@@ -1,6 +1,6 @@
 {
-	"stepper_tabs":[
-	{ "label": "FTL", "value":
-		"ftl_freight" }
-		]
+    "stepper_tabs":[
+        { "label": "FTL", "value": "ftl_freight" },
+        { "label": "RAIL", "value": "rail_domestic_freight" }
+    ]
 }

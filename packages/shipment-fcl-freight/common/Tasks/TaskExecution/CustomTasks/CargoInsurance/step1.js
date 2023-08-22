@@ -1,4 +1,4 @@
-import { Button, Toggle, cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ import getPayload from './utils/getPayload';
 const LAST_STEP = 3;
 const INCREMENT_FACTOR = 1;
 
-function Step1({
+function StepOne({
 	setStep = () => {},
 	step,
 	insuranceDetails = {},
@@ -25,9 +25,7 @@ function Step1({
 	setBillingData = () => {},
 	formProps = {},
 }) {
-	const [policyForSelf, setPolicyForSelf] = useState(
-		!!insuranceDetails?.policyForSelf,
-	);
+	const [policyForSelf, setPolicyForSelf] = useState(true);
 	const [prosporerAddress, setProsporerAddress] = useState({});
 	const [checked, setChecked] = useState([]);
 
@@ -69,9 +67,7 @@ function Step1({
 	useEffect(() => {
 		if (policyForSelf) {
 			setAddressId(
-				prosporerAddressType === 'billing'
-					? { organizationBillingAddressId: prosporerAddressId }
-					: { organizationAddressId: prosporerAddressId },
+				{ organizationBillingAddressId: billingId },
 			);
 		} else {
 			setAddressId(
@@ -93,17 +89,12 @@ function Step1({
 			<div className={styles.sub_header}>
 				<div className={cl`${styles.flex_row} ${styles.label}`}>
 					<div className={styles.label_val}>Billing Address Details</div>
-					<Toggle
-						offLabel="Self"
-						onLabel="Other"
-						checked={policyForSelf}
-						onChange={() => setPolicyForSelf((p) => !p)}
-					/>
 				</div>
 			</div>
 
 			<BillingAddressDetails
 				policyForSelf={policyForSelf}
+				setPolicyForSelf={setPolicyForSelf}
 				formProps={formProps}
 				billingData={billingData}
 				setBillingData={setBillingData}
@@ -125,9 +116,7 @@ function Step1({
 					size="md"
 					onClick={() => handleNextStep('next_step')}
 					disabled={
-						policyForSelf || loading
-							? isEmpty(prosporerAddress)
-							: isEmpty(billingData.billingId)
+						loading || isEmpty(billingData.billingId)
 					}
 					className={styles.btn_div}
 				>
@@ -137,4 +126,4 @@ function Step1({
 		</div>
 	);
 }
-export default Step1;
+export default StepOne;

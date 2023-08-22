@@ -63,6 +63,7 @@
 	width: 22px;
 	height: 22px;
 	margin-top: 4px;
+	cursor: pointer;
 	fill: #221f20;
 	transition: 0.4s;
 
@@ -76,4 +77,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.upload_icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
 }

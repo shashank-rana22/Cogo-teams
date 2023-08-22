@@ -1,25 +1,28 @@
 const getDefaultValues = (oldfields) => {
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	oldfields?.forEach((field) => {
 		const { value, type = '', name = '', controls = [], ...rest } = field;
 
 		if (type === 'fieldArray') {
-			const childDeafultValues = {};
+			const CHILD_DEFAULT_VALUES = {};
 
 			controls?.forEach((ctrl) => {
-				childDeafultValues[ctrl?.name] = defaultValues?.[ctrl?.name];
+				if (ctrl.type === 'datepicker') {
+					CHILD_DEFAULT_VALUES[ctrl?.name] = null;
+				} else {
+					CHILD_DEFAULT_VALUES[ctrl?.name] = '';
+				}
 			});
 
-			defaultValues[name] = value || childDeafultValues;
+			DEFAULT_VALUES[name] = value || [CHILD_DEFAULT_VALUES];
 		} else {
-			defaultValues[name] = value || '';
+			DEFAULT_VALUES[name] = value || '';
 		}
-
 		return rest;
 	});
 
-	return defaultValues;
+	return DEFAULT_VALUES;
 };
 
 export default getDefaultValues;

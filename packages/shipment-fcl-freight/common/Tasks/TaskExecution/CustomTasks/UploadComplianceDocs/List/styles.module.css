@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 10px 24px;
+	margin-bottom: 12px;
+	background: #fff;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.doc_info {
+	width: 40%;
+}
+
+.sample_file {
+	margin-left: 40px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #034afd;
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 40%;
+}
+
+.approval_actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 30%;
+}

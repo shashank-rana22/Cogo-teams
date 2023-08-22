@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 
 import SALES_REASON_OPTIONS from './sales-reason-options';
 import {
@@ -7,8 +7,9 @@ import {
 } from './supply-reason-options';
 
 const SALES_OPTION_START_POINT = 0;
-const SHIPMENT_RECEIVED_LIMIT = 6;
-const SHIPMENT_NOT_RECEIVED_LIMIT = 5;
+const DECREMENT_LIMIT_BY_ONE = 1;
+const SHIPMENT_RECEIVED_LIMIT = SALES_REASON_OPTIONS.length;
+const SHIPMENT_NOT_RECEIVED_LIMIT = SALES_REASON_OPTIONS.length - DECREMENT_LIMIT_BY_ONE;
 
 const controls = (state, cancelReason) => {
 	const salesOptionLimit = state === 'shipment_received' ? SHIPMENT_RECEIVED_LIMIT : SHIPMENT_NOT_RECEIVED_LIMIT;
@@ -32,6 +33,7 @@ const controls = (state, cancelReason) => {
 			{
 				name  : 'cargo_ready_date',
 				label : 'When will your cargo be ready (Enter date)?',
+				span  : 6,
 				type  : 'datepicker',
 				rules : {
 					required: 'Date is required',
@@ -77,18 +79,22 @@ const controls = (state, cancelReason) => {
 				type        : 'select',
 				size        : 'sm',
 				placeholder : 'Select Currency',
-				options     : [
-					GLOBAL_CONSTANTS.currency_code.INR,
-					GLOBAL_CONSTANTS.currency_code.USD,
-					GLOBAL_CONSTANTS.currency_code.EUR,
-					GLOBAL_CONSTANTS.currency_code.GBP,
-				].map((currency) => ({
-					label : currency,
-					value : currency,
-				})),
-				rules: {
+				span        : 6,
+				options     : currencies,
+				rules       : {
 					required: 'Currency is required',
 				},
+			},
+			{
+				name        : 'better_quotation_shipping_line',
+				type        : 'async-select',
+				size        : 'sm',
+				placeholder : 'Select Airline',
+				span        : 6,
+				valueKey    : 'id',
+				labelKey    : 'business_name',
+				asyncKey    : 'list_operators',
+				rules       : { required: 'Airline is required' },
 			},
 			{
 				name        : 'better_quotation_value',
@@ -99,16 +105,6 @@ const controls = (state, cancelReason) => {
 					required : 'Value is required',
 					min      : 0,
 				},
-			},
-			{
-				name        : 'better_quotation_shipping_line',
-				type        : 'async_select',
-				size        : 'sm',
-				placeholder : 'Select Airline',
-				valueKey    : 'id',
-				labelKey    : 'business_name',
-				asyncKey    : 'list_operators',
-				rules       : { required: 'Airline is required' },
 			},
 			{
 				name        : 'remarks',

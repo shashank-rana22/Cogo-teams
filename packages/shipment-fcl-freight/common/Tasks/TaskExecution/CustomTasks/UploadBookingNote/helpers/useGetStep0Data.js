@@ -3,32 +3,15 @@ import { useState, useEffect } from 'react';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
-import useUpdateShipmentBookingConfirmationPreferences
-	from '../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 
-const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], setStep = () => {} }) => {
-	const { service_id, service_type } = task || {};
+const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [] }) => {
+	const { service_type } = task || {};
 	const { id:shipment_id } = shipment_data || {};
-	const [selectedServiceProvider, setSelectedServiceProvider] = useState({});
-
-	const updateRefetch = () => {
-		const { source = '' } = selectedServiceProvider;
-
-		if (source === 'bn_salvage') {
-			setStep(2);
-		} else {
-			setStep(1);
-		}
-	};
-
-	const { apiTrigger, loading:updatePreferenceLoading } = useUpdateShipmentBookingConfirmationPreferences({
-		refetch: updateRefetch,
-	});
+	const [selectedServiceProvider, setSelectedServiceProvider] = useState([]);
 
 	const { data, loading } = useListShipmentBookingConfirmationPreferences({
 		shipment_id,
 		defaultFilters: {
-			service_id,
 			service_type,
 		},
 	});
@@ -53,9 +36,7 @@ const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], set
 	return {
 		formProps,
 		listBookingPreferences   : data?.list || [],
-		updateBookingPreference  : apiTrigger,
 		bookingPreferenceLoading : loading,
-		updatePreferenceLoading,
 		setSelectedServiceProvider,
 		selectedServiceProvider,
 		shipment_data,

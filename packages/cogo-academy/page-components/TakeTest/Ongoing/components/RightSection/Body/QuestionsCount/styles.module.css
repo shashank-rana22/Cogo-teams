@@ -8,6 +8,11 @@
 	overflow-y: scroll;
 	border-top: 1px solid #f8f2e7;
 	border-bottom: 1px solid #f8f2e7;
+
+	@media (max-width: 768px) {
+		height: 250px;
+		padding: 0;
+	}
 }
 
 .question_count {

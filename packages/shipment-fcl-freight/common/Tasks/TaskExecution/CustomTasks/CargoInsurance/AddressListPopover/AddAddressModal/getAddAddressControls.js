@@ -2,8 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
-const geo = getGeoConstants();
-export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {} }) => [
+export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {}, geo = {} }) => [
 	{
 		label       : 'Billing Party Name',
 		name        : 'name',
@@ -104,7 +103,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		placeholder : 'Enter Email Id',
 		rules       : {
 			pattern: {
-				value   : geo.regex.EMAIL,
+				value   : geo?.regex?.EMAIL,
 				message : 'Invalid email address',
 			},
 		},
@@ -120,7 +119,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 				if (!v?.number || !v?.country_code) {
 					return 'Phone Number is required';
 				}
-				return geo.regex.MOBILE_NUMBER.test(v.number) || 'Invalid Phone Number';
+				return geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE.test(v.number) || 'Invalid Phone Number';
 			},
 		},
 		span: 12,
@@ -131,10 +130,12 @@ export const getModifiedControls = ({
 	checked,
 	setValue = () => {}, setCountryId = () => {}, countryId = '',
 }) => {
-	const countryCode = getCountryDetails({ country_id: countryId });
-	const controls = getAddAddressControls({ setValue, setCountryId });
+	const geo = getGeoConstants();
 
-	(controls || []).map((control) => {
+	const countryCode = getCountryDetails({ country_id: countryId });
+	const controls = getAddAddressControls({ setValue, setCountryId, geo });
+
+	const updatedControls = (controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
 				...control,
@@ -146,14 +147,14 @@ export const getModifiedControls = ({
 								.cargo_insurance.countries.includes(
 									countryCode?.country_code,
 								)
-								? geo.regex.GST
+								? geo?.regex?.GST
 								: '',
 						message: 'Invalid Tax Number',
 					},
 				},
 			};
 		}
-
 		return control;
 	});
+	return updatedControls;
 };

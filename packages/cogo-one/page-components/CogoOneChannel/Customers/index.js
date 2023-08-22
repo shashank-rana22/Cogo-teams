@@ -1,13 +1,12 @@
-import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
-import AgentStatus from './AgentStatus';
+import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
 import MailList from './MailList';
 import MessageList from './MessageList';
@@ -21,15 +20,25 @@ const COMPONENT_MAPPING = {
 };
 
 function Customers({
-	setActiveTab,
-	activeTab,
+	setActiveTab = () => {},
+	activeTab = '',
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
 	tagOptions = [],
 	mailProps = {},
-	firestore,
+	firestore = {},
 	viewType = '',
+	workPrefernceLoading = false,
+	setOpenKamContacts = () => {},
+	agentStatus = {},
+	fetchworkPrefernce = () => {},
+	agentTimeline = () => {},
+	setSendBulkTemplates = () => {},
+	setSelectedAutoAssign = () => {},
+	selectedAutoAssign = {},
+	autoAssignChats = {},
+	setAutoAssignChats = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 
@@ -48,6 +57,13 @@ function Customers({
 			isBotSession,
 			setIsBotSession,
 			tagOptions,
+			setModalType,
+			selectedAutoAssign,
+			setSelectedAutoAssign,
+			autoAssignChats,
+			setAutoAssignChats,
+			workPrefernceLoading,
+			setSendBulkTemplates,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -58,6 +74,7 @@ function Customers({
 		},
 		mail: {
 			...mailProps,
+			viewType,
 		},
 	};
 
@@ -80,23 +97,16 @@ function Customers({
 					</div>
 				</div>
 
-				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_self_status && (
-					<div className={styles.styled_toggle}>
-						<AgentStatus />
-					</div>
-				)}
-
-				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bot_message_toggle && (
-					<div className={styles.bot_messages}>
-						<div>Bot Messages</div>
-						<Toggle
-							name="online"
-							size="sm"
-							onChange={() => setIsBotSession((prev) => !prev)}
-							checked={isBotSession}
-						/>
-					</div>
-				)}
+				<AgentSettings
+					viewType={viewType}
+					agentStatus={agentStatus}
+					fetchworkPrefernce={fetchworkPrefernce}
+					agentTimeline={agentTimeline}
+					setIsBotSession={setIsBotSession}
+					isBotSession={isBotSession}
+					userId={userId}
+					firestore={firestore}
+				/>
 			</div>
 
 			<div className={styles.tabs}>
@@ -105,7 +115,7 @@ function Customers({
 					fullWidth
 					themeType="secondary"
 					onChange={(val) => {
-						setActiveTab({ tab: val, data: {} });
+						setActiveTab({ tab: val, data: {}, subTab: 'all' });
 					}}
 				>
 					{tabMappings.map((eachTab) => {
@@ -139,6 +149,9 @@ function Customers({
 				setModalType={setModalType}
 				modalType={modalType}
 				userId={userId}
+				viewType={viewType}
+				setOpenKamContacts={setOpenKamContacts}
+				setSendBulkTemplates={setSendBulkTemplates}
 			/>
 		</div>
 	);

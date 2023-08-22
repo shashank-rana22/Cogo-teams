@@ -7,7 +7,7 @@ interface PostSettlementProps {
 	setCheckedRows?: (p: object)=> void;
 }
 
-const usePostSettlementToSage = ({ refetch, setCheckedRows } :PostSettlementProps) => {
+const usePostSettlementToSage = ({ refetch, setCheckedRows = () => {} } :PostSettlementProps) => {
 	interface Profile {
 		profile?: { user: { id: string } }
 	}
@@ -36,7 +36,7 @@ const usePostSettlementToSage = ({ refetch, setCheckedRows } :PostSettlementProp
 			setCheckedRows({});
 			Toast.success('Processing your request. Please come back later.');
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

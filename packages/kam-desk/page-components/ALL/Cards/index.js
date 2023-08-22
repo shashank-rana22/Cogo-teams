@@ -14,23 +14,30 @@ import isSingleLocation from '../../../utils/checkSingleLocation';
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPE = {
+	fcl_freight: 'fcl',
+};
+
 function Card({ data = {} }) {
 	const router = useRouter();
+	const { partner_id = '' } = router.query || {};
+	const { shipment_type = '' } = data;
 
-	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
-		?${CONSTANTS.url_navigation_params}`;
+	let href = Object.keys(SHIPMENT_TYPE).includes(shipment_type)
+		? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipment_type]}/`
+		: `${window.location.origin}/${partner_id}/shipments/`;
+	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
+	const handleCardClick = (e) => {
+		const newUrl = e.currentTarget.href;
 		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
 	};
 
 	return (
-		<div
+		<a
+			href={href}
 			className={styles.container}
 			onClick={handleCardClick}
-			role="button"
-			tabIndex={0}
 		>
 			<div className={styles.header}>
 				<Header data={data} />
@@ -46,11 +53,11 @@ function Card({ data = {} }) {
 				<div className={styles.divider} />
 
 				<div className={styles.icon_container}>
-					<ShipmentIcon shipment_type={data?.shipment_type} />
+					<ShipmentIcon shipment_type={shipment_type} />
 				</div>
 
 				<div className={styles.location_container}>
-					{isSingleLocation(data?.shipment_type) ? (
+					{isSingleLocation(shipment_type) ? (
 						<SingleLocation data={data} />
 					) : (
 						<DualLocation data={data} />
@@ -63,7 +70,7 @@ function Card({ data = {} }) {
 					<CargoPills data={data} />
 				</div>
 			</div>
-		</div>
+		</a>
 	);
 }
 

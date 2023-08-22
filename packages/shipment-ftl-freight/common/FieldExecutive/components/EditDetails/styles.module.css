@@ -1,0 +1,31 @@
+.stepper_container {
+	padding: 20px 10px;
+	margin: 20px 0;
+	overflow-x: auto;
+	background-color: #fafafa;
+}
+
+.heading {
+	position: relative;
+	max-width: fit-content;
+	margin-bottom: 20px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #ed3726;
+}
+
+.heading::after {
+	position: absolute;
+	bottom: -5px;
+	display: block;
+	width: 60%;
+	height: 3px;
+	content: "";
+	background-color: #ed3726;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
+}

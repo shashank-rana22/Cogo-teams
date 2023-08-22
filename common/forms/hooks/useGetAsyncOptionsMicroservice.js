@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest } from '@cogoport/request';
+import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -9,6 +9,7 @@ const REQUEST_HOOK_MAPPING = {
 	business_finance : useRequestBf,
 	allocation       : useAllocationRequest,
 	tickets          : useTicketsRequest,
+	auth             : useAuthRequest,
 };
 
 function useGetAsyncOptionsMicroservice({
@@ -21,6 +22,7 @@ function useGetAsyncOptionsMicroservice({
 	microService = '',
 	searchByq,
 	qFilterKey = 'q',
+	getModifiedOptions,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -36,7 +38,11 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	const options = data?.list || data?.items || data || [];
+	let options = data?.list || data?.items || data || [];
+
+	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
+		options = getModifiedOptions({ options });
+	}
 
 	const optionValues = options.map((item) => item[valueKey]);
 

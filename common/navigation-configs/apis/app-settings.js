@@ -147,7 +147,7 @@ const app_settings = [
 	{
 		api          : 'get_user_session',
 		access_type  : 'private',
-		service_name : 'user',
+		service_name : 'auth',
 	},
 	{
 		api          : 'get_organization_services',
@@ -221,6 +221,21 @@ const app_settings = [
 	},
 	{
 		api          : 'update_user_alert_preference',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_documents',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_document',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_document',
 		access_type  : 'private',
 		service_name : 'organization',
 	},

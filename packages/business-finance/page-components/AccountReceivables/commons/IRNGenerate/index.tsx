@@ -1,4 +1,5 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -17,7 +18,7 @@ import styles from './styles.module.css';
 type Itemdata = {
 	id?: string;
 	invoiceStatus?: string;
-	entityCode?: number;
+	entityCode?: string;
 	daysLeftForAutoIrnGeneration?: string;
 	isFinalPosted?:boolean;
 	invoiceType?:string;
@@ -32,6 +33,7 @@ interface RootState {
 		partner?: {
 			id?: string;
 		};
+		permissions_navigations?: object;
 	};
 }
 
@@ -39,8 +41,16 @@ const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
-const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
-function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
+
+const PERMISSION_BUTTON = {
+	upload_invoice: {
+		title          : 'Upload Invoice',
+		API_NAME       : 'post_sales_invoice_einvoice',
+		NAVIGATION_KEY : 'business_finance-account_receivables',
+	},
+};
+
+function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { profile = {} }: RootState = useSelector((state) => state);
 	const [openReject, setOpenReject] = useState(false);
 	const [uploadInvoice, setUploadInvoice] = useState(false);
@@ -50,7 +60,12 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
 	const { id = '' } = itemData;
 
-	const { partner = {} } = profile;
+	const { partner = {}, permissions_navigations: PERMISSION_NAVIGATION = {} } = profile;
+
+	const { NAVIGATION_KEY, API_NAME } = PERMISSION_BUTTON.upload_invoice || {};
+
+	const NAVIGATION = PERMISSION_NAVIGATION
+		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.view_type !== 'none';
 
 	const { id: partnerId = '' } = partner;
 
@@ -66,6 +81,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	} = useGetIrnGeneration({
 		id,
 		refetch,
+		entityCode,
 	});
 	const { refresh, loadingOnRefresh } = useGetRefresh({
 		id,
@@ -84,11 +100,13 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const onChange = (e) => {
 		setTextValue(e);
 	};
-	const { labels } = CogoportEntity[entityCode] || {};
-	const { irn_label: IrnLabel } = labels || {};
+	const { labels } = ENTITY_FEATURE_MAPPING[entityCode] || {};
+	const { irn_label:irnLabel } = labels || {};
 
-	const UPLOAD_INVOICE_PERMISSION = GLOBAL_CONSTANTS.cogoport_entities[entityCode]
+	const UPLOAD_INVOICE_PERMISSION = ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported.includes('upload_invoice');
+	const REFRESH_ALLOWED = ENTITY_FEATURE_MAPPING[entityCode]
+		?.feature_supported.includes('refresh');
 
 	const handleFinalpost = () => {
 		setFinalPostToSageModal(true);
@@ -101,23 +119,23 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 			<div
 				className={styles.generate_container}
 			>
-				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION)
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION && NAVIGATION)
 					&& (
-						<div className={styles.upload_invoice}>
+						<div className={styles.button_container}>
 							<Button
 								size="sm"
 								disabled={invoiceLoading}
 								onClick={() => setUploadInvoice(true)}
 							>
-								<div className={styles.finance_reject}>
+								<div className={styles.lable_width}>
 									Upload
 									{' '}
-									{IrnLabel}
+									{irnLabel}
 								</div>
 							</Button>
 						</div>
 					)}
-				{uploadInvoice
+				{uploadInvoice && !IRN_FAILED_STATUS.includes(invoiceStatus)
 					&& (
 						<InvoiceModal
 							uploadInvoice={uploadInvoice}
@@ -126,16 +144,19 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							loading={invoiceLoading}
 						/>
 					)}
-				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
-					<div className={styles.generate_invoice}>
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost)
+				&& !IRN_FAILED_STATUS.includes(invoiceStatus) && (
+					<div className={styles.button_container}>
 						<Button
 							size="sm"
 							disabled={loading}
 							onClick={() => generateIrn()}
 						>
-							Generate
-							{' '}
-							{IrnLabel}
+							<span className={styles.lable_width}>
+								{IRN_FAILED_STATUS.includes(invoiceStatus) ? 'Regenerate' : 'Generate'}
+								{' '}
+								{irnLabel}
+							</span>
 						</Button>
 					</div>
 				)}
@@ -146,20 +167,22 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							disabled={finalPostLoading}
 							onClick={() => handleFinalpost()}
 						>
-							<div className={styles.button_style}>
+							<span className={styles.lable_width}>
 								{isFinalPosted ? 'Information' : 'Final Post'}
-							</div>
+							</span>
 						</Button>
 					</div>
 				)}
-				{IRN_FAILED_STATUS.includes(invoiceStatus) && (
+				{IRN_FAILED_STATUS.includes(invoiceStatus) && REFRESH_ALLOWED && (
 					<div className={styles.button_container}>
 						<Button
 							size="sm"
 							disabled={loadingOnRefresh}
 							onClick={refresh}
 						>
-							<div className={styles.button_style}>Refresh</div>
+							<span className={styles.lable_width}>
+								Refresh
+							</span>
 						</Button>
 					</div>
 				)}
@@ -189,7 +212,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						disabled={loading}
 						onClick={() => financeRejected()}
 					>
-						<div className={styles.finance_reject}>Finance Reject</div>
+						<div className={styles.lable_width}>Finance Reject</div>
 					</Button>
 				</div>
 			)}

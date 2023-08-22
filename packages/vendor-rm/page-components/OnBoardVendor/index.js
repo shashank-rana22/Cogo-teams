@@ -10,14 +10,14 @@ function OnBoardVendor() {
 	const {
 		ActiveComponent,
 		activeStepper = '',
-		setActiveStepper = () => {},
+		setActiveStepper = () => { },
 		vendorInformation = {},
 		showSuccessScreen,
 		setShowSuccessScreen,
-		setVendorInformation = () => {},
-		getVendor = () => {},
+		setVendorInformation = () => { },
+		getVendor = () => { },
 		getVendorLoading = false,
-		onBack = () => {},
+		onBack = () => { },
 	} = useGetVendor();
 
 	return (
@@ -28,7 +28,7 @@ function OnBoardVendor() {
 				className={styles.back_container}
 			>
 				<IcMArrowBack fill="#221F20" width={20} height={16} />
-				<div className={styles.back_text}>Back to Vendor Relationship Management</div>
+				<div className={styles.back_text}>Back</div>
 			</div>
 
 			<div className={styles.header}>Add New Vendor</div>

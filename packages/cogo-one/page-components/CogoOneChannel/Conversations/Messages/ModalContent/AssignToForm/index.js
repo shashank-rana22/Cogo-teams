@@ -1,13 +1,9 @@
 import { Radio, Button } from '@cogoport/components';
 import { useForm, RadioGroupController } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
-import { useSelector } from '@cogoport/store';
-import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import controls, { ASSIGN_TYPE_OPTIONS } from '../../../../../../configurations/assign-form-controls';
-import getCommonAgentType from '../../../../../../utils/getCommonAgentType';
+import useGetOmnichannelAgentTypes from '../../../../../../hooks/useGetOmnichannelAgentTypes';
 
 import { GetAssignTypeComp, ASSIGN_TYPE_PAYLOAD_MAPPING } from './getAssignTypeHelpers';
 import styles from './styles.module.css';
@@ -17,10 +13,8 @@ const DEFAULT_ASSIGN_TYPE = 'assign_user';
 function AssignToForm({
 	data = {},
 	assignLoading = false,
-	viewType,
+	viewType = '',
 }) {
-	const { profile = {} } = useSelector((state) => state);
-
 	const [assignType, setAssignType] = useState(DEFAULT_ASSIGN_TYPE);
 
 	const {
@@ -29,6 +23,7 @@ function AssignToForm({
 		watch,
 		reset,
 		formState: { errors },
+		resetField,
 	} = useForm(
 		{
 			defaultValues: {
@@ -38,34 +33,14 @@ function AssignToForm({
 		},
 	);
 
-	const listAgentsOptions = useGetAsyncOptions(
-		merge(
-			asyncFieldsListAgents(),
-			{
-				params: {
-					filters: {
-						status            : 'active',
-						common_agent_type : getCommonAgentType({ viewType }) || undefined,
-					},
-				},
-			},
-		),
-	);
+	const watchAgentType = watch('agent_type') || null;
 
-	const { role_functions = [] } = profile.auth_role_data;
+	const { options = [] } = useGetOmnichannelAgentTypes();
+
 	const { assignChat = () => {}, support_agent_id = null, accountType = '' } = data || {};
 
 	const { allow_user } = controls;
 	const watchCondtion = watch('assign_condition') || null;
-
-	const assignTypeComp = GetAssignTypeComp({
-		control,
-		listAgentsOptions,
-		errors,
-		watchCondtion,
-		assignType,
-		accountType,
-	});
 
 	const resetForm = () => {
 		reset({
@@ -90,18 +65,9 @@ function AssignToForm({
 					const {
 						label = '',
 						value = '',
-						agent_types = [],
 					} = eachAssignOption;
 
 					const isChecked = value === assignType;
-
-					if (
-						!(agent_types.find(
-							(roleType) => role_functions.includes(roleType),
-						))
-					) {
-						return null;
-					}
 
 					return (
 						<div key={value}>
@@ -114,7 +80,19 @@ function AssignToForm({
 									checked={isChecked}
 								/>
 							</div>
-							{isChecked && assignTypeComp}
+							{isChecked && (
+								<GetAssignTypeComp
+									control={control}
+									errors={errors}
+									watchCondtion={watchCondtion}
+									assignType={assignType}
+									accountType={accountType}
+									options={options}
+									viewType={viewType}
+									watchAgentType={watchAgentType}
+									resetField={resetField}
+								/>
+							)}
 						</div>
 					);
 				},

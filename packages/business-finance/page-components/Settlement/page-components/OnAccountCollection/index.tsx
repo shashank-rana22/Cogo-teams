@@ -23,7 +23,7 @@ import styles from './styles.module.css';
 
 const SEARCH_PLACEHOLDER = 'Search by Customer Name / UTR No /Doc. Value';
 
-function OnAccountCollection() {
+function OnAccountCollection({ entity }) {
 	const {
 		control,
 		watch,
@@ -91,9 +91,11 @@ function OnAccountCollection() {
 							renderLabel={(item) => `${item?.entity_code} - ${item?.business_name}`}
 							placeholder="Select Entity"
 							labelKey="entity_code"
+							value={entity}
 							initialCall
 							rules={{ required: true }}
 							isClearable
+							isSingleEntity
 						/>
 						{errors?.entityCode ? (
 							<div className={styles.errors}>* Required</div>

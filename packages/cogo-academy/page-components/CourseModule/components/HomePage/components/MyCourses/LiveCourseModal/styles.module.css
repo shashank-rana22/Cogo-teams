@@ -5,3 +5,9 @@
 	width: 100%;
 	margin-bottom: 16px;
 }
+
+.view_text {
+	width: fit-content;
+	text-decoration: underline;
+	cursor: pointer;
+}

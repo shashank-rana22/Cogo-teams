@@ -15,6 +15,7 @@ const INCREMENT_CONSTANT = 1;
 const MINIMUM_REMOVEABLE_NUMBER = 1;
 const TOTAL_SPAN = 12;
 const SPAN_CONVERTIABLE_FACTOR = 100;
+const START_ITERATING_VALUE = 0;
 
 function Child({
 	controls = [],
@@ -63,7 +64,7 @@ function Child({
 	|| formValues?.documents_commercial_invoice?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
 	|| formValues?.documents_packing_list?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += INCREMENT_CONSTANT) {
+		for (let i = START_ITERATING_VALUE; i < elements.length; i += INCREMENT_CONSTANT) {
 			elements[i].style.display = 'none';
 		}
 	}

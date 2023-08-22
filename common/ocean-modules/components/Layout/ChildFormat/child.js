@@ -1,21 +1,18 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
-import getAsyncFields from '../Item/getAsyncKeys';
+import getNewControls from '../helpers/getNewControls';
+import getTotalFields from '../helpers/getTotalFields';
 
 import styles from './styles.module.css';
 
-const DEFAULT_SPAN = 12;
-const EMPTY_SPAN = 0;
 const ELEMENTS_INCR_BY = 1;
 const INDEX_INCR_BY = 1;
 const REMOVE_UPTO_INDEX = 1;
-const PERCENT_FACTOR = 100;
-
-const ASYNC_SELECT_TYPE = ['select', 'creatable-select', 'location-select'];
 
 function Child({
 	controls = [],
@@ -26,35 +23,12 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field = {},
-	disabled,
+	disabled = false,
 	error = {},
 	formValues = {},
+	showElements = {},
 }) {
-	const TOTAL_FIELDS = [];
-
-	let rowWiseFields = [];
-	let span = EMPTY_SPAN;
-
-	controls.forEach((fields) => {
-		span += fields.span || DEFAULT_SPAN;
-		if (span === DEFAULT_SPAN) {
-			rowWiseFields.push(fields);
-			TOTAL_FIELDS.push(rowWiseFields);
-			rowWiseFields = [];
-			span = EMPTY_SPAN;
-		} else if (span < DEFAULT_SPAN) {
-			rowWiseFields.push(fields);
-		} else {
-			TOTAL_FIELDS.push(rowWiseFields);
-			rowWiseFields = [];
-			rowWiseFields.push(fields);
-			span = fields.span;
-		}
-	});
-
-	if (rowWiseFields.length) {
-		TOTAL_FIELDS.push(rowWiseFields);
-	}
+	const { TOTAL_FIELDS } = getTotalFields({ fields: controls, showElements });
 
 	const keysForFields = useMemo(
 		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
@@ -71,41 +45,13 @@ function Child({
 		}
 	}
 
-	const getNewControls = (item = {}) => {
-		let newProps = { ...item };
-
-		const { type } = item;
-		const isAsyncSelect = ASYNC_SELECT_TYPE.includes(type)
-		&& Object.keys(item).includes('optionsListKey');
-
-		if (isAsyncSelect) {
-			const asyncKey = item?.optionsListKey;
-
-			const asyncFields = getAsyncFields(asyncKey) || {};
-
-			const finalParams = item?.params || asyncFields?.defaultParams;
-
-			if (Object.keys(asyncFields)?.includes('defaultParams')) { delete asyncFields?.defaultParams; }
-
-			newProps = {
-				...newProps,
-				...asyncFields,
-				params : finalParams,
-				type   : 'async-select',
-			};
-			return newProps;
-		}
-
-		return newProps;
-	};
-
 	return (
-		<div className={styles.fieldarray} key={field.id}>
-			<h3 className={styles.heading}>
-				{name.toUpperCase()}
+		<fieldset className={styles.fieldarray} key={field.id}>
+			<legend className={styles.heading}>
+				{startCase(name)}
 				&nbsp;
 				{index + INDEX_INCR_BY}
-			</h3>
+			</legend>
 			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
@@ -126,10 +72,14 @@ function Child({
 							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR;
+
 						if (!Element || !show) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
+							<div
+								className={styles.element}
+								style={{ width: newControl.flex || '49%' }}
+								key={controlItem.name}
+							>
 								<h4 className={styles.label}>
 									{controlItem?.label}
 								</h4>
@@ -156,14 +106,13 @@ function Child({
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<div className={styles.delete_icon}>
-					<hr />
 					<IcMDelete
 						className={styles.icon}
 						onClick={() => remove(index, REMOVE_UPTO_INDEX)}
 					/>
 				</div>
 			) : null}
-		</div>
+		</fieldset>
 	);
 }
 export default Child;

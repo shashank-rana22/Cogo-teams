@@ -1,26 +1,32 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest, request } from '@cogoport/request';
 import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
+import useUpdatePendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 const useDraftBLHelper = ({
 	pendingTask = {},
+	shipmentData = {},
 }) => {
-	const [createTradeDocLoading, setCreateTradeDocLoading] = useState();
 	const {
 		refetch: getShipmentRefetch,
 		shipment_data,
 		primary_service,
 	} = useContext(ShipmentDetailContext);
 
+	const [createTradeDocLoading, setCreateTradeDocLoading] = useState(false);
+
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_shipment_document',
+		url    : 'fcl_freight/create_document',
 		method : 'POST',
 	}, { manual: true });
+
+	const { apiTrigger : updatePendingTaskTrigger, loading : updatePendingTaskLoading } = useUpdatePendingTask({});
 
 	const createHBL = async ({ hblData }) => {
 		setCreateTradeDocLoading(true);
@@ -32,18 +38,19 @@ const useDraftBLHelper = ({
 					shipment_id     : pendingTask?.shipment_id,
 					service_id      : pendingTask?.service_id,
 					service_type    : pendingTask?.service_type,
-					organization_id : pendingTask?.organization_id,
+					organization_id : shipmentData?.importer_exporter_id,
 					data            : {
 						...data,
 						service_id   : pendingTask?.service_id,
 						service_type : pendingTask?.service_type,
+						watermark    : 'DRAFT',
 					},
 					uploaded_by_org_id: pendingTask?.organization_id,
 				};
 
 				const promise = request({
 					method : 'POST',
-					url    : '/create_shipment_trade_document',
+					url    : '/generate_bluetide_hbl',
 					data   : body,
 				});
 
@@ -70,7 +77,6 @@ const useDraftBLHelper = ({
 				document_type      : 'draft_bill_of_lading',
 				service_id         : pendingTask?.service_id,
 				service_type       : pendingTask.service_type,
-				pending_task_id    : pendingTask?.id,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.fileName,
 					document_url : value?.url?.finalUrl,
@@ -84,13 +90,21 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			await trigger({ data: body });
+			const res = await trigger({ data: body });
+
+			if (!res?.hasError) {
+				const val = {
+					id     : pendingTask?.id,
+					status : 'completed',
+				};
+				await updatePendingTaskTrigger(val);
+			}
 
 			try {
 				const rpaMappings = {
-					cogo_shipment_id        : pendingTask.shipment_id,
+					cogo_shipment_id        : pendingTask?.shipment_id,
 					cogo_shipment_serial_no : shipment_data?.serial_id,
-					bill_of_lading          : body.documents[0].data.document_number,
+					bill_of_lading          : body?.documents[GLOBAL_CONSTANTS.zeroth_index]?.data?.document_number,
 				};
 
 				await submitShipmentMapping(rpaMappings);
@@ -104,7 +118,7 @@ const useDraftBLHelper = ({
 	return {
 		createHBL,
 		submitMBL,
-		loading,
+		loading: loading || updatePendingTaskLoading,
 		createTradeDocLoading,
 	};
 };

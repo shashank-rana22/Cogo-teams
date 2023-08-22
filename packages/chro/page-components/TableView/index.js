@@ -22,12 +22,16 @@ const getVariablePay = ({
 	joining_bonus_yearly,
 	retention_bonus_yearly,
 	performance_linked_variable_yearly,
+	retention_bonus_twice_yearly,
+	retention_bonus_thrice_yearly,
 }) => (
 	Number(joining_bonus_yearly)
-	+ Number(retention_bonus_yearly) + Number(performance_linked_variable_yearly)) || VARIABLE_PAY_THRESHOLD;
+	+ Number(retention_bonus_yearly) + Number(performance_linked_variable_yearly)
+	+ Number(retention_bonus_twice_yearly) + Number(retention_bonus_thrice_yearly))
+	|| VARIABLE_PAY_THRESHOLD;
 
-function TableView({ search, activeTab }) {
-	const [ctcBreakup, setCtcBreakup] = useState();
+function TableView({ search = '', activeTab = '' }) {
+	const [ctcBreakup, setCtcBreakup] = useState({});
 	const [error, setError] = useState(false);
 
 	const { data = {}, onPageChange, loading, refetch } = useGetTableView({ search, activeTab });
@@ -46,12 +50,15 @@ function TableView({ search, activeTab }) {
 	const {
 		init = 0, joining_bonus_yearly = 0,
 		retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
+		retention_bonus_twice_yearly = 0, retention_bonus_thrice_yearly = 0,
 	} = metadata || {};
 
 	const variable_pay = getVariablePay({
 		joining_bonus_yearly,
 		retention_bonus_yearly,
 		performance_linked_variable_yearly,
+		retention_bonus_twice_yearly,
+		retention_bonus_thrice_yearly,
 	});
 
 	if ((list || []).length < ARRAY_LENGTH && !loading) {
@@ -85,7 +92,7 @@ function TableView({ search, activeTab }) {
 				onClose={() => setCtcBreakup('')}
 			>
 				{ctcBreakup?.employee_detail?.name
-					? <Modal.Header title={`${ctcBreakup?.employee_detail?.name}`} />
+					? <Modal.Header title={ctcBreakup?.employee_detail?.name} />
 					: null}
 
 				<Modal.Body>

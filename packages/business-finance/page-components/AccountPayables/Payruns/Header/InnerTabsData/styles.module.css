@@ -1,0 +1,20 @@
+.container {
+	padding: 8px;
+	margin-right: 12px;
+	cursor: pointer;
+	background-color: var(--color-secondary-5);
+	border-radius: 6px;
+	box-shadow: 0 0 8px var(--color-secondary-greyscale-4);
+}
+
+.stats {
+	padding: 0 6px;
+	margin-left: 12px;
+	color: var(--color-secondary-5);
+	background: var(--color-primary-error-red-2);
+	border-radius: 6px;
+}
+
+.active {
+	background-color: var(--color-primary-error-red-5);
+}

@@ -1,4 +1,4 @@
-import { Input, Modal, Button, cl } from '@cogoport/components';
+import { CreatableSelect, Modal, Button, Toast, cl } from '@cogoport/components';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import Loader from '../../common/Loader';
@@ -7,12 +7,14 @@ import useListShipmentInvoicePreferences from '../../hooks/useListShipmentInvoic
 import useUpdateShipmentInvoice from '../../hooks/useUpdateShipmentInvoice';
 
 import { EditInvoiceIndex } from './context';
+import { EDIT_INVOICE_REMARK_OPTIONS } from './editInvoiceRemarkOptions';
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function EditInvoice() {
 	const [selectedInvoices, setSelectedInvoices] = useState(new Map());
 	const [showModal, setShowModal] = useState(false);
+	const [remarks, setRemarks] = useState({});
 
 	const {
 		loading,
@@ -29,6 +31,12 @@ function EditInvoice() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		if (Object.values(remarks || {}).some((remark) => !remark)) {
+			Toast.error('Remarks are required');
+			return;
+		}
+
 		const val = new FormData(e?.target);
 		const payload = Array.from(val?.entries())?.reduce((acc, [invoiceId, remark]) => (
 			[...acc, {
@@ -57,7 +65,7 @@ function EditInvoice() {
 		udpateInvoices({
 			invoice_edit_remarks : payload,
 			edit_invoice         : false,
-		}, () => { getInvoices(); setShowModal(false); });
+		}, () => { getInvoices(); setShowModal(false); setRemarks({}); });
 	};
 
 	useEffect(() => {
@@ -78,7 +86,7 @@ function EditInvoice() {
 							data={invoices}
 							loading={loading}
 							setFilters={setFilters}
-							setShowModal={setShowModal}
+							setShowModal={(val) => { setShowModal(val); setRemarks({}); }}
 							handleDisableInvoices={handleDisableInvoices}
 						/>
 					</EditInvoiceIndex.Provider>
@@ -115,7 +123,17 @@ function EditInvoice() {
 										<span className={cl`${styles.invoice_id} ${styles.bold}`}>
 											{invoiceId?.split('@')?.pop()?.split('#')?.shift()}
 										</span>
-										<Input name={invoiceId} placeholder="Add remark ..." required />
+										<CreatableSelect
+											name={invoiceId}
+											options={EDIT_INVOICE_REMARK_OPTIONS}
+											style={{ width: '100%' }}
+											placeholder="Select Remark"
+											onChange={(e) => setRemarks(
+												{ ...remarks, [shipmentKey.split('@')?.pop()]: e },
+											)}
+											value={remarks[shipmentKey.split('@')?.pop()]}
+											required
+										/>
 									</div>
 								));
 								acc.push(row);

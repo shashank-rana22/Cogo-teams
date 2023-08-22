@@ -1,0 +1,49 @@
+.bl_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: var(--color-tertiary-blue-5);
+	border-radius: 4px;
+
+	&.bl_details {
+		justify-content: flex-end;
+		margin: 0;
+	}
+}
+
+.document_type {
+	width: 25%;
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+	line-height: 16px;
+	color: var(--color-secondary-greyscale-1);
+}
+
+.bl_number {
+	font-size: var(--font-size-lg);
+	font-weight: 400;
+	line-height: 16px;
+	color: var(--color-secondary-greyscale-1);
+}
+
+.btn_div {
+	display: flex;
+	justify-content: flex-end;
+	margin: 16px;
+}
+
+.button {
+	margin-right: 8px;
+}
+
+.bl_not_uploaded {
+	display: flex;
+	justify-content: flex-start;
+	margin: 8px;
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+	color: var(--color-primary-error-red-2);
+}

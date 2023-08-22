@@ -18,6 +18,7 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 		options,
 		partnerOptions,
 		partnerRoleOptions,
+		isImportingRole,
 	} = useImportRoles({ onSubmit });
 	return (
 		<Modal
@@ -78,7 +79,15 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 				>
 					Cancel
 				</Button>
-				<Button size="md" themeType="primary" onClick={handleSubmit}>{submitText}</Button>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={handleSubmit}
+					loading={isImportingRole}
+				>
+					{submitText}
+
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

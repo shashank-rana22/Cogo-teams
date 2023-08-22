@@ -41,7 +41,12 @@ function Annexure({
 					</div>
 					<div className={styles.vessel_voyage}>
 						<span>Vessel</span>
-						{mode === MODE_READ ? <span>{initialValues?.annexure_vessel || ''}</span>
+						{mode === MODE_READ
+							? (
+								<span className={styles.value_text}>
+									{initialValues?.annexure_vessel || ''}
+								</span>
+							)
 							: (
 								<TextAreaController
 									name="annexure_vessel"
@@ -53,7 +58,12 @@ function Annexure({
 					</div>
 					<div className={styles.vessel_voyage}>
 						<span>Voyege</span>
-						{mode === MODE_READ ? <span>{initialValues?.annexure_vessel_number || ''}</span>
+						{mode === MODE_READ
+							? (
+								<span className={styles.value_text}>
+									{initialValues?.annexure_vessel_number || ''}
+								</span>
+							)
 							: (
 								<TextAreaController
 									name="annexure_vessel_number"

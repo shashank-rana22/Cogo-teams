@@ -1,19 +1,25 @@
 import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StakeHolderTimeline from '../../StakeHolderTimeline';
 import StyledTable from '../../StyledTable';
+import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 import { toTitleCase } from '../../utils/titleCase';
 
 import {
+	CREDIT_NOTE_APPROVAL_TYPE_OPTIONS,
 	CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS,
 	requestCreditNoteColumns, REVENUE_OPTIONS,
 } from './credit-note-config';
 import styles from './style.module.css';
+
+const MAX_LEN = 40;
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -23,9 +29,11 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remarks  : null,
 	});
 
+	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
+
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
-	const { data = {}, type } = row || {};
+	const { level3 = {}, level2 = {}, level1 = {}, data = {}, type } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest, consolidatedCreditNoteRequest, organization } = data;
 	const {
@@ -43,6 +51,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		currency,
 		documentUrls,
 		revoked,
+		creditNoteApprovalType: approvalType,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -53,6 +62,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remark,
 		CNCategoryValues,
 		isConsolidated,
+		creditNoteApprovalType,
+		level2,
 	});
 
 	const { businessName } = organization || {};
@@ -73,7 +84,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						className="primary md"
 						placeholder="CN Category Type.."
 						value={creditNoteType || CNCategoryValues?.CNType}
-						disabled={!isEditable}
+						disabled={!isEditable || level1?.status === 'APPROVED'}
 						onChange={(e:any) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
 						options={CATEGORY_OPTIONS}
 					/>
@@ -91,7 +102,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									className="primary md"
 									placeholder="Type here..."
 									value={creditNoteRemarks || CNCategoryValues?.CNValues}
-									disabled={!isEditable}
+									disabled={!isEditable || level1?.status === 'APPROVED'}
 									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 									options={
 									creditNoteRemarks
@@ -112,7 +123,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 										? creditNoteRemarks
 										: creditNoteRemarks || CNCategoryValues?.CNValues
 								}
-									disabled={!isEditable}
+									disabled={!isEditable || level1?.status === 'APPROVED'}
 									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 									options={
 									creditNoteRemarks
@@ -206,6 +217,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 										</div>
 									</Button>
 								</Popover>
+								<Select
+									value={approvalType || creditNoteApprovalType}
+									disabled={level1?.status === 'APPROVED'}
+									onChange={(e) => setCreditNoteApprovalType(e)}
+									placeholder="CN Approval Type"
+									options={CREDIT_NOTE_APPROVAL_TYPE_OPTIONS}
+									size="sm"
+									style={{ paddingLeft: '12px' }}
+								/>
 							</div>
 
 							{typeof (revoked) === 'boolean' && (
@@ -307,7 +327,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Remarks -</div>
-							{remark.length > 40 ? (
+							{remark?.length > MAX_LEN ? (
 								<Tooltip
 									className={styles.tooltip}
 									interactive
@@ -356,6 +376,12 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							</>
 						) }
 
+						{
+							(level1 || level2 || level3) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
+
 					</Modal.Body>
 					{isEditable && (
 						<Modal.Footer>
@@ -364,7 +390,9 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading}
+									disabled={!(remarks.length) || loading
+										|| (isEmpty(creditNoteApprovalType)
+										&& isEmpty(approvalType))}
 									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
@@ -376,7 +404,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<Button
 									size="md"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading}
+									disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
+										&& isEmpty(approvalType))}
 									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');

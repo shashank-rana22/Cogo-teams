@@ -28,6 +28,8 @@ function Navigations(props) {
 		searchString,
 		navStatus = 'all',
 		loading = false,
+		activeNavsLoading = false,
+		activeNavs = [],
 	} = props || {};
 
 	const [activeTab, setActiveTab] = React.useState('crm');
@@ -37,15 +39,10 @@ function Navigations(props) {
 	let navigationOptions = applyRegEx(searchString, navigationvalues, 'title', ['key']);
 
 	if (navStatus === 'assigned') {
-		navigationOptions = navigationOptions.filter((nav) => !!(roleData?.permissions || []).find(
-			(item) => item.navigation === nav.key && item.status === 'active',
-		));
+		navigationOptions = navigationOptions.filter((nav) => (activeNavs || []).includes(nav.key));
 	}
 	if (navStatus === 'not_assigned') {
-		navigationOptions = navigationOptions.filter((nav) => !(roleData?.permissions || [])
-			.find((item) => item.navigation === nav.key) || !!(roleData?.permissions || []).find(
-			(item) => item.navigation === nav.key && item.status === 'inactive',
-		));
+		navigationOptions = navigationOptions.filter((nav) => !(activeNavs || []).includes(nav.key));
 	}
 	const crmNavs = navigationOptions.filter((nav) => nav?.module_type === 'crm');
 	const dashBoardNavs = navigationOptions.filter((nav) => nav?.module_type === 'dashboards' || !nav?.module_type);
@@ -59,6 +56,7 @@ function Navigations(props) {
 						const NavElement = navElement(navigation);
 						return (
 							<NavElement
+								key={navigation.key}
 								navigation={navigation}
 								roleData={{
 									...(roleData || {}),
@@ -68,7 +66,8 @@ function Navigations(props) {
 								authRoleId={authRoleId}
 								getRole={getRole}
 								getNavOptions={getNavOptions}
-								loading={loading}
+								loading={loading || activeNavsLoading}
+								activeNavs={activeNavs}
 							/>
 						);
 					})}
@@ -78,6 +77,7 @@ function Navigations(props) {
 						const NavElement = navElement(navigation);
 						return (
 							<NavElement
+								key={navigation.key}
 								navigation={navigation}
 								roleData={{
 									...(roleData || {}),
@@ -87,7 +87,8 @@ function Navigations(props) {
 								authRoleId={authRoleId}
 								getRole={getRole}
 								getNavOptions={getNavOptions}
-								loading={loading}
+								loading={loading || activeNavsLoading}
+								activeNavs={activeNavs}
 							/>
 						);
 					})}

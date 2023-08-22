@@ -1,12 +1,12 @@
 import { Pill } from '@cogoport/components';
 
 import { SERVICES_WITH_DETAILS, SERVICE_LABEL_MAPPING } from '../../../../../../constants/flashRatesMapping';
+import { RENDER_VALUE_MAPPING, formatServiceDetails } from '../../../../../../utils/detailsHelperFuncs';
 
 import Details from './Details';
-import { RENDER_VALUE_MAPPING, formatServiceDetails } from './detailsHelperFuncs';
 import styles from './styles.module.css';
 
-function CargoDetails({ item }) {
+function CargoDetails({ item = {} }) {
 	const { service_type, service } = item || {};
 
 	const details = formatServiceDetails(service);

@@ -1,0 +1,26 @@
+.value_text {
+	margin-left: 2px;
+	font-size: var(--font-size-lg);
+	font-weight: 400;
+	line-height: 25px;
+}
+
+.header_text {
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+}
+
+.style_Table {
+	display: flex;
+	justify-content: center;
+}
+
+.card_list {
+	width: 500px;
+	margin: 12px 10px 23px;
+	border: 1px solid var(--color-accent-orange-2);
+}
+
+.style_header {
+	display: flex;
+}

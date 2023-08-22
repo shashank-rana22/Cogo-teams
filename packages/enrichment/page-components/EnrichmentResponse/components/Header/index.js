@@ -1,68 +1,53 @@
-import { Breadcrumb, Placeholder } from '@cogoport/components';
-import { useRouter, Link } from '@cogoport/next';
-import { startCase, format, isEmpty } from '@cogoport/utils';
+import { Avatar, Pill, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
 import useHeaderStats from '../../hooks/useHeaderStats';
+import getSourceOrganizationData from '../../utils/get-source-organization-data';
 
 import styles from './styles.module.css';
 
-const CARD_LABEL_MAPPING = {
-	business_name: 'Organization Name',
-	// registration_number : 'Registration Number',
-};
+const FIRST_INDEX = 1;
 
 function Header() {
-	const { query = {} } = useRouter();
+	const { data = {}, loading = false } = useHeaderStats();
 
-	const { requestData = {}, loading } = useHeaderStats();
+	const { lead_organization, organization } = data;
 
-	const { organization = {}, lead_organization = {}, created_at = '' } = requestData;
+	const sourceOrganization = getSourceOrganizationData({ lead_organization, organization });
+
+	const { business_name = '', serial_id = '' } = sourceOrganization || {};
+
+	const avatarName = `${business_name.split(' ')[GLOBAL_CONSTANTS.zeroth_index]}
+	 ${business_name.split(' ')[FIRST_INDEX] || ''}`;
 
 	if (loading) {
-		return <Placeholder height="60px" width="100%" />;
+		return <div className={styles.card}><Placeholder width="500px" height="64px" /></div>;
 	}
 
 	return (
-		<section>
-			<Breadcrumb>
-				<Breadcrumb.Item
-					label={(
-						<Link href={`/enrichment?tab=${query.tab}`}>
-							Enrichment
-						</Link>
-					)}
-				/>
-				<Breadcrumb.Item label="Organization Details" />
-			</Breadcrumb>
+		<div className={styles.card}>
 
-			<div className={styles.header}>
-				{Object.keys(CARD_LABEL_MAPPING).map((key) => (
-					<div key={key} className={styles.info}>
-						<div className={styles.info_label}>
-							{CARD_LABEL_MAPPING[key]}
-							{' '}
-							-
-						</div>
+			<Avatar personName={avatarName || '--'} size="72px" />
 
-						<div className={styles.value}>
-							{isEmpty(lead_organization) ? (
-								startCase(organization?.[key] || '-')
-							) : (
-								startCase(lead_organization?.[key] || '-')
-							)}
-						</div>
-					</div>
-				))}
+			<div className={styles.details}>
 
-				<div className={styles.info}>
-					<div className={styles.info_label}>Enrichment Request Created At -</div>
+				<span>
+					<span className={styles.label}>	Organization Name:</span>
+					<span className={styles.name}>{startCase(business_name || '--')}</span>
+				</span>
 
-					<div className={styles.value}>
-						{created_at ? format(created_at, 'dd MMM yyyy') : '-'}
-					</div>
-				</div>
+				<Pill
+					size="md"
+					color="blue"
+					className={styles.pill}
+				>
+					<span className={styles.label}>	ID:</span>
+					<span className={styles.value}>{serial_id || 'Nil'}</span>
+				</Pill>
+
 			</div>
-		</section>
+		</div>
 	);
 }
 

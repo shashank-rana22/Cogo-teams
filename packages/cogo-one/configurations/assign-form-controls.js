@@ -110,18 +110,21 @@ const controls = {
 			{ value: 'fcl_cfs', label: 'FCL CFS' },
 		],
 	},
+	agent_type: {
+		name        : 'agent_type',
+		type        : 'select',
+		placeholder : 'Select Agent Type',
+	},
 };
 
 export const ASSIGN_TYPE_OPTIONS = [
 	{
-		label       : 'Assign User',
-		value       : 'assign_user',
-		agent_types : ['sales', 'supply'],
+		label : 'Assign User',
+		value : 'assign_user',
 	},
 	{
-		label       : 'Transfer to Team',
-		value       : 'assign_on_entity',
-		agent_types : ['sales', 'supply'],
+		label : 'Transfer to Team',
+		value : 'assign_on_entity',
 	},
 ];
 

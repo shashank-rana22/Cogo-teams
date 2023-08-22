@@ -1,10 +1,16 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcMEmail, IcMTick } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useRef } from 'react';
 
 import styles from './styles.module.css';
 
 const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
+
+const FIRST_INDEX = 1;
+
+const SECOND_INDEX = 2;
 
 const getInitials = (name = '') => {
 	if (!name) {
@@ -12,14 +18,22 @@ const getInitials = (name = '') => {
 	}
 
 	const full_name = name.split(' ');
-	const initials = full_name.map((char) => char.charAt(0).toUpperCase());
-	return initials.length > 2 ? initials.splice(0, 2) : initials;
+	const initials = full_name.map((char) => char.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase());
+	return initials.length > SECOND_INDEX ? initials.splice(GLOBAL_CONSTANTS.zeroth_index, SECOND_INDEX) : initials;
 };
 
-function UserDetails({ user_data }) {
+function UserDetails({ user_data = {} }) {
+	const { t } = useTranslation(['profile']);
+
 	return (
 		<>
-			{user_data.block_access ? <div className={styles.blocked_user_tag}>Blocked</div> : null}
+			{user_data.block_access ? (
+				<div className={styles.blocked_user_tag}>
+					{
+			t('profile:blocked_button')
+}
+				</div>
+			) : null}
 
 			<div className={styles.popover_container}>
 				<div className={styles.header_text}>{user_data?.name}</div>
@@ -60,7 +74,10 @@ function UserCard({
 		}
 	};
 
-	const profileRef = useRef({ backgroundColor: colorArr[Math.floor(Math.random() * (colorArr.length + 1))] });
+	const profileRef = useRef({
+		backgroundColor: colorArr[Math.floor(Math.random()
+		* (colorArr.length + FIRST_INDEX))],
+	});
 
 	return (
 		<div className={styles.main_container}>

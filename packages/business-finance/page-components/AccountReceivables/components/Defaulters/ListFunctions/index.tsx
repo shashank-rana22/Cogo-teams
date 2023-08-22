@@ -14,7 +14,7 @@ import { INVOICE_STATUS_MAPPING, INVOICE_TYPE, STATUS_MAPPING } from '../Default
 
 import styles from './styles.module.css';
 
-const listFunctions = ({ refetch }) => ({
+const listFunctions = ({ refetch, entityCode }) => ({
 	showOrgName       : ({ organizationName }) => (<div>{showOverflowingNumber(organizationName || '-', 10)}</div>),
 	showInvoiceNumber : (row) => (
 		<div>
@@ -48,7 +48,7 @@ const listFunctions = ({ refetch }) => ({
 			<div>
 				<Pill size="sm" color={INVOICE_TYPE[(row?.invoiceType as string)]}>
 
-					{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(row?.invoiceType)}
+					{row?.eInvoicePdfUrl ? 'E-INVOICE' : startCase(row?.invoiceType)}
 
 				</Pill>
 			</div>
@@ -178,7 +178,7 @@ const listFunctions = ({ refetch }) => ({
 									className={styles.tool_tip}
 								>
 									{row?.eInvoicePdfUrl
-										? 'E INVOICE GENERATED'
+										? 'E-INVOICE GENERATED'
 										: startCase(row?.invoiceStatus)}
 
 								</div>
@@ -186,7 +186,7 @@ const listFunctions = ({ refetch }) => ({
 						>
 							<text className={styles.style_text}>
 								{row?.eInvoicePdfUrl
-									? `${'E INVOICE GENERATED'.substring(
+									? `${'E-INVOICE GENERATED'.substring(
 										0,
 										10,
 									)}...`
@@ -211,6 +211,7 @@ const listFunctions = ({ refetch }) => ({
 		<div className={styles.show_actions}>
 			<Remarks itemData={row} />
 			<InvoiceDetails
+				entityCode={entityCode}
 				item={row}
 			/>
 			<RenderIRNGenerated

@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getGeoConstants, { ENTITY_IDS_MAPPING } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
-import { isEmpty } from '@cogoport/utils';
+import { getByKey, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
@@ -21,11 +21,14 @@ const geo = getGeoConstants();
 
 const useEditInvoicePref = ({
 	shipment_data = {},
+	primary_service = {},
 	servicesList,
 	invoicing_parties = [],
 	refetch = () => {},
 }) => {
-	const { inco_term = '', importer_exporter_id = '' } = shipment_data;
+	const { importer_exporter_id = '' } = shipment_data;
+	const { inco_term = '' } = primary_service || {};
+
 	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
 	const ALL_SERVICE_LINE_ITEMS = [];
 	invoicing_parties?.forEach((p) => {
@@ -94,7 +97,6 @@ const useEditInvoicePref = ({
 		const currentInvoiceIndex = selectedParties?.findIndex(
 			(party) => party.id === inv.id,
 		);
-
 		const currentInvoiceId = selectedParties?.find(
 			(party) => party.id === inv.id,
 		)?.id;
@@ -182,7 +184,17 @@ const useEditInvoicePref = ({
 				});
 			}
 
-			if (isBasicFreight && updateExportInvoices && !allowServiceMerge) {
+			const is_invoice_mergeable = getByKey(
+				ENTITY_IDS_MAPPING[shipment_data?.entity_id] || {},
+				'others.navigations.bookings.invoicing.is_invoice_mergeable',
+			);
+
+			if (
+				isBasicFreight
+				&& updateExportInvoices
+				&& !allowServiceMerge
+				&& !is_invoice_mergeable
+			) {
 				Toast.error(
 					'Basic Freight or IGST invoices cannot be merged with other services',
 				);
@@ -195,8 +207,8 @@ const useEditInvoicePref = ({
 	const { handleEditPreferences, loading } = useUpdateInvoiceCombination({
 		servicesList,
 		selectedParties,
-		initial_service_invoice_id : INITIAL_SERVICE_INVOICE_ID,
-		allServiceLineitemsCount   : ALL_SERVICE_LINE_ITEMS.length,
+		INITIAL_SERVICE_INVOICE_ID,
+		allServiceLineitemsCount: ALL_SERVICE_LINE_ITEMS.length,
 		refetch,
 		importer_exporter_id,
 		updateExportInvoices,

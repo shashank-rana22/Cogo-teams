@@ -72,21 +72,50 @@
 	box-shadow: 3px 7px 16px #8a795d61;
 }
 
-.call_icon {
-	top: 35%;
-	right: 11px;
-	user-select: none;
+.call_icon_styles {
+	border-radius: 50%;
 }
 
-.whatsapp_icon {
-	top: 79%;
-	right: 40px;
-	user-select: none;
-}
-
-.mail_icon {
-	top: 25%;
-	user-select: none;
+.mail_icon_styles {
 	background: #ffff;
 	border-radius: 50%;
+}
+
+.common_contact_icon_styles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	background-color: #f9ae64;
+	border-radius: 50%;
+	transform: rotate(-43deg) !important;
+}
+
+.sp_contacts_icon {
+	background-color: #f97a64;
+}
+
+.position_1 {
+	top: 160px;
+	right: 14px;
+}
+
+.position_2 {
+	top: 79%;
+	right: 40px;
+}
+
+.position_3 {
+	top: 35%;
+	right: 11px;
+}
+
+.position_4 {
+	top: 25%;
+}
+
+.position_5 {
+	top: 60%;
+	left: 40px;
 }

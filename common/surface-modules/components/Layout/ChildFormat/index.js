@@ -6,16 +6,15 @@ import Child from './child';
 import styles from './styles.module.css';
 
 function FieldArray({
-	name,
-	control,
-	showElements,
-	controls,
-	buttonText,
+	name = '',
+	control = {},
+	showElements = false,
+	controls = [],
+	buttonText = '',
 	showButtons = true,
 	disabled = false,
-	value,
-	error,
-	formValues,
+	error = {},
+	formValues = {},
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
@@ -60,7 +59,7 @@ function FieldArray({
 						onClick={() => append(controlledItems)}
 					>
 						<div className={styles.add_button_text}>
-							+&nbsp;
+							{' '}
 							{buttonText || 'Add Items'}
 						</div>
 					</Button>

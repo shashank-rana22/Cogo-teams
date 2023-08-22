@@ -3,6 +3,12 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 40px 0;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+		margin: 10px 0;
+	}
 }
 
 .heading {
@@ -15,6 +21,12 @@
 .content {
 	display: flex;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin-bottom: 12px;
+		margin-left: 12px;
+	}
 }
 
 .text {
@@ -34,4 +46,9 @@
 	display: flex;
 	justify-content: space-between;
 	width: 60%;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		width: 100%;
+	}
 }

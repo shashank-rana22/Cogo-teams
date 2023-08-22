@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
 
 import useCreateShipmentDocument from '../../../../../../hooks/useCreateShipmentDocument';
+import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import styles from './styles.module.css';
 
@@ -22,9 +23,11 @@ function UploadCargoArrivalDocument({
 		refetch();
 		clearTask();
 	};
-	const { apiTrigger, docLoading } = useCreateShipmentDocument({
-		refetch: cargoDocRefetch,
-	});
+	const { apiTrigger, docLoading } = useCreateShipmentDocument({});
+
+	const { loading : taskLoading, apiTrigger : taskTrigger } = useUpdateShipmentPendingTask(
+		{ refetch: cargoDocRefetch },
+	);
 
 	const onSubmit = async (values) => {
 		const data = {
@@ -33,7 +36,6 @@ function UploadCargoArrivalDocument({
 			document_type      : 'container_arrival_notice',
 			service_id         : pendingTask?.service_id,
 			service_type       : pendingTask?.service_type,
-			pending_task_id    : pendingTask?.id,
 			documents          : [
 				{
 					file_name    : values?.cargo_arrival_notice?.fileName,
@@ -44,7 +46,8 @@ function UploadCargoArrivalDocument({
 				},
 			],
 		};
-		await apiTrigger(data);
+
+		apiTrigger(data).then(() => taskTrigger({ id: pendingTask?.id }));
 	};
 
 	return (
@@ -78,7 +81,7 @@ function UploadCargoArrivalDocument({
 				<div className={styles.footer}>
 					<Button
 						onClick={handleSubmit(onSubmit)}
-						disabled={docLoading}
+						disabled={docLoading || taskLoading}
 					>
 						Submit
 					</Button>

@@ -22,6 +22,7 @@
 }
 
 .receive_message_container {
+	position: relative;
 	width: fit-content;
 	padding: 12px;
 	margin-top: 5px;
@@ -60,4 +61,14 @@
 .message_tick_container {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.tags {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.tags_styles {
+	padding-top: 36px;
 }

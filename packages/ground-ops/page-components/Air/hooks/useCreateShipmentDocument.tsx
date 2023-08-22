@@ -1,11 +1,14 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useRequestAir } from '@cogoport/request';
 
 const useCreateShipmentDocument = () => {
-	const [{ loading }, trigger] = useRequest({
-		url    : 'create_shipment_document',
-		method : 'POST',
-	});
+	const [{ loading }, trigger] = useRequestAir(
+		{
+			url     : '/air-coe/documents',
+			method  : 'POST',
+			authKey : 'post_air_coe_documents',
+		},
+	);
 
 	const createDocument = async (payload, listAPI) => {
 		try {

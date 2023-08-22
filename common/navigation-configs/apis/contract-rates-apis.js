@@ -808,6 +808,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'update_checkout_risk_category',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'delete_contract_service',
+		access_type  : 'private',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;

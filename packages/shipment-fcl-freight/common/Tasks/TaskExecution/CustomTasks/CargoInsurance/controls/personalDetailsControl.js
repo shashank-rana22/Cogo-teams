@@ -50,13 +50,13 @@ export const personalDetailsControl = [
 	{
 		label       : 'Email',
 		name        : 'email',
-		type        : 'email',
+		type        : 'text',
 		span        : 3,
 		placeholder : 'Enter Email',
 		rules       : {
 			required : 'Email is required',
 			pattern  : {
-				value   : geo?.regex.EMAIL,
+				value   : geo?.regex?.EMAIL,
 				message : 'Email is invalid',
 			},
 		},
@@ -69,7 +69,10 @@ export const personalDetailsControl = [
 		placeholder : 'Enter your mobile number',
 		rules       : {
 			required : 'Mobile Number is required',
-			validate : (v) => geo?.regex.MOBILE_NUMBER.test(v) || 'Invalid Mobile Number',
+			pattern  : {
+				value   : geo?.regex?.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE,
+				message : 'Invalid Mobile Number',
+			},
 		},
 	},
 ];

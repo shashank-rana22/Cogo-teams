@@ -23,6 +23,7 @@ const useEditQuotations = ({
 	servicesList = [], shipment_data = {}, onCancel = () => {}, task = {},
 	taskListRefetch = () => {},
 	selectedCard = {},
+	formattedRate = {},
 }) => {
 	const {
 		refetch:getShipmentRefetch,
@@ -103,14 +104,27 @@ const useEditQuotations = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)
+		&& (formattedRate?.[service_charge?.service_id]?.line_items || []).length) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {
@@ -125,13 +139,13 @@ const useEditQuotations = ({
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
 			const SERVICE = (service_charges || []).find(
-				(charge) => charge?.id === key,
+				(charge) => charge?.service_id === key,
 			);
 			const newQuote = {
-				id         : key,
-				service_id : (service_charges || []).find((charge) => charge?.id === key)
-					?.service_id,
-				service_type: SERVICE?.service_type,
+				id: (service_charges || []).find((charge) => charge?.service_id === key)
+					?.id,
+				service_id   : key,
+				service_type : SERVICE?.service_type,
 				is_minimum_price_shipment:
 				SERVICE?.service_detail?.[GLOBAL_CONSTANTS.zeroth_index]?.is_minimum_price_shipment,
 				min_price  : BASIC_LINE_ITEM.min_price,

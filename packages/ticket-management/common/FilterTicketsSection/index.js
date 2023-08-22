@@ -8,11 +8,14 @@ import FilterType from './FilterType';
 import styles from './styles.module.css';
 import TicketsSection from './TicketsSection';
 
-function FilterTicketsSection({ type = '', setRefreshList =	() => {}, refreshList = {} }) {
+function FilterTicketsSection({
+	type = '', setRefreshList = () => {}, refreshList = {}, spectatorType = '',
+	setSpectatorType = () => {}, date = {},
+}) {
 	const { query: { ticket_id } } = useRouter();
 
 	const [showReassign, setShowReassign] = useState(false);
-	const [searchParams, setSearchParams] = useState({ text: '', spectatorType: '', agent: '', category: '' });
+	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState(ticket_id ? { ticketId: ticket_id } : {});
 	const [isUpdated, setIsUpdated] = useState(false);
 
@@ -20,9 +23,17 @@ function FilterTicketsSection({ type = '', setRefreshList =	() => {}, refreshLis
 
 	return (
 		<div className={cl`${styles.filter_tickets_container} ${isAdmin ? styles.bridge_gap : ''}`}>
-			<FilterType setSearchParams={setSearchParams} searchParams={searchParams} isAdmin={isAdmin} />
-			<TicketsSection
+			<FilterType
+				setSearchParams={setSearchParams}
 				searchParams={searchParams}
+				isAdmin={isAdmin}
+				spectatorType={spectatorType}
+				setSpectatorType={setSpectatorType}
+			/>
+			<TicketsSection
+				date={date}
+				searchParams={searchParams}
+				spectatorType={spectatorType}
 				isAdmin={isAdmin}
 				setModalData={setModalData}
 				isUpdated={isUpdated}

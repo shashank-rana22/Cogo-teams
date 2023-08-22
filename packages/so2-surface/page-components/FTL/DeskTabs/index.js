@@ -1,15 +1,13 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useContext } from 'react';
 
-import TabContainer from '../../../configs/TAB_CONFIG';
+import tabContainer from '../../../configs/tabContainer';
 import DashboardContext from '../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
-const DEFAULT_BADGE_VALUE = 0;
-
 function DeskTabs({ tabData = {} }) {
-	const tabsConfig = TabContainer();
+	const tabsConfig = tabContainer();
 	const { stepperTab, filters, setFilters, activeTab, setActiveTab } = useContext(DashboardContext);
 	const tabs = tabsConfig[stepperTab] || [];
 
@@ -30,7 +28,7 @@ function DeskTabs({ tabData = {} }) {
 					<TabPanel
 						title={tab.label}
 						name={tab.value}
-						badge={tabData[tab.stats] || DEFAULT_BADGE_VALUE}
+						badge={tabData[tab.stats]}
 						key={tab.value}
 					/>
 				))}

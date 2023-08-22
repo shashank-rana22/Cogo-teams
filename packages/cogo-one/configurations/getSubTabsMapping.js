@@ -30,8 +30,13 @@ const SUB_TAB_MAPPING = [
 		icon  : <IcMAppPoc height={20} width={20} />,
 	},
 	{
+		name  : 'kamContacts',
+		label : 'Contacts',
+		icon  : <IcMAppPoc height={20} width={20} />,
+	},
+	{
 		name  : 'observer',
-		label : 'History',
+		label : 'Observer',
 		icon  : <IcMHourglass height={20} width={20} />,
 	},
 ];

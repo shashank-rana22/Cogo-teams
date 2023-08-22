@@ -1,15 +1,5 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
-
-const CURRENCY_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.EUR,
-	GLOBAL_CONSTANTS.currency_code.GBP,
-].map((currency) => ({
-	label : currency,
-	value : currency,
-}));
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];
@@ -22,7 +12,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			name    : 'currency',
 			label   : 'Currency',
 			type    : 'select',
-			options : CURRENCY_OPTIONS,
+			options : currencies,
 			rules   : { required: 'Currency is required' },
 			show    : ['task', 'overview'].includes(source),
 			size    : 'sm',
@@ -61,7 +51,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 		},
 		{
 			name        : 'price',
-			label       : 'Price',
+			label       : 'Sell Price',
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },

@@ -12,10 +12,11 @@ const currencyOptions = [
 }));
 
 const controls = ({ serviceData = {}, source = '' }) => {
-	const unitOptions = [];
+	const UNITOPTIONS = [];
+
 	if (serviceData?.units) {
-		serviceData?.units?.forEach((unit) => { unitOptions.push({ label: startCase(unit), value: unit }); });
-	} else unitOptions.push({ label: startCase(serviceData?.unit), value: serviceData?.unit });
+		serviceData?.units?.forEach((unit) => { UNITOPTIONS.push({ label: startCase(unit), value: unit }); });
+	} else UNITOPTIONS.push({ label: startCase(serviceData?.unit), value: serviceData?.unit });
 
 	const formControl = [
 		{
@@ -24,7 +25,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type    : 'select',
 			options : currencyOptions,
 			rules   : { required: 'Currency is required' },
-			show    : ['task', 'overview'].includes(source),
+			show    : ['task', 'overview', 'purchase'].includes(source),
 			size    : 'sm',
 
 		},
@@ -34,7 +35,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter Buy Price',
 			rules       : { required: 'Buy Price is required', min: 0 },
-			show        : source !== 'task' || source === 'overview'
+			show        : source !== 'task' || source === 'overview' || source === 'purchase'
 			|| serviceData?.state === 'amendment_requested_by_importer_exporter',
 			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter' || source === 'add_sell_price',
 			size     : 'sm',
@@ -44,9 +45,9 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			label    : 'Unit',
 			type     : 'select',
 			span     : 6,
-			options  : unitOptions,
+			options  : UNITOPTIONS,
 			rules    : { required: 'Unit is required' },
-			show     : ['task', 'overview'].includes(source),
+			show     : ['task', 'overview', 'purchase'].includes(source),
 			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter' || source === 'add_sell_price',
 			size     : 'sm',
 		},
@@ -56,7 +57,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter quantity here',
 			rules       : { required: 'Quantity is required', min: 0 },
-			show        : ['task', 'overview'].includes(source),
+			show        : ['task', 'overview', 'purchase'].includes(source),
 			size        : 'sm',
 		},
 		{
@@ -65,15 +66,31 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : ['task', 'overview'].includes(source),
+			show        : ['task', 'purchase'].includes(source),
 			size        : 'sm',
+		},
+		{
+			name        : 'service_provider_id',
+			label       : 'Service provider',
+			type        : 'asyncSelect',
+			placeholder : 'Select Service Provider',
+			asyncKey    : 'organizations',
+			params      : {
+				filters: {
+					account_type : 'service_provider',
+					kyc_status   : 'verified',
+				},
+			},
+			size  : 'sm',
+			show  : ['overview'].includes(source),
+			rules : { required: 'org is required' },
 		},
 		{
 			name        : 'alias',
 			label       : 'Alias (Optional)',
 			type        : 'text',
 			placeholder : 'Enter Alias (Only if required)',
-			show        : ['task', 'overview'].includes(source),
+			show        : ['task', 'overview', 'purchase'].includes(source),
 			size        : 'sm',
 		},
 	];

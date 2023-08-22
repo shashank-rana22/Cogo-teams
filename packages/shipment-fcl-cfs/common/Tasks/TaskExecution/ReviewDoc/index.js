@@ -1,6 +1,7 @@
-import { Loader, Button, Toast } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -8,6 +9,8 @@ import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
 import styles from './styles.module.css';
+
+const GET_FINAL_URL = 1;
 
 function ReviewDoc({
 	task = {},
@@ -34,7 +37,7 @@ function ReviewDoc({
 	let params = {};
 
 	if (!loading && list?.list?.length) {
-		docData = list.list[0] || {};
+		docData = list.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 		params = {
 			id                  : docData.id,
 			pending_task_id     : task.id,
@@ -82,18 +85,15 @@ function ReviewDoc({
 	if (loading) {
 		return (
 			<div>
-				<Loader />
-				Loading Document...
+				<ThreeDotLoader message="Loading Document" />
 			</div>
 		);
 	}
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			const regex = /:finalUrl=>"([^"]*)"/;
-			const match = url.match(regex);
-
-			return match[1];
+			const match = url.match(GLOBAL_CONSTANTS.regex_patterns.file_upload_url);
+			return match[GET_FINAL_URL];
 		}
 
 		return url;

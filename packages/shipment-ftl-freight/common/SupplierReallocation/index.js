@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useContext } from 'react';
 
 import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
@@ -30,13 +31,17 @@ function SupplierReallocation({
 	serviceData = [],
 	setShow = () => {},
 }) {
-	const { refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
-	const { service_provider = {} } = primary_service;
-
-	const serviceObj = serviceData?.[0] || {};
+	const {
+		refetch, refetchServices, primary_service = {},
+		shipment_data : { shipment_type } = '',
+	} = useContext(ShipmentDetailContext);
+	const { service_provider = {}, service_type: primary_service_type = '' } = primary_service;
+	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls } = getControls({
+		shipment_type,
+		primary_service_type,
 		serviceObj,
 	});
 

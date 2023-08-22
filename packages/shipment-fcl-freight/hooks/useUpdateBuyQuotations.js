@@ -7,7 +7,7 @@ const useUpdateBuyQuotations = ({
 	successMessage = 'Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/update_buy_quotations',
+		url    : '/update_shipment_buy_quotations',
 		method : 'POST',
 	});
 

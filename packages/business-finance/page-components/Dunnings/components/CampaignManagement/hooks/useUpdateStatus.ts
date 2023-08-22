@@ -24,9 +24,9 @@ function useUpdateStatus({ getDunningList }:Props) {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/dunning/update-status',
+			url     : '/payments/dunning/status',
 			method  : 'put',
-			authKey : 'put_payments_dunning_update_status',
+			authKey : 'put_payments_dunning_status',
 		},
 		{ manual: true },
 	);

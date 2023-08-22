@@ -4,6 +4,9 @@ const EDIT_PARAMS_STAKEHOLDERS = {
 	booking_agent: {
 		idToMatch: 'importer_exporter_id',
 	},
+	booking_agent_manager: {
+		idToMatch: 'importer_exporter_id',
+	},
 	consignee_shipper_booking_agent: {
 		idToMatch: 'consignee_shipper_id',
 	},
@@ -36,7 +39,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
+	if (user_data?.id && user_data.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 

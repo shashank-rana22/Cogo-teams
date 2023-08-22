@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import styles from './styles.modules.css';
+import styles from './styles.module.css';
 
 function Loading() {
 	return (

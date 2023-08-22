@@ -1,4 +1,5 @@
-import { Tooltip, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import { renderValue } from '../../../../../../commons/CargoDetails/RenderCargoPills/renderValue';
 
@@ -13,9 +14,7 @@ function Item({ label, detail }) {
 				<div className={styles.key}>
 					{label?.label}
 				</div>
-				<Tooltip content={valueFormatted} placement="bottom">
-					<div className={cl`${styles.value}`}>{valueFormatted}</div>
-				</Tooltip>
+				<div className={cl`${styles.value}`}>{startCase(valueFormatted)}</div>
 			</div>
 		) : null;
 }
