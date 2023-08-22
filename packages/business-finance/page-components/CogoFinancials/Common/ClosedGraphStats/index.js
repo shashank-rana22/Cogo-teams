@@ -90,16 +90,18 @@ function ClosedGraphStats({
 						</div>
 
 						<div className={styles.graphs}>
-							{GRAPH.map((cardTitle) => (
+							{GRAPH.map((cardTitle, graphIndex) => (
 								<SingleGraphCard
 									heading={cardTitle}
 									key={cardTitle}
 									setActiveBar={setActiveBar}
+									activeBar={activeBar}
 									taxType={taxType}
 									type={type}
 									serviceLevelData={serviceLevelData}
 									serviceLevelLoading={serviceLevelLoading}
 									defaultWidth={defaultWidth}
+									graphIndex={graphIndex}
 								/>
 							))}
 						</div>

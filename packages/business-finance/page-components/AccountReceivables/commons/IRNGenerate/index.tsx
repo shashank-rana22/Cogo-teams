@@ -114,6 +114,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 		setVisible(!visible);
 	};
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
+	// eslint-disable-next-line custom-eslint/function-name-check
 	const content = () => (
 		<div>
 			<div

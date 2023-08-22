@@ -63,3 +63,16 @@
 .segmented_section {
 	margin: 0 12px;
 }
+
+.tour_btn {
+	margin-right: 12px;
+	background-image: linear-gradient(306deg, #b4d1ff 0%, #c685ff 51%, #aecdff 100%);
+}
+
+.tour_btn:hover {
+	svg {
+		width: 20px;
+		height: 20px;
+		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+	}
+}

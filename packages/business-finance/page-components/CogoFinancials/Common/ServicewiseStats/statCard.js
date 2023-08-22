@@ -20,7 +20,9 @@ const displayAmount = (amount, currency) => formatAmount({
 	},
 });
 
-function StatCard({ mappingCards = [], service = '', isMain = false, singleServiceData = [], taxType = '' }) {
+function StatCard({
+	mappingCards = [], service = '', isMain = false, singleServiceData = [], taxType = '',
+}) {
 	const { currency, invoiceCount, jobCount } = singleServiceData;
 
 	const getProfitColor = ({ amount, isProfit }) => {
@@ -33,7 +35,11 @@ function StatCard({ mappingCards = [], service = '', isMain = false, singleServi
 	};
 
 	return (
-		<div className={cl`${styles.statscontainer} ${!isMain && styles.border}`}>
+		<div
+			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
+			data-tour={!isMain ? 'single-service' : null}
+		>
+
 			{isMain ? null : (
 				<div className={styles.service}>
 					{service}
