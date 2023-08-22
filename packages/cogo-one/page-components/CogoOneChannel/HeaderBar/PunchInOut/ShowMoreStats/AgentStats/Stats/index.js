@@ -10,7 +10,7 @@ import useGetAgentTimelineEscalate from '../../../../../../../hooks/useGetAgentT
 import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
-const MIN_RATING = 3;
+const MIN_AVERAGE_RATING = 3;
 const ESCALATE_DEFAULT_CHAT_COUNT = 0;
 
 function Stats({
@@ -24,7 +24,6 @@ function Stats({
 	timePeriodValue = '',
 	isShowActivityGraph = false,
 }) {
-	console.log('viewType:', viewType);
 	const { chat_stats = {} } = statsData || {};
 	const {
 		rating = [],
@@ -57,17 +56,15 @@ function Stats({
 	const STATS_FEEDBACK_COUNT = {
 		no_of_bookings              : booked,
 		no_of_quotation_send        : totalQuotationSend,
-		chats_assigned              : totalChatAssigne, // commom
-		calls_made                  : totalCallMade, // commom
-		calls_received              : totalCallReceive, // commom
+		chats_assigned              : totalChatAssigne,
+		calls_made                  : totalCallMade,
+		calls_received              : totalCallReceive,
 		customer_satisfaction_score : averageRating,
-
-		// Supply:
-		no_of_rates_reverted       : rateRevert,
-		no_of_rate_sheets_received : '0',
-		avg_response_time          : avgResponseTime,
-		emails_send_count          : emailCount,
-		escalate_chats_count       : escalateCount,
+		no_of_rates_reverted        : rateRevert,
+		no_of_rate_sheets_received  : '0',
+		avg_response_time           : avgResponseTime,
+		emails_send_count           : emailCount,
+		escalate_chats_count        : escalateCount,
 
 	};
 
@@ -76,10 +73,6 @@ function Stats({
 	return (
 		<div className={styles.stats_container}>
 			{(STATS_FEEDBACK_MAPPING || []).map((item) => (
-				// <div
-				// 	className={cl`${styles.each_stats_div}
-				// ${(STATS_FEEDBACK_MAPPING.length >= MIN_COUNT_FOUR) ? styles.stat_box : ''}`}
-				// 	key={item}
 				<div
 					className={cl`${styles.each_stats_div}
 				 ${isShowActivityGraph ? '' : styles.new_each_stats}`}
@@ -88,7 +81,7 @@ function Stats({
 					<div className={styles.title}>{startCase(item)}</div>
 					<div className={styles.count_with_icon}>
 						{item === 'customer_satisfaction_score' && !isEmpty(averageRating) ? (
-							RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].image
+							RATING_ELEMENTS[averageRating >= MIN_AVERAGE_RATING ? 'happy' : 'sad'].image
 						) : null}
 
 						<div className={styles.count}>
@@ -99,7 +92,7 @@ function Stats({
 						{(item === 'customer_satisfaction_score' && averageRating)
 							? (
 								<div className={styles.arrow_icon}>
-									{RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].arrow}
+									{RATING_ELEMENTS[averageRating >= MIN_AVERAGE_RATING ? 'happy' : 'sad'].arrow}
 								</div>
 							) : null}
 					</div>
