@@ -1,8 +1,8 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const {
 	fortigo_details = {},
-	cogo_bank_details = {},
 	ftl_customer_pan_mappings = {},
 } = GLOBAL_CONSTANTS.others;
 
@@ -13,11 +13,49 @@ const {
 	fortigo_bank_details_mappings = {},
 } = fortigo_details || {};
 
-export const CUSTOMER_TO_SERVICE_DESCRIPTION = {
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_network_logistics]:
-		'Goods Transport Agency - FCM',
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_transport_agency]:
-		'Goods Transport Agency - RCM',
+export const getFortigoDetails = () => {
+	const geo = getGeoConstants();
+
+	const CUSTOMER_TO_SERVICE_DESCRIPTION = {
+		[geo.uuid.ftl_agencies_mapping.fortigo_network_logistics]:
+			'Goods Transport Agency - FCM',
+		[geo.uuid.ftl_agencies_mapping.fortigo_transport_agency]:
+			'Goods Transport Agency - RCM',
+	};
+
+	const CUSTOMER_TO_CIN = {
+		[geo.uuid.ftl_agencies_mapping.fortigo_network_logistics]:
+			fortigo_cin_mappings.fortigo_network_logistics,
+		[geo.uuid.ftl_agencies_mapping.fortigo_transport_agency]:
+			fortigo_cin_mappings.fortigo_transport_agency,
+	};
+
+	const TAX_PAYABLE_RCM = {
+		[geo.uuid.ftl_agencies_mapping.fortigo_network_logistics] : 'No',
+		[geo.uuid.ftl_agencies_mapping.fortigo_transport_agency]  : 'Yes',
+	};
+
+	const CUSTOMER_TO_BANK_DETAILS = {
+		[geo.uuid.ftl_agencies_mapping.fortigo_network_logistics]: {
+			bank_name      : 'Axis Bank',
+			bank_branch    : 'Corporate Banking Branch',
+			ifsc_code      : fortigo_bank_details_mappings.fortigo_network_logistics.ifsc_code,
+			account_number : fortigo_bank_details_mappings.fortigo_network_logistics.account_number,
+		},
+		[geo.uuid.ftl_agencies_mapping.fortigo_transport_agency]: {
+			bank_name      : 'ICICI',
+			bank_branch    : 'Koramangala Branch (Bangalore)',
+			ifsc_code      : fortigo_bank_details_mappings.fortigo_transport_agency.ifsc_code,
+			account_number : fortigo_bank_details_mappings.fortigo_transport_agency.account_number,
+		},
+	};
+
+	return {
+		CUSTOMER_TO_SERVICE_DESCRIPTION,
+		CUSTOMER_TO_CIN,
+		TAX_PAYABLE_RCM,
+		CUSTOMER_TO_BANK_DETAILS,
+	};
 };
 
 export const PAN_TO_SERVICE_DESCRIPTION = {
@@ -27,13 +65,6 @@ export const PAN_TO_SERVICE_DESCRIPTION = {
 		'Goods Transport Agency - RCM',
 };
 
-export const CUSTOMER_TO_CIN = {
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_network_logistics]:
-		fortigo_cin_mappings.fortigo_network_logistics,
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_transport_agency]:
-		fortigo_cin_mappings.fortigo_transport_agency,
-};
-
 export const PAN_TO_CIN = {
 	[fortigo_company_pan_mappings.fortigo_network_logistics]:
 		fortigo_cin_mappings.fortigo_network_logistics,
@@ -41,29 +72,9 @@ export const PAN_TO_CIN = {
 		fortigo_cin_mappings.fortigo_transport_agency,
 };
 
-export const TAX_PAYABLE_RCM = {
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_network_logistics] : 'No',
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_transport_agency]  : 'Yes',
-};
-
 export const PAN_TAX_PAYABLE_RCM = {
 	[fortigo_company_pan_mappings.fortigo_network_logistics] : 'No',
 	[fortigo_company_pan_mappings.fortigo_transport_agency]  : 'Yes',
-};
-
-export const CUSTOMER_TO_BANK_DETAILS = {
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_network_logistics]: {
-		bank_name      : 'Axis Bank',
-		bank_branch    : 'Corporate Banking Branch',
-		ifsc_code      : fortigo_bank_details_mappings.fortigo_network_logistics.ifsc_code,
-		account_number : fortigo_bank_details_mappings.fortigo_network_logistics.account_number,
-	},
-	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_transport_agency]: {
-		bank_name      : 'ICICI',
-		bank_branch    : 'Koramangala Branch (Bangalore)',
-		ifsc_code      : fortigo_bank_details_mappings.fortigo_transport_agency.ifsc_code,
-		account_number : fortigo_bank_details_mappings.fortigo_transport_agency.account_number,
-	},
 };
 
 export const PAN_TO_BANK_DETAILS = {
@@ -82,11 +93,10 @@ export const PAN_TO_BANK_DETAILS = {
 };
 
 export const DEFAULT_BANK_DETAILS = {
-	bank_name   : 'RBL BANK LIMITED',
-	bank_branch : 'LOWER PAREL',
-	ifsc_code   : cogo_bank_details.ifsc_code,
-	account_number:
-		cogo_bank_details.account_number,
+	bank_name      : 'RBL BANK LIMITED',
+	bank_branch    : 'LOWER PAREL',
+	ifsc_code      : '',
+	account_number : '',
 };
 
 export const BUSINESS_TO_SERVICE_DESCRIPTION = {

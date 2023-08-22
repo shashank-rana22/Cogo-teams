@@ -1,10 +1,6 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import {
-	CUSTOMER_TO_CIN,
-	CUSTOMER_TO_SERVICE_DESCRIPTION,
-	TAX_PAYABLE_RCM,
-} from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 import { getOtherData } from '../getOtherData';
 
 function TruckDetail({
@@ -27,6 +23,8 @@ function TruckDetail({
 		trip_id = '',
 		state_code = '',
 	} = getOtherData({ customData });
+
+	const { CUSTOMER_TO_CIN = {}, CUSTOMER_TO_SERVICE_DESCRIPTION = {}, TAX_PAYABLE_RCM = {} } = getFortigoDetails();
 
 	return (
 		<table

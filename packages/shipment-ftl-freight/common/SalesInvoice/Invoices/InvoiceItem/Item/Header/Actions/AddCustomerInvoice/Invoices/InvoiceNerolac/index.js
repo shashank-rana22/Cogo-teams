@@ -1,4 +1,4 @@
-import { CUSTOMER_TO_BANK_DETAILS } from '../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../utils/serviceDescriptionMappings';
 
 import Quotation from './Quotation';
 import TruckDetail from './TruckDetail';
@@ -12,6 +12,7 @@ function InvoiceNerolac({
 	customData = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_BANK_DETAILS = {} } = getFortigoDetails();
 	const { billing_address = {} } = invoice;
 
 	const [tradeParty] = tradePartyData?.list || [];

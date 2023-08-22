@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { CUSTOMER_TO_CIN } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 import { getLineItems } from '../getLineItems';
 import { getOtherData, getChargesData } from '../getOtherData';
 
@@ -12,6 +12,7 @@ function TableData({
 	customData = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_CIN = {} } = getFortigoDetails();
 	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
 	});

@@ -1,5 +1,6 @@
 import { Button, Modal, RTEditor } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/surface-modules';
 import { isEmpty } from '@cogoport/utils';
@@ -37,6 +38,7 @@ function FillCustomerPortalData({
 	const [termsAndConditions, setTermsAndConditions] = useState('');
 	const [bankDetails, setBankDetails] = useState('');
 
+	const geo = getGeoConstants();
 	const controls = useMemo(() => Object.values(formControls).flat(), []);
 
 	const { data } = useListShipmentTradePartners({
@@ -73,7 +75,7 @@ function FillCustomerPortalData({
 	} = useForm({ defaultValues: {} });
 
 	const watchCustomerName = watch('customer_name');
-	const isFortigoCustomer = Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(
+	const isFortigoCustomer = geo.uuid.fortigo_network_ids.includes(
 		shipmentData?.importer_exporter_id,
 	);
 	const isFortigoInvoicingParty = Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings)

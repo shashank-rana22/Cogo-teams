@@ -110,10 +110,8 @@ function Header({
 
 	const isTaxMechanismGoodsTransportAgency = tax_mechanism === 'goods_transport_agency';
 
-	const deliveryDatePresent = shipment_data.all_services?.[GLOBAL_CONSTANTS.zeroth_index]?.delivery_date;
-
 	disableMarkAsReviewed = !isEmptyInvoicesList && !isShipmentCompleted
-		&& !(deliveryDatePresent || isTaxMechanismGoodsTransportAgency);
+		&& !(isTaxMechanismGoodsTransportAgency);
 
 	return (
 		<div className={styles.container}>

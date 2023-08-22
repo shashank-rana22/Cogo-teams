@@ -1,10 +1,12 @@
-import { CUSTOMER_TO_CIN } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 
 function Header({
 	logoData = '',
 	billing_address = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_CIN = {} } = getFortigoDetails();
+
 	return (
 		<div style={{ border: '2px solid black', borderBottom: 'none' }}>
 			<table

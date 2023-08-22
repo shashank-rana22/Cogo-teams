@@ -1,4 +1,4 @@
-import { CUSTOMER_TO_BANK_DETAILS } from '../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../utils/serviceDescriptionMappings';
 
 import Quotation from './Quotation';
 import TruckDetail from './TruckDetail';
@@ -12,6 +12,7 @@ function InvoiceVarun({
 	customData = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_BANK_DETAILS = {} } = getFortigoDetails();
 	const [tradeParty] = tradePartyData?.list || [];
 
 	const bankDetails = (tradeParty?.documents || []).filter(

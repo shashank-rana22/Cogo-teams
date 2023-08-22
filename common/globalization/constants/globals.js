@@ -232,11 +232,6 @@ const GLOBAL_CONSTANTS = {
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
 			'20f59087-12cf-4e6d-8463-27d41e23da6f',
 		],
-		fortigo_agencies_mapping: {
-			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
-			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
-		},
-
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -599,10 +594,6 @@ const GLOBAL_CONSTANTS = {
 			kansai_nerolac   : 'AAACG1376N',
 			orissa_metaliks  : 'AAACO8663L',
 			varun_beverages  : 'AAACV2678L',
-		},
-		cogo_bank_details: {
-			ifsc_code      : 'RATN0000088',
-			account_number : '409001406475',
 		},
 	},
 	shipment_types: [

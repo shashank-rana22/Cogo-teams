@@ -1,3 +1,4 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useState } from 'react';
 
@@ -23,10 +24,11 @@ const getFinalUrls = ({
 	importerExporterId = '',
 	invoicesList = [],
 }) => {
+	const geo = getGeoConstants();
 	const { billing_address = {} } = invoice || {};
 
 	if (
-		Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(importerExporterId)
+		geo.uuid.fortigo_network_ids.includes(importerExporterId)
 		|| Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings).includes(
 			billing_address?.registration_number,
 		)

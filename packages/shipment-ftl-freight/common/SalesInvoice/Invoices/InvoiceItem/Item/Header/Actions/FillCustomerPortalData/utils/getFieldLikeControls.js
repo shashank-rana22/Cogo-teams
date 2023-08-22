@@ -1,3 +1,4 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { companyOptions } from '../../commons/utils/companyOptions';
@@ -15,7 +16,7 @@ function getFieldLikeControls({
 	isFortigoCustomer = true,
 	isFortigoInvoicingParty = true,
 }) {
-	const supportedEntities = Object.values(GLOBAL_CONSTANTS.cogoport_entities).filter(
+	const supportedEntities = Object.values(ENTITY_FEATURE_MAPPING).filter(
 		(item) => item.feature_supported.includes('ftl_customer_invoice'),
 	);
 

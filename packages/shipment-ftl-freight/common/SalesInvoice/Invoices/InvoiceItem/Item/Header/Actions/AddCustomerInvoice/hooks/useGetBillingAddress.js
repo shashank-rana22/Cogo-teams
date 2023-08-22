@@ -1,16 +1,15 @@
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import {
 	BUSINESS_TO_SERVICE_DESCRIPTION,
-	CUSTOMER_TO_BANK_DETAILS,
-	CUSTOMER_TO_CIN,
-	CUSTOMER_TO_SERVICE_DESCRIPTION,
 	DEFAULT_BANK_DETAILS,
 	PAN_TO_CIN,
 	PAN_TO_SERVICE_DESCRIPTION,
 	PAN_TO_BANK_DETAILS,
+	getFortigoDetails,
 } from '../utils/serviceDescriptionMappings';
 
 const FORTIGO_BRANCH_CITY = 'Bangalore';
@@ -22,7 +21,14 @@ const useGetBillingAddress = ({
 	importerExporterId = '',
 	customData = {},
 }) => {
+	const geo = getGeoConstants();
 	const initBillingAddress = { ...(invoice?.billing_address || {}) };
+
+	const {
+		CUSTOMER_TO_SERVICE_DESCRIPTION = {},
+		CUSTOMER_TO_BANK_DETAILS = {},
+		CUSTOMER_TO_CIN = {},
+	} = getFortigoDetails();
 
 	const supportedEntities = Object.values(ENTITY_FEATURE_MAPPING).filter(
 		(item) => item?.feature_supported?.includes('ftl_customer_invoice'),
@@ -37,7 +43,7 @@ const useGetBillingAddress = ({
 
 	const { fortigo, cogoport } = GLOBAL_CONSTANTS.websites || {};
 
-	if (Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(importerExporterId)) {
+	if (geo.uuid.fortigo_network_ids.includes(importerExporterId)) {
 		return {
 			billing_address: {
 				...initBillingAddress,
