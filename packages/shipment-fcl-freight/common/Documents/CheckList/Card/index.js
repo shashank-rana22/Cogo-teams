@@ -22,6 +22,7 @@ const Card = ({
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
+	do_details = [],
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -83,6 +84,7 @@ const Card = ({
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
 					activeStakeholder={activeStakeholder}
 					bl_details={bl_details}
+					do_details={do_details}
 				/>
 			);
 		});

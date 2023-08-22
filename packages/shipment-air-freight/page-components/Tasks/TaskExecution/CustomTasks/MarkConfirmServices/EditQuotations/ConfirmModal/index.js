@@ -7,6 +7,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ConfirmModal({
+	handlePriceLimitCheck = () => {},
 	confirmModal = false,
 	setConfirmModal = () => {},
 	airServiceFormValues = {},
@@ -18,10 +19,10 @@ function ConfirmModal({
 	watchServiceProvider = {},
 }) {
 	const geo = getGeoConstants();
-	const isCogoXpress =		watchServiceProvider?.normal_service_provider === geo.uuid.cogoxpress_id
+	const isCogoXpress = watchServiceProvider?.normal_service_provider === geo.uuid.cogoxpress_id
 		|| watchServiceProvider?.local_service_provider === geo.uuid.cogoxpress_id;
 
-	const isAnyCarrier =		watchServiceProvider?.normal_airline === geo.uuid.any_carrier_airline_id
+	const isAnyCarrier = watchServiceProvider?.normal_airline === geo.uuid.any_carrier_airline_id
 		|| watchServiceProvider?.local_airline === geo.uuid.any_carrier_airline_id;
 
 	const handleFinalSubmit = async () => {
@@ -35,6 +36,8 @@ function ConfirmModal({
 		}
 		setConfirmModal(false);
 	};
+
+	const priceLimitCheck = handlePriceLimitCheck();
 
 	return (
 		<>
@@ -153,6 +156,11 @@ function ConfirmModal({
 									</div>
 								</div>
 							</>
+						)}
+						{priceLimitCheck && (
+							<div className={styles.check_price}>
+								Your line item price exceeds the base price. Are you sure you want to proceed?
+							</div>
 						)}
 						<div className={styles.button_div}>
 							<div className={styles.button_head}>

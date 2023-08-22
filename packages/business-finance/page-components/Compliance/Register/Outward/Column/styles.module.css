@@ -4,6 +4,11 @@
 
 .fileName {
 	width: 100px;
+	margin-left: 16px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
 }
 
 .details {
@@ -11,9 +16,15 @@
 }
 
 .card_data {
+	display: flex;
+	align-items: center;
 	padding: 8px;
 	cursor: pointer;
 	border-bottom: 1px solid var(--color-tertiary-beige-2);
+}
+
+.download_icon {
+	margin-left: 4px;
 }
 
 .card_data:nth-child(3) {
@@ -73,4 +84,21 @@
 .failure:hover .tooltip_text {
 	visibility: visible;
 	opacity: 1;
+}
+
+.status_file {
+	display: flex;
+	align-items: center;
+}
+
+.refresh {
+	margin: 4px 0 0 4px;
+	color: var(--color-primary-error-red-3);
+	cursor: pointer;
+}
+
+.tooltip_value_style {
+	font-size: 12px;
+	word-break: break-word;
+	word-wrap: break-word;
 }

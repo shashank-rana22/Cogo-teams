@@ -59,7 +59,7 @@ const useGetProfitabilityStats = ({
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
 			currency      : DEFAULT_CURRENCY,
-			parentService : segment,
+			parentService : segment || undefined,
 			service       : !isEmpty(service) ? service.toUpperCase() : undefined,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,

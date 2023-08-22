@@ -34,6 +34,7 @@ function ListShipmentCards({
 					height={400}
 					width={400}
 					className={styles.empty_shipments_image}
+					alt="no-shipments"
 				/>
 			</div>
 		);

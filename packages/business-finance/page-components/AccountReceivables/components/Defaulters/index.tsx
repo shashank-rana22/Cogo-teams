@@ -72,7 +72,7 @@ function Defaulters({ entityCode }:Props) {
 		setIsClear(true);
 	};
 
-	const functions = listFunctions({ refetch });
+	const functions = listFunctions({ refetch, entityCode });
 
 	return (
 		<div>
