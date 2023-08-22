@@ -1,4 +1,3 @@
-// eslint-disable-next-line custom-eslint/function-name-check
 function asyncFieldsLocations2() {
 	return {
 		valueKey    : 'id',
