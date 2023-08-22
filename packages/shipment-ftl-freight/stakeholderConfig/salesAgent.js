@@ -10,6 +10,7 @@ export default {
 	],
 	visible_tabs: [
 		'overview',
+		'tasks',
 		'documents',
 		'emails',
 		'sales',
