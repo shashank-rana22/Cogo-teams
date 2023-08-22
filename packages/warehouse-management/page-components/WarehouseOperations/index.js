@@ -16,8 +16,7 @@ function WarehouseOperations({
 	searchValue = '',
 	addNewZone = false,
 	setAddNewZone = () => {},
-	date = new Date(),
-	selectedWarehouse = 'delhi',
+	selectedWarehouse = '',
 }) {
 	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
 	const [item, setItem] = useState({});
@@ -31,8 +30,7 @@ function WarehouseOperations({
 					searchValue={searchValue}
 					addNewZone={addNewZone}
 					setAddNewZone={setAddNewZone}
-					date={date}
-					selectedWarehouse={selectedWarehouse}
+					warehouseLocationId={selectedWarehouse}
 					setItem={setItem}
 					item={item}
 				/>

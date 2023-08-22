@@ -7,6 +7,7 @@ import CONSTANTS from '../constants/constants';
 
 const useListInventory = ({
 	searchValue = '',
+	warehouseLocationId = '',
 }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
@@ -21,7 +22,8 @@ const useListInventory = ({
 
 	const listAPI = useCallback(async () => {
 		const PAYLOAD = {
-			status: ['received'],
+			state: ['awaiting_gate_in', 'gated_in'],
+			warehouseLocationId,
 		};
 
 		try {
@@ -34,7 +36,7 @@ const useListInventory = ({
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [query, trigger]);
+	}, [query, trigger, warehouseLocationId]);
 
 	useEffect(() => {
 		if (searchValue) {

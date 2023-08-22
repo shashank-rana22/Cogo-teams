@@ -29,7 +29,7 @@ const configureFields = {
 			span   : 1,
 			render : (item) => (
 				<div>
-					{item?.aisles[GLOBAL_CONSTANTS.zeroth_index]?.aislesCount}
+					{item?.aisles?.[GLOBAL_CONSTANTS.zeroth_index]?.aislesCount}
 				</div>
 			),
 		},
@@ -39,7 +39,7 @@ const configureFields = {
 			span   : 1.5,
 			render : (item) => (
 				<div>
-					{item?.aisles[GLOBAL_CONSTANTS.zeroth_index]?.racksCount}
+					{item?.aisles?.[GLOBAL_CONSTANTS.zeroth_index]?.racksCount}
 				</div>
 			),
 		},
@@ -49,7 +49,7 @@ const configureFields = {
 			span   : 1.5,
 			render : (item) => (
 				<div>
-					{item?.aisles[GLOBAL_CONSTANTS.zeroth_index]?.shelvesCount}
+					{item?.aisles?.[GLOBAL_CONSTANTS.zeroth_index]?.shelvesCount}
 				</div>
 			),
 		},
@@ -59,10 +59,10 @@ const configureFields = {
 			span   : 1,
 			render : (item) => (
 				<div>
-					{`${item.aisles[GLOBAL_CONSTANTS.zeroth_index].totalBinsInShelf} 
-					(${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binLength} 
-						x ${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binWidth} x 
-						${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binHeight})`}
+					{`${item.aisles?.[GLOBAL_CONSTANTS.zeroth_index].totalBinsInShelf} 
+					(${item.aisles?.[GLOBAL_CONSTANTS.zeroth_index].binLength} 
+						x ${item.aisles?.[GLOBAL_CONSTANTS.zeroth_index].binWidth} x 
+						${item.aisles?.[GLOBAL_CONSTANTS.zeroth_index].binHeight})`}
 				</div>
 			),
 		},

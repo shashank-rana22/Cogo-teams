@@ -1,6 +1,8 @@
-import { Tabs, TabPanel, Input, ButtonIcon, Button, Datepicker, Select } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAppSearch, IcMCross, IcMCalendar, IcMProfile } from '@cogoport/icons-react';
+import {
+	Tabs, TabPanel, Input, ButtonIcon, Button,
+} from '@cogoport/components';
+import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { IcMAppSearch, IcMCross, IcMAppTruck } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import TRUCK_STATUS_MAPPINGS from '../../constants/truck-status-mappings';
@@ -21,17 +23,14 @@ function Header({
 	setTruckStatus = () => {},
 	searchValue = '',
 	setSearchValue = () => {},
-	date = new Date(),
-	setDate = () => {},
 	setAddNewZone = () => {},
-	selectedWarehouseLocation = 'delhi',
 	setSelectedWarehouseLocation = () => {},
 }) {
 	const COMPONENT_MAPPING = {
 		schedules: (
 			<>
 				<Tabs
-					tabIcon={<IcMProfile />}
+					tabIcon={<IcMAppTruck />}
 					themeType="tertiary"
 					activeTab={truckStatus}
 					onChange={setTruckStatus}
@@ -47,21 +46,6 @@ function Header({
 						);
 					})}
 				</Tabs>
-				<div className={styles.date_picker}>
-					<Datepicker
-						placeholder="Select Date"
-						showTimeSelect
-						dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
-						name="date"
-						value={date}
-						onChange={setDate}
-						isPreviousDaysAllowed
-						prefix={(
-							<IcMCalendar className={styles.calendar_icon} />
-						)}
-					/>
-
-				</div>
 				<Input
 					size="sm"
 					prefix={<IcMAppSearch />}
@@ -132,6 +116,11 @@ function Header({
 		),
 	};
 
+	const { watch, control } = useForm();
+	const warehouseLocationId = watch('warehouseLocationId');
+
+	setSelectedWarehouseLocation(warehouseLocationId);
+
 	return (
 		<>
 			<div className={styles.header_part}>
@@ -152,12 +141,19 @@ function Header({
 					})}
 				</Tabs>
 				<div className={styles.header_search_filter}>
-					<Select
+					<AsyncSelectController
+						control={control}
+						initialCall
 						className={styles.select_input}
-						value={selectedWarehouseLocation}
-						onChange={(val) => setSelectedWarehouseLocation({ val })}
+						asyncKey="list_locations"
+						name="warehouseLocationId"
 						placeholder="Choose warehouse"
-						size="sm"
+						params={{
+							filters: {
+								type   : ['warehouse'],
+								status : 'active',
+							},
+						}}
 					/>
 				</div>
 			</div>

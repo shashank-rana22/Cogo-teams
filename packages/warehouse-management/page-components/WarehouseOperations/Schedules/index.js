@@ -14,6 +14,7 @@ function Schedules({
 	activeTab = 'configure',
 	truckStatus = 'truck_in',
 	searchValue = '',
+	warehouseLocationId = '',
 }) {
 	const { fields } = scheduleFields(truckStatus);
 	const [showTruckStatusModal, setShowTruckStatusModal] = useState({});
@@ -24,7 +25,7 @@ function Schedules({
 		page,
 		setPage,
 		listAPI,
-	} = useListSchedules({ activeTab, truckStatus, searchValue });
+	} = useListSchedules({ activeTab, truckStatus, searchValue, warehouseLocationId });
 
 	const handleStatusChange = ({ singleItem }) => (
 		!isEmpty(showTruckStatusModal)
@@ -35,6 +36,7 @@ function Schedules({
 				setShowTruckStatusModal={setShowTruckStatusModal}
 				truckStatus={truckStatus}
 				listAPI={listAPI}
+				warehouseLocationId={warehouseLocationId}
 			/>
 		)
 	);

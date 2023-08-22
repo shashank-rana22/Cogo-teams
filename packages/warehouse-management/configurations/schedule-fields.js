@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const scheduleFields = (truckStatus = 'truck_in') => ({
 	fields: [
 		{
@@ -31,12 +33,12 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			),
 		},
 		{
-			key    : 'truck_type',
-			label  : 'Truck type',
+			key    : 'transporter_name',
+			label  : 'Transporter Name',
 			span   : 2.5,
 			render : (item) => (
 				<div>
-					{item?.truckDetails?.truckType}
+					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.transporter_name}
 				</div>
 			),
 		},
@@ -46,17 +48,17 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			span   : 1,
 			render : (item) => (
 				<div>
-					{item?.truckDetails?.truckNumber}
+					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.truck_number}
 				</div>
 			),
 		},
 		{
-			key    : 'truck_size',
-			label  : 'Truck Size',
+			key    : 'driver_name',
+			label  : 'Driver Name',
 			span   : 1,
 			render : (item) => (
 				<div>
-					{item.truckDetails?.truckSize}
+					{item.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.driver_name}
 				</div>
 			),
 		},
@@ -66,7 +68,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{item?.truckDetails?.driverContactNumber}
+					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.driver_contact_number}
 				</div>
 			),
 		},

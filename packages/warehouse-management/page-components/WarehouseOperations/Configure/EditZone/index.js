@@ -14,6 +14,7 @@ function EditZoneModal({
 	editZone = {},
 	setEditZone = () => {},
 	listAPI = () => {},
+	warehouseLocationId = '',
 }) {
 	const {
 		control,
@@ -35,7 +36,7 @@ function EditZoneModal({
 	const {
 		loading = false,
 		onSubmit = () => {},
-	} = useUpdateConfiguration({ id: item?.id, formValues, listAPI, setEditZone });
+	} = useUpdateConfiguration({ id: item?.id, formValues, listAPI, setEditZone, warehouseLocationId });
 	return (
 		<Modal
 			show={editZone}

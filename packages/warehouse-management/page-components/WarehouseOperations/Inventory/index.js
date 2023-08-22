@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function Inventory({
 	activeTab = '',
 	searchValue = '',
+	warehouseLocationId = '',
 }) {
 	const { fields } = inventoryFields;
 	const {
@@ -18,7 +19,7 @@ function Inventory({
 		page,
 		setPage,
 		listAPI,
-	} = useListInventory({ searchValue });
+	} = useListInventory({ searchValue, warehouseLocationId });
 	const handlePageChange = (pageVal) => {
 		setPage(pageVal);
 	};
@@ -52,13 +53,13 @@ function Inventory({
 		handleStatus: (singleItem) => {
 			let flag = true;
 			singleItem?.details?.forEach((item) => {
-				if (item?.serviceStatus === 'not_recieved') {
+				if (item?.serviceStatus === 'not_received') {
 					flag = false;
 				}
 			});
 			return (
 				<div>
-					{flag ? 'Received' : 'Not recieved'}
+					{flag ? 'Received' : 'Not received'}
 				</div>
 			);
 		},

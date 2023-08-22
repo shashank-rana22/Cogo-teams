@@ -18,6 +18,7 @@ function TruckStatusUpdateModal({
 	setShowTruckStatusModal = () => {},
 	truckStatus = 'truck_in',
 	listAPI = () => {},
+	warehouseLocationId = '',
 }) {
 	const [showCargoAcknowledgmentModal, setShowCargoAcknowledgmentModal] = useState(false);
 
@@ -41,6 +42,7 @@ function TruckStatusUpdateModal({
 		setShowTruckStatusModal,
 		showTruckStatusModal,
 		setShowCargoAcknowledgmentModal,
+		warehouseLocationId,
 	});
 
 	return (

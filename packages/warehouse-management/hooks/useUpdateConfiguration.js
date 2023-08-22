@@ -1,12 +1,14 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 function useUpdateConfiguration({
 	id = '',
 	formValues = {},
 	listAPI = () => {},
 	setEditZone = () => {},
+	warehouseLocationId = '',
 }) {
 	const [{ loading }, trigger] = useRequestAir(
 		{
@@ -15,6 +17,10 @@ function useUpdateConfiguration({
 			authKey : 'put_air_coe_warehouse_management_configuration',
 		},
 	);
+
+	const { userId } = useSelector(({ profile }) => ({
+		userId: profile.id,
+	}));
 
 	const handleOnClose = () => {
 		setEditZone(false);
@@ -25,11 +31,11 @@ function useUpdateConfiguration({
 			await trigger({
 				data: {
 					id,
-					commodity           : formValues?.commodity,
-					aisles              : formValues?.aisles,
-					warehouseLocationId : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-					warehouseManagerId  : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-					status              : 'active',
+					commodity          : formValues?.commodity,
+					aisles             : formValues?.aisles,
+					warehouseLocationId,
+					warehouseManagerId : userId,
+					status             : 'active',
 				},
 			});
 			Toast.success('Zone changed');

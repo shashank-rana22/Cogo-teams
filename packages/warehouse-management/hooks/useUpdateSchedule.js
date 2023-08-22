@@ -13,15 +13,16 @@ const getParams = ({ shipmentId, warehouseLocationId, warehouseTransferId, truck
 	if (truckStatus === 'truck_in') {
 		req = {
 			...req,
-			truckInStatus : true,
-			truckInProof  : fileValue,
+			state        : 'trucked_in',
+			truckInProof : fileValue,
+			truckInEta   : new Date(),
 		};
 	} else {
 		req = {
 			...req,
-			truckOutStatus : true,
-			truckOutProof  : fileValue,
-			truckOutEta    : new Date(),
+			state         : 'trucked_out',
+			truckOutProof : fileValue,
+			truckOutEta   : new Date(),
 		};
 	}
 
@@ -35,6 +36,7 @@ const useUpdateSchedule = ({
 	listAPI = () => {},
 	setShowTruckStatusModal = () => {},
 	setShowCargoAcknowledgmentModal = () => {},
+	warehouseLocationId = '',
 
 }) => {
 	const [{ loading, data }, trigger] = useRequestAir(
@@ -56,7 +58,7 @@ const useUpdateSchedule = ({
 				data: {
 					...getParams({
 						shipmentId          : item?.shipmentDetails[GLOBAL_CONSTANTS.zeroth_index]?.shipmentId,
-						warehouseLocationId : 'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19',
+						warehouseLocationId,
 						warehouseTransferId : item?.warehouseTransferId,
 						truckStatus,
 						fileValue,

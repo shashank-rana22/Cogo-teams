@@ -7,6 +7,7 @@ import CONSTANTS from '../constants/constants';
 
 const useListConfiguration = ({
 	searchValue = '',
+	warehouseLocationId = '',
 }) => {
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 
@@ -22,8 +23,8 @@ const useListConfiguration = ({
 
 	const listAPI = useCallback(async () => {
 		const PAYLOAD = {
-			warehouseLocationId : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-			status              : 'active',
+			warehouseLocationId,
+			status: 'active',
 		};
 
 		try {
@@ -36,7 +37,7 @@ const useListConfiguration = ({
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [query, trigger]);
+	}, [query, trigger, warehouseLocationId]);
 
 	useEffect(() => {
 		if (searchValue) {

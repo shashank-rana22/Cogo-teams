@@ -40,8 +40,8 @@ const controls = [
 		type    : 'checkbox_group',
 		span    : 12,
 		options : [
-			{ label: 'Not Recieved', value: 'not_recieved' },
-			{ label: 'Recieved', value: 'recieved' },
+			{ label: 'Not Received', value: 'not_received' },
+			{ label: 'Received', value: 'received' },
 			{ label: 'Pending', value: 'pending' },
 			{ label: 'Ready to ship', value: 'ready_to_ship' },
 		],

@@ -1,11 +1,13 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useCreateConfiguration = ({
 	formValues = {},
 	listAPI = () => {},
 	setAddNewZone = () => {},
+	warehouseLocationId = '',
 }) => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
@@ -15,6 +17,10 @@ const useCreateConfiguration = ({
 		},
 	);
 
+	const { userId } = useSelector(({ profile }) => ({
+		userId: profile.id,
+	}));
+
 	const handleOnClose = () => {
 		setAddNewZone(false);
 	};
@@ -23,13 +29,13 @@ const useCreateConfiguration = ({
 		try {
 			await trigger({
 				data: {
-					zoneName            : formValues.zoneName,
-					commodityType       : formValues.commodity,
-					commodity           : formValues.commodity,
-					aisles              : formValues.aisles,
-					warehouseLocationId : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-					warehouseManagerId  : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-					status              : 'active',
+					zoneName           : formValues.zoneName,
+					commodityType      : formValues.commodity,
+					commodity          : formValues.commodity,
+					aisles             : formValues.aisles,
+					warehouseLocationId,
+					warehouseManagerId : userId,
+					status             : 'active',
 				},
 			});
 			Toast.success('New Zone added');

@@ -17,12 +17,13 @@ function Configure({
 	addNewZone = false,
 	setAddNewZone = () => {},
 	searchValue = '',
+	warehouseLocationId = '',
 }) {
 	const { fields } = configureFields;
 	const [editZone, setEditZone] = useState({});
 	const [deleteZone, setDeleteZone] = useState({});
 
-	const { loading, data, listAPI } = useListConfiguration({ searchValue });
+	const { loading, data, listAPI } = useListConfiguration({ searchValue, warehouseLocationId });
 
 	const { page, setPage } = data;
 	const handlePageChange = (pageVal) => {
@@ -40,6 +41,7 @@ function Configure({
 					editZone={editZone}
 					setEditZone={setEditZone}
 					listAPI={listAPI}
+					warehouseLocationId={warehouseLocationId}
 				/>
 			);
 		}
@@ -102,6 +104,7 @@ function Configure({
 					addNewZone={addNewZone}
 					setAddNewZone={setAddNewZone}
 					listAPI={listAPI}
+					warehouseLocationId={warehouseLocationId}
 				/>
 			)}
 

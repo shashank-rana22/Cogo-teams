@@ -15,6 +15,7 @@ const useListSchedules = ({
 	truckStatus = 'truck_in',
 	searchValue = '',
 	setSearchValue = () => {},
+	warehouseLocationId = '',
 }) => {
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -32,14 +33,15 @@ const useListSchedules = ({
 		try {
 			await trigger({
 				params: {
-					q      : (query || '').trim() || undefined,
-					status : STATUS_MAP[truckStatus] || undefined,
+					q     : (query || '').trim() || undefined,
+					state : STATUS_MAP[truckStatus] || undefined,
+					warehouseLocationId,
 				},
 			});
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [query, trigger, truckStatus]);
+	}, [query, trigger, truckStatus, warehouseLocationId]);
 
 	useEffect(() => {
 		if (searchValue) {

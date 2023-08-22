@@ -8,9 +8,8 @@ function WarehouseManagement() {
 	const [activeTab, setActiveTab] = useState('schedules');
 
 	const [truckStatus, setTruckStatus] = useState('truck_in');
-	const [date, setDate] = useState(new Date());
 
-	const [selectedWarehouseLocation, setSelectedWarehouseLocation] = useState('delhi');
+	const [selectedWarehouseLocation, setSelectedWarehouseLocation] = useState('');
 	const [addNewZone, setAddNewZone] = useState(false);
 
 	const [searchValue, setSearchValue] = useState('');
@@ -33,9 +32,6 @@ function WarehouseManagement() {
 				setAddNewZone={setAddNewZone}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
-				date={date}
-				setDate={setDate}
-				selectedWarehouseLocation={selectedWarehouseLocation}
 				setSelectedWarehouseLocation={setSelectedWarehouseLocation}
 			/>
 			<WarehouseOperations
@@ -44,7 +40,6 @@ function WarehouseManagement() {
 				searchValue={searchValue}
 				addNewZone={addNewZone}
 				setAddNewZone={setAddNewZone}
-				date={date}
 				selectedWarehouse={selectedWarehouseLocation}
 			/>
 		</div>

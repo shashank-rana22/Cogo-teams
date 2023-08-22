@@ -11,6 +11,7 @@ function AddNewZoneModal({
 	addNewZone = false,
 	setAddNewZone = () => {},
 	listAPI = () => {},
+	warehouseLocationId = '',
 }) {
 	const {
 		control,
@@ -23,7 +24,7 @@ function AddNewZoneModal({
 	const {
 		loading = false,
 		onSubmit = () => {},
-	} = useCreateConfiguration({ formValues, listAPI, setAddNewZone });
+	} = useCreateConfiguration({ formValues, listAPI, setAddNewZone, warehouseLocationId });
 
 	return (
 		<Modal
