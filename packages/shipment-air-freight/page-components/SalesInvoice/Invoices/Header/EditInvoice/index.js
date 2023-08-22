@@ -9,6 +9,8 @@ import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
+const ALLOWED_ROLES = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
+
 function EditInvoice({
 	show = 'false',
 	onClose = () => {},
@@ -16,13 +18,9 @@ function EditInvoice({
 	refetch = () => {},
 	shipment_data = {},
 }) {
-	const { role_ids } = useSelector(({ profile }) => ({
-		role_ids: profile.partner?.user_role_ids,
-	}));
-	const isRoleAllowed = [
-		GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
-		GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
-	].some((ele) => role_ids?.includes(ele));
+	const { profile } = useSelector((state) => state);
+
+	const isRoleAllowed = ALLOWED_ROLES.some((ele) => profile?.user?.id?.includes(ele));
 
 	const {
 		controls,
