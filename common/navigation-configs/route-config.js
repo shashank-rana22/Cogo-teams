@@ -67,6 +67,7 @@ import shipmentLtlFreight from './config/shipment-ltl-freight';
 import shipmentRailDomesticFreight from './config/shipment-rail-domestic-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
+import supplyTools from './config/supply-tools';
 import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
@@ -147,6 +148,7 @@ const routeConfig = {
 	...notifications,
 	...centralisedCustomerService,
 	...resource,
+	...supplyTools,
 };
 
 export default routeConfig;
