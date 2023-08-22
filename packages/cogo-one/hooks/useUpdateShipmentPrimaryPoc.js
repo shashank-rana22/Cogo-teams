@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ selectedData = {}, showPocModal = {} }) => ({
 	shipment_id    : showPocModal?.shipmentData?.id,
-	primary_poc_id : selectedData?.user_id,
+	primary_poc_id : selectedData?.user_id || selectedData?.id,
 });
 
 function useUpdateShipmentPrimaryPoc({ setShowPocModal = () => {}, getShipmentsList = () => {} }) {

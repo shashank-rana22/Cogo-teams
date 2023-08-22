@@ -119,7 +119,7 @@ function OrgUsersList({
 								});
 							}}
 						>
-							<UserCard userData={userData} showDirection />
+							<UserCard userData={userData} showDirection showWorkScope={false} />
 						</div>
 					);
 				}) : <div className={styles.no_data_found}>No Users Found</div>}

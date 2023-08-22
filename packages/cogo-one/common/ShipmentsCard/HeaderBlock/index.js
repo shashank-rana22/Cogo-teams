@@ -1,7 +1,5 @@
 import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot, IcMCopy, IcMAgentManagement } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -48,7 +46,7 @@ const getButtonOptions = ({
 	},
 	{
 		key      : 'add_primary_poc',
-		children : 'Add Primary Poc',
+		children : 'Set Primary Poc',
 		onClick  : (e) => {
 			e.stopPropagation();
 			setShowPocModal({ show: true, shipmentData: shipmentItem });
@@ -149,22 +147,6 @@ function HeaderBlock({
 						}}
 					/>
 				</Tooltip>
-
-				{type === 'all_shipments' ? (
-					<Tooltip content="Shipment Chats" placement="bottom">
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.message_reply}
-							height={26}
-							width={26}
-							alt="message"
-							className={styles.message_icon_styles}
-							onClick={(e) => {
-								e.stopPropagation();
-								setShowPocDetails(shipmentItem);
-							}}
-						/>
-					</Tooltip>
-				) : null}
 
 				<Popover
 					placement="bottom-end"

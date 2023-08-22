@@ -1,4 +1,4 @@
-import { Avatar } from '@cogoport/components';
+import { Avatar, Tooltip } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -6,14 +6,22 @@ import getHidedUserDetails from '../../utils/getHidedUserDetails';
 
 import styles from './styles.module.css';
 
-function UserCard({ userData = {}, showDirection = false }) {
+const MAX_PREVIEW_LIMIT = 1;
+const MIN_PREVIEW_LIMIT = 0;
+
+function UserCard({ userData = {}, showDirection = false, showWorkScope = false }) {
 	const {
 		name = '',
 		email = '',
 		country_code = '',
 		user_number = '',
 		business_name = '',
+		work_scopes = [],
 	} = userData || {};
+
+	const lessList = (work_scopes || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
+	const moreList = (work_scopes || []).slice(MAX_PREVIEW_LIMIT);
+	const showMoreList = (work_scopes || []).length > MAX_PREVIEW_LIMIT;
 
 	return (
 		<div className={styles.main_container}>
@@ -23,7 +31,7 @@ function UserCard({ userData = {}, showDirection = false }) {
 					<div className={styles.name}>
 						{startCase(name) || '-'}
 					</div>
-					{business_name ? (
+					{business_name && !showWorkScope ? (
 						<div className={styles.business_name}>
 							{startCase(business_name) || '-'}
 						</div>
@@ -43,6 +51,35 @@ function UserCard({ userData = {}, showDirection = false }) {
 							}) : ''}
 						</div>
 					</div>
+
+					{showWorkScope ? (
+						<div className={styles.user_work_scope}>
+							{(lessList || []).map((item) => (
+								<div className={styles.scope_name} key={item}>
+									{startCase(item)}
+								</div>
+							))}
+							{showMoreList && (
+								<Tooltip
+									content={(
+										<div>
+											{(moreList || []).map((item) => (
+												<div className={styles.scope_name} key={item}>{startCase(item)}</div>
+											))}
+										</div>
+									)}
+									theme="light"
+									placement="bottom"
+								>
+									<div className={styles.more_tags}>
+										{moreList?.length}
+										+
+									</div>
+								</Tooltip>
+							)}
+						</div>
+					) : null }
+
 				</div>
 			</div>
 			{showDirection ? <IcMArrowRight className={styles.arrow_icon} /> : null}

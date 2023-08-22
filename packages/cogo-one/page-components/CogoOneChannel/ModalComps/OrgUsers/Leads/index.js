@@ -112,7 +112,7 @@ function Leads({
 								});
 							}}
 						>
-							<UserCard userData={userData} showDirection />
+							<UserCard userData={userData} showDirection showWorkScope={false} />
 						</div>
 					);
 				}) }

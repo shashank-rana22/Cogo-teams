@@ -1,7 +1,7 @@
 import { Modal, Button, Input, Placeholder, cl } from '@cogoport/components';
 import { IcMAppSearch } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useListOrganizationUsers from '../../hooks/useListOrganizationUsers';
 import useUpdateShipmentPrimaryPoc from '../../hooks/useUpdateShipmentPrimaryPoc';
@@ -32,12 +32,19 @@ function AddPrimaryPocModal({
 		updatePrimaryPoc = () => {},
 		updateLoading = false,
 	} = useUpdateShipmentPrimaryPoc({ setShowPocModal, getShipmentsList });
+
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
+
+	const primaryPocDetails = showPocModal?.shipmentData?.primary_poc_details;
 
 	const handleClose = () => {
 		setShowPocModal({ show: false, shipmentData: {} });
 		setSelectedData({});
 	};
+
+	useEffect(() => {
+		setSelectedData(primaryPocDetails);
+	}, [primaryPocDetails]);
 
 	return (
 		<Modal
@@ -48,7 +55,7 @@ function AddPrimaryPocModal({
 			onClose={handleClose}
 			className={styles.styled_modal}
 		>
-			<Modal.Header title="Add Primary Poc" />
+			<Modal.Header title="Set Primary Poc" />
 
 			<Modal.Body>
 				<div className={styles.input_container}>
@@ -71,6 +78,7 @@ function AddPrimaryPocModal({
 							countryCode = '',
 							whatsapp_number_eformat = '',
 							business_name = '',
+							work_scopes = [],
 						} = eachUser || {};
 
 						const userData = {
@@ -79,6 +87,7 @@ function AddPrimaryPocModal({
 							country_code : countryCode,
 							user_number  : whatsapp_number_eformat,
 							business_name,
+							work_scopes,
 						};
 
 						if (loading) {
@@ -95,13 +104,15 @@ function AddPrimaryPocModal({
 								key={user_id}
 								role="presentation"
 								className={cl`${styles.each_container} 
-								${selectedData?.user_id === eachUser?.user_id ? styles.active_card : ''}`}
+								${(selectedData?.user_id || selectedData?.id)
+								=== eachUser?.user_id ? styles.active_card : ''}`}
 								onClick={() => setSelectedData(eachUser)}
 							>
-								<UserCard userData={userData} showDirection={false} />
+								<UserCard userData={userData} showDirection={false} showWorkScope />
 							</div>
 						);
 					}) : <div className={styles.no_data_found}>No Users Found</div>}
+
 				</div>
 			</Modal.Body>
 
@@ -115,7 +126,7 @@ function AddPrimaryPocModal({
 					loading={updateLoading}
 					disabled={isEmpty(selectedData)}
 				>
-					Add Primary Poc
+					Set Primary Poc
 				</Button>
 			</Modal.Footer>
 		</Modal>

@@ -50,7 +50,7 @@
 
 .active_card {
 	background: #fbf7ec;
-	border: 1px solid rgb(174 168 168);
+	border: 0.5px solid #d6b300;
 }
 
 .no_data_found {

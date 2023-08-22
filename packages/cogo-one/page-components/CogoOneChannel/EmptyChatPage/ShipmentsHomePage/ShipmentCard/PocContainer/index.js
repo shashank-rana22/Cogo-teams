@@ -27,7 +27,7 @@ function PocContainer({
 		setModalData(null);
 	};
 
-	const mergedData = stakeHoldersData.concat(tradePartnersData);
+	const mergedData = tradePartnersData.concat(stakeHoldersData) || [];
 
 	return (
 		<div className={styles.container}>

@@ -1,6 +1,6 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Avatar } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcMEmail, IcMCall } from '@cogoport/icons-react';
+import { IcMEmail, IcMCall, IcMWhatsapp } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -8,7 +8,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const MAX_PREVIEW_LIMIT = 2;
+const MAX_PREVIEW_LIMIT = 1;
 const MIN_PREVIEW_LIMIT = 0;
 const LAST_INDEX = 1;
 
@@ -61,6 +61,7 @@ const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) 
 function PocUser({
 	stakeHoldersData = [],
 	setModalData = () => {},
+	setActiveTab = () => {},
 }) {
 	const dispatch = useDispatch();
 	const geo = getGeoConstants();
@@ -85,6 +86,16 @@ function PocUser({
 						trade_type,
 					} = getEachUserFormatedData({ userDetails });
 
+					const chatData = {
+						user_id                 : userId,
+						user_name               : name,
+						whatsapp_number_eformat : mobileNumber,
+						email,
+						channel_type            : 'whatsapp',
+						countryCode             : mobile_country_code,
+						mobile_no               : `${mobile_country_code.replace('+', '')}${mobileNumber}`,
+					};
+
 					const lessList = (stakeholder_type || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
 					const moreList = (stakeholder_type || []).slice(MAX_PREVIEW_LIMIT);
 					const showMoreList = (stakeholder_type || []).length > MAX_PREVIEW_LIMIT;
@@ -94,11 +105,11 @@ function PocUser({
 
 					return (
 						<div className={styles.container} key={id}>
+							<Avatar personName={name} size="32px" className={styles.styled_avatar} />
 							<div className={styles.user_details}>
 								<div className={styles.user_name}>
 									{startCase(name)}
 								</div>
-
 								<div className={styles.user_work_scope}>
 									<div className={styles.trade_type}>
 										{startCase(trade_type)}
@@ -136,7 +147,17 @@ function PocUser({
 								</div>
 							</div>
 
-							<div>
+							<div className={styles.action_icons}>
+								<IcMWhatsapp
+									className={styles.whatsapp_icon}
+									onClick={() => setActiveTab((prev) => ({
+										...prev,
+										hasNoFireBaseRoom : true,
+										data              : chatData,
+										tab               : 'message',
+									}))}
+								/>
+
 								{hasVoiceCallAccess && (
 									<IcMCall
 										className={styles.call_icon_styles}

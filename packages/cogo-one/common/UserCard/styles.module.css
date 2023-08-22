@@ -34,7 +34,7 @@
 }
 
 .email_info {
-	width: 40%;
+	width: 48%;
 	overflow: hidden;
 	font-size: 11px;
 	color: #221f20;
@@ -72,4 +72,23 @@
 .styled_avatar {
 	background: #ffd761;
 	border-radius: 50% !important;
+}
+
+.user_work_scope {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.scope_name {
+	padding: 0 8px;
+	margin: 5px 10px 0 0;
+	font-size: 10px;
+	background: #ddebc0;
+	border-radius: 2px;
+}
+
+.more_tags {
+	margin: 0 2px;
+	font-size: 10px;
 }
