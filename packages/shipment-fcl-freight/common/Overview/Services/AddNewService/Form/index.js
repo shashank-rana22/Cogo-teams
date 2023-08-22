@@ -12,7 +12,7 @@ import Footer from '../Footer';
 import DestinationPortStep from './DestinationPortStep';
 import styles from './styles.module.css';
 
-const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
+const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager'];
 const FIRST_STEP = 1;
 const SECOND_STEP = 2;
 
@@ -44,7 +44,6 @@ function Form({
 		destination_port = {},
 		origin_port = {},
 		cargo_details = [],
-		trade_type = '',
 		inco_term = '',
 	} = primary_service;
 

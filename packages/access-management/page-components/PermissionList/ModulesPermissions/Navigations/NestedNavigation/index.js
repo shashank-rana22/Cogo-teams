@@ -12,6 +12,7 @@ function NestedNavigations({
 	getRole,
 	getNavOptions,
 	loading,
+	activeNavs,
 }) {
 	return (
 		<section className={styles.container}>
@@ -22,6 +23,7 @@ function NestedNavigations({
 			{navigation.options.map((nav) => (
 				<Navigation
 					navigation={nav}
+					key={nav?.key}
 					roleData={{
 						...(roleData || {}),
 						permissions     : roleData?.permissions,
@@ -32,6 +34,7 @@ function NestedNavigations({
 					getNavOptions={getNavOptions}
 					loading={loading}
 					isNested
+					activeNavs={activeNavs}
 				/>
 			))}
 		</section>

@@ -2,9 +2,11 @@ import adminConfig from './admin.json';
 import bookingAgent from './bookingAgent.json';
 import bookingDeskConfig from './bookingDesk.json';
 import bookingDeskManagerConfig from './bookingDeskManager.json';
-import costBookingManagerConfig from './costBookingManagerConfig.json';
+import costBookingManagerConfig from './costBookingManager.json';
+import defaultConfig from './default.json';
 import documentDeskConfig from './documentDesk.json';
 import documentDeskManagerConfig from './documentDeskManager.json';
+import ffCostBooking from './ffCostBooking.json';
 import prodProcessOwnerConfig from './prodProcessOwner.json';
 import superadminConfig from './superadmin.json';
 
@@ -21,8 +23,9 @@ const CONFIG_MAPPING = {
 	credit_control        : adminConfig,
 	cost_booking_manager  : costBookingManagerConfig,
 	so1_so2_ops           : documentDeskConfig,
+	ff_cost_booking       : ffCostBooking,
 };
 
-const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || {};
+const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || defaultConfig;
 
 export default stakeholderConfig;

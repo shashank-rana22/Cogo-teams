@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
-import getFileAttributes from './getFileAttributes';
+import { getFileAttributes } from './getFileAttributes';
 
 const LAST_INDEX = 1;
 
@@ -10,7 +10,7 @@ function mailFunction({
 	setErrorValue = () => {},
 	emailState = {},
 	setShowControl = () => {},
-	showControl,
+	showControl = '',
 	setAttachments = () => {},
 	setEmailState = () => {},
 	setButtonType = () => {},
@@ -61,7 +61,12 @@ function mailFunction({
 	};
 
 	const handleEdit = ({ type, setNewEmailInput }) => {
-		setShowControl(type);
+		setShowControl((prev) => {
+			if (prev === type) {
+				return null;
+			}
+			return type;
+		});
 		setErrorValue(null);
 		setNewEmailInput('');
 	};

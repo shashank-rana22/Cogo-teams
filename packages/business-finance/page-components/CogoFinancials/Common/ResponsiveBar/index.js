@@ -3,6 +3,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const LESS_DATA_LIMIT = 3;
+const BOTTOM_LABEL_SPACE = 12;
+const MINIMUM_DATA_LENGTH = 2;
+
 function MyResponsiveBar({
 	data = [],
 	height = '385px',
@@ -44,7 +48,7 @@ function MyResponsiveBar({
 				keys={keys}
 				indexBy={indexBy}
 				margin={margin}
-				padding={0.3}
+				padding={data?.length < LESS_DATA_LIMIT ? '0.6 ' : '0.3'}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
 				colors={colors}
@@ -77,6 +81,33 @@ function MyResponsiveBar({
 					legend         : legendX,
 					legendPosition : 'middle',
 					legendOffset   : 32,
+					renderTick     : (props) => { // custom bottom label
+						const { value, x, y } = props || {};
+						let valueData;
+						if (data?.length > MINIMUM_DATA_LENGTH) {
+							valueData = value?.split(' '); // splitting bottom label to avoid overlap
+						} else {
+							valueData = [value]; // show full length label in data is less
+						}
+						return (
+							<g transform={`translate(${x},${y})`}>
+								{valueData?.map((item, index) => (
+									<text
+										key={item}
+										x={0}
+										y={(index * BOTTOM_LABEL_SPACE)}
+										dy={16}
+										textAnchor="middle"
+										fill="#666"
+										transform="rotate(0)"
+										fontSize={10}
+									>
+										{item}
+									</text>
+								))}
+							</g>
+						);
+					},
 				}}
 				axisLeft={axisLeft}
 				labelSkipWidth={14}

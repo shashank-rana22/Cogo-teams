@@ -145,51 +145,53 @@ function ExpenseComponent() {
 		nonRecurring : 'Create Expense',
 	};
 
-	const renderHeaders = () => (
-		<div className={styles.header_container}>
-			<div className={styles.left_container}>
-				{recurringState === 'nonRecurring' && (
-					<Filter
-						controls={nonRecurringFilters}
-						filters={expenseFilters}
-						setFilters={setExpenseFilters}
-					/>
-				)}
-				{recurringState === 'recurring' && (
-					<Filter
-						controls={recurringFilters}
-						filters={expenseFilters}
-						setFilters={setExpenseFilters}
-					/>
-				)}
-			</div>
-			<div className={styles.right_container}>
-				<div className={styles.input_container}>
-					<Input
-						size="lg"
-						placeholder={`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`}
-						suffix={<IcMSearchlight />}
-						value={expenseFilters.searchValue}
-						onChange={(e: any) => handleChange(e)}
-						className={styles.search}
-					/>
+	function RenderHeaders() {
+		return (
+			<div className={styles.header_container}>
+				<div className={styles.left_container}>
+					{recurringState === 'nonRecurring' && (
+						<Filter
+							controls={nonRecurringFilters}
+							filters={expenseFilters}
+							setFilters={setExpenseFilters}
+						/>
+					)}
+					{recurringState === 'recurring' && (
+						<Filter
+							controls={recurringFilters}
+							filters={expenseFilters}
+							setFilters={setExpenseFilters}
+						/>
+					)}
 				</div>
-				<div>
-					<Button
-						size="lg"
-						themeType="secondary"
-						onClick={() => {
-							setCreateExpenseType(recurringState);
-							setShowModal(true);
-						}}
-						className={styles.cta_button}
-					>
-						{BUTTON_TEXT[recurringState]}
-					</Button>
+				<div className={styles.right_container}>
+					<div className={styles.input_container}>
+						<Input
+							size="lg"
+							placeholder={`Search by Vendor Name/${geo?.others?.identification_number?.label}/Organization ID/Sage ID`}
+							suffix={<IcMSearchlight />}
+							value={expenseFilters.searchValue}
+							onChange={(e: any) => handleChange(e)}
+							className={styles.search}
+						/>
+					</div>
+					<div>
+						<Button
+							size="lg"
+							themeType="secondary"
+							onClick={() => {
+								setCreateExpenseType(recurringState);
+								setShowModal(true);
+							}}
+							className={styles.cta_button}
+						>
+							{BUTTON_TEXT[recurringState]}
+						</Button>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	const functions = {
 		addExpense: (itemData: ItemDataInterface) => (
@@ -444,28 +446,30 @@ function ExpenseComponent() {
 					</a>
 				);
 			}
-			const showDocuments = () => (
-				<div>
-					{proofDocuments.map((proof: string) => (
-						<div key={proof}>
-							{proof && (
-								<a
-									href={proof}
-									className={styles.multiple_proof}
-									target="_blank"
-									rel="noreferrer"
-								>
-									{proof}
-								</a>
-							)}
-						</div>
-					))}
-				</div>
-			);
+			function ShowDocuments() {
+				return (
+					<div>
+						{proofDocuments.map((proof: string) => (
+							<div key={proof}>
+								{proof && (
+									<a
+										href={proof}
+										className={styles.multiple_proof}
+										target="_blank"
+										rel="noreferrer"
+									>
+										{proof}
+									</a>
+								)}
+							</div>
+						))}
+					</div>
+				);
+			}
 			return (
 				<div>
 					<div>
-						<Popover placement="top" render={showDocuments()}>
+						<Popover placement="top" render={ShowDocuments()}>
 							<div className={styles.multiple_proof}>
 								{proofCount}
 								{' '}
@@ -573,7 +577,7 @@ function ExpenseComponent() {
 		),
 	};
 
-	const showDropDown = (singleItem: { id?: string; incidentId?: string }) => {
+	function ShowDropDown(singleItem: { id?: string; incidentId?: string }) {
 		const { id, incidentId } = singleItem || {};
 
 		if (recurringState === 'recurring') {
@@ -586,7 +590,7 @@ function ExpenseComponent() {
 			);
 		}
 		return null;
-	};
+	}
 
 	let listConfig: any;
 	let listItemData: ListDataProps;
@@ -614,7 +618,7 @@ function ExpenseComponent() {
 				/>
 			</div>
 			<div className={styles.styled_div}>
-				{renderHeaders()}
+				{RenderHeaders()}
 				<List
 					config={listConfig()}
 					itemData={listItemData}
@@ -631,7 +635,7 @@ function ExpenseComponent() {
 						}));
 					}}
 					showPagination
-					renderDropdown={showDropDown}
+					renderDropdown={(singleItem) => ShowDropDown(singleItem)}
 					showRibbon
 				/>
 			</div>

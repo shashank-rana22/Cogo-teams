@@ -5,6 +5,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
+import { updateUserLastActivity } from '../helpers/configurationHelpers';
+
 const getPayload = ({ type }) => {
 	const todayDateTime = formatDate({
 		date       : new Date(),
@@ -25,6 +27,8 @@ function useUpdateAgentWorkPreferences({
 	fetchworkPrefernce = () => {},
 	agentTimeline = () => {},
 	setIsShaking = () => {},
+	firestore = {},
+	userId = '',
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
@@ -37,12 +41,13 @@ function useUpdateAgentWorkPreferences({
 				data: getPayload({ type }),
 			});
 			agentTimeline();
+			updateUserLastActivity({ firestore, agent_id: userId, updated_status: type });
 			fetchworkPrefernce();
 			setIsShaking(false);
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger, fetchworkPrefernce, agentTimeline, setIsShaking]);
+	}, [trigger, agentTimeline, firestore, userId, fetchworkPrefernce, setIsShaking]);
 
 	return {
 		updateWorkPreference,

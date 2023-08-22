@@ -8,6 +8,7 @@ export default function PopoverContent({
 	invoice = {},
 	commonActions = false,
 	editInvoicesVisiblity = false,
+	showCancelOptions = {},
 }) {
 	const handleClick = (modalName) => {
 		setShowModal(modalName);
@@ -54,6 +55,28 @@ export default function PopoverContent({
 						</Button>
 					) : null}
 				</>
+			) : null}
+
+			{ showCancelOptions?.showCancel ? (
+				<Button
+					themeType="tertiary"
+					className={styles.text}
+					onClick={() => handleClick('cancel_e_invoice')}
+					type="button"
+				>
+					Request Cancel E Invoice
+				</Button>
+			) : null}
+
+			{ showCancelOptions?.showReplace ? (
+				<Button
+					themeType="tertiary"
+					className={styles.text}
+					onClick={() => handleClick('replace_e_invoice')}
+					type="button"
+				>
+					Request Replace E Invoice
+				</Button>
 			) : null}
 
 			{(invoice.exchange_rate_document || []).map((url) => (

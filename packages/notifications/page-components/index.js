@@ -2,6 +2,7 @@ import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapp
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import NotificationsPage from '../components/NotificationPage';
@@ -72,6 +73,9 @@ const notificationRedirect = ({ link, push, partner_id }) => {
 
 function Notifications() {
 	const { push } = useRouter();
+
+	const { t } = useTranslation(['notifications']);
+
 	const { general } = useSelector((state) => state);
 	const [page, setPage] = useState(INITIAL_PAGE);
 	const [disabled, setDisabled] = useState(false);
@@ -124,13 +128,13 @@ function Notifications() {
 			});
 
 			if (updateRes.hasError) {
-				showErrorsInToast(updateRes.messages);
+				showErrorsInToast(updateRes.messages, t);
 				return;
 			}
 
 			trigger();
 		} catch (err) {
-			showErrorsInToast(err.data);
+			showErrorsInToast(err.data, t);
 		}
 	};
 
@@ -156,7 +160,7 @@ function Notifications() {
 			});
 
 			if (updateRes.hasError) {
-				showErrorsInToast(updateRes.messages);
+				showErrorsInToast(updateRes.messages, t);
 				return;
 			}
 
@@ -167,7 +171,7 @@ function Notifications() {
 
 			trigger();
 		} catch (err) {
-			showErrorsInToast(err.data);
+			showErrorsInToast(err.data, t);
 		} finally {
 			setDisabled(false);
 		}

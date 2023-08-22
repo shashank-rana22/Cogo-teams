@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -29,11 +30,6 @@ function Status({
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
-	const isAuthorizedForCN = [
-		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id,
-		GLOBAL_CONSTANTS.uuid.manoj_mahapatra_user_id].includes(user_data?.user?.id);
-
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const bfInvoice = invoicesList?.filter(
@@ -63,8 +59,11 @@ function Status({
 		});
 	};
 
+	const geo = getGeoConstants();
+
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
 
 	return (
 		<div className={styles.invoice_container}>
@@ -97,7 +96,7 @@ function Status({
 						</Button>
 				) : null}
 
-			{showRequestCN && isAuthorizedForCN ? (
+			{showRequestCN ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"

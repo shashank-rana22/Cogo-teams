@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -15,6 +16,7 @@ const GRAPH = ['Operational Profitability', 'Revenue', 'Expense'];
 function ClosedGraphStats({
 	title = '', setActiveShipmentCard = () => { },
 	setShowShipmentList = () => { },
+	showShipmentList = false,
 	entity = '',
 	timeRange = '',
 	statsType = '',
@@ -25,15 +27,18 @@ function ClosedGraphStats({
 	customDate = new Date(),
 	activeBar = '',
 	setActiveBar = () => {},
-	defaultWidth = '400',
+	defaultWidth = '252',
+	setTableFilters = () => {},
+	infoContent = '',
 }) {
-	const { getServiceLevelData, serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
+	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
 		timeRange,
 		statsType,
 		filter,
 		activeBar,
 		customDate,
+		serviceLevel: activeBar,
 	});
 
 	return (
@@ -46,6 +51,7 @@ function ClosedGraphStats({
 							showInfo
 							showBack
 							onBack={() => setActiveShipmentCard('')}
+							infoContent={infoContent}
 						/>
 						<div className={styles.graph_label_container}>
 							<div
@@ -67,15 +73,20 @@ function ClosedGraphStats({
 
 					<div style={{ display: 'flex' }}>
 						<div style={{ width: '25vw' }}>
-							<ClosedShipmentCard
-								showHeading={false}
-								isAdditonalView
-								wrapElement
-								isDeviationVisible={false}
-								cardData={cardData}
-								type={type}
-								taxType={taxType}
-							/>
+							{
+								!serviceLevelLoading ? (
+									<ClosedShipmentCard
+										showHeading={false}
+										isAdditonalView
+										wrapElement
+										isDeviationVisible={false}
+										cardData={cardData}
+										type={type}
+										taxType={taxType}
+									/>
+
+								) : (<Placeholder height="100%" width="100%" />)
+							}
 						</div>
 
 						<div className={styles.graphs}>
@@ -101,11 +112,12 @@ function ClosedGraphStats({
 					setActiveBar={setActiveBar}
 					isFullWidth
 					setShowShipmentList={setShowShipmentList}
+					showShipmentList={showShipmentList}
 					taxType={taxType}
 					type={type}
 					serviceLevelData={serviceLevelData}
 					serviceLevelLoading={serviceLevelLoading}
-					getServiceLevelData={getServiceLevelData}
+					setTableFilters={setTableFilters}
 				/>
 			)}
 		</div>

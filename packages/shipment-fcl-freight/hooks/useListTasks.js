@@ -7,11 +7,12 @@ import { useContext, useEffect, useCallback } from 'react';
 const SHOW_ALL_TASKS = ['manager', 'admin'];
 
 const STAKEHOLDER_MAPPINGS = {
-	booking_desk  : 'service_ops',
-	lastmile_ops  : 'lastmile_ops',
-	document_desk : 'service_ops',
-	so1_so2_ops   : 'service_ops',
-	booking_agent : 'booking_agent',
+	booking_desk          : 'service_ops',
+	lastmile_ops          : 'lastmile_ops',
+	document_desk         : 'service_ops',
+	so1_so2_ops           : 'service_ops',
+	booking_agent         : 'booking_agent',
+	booking_agent_manager : 'booking_agent',
 };
 
 function useListTasks({
@@ -29,8 +30,11 @@ function useListTasks({
 
 	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
 
-	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
+	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
+	if (activeStakeholder === 'lastmile_ops' && !showOnlyMyTasks) {
+		showTaskFilters = {};
+	}
 	SHOW_ALL_TASKS.forEach((item) => {
 		if (activeStakeholder?.includes(item)) {
 			showOnlyMyTasks = false;

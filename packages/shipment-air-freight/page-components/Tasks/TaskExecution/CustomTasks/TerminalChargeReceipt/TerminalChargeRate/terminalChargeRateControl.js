@@ -1,10 +1,5 @@
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
-const CURRENCY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.currency_code).map((currencyCode) => ({
-	label : currencyCode,
-	value : currencyCode,
-}));
 
 const ENTITY_CODES = Object.keys(ENTITY_FEATURE_MAPPING).filter(
 	(key) => ENTITY_FEATURE_MAPPING[key].feature_supported.includes('terminal_charge'),
@@ -34,7 +29,7 @@ const getTerminalChargeRateControl = ({ setEntityData = () => {} }) => {
 			type    : 'select',
 			rules   : { required: 'Currency is required' },
 			span    : 6,
-			options : CURRENCY_OPTIONS,
+			options : currencies,
 		},
 
 		{

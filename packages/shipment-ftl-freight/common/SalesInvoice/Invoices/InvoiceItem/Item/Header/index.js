@@ -2,6 +2,7 @@ import { cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -70,8 +71,11 @@ function Header({
 
 	if (invoiceStatus === 'POSTED') { invoiceStatus = 'IRN GENERATED';	}
 
+	const geo = getGeoConstants();
+
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized)
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
 
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];

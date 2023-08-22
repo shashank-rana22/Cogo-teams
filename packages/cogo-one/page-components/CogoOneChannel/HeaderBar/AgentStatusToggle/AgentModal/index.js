@@ -1,25 +1,48 @@
-import { Modal, Input, Pagination, Select, Toggle } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { Modal, Pagination, cl } from '@cogoport/components';
 
-import { getIsActive, updateCogooneConstants } from '../../../../../helpers/configurationHelpers';
-import { formatAgentList } from '../../../../../helpers/groupAgentsHelpers';
-import useGetOmnichannelAgentTypes from '../../../../../hooks/useGetOmnichannelAgentTypes';
+import { SCREEN_LOCK_MAPPING } from '../../../../../constants/PLATFORM_ACTIVITY_KEYS_MAPPING';
+import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
-import useUpdateAgentPreference from '../../../../../hooks/useUpdateAgentPreference';
+import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 
-import GroupedAgents from './GroupedAgents';
+import AgentWiseLockScreen from './AgentWiseLockScreen';
+import LeaveStatusView from './LeaveStatusView';
+import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
 
-const LOADER_COUNT = 8;
+const SHOW_PAGINATION_FOR = ['list_agents', 'agents_status'];
+
+const TAB_CONFIG_MAPPING = {
+	list_agents: {
+		Component  : AgentWiseLockScreen,
+		hook       : useListChatAgents,
+		headerText : 'Agents List',
+	},
+	lock_configuration: {
+		Component  : RoleWiseLockScreen,
+		headerText : 'Lock Screen Configuration',
+	},
+	agents_status: {
+		Component  : LeaveStatusView,
+		hook       : useListAgentStatus,
+		headerText : 'Agents Status',
+	},
+};
 
 function AgentModal({
 	showAgentDetails = false,
 	setShowAgentDetails = () => {},
 	firestore = {},
+	configurationsToBeShown = [],
+	viewType = '',
+	activeCard = '',
+	setActiveCard = () => {},
 }) {
-	const [isLockedToggle, setIsLockedToggle] = useState(false);
+	const {
+		Component = null,
+		hook: hookToBeUsed = () => {},
+		headerText = '',
+	} = TAB_CONFIG_MAPPING[activeCard] || TAB_CONFIG_MAPPING.list_agents;
 
 	const {
 		getListChatAgents = () => { },
@@ -29,14 +52,9 @@ function AgentModal({
 		setSearch = () => {},
 		paramsState = {},
 		setAgentType = () => {},
-	} = useListChatAgents();
-
-	const {
-		updateAgentPreference,
-		createLoading = false,
-	} = useUpdateAgentPreference({ getListChatAgents });
-
-	const { options = [] } = useGetOmnichannelAgentTypes();
+	} = hookToBeUsed({
+		agentType: getCommonAgentType({ viewType }),
+	}) || {};
 
 	const {
 		list = [],
@@ -45,74 +63,79 @@ function AgentModal({
 		page = 0,
 	} = listAgentStatus;
 
-	const onToggle = (e) => {
-		setIsLockedToggle(e?.target?.checked);
-		updateCogooneConstants({ firestore, value: e?.target?.checked });
+	const COMPONENT_PROPS = {
+		list_agents: {
+			firestore,
+			getListChatAgents,
+			loading,
+			list,
+			setSearch,
+			paramsState,
+			setAgentType,
+			setActiveCard,
+		},
+		lock_configuration: {
+			firestore,
+			setActiveCard,
+		},
+		agents_status: {
+			firestore,
+			isLoading: loading,
+			listAgentStatus,
+			setSearch,
+			paramsState,
+			getListChatAgents,
+		},
 	};
 
-	const modifiedGroupedAgents = loading
-		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
-
-	useEffect(() => {
-		getIsActive({ firestore, setIsLockedToggle });
-	}, [firestore]);
+	const handleClose = () => {
+		setActiveCard('');
+		setShowAgentDetails(false);
+	};
 
 	return (
 		<Modal
 			size="md"
 			show={showAgentDetails}
-			onClose={() => setShowAgentDetails(false)}
-			placement="center"
+			onClose={handleClose}
+			placement="top"
 		>
-			<Modal.Header title="Agent Status" />
+			<Modal.Header title={headerText || 'Configuration'} />
 			<Modal.Body className={styles.modal_body}>
-				<div className={styles.search_switch_toggle_space}>
-					Screen Lock
-					<Toggle
-						onChange={onToggle}
-						checked={isLockedToggle}
-					/>
-				</div>
-				<div className={styles.header_filters}>
-					<Input
-						size="sm"
-						placeholder="Search here"
-						className={styles.search}
-						prefix={<IcMSearchlight />}
-						onChange={setSearch}
-					/>
-					<Select
-						size="sm"
-						placeholder="Select agent type"
-						className={styles.select_styles}
-						prefix={<IcMSearchlight />}
-						onChange={setAgentType}
-						options={options}
-						value={paramsState?.agentType}
-						isClearable
-					/>
-				</div>
-				{isEmpty(modifiedGroupedAgents)
+				{(activeCard && Component)
 					? (
-						<div className={styles.empty_state}>
-							No data found
+						<Component
+							key={activeCard}
+							{...COMPONENT_PROPS[activeCard]}
+						/>
+					) : (
+						<div className={styles.screen_container}>
+							{SCREEN_LOCK_MAPPING.map((item) => {
+								const { label = '', name = '', icon = {} } = item || {};
+
+								if (!configurationsToBeShown.includes(name)) {
+									return null;
+								}
+
+								return (
+									<div
+										key={name}
+										role="presentation"
+										onClick={() => setActiveCard(name)}
+										className={cl`
+											${activeCard === name ? styles.active_card : ''} 
+											${styles.card_section}`}
+									>
+										{icon}
+										<div className={styles.card_label}>{label}</div>
+									</div>
+								);
+							})}
 						</div>
-					)
-					: Object.keys(modifiedGroupedAgents).map(
-						(eachType) => (
-							<GroupedAgents
-								key={eachType}
-								groupedList={modifiedGroupedAgents[eachType]}
-								groupName={eachType}
-								createLoading={createLoading}
-								updateAgentPreference={updateAgentPreference}
-								loading={loading}
-							/>
-						),
 					)}
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_styles}>
-				{!loading && (
+				{!loading && SHOW_PAGINATION_FOR.includes(activeCard) ? (
 					<Pagination
 						className={styles.pagination}
 						type="table"
@@ -121,7 +144,7 @@ function AgentModal({
 						pageSize={page_limit}
 						onPageChange={setPagination}
 					/>
-				)}
+				) : null}
 			</Modal.Footer>
 		</Modal>
 	);

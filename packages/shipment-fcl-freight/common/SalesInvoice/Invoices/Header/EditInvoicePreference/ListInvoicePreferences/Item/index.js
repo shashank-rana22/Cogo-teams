@@ -5,7 +5,7 @@ import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import SelectService from './SelectService';
 import styles from './styles.module.css';
@@ -73,6 +73,11 @@ function Item({
 	});
 
 	const noActionState = ACTION_STATE.includes(status);
+	const noActionForInsurance = !isEmpty(
+		(invoice?.services || []).find(
+			(s) => s?.service_type === 'cargo_insurance_service',
+		),
+	);
 
 	return (
 		<div className={styles.container}>
@@ -85,8 +90,10 @@ function Item({
 
 			<div
 				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
-				style={{ cursor: noActionState ? 'default' : '' }}
-				onClick={!noActionState ? () => handleServiceToggle() : null}
+				style={{ cursor: noActionState || noActionForInsurance ? 'default' : '' }}
+				onClick={!(noActionState || noActionForInsurance)
+					? () => handleServiceToggle()
+					: null}
 			>
 				<div className={styles.info_div}>
 					<div className={styles.details}>
@@ -148,7 +155,7 @@ function Item({
 					</div>
 				</div>
 
-				{!noActionState ? (
+				{!(noActionState || noActionForInsurance) ? (
 					<div className={styles.header}>
 						{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</div>
