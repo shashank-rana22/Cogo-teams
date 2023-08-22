@@ -21,7 +21,7 @@ function Actions({
 					className={styles.tooltip_pad}
 					placement="right"
 					interactive
-					content={
+					content={(
 						<div className={styles.options}>
 							<Button
 								themeType="primary"
@@ -32,7 +32,7 @@ function Actions({
 								<div>Move Supplier</div>
 							</Button>
 						</div>
-					}
+					)}
 				>
 					<IcMOverflowDot style={{ cursor: 'pointer' }} />
 				</Tooltip>

@@ -4,8 +4,8 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const COLORS_MAPPING = {
-	current_container_allocation: '#DDEBC0',
-	past_container_allocation: '#E0E0E0',
+	current_container_allocation : '#DDEBC0',
+	past_container_allocation    : '#E0E0E0',
 };
 
 const C = 100;
@@ -30,9 +30,17 @@ function CustomProgressBar({
 			style={style}
 		>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				<div>{promisedCount} TEU ALLOCATED</div>
+				<div>
+					{promisedCount}
+					{' '}
+					TEU ALLOCATED
+				</div>
 
-				<div>{allocatedCount} TEU FULFILLED</div>
+				<div>
+					{allocatedCount}
+					{' '}
+					TEU FULFILLED
+				</div>
 			</div>
 			<div
 				className={cl`
@@ -44,8 +52,8 @@ function CustomProgressBar({
 						${styles.progress} 
 						${cl.ns('progressbar_progress')}`}
 					style={{
-						width: `${progress}%`,
-						background: `${COLORS_MAPPING[view]}`,
+						width      : `${progress}%`,
+						background : `${COLORS_MAPPING[view]}`,
 					}}
 				/>
 			</div>

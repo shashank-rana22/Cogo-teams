@@ -20,9 +20,9 @@ function ServiceProvider({
 	return (
 		<div
 			style={{
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'space-between',
+				display        : 'flex',
+				alignItems     : 'center',
+				justifyContent : 'space-between',
 			}}
 		>
 			<Actions
@@ -34,18 +34,18 @@ function ServiceProvider({
 			/>
 			<div
 				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					marginRight: '10px',
-					width: '200px',
+					display       : 'flex',
+					flexDirection : 'column',
+					marginRight   : '10px',
+					width         : '200px',
 				}}
 			>
 				<Tooltip content={service_provider?.short_name} placement="top">
 					<div
 						style={{
-							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-							whiteSpace: 'nowrap',
+							overflow     : 'hidden',
+							textOverflow : 'ellipsis',
+							whiteSpace   : 'nowrap',
 						}}
 					>
 						{service_provider?.short_name}
@@ -64,14 +64,15 @@ function ServiceProvider({
 
 				<div>
 					{formatAmount({
-						amount: service_provider_outstanding_amount,
-						currency: service_provider_outstanding_currency,
-						options: {
-							style: 'currency',
-							currencyDisplay: 'code',
-							maximumFractionDigits: 2,
+						amount   : service_provider_outstanding_amount,
+						currency : service_provider_outstanding_currency,
+						options  : {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
 						},
-					})}{' '}
+					})}
+					{' '}
 					Outstanding
 				</div>
 			</div>

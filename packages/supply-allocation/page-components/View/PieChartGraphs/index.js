@@ -1,18 +1,21 @@
 import { isEmpty } from '@cogoport/utils';
-import useGetRollingForecastData from '../../../hooks/useGetRollingForecastData';
-import GraphItem from './GraphItem';
+
 import DotLoader from '../../../commons/DotLoader';
+import useGetRollingForecastData from '../../../hooks/useGetRollingForecastData';
+
+import GraphItem from './GraphItem';
+
+const ARRAY_LENGTH = 3;
 
 function PieChartGraphs({
 	originLocationId = '',
 	destinationLocationId = '',
 	listApiLoading = false,
 }) {
-	const { data: rollingForecastData = {}, graphDataLoading } =
-		useGetRollingForecastData({
-			origin_location_id: originLocationId,
-			destination_location_id: destinationLocationId,
-		});
+	const { data: rollingForecastData = {}, graphDataLoading } =		useGetRollingForecastData({
+		origin_location_id      : originLocationId,
+		destination_location_id : destinationLocationId,
+	});
 
 	const {
 		persona_forecasts = {},
@@ -34,23 +37,23 @@ function PieChartGraphs({
 		return (
 			<div
 				style={{
-					display: 'flex',
-					gap: '16px',
-					width: '100%',
-					height: '450px',
+					display : 'flex',
+					gap     : '16px',
+					width   : '100%',
+					height  : '450px',
 				}}
 			>
-				{[1, 2, 3].map((key) => (
+				{[...Array(ARRAY_LENGTH).keys()].map((key) => (
 					<div
 						key={key}
 						style={{
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							background: '#fff',
-							padding: '10px',
-							marginBottom: '10px',
-							flexBasis: '33%',
+							display        : 'flex',
+							justifyContent : 'center',
+							alignItems     : 'center',
+							background     : '#fff',
+							padding        : '10px',
+							marginBottom   : '10px',
+							flexBasis      : '33%',
 						}}
 					>
 						<DotLoader />

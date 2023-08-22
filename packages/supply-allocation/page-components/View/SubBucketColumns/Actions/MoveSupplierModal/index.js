@@ -21,8 +21,7 @@ function MoveSupplierModal({
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateFclFreightAllocation, loading } =
-		useUpdateFclFreightAllocation();
+	const { updateFclFreightAllocation, loading } =		useUpdateFclFreightAllocation();
 	const onClickSubmit = (values) => {
 		const payload = {
 			service_provider_id,

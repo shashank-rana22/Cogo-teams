@@ -12,14 +12,14 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const ICON_MAPPING = {
-	seaport: <IcMPort />,
-	airport: <IcMAirport />,
-	country: <IcMLocation />,
-	city: <IcMLocation />,
-	warehouse: <IcAWarehouse />,
-	pincode: <IcMLocation />,
-	riverport: <IcMWater />,
-	railway_terminal: <IcMHaulage />,
+	seaport          : <IcMPort />,
+	airport          : <IcMAirport />,
+	country          : <IcMLocation />,
+	city             : <IcMLocation />,
+	warehouse        : <IcAWarehouse />,
+	pincode          : <IcMLocation />,
+	riverport        : <IcMWater />,
+	railway_terminal : <IcMHaulage />,
 };
 
 const formatSubLocation = (display_name) => {

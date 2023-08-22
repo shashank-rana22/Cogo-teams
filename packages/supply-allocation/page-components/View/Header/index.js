@@ -9,16 +9,15 @@ import DotLoader from '../../../commons/DotLoader';
 import styles from './styles.module.css';
 
 const commonLocationProps = {
-	asyncKey: 'supply_fcl_searches',
-	getModifiedOptions: ({ options }) =>
-		options.map((option) => ({
-			...option,
-			origin_display_name: option?.origin_location?.display_name,
-			destination_display_name: option?.destination_location?.display_name,
-		})),
-	renderLabel: (item) => item.origin_location.display_name,
-	initialCall: true,
-	placeholder: 'Search via port name/code...',
+	asyncKey           : 'supply_fcl_searches',
+	getModifiedOptions : ({ options }) => options.map((option) => ({
+		...option,
+		origin_display_name      : option?.origin_location?.display_name,
+		destination_display_name : option?.destination_location?.display_name,
+	})),
+	renderLabel : (item) => item.origin_location.display_name,
+	initialCall : true,
+	placeholder : 'Search via port name/code...',
 };
 
 function Header({ firstSearch, loading }) {
@@ -52,12 +51,12 @@ function Header({ firstSearch, loading }) {
 		return (
 			<div
 				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					background: '#fff',
-					padding: '10px',
-					marginBottom: '10px',
+					display        : 'flex',
+					justifyContent : 'center',
+					alignItems     : 'center',
+					background     : '#fff',
+					padding        : '10px',
+					marginBottom   : '10px',
 				}}
 			>
 				<DotLoader />
@@ -68,12 +67,12 @@ function Header({ firstSearch, loading }) {
 	return !editMode ? (
 		<div
 			style={{
-				display: 'flex',
-				justifyContent: 'space-between',
-				alignItems: 'center',
-				background: '#fff',
-				padding: '10px',
-				marginBottom: '10px',
+				display        : 'flex',
+				justifyContent : 'space-between',
+				alignItems     : 'center',
+				background     : '#fff',
+				padding        : '10px',
+				marginBottom   : '10px',
 			}}
 		>
 			<IcMArrowBack
@@ -122,7 +121,11 @@ function Header({ firstSearch, loading }) {
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				<div className={styles.sub_heading}>Forecasted Vol</div>
 				{!editMode ? (
-					<div className={styles.volume}>{forecasted_volume} TEU</div>
+					<div className={styles.volume}>
+						{forecasted_volume}
+						{' '}
+						TEU
+					</div>
 				) : (
 					'--'
 				)}
@@ -144,12 +147,12 @@ function Header({ firstSearch, loading }) {
 	) : (
 		<div
 			style={{
-				display: 'flex',
-				alignItems: 'center',
-				background: '#fff',
-				padding: '10px',
-				marginBottom: '10px',
-				justifyContent: 'space-between',
+				display        : 'flex',
+				alignItems     : 'center',
+				background     : '#fff',
+				padding        : '10px',
+				marginBottom   : '10px',
+				justifyContent : 'space-between',
 			}}
 		>
 			<div style={{ display: 'flex', alignItems: 'center' }}>

@@ -3,8 +3,8 @@ import { useRequest } from '@cogoport/request';
 const useUpdateRollingFclFreightSearch = ({ refetchListFclSearches }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url: '/update_rolling_fcl_freight_search',
-			method: 'POST',
+			url    : '/update_rolling_fcl_freight_search',
+			method : 'POST',
 		},
 		{ manual: true },
 	);

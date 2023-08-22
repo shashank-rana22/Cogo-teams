@@ -7,12 +7,12 @@ import styles from './styles.module.css';
 
 const ICON_MAPPING = {
 	sm: {
-		height: '12px',
-		width: '12px',
+		height : '12px',
+		width  : '12px',
 	},
 	lg: {
-		height: '18px',
-		width: '18px',
+		height : '18px',
+		width  : '18px',
 	},
 };
 
@@ -29,13 +29,13 @@ function StyledSelect({
 		<Popover
 			visible={showPopover}
 			placement="bottom"
-			content={
+			content={(
 				<StyledOptions
 					setShowPopover={setShowPopover}
 					onChange={onChange}
 					options={options}
 				/>
-			}
+			)}
 			className={styles.popover}
 			onClickOutside={() => setShowPopover(false)}
 			interactive
@@ -57,8 +57,8 @@ function StyledSelect({
 				{!disabled ? (
 					<IcMArrowDown
 						style={{
-							margin: '2px 0px 0px 4px',
-							cursor: 'pointer',
+							margin : '2px 0px 0px 4px',
+							cursor : 'pointer',
 							...ICON_MAPPING[size],
 						}}
 					/>

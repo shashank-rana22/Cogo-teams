@@ -4,11 +4,11 @@ import { useCallback } from 'react';
 const useListFclSearchesView = () => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url: '/list_rolling_fcl_freight_searches',
-			method: 'get',
-			params: {
-				service_data_required: true,
-				allocation_data_required: true,
+			url    : '/list_rolling_fcl_freight_searches',
+			method : 'get',
+			params : {
+				service_data_required    : true,
+				allocation_data_required : true,
 			},
 		},
 		{ manual: true },
@@ -19,9 +19,9 @@ const useListFclSearchesView = () => {
 			try {
 				await trigger({
 					params: {
-						service_data_required: true,
-						allocation_data_required: true,
-						filters: { id },
+						service_data_required    : true,
+						allocation_data_required : true,
+						filters                  : { id },
 					},
 				});
 			} catch (err) {

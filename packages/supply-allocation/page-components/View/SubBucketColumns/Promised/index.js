@@ -16,9 +16,9 @@ function Promised({ item = {}, control, unregister }) {
 		<>
 			<div
 				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					padding: '0 10px',
+					display        : 'flex',
+					justifyContent : 'space-between',
+					padding        : '0 10px',
 				}}
 			>
 				{allocated_containers}
@@ -43,9 +43,7 @@ function Promised({ item = {}, control, unregister }) {
 			/>
 			<div className={styles.cancel_container}>
 				<IcMCross
-					onClick={() =>
-						onClickCancel(`${item?.service_provider?.id}.promised_containers`)
-					}
+					onClick={() => onClickCancel(`${item?.service_provider?.id}.promised_containers`)}
 				/>
 			</div>
 			<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -53,7 +51,8 @@ function Promised({ item = {}, control, unregister }) {
 					name={`${item?.service_provider?.id}.is_hard_limit`}
 					control={control}
 					value={item?.is_hard_limit}
-				/>{' '}
+				/>
+				{' '}
 				<span> is Hard Limit</span>
 			</div>
 		</div>

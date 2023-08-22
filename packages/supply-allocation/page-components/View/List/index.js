@@ -17,8 +17,7 @@ function List({ bucketData = [], search_id = '', bucketsArray = [] }) {
 			current_allocated_containers = 0,
 		} = current_container_allocation;
 
-		const { past_fulfilled_containers = 30, past_allocated_containers = 50 } =
-			past_container_fulfillment;
+		const { past_fulfilled_containers = 30, past_allocated_containers = 50 } =			past_container_fulfillment;
 
 		return [
 			...acc,
@@ -38,11 +37,11 @@ function List({ bucketData = [], search_id = '', bucketsArray = [] }) {
 		<>
 			<div
 				style={{
-					display: 'flex',
-					alignItems: 'center',
-					background: '#FDFBF6',
-					padding: '20px 5px',
-					marginTop: '20px',
+					display    : 'flex',
+					alignItems : 'center',
+					background : '#FDFBF6',
+					padding    : '20px 5px',
+					marginTop  : '20px',
 				}}
 			>
 				{bucketControls.map(({ title, flexBasis }) => (

@@ -1,73 +1,64 @@
 {
-	"name": "cogo-admin",
-	"version": "0.0.1",
-	"description": "Turbo repo for Cogo admin",
-	"repository": "git@github.com:Cogoport/cogo-admin.git",
-	"author": "Prashant Paddune <padadunep@gmail.com>",
-	"license": "MIT",
-	"private": true,
-	"workspaces": [
-		"*",
-		"packages/*",
-		"common/*"
-	],
-	"scripts": {
-		"deploy": "pnpm run build && (cd cogo-control && pm2 start pm2.config.js)",
-		"build": "pnpm run pre-build && NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=6144\" turbo run build",
-		"pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
-		"dev": "npx husky install && node scripts/build-pages && node scripts/pre-build && turbo run dev",
-		"start": "turbo run start",
-		"eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-		"eslint_file": "eslint",
-		"stylelint": "stylelint \"**/*.css\"",
-		"clean": "turbo run clean",
-		"lint": "eslint",
-		"precommit": "lint-staged"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix",
-			"git add"
-		]
-	},
-	"dependencies": {
-		"@cogoport/maps": "^1.0.3",
-		"@sentry/nextjs": "^7.54.0",
-		"accept-language": "^3.0.18",
-		"axios-hooks": "^4.0.0",
-		"i18next": "^22.4.10",
-		"next": "13.1.6",
-		"next-i18next": "^13.2.1",
-		"react-i18next": "^12.1.4",
-		"react-dom": "18.2.0"
-	},
-	"devDependencies": {
-		"@cogoport/eslint-config": "2.0.9",
-		"@cogoport/stylelint-config": "^1.0.3",
-		"@svgr/webpack": "^6.5.1",
-		"eslint": "^8.34.0",
-		"eslint-config-airbnb": "^18.2.1",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-cypress": "^2.11.1",
-		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-jest": "^27.2.1",
-		"eslint-plugin-jsx-a11y": "^6.4.1",
-		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-react": "^7.21.5",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"prettier": "^2.5.1",
-		"fs-extra": "^11.1.1",
-		"git-precommit-checks": "^3.1.0",
-		"husky": "^8.0.3",
-		"lint-staged": "^13.2.2",
-		"postcss": "^8.4.24",
-		"postcss-flexbugs-fixes": "^5.0.2",
-		"postcss-nested": "^6.0.1",
-		"postcss-preset-env": "^8.4.2",
-		"stylelint": "^14.16.1",
-		"turbo": "^1.10.2",
-		"turbo-darwin-64": "^1.10.3",
-		"dotenv": "^16.0.3"
-	},
-	"packageManager": "pnpm@7.15.0"
+  "name": "cogo-admin",
+  "version": "0.0.1",
+  "description": "Turbo repo for Cogo admin",
+  "repository": "git@github.com:Cogoport/cogo-admin.git",
+  "author": "Prashant Paddune <padadunep@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "*",
+    "packages/*",
+    "common/*"
+  ],
+  "scripts": {
+    "deploy": "pnpm run build && (cd cogo-control && pm2 start pm2.config.js)",
+    "build": "pnpm run pre-build && NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=6144\" turbo run build",
+    "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
+    "dev": "npx husky install && node scripts/build-pages && node scripts/pre-build && turbo run dev",
+    "start": "turbo run start",
+    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint_file": "eslint",
+    "stylelint": "stylelint \"**/*.css\"",
+    "clean": "turbo run clean",
+    "lint": "eslint",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@cogoport/maps": "^1.0.3",
+    "@sentry/nextjs": "^7.54.0",
+    "accept-language": "^3.0.18",
+    "axios-hooks": "^4.0.0",
+    "i18next": "^22.4.10",
+    "next": "13.1.6",
+    "next-i18next": "^13.2.1",
+    "react-i18next": "^12.1.4",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@cogoport/eslint-config": "2.0.9",
+    "@cogoport/stylelint-config": "^1.0.3",
+    "@svgr/webpack": "^6.5.1",
+    "eslint": "^8.42.0",
+    "eslint-plugin-custom-eslint": "link:node_modules/@cogoport/eslint-config/packages/custom-eslint",
+    "fs-extra": "^11.1.1",
+    "git-precommit-checks": "^3.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "postcss": "^8.4.24",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^8.4.2",
+    "stylelint": "^14.16.1",
+    "turbo": "^1.10.2",
+    "turbo-darwin-64": "^1.10.3",
+    "dotenv": "^16.0.3"
+  },
+  "packageManager": "pnpm@7.15.0"
 }

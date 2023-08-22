@@ -32,23 +32,23 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 			) : (
 				<IcMArrowRotateRight onClick={() => setShow((prev) => !prev)} />
 			),
-			flexBasis: '5%',
-			key: 'actions',
+			flexBasis : '5%',
+			key       : 'actions',
 		},
 		{
-			component: <div>{startCase(bucket_type)}</div>,
-			flexBasis: '15%',
-			key: 'bucket_name',
+			component : <div>{startCase(bucket_type)}</div>,
+			flexBasis : '15%',
+			key       : 'bucket_name',
 		},
 		{
-			component: <div>{suppliers_count}</div>,
-			flexBasis: '10%',
-			key: 'supplier_count',
+			component : <div>{suppliers_count}</div>,
+			flexBasis : '10%',
+			key       : 'supplier_count',
 		},
 		{
-			component: <div>{allocation_percentage}</div>,
-			flexBasis: '10%',
-			key: 'allocation_percent',
+			component : <div>{allocation_percentage}</div>,
+			flexBasis : '10%',
+			key       : 'allocation_percent',
 		},
 		{
 			component: (
@@ -59,8 +59,8 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 					view="current_container_allocation"
 				/>
 			),
-			flexBasis: '30%',
-			key: 'current_container_allocation',
+			flexBasis : '30%',
+			key       : 'current_container_allocation',
 		},
 		{
 			component: (
@@ -71,12 +71,11 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 					view="past_container_allocation"
 				/>
 			),
-			flexBasis: '30%',
-			key: 'past_container_allocation',
+			flexBasis : '30%',
+			key       : 'past_container_allocation',
 		},
 	];
-	const { bulkUpdateFclFreightAllocation } =
-		useBulkUpdateFclFreightAllocation();
+	const { bulkUpdateFclFreightAllocation } =		useBulkUpdateFclFreightAllocation();
 
 	const onClickSaveChanges = (values) => {
 		const modifiedValues = Object.entries(values).reduce(
@@ -85,9 +84,9 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 		);
 
 		const payload = {
-			rolling_fcl_freight_search_id: search_id,
+			rolling_fcl_freight_search_id : search_id,
 			bucket_type,
-			data: modifiedValues,
+			data                          : modifiedValues,
 		};
 		bulkUpdateFclFreightAllocation({ payload });
 	};
@@ -100,12 +99,12 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 						key={key}
 						style={{
 							flexBasis,
-							padding: '20px 5px',
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							borderBottom: '1px solid #f9f9f9',
-							background: ' #fff',
+							padding        : '20px 5px',
+							display        : 'flex',
+							justifyContent : 'center',
+							alignItems     : 'center',
+							borderBottom   : '1px solid #f9f9f9',
+							background     : ' #fff',
 						}}
 					>
 						{component}
@@ -116,10 +115,10 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 			{!isEmpty(dirtyFields) ? (
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						marginTop: '20px',
-						opacity: !isEmpty(dirtyFields) ? '1' : '0',
+						display        : 'flex',
+						justifyContent : 'space-between',
+						marginTop      : '20px',
+						opacity        : !isEmpty(dirtyFields) ? '1' : '0',
 						...(isEmpty(dirtyFields) ? { pointerEvents: 'none' } : {}),
 					}}
 				>

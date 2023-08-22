@@ -7,8 +7,8 @@ const useCreateSupplySearch = ({
 }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url: '/create_rolling_fcl_freight_search',
-			method: 'POST',
+			url    : '/create_rolling_fcl_freight_search',
+			method : 'POST',
 		},
 		{ manual: true },
 	);

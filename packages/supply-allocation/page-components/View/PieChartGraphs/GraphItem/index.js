@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+
 import PieChart from '../../../../commons/PieChart';
 import {
 	CONTAINER_TYPE_DISTRIBUTION_COLORS,
@@ -9,15 +10,15 @@ import {
 } from '../../../../configs/pie-chart-colors-mapping';
 
 const COLORS_MAPPING = {
-	container_type_forecasts: CONTAINER_TYPE_DISTRIBUTION_COLORS,
-	weekly_forecasts: WEEKY_DISTRIBUTION_COLORS,
-	persona_forecasts: PERSONA_DISTRIBUTION_COLORS,
+	container_type_forecasts : CONTAINER_TYPE_DISTRIBUTION_COLORS,
+	weekly_forecasts         : WEEKY_DISTRIBUTION_COLORS,
+	persona_forecasts        : PERSONA_DISTRIBUTION_COLORS,
 };
 
 const HEADINGS_MAPPING = {
-	container_type_forecasts: 'Container Type Distribution',
-	weekly_forecasts: 'Weekly Distribution',
-	persona_forecasts: 'Persona Distribution',
+	container_type_forecasts : 'Container Type Distribution',
+	weekly_forecasts         : 'Weekly Distribution',
+	persona_forecasts        : 'Persona Distribution',
 };
 
 const generateData = (data, type) => {
@@ -31,13 +32,11 @@ const generateData = (data, type) => {
 
 			if (isWeeklyForecast) {
 				const dateRange = JSON.parse(key);
-				const [startDate, endDate] = dateRange.map((date) =>
-					formatDate({
-						date: date.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
-						dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM'],
-						formatType: 'date',
-					}),
-				);
+				const [startDate, endDate] = dateRange.map((date) => formatDate({
+					date       : date.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+					formatType : 'date',
+				}));
 
 				label = `${startDate} to ${endDate}`;
 				color = WEEKY_DISTRIBUTION_COLORS[index];

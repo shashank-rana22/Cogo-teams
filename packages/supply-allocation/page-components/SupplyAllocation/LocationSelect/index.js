@@ -9,28 +9,28 @@ import StyledSelect from '../../../commons/StyledSelect';
 import styles from './styles.module.css';
 
 const OBJECT_OPTIONS = {
-	all: 'All Regions',
-	is_bookmarked: 'BookMarked',
-	attention_required: 'Attention Required',
+	all                : 'All Regions',
+	is_bookmarked      : 'BookMarked',
+	attention_required : 'Attention Required',
 };
 
 const DEFAULT_PAGE = 1;
 
 const commonLocationProps = {
-	asyncKey: 'list_locations',
-	params: {
+	asyncKey : 'list_locations',
+	params   : {
 		filters: {
 			type: ['seaport', 'country', 'continent'],
 		},
-		page_limit: 10,
-		sort_by: 'name',
-		sort_type: 'asc',
-		includes: { default_params_required: true },
+		page_limit : 10,
+		sort_by    : 'name',
+		sort_type  : 'asc',
+		includes   : { default_params_required: true },
 	},
-	labelKey: 'display_name',
-	renderLabel: (item) => <RenderLabelNew data={item} />,
-	initialCall: true,
-	placeholder: 'Search via port name/code...',
+	labelKey    : 'display_name',
+	renderLabel : (item) => <RenderLabelNew data={item} />,
+	initialCall : true,
+	placeholder : 'Search via port name/code...',
 };
 
 function LocationSelect({
@@ -63,8 +63,8 @@ function LocationSelect({
 					onChange={(id, item) => {
 						setLocationDetails((prev) => ({
 							...prev,
-							origin_location_id: id,
-							origin_location_type: item?.type,
+							origin_location_id   : id,
+							origin_location_type : item?.type,
 						}));
 
 						setFilters((prev) => ({
@@ -92,8 +92,8 @@ function LocationSelect({
 					onChange={(id, item) => {
 						setLocationDetails((prev) => ({
 							...prev,
-							destination_location_id: id,
-							destination_location_type: item?.type,
+							destination_location_id   : id,
+							destination_location_type : item?.type,
 						}));
 						setFilters((prev) => ({
 							...prev,
@@ -106,10 +106,10 @@ function LocationSelect({
 
 			<div
 				style={{
-					width: 150,
-					display: 'flex',
-					alignItems: 'flex-end',
-					marginTop: '36px',
+					width      : 150,
+					display    : 'flex',
+					alignItems : 'flex-end',
+					marginTop  : '36px',
 				}}
 			>
 				<StyledSelect
@@ -119,16 +119,16 @@ function LocationSelect({
 						setFilters((prev) => {
 							const filterValues = {
 								is_bookmarked: {
-									is_bookmarked: true,
-									is_attention_required: undefined,
+									is_bookmarked         : true,
+									is_attention_required : undefined,
 								},
 								attention_required: {
-									is_bookmarked: undefined,
-									is_attention_required: true,
+									is_bookmarked         : undefined,
+									is_attention_required : true,
 								},
 								all: {
-									is_bookmarked: undefined,
-									is_attention_required: undefined,
+									is_bookmarked         : undefined,
+									is_attention_required : undefined,
 								},
 							};
 
