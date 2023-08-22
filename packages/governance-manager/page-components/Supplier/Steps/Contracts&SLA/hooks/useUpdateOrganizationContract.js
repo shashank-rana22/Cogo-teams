@@ -5,8 +5,7 @@ function useUpdateOrganizationContract({ item, id, updatedValue }) {
 		method : 'post',
 		url    : '/update_organization_contract',
 	}, { manual: true });
-	console.log(item);
-	const UpdateOrganizationContract = async ({ state }) => {
+	const updateOrganizationContract = async (state) => {
 		try {
 			await trigger({
 				params: {
@@ -25,7 +24,7 @@ function useUpdateOrganizationContract({ item, id, updatedValue }) {
 	return {
 		data,
 		loading,
-		UpdateOrganizationContract,
+		updateOrganizationContract,
 	};
 }
 export default useUpdateOrganizationContract;

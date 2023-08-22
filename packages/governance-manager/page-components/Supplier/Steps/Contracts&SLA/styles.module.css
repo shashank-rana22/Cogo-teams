@@ -6,12 +6,16 @@
 
 .heading {
 	display: flex;
-	min-width: 602px;
+	justify-content: space-between;
 	font-size: 16px;
 	font-style: medium;
 	font-weight: 600;
 	line-height: 150%;
 	color: #000;
+}
+
+.flex {
+	display: flex;
 }
 
 .headingsteps {
