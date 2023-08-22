@@ -4,15 +4,14 @@ import { useRequest } from '@cogoport/request';
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
 	setIRNGenerated = () => {},
-	lineItemDetails = {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
 		method : 'POST',
 	}, { manual: true });
 
-	const createShipmentAdditionalService = async () => {
-		const { total_tax_price = '', currency = '' } = lineItemDetails || {};
+	const createShipmentAdditionalService = async (values) => {
+		const { total_tax_price = '', currency = '' } = values || {};
 		const { id = '', all_services = [] } = shipmentData || {};
 
 		const airFreightLocalService = all_services.find((
