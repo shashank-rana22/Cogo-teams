@@ -1,5 +1,6 @@
 import { Accordion, Modal, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCross } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -96,6 +97,13 @@ function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () 
 				className={styles.modalcontainer}
 			>
 				<Modal.Body>
+					<div className={styles.cross}>
+						<IcMCross
+							type="button"
+							onClick={() => setShowCallPriority(false)}
+							className={styles.close_icon}
+						/>
+					</div>
 					<div className={styles.container}>
 						<div className={styles.sub_org_name_conatiner}>
 							<div style={{ display: 'flex' }}>

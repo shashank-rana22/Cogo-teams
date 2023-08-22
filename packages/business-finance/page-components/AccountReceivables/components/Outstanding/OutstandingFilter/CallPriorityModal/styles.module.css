@@ -89,3 +89,11 @@
 .tabbs {
 	margin-top: 24px;
 }
+
+.cross {
+	display: flex;
+	justify-content: flex-end;
+	padding-bottom: 12px;
+	margin-right: 12px;
+	cursor: pointer;
+}
