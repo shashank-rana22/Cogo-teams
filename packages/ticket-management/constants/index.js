@@ -97,9 +97,9 @@ export const PRIORITY_MAPPING = {
 
 export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
 
-export const SPECTATOR_TYPE_OPTIONS = [
-	{ label: 'Tickets assigned to me', value: 'reviewer' },
-	{ label: 'Tickets raised by me', value: 'agent' },
-	{ label: 'Closure Authorizer', value: 'closure_authorizer' },
-	{ label: 'My Configurations', value: 'configuration_owner' },
+export const getSpectatorTypeOptions = (t) => [
+	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },
+	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
+	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
+	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
 ];
