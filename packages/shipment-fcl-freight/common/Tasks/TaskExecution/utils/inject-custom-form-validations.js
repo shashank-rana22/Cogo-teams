@@ -1,13 +1,10 @@
 import { isEmpty } from '@cogoport/utils';
 
-const validateFileField = (value, control, isFieldArray) => {
+const validateFileField = (value, control) => {
 	if (typeof value === 'string' && !isEmpty(value)) {
 		return true;
 	}
-	if (!isFieldArray && isEmpty(value?.finalUrl)) {
-		return control.rules?.required?.message || control.rules?.required || 'This field is required';
-	}
-	if (isFieldArray) {
+	if (Array.isArray(value)) {
 		let isValid = true;
 		value.forEach((item) => {
 			if (isEmpty(item?.finalUrl)) {
@@ -17,6 +14,9 @@ const validateFileField = (value, control, isFieldArray) => {
 		if (!isValid) {
 			return control.rules?.required?.message || control.rules?.required || 'This field is required';
 		}
+	}
+	if (isEmpty(value?.finalUrl)) {
+		return control.rules?.required?.message || control.rules?.required || 'This field is required';
 	}
 
 	return true;
@@ -33,13 +33,13 @@ const injectCustomFormValidations = (controls = []) => {
 		}
 
 		if (control?.rules?.required && control?.type === 'file') {
-			newControls[index].rules.validate = (value) => validateFileField(value, control, false);
+			newControls[index].rules.validate = (value) => validateFileField(value, control);
 		}
 
 		if (control?.type === 'fieldArray') {
 			control?.controls?.forEach((item, idx) => {
 				if (item?.rules?.required && item?.type === 'file') {
-					newControls[index].controls[idx].rules.validate = (value) => validateFileField(value, item, true);
+					newControls[index].controls[idx].rules.validate = (value) => validateFileField(value, item);
 				}
 			});
 		}
