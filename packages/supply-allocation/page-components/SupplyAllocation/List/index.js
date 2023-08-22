@@ -244,7 +244,7 @@ function List({
 		<div className={styles.container}>
 			<StyledTable data={list} columns={columns} loading={loading} />
 
-			{total_count ? (
+			{total_count > page_limit ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						className="md"

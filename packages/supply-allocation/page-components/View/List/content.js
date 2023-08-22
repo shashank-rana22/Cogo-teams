@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMArrowRotateRight } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -27,7 +27,9 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 
 	const bucketControls = [
 		{
-			component: (
+			component: show ? (
+				<IcMArrowRotateDown onClick={() => setShow((prev) => !prev)} />
+			) : (
 				<IcMArrowRotateRight onClick={() => setShow((prev) => !prev)} />
 			),
 			flexBasis: '5%',

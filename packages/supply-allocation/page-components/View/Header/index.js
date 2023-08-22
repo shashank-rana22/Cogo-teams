@@ -38,9 +38,11 @@ function Header({ firstSearch, loading }) {
 	const [locationSearchId, setLocationSearchId] = useState('');
 	const { control, watch, reset } = useForm();
 	const { origin_location_id, destination_location_id } = watch();
+
 	const onClickBack = () => {
 		router.push('/supply-allocation');
 	};
+
 	const onClickSearch = () => {
 		router.push(`/supply-allocation/view/${locationSearchId}`);
 		reset();
@@ -62,6 +64,7 @@ function Header({ firstSearch, loading }) {
 			</div>
 		);
 	}
+
 	return !editMode ? (
 		<div
 			style={{
