@@ -10,22 +10,44 @@ function StepTwo({
 	id,
 	negotiationIds,
 	setNegotiationIds,
+	getOrganizationContract,
 }) {
 	const ZERO = 0;
 	const ONE = 1;
 	const [value, setValue] = useState(item?.variables_details?.[ZERO]?.updated_value);
-	const { updateOrganizationContract } = useUpdateOrganizationContract({ item, id, updatedValue: value });
+	const { updateOrganizationContract } = useUpdateOrganizationContract({
+		item,
+		id,
+		updatedValue: value,
+		getOrganizationContract,
+	});
 
 	return (
 		<div key={item}>
 			<div className={styles.box_layout}>
 				<div className={styles.term}>
-					<Checkbox
-						style={{ paddingLeft: '0px' }}
-						onChange={(e) => {
-							setNegotiationIds('skdjf');
-						}}
-					/>
+					{
+                    item?.state !== 'approved'
+					&& (
+						<Checkbox
+							style={{ paddingLeft: '0px' }}
+							onChange={(e) => {
+								if (e.target.checked) {
+									setNegotiationIds(
+										[...negotiationIds, item?.organization_contract_configuration_id],
+									);
+								} else {
+									setNegotiationIds(
+										(prev) => prev.filter(
+											(i) => i !== item?.organization_contract_configuration_id,
+										),
+									);
+								}
+							}}
+						/>
+					)
+
+                    }
 					<div>
 						Term
 						{' '}

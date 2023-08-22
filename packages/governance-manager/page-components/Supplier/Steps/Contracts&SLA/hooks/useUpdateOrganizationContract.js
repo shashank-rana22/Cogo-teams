@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-function useUpdateOrganizationContract({ item, id, updatedValue }) {
+function useUpdateOrganizationContract({ item, id, updatedValue, getOrganizationContract }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_contract',
@@ -17,6 +17,7 @@ function useUpdateOrganizationContract({ item, id, updatedValue }) {
 					state,
 				},
 			});
+			getOrganizationContract();
 		} catch (err) {
 			console.log(err);
 		}

@@ -99,6 +99,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
-
+	{
+		api          : 'send_organization_contract_for_renegotiation',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 export default apis;

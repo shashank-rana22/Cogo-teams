@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import StepOne from './ContractItem/StepOne';
 import StepTwo from './ContractItem/StepTwo';
@@ -10,18 +10,12 @@ import styles from './styles.module.css';
 
 function ContractSla({ organization_id, service_type }) {
 	const [step, setStep] = useState(1);
-	const { data, id } = useGetOrganizationContract({ organization_id, service_type, step });
+	const { data, id, getOrganizationContract } = useGetOrganizationContract({ organization_id, service_type, step });
 	const {
 		control,
 	} = useForm();
 
-	const [negotiationIds, setNegotiationids] = useState();
-
-	useEffect(() => {
-		console.log(negotiationIds, 'nego');
-	}, [negotiationIds]);
-
-	console.log(negotiationIds, 'nego');
+	const [negotiationIds, setNegotiationIds] = useState([]);
 
 	return (
 		<div className={styles.parent}>
@@ -44,7 +38,17 @@ function ContractSla({ organization_id, service_type }) {
 			</div>
 			{data?.map((item, index) => (
 				step === 1
-					? <StepOne key={item} item={item} index={index} control={control} step={step} id={id} />
+					? (
+						<StepOne
+							key={item}
+							item={item}
+							index={index}
+							control={control}
+							step={step}
+							id={id}
+							getOrganizationContract={getOrganizationContract}
+						/>
+					)
 					: (
 						<StepTwo
 							key={item}
@@ -54,11 +58,13 @@ function ContractSla({ organization_id, service_type }) {
 							step={step}
 							id={id}
 							negotiationIds={negotiationIds}
-							setNegotiationids={setNegotiationids}
+							setNegotiationIds={setNegotiationIds}
+							getOrganizationContract={getOrganizationContract}
 						/>
 					)
 
 			))}
+
 			{step === 1 ? (
 				<div className={styles.footer}>
 					{' '}

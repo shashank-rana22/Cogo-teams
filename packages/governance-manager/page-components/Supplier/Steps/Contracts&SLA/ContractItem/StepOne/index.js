@@ -5,11 +5,16 @@ import { useState } from 'react';
 import useUpdateOrganizationContract from '../../hooks/useUpdateOrganizationContract';
 import styles from '../../styles.module.css';
 
-function StepTwo({ item, index, id }) {
+function StepTwo({ item, index, id, getOrganizationContract }) {
 	const ZERO = 0;
 	const ONE = 1;
 	const [value, setValue] = useState(item?.variables_details?.[ZERO]?.updated_value);
-	const { updateOrganizationContract } = useUpdateOrganizationContract({ item, id, updatedValue: value });
+	const { updateOrganizationContract } = useUpdateOrganizationContract({
+		item,
+		id,
+		updatedValue: value,
+		getOrganizationContract,
+	});
 
 	return (
 		<div key={item}>
