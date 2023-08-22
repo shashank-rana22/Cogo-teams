@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const SECOND_INDEX = 2;
 
-const useGetColumns = ({ columnsToShow = [], t }) => {
+const useGetColumns = ({ columnsToShow = [], t = () => {} }) => {
 	const columns = [
 		{
 			Header   : t('athenaDashboard:shipment_record_id'),
