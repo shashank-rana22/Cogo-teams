@@ -26,7 +26,7 @@ const useCreateSupplySearch = ({
 	return {
 		data,
 		createSupplySearch,
-		loading,
+		createSearchLoadng: loading,
 	};
 };
 

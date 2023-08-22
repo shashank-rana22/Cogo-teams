@@ -1,7 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-
 import PieChart from '../../../../commons/PieChart';
 import {
 	CONTAINER_TYPE_DISTRIBUTION_COLORS,
@@ -40,10 +39,10 @@ const generateData = (data, type) => {
 					}),
 				);
 
-				label = `${startDate} to ${endDate} : ${value}`;
+				label = `${startDate} to ${endDate}`;
 				color = WEEKY_DISTRIBUTION_COLORS[index];
 			} else {
-				label = `${startCase(key)} ${value}`;
+				label = `${startCase(key)}`;
 				color = COLORS_MAPPING?.[type]?.[key];
 			}
 
@@ -62,6 +61,7 @@ const generateData = (data, type) => {
 					{
 						color,
 						label,
+						currCount: value,
 					},
 				],
 				count: count + value,
@@ -73,7 +73,6 @@ const generateData = (data, type) => {
 
 function GraphItem({ data = {}, type = '' }) {
 	const { graphData, count, legendsData } = generateData(data, type);
-	console.log('graphData:', graphData);
 
 	return (
 		<PieChart

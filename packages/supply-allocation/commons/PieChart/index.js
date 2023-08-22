@@ -1,5 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 
+import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const BORDER_COLOR_MODIFIERS = 0.2;
@@ -49,6 +50,15 @@ function PieChart({ data = [], count = 0, heading = '', legendsData }) {
 					from: 'color',
 					modifiers: [['darker', ARC_LABELS_TEXT_COLOR_MODIFIERS]],
 				}}
+				tooltip={({ datum: { label, value } }) => {
+					return (
+						<div className={styles.pie_tooltip_container}>
+							<div className={styles.text_pie}>
+								{startCase(label)} ({value} TEU)
+							</div>
+						</div>
+					);
+				}}
 			/>
 
 			{count ? (
@@ -65,9 +75,17 @@ function PieChart({ data = [], count = 0, heading = '', legendsData }) {
 					<div className={styles.count}>{count} TEU</div>
 				</div>
 			) : null}
-			<div style={{ marginTop: '100px', display: 'flex', flexWrap: 'wrap' }}>
+			<div
+				style={{
+					marginTop: '100px',
+					display: 'flex',
+					flexWrap: 'wrap',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
+			>
 				{legendsData.map((legend) => {
-					const { color, label } = legend;
+					const { color, label, currCount } = legend;
 					return (
 						<div
 							key={label}
@@ -86,7 +104,7 @@ function PieChart({ data = [], count = 0, heading = '', legendsData }) {
 									marginRight: '4px',
 								}}
 							/>
-							{label}
+							{label} ({currCount} TEU)
 						</div>
 					);
 				})}

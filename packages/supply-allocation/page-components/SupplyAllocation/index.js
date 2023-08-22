@@ -22,7 +22,7 @@ function SupplyAllocation() {
 
 	const { control, reset } = useForm({});
 
-	const { createSupplySearch } = useCreateSupplySearch({
+	const { createSupplySearch, createSearchLoadng } = useCreateSupplySearch({
 		refetchListFclSearches,
 		reset,
 		setLocationDetails,
@@ -40,6 +40,8 @@ function SupplyAllocation() {
 				setLocationDetails={setLocationDetails}
 				setFilters={setFilters}
 				setPagination={setPagination}
+				listLoading={loading}
+				createSearchLoadng={createSearchLoadng}
 			/>
 
 			<List

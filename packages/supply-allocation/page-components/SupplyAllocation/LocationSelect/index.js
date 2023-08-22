@@ -40,6 +40,8 @@ function LocationSelect({
 	setLocationDetails = () => {},
 	setFilters = () => {},
 	setPagination = () => {},
+	listLoading = false,
+	createSearchLoadng = false,
 }) {
 	const onClickAllocate = () => {
 		const payload = { ...locationDetails };
@@ -142,7 +144,12 @@ function LocationSelect({
 			</div>
 
 			<div className={styles.port_arrow_icon}>
-				<Button onClick={() => onClickAllocate()} themeType="accent">
+				<Button
+					onClick={() => onClickAllocate()}
+					themeType="accent"
+					disabled={listLoading}
+					loading={createSearchLoadng}
+				>
 					+ Allocation
 				</Button>
 			</div>

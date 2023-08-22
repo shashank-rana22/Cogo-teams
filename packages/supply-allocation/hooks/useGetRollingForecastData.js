@@ -20,7 +20,7 @@ const useGetRollingForecastData = (props) => {
 	return {
 		data,
 		getRollingForecastData,
-		loading,
+		graphDataLoading: loading,
 	};
 };
 
