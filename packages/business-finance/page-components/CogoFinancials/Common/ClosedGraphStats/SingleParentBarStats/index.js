@@ -6,6 +6,7 @@ import { LABEL_MAPPING } from '../../../constants';
 import { TourContext } from '../../Contexts';
 import RenderCardHeader from '../../RenderCardHeader';
 import SingleGraphCard from '../../SingleGraphCard';
+import { TOUR_COMMON_PROPS } from '../../tourCommonProps';
 import { BAR_GROUP_CHILDREN } from '../../tourSteps';
 
 import styles from './styles.module.css';
@@ -33,17 +34,15 @@ function SingleParentBarStats({
 	};
 	return (
 		<div className={styles.container}>
-			{!showShipmentList && (
+			{!showShipmentList && !serviceLevelLoading && (
 				<Tour
 					steps={BAR_GROUP_CHILDREN}
-					isOpen={tour && !serviceLevelLoading}
+					isOpen={tour && !serviceLevelLoading && !showShipmentList}
 					onRequestClose={() => {
 						setTour(false);
 						setIsTourInitial(true);
 					}}
-					maskClassName={styles.tour_mask}
-					startAt={0}
-					closeWithMask={false}
+					{...TOUR_COMMON_PROPS}
 				/>
 			)}
 			<div className={styles.header_combine}>

@@ -6,6 +6,7 @@ import React, { useContext } from 'react';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
+import { TOUR_COMMON_PROPS } from '../tourCommonProps';
 import { getSingleServiceSteps } from '../tourSteps';
 
 import getMappingCard from './getMappingCard';
@@ -71,9 +72,7 @@ function ServiceWiseStats({
 					onRequestClose={() => {
 						setTour(false);
 					}}
-					maskClassName={styles.tour_mask}
-					startAt={0}
-					closeWithMask={false}
+					{...TOUR_COMMON_PROPS}
 				/>
 			)}
 			<div className={styles.justifiy}>

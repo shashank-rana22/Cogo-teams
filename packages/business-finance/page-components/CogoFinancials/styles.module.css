@@ -76,7 +76,3 @@
 		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 	}
 }
-
-.tour_mask {
-	opacity: 0.4;
-}

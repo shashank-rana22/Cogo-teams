@@ -12,6 +12,7 @@ import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import { TourContext } from './Common/Contexts/index';
 import StatsCard from './Common/StatsCard';
+import { TOUR_COMMON_PROPS } from './Common/tourCommonProps';
 import { FINANCIAL_HOME_STEP, HOME_TOUR_STEPS } from './Common/tourSteps';
 import { getTimeRangeOptions, INFO_CONTENT } from './constants';
 import Filters from './Filters';
@@ -88,9 +89,7 @@ function CogoFinancials() {
 						setTour(false);
 						setIsTourInitial(true);
 					}}
-					maskClassName={styles.tour_mask}
-					startAt={0}
-					closeWithMask={false}
+					{...TOUR_COMMON_PROPS}
 				/>
 				<div className={styles.header}>
 					<div

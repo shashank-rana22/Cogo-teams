@@ -9,6 +9,7 @@ import { INFO_CONTENT, LABEL_MAPPING } from '../../constants';
 import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
+import { TOUR_COMMON_PROPS } from '../tourCommonProps';
 import { CLOSED_PARENT_SERVICES_STEPS } from '../tourSteps';
 
 import styles from './styles.module.css';
@@ -118,9 +119,7 @@ function SingleGraphCard({
 						setTour(false);
 						setIsTourInitial(true);
 					}}
-					maskClassName={styles.tour_mask}
-					startAt={0}
-					closeWithMask={false}
+					{...TOUR_COMMON_PROPS}
 				/>
 			)}
 			{!serviceLevelLoading && (
@@ -239,7 +238,6 @@ function SingleGraphCard({
 					</div>
 				)}
 			</div>
-
 		</div>
 	);
 }

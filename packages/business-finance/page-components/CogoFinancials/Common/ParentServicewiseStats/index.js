@@ -10,6 +10,7 @@ import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
 import ServiceWiseStats from '../ServicewiseStats';
+import { TOUR_COMMON_PROPS } from '../tourCommonProps';
 import { ONGOING_PARENT_SERVICES_STEPS } from '../tourSteps';
 
 import getCardData from './getCardData';
@@ -66,9 +67,7 @@ function ParentServicewiseStats({
 							steps={ONGOING_PARENT_SERVICES_STEPS}
 							isOpen={tour && isEmpty(activeService)}
 							onRequestClose={() => setTour(false)}
-							maskClassName={styles.tour_mask}
-							startAt={0}
-							closeWithMask={false}
+							{...TOUR_COMMON_PROPS}
 						/>
 					)}
 					<div className={styles.justifiy}>

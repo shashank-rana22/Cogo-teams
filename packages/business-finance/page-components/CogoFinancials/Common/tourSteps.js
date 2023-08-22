@@ -11,12 +11,12 @@ export const HOME_TOUR_STEPS = [
 		content  : 'Get details of ongoing shipments here.',
 	},
 	{
-		selector : '[data-tour="financially-closed-heading"]',
-		content  : 'Get details of financially closed shipments here.',
-	},
-	{
 		selector : '[data-tour="operationally-closed-heading"]',
 		content  : 'Get details of operationally closed shipments here.',
+	},
+	{
+		selector : '[data-tour="financially-closed-heading"]',
+		content  : 'Get details of financially closed shipments here.',
 	},
 	{
 		selector                 : '[data-tour="ongoing-card"]',
