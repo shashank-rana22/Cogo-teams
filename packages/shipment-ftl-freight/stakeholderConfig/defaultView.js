@@ -12,7 +12,8 @@ export default {
 	shipment_info : {},
 	default_tab   : 'overview',
 	overview      : {
-		tab_title: 'Overview',
+		tab_title            : 'Overview',
+		enable_consolidation : true,
 	},
 	cancel_shipment: {
 		can_cancel   : false,
