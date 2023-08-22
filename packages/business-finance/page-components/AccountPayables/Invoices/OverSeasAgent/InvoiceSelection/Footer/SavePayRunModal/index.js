@@ -3,7 +3,7 @@ import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useGetListSupplier from '../../../hooks/useGetListSupplier';
+import useGetListSupplier from '../../../../hooks/useGetListSupplier';
 
 import styles from './styles.module.css';
 

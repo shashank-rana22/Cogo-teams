@@ -35,20 +35,20 @@ export interface Props {
 	showId?: string;
 	RenderAccordianData?: any;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
-	viewId?:null;
-	renderDropDown?:Function;
+	// viewId?: null;
+	// renderDropDown?: Function;
 }
 
 function List({
 	config = { fields: [] },
 	sort = {},
-	setSort = () => {},
+	setSort = () => { },
 	itemData = {},
 	renderHeaderCheckbox = () => '',
 	functions = {},
 	loading = false,
 	page = 1,
-	handlePageChange = () => {},
+	handlePageChange = () => { },
 	pageSize = 10,
 	showPagination = true,
 	showId = '',
