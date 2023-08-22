@@ -158,6 +158,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 					<AddPrimaryPocModal
 						showPocModal={showPocModal}
 						setShowPocModal={setShowPocModal}
+						getShipmentsList={handlePageChange}
 					/>
 				) : null}
 		</>

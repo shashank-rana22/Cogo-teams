@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListOrganizationUsers from '../../hooks/useListOrganizationUsers';
+import useUpdateShipmentPrimaryPoc from '../../hooks/useUpdateShipmentPrimaryPoc';
 import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
@@ -13,6 +14,7 @@ const LOADER_COUNT = 4;
 function AddPrimaryPocModal({
 	showPocModal = {},
 	setShowPocModal = () => {},
+	getShipmentsList = () => {},
 }) {
 	const [selectedData, setSelectedData] = useState({});
 
@@ -26,7 +28,10 @@ function AddPrimaryPocModal({
 		endPoint       : 'list_organization_users',
 		filterKey      : 'organization_id',
 	});
-
+	const {
+		updatePrimaryPoc = () => {},
+		updateLoading = false,
+	} = useUpdateShipmentPrimaryPoc({ setShowPocModal, getShipmentsList });
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
 
 	const handleClose = () => {
@@ -101,7 +106,15 @@ function AddPrimaryPocModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button size="md" type="submit" disabled={isEmpty(selectedData)}>
+				<Button
+					size="md"
+					type="submit"
+					onClick={() => {
+						updatePrimaryPoc({ selectedData, showPocModal });
+					}}
+					loading={updateLoading}
+					disabled={isEmpty(selectedData)}
+				>
 					Add Primary Poc
 				</Button>
 			</Modal.Footer>

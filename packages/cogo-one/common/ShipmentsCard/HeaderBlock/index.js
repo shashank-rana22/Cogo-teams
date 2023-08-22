@@ -1,6 +1,6 @@
-import { Popover, ButtonGroup, cl } from '@cogoport/components';
+import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCopy, IcMAgentManagement } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
@@ -127,28 +127,44 @@ function HeaderBlock({
 			</div>
 
 			<div className={styles.icons_container}>
-				<IcMCopy
-					className={cl`${styles.copy_icon} 
-					${type !== 'all_shipments' ? styles.user_activity_copy_icon : ''}`}
-					onClick={(e) => {
-						e.stopPropagation();
-						handleCopyShipmentData({ shipmentItem });
-					}}
-				/>
 
-				{type === 'all_shipments' && (
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.message_reply}
-						height={25}
-						width={25}
-						alt="message"
-						className={styles.message_icon_styles}
+				{type === 'all_shipments' ? (
+					<Tooltip content="Poc's" placement="bottom">
+						<IcMAgentManagement
+							className={styles.poc_details}
+							onClick={(e) => {
+								e.stopPropagation();
+								setShowPocDetails(shipmentItem);
+							}}
+						/>
+					</Tooltip>
+				) : null}
+
+				<Tooltip content="Copy" placement="bottom">
+					<IcMCopy
+						className={styles.copy_icon}
 						onClick={(e) => {
 							e.stopPropagation();
-							setShowPocDetails(shipmentItem);
+							handleCopyShipmentData({ shipmentItem });
 						}}
 					/>
-				)}
+				</Tooltip>
+
+				{type === 'all_shipments' ? (
+					<Tooltip content="Shipment Chats" placement="bottom">
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.message_reply}
+							height={26}
+							width={26}
+							alt="message"
+							className={styles.message_icon_styles}
+							onClick={(e) => {
+								e.stopPropagation();
+								setShowPocDetails(shipmentItem);
+							}}
+						/>
+					</Tooltip>
+				) : null}
 
 				<Popover
 					placement="bottom-end"

@@ -15,7 +15,7 @@ const LAST_INDEX = 1;
 const getEachUserFormatedData = ({ userDetails = {} }) => {
 	const {
 		stakeholder_type = '', user = {}, id = '', name: pocName = '',
-		mobile_country_code: pocMobileCountryCode = '', processes = [], mobile_number = '', email = '',
+		mobile_country_code: pocMobileCountryCode = '', processes = [], mobile_number = '', email = '', trade_type = '',
 	} = userDetails;
 
 	const {
@@ -33,6 +33,7 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 		mobile_country_code : mobile_country_code || pocMobileCountryCode,
 		userId              : userId || id,
 		email               : userEmail || email,
+		trade_type,
 	};
 };
 
@@ -81,6 +82,7 @@ function PocUser({
 						mobile_country_code = '',
 						userId = '',
 						email = '',
+						trade_type,
 					} = getEachUserFormatedData({ userDetails });
 
 					const lessList = (stakeholder_type || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
@@ -98,6 +100,9 @@ function PocUser({
 								</div>
 
 								<div className={styles.user_work_scope}>
+									<div className={styles.trade_type}>
+										{startCase(trade_type)}
+									</div>
 									{(lessList || []).map((item, index) => (
 										<div className={styles.scope_name} key={item}>
 											{startCase(item)}

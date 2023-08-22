@@ -72,3 +72,9 @@
 	margin: 0 2px;
 	font-size: 10px;
 }
+
+.trade_type {
+	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 600;
+}
