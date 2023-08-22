@@ -18,6 +18,12 @@
 .button_container {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_button_container {
+			height: 24px !important;
+		}
+	}
 }
 
 .count {

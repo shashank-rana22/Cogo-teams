@@ -14,7 +14,6 @@ import ICONS_MAPPING from '../../icons-mapping';
 import styles from './styles.module.css';
 
 const INITIAL_REDUCE_VALUE = 0;
-
 const DEFAULT_PRICE_VALUE = 0;
 
 const formatPrice = (currency, amount) => formatAmount({
@@ -213,7 +212,6 @@ function ListItem({
 			disabled={loading}
 			className={cl`${styles.service} ${isSelected ? styles.active : null}`}
 		>
-
 			<div className={styles.service_div}>
 				<span className={styles.icon}>{ICONS_MAPPING[service_type]}</span>
 

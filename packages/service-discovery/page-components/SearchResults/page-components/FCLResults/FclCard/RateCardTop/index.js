@@ -150,13 +150,25 @@ function RateCardTop({
 					showPopover={showPopover}
 				/>
 
-				{imageUrl ? (
-					<img
-						src={imageUrl}
-						alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
-						style={{ height: 24, objectFit: 'cover' }}
-					/>
-				) : <strong>{rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}</strong>}
+				<div
+					className={styles.shipping_line_info}
+					style={{ marginLeft: isSelectedCard ? '12px' : '0px' }}
+				>
+					{imageUrl ? (
+						<img
+							src={imageUrl}
+							alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
+							className={styles.shipping_line_logo}
+							height={28}
+						/>
+					) : null}
+
+					{source !== 'cogo_assured_rate' ? (
+						<strong className={styles.shipping_line_name}>
+							{rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
+						</strong>
+					) : null}
+				</div>
 			</div>
 
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>

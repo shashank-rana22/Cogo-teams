@@ -1,6 +1,7 @@
-import { Accordion } from '@cogoport/components';
+import { Accordion, Popover } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 
+import InfoBannerContent from '../../../../../../../../common/InfoBannerContent';
 import AdditionalServicesComponent from '../../../../../../../../common/OtherServices/AdditionalServices';
 import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';
 
@@ -24,6 +25,10 @@ function AdditionalServices({
 	possible_subsidiary_services = [],
 	loading = false,
 	servicesLength = 0,
+	infoBanner = {},
+	setInfoBanner = () => {},
+	nextGuide = 'proceed_button',
+	prevGuide = 'add_or_edit_margin',
 }) {
 	const { services, id, ...restDetails } = detail;
 
@@ -35,12 +40,33 @@ function AdditionalServices({
 
 	const rateCardData = { ...rate, service_rates: serviceRates, service_type: restDetails.primary_service };
 
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
+
 	return (
 		<Accordion
 			className={styles.accordion}
+			id="additional_services"
 			type="form"
 			isOpen={servicesLength < MAX_SERVICES_LENGTH}
-			title="Looking for additional services?"
+			title={(
+				<Popover
+					placement="bottom"
+					caret
+					visible={current === 'additional_services'}
+					render={(
+						<InfoBannerContent
+							popoverComponentData={buttonProps.additional_services || {}}
+							totalBanners={totalBanners}
+							setInfoBanner={setInfoBanner}
+							guideKey="edit_margin_guide_completed_for"
+							nextGuide={nextGuide}
+							prevGuide={prevGuide}
+						/>
+					)}
+				>
+					Looking for additional services?
+				</Popover>
+			)}
 			animate
 		>
 			<AdditionalServicesComponent

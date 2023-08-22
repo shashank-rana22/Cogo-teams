@@ -105,9 +105,7 @@ function ModalContent({
 					errors={errors}
 					setValue={setValue}
 				/>
-
 			</div>
-
 		</div>
 	);
 }

@@ -8,45 +8,72 @@ function DeleteServiceModal({
 	service = {},
 	loading = false,
 	onClick = () => {},
-	...rest
+	cancelText = 'Cancel',
+	deleteText = 'Delete',
+	title = '',
+	service_name = '',
+	modalSize = 'sm',
 }) {
+	const handleCancel = (event) => {
+		event.stopPropagation();
+		setShow(false);
+	};
+
+	const handleDelete = async (event) => {
+		event.stopPropagation();
+		event.preventDefault();
+
+		const deleted = await onClick();
+
+		if (deleted) {
+			setShow(false);
+		}
+	};
+
+	const BUTTONS_MAPPING = {
+		cancel: {
+			themeType : 'secondary',
+			onClick   : handleCancel,
+			style     : {},
+			disabled  : loading,
+			label     : cancelText,
+		},
+		delete: {
+			themeType : 'primary',
+			style     : { marginLeft: 12 },
+			onClick   : handleDelete,
+			loading,
+			label     : deleteText,
+		},
+	};
+
 	return (
 		<Modal
-			size={rest.size || 'sm'}
+			size={modalSize}
 			show={show}
 			showCloseIcon={false}
 			onClose={() => setShow(false)}
 			closeOnOuterClick={false}
 		>
-			<Modal.Header title={rest.title ? rest.title : `Are you sure you want to delete 
-			${startCase(rest.service_name || service.label || service.name)} ?`}
+			<Modal.Header title={title || `Are you sure you want to delete 
+			${startCase(service_name || service.label || service.name)} ?`}
 			/>
 
 			<Modal.Footer>
-				<Button
-					type="button"
-					themeType="secondary"
-					onClick={(event) => { event.stopPropagation(); setShow(false); }}
-					disabled={loading}
-				>
-					{rest.cancelText || 'Cancel'}
-				</Button>
+				{Object.entries(BUTTONS_MAPPING).map(([key, buttonObj]) => {
+					const { label = '', ...rest } = buttonObj;
 
-				<Button
-					type="button"
-					style={{ marginLeft: 12 }}
-					themeType="primary"
-					disabled={loading}
-					loading={loading}
-					onClick={async (event) => {
-						event.stopPropagation();
-						event.preventDefault();
-						const done = await onClick();
-						if (done) { setShow(false); }
-					}}
-				>
-					{rest.deleteText || 'Delete'}
-				</Button>
+					return (
+						<Button
+							key={key}
+							type="button"
+							id={`$delete_service_modal_${key}_button`}
+							{...rest}
+						>
+							{label}
+						</Button>
+					);
+				})}
 			</Modal.Footer>
 		</Modal>
 	);

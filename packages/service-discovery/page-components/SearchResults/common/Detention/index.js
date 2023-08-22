@@ -1,5 +1,6 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button, Toast, ButtonIcon } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
+import { IcMCross } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
 import useRemoveDetentionDumurrage from '../../hooks/useRemoveDetentionDemurrage';
@@ -105,6 +106,14 @@ function Detention({
 
 	return (
 		<div className={styles.container}>
+			<ButtonIcon
+				className={styles.close_button}
+				size="md"
+				icon={<IcMCross />}
+				themeType="primary"
+				onClick={() => setShow(false)}
+			/>
+
 			{rest.heading ? (
 				<strong className={styles.heading}>{rest.heading}</strong>
 			) : null}
@@ -130,6 +139,8 @@ function Detention({
 					/>
 				) : null}
 			</div>
+
+			<p className={styles.info}>*Some shipping lines don’t provide additional free days.</p>
 
 			<div className={styles.button_container}>
 				{showReset ? (
