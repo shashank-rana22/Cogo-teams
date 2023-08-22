@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const OBJECT_OPTIONS = {
 	all                : 'All Regions',
-	is_bookmarked      : 'Your Favorites',
+	is_bookmarked      : 'BookMarked',
 	attention_required : 'Attention Required',
 };
 
@@ -52,7 +52,7 @@ function LocationSelect({
 		<div className={styles.location_container}>
 
 			<div className={styles.select_controller}>
-				<div className={styles.location_label}>Origin Port</div>
+				<div className={styles.location_label}>Origin </div>
 				<AsyncSelectController
 					name="origin_location_id"
 					control={control}
@@ -82,7 +82,7 @@ function LocationSelect({
 			</div>
 
 			<div className={styles.select_controller}>
-				<div className={styles.location_label}>Destination Port</div>
+				<div className={styles.location_label}>Destination </div>
 				<AsyncSelectController
 					name="destination_location_id"
 					control={control}
@@ -109,6 +109,18 @@ function LocationSelect({
 					defaultValue={region}
 					onChange={({ selectedValue }) => {
 						setRegion(selectedValue);
+						setFilters((prev) => {
+							const filterValues = {
+								is_bookmarked      : { is_bookmarked: true, is_attention_required: undefined },
+								attention_required : { is_bookmarked: undefined, is_attention_required: true },
+								all                : { is_bookmarked: undefined, is_attention_required: undefined },
+							};
+
+							return {
+								...prev,
+								...(filterValues[selectedValue] || {}),
+							};
+						});
 					}}
 					size="sm"
 					options={OBJECT_OPTIONS}

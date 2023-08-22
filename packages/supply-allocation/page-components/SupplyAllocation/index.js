@@ -37,6 +37,7 @@ function SupplyAllocation() {
 				pagination={pagination}
 				loading={loading}
 				setPagination={setPagination}
+				setFilters={setFilters}
 			/>
 
 		</>
