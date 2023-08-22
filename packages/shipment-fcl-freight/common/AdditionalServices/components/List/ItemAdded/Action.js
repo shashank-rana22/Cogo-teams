@@ -3,17 +3,14 @@ import React from 'react';
 
 import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
-const actions = ({
+function Action({
 	status = {},
 	serviceListItem,
-	addRate,
 	setShowModal = () => {},
 	setItem = () => {},
 	activeStakeholder = '',
 	canEditCancelService = false,
-}) => {
-	const isSameItem = serviceListItem.id === addRate?.item?.id;
-
+}) {
 	const onClickSetItem = () => setItem({ serviceListItem, status });
 
 	if (['quoted_by_service_provider', 'price_recieved'].includes(status.status)) {
@@ -23,7 +20,7 @@ const actions = ({
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => setShowModal('add_sell_price')}
 			>
-				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
+				ADD SELL PRICE
 			</Button>
 		);
 	}
@@ -40,7 +37,7 @@ const actions = ({
 					setShowModal('add_sell_price');
 				}}
 			>
-				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
+				REVIEW PRICE
 			</Button>
 		);
 	}
@@ -59,7 +56,9 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
+		status.status === 'amendment_requested_by_importer_exporter'
+		&& ['booking_agent',
+			'booking_agent_manager', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
 	) {
 		return (
 			<Button
@@ -88,12 +87,12 @@ const actions = ({
 					setShowModal('ip');
 				}}
 			>
-				{ isSameItem ? 'CLOSE' : 'ADD IP'}
+				ADD IP
 			</Button>
 		);
 	}
 
 	return false;
-};
+}
 
-export default actions;
+export default Action;

@@ -122,7 +122,12 @@ const useCheckChannelPartner = ({
 	});
 
 	return {
-		openNewTab, loading, disableQuickActions, hideCpButton, getOrgDetails,
+		openNewTab,
+		loading,
+		disableQuickActions,
+		hideCpButton,
+		getOrgDetails,
+		organizationData: data?.data || {},
 	};
 };
 export default useCheckChannelPartner;
