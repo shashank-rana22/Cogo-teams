@@ -80,7 +80,7 @@ export const getFormatPrefillValues = ({ data = {}, invoice = {} }) => {
 		converted_case = '',
 		lr_numbers = [],
 	} = detail;
-	const basLineItem = line_items.find((item) => item?.code === BAS_CODE) || {};
+	const basLineItem = line_items?.find((item) => item?.code === BAS_CODE) || {};
 	const { price_discounted: bas_rate = DEFAULT_VALUE, quantity: invoiceQuantity = DEFAULT_VALUE } = basLineItem;
 
 	const obj = {

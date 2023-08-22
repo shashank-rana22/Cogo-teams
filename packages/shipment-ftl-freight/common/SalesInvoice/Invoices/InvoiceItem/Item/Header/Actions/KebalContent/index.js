@@ -2,7 +2,7 @@ import ClickableDiv from '../../../../../../../ClickableDiv';
 
 import styles from './styles.module.css';
 
-const CUSTOMER_INVOICE_STATUSES = ['reviewed', 'approved', 'pending'];
+const CUSTOMER_INVOICE_STATUSES = ['reviewed', 'approved'];
 
 function KebabContent({
 	handleSetter = () => {},

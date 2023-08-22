@@ -6,13 +6,12 @@ import { isEmpty } from '@cogoport/utils';
 import {
 	BUSINESS_TO_SERVICE_DESCRIPTION,
 	DEFAULT_BANK_DETAILS,
-	PAN_TO_CIN,
-	PAN_TO_SERVICE_DESCRIPTION,
-	PAN_TO_BANK_DETAILS,
+	PAN_TO_CIN_MAPPING,
+	PAN_TO_SERVICE_DESCRIPTION_MAPPING,
+	PAN_TO_BANK_DETAILS_MAPPING,
 	getFortigoDetails,
 } from '../utils/serviceDescriptionMappings';
 
-const FORTIGO_BRANCH_CITY = 'Bangalore';
 const SINGLE_VALUE = 1;
 
 const useGetBillingAddress = ({
@@ -30,20 +29,20 @@ const useGetBillingAddress = ({
 		CUSTOMER_TO_CIN = {},
 	} = getFortigoDetails();
 
-	const supportedEntities = Object.values(ENTITY_FEATURE_MAPPING).filter(
+	const supportedEntities = Object.keys(ENTITY_FEATURE_MAPPING).filter(
 		(item) => item?.feature_supported?.includes('ftl_customer_invoice'),
 	);
 
 	const {
-		cogoport_ftl_collections,
-		cogoport_support,
-	} = GLOBAL_CONSTANTS.emails;
+		cogoport_ftl_collections = '',
+		cogoport_support = '',
+	} = GLOBAL_CONSTANTS.emails || {};
 
-	const { fortigo_support, fortigo_collections } = GLOBAL_CONSTANTS?.others?.fortigo_details?.emails || {};
+	const { fortigo_support = '', fortigo_collections = '' } = GLOBAL_CONSTANTS?.others?.fortigo_details?.emails || {};
 
-	const { fortigo, cogoport } = GLOBAL_CONSTANTS.websites || {};
+	const { fortigo = '', cogoport = '' } = GLOBAL_CONSTANTS.websites || {};
 
-	if (geo.uuid.fortigo_network_ids.includes(importerExporterId)) {
+	if (geo.uuid.fortigo_network_ids?.includes(importerExporterId)) {
 		return {
 			billing_address: {
 				...initBillingAddress,
@@ -52,7 +51,7 @@ const useGetBillingAddress = ({
 				website                 : fortigo,
 				service_description     : CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId],
 				payment_email           : fortigo_collections,
-				branch_city             : FORTIGO_BRANCH_CITY,
+				branch_city             : GLOBAL_CONSTANTS?.others?.fortigo_details?.fortigo_branch_city,
 				is_required_for_fortigo : true,
 				bank_details            : CUSTOMER_TO_BANK_DETAILS[importerExporterId],
 			},
@@ -60,23 +59,23 @@ const useGetBillingAddress = ({
 	}
 
 	if (
-		Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings).includes(
+		Object.values(GLOBAL_CONSTANTS.others?.fortigo_details?.fortigo_company_pan_mappings).includes(
 			initBillingAddress?.registration_number,
 		)
 	) {
 		return {
 			billing_address: {
 				...initBillingAddress,
-				cin: PAN_TO_CIN[initBillingAddress?.registration_number],
+				cin: PAN_TO_CIN_MAPPING[initBillingAddress?.registration_number],
 				service_description:
-					PAN_TO_SERVICE_DESCRIPTION[initBillingAddress?.registration_number],
+					PAN_TO_SERVICE_DESCRIPTION_MAPPING[initBillingAddress?.registration_number],
 				email                   : fortigo_support,
 				website                 : fortigo,
 				payment_email           : fortigo_collections,
-				branch_city             : FORTIGO_BRANCH_CITY,
+				branch_city             : GLOBAL_CONSTANTS?.others?.fortigo_details?.fortigo_branch_city,
 				is_required_for_fortigo : true,
 				bank_details:
-					PAN_TO_BANK_DETAILS[initBillingAddress?.registration_number],
+					PAN_TO_BANK_DETAILS_MAPPING[initBillingAddress?.registration_number],
 			},
 		};
 	}
@@ -86,7 +85,7 @@ const useGetBillingAddress = ({
 			customData?.cogo_entity_address_id,
 			customData?.business_mode].every((ele) => !isEmpty(ele))
 	) {
-		const entity =	entityList.find((item) => item?.id === customData?.cogo_entity_id) || {};
+		const entity =	entityList?.find((item) => item?.id === customData?.cogo_entity_id) || {};
 		const entityAddress = entity?.addresses?.find(
 			(item) => item?.id === customData?.cogo_entity_address_id,
 		) || {};
@@ -113,7 +112,8 @@ const useGetBillingAddress = ({
 	}
 
 	if (supportedEntities?.length === SINGLE_VALUE) {
-		const cogo_entity_id = supportedEntities[GLOBAL_CONSTANTS.zeroth_index]?.id;
+		const entityKey = supportedEntities[GLOBAL_CONSTANTS.zeroth_index] || '';
+		const cogo_entity_id = GLOBAL_CONSTANTS.cogoport_entities?.[entityKey]?.id || '';
 		const entity = entityList?.find((item) => item?.id === cogo_entity_id) || {};
 		let entityAddress =	 {};
 		let taxMechanism = '';

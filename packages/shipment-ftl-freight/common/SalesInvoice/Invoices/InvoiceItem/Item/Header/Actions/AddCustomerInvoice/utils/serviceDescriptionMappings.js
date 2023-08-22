@@ -58,26 +58,26 @@ export const getFortigoDetails = () => {
 	};
 };
 
-export const PAN_TO_SERVICE_DESCRIPTION = {
+export const PAN_TO_SERVICE_DESCRIPTION_MAPPING = {
 	[fortigo_company_pan_mappings.fortigo_network_logistics]:
 		'Goods Transport Agency - FCM',
 	[fortigo_company_pan_mappings.fortigo_transport_agency]:
 		'Goods Transport Agency - RCM',
 };
 
-export const PAN_TO_CIN = {
+export const PAN_TO_CIN_MAPPING = {
 	[fortigo_company_pan_mappings.fortigo_network_logistics]:
 		fortigo_cin_mappings.fortigo_network_logistics,
 	[fortigo_company_pan_mappings.fortigo_transport_agency]:
 		fortigo_cin_mappings.fortigo_transport_agency,
 };
 
-export const PAN_TAX_PAYABLE_RCM = {
+export const PAN_TAX_PAYABLE_RCM_MAPPING = {
 	[fortigo_company_pan_mappings.fortigo_network_logistics] : 'No',
 	[fortigo_company_pan_mappings.fortigo_transport_agency]  : 'Yes',
 };
 
-export const PAN_TO_BANK_DETAILS = {
+export const PAN_TO_BANK_DETAILS_MAPPING = {
 	[fortigo_company_pan_mappings.fortigo_network_logistics]: {
 		bank_name      : 'Axis Bank',
 		bank_branch    : 'Corporate Banking Branch',

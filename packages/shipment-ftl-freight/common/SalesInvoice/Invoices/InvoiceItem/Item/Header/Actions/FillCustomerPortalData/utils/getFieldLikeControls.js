@@ -16,8 +16,8 @@ function getFieldLikeControls({
 	isFortigoCustomer = true,
 	isFortigoInvoicingParty = true,
 }) {
-	const supportedEntities = Object.values(ENTITY_FEATURE_MAPPING).filter(
-		(item) => item.feature_supported.includes('ftl_customer_invoice'),
+	const supportedEntities = Object.keys(ENTITY_FEATURE_MAPPING).filter(
+		(item) => item?.feature_supported?.includes('ftl_customer_invoice'),
 	);
 
 	const updatedControls = controls.map((controlObj) => {
@@ -112,7 +112,8 @@ function getFieldLikeControls({
 				return {
 					...controlObj,
 					onChange: (_, obj) => {
-						const entityId = supportedEntities[GLOBAL_CONSTANTS.zeroth_index]?.id;
+						const entityKey = supportedEntities?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+						const entityId = GLOBAL_CONSTANTS.cogoport_entities?.[entityKey]?.id || '';
 						const entityObj = entityList.find((item) => item?.id === entityId) || {};
 						let reqAddress = {};
 						if (obj?.value === 'fcm') {

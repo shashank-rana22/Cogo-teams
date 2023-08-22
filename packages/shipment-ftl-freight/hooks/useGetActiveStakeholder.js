@@ -3,9 +3,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-const geo = getGeoConstants();
-
 const useGetActiveStakeholder = () => {
+	const geo = getGeoConstants();
+
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 
 	const stakeholderMap = [

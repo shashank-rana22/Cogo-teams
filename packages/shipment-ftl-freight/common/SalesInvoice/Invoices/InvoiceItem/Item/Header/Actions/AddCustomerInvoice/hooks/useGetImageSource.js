@@ -28,7 +28,7 @@ const getFinalUrls = ({
 	const { billing_address = {} } = invoice || {};
 
 	if (
-		geo.uuid.fortigo_network_ids.includes(importerExporterId)
+		geo.uuid.fortigo_network_ids?.includes(importerExporterId)
 		|| Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings).includes(
 			billing_address?.registration_number,
 		)

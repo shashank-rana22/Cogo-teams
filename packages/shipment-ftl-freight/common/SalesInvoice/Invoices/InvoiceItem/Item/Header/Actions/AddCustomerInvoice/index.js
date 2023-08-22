@@ -12,7 +12,7 @@ import UploadProof from './UploadProof';
 import { getPayload } from './utils/getPayload';
 import { INVOICE_SOURCES } from './utils/serviceDescriptionMappings';
 
-const INVOICE_STATUS_REVIEWED = ['reviewed', 'approved', 'pending'];
+const INVOICE_STATUS_REVIEWED = ['reviewed', 'approved'];
 
 function AddCustomerInvoice({
 	handleRefetch = () => {},

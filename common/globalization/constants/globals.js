@@ -582,6 +582,7 @@ const GLOBAL_CONSTANTS = {
 				fortigo_collections : 'collection@4tigo.com',
 				fortigo_support     : 'info@4tigo.com',
 			},
+			fortigo_branch_city: 'Bangalore',
 		},
 		cogo_mumbai_gst           : '27AAICC8838P1ZR',
 		ftl_customer_pan_mappings : {
