@@ -1,10 +1,10 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import { LOGO_URL } from '../../constants';
+import MESSAGE_STATUS_ICON_MAPPING from '../../constants/messageStatusIconMapping';
 import MessageBody from '../MessageBody';
 import MessageTags from '../MessageTags';
 
@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 
 function SentDiv({
 	eachMessage = {},
-	messageStatus = false,
 }) {
 	const {
 		message_type = 'text',
@@ -21,7 +20,7 @@ function SentDiv({
 		response,
 		send_by = '',
 		session_type = 'bot',
-		message_status = '',
+		message_status = 'sent',
 	} = eachMessage;
 
 	const date = created_at && formatDate({
@@ -34,6 +33,8 @@ function SentDiv({
 	const adminStyles = !!(send_by || session_type === 'admin') || false;
 
 	const hasTags = !isEmpty(response?.tags);
+
+	const statusIcon = MESSAGE_STATUS_ICON_MAPPING[message_status] || null;
 
 	return (
 		<div className={styles.container}>
@@ -55,13 +56,11 @@ function SentDiv({
 						<MessageBody
 							response={response}
 							message_type={message_type}
-							message_status={message_status}
 						/>
 						<div
 							className={styles.message_tick_container}
 						>
-							{((message_status === 'seen') || messageStatus
-								? <IcMDoubleTick fill="#0000FF" /> : <IcMTick />)}
+							{statusIcon || null}
 						</div>
 
 					</div>
