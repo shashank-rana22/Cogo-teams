@@ -3,7 +3,14 @@ import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 
-function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInfoBanner = () => {} }) {
+function InfoBannerContent({
+	popoverComponentData = {},
+	totalBanners = 1,
+	setInfoBanner = () => {},
+	guideKey = 'guide_completed_for',
+	nextGuide = 'comparision_button',
+	prevGuide = 'edit_button',
+}) {
 	const { user:{ id } } = useSelector(({ profile }) => ({
 		user: profile.user,
 	}));
@@ -16,22 +23,21 @@ function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInf
 		subText = '',
 	} = popoverComponentData;
 
-	const onButtonClick = ({ name }) => {
-		if (name === 'close' && totalBanners === sequence_number) {
-			localStorage.setItem(`guide_completed_for_${id}`, true);
-		}
-
+	const onButtonClick = ({ name, onclickFunction = () => {}, event }) => {
 		if (name === 'close') {
 			setInfoBanner((prev) => ({ ...prev, current: '' }));
+			localStorage.setItem(`${guideKey}_${id}`, true);
 			return;
 		}
 
 		if (name === 'next') {
-			setInfoBanner((prev) => ({ ...prev, current: 'comparision_button' }));
+			onclickFunction(event);
+			setInfoBanner((prev) => ({ ...prev, current: nextGuide }));
 			return;
 		}
 
-		setInfoBanner((prev) => ({ ...prev, current: 'edit_button' }));
+		onclickFunction(event);
+		setInfoBanner((prev) => ({ ...prev, current: prevGuide }));
 	};
 
 	return (
@@ -53,10 +59,14 @@ function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInf
 
 				<div className={styles.button_container}>
 					{buttons.map((item) => {
-						const { label, name, ...restProps } = item;
+						const { label, name, onclickFunction, ...restProps } = item;
 
 						return (
-							<Button key={name} {...restProps} onClick={() => onButtonClick({ name })}>
+							<Button
+								key={name}
+								{...restProps}
+								onClick={(event) => onButtonClick({ name, onclickFunction, event })}
+							>
 								{label}
 							</Button>
 						);
