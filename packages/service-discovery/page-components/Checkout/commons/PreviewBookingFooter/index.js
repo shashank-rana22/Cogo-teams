@@ -1,10 +1,11 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button, Popover, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useRef, useEffect, useContext } from 'react';
 
+import InfoBannerContent from '../../../../common/InfoBannerContent';
 import { CheckoutContext } from '../../context';
 import handleTimer from '../../utils/handleTimer';
 
@@ -32,6 +33,8 @@ function PreviewBookingFooter({
 	agreeTandC = false,
 	cargoDetails = {},
 	formProps = {},
+	setInfoBanner = () => {},
+	infoBanner = {},
 }) {
 	const { push } = useRouter();
 
@@ -45,6 +48,8 @@ function PreviewBookingFooter({
 		primary_service = '',
 		services = {},
 	} = detail;
+
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
 	const { getValues, handleSubmit } = formProps;
 
@@ -199,7 +204,7 @@ function PreviewBookingFooter({
 	}, [hasExpired, validity_end]);
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} id="proceed_button">
 			<div className={styles.validity_time}>
 				{!hasExpired ? (
 					<div className={styles.flex}>
@@ -223,21 +228,37 @@ function PreviewBookingFooter({
 				</span>
 			</div>
 
-			<div className={styles.button_container}>
-				{MAPPING.map((item) => {
-					const { key, label, ...restProps } = item;
+			<Popover
+				placement="bottom"
+				caret
+				visible={current === 'proceed_button'}
+				className={styles.popover_container}
+				render={(
+					<InfoBannerContent
+						popoverComponentData={buttonProps.proceed_button || {}}
+						totalBanners={totalBanners}
+						setInfoBanner={setInfoBanner}
+						guideKey="preview_booking_guide_completed_for"
+						prevGuide="additional_services"
+					/>
+				)}
+			>
+				<div className={styles.button_container}>
+					{MAPPING.map((item) => {
+						const { key, label, ...restProps } = item;
 
-					if (hasExpired) {
-						return null;
-					}
+						if (hasExpired) {
+							return null;
+						}
 
-					return (
-						<Button key={key} {...restProps}>
-							{label}
-						</Button>
-					);
-				})}
-			</div>
+						return (
+							<Button key={key} {...restProps}>
+								{label}
+							</Button>
+						);
+					})}
+				</div>
+			</Popover>
 		</div>
 	);
 }

@@ -5,6 +5,18 @@
 	margin-top: 32px;
 	background-color: #fffce6;
 	border-radius: 8px;
+
+	:global {
+		.ui_popover_container {
+			max-width: 300px !important;
+			background-color: #fef199;
+			box-shadow: 0 0 9px 0 #f2f3fab2;
+		}
+
+		.tippy-arrow::before {
+			border-bottom-color: #fef199 !important;
+		}
+	}
 }
 
 .validity_time {

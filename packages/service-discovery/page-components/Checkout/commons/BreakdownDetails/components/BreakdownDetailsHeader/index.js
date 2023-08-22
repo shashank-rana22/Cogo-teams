@@ -1,7 +1,8 @@
-import { Button } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useContext, useState, useEffect, useMemo, useCallback } from 'react';
 
+import InfoBannerContent from '../../../../../../common/InfoBannerContent';
 import canSeeMargin from '../../../../../../helpers/canSeeMargin';
 import useGetPermission from '../../../../../../helpers/useGetPermission';
 import { CheckoutContext } from '../../../../context';
@@ -20,6 +21,8 @@ function BreakdownDetailsHeader({
 	disableForm = false,
 	resetMargins = () => {},
 	rateDetails = [],
+	infoBanner = {},
+	setInfoBanner = () => {},
 }) {
 	const { rate = {}, conversions = {} } = useContext(CheckoutContext);
 
@@ -153,10 +156,27 @@ function BreakdownDetailsHeader({
 		rate?.total_price_currency,
 	]);
 
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
+
 	return (
-		<div className={styles.header}>
+		<div className={styles.header} id="add_or_edit_margin">
 			{!disableForm ? (
-				<div className={styles.heading}>Add or Edit Margin</div>
+				<Popover
+					placement="bottom"
+					caret
+					visible={current === 'add_or_edit_margin'}
+					render={(
+						<InfoBannerContent
+							popoverComponentData={buttonProps.add_or_edit_margin || {}}
+							totalBanners={totalBanners}
+							setInfoBanner={setInfoBanner}
+							guideKey="edit_margin_guide_completed_for"
+							nextGuide="additional_services"
+						/>
+					)}
+				>
+					<div className={styles.heading}>Add or Edit Margin</div>
+				</Popover>
 			) : null}
 
 			<ProfitOutlook

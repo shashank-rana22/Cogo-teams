@@ -21,12 +21,16 @@ function ActiveComponent({
 	search_id = '',
 	updateLoading = false,
 	source = '',
+	setInfoBanner = () => {},
+	infoBanner = {},
 }) {
 	if (source === 'cogo_assured_rate') {
 		return (
 			<UnpreferredShippingLines
 				formProps={formProps}
 				primaryService={primaryService}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
 			/>
 		);
 	}
@@ -37,6 +41,8 @@ function ActiveComponent({
 			primaryService={primaryService}
 			search_id={search_id}
 			updateLoading={updateLoading}
+			infoBanner={infoBanner}
+			setInfoBanner={setInfoBanner}
 		/>
 	);
 }
@@ -47,6 +53,8 @@ function AdditionalContent({
 	agreeTandC = false,
 	setAgreeTandC = () => {},
 	formProps = {},
+	setInfoBanner = () => {},
+	infoBanner = {},
 }) {
 	const {
 		rate,
@@ -75,6 +83,8 @@ function AdditionalContent({
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
 				primaryService={primaryService}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
 			/>
 
 			<ActiveComponent
@@ -83,6 +93,8 @@ function AdditionalContent({
 				search_id={search_id}
 				updateLoading={updateLoading}
 				source={source}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
 			/>
 
 			<AdditionalServices
@@ -94,6 +106,10 @@ function AdditionalContent({
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
 				servicesLength={Object.values(services).length}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
+				nextGuide="proceed_button"
+				prevGuide="shipping_preferences"
 			/>
 
 			<BookingContent
@@ -149,6 +165,8 @@ function AdditionalContent({
 				agreeTandC={agreeTandC}
 				cargoDetails={cargoDetails}
 				formProps={formProps}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
 			/>
 		</div>
 	);

@@ -1,11 +1,16 @@
+import { Popover } from '@cogoport/components';
 import { AsyncSelectController, ChipsController } from '@cogoport/forms';
 import { useEffect } from 'react';
+
+import InfoBannerContent from '../../../../../../../../common/InfoBannerContent';
 
 import styles from './styles.module.css';
 
 function UnpreferredShippingLines({
 	formProps = {},
 	primaryService = {},
+	setInfoBanner = () => {},
+	infoBanner = {},
 }) {
 	const {
 		control,
@@ -14,6 +19,8 @@ function UnpreferredShippingLines({
 	} = formProps;
 
 	const { shipping_preferences = {} } = primaryService;
+
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
 	useEffect(() => {
 		const {
@@ -24,8 +31,24 @@ function UnpreferredShippingLines({
 	}, [setValue, shipping_preferences]);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>Unpreferred shipping lines</div>
+		<div className={styles.container} id="shipping_preferences">
+			<Popover
+				placement="bottom"
+				caret
+				visible={current === 'shipping_preferences'}
+				render={(
+					<InfoBannerContent
+						popoverComponentData={buttonProps.shipping_preferences || {}}
+						totalBanners={totalBanners}
+						setInfoBanner={setInfoBanner}
+						guideKey="preview_booking_guide_completed_for"
+						nextGuide="additional_services"
+						prevGuide="cargo_details"
+					/>
+				)}
+			>
+				<div className={styles.header}>Unpreferred shipping lines</div>
+			</Popover>
 
 			<div className={styles.text}>
 				Unpreferred shipping lines will not be considered for your shipment.

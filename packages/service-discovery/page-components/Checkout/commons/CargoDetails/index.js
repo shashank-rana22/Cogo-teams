@@ -1,13 +1,23 @@
-import { Datepicker, Input, Select, cl } from '@cogoport/components';
+import { Datepicker, Input, Popover, Select, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import InfoBannerContent from '../../../../common/InfoBannerContent';
 import currencies from '../../helpers/currencies';
 
 import styles from './styles.module.css';
 import useGetCommodityOptions from './useGetCommodityOptions';
 
-function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = {}, primaryService = {} }) {
+function CargoDetails({
+	cargoDetails = {},
+	setCargoDetails = () => {},
+	detail = {},
+	primaryService = {},
+	setInfoBanner = () => {},
+	infoBanner = {},
+}) {
 	const { commodityTypeOptions = [], loading = false } = useGetCommodityOptions({ detail });
+
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
 	const MAPPING = [
 		{
@@ -63,7 +73,7 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 	];
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} id="cargo_details">
 			{MAPPING.map((item) => {
 				const {
 					heading,
@@ -81,10 +91,27 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 
 				return (
 					<div key={`${key}_${loading}`} className={styles.item_container}>
-						<div className={styles.heading}>
-							{heading}
-							<sup className={styles.superscipt}>*</sup>
-						</div>
+						<Popover
+							placement="bottom"
+							caret
+							visible={current === 'cargo_details' && key === 'cargo_readiness_date'}
+							className={styles.popover_container}
+							render={(
+								<InfoBannerContent
+									popoverComponentData={buttonProps.cargo_details || {}}
+									totalBanners={totalBanners}
+									setInfoBanner={setInfoBanner}
+									guideKey="preview_booking_guide_completed_for"
+									nextGuide="shipping_preferences"
+									prevGuide="multiple_options"
+								/>
+							)}
+						>
+							<div className={styles.heading}>
+								{heading}
+								<sup className={styles.superscipt}>*</sup>
+							</div>
+						</Popover>
 
 						<div className={styles.content} style={{ ...styleProps }}>
 							<img src={iconUrl} width={44} height={44} alt="Empty-state" />

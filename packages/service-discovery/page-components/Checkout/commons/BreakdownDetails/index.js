@@ -28,6 +28,8 @@ function BreakdownDetails({
 	source = '',
 	setNoRatesPresent = () => {},
 	getCheckoutInvoices = () => {},
+	infoBanner = {},
+	setInfoBanner = () => {},
 }) {
 	const {
 		rate,
@@ -60,7 +62,13 @@ function BreakdownDetails({
 
 	return (
 		<div>
-			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
+			<BreakdownDetailsHeader
+				disableForm={disableForm}
+				resetMargins={resetMargins}
+				rateDetails={rateDetails}
+				setInfoBanner={setInfoBanner}
+				infoBanner={infoBanner}
+			/>
 
 			{rateDetails.map((item, index) => {
 				const { id = '' } = item || {};
