@@ -60,5 +60,21 @@
     "lms_user_id_field_label":"ID người dùng (nền tảng)",
     "lms_password_field_label":"Mật khẩu (nền tảng)",
     "edit_repository":"Chỉnh sửa kho lưu trữ",
-    "delete_repository":"Xóa kho lưu trữ"
+    "delete_repository":"Xóa kho lưu trữ",
+    "cannot_be_less_than": "không thể ít hơn",
+    "cannot_be_greater_than": "không thể lớn hơn",
+    "should_be": "nên là",
+    "characters_long": "kí tự dài",
+    "should_be_less_than": "nên ít hơn",
+    "empty_state_text_sorry_no": "Lấy làm tiếc! KHÔNG",
+    "empty_state_text_found": "thành lập",
+    "empty_state_content": "Chúng tôi xin lỗi những gì bạn đang tìm kiếm. Vui lòng thử một cách khác",
+    "show_less_text":"Hiện ít hơn",
+    "show_more_text":"Cho xem nhiều hơn",
+    "successfully":"Thành công",
+    "updated":"Cập nhật",
+    "created":"Tạo",
+    "failed_to_upload":"Không tải lên",
+    "before":"Trước",
+    "after":"Sau đó"
 }

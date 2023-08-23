@@ -41,7 +41,7 @@ function POCDetails({ data = {} }) {
 						{t('airRepository:inventory')}
 						<span>:</span>
 					</div>
-					{availability === 'before_booking' ? 'Before' : 'After'}
+					{availability === 'before_booking' ? t('airRepository:before') : t('airRepository:after')}
 				</div>
 				<div className={styles.poc_list}>
 					<header className={styles.header}>

@@ -60,5 +60,21 @@
     "lms_user_id_field_label": "用户ID（平台）",
     "lms_password_field_label": "密码（平台）",
     "edit_repository": "编辑存储库",
-    "delete_repository": "删除存储库"
+    "delete_repository": "删除存储库",
+    "cannot_be_less_than": "不能小于",
+    "cannot_be_greater_than": "不能大于",
+    "should_be": "应该",
+    "characters_long": "长字符",
+    "should_be_less_than": "应该小于",
+    "empty_state_text_sorry_no": "对不起！不",
+    "empty_state_text_found": "成立",
+    "empty_state_content": "我们很抱歉您想要的东西。请用另一种方式尝试",
+    "show_less_text":"显示较少",
+    "show_more_text":"展示更多",
+    "successfully":"成功地",
+    "updated":"更新",
+    "created":"创建",
+    "failed_to_upload":"无法上传",
+    "before":"前",
+    "after":"后"
 }

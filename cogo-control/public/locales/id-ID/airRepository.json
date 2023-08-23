@@ -60,5 +60,21 @@
     "lms_user_id_field_label": "ID Pengguna (Platform)",
     "lms_password_field_label": "Kata sandi (platform)",
     "edit_repository": "Edit repositori",
-    "delete_repository": "Hapus repositori"
+    "delete_repository": "Hapus repositori",
+    "cannot_be_less_than": "tidak bisa kurang dari",
+    "cannot_be_greater_than": "tidak bisa lebih besar dari",
+    "should_be": "seharusnya",
+    "characters_long": "karakter panjang",
+    "should_be_less_than": "harus kurang dari",
+    "empty_state_text_sorry_no": "Maaf! TIDAK",
+    "empty_state_text_found": "ditemukan",
+    "empty_state_content": "Kami menyesal apa yang Anda cari. Silakan coba cara lain",
+    "show_less_text":"Tunjukkan lebih sedikit",
+    "show_more_text":"Menampilkan lebih banyak",
+    "successfully":"Berhasil",
+    "updated":"Diperbarui",
+    "created":"Dibuat",
+    "failed_to_upload":"Gagal mengunggah",
+    "before":"Sebelum",
+    "after":"Setelah"
 }

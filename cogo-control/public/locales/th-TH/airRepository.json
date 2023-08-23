@@ -60,5 +60,21 @@
     "lms_user_id_field_label": "ID ผู้ใช้ (แพลตฟอร์ม)",
     "lms_password_field_label": "รหัสผ่าน (แพลตฟอร์ม)",
     "edit_repository": "แก้ไขที่เก็บข้อมูล",
-    "delete_repository": "ลบที่เก็บข้อมูล"
+    "delete_repository": "ลบที่เก็บข้อมูล",
+    "cannot_be_less_than": "ไม่สามารถน้อยกว่า",
+    "cannot_be_greater_than": "ไม่สามารถมากกว่า",
+    "should_be": "ควรจะเป็น",
+    "characters_long": "ตัวละครยาว",
+    "should_be_less_than": "ควรน้อยกว่า",
+    "empty_state_text_sorry_no": "ขอโทษ! เลขที่",
+    "empty_state_text_found": "พบ",
+    "empty_state_content": "เราขอโทษในสิ่งที่คุณกำลังมองหา โปรดลองใช้วิธีอื่น",
+    "show_less_text":"แสดงน้อยลง",
+    "show_more_text":"แสดงมากขึ้น",
+    "successfully":"อย่างประสบความสำเร็จ",
+    "updated":"อัปเดต",
+    "created":"สร้าง",
+    "failed_to_upload":"อัพโหลดล้มเหลว",
+    "before":"ก่อน",
+    "after":"หลังจาก"
 }

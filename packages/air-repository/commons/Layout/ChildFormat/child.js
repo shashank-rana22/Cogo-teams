@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import getElementController from '../getController';
@@ -25,6 +26,7 @@ function Child({
 	field = {},
 	error = {},
 }) {
+	const { t } = useTranslation(['airRepository']);
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
 	let span = 0;
@@ -61,6 +63,7 @@ function Child({
 							error : error?.[controlItem.name],
 							rules : controlItem?.rules,
 							label : controlItem?.label,
+							t,
 						});
 						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {

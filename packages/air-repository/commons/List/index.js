@@ -1,6 +1,7 @@
 import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { Fragment, useState, useEffect } from 'react';
 
 import EmptyState from './EmptyState';
@@ -19,6 +20,7 @@ function Render({
 	Child = <div />,
 	isMobile = false,
 }) {
+	const { t } = useTranslation(['airRepository']);
 	const [open, setOpen] = useState('');
 
 	const handlePOCDetails = (itm) => {
@@ -48,7 +50,7 @@ function Render({
 									setOpen('');
 								}}
 							>
-								Show Less
+								{t('airRepository:show_less_text')}
 								<IcMArrowDown
 									style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
 								/>
@@ -61,7 +63,7 @@ function Render({
 									handlePOCDetails(singleitem);
 								}}
 							>
-								<span>Show More</span>
+								<span>{t('airRepository:show_more_text')}</span>
 								<IcMArrowDown
 									style={{ cursor: 'pointer' }}
 								/>
