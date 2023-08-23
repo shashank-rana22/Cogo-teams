@@ -132,7 +132,6 @@ export default {
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
 			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand
 			'a35fbbbe-38ea-4ee8-82a8-06d1245a23a4', // KAM - Enterprise Demand
-			'4c6f6036-2383-4c40-9b84-fa2b598031e1', // KAM SO1
 			'eb292d80-a05f-4a56-a0f7-ef51255583aa', // Prod_KAM_Transport_Supply
 			'b5dd96b2-11a2-4655-8319-040614262f3d', // OKAM (Operational Key Account Manager)
 			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
@@ -282,7 +281,7 @@ export default {
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 		],
-		fortigo_agencies_mapping: {
+		ftl_agencies_mapping: {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
