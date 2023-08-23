@@ -13526,7 +13526,7 @@ const partner = {
 	],
 	warehouse_app: [
 		{
-			api         : 'get_air_coe_warehouse_app_warehouse_app',
+			api         : 'get_air_coe_warehouse_app_list',
 			access_type : 'private',
 		},
 		{
