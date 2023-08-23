@@ -27,7 +27,7 @@ function Stats({
 	const { chat_stats = {} } = statsData || {};
 	const {
 		rating = [],
-		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = 0, agent_msg_stats : agentMsgStats = {},
+		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = 0, agent_msg_stats : agentMsgStats = [],
 	} = agentStatsData || {};
 
 	const { data, escalateLoading } = useGetAgentTimelineEscalate({ viewType, timePeriodValue });
@@ -37,9 +37,9 @@ function Stats({
 	const { avg_rating: averageRating = '' } = rating || [];
 
 	const emailObj = Array.isArray(agentMsgStats)
-		? Object.keys(agentMsgStats || {}).find((item) => item.type === 'email') : undefined;
+		? (agentMsgStats || []).filter((item) => item.type === 'email') : [];
 
-	const { count: emailCount } = emailObj || {};
+	const { count: emailCount } = emailObj?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { active = 0, escalated = 0, warning = 0 } = chat_stats || {};
 
