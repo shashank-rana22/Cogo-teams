@@ -16,6 +16,8 @@ const SHIPMENT_SPECIALIST = {
 	show_relevant_templates       : ['quick_reply'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
+	stats_feedback_count          : [],
+	to_show_agent_activity_graph  : false,
 	configurations_to_be_shown    : [],
 	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
 	accessible_new_communications : ['new_mail'],

@@ -1,16 +1,15 @@
 import { Button, cl, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState, useEffect, useCallback } from 'react';
 
+import useGetCogoOneAgentStats from '../../../../hooks/useGetOmniChannelStats';
 import useUpdateAgentWorkPreferences from '../../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
 import TimelineContent from './TimelineContent';
 
-const MIN_FEEDBACK_SCORE = 0;
 const MIN_TIMER_VALUE = 0;
 const PUNCH_IN_TIME_HOUR = 9;
 const PUNCH_IN_TIME_MINUTE = 30;
@@ -36,13 +35,18 @@ function PunchInOut({
 	agentTimeline = () => {},
 	timelineLoading = false,
 	preferenceLoading = false,
+	viewType = '',
+	timePeriodValue = '',
+	setTimePeriodValue = () => {},
 	firestore = {},
 	userId = '',
+	isPunchPresent = false,
+	showDetails = false,
+	setShowDetails = () => {},
 }) {
 	const { status = '' } = agentStatus || {};
 	const { list = [] } = data || {};
 
-	const [showDetails, setShowDetails] = useState(false);
 	const [isShaking, setIsShaking] = useState(false);
 	const [showTimer, setShowTimer] = useState(false);
 	const [showEndButton, setShowEndButton] = useState(false);
@@ -60,6 +64,11 @@ function PunchInOut({
 		firestore,
 		userId,
 	});
+
+	const {
+		agentStatsLoading = false,
+		agentStatsData = {},
+	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	const shakeButton = () => {
 		setIsShaking(true);
@@ -135,6 +144,11 @@ function PunchInOut({
 						punchedTime={lastBreakTime}
 						status={status}
 						handlePunchIn={handlePunchIn}
+						viewType={viewType}
+						agentStatsLoading={agentStatsLoading}
+						agentStatsData={agentStatsData}
+						timePeriodValue={timePeriodValue}
+						setTimePeriodValue={setTimePeriodValue}
 					/>
 				)}
 			</div>
@@ -144,9 +158,6 @@ function PunchInOut({
 				className={styles.minimize_container}
 				onClick={() => setShowDetails((prev) => !prev)}
 			>
-				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
-				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
-				<IcMDown className={styles.down_icon} />
 				{status === 'punched_out' ? (
 					<Button
 						size="xs"
