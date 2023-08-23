@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import CrmTable from '../../../../common/CrmTable';
 import useRequestOrganization from '../../../../hooks/useRequestOrganization';
@@ -7,6 +8,8 @@ import { getRequestColumns } from './get-request-columns';
 import styles from './styles.module.css';
 
 function RequestTab({ organization_id = '', type = '' }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data = {},
 		loading = false,
@@ -17,7 +20,7 @@ function RequestTab({ organization_id = '', type = '' }) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = getRequestColumns({ refetch });
+	const columns = getRequestColumns({ refetch, t });
 
 	return (
 		<div className={styles.container}>

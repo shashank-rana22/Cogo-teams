@@ -177,5 +177,20 @@
     "send_request": "Gửi Yêu cầu",
     "request_initiated_successfully": "Yêu cầu đã được khởi tạo thành công.",
     "responses_received": "Phản hồi đã nhận",
-    "request_created": "Yêu cầu đã tạo"
+    "request_created": "Yêu cầu đã tạo",
+    "tab_feedback_received_label": "Phản hồi đã nhận",
+    "tab_requests_label": "Yêu cầu",
+    "third_party": "BÊN THỨ BA",
+    "response_date": "NGÀY PHẢN HỒI",
+    "active_status_button_label": "Vô hiệu hóa yêu cầu",
+    "responded_status_label": "Đã nhận phản hồi",
+    "responded_status_button_label": "Xem phản hồi",
+    "inactive_status_label": "Đã vô hiệu hóa",
+    "deactivate_enrichment_request_phrase": "Bạn sắp vô hiệu hóa một yêu cầu đã gửi đến",
+    "are_you_sure": ", bạn chắc chắn chứ?",
+    "deactivate_enrichment_request": "Vô hiệu hóa yêu cầu làm giàu",
+    "request_deactivated_successfully": "Yêu cầu đã được vô hiệu hóa thành công.",
+    "other_status": "Khác",
+    "organization_name": "Tên Tổ chức:",
+    "nill_value": "Trống"
 }

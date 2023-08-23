@@ -94,7 +94,7 @@ export const getRequestColumns = ({
 			return (
 				<section className={styles.view}>
 					<Pill size="md" color={color}>
-						{translatedStatus || 'Nil'}
+						{translatedStatus || t('allocation:nill_value')}
 					</Pill>
 
 					<Button size="sm" themeType="secondary" onClick={() => router.push(url)}>

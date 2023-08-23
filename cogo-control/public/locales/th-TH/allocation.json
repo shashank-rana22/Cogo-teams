@@ -177,5 +177,20 @@
     "send_request": "ส่งคำขอ",
     "request_initiated_successfully": "คำขอถูกเริ่มต้นเรียบร้อยแล้ว",
     "responses_received": "การตอบรับที่ได้รับ",
-    "request_created": "คำขอถูกสร้าง"
+    "request_created": "คำขอถูกสร้าง",
+    "tab_feedback_received_label": "ข้อเสนอแนะที่ได้รับ",
+    "tab_requests_label": "คำขอ",
+    "third_party": "บุคคลที่สาม",
+    "response_date": "วันที่ตอบรับ",
+    "active_status_button_label": "ปิดใช้งานคำขอ",
+    "responded_status_label": "ได้รับการตอบรับ",
+    "responded_status_button_label": "ดูการตอบรับ",
+    "inactive_status_label": "ถูกปิดใช้งานแล้ว",
+    "deactivate_enrichment_request_phrase": "คุณกำลังจะปิดใช้งานคำขอที่ถูกส่งไปยัง",
+    "are_you_sure": " คุณแน่ใจหรือไม่?",
+    "deactivate_enrichment_request": "ปิดใช้งานคำขอเพิ่มคุณค่า",
+    "request_deactivated_successfully": "คำขอถูกปิดใช้งานเรียบร้อยแล้ว",
+    "other_status": "อื่นๆ",
+    "organization_name": "ชื่อองค์กร:",
+    "nill_value": "ค่าว่าง"
 }

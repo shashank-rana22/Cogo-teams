@@ -177,5 +177,20 @@
     "send_request": "Kirim Permintaan",
     "request_initiated_successfully": "Permintaan telah berhasil dimulai.",
     "responses_received": "Respon Diterima",
-    "request_created": "Permintaan Dibuat"
+    "request_created": "Permintaan Dibuat",
+    "tab_feedback_received_label": "Umpan Balik Diterima",
+    "tab_requests_label": "Permintaan",
+    "third_party": "PIHAK KETIGA",
+    "response_date": "TANGGAL RESPON",
+    "active_status_button_label": "Nonaktifkan Permintaan",
+    "responded_status_label": "Respon Diterima",
+    "responded_status_button_label": "Lihat Respon",
+    "inactive_status_label": "Nonaktif",
+    "deactivate_enrichment_request_phrase": "Anda akan Menonaktifkan Permintaan yang dikirim ke",
+    "are_you_sure": ", apakah Anda yakin?",
+    "deactivate_enrichment_request": "Nonaktifkan Permintaan Pengayaan",
+    "request_deactivated_successfully": "Permintaan berhasil dinonaktifkan.",
+    "other_status": "Lainnya",
+    "organization_name": "Nama Organisasi:",
+    "nill_value": "Kosong"
 }

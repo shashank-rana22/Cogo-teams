@@ -177,5 +177,20 @@
     "send_request": "Send Request",
     "request_initiated_successfully": "Request has been initiated successfully.",
     "responses_received": "Responses Received",
-    "request_created": "Request Created"
+    "request_created": "Request Created",
+    "tab_feedback_received_label": "Feedbacks Received",
+    "tab_requests_label": "Requests",
+    "third_party": "THIRD PARTY",
+    "response_date": "RESPONSE DATE",
+    "active_status_button_label": "Deactivate Request",
+    "responded_status_label": "Response Received",
+    "responded_status_button_label": "View Response",
+    "inactive_status_label": "Deactivated",
+    "deactivate_enrichment_request_phrase": "You are about to Deactivate a Request sent to",
+    "are_you_sure": ", are you sure?",
+    "deactivate_enrichment_request": "Deactivate Enrichment Request",
+    "request_deactivated_successfully": "Request has been deactivated successfully.",
+    "other_status": "Other",
+    "organization_name": "Organization Name:",
+    "nill_value": "Nil"
 }
