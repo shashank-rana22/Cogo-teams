@@ -11,7 +11,7 @@ const ALL_SERVICES = [
 	'haulage_freight',
 	'lcl_freight'];
 
-function useListOrganizationServices({ currentPage, activeTab, setApprovalStats, currentService }) {
+function useListOrganizationServices({ currentPage, activeTab, setApprovalStats, currentService, role }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -23,8 +23,12 @@ function useListOrganizationServices({ currentPage, activeTab, setApprovalStats,
 				params: {
 					filters: {
 						stage_of_approval:
-						activeTab === 'contract_and_sla_updation'
-							? ['contract_and_sla_updation', 'contract_and_sla_approval'] : activeTab,
+						{
+							governance_manager:
+							(activeTab === 'contract_and_sla_updation' ? 'contract_and_sla_updation' : activeTab),
+							governance_lead:
+							(activeTab === 'contract_and_sla_updation' ? 'contract_and_sla_approval' : activeTab),
+						}[role],
 						service : currentService === 'all' ? ALL_SERVICES : currentService,
 						status  : 'pending_approval',
 					},

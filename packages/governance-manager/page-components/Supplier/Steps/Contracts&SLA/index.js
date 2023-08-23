@@ -16,8 +16,8 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 	const { push } = useRouter();
 	const [step, setStep] = useState(
 		{
-			governance_lead    : 1,
-			governance_manager : 2,
+			governance_manager : 1,
+			governance_lead    : 2,
 		}[role],
 	);
 	const { data, id, getOrganizationContract } = useGetOrganizationContract({ organization_id, service_type, step });

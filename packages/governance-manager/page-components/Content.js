@@ -20,7 +20,10 @@ function Content() {
 	);
 
 	const [currentPage, setCurrentPage] = useState(1);
-	const [activeTab, setActiveTab] = useState('need_analysis');
+	const [activeTab, setActiveTab] = useState(
+		role === 'governance_manager'
+			? 'need_analysis' : 'organization_approval',
+	);
 	const [approvalStats, setApprovalStats] = useState(null);
 	const [currentService, setCurrentService] = useState('all');
 
@@ -32,6 +35,7 @@ function Content() {
 		activeTab,
 		setApprovalStats,
 		currentService,
+		role,
 	});
 
 	return (
