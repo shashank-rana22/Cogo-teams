@@ -147,7 +147,7 @@ function DocumentForm({
 							{Error('preferred_mode_of_document_execution')}
 						</div>
 
-						{watchModeOfExecution !== 'telex'
+						{!['telex', 'email'].includes(watchModeOfExecution)
 							? (
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>
@@ -165,7 +165,7 @@ function DocumentForm({
 							) : null}
 
 						<div className={styles.contact_form_item}>
-							{watchModeOfExecution !== 'telex'
+							{!['telex', 'email'].includes(watchModeOfExecution)
 								? (
 									<>
 										<div className={styles.country_code}>
@@ -202,7 +202,7 @@ function DocumentForm({
 								) : null}
 						</div>
 
-						{watchModeOfExecution !== 'telex'
+						{!['telex', 'email'].includes(watchModeOfExecution)
 							? (
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>
