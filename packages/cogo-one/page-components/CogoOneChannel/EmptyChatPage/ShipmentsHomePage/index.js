@@ -3,10 +3,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-// import { ShipmentChat } from '@cogoport/shipment-chat/page-components/List';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useMemo } from 'react';
 
+import ShipmentChatModal from '../../../../common/ShipmentChatModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
@@ -15,7 +15,6 @@ import BookingNoteModal from './BookingNoteModal';
 import Filter from './Filter';
 import LoadingState from './LoadingState';
 import ShipmentCard from './ShipmentCard';
-import ShipmentChatModal from './ShipmentChatModal';
 import styles from './styles.module.css';
 
 const DEFAULT_PAGE = 1;

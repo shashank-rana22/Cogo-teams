@@ -13057,6 +13057,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'create_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_message',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_chat_channel',
 			access_type : 'private',
 		},

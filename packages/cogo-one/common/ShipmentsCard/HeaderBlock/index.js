@@ -114,16 +114,14 @@ function HeaderBlock({ shipmentItem = {}, type = '', setShowShipmentChat = () =>
 					}}
 				/>
 
-				{type === 'all_shipments' && (
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.message_reply}
-						height={25}
-						width={25}
-						alt="message"
-						className={styles.message_icon_styles}
-						onClick={handleShipmentChat}
-					/>
-				)}
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.message_reply}
+					height={25}
+					width={25}
+					alt="message"
+					className={styles.message_icon_styles}
+					onClick={handleShipmentChat}
+				/>
 
 				<Popover
 					placement="bottom-end"
