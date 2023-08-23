@@ -40,7 +40,7 @@ function SidePanel({
 	accuracyLoading = false,
 	setActiveList = () => {},
 	setSort = () => {},
-	sort = 'accuracy',
+	sort = {},
 }) {
 	const { sort_by, sort_type } = sort;
 	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;

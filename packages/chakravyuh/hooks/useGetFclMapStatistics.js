@@ -46,7 +46,7 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	}, {});
 
 	const accuracyMapping = (data?.list || []).reduce((acc, item) => {
-		acc[item.destination_id] = item?.accuracy;
+		acc[item.destination_id] = item?.total_accuracy;
 		return acc;
 	}, {});
 

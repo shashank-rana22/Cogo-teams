@@ -37,7 +37,7 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 		);
 	}
 	if (loading || finalList.length) {
-		return finalList.map(({ total_rates = 0, destination_id, destination_name, accuracy = 0 }) => (
+		return finalList.map(({ total_rates = 0, destination_id, destination_name, total_accuracy = 0 }) => (
 			// eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
 			<button
 				onMouseOver={() => handleMouseOver(destination_id)}
@@ -59,7 +59,7 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 				</div>
 				<div className={styles.right}>
 					<p>Accuracy</p>
-					<h4>{`${Number(accuracy).toFixed(TO_FIXED)}%`}</h4>
+					<h4>{`${Number(total_accuracy).toFixed(TO_FIXED)}%`}</h4>
 				</div>
 			</button>
 		));
