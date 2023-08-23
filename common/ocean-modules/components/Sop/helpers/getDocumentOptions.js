@@ -46,7 +46,7 @@ const getDocumentOptions = ({ data = [], billingAddressData = [], orgPocData = [
 	}
 
 	if (watchModeOfExecution === 'pickup' && !isEmpty(orgPocData)) {
-		orgPocData.forEach((item) => {
+		(orgPocData || []).forEach((item) => {
 			const { name = '', mobile_number = '', mobile_country_code = '' } = item || {};
 
 			tempData.name.add(name);
