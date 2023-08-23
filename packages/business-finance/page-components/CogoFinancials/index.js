@@ -62,10 +62,15 @@ function CogoFinancials() {
 		setShowShipmentList(false);
 		setActiveBar('');
 		setActiveShipmentCard('');
+		setIsTourInitial(true);
 	};
 
 	useEffect(() => {
-		if (!showShipmentList) { setTableFilters({}); }
+		if (!showShipmentList) {
+			setTableFilters({});
+		} else {
+			setTour(false); // tour completes on showing list
+		}
 	}, [showShipmentList]);
 
 	const getTourProps = useMemo(() => ({
