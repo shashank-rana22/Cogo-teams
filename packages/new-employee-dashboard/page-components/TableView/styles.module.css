@@ -90,3 +90,29 @@
 	align-items: baseline;
 	justify-content: space-between;
 }
+
+.div_button_content {
+	margin-bottom: 4px;
+}
+
+.div_button2_content {
+	padding-top: 4px;
+}
+
+.selection_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.button_content {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+}

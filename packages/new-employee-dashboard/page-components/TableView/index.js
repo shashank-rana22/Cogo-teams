@@ -1,11 +1,13 @@
-import { Tabs, TabPanel, Input, Pagination, Toggle, Button, Select } from '@cogoport/components';
+import {
+	Tabs, TabPanel, Input, Pagination, Toggle, Button, Select, Popover,
+} from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
-import useBulkEmployeeDetails from '../hooks/useBulkEmployeeDetails';
 import StyledTable from '../StyledTable';
 
+import BulkActionPopOverContent from './BulkActionPopOverContent';
 import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
 import useRejectAction from './useRejectAction';
@@ -27,12 +29,12 @@ function TableView({ search, setSearch }) {
 	const [bulkAction, setBulkAction] = useState(false);
 	const [pageLimit, setPageLimit] = useState(INITIAL_PAGE_LIMIT);
 	const [selectedIds, setSelectedIds] = useState([]);
+	const [showModal, setShowModal] = useState(false);
+	const [showPopOver, setShowPopOver] = useState(false);
 
 	const {
 		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
 	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction, pageLimit, selectedIds, setSelectedIds });
-
-	const { btnloading:bulkloading, sendBulkActionMail } = useBulkEmployeeDetails({ selectedIds });
 
 	return (
 		<div className={styles.container}>
@@ -61,14 +63,26 @@ function TableView({ search, setSearch }) {
 
 					{bulkAction && (
 						<div className={styles.styled_button}>
-							<Button
-								themeType="secondary"
-								disabled={isEmpty(selectedIds)}
-								onClick={sendBulkActionMail}
-								loading={bulkloading}
+							<Popover
+								placement="right"
+								render={(
+									<BulkActionPopOverContent
+										setShowPopOver={setShowPopOver}
+										setShowModal={setShowModal}
+										showModal={showModal}
+										selectedIds={selectedIds}
+									/>
+								)}
+								visible={showPopOver}
+								onClickOutside={() => setShowPopOver(false)}
 							>
-								Send email
-							</Button>
+								<Button
+									disabled={isEmpty(selectedIds)}
+									onClick={() => setShowPopOver(true)}
+								>
+									Bulk Actions
+								</Button>
+							</Popover>
 						</div>
 					)}
 				</div>
