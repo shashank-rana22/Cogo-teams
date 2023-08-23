@@ -31,7 +31,7 @@ function Item({ isSupplierPage = false, item }) {
 			</div>
 			<div>
 				<div className={styles.key}>Home Country</div>
-				<div className={styles.value}>Australia</div>
+				<div className={styles.value}>{item?.organization?.country?.name}</div>
 			</div>
 			<div>
 				<div className={styles.key}>Service Provided</div>

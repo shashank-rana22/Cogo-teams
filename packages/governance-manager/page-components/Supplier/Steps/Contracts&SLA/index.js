@@ -12,9 +12,14 @@ import useGetOrganizationContract from './hooks/useGetOrganizationContract';
 import useSendOrganizationContractForRenegotiation from './hooks/useSendOrganizationContractForRenegotiation';
 import styles from './styles.module.css';
 
-function ContractSla({ organization_id, service_type, id:organization_service_id }) {
+function ContractSla({ organization_id, service_type, id:organization_service_id, role }) {
 	const { push } = useRouter();
-	const [step, setStep] = useState(2);
+	const [step, setStep] = useState(
+		{
+			governance_lead    : 1,
+			governance_manager : 2,
+		}[role],
+	);
 	const { data, id, getOrganizationContract } = useGetOrganizationContract({ organization_id, service_type, step });
 	const {
 		control,
@@ -23,6 +28,12 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
 		stage_of_approval : 'contract_and_sla_approval',
+		service           : service_type,
+	});
+
+	const { updateOrganizationService:finalApproval } = useUpdateOrganizationService({
+		organization_id,
+		stage_of_approval : 'approve',
 		service           : service_type,
 	});
 
@@ -40,13 +51,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 			<div className={styles.heading}>
 				<div className={styles.flex}>
 					<div>
-						Contract & SLA -
-					</div>
-					<div className={styles.headingsteps}>
-						Step
-						{' '}
-						{step}
-						/2
+						Contract & SLA
 					</div>
 				</div>
 				{
@@ -131,12 +136,22 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 
 					</Button>
 					<div className={styles.side_line_buttons}>
-						<Button style={{ fontWeight: 600 }} onClick={() => { setStep(2); }}>Approve</Button>
+						<Button
+							style={{ fontWeight: 600 }}
+							onClick={() => {
+								finalApproval('active');
+							}}
+						>
+							Approve
+
+						</Button>
 						{' '}
 						<Button
 							themeType="secondary"
 							style={{ fontWeight: 600 }}
-							onClick={() => { setStep(1); }}
+							onClick={() => {
+								finalApproval('inactive');
+							}}
 						>
 							Reject
 

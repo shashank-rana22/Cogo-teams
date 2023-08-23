@@ -12,7 +12,9 @@ import SupplierApprovalDueDiligenceModal from './SupplierApprovalDueDiligenceMod
 import SupplierApprovalModal from './SupplierApprovalModal';
 import { report } from './utils/report';
 
-function SupplierApproval({ id, organization_id, service_type, getOrganizationService }) {
+const FOUR = 4;
+
+function SupplierApproval({ id, organization_id, service_type, getOrganizationService, role }) {
 	const [verify, setVerify] = useState({
 		need_analysis_report           : null,
 		market_feedback_report         : null,
@@ -35,6 +37,7 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 		service           : service_type,
 		getOrganizationService,
 	});
+	console.log(verify, 'abc');
 
 	return (
 		<>
@@ -76,22 +79,37 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 								setVerify={setVerify}
 								setOpen={setOpen}
 								type={item?.type}
+								role={role}
 							/>
 						))
 					}
 				</div>
-				<div className={styles.flex_right}>
-					<div className={styles.right_submit_btn}>
-						<div>
-							<Tooltip content={<Alert />} placement="left" className={styles.alert}>
-								<IcMAlert color="red" width={20} height={20} />
-							</Tooltip>
 
-						</div>
-						<Button onClick={() => updateOrganizationService()}>Submit</Button>
-					</div>
+				{
+					role === 'governance_lead'
+							&& (
+								<div className={styles.flex_right}>
+									<div className={styles.right_submit_btn}>
+										<div>
+											<Tooltip content={<Alert />} placement="left" className={styles.alert}>
+												<IcMAlert color="red" width={20} height={20} />
+											</Tooltip>
 
-				</div>
+										</div>
+										<Button
+											onClick={() => updateOrganizationService()}
+											disabled={Object.values(verify)
+												?.filter((i) => i === 'verified'
+													|| i === 'rejected').length !== FOUR}
+										>
+											Submit
+
+										</Button>
+									</div>
+
+								</div>
+							)
+				}
 			</div>
 		</>
 

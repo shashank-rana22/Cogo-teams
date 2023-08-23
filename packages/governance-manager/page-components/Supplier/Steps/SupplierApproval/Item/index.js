@@ -4,7 +4,7 @@ import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Item({ title, verify, setOpen, type }) {
+function Item({ title, verify, setOpen, type, role }) {
 	return (
 		<div className={styles.row}>
 			<div className={styles.title}>{title}</div>
@@ -35,18 +35,24 @@ function Item({ title, verify, setOpen, type }) {
 
 					</div>
 				)}
-				<Button
-					className={styles.button}
-					size="md"
-					themeType="accent"
-					onClick={() => {
-						setOpen(type);
-					}}
-					disabled={verify?.[type] !== 'pending'}
-				>
-					Open
+				{
+					role === 'governance_lead'
+					&& (
+						<Button
+							className={styles.button}
+							size="md"
+							themeType="accent"
+							onClick={() => {
+								setOpen(type);
+							}}
+							disabled={verify?.[type] !== 'pending'}
+						>
+							Open
 
-				</Button>
+						</Button>
+					)
+
+				}
 			</div>
 
 		</div>
