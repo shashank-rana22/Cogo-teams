@@ -14,7 +14,7 @@ import FeedbackComponent from '../FeedbackComponent';
 
 import styles from './styles.module.css';
 
-const callOptions = [
+const CALL_OPTIONS = [
 	{ label: 'Call', value: 'call' },
 	{ label: 'Email', value: 'email' },
 	{ label: 'Meeting', value: 'meeting' },
@@ -25,17 +25,18 @@ const communicationOptions = [
 	{ label: 'Answered', value: 'answered' },
 	{ label: 'Not Answered', value: 'not_answered' },
 	{ label: 'Wrong Number', value: 'wrong_number' },
+
 	{ label: 'Invalid Number', value: 'invalid_number' },
 	{ label: 'Not Reachable', value: 'not_reachable' },
 	{ label: 'Busy', value: 'Busy' },
 	{ label: 'Does not exist', value: 'Does not exist' },
 	{
-		label : 'Does not belong to this user',
-		value : 'Does not belong to this user',
+		label: 'Does not belong to this user',
+		value: 'Does not belong to this user',
 	},
 	{
-		label : 'Belongs to the user who has left the company',
-		value : 'Belongs to the user who has left the company',
+		label: 'Belongs to the user who has left the company',
+		value: 'Belongs to the user who has left the company',
 	},
 
 ];
@@ -52,6 +53,9 @@ function ActivityLog({
 	type,
 	organizationId = '',
 }) {
+
+	const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
+	const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 	return (
 		<div>
 			<CheckboxController
@@ -65,7 +69,7 @@ function ActivityLog({
 				<div className={styles.input}>
 					<div className={styles.label}>Select Reminder Type *</div>
 					<SelectController
-						options={callOptions}
+						options={CALL_OPTIONS}
 						name="reminderType"
 						control={control}
 						value={type}
@@ -184,8 +188,8 @@ function ActivityLog({
 						control={control}
 						params={{
 							filters: {
-								status          : 'active',
-								organization_id : organizationId,
+								status: 'active',
+								organization_id: organizationId,
 							},
 						}}
 						size="md"
@@ -210,8 +214,8 @@ function ActivityLog({
 						multiple
 						params={{
 							filters: {
-								status          : 'active',
-								organization_id : organizationId,
+								status: 'active',
+								organization_id: organizationId,
 							},
 						}}
 						size="md"

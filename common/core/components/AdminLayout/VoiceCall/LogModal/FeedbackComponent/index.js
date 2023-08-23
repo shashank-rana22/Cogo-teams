@@ -15,13 +15,13 @@ function FeedbackComponent({
 	feedbackData = {},
 	remove = () => {},
 	index = 0,
-	control,
+	control = {},
 	setValue = () => {},
-	errors,
+	errors = {},
 }) {
 	const currencyOptions = Object.values(GLOBAL_CONSTANTS.currency_code).map((item) => ({
-		label : item,
-		value : item,
+		label: item,
+		value: item,
 	}));
 
 	useEffect(() => {

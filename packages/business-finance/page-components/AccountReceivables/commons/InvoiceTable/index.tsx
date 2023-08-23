@@ -24,6 +24,13 @@ interface Props {
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
+const getStyle = ({
+	sortType = '',
+	sortBy = '',
+	activeSortType = '',
+	activeSortBy = '',
+}) => (sortType === activeSortType && sortBy === activeSortBy ? ORANGE : GREY);
+
 function InvoiceTable({
 	organizationId = '',
 	entityCode = '',
@@ -62,21 +69,51 @@ function InvoiceTable({
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleGrandTotalAsc =		sortType === 'asc' && sortBy === 'grandTotal' ? ORANGE : GREY;
+	const sortStyleGrandTotalAsc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType: 'asc',
+		activeSortBy: 'grandTotal',
+	});
 
-	const sortStyleGrandTotalDesc =		sortType === 'desc' && sortBy === 'grandTotal' ? ORANGE : GREY;
+	const sortStyleGrandTotalDesc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType: 'desc',
+		activeSortBy: 'grandTotal',
+	});
 
-	const sortStyleInvoiceDateAsc =		sortType === 'asc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
+	const sortStyleInvoiceDateAsc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType: 'asc',
+		activeSortBy: 'invoiceDate',
+	});
 
-	const sortStyleInvoiceDateDesc =		sortType === 'desc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
+	const sortStyleInvoiceDateDesc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType: 'desc',
+		activeSortBy: 'invoiceDate',
+	});
 
-	const sortStyleDueDateAsc =		sortType === 'asc' && sortBy === 'dueDate' ? ORANGE : GREY;
+	const sortStyleDueDateAsc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType: 'asc',
+		activeSortBy: 'dueDate',
+	});
 
-	const sortStyleDueDateDesc =		sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
+	const sortStyleDueDateDesc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType: 'desc',
+		activeSortBy: 'dueDate',
+	});
 
 	const columns = completedColumn({
 		entityCode,
-		refetch   : getOrganizationInvoices,
+		refetch: getOrganizationInvoices,
 		showName,
 		setSort,
 		sortStyleGrandTotalAsc,
@@ -89,7 +126,7 @@ function InvoiceTable({
 		setinvoiceFilters,
 		checkedRows,
 		setCheckedRows,
-		totalRows : listData?.list || [],
+		totalRows: listData?.list || [],
 		isHeaderChecked,
 		setIsHeaderChecked,
 	});
@@ -128,11 +165,13 @@ function InvoiceTable({
 
 						<SearchInput
 							value={invoiceFilters.search || ''}
-							onChange={(value) => setinvoiceFilters({
-								...invoiceFilters,
-								search : value || undefined,
-								page   : 1,
-							})}
+							onChange={(value) =>
+								setinvoiceFilters({
+									...invoiceFilters,
+									search: value || undefined,
+									page: 1,
+								})
+							}
 							size="md"
 							placeholder="Search by /Invoice number /SID"
 						/>
@@ -142,11 +181,13 @@ function InvoiceTable({
 				<div className={styles.inputstyles}>
 					<SearchInput
 						value={invoiceFilters.search || ''}
-						onChange={(value) => setinvoiceFilters({
-							...invoiceFilters,
-							search : value || undefined,
-							page   : 1,
-						})}
+						onChange={(value) =>
+							setinvoiceFilters({
+								...invoiceFilters,
+								search: value || undefined,
+								page: 1,
+							})
+						}
 						size="md"
 						placeholder="Search by /Invoice number /SID"
 					/>
@@ -167,7 +208,9 @@ function InvoiceTable({
 					currentPage={pageInvoiceList}
 					totalItems={recordInvoiceList}
 					pageSize={invoiceFilters.pageLimit}
-					onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
+					onPageChange={(val) =>
+						setinvoiceFilters({ ...invoiceFilters, page: val })
+					}
 				/>
 			</div>
 			{showFilters ? (
