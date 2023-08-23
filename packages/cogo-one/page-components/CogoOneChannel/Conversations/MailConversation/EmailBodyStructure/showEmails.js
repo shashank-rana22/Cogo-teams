@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 const NO_OF_MAILS_TO_BE_SHOWN = 3;
 const INDEX_STEP = 1;
+const DEFAULT_LENGTH = 0;
 
 function TooltipContainer({ popoverMails = [] }) {
 	return (
@@ -17,7 +18,7 @@ function TooltipContainer({ popoverMails = [] }) {
 						className={styles.email_element}
 					>
 						{itm}
-						{index !== popoverMails.length - INDEX_STEP
+						{index !== (popoverMails?.length || DEFAULT_LENGTH) - INDEX_STEP
 							? ','
 							: ''}
 					</div>
@@ -31,13 +32,13 @@ function ShowEmails({ emailsData = [] }) {
 	const toBeShownEmails = emailsData?.slice(
 		GLOBAL_CONSTANTS.zeroth_index,
 		NO_OF_MAILS_TO_BE_SHOWN,
-	);
+	) || [];
 
 	const popoverMails = emailsData?.slice(NO_OF_MAILS_TO_BE_SHOWN) || [];
 
 	return (
 		<div className={styles.name_div}>
-			{toBeShownEmails.join(', ')}
+			{toBeShownEmails?.join(', ')}
 
 			{popoverMails?.length
 				? (
@@ -53,7 +54,7 @@ function ShowEmails({ emailsData = [] }) {
 					>
 						<div className={styles.more_text}>
 							+
-							{popoverMails.length}
+							{popoverMails?.length}
 							{' '}
 							more
 						</div>

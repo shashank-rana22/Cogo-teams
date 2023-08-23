@@ -9,8 +9,6 @@ import { SEARCH_QUERY_LIMIT } from '../../../constants/mailConstants';
 import MailLoading from './MailLoading';
 import styles from './styles.module.css';
 
-const DEFAULT_LIST_LENGTH = 0;
-
 function ListMails({
 	handleScroll = () => {},
 	list = [],
@@ -19,7 +17,7 @@ function ListMails({
 	setActiveMail = () => {},
 	searchQuery = '',
 }) {
-	const emailsShown = (list || [])?.length || DEFAULT_LIST_LENGTH;
+	const emailsShown = (list || [])?.length;
 
 	return (
 		<div

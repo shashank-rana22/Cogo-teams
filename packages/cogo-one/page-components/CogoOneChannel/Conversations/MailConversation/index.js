@@ -81,7 +81,7 @@ function MailConversation({ mailProps = {} }) {
 				/>
 
 				<div className={styles.message_div}>
-					{(loading) ? (
+					{loading ? (
 						<>
 							<div className={styles.time_stamp}>
 								<Placeholder width="80px" height="10px" />
