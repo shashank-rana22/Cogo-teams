@@ -4,9 +4,9 @@ import { useEffect, useCallback } from 'react';
 
 const useGetInsuranceListCommodities = () => {
 	const [{ data }, trigger] = useRequestBf({
-		auth   : 'get_saas_insurance_list_commodities',
-		url    : 'saas/insurance/list-commodities',
-		method : 'GET',
+		authKey : 'get_saas_insurance_list_commodities',
+		url     : 'saas/insurance/list-commodities',
+		method  : 'GET',
 	}, { manual: true });
 
 	const getListCommodities = useCallback(async () => {
