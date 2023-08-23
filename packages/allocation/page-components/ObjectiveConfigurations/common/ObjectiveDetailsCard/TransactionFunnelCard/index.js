@@ -2,33 +2,38 @@ import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-const CARD_DATA_MAPPING = [
+const getCardDataMapping = ({ t = () => {} }) => ([
 	{
-		label : 'No. of Shipments',
+		label : t('allocation:shipment_count'),
 		key   : 'shipment_count',
 	},
 	{
-		label : 'No. of Quotations',
+		label : t('allocation:quotation_count'),
 		key   : 'quotation_count',
 	},
 	{
-		label : 'No. of Searches',
+		label : t('allocation:search_count'),
 		key   : 'search_count',
 	},
-];
+]);
 
 function TransactionFunnelCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { statsDetails } = props;
 
 	const { date_range : { startDate, endDate } = {} } = statsDetails;
 
+	const cardDataMapping = getCardDataMapping({ t });
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
-				<h4 className={styles.heading}>Transaction Funnel</h4>
+				<h4 className={styles.heading}>{t('allocation:transaction_funnel')}</h4>
 				{startDate && endDate && (
 					<Pill size="md">
 						{`From ${formatDate({
@@ -45,7 +50,7 @@ function TransactionFunnelCard(props) {
 			</div>
 
 			<div className={styles.card}>
-				{CARD_DATA_MAPPING.map((item) => {
+				{cardDataMapping.map((item) => {
 					const { key, label } = item;
 
 					const statItem = statsDetails[key];
