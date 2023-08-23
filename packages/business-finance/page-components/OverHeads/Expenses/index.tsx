@@ -635,7 +635,7 @@ function ExpenseComponent() {
 						}));
 					}}
 					showPagination
-					renderDropdown={({ singleItem }) => ShowDropDown(singleItem)}
+					renderDropdown={(singleItem) => ShowDropDown(singleItem)}
 					showRibbon
 				/>
 			</div>

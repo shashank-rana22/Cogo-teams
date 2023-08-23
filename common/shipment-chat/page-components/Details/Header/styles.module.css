@@ -1,9 +1,10 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	width: 100%;
-	min-height: 82px;
-	background-color: #fff;
+	min-height: 80px;
+	border-radius: 0 8px 0 0;
 }
 
 .sub_container {
@@ -12,19 +13,14 @@
 	justify-content: space-between;
 	width: 100%;
 	padding: 6px 0;
-	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+	border-radius: 0 8px 0 0;
 }
 
 .serial_id {
 	width: 160px;
-	padding: 0 16px;
-	font-size: 12px;
+	margin: 0 8px;
 	font-weight: 700;
-	color: #333;
-	text-decoration-line: underline;
 	white-space: nowrap;
-	cursor: pointer;
-	border-right: 1px solid #f68b21;
 }
 
 .name {
@@ -55,7 +51,6 @@
 
 .button {
 	display: flex;
-	gap: 8px;
 	align-items: center;
 	justify-content: center;
 	width: 80px;
@@ -67,31 +62,37 @@
 	border-radius: 6px;
 }
 
+.profile_img {
+	margin-right: 4px;
+}
+
 .filter_box {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	height: 36px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #221f20;
-	background: #cfeaed;
+	color: var(--color-secondary-greyscale-2);
+	background: var(--color-tertiary-blue-4);
 }
 
 .close_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 4px;
 	margin-right: 6px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #ee3425;
-	cursor: pointer;
 	border-radius: 50%;
 
 	&:hover {
 		background: white;
 		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	}
+
+	:global {
+		.ui_button_container {
+			min-width: fit-content;
+			height: fit-content;
+			padding: 4px;
+			font-size: var(--font-size-xl);
+			color: var(--color-primary-error-red-2);
+		}
 	}
 }

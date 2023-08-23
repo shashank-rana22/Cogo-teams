@@ -63,6 +63,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 						setShowAcceptModal={setShowAcceptModal}
 						id={id}
 						getEmployeeDetails={getEmployeeDetails}
+						document_url={document_url}
 					/>
 
 				</div>

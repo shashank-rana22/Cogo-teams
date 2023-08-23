@@ -3,6 +3,7 @@ import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import getFormattedPayload from '../utils/getFormattedPayload';
+import toastApiError from '../utils/toastApiError';
 
 const START_PAGE = 1;
 const KEY_TO_SEND = {
@@ -28,7 +29,7 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 		try {
 			await trigger({ params });
 		} catch (err) {
-			// console.error(err);
+			toastApiError(err);
 		}
 	};
 
@@ -36,7 +37,7 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 		try {
 			await rateRequestTrigger({ params });
 		} catch (err) {
-			// console.error(err);
+			toastApiError(err);
 		}
 	};
 

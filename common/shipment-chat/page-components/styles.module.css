@@ -13,6 +13,13 @@
 	justify-content: center;
 	cursor: pointer;
 	border-radius: 50%;
+
+	:global {
+		.ui_button_container {
+			min-width: fit-content;
+			padding: 0;
+		}
+	}
 }
 
 .icon {
@@ -25,8 +32,8 @@
 
 .circle {
 	position: absolute;
-	top: -4px;
-	right: -4px;
+	top: -12px;
+	right: -8px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

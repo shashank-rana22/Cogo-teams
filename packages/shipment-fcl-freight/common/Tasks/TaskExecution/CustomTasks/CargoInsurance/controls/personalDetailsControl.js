@@ -50,7 +50,7 @@ export const personalDetailsControl = [
 	{
 		label       : 'Email',
 		name        : 'email',
-		type        : 'email',
+		type        : 'text',
 		span        : 3,
 		placeholder : 'Enter Email',
 		rules       : {

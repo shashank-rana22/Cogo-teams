@@ -1,0 +1,133 @@
+.intelligence_container {
+	padding: 10px 0;
+}
+
+.intelligence_title {
+	margin-bottom: 5px;
+	font-weight: 600;
+	font-weight: 16px;
+	color: #221f20;
+}
+
+.intelligence_content {
+	color: #828282;
+}
+
+.plans_sub_header {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	color: #ee3425;
+
+	span {
+		margin-left: 5px;
+	}
+}
+
+.standard_plans_footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.discount {
+	display: flex;
+	font-size: 12px;
+	color: #f9ae64;
+}
+
+.annual_discount_percent {
+	margin: 0 2px;
+}
+
+.toggle_container {
+	display: flex;
+	align-items: center;
+}
+
+.subcription_amount {
+	margin-bottom: 4px;
+}
+
+.plans_fixed_footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 15px 25px 15px 10px;
+	background: #fff;
+	box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+}
+
+.two_childs_present {
+	justify-content: space-between;
+}
+
+.buy_add_on_button {
+	margin-right: 20px;
+}
+
+.active_standard_plans_footer {
+	color: #fff;
+
+	span {
+		margin-left: 2px;
+		font-weight: 700;
+	}
+}
+
+.empty_state_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.empty_state_label {
+	margin: 30px 0;
+	font-size: 18px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.copy_icon {
+	width: 18px;
+	height: 18px;
+	margin-left: 8px;
+	cursor: pointer;
+
+	:hover {
+		fill: #034afd;
+	}
+}
+
+.payment_link_status {
+	width: 120px;
+	overflow: hidden;
+	font-size: 12px;
+	color: #034afd;
+	text-decoration: underline;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.refresh_icon {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+	cursor: pointer;
+
+	:hover {
+		fill: #034afd;
+	}
+}
+
+.link_with_refresh {
+	display: flex;
+	align-items: center;
+}

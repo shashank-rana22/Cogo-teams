@@ -1,8 +1,8 @@
-const controls = [
+const getControls = ({ t = () => {} }) => [
 	{
 		name        : 'origin_country',
-		placeholder : 'Enter Country...',
-		label       : 'Origin Country',
+		placeholder : t('athenaDashboard:origin_country_placeholder'),
+		label       : t('athenaDashboard:origin_country_label'),
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
@@ -17,8 +17,8 @@ const controls = [
 	},
 	{
 		name        : 'destination_country',
-		placeholder : 'Enter Country...',
-		label       : 'Destination Country',
+		placeholder : t('athenaDashboard:destination_country_placeholder'),
+		label       : t('athenaDashboard:destination_country_label'),
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
@@ -33,8 +33,8 @@ const controls = [
 	},
 	{
 		name        : 'origin_port',
-		placeholder : 'Enter Port...',
-		label       : 'Origin Port',
+		placeholder : t('athenaDashboard:origin_port_placeholder'),
+		label       : t('athenaDashboard:origin_port_label'),
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
@@ -49,8 +49,8 @@ const controls = [
 	},
 	{
 		name        : 'destination_port',
-		placeholder : 'Enter Port...',
-		label       : 'Destination Port',
+		placeholder : t('athenaDashboard:destination_port_placeholder'),
+		label       : t('athenaDashboard:destination_port_label'),
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
@@ -64,4 +64,4 @@ const controls = [
 
 	},
 ];
-export default controls;
+export default getControls;

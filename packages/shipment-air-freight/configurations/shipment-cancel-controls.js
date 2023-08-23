@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 
 import SALES_REASON_OPTIONS from './sales-reason-options';
 import {
@@ -80,16 +80,8 @@ const controls = (state, cancelReason) => {
 				size        : 'sm',
 				placeholder : 'Select Currency',
 				span        : 6,
-				options     : [
-					GLOBAL_CONSTANTS.currency_code.INR,
-					GLOBAL_CONSTANTS.currency_code.USD,
-					GLOBAL_CONSTANTS.currency_code.EUR,
-					GLOBAL_CONSTANTS.currency_code.GBP,
-				].map((currency) => ({
-					label : currency,
-					value : currency,
-				})),
-				rules: {
+				options     : currencies,
+				rules       : {
 					required: 'Currency is required',
 				},
 			},

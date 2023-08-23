@@ -1,6 +1,7 @@
-import { cl } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -21,15 +22,30 @@ const formarAmountData = (amount) => formatAmount({
 	},
 });
 
-const getPremiumLineItem = ({ amount, item, key }) => (
-	<div className={styles.premium_line_item} key={key}>
-		<div className={styles.text}>{item}</div>
-		<div className={cl`${styles.flex_row} ${styles.values}`}>
-			<div className={styles.line} />
-			{formarAmountData(amount)}
+function GetPremiumLineItem({ amount, item, key }) {
+	return (
+		<div className={styles.premium_line_item} key={key}>
+			<div className={styles.text}>
+				{item}
+				{item === 'Amount Payable'
+					? 						(
+						<Tooltip
+							interactive
+							theme="light"
+							content="Exclusive of taxes"
+						>
+							<IcMInfo className={styles.info_icon} />
+						</Tooltip>
+					)
+					: null}
+			</div>
+			<div className={cl`${styles.flex_row} ${styles.values}`}>
+				<div className={styles.line} />
+				{formarAmountData(amount)}
+			</div>
 		</div>
-	</div>
-);
+	);
+}
 
 function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 	if (premiumLoading) {
@@ -42,17 +58,33 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 
 	return (
 		<div className={styles.premium_value}>
-			{isEmpty(premiumData?.serviceChargeList)
-				? CHARGES.map((item) => getPremiumLineItem({ amount: DEFAULT_AMOUNT, item, key: item?.displayName }))
-				: premiumData?.serviceChargeList?.map((item) => getPremiumLineItem({
-					amount : item?.totalCharges,
-					item   : item?.displayName,
-					key    : item?.displayName,
-				}))}
+			{isEmpty(premiumData?.serviceChargeList) ? (
+				CHARGES.map((item) => (
+					<GetPremiumLineItem
+						amount={DEFAULT_AMOUNT}
+						item={item}
+						key={item?.displayName}
+					/>
+				))
+			) : (
+				premiumData?.serviceChargeList?.map((item) => (
+					<GetPremiumLineItem
+						amount={item?.totalCharges}
+						item={item?.displayName}
+						key={item?.displayName}
+					/>
+				))
+			)}
 
 			<div className={styles.line} />
-			{getPremiumLineItem({ amount: premiumData?.totalApplicableCharges, item: 'Amount Payable', key: '' })}
+
+			<GetPremiumLineItem
+				amount={premiumData?.totalCharges}
+				item="Amount Payable"
+				key=""
+			/>
 		</div>
+
 	);
 }
 
