@@ -2,16 +2,25 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import React, { useState, useContext } from 'react';
 
 import { INFO_CONTENT, MAPPING_CARDS_DATA } from '../../constants';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
+import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
 import ServiceWiseStats from '../ServicewiseStats';
+import { TOUR_COMMON_PROPS } from '../tourCommonProps';
+import { ONGOING_PARENT_SERVICES_STEPS } from '../tourSteps';
 
 import getCardData from './getCardData';
 import StatCard from './statCard';
 import styles from './styles.module.css';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const PLACEHOLDER_COUNT = 4;
 
@@ -31,6 +40,7 @@ function ParentServicewiseStats({
 	activeShipmentCard = '', entity = '', timeRange = '', filter = {},
 	customDate = new Date(),
 }) {
+	const { tour, setTour } = useContext(TourContext);
 	const [activeService, setActiveService] = useState('');
 	const { currency, invoiceCount, jobCount } = mainCardData || {};
 
@@ -52,6 +62,14 @@ function ParentServicewiseStats({
 		<div>
 			{isEmpty(activeService) ? (
 				<div className={styles.container}>
+					{!serviceLevelLoading && (
+						<Tour
+							steps={ONGOING_PARENT_SERVICES_STEPS}
+							isOpen={tour && isEmpty(activeService)}
+							onRequestClose={() => setTour(false)}
+							{...TOUR_COMMON_PROPS}
+						/>
+					)}
 					<div className={styles.justifiy}>
 						<RenderCardHeader
 							title="Ongoing Shipments"
@@ -76,7 +94,10 @@ function ParentServicewiseStats({
 
 						</div>
 						{!serviceLevelLoading ? (
-							<div className={styles.sidestats}>
+							<div
+								className={styles.sidestats}
+								data-tour="parent-service-group"
+							>
 								{services.map((service) => {
 									const singleServiceData = (serviceLevelData || []).filter(
 										(item) => item.serviceName === service,
@@ -122,6 +143,7 @@ function ParentServicewiseStats({
 					timeRange={timeRange}
 					filter={filter}
 					activeShipmentCard={activeShipmentCard}
+					setActiveShipmentCard={setActiveShipmentCard}
 					customDate={customDate}
 				/>
 			)}

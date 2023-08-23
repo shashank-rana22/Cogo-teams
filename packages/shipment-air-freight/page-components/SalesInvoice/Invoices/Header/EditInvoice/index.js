@@ -1,6 +1,5 @@
 import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
@@ -10,7 +9,7 @@ import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
+const ALLOWED_ROLES = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
 
 function EditInvoice({
 	show = 'false',
@@ -19,11 +18,9 @@ function EditInvoice({
 	refetch = () => {},
 	shipment_data = {},
 }) {
-	const { role_ids } = useSelector(({ profile }) => ({
-		role_ids: profile.partner?.user_role_ids,
-	}));
-	const isAdminSuperAdmin = [geo.uuid.admin_id, geo.uuid.super_admin_id]
-		.some((ele) => role_ids?.includes(ele));
+	const { profile } = useSelector((state) => state);
+
+	const isRoleAllowed = ALLOWED_ROLES.includes(profile?.user?.id);
 
 	const {
 		controls,
@@ -34,18 +31,19 @@ function EditInvoice({
 		control,
 		setValue,
 		watch,
+		onError,
 		newFormValues,
 	} = editLineItems({
 		invoice,
 		onClose,
 		refetch,
-		isAdminSuperAdmin,
+		isRoleAllowed,
 		shipment_data,
 		info: <Info />,
 	});
 
 	const disabledProps = controls?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name === 'air_freight_service'
-	&& !isAdminSuperAdmin && shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
+	&& !isRoleAllowed && shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
 
 	const formValues = watch();
 
@@ -108,7 +106,7 @@ function EditInvoice({
 
 				<Button
 					size="md"
-					onClick={handleSubmit(onCreate)}
+					onClick={handleSubmit(onCreate, onError)}
 					style={{ marginLeft: '16px' }}
 					disabled={loading}
 				>

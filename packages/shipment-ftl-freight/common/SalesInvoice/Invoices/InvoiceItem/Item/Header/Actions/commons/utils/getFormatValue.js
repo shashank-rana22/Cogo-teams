@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 const CUSTOMER_KEYS = [
 	'customer_id',
 	'customer_name',
@@ -11,7 +13,7 @@ const CONSIGNOR_KEYS = [
 	'consignor_address',
 	'consignor_gstin',
 ];
-const ADDITIONAL_CHARGE_KEYS = [
+export const ADDITIONAL_CHARGE_KEYS = [
 	'loading_amount',
 	'loading_amount_tax',
 	'loading_description',
@@ -83,10 +85,14 @@ export const getFormatValue = ({
 	values = {},
 	shipment_id = '',
 	invoice_combination_id = '',
+	terms_and_conditions = '',
+	bank_details = '',
 }) => {
 	const formattedData = {
 		shipment_id,
 		invoice_combination_id,
+		terms_and_conditions : isEmpty(terms_and_conditions) ? terms_and_conditions : undefined,
+		bank_details         : isEmpty(bank_details) ? bank_details : undefined,
 	};
 
 	Object.keys(DATA_OBJECT_KEYS_MAPPING).forEach((key) => {
@@ -98,14 +104,14 @@ export const getFormatValue = ({
 			([objKey, objValue]) => {
 				if (Array.isArray(objValue) && objValue.includes(rawKey)) {
 					const finalValue = objKey === 'trip_documents' ? rawValue?.finalUrl || rawValue : rawValue;
-					formattedData[objKey][rawKey] = finalValue ?? undefined;
+					formattedData[objKey][rawKey] = finalValue !== '' ? finalValue ?? undefined : undefined;
 					return true;
 				}
 				return false;
 			},
 		);
 		if (!entryAdded) {
-			formattedData[rawKey] = rawValue ?? undefined;
+			formattedData[rawKey] = rawValue !== '' ? rawValue ?? undefined : undefined;
 		}
 	});
 
