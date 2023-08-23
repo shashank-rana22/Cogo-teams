@@ -5,12 +5,12 @@ import Services from '../Services';
 
 import styles from './styles.module.css';
 
-function ManageServices() {
+function ManageServices({ activeTab = '', source = '' }) {
 	return (
 		<Accordion title={<div className={styles.title}>Manage Services</div>} isOpen>
-			<Services />
+			{ activeTab !== 'purchase' && <Services /> }
 
-			<AdditionalServiceList />
+			<AdditionalServiceList source={source} />
 		</Accordion>
 	);
 }

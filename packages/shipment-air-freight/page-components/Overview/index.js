@@ -14,7 +14,7 @@ function Overview() {
 
 	return (
 		<div className={styles.container}>
-			<ManageServices />
+			<ManageServices source="overview" />
 
 			<AWBDetails />
 
