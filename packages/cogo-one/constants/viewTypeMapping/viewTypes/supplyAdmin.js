@@ -28,7 +28,7 @@ const SUPPLY_ADMIN = {
 	bulk_assign_features          : ['bulk_send_templates'],
 	configurations_to_be_shown    : [],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
-	group_agents_api_filter       : ['supply'],
+	group_agents_api_filter       : 'supply',
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
