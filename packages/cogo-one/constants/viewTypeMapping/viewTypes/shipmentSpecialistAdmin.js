@@ -20,7 +20,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	accessible_new_communications : ['new_mail'],
 	stats_feedback_count          : [],
 	to_show_agent_activity_graph  : false,
-	group_agents_api_filter       : 'shipment_specialist',
+	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,

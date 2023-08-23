@@ -106,6 +106,7 @@ function MailDetails({
 					activeMail={activeMail}
 					handleScroll={handleScroll}
 					setActiveMail={setActiveMail}
+					searchQuery={searchQuery}
 				/>
 			)}
 		</div>
