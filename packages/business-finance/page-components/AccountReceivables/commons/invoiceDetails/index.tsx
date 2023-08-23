@@ -23,7 +23,7 @@ const INVOICE_DATA_MAPPING = [
 	{ id: '3', label: 'UTR Number' },
 	{ id: '4', label: 'Cancellation Agreement' },
 ];
-function InvoiceDetails({ item }) {
+function InvoiceDetails({ item, entityCode }) {
 	const { loading, data, getInvoiceDetailsApi } = useInvoiceDetails({
 		id: item?.id,
 	});
@@ -198,7 +198,11 @@ function InvoiceDetails({ item }) {
 																<Poc data={data} />
 															)}
 															{label === 'Timeline' && (
-																<Timeline data={data} loading={loading} />
+																<Timeline
+																	data={data}
+																	loading={loading}
+																	entityCode={entityCode}
+																/>
 															)}
 															{label === 'UTR Number' && (
 																<UtrNumber eventData={data} />

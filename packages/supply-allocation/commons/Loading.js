@@ -1,12 +1,19 @@
 import React from 'react';
 
+const DOT_LENGTH_MULTIPLIER = 0.2;
+const DOT_LENGTH_REMAINDER = 0.1;
+const TOTAL_TIME_MULTIPLIER = -0.4;
+const ONE = 1;
+
 function WaveLoadingAnimation({ dotLength = 6 }) {
 	const animationDelay = (index) => {
-		const a = (-0.4) + (index - 1) * 0.2;
+		const a = TOTAL_TIME_MULTIPLIER + (index - ONE) * DOT_LENGTH_MULTIPLIER;
 		return `${a}s`;
 	};
 
-	const finalAnimationTime = `blink ${dotLength * 0.2 + 0.1}s infinite, shrink ${dotLength * 0.2 + 0.1}s infinite`;
+	const finalAnimationTime = `blink ${
+		dotLength * DOT_LENGTH_MULTIPLIER + DOT_LENGTH_REMAINDER
+	}s infinite, shrink ${dotLength * DOT_LENGTH_MULTIPLIER + DOT_LENGTH_REMAINDER}s infinite`;
 
 	const styles = `
     html, body {
@@ -38,12 +45,14 @@ function WaveLoadingAnimation({ dotLength = 6 }) {
     }
 
     ${Array.from({ length: dotLength })
-		.map((_, index) => `
-        #wave .dot:nth-child(${index + 1}) {
+		.map(
+			(_, index) => `
+        #wave .dot:nth-child(${index + ONE}) {
             animation-delay: ${animationDelay(index)};
             background-color: #ee3425;
         }
-        `)
+        `,
+		)
 		.join('\n')}
       
     @keyframes blink {
@@ -72,6 +81,7 @@ function WaveLoadingAnimation({ dotLength = 6 }) {
 			<style>{styles}</style>
 			<div id="wave">
 				{Array.from({ length: dotLength }).map((_, index) => (
+					// eslint-disable-next-line react/no-array-index-key
 					<span key={index} className="dot" />
 				))}
 			</div>

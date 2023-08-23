@@ -1,6 +1,5 @@
 .location_container {
 	display: flex;
-	gap: 30px;
 	align-items: center;
 	margin-top: 30px;
 }
@@ -29,7 +28,7 @@
 	font-size: 12px;
 	font-weight: 500;
 	color: #333;
-	background: white;
+	background: #fff;
 	border-radius: 4px;
 
 	&:hover {
@@ -38,5 +37,21 @@
 }
 
 .port_arrow_icon {
-	margin-top: 30px;
+	padding: 0 20px;
+	margin-top: 20px;
+}
+
+.select_container {
+	margin-top: 20px;
+
+	:global {
+		.ui_select_container {
+			width: 200px;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
 }

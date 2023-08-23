@@ -11,11 +11,22 @@ import LocationSelect from './LocationSelect';
 function SupplyAllocation() {
 	const [locationDetails, setLocationDetails] = useState({});
 
-	const { data, refetchListFclSearches, pagination, setPagination, loading, setFilters } = useListFclSearches();
+	const {
+		data,
+		refetchListFclSearches,
+		pagination,
+		setPagination,
+		loading,
+		setFilters,
+	} = useListFclSearches();
 
 	const { control, reset } = useForm({});
 
-	const { createSupplySearch } = useCreateSupplySearch({ refetchListFclSearches, reset, setLocationDetails });
+	const { createSupplySearch, createSearchLoadng } = useCreateSupplySearch({
+		refetchListFclSearches,
+		reset,
+		setLocationDetails,
+	});
 
 	return (
 		<>
@@ -29,6 +40,8 @@ function SupplyAllocation() {
 				setLocationDetails={setLocationDetails}
 				setFilters={setFilters}
 				setPagination={setPagination}
+				listLoading={loading}
+				createSearchLoadng={createSearchLoadng}
 			/>
 
 			<List
@@ -37,8 +50,8 @@ function SupplyAllocation() {
 				pagination={pagination}
 				loading={loading}
 				setPagination={setPagination}
+				setFilters={setFilters}
 			/>
-
 		</>
 	);
 }

@@ -1,32 +1,44 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { startCase } from '@cogoport/utils';
+
+import styles from './styles.module.css';
 
 const BORDER_COLOR_MODIFIERS = 0.2;
 const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 
-function PieChart({ data = [], count = 0, heading = '' }) {
+function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 	const colors = data.map((item) => item.color);
 
 	return (
-		<div style={{
-			display       : 'flex',
-			flexDirection : 'column',
-			flexBasis     : '33%',
-			height        : '350px',
-			background    : '#fff',
-			padding       : '0',
-
-		}}
+		<div
+			style={{
+				display       : 'flex',
+				flexDirection : 'column',
+				flexBasis     : '33%',
+				height        : '300px',
+				background    : '#fff',
+				padding       : '0',
+			}}
 		>
-			<div style={{ fontWeight: 600, paddingLeft: '20px' }}>{heading}</div>
+			<div style={{
+				fontWeight   : 600,
+				paddingLeft  : '16px',
+				paddingTop   : '16px',
+				marginBottom : '-20px',
+			}}
+			>
+				{heading}
+
+			</div>
 
 			<ResponsivePie
 				colors={colors}
 				data={data}
 				margin={{
-					top    : 20,
-					right  : 110,
-					bottom : 20,
-					left   : 110,
+					top    : 0,
+					right  : 240,
+					bottom : 0,
+					left   : 20,
 				}}
 				innerRadius={0.8}
 				padAngle={0.7}
@@ -47,27 +59,80 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 					from      : 'color',
 					modifiers : [['darker', ARC_LABELS_TEXT_COLOR_MODIFIERS]],
 				}}
+				tooltip={({ datum: { label, value } }) => (
+					<div className={styles.pie_tooltip_container}>
+						<div className={styles.text_pie}>
+							{startCase(label)}
+							{' '}
+							(
+							{value}
+							{' '}
+							TEU)
+						</div>
+					</div>
+				)}
 			/>
 
-			{count
-				? (
-					<div style={{
-						marginLeft    : '-3px',
+			{count ? (
+				<div
+					style={{
+						marginLeft    : '-220px',
 						display       : 'flex',
 						flexDirection : 'column',
 						alignItems    : 'center',
-						marginTop     : '-190px',
+						marginTop     : '-174px',
 					}}
-					>
-						<div style={{ fontSize: '10px' }}>Predicted</div>
-						<div style={{ fontSize: '16px' }}>
-							{count}
-							{' '}
-							TEU
-						</div>
-
+				>
+					<div className={styles.predicted}>Predicted</div>
+					<div className={styles.count}>
+						{count}
+						{' '}
+						TEU
 					</div>
-				) : null}
+				</div>
+			) : null}
+			<div
+				style={{
+					marginTop      : '-54px',
+					display        : 'flex',
+					flexWrap       : 'wrap',
+					alignItems     : 'center',
+					justifyContent : 'center',
+					flexDirection  : 'column',
+					marginLeft     : '229px',
+
+				}}
+			>
+				{legendsData.map((legend) => {
+					const { color, label, currCount } = legend;
+					return (
+						<div
+							key={label}
+							style={{
+								display     : 'flex',
+								alignItems  : 'center',
+								marginRight : '20px',
+							}}
+						>
+							<div
+								style={{
+									width        : '12px',
+									height       : '12px',
+									borderRadius : '50%',
+									background   : `${color}`,
+									marginRight  : '4px',
+								}}
+							/>
+							{label}
+							{' '}
+							(
+							{currCount}
+							{' '}
+							TEU)
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

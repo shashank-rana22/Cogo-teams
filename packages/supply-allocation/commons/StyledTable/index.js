@@ -5,7 +5,6 @@ import styles from './styles.module.css';
 function StyledTable({ data = [], columns = [], loading = false }) {
 	return (
 		<div className={styles.table_container}>
-
 			<Table
 				className={styles.table_container}
 				data={data}

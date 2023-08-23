@@ -1,39 +1,18 @@
+import React, { useMemo } from 'react';
+
 import { bucketControls } from '../../../configs/bucket-controls';
+import useGetRollingForecastBucketsData from '../../../hooks/useGetRollingForeCastBucketsData';
 
 import Content from './content';
 
-const ALASKA = 300;
-const BERLIN = 200;
-const CANNADA = 300;
-const ARRAY = [ALASKA, BERLIN, CANNADA];
-const itemsArray = [
-	{
-		key                          : ALASKA,
-		bucket_name                  : 'Sample Bucket 1',
-		supplier_count               : BERLIN,
-		allocation_percent           : BERLIN,
-		current_container_allocation : ALASKA,
-		past_container_allocation    : ARRAY,
-	},
-	{
-		key                          : BERLIN,
-		bucket_name                  : 'Sample Bucket 2',
-		supplier_count               : BERLIN,
-		allocation_percent           : BERLIN,
-		current_container_allocation : ALASKA,
-		past_container_allocation    : ARRAY,
-	},
-	{
-		key                          : CANNADA,
-		bucket_name                  : 'Sample Bucket 3',
-		supplier_count               : CANNADA,
-		allocation_percent           : CANNADA,
-		current_container_allocation : ALASKA,
-		past_container_allocation    : ARRAY,
-	},
-];
-function List({ bucketData = [], search_id = '' }) {
-	const generateBucketTableData = bucketData.reduce((acc, curr) => {
+function List({ search_id = '' }) {
+	const { data: bucketData = [] } = useGetRollingForecastBucketsData({
+		supply_fcl_freight_search_id: search_id,
+	});
+
+	const bucketsArray = (bucketData || []).map((bucket) => bucket.bucket_type);
+
+	const generateBucketTableData = useMemo(() => (bucketData || []).reduce((acc, curr) => {
 		const {
 			allocation_percentage,
 			bucket_type,
@@ -42,49 +21,57 @@ function List({ bucketData = [], search_id = '' }) {
 			suppliers_count = 0,
 		} = curr;
 
-		const { current_promised_containers = 0, current_allocated_containers = 0 } = current_container_allocation;
+		const {
+			current_promised_containers = 0,
+			current_allocated_containers = 0,
+		} = current_container_allocation;
 
-		const { past_fulfilled_containers = 30, past_allocated_containers = 50 } = past_container_fulfillment;
+		const { past_fulfilled_containers = 0, past_allocated_containers = 0 } = past_container_fulfillment;
 
-		return [...acc, {
-			bucket_type,
-			allocation_percentage,
-			suppliers_count,
-			current_promised_containers,
-			current_allocated_containers,
-			past_fulfilled_containers,
-			past_allocated_containers,
-		}];
-	}, []);
+		return [
+			...acc,
+			{
+				bucket_type,
+				allocation_percentage,
+				suppliers_count,
+				current_promised_containers,
+				current_allocated_containers,
+				past_fulfilled_containers,
+				past_allocated_containers,
+			},
+		];
+	}, []), [bucketData]);
 
 	return (
 		<>
-			<div style={{
-				display    : 'flex',
-				alignItems : 'center',
-				background : '#FDFBF6',
-				padding    : '20px 5px',
-				marginTop  : '20px',
-			}}
+			<div
+				style={{
+					display    : 'flex',
+					alignItems : 'center',
+					background : '#FDFBF6',
+					padding    : '20px 5px',
+					marginTop  : '20px',
+				}}
 			>
-				{ bucketControls.map(({ title, flexBasis }) => (
-					<div key={title} style={{ flexBasis, display: 'flex', justifyContent: 'center' }}>
-
+				{bucketControls.map(({ title, flexBasis }) => (
+					<div
+						key={title}
+						style={{ flexBasis, display: 'flex', justifyContent: 'center' }}
+					>
 						{title}
 					</div>
 				))}
-
 			</div>
 
-			{generateBucketTableData.map((item, index) => (
+			{generateBucketTableData?.map((item, index) => (
 				<Content
 					key={item.bucket_type}
 					item={item}
 					index={index}
 					search_id={search_id}
+					bucketsArray={bucketsArray}
 				/>
 			))}
-
 		</>
 	);
 }

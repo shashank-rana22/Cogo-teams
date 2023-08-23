@@ -17,8 +17,11 @@ const ICON_MAPPING = {
 };
 
 function StyledSelect({
-	defaultValue = '', onChange = () => { }, options = {}, disabled = false, size = 'sm',
-
+	defaultValue = '',
+	onChange = () => {},
+	options = {},
+	disabled = false,
+	size = 'sm',
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
@@ -44,16 +47,20 @@ function StyledSelect({
 					setShowPopover(!showPopover);
 				}}
 			>
-				<div className={cl`${styles.styled_text}
+				<div
+					className={cl`${styles.styled_text}
 				 ${styles[size]} ${disabled && styles.disabled}`}
 				>
 					{options[defaultValue]}
-
 				</div>
 
 				{!disabled ? (
 					<IcMArrowDown
-						style={{ margin: '2px 0px 0px 4px', cursor: 'pointer', ...ICON_MAPPING[size] }}
+						style={{
+							margin : '2px 0px 0px 4px',
+							cursor : 'pointer',
+							...ICON_MAPPING[size],
+						}}
 					/>
 				) : null}
 			</div>

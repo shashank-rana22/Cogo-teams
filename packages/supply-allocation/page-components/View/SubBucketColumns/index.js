@@ -1,15 +1,18 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
+import styles from './styles.module.css';
 
 const C = 100;
-const DEF = 0;
+const DEF = GLOBAL_CONSTANTS.zeroth_index;
 const SUB = 20;
 const ANO_SUB = 10;
 
-function GetOrdinalNumber({ number }) {
+function GetOrdinalNumber({ number = 0 }) {
 	const suffix = ['th', 'st', 'nd', 'rd'];
 	const quotient = number % C;
-	const ordinal = suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
+	const ordinal =		suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
 	return (
 		<>
 			<span className="black">{number}</span>
@@ -18,44 +21,67 @@ function GetOrdinalNumber({ number }) {
 	);
 }
 
-const getSubBucketColumns = ({ control = {}, unregister }) => {
+const getSubBucketColumns = ({
+	control = {},
+	unregister,
+	bucketOptions,
+	current_allocated_containers,
+	bucket_type,
+	rollingFclFreightSearchId,
+}) => {
 	const subBucketColumns = [
 		{
 			id       : 'service_provider',
-			Header   : 'SERVICE PROVIDER',
-			accessor : (item) => <ServiceProvider item={item} />,
+			Header   : 'SERVICE PROVIDER', // font weight 700
+			accessor : (item) => (
+				<ServiceProvider
+					item={item}
+					bucketOptions={bucketOptions}
+					bucket_type={bucket_type}
+					current_allocated_containers={current_allocated_containers}
+					rollingFclFreightSearchId={rollingFclFreightSearchId}
+				/>
+			),
 		},
 		{
 			id       : 'Allocated',
-			Header   : 'Allocated',
+			Header   : 'ALLOCATED',
 			accessor : (item) => (
 				<Promised item={item} control={control} unregister={unregister} />
 			),
 		},
 		{
-			id     : 'capability',
-			Header : (
-				<div>CAPABILITY</div>
+			id       : 'capability',
+			Header   : <div>CAPABILITY</div>,
+			accessor : (item) => (
+				<div>
+					{item.capability}
+					{' '}
+					TEU
+				</div>
 			),
-			accessor: (item) => item.capability,
 		},
 		{
 			id     : 'past_allocated',
 			Header : (
 				<>
 					<div>Past Allocated</div>
-					<div>(last 4 weeks)</div>
-				</>),
+					<div className={styles.last_four_weeks}>Last 4 weeks</div>
+				</>
+			),
 			accessor: ({ past_allocation = '' }) => `${past_allocation} TEU`,
 		},
 		{
-			id: 'fulfilled',
-			Header:
-				(
-					<>
-						<div>FULLFILLED</div>
-						<div>(last 4 weeks)</div>
-					</>),
+			id     : 'fulfilled',
+			Header : (
+				<>
+					<div>FULLFILLED</div>
+					<div className={styles.last_four_weeks}>
+						Last 4 weeks
+
+					</div>
+				</>
+			),
 			accessor: ({ allocated_containers = 0 }) => `${allocated_containers} TEU`,
 		},
 		{
@@ -74,12 +100,15 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 						%
 					</div>
 
-					<div>
-						(
-						{rolling_shipments}
-						{' '}
-						rolling shipments)
-					</div>
+					{rolling_shipments
+						? (
+							<div className={styles.rolling_shipments}>
+
+								{rolling_shipments}
+								{' '}
+								Rolling Shipments
+							</div>
+						) : null}
 				</>
 			),
 		},
@@ -88,7 +117,10 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 			Header : (
 				<>
 					<div>Avg Rate rank</div>
-					<div> (Cogoport Profitability)</div>
+					<div className={styles.profitability}>
+						(Cogoport Profitability)
+
+					</div>
 				</>
 			),
 			accessor: ({ avg_rate_rank = '', profitability }) => (
@@ -97,7 +129,7 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 						<GetOrdinalNumber number={avg_rate_rank} />
 					</div>
 
-					<div>
+					<div className={styles.profitability}>
 						(Profitability
 						{' '}
 						{profitability}
@@ -107,6 +139,9 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 			),
 		},
 	];
-	return { subBucketColumns };
+	return {
+		subBucketColumns,
+	};
 };
+
 export default getSubBucketColumns;

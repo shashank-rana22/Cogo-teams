@@ -1,4 +1,11 @@
-import { IcMPort, IcMLocation, IcMAirport, IcAWarehouse, IcMWater, IcMHaulage } from '@cogoport/icons-react';
+import {
+	IcMPort,
+	IcMLocation,
+	IcMAirport,
+	IcAWarehouse,
+	IcMWater,
+	IcMHaulage,
+} from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -21,8 +28,14 @@ const formatSubLocation = (display_name) => {
 	return dp2 ? `${subLocation}, ${dp2}` : subLocation;
 };
 
-function LocationOption({ data = {} }) {
-	const { port_code, postal_code, name:locationName, type, display_name } = data;
+function ListLocations({ data = {} }) {
+	const {
+		port_code,
+		postal_code,
+		name: locationName,
+		type,
+		display_name,
+	} = data;
 
 	const locationCode = port_code || postal_code;
 
@@ -36,16 +49,11 @@ function LocationOption({ data = {} }) {
 
 			<div className={styles.main}>
 				<div className={styles.SpaceBetween}>
-					<p className={styles.location_name}>
-						{locationName}
-					</p>
+					<p className={styles.location_name}>{locationName}</p>
 
 					{locationCode && (
-						<p className={styles.location_code}>
-							{locationCode}
-						</p>
+						<p className={styles.location_code}>{locationCode}</p>
 					)}
-
 				</div>
 
 				<div className={styles.space_between}>
@@ -59,4 +67,4 @@ function LocationOption({ data = {} }) {
 	);
 }
 
-export default LocationOption;
+export default ListLocations;

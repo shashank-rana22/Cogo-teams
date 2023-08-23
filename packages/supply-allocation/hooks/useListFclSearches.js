@@ -7,14 +7,17 @@ const useListFclSearches = () => {
 	const [pagination, setPagination] = useState(INITIAL_PAGE);
 	const [filters, setFilters] = useState({});
 
-	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_rolling_fcl_freight_searches',
-		method : 'get',
-		params : {
-			service_data_required    : true,
-			allocation_data_required : true,
+	const [{ data, loading }, trigger] = useRequest(
+		{
+			url    : '/list_rolling_fcl_freight_searches',
+			method : 'get',
+			params : {
+				service_data_required    : true,
+				allocation_data_required : true,
+			},
 		},
-	}, { manual: false });
+		{ manual: false },
+	);
 
 	const refetchListFclSearches = async () => {
 		try {
