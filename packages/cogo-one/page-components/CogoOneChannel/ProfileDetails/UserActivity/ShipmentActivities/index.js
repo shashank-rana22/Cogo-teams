@@ -8,7 +8,10 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMappi
 
 import styles from './styles.module.css';
 
-function ShipmentActivities({ transactional = {}, viewType = '', fetchActivityLogs = () => {} }) {
+function ShipmentActivities({
+	transactional = {}, viewType = '', fetchActivityLogs = () => {},
+	setActiveTab = () => {},
+}) {
 	const [showPopover, setShowPopover] = useState('');
 	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
 
@@ -46,6 +49,7 @@ function ShipmentActivities({ transactional = {}, viewType = '', fetchActivityLo
 						showPocModal={showPocModal}
 						setShowPocModal={setShowPocModal}
 						fetchActivityLogs={fetchActivityLogs}
+						setActiveTab={setActiveTab}
 					/>
 				) : null}
 		</>

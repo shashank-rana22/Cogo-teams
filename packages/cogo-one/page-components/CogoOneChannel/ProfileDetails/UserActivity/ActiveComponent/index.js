@@ -12,6 +12,7 @@ function ActiveComponent(props) {
 		shipmentsData = {},
 		viewType = '',
 		fetchActivityLogs = () => {},
+		setActiveTab = () => {},
 	} = props || {};
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -42,6 +43,7 @@ function ActiveComponent(props) {
 				shipmentsData={shipmentsData}
 				viewType={viewType}
 				fetchActivityLogs={fetchActivityLogs}
+				setActiveTab={setActiveTab}
 			/>
 		</div>
 	);

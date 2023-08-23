@@ -30,6 +30,7 @@ function UserActivities(props) {
 		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
 		setRaiseTicketModal = () => {},
 		viewType = '',
+		setActiveTab = () => {},
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -42,7 +43,6 @@ function UserActivities(props) {
 		user_id:messageUserId,
 		lead_user_id:messageLeadUserId = null, id = '', sender = '',
 	} = formattedMessageData || {};
-
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
 	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
@@ -99,7 +99,6 @@ function UserActivities(props) {
 
 	const { list: timeLineList = [], total_count: agent_total_count } = timeLineData || {};
 	const { list: chatDataList = [], total_count: summary_total_count } = chatData || {};
-
 	let list = [];
 	let channel_total_count;
 
@@ -259,6 +258,7 @@ function UserActivities(props) {
 					setRaiseTicketModal={setRaiseTicketModal}
 					viewType={viewType}
 					fetchActivityLogs={fetchActivityLogs}
+					setActiveTab={setActiveTab}
 				/>
 			)}
 
