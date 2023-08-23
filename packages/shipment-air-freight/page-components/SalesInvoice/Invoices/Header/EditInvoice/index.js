@@ -20,7 +20,7 @@ function EditInvoice({
 }) {
 	const { profile } = useSelector((state) => state);
 
-	const isRoleAllowed = ALLOWED_ROLES.some((ele) => profile?.user?.id?.includes(ele));
+	const isRoleAllowed = ALLOWED_ROLES.includes(profile?.user?.id);
 
 	const {
 		controls,
