@@ -81,9 +81,9 @@ function EmailBodyStructure({
 								className={styles.header_to_cc}
 								key={itm.label}
 							>
-								{itm.label}
+								{itm?.label || ''}
 								:
-								<ShowEmails emailsData={itm.value} />
+								<ShowEmails emailsData={itm?.value || []} />
 							</div>
 						),
 					)}

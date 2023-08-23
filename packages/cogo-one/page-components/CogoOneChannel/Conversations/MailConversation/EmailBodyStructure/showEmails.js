@@ -10,7 +10,7 @@ const INDEX_STEP = 1;
 function TooltipContainer({ popoverMails = [] }) {
 	return (
 		<div className={styles.popover_mails_text}>
-			{popoverMails.map(
+			{(popoverMails || [])?.map(
 				(itm, index) => (
 					<div
 						key={itm}
