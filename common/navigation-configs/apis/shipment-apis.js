@@ -1745,8 +1745,12 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'get_shipment_report_url',
 		api          : 'create_shipment_terminal_service_task',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_report_url',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
