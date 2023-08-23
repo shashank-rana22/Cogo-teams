@@ -99,7 +99,7 @@ function SidePanel({
 					<div className={styles.list_header}>
 						<h4>
 							<span className={styles.elipsis}>{startCase(originName)}</span>
-							<span>{`to ${startCase(destination || 'Countries')}`}</span>
+							<span>{` to ${startCase(destination || 'Countries')}`}</span>
 						</h4>
 						<SortButton
 							type={sort_type}
