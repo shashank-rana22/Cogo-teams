@@ -5,7 +5,6 @@ import Header from './Header';
 
 const RESOLVE_SHIPMENT = {
 	ocean : dynamic(() => import('./Fcl'), { ssr: false }),
-	air   : dynamic(() => import('./Air'), { ssr: false }),
 	rail  : dynamic(() => import('./Rail'), { ssr: false }),
 };
 
@@ -22,7 +21,7 @@ function DetentionDemurrage() {
 			/>
 
 			<div>
-				{Shipment ? <Shipment /> : null}
+				{Shipment ? <Shipment activeShipment={activeShipment} /> : null}
 			</div>
 		</div>
 	);

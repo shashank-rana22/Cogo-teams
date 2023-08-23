@@ -3,23 +3,23 @@ import { useEffect, useCallback, useState } from 'react';
 
 import removeObjEmptyValue from '../helpers/removeObjEmptyValue';
 
-const useListFclFreightRateFreeDays = ({ activeTab = '', isApiTrigger = true, defaultFilters = {} }) => {
+const useListShipmentInvoiceCombinations = ({ defaultFilters = {} }) => {
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 
 	const { page = 1, ...restFilters } = filters;
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_fcl_freight_rate_free_days',
+		url    : '/list_shipment_invoice_combinations',
 		params : {
 			filters: {
-				active   : activeTab === 'active' ? true : undefined,
-				inactive : activeTab === 'inactive' ? true : undefined,
-				...(removeObjEmptyValue(restFilters)),
 				...defaultFilters,
+				...(removeObjEmptyValue(restFilters)),
+
 			},
 			page,
-			page_limit: 10,
+			page_limit : 10,
+			sort_by    : 'created_at',
 		},
 	}, { manual: true });
 
@@ -37,8 +37,8 @@ const useListFclFreightRateFreeDays = ({ activeTab = '', isApiTrigger = true, de
 	}, [trigger]);
 
 	useEffect(() => {
-		if (isApiTrigger)apiTrigger();
-	}, [apiTrigger, filters, activeTab, isApiTrigger]);
+		apiTrigger();
+	}, [apiTrigger, filters]);
 
 	return {
 		loading,
@@ -49,4 +49,4 @@ const useListFclFreightRateFreeDays = ({ activeTab = '', isApiTrigger = true, de
 	};
 };
 
-export default useListFclFreightRateFreeDays;
+export default useListShipmentInvoiceCombinations;
