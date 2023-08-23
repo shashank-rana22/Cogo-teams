@@ -70,14 +70,14 @@ export const usePieChartConfigs = (type, data) => {
 	if (!type) {
 		return {
 			pieChartData,
-			pieColors: Object.keys(data).flatMap((key) => {
-				if (key !== 'total_rates') return COLOR_MAPPINGS[key][GLOBAL_CONSTANTS.zeroth_index];
+			pieColors: Object.keys(data || {}).flatMap((key) => {
+				if (key !== 'total_rate_count') return COLOR_MAPPINGS[key]?.[GLOBAL_CONSTANTS.zeroth_index];
 				return [];
 			}),
 		};
 	}
 	return {
-		pieChartData: [...Object.entries(data).flatMap((obj) => {
+		pieChartData: [...Object.entries(data || {}).flatMap((obj) => {
 			if (obj[GLOBAL_CONSTANTS.zeroth_index] === type) {
 				return EXPLORED_VIEW_DATA.map((entry) => ({
 					...entry,

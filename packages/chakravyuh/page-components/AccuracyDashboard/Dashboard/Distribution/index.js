@@ -89,7 +89,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 								<div className={styles.pie_chart_middle_container}>
 									<p className={styles.pie_center_text}>Total Rates</p>
 									<p className={styles.pie_center_count}>
-										{formatBigNumbers(data?.total_rates || GLOBAL_CONSTANTS.zeroth_index)}
+										{formatBigNumbers(data?.total_rate_count || GLOBAL_CONSTANTS.zeroth_index)}
 									</p>
 									{ mode
 					&& (
