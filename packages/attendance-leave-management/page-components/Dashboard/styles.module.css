@@ -29,6 +29,10 @@
 	transition: all 0.3s;
 }
 
+.request_btn {
+	gap: 6px;
+}
+
 .show {
 	transform: translateX(0%);
 }
@@ -59,5 +63,14 @@
 
 	.leave_req_reading {
 		padding: 8px 0;
+	}
+
+	.main_tab {
+		:global {
+			.ui_tab_list_container {
+				width: 100%;
+				overflow-x: scroll;
+			}
+		}
 	}
 }

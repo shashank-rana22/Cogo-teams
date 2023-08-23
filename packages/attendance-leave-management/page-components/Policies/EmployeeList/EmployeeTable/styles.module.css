@@ -1,0 +1,45 @@
+.active {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 2px 4px;
+	background: #c4dc91;
+	border-radius: 6px;
+}
+
+.pill {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.editContainer {
+	display: flex;
+	gap: 6px;
+}
+
+.footer {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+}
+
+.footer_text {
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
