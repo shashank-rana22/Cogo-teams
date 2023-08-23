@@ -28,11 +28,11 @@ export const HOME_TOUR_STEPS = [
 export const ONGOING_PARENT_SERVICES_STEPS = [
 	{
 		selector : '[data-tour="parent-service-main"]',
-		content  : 'Combined data',
+		content  : 'Here is the overall summary of ongoing shipments',
 	},
 	{
 		selector : '[data-tour="parent-service-group"]',
-		content  : 'Here are the details of all parent services of ongoing shipments. You can click on any service to get more data.',
+		content  : 'You can check the details of all parent services of ongoing shipments. Click on any service to get more data.',
 	},
 	{
 		selector : '[data-tour="single-parent-service"]',
@@ -79,6 +79,6 @@ export const CLOSED_PARENT_SERVICES_STEPS = [
 export const BAR_GROUP_CHILDREN = [
 	{
 		selector : '[data-tour="children-bar-group"]',
-		content  : 'Here is the detailed graph of service wise data. You can click on "View Details" button(on top) to see list below the graph. Tutorial ends here...',
+		content  : 'Here is the detailed graph of service wise data. You can click on "View Details" button(on top) to see list below the graph. The tutorial ends here... Please click on "Cogo Financials" to return to homepage. ',
 	},
 ];
