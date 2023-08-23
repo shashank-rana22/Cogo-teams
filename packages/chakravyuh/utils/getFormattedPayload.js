@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { LOCATION_KEYS } from '../constants/map_constants';
 
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
-	'is_origin_icd', 'is_destination_icd', 'parent_mode', 'startDate', 'endDate'];
+	'is_origin_icd', 'is_destination_icd', 'parent_mode', 'startDate', 'endDate', 'page'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const keysToExclude = [...EXCLUDE_KEYS, ...excludeKeys];

@@ -95,7 +95,7 @@ function Filters(props) {
 				<DateRangepicker
 					value={{ startDate, endDate }}
 					onChange={(value) => {
-						setGlobalFilters((prev) => ({ ...prev, ...value, page: 1 }));
+						setGlobalFilters((prev) => ({ ...prev, ...value }));
 					}}
 					isPreviousDaysAllowed
 					maxDate={new Date()}
