@@ -13,6 +13,13 @@ function TicketsSectionPart({
 }) {
 	const { t } = useTranslation(['myTickets']);
 
+	const SECTION_LABEL_MAPPING = {
+		Open              : t('myTickets:open_section_label'),
+		'Closure Pending' : t('myTickets:closure_pending_section_label'),
+		Escalated         : t('myTickets:escalated_section_label'),
+		Closed            : t('myTickets:closed_section_label'),
+	};
+
 	const {
 		tickets = {},
 		listLoading = false,
@@ -49,7 +56,7 @@ function TicketsSectionPart({
 	return (
 		<div className={cl`${styles.tickets_section_part} ${isAdmin ? styles.admin_ticket_view : ''}`}>
 			<div className={styles.status_heading}>
-				{label}
+				{SECTION_LABEL_MAPPING[label]}
 				<div className={styles.tickets_count_label}>{`(${total} ${t('myTickets:tickets')})`}</div>
 			</div>
 			<TicketStructure

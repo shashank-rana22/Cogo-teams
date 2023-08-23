@@ -1,7 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useTranslation } from 'next-i18next';
 
-import { STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../constants';
+import { STATUS_MAPPING, getStatusLabelMapping } from '../../../constants';
 import TicketActions from '../../TicketActions';
 
 import styles from './styles.module.css';
@@ -24,7 +25,9 @@ function TicketStructureBody({
 		TicketStatus: ticketStatus = '',
 	} = data;
 
-	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
+	const { t } = useTranslation(['myTickets']);
+
+	const { color: textColor, label } =	getStatusLabelMapping(t)?.[STATUS_MAPPING[ticketStatus]] || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
@@ -39,6 +42,7 @@ function TicketStructureBody({
 						#
 						{id}
 					</div>
+
 					<TicketActions
 						id={id}
 						isModal={false}
@@ -48,12 +52,14 @@ function TicketStructureBody({
 					/>
 				</div>
 			</div>
+
 			<div className={styles.ticket_view} role="presentation" onClick={() => setModalData({ ticketId: id })}>
 				<div className={styles.ticket_type}>
 					<div className={styles.category_ticket_activity}>
 						{type || description.substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
 					</div>
 				</div>
+
 				<div className={styles.subcontainer_two}>
 					<div className={styles.subcontainer_header}>
 						<div
@@ -74,6 +80,7 @@ function TicketStructureBody({
 							})}
 						</div>
 					</div>
+
 					<div className={styles.ticket_reason_box}>
 						<div className={styles.description}>
 							{(ticketActivity?.Description
@@ -84,7 +91,6 @@ function TicketStructureBody({
 								{activityCount}
 							</div>
 						) : null}
-
 					</div>
 				</div>
 			</div>

@@ -46,7 +46,7 @@ function TicketStructure({
 
 			{reachedBottom ? (
 				<div className={styles.footer_no_data}>
-					No more tickets are available
+					{t('myTickets:reached_bottom_label')}
 				</div>
 			) : null}
 
