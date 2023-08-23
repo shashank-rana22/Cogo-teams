@@ -5,21 +5,15 @@
     "roles_and_permission_pills_cogoport":"Cogoport",
     "roles_and_permission_pills_channel_partner":"Kênh đối tác",
     "roles_and_permission_pills_customer":"Khách hàng",
-
     "roles_and_permission_select_stakeholder_id_placeholder": "Chọn đối tác",
     "roles_and_permission_select_navigation_placeholder": "Chọn mô-đun",
-    
-
     "roles_and_permission_select_role_functions_placeholder": "Chọn chức năng",
     "roles_and_permission_select_role_functions_select_sales": "Bán hàng",
     "roles_and_permission_select_role_functions_select_supply": "Cung ứng",
     "roles_and_permission_select_role_functions_select_operations": "Hoạt động",
     "roles_and_permission_select_role_functions_select_finance": "Tài chính",
     "roles_and_permission_select_role_functions_select_external": "Bên ngoài",
-    
-
     "roles_and_permission_select_sub_function_placeholder": "Chọn chức năng con",
-
     "roles_and_permission_select_sales_customer_success": "khách hàng thành công",
     "roles_and_permission_select_sales_field_sales": "Lĩnh vực bán hàng",
     "roles_and_permission_select_sales_strategic_sales": "Bán hàng chiến lược",
@@ -27,7 +21,6 @@
     "roles_and_permission_select_sales_acquisition": "Sự mua lại",
     "roles_and_permission_select_cp_portfolio": "danh mục đầu tư CP",
     "roles_and_permission_select_customer_operations": "Hoạt động khách hàng",
-
     "roles_and_permission_select_supply_shippling_line": "Hãng tàu biển",
     "roles_and_permission_select_supply_freight_forwarder": "Nhà chuyển phát hàng hóa",
     "roles_and_permission_select_supply_transportation": "Vận chuyển",
@@ -36,7 +29,6 @@
     "roles_and_permission_select_supply_nvocc": "NVOCC",
     "roles_and_permission_select_supply_overseas": "Nước ngoài",
     "roles_and_permission_select_supply_iata_agents": "Đại lý IATA",
-      
     "roles_and_permission_select_operations_booking_desk": "Quầy đặt hàng",
     "roles_and_permission_select_operations_post_shipment": "Sau giao hàng",
     "roles_and_permission_select_operations_finops": "Tài chính vận hành",
@@ -44,22 +36,15 @@
     "roles_and_permission_select_operations_cp_customer_operations": "Hoạt động của khách hàng CP",
     "roles_and_permission_select_operations_mid_size_customer_operations": "Hoạt động khách hàng cỡ trung",
     "roles_and_permission_select_operations_enterprise_customer_operations": "Hoạt động khách hàng doanh nghiệp",
-
     "roles_and_permission_select_finance_credit_controller": "Kiểm soát viên tín dụng",
-
     "roles_and_permission_select_training_training_general": "Đào tạo chung",
     "roles_and_permission_select_training_tech": "Công nghệ",
     "roles_and_permission_select_training_product": "Sản phẩm",
-
     "roles_and_permission_select_hr_admin": "Quản trị nhân sự",
     "roles_and_permission_select_hrbp": "HRBP",
     "roles_and_permission_select_talent_acquisition": "Tuyển dụng tài năng",
-
     "roles_and_permission_select_enrichment": "Bổ sung",
-
-
     "roles_and_permission_select_hierarchy_level_placeholder": "Chọn cấp độ",
-
     "roles_and_permission_select_hierarchy_level_owner": "Chủ sở hữu",
     "roles_and_permission_select_hierarchy_level_manager": "Quản lý",
     "roles_and_permission_select_hierarchy_level_function_head": "Trưởng bộ phận",
@@ -67,7 +52,6 @@
     "roles_and_permission_select_hierarchy_level_zone_head": "Trưởng Khu vực",
     "roles_and_permission_select_hierarchy_level_region_head": "Trưởng Vùng",
     "roles_and_permission_select_hierarchy_level_cluster_head": "Trưởng Cụm",
-
     "roles_and_permission_column_role_description": "Mô tả Vai trò",
     "roles_and_permission_column_role_type": "Loại Vai trò",
     "roles_and_permission_column_partner": "Đối tác",
@@ -75,9 +59,7 @@
     "roles_and_permission_column_level": "Cấp độ",
     "roles_and_permission_column_functions": "Chức năng",
     "roles_and_permission_column_sub_functions": "Chức năng phụ",
-
     "roles_and_permission_button_back": "Mặt sau",
-
     "roles_and_permission_update_role_heading": "Cập Nhật Vai Trò",
     "roles_and_permission_update_role_sub_heading": "Cập nhật quyền cho vai trò",
     "roles_and_permission_update_edit_role_heading": "Chỉnh sửa vai trò",
@@ -104,36 +86,29 @@
     "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "Chọn cấp bậc trong hệ thống",
     "roles_and_permission_update_edit_role_remarks_description": "Mô Tả",
     "roles_and_permission_update_edit_role_remarks_placeholder": "Nhập mô tả của vai trò",
-
     "roles_and_permission_update_role_toast_success": "Cập nhật vai trò thành công. Kết quả sẽ được phản ánh trong thời gian ngắn.",
     "roles_and_permission_update_role_toast_error": "Không thể chỉnh sửa vai trò. Vui lòng thử lại!!",
-
     "roles_and_permission_update_role_edit_button": "Biên tập",
     "roles_and_permission_update_role_update_button": "Cập nhật vai trò",
     "roles_and_permission_update_role_updateing_button": "Đang cập nhật vai trò",
-
     "roles_and_permission_update_role_role": "Vai trò",
     "roles_and_permission_update_role_short_name": "Tên ngắn",
     "roles_and_permission_update_role_partner": "Đối tác",
     "roles_and_permission_update_role_role_description": "Mô tả vai trò",
-
     "roles_and_permission_title_modules": "Mô-đun",
     "roles_and_permission_sub_title_first_part_assign_modules": "Phân quyền cho các mô-đun và quyền của nó cho",
     "roles_and_permission_sub_title_second_part_role": "vai trò",
-
     "roles_and_permission_search_navigation_placeholder": "Tìm kiếm Điều hướng",
     "roles_and_permission_filters_label": "Bộ lọc",
     "roles_and_permission_filters_navigation_status_heading": "Trạng thái Điều hướng",
     "roles_and_permission_filters_children_assigned": "Đã phân công",
     "roles_and_permission_filters_children_not_assigned": "Chưa được phân công",
     "roles_and_permission_filters_children_all_assigned": "Tất cả đã phân công",
-
     "roles_and_permission_department_description_access_type_scopes": "Phạm vi các loại quyền truy cập",
     "roles_and_permission_department_description_access_type_scopes_placeholder": "Chọn loại",
     "roles_and_permission_department_description_label": "Phòng ban",
     "roles_and_permission_access_type_allows_description": "Loại quyền truy cập cho phép vai trò này xem dữ liệu trong các định dạng khác nhau. Ví dụ: nếu bạn chọn đội, vai trò sẽ có thể xem dữ liệu của các thành viên trong đội của họ trong phần điều hướng đó.",
     "roles_and_permission_department_description": "Phòng ban cho phép vai trò này xem dữ liệu thông qua các tiêu chí khác nhau trong phạm vi cụ thể. Ví dụ: Nếu bạn đã chọn bán hàng, vai trò sẽ có thể xem dữ liệu trong đó họ được gắn thẻ là người sở hữu bán hàng hoặc dữ liệu của các thành viên trong nhóm của họ được gắn thẻ là người sở hữu bán hàng",
-
     "roles_and_permission_crm_dashboard_button_edit": "Chỉnh sửa",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "Phân công Ngay",
     "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Hủy phân công Ngay",
@@ -143,7 +118,6 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "Đang lưu, Vui lòng đợi...",
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Lưu",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Cho phép Điều hướng",
-
     "roles_and_permission_crm_dashboard_permission_module": "Cấu hình các quyền của bạn theo ý muốn và lưu. Để sửa đổi quyền truy cập hàng loạt, hãy nhấp vào các nút radio tính năng ở trên.",
     "roles_and_permission_create_role_modal_heading": "Tạo Vai trò",
     "roles_and_permission_create_role_modal_sub_heading": "Đặt tên và mô tả vai trò",

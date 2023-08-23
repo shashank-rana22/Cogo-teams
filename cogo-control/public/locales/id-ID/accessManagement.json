@@ -5,21 +5,15 @@
     "roles_and_permission_pills_cogoport": "Cogoport",
     "roles_and_permission_pills_channel_partner": "Mitra Saluran",
     "roles_and_permission_pills_customer": "Mitra Saluran",
-
     "roles_and_permission_select_stakeholder_id_placeholder": "Pilih mitra",
     "roles_and_permission_select_navigation_placeholder": "Pilih modul",
-    
-
     "roles_and_permission_select_role_functions_placeholder": "Pilih Fungsi",
     "roles_and_permission_select_role_functions_select_sales": "Penjualan",
     "roles_and_permission_select_role_functions_select_supply": "Pemasokan",
     "roles_and_permission_select_role_functions_select_operations": "Operasi",
     "roles_and_permission_select_role_functions_select_finance": "Keuangan",
     "roles_and_permission_select_role_functions_select_external": "Eksternal",
-
-
     "roles_and_permission_select_sub_function_placeholder": "Pilih Subfungsi",
-
     "roles_and_permission_select_sales_customer_success": "Sukses Pelanggan",
     "roles_and_permission_select_sales_field_sales": "Penjualan lapangan",
     "roles_and_permission_select_sales_strategic_sales": "Penjualan Strategis",
@@ -27,7 +21,6 @@
     "roles_and_permission_select_sales_acquisition": "Akuisisi",
     "roles_and_permission_select_cp_portfolio": "Portofolio CP",
     "roles_and_permission_select_customer_operations": "Operasi Pelanggan",
-
     "roles_and_permission_select_supply_shippling_line": "Perusahaan Pelayaran",
     "roles_and_permission_select_supply_freight_forwarder": "Pengangkut Barang",
     "roles_and_permission_select_supply_transportation": "Transportasi",
@@ -36,8 +29,6 @@
     "roles_and_permission_select_supply_nvocc": "NVOCC",
     "roles_and_permission_select_supply_overseas": "Luar Negeri",
     "roles_and_permission_select_supply_iata_agents": "Agen IATA",
-      
-
     "roles_and_permission_select_operations_booking_desk": "Meja Pemesanan",
     "roles_and_permission_select_operations_post_shipment": "Pengiriman Setelahnya",
     "roles_and_permission_select_operations_finops": "FINOPS",
@@ -45,22 +36,15 @@
     "roles_and_permission_select_operations_cp_customer_operations": "Operasi Pelanggan CP",
     "roles_and_permission_select_operations_mid_size_customer_operations": "Operasi Pelanggan Skala Menengah",
     "roles_and_permission_select_operations_enterprise_customer_operations": "Operasi Pelanggan Enterprise",
-
     "roles_and_permission_select_finance_credit_controller": "Pengontrol kredit",
-
     "roles_and_permission_select_training_training_general": "Pelatihan Umum",
     "roles_and_permission_select_training_tech": "Teknologi",
     "roles_and_permission_select_training_product": "Produk",
-
     "roles_and_permission_select_hr_admin": "Admin HR",
     "roles_and_permission_select_hrbp": "HRBP",
     "roles_and_permission_select_talent_acquisition": "Akuisisi Bakat",
-
     "roles_and_permission_select_enrichment": "Pemerkayaan",
-
-
     "roles_and_permission_select_hierarchy_level_placeholder": "Pilih tingkat",
-
     "roles_and_permission_select_hierarchy_level_owner": "Pemilik",
     "roles_and_permission_select_hierarchy_level_manager": "Manajer",
     "roles_and_permission_select_hierarchy_level_function_head": "Kepala Fungsi",
@@ -68,7 +52,6 @@
     "roles_and_permission_select_hierarchy_level_zone_head": "Kepala Zona",
     "roles_and_permission_select_hierarchy_level_region_head": "Kepala Wilayah",
     "roles_and_permission_select_hierarchy_level_cluster_head": "Kepala Kluster",
-
     "roles_and_permission_column_role_description": "Deskripsi Peran",
     "roles_and_permission_column_role_type": "Tipe Peran",
     "roles_and_permission_column_partner": "Mitra",
@@ -76,9 +59,7 @@
     "roles_and_permission_column_level": "Tingkat",
     "roles_and_permission_column_functions": "Fungsi",
     "roles_and_permission_column_sub_functions": "Sub Fungsi",
-
     "roles_and_permission_button_back": "Kembali",
-
     "roles_and_permission_update_role_heading": "Perbarui Peran",
     "roles_and_permission_update_role_sub_heading": "Perbarui izin untuk peran",
     "roles_and_permission_update_edit_role_heading": "Sunting Peran",
@@ -105,30 +86,24 @@
     "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "Pilih Tingkat Hirarki",
     "roles_and_permission_update_edit_role_remarks_description": "Deskripsi",
     "roles_and_permission_update_edit_role_remarks_placeholder": "Masukkan deskripsi peran",
-
     "roles_and_permission_update_role_toast_success": "Peran berhasil diperbarui. Hasil akan segera terlihat.",
     "roles_and_permission_update_role_toast_error": "Tidak dapat mengedit peran. Silakan coba lagi!!",
-
     "roles_and_permission_update_role_edit_button": "Sunting",
     "roles_and_permission_update_role_update_button": "Perbarui Peran",
     "roles_and_permission_update_role_updateing_button": "Memperbarui Peran",
-
     "roles_and_permission_update_role_role": "Peran",
     "roles_and_permission_update_role_short_name": "Nama Pendek",
     "roles_and_permission_update_role_partner": "Mitra",
     "roles_and_permission_update_role_role_description": "Deskripsi Peran",
-
     "roles_and_permission_title_modules": "Modul",
     "roles_and_permission_sub_title_first_part_assign_modules": "Tetapkan modul dan izinnya untuk",
     "roles_and_permission_sub_title_second_part_role": "peran",
-
     "roles_and_permission_search_navigation_placeholder": "Cari Navigasi",
     "roles_and_permission_filters_label": "Filter",
     "roles_and_permission_filters_navigation_status_heading": "Status Navigasi",
     "roles_and_permission_filters_children_assigned": "Ditugaskan",
     "roles_and_permission_filters_children_not_assigned": "Tidak Ditugaskan",
     "roles_and_permission_filters_children_all_assigned": "Semua Ditugaskan",
-
     "roles_and_permission_department_description_access_type_scopes": "Jenis akses (lingkup)",
     "roles_and_permission_department_description_access_type_scopes_placeholder": "Pilih jenis",
     "roles_and_permission_department_description_label": "Departemen",

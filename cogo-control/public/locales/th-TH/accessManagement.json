@@ -5,21 +5,15 @@
     "roles_and_permission_pills_cogoport": "Cogoport",
     "roles_and_permission_pills_channel_partner": "พันธมิตรช่องทาง",
     "roles_and_permission_pills_customer": "ลูกค้า",
-
     "roles_and_permission_select_stakeholder_id_placeholder": "เลือกคู่ค้า",
     "roles_and_permission_select_navigation_placeholder": "เลือกโมดูล",
-    
-
     "roles_and_permission_select_role_functions_placeholder": "เลือกฟังก์ชัน",
     "roles_and_permission_select_role_functions_select_sales": "การขาย",
     "roles_and_permission_select_role_functions_select_supply": "การจัดหา",
     "roles_and_permission_select_role_functions_select_operations": "การดำเนินงาน",
     "roles_and_permission_select_role_functions_select_finance": "การเงิน",
     "roles_and_permission_select_role_functions_select_external": "ภายนอก",
-    
-
     "roles_and_permission_select_sub_function_placeholder": "เลือกฟังก์ชั่นย่อย",
-
     "roles_and_permission_select_sales_customer_success": "ความสำเร็จของลูกค้า",
     "roles_and_permission_select_sales_field_sales": "ฝ่ายขายสนาม",
     "roles_and_permission_select_sales_strategic_sales": "ฝ่ายขายกลยุทธ์",
@@ -27,7 +21,6 @@
     "roles_and_permission_select_sales_acquisition": "ฝ่ายจัดหา",
     "roles_and_permission_select_cp_portfolio": "พอร์ตการจัดหา CP",
     "roles_and_permission_select_customer_operations": "การดำเนินงานลูกค้า",
-
     "roles_and_permission_select_supply_shippling_line": "บริษัทเรือ",
     "roles_and_permission_select_supply_freight_forwarder": "บริษัทส่งสินค้า",
     "roles_and_permission_select_supply_transportation": "การขนส่ง",
@@ -36,7 +29,6 @@
     "roles_and_permission_select_supply_nvocc": "NVOCC",
     "roles_and_permission_select_supply_overseas": "ต่างประเทศ",
     "roles_and_permission_select_supply_iata_agents": "ตัวแทน IATA",
-
     "roles_and_permission_select_operations_booking_desk": "โต๊ะจองสินค้า",
     "roles_and_permission_select_operations_post_shipment": "โพสต์การส่งสินค้า",
     "roles_and_permission_select_operations_finops": "การดำเนินงานทางการเงิน",
@@ -44,22 +36,15 @@
     "roles_and_permission_select_operations_cp_customer_operations": "ฝ่ายปฏิบัติการลูกค้าซีพี",
     "roles_and_permission_select_operations_mid_size_customer_operations": "การดำเนินงานลูกค้าขนาดกลาง",
     "roles_and_permission_select_operations_enterprise_customer_operations": "การดำเนินงานลูกค้าองค์กร",
-
     "roles_and_permission_select_finance_credit_controller": "ผู้ควบคุมสินเชื่อ",
-
     "roles_and_permission_select_training_training_general": "การฝึกอบรมทั่วไป",
     "roles_and_permission_select_training_tech": "เทคโนโลยี",
     "roles_and_permission_select_training_product": "ผลิตภัณฑ์",
-
     "roles_and_permission_select_hr_admin": "ผู้ดูแลทรัพยากรบุคคล",
     "roles_and_permission_select_hrbp": "HRBP",
     "roles_and_permission_select_talent_acquisition": "การสรรหาบุคคลที่มีความสามารถ",
-
     "roles_and_permission_select_enrichment": "การเพิ่มคุณค่า",
-
-
     "roles_and_permission_select_hierarchy_level_placeholder": "เลือกระดับ",
-
     "roles_and_permission_select_hierarchy_level_owner": "เจ้าของ",
     "roles_and_permission_select_hierarchy_level_manager": "ผู้จัดการ",
     "roles_and_permission_select_hierarchy_level_function_head": "หัวหน้าฟังก์ชั่น",
@@ -67,7 +52,6 @@
     "roles_and_permission_select_hierarchy_level_zone_head": "หัวหน้าเขต",
     "roles_and_permission_select_hierarchy_level_region_head": "หัวหน้าภูมิภาค",
     "roles_and_permission_select_hierarchy_level_cluster_head": "หัวหน้าคลัสเตอร์",
-
     "roles_and_permission_column_role_description": "คำอธิบายบทบาท",
     "roles_and_permission_column_role_type": "ประเภทบทบาท",
     "roles_and_permission_column_partner": "พันธมิตร",
@@ -75,9 +59,7 @@
     "roles_and_permission_column_level": "ระดับ",
     "roles_and_permission_column_functions": "ฟังก์ชัน",
     "roles_and_permission_column_sub_functions": "ฟังก์ชันย่อย",
-
     "roles_and_permission_button_back": "กลับ",
-
     "roles_and_permission_update_role_heading": "อัปเดตบทบาท",
     "roles_and_permission_update_role_sub_heading": "อัปเดตสิทธิ์สำหรับบทบาท",
     "roles_and_permission_update_edit_role_heading": "แก้ไขบทบาท",
@@ -104,36 +86,29 @@
     "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "เลือกระดับชั้นบรรยากาศ",
     "roles_and_permission_update_edit_role_remarks_description": "คำอธิบาย",
     "roles_and_permission_update_edit_role_remarks_placeholder": "ป้อนคำอธิบายของบทบาท",
-
     "roles_and_permission_update_role_toast_success": "อัปเดตบทบาทเรียบร้อยแล้ว ผลลัพธ์จะปรากฏในเร็ว ๆ นี้",
     "roles_and_permission_update_role_toast_error": "ไม่สามารถแก้ไขบทบาทได้ โปรดลองอีกครั้ง!!",
-
     "roles_and_permission_update_role_edit_button": "แก้ไข",
     "roles_and_permission_update_role_update_button": "อัปเดตบทบาท",
     "roles_and_permission_update_role_updateing_button": "กำลังอัปเดตบทบาท",
-
     "roles_and_permission_update_role_role": "บทบาท",
     "roles_and_permission_update_role_short_name": "ชื่อย่อ",
     "roles_and_permission_update_role_partner": "พาร์ทเนอร์",
     "roles_and_permission_update_role_role_description": "คำอธิบายบทบาท",
-
     "roles_and_permission_title_modules": "โมดูล",
     "roles_and_permission_sub_title_first_part_assign_modules": "กำหนดโมดูลและสิทธิ์สำหรับ",
     "roles_and_permission_sub_title_second_part_role": "บทบาท",
-
     "roles_and_permission_search_navigation_placeholder": "ค้นหาการนำทาง",
     "roles_and_permission_filters_label": "ตัวกรอง",
     "roles_and_permission_filters_navigation_status_heading": "สถานะการนำทาง",
     "roles_and_permission_filters_children_assigned": "มอบหมายแล้ว",
     "roles_and_permission_filters_children_not_assigned": "ไม่ได้มอบหมาย",
     "roles_and_permission_filters_children_all_assigned": "มอบหมายทั้งหมด",
-
     "roles_and_permission_department_description_access_type_scopes": "รูปแบบการเข้าถึง (ขอบเขต)",
     "roles_and_permission_department_description_access_type_scopes_placeholder": "เลือกประเภท",
     "roles_and_permission_department_description_label": "แผนก",
     "roles_and_permission_access_type_allows_description": "รูปแบบการเข้าถึงที่ให้บทบาทนี้เห็นข้อมูลในรูปแบบที่แตกต่างกัน เช่น หากคุณเลือกทีม บทบาทจะสามารถเห็นข้อมูลสมาชิกทีมของพวกเขาในนั้น",
     "roles_and_permission_department_description": "แผนกที่ให้บทบาทนี้เห็นข้อมูลผ่านหลักเกณฑ์ที่แตกต่างกันในขอบเขตที่เฉพาะเจาะจง เช่น หากคุณเลือกการขาย บทบาทจะสามารถเห็นข้อมูลที่พวกเขาถูกแท็กเป็นเจ้าของการขายหรือข้อมูลสมาชิกทีมของพวกเขาที่ถูกแท็กเป็นเจ้าของการขาย",
-
     "roles_and_permission_crm_dashboard_button_edit": "แก้ไข",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "กำหนดเดี๋ยวนี้",
     "roles_and_permission_crm_dashboard_button_text_un_assign_now": "ยกเลิกการกำหนดเดี๋ยวนี้",
@@ -143,9 +118,7 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "กำลังบันทึก โปรดรอสักครู่...",
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "บันทึก",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "อนุญาตให้นำทาง",
-
     "roles_and_permission_crm_dashboard_permission_module": "กำหนดการอนุญาตของคุณตามที่คุณต้องการและบันทึก สำหรับการแก้ไขการอนุญาตแบบจำนวนมากคลิกที่ปุ่มวงกลมข้างบน",
-    
     "roles_and_permission_create_role_modal_heading": "สร้างบทบาท",
     "roles_and_permission_create_role_modal_sub_heading": "ตั้งชื่อบทบาทและคำอธิบายบทบาท",
     "roles_and_permission_create_role_modal_role_name": "ชื่อบทบาท",

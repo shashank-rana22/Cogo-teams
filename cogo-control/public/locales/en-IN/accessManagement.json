@@ -5,17 +5,14 @@
     "roles_and_permission_pills_cogoport": "Cogoport",
     "roles_and_permission_pills_channel_partner": "Channel Partner",
     "roles_and_permission_pills_customer": "Customer",
-
     "roles_and_permission_select_stakeholder_id_placeholder": "Select partner",
     "roles_and_permission_select_navigation_placeholder": "Select module",
-
     "roles_and_permission_select_role_functions_placeholder": "Select Function",
     "roles_and_permission_select_role_functions_select_sales": "Sales",
     "roles_and_permission_select_role_functions_select_supply": "Supply",
     "roles_and_permission_select_role_functions_select_operations": "Operations",
     "roles_and_permission_select_role_functions_select_finance": "Finance",
     "roles_and_permission_select_role_functions_select_external": "External",
-
     "roles_and_permission_select_sub_function_placeholder": "Select Sub-function",
     "roles_and_permission_select_sales_customer_success": "Customer Success",
     "roles_and_permission_select_sales_field_sales": "Field Sales",
@@ -55,7 +52,6 @@
     "roles_and_permission_select_hierarchy_level_zone_head": "Zone Head",
     "roles_and_permission_select_hierarchy_level_region_head": "Region Head",
     "roles_and_permission_select_hierarchy_level_cluster_head": "Cluster Head",
-    
     "roles_and_permission_column_role_description": "Role Description",
     "roles_and_permission_column_role_type": "Role Type",
     "roles_and_permission_column_partner": "Partner",
@@ -63,9 +59,7 @@
     "roles_and_permission_column_level": "Level",
     "roles_and_permission_column_functions": "Functions",
     "roles_and_permission_column_sub_functions": "Sub Functions",
-
     "roles_and_permission_button_back": "Back",
-
     "roles_and_permission_update_role_heading": "Update Role",
     "roles_and_permission_update_role_sub_heading": "Update permissions for the role",
     "roles_and_permission_update_edit_role_heading": "Edit Role",
@@ -92,36 +86,29 @@
     "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "Choose Hierarchy Level",
     "roles_and_permission_update_edit_role_remarks_description": "Description",
     "roles_and_permission_update_edit_role_remarks_placeholder": "Enter role description",
-
     "roles_and_permission_update_role_toast_success": "Role updated successfully. Results will be reflected shortly.",
     "roles_and_permission_update_role_toast_error": "Unable to Edit role Please try again!!",
-
     "roles_and_permission_update_role_edit_button": "Edit",
     "roles_and_permission_update_role_update_button": "Update Role",
     "roles_and_permission_update_role_updateing_button": "Updating Role",
-
     "roles_and_permission_update_role_role": "Role",
     "roles_and_permission_update_role_short_name": "Short Name",
     "roles_and_permission_update_role_partner": "Partner",
     "roles_and_permission_update_role_role_description": "Role Description", 
-
     "roles_and_permission_title_modules": "Module",
     "roles_and_permission_sub_title_first_part_assign_modules": "Assign modules and it's permissions for",
     "roles_and_permission_sub_title_second_part_role": "role",
-
     "roles_and_permission_search_navigation_placeholder": "Search Navigation",
     "roles_and_permission_filters_label": "Filters",
     "roles_and_permission_filters_navigation_status_heading": "Navigation Status",
     "roles_and_permission_filters_children_assigned": "Assigned",
     "roles_and_permission_filters_children_not_assigned": "Not Assigned",
     "roles_and_permission_filters_children_all_assigned": "All Assigned",
-
     "roles_and_permission_department_description_access_type_scopes": "Access types (scopes)",
     "roles_and_permission_department_description_access_type_scopes_placeholder": "Choose type",
     "roles_and_permission_department_description_label": "Departments",
     "roles_and_permission_access_type_allows_description": "Access type allows this role too see data in different formats. For e.g. if you are selecting team, role will be able to see their team memebers data in that navigation.",
     "roles_and_permission_department_description":"Department allow this role too see data via different criterias in a particular scope. For e.g If you have selected sales then role will be able to see data in which they are tagged as sales owner or team members data in which their team members are tagged as sales owner",
-
     "roles_and_permission_crm_dashboard_button_edit": "Edit",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "Assign Now",
     "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Un-Assgn Now",
@@ -131,9 +118,7 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "Saving, Please wait...",
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Save",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Allow Navigation",
-
     "roles_and_permission_crm_dashboard_permission_module": "Configure your permissions according to you and save. For modifying permissions in bulk click on feature radio buttons above",
-
     "roles_and_permission_create_role_modal_heading": "Create Role",
     "roles_and_permission_create_role_modal_sub_heading": "Set role name and role description",
     "roles_and_permission_create_role_modal_role_name": "Role Name",
