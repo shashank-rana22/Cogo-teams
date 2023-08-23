@@ -1,8 +1,5 @@
-/* eslint-disable max-len */
+import { startCase, isEmpty } from '@cogoport/utils';
 
-import { startCase } from '@cogoport/utils';
-
-/* eslint-disable react/jsx-one-expression-per-line */
 const inventoryFields = {
 	fields: [
 		{
@@ -61,7 +58,17 @@ const inventoryFields = {
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{item?.warehouseLocation?.zoneNumber}-{item?.warehouseLocation?.aisleNumber}-{item?.warehouseLocation?.rackNumber}-{item?.warehouseLocation?.shelfNumber}-{item?.warehouseLocation?.binNumber}
+					{item?.warehouseLocation?.zoneNumber}
+					-
+					{item?.warehouseLocation?.aisleNumber}
+					-
+					{item?.warehouseLocation?.rackNumber}
+					-
+					{item?.warehouseLocation?.shelfNumber}
+					-
+					{
+					item?.warehouseLocation?.binNumber
+}
 				</div>
 			),
 		},
@@ -71,17 +78,27 @@ const inventoryFields = {
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{`${item?.dimensions?.length ?? '0'} x ${item?.dimensions?.width ?? '0'} x ${item?.dimensions?.height ?? '0'} `}
+					{`${item?.dimensions?.length ?? '-'} x
+					 ${item?.dimensions?.width ?? '-'} x 
+					 ${item?.dimensions?.height ?? '-'} `}
 				</div>
 			),
 		},
 		{
-			key    : 'service',
+			key    : 'services',
 			label  : 'Services',
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{startCase(item?.serviceName)}
+					{
+					isEmpty(item)
+						? '-'
+						: item?.services.map((service) => (
+							<span key={service.serviceName}>
+								{ `${startCase(service.serviceName)}, ` }
+							</span>
+						))
+}
 				</div>
 			),
 		},
@@ -91,7 +108,7 @@ const inventoryFields = {
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{startCase(item?.serviceStatus)}
+					{startCase(item?.serviceStatus) || '-'}
 				</div>
 			),
 		},

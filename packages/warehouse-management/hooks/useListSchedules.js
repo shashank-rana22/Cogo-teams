@@ -22,9 +22,9 @@ const useListSchedules = ({
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/warehouse-management/warehouse-schedules',
+			url     : '/air-coe/warehouse-management/list-schedules',
 			method  : 'get',
-			authKey : 'get_air_coe_warehouse_management_warehouse_schedules',
+			authKey : 'get_air_coe_warehouse_management_list_schedules',
 		},
 		{ manual: true },
 	);
@@ -33,9 +33,9 @@ const useListSchedules = ({
 		try {
 			await trigger({
 				params: {
-					q     : (query || '').trim() || undefined,
-					state : STATUS_MAP[truckStatus] || undefined,
-					warehouseLocationId,
+					q                   : (query || '').trim() || undefined,
+					state               : STATUS_MAP[truckStatus] || undefined,
+					warehouseLocationId : warehouseLocationId || undefined,
 				},
 			});
 		} catch (err) {

@@ -14,17 +14,17 @@ const useListConfiguration = ({
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/warehouse-management/warehouse-configurations',
+			url     : '/air-coe/warehouse-management/list-configurations',
 			method  : 'get',
-			authKey : 'get_air_coe_warehouse_management_warehouse_configurations',
+			authKey : 'get_air_coe_warehouse_management_list_configurations',
 		},
 		{ manual: true },
 	);
 
 	const listAPI = useCallback(async () => {
 		const PAYLOAD = {
-			warehouseLocationId,
-			status: 'active',
+			warehouseLocationId : warehouseLocationId || undefined,
+			status              : 'active',
 		};
 
 		try {

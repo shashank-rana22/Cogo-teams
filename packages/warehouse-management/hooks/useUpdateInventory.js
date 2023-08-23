@@ -2,6 +2,8 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
+const getServices = (services) => services.map((service) => ({ serviceName: service, serviceStatus: 'received' }));
+
 function useUpdateInventory({
 	id = '',
 	formValues = {},
@@ -24,11 +26,10 @@ function useUpdateInventory({
 			await trigger({
 				data: {
 					id,
-					services   : { serviceName: formValues?.servicesSelected },
-					dimensions : { length: formValues?.length, width: formValues?.width, height: formValues?.height },
+					services: getServices(formValues?.servicesSelected),
 				},
 			});
-			Toast.success('Zone changed');
+			Toast.success('Updated Successfully');
 			listAPI();
 			handleOnClose();
 		} catch (err) {

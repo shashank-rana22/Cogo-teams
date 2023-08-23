@@ -1,6 +1,7 @@
 import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import useUpdateInventory from '../../../../hooks/useUpdateInventory';
 
@@ -13,12 +14,22 @@ function UpdateStatusModal({
 	setShowUpdateStatusModal = () => {},
 	listAPI = () => {},
 }) {
-	const { control, formState:{ errors = {} }, watch } = useForm();
+	const { control, formState:{ errors = {} }, watch, setValue } = useForm();
 	const formValues = watch();
 	const {
 		loading,
 		handleUpdate,
 	} = useUpdateInventory({ id: item?.id, formValues, setShowUpdateStatusModal, listAPI });
+
+	useEffect(() => {
+		const selectedServices = item?.services.reduce((acc, service) => {
+			if (service.serviceStatus === 'received') {
+				acc.push(service.serviceName);
+			}
+			return acc;
+		}, []);
+		setValue('servicesSelected', selectedServices);
+	}, [item?.services, setValue]);
 	return (
 		<Modal
 			show={showUpdateStatusModal}

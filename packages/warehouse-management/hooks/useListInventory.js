@@ -13,17 +13,17 @@ const useListInventory = ({
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/warehouse-management/warehouse-inventory',
+			url     : '/air-coe/warehouse-management/list-inventory',
 			method  : 'get',
-			authKey : 'get_air_coe_warehouse_management_warehouse_inventory',
+			authKey : 'get_air_coe_warehouse_management_list_inventory',
 		},
 		{ manual: true },
 	);
 
 	const listAPI = useCallback(async () => {
 		const PAYLOAD = {
-			state: ['awaiting_gate_in', 'gated_in'],
-			warehouseLocationId,
+			state               : ['awaiting_gate_in', 'gated_in'],
+			warehouseLocationId : warehouseLocationId || undefined,
 		};
 
 		try {

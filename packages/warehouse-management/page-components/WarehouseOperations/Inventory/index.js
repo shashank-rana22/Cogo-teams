@@ -32,9 +32,9 @@ function Inventory({
 			});
 			locations = [...new Set(locations)];
 			return (
-				<div>
+				<>
 					-
-				</div>
+				</>
 			);
 		},
 		handleServices: (singleItem) => {
@@ -45,9 +45,9 @@ function Inventory({
 			services = [...new Set(services)];
 			services.join(', ');
 			return (
-				<div>
+				<>
 					{startCase(services)}
-				</div>
+				</>
 			);
 		},
 		handleStatus: (singleItem) => {
@@ -59,7 +59,9 @@ function Inventory({
 			});
 			return (
 				<div>
-					{flag ? 'Received' : 'Not received'}
+					{flag
+						? 'Received'
+						: 'Not received'}
 				</div>
 			);
 		},

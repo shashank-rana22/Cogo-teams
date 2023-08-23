@@ -31,14 +31,14 @@ function useUpdateConfiguration({
 			await trigger({
 				data: {
 					id,
-					commodity          : formValues?.commodity,
-					aisles             : formValues?.aisles,
-					warehouseLocationId,
-					warehouseManagerId : userId,
-					status             : 'active',
+					commodity           : formValues?.commodity,
+					aisles              : formValues?.aisles,
+					warehouseLocationId : warehouseLocationId || undefined,
+					warehouseManagerId  : userId,
+					status              : 'active',
 				},
 			});
-			Toast.success('Zone changed');
+			Toast.success('Updated Successfully');
 			listAPI();
 			handleOnClose();
 		} catch (err) {

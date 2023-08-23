@@ -29,13 +29,13 @@ const useCreateConfiguration = ({
 		try {
 			await trigger({
 				data: {
-					zoneName           : formValues.zoneName,
-					commodityType      : formValues.commodity,
-					commodity          : formValues.commodity,
-					aisles             : formValues.aisles,
-					warehouseLocationId,
-					warehouseManagerId : userId,
-					status             : 'active',
+					zoneName            : formValues.zoneName,
+					commodityType       : formValues.commodity,
+					commodity           : formValues.commodity,
+					aisles              : formValues.aisles,
+					warehouseLocationId : warehouseLocationId || undefined,
+					warehouseManagerId  : userId,
+					status              : 'active',
 				},
 			});
 			Toast.success('New Zone added');
