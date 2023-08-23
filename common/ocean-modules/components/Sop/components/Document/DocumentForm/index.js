@@ -1,5 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
-import { SelectController, CheckboxController, useForm } from '@cogoport/forms';
+import { SelectController, CheckboxController, useForm, RadioGroupController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import { BL_CATEGORY_MAPPING, BL_PREFERENCE_MAPPING } from '../../../../../constants/BL_MAPPING';
@@ -136,7 +136,7 @@ function DocumentForm({
 
 						<div className={styles.form_item_container}>
 							<label className={styles.form_label}>Delivery Preferences</label>
-							<SelectController
+							<RadioGroupController
 								size="sm"
 								name="preferred_mode_of_document_execution"
 								control={control}
@@ -219,7 +219,6 @@ function DocumentForm({
 								<CheckboxController
 									control={control}
 									name="is_primary"
-									rules={{ required: { value: true, message: 'This is required' } }}
 								/>
 								<label>Set this as default preference for all the shipments</label>
 							</div>

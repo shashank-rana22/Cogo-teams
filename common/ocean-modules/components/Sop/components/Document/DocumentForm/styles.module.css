@@ -4,6 +4,12 @@
 
 .form_item_container {
 	margin: 8px 0;
+
+	:global {
+		.ui_radio_container {
+			padding: 10px 14px 0 0;
+		}
+	}
 }
 
 .contact_form_item {
