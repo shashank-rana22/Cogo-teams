@@ -1,3 +1,4 @@
+import { subtractDays } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import DashboardView from './Dashboard';
@@ -24,13 +25,15 @@ const VIEW_MAPPING = {
 	},
 };
 
+const MONTH_DAYS = 30;
+
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
 	const [globalFilters, setGlobalFilters] = useState({
 		service_type : 'fcl',
 		parent_mode  : null,
-		end_date     : new Date(),
-		date_diff    : 30,
+		startDate    : subtractDays(new Date(), MONTH_DAYS),
+		endDate      : new Date(),
 	});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
