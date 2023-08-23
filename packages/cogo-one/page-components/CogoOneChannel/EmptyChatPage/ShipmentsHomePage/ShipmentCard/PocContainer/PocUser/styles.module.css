@@ -18,7 +18,14 @@
 }
 
 .user_details {
-	width: 56%;
+	width: 100%;
+	margin-left: 8px;
+}
+
+.user_info {
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
 .user_name {
@@ -93,7 +100,7 @@
 .scope_name {
 	padding: 2px 0;
 	margin-right: 4px;
-	font-size: 12px;
+	font-size: 10px;
 }
 
 .more_tags {
@@ -104,7 +111,6 @@
 .trade_type {
 	margin-right: 4px;
 	font-size: 12px;
-	font-size: 13px;
 	font-weight: 500;
 	color: #4f4f4f;
 }

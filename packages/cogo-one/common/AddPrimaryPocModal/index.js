@@ -15,6 +15,7 @@ function AddPrimaryPocModal({
 	showPocModal = {},
 	setShowPocModal = () => {},
 	getShipmentsList = () => {},
+	setActiveTab = () => {},
 }) {
 	const [selectedData, setSelectedData] = useState({});
 
@@ -31,7 +32,7 @@ function AddPrimaryPocModal({
 	const {
 		updatePrimaryPoc = () => {},
 		updateLoading = false,
-	} = useUpdateShipmentPrimaryPoc({ setShowPocModal, getShipmentsList });
+	} = useUpdateShipmentPrimaryPoc({ setShowPocModal, getShipmentsList, setActiveTab });
 
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
 

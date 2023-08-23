@@ -16,10 +16,31 @@ function PocContainer({
 	setActiveTab = () => {},
 }) {
 	const [modalData, setModalData] = useState({});
-	const { id = '' } = showPocDetails;
+	const { id = '', primary_poc_details = {}, importer_exporter_poc = {} } = showPocDetails;
+
 	const { stakeHoldersData = [], loading } = useListShipmentStakeholders({ shipmentId: id });
 
 	const { tradePartnersLoading = false, tradePartnersData = [] } = useListShipmentTradePartners({ shipmentId: id });
+
+	const PocDetails = [importer_exporter_poc];
+
+	if (primary_poc_details) {
+		const updatedPocData = { ...primary_poc_details, is_primary_poc: true };
+		PocDetails.unshift(updatedPocData);
+	}
+
+	const updatedPocDetails = PocDetails?.reduce((accumulator, item) => {
+		const updatedItem = item?.is_primary_poc ? { ...item, chat_option: true, is_customer: true }
+			: { ...item, chat_option: true, is_primary_poc: false, is_customer: true };
+		accumulator.push(updatedItem);
+		return accumulator;
+	}, []);
+
+	const updatedTradePartnersData = tradePartnersData?.reduce((accumulator, item) => {
+		const updatedItem = { ...item, chat_option: true, show_trade_type: true };
+		accumulator.push(updatedItem);
+		return accumulator;
+	}, []);
 
 	const { modalType = '', userData = {} } = modalData || {};
 
@@ -27,7 +48,7 @@ function PocContainer({
 		setModalData(null);
 	};
 
-	const mergedData = tradePartnersData.concat(stakeHoldersData) || [];
+	const mergedData = [...updatedPocDetails, ...updatedTradePartnersData, ...stakeHoldersData];
 
 	return (
 		<div className={styles.container}>

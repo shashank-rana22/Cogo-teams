@@ -159,6 +159,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 						showPocModal={showPocModal}
 						setShowPocModal={setShowPocModal}
 						getShipmentsList={handlePageChange}
+						setActiveTab={setActiveTab}
 					/>
 				) : null}
 		</>

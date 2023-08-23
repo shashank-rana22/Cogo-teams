@@ -16,6 +16,10 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 	const {
 		stakeholder_type = '', user = {}, id = '', name: pocName = '',
 		mobile_country_code: pocMobileCountryCode = '', processes = [], mobile_number = '', email = '', trade_type = '',
+		chat_option = false,
+		is_primary_poc = false,
+		is_customer = false,
+		show_trade_type = false,
 	} = userDetails;
 
 	const {
@@ -34,6 +38,10 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 		userId              : userId || id,
 		email               : userEmail || email,
 		trade_type,
+		chatOption          : chat_option,
+		isPrimaryPoc        : is_primary_poc,
+		isCustomer          : is_customer,
+		showTradeType       : show_trade_type,
 	};
 };
 
@@ -84,6 +92,10 @@ function PocUser({
 						userId = '',
 						email = '',
 						trade_type,
+						chatOption = false,
+						isPrimaryPoc = false,
+						isCustomer = false,
+						showTradeType = false,
 					} = getEachUserFormatedData({ userDetails });
 
 					const chatData = {
@@ -105,58 +117,70 @@ function PocUser({
 
 					return (
 						<div className={styles.container} key={id}>
-							<Avatar personName={name} size="32px" className={styles.styled_avatar} />
-							<div className={styles.user_details}>
-								<div className={styles.user_name}>
-									{startCase(name)}
-								</div>
-								<div className={styles.user_work_scope}>
-									<div className={styles.trade_type}>
-										{startCase(trade_type)}
+							<div className={styles.user_info}>
+								<Avatar personName={name} size="32px" className={styles.styled_avatar} />
+								<div className={styles.user_details}>
+									<div className={styles.user_name}>
+										{startCase(name)}
 									</div>
-									{(lessList || []).map((item, index) => (
-										<div className={styles.scope_name} key={item}>
-											{startCase(item)}
-											{index !== lessList.length - LAST_INDEX ? ',' : ''}
-										</div>
-									))}
-									{showMoreList && (
-										<Tooltip
-											content={(
-												<div>
-													{(moreList || []).map((item) => (
-														<div
-															className={styles.scope_name}
-															key={item}
-														>
-															{startCase(item)}
-
-														</div>
-													))}
-												</div>
-											)}
-											theme="light"
-											placement="bottom"
-										>
-											<div className={styles.more_tags}>
-												{moreList?.length}
-												+
+									<div className={styles.user_work_scope}>
+										{isCustomer ? (
+											<div className={styles.scope_name}>
+												{isPrimaryPoc ? 'Customer - Primary POC' : 'Customer'}
 											</div>
-										</Tooltip>
-									)}
+										) : null}
+
+										{showTradeType ? (
+											<div className={styles.trade_type}>
+												{startCase(trade_type)}
+											</div>
+										) : null }
+
+										{(lessList || []).map((item, index) => (
+											<div className={styles.scope_name} key={item}>
+												{startCase(item)}
+												{index !== lessList.length - LAST_INDEX ? ',' : ''}
+											</div>
+										))}
+										{showMoreList && (
+											<Tooltip
+												content={(
+													<div>
+														{(moreList || []).map((item) => (
+															<div
+																className={styles.scope_name}
+																key={item}
+															>
+																{startCase(item)}
+
+															</div>
+														))}
+													</div>
+												)}
+												theme="light"
+												placement="bottom"
+											>
+												<div className={styles.more_tags}>
+													{moreList?.length}
+													+
+												</div>
+											</Tooltip>
+										)}
+									</div>
 								</div>
 							</div>
-
 							<div className={styles.action_icons}>
-								<IcMWhatsapp
-									className={styles.whatsapp_icon}
-									onClick={() => setActiveTab((prev) => ({
-										...prev,
-										hasNoFireBaseRoom : true,
-										data              : chatData,
-										tab               : 'message',
-									}))}
-								/>
+								{chatOption ? (
+									<IcMWhatsapp
+										className={styles.whatsapp_icon}
+										onClick={() => setActiveTab((prev) => ({
+											...prev,
+											hasNoFireBaseRoom : true,
+											data              : chatData,
+											tab               : 'message',
+										}))}
+									/>
+								) : null}
 
 								{hasVoiceCallAccess && (
 									<IcMCall
