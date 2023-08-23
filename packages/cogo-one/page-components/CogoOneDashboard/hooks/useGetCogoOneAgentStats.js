@@ -22,7 +22,7 @@ const getParams = ({ timeline, startDate, endDate, id, viewType }) => {
 	const PAYLOAD = {};
 
 	if (VIEW_TYPES_WITH_PAYLOAD.some((type) => viewType.includes(type))) {
-		PAYLOAD.supplier_stats_required = false;
+		PAYLOAD.supply_stats_required = false;
 		PAYLOAD.sales_stats_required = true;
 		PAYLOAD.show_agent_activity_graph = true;
 	}

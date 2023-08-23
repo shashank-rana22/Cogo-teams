@@ -1,6 +1,6 @@
 export function getAdditionalPayloadForViewType(viewType) {
 	const commonPayload = {
-		supplier_stats_required   : false,
+		supply_stats_required     : false,
 		sales_stats_required      : false,
 		show_agent_activity_graph : false,
 		filters                   : {},
@@ -11,7 +11,7 @@ export function getAdditionalPayloadForViewType(viewType) {
 			sales_stats_required: true,
 		},
 		supply: {
-			supplier_stats_required: true,
+			supply_stats_required: true,
 		},
 		sales: {
 			sales_stats_required: true,
