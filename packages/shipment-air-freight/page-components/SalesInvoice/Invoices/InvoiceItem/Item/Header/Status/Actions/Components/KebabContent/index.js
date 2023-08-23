@@ -7,7 +7,8 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
-const AUTHORIZED_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
+const AUTHORIZED_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id, GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id];
 
 function Remarks({ remarks = '' }) {
 	return (

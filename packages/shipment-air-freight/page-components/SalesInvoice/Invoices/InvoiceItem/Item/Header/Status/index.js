@@ -29,7 +29,8 @@ function Status({
 	setAskNullify = () => {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
+	const isAuthorized = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
