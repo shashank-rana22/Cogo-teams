@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 
 export const HOME_TOUR_STEPS = [
@@ -32,7 +31,12 @@ export const ONGOING_PARENT_SERVICES_STEPS = [
 	},
 	{
 		selector : '[data-tour="parent-service-group"]',
-		content  : 'You can check the details of all parent services of ongoing shipments. Click on any service to get more data.',
+		content  : (
+			<div>
+				You can check the details of all parent services of ongoing shipments.
+				Click on any service to get more data.
+			</div>
+		),
 	},
 	{
 		selector : '[data-tour="single-parent-service"]',
@@ -79,6 +83,15 @@ export const CLOSED_PARENT_SERVICES_STEPS = [
 export const BAR_GROUP_CHILDREN = [
 	{
 		selector : '[data-tour="children-bar-group"]',
-		content  : 'Here is the detailed graph of service wise data. You can click on "View Details" button(on top) to see list below the graph. The tutorial ends here... Please click on "Cogo Financials" to return to homepage. ',
+		content  : (
+			<div>
+				Here is the detailed graph of service wise data.
+				You can click on &quot;View Details&quot; button(on top) to see list below the graph.
+				<div><strong>The tutorial ends here...</strong></div>
+				{' '}
+				Note: You can click on &quot;Cogo Financials&quot; to return to homepage directly.
+				{' '}
+			</div>
+		),
 	},
 ];
