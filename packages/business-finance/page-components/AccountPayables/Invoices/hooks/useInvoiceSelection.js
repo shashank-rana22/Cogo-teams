@@ -183,7 +183,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			Toast.success('Invoice deleted successfully');
 			refetch();
 		} catch (e) {
-			Toast.error(e?.data?.message);
+			Toast.error(e?.message);
 		}
 	};
 	const submitSelectedInvoices = async () => {
@@ -259,7 +259,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 				refetch();
 			}
 		} catch (e) {
-			Toast.error(e?.data?.message);
+			Toast.error(e?.message);
 		}
 		return null;
 	};

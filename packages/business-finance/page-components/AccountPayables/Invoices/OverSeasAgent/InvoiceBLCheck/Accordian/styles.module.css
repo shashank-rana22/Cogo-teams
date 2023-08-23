@@ -69,6 +69,14 @@
 	color: var(--color-tertiary-success-green-1);
 }
 
+.rejected {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 0 20px;
+	color: var(--color-primary-error-red-2);
+}
+
 .btn {
 	&:hover {
 		background-color: var(--color-secondary-5);

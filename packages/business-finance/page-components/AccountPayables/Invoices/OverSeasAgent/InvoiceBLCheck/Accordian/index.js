@@ -1,18 +1,16 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowRotateUp, IcMArrowRotateDown, IcCFtick } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { IcMArrowRotateUp, IcMArrowRotateDown, IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
+import React from 'react';
 
 import useGetDocument from '../../../hooks/useGetDocuments';
 import Documents from '../Documents';
 
 import styles from './styles.module.css';
 
-function Accordian({ setIsOpen, isOpen, itemData }) {
-	const [showCheckInvoices, setShowCheckInvoices] = useState({});
+function Accordian({ setIsOpen, isOpen, itemData, showCheckInvoices, setShowCheckInvoices }) {
 	const {
 		invoiceNumber = '',
 		sid = '',
-		status = '',
 		billId = '',
 		serviceType = '',
 		documentUrl = '',
@@ -25,18 +23,12 @@ function Accordian({ setIsOpen, isOpen, itemData }) {
 		DocumentData, ApproveReject, onApproveReject,
 	} =		useGetDocument({ setShowCheckInvoices, setIsOpen });
 
-	// console.log('DocumentData', DocumentData);
-	// const billId = 'n8aj';
-	// const services_type = 'FCL_FREIGHT';
-
 	const handleDropdown = (key = invoiceNumber) => {
 		setIsOpen(key);
 		if (billId) {
 			onGetDocument(billId, serviceType);
 		}
 	};
-
-	// console.log('itemData', itemData);s
 
 	return (
 		<div className={styles.accordian_container}>
@@ -52,30 +44,21 @@ function Accordian({ setIsOpen, isOpen, itemData }) {
 
 				<div className={styles.status}>
 					<div className={styles.checkinvoice}>
-						{/* {(showCheckInvoices[id] === 'Tagged'
-                            || payrunBillStatus === 'APPROVED') && (
-                                <TagStyled>
-                                    <Icon>
-                                        <IcCFtick />
-                                    </Icon>
-                                    <TextStyled>Tagged</TextStyled>
-                                </TagStyled>
-            )}
-            {(showCheckInvoices[id] === 'Reject'
-                            || payrunBillStatus === 'REJECTED') && (
-                                <TagStyled>
-                                    <Icon>
-                                        <IcCFcrossInCircle />
-                                    </Icon>
-                                    <TextStyled> Rejected </TextStyled>
-                                </TagStyled>
-            )} */}
-						<div className={styles.verified}>
-							<IcCFtick />
-							<div>
-								{status}
+						{(showCheckInvoices[id] === 'Tagged' || payrunBillStatus === 'APPROVED') && (
+							<div className={styles.verified}>
+								<IcCFtick />
+								{' '}
+								Tagged
 							</div>
-						</div>
+						)}
+						{(showCheckInvoices[id] === 'Reject' || payrunBillStatus === 'REJECTED') && (
+							<div className={styles.rejected}>
+								<IcCFcrossInCircle />
+								{' '}
+								Reject
+							</div>
+						)}
+
 					</div>
 
 					<div className={styles.iconwrapper}>

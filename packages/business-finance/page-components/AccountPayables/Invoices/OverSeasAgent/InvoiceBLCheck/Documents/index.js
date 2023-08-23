@@ -20,7 +20,7 @@ function Documents({
 }) {
 	const [radioSet, setRadioSet] = useState('mbl');
 	const [radioAir, setRadioAir] = useState('mawb');
-	const taggedDocument = DocumentData?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
+	const taggedDocument = DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
 
 	function ShowDocument(radioValue, DocData) {
 		let docLink = '';

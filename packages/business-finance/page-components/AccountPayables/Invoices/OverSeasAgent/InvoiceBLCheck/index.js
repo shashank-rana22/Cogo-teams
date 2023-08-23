@@ -9,6 +9,7 @@ function InvoiceBLCheck({ setActive, bLData = {} }) {
 	// const { query } = useRouter();
 	// const { services } = query;
 	const [isOpen, setIsOpen] = useState(null);
+	const [showCheckInvoices, setShowCheckInvoices] = useState({});
 
 	const { list = [] } = bLData || {};
 
@@ -34,7 +35,14 @@ function InvoiceBLCheck({ setActive, bLData = {} }) {
 			<div className={styles.accordians}>
 				{
 				list.map((item) => (
-					<Accordian key={item.id} itemData={item} isOpen={isOpen} setIsOpen={setIsOpen} />
+					<Accordian
+						key={item.id}
+						itemData={item}
+						isOpen={isOpen}
+						setIsOpen={setIsOpen}
+						showCheckInvoices={showCheckInvoices}
+						setShowCheckInvoices={setShowCheckInvoices}
+					/>
 				))
 			}
 			</div>

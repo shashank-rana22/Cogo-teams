@@ -6,12 +6,6 @@ const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	// const DocumentData = useRequest('get', false, 'business_finance', {
-	// 	authkey: 'get_purchase_payable_bill_shipment_documents',
-	// })('/purchase/payable-bill/shipment-documents');
-	// const ApproveReject = useRequest('put', false, 'business_finance', {
-	// 	authkey: 'get_purchase_payrun_bill',
-	// })('/purchase/payrun-bill');
 
 	const [{ data: DocumentData, loading: billsLoading }, trigger] = useRequestBf(
 		{
@@ -21,7 +15,7 @@ const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
 		},
 		{ manual: true },
 	);
-	const [{ data: ApproveReject, loading: ApproveRejectLoading },
+	const [{ data: ApproveReject, loading: ApproveRejectLoading }, ApproveRejectTrigger,
 	] = useRequestBf(
 		{
 			url     : '/purchase/payrun-bill',
@@ -55,14 +49,15 @@ const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
 				id,
 				status          : checkStatus,
 				remarks         : checkStatus.toLowerCase(),
-				performedBy     : user_profile?.id,
+				performedBy     : user_profile?.user?.id,
 				performedByType : user_profile.session_type,
 				taggedDocuments : taggedDocument,
 				payRunType      : 'OVERSEAS',
 			};
-			const response = await ApproveReject?.trigger({
+			const response = await ApproveRejectTrigger({
 				data: payload,
 			});
+
 			if (checkStatus === 'APPROVED' && response?.data?.id) {
 				setShowCheckInvoices((p) => ({
 					...p,
