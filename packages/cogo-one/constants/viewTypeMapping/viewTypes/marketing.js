@@ -46,6 +46,7 @@ const MARKETING = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
+		show_lead_voice_calls       : false,
 	},
 };
 
