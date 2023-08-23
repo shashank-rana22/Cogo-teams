@@ -1,5 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
+
+import useGetBillingAddress from '../../hooks/useGetBillingAddress';
 
 import { getOtherData } from './getOtherData';
 import Header from './Header';
@@ -13,8 +16,16 @@ function InvoiceGujaratMilk({
 	tradePartyData = {},
 	customData = {},
 	importerExporterId = '',
+	entityList = [],
 }) {
-	const { billing_address = {} } = invoice;
+	const { billing_address = {} } = useGetBillingAddress({
+		invoice,
+		entityList,
+		importerExporterId,
+		customData,
+	});
+
+	const { business_name = '' } = billing_address || {};
 
 	const [tradeParty] = tradePartyData?.list || [];
 
@@ -41,11 +52,11 @@ function InvoiceGujaratMilk({
 	} = getOtherData({ customData });
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>
-			<table border="0" cellPadding="0" cellSpacing="0">
+			<table border="0" cellPadding="0" cellSpacing="0" style={{ width: '100%' }}>
 				<tr>
 					<td>
 						<h2 style={{ marginTop: '0px', color: '#ffa500' }}>
-							<b>{billing_address?.business_name || ''}</b>
+							<b>{business_name}</b>
 						</h2>
 					</td>
 				</tr>
@@ -59,23 +70,29 @@ function InvoiceGujaratMilk({
 			>
 				<tr style={{ marginBottom: '50px' }}>
 					<td style={{ width: '50%' }}>
-						<b>Customer:&nbsp;</b>
-						&nbsp;
+						<b>
+							Customer:
+							{' '}
+						</b>
+						{' '}
 						{customer_name}
 						,
-						&nbsp;
+						{' '}
 						{customer_address}
 					</td>
 					<td
 						style={{ width: '25%', paddingLeft: '30px' }}
 					>
-						<b>Invoice No:&nbsp; </b>
+						<b>
+							Invoice No:
+							{' '}
+						</b>
 						{invoice_no}
 					</td>
 					<td style={{ width: '25%' }}>
 						<b>
 							Original For Recipient /
-							&nbsp;
+							{' '}
 							<del>Duplicate For Supplier</del>
 						</b>
 					</td>
@@ -91,19 +108,31 @@ function InvoiceGujaratMilk({
 					<td style={{ width: '50%', verticalAlign: 'top' }}>
 						<p style={{ wordWrap: 'break-word' }} />
 						<p>
-							<b>State Code :&nbsp;</b>
+							<b>
+								State Code :
+								{' '}
+							</b>
 							{state_code}
 						</p>
 						<p>
-							<b>GSTIN of Recipient :&nbsp;</b>
+							<b>
+								GSTIN of Recipient :
+								{' '}
+							</b>
 							{customer_gstin}
 						</p>
 						<p>
-							<b>Value of Goods :&nbsp;</b>
+							<b>
+								Value of Goods :
+								{' '}
+							</b>
 							{value_of_goods}
 						</p>
 						<p>
-							<b>Kind Attention :&nbsp;</b>
+							<b>
+								Kind Attention :
+								{' '}
+							</b>
 							{kind_attention}
 						</p>
 					</td>
@@ -111,7 +140,10 @@ function InvoiceGujaratMilk({
 						style={{ width: '50%', paddingLeft: '30px' }}
 					>
 						<p>
-							<b>Date :&nbsp;</b>
+							<b>
+								Date :
+								{' '}
+							</b>
 							{formatDate({
 								date       : invoice_date,
 								formatType : 'date',
@@ -119,23 +151,35 @@ function InvoiceGujaratMilk({
 							})}
 						</p>
 						<p style={{ wordWrap: 'break-word' }}>
-							<b>Consignor Name & Address :&nbsp;</b>
+							<b>
+								Consignor Name & Address :
+								{' '}
+							</b>
 							{consignor_name}
 							,
 							{consignor_address}
 						</p>
 						<p>
-							<b>Consignor GSTIN :&nbsp;</b>
+							<b>
+								Consignor GSTIN :
+								{' '}
+							</b>
 							{consignor_gstin}
 						</p>
 						<p style={{ wordWrap: 'break-word' }}>
-							<b>Consignee Name & Address :&nbsp;</b>
+							<b>
+								Consignee Name & Address :
+								{' '}
+							</b>
 							{consignee_name}
 							,
 							{consignee_address}
 						</p>
 						<p>
-							<b>Consignee GSTIN :&nbsp;</b>
+							<b>
+								Consignee GSTIN :
+								{' '}
+							</b>
 							{consignee_gstin}
 						</p>
 					</td>
@@ -157,13 +201,13 @@ function InvoiceGujaratMilk({
 							PO Number
 
 						</th>
-						<th style={{ border: '2px solid black', borderBottom: 'none' }}>vehicle Type</th>
+						<th style={{ border: '2px solid black', borderBottom: 'none' }}>Vehicle Type</th>
 					</tr>
 					<tr style={{ border: '2px solid black' }}>
 						<td style={{ border: '2px solid black', borderRight: 'none' }}>
 							{grn_number}
 							,
-							&nbsp;
+							{' '}
 							{formatDate({
 								date       : grn_date,
 								formatType : 'date',
@@ -173,7 +217,7 @@ function InvoiceGujaratMilk({
 						<td style={{ border: '2px solid black', borderRight: 'none' }}>
 							{po_number}
 							,
-							&nbsp;
+							{' '}
 							{formatDate({
 								date       : po_date,
 								formatType : 'date',
@@ -181,7 +225,7 @@ function InvoiceGujaratMilk({
 							})}
 						</td>
 						<td style={{ border: '2px solid black' }}>
-							{truck_type}
+							{truck_type ? startCase(truck_type) : null}
 						</td>
 					</tr>
 				</table>
@@ -189,12 +233,14 @@ function InvoiceGujaratMilk({
 			<TableData
 				customData={customData}
 				importerExporterId={importerExporterId}
+				billing_address={billing_address}
 			/>
 			<Terms
 				stampData={stampData}
 				tradeParty={tradeParty}
 				billing_address={billing_address}
 				importerExporterId={importerExporterId}
+				customData={customData}
 			/>
 		</div>
 	);
