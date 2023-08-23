@@ -80,15 +80,16 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 
 	const handleRowClick = (e) => {
 		e.stopPropagation();
+		let shipmentDetailsPage;
 		if (Object.keys(ROUTES_MAPPING).includes(shipment_type)) {
 			const route = ROUTES_MAPPING[shipment_type];
-			const shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${shipmentId}`;
 
-			window.open(shipmentDetailsPage, '_blank');
+			shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${shipmentId}`;
 		} else {
-			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-			window.open(shipmentDetailsPage, '_blank');
+			shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
 		}
+
+		window.open(shipmentDetailsPage, '_blank');
 	};
 
 	return (
