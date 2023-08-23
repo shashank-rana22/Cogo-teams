@@ -25,6 +25,9 @@ const STRAIGHT_AXIS_LIMIT = 2;
 const MINIMUM_POSITIVE = 0;
 const MID_GRAPH_INDEX = 1;
 const MAX_ANIMATION_TIME = 500;
+const MIN_VALUE = 1;
+const LOW_VALUE_FRACTION = 3;
+const DEFAULT_FRACTION = 0;
 
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
@@ -46,7 +49,7 @@ const formatPercentageLabel = (value) => `${formatAmount({
 	options : {
 		style                 : 'decimal',
 		notation              : 'compact',
-		maximumFractionDigits : 0,
+		maximumFractionDigits : Number(value) < MIN_VALUE ? LOW_VALUE_FRACTION : DEFAULT_FRACTION,
 	},
 })}%`;
 

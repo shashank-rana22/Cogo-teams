@@ -1,7 +1,12 @@
 .header {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	cursor: pointer;
+}
+
+.main_heading {
+	margin: 0;
 }
 
 .main_heading:hover {
@@ -73,5 +78,15 @@
 		width: 20px;
 		height: 20px;
 		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+	}
+}
+
+.entity_select {
+	width: 320px;
+
+	:global {
+		.ui_select_display_container {
+			height: 42px !important;
+		}
 	}
 }

@@ -42,6 +42,7 @@ function CogoFinancials() {
 	const [tableFilters, setTableFilters] = useState({});
 	const [tour, setTour] = useState(false);
 	const [isTourInitial, setIsTourInitial] = useState(true);
+	const [isDateVisible, setIsDateVisible] = useState(false);
 
 	const geo = getGeoConstants();
 	const countryCode = geo?.country.code;
@@ -120,7 +121,12 @@ function CogoFinancials() {
 						/>
 						<div className={styles.segmented_section}>
 							<SegmentedControl
-								options={getTimeRangeOptions({ customDate, setCustomDate })}
+								options={getTimeRangeOptions({
+									customDate,
+									setCustomDate,
+									isDateVisible,
+									setIsDateVisible,
+								})}
 								activeTab={timeRange}
 								setActiveTab={setTimeRange}
 								color="#ED3726"
@@ -137,7 +143,7 @@ function CogoFinancials() {
 							value={entity}
 							onChange={setEntity}
 							options={ENTITY_OPTIONS}
-							style={{ width: '320px' }}
+							className={styles.entity_select}
 						/>
 					</div>
 				</div>
