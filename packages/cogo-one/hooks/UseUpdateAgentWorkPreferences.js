@@ -45,7 +45,7 @@ function useUpdateAgentWorkPreferences({
 			fetchworkPrefernce();
 			setIsShaking(false);
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}
 	}, [trigger, agentTimeline, firestore, userId, fetchworkPrefernce, setIsShaking]);
 
