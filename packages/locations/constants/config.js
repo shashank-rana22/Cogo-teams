@@ -1,69 +1,69 @@
-const STATUS = [
+const getStatusColumns = ({ t = () => {} }) => [
 	{
-		label : 'Name',
+		label : t('locations:list_name_label'),
 		key   : 'name',
 		flex  : 1,
 	},
 	{
-		label : 'Type',
+		label : t('locations:list_type_label'),
 		key   : 'type',
 		flex  : 1,
 	}, {
-		label : 'Status',
+		label : t('locations:list_status_label'),
 		key   : 'status',
 		flex  : 1,
 	}, {
-		label : 'Created at',
+		label : t('locations:list_created_at_label'),
 		key   : 'created_at',
 		type  : 'datetime',
 		flex  : 1,
 	},
 ];
 
-const COUNTRY = [
+const getCountryColumns = ({ t = () => {} }) => [
 	{
-		label : 'Name',
+		label : t('locations:list_name_label'),
 		key   : 'name',
 		flex  : 2,
 	},
 	{
-		label : 'Type',
+		label : t('locations:list_type_label'),
 		key   : 'type',
 		flex  : 2,
 	},
 	{
-		label : 'Country Code',
+		label : t('locations:list_country_code_label'),
 		key   : 'country_code',
 		flex  : 2,
 	},
 	{
-		label : 'Created at',
+		label : t('locations:list_created_at_label'),
 		key   : 'created_at',
 		type  : 'datetime',
 		flex  : 2,
 	},
 ];
 
-const DEFAULT = [
+const getDefaultColumns = ({ t = () => {} }) => [
 	{
-		label : 'Name',
+		label : t('locations:list_name_label'),
 		key   : 'name',
 		flex  : 1,
 	},
 	{
-		label : 'Type',
+		label : t('locations:list_type_label'),
 		key   : 'type',
 		flex  : 1,
 	},
 	{
-		label : 'Created at',
+		label : t('locations:list_created_at_label'),
 		key   : 'created_at',
 		type  : 'datetime',
 		flex  : 1,
 	},
 ];
 
-const getFieldsByTab = (tab) => {
+const getFieldsByTab = ({ type, t = () => {} }) => {
 	const tabsWithCountry = [
 		'country',
 		'city',
@@ -75,15 +75,19 @@ const getFieldsByTab = (tab) => {
 	];
 	const tabsWithStatus = ['continent', 'region'];
 
-	if (tabsWithCountry.includes(tab)) {
-		return COUNTRY;
+	const countryColumns = getCountryColumns({ t });
+	const statusColumns = getStatusColumns({ t });
+	const defaultColumns = getDefaultColumns({ t });
+
+	if (tabsWithCountry.includes(type)) {
+		return countryColumns;
 	}
 
-	if (tabsWithStatus.includes(tab)) {
-		return STATUS;
+	if (tabsWithStatus.includes(type)) {
+		return statusColumns;
 	}
 
-	return DEFAULT;
+	return defaultColumns;
 };
 
 export default getFieldsByTab;

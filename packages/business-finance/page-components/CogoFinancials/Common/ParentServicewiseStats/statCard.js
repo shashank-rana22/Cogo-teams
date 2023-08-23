@@ -16,10 +16,10 @@ function StatCard({
 	return (
 		<div
 			key={service}
-			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
+			className={cl`${styles.statscontainer} ${!isMain && styles.child_styles}`}
 			style={{
 				cursor : !isMain ? 'pointer' : null,
-				width  : !isMain ? '47%' : null,
+				width  : !isMain ? '48%' : null,
 			}}
 			role="presentation"
 			onClick={() => setActiveService(service)}

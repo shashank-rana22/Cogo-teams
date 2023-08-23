@@ -66,7 +66,7 @@ const getAgentsFilterControls = () => {
 				permissions_data_required : false,
 				filters                   : {
 					partner_entity_types : ['cogoport'],
-					status               : 'active',
+					status               : true,
 					stakeholder_id       : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => entity.id),
 				},
 			},

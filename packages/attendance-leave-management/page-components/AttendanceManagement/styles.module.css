@@ -9,6 +9,13 @@
 	}
 }
 
+.container {
+	padding: 16px 12px;
+	margin-top: 24px;
+	background-color: #f9f9f9;
+	border-radius: 25px;
+}
+
 .check_in_style {
 	width: 28%;
 	min-height: 30vh;

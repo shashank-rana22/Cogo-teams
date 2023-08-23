@@ -1445,7 +1445,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_checkout_applicable_promocodes',
+		api          : 'get_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
@@ -1690,6 +1690,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_distance_matrix_valhalla',
+		access_type  : 'private',
+		service_name : 'location',
+	},
+	{
 		api          : 'send_rail_domestic_indent_email',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1720,11 +1725,27 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_shipments_for_report',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_report_schedule',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_shipment_report_url',
 		api          : 'create_shipment_terminal_service_task',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1741,6 +1762,11 @@ const apis = [
 	},
 	{
 		api          : 'get_shipment_air_csr_ocr_data',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_trade_party_shipments',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

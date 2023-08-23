@@ -12,6 +12,12 @@
 	margin-top: 16px;
 	background-color: #fff;
 	border-radius: 16px;
+
+	:global {
+		.ui_placeholder_skeleton_loader {
+			margin: 0 !important;
+		}
+	}
 }
 
 .time_wrapper {
@@ -44,4 +50,10 @@
 			width: 100%;
 		}
 	}
+}
+
+.note {
+	margin-bottom: 12px;
+	font-size: 10px;
+	color: #fc0101;
 }

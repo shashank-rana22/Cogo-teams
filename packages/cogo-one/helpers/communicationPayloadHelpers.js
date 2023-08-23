@@ -2,8 +2,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const ENDPOINT_MAPPING = {
-	forward : '/cogolens/forward_mail',
-	reply   : '/cogolens/reply_mail',
+	forward : '/forward_mail',
+	reply   : '/reply_mail',
 };
 
 export const getCommunicationPayload = ({
@@ -60,5 +60,6 @@ export const getCommunicationPayload = ({
 		cc_emails       : isEmpty(ccrecipients) ? undefined : ccrecipients,
 		bcc_emails      : isEmpty(bccrecipients) ? undefined : ccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
+		source          : 'CogoOne:AdminPlatform',
 	};
 };

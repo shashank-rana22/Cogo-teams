@@ -1,16 +1,20 @@
 .financially_closed_container {
+	box-sizing: border-box;
 	width: 100%;
-	padding: 2%;
+	min-height: 200px;
 	background: #fff;
 }
 
 .financially_closed_container:hover {
 	background: rgb(255 236 236);
+	box-shadow: rgb(99 99 99 / 20%) 0 2px 8px 0;
+	transition: background 0.2s, box-shadow 0.2s;
 }
 
 .responsive_graph_circular {
-	width: 50%;
+	width: 75%;
 	height: 86%;
+	padding-bottom: 10px;
 	margin: 10px 0;
 
 	& > div:first-of-type {
@@ -21,22 +25,20 @@
 
 .show_graph_data {
 	display: flex;
-	justify-content: space-between;
-	width: 96%;
-	height: 100%;
-	margin-left: 30px;
+	justify-content: space-around;
+	width: 100%;
 }
 
 .label_circle {
 	display: inline-block;
 	width: 12px;
 	height: 12px;
-	margin: 0 4px;
+	margin-right: 4px;
 	border-radius: 50%;
 }
 
 .graph_value {
-	margin: 0 0 8px 20px;
+	margin: 0 0 8px;
 	font-size: var(--font-size-xl);
 	font-weight: 600;
 }
@@ -58,7 +60,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	width: 50%;
 	margin: 20px 0;
 }
 
@@ -83,4 +84,14 @@
 	min-width: 100px;
 	margin-right: 4px;
 	font-size: 12px;
+}
+
+.placeholder_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 70%;
+	min-height: 200px;
+	padding-bottom: 8px;
+	margin: 8px 0;
 }

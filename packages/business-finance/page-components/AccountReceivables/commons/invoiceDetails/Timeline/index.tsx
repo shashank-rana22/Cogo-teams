@@ -4,7 +4,9 @@ import {
 	IcCFtick,
 	IcCSendEmail,
 } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, upperCase } from '@cogoport/utils';
+
+import getStatus from '../../../Utils/getStatus';
 
 import styles from './styles.module.css';
 
@@ -22,7 +24,7 @@ const getTime = (date) => format(
 	false,
 );
 
-function Timeline({ data, loading }) {
+function Timeline({ data, loading, entityCode }) {
 	const timelineDetails = data?.timelineDetail;
 
 	if (loading) {
@@ -42,10 +44,10 @@ function Timeline({ data, loading }) {
 
 	return (timelineDetails || [])?.map((item) => {
 		const showLine = item.eventName === 'CREATED';
-		const completeLine =			item.eventName === 'POSTED' || item.eventName === 'PAID';
+		const completeLine = item.eventName === 'POSTED' || item.eventName === 'PAID';
 
 		return (
-			<div className={styles.container}>
+			<div className={styles.container} key={item.eventName}>
 				<div className={styles.sub_container}>
 					<div style={{ width: '20%' }}>
 						<div>{getDate(item.occurredAt)}</div>
@@ -59,7 +61,7 @@ function Timeline({ data, loading }) {
 					<div className={styles.event_data_container}>
 						<div style={{ fontWeight: '500' }}>
 							{' '}
-							{startCase(item?.eventName)}
+							{upperCase(getStatus({ entityCode, eventName: item.eventName }))}
 						</div>
 						<div>
 							{item?.data?.errorMessage ? (

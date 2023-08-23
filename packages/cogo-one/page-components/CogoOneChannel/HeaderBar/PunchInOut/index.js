@@ -36,6 +36,8 @@ function PunchInOut({
 	agentTimeline = () => {},
 	timelineLoading = false,
 	preferenceLoading = false,
+	firestore = {},
+	userId = '',
 }) {
 	const { status = '' } = agentStatus || {};
 	const { list = [] } = data || {};
@@ -51,7 +53,13 @@ function PunchInOut({
 	const {
 		updateWorkPreference = () => {},
 		loading = false,
-	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce, agentTimeline, setIsShaking });
+	} = useUpdateAgentWorkPreferences({
+		fetchworkPrefernce,
+		agentTimeline,
+		setIsShaking,
+		firestore,
+		userId,
+	});
 
 	const shakeButton = () => {
 		setIsShaking(true);

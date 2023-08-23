@@ -1,11 +1,14 @@
 import { Button, Tooltip } from '@cogoport/components';
 import openDocument from '@cogoport/core/helpers/openDocument';
 import { IcMInformation } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function CardItem({ data = {} }) {
+	const { t } = useTranslation(['welcome']);
+
 	const { icon_url, heading, desc, login_id, password, href, eye_button_text } = data;
 
 	const { label, url } = href;
@@ -38,13 +41,13 @@ function CardItem({ data = {} }) {
 
 					<div className={styles.login_details}>
 						<span>
-							<strong>Login id - </strong>
+							<strong>{t('welcome:login_label')}</strong>
 							{' '}
 							{login_id}
 						</span>
 
 						<span>
-							<strong>Password - </strong>
+							<strong>{t('welcome:password_label')}</strong>
 							{password}
 						</span>
 					</div>

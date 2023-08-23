@@ -3,6 +3,7 @@ import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { useGeolocated } from '../../utils/getCurrentLocation';
 import AttendanceManagement from '../AttendanceManagement';
 import LeavesManagement from '../LeavesManagement';
 import Policies from '../Policies';
@@ -16,13 +17,24 @@ import styles from './styles.module.css';
 function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
 	const [show, setShow] = useState(false);
+
+	const { coords } = useGeolocated({
+		positionOptions: {
+			enableHighAccuracy: false,
+		},
+		watchPosition                 : true,
+		watchLocationPermissionChange : true,
+	});
+
+	console.log('coords', coords);
+
 	const MANAGER = true;
 	console.log(show);
 
 	return (
 		<div>
 			<div className={styles.heading}>
-				<h1>
+				<h1 className={styles.title}>
 					Attendance & Leaves
 				</h1>
 				{MANAGER ? (
@@ -54,7 +66,7 @@ function AttendanceLeaveDashboard() {
 				{show && <RequestModal show={show} onClose={onClose} />}
 			</div> */}
 
-			<div className={styles.main_tab}>
+			<div className={styles.tab_container}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="secondary"
@@ -62,7 +74,7 @@ function AttendanceLeaveDashboard() {
 				>
 					<TabPanel name="attendance" title="Attendance">
 						<div className={styles.tab_panel}>
-							<AttendanceManagement />
+							<AttendanceManagement location={coords} />
 						</div>
 					</TabPanel>
 

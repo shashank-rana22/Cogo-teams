@@ -5,8 +5,9 @@ import AttendanceLogs from './AttendanceLogs';
 import ChecInCheckOut from './CheckInCheckOutContainer';
 import Header from './Header';
 import styles from './styles.module.css';
+import Summary from './Summary';
 
-function AttendanceComponent() {
+function AttendanceComponent({ location }) {
 	const [selectMonth, setSelectMonth] = useState('march');
 	return (
 		<div className={styles.content}>
@@ -16,14 +17,17 @@ function AttendanceComponent() {
 
 			<div className={styles.body_container}>
 				<div className={styles.check_in_style}>
-					<ChecInCheckOut />
+					<ChecInCheckOut location={location} />
 				</div>
 
 				<div className={styles.attendance_stats}>
 					<AttendanceStats />
 				</div>
 			</div>
-			<AttendanceLogs />
+			<div className={styles.container}>
+				<AttendanceLogs />
+				<Summary />
+			</div>
 		</div>
 	);
 }
