@@ -9,10 +9,10 @@ const useGetInsuranceDraftDetails = ({
 	setAddressId = () => {},
 }) => {
 	const [{ loading, data }, trigger] = useRequestBf({
-		auth   : '/get/saas/insurance_draft_details',
-		url    : 'saas/insurance/draft/details',
-		method : 'GET',
-		params : {
+		authKey : '/get/saas/insurance_draft_details',
+		url     : 'saas/insurance/draft/details',
+		method  : 'GET',
+		params  : {
 			policyId,
 		},
 	}, { manual: true });

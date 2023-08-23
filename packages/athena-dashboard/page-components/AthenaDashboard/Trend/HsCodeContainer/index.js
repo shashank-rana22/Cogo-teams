@@ -1,16 +1,24 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function HsCodeContainer({ hscodeArr = [], handleSubmit, getReport, setHscodeArr }) {
+function HsCodeContainer({
+	hscodeArr = [],
+	handleSubmit,
+	getReport,
+	setHscodeArr,
+}) {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	return (
 		<div className={styles.selected_hscode_container}>
 			{
 				!isEmpty(hscodeArr) ? (
 
 					<div className={styles.selected_hscodes}>
-						Selected HS Codes
+						{t('athenaDashboard:selected_hs_codes')}
 						<div className={styles.display_selected_code}>
 							{
 							((hscodeArr || []).map((item) => (
@@ -29,7 +37,7 @@ function HsCodeContainer({ hscodeArr = [], handleSubmit, getReport, setHscodeArr
 								className={styles.build_report_button}
 								onClick={handleSubmit(getReport)}
 							>
-								Build Report
+								{t('athenaDashboard:build_report')}
 							</Button>
 
 							<Button
@@ -37,7 +45,7 @@ function HsCodeContainer({ hscodeArr = [], handleSubmit, getReport, setHscodeArr
 								themeType="tertiary"
 								onClick={() => { setHscodeArr([]); }}
 							>
-								Clear all
+								{t('athenaDashboard:clear_all')}
 							</Button>
 
 						</div>
@@ -45,7 +53,7 @@ function HsCodeContainer({ hscodeArr = [], handleSubmit, getReport, setHscodeArr
 
 				) : (
 					<div className={styles.selected_hscode_container_text}>
-						Select HS Codes for your report below. Your selected codes will show up here.
+						{t('athenaDashboard:select_hs_code_phrase')}
 					</div>
 				)
 			}

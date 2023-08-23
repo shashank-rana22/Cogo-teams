@@ -214,6 +214,7 @@ const GLOBAL_CONSTANTS = {
 		sagar_bankar_user_id    : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
 		ajeet_singh_user_id     : '4bafde92-a30f-44d3-ace4-584dd460143e',
 		linh_nguyen_duy_user_id : 'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',
+		vietnam_admin_id        : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
 		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',

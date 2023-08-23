@@ -30,14 +30,15 @@ export const getDocumentInfo = ({ itemData }: Object) => {
 		irnNumber = '', invoiceNumber = '', proformaNumber = '',
 		invoiceAdditionals: { cancelledEInvoicePdfUrl = '', cancelledIrnNumber = '' },
 		proformaPdfUrl = '', invoicePdf = '', eInvoicePdfUrl = '',
+		einvoicePdfUrl = '',
 	} = itemData;
 
 	const invoiceNumberPriority = [
 		[cancelledIrnNumber, cancelledEInvoicePdfUrl, 'CANCELLED'],
-		[irnNumber, eInvoicePdfUrl, 'E INVOICE'],
+		[irnNumber, eInvoicePdfUrl || einvoicePdfUrl, 'E INVOICE'],
 		[invoiceNumber, invoicePdf, itemData?.invoiceType],
 		[proformaNumber, proformaPdfUrl, itemData?.invoiceType],
-	].filter((item) => (item[GLOBAL_CONSTANTS.zeroth_index] || undefined) !== undefined)[GLOBAL_CONSTANTS.zeroth_index];
+	].filter((item) => (item[1] || undefined) !== undefined)[GLOBAL_CONSTANTS.zeroth_index];
 
 	return {
 		invoice_number : invoiceNumberPriority[GLOBAL_CONSTANTS.zeroth_index],

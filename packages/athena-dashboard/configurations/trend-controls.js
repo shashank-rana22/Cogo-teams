@@ -1,19 +1,19 @@
-const controls = [
+const getControls = ({ t = () => {} }) => [
 	{
 		name    : 'trade_direction',
-		label   : 'Trade Direction',
+		label   : t('athenaDashboard:trade_direction'),
 		options : [
-			{ value: 'import', label: 'Import' },
-			{ value: 'export', label: 'Export' },
+			{ value: 'import', label: t('athenaDashboard:trade_direction_import') },
+			{ value: 'export', label: t('athenaDashboard:trade_direction_export') },
 		],
 	},
 	{
 		name    : 'hs_code',
-		label   : 'HS Codes',
+		label   : t('athenaDashboard:hs_code_label'),
 		options : [
-			{ label: 'All', value: 'all' },
-			{ label: 'Select Codes Below', value: 'select_codes_value' },
+			{ label: t('athenaDashboard:all_hs_code_option'), value: 'all' },
+			{ label: t('athenaDashboard:select_below_hs_code_option'), value: 'select_codes_value' },
 		],
 	},
 ];
-export default controls;
+export default getControls;
