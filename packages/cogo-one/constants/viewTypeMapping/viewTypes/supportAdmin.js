@@ -21,7 +21,7 @@ const SUPPORT_ADMIN = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
-	group_agents_api_filter       : ['support'],
+	group_agents_api_filter       : 'support',
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,

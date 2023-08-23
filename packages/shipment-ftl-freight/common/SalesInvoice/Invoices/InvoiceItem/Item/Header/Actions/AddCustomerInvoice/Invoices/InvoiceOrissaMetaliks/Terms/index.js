@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
@@ -8,6 +8,7 @@ function Terms({
 	tradeParty = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_BANK_DETAILS = {} } = getFortigoDetails();
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
 	);
@@ -29,7 +30,7 @@ function Terms({
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = CUSTOMER_TO_BANK_DETAILS[importerExporterId] || {};
 
 	return (
 		<div style={{ border: '2px solid black', borderTop: 'none' }}>
@@ -57,12 +58,12 @@ function Terms({
 						<ol>
 							<li>
 								<b>Payment Terms:</b>
-								&nbsp;
+								{' '}
 								30 days
 							</li>
 							<li>
 								All Payments should be to the account of
-								&nbsp;
+								{' '}
 								<b>{billing_address?.business_name}</b>
 								. account details:
 								<p>
@@ -84,7 +85,7 @@ function Terms({
 							</li>
 							<li>
 								<b>Delayed payment penalty:</b>
-								&nbsp;
+								{' '}
 								2% per month or part therof from
 								the date of invoice.
 							</li>
