@@ -151,7 +151,7 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 			} else if (item?.name === DESIGNATION) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else if (item?.name === HIRING_MANAGER) {
-				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
+				setValue(item.name, startCase(content?.detail?.[item?.name]?.name));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
