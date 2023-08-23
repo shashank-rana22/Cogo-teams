@@ -11,6 +11,14 @@
 	transition: background 0.2s, box-shadow 0.2s;
 }
 
+.financially_closed_child {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 200px;
+	cursor: auto;
+	background: #fff;
+}
+
 .responsive_graph_circular {
 	width: 75%;
 	height: 86%;
