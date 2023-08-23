@@ -10,6 +10,21 @@ import useListShipmentTradePartners from '../../../../../../hooks/useListShipmen
 import PocUser from './PocUser';
 import styles from './styles.module.css';
 
+const RECOGNIZATIONS = [
+	{
+		colorCode : '#d6b200',
+		title     : 'Customers',
+	},
+	{
+		colorCode : '#c26d1a',
+		title     : 'Trade Partners',
+	},
+	{
+		colorCode : '#6fa5ab',
+		title     : 'Stakeholders',
+	},
+];
+
 function PocContainer({
 	setShowPocDetails = () => {},
 	showPocDetails = {},
@@ -37,7 +52,7 @@ function PocContainer({
 	}, []);
 
 	const updatedTradePartnersData = tradePartnersData?.reduce((accumulator, item) => {
-		const updatedItem = { ...item, chat_option: true, show_trade_type: true };
+		const updatedItem = { ...item, chat_option: true, is_trade_partner: true };
 		accumulator.push(updatedItem);
 		return accumulator;
 	}, []);
@@ -58,9 +73,18 @@ function PocContainer({
 				onClick={() => setShowPocDetails({})}
 			>
 				<IcMArrowBack />
-				Back
 			</div>
+			<div className={styles.recognizations}>
+				{(RECOGNIZATIONS || []).map((item) => (
+					<div className={styles.single_container} key={item}>
+						<div className={styles.circle} style={{ background: `${item?.colorCode}` }} />
+						<div className={styles.color_title}>
+							{item.title}
+						</div>
+					</div>
+				))}
 
+			</div>
 			<div className={styles.title}>
 				Initiate Conversation
 			</div>

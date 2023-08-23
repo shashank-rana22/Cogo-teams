@@ -1,4 +1,4 @@
-import { Tooltip, Avatar } from '@cogoport/components';
+import { Tooltip, Avatar, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMEmail, IcMCall, IcMWhatsapp } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
@@ -19,7 +19,7 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 		chat_option = false,
 		is_primary_poc = false,
 		is_customer = false,
-		show_trade_type = false,
+		is_trade_partner = false,
 	} = userDetails;
 
 	const {
@@ -41,7 +41,7 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 		chatOption          : chat_option,
 		isPrimaryPoc        : is_primary_poc,
 		isCustomer          : is_customer,
-		showTradeType       : show_trade_type,
+		isTradePartner      : is_trade_partner,
 	};
 };
 
@@ -95,7 +95,7 @@ function PocUser({
 						chatOption = false,
 						isPrimaryPoc = false,
 						isCustomer = false,
-						showTradeType = false,
+						isTradePartner = false,
 					} = getEachUserFormatedData({ userDetails });
 
 					const chatData = {
@@ -116,98 +116,108 @@ function PocUser({
 					const countryCode = mobile_country_code.replace('+', '');
 
 					return (
-						<div className={styles.container} key={id}>
-							<div className={styles.user_info}>
-								<Avatar personName={name} size="32px" className={styles.styled_avatar} />
-								<div className={styles.user_details}>
-									<div className={styles.user_name}>
-										{startCase(name)}
-									</div>
-									<div className={styles.user_work_scope}>
-										{isCustomer ? (
-											<div className={styles.scope_name}>
-												{isPrimaryPoc ? 'Customer - Primary POC' : 'Customer'}
-											</div>
-										) : null}
-
-										{showTradeType ? (
-											<div className={styles.trade_type}>
-												{startCase(trade_type)}
-											</div>
-										) : null }
-
-										{(lessList || []).map((item, index) => (
-											<div className={styles.scope_name} key={item}>
-												{startCase(item)}
-												{index !== lessList.length - LAST_INDEX ? ',' : ''}
-											</div>
-										))}
-										{showMoreList && (
-											<Tooltip
-												content={(
-													<div>
-														{(moreList || []).map((item) => (
-															<div
-																className={styles.scope_name}
-																key={item}
-															>
-																{startCase(item)}
-
-															</div>
-														))}
-													</div>
-												)}
-												theme="light"
-												placement="bottom"
-											>
-												<div className={styles.more_tags}>
-													{moreList?.length}
-													+
+						<div className={styles.main_container} key={id}>
+							<div className={styles.container}>
+								<div className={styles.user_info}>
+									<Avatar
+										personName={name}
+										size="32px"
+										className={cl`${styles.styled_avatar}
+										${isCustomer ? styles.customer_avatar : ''}
+										${isTradePartner ? styles.trade_partners_avatar : ''}
+										`}
+									/>
+									<div className={styles.user_details}>
+										<div className={styles.user_name}>
+											{startCase(name)}
+										</div>
+										<div className={styles.user_work_scope}>
+											{isCustomer ? (
+												<div className={styles.scope_name}>
+													{isPrimaryPoc ? 'Customer - Primary POC' : 'Customer'}
 												</div>
-											</Tooltip>
-										)}
+											) : null}
+
+											{isTradePartner ? (
+												<div className={styles.trade_type}>
+													{startCase(trade_type)}
+												</div>
+											) : null }
+
+											{(lessList || []).map((item, index) => (
+												<div className={styles.scope_name} key={item}>
+													{startCase(item)}
+													{index !== lessList.length - LAST_INDEX ? ',' : ''}
+												</div>
+											))}
+											{showMoreList && (
+												<Tooltip
+													content={(
+														<div>
+															{(moreList || []).map((item) => (
+																<div
+																	className={styles.scope_name}
+																	key={item}
+																>
+																	{startCase(item)}
+
+																</div>
+															))}
+														</div>
+													)}
+													theme="light"
+													placement="bottom"
+												>
+													<div className={styles.more_tags}>
+														{moreList?.length}
+														+
+													</div>
+												</Tooltip>
+											)}
+										</div>
 									</div>
 								</div>
-							</div>
-							<div className={styles.action_icons}>
-								{chatOption ? (
-									<IcMWhatsapp
-										className={styles.whatsapp_icon}
-										onClick={() => setActiveTab((prev) => ({
-											...prev,
-											hasNoFireBaseRoom : true,
-											data              : chatData,
-											tab               : 'message',
-										}))}
-									/>
-								) : null}
+								<div className={styles.action_icons}>
+									{chatOption ? (
+										<IcMWhatsapp
+											className={styles.whatsapp_icon}
+											onClick={() => setActiveTab((prev) => ({
+												...prev,
+												hasNoFireBaseRoom : true,
+												data              : chatData,
+												tab               : 'message',
+											}))}
+										/>
+									) : null}
 
-								{hasVoiceCallAccess && (
-									<IcMCall
-										className={styles.call_icon_styles}
-										onClick={() => handleVoiceCall({
-											mobileNumber,
-											userId,
-											name,
-											countryCode,
-											dispatch,
+									{hasVoiceCallAccess && (
+										<IcMCall
+											className={styles.call_icon_styles}
+											onClick={() => handleVoiceCall({
+												mobileNumber,
+												userId,
+												name,
+												countryCode,
+												dispatch,
+											})}
+										/>
+									)}
+
+									<IcMEmail
+										className={styles.email_icon_styles}
+										onClick={() => setModalData({
+											modalType : 'email',
+											userData  : user,
 										})}
 									/>
-								)}
-
-								<IcMEmail
-									className={styles.email_icon_styles}
-									onClick={() => setModalData({
-										modalType : 'email',
-										userData  : user,
-									})}
-								/>
+								</div>
 							</div>
 						</div>
 					);
 				},
 			)}
 		</div>
+
 	);
 }
 
