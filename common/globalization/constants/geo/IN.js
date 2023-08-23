@@ -144,6 +144,7 @@ export default {
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 			'8e0c7f28-f77c-44ae-9fef-901ca85fada5', // Portfolio Team Lead
+			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 		],
 		kam_manager_ids: [
 			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
@@ -152,6 +153,7 @@ export default {
 			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
 			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
@@ -215,6 +217,11 @@ export default {
 			'7000ed27-f649-4e00-9c20-8c20c9eccf78', // Prod_COE_Finance_Head
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
+			'e48ae064-781a-43ee-af27-b7d4ed37329f', // Prod_Account Payable Executive
+			'6106378a-44e0-4f60-9f4b-4160843d9dc9', // Temp-  Corporate Owner Finance
+			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
+			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
+
 		],
 		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
@@ -297,6 +304,10 @@ export default {
 		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
 		supply_fulfillment       : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
+		finops                   : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
+		cogo_one_kyc             : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
+		finance_branch_accounts  : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+
 	},
 	options: {
 		registration_types: [
