@@ -192,10 +192,10 @@ function AgentDetails({
 					leadUserId={lead_user_id}
 					orgId={orgId}
 					mobileNumber={mobile_number}
-					userData={userData}
 					organizationData={organizationData}
 					fetchOrganization={fetchOrganization}
 					partnerId={partnerId}
+					formattedMessageData={formattedMessageData}
 				/>
 			)}
 
@@ -219,7 +219,7 @@ function AgentDetails({
 					hasVoiceCallAccess={geo.others.navigations.cogo_one.has_voice_call_access}
 				/>
 			)}
-			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
+			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} viewType={viewType} /> }
 			<GroupMembersRequests
 				deleteGroupRequest={deleteGroupRequest}
 				approveGroupRequest={approveGroupRequest}
