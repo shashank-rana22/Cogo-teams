@@ -195,7 +195,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			} else if (item?.name === DESIGNATION) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else if (item?.name === HIRING_MANAGER) {
-				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
+				setValue(item.name, content?.detail?.[item?.name]);
 			} else if (item?.name === ATTENDENCE) {
 				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
 					?.attendance));
