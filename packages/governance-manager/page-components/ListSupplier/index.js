@@ -6,6 +6,7 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function ListSupplier({
+	t,
 	supplierList = [],
 	loading,
 	currentPage,
@@ -18,13 +19,14 @@ function ListSupplier({
 				!loading
 				&& (isEmpty(supplierList) ? (
 					<div className={styles.no_data_found}>
-						No Data Found
+						{t('main_page_no_data_found')}
 					</div>
 				)
 					: (
 						<>
 							{supplierList?.map((item) => (
 								<Item
+									t={t}
 									item={item}
 									key={item}
 								/>

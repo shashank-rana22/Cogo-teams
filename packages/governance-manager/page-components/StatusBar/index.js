@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 import { serviceOptions } from './utils/service-options';
 import { statusTabs } from './utils/status-tabs';
 
-function StatusBar({ activeTab, setActiveTab, approvalStats, currentService, setCurrentService, role }) {
+function StatusBar({ activeTab, setActiveTab, approvalStats, currentService, setCurrentService, role, t }) {
 	return (
 		<div className={styles.parent}>
 			<div className={styles.select_service}>
@@ -12,7 +12,7 @@ function StatusBar({ activeTab, setActiveTab, approvalStats, currentService, set
 					value={currentService}
 					onChange={setCurrentService}
 					placeholder="Select Books"
-					options={serviceOptions}
+					options={serviceOptions({ t })}
 				/>
 			</div>
 			<Tabs
@@ -22,7 +22,7 @@ function StatusBar({ activeTab, setActiveTab, approvalStats, currentService, set
 				fullWidth
 			>
 				{
-				statusTabs({ approvalStats, role }).map((object) => (
+				statusTabs({ approvalStats, role, t }).map((object) => (
 					<TabPanel
 						key={object?.name}
 						name={object.name}

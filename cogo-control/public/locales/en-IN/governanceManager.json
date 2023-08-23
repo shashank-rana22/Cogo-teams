@@ -1,0 +1,26 @@
+{
+    "service_all_title": "All",
+    "service_fcl_freight_title": "FCL Freight",
+    "service_lcl_freight_title": "LCL Freight",
+    "service_halage_freight_title": "Haulage Freight",
+    "service_air_customs_title": "Air Customs",
+    "service_fcl_customs_title": "FCL Customs",
+    "service_lcl_customs_title": "LCL Customs",
+    "service_fcl_cfs_title": "FCL CFS",
+    "main_page_title": "Governance Manager",
+    "main_page_stats_pending_title":"Suppliers Pending",
+    "main_page_stats_onboarded_title":"Suppliers Onboarded",
+    "main_page_stats_rejected_title":"Suppliers Rejected",
+    "main_page_filter_tabs_need_analysis":"Need Analysis",
+    "main_page_filter_tabs_market_feedback":"Market Feedback",
+    "main_page_filter_tabs_organization_evaluation":"Supplier Evaluation",
+    "main_page_filter_tabs_organization_approval":"Supplier Approval",
+    "main_page_filter_tabs_contract_and_sla":"Contract & SLA",
+    "main_page_no_data_found":"No Data Found",
+    "supplier_page_card_go_back_btn_title":"Go Back",
+    "supplier_page_card_name_title":"Supplier name",
+    "supplier_page_card_home_country_title":"Home Country",
+    "supplier_page_card_service_provieded_title":"Service Provied"
+
+
+}

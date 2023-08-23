@@ -1,10 +1,10 @@
-export const serviceOptions = [
-	{ label: 'All', value: 'all' },
-	{ label: 'FCL freight', value: 'fcl_freight' },
-	{ label: 'LCL Freight', value: 'lcl_freight' },
-	{ label: 'Haulage freight', value: 'haulage_freight' },
-	{ label: 'AIR Customs', value: 'air_customs' },
-	{ label: 'FCL Customs', value: 'fcl_customs' },
-	{ label: 'LCL Customs', value: 'lcl_customs' },
-	{ label: 'FCL CFS', value: 'fcl_cfs' },
+export const serviceOptions = ({ t }) => [
+	{ label: t('service_all_title'), value: 'all' },
+	{ label: t('service_fcl_freight_title'), value: 'fcl_freight' },
+	{ label: t('service_lcl_freight_title'), value: 'lcl_freight' },
+	{ label: t('service_halage_freight_title'), value: 'haulage_freight' },
+	{ label: t('service_air_customs_title'), value: 'air_customs' },
+	{ label: t('service_fcl_customs_title'), value: 'fcl_customs' },
+	{ label: t('service_lcl_customs_title'), value: 'lcl_customs' },
+	{ label: t('service_fcl_cfs_title'), value: 'fcl_cfs' },
 ];

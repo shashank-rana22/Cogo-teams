@@ -3,7 +3,7 @@ import useGetStats from '../hooks/useGetStats';
 import styles from './styles.module.css';
 import { STATS_IMAGE_URLS } from './utils/stats-image-urls';
 
-function Stats() {
+function Stats({ t }) {
 	const { data:stats } = useGetStats();
 
 	return (
@@ -19,7 +19,7 @@ function Stats() {
 				</div>
 				<div className={styles.pending_right}>
 					<div className={styles.right_bolder}>{stats?.pending_service_approval}</div>
-					<div className={styles.right_lighter}>Suppliers Pending</div>
+					<div className={styles.right_lighter}>{t('main_page_stats_pending_title')}</div>
 
 				</div>
 			</div>
@@ -35,7 +35,7 @@ function Stats() {
 					</div>
 					<div className={styles.onboarded_right}>
 						<div className={styles.right_bolder}>{stats?.approved_service_approval}</div>
-						<div className={styles.right_lighter}>Suppliers Onboarded</div>
+						<div className={styles.right_lighter}>{t('main_page_stats_onboarded_title')}</div>
 					</div>
 				</div>
 				<div className={styles.rejected}>
@@ -49,7 +49,7 @@ function Stats() {
 					</div>
 					<div className={styles.rejected_right}>
 						<div className={styles.right_bolder}>{stats?.rejected_service_approval}</div>
-						<div className={styles.right_lighter}>Suppliers Rejected</div>
+						<div className={styles.right_lighter}>{t('main_page_stats_rejected_title')}</div>
 					</div>
 				</div>
 			</div>
