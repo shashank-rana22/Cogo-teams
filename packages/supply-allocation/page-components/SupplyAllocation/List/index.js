@@ -180,7 +180,7 @@ function List({
 			id     : 'forecasted_volume',
 			Header : (
 				<div style={{ display: 'flex' }}>
-					FORECASTED VOLUME
+					FORECASTED VOL
 					<span
 						role="presentation"
 						onClick={() => onClickVolumeSort()}
@@ -196,7 +196,13 @@ function List({
 					</span>
 				</div>
 			),
-			accessor: (item) => `${item?.forecasted_volume} TEU`,
+			accessor: ({ forecasted_volume = 0 }) => (
+				<div className={styles.volume}>
+					{forecasted_volume}
+					{' '}
+					TEU
+				</div>
+			),
 		},
 		{
 			id       : 'bookmark',

@@ -1,26 +1,12 @@
-import { Button, Tooltip } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
-import { IcMArrowBack, IcMPortArrow, IcMEdit } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
 
 import DotLoader from '../../../commons/DotLoader';
 
 import styles from './styles.module.css';
 
-const commonLocationProps = {
-	asyncKey           : 'supply_fcl_searches',
-	getModifiedOptions : ({ options }) => options.map((option) => ({
-		...option,
-		origin_display_name      : option?.origin_location?.display_name,
-		destination_display_name : option?.destination_location?.display_name,
-	})),
-	renderLabel : (item) => item.origin_location.display_name,
-	initialCall : true,
-	placeholder : 'Search via port name/code...',
-};
-
-function Header({ firstSearch, loading }) {
+function Header({ firstSearch = {}, loading = false }) {
 	const {
 		origin_location = {},
 		destination_location = {},
@@ -33,54 +19,29 @@ function Header({ firstSearch, loading }) {
 	const { display_name: destinationName } = destination_location;
 
 	const router = useRouter();
-	const [editMode, setEditMode] = useState(false);
-	const [locationSearchId, setLocationSearchId] = useState('');
-	const { control, watch, reset } = useForm();
-	const { origin_location_id, destination_location_id } = watch();
 
 	const onClickBack = () => {
 		router.push('/supply-allocation');
 	};
 
-	const onClickSearch = () => {
-		router.push(`/supply-allocation/view/${locationSearchId}`);
-		reset();
-	};
-
 	if (loading) {
 		return (
-			<div
-				style={{
-					display        : 'flex',
-					justifyContent : 'center',
-					alignItems     : 'center',
-					background     : '#fff',
-					padding        : '10px',
-					marginBottom   : '10px',
-				}}
-			>
+			<div className={styles.loading_container}>
 				<DotLoader />
 			</div>
 		);
 	}
 
-	return !editMode ? (
-		<div
-			style={{
-				display        : 'flex',
-				justifyContent : 'space-between',
-				alignItems     : 'center',
-				background     : '#fff',
-				padding        : '10px',
-				marginBottom   : '20px',
-			}}
-		>
-			<IcMArrowBack
-				height={30}
-				width={30}
-				style={{ cursor: 'pointer' }}
-				onClick={onClickBack}
-			/>
+	return (
+		<div className={styles.container}>
+			<div className={styles.back_icon}>
+				<IcMArrowBack
+					height={20}
+					width={20}
+					onClick={onClickBack}
+				/>
+			</div>
+			<div className={styles.border} />
 
 			<Tooltip
 				content={
@@ -93,7 +54,7 @@ function Header({ firstSearch, loading }) {
 				<div className={styles.location_name}>{originName}</div>
 			</Tooltip>
 
-			<div>
+			<div className={styles.port_icon}>
 				<IcMPortArrow className="port_arrow_icon" width={20} height={20} />
 			</div>
 
@@ -105,130 +66,46 @@ function Header({ firstSearch, loading }) {
 				theme="light"
 				style={{ marginBottom: '24px' }}
 			>
-				<div className={styles.location_name}>{destinationName}</div>
+				<div className={styles.destination_location_name}>{destinationName}</div>
 			</Tooltip>
 
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+			<div className={styles.border} />
+
+			<div className={styles.sub_container}>
 				<div className={styles.sub_heading}>Avg Profitability</div>
-				{!editMode ? (
-					<div className={styles.bold}>
-						{profitability}
-						{' '}
-						%
-					</div>
-				) : '--'}
+
+				<div className={styles.bold}>
+					{profitability}
+					{' '}
+					%
+				</div>
+
 			</div>
 
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+			<div className={styles.sub_container}>
 				<div className={styles.sub_heading}>% Fulfillment </div>
-				{!editMode ? (
-					<div className={styles.bold}>
-						{fulfillment}
-						{' '}
-						%
-					</div>
-				) : '--'}
+
+				<div className={styles.bold}>
+					{fulfillment}
+					{' '}
+					%
+				</div>
+
 			</div>
 
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+			<div className={styles.sub_container}>
 				<div className={styles.sub_heading}>Forecasted Vol</div>
-				{!editMode ? (
-					<div className={styles.volume}>
-						{forecasted_volume}
-						{' '}
-						TEU
-					</div>
-				) : (
-					'--'
-				)}
+
+				<div className={styles.volume}>
+					{forecasted_volume}
+					{' '}
+					TEU
+				</div>
+
 			</div>
 
-			<div
-				style={{ cursor: 'pointer' }}
-				role="presentation"
-				onClick={() => setEditMode((prev) => !prev)}
-			>
-				<IcMEdit
-					fill="#F68B21"
-					width={14}
-					height={14}
-					style={{ marginRight: 12 }}
-				/>
-			</div>
 		</div>
-	) : (
-		<div
-			style={{
-				display        : 'flex',
-				alignItems     : 'center',
-				background     : '#fff',
-				padding        : '10px',
-				marginBottom   : '10px',
-				justifyContent : 'space-between',
-			}}
-		>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<IcMArrowBack height={30} width={30} onClick={onClickBack} />
-				<div
-					style={{ width: '350px', marginRight: '20px', marginLeft: '20px' }}
-				>
-					<AsyncSelectController
-						name="origin_location_id"
-						control={control}
-						isClearable
-						labelKey="origin_display_name"
-						valueKey="origin_location_id"
-						{...commonLocationProps}
-						onChange={(_, item) => {
-							setLocationSearchId(item?.id);
-						}}
-						params={{
-							service_data_required: true,
-							...(destination_location_id
-								? { filters: { destination_location_id } }
-								: {}),
-						}}
-						renderLabel={(item) => item?.origin_location?.display_name}
-					/>
-				</div>
-				<div style={{ marginRight: '20px' }}>
-					<IcMPortArrow className="port_arrow_icon" width={30} height={30} />
-				</div>
-				<div style={{ width: '350px' }}>
-					<AsyncSelectController
-						name="destination_location_id"
-						control={control}
-						isClearable
-						labelKey="destination_display_name"
-						valueKey="destination_location_id"
-						{...commonLocationProps}
-						onChange={(_, item) => {
-							setLocationSearchId(item?.id);
-						}}
-						renderLabel={(item) => item?.destination_location?.display_name}
-						params={{
-							service_data_required: true,
-							...(origin_location_id
-								? { filters: { origin_location_id } }
-								: {}),
-						}}
-					/>
-				</div>
-			</div>
 
-			<div className={styles.flex}>
-				<Button
-					className={styles.cancel_button}
-					onClick={() => setEditMode((prev) => !prev)}
-					themeType="secondary"
-				>
-					Cancel
-				</Button>
-				<Button themeType="accent" onClick={onClickSearch}>
-					Search
-				</Button>
-			</div>
-		</div>
 	);
 }
 

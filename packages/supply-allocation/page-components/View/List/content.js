@@ -23,6 +23,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 	const formProps = useForm();
 
 	const { control, unregister, formState, handleSubmit } = formProps;
+
 	const { dirtyFields = {} } = formState;
 
 	const bucketControls = [

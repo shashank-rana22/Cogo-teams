@@ -2,6 +2,7 @@ import GetOrdinalNumber from '../../../utils/GetOrdinalNumber';
 
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
+import styles from './styles.module.css';
 
 const getSubBucketColumns = ({
 	control = {},
@@ -48,7 +49,7 @@ const getSubBucketColumns = ({
 			Header : (
 				<>
 					<div>Past Allocated</div>
-					<div>(last 4 weeks)</div>
+					<div className={styles.last_four_weeks}>Last 4 weeks</div>
 				</>
 			),
 			accessor: ({ past_allocation = '' }) => `${past_allocation} TEU`,
@@ -58,7 +59,10 @@ const getSubBucketColumns = ({
 			Header : (
 				<>
 					<div>FULLFILLED</div>
-					<div>(last 4 weeks)</div>
+					<div className={styles.last_four_weeks}>
+						Last 4 weeks
+
+					</div>
 				</>
 			),
 			accessor: ({ allocated_containers = 0 }) => `${allocated_containers} TEU`,
@@ -79,12 +83,15 @@ const getSubBucketColumns = ({
 						%
 					</div>
 
-					<div>
-						(
-						{rolling_shipments}
-						{' '}
-						rolling shipments)
-					</div>
+					{rolling_shipments
+						? (
+							<div className={styles.rolling_shipments}>
+
+								{rolling_shipments}
+								{' '}
+								Rolling Shipments
+							</div>
+						) : null}
 				</>
 			),
 		},
@@ -93,7 +100,10 @@ const getSubBucketColumns = ({
 			Header : (
 				<>
 					<div>Avg Rate rank</div>
-					<div> (Cogoport Profitability)</div>
+					<div className={styles.profitability}>
+						(Cogoport Profitability)
+
+					</div>
 				</>
 			),
 			accessor: ({ avg_rate_rank = '', profitability }) => (
@@ -102,7 +112,7 @@ const getSubBucketColumns = ({
 						<GetOrdinalNumber number={avg_rate_rank} />
 					</div>
 
-					<div>
+					<div className={styles.profitability}>
 						(Profitability
 						{' '}
 						{profitability}
