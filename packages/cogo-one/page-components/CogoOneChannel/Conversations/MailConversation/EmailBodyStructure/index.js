@@ -4,6 +4,7 @@ import React from 'react';
 
 import getUserNameFromEmail from '../../../../../helpers/getUserNameFromEmail';
 
+import ShowEmails from './showEmails';
 import styles from './styles.module.css';
 
 function RenderLoader() {
@@ -82,9 +83,7 @@ function EmailBodyStructure({
 							>
 								{itm.label}
 								:
-								<div className={styles.name_div}>
-									{itm.value.join(', ')}
-								</div>
+								<ShowEmails emailsData={itm.value} />
 							</div>
 						),
 					)}

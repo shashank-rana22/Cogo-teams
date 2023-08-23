@@ -71,56 +71,58 @@ function MailConversation({ mailProps = {} }) {
 				isDraft={isDraft}
 			/>
 
-			<EmailBodyStructure
-				sender={sender}
-				recipientData={recipientData}
-				ccData={ccData}
-				bccData={bccData}
-				loading={loading}
-			/>
+			<div className={styles.email_body}>
+				<EmailBodyStructure
+					sender={sender}
+					recipientData={recipientData}
+					ccData={ccData}
+					bccData={bccData}
+					loading={loading}
+				/>
 
-			<div className={styles.message_div}>
-				{(loading) ? (
-					<>
-						<div className={styles.time_stamp}>
-							<Placeholder width="80px" height="10px" />
-						</div>
-						<div className={styles.receive_message_container}>
-							{[...Array(MAIL_LOADING_SKELETON_LENGTH).keys()].map(
-								(itm) => (
-									<Placeholder
-										key={itm}
-										width="500px"
-										height="20px"
-										margin="0px 0px 10px 0px"
-									/>
-								),
-							)}
-						</div>
-					</>
-				) : (
-					<>
-						<div className={styles.time_stamp}>
-							{formatDate({
-								date       : sentDateTime,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-								formatType : 'dateTime',
-								separator  : ' ',
-							})}
-						</div>
-						<div
-							className={cl`${styles.receive_message_container}
+				<div className={styles.message_div}>
+					{loading ? (
+						<>
+							<div className={styles.time_stamp}>
+								<Placeholder width="80px" height="10px" />
+							</div>
+							<div className={styles.receive_message_container}>
+								{[...Array(MAIL_LOADING_SKELETON_LENGTH).keys()].map(
+									(itm) => (
+										<Placeholder
+											key={itm}
+											width="500px"
+											height="20px"
+											margin="0px 0px 10px 0px"
+										/>
+									),
+								)}
+							</div>
+						</>
+					) : (
+						<>
+							<div className={styles.time_stamp}>
+								{formatDate({
+									date       : sentDateTime,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+									separator  : ' ',
+								})}
+							</div>
+							<div
+								className={cl`${styles.receive_message_container}
 										${hasAttachments ? styles.receive_preview_div : ''}
 										`}
-							dangerouslySetInnerHTML={{ __html: newContent }}
-						/>
-						<MailAttachments
-							attachmentData={attachmentData}
-							loading={loading || attachmentLoading}
-						/>
-					</>
-				)}
+								dangerouslySetInnerHTML={{ __html: newContent }}
+							/>
+							<MailAttachments
+								attachmentData={attachmentData}
+								loading={loading || attachmentLoading}
+							/>
+						</>
+					)}
+				</div>
 			</div>
 		</div>
 	);
