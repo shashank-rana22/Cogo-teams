@@ -19,8 +19,7 @@ const SCOPE_MAPPING = {
 	region     : 'ports',
 };
 
-const TIMEOUT_TIME = 1000;
-const SCROLLING_LIMIT = 30;
+const TIMEOUT_TIME = 400;
 const START_PAGE = 1;
 
 function SidePanel({
@@ -49,17 +48,17 @@ function SidePanel({
 	const destination = destinationType.includes('port')
 		? locationFilters?.destination?.name : SCOPE_MAPPING[destinationType];
 
-	const { list = [], total_count = 0 } = mapStatisticsData;
-	const hasMore = page < Math.ceil(total_count / SCROLLING_LIMIT);
+	const { list = [], total_pages = 0 } = mapStatisticsData;
+	const hasMore = page < total_pages;
 	const { service_type } = globalFilters;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
 			if (!accuracyLoading) {
-				setPage((prev) => prev + START_PAGE);
+				setPage(page + START_PAGE);
 			}
 		}, TIMEOUT_TIME);
-	}, [accuracyLoading, setPage]);
+	}, [accuracyLoading, page, setPage]);
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
@@ -118,7 +117,7 @@ function SidePanel({
 					<InfiniteScroll
 						pageStart={1}
 						initialLoad={false}
-						loadMore={loadMore}
+						loadMore={hasMore && loadMore}
 						hasMore={hasMore}
 						loader={accuracyLoading ? (
 							<div className={styles.loading_style}>
@@ -126,7 +125,6 @@ function SidePanel({
 							</div>
 						) : null}
 						useWindow={false}
-						threshold={600}
 					>
 						<List
 							setActiveId={setActiveId}
@@ -134,13 +132,12 @@ function SidePanel({
 							finalList={activeList}
 							originName={originName}
 						/>
-						{!hasMore && !isEmpty(activeList) && !accuracyLoading && (
-							<p className={styles.has_more}>
-								You reached the end!!
-							</p>
-						)}
-
 					</InfiniteScroll>
+					{!hasMore && !isEmpty(activeList) && !accuracyLoading && (
+						<h4 className={styles.has_more}>
+							You reached the end!!
+						</h4>
+					)}
 				</div>
 			</div>
 			<button
