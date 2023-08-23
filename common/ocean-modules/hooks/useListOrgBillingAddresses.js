@@ -36,12 +36,10 @@ const useListOrganizationBillingAddresses = ({
 	}, { manual: true });
 
 	useEffect(() => {
-		if (organization_id && watchModeOfExecution) {
-			if (watchModeOfExecution !== 'pickup') {
-				trigger();
-			} else {
-				orgPocTrigger();
-			}
+		if (organization_id || watchModeOfExecution) {
+			trigger();
+
+			if (watchModeOfExecution === 'pickup') orgPocTrigger();
 		}
 	}, [organization_id, watchModeOfExecution, trigger, orgPocTrigger]);
 
