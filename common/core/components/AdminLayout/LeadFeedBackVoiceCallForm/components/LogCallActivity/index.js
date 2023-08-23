@@ -27,9 +27,13 @@ function LogCallActivity({
 	const {
 		createLeadOrgUserLog = () => {},
 		loading = false,
-	} = useCreateLeadOrgUserLog({ leadOrgId, partnerId });
+	} = useCreateLeadOrgUserLog({ leadOrgId, partnerId, onCloseForm });
 
-	const controls = getControls({ communicationType: 'call', lead_organization_id: leadOrgId, watch });
+	const controls = getControls({
+		communicationType    : 'call',
+		lead_organization_id : leadOrgId,
+		watch,
+	});
 
 	return (
 		<div className={styles.main_container}>

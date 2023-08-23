@@ -5,11 +5,14 @@ import { useCallback, useEffect, useState } from 'react';
 const DEFAULT_PAGE_NUMBER = 1;
 
 const getParams = ({ query, page }) => ({
-	filters                 : query ? { q: query } : undefined,
-	lead_user_data_required : true,
-	agent_data_required     : true,
+	filters                            : query ? { q: query } : undefined,
+	lead_user_data_required            : true,
+	agent_data_required                : true,
+	lead_organization_data_required    : true,
+	communication_log_count_required   : true,
+	machine_intelligence_data_required : true,
 	page,
-	page_limit              : 6,
+	page_limit                         : 6,
 });
 
 const useListLeadOrgUsers = () => {
@@ -45,7 +48,7 @@ const useListLeadOrgUsers = () => {
 	}, [getOrganizationUsers]);
 
 	return {
-		data,
+		data: loading ? {} : data,
 		loading,
 		search,
 		setSearch,

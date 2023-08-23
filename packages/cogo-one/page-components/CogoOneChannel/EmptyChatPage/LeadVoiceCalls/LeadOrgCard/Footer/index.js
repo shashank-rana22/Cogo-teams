@@ -1,5 +1,4 @@
 import { Button } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
@@ -44,7 +43,6 @@ function Footer({ eachItem = {}, openLeadOrgModal = () => {} }) {
 						</Button>
 						<div className={styles.right_container}>
 							{subText}
-							<IcMInfo height="13px" width="13px" className={styles.icon_styles} />
 						</div>
 					</div>
 				);

@@ -17,7 +17,7 @@ const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
 	} = values || {};
 
 	const fieldArrAdditonalLeadUserIds = added_additional_contacts?.map(
-		(eachVal) => eachVal?.field_additional_lead_user_id,
+		(eachVal) => eachVal?.field_additional_lead_user?.lead_user_id,
 	);
 
 	const additionalLeadUserids = [...new Set(
@@ -32,13 +32,14 @@ const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
 		communication_end_time,
 		agent_id,
 		communication_summary,
-		lead_user_id             : added_primary_contacts?.pop()?.field_additional_lead_user_id || lead_user_id,
+		lead_user_id             : lead_user_id || added_primary_contacts?.pop()?.field_primary_lead_user?.lead_user_id,
 		additional_lead_user_ids : additionalLeadUserids,
 		partner_id               : partnerId,
+		communication_type       : 'call',
 	};
 };
 
-function useCreateLeadOrgUserLog({ leadOrgId = '', partnerId = '' }) {
+function useCreateLeadOrgUserLog({ leadOrgId = '', partnerId = '', onCloseForm = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_organization_communication_log',
 		method : 'post',
@@ -50,6 +51,7 @@ function useCreateLeadOrgUserLog({ leadOrgId = '', partnerId = '' }) {
 				data: getPayload({ leadOrgId, values, partnerId }),
 			});
 			Toast.success('Successfully Created');
+			onCloseForm();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

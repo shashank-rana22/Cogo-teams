@@ -10,7 +10,7 @@
 
 	>div:last-child,
 	>div:first-child {
-		width: 45%;
+		max-width: 45%;
 	}
 }
 
@@ -27,13 +27,13 @@
 }
 
 .port_name {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
 	color: #221f20;
 }
 
 .country_name {
-	font-size: 12px;
+	font-size: 10px;
 	color: #221f20;
 }
 

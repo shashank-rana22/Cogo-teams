@@ -6,10 +6,29 @@
 .port_pair_data {
 	width: 100%;
 	height: 70%;
-	padding: 4px;
+	padding: 0 4px;
 }
 
 .sub_text {
-	font-size: 12px;
+	margin-right: 12px;
+	font-size: 10px;
 	color: #828282;
+	text-align: end;
+}
+
+.tooltip_container {
+	width: 100%;
+	height: 150px;
+	padding: 8px;
+	overflow: scroll;
+}
+
+.popover_styles {
+	width: 350px;
+
+	:global {
+		.tippy-content {
+			width: 100%;
+		}
+	}
 }

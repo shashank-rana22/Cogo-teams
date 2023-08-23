@@ -59,6 +59,46 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		);
 	};
 
+	const handleOpenMessage = ({ selectedLeadUser }) => {
+		const {
+			name,
+			email,
+			whatsapp_country_code,
+			whatsapp_number,
+			mobile_number,
+			mobile_country_code,
+			lead_user_id,
+			lead_organization_id,
+		} = selectedLeadUser || {};
+
+		let numberEformat;
+
+		if (whatsapp_country_code) {
+			numberEformat = `${whatsapp_country_code?.replace('+', '')}${whatsapp_number}`;
+		} else if (mobile_country_code) {
+			numberEformat = `${mobile_country_code?.replace('+', '')}${mobile_number}`;
+		}
+
+		const chatData = {
+			user_id                 : null,
+			lead_user_id,
+			lead_organization_id,
+			user_name               : name,
+			whatsapp_number_eformat : whatsapp_number || mobile_number,
+			email,
+			channel_type            : 'whatsapp',
+			countryCode             : whatsapp_country_code || mobile_country_code,
+			mobile_no               : numberEformat,
+		};
+
+		setActiveTab((prev) => ({
+			...prev,
+			hasNoFireBaseRoom : true,
+			data              : chatData,
+			tab               : 'message',
+		}));
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
@@ -90,6 +130,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 							setActiveTab={setActiveTab}
 							openLeadOrgModal={openLeadOrgModal}
 							handlePlaceCall={handlePlaceCall}
+							handleOpenMessage={handleOpenMessage}
 						/>
 					))}
 				</div>

@@ -79,7 +79,7 @@ const COMMUNICATION_RES_MAPPING = {
 
 const LAST_INDEX = 1;
 
-const getControls = ({ communicationType = '', lead_organization_id = '', watch }) => {
+const getControls = ({ communicationType = '', lead_organization_id = '', watch = () => {} }) => {
 	const {
 		communication_start_time = '',
 		communication_end_time = '',
@@ -90,10 +90,10 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 	} = watch();
 
 	const primaryLeadUserId = lead_user_id
-	|| added_primary_contacts?.[added_primary_contacts.length - LAST_INDEX]?.field_primary_lead_user_id;
+	|| added_primary_contacts?.[added_primary_contacts.length - LAST_INDEX]?.field_primary_lead_user?.lead_user_id;
 
 	const fieldArrAdditonalLeadUserIds = added_additional_contacts?.map(
-		(eachVal) => eachVal?.field_additional_lead_user_id,
+		(eachVal) => eachVal?.field_additional_lead_user?.lead_user_id,
 	);
 
 	const additionalLeadUserids = [...new Set(
@@ -122,27 +122,31 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 			name           : 'communication_start_time',
 			label          : 'Start Time',
 			controlType    : 'datePicker',
-			lowerlabel     : 'Date & Time are in your current timezone',
 			width          : '50%',
 			placeholder    : 'Select Date-Time',
 			withTimePicker : true,
 			// eslint-disable-next-line max-len
 			dateFormat     : `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 			maxDate        : communication_end_time,
-			rules          : { required: 'This is Required' },
+			rules          : {
+				required : 'This is Required',
+				validate : (value) => (value > communication_end_time ? 'Cannot be greater than end time' : true),
+			},
 		},
 		{
 			name           : 'communication_end_time',
 			label          : 'End Time',
-			controlType    : 'datepicker',
+			controlType    : 'datePicker',
 			withTimePicker : true,
-			lowerlabel     : 'Date & Time are in your current timezone',
 			placeholder    : 'Select Date-Time',
 			width          : '50%',
 			// eslint-disable-next-line max-len
 			dateFormat     : `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 			minDate        : communication_start_time,
-			rules          : { required: 'This is Required' },
+			rules          : {
+				required : 'This is Required',
+				validate : (value) => (value < communication_start_time ? 'Cannot be less than start time' : true),
+			},
 		},
 		{
 			label       : 'Attendee from Cogoport',
@@ -177,14 +181,14 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 		{
 			name                : 'added_primary_contacts',
 			controlType         : 'fieldArray',
-			append_empty_values : { field_primary_lead_user_id: '' },
+			append_empty_values : { field_primary_lead_user: {} },
 			width               : '100%',
 			addOnlyOnPrevFill   : true,
 			buttonText          : '+ Add New Contact',
 			customDelete        : true,
 			controls            : [
 				{
-					name            : 'field_primary_lead_user_id',
+					name            : 'field_primary_lead_user',
 					controlType     : 'withControl',
 					width           : '100%',
 					Component       : AddContactsForm,
@@ -216,21 +220,22 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 		{
 			name                : 'added_additional_contacts',
 			controlType         : 'fieldArray',
-			append_empty_values : { field_additional_lead_user_id: '' },
+			append_empty_values : { field_additional_lead_user: {} },
 			width               : '100%',
 			addOnlyOnPrevFill   : true,
 			buttonText          : '+ Add New Contact',
 			customDelete        : true,
 			controls            : [
 				{
-					name            : 'field_additional_lead_user_id',
+					name            : 'field_additional_lead_user',
 					controlType     : 'withControl',
 					width           : '100%',
 					Component       : AddContactsForm,
 					componentParams : {
 						lead_organization_id,
 					},
-				}],
+				},
+			],
 		},
 		{
 			name        : 'communication_summary',

@@ -4,7 +4,7 @@ import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function Header({ eachItem = {} }) {
+function Header({ eachItem = {}, handleOpenMessage = () => {} }) {
 	const { lead_organization = {} } = eachItem || {};
 
 	const { serial_id = '', business_name = '' } = lead_organization || {};
@@ -27,7 +27,10 @@ function Header({ eachItem = {} }) {
 				width={25}
 				alt="message"
 				className={styles.message_icon_styles}
-				onClick={(e) => e.stopPropagation()}
+				onClick={(e) => {
+					e.stopPropagation();
+					handleOpenMessage({ selectedLeadUser: eachItem });
+				}}
 			/>
 			<IcMOverflowDot
 				className={styles.overflow_container}

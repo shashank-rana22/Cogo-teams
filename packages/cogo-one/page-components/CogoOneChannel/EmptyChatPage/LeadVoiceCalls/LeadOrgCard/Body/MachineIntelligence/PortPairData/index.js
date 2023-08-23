@@ -1,5 +1,4 @@
-import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Popover } from '@cogoport/components';
 
 import EachPortPairCard from '../EachPortPairCard';
 
@@ -10,14 +9,14 @@ const DEFAULT_LENGTH = 0;
 
 function PortPairsExtra({ portPairCardData = [] }) {
 	return (
-		<div>
+		<div className={styles.tooltip_container}>
 			{portPairCardData?.map((eachCard) => <EachPortPairCard key={eachCard?.id} eachItem={eachCard} />)}
 		</div>
 	);
 }
-console.log('PortPairsExtra', PortPairsExtra);
+
 function PortPairData({ portPairCardData = [] }) {
-	const firstData = portPairCardData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const [firstData, ...restData] = portPairCardData || [];
 
 	const portPairsLength = (portPairCardData.length || DEFAULT_LENGTH) - EXECPT_FIRST;
 
@@ -25,14 +24,21 @@ function PortPairData({ portPairCardData = [] }) {
 		<div className={styles.port_pair_data}>
 			<EachPortPairCard eachItem={firstData} />
 			{portPairsLength > DEFAULT_LENGTH ? (
-				<Tooltip>
+				<Popover
+					content={<PortPairsExtra portPairCardData={restData} />}
+					placement="bottom"
+					interactive
+					trigger="click"
+					caret={false}
+					className={styles.popover_styles}
+				>
 					<div className={styles.sub_text}>
 						+
 						{portPairsLength}
 						{' '}
-						MORE
+						more
 					</div>
-				</Tooltip>
+				</Popover>
 			) : null}
 		</div>
 	);

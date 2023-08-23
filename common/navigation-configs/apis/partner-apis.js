@@ -12474,6 +12474,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'create_lead_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'lead',

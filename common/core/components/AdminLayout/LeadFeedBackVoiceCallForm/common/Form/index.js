@@ -34,7 +34,6 @@ function Form({
 							key={name}
 							control={control}
 							{...eachControl}
-							width=""
 							error={errors?.[name]}
 						/>
 						<div className={styles.error_text}>

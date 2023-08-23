@@ -7,10 +7,11 @@ function LeadOrgCard({
 	eachItem = {},
 	openLeadOrgModal = () => {},
 	handlePlaceCall = () => {},
+	handleOpenMessage = () => {},
 }) {
 	return (
 		<div className={styles.each_container}>
-			<Header eachItem={eachItem} />
+			<Header eachItem={eachItem} handleOpenMessage={handleOpenMessage} />
 			<Body eachItem={eachItem} handlePlaceCall={handlePlaceCall} />
 			<Footer eachItem={eachItem} openLeadOrgModal={openLeadOrgModal} />
 		</div>

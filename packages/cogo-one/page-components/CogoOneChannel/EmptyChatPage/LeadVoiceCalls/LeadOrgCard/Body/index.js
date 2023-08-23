@@ -13,6 +13,7 @@ function Body({ eachItem = {}, handlePlaceCall = () => {} }) {
 		mobile_country_code = '',
 		lead_user_id = '',
 		lead_organization_id = '',
+		mobile_number_verified = false,
 	} = eachItem || {};
 
 	return (
@@ -25,12 +26,12 @@ function Body({ eachItem = {}, handlePlaceCall = () => {} }) {
 						className={styles.avatar_styles}
 					/>
 					<Tooltip
-						content={name}
+						content={name || 'User'}
 						placement="bottom"
 					>
-						<div className={styles.name}>{startCase(name)}</div>
+						<div className={styles.name}>{startCase(name) || 'User'}</div>
 					</Tooltip>
-					<IcCFtick className={styles.tick_icon} />
+					{mobile_number_verified ? <IcCFtick className={styles.tick_icon} /> : null}
 				</div>
 				<div className={styles.call_icon_border}>
 					<IcMCall
