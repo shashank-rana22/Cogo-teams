@@ -45,9 +45,11 @@ function Contract({
 		},
 	};
 
-	const { component: ActiveComponent, props } = COMPONENTS_MAPPING[screen];
-
 	const onClose = () => setShow(false);
+
+	const { component: ActiveComponent, props = {} } = COMPONENTS_MAPPING[screen];
+
+	if (!ActiveComponent) return null;
 
 	return (
 		<Modal

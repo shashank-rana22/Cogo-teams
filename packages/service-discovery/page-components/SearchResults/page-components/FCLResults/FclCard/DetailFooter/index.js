@@ -100,7 +100,7 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 													{' '}
 													services
 													{' '}
-													are not found
+													are not available
 												</span>
 											)}
 										>
