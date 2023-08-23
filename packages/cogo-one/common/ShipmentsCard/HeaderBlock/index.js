@@ -10,6 +10,11 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
+const ROUTES_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
+
 const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 	{
 		key      : 'view_shipments',
@@ -73,10 +78,17 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 
 	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
 
-	const handleSidClick = (e) => {
+	const handleRowClick = (e) => {
 		e.stopPropagation();
-		const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-		window.open(shipmentDetailsPage, '_blank');
+		if (Object.keys(ROUTES_MAPPING).includes(shipment_type)) {
+			const route = ROUTES_MAPPING[shipment_type];
+			const shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${shipmentId}`;
+
+			window.open(shipmentDetailsPage, '_blank');
+		} else {
+			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
+			window.open(shipmentDetailsPage, '_blank');
+		}
 	};
 
 	return (
@@ -89,7 +101,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				<div
 					className={styles.sid_id}
 					role="presentation"
-					onClick={handleSidClick}
+					onClick={handleRowClick}
 				>
 					{`SID: ${serial_id}`}
 				</div>
