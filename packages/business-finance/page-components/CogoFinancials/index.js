@@ -1,12 +1,8 @@
-import { Button, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useMemo } from 'react';
-
-import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
@@ -14,10 +10,10 @@ import { TourContext } from './Common/Contexts/index';
 import StatsCard from './Common/StatsCard';
 import { TOUR_COMMON_PROPS } from './Common/tourCommonProps';
 import { FINANCIAL_HOME_STEP, HOME_TOUR_STEPS } from './Common/tourSteps';
-import { getTimeRangeOptions, INFO_CONTENT } from './constants';
+import { INFO_CONTENT } from './constants';
 import Filters from './Filters';
+import HeadingSection from './HeadingSection/index';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
-import MultipleFilters from './MultipleFilters';
 import styles from './styles.module.css';
 import TableComp from './TableComp';
 
@@ -25,11 +21,6 @@ const Tour = dynamic(
 	() => import('reactour'),
 	{ ssr: false },
 );
-
-const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
-	value : String(item),
-	label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
-}));
 
 function CogoFinancials() {
 	const [isPreTax, setIsPreTax] = useState(true);
@@ -42,7 +33,6 @@ function CogoFinancials() {
 	const [tableFilters, setTableFilters] = useState({});
 	const [tour, setTour] = useState(false);
 	const [isTourInitial, setIsTourInitial] = useState(true);
-	const [isDateVisible, setIsDateVisible] = useState(false);
 
 	const geo = getGeoConstants();
 	const countryCode = geo?.country.code;
@@ -54,17 +44,9 @@ function CogoFinancials() {
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
 	const {
-		financialData, financialLoading,
-		operationalData, operationalLoading,
-		ongoingData, ongoingLoading,
+		financialData, financialLoading, operationalData, operationalLoading, ongoingData,
+		ongoingLoading,
 	} = useGetProfitabilityStats({ filter, entity, timeRange, customDate, showShipmentList });
-
-	const handleClick = () => {
-		setShowShipmentList(false);
-		setActiveBar('');
-		setActiveShipmentCard('');
-		setIsTourInitial(true);
-	};
 
 	useEffect(() => {
 		if (!showShipmentList) {
@@ -74,16 +56,7 @@ function CogoFinancials() {
 		}
 	}, [showShipmentList]);
 
-	const getTourProps = useMemo(() => ({
-		tour,
-		setTour,
-		setIsTourInitial,
-	}), [tour]);
-
-	const handleTourClick = () => {
-		setTour(true);
-		handleClick();
-	};
+	const getTourProps = useMemo(() => ({ tour, setTour, setIsTourInitial }), [tour]);
 
 	return (
 		<TourContext.Provider value={getTourProps}>
@@ -97,56 +70,23 @@ function CogoFinancials() {
 					}}
 					{...TOUR_COMMON_PROPS}
 				/>
-				<div className={styles.header}>
-					<div
-						role="presentation"
-						onClick={handleClick}
-					>
-						<h2 className={styles.main_heading} data-tour="main-heading">COGO Financials</h2>
-					</div>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<Button
-							onClick={handleTourClick}
-							className={styles.tour_btn}
-						>
-							<IcMPlatformDemo height={14} width={14} style={{ marginRight: '8px' }} />
-							Start Tour
-						</Button>
-						<Toggle
-							name="taxType"
-							size="md"
-							offLabel="Pre Tax"
-							onLabel="Post Tax"
-							onChange={() => setIsPreTax(!isPreTax)}
-						/>
-						<div className={styles.segmented_section}>
-							<SegmentedControl
-								options={getTimeRangeOptions({
-									customDate,
-									setCustomDate,
-									isDateVisible,
-									setIsDateVisible,
-								})}
-								activeTab={timeRange}
-								setActiveTab={setTimeRange}
-								color="#ED3726"
-								background="#FFE69D"
-								style={{ overflow: 'visible' }}
-							/>
-						</div>
-						<MultipleFilters
-							filter={filter}
-							setFilter={setFilter}
-							entity={entity}
-						/>
-						<Select
-							value={entity}
-							onChange={setEntity}
-							options={ENTITY_OPTIONS}
-							className={styles.entity_select}
-						/>
-					</div>
-				</div>
+				<HeadingSection
+					setShowShipmentList={setShowShipmentList}
+					setActiveBar={setActiveBar}
+					setActiveShipmentCard={setActiveShipmentCard}
+					setIsTourInitial={setIsTourInitial}
+					setTour={setTour}
+					setIsPreTax={setIsPreTax}
+					isPreTax={isPreTax}
+					customDate={customDate}
+					setCustomDate={setCustomDate}
+					timeRange={timeRange}
+					setTimeRange={setTimeRange}
+					filter={filter}
+					setFilter={setFilter}
+					entity={entity}
+					setEntity={setEntity}
+				/>
 
 				{isEmpty(activeShipmentCard) ? (
 					<div className={styles.top_card}>

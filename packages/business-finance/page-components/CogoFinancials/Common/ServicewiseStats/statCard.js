@@ -36,7 +36,7 @@ function StatCard({
 
 	return (
 		<div
-			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
+			className={cl`${styles.statscontainer} ${!isMain ? styles.border : null}`}
 			data-tour={!isMain ? 'single-service' : null}
 		>
 

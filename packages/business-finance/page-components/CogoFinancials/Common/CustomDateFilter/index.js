@@ -19,7 +19,7 @@ function CustomDateFilter({ customDate = new Date(), setCustomDate = () => {}, s
 				placeholder="Enter Date"
 				dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 				name="date"
-				onChange={(e) => handleChange(e)}
+				onChange={handleChange}
 				value={customDate}
 				isPreviousDaysAllowed
 			/>

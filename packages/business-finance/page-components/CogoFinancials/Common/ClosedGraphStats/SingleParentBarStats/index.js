@@ -28,7 +28,7 @@ function SingleParentBarStats({
 	serviceLevelLoading = false,
 	setTableFilters = () => {},
 }) {
-	const { tour, setTour, setIsTourInitial } = useContext(TourContext);
+	const { tour = false, setTour = () => {}, setIsTourInitial = () => {} } = useContext(TourContext);
 	const onViewDetails = () => {
 		setShowShipmentList(true);
 	};
