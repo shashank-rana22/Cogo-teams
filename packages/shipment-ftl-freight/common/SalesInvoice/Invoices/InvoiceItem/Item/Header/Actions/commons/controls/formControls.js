@@ -9,7 +9,6 @@ import { amountControls } from './amountControls';
 import { customerControls } from './customerControls';
 import { deliveryControls } from './deliveryControls';
 import { fleetOwnerDriverDetailControls } from './fleetOwnerDriverDetailControls';
-import { uploadControls } from './uploadControls';
 
 export const formControls = {
 	mainControls: [
@@ -24,6 +23,28 @@ export const formControls = {
 				{ label: 'FCM', value: 'fcm' },
 				{ label: 'RCM', value: 'rcm' },
 			],
+		},
+		{
+			name        : 'cogo_entity_id',
+			placeholder : 'Choose Entity',
+			type        : 'select',
+			span        : 4,
+			label       : <Label required>Cogoport Entity</Label>,
+			options     : [],
+			rules       : {
+				required: 'This is required',
+			},
+		},
+		{
+			name        : 'cogo_entity_address_id',
+			placeholder : 'Choose Entity Address',
+			type        : 'select',
+			span        : 4,
+			label       : <Label required>Cogoport Entity Address</Label>,
+			options     : [],
+			rules       : {
+				required: 'This is required',
+			},
 		},
 		{
 			name        : 'truck_type',
@@ -231,10 +252,11 @@ export const formControls = {
 			label       : <Label>GCN No</Label>,
 		},
 		{
-			name  : 'gcn_date',
-			label : <Label>GCN Date</Label>,
-			type  : 'datepicker',
-			span  : 4,
+			name                  : 'gcn_date',
+			label                 : <Label>GCN Date</Label>,
+			type                  : 'datepicker',
+			isPreviousDaysAllowed : true,
+			span                  : 4,
 		},
 		{
 			name        : 'value_of_goods',
@@ -264,7 +286,7 @@ export const formControls = {
 			name        : 'sac_code',
 			placeholder : 'Select',
 			label       : <Label required>SAC Code</Label>,
-			type        : 'select',
+			type        : 'creatable-select',
 			options     : [
 				{ label: '996791 - Freight Transportation', value: 996791 },
 				{ label: '996513 - Rental Invoice', value: 996513 },
@@ -287,11 +309,12 @@ export const formControls = {
 		},
 		...fleetOwnerDriverDetailControls,
 		{
-			name           : 'pickup_date_time',
-			label          : <Label>Pickup Date Time</Label>,
-			type           : 'datepicker',
-			withTimePicker : true,
-			span           : 4,
+			name                  : 'pickup_date_time',
+			label                 : <Label>Pickup Date Time</Label>,
+			type                  : 'datepicker',
+			withTimePicker        : true,
+			isPreviousDaysAllowed : true,
+			span                  : 4,
 		},
 		{
 			name        : 'eway_bill_no',
@@ -396,6 +419,5 @@ export const formControls = {
 			label        : 'Permit No.',
 			showOptional : false,
 		},
-		...uploadControls,
 	],
 };
