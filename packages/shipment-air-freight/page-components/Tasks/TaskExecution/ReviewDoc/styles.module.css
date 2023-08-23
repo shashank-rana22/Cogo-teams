@@ -28,6 +28,7 @@
 .action_buttons {
 	display: flex;
 	justify-content: flex-end;
+	padding-bottom: 20px;
 	margin: 12px;
 
 	& > button:first-child {
@@ -43,7 +44,7 @@
 }
 
 .remark {
-	margin: 12px 0;
+	margin: 12px;
 
 	.ui-textarea {
 		padding: 6px;

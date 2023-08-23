@@ -5,14 +5,14 @@ import React, { useContext } from 'react';
 import styles from './styles.module.css';
 
 function ActionsToShow({
-	status,
+	status = '',
 	setAddRate = () => {},
-	onAddRate,
-	handleSubmit,
-	setSecondStep,
+	onAddRate = () => {},
+	handleSubmit = () => {},
+	setSecondStep = () => {},
 	setAddSellPrice = () => {},
 	updateResponse = {},
-	loading,
+	loading = false,
 	onCancel = () => {},
 }) {
 	const { activeStakeholder } = useContext(ShipmentDetailContext);
@@ -43,7 +43,10 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
+		status?.status === 'amendment_requested_by_importer_exporter'
+		&& ['booking_agent',
+			'consignee_shipper_booking_agent',
+			'booking_agent_manager'].includes(activeStakeholder)
 	) {
 		return (
 			<div className={styles.button_container}>

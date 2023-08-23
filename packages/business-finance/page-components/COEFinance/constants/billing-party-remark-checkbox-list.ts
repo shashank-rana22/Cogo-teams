@@ -1,9 +1,11 @@
 function billingPartyRejectCheckboxList(
-	entityCode,
-	organizationNameBuyer,
-	address,
-	registrationNumberBuyer,
-	taxNumberBuyer,
+	{
+		entityCode,
+		organizationNameBuyer,
+		address,
+		registrationNumberBuyer,
+		taxNumberBuyer,
+	},
 ) {
 	return [
 		{ name: 'Entity', value: 'Entity', label: `Entity - ${entityCode} - ${organizationNameBuyer}` },

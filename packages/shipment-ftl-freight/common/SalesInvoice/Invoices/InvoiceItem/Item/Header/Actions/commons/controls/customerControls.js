@@ -75,4 +75,12 @@ export const customerControls = [
 		type        : 'text',
 		span        : 4,
 	},
+	{
+		name                  : 'customer_invoice_date',
+		placeholder           : 'Type here...',
+		label                 : <Label>Customer Invoice Date</Label>,
+		type                  : 'datepicker',
+		isPreviousDaysAllowed : true,
+		span                  : 4,
+	},
 ];

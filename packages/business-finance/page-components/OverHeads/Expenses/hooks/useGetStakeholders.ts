@@ -1,12 +1,12 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetStakeholders = (expenseCategory:string) => {
+const useGetStakeholders = ({ incidentSubType, incidentType, entityId }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/purchase/expense/stakeholder',
+			url     : '/incident-management/incident/get-incident-approval-management',
 			method  : 'get',
-			authKey : 'get_purchase_expense_stakeholder',
+			authKey : 'get_incident_management_incident_get_incident_approval_management',
 		},
 		{ manual: true },
 	);
@@ -16,19 +16,20 @@ const useGetStakeholders = (expenseCategory:string) => {
 			try {
 				await trigger({
 					params: {
-						category : (expenseCategory || '').toUpperCase() || undefined,
-						level    : 1,
+						entityId,
+						incidentSubType: incidentSubType || undefined,
+						incidentType,
 					},
 				});
 			} catch (err) {
-				console.log('error-', err);
+				console.error('error-', err);
 			}
 		};
 		api();
-	}, [trigger, expenseCategory]);
+	}, [trigger, incidentType, entityId, incidentSubType]);
 
 	return {
-		stakeholdersData: data?.data,
+		stakeholdersData: data,
 		loading,
 	};
 };

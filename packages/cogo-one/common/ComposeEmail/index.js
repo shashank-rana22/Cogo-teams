@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 
 import { TOOLBARCONFIG } from '../../constants';
 import getFormatedEmailBody from '../../helpers/getFormatedEmailBody';
-import getFileAttributes from '../../utils/getFileAttributes';
+import { getFileAttributes } from '../../utils/getFileAttributes';
 import hideDetails from '../../utils/hideDetails';
 import CustomFileUploader from '../CustomFileUploader';
 
@@ -15,8 +15,7 @@ const LAST_FILE_NAME = 1;
 const getdecodedData = ({ data = '' }) => {
 	const val = decodeURI(data).split('/');
 	const fileName = val[val.length - LAST_FILE_NAME];
-	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
-	return { uploadedFileName, fileIcon };
+	return getFileAttributes({ fileName, finalUrl: data });
 };
 
 function ComposeEmail({
@@ -36,17 +35,19 @@ function ComposeEmail({
 
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
+
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
-		} else {
-			sendQuickCommuncation({
-				template_name         : 'send_email_template',
-				otherChannelRecipient : userData?.email,
-				variables             : { ...emailState },
-				type                  : 'email',
-				attachment_urls       : attachments || [],
-			});
+			return;
 		}
+
+		sendQuickCommuncation({
+			template_name         : 'send_email_template',
+			otherChannelRecipient : userData?.email,
+			variables             : { ...emailState },
+			type                  : 'email',
+			attachment_urls       : attachments || [],
+		});
 	};
 
 	const handleProgress = (val) => {
@@ -111,13 +112,14 @@ function ComposeEmail({
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
 						{(attachments || []).map((eachAttachement) => {
-							const { fileIcon, uploadedFileName } = getdecodedData({ data: eachAttachement });
+							const { fileIcon = '', fileName = '' } = getdecodedData({ data: eachAttachement }) || {};
+
 							return (
 								<div className={styles.uploaded_files} key={eachAttachement}>
 									<div className={styles.uploaded_files_content}>
 										{fileIcon}
 										<div className={styles.content_div}>
-											{uploadedFileName}
+											{fileName}
 										</div>
 									</div>
 									<IcMCross

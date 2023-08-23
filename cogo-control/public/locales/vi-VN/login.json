@@ -1,0 +1,14 @@
+{
+    "title": "Vui lòng cung cấp email và mật khẩu để đăng nhập",
+    "email_placeholder": "Email",
+    "email_rules_required": "Email là bắt buộc.",
+    "password_placeholder": "Mật khẩu",
+    "password_rules_required": "Mật khẩu là bắt buộc.",
+    "forgot_your_password": "Quên mật khẩu?",
+    "login_button": "ĐĂNG NHẬP",
+    "go_back_button": "QUAY LẠI",
+    "or_label": "HOẶC",
+    "continue_with_microsoft": "TIẾP TỤC VỚI MICROSOFT",
+    "already_login_toast_error": "Không thể đăng nhập với tài khoản đã hoạt động",
+    "failed_to_login_toast_error": "Đăng nhập thất bại, vui lòng thử lại..."
+}

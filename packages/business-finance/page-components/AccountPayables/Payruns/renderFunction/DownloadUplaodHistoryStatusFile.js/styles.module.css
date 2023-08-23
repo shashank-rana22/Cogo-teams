@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+}
+
+.status {
+	width: fit-content;
+	height: fit-content;
+	padding: 0 2px;
+	border-radius: 4px;
+}
+
+.button {
+	margin-left: 4px;
+	cursor: pointer;
+}

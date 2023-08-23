@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMStar, IcCStar, IcMDocument } from '@cogoport/icons-react';
@@ -7,9 +7,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function MessageContent({ msg, user_id, handleClick = () => {} }) {
-	const getSplited = (str) => {
-		const all = str.split('\\n');
+function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
+	const getSplitted = (str) => {
+		const all = str?.split('\\n');
 		let res = '';
 		(all || []).forEach((ele) => {
 			res += `${ele}\n`;
@@ -31,8 +31,8 @@ function MessageContent({ msg, user_id, handleClick = () => {} }) {
 							? styles.right : styles.left} `}
 					>
 						<div className={styles.details}>
-							<div style={{ display: 'flex', alignItems: 'center' }}>
-								<span style={{ margin: '0px 8px' }}>
+							<div>
+								<span>
 									{msg?.created_by_stakeholder ? (
 										<div className={styles.stakeholder}>
 											{msg?.created_by_stakeholder
@@ -54,40 +54,32 @@ function MessageContent({ msg, user_id, handleClick = () => {} }) {
 								</div>
 							</div>
 
-							<div
-								className={cl` ${styles.imp_sign} ${msg?.created_by_user_id === user_id
-									? styles.right : styles.left} `}
-								role="button"
-								tabIndex={0}
+							<Button
+								themeType="link"
 								onClick={() => handleClick(msg)}
 							>
-								{msg?.important === true ? (
-									<IcCStar
-										style={{ width: '1.3em', height: '1.3em' }}
-									/>
+								{msg?.important ? (
+									<IcCStar width="1.3em" height="1.3em" />
 								) : (
-									<IcMStar
-										style={{ width: '1.3em', height: '1.3em' }}
-									/>
+									<IcMStar width="1.3em" height="1.3em" />
 								)}
-							</div>
+							</Button>
 						</div>
 
 						{(msg?.attachment_urls || []).map((url) => (
-							<div
+							<Button
 								key={url}
-								role="button"
-								tabIndex={0}
 								className={styles.flex_row}
+								themeType="link"
 								onClick={() => window.open(url, '_blank')}
 							>
-								<IcMDocument style={{ width: '1.5em', height: '1.5em', marginRight: '6px' }} />
-								{url?.split('/').pop()}
-							</div>
+								<IcMDocument width="1.6em" height="1.6em" className={styles.icm_document} />
+								<span>{url?.split('/')?.pop()}</span>
+							</Button>
 						))}
 
 						{msg?.content ? (
-							<div className={styles.msg}>{`${getSplited(msg.content)}`}</div>
+							<div className={styles.msg}>{`${getSplitted(msg.content)}`}</div>
 						) : null}
 					</div>
 				) : null

@@ -1,22 +1,26 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 function usePostProfileMasteryBadge({ profileBadgeRefetch }) {
+	const router = useRouter();
+
+	const { t } = useTranslation(['profile']);
+
+	const {
+		profile: { partner = {} },
+	} = useSelector((state) => state);
+
 	const [masteryId, setMasteryId] = useState('');
 	const [showModal, setShowModal] = useState(false);
 
 	const onCloseModal = () => {
 		setShowModal(false);
 	};
-
-	const router = useRouter();
-
-	const {
-		profile: { partner = {} },
-	} = useSelector((state) => state);
 
 	const { partner_user_id = '' } = partner;
 
@@ -41,9 +45,10 @@ function usePostProfileMasteryBadge({ profileBadgeRefetch }) {
 
 			onCloseModal();
 
-			Toast.success('Mastery Badge Updated');
+			Toast.success(t('profile:mastery_badge_success_toast'));
 		} catch (error) {
-			Toast.error(error?.response?.data?.base[0] || 'Something went wrong');
+			Toast.error(error?.response?.data?.base[GLOBAL_CONSTANTS.zeroth_index]
+				|| t('profile:something_went_wrong_error_toast'));
 		}
 	};
 

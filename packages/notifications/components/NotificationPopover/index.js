@@ -2,6 +2,7 @@
 import Popover from '@cogoport/components';
 import { IcMNotifications } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import getStaticPath from '../../utils/getStaticPath';
@@ -28,6 +29,8 @@ function NotificationsPopover({
 	rpaLoading,
 	handleRpaNotificationClick,
 }) {
+	const { t } = useTranslation(['notifications']);
+
 	const [show, setShow] = useState(false);
 	const [notificationType, setNotificationType] = useState('general');
 	// const { show, handlers, onOuterClick } = usePopoverTrigger('click');
@@ -52,61 +55,61 @@ function NotificationsPopover({
 		} else if (Notification.permission === 'granted') {
 			// eslint-disable-next-line no-unused-vars
 			const notification = new Notification(
-				`${formattedData?.not_seen_count} new notifications from cogoport!`,
+				`${formattedData?.not_seen_count} ${t('notifications:new_notifications')}`,
 			);
 		}
 	};
 
-	const renderBody = () => (
-		<div className={styles.notification_container}>
-			<Header
-				onMarkAllAsRead={onMarkAllAsRead}
-				onSeeAll={() => {
-					setShow(false);
-					onSeeAll();
-				}}
-				setShow={setShow}
-				notificationType={notificationType}
-				setNotificationType={setNotificationType}
-				formattedData={(formattedData?.list || []).length}
-			/>
-			{notificationType === 'general' ? (
-				<div style={{ overflow: 'auto', maxHeight: '500px' }}>
-					{(formattedData.list || []).map((item) => (
-						<NotificationCompoment
-							key={item}
-							// key={item.id}
-							className="small"
-							item={item}
-							handleNotificationClick={handleNotificationClick}
-							setShow={setShow}
+	function RenderBody() {
+		return (
+			<div className={styles.notification_container}>
+				<Header
+					onMarkAllAsRead={onMarkAllAsRead}
+					onSeeAll={() => {
+						setShow(false);
+						onSeeAll();
+					}}
+					setShow={setShow}
+					notificationType={notificationType}
+					setNotificationType={setNotificationType}
+					formattedData={(formattedData?.list || []).length}
+				/>
+				{notificationType === 'general' ? (
+					<div style={{ overflow: 'auto', maxHeight: '500px' }}>
+						{(formattedData.list || []).map((item) => (
+							<NotificationCompoment
+								key={item}
+								item={item}
+								handleNotificationClick={handleNotificationClick}
+								setShow={setShow}
+							/>
+						))}
+					</div>
+				) : (
+					<div style={{ overflow: 'auto', maxHeight: '500px' }}>
+						<RPANotification
+							rpaNotifications={rpaNotifications}
+							rpaLoading={rpaLoading}
+							handleRpaNotificationClick={handleRpaNotificationClick}
+							setShowRpa={setShow}
 						/>
-					))}
-				</div>
-			) : (
-				<div style={{ overflow: 'auto', maxHeight: '500px' }}>
-					<RPANotification
-						rpaNotifications={rpaNotifications}
-						rpaLoading={rpaLoading}
-						handleRpaNotificationClick={handleRpaNotificationClick}
-						setShowRpa={setShow}
-					/>
-				</div>
-			)}
-			{notificationType === 'general' && (
-				<div>
-					{!formattedData?.loading
+					</div>
+				)}
+				{notificationType === 'general' && (
+					<div>
+						{!formattedData?.loading
 					&& isEmpty(formattedData?.list) ? (
 						<Empty />
-						) : null}
-					{formattedData?.loading
+							) : null}
+						{formattedData?.loading
 					&& isEmpty(formattedData?.list) ? (
 						<LoaderComp />
-						) : null}
-				</div>
-			)}
-		</div>
-	);
+							) : null}
+					</div>
+				)}
+			</div>
+		);
+	}
 
 	useEffect(() => {
 		onShowToggle(show);
@@ -144,7 +147,7 @@ function NotificationsPopover({
 			<div className={styles.popover_container}>
 				<Popover
 					placement="bottom-end"
-					content={renderBody()}
+					content={<RenderBody />}
 					theme="light"
 					visible={show}
 					interactive

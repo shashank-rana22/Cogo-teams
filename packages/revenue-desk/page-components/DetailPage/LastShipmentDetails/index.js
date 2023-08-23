@@ -115,8 +115,7 @@ function LastShipmentDetails({ itemData, isPillSelected }) {
 			) : (
 				<EmptyState
 					isSmall
-					heading={`This is the Customer's First Shipment in 
-			${startCase(itemData?.shipment_type)}`}
+					heading="No applicable Shipments Found!"
 				/>
 			)}
 		</div>

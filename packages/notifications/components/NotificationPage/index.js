@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, Placeholder, cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import Notification from '../Notification';
@@ -18,6 +19,8 @@ function NotificationPage({
 	disabled = false,
 	setDisabled = () => {},
 }) {
+	const { t } = useTranslation(['notifications']);
+
 	const {
 		activeTab,
 		setPagination,
@@ -42,7 +45,7 @@ function NotificationPage({
 				>
 					<TabPanel
 						name="notifications"
-						title="Notifications"
+						title={t('notifications:tab_notifications_label')}
 						className={styles.tab_panel}
 					>
 						<Header
@@ -66,7 +69,11 @@ function NotificationPage({
 							))
 						)}
 					</TabPanel>
-					<TabPanel name="mails" title="Mails" className={styles.tab_panel}>
+					<TabPanel
+						name="mails"
+						title={t('notifications:tab_mails_label')}
+						className={styles.tab_panel}
+					>
 						<Header
 							onMarkAllAsRead={onMarkAllAsRead}
 							formattedData={formattedmailData}

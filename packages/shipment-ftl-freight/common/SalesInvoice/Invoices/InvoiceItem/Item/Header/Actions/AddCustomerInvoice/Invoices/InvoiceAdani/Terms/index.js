@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
@@ -8,6 +8,7 @@ function Terms({
 	tradeParty = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_BANK_DETAILS = {} } = getFortigoDetails();
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
 	);
@@ -29,7 +30,7 @@ function Terms({
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = CUSTOMER_TO_BANK_DETAILS[importerExporterId] || {};
 
 	return (
 		<>
@@ -70,7 +71,7 @@ function Terms({
 							<li>Payment Terms: Days Receipt of Invoice.</li>
 							<li>
 								All Payments should be to the account of a
-								&nbsp;
+								{' '}
 								{billing_address?.business_name}
 								. Bank account details:
 								<p style={{ margin: '3px 0', fontSize: '12px' }}>
@@ -100,7 +101,7 @@ function Terms({
 							</li>
 							<li>
 								Payment advice should be mailed to
-								&nbsp;
+								{' '}
 								<b>collection@4tigo.com</b>
 								.
 							</li>

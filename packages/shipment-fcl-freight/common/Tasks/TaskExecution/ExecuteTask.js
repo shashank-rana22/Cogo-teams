@@ -1,8 +1,10 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import { ThreeDotLoader, AddCompanyModal } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
+import useListShipmentTradePartners from '../../../hooks/useListShipmentTradePartners';
 import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
@@ -24,12 +26,21 @@ import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-const EXCLUDE_SERVICES = [
+const EXCLUDED_SERVICES = [
 	'fcl_freight_service',
+	'haulage_freight_service',
 ];
+
+const TRADE_PARTY_TYPE = {
+	add_consignee_details : { trade_party_type: 'consignee' },
+	add_shipper_details   : { trade_party_type: 'shipper' },
+};
 
 const INCLUDED_ORG = ['nvocc', 'freight_forwarder'];
 const REDUCE_LENGTH_BY = 1;
+const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
+
+const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
 
 function ExecuteTask({
 	task = {},
@@ -43,6 +54,7 @@ function ExecuteTask({
 
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
+	const { data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id, task });
 
 	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
@@ -59,23 +71,25 @@ function ExecuteTask({
 	});
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - REDUCE_LENGTH_BY]
+		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
 		: {};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<ThreeDotLoader message="Fetching Task" />
+		);
 	}
 
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
-		&& (!EXCLUDE_SERVICES.includes(task.service_type))
+		&& (!EXCLUDED_SERVICES.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
 				task={task}
 				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
+				refetch={taskListRefetch}
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={servicesList}
@@ -110,8 +124,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'update_container_details') {
+	if (task.task === 'update_container_details') {
 		return (
 			<UploadContainerDetails
 				pendingTask={task}
@@ -194,6 +207,20 @@ function ExecuteTask({
 		);
 	}
 
+	if (['add_consignee_details', 'add_shipper_details'].includes(task.task)) {
+		return (
+			<AddCompanyModal
+				tradePartnersData={data}
+				addCompany={TRADE_PARTY_TYPE[task.task]}
+				tradePartnerTrigger={taskListRefetch}
+				shipment_id={shipment_data?.id}
+				importer_exporter_id={shipment_data?.importer_exporter_id}
+				withModal={false}
+				setAddCompany={onCancel}
+			/>
+		);
+	}
+
 	if (
 		task?.task === 'generate_cargo_insurance') {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
@@ -210,7 +237,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (task?.task === 'generate_cargo_insurance') {
+	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
@@ -249,6 +276,7 @@ function ExecuteTask({
 			onCancel={onCancel}
 			refetch={taskListRefetch}
 			isLastStep={currentStep === steps.length - REDUCE_LENGTH_BY}
+			shipment_data={shipment_data}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

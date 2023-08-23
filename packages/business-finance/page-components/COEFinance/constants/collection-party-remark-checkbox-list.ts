@@ -1,11 +1,13 @@
 function collectionPartyRejectCheckboxList(
-	organizationName,
-	bankName,
-	accountNumber,
-	ifscCode,
-	registrationNumber,
-	taxNumber,
-	beneficiaryName,
+	{
+		organizationName,
+		beneficiaryName,
+		bankName,
+		accountNumber,
+		ifscCode,
+		registrationNumber,
+		taxNumber,
+	},
 ) {
 	return [
 		{

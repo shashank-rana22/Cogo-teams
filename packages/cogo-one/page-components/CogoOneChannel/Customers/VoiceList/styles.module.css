@@ -81,13 +81,11 @@
 }
 
 .avatar {
-	width: 15px;
-	height: 15px;
 	margin-top: 10px;
 }
 
 .list_container {
-	height: 85%;
+	height: 82%;
 	overflow-y: auto;
 
 	@media (max-width: 1280px) {

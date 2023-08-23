@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 
 import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
 import controls from '../EditSchedule/controls';
-import { getDate } from '../utils/getDate';
+import { getCustomDate } from '../utils/getCustomDate';
 
 export default function useEditServiceSchedule({
 	setShow = () => {},
@@ -12,11 +12,10 @@ export default function useEditServiceSchedule({
 }) {
 	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
-	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
+	const [departureDate, setDepartureDate] = useState(getCustomDate(primary_service?.schedule_departure));
 
 	const { apiTrigger: updateShipmentService, loading } = useUpdateShipmentService({
-		successMessage : 'Booking Note Updated Successfully !',
-		refetch        : () => {
+		refetch: () => {
 			setShow(false);
 			shipmentRefetch();
 		},

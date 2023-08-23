@@ -119,6 +119,14 @@
 .button_container_data {
 	display: flex;
 	width: fit-content;
+
+	:global {
+		.ui_select_options_relative_container {
+			.ui_select_options_container {
+				z-index: 2;
+			}
+		}
+	}
 }
 
 .list_container {

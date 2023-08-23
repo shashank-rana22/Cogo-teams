@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import ClickableDiv from '../../../../../../../ClickableDiv';
 
 import styles from './styles.module.css';
@@ -82,19 +80,11 @@ function KebabContent({
 							className={styles.text}
 							onClick={() => handleSetter('addCustomerInvoice')}
 						>
-							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
-								&nbsp;
-							{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? '/Generate' : ''}
+							Add
+							{' '}
+							{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? '/ Generate ' : ''}
 							Customer Invoice
 						</ClickableDiv>
-						{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
-							<ClickableDiv
-								className={styles.text}
-								onClick={() => handleSetter('updateCustomerInvoice')}
-							>
-								Update Customer Invoice
-							</ClickableDiv>
-						) : null}
 					</div>
 				</div>
 			))}

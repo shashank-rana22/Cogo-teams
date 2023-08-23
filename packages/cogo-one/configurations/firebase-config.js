@@ -20,6 +20,8 @@ const AGENT_DATA = '/users';
 
 const COGOONE_CONSTANTS = '/cogoone_constants';
 
+const EMAIL = '/customer_chat/email/rooms';
+
 export const FIRESTORE_PATH = {
 	whatsapp          : WHATSAPP,
 	platform_chat     : PLATFORM_CHAT,
@@ -27,5 +29,6 @@ export const FIRESTORE_PATH = {
 	zalo              : ZALO,
 	agent_data        : AGENT_DATA,
 	cogoone_constants : COGOONE_CONSTANTS,
+	email             : EMAIL,
 
 };

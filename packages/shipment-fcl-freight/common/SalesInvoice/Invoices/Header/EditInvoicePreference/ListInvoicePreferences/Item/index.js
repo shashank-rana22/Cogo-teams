@@ -5,7 +5,7 @@ import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import SelectService from './SelectService';
 import styles from './styles.module.css';
@@ -22,11 +22,12 @@ function Item({
 	allTakenServices = [],
 }) {
 	const { shipment_type = '' } = shipmentData;
+
 	const {
 		billing_address,
 		invoice_currency = '', invoice_source = '',
-		invoicing_party_total_discounted = '',
 		invoice_total_currency = '',
+		invoice_total_discounted = '',
 		services = [],
 		status = '',
 		id = '',
@@ -48,11 +49,16 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (services || []).map((service) => {
-		const trade_type = MAIN_SERVICES !== service?.service_type
+		const trade_type = !MAIN_SERVICES.includes(service?.service_type)
 			? service?.trade_type
 			: null;
 
-		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+		let tradeType = '';
+		if (trade_type === 'export') {
+			tradeType = 'Origin';
+		} else if (trade_type === 'import') {
+			tradeType = 'Destination';
+		}
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
@@ -67,6 +73,11 @@ function Item({
 	});
 
 	const noActionState = ACTION_STATE.includes(status);
+	const noActionForInsurance = !isEmpty(
+		(invoice?.services || []).find(
+			(s) => s?.service_type === 'cargo_insurance_service',
+		),
+	);
 
 	return (
 		<div className={styles.container}>
@@ -79,8 +90,10 @@ function Item({
 
 			<div
 				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
-				style={{ cursor: noActionState ? 'default' : '' }}
-				onClick={!noActionState ? () => handleServiceToggle() : null}
+				style={{ cursor: noActionState || noActionForInsurance ? 'default' : '' }}
+				onClick={!(noActionState || noActionForInsurance)
+					? () => handleServiceToggle()
+					: null}
 			>
 				<div className={styles.info_div}>
 					<div className={styles.details}>
@@ -120,12 +133,12 @@ function Item({
 						{invoice_currency}
 					</div>
 
-					{invoicing_party_total_discounted ? (
+					{invoice_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
 							&nbsp;
 							{formatAmount({
-								amount   : invoicing_party_total_discounted,
+								amount   : invoice_total_discounted,
 								currency : invoice_total_currency,
 								options  : {
 									style           : 'currency',
@@ -142,7 +155,7 @@ function Item({
 					</div>
 				</div>
 
-				{!noActionState ? (
+				{!(noActionState || noActionForInsurance) ? (
 					<div className={styles.header}>
 						{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</div>

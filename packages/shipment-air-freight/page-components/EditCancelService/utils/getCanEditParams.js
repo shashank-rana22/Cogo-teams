@@ -22,7 +22,11 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id) {
+	if (user_data?.id
+		&& [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+			GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
+			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id,
+		].includes(user_data?.id)) {
 		return true;
 	}
 

@@ -80,7 +80,7 @@ export const RENDER_VALUE_MAPPING = {
 		if (!trucks_count) {
 			return null;
 		}
-		return trucks_count > CHECK_IF_COUNT_MORE_THAN_ONE ? `${trucks_count} Packages` : '1 Package';
+		return trucks_count > CHECK_IF_COUNT_MORE_THAN_ONE ? `${trucks_count} Trucks` : '1 Truck';
 	},
 	truck_type     : (detail) => startCase(detail.truck_type || ''),
 	container_type : (detail) => startCase(detail.container_type || ''),
