@@ -15,7 +15,7 @@ const getParams = ({ userId, value }) => ({
 	},
 });
 
-const useGetAgentTimelineEscalate = ({ viewType = '', timePeriodValue }) => {
+const useGetAgentTimelineEscalate = ({ viewType = '', timePeriodValue = '' }) => {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.user.id,
 	}));
@@ -23,7 +23,7 @@ const useGetAgentTimelineEscalate = ({ viewType = '', timePeriodValue }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_cogoone_timelines',
 		method : 'get',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const isSupplyAgent = viewType === 'supply';
 
@@ -42,8 +42,8 @@ const useGetAgentTimelineEscalate = ({ viewType = '', timePeriodValue }) => {
 	}, [isSupplyAgent, timePeriodValue, trigger, userId]);
 
 	useEffect(() => {
-		agentEscalateTimeline({ userId });
-	}, [agentEscalateTimeline, userId]);
+		agentEscalateTimeline();
+	}, [agentEscalateTimeline]);
 
 	return {
 		data,

@@ -25,6 +25,7 @@ function HeaderBar({
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
 
 	const [timePeriodValue, setTimePeriodValue] = useState('day');
+	const [showDetails, setShowDetails] = useState(false);
 
 	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
@@ -32,7 +33,7 @@ function HeaderBar({
 		<>
 			<div className={styles.container}>
 				{flashRevertLogs ? (
-					<FlashRevertLogs />
+					<FlashRevertLogs showDetails={showDetails} />
 				) : null}
 
 				{!isEmpty(configurationsToBeShown) && (
@@ -57,6 +58,8 @@ function HeaderBar({
 					firestore={firestore}
 					userId={userId}
 					isPunchPresent={isPunchPresent}
+					showDetails={showDetails}
+					setShowDetails={setShowDetails}
 				/>
 			)}
 		</>

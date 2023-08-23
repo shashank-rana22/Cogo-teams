@@ -7,6 +7,11 @@ import AdminDashboard from './components/AdminDashboard';
 import AgentDashboard from './components/AgentDashboard';
 import styles from './styles.module.css';
 
+const DASHBOARD_COMPONENT_MAPPING = {
+	agent : AgentDashboard,
+	admin : AdminDashboard,
+};
+
 function CogoOneDashboard() {
 	const {
 		userData,
@@ -22,12 +27,14 @@ function CogoOneDashboard() {
 
 	const isRolePresent = userRoleIds.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
 
+	const dashboardType = isRolePresent ? 'agent' : 'admin';
+
+	const Component = DASHBOARD_COMPONENT_MAPPING[dashboardType];
+
 	return (
 		<div>
 			<div className={styles.prime_container}>
-				{isRolePresent
-					? <AgentDashboard isRolePresent={isRolePresent} viewType={viewType} />
-					: <AdminDashboard isRolePresent={isRolePresent} viewType={viewType} />}
+				<Component isRolePresent={isRolePresent} viewType={viewType} />
 			</div>
 		</div>
 	);

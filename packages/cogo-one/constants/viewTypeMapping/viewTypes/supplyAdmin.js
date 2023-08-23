@@ -21,7 +21,7 @@ const SUPPLY_ADMIN = {
 	},
 	stats_feedback_count: ['no_of_rates_reverted',
 		'no_of_rate_sheets_received', 'chats_assigned', 'avg_response_time', 'emails_send_count',
-		'escalate_chats_count', 'calls_made', 'calls_received'],
+		'calls_made', 'calls_received'],
 	to_show_agent_activity_graph  : false,
 	extra_side_bar_navs_access    : ['flash_shipment_bookings'],
 	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],

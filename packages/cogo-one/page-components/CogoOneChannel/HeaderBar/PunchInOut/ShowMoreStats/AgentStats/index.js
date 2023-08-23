@@ -11,8 +11,8 @@ import Stats from './Stats';
 import styles from './styles.module.css';
 
 function AgentStats({
-	showDetails = false, name = '', viewType = '', AgentStatsLoading = false,
-	AgentStatsData = {}, timePeriodValue = '',
+	showDetails = false, name = '', viewType = '', agentStatsLoading = false,
+	agentStatsData = {}, timePeriodValue = '',
 	setTimePeriodValue = () => {},
 }) {
 	const {
@@ -20,9 +20,9 @@ function AgentStats({
 		shipmentData = {},
 	} = useListAgentCheckout({ value: timePeriodValue, showDetails });
 
-	const { statsData = {}, statsLoading = false } = useListAssignedChats({ value: timePeriodValue });
+	const { statsData = {}, statsLoading = false } = useListAssignedChats({ value: timePeriodValue, viewType });
 
-	const { calls = [] } = AgentStatsData || {};
+	const { calls = [] } = agentStatsData || {};
 	const { sales_dashboard_stats = {} } = shipmentData || {};
 	const { booked = 0, total_sent = 0 } = sales_dashboard_stats || {};
 
@@ -66,9 +66,9 @@ function AgentStats({
 						booked={booked}
 						statsData={statsData}
 						calls={calls}
-						loading={shiplentLoading || AgentStatsLoading || statsLoading}
+						loading={shiplentLoading || agentStatsLoading || statsLoading}
 						viewType={viewType}
-						AgentStatsData={AgentStatsData}
+						agentStatsData={agentStatsData}
 						timePeriodValue={timePeriodValue}
 						isShowActivityGraph={isShowActivityGraph}
 					/>
@@ -80,7 +80,7 @@ function AgentStats({
 
 						<div className={styles.title}>Activities at a glance</div>
 						<AgentActivityGraph
-							loading={shiplentLoading || AgentStatsLoading || statsLoading}
+							loading={shiplentLoading || agentStatsLoading || statsLoading}
 							bookingCount={booked}
 							callData={calls}
 							statsData={statsData}

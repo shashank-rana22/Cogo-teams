@@ -1,6 +1,6 @@
 import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import { RATING_ELEMENTS } from '../../../../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
@@ -20,7 +20,7 @@ function Stats({
 	calls = [],
 	loading = false,
 	viewType = '',
-	AgentStatsData = {},
+	agentStatsData = {},
 	timePeriodValue = '',
 	isShowActivityGraph = false,
 }) {
@@ -28,7 +28,7 @@ function Stats({
 	const {
 		rating = [],
 		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = 0, agent_msg_stats = {},
-	} = AgentStatsData || {};
+	} = agentStatsData || {};
 
 	const { data, escalateLoading } = useGetAgentTimelineEscalate({ viewType, timePeriodValue });
 
@@ -36,7 +36,7 @@ function Stats({
 
 	const { avg_rating: averageRating = '' } = rating || [];
 
-	const emailObj = agent_msg_stats.type === 'email' ? agent_msg_stats : undefined;
+	const emailObj = agent_msg_stats.find((item) => item.type === 'email');
 
 	const emailCount = emailObj ? emailObj.count : undefined;
 
@@ -80,7 +80,7 @@ function Stats({
 				>
 					<div className={styles.title}>{startCase(item)}</div>
 					<div className={styles.count_with_icon}>
-						{item === 'customer_satisfaction_score' && !isEmpty(averageRating) ? (
+						{item === 'customer_satisfaction_score' && !averageRating ? (
 							RATING_ELEMENTS[averageRating >= MIN_AVERAGE_RATING ? 'happy' : 'sad'].image
 						) : null}
 

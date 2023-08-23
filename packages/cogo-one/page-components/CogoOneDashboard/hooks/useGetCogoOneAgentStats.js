@@ -21,7 +21,9 @@ const VIEW_TYPES_WITH_PAYLOAD = [
 const getParams = ({ timeline, startDate, endDate, id, viewType }) => {
 	const PAYLOAD = {};
 
-	if (VIEW_TYPES_WITH_PAYLOAD.some((type) => viewType.includes(type))) {
+	const additionalPayload = VIEW_TYPES_WITH_PAYLOAD.some((type) => viewType === type);
+
+	if (additionalPayload) {
 		PAYLOAD.supply_stats_required = false;
 		PAYLOAD.sales_stats_required = true;
 		PAYLOAD.show_agent_activity_graph = true;

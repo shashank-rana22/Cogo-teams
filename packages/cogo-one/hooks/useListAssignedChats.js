@@ -4,18 +4,19 @@ import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
 
-const getParams = ({ value, userId }) => ({
+const getParams = ({ value, userId, viewType }) => ({
 	chat_stats_required      : true,
 	data_required            : false,
 	pagination_data_required : false,
 	filters                  : {
-		sales_agent_id          : userId,
+		sales_agent_id          : !(viewType === 'supply_admin') ? userId : undefined,
 		created_at_less_than    : new Date(),
 		created_at_greater_than : DATE_FILTER_MAPPING[value](new Date()),
+		sales_agent_rm_id       : (viewType === 'supply_admin') ? userId : undefined,
 	},
 });
 
-const useListAssignedChats = ({ value }) => {
+const useListAssignedChats = ({ value = '', viewType = '' }) => {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.user.id,
 	}));
@@ -28,12 +29,12 @@ const useListAssignedChats = ({ value }) => {
 	const assignChats = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ value, userId }),
+				params: getParams({ value, userId, viewType }),
 			});
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, value, userId]);
+	}, [trigger, value, userId, viewType]);
 
 	useEffect(() => {
 		assignChats();

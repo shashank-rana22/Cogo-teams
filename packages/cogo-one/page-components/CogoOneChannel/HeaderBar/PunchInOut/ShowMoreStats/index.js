@@ -13,8 +13,8 @@ function ShowMoreStats({
 	status = '',
 	handlePunchIn = () => {},
 	viewType = '',
-	AgentStatsLoading = false,
-	AgentStatsData = {},
+	agentStatsLoading = false,
+	agentStatsData = {},
 	timePeriodValue = '',
 	setTimePeriodValue = () => {},
 }) {
@@ -44,8 +44,8 @@ function ShowMoreStats({
 					showDetails={showDetails}
 					name={name}
 					viewType={viewType}
-					AgentStatsLoading={AgentStatsLoading}
-					AgentStatsData={AgentStatsData}
+					agentStatsLoading={agentStatsLoading}
+					agentStatsData={agentStatsData}
 					timePeriodValue={timePeriodValue}
 					setTimePeriodValue={setTimePeriodValue}
 				/>

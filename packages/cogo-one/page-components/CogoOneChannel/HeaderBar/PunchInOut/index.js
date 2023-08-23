@@ -41,11 +41,12 @@ function PunchInOut({
 	firestore = {},
 	userId = '',
 	isPunchPresent = false,
+	showDetails = false,
+	setShowDetails = () => {},
 }) {
 	const { status = '' } = agentStatus || {};
 	const { list = [] } = data || {};
 
-	const [showDetails, setShowDetails] = useState(false);
 	const [isShaking, setIsShaking] = useState(false);
 	const [showTimer, setShowTimer] = useState(false);
 	const [showEndButton, setShowEndButton] = useState(false);
@@ -65,8 +66,8 @@ function PunchInOut({
 	});
 
 	const {
-		AgentStatsLoading = false,
-		AgentStatsData = {},
+		agentStatsLoading = false,
+		agentStatsData = {},
 	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	const shakeButton = () => {
@@ -144,8 +145,8 @@ function PunchInOut({
 						status={status}
 						handlePunchIn={handlePunchIn}
 						viewType={viewType}
-						AgentStatsLoading={AgentStatsLoading}
-						AgentStatsData={AgentStatsData}
+						agentStatsLoading={agentStatsLoading}
+						agentStatsData={agentStatsData}
 						timePeriodValue={timePeriodValue}
 						setTimePeriodValue={setTimePeriodValue}
 					/>

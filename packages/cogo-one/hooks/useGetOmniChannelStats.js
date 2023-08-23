@@ -5,7 +5,43 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
-import { getAdditionalPayloadForViewType } from '../helpers/getAdditionalPayloadForViewType';
+
+const commonPayload = {
+	supply_stats_required     : false,
+	sales_stats_required      : false,
+	show_agent_activity_graph : false,
+	filters                   : {},
+};
+
+const viewTypePayloads = {
+	default: {
+		sales_stats_required: true,
+	},
+	supply: {
+		supply_stats_required: true,
+	},
+	supply_admin: {
+		supply_stats_required: true,
+	},
+	sales: {
+		sales_stats_required: true,
+	},
+	support: {
+		sales_stats_required: true,
+	},
+	cp_support: {
+		sales_stats_required: true,
+	},
+	support_admin             : {},
+	cogoone_admin             : {},
+	shipment_specialist       : {},
+	shipment_specialist_admin : {},
+};
+
+const getAdditionalPayloadForViewType = (viewType) => ({
+	...commonPayload,
+	...viewTypePayloads[viewType] || {},
+});
 
 const getDateString = ({ date }) => formatDate({
 	date,
@@ -28,7 +64,7 @@ const getParams = ({ timePeriodValue, viewType }) => {
 	};
 };
 
-function useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue = '', viewType = '' }) {
+function useGetCogoOneAgentStats({ isPunchPresent = false, timePeriodValue = '', viewType = '' }) {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile?.user?.id,
 	}));
@@ -55,9 +91,9 @@ function useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue = '', viewTyp
 	}, [getCogoOneDashboard, isPunchPresent]);
 
 	return {
-		AgentStatsLoading : loading,
+		agentStatsLoading : loading,
 		getCogoOneDashboard,
-		AgentStatsData    : data,
+		agentStatsData    : data,
 	};
 }
 export default useGetCogoOneAgentStats;
