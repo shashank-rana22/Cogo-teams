@@ -21,11 +21,11 @@ function useGetVendor() {
 
 	const [activeStepper, setActiveStepper] = useState('vendor_details');
 	const [vendorInformation, setVendorInformation] = useState({});
-	const [showSuccessScreen, setShowSuccessScreen] = useState(false);
+	const [showSuccessScreen, setShowSuccessScreen] = useState(false); 4
 
 	const [{ loading: getVendorLoading = false }, trigger] = useRequest({
-		url    : 'get_vendor',
-		method : 'GET',
+		url: 'get_vendor',
+		method: 'GET',
 	}, { manual: true });
 
 	const getVendor = useCallback(async () => {
@@ -34,9 +34,9 @@ function useGetVendor() {
 
 			setVendorInformation({
 				...res.data,
-				contact_details : res.data?.pocs[GLOBAL_CONSTANTS.zeroth_index],
-				payment_details : res.data?.bank_details[GLOBAL_CONSTANTS.zeroth_index],
-				vendor_services : res.data?.services,
+				contact_details: res.data?.pocs[GLOBAL_CONSTANTS.zeroth_index],
+				payment_details: res.data?.bank_details[GLOBAL_CONSTANTS.zeroth_index],
+				vendor_services: res.data?.services,
 			});
 
 			if (res.data.vendor_details.kyc_status === 'pending_verification') {
