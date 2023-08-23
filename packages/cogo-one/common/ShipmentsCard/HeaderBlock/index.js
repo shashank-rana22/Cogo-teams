@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 const getButtonOptions = ({
 	partnerId, shipmentId, setShowRaiseTicket,
 	setShowPocModal, setShowPopover, shipmentItem,
+	showAddPrimaryUserButton = false,
 }) => [
 	{
 		key      : 'view_shipments',
@@ -21,7 +22,8 @@ const getButtonOptions = ({
 			window.open(shipmentDetailsPage, '_blank');
 			setShowPopover('');
 		},
-		condition: ['all_shipments', 'user_shipments'],
+		condition : ['all_shipments', 'user_shipments'],
+		show      : true,
 	},
 	{
 		key      : 'view_documents',
@@ -32,7 +34,8 @@ const getButtonOptions = ({
 			window.open(shipmentDocuments, '_blank');
 			setShowPopover('');
 		},
-		condition: ['all_shipments', 'user_shipments'],
+		condition : ['all_shipments', 'user_shipments'],
+		show      : true,
 	},
 	{
 		key      : 'raise_ticket',
@@ -42,7 +45,8 @@ const getButtonOptions = ({
 			setShowRaiseTicket(true);
 			setShowPopover('');
 		},
-		condition: ['user_shipments'],
+		condition : ['user_shipments'],
+		show      : true,
 	},
 	{
 		key      : 'add_primary_poc',
@@ -52,7 +56,8 @@ const getButtonOptions = ({
 			setShowPocModal({ show: true, shipmentData: shipmentItem });
 			setShowPopover('');
 		},
-		condition: ['all_shipments', 'user_shipments'],
+		condition : ['all_shipments', 'user_shipments'],
+		show      : showAddPrimaryUserButton,
 	},
 ];
 
@@ -60,6 +65,7 @@ function HeaderBlock({
 	shipmentItem = {}, setShowPocDetails = () => {},
 	type = '', setShowPopover = () => {}, showPopover = '',
 	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
@@ -94,9 +100,10 @@ function HeaderBlock({
 		setShowPocModal,
 		setShowPopover,
 		shipmentItem,
+		showAddPrimaryUserButton,
 	});
 
-	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
+	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type) && itm?.show);
 
 	const handleSidClick = (e) => {
 		e.stopPropagation();

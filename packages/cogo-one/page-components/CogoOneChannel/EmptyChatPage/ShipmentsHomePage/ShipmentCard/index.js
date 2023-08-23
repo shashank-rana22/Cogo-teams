@@ -49,6 +49,7 @@ function ShipmentCard({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
 }) {
 	const {
 		serial_id = '',
@@ -83,6 +84,7 @@ function ShipmentCard({
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
+				showAddPrimaryUserButton={showAddPrimaryUserButton}
 			/>
 		</div>
 	);

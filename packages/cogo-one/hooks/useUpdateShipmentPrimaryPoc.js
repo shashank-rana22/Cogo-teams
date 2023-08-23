@@ -11,6 +11,7 @@ function useUpdateShipmentPrimaryPoc({
 	setShowPocModal = () => {},
 	getShipmentsList = () => {},
 	setActiveTab = () => {},
+	fetchActivityLogs = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_primary_poc',
@@ -18,15 +19,19 @@ function useUpdateShipmentPrimaryPoc({
 	}, { manual: true });
 
 	const updatePrimaryPoc = async ({ selectedData = {}, showPocModal = {} }) => {
+		const {
+			user_id = '', userName = '', whatsapp_number_eformat = '',
+			mobile_no = '', email = '', countryCode = '',
+		} = selectedData;
+
 		const chatData = {
-			user_id                 : selectedData?.user_id,
-			user_name               : selectedData?.userName,
-			whatsapp_number_eformat : selectedData?.whatsapp_number_eformat || selectedData?.mobile_no,
-			email                   : selectedData?.email,
+			user_id,
+			user_name               : userName,
+			whatsapp_number_eformat : whatsapp_number_eformat || mobile_no,
+			email,
 			channel_type            : 'whatsapp',
-			countryCode             : selectedData?.countryCode,
-			mobile_no               : `${selectedData?.countryCode.replace('+', '')}
-			${selectedData?.whatsapp_number_eformat}`,
+			countryCode,
+			mobile_no               : `${countryCode.replace('+', '')}${whatsapp_number_eformat}`,
 		};
 
 		try {
@@ -35,15 +40,14 @@ function useUpdateShipmentPrimaryPoc({
 			});
 			Toast.success('Primary Poc Updated Successfully');
 			setShowPocModal({ show: false, shipmentData: {} });
-
 			setActiveTab((prev) => ({
 				...prev,
 				hasNoFireBaseRoom : true,
 				data              : chatData,
 				tab               : 'message',
 			}));
-
 			getShipmentsList();
+			fetchActivityLogs();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

@@ -10,6 +10,8 @@ function ActiveComponent(props) {
 		emptyCheck = false, activityTab = '', activeSubTab = '', data = {},
 		timeLineList = [], chatDataList = [], setRaiseTicketModal = () => {},
 		shipmentsData = {},
+		viewType = '',
+		fetchActivityLogs = () => {},
 	} = props || {};
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -38,6 +40,8 @@ function ActiveComponent(props) {
 				chatDataList={chatDataList}
 				setRaiseTicketModal={setRaiseTicketModal}
 				shipmentsData={shipmentsData}
+				viewType={viewType}
+				fetchActivityLogs={fetchActivityLogs}
 			/>
 		</div>
 	);

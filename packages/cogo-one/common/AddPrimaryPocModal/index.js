@@ -16,27 +16,29 @@ function AddPrimaryPocModal({
 	setShowPocModal = () => {},
 	getShipmentsList = () => {},
 	setActiveTab = () => {},
+	fetchActivityLogs = () => {},
 }) {
 	const [selectedData, setSelectedData] = useState({});
 
+	const { show: showModal = false, shipmentData = {} } = showPocModal || {};
+
+	const { importer_exporter_id = '', primary_poc_details = {} } = shipmentData || {};
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
 		setSearch = () => {},
 		search = '',
 	} = useListOrganizationUsers({
-		organizationId : showPocModal?.shipmentData?.importer_exporter_id,
+		organizationId : importer_exporter_id,
 		endPoint       : 'list_organization_users',
 		filterKey      : 'organization_id',
 	});
 	const {
 		updatePrimaryPoc = () => {},
 		updateLoading = false,
-	} = useUpdateShipmentPrimaryPoc({ setShowPocModal, getShipmentsList, setActiveTab });
+	} = useUpdateShipmentPrimaryPoc({ setShowPocModal, getShipmentsList, setActiveTab, fetchActivityLogs });
 
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
-
-	const primaryPocDetails = showPocModal?.shipmentData?.primary_poc_details;
 
 	const handleClose = () => {
 		setShowPocModal({ show: false, shipmentData: {} });
@@ -44,14 +46,14 @@ function AddPrimaryPocModal({
 	};
 
 	useEffect(() => {
-		setSelectedData(primaryPocDetails);
-	}, [primaryPocDetails]);
+		setSelectedData(primary_poc_details);
+	}, [primary_poc_details]);
 
 	return (
 		<Modal
 			placement="center"
 			size="sm"
-			show={showPocModal?.show}
+			show={showModal}
 			closeOnOuterClick={handleClose}
 			onClose={handleClose}
 			className={styles.styled_modal}
