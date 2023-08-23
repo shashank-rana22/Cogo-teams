@@ -148,26 +148,23 @@ function DocumentForm({
 						</div>
 
 						{!['telex', 'email'].includes(watchModeOfExecution)
-							? (
-								<div className={styles.form_item_container}>
-									<label className={styles.form_label}>
-										{watchModeOfExecution === 'pickup' ? "Receiver's Name" : 'Name'}
-									</label>
-									<SelectController
-										size="sm"
-										name="name"
-										control={control}
-										options={nameOptions}
-										rules={{ required: { value: true, message: 'Name is required' } }}
-									/>
-									{Error('name')}
-								</div>
-							) : null}
+							? 							(
+								<>
+									<div className={styles.form_item_container}>
+										<label className={styles.form_label}>
+											{watchModeOfExecution === 'pickup' ? "Receiver's Name" : 'Name'}
+										</label>
+										<SelectController
+											size="sm"
+											name="name"
+											control={control}
+											options={nameOptions}
+											rules={{ required: { value: true, message: 'Name is required' } }}
+										/>
+										{Error('name')}
+									</div>
+									<div className={styles.contact_form_item}>
 
-						<div className={styles.contact_form_item}>
-							{!['telex', 'email'].includes(watchModeOfExecution)
-								? (
-									<>
 										<div className={styles.country_code}>
 											<label className={styles.form_label}>
 												Country Code
@@ -198,25 +195,23 @@ function DocumentForm({
 											/>
 											{Error('contact_no')}
 										</div>
-									</>
-								) : null}
-						</div>
+									</div>
 
-						{!['telex', 'email'].includes(watchModeOfExecution)
-							? (
-								<div className={styles.form_item_container}>
-									<label className={styles.form_label}>
-										{watchModeOfExecution === 'pickup' ? 'Pickup Address' : 'Address'}
-									</label>
-									<SelectController
-										size="sm"
-										name="address"
-										control={control}
-										options={addressOptions}
-										rules={{ required: { value: true, message: 'Address is required' } }}
-									/>
-									{Error('address')}
-								</div>
+									<div className={styles.form_item_container}>
+										<label className={styles.form_label}>
+											{watchModeOfExecution === 'pickup' ? 'Pickup Address' : 'Address'}
+										</label>
+										<SelectController
+											size="sm"
+											name="address"
+											control={control}
+											options={addressOptions}
+											rules={{ required: { value: true, message: 'Address is required' } }}
+										/>
+										{Error('address')}
+									</div>
+
+								</>
 							) : null}
 
 						{isEmpty(sop_detail) ? (
