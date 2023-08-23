@@ -71,7 +71,7 @@ function Footer({
 							<div className={styles.view_button}>
 								<Button
 									onClick={() => {
-										setActive('invoiceBLCheck');
+										setActive('invoice_bl_check');
 										setBLData(apiData);
 										setShowHeader(true);
 									}}

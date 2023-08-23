@@ -38,6 +38,31 @@ export const EXPENSE_OPTIONS = [
 	},
 ];
 
+export const OptionAIR = [
+	{
+		label : 'DO',
+		value : 'do',
+	},
+	{
+		label : 'HAWB',
+		value : 'hawb',
+	},
+	{
+		label : 'MAWB',
+		value : 'mawb',
+	},
+];
+export const OPTIONS = [
+	{
+		label : 'MBL',
+		value : 'mbl',
+	},
+	{
+		label : 'HBL',
+		value : 'hbl',
+	},
+];
+
 export const SERVICE_TYPE = [
 	{ value: 'fcl_freight', label: 'FCL' },
 	{ value: 'lcl_freight', label: 'LCL' },

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import useGetInvoiceSelection from '../hooks/useInvoiceSelection';
 
+import InvoiceBLCheck from './InvoiceBLCheck';
 import InvoiceSelection from './InvoiceSelection';
 import PayabledDetails from './PayableDetails';
 import styles from './styles.module.css';
@@ -44,9 +45,9 @@ function OverSeasAgent() {
 		// if (active === 'Merge Documents') {
 		// 	return <MergeDocuments setActive={setActive} />;
 		// }
-		// if (active === 'Invoice - BL check') {
-		// 	return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
-		// }
+		if (active === 'invoice_bl_check') {
+			return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
+		}
 		// if (active === 'Final Confirmation') {
 		// 	return (
 		// 		<FinalConfirmation

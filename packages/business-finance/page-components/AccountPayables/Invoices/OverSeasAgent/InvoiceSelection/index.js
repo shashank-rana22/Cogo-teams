@@ -54,11 +54,11 @@ const getFunctions = ({ GetTableBodyCheckbox, setEditedValue, refetch }) => ({
 
 });
 function InvoiceSelection({
-	// setActive,
+	setActive,
 	setShowHeader,
 	showHeader,
 	active,
-	// setBLData,
+	setBLData,
 	setShowPayableAmount,
 	setShowSaveAsDraft,
 }) {
@@ -168,6 +168,8 @@ function InvoiceSelection({
 				submitSelectedInvoices={submitSelectedInvoices}
 				setShowHeader={setShowHeader}
 				listSelectedInvoice={listSelectedInvoice}
+				setActive={setActive}
+				setBLData={setBLData}
 			/>
 		</div>
 	);
