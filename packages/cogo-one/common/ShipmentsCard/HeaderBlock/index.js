@@ -95,7 +95,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				<div
 					className={styles.sid_id}
 					role="presentation"
-					onClick={handleRowClick}
+					onClick={(e) => handleRowClick({ e })}
 				>
 					{`SID: ${serial_id}`}
 				</div>
