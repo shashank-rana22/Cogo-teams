@@ -15,26 +15,18 @@ const ROUTES_MAPPING = {
 	air_freight : 'air-freight',
 };
 
-const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
+const getButtonOptions = ({ setShowRaiseTicket, handleRowClick = () => {} }) => [
 	{
-		key      : 'view_shipments',
-		children : 'View Shipments',
-		onClick  : (e) => {
-			e.stopPropagation();
-			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-			window.open(shipmentDetailsPage, '_blank');
-		},
-		condition: ['all_shipments', 'user_shipments'],
+		key       : 'view_shipments',
+		children  : 'View Shipments',
+		onClick   : (e) => handleRowClick({ e }),
+		condition : ['all_shipments', 'user_shipments'],
 	},
 	{
-		key      : 'view_documents',
-		children : 'View Documents',
-		onClick  : (e) => {
-			e.stopPropagation();
-			const shipmentDocuments = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
-			window.open(shipmentDocuments, '_blank');
-		},
-		condition: ['all_shipments', 'user_shipments'],
+		key       : 'view_documents',
+		children  : 'View Documents',
+		onClick   : (e) => handleRowClick({ e, activeTab: 'documents' }),
+		condition : ['all_shipments', 'user_shipments'],
 	},
 	{
 		key      : 'raise_ticket',
@@ -74,11 +66,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		importer_exporter_id,
 	};
 
-	const buttons = getButtonOptions({ shipmentId, partnerId, setShowRaiseTicket });
-
-	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
-
-	const handleRowClick = (e) => {
+	const handleRowClick = ({ e, activeTab = '' }) => {
 		e.stopPropagation();
 		let shipmentDetailsPage;
 		if (Object.keys(ROUTES_MAPPING).includes(shipment_type)) {
@@ -86,11 +74,16 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 
 			shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${shipmentId}`;
 		} else {
-			shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
+			// eslint-disable-next-line max-len
+			shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}${activeTab ? `?tab=${activeTab}` : ''}`;
 		}
 
 		window.open(shipmentDetailsPage, '_blank');
 	};
+
+	const buttons = getButtonOptions({ setShowRaiseTicket, handleRowClick });
+
+	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
 
 	return (
 		<div className={styles.container}>
