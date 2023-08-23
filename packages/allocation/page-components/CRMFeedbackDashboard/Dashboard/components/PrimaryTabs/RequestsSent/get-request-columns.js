@@ -18,14 +18,16 @@ function computeStatus({ statuses = '', t = () => {} }) {
 		const totalRequested = requested + responded;
 
 		return {
-			status : `${responsesReceived}/${totalRequested} ${t('allocation:responses_received')}`,
-			color  : 'green',
+			translatedStatus : `${responsesReceived}/${totalRequested} ${t('allocation:responses_received')}`,
+			status           : `${responsesReceived}/${totalRequested} Responses Received`,
+			color            : 'green',
 		};
 	}
 
 	return {
-		status : t('allocation:request_created'),
-		color  : 'blue',
+		translatedStatus : t('allocation:request_created'),
+		status           : 'Request Created',
+		color            : 'blue',
 	};
 }
 
@@ -79,7 +81,7 @@ export const getRequestColumns = ({
 		accessor : ({
 			statuses = [], organization = {}, lead_organization = {}, lead_organization_id,
 		}) => {
-			const { status, color } = computeStatus({ statuses, t });
+			const { status, color, translatedStatus } = computeStatus({ statuses, t });
 
 			const orgObject = lead_organization_id ? lead_organization : organization;
 
@@ -92,7 +94,7 @@ export const getRequestColumns = ({
 			return (
 				<section className={styles.view}>
 					<Pill size="md" color={color}>
-						{status || 'Nil'}
+						{translatedStatus || 'Nil'}
 					</Pill>
 
 					<Button size="sm" themeType="secondary" onClick={() => router.push(url)}>
