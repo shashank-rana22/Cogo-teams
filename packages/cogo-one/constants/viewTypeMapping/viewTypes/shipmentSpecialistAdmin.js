@@ -18,7 +18,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : ['agents_status'],
 	accessible_new_communications : ['new_mail'],
-	group_agents_api_filter       : 'shipment_specialist',
+	group_agents_api_filter       : ['shipment_specialist', 'support'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
