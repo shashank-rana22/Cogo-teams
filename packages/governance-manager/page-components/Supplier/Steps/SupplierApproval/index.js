@@ -98,9 +98,9 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 										</div>
 										<Button
 											onClick={() => updateOrganizationService()}
-											disabled={Object.values(verify)
-												?.filter((i) => i === 'verified'
-													|| i === 'rejected').length !== FOUR}
+											// disabled={Object.values(verify)
+											// 	?.filter((i) => i === 'verified'
+											// 		|| i === 'rejected').length !== FOUR}
 										>
 											Submit
 

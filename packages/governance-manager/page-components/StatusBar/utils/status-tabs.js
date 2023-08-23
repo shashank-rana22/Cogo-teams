@@ -8,7 +8,7 @@ export const statusTabs = ({ approvalStats, role }) => {
 		{
 			name  : 'contract_and_sla_updation',
 			title : 'Contract & SLA',
-			badge : approvalStats?.total_contract_and_sla,
+			badge : approvalStats?.total_contract_and_sla_approval,
 		}];
 	}
 	return	[{
@@ -34,6 +34,6 @@ export const statusTabs = ({ approvalStats, role }) => {
 	{
 		name  : 'contract_and_sla_updation',
 		title : 'Contract & SLA',
-		badge : approvalStats?.total_contract_and_sla,
+		badge : approvalStats?.total_contract_and_sla_updation,
 	}];
 };

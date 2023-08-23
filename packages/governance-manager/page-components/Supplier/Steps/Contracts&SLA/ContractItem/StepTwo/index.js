@@ -57,48 +57,51 @@ function StepTwo({
 				<div className={styles.term_content}>
 					{item?.display_content}
 				</div>
-				<div className={styles.update}>
-					<span className={styles.icon}>Original Value</span>
-					<Input
-						size="sm"
-						onChange={setValue}
-						style={{
-							marginLeft  : '12px',
-							height      : '20px',
-							width       : '90px',
-							marginRight : '24px',
-						}}
-						placeholder=" "
-						disabled
-						value={item?.variables_details?.[ZERO]?.default_value}
-					/>
-					<span className={styles.icon}>Updated Value</span>
-					<Input
-						size="sm"
-						onChange={setValue}
-						style={{
-							marginLeft  : '12px',
-							height      : '20px',
-							width       : '90px',
-							marginRight : '24px',
-						}}
-						placeholder=" "
-						disabled
-						value={item?.variables_details?.[ZERO]?.updated_value}
-					/>
+				{item?.variables_details?.[ZERO] && (
+					<div className={styles.update}>
 
-					<Button
-						size="sm"
-						themeType="secondary"
-						className={styles.update_button}
-						style={{ height: '28px' }}
-						disabled={item?.state === 'approved'}
-						onClick={() => updateOrganizationContract('approved')}
-					>
-						Confirm
+						<span className={styles.icon}>Original Value</span>
+						<Input
+							size="sm"
+							onChange={setValue}
+							style={{
+								marginLeft  : '12px',
+								height      : '20px',
+								width       : '90px',
+								marginRight : '24px',
+							}}
+							placeholder=" "
+							disabled
+							value={item?.variables_details?.[ZERO]?.default_value}
+						/>
+						<span className={styles.icon}>Updated Value</span>
+						<Input
+							size="sm"
+							onChange={setValue}
+							style={{
+								marginLeft  : '12px',
+								height      : '20px',
+								width       : '90px',
+								marginRight : '24px',
+							}}
+							placeholder=" "
+							disabled
+							value={item?.variables_details?.[ZERO]?.updated_value}
+						/>
 
-					</Button>
-				</div>
+						<Button
+							size="sm"
+							themeType="secondary"
+							className={styles.update_button}
+							style={{ height: '28px' }}
+							disabled={item?.state === 'approved'}
+							onClick={() => updateOrganizationContract('approved')}
+						>
+							Confirm
+
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);
