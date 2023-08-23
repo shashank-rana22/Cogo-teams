@@ -36,8 +36,10 @@ function AgentStats({
 				<div className={styles.header_sub_label}>
 					<div className={styles.header}>
 						Hi
-						<span>{startCase(name)}</span>
-						,
+						<span>
+							{startCase(name)}
+							,
+						</span>
 					</div>
 					<div className={styles.sub_label}>
 						This is how you have interacted with your clients.
