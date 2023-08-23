@@ -112,36 +112,40 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
-				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							content={(
-								<>
-									<h6 className={styles.title}>Invoice Remarks</h6>
-									<p className={styles.value}>{invoice.remarks}</p>
-								</>
-							)}
-							className={styles.remark_container}
-						>
-							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="#DDEBC0" />
-							</div>
-						</Tooltip>
-					) : null}
 
-					<EmailInfo invoice={invoice} setSendEmail={() => setShowModal('send_invoice_email')} />
+				{!(invoice?.parent_invoice_id) ? (
+					<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
+						{!isEmpty(invoice.remarks) ? (
+							<Tooltip
+								placement="bottom"
+								content={(
+									<>
+										<h6 className={styles.title}>Invoice Remarks</h6>
+										<p className={styles.value}>{invoice.remarks}</p>
+									</>
+								)}
+								className={styles.remark_container}
+							>
+								<div className={styles.icon_more_wrapper}>
+									<IcMInfo fill="#DDEBC0" />
+								</div>
+							</Tooltip>
+						) : null}
 
-					<KebabContent
-						invoice={invoice}
-						shipment_data={shipment_data}
-						invoiceData={invoiceData}
-						isIRNGenerated={isIRNGenerated}
-						setShowModal={setShowModal}
-						showCancelOptions={showCancelOptions}
-						bfInvoice={bfInvoice}
-					/>
-				</div>
+						<EmailInfo invoice={invoice} setSendEmail={() => setShowModal('send_invoice_email')} />
+
+						<KebabContent
+							invoice={invoice}
+							shipment_data={shipment_data}
+							invoiceData={invoiceData}
+							isIRNGenerated={isIRNGenerated}
+							setShowModal={setShowModal}
+							showCancelOptions={showCancelOptions}
+							bfInvoice={bfInvoice}
+						/>
+					</div>
+				) : null}
+
 			</div>
 
 			{(invoice.services || []).length && showModal === 'edit_invoice' ? (
