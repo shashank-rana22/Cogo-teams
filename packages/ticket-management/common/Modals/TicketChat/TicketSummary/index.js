@@ -3,9 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
+import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping } from '../../../../constants';
 import useGetCountdown from '../../../../hooks/useGetCountdown';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
@@ -33,9 +34,10 @@ function TicketSummary({
 		Source: source = '',
 	} = ticket || {};
 
-	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
+	const { t } = useTranslation(['myTicktes']);
+	const { color: textColor, label } =	getStatusLabelMapping(t)?.[STATUS_MAPPING[ticketStatus]] || {};
 
-	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
+	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
 	const isSameName = agentName === name;
 
