@@ -59,99 +59,106 @@ function LocationSelect({
 	const [region, setRegion] = useState('all');
 
 	return (
-		<div className={styles.location_container}>
-			<div className={styles.select_controller}>
-				<div className={styles.location_label}>Origin </div>
-				<AsyncSelectController
-					name="origin_location_id"
-					control={control}
-					isClearable
-					label="Select Origin SeaPort"
-					{...commonLocationProps}
-					onChange={(id, item) => {
-						setLocationDetails((prev) => ({
-							...prev,
-							origin_location_id   : id,
-							origin_location_type : item?.type,
-						}));
+		<div className={styles.container}>
+			<div className={styles.location_container}>
+				<div className={styles.select_controller}>
+					<div className={styles.location_label}>Origin </div>
+					<AsyncSelectController
+						name="origin_location_id"
+						control={control}
+						isClearable
+						label="Select Origin SeaPort"
+						{...commonLocationProps}
+						onChange={(id, item) => {
+							setLocationDetails((prev) => ({
+								...prev,
+								origin_location_id   : id,
+								origin_location_type : item?.type,
+							}));
 
-						setFilters((prev) => ({
-							...prev,
-							origin_location_id: id || undefined,
-						}));
+							setFilters((prev) => ({
+								...prev,
+								origin_location_id: id || undefined,
+							}));
 
-						setPagination(DEFAULT_PAGE);
-					}}
-				/>
+							setPagination(DEFAULT_PAGE);
+						}}
+					/>
+				</div>
+
+				<div className={styles.port_arrow_icon}>
+					<IcMPortArrow width={30} height={30} />
+				</div>
+
+				<div className={styles.select_controller}>
+					<div className={styles.location_label}>Destination </div>
+					<AsyncSelectController
+						name="destination_location_id"
+						control={control}
+						isClearable
+						label="Select Origin SeaPort"
+						{...commonLocationProps}
+						onChange={(id, item) => {
+							setLocationDetails((prev) => ({
+								...prev,
+								destination_location_id   : id,
+								destination_location_type : item?.type,
+							}));
+							setFilters((prev) => ({
+								...prev,
+								destination_location_id: id || undefined,
+							}));
+							setPagination(DEFAULT_PAGE);
+						}}
+					/>
+				</div>
 			</div>
 
-			<div className={styles.port_arrow_icon}>
-				<IcMPortArrow width={30} height={30} />
-			</div>
+			<div style={{ display: 'flex', marginTop: '30px' }}>
+				<div className={styles.select_container}>
+					<Select
+						size="md"
+						options={OPTIONS}
+						value={region}
+						onChange={(selectedValue) => {
+							setRegion(selectedValue);
+							setFilters((prev) => {
+								const filterValues = {
+									is_bookmarked: {
+										is_bookmarked         : true,
+										is_attention_required : undefined,
+									},
+									attention_required: {
+										is_bookmarked         : undefined,
+										is_attention_required : true,
+									},
+									all: {
+										is_bookmarked         : undefined,
+										is_attention_required : undefined,
+									},
+								};
 
-			<div className={styles.select_controller}>
-				<div className={styles.location_label}>Destination </div>
-				<AsyncSelectController
-					name="destination_location_id"
-					control={control}
-					isClearable
-					label="Select Origin SeaPort"
-					{...commonLocationProps}
-					onChange={(id, item) => {
-						setLocationDetails((prev) => ({
-							...prev,
-							destination_location_id   : id,
-							destination_location_type : item?.type,
-						}));
-						setFilters((prev) => ({
-							...prev,
-							destination_location_id: id || undefined,
-						}));
-						setPagination(DEFAULT_PAGE);
-					}}
-				/>
-			</div>
+								return {
+									...prev,
+									...(filterValues[selectedValue] || {}),
+								};
+							});
+						}}
+					/>
+				</div>
 
-			<Select
-				size="md"
-				options={OPTIONS}
-				value={region}
-				onChange={(selectedValue) => {
-					setRegion(selectedValue);
-					setFilters((prev) => {
-						const filterValues = {
-							is_bookmarked: {
-								is_bookmarked         : true,
-								is_attention_required : undefined,
-							},
-							attention_required: {
-								is_bookmarked         : undefined,
-								is_attention_required : true,
-							},
-							all: {
-								is_bookmarked         : undefined,
-								is_attention_required : undefined,
-							},
-						};
+				<div className={styles.port_arrow_icon}>
+					<Button
+						onClick={() => onClickAllocate()}
+						themeType="accent"
+						disabled={listLoading}
+						loading={createSearchLoadng}
+						size="lg"
+					>
+						+ Allocation
+					</Button>
+				</div>
 
-						return {
-							...prev,
-							...(filterValues[selectedValue] || {}),
-						};
-					});
-				}}
-			/>
-
-			<div className={styles.port_arrow_icon}>
-				<Button
-					onClick={() => onClickAllocate()}
-					themeType="accent"
-					disabled={listLoading}
-					loading={createSearchLoadng}
-					size="lg"
-				>
-					+ Allocation
-				</Button>
 			</div>
 		</div>
 	);
