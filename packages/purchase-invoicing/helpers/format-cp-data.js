@@ -309,7 +309,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			bankDetail        : {
 				bankId     : bankDetails?.id,
 				bankName   : bankDetails?.data?.bank_name,
-				branchCode : bankDetails?.data?.ifsc_number,
+				branchCode : bankDetails?.data?.ifsc_number || bankDetails?.data?.swift_number,
 				branchName:
                     bankDetails?.data?.branch_name || bankDetails?.data?.bank_name,
 				beneficiaryName   : bankDetails?.data?.account_holder_name,
