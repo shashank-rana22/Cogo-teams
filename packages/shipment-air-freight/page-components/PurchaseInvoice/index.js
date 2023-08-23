@@ -12,7 +12,7 @@ function PurchaseInvoice() {
 
 	return (
 		<main className={styles.main}>
-			<ManageServices isOpen={false} activeTab="purchase" source="purchase" isSeller />
+			<ManageServices isOpen={false} source="purchase" isSeller />
 			<PurchaseInvoicing
 				shipmentData={shipment_data}
 				servicesData={servicesList}
