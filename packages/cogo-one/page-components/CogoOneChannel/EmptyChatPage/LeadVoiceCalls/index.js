@@ -123,16 +123,26 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 				</div>
 			) : (
 				<div className={styles.list_container}>
-					{list?.map((eachItem) => (
-						<LeadOrgCard
-							eachItem={eachItem}
-							key={eachItem?.id}
-							setActiveTab={setActiveTab}
-							openLeadOrgModal={openLeadOrgModal}
-							handlePlaceCall={handlePlaceCall}
-							handleOpenMessage={handleOpenMessage}
-						/>
-					))}
+					{!isEmpty(list)
+						? list?.map((eachItem) => (
+							<LeadOrgCard
+								eachItem={eachItem}
+								key={eachItem?.id}
+								setActiveTab={setActiveTab}
+								openLeadOrgModal={openLeadOrgModal}
+								handlePlaceCall={handlePlaceCall}
+								handleOpenMessage={handleOpenMessage}
+							/>
+						)) : (
+							<div className={styles.loader}>
+								<Image
+									src={GLOBAL_CONSTANTS.image_url.empty_state}
+									alt="empty"
+									width={250}
+									height={200}
+								/>
+							</div>
+						)}
 				</div>
 			)}
 			<div className={styles.pagination_container}>
