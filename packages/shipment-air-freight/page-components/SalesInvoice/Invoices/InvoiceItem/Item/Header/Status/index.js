@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -59,10 +60,13 @@ function Status({
 		});
 	};
 
+	const geo = getGeoConstants();
+
 	const showRequestCN = showCN
 	&& !invoice.is_revoked
 	&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
 
 	return (
 		<div className={styles.invoice_container}>

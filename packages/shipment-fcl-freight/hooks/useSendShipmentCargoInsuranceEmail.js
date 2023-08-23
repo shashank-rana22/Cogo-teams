@@ -11,11 +11,12 @@ const useSendShipmentCargoInsuranceEmail = ({ successMessage = 'Email sent to cu
 		method : 'POST',
 	}, { manual: true });
 
-	const sendCustomerEmail = async () => {
+	const sendCustomerEmail = async (data) => {
 		try {
 			await trigger({
 				data: {
 					shipment_id: shipment_data?.id,
+					...data,
 				},
 			});
 			Toast.success(successMessage);

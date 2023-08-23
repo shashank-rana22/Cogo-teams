@@ -8,8 +8,13 @@ const fileUploadRestControls = {
 			'image/*,.pdf,.doc,.docx,.xlsx,application/'
 			+ 'msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	uploadType : 'aws',
-	rules      : { required: 'Required' },
-	span       : 4,
+	rules      : {
+		required: {
+			value   : true,
+			message : 'File is required',
+		},
+	},
+	span: 3,
 
 };
 
@@ -49,6 +54,11 @@ export const invoiceControls = [
 	{
 		label : 'Upload Commercial Invoice',
 		name  : 'invoiceDoc',
+		...fileUploadRestControls,
+	},
+	{
+		label : 'Customer Confirmation Proof',
+		name  : 'customerConfirmationDoc',
 		...fileUploadRestControls,
 	},
 ];

@@ -1,13 +1,17 @@
 import { useHarbourRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
+
+const DEFAULT_PAGE = 1;
 
 const onClickOpen = (url) => {
 	window.open(url, '_blank');
 };
 
 const useEmployeeData = ({ detail, refetchReimbursementList, setRefetchReimbursementList }) => {
+	const [page, setPage] = useState(DEFAULT_PAGE);
+
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_employee_device_details',
@@ -16,25 +20,32 @@ const useEmployeeData = ({ detail, refetchReimbursementList, setRefetchReimburse
 	const fetch = useCallback(
 		async () => {
 			await trigger({
-				filters: {
-					employee_detail_id : detail?.id,
-					status             : 'active',
+				params: {
+					filters: {
+						employee_detail_id: detail?.id,
+					},
+					page,
 				},
-				page: 1,
 			});
 
 			setRefetchReimbursementList(false);
 		},
-		[detail?.id, setRefetchReimbursementList, trigger],
+		[detail?.id, page, setRefetchReimbursementList, trigger],
 	);
 
 	useEffect(() => {
 		if (refetchReimbursementList) fetch();
 	}, [fetch, refetchReimbursementList]);
 
+	useEffect(() => {
+		setRefetchReimbursementList(true);
+	}, [page, setRefetchReimbursementList]);
+
 	const columns = getColumns({ onClickOpen });
 
-	const NEW_LIST = (data?.list || []).flatMap((item) => {
+	const { list = [], ...paginationData } = data || {};
+
+	const NEW_LIST = (list || []).flatMap((item) => {
 		const { updated_at, invoice_url, rejection_reason, status } = item || {};
 
 		return (item?.device_details || []).map((device_detail) => ({
@@ -50,6 +61,9 @@ const useEmployeeData = ({ detail, refetchReimbursementList, setRefetchReimburse
 		loading,
 		NEW_LIST,
 		columns,
+		page,
+		setPage,
+		paginationData,
 	};
 };
 

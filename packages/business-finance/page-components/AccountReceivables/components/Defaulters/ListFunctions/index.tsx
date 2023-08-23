@@ -14,7 +14,7 @@ import { INVOICE_STATUS_MAPPING, INVOICE_TYPE, STATUS_MAPPING } from '../Default
 
 import styles from './styles.module.css';
 
-const listFunctions = ({ refetch }) => ({
+const listFunctions = ({ refetch, entityCode }) => ({
 	showOrgName       : ({ organizationName }) => (<div>{showOverflowingNumber(organizationName || '-', 10)}</div>),
 	showInvoiceNumber : (row) => (
 		<div>
@@ -211,6 +211,7 @@ const listFunctions = ({ refetch }) => ({
 		<div className={styles.show_actions}>
 			<Remarks itemData={row} />
 			<InvoiceDetails
+				entityCode={entityCode}
 				item={row}
 			/>
 			<RenderIRNGenerated

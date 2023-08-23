@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
+const AUTHORIZED_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
+
 function Remarks({ remarks = '' }) {
 	return (
 		<div className={styles.remarkcontainer}>
@@ -26,6 +28,8 @@ function Content({
 	setIsEditInvoice = () => {},
 	setExchangeRate = () => {},
 	invoice = {},
+	showCancelOptions = {},
+	setShowCancelModal = () => {},
 }) {
 	return (
 		<div className={styles.dialog_box}>
@@ -89,6 +93,28 @@ function Content({
 					</Button>
 				</div>
 			))}
+
+			{ showCancelOptions?.showCancel ? (
+				<Button
+					themeType="tertiary"
+					className={styles.text}
+					onClick={() => setShowCancelModal((prev) => ({ ...prev, showCancel: true }))}
+					type="button"
+				>
+					Request Cancel E Invoice
+				</Button>
+			) : null}
+
+			{ showCancelOptions?.showReplace ? (
+				<Button
+					themeType="tertiary"
+					className={styles.text}
+					onClick={() => setShowCancelModal((prev) => ({ ...prev, showReplace: true }))}
+					type="button"
+				>
+					Request Replace E Invoice
+				</Button>
+			) : null}
 		</div>
 	);
 }
@@ -103,9 +129,11 @@ function KebabContent({
 	setShowChangePaymentMode = () => {},
 	setIsEditInvoice = () => {},
 	setExchangeRate = () => {},
+	setShowCancelModal = () => {},
+	showCancelOptions = {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorizedUser = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
+	const isAuthorizedUser = AUTHORIZED_IDS.includes(user_data?.user?.id);
 
 	const [show, setShow] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
@@ -146,6 +174,8 @@ function KebabContent({
 									setIsEditInvoice={setIsEditInvoice}
 									setExchangeRate={setExchangeRate}
 									invoice={invoice}
+									showCancelOptions={showCancelOptions}
+									setShowCancelModal={setShowCancelModal}
 								/>
 							)}
 							theme="light"

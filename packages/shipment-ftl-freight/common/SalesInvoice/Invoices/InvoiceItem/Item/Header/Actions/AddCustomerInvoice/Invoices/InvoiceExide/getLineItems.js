@@ -1,5 +1,4 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
-import { customerToServiceDescription } from '../../utils/serviceDescriptionMappings';
 
 const LINE_ITEMS_KEY_MAPPING = {
 	service_description : 'service_description',
@@ -17,16 +16,16 @@ const LINE_ITEMS_KEY_MAPPING = {
 	total               : 'total',
 };
 
-export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
+export const getLineItems = ({ customData = {}, billing_address = {} }) => {
 	const lineItems = lineItemsHelper({
-		lineItems: customData?.line_items?.line_items,
-		LINE_ITEMS_KEY_MAPPING,
+		lineItems               : customData?.line_items?.line_items,
+		LINE_ITEMS_KEYS_MAPPING : LINE_ITEMS_KEY_MAPPING,
 		customData,
 	});
 
 	lineItems.forEach((item) => {
 		const newItem = item;
-		newItem.service_description = customerToServiceDescription[importerExporterId] || '';
+		newItem.service_description = billing_address?.service_description || '';
 		newItem.description = 'Fixed';
 	});
 
@@ -57,8 +56,8 @@ export const getAnnexureData = ({ customData = {} }) => {
 		? [customData?.annexure]
 		: customData?.annexure;
 	const annexureItems = lineItemsHelper({
-		lineItems              : annexure,
-		LINE_ITEMS_KEY_MAPPING : ANNEXURE_KEY_MAPPINGS,
+		lineItems               : annexure,
+		LINE_ITEMS_KEYS_MAPPING : ANNEXURE_KEY_MAPPINGS,
 		customData,
 	});
 

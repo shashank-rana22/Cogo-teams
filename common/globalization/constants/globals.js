@@ -214,6 +214,7 @@ const GLOBAL_CONSTANTS = {
 		sagar_bankar_user_id    : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
 		ajeet_singh_user_id     : '4bafde92-a30f-44d3-ace4-584dd460143e',
 		linh_nguyen_duy_user_id : 'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',
+		vietnam_admin_id        : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
 		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
@@ -232,7 +233,6 @@ const GLOBAL_CONSTANTS = {
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
 			'20f59087-12cf-4e6d-8463-27d41e23da6f',
 		],
-
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -369,8 +369,16 @@ const GLOBAL_CONSTANTS = {
 		alarm_snooze: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-snooze.svg',
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
-		message_reply        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
-		cargo_ship_vector    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
+		message_reply     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
+		cargo_ship_vector : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
+		fortigo_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/13af930163006f55ec9f077ece369e4d/fortigo_logo.png',
+		other_stamp:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/0fcedc3fbe3661ff791bf433e6690c09/fortigo_stamp.png',
+		cogo_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/a99aae91de2638328f94abd85414987b/cogoLogo.png',
+		cogo_mumbai_invoice_stamp:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/4a578b474c6d502c271e0e31987b8e7f/mumbai_stamp.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
 		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
@@ -398,8 +406,9 @@ const GLOBAL_CONSTANTS = {
 		ic_tree_multiple        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
 		ic_tree_single          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
 		drop_down_red           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
-		comming_soon            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/coming.gif',
-
+		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
+		custom_plan:
+		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
 	},
 
 	video_call_ring_tone_url:
@@ -547,7 +556,47 @@ const GLOBAL_CONSTANTS = {
 		old_shipment_serial_id      : 120347,
 		cogopoint_default_value     : 0,
 		fcl_import_new_process_date : '2023-07-27T00:00:00',
-
+		fortigo_details             : {
+			fortigo_company_pan_mappings: {
+				fortigo_network_logistics : 'AACCF6637K',
+				fortigo_transport_agency  : 'AADCF3831G',
+			},
+			fortigo_bank_details_mappings: {
+				fortigo_network_logistics: {
+					ifsc_code      : 'UTIB000541',
+					account_number : '921020010527964',
+				},
+				fortigo_transport_agency: {
+					ifsc_code      : 'ICIC0000047',
+					account_number : '004705014491',
+				},
+			},
+			fortigo_cin_mappings: {
+				fortigo_network_logistics : 'U72200KA2015PTC082767',
+				fortigo_transport_agency  : 'U60221KA2018PTC112639',
+			},
+			fortigo_registration_number_mappings: {
+				fortigo_network_logistics : 'KR03E0088395',
+				fortigo_transport_agency  : 'KR03D0105659',
+			},
+			emails: {
+				fortigo_collections : 'collection@4tigo.com',
+				fortigo_support     : 'info@4tigo.com',
+			},
+			fortigo_branch_city: 'Bangalore',
+		},
+		cogo_mumbai_gst           : '27AAICC8838P1ZR',
+		ftl_customer_pan_mappings : {
+			exide_industries : 'AAACE6641E',
+			adani_wilmar     : 'AABCA8056G',
+			gujarat_milk     : 'AAAAG5588Q',
+			hil_limited      : 'AAACH2676Q',
+			itc_limited      : 'AAACI5950L',
+			ivl_dhunseri     : 'AAFCD5214M',
+			kansai_nerolac   : 'AAACG1376N',
+			orissa_metaliks  : 'AAACO8663L',
+			varun_beverages  : 'AAACV2678L',
+		},
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
@@ -654,10 +703,15 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	emails: {
-		import_rates : 'Import.rates@cogoport.com',
-		export_rates : 'Export.rates@cogoport.com',
+		import_rates             : 'Import.rates@cogoport.com',
+		export_rates             : 'Export.rates@cogoport.com',
+		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
+		cogoport_support         : 'support@cogoport.com',
 	},
-
+	websites: {
+		cogoport : 'www.cogoport.com',
+		fortigo  : 'www.4tigo.com',
+	},
 	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 };
 

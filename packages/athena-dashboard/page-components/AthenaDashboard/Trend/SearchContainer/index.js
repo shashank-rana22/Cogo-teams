@@ -1,13 +1,21 @@
 import { Input, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function SearchContainer({ searchValue, setSearchValue, handleClick, loading }) {
+function SearchContainer({
+	searchValue,
+	setSearchValue,
+	handleClick,
+	loading,
+}) {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	return (
 		<div className={styles.search_container}>
 			<Input
 				size="sm"
-				placeholder="Search Here..."
+				placeholder={t('athenaDashboard:search_here_placeholder')}
 				onChange={setSearchValue}
 				value={searchValue}
 			/>
@@ -17,7 +25,7 @@ function SearchContainer({ searchValue, setSearchValue, handleClick, loading }) 
 				onClick={handleClick}
 				disabled={loading}
 			>
-				Search
+				{t('athenaDashboard:search_button')}
 			</Button>
 		</div>
 	);
