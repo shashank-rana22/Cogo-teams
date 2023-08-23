@@ -1,6 +1,7 @@
 import { Button, Modal, Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useGetAllocationKamExpertiseProfile from '../../hooks/useGetAllocationKamExpertiseProfile';
 
@@ -14,6 +15,8 @@ import styles from './styles.module.css';
 import useMyDetails from './useMyDetails';
 
 function MyProfile() {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		profile: { partner = {} },
 	} = useSelector((state) => state);
@@ -68,7 +71,7 @@ function MyProfile() {
 		<div className={styles.main_container_wrapper}>
 			<div className={styles.greeting_container}>
 				<div className={styles.main_heading}>
-					<span className={styles.span}>Welcome!</span>
+					<span className={styles.span}>{t('profile:welcome_label')}</span>
 					{' '}
 					{startCase(name)}
 				</div>
@@ -78,7 +81,7 @@ function MyProfile() {
 						className="primary sm"
 						onClick={() => setChangepasswordModal(true)}
 					>
-						CHANGE PASSWORD
+						{t('profile:chanage_password_button')}
 					</Button>
 					<GrantOutlookAccess />
 				</div>
@@ -114,7 +117,7 @@ function MyProfile() {
 					? (
 						<div>
 							<div className={styles.organization_container}>
-								<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
+								<div className={styles.organization}>{t('profile:organization_hierarchy')}</div>
 
 								<Organization personDetails={detailsData} detailsLoading={loading} />
 							</div>
@@ -127,7 +130,7 @@ function MyProfile() {
 				onClose={() => setChangepasswordModal(false)}
 				onOuterClick={() => setChangepasswordModal(false)}
 			>
-				<Modal.Header title="Update Password" />
+				<Modal.Header title={t('profile:update_password_label')} />
 
 				<ChangePassword
 					control={control}
@@ -142,7 +145,7 @@ function MyProfile() {
 						disabled={apiLoading}
 						themeType="tertiary"
 					>
-						CANCEL
+						{t('profile:cancel_button')}
 					</Button>
 
 					<Button
@@ -151,7 +154,7 @@ function MyProfile() {
 						themeType="primary"
 
 					>
-						UPDATE
+						{t('profile:update_button')}
 					</Button>
 
 				</Modal.Footer>

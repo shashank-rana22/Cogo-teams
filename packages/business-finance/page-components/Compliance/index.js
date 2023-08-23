@@ -34,7 +34,9 @@ function Compliance() {
 			activeTab,
 		},
 	};
+
 	const ActiveTabComponent = TABS_KEY_COMPONENT_MAPPING[activeTab] || null;
+
 	const onChange = (view) => {
 		setActiveTab(view);
 		push(

@@ -1,4 +1,5 @@
 import { Button, Chips } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -13,13 +14,15 @@ function Header({
 	notificationType,
 	setNotificationType,
 }) {
+	const { t } = useTranslation(['notifications']);
+
 	return (
 		<div className={styles.container}>
 			<Chips
 				size="md"
 				items={[
-					{ label: 'Notifications', value: 'general' },
-					{ label: 'Mails', value: 'mails' },
+					{ label: t('notifications:chips_notifications_label'), value: 'general' },
+					{ label: t('notifications:chips_mails_label'), value: 'mails' },
 				]}
 				selectedItems={notificationType}
 				onItemChange={setNotificationType}
@@ -35,10 +38,10 @@ function Header({
 							setShow(false);
 						}}
 					>
-						Mark all as read
+						{t('notifications:mark_all_as_read')}
 					</Button>
 					<Button className="primary sm uppercase" onClick={onSeeAll}>
-						SEE All
+						{t('notifications:see_all_button')}
 					</Button>
 				</div>
 			)}

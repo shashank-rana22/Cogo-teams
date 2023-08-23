@@ -22,6 +22,8 @@ const displayAmount = (amount, currency) => formatAmount({
 function StatsCard({
 	heading = '', cardId = '', setActiveShipmentCard = () => {},
 	showPill = false, cardData = [], loading = false, taxType = '',
+	infoContent = '',
+	isAdditonalView = false,
 }) {
 	const { currency, invoiceCount = 0, jobCount = 0 } = cardData;
 
@@ -39,13 +41,18 @@ function StatsCard({
 	];
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			style={{ height: isAdditonalView ? '100%' : '49%' }}
+		>
 			<div className={styles.flexhead}>
 				<div>
 					<RenderCardHeader
 						title={heading}
 						showInfo
+						infoContent={infoContent}
 					/>
+
 				</div>
 				{showPill && !loading && (
 					<div className={styles.tag}>
@@ -77,7 +84,7 @@ function StatsCard({
 			)
 				: (
 					<div style={{ marginTop: '8px' }}>
-						<Placeholder height={200} width="100%" />
+						<Placeholder height={156} width="100%" />
 					</div>
 				)}
 		</div>
