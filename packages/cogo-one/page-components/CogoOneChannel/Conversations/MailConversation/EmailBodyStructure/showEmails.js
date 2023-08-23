@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 const NO_OF_MAILS_TO_BE_SHOWN = 3;
 const INDEX_STEP = 1;
-const DEFAULT_LENGTH = 0;
 
 function TooltipContainer({ popoverMails = [] }) {
 	return (
@@ -18,7 +17,7 @@ function TooltipContainer({ popoverMails = [] }) {
 						className={styles.email_element}
 					>
 						{itm}
-						{index !== (popoverMails?.length || DEFAULT_LENGTH) - INDEX_STEP
+						{index !== (popoverMails || []).length - INDEX_STEP
 							? ','
 							: ''}
 					</div>
