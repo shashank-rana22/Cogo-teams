@@ -47,11 +47,11 @@ const getColumns = ({
 		},
 		{
 			Header   : 'REPORTING MANAGER',
-			accessor : (item) => <div>{item?.reporting_manager?.userName || '-'}</div>,
+			accessor : (item) => <div>{item?.reporting_manager?.name || '-'}</div>,
 		},
 		{
 			Header   : 'HIRING MANAGER',
-			accessor : (item) => <div>{item?.hiring_manager?.userName || '-'}</div>,
+			accessor : (item) => <div>{item?.hiring_manager?.name || '-'}</div>,
 		},
 		{
 			Header   : 'DATE OF JOINING',

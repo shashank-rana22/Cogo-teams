@@ -164,7 +164,7 @@ const controls = () => [
 	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Hiring Manager',
 		placeholder : 'Hiring Manager',
 		initialCall : true,
@@ -174,7 +174,7 @@ const controls = () => [
 				partner_entity_types : ['cogoport'],
 
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	},
 	{

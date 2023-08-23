@@ -139,12 +139,11 @@ const controls = [
 		rules       : {
 			required: 'Department is required',
 		},
-
 	},
 	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Hiring Manager*',
 		placeholder : 'Hiring Manager',
 		rules       : {
@@ -155,15 +154,14 @@ const controls = [
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
-
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	},
 	{
 		name        : 'reporting_manager_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Reporting Manager',
 		placeholder : 'Reporting Manager',
 		rules       : {
@@ -176,13 +174,13 @@ const controls = [
 				partner_entity_types : ['cogoport'],
 
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	},
 	{
 		name        : 'hr_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'HR Name*',
 		placeholder : 'Enter Name',
 		rules       : {
@@ -194,13 +192,13 @@ const controls = [
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	},
 	{
 		name        : 'hrbp_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'HRBP*',
 		placeholder : 'HRBP',
 		rules       : {
@@ -211,7 +209,7 @@ const controls = [
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	},
 ];

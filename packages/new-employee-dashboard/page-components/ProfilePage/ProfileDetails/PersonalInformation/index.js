@@ -54,14 +54,14 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		date_of_joining           : formatdate({ date: date_of_joining }),
 		designation               : startCase(designation),
 		employee_code,
-		office_location,
-		hiring_manager            : startCase(hiring_manager?.userName),
-		hiring_manager_email      : hiring_manager?.userEmail,
+		office_location           : startCase(office_location),
+		hiring_manager            : startCase(hiring_manager?.name),
+		hiring_manager_email      : hiring_manager?.cogoport_email,
 		emergency_contact_details : emergencyContactDetails,
-		HR_name                   : startCase(hr?.userName),
-		HR_email                  : hr?.userEmail,
-		HRBP_name                 : startCase(hrbp?.userName),
-		HRBP_email                : hrbp?.userEmail,
+		HR_name                   : startCase(hr?.name),
+		HR_email                  : hr?.cogoport_email,
+		HRBP_name                 : startCase(hrbp?.name),
+		HRBP_email                : hrbp?.cogoport_email,
 	};
 
 	if (getEmployeeDetailsLoading) return <CommonLoader />;
