@@ -1,6 +1,8 @@
 import { Select } from '@cogoport/components';
 import React from 'react';
 
+import { DATA } from '../../../utils/constants';
+
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
 import styles from './styles.module.css';
@@ -95,7 +97,7 @@ const dataArr = [
 
 function AttendanceLogs() {
 	return (
-		<div className={styles.container}>
+		<div>
 			<div className={styles.header_container}>
 				<div>
 					<div className={styles.title}>
@@ -115,7 +117,7 @@ function AttendanceLogs() {
 				</div>
 			</div>
 			<div className={styles.table_container}>
-				<DesktopView dataArr={dataArr} />
+				<DesktopView dataArr={DATA} />
 			</div>
 			<div className={styles.mobile_view}>
 				<MobileView dataArr={dataArr} />
