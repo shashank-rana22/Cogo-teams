@@ -4,6 +4,9 @@ const EDIT_PARAMS_STAKEHOLDERS = {
 	booking_agent: {
 		idToMatch: 'importer_exporter_id',
 	},
+	booking_agent_manager: {
+		idToMatch: 'importer_exporter_id',
+	},
 	consignee_shipper_booking_agent: {
 		idToMatch: 'consignee_shipper_id',
 	},
@@ -46,9 +49,11 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		userCanEdit = idToMatch === serviceData?.importer_exporter?.id;
 	}
 
+	const showEditParamsKey = serviceData?.show_edit_params;
+
 	const isControlsEditable = CONTROLS_EDITABLE_CONDITIONS.some(
 		(conditions) => getShowCondition({ trade_type: shipment_data?.trade_type, ...serviceData }, conditions),
 	);
 
-	return userCanEdit && isControlsEditable;
+	return userCanEdit && showEditParamsKey && isControlsEditable;
 }

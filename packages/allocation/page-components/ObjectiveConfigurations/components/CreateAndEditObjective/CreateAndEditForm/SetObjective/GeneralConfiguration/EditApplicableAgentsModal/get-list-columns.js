@@ -1,5 +1,7 @@
-import { Checkbox } from '@cogoport/components';
+import { Checkbox, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import styles from './styles.module.css';
 
 const getListColumns = (props) => {
 	const { selectMode, selectedAgentIds, setSelectedAgentIds } = props;
@@ -7,14 +9,18 @@ const getListColumns = (props) => {
 	const LIST_COLUMNS = [
 		{
 			id       : 'agent',
-			accessor : ({ name, roles_data }) => (
-				<p>
-					{name || '___'}
-					{' '}
-					:
-					{' '}
-					{roles_data[GLOBAL_CONSTANTS.zeroth_index]?.name || '___'}
-				</p>
+			accessor : ({ name, roles_data, block_access }) => (
+				<div className={styles.agent_container}>
+					<p className={styles.agent}>
+						{name || '___'}
+						{' '}
+						:
+						{' '}
+						{roles_data[GLOBAL_CONSTANTS.zeroth_index]?.name || '___'}
+					</p>
+
+					{block_access ? <Pill color="red">Blocked</Pill> : null}
+				</div>
 			),
 		},
 		{

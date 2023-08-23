@@ -29,9 +29,11 @@ export default function useCreateSpotSearch({
 
 			if (!res.hasError) {
 				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
-				newHref += `${res.data?.id}/${shipment_data?.importer_exporter_id}/${shipment_data?.id}`;
+				newHref += `${res.data?.id}/${shipment_data?.importer_exporter_id}/${shipment_data?.id}
+				?shipment_type=${shipment_data?.shipment_type}`;
 
 				window.location.href = newHref;
+				window.sessionStorage.setItem('shipment_type', shipment_data?.shipment_type);
 			}
 		} catch (err) {
 			toastApiError(err);

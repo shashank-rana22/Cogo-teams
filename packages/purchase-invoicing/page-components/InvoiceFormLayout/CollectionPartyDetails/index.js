@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { AsyncSelectController, SelectController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import AccordianView from '../../../common/Accordianview';
@@ -10,6 +10,7 @@ import AccordianView from '../../../common/Accordianview';
 import RenderLabel from './RenderLabel';
 import styles from './styles.module.css';
 import collectionPartyBankDetails from './utils/collectionPartyBankDetails';
+import { getCollectionPartyDetails } from './utils/getCollectionPartyDetails';
 
 const ONE_OPTION = 1;
 
@@ -71,21 +72,7 @@ function CollectionPartyDetails({
 
 	const stringifycollectionPartyAddresses = JSON.stringify(collectionPartyAddresses || []);
 
-	const handleModifiedOptions = ({ options }) => options.map((option) => ({
-		...option,
-		display_name:
-	<div className={styles.spacebetween}>
-		<div>
-			{
-				option?.trade_party_type === 'self'
-					? option?.display_name
-					: `${option?.business_name} ${option?.display_name}`
-			}
-		</div>
-		<div className={styles.verification_status}>{startCase(option.verification_status)}</div>
-	</div>,
-		registration_number: option?.registration_number,
-	}));
+	const { handleModifiedOptions } = getCollectionPartyDetails();
 
 	const bankAccountNumber = watch('collection_party_bank_details');
 

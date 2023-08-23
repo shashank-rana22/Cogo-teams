@@ -5,7 +5,8 @@ import { useState } from 'react';
 
 interface InvoiceAdditionals {
 	reqCancelReason?: string
-	reqDocumentUrl?: string
+	reqCancelDocumentUrl?: string
+	reqReplaceDocumentUrl?:string
 }
 interface InvoiceData {
 	invoiceAdditionals?: InvoiceAdditionals
@@ -29,9 +30,10 @@ const useGetIrnCancellation = ({
 	const [response, setResponse] = useState({
 		remarks           : itemData?.invoiceAdditionals?.reqCancelReason,
 		value             : '',
-		agreementDocument : itemData?.invoiceAdditionals?.reqDocumentUrl,
-		agreementNumber   : '',
-		agreementDate     : new Date(),
+		agreementDocument : itemData?.invoiceAdditionals?.reqCancelDocumentUrl
+		|| itemData?.invoiceAdditionals?.reqReplaceDocumentUrl,
+		agreementNumber : '',
+		agreementDate   : new Date(),
 	});
 	const [
 		{ loading },
@@ -60,8 +62,8 @@ const useGetIrnCancellation = ({
 				payload = {
 					cancelReason      : response?.remarks,
 					agreementDocument : response?.agreementDocument,
-					agreementNumber   : response?.agreementNumber,
-					agreementDate     : response?.agreementDate,
+					agreementNumber   : response?.agreementDocument ? response?.agreementNumber : undefined,
+					agreementDate     : response?.agreementDocument ? response?.agreementDate : undefined,
 				};
 			} else if (CANCEL_IRN) {
 				payload = {

@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { upperCase } from '@cogoport/utils';
@@ -15,8 +16,11 @@ const useGetShipmentList = ({
 	activeBar = '',
 	customDate = new Date(),
 	tableFilters,
+	sort = {},
+	taxType = '',
 }) => {
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [
 		{ data: serviceLevelData, loading: serviceLevelLoading },
@@ -30,12 +34,13 @@ const useGetShipmentList = ({
 		{ manual: true },
 	);
 
-	const { pageIndex, serviceLevel:serviceLevelFilter } = tableFilters;
+	const { pageIndex, serviceLevel:serviceLevelFilter, query:searchQuery } = tableFilters;
 
-	const getShipmentList = useCallback((serviceLevel) => {
+	const getShipmentList = useCallback(() => {
 		const { channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate: customStartDate, endDate: customEndDate } = customDate || {};
+		const { sortBy, sortType } = sort;
 
 		const params = {
 			statsType,
@@ -43,12 +48,15 @@ const useGetShipmentList = ({
 			currency      : DEFAULT_CURRENCY,
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
-			serviceLevel  : serviceLevel || serviceLevelFilter || activeBar || 'OVERALL',
+			serviceLevel  : serviceLevelFilter || activeBar || undefined,
 			parentService : segment,
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
 			pageIndex,
+			query         : query || undefined,
+			sortBy        : sortBy ? `${sortBy}${taxType}` : undefined,
+			sortType      : sortType || undefined,
 		};
 
 		// no api call if no custom date & range selected
@@ -64,11 +72,15 @@ const useGetShipmentList = ({
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
 		filter, customDate, pageIndex, activeBar, serviceLevelFilter,
-		DEFAULT_CURRENCY]);
+		DEFAULT_CURRENCY, query, sort, taxType]);
 
 	useEffect(() => {
 		getShipmentList();
 	}, [getShipmentList]);
+
+	useEffect(() => {
+		debounceQuery(searchQuery);
+	}, [debounceQuery, searchQuery]);
 
 	return {
 		serviceLevelData,

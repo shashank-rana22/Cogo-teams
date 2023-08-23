@@ -693,6 +693,19 @@ function asyncListRoles() {
 		},
 	};
 }
+function asyncListDepartment() {
+	return {
+		labelKey    : 'department_name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_departments',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
 
 function asyncListPromotions() {
 	return {
@@ -794,6 +807,17 @@ function asyncListShipmentServices() {
 		initialCall : true,
 		params      : {
 			page_limit: 10,
+		},
+	};
+}
+function asyncFieldsLocationsMapping() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_locations_mapping',
+		initialCall : true,
+		params      : {
+			page_limit: 20,
 		},
 	};
 }
@@ -905,6 +929,7 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncListDepartment,
 	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
@@ -917,4 +942,5 @@ export {
 	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
 	asyncListResources,
+	asyncFieldsLocationsMapping,
 };

@@ -120,7 +120,7 @@ function Read({
 
 						<div className={styles['section_one_child_2-goods_delivery_contact']}>
 							<p>For delivery of goods please apply to:</p>
-							<p>{defaultValues?.goods_delivery_contact || ''}</p>
+							<p className={styles.value_text}>{defaultValues?.goods_delivery_contact || ''}</p>
 						</div>
 					</div>
 				</div>
@@ -161,7 +161,7 @@ function Read({
 						<div className={styles['section_four_child_1-particular']}>
 							<span className={styles.section_four_text}>
 								Other Particulars (if any)
-								<p>{defaultValues?.other_particulars || ''}</p>
+								<p className={styles.value_text}>{defaultValues?.other_particulars || ''}</p>
 							</span>
 							<span className={styles.section_four_text}>
 								(TERMS CONTINUED ON BACK HEREOF)

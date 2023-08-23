@@ -11,7 +11,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
-		endpoint            : '/cogolens/send_mail',
+		endpoint            : '/send_mail',
 		body                : payload,
 		send_to_omnichannel : !!userMails?.includes(payload?.sender),
 		sender_user_id      : userId,
@@ -21,6 +21,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 	service        : 'user',
 	service_id     : userId,
 	sender         : payload?.sender,
+	source         : 'CogoOne:AdminPlatform',
 });
 
 const API_MAPPING = {

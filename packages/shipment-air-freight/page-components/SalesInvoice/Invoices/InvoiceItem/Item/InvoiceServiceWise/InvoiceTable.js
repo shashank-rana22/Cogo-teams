@@ -2,7 +2,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
-export const InvoiceTable = (serviceItem = {}) => {
+export const invoiceTable = (serviceItem = {}) => {
 	const serviceName = getServiceNameforTableColumn(
 		serviceItem?.service_type,
 		serviceItem?.trade_type,
@@ -84,7 +84,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || '-'}%)`,
+			})} (${item?.tax_percent || '0'}%)`,
 			span: 1,
 		},
 		{

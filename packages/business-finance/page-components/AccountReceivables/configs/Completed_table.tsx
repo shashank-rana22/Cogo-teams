@@ -7,7 +7,7 @@ import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
 import RenderIRNGenerated from '../commons/RenderIRNGenerated';
 import RibbonRender from '../commons/RibbonRender';
-import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
+import { getDocumentInfo } from '../Utils/getDocumentNumber';
 import getStatus from '../Utils/getStatus';
 
 import CheckboxItem from './CheckboxItem';
@@ -132,25 +132,31 @@ const completedColumn = ({
 	},
 	{
 		Header   : 'Invoice Number',
-		accessor : (row) => (
-			(
+		accessor : (row) => {
+			const {
+				invoice_number:invoiceNumber = '',
+				invoice_pdf: invoicePdf = '',
+				invoice_type: invoiceType = '',
+			} = getDocumentInfo({ itemData: row });
+
+			return (
 				<div className={styles.fieldPair}>
-					{(getDocumentNumber({ itemData: row }) as string)?.length > 10 ? (
+					{(invoiceNumber)?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"
 							content={(
 								<div className={styles.tool_tip}>
-									{getDocumentNumber({ itemData: row }) as string}
+									{invoiceNumber}
 								</div>
 							)}
 						>
 							<text
 								className={styles.link}
-								onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+								onClick={() => window.open(invoicePdf, '_blank')}
 								role="presentation"
 							>
-								{`${(getDocumentNumber({ itemData: row }) as string).substring(
+								{`${(invoiceNumber).substring(
 									0,
 									10,
 								)}...`}
@@ -160,22 +166,20 @@ const completedColumn = ({
 						: (
 							<div
 								className={styles.link}
-								onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+								onClick={() => window.open(invoicePdf, '_blank')}
 								role="presentation"
 							>
-								{getDocumentNumber({ itemData: row }) as string}
+								{invoiceNumber}
 							</div>
 						)}
 					<div>
-						<Pill size="sm" color={INVOICE_TYPE[(getByKey(row, 'invoiceType') as string)]}>
-
-							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
-
+						<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
+							{invoiceType}
 						</Pill>
 					</div>
 				</div>
-			)
-		),
+			);
+		},
 		id: 'invoice_number',
 
 	},
@@ -378,7 +382,7 @@ const completedColumn = ({
 											? 'E INVOICE GENERATED'
 											: startCase(getStatus({
 												entityCode,
-												invoiceStatus: getByKey(row, 'invoiceStatus'),
+												invoiceStatus: row?.invoiceStatus,
 											}))}
 
 									</div>
@@ -392,7 +396,7 @@ const completedColumn = ({
 										)}...`
 										: `${startCase(getStatus({
 											entityCode,
-											invoiceStatus: getByKey(row, 'invoiceStatus'),
+											invoiceStatus: row?.invoiceStatus,
 										})).substring(
 											0,
 											10,
@@ -405,7 +409,7 @@ const completedColumn = ({
 								<div className={styles.style_text}>
 									{startCase(getStatus({
 										entityCode,
-										invoiceStatus: getByKey(row, 'invoiceStatus'),
+										invoiceStatus: row?.invoiceStatus,
 									}))}
 								</div>
 							)}
@@ -456,6 +460,7 @@ const completedColumn = ({
 				<Remarks itemData={row} />
 				<InvoiceDetails
 					item={row}
+					entityCode={entityCode}
 				/>
 				<RenderIRNGenerated
 					itemData={row}
