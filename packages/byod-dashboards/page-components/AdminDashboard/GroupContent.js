@@ -3,7 +3,6 @@ import React from 'react';
 
 import useGetEmployeeReimbursementGroup from '../../hooks/useGetEmployeeReimbursementGroup';
 
-import EmptyState from './EmptyState';
 import getGroupColumns from './getGroupColumns';
 import StyledTable from './StyledTable';
 import styles from './styles.module.css';
@@ -18,10 +17,7 @@ function GroupContent({ addon_details, device_details, id }) {
 
 			<div className={styles.body_container}>
 				<div className={styles.table_container}>
-					{!isEmpty(mappings) ? (
-						<StyledTable data={mappings} columns={groupColumns} loading={loading} />
-					) : <EmptyState emptyText="No Departments Data Found" />}
-
+					<StyledTable data={mappings} columns={groupColumns} loading={loading} />
 				</div>
 				{(isEmpty(addon_details) && isEmpty(device_details)) ? null : (
 					<div className={styles.display_content}>

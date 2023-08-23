@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
+import { isEmpty } from '@cogoport/utils';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
@@ -6,7 +6,7 @@ function Certification({
 	stampData = '',
 	billing_address = {},
 	tradeParty = {},
-	importerExporterId = '',
+	customData = {},
 }) {
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
@@ -25,11 +25,19 @@ function Certification({
 	const [bankDetailObj] = bankDetailsArray || [];
 
 	const {
+		business_name = '',
+		payment_email = '',
+		branch_city = '',
+		bank_details = {},
+		is_required_for_fortigo = true,
+	} = billing_address || {};
+
+	const {
 		bank_name = '',
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = bank_details || {};
 	return (
 		<>
 			<div style={{ width: '99%', padding: '0px 8px', borderTop: '0' }}>
@@ -61,50 +69,60 @@ function Certification({
 					<tr>
 						<td style={{ width: '70%' }}>
 							<div style={{ fontSize: '20px' }}>Terms & Conditions:</div>
-							<ol style={{ paddingLeft: '16px' }}>
-								<li style={{ padding: '5px 0px' }}> Payment Terms : Net 30 days.</li>
-								<li style={{ padding: '5px 0px' }}>
-									All Payments should be to the account of
-									&nbsp;
-									{billing_address?.business_name || '4Tigo'}
-									. Bank account
-									details:
-									<p>
-										<b>Bank Name: </b>
-										{bankDetailObj?.data?.bank_name || bank_name}
-									</p>
-									<p>
-										<b>Bank Branch: </b>
-										{bankDetailObj?.data?.branch_name || bank_branch}
-									</p>
-									<p>
-										<b>IFSC Code: </b>
-										{bankDetailObj?.data?.ifsc_code || ifsc_code}
-									</p>
-									<p>
-										<b>Account No.: </b>
-										{bankDetailObj?.data?.bank_account_number || account_number}
-									</p>
-								</li>
-								<li style={{ padding: '5px 0px' }}>
-									Delayed payment penalty: 2% per month or part therof from the
-									date of invoice.
-								</li>
-								<li style={{ padding: '5px 0px' }}>
-									Any part payment made against this invoice shall be treated as
-									on Account, unless the amount of invoice is paid in full
-								</li>
-								<li style={{ padding: '5px 0px' }}>
-									Payment advice should be mailed to
-									&nbsp;
-									<b>collection@4tigo.com</b>
-									.
-								</li>
-								<li style={{ padding: '5px 0px' }}>
-									Disputes, if any shall be subject to jurisdiction of Courts at
-									Bangalore.
-								</li>
-							</ol>
+							{(is_required_for_fortigo || isEmpty(customData?.terms_and_conditions)) ? (
+								<ol style={{ paddingLeft: '16px' }}>
+									<li style={{ padding: '5px 0px' }}> Payment Terms : Net 30 days.</li>
+									<li style={{ padding: '5px 0px' }}>
+										All Payments should be to the account of
+										{' '}
+										{business_name || '4Tigo'}
+										. Bank account
+										details:
+										<p>
+											<b>Bank Name: </b>
+											{bankDetailObj?.data?.bank_name || bank_name}
+										</p>
+										<p>
+											<b>Bank Branch: </b>
+											{bankDetailObj?.data?.branch_name || bank_branch}
+										</p>
+										<p>
+											<b>IFSC Code: </b>
+											{bankDetailObj?.data?.ifsc_code || ifsc_code}
+										</p>
+										<p>
+											<b>Account No.: </b>
+											{bankDetailObj?.data?.bank_account_number || account_number}
+										</p>
+									</li>
+									<li style={{ padding: '5px 0px' }}>
+										Delayed payment penalty: 2% per month or part therof from the
+										date of invoice.
+									</li>
+									<li style={{ padding: '5px 0px' }}>
+										Any part payment made against this invoice shall be treated as
+										on Account, unless the amount of invoice is paid in full
+									</li>
+									<li style={{ padding: '5px 0px' }}>
+										Payment advice should be mailed to
+										{' '}
+										<b>{payment_email}</b>
+										.
+									</li>
+									<li style={{ padding: '5px 0px' }}>
+										Disputes, if any shall be subject to jurisdiction of Courts at
+										{' '}
+										{branch_city}
+										.
+									</li>
+								</ol>
+							) : (
+								<div
+									dangerouslySetInnerHTML={{
+										__html: customData?.terms_and_conditions,
+									}}
+								/>
+							)}
 						</td>
 						<td
 							style={{ width: '30%', textAlign: 'center', verticalAlign: 'top' }}
@@ -112,7 +130,8 @@ function Certification({
 							<h3>
 								<b>
 									for
-									{billing_address?.business_name}
+									{' '}
+									{business_name}
 								</b>
 							</h3>
 							<img
@@ -123,16 +142,18 @@ function Certification({
 							<h3>Authorised Signatory</h3>
 						</td>
 					</tr>
-					<tr>
-						<td colSpan="2">
-							<h2 style={{ textAlign: 'center', margin: '0px 0px' }}>
-								<b>
-									Our Company is registered as a Small Enterprise under the MSME
-									Act 2006 with registration number: KR03E0088395
-								</b>
-							</h2>
-						</td>
-					</tr>
+					{is_required_for_fortigo ? (
+						<tr>
+							<td colSpan="2" className="noBorder">
+								<h2 style={{ textAlign: 'center', margin: '0px' }}>
+									<b>
+										Our Company is registered as a Small Enterprise under the
+										MSME Act 2006 with registration number: KR03E0088395
+									</b>
+								</h2>
+							</td>
+						</tr>
+					) : null}
 				</table>
 			</div>
 		</>

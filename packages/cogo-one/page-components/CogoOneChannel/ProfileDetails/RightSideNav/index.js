@@ -25,7 +25,7 @@ function RightSideNav({
 	quotationEmailSentAt = '',
 	orgId = '',
 	viewType = '',
-	userData = {},
+	formattedMessageData = {},
 }) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
@@ -128,7 +128,7 @@ function RightSideNav({
 					setSearchSpotmodal={setSearchSpotmodal}
 					openNewTab={openNewTab}
 					loading={loading}
-					userData={userData}
+					formattedMessageData={formattedMessageData}
 				/>
 			) : null}
 		</>
