@@ -57,7 +57,7 @@ export const usePieChartConfigs = (type, data) => {
 	const pieChartData = Object.entries(data).flatMap((obj) => {
 		const objKey = obj[GLOBAL_CONSTANTS.zeroth_index];
 		const objLabel = snakeCaseToTitleCase(objKey);
-		if (objKey === 'total_rates') return [];
+		if (objKey === 'total_rate_count') return [];
 		return {
 			key          : objKey,
 			id           : objLabel,

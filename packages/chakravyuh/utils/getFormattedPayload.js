@@ -1,9 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
 
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
-	'is_origin_icd', 'is_destination_icd', 'parent_mode', 'startDate', 'endDate', 'page'];
+	'is_origin_icd', 'is_destination_icd', 'startDate', 'endDate', 'page'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const keysToExclude = [...EXCLUDE_KEYS, ...excludeKeys];
@@ -14,6 +15,7 @@ const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 
 	filters.start_date = startDate ? startDate.toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index] : undefined;
 	filters.end_date = endDate ? endDate.toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index] : undefined;
+	filters.commodity = !isEmpty(filters?.commodity) ? filters.commodity : undefined;
 
 	LOCATION_KEYS.forEach((key) => {
 		if (!excludeKeys.includes(key) && globalFilters[key]) {
