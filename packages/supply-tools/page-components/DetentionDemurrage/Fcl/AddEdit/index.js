@@ -8,8 +8,9 @@ function AddEdit() {
 	const formRef = useRef(null);
 
 	const onSubmit = () => {
-		console.log(formRef.current.formSubmit());
+		// console.log(formRef.current.formSubmit());
 	};
+
 	return (
 		<div>
 			<Button onClick={() => setShowModal(true)}>ADD + </Button>

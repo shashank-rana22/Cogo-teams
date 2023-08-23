@@ -20,13 +20,9 @@ function Form({ item = {} }, ref) {
 		defaultValues: DEFAULT_VALUES,
 	});
 
-	const onSubmit = (values) => {
-		console.log({ values });
-	};
+	const onSubmit = (values) => values;
 
-	const onError = (err) => {
-		console.log({ err });
-	};
+	const onError = (err) => err;
 
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
