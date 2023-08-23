@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-key */
 import { Button } from '@cogoport/components';
-import { IcMArrowUp, IcMPlus, IcMCross, IcMTick, IcMWasteScrap, IcMEdit, IcMArrowDown }
+import {
+	IcMArrowUp, IcMLocation, IcMCross, IcMTick, IcMArrowDown, IcMCalendar,
+}
 	from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -12,7 +14,7 @@ function LeaveCard({ isManager, data }) {
 	const [accordion, setAccordion] = useState(false);
 	return (
 		<>
-			<div className={styles.leave_req_reading} onClick={() => setAccordion(!accordion)}>
+			<div className={styles.card_container} onClick={() => setAccordion(!accordion)}>
 				<div>
 					<div className={styles.heading_sp1}>{request_type}</div>
 					<div className={styles.heading_sp2}>
@@ -21,20 +23,34 @@ function LeaveCard({ isManager, data }) {
 						Pending
 					</div>
 				</div>
-				<div>{accordion ? <IcMArrowUp width={16} height={16} /> : <IcMArrowDown width={16} height={16} />}</div>
+				<div className={styles.yes_no}>
+					<Button size="md" themeType="link">Approve All</Button>
+					{accordion ? <IcMArrowUp width={16} height={16} /> : <IcMArrowDown width={16} height={16} />}
+				</div>
 			</div>
 			{accordion && (
-				<div>
+				<div className={styles.parent_div}>
 					{leaveData.map((val) => (
 						<div className={styles.parent_div}>
 							<div className={styles.details}>
 								<div className={styles.design}>
-									<div className={styles.img}><IcMPlus width={18} height={18} /></div>
+									<div className={styles.img}>
+										{request_type !== 'Leave Request'
+											? <IcMLocation width={18} height={18} />
+											: <IcMCalendar width={18} height={18} />}
+
+									</div>
 									<div className={styles.sec2}>
 										<div className={styles.text1}>
-											{val.leaveType}
+											<span className={styles.text_name}>{val.name}</span>
+
 											{' '}
-											Leave (2 Days)
+
+											requested Geolocation Access
+											for 2 Days, from August 21, 2023 - August 22, 2023
+
+											{' '}
+
 										</div>
 										<div className={styles.text2}>
 											{val.startDate}
@@ -44,61 +60,66 @@ function LeaveCard({ isManager, data }) {
 											{val.endDate}
 										</div>
 										<div className={styles.leave_details}>
-											<div className={styles.name}>
+											<span className={styles.name}>
 												{val.name}
-											</div>
-											<div className={styles.name}>
+											</span>
+											<span className={styles.dot}>
 												.
-											</div>
+											</span>
 											<div className={styles.name}>
-												August 16, 2023
+												{val.leaveType}
 											</div>
 
 										</div>
 
 									</div>
 								</div>
+								{isManager ?	(
+									<div className={styles.yes_no}>
+										<div className={styles.deny}>
+											<Button size="md" themeType="secondary">
+												<div className={styles.reject}>
 
-								<div className={styles.pending}>
-									<span className={styles.dot}>.</span>
-									<span>Pending</span>
+													<IcMCross width={16} height={22} fill="#BF291E" />
+													<span className={styles.rej_content}>Reject</span>
 
-								</div>
+												</div>
+
+											</Button>
+										</div>
+										<div className={styles.approve}>
+											<Button size="md" themeType="secondary">
+
+												<div className={styles.accept}>
+
+													<IcMTick width={25} height={22} fill="#849E4C" />
+													<span className={styles.acc_content}>Approve</span>
+
+												</div>
+
+											</Button>
+										</div>
+									</div>
+								) : (
+								// <div className={styles.edit_del}>
+								// 	<IcMWasteScrap />
+
+								// 	<Button size="md" themeType="secondary" className={styles.del}>
+								// 		<IcMEdit className={styles.edit_icon} />
+								// 		<span className={styles.edit_text}>Edit</span>
+
+								// 	</Button>
+								// </div>
+
+									<div className={` ${styles[val.leaveStatus === 'pending'
+										? 'pending' : 'accepted']}`}
+									>
+										{val.leaveStatus }
+									</div>
+
+								) }
 							</div>
 
-							{isManager ?	(
-								<div className={styles.yes_no}>
-									<Button size="md" themeType="secondary">
-										<div className={styles.reject}>
-
-											<IcMCross width={16} height={22} />
-											<span className={styles.rej_content}>Reject</span>
-
-										</div>
-
-									</Button>
-									<Button size="md" themeType="primary">
-
-										<div className={styles.accept}>
-
-											<IcMTick width={25} height={22} />
-											<span className={styles.acc_content}>Approve</span>
-
-										</div>
-
-									</Button>
-								</div>
-							) : (
-								<div className={styles.edit_del}>
-									<IcMWasteScrap />
-
-									<Button size="md" themeType="secondary" className={styles.del}>
-										<IcMEdit className={styles.edit_icon} />
-										<span className={styles.edit_text}>Edit</span>
-
-									</Button>
-								</div>
-							) }
 						</div>
 					))}
 				</div>

@@ -1,0 +1,153 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	align-items: flex-start;
+	padding: 16px 12px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	align-self: stretch;
+	justify-content: space-between;
+}
+
+.left_header {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.card_content {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.btn_text {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 130%;
+	color: #221f20;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: flex-start;
+	align-self: stretch;
+	width: 100%;
+}
+
+.num_people {
+	display: flex;
+	flex-grow: 1;
+	gap: 4px;
+	align-items: center;
+}
+
+.team_heading {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #4f4f4f;
+	text-align: center;
+}
+
+.left_card {
+	display: flex;
+	flex: 1 0 0;
+	flex-direction: column;
+	gap: 6px;
+	align-items: flex-start;
+}
+
+.above_text {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #4f4f4f;
+	text-align: center;
+}
+
+.below_text {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.card_container {
+	display: flex;
+	align-items: center;
+	align-self: stretch;
+	justify-content: space-between;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 10px;
+}
+
+.active {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 4px 8px;
+	margin-right: 10px;
+	color: #849e4c;
+	background-color: #f7faef;
+	border-radius: 100px;
+}
+
+.g_dot {
+	width: 6px;
+	height: 6px;
+	background: #849e4c;
+	border-radius: 50%;
+}
+
+.rdot {
+	width: 6px;
+	height: 6px;
+	background: red;
+	border-radius: 50%;
+}
+
+.inactive {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 4px 8px;
+	margin-right: 10px;
+	color: red;
+	background-color: #fdebe9;
+	border-radius: 100px;
+}
+
+.cohort {
+	display: flex;
+}
+
+.branches_container {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	align-self: stretch;
+}
+
+.location {
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
+	text-align: center;
+}

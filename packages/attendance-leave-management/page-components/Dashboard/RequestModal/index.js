@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-key */
-/* eslint-disable max-lines-per-function */
 import { Tabs, TabPanel } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -19,7 +18,7 @@ const data = {
 					leaveType   : 'V sick',
 					startDate   : '4 july',
 					endDate     : '8 Aug',
-					name        : 'yash',
+					name        : 'Barath',
 					appliedDate : '16 Aug',
 					leaveStatus : 'pending',
 				},
@@ -29,7 +28,7 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'hritik',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Approved',
 				},
 				{
 					leaveType   : 'Sick',
@@ -37,7 +36,7 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'yash',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Approved',
 				},
 			],
 		},

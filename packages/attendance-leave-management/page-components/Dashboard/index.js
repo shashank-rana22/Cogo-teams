@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -8,7 +9,9 @@ import LeavesManagement from '../LeavesManagement';
 import Policies from '../Policies';
 import TeamAttendance from '../TeamAttendance';
 
-import RequestModal from './RequestModal';
+import LeaveRequest from './LeaveRequest';
+
+// import RequestModal from './RequestModal';
 import styles from './styles.module.css';
 
 function AttendanceLeaveDashboard() {
@@ -26,10 +29,7 @@ function AttendanceLeaveDashboard() {
 	console.log('coords', coords);
 
 	const MANAGER = true;
-
-	const onClose = () => {
-		setShow(false);
-	};
+	console.log(show);
 
 	return (
 		<div>
@@ -42,7 +42,7 @@ function AttendanceLeaveDashboard() {
 						size="md"
 						themeType="primary"
 						className={styles.request_btn}
-						onClick={() => { setShow(true); }}
+						onClick={() => setShow(true)}
 					>
 						My Requests
 						<IcMLiveChat />
@@ -53,7 +53,7 @@ function AttendanceLeaveDashboard() {
 						size="md"
 						themeType="primary"
 						className={styles.request_btn}
-						onClick={() => { setShow(true); }}
+						onClick={() => setShow(true)}
 					>
 						My Inbox
 						<IcMLiveChat />
@@ -62,10 +62,9 @@ function AttendanceLeaveDashboard() {
 				)}
 
 			</div>
-
-			<div className={`${styles.modal_container} ${styles[show ? 'show' : 'hide']}`}>
+			{/* <div className={`${styles.modal_container} ${styles[show ? 'show' : 'hide']}`}>
 				{show && <RequestModal show={show} onClose={onClose} />}
-			</div>
+			</div> */}
 
 			<div className={styles.tab_container}>
 				<Tabs
@@ -98,6 +97,7 @@ function AttendanceLeaveDashboard() {
 					</TabPanel>
 				</Tabs>
 			</div>
+			<div><LeaveRequest /></div>
 		</div>
 	);
 }
