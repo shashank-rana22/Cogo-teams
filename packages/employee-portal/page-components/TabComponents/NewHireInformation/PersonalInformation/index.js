@@ -92,7 +92,7 @@ const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING
 	</div>
 ));
 
-function PersonalInformation({ data: content, getEmployeeDetails }) {
+function PersonalInformation({ data: content = {}, getEmployeeDetails = () => {} }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const controlsvalue = controls({ content });
