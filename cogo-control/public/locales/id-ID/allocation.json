@@ -192,5 +192,22 @@
     "request_deactivated_successfully": "Permintaan berhasil dinonaktifkan.",
     "other_status": "Lainnya",
     "organization_name": "Nama Organisasi:",
-    "nill_value": "Kosong"
+    "nill_value": "Kosong",
+    "data_organization_name": "Nama Organisasi Data:",
+    "tab_points_of_contacts_label": "Titik Kontak",
+    "tab_address_label": "Alamat",
+    "full_address": "Alamat Lengkap",
+    "workscopes": "Lingkup Pekerjaan",
+    "card_header_poc_label": "POC",
+    "card_header_address_label": "Alamat",
+    "user_name_label": "Titik Kontak (Nama Pengguna)",
+    "user_email_label": "Email",
+    "user_mobile_number_label": "Nomor Ponsel",
+    "user_alternate_mobile_number_label": "Nomor Ponsel Alternatif",
+    "user_whatsapp_number_label": "Nomor Whatsapp",
+    "address_city_label": "Kota",
+    "address_state_label": "Provinsi",
+    "address_country_label": "Negara",
+    "address_pincode_label": "Kode Pos",
+    "address_tax_number_label": "GSTIN"
 }

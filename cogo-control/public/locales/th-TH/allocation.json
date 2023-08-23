@@ -192,5 +192,22 @@
     "request_deactivated_successfully": "คำขอถูกปิดใช้งานเรียบร้อยแล้ว",
     "other_status": "อื่นๆ",
     "organization_name": "ชื่อองค์กร:",
-    "nill_value": "ค่าว่าง"
+    "nill_value": "ค่าว่าง",
+    "data_organization_name": "ชื่อองค์กรข้อมูล:",
+    "tab_points_of_contacts_label": "ผู้ติดต่อ",
+    "tab_address_label": "ที่อยู่",
+    "full_address": "ที่อยู่เต็ม",
+    "workscopes": "ขอบเขตงาน",
+    "card_header_poc_label": "ผู้ติดต่อ",
+    "card_header_address_label": "ที่อยู่",
+    "user_name_label": "ผู้ติดต่อหลัก (ชื่อผู้ใช้)",
+    "user_email_label": "อีเมล",
+    "user_mobile_number_label": "หมายเลขโทรศัพท์มือถือ",
+    "user_alternate_mobile_number_label": "หมายเลขโทรศัพท์มือถือสำรอง",
+    "user_whatsapp_number_label": "หมายเลข Whatsapp",
+    "address_city_label": "เมือง",
+    "address_state_label": "รัฐ",
+    "address_country_label": "ประเทศ",
+    "address_pincode_label": "รหัสไปรษณีย์",
+    "address_tax_number_label": "GSTIN"
 }

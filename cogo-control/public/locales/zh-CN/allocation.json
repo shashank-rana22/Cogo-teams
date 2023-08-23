@@ -192,5 +192,22 @@
     "request_deactivated_successfully": "请求已成功停用。",
     "other_status": "其他",
     "organization_name": "组织名称：",
-    "nill_value": "无"
+    "nill_value": "无",
+    "data_organization_name": "数据组织名称:",
+    "tab_points_of_contacts_label": "联系人",
+    "tab_address_label": "地址",
+    "full_address": "完整地址",
+    "workscopes": "工作范围",
+    "card_header_poc_label": "联系人",
+    "card_header_address_label": "地址",
+    "user_name_label": "联系人（用户名）",
+    "user_email_label": "电子邮件",
+    "user_mobile_number_label": "手机号码",
+    "user_alternate_mobile_number_label": "备用手机号码",
+    "user_whatsapp_number_label": "WhatsApp号码",
+    "address_city_label": "城市",
+    "address_state_label": "省/州",
+    "address_country_label": "国家",
+    "address_pincode_label": "邮政编码",
+    "address_tax_number_label": "GSTIN"
 }

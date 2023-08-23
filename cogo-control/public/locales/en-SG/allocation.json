@@ -192,5 +192,22 @@
     "request_deactivated_successfully": "Request has been deactivated successfully.",
     "other_status": "Other",
     "organization_name": "Organization Name:",
-    "nill_value": "Nil"
+    "nill_value": "Nil",
+    "data_organization_name": "Data Organization Name:",
+    "tab_points_of_contacts_label": "Point of Contacts",
+    "tab_address_label": "Address",
+    "full_address": "Full Address",
+    "workscopes": "Workscopes",
+    "card_header_poc_label": "POC",
+    "card_header_address_label": "Address",
+    "user_name_label": "Point Of Contact (User Name)",
+    "user_email_label": "Email",
+    "user_mobile_number_label": "Mobile Number",
+    "user_alternate_mobile_number_label": "Alternate Mobile Number",
+    "user_whatsapp_number_label": "Whatsapp Number",
+    "address_city_label": "City",
+    "address_state_label": "State",
+    "address_country_label": "Country",
+    "address_pincode_label": "Pincode",
+    "address_tax_number_label": "GSTIN"
 }

@@ -192,5 +192,22 @@
     "request_deactivated_successfully": "Yêu cầu đã được vô hiệu hóa thành công.",
     "other_status": "Khác",
     "organization_name": "Tên Tổ chức:",
-    "nill_value": "Trống"
+    "nill_value": "Trống",
+    "data_organization_name": "Tên Tổ chức Dữ liệu:",
+    "tab_points_of_contacts_label": "Điểm Liên Hệ",
+    "tab_address_label": "Địa chỉ",
+    "full_address": "Địa chỉ đầy đủ",
+    "workscopes": "Phạm vi công việc",
+    "card_header_poc_label": "Liên hệ",
+    "card_header_address_label": "Địa chỉ",
+    "user_name_label": "Người Liên Hệ (Tên Người Dùng)",
+    "user_email_label": "Email",
+    "user_mobile_number_label": "Số Di động",
+    "user_alternate_mobile_number_label": "Số Di động Khác",
+    "user_whatsapp_number_label": "Số Whatsapp",
+    "address_city_label": "Thành phố",
+    "address_state_label": "Tiểu bang",
+    "address_country_label": "Quốc gia",
+    "address_pincode_label": "Mã bưu chính",
+    "address_tax_number_label": "Mã số thuế (GSTIN)"
 }
