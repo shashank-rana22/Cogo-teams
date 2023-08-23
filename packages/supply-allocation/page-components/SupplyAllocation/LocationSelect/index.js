@@ -1,18 +1,26 @@
-import { Button } from '@cogoport/components';
+import { Button, Select } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import ListLocations from '../../../commons/RenderLabels/ListLocations';
-import StyledSelect from '../../../commons/StyledSelect';
 
 import styles from './styles.module.css';
 
-const OBJECT_OPTIONS = {
-	all                : 'All Regions',
-	is_bookmarked      : 'BookMarked',
-	attention_required : 'Attention Required',
-};
+const OPTIONS = [
+	{
+		label : 'All Regions',
+		value : 'all',
+	},
+	{
+		label : 'BookMarked',
+		value : 'is_bookmarked',
+	},
+	{
+		label : 'Attention Required',
+		value : 'attention_required',
+	},
+];
 
 const DEFAULT_PAGE = 1;
 
@@ -104,44 +112,35 @@ function LocationSelect({
 				/>
 			</div>
 
-			<div
-				style={{
-					width      : 150,
-					display    : 'flex',
-					alignItems : 'flex-end',
-					marginTop  : '36px',
-				}}
-			>
-				<StyledSelect
-					defaultValue={region}
-					onChange={({ selectedValue }) => {
-						setRegion(selectedValue);
-						setFilters((prev) => {
-							const filterValues = {
-								is_bookmarked: {
-									is_bookmarked         : true,
-									is_attention_required : undefined,
-								},
-								attention_required: {
-									is_bookmarked         : undefined,
-									is_attention_required : true,
-								},
-								all: {
-									is_bookmarked         : undefined,
-									is_attention_required : undefined,
-								},
-							};
+			<Select
+				size="md"
+				options={OPTIONS}
+				value={region}
+				onChange={(selectedValue) => {
+					setRegion(selectedValue);
+					setFilters((prev) => {
+						const filterValues = {
+							is_bookmarked: {
+								is_bookmarked         : true,
+								is_attention_required : undefined,
+							},
+							attention_required: {
+								is_bookmarked         : undefined,
+								is_attention_required : true,
+							},
+							all: {
+								is_bookmarked         : undefined,
+								is_attention_required : undefined,
+							},
+						};
 
-							return {
-								...prev,
-								...(filterValues[selectedValue] || {}),
-							};
-						});
-					}}
-					size="sm"
-					options={OBJECT_OPTIONS}
-				/>
-			</div>
+						return {
+							...prev,
+							...(filterValues[selectedValue] || {}),
+						};
+					});
+				}}
+			/>
 
 			<div className={styles.port_arrow_icon}>
 				<Button
@@ -149,6 +148,7 @@ function LocationSelect({
 					themeType="accent"
 					disabled={listLoading}
 					loading={createSearchLoadng}
+					size="lg"
 				>
 					+ Allocation
 				</Button>

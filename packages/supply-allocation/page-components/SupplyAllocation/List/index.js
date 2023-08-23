@@ -87,22 +87,25 @@ function List({
 		{
 			id       : 'origin',
 			Header   : 'ORIGIN',
-			accessor : ({ origin_location }) => (
+			accessor : ({ origin_location, is_attention_required }) => (
 				<div className={styles.origin_container}>
-					<Tooltip
-						content={(
-							<div style={{ wordBreak: 'break-word' }}>
-								Reallocation required due to a change in forecasted demand
-							</div>
-						)}
-						placement="right"
-					>
-						<div className={styles.relative_container}>
-							Attention Required!
-							{' '}
-							<IcMInfo height={8} width={8} style={{ marginLeft: '2px' }} />
-						</div>
-					</Tooltip>
+					{is_attention_required
+						? (
+							<Tooltip
+								content={(
+									<div style={{ wordBreak: 'break-word' }}>
+										Reallocation required due to a change in forecasted demand
+									</div>
+								)}
+								placement="right"
+							>
+								<div className={styles.relative_container}>
+									Attention Required!
+									{' '}
+									<IcMInfo height={8} width={8} style={{ marginLeft: '2px' }} />
+								</div>
+							</Tooltip>
+						) : null}
 
 					<Tooltip content={origin_location.display_name} placement="right">
 						<div
@@ -161,21 +164,17 @@ function List({
 					</span>
 				</div>
 			),
-			accessor: (item) => item?.profitability,
+			accessor: (item) => `${item?.profitability} %`,
 		},
 		{
 			id     : 'percent_fulfillment',
 			Header : (
 				<div>
 					% FULFILLMENT
-					<div style={{ fontSize: '10px', fontWeight: '400' }}>
-						{' '}
-						(ON BEST RATE)
-						{' '}
-					</div>
+					<div style={{ fontSize: '10px', fontWeight: '400' }} />
 				</div>
 			),
-			accessor: (item) => item?.fulfillment,
+			accessor: (item) => ` ${item?.fulfillment} %`,
 		},
 		{
 			id     : 'forecasted_volume',
@@ -192,10 +191,12 @@ function List({
 						}}
 					>
 						{ICON_MAPPING[forVolumeStage]}
+						{' '}
+
 					</span>
 				</div>
 			),
-			accessor: (item) => item?.forecasted_volume,
+			accessor: (item) => `${item?.forecasted_volume} TEU`,
 		},
 		{
 			id       : 'bookmark',

@@ -15,21 +15,30 @@ function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 				display       : 'flex',
 				flexDirection : 'column',
 				flexBasis     : '33%',
-				height        : '450px',
+				height        : '300px',
 				background    : '#fff',
 				padding       : '0',
 			}}
 		>
-			<div style={{ fontWeight: 600, paddingLeft: '20px' }}>{heading}</div>
+			<div style={{
+				fontWeight   : 600,
+				paddingLeft  : '16px',
+				paddingTop   : '16px',
+				marginBottom : '-20px',
+			}}
+			>
+				{heading}
+
+			</div>
 
 			<ResponsivePie
 				colors={colors}
 				data={data}
 				margin={{
 					top    : 0,
-					right  : 110,
-					bottom : 140,
-					left   : 110,
+					right  : 240,
+					bottom : 0,
+					left   : 20,
 				}}
 				innerRadius={0.8}
 				padAngle={0.7}
@@ -67,11 +76,11 @@ function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 			{count ? (
 				<div
 					style={{
-						marginLeft    : '-3px',
+						marginLeft    : '-220px',
 						display       : 'flex',
 						flexDirection : 'column',
 						alignItems    : 'center',
-						marginTop     : '-290px',
+						marginTop     : '-174px',
 					}}
 				>
 					<div className={styles.predicted}>Predicted</div>
@@ -84,11 +93,14 @@ function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 			) : null}
 			<div
 				style={{
-					marginTop      : '100px',
+					marginTop      : '-54px',
 					display        : 'flex',
 					flexWrap       : 'wrap',
 					alignItems     : 'center',
 					justifyContent : 'center',
+					flexDirection  : 'column',
+					marginLeft     : '229px',
+
 				}}
 			>
 				{legendsData.map((legend) => {

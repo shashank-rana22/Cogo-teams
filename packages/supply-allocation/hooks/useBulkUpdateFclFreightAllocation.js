@@ -19,7 +19,7 @@ const useBulkUpdateFclFreightAllocation = () => {
 
 	return {
 		data,
-		loading,
+		bulkUpdateLoading: loading,
 		bulkUpdateFclFreightAllocation,
 	};
 };

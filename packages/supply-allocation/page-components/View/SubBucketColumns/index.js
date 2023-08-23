@@ -14,7 +14,7 @@ const getSubBucketColumns = ({
 	const subBucketColumns = [
 		{
 			id       : 'service_provider',
-			Header   : 'SERVICE PROVIDER',
+			Header   : 'SERVICE PROVIDER', // font weight 700
 			accessor : (item) => (
 				<ServiceProvider
 					item={item}

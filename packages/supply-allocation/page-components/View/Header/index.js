@@ -72,7 +72,7 @@ function Header({ firstSearch, loading }) {
 				alignItems     : 'center',
 				background     : '#fff',
 				padding        : '10px',
-				marginBottom   : '10px',
+				marginBottom   : '20px',
 			}}
 		>
 			<IcMArrowBack
@@ -94,7 +94,7 @@ function Header({ firstSearch, loading }) {
 			</Tooltip>
 
 			<div>
-				<IcMPortArrow className="port_arrow_icon" width={30} height={30} />
+				<IcMPortArrow className="port_arrow_icon" width={20} height={20} />
 			</div>
 
 			<Tooltip
@@ -110,12 +110,24 @@ function Header({ firstSearch, loading }) {
 
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				<div className={styles.sub_heading}>Avg Profitability</div>
-				{!editMode ? <div className={styles.bold}>{profitability}</div> : '--'}
+				{!editMode ? (
+					<div className={styles.bold}>
+						{profitability}
+						{' '}
+						%
+					</div>
+				) : '--'}
 			</div>
 
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
-				<div className={styles.sub_heading}>% Fulfillment (On best rate)</div>
-				{!editMode ? <div className={styles.bold}>{fulfillment}</div> : '--'}
+				<div className={styles.sub_heading}>% Fulfillment </div>
+				{!editMode ? (
+					<div className={styles.bold}>
+						{fulfillment}
+						{' '}
+						%
+					</div>
+				) : '--'}
 			</div>
 
 			<div style={{ display: 'flex', flexDirection: 'column' }}>

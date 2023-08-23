@@ -75,7 +75,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 			key       : 'past_container_allocation',
 		},
 	];
-	const { bulkUpdateFclFreightAllocation } =		useBulkUpdateFclFreightAllocation();
+	const { bulkUpdateFclFreightAllocation, bulkUpdateLoading } = useBulkUpdateFclFreightAllocation();
 
 	const onClickSaveChanges = (values) => {
 		const modifiedValues = Object.entries(values).reduce(
@@ -126,6 +126,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 					<Button
 						onClick={handleSubmit(onClickSaveChanges)}
 						themeType="secondary"
+						loading={bulkUpdateLoading}
 					>
 						Save Changes
 					</Button>

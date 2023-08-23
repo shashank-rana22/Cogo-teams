@@ -22,6 +22,8 @@ function Promised({ item = {}, control, unregister }) {
 				}}
 			>
 				{allocated_containers}
+				{' '}
+				TEU
 				<IcMEdit onClick={() => setEditPromised(true)} />
 			</div>
 			<div>
