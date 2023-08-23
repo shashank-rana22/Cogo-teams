@@ -1,10 +1,12 @@
-import { customerToCin } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 
 function Header({
 	logoData = '',
 	billing_address = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_CIN = {} } = getFortigoDetails();
+
 	return (
 		<div style={{ border: '2px solid black', borderBottom: 'none' }}>
 			<table
@@ -37,16 +39,16 @@ function Header({
 					<td style={{ width: '25%', padding: '0 8px', verticalAlign: 'top' }}>
 						<p style={{ display: 'flex' }}>
 							<b>CIN : </b>
-							{customerToCin[importerExporterId] || ''}
+							{CUSTOMER_TO_CIN[importerExporterId] || ''}
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>PAN : </b>
-							&nbsp;
+							{' '}
 							{billing_address?.registration_number}
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>GST No: </b>
-							&nbsp;
+							{' '}
 							{billing_address?.tax_number}
 						</p>
 					</td>
