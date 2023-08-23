@@ -1567,7 +1567,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-marketing_cogo_store',
-					title         : 'CogoStore',
+					title         : t('common:marketing_cogo_store'),
 					href          : '/marketing/cogo-store/[active_tab]',
 					as            : '/marketing/cogo-store/manage',
 					type          : 'link',
@@ -1898,7 +1898,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		advance_booking_manager: {
 			key           : 'advance_booking_manager',
-			title         : 'Advance Booking Manager',
+			title         : t('common:advance_booking_manager'),
 			href          : '/v2/advance-booking-manager',
 			as            : '/v2/advance-booking-manager',
 			main_apis     : [],
@@ -2490,7 +2490,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'chakravyuh-accuracy',
-					title         : 'Pricing Accuracy Dashboard',
+					title         : t('common:feedback_accuracy'),
 					href          : '/v2/chakravyuh/accuracy-dashboard',
 					as            : '/v2/chakravyuh/accuracy-dashboard',
 					possible_apis : apis.pricing_accuracy_dashboard,
@@ -2499,14 +2499,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		byod_dashboard: {
 			key         : 'byod_dashboard',
-			title       : 'BYOD',
+			title       : t('common:byod'),
 			isSubNavs   : true,
 			icon        : IcMDashboard,
 			module_type : 'dashboards',
 			options     : [
 				{
 					key           : 'byod_dashboard-employee',
-					title         : 'Employee BYOD Form',
+					title         : t('common:employee_byod_form'),
 					href          : '/v2/byod/employee-dashboard',
 					as            : '/v2/byod/employee-dashboard',
 					type          : 'link',
@@ -2515,7 +2515,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'byod_dashboard-employee_list',
-					title         : 'Employee List',
+					title         : t('common:employee_byod_list'),
 					href          : '/v2/byod/employee',
 					as            : '/v2/byod/employee',
 					type          : 'link',
@@ -2524,7 +2524,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'byod_dashboard-admin_dashboard',
-					title         : 'BYOD Admin Dashboard',
+					title         : t('common:employee_byod_admin_dashboard'),
 					href          : '/v2/byod/admin-dashboard',
 					as            : '/v2/byod/admin-dashboard',
 					type          : 'link',
