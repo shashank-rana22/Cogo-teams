@@ -1,6 +1,7 @@
 import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -13,9 +14,11 @@ const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: true });
 const FAQ_BUBBLE_EXCLUSION_LIST = ['external'];
 
 function Layout({ children, layout }) {
-	const hideLayout = layout === 'hidden';
+	const router = useRouter();
 
 	const { t } = useTranslation(['common']);
+
+	const hideLayout = layout === 'hidden';
 
 	const profile = useSelector((state) => state.profile || {});
 
@@ -33,7 +36,7 @@ function Layout({ children, layout }) {
 		trigger,
 	} = useGetFaqNotifications();
 
-	if (hideLayout) {
+	if (hideLayout || ['/404', '/_error'].includes(router.route)) {
 		return <div>{children}</div>;
 	}
 

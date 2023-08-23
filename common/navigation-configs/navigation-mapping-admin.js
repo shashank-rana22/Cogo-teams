@@ -70,17 +70,6 @@ import business_finance from './apis/business-finance-apis';
 
 const navigationMapping = ({ t = () => {} }) => {
 	const navigationMappingAdmin = {
-		things_to_do: {
-			key           : 'things_to_do',
-			title         : t('common:things_to_do'),
-			href          : '/things-to-do',
-			as            : '/things-to-do',
-			type          : 'link',
-			icon          : IcMDashboard,
-			main_apis     : [],
-			possible_apis : [],
-			module_type   : 'dashboards',
-		},
 		welcome: {
 			key           : 'welcome',
 			title         : t('common:welcome'),
