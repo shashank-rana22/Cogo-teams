@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import { getOtherDataHelper } from '../../utils/getOtherDataHelper';
 
 const OTHER_KEY_MAPPING = {
@@ -58,7 +60,7 @@ const ANNEXURE_KEY_MAPPINGS = {
 
 export const getAnnexureTotalData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
-		customData          : customData?.annexure,
+		customData          : customData?.annexure?.[GLOBAL_CONSTANTS.zeroth_index],
 		requiredKeysMapping : ANNEXURE_KEY_MAPPINGS,
 	});
 

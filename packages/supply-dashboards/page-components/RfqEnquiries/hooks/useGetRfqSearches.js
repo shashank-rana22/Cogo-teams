@@ -1,21 +1,32 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
+const CONSTANT_ONE = 1;
 const useGetRfqSearches = ({ rfqId } = {}) => {
+	const { user_profile } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
+	const isFullAccess = user_profile.partner.user_role_ids
+		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
 	const [list, setList] = useState({
 		data       : [],
 		total      : 0,
 		total_page : 0,
 	});
-	const [page, setPage] = useState(1);
-
+	const [page, setPage] = useState(CONSTANT_ONE);
 	const [{ loading }, refetch] = useRequest({
 		method : 'GET',
 		url    : '/list_rfq_searches',
 		params : {
-			filters               : { rfq_id: rfqId, is_under_negotiation: true },
+			filters: {
+				rfq_id                   : rfqId,
+				is_under_negotiation     : true,
+				relevant_supply_agent_id : !isFullAccess ? user_profile?.user?.id : undefined,
+			},
 			page,
-			service_data_required : true,
+			service_data_required: true,
 		},
 	}, { manual: false });
 
