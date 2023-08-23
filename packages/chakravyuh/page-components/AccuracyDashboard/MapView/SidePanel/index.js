@@ -65,7 +65,18 @@ function SidePanel({
 			if (page === START_PAGE) {
 				setActiveList([...list]);
 			} else {
-				setActiveList((prev) => prev.concat(list));
+				setActiveList((prev) => {
+					const uniqueSet = new Set(prev);
+					const uniqueItems = list.filter((item) => {
+						if (!uniqueSet.has(item)) {
+							uniqueSet.add(item);
+							return true;
+						}
+						return false;
+					});
+
+					return prev.concat(uniqueItems);
+				});
 			}
 		}
 	}, [list, page, setActiveList]);

@@ -1,5 +1,4 @@
 import { Loader, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -9,6 +8,7 @@ import styles from '../styles.module.css';
 import EmptyState from './EmptyState';
 
 const HOVER_DELAY = 100;
+const TO_FIXED = 2;
 
 function List({ loading = false, finalList = [], setActiveId = () => {}, originName = '' }) {
 	const [hoverTimer, setHoverTimer] = useState(null);
@@ -59,7 +59,7 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 				</div>
 				<div className={styles.right}>
 					<p>Accuracy</p>
-					<h4>{`${Number(accuracy).toFixed(GLOBAL_CONSTANTS.zeroth_index)}%`}</h4>
+					<h4>{`${Number(accuracy).toFixed(TO_FIXED)}%`}</h4>
 				</div>
 			</button>
 		));

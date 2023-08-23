@@ -12,7 +12,7 @@ const EXCLUDE_KEYS = LOCATION_KEYS.map((key) => [key,
 	...HIERARCHY_KEYS.map((sub_key) => `${key}_${sub_key}_id`)]).flat();
 
 const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
-	const [sort, setSort] = useState({ sort_by: 'accuracy', sort_type: 'asc' });
+	const [sort, setSort] = useState({ sort_by: 'total_accuracy', sort_type: 'asc' });
 	const [page, setPage] = useState(START_PAGE);
 	const [activeList, setActiveList] = useState([]);
 
