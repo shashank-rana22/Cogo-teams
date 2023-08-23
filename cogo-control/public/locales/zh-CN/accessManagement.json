@@ -141,5 +141,7 @@
     "roles_and_permission_create_role_modal_role_remarks_label": "描述",
     "roles_and_permission_create_role_modal_role_remarks_placeholder": "输入角色描述",
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "描述不能为空",
-    "roles_and_permission_crm_dashboard_btm_text_create": "创造"
+    "roles_and_permission_crm_dashboard_btm_text_create": "创造",
+    "roles_and_permission_hooks_toast_something_went_wrong": "角色创建成功...",
+    "roles_and_permission_hooks_toast_role_created_successfully": "角色创建成功..."
 }

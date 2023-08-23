@@ -29,17 +29,19 @@ const useCreateRole = ({
 
 			const response = await trigger({ data: payload });
 			if (response.hasError) {
-				Toast.error(response?.message || 'Something went wrong');
+				Toast.error(response?.message
+					|| t('accessManagement:roles_and_permission_hooks_toast_something_went_wrong'));
 				return;
 			}
 
-			Toast.success('Role created successfully...');
+			Toast.success(t('accessManagement:roles_and_permission_hooks_toast_role_created_successfully'));
 
 			onChangeShowCreateRoleModal(false);
 
 			redirect(response?.data?.id);
 		} catch (error) {
-			Toast.error(error.response?.data.error || 'Something went wrong');
+			Toast.error(error.response?.data.error
+				|| t('accessManagement:roles_and_permission_hooks_toast_something_went_wrong'));
 		}
 	};
 

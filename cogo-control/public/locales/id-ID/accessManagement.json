@@ -141,5 +141,7 @@
     "roles_and_permission_create_role_modal_role_remarks_label": "Deskripsi",
     "roles_and_permission_create_role_modal_role_remarks_placeholder": "Masukkan deskripsi peran",
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Deskripsi wajib diisi",
-    "roles_and_permission_crm_dashboard_btm_text_create": "Membuat"
+    "roles_and_permission_crm_dashboard_btm_text_create": "Membuat",
+    "roles_and_permission_hooks_toast_something_went_wrong": "Ada yang salah",
+    "roles_and_permission_hooks_toast_role_created_successfully": "Peran Berhasil Dibuat..."
 }

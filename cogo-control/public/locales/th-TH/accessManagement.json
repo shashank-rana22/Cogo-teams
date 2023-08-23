@@ -141,5 +141,7 @@
     "roles_and_permission_create_role_modal_role_remarks_label": "คำอธิบาย",
     "roles_and_permission_create_role_modal_role_remarks_placeholder": "ใส่คำอธิบายบทบาท",
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "จำเป็นต้องใส่คำอธิบาย",
-    "roles_and_permission_crm_dashboard_btm_text_create": "สร้าง"
+    "roles_and_permission_crm_dashboard_btm_text_create": "สร้าง",
+    "roles_and_permission_hooks_toast_something_went_wrong": "บางอย่างผิดพลาด",
+    "roles_and_permission_hooks_toast_role_created_successfully": "สร้างบทบาทสำเร็จแล้ว..."
 }

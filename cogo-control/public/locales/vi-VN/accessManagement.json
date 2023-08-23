@@ -141,5 +141,7 @@
     "roles_and_permission_create_role_modal_role_remarks_label": "Mô tả",
     "roles_and_permission_create_role_modal_role_remarks_placeholder": "Nhập mô tả vai trò",
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Mô tả là bắt buộc",
-    "roles_and_permission_crm_dashboard_btm_text_create": "Tạo nên"
+    "roles_and_permission_crm_dashboard_btm_text_create": "Tạo nên",
+    "roles_and_permission_hooks_toast_something_went_wrong": "Đã xảy ra lỗi",
+    "roles_and_permission_hooks_toast_role_created_successfully": "Vai trò được tạo thành công..."
 }

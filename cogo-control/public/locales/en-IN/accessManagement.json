@@ -141,5 +141,7 @@
     "roles_and_permission_create_role_modal_role_remarks_label": "Description",
     "roles_and_permission_create_role_modal_role_remarks_placeholder": "Enter role description",
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Description is required",
-    "roles_and_permission_crm_dashboard_btm_text_create": "Create"
+    "roles_and_permission_crm_dashboard_btm_text_create": "Create",
+    "roles_and_permission_hooks_toast_something_went_wrong": "Something went wrong",
+    "roles_and_permission_hooks_toast_role_created_successfully": "Role Created Successfully..."
 }

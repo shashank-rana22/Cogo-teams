@@ -10,10 +10,12 @@ const useEditRole = ({ roleData, setShow, getRole, t = () => {} }) => {
 			label       : t('accessManagement:roles_and_permission_update_edit_role_short_name'),
 			type        : 'text',
 			maxLength   : 16,
-			value      	: 'hii',
-			placeholder : 'Enter Role Short Name',
-			rules       : { required: 'Role Short Name is required' },
-			span        : 6,
+			placeholder : t('accessManagement:roles_and_permission_create_role_modal_role_short_name_placeholder'),
+			rules       : {
+				required:
+				t('accessManagement:roles_and_permission_create_role_modal_role_short_name_rules_required'),
+			},
+			span: 6,
 		},
 		{
 			name    : 'role_functions',
