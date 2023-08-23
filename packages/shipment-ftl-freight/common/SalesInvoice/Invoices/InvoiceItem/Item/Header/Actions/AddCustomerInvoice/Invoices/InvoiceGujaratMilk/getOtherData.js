@@ -19,7 +19,7 @@ const OTHER_KEYS_MAPPING = {
 	grn_date          : 'grn_date',
 	po_number         : 'po_number',
 	po_date           : 'po_date',
-	truck_type        : 'truck_type',
+	truck_type        : 'indent_truck_type',
 };
 
 export const getOtherData = ({ customData = {} }) => {
