@@ -48,7 +48,7 @@ function LandingPage({
 
 						return (
 							<div key={label} className={styles.feature}>
-								<img src={icon} alt="" height={50} style={{ objectFit: 'cover' }} />
+								<img src={icon} alt={label} height={50} style={{ objectFit: 'cover' }} />
 
 								<span className={styles.feature_label}>{label}</span>
 								<span className={styles.feature_text}>{text}</span>

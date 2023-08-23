@@ -112,6 +112,10 @@ function RequestContract({
 									{newControl?.rules?.required && label ? (
 										<span className={styles.required_mark}>*</span>
 									) : null}
+
+									{newControl?.showOptional ? (
+										<span className={styles.optional_text}>(OPTIONAL)</span>
+									) : null}
 								</div>
 
 								<div className={styles.element}>
