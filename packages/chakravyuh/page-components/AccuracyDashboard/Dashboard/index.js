@@ -14,7 +14,7 @@ import Views from './Views';
 function DashboardView(props) {
 	const [isHighlighted, setIsHighlighted] = useState(false);
 	const { setView = () => {}, globalFilters = {} } = props;
-	const { parent_mode } = globalFilters;
+	const { mode } = globalFilters;
 
 	const {
 		data, loading,
@@ -28,7 +28,7 @@ function DashboardView(props) {
 					<ScallableAccuracy
 						accuracy={accuracy}
 						loading={loading}
-						parent_mode={parent_mode}
+						mode={mode}
 						isHighlighted={isHighlighted}
 						setIsHighlighted={setIsHighlighted}
 					/>
@@ -39,10 +39,10 @@ function DashboardView(props) {
 					<Distribution {...props} />
 				</div>
 			</div>
-			{parent_mode
+			{mode
 			&& (
 				<SupplyRates
-					heading={`${startCase(parent_mode)} ${parent_mode.includes('rate') ? '' : 'Rates'}`}
+					heading={`${startCase(mode)} ${mode.includes('rate') ? '' : 'Rates'}`}
 					{...props}
 				/>
 			)}

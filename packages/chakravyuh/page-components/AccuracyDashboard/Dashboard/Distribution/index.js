@@ -12,22 +12,22 @@ import styles from './styles.module.css';
 
 const LOADING_COUNT = 5;
 function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
-	const { parent_mode = null } = globalFilters;
+	const { mode = null } = globalFilters;
 	const {
 		data = {},
 		loading = false,
 	} = useGetFclFreightDistribution({ filters: globalFilters });
 
-	const { pieChartData, pieColors } = usePieChartConfigs(parent_mode, data);
+	const { pieChartData, pieColors } = usePieChartConfigs(mode, data);
 
 	const handlePieClick = (event) => {
-		if (!parent_mode) {
-			setGlobalFilters((prev) => ({ ...prev, parent_mode: event?.data?.key }));
+		if (!mode) {
+			setGlobalFilters((prev) => ({ ...prev, mode: event?.data?.key }));
 		}
 	};
 
 	const defaultView = () => {
-		setGlobalFilters((prev) => ({ ...prev, parent_mode: null }));
+		setGlobalFilters((prev) => ({ ...prev, mode: null }));
 	};
 
 	return (
@@ -91,7 +91,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 									<p className={styles.pie_center_count}>
 										{formatBigNumbers(data?.total_rates || GLOBAL_CONSTANTS.zeroth_index)}
 									</p>
-									{ parent_mode
+									{ mode
 					&& (
 						<Button
 							themeType="linkUi"
@@ -123,11 +123,11 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 									/>
 									<div className={styles.legend_text_row}>
 										<p className={styles.legend_name}>{label}</p>
-										{ !parent_mode
+										{ !mode
 										&& <p className={styles.legend_rate}>{`(${formatBigNumbers(value)} Rates)`}</p>}
 									</div>
 								</div>
-								{ !parent_mode
+								{ !mode
 									? (
 										<p className={styles.legend_percentage}>
 											{`${cancellation} % Cancellation`}

@@ -21,8 +21,8 @@ const THREE = 3;
 const EmptyStateData = [MAXIMUM_CARDS, THREE, THREE, FACTOR];
 
 function DrillDown({ globalFilters = {} }) {
-	const { parent_mode } = globalFilters;
-	const rateModes = parent_mode ? [parent_mode] : RATE_MODES;
+	const { mode } = globalFilters;
+	const rateModes = mode ? [mode] : RATE_MODES;
 	const [activeParent, setActiveParent] = useState(null);
 
 	const handleClick = (val) => {
@@ -55,13 +55,13 @@ function DrillDown({ globalFilters = {} }) {
 							</div>
 						))}
 						<img
-							src={!parent_mode
+							src={!mode
 								? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
 								: GLOBAL_CONSTANTS.image_url.ic_tree_single}
 							alt="branches"
 							className={styles.tree_icon}
 						/>
-						{!loading && <BranchAnimation parent_mode={parent_mode} />}
+						{!loading && <BranchAnimation mode={mode} />}
 
 						<div className={cl`${styles.source_card} ${styles.main_card}`}>
 							<h4>{formatBigNumbers(totalSearches)}</h4>

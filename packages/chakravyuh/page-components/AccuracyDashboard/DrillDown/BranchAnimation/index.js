@@ -7,7 +7,7 @@ import { SECOND_IDX } from '../../../../constants/map_constants';
 import { ANIMATION_CONFIG, MAPPING, LAST_INDEX, FACTOR } from '../../../../constants/svg_constants';
 import styles from '../styles.module.css';
 
-function BranchAnimation({ parent_mode = null }) {
+function BranchAnimation({ mode = null }) {
 	const svgRef = useRef(null);
 
 	useEffect(() => {
@@ -49,7 +49,7 @@ function BranchAnimation({ parent_mode = null }) {
 			{ANIMATION_CONFIG.map(({ parentProps, children }) => (
 				<g {...parentProps} key={parentProps.id}>
 					{children.map(({ gProps, pathProps }) => {
-						const showPath = !parent_mode || !pathProps.id.includes('left')
+						const showPath = !mode || !pathProps.id.includes('left')
 						|| pathProps.id.slice(-SECOND_IDX) === '2';
 
 						return showPath && (

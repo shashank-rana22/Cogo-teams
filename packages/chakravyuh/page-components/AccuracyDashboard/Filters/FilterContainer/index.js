@@ -13,7 +13,7 @@ function FilterContainer({
 	globalFilters = {}, setGlobalFilters = () => {}, showText = true,
 	setVisible = () => {}, view = '',
 }) {
-	const { service_type = 'fcl', parent_mode = null } = globalFilters;
+	const { service_type = 'fcl', mode = null } = globalFilters;
 
 	const {
 		control,
@@ -40,18 +40,18 @@ function FilterContainer({
 
 	useEffect(() => {
 		setValue(
-			'parent_mode',
-			parent_mode,
+			'mode',
+			mode,
 		);
-	}, [parent_mode, setValue]);
+	}, [mode, setValue]);
 
 	const onReset = () => {
-		setGlobalFilters((prev) => ({ ...prev, parent_mode: undefined }));
+		setGlobalFilters((prev) => ({ ...prev, mode: undefined }));
 		reset();
 	};
 
 	const onSumbit = () => {
-		setGlobalFilters((prev) => ({ ...prev, ...values, parent_mode: values?.mode }));
+		setGlobalFilters((prev) => ({ ...prev, ...values, mode: values?.mode }));
 		setVisible(false);
 	};
 

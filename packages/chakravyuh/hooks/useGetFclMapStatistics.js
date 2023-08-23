@@ -7,6 +7,10 @@ import getFormattedPayload from '../utils/getFormattedPayload';
 import toastApiError from '../utils/toastApiError';
 
 const START_PAGE = 1;
+const HIERARCHY_KEYS = ['port', 'airport', 'region', 'country', 'continent'];
+const EXCLUDE_KEYS = LOCATION_KEYS.map((key) => [key,
+	...HIERARCHY_KEYS.map((sub_key) => `${key}_${sub_key}_id`)]).flat();
+
 const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	const [sort, setSort] = useState({ sort_by: 'accuracy', sort_type: 'asc' });
 	const [page, setPage] = useState(START_PAGE);
@@ -49,15 +53,15 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	const dependency = Object.values(filters).map(({ id }) => id).join('_');
 
 	useEffect(() => {
-		const params = getFormattedPayload(globalFilters, ['origin', 'destination']);
+		const params = getFormattedPayload(globalFilters, EXCLUDE_KEYS);
 		setPage(START_PAGE);
-		getStats(merge(params, { filters: { ...filters, ...sort }, page: 1 }));
+		getStats(merge(params, { filters, ...sort, page: 1 }));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dependency, globalFilters, sort, getStats]);
 
 	useEffect(() => {
 		if (page > START_PAGE) {
-			getStats({ filters, sort, page });
+			getStats({ filters, ...sort, page });
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, getStats]);
