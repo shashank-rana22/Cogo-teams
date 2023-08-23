@@ -78,7 +78,7 @@ function SingleService({
 	} = useListShipmentBookingConfirmationPreferences({
 		singleServiceData,
 		shipmentData,
-		isPreferenceRequired: !isPreferenceSet && singleServiceData.service_type === 'fcl_freight_service',
+		isPreferenceRequired: !isPreferenceSet && singleServiceData?.service_type === 'fcl_freight_service',
 	});
 	// const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 	// 	shipmentData,

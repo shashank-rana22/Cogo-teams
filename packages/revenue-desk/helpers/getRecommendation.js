@@ -15,13 +15,13 @@ const getRecommendation = ({
 		let required_rate = {};
 
 		if (source === 'flashed') {
-			required_rate = (currentFormatedrates.rows || []).find((obj) => obj.id === rate_id);
+			required_rate = (currentFormatedrates?.rows || []).find((obj) => obj?.id === rate_id);
 		} else {
-			required_rate = (systemFormattedRates.rows || []).find((obj) => {
+			required_rate = (systemFormattedRates?.rows || []).find((obj) => {
 				if (validity_id) {
-					return obj.id === rate_id && obj.rowData.validity_id === validity_id;
+					return obj?.id === rate_id && obj?.rowData.validity_id === validity_id;
 				}
-				return obj.id === rate_id;
+				return obj?.id === rate_id;
 			});
 		}
 		SERVICE_PROVIDERS.push({
