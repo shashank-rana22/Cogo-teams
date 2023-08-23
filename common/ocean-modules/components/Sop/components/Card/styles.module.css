@@ -18,6 +18,7 @@
 
 .animated_container {
 	padding: 0 10px;
+	overflow: hidden;
 	transition: all 0.5s;
 
 	&.enter {

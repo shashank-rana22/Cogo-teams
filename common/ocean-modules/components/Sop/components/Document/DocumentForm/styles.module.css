@@ -9,6 +9,10 @@
 		.ui_radio_container {
 			padding: 10px 14px 0 0;
 		}
+
+		.ui_select_options_container {
+			max-height: 74px;
+		}
 	}
 }
 
