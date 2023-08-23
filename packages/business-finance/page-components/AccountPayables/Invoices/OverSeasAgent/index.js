@@ -64,6 +64,7 @@ function OverSeasAgent() {
 				active={active}
 				setBLData={setBLData}
 				setShowHeader={setShowHeader}
+				showHeader={showHeader}
 				setShowPayableAmount={setShowPayableAmount}
 				setShowSaveAsDraft={setShowSaveAsDraft}
 			/>

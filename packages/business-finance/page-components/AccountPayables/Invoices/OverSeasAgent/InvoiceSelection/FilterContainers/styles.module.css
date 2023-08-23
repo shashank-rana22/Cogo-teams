@@ -18,6 +18,9 @@
 }
 
 .search {
+	display: flex;
+	align-items: center;
+
 	:global {
 		width: 336px;
 

@@ -5,6 +5,7 @@ import List from '../../../../commons/List/index.tsx';
 import EditableTdsInput from '../../CreatePayrun/SelectInvoices/EditableInput';
 import EditablePayableAmount from '../../CreatePayrun/SelectInvoices/EditableInput/EditablePayableAmount';
 import BankDetails from '../../CreatePayrun/ViewSelectedInvoices/BankDetails/index';
+import Delete from '../../CreatePayrun/ViewSelectedInvoices/Delete/index';
 import useGetInvoiceSelection from '../../hooks/useInvoiceSelection';
 import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
@@ -16,8 +17,9 @@ import Footer from './Footer';
 import styles from './styles.module.css';
 
 const MORE_THAN_ZERO = 0;
+const FIRST_PAGE = 1;
 
-const getFunctions = ({ GetTableBodyCheckbox, setEditedValue }) => ({
+const getFunctions = ({ GetTableBodyCheckbox, setEditedValue, refetch }) => ({
 	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
 	renderToolTip  : (itemData, field) => (
 		<RenderToolTip itemData={itemData} field={field} />
@@ -48,10 +50,13 @@ const getFunctions = ({ GetTableBodyCheckbox, setEditedValue }) => ({
 			setEditedValue={setEditedValue}
 		/>
 	),
+	renderDelete: (itemData) => (<Delete itemData={itemData} refetch={refetch} />),
+
 });
 function InvoiceSelection({
 	// setActive,
-	// setShowHeader,
+	setShowHeader,
+	showHeader,
 	active,
 	// setBLData,
 	setShowPayableAmount,
@@ -62,21 +67,21 @@ function InvoiceSelection({
 
 	const {
 		config,
-		// globalFilters,
+		globalFilters,
 		invoiceData,
-		// setGlobalFilters,
+		setGlobalFilters,
 		setViewSelectedInvoice,
 		viewSelectedInvoice,
 		// onClear,
 		// filterClear,
-		// listSelectedInvoice,
+		listSelectedInvoice,
 		submitSelectedInvoices,
 		// createloading,
 		GetTableHeaderCheckbox,
 		// deleteInvoices,
 		// delete_payrun_invoice,
 		GetTableBodyCheckbox,
-		// resetPage,
+		resetPage,
 		setEditedValue,
 		// setEditeableTds,
 		// setEditeable,
@@ -85,10 +90,9 @@ function InvoiceSelection({
 		// setRestValue,
 		loading,
 		// payrun_type,
-		// goBack,
+		goBack,
+		refetch,
 	} = useGetInvoiceSelection({ sort });
-
-	// console.log('globalFilters', invoiceData);
 
 	const { overAllValue = 0, list = [] } = invoiceData || {};
 
@@ -112,7 +116,7 @@ function InvoiceSelection({
 	// const type = 'Search by Name /Invoices Number /SID';
 
 	useEffect(() => {
-		if (active === 'Invoice selection' && totalCalc > MORE_THAN_ZERO) {
+		if (active === 'invoice_selection' && totalCalc > MORE_THAN_ZERO) {
 			setShowPayableAmount(totalCalc);
 		}
 	}, [totalCalc, setShowPayableAmount, active]);
@@ -121,11 +125,20 @@ function InvoiceSelection({
 		if (isEmpty(invoiceData?.list)) setShowSaveAsDraft(true);
 	}, [invoiceData, setShowSaveAsDraft]);
 
-	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue });
+	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue, refetch });
 
 	return (
 		<div className={styles.container}>
-			<FilterContainers />
+			<FilterContainers
+				filters={globalFilters}
+				setFilters={setGlobalFilters}
+				goBack={goBack}
+				resetPage={resetPage}
+				active={active}
+				showHeader={showHeader}
+				setShowHeader={setShowHeader}
+				viewSelectedInvoice={viewSelectedInvoice}
+			/>
 
 			<div className={styles.list_container}>
 				<List
@@ -133,14 +146,13 @@ function InvoiceSelection({
 					loading={loading}
 					config={config}
 					functions={FUNCTIONS}
-				// sort={sort}
 					setSort={setSort}
-    // page={filters?.pageIndex || FIRST_PAGE}
+					page={globalFilters?.pageIndex || FIRST_PAGE}
 					pageSize={10}
-		// 		handlePageChange={(val) => setFilters({
-// ...filters,
-// pageIndex: val,
-		// 		})}
+					handlePageChange={(val) => setGlobalFilters({
+						...globalFilters,
+						pageIndex: val,
+					})}
 					renderHeaderCheckbox={GetTableHeaderCheckbox}
 					rowStyle="border"
 					showPagination
@@ -154,6 +166,8 @@ function InvoiceSelection({
 				apiData={invoiceData}
 				loading={loading}
 				submitSelectedInvoices={submitSelectedInvoices}
+				setShowHeader={setShowHeader}
+				listSelectedInvoice={listSelectedInvoice}
 			/>
 		</div>
 	);

@@ -1,6 +1,6 @@
-import { Input } from '@cogoport/components';
+import { Button, Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Filter from '../../../../../commons/Filters/index.tsx';
 import { invoiceFilters } from '../../../configurations/index';
@@ -8,14 +8,24 @@ import FilterModal from '../../../MoreFilters/index';
 
 import styles from './styles.module.css';
 
-function FilterContainers() {
-	const [filters, setFilters] = useState('');
+function FilterContainers({
+	filters = '',
+	setFilters = () => {},
+	goBack = () => {},
+	resetPage = () => {},
+	active = '',
+	showHeader = '',
+	setShowHeader = () => {},
+	viewSelectedInvoice = false,
+}) {
 	return (
 		<div className={styles.filters}>
-			<div className={styles.filtercontainer}>
-				<Filter controls={invoiceFilters} filters={filters} setFilters={setFilters} />
-				<FilterModal filters={filters} setFilters={setFilters} filterLength={5} />
-			</div>
+			{!viewSelectedInvoice && (
+				<div className={styles.filtercontainer}>
+					<Filter controls={invoiceFilters} filters={filters} setFilters={setFilters} />
+					<FilterModal filters={filters} setFilters={setFilters} filterLength={5} />
+				</div>
+			)}
 
 			<div className={styles.search_filter}>
 				<div className={styles.search}>
@@ -35,6 +45,19 @@ function FilterContainers() {
 							</div>
 						)}
 					/>
+
+					<Button
+						themeType="accent"
+						onClick={() => {
+							goBack();
+							resetPage();
+							setShowHeader(true);
+						}}
+						style={{ width: '100px', margin: '0px 10px', height: '40px' }}
+						disabled={active !== 'invoice_selection' || showHeader}
+					>
+						Go Back
+					</Button>
 				</div>
 			</div>
 		</div>

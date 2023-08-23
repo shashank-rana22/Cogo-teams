@@ -15,13 +15,14 @@ function BankDetails({ itemData }) {
 		beneficiary_name = '',
 		ifsc_number = '',
 		account_number = '',
-	} = bankDetail?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+		ifscCode = '',
+	} = bankDetail?.[GLOBAL_CONSTANTS.zeroth_index] || bankDetail || {};
 	return (
 		<div className={styles.font}>
 			<div className={styles.bold}>{bankName || bank_name || beneficiary_name}</div>
 			<span>{`A/C No: ${accountNo || account_number}`}</span>
 			<span className={styles.flex}>
-				{`IFSC: ${ifsc_code || ifsc_number}`}
+				{`IFSC: ${ifsc_code || ifsc_number || ifscCode}`}
 			</span>
 		</div>
 	);

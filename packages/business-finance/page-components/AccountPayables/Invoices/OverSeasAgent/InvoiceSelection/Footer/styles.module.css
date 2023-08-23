@@ -23,6 +23,7 @@
 
 .button_container {
 	display: flex;
+	align-items: center;
 	margin-right: 4px;
 }
 
@@ -56,7 +57,6 @@
 .sid_count {
 	display: flex;
 	gap: 4px;
-	margin-top: 9px;
 	margin-left: 16px;
 	font-size: 12px;
 	font-weight: 500;

@@ -31,9 +31,9 @@ const useGetInvoiceSelection = ({ sort }) => {
 		performedByName,
 	} = useSelector(({ general, profile }) => ({
 		query           : general.query,
-		performedBy     : profile.id,
+		performedBy     : profile.user.id,
 		performedByType : profile.session_type,
-		performedByName : profile.name,
+		performedByName : profile.user.name,
 	}));
 
 	const [apiData, setApiData] = useState();
@@ -128,12 +128,10 @@ const useGetInvoiceSelection = ({ sort }) => {
 			}));
 		}
 
-		// console.log('newData', );
 		setApiData(newData);
 		setApiTdsData(newData);
 	}, [JSON.stringify(api[API_DATA_VARIABLE_ZERO]?.data)]);
 
-	// console.log('api', apiData);
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search]);
@@ -149,7 +147,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 				performedByType,
 				performedByName,
 				organizationId,
-				services,
+				serviceType        : services,
 				...(rest || {}),
 				startDate          : dueDate?.startDate || undefined,
 				endDate            : dueDate?.endDate || undefined,
@@ -242,7 +240,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			}
 		}
 		try {
-			const res = await addInvoiceToSelectedAPI.trigger({
+			const res = await addInvoiceToSelectedAPI[API_DATA_VARIABLE_ONE]({
 				data: {
 					list       : [...SELECTED_INVOICE],
 					id         : urlQuery?.payrun,
