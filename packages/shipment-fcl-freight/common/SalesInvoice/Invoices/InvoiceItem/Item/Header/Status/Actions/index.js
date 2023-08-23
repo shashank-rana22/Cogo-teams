@@ -57,7 +57,7 @@ function Actions({
 		showCancel: new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth()
 			&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice,
 		showReplace: geo.others.navigations.partner.bookings.invoicing.request_replace_invoice,
-	} : undefined;
+	} : {};
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';

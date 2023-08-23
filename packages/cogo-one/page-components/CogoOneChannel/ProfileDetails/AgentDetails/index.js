@@ -219,7 +219,7 @@ function AgentDetails({
 					hasVoiceCallAccess={geo.others.navigations.cogo_one.has_voice_call_access}
 				/>
 			)}
-			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
+			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} viewType={viewType} /> }
 			<GroupMembersRequests
 				deleteGroupRequest={deleteGroupRequest}
 				approveGroupRequest={approveGroupRequest}
