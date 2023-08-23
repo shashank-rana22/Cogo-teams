@@ -2578,13 +2578,13 @@ const navigationMappingAdmin = {
 		icon          : IcASecureCloudStorage,
 	},
 	attendance_leave_management: {
-		key   : 'attendance_leave_management',
-		title : 'Attendance and Leave Management',
-		icon  : IcMDashboard,
-		href  : '/v2/attendance-leave-management',
-		as    : '/v2/attendance-leave-management',
-		type  : 'link',
-		// possible_apis : apis.performance_manager_dashboard,
+		key           : 'attendance_leave_management',
+		title         : 'Attendance and Leave Management',
+		icon          : IcMDashboard,
+		href          : '/v2/attendance-leave-management',
+		as            : '/v2/attendance-leave-management',
+		type          : 'link',
+		possible_apis : apis.attendance_leave_management,
 	},
 };
 

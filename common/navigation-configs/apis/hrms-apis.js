@@ -618,6 +618,38 @@ const HRMS = {
 
 		},
 	],
+	attendance_leave_management: [
+		{
+			api          : 'get_day_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_timesheet',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_attendance_logs',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_attendance_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_monthly_summary',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default HRMS;
