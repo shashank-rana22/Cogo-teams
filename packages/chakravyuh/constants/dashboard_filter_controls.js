@@ -17,37 +17,3 @@ export const SELECT_ICON_MAPPING = {
 	fcl : <IcMFcl />,
 	air : <IcMAir />,
 };
-
-export const TIME_RANGE_OPTIONS = {
-	more_options: [
-
-		{
-			children : '1W',
-			key      : 7,
-		},
-
-		{
-			children : '1Y',
-			key      : 365,
-		},
-		{
-			children : 'all',
-			key      : 2500,
-		},
-	],
-	default: [
-		{
-			children : '1M',
-			key      : 30,
-		},
-		{
-			children : '3M',
-			key      : 90,
-		},
-		{
-			children : '6M',
-			key      : 180,
-		},
-
-	],
-};
