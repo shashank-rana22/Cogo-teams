@@ -6,7 +6,7 @@ import completedColumn from '../../configs/Completed_table.tsx';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
 import { INVOICE_FILTER } from '../../Utils/invoicelistFilter.ts';
-import FilterPopover from '../FilterPopover/index.tsx';
+import FilterPopover from '../FilterPopover';
 import FooterCard from '../FooterCard';
 import SearchInput from '../searchInput/index.tsx';
 import StyledTable from '../styledTable/index.tsx';
@@ -15,6 +15,13 @@ import styles from './styles.module.css';
 
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
+
+const getStyle = ({
+	sortType = '',
+	sortBy = '',
+	activeSortType = '',
+	activeSortBy = '',
+}) => (sortType === activeSortType && sortBy === activeSortBy ? ORANGE : GREY);
 
 function InvoiceTable({
 	organizationId = '',
@@ -54,17 +61,47 @@ function InvoiceTable({
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleGrandTotalAsc = sortType === 'asc' && sortBy === 'grandTotal' ? ORANGE : GREY;
+	const sortStyleGrandTotalAsc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType : 'asc',
+		activeSortBy   : 'grandTotal',
+	});
 
-	const sortStyleGrandTotalDesc = sortType === 'desc' && sortBy === 'grandTotal' ? ORANGE : GREY;
+	const sortStyleGrandTotalDesc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType : 'desc',
+		activeSortBy   : 'grandTotal',
+	});
 
-	const sortStyleInvoiceDateAsc = sortType === 'asc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
+	const sortStyleInvoiceDateAsc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType : 'asc',
+		activeSortBy   : 'invoiceDate',
+	});
 
-	const sortStyleInvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
+	const sortStyleInvoiceDateDesc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType : 'desc',
+		activeSortBy   : 'invoiceDate',
+	});
 
-	const sortStyleDueDateAsc = sortType === 'asc' && sortBy === 'dueDate' ? ORANGE : GREY;
+	const sortStyleDueDateAsc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType : 'asc',
+		activeSortBy   : 'dueDate',
+	});
 
-	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
+	const sortStyleDueDateDesc = getStyle({
+		sortType,
+		sortBy,
+		activeSortType : 'desc',
+		activeSortBy   : 'dueDate',
+	});
 
 	const columns = completedColumn({
 		entityCode,

@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const ELEMENTS_TO_BE_DELETED = 1;
 
-function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row = {} }) {
+function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row = {}, orgData = {} }) {
 	const dispatch = useDispatch();
 	const geo = getGeoConstants();
 
@@ -43,6 +43,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row
 					mobile_country_code : dialNumber?.country_code,
 					isUnkownUser        : true,
 					source              : 'outstanding',
+					orgData,
 				},
 			}),
 		);

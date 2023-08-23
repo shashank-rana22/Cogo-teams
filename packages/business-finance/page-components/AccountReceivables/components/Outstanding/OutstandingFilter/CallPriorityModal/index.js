@@ -15,21 +15,21 @@ import styles from './styles.module.css';
 
 const DEFAULT_LENGTH = 1;
 
-const TabsOptions = [
+const TAB_OPTIONS = [
 	{
-		key       : 'invoice_details',
-		name      : 'Invoice Details',
-		component : InvoiceTable,
+		key: 'invoice_details',
+		name: 'Invoice Details',
+		component: InvoiceTable,
 	},
 	{
-		key       : 'communication',
-		name      : 'Communication',
-		component : Communication,
+		key: 'communication',
+		name: 'Communication',
+		component: Communication,
 	},
 	{
-		key       : 'organization_users',
-		name      : 'Users',
-		component : OrganizationUsers,
+		key: 'organization_users',
+		name: 'Users',
+		component: OrganizationUsers,
 	},
 
 ];
@@ -69,23 +69,22 @@ function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () 
 		invoice_details: {
 			organizationId,
 			entityCode,
-			showName    : false,
-			showFilters : false,
-			limit       : 4,
+			showName: false,
+			showFilters: false,
+			limit: 4,
 		},
 		organization_users: {
 			selfOrganizationId,
+			orgData: data,
 		},
 		communication: { orgData: data },
 	};
 
-	const handleActiveTabs = (val) => {
-		if (val === activeTab) {
-			setActiveTab('');
-		} else {
-			setActiveTab(val);
-		}
-	};
+	const handleActiveTabs = (val) => (
+		val === activeTab
+			? setActiveTab('')
+			: setActiveTab(val)
+	);
 
 	return (
 		<div className={styles.container}>
@@ -162,7 +161,7 @@ function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () 
 							fullWidth
 							themeType="primary"
 						>
-							{(TabsOptions || []).map(
+							{(TAB_OPTIONS || []).map(
 								({ key, name, component: Component }) => (
 									<TabPanel key={key} name={key} title={name}>
 										{activeTab && (

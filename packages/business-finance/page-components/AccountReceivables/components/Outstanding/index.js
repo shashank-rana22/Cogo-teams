@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import EmptyState from '../../../commons/EmptyStateDocs/index.tsx';
 import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding.ts';
 
-import OutstandingFilter from './OutstandingFilter/index.tsx';
+import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList/index.tsx';
 import OrgLoader from './OutstandingList/OrgLoaders/index.tsx';
 import styles from './styles.module.css';

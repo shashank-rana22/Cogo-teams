@@ -8,10 +8,11 @@ import useGetOrganizationUsers from '../../../../hooks/useGetOrganizationUsers';
 import styles from './styles.module.css';
 
 interface Props {
-	selfOrganizationId: string,
+	selfOrganizationId: string;
+	orgData: Object;
 }
 
-function Users({ selfOrganizationId }: Props) {
+function Users({ selfOrganizationId = '', orgData = {} }: Props) {
 	const { organizationData, param, setParam, loading } =	useGetOrganizationUsers({
 		selfOrganizationId,
 	});
@@ -20,7 +21,11 @@ function Users({ selfOrganizationId }: Props) {
 
 	return (
 		<div>
-			<StyledTable data={list} columns={organizationColumn()} loading={loading} />
+			<StyledTable
+				data={list}
+				columns={organizationColumn({ orgData })}
+				loading={loading}
+			/>
 
 			<div className={styles.pagination_container}>
 				<Pagination
@@ -30,9 +35,7 @@ function Users({ selfOrganizationId }: Props) {
 					pageSize={param.page_limit}
 					onPageChange={(val) => setParam({ ...param, page: val })}
 				/>
-
 			</div>
-
 		</div>
 	);
 }

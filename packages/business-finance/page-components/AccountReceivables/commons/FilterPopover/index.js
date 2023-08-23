@@ -1,46 +1,33 @@
-import { Button, Popover, Tabs, TabPanel, RadioGroup, SingleDateRange } from '@cogoport/components';
+import {
+	Button,
+	Popover,
+	Tabs,
+	TabPanel,
+	RadioGroup,
+	SingleDateRange,
+} from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../commons/Interfaces';
-import { SERVICE_TYPE } from '../../constants';
+import { SERVICE_TYPE } from '../../constants/index.ts';
 
 import styles from './styles.module.css';
 
-interface Props {
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-	clearFilter: () => void;
-	refetch:(p?: object) => void;
-
-}
-
-function FilterPopover({
-	filters = {},
-	setFilters = () => {},
+function Content({
 	clearFilter = () => {},
 	refetch = () => {},
-}: Props) {
-	const [show, setShow] = useState(false);
-	const [receivables, setReceivables] = useState('services');
-
-	const onChange = (val:string | object, name:string) => {
-		setFilters((p:object) => ({ ...p, [name]: val }));
-	};
-	const rest = { onClickOutside: () => setShow(false) };
-
-	const handleChange = (val: string) => {
-		setReceivables(val);
-	};
-
-	const content = () => (
+	setShow = () => {},
+	receivables = '',
+	filters = {},
+	handleChange = () => {},
+	onChange = () => {},
+}) {
+	return (
 		<div className={styles.filter_div_style}>
 			<div className={styles.tab_container}>
 				<div className={styles.search_container}>
-					<div className={styles.styled_search_text}>
-						Filters
-					</div>
+					<div className={styles.styled_search_text}>Filters</div>
 					<div className={styles.button_container}>
 						<div className={styles.reset_button}>
 							<Button
@@ -69,7 +56,7 @@ function FilterPopover({
 				</div>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val: string) => handleChange(val)}
+					onChange={(val) => handleChange(val)}
 					themeType="primary-vertical"
 					style={{ display: 'flex', width: '440px' }}
 				>
@@ -78,7 +65,7 @@ function FilterPopover({
 							<RadioGroup
 								options={SERVICE_TYPE}
 								value={filters?.services}
-								onChange={(val?:string) => onChange(val, 'services')}
+								onChange={(val) => onChange(val, 'services')}
 								className={styles.style_radio}
 							/>
 						</div>
@@ -110,13 +97,15 @@ function FilterPopover({
 					<TabPanel name="currency" title="Currency">
 						<div className={styles.tabpanel_style}>
 							<RadioGroup
-								options={Object.keys(GLOBAL_CONSTANTS.currency_code).map((currencyCode) => ({
+								options={Object.keys(
+									GLOBAL_CONSTANTS.currency_code,
+								).map((currencyCode) => ({
 									name  : currencyCode,
 									label : currencyCode,
 									value : currencyCode,
 								}))}
 								value={filters?.currency}
-								onChange={(val?:string) => onChange(val, 'currency')}
+								onChange={(val) => onChange(val, 'currency')}
 								className={styles.style_radio}
 							/>
 						</div>
@@ -125,12 +114,42 @@ function FilterPopover({
 			</div>
 		</div>
 	);
+}
+
+function FilterPopover({
+	filters = {},
+	setFilters = () => {},
+	clearFilter = () => {},
+	refetch = () => {},
+}) {
+	const [show, setShow] = useState(false);
+	const [receivables, setReceivables] = useState('services');
+
+	const onChange = (val, name) => {
+		setFilters((p) => ({ ...p, [name]: val }));
+	};
+	const rest = { onClickOutside: () => setShow(false) };
+
+	const handleChange = (val) => {
+		setReceivables(val);
+	};
+
 	return (
 		<div>
 			<Popover
 				visible={show}
 				placement="bottom"
-				render={content()}
+				render={(
+					<Content
+						clearFilter={clearFilter}
+						refetch={refetch}
+						setShow={setShow}
+						receivables={receivables}
+						filters={filters}
+						handleChange={handleChange}
+						onChange={onChange}
+					/>
+				)}
 				className={styles.pop_over_style}
 				{...rest}
 			>

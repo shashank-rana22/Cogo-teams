@@ -7,21 +7,21 @@ import Meeting from '../../OutstandingFilter/CallPriorityModal/Meeting';
 
 import styles from './styles.module.css';
 
-const TabsOptions = [
+const TAB_OPTIONS = [
 	{
-		key       : 'Email',
-		name      : 'Email',
-		component : Email,
+		key: 'Email',
+		name: 'Email',
+		component: Email,
 	},
 	{
-		key       : 'Call',
-		name      : 'Call',
-		component : Call,
+		key: 'Call',
+		name: 'Call',
+		component: Call,
 	},
 	{
-		key       : 'Meeting',
-		name      : 'Meeting',
-		component : Meeting,
+		key: 'Meeting',
+		name: 'Meeting',
+		component: Meeting,
 	},
 ];
 
@@ -35,7 +35,7 @@ function Communication({ orgData = {} }) {
 				onChange={setActiveTab}
 				themeType="tertiary"
 			>
-				{(TabsOptions || []).map(
+				{(TAB_OPTIONS).map(
 					({ key, name, component: Component }) => (
 						<TabPanel key={key} name={key} title={name}>
 							{activeTab && (

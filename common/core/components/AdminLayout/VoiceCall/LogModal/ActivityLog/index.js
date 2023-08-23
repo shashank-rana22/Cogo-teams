@@ -7,7 +7,6 @@ import {
 	SelectController,
 	TextAreaController,
 } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -15,14 +14,14 @@ import FeedbackComponent from '../FeedbackComponent';
 
 import styles from './styles.module.css';
 
-const CALL_OPTIONS = [
+const callOptions = [
 	{ label: 'Call', value: 'call' },
 	{ label: 'Email', value: 'email' },
 	{ label: 'Meeting', value: 'meeting' },
 	{ label: 'Platform Demo', value: 'platformDemo' },
 ];
 
-const COMMUNICATION_OPTIONS = [
+const communicationOptions = [
 	{ label: 'Answered', value: 'answered' },
 	{ label: 'Not Answered', value: 'not_answered' },
 	{ label: 'Wrong Number', value: 'wrong_number' },
@@ -46,15 +45,13 @@ function ActivityLog({
 	feedback = [],
 	remove = () => { },
 	append = () => { },
-	control = {},
+	control,
 	setValue = () => { },
 	errors = {},
-	watch = () => { },
-	type = '',
+	watch,
+	type,
 	organizationId = '',
 }) {
-	const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
-	const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 	return (
 		<div>
 			<CheckboxController
@@ -68,7 +65,7 @@ function ActivityLog({
 				<div className={styles.input}>
 					<div className={styles.label}>Select Reminder Type *</div>
 					<SelectController
-						options={CALL_OPTIONS}
+						options={callOptions}
 						name="reminderType"
 						control={control}
 						value={type}
@@ -114,7 +111,7 @@ function ActivityLog({
 								<SelectController
 									control={control}
 									name="communicationResponse"
-									options={COMMUNICATION_OPTIONS}
+									options={communicationOptions}
 									rules={{ required: true }}
 								/>
 								<div className={styles.error}>{errors?.communicationResponse ? '*required' : null}</div>
@@ -126,7 +123,7 @@ function ActivityLog({
 								<DatepickerController
 									placeholder="Select Date"
 									showTimeSelect
-									dateFormat={`${date} ${time}`}
+									dateFormat="dd/MM/yyyy HH:mm"
 									name="reminderDateTime"
 									isPreviousDaysAllowed
 									control={control}
@@ -147,7 +144,7 @@ function ActivityLog({
 							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
-								dateFormat={`${date} ${time}`}
+								dateFormat="dd/MM/yyyy HH:mm"
 								name="startDateTime"
 								isPreviousDaysAllowed
 								control={control}
@@ -163,7 +160,7 @@ function ActivityLog({
 							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
-								dateFormat={`${date} ${time}`}
+								dateFormat="dd/MM/yyyy HH:mm"
 								name="endDateTime"
 								isPreviousDaysAllowed
 								control={control}

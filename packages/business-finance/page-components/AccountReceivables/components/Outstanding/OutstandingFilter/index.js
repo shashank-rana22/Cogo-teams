@@ -11,11 +11,10 @@ import { useState } from 'react';
 
 import {
 	SORTBY_OPTION,
-	getSearchOptionsLabels,
-} from '../../../constants/index';
+} from '../../../constants/index.ts';
 
 import CallPriorityModal from './CallPriorityModal';
-import FilterpopOver from './FilterpopOver';
+import FilterpopOver from './FilterpopOver/index.tsx';
 import styles from './styles.module.css';
 
 function Filters({
@@ -30,13 +29,11 @@ function Filters({
 	clearFilter = () => {},
 	queryKey = '',
 	entityCode = '',
-	setQueryKey = () => {},
 	refetch = () => {},
 	list = [],
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 	const [showCallPriority, setShowCallPriority] = useState(false);
-	const [showSearchPopover, setShowSearchPopover] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
 
@@ -52,7 +49,7 @@ function Filters({
 	} else if (queryKey === 'organizationSerialId') {
 		placeholder = 'Search By Serial Id';
 	}
-	const { search } = params || {};
+	const { search = '' } = params || {};
 
 	return (
 		<div className={styles.container}>
@@ -163,14 +160,16 @@ function Filters({
 							placeholder={placeholder}
 							value={search}
 							onChange={(e) => handleChange(e)}
-							suffix={(
-								<IcMCross
-									onClick={handleInputReset}
-									cursor="pointer"
-									className={styles.icon_style}
-								/>
-							)}
-							prefix={<IcMSearchdark />}
+							suffix={
+								search ? (
+									<IcMCross
+										onClick={handleInputReset}
+										cursor="pointer"
+										className={styles.icon_style}
+									/>
+								) : null
+							}
+							prefix={null}
 							className={styles.styled_input}
 						/>
 					</div>

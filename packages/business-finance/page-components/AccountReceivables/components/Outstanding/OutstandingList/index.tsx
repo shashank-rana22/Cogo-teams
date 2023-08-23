@@ -102,6 +102,7 @@ function OutstandingList({
 		},
 		organization_users: {
 			selfOrganizationId,
+			orgData: item,
 		},
 		communication: {
 			orgData: item,
@@ -199,7 +200,7 @@ function OutstandingList({
 									: startCase(
 										item[it.valueKey]?.name
 												|| item[it.valueKey],
-									) || it.defaultValueKey}
+									  ) || it.defaultValueKey}
 							</div>
 						</div>
 					);

@@ -1,4 +1,10 @@
-import { DatepickerController, InputController, RadioGroupController, SelectController, TextAreaController } from '@cogoport/forms';
+import {
+	DatepickerController,
+	InputController,
+	RadioGroupController,
+	SelectController,
+	TextAreaController,
+} from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
@@ -7,11 +13,11 @@ import styles from './styles.module.css';
 
 function FeedbackComponent({
 	feedbackData = {},
-	remove = () => { },
+	remove = () => {},
 	index = 0,
-	control = {},
-	setValue = () => { },
-	errors = {},
+	control,
+	setValue = () => {},
+	errors,
 }) {
 	const currencyOptions = Object.values(GLOBAL_CONSTANTS.currency_code).map((item) => ({
 		label : item,

@@ -36,7 +36,7 @@ function Email({ orgData = {} }) {
 				setFilters={setFilters}
 				data={data}
 				loading={loading}
-				config={emailConfig}
+				config={emailConfig({ orgData })}
 			/>
 		</div>
 	);

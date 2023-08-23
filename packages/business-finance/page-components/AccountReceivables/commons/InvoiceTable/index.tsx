@@ -157,14 +157,18 @@ function InvoiceTable({
 				columns={columnsFiltered}
 				loading={invoiceLoading}
 			/>
-			<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
+			<div
+				className={cl`${styles.pagination_container} ${
+					showFilters && styles.nomargin
+				}`}
+			>
 				<Pagination
 					type="table"
 					currentPage={pageInvoiceList}
 					totalItems={recordInvoiceList}
 					pageSize={invoiceFilters.pageLimit}
 					onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
-				/> 
+				/>
 			</div>
 			{showFilters ? (
 				<FooterCard

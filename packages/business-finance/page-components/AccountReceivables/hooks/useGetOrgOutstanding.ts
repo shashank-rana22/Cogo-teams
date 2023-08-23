@@ -17,7 +17,7 @@ interface GetOrgOutstanding {
 	entityCode?: string
 }
 
-const useGetOrgOutstanding = ({ entityCode }: GetOrgOutstanding) => {
+const useGetOrgOutstanding = ({ entityCode = '' }: GetOrgOutstanding) => {
 	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
 		page      : 1,
 		pageLimit : 10,

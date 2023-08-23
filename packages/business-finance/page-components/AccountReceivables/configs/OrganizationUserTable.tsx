@@ -1,8 +1,8 @@
-import { startCase, getByKey } from '@cogoport/utils';
+import { startCase, getByKey, isEmpty } from '@cogoport/utils';
 
 import HandleCall from './HandleCall';
 
-const organizationColumn = () => [
+const organizationColumn = ({ orgData }) => [
 	{
 		Header   : 'Name',
 		id       : 'name',
@@ -26,7 +26,7 @@ const organizationColumn = () => [
 		Header   : 'Work Scopes',
 		accessor : (row) => (
 			<div>
-				{row?.work_scopes?.length > 0 ? (
+				{!isEmpty(row?.work_scopes) ? (
 					<div>
 						{(getByKey(row, 'work_scopes') as []).map((val) => (
 							<div key={val}>{startCase(val)}</div>
@@ -40,7 +40,7 @@ const organizationColumn = () => [
 	},
 	{
 		Header   : '',
-		accessor : (row) => <HandleCall row={row} />,
+		accessor : (row) => <HandleCall row={row} orgData={orgData} />,
 		id       : 'mobile',
 	},
 ];

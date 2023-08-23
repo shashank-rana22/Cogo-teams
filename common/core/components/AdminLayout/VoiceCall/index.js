@@ -11,6 +11,7 @@ import useFetchFirebaseRoom from './hooks/useFetchFirebase';
 import useHangUpCall from './hooks/useHangUpCall';
 import useOutgoingCall from './hooks/useOutgoingCall';
 import useUpdateLiveCallStatus from './hooks/useUpdateLiveCallStatus';
+import LogModal from './LogModal';
 import MinimizeCallModal from './MinimizeModal';
 
 const SECS_TO_MS = 1000;
@@ -48,6 +49,7 @@ function VoiceCall({ firestore = {} }) {
 		callRecordId = '',
 		callEndAt = '',
 		conferenceType = '',
+		voiceCallData: callData,
 	} = callState || {};
 
 	const {
@@ -55,7 +57,7 @@ function VoiceCall({ firestore = {} }) {
 		openFeedbackform,
 	} = useCloseVoiceCall({ setCallState });
 
-	const { makeCallApi = () => {}, callLoading } = useOutgoingCall({
+	const { makeCallApi = () => { }, callLoading } = useOutgoingCall({
 		voiceCallData,
 		setCallState,
 		unmountVoiceCall,
@@ -67,12 +69,13 @@ function VoiceCall({ firestore = {} }) {
 	});
 
 	const {
-		hangUpCall = () => {},
+		hangUpCall = () => { },
 		hangUpLoading,
 	} = useHangUpCall({
 		callRecordId,
 		firestore,
 		loggedInAgentId,
+		openFeedbackform,
 	});
 
 	useEffect(() => {
@@ -113,6 +116,8 @@ function VoiceCall({ firestore = {} }) {
 		};
 	}, [callStartAt, status]);
 
+	const showLogModal = callData?.source === 'outstanding';
+
 	return (
 		<>
 			{showCallModalType === 'fullCallModal' && (
@@ -131,7 +136,7 @@ function VoiceCall({ firestore = {} }) {
 					callState={callState}
 				/>
 			)}
-			{showCallModalType === 'feedbackModal' && (
+			{showCallModalType === 'feedbackModal' && !showLogModal && (
 				<FeedbackModal
 					receiverUserDetails={receiverUserDetails}
 					unmountVoiceCall={unmountVoiceCall}
@@ -140,6 +145,15 @@ function VoiceCall({ firestore = {} }) {
 					callEndAt={callEndAt}
 				/>
 			)}
+
+			{showCallModalType === 'feedbackModal' && showLogModal && (
+				<LogModal
+					showLog
+					organizationId={callData?.orgData?.selfOrganizationId}
+					unmountVoiceCall={unmountVoiceCall}
+				/>
+			)}
+
 			{showCallModalType === 'minimizedModal' && (
 				<MinimizeCallModal
 					receiverUserDetails={receiverUserDetails}

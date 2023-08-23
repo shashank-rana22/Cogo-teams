@@ -6,11 +6,9 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 function useCreateCommunicationLog({
-	formData = {},
-	organizationId = '',
-	setShowLog = () => {},
-	reset = () => {},
-	refetch = () => {},
+	formData,
+	organizationId,
+	unmountVoiceCall,
 }) {
 	const profile = useSelector((state) => state.profile || {});
 	const [{ loading }, trigger] = useRequest({
@@ -73,10 +71,8 @@ function useCreateCommunicationLog({
 			await trigger({
 				data: payload,
 			});
+			unmountVoiceCall();
 			Toast.success('Saved Successfully');
-			refetch();
-			reset();
-			setShowLog(false);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}

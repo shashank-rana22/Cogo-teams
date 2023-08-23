@@ -2,7 +2,7 @@ import { getByKey } from '@cogoport/utils';
 
 import HandleCall from './HandleCall';
 
-const emailConfig = [
+const emailConfig = ({ orgData }) => [
 	{
 		Header   : 'Recipient',
 		id       : 'recipient',
@@ -23,7 +23,7 @@ const emailConfig = [
 	},
 	{
 		Header   : '',
-		accessor : (row) => <HandleCall row={row} />,
+		accessor : (row) => <HandleCall row={row} orgData={orgData} />,
 		id       : 'mobile',
 	},
 ];
