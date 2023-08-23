@@ -13524,6 +13524,16 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	warehouse_app: [
+		{
+			api         : 'get_air_coe_warehouse_app_warehouse_app',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_app_cargo_scan',
+			access_type : 'private',
+		},
+	],
 	printing_desk: [
 		{
 			api         : 'post_air_coe_documents',
