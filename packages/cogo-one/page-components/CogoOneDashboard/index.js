@@ -34,7 +34,11 @@ function CogoOneDashboard() {
 	return (
 		<div>
 			<div className={styles.prime_container}>
-				<Component isRolePresent={isRolePresent} viewType={viewType} />
+				<Component
+					key={dashboardType}
+					isRolePresent={isRolePresent}
+					viewType={viewType}
+				/>
 			</div>
 		</div>
 	);

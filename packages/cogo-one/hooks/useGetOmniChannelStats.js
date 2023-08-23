@@ -6,14 +6,14 @@ import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
 
-const commonPayload = {
+const COMMON_PAYLOAD = {
 	supply_stats_required     : false,
 	sales_stats_required      : false,
 	show_agent_activity_graph : false,
 	filters                   : {},
 };
 
-const viewTypePayloads = {
+const VIEW_TYPE_PAYLOADS = {
 	default: {
 		sales_stats_required: true,
 	},
@@ -39,8 +39,8 @@ const viewTypePayloads = {
 };
 
 const getAdditionalPayloadForViewType = (viewType) => ({
-	...commonPayload,
-	...viewTypePayloads[viewType] || {},
+	...COMMON_PAYLOAD,
+	...VIEW_TYPE_PAYLOADS[viewType] || {},
 });
 
 const getDateString = ({ date }) => formatDate({
