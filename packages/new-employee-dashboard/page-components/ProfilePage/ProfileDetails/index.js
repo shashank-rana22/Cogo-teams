@@ -100,6 +100,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 													<ModalComponent
 														data={profileData}
 														getEmployeeDetails={getEmployeeDetails}
+														setShow={setShow}
 													/>
 												</Modal.Body>
 											</div>

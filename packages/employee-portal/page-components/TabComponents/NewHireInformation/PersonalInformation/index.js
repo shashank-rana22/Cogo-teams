@@ -19,7 +19,7 @@ const MOBILE_NUMBER = 'mobile_number';
 const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
 const EMERGENCY_CONTACT_DETAILS = 'emergency_contact_details';
-const DESIGNATION = 'designation';
+const DESIGNATION = 'role';
 const HIRING_MANAGER = 'hiring_manager';
 
 const removeTypeField = (controlItem) => {
@@ -30,7 +30,7 @@ const removeTypeField = (controlItem) => {
 const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth',
 	'personal_email', 'mobile_number', 'passport_size_photo_url'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'role', 'date_of_joining',
 	'cogoport_email', 'hiring_manager',
 ];
 

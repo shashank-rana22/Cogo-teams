@@ -24,7 +24,7 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		mobile_country_code,
 		mobile_number,
 		permanent_address, present_address, cogoport_email, date_of_birth,
-		date_of_joining, designation, emergency_contact_details,
+		date_of_joining, role, emergency_contact_details,
 		employee_code, hiring_manager, hr, hrbp, office_location,
 	} = detail || {};
 
@@ -52,7 +52,7 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		cogoport_email,
 		date_of_birth             : formatdate({ date: date_of_birth }),
 		date_of_joining           : formatdate({ date: date_of_joining }),
-		designation               : startCase(designation),
+		role                      : startCase(role),
 		employee_code,
 		office_location           : startCase(office_location),
 		hiring_manager            : startCase(hiring_manager?.name),

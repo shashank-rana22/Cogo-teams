@@ -1,14 +1,25 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 const controls = [
 	{
 		name           : 'roles',
 		label          : 'ROLES',
 		placeholder    : 'Select Role',
-		type           : 'select',
+		type           : 'asyncSelect',
 		isClearable    : true,
-		options        : GLOBAL_CONSTANTS.options.role_options,
+		initialCall    : true,
+		asyncKey       : 'list_employee_roles',
 		defaultOptions : true,
+		multiple       : true,
+	},
+	{
+		name           : 'department',
+		label          : 'DEPARTMENT',
+		placeholder    : 'Select Department',
+		type           : 'asyncSelect',
+		isClearable    : true,
+		initialCall    : true,
+		asyncKey       : 'list_employee_departments',
+		defaultOptions : true,
+		multiple       : true,
 	},
 	{
 		name           : 'joining_date',

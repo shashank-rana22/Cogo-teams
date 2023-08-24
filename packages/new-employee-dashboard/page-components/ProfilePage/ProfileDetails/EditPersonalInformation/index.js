@@ -36,9 +36,9 @@ const removeTypeField = (controlItem) => {
 const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth',
 	'personal_email', 'mobile_number', 'passport_size_photo_url'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'role_id', 'date_of_joining',
 	'cogoport_email', 'hiring_manager_id', 'attendance', 'learning_indicator', 'predictive_index',
-	'department', 'office_location',
+	'department_id', 'office_location',
 ];
 
 const ADDITIONAL_DETAILS_MAPPING = ['relation_type',
@@ -101,17 +101,20 @@ const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING
 	</div>
 ));
 
-function PersonalDetails({ data: content, getEmployeeDetails }) {
+function PersonalDetails({ data: content, getEmployeeDetails, setShow = () => {} }) {
 	const { handleSubmit, control, formState: { errors }, setValue, watch, getValues } = useForm();
 
 	const controlsvalue = controls({ content });
 
 	const id = content?.detail?.id;
-	const status = content?.detail?.status;
 	const cogo_mail = content?.detail?.cogoport_email;
 	const additional_information_id = content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]?.id;
-
-	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, SOURCE, status });
+	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({
+		id,
+		getEmployeeDetails,
+		SOURCE,
+		setShow,
+	});
 
 	const onSubmit = (values) => {
 		const {

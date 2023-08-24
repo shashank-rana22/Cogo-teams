@@ -59,6 +59,7 @@ function useUpdateEmployeeDetails({
 	getEmployeeDetails = () => {},
 	offerLetter = {},
 	paySlip = {},
+	setShow = () => {},
 }) {
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
@@ -83,6 +84,7 @@ function useUpdateEmployeeDetails({
 					...GET_PAYLOAD_MAPPING?.[formType],
 				},
 			});
+			setShow('');
 			getEmployeeDetails();
 			Toast.success('Details have been saved successfully!');
 		} catch (err) {

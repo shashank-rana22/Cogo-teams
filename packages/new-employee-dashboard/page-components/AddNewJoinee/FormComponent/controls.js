@@ -53,11 +53,12 @@ const controls = [
 		placeholder : 'Employee Id',
 	},
 	{
-		name        : 'designation',
-		type        : 'select',
-		label       : 'Designation*',
+		name        : 'role_id',
+		type        : 'asyncSelect',
+		label       : 'Role*',
 		placeholder : 'Role',
-		options     : GLOBAL_CONSTANTS.options.role_options,
+		initialCall : true,
+		asyncKey    : 'list_employee_roles',
 		rules       : {
 			required: 'Role is required',
 		},
@@ -131,11 +132,12 @@ const controls = [
 
 	},
 	{
-		name        : 'department',
-		type        : 'select',
+		name        : 'department_id',
+		type        : 'asyncSelect',
 		label       : 'Department*',
 		placeholder : 'Select Department',
-		options     : GLOBAL_CONSTANTS.department_options,
+		initialCall : true,
+		asyncKey    : 'list_employee_departments',
 		rules       : {
 			required: 'Department is required',
 		},
@@ -201,6 +203,7 @@ const controls = [
 		asyncKey    : 'list_employees',
 		label       : 'HRBP*',
 		placeholder : 'HRBP',
+		initialCall : true,
 		rules       : {
 			required: 'HRBP is required',
 		},
