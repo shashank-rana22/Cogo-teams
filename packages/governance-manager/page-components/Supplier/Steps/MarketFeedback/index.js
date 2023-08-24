@@ -32,7 +32,6 @@ function MarketFeedback({ t, organization_id, service, getOrganizationService, i
 		organization_service_id: service_id,
 	});
 
-	console.log(data);
 	const {
 		control,
 		handleSubmit,

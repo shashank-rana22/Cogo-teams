@@ -127,15 +127,6 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 				</div>
 			) : (
 				<div className={styles.step_two_footer}>
-					{' '}
-					<Button
-						themeType="secondary"
-						style={{ fontWeight: 600 }}
-						onClick={() => { setStep(1); }}
-					>
-						{t('supplier_page_contract_sla_submit_and_next_button_label')}
-
-					</Button>
 					<div className={styles.side_line_buttons}>
 						<Button
 							style={{ fontWeight: 600 }}
