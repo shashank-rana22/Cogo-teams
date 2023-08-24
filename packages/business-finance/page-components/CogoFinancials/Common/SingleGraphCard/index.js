@@ -2,18 +2,32 @@ import { Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import dynamic from 'next/dynamic';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { INFO_CONTENT, LABEL_MAPPING } from '../../constants';
+import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
+import { TOUR_COMMON_PROPS } from '../tourCommonProps';
+import { CLOSED_PARENT_SERVICES_STEPS } from '../tourSteps';
 
 import styles from './styles.module.css';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const BOTTOM_AXIS_ROTATION = 20;
 const DEFAULT_ROTATION = 0;
 const STRAIGHT_AXIS_LIMIT = 2;
 const MINIMUM_POSITIVE = 0;
+const MID_GRAPH_INDEX = 1;
+const MAX_ANIMATION_TIME = 500;
+const MIN_VALUE = 1;
+const LOW_VALUE_FRACTION = 3;
+const DEFAULT_FRACTION = 0;
 
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
@@ -35,13 +49,14 @@ const formatPercentageLabel = (value) => `${formatAmount({
 	options : {
 		style                 : 'decimal',
 		notation              : 'compact',
-		maximumFractionDigits : 0,
+		maximumFractionDigits : Number(value) < MIN_VALUE ? LOW_VALUE_FRACTION : DEFAULT_FRACTION,
 	},
 })}%`;
 
 function SingleGraphCard({
 	heading = '',
 	setActiveBar = () => {},
+	activeBar = '',
 	isViewDetailsVisible = false,
 	onViewDetails = () => { },
 	taxType = '',
@@ -50,7 +65,10 @@ function SingleGraphCard({
 	serviceLevelLoading = false,
 	defaultWidth = '300',
 	showShipmentList = false,
+	graphIndex = 0,
 }) {
+	const { tour, setTour, setIsTourInitial } = useContext(TourContext);
+	const [isAnimationCompleted, setIsAnimationCompleted] = useState(false);
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 	const graphKey = heading;
 
@@ -88,8 +106,25 @@ function SingleGraphCard({
 		return '#f37166'; // dark red
 	};
 
+	useEffect(() => {
+		setTimeout(() => {
+			setIsAnimationCompleted(true);
+		}, MAX_ANIMATION_TIME); // waiting for animation to complete first
+	}, []);
+
 	return (
 		<div className={styles.container}>
+			{isAnimationCompleted && graphIndex === MID_GRAPH_INDEX && (
+				<Tour
+					steps={CLOSED_PARENT_SERVICES_STEPS}
+					isOpen={tour && isEmpty(activeBar)}
+					onRequestClose={() => {
+						setTour(false);
+						setIsTourInitial(true);
+					}}
+					{...TOUR_COMMON_PROPS}
+				/>
+			)}
 			{!serviceLevelLoading && (
 				<div className={styles.flexhead}>
 					<RenderCardHeader
@@ -103,7 +138,6 @@ function SingleGraphCard({
 							onClick={onViewDetails}
 						>
 							View Details
-
 						</Button>
 					)}
 				</div>
@@ -117,7 +151,9 @@ function SingleGraphCard({
 				className={styles.graph}
 			>
 				{!serviceLevelLoading ? (
-					<div>
+					<div data-tour={graphIndex === MID_GRAPH_INDEX
+						? 'closed-single-parent-bar' : null}
+					>
 						{!isEmpty(formattedServiceLevelData) ? (
 							<MyResponsiveBar
 								data={formattedServiceLevelData}
@@ -190,6 +226,7 @@ function SingleGraphCard({
 										maximumFractionDigits : 2,
 									},
 								})}
+								isBarClickable={!isLastView}
 							/>
 						) : (
 							<div className={styles.empty_section}>
@@ -203,7 +240,6 @@ function SingleGraphCard({
 					</div>
 				)}
 			</div>
-
 		</div>
 	);
 }

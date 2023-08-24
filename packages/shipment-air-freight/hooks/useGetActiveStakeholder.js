@@ -27,9 +27,12 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{ role_ids: [geo.uuid.coe_finance_head, geo.uuid.prod_settlement_executive], stakeholder: 'credit_control' },
 		{
-			role_ids: [geo.uuid.ff_cost_booking_executive,
-				geo.uuid.costbooking_ops_role_ids, geo.uuid.costbooking_ops_manager_role_ids],
-			stakeholder: 'cost_booking_manager',
+			role_ids    : [geo.uuid.costbooking_ops_role_ids, geo.uuid.costbooking_ops_manager_role_ids],
+			stakeholder : 'cost_booking_manager',
+		},
+		{
+			role_ids    : [geo.uuid.ff_cost_booking_executive],
+			stakeholder : 'ff_cost_booking',
 		},
 		{ role_ids: geo.uuid.so1_so2_ops_role_id, stakeholder: 'so1_so2_ops' },
 	];

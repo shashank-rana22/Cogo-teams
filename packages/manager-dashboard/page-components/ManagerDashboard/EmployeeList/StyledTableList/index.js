@@ -1,5 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
@@ -16,6 +17,8 @@ function RenderStyledTable({
 	setSortData,
 	sortData,
 }) {
+	const { t } = useTranslation(['managerDashboard']);
+
 	const columns = getColumns({
 		setEmployeeId,
 		level,
@@ -28,7 +31,7 @@ function RenderStyledTable({
 		<StyledTable
 			columns={columns}
 			data={employee_list}
-			emptyText="No Data Found"
+			emptyText={t('managerDashboard:empty_text')}
 		/>
 	);
 }

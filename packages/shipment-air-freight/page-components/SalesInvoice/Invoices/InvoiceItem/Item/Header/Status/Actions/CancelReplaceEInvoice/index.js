@@ -1,22 +1,29 @@
 import { Button, Modal } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import useCancelInvoice from '../../../../../../../../../hooks/useCancelInvoice';
+import useCancelReplaceInvoice from '../../../../../../../../../hooks/useCancelReplaceInvoice';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function CancelEInvoice({
+function CancelReplaceEInvoice({
+	showCancelModal = {},
+	setShowCancelModal = () => {},
 	bfInvoice = {},
-	show = false,
-	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
 	const { control, handleSubmit } = useForm();
 
-	const { loading, submit } = useCancelInvoice();
+	const { loading, onRevoke } = useCancelReplaceInvoice();
+
+	const modalType = ([
+		{ type: 'CANCEL_INVOICE', criteria: showCancelModal?.showCancel },
+		{ type: 'REPLACE_INVOICE', criteria: showCancelModal?.showReplace },
+	].filter((item) => (item.criteria === true)) || [])[GLOBAL_CONSTANTS.zeroth_index]?.type;
 
 	const getElement = (type) => {
 		const ELEMENT_MAPPING = {
@@ -30,31 +37,36 @@ function CancelEInvoice({
 		? [values?.documentUrls?.finalUrl]
 		: undefined);
 
-	const handleCancel = (values) => {
-		submit({
+	const handleClose = () => {
+		setShowCancelModal({ showCancel: false, showReplace: false });
+	};
+
+	const handleRevoke = (values) => {
+		onRevoke({
 			cancelReason         : values?.cancelReason,
 			proformaNumber       : bfInvoice?.proformaNumber,
-			closeModal           : onClose,
+			closeModal           : handleClose,
 			invoiceCombinationId : invoice?.id,
 			invoiceId            : bfInvoice?.id,
 			refetch,
 			documentUrls         : getDocumentUrl(values),
+			incidentSubType      : modalType,
 		});
 	};
 
 	return (
 		<Modal
-			show={show}
-			onClose={onClose}
+			show={showCancelModal?.showCancel || showCancelModal?.showReplace}
+			onClose={handleClose}
 			className="secondary sm"
-			onOuterClick={onClose}
+			onOuterClick={handleClose}
 		>
 			<Modal.Header
-				title="Cancel E-Invoice"
+				title={startCase(modalType)}
 				className={styles.heading}
 			/>
 			<Modal.Body>
-				{controls?.map((c) => {
+				{controls({ type: modalType })?.map((c) => {
 					const Element = getElement(c?.type);
 					return (Element
 						? (
@@ -77,13 +89,13 @@ function CancelEInvoice({
 				<Button
 					className="secondary md"
 					style={{ marginRight: '10px' }}
-					onClick={onClose}
+					onClick={handleClose}
 				>
 					Cancel
 				</Button>
 				<Button
 					className="primary md"
-					onClick={handleSubmit(handleCancel)}
+					onClick={handleSubmit(handleRevoke)}
 				>
 					{loading ? 'Submit' : 'Submiting'}
 				</Button>
@@ -92,4 +104,4 @@ function CancelEInvoice({
 	);
 }
 
-export default CancelEInvoice;
+export default CancelReplaceEInvoice;

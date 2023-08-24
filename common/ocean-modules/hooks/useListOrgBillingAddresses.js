@@ -38,19 +38,17 @@ const useListOrganizationBillingAddresses = ({
 	useEffect(() => {
 		if (organization_id || watchModeOfExecution) {
 			trigger();
-		}
 
-		if (organization_id && watchModeOfExecution === 'pick_up') {
-			orgPocTrigger();
+			if (watchModeOfExecution === 'pickup') orgPocTrigger();
 		}
 	}, [organization_id, watchModeOfExecution, trigger, orgPocTrigger]);
 
 	return {
-		billingAddressData: data?.list,
+		billingAddressData : data?.list,
 		loading,
 		trigger,
 		orgPocLoading,
-		orgPocData,
+		orgPocData         : orgPocData?.list,
 		orgPocTrigger,
 	};
 };

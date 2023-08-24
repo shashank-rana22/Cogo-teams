@@ -1,24 +1,29 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import Shipment from './Shipment';
 import Trends from './Trend';
 
-const ATHENA_DASHBOARD_MAPPING = {
+const getAthenaDashboardMapping = ({ t = () => {} }) => ({
 	shipments: {
 		name      : 'shipments',
-		title     : 'Shipments',
+		title     : t('athenaDashboard:tabs_shipments_label'),
 		Component : Shipment,
 	},
 	trends: {
 		name      : 'trends',
-		title     : 'Trends',
+		title     : t('athenaDashboard:tabs_trends_labels'),
 		Component : Trends,
 	},
-};
+});
 
 function AthenaDashboard() {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	const [activeTab, setActiveTab] = useState('shipments');
+
+	const athenaDashboardMapping = getAthenaDashboardMapping({ t });
 
 	return (
 		<Tabs
@@ -27,7 +32,7 @@ function AthenaDashboard() {
 			themeType="primary"
 			onChange={setActiveTab}
 		>
-			{Object.values(ATHENA_DASHBOARD_MAPPING).map((item) => {
+			{Object.values(athenaDashboardMapping).map((item) => {
 				const { name = '', title = '', Component } = item;
 
 				if (!Component) return null;
