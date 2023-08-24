@@ -4,9 +4,11 @@ import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
+import useGetCrossEntityCreditNotes from '../../../hooks/useGetCrossEntityCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
 import CreditNote from '../CreditNote';
+import CrossEntityCreditNote from '../CrossEntityCreditNote';
 import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 
 import Header from './Header';
@@ -24,7 +26,19 @@ function Invoices({
 	isCustomer = false,
 	isIRNGenerated = false,
 }) {
-	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
+	const filteredGroupedInvoices = Object.entries(groupedInvoices).reduce(
+		(acc, [key, value]) => {
+			const present = value?.invoices?.every((val) => isEmpty(val?.parent_invoice_id));
+			if (present) {
+				acc[key] = value;
+			}
+
+			return acc;
+		},
+		{},
+	);
+
+	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(filteredGroupedInvoices || {}) });
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
@@ -51,6 +65,8 @@ function Invoices({
 	disableAction = showForOldShipments ? false : disableAction;
 
 	const { list, cnRefetch, loading: cNLoading } = useGetCreditNotes({});
+
+	const { CECreditNoteData, loadingCECN } = useGetCrossEntityCreditNotes();
 
 	return (
 		<main className={styles.container}>
@@ -92,6 +108,15 @@ function Invoices({
 						invoicesList={invoicesList}
 					/>
 				) : null}
+
+			{!isEmpty(CECreditNoteData) ? (
+				<CrossEntityCreditNote
+					loading={loadingCECN}
+					list={CECreditNoteData}
+					invoicesList={invoicesList}
+				/>
+			) : null}
+
 		</main>
 	);
 }
