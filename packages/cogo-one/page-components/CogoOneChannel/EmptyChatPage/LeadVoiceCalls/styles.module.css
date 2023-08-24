@@ -15,7 +15,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 94%;
-	height: 10%;
+	height: 50px;
 	margin-left: 8px;
 }
 
@@ -27,7 +27,7 @@
 .list_container {
 	display: flex;
 	flex-wrap: wrap;
-	height: calc(90% - 45px);
+	height: calc(100% - 95px);
 	overflow: scroll;
 }
 
