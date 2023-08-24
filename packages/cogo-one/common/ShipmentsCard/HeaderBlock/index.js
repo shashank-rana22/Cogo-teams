@@ -1,7 +1,5 @@
-import { Popover, ButtonGroup, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
+import { IcMOverflowDot, IcMCopy, IcMAgentManagement } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -15,18 +13,31 @@ const ROUTES_MAPPING = {
 	air_freight : 'air-freight',
 };
 
-const getButtonOptions = ({ setShowRaiseTicket, handleRowClick = () => {} }) => [
+const getButtonOptions = ({
+	setShowRaiseTicket,
+	setShowPocModal, setShowPopover, shipmentItem,
+	showAddPrimaryUserButton = false,
+	handleRowClick = () => {},
+}) => [
 	{
-		key       : 'view_shipments',
-		children  : 'View Shipments',
-		onClick   : (e) => handleRowClick({ e }),
+		key      : 'view_shipments',
+		children : 'View Shipments',
+		onClick  : (e) => {
+			handleRowClick({ e });
+			setShowPopover('');
+		},
 		condition : ['all_shipments', 'user_shipments'],
+		show      : true,
 	},
 	{
-		key       : 'view_documents',
-		children  : 'View Documents',
-		onClick   : (e) => handleRowClick({ e, activeTab: 'documents' }),
+		key      : 'view_documents',
+		children : 'View Documents',
+		onClick  : (e) => {
+			handleRowClick({ e, activeTab: 'documents' });
+			setShowPopover('');
+		},
 		condition : ['all_shipments', 'user_shipments'],
+		show      : true,
 	},
 	{
 		key      : 'raise_ticket',
@@ -34,12 +45,30 @@ const getButtonOptions = ({ setShowRaiseTicket, handleRowClick = () => {} }) => 
 		onClick  : (e) => {
 			e.stopPropagation();
 			setShowRaiseTicket(true);
+			setShowPopover('');
 		},
-		condition: ['user_shipments'],
+		condition : ['user_shipments'],
+		show      : true,
+	},
+	{
+		key      : 'add_primary_poc',
+		children : 'Set Primary Poc',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setShowPocModal({ show: true, shipmentData: shipmentItem });
+			setShowPopover('');
+		},
+		condition : ['all_shipments', 'user_shipments'],
+		show      : showAddPrimaryUserButton,
 	},
 ];
 
-function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '' }) {
+function HeaderBlock({
+	shipmentItem = {}, setShowPocDetails = () => {},
+	type = '', setShowPopover = () => {}, showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
+}) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
 		userId    : profile.user.id,
@@ -81,9 +110,18 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		window.open(shipmentDetailsPage, '_blank');
 	};
 
-	const buttons = getButtonOptions({ setShowRaiseTicket, handleRowClick });
+	const buttons = getButtonOptions({
+		shipmentId,
+		partnerId,
+		setShowRaiseTicket,
+		setShowPocModal,
+		setShowPopover,
+		shipmentItem,
+		showAddPrimaryUserButton,
+		handleRowClick,
+	});
 
-	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
+	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type) && itm?.show);
 
 	return (
 		<div className={styles.container}>
@@ -106,32 +144,33 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 			</div>
 
 			<div className={styles.icons_container}>
-				<IcMCopy
-					className={cl`${styles.copy_icon} 
-					${type !== 'all_shipments' ? styles.user_activity_copy_icon : ''}`}
-					onClick={(e) => {
-						e.stopPropagation();
-						handleCopyShipmentData({ shipmentItem });
-					}}
-				/>
 
-				{type === 'all_shipments' && (
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.message_reply}
-						height={25}
-						width={25}
-						alt="message"
-						className={styles.message_icon_styles}
+				{type === 'all_shipments' ? (
+					<Tooltip content="POCs" placement="bottom">
+						<IcMAgentManagement
+							className={styles.poc_details}
+							onClick={(e) => {
+								e.stopPropagation();
+								setShowPocDetails(shipmentItem);
+							}}
+						/>
+					</Tooltip>
+				) : null}
+
+				<Tooltip content="Copy" placement="bottom">
+					<IcMCopy
+						className={styles.copy_icon}
 						onClick={(e) => {
 							e.stopPropagation();
-							setShowPocDetails(shipmentItem);
+							handleCopyShipmentData({ shipmentItem });
 						}}
 					/>
-				)}
+				</Tooltip>
 
 				<Popover
 					placement="bottom-end"
 					caret={false}
+					visible={showPopover === shipmentId}
 					render={(
 						<ButtonGroup
 							size="sm"
@@ -142,7 +181,10 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				>
 					<IcMOverflowDot
 						className={styles.overflow_container}
-						onClick={(e) => e.stopPropagation()}
+						onClick={(e) => {
+							e.stopPropagation();
+							setShowPopover((prevShowPopover) => (prevShowPopover === shipmentId ? '' : shipmentId));
+						}}
 					/>
 				</Popover>
 			</div>
