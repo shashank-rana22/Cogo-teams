@@ -2,7 +2,7 @@ import {
 	Tabs, TabPanel, Input, Pagination, Toggle, Button, Select, Popover,
 } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import StyledTable from '../StyledTable';
@@ -35,6 +35,12 @@ function TableView({ search, setSearch }) {
 	const {
 		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
 	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction, pageLimit, selectedIds, setSelectedIds });
+
+	useEffect(() => {
+		if (!bulkAction) {
+			setSelectedIds([]);
+		}
+	}, [bulkAction]);
 
 	return (
 		<div className={styles.container}>

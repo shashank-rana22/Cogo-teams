@@ -94,7 +94,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 											placement="top"
 											closeOnOuterClick
 										>
-											<Modal.Header title={name} />
+											<Modal.Header title={startCase(name)} />
 											<div className={styles.styled_body}>
 												<Modal.Body>
 													<ModalComponent

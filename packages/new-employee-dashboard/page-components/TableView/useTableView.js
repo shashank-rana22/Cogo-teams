@@ -72,10 +72,7 @@ const useTableView = ({
 	}, [fetch, search]);
 
 	const onClickNewJoinerColumn = (id) => {
-		router.push(
-			`/new-employee-dashboard/${id}`,
-			`/new-employee-dashboard/${id}`,
-		);
+		router.push('/new-employee-dashboard/[profile_id]', `/new-employee-dashboard/${id}`);
 	};
 
 	const { downloadDocuments, loading:documentLoading } = useGetZipFile();
