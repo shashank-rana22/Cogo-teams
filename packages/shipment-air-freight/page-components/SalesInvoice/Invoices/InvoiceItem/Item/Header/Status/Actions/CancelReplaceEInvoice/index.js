@@ -51,6 +51,7 @@ function CancelReplaceEInvoice({
 			refetch,
 			documentUrls         : getDocumentUrl(values),
 			incidentSubType      : modalType,
+			entityId             : GLOBAL_CONSTANTS.currency_entity_ids[bfInvoice?.ledgerCurrency],
 		});
 	};
 

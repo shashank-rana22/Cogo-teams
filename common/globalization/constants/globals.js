@@ -56,6 +56,11 @@ const GLOBAL_CONSTANTS = {
 		TH : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
 		CN : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 	},
+	currency_entity_ids: {
+		INR : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+		VND : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		SGD : '04bd1037-c110-4aad-8ecc-fc43e9d4069d',
+	},
 	country_ids: {
 		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
 		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',

@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -40,13 +41,14 @@ function CancelReplaceEInvoice({
 	const handleCancel = (values) => {
 		submit({
 			cancelReason         : values?.cancelReason,
-			proformaNumber       : bfInvoice?.proformaNumber,
+			proformaNumber       : bfInvoice?.einvoiceNumber,
 			closeModal           : onClose,
 			invoiceCombinationId : invoice?.id,
 			invoiceId            : bfInvoice?.id,
 			refetch,
 			documentUrls         : getDocumentUrl(values),
 			incidentSubType      : MODAL_INCIDENT_MAP[modalType],
+			entityId             : GLOBAL_CONSTANTS.currency_entity_ids[bfInvoice?.ledgerCurrency],
 		});
 	};
 
