@@ -2,7 +2,7 @@ import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 
 import InfoHeader from '../page-components/InfoHeader';
 
-export const repositoryFields = (t) => ({
+export const repositoryFields = (t = () => {}) => ({
 	fields: [
 		{
 			key   : 'airline_id',

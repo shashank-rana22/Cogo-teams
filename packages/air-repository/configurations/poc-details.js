@@ -1,4 +1,4 @@
-export const pocDetailsFields = (t) => ({
+export const pocDetailsFields = (t = () => {}) => ({
 	fields: [
 		{
 			key   : 'name',
