@@ -8,9 +8,7 @@ const getUpdatedKeysInPayload = (newValue, oldValue) => {
 	return newValue;
 };
 
-const getPersonalInfoPayload = (data, content) => {
-	const { detail } = content || {};
-
+const getPersonalInfoPayload = (data, detail) => {
 	const NEW_DATA = {};
 	(Object.keys(data) || []).forEach((element) => {
 		NEW_DATA[element] = getUpdatedKeysInPayload(data[element], detail?.[element]);
@@ -39,26 +37,36 @@ const getPersonalInfoPayload = (data, content) => {
 	};
 };
 
-const getEducationalQualificationsPayload = (data) => ({
-	employee_education_details: (data?.educational_qualification || []).map(
+const getEducationalQualificationsPayload = (data, detail) => {
+	const employee_education_details = (data?.educational_qualification || []).map(
 		(item) => ({
 			...item,
 			degree_proof : item?.degree_proof?.finalUrl ? item?.degree_proof?.finalUrl : item?.degree_proof,
 			started_at   : String(item.started_at),
 			ended_at     : String(item.ended_at),
 		}),
-	),
-});
+	);
 
-const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip }) => ({
-	employee_experience_details: (data?.employment_history || []).map((item) => ({
+	return {
+		employee_education_details:
+				getUpdatedKeysInPayload(employee_education_details, detail?.employee_education_details),
+	};
+};
+
+const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip, detail }) => {
+	const employee_experience_details = (data?.employment_history || []).map((item) => ({
 		...item,
 		started_at   : String(item.started_at),
 		ended_at     : String(item.ended_at),
 		offer_letter : offerLetter?.finalUrl,
 		payslip      : paySlip?.finalUrl,
-	})),
-});
+	}));
+
+	return {
+		employee_experience_details:
+				getUpdatedKeysInPayload(employee_experience_details, detail?.employee_experience_details),
+	};
+};
 
 function useUpdateEmployeeDetails({
 	id,
@@ -77,10 +85,12 @@ function useUpdateEmployeeDetails({
 
 	const updateEmployeeDetails = async ({ data, formType, content }) => {
 		try {
+			const { detail } = content || {};
+
 			const GET_PAYLOAD_MAPPING = {
-				personal_info             : getPersonalInfoPayload(data, content),
-				educational_qualification : getEducationalQualificationsPayload(data),
-				employment_history        : getEmploymentHistoryPayload({ data, offerLetter, paySlip }),
+				personal_info             : getPersonalInfoPayload(data, detail),
+				educational_qualification : getEducationalQualificationsPayload(data, detail),
+				employment_history        : getEmploymentHistoryPayload({ data, offerLetter, paySlip, detail }),
 			};
 
 			await trigger({
