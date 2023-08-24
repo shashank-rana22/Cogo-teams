@@ -50,32 +50,6 @@ const getEducationalQualificationsPayload = (data) => ({
 	),
 });
 
-const getAddressDetailsPayload = (data, content) => {
-	const { detail } = content || {};
-
-	console.log('detail :: ', detail);
-
-	const permanent_address = {
-		address : data?.permanent_address,
-		city    : data?.permanent_city,
-		pincode : data?.permanent_pincode,
-		state   : data?.permanent_state,
-		country : data?.permanent_country,
-	};
-	const present_address = {
-		address : data?.current_address,
-		city    : data?.current_city,
-		pincode : data?.current_pincode,
-		state   : data?.current_state,
-		country : data?.current_country,
-	};
-
-	return {
-		permanent_address : getUpdatedKeysInPayload(permanent_address, detail?.permanent_address),
-		present_address   : getUpdatedKeysInPayload(present_address, detail?.present_address),
-	};
-};
-
 const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip }) => ({
 	employee_experience_details: (data?.employment_history || []).map((item) => ({
 		...item,
@@ -106,7 +80,6 @@ function useUpdateEmployeeDetails({
 			const GET_PAYLOAD_MAPPING = {
 				personal_info             : getPersonalInfoPayload(data, content),
 				educational_qualification : getEducationalQualificationsPayload(data),
-				address_details           : getAddressDetailsPayload(data, content),
 				employment_history        : getEmploymentHistoryPayload({ data, offerLetter, paySlip }),
 			};
 
@@ -119,7 +92,7 @@ function useUpdateEmployeeDetails({
 
 			setShow('');
 			getEmployeeDetails();
-			// Toast.success('Details have been saved successfully!');
+			Toast.success('Details have been saved successfully!');
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data) || 'Something went wrong',
