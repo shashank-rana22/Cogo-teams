@@ -33,7 +33,10 @@ function Body({ eachItem = {}, handlePlaceCall = () => {} }) {
 					</Tooltip>
 					{mobile_number_verified ? <IcCFtick className={styles.tick_icon} /> : null}
 				</div>
-				<div className={styles.call_icon_border}>
+				<div
+					className={styles.call_icon_border}
+					style={{ cursor: mobile_number ? 'pointer' : 'not-allowed' }}
+				>
 					<IcMCall
 						className={styles.call_icon}
 						onClick={() => {

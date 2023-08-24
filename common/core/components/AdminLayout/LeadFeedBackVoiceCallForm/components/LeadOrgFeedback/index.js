@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import Form from '../../common/Form';
+import Form from '../../common/FormLayout';
 import LEAD_ORG_FEEDBACK from '../../configurations/leadOrgFeedbackForm';
 import usePostAllocationFeedback from '../../hooks/usePostAllocationFeedback';
 
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function LeadOrgFeedback({ onCloseForm = () => {}, leadOrgId = '' }) {
 	const {
 		control,
-		formState:{ errors = {} },
+		formState: { errors = {} },
 		handleSubmit,
 		watch,
 	} = useForm();

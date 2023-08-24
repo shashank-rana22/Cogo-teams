@@ -13,7 +13,7 @@ import {
 } from '@cogoport/forms';
 
 // eslint-disable-next-line import/no-cycle
-import FieldArrayController from '../common/Form/FieldArray';
+import FieldArrayController from '../common/FormLayout/FieldArray';
 
 const CONTROLLER_MAPPING = {
 	input              : InputController,
@@ -31,7 +31,7 @@ const CONTROLLER_MAPPING = {
 	mobileNumberSelect : MobileNumberController,
 };
 
-export const getFieldController = ({ controlType = 'text', Component }) => {
+export const getFieldController = ({ controlType = 'text', Component = () => {} }) => {
 	if (controlType === 'withControl') {
 		if (!Component) {
 			return null;

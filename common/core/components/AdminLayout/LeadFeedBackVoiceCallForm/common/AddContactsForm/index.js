@@ -5,7 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import CONTACT_FORM_CONTROLS from '../../configurations/contactsForm';
 import useCreateLeadUser from '../../hooks/useCreateLeadUser';
-import Form from '../Form';
+import FormLayout from '../FormLayout';
 
 import styles from './styles.module.css';
 
@@ -13,11 +13,11 @@ function AddContactsForm({
 	componentParams = {},
 	onChange = () => {},
 	onRemove = () => {},
-	value = '',
+	value = {},
 }) {
 	const {
 		control,
-		formState:{ errors = {} },
+		formState: { errors = {} },
 		handleSubmit,
 	} = useForm();
 
@@ -42,7 +42,7 @@ function AddContactsForm({
 				Add New Contact
 			</legend>
 			<div className={styles.form_div}>
-				<Form
+				<FormLayout
 					control={control}
 					errors={errors}
 					controls={CONTACT_FORM_CONTROLS}

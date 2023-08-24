@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
@@ -31,10 +30,6 @@ function Header({ eachItem = {}, handleOpenMessage = () => {} }) {
 					e.stopPropagation();
 					handleOpenMessage({ selectedLeadUser: eachItem });
 				}}
-			/>
-			<IcMOverflowDot
-				className={styles.overflow_container}
-				onClick={(e) => e.stopPropagation()}
 			/>
 		</div>
 	);

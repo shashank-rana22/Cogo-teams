@@ -23,6 +23,8 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		handlePagination,
 	} = useListLeadOrgUsers();
 
+	const geo = getGeoConstants();
+
 	const { list = [], page = 1, page_limit = 6, total_count = 0 } = data || {};
 
 	const openLeadOrgModal = ({ type = '', leadOrgId = '' }) => {
@@ -34,7 +36,6 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		);
 	};
 
-	const geo = getGeoConstants();
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 
 	const handlePlaceCall = ({ number, code, userName, leadOrgId = '', leadUserId }) => {
@@ -146,13 +147,12 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 				</div>
 			)}
 			<div className={styles.pagination_container}>
-				{!isEmpty(list) ? (
+				{!loading ? (
 					<Pagination
 						type="number"
 						currentPage={page}
 						totalItems={total_count}
 						pageSize={page_limit}
-						disabled={loading}
 						onPageChange={handlePagination}
 					/>
 				) : null}

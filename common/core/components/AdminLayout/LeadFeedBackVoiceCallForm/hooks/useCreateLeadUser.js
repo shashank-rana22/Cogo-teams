@@ -34,7 +34,7 @@ function useCreateLeadUser({ leadOrgId = '', onChange = () => {} }) {
 			onChange({ lead_user_id: res?.data?.id, name: values?.name });
 			Toast.success('Successfully Created');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}
 	};
 

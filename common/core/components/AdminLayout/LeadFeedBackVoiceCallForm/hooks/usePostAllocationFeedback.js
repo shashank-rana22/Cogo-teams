@@ -33,7 +33,7 @@ function usePostAllocationFeedback({ leadOrgId = '', onCloseForm = () => {} }) {
 			Toast.success('Successfully added the feedback');
 			onCloseForm();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}
 	};
 

@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import Form from '../../common/Form';
+import FormLayout from '../../common/FormLayout';
 import getControls from '../../configurations/getFeedbackFormControls';
 import useCreateLeadOrgUserLog from '../../hooks/useCreateLeadOrgUserLog';
 
@@ -38,7 +38,7 @@ function LogCallActivity({
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.form_container}>
-				<Form
+				<FormLayout
 					controls={controls}
 					control={control}
 					errors={errors}

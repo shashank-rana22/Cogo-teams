@@ -11,6 +11,7 @@ const getParams = ({ query, page }) => ({
 	lead_organization_data_required    : true,
 	communication_log_count_required   : true,
 	machine_intelligence_data_required : true,
+	feedback_count_required            : true,
 	page,
 	page_limit                         : 6,
 });
