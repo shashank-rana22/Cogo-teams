@@ -11,9 +11,9 @@ const NUMBER = 100;
 const PROGRESS_PERCENTAGE = 0;
 
 const COLOR_MAPPING = {
-	active           : '#ddebc0',
+	offered          : '#ddebc0',
 	rejected_by_user : '#ffcbd1',
-	inactive         : '#f1ee8e',
+	rejected         : '#f1ee8e',
 };
 
 const getColumns = ({
@@ -91,8 +91,8 @@ const getColumns = ({
 			Header   : 'STATUS',
 			accessor : (item) => (
 				<div>
-					<Pill size="md" color={COLOR_MAPPING[item?.status]}>
-						{startCase(item?.status)}
+					<Pill size="md" color={COLOR_MAPPING[item?.employee_status]}>
+						{startCase(item?.employee_status)}
 					</Pill>
 				</div>
 			),
@@ -118,14 +118,14 @@ const getColumns = ({
 		{
 			Header   : 'ACTION',
 			accessor : (item) => {
-				const { id, status } = item;
+				const { id, employee_status } = item;
 
 				return (
 					<div>
-						{status === 'rejected_by_user' ? (
+						{employee_status === 'rejected_by_user' ? (
 							<Button
 								loading={btnloading}
-								onClick={() => { updateEmployeeStatus(id, 'active', fetch).then(() => fetch()); }}
+								onClick={() => { updateEmployeeStatus(id, 'offered', fetch).then(() => fetch()); }}
 								themeType="secondary"
 							>
 								Re-Apply
