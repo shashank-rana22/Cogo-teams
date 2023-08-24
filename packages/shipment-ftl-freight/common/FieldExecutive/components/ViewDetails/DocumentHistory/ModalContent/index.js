@@ -55,7 +55,7 @@ function ModalContent(props) {
 				<div>Document History</div>
 				<div className={styles.filter}>
 					<Input
-						placeholder="Search Document Type"
+						placeholder="Search Document"
 						size="md"
 						value={filterValue}
 						onChange={(val) => {

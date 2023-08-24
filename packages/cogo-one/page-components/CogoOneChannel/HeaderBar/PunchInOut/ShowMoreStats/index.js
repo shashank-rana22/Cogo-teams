@@ -12,6 +12,11 @@ function ShowMoreStats({
 	punchedTime = '',
 	status = '',
 	handlePunchIn = () => {},
+	viewType = '',
+	agentStatsLoading = false,
+	agentStatsData = {},
+	timePeriodValue = '',
+	setTimePeriodValue = () => {},
 }) {
 	const {
 		profile: { user = {} },
@@ -38,6 +43,11 @@ function ShowMoreStats({
 					setShowDetails={setShowDetails}
 					showDetails={showDetails}
 					name={name}
+					viewType={viewType}
+					agentStatsLoading={agentStatsLoading}
+					agentStatsData={agentStatsData}
+					timePeriodValue={timePeriodValue}
+					setTimePeriodValue={setTimePeriodValue}
 				/>
 			</div>
 		</>
