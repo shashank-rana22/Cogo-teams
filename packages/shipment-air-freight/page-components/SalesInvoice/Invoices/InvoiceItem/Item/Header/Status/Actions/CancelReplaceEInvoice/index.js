@@ -44,7 +44,7 @@ function CancelReplaceEInvoice({
 	const handleRevoke = (values) => {
 		onRevoke({
 			cancelReason         : values?.cancelReason,
-			proformaNumber       : bfInvoice?.proformaNumber,
+			proformaNumber       : bfInvoice?.einvoiceNumber,
 			closeModal           : handleClose,
 			invoiceCombinationId : invoice?.id,
 			invoiceId            : bfInvoice?.id,
