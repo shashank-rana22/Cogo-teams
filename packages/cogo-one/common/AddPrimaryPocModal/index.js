@@ -1,7 +1,7 @@
 import { Modal, Button, Input, Placeholder, cl } from '@cogoport/components';
 import { IcMAppSearch } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useListOrganizationUsers from '../../hooks/useListOrganizationUsers';
 import useUpdateShipmentPrimaryPoc from '../../hooks/useUpdateShipmentPrimaryPoc';
@@ -18,11 +18,12 @@ function AddPrimaryPocModal({
 	setActiveTab = () => {},
 	fetchActivityLogs = () => {},
 }) {
-	const [selectedData, setSelectedData] = useState({});
-
 	const { show: showModal = false, shipmentData = {} } = showPocModal || {};
 
 	const { importer_exporter_id = '', primary_poc_details = {} } = shipmentData || {};
+
+	const [selectedData, setSelectedData] = useState(primary_poc_details);
+
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
@@ -44,10 +45,6 @@ function AddPrimaryPocModal({
 		setShowPocModal({ show: false, shipmentData: {} });
 		setSelectedData({});
 	};
-
-	useEffect(() => {
-		setSelectedData(primary_poc_details);
-	}, [primary_poc_details]);
 
 	return (
 		<Modal
@@ -73,7 +70,7 @@ function AddPrimaryPocModal({
 				</div>
 
 				<div className={styles.list_container}>
-					{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
+					{!isEmpty(modifiedList) ? (modifiedList || []).map((eachUser) => {
 						const {
 							user_id,
 							userName = '',

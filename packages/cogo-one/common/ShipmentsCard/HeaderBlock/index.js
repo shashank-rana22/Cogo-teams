@@ -171,7 +171,7 @@ function HeaderBlock({
 						className={styles.overflow_container}
 						onClick={(e) => {
 							e.stopPropagation();
-							setShowPopover(shipmentId);
+							setShowPopover((prevShowPopover) => (prevShowPopover === shipmentId ? '' : shipmentId));
 						}}
 					/>
 				</Popover>

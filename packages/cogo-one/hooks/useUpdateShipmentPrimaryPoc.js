@@ -31,7 +31,7 @@ function useUpdateShipmentPrimaryPoc({
 			email,
 			channel_type            : 'whatsapp',
 			countryCode,
-			mobile_no               : `${countryCode.replace('+', '')}${whatsapp_number_eformat}`,
+			mobile_no               : `${countryCode?.replace('+', '')}${whatsapp_number_eformat}`,
 		};
 
 		try {
