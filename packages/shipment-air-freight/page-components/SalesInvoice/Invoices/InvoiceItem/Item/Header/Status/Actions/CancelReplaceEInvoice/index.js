@@ -59,7 +59,7 @@ function CancelReplaceEInvoice({
 			refetch,
 			documentUrls         : getDocumentUrl(values),
 			incidentSubType      : modalType,
-			entityId             : getIncidenceEntity,
+			entityId             : getIncidenceEntity(),
 		});
 	};
 
