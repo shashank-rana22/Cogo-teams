@@ -1,21 +1,17 @@
 import React from 'react';
 
-import { FieldType } from '../Interfaces';
-
 import styles from './styles.module.css';
 
-export interface Props {
-	fields: FieldType[];
-}
+const DEFAULT_SPAN = 1;
 
-function Header({ fields }:Props) {
+function Header({ fields = [] }) {
 	return (
 		<header className={styles.header}>
 			<div className={styles.header_row}>
 				{fields.map((field) => (
 					<div
 						className={`${styles.col}`}
-						style={{ '--span': field.span || 1 } as React.CSSProperties}
+						style={{ '--span': field.span || DEFAULT_SPAN }}
 						key={field.key}
 					>
 						{ field.label }

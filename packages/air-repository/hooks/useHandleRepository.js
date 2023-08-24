@@ -1,13 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-
-interface Props {
-	payload?: object,
-	listRepository?: Function,
-	setShowModal?: (p:boolean)=> void,
-}
+import { useTranslation } from 'next-i18next';
 
 const useHandleRepository = (edit) => {
+	const { t } = useTranslation(['airRepository']);
 	const api = edit ? '/update_shipment_service_ops_repository' : '/create_shipment_service_ops_repository';
 
 	const [{ loading }, trigger] = useRequest({
@@ -15,16 +11,17 @@ const useHandleRepository = (edit) => {
 		method : 'POST',
 	});
 
-	const handleRepository = async ({ payload, listRepository, setShowModal = () => {} }:Props) => {
+	const handleRepository = async ({ payload, listRepository, setShowModal = () => {} }) => {
 		try {
 			await trigger({
 				data: payload,
 			});
 			listRepository();
 			setShowModal(false);
-			Toast.success(`Repository ${edit ? 'Updated' : 'Created'} Successfully`);
+			Toast.success(`${t('airRepository:repository')} ${edit
+				? t('airRepository:updated') : t('airRepository:created')} ${t('airRepository:successfully')}`);
 		} catch (err) {
-			Toast.error(err?.response?.data?.base || err?.message || 'Failed to Upload');
+			Toast.error(err?.response?.data?.base || err?.message || t('airRepository:failed_to_upload'));
 		}
 	};
 

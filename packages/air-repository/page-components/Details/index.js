@@ -3,42 +3,28 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import List from '../../commons/List';
-import { ListDataType } from '../../commons/List/Interfaces';
-import { RepositoryFields } from '../../configurations/repository-fields';
+import { repositoryFields } from '../../configurations/repository-fields';
 
 import ConfirmDelete from './ConfirmDelete';
 import POCDetails from './POCDetails';
 import styles from './styles.module.css';
 
-interface NestedObj {
-	[key: string]: string;
-}
-
-interface DetailsProps {
-	data: ListDataType;
-	loading: boolean;
-	setShowModal: React.FC;
-	setItem: React.FC;
-	setEdit: React.FC;
-	listRepository: React.FC;
-	page: number;
-	setPage: React.FC;
-}
-
-interface EditDetailProps {
-	singleItem: NestedObj;
-}
-
-function EditDetail({ singleItem = {} }:EditDetailProps) {
+function EditDetail({ singleItem = {} }) {
+	const { t } = useTranslation(['airRepository']);
 	const { last_edited_by:lastEditedBy, updated_at:updatedAt } = singleItem || {};
 	return (
 		<div className={styles.edit_detail}>
-			Last Edited :
+			{t('airRepository:last_edited')}
+			{' '}
+			:
 			<span>
-				BY:
+				{t('airRepository:by_label')}
+				{' '}
+				:
 				{' '}
 				{lastEditedBy}
 				{' '}
@@ -126,8 +112,9 @@ function Details({
 	listRepository = () => {},
 	page = 1,
 	setPage = () => {},
-}:DetailsProps) {
-	const { fields } = RepositoryFields;
+}) {
+	const { t } = useTranslation(['airRepository']);
+	const { fields } = repositoryFields(t);
 
 	return (
 		<div className={styles.details_list}>

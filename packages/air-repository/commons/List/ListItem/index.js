@@ -1,22 +1,11 @@
 import { cl, Placeholder } from '@cogoport/components';
-import React, { ReactNode, ReactFragment } from 'react';
-
-import { FieldType, FunctionObjects, NestedObj } from '../Interfaces';
+import React from 'react';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
 
-export interface Props {
-	fields: FieldType[];
-	singleitem?: NestedObj;
-	functions?: FunctionObjects;
-	loading?: boolean;
-	isMobile?: boolean;
-	Child?: ReactFragment;
-	open?: string;
-}
-
 const INCLUDE_LINE_SEPARATION = ['booking_mode', 'poc_email', 'lms_password'];
+const DEFAULT_SPAN = 1;
 
 function CardItem({
 	fields = [],
@@ -26,7 +15,7 @@ function CardItem({
 	isMobile = false,
 	Child = <div />,
 	open = '',
-}:Props) {
+}) {
 	return (
 		<div>
 			<section className={styles.list_container}>
@@ -35,7 +24,7 @@ function CardItem({
 						isMobile ? styles.is_mobile : ''
 					}`}
 				>
-					{fields.map((field:FieldType) => {
+					{fields.map((field) => {
 						const itemStyle = field.styles || {};
 						return (
 							<>
@@ -44,9 +33,9 @@ function CardItem({
 										isMobile ? styles.is_mobile : ''
 									}`}
 									style={{
-										'--span': (field.span || 1),
+										'--span': (field.span || DEFAULT_SPAN),
 										...itemStyle,
-									} as React.CSSProperties}
+									}}
 									key={field.key}
 								>
 									{isMobile && (
@@ -63,7 +52,7 @@ function CardItem({
 													field,
 													functions,
 													'-',
-												) as ReactNode }
+												) }
 											</div>
 										)}
 

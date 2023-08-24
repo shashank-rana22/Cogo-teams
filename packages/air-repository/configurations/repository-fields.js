@@ -2,40 +2,40 @@ import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 
 import InfoHeader from '../page-components/InfoHeader';
 
-export const RepositoryFields = {
+export const repositoryFields = (t = () => {}) => ({
 	fields: [
 		{
 			key   : 'airline_id',
-			label : 'Airlines',
+			label : t('airRepository:airlines_field_label'),
 			span  : 1.5,
 			func  : 'handleAirline',
 		},
 		{
 			key   : 'airport_id',
-			label : 'Airport',
+			label : t('airRepository:airport_field_label'),
 			span  : 2.5,
 			func  : 'handleAirport',
 		},
 		{
 			key   : 'booking_mode',
-			label : 'Mode',
+			label : t('airRepository:booking_mode_field_label'),
 			span  : 1.5,
 			func  : 'handleMode',
 		},
 		{
 			key   : 'lms_url',
-			label : 'Platform URL',
+			label : t('airRepository:lms_url_field_label'),
 			span  : 2.5,
 			func  : 'handlePlatformURL',
 		},
 		{
 			key   : 'lms_user_id',
-			label : 'User Id (Platform)',
+			label : t('airRepository:lms_user_id_field_label'),
 			span  : 1,
 		},
 		{
 			key   : 'lms_password',
-			label : 'Password (Platform)',
+			label : t('airRepository:lms_password_field_label'),
 			span  : 1,
 		},
 		{
@@ -47,11 +47,11 @@ export const RepositoryFields = {
 						<div style={{ display: 'flex', flexDirection: 'column' }}>
 							<span>
 								<IcMEdit fill="#F68B21" width={14} height={14} style={{ marginRight: 12 }} />
-								Edit Repository
+								{t('airRepository:edit_repository')}
 							</span>
 							<span>
 								<IcMDelete fill="#F68B21" width={14} height={14} style={{ marginRight: 12 }} />
-								Delete Repository
+								{t('airRepository:delete_repository')}
 							</span>
 						</div>
 					)}
@@ -67,4 +67,4 @@ export const RepositoryFields = {
 			func  : 'handleEditDetail',
 		},
 	],
-};
+});

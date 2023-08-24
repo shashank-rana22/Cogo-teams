@@ -1,19 +1,12 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useHandleRepository from '../../../hooks/useHandleRepository';
 
 import styles from './styles.module.css';
 
-interface NestedObj {
-	[key: string]: string;
-}
-interface Props {
-	item:NestedObj;
-	listRepository: Function;
-
-}
-
-function ConfirmDelete({ item = {}, listRepository = () => {} }:Props) {
+function ConfirmDelete({ item = {}, listRepository = () => {} }) {
+	const { t } = useTranslation(['airRepository']);
 	const { handleRepository, loading } = useHandleRepository(true);
 
 	const handleDelete = () => {
@@ -23,10 +16,12 @@ function ConfirmDelete({ item = {}, listRepository = () => {} }:Props) {
 
 	return (
 		<div className={styles.confirm_delete_container}>
-			<div>Are you sure to delete this Repository?</div>
+			<div>
+				{t('airRepository:delete_confirm_text')}
+			</div>
 			<div className={styles.confirm_delete_buttons}>
 				<Button size="sm" disabled={loading} onClick={handleDelete}>
-					Confirm
+					{t('airRepository:confirm_button')}
 				</Button>
 			</div>
 		</div>

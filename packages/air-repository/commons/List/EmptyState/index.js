@@ -1,9 +1,11 @@
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function EmptyState({ heading = 'results', placement = 'center' }) {
+	const { t } = useTranslation(['airRepository']);
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
@@ -13,14 +15,16 @@ function EmptyState({ heading = 'results', placement = 'center' }) {
 					</div>
 				) : null}
 				<div className={styles.heading}>
-					Sorry! no
+					{t('airRepository:empty_state_text_sorry_no')}
 					{' '}
 					{heading}
 					{' '}
-					found :(
+					{t('airRepository:empty_state_text_found')}
+					{' '}
+					:(
 				</div>
 				<div className={styles.content}>
-					We are sorry what you were looking for. Please try another way
+					{t('airRepository:empty_state_content')}
 				</div>
 			</div>
 		</div>
