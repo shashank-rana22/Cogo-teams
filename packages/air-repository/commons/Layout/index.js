@@ -4,24 +4,29 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const FLEX_HUNDRED = 100;
+const FLEX_ONE = 1;
+const ZEROTH_SPAN = 0;
+
 function Layout({
-	control, fields, showElements = {}, errors,
+	control = {}, fields = [], showElements = {}, errors = {},
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
-			span += field.span || 12;
-			if (span === 12) {
+			span += field.span || TOTAL_SPAN;
+			if (span === TOTAL_SPAN) {
 				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
-				span = 0;
-			} else if (span < 12) {
+				span = ZEROTH_SPAN;
+			} else if (span < TOTAL_SPAN) {
 				rowWiseFields.push(field);
 			} else {
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
 				rowWiseFields.push(field);
 				span = field.span;
@@ -29,10 +34,10 @@ function Layout({
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
-	const totalFieldsObject = { ...totalFields };
+	const totalFieldsObject = { ...TOTAL_FIELDS };
 
 	return (
 		<div className={styles.layout}>
@@ -40,7 +45,7 @@ function Layout({
 				<div className={styles.row} key={field}>
 					{totalFieldsObject[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
-						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
+						const flex = ((fieldArraySpan || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 						const show = (!(totalFieldsObject[field].name in showElements)
 						|| showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {

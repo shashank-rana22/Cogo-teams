@@ -1,28 +1,23 @@
 import { cl } from '@cogoport/components';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import { NestedObj, FieldType, FunctionObjects } from '../../../../commons/List/Interfaces';
 import getValue from '../../../../commons/List/ListItem/getValue';
 import styles from '../styles.module.css';
 
-export interface Props {
-	fields: FieldType[];
-	item?: NestedObj;
-	functions?: FunctionObjects;
-}
+const DEFAULT_SPAN = 1;
 
-function POCDetailsItem({ fields = [], item = {}, functions = {} }:Props) {
+function POCDetailsItem({ fields = [], item = {}, functions = {} }) {
 	return (
 		<section className={styles.list_container}>
 			<div
 				className={styles.row}
 			>
-				{fields.map((field:FieldType) => (
+				{fields.map((field) => (
 					<div
 						className={cl`${styles.col} ${field.className || ''}`}
 						style={{
-							'--span': (field.span || 1),
-						} as React.CSSProperties}
+							'--span': (field.span || DEFAULT_SPAN),
+						}}
 						key={field.key}
 					>
 						<div className={styles.flex}>
@@ -31,7 +26,7 @@ function POCDetailsItem({ fields = [], item = {}, functions = {} }:Props) {
 								field,
 								functions,
 								'-',
-							) as ReactNode }
+							) }
 						</div>
 
 					</div>

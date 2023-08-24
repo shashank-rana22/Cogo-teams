@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
@@ -8,20 +9,6 @@ import useHandleRepository from '../../hooks/useHandleRepository';
 
 import styles from './styles.module.css';
 
-type TypeObject = string | Array<object> | object[] | React.FC ;
-interface NestedObj {
-	[key: string]: TypeObject;
-}
-
-interface ModalProps {
-	showModal: boolean;
-	setShowModal: React.FC;
-	listRepository: React.FC;
-	item:NestedObj;
-	edit:boolean;
-	setEdit:React.FC;
-}
-
 function RepositoryModal({
 	showModal = false,
 	setShowModal = () => {},
@@ -29,11 +16,12 @@ function RepositoryModal({
 	item = {},
 	edit = false,
 	setEdit = () => {},
-}:ModalProps) {
+}) {
+	const { t } = useTranslation(['airRepository']);
 	const { handleRepository, loading } = useHandleRepository(edit);
 
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
-	const fields = repositoryControls();
+	const fields = repositoryControls(t);
 	const mode = watch('booking_mode');
 
 	const dataPayload = (poc) => ({
@@ -86,20 +74,24 @@ function RepositoryModal({
 			className={styles.modal_container}
 		>
 			<div className={styles.modal_header}>
-				{edit ? 'Edit' : 'Create'}
+				{edit ? t('airRepository:edit_text') : t('airRepository:create_text')}
 				{' '}
-				Repository
+				{t('airRepository:repository')}
 			</div>
 			<Layout fields={fields.basic} control={control} errors={errors} />
 			{['email', 'email_and_platform'].includes(mode) && (
 				<>
-					<div className={styles.modal_header} style={{ marginTop: 24 }}>E-mail Information</div>
+					<div className={styles.modal_header} style={{ marginTop: 24 }}>
+						{t('airRepository:e-mail_information')}
+					</div>
 					<Layout fields={fields.email} control={control} errors={errors} />
 				</>
 			)}
 			{['platform', 'email_and_platform'].includes(mode) && (
 				<>
-					<div className={styles.modal_header} style={{ marginTop: 24 }}>Platform Information</div>
+					<div className={styles.modal_header} style={{ marginTop: 24 }}>
+						{t('airRepository:platform_information')}
+					</div>
 					<Layout fields={fields.platform} control={control} errors={errors} />
 				</>
 			)}
@@ -111,10 +103,10 @@ function RepositoryModal({
 					style={{ marginRight: 12 }}
 					onClick={() => { setShowModal(false); setEdit(false); }}
 				>
-					Cancel
+					{t('airRepository:cancel_button')}
 				</Button>
 				<Button size="md" disabled={loading} onClick={handleSubmit(onSubmit)}>
-					Apply
+					{t('airRepository:apply_button')}
 				</Button>
 			</div>
 		</Modal>
