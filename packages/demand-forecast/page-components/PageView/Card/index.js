@@ -12,7 +12,7 @@ function Card({ card = {} }) {
 		sethowDetails(!showDetails);
 	};
 
-	const { origin = {}, destination = {}, forecasted_demand, high_demand_port_pairs } = card;
+	const { origin = {}, destination = {}, forecasted_demand, high_demand_port_pairs, rated_acquired = 0 } = card;
 
 	return (
 		<div>
@@ -33,7 +33,7 @@ function Card({ card = {} }) {
 				</div>
 
 				<div className={styles.rated_acquired}>
-					30
+					{rated_acquired}
 				</div>
 
 				<div className={styles.forecasted_demand}>

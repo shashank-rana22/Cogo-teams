@@ -2,17 +2,17 @@ const getSupplierTableConfig = () => {
 	const config = [
 		{
 			key   : 'supplier',
-			title : 'Suppliers',
+			title : 'SUPPLIER',
 			width : '40%',
 		},
 		{
 			key   : 'win_probability',
-			title : 'Win Probability',
+			title : 'WIN PROBABILITY',
 			width : '15%',
 		},
 		{
 			key   : 'capability',
-			title : 'Capability',
+			title : 'CAPABILITY',
 			width : '15%',
 		},
 		{

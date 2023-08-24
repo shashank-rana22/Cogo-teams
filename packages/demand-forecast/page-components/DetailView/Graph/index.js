@@ -61,7 +61,25 @@ const GRAPH_COLOR_MAPPING = {
 function Graph({
 	data = {},
 	loading = true,
+	total_estimated_demand = '',
 }) {
+	function CenteredMetric({ centerX = '', centerY = '' }) {
+		return (
+			<text
+				x={centerX}
+				y={centerY}
+				textAnchor="middle"
+				dominantBaseline="central"
+				className={styles.style_component_text}
+			>
+				Predicted
+				<tspan x={centerX} dy="1.2em">
+					{total_estimated_demand}
+				</tspan>
+			</text>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{
@@ -74,17 +92,20 @@ function Graph({
 						<div className={styles.title}>
 							{GRAPH_TTTLE[key]}
 						</div>
-						<div className={styles.graph}>
-							<ResponsivePie
-								loading={loading}
-								data={graphicalData}
-								innerRadius={0.5}
-								activeOuterRadiusOffset={6}
-								enableArcLinkLabels={false}
-								enableArcLabels={false}
-								colors={colors}
-								colorBy="index"
-							/>
+						<div className={styles.parent_asd}>
+							<div className={styles.graph}>
+								<ResponsivePie
+									loading={loading}
+									data={graphicalData}
+									innerRadius={0.6}
+									activeOuterRadiusOffset={6}
+									enableArcLinkLabels={false}
+									enableArcLabels={false}
+									colors={colors}
+									colorBy="index"
+									layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
+								/>
+							</div>
 						</div>
 						<div className={styles.legends}>
 							{

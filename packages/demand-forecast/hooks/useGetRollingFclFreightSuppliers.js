@@ -9,7 +9,7 @@ const useGetRollingFclFreightSuppliers = ({ filters = {}, origin_location_id = '
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const [{ data, loading = false }, trigger] = useRequest({
-		url    : '/get_rolling_fcl_freight_suppliers',
+		url    : '/get_rolling_forecast_fcl_freight_suppliers',
 		method : 'GET',
 	}, { manual: true });
 

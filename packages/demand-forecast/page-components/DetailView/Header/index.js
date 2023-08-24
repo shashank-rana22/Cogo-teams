@@ -16,9 +16,8 @@ function RenderPortName({ portName = '' }) {
 	return (
 		<Tooltip content={<div style={{ color: 'grey' }}>{portName}</div>}>
 			<div>
-				{portName}
 				{portName?.substring(START_INDEX, MAX_LENGTH) || ''}
-				...
+				{portName.length > MAX_LENGTH ? '...' : null}
 			</div>
 		</Tooltip>
 	);
@@ -103,15 +102,17 @@ function Header({
 					</div>
 
 					<div className={styles.forecasted_demand}>
-						<div>Forecasted Demands</div>
-						<div>
+						<div className={styles.header_title}>Forecasted Demands</div>
+						<div className={styles.value}>
 							{total_estimated_demand}
+							{' '}
+							TEUs
 						</div>
 					</div>
 
 					<div className={styles.forecasted_dates}>
-						<div>Forecasted Dates</div>
-						<div>
+						<div className={styles.header_title}>Forecasted Dates</div>
+						<div className={styles.value}>
 							{startDate}
 							{' '}
 							-

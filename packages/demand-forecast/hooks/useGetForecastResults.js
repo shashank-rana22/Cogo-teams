@@ -10,8 +10,6 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 	const { agent_id } = useSelector(({ profile }) => ({ agent_id: profile.user.id }));
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
-	console.log('agent_id::', agent_id);
-
 	const [{ data, loading = false }, trigger] = useRequest({
 		url    : '/list_rolling_forecast_fcl_freight_clusters',
 		method : 'GET',
@@ -23,9 +21,10 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 				await trigger({
 					params: {
 						filters: {
-							agent_id: '2d8ff7d8-7d08-43b8-947e-5fc7da7fa8dc',
+							agent_id,
 							...filters,
 						},
+						sort_by_cluster: true,
 						page,
 					},
 				});
@@ -33,6 +32,7 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[page, trigger, filters],
 	);
 

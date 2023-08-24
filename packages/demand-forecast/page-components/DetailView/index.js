@@ -36,10 +36,11 @@ function DetailView() {
 				total_estimated_demand={total_estimated_demand}
 				loading={loading}
 			/>
-			<Graph data={data} loading={loading} />
+			<Graph data={data} loading={loading} total_estimated_demand={total_estimated_demand} />
 			<SupplierList
 				origin_location_id={origin_id}
 				destination_location_id={destination_id}
+				total_estimated_demand={total_estimated_demand}
 			/>
 		</div>
 	);
