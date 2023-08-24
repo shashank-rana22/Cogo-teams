@@ -43,9 +43,9 @@ const getLoadArray = (search_type, serviceDetails) => {
 					height               : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].height,
 					length               : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].length,
 					width                : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].width,
-					package_type         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packing_type,
+					packing_type         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packing_type,
 					packages_count       : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packages_count,
-					stackability         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].handling_type,
+					handling_type        : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].handling_type,
 				});
 			} else if (service.service_type === 'air_freight') {
 				LOAD.push({

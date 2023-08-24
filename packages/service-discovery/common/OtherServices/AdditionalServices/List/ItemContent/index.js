@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import FeedBackModal from '../../../../../page-components/SearchResults/common/EmptyState/RequestRate/FeedBackModal';
+import FeedBackModal from '../../../../../page-components/SearchResults/common/RequestRate/FeedBackModal';
 import LineItems from '../../../common/LineItems';
 
 import styles from './styles.module.css';

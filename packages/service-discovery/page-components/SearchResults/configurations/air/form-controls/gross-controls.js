@@ -19,7 +19,7 @@ export const getGrossControls = () => {
 			},
 		},
 		{
-			name           : 'package_type',
+			name           : 'packing_type',
 			label          : 'Unit Type',
 			type           : 'select',
 			optionsListKey : 'package-types',
@@ -112,7 +112,7 @@ export const getGrossControls = () => {
 			],
 		},
 		{
-			name    : 'stackability',
+			name    : 'handling_type',
 			type    : 'chips',
 			span    : 10,
 			value   : 'stackable',

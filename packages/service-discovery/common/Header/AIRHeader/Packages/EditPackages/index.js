@@ -22,8 +22,8 @@ const getTabWisePrefilledValues = (activeTab, values = {}) => {
 			total_quantity : total_quantity || DEFAULT_VALUE,
 			total_weight   : total_weight || DEFAULT_VALUE,
 			total_volume   : total_volume || DEFAULT_VALUE,
-			stackability   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.handling_type || 'stackable',
-			package_type   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_type || 'box',
+			handling_type  : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.handling_type || 'stackable',
+			packing_type   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_type || 'box',
 			packing_list,
 		};
 	}
@@ -34,13 +34,15 @@ const getTabWisePrefilledValues = (activeTab, values = {}) => {
 		formValues = {
 			packages: [
 				...(packagesData || []).map((packageItem) => ({
-					packages_count : packageItem.packages_count || DEFAULT_VALUE,
-					package_type   : packageItem.packing_type || 'box',
-					length         : packageItem.length || DEFAULT_VALUE,
-					width          : packageItem.width || DEFAULT_VALUE,
-					height         : packageItem.height || DEFAULT_VALUE,
-					weight         : packageItem.package_weight || DEFAULT_VALUE,
-					stackability   : packageItem.handling_type || 'stackable',
+					packages_count  : packageItem.packages_count || DEFAULT_VALUE,
+					packing_type    : packageItem.packing_type || 'box',
+					length          : packageItem.length || DEFAULT_VALUE,
+					width           : packageItem.width || DEFAULT_VALUE,
+					height          : packageItem.height || DEFAULT_VALUE,
+					package_weight  : packageItem.package_weight || DEFAULT_VALUE,
+					handling_type   : packageItem.handling_type || 'stackable',
+					dimensions_unit : 'cm',
+					weight_unit     : 'kg_unit',
 				})),
 			],
 		};
@@ -108,9 +110,8 @@ function EditPackages({
 				'/book/[spot_search_id]',
 				`/book/${spot_search_id}`,
 			);
+			setShow(false);
 		}
-
-		setShow(false);
 	};
 
 	useEffect(() => {
@@ -149,7 +150,6 @@ function EditPackages({
 					showModal={showModal}
 					setShowModal={setShowModal}
 					handleApply={handleApply}
-					reset={reset}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
 				/>

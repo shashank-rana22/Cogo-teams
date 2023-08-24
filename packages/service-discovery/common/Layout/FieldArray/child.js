@@ -149,7 +149,6 @@ function Child({
 						</div>
 					);
 				})}
-
 			</div>
 
 			{length >= TWO_VALUE && !disabled && !isSubControl ? (

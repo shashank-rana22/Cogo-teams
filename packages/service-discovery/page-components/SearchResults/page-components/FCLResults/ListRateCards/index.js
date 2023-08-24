@@ -3,14 +3,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import EmptyState from '../../../common/EmptyState';
-import RequestRate from '../../../common/EmptyState/RequestRate';
+import AppliedFilters from '../../../common/AppliedFilters';
+import RequestRate from '../../../common/RequestRate';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
-import AppliedFilters from './AppliedFilters';
 import ComparisonHeader from './ComparisonHeader';
 import ContractAd from './ContractAd';
+import EmptyState from './EmptyState';
 import Header from './Header';
 import Schedules from './Schedules';
 import styles from './styles.module.css';

@@ -1,0 +1,37 @@
+.container {
+	padding: 0 20px;
+	background-color: #fff;
+}
+
+.header_wrapper {
+	position: sticky;
+	top: 116px;
+	z-index: 99;
+	width: 100%;
+}
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+.loading_text {
+	margin-right: 8px;
+	font-size: 26px;
+	font-weight: 500;
+}
+
+.header {
+	margin: 0 -20px;
+}
+
+.request_rate {
+	margin-top: 32px;
+}
+
+.pagination {
+	float: right;
+	margin: 12px 32px 20px 0;
+}

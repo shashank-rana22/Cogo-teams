@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import getIncoterm from './getIncoterm';
 
 const LB_TO_KG = 2.205;
@@ -5,6 +7,8 @@ const CFT_TO_CBM = 35.315;
 const CC_TO_CBM = 1000000;
 const INCHCUBE_TO_CBM = 61020;
 const INCH_TO_CM = 2.54;
+const ROUNDOFF_TO_POWER_6 = 1000000;
+const ROUNDOFF_TO_POWER_3 = 1000;
 
 const getAirPayload = (values, origin, destination) => {
 	const {
@@ -25,9 +29,10 @@ const getAirPayload = (values, origin, destination) => {
 			total_volume,
 			volume_unit,
 			weight_unit,
-			stackability,
-			package_type,
+			packages:packagesData = [],
 		} = values;
+
+		const { handling_type = '', packing_type = '' } = packagesData[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		totalWeight = Number(total_weight);
 		totalQuantity = Number(total_quantity);
@@ -35,53 +40,53 @@ const getAirPayload = (values, origin, destination) => {
 
 		if (volume_unit === 'cc') {
 			totalVolume = Number(total_volume) / CC_TO_CBM;
-			totalVolume = Math.round(totalVolume * 1000) / 1000;
+			totalVolume = Math.round(totalVolume * ROUNDOFF_TO_POWER_3) / ROUNDOFF_TO_POWER_3;
 		} else if (volume_unit === 'cft') {
 			totalVolume = Number(total_volume) / CFT_TO_CBM;
-			totalVolume = Math.round(totalVolume * 1000) / 1000;
+			totalVolume = Math.round(totalVolume * ROUNDOFF_TO_POWER_3) / ROUNDOFF_TO_POWER_3;
 		}
 
 		if (weight_unit === 'lb') {
 			totalWeight = Number(total_weight) / LB_TO_KG;
-			totalWeight = Math.round(totalWeight * 1000) / 1000;
+			totalWeight = Math.round(totalWeight * ROUNDOFF_TO_POWER_3) / ROUNDOFF_TO_POWER_3;
 		}
 
 		packages = [
 			{
 				packages_count : Number(total_quantity),
-				packing_type   : package_type,
-				handling_type  : stackability || 'non_stackable',
+				packing_type,
+				handling_type  : handling_type || 'non_stackable',
 			},
 		];
 	} else {
 		const { packages:packagesData = [] } = values;
 
 		(packagesData || []).forEach((item) => {
-			let { length, width, height, weight } = item;
+			let { length, width, height, package_weight } = item;
 			totalQuantity += Number(item.packages_count);
 
 			if (item.weight_unit === 'kg_unit') {
-				totalWeight += Number(item.packages_count) * Number(item.weight);
+				totalWeight += Number(item.packages_count) * Number(item.package_weight);
 			}
 			if (item.weight_unit === 'kg_total') {
-				totalWeight += Number(item.weight);
-				weight /= Number(item?.packages_count);
+				totalWeight += Number(item.package_weight);
+				package_weight /= Number(item?.packages_count);
 			}
 			if (item.weight_unit === 'lb_unit') {
-				totalWeight += (Number(item.packages_count) * Number(item.weight)) / LB_TO_KG;
-				weight /= LB_TO_KG;
-				weight = Math.round(weight * 1000000) / 1000000;
+				totalWeight += (Number(item.packages_count) * Number(item.package_weight)) / LB_TO_KG;
+				package_weight /= LB_TO_KG;
+				package_weight = Math.round(package_weight * ROUNDOFF_TO_POWER_6) / ROUNDOFF_TO_POWER_6;
 			}
 			if (item.weight_unit === 'lb_total') {
-				totalWeight += Number(item.weight) / LB_TO_KG;
-				weight /= LB_TO_KG;
-				weight = Math.round(weight * 1000000) / 1000000;
-				weight /= Number(item?.packages_count);
+				totalWeight += Number(item.package_weight) / LB_TO_KG;
+				package_weight /= LB_TO_KG;
+				package_weight = Math.round(package_weight * ROUNDOFF_TO_POWER_6) / ROUNDOFF_TO_POWER_6;
+				package_weight /= Number(item?.packages_count);
 			}
 
 			if (item.dimensions_unit === 'cm') {
 				totalVolume += (Number(item.length) * Number(item.width) * Number(item.height)
-                            * Number(item.packages_count)) / 1000000;
+                            * Number(item.packages_count)) / ROUNDOFF_TO_POWER_6;
 			}
 
 			if (item.dimensions_unit === 'inch') {
@@ -93,21 +98,21 @@ const getAirPayload = (values, origin, destination) => {
 				height *= INCH_TO_CM;
 			}
 			if (!item?.weight_unit && !item?.volume_unit) {
-				totalWeight += Number(item.weight) * Number(item.packages_count);
+				totalWeight += Number(item.package_weight) * Number(item.packages_count);
 				totalVolume += (Number(item.length) * Number(item.width) * Number(item.height)
-							* Number(item.packages_count)) / 1000000;
+							* Number(item.packages_count)) / ROUNDOFF_TO_POWER_6;
 			}
 
 			packages = [
 				...packages,
 				{
-					length,
-					width,
-					height,
+					length         : Number(length),
+					width          : Number(width),
+					height         : Number(height),
 					packages_count : Number(item.packages_count),
-					packing_type   : item.package_type,
-					handling_type  : item.stackability || 'non_stackable',
-					package_weight : weight,
+					packing_type   : item.packing_type,
+					handling_type  : item.handling_type || 'non_stackable',
+					package_weight : Number(package_weight),
 				},
 			];
 		});
@@ -122,8 +127,8 @@ const getAirPayload = (values, origin, destination) => {
 		inco_term              : getIncoterm(origin, destination) || undefined,
 		packages,
 		packages_count         : totalQuantity,
-		weight                 : Math.round(totalWeight * 1000000) / 1000000,
-		volume                 : Math.round(totalVolume * 1000000) / 1000000,
+		weight                 : Math.round(totalWeight * ROUNDOFF_TO_POWER_6) / ROUNDOFF_TO_POWER_6,
+		volume                 : Math.round(totalVolume * ROUNDOFF_TO_POWER_6) / ROUNDOFF_TO_POWER_6,
 		status                 : 'active',
 		payment_type           : 'prepaid',
 		dry_ice_required       : false,

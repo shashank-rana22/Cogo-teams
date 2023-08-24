@@ -1,0 +1,64 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.filter_item {
+	width: 90%;
+
+	:global {
+		.layout_form_item {
+			margin-bottom: 0 !important;
+		}
+
+		.ui_accordion_container {
+			padding-top: 20px;
+			box-shadow: none;
+		}
+
+		.ui_accordion_header {
+			padding: 12px 0;
+			border-bottom: 1px solid #f3f3f3;
+			border-radius: 0;
+		}
+
+		.ui_accordion_content {
+			padding: 12px 0;
+			background-color: #fff;
+		}
+	}
+}
+
+.label_container {
+	display: flex;
+	align-items: center;
+}
+
+.filter_value_pill {
+	display: flex;
+	align-items: center;
+	width: max-content;
+	padding: 4px 12px;
+	margin-left: 12px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #1295a3;
+	border: 1px solid #24c7d9;
+	border-radius: 12px;
+}
+
+.cross_icon {
+	width: 14px;
+	height: 14px;
+	margin-left: 4px;
+	stroke: #1295a3;
+	stroke-width: 1.1px;
+}

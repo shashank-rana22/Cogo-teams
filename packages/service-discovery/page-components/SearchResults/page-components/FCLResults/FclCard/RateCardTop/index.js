@@ -4,8 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import InfoBannerContent from '../../../../../../common/InfoBannerContent';
+import LikeDislike from '../../../../common/LikeDislike';
 import ShareToUsers from '../../../../common/ShareToUsers';
-import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
 

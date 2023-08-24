@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	margin-right: 1rem;
+}
+
+.packages_price_container {
+	display: flex;
+	align-items: center;
+}
+
+.price_item {
+	display: flex;
+	flex-direction: column;
+	margin-right: 2rem;
+}
+
+.label {
+	font-size: 10px;
+	line-height: 150%;
+	color: #000;
+}

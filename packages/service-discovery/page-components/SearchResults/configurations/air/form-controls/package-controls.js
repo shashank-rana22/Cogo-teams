@@ -111,7 +111,7 @@ export const getPackageControls = ({
 					},
 				},
 				{
-					name           : 'package_type',
+					name           : 'packing_type',
 					label          : 'Unit Type',
 					type           : 'select',
 					optionsListKey : 'package-types',
@@ -174,7 +174,7 @@ export const getPackageControls = ({
 					rules   : { required: 'This is required' },
 				},
 				{
-					name        : 'weight',
+					name        : 'package_weight',
 					label       : 'Weight Per Unit',
 					type        : 'input',
 					placeholder : 'Enter weight',
@@ -201,7 +201,7 @@ export const getPackageControls = ({
 					rules   : { required: 'This is required' },
 				},
 				{
-					name    : 'stackability',
+					name    : 'handling_type',
 					type    : 'chips',
 					span    : 10,
 					value   : 'stackable',

@@ -23,7 +23,8 @@ function Location(props) {
 		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
 		iconToShow = IcMPort;
 	} else if (data.type === 'airport') {
-		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+		// portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+		portCode = data.port_code;
 		iconToShow = IcMAirport;
 	} else if (data.type === 'pincode') {
 		portCode = countryName

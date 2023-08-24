@@ -19,7 +19,6 @@ function FormModal({
 	showModal = '',
 	setShowModal = () => {},
 	handleApply = () => {},
-	reset = () => {},
 	activeTab = '',
 	setActiveTab = () => {},
 }) {
@@ -61,7 +60,6 @@ function FormModal({
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				reset={reset}
 			/>
 
 			{activeTab === 'cargo_per_package' ? (

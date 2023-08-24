@@ -24,7 +24,7 @@ function Layout({
 	...restLayout
 }) {
 	return (
-		<div className={styles.form}>
+		<div className={`${styles.form} layout_form`}>
 			{(controls || []).map((controlItem) => {
 				let newControl = { ...controlItem };
 
@@ -34,7 +34,11 @@ function Layout({
 
 				if (['field-array', 'fieldArray'].includes(type)) {
 					return (
-						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
+						<div
+							className={`${styles.form_item} layout_form_item`}
+							key={`${name}_${label}`}
+							style={{ width: `${flex}%` }}
+						>
 							<FieldArray
 								{...newControl}
 								control={control}
@@ -51,11 +55,13 @@ function Layout({
 				if (innerControls && !isEmpty(innerControls)) {
 					return (
 						<div
-							className={styles.form_item}
+							className={`${styles.form_item} layout_form_item`}
 							key={`${name}_${label}`}
 							style={{ width: `${flex}%`, marginBottom: '12px' }}
 						>
-							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+							<div className={cl`${styles.label} layout_label 
+							${newControl?.boldLabel ? styles.bold_label : {}}`}
+							>
 								{newControl?.boldLabel || label || ''}
 								{' '}
 								{(newControl?.rules?.required || newControl?.showRequired)
@@ -109,11 +115,13 @@ function Layout({
 				return (
 					<div
 						key={`${name}_${label}`}
-						className={styles.form_item}
+						className={`${styles.form_item} layout_form_item`}
 						style={{ width: `${flex}%`, marginBottom: isSubControl ? '12px' : '24px' }}
 					>
 						{isSubControl || type === 'checkbox' ? null : (
-							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+							<div className={cl`${styles.label} layout_label 
+							${newControl?.boldLabel ? styles.bold_label : {}}`}
+							>
 								{newControl?.boldLabel || label || ''}
 								{' '}
 								{newControl?.rules?.required && (label || newControl?.boldLabel) ? (
@@ -135,7 +143,7 @@ function Layout({
 						/>
 
 						{errors[name] && (
-							<div className={styles.error_message}>
+							<div className={`${styles.error_message} layout_error_message`}>
 								{errorMessage}
 							</div>
 						)}

@@ -15,14 +15,16 @@ const getSinglePackageDetails = ({ watch = () => {} }) => {
 	const PACKAGE_WEIGHT = [];
 	const PACKAGE_VOLUME = [];
 
-	(watch('packages') || []).forEach((item) => {
+	const packagesData = watch('packages') || [];
+
+	packagesData.forEach((item) => {
 		PACKAGE_QUANTITY.push(Number(item.packages_count));
 
 		const WEIGHT_VALUE_MAPPING = {
-			kg_unit  : item.packages_count * item.weight,
-			kg_total : item.weight,
-			lb_unit  : (item.packages_count * item.weight) / LB_TO_KG,
-			lb_total : item.weight / LB_TO_KG,
+			kg_unit  : item.packages_count * item.package_weight,
+			kg_total : item.package_weight,
+			lb_unit  : (item.packages_count * item.package_weight) / LB_TO_KG,
+			lb_total : item.package_weight / LB_TO_KG,
 		};
 
 		const weight = WEIGHT_VALUE_MAPPING[item.weight_unit] || DEFAULT_VALUE;

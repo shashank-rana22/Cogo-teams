@@ -1,4 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -14,15 +15,23 @@ const TAB_PANELS_MAPPING = {
 function Header({
 	activeTab = '',
 	setActiveTab = () => {},
-	reset = () => {},
 }) {
+	const headerRef = useRef(null);
+
 	const onChange = (val) => {
 		setActiveTab(val);
-		reset();
 	};
 
+	const scrollToTop = () => {
+		headerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+	};
+
+	useEffect(() => {
+		scrollToTop();
+	}, [activeTab]);
+
 	return (
-		<div className={styles.container}>
+		<div ref={headerRef} className={styles.container}>
 			<div className={styles.heading}>Cargo Details</div>
 
 			<div className={styles.tabs}>
