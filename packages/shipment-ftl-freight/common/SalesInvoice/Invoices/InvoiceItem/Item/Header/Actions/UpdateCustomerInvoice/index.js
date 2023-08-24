@@ -4,7 +4,6 @@ import { useMemo, useRef } from 'react';
 
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';
 import useGetShipmentFortigoTripDetail from '../../../../../../../../hooks/useGetShipmentFortigoTripDetail';
-import useListShipmentTradePartners from '../../../../../../../../hooks/useListShipmentTradePartners';
 import { formControls } from '../commons/controls/formControls';
 import { getFormatValue } from '../commons/utils/getFormatValue';
 
@@ -21,28 +20,14 @@ function UpdateCustomerInvoice(props) {
 
 	const formRef = useRef(null);
 
-	const { data: tradePartnerData } = useListShipmentTradePartners({
-		defaultFilters: {
-			shipment_id      : shipmentData?.id,
-			trade_party_type : 'shipper',
-		},
-		defaultParams: {
-			add_service_objects_required: true,
-		},
-	});
-
 	const finalControls = useMemo(() => Object.values(formControls).flat(), []);
-
-	const [firstElement = {}] = tradePartnerData?.list || [];
-	const { trade_partner_details: { registration_number: shipperTradePartyPanNumber } = {} } = firstElement;
 
 	const { data: customData } = useGetShipmentFortigoTripDetail({
 		defaultParams: {
-			shipment_id                 : shipmentData?.serial_id,
-			invoice_combination_id      : invoice?.id,
-			shipper_registration_number : shipperTradePartyPanNumber,
-		},
+			shipment_id            : shipmentData?.serial_id,
+			invoice_combination_id : invoice?.id,
 
+		},
 	});
 	const defaultValues = useFillFormData({
 		customData,

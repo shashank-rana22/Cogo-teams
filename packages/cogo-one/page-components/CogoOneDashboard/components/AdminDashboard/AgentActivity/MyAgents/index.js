@@ -16,10 +16,10 @@ const TAB_MAPPING = {
 function MyAgents({ list = [], activeTab = '' }) {
 	const { push } = useRouter();
 
-	const redirectToAgentView = ({ agentId = '', name = '' }) => {
+	const redirectToAgentView = ({ agentId = '', name = '', agent_type = '' }) => {
 		push(
 			`/cogo-one/dashboard/[id]?view=agent&agentName=${name}`,
-			`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}`,
+			`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}&agentType=${agent_type}`,
 		);
 	};
 
@@ -30,7 +30,7 @@ function MyAgents({ list = [], activeTab = '' }) {
 	return (
 		<>
 			{(list || []).map((item) => {
-				const { agent_data = {}, agent_id = '', id = '' } = item;
+				const { agent_data = {}, agent_id = '', id = '', agent_type = '' } = item;
 				const { email = '', name = '' } = agent_data || {};
 
 				return (
@@ -38,7 +38,7 @@ function MyAgents({ list = [], activeTab = '' }) {
 						key={id}
 						className={styles.profile_box}
 						role="presentation"
-						onClick={() => redirectToAgentView({ agentId: agent_id, name })}
+						onClick={() => redirectToAgentView({ agentId: agent_id, name, agent_type })}
 					>
 						<div className={styles.profile_box_left}>
 							<div className={cl`${styles.circle_icon} ${TAB_MAPPING[activeTab]}`} />

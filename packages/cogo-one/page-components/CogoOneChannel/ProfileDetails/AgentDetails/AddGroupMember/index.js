@@ -3,6 +3,8 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
+
 import styles from './styles.module.css';
 
 function RenderSelectLabel({ item = {} }) {
@@ -19,7 +21,7 @@ function RenderSelectLabel({ item = {} }) {
 	);
 }
 
-function AddGroupMember({ addGroupMember = () => {} }) {
+function AddGroupMember({ addGroupMember = () => {}, viewType = '' }) {
 	const [agentId, setAgentId] = useState('');
 
 	const addMember = () => {
@@ -46,6 +48,11 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 					onChange={setAgentId}
 					className={styles.select}
 					isClearable
+					params={{
+						filters: {
+							agent_type: VIEW_TYPE_GLOBAL_MAPPING[viewType]?.group_agents_api_filter || undefined,
+						},
+					}}
 					renderLabel={(item) => <RenderSelectLabel item={item} />}
 				/>
 

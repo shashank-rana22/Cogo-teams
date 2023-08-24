@@ -11,10 +11,6 @@ export default [{
 	value : 'telex',
 },
 {
-	label : 'Physical Handover',
-	value : 'physical_handover',
-},
-{
 	label : 'Email',
 	value : 'email',
 },

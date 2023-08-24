@@ -10,10 +10,10 @@ import styles from './styles.module.css';
 
 const MIN_CHAT_COUNT = 0;
 
-function TotalChatsHandled({ agentId = '', timeline = '' }) {
+function TotalChatsHandled({ agentId = '' }) {
 	const { query } = useRouter();
 
-	const { data = {}, loading = false } = useListAssignedChats({ agentId, timeline });
+	const { data = {}, loading = false } = useListAssignedChats({ agentId });
 
 	const { agentName = '', view = '' } = query || {};
 	const { chat_stats = {} } = data || {};

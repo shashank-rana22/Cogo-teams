@@ -1,5 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
-import { SelectController, CheckboxController, useForm } from '@cogoport/forms';
+import { SelectController, CheckboxController, useForm, RadioGroupController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import { BL_CATEGORY_MAPPING, BL_PREFERENCE_MAPPING } from '../../../../../constants/BL_MAPPING';
@@ -136,7 +136,7 @@ function DocumentForm({
 
 						<div className={styles.form_item_container}>
 							<label className={styles.form_label}>Delivery Preferences</label>
-							<SelectController
+							<RadioGroupController
 								size="sm"
 								name="preferred_mode_of_document_execution"
 								control={control}
@@ -147,27 +147,24 @@ function DocumentForm({
 							{Error('preferred_mode_of_document_execution')}
 						</div>
 
-						{watchModeOfExecution !== 'telex'
-							? (
-								<div className={styles.form_item_container}>
-									<label className={styles.form_label}>
-										{watchModeOfExecution === 'pickup' ? "Receiver's Name" : 'Name'}
-									</label>
-									<SelectController
-										size="sm"
-										name="name"
-										control={control}
-										options={nameOptions}
-										rules={{ required: { value: true, message: 'Name is required' } }}
-									/>
-									{Error('name')}
-								</div>
-							) : null}
+						{!['telex', 'email'].includes(watchModeOfExecution)
+							? 							(
+								<>
+									<div className={styles.form_item_container}>
+										<label className={styles.form_label}>
+											{watchModeOfExecution === 'pickup' ? "Receiver's Name" : 'Name'}
+										</label>
+										<SelectController
+											size="sm"
+											name="name"
+											control={control}
+											options={nameOptions}
+											rules={{ required: { value: true, message: 'Name is required' } }}
+										/>
+										{Error('name')}
+									</div>
+									<div className={styles.contact_form_item}>
 
-						<div className={styles.contact_form_item}>
-							{watchModeOfExecution !== 'telex'
-								? (
-									<>
 										<div className={styles.country_code}>
 											<label className={styles.form_label}>
 												Country Code
@@ -198,25 +195,23 @@ function DocumentForm({
 											/>
 											{Error('contact_no')}
 										</div>
-									</>
-								) : null}
-						</div>
+									</div>
 
-						{watchModeOfExecution !== 'telex'
-							? (
-								<div className={styles.form_item_container}>
-									<label className={styles.form_label}>
-										{watchModeOfExecution === 'pickup' ? 'Pickup Address' : 'Address'}
-									</label>
-									<SelectController
-										size="sm"
-										name="address"
-										control={control}
-										options={addressOptions}
-										rules={{ required: { value: true, message: 'Address is required' } }}
-									/>
-									{Error('address')}
-								</div>
+									<div className={styles.form_item_container}>
+										<label className={styles.form_label}>
+											{watchModeOfExecution === 'pickup' ? 'Pickup Address' : 'Address'}
+										</label>
+										<SelectController
+											size="sm"
+											name="address"
+											control={control}
+											options={addressOptions}
+											rules={{ required: { value: true, message: 'Address is required' } }}
+										/>
+										{Error('address')}
+									</div>
+
+								</>
 							) : null}
 
 						{isEmpty(sop_detail) ? (
@@ -224,7 +219,6 @@ function DocumentForm({
 								<CheckboxController
 									control={control}
 									name="is_primary"
-									rules={{ required: { value: true, message: 'This is required' } }}
 								/>
 								<label>Set this as default preference for all the shipments</label>
 							</div>
