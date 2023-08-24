@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import { escalateTicketsControls } from '../../../../configurations/escalate-controls';
@@ -12,8 +13,9 @@ function EscalateTicket({
 	ticketId = '', showEscalate = false, setShowEscalate = () => {},
 	updateTicketActivity = () => {}, updateLoading = false,
 }) {
-	const [showConfirmation, setShowConfirmation] = useState(false);
+	const { t } = useTranslation(['myTickets']);
 
+	const [showConfirmation, setShowConfirmation] = useState(false);
 	const { control, handleSubmit, formState: { errors }, reset } = useForm();
 
 	const handleClose = () => {
@@ -39,11 +41,11 @@ function EscalateTicket({
 			onClose={handleClose}
 		>
 			<form onSubmit={handleSubmit(handleEscalateTicket)}>
-				<Modal.Header title={`Escalate Ticket (${ticketId})`} />
+				<Modal.Header title={`${t('myTickets:escalate_ticket')} (${ticketId})`} />
 
 				<Modal.Body>
 					<div>
-						{escalateTicketsControls.map((controlItem) => {
+						{escalateTicketsControls(t).map((controlItem) => {
 							const elementItem = { ...controlItem };
 							const { name, label, controllerType } = elementItem || {};
 							const Element = getFieldController(controllerType);
@@ -63,7 +65,9 @@ function EscalateTicket({
 										size="sm"
 										control={control}
 									/>
-									<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
+									<div className={styles.error}>
+										{errors?.[controlItem.name] && t('myTickets:required')}
+									</div>
 								</div>
 							);
 						})}
@@ -74,12 +78,13 @@ function EscalateTicket({
 					{showConfirmation
 						? (
 							<Confirmation
+								t={t}
 								loading={updateLoading}
 								handleChange={setShowConfirmation}
 							/>
 						) : (
 							<Button size="md" onClick={() => setShowConfirmation(true)} loading={updateLoading}>
-								Submit
+								{t('myTickets:submit')}
 							</Button>
 						)}
 				</Modal.Footer>
