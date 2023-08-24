@@ -11,7 +11,7 @@ import Layout from './Layout';
 import styles from './styles.module.css';
 import { controls, defaultValues } from './utils/email-from-controls';
 
-function MarketFeedback({ organization_id, service, getOrganizationService, id:service_id }) {
+function MarketFeedback({ t, organization_id, service, getOrganizationService, id:service_id }) {
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
 		stage_of_approval: 'organization_evaluation',
@@ -56,14 +56,14 @@ function MarketFeedback({ organization_id, service, getOrganizationService, id:s
 	return (
 		<div className={styles.parent}>
 
-			<Layout control={control} controls={controls} errors={errors} />
+			<Layout control={control} controls={controls(t)} errors={errors} />
 
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
 					onClick={handleSubmit(createMarketFeedbackDraft)}
 				>
-					Save & Do it Later
+					{t('supplier_page_market_feedback_save_and_do_it_later')}
 				</Button>
 
 				<Button onClick={handleSubmit(createMarketFeedbackActive)}>Submit & Next</Button>

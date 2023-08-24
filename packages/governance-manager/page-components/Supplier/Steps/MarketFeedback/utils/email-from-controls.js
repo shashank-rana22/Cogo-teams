@@ -1,39 +1,51 @@
-export	const controls = [
+export	const controls = ({ t }) => [
 	{
 		type     : 'fieldArray',
 		name     : 'emails',
-		label    : 'Email',
+		label    : t('supplier_page_market_feedback_email_controls_email_label'),
 		controls : [
 			{
 				controlType : 'select',
 				name        : 'user_role',
-				label       : 'Role',
-				rules       : { required: 'Required' },
-				placeholder : 'Search Role',
+				label       : t('supplier_page_market_feedback_email_controls_role_label'),
+				rules       : { required: t('supplier_page_market_feedback_email_controls_role_required') },
+				placeholder : t('supplier_page_market_feedback_email_controls_role_place_holder'),
 				options     : [
-					{ label: 'Industry Expert', value: 'industry_expert' },
-					{ label: 'Cogoport Employee', value: 'cogoport_employee' },
-					{ label: 'Customer', value: 'customer' },
-					{ label: 'Others', value: 'others' },
+					{
+						label : t('supplier_page_market_feedback_email_controls_role_option_industry_expert'),
+						value : 'industry_expert',
+					},
+					{
+						label : t('supplier_page_market_feedback_email_controls_role_option_industry_experts'),
+						value : 'cogoport_employee',
+					},
+					{
+						label : t('supplier_page_market_feedback_email_controls_role_option_industry_expert'),
+						value : 'customer',
+					},
+					{
+						label : t('supplier_page_market_feedback_email_controls_role_option_industry_expert'),
+						value : 'others',
+					},
 				],
 			},
 			{
 				controlType : 'input',
 				name        : 'user_name',
 				label       : 'name',
-				placeholder : 'Name',
-				rules       : { required: 'Required' },
+				placeholder : t('supplier_page_market_feedback_email_controls_user_name_label'),
+				rules       : { required: t('supplier_page_market_feedback_email_controls_user_name_required') },
 			},
 			{
-				label       : 'email',
+				label       : t('supplier_page_market_feedback_email_controls_email_label'),
 				controlType : 'input',
-				placeholder : 'Email',
+				placeholder : t('supplier_page_market_feedback_email_controls_email_place_holder'),
 				name        : 'user_email',
 				rules       : {
-					required : 'Email is required',
+					required : t('supplier_page_market_feedback_email_controls_email_required'),
 					pattern  : {
 						value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-						message : 'Please Enter correct Email',
+						message : t('supplier_page_market_feedback_email_controls_email_required_message'),
 					},
 				},
 			},

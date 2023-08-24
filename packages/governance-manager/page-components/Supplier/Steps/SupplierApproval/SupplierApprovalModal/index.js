@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 import SupplierEvaluationData from './SupplierEvaluationData';
 
 function SupplierApprovalModal({
+	t,
 	open, setOpen,
 	organization_id, service_id,
 	getOrganizationSupplierVerificationDetails,
@@ -70,18 +71,21 @@ function SupplierApprovalModal({
 			<Modal.Body className={styles.body}>
 				<div className={styles.text_middle}>
 					{{
-						need_analysis_report         : 'Need Analysis Report',
-						evaluation_paramenter_report : 'Evaluation parameter Report',
+						need_analysis_report: t('supplier_page_supplier_approval_modal_need_analysis_title'),
+						evaluation_paramenter_report:
+						t('supplier_page_supplier_approval_modal_evaluation_parameter_title'),
 					}[open]}
 
 				</div>
 				{{
 					need_analysis_report:	<NeedAnalysisData
+						t={t}
 						service_type={service_type}
 						organization_id={organization_id}
 						id={service_id}
 					/>,
 					evaluation_paramenter_report: <SupplierEvaluationData
+						t={t}
 						organization_id={organization_id}
 						id={service_id}
 					/>,
@@ -89,8 +93,12 @@ function SupplierApprovalModal({
 				}[open]}
 			</Modal.Body>
 			<Modal.Footer style={{ gap: '15px' }}>
-				<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>Verify</Button>
-				<Button onClick={handleReject}>Reject</Button>
+				<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>
+					{t('supplier_page_supplier_approval_modal_verify_button_label')}
+				</Button>
+				<Button onClick={handleReject}>
+					{t('supplier_page_supplier_approval_modal_reject_button_label')}
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

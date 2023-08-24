@@ -14,7 +14,7 @@ import { report } from './utils/report';
 
 const FOUR = 4;
 
-function SupplierApproval({ id, organization_id, service_type, getOrganizationService, role }) {
+function SupplierApproval({ t, id, organization_id, service_type, getOrganizationService, role }) {
 	const [verify, setVerify] = useState({
 		need_analysis_report           : null,
 		market_feedback_report         : null,
@@ -37,12 +37,12 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 		service           : service_type,
 		getOrganizationService,
 	});
-	console.log(verify, 'abc');
 
 	return (
 		<>
 			{(open !== 'financial_due_diligence_report') && (
 				<SupplierApprovalModal
+					t={t}
 					open={open}
 					setOpen={setOpen}
 					setVerify={setVerify}
@@ -55,6 +55,7 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 			)}
 			{(open === 'financial_due_diligence_report') && (
 				<SupplierApprovalDueDiligenceModal
+					t={t}
 					open={open}
 					setOpen={setOpen}
 					setVerify={setVerify}
@@ -67,12 +68,13 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 
 			<div className={styles.parent}>
 				<div className={styles.heading}>
-					Supplier Approval
+					{t('supplier_page_supplier_approval_title')}
 				</div>
 				<div className={styles.container}>
 					{
-						report?.map((item) => (
+						report({ t })?.map((item) => (
 							<Item
+								t={t}
 								key={item}
 								title={item?.title}
 								verify={verify}
@@ -102,8 +104,7 @@ function SupplierApproval({ id, organization_id, service_type, getOrganizationSe
 											// 	?.filter((i) => i === 'verified'
 											// 		|| i === 'rejected').length !== FOUR}
 										>
-											Submit
-
+											{t('supplier_page_supplier_approval_submit_button_label')}
 										</Button>
 									</div>
 

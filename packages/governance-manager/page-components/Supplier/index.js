@@ -55,6 +55,7 @@ function Supplier() {
 					setStatus={setStatus}
 				/>,
 				market_feedback: <MarketFeedback
+					t={t}
 					organization_id={supplierData?.organization_id}
 					id={id}
 					service={supplierData?.service}
@@ -62,6 +63,7 @@ function Supplier() {
 					setStatus={setStatus}
 				/>,
 				organization_evaluation: <SupplierEvaluation
+					t={t}
 					id={id}
 					service={supplierData?.service}
 					organization_id={supplierData?.organization_id}
@@ -69,6 +71,7 @@ function Supplier() {
 					getOrganizationService={getOrganizationService}
 				/>,
 				organization_approval: <SupplierApproval
+					t={t}
 					setStatus={setStatus}
 					id={id}
 					organization_id={supplierData?.organization_id}
@@ -77,6 +80,7 @@ function Supplier() {
 					role={role}
 				/>,
 				contract_and_sla_updation: <ContractSla
+					t={t}
 					setStatus={setStatus}
 					service_type={supplierData?.service}
 					organization_id={supplierData?.organization_id}
