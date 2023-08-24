@@ -17,7 +17,7 @@
 	cursor: pointer;
 
 	&:hover {
-		fill: #f68b21;
+		color: #f68b21;
 	}
 }
 

@@ -21,6 +21,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		search,
 		setSearch,
 		handlePagination,
+		partnerId,
 	} = useListLeadOrgUsers();
 
 	const geo = getGeoConstants();
@@ -103,6 +104,12 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		}));
 	};
 
+	const redirectToLeads = ({ e, leadOrgId }) => {
+		e.stopPropagation();
+		const leadOrgPage = `${window.location.origin}/${partnerId}/lead-organization/${leadOrgId}`;
+		window.open(leadOrgPage, '_blank');
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
@@ -136,6 +143,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 								openLeadOrgModal={openLeadOrgModal}
 								handlePlaceCall={handlePlaceCall}
 								handleOpenMessage={handleOpenMessage}
+								redirectToLeads={redirectToLeads}
 							/>
 						)) : (
 							<div className={styles.loader}>

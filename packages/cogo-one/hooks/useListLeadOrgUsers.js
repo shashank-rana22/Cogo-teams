@@ -21,8 +21,10 @@ const getParams = ({ query, page }) => ({
 const useListLeadOrgUsers = () => {
 	const {
 		refetchList = false,
+		partnerId = '',
 	} = useSelector(({ profile }) => ({
-		refetchList: profile?.lead_feedback_form_data?.refetch_list,
+		refetchList : profile?.lead_feedback_form_data?.refetch_list,
+		partnerId   : profile?.partner.id,
 	}));
 
 	const dispatch = useDispatch();
@@ -79,6 +81,7 @@ const useListLeadOrgUsers = () => {
 		search,
 		setSearch,
 		handlePagination,
+		partnerId,
 	};
 };
 export default useListLeadOrgUsers;

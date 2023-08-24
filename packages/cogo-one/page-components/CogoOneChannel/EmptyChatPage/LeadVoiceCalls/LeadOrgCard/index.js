@@ -8,10 +8,11 @@ function LeadOrgCard({
 	openLeadOrgModal = () => {},
 	handlePlaceCall = () => {},
 	handleOpenMessage = () => {},
+	redirectToLeads = () => {},
 }) {
 	return (
 		<div className={styles.each_container}>
-			<Header eachItem={eachItem} handleOpenMessage={handleOpenMessage} />
+			<Header eachItem={eachItem} handleOpenMessage={handleOpenMessage} redirectToLeads={redirectToLeads} />
 			<Body eachItem={eachItem} handlePlaceCall={handlePlaceCall} />
 			<Footer eachItem={eachItem} openLeadOrgModal={openLeadOrgModal} />
 		</div>
