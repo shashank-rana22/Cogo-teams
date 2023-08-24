@@ -150,6 +150,8 @@ function List({ isSeller = false, source = '' }) {
 					<Modal.Body>
 						<AddRate
 							item={item?.serviceListItem}
+							setAddRate={setShowModal}
+							refetch={refetch}
 							status={item?.status}
 							closeModal={closeModal}
 							updateResponse={updateResponse}

@@ -1,7 +1,7 @@
 import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
 
-const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase'];
+const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase', 'add_sell_price'];
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];
@@ -73,7 +73,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : ['task', 'overview'].includes(source),
+			show        : ['task', 'overview', 'add_sell_price'].includes(source),
 			size        : 'sm',
 		},
 		{
