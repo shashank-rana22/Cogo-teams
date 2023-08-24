@@ -7,7 +7,6 @@ export type FilterProps = {
 	category?:string,
 	date?:{ startDate?:Date, endDate?:Date }
 	urgency?:string
-	isMyTaskOnly?:boolean
 };
 
 export interface TableProps {
