@@ -31,12 +31,12 @@ const communicationOptions = [
 	{ label: 'Busy', value: 'Busy' },
 	{ label: 'Does not exist', value: 'Does not exist' },
 	{
-		label: 'Does not belong to this user',
-		value: 'Does not belong to this user',
+		label : 'Does not belong to this user',
+		value : 'Does not belong to this user',
 	},
 	{
-		label: 'Belongs to the user who has left the company',
-		value: 'Belongs to the user who has left the company',
+		label : 'Belongs to the user who has left the company',
+		value : 'Belongs to the user who has left the company',
 	},
 
 ];
@@ -53,7 +53,6 @@ function ActivityLog({
 	type,
 	organizationId = '',
 }) {
-
 	const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 	const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 	return (
@@ -168,6 +167,7 @@ function ActivityLog({
 								name="endDateTime"
 								isPreviousDaysAllowed
 								control={control}
+								minDate={watch('startDateTime')}
 								rules={{ required: true }}
 							/>
 							<div className={styles.error}>{errors?.endDateTime ? '*required' : null}</div>
@@ -188,8 +188,8 @@ function ActivityLog({
 						control={control}
 						params={{
 							filters: {
-								status: 'active',
-								organization_id: organizationId,
+								status          : 'active',
+								organization_id : organizationId,
 							},
 						}}
 						size="md"
@@ -214,8 +214,8 @@ function ActivityLog({
 						multiple
 						params={{
 							filters: {
-								status: 'active',
-								organization_id: organizationId,
+								status          : 'active',
+								organization_id : organizationId,
 							},
 						}}
 						size="md"

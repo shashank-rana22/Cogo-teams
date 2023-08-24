@@ -165,6 +165,7 @@ function ActivityLog({
 								showTimeSelect
 								dateFormat={`${date} ${time}`}
 								name="endDateTime"
+								minDate={watch('startDateTime')}
 								isPreviousDaysAllowed
 								control={control}
 								rules={{ required: true }}

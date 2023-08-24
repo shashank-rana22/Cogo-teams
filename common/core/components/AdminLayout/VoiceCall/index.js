@@ -49,7 +49,8 @@ function VoiceCall({ firestore = {} }) {
 		callRecordId = '',
 		callEndAt = '',
 		conferenceType = '',
-		voiceCallData: callData,
+		selfOrganizationId = '',
+		source = '',
 	} = callState || {};
 
 	const {
@@ -69,7 +70,7 @@ function VoiceCall({ firestore = {} }) {
 	});
 
 	const {
-		hangUpCall = () => { },
+		hangUpCall = () => {},
 		hangUpLoading,
 	} = useHangUpCall({
 		callRecordId,
@@ -116,7 +117,7 @@ function VoiceCall({ firestore = {} }) {
 		};
 	}, [callStartAt, status]);
 
-	const showLogModal = callData?.source === 'outstanding';
+	const showLogModal = source === 'outstanding';
 
 	return (
 		<>
@@ -149,7 +150,7 @@ function VoiceCall({ firestore = {} }) {
 			{showCallModalType === 'feedbackModal' && showLogModal && (
 				<LogModal
 					showLog
-					organizationId={callData?.orgData?.selfOrganizationId}
+					organizationId={selfOrganizationId}
 					unmountVoiceCall={unmountVoiceCall}
 				/>
 			)}

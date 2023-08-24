@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const ELEMENTS_TO_BE_DELETED = 1;
 
-function DialCallModal({ showDialModal = false, setShowDialModal = () => { } }) {
+function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 	const dispatch = useDispatch();
 	const geo = getGeoConstants();
 
