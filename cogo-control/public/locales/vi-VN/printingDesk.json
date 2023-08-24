@@ -85,6 +85,7 @@
     "approved_awb_fields_label1": "SID",
     "approved_awb_fields_label2": "AWB",
     "approved_awb_fields_label3": "AWB Loại",
+    "card_list_empty_state_header": "Dữ liệu không tồn tại",
     "card_list_empty_state_text": "Chúng tôi xin lỗi những gì bạn đang tìm kiếm.Vui lòng thử một cách khác",
     "awb_controls_label1": "Trọng lượng thô",
     "awb_controls_label2": "Trọng lượng thể tích",

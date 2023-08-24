@@ -85,6 +85,7 @@
     "approved_awb_fields_label1": "SID",
     "approved_awb_fields_label2": "AWB",
     "approved_awb_fields_label3": "AWB Category",
+    "card_list_empty_state_header": "Data not found",
     "card_list_empty_state_text": "We are sorry what you were looking for. Please try another way",
     "awb_controls_label1": "Gross Weight",
     "awb_controls_label2": "Volumetric Weight",

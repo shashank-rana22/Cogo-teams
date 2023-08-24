@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 function EmptyState({
 	height = 250,
 	width = 375,
-	emptyText = 'Data not found',
 	textSize = '20px',
 }) {
 	const { t } = useTranslation(['printingDesk']);
@@ -21,7 +20,9 @@ function EmptyState({
 				className={styles.image}
 			/>
 			<div>
-				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
+				<div className={styles.text} style={{ fontSize: textSize }}>
+					{t('printingDesk:card_list_empty_state_header')}
+				</div>
 				<p className={styles.text}>{t('printingDesk:card_list_empty_state_text')}</p>
 			</div>
 		</div>

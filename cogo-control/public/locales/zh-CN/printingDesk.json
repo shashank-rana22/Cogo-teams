@@ -85,6 +85,7 @@
     "approved_awb_fields_label1": "SID",
     "approved_awb_fields_label2": "AWB",
     "approved_awb_fields_label3": "AWB 类别",
+    "card_list_empty_state_header": "找不到数据",
     "card_list_empty_state_text": "我们很抱歉您想要的东西。请用另一种方式尝试",
     "awb_controls_label1": "总重量",
     "awb_controls_label2": "体积重量",

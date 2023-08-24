@@ -85,6 +85,7 @@
     "approved_awb_fields_label1": "SID",
     "approved_awb_fields_label2": "AWB",
     "approved_awb_fields_label3": "AWB Kategori",
+    "card_list_empty_state_header": "Data tidak ditemukan",
     "card_list_empty_state_text": "Kami menyesal apa yang Anda cari.Silakan coba cara lain",
     "awb_controls_label1": "Berat kotor",
     "awb_controls_label2": "Berat volumetrik",
