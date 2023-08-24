@@ -1,6 +1,6 @@
-import { Popover, ButtonGroup, cl } from '@cogoport/components';
+import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCopy, IcMAgentManagement } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
@@ -10,7 +10,11 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
-const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
+const getButtonOptions = ({
+	partnerId, shipmentId, setShowRaiseTicket,
+	setShowPocModal, setShowPopover, shipmentItem,
+	showAddPrimaryUserButton = false,
+}) => [
 	{
 		key      : 'view_shipments',
 		children : 'View Shipments',
@@ -18,8 +22,10 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 			e.stopPropagation();
 			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
 			window.open(shipmentDetailsPage, '_blank');
+			setShowPopover('');
 		},
-		condition: ['all_shipments', 'user_shipments'],
+		condition : ['all_shipments', 'user_shipments'],
+		show      : true,
 	},
 	{
 		key      : 'view_documents',
@@ -28,8 +34,10 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 			e.stopPropagation();
 			const shipmentDocuments = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
 			window.open(shipmentDocuments, '_blank');
+			setShowPopover('');
 		},
-		condition: ['all_shipments', 'user_shipments'],
+		condition : ['all_shipments', 'user_shipments'],
+		show      : true,
 	},
 	{
 		key      : 'raise_ticket',
@@ -37,12 +45,31 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		onClick  : (e) => {
 			e.stopPropagation();
 			setShowRaiseTicket(true);
+			setShowPopover('');
 		},
-		condition: ['user_shipments'],
+		condition : ['user_shipments'],
+		show      : true,
+	},
+	{
+		key      : 'add_primary_poc',
+		children : 'Set Primary Poc',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setShowPocModal({ show: true, shipmentData: shipmentItem });
+			setShowPopover('');
+		},
+		condition : ['all_shipments', 'user_shipments'],
+		show      : showAddPrimaryUserButton,
 	},
 ];
 
-function HeaderBlock({ shipmentItem = {}, type = '', setShowShipmentChat = () => {} }) {
+function HeaderBlock({
+	shipmentItem = {}, setShowPocDetails = () => {},
+	type = '', setShowPopover = () => {}, showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
+	setShowShipmentChat = () => {},
+}) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
 		userId    : profile.user.id,
@@ -69,9 +96,17 @@ function HeaderBlock({ shipmentItem = {}, type = '', setShowShipmentChat = () =>
 		importer_exporter_id,
 	};
 
-	const buttons = getButtonOptions({ shipmentId, partnerId, setShowRaiseTicket });
+	const buttons = getButtonOptions({
+		shipmentId,
+		partnerId,
+		setShowRaiseTicket,
+		setShowPocModal,
+		setShowPopover,
+		shipmentItem,
+		showAddPrimaryUserButton,
+	});
 
-	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
+	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type) && itm?.show);
 
 	const handleSidClick = (e) => {
 		e.stopPropagation();
@@ -105,27 +140,42 @@ function HeaderBlock({ shipmentItem = {}, type = '', setShowShipmentChat = () =>
 			</div>
 
 			<div className={styles.icons_container}>
-				<IcMCopy
-					className={cl`${styles.copy_icon} 
-					${type !== 'all_shipments' ? styles.user_activity_copy_icon : ''}`}
-					onClick={(e) => {
-						e.stopPropagation();
-						handleCopyShipmentData({ shipmentItem });
-					}}
-				/>
+
+				{type === 'all_shipments' ? (
+					<Tooltip content="Poc's" placement="bottom">
+						<IcMAgentManagement
+							className={styles.poc_details}
+							onClick={(e) => {
+								e.stopPropagation();
+								setShowPocDetails(shipmentItem);
+							}}
+						/>
+					</Tooltip>
+				) : null}
 
 				<Image
 					src={GLOBAL_CONSTANTS.image_url.message_reply}
-					height={25}
-					width={25}
+					height={24}
+					width={24}
 					alt="message"
 					className={styles.message_icon_styles}
 					onClick={handleShipmentChat}
 				/>
 
+				<Tooltip content="Copy" placement="bottom">
+					<IcMCopy
+						className={styles.copy_icon}
+						onClick={(e) => {
+							e.stopPropagation();
+							handleCopyShipmentData({ shipmentItem });
+						}}
+					/>
+				</Tooltip>
+
 				<Popover
 					placement="bottom-end"
 					caret={false}
+					visible={showPopover === shipmentId}
 					render={(
 						<ButtonGroup
 							size="sm"
@@ -136,7 +186,10 @@ function HeaderBlock({ shipmentItem = {}, type = '', setShowShipmentChat = () =>
 				>
 					<IcMOverflowDot
 						className={styles.overflow_container}
-						onClick={(e) => e.stopPropagation()}
+						onClick={(e) => {
+							e.stopPropagation();
+							setShowPopover(shipmentId);
+						}}
 					/>
 				</Popover>
 			</div>
