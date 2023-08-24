@@ -10,26 +10,23 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
-const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
+const ROUTES_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
+
+const getButtonOptions = ({ setShowRaiseTicket, handleRowClick = () => {} }) => [
 	{
-		key      : 'view_shipments',
-		children : 'View Shipments',
-		onClick  : (e) => {
-			e.stopPropagation();
-			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-			window.open(shipmentDetailsPage, '_blank');
-		},
-		condition: ['all_shipments', 'user_shipments'],
+		key       : 'view_shipments',
+		children  : 'View Shipments',
+		onClick   : (e) => handleRowClick({ e }),
+		condition : ['all_shipments', 'user_shipments'],
 	},
 	{
-		key      : 'view_documents',
-		children : 'View Documents',
-		onClick  : (e) => {
-			e.stopPropagation();
-			const shipmentDocuments = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
-			window.open(shipmentDocuments, '_blank');
-		},
-		condition: ['all_shipments', 'user_shipments'],
+		key       : 'view_documents',
+		children  : 'View Documents',
+		onClick   : (e) => handleRowClick({ e, activeTab: 'documents' }),
+		condition : ['all_shipments', 'user_shipments'],
 	},
 	{
 		key      : 'raise_ticket',
@@ -69,15 +66,24 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		importer_exporter_id,
 	};
 
-	const buttons = getButtonOptions({ shipmentId, partnerId, setShowRaiseTicket });
-
-	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
-
-	const handleSidClick = (e) => {
+	const handleRowClick = ({ e, activeTab = '' }) => {
 		e.stopPropagation();
-		const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
+		let shipmentDetailsPage;
+		if (Object.keys(ROUTES_MAPPING).includes(shipment_type)) {
+			const route = ROUTES_MAPPING[shipment_type];
+
+			shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${shipmentId}`;
+		} else {
+			// eslint-disable-next-line max-len
+			shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}${activeTab ? `?tab=${activeTab}` : ''}`;
+		}
+
 		window.open(shipmentDetailsPage, '_blank');
 	};
+
+	const buttons = getButtonOptions({ setShowRaiseTicket, handleRowClick });
+
+	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
 
 	return (
 		<div className={styles.container}>
@@ -89,7 +95,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				<div
 					className={styles.sid_id}
 					role="presentation"
-					onClick={handleSidClick}
+					onClick={(e) => handleRowClick({ e })}
 				>
 					{`SID: ${serial_id}`}
 				</div>
