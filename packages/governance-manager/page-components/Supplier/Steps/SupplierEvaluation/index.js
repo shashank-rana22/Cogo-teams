@@ -102,11 +102,18 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 						/>
 					</div>
 				</div>
-				<ScoreModal
-					show={show}
-					setShow={setShow}
-					getOrganizationEvaluationDetails={getOrganizationEvaluationDetails}
-				/>
+				{
+					show
+					&& (
+						<ScoreModal
+							t={t}
+							show={show}
+							setShow={setShow}
+							getOrganizationEvaluationDetails={getOrganizationEvaluationDetails}
+						/>
+					)
+
+				}
 			</div>
 			<div className={styles.flex_right}>
 				<Button
