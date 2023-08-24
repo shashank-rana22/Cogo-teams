@@ -16,12 +16,17 @@ const scopePossibleThroughCriteriaMap = {
 		{ label: 'Supply Location View', value: 'supply_location_view' },
 	],
 	channel_partner: [
-		{ label: 'Entity Manager Team Members View', value: 'entity_manager_team_members_view' },
-		{ label: 'Portfolio Manager Team Members View', value: 'portfolio_manager_team_members_view' },
-	],
-	channel_partner_team: [
 		{ label: 'Entity Manager View', value: 'entity_manager_view' },
 		{ label: 'Portfolio Manager View', value: 'portfolio_manager_view' },
+		{ label: 'Credit Controller View', value: 'credit_controller_view' },
+		{ label: 'Trade Finance Agent View', value: 'trade_finance_agent_view' },		
+	],
+	channel_partner_team: [
+		{ label: 'Entity Manager Team Members View', value: 'entity_manager_team_members_view' },
+		{ label: 'Portfolio Manager Team Members View', value: 'portfolio_manager_team_members_view' },
+		{ label: 'Trade Finance Team Members View', value: 'trade_finance_team_members_view' },
+		{ label: 'Credit Controller Team Members View', value: 'credit_controller_team_members_view' },
+		{ label: 'Entity Manager View', value: 'entity_manager_view' },
 	],
 };
 
