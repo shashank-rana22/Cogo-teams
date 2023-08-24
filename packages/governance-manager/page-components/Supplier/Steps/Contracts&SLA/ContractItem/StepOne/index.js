@@ -5,7 +5,7 @@ import { useState } from 'react';
 import useUpdateOrganizationContract from '../../hooks/useUpdateOrganizationContract';
 import styles from '../../styles.module.css';
 
-function StepTwo({ item, index, id, getOrganizationContract }) {
+function StepOne({ t, item, index, id, getOrganizationContract }) {
 	const ZERO = 0;
 	const ONE = 1;
 	const [value, setValue] = useState(item?.variables_details?.[ZERO]?.updated_value);
@@ -21,7 +21,7 @@ function StepTwo({ item, index, id, getOrganizationContract }) {
 			<div className={styles.box_layout}>
 				<div className={styles.term}>
 					<div>
-						Term
+						{t('supplier_page_contract_sla_step1_term_label')}
 						{' '}
 						{index + ONE}
 					</div>
@@ -49,8 +49,7 @@ function StepTwo({ item, index, id, getOrganizationContract }) {
 								disabled={item?.state === 'approved'}
 								onClick={() => updateOrganizationContract('updated')}
 							>
-								Update
-
+								{t('supplier_page_contract_sla_step1_update_button_label')}
 							</Button>
 						</>
 					)}
@@ -61,4 +60,4 @@ function StepTwo({ item, index, id, getOrganizationContract }) {
 	);
 }
 
-export default StepTwo;
+export default StepOne;

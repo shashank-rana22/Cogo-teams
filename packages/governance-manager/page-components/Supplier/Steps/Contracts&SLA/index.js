@@ -12,7 +12,7 @@ import useGetOrganizationContract from './hooks/useGetOrganizationContract';
 import useSendOrganizationContractForRenegotiation from './hooks/useSendOrganizationContractForRenegotiation';
 import styles from './styles.module.css';
 
-function ContractSla({ organization_id, service_type, id:organization_service_id, role }) {
+function ContractSla({ organization_id, service_type, id:organization_service_id, role, t }) {
 	const { push } = useRouter();
 	const [step, setStep] = useState(
 		{
@@ -51,7 +51,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 			<div className={styles.heading}>
 				<div className={styles.flex}>
 					<div>
-						Contract & SLA
+						{t('supplier_page_contract_sla_title')}
 					</div>
 				</div>
 				{
@@ -63,7 +63,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 							disabled={negotiationIds?.length === 0}
 							onClick={() => sendOrganizationContractForRenegotiation()}
 						>
-							Renegotiate
+							{t('supplier_page_contract_sla_renegotiate_button_label')}
 						</Button>
 					)
 				}
@@ -72,6 +72,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 				step === 1
 					? (
 						<StepOne
+							t={t}
 							key={item}
 							item={item}
 							index={index}
@@ -83,6 +84,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 					)
 					: (
 						<StepTwo
+							t={t}
 							key={item}
 							item={item}
 							index={index}
@@ -111,7 +113,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 							);
 						}}
 					>
-						Save & Next
+						{t('supplier_page_contract_sla_submit_and_next_button_label')}
 
 					</Button>
 					{' '}
@@ -120,8 +122,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 						style={{ fontWeight: 600 }}
 						onClick={() => { setStep(1); }}
 					>
-						Save & Do It Later
-
+						{t('supplier_page_contract_sla_save_and_do_it_later_button_label')}
 					</Button>
 				</div>
 			) : (
@@ -132,7 +133,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 						style={{ fontWeight: 600 }}
 						onClick={() => { setStep(1); }}
 					>
-						Save & Do It Later
+						{t('supplier_page_contract_sla_submit_and_next_button_label')}
 
 					</Button>
 					<div className={styles.side_line_buttons}>
@@ -142,7 +143,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 								finalApproval('active');
 							}}
 						>
-							Approve
+							{t('supplier_page_contract_sla_approve_button_label')}
 
 						</Button>
 						{' '}
@@ -153,7 +154,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 								finalApproval('inactive');
 							}}
 						>
-							Reject
+							{t('supplier_page_contract_sla_reject_button_label')}
 
 						</Button>
 

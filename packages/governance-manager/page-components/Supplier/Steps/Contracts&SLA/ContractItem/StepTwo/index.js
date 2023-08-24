@@ -5,6 +5,7 @@ import useUpdateOrganizationContract from '../../hooks/useUpdateOrganizationCont
 import styles from '../../styles.module.css';
 
 function StepTwo({
+	t,
 	item,
 	index,
 	id,
@@ -49,7 +50,7 @@ function StepTwo({
 
                     }
 					<div>
-						Term
+						{t('supplier_page_contract_sla_step2_term_label')}
 						{' '}
 						{index + ONE}
 					</div>
@@ -60,7 +61,9 @@ function StepTwo({
 				{item?.variables_details?.[ZERO] && (
 					<div className={styles.update}>
 
-						<span className={styles.icon}>Original Value</span>
+						<span className={styles.icon}>
+							{t('supplier_page_contract_sla_step2_original_label')}
+						</span>
 						<Input
 							size="sm"
 							onChange={setValue}
@@ -74,7 +77,9 @@ function StepTwo({
 							disabled
 							value={item?.variables_details?.[ZERO]?.default_value}
 						/>
-						<span className={styles.icon}>Updated Value</span>
+						<span className={styles.icon}>
+							{t('supplier_page_contract_sla_step2_update_label')}
+						</span>
 						<Input
 							size="sm"
 							onChange={setValue}
@@ -97,8 +102,7 @@ function StepTwo({
 							disabled={item?.state === 'approved'}
 							onClick={() => updateOrganizationContract('approved')}
 						>
-							Confirm
-
+							{t('supplier_page_contract_sla_step2_confirm_button_label')}
 						</Button>
 					</div>
 				)}

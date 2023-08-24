@@ -5,7 +5,7 @@ import { columns } from '../../../NeedAnalysis/utils/need-analysis-utils';
 
 import styles from './styles.module.css';
 
-function NeedAnalysisData({ setShow, service_type, id, organization_id }) {
+function NeedAnalysisData({ t, setShow, service_type, id, organization_id }) {
 	const {
 		data: serviceExpertiseData,
 	} = useGetOrganizationServiceSuppliers(
@@ -19,7 +19,7 @@ function NeedAnalysisData({ setShow, service_type, id, organization_id }) {
 	if (serviceExpertiseData) {
 		return (
 			<Table
-				columns={columns({ setShow, service_type, isForApproval: true })}
+				columns={columns({ t, setShow, service_type, isForApproval: true })}
 				data={serviceExpertiseData}
 				className={styles.table}
 			/>
