@@ -1,13 +1,13 @@
 export type FilterProps = {
-	page: number,
-	pageLimit: number,
-	search?: string,
-	activeTab?: string,
-	searchQuery?: string,
-	category?:string,
-	date?:{ startDate?:Date, endDate?:Date }
-	urgency?:string
-	isMyTaskOnly?: boolean
+	page: number;
+	pageLimit: number;
+	search?: string;
+	activeTab?: string;
+	searchQuery?: string;
+	category?:string;
+	date?:{ startDate?:Date, endDate?:Date };
+	urgency?:string;
+	isMyTaskOnly?: boolean;
 };
 
 export interface TableProps {
