@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState, useEffect, useCallback } from 'react';
 
-import useGetCogoOneAgentStats from '../../../../hooks/useGetOmniChannelStats';
 import useUpdateAgentWorkPreferences from '../../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
@@ -64,11 +63,6 @@ function PunchInOut({
 		firestore,
 		userId,
 	});
-
-	const {
-		agentStatsLoading = false,
-		agentStatsData = {},
-	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	const shakeButton = () => {
 		setIsShaking(true);
@@ -145,10 +139,9 @@ function PunchInOut({
 						status={status}
 						handlePunchIn={handlePunchIn}
 						viewType={viewType}
-						agentStatsLoading={agentStatsLoading}
-						agentStatsData={agentStatsData}
 						timePeriodValue={timePeriodValue}
 						setTimePeriodValue={setTimePeriodValue}
+						isPunchPresent={isPunchPresent}
 					/>
 				)}
 			</div>

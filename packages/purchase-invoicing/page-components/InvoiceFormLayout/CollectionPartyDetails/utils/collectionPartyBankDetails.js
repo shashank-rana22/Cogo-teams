@@ -9,7 +9,7 @@ const collectionPartyBankDetails = ({ collectionPartyAddress, collectionPartyBan
 	},
 	{
 		label : 'IFSC :',
-		value : `${collectionPartyBank?.data?.ifsc_number || '-'}`,
+		value : `${collectionPartyBank?.data?.ifsc_number || collectionPartyBank?.data?.swift_number || '-'}`,
 	},
 	{
 		label : 'PAN Number :',
