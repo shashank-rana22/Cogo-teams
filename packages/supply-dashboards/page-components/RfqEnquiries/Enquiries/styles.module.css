@@ -50,3 +50,13 @@
 	display: flex;
 	justify-content: flex-start;
 }
+
+.details {
+	width: 100%;
+}
+
+.details_card {
+	padding: 10px;
+	margin: 16px 6px 0;
+	background: #fff;
+}
