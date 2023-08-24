@@ -3,12 +3,10 @@
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 10px 6px;
-	border-color: #e0e0e0;
-	border-style: solid;
-	border-width: 1px 1px 0;
+	border-bottom: 1px solid #e0e0e0;
 
 	&:last-child {
-		border-bottom: 1px solid  #e0e0e0;
+		border-bottom: none;
 	}
 }
 
@@ -61,7 +59,7 @@
 	height: 22px;
 	margin-right: 6px;
 	cursor: pointer;
-	fill: #b0924f;
+	fill: #6fa5ab;
 	transition: 0.3s ease-in-out;
 
 	&:hover {
@@ -75,7 +73,7 @@
 	height: 18px;
 	margin-right: 6px;
 	cursor: pointer;
-	fill: #b0924f;
+	fill: #6fa5ab;
 	transition: 0.3s ease-in-out;
 
 	&:hover {
@@ -88,7 +86,7 @@
 	width: 18px;
 	height: 18px;
 	cursor: pointer;
-	fill: #b0924f;
+	fill: #6fa5ab;
 	transition: 0.3s ease-in-out;
 
 	&:hover {
@@ -132,6 +130,14 @@
 
 .trade_partners_avatar {
 	background: #c26d1a;
+}
+
+.customer_icons {
+	fill: #d6b200;
+}
+
+.trade_partners_icons {
+	fill: #c26d1a;
 }
 
 .action_icons {

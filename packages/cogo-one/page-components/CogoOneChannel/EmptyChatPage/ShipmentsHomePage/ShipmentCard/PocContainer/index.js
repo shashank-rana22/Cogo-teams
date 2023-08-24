@@ -39,7 +39,7 @@ function PocContainer({
 
 	const PocDetails = [importer_exporter_poc];
 
-	if (primary_poc_details) {
+	if (primary_poc_details && primary_poc_details?.id !== importer_exporter_poc?.id) {
 		const updatedPocData = { ...primary_poc_details, is_primary_poc: true };
 		PocDetails.unshift(updatedPocData);
 	}

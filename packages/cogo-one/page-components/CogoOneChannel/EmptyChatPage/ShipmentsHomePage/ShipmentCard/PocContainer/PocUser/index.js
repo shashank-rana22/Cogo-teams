@@ -180,7 +180,9 @@ function PocUser({
 								<div className={styles.action_icons}>
 									{chatOption ? (
 										<IcMWhatsapp
-											className={styles.whatsapp_icon}
+											className={cl`${styles.whatsapp_icon}
+										${isCustomer ? styles.customer_icons : ''}
+										${isTradePartner ? styles.trade_partners_icons : ''}`}
 											onClick={() => setActiveTab((prev) => ({
 												...prev,
 												hasNoFireBaseRoom : true,
@@ -192,7 +194,9 @@ function PocUser({
 
 									{hasVoiceCallAccess && (
 										<IcMCall
-											className={styles.call_icon_styles}
+											className={cl`${styles.call_icon_styles}
+											${isCustomer ? styles.customer_icons : ''}
+											${isTradePartner ? styles.trade_partners_icons : ''}`}
 											onClick={() => handleVoiceCall({
 												mobileNumber,
 												userId,
@@ -204,7 +208,9 @@ function PocUser({
 									)}
 
 									<IcMEmail
-										className={styles.email_icon_styles}
+										className={cl`${styles.email_icon_styles}
+										${isCustomer ? styles.customer_icons : ''}
+										${isTradePartner ? styles.trade_partners_icons : ''}`}
 										onClick={() => setModalData({
 											modalType : 'email',
 											userData  : user,
