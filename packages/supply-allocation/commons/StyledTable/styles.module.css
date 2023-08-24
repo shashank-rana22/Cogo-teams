@@ -1,6 +1,5 @@
 .table_container {
 	padding: unset !important;
-	margin-top: 16px;
 	overflow: auto;
 
 	:global {

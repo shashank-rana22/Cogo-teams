@@ -3,6 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Actions from '../Actions';
 
+import styles from './styles.module.css';
+
 function ServiceProvider({
 	item = {},
 	bucketOptions = [],
@@ -52,13 +54,13 @@ function ServiceProvider({
 					</div>
 				</Tooltip>
 
-				<div>
+				<div className={styles.rating_container}>
 					<RatingComponent
 						type="star"
 						totalStars={5}
 						value={service_provider_star_rating}
 						size="sm"
-						style={{ cursor: 'normal' }}
+						onClick={() => {}}
 					/>
 				</div>
 

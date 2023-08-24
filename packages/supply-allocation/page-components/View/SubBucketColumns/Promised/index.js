@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Promised({ item = {}, control, unregister }) {
+function Promised({ item = {}, control, unregister, bulkEditMode }) {
 	const [editPromised, setEditPromised] = useState(false);
 
 	const onClickCancel = (controlName) => {
@@ -24,7 +24,8 @@ function Promised({ item = {}, control, unregister }) {
 				{allocated_containers}
 				{' '}
 				TEU
-				<IcMEdit onClick={() => setEditPromised(true)} />
+				{bulkEditMode
+					? <IcMEdit onClick={() => setEditPromised(true)} /> : null}
 			</div>
 			<div>
 				{is_hard_limit ? (
@@ -37,6 +38,12 @@ function Promised({ item = {}, control, unregister }) {
 		</>
 	) : (
 		<div className={styles.edit_container}>
+
+			<span>
+				{' '}
+				previous:
+				{ allocated_containers}
+			</span>
 			<InputNumberController
 				size="xs"
 				control={control}
