@@ -12,6 +12,7 @@ function LogCallActivity({
 	onCloseForm = () => {},
 	partnerId = '',
 	loggedInAgentId = '',
+	leadUserId = '',
 }) {
 	const {
 		control,
@@ -20,7 +21,8 @@ function LogCallActivity({
 		watch,
 	} = useForm({
 		defaultValues: {
-			agent_id: loggedInAgentId,
+			agent_id     : loggedInAgentId,
+			lead_user_id : leadUserId,
 		},
 	});
 

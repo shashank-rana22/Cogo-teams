@@ -37,16 +37,18 @@ function LeadFeedBackVoiceCallForm() {
 
 	const [activeTab, setActiveTab] = useState(leadFeedBackFormType);
 
-	const onCloseForm = () => {
+	const onCloseForm = ({ isSubmitSucessFull = false } = {}) => {
 		dispatch(
 			setProfileState({
-				lead_feedback_form_data : {},
-				lead_feedback_form_type : '',
+				lead_feedback_form_data: {
+					refetch_list: isSubmitSucessFull,
+				},
+				lead_feedback_form_type: '',
 			}),
 		);
 	};
 
-	const { lead_organization_id = '' } = leadFeedbackFormData || {};
+	const { lead_organization_id = '', lead_user_id = '' } = leadFeedbackFormData || {};
 
 	useEffect(() => {
 		setActiveTab(leadFeedBackFormType);
@@ -86,6 +88,7 @@ function LeadFeedBackVoiceCallForm() {
 									onCloseForm={onCloseForm}
 									partnerId={partnerId}
 									loggedInAgentId={loggedInAgentId}
+									leadUserId={lead_user_id}
 								/>
 							</TabPanel>
 						);

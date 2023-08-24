@@ -1,5 +1,7 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector, useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useCallback, useEffect, useState } from 'react';
 
 const DEFAULT_PAGE_NUMBER = 1;
@@ -17,6 +19,14 @@ const getParams = ({ query, page }) => ({
 });
 
 const useListLeadOrgUsers = () => {
+	const {
+		refetchList = false,
+	} = useSelector(({ profile }) => ({
+		refetchList: profile?.lead_feedback_form_data?.refetch_list,
+	}));
+
+	const dispatch = useDispatch();
+
 	const [search, setSearch] = useState('');
 
 	const [{ data, loading }, trigger] = useRequest({
@@ -26,11 +36,17 @@ const useListLeadOrgUsers = () => {
 
 	const { debounceQuery, query } = useDebounceQuery();
 
+	const clearRefectchList = useCallback(() => {
+		dispatch(
+			setProfileState({
+				lead_feedback_form_data: {},
+			}),
+		);
+	}, [dispatch]);
+
 	const getOrganizationUsers = useCallback(({ page }) => {
 		try {
-			trigger(
-				{ params: getParams({ query, page }) },
-			);
+			trigger({ params: getParams({ query, page }) });
 		} catch (err) {
 			console.error('err', err);
 		}
@@ -47,6 +63,15 @@ const useListLeadOrgUsers = () => {
 	useEffect(() => {
 		getOrganizationUsers({ page: DEFAULT_PAGE_NUMBER });
 	}, [getOrganizationUsers]);
+
+	useEffect(() => {
+		if (!refetchList) {
+			return;
+		}
+
+		getOrganizationUsers({ page: DEFAULT_PAGE_NUMBER });
+		clearRefectchList();
+	}, [clearRefectchList, getOrganizationUsers, refetchList]);
 
 	return {
 		data: loading ? {} : data,

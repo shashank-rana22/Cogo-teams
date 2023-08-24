@@ -27,11 +27,14 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 
 	const { list = [], page = 1, page_limit = 6, total_count = 0 } = data || {};
 
-	const openLeadOrgModal = ({ type = '', leadOrgId = '' }) => {
+	const openLeadOrgModal = ({ type = '', leadOrgId = '', leadUserId = '' }) => {
 		dispatch(
 			setProfileState({
-				lead_feedback_form_data : { lead_organization_id: leadOrgId },
-				lead_feedback_form_type : type,
+				lead_feedback_form_data: {
+					lead_organization_id : leadOrgId,
+					lead_user_id         : leadUserId,
+				},
+				lead_feedback_form_type: type,
 			}),
 		);
 	};
@@ -75,9 +78,9 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		let numberEformat;
 
 		if (whatsapp_country_code) {
-			numberEformat = `${whatsapp_country_code?.replace('+', '')}${whatsapp_number}`;
+			numberEformat = `${whatsapp_country_code?.replace('+', '') || ''}${whatsapp_number || ''}`;
 		} else if (mobile_country_code) {
-			numberEformat = `${mobile_country_code?.replace('+', '')}${mobile_number}`;
+			numberEformat = `${mobile_country_code?.replace('+', '') || ''}${mobile_number || ''}`;
 		}
 
 		const chatData = {
@@ -127,8 +130,8 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 					{!isEmpty(list)
 						? list?.map((eachItem) => (
 							<LeadOrgCard
-								eachItem={eachItem}
 								key={eachItem?.id}
+								eachItem={eachItem}
 								setActiveTab={setActiveTab}
 								openLeadOrgModal={openLeadOrgModal}
 								handlePlaceCall={handlePlaceCall}

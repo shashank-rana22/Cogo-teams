@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMDelete } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import CONTACT_FORM_CONTROLS from '../../configurations/contactsForm';
 import useCreateLeadUser from '../../hooks/useCreateLeadUser';
@@ -13,7 +12,7 @@ function AddContactsForm({
 	componentParams = {},
 	onChange = () => {},
 	onRemove = () => {},
-	value = {},
+	value = '',
 }) {
 	const {
 		control,
@@ -28,12 +27,7 @@ function AddContactsForm({
 	} = useCreateLeadUser({ leadOrgId: lead_organization_id, onChange });
 
 	if (!isEmpty(value)) {
-		return (
-			<div className={styles.added_container_styles}>
-				<div className={styles.name_styles}>{startCase(value?.name)}</div>
-				<IcMDelete onClick={onRemove} className={styles.delete_styles} />
-			</div>
-		);
+		return null;
 	}
 
 	return (

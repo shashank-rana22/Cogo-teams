@@ -1,22 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 
 /* eslint-disable import/no-cycle */
 import EachField from './EachField';
 import styles from './styles.module.css';
-
-const LAST_INDEX = 1;
-
-const getShowAddButton = (obj = {}) => {
-	if (isEmpty(obj)) {
-		return true;
-	}
-
-	return !Object.keys(obj || {}).some(
-		(eachKey) => eachKey !== 'id' && !isEmpty(obj[eachKey]),
-	);
-};
 
 function FieldArrayController({
 	control = {},
@@ -24,14 +11,11 @@ function FieldArrayController({
 	controls = [],
 	error = [],
 	append_empty_values = {},
-	addOnlyOnPrevFill = true,
 	showAddButton = true,
 	buttonText = 'Add',
 	...rest
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
-
-	const showAddButtonOnPrev = getShowAddButton(fields?.[fields.length - LAST_INDEX] || {});
 
 	return (
 		<div className={styles.outer_container}>
@@ -48,7 +32,7 @@ function FieldArrayController({
 					field={field}
 				/>
 			))}
-			{((!showAddButton) || (addOnlyOnPrevFill && !showAddButtonOnPrev)) ? (
+			{!showAddButton ? (
 				null
 			) : (
 				<Button

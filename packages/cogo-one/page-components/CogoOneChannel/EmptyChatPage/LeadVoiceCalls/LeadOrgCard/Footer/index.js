@@ -20,6 +20,7 @@ function Footer({ eachItem = {}, openLeadOrgModal = () => {} }) {
 		lead_organization_id = '',
 		communication_log_stats = {},
 		feedback_count: feedBackCount = 0,
+		lead_user_id = '',
 	} = eachItem || {};
 	const { call: noOfCallsMade = 0 } = communication_log_stats || {};
 
@@ -36,7 +37,11 @@ function Footer({ eachItem = {}, openLeadOrgModal = () => {} }) {
 							size="sm"
 							themeType="secondary"
 							onClick={() => {
-								openLeadOrgModal({ type: key, leadOrgId: lead_organization_id });
+								openLeadOrgModal({
+									type       : key,
+									leadOrgId  : lead_organization_id,
+									leadUserId : lead_user_id,
+								});
 							}}
 						>
 							{buttontext}
