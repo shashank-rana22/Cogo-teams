@@ -47,13 +47,13 @@ function TruckStatusUpdateModal({
 
 	return (
 		<div>
-			{/* {(isEmpty(showTruckStatusModal) && !isEmpty(data) && (
+			{(isEmpty(showTruckStatusModal) && !isEmpty(data) && (
 				<CargoAcknowledgmentModal
 					showCargoAcknowledgmentModal={showCargoAcknowledgmentModal}
-					setShowCargoAcknowledgmentModal={data}
-					cargoData={showCargoAcknowledgmentModal}
+					setShowCargoAcknowledgmentModal={setShowCargoAcknowledgmentModal}
+					cargoData={data}
 				/>
-			))} */}
+			))}
 			<Modal
 				show={!isEmpty(showTruckStatusModal)}
 				onClose={() => setShowTruckStatusModal({})}

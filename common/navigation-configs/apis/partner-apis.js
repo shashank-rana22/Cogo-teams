@@ -13383,7 +13383,7 @@ const partner = {
 	],
 	warehouse_management: [
 		{
-			api         : 'get_air_coe_warehouse_management_warehouse_configurations',
+			api         : 'get_air_coe_warehouse_management_list_configurations',
 			access_type : 'private',
 		},
 		{
@@ -13399,7 +13399,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_air_coe_warehouse_management_warehouse_schedules',
+			api         : 'get_air_coe_warehouse_management_list_schedules',
 			access_type : 'private',
 		},
 		{
@@ -13415,7 +13415,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_air_coe_warehouse_management_warehouse_inventory',
+			api         : 'get_air_coe_warehouse_management_list_inventory',
 			access_type : 'private',
 		},
 		{
