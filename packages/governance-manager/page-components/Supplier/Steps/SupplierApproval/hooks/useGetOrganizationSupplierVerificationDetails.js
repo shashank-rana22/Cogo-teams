@@ -16,7 +16,7 @@ function useGetOrganizationSupplierVerificationDetails({ organization_id, organi
 					organization_service_id,
 				},
 			});
-			console.log(res?.data?.organization_evaluation_details, 'abc');
+
 			setVerify(
 				{
 					need_analysis_report   : res?.data?.need_analysis_details?.[ZERO]?.manager_approval_status,

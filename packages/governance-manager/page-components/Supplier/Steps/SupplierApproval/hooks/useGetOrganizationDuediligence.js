@@ -20,10 +20,8 @@ function useGetOrganizationDueDiligence({ organization_id }) {
 	};
 	useEffect(() => {
 		getOrganizationDueDiligence();
-		// put a id check
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	console.log(data);
 	return {
 		data,
 		loading,
