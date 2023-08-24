@@ -34,7 +34,7 @@ function RibbonRender({ row = {} }: Interface) {
 			criteria   : (daysLeftForAutoIrnGeneration as unknown as number) >= 0,
 		},
 		{ param: reqCancelReason, displayVal: 'Cancel Approved', criteria: true },
-		{ param: reqReplaceReason, displayVal: `Replace to ${reqReplaceTo}`, criteria: true },
+		{ param: reqReplaceReason && reqReplaceTo, displayVal: `Replace to ${reqReplaceTo}`, criteria: true },
 	];
 
 	return (

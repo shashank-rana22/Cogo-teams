@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -21,17 +20,11 @@ const useCancelReplaceInvoice = () => {
 		user_id: profile?.user?.id,
 	}));
 
-	const geo = getGeoConstants();
-
-	const entity_id = geo.others.navigations.partner.bookings.invoicing
-		.request_cancel_invoice
-		? geo.parent_entity_id
-		: undefined;
-
 	const submit = async ({
 		cancelReason = '', proformaNumber = '', closeModal = () => {},
 		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
 		incidentSubType = 'CANCEL_INVOICE',
+		entityId = '',
 	}) => {
 		try {
 			await trigger({
@@ -50,7 +43,7 @@ const useCancelReplaceInvoice = () => {
 					},
 					source    : 'BOOKINGS',
 					createdBy : user_id,
-					entityId  : entity_id,
+					entityId,
 				},
 			});
 			Toast.success(`Requested ${startCase(incidentSubType.toLowerCase())}`);
