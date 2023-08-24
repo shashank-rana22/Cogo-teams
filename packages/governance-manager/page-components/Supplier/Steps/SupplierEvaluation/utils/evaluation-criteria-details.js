@@ -1,51 +1,52 @@
 /* eslint-disable consistent-return */
-export const evaluationCriteriaDetails = ({ service }) => {
+export const evaluationCriteriaDetails = ({ t, service }) => {
 	if (['fcl_freight'].includes(service)) {
 		return [
 			{
-				range : 'Above 50',
-				text  : 'Direct approval of vendor',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_fcl_direct_approval_50_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_fcl_vendor_approval_50_plus'),
 			},
 			{
-				range : 'Between 40-50	',
-				text  : 'Need approval of Governance Manager',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_fcl_direct_approval_40_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_fcl_gov_approval_40_plus'),
 			},
 			{
-				range : 'Below 40',
-				text  : 'Reject The supplier',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_fcl_direct_approval_below_40'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_fcl_gov_approval_below_40'),
 			},
 		];
 	}
 	if (['lcl_freight'].includes(service)) {
 		return [
 			{
-				range : 'Above 60',
-				text  : 'Direct approval of vendor',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_lcl_direct_approval_60_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_lcl_vendor_approval_60_plus'),
 			},
 			{
-				range : 'Between 50-60	',
-				text  : 'Need approval of Governance Manager',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_lcl_direct_approval_50_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_lcl_gov_approval_50_plus'),
 			},
 			{
-				range : 'Below 40',
-				text  : 'Reject The supplier',
-			}];
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_lcl_direct_approval_below_40'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_lcl_gov_approval_below_40'),
+			},
+		];
 	}
 
 	if (['haulage_freight'].includes(service)) {
 		return [
 
 			{
-				range : 'Above 50',
-				text  : 'Direct approval of vendor',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_haul_direct_approval_50_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_haul_vendor_approval_50_plus'),
 			},
 			{
-				range : 'Between 40-50	',
-				text  : 'Need approval of Governance Manager',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_haul_direct_approval_40_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_haul_gov_approval_40_plus'),
 			},
 			{
-				range : 'Below 40',
-				text  : 'Reject The supplier',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_haul_direct_approval_below_40'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_haul_gov_approval_below_40'),
 			},
 
 		];
@@ -56,31 +57,32 @@ export const evaluationCriteriaDetails = ({ service }) => {
 		'air_customs'].includes(service)) {
 		return [
 			{
-				range : 'Above 70',
-				text  : 'Direct approval of vendor',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cha_direct_approval_50_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cha_vendor_approval_50_plus'),
 			},
 			{
-				range : 'Between 60-70	',
-				text  : 'Need approval of Governance Manager',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cha_direct_approval_40_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cha_gov_approval_40_plus'),
 			},
 			{
-				range : 'Below 60',
-				text  : 'Reject The supplier',
-			}];
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cha_direct_approval_below_40'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cha_gov_approval_below_40'),
+			},
+		];
 	}
 	if (['fcl_cfs'].includes(service)) {
 		return [
 			{
-				range : 'Above 66',
-				text  : 'Direct approval of vendor',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cfs_direct_approval_50_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cfs_vendor_approval_50_plus'),
 			},
 			{
-				range : 'Between 50-66	',
-				text  : 'Need approval of Governance Manager',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cfs_direct_approval_40_plus'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cfs_gov_approval_40_plus'),
 			},
 			{
-				range : 'Below 50',
-				text  : 'Reject The supplier',
+				range : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cfs_direct_approval_below_40'),
+				text  : t('supplier_page_supplier_evaluation_table_evaluation_criteria_cfs_gov_approval_below_40'),
 			},
 
 		];

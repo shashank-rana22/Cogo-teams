@@ -6,7 +6,7 @@ import useUpdateOrganizationServiceExpertiseFeedback from '../hooks/useUpdateOrg
 
 import styles from './styles.module.css';
 
-function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
+function EvaluateModal({ t, show, setShow, getOrganizationExpertiseSuppliers }) {
 	const FIFTY = 50;
 	const [feedback, setFeedback] = useState('');
 	const [checkbox, setCheckbox] = useState('');
@@ -21,10 +21,10 @@ function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
 	const { data, loading } = useGetOrganizationServiceExpertises({ show });
 	const columns = [
 		{
-			Header   : 'Name of Current Supplier',
+			Header   : t('supplier_page_need_analysis_table__evaluate_modal'),
 			accessor : (row) => row?.organization?.business_name,
 		},
-		{ Header: 'Volume Served', accessor: 'total_teus' },
+		{ Header: t('supplier_page_need_analysis_table_volume_served'), accessor: 'total_teus' },
 	];
 
 	return (
@@ -37,7 +37,7 @@ function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
 				maxHeight={100}
 				scroll={false}
 			>
-				<Modal.Header title="Evaluating India to West Coast" />
+				<Modal.Header title={t('supplier_page_need_analysis_table_evaluating')} />
 				<Modal.Body>
 					<div className={styles.parent}>
 						<div className={styles.left}>
@@ -49,7 +49,7 @@ function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
 							<div className={styles.right_upper}>
 								<Radio
 									name="a1"
-									label="Needed"
+									label={t('supplier_page_need_analysis_table_needed')}
 									value="yes"
 									style={{ marginRight: '30px' }}
 									onChange={(e) => setCheckbox(e.target.value)}
@@ -57,16 +57,16 @@ function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
 								<Radio
 									name="a1"
 									value="no"
-									label="Not Needed"
+									label={t('supplier_page_need_analysis_table_not_needed')}
 									onChange={(e) => setCheckbox(e.target.value)}
 								/>
 							</div>
-							<h4>Feedback</h4>
+							<h4>{t('supplier_page_need_analysis_table_feedback')}</h4>
 							<Textarea
 								className={styles.feedback_box}
 								size="md"
 								defaultValue=""
-								placeholder="Minimum 50 characters"
+								placeholder={t('supplier_page_need_analysis_table_character_count')}
 								value={feedback}
 								onChange={(val) => setFeedback(val)}
 							/>
@@ -81,7 +81,7 @@ function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
 						|| checkbox === ''
 					}
 					>
-						Submit
+						{t('supplier_page_need_analysis_table_submit')}
 
 					</Button>
 				</Modal.Footer>

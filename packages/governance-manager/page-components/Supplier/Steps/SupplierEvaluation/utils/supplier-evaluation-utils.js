@@ -8,22 +8,34 @@ export const filterData = (data) => {
 	return [...A, ...B];
 };
 
-export function columns({ setShow, isForApproval }) {
+export function columns({ t, setShow, isForApproval }) {
 	return [
 		{
-			id       : 'parameters',
-			Header   : () => (<div className={styles.th}>Parameters</div>),
-			accessor : (row) => (<div className={styles.td}>{row.label}</div>),
+			id     : 'parameters',
+			Header : () => (
+				<div className={styles.th}>
+					{t('supplier_page_supplier_evaluation_table_evaluation_criteria_utils_parameter')}
+				</div>
+			),
+			accessor: (row) => (<div className={styles.td}>{row.label}</div>),
 		},
 		{
-			id       : 'total_score',
-			Header   : () => (<div className={styles.th}>Total Score</div>),
-			accessor : (row) => (<div className={styles.td}>{row.total_score}</div>),
+			id     : 'total_score',
+			Header : () => (
+				<div className={styles.th}>
+					{t('supplier_page_supplier_evaluation_table_evaluation_criteria_utils_total_score')}
+				</div>
+			),
+			accessor: (row) => (<div className={styles.td}>{row.total_score}</div>),
 		},
 		{
-			id       : 'score_received',
-			Header   : () => (<div className={styles.th}>Score Received</div>),
-			accessor : (row) => (
+			id     : 'score_received',
+			Header : () => (
+				<div className={styles.th}>
+					{t('supplier_page_supplier_evaluation_table_evaluation_criteria_utils_score_rec')}
+				</div>
+			),
+			accessor: (row) => (
 				<div className={styles.td}>
 					<div>
 						{
@@ -33,7 +45,7 @@ export function columns({ setShow, isForApproval }) {
 					{
 row?.evaluation_mode === 'manual' && row?.task !== 'total_score' && !isForApproval && (
 	<Button themeType="accent" size="sm" onClick={() => setShow(row)}>
-		Score
+		{t('supplier_page_supplier_evaluation_table_evaluation_criteria_utils_score')}
 	</Button>
 )
                 }

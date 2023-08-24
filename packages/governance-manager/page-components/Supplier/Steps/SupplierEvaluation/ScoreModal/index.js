@@ -5,7 +5,7 @@ import useUpdateOrganizationEvaluationTask from '../hooks/useUpdateOrganizationE
 
 import styles from './styles.module.css';
 
-function ScoreModal({ show = null, setShow, getOrganizationEvaluationDetails }) {
+function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails }) {
 	const ZERO = 0;
 	const [yourScore, setYourScore] = useState(ZERO);
 	const [reason, setReason] = useState('');
@@ -35,27 +35,30 @@ function ScoreModal({ show = null, setShow, getOrganizationEvaluationDetails }) 
 			<Modal size="md" show={show} onClose={onClose} placement="center">
 				<Modal.Body>
 					<div className={styles.parent}>
-						<div className={styles.header}>Score on Strength With Shipping Lines</div>
+						<div className={styles.header}>
+							{t('supplier_page_supplier_evaluation_table_shipping_lines')}
+						</div>
 						<div className={styles.maximum_score}>
-							Maximum Score :&nbsp;
+							{t('supplier_page_supplier_evaluation_table_maximum_score')}
+							{' '}
 							<span style={{ color: '#221F20' }}>{show?.total_score}</span>
 						</div>
 						<div className={styles.input_score}>
-							Your Score
+							{t('supplier_page_supplier_evaluation_table_your_score')}
 							<Input
 								size="sm"
 								value={yourScore}
 								onChange={(value) => {
 									if (value <= show?.total_score) {
 										setYourScore(value);
-									} else { Toast.error('Score should be less than Total Score'); }
+									} else { Toast.error(t('supplier_page_supplier_evaluation_table_score_limit')); }
 								}}
 								style={{ width: '132px', height: '32 px' }}
-								placeholder="Score"
+								placeholder={t('supplier_page_supplier_evaluation_table_score_placeholder')}
 							/>
 						</div>
 						<div className={styles.reason_main}>
-							Reason
+							{t('supplier_page_supplier_evaluation_table_reason')}
 							<Textarea
 								onChange={(value) => { setReason(value); }}
 								className={styles.reason}
@@ -69,7 +72,9 @@ function ScoreModal({ show = null, setShow, getOrganizationEvaluationDetails }) 
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { updateOrganizationEvaluationTask(); }}>OK</Button>
+					<Button onClick={() => { updateOrganizationEvaluationTask(); }}>
+						{t('supplier_page_supplier_evaluation_table_ok')}
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>
