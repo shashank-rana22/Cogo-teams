@@ -18,6 +18,8 @@ function SupplyAllocation() {
 		setPagination,
 		loading,
 		setFilters,
+		sortFilters,
+		setSortFilters,
 	} = useListFclSearches();
 
 	const { control, reset } = useForm({});
@@ -42,6 +44,8 @@ function SupplyAllocation() {
 				setPagination={setPagination}
 				listLoading={loading}
 				createSearchLoadng={createSearchLoadng}
+				sortFilters={sortFilters}
+				setSortFilters={setSortFilters}
 			/>
 
 			<List
@@ -51,6 +55,7 @@ function SupplyAllocation() {
 				loading={loading}
 				setPagination={setPagination}
 				setFilters={setFilters}
+				setSortFilters={setSortFilters}
 			/>
 		</>
 	);

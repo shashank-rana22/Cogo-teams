@@ -6,6 +6,7 @@ const INITIAL_PAGE = 1;
 const useListFclSearches = () => {
 	const [pagination, setPagination] = useState(INITIAL_PAGE);
 	const [filters, setFilters] = useState({});
+	const [sortFilters, setSortFilters] = useState({});
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -26,6 +27,7 @@ const useListFclSearches = () => {
 					service_data_required    : true,
 					allocation_data_required : true,
 					filters,
+					...sortFilters,
 				},
 			});
 		} catch (err) {
@@ -41,12 +43,13 @@ const useListFclSearches = () => {
 					allocation_data_required : true,
 					filters,
 					page                     : pagination,
+					...sortFilters,
 				},
 			});
 		} catch (err) {
 			console.error(err);
 		}
-	}, [filters, trigger, pagination]);
+	}, [trigger, filters, pagination, sortFilters]);
 
 	useEffect(() => {
 		listFclSearchesApi();
@@ -60,6 +63,8 @@ const useListFclSearches = () => {
 		setPagination,
 		filters,
 		setFilters,
+		sortFilters,
+		setSortFilters,
 	};
 };
 
