@@ -8,18 +8,22 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
+const ROUTES_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
+
 const getButtonOptions = ({
-	partnerId, shipmentId, setShowRaiseTicket,
+	setShowRaiseTicket,
 	setShowPocModal, setShowPopover, shipmentItem,
 	showAddPrimaryUserButton = false,
+	handleRowClick = () => {},
 }) => [
 	{
 		key      : 'view_shipments',
 		children : 'View Shipments',
 		onClick  : (e) => {
-			e.stopPropagation();
-			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-			window.open(shipmentDetailsPage, '_blank');
+			handleRowClick({ e });
 			setShowPopover('');
 		},
 		condition : ['all_shipments', 'user_shipments'],
@@ -29,9 +33,7 @@ const getButtonOptions = ({
 		key      : 'view_documents',
 		children : 'View Documents',
 		onClick  : (e) => {
-			e.stopPropagation();
-			const shipmentDocuments = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
-			window.open(shipmentDocuments, '_blank');
+			handleRowClick({ e, activeTab: 'documents' });
 			setShowPopover('');
 		},
 		condition : ['all_shipments', 'user_shipments'],
@@ -93,6 +95,21 @@ function HeaderBlock({
 		importer_exporter_id,
 	};
 
+	const handleRowClick = ({ e, activeTab = '' }) => {
+		e.stopPropagation();
+		let shipmentDetailsPage;
+		if (Object.keys(ROUTES_MAPPING).includes(shipment_type)) {
+			const route = ROUTES_MAPPING[shipment_type];
+
+			shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${shipmentId}`;
+		} else {
+			// eslint-disable-next-line max-len
+			shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}${activeTab ? `?tab=${activeTab}` : ''}`;
+		}
+
+		window.open(shipmentDetailsPage, '_blank');
+	};
+
 	const buttons = getButtonOptions({
 		shipmentId,
 		partnerId,
@@ -101,15 +118,10 @@ function HeaderBlock({
 		setShowPopover,
 		shipmentItem,
 		showAddPrimaryUserButton,
+		handleRowClick,
 	});
 
 	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type) && itm?.show);
-
-	const handleSidClick = (e) => {
-		e.stopPropagation();
-		const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-		window.open(shipmentDetailsPage, '_blank');
-	};
 
 	return (
 		<div className={styles.container}>
@@ -121,7 +133,7 @@ function HeaderBlock({
 				<div
 					className={styles.sid_id}
 					role="presentation"
-					onClick={handleSidClick}
+					onClick={(e) => handleRowClick({ e })}
 				>
 					{`SID: ${serial_id}`}
 				</div>

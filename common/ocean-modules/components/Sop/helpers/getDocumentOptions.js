@@ -32,7 +32,7 @@ const getDocumentOptions = ({ data = [], billingAddressData = [], orgPocData = [
 
 	if (isEmpty(data) && !isEmpty(billingAddressData)) {
 		(billingAddressData || []).forEach((item) => {
-			const { address = '', organization_pocs = [], pincode = '', pin_code = '' } = item || {};
+			const { address = '', organization_pocs = [] } = item || {};
 
 			(organization_pocs || []).forEach((ele) => {
 				const { name, mobile_number, mobile_country_code } = ele;
@@ -42,12 +42,11 @@ const getDocumentOptions = ({ data = [], billingAddressData = [], orgPocData = [
 				tempData.country_code.add(mobile_country_code);
 			});
 			tempData.address.add(address);
-			tempData.address.add(pin_code || pincode);
 		});
 	}
 
 	if (watchModeOfExecution === 'pickup' && !isEmpty(orgPocData)) {
-		orgPocData.forEach((item) => {
+		(orgPocData || []).forEach((item) => {
 			const { name = '', mobile_number = '', mobile_country_code = '' } = item || {};
 
 			tempData.name.add(name);
