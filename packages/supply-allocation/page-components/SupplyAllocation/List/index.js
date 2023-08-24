@@ -62,8 +62,9 @@ function List({
 			...prev,
 			...(nextStage !== 'default'
 				? {
-					sort_by   : 'profitability',
-					sort_type : KEY_STAGE_MAPPING[nextStage],
+					sort_by_forecasted_volume : undefined,
+					sort_by                   : 'profitability',
+					sort_type                 : KEY_STAGE_MAPPING[nextStage],
 				}
 				: { sort_by: undefined, sort_type: undefined }),
 		}));
@@ -77,10 +78,11 @@ function List({
 			...prev,
 			...(nextStage !== 'default'
 				? {
-					sort_by   : 'forcasted_volume',
-					sort_type : KEY_STAGE_MAPPING[nextStage],
+					sort_by                   : undefined,
+					sort_by_forecasted_volume : true,
+					sort_type                 : KEY_STAGE_MAPPING[nextStage],
 				}
-				: { sort_by: undefined, sort_type: undefined }),
+				: { sort_by_forecasted_volume: undefined, sort_type: undefined }),
 		}));
 	};
 
