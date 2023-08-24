@@ -242,5 +242,14 @@
     "booking_desk": "Meja Pemesanan",
     "feedbacks": "Umpan balik",
     "promotions_marketing": "Promosi Pemasaran",
-    "promotions_kam": "Promosi KAM"
+    "promotions_kam": "Promosi KAM",
+    "switch_account": "Ganti Akun",
+    "help": "Bantuan",
+    "logout": "Keluar",
+    "logout_all_accounts": "Keluar dari SEMUA akun",
+    "you_have": "Anda memiliki",
+    "new": "baru",
+    "notification": "notifikasi",
+    "add_account": "Tambah Akun",
+    "search_bar": "Menu pencarian..."
 }

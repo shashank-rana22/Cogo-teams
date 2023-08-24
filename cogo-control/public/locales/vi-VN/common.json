@@ -242,5 +242,14 @@
     "booking_desk": "Bàn đặt phòng",
     "feedbacks": "phản hồi",
     "promotions_marketing": "Khuyến mãi Tiếp thị",
-    "promotions_kam": "Promotions KAM"
+    "promotions_kam": "Promotions KAM",
+    "switch_account": "Chuyển đổi Tài khoản",
+    "help": "Trợ giúp",
+    "logout": "Đăng xuất",
+    "logout_all_accounts": "Đăng xuất khỏi TẤT CẢ các tài khoản",
+    "you_have": "Bạn có",
+    "new": "mới",
+    "notification": "thông báo",
+    "add_account": "Thêm tài khoản",
+    "search_bar": "Thực đơn tìm kiếm..."
 }

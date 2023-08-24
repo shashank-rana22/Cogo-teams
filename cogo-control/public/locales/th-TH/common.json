@@ -242,5 +242,14 @@
     "booking_desk": "โต๊ะจอง",
     "feedbacks": "การตอบรับ",
     "promotions_marketing": "โปรโมชั่น การตลาด",
-    "promotions_kam": "โปรโมชั่น KAM"
+    "promotions_kam": "โปรโมชั่น KAM",
+    "switch_account": "เปลี่ยนบัญชี",
+    "help": "ช่วยเหลือ",
+    "logout": "ออกจากระบบ",
+    "logout_all_accounts": "ออกจากทุกบัญชี",
+    "you_have": "คุณมี",
+    "new": "ใหม่",
+    "notification": "การแจ้งเตือน",
+    "add_account": "เพิ่มบัญชี",
+    "search_bar": "เมนูค้นหา..."
 }

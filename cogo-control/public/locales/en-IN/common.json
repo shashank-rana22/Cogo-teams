@@ -63,7 +63,7 @@
     "employee_directory": "Employee Directory",
     "lens": "Lens",
     "pay_later": "Pay Later",
-    "notifications": "Notifications",
+    "notifications": "notifications",
     "tracking": "Tracking",
     "revenue_desk": "Revenue Desk",
     "center_of_excellence_coe": "Center of Excellence [COE]",
@@ -242,5 +242,14 @@
     "booking_desk": "Booking Desk",
     "feedbacks": "Feedbacks",
     "promotions_marketing": "Promotions Marketing",
-    "promotions_kam": "Promotions KAM"
+    "promotions_kam": "Promotions KAM",
+    "switch_account": "Switch Account",
+    "help": "Help",
+    "logout": "Logout",
+    "logout_all_accounts": "Logout of ALL accounts",
+    "you_have": "You have",
+    "new": "new",
+    "notification": "notification",
+    "add_account": "Add Account",
+    "search_bar": "Search menu..."
 }
