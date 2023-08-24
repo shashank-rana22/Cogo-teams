@@ -143,5 +143,16 @@
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Description is required",
     "roles_and_permission_crm_dashboard_btm_text_create": "Create",
     "roles_and_permission_hooks_toast_something_went_wrong": "Something went wrong",
-    "roles_and_permission_hooks_toast_role_created_successfully": "Role Created Successfully..."
+    "roles_and_permission_hooks_toast_role_created_successfully": "Role Created Successfully...",
+    "roles_and_permission_search_search_role": "Search Role",
+    "roles_and_permission_allow": "Allow",
+    "roles_and_permission_self": "Self",
+    "roles_and_permission_team": "Team",
+    "roles_and_permission_all": "All",
+    "roles_and_permission_across_all": "Across All",
+    "roles_and_permission_channel_partner": "Channel Partner",
+    "roles_and_permission_channel_partner_team": "Channel Partner Team",
+    "roles_and_permission_prefill_permission_from_other_roles": "Prefill permissions from other roles",
+    "roles_and_permission_clear_import": "Clear Import",
+    "roles_and_permission_import_role": "Import Role"
 }

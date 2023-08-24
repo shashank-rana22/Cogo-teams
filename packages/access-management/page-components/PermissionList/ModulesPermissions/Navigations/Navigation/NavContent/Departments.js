@@ -4,37 +4,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const OPTIONS_Select = [
-	{
-		label : 'Allow',
-		value : 'allowed',
-	},
-	{
-		label : 'Self',
-		value : 'self',
-	},
-	{
-		label : 'Team',
-		value : 'team',
-	},
-	{
-		label : 'All',
-		value : 'all',
-	},
-	{
-		label : 'Across All',
-		value : 'across_all',
-	},
-	{
-		label : 'Channel Partner',
-		value : 'channel_partner',
-	},
-	{
-		label : 'Channel Partner Team',
-		value : 'channel_partner_team',
-	},
-];
-
 const through_criteria = {
 	supply: [
 		'supply_agent_view',
@@ -79,6 +48,37 @@ const getDepartment = (item) => {
 };
 
 function Departments({ onChange = () => {}, selectedDepartments = {}, t = () => {} }) {
+	const OPTIONS_Select = [
+		{
+			label : t('accessManagement:roles_and_permission_allow'),
+			value : 'allowed',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_self'),
+			value : 'self',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_team'),
+			value : 'team',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_all'),
+			value : 'all',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_across_all'),
+			value : 'across_all',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_channel_partner'),
+			value : 'channel_partner',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_channel_partner_team'),
+			value : 'channel_partner_team',
+		},
+	];
+
 	const OPTIONS = [
 		{
 			children : t('accessManagement:roles_and_permission_update_edit_role_role_functions_supply'),

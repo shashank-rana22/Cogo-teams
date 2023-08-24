@@ -143,5 +143,16 @@
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "描述不能为空",
     "roles_and_permission_crm_dashboard_btm_text_create": "创造",
     "roles_and_permission_hooks_toast_something_went_wrong": "角色创建成功...",
-    "roles_and_permission_hooks_toast_role_created_successfully": "角色创建成功..."
+    "roles_and_permission_hooks_toast_role_created_successfully": "角色创建成功...",
+    "roles_and_permission_search_search_role": "搜索角色",
+    "roles_and_permission_allow": "允许",
+    "roles_and_permission_self": "个人",
+    "roles_and_permission_team": "团队",
+    "roles_and_permission_all": "全部",
+    "roles_and_permission_across_all": "跨所有",
+    "roles_and_permission_channel_partner": "渠道合作伙伴",
+    "roles_and_permission_channel_partner_team": "渠道合作伙伴团队",
+    "roles_and_permission_prefill_permission_from_other_roles": "预填充其他角色的权限",
+    "roles_and_permission_clear_import": "清除导入",
+    "roles_and_permission_import_role": "导入角色"
 }

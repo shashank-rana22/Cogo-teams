@@ -63,12 +63,13 @@ function RoleDetails({
 				placement="top"
 				trigger="mouseenter"
 				interactive
-				content={<div>Prefill permissions from other roles</div>}
+				content={<div>{t('accessManagement:roles_and_permission_prefill_permission_from_other_roles')}</div>}
 			>
 				<div>
 					<Button onClick={onImport}>
 						<IcMArrowDoubleLeft size={1.25} style={{ marginRight: 8 }} />
-						{isImported ? 'Clear Import' : 'Import Role'}
+						{isImported ? t('accessManagement:roles_and_permission_clear_import')
+							: t('accessManagement:roles_and_permission_import_role')}
 					</Button>
 				</div>
 			</Tooltip>

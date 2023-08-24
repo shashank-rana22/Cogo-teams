@@ -143,5 +143,16 @@
     "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Deskripsi wajib diisi",
     "roles_and_permission_crm_dashboard_btm_text_create": "Membuat",
     "roles_and_permission_hooks_toast_something_went_wrong": "Ada yang salah",
-    "roles_and_permission_hooks_toast_role_created_successfully": "Peran Berhasil Dibuat..."
+    "roles_and_permission_hooks_toast_role_created_successfully": "Peran Berhasil Dibuat...",
+    "roles_and_permission_search_search_role": "Peran Pencarian",
+    "roles_and_permission_allow": "Izinkan",
+    "roles_and_permission_self": "Sendiri",
+    "roles_and_permission_team": "Tim",
+    "roles_and_permission_all": "Semua",
+    "roles_and_permission_across_all": "Seluruhnya",
+    "roles_and_permission_channel_partner": "Mitra Saluran",
+    "roles_and_permission_channel_partner_team": "Tim Mitra Saluran",
+    "roles_and_permission_prefill_permission_from_other_roles": "Izin pra-isi dari peran lain",
+    "roles_and_permission_clear_import": "Hapus Impor",
+    "roles_and_permission_import_role": "Impor Peran"
 }

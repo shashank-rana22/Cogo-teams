@@ -48,7 +48,7 @@ function Filters({
 				value={searchString || ''}
 				onChange={(value) => setSearchString(value || '')}
 				size="md"
-				placeholder="Search Role"
+				placeholder={t('accessManagement:roles_and_permission_search_search_role')}
 			/>
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
