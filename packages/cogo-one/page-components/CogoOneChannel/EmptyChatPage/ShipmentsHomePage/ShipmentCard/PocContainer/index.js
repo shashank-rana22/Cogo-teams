@@ -29,6 +29,7 @@ function PocContainer({
 	setShowPocDetails = () => {},
 	showPocDetails = {},
 	setActiveTab = () => {},
+	handleShipmentChat = () => {},
 }) {
 	const [modalData, setModalData] = useState({});
 	const { id = '', primary_poc_details = {}, importer_exporter_poc = {} } = showPocDetails;
@@ -104,6 +105,7 @@ function PocContainer({
 							stakeHoldersData={mergedData}
 							setActiveTab={setActiveTab}
 							setModalData={setModalData}
+							handleShipmentChat={handleShipmentChat}
 						/>
 					)}
 			</div>

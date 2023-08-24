@@ -26,6 +26,10 @@ function ShipmentActivities({
 
 	const showAddPrimaryUserButton = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
+	const handleShipmentChat = ({ shipmentItem }) => {
+		setShipmentChat(shipmentItem);
+	};
+
 	if (isEmpty(list)) {
 		return (
 			<EmptyState type="activities" />
@@ -47,6 +51,7 @@ function ShipmentActivities({
 						showPopover={showPopover}
 						setShowPocModal={setShowPocModal}
 						showAddPrimaryUserButton={showAddPrimaryUserButton}
+						handleShipmentChat={handleShipmentChat}
 					/>
 				</div>
 			))}

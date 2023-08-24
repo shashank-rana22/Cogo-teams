@@ -1,5 +1,5 @@
 const mappings = {
-	booking_agent : ['service_Ops1', 'service_Ops2', 'service_Ops3'],
+	booking_agent : ['service_Ops1', 'service_Ops2', 'service_Ops3', 'sales_agent'],
 	service_ops1  : ['Kam', 'supply_Agent', 'service_Ops2'],
 	service_ops2  : ['Kam', 'service_Ops1', 'service_Ops3'],
 	supply_agent  : ['service_Ops1', 'service_Ops2', 'service_Ops3'],
@@ -11,6 +11,7 @@ const mappings = {
 		'Kam',
 		'supply_Agent',
 		'Lastmile_Ops',
+		'sales_agent',
 	],
 };
 

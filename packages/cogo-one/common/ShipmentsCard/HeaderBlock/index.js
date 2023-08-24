@@ -1,7 +1,5 @@
 import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot, IcMCopy, IcMAgentManagement } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { IcMOverflowDot, IcMCopy, IcMAgentManagement, IcMLiveChat } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -68,7 +66,7 @@ function HeaderBlock({
 	type = '', setShowPopover = () => {}, showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
-	setShowShipmentChat = () => {},
+	handleShipmentChat = () => {},
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
@@ -114,11 +112,6 @@ function HeaderBlock({
 		window.open(shipmentDetailsPage, '_blank');
 	};
 
-	const handleShipmentChat = (event) => {
-		event.stopPropagation();
-		setShowShipmentChat(shipmentItem);
-	};
-
 	return (
 		<div className={styles.container}>
 			<div
@@ -153,14 +146,15 @@ function HeaderBlock({
 					</Tooltip>
 				) : null}
 
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.message_reply}
-					height={24}
-					width={24}
-					alt="message"
-					className={styles.message_icon_styles}
-					onClick={handleShipmentChat}
-				/>
+				<Tooltip content="Chat" placement="bottom">
+					<IcMLiveChat
+						className={styles.message_icon_styles}
+						onClick={(e) => {
+							e.stopPropagation();
+							handleShipmentChat({ shipmentItem });
+						}}
+					/>
+				</Tooltip>
 
 				<Tooltip content="Copy" placement="bottom">
 					<IcMCopy
