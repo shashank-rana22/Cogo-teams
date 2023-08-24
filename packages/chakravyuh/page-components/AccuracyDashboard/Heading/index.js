@@ -70,7 +70,7 @@ function Heading({
 					{loading
 						? <Loader /> : formatBigNumbers(total_rates || 'NA')}
 
-					<span>Total Rates</span>
+					<span>Active Rates</span>
 					{show
 						? <IcMEyeclose className={styles.redirect} onClick={() => setShow(false)} />
 						: <IcMEyeopen className={styles.redirect} onClick={() => setShow(true)} />}

@@ -3,6 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useCallback } from 'react';
 
 import rawControls from './rawControls';
@@ -17,7 +18,7 @@ const useEditLineItems = ({
 	invoice = {},
 	onClose = () => {},
 	refetch = () => {},
-	isAdminSuperAdmin = false,
+	isRoleAllowed = false,
 	shipment_data = {},
 	info,
 }) => {
@@ -25,6 +26,7 @@ const useEditLineItems = ({
 
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
+	const [error, setError] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -67,7 +69,7 @@ const useEditLineItems = ({
 			handleChange,
 			service,
 			info,
-			isAdminSuperAdmin,
+			isRoleAllowed,
 			shipment_data,
 			index,
 			TRADE_MAPPING,
@@ -108,7 +110,7 @@ const useEditLineItems = ({
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
-	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
+	const { handleSubmit, control, setValue, watch } = useForm({ defaultValues });
 
 	const formValues = watch();
 
@@ -143,7 +145,47 @@ const useEditLineItems = ({
 		};
 	});
 
+	const validateForPriceChanges = (values) => {
+		const NEW_ERRORS = {};
+
+		(Object.keys(values) || []).forEach((key) => {
+			const CUSTOM_ERRORS = {};
+			const service =	(services || []).find(
+				(ele) => ele?.service_id === key?.split(':')?.[GLOBAL_CONSTANTS.zeroth_index],
+			) || {};
+
+			const { line_items: lineItems } = service;
+
+			(values[key] || []).forEach((val, idx) => {
+				const originalValue = lineItems?.[idx];
+				const ERROR_ITEM = {};
+
+				if (originalValue?.price_discounted > val?.price_discounted && !isRoleAllowed) {
+					ERROR_ITEM.price_discounted = {
+						message: `Price cannot be less than ${originalValue?.price_discounted}`,
+					};
+				}
+				if (!isEmpty(ERROR_ITEM)) {
+					CUSTOM_ERRORS[idx] = ERROR_ITEM;
+				}
+			});
+
+			if (!isEmpty(CUSTOM_ERRORS)) {
+				NEW_ERRORS[key] = CUSTOM_ERRORS;
+			}
+		});
+		setError({ ...NEW_ERRORS });
+
+		return isEmpty(Object.keys(NEW_ERRORS));
+	};
+
 	const onCreate = async (values) => {
+		const isValid = validateForPriceChanges(values);
+
+		if (!isValid) {
+			return;
+		}
+
 		try {
 			const PAYLOAD = [];
 			Object.keys(values).forEach((key) => {
@@ -187,16 +229,21 @@ const useEditLineItems = ({
 		}
 	};
 
+	const onError = (err) => {
+		setError({ ...err });
+	};
+
 	return {
 		onCreate,
 		handleSubmit,
 		controls,
 		loading,
 		CUSTOM_VALUES,
-		errors,
+		errors: error,
 		control,
 		setValue,
 		watch,
+		onError,
 		newFormValues,
 	};
 };
