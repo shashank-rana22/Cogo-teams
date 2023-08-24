@@ -42,7 +42,7 @@ function FeedBackModal({
 		{
 			label     : 'Submit',
 			onClick   : handleSubmit(onSubmit),
-			themeType : 'secondary',
+			themeType : 'primary',
 			loading,
 		},
 	];

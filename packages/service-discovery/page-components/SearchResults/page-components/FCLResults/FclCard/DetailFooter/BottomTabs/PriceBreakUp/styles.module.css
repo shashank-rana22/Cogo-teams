@@ -55,7 +55,7 @@
 			width: 40%;
 		}
 
-		.ui_table_body_cell:nth-child(3) {
+		.ui_table_body_cell:nth-child(2) {
 			width: 28%;
 		}
 
@@ -98,4 +98,9 @@
 
 .column {
 	height: 100%;
+}
+
+.info_icon {
+	margin-left: 4px;
+	color: #ee3425;
 }

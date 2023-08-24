@@ -26,7 +26,7 @@ function BookingDetails({
 		detail = {},
 	} = useContext(CheckoutContext);
 
-	const { tax_total_price_discounted = 0, tax_total_price_currency = '' } = rate;
+	const { tax_total_price_discounted = 0, tax_total_price_currency = '', source = '' } = rate;
 
 	const { quotation_email_sent_at = '' } = detail;
 
@@ -51,7 +51,7 @@ function BookingDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_content}>
-				<ShippingLineDetails shipping_line={shipping_line} />
+				<ShippingLineDetails shipping_line={shipping_line} source={source} />
 
 				<LocationDetails data={mainServiceObject} />
 

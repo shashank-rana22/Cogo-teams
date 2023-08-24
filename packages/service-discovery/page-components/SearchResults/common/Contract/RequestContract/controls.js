@@ -59,12 +59,13 @@ const createContracts = () => [
 		rules  : { required: 'Maximum weight is required', min: 50 },
 	},
 	{
-		name        : 'preferred_shipping_line_ids',
-		label       : 'Preferred Shipping Line (Optional)',
-		type        : 'async-select',
-		asyncKey    : 'list_operators',
-		initialCall : true,
-		params      : getParams({
+		name         : 'preferred_shipping_line_ids',
+		label        : 'Preferred Shipping Line',
+		type         : 'async-select',
+		asyncKey     : 'list_operators',
+		showOptional : true,
+		initialCall  : true,
+		params       : getParams({
 			status        : 'active',
 			operator_type : 'shipping_line',
 		}),
@@ -77,12 +78,13 @@ const createContracts = () => [
 		showIn         : ['fcl_freight'],
 	},
 	{
-		name        : 'preferred_airline_line_ids',
-		label       : 'Prefered Airline line',
-		type        : 'async-select',
-		asyncKey    : 'list_operators',
-		initialCall : true,
-		params      : getParams({
+		name         : 'preferred_airline_line_ids',
+		label        : 'Prefered Airline line',
+		type         : 'async-select',
+		asyncKey     : 'list_operators',
+		showOptional : true,
+		initialCall  : true,
+		params       : getParams({
 			status        : 'active',
 			operator_type : 'airline',
 		}),
@@ -102,6 +104,7 @@ const createContracts = () => [
 		asyncKey       : 'list_operators',
 		initialCall    : true,
 		labelKey       : 'short_name',
+		showOptional   : true,
 		defaultOptions : false,
 		params         : getParams({
 			status        : 'inactive',
@@ -114,12 +117,13 @@ const createContracts = () => [
 	},
 	{
 		name           : 'exclude_shipping_line_ids',
-		label          : 'Exclude Shipping Line (Optional)',
+		label          : 'Exclude Shipping Line',
 		type           : 'async-select',
 		asyncKey       : 'list_operators',
 		initialCall    : true,
 		className      : 'primary lg shipping-line',
 		labelKey       : 'short_name',
+		showOptional   : true,
 		defaultOptions : false,
 		params         : getParams({
 			status        : 'inactive',
