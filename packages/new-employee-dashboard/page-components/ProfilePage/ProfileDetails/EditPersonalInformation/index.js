@@ -15,6 +15,7 @@ const CONTROL_SELECT_TYPE = 'fileUpload';
 const DEFAULT_MOBILE_CODE = '+91';
 
 const PERSONAL_INFO = 'personal_info';
+
 const MOBILE_NUMBER = 'mobile_number';
 const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
@@ -101,7 +102,7 @@ const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING
 	</div>
 ));
 
-function PersonalDetails({ data: content, getEmployeeDetails, setShow = () => {} }) {
+function PersonalDetails({ data: content = {}, getEmployeeDetails = () => {}, setShow = () => {} }) {
 	const { handleSubmit, control, formState: { errors }, setValue, watch, getValues } = useForm();
 
 	const controlsvalue = controls({ content });
@@ -158,7 +159,7 @@ function PersonalDetails({ data: content, getEmployeeDetails, setShow = () => {}
 				cogoport_email,
 			};
 		}
-		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
+		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO, content });
 	};
 
 	useEffect(() => {
