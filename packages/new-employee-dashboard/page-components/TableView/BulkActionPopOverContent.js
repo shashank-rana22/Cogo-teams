@@ -19,7 +19,7 @@ function BulkActionPopOverContent({
 		<div className={styles.popover_content}>
 			<div className={styles.div_button_content}>
 				<Button
-					style={{ width: '190px' }}
+					style={{ width: '194px' }}
 					themeType="secondary"
 					loading={bulkloading}
 					onClick={() => {
@@ -51,41 +51,32 @@ function BulkActionPopOverContent({
 				<Modal.Body>
 					<div>
 						<div>
-							All the selected Employees in
-							{' '}
-							<b> New Hire Dashboard</b>
-							{' '}
-							will be moved to the
-							<b> Employee Directory Dasboard</b>
+							All the selected Employees will be moved to the
+							<b> Employee Directory Navigation </b>
+							and will no longer be visible here.
 						</div>
 
 						<div className={styles.selection_content}>
 							<div className={styles.title}>
-								Are you sure you want to move the Employees to Probation?
+								Are you sure you want to change selected Employees status to Probation?
 							</div>
 
 							<div className={styles.button_content}>
 								<Button
 									style={{ marginLeft: '150px' }}
+									onClick={() => setShowModal(false)}
+								>
+									No
+								</Button>
+
+								<Button
+									style={{ marginRight: '150px' }}
 									themeType="secondary"
 									onClick={() => {
 										sendBulkActionMail('move_to_probation');
 									}}
 								>
-									{' '}
 									Yes
-									{' '}
-
-								</Button>
-
-								<Button
-									style={{ marginRight: '150px' }}
-									onClick={() => setShowModal(false)}
-								>
-									{' '}
-									No
-									{' '}
-
 								</Button>
 							</div>
 						</div>

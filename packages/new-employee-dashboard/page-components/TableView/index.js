@@ -46,22 +46,23 @@ function TableView({ search, setSearch }) {
 						onChange={setActiveTab}
 						style={{ marginBottom: 6 }}
 					>
-						<TabPanel name="active" title="Active" />
-						<TabPanel name="inactive" title="Inactive" />
+						<TabPanel name="offered" title="Offered" />
+						<TabPanel name="rejected" title="Rejected by HR" />
 						<TabPanel name="rejected_by_user" title="Rejected By User" />
+						<TabPanel name="no_show" title="No Show" />
 					</Tabs>
+					{activeTab === 'offered' && (
+						<div className={styles.bulkupload_container}>
+							BulkAction
+							<Toggle
+								onChange={(val) => setBulkAction(val?.target?.checked)}
+								value={bulkAction}
+								styles={{ marginBottom: '30px' }}
+							/>
+						</div>
+					) }
 
-					<div className={styles.bulkupload_container}>
-						BulkAction
-
-						<Toggle
-							onChange={(val) => setBulkAction(val?.target?.checked)}
-							value={bulkAction}
-							styles={{ marginBottom: '30px' }}
-						/>
-					</div>
-
-					{bulkAction && (
+					{(bulkAction && activeTab === 'offered') && (
 						<div className={styles.styled_button}>
 							<Popover
 								placement="right"

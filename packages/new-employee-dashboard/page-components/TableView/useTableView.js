@@ -14,7 +14,7 @@ const useTableView = ({
 	pageLimit, selectedIds, setSelectedIds,
 }) => {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('active');
+	const [activeTab, setActiveTab] = useState('offered');
 	const [page, setPage] = useState(INITIAL_PAGE);
 	const [filters, setFilters] = useState({});
 
@@ -31,11 +31,11 @@ const useTableView = ({
 			await trigger({
 				params: {
 					filters: {
-						q              : search || undefined,
-						status         : activeTab,
-						joining_after  : filters?.joining_date?.startDate || undefined,
-						joining_before : filters?.joining_date?.endDate || undefined,
-						designation    : filters?.roles || undefined,
+						q               : search || undefined,
+						employee_status : activeTab,
+						joining_after   : filters?.joining_date?.startDate || undefined,
+						joining_before  : filters?.joining_date?.endDate || undefined,
+						designation     : filters?.roles || undefined,
 					},
 					page       : search ? INITIAL_PAGE : page,
 					page_limit : pageLimit,
