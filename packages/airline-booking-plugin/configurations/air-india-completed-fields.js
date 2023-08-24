@@ -1,63 +1,63 @@
-export const airIndiaCompletedFields = [
+export const airIndiaCompletedFields = (t) => ([
 	{
 		key   : 'source',
-		label : 'Source',
+		label : t('airlineBookingPlugin:source_label'),
 		span  : 1.2,
 		func  : 'handleSource',
 	},
 	{
 		key   : 'destination',
-		label : 'Destination',
+		label : t('airlineBookingPlugin:destination_label'),
 		span  : 1.2,
 		func  : 'handleDestination',
 	},
 	{
 		key   : 'commodity',
-		label : 'Commodity',
+		label : t('airlineBookingPlugin:commodity_label'),
 		span  : 1.2,
 	},
 	{
 		key   : 'number_of_pieces',
-		label : 'No. of Pieces',
+		label : t('airlineBookingPlugin:number_of_pieces_label'),
 		span  : 1,
 	},
 	{
 		key   : 'weight',
-		label : 'Weight',
+		label : t('airlineBookingPlugin:weight_label'),
 		span  : 1,
 	},
 	{
 		key   : 'volume',
-		label : 'Volume',
+		label : t('airlineBookingPlugin:volume_label'),
 		span  : 1,
 	},
 	{
 		key   : 'flight_number',
-		label : 'Flight No.',
+		label : t('airlineBookingPlugin:flight_number_label'),
 		span  : 1,
 	},
 	{
 		key   : 'flight_date',
-		label : 'Flight Date',
+		label : t('airlineBookingPlugin:flight_date_label'),
 		span  : 1,
 		func  : 'handleFlightDate',
 	},
 	{
 		key   : 'air_awb_number',
-		label : 'AWB No.',
+		label : t('airlineBookingPlugin:air_awb_number_label'),
 		span  : 1.5,
 		func  : 'handleAWBNumber',
 	},
 	{
 		key   : 'flight_status',
-		label : 'Flight Status',
+		label : t('airlineBookingPlugin:flight_status_label'),
 		span  : 0.9,
 		func  : 'handleFlightStatus',
 	},
 	{
 		key   : 'plugin-action',
-		label : 'Action',
+		label : t('airlineBookingPlugin:action_label'),
 		span  : 1,
 		func  : 'handleAction',
 	},
-];
+]);

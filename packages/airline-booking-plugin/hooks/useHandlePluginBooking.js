@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 import CONSTANTS from '../constants/constants';
 
@@ -9,6 +10,7 @@ const TEXT_DATA = ['commodity', 'flight_number'];
 const NUMBER_DATA = ['number_of_pieces', 'volume', 'weight'];
 
 const useHandlePluginBooking = (edit = false) => {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	const api = edit ? '/update_awb_plugin_booking_information' : '/create_awb_booking_information';
 
 	const [{ loading }, trigger] = useRequest({
@@ -43,7 +45,7 @@ const useHandlePluginBooking = (edit = false) => {
 			await trigger({
 				data: payload,
 			});
-			Toast.success('AWB Booking Information Successfully Added');
+			Toast.success(t('airlineBookingPlugin:handle_booking_success_toast'));
 			setPluginData((prev) => (edit ? [] : [
 				...prev,
 				{ ...finalData, ...locationData },
@@ -73,7 +75,8 @@ const useHandlePluginBooking = (edit = false) => {
 			await trigger({
 				data: { id, status: statusAwb },
 			}).then(() => {
-				Toast.success(`AWB Booking Information ${statusAwb}d Successfully`);
+				Toast.success(`${t('airlineBookingPlugin:awb_booking_information')} 
+				${statusAwb}${t('airlineBookingPlugin:d_letter')} ${t('airlineBookingPlugin:successfully')}`);
 				setFinalList([]);
 				getAirIndiaAwbNumbersList();
 				setPage(CONSTANTS.START_PAGE);

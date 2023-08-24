@@ -2,6 +2,7 @@ import { Button, Tooltip } from '@cogoport/components';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../commons/List';
@@ -24,6 +25,7 @@ function AirIndiaAWB({
 	setItem = () => {},
 	setRefresh = () => {},
 }) {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	const profile = useSelector((state) => state);
 	const [status, setStatus] = useState('inactive');
 	const [statusAwb, setStatusAwb] = useState([]);
@@ -56,7 +58,7 @@ function AirIndiaAWB({
 						}}
 						style={{ padding: 0 }}
 					>
-						Move to New Bookings
+						{t('airlineBookingPlugin:move_to_new_bookings_button')}
 					</Button>
 				))
 			);
@@ -143,7 +145,9 @@ function AirIndiaAWB({
 					className={status === 'active' && 'active'}
 					onClick={() => setStatus('active')}
 				>
-					New Bookings |
+					{t('airlineBookingPlugin:new_bookings_button')}
+					{' '}
+					|
 					{' '}
 					{data.active || NO_DATA_COUNT}
 				</Button>
@@ -153,7 +157,9 @@ function AirIndiaAWB({
 					className={status === 'inactive' && 'active'}
 					onClick={() => setStatus('inactive')}
 				>
-					Completed |
+					{t('airlineBookingPlugin:completed_button')}
+					{' '}
+					|
 					{' '}
 					{data.inactive || NO_DATA_COUNT}
 				</Button>
@@ -167,8 +173,8 @@ function AirIndiaAWB({
 				finalList={finalList}
 				fields={
 					status === 'inactive'
-						? airIndiaCompletedFields
-						: airIndiaNewFields
+						? airIndiaCompletedFields(t)
+						: airIndiaNewFields(t)
 				}
 				functions={functions}
 				status={status}

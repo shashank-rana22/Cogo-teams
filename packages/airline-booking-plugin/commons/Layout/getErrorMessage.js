@@ -2,32 +2,32 @@ const MIN_COUNT = 0;
 
 const getErrorMessage = (props) => {
 	const {
-		error, rules, label,
+		error, rules, label, t,
 	} = props;
 	const ERROR_MESSAGE = [];
 
 	if (error) {
 		if (rules?.required && error.type === 'required') {
-			ERROR_MESSAGE.push(error?.message || `${label} is Required`);
+			ERROR_MESSAGE.push(error?.message || `${label} ${t('airRepository:is_required')}`);
 		}
 		if ((rules?.min || rules?.min === MIN_COUNT) && error.type === 'min') {
 			ERROR_MESSAGE.push(
-				`${label} cannot be less than ${rules.min}`,
+				`${label} ${t('airRepository:cannot_be_less_than')} ${rules.min}`,
 			);
 		}
 		if (rules?.max && error.type === 'max') {
 			ERROR_MESSAGE.push(
-				`${label} cannot be greater than ${rules.max}`,
+				`${label} ${t('airRepository:cannot_be_greater_than')} ${rules.max}`,
 			);
 		}
 		if (rules?.minLength && error.type === 'minLength') {
 			ERROR_MESSAGE.push(
-				`${label} should be ${rules.minLength} character(s) long`,
+				`${label} ${t('airRepository:should_be')} ${rules.minLength} ${t('airRepository:characters_long')}`,
 			);
 		}
 		if (rules?.maxLength && error.type === 'maxLength') {
 			ERROR_MESSAGE.push(
-				`${label} should be less than ${rules.maxLength}`,
+				`${label} ${t('airRepository:should_be_less_than')} ${rules.maxLength}`,
 			);
 		}
 	}

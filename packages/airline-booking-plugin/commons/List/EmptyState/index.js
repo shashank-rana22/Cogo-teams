@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,9 +8,10 @@ import styles from './styles.module.css';
 function EmptyState({
 	height = 250,
 	width = 375,
-	emptyText = 'Data not found',
+	emptyText = '',
 	textSize = '20px',
 }) {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	return (
 		<div className={styles.container}>
 			<Image
@@ -21,7 +23,7 @@ function EmptyState({
 			/>
 			<div>
 				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
-				<p className={styles.text}>We are sorry what you were looking for. Please try another way</p>
+				<p className={styles.text}>{t('airlineBookingPlugin:empty_state_message')}</p>
 			</div>
 		</div>
 	);

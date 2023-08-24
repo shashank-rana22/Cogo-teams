@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -15,6 +16,7 @@ const TIMEOUT_TIME = 1000;
 const SCROLLING_LIMIT = 10;
 
 function Render({ loading = false, finalList = [], fields = [], functions = {}, isMobile = false }) {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	if (loading || finalList.length) {
 		return (finalList || []).map((singleitem) => (
 			<ListItem
@@ -26,7 +28,7 @@ function Render({ loading = false, finalList = [], fields = [], functions = {}, 
 			/>
 		));
 	}
-	return <EmptyState />;
+	return <EmptyState emptyText={t('airlineBookingPlugin:empty_state_text')} />;
 }
 
 function List({
@@ -39,6 +41,7 @@ function List({
 	finalList = [],
 	setFinalList = () => {},
 }) {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = [], total_count:totalCount } = listData;
 
@@ -106,7 +109,9 @@ function List({
 					</div>
 				)}
 				{finalList.length === totalCount && !isEmpty(finalList) ? (
-					<div className={styles.end_message}>No more data to show</div>
+					<div className={styles.end_message}>
+						{t('airlineBookingPlugin:no_more_data_message')}
+					</div>
 				) : null}
 			</div>
 		</section>
