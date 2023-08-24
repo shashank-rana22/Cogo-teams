@@ -20,6 +20,8 @@ import {
 import styles from './style.module.css';
 
 const MAX_LEN = 40;
+const CN_VALUES_DATA = ['revenueOthers', 'nonRevenueOthers'];
+const STATUS_LIST = ['APPROVED', 'REJECTED'];
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -92,8 +94,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					</div>
 				</div>
 				{(CNCategoryValues?.CNType
-				|| status === 'APPROVED'
-				|| status === 'REJECTED') && (
+				|| STATUS_LIST.includes(status)) && (
 					<div>
 						{RevenueImpacting && <div className={styles.texts}>Revenue Impacting*</div>}
 						{NonRevenueImpacting && <div className={styles.texts}>Non-Revenue Impacting*</div>}
@@ -139,8 +140,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						</div>
 					</div>
 				)}
-				{(CNCategoryValues?.CNValues === 'revenueOthers'
-				|| CNCategoryValues?.CNValues === 'nonRevenueOthers') && (
+				{CN_VALUES_DATA.includes(CNCategoryValues?.CNValues) && (
 					<div>
 						<div className={styles.texts}>Remark</div>
 
@@ -200,7 +200,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Body className={styles.body_section}>
 						{!isEditable && <ApproveAndReject row={row} />}
 						{
-							(level1 || level2 || level3) && (
+							(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
 								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
 							)
 						}
@@ -210,7 +210,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<Popover
 									placement="bottom"
 									visible={showPopover}
-									render={ShowContent()}
+									render={<ShowContent />}
 									{...rest}
 								>
 									<Button
