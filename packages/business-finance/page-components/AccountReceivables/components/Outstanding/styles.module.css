@@ -10,3 +10,17 @@
 .empty_state {
 	margin-top: 12px;
 }
+
+.overlay_container {
+	position: relative;
+	width: 100%;
+}
+
+.scroll_container {
+	position: relative;
+	padding: 16px 0 0 !important;
+	margin-bottom: 20px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+}

@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
 import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding';
+import useGetSageArOutstandingsStats from '../../hooks/useGetSageArOustandingStats';
 
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
+import OverallOutstandingStats from './OverallOutstandingStats';
 import styles from './styles.module.css';
 
 function Outstanding({ entityCode }) {
@@ -27,6 +29,10 @@ function Outstanding({ entityCode }) {
 		setQueryKey,
 		queryKey,
 	} = useGetOrgOutstanding({ formFilters, entityCode });
+	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
+		globalFilters: formFilters,
+	});
+	console.log(entityCode, 'entityCode');
 
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -64,7 +70,58 @@ function Outstanding({ entityCode }) {
 				setQueryKey={setQueryKey}
 				entityCode={entityCode}
 			/>
-
+			<OverallOutstandingStats item={statsData} statsLoading={statsLoading} />
+			<div className={styles.overlay_container}>
+				<div className={styles.scroll_container}>
+					{/* <div ref={ref}>
+						<StyledRow className="ui-table-root">
+							{Object.keys(graphPropsList || {}).map((singleGraphProp) => (
+								<Col xs={6}>
+									<ResponsivePieChart
+										{...(graphPropsList[singleGraphProp] || {})}
+									/>
+								</Col>
+							))}
+							<Col xs={5}>
+								{Object.keys(graphPropsChild || {}).map((singleGraphProp) => (
+									<ResponsivePieChart
+										{...(graphPropsChild[singleGraphProp] || {})}
+									/>
+								))}
+							</Col>
+							<Col xs={7}>
+								<CcCallList
+									dateFilter={dateFilter}
+									list={ccCommStats}
+									loading={ccCommLoading}
+									setRange={setRange}
+									range={range}
+									setDateFilter={setDateFilter}
+								/>
+							</Col>
+						</StyledRow>
+					</div> */}
+					{/* <ScrollDiv>
+						{viewGraphStats && (
+							<ScrollBar
+								ref={ref}
+								rightOffSet={rightOffSet}
+								leftOffSet={leftOffSet}
+							/>
+						)}
+					</ScrollDiv> */}
+				</div>
+				{/* {!viewGraphStats && (
+					<Overlay>
+						<Button
+							onClick={() => setViewGraphStats(true)}
+							className="primary md"
+						>
+							View
+						</Button>
+					</Overlay>
+				)} */}
+			</div>
 			{outstandingLoading ? (
 				<div>
 					{[1, 2, 3, 4, 5, 6, 7].map((key) => (
