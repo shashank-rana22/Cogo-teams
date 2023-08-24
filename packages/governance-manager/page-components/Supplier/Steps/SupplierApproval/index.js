@@ -93,16 +93,20 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 								<div className={styles.flex_right}>
 									<div className={styles.right_submit_btn}>
 										<div>
-											<Tooltip content={<Alert />} placement="left" className={styles.alert}>
+											<Tooltip
+												content={<Alert t={t} />}
+												placement="left"
+												className={styles.alert}
+											>
 												<IcMAlert color="red" width={20} height={20} />
 											</Tooltip>
 
 										</div>
 										<Button
 											onClick={() => updateOrganizationService()}
-											// disabled={Object.values(verify)
-											// 	?.filter((i) => i === 'verified'
-											// 		|| i === 'rejected').length !== FOUR}
+											disabled={Object.values(verify)
+												?.filter((i) => i === 'verified'
+													|| i === 'rejected').length !== FOUR}
 										>
 											{t('supplier_page_supplier_approval_submit_button_label')}
 										</Button>

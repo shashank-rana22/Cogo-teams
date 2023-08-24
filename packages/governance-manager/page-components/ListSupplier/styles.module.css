@@ -1,12 +1,13 @@
 .no_data_found {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 400px;
-    background-color: rgba(255, 255, 255, 0.664);
+    background-color: rgba(255 255 255 66.4%);
 }
+
 .pagination {
-	display: flex;
-	justify-content: right;
-	margin-top: 30px;
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
 }

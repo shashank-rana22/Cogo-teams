@@ -14,7 +14,7 @@ function Content() {
 	const GOVERNANCE_MANAGER_ROLE_ID = '31fc7e90-84e0-4ffc-828c-ceaa87e5fa4f';
 	const GOVERNANCE_LEAD_ROLE_ID = 'ebafce31-75ef-4865-9060-775574e9606f';
 	const { id:roleId } = useSelector((s) => s?.profile?.auth_role_data);
-	const [role, setRole] = useState(
+	const [role] = useState(
 		{
 			[GOVERNANCE_MANAGER_ROLE_ID] : 'governance_manager',
 			[GOVERNANCE_LEAD_ROLE_ID]    : 'governance_lead',
@@ -42,7 +42,7 @@ function Content() {
 
 	return (
 		<>
-			<h2>{t('governanceManager:main_page_title')}</h2>
+			<h2>{t('main_page_title')}</h2>
 			<Stats t={t} />
 			<StatusBar
 				t={t}

@@ -48,7 +48,7 @@ function Item({ t, title, verify, setOpen, type, role }) {
 							onClick={() => {
 								setOpen(type);
 							}}
-							disabled={verify?.[type] !== 'pending'}
+							disabled={verify?.[type] && verify?.[type] !== 'pending'}
 						>
 							{t('supplier_page_supplier_approval_item_open_button_label')}
 						</Button>
