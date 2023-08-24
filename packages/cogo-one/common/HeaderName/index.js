@@ -32,14 +32,14 @@ function HeaderName({ formattedData = {} }) {
 			<UserAvatar type={channel_type} event={last_message_document?.source} />
 			<div className={styles.parent}>
 				<div className={styles.name}>
-					{startCase(user_name) || startCase(lead_user_details?.name) || 'User'}
-					{channel_type === 'whatsapp' && (
+					{startCase(search_user_name || user_name || 'user')}
+					{channel_type === 'whatsapp' ? (
 						<span className={styles.span_whatsapp_name}>
 							(
-							{startCase(search_user_name) || 'User'}
+							{startCase(user_name || lead_user_details?.name || 'user')}
 							)
 						</span>
-					)}
+					) : null}
 				</div>
 				<div className={styles.phone_number}>
 					{getLowerLabel()}
