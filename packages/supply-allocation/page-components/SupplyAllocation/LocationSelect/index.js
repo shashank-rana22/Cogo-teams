@@ -143,6 +143,7 @@ function LocationSelect({
 									...(filterValues[selectedValue] || {}),
 								};
 							});
+							setPagination(DEFAULT_PAGE);
 						}}
 					/>
 				</div>

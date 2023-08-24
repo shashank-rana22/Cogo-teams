@@ -41,14 +41,15 @@ function List({
 	setPagination = () => {},
 	loading = false,
 	refetchListFclSearches = () => {},
-	setFilters = () => {},
+	setSortFilters = () => {},
 }) {
 	const { list = [], page_limit = 10, total_count = 0 } = data || {};
+
+	const router = useRouter();
 
 	const [profitabilityStage, setProfitabilityStage] = useState('default');
 	const [forVolumeStage, setForVolumeStage] = useState('default');
 
-	const router = useRouter();
 	const { updateRollingFclFreightSearch } = useUpdateRollingFclFreightSearch({
 		refetchListFclSearches,
 	});
@@ -57,7 +58,7 @@ function List({
 		const nextStage = NEXT_STAGE_MAPPING[profitabilityStage];
 		setProfitabilityStage(nextStage);
 		setForVolumeStage('default');
-		setFilters((prev) => ({
+		setSortFilters((prev) => ({
 			...prev,
 			...(nextStage !== 'default'
 				? {
@@ -72,7 +73,7 @@ function List({
 		const nextStage = NEXT_STAGE_MAPPING[forVolumeStage];
 		setForVolumeStage(nextStage);
 		setProfitabilityStage('default');
-		setFilters((prev) => ({
+		setSortFilters((prev) => ({
 			...prev,
 			...(nextStage !== 'default'
 				? {
