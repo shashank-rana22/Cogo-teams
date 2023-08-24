@@ -148,7 +148,7 @@
 .message_icon_styles {
 	width: 18px;
 	height: 18px;
-	margin-right: 4px;
+	margin-right: 8px;
 	cursor: pointer;
 	fill: #6fa5ab;
 	transition: 0.3s ease-in-out;

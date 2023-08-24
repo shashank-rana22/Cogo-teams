@@ -146,15 +146,19 @@ function HeaderBlock({
 					</Tooltip>
 				) : null}
 
-				<Tooltip content="Chat" placement="bottom">
-					<IcMLiveChat
-						className={styles.message_icon_styles}
-						onClick={(e) => {
-							e.stopPropagation();
-							handleShipmentChat({ shipmentItem });
-						}}
-					/>
-				</Tooltip>
+				{
+					showAddPrimaryUserButton ? (
+						<Tooltip content="Chat" placement="bottom">
+							<IcMLiveChat
+								className={styles.message_icon_styles}
+								onClick={(e) => {
+									e.stopPropagation();
+									handleShipmentChat({ shipmentItem });
+								}}
+							/>
+						</Tooltip>
+					) : null
+				}
 
 				<Tooltip content="Copy" placement="bottom">
 					<IcMCopy
