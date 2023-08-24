@@ -1,5 +1,6 @@
 import { Tabs, TabPanel, DateRangepicker } from '@cogoport/components';
 import { subtractDays } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import FilterTicketsSection from '../../common/FilterTicketsSection';
@@ -10,7 +11,10 @@ import styles from './styles.module.css';
 const SUBTRACT_DAYS = 6;
 
 function SuperAdmin() {
+	const { t } = useTranslation(['myTickets']);
+
 	const [activeTab, setActiveTab] = useState('dashboard');
+
 	const [refreshList, setRefreshList] = useState({
 		Open      : false,
 		Pending   : false,
@@ -32,13 +36,13 @@ function SuperAdmin() {
 			>
 				<TabPanel
 					name="dashboard"
-					title="Dashboard"
+					title={t('myTickets:dashboard')}
 				>
 					<Dashboard date={date} />
 				</TabPanel>
 				<TabPanel
 					name="all_tickets"
-					title="All Tickets"
+					title={t('myTickets:all_tickets')}
 				>
 					<FilterTicketsSection
 						type="admin"

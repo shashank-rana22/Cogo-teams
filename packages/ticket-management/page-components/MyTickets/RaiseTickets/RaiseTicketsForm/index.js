@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
@@ -13,6 +14,9 @@ function RaiseTicketsForm({
 	setAdditionalInfo = () => {},
 }) {
 	const { errors = {} } = formState || {};
+
+	const { t } = useTranslation(['myTickets']);
+
 	const [subCategories, setSubCategories] = useState([]);
 
 	const formRef = useRef(null);
@@ -23,12 +27,11 @@ function RaiseTicketsForm({
 	const watchIssueType = watch('issue_type');
 	const watchService = watch('service');
 	const watchTradeType = watch('trade_type');
-
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
 		name           : item,
 		controllerType : 'text',
-		placeholder    : `add ${item}`,
+		placeholder    : `${t('myTickets:add')} ${item}`,
 		showOptional   : false,
 	}));
 
@@ -47,6 +50,7 @@ function RaiseTicketsForm({
 		watchService,
 		watchOrgId,
 		resetField,
+		t,
 	});
 
 	const controls = defaultControls?.concat(additionalControls);
@@ -83,7 +87,13 @@ function RaiseTicketsForm({
 								<div className={styles.label}>
 									<div className={styles.sub_label}>{label}</div>
 									{controlItem.name === 'additional_information'
-									&& <div className={styles.info_label}>(max 200 characters)</div>}
+									&& (
+										<div className={styles.info_label}>
+											(
+											{t('myTickets:max_200_characters')}
+											)
+										</div>
+									)}
 								</div>
 							)}
 						<Element
@@ -94,7 +104,9 @@ function RaiseTicketsForm({
 							id={`${name}_input`}
 							disabled={DISABLE_MAPPING[name]?.some(isEmpty)}
 						/>
-						<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
+						<div className={styles.error}>
+							{errors?.[controlItem.name] && t('myTickets:required')}
+						</div>
 					</div>
 				);
 			})}

@@ -5,37 +5,37 @@ const ASYNC_OPTION_MAPPING = {
 	'partner-users' : asyncFieldsPartnerUsers(),
 };
 
-export const useReassignTicketsControls = ({ watchType, setUserData }) => {
+export const useReassignTicketsControls = ({ t, watchType, setUserData }) => {
 	const assignToOptions = useGetAsyncOptions({ ...ASYNC_OPTION_MAPPING[watchType] });
 
 	return [
 		{
 			name           : 'type',
-			label          : 'Type',
+			label          : t('myTickets:type'),
 			controllerType : 'select',
 			value          : 'partner-roles',
 			options        : [
-				{ label: 'Role', value: 'partner-roles' },
-				{ label: 'User', value: 'partner-users' },
-				{ label: 'Credit Controller', value: 'credit_controller' },
-				{ label: 'Sales Agent', value: 'sales_agent' },
-				{ label: 'Kam Owner', value: 'kam_owner' },
+				{ label: t('myTickets:role'), value: 'partner-roles' },
+				{ label: t('myTickets:user'), value: 'partner-users' },
+				{ label: t('myTickets:credit_controller'), value: 'credit_controller' },
+				{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
+				{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
 			],
 		},
 		{
 			...(assignToOptions || {}),
 			name           : 'assign_to',
-			label          : 'Assign To',
+			label          : t('myTickets:assign_to'),
 			controllerType : 'select',
 			className      : 'primary md',
-			placeholder    : 'Search by Name',
+			placeholder    : t('myTickets:search_by_name'),
 			onChange       : (_, obj) => setUserData(obj),
 		},
 		{
 			name           : 'comment',
 			controllerType : 'textarea',
-			label          : 'Comments',
-			placeholder    : 'Enter Comments',
+			label          : t('myTickets:comments'),
+			placeholder    : t('myTickets:enter_comments'),
 			rules          : { required: true },
 		},
 	];
