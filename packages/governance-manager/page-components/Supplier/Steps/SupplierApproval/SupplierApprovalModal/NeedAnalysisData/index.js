@@ -3,8 +3,6 @@ import { Table } from '@cogoport/components';
 import useGetOrganizationServiceSuppliers from '../../../NeedAnalysis/hooks/useListOrganizationExpertiseSuppliers';
 import { columns } from '../../../NeedAnalysis/utils/need-analysis-utils';
 
-import styles from './styles.module.css';
-
 function NeedAnalysisData({ t, setShow, service_type, id, organization_id }) {
 	const {
 		data: serviceExpertiseData,
@@ -21,7 +19,6 @@ function NeedAnalysisData({ t, setShow, service_type, id, organization_id }) {
 			<Table
 				columns={columns({ t, setShow, service_type, isForApproval: true })}
 				data={serviceExpertiseData}
-				className={styles.table}
 			/>
 		);
 	}

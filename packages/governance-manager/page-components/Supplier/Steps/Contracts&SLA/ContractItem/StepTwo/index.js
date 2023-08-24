@@ -78,7 +78,7 @@ function StepTwo({
 							value={item?.variables_details?.[ZERO]?.default_value}
 						/>
 						<span className={styles.icon}>
-							{t('supplier_page_contract_sla_step2_update_label')}
+							{t('supplier_page_contract_sla_step2_updated_label')}
 						</span>
 						<Input
 							size="sm"

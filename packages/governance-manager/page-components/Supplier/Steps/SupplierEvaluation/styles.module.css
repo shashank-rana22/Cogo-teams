@@ -79,12 +79,12 @@
 	margin-top: 16px;
 }
 
-.ec_table{
-	background-color: rgba(230, 229, 229, 0.781);
+.ec_table {
 	padding: 20px;
+	background-color: rgba(230 229 229 78.1%);
 	border-radius: 4px;
 }
 
-.ec_td{
+.ec_td {
 	width: 280px;
 }

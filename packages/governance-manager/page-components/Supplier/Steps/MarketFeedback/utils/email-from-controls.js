@@ -16,11 +16,11 @@ export	const controls = ({ t }) => [
 						value : 'industry_expert',
 					},
 					{
-						label : t('supplier_page_market_feedback_email_controls_role_option_industry_experts'),
+						label : t('supplier_page_market_feedback_email_controls_role_option_cogoport_employee'),
 						value : 'cogoport_employee',
 					},
 					{
-						label : t('supplier_page_market_feedback_email_controls_role_option_industry_expert'),
+						label : t('supplier_page_market_feedback_email_controls_role_option_others'),
 						value : 'customer',
 					},
 					{

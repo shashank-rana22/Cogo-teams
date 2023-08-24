@@ -56,7 +56,7 @@ function MarketFeedback({ t, organization_id, service, getOrganizationService, i
 	return (
 		<div className={styles.parent}>
 
-			<Layout control={control} controls={controls(t)} errors={errors} />
+			<Layout control={control} controls={controls({ t })} errors={errors} />
 
 			<div className={styles.flex_right}>
 				<Button
