@@ -76,7 +76,6 @@ function VoiceCall({ firestore = {} }) {
 		callRecordId,
 		firestore,
 		loggedInAgentId,
-		openFeedbackform,
 	});
 
 	useEffect(() => {
