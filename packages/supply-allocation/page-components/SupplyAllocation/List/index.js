@@ -62,9 +62,8 @@ function List({
 			...prev,
 			...(nextStage !== 'default'
 				? {
-					sort_by_forecasted_volume : undefined,
-					sort_by                   : 'profitability',
-					sort_type                 : KEY_STAGE_MAPPING[nextStage],
+					sort_by   : 'profitability',
+					sort_type : KEY_STAGE_MAPPING[nextStage],
 				}
 				: { sort_by: undefined, sort_type: undefined }),
 		}));
@@ -78,9 +77,8 @@ function List({
 			...prev,
 			...(nextStage !== 'default'
 				? {
-					sort_by                   : undefined,
-					sort_by_forecasted_volume : true,
-					sort_type                 : KEY_STAGE_MAPPING[nextStage],
+					sort_by   : 'forecasted_volume',
+					sort_type : KEY_STAGE_MAPPING[nextStage],
 				}
 				: { sort_by_forecasted_volume: undefined, sort_type: undefined }),
 		}));
@@ -89,18 +87,19 @@ function List({
 	const columns = [
 		{
 			id       : 'origin',
-			Header   : 'ORIGIN',
+			Header   : <div style={{ display: 'flex' }}>ORIGIN</div>,
 			accessor : ({ origin_location, is_attention_required }) => (
 				<div className={styles.origin_container}>
 					{is_attention_required
 						? (
 							<Tooltip
 								content={(
-									<div style={{ wordBreak: 'break-word' }}>
+									<div style={{ wordBreak: 'break-word', color: ' #bf291e' }}>
 										Reallocation required due to a change in forecasted demand
 									</div>
 								)}
-								placement="right"
+								placement="bottom"
+								caret={false}
 							>
 								<div className={styles.relative_container}>
 									Attention Required!
@@ -110,13 +109,14 @@ function List({
 							</Tooltip>
 						) : null}
 
-					<Tooltip content={origin_location.display_name} placement="right">
+					<Tooltip content={origin_location.display_name} placement="bottom">
 						<div
 							style={{
 								overflow     : 'hidden',
 								textOverflow : 'ellipsis',
 								maxWidth     : '180px',
 								whiteSpace   : 'nowrap',
+								textAlign    : 'start',
 							}}
 						>
 							{origin_location.display_name}
@@ -127,20 +127,21 @@ function List({
 		},
 		{
 			id       : 'icon',
-			Header   : <IcMPortArrow width={20} height={20} />,
+			Header   : '',
 			accessor : () => <IcMPortArrow width={20} height={20} />,
 		},
 		{
 			id       : 'destination',
-			Header   : 'DESTINATION',
+			Header   : <div style={{ display: 'flex' }}>DESTINATION</div>,
 			accessor : ({ destination_location }) => (
-				<Tooltip content={destination_location?.display_name} placement="right">
+				<Tooltip content={destination_location?.display_name} placement="bottom">
 					<div
 						style={{
 							overflow     : 'hidden',
 							textOverflow : 'ellipsis',
 							maxWidth     : '180px',
 							whiteSpace   : 'nowrap',
+							textAlign    : 'start',
 						}}
 					>
 						{destination_location?.display_name}
@@ -151,7 +152,7 @@ function List({
 		{
 			id     : 'avg_profitability',
 			Header : (
-				<div style={{ display: 'flex' }}>
+				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 					AVG PROFITABILITY
 					{' '}
 					<span
@@ -182,7 +183,7 @@ function List({
 		{
 			id     : 'forecasted_volume',
 			Header : (
-				<div style={{ display: 'flex' }}>
+				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 					FORECASTED VOL
 					<span
 						role="presentation"

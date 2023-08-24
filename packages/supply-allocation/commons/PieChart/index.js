@@ -6,6 +6,15 @@ import styles from './styles.module.css';
 const BORDER_COLOR_MODIFIERS = 0.2;
 const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 
+const MARGIN_TOP_MAPPING = {
+	1 : -26,
+	2 : -36,
+	3 : -54,
+	4 : -64,
+	5 : -84,
+	6 : -80,
+};
+
 function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 	const colors = data.map((item) => item.color);
 
@@ -93,10 +102,9 @@ function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 			) : null}
 			<div
 				style={{
-					marginTop      : '-54px',
+					marginTop      : MARGIN_TOP_MAPPING[legendsData?.length],
 					display        : 'flex',
 					flexWrap       : 'wrap',
-					alignItems     : 'center',
 					justifyContent : 'center',
 					flexDirection  : 'column',
 					marginLeft     : '229px',
@@ -109,9 +117,10 @@ function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 						<div
 							key={label}
 							style={{
-								display     : 'flex',
-								alignItems  : 'center',
-								marginRight : '20px',
+								display       : 'flex',
+								alignItems    : 'center',
+								marginRight   : '20px',
+								paddingBottom : '10px',
 							}}
 						>
 							<div
