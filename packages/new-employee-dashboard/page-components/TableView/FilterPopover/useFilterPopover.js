@@ -8,7 +8,6 @@ const useFilterPopover = ({ setFilters }) => {
 
 	const onSubmit = (values) => {
 		const { roles, joining_date, department } = values;
-		console.log(values, 'valuesvalues');
 		const filterApplied = Boolean(roles || department || (joining_date?.startDate || joining_date?.endDate));
 
 		if (!filterApplied) {
