@@ -10,7 +10,8 @@ export default {
 			code   : 'VND',
 			symbol : '₫',
 		},
-		mobile_country_code: '+84',
+		mobile_country_code : '+84',
+		language            : 'vietnamese',
 	},
 	formats: {
 		amount: {
