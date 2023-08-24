@@ -1,8 +1,9 @@
 import { Button, Checkbox, CheckboxGroup } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
-import { OPTIONS } from '../../../constants/awb-copies-options';
+import { options } from '../../../constants/awb-copies-options';
 import useGetMultipleCopiesList from '../../../hooks/useGetMultipleCopiesList';
 
 import styles from './styles.module.css';
@@ -33,6 +34,8 @@ function SelectDocumentCopies({
 	taskItem = {},
 	loading = false,
 }) {
+	const { t } = useTranslation(['printingDesk']);
+	const OPTIONS = options(t);
 	const { data } = useGetMultipleCopiesList(taskItem);
 
 	const onChangeTableHeaderCheckbox = (event) => {
@@ -52,7 +55,7 @@ function SelectDocumentCopies({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [copiesValue]);
 
-	const getSelectAllCheckbox = () => {
+	function GetSelectAllCheckbox() {
 		const isAllRowsChecked = (copiesValue || []).length === TOTAL_AWB_COPIES;
 
 		return (
@@ -64,12 +67,12 @@ function SelectDocumentCopies({
 				onChange={onChangeTableHeaderCheckbox}
 			/>
 		);
-	};
+	}
 
 	return (
 		<div className={styles.select_copies_container}>
 			<div className={styles.column_flex}>
-				{getSelectAllCheckbox()}
+				{GetSelectAllCheckbox()}
 				<CheckboxGroup
 					options={OPTIONS}
 					onChange={copiesOnChange}
@@ -87,7 +90,7 @@ function SelectDocumentCopies({
 					style={{ marginLeft: 'auto' }}
 					disabled={loading || isEmpty(copiesValue)}
 				>
-					Download
+					{t('printingDesk:awb_document_download_document_container_download_other__button')}
 				</Button>
 			</div>
 		</div>

@@ -1,53 +1,53 @@
 const NEGATIVE_CHECK_VALUE = 0;
 
-const awbControls = [
+const awbControls = (t) => [
 	{
 		name        : 'weight',
-		placeholder : 'Enter Gross Weight',
-		label       : 'Gross Weight',
+		placeholder : t('printingDesk:awb_controls_placeholder1'),
+		label       : t('printingDesk:awb_controls_label1'),
 		type        : 'number',
 		span        : 6,
 		rules       : {
-			required : 'Gross Weight is Required',
-			validate : (value) => (value < NEGATIVE_CHECK_VALUE ? 'Cannot be Negative' : true),
+			required : t('printingDesk:awb_controls_required1'),
+			validate : (value) => (value < NEGATIVE_CHECK_VALUE ? t('printingDesk:awb_controls_validate1') : true),
 		},
 	},
 	{
 		name        : 'volumetricWeight',
-		placeholder : 'Enter Volumetric Weight',
+		placeholder : t('printingDesk:awb_controls_placeholder2'),
 		type        : 'number',
-		label       : 'Volumetric Weight',
+		label       : t('printingDesk:awb_controls_label2'),
 		span        : 6,
 		rules       : {
-			required: 'Volumetric Weight is Required',
+			required: t('printingDesk:awb_controls_required2'),
 		},
 	},
 	{
 		name        : 'chargeableWeight',
-		placeholder : 'Enter Chargeable Weight',
-		label       : 'Chargeable Weight',
+		placeholder : t('printingDesk:awb_controls_placeholder3'),
+		label       : t('printingDesk:awb_controls_label3'),
 		type        : 'number',
 		span        : 6,
 		rules       : {
-			required : 'Chargable Weight is Required',
-			validate : (value) => (value < NEGATIVE_CHECK_VALUE ? 'Cannot be Negative' : true),
+			required : t('printingDesk:awb_controls_required3'),
+			validate : (value) => (value < NEGATIVE_CHECK_VALUE ? t('printingDesk:awb_controls_validate1') : true),
 		},
 	},
 	{
 		name        : 'totalPackagesCount',
-		placeholder : 'Package Count',
-		label       : 'Package Count',
+		placeholder : t('printingDesk:awb_controls_placeholder4'),
+		label       : t('printingDesk:awb_controls_label4'),
 		type        : 'number',
 		span        : 6,
 		disabled    : true,
 		rules       : {
-			required : 'Package Count is Required',
-			validate : (value) => (value <= NEGATIVE_CHECK_VALUE ? 'Should be greater than 0' : true),
+			required : t('printingDesk:awb_controls_required4'),
+			validate : (value) => (value <= NEGATIVE_CHECK_VALUE ? t('printingDesk:awb_controls_validate2') : true),
 		},
 	},
 	{
 		name               : 'dimension',
-		label              : 'Dimensions (in cm)',
+		label              : t('printingDesk:awb_controls_label5'),
 		type               : 'fieldArray',
 		span               : 12,
 		showButtons        : true,
@@ -65,52 +65,56 @@ const awbControls = [
 		controls: [
 			{
 				name        : 'length',
-				placeholder : 'Enter Length',
-				label       : 'Length',
+				placeholder : t('printingDesk:awb_controls_placeholder6'),
+				label       : t('printingDesk:awb_controls_label6'),
 				type        : 'number',
 				span        : 2,
 				rules       : {
-					validate: (value) => (value < NEGATIVE_CHECK_VALUE ? 'Cannot be Negative' : true),
+					validate: (value) => (value < NEGATIVE_CHECK_VALUE
+						? t('printingDesk:awb_controls_validate1') : true),
 				},
 			},
 			{
 				name        : 'width',
-				placeholder : 'Enter Width',
-				label       : 'Width',
+				placeholder : t('printingDesk:awb_controls_placeholder7'),
+				label       : t('printingDesk:awb_controls_label7'),
 				type        : 'number',
 				span        : 2,
 				rules       : {
-					validate: (value) => (value < NEGATIVE_CHECK_VALUE ? 'Cannot be Negative' : true),
+					validate: (value) => (value < NEGATIVE_CHECK_VALUE
+						? t('printingDesk:awb_controls_validate1') : true),
 				},
 			},
 			{
 				name        : 'height',
-				placeholder : 'Enter Height',
-				label       : 'Height',
+				placeholder : t('printingDesk:awb_controls_placeholder8'),
+				label       : t('printingDesk:awb_controls_label8'),
 				type        : 'number',
 				span        : 2,
 				rules       : {
-					validate: (value) => (value < NEGATIVE_CHECK_VALUE ? 'Cannot be Negative' : true),
+					validate: (value) => (value < NEGATIVE_CHECK_VALUE
+						? t('printingDesk:awb_controls_validate1') : true),
 				},
 			},
 			{
 				name        : 'packages_count',
-				placeholder : 'Enter Packages count',
-				label       : 'No. of Packages',
+				placeholder : t('printingDesk:awb_controls_placeholder9'),
+				label       : t('printingDesk:awb_controls_label9'),
 				type        : 'number',
 				span        : 3,
 				rules       : {
-					validate: (value) => (value < NEGATIVE_CHECK_VALUE ? 'Cannot be Negative' : true),
+					validate: (value) => (value < NEGATIVE_CHECK_VALUE
+						? t('printingDesk:awb_controls_validate1') : true),
 				},
 			}, {
 				name        : 'unit',
-				label       : 'Unit',
+				label       : t('printingDesk:awb_controls_label10'),
 				type        : 'select',
-				placeholder : 'Select Unit',
+				placeholder : t('printingDesk:awb_controls_placeholder10'),
 				span        : 3,
 				options     : [
-					{ label: 'Cm', value: 'cms' },
-					{ label: 'Inch', value: 'inch' },
+					{ label: t('printingDesk:awb_controls_label11'), value: 'cms' },
+					{ label: t('printingDesk:awb_controls_label12'), value: 'inch' },
 				],
 			},
 

@@ -1,11 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-export const finalAwbFields = {
-	fields: [
+export const finalAwbFields = (t) => {
+	const fields = [
 		{
 			key    : 'serialId',
-			label  : 'SID',
+			label  : t('printingDesk:final_awb_fields_label1'),
 			span   : 1,
 			render : (item) => (
 				<div>
@@ -16,12 +16,12 @@ export const finalAwbFields = {
 		},
 		{
 			key   : 'awbNumber',
-			label : 'AWB',
+			label : t('printingDesk:final_awb_fields_label2'),
 			span  : 1,
 		},
 		{
 			key    : 'blCategory',
-			label  : 'AWB Category',
+			label  : t('printingDesk:final_awb_fields_label3'),
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
@@ -31,7 +31,7 @@ export const finalAwbFields = {
 		},
 		{
 			key    : 'deadline',
-			label  : 'Due On',
+			label  : t('printingDesk:final_awb_fields_label4'),
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
@@ -46,9 +46,10 @@ export const finalAwbFields = {
 		},
 		{
 			key   : 'upload',
-			label : 'Action',
+			label : t('printingDesk:final_awb_fields_label5'),
 			span  : 1,
 			func  : 'handleUpload',
 		},
-	],
+	];
+	return fields;
 };

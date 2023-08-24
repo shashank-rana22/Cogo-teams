@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
@@ -21,9 +22,10 @@ function ApprovedAWB({
 	setEdit = () => {},
 	listAPI = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	const [triggerManifest, setTriggerManifest] = useState('');
 	const [handoverModal, setHandoverModal] = useState(false);
-	const { fields } = approvedAWBFields;
+	const { fields } = approvedAWBFields(t);
 
 	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
 
@@ -55,6 +57,7 @@ function ApprovedAWB({
 							<Modal.Header title="Confirm Handover?" />
 							<Modal.Body className={styles.modal_body}>
 								Are you sure you want to confirm the Handover?
+								{t('printingDesk:approve_awb_body_text')}
 							</Modal.Body>
 							<Modal.Footer>
 								<Button
@@ -62,7 +65,7 @@ function ApprovedAWB({
 									disabled={updateLoading}
 									onClick={() => setHandoverModal(false)}
 								>
-									Cancel
+									{t('printingDesk:approve_awb_cancel_button')}
 
 								</Button>
 								<Button
@@ -70,7 +73,7 @@ function ApprovedAWB({
 									disabled={updateLoading}
 									onClick={() => updateShipment({ payload })}
 								>
-									Confirm
+									{t('printingDesk:approve_awb_confirm_button')}
 								</Button>
 							</Modal.Footer>
 						</Modal>

@@ -3,10 +3,11 @@ import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/Conta
 import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails/index.tsx';
 import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails/index.tsx';
 import { cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React, { createRef, useState } from 'react';
 
 import Modal from '../../common/Modal';
-import { FOOTER_VALUES } from '../../constants/footer-values';
+import { footerValues } from '../../constants/footer-values';
 
 import DownloadDocumentContainer from './DownloadDocumentContainer';
 import SaveDocumentContainer from './SaveDocumentContainer';
@@ -24,6 +25,8 @@ function AWBDocument({
 	back = false,
 	setBack = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
+	const FOOTER_VALUES = footerValues(t);
 	const [whiteout, setWhiteout] = useState(false);
 	const [saveDocument, setSaveDocument] = useState(false);
 

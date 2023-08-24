@@ -1,19 +1,19 @@
-export const handedOverFields = {
-	fields: [
+export const handedOverFields = (t) => {
+	const fields = [
 		{
 			key   : 'serialId',
-			label : 'SID',
+			label : t('printingDesk:handed_over_label1'),
 			span  : 2,
 			func  : 'handleSerialId',
 		},
 		{
 			key   : 'awbNumber',
-			label : 'AWB',
+			label : t('printingDesk:handed_over_label2'),
 			span  : 2,
 		},
 		{
 			key   : 'blCategory',
-			label : 'AWB Category',
+			label : t('printingDesk:handed_over_label3'),
 			span  : 2,
 			func  : 'handleBlCategory',
 		},
@@ -25,7 +25,7 @@ export const handedOverFields = {
 		},
 		{
 			key   : 'handoverDate',
-			label : 'Handover Date',
+			label : t('printingDesk:handed_over_label4'),
 			span  : 2,
 			func  : 'handleHandoverDate',
 		},
@@ -41,5 +41,6 @@ export const handedOverFields = {
 			span  : 0.5,
 			func  : 'handleEdit',
 		},
-	],
+	];
+	return fields;
 };

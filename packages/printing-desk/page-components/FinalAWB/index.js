@@ -1,5 +1,6 @@
 import { ButtonIcon } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
@@ -16,7 +17,8 @@ function FinalAwb({
 	setEdit = () => {},
 	listAPI = () => {},
 }) {
-	const { fields } = finalAwbFields;
+	const { t } = useTranslation(['printingDesk']);
+	const { fields } = finalAwbFields(t);
 	const [showUpload, setShowUpload] = useState({});
 
 	const functions = {
