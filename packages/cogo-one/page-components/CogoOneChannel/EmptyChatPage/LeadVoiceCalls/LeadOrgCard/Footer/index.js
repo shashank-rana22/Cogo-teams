@@ -2,16 +2,19 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const ONE_ENTRY = 1;
 const getFooterMappings = ({ noOfCallsMade = 0, feedBackCount = 0 }) => [
 	{
-		key        : 'log_call_activity',
-		subText    : noOfCallsMade ? `${noOfCallsMade} Calls Made` : 'No Calls Made',
-		buttontext : 'create log activity',
+		key     : 'log_call_activity',
+		subText : noOfCallsMade ? `${noOfCallsMade} Call log${noOfCallsMade > ONE_ENTRY ? '\'s' : ''} created`
+			: 'No call logs created',
+		buttontext: 'create log activity',
 	},
 	{
-		key        : 'lead_org_feedback',
-		subText    : feedBackCount ? `${feedBackCount} feedback's created` : 'No feedback\'s created',
-		buttontext : 'create feedback',
+		key     : 'lead_org_feedback',
+		subText : feedBackCount ? `${feedBackCount} feedback${feedBackCount > ONE_ENTRY ? '\'s' : ''} created`
+			: 'No feedback\'s created',
+		buttontext: 'create feedback',
 	},
 ];
 
@@ -36,6 +39,7 @@ function Footer({ eachItem = {}, openLeadOrgModal = () => {} }) {
 						<Button
 							size="sm"
 							themeType="secondary"
+							className={styles.button_styles}
 							onClick={() => {
 								openLeadOrgModal({
 									type       : key,

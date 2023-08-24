@@ -15,7 +15,7 @@
 
 .name {
 	width: fit-content;
-	max-width: 120px;
+	max-width: 100px;
 	margin: 0 4px;
 	overflow: hidden;
 	font-weight: 600;
