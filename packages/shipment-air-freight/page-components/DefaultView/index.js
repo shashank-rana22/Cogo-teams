@@ -30,6 +30,26 @@ const TAB_MAPPING = {
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
 
+function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = () => {}, isGettingShipment = false }) {
+	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
+
+	if (!shipment_data?.is_job_closed && isTrue) {
+		return (
+			<div className={styles.raise_alarm_container}>
+				<RaiseAlarm
+					alarmId={alarmId}
+					setAlarmId={setAlarmId}
+					loading={isGettingShipment}
+				/>
+			</div>
+		);
+	}
+	if (shipment_data?.is_job_closed) {
+		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
+	}
+	return null;
+}
+
 function DefaultView() {
 	const router = useRouter();
 
@@ -102,26 +122,6 @@ function DefaultView() {
 		);
 	}
 
-	function HandleRaiseContainer() {
-		const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
-
-		if (!shipment_data?.is_job_closed && isTrue) {
-			return (
-				<div className={styles.raise_alarm_container}>
-					<RaiseAlarm
-						alarmId={alarmId}
-						setAlarmId={setAlarmId}
-						loading={isGettingShipment}
-					/>
-				</div>
-			);
-		}
-		if (shipment_data?.is_job_closed) {
-			return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
-		}
-		return null;
-	}
-
 	return (
 		<div>
 			<div className={styles.top_header}>
@@ -133,7 +133,12 @@ function DefaultView() {
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
-					<HandleRaiseContainer />
+					<HandleRaiseContainer
+						shipment_data={shipment_data}
+						alarmId={alarmId}
+						setAlarmId={setAlarmId}
+						isGettingShipment={isGettingShipment}
+					/>
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>

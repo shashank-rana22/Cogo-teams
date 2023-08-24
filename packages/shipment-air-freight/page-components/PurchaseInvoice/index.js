@@ -8,7 +8,7 @@ import ManageServices from '../../commons/ManageServices';
 import styles from './styles.module.css';
 
 function PurchaseInvoice() {
-	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, servicesList = [] } = useContext(ShipmentDetailContext);
 
 	return (
 		<main className={styles.main}>
