@@ -76,10 +76,11 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 	);
 
 	const [filters, setFilters] = useState<FilterProps>({
-		page        : 1,
-		pageLimit   : 10,
+		page         : 1,
+		pageLimit    : 10,
 		activeTab,
-		searchQuery : '',
+		searchQuery  : '',
+		isMyTaskOnly : false,
 	});
 	const {
 		search, category, date, page, urgency, pageLimit, isMyTaskOnly, ...rest
