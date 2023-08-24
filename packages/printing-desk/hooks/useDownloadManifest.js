@@ -32,7 +32,7 @@ const useDownloadManifest = (stylesTHC, handleSave, documentNumber) => {
 				handleSave(url);
 			});
 		} catch (err) {
-			Toast.error(err?.message || t('printingDesk:common_error_message2'));
+			Toast.error(err?.message || t('printingDesk:common_error_failed_to_download_message'));
 		}
 	};
 

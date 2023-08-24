@@ -95,7 +95,7 @@ function UploadModal({
 					size="md"
 				>
 					<Modal.Header
-						title={(<h5>{t('printingDesk:final_awb_upload_modal_header')}</h5>)}
+						title={(<h5>{t('printingDesk:final_awb_upload_modal_upload_airway_bill_header')}</h5>)}
 						style={{ paddingBottom: 0 }}
 					/>
 					<Modal.Body>
@@ -106,7 +106,7 @@ function UploadModal({
 							disabled={loading || updateLoading}
 							themeType="accent"
 						>
-							{t('printingDesk:final_awb_upload_modal_button')}
+							{t('printingDesk:final_awb_upload_modal_upload_button_text')}
 						</Button>
 					</Modal.Body>
 				</Modal>

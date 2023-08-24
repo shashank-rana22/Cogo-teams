@@ -59,14 +59,16 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 					disabled={loading || createManifestLoading}
 					style={{ marginLeft: 'auto' }}
 				>
-					{t('printingDesk:generate_manifest_doc_button_text')}
+					{t('printingDesk:generate_manifest_doc_download_button_text')}
 				</Button>
 				<div
 					className={styles.container}
 					id="manifest"
 				>
 					<div className="flex_column">
-						<div className="manifest_heading">{t('printingDesk:generate_manifest_doc_heading')}</div>
+						<div className="manifest_heading">
+							{t('printingDesk:generate_manifest_doc_heading_cargo_manifest')}
+						</div>
 						<div style={{ margin: '12px 40px' }}>
 							<div className="flex_row">
 								<div className="shipper">
@@ -111,12 +113,12 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 						</div>
 						<table>
 							<tr className="font_style">
-								<th>{t('printingDesk:generate_manifest_doc_table_label1')}</th>
-								<th>{t('printingDesk:generate_manifest_doc_table_label2')}</th>
-								<th>{t('printingDesk:generate_manifest_doc_table_label3')}</th>
-								<th>{t('printingDesk:generate_manifest_doc_table_label4')}</th>
-								<th>{t('printingDesk:generate_manifest_doc_table_label5')}</th>
-								<th>{t('printingDesk:generate_manifest_doc_table_label6')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_hawb_number_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_pkgs_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_gross_weight_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_commodity_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_shipper_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_consignee_label')}</th>
 							</tr>
 							{HAWB_DATA.map((item) => {
 								const {

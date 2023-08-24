@@ -20,7 +20,7 @@ const useCreateShipmentDocument = () => {
 			});
 			listAPI({ filters: {} });
 
-			Toast.success(t('printingDesk:common_success_message1'));
+			Toast.success(t('printingDesk:common_success_doc_created_message'));
 		} catch (err) {
 			toastApiError(err);
 		}

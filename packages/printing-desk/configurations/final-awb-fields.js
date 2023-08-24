@@ -5,7 +5,7 @@ export const finalAwbFields = (t) => {
 	const fields = [
 		{
 			key    : 'serialId',
-			label  : t('printingDesk:final_awb_fields_label1'),
+			label  : t('printingDesk:final_awb_fields_sid_label'),
 			span   : 1,
 			render : (item) => (
 				<div>
@@ -16,12 +16,12 @@ export const finalAwbFields = (t) => {
 		},
 		{
 			key   : 'awbNumber',
-			label : t('printingDesk:final_awb_fields_label2'),
+			label : t('printingDesk:final_awb_fields_awb_label'),
 			span  : 1,
 		},
 		{
 			key    : 'blCategory',
-			label  : t('printingDesk:final_awb_fields_label3'),
+			label  : t('printingDesk:final_awb_fields_awb_category_label'),
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
@@ -31,7 +31,7 @@ export const finalAwbFields = (t) => {
 		},
 		{
 			key    : 'deadline',
-			label  : t('printingDesk:final_awb_fields_label4'),
+			label  : t('printingDesk:final_awb_fields_due_on_label'),
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
@@ -46,7 +46,7 @@ export const finalAwbFields = (t) => {
 		},
 		{
 			key   : 'upload',
-			label : t('printingDesk:final_awb_fields_label5'),
+			label : t('printingDesk:final_awb_fields_action_label'),
 			span  : 1,
 			func  : 'handleUpload',
 		},

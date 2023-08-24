@@ -18,7 +18,7 @@ const useGetMediaUrl = () => {
 						resolve(documentData);
 					} else {
 						reject(
-							Toast.error(t('printingDesk:common_error_message4')),
+							Toast.error(t('printingDesk:common_error_issue_uploading_doc_message')),
 						);
 					}
 				}
@@ -26,7 +26,7 @@ const useGetMediaUrl = () => {
 			Object.keys(headers).forEach((header) => xhr.setRequestHeader(header, headers[header]));
 			xhr.send(file);
 		} else {
-			Toast.error(t('printingDesk:common_error_message5'));
+			Toast.error(t('printingDesk:common_error_error_uploading_file_message'));
 		}
 	});
 
@@ -39,7 +39,7 @@ const useGetMediaUrl = () => {
 					resolve(xhr.responseText);
 				} else {
 					reject(
-						Toast.error(t('printingDesk:common_error_message4')),
+						Toast.error(t('printingDesk:common_error_issue_uploading_doc_message')),
 					);
 				}
 			}

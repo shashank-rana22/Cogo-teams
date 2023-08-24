@@ -30,7 +30,7 @@ const useCreateManifest = () => {
 			});
 			setTriggerManifest('');
 		} catch (err) {
-			Toast.error(err?.message || t('printingDesk:common_error_message1'));
+			Toast.error(err?.message || t('printingDesk:common_error_failed_to_create_message'));
 		}
 	};
 

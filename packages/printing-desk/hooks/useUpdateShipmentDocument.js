@@ -14,10 +14,12 @@ const useUpdateShipmentDocument = ({ listAPI = () => {} }) => {
 			await trigger({
 				data: payload,
 			});
-			Toast.success(t('printingDesk:common_success_message3'));
+			Toast.success(t('printingDesk:common_success_doc_saved_message'));
 			listAPI();
 		} catch (error) {
-			Toast.error(error?.response?.data?.message || error?.message || t('printingDesk:common_error_message3'));
+			Toast.error(error?.response?.data?.message
+				|| error?.message
+				|| t('printingDesk:common_error_failed_to_save_doc_message'));
 		}
 	};
 

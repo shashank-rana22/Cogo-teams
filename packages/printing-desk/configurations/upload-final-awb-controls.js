@@ -4,7 +4,7 @@ import { IcMUpload } from '@cogoport/icons-react';
 const controls = (t) => [
 	{
 		name        : 'remark',
-		label       : t('printingDesk:upload_final_awb_controls_label1'),
+		label       : t('printingDesk:upload_final_awb_controls_doc_description_label'),
 		type        : 'textarea',
 		span        : 12,
 		maxLength   : 150,
@@ -15,7 +15,7 @@ const controls = (t) => [
 	},
 	{
 		name        : 'hawbCount',
-		label       : t('printingDesk:upload_final_awb_controls_label2'),
+		label       : t('printingDesk:upload_final_awb_controls_hawb_inc_shipment_label'),
 		type        : 'number',
 		span        : 12,
 		maxLength   : 150,
@@ -27,7 +27,7 @@ const controls = (t) => [
 	},
 	{
 		name       : 'document',
-		label      : t('printingDesk:upload_final_awb_controls_label3'),
+		label      : t('printingDesk:upload_final_awb_controls_document_label'),
 		type       : 'file',
 		drag       : true,
 		span       : 8,

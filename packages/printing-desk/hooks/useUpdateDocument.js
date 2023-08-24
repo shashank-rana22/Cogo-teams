@@ -19,7 +19,7 @@ const useUpdateShipmentDocument = () => {
 				data: payload,
 			});
 			listAPI({});
-			Toast.success(t('printingDesk:common_success_message2'));
+			Toast.success(t('printingDesk:common_success_doc_approved_message'));
 		} catch (err) {
 			toastApiError(err);
 		}

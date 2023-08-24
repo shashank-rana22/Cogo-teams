@@ -2,18 +2,18 @@ export const approvedAWBFields = (t) => {
 	const fields = [
 		{
 			key   : 'serialId',
-			label : t('printingDesk:approved_awb_fields_label1'),
+			label : t('printingDesk:approved_awb_fields_sid_label'),
 			span  : 2,
 			func  : 'handleSerialId',
 		},
 		{
 			key   : 'awbNumber',
-			label : t('printingDesk:approved_awb_fields_label2'),
+			label : t('printingDesk:approved_awb_fields_awb_label'),
 			span  : 2,
 		},
 		{
 			key   : 'blCategory',
-			label : t('printingDesk:approved_awb_fields_label3'),
+			label : t('printingDesk:approved_awb_fields_awb_category_label'),
 			span  : 2,
 			func  : 'handleBlCategory',
 		},

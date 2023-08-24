@@ -10,15 +10,15 @@ import styles from './styles.module.css';
 const tabs = (t) => [
 	{
 		key   : 'approved_awb',
-		label : t('printingDesk:header_tabs_label1'),
+		label : t('printingDesk:header_tabs_approved_awb'),
 	},
 	{
 		key   : 'handed_over',
-		label : t('printingDesk:header_tabs_label2'),
+		label : t('printingDesk:header_tabs_handed_over'),
 	},
 	{
 		key   : 'final_awb',
-		label : t('printingDesk:header_tabs_label3'),
+		label : t('printingDesk:header_tabs_final_awb'),
 	},
 ];
 
@@ -34,7 +34,7 @@ function Header({
 	const { t } = useTranslation(['printingDesk']);
 	return (
 		<header>
-			<div className={styles.heading}>{t('printingDesk:header_heading')}</div>
+			<div className={styles.heading}>{t('printingDesk:header_printing_desk')}</div>
 			<div className={styles.top_container}>
 				<Tabs
 					themeType="tertiary"
