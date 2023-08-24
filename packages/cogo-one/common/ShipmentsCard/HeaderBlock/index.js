@@ -134,7 +134,7 @@ function HeaderBlock({
 			<div className={styles.icons_container}>
 
 				{type === 'all_shipments' ? (
-					<Tooltip content="Poc's" placement="bottom">
+					<Tooltip content="POCs" placement="bottom">
 						<IcMAgentManagement
 							className={styles.poc_details}
 							onClick={(e) => {
