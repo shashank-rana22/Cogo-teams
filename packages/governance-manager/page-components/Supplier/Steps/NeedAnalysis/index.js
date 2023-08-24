@@ -63,12 +63,13 @@ function NeedAnalysis({ t, organization_id, service, getOrganizationService, ser
 
 			<div className={styles.submit_btn}>
 				<Button onClick={() => updateOrganizationService()} disabled={!isProceedable}>
-					Submit & Next
+					{t('supplier_page_need_analysis_table_submit_and_next')}
 				</Button>
 			</div>
 			{
 				show && (
 					<EvaluateModal
+						t={t}
 						show={show}
 						setShow={setShow}
 						getOrganizationExpertiseSuppliers={getOrganizationExpertiseSuppliers}

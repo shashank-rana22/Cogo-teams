@@ -1,18 +1,21 @@
 import { Button } from '@cogoport/components';
 
-export const cfsColumns = ({ setShow, service_type, isForApproval }) => {
+export const cfsColumns = ({ t, setShow, service_type, isForApproval }) => {
 	const columns = [
-		{ Header: 'CFS/ICD', accessor: (row) => (<div>{row?.expertise_data?.location_name}</div>) },
 		{
-			Header   : 'Container Type',
+			Header   : t('supplier_page_need_analysis_table_cfs_header'),
+			accessor : (row) => (<div>{row?.expertise_data?.location_name}</div>),
+		},
+		{
+			Header   : t('supplier_page_need_analysis_table_cfs_container_type'),
 			accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),
 		},
 		{
-			Header   : 'Rate Provided',
+			Header   : t('supplier_page_need_analysis_table_cfs_rate_provided'),
 			accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),
 		},
 		{
-			Header   : 'No. of Existing Suppliers',
+			Header   : t('supplier_page_need_analysis_table_cfs_count_suppliers'),
 			accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),
 		},
 	];
@@ -25,7 +28,7 @@ export const cfsColumns = ({ setShow, service_type, isForApproval }) => {
 					onClick={() => setShow({ ...row, service_type })}
 					disabled={row?.service_requirement}
 				>
-					Evaluate
+					{t('supplier_page_need_analysis_table_cfs_evaluate')}
 				</Button>
 			)
 			,

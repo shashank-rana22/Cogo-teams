@@ -62,6 +62,7 @@ function Supplier() {
 					setStatus={setStatus}
 				/>,
 				organization_evaluation: <SupplierEvaluation
+					t={t}
 					id={id}
 					service={supplierData?.service}
 					organization_id={supplierData?.organization_id}
