@@ -9,7 +9,7 @@ export const filterData = (data) => {
 };
 
 export function columns({ t, setShow, isForApproval }) {
-	return [
+	const column = [
 		{
 			id     : 'parameters',
 			Header : () => (
@@ -43,14 +43,15 @@ export function columns({ t, setShow, isForApproval }) {
                 }
 					</div>
 					{
-row?.evaluation_mode === 'manual' && row?.task !== 'total_score' && !isForApproval && (
-	<Button themeType="accent" size="sm" onClick={() => setShow(row)}>
-		{t('supplier_page_supplier_evaluation_table_evaluation_criteria_utils_score')}
-	</Button>
-)
+						row?.evaluation_mode === 'manual' && row?.task !== 'total_score' && !isForApproval && (
+							<Button themeType="accent" size="sm" onClick={() => setShow(row)}>
+								{t('supplier_page_supplier_evaluation_table_evaluation_criteria_utils_score')}
+							</Button>
+						)
                 }
 				</div>
 			),
 		},
 	];
+	return column;
 }

@@ -25,7 +25,8 @@ function useGetOrganizationEvaluationDetails({ id, organization_id }) {
 	}, []);
 
 	return {
-		data: data?.organization_evaluation_tasks,
+		data                            : data?.organization_evaluation_tasks,
+		organization_evaulation_details : data?.organization_evaluation,
 		loading,
 		getOrganizationEvaluationDetails,
 	};
