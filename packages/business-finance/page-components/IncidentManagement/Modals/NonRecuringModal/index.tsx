@@ -70,6 +70,11 @@ function NonRecuringModal({
 				/>
 				<Modal.Body>
 					{!isEditable && <ApproveAndReject row={row} />}
+					{
+							(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
 
 					<div className={styles.flex}>
 						{INCIDENT_MAPPING?.map((item) => (
@@ -153,12 +158,6 @@ function NonRecuringModal({
 							/>
 						</>
 					)}
-
-					{
-							(level1 || level2 || level3) && (
-								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
-							)
-						}
 
 				</Modal.Body>
 				{isEditable && (
