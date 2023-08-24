@@ -4,6 +4,7 @@ import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import CommunicationModal from '../../../../../../common/CommunicationModal';
+import getAllPocMergedData from '../../../../../../helpers/getAllPocMergedData';
 import useListShipmentStakeholders from '../../../../../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../../../../../hooks/useListShipmentTradePartners';
 
@@ -32,39 +33,19 @@ function PocContainer({
 	handleShipmentChat = () => {},
 }) {
 	const [modalData, setModalData] = useState({});
-	const { id = '', primary_poc_details = {}, importer_exporter_poc = {} } = showPocDetails;
+	const { id = '' } = showPocDetails;
 
 	const { stakeHoldersData = [], loading } = useListShipmentStakeholders({ shipmentId: id });
 
 	const { tradePartnersLoading = false, tradePartnersData = [] } = useListShipmentTradePartners({ shipmentId: id });
 
-	const PocDetails = [importer_exporter_poc];
-
-	if (primary_poc_details && primary_poc_details?.id !== importer_exporter_poc?.id) {
-		const updatedPocData = { ...primary_poc_details, is_primary_poc: true };
-		PocDetails.unshift(updatedPocData);
-	}
-
-	const updatedPocDetails = PocDetails?.reduce((accumulator, item) => {
-		const updatedItem = item?.is_primary_poc ? { ...item, chat_option: true, is_customer: true }
-			: { ...item, chat_option: true, is_primary_poc: false, is_customer: true };
-		accumulator.push(updatedItem);
-		return accumulator;
-	}, []);
-
-	const updatedTradePartnersData = tradePartnersData?.reduce((accumulator, item) => {
-		const updatedItem = { ...item, chat_option: true, is_trade_partner: true };
-		accumulator.push(updatedItem);
-		return accumulator;
-	}, []);
-
 	const { modalType = '', userData = {} } = modalData || {};
+
+	const allPocMergedData = getAllPocMergedData({ tradePartnersData, stakeHoldersData, showPocDetails });
 
 	const closeModal = () => {
 		setModalData(null);
 	};
-
-	const mergedData = [...updatedPocDetails, ...updatedTradePartnersData, ...stakeHoldersData];
 
 	return (
 		<div className={styles.container}>
@@ -102,7 +83,7 @@ function PocContainer({
 					)
 					: (
 						<PocUser
-							stakeHoldersData={mergedData}
+							stakeHoldersData={allPocMergedData}
 							setActiveTab={setActiveTab}
 							setModalData={setModalData}
 							handleShipmentChat={handleShipmentChat}

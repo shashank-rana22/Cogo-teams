@@ -6,44 +6,13 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import getEachUserFormatedData from '../../../../../../../utils/getPocUserFormattedData';
+
 import styles from './styles.module.css';
 
 const MAX_PREVIEW_LIMIT = 1;
 const MIN_PREVIEW_LIMIT = 0;
 const LAST_INDEX = 1;
-
-const getEachUserFormatedData = ({ userDetails = {} }) => {
-	const {
-		stakeholder_type = '', user = {}, id = '', name: pocName = '',
-		mobile_country_code: pocMobileCountryCode = '', processes = [], mobile_number = '', email = '', trade_type = '',
-		chat_option = false,
-		is_primary_poc = false,
-		is_customer = false,
-		is_trade_partner = false,
-	} = userDetails;
-
-	const {
-		name = '',
-		id: userId = '',
-		mobile_country_code = '',
-		mobile_number: mobileNumber = '',
-		email: userEmail = '',
-	} = user || {};
-	return {
-		id,
-		name                : name || pocName,
-		stakeholder_type    : Object.keys(userDetails).includes('processes') ? processes : [stakeholder_type],
-		mobileNumber        : mobileNumber || mobile_number,
-		mobile_country_code : mobile_country_code || pocMobileCountryCode,
-		userId              : userId || id,
-		email               : userEmail || email,
-		trade_type,
-		chatOption          : chat_option,
-		isPrimaryPoc        : is_primary_poc,
-		isCustomer          : is_customer,
-		isTradePartner      : is_trade_partner,
-	};
-};
 
 const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) => {
 	if (!mobileNumber) {
@@ -106,7 +75,7 @@ function PocUser({
 						email,
 						channel_type            : 'whatsapp',
 						countryCode             : mobile_country_code,
-						mobile_no               : `${mobile_country_code.replace('+', '')}${mobileNumber}`,
+						mobile_no               : `${mobile_country_code?.replace('+', '')}${mobileNumber}`,
 					};
 
 					const lessList = (stakeholder_type || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
@@ -114,14 +83,14 @@ function PocUser({
 					const showMoreList = (stakeholder_type || []).length > MAX_PREVIEW_LIMIT;
 
 					const user = { id, email };
-					const countryCode = mobile_country_code.replace('+', '');
+					const countryCode = mobile_country_code?.replace('+', '');
 
 					return (
 						<div className={styles.main_container} key={id}>
 							<div className={styles.container}>
 								<div className={styles.user_info}>
 									<Avatar
-										personName={name}
+										personName={name || 'user'}
 										size="32px"
 										className={cl`${styles.styled_avatar}
 										${isCustomer ? styles.customer_avatar : ''}
@@ -130,7 +99,7 @@ function PocUser({
 									/>
 									<div className={styles.user_details}>
 										<div className={styles.user_name}>
-											{startCase(name)}
+											{startCase(name || 'User')}
 										</div>
 										<div className={styles.user_work_scope}>
 											{isCustomer ? (
@@ -170,8 +139,8 @@ function PocUser({
 													placement="bottom"
 												>
 													<div className={styles.more_tags}>
-														{moreList?.length}
 														+
+														{moreList?.length}
 													</div>
 												</Tooltip>
 											)}

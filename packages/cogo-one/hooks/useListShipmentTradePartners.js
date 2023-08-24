@@ -16,9 +16,9 @@ function useListShipmentTradePartners({ shipmentId }) {
 	}, { manual: true });
 
 	const getShipmentTradePartnersList = useCallback(
-		async () => {
+		() => {
 			try {
-				await trigger({
+				trigger({
 					params: getParams({ shipmentId }),
 				});
 			} catch (error) {

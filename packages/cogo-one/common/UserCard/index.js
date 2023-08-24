@@ -1,6 +1,6 @@
 import { Avatar, Tooltip } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import getHidedUserDetails from '../../utils/getHidedUserDetails';
 
@@ -21,7 +21,7 @@ function UserCard({ userData = {}, showDirection = false, showWorkScope = false 
 
 	const lessList = (work_scopes || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
 	const moreList = (work_scopes || []).slice(MAX_PREVIEW_LIMIT);
-	const showMoreList = (work_scopes || []).length > MAX_PREVIEW_LIMIT;
+	const showMoreList = !isEmpty(moreList);
 
 	return (
 		<div className={styles.main_container}>
@@ -48,7 +48,7 @@ function UserCard({ userData = {}, showDirection = false, showWorkScope = false 
 								data        : user_number,
 								type        : 'number',
 								countryCode : country_code,
-							}) : ''}
+							}) : null}
 						</div>
 					</div>
 
@@ -69,11 +69,11 @@ function UserCard({ userData = {}, showDirection = false, showWorkScope = false 
 										</div>
 									)}
 									theme="light"
-									placement="bottom"
+									placement="right"
 								>
 									<div className={styles.more_tags}>
-										{moreList?.length}
 										+
+										{moreList?.length}
 									</div>
 								</Tooltip>
 							)}
