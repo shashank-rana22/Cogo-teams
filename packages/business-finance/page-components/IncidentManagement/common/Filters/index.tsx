@@ -30,16 +30,23 @@ function Filters({
 				{filterControls.map((control) => {
 					const Element = getElements(control.type);
 					return (
-						<div className={styles.element}>
+						<div className={styles.element} key={control.name}>
 							<Element
 								key={control.name}
 								className={styles.select}
 								value={filters[control.name]}
-								onChange={(value) => onChangeFilters({
-									...filters,
-									[control.name] : value || undefined,
-									page           : 1,
-								})}
+								onChange={(value) => {
+									let val = value;
+									if (control?.type === 'toggle') {
+										val = value?.target?.checked;
+									}
+
+									onChangeFilters({
+										...filters,
+										[control.name] : val || undefined,
+										page           : 1,
+									});
+								}}
 								{...control}
 							/>
 						</div>

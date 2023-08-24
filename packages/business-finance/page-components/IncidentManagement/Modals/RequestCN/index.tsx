@@ -75,22 +75,23 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 	const { referenceId = '' } = row || {};
 
-	const content = () => (
-		<div className={styles.container}>
-			<div>
-				<div className={styles.texts}>CN Category Type*</div>
-				<div className={styles.select_container}>
-					<Select
-						className="primary md"
-						placeholder="CN Category Type.."
-						value={creditNoteType || CNCategoryValues?.CNType}
-						disabled={!isEditable || level1?.status === 'APPROVED'}
-						onChange={(e:any) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
-						options={CATEGORY_OPTIONS}
-					/>
+	function ShowContent() {
+		return (
+			<div className={styles.container}>
+				<div>
+					<div className={styles.texts}>CN Category Type*</div>
+					<div className={styles.select_container}>
+						<Select
+							className="primary md"
+							placeholder="CN Category Type.."
+							value={creditNoteType || CNCategoryValues?.CNType}
+							disabled={!isEditable || level1?.status === 'APPROVED'}
+							onChange={(e:string) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
+							options={CATEGORY_OPTIONS}
+						/>
+					</div>
 				</div>
-			</div>
-			{(CNCategoryValues?.CNType
+				{(CNCategoryValues?.CNType
 				|| status === 'APPROVED'
 				|| status === 'REJECTED') && (
 					<div>
@@ -137,8 +138,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							)}
 						</div>
 					</div>
-			)}
-			{(CNCategoryValues?.CNValues === 'revenueOthers'
+				)}
+				{(CNCategoryValues?.CNValues === 'revenueOthers'
 				|| CNCategoryValues?.CNValues === 'nonRevenueOthers') && (
 					<div>
 						<div className={styles.texts}>Remark</div>
@@ -154,14 +155,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						/>
 
 					</div>
-			)}
-			<div className={styles.button_container}>
-				<Button themeType="primary" onClick={() => setShowPopover(false)}>
-					Done
-				</Button>
+				)}
+				<div className={styles.button_container}>
+					<Button themeType="primary" onClick={() => setShowPopover(false)}>
+						Done
+					</Button>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	useEffect(() => {
 		setCNCategoryValues({
@@ -188,21 +190,21 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 			</div>
 			{showTdsModal && (
 				<Modal
-					size="lg"
+					size="xl"
 					show={showTdsModal}
 					onClose={() => {
 						setShowTdsModal(false);
 					}}
 				>
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
-					<Modal.Body>
+					<Modal.Body className={styles.body_section}>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.credit}>
 							<div className={styles.button_container_data}>
 								<Popover
 									placement="bottom"
 									visible={showPopover}
-									render={content()}
+									render={ShowContent()}
 									{...rest}
 								>
 									<Button
