@@ -5,7 +5,13 @@ import { useState } from 'react';
 import MoveSupplierModal from './MoveSupplierModal';
 import styles from './styles.module.css';
 
-function Actions({ item = {} }) {
+function Actions({
+	item = {},
+	bucketOptions = [],
+	bucket_type = '',
+	current_allocated_containers = '',
+	rollingFclFreightSearchId = '',
+}) {
 	const [showMoveSupplierModal, setShowMoveSupplierModal] = useState(false);
 
 	return (
@@ -37,9 +43,12 @@ function Actions({ item = {} }) {
 					showMoveSupplierModal={showMoveSupplierModal}
 					setShowMoveSupplierModal={setShowMoveSupplierModal}
 					item={item}
+					bucketOptions={bucketOptions}
+					bucket_type={bucket_type}
+					current_allocated_containers={current_allocated_containers}
+					rollingFclFreightSearchId={rollingFclFreightSearchId}
 				/>
 			) : null}
-
 		</div>
 	);
 }

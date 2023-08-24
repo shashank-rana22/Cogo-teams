@@ -382,7 +382,7 @@ const completedColumn = ({
 											? 'E INVOICE GENERATED'
 											: startCase(getStatus({
 												entityCode,
-												invoiceStatus: getByKey(row, 'invoiceStatus'),
+												invoiceStatus: row?.invoiceStatus,
 											}))}
 
 									</div>
@@ -396,7 +396,7 @@ const completedColumn = ({
 										)}...`
 										: `${startCase(getStatus({
 											entityCode,
-											invoiceStatus: getByKey(row, 'invoiceStatus'),
+											invoiceStatus: row?.invoiceStatus,
 										})).substring(
 											0,
 											10,
@@ -409,7 +409,7 @@ const completedColumn = ({
 								<div className={styles.style_text}>
 									{startCase(getStatus({
 										entityCode,
-										invoiceStatus: getByKey(row, 'invoiceStatus'),
+										invoiceStatus: row?.invoiceStatus,
 									}))}
 								</div>
 							)}
@@ -460,6 +460,7 @@ const completedColumn = ({
 				<Remarks itemData={row} />
 				<InvoiceDetails
 					item={row}
+					entityCode={entityCode}
 				/>
 				<RenderIRNGenerated
 					itemData={row}

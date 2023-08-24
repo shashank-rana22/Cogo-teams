@@ -8,6 +8,8 @@ const COLORS_MAPPING = {
 	past_container_allocation    : '#E0E0E0',
 };
 
+const C = 100;
+
 function CustomProgressBar({
 	id = '',
 	className = '',
@@ -16,7 +18,7 @@ function CustomProgressBar({
 	promisedCount = 0,
 	view = '',
 }) {
-	const progress = (promisedCount / allocatedCount) * 100;
+	const progress = (promisedCount / allocatedCount) * C;
 
 	return (
 		<div
@@ -39,9 +41,9 @@ function CustomProgressBar({
 					{' '}
 					TEU FULFILLED
 				</div>
-
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.progress_bar}
 				${cl.ns('progressbar_bar')}`}
 			>
@@ -49,11 +51,13 @@ function CustomProgressBar({
 					className={cl`
 						${styles.progress} 
 						${cl.ns('progressbar_progress')}`}
-					style={{ width: `${progress}%`, background: `${COLORS_MAPPING[view]}` }}
+					style={{
+						width      : `${progress}%`,
+						background : `${COLORS_MAPPING[view]}`,
+					}}
 				/>
 			</div>
 		</div>
-
 	);
 }
 export default CustomProgressBar;

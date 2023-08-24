@@ -1,16 +1,21 @@
 export const PERSONA_DISTRIBUTION_COLORS = {
-	sme        : '#F2F3FA',
-	mid_size   : '#CED1ED',
-	long_tail  : '#BABEE7',
-	enterprise : '#9BA0CB',
+	sme             : '#F2F3FA',
+	mid_size        : '#CED1ED',
+	long_tail       : '#BABEE7',
+	enterprise      : '#9BA0CB',
+	channel_partner : '#acb2f0',
+	others          : '#888fd2',
+
 };
 
-export const WEEKY_DISTRIBUTION_COLORS = {
-	standard  : '#EDFFFF',
-	refer     : '#ACDADF',
-	flat_rack : '#63BEC8',
-	iso_tank  : '#CFEAED',
-};
+export const WEEKY_DISTRIBUTION_COLORS = [
+	'#E6F0F0',
+	'#CFEAED',
+	'#ACDADF',
+	'#63BEC8',
+	'#74c2ca',
+	'#67b0b8',
+];
 
 export const CONTAINER_TYPE_DISTRIBUTION_COLORS = {
 	standard  : '#FBD1A6',

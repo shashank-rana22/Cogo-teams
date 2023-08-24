@@ -7,8 +7,8 @@
 	max-width: 100%;
 	height: 16px;
 	margin-bottom: 4px;
-	background: var(--greyscale-secondary-white, #fff);
-	border: 1px solid var(--balck-40-disabled, #bdbdbd);
+	background: #fff;
+	border: 1px solid #bdbdbd;
 	border-radius: 3px;
 	border-radius: 4px;
 }

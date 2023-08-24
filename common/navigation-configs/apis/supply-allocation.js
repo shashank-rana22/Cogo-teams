@@ -34,6 +34,11 @@ const APIS = [
 		access_type  : 'private',
 		service_name : 'rolling_forecast',
 	},
+	{
+		api          : 'update_rolling_forecast_fcl_freight_allocation',
+		access_type  : 'private',
+		service_name : 'rolling_forecast',
+	},
 ];
 
 export default APIS;

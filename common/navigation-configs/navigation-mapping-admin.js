@@ -61,6 +61,7 @@ import {
 	IcMAppMissions,
 	IcMFsoppoc,
 	IcMBookingDesk,
+	IcMUpwardGraph,
 	IcASecureCloudStorage,
 } from '@cogoport/icons-react';
 
@@ -1656,7 +1657,7 @@ const navigationMappingAdmin = {
 		title       : 'Forecast',
 		isSubNavs   : true,
 		module_type : 'dashboards',
-		icon        : IcCCogoassured,
+		icon        : IcMUpwardGraph,
 		options     : [
 			{
 				key           : 'forecast-supply_allocation',

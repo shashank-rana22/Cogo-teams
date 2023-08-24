@@ -1,10 +1,17 @@
 import { useRequest } from '@cogoport/request';
 
-const useCreateSupplySearch = ({ refetchListFclSearches, reset, setLocationDetails }) => {
-	const [{ data, loading }, trigger] = useRequest({
-		url    : '/create_rolling_fcl_freight_search',
-		method : 'POST',
-	}, { manual: true });
+const useCreateSupplySearch = ({
+	refetchListFclSearches,
+	reset,
+	setLocationDetails,
+}) => {
+	const [{ data, loading }, trigger] = useRequest(
+		{
+			url    : '/create_rolling_fcl_freight_search',
+			method : 'POST',
+		},
+		{ manual: true },
+	);
 
 	const createSupplySearch = async ({ payload }) => {
 		try {
@@ -19,7 +26,7 @@ const useCreateSupplySearch = ({ refetchListFclSearches, reset, setLocationDetai
 	return {
 		data,
 		createSupplySearch,
-		loading,
+		createSearchLoadng: loading,
 	};
 };
 
