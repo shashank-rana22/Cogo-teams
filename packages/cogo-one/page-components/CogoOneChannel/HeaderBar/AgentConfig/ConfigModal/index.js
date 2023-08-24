@@ -1,6 +1,7 @@
-import { Modal, Pagination, cl } from '@cogoport/components';
+import { Modal, Pagination, cl, Button } from '@cogoport/components';
+import { useState } from 'react';
 
-import { SCREEN_LOCK_MAPPING } from '../../../../../constants/PLATFORM_ACTIVITY_KEYS_MAPPING';
+import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
 import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
@@ -9,6 +10,7 @@ import AgentWiseLockScreen from './AgentWiseLockScreen';
 import LeaveStatusView from './LeaveStatusView';
 import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
+import SwitchView from './SwitchView';
 
 const SHOW_PAGINATION_FOR = ['list_agents', 'agents_status'];
 
@@ -27,9 +29,13 @@ const TAB_CONFIG_MAPPING = {
 		hook       : useListAgentStatus,
 		headerText : 'Agents Status',
 	},
+	switch_views: {
+		Component  : SwitchView,
+		headerText : 'Switch View',
+	},
 };
 
-function AgentModal({
+function ConfigModal({
 	showAgentDetails = false,
 	setShowAgentDetails = () => {},
 	firestore = {},
@@ -37,7 +43,10 @@ function AgentModal({
 	viewType = '',
 	activeCard = '',
 	setActiveCard = () => {},
+	setViewType = () => {},
+	initialViewType = '',
 }) {
+	const [switchViewType, setSwitchViewType] = useState(viewType);
 	const {
 		Component = null,
 		hook: hookToBeUsed = () => {},
@@ -86,6 +95,12 @@ function AgentModal({
 			paramsState,
 			getListChatAgents,
 		},
+		switch_views: {
+			viewType,
+			setSwitchViewType,
+			setActiveCard,
+			switchViewType,
+		},
 	};
 
 	const handleClose = () => {
@@ -100,7 +115,11 @@ function AgentModal({
 			onClose={handleClose}
 			placement="top"
 		>
-			<Modal.Header title={headerText || 'Configuration'} />
+			<Modal.Header
+				className={styles.modal_header}
+				title={headerText || 'Configuration'}
+			/>
+
 			<Modal.Body className={styles.modal_body}>
 				{(activeCard && Component)
 					? (
@@ -110,10 +129,10 @@ function AgentModal({
 						/>
 					) : (
 						<div className={styles.screen_container}>
-							{SCREEN_LOCK_MAPPING.map((item) => {
+							{AGENT_CONFIG_MAPPING.map((item) => {
 								const { label = '', name = '', icon = {} } = item || {};
 
-								if (!configurationsToBeShown.includes(name)) {
+								if (!configurationsToBeShown.includes(name) && initialViewType !== 'cogoone_admin') {
 									return null;
 								}
 
@@ -145,9 +164,20 @@ function AgentModal({
 						onPageChange={setPagination}
 					/>
 				) : null}
+
+				{activeCard === 'switch_views' ? (
+					<Button
+						size="md"
+						themeType="primary"
+						disabled={viewType === switchViewType}
+						onClick={() => setViewType(switchViewType)}
+					>
+						Switch
+					</Button>
+				) : null}
 			</Modal.Footer>
 		</Modal>
 	);
 }
 
-export default AgentModal;
+export default ConfigModal;

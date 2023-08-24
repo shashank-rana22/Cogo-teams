@@ -73,3 +73,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.padding_inner {
+	padding: 0 12px;
+}

@@ -1,9 +1,9 @@
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
-import AgentStatusToggle from './AgentStatusToggle';
+import AgentConfig from './AgentConfig';
 import FlashRevertLogs from './FlashRevertLogs';
 import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
@@ -18,6 +18,8 @@ function HeaderBar({
 	preferenceLoading = false,
 	timelineLoading = false,
 	userId = '',
+	initialViewType = '',
+	setViewType = () => {},
 }) {
 	const {
 		flash_revert_logs : flashRevertLogs = false,
@@ -32,17 +34,28 @@ function HeaderBar({
 	return (
 		<>
 			<div className={styles.container}>
-				{flashRevertLogs ? (
-					<FlashRevertLogs showDetails={showDetails} />
-				) : null}
+				<div className={styles.label_styles}>
+					{startCase(viewType)}
+					{' '}
+					View
+				</div>
 
-				{!isEmpty(configurationsToBeShown) && (
-					<AgentStatusToggle
-						firestore={firestore}
-						configurationsToBeShown={configurationsToBeShown}
-						viewType={viewType}
-					/>
-				)}
+				<div>
+					{flashRevertLogs ? (
+						<FlashRevertLogs showDetails={showDetails} />
+					) : null}
+
+					{!isEmpty(configurationsToBeShown) && (
+						<AgentConfig
+							firestore={firestore}
+							configurationsToBeShown={configurationsToBeShown}
+							setViewType={setViewType}
+							initialViewType={initialViewType}
+							viewType={viewType}
+							showDetails={showDetails}
+						/>
+					)}
+				</div>
 			</div>
 			{isPunchPresent && !preferenceLoading && (
 				<PunchInOut

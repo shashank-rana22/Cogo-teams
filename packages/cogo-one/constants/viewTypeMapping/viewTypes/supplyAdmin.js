@@ -52,6 +52,7 @@ const SUPPLY_ADMIN = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
+		view_switch_allowed         : false,
 	},
 };
 

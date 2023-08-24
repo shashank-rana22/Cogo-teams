@@ -39,3 +39,7 @@
 	width: 60%;
 	margin: 18px 0 0;
 }
+
+.padding_inner {
+	padding: 0 12px;
+}

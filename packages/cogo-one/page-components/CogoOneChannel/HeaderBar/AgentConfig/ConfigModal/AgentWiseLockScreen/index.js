@@ -35,7 +35,7 @@ function AgentWiseLockScreen({
 		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
 
 	return (
-		<>
+		<div className={styles.padding_inner}>
 			<div className={styles.search_switch_toggle_space}>
 				<div><IcMArrowBack className={styles.back_icon} onClick={() => setActiveCard('')} /></div>
 				<div className={styles.toogle_section}>
@@ -73,7 +73,7 @@ function AgentWiseLockScreen({
 					/>
 				))
 				: <div className={styles.empty_state}>No data found</div>}
-		</>
+		</div>
 	);
 }
 

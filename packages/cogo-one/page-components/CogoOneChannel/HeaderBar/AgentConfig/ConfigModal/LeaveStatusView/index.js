@@ -40,7 +40,7 @@ function LeaveAgentModal({
 	};
 
 	return (
-		<>
+		<div className={styles.padding_inner}>
 			<div className={styles.header}>
 				<Input
 					size="sm"
@@ -103,7 +103,7 @@ function LeaveAgentModal({
 					updateUserStatus={updateUserStatus}
 				/>
 			)}
-		</>
+		</div>
 	);
 }
 

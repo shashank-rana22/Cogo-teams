@@ -1,9 +1,18 @@
 .container {
 	position: absolute;
 	top: 4px;
-	right: 8px;
+	right: 6px;
+	z-index: 99999;
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
+	width: calc(99% - var(--layout-navbar-collapsed));
 	height: 20px;
+}
+
+.label_styles {
+	margin-top: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
 }

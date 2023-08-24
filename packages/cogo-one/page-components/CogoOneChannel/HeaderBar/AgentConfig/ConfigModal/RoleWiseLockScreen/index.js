@@ -43,7 +43,7 @@ function RoleWiseLockScreen({
 	}, [firestore]);
 
 	return (
-		<>
+		<div className={styles.padding_inner}>
 			<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
@@ -108,7 +108,7 @@ function RoleWiseLockScreen({
 					</>
 				) : null}
 			</div>
-		</>
+		</div>
 	);
 }
 
