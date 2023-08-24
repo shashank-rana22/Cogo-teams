@@ -7,6 +7,8 @@ import styles from './styles.module.css';
 import { getElements } from './utils/getElements';
 import { getFilterControls } from './utils/getFilterControls';
 
+const DEFAULT_PAGE = 1;
+
 interface Props {
 	isSettlementExecutive:boolean
 	activeTab?:string
@@ -44,7 +46,7 @@ function Filters({
 									onChangeFilters({
 										...filters,
 										[control.name] : val || undefined,
-										page           : 1,
+										page           : DEFAULT_PAGE,
 									});
 								}}
 								{...control}

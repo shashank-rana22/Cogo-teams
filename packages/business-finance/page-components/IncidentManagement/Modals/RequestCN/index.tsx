@@ -199,6 +199,12 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body className={styles.body_section}>
 						{!isEditable && <ApproveAndReject row={row} />}
+						{
+							(level1 || level2 || level3) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
+
 						<div className={styles.credit}>
 							<div className={styles.button_container_data}>
 								<Popover
@@ -377,12 +383,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								/>
 							</>
 						) }
-
-						{
-							(level1 || level2 || level3) && (
-								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
-							)
-						}
 
 					</Modal.Body>
 					{isEditable && (

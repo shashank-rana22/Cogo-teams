@@ -87,7 +87,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 		{
 			name      : 'isMyTaskOnly',
 			type      : 'toggle',
-			size      : 'md',
+			size      : 'sm',
 			onLabel   : 'Show only my Tasks',
 			offLabel  : '',
 			className : styles.toggle,
@@ -139,11 +139,11 @@ export const remainControls = (isSettlementExecutive = false) => {
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'EXPENSE APPROVAL',
+				label : 'Expense Approval',
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'NON Recurring EXpense Approval',
+				label : 'Non Recurring Expense Approval',
 			},
 		];
 	}
