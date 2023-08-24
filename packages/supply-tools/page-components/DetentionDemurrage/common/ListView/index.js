@@ -66,13 +66,13 @@ function ListView({ data = {}, columns = [], EditForm = () => {}, loading = fals
 								))}
 
 							</div>
+
 							<div>
 								<ButtonIcon icon={<IcMEdit />} themeType="tertiary" onClick={() => setShowEdit(item)} />
 							</div>
 						</div>
 
 						<Footer item={item} />
-
 					</div>
 				))}
 			</div>

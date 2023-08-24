@@ -47,16 +47,3 @@ function Footer({ item = {} }) {
 }
 
 export default Footer;
-
-// currency
-// :
-// "INR"
-// lower_limit
-// :
-// 2
-// price
-// :
-// 111
-// upper_limit
-// :
-// 11

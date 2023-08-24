@@ -4,6 +4,7 @@ import Invoice from '../common/Invoice';
 import ListView from '../common/ListView';
 import ShipmentTabs from '../common/ShipmentTabs';
 
+import AddEdit from './AddEdit';
 import Filter from './Filter';
 import listFieldsColumns from './listFieldsColumns';
 import styles from './styles.module.css';
@@ -32,7 +33,7 @@ function Rail({ activeShipment = '' }) {
 
 				<div className={styles.button_group_container}>
 					<Filter />
-					{/* {activeTab === 'active' ? <AddEdit /> : null} */}
+					{activeTab === 'active' ? <AddEdit /> : null}
 				</div>
 
 			</div>

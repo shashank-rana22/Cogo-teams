@@ -8,30 +8,32 @@ function AddEdit() {
 	const formRef = useRef(null);
 
 	const onSubmit = () => {
-		// console.log(formRef.current.formSubmit());
+		formRef.current.formSubmit();
 	};
 
 	return (
 		<div>
 			<Button onClick={() => setShowModal(true)}>ADD + </Button>
 
-			<Modal show={showModal} onClose={() => setShowModal(false)} size="lg" placement="top">
-				<Modal.Header title="Add Detention / Demurrage" />
-				<Modal.Body>
-					<Form ref={formRef} />
-				</Modal.Body>
+			{showModal ? (
+				<Modal show={showModal} onClose={() => setShowModal(false)} size="lg" placement="top">
+					<Modal.Header title="Add Detention / Demurrage" />
+					<Modal.Body>
+						<Form ref={formRef} />
+					</Modal.Body>
 
-				<Modal.Footer>
-					<Button
-						themeType="secondary"
-						style={{ marginRight: 8 }}
-					>
-						Cancel
-					</Button>
+					<Modal.Footer>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: 8 }}
+						>
+							Cancel
+						</Button>
 
-					<Button onClick={onSubmit}>Submit</Button>
-				</Modal.Footer>
-			</Modal>
+						<Button onClick={onSubmit}>Submit</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 
 		</div>
 	);
