@@ -20,7 +20,18 @@
     "supplier_page_card_go_back_btn_title":"Go Back",
     "supplier_page_card_name_title":"Supplier name",
     "supplier_page_card_home_country_title":"Home Country",
-    "supplier_page_card_service_provieded_title":"Service Provied"
-
-
+    "supplier_page_card_service_provieded_title":"Service Provied",
+    "supplier_page_need_analysis_table_fcl_origin_title":"Origin",
+    "supplier_page_need_analysis_table_fcl_destination_title": "Destination",
+    "supplier_page_need_analysis_table_fcl_current_supplier_total_count": "Current Supplier (Total Count)",
+    "supplier_page_need_analysis_table_fcl_volume_served": "Volume Served (Total Containers)",
+    "supplier_page_need_analysis_table_fcl_evaluate": "Evaluate",
+    "supplier_page_need_analysis_table_trailer_origin_title":"Origin",
+    "supplier_page_need_analysis_table_trailer_destination_title": "Destination",
+    "supplier_page_need_analysis_table_trailer_current_supplier_total_count": "Current Supplier (Total Count)",
+    "supplier_page_need_analysis_table_trailer_volume_served": "Volume Served (Total Containers)",
+    "supplier_page_need_analysis_table_trailer_evaluate": "Evaluate",
+    "supplier_page_need_analysis_table_cha_location":"Location",
+    "supplier_page_need_analysis_table_cha_existing_count":"No. of Existing CHA",
+    "supplier_page_need_analysis_table_cha_evaluate": "Evaluate"
 }

@@ -3,7 +3,7 @@ import { chaColumns } from './servicewise-columns/cha-columns';
 import { fclColumns } from './servicewise-columns/fcl-columns';
 import { trailerColumns } from './servicewise-columns/trailer-controls';
 
-export const columns = ({ setShow, service_type, isForApproval }) => {
+export const columns = ({ t, setShow, service_type, isForApproval }) => {
 	const SERVICE_COLUMNS_MAPPING = {
 		fcl_freight             : fclColumns,
 		lcl_freight             : fclColumns,
@@ -21,5 +21,5 @@ export const columns = ({ setShow, service_type, isForApproval }) => {
 		fcl_cfs                 : cfsColumns,
 	};
 
-	return SERVICE_COLUMNS_MAPPING[service_type]({ setShow, service_type, isForApproval });
+	return SERVICE_COLUMNS_MAPPING[service_type]({ t, setShow, service_type, isForApproval });
 };

@@ -8,7 +8,7 @@ import useGetOrganizationServiceSuppliers from './hooks/useListOrganizationExper
 import styles from './styles.module.css';
 import { columns } from './utils/need-analysis-utils';
 
-function NeedAnalysis({ organization_id, service, getOrganizationService, service_type, id }) {
+function NeedAnalysis({ t, organization_id, service, getOrganizationService, service_type, id }) {
 	const ONE = 1;
 	const [currentPage, setCurrentPage] = useState(ONE);
 
@@ -44,7 +44,7 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 				!loadingSE && serviceExpertiseData
 				&& (
 					<Table
-						columns={columns({ setShow, service_type })}
+						columns={columns({ t, setShow, service_type })}
 						data={serviceExpertiseData}
 						className={styles.table}
 					/>

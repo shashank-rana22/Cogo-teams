@@ -1,6 +1,7 @@
 import { Stepper } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useGetOrganizationService from '../hooks/useGetOrganizationService';
@@ -15,6 +16,8 @@ import styles from './styles.module.css';
 import { items } from './utils/supplier-utils';
 
 function Supplier() {
+	const { t } = useTranslation(['governanceManager']);
+
 	const GOVERNANCE_MANAGER_ROLE_ID = '31fc7e90-84e0-4ffc-828c-ceaa87e5fa4f';
 	const GOVERNANCE_LEAD_ROLE_ID = 'ebafce31-75ef-4865-9060-775574e9606f';
 	const { id:roleId } = useSelector((s) => s?.profile?.auth_role_data);
@@ -33,16 +36,17 @@ function Supplier() {
 
 	return (
 		<div>
-			<h2>Governance Manager</h2>
-			<Item isSupplierPage item={supplierData} />
+			<h2>{t('main_page_title')}</h2>
+			<Item isSupplierPage item={supplierData} t={t} />
 			<Stepper
 				active={status}
 				setActive={() => {}}
-				items={items({ role })}
+				items={items({ role, t })}
 				className={styles.stepper}
 			/>
 			{{
 				need_analysis: <NeedAnalysis
+					t={t}
 					organization_id={supplierData?.organization_id}
 					service_type={supplierData?.service}
 					id={id}

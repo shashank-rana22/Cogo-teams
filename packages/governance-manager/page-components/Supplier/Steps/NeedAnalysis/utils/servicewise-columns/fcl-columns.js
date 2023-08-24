@@ -1,15 +1,21 @@
 import { Button } from '@cogoport/components';
 
-export const fclColumns = ({ setShow, service_type, isForApproval }) => {
+export const fclColumns = ({ t, setShow, service_type, isForApproval }) => {
 	const columns = 		[
-		{ Header: 'Origin', accessor: (row) => (<div>{row?.expertise_data?.origin_name}</div>) },
-		{ Header: 'Destination', accessor: (row) => (<div>{row?.expertise_data?.destination_name}</div>) },
 		{
-			Header   : 'Current Supplier (Total Count)',
+			Header   : t('supplier_page_need_analysis_table_fcl_origin_title'),
+			accessor : (row) => (<div>{row?.expertise_data?.origin_name}</div>),
+		},
+		{
+			Header   : t('supplier_page_need_analysis_table_fcl_destination_title'),
+			accessor : (row) => (<div>{row?.expertise_data?.destination_name}</div>),
+		},
+		{
+			Header   : t('supplier_page_need_analysis_table_fcl_current_supplier_total_count'),
 			accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),
 		},
 		{
-			Header   : 'Volume Served (Total Containers)',
+			Header   : t('supplier_page_need_analysis_table_fcl_volume_served'),
 			accessor : (row) => (<div>{row?.expertise_data?.total_volume_served?.total_teus}</div>),
 		},
 
@@ -23,7 +29,7 @@ export const fclColumns = ({ setShow, service_type, isForApproval }) => {
 					onClick={() => setShow({ ...row, service_type })}
 					disabled={row?.service_requirement}
 				>
-					Evaluate
+					{t('supplier_page_need_analysis_table_fcl_evaluate')}
 				</Button>
 			)
 			,

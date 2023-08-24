@@ -1,10 +1,13 @@
 import { Button } from '@cogoport/components';
 
-export const chaColumns = ({ setShow, service_type, isForApproval }) => {
+export const chaColumns = ({ t, setShow, service_type, isForApproval }) => {
 	const columns = 	[
-		{ Header: 'Location', accessor: (row) => (<div>{row?.expertise_data?.location_name}</div>) },
 		{
-			Header   : 'No. of Existing CHA',
+			Header   : t('supplier_page_need_analysis_table_cha_location'),
+			accessor : (row) => (<div>{row?.expertise_data?.location_name}</div>),
+		},
+		{
+			Header   : t('supplier_page_need_analysis_table_cha_existing_count'),
 			accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),
 		},
 	];
@@ -17,7 +20,7 @@ export const chaColumns = ({ setShow, service_type, isForApproval }) => {
 					onClick={() => setShow({ ...row, service_type })}
 					disabled={row?.service_requirement}
 				>
-					Evaluate
+					{t('supplier_page_need_analysis_table_cha_evaluate')}
 				</Button>
 			)
 			,
