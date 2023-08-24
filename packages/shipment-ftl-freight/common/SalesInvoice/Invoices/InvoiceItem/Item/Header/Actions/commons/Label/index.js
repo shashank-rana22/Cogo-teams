@@ -1,9 +1,10 @@
-function Label({ children, required }) {
+function Label(props) {
+	const { children, required } = props;
 	return (
 		<>
 			<span style={{ color: '#000' }}>{children}</span>
-			&nbsp;
-			{required ? <span style={{ color: '#000' }}>*</span> : null}
+			{' '}
+			{required ? <span style={{ color: '#EE3425' }}>*</span> : null}
 		</>
 	);
 }

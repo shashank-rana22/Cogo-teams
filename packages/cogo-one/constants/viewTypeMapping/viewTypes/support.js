@@ -18,6 +18,9 @@ const SUPPORT = {
 		observer : ['closed_session'],
 		all      : ['chat_tags'],
 	},
+	stats_feedback_count: ['no_of_quotation_send', 'no_of_bookings', 'customer_satisfaction_score',
+		'calls_made', 'calls_received', 'chats_assigned'],
+	to_show_agent_activity_graph  : true,
 	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
 	extra_side_bar_navs_access    : ['spot_search'],
 	get_accesible_assign_buttons  : getKamButtons,
@@ -26,7 +29,7 @@ const SUPPORT = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
-	group_agents_api_filter       : ['support'],
+	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,

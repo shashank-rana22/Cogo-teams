@@ -2,14 +2,13 @@ import { finalAmountInWords } from '../../../utils/numToWords';
 import { getLineItems, getAnnexureData } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
 
-function TableData({ customData = {}, importerExporterId }) {
+function TableData({ customData = {}, importerExporterId = '', billing_address = {} }) {
 	const {
 		total_value_of_supply,
 		total_taxable_value,
 		total_cgst_amount,
 		total_sgst_amount,
 		total_igst_amount,
-		total_other_charges_amount,
 		total_discount,
 		total,
 	} = getChargesData({ customData });
@@ -17,7 +16,9 @@ function TableData({ customData = {}, importerExporterId }) {
 	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
 		importerExporterId,
+		billing_address,
 	});
+	const { is_required_for_fortigo = false } = billing_address || {};
 	const { annexureItems = [], ANNEXURE_KEY_MAPPINGS = {} } = getAnnexureData({
 		customData,
 	});
@@ -31,7 +32,9 @@ function TableData({ customData = {}, importerExporterId }) {
 			>
 				<tr style={{ border: '2px solid black' }}>
 					<th style={{ border: '2px solid black' }} colSpan="2">
-						Fortigo Trip ID
+						{is_required_for_fortigo ? 'Fortigo Trip' : 'Shipment'}
+						{' '}
+						ID
 					</th>
 					<th style={{ border: '2px solid black' }} colSpan="2">
 						Truck Type & No.
@@ -107,9 +110,6 @@ function TableData({ customData = {}, importerExporterId }) {
 					<th style={{ border: '2px solid black' }} colSpan="2">
 						IGST
 					</th>
-					<th style={{ border: '2px solid black' }} rowSpan="2">
-						Other Charges
-					</th>
 					<th style={{ border: '2px solid black' }} rowSpan="2" colSpan="4">
 						TOTAL
 					</th>
@@ -182,9 +182,6 @@ function TableData({ customData = {}, importerExporterId }) {
 					<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 					<td style={{ border: '2px solid black' }}>
 						<b>{total_igst_amount}</b>
-					</td>
-					<td style={{ border: '2px solid black' }}>
-						<b>{total_other_charges_amount}</b>
 					</td>
 					<td style={{ border: '2px solid black' }} colSpan="4">
 						<b>{total}</b>
