@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 
 import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
 import BookingContent from '../../../../../../commons/BookingContent';
@@ -14,6 +14,7 @@ import ShippingPreferences from '../ShippingPreferences';
 import UnpreferredShippingLines from '../UnpreferredShippingLines';
 
 import styles from './styles.module.css';
+import useHandleAdditionalContent from './useHandleAdditionalContent';
 
 function ActiveComponent({
 	formProps = {},
@@ -72,32 +73,21 @@ function AdditionalContent({
 		possible_subsidiary_services = [],
 	} = useContext(CheckoutContext);
 
-	const [noRatesPresent, setNoRatesPresent] = useState(false);
-
 	const { primary_service = '', services = {}, trade_type = '', source_id: search_id } = detail || {};
 
-	const { source = '', services: rateServices = {}, source: rateSource = '' } = rate || {};
+	const { source = '' } = rate || {};
 
-	useEffect(() => {
-		setNoRatesPresent(false);
-
-		Object.values(rateServices).forEach((item) => {
-			const fclLocalEmpty = !item?.line_items?.length
-				&& [
-					'fcl_freight_local_service',
-					'fcl_freight_local',
-					'air_freight_local',
-				].includes(item?.service_type);
-
-			const noRatesFound = !item?.total_price_discounted
-			&& !(fclLocalEmpty && rateSource !== 'cogo_assured_rate')
-			&& item?.service_type !== primary_service;
-
-			if (noRatesFound) {
-				setNoRatesPresent(true);
-			}
-		});
-	}, [primary_service, rateServices, rateSource]);
+	const {
+		updateCheckoutServiceLoading,
+		onClickNextButton,
+		noRatesPresent,
+	} = useHandleAdditionalContent({
+		formProps,
+		updateCheckout,
+		cargoDetails,
+		detail,
+		rate,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -186,11 +176,11 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				agreeTandC={agreeTandC}
-				cargoDetails={cargoDetails}
-				formProps={formProps}
 				infoBanner={infoBanner}
 				setInfoBanner={setInfoBanner}
 				noRatesPresent={noRatesPresent}
+				updateCheckoutServiceLoading={updateCheckoutServiceLoading}
+				onClickNextButton={onClickNextButton}
 			/>
 		</div>
 	);
