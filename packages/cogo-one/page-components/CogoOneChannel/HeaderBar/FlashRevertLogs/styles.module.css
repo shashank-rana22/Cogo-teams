@@ -8,11 +8,3 @@
 		}
 	}
 }
-
-.button_container {
-	z-index: 9999;
-}
-
-.hide_button {
-	display: none;
-}

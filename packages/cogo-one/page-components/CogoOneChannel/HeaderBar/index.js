@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -5,8 +6,10 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
 import AgentConfig from './AgentConfig';
 import FlashRevertLogs from './FlashRevertLogs';
-import PunchInOut from './PunchInOut';
+import PunchInOut from './punchInOut';
+import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
+import usePunchInOut from './usePunchInOut';
 
 function HeaderBar({
 	firestore = {},
@@ -29,23 +32,84 @@ function HeaderBar({
 	const [timePeriodValue, setTimePeriodValue] = useState('day');
 	const [showDetails, setShowDetails] = useState(false);
 
+	const {
+		updateWorkPreference,
+		loading,
+		lastBreakTime,
+		status,
+		handlePunchIn,
+		agentStatsLoading,
+		agentStatsData,
+		setIsShaking,
+		shakeButton,
+		handlePunchOut,
+		isShaking,
+	} = usePunchInOut({
+		isPunchPresent,
+		timePeriodValue,
+		viewType,
+		fetchworkPrefernce: fetchWorkStatus,
+		agentTimeline,
+		firestore,
+		userId,
+		agentStatus,
+		data,
+	});
+
 	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
 	return (
-		<>
-			<div className={styles.container}>
-				<div className={styles.label_styles}>
-					{startCase(viewType)}
-					{' '}
-					View
+		<div className={styles.header_container}>
+			<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
+				{showDetails && (
+					<ShowMoreStats
+						setShowDetails={setShowDetails}
+						showDetails={showDetails}
+						updateWorkPreference={updateWorkPreference}
+						loading={loading}
+						punchedTime={lastBreakTime}
+						status={status}
+						handlePunchIn={handlePunchIn}
+						viewType={viewType}
+						agentStatsLoading={agentStatsLoading}
+						agentStatsData={agentStatsData}
+						timePeriodValue={timePeriodValue}
+						setTimePeriodValue={setTimePeriodValue}
+					/>
+				)}
+			</div>
+
+			<div
+				className={styles.navigation_bar}
+				style={{ justifyContent: showDetails ? 'center' : 'space-between' }}
+			>
+				<div className={cl`${styles.label_styles} ${showDetails ? styles.hide_section : ''}`}>
+					{`${startCase(viewType)} View`}
 				</div>
 
-				<div>
+				{isPunchPresent && !preferenceLoading && (
+					<PunchInOut
+						timelineLoading={timelineLoading}
+						preferenceLoading={preferenceLoading}
+						showDetails={showDetails}
+						setShowDetails={setShowDetails}
+						status={status}
+						setIsShaking={setIsShaking}
+						shakeButton={shakeButton}
+						handlePunchIn={handlePunchIn}
+						handlePunchOut={handlePunchOut}
+						loading={loading}
+						isShaking={isShaking}
+						lastBreakTime={lastBreakTime}
+					/>
+				)}
+
+				<div className={cl`${styles.configs} ${showDetails ? styles.hide_section : ''}`}>
 					{flashRevertLogs ? (
-						<FlashRevertLogs showDetails={showDetails} />
+						<FlashRevertLogs />
 					) : null}
 
-					{!isEmpty(configurationsToBeShown) && (
+					{(!isEmpty(configurationsToBeShown) || initialViewType === 'cogoone_admin') && (
 						<AgentConfig
 							firestore={firestore}
 							configurationsToBeShown={configurationsToBeShown}
@@ -57,25 +121,7 @@ function HeaderBar({
 					)}
 				</div>
 			</div>
-			{isPunchPresent && !preferenceLoading && (
-				<PunchInOut
-					fetchworkPrefernce={fetchWorkStatus}
-					agentStatus={agentStatus}
-					data={data}
-					agentTimeline={agentTimeline}
-					preferenceLoading={preferenceLoading}
-					timelineLoading={timelineLoading}
-					viewType={viewType}
-					timePeriodValue={timePeriodValue}
-					setTimePeriodValue={setTimePeriodValue}
-					firestore={firestore}
-					userId={userId}
-					isPunchPresent={isPunchPresent}
-					showDetails={showDetails}
-					setShowDetails={setShowDetails}
-				/>
-			)}
-		</>
+		</div>
 	);
 }
 

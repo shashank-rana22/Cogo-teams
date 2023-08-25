@@ -1,10 +1,10 @@
 import { Select, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import { TIMELINE_FILTER_OPTIOINS } from '../../../../../../configurations/agent-wise-feedback-mapping';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
-import useListAgentCheckout from '../../../../../../hooks/useListAgentCheckout';
-import useListAssignedChats from '../../../../../../hooks/useListAssignedChats';
+import { TIMELINE_FILTER_OPTIOINS } from '../../../../../configurations/agent-wise-feedback-mapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
+import useListAgentCheckout from '../../../../../hooks/useListAgentCheckout';
+import useListAssignedChats from '../../../../../hooks/useListAssignedChats';
 
 import AgentActivityGraph from './AgentActivitiesGraph';
 import Stats from './Stats';

@@ -132,7 +132,12 @@ function ConfigModal({
 							{AGENT_CONFIG_MAPPING.map((item) => {
 								const { label = '', name = '', icon = {} } = item || {};
 
-								if (!configurationsToBeShown.includes(name) && initialViewType !== 'cogoone_admin') {
+								const toShowConfig = (
+									configurationsToBeShown.includes(name)
+									|| (initialViewType === 'cogoone_admin' && name === 'switch_views')
+								);
+
+								if (!toShowConfig) {
 									return null;
 								}
 

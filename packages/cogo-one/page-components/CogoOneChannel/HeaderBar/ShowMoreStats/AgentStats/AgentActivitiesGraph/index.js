@@ -1,7 +1,7 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import formatData from '../../../../../../../helpers/formatGraphData';
+import formatData from '../../../../../../helpers/formatGraphData';
 
 import GraphLoader from './GraphLoader';
 import styles from './styles.module.css';
