@@ -44,22 +44,20 @@
 }
 
 .message_icon_styles {
-	margin-right: 4px;
-	cursor: pointer;
+	margin-right: 10px;
 }
 
 .copy_icon {
-	width: 21px;
-	height: 21px;
-	margin-right: 4px;
-	cursor: pointer;
-	fill: #9f9f9f;
+	margin-right: 8px;
 }
 
 .poc_details {
-	width: 21px;
-	height: 21px;
-	margin-right: 4px;
+	margin-right: 10px;
+}
+
+.common_style {
+	width: 20px;
+	height: 20px;
 	cursor: pointer;
 	fill: #9f9f9f;
 }

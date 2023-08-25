@@ -1,0 +1,12 @@
+.modal_styles {
+	width: 900px !important;
+
+	:global {
+		.ui_modal_body_container {
+			min-height: 472px;
+			padding: 0;
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+	}
+}
