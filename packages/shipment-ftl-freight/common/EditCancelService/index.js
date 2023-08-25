@@ -23,9 +23,6 @@ import { getActionButtons } from './utils/actions';
 
 const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
-const EXCLUDED_STATES = ['cn_requested', 'revoked'];
-const INVOICE_REQUIRED_STATES = ['pending', 'amendment_requested'];
-
 export const getTrucklistWithId = (all_services) => {
 	const servicesList = (all_services || []).filter(
 		(service) => service?.service_type !== 'subsidiary_service' && service?.truck_number,
@@ -80,7 +77,7 @@ export const getEtaEtdList = (all_services) => {
 	return etaEtdList;
 };
 
-function EditCancelService({ serviceData = {}, invoicing_parties = [] }) {
+function EditCancelService({ serviceData = {} }) {
 	const { state, trade_type, service_type } = serviceData?.[DEFAULT_INDEX] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
@@ -107,30 +104,19 @@ function EditCancelService({ serviceData = {}, invoicing_parties = [] }) {
 	const isTruckPresent =	!isEmpty(truckList || [])
 		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
 
-	const filteredInvoices = invoicing_parties?.filter(
-		(item) => !EXCLUDED_STATES.includes(item.status),
-	);
-	let enableConsolidations = false;
-
-	if (!isEmpty(filteredInvoices)) {
-		enableConsolidations =	filteredInvoices?.every((invoice) => INVOICE_REQUIRED_STATES.includes(invoice?.status));
-	}
-
 	const actionButtons = getActionButtons({
 		shipment_data,
 		user_data,
 		state,
 		activeStakeholder,
 		isTruckPresent,
-		enableConsolidations,
+		enableConsolidations: true,
 		stakeholderConfig,
 	});
 
 	if (!(actionButtons || []).some((actionButton) => actionButton.show)) {
 		return null;
 	}
-
-	const showEdit = isTruckPresent || enableConsolidations;
 
 	const content = (actionButtons || []).map((action) => {
 		const { label = '', value = '', show = false } = action || {};
@@ -158,9 +144,7 @@ function EditCancelService({ serviceData = {}, invoicing_parties = [] }) {
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
 			>
-				{showEdit
-					? <IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
-					: null}
+				<IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 			</Popover>
 
 			{showModal === 'supplier_reallocation'
