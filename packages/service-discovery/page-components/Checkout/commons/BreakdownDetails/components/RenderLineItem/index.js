@@ -11,8 +11,9 @@ import ServiceMargin from './ServiceMargin';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
-
 const ROUND_OFF_VALUE = 2;
+const ONE = 1;
+const PERCENT_VALUE = 100;
 
 function RenderLineItem({
 	lineItem = {},
@@ -44,15 +45,29 @@ function RenderLineItem({
 		code = '',
 	} = lineItem;
 
-	const { id:itemId = '' } = item;
+	const { id:itemId = '', service_type = '' } = item;
+
+	const { auto_promocode = {} } = rate || {};
+
+	const { promotion_data = {} } = auto_promocode || {};
+
+	const { promotion_discounts = [], services = [], description = '' } = promotion_data || {};
+
+	const { value = 0, unit: promotionUnit = '' } = promotion_discounts?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	const isautoDiscountApplicable = promotionUnit === 'percentage'
+	&& value
+	&& services.includes(service_type)
+	&& code === 'BAS';
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_checkout_customize_quotation',
 	}, { manual: true });
 
-	const buy_price = total_price_discounted
-		- (margins.find((marginObj) => marginObj?.margin_type === 'demand')?.total_margin_value || DEFAULT_VALUE);
+	const buy_price = (total_price_discounted
+		- (margins.find((marginObj) => marginObj?.margin_type === 'demand')?.total_margin_value || DEFAULT_VALUE))
+		* (isautoDiscountApplicable ? ONE - value / PERCENT_VALUE : ONE);
 
 	const displayBuyPrice = formatAmount({
 		amount  : Number(buy_price),
@@ -66,7 +81,6 @@ function RenderLineItem({
 
 	const onChangeLineItem = ({
 		selectedValue,
-		setShowPopover = () => {},
 		lineItemKey,
 	}) => {
 		setRateDetails((prev) => prev.map((service, index) => {
@@ -90,8 +104,6 @@ function RenderLineItem({
 			}
 			return service;
 		}));
-
-		setShowPopover(false);
 	};
 
 	const handleDelete = async () => {
@@ -162,6 +174,9 @@ function RenderLineItem({
 				filteredMargins={filteredMargins}
 				item={lineItem}
 				onChangeLineItem={onChangeLineItem}
+				isautoDiscountApplicable={isautoDiscountApplicable}
+				description={description}
+				promotion_discounts={promotion_discounts?.[GLOBAL_CONSTANTS.zeroth_index]}
 				shouldEditMargin={
 					(shouldEditMargin
 						&& isServiceMarginAllowedRate

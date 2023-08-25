@@ -20,6 +20,7 @@
 		.ui_accordion_content {
 			width: 100%;
 			padding: 8px 0 !important;
+			overflow: unset !important;
 			background-color: #f3f3f3 !important;
 		}
 
