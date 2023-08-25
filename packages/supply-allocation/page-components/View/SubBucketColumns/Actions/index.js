@@ -25,7 +25,7 @@ function Actions({
 					content={(
 						<div className={styles.options}>
 							<Button
-								themeType="primary"
+								themeType="secondary"
 								className={styles.btn}
 								onClick={() => { setShowMoveSupplierModal((prev) => !prev); setShowPopOver(false); }}
 							>

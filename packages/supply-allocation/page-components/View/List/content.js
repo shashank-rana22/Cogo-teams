@@ -43,17 +43,17 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 		},
 		{
 			component : <div>{startCase(bucket_type)}</div>,
-			flexBasis : '15%',
+			flexBasis : '10%',
 			key       : 'bucket_name',
 		},
 		{
 			component : <div>{suppliers_count}</div>,
-			flexBasis : '10%',
+			flexBasis : '12.5%',
 			key       : 'supplier_count',
 		},
 		{
 			component : <div>{allocation_percentage}</div>,
-			flexBasis : '10%',
+			flexBasis : '12.5%',
 			key       : 'allocation_percent',
 		},
 		{
@@ -120,13 +120,17 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 			</div>
 
 			{show ? (
-				<>
+				<div
+					style={{
+						background: '#f9f9f9',
+					}}
+				>
 					<div
 						style={{
 							display        : 'flex',
 							justifyContent : 'flex-end',
-							background     : '#fff',
-							padding        : '10px 10px 0 10px',
+
+							padding: '20px 20px 10px 10px',
 
 						}}
 					>
@@ -148,7 +152,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 						</Button>
 					</div>
 
-					<div style={{ padding: '10px 0', background: '#fff', marginBottom: '10px' }}>
+					<div style={{ padding: '10px 0', background: '#f9f9f9', marginBottom: '10px' }}>
 						<BucketTable
 							control={control}
 							unregister={unregister}
@@ -159,7 +163,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 							bulkEditMode={bulkEditMode}
 						/>
 					</div>
-				</>
+				</div>
 			) : null}
 
 			{showWarning ? (

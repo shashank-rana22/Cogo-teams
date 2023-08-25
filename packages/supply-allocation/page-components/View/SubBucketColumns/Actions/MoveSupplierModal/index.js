@@ -10,6 +10,18 @@ import styles from './styles.module.css';
 
 const LENGTH_TO_PREFILL = 1;
 
+const WARNING_SUB_TEXT = 'You are about to move a supplier to a new bucket.'
+	+ ' This will affect the general allocation decided for each bucket.';
+
+function Header({ short_name = '' }) {
+	return (
+		<>
+			<div style={{ fontSize: '18px' }}>{ short_name}</div>
+			<div style={{ fontSize: '12px', color: 'red' }}>{ WARNING_SUB_TEXT}</div>
+		</>
+	);
+}
+
 function MoveSupplierModal({
 	showMoveSupplierModal = false,
 	setShowMoveSupplierModal = () => {},
@@ -38,18 +50,18 @@ function MoveSupplierModal({
 
 	return (
 		<Modal
-			size="md"
+			size="lg"
 			show={showMoveSupplierModal}
 			onClose={() => setShowMoveSupplierModal(false)}
-			placement="top"
 			className={styles.modal_container}
+			placement="top"
 		>
-			<Modal.Header title={short_name} />
+			<Modal.Header title={<Header short_name={short_name} />} />
 
 			<Modal.Body>
 				<div className={styles.container}>
 					<div>
-						<div>
+						<div style={{ marginBottom: '20px' }}>
 							Current Bucket :
 							<div style={{ height: '32px' }}>{startCase(bucket_type)}</div>
 						</div>
@@ -102,16 +114,17 @@ function MoveSupplierModal({
 						disabled={loading}
 						onClick={() => setShowMoveSupplierModal(false)}
 					>
-						No
+						Cancel
 					</Button>
 
 					<Button
 						type="button"
+						themeType="accent"
 						className={styles.extend_button}
 						loading={loading}
 						onClick={handleSubmit(onClickSubmit)}
 					>
-						Yes
+						Confirm
 					</Button>
 				</div>
 			</Modal.Footer>

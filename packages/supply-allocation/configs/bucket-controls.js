@@ -5,15 +5,15 @@ export const bucketControls = [
 	},
 	{
 		title     : 'Bucket',
-		flexBasis : '15%',
+		flexBasis : '10%',
 	},
 	{
 		title     : 'Supplier count',
-		flexBasis : '10%',
+		flexBasis : '12.5%',
 	},
 	{
 		title     : 'Allocation %',
-		flexBasis : '10%',
+		flexBasis : '12.5%%',
 	},
 	{
 		title     : 'Current Container Allocation',

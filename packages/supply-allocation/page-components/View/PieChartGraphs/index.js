@@ -33,7 +33,7 @@ function PieChartGraphs({
 					display : 'flex',
 					gap     : '16px',
 					width   : '100%',
-					height  : '450px',
+					height  : '300px',
 				}}
 			>
 				{[...Array(ARRAY_LENGTH).keys()].map((key) => (
