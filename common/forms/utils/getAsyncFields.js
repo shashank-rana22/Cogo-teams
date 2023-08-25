@@ -104,7 +104,6 @@ function asyncFieldsOperators() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
 		},
 	};
 }
