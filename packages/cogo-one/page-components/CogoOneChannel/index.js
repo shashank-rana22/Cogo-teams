@@ -188,6 +188,7 @@ function CogoOne() {
 								activeTab={activeTab}
 								viewType={viewType}
 								setActiveTab={setActiveTab}
+								mailProps={mailProps}
 							/>
 						</div>
 					) : (

@@ -33,6 +33,7 @@ function ListShipmentCards({
 	showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
+	mailProps = {},
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -62,12 +63,13 @@ function ListShipmentCards({
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				mailProps={mailProps}
 			/>
 		),
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false }) {
+function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
@@ -146,6 +148,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								showPopover={showPopover}
 								setShowPocModal={setShowPocModal}
 								showAddPrimaryUserButton={showAddPrimaryUserButton}
+								mailProps={mailProps}
 							/>
 						)}
 				</div>

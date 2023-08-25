@@ -51,6 +51,7 @@ function ShipmentCard({
 	showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
+	mailProps = {},
 }) {
 	const {
 		serial_id = '',
@@ -70,6 +71,7 @@ function ShipmentCard({
 					setShowPocDetails={setShowPocDetails}
 					setActiveTab={setActiveTab}
 					handleShipmentChat={handleShipmentChat}
+					mailProps={mailProps}
 				/>
 			</div>
 		);

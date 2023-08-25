@@ -17,6 +17,7 @@ function EmptyChatPage({
 	activeTab = {},
 	viewType = '',
 	setActiveTab = () => {},
+	mailProps = {},
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
@@ -27,6 +28,7 @@ function EmptyChatPage({
 			<ShipmentsHomePage
 				setActiveTab={setActiveTab}
 				showAddPrimaryUserButton={showShipments}
+				mailProps={mailProps}
 			/>
 		);
 	}

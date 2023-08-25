@@ -30,6 +30,8 @@
 }
 
 .toggle {
+	min-width: 172px;
+
 	div {
 		color: #000;
 	}
