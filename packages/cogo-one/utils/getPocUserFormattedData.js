@@ -21,7 +21,7 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 		stakeholder_type    : Object.keys(userDetails || {}).includes('processes') ? processes : [stakeholder_type],
 		mobileNumber        : mobileNumber || mobile_number,
 		mobile_country_code : mobile_country_code || pocMobileCountryCode,
-		userId              : userId || id,
+		userId,
 		email               : userEmail || email,
 		trade_type,
 		chatOption          : chat_option,

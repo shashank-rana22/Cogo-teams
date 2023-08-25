@@ -1,9 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import React, { useState } from 'react';
 
-import CommunicationModal from '../../../../../../common/CommunicationModal';
 import getAllPocMergedData from '../../../../../../helpers/getAllPocMergedData';
 import useListShipmentStakeholders from '../../../../../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../../../../../hooks/useListShipmentTradePartners';
@@ -30,21 +28,15 @@ function PocContainer({
 	setShowPocDetails = () => {},
 	showPocDetails = {},
 	setActiveTab = () => {},
+	mailProps = {},
 }) {
-	const [modalData, setModalData] = useState({});
 	const { id = '' } = showPocDetails;
 
 	const { stakeHoldersData = [], loading } = useListShipmentStakeholders({ shipmentId: id });
 
 	const { tradePartnersLoading = false, tradePartnersData = [] } = useListShipmentTradePartners({ shipmentId: id });
 
-	const { modalType = '', userData = {} } = modalData || {};
-
 	const allPocMergedData = getAllPocMergedData({ tradePartnersData, stakeHoldersData, showPocDetails });
-
-	const closeModal = () => {
-		setModalData(null);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -84,21 +76,10 @@ function PocContainer({
 						<PocUser
 							stakeHoldersData={allPocMergedData}
 							setActiveTab={setActiveTab}
-							setModalData={setModalData}
+							mailProps={mailProps}
 						/>
 					)}
 			</div>
-
-			{modalType && (
-				<CommunicationModal
-					modalType={modalType}
-					closeModal={closeModal}
-					activeCardData={{ userId: userData?.id }}
-					userData={{
-						email: userData?.email,
-					}}
-				/>
-			)}
 		</div>
 	);
 }
