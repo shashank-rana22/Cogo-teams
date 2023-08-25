@@ -1,11 +1,26 @@
 import { Button, Modal } from '@cogoport/components';
-import { InputController, SelectController, useForm } from '@cogoport/forms';
+import { InputNumberController, SelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import useUpdateFclFreightAllocation from '../../../../../hooks/useUpdateFclFreightAllocation';
 
 import styles from './styles.module.css';
+
+const LENGTH_TO_PREFILL = 1;
+
+const WARNING_SUB_TEXT = 'You are about to move a supplier to a new bucket.'
+	+ ' This will affect the general allocation decided for each bucket.';
+
+function Header({ short_name = '' }) {
+	return (
+		<>
+			<div style={{ fontSize: '18px' }}>{ short_name}</div>
+			<div style={{ fontSize: '12px', color: 'red' }}>{ WARNING_SUB_TEXT}</div>
+		</>
+	);
+}
 
 function MoveSupplierModal({
 	showMoveSupplierModal = false,
@@ -21,7 +36,8 @@ function MoveSupplierModal({
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateFclFreightAllocation, loading } =		useUpdateFclFreightAllocation();
+	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation();
+
 	const onClickSubmit = (values) => {
 		const payload = {
 			service_provider_id,
@@ -31,20 +47,21 @@ function MoveSupplierModal({
 		};
 		updateFclFreightAllocation({ payload });
 	};
+
 	return (
 		<Modal
-			size="md"
+			size="lg"
 			show={showMoveSupplierModal}
 			onClose={() => setShowMoveSupplierModal(false)}
-			placement="top"
 			className={styles.modal_container}
+			placement="top"
 		>
-			<Modal.Header title={short_name} />
+			<Modal.Header title={<Header short_name={short_name} />} />
 
 			<Modal.Body>
 				<div className={styles.container}>
 					<div>
-						<div>
+						<div style={{ marginBottom: '20px' }}>
 							Current Bucket :
 							<div style={{ height: '32px' }}>{startCase(bucket_type)}</div>
 						</div>
@@ -72,10 +89,12 @@ function MoveSupplierModal({
 							placeholder="Select Below"
 							size="sm"
 							options={bucketOptions}
+							{...(bucketOptions.length === LENGTH_TO_PREFILL
+								? { value: bucketOptions[GLOBAL_CONSTANTS.zeroth_index].value } : {})}
 						/>
 
 						<div>New Promised</div>
-						<InputController
+						<InputNumberController
 							name="promised_containers"
 							isClearable
 							label="Select Origin SeaPort"
@@ -95,16 +114,17 @@ function MoveSupplierModal({
 						disabled={loading}
 						onClick={() => setShowMoveSupplierModal(false)}
 					>
-						No, Don&apos;t
+						Cancel
 					</Button>
 
 					<Button
 						type="button"
+						themeType="accent"
 						className={styles.extend_button}
 						loading={loading}
 						onClick={handleSubmit(onClickSubmit)}
 					>
-						Yes, Change
+						Confirm
 					</Button>
 				</div>
 			</Modal.Footer>

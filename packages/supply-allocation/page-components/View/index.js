@@ -1,7 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import { useEffect, Fragment } from 'react';
-
-import useListFclSearchesView from '../../hooks/useListFclSearchesView';
+import { Fragment } from 'react';
 
 import Header from './Header';
 import List from './List';
@@ -13,25 +11,12 @@ function View() {
 	const { query = {} } = general;
 	const { search_id } = query;
 
-	const { data, findFclSearch, loading } = useListFclSearchesView({});
-
-	useEffect(() => {
-		findFclSearch(search_id);
-	}, [findFclSearch, search_id]);
-
-	const { list = [] } = data || {};
-	const [firstSearch = {}] = list || [];
-
-	const { origin_location_id = '', destination_location_id = '' } =		firstSearch || {};
-
 	return (
 		<Fragment key={search_id}>
-			<Header firstSearch={firstSearch} loading={loading} />
+			<Header searchId={search_id} />
 
 			<PieChartGraphs
-				originLocationId={origin_location_id}
-				destinationLocationId={destination_location_id}
-				listApiLoading={loading}
+				searchId={search_id}
 			/>
 
 			<List search_id={search_id} />

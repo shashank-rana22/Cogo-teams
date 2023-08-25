@@ -26,6 +26,7 @@
 	max-width: 250px;
 	padding: 0 20px;
 	overflow: hidden;
+	font-size: 18px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -46,6 +47,7 @@
 	max-width: 250px;
 	padding: 0 20px;
 	overflow: hidden;
+	font-size: 18px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

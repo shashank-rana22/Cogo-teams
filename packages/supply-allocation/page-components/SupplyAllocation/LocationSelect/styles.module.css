@@ -1,7 +1,6 @@
 .location_container {
 	display: flex;
-	align-items: center;
-	margin-top: 30px;
+	align-items: flex-end;
 }
 
 .select_controller {
@@ -38,12 +37,9 @@
 
 .port_arrow_icon {
 	padding: 0 20px;
-	margin-top: 20px;
 }
 
 .select_container {
-	margin-top: 20px;
-
 	:global {
 		.ui_select_container {
 			width: 200px;

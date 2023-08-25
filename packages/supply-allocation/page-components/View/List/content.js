@@ -8,6 +8,8 @@ import CustomProgressBar from '../../../commons/CustomProgressBar';
 import useBulkUpdateFclFreightAllocation from '../../../hooks/useBulkUpdateFclFreightAllocation';
 import BucketTable from '../BucketsTable';
 
+import WarningModal from './WarningModal';
+
 function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 	const {
 		bucket_type,
@@ -20,6 +22,9 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 	} = item;
 
 	const [show, setShow] = useState(false);
+	const [bulkEditMode, setBulkEditMode] = useState(false);
+	const [showWarning, setShowWarning] = useState(false);
+
 	const formProps = useForm();
 
 	const { control, unregister, formState, handleSubmit } = formProps;
@@ -38,17 +43,17 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 		},
 		{
 			component : <div>{startCase(bucket_type)}</div>,
-			flexBasis : '15%',
+			flexBasis : '10%',
 			key       : 'bucket_name',
 		},
 		{
 			component : <div>{suppliers_count}</div>,
-			flexBasis : '10%',
+			flexBasis : '12.5%',
 			key       : 'supplier_count',
 		},
 		{
 			component : <div>{allocation_percentage}</div>,
-			flexBasis : '10%',
+			flexBasis : '12.5%',
 			key       : 'allocation_percent',
 		},
 		{
@@ -76,6 +81,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 			key       : 'past_container_allocation',
 		},
 	];
+
 	const { bulkUpdateFclFreightAllocation, bulkUpdateLoading } = useBulkUpdateFclFreightAllocation();
 
 	const onClickSaveChanges = (values) => {
@@ -94,7 +100,7 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 
 	return (
 		<>
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', background: '#fff' }}>
 				{bucketControls.map(({ component, flexBasis, key }) => (
 					<div
 						key={key}
@@ -113,37 +119,60 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 				))}
 			</div>
 
-			{!isEmpty(dirtyFields) ? (
+			{show ? (
 				<div
 					style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						marginTop      : '20px',
-						opacity        : !isEmpty(dirtyFields) ? '1' : '0',
-						...(isEmpty(dirtyFields) ? { pointerEvents: 'none' } : {}),
+						background: '#f9f9f9',
 					}}
 				>
-					<div>Add New Allocation</div>
-					<Button
-						onClick={handleSubmit(onClickSaveChanges)}
-						themeType="secondary"
-						loading={bulkUpdateLoading}
+					<div
+						style={{
+							display        : 'flex',
+							justifyContent : 'flex-end',
+
+							padding: '20px 20px 10px 10px',
+
+						}}
 					>
-						Save Changes
-					</Button>
+						<Button
+							style={{ marginRight: '10px' }}
+							size="md"
+							onClick={() => { setShowWarning(true); }}
+							themeType="secondary"
+						>
+							Edit Allocation
+						</Button>
+						<Button
+							onClick={handleSubmit(onClickSaveChanges)}
+							themeType="primary"
+							loading={bulkUpdateLoading}
+							disabled={isEmpty(dirtyFields)}
+						>
+							Save Changes
+						</Button>
+					</div>
+
+					<div style={{ padding: '10px 0', background: '#f9f9f9', marginBottom: '10px' }}>
+						<BucketTable
+							control={control}
+							unregister={unregister}
+							id={search_id}
+							current_allocated_containers={current_allocated_containers}
+							bucket_type={bucket_type}
+							bucketsArray={bucketsArray}
+							bulkEditMode={bulkEditMode}
+						/>
+					</div>
 				</div>
 			) : null}
 
-			{show ? (
-				<BucketTable
-					control={control}
-					unregister={unregister}
-					id={search_id}
-					current_allocated_containers={current_allocated_containers}
-					bucket_type={bucket_type}
-					bucketsArray={bucketsArray}
+			{showWarning ? (
+				<WarningModal
+					show={showWarning}
+					setShowWarning={setShowWarning}
+					setBulkEditMode={setBulkEditMode}
 				/>
-			) : null}
+			) : (null)}
 		</>
 	);
 }

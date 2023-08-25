@@ -13,6 +13,7 @@ function BucketTable({
 	unregister = () => {},
 	bucketsArray = [],
 	current_allocated_containers = 0,
+	bulkEditMode = false,
 }) {
 	const { data, loading } = useGetRollingForecastBucketData({
 		id,
@@ -31,6 +32,7 @@ function BucketTable({
 		bucket_type,
 		current_allocated_containers,
 		rollingFclFreightSearchId: id,
+		bulkEditMode,
 	});
 
 	return (
