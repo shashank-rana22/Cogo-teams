@@ -7,7 +7,6 @@
     "service_fcl_customs_title": "FCL Customs",
     "service_lcl_customs_title": "LCL Customs",
     "service_fcl_cfs_title": "FCL CFS",
-
     "main_page_title": "Governance Manager",
     "main_page_stats_pending_title":"Suppliers Pending",
     "main_page_stats_onboarded_title":"Suppliers Onboarded",
@@ -18,12 +17,10 @@
     "main_page_filter_tabs_organization_approval":"Supplier Approval",
     "main_page_filter_tabs_contract_and_sla":"Contract & SLA",
     "main_page_no_data_found":"No Data Found",
-  
     "supplier_page_card_go_back_btn_title":"Go Back",
     "supplier_page_card_name_title":"Supplier name",
     "supplier_page_card_home_country_title":"Home Country",
     "supplier_page_card_service_provieded_title":"Service Provied",
-
     "supplier_page_need_analysis_table_fcl_origin_title":"Origin",
     "supplier_page_need_analysis_table_fcl_destination_title": "Destination",
     "supplier_page_need_analysis_table_fcl_current_supplier_total_count": "Current Supplier (Total Count)",
@@ -70,7 +67,6 @@
     "supplier_page_market_feedback_email_controls_email_required": "Email is Required",    
     "supplier_page_market_feedback_email_controls_email_required_message": "Email is Required",    
     "supplier_page_market_feedback_layout_field_array_add_more": "+ Add More",    
-
     "supplier_page_supplier_approval_title": "Supplier Approval",    
     "supplier_page_supplier_approval_submit_button_label": "Submit",    
     "supplier_page_supplier_approval_item_verified_label": "Verified",    
@@ -87,7 +83,6 @@
     "supplier_page_supplier_approval_report_financial_due_diligence_label": "Financeial Due Diligence Report",    
     "supplier_page_supplier_approval_modal_need_analysis_title": "Need Analysis Report",    
     "supplier_page_supplier_approval_modal_evaluation_parameter_title": "Verify",    
-
     "supplier_page_contract_sla_title": "Contract & SLA",    
     "supplier_page_contract_sla_renegotiate_button_label": "Renegotiate",    
     "supplier_page_contract_sla_save_and_do_it_later_button_label": "Save & Do It Later",    
@@ -100,7 +95,6 @@
     "supplier_page_contract_sla_step2_original_label": "Original Value",    
     "supplier_page_contract_sla_step2_updated_label": "Updated Value",    
     "supplier_page_contract_sla_step2_confirm_button_label": "Confirm",
-    
     "supplier_page_supplier_evaluation_table_heading": "Supplier Evaluation",
     "supplier_page_supplier_evaluation_table_bl_delivery": "Will They provide BL delivery via Courier or Runner ?",
     "supplier_page_supplier_evaluation_table_basic_consignee_mbl": "Agress to Act Basic Consignee MBL with Us?",

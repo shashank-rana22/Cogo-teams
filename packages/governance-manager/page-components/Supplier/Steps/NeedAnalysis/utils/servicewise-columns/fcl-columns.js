@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
+import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 
 export const fclColumns = ({ t, setShow, service_type, isForApproval }) => {
 	const columns = 		[
@@ -34,6 +35,32 @@ export const fclColumns = ({ t, setShow, service_type, isForApproval }) => {
 			)
 			,
 		});
+	} else {
+		columns.push(
+			{
+				id       : 'service_requirement',
+				Header   : () => (<div style={{ textAlign: 'center' }}>Service Requirement</div>),
+				accessor : (row) => (
+					<div style={{ textAlign: 'center' }}>
+						{row?.service_requirement === 'yes' ? <IcCFtick /> : <IcCFcrossInCircle />}
+					</div>
+				),
+			},
+		);
+		columns.push(
+			{
+				Header   : 'Feedback',
+				accessor : (row) => (
+					<div>
+						<Tooltip content={row?.feedback}>
+							<Button size="sm" themeType="secondary">
+								View
+							</Button>
+						</Tooltip>
+					</div>
+				),
+			},
+		);
 	}
 	return columns;
 };
