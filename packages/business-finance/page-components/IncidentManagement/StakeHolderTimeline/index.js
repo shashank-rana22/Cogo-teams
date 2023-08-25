@@ -39,7 +39,7 @@ function StakeHolderTimeline({ timeline = [] }) {
 							</div>
 							<div
 								className={styles.status}
-								style={{ background: STATUS_COLOR_MAPPING[item?.status] }}
+								style={{ background: STATUS_COLOR_MAPPING[item?.status || 'PENDING'] }}
 							>
 								{item?.status || 'PENDING'}
 							</div>
