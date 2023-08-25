@@ -1,56 +1,51 @@
+import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
+
+import useGetMonthlySummary from '../../../hooks/useGetMonthlySummary';
+import { MONTHLY_SUMMARY_CONFIGS } from '../../../utils/constants';
+import { getDecimalValue } from '../../../utils/getDecimalValue';
 
 import styles from './styles.module.css';
 
-const data = [
-	{
-		label : 'Days Present',
-		key   : 'days_present',
-	},
-	{
-		label : 'Days Absent',
-		key   : 'days_absent',
-	},
-	{
-		label : 'Leave Taken',
-		key   : 'leave_taken',
-	},
-	{
-		label : 'Weekly Off',
-		key   : 'weekly_off',
-	},
-	{
-		label : 'Holiday',
-		key   : 'holiday',
-	},
-	{
-		label : 'Invalid Records',
-		key   : 'invalid_records',
-	},
-	{
-		label : 'Total Hours',
-		key   : 'total_hours',
-	},
-	{
-		label : 'Total Deviation',
-		key   : 'total_deviation',
-	},
-];
+function Summary({ cycle = '' }) {
+	const { loading, data = {} } = useGetMonthlySummary(cycle);
 
-function Summary() {
+	function GetData({ val }) {
+		if (loading) {
+			return <Placeholder height="30px" width="100px" />;
+		}
+
+		const value = data[val.key];
+
+		if (val.showHrs) {
+			const sign = value?.charAt(GLOBAL_CONSTANTS.zeroth_index);
+			const className = sign === '-' ? 'negative_deviation' : 'positive_deviation';
+			return (
+				<div className={val.showColor && styles[className]}>
+					{value}
+					{' '}
+					Hrs
+				</div>
+			);
+		}
+
+		return getDecimalValue(value);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
 				Monthly Summary
 			</div>
 			<div className={styles.summary_container}>
-				{data.map((val) => (
+				{MONTHLY_SUMMARY_CONFIGS.map((val) => (
 					<div key={val.key} className={styles.item}>
 						<div className={styles.label}>
 							{val.label}
 						</div>
 						<div className={styles.num_value}>
-							0
+							<GetData val={val} />
 						</div>
 					</div>
 				))}

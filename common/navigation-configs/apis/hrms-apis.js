@@ -649,6 +649,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_cycle_ids',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_timesheet',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

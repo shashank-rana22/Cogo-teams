@@ -36,6 +36,52 @@
 .attendance_dot {
 	width: 8px;
 	height: 8px;
-	background-color: #abcd62;
 	border-radius: 50%;
+}
+
+.present {
+	color: #abcd62;
+	background-color: #abcd62;
+}
+
+.absent {
+	color: #ee3425;
+	background-color: #ee3425;
+}
+
+.weekly_off {
+	color: #f68b21;
+	background-color: #f68b21;
+}
+
+.invalid {
+	color: #e0e0e0;
+	background-color: #e0e0e0;
+}
+
+.present_color {
+	color: #abcd62;
+}
+
+.absent_color {
+	color: #ee3425;
+}
+
+.weekly_off_color {
+	color: #f68b21;
+}
+
+.invalid_color {
+	color: #e0e0e0;
+}
+
+.hda {
+	width: 8px;
+	height: 8px;
+	background:
+		conic-gradient(
+			from 0deg,
+			#abcd62 0deg 180deg,
+			#ee3425 180deg 360deg
+		);
 }

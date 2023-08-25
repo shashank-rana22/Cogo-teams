@@ -31,22 +31,6 @@
 	margin: 20px 0;
 }
 
-.line_1 {
-	background-color: #abcd62;
-}
-
-.line_2 {
-	background-color: #ee3425;
-}
-
-.line_3 {
-	background-color: #888fd1;
-}
-
-.line_4 {
-	background-color: #f68b21;
-}
-
 .flex {
 	display: flex;
 	align-items: center;
@@ -115,6 +99,14 @@
 	background-color: #f68b21;
 }
 
+.invalid_color {
+	background-color: #221f20;
+}
+
+.remaining_days {
+	background-color: #bdbdbd;
+}
+
 .attendance_stats_data {
 	display: flex;
 	align-items: center;
@@ -123,6 +115,7 @@
 .leave_team_stats {
 	display: flex;
 	gap: 12px;
+	width: 100%;
 
 	@media (max-width: 768px) {
 		flex-wrap: wrap;

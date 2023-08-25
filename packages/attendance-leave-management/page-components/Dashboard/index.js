@@ -9,10 +9,11 @@ import LeavesManagement from '../LeavesManagement';
 import Policies from '../Policies';
 import TeamAttendance from '../TeamAttendance';
 
-import LeaveRequest from './LeaveRequest';
-
 // import RequestModal from './RequestModal';
 import styles from './styles.module.css';
+import useGetCheckinStats from '../../hooks/useGetCheckinStats';
+
+const MANAGER = true;
 
 function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
@@ -26,10 +27,11 @@ function AttendanceLeaveDashboard() {
 		watchLocationPermissionChange : true,
 	});
 
-	console.log('coords', coords);
+	const { data, loading, refetch } = useGetCheckinStats(coords);
 
-	const MANAGER = true;
 	console.log(show);
+
+	// console.log('data', data);
 
 	return (
 		<div>
@@ -46,7 +48,6 @@ function AttendanceLeaveDashboard() {
 					>
 						My Requests
 						<IcMLiveChat />
-
 					</Button>
 				) : (
 					<Button
@@ -74,7 +75,7 @@ function AttendanceLeaveDashboard() {
 				>
 					<TabPanel name="attendance" title="Attendance">
 						<div className={styles.tab_panel}>
-							<AttendanceManagement location={coords} />
+							<AttendanceManagement data={data} loading={loading} coords={coords} refetch={refetch} />
 						</div>
 					</TabPanel>
 
@@ -97,7 +98,7 @@ function AttendanceLeaveDashboard() {
 					</TabPanel>
 				</Tabs>
 			</div>
-			<div><LeaveRequest /></div>
+			{/* <div><LeaveRequest /></div> */}
 		</div>
 	);
 }

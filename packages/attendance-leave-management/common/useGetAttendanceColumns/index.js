@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMTimer, IcMPlus } from '@cogoport/icons-react';
+import { IcMTimer } from '@cogoport/icons-react';
 import React from 'react';
 
 import { ATTENDANCE_LOGS_STATUS_MAPPING } from '../../utils/constants';
@@ -11,13 +11,17 @@ import styles from './styles.module.css';
 const GREEN_DOT = ['present', 'holiday', 'sick_leave', 'privilege_leave',
 	'casual_leave', 'half_day_sick_leave', 'half_day_privilege_leave', 'half_day_casual_leave'];
 
-const RED_DOT = ['absent', 'half_day_absent', 'leave_without_pay'];
+const RED_DOT = ['absent', 'half_day_absent', 'leave_without_pay', 'half_day_absent_sick_leave',
+	'half_day_absent_privilege_leave', 'half_day_absent_casual_leave'];
 
 const GRAY_DOT = ['invalid'];
 
 const ORANGE_DOT = ['weekly_off'];
 
-const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
+const SEPARATOR_CONDITION = ['half_day_absent_sick_leave', 'half_day_absent_privilege_leave',
+	'half_day_absent_casual_leave', 'half_day_absent'];
+
+const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal }) => {
 	const getTimings = (shift_timings) => {
 		const { start_time, end_time } = shift_timings || {};
 
@@ -49,7 +53,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 	};
 
 	const getRightDotColor = (val) => {
-		const greenDot = [...GREEN_DOT, 'half_day_absent'];
+		const greenDot = [...GREEN_DOT, ...SEPARATOR_CONDITION];
 
 		if (ORANGE_DOT.includes(val)) {
 			return 'color_orange';
@@ -67,7 +71,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 	};
 
 	const getSeparatorColor = (val) => {
-		if (val === 'half_day_absent') {
+		if (SEPARATOR_CONDITION.includes(val)) {
 			return styles.hda;
 		}
 
@@ -110,7 +114,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 		{
 			Header   : <div className={styles.header_text}>DAY</div>,
 			accessor : (item) => formatDate({
-				date       : new Date(item.date),
+				date       : item.date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['EEE, dd'],
 				formatType : 'date',
 			}),
@@ -118,11 +122,11 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 		},
 		{
 			Header   : <div className={styles.header_text}>CHECK IN</div>,
-			accessor : (item) => formatDate({
+			accessor : (item) => (item.check_in ? formatDate({
 				date       : item.check_in,
 				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'time',
-			}),
+			}) : '--'),
 			id: 'check_in',
 		},
 		{
@@ -142,11 +146,11 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 		},
 		{
 			Header   : <div className={styles.header_text}>CHECK OUT</div>,
-			accessor : (item) => formatDate({
+			accessor : (item) => (item.check_out ? formatDate({
 				date       : item.check_out,
 				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'time',
-			}),
+			}) : '--'),
 			id: 'check_out',
 		},
 		{
@@ -155,7 +159,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 				<div className={styles.total_hrs}>
 					{item.total_hrs}
 					{' '}
-					Hrs
+					{item.total_hrs ? 'Hrs' : '--'}
 				</div>
 			),
 			id: 'total_hrs',
@@ -171,10 +175,14 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift }) => {
 		},
 		{
 			Header   : <div className={styles.header_text}>ACTIONS</div>,
-			accessor : () => (
+			accessor : (item) => (
 				<div className={styles.action_flex}>
-					<IcMTimer className={`${styles.cursor_pointer} ${styles.timer_icon}`} width={25} height={25} />
-					<IcMPlus className={styles.cursor_pointer} width={25} height={25} />
+					<IcMTimer
+						className={cl`${styles.cursor_pointer} ${styles.timer_icon}`}
+						width={25}
+						height={25}
+						onClick={() => handleOpenModal(item.date)}
+					/>
 				</div>
 			),
 			id: 'actions',

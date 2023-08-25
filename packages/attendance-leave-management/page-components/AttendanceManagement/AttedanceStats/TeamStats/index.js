@@ -1,9 +1,14 @@
+import { cl } from '@cogoport/components';
 import { IcMProfile, IcMTeam } from '@cogoport/icons-react';
 import React from 'react';
 
+import { getDecimalValue } from '../../../../utils/getDecimalValue';
+
 import styles from './styles.module.css';
 
-function TeamStats() {
+function TeamStats({ teamStats = {} }) {
+	const { self, team } = teamStats;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
@@ -11,7 +16,7 @@ function TeamStats() {
 			</div>
 			<div className={styles.flex_stats1}>
 				<div className={styles.avatar_container}>
-					<div className={`${styles.avatar_icon} ${styles.my_stats}`}>
+					<div className={cl`${styles.avatar_icon} ${styles.my_stats}`}>
 						<IcMProfile fill="#C26D1A" width={14} height={14} />
 					</div>
 					Me
@@ -21,7 +26,7 @@ function TeamStats() {
 						Avg hrs/day
 					</span>
 					<div className={styles.stats_text}>
-						9 Hrs
+						{getDecimalValue(self.avg_work_hrs)}
 					</div>
 				</div>
 				<div className={styles.arrival_text}>
@@ -29,7 +34,8 @@ function TeamStats() {
 						On Time Arrival
 					</span>
 					<div className={styles.stats_text}>
-						82%
+						{getDecimalValue(self.on_time_arrival)}
+						%
 					</div>
 				</div>
 			</div>
@@ -41,10 +47,11 @@ function TeamStats() {
 					My Team
 				</div>
 				<div className={styles.team_stats_text}>
-					9 Hrs
+					{getDecimalValue(team.avg_work_hrs)}
 				</div>
 				<div className={styles.team_stats_text}>
-					82%
+					{getDecimalValue(team.on_time_arrival)}
+					%
 				</div>
 			</div>
 		</div>

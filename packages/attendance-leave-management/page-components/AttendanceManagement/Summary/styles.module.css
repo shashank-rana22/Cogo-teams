@@ -39,3 +39,11 @@
 		margin-bottom: 12px;
 	}
 }
+
+.positive_deviation {
+	color: #849e4c;
+}
+
+.negative_deviation {
+	color: #bf291e;
+}

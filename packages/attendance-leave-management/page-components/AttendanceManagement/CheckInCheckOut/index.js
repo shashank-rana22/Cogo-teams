@@ -4,23 +4,18 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import useGetCheckinStats from '../../../hooks/useGetCheckinStats';
+import useGetUpdateAttendance from '../../../hooks/useGetUpdateAttendance';
 
 import CompletedTime from './CompletedTime';
 import CurrentTimeClock from './CurrentTimeClock';
 import styles from './styles.module.css';
 
-function ChecInCheckOut({ location }) {
+function ChecInCheckOut({ data, loading, coords, refetch }) {
 	const formatToday = formatDate({
 		date       : new Date(),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 		formatType : 'date',
 	});
-
-	// const formatedTime = formatDate({
-	// 	date       : new Date(),
-	// 	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
-	// 	formatType : 'time',
-	// });
 
 	const getTime = (date) => {
 		if (!date) {
@@ -34,9 +29,18 @@ function ChecInCheckOut({ location }) {
 		});
 	};
 
-	const { loading, data } = useGetCheckinStats();
+	const { check_in, check_out, enable_check_out } = data || {};
 
-	const { check_in, check_out, enable_check_out, lat, long, radius } = data || {};
+	const { loading : updateLoading, updateAttendance } = useGetUpdateAttendance(check_in, refetch);
+
+	const handleCheckOut = () => {
+		const { latitude, longitude } = coords || {};
+		const dataObj = {
+			lat  : latitude,
+			long : longitude,
+		};
+		updateAttendance(dataObj);
+	};
 
 	return (
 		<div>
@@ -103,10 +107,13 @@ function ChecInCheckOut({ location }) {
 					<Button
 						themeType="accent"
 						size="lg"
-						disabled={!enable_check_out}
-						onClick={enable_check_out ? () => console.log('click enable') : () => {}}
+						// disabled={!enable_check_out || updateLoading}
+						// onClick={enable_check_out ? handleCheckOut : () => {}}
+						onClick={handleCheckOut}
 					>
-						Check Out
+						Check
+						{' '}
+						{check_in ? 'Out' : 'In'}
 					</Button>
 				</div>
 			</div>

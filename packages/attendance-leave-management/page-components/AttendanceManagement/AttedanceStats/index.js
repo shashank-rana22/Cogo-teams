@@ -1,28 +1,37 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { upperCase, isEmpty } from '@cogoport/utils';
 
-import { ATTENDANCE_CONSTANT } from '../../../utils/constants';
+import useGetAttendanceStats from '../../../hooks/useGetAttendanceStats';
+// import useGetLeaveBalance from '../../../hooks/useGetLeaveBalance';
+import { ATTENDANCE_CONSTANT, ATTENDANCE_STATS_MAPPING } from '../../../utils/constants';
 
 import LeaveStats from './LeaveStats';
 import styles from './styles.module.css';
 import TeamStats from './TeamStats';
 
-const PRESENT_DAYS = 16;
-const ABSENT_DAYS = 2;
-const LEAVES = 4;
-const WEEK_OFF = 8;
-
-const DAYS = 30;
 const PERCENTAGE_VALUE = 100;
 
-function AttendanceStats() {
-	const getWidth = (item) => `${(item / DAYS) * PERCENTAGE_VALUE}%`;
+function AttendanceStats({ selectMonth = {} }) {
+	const { value, month } = selectMonth;
+
+	const { data, loading } = useGetAttendanceStats(value);
+	// const { leaveData, leaveLoading } = useGetLeaveBalance();
+
+	const { attendance_stats, team_stats = {} } = data || {};
+
+	const { total_days, completed_days } = attendance_stats || {};
+
+	console.log('data AttendanceStats', data);
+
+	const getWidth = (item) => `${(item / total_days) * PERCENTAGE_VALUE}%`;
+
 	return (
 		<div>
 			<div className={styles.flex}>
 				<div className={styles.title}>
 					<div className={styles.header}>
-						THIS MONTH
+						{upperCase(month)}
 					</div>
 					<div className={styles.sub_header}>
 						Insights about your attendance
@@ -40,23 +49,28 @@ function AttendanceStats() {
 						Attendance Stats
 					</div>
 					<div className={styles.present_days}>
-						27/31 Days
+						{`${completed_days}/${total_days}`}
+						{' '}
+						Days
 					</div>
 				</div>
 
 				<div className={styles.gradient_lines} style={{ width: '100%' }}>
-					<div className={styles.line_1} style={{ width: getWidth(PRESENT_DAYS) }} />
-					<div className={styles.line_2} style={{ width: getWidth(ABSENT_DAYS) }} />
-					<div className={styles.line_3} style={{ width: getWidth(LEAVES) }} />
-					<div className={styles.line_4} style={{ width: getWidth(WEEK_OFF) }} />
+					{ATTENDANCE_STATS_MAPPING.map((val) => (
+						<div
+							key={val.key}
+							className={styles[val.className]}
+							style={{ width: getWidth(attendance_stats?.[val.key]) }}
+						/>
+					))}
 				</div>
 
 				<div className={styles.attendance_stats}>
 					{ATTENDANCE_CONSTANT.map((val) => (
 						<div className={styles.attendance_stats_data} key={val.key}>
-							<div className={`${styles.attendance_dot} ${styles[val.colorDot]}`} />
+							<div className={`${styles.attendance_dot} ${styles?.[val.colorDot]}`} />
 							<span className={styles.span}>{val.label}</span>
-							{val.key}
+							{attendance_stats?.[val.key]}
 							{' '}
 							Days
 						</div>
@@ -65,7 +79,7 @@ function AttendanceStats() {
 			</div>
 			<div className={styles.leave_team_stats}>
 				<LeaveStats />
-				<TeamStats />
+				{!loading && !isEmpty(team_stats) && <TeamStats teamStats={team_stats} />}
 			</div>
 		</div>
 	);

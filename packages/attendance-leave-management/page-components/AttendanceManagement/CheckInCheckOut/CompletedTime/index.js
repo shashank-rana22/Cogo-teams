@@ -10,16 +10,20 @@ function CompletedTime({ checkInTimeStr, checkOutTimeStr }) {
 
 	useEffect(() => {
 		const updateElapsedTime = () => {
-			const currentTime = new Date();
-			const checkInTime = new Date(checkInTimeStr);
-			const checkoutTime = checkOutTimeStr ? new Date(checkOutTimeStr) : currentTime;
+			if (checkInTimeStr) {
+				const currentTime = new Date();
+				const checkInTime = new Date(checkInTimeStr);
+				const checkoutTime = checkOutTimeStr ? new Date(checkOutTimeStr) : currentTime;
 
-			const timeDifferenceMs = checkoutTime - checkInTime;
-			const hours = Math.floor(timeDifferenceMs / (1000 * 60 * 60));
-			const minutes = Math.floor((timeDifferenceMs % (1000 * 60 * 60)) / (1000 * 60));
-			const seconds = Math.floor((timeDifferenceMs % (1000 * 60)) / 1000);
+				const timeDifferenceMs = checkoutTime - checkInTime;
+				const hours = Math.floor(timeDifferenceMs / (1000 * 60 * 60));
+				const minutes = Math.floor((timeDifferenceMs % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((timeDifferenceMs % (1000 * 60)) / 1000);
 
-			setTimeElapsed({ hours, minutes, seconds });
+				setTimeElapsed({ hours, minutes, seconds });
+			} else {
+				setTimeElapsed({ hours: 0, minutes: 0, seconds: 0 });
+			}
 		};
 
 		updateElapsedTime(); // Call once immediately
