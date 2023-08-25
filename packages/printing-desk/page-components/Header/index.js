@@ -27,7 +27,7 @@ function Header({
 					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
-					{tabs(t).map((tab) => {
+					{tabs({ t }).map((tab) => {
 						const { key = '', label = '' } = tab;
 						return (
 							<TabPanel

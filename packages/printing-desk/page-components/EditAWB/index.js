@@ -16,7 +16,7 @@ function EditAWB({
 	listAPI = () => {},
 }) {
 	const { t } = useTranslation(['printingDesk']);
-	const AWBCONTROLS = awbControls(t);
+	const AWBCONTROLS = awbControls({ t });
 	const [preview, setPreview] = useState(false);
 	const [formData, setFormData] = useState({});
 

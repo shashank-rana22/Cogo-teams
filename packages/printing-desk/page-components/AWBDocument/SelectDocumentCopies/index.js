@@ -20,7 +20,7 @@ function SelectDocumentCopies({
 	loading = false,
 }) {
 	const { t } = useTranslation(['printingDesk']);
-	const OPTIONS = options(t);
+	const OPTIONS = options({ t });
 	const { data } = useGetMultipleCopiesList(taskItem);
 
 	useEffect(() => {

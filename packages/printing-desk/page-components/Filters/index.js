@@ -44,7 +44,7 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 	function PopoverContent() {
 		return (
 			<>
-				<Layout fields={filterControls(t)} control={control} errors={errors} />
+				<Layout fields={filterControls({ t })} control={control} errors={errors} />
 				<div className={styles.footer_button}>
 					<Button
 						themeType="secondary"

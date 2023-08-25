@@ -18,7 +18,7 @@ function FinalAwb({
 	listAPI = () => {},
 }) {
 	const { t } = useTranslation(['printingDesk']);
-	const { fields } = finalAwbFields(t);
+	const { fields } = finalAwbFields({ t });
 	const [showUpload, setShowUpload] = useState({});
 
 	const functions = {
