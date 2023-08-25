@@ -7,7 +7,7 @@ import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
-import mobileNumberPads from '../../../../../configurations/number-pad';
+import MOBILE_NUMBER_KEYS from '../../../../../configurations/number-pad';
 
 import styles from './styles.module.css';
 
@@ -80,7 +80,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 					placeholder="Enter number"
 				/>
 				<div className={styles.number_div}>
-					{mobileNumberPads.map((item) => {
+					{MOBILE_NUMBER_KEYS.map((item) => {
 						const {
 							label = '',
 							key = '',
@@ -101,7 +101,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 									</div>
 								)}
 								<div className={styles.delete_div}>
-									{icon && (
+									{icon ? (
 										<div
 											role="presentation"
 											className={styles.delete_icon}
@@ -109,7 +109,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 										>
 											{icon}
 										</div>
-									)}
+									) : null}
 								</div>
 							</div>
 						);

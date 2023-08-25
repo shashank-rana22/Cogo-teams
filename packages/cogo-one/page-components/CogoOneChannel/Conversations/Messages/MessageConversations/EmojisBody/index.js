@@ -24,11 +24,13 @@ function PopBody({
 
 									const emojiName = item?.[EMOJI_NAME_INDEX];
 
-									let emoji = '';
-
-									result.forEach((emojiUnicode) => {
-										emoji += String.fromCodePoint(`0x${emojiUnicode}`);
-									});
+									const emoji = result.reduce(
+										(
+											accumulator,
+											emojiUnicode,
+										) => accumulator + String.fromCodePoint(`0x${emojiUnicode}`),
+										'',
+									);
 
 									return (
 										<div

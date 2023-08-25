@@ -18,7 +18,7 @@ function AgentStatusToggle({
 				className={styles.settings_icon}
 				onClick={() => setShowAgentDetails(true)}
 			/>
-			{showAgentDetails && (
+			{showAgentDetails ? (
 				<AgentModal
 					key={activeCard}
 					showAgentDetails={showAgentDetails}
@@ -29,7 +29,7 @@ function AgentStatusToggle({
 					setActiveCard={setActiveCard}
 					activeCard={activeCard}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }

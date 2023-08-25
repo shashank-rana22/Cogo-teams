@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
-const mobileNumberPads = [
+const MOBILE_NUMBER_KEYS = [
 	{
 		key   : 'one',
 		label : '1',
@@ -68,4 +68,4 @@ const mobileNumberPads = [
 	},
 ];
 
-export default mobileNumberPads;
+export default MOBILE_NUMBER_KEYS;
