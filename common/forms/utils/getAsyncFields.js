@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/function-name-check */
 function asyncFieldsLocations2() {
 	return {
 		valueKey    : 'id',
@@ -872,6 +873,17 @@ function asyncListResources() {
 	};
 }
 
+function asyncListCompanyLocations() {
+	return {
+		labelKey     : 'display_name',
+		valueKey     : 'id',
+		endpoint     : 'list_company_location',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -943,4 +955,5 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
 };

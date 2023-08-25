@@ -13,7 +13,7 @@ function LeaveCard({ isManager, data }) {
 	const { leaveData, pendingCount, request_type } = data;
 	const [accordion, setAccordion] = useState(false);
 	return (
-		<>
+		<div className={styles.leavecard}>
 			<div className={styles.card_container} onClick={() => setAccordion(!accordion)}>
 				<div>
 					<div className={styles.heading_sp1}>{request_type}</div>
@@ -24,7 +24,7 @@ function LeaveCard({ isManager, data }) {
 					</div>
 				</div>
 				<div className={styles.yes_no}>
-					<Button size="md" themeType="link">Approve All</Button>
+					<Button size="md" themeType="link" onClick={(e) => e.stopPropagation()}>Approve All</Button>
 					{accordion ? <IcMArrowUp width={16} height={16} /> : <IcMArrowDown width={16} height={16} />}
 				</div>
 			</div>
@@ -124,7 +124,7 @@ function LeaveCard({ isManager, data }) {
 					))}
 				</div>
 			) }
-		</>
+		</div>
 	);
 }
 

@@ -7,6 +7,30 @@
 	border-radius: 16px;
 }
 
+.pending {
+	display: flex;
+	justify-content: center;
+	padding: 4px;
+	color: #c26d1a;
+	background-color: #fef3e9;
+	border-radius: 100px;
+}
+
+.remarks {
+	width: fit-content;
+	max-width: 110px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.action {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	justify-content: center;
+}
+
 .heading {
 	font-weight: 600;
 	color: #221f20;

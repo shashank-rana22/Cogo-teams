@@ -110,3 +110,33 @@ export const MONTHLY_SUMMARY_CONFIGS = [
 		showColor : true,
 	},
 ];
+
+export const EMPLOYEE_LIST_CONTROLS = {
+	designation: {
+		name        : 'designation',
+		label       : 'Select Designation',
+		placeholder : 'Search Designation',
+		asyncKey    : 'list_employees',
+		params      : {
+			filters                       : { status: 'active' },
+			page_limit                    : 100,
+			required_keys                 : ['designation'],
+			service_objects_data_required : false,
+			mappings_data_required        : true,
+		},
+		isClearable : true,
+		labelKey    : 'designation',
+		valueKey    : 'designation',
+		initialCall : true,
+		multiple    : true,
+	},
+	location: {
+		name        : 'location_id',
+		label       : 'Select Location',
+		placeholder : 'Search Location',
+		asyncKey    : 'list_company_locations',
+		isClearable : true,
+		multiple    : true,
+		initialCall : true,
+	},
+};

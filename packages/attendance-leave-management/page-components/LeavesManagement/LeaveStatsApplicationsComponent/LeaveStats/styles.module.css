@@ -21,6 +21,7 @@
 
 .month_styles {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	padding-top: 20px;
 	color: #bdbdbd;
@@ -32,9 +33,15 @@
 
 .month_dates {
 	padding: 6px;
+	color: #bf291e;
+	background-color: #fdebe9;
 
-	/* background-color: #FDEBE9; */
+	/* font-size: 12px;  */
+}
 
-	/* color: #BF291E; */
+.month_dates_Absent {
+	padding: 6px;
 	font-size: 12px;
+	color: #bf291e;
+	background-color: #fdebe9;
 }
