@@ -2114,6 +2114,7 @@ importers:
       '@cogoport/next': workspace:0.1.0
       '@cogoport/purchase-invoicing': workspace:^0.1.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/select-language': ^0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
       '@cogoport/shipment-mails': workspace:^0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -2131,6 +2132,7 @@ importers:
       '@cogoport/next': link:../../common/next
       '@cogoport/purchase-invoicing': link:../purchase-invoicing
       '@cogoport/request': link:../../common/request
+      '@cogoport/select-language': link:../../common/select-language
       '@cogoport/shipment-chat': link:../../common/shipment-chat
       '@cogoport/shipment-mails': link:../../common/shipment-mails
       '@cogoport/store': link:../../common/store
