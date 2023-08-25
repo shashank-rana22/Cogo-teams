@@ -65,7 +65,7 @@
 		}
 
 		.leaflet-tile {
-			filter: hue-rotate(45deg) !important;
+			filter: grayscale(1) !important;
 		}
 
 		.leaflet-container {
