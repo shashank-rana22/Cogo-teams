@@ -384,6 +384,7 @@ const GLOBAL_CONSTANTS = {
 		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
 		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		agent_current_status : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/agent_current_status.png',
+		switch_view          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/switch_view.png',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
@@ -407,9 +408,11 @@ const GLOBAL_CONSTANTS = {
 		ic_tree_multiple        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
 		ic_tree_single          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
 		drop_down_red           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
+		user_logo               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user.svg',
 		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
 		custom_plan:
 		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
+		truck_image: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
 	},
 
 	video_call_ring_tone_url:
