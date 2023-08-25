@@ -9,6 +9,9 @@ import styles from './styles.module.css';
 
 const FILE_NAME_IN_URL_SLICE_INDEX = -1;
 const PERCENT_FACTOR = 100;
+const ONE_MEGA_BYTE = Number(GLOBAL_CONSTANTS.options.upload_file_size['1MB']);
+const TIMEOUT_DURATION = 10;
+const MAXIMUM_UPLOAD_SIZE = Number(GLOBAL_CONSTANTS.options.upload_file_size['20MB']);
 
 function FileUploader(props) {
 	const {
@@ -18,6 +21,7 @@ function FileUploader(props) {
 		docName,
 		uploadIcon = null,
 		uploadDesc = '',
+		maxSize = MAXIMUM_UPLOAD_SIZE,
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null); // remove
@@ -105,7 +109,19 @@ function FileUploader(props) {
 			if (values?.length) {
 				setProgress({});
 
-				const promises = values.map((value, index) => uploadFile(index)(value));
+				const filteredValues = values.filter((item) => {
+					const THRESHOLD_SIZE = Number(maxSize) / ONE_MEGA_BYTE;
+
+					if (item.size > Number(maxSize)) {
+						setTimeout(() => {
+							Toast.error(`The size of ${item.name} is greater than ${THRESHOLD_SIZE} MB.
+							Please upload a file with size less than ${THRESHOLD_SIZE} MB`);
+						}, TIMEOUT_DURATION);
+					}
+					return item.size < Number(maxSize);
+				});
+
+				const promises = filteredValues.map((value, index) => uploadFile(index)(value));
 
 				const allUrls = await Promise.all(promises);
 
@@ -115,16 +131,16 @@ function FileUploader(props) {
 						return [...prev, ...allUrls];
 					});
 					setFileName((prev) => {
-						if (prev === null) return values;
+						if (prev === null) return filteredValues;
 						let prevValue = [];
 
 						if (typeof prev !== 'object' || !Array.isArray(prev)) { prevValue = prev?.target?.value || []; }
 
-						return [...prevValue, ...values];
+						return [...prevValue, ...filteredValues];
 					});
 				} else {
 					setUrlStore(allUrls);
-					setFileName(values);
+					setFileName(filteredValues);
 				}
 			}
 		} catch (error) {

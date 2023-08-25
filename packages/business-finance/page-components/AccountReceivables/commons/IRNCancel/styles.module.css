@@ -11,7 +11,7 @@
 
 .date_container {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 .div_width {
@@ -21,6 +21,15 @@
 .lable_style {
 	margin-bottom: 4px;
 	font-weight: 600;
+}
+
+.agreement {
+	margin: 5px;
+}
+
+.agreement_block {
+	display: flex;
+	flex-direction: column;
 }
 
 .errors {

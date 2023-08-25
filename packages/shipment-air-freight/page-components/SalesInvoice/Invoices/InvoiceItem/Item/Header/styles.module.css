@@ -183,6 +183,7 @@
 }
 
 .status_container {
+	padding: 7px 16px;
 	margin-top: 2px;
 	font-size: var(--font-size-sm);
 	color: var(--color-secondary-greyscale-2);

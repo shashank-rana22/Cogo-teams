@@ -1,10 +1,27 @@
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
+
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 
 import styles from './styles.module.css';
 
-function AddGroupMember({ addGroupMember = () => {} }) {
+function RenderSelectLabel({ item = {} }) {
+	return	(
+		<div>
+			<div className={styles.agent_label}>
+				{startCase(item?.name)}
+			</div>
+
+			<div className={styles.lower_label}>
+				{startCase(item?.agent_type)}
+			</div>
+		</div>
+	);
+}
+
+function AddGroupMember({ addGroupMember = () => {}, viewType = '' }) {
 	const [agentId, setAgentId] = useState('');
 
 	const addMember = () => {
@@ -17,23 +34,28 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 
 	return (
 		<div>
-			<div className={styles.conversation_title}>Add Group Member</div>
+			<div className={styles.conversation_title}>
+				Add Group Member
+			</div>
+
 			<div className={styles.container}>
 				<AsyncSelect
 					key={agentId}
 					name="agent_id"
-					asyncKey="partner_users"
+					asyncKey="list_chat_agents"
 					value={agentId}
-					valueKey="user_id"
+					valueKey="agent_id"
 					onChange={setAgentId}
-					params={{
-						rm_mappings_data_required : false,
-						partner_data_required     : false,
-						filters                   : { role_functions: ['supply'] },
-					}}
 					className={styles.select}
 					isClearable
+					params={{
+						filters: {
+							agent_type: VIEW_TYPE_GLOBAL_MAPPING[viewType]?.group_agents_api_filter || undefined,
+						},
+					}}
+					renderLabel={(item) => <RenderSelectLabel item={item} />}
 				/>
+
 				<IcMPlusInCircle
 					className={styles.icon}
 					onClick={addMember}

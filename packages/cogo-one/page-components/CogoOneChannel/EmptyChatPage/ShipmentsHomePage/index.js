@@ -5,6 +5,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
@@ -25,6 +26,10 @@ function ListShipmentCards({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setShowBookingNote = () => {},
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -34,6 +39,7 @@ function ListShipmentCards({
 					height={400}
 					width={400}
 					className={styles.empty_shipments_image}
+					alt="no-shipments"
 				/>
 			</div>
 		);
@@ -43,22 +49,29 @@ function ListShipmentCards({
 		(shipmentItem) => (
 			<ShipmentCard
 				setActiveTab={setActiveTab}
-				key={shipmentItem?.sid}
+				key={shipmentItem?.id}
 				shipmentItem={shipmentItem}
 				showPocDetails={showPocDetails}
 				setShowPocDetails={setShowPocDetails}
 				setShowBookingNote={setShowBookingNote}
+				setShowPopover={setShowPopover}
+				showPopover={showPopover}
+				setShowPocModal={setShowPocModal}
+				showAddPrimaryUserButton={showAddPrimaryUserButton}
 			/>
 		),
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {} }) {
+function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
+	const [showPopover, setShowPopover] = useState('');
+	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
+
 	const {
 		listLoading,
 		shipmentsData,
@@ -119,6 +132,10 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 								showPocDetails={showPocDetails}
 								setShowPocDetails={setShowPocDetails}
 								setShowBookingNote={setShowBookingNote}
+								setShowPopover={setShowPopover}
+								showPopover={showPopover}
+								setShowPocModal={setShowPocModal}
+								showAddPrimaryUserButton={showAddPrimaryUserButton}
 							/>
 						)}
 				</div>
@@ -138,6 +155,16 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 			</div>
 			{showBookingNote?.show
 				? <BookingNoteModal setShowBookingNote={setShowBookingNote} showBookingNote={showBookingNote} /> : null}
+
+			{showPocModal?.show
+				? (
+					<AddPrimaryPocModal
+						showPocModal={showPocModal}
+						setShowPocModal={setShowPocModal}
+						getShipmentsList={handlePageChange}
+						setActiveTab={setActiveTab}
+					/>
+				) : null}
 		</>
 	);
 }

@@ -9,25 +9,25 @@ function useCreateUserInactiveStatus({
 	setOpenModal = () => {},
 	agentTimeline = () => {},
 	firestore = {},
-	userId = '',
-	status = '',
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
 		method : 'post',
 	}, { manual: true });
 
-	const updateStatus = status === 'active' ? 'break' : 'active';
-
-	const updateUserStatus = async (data) => {
+	const updateUserStatus = async (data = {}) => {
 		try {
+			const { userId } = data || {};
+
 			await trigger({
 				data: {
 					...data,
+					agent_id: userId,
 				},
 			});
+
 			setOpenModal(false);
-			updateUserLastActivity({ firestore, agent_id: userId, updated_status: updateStatus });
+			updateUserLastActivity({ firestore, agent_id: userId, updated_status: data?.status });
 			Toast.success('succesfully updated your status');
 			agentTimeline();
 			fetchworkPrefernce();

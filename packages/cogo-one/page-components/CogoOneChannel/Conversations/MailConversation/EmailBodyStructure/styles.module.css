@@ -6,7 +6,7 @@
 
 .body_header {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .header_details {
@@ -32,4 +32,19 @@
 	display: flex;
 	margin-left: 4px;
 	font-size: 12px;
+}
+
+.more_text {
+	padding-left: 4px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.popover_mails_text {
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.tooltip_container {
+	max-width: 400px !important;
 }

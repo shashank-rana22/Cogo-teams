@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import { MAPPING_IRN_STATUS, MAPPING_IRN_STATUS_COLOR } from '../../utils';
@@ -13,9 +14,15 @@ function openPDF(event) {
 	window.open(pdfLink, '_blank');
 }
 
-const viewColumn = [
+const viewColumn = ({
+	deleteInvoice,
+	showDeleteModal,
+	setShowDeleteModal,
+	setOutWardId,
+	isChecked,
+}) => [
 	{
-		Header   : <div>Invoice No</div>,
+		Header   : <div className={styles.header}>Invoice No</div>,
 		id       : 'invoiceNo',
 		accessor : ({ invoiceNumber, invoicePdfUrl }) => (
 			<div className={invoicePdfUrl ? styles.invoice_number : styles.invoice_number_val}>
@@ -28,7 +35,7 @@ const viewColumn = [
 		),
 	},
 	{
-		Header   : <div>Trade party’s GST</div>,
+		Header   : <div className={styles.header}>Trade party’s GST</div>,
 		id       : 'tradePartyGst',
 		accessor : ({ tradePartyGst }) => (
 			<div className={styles.trade_party}>
@@ -37,7 +44,7 @@ const viewColumn = [
 		),
 	},
 	{
-		Header   : <div>Type</div>,
+		Header   : <div className={styles.header}>Type</div>,
 		id       : 'type',
 		accessor : ({ invoiceType }) => (
 			<div>
@@ -46,7 +53,7 @@ const viewColumn = [
 		),
 	},
 	{
-		Header   : <div>Taxable Value</div>,
+		Header   : <div className={styles.header}>Taxable Value</div>,
 		id       : 'taxableValue',
 		accessor : ({ taxableValue, invoiceCurrency }) => (
 			<div>
@@ -58,7 +65,7 @@ const viewColumn = [
 		),
 	},
 	{
-		Header   : <div>Line Count</div>,
+		Header   : <div className={styles.header}>Line Count</div>,
 		id       : 'lineCount',
 		accessor : ({ lineCount }) => (
 			lineCount &&	(
@@ -116,7 +123,7 @@ const viewColumn = [
 		),
 	},
 	{
-		Header   : <div>IRN Status</div>,
+		Header   : <div className={styles.header}>IRN Status</div>,
 		id       : 'irnStatus',
 		accessor : ({ irnStatus }) => (
 			irnStatus && (
@@ -126,6 +133,35 @@ const viewColumn = [
 					</Pill>
 				</div>
 			)
+		),
+	},
+	{
+		id       : 'deleteInvoice',
+		accessor : ({ outwardInvoiceId }) => (
+			outwardInvoiceId &&	(
+				(showDeleteModal === true && isChecked) ? (
+					<div
+						onClick={() => { deleteInvoice(outwardInvoiceId); }}
+						role="presentation"
+						className={styles.delete_invoice}
+					>
+						<IcMDelete height={20} width={20} />
+
+					</div>
+				) : (
+					<div
+						onClick={() => { setShowDeleteModal(true); setOutWardId(outwardInvoiceId); }}
+						role="presentation"
+						className={styles.delete_invoice}
+					>
+						<IcMDelete height={20} width={20} />
+
+					</div>
+
+				)
+
+			)
+
 		),
 	},
 

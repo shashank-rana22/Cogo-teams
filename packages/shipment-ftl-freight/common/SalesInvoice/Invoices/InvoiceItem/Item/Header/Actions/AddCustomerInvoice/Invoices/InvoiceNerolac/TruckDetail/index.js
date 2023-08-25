@@ -1,10 +1,6 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import {
-	customerToCin,
-	customerToServiceDescription,
-	taxPayableRCM,
-} from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 import { getOtherData } from '../getOtherData';
 
 function TruckDetail({
@@ -27,6 +23,8 @@ function TruckDetail({
 		trip_id = '',
 		state_code = '',
 	} = getOtherData({ customData });
+
+	const { CUSTOMER_TO_CIN = {}, CUSTOMER_TO_SERVICE_DESCRIPTION = {}, TAX_PAYABLE_RCM = {} } = getFortigoDetails();
 
 	return (
 		<table
@@ -75,8 +73,8 @@ function TruckDetail({
 				<td style={{ border: '2px solid black' }}>{trip_type}</td>
 				<td style={{ border: '2px solid black' }} colSpan="2">
 					CIN :
-					&nbsp;
-					{customerToCin[importerExporterId] || ''}
+					{' '}
+					{CUSTOMER_TO_CIN[importerExporterId] || ''}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
@@ -130,7 +128,7 @@ function TruckDetail({
 					WHETHER TAX IS PAYABLE ON RCM?
 				</td>
 				<td style={{ border: '2px solid black' }}>
-					{taxPayableRCM[importerExporterId] || ''}
+					{TAX_PAYABLE_RCM[importerExporterId] || ''}
 				</td>
 				<td style={{ border: '2px solid black' }}>
 					Freight Type
@@ -150,10 +148,10 @@ function TruckDetail({
 					style={{ border: '2px solid black' }}
 				>
 					DESCRIPTION OF SERVICE
-					&nbsp;
+					{' '}
 				</td>
 				<td style={{ border: '2px solid black' }}>
-					{customerToServiceDescription[importerExporterId] || ''}
+					{CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId] || ''}
 				</td>
 				<td style={{ border: '2px solid black' }}>
 					DELIVERY MONTH
@@ -185,7 +183,7 @@ function TruckDetail({
 				</td>
 				<td style={{ border: '2px solid black' }}>
 					BILL DATE
-					&nbsp;
+					{' '}
 				</td>
 				<td style={{ }}>
 					{bill_date ? formatDate({ date: bill_date, formatType: 'date' }) : ''}
@@ -206,7 +204,7 @@ function TruckDetail({
 				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 			</tr>
 			<tr>
-				<td style={{ padding: '4px' }} colSpan="6">&nbsp;</td>
+				<td style={{ padding: '4px' }} colSpan="6">{' '}</td>
 			</tr>
 		</table>
 	);

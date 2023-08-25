@@ -16,6 +16,7 @@ const getCreateDocumentParams = ({ shipmentData, formValues, activeStakeholder, 
 			break;
 
 		case 'booking_agent':
+		case 'booking_agent_manager':
 		case 'consignee_shipper_booking_agent':
 			params = {
 				shipment_id         : shipmentData?.id,

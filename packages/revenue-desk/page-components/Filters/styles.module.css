@@ -45,11 +45,11 @@
 }
 
 .last_section {
-	padding: 16px 0;
+	padding: 16px 0 10px;
 }
 
 .date_subsection {
-	padding: 10px 16px;
+	padding: 5px 16px;
 }
 
 .trade_sub_section {
@@ -83,4 +83,8 @@
 			padding-left: 0 !important;
 		}
 	}
+}
+
+.select {
+	margin: 10px;
 }

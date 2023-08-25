@@ -4,19 +4,22 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import getControls from '../configurations/create-form';
 
 const useCreateUpdate = () => {
-	const {
-		handleSubmit, getValues, control, formState: { errors },
-		watch,
-	} = useForm();
+	const { t } = useTranslation(['locations']);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_location',
 		method : 'post',
 	}, { manual: true });
+
+	const {
+		handleSubmit, getValues, control, formState: { errors },
+		watch,
+	} = useForm();
 
 	const onCreate = async () => {
 		const formattedValues = getValues();
@@ -27,10 +30,10 @@ const useCreateUpdate = () => {
 		try {
 			const res = await trigger({ data: { ...payload } });
 			if (res?.data) {
-				Toast.success('Location created successfully');
+				Toast.success(t('locations:location_created_successfully'));
 			}
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error(t('locations:some_went_wrong_error_toast'));
 		}
 	};
 
@@ -70,6 +73,7 @@ const useCreateUpdate = () => {
 		clusterOptions,
 		pincodeOptions,
 		cfsOptions,
+		t,
 	});
 
 	return {

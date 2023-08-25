@@ -118,6 +118,8 @@ function Messages({
 		assignLoading,
 		setOpenModal,
 		assignChat,
+		userId,
+		supportAgentId,
 		activeMessageCard: activeTab?.data,
 	};
 
@@ -151,9 +153,7 @@ function Messages({
 						activeAgentName={activeAgentName}
 						filteredSpectators={filteredSpectators}
 						tagOptions={tagOptions}
-						supportAgentId={supportAgentId}
 						showBotMessages={showBotMessages}
-						userId={userId}
 						requestForAssignChat={requestForAssignChat}
 						requestAssignLoading={requestAssignLoading}
 						escalateToSupplyRm={escalateToSupplyRm}

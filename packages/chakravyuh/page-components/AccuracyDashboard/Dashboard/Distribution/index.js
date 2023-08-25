@@ -1,5 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
-import { Button, Placeholder, cl } from '@cogoport/components';
+import { Button, Placeholder, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import NoDataState from '../../../../common/NoDataState';
@@ -87,9 +87,11 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 								</div>
 							) : (
 								<div className={styles.pie_chart_middle_container}>
-									<p className={styles.pie_center_text}>Total Rates</p>
+									<Tooltip content="Active rates for selected time.">
+										<p className={styles.pie_center_text}>Active Rates</p>
+									</Tooltip>
 									<p className={styles.pie_center_count}>
-										{formatBigNumbers(data?.total_rates || GLOBAL_CONSTANTS.zeroth_index)}
+										{formatBigNumbers(data?.total_rate_count || GLOBAL_CONSTANTS.zeroth_index)}
 									</p>
 									{ parent_mode
 					&& (
