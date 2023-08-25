@@ -94,7 +94,7 @@ function AirIndiaAWB({
 					>
 						<div className={styles.tooltip_container}>
 							<Tooltip
-								content="Delete Booking"
+								content={t('airlineBookingPlugin:delete_booking')}
 								placement="right"
 								interactive
 							>

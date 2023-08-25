@@ -47,5 +47,6 @@
     "cannot_be_greater_than": "不能大于",
     "should_be": "应该",
     "characters_long": "长字符",
-    "should_be_less_than": "应该小于"
+    "should_be_less_than": "应该小于",
+    "delete_booking": "删除预订"
 }

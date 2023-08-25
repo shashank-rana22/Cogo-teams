@@ -47,5 +47,6 @@
     "cannot_be_greater_than": "cannot be greater than",
     "should_be": "should be",
     "characters_long": "character(s) long",
-    "should_be_less_than": "should be less than"
+    "should_be_less_than": "should be less than",
+    "delete_booking": "Delete Booking"
 }

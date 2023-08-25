@@ -47,5 +47,6 @@
     "cannot_be_greater_than": "ไม่สามารถมากกว่า",
     "should_be": "ควรจะเป็น",
     "characters_long": "ตัวละครยาว",
-    "should_be_less_than": "ควรน้อยกว่า"
+    "should_be_less_than": "ควรน้อยกว่า",
+    "delete_booking": "ลบการจอง"
 }

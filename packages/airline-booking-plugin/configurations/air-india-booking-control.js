@@ -1,4 +1,4 @@
-export const bookingControl = (setLocationData, edit, t) => [
+export const bookingControl = (setLocationData = () => {}, edit = false, t = () => {}) => [
 	{
 		name        : 'source',
 		type        : 'async-select',

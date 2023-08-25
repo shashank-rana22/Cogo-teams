@@ -1,4 +1,4 @@
-const tabs = (t) => ([
+const tabs = (t = () => {}) => ([
 	{
 		key   : 'air_india',
 		title : t('airlineBookingPlugin:air_india_awb'),

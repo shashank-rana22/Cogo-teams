@@ -1,4 +1,4 @@
-export const airIndiaCompletedFields = (t) => ([
+export const airIndiaCompletedFields = (t = () => {}) => ([
 	{
 		key   : 'source',
 		label : t('airlineBookingPlugin:source_label'),

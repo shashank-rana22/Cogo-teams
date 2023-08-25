@@ -47,5 +47,6 @@
     "cannot_be_greater_than": "tidak bisa lebih besar dari",
     "should_be": "seharusnya",
     "characters_long": "karakter panjang",
-    "should_be_less_than": "harus kurang dari"
+    "should_be_less_than": "harus kurang dari",
+    "delete_booking": "Hapus pemesanan"
 }

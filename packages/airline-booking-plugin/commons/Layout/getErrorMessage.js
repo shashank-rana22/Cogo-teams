@@ -2,7 +2,7 @@ const MIN_COUNT = 0;
 
 const getErrorMessage = (props) => {
 	const {
-		error, rules, label, t,
+		error = {}, rules = {}, label = '', t = () => {},
 	} = props;
 	const ERROR_MESSAGE = [];
 

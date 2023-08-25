@@ -1,6 +1,6 @@
 import { upperCase } from '@cogoport/utils';
 
-export const pluginHeader = (t) => ([
+export const pluginHeader = (t = () => {}) => ([
 	{
 		label : upperCase(t('airlineBookingPlugin:source_label')),
 		name  : 'source',

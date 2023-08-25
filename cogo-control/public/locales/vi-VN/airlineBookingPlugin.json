@@ -47,5 +47,6 @@
     "cannot_be_greater_than": "không thể lớn hơn",
     "should_be": "nên là",
     "characters_long": "kí tự dài",
-    "should_be_less_than": "nên ít hơn"
+    "should_be_less_than": "nên ít hơn",
+    "delete_booking": "Xóa đặt phòng"
 }
