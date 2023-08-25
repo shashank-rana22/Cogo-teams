@@ -45,11 +45,10 @@ function ForecastList({ filters = {} }) {
 					return <div key={key} className={styles.header} style={{ width }}>{title}</div>;
 				})}
 			</div>
-			{
-				loading ? <ListLoading /> : dataList?.map((card) => (
+			{loading
+				? <ListLoading /> : dataList?.map((card) => (
 					<Card key={card?.id} card={card} />
-				))
-			}
+				))}
 			<div className={styles.pagination_container}>
 				<Pagination
 					className="md"

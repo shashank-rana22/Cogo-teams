@@ -18,26 +18,28 @@ function Card({ card = {} }) {
 		<div>
 			<div className={styles.row}>
 				<dv className={styles.orgin_port}>
-					{origin?.name}
+					{origin?.name || '-'}
 				</dv>
 				<div className={styles.arrow_logo}>
 					<IcMPortArrow />
 				</div>
 
 				<div className={styles.destination_port}>
-					{destination?.name}
+					{destination?.name || '-'}
 				</div>
 
 				<div className={styles.high_demand_port_pairs}>
-					{high_demand_port_pairs}
+					{high_demand_port_pairs || '0'}
 				</div>
 
-				<div className={styles.rated_acquired}>
+				<div className={styles.rated_acquired || '0'}>
 					{rated_acquired}
 				</div>
 
 				<div className={styles.forecasted_demand}>
-					{forecasted_demand}
+					{forecasted_demand || '-'}
+					{' '}
+					TEUs
 				</div>
 
 				<div
