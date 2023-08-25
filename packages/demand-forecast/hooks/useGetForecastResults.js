@@ -1,17 +1,15 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 const DEFAULT_PAGE = 1;
 
 const useGetForecastFclFreightClusters = ({ filters = {} }) => {
-	const { agent_id } = useSelector(({ profile }) => ({ agent_id: profile.user.id }));
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const [{ data, loading = false }, trigger] = useRequest({
-		url    : '/list_rolling_forecast_fcl_freight_clusters',
+		url    : '/get_rolling_forecast_fcl_freight_clusters',
 		method : 'GET',
 	}, { manual: true });
 
@@ -21,7 +19,6 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 				await trigger({
 					params: {
 						filters: {
-							agent_id,
 							...filters,
 						},
 						sort_by_cluster: true,

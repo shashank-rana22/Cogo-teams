@@ -13591,6 +13591,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_clusters',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
 	],
 };
 

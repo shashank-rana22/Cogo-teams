@@ -14,7 +14,7 @@ function Tab({ activeTab, setActiveTab }) {
 	// }, [activeTab]);
 
 	return (
-		<div style={{ marginBottom: 20 }}>
+		<div>
 			<Tabs
 				activeTab={activeTab}
 				onChange={setActiveTab}
