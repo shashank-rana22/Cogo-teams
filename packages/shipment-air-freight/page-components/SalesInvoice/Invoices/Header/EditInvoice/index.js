@@ -9,7 +9,9 @@ import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
-const ALLOWED_ROLES = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
+const ALLOWED_ROLES = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
+	GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id];
 
 function EditInvoice({
 	show = 'false',
