@@ -6,6 +6,7 @@
 }
 
 .title {
+	display: inline-block;
 	padding: 12px;
 	margin-bottom: 8px;
 	font-size: 16px;
@@ -15,4 +16,54 @@
 .sub_card {
 	padding: 12px;
 	background-color: #fdfbf6;
+}
+
+.popover_txt {
+	display: inline-block;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.popover_header {
+	display: flex;
+	margin-bottom: 6px;
+}
+
+.popover_body {
+	display: flex;
+	justify-content: space-between;
+	padding: 4px;
+	margin-bottom: 4px;
+}
+
+.name {
+	width: 40%;
+}
+
+.arrow {
+	display: flex;
+	align-items: center;
+	width: 20%;
+}
+
+.popover {
+	height: 150px;
+	overflow-y: scroll;
+}
+
+.head {
+	width: 50%;
+	font-weight: 600;
+}
+
+.port_code {
+	color: #f68b21;
+}
+
+.destination_header {
+	margin-left: 20%;
+}
+
+.origin_header {
+	margin-left: 2%;
 }
