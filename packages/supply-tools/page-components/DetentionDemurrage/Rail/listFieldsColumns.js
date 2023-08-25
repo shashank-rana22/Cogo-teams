@@ -6,7 +6,7 @@ const listFieldsColumns = [
 	{
 		label  : 'Locations',
 		key    : 'location',
-		span   : 2.2,
+		span   : 2.0,
 		render : (item) => (
 			<div className={styles.wrap_text}>{item?.location?.display_name || item?.location?.name || '-'}</div>
 		),
@@ -48,16 +48,16 @@ const listFieldsColumns = [
 		label  : 'Commodity',
 		key    : 'commodity',
 		name   : 'commodity',
-		span   : 1.5,
+		span   : 1.2,
 		render : (item) => (
-			<div className={styles.wrap_text}>{item?.commodity || '-'}</div>
+			<div className={styles.wrap_text}>{startCase(item?.commodity) || '-'}</div>
 		),
 	},
 	{
 		label  : 'Container Limit',
 		key    : 'container_limit',
 		name   : 'container_limit',
-		span   : 1,
+		span   : 1.3,
 		render : (item) => (
 			<div className={styles.wrap_text}>
 				{`${item?.containers_count_lower_limit || ''} - ${
@@ -76,7 +76,7 @@ const listFieldsColumns = [
 		),
 	},
 	{
-		label  : 'Free Days type',
+		label  : 'Free Days Type',
 		key    : 'free_days_type',
 		name   : 'free_days_type',
 		span   : 1,
@@ -88,7 +88,7 @@ const listFieldsColumns = [
 		label  : 'Free Limit',
 		key    : 'free_limit',
 		name   : 'free_limit',
-		span   : 1,
+		span   : 0.8,
 		render : (item) => (
 			<div className={styles.wrap_text}>
 				{item?.free_limit || '-'}

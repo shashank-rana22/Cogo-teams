@@ -5,10 +5,17 @@ import FormElement from './FormElement';
 import getWidthPercent from './getWidthPercent';
 import styles from './styles.module.css';
 
-function Layout({ controls = [], control = {}, errors = {} }) {
+function Layout({ controls = [], control = {}, errors = {}, showElements = {} }) {
+	const finalControls = controls.filter((c) => {
+		if (c.name in showElements) {
+			return showElements[c.name];
+		}
+		return true;
+	});
+
 	return (
 		<div className={styles.container}>
-			{controls.map((ctrl) => {
+			{finalControls.map((ctrl) => {
 				const { type = '', label = '', span = 6, removeLabelMargin = false, ...restCtrl } = ctrl || {};
 
 				if (type === 'fieldArray') {

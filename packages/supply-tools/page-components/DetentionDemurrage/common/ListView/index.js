@@ -3,6 +3,8 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState } from 'react';
 
+import ListPagination from '../ListPagination';
+
 import Footer from './Footer';
 import styles from './styles.module.css';
 
@@ -19,7 +21,10 @@ const getWidthPercent = (span) => {
 	return percent;
 };
 
-function ListView({ data = {}, columns = [], EditForm = () => {}, loading = false }) {
+function ListView({
+	data = {}, columns = [], EditForm = () => {}, loading = false,
+	filters = {}, setFilters = () => {},
+}) {
 	const [showEdit, setShowEdit] = useState(false);
 
 	const editRef = useRef(null);
@@ -38,6 +43,7 @@ function ListView({ data = {}, columns = [], EditForm = () => {}, loading = fals
 
 	return (
 		<div>
+
 			<div className={cl`${styles.row_container} ${styles.width_95} ${styles.header_container}`}>
 				{columns.map((col) => (
 					<div
@@ -53,6 +59,8 @@ function ListView({ data = {}, columns = [], EditForm = () => {}, loading = fals
 			<hr className={styles.divider} />
 
 			<div>
+				<ListPagination data={data} setFilters={setFilters} filters={filters} />
+
 				{(data?.list || []).map((item) => (
 					<div key={item?.id} className={styles.card_container}>
 						<div className={styles.row_container}>
@@ -76,6 +84,8 @@ function ListView({ data = {}, columns = [], EditForm = () => {}, loading = fals
 						<Footer item={item} />
 					</div>
 				))}
+
+				<ListPagination data={data} setFilters={setFilters} filters={filters} />
 			</div>
 
 			{showEdit ? (

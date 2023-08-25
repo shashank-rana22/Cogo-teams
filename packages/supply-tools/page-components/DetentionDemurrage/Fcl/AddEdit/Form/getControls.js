@@ -211,7 +211,22 @@ const getControls = ({ item = {} }) => [
 		name  : 'previous_days_applicable_label',
 		span  : 12,
 	},
-	// REMAINING
+	{
+		name    : 'previous_days_applicable',
+		type    : 'chips',
+		span    : 4,
+		value   : item?.previous_days_applicable ? 'yes' : 'no',
+		options : [
+			{
+				children : 'Yes',
+				key      : 'yes',
+			},
+			{
+				children : 'No',
+				key      : 'no',
+			},
+		],
+	},
 
 	{
 		label : 'Free Days Type',
@@ -251,7 +266,7 @@ const getControls = ({ item = {} }) => [
 		name               : 'demurrage',
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
-		value              : item?.free_days_type === 'demurrage' ? item?.slabs : undefined,
+		value              : item?.free_days_type === 'demurrage' ? item?.slabs : [{ lower_limit: '' }],
 		controls           : [
 			{
 				label       : 'Lower Limit',
@@ -272,14 +287,14 @@ const getControls = ({ item = {} }) => [
 				rules       : { required: 'This is required' },
 			},
 			{
-				name           : 'currency',
-				type           : 'select',
-				optionsListKey : 'currencies',
-				span           : 3,
-				label          : 'Currency',
-				size           : 'sm',
-				placeholder    : 'Currency',
-				rules          : { required: 'This is required' },
+				name        : 'currency',
+				type        : 'async_select',
+				asyncKey    : 'list_exchange_rate_currencies',
+				span        : 3,
+				label       : 'Currency',
+				size        : 'sm',
+				placeholder : 'Currency',
+				rules       : { required: 'This is required' },
 			},
 			{
 				name        : 'price',
@@ -288,6 +303,55 @@ const getControls = ({ item = {} }) => [
 				size        : 'sm',
 				label       : 'Price',
 				placeholder : 'Price',
+				rules       : { required: 'This is required' },
+			},
+		],
+	},
+
+	{
+		label : 'Detention',
+		name  : 'detention_label',
+		span  : 12,
+	},
+	{
+		name               : 'detention',
+		type               : 'fieldArray',
+		showButtons        : true,
+		buttonText         : 'Add Slab',
+		noDeleteButtonTill : 0,
+		value              : item?.free_days_type === 'detention' ? item?.slabs : [{ lower_limit: '' }],
+		controls           : [
+			{
+				name        : 'lower_limit',
+				type        : 'number',
+				size        : 'sm',
+				placeholder : 'Lower Limit (in Days)',
+				span        : 3,
+				rules       : { required: 'This is required', min: 1 },
+			},
+			{
+				name        : 'upper_limit',
+				type        : 'number',
+				size        : 'sm',
+				span        : 3,
+				placeholder : 'Upper Limit (in Days)',
+				rules       : { required: 'This is required', min: 1 },
+			},
+			{
+				name        : 'currency',
+				placeholder : 'Currency',
+				size        : 'sm',
+				type        : 'async_select',
+				asyncKey    : 'list_exchange_rate_currencies', // component
+				span        : 3,
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'price',
+				placeholder : 'Enter Price',
+				size        : 'sm',
+				type        : 'number',
+				span        : 2,
 				rules       : { required: 'This is required' },
 			},
 		],
