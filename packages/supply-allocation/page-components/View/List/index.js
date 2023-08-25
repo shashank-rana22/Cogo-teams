@@ -50,7 +50,6 @@ function List({ search_id = '' }) {
 			{loading ? (
 				<div className={styles.loading_container}>
 					<DotLoader />
-
 				</div>
 			) : (
 				generateBucketTableData?.map((item) => (

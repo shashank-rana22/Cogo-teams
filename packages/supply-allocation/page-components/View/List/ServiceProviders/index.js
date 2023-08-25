@@ -29,7 +29,7 @@ function ServiceProviders({
 		refetchServiceProvidersData,
 	});
 
-	const { control, unregister, formState, handleSubmit } = formProps;
+	const { control, unregister, formState, handleSubmit, reset } = formProps;
 
 	const { dirtyFields = {} } = formState;
 
@@ -63,10 +63,10 @@ function ServiceProviders({
 					<Button
 						style={{ marginRight: '10px' }}
 						size="md"
-						onClick={() => { setShowWarning(true); }}
+						onClick={() => (bulkEditMode ? (reset(), setBulkEditMode(false)) : setShowWarning(true))}
 						themeType="secondary"
 					>
-						Edit Allocation
+						{bulkEditMode ? 'Cancel' : 'Edit Allocation'}
 					</Button>
 					<Button
 						onClick={handleSubmit(onClickSaveChanges)}

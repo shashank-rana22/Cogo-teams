@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Promised({ item = {}, control, unregister, bulkEditMode }) {
+function Promised({ item = {}, control, unregister, bulkEditMode = false }) {
 	const [editPromised, setEditPromised] = useState(false);
 
 	const onClickCancel = (controlName) => {
@@ -12,7 +12,7 @@ function Promised({ item = {}, control, unregister, bulkEditMode }) {
 		unregister(controlName);
 	};
 	const { allocated_containers, is_hard_limit } = item;
-	return !editPromised ? (
+	return !(editPromised && bulkEditMode) ? (
 		<>
 			<div
 				style={{
