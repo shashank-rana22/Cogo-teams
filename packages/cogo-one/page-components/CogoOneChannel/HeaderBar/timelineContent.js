@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function TimelineContent({
 	showTimer = false,

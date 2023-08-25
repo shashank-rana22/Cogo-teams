@@ -69,6 +69,7 @@ function HeaderBar({
 						viewType={viewType}
 						timePeriodValue={timePeriodValue}
 						setTimePeriodValue={setTimePeriodValue}
+						isPunchPresent={isPunchPresent}
 					/>
 				)}
 			</div>
