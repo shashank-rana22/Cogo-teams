@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import PortPairData from './PortPairData';
@@ -38,7 +40,16 @@ function MachineIntelligence({ eachItem = {} }) {
 						<div
 							className={styles.not_found_text}
 						>
-							No port pair data found
+							<div className={styles.body}>
+								<Image
+									height={35}
+									width={50}
+									src={GLOBAL_CONSTANTS.image_url.truck_image}
+									alt="no data"
+								/>
+								<div className={styles.no_data_found}>No data found</div>
+							</div>
+							<div className={styles.rect} />
 						</div>
 					) : <PortPairData portPairCardData={port_pair_data} /> }
 			</div>

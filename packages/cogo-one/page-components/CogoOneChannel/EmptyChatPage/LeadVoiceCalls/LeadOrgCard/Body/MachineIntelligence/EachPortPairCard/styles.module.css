@@ -10,8 +10,7 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
 
-	>div:last-child,
-	>div:first-child {
+	>[role="tooltip"] {
 		width: 45%;
 		text-align: center;
 	}
