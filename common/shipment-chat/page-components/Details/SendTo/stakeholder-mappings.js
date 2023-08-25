@@ -4,15 +4,8 @@ const mappings = {
 	service_ops2  : ['Kam', 'service_Ops1', 'service_Ops3'],
 	supply_agent  : ['service_Ops1', 'service_Ops2', 'service_Ops3'],
 	service_ops3  : ['Kam', 'service_Ops2'],
-	sales_agent   : [
-		'service_Ops1',
-		'service_Ops2',
-		'service_Ops3',
-		'Kam',
-		'supply_Agent',
-		'Lastmile_Ops',
-	],
-	default: [
+	sales_agent   : ['service_Ops1', 'service_Ops2', 'service_Ops3', 'Kam'],
+	default       : [
 		'service_Ops1',
 		'service_Ops2',
 		'service_Ops3',

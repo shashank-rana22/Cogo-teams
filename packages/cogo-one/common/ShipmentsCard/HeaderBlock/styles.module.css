@@ -46,7 +46,7 @@
 .message_icon_styles {
 	width: 20px;
 	height: 20px;
-	margin-right: 4px;
+	margin-right: 10px;
 	cursor: pointer;
 	fill: #9f9f9f;
 }
@@ -54,7 +54,7 @@
 .copy_icon {
 	width: 20px;
 	height: 20px;
-	margin-right: 4px;
+	margin-right: 8px;
 	cursor: pointer;
 	fill: #9f9f9f;
 }
@@ -62,7 +62,7 @@
 .poc_details {
 	width: 20px;
 	height: 20px;
-	margin-right: 4px;
+	margin-right: 10px;
 	cursor: pointer;
 	fill: #9f9f9f;
 }
