@@ -1,0 +1,19 @@
+.icon_flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-left: 8px;
+}
+
+.active {
+	fill: red;
+}
+
+/* table {
+	:gobal {
+		.ui_table_head_cell {
+			border-bottom: 1px solid red;
+		}
+	}
+} */
