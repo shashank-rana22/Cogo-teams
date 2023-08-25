@@ -103,3 +103,13 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.label_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.tds {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}

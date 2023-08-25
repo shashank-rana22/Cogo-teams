@@ -35,6 +35,7 @@ function PreviewBookingFooter({
 	formProps = {},
 	setInfoBanner = () => {},
 	infoBanner = {},
+	noRatesPresent = false,
 }) {
 	const { push } = useRouter();
 
@@ -157,7 +158,7 @@ function PreviewBookingFooter({
 		);
 	};
 
-	const disableButton = isVeryRisky || !agreeTandC
+	const disableButton = isVeryRisky || !agreeTandC || noRatesPresent
 		|| (detail?.importer_exporter?.kyc_status !== 'verified'
 			&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
 
@@ -203,8 +204,16 @@ function PreviewBookingFooter({
 		return () => {};
 	}, [hasExpired, validity_end]);
 
+	console.log('noRatesPresent', noRatesPresent);
+
 	return (
 		<div className={styles.container} id="proceed_button">
+			{noRatesPresent ? (
+				<div className={styles.error}>
+					Please remove services with no rates
+				</div>
+			) : null}
+
 			<div className={styles.validity_time}>
 				{!hasExpired ? (
 					<div className={styles.flex}>

@@ -4,21 +4,22 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewType }) {
+export function getHasAccessToEditGroup({
+	formattedMessageData = {},
+	agentId = '',
+	viewType = '',
+}) {
 	const {
-		session_type,
-		account_type,
-		group_members,
-		support_agent_id,
+		session_type = '',
+		support_agent_id = '',
 		managers_ids = [],
 	} = formattedMessageData || {};
 
 	return (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_group_access
-		&& (session_type === 'admin' && account_type === 'service_provider')
+		&& session_type === 'admin'
 		&& (
 			VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
-			|| group_members?.includes(agentId)
 			|| managers_ids?.includes(agentId)
 			|| support_agent_id === agentId
 		)

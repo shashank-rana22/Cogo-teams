@@ -1,7 +1,7 @@
 import { Tooltip, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMCall, IcMOverflowDot } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
 import styles from './styles.module.css';
@@ -27,6 +27,11 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 		});
 	});
 
+	const otherStakeholders = (task?.other_stakeholders || []).filter((item) => item.id !== task?.stakeholder?.id);
+	const renderTooltip = otherStakeholders.map(
+		(stakeholder) => <div key={stakeholder?.id}>{stakeholder?.name}</div>,
+	);
+
 	const canReassignTask = CAN_REASSIGN_TASK_STAKEHOLDER.includes(activeStakeholder);
 
 	return (
@@ -37,6 +42,20 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 					: startCase(task?.stakeholder?.name)}
 
 				{task?.assigned_stakeholder === 'system' && startCase(task?.assigned_stakeholder)}
+
+				{task?.status === 'pending' && !isEmpty(otherStakeholders) && (
+					<div className={styles.other_stakeholders}>
+						<Tooltip
+							interactive
+							theme="light"
+							content={renderTooltip}
+						>
+							{' '}
+							+
+							{otherStakeholders.length}
+						</Tooltip>
+					</div>
+				)}
 			</div>
 
 			{task?.stakeholder?.mobile_number ? (

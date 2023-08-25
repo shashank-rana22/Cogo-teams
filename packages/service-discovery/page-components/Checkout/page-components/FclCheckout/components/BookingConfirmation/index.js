@@ -48,8 +48,6 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 
 	const { is_any_invoice_on_credit = false } = detail?.credit_details || {};
 
-	console.log('ref', ref.current);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Set Invoicing Parties</div>

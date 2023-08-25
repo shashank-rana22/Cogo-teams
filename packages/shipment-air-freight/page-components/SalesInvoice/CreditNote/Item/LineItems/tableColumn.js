@@ -72,7 +72,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || '-'}%)`,
+			})} (${item?.tax_percent || '0'}%)`,
 
 			span: 1.5,
 		},

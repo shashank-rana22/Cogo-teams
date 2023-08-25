@@ -25,9 +25,11 @@ function UnpreferredShippingLines({
 	useEffect(() => {
 		const {
 			agreed_for_partial_shipment = false,
+			unpreferred_shipping_line_ids = [],
 		} = shipping_preferences || {};
 
 		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
+		setValue('unpreferred_shipping_line_ids', unpreferred_shipping_line_ids);
 	}, [setValue, shipping_preferences]);
 
 	return (
@@ -58,7 +60,7 @@ function UnpreferredShippingLines({
 			<AsyncSelectController
 				control={control}
 				asyncKey="list_operators"
-				name="unpreferred_shipping_lines"
+				name="unpreferred_shipping_line_ids"
 				multiple
 				className={styles.select}
 				initialCall
@@ -70,9 +72,9 @@ function UnpreferredShippingLines({
 				}}
 			/>
 
-			{errors?.unpreferred_shipping_lines?.message ? (
+			{errors?.unpreferred_shipping_line_ids?.message ? (
 				<div className={styles.error_message}>
-					{errors?.unpreferred_shipping_lines?.message}
+					{errors?.unpreferred_shipping_line_ids?.message}
 				</div>
 			) : null}
 

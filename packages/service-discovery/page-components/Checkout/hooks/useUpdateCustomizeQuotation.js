@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 
 const useUpdateCustomizeQuotation = ({ setAddLineItemData, getCheckout }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -16,8 +17,12 @@ const useUpdateCustomizeQuotation = ({ setAddLineItemData, getCheckout }) => {
 
 			setAddLineItemData({});
 		} catch (error) {
+			if (error?.response?.data?.line_item_code) {
+				Toast.error('Line item already exists');
+				return;
+			}
 			if (error?.response) {
-				Toast.error(getApiErrorString(error?.response?.data));
+				Toast.error(startCase(getApiErrorString(error?.response?.data)));
 			}
 		}
 	};

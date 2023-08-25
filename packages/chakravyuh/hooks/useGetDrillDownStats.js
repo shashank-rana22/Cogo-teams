@@ -3,6 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import getFormattedPayload from '../utils/getFormattedPayload';
+import toastApiError from '../utils/toastApiError';
 
 const useGetDrillDownStats = ({ globalFilters = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -13,8 +14,8 @@ const useGetDrillDownStats = ({ globalFilters = {} }) => {
 	const getDrillDownStats = useCallback(async (params) => {
 		try {
 			await trigger({ params });
-		} catch (e) {
-			// console.error(e);
+		} catch (err) {
+			toastApiError(err);
 		}
 	}, [trigger]);
 
