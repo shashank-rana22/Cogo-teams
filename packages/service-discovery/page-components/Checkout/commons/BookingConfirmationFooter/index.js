@@ -5,9 +5,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useRef, useContext } from 'react';
 
-import OTPLayout from '../../../../../../commons/WhatsappNoVerificationModal/WhatsappVerification/OTPLayout';
-import { CheckoutContext } from '../../../../../../context';
-import handleTimer from '../../../../../../utils/handleTimer';
+import { CheckoutContext } from '../../context';
+import handleTimer from '../../utils/handleTimer';
+import OTPLayout from '../WhatsappNoVerificationModal/WhatsappVerification/OTPLayout';
 
 import CogoPoint from './CogoPoint';
 import domesticServices from './domestic-services.json';
