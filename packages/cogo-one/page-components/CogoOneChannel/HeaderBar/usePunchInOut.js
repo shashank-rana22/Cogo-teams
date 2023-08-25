@@ -1,15 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
-import useGetCogoOneAgentStats from '../../../hooks/useGetOmniChannelStats';
 import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPreferences';
 
 const BUTTON_SHAKE_DURATION = 300000;
 
 function usePunchInOut({
-	isPunchPresent = '',
-	timePeriodValue = '',
-	viewType = '',
 	fetchworkPrefernce = () => {},
 	agentTimeline = () => {},
 	firestore = {},
@@ -18,11 +14,6 @@ function usePunchInOut({
 	agentStatus = {},
 }) {
 	const [isShaking, setIsShaking] = useState(false);
-
-	const {
-		agentStatsLoading = false,
-		agentStatsData = {},
-	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	const {
 		updateWorkPreference = () => {},
@@ -63,8 +54,6 @@ function usePunchInOut({
 		lastBreakTime,
 		status,
 		handlePunchIn,
-		agentStatsLoading,
-		agentStatsData,
 		isShaking,
 		setIsShaking,
 		shakeButton,

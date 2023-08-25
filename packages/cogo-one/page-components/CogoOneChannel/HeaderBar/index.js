@@ -38,16 +38,11 @@ function HeaderBar({
 		lastBreakTime,
 		status,
 		handlePunchIn,
-		agentStatsLoading,
-		agentStatsData,
 		setIsShaking,
 		shakeButton,
 		handlePunchOut,
 		isShaking,
 	} = usePunchInOut({
-		isPunchPresent,
-		timePeriodValue,
-		viewType,
 		fetchworkPrefernce: fetchWorkStatus,
 		agentTimeline,
 		firestore,
@@ -71,8 +66,6 @@ function HeaderBar({
 						status={status}
 						handlePunchIn={handlePunchIn}
 						viewType={viewType}
-						agentStatsLoading={agentStatsLoading}
-						agentStatsData={agentStatsData}
 						timePeriodValue={timePeriodValue}
 						setTimePeriodValue={setTimePeriodValue}
 					/>

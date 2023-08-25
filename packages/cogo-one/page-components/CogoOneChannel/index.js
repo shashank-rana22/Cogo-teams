@@ -186,6 +186,7 @@ function CogoOne() {
 					<PortPairOrgFilters
 						setSelectedAutoAssign={setSelectedAutoAssign}
 						sendBulkTemplates={sendBulkTemplates}
+						viewType={viewType}
 						{...commonProps}
 					/>
 				) : null}
