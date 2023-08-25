@@ -155,7 +155,7 @@ const useUpdateShipmentAdditionalService = ({
 				add_to_sell_quotation: value === 'bill',
 				state:
 					value === 'not_bill' ? 'accepted_by_importer_exporter' : undefined,
-				id: item.serviceListItem.id,
+				id: item.id,
 			};
 
 			await handleSubmit(payload);
