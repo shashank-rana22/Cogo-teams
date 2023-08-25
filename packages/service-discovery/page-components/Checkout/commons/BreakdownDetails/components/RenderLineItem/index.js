@@ -65,8 +65,8 @@ function RenderLineItem({
 		url    : '/update_checkout_customize_quotation',
 	}, { manual: true });
 
-	const buy_price = (total_price_discounted
-		- (margins.find((marginObj) => marginObj?.margin_type === 'demand')?.total_margin_value || DEFAULT_VALUE))
+	const buy_price = total_price_discounted
+		- (margins.find((marginObj) => marginObj?.margin_type === 'demand')?.total_margin_value || DEFAULT_VALUE)
 		* (isautoDiscountApplicable ? ONE - value / PERCENT_VALUE : ONE);
 
 	const displayBuyPrice = formatAmount({
