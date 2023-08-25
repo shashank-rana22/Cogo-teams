@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest } from '@cogoport/request';
-import useCxAutomationRequest from '@cogoport/request/hooks/useCxAutomationRequest';
+import {
+	useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest,
+	useCxAutomationRequest,
+} from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
