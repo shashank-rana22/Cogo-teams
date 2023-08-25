@@ -4,9 +4,7 @@ import { IcMEmail, IcMCall, IcMWhatsapp } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
 
-import CommunicationModal from '../../../../../../../common/CommunicationModal';
 import getEachUserFormatedData from '../../../../../../../utils/getPocUserFormattedData';
 
 import styles from './styles.module.css';
@@ -43,8 +41,6 @@ function PocUser({
 }) {
 	const dispatch = useDispatch();
 
-	const [modalType, setModalType] = useState('');
-
 	const geo = getGeoConstants();
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
@@ -65,162 +61,150 @@ function PocUser({
 		);
 	};
 
-	const closeModal = () => {
-		setModalType('');
-	};
-
 	if (isEmpty(stakeHoldersData)) {
 		return "No POC's found";
 	}
 
 	return (
-		<>
-			<div className={styles.pocusers_container}>
-				{stakeHoldersData.map(
-					(userDetails) => {
-						const {
-							id = '', name = '',
-							stakeholder_type = [],
-							mobileNumber = '',
-							mobile_country_code = '',
-							userId = '',
-							email = '',
-							trade_type,
-							chatOption = false,
-							isPrimaryPoc = false,
-							isCustomer = false,
-							isTradePartner = false,
-						} = getEachUserFormatedData({ userDetails });
+		<div className={styles.pocusers_container}>
+			{stakeHoldersData.map(
+				(userDetails) => {
+					const {
+						id = '', name = '',
+						stakeholder_type = [],
+						mobileNumber = '',
+						mobile_country_code = '',
+						userId = '',
+						email = '',
+						trade_type,
+						chatOption = false,
+						isPrimaryPoc = false,
+						isCustomer = false,
+						isTradePartner = false,
+					} = getEachUserFormatedData({ userDetails });
 
-						const chatData = {
-							user_id                 : userId,
-							user_name               : name,
-							whatsapp_number_eformat : mobileNumber,
-							email,
-							channel_type            : 'whatsapp',
-							countryCode             : mobile_country_code,
-							mobile_no               : `${mobile_country_code?.replace('+', '')}${mobileNumber}`,
-						};
+					const chatData = {
+						user_id                 : userId,
+						user_name               : name,
+						whatsapp_number_eformat : mobileNumber,
+						email,
+						channel_type            : 'whatsapp',
+						countryCode             : mobile_country_code,
+						mobile_no               : `${mobile_country_code?.replace('+', '')}${mobileNumber}`,
+					};
 
-						const lessList = (stakeholder_type || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
-						const moreList = (stakeholder_type || []).slice(MAX_PREVIEW_LIMIT);
-						const showMoreList = (stakeholder_type || []).length > MAX_PREVIEW_LIMIT;
+					const lessList = (stakeholder_type || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
+					const moreList = (stakeholder_type || []).slice(MAX_PREVIEW_LIMIT);
+					const showMoreList = (stakeholder_type || []).length > MAX_PREVIEW_LIMIT;
 
-						const user = { id, email };
-						const countryCode = mobile_country_code?.replace('+', '');
+					const user = { id, email };
+					const countryCode = mobile_country_code?.replace('+', '');
 
-						return (
-							<div className={styles.main_container} key={id}>
-								<div className={styles.container}>
-									<div className={styles.user_info}>
-										<Avatar
-											personName={name || 'user'}
-											size="32px"
-											className={cl`${styles.styled_avatar}
+					return (
+						<div className={styles.main_container} key={id}>
+							<div className={styles.container}>
+								<div className={styles.user_info}>
+									<Avatar
+										personName={name || 'user'}
+										size="32px"
+										className={cl`${styles.styled_avatar}
 										${isCustomer ? styles.customer_avatar : ''}
 										${isTradePartner ? styles.trade_partners_avatar : ''}
 										`}
-										/>
-										<div className={styles.user_details}>
-											<div className={styles.user_name}>
-												{startCase(name || 'User')}
-											</div>
-											<div className={styles.user_work_scope}>
-												{isCustomer ? (
-													<div className={styles.scope_name}>
-														{isPrimaryPoc ? 'Customer - Primary POC' : 'Customer'}
-													</div>
-												) : null}
+									/>
+									<div className={styles.user_details}>
+										<div className={styles.user_name}>
+											{startCase(name || 'User')}
+										</div>
+										<div className={styles.user_work_scope}>
+											{isCustomer ? (
+												<div className={styles.scope_name}>
+													{isPrimaryPoc ? 'Customer - Primary POC' : 'Customer'}
+												</div>
+											) : null}
 
-												{isTradePartner ? (
-													<div className={styles.trade_type}>
-														{startCase(trade_type)}
-													</div>
-												) : null }
+											{isTradePartner ? (
+												<div className={styles.trade_type}>
+													{startCase(trade_type)}
+												</div>
+											) : null }
 
-												{(lessList || []).map((item, index) => (
-													<div className={styles.scope_name} key={item}>
-														{startCase(item)}
-														{index !== lessList.length - LAST_INDEX ? ',' : ''}
-													</div>
-												))}
-												{showMoreList && (
-													<Tooltip
-														content={(
-															<div>
-																{(moreList || []).map((item) => (
-																	<div
-																		className={styles.scope_name}
-																		key={item}
-																	>
-																		{startCase(item)}
+											{(lessList || []).map((item, index) => (
+												<div className={styles.scope_name} key={item}>
+													{startCase(item)}
+													{index !== lessList.length - LAST_INDEX ? ',' : ''}
+												</div>
+											))}
+											{showMoreList && (
+												<Tooltip
+													content={(
+														<div>
+															{(moreList || []).map((item) => (
+																<div
+																	className={styles.scope_name}
+																	key={item}
+																>
+																	{startCase(item)}
 
-																	</div>
-																))}
-															</div>
-														)}
-														theme="light"
-														placement="bottom"
-													>
-														<div className={styles.more_tags}>
-															+
-															{moreList?.length}
+																</div>
+															))}
 														</div>
-													</Tooltip>
-												)}
-											</div>
+													)}
+													theme="light"
+													placement="bottom"
+												>
+													<div className={styles.more_tags}>
+														+
+														{moreList?.length}
+													</div>
+												</Tooltip>
+											)}
 										</div>
 									</div>
-									<div className={styles.action_icons}>
-										{chatOption ? (
-											<IcMWhatsapp
-												className={cl`${styles.whatsapp_icon}
+								</div>
+								<div className={styles.action_icons}>
+									{chatOption ? (
+										<IcMWhatsapp
+											className={cl`${styles.whatsapp_icon}
 										${isCustomer ? styles.customer_icons : ''}
 										${isTradePartner ? styles.trade_partners_icons : ''}`}
-												onClick={() => setActiveTab((prev) => ({
-													...prev,
-													hasNoFireBaseRoom : true,
-													data              : chatData,
-													tab               : 'message',
-												}))}
-											/>
-										) : null}
+											onClick={() => setActiveTab((prev) => ({
+												...prev,
+												hasNoFireBaseRoom : true,
+												data              : chatData,
+												tab               : 'message',
+											}))}
+										/>
+									) : null}
 
-										{hasVoiceCallAccess && (
-											<IcMCall
-												className={cl`${styles.call_icon_styles}
+									{hasVoiceCallAccess && (
+										<IcMCall
+											className={cl`${styles.call_icon_styles}
 											${isCustomer ? styles.customer_icons : ''}
 											${isTradePartner ? styles.trade_partners_icons : ''}`}
-												onClick={() => handleVoiceCall({
-													mobileNumber,
-													userId,
-													name,
-													countryCode,
-													dispatch,
-												})}
-											/>
-										)}
+											onClick={() => handleVoiceCall({
+												mobileNumber,
+												userId,
+												name,
+												countryCode,
+												dispatch,
+											})}
+										/>
+									)}
 
-										<IcMEmail
-											className={cl`${styles.email_icon_styles}
+									<IcMEmail
+										className={cl`${styles.email_icon_styles}
 										${isCustomer ? styles.customer_icons : ''}
 										${isTradePartner ? styles.trade_partners_icons : ''}`}
-											onClick={() => handleSendEmail({ user })}
-										/>
-									</div>
+										onClick={() => handleSendEmail({ user })}
+									/>
 								</div>
 							</div>
-						);
-					},
-				)}
-			</div>
-			{modalType ? (
-				<CommunicationModal
-					modalType={modalType}
-					closeModal={closeModal}
-				/>
-			) : null}
-		</>
+						</div>
+					);
+				},
+			)}
+		</div>
 	);
 }
 
