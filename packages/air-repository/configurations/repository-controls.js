@@ -2,14 +2,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import validateMobileNumber from '../utils/validateMobileNumber';
 
-const repositoryControls = () => ({
+const repositoryControls = (t = () => {}) => ({
 	basic: [
 		{
 			name        : 'airline_id',
 			type        : 'async-select',
 			asyncKey    : 'list_operators',
-			label       : 'Select Airline',
-			placeholder : 'Select Airline...',
+			label       : t('airRepository:airline_label'),
+			placeholder : t('airRepository:airline_placeholder'),
 			params      : {
 				filters    : { operator_type: 'airline', status: 'active' },
 				page_limit : 10,
@@ -36,8 +36,8 @@ const repositoryControls = () => ({
 				includes   : { default_params_required: true },
 			},
 			initialCall : true,
-			label       : 'Select Airport',
-			placeholder : 'Select Airport...',
+			label       : t('airRepository:airport_label'),
+			placeholder : t('airRepository:airport_placeholder'),
 			span        : 6,
 			rules       : {
 				required: true,
@@ -46,12 +46,12 @@ const repositoryControls = () => ({
 		{
 			name        : 'booking_mode',
 			type        : 'select',
-			label       : 'Select Mode',
-			placeholder : 'Choose Email/Platform',
+			label       : t('airRepository:booking_mode_label'),
+			placeholder : t('airRepository:booking_mode_placeholder'),
 			options     : [
-				{ value: 'email', label: 'E-mail' },
-				{ value: 'platform', label: 'Platform' },
-				{ value: 'email_and_platform', label: 'E-mail/Platform' },
+				{ value: 'email', label: t('airRepository:e-mail_label') },
+				{ value: 'platform', label: t('airRepository:platform_label') },
+				{ value: 'email_and_platform', label: t('airRepository:e-mail_or_platform_label') },
 			],
 			span  : 6,
 			rules : {
@@ -63,16 +63,16 @@ const repositoryControls = () => ({
 			type    : 'select',
 			options : [
 				{
-					label : 'Available',
+					label : t('airRepository:available_label'),
 					value : 'available',
 				},
 				{
-					label : 'Not Available',
+					label : t('airRepository:not_available_label'),
 					value : 'not_available',
 				},
 			],
 			value : 'not_available',
-			label : 'Is E Booking Available',
+			label : t('airRepository:e_booking_availability_label'),
 			span  : 6,
 			rules : {
 				required: true,
@@ -81,18 +81,18 @@ const repositoryControls = () => ({
 		{
 			name        : 'inventory_stock_availability',
 			type        : 'select',
-			placeholder : 'Select Before/After Booking',
+			placeholder : t('airRepository:inventory_stock_availability_placeholder'),
 			options     : [
 				{
-					label : 'Before Booking',
+					label : t('airRepository:before_booking_label'),
 					value : 'before_booking',
 				},
 				{
-					label : 'After Booking',
+					label : t('airRepository:after_booking_label'),
 					value : 'after_booking',
 				},
 			],
-			label : 'When is Airway Bill Procured?',
+			label : t('airRepository:inventory_stock_availability_label'),
 			span  : 6,
 			rules : {
 				required: true,
@@ -106,13 +106,13 @@ const repositoryControls = () => ({
 			span               : 12,
 			showButtons        : true,
 			noDeleteButtonTill : 1,
-			buttonText         : 'Add POC Details',
+			buttonText         : t('airRepository:pocs_data_button'),
 			controls           : [
 				{
 					name        : 'name',
 					type        : 'text',
-					label       : 'Airline Person(POC)',
-					placeholder : 'Enter name',
+					label       : t('airRepository:poc_name_label'),
+					placeholder : t('airRepository:poc_name_placeholder'),
 					span        : 6,
 					rules       : {
 						required: true,
@@ -121,14 +121,14 @@ const repositoryControls = () => ({
 				{
 					name        : 'email',
 					type        : 'text',
-					label       : 'Airline E-mail ID',
-					placeholder : 'Enter email',
+					label       : t('airRepository:poc_email_label'),
+					placeholder : t('airRepository:poc_email_placeholder'),
 					span        : 6,
 					rules       : {
 						required : true,
 						pattern  : {
 							value   : GLOBAL_CONSTANTS.regex_patterns.email,
-							message : 'Email is invalid',
+							message : t('airRepository:poc_email_regex_message'),
 						},
 					},
 				},
@@ -136,11 +136,11 @@ const repositoryControls = () => ({
 					name        : 'mobile',
 					type        : 'mobile',
 					inputType   : 'number',
-					label       : 'Contact Number',
-					placeholder : 'Enter contact number',
+					label       : t('airRepository:poc_mobile_label'),
+					placeholder : t('airRepository:poc_mobile_placeholder'),
 					span        : 8,
 					rules       : {
-						validate: validateMobileNumber,
+						validate: (val) => validateMobileNumber(val, t),
 					},
 				},
 			],
@@ -150,16 +150,16 @@ const repositoryControls = () => ({
 			type    : 'select',
 			options : [
 				{
-					label : 'Yes',
+					label : t('airRepository:yes_label'),
 					value : 'yes',
 				},
 				{
-					label : 'No',
+					label : t('airRepository:no_label'),
 					value : 'no',
 				},
 			],
 			value : 'yes',
-			label : 'Do we send Agreed Rate in Email for this Airline?',
+			label : t('airRepository:rate_required_label'),
 			span  : 6,
 			rules : {
 				required: true,
@@ -171,22 +171,22 @@ const repositoryControls = () => ({
 		{
 			name        : 'lms_url',
 			type        : 'text',
-			label       : 'Enter Platform URL',
-			placeholder : 'Enter URL',
+			label       : t('airRepository:lms_url_label'),
+			placeholder : t('airRepository:lms_url_placeholder'),
 			span        : 6,
 			rules       : {
 				required : true,
 				pattern  : {
 					value   : GLOBAL_CONSTANTS.regex_patterns.url_match,
-					message : 'URL is invalid',
+					message : t('airRepository:lms_url_regex_message'),
 				},
 			},
 		},
 		{
 			name        : 'lms_user_id',
 			type        : 'text',
-			label       : 'Enter Platform User Id',
-			placeholder : 'Enter used id',
+			label       : t('airRepository:lms_user_id_label'),
+			placeholder : t('airRepository:lms_user_id_placeholder'),
 			span        : 6,
 			rules       : {
 				required: true,
@@ -195,8 +195,8 @@ const repositoryControls = () => ({
 		{
 			name        : 'lms_password',
 			type        : 'text',
-			label       : 'Enter Platform Password',
-			placeholder : 'Enter password',
+			label       : t('airRepository:lms_password_label'),
+			placeholder : t('airRepository:lms_password_placeholder'),
 			span        : 6,
 			rules       : {
 				required: true,

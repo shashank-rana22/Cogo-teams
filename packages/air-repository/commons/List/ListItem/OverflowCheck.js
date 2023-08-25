@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-function OverflowCheck({ children }) {
+function OverflowCheck({ children = <div /> }) {
 	const containerRef = useRef(null);
 	const [isOverflowing, setIsOverflowing] = useState(false);
 

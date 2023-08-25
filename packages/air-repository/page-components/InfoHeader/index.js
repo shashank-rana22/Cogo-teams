@@ -1,15 +1,9 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { ReactFragment } from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	heading: string;
-	content: ReactFragment;
-}
-
-function InfoHeader({ heading, content }:Props) {
+function InfoHeader({ heading = '', content = '' }) {
 	return (
 		<div className={styles.info_container}>
 			<div>{heading}</div>
