@@ -7,13 +7,13 @@ const getPayload = ({ leadOrgId = '', values }) => {
 
 	return {
 		feedback,
-		lead_organization_id     : leadOrgId,
-		source_type              : 'lead_organization',
-		source_id                : leadOrgId,
-		feedback_parameter       : 'account',
-		feedback_parameter_value : '',
-		other_feedback           : feedback === 'other' ? other_feedback : undefined,
-		feedback_reference_document_url,
+		lead_organization_id            : leadOrgId,
+		source_type                     : 'lead_organization',
+		source_id                       : leadOrgId,
+		feedback_parameter              : 'account',
+		feedback_parameter_value        : '',
+		other_feedback                  : feedback === 'other' ? other_feedback : undefined,
+		feedback_reference_document_url : feedback_reference_document_url?.file_url || undefined,
 	};
 };
 

@@ -7,7 +7,9 @@ import usePostAllocationFeedback from '../../hooks/usePostAllocationFeedback';
 
 import styles from './styles.module.css';
 
-function LeadOrgFeedback({ onCloseForm = () => {}, leadOrgId = '' }) {
+const HIDE_CANCEL = ['voice_call'];
+
+function LeadOrgFeedback({ onCloseForm = () => {}, leadOrgId = '', source = '' }) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -33,14 +35,16 @@ function LeadOrgFeedback({ onCloseForm = () => {}, leadOrgId = '' }) {
 				/>
 			</div>
 			<div className={styles.footer}>
-				<Button
-					size="md"
-					themeType="secondary"
-					disabled={loading}
-					onClick={onCloseForm}
-				>
-					Cancel
-				</Button>
+				{!HIDE_CANCEL.includes(source) ? (
+					<Button
+						size="md"
+						themeType="secondary"
+						disabled={loading}
+						onClick={onCloseForm}
+					>
+						Cancel
+					</Button>
+				) : null}
 				<Button
 					size="md"
 					themeType="accent"

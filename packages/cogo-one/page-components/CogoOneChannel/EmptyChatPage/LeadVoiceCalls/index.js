@@ -34,6 +34,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 				lead_feedback_form_data: {
 					lead_organization_id : leadOrgId,
 					lead_user_id         : leadUserId,
+					source               : 'cogo_one',
 				},
 				lead_feedback_form_type: type,
 			}),
@@ -113,7 +114,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
-				<div className={styles.title}>All Leads</div>
+				<div className={styles.title}>Lead Contacts</div>
 				<Input
 					size="sm"
 					value={search}

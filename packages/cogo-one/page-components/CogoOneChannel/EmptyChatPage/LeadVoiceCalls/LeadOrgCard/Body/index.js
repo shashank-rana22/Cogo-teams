@@ -34,20 +34,21 @@ function Body({ eachItem = {}, handlePlaceCall = () => {} }) {
 					{mobile_number_verified ? <IcCFtick className={styles.tick_icon} /> : null}
 				</div>
 				<div
+					role="presentation"
 					className={styles.call_icon_border}
 					style={{ cursor: mobile_number ? 'pointer' : 'not-allowed' }}
+					onClick={() => {
+						handlePlaceCall({
+							number     : mobile_number,
+							code       : mobile_country_code,
+							userName   : name,
+							leadUserId : lead_user_id,
+							leadOrgId  : lead_organization_id,
+						});
+					}}
 				>
 					<IcMCall
 						className={styles.call_icon}
-						onClick={() => {
-							handlePlaceCall({
-								number     : mobile_number,
-								code       : mobile_country_code,
-								userName   : name,
-								leadUserId : lead_user_id,
-								leadOrgId  : lead_organization_id,
-							});
-						}}
 					/>
 				</div>
 			</div>

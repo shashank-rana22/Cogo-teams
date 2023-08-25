@@ -7,6 +7,8 @@ import useCreateLeadOrgUserLog from '../../hooks/useCreateLeadOrgUserLog';
 
 import styles from './styles.module.css';
 
+const HIDE_CANCEL = ['voice_call'];
+
 function LogCallActivity({
 	leadOrgId = '',
 	onCloseForm = () => {},
@@ -14,6 +16,7 @@ function LogCallActivity({
 	loggedInAgentId = '',
 	leadUserId = '',
 	restData = {},
+	source = '',
 }) {
 	const { communication_start_time, communication_end_time } = restData || {};
 
@@ -52,14 +55,16 @@ function LogCallActivity({
 				/>
 			</div>
 			<div className={styles.footer}>
-				<Button
-					size="md"
-					themeType="secondary"
-					disabled={loading}
-					onClick={onCloseForm}
-				>
-					Cancel
-				</Button>
+				{!HIDE_CANCEL.includes(source) ? (
+					<Button
+						size="md"
+						themeType="secondary"
+						disabled={loading}
+						onClick={onCloseForm}
+					>
+						Cancel
+					</Button>
+				) : null}
 				<Button
 					size="md"
 					themeType="accent"
