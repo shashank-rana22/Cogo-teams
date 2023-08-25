@@ -14,7 +14,6 @@ import styles from './styles.module.css';
 
 function Enquiries() {
 	const ZEROVALUE = 0;
-	const ZERO_VALUE = 1;
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [revertCounts, setRevertCounts] = useState({});
 	const [showMore, setShowMore] = useState(true);
@@ -33,7 +32,7 @@ function Enquiries() {
 	useEffect(() => {
 		if (data) {
 			const OBJ = {};
-			setSelectedCard(data?.data[ZERO_VALUE]);
+			setSelectedCard(data?.data[ZEROVALUE]);
 			(data?.data || []).forEach((item) => {
 				OBJ[item?.id] = item?.negotiation_reverts_count;
 			});
@@ -53,7 +52,7 @@ function Enquiries() {
 					<IcMArrowBack style={{ marginRight: '6px' }} />
 					RFQ ID:
 					{' '}
-					{data?.data[ZERO_VALUE]?.rfq_data?.serial_id}
+					{data?.data[ZEROVALUE]?.rfq_data?.serial_id}
 				</div>
 			</div>
 
@@ -61,7 +60,7 @@ function Enquiries() {
 				<div>
 					LAST UPDATED:
 					{' '}
-					{format(data?.data[ZERO_VALUE]?.rfq_data?.updated_at, 'dd MMM yyyy')}
+					{format(data?.data[ZEROVALUE]?.rfq_data?.updated_at, 'dd MMM yyyy')}
 				</div>
 			</div>
 			<div className={styles.enquiries}>
