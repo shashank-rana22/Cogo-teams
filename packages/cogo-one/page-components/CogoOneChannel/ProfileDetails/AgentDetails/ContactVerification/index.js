@@ -1,6 +1,5 @@
 import { Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
-import { snakeCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -10,12 +9,14 @@ function ContactVerification({ leadUserId = '', userId = '', loading = false, us
 
 	const VERIFICATION_STATUS = [
 		{
+			name       : 'call',
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
 			color      : mobile_verified ? 'green' : '#f8aea8',
 			size       : 'sm',
 			prefixIcon : <IcMCall />,
 		},
 		{
+			name       : 'whatsapp',
 			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
 			color      : whatsapp_verified ? 'green' : '#f8aea8',
 			size       : 'sm',
@@ -36,22 +37,28 @@ function ContactVerification({ leadUserId = '', userId = '', loading = false, us
 		<div>
 			<div className={styles.verification_pills}>
 				{VERIFICATION_STATUS.map((item) => {
-					const { label = '', prefixIcon, color } = item;
-					const itemKey = `${snakeCase(item.label)}`;
-					return (
-						<div key={itemKey}>
-							<Pill
-								key={label}
-								prefix={prefixIcon}
-								size="md"
-								color={color}
-							>
-								<div className={styles.pill_name}>
-									{label}
-								</div>
-							</Pill>
+					const {
+						name = '',
+						label = '',
+						prefixIcon = null,
+						color = '',
+					} = item || {};
 
-						</div>
+					if (!prefixIcon) {
+						return null;
+					}
+
+					return (
+						<Pill
+							key={name}
+							prefix={prefixIcon}
+							size="md"
+							color={color}
+						>
+							<div className={styles.pill_name}>
+								{label}
+							</div>
+						</Pill>
 					);
 				})}
 			</div>

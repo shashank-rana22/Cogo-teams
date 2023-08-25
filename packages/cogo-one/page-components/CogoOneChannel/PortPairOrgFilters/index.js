@@ -26,6 +26,7 @@ function PortPairOrgFilters({
 	setSelectedAutoAssign = () => {},
 	setAutoAssignChats = () => {},
 	sendBulkTemplates = false,
+	viewType = '',
 }) {
 	const componentRef = useRef(null);
 
@@ -225,6 +226,7 @@ function PortPairOrgFilters({
 								data={data}
 								selectedAutoAssign={selectedUsers}
 								type={modalType}
+								viewType={viewType}
 							/>
 						</div>
 					) : null}

@@ -27,6 +27,7 @@ const COGOVERSE_AGENT_MAPPINGS = {
 	supply_admin              : ['supply_admin'],
 	sales_admin               : ['sales_admin'],
 	shipment_specialist_admin : ['shipment_specialist_admin'],
+	cogoone_admin             : ['tech_support'],
 };
 
 const DEFAULT_VIEW_TYPE = 'sales';

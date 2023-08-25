@@ -1,5 +1,7 @@
 import { IcMReply, IcMForward } from '@cogoport/icons-react';
 
+export const SEARCH_QUERY_LIMIT = 50;
+
 export const MAIL_FOLDER_OPTIONS = {
 	inbox : 'Inbox',
 	draft : 'Drafts',
