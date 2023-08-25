@@ -18,7 +18,7 @@ function MyAgents({ list = [], activeTab = '' }) {
 
 	const redirectToAgentView = ({ agentId = '', name = '', agent_type = '' }) => {
 		push(
-			`/cogo-one/dashboard/[id]?view=agent&agentName=${name}`,
+			`/cogo-one/dashboard/[id]?view=agent&agentName=${name}&agentType=${agent_type}`,
 			`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}&agentType=${agent_type}`,
 		);
 	};

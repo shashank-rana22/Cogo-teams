@@ -256,8 +256,19 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 						businessName,
 					)} (${toTitleCase(expenseType)})`}
 				/>
-				<Modal.Body>
+				<Modal.Body className={styles.body_section}>
 					{!isEditable && <ApproveAndReject row={row} />}
+					{!isEmpty(level1)
+						|| !isEmpty(level2)
+						|| !isEmpty(level3) ? (
+							<StakeHolderTimeline
+								timeline={stakeHolderTimeLineData({
+									level1,
+									level2,
+									level3,
+								})}
+							/>
+						) : null}
 					{summeryMapping.map(({ key, val }) => (
 						<RenderSummary key={key} summary={val} />
 					))}
@@ -281,17 +292,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 							/>
 						</>
 					) : null}
-					{!isEmpty(level1)
-						|| !isEmpty(level2)
-						|| !isEmpty(level3) ? (
-							<StakeHolderTimeline
-								timeline={stakeHolderTimeLineData({
-									level1,
-									level2,
-									level3,
-								})}
-							/>
-						) : null}
+
 				</Modal.Body>
 				{isEditable && (
 					<Modal.Footer>

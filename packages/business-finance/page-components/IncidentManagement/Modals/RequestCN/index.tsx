@@ -20,6 +20,8 @@ import {
 import styles from './style.module.css';
 
 const MAX_LEN = 40;
+const CN_VALUES_DATA = ['revenueOthers', 'nonRevenueOthers'];
+const STATUS_LIST = ['APPROVED', 'REJECTED'];
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -75,24 +77,24 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 	const { referenceId = '' } = row || {};
 
-	const content = () => (
-		<div className={styles.container}>
-			<div>
-				<div className={styles.texts}>CN Category Type*</div>
-				<div className={styles.select_container}>
-					<Select
-						className="primary md"
-						placeholder="CN Category Type.."
-						value={creditNoteType || CNCategoryValues?.CNType}
-						disabled={!isEditable || level1?.status === 'APPROVED'}
-						onChange={(e:any) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
-						options={CATEGORY_OPTIONS}
-					/>
+	function ShowContent() {
+		return (
+			<div className={styles.container}>
+				<div>
+					<div className={styles.texts}>CN Category Type*</div>
+					<div className={styles.select_container}>
+						<Select
+							className="primary md"
+							placeholder="CN Category Type.."
+							value={creditNoteType || CNCategoryValues?.CNType}
+							disabled={!isEditable || level1?.status === 'APPROVED'}
+							onChange={(e:string) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
+							options={CATEGORY_OPTIONS}
+						/>
+					</div>
 				</div>
-			</div>
-			{(CNCategoryValues?.CNType
-				|| status === 'APPROVED'
-				|| status === 'REJECTED') && (
+				{(CNCategoryValues?.CNType
+				|| STATUS_LIST.includes(status)) && (
 					<div>
 						{RevenueImpacting && <div className={styles.texts}>Revenue Impacting*</div>}
 						{NonRevenueImpacting && <div className={styles.texts}>Non-Revenue Impacting*</div>}
@@ -137,9 +139,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							)}
 						</div>
 					</div>
-			)}
-			{(CNCategoryValues?.CNValues === 'revenueOthers'
-				|| CNCategoryValues?.CNValues === 'nonRevenueOthers') && (
+				)}
+				{CN_VALUES_DATA.includes(CNCategoryValues?.CNValues) && (
 					<div>
 						<div className={styles.texts}>Remark</div>
 
@@ -154,14 +155,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						/>
 
 					</div>
-			)}
-			<div className={styles.button_container}>
-				<Button themeType="primary" onClick={() => setShowPopover(false)}>
-					Done
-				</Button>
+				)}
+				<div className={styles.button_container}>
+					<Button themeType="primary" onClick={() => setShowPopover(false)}>
+						Done
+					</Button>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	useEffect(() => {
 		setCNCategoryValues({
@@ -188,21 +190,27 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 			</div>
 			{showTdsModal && (
 				<Modal
-					size="lg"
+					size="xl"
 					show={showTdsModal}
 					onClose={() => {
 						setShowTdsModal(false);
 					}}
 				>
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
-					<Modal.Body>
+					<Modal.Body className={styles.body_section}>
 						{!isEditable && <ApproveAndReject row={row} />}
+						{
+							(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
+
 						<div className={styles.credit}>
 							<div className={styles.button_container_data}>
 								<Popover
 									placement="bottom"
 									visible={showPopover}
-									render={content()}
+									render={<ShowContent />}
 									{...rest}
 								>
 									<Button
@@ -375,12 +383,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								/>
 							</>
 						) }
-
-						{
-							(level1 || level2 || level3) && (
-								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
-							)
-						}
 
 					</Modal.Body>
 					{isEditable && (
