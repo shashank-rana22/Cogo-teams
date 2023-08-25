@@ -106,7 +106,6 @@ function MailBody({
 
 				<Button
 					onClick={handleExpandClick}
-					role="presentation"
 					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
 					size="xs"
 					className={styles.dots_body}
