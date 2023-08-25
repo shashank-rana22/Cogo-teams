@@ -71,9 +71,11 @@ function PromocodesModal({
 	};
 
 	useEffect(() => {
-		setEligiblePromotions(
-			list.filter((promotion) => promotion?.eligibility_checks?.is_eligible),
-		);
+		if (!isEmpty(list)) {
+			setEligiblePromotions(
+				list.filter((promotion) => promotion?.eligibility_checks?.is_eligible),
+			);
+		}
 	}, [list]);
 
 	const reorderedList = eligiblePromotions?.sort((a, b) => {
