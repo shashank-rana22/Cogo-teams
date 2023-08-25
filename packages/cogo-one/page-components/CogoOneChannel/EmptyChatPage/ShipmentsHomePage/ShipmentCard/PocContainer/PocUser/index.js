@@ -42,8 +42,10 @@ function PocUser({
 	setActiveTab = () => {},
 }) {
 	const dispatch = useDispatch();
-	const geo = getGeoConstants();
+
 	const [modalType, setModalType] = useState('');
+
+	const geo = getGeoConstants();
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 
@@ -212,12 +214,12 @@ function PocUser({
 					},
 				)}
 			</div>
-			{modalType && (
+			{modalType ? (
 				<CommunicationModal
 					modalType={modalType}
 					closeModal={closeModal}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }

@@ -1,6 +1,7 @@
 const getEachUserFormatedData = ({ userDetails = {} }) => {
 	const {
 		stakeholder_type = '', user = {}, id = '', name: pocName = '',
+		user_id: customerUserId = '',
 		mobile_country_code: pocMobileCountryCode = '', processes = [], mobile_number = '', email = '', trade_type = '',
 		chat_option = false,
 		is_primary_poc = false,
@@ -21,7 +22,7 @@ const getEachUserFormatedData = ({ userDetails = {} }) => {
 		stakeholder_type    : Object.keys(userDetails || {}).includes('processes') ? processes : [stakeholder_type],
 		mobileNumber        : mobileNumber || mobile_number,
 		mobile_country_code : mobile_country_code || pocMobileCountryCode,
-		userId,
+		userId              : userId || customerUserId,
 		email               : userEmail || email,
 		trade_type,
 		chatOption          : chat_option,
