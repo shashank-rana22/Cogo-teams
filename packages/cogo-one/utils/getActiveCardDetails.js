@@ -39,6 +39,7 @@ const getActiveCardDetails = (data = {}) => {
 			email            : user_email,
 			lead_user_details,
 			user_details,
+			country_code,
 		};
 	}
 
@@ -69,6 +70,7 @@ const getActiveCardDetails = (data = {}) => {
 		sender,
 		lead_user_details,
 		user_details,
+		country_code,
 	};
 };
 export default getActiveCardDetails;

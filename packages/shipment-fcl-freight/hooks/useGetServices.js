@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 import filterServicesForKam from '../helpers/filterServicesForKam';
 
-const SERVICES_TO_BE_FILTERED_FOR = ['consignee_shipper_booking_agent', 'booking_agent'];
+const SERVICES_TO_BE_FILTERED_FOR = ['consignee_shipper_booking_agent', 'booking_agent', 'booking_agent_manager'];
 
 function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
 	const [servicesData, setServicesData] = useState([]);

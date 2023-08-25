@@ -1,16 +1,17 @@
 import React, { useMemo } from 'react';
 
+import DotLoader from '../../../commons/DotLoader';
 import { bucketControls } from '../../../configs/bucket-controls';
 import useGetRollingForecastBucketsData from '../../../hooks/useGetRollingForeCastBucketsData';
 
-import Content from './content';
+import BucketsListBody from './BucketsListBody';
+import BucketsListHeader from './BucketsListHeader';
+import styles from './styles.module.css';
 
 function List({ search_id = '' }) {
-	const { data: bucketData = [] } = useGetRollingForecastBucketsData({
+	const { data: bucketData = [], refetchBucketsData = () => {}, loading } = useGetRollingForecastBucketsData({
 		supply_fcl_freight_search_id: search_id,
 	});
-
-	const bucketsArray = (bucketData || []).map((bucket) => bucket.bucket_type);
 
 	const generateBucketTableData = useMemo(() => (bucketData || []).reduce((acc, curr) => {
 		const {
@@ -44,35 +45,27 @@ function List({ search_id = '' }) {
 
 	return (
 		<>
-			<div
-				style={{
-					display    : 'flex',
-					alignItems : 'center',
-					background : '#FDFBF6',
-					padding    : '20px 5px',
-					marginTop  : '20px',
-				}}
-			>
-				{bucketControls.map(({ title, flexBasis }) => (
-					<div
-						key={title}
-						style={{ flexBasis, display: 'flex', justifyContent: 'center' }}
-					>
-						{title}
-					</div>
-				))}
-			</div>
+			<BucketsListHeader bucketControls={bucketControls} />
 
-			{generateBucketTableData?.map((item, index) => (
-				<Content
-					key={item.bucket_type}
-					item={item}
-					index={index}
-					search_id={search_id}
-					bucketsArray={bucketsArray}
-				/>
-			))}
+			{loading ? (
+				<div className={styles.loading_container}>
+					<DotLoader />
+
+				</div>
+			) : (
+				generateBucketTableData?.map((item) => (
+					<BucketsListBody
+						key={item.bucket_type}
+						item={item}
+						searchId={search_id}
+						refetchBucketsData={refetchBucketsData}
+
+					/>
+				))
+			)}
+
 		</>
 	);
 }
+
 export default List;

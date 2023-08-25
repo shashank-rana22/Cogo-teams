@@ -745,6 +745,22 @@ const partner = {
 			feature      : 'credit',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'demand_crm_new',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1980,6 +1996,22 @@ const partner = {
 			api          : 'send_checkout_for_approval',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'demand_crm',
+		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'get_transacting_organization_shipment_data',
@@ -3936,6 +3968,26 @@ const partner = {
 			service_name : 'air_freight_rate',
 		},
 		{
+			api          : 'list_haulage_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_haulage_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -3959,6 +4011,16 @@ const partner = {
 			api          : 'update_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'update_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -3989,6 +4051,16 @@ const partner = {
 			api          : 'create_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'create_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -4944,6 +5016,26 @@ const partner = {
 			service_name : 'fcl_customs_rate',
 		},
 		{
+			api          : 'list_haulage_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_haulage_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4967,6 +5059,16 @@ const partner = {
 			api          : 'update_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'update_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -5017,6 +5119,16 @@ const partner = {
 			api          : 'create_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'create_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -9640,7 +9752,11 @@ const partner = {
 		},
 	],
 	utm_parameters: [
-
+		{
+			api          : 'create_utm_link',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
 		{
 			api          : 'create_utm',
 			access_type  : 'private',
@@ -12968,6 +13084,46 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'get_saas_subscription_profile',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'saas_get_active_plan_checkout_details',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_subscription_payment_link',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'create_subscription_generate_invoice',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
@@ -12976,6 +13132,16 @@ const partner = {
 			api          : 'sync_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'list_shipment_trade_partners',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_primary_poc',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 	analytics_dashboard: [

@@ -4,6 +4,9 @@ const EDIT_PARAMS_STAKEHOLDERS = {
 	booking_agent: {
 		idToMatch: 'importer_exporter_id',
 	},
+	booking_agent_manager: {
+		idToMatch: 'importer_exporter_id',
+	},
 	consignee_shipper_booking_agent: {
 		idToMatch: 'consignee_shipper_id',
 	},

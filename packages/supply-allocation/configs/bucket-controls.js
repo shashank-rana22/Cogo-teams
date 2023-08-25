@@ -13,7 +13,7 @@ export const bucketControls = [
 	},
 	{
 		title     : 'Allocation %',
-		flexBasis : '12.5%%',
+		flexBasis : '12.5%',
 	},
 	{
 		title     : 'Current Container Allocation',

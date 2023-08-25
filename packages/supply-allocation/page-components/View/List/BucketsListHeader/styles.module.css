@@ -1,0 +1,12 @@
+.container {
+	display: flex;
+	align-items: center;
+	padding: 20px 5px;
+	margin-top: 20px;
+	background: #fdfbf6;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+}
