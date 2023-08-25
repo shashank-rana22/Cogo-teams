@@ -130,8 +130,13 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 					<div className={styles.side_line_buttons}>
 						<Button
 							style={{ fontWeight: 600 }}
-							onClick={() => {
-								finalApproval('active');
+							onClick={async () => {
+								await finalApproval('active');
+								Toast.success('Updated');
+								push(
+									'/governance-manager/',
+									'/governance-manager/',
+								);
 							}}
 						>
 							{t('supplier_page_contract_sla_approve_button_label')}
@@ -141,8 +146,13 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 						<Button
 							themeType="secondary"
 							style={{ fontWeight: 600 }}
-							onClick={() => {
-								finalApproval('inactive');
+							onClick={async () => {
+								await finalApproval('inactive');
+								Toast.success('Saved');
+								push(
+									'/governance-manager/',
+									'/governance-manager/',
+								);
 							}}
 						>
 							{t('supplier_page_contract_sla_reject_button_label')}

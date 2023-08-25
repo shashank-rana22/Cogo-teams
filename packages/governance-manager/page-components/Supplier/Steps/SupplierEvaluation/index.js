@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { Table, Toggle, Textarea, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
@@ -17,6 +18,8 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 	const [feedback, setFeedback] = useState('');
 	const [provideBl, setProvideBl] = useState(false);
 	const [basisConsignee, setBasisConsignee] = useState(false);
+
+	const { push } = useRouter();
 
 	const {
 		data: organizationEvaluationDetails,
@@ -37,10 +40,6 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 		basisConsignee,
 		updateOrganizationService,
 	});
-
-	const handleSubmit = () => {
-		createOrganizationEvaluation();
-	};
 
 	return (
 		<>
@@ -118,13 +117,22 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
-					onClick={handleSubmit}
+					onClick={() => {
+						createOrganizationEvaluation('draft');
+						push(
+							'/governance-manager/',
+							'/governance-manager/',
+						);
+					}}
 				>
 					{t('supplier_page_supplier_evaluation_table_basic_save_and_do_it_later')}
 
 				</Button>
 
-				<Button onClick={handleSubmit}>
+				<Button onClick={() => {
+					createOrganizationEvaluation('active');
+				}}
+				>
 					{t('supplier_page_supplier_evaluation_table_basic_submit_and_next')}
 				</Button>
 

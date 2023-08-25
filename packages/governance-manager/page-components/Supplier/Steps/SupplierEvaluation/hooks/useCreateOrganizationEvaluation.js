@@ -9,7 +9,7 @@ function useCreateOrganizationEvaluation({
 		url    : '/create_organization_evaluation',
 	}, { manual: true });
 
-	const createOrganizationEvaluation = async () => {
+	const createOrganizationEvaluation = async (status = 'active') => {
 		try {
 			await trigger({
 				params: {
@@ -18,10 +18,10 @@ function useCreateOrganizationEvaluation({
 					organization_service_id : id,
 					provide_bl              : provideBl,
 					act_basis_consignee_mbl : basisConsignee,
-					status                  : 'active',
+					status,
 				},
 			});
-			updateOrganizationService();
+			if (status === 'active') { updateOrganizationService(); }
 		} catch (err) {
 			console.log(err);
 		}
