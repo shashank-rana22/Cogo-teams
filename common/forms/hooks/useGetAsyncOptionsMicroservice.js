@@ -44,11 +44,15 @@ function useGetAsyncOptionsMicroservice({
 	}, { manual: !(initialCall || query) });
 	let options = data?.list || data?.items || data?.data || data?.data?.list || data || [];
 
+	if (!Array.isArray(options)) {
+		options = [];
+	}
+
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });
 	}
 
-	const optionValues = Array.isArray(options) ? options.map((item) => item[valueKey]) : [];
+	const optionValues = options.map((item) => item[valueKey]);
 
 	const [{ loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
 		url    : endpoint,
