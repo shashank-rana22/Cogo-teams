@@ -2,10 +2,17 @@ import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ApplyLeave from '../../../../common/ApplyLeave';
+import useGetEmployeeLeaveBalances from '../../../../hooks/useGetEmployeeLeaveBalances';
 
 import styles from './styles.module.css';
 
 function LeaveStats() {
+	const { data } = useGetEmployeeLeaveBalances();
+	const {
+		available_privilege_leaves,
+		available_casual_leaves, available_sick_leaves,
+		pending_casual_leaves, pending_sick_leaves, pending_privilege_leaves,
+	} = data || {};
 	const [applyLeave, setApplyLeave] = useState(false);
 	return (
 		<>
@@ -14,7 +21,9 @@ function LeaveStats() {
 					<div className={styles.title}>Leaves Stats</div>
 					<div className={styles.pending_approval}>
 						<div className={styles.pending_dot} />
-						2 Pending Approval
+						{pending_casual_leaves + pending_privilege_leaves + pending_sick_leaves}
+						{' '}
+						Pending Approval
 					</div>
 				</div>
 				<div className={styles.leave_stats_data}>
@@ -23,7 +32,7 @@ function LeaveStats() {
 							Privilege Leaves
 						</div>
 						<div className={styles.stats_number}>
-							3
+							{available_privilege_leaves}
 						</div>
 					</div>
 					<div className={styles.leave_data}>
@@ -31,7 +40,7 @@ function LeaveStats() {
 							Casual Leaves
 						</div>
 						<div className={styles.stats_number}>
-							3
+							{available_casual_leaves}
 						</div>
 					</div>
 					<div className={styles.leave_data}>
@@ -39,7 +48,7 @@ function LeaveStats() {
 							Sick Leaves
 						</div>
 						<div className={styles.stats_number}>
-							3
+							{ available_sick_leaves}
 						</div>
 					</div>
 				</div>
