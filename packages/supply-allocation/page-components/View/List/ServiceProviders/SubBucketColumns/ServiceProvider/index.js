@@ -10,6 +10,7 @@ function ServiceProvider({
 	bucket_type = '',
 	current_allocated_containers = '',
 	rollingFclFreightSearchId = '',
+	refetchBucketsData = () => {},
 }) {
 	const {
 		service_provider,
@@ -31,6 +32,7 @@ function ServiceProvider({
 				bucket_type={bucket_type}
 				current_allocated_containers={current_allocated_containers}
 				rollingFclFreightSearchId={rollingFclFreightSearchId}
+				refetchBucketsData={refetchBucketsData}
 			/>
 			<div
 				style={{

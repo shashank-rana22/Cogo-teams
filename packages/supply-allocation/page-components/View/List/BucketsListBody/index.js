@@ -5,7 +5,7 @@ import { useState } from 'react';
 import CustomProgressBar from '../../../../commons/CustomProgressBar';
 import ServiceProviders from '../ServiceProviders';
 
-function BucketsListBody({ item = {}, searchId = '' }) {
+function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => {} }) {
 	const {
 		bucket_type,
 		allocation_percentage,
@@ -88,7 +88,6 @@ function BucketsListBody({ item = {}, searchId = '' }) {
 						{component}
 					</div>
 				))}
-
 			</div>
 
 			{show ? (
@@ -96,6 +95,7 @@ function BucketsListBody({ item = {}, searchId = '' }) {
 					searchId={searchId}
 					bucketType={bucket_type}
 					currentAllocatedContainers={current_allocated_containers}
+					refetchBucketsData={refetchBucketsData}
 				/>
 			) : null}
 

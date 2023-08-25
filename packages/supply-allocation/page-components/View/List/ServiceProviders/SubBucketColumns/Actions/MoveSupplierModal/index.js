@@ -35,13 +35,14 @@ function MoveSupplierModal({
 	bucket_type = '',
 	current_allocated_containers = '',
 	rollingFclFreightSearchId = '',
+	refetchBucketsData = () => {},
 }) {
 	const { control, handleSubmit } = useForm({});
 
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation();
+	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation({ refetchBucketsData });
 
 	const onClickSubmit = (values) => {
 		const payload = {

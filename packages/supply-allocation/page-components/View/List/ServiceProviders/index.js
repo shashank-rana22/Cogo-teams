@@ -9,7 +9,12 @@ import useGetRollingForecastBucketData from '../../../../hooks/useGetRollingFore
 import BucketTable from './ServiceProvidersTable';
 import WarningModal from './WarningModal';
 
-function ServiceProviders({ searchId = '', bucketType = '', currentAllocatedContainers = 0 }) {
+function ServiceProviders({
+	searchId = '',
+	bucketType = '',
+	currentAllocatedContainers = 0,
+	refetchBucketsData = () => { },
+}) {
 	const [bulkEditMode, setBulkEditMode] = useState(false);
 	const [showWarning, setShowWarning] = useState(false);
 
@@ -82,6 +87,7 @@ function ServiceProviders({ searchId = '', bucketType = '', currentAllocatedCont
 						bucket_type={bucketType}
 						bulkEditMode={bulkEditMode}
 						serviceProvidersApiLoading={loading}
+						refetchBucketsData={refetchBucketsData}
 						serviceProvidersData={data}
 					/>
 				</div>

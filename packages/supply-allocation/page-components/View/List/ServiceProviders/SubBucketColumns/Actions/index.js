@@ -9,6 +9,7 @@ function Actions({
 	item = {},
 	bucket_type = '',
 	rollingFclFreightSearchId = '',
+	refetchBucketsData = () => {},
 }) {
 	const [showMoveSupplierModal, setShowMoveSupplierModal] = useState(false);
 	const [showPopOver, setShowPopOver] = useState(false);
@@ -48,6 +49,7 @@ function Actions({
 					bucket_type={bucket_type}
 					current_allocated_containers={item?.allocated_containers}
 					rollingFclFreightSearchId={rollingFclFreightSearchId}
+					refetchBucketsData={refetchBucketsData}
 				/>
 			) : null}
 		</div>
