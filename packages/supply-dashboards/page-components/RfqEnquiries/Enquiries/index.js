@@ -1,5 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -13,9 +13,11 @@ import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
 
 function Enquiries() {
+	const ZEROVALUE = 0;
 	const ZERO_VALUE = 1;
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [revertCounts, setRevertCounts] = useState({});
+	const [showMore, setShowMore] = useState(true);
 	const [activeTab, setActiveTab] = useState('shipmemt_details');
 	const { query, push } = useRouter();
 	const rfqId = query?.id;
@@ -25,6 +27,8 @@ function Enquiries() {
 		list:data,
 		setPage,
 	} = useGetRfqSearches({ rfqId });
+
+	const negotiation_remarks = data?.data[ZEROVALUE]?.negotiation_remarks;
 
 	useEffect(() => {
 		if (data) {
@@ -87,10 +91,36 @@ function Enquiries() {
 
 							<TabPanel name="remarks" title="Remarks">
 								<Remarks
-									// showMore={showMore}
+									showMore={showMore}
 									loading={loading}
 									selectedCard={selectedCard}
 								/>
+
+								{showMore
+										&& negotiation_remarks !== null
+										&& negotiation_remarks?.length >= ZEROVALUE && (
+											<div
+												role="presentation"
+												className={styles.bottom}
+												onClick={() => setShowMore(!showMore)}
+											>
+												Show More
+												<IcMArrowDown />
+											</div>
+								)}
+
+								{!showMore
+										&& negotiation_remarks !== null
+										&& negotiation_remarks?.length >= ZEROVALUE && (
+											<div
+												role="presentation"
+												className={styles.bottom}
+												onClick={() => setShowMore(!showMore)}
+											>
+												Show Less
+												<IcMArrowUp />
+											</div>
+								)}
 							</TabPanel>
 						</Tabs>
 					</div>
