@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
 const MIN_AVERAGE_RATING = 3;
-const ESCALATE_DEFAULT_CHAT_COUNT = 0;
+const MIN_ROUND_UP_DIGIT = 2;
 
 function Stats({
 	totalQuotationSend = 0,
@@ -27,12 +27,12 @@ function Stats({
 	const { chat_stats = {} } = statsData || {};
 	const {
 		rating = [],
-		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = 0, agent_msg_stats : agentMsgStats = [],
+		avg_response_time : avgResponseTime = 0, rate_revert : rateRevert = 0, agent_msg_stats : agentMsgStats = [],
 	} = agentStatsData || {};
 
 	const { data, escalateLoading } = useGetAgentTimelineEscalate({ viewType, timePeriodValue });
 
-	const escalateCount = data?.total_count || ESCALATE_DEFAULT_CHAT_COUNT;
+	const escalateCount = data?.total_count || MIN_COUNT;
 
 	const { avg_rating: averageRating = '' } = rating || [];
 
@@ -51,21 +51,21 @@ function Stats({
 	} = calls[GLOBAL_CONSTANTS.zeroth_index] || [];
 
 	const totalCallMade = outgoing_answered + outgoing_missed;
-	const totalCallReceive = incoming_answered + incoming_missed;
-	const totalChatAssigne = active + escalated + warning;
+	const totalCallReceived = incoming_answered + incoming_missed;
+	const totalChatAssigned = active + escalated + warning;
 
 	const STATS_FEEDBACK_COUNT = {
-		no_of_bookings              : booked,
-		no_of_quotation_send        : totalQuotationSend,
-		chats_assigned              : totalChatAssigne,
-		calls_made                  : totalCallMade,
-		calls_received              : totalCallReceive,
+		no_of_bookings              : getFormattedNumber(booked || MIN_COUNT),
+		no_of_quotation_send        : getFormattedNumber(totalQuotationSend || MIN_COUNT),
+		chats_assigned              : getFormattedNumber(totalChatAssigned || MIN_COUNT),
+		calls_made                  : getFormattedNumber(totalCallMade || MIN_COUNT),
+		calls_received              : getFormattedNumber(totalCallReceived || MIN_COUNT),
 		customer_satisfaction_score : averageRating,
-		no_of_rates_reverted        : rateRevert,
+		no_of_rates_reverted        : getFormattedNumber(rateRevert || MIN_COUNT),
 		no_of_rate_sheets_received  : '0',
-		avg_response_time           : avgResponseTime,
-		emails_send_count           : emailCount,
-		escalate_chats_count        : escalateCount,
+		avg_response_time           : `${(avgResponseTime || MIN_COUNT)?.toFixed(MIN_ROUND_UP_DIGIT)} min`,
+		emails_send_count           : getFormattedNumber(emailCount || MIN_COUNT),
+		escalate_chats_count        : getFormattedNumber(escalateCount || MIN_COUNT),
 
 	};
 
@@ -87,7 +87,7 @@ function Stats({
 
 						<div className={styles.count}>
 							{(loading || escalateLoading) ? <Placeholder width="80px" height="40px" /> : (
-								<div>{getFormattedNumber(STATS_FEEDBACK_COUNT[item] || MIN_COUNT)}</div>
+								<div>{STATS_FEEDBACK_COUNT[item]}</div>
 							)}
 						</div>
 						{(item === 'customer_satisfaction_score' && averageRating)
