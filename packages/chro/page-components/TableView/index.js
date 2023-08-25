@@ -1,5 +1,4 @@
 import { Modal, Button, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
@@ -32,7 +31,7 @@ const getVariablePay = ({
 	|| VARIABLE_PAY_THRESHOLD;
 
 function TableView({ search = '', activeTab = '' }) {
-	const [ctcBreakup, setCtcBreakup] = useState({});
+	const [ctcBreakup, setCtcBreakup] = useState('');
 	const [error, setError] = useState(false);
 
 	const { data = {}, onPageChange, loading, refetch } = useGetTableView({ search, activeTab });
@@ -89,7 +88,7 @@ function TableView({ search = '', activeTab = '' }) {
 
 			<Modal
 				size="lg"
-				show={!isEmpty(ctcBreakup)}
+				show={ctcBreakup}
 				onClose={() => setCtcBreakup('')}
 			>
 				{ctcBreakup?.employee_detail?.name
