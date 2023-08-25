@@ -116,5 +116,6 @@
     "awb_controls_chargeable_weight_required": "Chargeable Weight is Required",
     "awb_controls_package_count_required": "Package Count is Required",
     "awb_controls_cannot_be_negative_validation": "Cannot be Negative",
-    "awb_controls_should_be_greater_than_0_validation": "Should be greater than 0"
+    "awb_controls_should_be_greater_than_0_validation": "Should be greater than 0",
+    "utils_get_select_all_checkbox_label": "Select All"
 }

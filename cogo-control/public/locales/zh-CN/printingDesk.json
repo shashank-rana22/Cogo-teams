@@ -116,5 +116,6 @@
     "awb_controls_chargeable_weight_required": "需要收费的重量",
     "awb_controls_package_count_required": "包装计数是必需的",
     "awb_controls_cannot_be_negative_validation": "不能负面",
-    "awb_controls_should_be_greater_than_0_validation": "应该大于0"
+    "awb_controls_should_be_greater_than_0_validation": "应该大于0",
+    "utils_get_select_all_checkbox_label": "全选"
 }

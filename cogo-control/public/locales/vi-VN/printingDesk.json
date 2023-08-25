@@ -116,5 +116,6 @@
     "awb_controls_chargeable_weight_required": "Cần có trọng lượng tính phí",
     "awb_controls_package_count_required": "Số lượng gói là bắt buộc",
     "awb_controls_cannot_be_negative_validation": "Không thể là tiêu cực",
-    "awb_controls_should_be_greater_than_0_validation": "Nên lớn hơn 0"
+    "awb_controls_should_be_greater_than_0_validation": "Nên lớn hơn 0",
+    "utils_get_select_all_checkbox_label": "Chọn tất cả"
 }

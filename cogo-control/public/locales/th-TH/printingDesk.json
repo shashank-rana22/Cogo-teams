@@ -116,5 +116,6 @@
     "awb_controls_chargeable_weight_required": "ต้องมีน้ำหนักที่เรียกเก็บได้",
     "awb_controls_package_count_required": "จำเป็นต้องมีจำนวนแพ็คเกจ",
     "awb_controls_cannot_be_negative_validation": "ไม่สามารถลบได้",
-    "awb_controls_should_be_greater_than_0_validation": "ควรมากกว่า 0"
+    "awb_controls_should_be_greater_than_0_validation": "ควรมากกว่า 0",
+    "utils_get_select_all_checkbox_label": "เลือกทั้งหมด"
 }
