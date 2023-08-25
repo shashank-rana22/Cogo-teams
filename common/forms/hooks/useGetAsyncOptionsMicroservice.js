@@ -48,7 +48,7 @@ function useGetAsyncOptionsMicroservice({
 		options = getModifiedOptions({ options });
 	}
 
-	const optionValues = options.map((item) => item[valueKey]);
+	const optionValues = Array.isArray(options) ? options.map((item) => item[valueKey]) : [];
 
 	const [{ loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
 		url    : endpoint,
