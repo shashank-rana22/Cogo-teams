@@ -16,8 +16,12 @@ const WARNING_SUB_TEXT = 'You are about to move a supplier to a new bucket.'
 function Header({ short_name = '' }) {
 	return (
 		<>
-			<div style={{ fontSize: '18px' }}>{ short_name}</div>
-			<div style={{ fontSize: '12px', color: 'red' }}>{ WARNING_SUB_TEXT}</div>
+			<div style={{ fontSize: '18px' }}>
+				Move Service Provider :
+				{' '}
+				{ short_name}
+			</div>
+			<div style={{ fontSize: '12px', color: '#ee3425' }}>{ WARNING_SUB_TEXT}</div>
 		</>
 	);
 }
@@ -53,8 +57,6 @@ function MoveSupplierModal({
 			size="lg"
 			show={showMoveSupplierModal}
 			onClose={() => setShowMoveSupplierModal(false)}
-			className={styles.modal_container}
-			placement="top"
 		>
 			<Modal.Header title={<Header short_name={short_name} />} />
 
