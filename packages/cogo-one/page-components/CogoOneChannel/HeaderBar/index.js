@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -54,7 +55,7 @@ function HeaderBar({
 	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
 	return (
-		<div className={styles.header_container}>
+		<div className={cl`${styles.header_container} ${showDetails ? styles.show_on_top : ''}`}>
 			<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
 				{showDetails && (
 					<ShowMoreStats
@@ -77,7 +78,14 @@ function HeaderBar({
 				style={{ justifyContent: showDetails ? 'center' : 'space-between' }}
 			>
 				<div className={styles.label_styles}>
-					{(showDetails || initialViewType !== 'cogoone_admin') ? '' : `${startCase(viewType)} View` }
+					{(showDetails || initialViewType !== 'cogoone_admin')
+						? null
+						: (
+							<>
+								<IcMEyeopen className={styles.eye_icon} />
+								{`${startCase(viewType)} View`}
+							</>
+						)}
 				</div>
 
 				{isPunchPresent && !preferenceLoading && (

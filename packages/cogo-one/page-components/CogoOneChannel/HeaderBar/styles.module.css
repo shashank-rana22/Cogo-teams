@@ -1,8 +1,8 @@
 .header_container {
 	position: absolute;
 	top: 0;
-	right: 0%;
-	z-index: 9000;
+	right: 0;
+	z-index: 999;
 	width: 100%;
 }
 
@@ -13,6 +13,8 @@
 }
 
 .label_styles {
+	display: flex;
+	align-items: center;
 	padding-left: 20px;
 	margin: 4px 0 0 var(--layout-navbar-collapsed);
 	font-size: 12px;
@@ -35,8 +37,11 @@
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
+.show_on_top {
+	z-index: 9999;
+}
+
 .minimize_container {
-	z-index: 99999;
 	display: flex;
 	align-items: center;
 	width: fit-content;
@@ -118,4 +123,10 @@
 
 .hide_section {
 	display: none;
+}
+
+.eye_icon {
+	width: 14px;
+	height: 14px;
+	margin-right: 4px;
 }

@@ -8,12 +8,12 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMa
 import styles from './styles.module.css';
 
 function getOptions() {
-	return Object.keys(VIEW_TYPE_GLOBAL_MAPPING).sort().map(
+	return Object.keys(VIEW_TYPE_GLOBAL_MAPPING)?.sort()?.map(
 		(itm) => ({
 			name  : itm,
 			value : itm,
 			label : startCase(itm),
-		}),
+		}) || [],
 	);
 }
 
