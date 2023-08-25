@@ -12,7 +12,7 @@ const MINIMUM_VALUE = 0;
 const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 	const loadOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
-		params: { Audience: 'cogoport_user' },
+		params: { Audience: 'cogoone_demand' },
 	});
 
 	const { keyword = '', datakey = '', validation = '' } = TICKET_DATA_KEYWORDS_MAPPING

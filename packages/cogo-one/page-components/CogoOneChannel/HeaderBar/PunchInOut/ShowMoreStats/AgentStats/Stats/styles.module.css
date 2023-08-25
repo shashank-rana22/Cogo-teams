@@ -1,21 +1,43 @@
-.top_stats_content {
+.stats_container {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	width: 100%;
 }
 
 .each_stats_div {
-	width: 34%;
+	width: 30%;
 	padding-bottom: 16px;
-	border-bottom: 1px dashed #dde4ea;
 
 	&:last-child {
 		width: 40%;
 	}
+
+	&:nth-child(3) {
+		width: 40%;
+	}
+}
+
+.new_each_stats {
+	width: 24%;
+
+	&:last-child {
+		width: 24%;
+	}
+
+	&:nth-child(3) {
+		width: 24%;
+	}
+}
+
+.stat_box {
+	&:nth-child(-n+3) {
+		border-bottom: 1px dashed #dde4ea;
+	}
 }
 
 .title {
-	color: #808080;
+	margin-top: 18px;
 }
 
 .count {
@@ -31,19 +53,4 @@
 	width: 20px;
 	height: 20px;
 	margin-top: 18px;
-	fill: #ee3425;
-}
-
-.bottom_stats_content {
-	display: flex;
-	align-items: center;
-}
-
-.each_div {
-	width: 60%;
-	padding-top: 32px;
-}
-
-.emoji_icon {
-	margin-right: 4px;
 }
