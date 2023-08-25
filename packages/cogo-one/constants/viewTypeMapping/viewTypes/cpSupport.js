@@ -47,6 +47,7 @@ const CP_SUPPORT = {
 		customer_org_users          : false,
 		convert_account_to_cp       : true,
 		show_shipment_reminder      : true,
+		show_lead_voice_calls       : false,
 	},
 };
 

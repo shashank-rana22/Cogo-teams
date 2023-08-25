@@ -1,10 +1,9 @@
 import { Tooltip, Avatar, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcMEmail, IcMCall, IcMWhatsapp } from '@cogoport/icons-react';
+import { IcMEmail, IcMCall, IcMWhatsapp, IcMLiveChat } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import getEachUserFormatedData from '../../../../../../../utils/getPocUserFormattedData';
 
@@ -37,13 +36,32 @@ const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) 
 
 function PocUser({
 	stakeHoldersData = [],
-	setModalData = () => {},
+	showPocDetails = {},
+	mailProps = {},
 	setActiveTab = () => {},
+	handleShipmentChat = () => {},
 }) {
 	const dispatch = useDispatch();
+
 	const geo = getGeoConstants();
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
+
+	const { setButtonType, setEmailState } = mailProps;
+
+	const handleSendEmail = ({ user = {} }) => {
+		setButtonType('send_mail');
+		setEmailState(
+			(prev) => ({
+				...prev,
+				body          : '',
+				subject       : '',
+				toUserEmail   : user?.email ? [user?.email] : [],
+				ccrecipients  : [],
+				bccrecipients : [],
+			}),
+		);
+	};
 
 	if (isEmpty(stakeHoldersData)) {
 		return "No POC's found";
@@ -161,6 +179,14 @@ function PocUser({
 										/>
 									) : null}
 
+									{(!isCustomer && !isTradePartner) ? (
+										<IcMLiveChat
+											className={styles.message_icon_styles}
+											onClick={() => handleShipmentChat({ shipmentDetails: showPocDetails })}
+										/>
+
+									) : null}
+
 									{hasVoiceCallAccess && (
 										<IcMCall
 											className={cl`${styles.call_icon_styles}
@@ -180,10 +206,7 @@ function PocUser({
 										className={cl`${styles.email_icon_styles}
 										${isCustomer ? styles.customer_icons : ''}
 										${isTradePartner ? styles.trade_partners_icons : ''}`}
-										onClick={() => setModalData({
-											modalType : 'email',
-											userData  : user,
-										})}
+										onClick={() => handleSendEmail({ user })}
 									/>
 								</div>
 							</div>
@@ -192,7 +215,6 @@ function PocUser({
 				},
 			)}
 		</div>
-
 	);
 }
 
