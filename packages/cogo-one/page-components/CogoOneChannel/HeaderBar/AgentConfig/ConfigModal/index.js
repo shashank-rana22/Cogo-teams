@@ -1,4 +1,4 @@
-import { Modal, Pagination, cl, Button } from '@cogoport/components';
+import { Modal, Pagination, cl } from '@cogoport/components';
 import { useState } from 'react';
 
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
@@ -72,6 +72,11 @@ function ConfigModal({
 		page = 0,
 	} = listAgentStatus;
 
+	const handleClose = () => {
+		setActiveCard('');
+		setShowAgentDetails(false);
+	};
+
 	const COMPONENT_PROPS = {
 		list_agents: {
 			firestore,
@@ -101,12 +106,9 @@ function ConfigModal({
 			setSwitchViewType,
 			setActiveCard,
 			switchViewType,
+			handleClose,
+			setViewType,
 		},
-	};
-
-	const handleClose = () => {
-		setActiveCard('');
-		setShowAgentDetails(false);
 	};
 
 	return (
@@ -159,29 +161,22 @@ function ConfigModal({
 						</div>
 					)}
 			</Modal.Body>
-			<Modal.Footer className={styles.footer_styles}>
-				{!loading && SHOW_PAGINATION_FOR.includes(activeCard) ? (
-					<Pagination
-						className={styles.pagination}
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						onPageChange={setPagination}
-					/>
-				) : null}
 
-				{activeCard === 'switch_views' ? (
-					<Button
-						size="md"
-						themeType="primary"
-						disabled={viewType === switchViewType}
-						onClick={() => setViewType(switchViewType)}
-					>
-						Switch
-					</Button>
-				) : null}
-			</Modal.Footer>
+			{SHOW_PAGINATION_FOR.includes(activeCard) ? (
+				<Modal.Footer className={styles.footer_styles}>
+					{!loading ? (
+						<Pagination
+							className={styles.pagination}
+							type="table"
+							currentPage={page}
+							totalItems={total_count}
+							pageSize={page_limit}
+							onPageChange={setPagination}
+						/>
+					) : null}
+
+				</Modal.Footer>
+			) : null}
 		</Modal>
 	);
 }

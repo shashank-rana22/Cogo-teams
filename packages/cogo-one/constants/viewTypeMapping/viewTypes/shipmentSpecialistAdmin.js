@@ -41,7 +41,6 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		customer_org_users          : true,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
-		view_switch_allowed         : false,
 	},
 };
 

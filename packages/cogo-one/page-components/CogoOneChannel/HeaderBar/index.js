@@ -57,7 +57,7 @@ function HeaderBar({
 	return (
 		<div className={cl`${styles.header_container} ${showDetails ? styles.show_on_top : ''}`}>
 			<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
-				{showDetails && (
+				{showDetails ? (
 					<ShowMoreStats
 						setShowDetails={setShowDetails}
 						showDetails={showDetails}
@@ -71,7 +71,7 @@ function HeaderBar({
 						setTimePeriodValue={setTimePeriodValue}
 						isPunchPresent={isPunchPresent}
 					/>
-				)}
+				) : null}
 			</div>
 
 			<div
@@ -89,7 +89,7 @@ function HeaderBar({
 						)}
 				</div>
 
-				{isPunchPresent && !preferenceLoading && (
+				{(isPunchPresent && !preferenceLoading) ? (
 					<PunchInOut
 						timelineLoading={timelineLoading}
 						preferenceLoading={preferenceLoading}
@@ -104,14 +104,14 @@ function HeaderBar({
 						isShaking={isShaking}
 						lastBreakTime={lastBreakTime}
 					/>
-				)}
+				) : null}
 
 				<div className={cl`${styles.configs} ${showDetails ? styles.hide_section : ''}`}>
 					{flashRevertLogs ? (
 						<FlashRevertLogs />
 					) : null}
 
-					{(!isEmpty(configurationsToBeShown) || initialViewType === 'cogoone_admin') && (
+					{(!isEmpty(configurationsToBeShown) || initialViewType === 'cogoone_admin') ? (
 						<AgentConfig
 							firestore={firestore}
 							configurationsToBeShown={configurationsToBeShown}
@@ -120,7 +120,7 @@ function HeaderBar({
 							viewType={viewType}
 							showDetails={showDetails}
 						/>
-					)}
+					) : null}
 				</div>
 			</div>
 		</div>

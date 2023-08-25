@@ -33,9 +33,11 @@ function usePunchInOut({
 
 	const shakeButton = () => {
 		setIsShaking(true);
-		setTimeout(() => {
+		const timerFunction = setTimeout(() => {
 			setIsShaking(false);
 		}, BUTTON_SHAKE_DURATION);
+
+		return () => clearTimeout(timerFunction);
 	};
 
 	const handlePunchIn = (event) => {

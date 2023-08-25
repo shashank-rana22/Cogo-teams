@@ -36,8 +36,10 @@ function PunchInOut({
 	isShaking = false,
 	lastBreakTime = '',
 }) {
-	const [showTimer, setShowTimer] = useState(false);
-	const [showEndButton, setShowEndButton] = useState(false);
+	const [punchConfig, setPunchConfig] = useState({
+		showTimer     : false,
+		showEndButton : false,
+	});
 	const [countdown, setCountdown] = useState(MIN_TIMER_VALUE);
 
 	const startShift = useCallback(() => {
@@ -47,11 +49,15 @@ function PunchInOut({
 
 		const timeDiff = startTime - currentTime;
 
+		let timerFunction;
+
 		if (timeDiff < MIN_SECOND && status === 'punched_out') {
 			setIsShaking(false);
 		} else {
-			setTimeout(shakeButton, timeDiff);
+			timerFunction = setTimeout(shakeButton, timeDiff);
 		}
+
+		return () => clearTimeout(timerFunction);
 	}, [setIsShaking, shakeButton, status]);
 
 	useEffect(() => {
@@ -64,16 +70,22 @@ function PunchInOut({
 			const remainingTime = Math.floor((targetTime - currentTime) / UPDATE_TIME_BY_ONE_SECOND);
 
 			if (remainingTime <= COUNT_DOWN_BUFFER_TIME && remainingTime > MIN_SECOND) {
-				setShowTimer(true);
-				setShowEndButton(false);
+				setPunchConfig({
+					showTimer     : true,
+					showEndButton : false,
+				});
 				setCountdown(remainingTime);
 			} else if (remainingTime <= MIN_SECOND) {
-				setShowTimer(false);
+				setPunchConfig({
+					showTimer     : false,
+					showEndButton : true,
+				});
 				setCountdown(MIN_SECOND);
-				setShowEndButton(true);
 			} else {
-				setShowTimer(false);
-				setShowEndButton(false);
+				setPunchConfig({
+					showTimer     : false,
+					showEndButton : false,
+				});
 				setCountdown(remainingTime);
 			}
 		}, UPDATE_TIME_BY_ONE_SECOND);
@@ -107,8 +119,8 @@ function PunchInOut({
 						: (
 							<TimelineContent
 								handlePunchOut={handlePunchOut}
-								showTimer={showTimer}
-								showEndButton={showEndButton}
+								showTimer={punchConfig?.showTimer}
+								showEndButton={punchConfig?.showEndButton}
 								lastBreakTime={lastBreakTime}
 								formatTime={formatTime}
 								countdown={countdown}

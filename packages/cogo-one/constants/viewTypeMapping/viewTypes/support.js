@@ -49,7 +49,6 @@ const SUPPORT = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : true,
-		view_switch_allowed         : false,
 	},
 };
 
