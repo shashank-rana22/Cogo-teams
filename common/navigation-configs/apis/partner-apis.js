@@ -8790,6 +8790,20 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api          : 'get_kam_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_service_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
 	],
 	compliance: [
 		{

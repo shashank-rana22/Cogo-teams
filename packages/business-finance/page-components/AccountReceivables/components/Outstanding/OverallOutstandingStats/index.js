@@ -36,8 +36,6 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 								key={val?.label}
 								style={{
 									width: '16%',
-									// display : 'flex',
-									// justifyContent : 'center',
 								}}
 							>
 								{val.label}

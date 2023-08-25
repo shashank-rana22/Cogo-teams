@@ -1,0 +1,57 @@
+.container {
+	display: flex;
+	width: 100%;
+	height: 260px;
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 550;
+	color: #333;
+}
+
+.color_dot {
+	/* background: ${({ bgColor }) => bgColor || '#5936f0'}; */
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+	border-radius: 50%;
+}
+
+.toolTip_title {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.toolTip_amount {
+	display: flex;
+	align-items: center;
+	margin-left: 6px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.toolTip_div {
+	padding: 9px 12px;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 14px 0 10px;
+	margin-bottom: 6px;
+}
+
+.graph_wrapper {
+	width: 55%;
+	height: 260px;
+}
+
+/* export const StyledCol = styled(Col)`
+	border-right: 1px solid rgb(198, 219, 239);
+`; */
