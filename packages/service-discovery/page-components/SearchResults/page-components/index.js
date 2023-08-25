@@ -20,14 +20,13 @@ const COMPONENT_MAPPING = {
 };
 
 function SearchResults() {
-	const { user:{ id }, query, partner_id = '' } = useSelector(({ profile, general }) => ({
+	const { user:{ id }, query = {}, partner_id = '' } = useSelector(({ profile, general }) => ({
 		user       : profile.user,
 		query      : general?.query,
 		partner_id : profile?.partner?.id,
 	}));
 
-	// const { redirect_required = 'true' } = query;
-	const redirect_required = 'false';
+	const { redirect_required = 'true' } = query || {};
 
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);

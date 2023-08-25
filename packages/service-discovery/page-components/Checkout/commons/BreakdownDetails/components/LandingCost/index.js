@@ -23,10 +23,6 @@ function LandingCost({
 
 	const { price = 0, currency = '', quantity = 1 } = convenience_rate;
 
-	const totalBeforeDiscount = rate?.tax_total_price || DEFAULT_VALUE;
-	const totalPrice = rate?.tax_total_price_discounted || DEFAULT_VALUE;
-	const discount = totalPrice - totalBeforeDiscount;
-
 	const finalConvenienceFee = convertCurrencyValue(
 		price * quantity,
 		currency,
@@ -53,7 +49,7 @@ function LandingCost({
 		return acc;
 	}, DEFAULT_VALUE);
 
-	const totalCost = total + finalConvenienceFee + finalTaxValue + discount + otherChargesPrice;
+	const totalCost = total + finalConvenienceFee + finalTaxValue + otherChargesPrice;
 
 	return (
 		<div className={styles.container}>
