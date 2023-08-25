@@ -16,8 +16,16 @@ function Form({ item = {} }, ref) {
 		}
 	});
 
-	const { control, handleSubmit, formState:{ errors = {} } } = useForm({
+	const { control, handleSubmit, formState:{ errors = {} }, watch } = useForm({
 		defaultValues: DEFAULT_VALUES,
+	});
+
+	const watchServiceProvider = watch('service_provider_id');
+
+	controls.forEach((_c, index) => {
+		if (controls[index]?.name === 'sourced_by_id' && watchServiceProvider) {
+			controls[index].params = { filters: { organization_id: watchServiceProvider } };
+		}
 	});
 
 	const onSubmit = (values) => (values);

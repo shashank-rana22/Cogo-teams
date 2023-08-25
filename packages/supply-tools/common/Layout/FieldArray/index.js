@@ -9,8 +9,6 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true })
 
 	const { fields, append, remove } = useFieldArray({ control, name });
 
-	console.log({ name, fields });
-
 	return (
 		<div className={styles.field_array}>
 			{fields.map((field, index) => (

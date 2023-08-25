@@ -49,6 +49,7 @@ function ListView({ data = {}, columns = [], EditForm = () => {}, loading = fals
 					</div>
 				))}
 			</div>
+
 			<hr className={styles.divider} />
 
 			<div>
@@ -77,27 +78,29 @@ function ListView({ data = {}, columns = [], EditForm = () => {}, loading = fals
 				))}
 			</div>
 
-			<Modal
-				show={showEdit}
-				onClose={() => { setShowEdit(null); }}
-				size="lg"
-				placement="top"
-			>
-				<Modal.Header title="Edit Detention / Demurrage" />
-				<Modal.Body>
-					<EditForm item={showEdit} ref={editRef} />
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						themeType="secondary"
-						style={{ marginRight: 8 }}
-					>
-						Cancel
-					</Button>
+			{showEdit ? (
+				<Modal
+					show={showEdit}
+					onClose={() => { setShowEdit(null); }}
+					size="lg"
+					placement="top"
+				>
+					<Modal.Header title="Edit Detention / Demurrage" />
+					<Modal.Body>
+						<EditForm item={showEdit} ref={editRef} />
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: 8 }}
+						>
+							Cancel
+						</Button>
 
-					<Button onClick={onEditSubmit}>Submit</Button>
-				</Modal.Footer>
-			</Modal>
+						<Button onClick={onEditSubmit}>Submit</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

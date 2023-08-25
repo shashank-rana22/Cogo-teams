@@ -20,12 +20,9 @@ function Footer({ services = [] }) {
 		[services],
 	);
 
-	console.log(data);
 	return (
 		<div className={styles.footer}>
-			<div>
-				<Table columns={tableColumns} data={data} />
-			</div>
+			<Table columns={tableColumns} data={data} />
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
 .table_container {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 	width: 40%;
 }
 
@@ -17,4 +18,10 @@
 	justify-content: center;
 	width: 100%;
 	background-color: antiquewhite;
+}
+
+.updated_at {
+	width: 100%;
+	font-size: 12px;
+	text-align: right;
 }

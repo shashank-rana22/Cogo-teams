@@ -1,4 +1,6 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -15,13 +17,22 @@ function Footer({ item = {} }) {
 		{ Header: 'Currency', accessor: (row) => row?.currency },
 		{ Header: 'Price', accessor: (row) => row?.price },
 	];
-	const { slabs = [] } = item || {};
+	const { slabs = [], updated_at = '' } = item || {};
 
 	return (
 		<div className={styles.container}>
 			{show ? (
 				<div className={styles.table_container}>
 					<Table data={slabs} columns={columns} />
+					<div className={styles.updated_at}>
+						{formatDate({
+							date       : updated_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+						})}
+
+					</div>
 				</div>
 			) : null}
 
