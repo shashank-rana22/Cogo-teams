@@ -649,6 +649,41 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_company_location',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_geo_location_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_leave_applications',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_leave_calendar',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_leave_balances',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

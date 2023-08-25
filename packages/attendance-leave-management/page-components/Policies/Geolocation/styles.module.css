@@ -3,6 +3,7 @@
 	flex-direction: column;
 	gap: 24px;
 	align-items: flex-start;
+	width: 100%;
 	padding: 16px 12px;
 	background: #f9f9f9;
 	border-radius: 16px;
@@ -91,6 +92,7 @@
 	align-items: center;
 	align-self: stretch;
 	justify-content: space-between;
+	padding: 24px 16px;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 10px;
@@ -150,4 +152,10 @@
 	line-height: 150%;
 	color: #221f20;
 	text-align: center;
+}
+
+.arrow_section {
+	display: flex;
+	gap: 6px;
+	align-items: flex-start;
 }

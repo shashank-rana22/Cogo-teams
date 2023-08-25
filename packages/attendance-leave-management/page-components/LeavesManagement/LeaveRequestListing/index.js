@@ -1,3 +1,5 @@
+import useGetLeaveRequestListing from '../../../hooks/useGetLeaveRequestListing';
+
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
 import styles from './styles.module.css';
@@ -96,6 +98,7 @@ const dataArr = [
 ];
 
 function LeaveRequestListing() {
+	const { data, filters, setFilters } = useGetLeaveRequestListing();
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
@@ -105,7 +108,7 @@ function LeaveRequestListing() {
 				</div>
 			</div>
 			<div className={styles.desktop_view}>
-				<DesktopView dataArr={dataArr} />
+				<DesktopView dataArr={data} filters={filters} setFilters={setFilters} />
 			</div>
 			<div className={styles.mobile_view}>
 				<MobileView dataArr={dataArr} />

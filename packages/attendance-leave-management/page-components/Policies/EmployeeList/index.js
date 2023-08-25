@@ -1,11 +1,21 @@
-import { Select, Input } from '@cogoport/components';
+import { Input } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
+
+import useGetEmployeeList from '../../../hooks/useGetEmployeeList';
+import { EMPLOYEE_LIST_CONTROLS } from '../../../utils/constants';
 
 import EmployeeTable from './EmployeeTable';
 import styles from './styles.module.css';
 
-function EmployeeList() {
+function EmployeeList({ selectedLocation }) {
+	const { designation } = EMPLOYEE_LIST_CONTROLS;
+	console.log('selectedLocation', selectedLocation);
+	// const [editItemId, setEditItemId] = useState(null);
+	// const [selectedIds, setSelectedIds] = useState([]);
+	const { loading, data, setFilters } = useGetEmployeeList(selectedLocation);
+	console.log(data);
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
@@ -21,14 +31,12 @@ function EmployeeList() {
 				<div className={styles.filters}>
 					<div className={styles.selection_options}>
 						<div className={styles.select}>
-							<Select placeholder="Designation" />
+							<AsyncSelect {...designation} />
 						</div>
-						<div className={styles.select}>
-							<Select placeholder="Department" />
-						</div>
-						<div className={styles.select}>
-							<Select placeholder="Location" />
-						</div>
+
+						{/* <div className={styles.select}>
+							<AsyncSelect {...location} />
+						</div> */}
 					</div>
 					<Input
 						size="md"
@@ -38,7 +46,15 @@ function EmployeeList() {
 				</div>
 			</div>
 			<div className={styles.container}>
-				<EmployeeTable />
+				<EmployeeTable
+					data={data}
+					setFilters={setFilters}
+					loading={loading}
+					// editItemId={editItemId}
+					// setEditItemId={setEditItemId}
+					// selectedIds={selectedIds}
+					// setSelectedIds={setSelectedIds}
+				/>
 			</div>
 		</div>
 	);

@@ -1,4 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+
+import styles from './styles.module.css';
 
 const getColumns = () => [
 	{
@@ -14,7 +19,12 @@ const getColumns = () => [
 		Header   : 'FROM DATE',
 		accessor : (item) => (
 			<div>
-				{item?.from_date || '-'}
+				{formatDate({
+					date       : item?.leave_start_date || '-',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+					separator  : ' | ',
+				})}
 			</div>
 		),
 		id: 'from_date',
@@ -23,7 +33,12 @@ const getColumns = () => [
 		Header   : 'TO DATE',
 		accessor : (item) => (
 			<div>
-				{item?.to_date || '-'}
+				{formatDate({
+					date       : item?.leave_end_date || '-',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+					separator  : ' | ',
+				})}
 			</div>
 		),
 		id: 'to_date',
@@ -32,7 +47,7 @@ const getColumns = () => [
 		Header   : 'TOTAL DAYS',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.total_days) || '-'}
+				{startCase(item?.leave_count) || '-'}
 			</div>
 		),
 		id: 'total_days',
@@ -40,8 +55,8 @@ const getColumns = () => [
 	{
 		Header   : 'REMARKS',
 		accessor : (item) => (
-			<div>
-				{startCase(item?.remarks) || '-'}
+			<div className={styles.remarks}>
+				{startCase(item?.approval_remarks) || '-'}
 			</div>
 		),
 		id: 'remarks',
@@ -50,7 +65,7 @@ const getColumns = () => [
 		Header   : 'APPROVER',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.approver) || '-'}
+				{startCase(item?.approved_by_id) || '-'}
 			</div>
 		),
 		id: 'approver',
@@ -58,17 +73,18 @@ const getColumns = () => [
 	{
 		Header   : 'STATUS',
 		accessor : (item) => (
-			<div>
-				{startCase(item?.status) || '-'}
+			<div className={styles.pending}>
+				{startCase(item?.leave_status) || '-'}
 			</div>
 		),
 		id: 'status',
 	},
 	{
 		Header   : 'ACTION',
-		accessor : (item) => (
-			<div>
-				{startCase(item?.operation_key) || '-'}
+		accessor : () => (
+			<div className={styles.action}>
+				<IcMEdit />
+				<IcMDelete />
 			</div>
 		),
 		id: 'action',
