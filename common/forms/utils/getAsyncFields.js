@@ -1,3 +1,4 @@
+// eslint-disable-next-line custom-eslint/function-name-check
 function asyncFieldsLocations2() {
 	return {
 		valueKey    : 'id',
@@ -100,6 +101,12 @@ function asyncFieldsOperators() {
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
 		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
 	};
 }
 
