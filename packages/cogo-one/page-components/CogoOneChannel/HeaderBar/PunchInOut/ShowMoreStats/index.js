@@ -1,5 +1,7 @@
 import { useSelector } from '@cogoport/store';
 
+import useGetCogoOneAgentStats from '../../../../../hooks/useGetOmniChannelStats';
+
 import AgentInfo from './AgentInfo';
 import AgentStats from './AgentStats';
 import styles from './styles.module.css';
@@ -13,16 +15,20 @@ function ShowMoreStats({
 	status = '',
 	handlePunchIn = () => {},
 	viewType = '',
-	agentStatsLoading = false,
-	agentStatsData = {},
 	timePeriodValue = '',
 	setTimePeriodValue = () => {},
+	isPunchPresent = false,
 }) {
 	const {
 		profile: { user = {} },
 	} = useSelector((state) => state);
 
 	const { name = '', picture, email = '' } = user || {};
+
+	const {
+		agentStatsLoading = false,
+		agentStatsData = {},
+	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	return (
 		<>
