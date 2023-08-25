@@ -408,9 +408,11 @@ const GLOBAL_CONSTANTS = {
 		ic_tree_multiple        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
 		ic_tree_single          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
 		drop_down_red           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
+		user_logo               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user.svg',
 		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
 		custom_plan:
 		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
+		truck_image: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
 	},
 
 	video_call_ring_tone_url:
