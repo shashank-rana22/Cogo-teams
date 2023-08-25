@@ -13,25 +13,24 @@ const getAllPocMergedData = ({ tradePartnersData = [], stakeHoldersData = [], sh
 	}
 
 	const updatedPocDetails = pocDetails?.reduce((accumulator, item) => {
+		let updatedItem = {};
 		if (pocDetails?.length === CHECK_ARRAY_LENGTH) {
-			const updatedItem = {
+			updatedItem = {
 				...item,
 				user_id        : item?.id,
 				chat_option    : true,
 				is_primary_poc : true,
 				is_customer    : true,
 			};
-			accumulator.push(updatedItem);
 		} else {
-			const updatedItem = item?.is_primary_poc ? {
+			updatedItem = item?.is_primary_poc ? {
 				...item,
 				user_id     : item?.id,
 				chat_option : true,
 				is_customer : true,
 			} : { ...item, user_id: item?.id, chat_option: true, is_primary_poc: false, is_customer: true };
-			accumulator.push(updatedItem);
 		}
-		return accumulator;
+		return [...accumulator, updatedItem];
 	}, []);
 
 	const updatedTradePartnersData = tradePartnersData?.reduce((accumulator, item) => {
