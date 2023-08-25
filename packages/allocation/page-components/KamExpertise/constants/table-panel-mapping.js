@@ -8,16 +8,16 @@ export const CONSTANT_KEYS = {
 
 const { KAM_EXPERTISE_SCORE_CONFIG, KAM_LEVEL_CONFIG } = CONSTANT_KEYS;
 
-export const TAB_PANEL_MAPPING = {
+export const getTabPanelMapping = ({ t = () => {} }) => ({
 	configurations: {
 		name      : KAM_EXPERTISE_SCORE_CONFIG,
-		title     : 'Kam Expertise Score Config',
+		title     : t('allocation:kam_expertise_score_config'),
 		Component : KamExpertiseScoreConfig,
 	},
 
 	relations: {
 		name      : KAM_LEVEL_CONFIG,
-		title     : 'Kam Level Config',
+		title     : t('allocation:kam_level_config'),
 		Component : KamLevel,
 	},
-};
+});

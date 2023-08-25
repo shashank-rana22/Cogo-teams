@@ -1,5 +1,6 @@
 import { Card, Placeholder } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import CardContent from './CardContent';
 import styles from './styles.module.css';
@@ -7,6 +8,8 @@ import styles from './styles.module.css';
 const INDEX_LENGTH_NOMRALIZATION = 1;
 
 function KamLevelScoreCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		index_lvl,
 		listData,
@@ -64,7 +67,7 @@ function KamLevelScoreCard(props) {
 			<Card.Title title={(
 				<div className={styles.card_title}>
 					<div className={styles.kam_level}>
-						KAM
+						{t('allocation:kam')}
 						{' '}
 						{index_lvl + INDEX_LENGTH_NOMRALIZATION}
 					</div>

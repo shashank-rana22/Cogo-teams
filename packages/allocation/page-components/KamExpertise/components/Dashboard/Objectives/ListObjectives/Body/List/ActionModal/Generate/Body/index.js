@@ -1,4 +1,5 @@
 import { Loader } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from '../../styles.module.css';
@@ -7,17 +8,19 @@ function Body({
 	loading,
 	contentLoader,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	if (loading || contentLoader) {
 		return (
 			<>
 				<div className={styles.loader_container}>
 					<Loader style={{ height: 64, width: 64 }} themeType="primary" />
 					<div className={styles.loading_text}>
-						Loading...
+						{t('allocation:loading_label')}
 					</div>
 				</div>
 				<div className={styles.info_text}>
-					Please wait while we Generate the list of KAMs applicable for this Objective
+					{t('allocation:please_wait_generating_kams_applicable')}
 				</div>
 			</>
 		);
@@ -27,16 +30,19 @@ function Body({
 		<>
 			<div className={styles.loader_container}>
 				<div className={styles.loading_text}>
-					Your list is being generated
+					{t('allocation:generate_list_heading')}
 				</div>
 			</div>
 			<div className={styles.info_text}>
-				A list of KAMs is being generated on the basis of this
-				Objective. Click on
+				{t('allocation:generate_list_phrase')}
 				{' '}
-				<b>‘View List’</b>
+				<b>
+					‘
+					{t('allocation:view_list')}
+					’
+				</b>
 				{' '}
-				in the table to view and download the list.
+				{t('allocation:generate_list_desciption')}
 			</div>
 		</>
 	);
