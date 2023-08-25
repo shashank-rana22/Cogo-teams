@@ -1,3 +1,5 @@
+const CHECK_ARRAY_LENGTH = 1;
+
 const getAllPocMergedData = ({ tradePartnersData = [], stakeHoldersData = [], showPocDetails = {} }) => {
 	const { primary_poc_details = {}, importer_exporter_poc = {} } = showPocDetails;
 
@@ -9,9 +11,14 @@ const getAllPocMergedData = ({ tradePartnersData = [], stakeHoldersData = [], sh
 	}
 
 	const updatedPocDetails = pocDetails?.reduce((accumulator, item) => {
-		const updatedItem = item?.is_primary_poc ? { ...item, chat_option: true, is_customer: true }
-			: { ...item, chat_option: true, is_primary_poc: false, is_customer: true };
-		accumulator.push(updatedItem);
+		if (pocDetails?.length === CHECK_ARRAY_LENGTH) {
+			const updatedItem = { ...item, chat_option: true, is_primary_poc: true, is_customer: true };
+			accumulator.push(updatedItem);
+		} else {
+			const updatedItem = item?.is_primary_poc ? { ...item, chat_option: true, is_customer: true }
+				: { ...item, chat_option: true, is_primary_poc: false, is_customer: true };
+			accumulator.push(updatedItem);
+		}
 		return accumulator;
 	}, []);
 

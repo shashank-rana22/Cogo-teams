@@ -11,7 +11,7 @@ function ShipmentChatModal({
 	showShipmentChat = {},
 	setShowShipmentChat = () => {},
 }) {
-	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
+	const { userId = '' } = useSelector((state) => ({ userId: state?.profile?.user?.id }));
 
 	const [seenLoading, setSeenLoading] = useState(false);
 
@@ -48,7 +48,7 @@ function ShipmentChatModal({
 							}
 						}}
 						messageContentArr={MESSAGE_CONTENT_ARR}
-						user_id={user_id}
+						user_id={userId}
 						setSeenLoading={setSeenLoading}
 					/>
 				</Modal.Body>
