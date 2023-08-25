@@ -1,5 +1,5 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
-import { customerToServiceDescription } from '../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../utils/serviceDescriptionMappings';
 
 const LINE_ITEMS_KEYS_MAPPING = {
 	service_description   : 'service_description',
@@ -20,6 +20,7 @@ const LINE_ITEMS_KEYS_MAPPING = {
 };
 
 export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
+	const { CUSTOMER_TO_SERVICE_DESCRIPTION = {} } = getFortigoDetails();
 	const lineItems = lineItemsHelper({
 		lineItems: customData?.line_items?.line_items,
 		LINE_ITEMS_KEYS_MAPPING,
@@ -28,7 +29,7 @@ export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
 
 	lineItems.forEach((item) => {
 		const newItem = item;
-		newItem.service_description = customerToServiceDescription[importerExporterId] || '';
+		newItem.service_description = CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId] || '';
 		newItem.description = 'Fixed';
 	});
 

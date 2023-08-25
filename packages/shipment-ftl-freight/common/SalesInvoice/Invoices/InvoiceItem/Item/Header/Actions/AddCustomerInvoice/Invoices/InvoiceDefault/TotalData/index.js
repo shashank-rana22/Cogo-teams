@@ -4,7 +4,12 @@ import { finalAmountInWords } from '../../../utils/numToWords';
 import BottomData from '../BottomData';
 import { getChargesData } from '../getOtherData';
 
-function TotalData({ stampData = '', customData = {}, invoice = {} }) {
+function TotalData({
+	stampData = '',
+	customData = {},
+	invoice = {},
+	billing_address = {},
+}) {
 	const {
 		total_amount = '',
 		cgst = '',
@@ -90,7 +95,7 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 							>
 								<b>
 									{total_amount}
-									&nbsp;
+									{' '}
 								</b>
 							</td>
 						</tr>
@@ -211,7 +216,7 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 					</table>
 				</td>
 			</tr>
-			<BottomData stampData={stampData} />
+			<BottomData stampData={stampData} billing_address={billing_address} customData={customData} />
 		</table>
 	);
 }
