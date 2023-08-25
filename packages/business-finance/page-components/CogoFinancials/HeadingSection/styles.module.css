@@ -1,0 +1,41 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+}
+
+.main_heading {
+	margin: 0;
+}
+
+.main_heading:hover {
+	color: var(--color-primary-error-red-2);
+	text-decoration: underline;
+}
+
+.tour_btn {
+	margin-right: 12px;
+}
+
+.tour_btn:hover {
+	svg {
+		width: 20px;
+		height: 20px;
+		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+	}
+}
+
+.segmented_section {
+	margin: 0 12px;
+}
+
+.entity_select {
+	width: 320px;
+
+	:global {
+		.ui_select_display_container {
+			height: 42px !important;
+		}
+	}
+}

@@ -78,7 +78,7 @@ function UploadAmendDoc({
 
 	return (
 		<div className={styles.container}>
-			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+			<div className={styles.remark_container}>
 				<div className={styles.remark}>
 					<div className={styles.remark_head}>Remarks:</div>
 					<div className={styles.remark_head}>{details?.remarks}</div>

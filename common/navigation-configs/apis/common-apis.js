@@ -306,6 +306,11 @@ const common_apis = {
 			service_name : 'fcl_customs_rate',
 		},
 		{
+			api          : 'create_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
 			api          : 'update_organization',
 			access_type  : 'private',
 			service_name : 'organization',

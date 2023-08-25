@@ -1,15 +1,19 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import LogsTable from './LogsTable';
 import styles from './styles.module.css';
 
-function FlashRevertLogs() {
+function FlashRevertLogs({ showDetails = false }) {
 	const [showLogs, setShowLogs] = useState(false);
 
 	return (
 		<>
 			<Button
+				className={
+					cl`${styles.button_container} 
+					${showDetails === true ? styles.hide_button : ''}`
+				}
 				size="md"
 				themeType="linkUi"
 				onClick={() => setShowLogs(true)}
