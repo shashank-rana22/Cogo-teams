@@ -9,6 +9,11 @@ const EMPTY_VALUE = 0;
 const TEXT_DATA = ['commodity', 'flight_number'];
 const NUMBER_DATA = ['number_of_pieces', 'volume', 'weight'];
 
+const toastMapping = (t = () => {}) => ({
+	move   : t('airlineBookingPlugin:move_success_toast'),
+	delete : t('airlineBookingPlugin:delete_success_toast'),
+});
+
 const useHandlePluginBooking = (edit = false) => {
 	const { t } = useTranslation(['airlineBookingPlugin']);
 	const api = edit ? '/update_awb_plugin_booking_information' : '/create_awb_booking_information';
@@ -75,8 +80,7 @@ const useHandlePluginBooking = (edit = false) => {
 			await trigger({
 				data: { id, status: statusAwb },
 			}).then(() => {
-				Toast.success(`${t('airlineBookingPlugin:awb_booking_information')} 
-				${statusAwb}${t('airlineBookingPlugin:d_letter')} ${t('airlineBookingPlugin:successfully')}`);
+				Toast.success(toastMapping(t)[statusAwb] || t('airlineBookingPlugin:updated_successfully'));
 				setFinalList([]);
 				getAirIndiaAwbNumbersList();
 				setPage(CONSTANTS.START_PAGE);
