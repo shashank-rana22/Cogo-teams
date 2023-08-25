@@ -76,8 +76,8 @@ function HeaderBar({
 				className={styles.navigation_bar}
 				style={{ justifyContent: showDetails ? 'center' : 'space-between' }}
 			>
-				<div className={cl`${styles.label_styles} ${showDetails ? styles.hide_section : ''}`}>
-					{`${startCase(viewType)} View`}
+				<div className={styles.label_styles}>
+					{(showDetails || initialViewType !== 'cogoone_admin') ? '' : `${startCase(viewType)} View` }
 				</div>
 
 				{isPunchPresent && !preferenceLoading && (

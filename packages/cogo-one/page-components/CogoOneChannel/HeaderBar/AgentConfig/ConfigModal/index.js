@@ -94,6 +94,7 @@ function ConfigModal({
 			setSearch,
 			paramsState,
 			getListChatAgents,
+			setActiveCard,
 		},
 		switch_views: {
 			viewType,
