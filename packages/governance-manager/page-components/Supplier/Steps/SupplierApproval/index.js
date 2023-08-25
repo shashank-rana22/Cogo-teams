@@ -1,5 +1,6 @@
 import { Button, Tooltip } from '@cogoport/components';
 import { IcMAlert } from '@cogoport/icons-react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
@@ -22,6 +23,8 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 		financial_due_diligence_report : null,
 
 	});
+
+	const { push } = useRouter();
 
 	const [open, setOpen] = useState(null);
 
@@ -103,7 +106,13 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 
 										</div>
 										<Button
-											onClick={() => updateOrganizationService()}
+											onClick={async () => {
+												await updateOrganizationService();
+												push(
+													'/governance-manager/',
+													'/governance-manager/',
+												);
+											}}
 											disabled={Object.values(verify)
 												?.filter((i) => i === 'verified'
 													|| i === 'rejected').length !== FOUR}

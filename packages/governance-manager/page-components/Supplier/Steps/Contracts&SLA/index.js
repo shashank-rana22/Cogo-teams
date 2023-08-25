@@ -33,7 +33,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 
 	const { updateOrganizationService:finalApproval } = useUpdateOrganizationService({
 		organization_id,
-		stage_of_approval : 'approve',
+		stage_of_approval : 'approved',
 		service           : service_type,
 	});
 

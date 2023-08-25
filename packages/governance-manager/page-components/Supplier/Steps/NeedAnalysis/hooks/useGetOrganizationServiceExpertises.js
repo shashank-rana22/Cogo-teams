@@ -18,9 +18,10 @@ function useGetOrganizationServiceExpertises({ show }) {
 					status                  : 'active',
 					neglect_organization_id : show?.organization_id,
 				},
-				location_details_required : true,
-				service_type_required     : true,
-				teus_data_required        : true,
+				location_details_required  : true,
+				service_type_required      : true,
+				teus_data_required         : true,
+				organization_data_required : true,
 			};
 			await trigger({
 				params: {

@@ -16,10 +16,10 @@ function useUpdateOrganizationServiceExpertiseFeedback({
 			if (feedback?.length >= FIFTY && service_requirement !== '') {
 				await trigger({
 					params: {
-						...show,
+						id     : show?.id,
 						feedback,
 						service_requirement,
-						status: 'active',
+						status : 'active',
 					},
 				});
 				getOrganizationExpertiseSuppliers();
