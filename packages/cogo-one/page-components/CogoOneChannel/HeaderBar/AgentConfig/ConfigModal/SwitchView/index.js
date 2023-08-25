@@ -57,7 +57,7 @@ function SwitchView({
 				<div className={styles.button_container}>
 					<Button
 						size="md"
-						themeType="secondary"
+						themeType="tertiary"
 						disabled={switchViewType === 'cogoone_admin'}
 						onClick={() => {
 							setViewType('cogoone_admin');
