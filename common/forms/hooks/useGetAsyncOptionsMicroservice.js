@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest } from '@cogoport/request';
+import useCxAutomationRequest from '@cogoport/request/hooks/useCxAutomationRequest';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +11,7 @@ const REQUEST_HOOK_MAPPING = {
 	allocation       : useAllocationRequest,
 	tickets          : useTicketsRequest,
 	auth             : useAuthRequest,
+	cx_automation    : useCxAutomationRequest,
 };
 
 function useGetAsyncOptionsMicroservice({
