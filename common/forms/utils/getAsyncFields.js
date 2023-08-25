@@ -1,5 +1,4 @@
-// eslint-disable-next-line custom-eslint/function-name-check
-function asyncFieldsLocations2() {
+function asyncFieldsLocationsTwo() {
 	return {
 		valueKey    : 'id',
 		labelKey    : 'name',
@@ -884,7 +883,7 @@ function asyncListLeadOrganizationUsers() {
 
 export {
 	asyncFieldsLocations,
-	asyncFieldsLocations2,
+	asyncFieldsLocationsTwo as asyncFieldsLocations2,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
