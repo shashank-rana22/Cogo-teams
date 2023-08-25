@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useUpdateShipmentDocument from '../../../hooks/useUpdateShipmentDocument';
+import { downloadButton } from '../../../utils/downloadButton';
 import getFileObject from '../../../utils/getFileObject';
 import useGetMediaUrl from '../../../utils/useGetMediaUrl';
 import SelectDocumentCopies from '../SelectDocumentCopies';
@@ -39,11 +40,6 @@ function DownloadDocumentContainer({
 	const [docCopies, setDocCopies] = useState([]);
 	const [copiesValue, copiesOnChange] = useState([]);
 
-	const DOWNLOAD_BUTTON = {
-		document_accepted            : t('printingDesk:awb_document_download_document_container_download_button'),
-		document_uploaded            : t('printingDesk:awb_document_download_document_container_download_other_button'),
-		document_amendment_requested : t('printingDesk:awb_document_download_document_container_download_other_button'),
-	};
 	const {
 		document_number: documentNumber, awbNumber, documentType, shipmentId, pendingShipmentId,
 		documentState, documentId, serviceId, blCategory,
@@ -219,7 +215,7 @@ function DownloadDocumentContainer({
 						>
 							{saveDocument
 								? t('printingDesk:awb_document_download_document_container_downloading_button')
-								: DOWNLOAD_BUTTON[documentState]}
+								: downloadButton({ t, documentState })}
 						</Button>
 					)}
 			</div>

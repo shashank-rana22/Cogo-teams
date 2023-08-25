@@ -1,6 +1,6 @@
 const NEGATIVE_CHECK_VALUE = 0;
 
-const awbControls = (t = () => {}) => [
+const awbControls = ({ t = () => {} }) => [
 	{
 		name        : 'weight',
 		placeholder : t('printingDesk:awb_controls_gross_weight_placeholder'),

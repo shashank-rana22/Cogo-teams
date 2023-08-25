@@ -1,4 +1,4 @@
-export const hawbFields = (t = () => {}) => {
+export const hawbFields = ({ t = () => {} }) => {
 	const fields = [
 		{
 			key   : 'serialId',

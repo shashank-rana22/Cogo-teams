@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-export const finalAwbFields = (t = () => {}) => {
+export const finalAwbFields = ({ t = () => {} }) => {
 	const fields = [
 		{
 			key    : 'serialId',

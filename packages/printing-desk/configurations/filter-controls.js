@@ -1,4 +1,4 @@
-const filterControls = (t = () => {}) => [
+const filterControls = ({ t = () => {} }) => [
 	{
 		name    : 'blCategory',
 		type    : 'select',

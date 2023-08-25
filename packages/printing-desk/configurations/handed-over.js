@@ -1,4 +1,4 @@
-export const handedOverFields = (t = () => {}) => {
+export const handedOverFields = ({ t = () => {} }) => {
 	const fields = [
 		{
 			key   : 'serialId',
