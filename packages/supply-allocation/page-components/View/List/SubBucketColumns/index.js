@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { getItemDisplayString } from '../../../generateDisplayName.js/generateDisplayName';
+import { getItemDisplayString } from '../../../../utils/generateDisplayName';
 
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
@@ -26,7 +26,6 @@ function GetOrdinalNumber({ number = 0 }) {
 const getSubBucketColumns = ({
 	control = {},
 	unregister,
-	bucketOptions,
 	current_allocated_containers,
 	bucket_type,
 	bulkEditMode = false,
@@ -39,7 +38,6 @@ const getSubBucketColumns = ({
 			accessor : (item) => (
 				<ServiceProvider
 					item={item}
-					bucketOptions={bucketOptions}
 					bucket_type={bucket_type}
 					current_allocated_containers={current_allocated_containers}
 					rollingFclFreightSearchId={rollingFclFreightSearchId}

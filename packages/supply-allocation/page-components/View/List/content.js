@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
 import useBulkUpdateFclFreightAllocation from '../../../hooks/useBulkUpdateFclFreightAllocation';
-import BucketTable from '../BucketsTable';
 
+import BucketTable from './BucketsTable';
 import WarningModal from './WarningModal';
 
 function Content({ item = {}, search_id = '', bucketsArray = [] }) {

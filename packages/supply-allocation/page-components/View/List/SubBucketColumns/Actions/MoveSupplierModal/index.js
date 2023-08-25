@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import useUpdateFclFreightAllocation from '../../../../../hooks/useUpdateFclFreightAllocation';
+import useUpdateFclFreightAllocation from '../../../../../../hooks/useUpdateFclFreightAllocation';
 
 import styles from './styles.module.css';
 
@@ -12,6 +12,8 @@ const LENGTH_TO_PREFILL = 1;
 
 const WARNING_SUB_TEXT = 'You are about to move a supplier to a new bucket.'
 	+ ' This will affect the general allocation decided for each bucket.';
+
+const POSSIBLE_BUCKETS = ['strategic', 'tactical', 'hopeful'];
 
 function Header({ short_name = '' }) {
 	return (
@@ -30,7 +32,6 @@ function MoveSupplierModal({
 	showMoveSupplierModal = false,
 	setShowMoveSupplierModal = () => {},
 	item = {},
-	bucketOptions = [],
 	bucket_type = '',
 	current_allocated_containers = '',
 	rollingFclFreightSearchId = '',
@@ -52,6 +53,11 @@ function MoveSupplierModal({
 		updateFclFreightAllocation({ payload });
 	};
 
+	const bucketOptions = POSSIBLE_BUCKETS.reduce((acc, bucket) => {
+		if (bucket === bucket_type) return acc;
+		return [...acc, { value: bucket, label: startCase(bucket) }];
+	}, []);
+
 	return (
 		<Modal
 			size="lg"
@@ -72,6 +78,8 @@ function MoveSupplierModal({
 							Current Promised:
 							<div style={{ height: '32px' }}>
 								{current_allocated_containers}
+								{' '}
+								TEU
 							</div>
 						</div>
 					</div>
@@ -82,28 +90,33 @@ function MoveSupplierModal({
 					</div>
 
 					<div>
-						<div> New Bucket </div>
-						<SelectController
-							name="new_bucket_type"
-							isClearable
-							label="Select Origin SeaPort"
-							control={control}
-							placeholder="Select Below"
-							size="sm"
-							options={bucketOptions}
-							{...(bucketOptions.length === LENGTH_TO_PREFILL
-								? { value: bucketOptions[GLOBAL_CONSTANTS.zeroth_index].value } : {})}
-						/>
+						<div style={{ marginBottom: '20px' }}>
+							<div> New Bucket </div>
+							<SelectController
+								name="new_bucket_type"
+								isClearable
+								control={control}
+								placeholder="Select Below"
+								size="sm"
+								options={bucketOptions}
+								{...(bucketOptions.length === LENGTH_TO_PREFILL
+									? { value: bucketOptions[GLOBAL_CONSTANTS.zeroth_index].value } : {})}
+							/>
+						</div>
 
-						<div>New Promised</div>
-						<InputNumberController
-							name="promised_containers"
-							isClearable
-							label="Select Origin SeaPort"
-							size="sm"
-							control={control}
-							placeholder="Type Here"
-						/>
+						<div>
+							<div>New Promised</div>
+							<InputNumberController
+								name="promised_containers"
+								isClearable
+								size="sm"
+								control={control}
+								arrow={false}
+								suffix={<span style={{ paddingRight: '8px' }}>TEU</span>}
+								placeholder="Type Here"
+								value={current_allocated_containers}
+							/>
+						</div>
 					</div>
 				</div>
 			</Modal.Body>

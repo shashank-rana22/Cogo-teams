@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 
 function Actions({
 	item = {},
-	bucketOptions = [],
 	bucket_type = '',
 	rollingFclFreightSearchId = '',
 }) {
@@ -46,7 +45,6 @@ function Actions({
 					showMoveSupplierModal={showMoveSupplierModal}
 					setShowMoveSupplierModal={setShowMoveSupplierModal}
 					item={item}
-					bucketOptions={bucketOptions}
 					bucket_type={bucket_type}
 					current_allocated_containers={item?.allocated_containers}
 					rollingFclFreightSearchId={rollingFclFreightSearchId}
@@ -55,4 +53,5 @@ function Actions({
 		</div>
 	);
 }
+
 export default Actions;

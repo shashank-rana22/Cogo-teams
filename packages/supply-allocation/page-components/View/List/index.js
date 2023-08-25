@@ -10,8 +10,6 @@ function List({ search_id = '' }) {
 		supply_fcl_freight_search_id: search_id,
 	});
 
-	const bucketsArray = (bucketData || []).map((bucket) => bucket.bucket_type);
-
 	const generateBucketTableData = useMemo(() => (bucketData || []).reduce((acc, curr) => {
 		const {
 			allocation_percentage,
@@ -69,10 +67,10 @@ function List({ search_id = '' }) {
 					item={item}
 					index={index}
 					search_id={search_id}
-					bucketsArray={bucketsArray}
 				/>
 			))}
 		</>
 	);
 }
+
 export default List;

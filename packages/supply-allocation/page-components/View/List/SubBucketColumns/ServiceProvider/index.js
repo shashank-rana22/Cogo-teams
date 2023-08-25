@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 
 function ServiceProvider({
 	item = {},
-	bucketOptions = [],
 	bucket_type = '',
 	current_allocated_containers = '',
 	rollingFclFreightSearchId = '',
@@ -29,7 +28,6 @@ function ServiceProvider({
 		>
 			<Actions
 				item={item}
-				bucketOptions={bucketOptions}
 				bucket_type={bucket_type}
 				current_allocated_containers={current_allocated_containers}
 				rollingFclFreightSearchId={rollingFclFreightSearchId}

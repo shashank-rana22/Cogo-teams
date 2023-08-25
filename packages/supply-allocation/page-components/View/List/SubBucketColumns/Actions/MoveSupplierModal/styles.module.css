@@ -21,6 +21,16 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 8px;
+
+	:global {
+		.ui_input_number_container {
+			width: 200px;
+		}
+
+		.ui_select_container {
+			width: 200px;
+		}
+	}
 }
 
 .extend_button {
