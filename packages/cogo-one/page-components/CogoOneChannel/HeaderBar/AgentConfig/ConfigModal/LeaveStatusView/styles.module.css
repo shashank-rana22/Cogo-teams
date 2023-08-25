@@ -73,3 +73,21 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.padding_inner {
+	padding: 0 12px;
+}
+
+.header_bar {
+	display: flex;
+	align-items: center;
+	color: #4f4f4f;
+}
+
+.arrow_back {
+	width: 20px;
+	height: 20px;
+	margin-right: 4px;
+	cursor: pointer;
+	fill: #4f4f4f;
+}

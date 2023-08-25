@@ -1,6 +1,6 @@
 import { useSelector } from '@cogoport/store';
 
-import useGetCogoOneAgentStats from '../../../../../hooks/useGetOmniChannelStats';
+import useGetCogoOneAgentStats from '../../../../hooks/useGetOmniChannelStats';
 
 import AgentInfo from './AgentInfo';
 import AgentStats from './AgentStats';

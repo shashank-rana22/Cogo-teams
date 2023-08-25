@@ -2,10 +2,10 @@ import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
-import { RATING_ELEMENTS } from '../../../../../../../constants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
-import { getFormattedNumber } from '../../../../../../../helpers/getFormattedNumber';
-import useGetAgentTimelineEscalate from '../../../../../../../hooks/useGetAgentTimelineEscalate';
+import { RATING_ELEMENTS } from '../../../../../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
+import { getFormattedNumber } from '../../../../../../helpers/getFormattedNumber';
+import useGetAgentTimelineEscalate from '../../../../../../hooks/useGetAgentTimelineEscalate';
 
 import styles from './styles.module.css';
 

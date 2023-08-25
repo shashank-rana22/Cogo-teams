@@ -384,6 +384,7 @@ const GLOBAL_CONSTANTS = {
 		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
 		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		agent_current_status : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/agent_current_status.png',
+		switch_view          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/switch_view.png',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',

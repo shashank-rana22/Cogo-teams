@@ -22,7 +22,7 @@ const COGOONE_ADMIN = {
 	show_relevant_templates       : ['quick_reply', 'supply'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
-	configurations_to_be_shown    : ['lock_configuration', 'list_agents'],
+	configurations_to_be_shown    : ['lock_configuration', 'list_agents', 'switch_views'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 	permissions                   : {
 		auto_assign                 : true,

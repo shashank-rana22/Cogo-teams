@@ -1,5 +1,5 @@
 import { Input, Placeholder, Toggle } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import LeaveModal from '../../../../../../common/LeaveModal';
@@ -16,6 +16,7 @@ function LeaveAgentModal({
 	setSearch = () => {},
 	paramsState = {},
 	getListChatAgents = () => {},
+	setActiveCard = () => {},
 }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 
@@ -40,7 +41,14 @@ function LeaveAgentModal({
 	};
 
 	return (
-		<>
+		<div className={styles.padding_inner}>
+			<div className={styles.header_bar}>
+				<IcMArrowBack
+					className={styles.arrow_back}
+					onClick={() => setActiveCard('')}
+				/>
+				Back
+			</div>
 			<div className={styles.header}>
 				<Input
 					size="sm"
@@ -103,7 +111,7 @@ function LeaveAgentModal({
 					updateUserStatus={updateUserStatus}
 				/>
 			)}
-		</>
+		</div>
 	);
 }
 
