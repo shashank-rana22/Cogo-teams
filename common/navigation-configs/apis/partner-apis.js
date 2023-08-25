@@ -13129,6 +13129,26 @@ const partner = {
 			service_name : 'auth',
 		},
 		{
+			api         : 'list_chat_channels',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+		},
+		{
+			api         : 'create_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_chat_channel',
+			access_type : 'private',
+		},
+		{
 			api          : 'sync_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',

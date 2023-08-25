@@ -1,8 +1,8 @@
-const tabs = [
+const tabs = (t = () => {}) => ([
 	{
 		key   : 'air_india',
-		title : 'Air India - AWB',
+		title : t('airlineBookingPlugin:air_india_awb'),
 		name  : 'air_india',
 	},
-];
+]);
 export default tabs;
