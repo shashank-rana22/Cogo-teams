@@ -46,6 +46,7 @@ function ShipmentCard({
 	setActiveTab = () => {},
 	setShowBookingNote = () => {},
 	key = '',
+	setShowShipmentChat = () => {},
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
@@ -58,6 +59,10 @@ function ShipmentCard({
 		primary_poc_details: primaryPocDetails = {},
 	} = shipmentItem;
 
+	const handleShipmentChat = ({ shipmentDetails }) => {
+		setShowShipmentChat(shipmentDetails);
+	};
+
 	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === serial_id) {
 		return (
 			<div className={styles.container} key={key}>
@@ -65,6 +70,7 @@ function ShipmentCard({
 					showPocDetails={showPocDetails}
 					setShowPocDetails={setShowPocDetails}
 					setActiveTab={setActiveTab}
+					handleShipmentChat={handleShipmentChat}
 					mailProps={mailProps}
 				/>
 			</div>
@@ -87,6 +93,7 @@ function ShipmentCard({
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				handleShipmentChat={handleShipmentChat}
 			/>
 		</div>
 	);

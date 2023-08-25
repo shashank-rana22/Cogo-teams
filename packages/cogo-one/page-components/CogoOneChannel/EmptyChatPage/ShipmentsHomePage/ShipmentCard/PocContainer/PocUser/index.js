@@ -1,6 +1,6 @@
 import { Tooltip, Avatar, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcMEmail, IcMCall, IcMWhatsapp } from '@cogoport/icons-react';
+import { IcMEmail, IcMCall, IcMWhatsapp, IcMLiveChat } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -36,8 +36,10 @@ const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) 
 
 function PocUser({
 	stakeHoldersData = [],
+	showPocDetails = {},
 	mailProps = {},
 	setActiveTab = () => {},
+	handleShipmentChat = () => {},
 }) {
 	const dispatch = useDispatch();
 
@@ -175,6 +177,14 @@ function PocUser({
 												tab               : 'message',
 											}))}
 										/>
+									) : null}
+
+									{(!isCustomer && !isTradePartner) ? (
+										<IcMLiveChat
+											className={styles.message_icon_styles}
+											onClick={() => handleShipmentChat({ shipmentDetails: showPocDetails })}
+										/>
+
 									) : null}
 
 									{hasVoiceCallAccess && (

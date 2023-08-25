@@ -28,6 +28,7 @@ function PocContainer({
 	setShowPocDetails = () => {},
 	showPocDetails = {},
 	setActiveTab = () => {},
+	handleShipmentChat = () => {},
 	mailProps = {},
 }) {
 	const { id = '' } = showPocDetails;
@@ -76,6 +77,8 @@ function PocContainer({
 						<PocUser
 							stakeHoldersData={allPocMergedData}
 							setActiveTab={setActiveTab}
+							handleShipmentChat={handleShipmentChat}
+							showPocDetails={showPocDetails}
 							mailProps={mailProps}
 						/>
 					)}
