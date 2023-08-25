@@ -17,14 +17,12 @@ function ShipmentChatModal({
 
 	const { msgSeen } = useSeen();
 
-	const MESSAGE_CONTENT_ARR = [];
-	Object.keys(msgSeen || {}).forEach((key) => {
-		const newObj = {
+	const MESSAGE_CONTENT_ARR = Object.keys(msgSeen || {}).map(
+		(key) => ({
 			...msgSeen[key],
 			mainKey: key,
-		};
-		MESSAGE_CONTENT_ARR.push(newObj);
-	});
+		}),
+	);
 
 	if (isEmpty(showShipmentChat)) {
 		return null;

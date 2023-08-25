@@ -58,8 +58,8 @@ function ShipmentCard({
 		primary_poc_details: primaryPocDetails = {},
 	} = shipmentItem;
 
-	const handleShipmentChat = () => {
-		setShowShipmentChat(shipmentItem);
+	const handleShipmentChat = ({ shipmentDetails }) => {
+		setShowShipmentChat(shipmentDetails);
 	};
 
 	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === serial_id) {

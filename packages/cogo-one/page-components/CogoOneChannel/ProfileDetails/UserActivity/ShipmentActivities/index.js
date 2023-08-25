@@ -26,8 +26,8 @@ function ShipmentActivities({
 
 	const showAddPrimaryUserButton = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
-	const handleShipmentChat = ({ shipmentItem }) => {
-		setShipmentChat(shipmentItem);
+	const handleShipmentChat = ({ shipmentDetails }) => {
+		setShipmentChat(shipmentDetails);
 	};
 
 	if (isEmpty(list)) {

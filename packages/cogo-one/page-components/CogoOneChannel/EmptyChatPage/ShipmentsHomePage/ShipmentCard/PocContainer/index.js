@@ -87,6 +87,7 @@ function PocContainer({
 							setActiveTab={setActiveTab}
 							setModalData={setModalData}
 							handleShipmentChat={handleShipmentChat}
+							showPocDetails={showPocDetails}
 						/>
 					)}
 			</div>

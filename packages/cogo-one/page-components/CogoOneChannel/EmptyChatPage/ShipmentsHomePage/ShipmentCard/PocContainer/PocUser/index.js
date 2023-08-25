@@ -37,6 +37,7 @@ const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) 
 
 function PocUser({
 	stakeHoldersData = [],
+	showPocDetails = {},
 	setModalData = () => {},
 	setActiveTab = () => {},
 	handleShipmentChat = () => {},
@@ -165,7 +166,7 @@ function PocUser({
 									{(!isCustomer && !isTradePartner) ? (
 										<IcMLiveChat
 											className={styles.message_icon_styles}
-											onClick={handleShipmentChat}
+											onClick={() => handleShipmentChat({ shipmentDetails: showPocDetails })}
 										/>
 
 									) : null}
