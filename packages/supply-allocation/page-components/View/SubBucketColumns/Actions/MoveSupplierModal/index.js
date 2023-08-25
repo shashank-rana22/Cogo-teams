@@ -1,11 +1,14 @@
 import { Button, Modal } from '@cogoport/components';
-import { InputController, SelectController, useForm } from '@cogoport/forms';
+import { InputNumberController, SelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import useUpdateFclFreightAllocation from '../../../../../hooks/useUpdateFclFreightAllocation';
 
 import styles from './styles.module.css';
+
+const LENGTH_TO_PREFILL = 1;
 
 function MoveSupplierModal({
 	showMoveSupplierModal = false,
@@ -21,7 +24,8 @@ function MoveSupplierModal({
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateFclFreightAllocation, loading } =		useUpdateFclFreightAllocation();
+	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation();
+
 	const onClickSubmit = (values) => {
 		const payload = {
 			service_provider_id,
@@ -31,6 +35,7 @@ function MoveSupplierModal({
 		};
 		updateFclFreightAllocation({ payload });
 	};
+
 	return (
 		<Modal
 			size="md"
@@ -72,10 +77,12 @@ function MoveSupplierModal({
 							placeholder="Select Below"
 							size="sm"
 							options={bucketOptions}
+							{...(bucketOptions.length === LENGTH_TO_PREFILL
+								? { value: bucketOptions[GLOBAL_CONSTANTS.zeroth_index].value } : {})}
 						/>
 
 						<div>New Promised</div>
-						<InputController
+						<InputNumberController
 							name="promised_containers"
 							isClearable
 							label="Select Origin SeaPort"
@@ -95,7 +102,7 @@ function MoveSupplierModal({
 						disabled={loading}
 						onClick={() => setShowMoveSupplierModal(false)}
 					>
-						No, Don&apos;t
+						No
 					</Button>
 
 					<Button
@@ -104,7 +111,7 @@ function MoveSupplierModal({
 						loading={loading}
 						onClick={handleSubmit(onClickSubmit)}
 					>
-						Yes, Change
+						Yes
 					</Button>
 				</div>
 			</Modal.Footer>

@@ -25,13 +25,11 @@ function Content({ item = {}, search_id = '', bucketsArray = [] }) {
 	const [bulkEditMode, setBulkEditMode] = useState(false);
 	const [showWarning, setShowWarning] = useState(false);
 
-	console.log('bulkEditMode:', bulkEditMode);
 	const formProps = useForm();
 
 	const { control, unregister, formState, handleSubmit } = formProps;
 
 	const { dirtyFields = {} } = formState;
-	console.log('dirtyFields', isEmpty(dirtyFields));
 
 	const bucketControls = [
 		{

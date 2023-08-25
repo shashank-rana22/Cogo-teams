@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -9,24 +9,25 @@ function Actions({
 	item = {},
 	bucketOptions = [],
 	bucket_type = '',
-	current_allocated_containers = '',
 	rollingFclFreightSearchId = '',
 }) {
 	const [showMoveSupplierModal, setShowMoveSupplierModal] = useState(false);
+	const [showPopOver, setShowPopOver] = useState(false);
 
 	return (
 		<div>
 			<div className={styles.container}>
-				<Tooltip
+				<Popover
 					className={styles.tooltip_pad}
 					placement="right"
 					interactive
+					visible={showPopOver}
 					content={(
 						<div className={styles.options}>
 							<Button
 								themeType="primary"
 								className={styles.btn}
-								onClick={() => setShowMoveSupplierModal((prev) => !prev)}
+								onClick={() => { setShowMoveSupplierModal((prev) => !prev); setShowPopOver(false); }}
 							>
 								<IcMEdit />
 								<div>Move Supplier</div>
@@ -34,8 +35,10 @@ function Actions({
 						</div>
 					)}
 				>
-					<IcMOverflowDot style={{ cursor: 'pointer' }} />
-				</Tooltip>
+					<div role="presentation" onClick={() => setShowPopOver(true)}>
+						<IcMOverflowDot style={{ cursor: 'pointer' }} />
+					</div>
+				</Popover>
 			</div>
 
 			{showMoveSupplierModal ? (
@@ -45,7 +48,7 @@ function Actions({
 					item={item}
 					bucketOptions={bucketOptions}
 					bucket_type={bucket_type}
-					current_allocated_containers={current_allocated_containers}
+					current_allocated_containers={item?.allocated_containers}
 					rollingFclFreightSearchId={rollingFclFreightSearchId}
 				/>
 			) : null}
