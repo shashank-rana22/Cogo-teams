@@ -114,12 +114,13 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 		setVisible(!visible);
 	};
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
-	const content = () => (
-		<div>
-			<div
-				className={styles.generate_container}
-			>
-				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION && NAVIGATION)
+	function Content() {
+		return (
+			<div>
+				<div
+					className={styles.generate_container}
+				>
+					{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION && NAVIGATION)
 					&& (
 						<div className={styles.button_container}>
 							<Button
@@ -135,8 +136,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-				{uploadInvoice && !IRN_FAILED_STATUS.includes(invoiceStatus)
-					&& (
+					{uploadInvoice && (
 						<InvoiceModal
 							uploadInvoice={uploadInvoice}
 							setUploadInvoice={setUploadInvoice}
@@ -144,7 +144,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							loading={invoiceLoading}
 						/>
 					)}
-				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost)
+					{(INVOICE_STATUS.includes(invoiceStatus) && !showPost)
 				&& !IRN_FAILED_STATUS.includes(invoiceStatus) && (
 					<div className={styles.button_container}>
 						<Button
@@ -159,113 +159,114 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							</span>
 						</Button>
 					</div>
-				)}
-				{POSTED_STATUS.includes(invoiceStatus) && (
-					<div className={styles.button_container}>
-						<Button
-							size="sm"
-							disabled={finalPostLoading}
-							onClick={() => handleFinalpost()}
-						>
-							<span className={styles.lable_width}>
-								{isFinalPosted ? 'Information' : 'Final Post'}
-							</span>
-						</Button>
-					</div>
-				)}
-				{IRN_FAILED_STATUS.includes(invoiceStatus) && REFRESH_ALLOWED && (
-					<div className={styles.button_container}>
-						<Button
-							size="sm"
-							disabled={loadingOnRefresh}
-							onClick={refresh}
-						>
-							<span className={styles.lable_width}>
-								Refresh
-							</span>
-						</Button>
-					</div>
-				)}
-				{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
-					<Button
-						disabled={showPostLoading}
-						size="sm"
-						onClick={postToSage}
-					>
-						Post to Sage
-					</Button>
-				)}
-				<FinalPostModal
-					finalPostToSageModal={finalPostToSageModal}
-					setFinalPostToSageModal={setFinalPostToSageModal}
-					finalPostFromSage={finalPostFromSage}
-					sageInvoiceData={sageInvoiceData}
-					sageInvoiceLoading={sageInvoiceLoading}
-					finalPostLoading={finalPostLoading}
-					isFinalPosted={isFinalPosted}
-				/>
-			</div>
-			{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
-				<div className={styles.button_container}>
-					<Button
-						size="sm"
-						disabled={loading}
-						onClick={() => financeRejected()}
-					>
-						<div className={styles.lable_width}>Finance Reject</div>
-					</Button>
-				</div>
-			)}
-			{openReject && (
-				<Modal
-					show={openReject}
-					onClose={() => {
-						setOpenReject(false);
-					}}
-				>
-					<Modal.Header title="Remarks*" />
-					<Modal.Body>
-						<Textarea
-							size="md"
-							value={textValue}
-							onChange={onChange}
-							style={{ height: '100px' }}
-						/>
-					</Modal.Body>
-					<Modal.Footer>
-						<div className={styles.button_val}>
-							<div className={styles.style_cancel}>
-								<Button
-									className="secondary sm"
-									onClick={() => {
-										setOpenReject(false);
-									}}
-								>
-									Cancel
-								</Button>
-							</div>
+					)}
+					{POSTED_STATUS.includes(invoiceStatus) && (
+						<div className={styles.button_container}>
 							<Button
-								className="primary sm"
-								disabled={!textValue || loadingReject}
-								onClick={() => {
-									financeReject();
-								}}
+								size="sm"
+								disabled={finalPostLoading}
+								onClick={() => handleFinalpost()}
 							>
-								Reject
+								<span className={styles.lable_width}>
+									{isFinalPosted ? 'Information' : 'Final Post'}
+								</span>
 							</Button>
 						</div>
-					</Modal.Footer>
-				</Modal>
-			)}
-		</div>
-	);
+					)}
+					{IRN_FAILED_STATUS.includes(invoiceStatus) && REFRESH_ALLOWED && (
+						<div className={styles.button_container}>
+							<Button
+								size="sm"
+								disabled={loadingOnRefresh}
+								onClick={refresh}
+							>
+								<span className={styles.lable_width}>
+									Refresh
+								</span>
+							</Button>
+						</div>
+					)}
+					{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
+						<Button
+							disabled={showPostLoading}
+							size="sm"
+							onClick={postToSage}
+						>
+							Post to Sage
+						</Button>
+					)}
+					<FinalPostModal
+						finalPostToSageModal={finalPostToSageModal}
+						setFinalPostToSageModal={setFinalPostToSageModal}
+						finalPostFromSage={finalPostFromSage}
+						sageInvoiceData={sageInvoiceData}
+						sageInvoiceLoading={sageInvoiceLoading}
+						finalPostLoading={finalPostLoading}
+						isFinalPosted={isFinalPosted}
+					/>
+				</div>
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
+					<div className={styles.button_container}>
+						<Button
+							size="sm"
+							disabled={loading}
+							onClick={() => financeRejected()}
+						>
+							<div className={styles.lable_width}>Finance Reject</div>
+						</Button>
+					</div>
+				)}
+				{openReject && (
+					<Modal
+						show={openReject}
+						onClose={() => {
+							setOpenReject(false);
+						}}
+					>
+						<Modal.Header title="Remarks*" />
+						<Modal.Body>
+							<Textarea
+								size="md"
+								value={textValue}
+								onChange={onChange}
+								style={{ height: '100px' }}
+							/>
+						</Modal.Body>
+						<Modal.Footer>
+							<div className={styles.button_val}>
+								<div className={styles.style_cancel}>
+									<Button
+										className="secondary sm"
+										onClick={() => {
+											setOpenReject(false);
+										}}
+									>
+										Cancel
+									</Button>
+								</div>
+								<Button
+									className="primary sm"
+									disabled={!textValue || loadingReject}
+									onClick={() => {
+										financeReject();
+									}}
+								>
+									Reject
+								</Button>
+							</div>
+						</Modal.Footer>
+					</Modal>
+				)}
+			</div>
+		);
+	}
 	const rest = {
 		onClickOutside: () => setVisible(false),
 	};
 	return (
 		<Popover
 			placement="left"
-			render={content()}
+			render={Content()}
 			visible={visible}
 			{...rest}
 		>
