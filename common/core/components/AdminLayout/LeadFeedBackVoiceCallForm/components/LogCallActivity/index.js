@@ -13,7 +13,10 @@ function LogCallActivity({
 	partnerId = '',
 	loggedInAgentId = '',
 	leadUserId = '',
+	restData = {},
 }) {
+	const { communication_start_time, communication_end_time } = restData || {};
+
 	const {
 		control,
 		formState:{ errors = {} },
@@ -21,8 +24,10 @@ function LogCallActivity({
 		watch,
 	} = useForm({
 		defaultValues: {
-			agent_id     : loggedInAgentId,
-			lead_user_id : leadUserId,
+			agent_id                 : loggedInAgentId,
+			lead_user_id             : leadUserId,
+			communication_start_time : communication_start_time ? new Date(communication_start_time) : null,
+			communication_end_time   : communication_end_time ? new Date(communication_end_time) : null,
 		},
 	});
 

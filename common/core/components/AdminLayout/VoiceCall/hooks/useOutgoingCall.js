@@ -47,7 +47,13 @@ const setCallStateData = ({
 		lead_organization_id,
 	};
 
-	setCallState((p) => ({ ...p, receiverUserDetails, showCallModalType: 'fullCallModal', isSelfIntiated: true }));
+	setCallState((p) => ({
+		...p,
+		receiverUserDetails,
+		lead_organization_id,
+		showCallModalType : 'fullCallModal',
+		isSelfIntiated    : true,
+	}));
 };
 
 function useOutgoingCall({

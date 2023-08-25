@@ -48,7 +48,11 @@ function LeadFeedBackVoiceCallForm() {
 		);
 	};
 
-	const { lead_organization_id = '', lead_user_id = '' } = leadFeedbackFormData || {};
+	const {
+		lead_organization_id = '',
+		lead_user_id = '',
+		...restData
+	} = leadFeedbackFormData || {};
 
 	useEffect(() => {
 		setActiveTab(leadFeedBackFormType);
@@ -89,6 +93,7 @@ function LeadFeedBackVoiceCallForm() {
 									partnerId={partnerId}
 									loggedInAgentId={loggedInAgentId}
 									leadUserId={lead_user_id}
+									restData={restData}
 								/>
 							</TabPanel>
 						);
