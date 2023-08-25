@@ -1,4 +1,4 @@
-export const footerValues = (t) => [
+export const footerValues = (t = () => {}) => [
 	t('printingDesk:awb_copies_options_copy_12_for_customs_label'),
 	t('printingDesk:awb_copies_options_copy_11_extra_copies_for_carrier_label'),
 	t('printingDesk:awb_copies_options_copy_10_extra_copies_for_carrier_label'),

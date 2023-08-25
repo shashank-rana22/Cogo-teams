@@ -7,7 +7,7 @@ import Filters from '../Filters';
 
 import styles from './styles.module.css';
 
-const tabs = (t) => [
+const tabs = (t = () => {}) => [
 	{
 		key   : 'approved_awb',
 		label : t('printingDesk:header_tabs_approved_awb'),

@@ -47,7 +47,7 @@ function ApprovedAWB({
 						onClick={() => setHandoverModal(true)}
 						disabled={updateLoading}
 					>
-						Handover
+						{t('printingDesk:approve_awb_handover_button')}
 					</Button>
 					{handoverModal && (
 						<Modal
@@ -56,7 +56,6 @@ function ApprovedAWB({
 						>
 							<Modal.Header title="Confirm Handover?" />
 							<Modal.Body className={styles.modal_body}>
-								Are you sure you want to confirm the Handover?
 								{t('printingDesk:approve_awb_body_text')}
 							</Modal.Body>
 							<Modal.Footer>

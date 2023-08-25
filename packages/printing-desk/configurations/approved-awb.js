@@ -1,4 +1,4 @@
-export const approvedAWBFields = (t) => {
+export const approvedAWBFields = (t = () => {}) => {
 	const fields = [
 		{
 			key   : 'serialId',

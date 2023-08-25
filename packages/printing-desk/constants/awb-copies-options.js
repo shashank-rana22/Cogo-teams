@@ -1,4 +1,4 @@
-export const options = (t) => [
+export const options = (t = () => {}) => [
 	{
 		name  : 'original_3',
 		value : 'original_3',

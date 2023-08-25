@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 
-const controls = (t) => [
+const controls = (t = () => {}) => [
 	{
 		name        : 'remark',
 		label       : t('printingDesk:upload_final_awb_controls_doc_description_label'),

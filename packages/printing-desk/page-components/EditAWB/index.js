@@ -55,7 +55,7 @@ function EditAWB({
 				onClose={() => { setEdit(false); }}
 				className={styles.modal_container}
 			>
-				<Modal.Header title="Edit AWB" />
+				<Modal.Header title={t('printingDesk:edit_awb_modal_header')} />
 				<Layout fields={AWBCONTROLS} control={control} errors={errors} />
 				<div className={styles.modal_footer}>
 					<Button
