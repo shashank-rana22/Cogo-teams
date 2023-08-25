@@ -1,4 +1,4 @@
-const controls = [
+const controls = (filters) => [
 	{
 		name           : 'roles',
 		label          : 'ROLES',
@@ -9,6 +9,7 @@ const controls = [
 		asyncKey       : 'list_employee_roles',
 		defaultOptions : true,
 		multiple       : true,
+		value          : filters?.roles || null,
 	},
 	{
 		name           : 'department',
@@ -20,12 +21,14 @@ const controls = [
 		asyncKey       : 'list_employee_departments',
 		defaultOptions : true,
 		multiple       : true,
+		value          : filters?.department || [],
 	},
 	{
 		name           : 'joining_date',
 		label          : 'Joining Date',
 		type           : 'date-picker',
 		showTimeSelect : true,
+		value          : filters?.joining_date || {},
 	},
 ];
 

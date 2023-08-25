@@ -1,6 +1,8 @@
 import {
 	Tabs, TabPanel, Input, Pagination, Toggle, Button, Select, Popover,
 } from '@cogoport/components';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -22,21 +24,54 @@ const PAGE_LIMIT_OPTIONS = [
 	{ label: 100, value: 100 },
 	{ label: 200, value: 200 },
 ];
-const INITIAL_PAGE_LIMIT = 10;
 
-function TableView({ search, setSearch }) {
+function TableView() {
+	const profileData = useSelector(({ profile }) => profile);
+	const dispatch = useDispatch();
+
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
 	const [bulkAction, setBulkAction] = useState(false);
-	const [pageLimit, setPageLimit] = useState(INITIAL_PAGE_LIMIT);
 	const [selectedIds, setSelectedIds] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [showPopOver, setShowPopOver] = useState(false);
 
 	const {
-		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
-	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction, pageLimit, selectedIds, setSelectedIds });
+		columns, loading, list, setActiveTab, setSearch, search,
+		activeTab, data, setPage, page, filters, setFilters, pageLimit, setPageLimit,
+	} = useTableView({ btnloading, updateEmployeeStatus, bulkAction, selectedIds, setSelectedIds });
 
 	useEffect(() => { if (!bulkAction) setSelectedIds([]); }, [bulkAction]);
+
+	const updateProfileField = (fieldName, val) => {
+		const modifiedProfileData = {
+			...profileData,
+			user: {
+				...profileData?.user,
+				new_hire_dashboard: {
+					...profileData?.user?.new_hire_dashboard,
+					[fieldName]: val,
+				},
+			},
+		};
+
+		switch (fieldName) {
+			case 'page_limit':
+				setPageLimit(val);
+				break;
+			case 'page':
+				setPage(val);
+				break;
+			case 'activeTab':
+				setActiveTab(val);
+				setPage(INITIAL_PAGE);
+				modifiedProfileData.user.new_hire_dashboard.page = 1;
+				break;
+			default:
+				break;
+		}
+
+		dispatch(setProfileState(modifiedProfileData));
+	};
 
 	return (
 		<div className={styles.container}>
@@ -45,7 +80,7 @@ function TableView({ search, setSearch }) {
 					<Tabs
 						activeTab={activeTab}
 						themeType="tertiary"
-						onChange={setActiveTab}
+						onChange={(val) => updateProfileField('activeTab', val)}
 						style={{ marginBottom: 6 }}
 					>
 						<TabPanel name="offered" title="Offered" />
@@ -53,6 +88,7 @@ function TableView({ search, setSearch }) {
 						<TabPanel name="rejected_by_user" title="Rejected By User" />
 						<TabPanel name="no_show" title="No Show" />
 					</Tabs>
+
 					{activeTab === 'offered' && (
 						<div className={styles.bulkupload_container}>
 							BulkAction
@@ -115,7 +151,7 @@ function TableView({ search, setSearch }) {
 						<div className={styles.pagination_container}>
 							<div className={styles.text}> Page Limit : </div>
 							<Select
-								onChange={(val) => setPageLimit(val)}
+								onChange={(val) => updateProfileField('page_limit', val)}
 								value={pageLimit}
 								options={PAGE_LIMIT_OPTIONS}
 								size="sm"
@@ -127,7 +163,7 @@ function TableView({ search, setSearch }) {
 								totalItems={data?.total_count || INITIAL_TOTAL_COUNT}
 								currentPage={page || INITIAL_PAGE}
 								pageSize={data?.page_limit}
-								onPageChange={setPage}
+								onPageChange={(val) => updateProfileField('page', val)}
 								type="table"
 								style={{ paddingTop: '5px' }}
 							/>

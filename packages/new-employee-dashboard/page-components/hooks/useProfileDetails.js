@@ -193,7 +193,7 @@ const useProfileDetails = () => {
 		[profile_id, trigger],
 	);
 
-	useEffect(() => { getEmployeeDetails(); }, [getEmployeeDetails, profile_id]);
+	useEffect(() => { if (profile_id) getEmployeeDetails(); }, [getEmployeeDetails, profile_id]);
 
 	return {
 		data,

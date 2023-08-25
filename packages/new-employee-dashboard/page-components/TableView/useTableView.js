@@ -2,21 +2,30 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
 import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
+const INITIAL_PAGE_LIMIT = 10;
 
 const useTableView = ({
-	search, btnloading, updateEmployeeStatus, bulkAction,
-	pageLimit, selectedIds, setSelectedIds,
+	btnloading, updateEmployeeStatus, bulkAction,
+	selectedIds, setSelectedIds,
 }) => {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('offered');
-	const [page, setPage] = useState(INITIAL_PAGE);
-	const [filters, setFilters] = useState({});
+	const profileData = useSelector(({ profile }) => profile);
+
+	const { user } = profileData || {};
+	const { new_hire_dashboard } = user || {};
+
+	const [activeTab, setActiveTab] = useState(new_hire_dashboard?.activeTab || 'offered');
+	const [page, setPage] = useState(new_hire_dashboard?.page || INITIAL_PAGE);
+	const [filters, setFilters] = useState(new_hire_dashboard?.filters || {});
+	const [search, setSearch] = useState(new_hire_dashboard?.search || '');
+	const [pageLimit, setPageLimit] = useState(new_hire_dashboard?.page_limit || INITIAL_PAGE_LIMIT);
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
@@ -107,6 +116,10 @@ const useTableView = ({
 		filters,
 		setFilters,
 		fetch,
+		pageLimit,
+		setPageLimit,
+		setSearch,
+		search,
 	};
 };
 
