@@ -80,10 +80,9 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 		pageLimit   : 10,
 		activeTab,
 		searchQuery : '',
-		// isMyTaskOnly : false,
 	});
 	const {
-		search, category, date, page, urgency, pageLimit, isMyTaskOnly, ...rest
+		search, category, date, page, urgency, pageLimit, isMyTaskOnly = false, ...rest
 	} =		filters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
