@@ -100,6 +100,11 @@ function asyncFieldsOperators() {
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
 		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
 	};
 }
 
