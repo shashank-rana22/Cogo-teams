@@ -11,10 +11,11 @@ function BulkActionPopOverContent({
 	showModal = false,
 	selectedIds = [],
 }) {
-	const { btnloading:bulkloading, sendBulkActionMail } = 	useBulkEmployeeDetails({
+	const { btnloading: bulkloading, sendBulkActionMail } = useBulkEmployeeDetails({
 		selectedIds,
 		setShowModal,
 	});
+
 	return (
 		<div className={styles.popover_content}>
 			<div className={styles.div_button_content}>
@@ -28,7 +29,6 @@ function BulkActionPopOverContent({
 					}}
 				>
 					Send Mail To Quikchex
-
 				</Button>
 			</div>
 
@@ -72,9 +72,7 @@ function BulkActionPopOverContent({
 								<Button
 									style={{ marginRight: '150px' }}
 									themeType="secondary"
-									onClick={() => {
-										sendBulkActionMail('move_to_probation');
-									}}
+									onClick={() => sendBulkActionMail('move_to_probation')}
 								>
 									Yes
 								</Button>

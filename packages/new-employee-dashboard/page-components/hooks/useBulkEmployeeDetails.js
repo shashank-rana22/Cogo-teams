@@ -4,7 +4,7 @@ import { useHarbourRequest } from '@cogoport/request';
 
 const TOAST_MESSAGE = {
 	send_quickchex_mail : 'Email sent Sucessfully to all the selected employees',
-	move_to_probation   : 'All the Selected employees moved to the Employee Directory under probation  ',
+	move_to_probation   : 'All the Selected employees moved to the Employee Directory under probation',
 };
 
 const useBulkEmployeeDetails = ({ selectedIds, setShowModal = () => {} }) => {
@@ -20,9 +20,7 @@ const useBulkEmployeeDetails = ({ selectedIds, setShowModal = () => {} }) => {
 				employee_detail_ids : selectedIds,
 			};
 
-			await trigger({
-				data: payload,
-			});
+			await trigger({ data: payload });
 
 			setShowModal(false);
 			Toast(TOAST_MESSAGE[action]);

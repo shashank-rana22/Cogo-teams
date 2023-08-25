@@ -36,11 +36,7 @@ function TableView({ search, setSearch }) {
 		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
 	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction, pageLimit, selectedIds, setSelectedIds });
 
-	useEffect(() => {
-		if (!bulkAction) {
-			setSelectedIds([]);
-		}
-	}, [bulkAction]);
+	useEffect(() => { if (!bulkAction) setSelectedIds([]); }, [bulkAction]);
 
 	return (
 		<div className={styles.container}>
