@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -11,7 +11,15 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => { }, filterLength = FILTER_LENGTH }) {
+function FilterModal({
+	filters = {},
+	setFilters = () => { },
+	filterLength = FILTER_LENGTH,
+	onClear = () => {},
+	// type,
+	// filterClear,
+	// clearMoreFilters = false,
+}) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalFilters, setModalFilters] = useState({ currency: filters?.currency });
 	const { currency = '' } = modalFilters || {};
@@ -40,7 +48,7 @@ function FilterModal({ filters = {}, setFilters = () => { }, filterLength = FILT
 							const { icon: Icon, text } = item;
 							return (
 								<div
-									className={`${styles.currency_values} 
+									className={cl`${styles.currency_values} 
 									${currency === text ? styles.selected : styles.unselected}`}
 									key={text}
 									onClick={() => {
@@ -77,10 +85,11 @@ function FilterModal({ filters = {}, setFilters = () => { }, filterLength = FILT
 										pageIndex   : 1,
 										pageSize    : 10,
 										invoiceView : filters?.invoiceView || '',
-										category    : filters?.category || '',
+										category    : filters?.category || undefined,
 										currency    : filters?.currency || '',
 										entity      : filters?.entity || '',
 									});
+									onClear();
 									setModalFilters({ currency: filters?.currency || '' });
 									setShowModal(false);
 								}}

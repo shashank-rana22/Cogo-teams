@@ -17,13 +17,22 @@ function FilterContainers({
 	showHeader = '',
 	setShowHeader = () => {},
 	viewSelectedInvoice = false,
+	onClear = () => {},
+	filterClear = [],
 }) {
 	return (
 		<div className={styles.filters}>
 			{!viewSelectedInvoice && (
 				<div className={styles.filtercontainer}>
 					<Filter controls={invoiceFilters} filters={filters} setFilters={setFilters} />
-					<FilterModal filters={filters} setFilters={setFilters} filterLength={5} />
+					<FilterModal
+						type="createpayrun"
+						filters={filters}
+						setFilters={setFilters}
+						filterLength={5}
+						onClear={onClear}
+						filterClear={filterClear}
+					/>
 				</div>
 			)}
 

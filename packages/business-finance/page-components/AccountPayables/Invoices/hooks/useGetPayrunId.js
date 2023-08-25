@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceType, serviceAgent }) => {
+const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceType, serviceAgent, categoryValue }) => {
 	const { push } = useRouter();
 	const {
 		user_data: userData,
@@ -26,22 +26,63 @@ const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceTyp
 	);
 
 	const getPayrunId = async () => {
+		let type;
+		let organizationId;
+		let service_type;
+
+		switch (categoryValue) {
+			case 'normal_payrun':
+				type = 'NORMAL';
+				organizationId = undefined;
+				service_type = undefined;
+				break;
+			case 'overseas_agent':
+				type = 'OVERSEAS';
+				organizationId = serviceAgent;
+				service_type = serviceType.toUpperCase() || null;
+				break;
+			case 'overheads':
+				type = 'OVERHEADS';
+				organizationId = undefined;
+				service_type = undefined;
+				break;
+			default:
+				break;
+		}
+
 		try {
 			const resp = await trigger({
 				data: {
-					type            : 'NORMAL',
+					type,
 					currency,
 					list            : [],
 					entityCode      : activeEntity,
 					performedBy     : userId,
 					performedByName : name,
 					performedByType : sessionType,
-					organization_id : serviceAgent || undefined,
-					service_type    : serviceType.toUpperCase() || undefined,
+					organization_id : organizationId,
+					service_type,
 				},
 			});
-			push(`/business-finance/account-payables/invoices/create-pay-run?payrun=${resp?.data?.id}
-			&currency=${currency}&entity=${activeEntity}`);
+
+			if (resp?.data && categoryValue === 'normal_payrun') {
+				push(
+					`/business-finance/account-payables/invoices/create-pay-run?payrun=${resp?.data.id}
+							&currency=${currency}&entity=${activeEntity}&payrun_type=${type}`,
+				);
+			} else if (categoryValue === 'overseas_agent') {
+				push(
+					`/business-finance/account-payables/invoices/over-seas-agent?organizationId=${serviceAgent}
+						&services=${serviceType}&payrun_type=${type}&payrun=${resp?.data.id}
+						&currency=${currency}&entity=${activeEntity}`,
+				);
+			} else if (categoryValue === 'overheads') {
+				push(
+					`/business-finance/account-payables/invoices/create-pay-run?payrun=${resp?.data.id}
+							&currency=${currency}&entity=${activeEntity}&payrun_type=overheads`,
+				);
+			}
+
 			setShowPayrunModal(false);
 		} catch (err) {
 			toastApiError(err);

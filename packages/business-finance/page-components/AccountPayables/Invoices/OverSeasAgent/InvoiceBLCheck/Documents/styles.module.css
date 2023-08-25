@@ -49,6 +49,8 @@
 	width: 100%;
 	height: calc(100vh - 220px);
 	overflow: scroll;
+
+	/* background-color: black; */
 }
 
 .empty_data {

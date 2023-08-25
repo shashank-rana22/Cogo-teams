@@ -2,6 +2,7 @@
 /* eslint-disable max-lines-per-function */
 import { Toast, Checkbox } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -15,8 +16,7 @@ import { VIEW_SELECTED_CONFIG } from '../CreatePayrun/Configurations/viewSelecte
 // import { VIEW_SELECTED_VN } from '../configurations/payruns/view-selected-table-vn';
 import { CREATE_OVER_SEAS_CONFIG } from '../OverSeasAgent/Configurations/createOverSeasConfig';
 
-const API_DATA_VARIABLE_ZERO = 0;
-const API_DATA_VARIABLE_ONE = 1;
+const API_ARRAY_VARIABLE_ONE = 1;
 const INCREEMENT_BY = 1;
 const VALUE_ZERO = 0;
 const POSITIVE_NO_CHECK = -1;
@@ -36,8 +36,8 @@ const useGetInvoiceSelection = ({ sort }) => {
 		performedByName : profile.user.name,
 	}));
 
-	const [apiData, setApiData] = useState();
-	const [apiTdsData, setApiTdsData] = useState();
+	const [apiData, setApiData] = useState({});
+	const [apiTdsData, setApiTdsData] = useState({});
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 	// const { country } = useContext(UserContext) || {};
 
@@ -117,7 +117,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 	const { search, dueDate, invoiceDate, uploadDate, ...rest } = globalFilters;
 
 	useEffect(() => {
-		const newData = { ...api[API_DATA_VARIABLE_ZERO]?.data };
+		const newData = { ...api[GLOBAL_CONSTANTS.zeroth_index]?.data };
 		if (newData.list) {
 			newData.list = newData?.list?.map((item) => ({
 				...item,
@@ -130,7 +130,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 
 		setApiData(newData);
 		setApiTdsData(newData);
-	}, [JSON.stringify(api[API_DATA_VARIABLE_ZERO]?.data)]);
+	}, [JSON.stringify(api[GLOBAL_CONSTANTS.zeroth_index]?.data)]);
 
 	useEffect(() => {
 		debounceQuery(search);
@@ -138,7 +138,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 
 	const refetch = () => {
 		const q = query || undefined;
-		api[API_DATA_VARIABLE_ONE]({
+		api[API_ARRAY_VARIABLE_ONE]({
 			params: {
 				payrunId           : payrun,
 				entityCode         : entity,
@@ -240,7 +240,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			}
 		}
 		try {
-			const res = await addInvoiceToSelectedAPI[API_DATA_VARIABLE_ONE]({
+			const res = await addInvoiceToSelectedAPI[API_ARRAY_VARIABLE_ONE]({
 				data: {
 					list       : [...SELECTED_INVOICE],
 					id         : urlQuery?.payrun,
@@ -497,7 +497,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		setEditedTdsValue,
 		setRestValue,
 		deleteInvoices,
-		loading       : api[API_DATA_VARIABLE_ZERO]?.loading,
+		loading       : api[GLOBAL_CONSTANTS.zeroth_index]?.loading,
 		payrun_type,
 		currency      : urlQuery?.currency,
 	};

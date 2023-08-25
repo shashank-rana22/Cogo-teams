@@ -45,7 +45,7 @@ const FUNCTIONS = {
 	),
 };
 
-function Invoices({ activeEntity }) {
+function Invoices({ activeEntity = '' }) {
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);

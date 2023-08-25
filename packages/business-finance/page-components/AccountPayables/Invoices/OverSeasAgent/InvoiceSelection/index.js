@@ -54,13 +54,13 @@ const getFunctions = ({ GetTableBodyCheckbox, setEditedValue, refetch }) => ({
 
 });
 function InvoiceSelection({
-	setActive,
-	setShowHeader,
-	showHeader,
-	active,
-	setBLData,
-	setShowPayableAmount,
-	setShowSaveAsDraft,
+	setActive = () => {},
+	setShowHeader = () => {},
+	showHeader = true,
+	active = '',
+	setBLData = () => {},
+	setShowPayableAmount = () => {},
+	setShowSaveAsDraft = () => {},
 }) {
 	const [sort, setSort] = useState({});
 	// const [showMoreFilters, setshowMoreFilters] = useState(false);
@@ -72,8 +72,8 @@ function InvoiceSelection({
 		setGlobalFilters,
 		setViewSelectedInvoice,
 		viewSelectedInvoice,
-		// onClear,
-		// filterClear,
+		onClear,
+		filterClear,
 		listSelectedInvoice,
 		submitSelectedInvoices,
 		// createloading,
@@ -138,6 +138,8 @@ function InvoiceSelection({
 				showHeader={showHeader}
 				setShowHeader={setShowHeader}
 				viewSelectedInvoice={viewSelectedInvoice}
+				onClear={onClear}
+				filterClear={filterClear}
 			/>
 
 			<div className={styles.list_container}>

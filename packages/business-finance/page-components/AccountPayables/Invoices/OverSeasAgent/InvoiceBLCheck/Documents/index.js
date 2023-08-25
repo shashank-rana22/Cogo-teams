@@ -8,13 +8,13 @@ import { OPTIONS, OptionAIR } from '../../../Constants';
 import styles from './styles.module.css';
 
 function Documents({
-	id,
-	documentUrl,
-	onApproveReject,
-	ApproveReject,
-	DocumentData,
-	payrunBillStatus,
-	showCheckInvoices,
+	id = '',
+	documentUrl = '',
+	onApproveReject = () => {},
+	ApproveRejectLoading = false,
+	DocumentData = [],
+	payrunBillStatus = '',
+	showCheckInvoices = false,
 	handleDropdown = () => {},
 	setShowCheckInvoices = () => {},
 }) {
@@ -89,8 +89,8 @@ function Documents({
 					</div>
 				) : (
 					<div className={styles.right}>
-						{DocumentData?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type === 'bill_of_lading'
-							|| DocumentData?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type
+						{DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type === 'bill_of_lading'
+							|| DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type
 								=== 'house_bill_of_lading' ? (
 									<>
 										<div className={styles.radiobtn}>
@@ -123,7 +123,7 @@ function Documents({
 			<div className={styles.btn_container}>
 				<Button
 					size="md"
-					themeType="accent"
+					themeType="secondary"
 					className={styles.btn}
 					onClick={() => {
 						onApproveReject(
@@ -135,7 +135,7 @@ function Documents({
 						);
 					}}
 					disabled={
-						ApproveReject?.loading
+						ApproveRejectLoading
 						|| payrunBillStatus === 'APPROVED'
 						|| payrunBillStatus === 'REJECTED'
 						|| showCheckInvoices[id] === 'Reject'
@@ -147,7 +147,7 @@ function Documents({
 
 				<Button
 					size="md"
-					themeType="secondary"
+					themeType="primary"
 					className={styles.btn}
 					onClick={() => {
 						onApproveReject(
@@ -159,7 +159,7 @@ function Documents({
 						);
 					}}
 					disabled={
-						ApproveReject?.loading
+						ApproveRejectLoading
 						|| payrunBillStatus === 'APPROVED'
 						|| payrunBillStatus === 'REJECTED'
 						|| showCheckInvoices[id] === 'Tagged'

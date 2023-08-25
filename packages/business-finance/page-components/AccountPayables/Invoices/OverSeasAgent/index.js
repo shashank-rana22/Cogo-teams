@@ -1,13 +1,17 @@
 import { Breadcrumb, Button, Stepper } from '@cogoport/components';
 import { Link } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
 import useGetInvoiceSelection from '../hooks/useInvoiceSelection';
 
+import FinalConfirmation from './FinalConfirmation';
 import InvoiceBLCheck from './InvoiceBLCheck';
 import InvoiceSelection from './InvoiceSelection';
+import MergeDocuments from './MergeDocuments';
 import PayabledDetails from './PayableDetails';
 import styles from './styles.module.css';
+import UploadDocuments from './UploadDocuments';
 
 const STEPS_MAPPING = [
 	{ title: 'Invoice selection', key: 'invoice_selection' },
@@ -18,14 +22,18 @@ const STEPS_MAPPING = [
 ];
 
 function OverSeasAgent() {
+	const {
+		query,
+	} = useSelector(({ general }) => ({
+		query: general.query,
+	}));
 	const [showHeader, setShowHeader] = useState(true);
 	const INITIAL_ACTIVE = 'invoice_selection';
 	const [active, setActive] = useState(INITIAL_ACTIVE);
 	const [bLData, setBLData] = useState([{}]);
 	const [showPayableAmount, setShowPayableAmount] = useState();
 	const [showSaveAsDraft, setShowSaveAsDraft] = useState(false);
-	// const { organizationId = '' } = urlQuery || {};
-	const ORGANIZATION_ID = 'b8099de7-8bae-4cf0-9db2-3a75171b11de';
+	const { organizationId = '' } = query || {};
 	const { goBack, resetPage, currency } = useGetInvoiceSelection({});
 	const { payrunState = '' } = bLData || {};
 
@@ -42,23 +50,23 @@ function OverSeasAgent() {
 	}, [payrunState]);
 
 	function RenderData() {
-		// if (active === 'Merge Documents') {
-		// 	return <MergeDocuments setActive={setActive} />;
-		// }
+		if (active === 'merge_documents') {
+			return <MergeDocuments setActive={setActive} />;
+		}
 		if (active === 'invoice_bl_check') {
 			return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
 		}
-		// if (active === 'Final Confirmation') {
-		// 	return (
-		// 		<FinalConfirmation
-		// 			setActive={setActive}
-		// 			setShowSaveAsDraft={setShowSaveAsDraft}
-		// 		/>
-		// 	);
-		// }
-		// if (active === 'Upload Documents') {
-		// 	return <UploadDocument setActive={setActive} />;
-		// }
+		if (active === 'final_confirmation') {
+			return (
+				<FinalConfirmation
+					setActive={setActive}
+					setShowSaveAsDraft={setShowSaveAsDraft}
+				/>
+			);
+		}
+		if (active === 'upload_documents') {
+			return <UploadDocuments setActive={setActive} />;
+		}
 		return (
 			<InvoiceSelection
 				setActive={setActive}
@@ -103,7 +111,7 @@ function OverSeasAgent() {
 			{showHeader && (
 				<>
 					<PayabledDetails
-						organizationId={ORGANIZATION_ID}
+						organizationId={organizationId}
 						showPayableAmount={showPayableAmount}
 						currency={currency}
 					/>

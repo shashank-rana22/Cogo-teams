@@ -7,7 +7,13 @@ import Documents from '../Documents';
 
 import styles from './styles.module.css';
 
-function Accordian({ setIsOpen, isOpen, itemData, showCheckInvoices, setShowCheckInvoices }) {
+function Accordian({
+	setIsOpen = () => {},
+	isOpen = false,
+	itemData = {},
+	showCheckInvoices = false,
+	setShowCheckInvoices = () => {},
+}) {
 	const {
 		invoiceNumber = '',
 		sid = '',
@@ -20,7 +26,7 @@ function Accordian({ setIsOpen, isOpen, itemData, showCheckInvoices, setShowChec
 
 	const {
 		onGetDocument,
-		DocumentData, ApproveReject, onApproveReject,
+		DocumentData, onApproveReject, ApproveRejectLoading,
 	} =		useGetDocument({ setShowCheckInvoices, setIsOpen });
 
 	const handleDropdown = (key = invoiceNumber) => {
@@ -93,7 +99,7 @@ function Accordian({ setIsOpen, isOpen, itemData, showCheckInvoices, setShowChec
 					setShowCheckInvoices={setShowCheckInvoices}
 					DocumentData={DocumentData}
 					onApproveReject={onApproveReject}
-					ApproveReject={ApproveReject}
+					ApproveRejectLoading={ApproveRejectLoading}
 					payrunBillStatus={payrunBillStatus}
 					showCheckInvoices={showCheckInvoices}
 				/>

@@ -36,7 +36,14 @@ function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
 	const {
 		getPayrunId,
 		loading,
-	} = useGetPayrunId({ activeEntity, currency: text, setShowPayrunModal, serviceType, serviceAgent });
+	} = useGetPayrunId({
+		activeEntity,
+		currency: text,
+		setShowPayrunModal,
+		serviceType,
+		serviceAgent,
+		categoryValue,
+	});
 
 	return (
 		<div>

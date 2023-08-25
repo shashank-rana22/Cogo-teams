@@ -18,7 +18,7 @@ function DeleteModal({ show, setShow, refetch, itemData }) {
 				onClose={() => setShow(false)}
 				className={styles.modal}
 			>
-				<Modal.Header title="Delete" />
+				<Modal.Header title="Delete Invoice" />
 				<Modal.Body>
 					<div className={styles.container}>
 						<div className={styles.icon}>
@@ -27,7 +27,7 @@ function DeleteModal({ show, setShow, refetch, itemData }) {
 						<div className={styles.icon}>
 							Are you sure You want to delete this invoice (
 							{itemData?.invoiceNumber || ''}
-							) ?.
+							) ?
 						</div>
 					</div>
 				</Modal.Body>
