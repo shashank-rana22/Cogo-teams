@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import useListRailDomesticFreightRateFreeDays from '../../../hooks/useListRailDomesticFreightRateFreeDays';
 import Invoice from '../common/Invoice';
 import ListView from '../common/ListView';
 import ShipmentTabs from '../common/ShipmentTabs';
@@ -17,7 +18,15 @@ const LIST_INVOICE_DEFAULT_FILTERS = {
 function Rail({ activeShipment = '' }) {
 	const [activeTab, setActiveTab] = useState('active');
 
-	const listViewProps = { columns: listFieldsColumns };
+	const {
+		data = {},
+		setFilters = () => {},
+		filters = {},
+		loading,
+	} = useListRailDomesticFreightRateFreeDays({ activeTab,	isApiTrigger: ['active', 'inactive'].includes(activeTab) });
+
+	const listViewProps = { columns: listFieldsColumns, filters, setFilters, data, loading };
+
 	const invoiceProps = { listFilters: LIST_INVOICE_DEFAULT_FILTERS, shipment_type: SHIPMENT_TYPE };
 
 	const tabMapping = {

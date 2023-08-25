@@ -2,10 +2,6 @@
 	margin-bottom: 20px;
 	background-color: white;
 	box-shadow: 0 0 10px rgb(0 0 0 / 5%);
-
-	&:first-of-type {
-		margin-top: 10px;
-	}
 }
 
 .row_container {
@@ -13,8 +9,7 @@
 	align-items: center;
 	justify-content: space-between;
 	min-height: 60px;
-	padding-right: 10px;
-	padding-left: 4px;
+	padding: 0 4px;
 }
 
 .width_95 {
