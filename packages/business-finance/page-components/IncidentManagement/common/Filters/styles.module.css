@@ -44,14 +44,6 @@
 	width: 50%;
 	margin-left: -6px;
 
-	.element {
-		width: 35%;
-	}
-
-	.element ~ .element {
-		width: 30%;
-	}
-
 	@media (max-width: 768px) {
 		flex-direction: column;
 	}

@@ -1,5 +1,5 @@
-const countryname_value = [
-	{ label: 'INDIA', value: 'INDIA' },
+const getCountryOptions = ({ t = () => {} }) => [
+	{ label: t('athenaDashboard:country_india_option_label'), value: 'INDIA' },
 ];
 
-export default countryname_value;
+export default getCountryOptions;

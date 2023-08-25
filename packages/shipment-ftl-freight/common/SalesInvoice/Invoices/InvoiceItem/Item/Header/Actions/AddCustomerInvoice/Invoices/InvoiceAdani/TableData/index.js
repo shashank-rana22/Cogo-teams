@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { customerToCin } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 import { getLineItems } from '../getLineItems';
 import { getOtherData, getChargesData } from '../getOtherData';
 
@@ -12,6 +12,7 @@ function TableData({
 	customData = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_CIN = {} } = getFortigoDetails();
 	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
 	});
@@ -49,7 +50,7 @@ function TableData({
 						}}
 					>
 						<b>GSTIN:</b>
-						&nbsp;
+						{' '}
 						{billing_address?.tax_number}
 					</td>
 					<td
@@ -72,7 +73,7 @@ function TableData({
 						}}
 					>
 						<b>Invoice No:- </b>
-						&nbsp;
+						{' '}
 						{invoice_no}
 					</td>
 				</tr>
@@ -91,7 +92,7 @@ function TableData({
 								{billing_address?.registration_number}
 							</p>
 							<p style={{ margin: '3px 0', fontSize: '12px' }}>
-								{customerToCin[importerExporterId] || ''}
+								{CUSTOMER_TO_CIN[importerExporterId] || ''}
 							</p>
 						</div>
 					</td>
@@ -105,7 +106,7 @@ function TableData({
 						}}
 					>
 						SAC Code:
-						&nbsp;
+						{' '}
 						{sac_code}
 					</td>
 					<td
@@ -117,7 +118,7 @@ function TableData({
 						}}
 					>
 						<b>Invoice Date:- </b>
-						&nbsp;
+						{' '}
 						{formatDate({
 							date       : bill_date,
 							formatType : 'date',

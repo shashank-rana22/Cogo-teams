@@ -17,6 +17,7 @@ const useGetRollingForecastData = (props) => {
 			console.error(err);
 		}
 	};
+
 	return {
 		data,
 		getRollingForecastData,

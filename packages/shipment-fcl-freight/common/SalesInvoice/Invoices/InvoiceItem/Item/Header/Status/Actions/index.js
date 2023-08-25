@@ -3,10 +3,11 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError, IcMInfo } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CancelEInvoice from './CancelEInvoice';
+import CancelReplaceEInvoice from './CancelReplaceEInvoice';
 import EmailInfo from './Components/EmailInfo';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
@@ -21,7 +22,8 @@ const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: fals
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
-const CANCEL_ALLOWED_STATUSES = ['IRN_GENERATED'];
+const CANCEL_OPTION_ALLOWED_STATUSES = ['IRN_GENERATED'];
+const CANCEL_MODAL_OPTIONS = ['cancel_e_invoice', 'replace_e_invoice'];
 
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
 
@@ -33,6 +35,10 @@ function Actions({
 	isIRNGenerated = false,
 	bfInvoice = {},
 }) {
+	const { role_id } = useSelector(({ profile }) => ({
+		role_id: profile?.auth_role_data?.id,
+	}));
+
 	const [showModal, setShowModal] = useState('');
 
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
@@ -52,22 +58,24 @@ function Actions({
 	const onModalClose = () => setShowModal('');
 	const geo = getGeoConstants();
 
+	const showCancelOptions = CANCEL_OPTION_ALLOWED_STATUSES.includes(bfInvoice.status) ? {
+		showCancel: (role_id === GLOBAL_CONSTANTS.uuid.vietnam_admin_id
+			? true : new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth())
+			&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice,
+		showReplace: geo.others.navigations.partner.bookings.invoicing.request_replace_invoice,
+	} : {};
+
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
 
-	const showCancel = CANCEL_ALLOWED_STATUSES.includes(bfInvoice.status)
-	&& new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth()
-	&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice;
-
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
 		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
 	}
 	// HARD CODING ENDS
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_container}>
@@ -135,7 +143,8 @@ function Actions({
 						invoiceData={invoiceData}
 						isIRNGenerated={isIRNGenerated}
 						setShowModal={setShowModal}
-						showCancel={showCancel}
+						showCancelOptions={showCancelOptions}
+						bfInvoice={bfInvoice}
 					/>
 				</div>
 			</div>
@@ -195,13 +204,14 @@ function Actions({
 					shipment_data={shipment_data}
 				/>
 			) : null}
-			{(showModal === 'cancel_e_invoice') && showCancel && (
-				<CancelEInvoice
+			{(CANCEL_MODAL_OPTIONS.includes(showModal)) && showCancelOptions && (
+				<CancelReplaceEInvoice
 					bfInvoice={bfInvoice}
-					show={showModal === 'cancel_e_invoice'}
+					show={CANCEL_MODAL_OPTIONS.includes(showModal)}
 					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
+					modalType={showModal}
 				/>
 			)}
 

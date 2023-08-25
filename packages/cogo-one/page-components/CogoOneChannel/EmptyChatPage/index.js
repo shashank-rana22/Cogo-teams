@@ -26,6 +26,7 @@ function EmptyChatPage({
 		return (
 			<ShipmentsHomePage
 				setActiveTab={setActiveTab}
+				showAddPrimaryUserButton={showShipments}
 			/>
 		);
 	}

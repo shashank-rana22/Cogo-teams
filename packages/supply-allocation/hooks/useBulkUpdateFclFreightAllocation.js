@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useBulkUpdateFclFreightAllocation = () => {
+const useBulkUpdateFclFreightAllocation = ({ refetchServiceProvidersData = () => {} }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/bulk_update_rolling_forecast_fcl_freight_allocation',
@@ -12,6 +12,7 @@ const useBulkUpdateFclFreightAllocation = () => {
 	const bulkUpdateFclFreightAllocation = async ({ payload }) => {
 		try {
 			await trigger({ data: payload });
+			refetchServiceProvidersData();
 		} catch (err) {
 			console.error(err);
 		}
