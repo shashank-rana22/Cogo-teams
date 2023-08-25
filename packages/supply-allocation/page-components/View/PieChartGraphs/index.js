@@ -8,13 +8,10 @@ import GraphItem from './GraphItem';
 const ARRAY_LENGTH = 3;
 
 function PieChartGraphs({
-	originLocationId = '',
-	destinationLocationId = '',
-	listApiLoading = false,
+	searchId = '',
 }) {
 	const { data: rollingForecastData = {}, graphDataLoading } =		useGetRollingForecastData({
-		origin_location_id      : originLocationId,
-		destination_location_id : destinationLocationId,
+		search_id: searchId,
 	});
 
 	const {
@@ -28,10 +25,6 @@ function PieChartGraphs({
 		weekly_forecasts,
 		container_type_forecasts,
 	};
-
-	if (listApiLoading) {
-		return null;
-	}
 
 	if (graphDataLoading) {
 		return (

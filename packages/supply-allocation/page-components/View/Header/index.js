@@ -1,12 +1,21 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useEffect } from 'react';
 
 import DotLoader from '../../../commons/DotLoader';
+import useListFclSearchesView from '../../../hooks/useListFclSearchesView';
 
 import styles from './styles.module.css';
 
-function Header({ firstSearch = {}, loading = false }) {
+function Header({ searchId = '' }) {
+	const router = useRouter();
+
+	const { data, findFclSearch, loading } = useListFclSearchesView({});
+
+	const { list = [] } = data || {};
+
+	const [firstSearch = {}] = list || [];
 	const {
 		origin_location = {},
 		destination_location = {},
@@ -18,11 +27,13 @@ function Header({ firstSearch = {}, loading = false }) {
 	const { display_name: originName } = origin_location;
 	const { display_name: destinationName } = destination_location;
 
-	const router = useRouter();
-
 	const onClickBack = () => {
 		router.push('/supply-allocation');
 	};
+
+	useEffect(() => {
+		findFclSearch(searchId);
+	}, [findFclSearch, searchId]);
 
 	if (loading) {
 		return (
