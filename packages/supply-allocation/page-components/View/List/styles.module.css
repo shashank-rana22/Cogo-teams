@@ -8,3 +8,10 @@
 	margin-bottom: 10px;
 	background: #fff;
 }
+
+.empty_state {
+	margin-top: 150px;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
