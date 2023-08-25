@@ -50,7 +50,7 @@ function List({ search_id = '' }) {
 		</div>;
 	}
 
-	if (!isEmpty(generateBucketTableData)) {
+	if (isEmpty(generateBucketTableData)) {
 		return (
 			<div className={styles.empty_state}>
 				No Suppliers are allocated for this pair.
