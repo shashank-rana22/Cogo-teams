@@ -1,4 +1,6 @@
-import Item from './Item';
+// import Item from './Item';
+import Item from '../CreditNote/Item';
+
 import styles from './styles.module.css';
 
 function CrossEntityCreditNote({
@@ -17,6 +19,7 @@ function CrossEntityCreditNote({
 						key={item?.id}
 						item={item}
 						invoicesList={invoicesList}
+						isCrossEntity
 					/>
 				))}
 			</div>

@@ -30,6 +30,7 @@ function Item({
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
+	isCrossEntity = false,
 }) {
 	const [open, setOpen] = useState('');
 
@@ -65,7 +66,11 @@ function Item({
 			<main className={styles.main}>
 				<div className={styles.header}>
 					<div className={styles.billing_party} ref={billingPartyHeightRef}>
-						<h5>{item?.billing_address?.name}</h5>
+						<h5>
+							{isCrossEntity ? item?.billing_address?.business_name?.toUpperCase()
+								: item?.billing_address?.name}
+
+						</h5>
 
 						<Tooltip
 							theme="light"
@@ -118,7 +123,7 @@ function Item({
 									{startCase(CN_STATUS_MAPPING[itemStatus])}
 								</div>
 
-								{itemStatus === 'rejected' ? (
+								{itemStatus === 'rejected' && !isCrossEntity ? (
 									<IcCError width={16} height={16} />
 								) : null}
 							</div>
@@ -133,7 +138,7 @@ function Item({
 							) : null}
 						</div>
 
-						{itemStatus === 'pending' ? (
+						{itemStatus === 'pending' && !isCrossEntity ? (
 							<div
 								onClick={() => setOpen('edit')}
 								role="button"
@@ -170,7 +175,7 @@ function Item({
 				) : null}
 			</main>
 
-			{open === 'review' ? (
+			{open === 'review' && !isCrossEntity ? (
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
@@ -178,7 +183,7 @@ function Item({
 				/>
 			) : null}
 
-			{open === 'edit' ? (
+			{open === 'edit' && !isCrossEntity ? (
 				<Edit
 					setOpen={setOpen}
 					prevData={prevData}
