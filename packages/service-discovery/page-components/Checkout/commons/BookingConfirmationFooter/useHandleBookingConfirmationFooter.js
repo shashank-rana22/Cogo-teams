@@ -5,9 +5,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useBookShipment from '../../../../../../hooks/useBookShipment';
-import useControlBookingApproval from '../../../../../../hooks/useControlBookingApproval';
-import useSendWhatsappBooking from '../../../../../../hooks/useSendWhatsappBooking';
+import useBookShipment from '../../hooks/useBookShipment';
+import useControlBookingApproval from '../../hooks/useControlBookingApproval';
+import useSendWhatsappBooking from '../../hooks/useSendWhatsappBooking';
 
 const useHandleBookingConfirmationFooter = ({
 	detail = {},
