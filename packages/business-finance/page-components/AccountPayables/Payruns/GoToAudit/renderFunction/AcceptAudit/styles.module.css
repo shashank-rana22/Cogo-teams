@@ -1,0 +1,8 @@
+.accept_button {
+	margin-left: 16px;
+}
+
+.button_container {
+	display: flex;
+	margin-right: 4px;
+}
