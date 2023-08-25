@@ -115,6 +115,7 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 		],
 		kam_manager_ids: [
 			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
@@ -123,7 +124,7 @@ export default {
 			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
 			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
-
+			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 		],
 
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
@@ -188,6 +189,10 @@ export default {
 			'7000ed27-f649-4e00-9c20-8c20c9eccf78', // Prod_COE_Finance_Head
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
+			'e48ae064-781a-43ee-af27-b7d4ed37329f', // Prod_Account Payable Executive
+			'6106378a-44e0-4f60-9f4b-4160843d9dc9', // Temp-  Corporate Owner Finance
+			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
+			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
 		],
 		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
@@ -246,10 +251,17 @@ export default {
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 		],
-		fortigo_agencies_mapping: {
+		ftl_agencies_mapping: {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
+		centralised_customer_support: [
+			'52e5b6f3-f243-40b6-a9cb-689fd9f25093', // Sales Head SG
+			'264a83ab-d438-48c3-8095-bb503f5b619c',	// Common Pool
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
+			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
+		],
 		igm_desk                  : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager  : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
 		document_control_lead     : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
@@ -260,6 +272,9 @@ export default {
 		ftl_ground_ops_role_id    : 'd2275231-30ad-4df9-8451-daf03b766f8a',
 		field_service_ops_role_id : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
 		kam_service_ops1_role_id  : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
+		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
+		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
+		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
 	},
 	options: {
 		registration_types: [

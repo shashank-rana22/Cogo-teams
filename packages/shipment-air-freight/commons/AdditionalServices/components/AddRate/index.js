@@ -91,7 +91,7 @@ function AddRate({
 	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
 
 	const onAddRate = (data) => {
-		const payload = getPayload(data, item, preProps, filters, billToCustomer);
+		const payload = getPayload({ data, item, preProps, filters, whoIsAddingRate, billToCustomer });
 
 		if (preProps.api === '/create_shipment_additional_service') {
 			apiTriggerCreate(payload);

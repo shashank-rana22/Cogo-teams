@@ -111,14 +111,14 @@ export const cargoControls = ({ insuranceDetails = {}, policyDetails, primary_se
 
 		{
 			name           : 'transitDate',
-			label          : 'Transition Date',
-			placeholder    : 'Select Transition Date',
+			label          : 'Sailing Date',
+			placeholder    : 'Select Sailing Date',
 			type           : 'datepicker',
 			span           : 4,
 			isClearable    : true,
 			minDate        : addDays(new Date(), MIN_DATE_LIMIT),
 			maxDate        : addDays(new Date(), MAX_DATE_LIMIT),
-			rules          : { required: 'Transition Date is required' },
+			rules          : { required: 'Sailing Date is required' },
 			showTimeSelect : true,
 			value          : insuranceDetails?.riskCoverage || 'ALL_RISK',
 			dateFormat     : 'MMM dd, yyyy, hh:mm:ss aaa',

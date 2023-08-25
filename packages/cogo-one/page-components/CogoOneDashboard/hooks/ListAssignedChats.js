@@ -14,6 +14,7 @@ const getParams = ({ timeline, agentId }) => ({
 	pagination_data_required : false,
 	filters                  : {
 		sales_agent_id          : agentId || undefined,
+		created_at_less_than    : new Date(),
 		created_at_greater_than : DATE_FILTER_MAPPING[timeline]?.(new Date()),
 	},
 });

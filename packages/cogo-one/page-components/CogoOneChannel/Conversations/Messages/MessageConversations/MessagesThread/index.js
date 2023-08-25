@@ -112,13 +112,20 @@ function MessagesThread(
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
 
+				const modtifiedEachMessage = {
+					...(eachMessage || {}),
+					...(channel_type === 'platform_chat'
+						? {
+							message_status: (!(index >= unreadIndex)) ? 'seen' : 'delivered',
+						}
+						: {}),
+				};
 				return (
 					<Component
 						key={eachMessage?.created_at}
 						conversation_type={eachMessage?.conversation_type || 'unknown'}
-						eachMessage={eachMessage}
+						eachMessage={modtifiedEachMessage}
 						activeMessageCard={activeMessageCard}
-						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
