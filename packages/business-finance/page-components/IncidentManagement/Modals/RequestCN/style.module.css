@@ -10,6 +10,8 @@
 .flex {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .name {
@@ -176,4 +178,9 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
+}
+
+.body_section {
+	max-height: 82vh !important;
+	padding: 20px 28px;
 }

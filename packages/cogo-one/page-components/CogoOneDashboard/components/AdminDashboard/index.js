@@ -13,7 +13,7 @@ import Escalation from './Escalations';
 import PerformanceTab from './PerformanceTabs';
 import styles from './styles.module.css';
 
-function AdminDashboard({ isRolePresent = false }) {
+function AdminDashboard({ isRolePresent = false, viewType = '' }) {
 	const [timeline, setTimeline] = useState('day');
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(new Date());
@@ -27,7 +27,7 @@ function AdminDashboard({ isRolePresent = false }) {
 		loading = false,
 		data = {},
 		getCogoOneDashboard = () => {},
-	} = useGetCogoOneAgentStats({ timeline, selectedDate, isAgent: true, isRolePresent });
+	} = useGetCogoOneAgentStats({ timeline, selectedDate, isAgent: true, isRolePresent, viewType });
 
 	const props = {
 		timeline,

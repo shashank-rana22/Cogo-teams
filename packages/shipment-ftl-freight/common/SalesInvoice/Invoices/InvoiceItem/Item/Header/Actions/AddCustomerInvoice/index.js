@@ -10,6 +10,7 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 import UploadProof from './UploadProof';
 import { getPayload } from './utils/getPayload';
+import { INVOICE_SOURCES } from './utils/serviceDescriptionMappings';
 
 const INVOICE_STATUS_REVIEWED = ['reviewed', 'approved'];
 
@@ -18,6 +19,7 @@ function AddCustomerInvoice({
 	invoice = {},
 	shipmentData = {},
 	setShowModal = () => {},
+	invoiceData = {},
 }) {
 	const [showInvoiceModal, setShowInvoiceModal] = useState(false);
 	const [toggle, setToggle] = useState(false);
@@ -52,7 +54,7 @@ function AddCustomerInvoice({
 	const customHandleSubmit = () => {
 		const handleSubmitCallback = (data) => {
 			const pdfUrl = data?.upload_proof?.finalUrl;
-			const payload = getPayload({ shipmentData, invoice, pdfUrl });
+			const payload = getPayload({ shipmentData, invoice, pdfUrl, source: INVOICE_SOURCES.UPLOADED });
 			apiTrigger(payload);
 		};
 		formRef?.current?.handleSubmit?.(handleSubmitCallback)();
@@ -120,6 +122,7 @@ function AddCustomerInvoice({
 						handleCloseModal={handleCloseModal}
 						handleClose={() => setShowInvoiceModal(false)}
 						tradePartnerData={tradePartnerData?.list}
+						invoiceData={invoiceData}
 					/>
 				</Modal.Body>
 			</Modal>

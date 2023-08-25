@@ -13,6 +13,8 @@ const COGOONE_ADMIN = {
 		all      : ['15_min_filter', 'assigned_to', 'assigned_agent', 'chat_tags'],
 		contacts : ['chat_tags'],
 	},
+	stats_feedback_count          : [],
+	to_show_agent_activity_graph  : false,
 	extra_side_bar_navs_access    : ['spot_search', 'flash_shipment_bookings'],
 	accesible_agent_types_query   : [],
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,

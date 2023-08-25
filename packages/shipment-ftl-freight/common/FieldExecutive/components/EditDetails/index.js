@@ -19,6 +19,7 @@ function EditDetails({
 	truckNumber = {},
 	updateDetails = () => {},
 	editLoading = false,
+	fieldExecTabConfig = {},
 }) {
 	const {
 		activeStepper,
@@ -44,6 +45,7 @@ function EditDetails({
 					setInitFormattedData={setInitFormattedData}
 					otherFormattedData={otherFormattedData}
 					setOtherFormattedData={setOtherFormattedData}
+					fieldExecTabConfig={fieldExecTabConfig}
 				/>
 			))}
 			<div className={styles.button_wrapper}>
