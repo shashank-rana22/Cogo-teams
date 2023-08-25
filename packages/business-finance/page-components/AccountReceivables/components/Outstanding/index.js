@@ -3,12 +3,15 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs/index.tsx';
+import useGetCallPriority from '../../hooks/useGetCallPriority';
 import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding.ts';
 
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList/index.tsx';
 import OrgLoader from './OutstandingList/OrgLoaders/index.tsx';
 import styles from './styles.module.css';
+
+const LOADER_LEN = 7;
 
 function Outstanding({ entityCode = '' }) {
 	const [formFilters, setFormFilters] = useState({
@@ -29,6 +32,8 @@ function Outstanding({ entityCode = '' }) {
 		queryKey,
 		refetch,
 	} = useGetOrgOutstanding({ entityCode });
+
+	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -66,14 +71,16 @@ function Outstanding({ entityCode = '' }) {
 				setQueryKey={setQueryKey}
 				entityCode={entityCode}
 				refetch={refetch}
-				list={list}
+				callPriorityData={callPriorityData}
+				callPriorityLoading={callPriorityLoading}
 			/>
 
 			{outstandingLoading ? (
 				<div>
-					{[1, 2, 3, 4, 5, 6, 7].map((key) => (
-						<OrgLoader key={key} />
-					))}
+					{Array(LOADER_LEN)
+						.fill(null).map((key) => (
+							<OrgLoader key={key} />
+						))}
 				</div>
 			) : (
 				<>

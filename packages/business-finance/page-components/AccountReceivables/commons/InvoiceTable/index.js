@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
-const SEARCH_PLACEHOLDER = "Search by Invoice number / SID"
+const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
 
 const getStyle = ({
 	sortType = '',
@@ -66,48 +66,48 @@ function InvoiceTable({
 	const sortStyleGrandTotalAsc = getStyle({
 		sortType,
 		sortBy,
-		activeSortType: 'asc',
-		activeSortBy: 'grandTotal',
+		activeSortType : 'asc',
+		activeSortBy   : 'grandTotal',
 	});
 
 	const sortStyleGrandTotalDesc = getStyle({
 		sortType,
 		sortBy,
-		activeSortType: 'desc',
-		activeSortBy: 'grandTotal',
+		activeSortType : 'desc',
+		activeSortBy   : 'grandTotal',
 	});
 
 	const sortStyleInvoiceDateAsc = getStyle({
 		sortType,
 		sortBy,
-		activeSortType: 'asc',
-		activeSortBy: 'invoiceDate',
+		activeSortType : 'asc',
+		activeSortBy   : 'invoiceDate',
 	});
 
 	const sortStyleInvoiceDateDesc = getStyle({
 		sortType,
 		sortBy,
-		activeSortType: 'desc',
-		activeSortBy: 'invoiceDate',
+		activeSortType : 'desc',
+		activeSortBy   : 'invoiceDate',
 	});
 
 	const sortStyleDueDateAsc = getStyle({
 		sortType,
 		sortBy,
-		activeSortType: 'asc',
-		activeSortBy: 'dueDate',
+		activeSortType : 'asc',
+		activeSortBy   : 'dueDate',
 	});
 
 	const sortStyleDueDateDesc = getStyle({
 		sortType,
 		sortBy,
-		activeSortType: 'desc',
-		activeSortBy: 'dueDate',
+		activeSortType : 'desc',
+		activeSortBy   : 'dueDate',
 	});
 
 	const columns = completedColumn({
 		entityCode,
-		refetch: getOrganizationInvoices,
+		refetch   : getOrganizationInvoices,
 		showName,
 		setSort,
 		sortStyleGrandTotalAsc,
@@ -120,7 +120,7 @@ function InvoiceTable({
 		setinvoiceFilters,
 		checkedRows,
 		setCheckedRows,
-		totalRows: listData?.list || [],
+		totalRows : listData?.list || [],
 		isHeaderChecked,
 		setIsHeaderChecked,
 	});
@@ -161,8 +161,8 @@ function InvoiceTable({
 							value={invoiceFilters.search || ''}
 							onChange={(value) => setinvoiceFilters({
 								...invoiceFilters,
-								search: value || undefined,
-								page: 1,
+								search : value || undefined,
+								page   : 1,
 							})}
 							size="md"
 							placeholder={SEARCH_PLACEHOLDER}
@@ -175,8 +175,8 @@ function InvoiceTable({
 						value={invoiceFilters.search || ''}
 						onChange={(value) => setinvoiceFilters({
 							...invoiceFilters,
-							search: value || undefined,
-							page: 1,
+							search : value || undefined,
+							page   : 1,
 						})}
 						size="md"
 						placeholder={SEARCH_PLACEHOLDER}

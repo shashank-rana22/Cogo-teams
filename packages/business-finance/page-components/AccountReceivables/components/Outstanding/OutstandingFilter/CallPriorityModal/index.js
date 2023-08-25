@@ -4,7 +4,7 @@ import { IcMCross } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import InvoiceTable from '../../../../commons/InvoiceTable/index.tsx';
+import InvoiceTable from '../../../../commons/InvoiceTable';
 import useGetPartnerRmMapping from '../../../../hooks/useGetPartnerRmMapping.ts';
 import Communication from '../../OutstandingList/Communication';
 import OrganizationUsers from '../../OutstandingList/OrganizationUsers/index.tsx';
@@ -17,19 +17,19 @@ const DEFAULT_LENGTH = 1;
 
 const TAB_OPTIONS = [
 	{
-		key: 'invoice_details',
-		name: 'Invoice Details',
-		component: InvoiceTable,
+		key       : 'invoice_details',
+		name      : 'Invoice Details',
+		component : InvoiceTable,
 	},
 	{
-		key: 'communication',
-		name: 'Communication',
-		component: Communication,
+		key       : 'communication',
+		name      : 'Communication',
+		component : Communication,
 	},
 	{
-		key: 'organization_users',
-		name: 'Users',
-		component: OrganizationUsers,
+		key       : 'organization_users',
+		name      : 'Users',
+		component : OrganizationUsers,
 	},
 
 ];
@@ -50,7 +50,11 @@ function Content({ types = [], head = '' }) {
 	);
 }
 
-function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () => { }, data = {} }) {
+function CallPriorityModal({
+	showCallPriority = false,
+	setShowCallPriority = () => { },
+	data = {},
+}) {
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const { data: item, getPartnerMappingData, loading } = useGetPartnerRmMapping();
 	const handleClick = (val) => {
@@ -69,9 +73,9 @@ function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () 
 		invoice_details: {
 			organizationId,
 			entityCode,
-			showName: false,
-			showFilters: false,
-			limit: 4,
+			showName    : false,
+			showFilters : false,
+			limit       : 4,
 		},
 		organization_users: {
 			selfOrganizationId,

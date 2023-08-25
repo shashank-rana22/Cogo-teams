@@ -1,11 +1,10 @@
-import { Input, Popover } from '@cogoport/components';
+import { Input, Placeholder, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
 	IcMCross,
-	IcMSearchdark,
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -30,7 +29,8 @@ function Filters({
 	queryKey = '',
 	entityCode = '',
 	refetch = () => {},
-	list = [],
+	callPriorityData = {},
+	callPriorityLoading = false,
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 	const [showCallPriority, setShowCallPriority] = useState(false);
@@ -136,25 +136,22 @@ function Filters({
 					/>
 				</div>
 				<div className={styles.flex_wrap}>
-					{orderBy?.label === 'Call Priority' ? (
-						<div className={styles.call}>
-							<div
-								style={{ display: 'flex', cursor: 'pointer' }}
-								onClick={() => setShowCallPriority(true)}
-								role="presentation"
-							>
-								<div className={styles.calllabel}>
-									{
-										list?.[GLOBAL_CONSTANTS.zeroth_index]
-											?.businessName
-									}
-								</div>
-								<div className={styles.callpriority}>
-									Call Priority
-								</div>
+					<div className={styles.call}>
+						<div
+							style={{ display: 'flex', cursor: 'pointer' }}
+							onClick={() => setShowCallPriority(true)}
+							role="presentation"
+						>
+							<div className={styles.calllabel}>
+								{callPriorityLoading ? <Placeholder width="60px" />
+									: callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]
+										?.businessName}
+							</div>
+							<div className={styles.callpriority}>
+								Call Priority
 							</div>
 						</div>
-					) : null}
+					</div>
 					<div className={styles.flex_wrap}>
 						<Input
 							placeholder={placeholder}
@@ -179,7 +176,7 @@ function Filters({
 				<CallPriorityModal
 					showCallPriority={showCallPriority}
 					setShowCallPriority={setShowCallPriority}
-					data={list?.[GLOBAL_CONSTANTS.zeroth_index]}
+					data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
 				/>
 			) : null}
 		</div>

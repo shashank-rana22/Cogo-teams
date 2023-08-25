@@ -43,7 +43,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
+	const [invoiceFilters, setinvoiceFilters] = useState({
 		page              : 1,
 		pageLimit         : limit,
 		orgId             : organizationId,
