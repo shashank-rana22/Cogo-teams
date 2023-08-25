@@ -6,6 +6,13 @@ import styles from './styles.module.css';
 
 const FIRST = 1;
 
+const STATUS_COLOR_MAPPING = {
+	PENDING        : '#fbd1a6',
+	REJECTED       : '#f37166',
+	APPROVED       : '#c4dc91',
+	NOT_APPLICABLE : '#fef199',
+};
+
 function StakeHolderTimeline({ timeline = [] }) {
 	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
 	return (
@@ -32,6 +39,7 @@ function StakeHolderTimeline({ timeline = [] }) {
 							</div>
 							<div
 								className={styles.status}
+								style={{ background: STATUS_COLOR_MAPPING[item?.status] }}
 							>
 								{item?.status || 'PENDING'}
 							</div>
