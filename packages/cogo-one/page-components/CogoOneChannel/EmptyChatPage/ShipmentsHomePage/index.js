@@ -71,7 +71,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
-	const [showShipmentChat, setShowShipmentChat] = useState(null);
+	const [showShipmentChat, setShowShipmentChat] = useState({});
 
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
 	const [showPopover, setShowPopover] = useState('');
