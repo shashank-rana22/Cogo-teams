@@ -1,4 +1,5 @@
 import { Modal, Button, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
@@ -88,7 +89,7 @@ function TableView({ search = '', activeTab = '' }) {
 
 			<Modal
 				size="lg"
-				show={ctcBreakup}
+				show={!isEmpty(ctcBreakup)}
 				onClose={() => setCtcBreakup('')}
 			>
 				{ctcBreakup?.employee_detail?.name
@@ -108,6 +109,7 @@ function TableView({ search = '', activeTab = '' }) {
 							? ` + Rs. ${variable_pay / DIVISION_NUMBER} LPA (variable)`
 							: null}
 					</span>
+
 					<CtcBreakup metadata={metadata} />
 				</Modal.Body>
 
