@@ -43,7 +43,7 @@ const getColumns = ({
 		},
 		{
 			Header   : 'ROLE',
-			accessor : (item) => <div>{startCase(item?.role)}</div>,
+			accessor : (item) => <div>{startCase(item?.role || '-')}</div>,
 		},
 		{
 			Header   : 'REPORTING MANAGER',
