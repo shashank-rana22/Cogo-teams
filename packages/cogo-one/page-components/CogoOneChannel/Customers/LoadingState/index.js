@@ -2,11 +2,13 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const LOADER_LENGTH = 6;
+
 function LoadingState() {
 	return (
 		<div className={styles.list_container}>
-			{[...Array(6)].map(() => (
-				<div className={styles.card_container}>
+			{[...Array(LOADER_LENGTH).keys()].map((itm) => (
+				<div className={styles.card_container} key={itm}>
 					<div className={styles.card}>
 
 						<div className={styles.user_information}>
