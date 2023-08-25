@@ -3,7 +3,8 @@ import React, { useMemo } from 'react';
 import { bucketControls } from '../../../configs/bucket-controls';
 import useGetRollingForecastBucketsData from '../../../hooks/useGetRollingForeCastBucketsData';
 
-import Content from './content';
+import BucketsListBody from './BucketsListBody';
+import BucketsListHeader from './BucketsListHeader';
 
 function List({ search_id = '' }) {
 	const { data: bucketData = [] } = useGetRollingForecastBucketsData({
@@ -42,33 +43,12 @@ function List({ search_id = '' }) {
 
 	return (
 		<>
-			<div
-				style={{
-					display    : 'flex',
-					alignItems : 'center',
-					background : '#FDFBF6',
-					padding    : '20px 5px',
-					marginTop  : '20px',
-				}}
-			>
-				{bucketControls.map(({ title, flexBasis }) => (
-					<div
-						key={title}
-						style={{ flexBasis, display: 'flex', justifyContent: 'center' }}
-					>
-						{title}
-					</div>
-				))}
-			</div>
+			<BucketsListHeader bucketControls={bucketControls} />
 
-			{generateBucketTableData?.map((item, index) => (
-				<Content
-					key={item.bucket_type}
-					item={item}
-					index={index}
-					search_id={search_id}
-				/>
+			{generateBucketTableData?.map((item) => (
+				<BucketsListBody key={item.bucket_type} item={item} searchId={search_id} />
 			))}
+
 		</>
 	);
 }

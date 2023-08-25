@@ -1,7 +1,4 @@
-import { startCase } from '@cogoport/utils';
-
-import StyledTable from '../../../../commons/StyledTable';
-import useGetRollingForecastBucketData from '../../../../hooks/useGetRollingForecastBucketData';
+import StyledTable from '../../../../../commons/StyledTable';
 import getSubBucketColumns from '../SubBucketColumns';
 
 import styles from './styles.module.css';
@@ -11,15 +8,11 @@ function BucketTable({
 	bucket_type = '',
 	control = {},
 	unregister = () => {},
-
 	current_allocated_containers = 0,
 	bulkEditMode = false,
+	serviceProvidersData = {},
+	serviceProvidersApiLoading = false,
 }) {
-	const { data, loading } = useGetRollingForecastBucketData({
-		id,
-		bucket_type,
-	});
-
 	const { subBucketColumns } = getSubBucketColumns({
 		control,
 		unregister,
@@ -33,9 +26,9 @@ function BucketTable({
 		<div className={styles.container}>
 			<StyledTable
 				key={bucket_type}
-				loading={loading}
+				loading={serviceProvidersApiLoading}
 				columns={subBucketColumns}
-				data={data || []}
+				data={serviceProvidersData || []}
 			/>
 		</div>
 	);

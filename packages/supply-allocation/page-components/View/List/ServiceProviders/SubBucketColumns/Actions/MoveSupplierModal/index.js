@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import useUpdateFclFreightAllocation from '../../../../../../hooks/useUpdateFclFreightAllocation';
+import useUpdateFclFreightAllocation from '../../../../../../../hooks/useUpdateFclFreightAllocation';
 
 import styles from './styles.module.css';
 

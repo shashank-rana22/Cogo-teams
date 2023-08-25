@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { getItemDisplayString } from '../../../../utils/generateDisplayName';
+import { getItemDisplayString } from '../../../../../utils/generateDisplayName';
 
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
