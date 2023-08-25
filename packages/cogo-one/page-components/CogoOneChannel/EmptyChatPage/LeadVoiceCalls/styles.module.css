@@ -53,3 +53,10 @@
 .input_styled {
 	width: 25%;
 }
+
+.cross_icon {
+	width: 13px;
+	height: 13px;
+	margin-right: 4px;
+	cursor: pointer;
+}

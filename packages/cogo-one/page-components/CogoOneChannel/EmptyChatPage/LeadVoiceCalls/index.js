@@ -1,7 +1,7 @@
 import { Input, Pagination } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -122,6 +122,14 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 					prefix={<IcMSearchlight className={styles.search_icon} />}
 					placeholder="Search By Name"
 					className={styles.input_styled}
+					suffix={
+						(search ? (
+							<IcMCross
+								className={styles.cross_icon}
+								onClick={() => setSearch('')}
+							/>
+						) : null)
+				}
 				/>
 			</div>
 			{loading ? (
