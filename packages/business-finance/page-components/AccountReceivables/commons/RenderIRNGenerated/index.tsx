@@ -1,24 +1,19 @@
-import { getByKey } from '@cogoport/utils';
 import React from 'react';
 
 import IRNCancel from '../IRNCancel';
 import IRNGenerate from '../IRNGenerate';
 
 const IS_ELIGIBLE_CHECK = ['FINANCE_ACCEPTED', 'POSTED', 'IRN_FAILED'];
-const IS_CANCELLABLE_CHECK = ['IRN_GENERATED', 'POSTED', 'FAILED'];
+const IS_CANCELLABLE_CHECK = ['IRN_GENERATED', 'POSTED', 'FAILED', 'IRN_CANCELLED'];
 
-function RenderIRNGenerated({ itemData, refetch }) {
-	const render = () => {
-		if (IS_ELIGIBLE_CHECK.includes((getByKey(itemData, 'invoiceStatus') as string))) {
-			return <IRNGenerate itemData={itemData} refetch={refetch} />;
-		}
-		if (IS_CANCELLABLE_CHECK.includes((getByKey(itemData, 'invoiceStatus') as string))) {
-			return <IRNCancel itemData={itemData} refetch={refetch} />;
-		}
-		return null;
-	};
+function RenderIRNGenerated({ itemData = { invoiceStatus: '' }, refetch = () => {} }) {
 	return (
-		render()
+		<>
+			{IS_ELIGIBLE_CHECK.includes(itemData?.invoiceStatus)
+				? <IRNGenerate itemData={itemData} refetch={refetch} /> : null}
+			{IS_CANCELLABLE_CHECK.includes(itemData?.invoiceStatus)
+				? <IRNCancel itemData={itemData} refetch={refetch} /> : null}
+		</>
 	);
 }
 
