@@ -88,6 +88,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
 			'upload_invoice',
+			'refetch-pdfs',
 			'dunning',
 		],
 		placeholder: {
