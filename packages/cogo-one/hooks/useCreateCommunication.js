@@ -3,21 +3,21 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import formatData from '../utils/formatData';
+import getFormatData from '../utils/getFormatData';
 
 function useCreateCommunicationLog({
-	setInputValue,
-	setDate,
+	setInputValue = () => {},
+	setDate = () => {},
 	fetchListLogApi = () => {},
-	activeMessageCard,
-	activeTab,
-	activeVoiceCard,
-	resetList,
+	activeMessageCard = {},
+	activeTab = '',
+	activeVoiceCard = {},
+	resetList = () => {},
 }) {
 	const {
 		orgId = '',
 		userId = '',
-	} = formatData({ activeMessageCard, activeVoiceCard, activeTab });
+	} = getFormatData({ activeMessageCard, activeVoiceCard, activeTab });
 
 	const { partnerId, agentID } = useSelector(({ profile }) => ({
 		partnerId : profile.partner?.id || {},

@@ -18,7 +18,7 @@ function GroupedAgents({
 				{!loading ? startCase(groupName) : <Placeholder height="20px" width="75px" />}
 			</div>
 			<div className={styles.grouped_list}>
-				{groupedList.map((item) => {
+				{groupedList.map((item, index) => {
 					const { name = '', status = '', agent_id = '' } = item || {};
 
 					return (
@@ -29,7 +29,7 @@ function GroupedAgents({
 							agent={name}
 							status={status}
 							agent_id={agent_id}
-							key={agent_id}
+							key={agent_id || index}
 						/>
 					);
 				})}

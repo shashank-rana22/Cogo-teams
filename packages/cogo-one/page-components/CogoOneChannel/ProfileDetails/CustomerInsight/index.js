@@ -5,17 +5,23 @@ import { useState, useEffect } from 'react';
 
 import SERVICE_TYPE_OPTIONS from '../../../../configurations/service-type-options';
 import useGetOmnichannelCustomerInsights from '../../../../hooks/useGetOmnichannelCustomerInsights';
-import FormatData from '../../../../utils/formatData';
+import getFormatData from '../../../../utils/getFormatData';
 
 import InsightsList from './InsightsList';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard, customerId, formattedMessageData }) {
+function CustomerInsight({
+	activeTab = '',
+	activeVoiceCard = {},
+	activeMessageCard = {},
+	customerId = '',
+	formattedMessageData = {},
+}) {
 	const { sender = null } = formattedMessageData;
 	const [serviceType, setServiceType] = useState('fcl_freight');
 
-	const { userId = '', userMobile = '' } = FormatData({
+	const { userId = '', userMobile = '' } = getFormatData({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,

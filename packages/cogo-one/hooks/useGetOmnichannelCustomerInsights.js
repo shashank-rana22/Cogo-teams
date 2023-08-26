@@ -2,22 +2,22 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import FormatData from '../utils/formatData';
+import getFormatData from '../utils/getFormatData';
 
 const useGetOmnichannelCustomerInsights = ({
 	activeMessageCard = {},
 	activeVoiceCard = {},
-	activeTab,
+	activeTab = '',
 	serviceType = '',
-	customerId,
-	sender,
+	customerId = '',
+	sender = '',
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_customer_insights',
 		method : 'get',
 	}, { manual: true });
 
-	const { userId = '', userMobile = '' } = FormatData({
+	const { userId = '', userMobile = '' } = getFormatData({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,

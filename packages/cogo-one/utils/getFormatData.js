@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-function FormatData({
+function getFormatData({
 	activeMessageCard = {},
 	activeTab = 'message',
 	activeVoiceCard = {},
@@ -60,4 +60,4 @@ function FormatData({
 		channelType,
 	};
 }
-export default FormatData;
+export default getFormatData;
