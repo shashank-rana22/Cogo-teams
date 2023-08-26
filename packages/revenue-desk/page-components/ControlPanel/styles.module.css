@@ -1,0 +1,12 @@
+.headTitle {
+	margin-left: 12px;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.back_button {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}

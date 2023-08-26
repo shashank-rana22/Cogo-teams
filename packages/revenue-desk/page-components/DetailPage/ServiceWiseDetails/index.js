@@ -7,6 +7,7 @@ import useUpdateRatesPreferences from '../../../hooks/useCreateRatesPreferences'
 import { DEFAULT_INDEX, VALUE_ONE, VALUE_TWO, VALUE_ZERO } from '../../constants';
 
 import CancellationModal from './CancellationModal';
+import DecisionPointsCard from './DecisionPointCard';
 import PreviewModal from './PreviewModal';
 import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
@@ -18,14 +19,15 @@ const included_services = ['fcl_freight_service',
 	'ftl_freight_service', 'ltl_freight_service', 'fcl_cfs_service'];
 
 function ServiceWiseDetails({
-	serviceData,
-	shipmentData,
-	priceData,
-	setShowDetailPage,
+	serviceData = [],
+	shipmentData = [],
+	priceData = [],
+	setShowDetailPage = () => {},
 	revenueDeskDecisionsData = [],
 }) {
 	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const GROUPED_SERVICES = {};
+
 	serviceData.forEach((service) => {
 		if (included_services.includes(service.service_type)) {
 			GROUPED_SERVICES[service.service_type] = [
@@ -74,6 +76,12 @@ function ServiceWiseDetails({
 
 	return (
 		<div className={styles.container}>
+			<DecisionPointsCard
+				supplierPayload={supplierPayload}
+				serviceData={serviceData}
+				priceData={priceData}
+				GROUPED_SERVICES={GROUPED_SERVICES}
+			/>
 			<div className={styles.button_select_container}>
 				{!['completed', 'cancelled'].includes(shipmentData?.state) ? (
 					<div className={styles.button_container}>
@@ -144,7 +152,6 @@ function ServiceWiseDetails({
 						supplierPayload={supplierPayload}
 						shipmentData={shipmentData}
 						updateTrigger={updateTrigger}
-						priceData={priceData}
 					/>
 				) : null}
 			{modalStep === VALUE_TWO

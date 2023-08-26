@@ -1,7 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, shipmentData } = {}) => {
+const useListShipmentBookingConfirmationPreferences = ({
+	singleServiceData,
+	shipmentData,
+	isPreferenceRequired,
+} = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_shipment_booking_confirmation_preferences',
@@ -22,9 +26,13 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, ship
 			// console.log(err);
 		}
 	}, [trigger, serviceId, shipmentId, serviceType]);
+
 	useEffect(() => {
-		getList();
-	}, [singleServiceData, getList]);
+		if (isPreferenceRequired) {
+			getList();
+		}
+	}, [singleServiceData, getList, isPreferenceRequired]);
+
 	return {
 		data: data?.list,
 		loading,
