@@ -1,8 +1,10 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Table } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
+import ccCallListTable from '../../configs/CC_Call_List_Table';
+import { KAM_WISE_DATA, SERVICE_WISE_DATA, CC_WISE_DATA, CC_COMMUNICATION_DATA } from '../../constants/kam-wise-data';
 import useGetKamWiseOutstandingsStats from '../../hooks/useGetKamWiseOutstandingsStats';
 import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../hooks/useGetSageArOustandingStats';
@@ -13,6 +15,7 @@ import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import OverallOutstandingStats from './OverallOutstandingStats';
 import ResponsivePieChart from './ResponsivePieChart';
+import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
 
 function Outstanding({ entityCode }) {
@@ -33,15 +36,18 @@ function Outstanding({ entityCode }) {
 		setQueryKey,
 		queryKey,
 	} = useGetOrgOutstanding({ formFilters, entityCode });
+	// const [viewGraphStats, setViewGraphStats] = useState(false);
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		globalFilters: formFilters,
 	});
 	const ref = useRef(null);
+	const RIGHT_OFF_SET = 2000;
+	const LEFT_OFF_SET = -2000;
 	console.log(entityCode, 'entityCode');
 	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats({
 		globalFilters: formFilters,
 	});
-	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({
+	const { serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({
 		globalFilters: formFilters,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
@@ -63,17 +69,24 @@ function Outstanding({ entityCode }) {
 	const handleInputReset = () => {
 		setoutStandingFilters({ ...outStandingFilters, search: '' });
 	};
-	const KamDataPoints = (kamWiseStats || []).map((item, index) => ({
+	const KamDataPoints = (KAM_WISE_DATA || []).map((item, index) => ({
 		id        : index,
 		label     : item.kam_owners.slice(0, 36) || '-',
 		sub_label : item.kam_owners || '-',
 		value     : item.total_outstanding_amount || 0,
 	}));
-	const ServiceDataPoints = (serviceWiseStats || []).map((item, index) => ({
+	const ServiceDataPoints = (SERVICE_WISE_DATA || []).map((item, index) => ({
 		id        : index,
 		label     : startCase(item.shipment_type) || '-',
 		sub_label : startCase(item.shipment_type) || '-',
 		value     : item.total_open_invoice_amount || 0,
+	}));
+
+	const ccDataPoints = (CC_WISE_DATA || []).map((item, index) => ({
+		id        : index,
+		label     : startCase(item.name) || '-',
+		sub_label : startCase(item.name) || '-',
+		value     : item.total_outstanding_amount || 0,
 	}));
 	const graphPropsList = {
 		kam_wise_outstandings: {
@@ -103,6 +116,21 @@ function Outstanding({ entityCode }) {
 			},
 		},
 	};
+	const graphPropsChild = {
+		cc_wise_outstandings: {
+			data        : ccDataPoints,
+			heading     : 'CC Wise Outstandings',
+			// loading     : ccWiseLoading,
+			isKamWise   : true,
+			graphStyles : {
+				legendPaddingTop: '10px',
+			},
+			listTitle: {
+				nameTitle  : 'Credit Controller',
+				valueTitle : 'Total Outstanding Amount',
+			},
+		},
+	};
 	console.log(kamWiseStats, 'kamWiseStats');
 
 	return (
@@ -122,45 +150,61 @@ function Outstanding({ entityCode }) {
 				entityCode={entityCode}
 			/>
 			<OverallOutstandingStats item={statsData} statsLoading={statsLoading} />
-			<div className={styles.overlay_container}>
+			<div className={`${styles.overlay_container} overlay_section`}>
 				<div className={styles.scroll_container}>
 					<div ref={ref}>
-						<div className="ui-table-root">
-							{Object.keys(graphPropsList || {}).map((singleGraphProp) => (
-								<div key={singleGraphProp}>
-									<ResponsivePieChart
-										{...(graphPropsList[singleGraphProp] || {})}
-									/>
-								</div>
-							))}
-							{/* <div>
-								{Object.keys(graphPropsChild || {}).map((singleGraphProp) => (
-									<ResponsivePieChart
-										{...(graphPropsChild[singleGraphProp] || {})}
-									/>
+						<div className={`${styles.outstanding_card} overlay_section`}>
+							<div style={{ display: 'flex', width: '100%', minWidth: '100%' }}>
+								{Object.keys(graphPropsList || {}).map((singleGraphProp) => (
+									<div key={singleGraphProp} style={{ width: '50%' }}>
+										<ResponsivePieChart
+											{...(graphPropsList[singleGraphProp] || {})}
+										/>
+									</div>
 								))}
-							</div> */}
-							{/* <div>
-								<CcCallList
-									dateFilter={dateFilter}
-									list={ccCommStats}
-									loading={ccCommLoading}
-									setRange={setRange}
-									range={range}
-									setDateFilter={setDateFilter}
-								/>
-							</div> */}
+							</div>
+							<div style={{
+								display     : 'flex',
+								width       : '50%',
+								minWidth    : '50%',
+								borderRight : '1px solid red',
+							}}
+							>
+								{Object.keys(graphPropsChild || {}).map((singleGraphProp) => (
+									<div key={singleGraphProp} style={{ width: '100%' }}>
+										<ResponsivePieChart
+											{...(graphPropsChild[singleGraphProp] || {})}
+										/>
+									</div>
+								))}
+							</div>
+							<div style={{
+
+								width     : '50%',
+								minWidth  : '50%',
+								maxHeight : '54vh',
+								overflow  : 'auto',
+							}}
+							>
+								<div style={{ fontWeight: 600, marginLeft: '10px' }}>CC Call Stats</div>
+								<div style={{
+									display: 'flex',
+								}}
+								>
+									<Table columns={ccCallListTable()} data={CC_COMMUNICATION_DATA || []} />
+								</div>
+							</div>
 						</div>
 					</div>
-					{/* <ScrollDiv>
-						{viewGraphStats && (
-							<ScrollBar
-								ref={ref}
-								rightOffSet={rightOffSet}
-								leftOffSet={leftOffSet}
-							/>
-						)}
-					</ScrollDiv> */}
+					<div>
+
+						<ScrollBar
+							ref={ref}
+							rightOffSet={RIGHT_OFF_SET}
+							leftOffSet={LEFT_OFF_SET}
+						/>
+
+					</div>
 				</div>
 				{/* {!viewGraphStats && (
 					<Overlay>

@@ -13,7 +13,7 @@
 
 .overlay_container {
 	position: relative;
-	width: 100%;
+	overflow-x: auto;
 }
 
 .scroll_container {
@@ -23,4 +23,24 @@
 	background: #fff;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+}
+
+.outstanding_card {
+	display: flex;
+	flex-flow: wrap;
+	flex-wrap: nowrap !important;
+	align-items: normal;
+	justify-content: flex-start;
+	width: 100%;
+	min-height: 317px !important;
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+	overflow: hidden;
+	scroll-behavior: smooth;
+	border-right: 1px solid red;
+
+	/* & > div:first-child {
+		padding-bottom: 20px;
+		border-right: 2px solid red;
+	} */
 }

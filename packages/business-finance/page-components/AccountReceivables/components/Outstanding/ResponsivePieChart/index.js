@@ -1,7 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
-import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import { SERVICE_WISE_COLORS, KAM_WISE_COLORS } from '../../../constants/color';
 // import EmptyState from '../EmptyState';
@@ -21,7 +20,7 @@ function ResponsivePieChart({
 	listTitle,
 }) {
 	const { legendPaddingTop } = graphStyles || {};
-	const [showListView, setShowListView] = useState(false);
+	// const [showListView, setShowListView] = useState(false);
 	// const [isSortBy, setIsSortBy] = useState('');
 	// const isEmpty = (data || []).every((el) => el.value === 0);
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
@@ -67,13 +66,13 @@ function ResponsivePieChart({
 							from      : 'color',
 							modifiers : [['darker', TWO]],
 						}}
-						tooltip={({ datum: { label, value } }) => (
-							<div className={styles.toolTip_div}>
-								<div className={styles.toolTip_title}>
-									<div className={styles.color_dot}> </div>
+						tooltip={({ datum: { label, value, color } }) => (
+							<div className={styles.tool_tip_div}>
+								<div className={styles.tool_tip_title}>
+									<div className={styles.color_dot} style={{ background: color || '#5936f0' }}> </div>
 									{label}
 									:
-									<div className={styles.toolTip_amount}>
+									<div className={styles.tool_tip_amount}>
 										{formatAmount({
 											amount   : value,
 											currency : 'INR',
@@ -102,12 +101,12 @@ function ResponsivePieChart({
 		<div>
 			<div className={styles.flex}>
 				<div className={styles.heading}>{heading}</div>
-				<Button
+				{/* <Button
 					className="secondary sm"
 					onClick={() => setShowListView(!showListView)}
 				>
 					{showListView ? 'Graph View' : 'List View'}
-				</Button>
+				</Button> */}
 			</div>
 			<div className={styles.container}>{RenderBody()}</div>
 		</div>
