@@ -114,6 +114,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 		setVisible(!visible);
 	};
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
+
 	function Content() {
 		return (
 			<div>
@@ -210,7 +211,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 						<Button
 							size="sm"
 							disabled={loading}
-							onClick={() => financeRejected()}
+							onClick={financeRejected}
 						>
 							<div className={styles.lable_width}>Finance Reject</div>
 						</Button>
@@ -247,9 +248,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 								<Button
 									className="primary sm"
 									disabled={!textValue || loadingReject}
-									onClick={() => {
-										financeReject();
-									}}
+									onClick={financeReject}
 								>
 									Reject
 								</Button>
@@ -266,7 +265,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	return (
 		<Popover
 			placement="left"
-			render={Content()}
+			render={<Content />}
 			visible={visible}
 			{...rest}
 		>

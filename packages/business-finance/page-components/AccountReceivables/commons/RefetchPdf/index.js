@@ -7,9 +7,13 @@ import useRefetchPdfs from './useRefetchPdfs';
 
 export default function RefetchPdfs({ itemData = {} }) {
 	const { entityCode, id } = itemData || {};
-	const refetch_pdf = ENTITY_FEATURE_MAPPING[entityCode].feature_supported.includes('refetch-pdfs');
+	const refetchPdf = ENTITY_FEATURE_MAPPING[entityCode].feature_supported.includes('refetch-pdfs');
 	const { onRefetch, loading } = useRefetchPdfs({ id });
 	const [show, setShow] = useState(false);
+
+	if (refetchPdf === null) {
+		return null;
+	}
 
 	const handleClick = () => {
 		onRefetch();
@@ -20,7 +24,7 @@ export default function RefetchPdfs({ itemData = {} }) {
 	};
 
 	return (
-		refetch_pdf ? (
+		refetchPdf ? (
 			<div>
 				<Popover
 					placement="left"
@@ -34,7 +38,7 @@ export default function RefetchPdfs({ itemData = {} }) {
 				>
 					<div>
 						<IcMOverflowDot
-							style={{ cursor: 'pointer' }}
+							cursor="pointer"
 							onClick={handleClose}
 							width="16px"
 							height="16px"
