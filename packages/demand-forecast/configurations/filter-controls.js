@@ -1,21 +1,16 @@
 const getControls = () => {
 	const filterControls = [
 		{
-			name        : 'origin_location_id',
+			name        : 'origin_cluster_id',
 			label       : 'Origin Port',
 			type        : 'asyncSelect',
-			asyncKey    : 'list_locations',
+			asyncKey    : 'list_pricing_zones',
 			placeholder : 'Origin Port',
-			params      : {
-				filters: {
-					type: ['seaport'],
-				},
-			},
 			initialCall : true,
 			isClearable : true,
 		},
 		{
-			name        : 'destination_location_id',
+			name        : 'destination_cluster_id',
 			label       : 'Destination Port',
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',

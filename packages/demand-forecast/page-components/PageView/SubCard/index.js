@@ -101,7 +101,6 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 												remaining_port_pairs={portPairData?.remaining_port_pairs}
 											/>
 										)}
-										trigger="mouseenter"
 									>
 										<span className={styles.popover_txt}>
 											{KEYS_MAPPING[key]}

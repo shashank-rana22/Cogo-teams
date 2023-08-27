@@ -13753,6 +13753,11 @@ const partner = {
 			service_name : 'rolling_forecast',
 		},
 		{
+			api          : 'list_pricing_zones',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
 			api          : 'send_requirement_email',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
