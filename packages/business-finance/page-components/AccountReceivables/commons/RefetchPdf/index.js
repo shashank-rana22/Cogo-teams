@@ -11,9 +11,7 @@ export default function RefetchPdfs({ itemData = {} }) {
 	const { onRefetch, loading } = useRefetchPdfs({ id });
 	const [show, setShow] = useState(false);
 
-	if (refetchPdf === null) {
-		return null;
-	}
+	if (!refetchPdf) { return null; }
 
 	const handleClick = () => {
 		onRefetch();
@@ -24,28 +22,26 @@ export default function RefetchPdfs({ itemData = {} }) {
 	};
 
 	return (
-		refetchPdf ? (
-			<div>
-				<Popover
-					placement="left"
-					visible={show}
-					render={(
-						<Button onClick={handleClick} type="button" disabled={loading}>
-							{loading ? 'Refetching' : 'Refetch'}
-						</Button>
-					)}
-					onClickOutside={handleClose}
-				>
-					<div>
-						<IcMOverflowDot
-							cursor="pointer"
-							onClick={handleClose}
-							width="16px"
-							height="16px"
-						/>
-					</div>
-				</Popover>
-			</div>
-		) : null
+		<div>
+			<Popover
+				placement="left"
+				visible={show}
+				render={(
+					<Button onClick={handleClick} type="button" disabled={loading}>
+						{loading ? 'Refetching' : 'Refetch'}
+					</Button>
+				)}
+				onClickOutside={handleClose}
+			>
+				<div>
+					<IcMOverflowDot
+						cursor="pointer"
+						onClick={handleClose}
+						width="16px"
+						height="16px"
+					/>
+				</div>
+			</Popover>
+		</div>
 	);
 }
