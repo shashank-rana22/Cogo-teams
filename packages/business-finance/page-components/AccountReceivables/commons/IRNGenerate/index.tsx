@@ -115,6 +115,23 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	};
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
 
+	const buttonMapping = [
+		{
+			status   : POSTED_STATUS,
+			disabled : finalPostLoading,
+			label    : isFinalPosted ? 'Information' : 'Final Post',
+			criteria : true,
+			action   : handleFinalpost,
+		},
+		{
+			status   : IRN_FAILED_STATUS,
+			disabled : loadingOnRefresh,
+			label    : 'Refresh',
+			criteria : REFRESH_ALLOWED,
+			action   : refresh,
+		},
+	];
+
 	function Content() {
 		return (
 			<div>
@@ -161,32 +178,28 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 						</Button>
 					</div>
 					)}
-					{POSTED_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={finalPostLoading}
-								onClick={() => handleFinalpost()}
-							>
-								<span className={styles.lable_width}>
-									{isFinalPosted ? 'Information' : 'Final Post'}
-								</span>
-							</Button>
-						</div>
-					)}
-					{IRN_FAILED_STATUS.includes(invoiceStatus) && REFRESH_ALLOWED && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={loadingOnRefresh}
-								onClick={refresh}
-							>
-								<span className={styles.lable_width}>
-									Refresh
-								</span>
-							</Button>
-						</div>
-					)}
+					{
+						buttonMapping.map((item) => {
+							const { status, disabled, label, criteria, action } = item;
+							return (status.includes(invoiceStatus) && criteria
+								? (
+									<div className={styles.button_container}>
+										<Button
+											size="sm"
+											disabled={disabled}
+											onClick={action}
+										>
+											<span className={styles.lable_width}>
+												{label}
+											</span>
+										</Button>
+									</div>
+								) : null
+
+							);
+						})
+					}
+
 					{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
 						<Button
 							disabled={showPostLoading}
