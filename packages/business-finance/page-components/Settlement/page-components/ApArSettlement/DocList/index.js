@@ -14,6 +14,8 @@ function DocList({
 	sortBy,
 	setSortBy,
 	sortType, setSortType, arrowDirections, setArrowDirections, sortData, setSortData,
+	pageCheckedRows,
+	setPageCheckedRows,
 }) {
 	const { list = [] } = data || {};
 	const col = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -31,6 +33,8 @@ function DocList({
 		setArrowDirections,
 		sortData,
 		setSortData,
+		pageCheckedRows,
+		setPageCheckedRows,
 	});
 	return (
 		<div>

@@ -1,19 +1,46 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
+import React, { useEffect } from 'react';
+
+// import useExchangeRate from '../../../hooks/useExchangeRate';
+import useGetExcRate from '../../../hooks/useGetExcRate';
+import useGetJVList from '../../../hooks/useGetJvsList';
 
 import styles from './styles.module.css';
 
+// import useGetJvList from '../../../hooks/useGetJvList';
+
 function Amount({
+	// docData = [],
 	data = [],
 	loading = false,
 	selectedData = [],
+	filters,
 	// setSelectedData,
+	matchModalShow,
 	setMatchModalShow = false,
 	// matchModalShow,
 	totalMatchingBalance = 0,
 }) {
-	// console.log(selectedData);
+	// console.log('sele', selectedData);
 	const INITIAL_BAL = 0;
+	const ZEROTH_INDEX = 0;
+	// const { page, pageLimit } = filters || {};
+	// console.log('data', data);
+	const { currency, ledCurrency } = selectedData?.[ZEROTH_INDEX] || {};
+	// console.log('curre', currency);
+	const {
+		// JvListData,
+		// JvListLoading,
+		jvListRefetch,
+	} = useGetJVList({ filters });
+	const from_cur = currency;
+	const to_cur = ledCurrency;
+	const {
+		getExchangeRate,
+	} = useGetExcRate({ from_cur, to_cur });
+	useEffect(() => {
+
+	}, [matchModalShow]);
 	return (
 		<div className={styles.Container}>
 			<div className={styles.BalanceCard}>
@@ -63,7 +90,7 @@ function Amount({
 						themeType="accent"
 						disabled={selectedData.length === INITIAL_BAL}
 						loading={loading}
-						onClick={() => { setMatchModalShow(true); }}
+						onClick={() => { setMatchModalShow(true); jvListRefetch(); getExchangeRate(); }}
 					>
 						Match
 

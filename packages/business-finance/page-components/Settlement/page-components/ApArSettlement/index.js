@@ -46,6 +46,7 @@ function ApArSettlement() {
 		setFilters((prev) => ({ ...prev, page: val }));
 	};
 	const [selectedData, setSelectedData] = useState([]);
+	const [pageCheckedRows, setPageCheckedRows] = useState({});
 	const [matchModalShow, setMatchModalShow] = useState(false);
 	// const { query = '', debounceQuery } = useDebounceQuery();
 	const {
@@ -84,6 +85,8 @@ function ApArSettlement() {
 				// setArrowDirections={setArrowDirections}
 					setSortData={setSorting}
 					sortData={sorting}
+					pageCheckedRows={pageCheckedRows}
+					setPageCheckedRows={setPageCheckedRows}
 				/>
 			);
 		}
@@ -103,6 +106,22 @@ function ApArSettlement() {
 		// balanceRefetch();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sorting]);
+	// console.log('happy');
+	useEffect(() => {
+		// Create a set of selected IDs for quick lookups
+		const selectedIds = new Set(selectedData.map((row) => row.id));
+
+		// Filter out IDs that are not in selectedData
+		const UPDATEDPAGECHECKEDROWS = {};
+		Object.keys(pageCheckedRows).forEach((pageNo) => {
+			UPDATEDPAGECHECKEDROWS[pageNo] = pageCheckedRows[pageNo].filter((id) => selectedIds.has(id));
+		});
+
+		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
+		console.log('p', pageCheckedRows);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedData]);
+	// console.log(selectedData);
 
 	// useEffect(() => {
 	// 	debounceQuery(filters?.query);
@@ -182,6 +201,7 @@ function ApArSettlement() {
 				matchModalShow={matchModalShow}
 				setMatchModalShow={setMatchModalShow}
 				totalMatchingBalance={totalMatchingBalance}
+				filters={filters}
 			/>
 			<MatchModal
 				matchModalShow={matchModalShow}
@@ -189,6 +209,7 @@ function ApArSettlement() {
 				totalMatchingBalance={totalMatchingBalance}
 				selectedData={selectedData}
 				setSelectedData={setSelectedData}
+				loading={loading}
 			/>
 		</div>
 

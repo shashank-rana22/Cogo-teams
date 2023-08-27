@@ -18,23 +18,27 @@ const useGetColumns = ({
 	sortData, setSortData,
 	// arrowDirections,
 	// setArrowDirections,
+	pageCheckedRows,
+	setPageCheckedRows,
 }) => {
+	// const [isChecked, setIsChecked] = useState(true);
 	const { list = [] } = data || {};
 	const { sortBy, sortType } = sortData || {};
 	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
 	// console.log('f', data);
 	const [selectAll, setSelectAll] = useState(false);
-	const [pageCheckedRows, setPageCheckedRows] = useState({});
+	// const [pageCheckedRows, setPageCheckedRows] = useState({});
 	// const [selectedData, setSelectedData] = useState([]);
 	const pageNumber = data?.pageNo;
-	const checkedRowsId = pageCheckedRows[pageNumber] || [];
+	const checkedRowsId = pageCheckedRows?.[pageNumber] || [];
 	const DOC_LENGTH = 10;
 	const AMT_LENGTH = 8;
-	const START_INDEX = 0;
+	const ZEROTH_INDEX = 0;
 
 	useEffect(() => {
 		// Update selectAll based on checkboxes of current page
-		const currentPageCheckedIds = pageCheckedRows[pageNumber] || [];
+		console.log('v');
+		const currentPageCheckedIds = pageCheckedRows?.[pageNumber] || [];
 		const isRowsChecked = currentPageListIds.every((id) => currentPageCheckedIds.includes(id));
 		setSelectAll(isRowsChecked);
 	}, [pageCheckedRows, currentPageListIds, pageNumber]);
@@ -82,9 +86,19 @@ const useGetColumns = ({
 			// }
 			} else {
 				// Select all checkboxes, including header
+				// newPageCheckedIds = currentPageListIds;
+				// newSelectedData = [...new Set([...selectedData, ...list])];
+				// console.log('vsd');
+				const newIdsToAdd = currentPageListIds.filter((id) => !selectedData.some((item) => item.id === id));
+				console.log('n', newIdsToAdd);
+				// newPageCheckedIds = [...selectedData.map((item) => item.id), ...newIdsToAdd];
 				newPageCheckedIds = currentPageListIds;
-				newSelectedData = [...new Set([...selectedData, ...list])];
+				const newDataToAdd = list.filter((item) => newIdsToAdd.includes(item.id));
+				newSelectedData = [...selectedData, ...newDataToAdd];
+				// newSelectedData = [...new Set([...selectedData, ...list])];
 			}
+			console.log('new', newSelectedData);
+			console.log(previousPageCheckedRows, 'previous');
 			setSelectedData(newSelectedData);
 			return {
 				...previousPageCheckedRows,
@@ -118,7 +132,8 @@ const useGetColumns = ({
 			</div>
 		);
 	};
-
+	// console.log(checkedRowsId);
+	// console.log(pageCheckedRows);
 	const columns = [
 		{
 			id     : 'checkbox',
@@ -133,7 +148,11 @@ const useGetColumns = ({
 			accessor: ({ id = '' }) => (
 				<Checkbox
 					checked={checkedRowsId.includes(id)}
+					// checked={isChecked}
 					onChange={(event) => onChangeBodyCheckbox(event, id)}
+					// onChange={() => {
+					// 	setIsChecked(!isChecked);
+					// }}
 				/>
 
 			),
@@ -161,7 +180,7 @@ const useGetColumns = ({
 						<div>
 							{/* {row?.documentValue || '-'} */}
 							{(row?.documentValue && row?.documentValue.length > DOC_LENGTH
-								? `${row?.documentValue.substr(START_INDEX, DOC_LENGTH)}...`
+								? `${row?.documentValue.substr(ZEROTH_INDEX, DOC_LENGTH)}...`
 								: row?.documentValue) || '-'}
 						</div>
 						<Pill
@@ -215,7 +234,7 @@ const useGetColumns = ({
 				</span>
 			),
 			id       : 'transactionDate',
-			accessor : (item) => (item?.transactionDate ? item.transactionDate.substr(START_INDEX, DOC_LENGTH) : '--'),
+			accessor : (item) => (item?.transactionDate ? item.transactionDate.substr(ZEROTH_INDEX, DOC_LENGTH) : '--'),
 		},
 		{
 			Header: (
@@ -259,7 +278,7 @@ const useGetColumns = ({
 						{item?.currency}
 						{' '}
 						{item?.documentAmount.toString().length > AMT_LENGTH
-							? `${item?.documentAmount.toString().substr(START_INDEX, AMT_LENGTH)}..`
+							? `${item?.documentAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
 							: item?.documentAmount}
 					</Tooltip>
 				</div>
@@ -290,7 +309,7 @@ const useGetColumns = ({
 						{item?.currency}
 						{' '}
 						{item?.tds.toString().length > AMT_LENGTH
-							? `${item?.tds.toString().substr(START_INDEX, AMT_LENGTH)}..`
+							? `${item?.tds.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
 							: item?.tds}
 					</Tooltip>
 				</div>
@@ -324,7 +343,7 @@ const useGetColumns = ({
 						{item?.currency}
 						{' '}
 						{item?.balanceAmount.toString().length > AMT_LENGTH
-							? `${item?.balanceAmount.toString().substr(START_INDEX, AMT_LENGTH)}..`
+							? `${item?.balanceAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
 							: item?.balanceAmount}
 					</Tooltip>
 				</div>
