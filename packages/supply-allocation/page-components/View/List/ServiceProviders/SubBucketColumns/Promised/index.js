@@ -25,8 +25,9 @@ function Promised({ item = {}, control, unregister, bulkEditMode = false }) {
 				{' '}
 				TEU
 				{bulkEditMode
-					? <IcMEdit onClick={() => setEditPromised(true)} /> : null}
+					? <IcMEdit style={{ cursor: 'pointer' }} onClick={() => setEditPromised(true)} /> : null}
 			</div>
+
 			<div>
 				{is_hard_limit ? (
 					<>
@@ -39,29 +40,33 @@ function Promised({ item = {}, control, unregister, bulkEditMode = false }) {
 	) : (
 		<div className={styles.edit_container}>
 
-			<span>
+			<span style={{ color: '#fc6a03' }}>
+				Current :
 				{' '}
-				previous:
 				{ allocated_containers}
+				{' '}
+				TEU
 			</span>
+
 			<InputNumberController
 				size="xs"
 				control={control}
+				arrow={false}
 				name={`${item.service_provider?.id}.promised_containers`}
 				value={allocated_containers}
 			/>
+
 			<div className={styles.cancel_container}>
-				<IcMCross
-					onClick={() => onClickCancel(`${item?.service_provider?.id}.promised_containers`)}
-				/>
+				<IcMCross onClick={() => onClickCancel(`${item?.service_provider?.id}.promised_containers`)} />
 			</div>
+
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<CheckboxController
 					name={`${item?.service_provider?.id}.is_hard_limit`}
 					control={control}
 					value={item?.is_hard_limit}
 				/>
-				{' '}
+
 				<span> is Hard Limit</span>
 			</div>
 		</div>

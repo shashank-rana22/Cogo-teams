@@ -64,19 +64,22 @@ function ServiceProvider({
 					/>
 				</div>
 
-				<div>
-					{formatAmount({
-						amount   : service_provider_outstanding_amount,
-						currency : service_provider_outstanding_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
-					{' '}
-					Outstanding
-				</div>
+				{service_provider_outstanding_amount && service_provider_outstanding_currency
+					? (
+						<div>
+							{formatAmount({
+								amount   : service_provider_outstanding_amount,
+								currency : service_provider_outstanding_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
+							{' '}
+							Outstanding
+						</div>
+					) : null}
 			</div>
 		</div>
 	);
