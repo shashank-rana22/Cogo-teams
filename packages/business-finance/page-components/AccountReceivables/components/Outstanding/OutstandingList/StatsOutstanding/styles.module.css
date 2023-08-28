@@ -57,10 +57,11 @@
 
 .flex {
 	display: flex;
+	width: 100%;
 }
 
 .label {
-	width: 124px;
+	width: 30%;
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 600;
