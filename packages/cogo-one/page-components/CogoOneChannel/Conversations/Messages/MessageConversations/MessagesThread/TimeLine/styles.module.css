@@ -29,3 +29,9 @@
 	text-align: center;
 	background: #f9f9f9;
 }
+
+.datetime_styles {
+	font-size: 10px;
+	font-weight: 600;
+	color: #616161;
+}
