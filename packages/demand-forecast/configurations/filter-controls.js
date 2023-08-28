@@ -13,7 +13,7 @@ const getControls = () => {
 			name        : 'destination_cluster_id',
 			label       : 'Destination Port',
 			type        : 'asyncSelect',
-			asyncKey    : 'list_locations',
+			asyncKey    : 'list_pricing_zones',
 			placeholder : 'Destination Port',
 			initialCall : true,
 			isClearable : true,
