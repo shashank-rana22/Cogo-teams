@@ -15,9 +15,7 @@ function View() {
 		<Fragment key={search_id}>
 			<Header searchId={search_id} />
 
-			<PieChartGraphs
-				searchId={search_id}
-			/>
+			<PieChartGraphs searchId={search_id} />
 
 			<List search_id={search_id} />
 		</Fragment>

@@ -10,7 +10,7 @@ const ARRAY_LENGTH = 3;
 function PieChartGraphs({
 	searchId = '',
 }) {
-	const { data: rollingForecastData = {}, graphDataLoading } =		useGetRollingForecastData({
+	const { data: rollingForecastData = {}, graphDataLoading } = useGetRollingForecastData({
 		search_id: searchId,
 	});
 
