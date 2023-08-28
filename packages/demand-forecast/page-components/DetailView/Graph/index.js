@@ -37,13 +37,13 @@ const getGraphData = ({ graphInfo = {}, key }) => {
 	const graphData = Object.keys(graphInfo).map((graphInfoKey) => {
 		if (key === 'weekly_forecasts') {
 			return {
-				id    : graphInfoKey,
+				id    : getDateLabel(JSON.parse(graphInfoKey)),
 				label : getDateLabel(JSON.parse(graphInfoKey)),
 				value : graphInfo[graphInfoKey],
 			};
 		}
 		return {
-			id    : graphInfoKey,
+			id    : startCase(graphInfoKey),
 			label : startCase(graphInfoKey),
 			value : graphInfo[graphInfoKey],
 		};
@@ -85,6 +85,7 @@ function Graph({
 			{
 			Object.keys(GRAPH_TTTLE).map((key) => {
 				const graphicalData = getGraphData({ graphInfo: data[key], key });
+
 				const colors = GRAPH_COLOR_MAPPING[key];
 
 				return (
