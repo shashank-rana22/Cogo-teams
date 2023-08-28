@@ -25,7 +25,7 @@ const HIRING_MANAGER = 'hiring_manager_id';
 const ATTENDENCE = 'attendance';
 const LEARNING_INDICATOR = 'learning_indicator';
 const PREDICTIVE_INDEX = 'predictive_index';
-const DEPARTMENT = 'department';
+const ROLE = 'role';
 
 const SOURCE = 'save';
 
@@ -209,7 +209,7 @@ function PersonalDetails({ data: content = {}, getEmployeeDetails = () => {}, se
 			} else if (item?.name === PREDICTIVE_INDEX) {
 				setValue(item.name, startCase(content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
 					?.predictive_index));
-			} else if (item?.name === DEPARTMENT) {
+			} else if (item?.name === ROLE) {
 				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
 					?.department));
 			} else {
