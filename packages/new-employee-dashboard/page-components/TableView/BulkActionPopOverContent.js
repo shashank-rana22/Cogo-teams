@@ -62,16 +62,12 @@ function BulkActionPopOverContent({
 							</div>
 
 							<div className={styles.button_content}>
-								<Button
-									style={{ marginLeft: '150px' }}
-									onClick={() => setShowModal(false)}
-								>
+								<Button onClick={() => setShowModal(false)} themeType="secondary">
 									No
 								</Button>
 
 								<Button
-									style={{ marginRight: '150px' }}
-									themeType="secondary"
+									style={{ marginLeft: 12 }}
 									onClick={() => sendBulkActionMail('move_to_probation')}
 								>
 									Yes
