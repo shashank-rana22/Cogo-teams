@@ -11,13 +11,13 @@ const useGetRollingForecastPortPairs = () => {
 
 	const getRollingForecastPortPairs = useCallback(({
 		origin_cluster_id = '',
-		destination_cluster_id,
+		destination_cluster_id = '',
 	}) => {
 		try {
 			trigger({
 				params: {
-					origin_cluster_id,
-					destination_cluster_id,
+					...(origin_cluster_id ? { origin_cluster_id } : null),
+					...(destination_cluster_id ? { destination_cluster_id } : null),
 				},
 			});
 		} catch (error) {

@@ -57,8 +57,7 @@ function EmailPreview({
 				organization_id,
 				organization_user_ids : emailSelected,
 				email_sent_type       : isSinglePortPair ? 'port_pair' : 'all',
-				origin_location_id,
-				destination_location_id,
+				...(isSinglePortPair ? { origin_location_id, destination_location_id } : {}),
 			};
 			const response = await sendRequirementEmail({ payload });
 			if (response?.status === API_RESPONSE) {
