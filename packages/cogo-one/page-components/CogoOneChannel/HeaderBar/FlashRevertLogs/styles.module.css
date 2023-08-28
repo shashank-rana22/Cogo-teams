@@ -10,9 +10,5 @@
 }
 
 .button_container {
-	z-index: 9999;
-}
-
-.hide_button {
-	display: none;
+	padding: 0 12px !important;
 }

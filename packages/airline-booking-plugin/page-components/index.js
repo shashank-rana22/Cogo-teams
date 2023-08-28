@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import tabs from '../configurations/tabs';
@@ -9,6 +10,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function AirlinePluginBooking() {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	const [activeTab, setActiveTab] = useState('air_india');
 	const [pluginData, setPluginData] = useState([]);
 	const [edit, setEdit] = useState(false);
@@ -24,7 +26,7 @@ function AirlinePluginBooking() {
 					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
-					{tabs.map((tab) => (
+					{tabs(t).map((tab) => (
 						<TabPanel name={tab.name} title={tab.title} key={tab.key}>
 							<AirIndiaAWB
 								activeTab={activeTab}

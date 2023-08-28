@@ -16,15 +16,14 @@ const useCancelReplaceInvoice = () => {
 		{ manual: true },
 	);
 
-	const { user_id, entity_id } = useSelector(({ profile }) => ({
-		user_id   : profile?.user?.id,
-		entity_id : profile?.partner?.id,
+	const { user_id } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
 	}));
 
 	const onRevoke = async ({
 		cancelReason = '', proformaNumber = '', closeModal = () => {},
 		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
-		incidentSubType = 'CANCEL_INVOICE',
+		incidentSubType = 'CANCEL_INVOICE', entityId = '',
 	}) => {
 		try {
 			await trigger({
@@ -43,7 +42,7 @@ const useCancelReplaceInvoice = () => {
 					},
 					source    : 'BOOKINGS',
 					createdBy : user_id,
-					entityId  : entity_id,
+					entityId,
 				},
 			});
 			Toast.success(`Requested ${startCase(incidentSubType.toLowerCase())}`);

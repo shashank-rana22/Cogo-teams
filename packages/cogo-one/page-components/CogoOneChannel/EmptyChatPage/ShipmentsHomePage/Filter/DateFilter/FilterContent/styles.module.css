@@ -9,6 +9,10 @@
 			height: 32px;
 			margin-left: 12px;
 		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
 	}
 }
 

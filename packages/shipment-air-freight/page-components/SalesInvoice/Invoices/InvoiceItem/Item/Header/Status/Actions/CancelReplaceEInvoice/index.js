@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -41,16 +42,24 @@ function CancelReplaceEInvoice({
 		setShowCancelModal({ showCancel: false, showReplace: false });
 	};
 
+	const getIncidenceEntity = () => {
+		const entityCode = Object.keys(ENTITY_MAPPING).filter(
+			(item) => ENTITY_MAPPING[item].currency === bfInvoice?.ledgerCurrency,
+		)[GLOBAL_CONSTANTS.zeroth_index];
+		return ENTITY_MAPPING[entityCode].id;
+	};
+
 	const handleRevoke = (values) => {
 		onRevoke({
 			cancelReason         : values?.cancelReason,
-			proformaNumber       : bfInvoice?.proformaNumber,
+			proformaNumber       : bfInvoice?.einvoiceNumber,
 			closeModal           : handleClose,
 			invoiceCombinationId : invoice?.id,
 			invoiceId            : bfInvoice?.id,
 			refetch,
 			documentUrls         : getDocumentUrl(values),
 			incidentSubType      : modalType,
+			entityId             : getIncidenceEntity(),
 		});
 	};
 

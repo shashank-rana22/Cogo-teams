@@ -26,13 +26,13 @@ const priceDisabled = (
 	service_name = '',
 ) => {
 	if (
-		shipment_type === 'fcl_freight'
+		(shipment_type === 'fcl_freight'
 		&& service_name !== 'fcl_freight_local_service'
 		&& !isEmpty(field?.code)
 		&& !FIELDS_CAN_BE_CHANGED.includes(controlItem?.name)
 		&& path === 'sales_invoice'
 		&& disable_edit_invoice
-		&& !isAuthorised
+		&& !isAuthorised) || (field?.code === 'BookingCONV' && !FIELDS_CAN_BE_CHANGED.includes(controlItem?.name))
 	) {
 		return true;
 	}
@@ -67,8 +67,9 @@ function Child({
 	const isAuthorised = AUTHORISED_USER_IDS.includes(profileData?.user?.id);
 
 	// can delete  only new added line items for FCL
-	const isLineItemRemovable = shipment_type === 'fcl_freight' && service_name !== 'fcl_freight_local_service'
-		&& !isEmpty(field?.code) && path === 'sales_invoice' && disable_edit_invoice && !isAuthorised
+	const isLineItemRemovable = (shipment_type === 'fcl_freight' && service_name !== 'fcl_freight_local_service'
+		&& !isEmpty(field?.code) && path === 'sales_invoice' && disable_edit_invoice && !isAuthorised)
+		|| (field?.code === 'BookingCONV')
 		? false
 		: showDeleteButton;
 
