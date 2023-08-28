@@ -1,16 +1,16 @@
 import { Button, ProgressBar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-import useGetEmployeeLeaveBalances from '../../../hooks/useGetEmployeeLeaveBalances';
+import ApplyLeave from '../../../common/ApplyLeave';
 
 import styles from './styles.module.css';
 
 const MAX = 100;
 
-function LeaveBalancesComponent() {
-	// const [progress, setProgress] = useState('60');
-	const { data } = useGetEmployeeLeaveBalances();
+function LeaveBalancesComponent({ data, refetch }) {
+	const [openLeaveModal, setOpenLeaveModal] = useState(false);
+
 	const {
 		available_privilege_leaves,
 		approved_privilege_leaves,
@@ -21,7 +21,6 @@ function LeaveBalancesComponent() {
 	} = data || {};
 
 	const progressBar = (available, used) => (available / (available + used)) * MAX;
-	console.log(progressBar);
 
 	const PROGRESS_PL = progressBar(available_privilege_leaves, approved_privilege_leaves);
 	const PROGRESS_SL = progressBar(available_sick_leaves, approved_sick_leaves);
@@ -103,9 +102,17 @@ function LeaveBalancesComponent() {
 					<ProgressBar progress={PROGRESS_CL} />
 				</div>
 				<div className={styles.button_ctn}>
-					<Button size="lg" themeType="accent">Apply Leave</Button>
+					<Button size="lg" themeType="accent" onClick={() => setOpenLeaveModal(true)}>Apply Leave</Button>
 				</div>
 			</div>
+			{ openLeaveModal && (
+				<ApplyLeave
+					show={openLeaveModal}
+					onClose={() => setOpenLeaveModal(false)}
+					data={data}
+					refetch={refetch}
+				/>
+			) }
 		</div>
 	);
 }

@@ -1,3 +1,4 @@
+import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
@@ -5,11 +6,11 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = () => [
+const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 	{
 		Header   : 'LEAVE TYPE',
 		accessor : (item) => (
-			<div>
+			<div className={styles.table_data_item}>
 				{startCase(item?.leave_type) || '-'}
 			</div>
 		),
@@ -18,12 +19,11 @@ const getColumns = () => [
 	{
 		Header   : 'FROM DATE',
 		accessor : (item) => (
-			<div>
+			<div className={styles.table_data_item}>
 				{formatDate({
 					date       : item?.leave_start_date || '-',
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
-					separator  : ' | ',
 				})}
 			</div>
 		),
@@ -32,12 +32,11 @@ const getColumns = () => [
 	{
 		Header   : 'TO DATE',
 		accessor : (item) => (
-			<div>
+			<div className={styles.table_data_item}>
 				{formatDate({
 					date       : item?.leave_end_date || '-',
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
-					separator  : ' | ',
 				})}
 			</div>
 		),
@@ -46,7 +45,7 @@ const getColumns = () => [
 	{
 		Header   : 'TOTAL DAYS',
 		accessor : (item) => (
-			<div>
+			<div className={styles.table_data_item}>
 				{startCase(item?.leave_count) || '-'}
 			</div>
 		),
@@ -55,16 +54,18 @@ const getColumns = () => [
 	{
 		Header   : 'REMARKS',
 		accessor : (item) => (
-			<div className={styles.remarks}>
-				{startCase(item?.approval_remarks) || '-'}
-			</div>
+			<Tooltip content={item?.approval_remarks} placement="top">
+				<div className={styles.remarks}>
+					{startCase(item?.approval_remarks) || '-'}
+				</div>
+			</Tooltip>
 		),
 		id: 'remarks',
 	},
 	{
 		Header   : 'APPROVER',
 		accessor : (item) => (
-			<div>
+			<div className={styles.table_data_item}>
 				{startCase(item?.approved_by_id) || '-'}
 			</div>
 		),
@@ -73,7 +74,12 @@ const getColumns = () => [
 	{
 		Header   : 'STATUS',
 		accessor : (item) => (
-			<div className={styles.pending}>
+			<div className={cl`${styles.pending_flex}
+			${styles[item.leave_status === 'pending' ? 'pending_color' : 'approved_color']}`}
+			>
+				<div className={cl`${styles.pending_dot} 
+				${styles[item.leave_status === 'pending' ? 'pending_color_bg' : 'approved_color_bg']}`}
+				/>
 				{startCase(item?.leave_status) || '-'}
 			</div>
 		),
@@ -81,10 +87,15 @@ const getColumns = () => [
 	},
 	{
 		Header   : 'ACTION',
-		accessor : () => (
+		accessor : (item) => (
 			<div className={styles.action}>
-				<IcMEdit />
-				<IcMDelete />
+				{item.leave_status === 'pending' && (
+					<IcMEdit
+						className={styles.cursor}
+						onClick={() => handleOpenModal(item)}
+					/>
+				)}
+				<IcMDelete className={styles.cursor} onClick={() => handleDeleteModal(item)} />
 			</div>
 		),
 		id: 'action',

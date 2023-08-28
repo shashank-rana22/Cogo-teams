@@ -1,15 +1,18 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import LeaveStats from './LeaveStats';
 import styles from './styles.module.css';
 
-function LeaveStatsApplicationsComponent() {
+function LeaveStatsApplicationsComponent({ selectedMonth }) {
+	const { month, value } = selectedMonth || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_ctn}>
 				<div>
-					<div className={styles.header_text1}>THIS MONTH</div>
+					<div className={styles.header_text1}>{startCase(month)}</div>
 					<div className={styles.header_text2}>Insights about your leaves</div>
 				</div>
 				<div>
@@ -21,7 +24,7 @@ function LeaveStatsApplicationsComponent() {
 				</div>
 			</div>
 			<div className={styles.leave_stats_style}>
-				<LeaveStats />
+				<LeaveStats cycle_id={value} />
 			</div>
 		</div>
 	);

@@ -74,7 +74,7 @@ const LEAVE_CONTROLS = [
 	},
 	{
 		controlLabel : 'Remarks',
-		name         : 'remarks',
+		name         : 'leave_reason',
 		controlType  : 'textarea',
 		placeholder  : 'Remarks',
 		rows         : 3,
@@ -86,7 +86,7 @@ const LEAVE_CONTROLS = [
 		},
 	},
 	{
-		name          : 'attachment',
+		name          : 'attachment_url',
 		controlLabel  : 'Attachment',
 		controlType   : 'fileUploader',
 		draggable     : true,

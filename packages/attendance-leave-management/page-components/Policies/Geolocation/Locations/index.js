@@ -1,5 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import { IcMArrowRight, IcMAppProfile } from '@cogoport/icons-react';
+import React from 'react';
 
 import styles from './styles.module.css';
 

@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useGetEmployeeList from '../../../hooks/useGetEmployeeList';
 import { EMPLOYEE_LIST_CONTROLS } from '../../../utils/constants';
@@ -10,12 +10,19 @@ import EmployeeTable from './EmployeeTable';
 import styles from './styles.module.css';
 
 function EmployeeList({ selectedLocation }) {
+	const [searchQuery, setSearchQuery] = useState('');
 	const { designation } = EMPLOYEE_LIST_CONTROLS;
 	console.log('selectedLocation', selectedLocation);
 	// const [editItemId, setEditItemId] = useState(null);
 	// const [selectedIds, setSelectedIds] = useState([]);
-	const { loading, data, setFilters } = useGetEmployeeList(selectedLocation);
+	const { loading, data, setFilters, filters, debounceQuery } = useGetEmployeeList(selectedLocation);
 	console.log(data);
+
+	const handleSearch = (val) => {
+		debounceQuery(val);
+		setSearchQuery(val);
+	};
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
@@ -31,7 +38,11 @@ function EmployeeList({ selectedLocation }) {
 				<div className={styles.filters}>
 					<div className={styles.selection_options}>
 						<div className={styles.select}>
-							<AsyncSelect {...designation} />
+							<AsyncSelect
+								{...designation}
+								onChange={(e) => setFilters((prev) => ({ ...prev, designation: e }))}
+								value={filters.designation}
+							/>
 						</div>
 
 						{/* <div className={styles.select}>
@@ -42,6 +53,8 @@ function EmployeeList({ selectedLocation }) {
 						size="md"
 						prefix={<IcMSearchdark />}
 						placeholder="Search"
+						onChange={(e) => handleSearch(e)}
+						value={searchQuery}
 					/>
 				</div>
 			</div>

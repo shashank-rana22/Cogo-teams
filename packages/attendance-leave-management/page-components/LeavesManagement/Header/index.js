@@ -1,16 +1,17 @@
 import { Select } from '@cogoport/components';
-import React, { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-const options = [
-	{ label: 'Jan 2023', value: 'jan_2023' },
-	{ label: 'Feb 2023', value: 'Feb_2023' },
-	{ label: 'March 2023', value: 'march_2023' },
-];
+function Header({ formattedData, selectedMonth, setSelectedMonth }) {
+	const handleMonthChange = (val, obj) => {
+		setSelectedMonth({
+			month : obj.label.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
+			value : val,
+		});
+	};
 
-function Header() {
-	const [monthWise, setMonthWise] = useState('march_2023');
 	return (
 		<div className={styles.container}>
 			<div>
@@ -19,10 +20,10 @@ function Header() {
 			</div>
 			<div className={styles.select_container}>
 				<Select
-					value={monthWise}
-					onChange={setMonthWise}
+					value={selectedMonth.value || ''}
+					onChange={handleMonthChange}
 					placeholder="Select Month"
-					options={options}
+					options={formattedData}
 					size="md"
 				/>
 			</div>

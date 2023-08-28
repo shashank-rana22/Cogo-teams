@@ -7,13 +7,16 @@ import useGetEmployeeLeaveBalances from '../../../../hooks/useGetEmployeeLeaveBa
 import styles from './styles.module.css';
 
 function LeaveStats() {
-	const { data } = useGetEmployeeLeaveBalances();
+	const { data, refetch } = useGetEmployeeLeaveBalances();
+
 	const {
 		available_privilege_leaves,
 		available_casual_leaves, available_sick_leaves,
 		pending_casual_leaves, pending_sick_leaves, pending_privilege_leaves,
 	} = data || {};
+
 	const [applyLeave, setApplyLeave] = useState(false);
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -61,7 +64,14 @@ function LeaveStats() {
 					Apply for Leaves
 				</Button>
 			</div>
-			<ApplyLeave show={applyLeave} onClose={() => setApplyLeave(false)} />
+			{applyLeave && (
+				<ApplyLeave
+					show={applyLeave}
+					onClose={() => setApplyLeave(false)}
+					data={data}
+					refetch={refetch}
+				/>
+			)}
 		</>
 	);
 }

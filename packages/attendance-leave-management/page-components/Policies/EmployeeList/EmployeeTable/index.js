@@ -11,17 +11,13 @@ function EmployeeTable({
 	data, setFilters,
 }) {
 	const columns = useGetLocationColumn();
-	// const {} = data;
 	const { list, page, page_limit, total_count } = data || {};
 
-	console.log('list', list);
-	console.log(page_limit);
 	const onPageChange = (pageNumber) => {
 		setFilters((prev) => ({
 			...prev,
 			page: pageNumber,
 		}));
-		console.log(page);
 	};
 
 	return (

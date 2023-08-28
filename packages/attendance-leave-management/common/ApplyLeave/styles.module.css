@@ -28,3 +28,22 @@
 	font-size: var(--font-size-md);
 	color: var(--color-primary-error-red-2);
 }
+
+.leave_type_stats {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+}
+
+.pending {
+	padding: 2px 8px;
+	margin-right: 8px;
+	background-color: #fea58e;
+	border-radius: 6px;
+}
+
+.available {
+	padding: 2px 8px;
+	background-color: #c4dc91;
+	border-radius: 6px;
+}

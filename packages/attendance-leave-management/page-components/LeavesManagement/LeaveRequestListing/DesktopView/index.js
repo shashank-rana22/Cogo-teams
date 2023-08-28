@@ -6,15 +6,17 @@ import getColumns from '../getColumns';
 
 import styles from './styles.module.css';
 
-function DesktopView({ dataArr, setFilters }) {
+function DesktopView({ dataArr, setFilters, handleOpenModal, handleDeleteModal }) {
 	const { list, page, page_limit, total_count } = dataArr || {};
-	const columns = getColumns();
+
+	const columns = getColumns({ handleOpenModal, handleDeleteModal });
 	const onPageChange = (pageNumber) => {
 		setFilters((prev) => ({
 			...prev,
 			page: pageNumber,
 		}));
 	};
+
 	return (
 		<>
 			<StyledTable

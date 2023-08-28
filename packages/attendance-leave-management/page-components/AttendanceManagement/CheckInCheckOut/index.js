@@ -107,9 +107,8 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 					<Button
 						themeType="accent"
 						size="lg"
-						// disabled={!enable_check_out || updateLoading}
-						// onClick={enable_check_out ? handleCheckOut : () => {}}
-						onClick={handleCheckOut}
+						disabled={!enable_check_out || updateLoading}
+						onClick={enable_check_out ? handleCheckOut : () => {}}
 					>
 						Check
 						{' '}

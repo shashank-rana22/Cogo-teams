@@ -1,81 +1,74 @@
+import { Pagination, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function MobileView() {
+function MobileView({ data, setFilters }) {
+	const { list = [], page, page_limit, total_count } = data || {};
+
+	console.log('listssss', list);
+
+	const onPageChange = (val) => {
+		setFilters((prev) => ({
+			...prev,
+			page: val,
+		}));
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.card}>
-				<div className={styles.flex}>
-					<div className={styles.leave_count}>
-						10
-						<span>
-							day
-						</span>
-					</div>
-					<div className={styles.leave_dates}>
-						<div className={styles.leave_type}>
-							Privilege leave
+			{ (list || []).map((val) => (
+				<div className={styles.card} key={val.id}>
+					<div className={styles.flex}>
+						<div className={styles.leave_count}>
+							{val.leave_count}
+							<span>
+								day
+							</span>
 						</div>
-						<div className={styles.dates}>
-							31/03/23 - 1/04/23
-						</div>
-					</div>
-				</div>
-				<div className={styles.leave_status}>
-					<div className={styles.leave_dot} />
-					<div className={styles.leave_status_text}>
-						Pending
-					</div>
-				</div>
-			</div>
-			<div className={styles.card}>
-				<div className={styles.flex}>
-					<div className={styles.leave_count}>
-						10
-						<span>
-							day
-						</span>
-					</div>
-					<div className={styles.leave_dates}>
-						<div className={styles.leave_type}>
-							Privilege leave
-						</div>
-						<div className={styles.dates}>
-							31/03/23 - 1/04/23
+						<div className={styles.leave_dates}>
+							<div className={styles.leave_type}>
+								{ startCase(val.leave_type)}
+							</div>
+							<div className={styles.dates}>
+								{formatDate({
+									date       : val.leave_start_date,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+									formatType : 'date',
+								})}
+								-
+								{' '}
+								{formatDate({
+									date       : val.leave_end_date,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+									formatType : 'date',
+								})}
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className={styles.leave_status}>
-					<div className={styles.leave_dot} />
-					<div className={styles.leave_status_text}>
-						Pending
-					</div>
-				</div>
-			</div>
-			<div className={styles.card}>
-				<div className={styles.flex}>
-					<div className={styles.leave_count}>
-						10
-						<span>
-							day
-						</span>
-					</div>
-					<div className={styles.leave_dates}>
-						<div className={styles.leave_type}>
-							Privilege leave
-						</div>
-						<div className={styles.dates}>
-							31/03/23 - 1/04/23
+					<div className={styles.leave_status}>
+						<div className={cl`${styles.leave_dot} 
+						${styles[val.leave_status === 'pending' ? 'pending_color_bg' : 'approved_color_bg']}`}
+						/>
+						<div className={cl`${styles.leave_status_text}
+								${styles[val.leave_status === 'pending' ? 'pending_color' : 'approved_color']}`}
+						>
+							{ startCase(val.leave_status) }
 						</div>
 					</div>
 				</div>
-				<div className={styles.leave_status}>
-					<div className={styles.leave_dot} />
-					<div className={styles.leave_status_text}>
-						Pending
-					</div>
-				</div>
+			))}
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="compact"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={onPageChange}
+				/>
 			</div>
 		</div>
 	);

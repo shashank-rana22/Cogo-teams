@@ -694,6 +694,21 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'create_employee_leave_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_leave_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_geo_location_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 
