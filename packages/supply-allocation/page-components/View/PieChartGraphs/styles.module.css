@@ -1,9 +1,10 @@
 .pie_chart_container {
 	display: flex;
-	gap: 16px;
+	justify-content: space-evenly;
 	width: 100%;
 
 	@media (max-width: 768px) {
+		flex-direction: column;
 		overflow: scroll;
 	}
 }

@@ -6,141 +6,112 @@ import styles from './styles.module.css';
 const BORDER_COLOR_MODIFIERS = 0.2;
 const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 
-const MARGIN_TOP_MAPPING = {
-	1 : -26,
-	2 : -36,
-	3 : -54,
-	4 : -64,
-	5 : -84,
-	6 : -80,
-};
+const CENTERED_METRIC_FIRST_OFFSET = 3;
+const CENTERED_METRIC_SECOND_OFFSET = 3;
 
 function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 	const colors = data.map((item) => item.color);
 
-	return (
-		<div
-			style={{
-				display       : 'flex',
-				flexDirection : 'column',
-				flexBasis     : '33%',
-				height        : '300px',
-				background    : '#fff',
-				padding       : '0',
-			}}
-		>
-			<div style={{
-				fontWeight   : 600,
-				paddingLeft  : '16px',
-				paddingTop   : '16px',
-				marginBottom : '-20px',
-			}}
-			>
-				{heading}
-
-			</div>
-
-			<ResponsivePie
-				colors={colors}
-				data={data}
-				margin={{
-					top    : 0,
-					right  : 240,
-					bottom : 0,
-					left   : 20,
-				}}
-				innerRadius={0.8}
-				padAngle={0.7}
-				cornerRadius={3}
-				activeOuterRadiusOffset={8}
-				borderWidth={1}
-				borderColor={{
-					from      : 'color',
-					modifiers : [['darker', BORDER_COLOR_MODIFIERS]],
-				}}
-				enableArcLinkLabels={false}
-				arcLinkLabelsSkipAngle={10}
-				arcLinkLabelsTextColor="#333333"
-				arcLinkLabelsThickness={2}
-				arcLinkLabelsColor={{ from: 'color' }}
-				arcLabelsSkipAngle={10}
-				arcLabelsTextColor={{
-					from      : 'color',
-					modifiers : [['darker', ARC_LABELS_TEXT_COLOR_MODIFIERS]],
-				}}
-				tooltip={({ datum: { label, value } }) => (
-					<div className={styles.pie_tooltip_container}>
-						<div className={styles.text_pie}>
-							{startCase(label)}
-							{' '}
-							(
-							{value}
-							{' '}
-							TEU)
-						</div>
-					</div>
-				)}
-			/>
-
-			{count ? (
-				<div
+	function CenteredMetric({ centerX = 0, centerY = 0 }) {
+		return (
+			<>
+				<text
+					x={centerX}
+					y={centerY - CENTERED_METRIC_FIRST_OFFSET}
+					textAnchor="middle"
+					dominantBaseline="central"
 					style={{
-						marginLeft    : '-220px',
-						display       : 'flex',
-						flexDirection : 'column',
-						alignItems    : 'center',
-						marginTop     : '-174px',
+						fontSize : '12px',
+						color    : '#828282',
 					}}
 				>
-					<div className={styles.predicted}>Predicted</div>
-					<div className={styles.count}>
-						{count}
-						{' '}
-						TEU
-					</div>
-				</div>
-			) : null}
-			<div
-				style={{
-					marginTop      : MARGIN_TOP_MAPPING[legendsData?.length],
-					display        : 'flex',
-					flexWrap       : 'wrap',
-					justifyContent : 'center',
-					flexDirection  : 'column',
-					marginLeft     : '229px',
+					Predicted
+				</text>
 
-				}}
-			>
-				{legendsData.map((legend) => {
-					const { color, label, currCount } = legend;
-					return (
-						<div
-							key={label}
-							style={{
-								display       : 'flex',
-								alignItems    : 'center',
-								marginRight   : '20px',
-								paddingBottom : '10px',
-							}}
-						>
-							<div
-								style={{
-									width        : '12px',
-									height       : '12px',
-									borderRadius : '50%',
-									background   : `${color}`,
-									marginRight  : '4px',
-								}}
-							/>
-							{label}
-							{' '}
-							(
-							{currCount}
-							{' '}
-							TEU)
-						</div>
-					);
-				})}
+				<text
+					x={centerX}
+					y={centerY + CENTERED_METRIC_SECOND_OFFSET}
+					textAnchor="middle"
+					dominantBaseline="central"
+					style={{
+						fontSize   : '18px',
+						fontWeight : 500,
+						color      : '#221F20',
+
+					}}
+				>
+					{count}
+				</text>
+			</>
+		);
+	}
+
+	return (
+		<div className={styles.container}>
+			<div className={styles.heading}>{heading}</div>
+
+			<div className={styles.pie_chart_container}>
+				<div className={styles.pie_chart}>
+					<ResponsivePie
+						colors={colors}
+						data={data}
+						innerRadius={0.8}
+						padAngle={0.7}
+						cornerRadius={3}
+						activeOuterRadiusOffset={8}
+						margin={{
+							top    : 20,
+							right  : 20,
+							bottom : 20,
+							left   : 20,
+						}}
+						borderWidth={1}
+						borderColor={{
+							from      : 'color',
+							modifiers : [['darker', BORDER_COLOR_MODIFIERS]],
+						}}
+						enableArcLinkLabels={false}
+						arcLinkLabelsSkipAngle={10}
+						enableArcLabels={false}
+						arcLinkLabelsThickness={2}
+						arcLinkLabelsColor={{ from: 'color' }}
+						arcLabelsSkipAngle={10}
+						arcLabelsTextColor={{
+							from      : 'color',
+							modifiers : [['darker', ARC_LABELS_TEXT_COLOR_MODIFIERS]],
+						}}
+						layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
+						tooltip={({ datum: { label, value } }) => (
+							<div className={styles.pie_tooltip_container}>
+								<div className={styles.text_pie}>
+									{startCase(label)}
+									{' '}
+									(
+									{value}
+									{' '}
+									TEU)
+								</div>
+							</div>
+						)}
+					/>
+				</div>
+
+				<div className={styles.legends_container}>
+					{legendsData.map((legend) => {
+						const { color, label, currCount } = legend;
+						return (
+							<div key={label} className={styles.legend_container}>
+								<div className={styles.circle} style={{ background: `${color}` }} />
+								{label}
+								{' '}
+								(
+								{currCount}
+								{' '}
+								TEU)
+							</div>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);

@@ -31,10 +31,10 @@ function PieChartGraphs({
 		return (
 			<div
 				style={{
-					display : 'flex',
-					gap     : '16px',
-					width   : '100%',
-					height  : '300px',
+					display        : 'flex',
+					justifyContent : 'space-evenly',
+					width          : '100%',
+					height         : '300px',
 				}}
 			>
 				{[...Array(ARRAY_LENGTH).keys()].map((key) => (
