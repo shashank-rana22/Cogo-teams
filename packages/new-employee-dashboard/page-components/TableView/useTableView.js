@@ -12,7 +12,7 @@ const INITIAL_PAGE = 1;
 const INITIAL_PAGE_LIMIT = 10;
 
 const useTableView = ({
-	btnloading, updateEmployeeStatus, bulkAction,
+	btnloading, updateEmployeeStatus,
 	selectedIds, setSelectedIds,
 }) => {
 	const router = useRouter();
@@ -26,6 +26,7 @@ const useTableView = ({
 	const [filters, setFilters] = useState(new_hire_dashboard?.filters || {});
 	const [search, setSearch] = useState(new_hire_dashboard?.search || '');
 	const [pageLimit, setPageLimit] = useState(new_hire_dashboard?.page_limit || INITIAL_PAGE_LIMIT);
+	const [bulkAction, setBulkAction] = useState(false);
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
@@ -98,6 +99,7 @@ const useTableView = ({
 		handleSelectId,
 		selectedIds,
 		dataArr: list,
+		activeTab,
 	});
 
 	if (activeTab !== 'rejected_by_user') {
@@ -120,6 +122,8 @@ const useTableView = ({
 		setPageLimit,
 		setSearch,
 		search,
+		setBulkAction,
+		bulkAction,
 	};
 };
 

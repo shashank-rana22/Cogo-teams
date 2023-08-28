@@ -2,7 +2,6 @@ import { Button, Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -20,6 +19,7 @@ const getColumns = ({
 	handleSelectId,
 	selectedIds,
 	dataArr,
+	activeTab,
 }) => {
 	const columns = [
 		{
@@ -37,7 +37,7 @@ const getColumns = ({
 		},
 		{
 			Header   : 'ROLE',
-			accessor : (item) => <div>{startCase(item?.role || '-')}</div>,
+			accessor : (item) => <div>{(item?.role || '-')}</div>,
 		},
 		{
 			Header   : 'REPORTING MANAGER',
@@ -122,7 +122,7 @@ const getColumns = ({
 
 	];
 
-	if (bulkAction) {
+	if (bulkAction && activeTab === 'offered') {
 		columns.unshift({
 			id     : 'action',
 			Header : () => (

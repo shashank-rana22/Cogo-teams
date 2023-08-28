@@ -30,15 +30,14 @@ function TableView() {
 	const dispatch = useDispatch();
 
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
-	const [bulkAction, setBulkAction] = useState(false);
 	const [selectedIds, setSelectedIds] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [showPopOver, setShowPopOver] = useState(false);
 
 	const {
-		columns, loading, list, setActiveTab, setSearch, search,
+		columns, loading, list, setActiveTab, setSearch, search, setBulkAction, bulkAction,
 		activeTab, data, setPage, page, filters, setFilters, pageLimit, setPageLimit,
-	} = useTableView({ btnloading, updateEmployeeStatus, bulkAction, selectedIds, setSelectedIds });
+	} = useTableView({ btnloading, updateEmployeeStatus, selectedIds, setSelectedIds });
 
 	useEffect(() => { if (!bulkAction) setSelectedIds([]); }, [bulkAction]);
 
@@ -80,7 +79,10 @@ function TableView() {
 					<Tabs
 						activeTab={activeTab}
 						themeType="tertiary"
-						onChange={(val) => updateProfileField('activeTab', val)}
+						onChange={(val) => {
+							setBulkAction(false);
+							updateProfileField('activeTab', val);
+						}}
 						style={{ marginBottom: 6 }}
 					>
 						<TabPanel name="offered" title="Offered" />
@@ -90,12 +92,14 @@ function TableView() {
 					</Tabs>
 
 					{activeTab === 'offered' && (
-						<div className={styles.bulkupload_container}>
+						<div
+							className={styles.bulkupload_container}
+						>
 							BulkAction
 							<Toggle
 								onChange={(val) => setBulkAction(val?.target?.checked)}
 								value={bulkAction}
-								styles={{ marginBottom: '30px' }}
+								styles={{ marginBottom: 30 }}
 							/>
 						</div>
 					) }
