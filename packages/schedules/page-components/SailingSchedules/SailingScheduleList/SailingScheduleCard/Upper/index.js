@@ -10,7 +10,12 @@ function Upper({ sailingSchedule, loading }) {
 				<div className={styles.shipping_line}>
 					{!loading ? (
 						<div>
-							<img alt="shipping_line_logo" src={sailingSchedule?.shipping_line?.logo_url} />
+							<img
+								alt="shipping_line_logo"
+								src={sailingSchedule?.shipping_line?.logo_url}
+								width="80px"
+								height="40px"
+							/>
 						</div>
 					) : <Placeholder width="60px" />}
 					{!loading ? (
