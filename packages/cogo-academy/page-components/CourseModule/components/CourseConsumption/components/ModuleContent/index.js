@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -15,23 +15,23 @@ const TEST_INDEX = 0;
 
 function ModuleContent({
 	data = {},
-	loading,
-	updateCourseProgress,
+	loading = false,
+	updateCourseProgress = () => {},
 	chapter = {},
-	indexes,
-	setIndexes,
-	getUserCourse,
-	setChapter,
-	RichTextEditor,
-	editorValue,
-	setEditorValue,
-	editorError,
-	setEditorError,
+	indexes = {},
+	setIndexes = () => {},
+	getUserCourse = () => {},
+	setChapter = () => {},
+	RichTextEditor = () => {},
+	editorValue = '',
+	setEditorValue = () => {},
+	editorError = '',
+	setEditorError = () => {},
 	viewType = 'normal',
-	showTestData,
-	showFeedback,
-	course_id,
-	courseState,
+	showTestData = false,
+	showFeedback = false,
+	course_id = '',
+	courseState = '',
 }) {
 	const {
 		name,
@@ -126,7 +126,7 @@ function ModuleContent({
 								size="md"
 								type="button"
 								themeType="tertiary"
-								className={`${styles.btn} ${styles.next_btn}`}
+								className={cl`${styles.btn} ${styles.next_btn}`}
 								loading={loading}
 								onClick={onClickNextChapter}
 							>
@@ -188,7 +188,7 @@ function ModuleContent({
 						<div
 							key={attachment.name}
 							role="presentation"
-							onClick={onClickAttachment}
+							onClick={() => onClickAttachment({ attachment })}
 							className={styles.list_text}
 						>
 							{attachment.name}

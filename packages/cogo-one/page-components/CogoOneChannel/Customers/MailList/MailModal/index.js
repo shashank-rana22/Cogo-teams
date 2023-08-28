@@ -1,10 +1,10 @@
-import { Toast, Modal, RTE, Input, Select } from '@cogoport/components';
+import { Toast, Modal, RTEditor, Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
-import { TOOLBARCONFIG } from '../../../../../constants';
+import RTE_TOOL_BAR_CONFIG from '../../../../../constants/rteToolBarConfig';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 import mailFunction from '../../../../../utils/mailFunctions';
 
@@ -165,11 +165,11 @@ function MailModal({
 				</div>
 
 				<div className={styles.rte_container}>
-					<RTE
+					<RTEditor
 						value={emailState?.body}
 						onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-						toolbarConfig={TOOLBARCONFIG}
 						className={styles.styled_editor}
+						modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 					/>
 
 					<div className={styles.attachments_scroll}>
