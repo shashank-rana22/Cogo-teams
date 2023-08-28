@@ -65,6 +65,7 @@ import {
 	asyncListResources,
 	asyncFieldsLocationsMapping,
 	asyncListPricingZones,
+	asyncListLeadOrganizationUsers,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -148,6 +149,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 	resources                            : asyncListResources,
 	list_pricing_zones                   : asyncListPricingZones,
+	lead_org_users                       : asyncListLeadOrganizationUsers,
 };
 
 const SINGLE_ENTITY = 1;
