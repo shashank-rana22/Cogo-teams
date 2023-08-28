@@ -10,7 +10,7 @@ function BucketTable({
 	unregister = () => {},
 	current_allocated_containers = 0,
 	bulkEditMode = false,
-	serviceProvidersData = {},
+	serviceProvidersData = [],
 	serviceProvidersApiLoading = false,
 	refetchBucketsData = () => {},
 }) {
