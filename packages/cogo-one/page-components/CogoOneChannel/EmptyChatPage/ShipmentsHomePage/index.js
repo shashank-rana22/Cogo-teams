@@ -1,11 +1,13 @@
 import { Pagination, Input, Select } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
+import ShipmentChatModal from '../../../../common/ShipmentChatModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
@@ -26,10 +28,12 @@ function ListShipmentCards({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setShowBookingNote = () => {},
+	setShowShipmentChat = () => {},
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
+	mailProps = {},
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -54,19 +58,22 @@ function ListShipmentCards({
 				showPocDetails={showPocDetails}
 				setShowPocDetails={setShowPocDetails}
 				setShowBookingNote={setShowBookingNote}
+				setShowShipmentChat={setShowShipmentChat}
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				mailProps={mailProps}
 			/>
 		),
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false }) {
+function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
+	const [showShipmentChat, setShowShipmentChat] = useState({});
 
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
 	const [showPopover, setShowPopover] = useState('');
@@ -86,6 +93,10 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 		page_limit = PAGE_LIMIT,
 		total_count = DEFAULT_SHIPMENTS_COUNT,
 	} = shipmentsData || {};
+
+	const contextValues = useMemo(() => ({
+		shipment_data: showShipmentChat,
+	}), [showShipmentChat]);
 
 	return (
 		<>
@@ -132,10 +143,12 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								showPocDetails={showPocDetails}
 								setShowPocDetails={setShowPocDetails}
 								setShowBookingNote={setShowBookingNote}
+								setShowShipmentChat={setShowShipmentChat}
 								setShowPopover={setShowPopover}
 								showPopover={showPopover}
 								setShowPocModal={setShowPocModal}
 								showAddPrimaryUserButton={showAddPrimaryUserButton}
+								mailProps={mailProps}
 							/>
 						)}
 				</div>
@@ -155,6 +168,13 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 			</div>
 			{showBookingNote?.show
 				? <BookingNoteModal setShowBookingNote={setShowBookingNote} showBookingNote={showBookingNote} /> : null}
+
+			<ShipmentDetailContext.Provider value={contextValues}>
+				<ShipmentChatModal
+					showShipmentChat={showShipmentChat}
+					setShowShipmentChat={setShowShipmentChat}
+				/>
+			</ShipmentDetailContext.Provider>
 
 			{showPocModal?.show
 				? (

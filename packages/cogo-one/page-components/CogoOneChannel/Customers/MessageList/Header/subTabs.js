@@ -43,9 +43,9 @@ function SubTabs({
 						{eachTab.icon || null}
 					</div>
 
-					<text className={styles.label}>
+					<div className={styles.label}>
 						{eachTab.label}
-					</text>
+					</div>
 				</div>
 			))}
 		</div>
