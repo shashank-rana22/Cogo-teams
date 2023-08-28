@@ -12669,6 +12669,21 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'create_lead_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'create_lead_user',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'send_booking_note_on_whatsapp',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -13127,6 +13142,26 @@ const partner = {
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
+		},
+		{
+			api         : 'list_chat_channels',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+		},
+		{
+			api         : 'create_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_chat_channel',
+			access_type : 'private',
 		},
 		{
 			api          : 'sync_agent_work_preference',
