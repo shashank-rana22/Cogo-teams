@@ -85,8 +85,8 @@ const getSubBucketColumns = ({
 			id     : 'avg_deviation',
 			Header : (
 				<>
-					<div>Avg DEVAITION</div>
-					<div>FROM BEST RATE</div>
+					<div>Avg Deviation</div>
+					<div>From Best Rate</div>
 				</>
 			),
 			accessor: ({ avg_deviation_from_best_rate, rolling_shipments }) => (

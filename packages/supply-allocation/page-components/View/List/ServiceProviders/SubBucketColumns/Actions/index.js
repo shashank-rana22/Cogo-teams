@@ -22,6 +22,7 @@ function Actions({
 					placement="right"
 					interactive
 					visible={showPopOver}
+					onClickOutside={() => setShowPopOver(false)}
 					content={(
 						<div className={styles.options}>
 							<Button
@@ -35,7 +36,7 @@ function Actions({
 						</div>
 					)}
 				>
-					<div role="presentation" onClick={() => setShowPopOver(true)}>
+					<div role="presentation" onClick={() => setShowPopOver((prev) => !prev)}>
 						<IcMOverflowDot style={{ cursor: 'pointer' }} />
 					</div>
 				</Popover>

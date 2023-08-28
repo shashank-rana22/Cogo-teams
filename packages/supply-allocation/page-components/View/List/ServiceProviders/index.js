@@ -68,6 +68,7 @@ function ServiceProviders({
 					>
 						{bulkEditMode ? 'Cancel' : 'Edit Allocation'}
 					</Button>
+
 					<Button
 						onClick={handleSubmit(onClickSaveChanges)}
 						themeType="primary"

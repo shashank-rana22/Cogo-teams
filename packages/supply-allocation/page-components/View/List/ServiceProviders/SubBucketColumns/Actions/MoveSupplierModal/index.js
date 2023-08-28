@@ -42,7 +42,10 @@ function MoveSupplierModal({
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation({ refetchBucketsData });
+	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation({
+		refetchBucketsData,
+		setShowMoveSupplierModal,
+	});
 
 	const onClickSubmit = (values) => {
 		const payload = {
