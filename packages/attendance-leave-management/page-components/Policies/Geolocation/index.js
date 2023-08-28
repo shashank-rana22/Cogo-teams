@@ -2,6 +2,7 @@ import { IcMArrowLeft, IcMAppProfile, IcMLocation, IcMArrowRight } from '@cogopo
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+// import useCreateGeoLocationMapping from '../../../hooks/useCreateGeoLocationMapping';
 import useGetBranchStats from '../../../hooks/useGetBranchStats';
 import EmployeeList from '../EmployeeList';
 
@@ -21,6 +22,11 @@ const tempaccess = [
 function Geolocation({ handlePolicy }) {
 	const [selectedLocation, setSelectedLocation] = useState('');
 	const { loading, data } = useGetBranchStats();
+
+	// const {
+	// 	loading : locationMappingLoading,
+	// 	createGeoLocationMapping,
+	// } = useCreateGeoLocationMapping();
 
 	const handleBack = () => {
 		if (isEmpty(selectedLocation)) {

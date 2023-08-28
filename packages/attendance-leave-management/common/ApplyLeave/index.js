@@ -60,7 +60,7 @@ function ApplyLeave({
 	const onSubmit = (values) => {
 		const valObj = {
 			...values,
-			leave_application_id: selectedData.id,
+			leave_application_id: selectedData?.id,
 		};
 		createLeaveApplication(valObj);
 	};
