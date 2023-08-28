@@ -56,7 +56,7 @@ const getSubBucketColumns = ({
 		{
 			id       : 'capability',
 			Header   : <div>Capability</div>,
-			accessor : ({ capability = 0 }) => (capability ? (`${capability} TEU`) : ('0 TEU')),
+			accessor : ({ capability = 0 }) => (capability ? (`${capability} TEU`) : 'N/A'),
 		},
 		{
 			id     : 'past_allocated',
