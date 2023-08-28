@@ -54,9 +54,7 @@ const functions = (activeTab, setShow, setEdit, setItem, t) => ({
 });
 
 function Operators() {
-	const abc = useTranslation(['operators']);
-	console.log('abc:', abc);
-	const { t } = abc;
+	const { t } = useTranslation(['operators']);
 
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
