@@ -7,7 +7,7 @@ const BORDER_COLOR_MODIFIERS = 0.2;
 const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 
 const CENTERED_METRIC_FIRST_OFFSET = 3;
-const CENTERED_METRIC_SECOND_OFFSET = 3;
+const CENTERED_METRIC_SECOND_OFFSET = 15;
 
 function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 	const colors = data.map((item) => item.color);
