@@ -27,7 +27,6 @@ function SendActions({
 	setDraftUploadedFiles = () => {},
 	setDraftMessages = () => {},
 	hasUploadedFiles = false,
-	draftUploadedFiles = {},
 	emailState = {},
 	isEmail = false,
 	mailActions = {},
@@ -88,7 +87,6 @@ function SendActions({
 								style={{ cursor: isUploadDisabled ? 'not-allowed' : 'pointer' }}
 							/>
 						)}
-						draftUploadedFiles={draftUploadedFiles}
 						channel={channel_type}
 						onChange={(val) => setDraftUploadedFiles((prev) => ({ ...prev, [roomId]: val }))}
 						ref={ref}

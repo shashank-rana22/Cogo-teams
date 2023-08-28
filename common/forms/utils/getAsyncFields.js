@@ -1,3 +1,16 @@
+function asyncFieldsLocationsTwo() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_locations_v2',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+			includes   : { country: null, default_params_required: true },
+		},
+	};
+}
 function asyncFieldsPartnerUsersIds() {
 	return {
 		labelKey    : 'name',
@@ -87,6 +100,11 @@ function asyncFieldsOperators() {
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
 		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
 	};
 }
 
@@ -858,6 +876,15 @@ function asyncListResources() {
 		params       : {},
 	};
 }
+function asyncListLeadOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'lead_user_id',
+		endpoint    : 'list_lead_organization_users',
+		initialCall : true,
+		params      : {},
+	};
+}
 
 function asyncListSaasHsCodes() {
 	return {
@@ -884,6 +911,7 @@ function asyncListSpotSearchRateCardOperators() {
 
 export {
 	asyncFieldsLocations,
+	asyncFieldsLocationsTwo as asyncFieldsLocations2,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
@@ -952,6 +980,7 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListLeadOrganizationUsers,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
 };

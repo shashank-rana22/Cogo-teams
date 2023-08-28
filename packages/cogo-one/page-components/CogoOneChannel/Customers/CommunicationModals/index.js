@@ -56,6 +56,7 @@ function CommunicationModals({
 					type="checkbox"
 					className={styles.checkbox}
 					checked={isChecked}
+					readOnly
 				/>
 				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
 					<div className={styles.wheel_box}>
@@ -104,10 +105,12 @@ function CommunicationModals({
 				/>
 			)}
 
-			<DialCallModal
-				setShowDialModal={setShowDialModal}
-				showDialModal={showDialModal}
-			/>
+			{showDialModal && (
+				<DialCallModal
+					setShowDialModal={setShowDialModal}
+					showDialModal={showDialModal}
+				/>
+			)}
 		</>
 	);
 }
