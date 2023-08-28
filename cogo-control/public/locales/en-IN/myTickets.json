@@ -13,6 +13,7 @@
     "escalated_label": "Escalated Tickets",
     "reopened_label": "Reopened Tickets",
     "satisfied_customer_label": "Happy customers",
+    "customers": "Customers",
     "neutral_customer_label": "Neutral customers",
     "dissatisfied_customer_label": "Angry customers",
     "search_placeholder_text": "Search here...",
