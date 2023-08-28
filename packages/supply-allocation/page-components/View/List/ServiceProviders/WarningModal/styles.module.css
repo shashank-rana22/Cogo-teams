@@ -11,9 +11,7 @@
 
 .heading {
 	font-weight: 500;
-	color: #4f4f4f;
 }
 
-.sub_heading {
-	color: #4f4f4f;
-}
+.heading,
+.sub_heading { color: #4f4f4f; }

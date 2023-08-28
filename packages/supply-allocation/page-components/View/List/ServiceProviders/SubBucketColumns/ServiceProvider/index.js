@@ -60,7 +60,6 @@ function ServiceProvider({
 						totalStars={5}
 						value={service_provider_star_rating}
 						size="sm"
-						onClick={() => {}}
 					/>
 				</div>
 

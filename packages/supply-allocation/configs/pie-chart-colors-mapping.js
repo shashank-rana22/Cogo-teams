@@ -1,18 +1,17 @@
 export const PERSONA_DISTRIBUTION_COLORS = {
-	sme             : '#F2F3FA',
+	sme             : '#f2f3fa',
 	mid_size        : '#d7d9f1',
 	long_tail       : '#b4bae7',
 	enterprise      : '#7d85ce',
 	channel_partner : '#99a1df',
 	others          : '#535ca7',
-
 };
 
 export const WEEKY_DISTRIBUTION_COLORS = [
-	'#E6F0F0',
-	'#CFEAED',
-	'#ACDADF',
-	'#63BEC8',
+	'#e6f0f0',
+	'#cfeaed',
+	'#acdadf',
+	'#63bec8',
 	'#74c2ca',
 	'#67b0b8',
 ];

@@ -13,22 +13,22 @@ function Promised({ item = {}, control, unregister, bulkEditMode = false }) {
 	};
 	const { allocated_containers, is_hard_limit } = item;
 	return !(editPromised && bulkEditMode) ? (
-		<>
-			<div
-				style={{
-					display        : 'flex',
-					justifyContent : 'space-between',
-					padding        : '0 10px',
-				}}
-			>
+		<div className={styles.main_container}>
+			<div>
 				{allocated_containers}
 				{' '}
 				TEU
+
 				{bulkEditMode
-					? <IcMEdit style={{ cursor: 'pointer' }} onClick={() => setEditPromised(true)} /> : null}
+					? (
+						<IcMEdit
+							style={{ cursor: 'pointer', marginLeft: '4px' }}
+							onClick={() => setEditPromised(true)}
+						/>
+					) : null}
 			</div>
 
-			<div>
+			<div style={{ textAlign: 'start' }}>
 				{is_hard_limit ? (
 					<>
 						<sup>*</sup>
@@ -36,17 +36,17 @@ function Promised({ item = {}, control, unregister, bulkEditMode = false }) {
 					</>
 				) : null}
 			</div>
-		</>
+		</div>
 	) : (
 		<div className={styles.edit_container}>
 
-			<span style={{ color: '#fc6a03' }}>
+			<div style={{ color: '#fc6a03', fontSize: '12px', textAlign: 'start' }}>
 				Current :
 				{' '}
 				{ allocated_containers}
 				{' '}
 				TEU
-			</span>
+			</div>
 
 			<InputNumberController
 				size="xs"
@@ -54,11 +54,12 @@ function Promised({ item = {}, control, unregister, bulkEditMode = false }) {
 				arrow={false}
 				name={`${item.service_provider?.id}.promised_containers`}
 				value={allocated_containers}
+				suffix={(
+					<div className={styles.cancel_container}>
+						<IcMCross onClick={() => onClickCancel(`${item?.service_provider?.id}.promised_containers`)} />
+					</div>
+				)}
 			/>
-
-			<div className={styles.cancel_container}>
-				<IcMCross onClick={() => onClickCancel(`${item?.service_provider?.id}.promised_containers`)} />
-			</div>
 
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<CheckboxController
