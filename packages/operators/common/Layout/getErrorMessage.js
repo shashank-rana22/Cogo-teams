@@ -9,26 +9,27 @@ const getErrorMessage = (props) => {
 
 	if (error) {
 		if (required && type === 'required') {
-			ERROR_MESSAGE.push(error?.message || `${label} ${t('operators:error_message_1')}`);
+			ERROR_MESSAGE.push(error?.message || `${label} ${t('operators:error_message_is_required')}`);
 		}
 		if ((min || min === MIN_COUNT) && type === 'min') {
 			ERROR_MESSAGE.push(
-				`${label} ${t('operators:error_message_2')} ${min}`,
+				`${label} ${t('operators:error_message_cannot_be_less_than')} ${min}`,
 			);
 		}
 		if (max && type === 'max') {
 			ERROR_MESSAGE.push(
-				`${label} ${t('operators:error_message_3')} ${max}`,
+				`${label} ${t('operators:error_message_cannot_be_greater_than')} ${max}`,
 			);
 		}
 		if (minLength && type === 'minLength') {
 			ERROR_MESSAGE.push(
-				`${label} ${t('operators:error_message_4')} ${minLength} ${t('operators:error_message_5')}`,
+				`${label} 
+				${t('operators:error_message_should_be')} ${minLength} ${t('operators:error_message_character_long')}`,
 			);
 		}
 		if (maxLength && type === 'maxLength') {
 			ERROR_MESSAGE.push(
-				`${label} ${t('operators:error_message_6')} ${maxLength}`,
+				`${label} ${t('operators:error_message_should_be_less_than')} ${maxLength}`,
 			);
 		}
 	}
