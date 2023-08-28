@@ -1,9 +1,10 @@
 import { Button, Select } from '@cogoport/components';
-import { AsyncSelectController } from '@cogoport/forms';
+import { AsyncSelectController, useForm } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import ListLocations from '../../../commons/RenderLabels/ListLocations';
+import useCreateSupplySearch from '../../../hooks/useCreateSupplySearch';
 
 import styles from './styles.module.css';
 
@@ -42,21 +43,26 @@ const commonLocationProps = {
 };
 
 function LocationSelect({
-	control = {},
-	createSupplySearch = () => {},
-	locationDetails = {},
-	setLocationDetails = () => {},
 	setFilters = () => {},
 	setPagination = () => {},
 	listLoading = false,
-	createSearchLoadng = false,
+	refetchListFclSearches = () => {},
 }) {
+	const [locationDetails, setLocationDetails] = useState({});
+	const [region, setRegion] = useState('all');
+
+	const { control, reset } = useForm({});
+
+	const { createSupplySearch, createSearchLoadng } = useCreateSupplySearch({
+		refetchListFclSearches,
+		reset,
+		setLocationDetails,
+	});
+
 	const onClickAllocate = () => {
 		const payload = { ...locationDetails };
 		createSupplySearch({ payload });
 	};
-
-	const [region, setRegion] = useState('all');
 
 	return (
 		<div className={styles.container}>
