@@ -10,7 +10,7 @@ function useUpdateOrganizationMarketFeedbackVerificationStatus({
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_organization_market_feedback_verification_status',
+		url    : '/update_organization_service_market_feedback_verification_status',
 	}, { manual: true });
 
 	const updateOrganizationMarketFeedbackVerificationStatus = async ({ verification_status }) => {

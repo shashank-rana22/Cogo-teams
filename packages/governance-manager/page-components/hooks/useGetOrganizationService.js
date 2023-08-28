@@ -21,9 +21,9 @@ const useGetOrganizationService = ({ id, setStatus }) => {
 					page: 1,
 				},
 			});
-			let stage_of_approval = res?.data?.list[GLOBAL_CONSTANTS.zeroth_index]?.stage_of_approval;
-			if (stage_of_approval === 'contract_and_sla_approval') { stage_of_approval = 'contract_and_sla_updation'; }
-			setStatus(stage_of_approval);
+			let approval_stage = res?.data?.list[GLOBAL_CONSTANTS.zeroth_index]?.approval_stage;
+			if (approval_stage === 'contract_and_sla_approval') { approval_stage = 'contract_and_sla_updation'; }
+			setStatus(approval_stage);
 		} catch (err) {
 			Toast.error('Something went wrong');
 		}

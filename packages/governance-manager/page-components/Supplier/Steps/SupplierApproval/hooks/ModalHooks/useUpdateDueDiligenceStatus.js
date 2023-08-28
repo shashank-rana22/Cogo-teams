@@ -9,7 +9,7 @@ function useUpdateOrganizationDueDiligenceStatus({
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_organization_due_diligence_status',
+		url    : '/update_organization_service_due_diligence_status',
 	}, { manual: true });
 
 	const UpdateOrganizationDueDiligenceStatus = async ({ manager_approval_status }) => {

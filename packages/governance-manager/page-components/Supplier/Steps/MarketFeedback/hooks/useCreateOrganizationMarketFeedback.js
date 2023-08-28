@@ -9,7 +9,7 @@ const useCreateOrganizationMarketFeedback = ({
 }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/create_organization_market_feedback',
+		url    : '/create_organization_service_market_feedback',
 	}, { manual: true });
 
 	const createMarketFeedbackActive = async (values) => {

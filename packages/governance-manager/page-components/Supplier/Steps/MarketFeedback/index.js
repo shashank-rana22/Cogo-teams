@@ -14,7 +14,7 @@ import { controls, defaultValues } from './utils/email-from-controls';
 function MarketFeedback({ t, organization_id, service, getOrganizationService, id:service_id }) {
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
-		stage_of_approval: 'organization_evaluation',
+		approval_stage: 'organization_evaluation',
 		service,
 		getOrganizationService,
 	});

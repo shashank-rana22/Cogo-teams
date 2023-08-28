@@ -29,7 +29,7 @@ function NeedAnalysis({ t, organization_id, service, getOrganizationService, ser
 
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
-		stage_of_approval: 'market_feedback',
+		approval_stage: 'market_feedback',
 		service,
 		getOrganizationService,
 	});

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 function useGetOrganizationEvaluationDetails({ id, organization_id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/get_organization_evaluation_details',
+		url    : '/get_organization_service_evaluation_details',
 	}, { manual: true });
 
 	const getOrganizationEvaluationDetails = async () => {

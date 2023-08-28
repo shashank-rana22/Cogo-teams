@@ -22,7 +22,7 @@ function useListOrganizationServices({ currentPage, activeTab, setApprovalStats,
 			const res = await trigger({
 				params: {
 					filters: {
-						stage_of_approval:
+						approval_stage:
 						{
 							governance_manager:
 							(activeTab === 'contract_and_sla_updation' ? 'contract_and_sla_updation' : activeTab),

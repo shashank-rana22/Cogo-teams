@@ -27,14 +27,14 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
-		stage_of_approval : 'contract_and_sla_approval',
-		service           : service_type,
+		approval_stage : 'contract_and_sla_approval',
+		service        : service_type,
 	});
 
 	const { updateOrganizationService:finalApproval } = useUpdateOrganizationService({
 		organization_id,
-		stage_of_approval : 'approved',
-		service           : service_type,
+		approval_stage : 'approved',
+		service        : service_type,
 	});
 
 	const [negotiationIds, setNegotiationIds] = useState([]);

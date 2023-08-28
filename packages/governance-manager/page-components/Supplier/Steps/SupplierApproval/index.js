@@ -36,8 +36,8 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
-		stage_of_approval : 'contract_and_sla_updation',
-		service           : service_type,
+		approval_stage : 'contract_and_sla_updation',
+		service        : service_type,
 		getOrganizationService,
 	});
 

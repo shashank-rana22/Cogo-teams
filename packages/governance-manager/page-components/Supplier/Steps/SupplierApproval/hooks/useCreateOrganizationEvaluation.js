@@ -8,7 +8,7 @@ function useCreateOrganizationEvaluation({
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/create_organization_evaluation',
+		url    : '/create_organization_service_evaluation',
 	}, { manual: true });
 
 	const createOrganizationEvaluation = async ({ verification_status }) => {

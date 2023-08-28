@@ -5,7 +5,7 @@ const ZERO = 0;
 function useGetOrganizationSupplierVerificationDetails({ organization_id, organization_service_id, setVerify }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/get_organization_supplier_verification_details',
+		url    : '/get_organization_service_supplier_verification_details',
 	}, { manual: true });
 
 	const getOrganizationSupplierVerificationDetails = async () => {

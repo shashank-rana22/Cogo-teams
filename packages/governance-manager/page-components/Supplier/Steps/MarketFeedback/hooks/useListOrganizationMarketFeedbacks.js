@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 const useListOrganizationMarketFeedbacks = ({ organization_id, service_id }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_organization_market_feedbacks',
+		url    : '/list_organization_service_market_feedbacks',
 	}, { manual: true });
 
 	const listOrganizationMarketFeedbacks = async () => {

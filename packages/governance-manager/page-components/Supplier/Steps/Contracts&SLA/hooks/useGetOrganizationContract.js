@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 const useGetOrganizationContract = ({ organization_id, step, service_type }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_organization_contract',
+		url    : 'get_organization_service_contract',
 	}, { manual: true });
 
 	const getOrganizationContract = async () => {

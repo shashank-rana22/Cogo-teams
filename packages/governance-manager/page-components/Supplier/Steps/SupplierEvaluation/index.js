@@ -27,7 +27,7 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 	} = useGetOrganizationEvaluationDetails({ organization_id, id, setStatus, getOrganizationService });
 
 	const { updateOrganizationService } = useUpdateOrganizationService({
-		organization_id, stage_of_approval: 'organization_approval', service, getOrganizationService,
+		organization_id, approval_stage: 'organization_approval', service, getOrganizationService,
 	});
 
 	const {

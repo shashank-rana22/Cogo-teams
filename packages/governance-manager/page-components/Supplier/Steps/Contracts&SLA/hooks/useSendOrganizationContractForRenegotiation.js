@@ -9,7 +9,7 @@ function useSendOrganizationContractForRenegotiation({
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/send_organization_contract_for_renegotiation',
+		url    : '/send_organization_service_contract_for_renegotiation',
 	}, { manual: true });
 
 	const { push } = useRouter();

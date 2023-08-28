@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-function useUpdateOrganizationService({ organization_id, stage_of_approval, service, getOrganizationService }) {
+function useUpdateOrganizationService({ organization_id, approval_stage, service, getOrganizationService }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_service',
@@ -10,7 +10,7 @@ function useUpdateOrganizationService({ organization_id, stage_of_approval, serv
 		try {
 			await trigger({
 				params: {
-					stage_of_approval,
+					approval_stage,
 					organization_id,
 					service,
 					status,

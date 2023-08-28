@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 function useUpdateOrganizationContract({ item, id, updatedValue, getOrganizationContract }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_organization_contract',
+		url    : '/update_organization_service_contract',
 	}, { manual: true });
 	const updateOrganizationContract = async (state) => {
 		try {

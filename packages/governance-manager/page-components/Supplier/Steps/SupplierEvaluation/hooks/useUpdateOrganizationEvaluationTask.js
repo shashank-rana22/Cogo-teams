@@ -6,7 +6,7 @@ function useUpdateOrganizationEvaluationTask({
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_organization_evaluation_task',
+		url    : '/update_organization_service_evaluation_task',
 	}, { manual: true });
 
 	const updateOrganizationEvaluationTask = async () => {
