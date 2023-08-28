@@ -14,7 +14,7 @@ import getPayloadForUpdateShipment from './utils/getPayloadForUpdateShipment';
 
 const BACK_STEP = 2;
 
-function Step3({
+function StepThree({
 	setStep = () => {},
 	step = 0,
 	policyId = '',
@@ -152,4 +152,4 @@ function Step3({
 	);
 }
 
-export default Step3;
+export default StepThree;

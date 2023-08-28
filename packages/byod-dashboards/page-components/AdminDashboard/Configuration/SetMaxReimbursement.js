@@ -10,15 +10,14 @@ const OPTIONS = [
 	{ value: 'no', label: 'No' },
 ];
 
-function SetMaxReimbursement(
-	{
-		id, setCombinedValue,
-		combinedValue,
-		setMaxReimbursementAmount,
-		maxReimbursementAmount,
-		getEmployeeReimbursementGroup = () => {},
-	},
-) {
+function SetMaxReimbursement({
+	id,
+	setCombinedValue = () => {},
+	combinedValue,
+	setMaxReimbursementAmount = () => {},
+	maxReimbursementAmount,
+	getEmployeeReimbursementGroup = () => {},
+}) {
 	const { updateDeviceDetails } = useUpdateDeviceDetails({
 		SOURCE: 'maxreimbursement',
 		id,

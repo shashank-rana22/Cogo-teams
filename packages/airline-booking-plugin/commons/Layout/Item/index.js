@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import CONSTANTS from '../../../constants/constants';
@@ -17,10 +18,12 @@ function Item({
 	rules = {},
 	...props
 }) {
+	const { t } = useTranslation(['airRepository']);
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,
 		label,
+		t,
 	});
 
 	if (!type) {

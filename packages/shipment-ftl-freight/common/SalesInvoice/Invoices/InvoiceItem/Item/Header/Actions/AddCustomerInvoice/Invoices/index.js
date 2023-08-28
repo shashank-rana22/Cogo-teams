@@ -3,11 +3,13 @@ import React, { useRef } from 'react';
 
 import useCreateShipmentDocument from '../../../../../../../../../hooks/useCreateShipmentDocument';
 import useGetShipmentFortigoTripDetail from '../../../../../../../../../hooks/useGetShipmentFortigoTripDetail';
+import useListCogoEntities from '../../../../../../../../../hooks/useListCogoEntities';
 import useListOrganizationTradeParties from '../../../../../../../../../hooks/useListOrganizationTradeParties';
 import useGeneratePdf from '../hooks/useGeneratePdf';
 import useGetImageSource from '../hooks/useGetImageSource';
 import { getComponentMapping } from '../utils/componentMapper';
 import { getPayload } from '../utils/getPayload';
+import { INVOICE_SOURCES } from '../utils/serviceDescriptionMappings';
 
 import styles from './styles.module.css';
 
@@ -18,6 +20,7 @@ function Invoices({
 	handleRefetch = () => {},
 	handleCloseModal = () => {},
 	handleClose = () => {},
+	invoiceData = {},
 }) {
 	const callbackCustomerInvoice = () => {
 		handleRefetch();
@@ -29,6 +32,8 @@ function Invoices({
 
 	const InvoiceRef = useRef(null);
 	const { loading: generateLoading, generatePdf } = useGeneratePdf();
+
+	const { loading, entityList } = useListCogoEntities();
 
 	const params = {
 		defaultParams: {
@@ -49,11 +54,15 @@ function Invoices({
 
 	const callbackGeneratePdf = (res) => {
 		const pdfUrl = res?.data?.pdf_url;
-		const payload = getPayload({ shipmentData, invoice, pdfUrl });
+		const payload = getPayload({ shipmentData, invoice, pdfUrl, source: INVOICE_SOURCES.SYSTEM_GENERATED });
 		apiTrigger(payload);
 	};
 
-	const { logoData, stampData } = useGetImageSource();
+	const { logoData, stampData } = useGetImageSource({
+		invoice,
+		importerExporterId : shipmentData?.importer_exporter_id,
+		invoicesList       : invoiceData?.invoicing_parties,
+	});
 
 	const { loading: customDataLoading, data: customData } = useGetShipmentFortigoTripDetail({
 		defaultParams: {
@@ -82,13 +91,14 @@ function Invoices({
 						invoice={invoice}
 						tradePartyData={tradePartyData}
 						importerExporterId={shipmentData?.importer_exporter_id}
+						entityList={entityList}
 					/>
 				) : null}
 			</div>
 			<div className={styles.button_wrapper}>
 				<Button
 					onClick={generateInvoice}
-					loading={generateLoading || docLoading || customDataLoading}
+					loading={generateLoading || docLoading || customDataLoading || loading}
 				>
 					Submit
 				</Button>
