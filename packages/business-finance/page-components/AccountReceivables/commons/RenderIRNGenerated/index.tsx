@@ -28,7 +28,11 @@ function RenderIRNGenerated({ itemData = { invoiceStatus: '' }, refetch = () => 
 			{statusComponentMap.map((item) => {
 				const Element = item.component;
 				return (item.status.includes(itemData?.invoiceStatus)
-					? <Element itemData={itemData} refetch={refetch} /> : null);
+					? (
+						<React.Fragment key={itemData}>
+							<Element itemData={itemData} refetch={refetch} />
+						</React.Fragment>
+					) : null);
 			})}
 		</>
 	);
