@@ -29,10 +29,10 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 	} = detail || {};
 
 	const { address = '', city = '', country = '', pincode = '', state = '' } = permanent_address || {};
-	const permanentAddress = !isEmpty(permanent_address)
+	const permanentAddress = (!isEmpty(city) && !isEmpty(pincode))
 		? `${address}, ${city}, ${state}, ${country} - ${pincode}` : '-';
 
-	const presentAddress = !isEmpty(present_address)
+	const presentAddress = (!isEmpty(city) && !isEmpty(pincode))
 		? `${present_address?.address || ''}, ${present_address?.city || ''}, 
 	${present_address?.state || ''}, ${present_address?.country || ''} - ${present_address?.pincode || ''}` : '-';
 
