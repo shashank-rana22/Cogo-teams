@@ -8,7 +8,7 @@ const IS_ELIGIBLE_CHECK = ['FINANCE_ACCEPTED', 'POSTED', 'IRN_FAILED'];
 const IS_CANCELLABLE_CHECK = ['IRN_GENERATED', 'POSTED', 'FAILED', 'IRN_CANCELLED'];
 const REFETCH_STATUS = ['IRN_GENERATED', 'IRN_CANCELLED'];
 
-function RenderIRNGenerated({ itemData = { invoiceStatus: '' }, refetch = () => {} }) {
+function RenderIRNGenerated({ itemData = { invoiceStatus: '' }, refetch = () => {} }: any) {
 	const statusComponentMap = [
 		{
 			status    : IS_ELIGIBLE_CHECK,
@@ -28,7 +28,11 @@ function RenderIRNGenerated({ itemData = { invoiceStatus: '' }, refetch = () => 
 			{statusComponentMap.map((item) => {
 				const Element = item.component;
 				return (item.status.includes(itemData?.invoiceStatus)
-					? <Element itemData={itemData} refetch={refetch} key={itemData} /> : null);
+					? (
+						<React.Fragement key={itemData}>
+							<Element itemData={itemData} refetch={refetch} />
+						</React.Fragement>
+					) : null);
 			})}
 		</>
 	);
