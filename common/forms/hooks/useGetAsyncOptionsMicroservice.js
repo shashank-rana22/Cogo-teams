@@ -42,7 +42,11 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	let options = data?.list || data?.items || data || [];
+	let options = data?.list || data?.items || data?.data || data?.data?.list || data || [];
+
+	if (!Array.isArray(options)) {
+		options = [];
+	}
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });

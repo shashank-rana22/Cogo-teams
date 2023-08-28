@@ -1,5 +1,5 @@
-import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
-import { IcMOverflowDot, IcMCopy, IcMAgentManagement } from '@cogoport/icons-react';
+import { Popover, ButtonGroup, Tooltip, cl } from '@cogoport/components';
+import { IcMOverflowDot, IcMCopy, IcMAgentManagement, IcMLiveChat } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -68,6 +68,7 @@ function HeaderBlock({
 	type = '', setShowPopover = () => {}, showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
+	handleShipmentChat = () => {},
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
@@ -148,7 +149,7 @@ function HeaderBlock({
 				{type === 'all_shipments' ? (
 					<Tooltip content="POCs" placement="bottom">
 						<IcMAgentManagement
-							className={styles.poc_details}
+							className={cl`${styles.common_style} ${styles.poc_details}`}
 							onClick={(e) => {
 								e.stopPropagation();
 								setShowPocDetails(shipmentItem);
@@ -157,9 +158,23 @@ function HeaderBlock({
 					</Tooltip>
 				) : null}
 
+				{
+					showAddPrimaryUserButton ? (
+						<Tooltip content="Chat" placement="bottom">
+							<IcMLiveChat
+								className={cl`${styles.common_style} ${styles.message_icon_styles}`}
+								onClick={(e) => {
+									e.stopPropagation();
+									handleShipmentChat({ shipmentDetails: shipmentItem });
+								}}
+							/>
+						</Tooltip>
+					) : null
+				}
+
 				<Tooltip content="Copy" placement="bottom">
 					<IcMCopy
-						className={styles.copy_icon}
+						className={cl`${styles.common_style} ${styles.copy_icon}`}
 						onClick={(e) => {
 							e.stopPropagation();
 							handleCopyShipmentData({ shipmentItem });
