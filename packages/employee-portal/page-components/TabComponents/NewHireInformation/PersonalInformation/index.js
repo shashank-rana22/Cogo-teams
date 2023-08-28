@@ -19,7 +19,7 @@ const MOBILE_NUMBER = 'mobile_number';
 const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
 const EMERGENCY_CONTACT_DETAILS = 'emergency_contact_details';
-const DESIGNATION = 'role';
+const ROLE = 'role';
 const HIRING_MANAGER = 'hiring_manager';
 
 const removeTypeField = (controlItem) => {
@@ -148,7 +148,7 @@ function PersonalInformation({ data: content = {}, getEmployeeDetails = () => {}
 					mapping[item.name]?.mobile_number
 					|| content?.detail?.[item.name].mobile_number,
 				);
-			} else if (item?.name === DESIGNATION) {
+			} else if (item?.name === ROLE) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else if (item?.name === HIRING_MANAGER) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]?.name));
