@@ -6,7 +6,7 @@ export { default } from '@cogoport/airline-booking-plugin/page-components';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common'])),
+			...(await serverSideTranslations(locale, ['common', 'airlineBookingPlugin'])),
 		},
 	};
 }

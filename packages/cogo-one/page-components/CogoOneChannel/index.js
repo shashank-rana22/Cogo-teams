@@ -52,6 +52,7 @@ function CogoOne() {
 		} : {},
 	});
 
+	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
@@ -72,7 +73,7 @@ function CogoOne() {
 	});
 
 	const {
-		viewType,
+		viewType: initialViewType = '',
 		loading: workPrefernceLoading = false,
 		userMails = [],
 	} = useAgentWorkPrefernce();
@@ -136,6 +137,13 @@ function CogoOne() {
 		}
 	}, [token]);
 
+	useEffect(
+		() => {
+			setViewType(initialViewType);
+		},
+		[initialViewType],
+	);
+
 	return (
 		<>
 			<HeaderBar
@@ -148,6 +156,8 @@ function CogoOne() {
 				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
 				userId={userId}
+				initialViewType={initialViewType}
+				setViewType={setViewType}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -188,6 +198,7 @@ function CogoOne() {
 								activeTab={activeTab}
 								viewType={viewType}
 								setActiveTab={setActiveTab}
+								mailProps={mailProps}
 							/>
 						</div>
 					) : (

@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
@@ -53,8 +54,9 @@ function AirIndiaBooking({
 	item = {},
 	setEdit = () => {},
 }) {
+	const { t } = useTranslation(['airlineBookingPlugin']);
 	const [locationData, setLocationData] = useState({});
-	const requiredControl = bookingControl(setLocationData, edit);
+	const requiredControl = bookingControl(setLocationData, edit, t);
 
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
@@ -74,7 +76,7 @@ function AirIndiaBooking({
 
 	return (
 		<div className={styles.booking_container}>
-			<Modal.Header title="BOOKING REQUIREMENTS" />
+			<Modal.Header title={t('airlineBookingPlugin:booking_modal_title')} />
 			<div className={styles.apply_box}>
 				<div style={{ width: '90%' }}>
 					<Layout
@@ -93,17 +95,17 @@ function AirIndiaBooking({
 					}))}
 					disabled={loading}
 				>
-					{edit ? 'Edit' : 'Add'}
+					{edit ? t('airlineBookingPlugin:edit') : t('airlineBookingPlugin:add')}
 				</Button>
 			</div>
 			{!isEmpty(pluginData) && (
 				<div>
-					<Header fields={pluginHeader} />
+					<Header fields={pluginHeader(t)} />
 					{(pluginData || []).map((singleitem) => (
 						<CardItem
 							key={singleitem.id}
 							singleitem={singleitem}
-							fields={pluginHeader}
+							fields={pluginHeader(t)}
 							functions={FUNCTIONS}
 						/>
 					))}

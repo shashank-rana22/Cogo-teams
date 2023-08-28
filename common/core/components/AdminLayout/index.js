@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
+import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
 import { FIREBASE_CONFIG } from './LockScreen/configurations/firebase-config';
 import Navbar from './Navbar';
@@ -121,6 +122,7 @@ function AdminLayout({
 				firestore={firestore}
 				inCall={inCall}
 			/>
+			<LeadFeedBackVoiceCallForm />
 		</div>
 	);
 }
