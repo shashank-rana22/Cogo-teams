@@ -28,7 +28,7 @@ function RenderIRNGenerated({ itemData = { invoiceStatus: '' }, refetch = () => 
 			{statusComponentMap.map((item) => {
 				const Element = item.component;
 				return (item.status.includes(itemData?.invoiceStatus)
-					? <Element itemData={itemData} refetch={refetch} /> : null);
+					? <Element itemData={itemData} refetch={refetch} key={itemData} /> : null);
 			})}
 		</>
 	);

@@ -183,7 +183,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							const { status, disabled, label, criteria, action } = item;
 							return (status.includes(invoiceStatus) && criteria
 								? (
-									<div className={styles.button_container}>
+									<div className={styles.button_container} key={label}>
 										<Button
 											size="sm"
 											disabled={disabled}

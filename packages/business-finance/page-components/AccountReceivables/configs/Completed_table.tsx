@@ -63,6 +63,7 @@ interface InvoiceTable {
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
+const NINE = 9;
 
 const completedColumn = ({
 	refetch,
@@ -370,7 +371,7 @@ const completedColumn = ({
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>
-						{(startCase(row?.invoiceStatus)).length > 9 ? (
+						{(startCase(row?.invoiceStatus)).length > NINE ? (
 							<Tooltip
 								interactive
 								placement="top"
