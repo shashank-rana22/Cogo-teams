@@ -87,7 +87,7 @@ function List({
 	const columns = [
 		{
 			id       : 'origin',
-			Header   : <div style={{ display: 'flex' }}>ORIGIN</div>,
+			Header   : <div style={{ display: 'flex' }}>Origin</div>,
 			accessor : ({ origin_location, is_attention_required }) => (
 				<div className={styles.origin_container}>
 					{is_attention_required
@@ -132,7 +132,7 @@ function List({
 		},
 		{
 			id       : 'destination',
-			Header   : <div style={{ display: 'flex' }}>DESTINATION</div>,
+			Header   : <div style={{ display: 'flex' }}>Destination</div>,
 			accessor : ({ destination_location }) => (
 				<Tooltip content={destination_location?.display_name} placement="bottom">
 					<div
@@ -153,7 +153,7 @@ function List({
 			id     : 'avg_profitability',
 			Header : (
 				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					AVG PROFITABILITY
+					Avg Profitability
 					{' '}
 					<span
 						role="presentation"
@@ -162,6 +162,7 @@ function List({
 							display    : 'flex',
 							alignItems : 'center',
 							marginLeft : '6px',
+							cursor     : 'pointer',
 						}}
 					>
 						{ICON_MAPPING[profitabilityStage]}
@@ -174,17 +175,17 @@ function List({
 			id     : 'percent_fulfillment',
 			Header : (
 				<div>
-					% FULFILLMENT
+					% Fulfillment
 					<div style={{ fontSize: '10px', fontWeight: '400' }} />
 				</div>
 			),
-			accessor: (item) => ` ${item?.fulfillment} %`,
+			accessor: (item) => `${item?.fulfillment} %`,
 		},
 		{
 			id     : 'forecasted_volume',
 			Header : (
 				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					FORECASTED VOL
+					Forecasted Vol
 					<span
 						role="presentation"
 						onClick={() => onClickVolumeSort()}
@@ -192,11 +193,10 @@ function List({
 							display    : 'flex',
 							alignItems : 'center',
 							marginLeft : '6px',
+							cursor     : 'pointer',
 						}}
 					>
 						{ICON_MAPPING[forVolumeStage]}
-						{' '}
-
 					</span>
 				</div>
 			),
@@ -211,38 +211,35 @@ function List({
 		{
 			id       : 'bookmark',
 			Header   : '',
-			accessor : (item) => {
-				const { is_bookmarked = false } = item;
-				return (
-					<span
-						role="presentation"
-						style={{ cursor: 'pointer' }}
-						onClick={() => {
-							updateRollingFclFreightSearch({
-								payload: {
-									id            : item.id,
-									is_bookmarked : !is_bookmarked,
-								},
-							});
-						}}
-					>
-						{is_bookmarked ? (
-							<IcCBookmark width={16} height={16} />
-						) : (
-							<IcMBookmark width={16} height={16} />
-						)}
-					</span>
-				);
-			},
+			accessor : ({ is_bookmarked = false, id = '' }) => (
+				<span
+					role="presentation"
+					style={{ cursor: 'pointer' }}
+					onClick={() => {
+						updateRollingFclFreightSearch({
+							payload: {
+								id,
+								is_bookmarked: !is_bookmarked,
+							},
+						});
+					}}
+				>
+					{is_bookmarked ? (
+						<IcCBookmark width={16} height={16} />
+					) : (
+						<IcMBookmark width={16} height={16} />
+					)}
+				</span>
+			),
 		},
 		{
 			id       : 'actions',
 			Header   : '',
-			accessor : (item) => (
+			accessor : ({ id = '' }) => (
 				<Button
 					themeType="secondary"
 					onClick={() => {
-						router.push(`/supply-allocation/view/${item.id}`);
+						router.push(`/supply-allocation/view/${id}`);
 					}}
 				>
 					View

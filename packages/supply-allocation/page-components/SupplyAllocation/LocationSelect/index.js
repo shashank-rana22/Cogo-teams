@@ -14,7 +14,7 @@ const OPTIONS = [
 		value : 'all',
 	},
 	{
-		label : 'BookMarked',
+		label : 'Bookmarked',
 		value : 'is_bookmarked',
 	},
 	{

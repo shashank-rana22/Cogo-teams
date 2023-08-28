@@ -5,6 +5,8 @@ import { useState } from 'react';
 import CustomProgressBar from '../../../../commons/CustomProgressBar';
 import ServiceProviders from '../ServiceProviders';
 
+import styles from './styles.module.css';
+
 function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => {} }) {
 	const {
 		bucket_type,
@@ -81,7 +83,7 @@ function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => 
 
 	return (
 		<>
-			<div style={{ display: 'flex', background: '#fff' }}>
+			<div className={styles.container}>
 				{bucketControls.map(({ component, flexBasis, key }) => (
 					<div
 						key={key}
