@@ -4,6 +4,7 @@ import DotLoader from '../../../commons/DotLoader';
 import useGetRollingForecastData from '../../../hooks/useGetRollingForecastData';
 
 import GraphItem from './GraphItem';
+import styles from './styles.module.css';
 
 const ARRAY_LENGTH = 3;
 
@@ -61,7 +62,7 @@ function PieChartGraphs({
 	}
 
 	return (
-		<div style={{ display: 'flex', gap: '16px', width: '100%' }}>
+		<div className={styles.pie_chart_container}>
 			{Object.entries(mapObject).map(([key, obj]) => (
 				<GraphItem key={key} data={obj} type={key} />
 			))}

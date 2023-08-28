@@ -1,9 +1,16 @@
 .edit_container {
 	position: relative;
+	width: 108px;
+
+	:global {
+		.ui_input_number_container {
+			width: 118px;
+		}
+	}
 }
 
 .cancel_container {
 	position: absolute;
-	top: 4px;
+	top: 28px;
 	right: 24px;
 }

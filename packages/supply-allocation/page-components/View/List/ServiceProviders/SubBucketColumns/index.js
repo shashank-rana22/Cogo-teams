@@ -35,7 +35,7 @@ const getSubBucketColumns = ({
 	const subBucketColumns = [
 		{
 			id       : 'service_provider',
-			Header   : 'SERVICE PROVIDER',
+			Header   : 'Service Provider',
 			accessor : (item) => (
 				<ServiceProvider
 					item={item}
@@ -48,14 +48,14 @@ const getSubBucketColumns = ({
 		},
 		{
 			id       : 'Allocated',
-			Header   : 'ALLOCATED',
+			Header   : 'Allocated',
 			accessor : (item) => (
 				<Promised item={item} control={control} unregister={unregister} bulkEditMode={bulkEditMode} />
 			),
 		},
 		{
 			id       : 'capability',
-			Header   : <div>CAPABILITY</div>,
+			Header   : <div>Capability</div>,
 			accessor : ({ capability = 0 }) => (capability ? (`${capability} TEU`) : ('0 TEU')),
 		},
 		{
@@ -72,7 +72,7 @@ const getSubBucketColumns = ({
 			id     : 'fulfilled',
 			Header : (
 				<>
-					<div>FULLFILLED</div>
+					<div>Fulfilled</div>
 					<div className={styles.last_four_weeks}>
 						Last 4 weeks
 					</div>
@@ -85,7 +85,7 @@ const getSubBucketColumns = ({
 			id     : 'avg_deviation',
 			Header : (
 				<>
-					<div>AVG DEVAITION</div>
+					<div>Avg DEVAITION</div>
 					<div>FROM BEST RATE</div>
 				</>
 			),
