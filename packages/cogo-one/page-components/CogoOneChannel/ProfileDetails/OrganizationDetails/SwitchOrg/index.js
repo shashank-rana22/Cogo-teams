@@ -1,5 +1,4 @@
 import { Popover, Select, Button } from '@cogoport/components';
-import { IcMRoundtrip } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -107,24 +106,16 @@ function SwitchOrg({
 					/>
 				) : null}
 			>
-				<div
-					role="presentation"
-					className={styles.icon_border}
-					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
-					onClick={() => {
-						if (loading) {
-							return;
-						}
-						setShowSwitchOrg((prev) => !prev);
-					}}
+				<Button
+					size="sm"
+					themeType="secondary"
+					onClick={() => setShowSwitchOrg((prev) => !prev)}
+					disabled={loading}
 				>
-					<IcMRoundtrip
-						fill="#4f4f4f"
-						width="16px"
-						height="16px"
-					/>
-				</div>
+					Switch Organization
+				</Button>
 			</Popover>
+
 		</div>
 	);
 }
