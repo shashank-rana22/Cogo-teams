@@ -1,9 +1,11 @@
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function EmptyState({ heading = 'operators' }) {
+	const { t } = useTranslation('operators');
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
@@ -11,14 +13,12 @@ function EmptyState({ heading = 'operators' }) {
 					<IcMSearchlight width={80} height={80} fill="#ee3425" />
 				</div>
 				<div className={styles.heading}>
-					Sorry! no
-					{' '}
-					{heading}
-					{' '}
-					found :(
+					{`${t('operators:card_list_empty_state_content1')} 
+					${heading} 
+					${t('operators:card_list_empty_state_content2')}`}
 				</div>
 				<div className={styles.content}>
-					We are sorry what you were looking for. Please try another way
+					{t('operators:card_list_empty_state_content')}
 				</div>
 			</div>
 		</div>

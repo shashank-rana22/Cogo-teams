@@ -1,6 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useCallback } from 'react';
+import { useTranslation } from 'next-i18next';
+import { useEffect, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import CONSTANTS from '../../constants/constants';
@@ -8,20 +9,9 @@ import CONSTANTS from '../../constants/constants';
 import Header from './CardHeader';
 import CardItem from './CardItem';
 import EmptyState from './EmptyState';
-import { FunctionObjects, FieldType, DataType, GenericObject } from './Interfaces';
 import styles from './styles.module.css';
 
-interface Props {
-	fields: FieldType[];
-	data: DataType;
-	loading?: boolean;
-	page?: number;
-	setPage?: React.FC;
-	finalList?: Array<object>;
-	setFinalList?: React.FC;
-	functions?: FunctionObjects;
-}
-
+const INITIAL_PAGE = 1;
 const TIMEOUT_TIME = 1000;
 const SCROLLING_LIMIT = 10;
 const INFINITE_SCROLL_THRESHOLD = 600;
@@ -35,8 +25,10 @@ function CardList({
 	finalList = [],
 	setFinalList = () => {},
 	functions = {},
-} :Props) {
-	const { list = [], total_count:totalCount } = data;
+}) {
+	const { t } = useTranslation('operators');
+
+	const { list = [], total_count:totalCount } = data || {};
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -48,7 +40,7 @@ function CardList({
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			setFinalList(page === 1 ? [...list] : finalList.concat(list));
+			setFinalList(page === INITIAL_PAGE ? [...list] : finalList.concat(list));
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
@@ -71,9 +63,9 @@ function CardList({
 					threshold={INFINITE_SCROLL_THRESHOLD}
 				>
 					<div>
-						{(finalList || []).map((singleitem:GenericObject) => (
+						{(finalList || []).map((singleitem) => (
 							<CardItem
-								key={singleitem.id}
+								key={singleitem?.id}
 								singleitem={singleitem}
 								fields={fields}
 								functions={functions}
@@ -88,7 +80,7 @@ function CardList({
 					</div>
 				)}
 				{finalList.length === totalCount && !isEmpty(finalList) ? (
-					<div className={styles.end_message}>No more data to show</div>
+					<div className={styles.end_message}>{t('operators:card_list_no_data')}</div>
 				) : null}
 			</div>
 		</section>

@@ -1,23 +1,16 @@
 import { cl } from '@cogoport/components';
-import React, { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 
 import CONSTANTS from '../../../constants/constants';
-import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
-
-export interface Props {
-	fields: FieldType[];
-	singleitem?: NestedObj;
-	functions?: FunctionObjects;
-}
 
 function CardItem({
 	fields = [],
 	singleitem = {},
 	functions = {},
-}:Props) {
+}) {
 	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
@@ -45,20 +38,20 @@ function CardItem({
 				}`}
 			>
 				{(fields || []).map((field) => {
-					const itemStyle = field.styles || {};
+					const itemStyle = field?.styles || {};
 					return (
 						<div
-							className={cl`${styles.col} ${field.className} ${
+							className={cl`${styles.col} ${field?.className} ${
 								isMobile ? styles.is_mobile : ''
 							}`}
 							style={{
-								'--span': (field.span || CONSTANTS.DEFAULT_SPAN),
+								'--span': (field?.span || CONSTANTS.DEFAULT_SPAN),
 								...itemStyle,
-							} as React.CSSProperties}
-							key={field.key}
+							}}
+							key={field?.key}
 						>
 							{isMobile && (
-								<div className={styles.table_label}>{field.label}</div>
+								<div className={styles.table_label}>{field?.label}</div>
 							)}
 
 							<div className={styles.flex}>
@@ -67,7 +60,7 @@ function CardItem({
 									field,
 									functions,
 									'-',
-								) as ReactNode}
+								)}
 							</div>
 
 						</div>
