@@ -1,4 +1,4 @@
-import { Button, Pill, Checkbox } from '@cogoport/components';
+import { Button, Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -9,12 +9,6 @@ import styles from './styles.module.css';
 
 const NUMBER = 100;
 const PROGRESS_PERCENTAGE = 0;
-
-const COLOR_MAPPING = {
-	offered          : '#ddebc0',
-	rejected_by_user : '#ffcbd1',
-	rejected         : '#f1ee8e',
-};
 
 const getColumns = ({
 	onClickNewJoinerColumn,
@@ -88,16 +82,6 @@ const getColumns = ({
 			},
 		},
 		{
-			Header   : 'STATUS',
-			accessor : (item) => (
-				<div>
-					<Pill size="md" color={COLOR_MAPPING[item?.employee_status]}>
-						{startCase(item?.employee_status)}
-					</Pill>
-				</div>
-			),
-		},
-		{
 			Header   : 'DOWNLOAD ZIP FILE',
 			accessor : (item) => (
 				<div>
@@ -137,6 +121,7 @@ const getColumns = ({
 		},
 
 	];
+
 	if (bulkAction) {
 		columns.unshift({
 			id     : 'action',
@@ -158,6 +143,7 @@ const getColumns = ({
 			),
 		});
 	}
+
 	return columns;
 };
 
