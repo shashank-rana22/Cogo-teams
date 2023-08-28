@@ -46,14 +46,14 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 	const cancelApproved = (cancelSupported && invoiceAdditionals?.reqCancelReason)
 		|| (!cancelSupported && (irnGeneratedAt !== null ? Number(irnGeneratedAt) + TIME_VALUE >= Date.now() : false));
 
-	const hasOptions = (cancelApproved) || (statusPresent && sageAllowed);
+	const hasOptions = (cancelApproved) || (statusPresent && sageAllowed) || (invoiceAdditionals?.reqCancelReason);
 
 	const rest = {
 		onClickOutside: () => setShow(false),
 	};
 
 	if (
-		(cancelApproved) || (statusPresent)
+		(cancelApproved) || (statusPresent) || (invoiceAdditionals?.reqCancelReason)
 	) {
 		return (
 			hasOptions
