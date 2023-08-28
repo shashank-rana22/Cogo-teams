@@ -28,6 +28,7 @@ function FilterPopover({ filters, setFilters }) {
 					control={control}
 					handleSubmit={handleSubmit}
 					onSubmit={onSubmit}
+					filters={filters}
 				/>
 			)}
 		>

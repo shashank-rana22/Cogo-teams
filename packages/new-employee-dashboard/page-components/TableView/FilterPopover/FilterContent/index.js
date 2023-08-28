@@ -10,10 +10,11 @@ function FilterContent({
 	handleSubmit,
 	onSubmit,
 	onClickReset,
+	filters,
 }) {
 	return (
 		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
-			{controls.map((item) => {
+			{controls(filters).map((item) => {
 				const { label, type, name } = item || {};
 
 				if (!type) {

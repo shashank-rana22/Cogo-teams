@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
@@ -8,7 +9,10 @@ import TabComponents from '../TabComponents';
 import styles from './styles.module.css';
 
 function Dashboard() {
-	const [informationPage, setInformationPage] = useState('');
+	const { query = {} } = useSelector((state) => state.general);
+	const { activeTile = '' } = query || {};
+
+	const [informationPage, setInformationPage] = useState(activeTile || '');
 
 	const { data, getEmployeeDetails, loading } = useGetEmployeeDetails({
 		company_policy_data_required: true,
