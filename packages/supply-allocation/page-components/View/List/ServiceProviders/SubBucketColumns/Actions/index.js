@@ -31,7 +31,7 @@ function Actions({
 								onClick={() => { setShowMoveSupplierModal((prev) => !prev); setShowPopOver(false); }}
 							>
 								<IcMEdit />
-								<div>Move Supplier</div>
+								<div style={{ marginLeft: '4px' }}>Move Supplier</div>
 							</Button>
 						</div>
 					)}

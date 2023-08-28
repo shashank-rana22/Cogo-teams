@@ -22,7 +22,7 @@ function WaveLoadingAnimation({ dotLength = 6 }) {
     }
 
     body {
-        background: #F6F7F8;
+        background: #f6f7f8;
     }
 
     div#wave {

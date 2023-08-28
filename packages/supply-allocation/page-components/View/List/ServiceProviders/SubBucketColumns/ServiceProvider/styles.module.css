@@ -2,7 +2,6 @@
 	:global {
 		.ui_star_rating {
 			pointer-events: none;
-			cursor: unset;
 		}
 	}
 }

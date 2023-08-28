@@ -80,7 +80,7 @@ function List({
 					sort_by   : 'forecasted_volume',
 					sort_type : KEY_STAGE_MAPPING[nextStage],
 				}
-				: { sort_by_forecasted_volume: undefined, sort_type: undefined }),
+				: { sort_by: undefined, sort_type: undefined }),
 		}));
 	};
 

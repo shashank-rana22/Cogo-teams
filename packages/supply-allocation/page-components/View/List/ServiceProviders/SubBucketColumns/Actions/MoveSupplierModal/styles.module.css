@@ -23,10 +23,7 @@
 	padding: 8px;
 
 	:global {
-		.ui_input_number_container {
-			width: 200px;
-		}
-
+		.ui_input_number_container,
 		.ui_select_container {
 			width: 200px;
 		}
