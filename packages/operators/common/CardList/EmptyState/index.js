@@ -13,12 +13,12 @@ function EmptyState({ heading = 'operators' }) {
 					<IcMSearchlight width={80} height={80} fill="#ee3425" />
 				</div>
 				<div className={styles.heading}>
-					{`${t('operators:card_list_empty_state_content1')} 
+					{`${t('operators:card_list_empty_state_content_sorry')} 
 					${heading} 
-					${t('operators:card_list_empty_state_content2')}`}
+					${t('operators:card_list_empty_state_content_nothing_found')}`}
 				</div>
 				<div className={styles.content}>
-					{t('operators:card_list_empty_state_content')}
+					{t('operators:card_list_empty_state_content_try_another_way')}
 				</div>
 			</div>
 		</div>
