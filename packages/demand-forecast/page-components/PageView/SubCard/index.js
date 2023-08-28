@@ -98,7 +98,7 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 					<div key={key} className={styles.card}>
 						<div className={styles.title}>
 							{
-								key === 'remaining_clusters' ? (
+								key === 'remaining_clusters' && !isEmpty(portPairData?.remaining_port_pairs) ? (
 									<Popover
 										placement="right"
 										content={(
