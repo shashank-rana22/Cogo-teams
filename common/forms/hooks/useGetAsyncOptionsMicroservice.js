@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
+const DEFAULT_SIZE = 0;
 const REQUEST_HOOK_MAPPING = {
 	business_finance : useRequestBf,
 	allocation       : useAllocationRequest,
@@ -32,7 +33,7 @@ function getOptions(data = []) {
 			if (typeof data[key] === 'object') {
 				options = getOptions(data[key]);
 			}
-			return false;
+			return options.length !== DEFAULT_SIZE;
 		});
 	}
 	return options;
