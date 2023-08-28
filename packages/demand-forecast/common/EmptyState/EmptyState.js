@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
@@ -14,7 +15,7 @@ function EmptyState({
 }) {
 	return (
 		<div
-			className={`${styles.container} 
+			className={cl`${styles.container} 
 		${styles[flexDirection]}`}
 			style={{ marginTop, marginBottom }}
 		>
