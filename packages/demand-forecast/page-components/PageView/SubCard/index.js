@@ -93,8 +93,11 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 
 	return (
 		<div className={styles.sub_card}>
-			{	loading ? <ListLoading /> : Object.keys(KEYS_MAPPING).map((key) => (
-				!isEmpty(portPairData[key]) && (
+			{	loading ? <ListLoading /> : Object.keys(KEYS_MAPPING).map((key) => {
+				if (key === 'remaining_clusters' && isEmpty(portPairData?.remaining_port_pairs)) {
+					return null;
+				}
+				return !isEmpty(portPairData[key]) && (
 					<div key={key} className={styles.card}>
 						<div className={styles.title}>
 							{
@@ -135,8 +138,8 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 							</div>
 						)}
 					</div>
-				)
-			))}
+				);
+			})}
 		</div>
 	);
 }
