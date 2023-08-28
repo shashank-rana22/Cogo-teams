@@ -6,6 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useSyncShipmentInvoices from '../../../../../../../hooks/useSyncShipmentInvoices';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -32,6 +33,8 @@ function Status({
 	const isAuthorized = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const { syncShipmentInvoices = () => {} } = useSyncShipmentInvoices({ refetch: refetchAferApiCall });
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
@@ -75,19 +78,39 @@ function Status({
 						</div>
 				) : null}
 
-			{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
-				<Actions
-					invoice={invoice}
-					refetch={refetchAferApiCall}
-					shipment_data={shipment_data}
-					invoiceData={invoiceData}
-					isIRNGenerated={isIRNGenerated}
-					bfInvoice={bfInvoice}
-				/>
-			) : null}
+			{invoice?.processing
+				? (
+					<div className={styles.relaod}>
+						<div className={styles.text}>Invoice is still processing</div>
+						<Button
+							size="sm"
+							onClick={() => syncShipmentInvoices({
+								payload: {
+									invoices: [{
+										proforma_number : invoice?.invoice_number,
+										id              : invoice?.id,
+									}],
+								},
+							})}
+						>
+							Reload
+						</Button>
+					</div>
+				)
+				: !invoice.is_revoked && invoice.status !== 'finance_rejected' && (
+					<Actions
+						invoice={invoice}
+						refetch={refetchAferApiCall}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						isIRNGenerated={isIRNGenerated}
+						bfInvoice={bfInvoice}
+					/>
+				)}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+					&& !invoice?.processing ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
@@ -97,7 +120,7 @@ function Status({
 						</Button>
 				) : null}
 
-			{showRequestCN ? (
+			{showRequestCN && !invoice?.processing ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"

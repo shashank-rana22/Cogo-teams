@@ -1774,6 +1774,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'sync_shipment_invoices',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
