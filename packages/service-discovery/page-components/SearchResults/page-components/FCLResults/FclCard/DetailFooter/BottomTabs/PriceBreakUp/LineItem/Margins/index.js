@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 const ROUND_OFF_VALUE = 2;
 
 function Margins({ margins = [] }) {
-	const { isConditionMatches } = useGetPermission();
+	const { isConditionMatches } = useGetPermission({ navigation: 'service_discovery' });
 
 	const salesMargin = (margins || []).filter(
 		(item) => item?.margin_type === 'demand',
