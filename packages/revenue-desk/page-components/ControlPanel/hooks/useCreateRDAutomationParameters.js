@@ -13,16 +13,15 @@ const useCreateRDAutomationParameters = ({ setData = () => {} }) => {
 	const apiTrigger = async ({ filter = {}, refetched = false }) => {
 		try {
 			const {
-				trade_type, service_type, customer_segment = '',
+				trade_type, service_type,
 				container_size, commodity_type, commodity_item, inco_term,
 			} = filter;
 			const res = await trigger({
 				data: {
 					service_type,
 					trade_type,
-					customer_segment,
 					is_weightage_required : true,
-					shipment_attributes   : {
+					shipment_parameters   : {
 						container_size,
 						container_type : commodity_type,
 						commodity      : commodity_item,
