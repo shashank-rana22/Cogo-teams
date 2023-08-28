@@ -22,9 +22,9 @@ function useGetOrganizationSupplierVerificationDetails({ organization_id, organi
 					need_analysis_report   : res?.data?.need_analysis_details?.[ZERO]?.manager_approval_status,
 					market_feedback_report : res?.data?.market_feedback_details?.verification_status,
 					evaluation_paramenter_report:
-                     res?.data?.organization_evaluation_details?.verification_status,
+                     res?.data?.organization_service_evaluation_details?.verification_status,
 					financial_due_diligence_report:
-                    res?.data?.organization_due_diligence_status?.manager_approval_status,
+                    res?.data?.organization_service_due_diligence_status?.manager_approval_status,
 				},
 			);
 		} catch (err) {

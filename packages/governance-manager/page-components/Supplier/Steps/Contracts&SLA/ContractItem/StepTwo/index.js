@@ -35,12 +35,12 @@ function StepTwo({
 							onChange={(e) => {
 								if (e.target.checked) {
 									setNegotiationIds(
-										[...negotiationIds, item?.organization_contract_configuration_id],
+										[...negotiationIds, item?.config_id],
 									);
 								} else {
 									setNegotiationIds(
 										(prev) => prev.filter(
-											(i) => i !== item?.organization_contract_configuration_id,
+											(i) => i !== item?.config_id,
 										),
 									);
 								}

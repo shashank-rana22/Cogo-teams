@@ -20,7 +20,7 @@ function useSendOrganizationContractForRenegotiation({
 				params: {
 					organization_service_id,
 					contract_id,
-					organization_contract_configuration_ids: negotiationIds,
+					config_ids: negotiationIds,
 				},
 			});
 			Toast.success('Negotiation sent');
