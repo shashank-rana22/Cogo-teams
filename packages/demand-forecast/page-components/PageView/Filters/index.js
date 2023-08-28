@@ -1,6 +1,7 @@
 import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import getControls from '../../../configurations/filter-controls';
@@ -9,9 +10,10 @@ import { getFieldController } from '../../../utils/getFieldController';
 import styles from './styles.module.css';
 
 function Content({ setFilters = () => {}, setVisible, visible }) {
+	const { t } = useTranslation(['demandForecast']);
 	const formProps = useForm();
 	const { control, handleSubmit } = formProps;
-	const controls = getControls();
+	const controls = getControls({ t });
 
 	const applyFilters = (value) => {
 		// eslint-disable-next-line custom-eslint/variables-name-check
@@ -58,6 +60,7 @@ function Content({ setFilters = () => {}, setVisible, visible }) {
 }
 
 function Filters({ filters = {}, setFilters = () => {} }) {
+	const { t } = useTranslation(['demandForecast']);
 	const [visible, setVisible] = useState(false);
 
 	const onClickFilterButton = () => {
@@ -80,7 +83,7 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 				onClick={onClickFilterButton}
 			>
 				<IcMFilter />
-				<div className={styles.filter_title}>Filters</div>
+				<div className={styles.filter_title}>{t('demandForecast:filters')}</div>
 			</div>
 		</Popover>
 	);

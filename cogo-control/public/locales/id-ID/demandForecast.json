@@ -1,0 +1,18 @@
+{
+    "heading": "Perkiraan Permintaan",
+    "origin": "ASAL",
+    "destination": "TUJUAN",
+    "high_demand_port_pairs": "PASANGAN PORT PERMINTAAN TINGGI",
+    "rated_added": "HARGA DITAMBAHKAN",
+    "forecasted_demand": "PERMINTAAN PERMINTAAN",
+    "filters": "FILTER",
+    "origin_port": "PELABUHAN ASAL",
+    "destination_port": "PELABUHAN TUJUAN",
+    "remaining_clusters": "Cluster yang Tersisa",
+    "high_demand_port_pairs_small": "Pasangan Port dengan Permintaan Tinggi",
+    "supplier": "PEMASOK",
+    "win_probability": "MENANGKAN PROBABILITAS",
+    "capability": "KEMAMPUAN",
+    "forecasted_demands": "Perkiraan Permintaan",
+    "forecasted_dates": "Tanggal Perkiraans"
+}

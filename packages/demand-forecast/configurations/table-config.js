@@ -1,28 +1,28 @@
-const getTableConfig = () => {
+const getTableConfig = ({ t }) => {
 	const config = [
 		{
 			key   : 'origin',
-			title : 'ORGIN',
+			title : t('demandForecast:origin'),
 			width : '24%',
 		},
 		{
 			key   : 'destination',
-			title : 'DESTINATION',
+			title : t('demandForecast:destination'),
 			width : '24%',
 		},
 		{
 			key   : 'high_demand_port_pairs',
-			title : 'HIGH DEMAND PORT PAIRS',
+			title : t('demandForecast:high_demand_port_pairs'),
 			width : '8%',
 		},
 		{
 			key   : 'rated_acquired',
-			title : 'RATES ADDED',
+			title : t('demandForecast:rated_added'),
 			width : '10%',
 		},
 		{
 			key   : 'forecasted_demand',
-			title : 'FORECASTED DEMAND',
+			title : t('demandForecast:forecasted_demand'),
 			width : '15%',
 		},
 		{

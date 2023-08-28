@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import HeaderLoading from '../../../common/EmptyState/HeaderLoading';
 
@@ -67,6 +68,7 @@ function Header({
 	loading = true,
 }) {
 	const router = useRouter();
+	const { t } = useTranslation(['demandForecast']);
 	const startDate = formatDate({
 		date       : week_info?.start_date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -102,7 +104,7 @@ function Header({
 					</div>
 
 					<div className={styles.forecasted_demand}>
-						<div className={styles.header_title}>Forecasted Demands</div>
+						<div className={styles.header_title}>{t('demandForecast:forecasted_demands')}</div>
 						<div className={styles.value}>
 							{total_estimated_demand}
 							{' '}
@@ -111,7 +113,7 @@ function Header({
 					</div>
 
 					<div className={styles.forecasted_dates}>
-						<div className={styles.header_title}>Forecasted Dates</div>
+						<div className={styles.header_title}>{t('demandForecast:forecasted_dates')}</div>
 						<div className={styles.value}>
 							{startDate}
 							{' '}

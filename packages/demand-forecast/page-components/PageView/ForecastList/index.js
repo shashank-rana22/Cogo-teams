@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EmptyState from '../../../common/EmptyState/EmptyState';
@@ -15,7 +16,8 @@ const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
 
 function ForecastList({ filters = {} }) {
-	const tableConfig = getTableConfig();
+	const { t } = useTranslation(['saasSubscription']);
+	const tableConfig = getTableConfig({ t });
 
 	const {
 		loading, list: dataList, page, setPage, pageData,

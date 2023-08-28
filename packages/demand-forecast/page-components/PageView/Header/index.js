@@ -1,10 +1,13 @@
+import { useTranslation } from 'next-i18next';
+
 import styles from './styles.module.css';
 
 function Header() {
+	const { t } = useTranslation(['demandForecast']);
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				Demand Forecast
+				{t('demandForecast:heading')}
 			</div>
 		</div>
 	);

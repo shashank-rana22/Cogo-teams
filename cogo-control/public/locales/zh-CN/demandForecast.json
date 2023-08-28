@@ -1,0 +1,18 @@
+{
+    "heading": "需求预测",
+    "origin": "起源",
+    "destination": "目的地",
+    "high_demand_port_pairs": "高需求端口对",
+    "rated_added": "附加费率",
+    "forecasted_demand": "预测需求",
+    "filters": "过滤器",
+    "origin_port": "始发港",
+    "destination_port": "目的端口",
+    "remaining_clusters": "剩余集群",
+    "high_demand_port_pairs_small": "高需求端口对",
+    "supplier": "供应商",
+    "win_probability": "获胜概率",
+    "capability": "能力",
+    "forecasted_demands": "预测需求",
+    "forecasted_dates": "预计日期"
+}

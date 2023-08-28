@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import ListLoading from '../../../common/EmptyState/ListLoading';
 import getSupplierTableConfig from '../../../configurations/supplier-table-config';
@@ -12,11 +13,13 @@ const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
 
 function SupplierList({ origin_location_id = '', destination_location_id = '' }) {
+	const { t } = useTranslation(['demandForecast']);
+
 	const {
 		list:dataList = [], pageData, page, setPage, loading,
 	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id });
 
-	const tableConfig = getSupplierTableConfig();
+	const tableConfig = getSupplierTableConfig({ t });
 
 	return (
 		<div className={styles.list}>

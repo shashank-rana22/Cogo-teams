@@ -1,8 +1,8 @@
-const getControls = () => {
+const getControls = ({ t }) => {
 	const filterControls = [
 		{
 			name        : 'origin_cluster_id',
-			label       : 'Origin Port',
+			label       : t('demandForecast:origin_port'),
 			type        : 'asyncSelect',
 			asyncKey    : 'list_pricing_zones',
 			placeholder : 'Origin Port',
@@ -11,7 +11,7 @@ const getControls = () => {
 		},
 		{
 			name        : 'destination_cluster_id',
-			label       : 'Destination Port',
+			label       : t('demandForecast:destination_port'),
 			type        : 'asyncSelect',
 			asyncKey    : 'list_pricing_zones',
 			placeholder : 'Destination Port',

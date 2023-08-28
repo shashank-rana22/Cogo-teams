@@ -1,23 +1,23 @@
-const getSupplierTableConfig = () => {
+const getSupplierTableConfig = ({ t }) => {
 	const config = [
 		{
 			key   : 'supplier',
-			title : 'SUPPLIER',
+			title : t('demandForecast:supplier'),
 			width : '40%',
 		},
 		{
 			key   : 'win_probability',
-			title : 'WIN PROBABILITY',
+			title : t('demandForecast:win_probability'),
 			width : '15%',
 		},
 		{
 			key   : 'capability',
-			title : 'CAPABILITY',
+			title : t('demandForecast:capability'),
 			width : '15%',
 		},
 		{
 			key   : 'rated_acquired',
-			title : 'RATES ADDED',
+			title : t('demandForecast:rated_added'),
 			width : '15%',
 		},
 		{

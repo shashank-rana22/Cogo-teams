@@ -1,6 +1,7 @@
 import { cl, Popover } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import EmptyState from '../../../common/EmptyState/EmptyState';
@@ -10,10 +11,10 @@ import useGetRollingForecastPortPairs from '../../../hooks/useGetRollingForecast
 import styles from './styles.module.css';
 import SubCardInfo from './SubCardInfo';
 
-const KEYS_MAPPING = {
-	high_demanding_port_pairs : 'High Demand Port Pairs',
-	remaining_clusters        : 'Remining Clusters',
-};
+const getKeysMapping = ({ t }) => ({
+	high_demanding_port_pairs : t('demandForecast:high_demand_port_pairs_small'),
+	remaining_clusters        : t('demandForecast:remaining_clusters'),
+});
 
 function PopOverContent({ remaining_port_pairs = [] }) {
 	return (
@@ -60,6 +61,10 @@ function PopOverContent({ remaining_port_pairs = [] }) {
 
 function SubCard({ showDetails = false, origin_cluster_id = '', destination_cluster_id = '' }) {
 	const { getRollingForecastPortPairs, data:portPairData, loading } = useGetRollingForecastPortPairs();
+
+	const { t } = useTranslation(['saasSubscription']);
+
+	const KEYS_MAPPING = getKeysMapping({ t });
 
 	useEffect(() => {
 		getRollingForecastPortPairs({ origin_cluster_id, destination_cluster_id });
