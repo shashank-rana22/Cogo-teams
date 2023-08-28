@@ -9,6 +9,7 @@ import AdvancePayment from './AdvancePayment/index.tsx';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
 import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
+import Outstanding from './Outstanding';
 import Payruns from './Payruns';
 import styles from './styles.module.css';
 import Treasury from './Treasury';
@@ -105,7 +106,7 @@ function AccountPayables() {
 						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
-						<h1>Outstandings</h1>
+						<Outstanding entityCode={activeEntity} />
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
 						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />
