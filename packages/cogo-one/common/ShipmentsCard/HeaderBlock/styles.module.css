@@ -10,7 +10,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 30%;
+	width: 40%;
 }
 
 .shipper_details {
@@ -39,24 +39,25 @@
 .overflow_container {
 	width: 18px;
 	height: 18px;
-	margin-left: 4px;
+	color: #8f8e8e;
 	cursor: pointer;
 }
 
 .message_icon_styles {
-	margin-left: 6px;
-	cursor: pointer;
+	margin-right: 10px;
 }
 
 .copy_icon {
-	width: 23px;
-	height: 23px;
-	cursor: pointer;
-	fill: #9f9f9f;
+	margin-right: 8px;
 }
 
-.user_activity_copy_icon {
-	width: 21px;
-	height: 21px;
-	margin-bottom: 4px;
+.poc_details {
+	margin-right: 10px;
+}
+
+.common_style {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	fill: #9f9f9f;
 }

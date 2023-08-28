@@ -38,13 +38,16 @@ const setCallStateData = ({
 	setCallState = () => {},
 	selfOrganizationId = {},
 	source = '',
+	lead_user_id = '',
+	lead_organization_id = '',
 }) => {
 	const receiverUserDetails = {
 		mobile_number,
 		user_id         : userId,
-		lead_user_id    : '',
 		userName,
 		organization_id : orgId,
+		lead_user_id,
+		lead_organization_id,
 	};
 
 	setCallState((p) => ({
@@ -52,6 +55,7 @@ const setCallStateData = ({
 		selfOrganizationId,
 		source,
 		receiverUserDetails,
+		lead_organization_id,
 		showCallModalType : 'fullCallModal',
 		isSelfIntiated    : true,
 	}));
@@ -80,6 +84,8 @@ function useOutgoingCall({
 		userName = '',
 		source = '',
 		orgData = {},
+		lead_user_id = '',
+		lead_organization_id = '',
 	} = voiceCallData || {};
 
 	const { selfOrganizationId = '' } = orgData || {};
@@ -94,6 +100,8 @@ function useOutgoingCall({
 				setCallState,
 				selfOrganizationId,
 				source,
+				lead_user_id,
+				lead_organization_id,
 			});
 
 			await trigger({
@@ -111,8 +119,11 @@ function useOutgoingCall({
 			Toast.error(error?.response?.data?.message?.[GLOBAL_CONSTANTS.zeroth_index] || 'Something Went Wrong');
 			unmountVoiceCall();
 		}
-	}, [isUnkownUser, loggedInAgentId, mobile_country_code, selfOrganizationId,
-		mobile_number, orgId, setCallState, trigger, unmountVoiceCall, userId, userName, source]);
+	}, [
+		isUnkownUser, lead_organization_id, lead_user_id,
+		loggedInAgentId, mobile_country_code, mobile_number, orgId,
+		setCallState, trigger, unmountVoiceCall, userId, userName, selfOrganizationId, source,
+	]);
 
 	return {
 		makeCallApi,

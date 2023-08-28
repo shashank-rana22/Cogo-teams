@@ -6,21 +6,65 @@ import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
 
+const COMMON_PAYLOAD = {
+	supply_stats_required     : false,
+	sales_stats_required      : false,
+	show_agent_activity_graph : false,
+	filters                   : {},
+};
+
+const VIEW_TYPE_PAYLOADS = {
+	default: {
+		sales_stats_required: true,
+	},
+	supply: {
+		supply_stats_required: true,
+	},
+	supply_admin: {
+		supply_stats_required: true,
+	},
+	sales: {
+		sales_stats_required: true,
+	},
+	support: {
+		sales_stats_required: true,
+	},
+	cp_support: {
+		sales_stats_required: true,
+	},
+	support_admin             : {},
+	cogoone_admin             : {},
+	shipment_specialist       : {},
+	shipment_specialist_admin : {},
+};
+
+const getAdditionalPayloadForViewType = (viewType) => ({
+	...COMMON_PAYLOAD,
+	...VIEW_TYPE_PAYLOADS[viewType] || {},
+});
+
 const getDateString = ({ date }) => formatDate({
 	date,
 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	formatType : 'date',
 }) || '';
 
-const getParams = ({ value }) => ({
-	duration_type : value,
-	start_date    : getDateString({ date: DATE_FILTER_MAPPING[value]?.(new Date()) }),
-	end_date      : getDateString({ date: new Date() }),
-});
+const getParams = ({ timePeriodValue, viewType }) => {
+	const baseParams = {
+		duration_type : timePeriodValue,
+		start_date    : getDateString({ date: DATE_FILTER_MAPPING[timePeriodValue]?.(new Date()) }),
+		end_date      : getDateString({ date: new Date() }),
+	};
 
-function useGetCogoOneAgentStats({
-	value = '',
-}) {
+	const additionalPayload = getAdditionalPayloadForViewType(viewType);
+
+	return {
+		...baseParams,
+		...additionalPayload,
+	};
+};
+
+function useGetCogoOneAgentStats({ isPunchPresent = false, timePeriodValue = '', viewType = '' }) {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile?.user?.id,
 	}));
@@ -33,21 +77,23 @@ function useGetCogoOneAgentStats({
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ value, userId }),
+				params: getParams({ timePeriodValue, userId, viewType }),
 			});
 		} catch (error) {
 			console.error(error, 'err');
 		}
-	}, [value, trigger, userId]);
+	}, [trigger, timePeriodValue, userId, viewType]);
 
 	useEffect(() => {
-		getCogoOneDashboard();
-	}, [getCogoOneDashboard]);
+		if (isPunchPresent) {
+			getCogoOneDashboard();
+		}
+	}, [getCogoOneDashboard, isPunchPresent]);
 
 	return {
-		loading,
+		agentStatsLoading : loading,
 		getCogoOneDashboard,
-		data,
+		agentStatsData    : data,
 	};
 }
 export default useGetCogoOneAgentStats;

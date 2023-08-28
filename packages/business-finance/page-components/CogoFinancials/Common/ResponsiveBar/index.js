@@ -39,10 +39,16 @@ function MyResponsiveBar({
 		ariaHidden     : true,
 		renderTick     : () => null,
 	},
+	isBarClickable = false,
 }) {
 	return (
-		<div style={{ width, height }} className={styles.container}>
+		<div
+			style={{ width, height }}
+			className={`${!isBarClickable ? styles.container
+				: styles.container_for_clickable_bar}`}
+		>
 			<ResponsiveBar
+				borderColor="#000"
 				enableLabel={enableLabel}
 				data={data}
 				keys={keys}
