@@ -8,12 +8,10 @@ import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function Content({ filters = {}, setFilters = () => {}, setVisible, visible }) {
+function Content({ setFilters = () => {}, setVisible, visible }) {
 	const formProps = useForm();
 	const { control, handleSubmit } = formProps;
 	const controls = getControls();
-
-	console.log('filters:', filters);
 
 	const applyFilters = (value) => {
 		// eslint-disable-next-line custom-eslint/variables-name-check

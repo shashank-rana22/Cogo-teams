@@ -9,10 +9,6 @@ const TABS_MAPPING = [
 ];
 
 function Tab({ activeTab, setActiveTab }) {
-	// useEffect(() => {
-
-	// }, [activeTab]);
-
 	return (
 		<div>
 			<Tabs
