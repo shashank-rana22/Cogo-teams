@@ -391,8 +391,8 @@ const completedColumn = ({
 										entityCode,
 										invoiceStatus: row?.invoiceStatus,
 									})).substring(
-										0,
-										9,
+										MIN_NAME_STRING,
+										NINE,
 									)}...`}
 
 								</text>
