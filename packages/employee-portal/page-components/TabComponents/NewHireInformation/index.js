@@ -1,5 +1,6 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -16,7 +17,7 @@ const KEY_COMPONENT_MAPPING = {
 	address_details          : AddressDetails,
 };
 
-function RenderPills({ name, isCompleted, isDocsApproved }) {
+function RenderPills({ name = '', isCompleted = false, isDocsApproved = false }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
@@ -28,7 +29,9 @@ function RenderPills({ name, isCompleted, isDocsApproved }) {
 	return <Pill color="yellow">Pending</Pill>;
 }
 
-function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
+function NewHireInformation({ setInformationPage = () => {}, id = '', data = {}, getEmployeeDetails = () => {} }) {
+	const { back } = useRouter();
+
 	const { progress_stats = {}, documents } = data || {};
 	const { personal_details = {} } = progress_stats;
 	const {
@@ -63,7 +66,10 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>NEW HIRE INFORMATION</div>
 			</div>

@@ -1,5 +1,6 @@
 import { Checkbox, Toast } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import PreviewDocumet from '../../../commons/PreviewDocument';
 
@@ -17,7 +18,9 @@ const handleChange = (checked = false) => {
 	}
 };
 
-function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
+function CompanyPolicies({ setInformationPage = () => {}, getEmployeeDetails = () => {}, data = {} }) {
+	const { back } = useRouter();
+
 	const { company_policy_data : list, detail } = data || {};
 	const { policies_data, id: employeeId } = detail || {};
 
@@ -33,7 +36,10 @@ function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>COMPANY POLICIES</div>
 			</div>
