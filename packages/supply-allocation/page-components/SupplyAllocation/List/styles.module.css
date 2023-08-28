@@ -22,11 +22,11 @@
 
 .relative_container {
 	position: absolute;
-	top: -21px;
-	left: -24px;
+	top: -16px;
+	left: -25px;
 	display: flex;
 	align-items: center;
-	height: 20px;
+	height: 13px;
 	padding: 0  2px;
 	font-size: 10px;
 	color: #bf291e;
