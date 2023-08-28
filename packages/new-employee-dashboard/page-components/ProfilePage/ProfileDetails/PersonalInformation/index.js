@@ -52,7 +52,7 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		cogoport_email,
 		date_of_birth             : formatdate({ date: date_of_birth }),
 		date_of_joining           : formatdate({ date: date_of_joining }),
-		role                      : startCase(role),
+		role,
 		employee_code,
 		office_location           : startCase(office_location),
 		hiring_manager            : startCase(hiring_manager?.name),
