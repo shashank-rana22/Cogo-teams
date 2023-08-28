@@ -21,9 +21,19 @@ function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => 
 	const bucketControls = [
 		{
 			component: show ? (
-				<IcMArrowRotateDown onClick={() => setShow((prev) => !prev)} />
+				<IcMArrowRotateDown
+					height={20}
+					width={20}
+					onClick={() => setShow((prev) => !prev)}
+					style={{ cursor: 'pointer' }}
+				/>
 			) : (
-				<IcMArrowRotateRight onClick={() => setShow((prev) => !prev)} />
+				<IcMArrowRotateRight
+					height={20}
+					width={20}
+					onClick={() => setShow((prev) => !prev)}
+					style={{ cursor: 'pointer' }}
+				/>
 			),
 			flexBasis : '5%',
 			key       : 'actions',

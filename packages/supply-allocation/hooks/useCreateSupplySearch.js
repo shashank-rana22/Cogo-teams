@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 const useCreateSupplySearch = ({
@@ -5,6 +6,8 @@ const useCreateSupplySearch = ({
 	reset,
 	setLocationDetails,
 }) => {
+	const router = useRouter();
+
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/create_rolling_fcl_freight_search',
@@ -15,14 +18,19 @@ const useCreateSupplySearch = ({
 
 	const createSupplySearch = async ({ payload }) => {
 		try {
-			await trigger({ data: payload });
+			const res = await trigger({ data: payload });
 			refetchListFclSearches();
+
+			const searchId = res?.data?.id;
+			router.push(`/supply-allocation/view/${searchId}`);
+
 			setLocationDetails({});
 			reset();
 		} catch (err) {
 			console.error(err);
 		}
 	};
+
 	return {
 		data,
 		createSupplySearch,

@@ -1,7 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect } from 'react';
 
 import DotLoader from '../../../commons/DotLoader';
 import useListFclSearchesView from '../../../hooks/useListFclSearchesView';
@@ -11,7 +10,7 @@ import styles from './styles.module.css';
 function Header({ searchId = '' }) {
 	const router = useRouter();
 
-	const { data, findFclSearch, loading } = useListFclSearchesView({});
+	const { data, loading } = useListFclSearchesView({ id: searchId });
 
 	const { list = [] } = data || {};
 
@@ -30,10 +29,6 @@ function Header({ searchId = '' }) {
 	const onClickBack = () => {
 		router.push('/supply-allocation');
 	};
-
-	useEffect(() => {
-		findFclSearch(searchId);
-	}, [findFclSearch, searchId]);
 
 	if (loading) {
 		return (

@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import DotLoader from '../../../commons/DotLoader';
@@ -43,26 +44,32 @@ function List({ search_id = '' }) {
 		];
 	}, []), [bucketData]);
 
+	if (loading) {
+		<div className={styles.loading_container}>
+			<DotLoader />
+		</div>;
+	}
+
+	if (isEmpty(generateBucketTableData)) {
+		return (
+			<div className={styles.empty_state}>
+				No Suppliers are allocated for this pair.
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<BucketsListHeader bucketControls={bucketControls} />
 
-			{loading ? (
-				<div className={styles.loading_container}>
-					<DotLoader />
-
-				</div>
-			) : (
-				generateBucketTableData?.map((item) => (
-					<BucketsListBody
-						key={item.bucket_type}
-						item={item}
-						searchId={search_id}
-						refetchBucketsData={refetchBucketsData}
-
-					/>
-				))
-			)}
+			{generateBucketTableData?.map((item) => (
+				<BucketsListBody
+					key={item.bucket_type}
+					item={item}
+					searchId={search_id}
+					refetchBucketsData={refetchBucketsData}
+				/>
+			))}
 
 		</>
 	);
