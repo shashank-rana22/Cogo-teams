@@ -12,7 +12,6 @@ const useGetAttendanceTimesheet = (date) => {
 				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 				formatType : 'date',
 			}),
-			performed_by_id: '50d1bb4e-b780-4ec7-ba51-2d1cfaf75f7d',
 		},
 	}, { manual: false });
 

@@ -12,7 +12,6 @@ const useGetAttendanceStats = (cycle_id) => {
 			trigger({
 				params: {
 					cycle_id,
-					performed_by_id: '50d1bb4e-b780-4ec7-ba51-2d1cfaf75f7d',
 				},
 			});
 		},
