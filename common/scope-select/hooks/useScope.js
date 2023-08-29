@@ -9,11 +9,11 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 	const { profile } = useSelector((store) => store);
 	const dispatch = useDispatch();
 
-	const { authParams, selected_agent_id: selectedAgentId, savedAuthDetails, ...restProfile } = profile || {};
+	const { selected_agent_id: selectedAgentId, savedAuthDetails, ...restProfile } = profile || {};
 
 	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider, savedAuthDetails });
 
-	const [, scope, viewType = ''] = (authParams || '').split(':');
+	const { defaultScope:scope = '', defaultView:viewType = '' } = scopeData;
 
 	const initialValues = useRef({ pathname, scope });
 
@@ -57,6 +57,14 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 			});
 		}
 	}, [scopeData, handleApply, pathname]);
+
+	useEffect(() => {
+		handleApply({
+			scope,
+			viewType,
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	// useEffect(() => Router.events.on('routeChangeStart', resetProfile), [resetProfile]);
 
