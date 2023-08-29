@@ -42,7 +42,7 @@ function ApArSettlement() {
 
 	const [selectedData, setSelectedData] = useState([]);
 	const [reRender, setReRender] = useState(false);
-
+	const [isDelete, setIsDelete] = useState(false);
 	const [pageCheckedRows, setPageCheckedRows] = useState({});
 	const [matchModalShow, setMatchModalShow] = useState(false);
 	const {
@@ -160,6 +160,8 @@ function ApArSettlement() {
 					filters={filters}
 					reRender={reRender}
 					setReRender={setReRender}
+					isDelete={isDelete}
+					setIsDelete={setIsDelete}
 				/>
 			) : null}
 		</div>

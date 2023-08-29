@@ -17,6 +17,8 @@ export default function MatchModal({
 	selectedData,
 	filters,
 	setSelectedData,
+	isDelete,
+	setIsDelete,
 	reRender,
 	setReRender,
 
@@ -32,10 +34,13 @@ export default function MatchModal({
 	const [date, setDate] = useState('');
 	const [dryRun, setDryRun] = useState(false);
 	const [showJV, setShowJV] = useState(false);
+	// const [showStack, setShowStack] = useState(false);
+	const updatedData = selectedData?.map((item) => ({ ...item })) || [];
 	const {
 		checkData,
 		postPaymentsSettlementCheck,
-	} = usePaymentsSettlementCheck({ selectedData, date });
+	} = usePaymentsSettlementCheck({ selectedData: updatedData, date });
+	// const [stackData, setStackData] = useState(checkData?.stackDetails || []);
 	const [showDocument, setShowDocument] = useState(false);
 	const [fileValue, setFileValue] = useState('');
 	const onClick = () => {
@@ -188,8 +193,14 @@ export default function MatchModal({
 						selectedData={selectedData}
 						setSelectedData={setSelectedData}
 						stackData={checkData?.stackDetails}
+						// stackData={stackData}
+						// setStackData={setStackData}
+						dryRun={dryRun}
 						reRender={reRender}
+						isDelete={isDelete}
+						setIsDelete={setIsDelete}
 						setReRender={setReRender}
+						updatedData={updatedData}
 					/>
 				</Modal.Body>
 				<Modal.Footer>
