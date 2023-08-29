@@ -30,11 +30,11 @@ interface ItemProps {
 interface PopoverProps {
 	data?: object;
 	loading?: boolean;
-	handleClick?: (p: string) => void;
+	handleClick?: Function;
 	item?: ItemProps;
 }
 
-function PopoverTags({ data, loading, handleClick, item }: PopoverProps) {
+function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item = {} }: PopoverProps) {
 	const { kam = {}, creditController = {}, salesAgent = {} } = item || {};
 
 	const { id = '', name = '', email = '' } = kam;
