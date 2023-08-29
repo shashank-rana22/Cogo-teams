@@ -12,6 +12,7 @@ import TeamAttendance from '../TeamAttendance';
 // import RequestModal from './RequestModal';
 import styles from './styles.module.css';
 import useGetCheckinStats from '../../hooks/useGetCheckinStats';
+import LeaveRequest from './LeaveRequest';
 
 const MANAGER = true;
 
@@ -98,7 +99,7 @@ function AttendanceLeaveDashboard() {
 					</TabPanel>
 				</Tabs>
 			</div>
-			{/* <div><LeaveRequest /></div> */}
+			<div><LeaveRequest /></div>
 		</div>
 	);
 }
