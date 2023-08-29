@@ -2,6 +2,7 @@ import { Collapse, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetEngagementScoringConfiguration from '../../../hooks/useGetEngagementScoringConfiguration';
@@ -11,7 +12,11 @@ import Header from './Header';
 import styles from './styles.module.css';
 import TitleComponent from './TitleComponent';
 
+const LOADING_ROWS = 3;
+
 function WarmthScoring(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { setToggleComponent = () => {} } = props;
 
 	const formProps = useForm();
@@ -67,7 +72,7 @@ function WarmthScoring(props) {
 						height={220}
 						width={380}
 						flexDirection="column"
-						emptyText="No data found"
+						emptyText={t('allocation:no_data_found')}
 						textSize={20}
 					/>
 				</div>
@@ -75,8 +80,8 @@ function WarmthScoring(props) {
 
 			{loading && !activeCollapse ? (
 				<div className={styles.collapse_container}>
-					{Array(3).fill('').map(() => (
-						<div className={styles.dummy_collapse}>
+					{[...Array(LOADING_ROWS).keys()].map((item) => (
+						<div key={item} className={styles.dummy_collapse}>
 							<Placeholder width="100px" height="32px" />
 							<IcMArrowRotateDown />
 						</div>

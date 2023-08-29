@@ -1,5 +1,6 @@
 import InvoiceTable from '../../../commons/InvoiceTable';
 
+import Communication from './Communication';
 import OrganizationUsers from './OrganizationUsers';
 import PaymentsTable from './PaymentTable';
 import SettlementTable from './SettlementTable';
@@ -24,6 +25,11 @@ const TabsOptions = [
 		key       : 'organization_users',
 		name      : 'Users',
 		component : OrganizationUsers,
+	},
+	{
+		key       : 'communication',
+		name      : 'Communication',
+		component : Communication,
 	},
 ];
 

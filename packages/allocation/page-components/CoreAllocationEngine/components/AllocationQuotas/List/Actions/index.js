@@ -1,8 +1,11 @@
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function ActionContent({ onClickCta }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div className={styles.action_container}>
 			<div
@@ -14,7 +17,7 @@ function ActionContent({ onClickCta }) {
 			>
 				<div className={styles.cta_text}>
 					<IcMEdit width={16} height={16} style={{ marginRight: '10px' }} />
-					Edit Quota
+					{t('allocation:edit_quota_button')}
 				</div>
 			</div>
 
@@ -27,7 +30,7 @@ function ActionContent({ onClickCta }) {
 			>
 				<div className={styles.cta_text}>
 					<IcMDelete width={16} height={16} style={{ marginRight: '10px' }} />
-					Delete
+					{t('allocation:delete_button')}
 				</div>
 			</div>
 		</div>

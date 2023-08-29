@@ -1,15 +1,18 @@
 import { Table, Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../common/EmptyState';
 import Form from '../../../../../common/Form';
-import controls from '../../../configurations/get-reject-request-controls';
-import STATUS_MAPPING from '../../../constants/requests-status-mapping';
+import getControls from '../../../configurations/get-reject-request-controls';
+import getStatusMapping from '../../../constants/requests-status-mapping';
 import useUpdateRequestStatus from '../../../hooks/useUpdateAllocationRequest';
 
 import styles from './styles.module.css';
 
 function List(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data,
 		columns,
@@ -22,11 +25,15 @@ function List(props) {
 
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
+	const statusMapping = getStatusMapping({ t });
+
+	const controls = getControls({ t });
+
 	const {
 		onStatusUpdate,
 		loadingUpdate,
 		formProps,
-	} = useUpdateRequestStatus({ fetchList, setRequestStatusItem, requestStatusItem });
+	} = useUpdateRequestStatus({ fetchList, setRequestStatusItem, requestStatusItem, t });
 
 	const { handleSubmit } = formProps;
 
@@ -36,7 +43,7 @@ function List(props) {
 				<EmptyState
 					height={280}
 					width={440}
-					emptyText="No records found"
+					emptyText={t('allocation:empty_text')}
 					textSize="24px"
 					flexDirection="column"
 				/>
@@ -82,23 +89,23 @@ function List(props) {
 
 					<div>
 						<Modal.Header
-							title="Update Status"
+							title={t('allocation:update_status_header')}
 						/>
 
 						<Modal.Body>
 							{requestStatusItem.status === 'rejected' ? (
 
 								<div className={styles.rejection_container}>
-									Please provide rejection details
+									{t('allocation:rejection_details')}
 									<Form formProps={formProps} controls={controls} />
 								</div>
 							) : (
 								<div>
-									Are you sure you want to
+									{t('allocation:are_you_sure_you_want_to')}
 									{' '}
-									{STATUS_MAPPING[requestStatusItem.status].label || 'update'}
+									{statusMapping[requestStatusItem.status].label || t('allocation:update_label')}
 									{' '}
-									this request ?
+									{t('allocation:this_request')}
 								</div>
 							)}
 
@@ -111,7 +118,7 @@ function List(props) {
 								onClick={handleSubmit(onStatusUpdate)}
 								loading={loadingUpdate}
 							>
-								Yes, I do
+								{t('allocation:yes_button_label')}
 							</Button>
 						</Modal.Footer>
 					</div>
