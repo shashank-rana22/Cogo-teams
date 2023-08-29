@@ -1,11 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getAgentsFilterControls = () => {
+const getAgentsFilterControls = ({ t = () => {} }) => {
 	const controls = [
 		{
 			name        : 'objective_id',
-			label       : 'Objective',
-			placeholder : 'Select Objective',
+			label       : t('allocation:objective_label'),
+			placeholder : t('allocation:select_objective'),
 			size        : 'sm',
 			type        : 'asyncSelect',
 			asyncKey    : 'allocation_objectives',
@@ -22,14 +22,14 @@ const getAgentsFilterControls = () => {
 		{
 			name    : 'objective_type',
 			type    : 'chips',
-			label   : 'Type',
+			label   : t('allocation:type_short_label'),
 			options : [
 				{
-					label : 'Company',
+					label : t('allocation:company_options'),
 					value : 'company',
 				},
 				{
-					label : 'Team',
+					label : t('allocation:team_options'),
 					value : 'team',
 				},
 			],
@@ -37,27 +37,27 @@ const getAgentsFilterControls = () => {
 		{
 			name     : 'channels',
 			type     : 'chips',
-			label    : 'Channel',
+			label    : t('allocation:channels_short_label'),
 			multiple : true,
 			options  : [
 				{
-					label : 'SME',
+					label : t('allocation:sme_options'),
 					value : 'sme',
 				},
 				{
-					label : 'Enterprise',
+					label : t('allocation:enterprise'),
 					value : 'enterprise',
 				},
 				{
-					label : 'CP',
+					label : t('allocation:cp_options'),
 					value : 'cp',
 				},
 			],
 		},
 		{
 			name        : 'role_ids',
-			label       : 'Agent Roles',
-			placeholder : 'Agent Roles',
+			label       : t('allocation:agent_roles_placeholder'),
+			placeholder : t('allocation:agent_roles_placeholder'),
 			type        : 'asyncSelect',
 			size        : 'sm',
 			multiple    : true,
@@ -74,8 +74,8 @@ const getAgentsFilterControls = () => {
 		},
 		{
 			name        : 'user_id',
-			label       : 'Agents',
-			placeholder : 'Agents',
+			label       : t('allocation:agents_text'),
+			placeholder : t('allocation:agents_text'),
 			type        : 'asyncSelect',
 			size        : 'sm',
 			asyncKey    : 'partner_users',
@@ -95,7 +95,7 @@ const getAgentsFilterControls = () => {
 			name    : 'partner_id',
 			type    : 'select',
 			size    : 'sm',
-			label   : 'Entity',
+			label   : t('allocation:entity_label'),
 			options : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map(
 				(entity) => ({ label: entity.name, value: entity.id }),
 			),

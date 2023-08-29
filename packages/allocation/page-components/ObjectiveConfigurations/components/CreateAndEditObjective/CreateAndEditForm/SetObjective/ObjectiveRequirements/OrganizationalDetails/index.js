@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
@@ -7,6 +8,7 @@ import getOrganizationalDetailsControls from '../../../../../../configurations/g
 import styles from './styles.module.css';
 
 function OrganizationalDetails(props) {
+	const { t } = useTranslation(['allocation']);
 	const { control, watch, setValue, disabled } = props;
 
 	const watchCountries = watch('country');
@@ -14,7 +16,7 @@ function OrganizationalDetails(props) {
 	const watchCities = watch('city');
 
 	const controls = getOrganizationalDetailsControls(
-		{ watchCountries, watchStates, watchCities, disabled },
+		{ watchCountries, watchStates, watchCities, disabled, t },
 	);
 
 	useEffect(() => {
@@ -35,7 +37,7 @@ function OrganizationalDetails(props) {
 
 	return (
 		<div className={styles.container}>
-			<h4>2. Organizational Details</h4>
+			<h4>{t('allocation:organizational_details')}</h4>
 
 			<div className={styles.form_container}>
 				{controls.map((formElement) => {

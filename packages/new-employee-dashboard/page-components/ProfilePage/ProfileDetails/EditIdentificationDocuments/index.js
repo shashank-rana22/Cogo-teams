@@ -26,6 +26,11 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
+const getUpdatedKeysInPayload = (newValue, oldValue) => {
+	if (newValue === oldValue) return undefined;
+	return newValue;
+};
+
 const COLOR_MAPPING = {
 	approved : 'green',
 	rejected : 'red',
@@ -38,7 +43,7 @@ const MAPPING = {
 	active   : 'Waiting for Approval',
 };
 
-function EditIdentificationDocuments({ data: info, getEmployeeDetails }) {
+function EditIdentificationDocuments({ data: info = {}, getEmployeeDetails = () => {} }) {
 	const { documents = [] } = info || {};
 
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
@@ -74,21 +79,34 @@ function EditIdentificationDocuments({ data: info, getEmployeeDetails }) {
 
 	const onSubmit = (values) => {
 		const doc = Object.keys(values).map((item) => {
-			const docNumber = `${item}_number`;
+			const docNumber = !item.includes('number') ? `${item}_number` : undefined;
 
-			const checkDocument = (documents || []).find((element) => (element.document_type === item));
+			if ((values?.[item]?.finalUrl || values?.[item]) && values?.[docNumber]) {
+				const apiObject = component[item];
 
-			if (checkDocument?.status === 'approved' || !values?.[item]?.finalUrl || !values?.[docNumber]) {
-				return null;
+				const documentNumberToBeUpdated = getUpdatedKeysInPayload(
+					values?.[docNumber].toUpperCase(),
+					apiObject?.document_number,
+				);
+				const documentUrlToBeUpdated = getUpdatedKeysInPayload(
+					values?.[item]?.finalUrl || values?.[item],
+					apiObject?.document_url,
+				);
+
+				if (!documentNumberToBeUpdated && !documentUrlToBeUpdated) {
+					return null;
+				}
+
+				return {
+					document_type   : item,
+					id              : apiObject?.id,
+					document_number : documentNumberToBeUpdated,
+					document_url    : documentUrlToBeUpdated,
+					status          : 'active',
+				};
 			}
 
-			return {
-				document_type   : item,
-				id              : component[item]?.id,
-				document_number : values?.[docNumber].toUpperCase() || undefined,
-				document_url    : values?.[item]?.finalUrl || undefined,
-				status          : 'active',
-			};
+			return null;
 		});
 
 		const newDoc = doc.filter((i) => i !== null);

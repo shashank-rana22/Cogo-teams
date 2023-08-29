@@ -1,4 +1,5 @@
 import { IcMCross, IcMDelete, IcMDoubleTick } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -6,6 +7,8 @@ function ActionContent({
 	activeTab,
 	onClickCta = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const WORKFLOW_CTA_MAPPING = {
 		active: (
 			<div
@@ -15,7 +18,7 @@ function ActionContent({
 			>
 				<div className={styles.cta_text}>
 					<IcMDelete width={16} height={16} style={{ marginRight: '10px' }} />
-					Delete
+					{t('allocation:delete_button')}
 				</div>
 			</div>
 		),
@@ -28,7 +31,7 @@ function ActionContent({
 				>
 					<div className={styles.cta_text}>
 						<IcMDoubleTick width={16} height={16} style={{ marginRight: '10px' }} />
-						Approve
+						{t('allocation:approved_label')}
 					</div>
 				</div>
 
@@ -39,7 +42,7 @@ function ActionContent({
 				>
 					<div className={styles.cta_text}>
 						<IcMCross width={16} height={16} style={{ marginRight: '10px' }} />
-						Reject
+						{t('allocation:rejected_label')}
 					</div>
 				</div>
 			</>
