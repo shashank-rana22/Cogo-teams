@@ -9,7 +9,6 @@ const useGetCallControls = () => {
 			value          : '',
 			multiple       : true,
 			valueKey       : 'user_id',
-			className      : 'escalation_field_controller',
 			placeholder    : 'Select by Name/Email',
 			isClearable    : true,
 		},

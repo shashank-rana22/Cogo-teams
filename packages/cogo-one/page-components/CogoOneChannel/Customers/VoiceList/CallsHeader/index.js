@@ -1,4 +1,4 @@
-import { Popover, Input } from '@cogoport/components';
+import { Popover, InputNumber } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -17,7 +17,7 @@ function CallsHeader({
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.source_types}>
-				<Input
+				<InputNumber
 					size="sm"
 					prefix={<IcMSearchlight width={18} height={18} />}
 					placeholder="Enter Mobile Number..."
