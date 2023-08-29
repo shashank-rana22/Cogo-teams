@@ -2,16 +2,16 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useSyncShipmentInvoices = ({
+const useSendInvoiceToFinance = ({
 	refetch = () => {},
 	successMessage = 'Reload Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/sync_shipment_invoices',
+		url    : '/send_invoice_combination_to_finance',
 		method : 'POST',
 	});
 
-	const syncShipmentInvoices = async ({ payload }) => {
+	const sendInvoiceToFinance = async ({ payload }) => {
 		try {
 			const res = await trigger({ data: payload });
 
@@ -27,8 +27,8 @@ const useSyncShipmentInvoices = ({
 	};
 
 	return {
-		loading, syncShipmentInvoices,
+		loading, sendInvoiceToFinance,
 	};
 };
 
-export default useSyncShipmentInvoices;
+export default useSendInvoiceToFinance;

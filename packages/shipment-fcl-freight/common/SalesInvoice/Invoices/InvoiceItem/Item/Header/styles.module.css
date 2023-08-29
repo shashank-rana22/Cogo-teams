@@ -266,11 +266,11 @@
 
 .relaod {
 	display: flex;
+	align-items: center;
 	justify-content: flex-start;
-	margin-top: -12px;
 }
 
 .text {
-	margin-right: 12px;
-	color: red;
+	font-weight: 500;
+	color: var(--color-primary-error-red-2);
 }

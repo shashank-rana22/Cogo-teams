@@ -2,11 +2,12 @@ import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import useSyncShipmentInvoices from '../../../../../../../hooks/useSyncShipmentInvoices';
+import useSendInvoiceToFinance from '../../../../../../../hooks/useSendInvoiceToFinance';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -34,7 +35,7 @@ function Status({
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { syncShipmentInvoices = () => {} } = useSyncShipmentInvoices({ refetch: refetchAferApiCall });
+	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
@@ -81,19 +82,17 @@ function Status({
 			{invoice?.processing
 				? (
 					<div className={styles.relaod}>
-						<div className={styles.text}>Invoice is still processing</div>
+						<div className={styles.text}>This Invoice is still processing</div>
 						<Button
 							size="sm"
-							onClick={() => syncShipmentInvoices({
+							themeType="tertiary"
+							onClick={() => sendInvoiceToFinance({
 								payload: {
-									invoices: [{
-										proforma_number : invoice?.invoice_number,
-										id              : invoice?.id,
-									}],
+									id: invoice?.id,
 								},
 							})}
 						>
-							Reload
+							<IcMRefresh width={15} height={15} fill="#ee3425" />
 						</Button>
 					</div>
 				)
