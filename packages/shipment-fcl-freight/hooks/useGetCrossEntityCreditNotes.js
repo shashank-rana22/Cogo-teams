@@ -11,7 +11,9 @@ const useGetCrossEntityCreditNotes = () => {
 		url    : 'list_shipment_cross_entity_credit_notes',
 		method : 'GET',
 		params : {
-			shipment_id,
+			filters: {
+				shipment_id,
+			},
 		},
 	}, { manual: false });
 
