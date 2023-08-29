@@ -109,21 +109,23 @@ function OutstandingList({
 		},
 	};
 
-	const content = (types, head) => (
-		<div className={styles.padding_container}>
-			<div className={styles.heading}>{head}</div>
-			<div className={styles.hr} />
-			<div className={styles.width_container}>
-				{types?.map((party) => (
-					<div className={styles.style_margin_top} key={party}>
-						<div className={styles.styled_tag}>
-							{startCase(party)}
+	function Content({ types = [], head = '' }) {
+		return (
+			<div className={styles.padding_container}>
+				<div className={styles.heading}>{head}</div>
+				<div className={styles.hr} />
+				<div className={styles.width_container}>
+					{types?.map((party) => (
+						<div className={styles.style_margin_top} key={party}>
+							<div className={styles.styled_tag}>
+								{startCase(party)}
+							</div>
 						</div>
-					</div>
-				))}
+					))}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	const handleViewDetailClick = () => {
 		router.push(
@@ -170,13 +172,13 @@ function OutstandingList({
 								timeFormat:
 									GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'dateTime',
-								separator  : '|',
+								separator  : ' | ',
 							})}
 						</div>
 					</div>
 					<div className={styles.custom_tag_margin}>
-						<div>CountryCode:</div>
-						<div className={styles.Value}>{countryCode}</div>
+						<div>CountryCode : </div>
+						<div className={styles.country}>{countryCode}</div>
 					</div>
 				</div>
 			</div>
@@ -200,7 +202,7 @@ function OutstandingList({
 									: startCase(
 										item[it.valueKey]?.name
 												|| item[it.valueKey],
-									  ) || it.defaultValueKey}
+									) || it.defaultValueKey}
 							</div>
 						</div>
 					);
@@ -217,9 +219,11 @@ function OutstandingList({
 							{' '}
 							{collectionPartyType.length > 1 ? (
 								<Tooltip
-									content={content(
-										collectionPartyType,
-										'Collection Party Types',
+									content={(
+										<Content
+											types={collectionPartyType}
+											head="Collection Party Types"
+										/>
 									)}
 									placement="right"
 								>

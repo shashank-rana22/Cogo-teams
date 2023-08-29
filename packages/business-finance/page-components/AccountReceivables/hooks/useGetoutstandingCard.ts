@@ -6,36 +6,6 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-type DueDate = {
-	startDate?: Date;
-	endDate?: Date;
-};
-
-type InvoiceDate = {
-	startDate?: Date;
-	endDate?: Date;
-};
-
-type DateObj = {
-	startDate?: Date;
-	endDate?: Date;
-};
-
-interface InvoiceFilterProps {
-	page: number;
-	pageLimit: number;
-	date?: DateObj;
-	search?: string;
-	dueDate?: DueDate;
-	invoiceDate?: InvoiceDate;
-	orgId?: string;
-	migrated?: string;
-	paymentStatusList?: string[];
-	invoiceStatus?: string;
-	services?: string[];
-	currency?: string;
-}
-
 const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 	const { userData } = useSelector(({ profile }) => ({
 		userData: profile?.user || {},
@@ -86,35 +56,31 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 		orgId,
 	} = invoiceFilters || {};
 
-	const dueDateStart =		dueDate
-		&& format(
-			dueDate?.startDate,
-			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			{},
-			false,
-		);
-	const dueDateEnd =		dueDate
-		&& format(
-			dueDate?.endDate,
-			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			{},
-			false,
-		);
+	const dueDateStart = dueDate && format(
+		dueDate?.startDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
+	const dueDateEnd = dueDate && format(
+		dueDate?.endDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
 
-	const invoiceDateStart =		invoiceDate
-		&& format(
-			invoiceDate?.startDate,
-			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			{},
-			false,
-		);
-	const invoiceDateEnd =		invoiceDate
-		&& format(
-			invoiceDate?.endDate,
-			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			{},
-			false,
-		);
+	const invoiceDateStart = invoiceDate && format(
+		invoiceDate?.startDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
+	const invoiceDateEnd = invoiceDate && format(
+		invoiceDate?.endDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
 
 	useEffect(() => {
 		debounceQuery(search);
@@ -122,35 +88,31 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 
 	const getOrganizationInvoices = useCallback(
 		async (filters) => {
-			const dueDateStartFilter =				filters?.dueDate
-				&& format(
-					filters?.dueDate?.startDate,
-					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					{},
-					false,
-				);
-			const dueDateEndFilter =				filters?.dueDate
-				&& format(
-					filters?.dueDate?.endDate,
-					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					{},
-					false,
-				);
+			const dueDateStartFilter = filters?.dueDate && format(
+				filters?.dueDate?.startDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
+			const dueDateEndFilter = filters?.dueDate && format(
+				filters?.dueDate?.endDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
 
-			const invoiceDateStartFilter =				filters?.invoiceDate
-				&& format(
-					filters?.invoiceDate?.startDate,
-					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					{},
-					false,
-				);
-			const invoiceDateEndFilter =				filters?.invoiceDate
-				&& format(
-					filters?.invoiceDate?.endDate,
-					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					{},
-					false,
-				);
+			const invoiceDateStartFilter = filters?.invoiceDate && format(
+				filters?.invoiceDate?.startDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
+			const invoiceDateEndFilter = filters?.invoiceDate && format(
+				filters?.invoiceDate?.endDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
 
 			try {
 				await listApi({

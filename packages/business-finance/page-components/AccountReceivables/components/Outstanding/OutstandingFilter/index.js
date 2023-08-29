@@ -17,18 +17,18 @@ import FilterpopOver from './FilterpopOver/index.tsx';
 import styles from './styles.module.css';
 
 function Filters({
-	handleChange = () => {},
-	handleInputReset = () => {},
-	setOrderBy = () => {},
+	handleChange = () => { },
+	handleInputReset = () => { },
+	setOrderBy = () => { },
 	orderBy = { key: '', order: '', label: '' },
-	setParams = () => {},
+	setParams = () => { },
 	params = {},
 	formFilters = {},
-	setFormFilters = () => {},
-	clearFilter = () => {},
+	setFormFilters = () => { },
+	clearFilter = () => { },
 	queryKey = '',
 	entityCode = '',
-	refetch = () => {},
+	refetch = () => { },
 	callPriorityData = {},
 	callPriorityLoading = false,
 }) {
@@ -38,6 +38,40 @@ function Filters({
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
+
+	function Content() {
+		return ((
+			<div className={styles.styled_row}>
+				{SORTBY_OPTION.map((item) => (
+					<div
+						key={item.value}
+						className={styles.styled_col}
+						onClick={() => {
+							setOrderBy({
+								key   : item.value,
+								order : 'Desc',
+								label : item.label,
+							});
+							setShowSortPopover(
+								!showSortPopover,
+							);
+							setParams({
+								...params,
+								page: 1,
+							});
+						}}
+						role="presentation"
+					>
+						<div
+							className={styles.tile_heading}
+						>
+							{item.label}
+						</div>
+					</div>
+				))}
+			</div>
+		));
+	}
 
 	let placeholder;
 	if (queryKey === 'q') {
@@ -58,37 +92,7 @@ function Filters({
 					<div className={styles.sort_container}>
 						<Popover
 							placement="bottom"
-							render={(
-								<div className={styles.styled_row}>
-									{SORTBY_OPTION.map((item) => (
-										<div
-											key={item.value}
-											className={styles.styled_col}
-											onClick={() => {
-												setOrderBy({
-													key   : item.value,
-													order : 'Desc',
-													label : item.label,
-												});
-												setShowSortPopover(
-													!showSortPopover,
-												);
-												setParams({
-													...params,
-													page: 1,
-												});
-											}}
-											role="presentation"
-										>
-											<div
-												className={styles.tile_heading}
-											>
-												{item.label}
-											</div>
-										</div>
-									))}
-								</div>
-							)}
+							render={<Content />}
 						>
 							<div
 								style={{ display: 'flex', cursor: 'pointer' }}
@@ -172,13 +176,15 @@ function Filters({
 					</div>
 				</div>
 			</div>
-			{showCallPriority ? (
-				<CallPriorityModal
-					showCallPriority={showCallPriority}
-					setShowCallPriority={setShowCallPriority}
-					data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
-				/>
-			) : null}
+			{
+				showCallPriority ? (
+					<CallPriorityModal
+						showCallPriority={showCallPriority}
+						setShowCallPriority={setShowCallPriority}
+						data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
+					/>
+				) : null
+			}
 		</div>
 	);
 }

@@ -159,3 +159,7 @@
 .ledger_style {
 	display: flex;
 }
+
+.country {
+	margin-left: 4px;
+}

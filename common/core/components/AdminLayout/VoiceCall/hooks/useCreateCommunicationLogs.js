@@ -47,22 +47,30 @@ function useCreateCommunicationLog({
 			formatType : 'dateTime',
 			separator  : 'T',
 		}),
-		feedback: formFeedback?.map((singleFeedback) => ({
-			feedback_type : singleFeedback?.feedback_type,
-			feedback_data : [
-				{
-					general_feedback: singleFeedback?.feedback_type === 'general_feedback'
-						? singleFeedback?.general_feedback_text : undefined,
-					call_feedback      : singleFeedback?.call_feedback || undefined,
-					payment_commitment : singleFeedback?.payment_commitment || undefined,
-					obstacle_faced     : singleFeedback?.obstacle_faced || undefined,
-					reminder_date      : singleFeedback?.reminder_date || undefined,
-					commitment_date    : singleFeedback?.commitment_date || undefined,
-					currency           : singleFeedback?.currency || undefined,
-					price              : singleFeedback?.price?.toString() || undefined,
-				},
-			],
-		})),
+		feedback: formFeedback?.map((singleFeedback) => {
+			const {
+				feedback_type = '', general_feedback_text = '', call_feedback = '',
+				payment_commitment = '', obstacle_faced = '', reminder_date = '',
+				commitment_date = '', currency = '', price = '',
+			} = singleFeedback || {};
+
+			return ({
+				feedback_type : singleFeedback?.feedback_type,
+				feedback_data : [
+					{
+						general_feedback: feedback_type === 'general_feedback'
+							? general_feedback_text : undefined,
+						call_feedback      : call_feedback || undefined,
+						payment_commitment : payment_commitment || undefined,
+						obstacle_faced     : obstacle_faced || undefined,
+						reminder_date      : reminder_date || undefined,
+						commitment_date    : commitment_date || undefined,
+						currency           : currency || undefined,
+						price              : price?.toString() || undefined,
+					},
+				],
+			});
+		}),
 
 	};
 

@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const mobileNumberPads = [
 	{
 		label: '1',
@@ -42,7 +44,7 @@ const mobileNumberPads = [
 		label : '',
 		icon  : (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/delete-icon.svg"
+				src={GLOBAL_CONSTANTS.image_url.backSpaceIcon}
 				alt="delete"
 			/>
 		),

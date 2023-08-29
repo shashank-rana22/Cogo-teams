@@ -9,19 +9,19 @@ import styles from './styles.module.css';
 
 const TAB_OPTIONS = [
 	{
-		key: 'Email',
-		name: 'Email',
-		component: Email,
+		key       : 'Email',
+		name      : 'Email',
+		component : Email,
 	},
 	{
-		key: 'Call',
-		name: 'Call',
-		component: Call,
+		key       : 'Call',
+		name      : 'Call',
+		component : Call,
 	},
 	{
-		key: 'Meeting',
-		name: 'Meeting',
-		component: Meeting,
+		key       : 'Meeting',
+		name      : 'Meeting',
+		component : Meeting,
 	},
 ];
 

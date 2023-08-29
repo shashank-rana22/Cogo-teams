@@ -7,6 +7,7 @@ import {
 	SelectController,
 	TextAreaController,
 } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -21,11 +22,10 @@ const CALL_OPTIONS = [
 	{ label: 'Platform Demo', value: 'platformDemo' },
 ];
 
-const communicationOptions = [
+const COMMUNICATION_OPTIONS = [
 	{ label: 'Answered', value: 'answered' },
 	{ label: 'Not Answered', value: 'not_answered' },
 	{ label: 'Wrong Number', value: 'wrong_number' },
-
 	{ label: 'Invalid Number', value: 'invalid_number' },
 	{ label: 'Not Reachable', value: 'not_reachable' },
 	{ label: 'Busy', value: 'Busy' },
@@ -46,11 +46,11 @@ function ActivityLog({
 	feedback = [],
 	remove = () => { },
 	append = () => { },
-	control,
+	control = {},
 	setValue = () => { },
 	errors = {},
-	watch,
-	type,
+	watch = () => { },
+	type = '',
 	organizationId = '',
 }) {
 	const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
@@ -114,7 +114,7 @@ function ActivityLog({
 								<SelectController
 									control={control}
 									name="communicationResponse"
-									options={communicationOptions}
+									options={COMMUNICATION_OPTIONS}
 									rules={{ required: true }}
 								/>
 								<div className={styles.error}>{errors?.communicationResponse ? '*required' : null}</div>
@@ -126,7 +126,7 @@ function ActivityLog({
 								<DatepickerController
 									placeholder="Select Date"
 									showTimeSelect
-									dateFormat="dd/MM/yyyy HH:mm"
+									dateFormat={`${date} ${time}`}
 									name="reminderDateTime"
 									isPreviousDaysAllowed
 									control={control}
@@ -147,7 +147,7 @@ function ActivityLog({
 							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
-								dateFormat="dd/MM/yyyy HH:mm"
+								dateFormat={`${date} ${time}`}
 								name="startDateTime"
 								isPreviousDaysAllowed
 								control={control}
@@ -163,11 +163,11 @@ function ActivityLog({
 							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
-								dateFormat="dd/MM/yyyy HH:mm"
+								dateFormat={`${date} ${time}`}
 								name="endDateTime"
+								minDate={watch('startDateTime')}
 								isPreviousDaysAllowed
 								control={control}
-								minDate={watch('startDateTime')}
 								rules={{ required: true }}
 							/>
 							<div className={styles.error}>{errors?.endDateTime ? '*required' : null}</div>
