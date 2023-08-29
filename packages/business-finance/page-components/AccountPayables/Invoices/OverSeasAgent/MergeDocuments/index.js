@@ -23,7 +23,6 @@ function MergeDocuments({ setActive = () => {} }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [selectBankShow, setSelectBankShow] = useState(false);
 
-	// console.log('selectBankShow', selectBankShow);
 	const {
 		data,
 		loadingList,
