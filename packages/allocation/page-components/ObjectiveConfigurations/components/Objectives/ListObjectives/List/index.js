@@ -1,5 +1,6 @@
 import { Collapse, Pagination, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useMemo } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -13,6 +14,8 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function List(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { setActiveMode, loading, list, paginationData, getNextPage, setRefCallback, refetch } = props;
 
 	const { page, total_count, page_limit } = paginationData || {};
@@ -21,7 +24,7 @@ function List(props) {
 
 	const [showActionModal, setShowActionModal] = useState({});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode, setShowActionModal, setRefCallback });
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode, setShowActionModal, setRefCallback, t });
 
 	const objectiveList = useMemo(() => (list || []).map((item) => ({
 		key      : item.id,

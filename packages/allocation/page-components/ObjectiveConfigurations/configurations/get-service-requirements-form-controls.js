@@ -18,6 +18,7 @@ const getServiceRequirementControls = (props) => {
 		watchDestinationLocation,
 		lifecycleStage,
 		disabled,
+		t = () => {},
 	} = props;
 
 	const geo = getGeoConstants();
@@ -25,19 +26,19 @@ const getServiceRequirementControls = (props) => {
 	const controls = [
 		{
 			name        : 'shipment_mode',
-			label       : 'Shipment Mode',
-			placeholder : 'Select Mode',
+			label       : t('allocation:shipment_mode_label'),
+			placeholder : t('allocation:shipment_mode_placeholder'),
 			type        : 'select',
-			options     : getShipmentModeOptions({ lifecycleStage }),
+			options     : getShipmentModeOptions({ lifecycleStage, t }),
 			isClearable : true,
 			disabled,
 		},
 		{
 			name        : 'service_type',
-			label       : 'Service Type',
-			placeholder : 'Select Type',
+			label       : t('allocation:service_type_label'),
+			placeholder : t('allocation:service_type_placeholder'),
 			type        : 'select',
-			options     : getServiceTypeOptions({ watchShipmentMode }),
+			options     : getServiceTypeOptions({ watchShipmentMode, t }),
 			isClearable : true,
 			showElement : {
 				shipmentMode: ['ocean', 'air', 'surface', 'haulage'],
@@ -46,16 +47,16 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'trade_type',
-			label       : 'Trade Type',
-			placeholder : 'Select Type',
+			label       : t('allocation:trade_type_label'),
+			placeholder : t('allocation:trade_type_placeholder'),
 			type        : 'select',
 			options     : [
 				{
-					label : 'Import',
+					label : t('allocation:trade_type_import'),
 					value : 'import',
 				},
 				{
-					label : 'Export',
+					label : t('allocation:trade_type_export'),
 					value : 'export',
 				},
 			],
@@ -67,8 +68,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'origin_location',
-			label       : 'Origin Country/Port',
-			placeholder : 'Select Origin',
+			label       : t('allocation:origin_location_label'),
+			placeholder : t('allocation:origin_location_placeholder'),
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
@@ -85,14 +86,14 @@ const getServiceRequirementControls = (props) => {
 			),
 			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			rules          : {
-				required: isEmpty(watchDestinationLocation) ? false : 'Required',
+				required: isEmpty(watchDestinationLocation) ? false : t('allocation:rules_required'),
 			},
 			disabled,
 		},
 		{
 			name        : 'destination_location',
-			label       : 'Destination Country/Port',
-			placeholder : 'Select Destination',
+			label       : t('allocation:destination_location_label'),
+			placeholder : t('allocation:destination_location_placeholder'),
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
@@ -109,14 +110,14 @@ const getServiceRequirementControls = (props) => {
 			),
 			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			rules          : {
-				required: isEmpty(watchOriginLocation) ? false : 'Required',
+				required: isEmpty(watchOriginLocation) ? false : t('allocation:rules_required'),
 			},
 			disabled,
 		},
 		{
 			name        : 'inco_terms',
-			label       : 'Incoterm',
-			placeholder : 'Select Incoterm',
+			label       : t('allocation:inco_terms_label'),
+			placeholder : t('allocation:inco_terms_placeholder'),
 			type        : 'multiSelect',
 			options     : getIncotermOptionsByTradeType({ trade_type: watchTradeType }),
 			isClearable : true,
@@ -127,8 +128,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'hs_codes',
-			label       : 'Commodity Details (HS Code)',
-			placeholder : 'Select HS Code',
+			label       : t('allocation:hs_code_label'),
+			placeholder : t('allocation:hs_code_placeholder'),
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_hs_codes',
@@ -142,8 +143,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'container_count',
-			label       : 'Container Count',
-			placeholder : 'Count',
+			label       : t('allocation:container_count_label'),
+			placeholder : t('allocation:container_count_placeholder'),
 			type        : 'number',
 			min         : 0,
 			isClearable : true,
@@ -154,8 +155,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'weight',
-			label       : 'Cargo Weight (in Kg)',
-			placeholder : 'Weight',
+			label       : t('allocation:weight_label'),
+			placeholder : t('allocation:weight_placeholder'),
 			type        : 'number',
 			min         : 0,
 			isClearable : true,
@@ -166,8 +167,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'volume',
-			label       : 'Volume (in CBM)',
-			placeholder : 'Volume',
+			label       : t('allocation:volume_label'),
+			placeholder : t('allocation:volume_placeholder'),
 			type        : 'text',
 			isClearable : true,
 			showElement : {
@@ -177,24 +178,24 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'container_size',
-			label       : 'Container Size',
-			placeholder : 'Size',
+			label       : t('allocation:container_size_label'),
+			placeholder : t('allocation:container_size_placeholder'),
 			type        : 'multiSelect',
 			options     : [
 				{
-					label : '20ft',
+					label : t('allocation:container_size_20'),
 					value : '20',
 				},
 				{
-					label : '40ft',
+					label : t('allocation:container_size_40'),
 					value : '40',
 				},
 				{
-					label : '40ft HC',
+					label : t('allocation:container_size_40_hc'),
 					value : '40 HC',
 				},
 				{
-					label : '45ft HC',
+					label : t('allocation:container_size_45_hc'),
 					value : '45 HC',
 				},
 			],
@@ -207,8 +208,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'container_type',
-			label       : 'Container Type',
-			placeholder : 'Type',
+			label       : t('allocation:container_type_label'),
+			placeholder : t('allocation:container_type_placeholder'),
 			type        : 'multiSelect',
 			options     : geo.options.freight_container_types,
 			isClearable : true,
@@ -220,8 +221,8 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'truck_type',
-			label       : 'Truck Type',
-			placeholder : 'Truck Type',
+			label       : t('allocation:truck_type_label'),
+			placeholder : t('allocation:truck_type_placeholder'),
 			type        : 'multiSelect',
 			options     : getAllTruckTypeOptions(),
 			isClearable : true,

@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import useDeleteObjectivesKAMList from '../../../../../../../hooks/useDeleteObjectivesKAMList';
@@ -12,44 +13,45 @@ const modalComponentMapping = ({
 	handleCloseActionModal = () => { },
 	loader,
 	handleDeleteKAMsList = () => { },
+	t = () => {},
 }) => ({
 	generate: {
-		title         : 'Generate List',
+		title         : t('allocation:generate_list'),
 		modalSize     : 'lg',
 		Component     : Generate,
 		actionButtons : [
 			{
-				text       : loader ? 'Cancel list generation' : 'Close',
+				text       : loader ? t('allocation:cancel_list_generation_button') : t('allocation:close_button'),
 				themeType  : 'accent',
 				onClickFun : handleCloseActionModal,
 			},
 		],
 	},
 	view: {
-		title            : 'Generated List',
+		title            : t('allocation:generated_list'),
 		modalSize        : 'lg',
 		Component        : ViewList,
 		customModalStyle : { minHeight: '400px' },
 		actionButtons    : [
 			{
-				text       : 'Close List',
+				text       : t('allocation:close_list_button'),
 				themeType  : 'accent',
 				onClickFun : handleCloseActionModal,
 			},
 		],
 	},
 	delete: {
-		title         : 'Delete List',
+		title         : t('allocation:delete_list'),
 		modalSize     : 'md',
 		Component     : DeleteList,
 		actionButtons : [
 			{
-				text       : 'No, Cancel',
+				text       : t('allocation:no_cancel_button'),
 				themeType  : 'secondary',
 				onClickFun : handleCloseActionModal,
 			},
 			{
-				text       : 'Yes, Delete List',
+				text       : t('allocation:yes_delete_list'),
 				themeType  : 'accent',
 				onClickFun : handleDeleteKAMsList,
 			},
@@ -62,6 +64,8 @@ function ActionModal({
 	setShowModal = () => { },
 	refetchListObjectives = () => { },
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const { action } = showModal || {};
 
 	const [loader, setLoader] = useState(true);
@@ -96,6 +100,7 @@ function ActionModal({
 		handleCloseActionModal,
 		loader,
 		handleDeleteKAMsList,
+		t,
 	})[action] || {};
 
 	return (

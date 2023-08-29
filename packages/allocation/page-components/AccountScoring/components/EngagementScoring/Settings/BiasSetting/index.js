@@ -1,22 +1,27 @@
 import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import getBiasControl from '../../../../configurations/get-add-bias-controls';
-import biasColumns from '../../../../constants/get-bias-columns';
+import getBiasColumns from '../../../../constants/get-bias-columns';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
 function BiasSetting(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		settingsLoading, settingsRefetch, biasList,
 		control, handleSubmit, errors, reset,
 	} = props;
 
 	const [editing, setEditing] = useState(false);
+
+	const biasColumns = getBiasColumns({ t });
 
 	if (isEmpty(biasList) && !settingsLoading) {
 		return (
@@ -25,7 +30,7 @@ function BiasSetting(props) {
 					height={220}
 					width={380}
 					flexDirection="row"
-					emptyText="Bias Data not found"
+					emptyText={t('allocation:bias_setting_empty_state')}
 					textSize={20}
 				/>
 			</div>
@@ -44,8 +49,8 @@ function BiasSetting(props) {
 				errors={errors}
 				reset={reset}
 				inputStyle="bias_input"
-				heading="Bias Settings"
-				tooltipData="Bias is used to calculate the warmness of the KAM."
+				heading={t('allocation:bias_setting_heading')}
+				tooltipData={t('allocation:bias_setting_tooltip_data')}
 			/>
 		);
 	}

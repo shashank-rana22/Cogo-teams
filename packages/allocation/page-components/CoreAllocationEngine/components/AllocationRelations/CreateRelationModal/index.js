@@ -1,12 +1,20 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import Form from '../../../../../common/Form';
 import useCreateRelations from '../../../hooks/useCreateRelations';
 
-function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRelationModal = () => {}, fetchList }) {
+function CreateRelationModal({
+	showCreateRelationModal = false,
+	setShowCreateRelationModal = () => {},
+	fetchList,
+}) {
+	const { t } = useTranslation(['allocation']);
+
 	const { controls, formProps, onCreate, handleSubmit, loading } = useCreateRelations({
 		fetchList,
 		setShowCreateRelationModal,
+		t,
 	});
 
 	return (
@@ -17,7 +25,7 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 			closeOnOuterClick={false}
 			placement="center"
 		>
-			<Modal.Header title="Create Allocation Relation" />
+			<Modal.Header title={t('allocation:create_allocation_relation')} />
 
 			<Modal.Body>
 				<Form controls={controls} formProps={formProps} />
@@ -32,7 +40,7 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 					onClick={() => setShowCreateRelationModal(false)}
 					style={{ marginRight: '10px' }}
 				>
-					Cancel
+					{t('allocation:cancel_button')}
 				</Button>
 				<Button
 					type="submit"
@@ -41,7 +49,7 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 					disabled={loading}
 					onClick={handleSubmit(onCreate)}
 				>
-					Save
+					{t('allocation:save_button')}
 				</Button>
 			</Modal.Footer>
 		</Modal>

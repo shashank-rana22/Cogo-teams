@@ -4,7 +4,7 @@ import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const getFeedbackColumns = () => [
+export const getFeedbackColumns = ({ t = () => {} }) => [
 	// {
 	// 	selectAll = false,
 	// 	onChangeTableHeadCheckbox = () => {},
@@ -36,7 +36,7 @@ export const getFeedbackColumns = () => [
 	// 	),
 	// },
 	{
-		Header   : 'TYPE',
+		Header   : t('allocation:type_label'),
 		key      : 'type',
 		id       : 'type',
 		accessor : ({ source_type }) => (
@@ -46,7 +46,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'SUB-TYPE',
+		Header   : t('allocation:sub_type'),
 		key      : 'sub_type',
 		id       : 'sub_type',
 		accessor : ({ feedback_parameter }) => (
@@ -56,7 +56,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'CURRENT DATA',
+		Header   : t('allocation:current_data'),
 		key      : 'current_data',
 		id       : 'current_data',
 		accessor : ({ feedback_parameter_value }) => (
@@ -76,7 +76,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'FEEDBACK & PROOF',
+		Header   : t('allocation:feedback_and_proof'),
 		key      : 'feedback',
 		id       : 'feedback',
 		accessor : ({ feedback, other_feedback, feedback_reference_document_url }) => (
@@ -84,7 +84,8 @@ export const getFeedbackColumns = () => [
 				<Tooltip
 					content={(
 						<span className={styles.tooltip}>
-							{feedback === 'other' ? (startCase(other_feedback) || 'Other') : (startCase(feedback))}
+							{feedback === 'other' ? (startCase(other_feedback)
+							|| t('allocation:other_status')) : (startCase(feedback))}
 						</span>
 					)}
 					placement="top"
@@ -110,7 +111,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'CORRECTION & PROOF',
+		Header   : t('allocation:correction_and_proof'),
 		key      : 'correction',
 		id       : 'correction',
 		accessor : ({
@@ -145,7 +146,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'KAM',
+		Header   : t('allocation:kam_label'),
 		key      : 'kam',
 		id       : 'kam',
 		accessor : ({ created_by }) => (
@@ -155,7 +156,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'KAM Manager',
+		Header   : t('allocation:kam_manager'),
 		key      : 'kam_manager',
 		id       : 'kam_manager',
 		accessor : ({ manager }) => (
@@ -165,7 +166,7 @@ export const getFeedbackColumns = () => [
 		),
 	},
 	{
-		Header   : 'CREATION DATE',
+		Header   : t('allocation:created_date'),
 		key      : 'created_date',
 		id       : 'created_date',
 		accessor : ({ created_at }) => (
