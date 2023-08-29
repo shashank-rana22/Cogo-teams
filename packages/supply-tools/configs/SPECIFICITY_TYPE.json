@@ -1,0 +1,16 @@
+{
+    "fcl":[
+        {
+            "label" : "Cogoport",
+            "value" : "cogoport"
+        },
+        {
+            "label" : "Shipping Line",
+            "value" : "shipping_line"
+        },
+        {
+            "label" : "Rate Specific",
+            "value" : "rate_specific"
+        }
+    ]
+}
