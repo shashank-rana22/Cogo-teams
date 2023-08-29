@@ -29,6 +29,7 @@ export const getEmailState = ({ mailActions = {}, email = '' }) => {
 	const { data, actionType = '' } = mailActions || {};
 	const { response, conversation_type } = data || {};
 	const { sender = '', subject = '', to_mails = [], bcc_mails = [], cc_mails = [] } = response || {};
+	const isReplayAll = actionType === 'reply_all';
 
 	let toEmail = [sender || email];
 
@@ -38,8 +39,8 @@ export const getEmailState = ({ mailActions = {}, email = '' }) => {
 
 	return {
 		toUserEmail   : CHECK_REPLAY_TYPE.includes(actionType) ? toEmail : [],
-		bccrecipients : actionType === 'reply_all' ? bcc_mails : [],
-		ccrecipients  : actionType === 'reply_all' ? cc_mails : [],
+		bccrecipients : isReplayAll ? bcc_mails : [],
+		ccrecipients  : isReplayAll ? cc_mails : [],
 		subject,
 	};
 };

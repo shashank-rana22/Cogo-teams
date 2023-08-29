@@ -11,7 +11,7 @@ function MailActions({
 	return (
 		<div className={styles.buttons_flex}>
 			{BUTTON_MAPPING.map((eachButton) => {
-				const { buttonName, icon, key } = eachButton || {};
+				const { buttonName = '', icon = '', key = '' } = eachButton || {};
 
 				return (
 					<Button
