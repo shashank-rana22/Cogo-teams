@@ -16,7 +16,7 @@ const REQUEST_HOOK_MAPPING = {
 	cx_automation    : useCxAutomationRequest,
 };
 
-function getOptions(data = {}) {
+function getOptions({ data = [] }) {
 	if (Array.isArray(data)) {
 		return data;
 	}
@@ -30,7 +30,7 @@ function getOptions(data = {}) {
 				return true;
 			}
 			if (typeof data[key] === 'object') {
-				options = getOptions(data[key]);
+				options = getOptions({ data: data[key] });
 			}
 			return !isEmpty(options);
 		});
@@ -64,7 +64,7 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	let options = getOptions(data);
+	let options = getOptions({ data });
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });
 	}
