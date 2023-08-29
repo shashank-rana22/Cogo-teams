@@ -1,0 +1,37 @@
+.container {
+	padding: 14px 20px 12px 24px;
+	margin-top: 20px;
+	background: rgb(255 255 255);
+	border: 1px solid rgb(189 189 189);
+	border-radius: 10px;
+	box-shadow: rgb(60 67 83 / 5%) 0 2px 55px 10px;
+}
+
+.service {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.service_type {
+	margin-left: 15px;
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.content {
+	display: inline-flex;
+	height: fit-content;
+	padding: 2px 6px;
+	background-color: rgb(242 242 242);
+	border: 1px solid rgb(242 242 242);
+	border-radius: 4px;
+}
+
+.content_details {
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+}
