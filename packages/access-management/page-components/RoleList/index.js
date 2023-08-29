@@ -1,6 +1,6 @@
 import { Pagination, Table } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import useRoleList from '../../hooks/useRoleList';
 

@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import useEditRole from '../../../../hooks/useEditRole';
 

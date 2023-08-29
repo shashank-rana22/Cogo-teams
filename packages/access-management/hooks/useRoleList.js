@@ -5,8 +5,8 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { changeFilters, getFilter, onResetFilters } from '../page-components/RoleList/Filters/utils/controls';
 import styles from '../page-components/RoleList/styles.module.css';

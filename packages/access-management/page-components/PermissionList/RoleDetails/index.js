@@ -1,8 +1,8 @@
 import { Placeholder, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDoubleLeft } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Heading from '../../../common/Heading';
 

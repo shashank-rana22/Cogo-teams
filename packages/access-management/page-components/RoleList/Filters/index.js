@@ -2,8 +2,8 @@ import { Select, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import SearchInput from '../../../common/SearchInput';
 

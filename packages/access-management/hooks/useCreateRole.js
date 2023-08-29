@@ -2,14 +2,15 @@ import { Toast } from '@cogoport/components';
 import { asyncFieldsPartner, useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 import { controls } from '../configurations/create-controls';
 
 const useCreateRole = ({
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
-	t = () => {},
 }) => {
+	const { t } = useTranslation(['accessManagement']);
 	const formProps = useForm();
 
 	const [{ loading }, trigger] = useAuthRequest({

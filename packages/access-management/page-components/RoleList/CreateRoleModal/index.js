@@ -1,6 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Heading from '../../../common/Heading';
 import useCreateRole from '../../../hooks/useCreateRole';
@@ -21,7 +21,7 @@ function CreateRoleModal({
 
 	const {
 		controls, formProps, onSubmit, createRoleApi,
-	} =	useCreateRole({ onChangeShowCreateRoleModal, redirect, t });
+	} =	useCreateRole({ onChangeShowCreateRoleModal, redirect });
 
 	const { handleSubmit } = formProps;
 	const { loading } = createRoleApi;
