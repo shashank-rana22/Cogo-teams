@@ -18,7 +18,6 @@ const API_SUCCESS_MESSAGE = {
 };
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
-const ALLOWED_ENTITY_ID_FOR_CN = ['04bd1037-c110-4aad-8ecc-fc43e9d4069d'];
 
 function Status({
 	invoice = {},
@@ -63,9 +62,7 @@ function Status({
 
 	const geo = getGeoConstants();
 
-	const cross_entity_check = 	ALLOWED_ENTITY_ID_FOR_CN.includes(invoice?.entity_id) && invoice?.status === 'approved';
-
-	const showRequestCN = (showCN || cross_entity_check)
+	const showRequestCN = showCN
 	&& !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice?.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
 	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
@@ -76,15 +73,6 @@ function Status({
 				<div className={styles.invoice_status}>
 					{startCase(invoice?.status)}
 				</div>
-				{showRequestCN ? (
-					<Button
-						style={{ marginTop: '4px' }}
-						size="sm"
-						onClick={() => setAskNullify(true)}
-					>
-						Request CN
-					</Button>
-				) : null}
 			</div>
 		);
 	}
