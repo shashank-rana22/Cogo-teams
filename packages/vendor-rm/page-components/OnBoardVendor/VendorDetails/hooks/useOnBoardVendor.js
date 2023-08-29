@@ -34,8 +34,8 @@ function useOnBoardVendor({
 	const { vendor_details } = vendorInformation;
 	const isUpdateAction = !isEmpty(vendor_details);
 	const [{ loading }, triggerApi] = useRequest({
-		url: isUpdateAction ? '/update_vendor' : '/create_vendor',
-		method: 'post',
+		url    : isUpdateAction ? '/update_vendor' : '/create_vendor',
+		method : 'post',
 	}, { manual: true });
 	const {
 		control,
@@ -51,9 +51,9 @@ function useOnBoardVendor({
 	const { country_id, registration_number = {} } = watchForm;
 	const countrySpecificData = getCountrySpecificData({
 		country_id,
-		accessorType: 'navigations',
-		accessor: 'onboard_vendor',
-		isDefaultData: false,
+		accessorType  : 'navigations',
+		accessor      : 'onboard_vendor',
+		isDefaultData : false,
 	});
 	const { validate_registration: isValidateRegistration = false } = countrySpecificData || {};
 	const countryData = getCountryDetails({ country_id });
@@ -63,8 +63,8 @@ function useOnBoardVendor({
 
 	const entityOptions = (entityList || []).map((item) => ({
 		...item,
-		label: `${item?.entity_code}-${item?.business_name}`,
-		value: item?.id,
+		label : `${item?.entity_code}-${item?.business_name}`,
+		value : item?.id,
 	}));
 
 	const fields = useMemo(() => getControls({
@@ -108,12 +108,12 @@ function useOnBoardVendor({
 		if (field.name === 'registration_number') {
 			newField = {
 				...newField,
-				countryId: watchForm.country_id,
-				onBlur: null,
-				maxLength: null,
-				rules: {
-					required: true,
-					validate: (value) => {
+				countryId : watchForm.country_id,
+				onBlur    : null,
+				maxLength : null,
+				rules     : {
+					required : true,
+					validate : (value) => {
 						const { registrationType = '', registrationNumber = '' } = value || {};
 						if (!registrationNumber) {
 							return 'Registration Number is required';
@@ -145,8 +145,8 @@ function useOnBoardVendor({
 				newField = {
 					...newField,
 					onBlur: () => onBlurTaxPanGstinControl({
-						registrationNumber: (watchRegistrationNumber || '').toUpperCase(),
-						registrationType: watchRegistartionType || '',
+						registrationNumber : (watchRegistrationNumber || '').toUpperCase(),
+						registrationType   : watchRegistartionType || '',
 					}),
 					maxLength: watchRegistartionType === 'gstin' ? GSTNUM_REG_LEN : OTHERS_REG_LEN,
 				};
@@ -187,9 +187,9 @@ function useOnBoardVendor({
 
 		const payload = {
 			...formattedValues,
-			registration_proof_url: registration_proof_url?.finalUrl,
-			registration_number: registrationNo?.registrationNumber,
-			registration_type: registrationNo?.registrationType,
+			registration_proof_url : registration_proof_url?.finalUrl,
+			registration_number    : registrationNo?.registrationNumber,
+			registration_type      : registrationNo?.registrationType,
 		};
 
 		try {
