@@ -18,7 +18,7 @@
 
 .header {
 	top: 0;
-	padding: 22px 10px 22px 15px;
+	padding: 20px 10px 20px 15px;
 }
 
 .footer {
@@ -60,7 +60,7 @@
 }
 
 .filters_container {
-	height: 66%;
+	height: 68%;
 	padding: 10px 20px;
 	overflow-y: auto;
 }
