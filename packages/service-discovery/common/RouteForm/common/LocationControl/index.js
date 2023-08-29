@@ -9,7 +9,7 @@ const DEFAULT_SPAN = 12;
 const PERCENT_FACTOR = 100;
 const FLEX_OFFSET = 4;
 
-function LocationControl({ controlItem = {}, formValues = {}, setFormValues = () => {} }) {
+function LocationControl({ controlItem = {}, formValues = {}, setFormValues = () => {}, ...rest }) {
 	const { label, span, name } = controlItem;
 
 	const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
@@ -37,6 +37,7 @@ function LocationControl({ controlItem = {}, formValues = {}, setFormValues = ()
 
 					setItemInQuery({ key, value: obj?.id });
 				}}
+				{...rest}
 			/>
 		</section>
 	);
