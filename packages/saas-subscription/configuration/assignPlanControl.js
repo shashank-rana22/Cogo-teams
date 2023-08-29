@@ -1,9 +1,9 @@
-const assignPlanControl = [
+const getAssignPlanControl = ({ t }) => [
 	{
 		name        : 'organizationId',
-		label       : 'Select Organization',
+		label       : t('saasSubscription:assign_plan_config_org'),
 		type        : 'asyncSelect',
-		placeholder : 'Select Organization',
+		placeholder : t('saasSubscription:assign_plan_config_org'),
 		asyncKey    : 'organizations',
 		rules       : {
 			required: true,
@@ -11,9 +11,9 @@ const assignPlanControl = [
 	},
 	{
 		name        : 'planId',
-		label       : 'Select Plan',
+		label       : t('saasSubscription:assign_plan_config_plan'),
 		type        : 'asyncSelect',
-		placeholder : 'Select Plan',
+		placeholder : t('saasSubscription:assign_plan_config_plan'),
 		asyncKey    : 'plan_pricing_list',
 		params      : {
 			filters    : { is_active: true, plan_type: 'P' },
@@ -25,4 +25,4 @@ const assignPlanControl = [
 	},
 ];
 
-export default assignPlanControl;
+export default getAssignPlanControl;

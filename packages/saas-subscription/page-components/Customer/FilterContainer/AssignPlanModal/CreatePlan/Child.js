@@ -1,15 +1,19 @@
 import { cl, Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
 function Child({ name, control, element, addonConfig, errors, getValues }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const { fields, remove, append } = useFieldArray({
 		name,
 		control,
 	});
+
 	const appendHandler = () => {
 		append(element.value);
 	};
@@ -55,7 +59,7 @@ function Child({ name, control, element, addonConfig, errors, getValues }) {
 						themeType="link"
 						onClick={appendHandler}
 					>
-						Add
+						{t('saasSubscription:add')}
 					</Button>
 				</div>
 			</div>

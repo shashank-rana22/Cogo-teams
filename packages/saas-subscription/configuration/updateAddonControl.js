@@ -1,4 +1,4 @@
-const updateAddonControl = 	[{
+const getUpdateAddonControl = ({ t }) => [{
 	name     : 'updateAddon',
 	type     : 'fieldArray',
 	controls : [
@@ -6,7 +6,7 @@ const updateAddonControl = 	[{
 			name        : 'product_id',
 			type        : 'asyncSelect',
 			asyncKey    : 'addon_list',
-			placeholder : 'Enter Name',
+			placeholder : t('saasSubscription:update_addon_name'),
 			size        : 'sm',
 			width       : '40%',
 			rules       : {
@@ -16,38 +16,39 @@ const updateAddonControl = 	[{
 		{
 			name        : 'count',
 			type        : 'number',
-			placeholder : 'Enter count',
+			placeholder : t('saasSubscription:update_addon_count'),
 			size        : 'sm',
 			width       : '25%',
 			rules       : {
 				required : true,
 				min      : {
 					value   : -1,
-					message : 'Should be greater than or equal to -1',
+					message : t('saasSubscription:update_addon_count_err'),
 				},
 			},
 		},
 		{
 			name        : 'discount',
 			type        : 'number',
-			placeholder : 'Enter Discount',
+			placeholder : t('saasSubscription:update_addon_discount'),
 			size        : 'sm',
 			width       : '25%',
 			rules       : {
 				required : true,
 				min      : {
 					value   : 0,
-					message : 'Should be greater than or equal to 0',
+					message : t('saasSubscription:update_addon_discount_err'),
 				},
 			},
 		},
 	],
 }];
 
-const addonDefaultValue = {
+const ADDON_DEFAULT_VALUE = {
 	product_id : '',
 	count      : 0,
 	discount   : 0,
 };
-export default updateAddonControl;
-export { addonDefaultValue };
+
+export default getUpdateAddonControl;
+export { ADDON_DEFAULT_VALUE };

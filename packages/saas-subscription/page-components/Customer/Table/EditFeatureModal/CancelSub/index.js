@@ -1,13 +1,16 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useCancelSubscription from '../../../../../hooks/useCancelSubscription';
 import styles from '../styles.module.css';
 
 function CancelSub({ subscriptionId = '', modalChangeHandler }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const { loading = false, cancelSubscriptionHandler } = useCancelSubscription({ modalChangeHandler });
 	return (
 		<div className={styles.cancel_container}>
-			<h3>Are you sure you want to cancel subscription?</h3>
+			<h3>{t('saasSubscription:cancel_sub_text')}</h3>
 			<div className={styles.button_container}>
 				<Button
 					themeType="secondary"
@@ -16,7 +19,7 @@ function CancelSub({ subscriptionId = '', modalChangeHandler }) {
 					loading={loading}
 					onClick={() => modalChangeHandler(false)}
 				>
-					No
+					{t('saasSubscription:no')}
 				</Button>
 				<Button
 					themeType="accent"
@@ -26,7 +29,7 @@ function CancelSub({ subscriptionId = '', modalChangeHandler }) {
 					onClick={() => cancelSubscriptionHandler(subscriptionId)}
 					loading={loading}
 				>
-					Yes
+					{t('saasSubscription:yes')}
 				</Button>
 			</div>
 		</div>

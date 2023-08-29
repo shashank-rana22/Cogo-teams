@@ -1,23 +1,23 @@
-const addonConfig = [
+const getAddonConfig = ({ t }) => [
 	{
 		key        : 'product_name',
-		title      : 'Display Name',
+		title      : t('saasSubscription:pricing_addon_config_name'),
 		renderFunc : 'renderName',
 		width      : '40%',
 	},
 	{
 		key        : 'unit_count',
-		title      : 'Count',
+		title      : t('saasSubscription:pricing_addon_config_count'),
 		renderFunc : 'renderNumber',
 		width      : '30%',
 	},
 	{
 		key        : 'discount_percent',
-		title      : 'Discount (in%)',
+		title      : t('saasSubscription:pricing_addon_config_discount'),
 		renderFunc : 'renderNumber',
 		width      : '30%',
 
 	},
 ];
 
-export default addonConfig;
+export default getAddonConfig;

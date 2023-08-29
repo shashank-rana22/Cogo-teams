@@ -1,19 +1,26 @@
 import { Pagination, Placeholder, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
-import planListConfig from '../../configuration/planListConfig';
+import getPlanListConfig from '../../configuration/planListConfig';
 import useGetPlanList from '../../hooks/useGetPlanList';
 import getValues from '../../utils/getValues';
 
 import itemFunction from './ItemFunction';
 import styles from './styles.module.css';
 
+const LOADER_COUNT = 5;
+
 function Plan() {
 	const { push } = useRouter();
 
+	const { t } = useTranslation(['saasSubscription']);
+	const planListConfig = getPlanListConfig({ t });
+	const functions = itemFunction({ t });
+
 	const { loading = false, planList = {}, pageChangeHandler } = useGetPlanList();
 	const { list = [], page = 0, page_limit = 0, total_count = 0 } = planList || {};
-	const newList = loading ? [...Array(5).keys()] : list;
+	const newList = loading ? [...Array(LOADER_COUNT).keys()] : list;
 
 	const redirectHandler = (id) => {
 		push('/saas-subscription/plan/[plan_id]', `/saas-subscription/plan/${id}`);
@@ -22,7 +29,7 @@ function Plan() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.flex_box}>
-				<h2>Plans</h2>
+				<h2>{t('saasSubscription:plan_title')}</h2>
 			</div>
 			<div className={styles.container}>
 
@@ -52,7 +59,7 @@ function Plan() {
 								style={{ width: config?.width }}
 							>
 								{loading ? <Placeholder height="30px" />
-									: getValues({ itemData: item, config, itemFunction })}
+									: getValues({ itemData: item, config, itemFunction: functions })}
 
 							</div>
 						))}

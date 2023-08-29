@@ -1,9 +1,9 @@
-const createPlanControl = [
+const getCreatePlanControl = ({ t }) => [
 	{
 		name        : 'organization_id',
-		label       : 'Select Organization',
+		label       : t('saasSubscription:assign_plan_config_org'),
 		type        : 'asyncSelect',
-		placeholder : 'Select Organization',
+		placeholder : t('saasSubscription:assign_plan_config_org'),
 		asyncKey    : 'organizations',
 		initialCall : true,
 		rules       : {
@@ -12,18 +12,18 @@ const createPlanControl = [
 	},
 	{
 		name        : 'display_name',
-		label       : 'Display Name',
+		label       : t('saasSubscription:assign_plan_config_display'),
 		type        : 'text',
-		placeholder : 'Enter Display Name',
+		placeholder : t('saasSubscription:assign_plan_config_display_placeholder'),
 		rules       : {
 			required: true,
 		},
 	},
 	{
 		name        : 'description',
-		label       : 'Descriptions',
+		label       : t('saasSubscription:assign_plan_config_desc'),
 		type        : 'text',
-		placeholder : 'Enter Descriptions',
+		placeholder : t('saasSubscription:assign_plan_config_desc_placeholder'),
 	},
 	{
 		name   : 'pricing',
@@ -31,17 +31,17 @@ const createPlanControl = [
 		config : [
 			{
 				key   : 'currency',
-				title : 'Currency',
+				title : t('saasSubscription:assign_plan_config_currency'),
 				width : '25%',
 			},
 			{
 				key   : 'period',
-				title : 'Frequency',
+				title : t('saasSubscription:assign_plan_config_frequency'),
 				width : '35%',
 			},
 			{
 				key        : 'price',
-				title      : 'Price',
+				title      : t('saasSubscription:assign_plan_config_price'),
 				width      : '40%',
 				renderFunc : 'renderPrice',
 			},
@@ -68,7 +68,7 @@ const createPlanControl = [
 				name        : 'product_id',
 				type        : 'asyncSelect',
 				asyncKey    : 'addon_list',
-				placeholder : 'Enter Name',
+				placeholder : t('saasSubscription:assign_plan_config_name_placeholder'),
 				size        : 'sm',
 				width       : '40%',
 				initialCall : true,
@@ -79,28 +79,28 @@ const createPlanControl = [
 			{
 				name        : 'count',
 				type        : 'number',
-				placeholder : 'Enter count',
+				placeholder : t('saasSubscription:assign_plan_config_count_placeholder'),
 				size        : 'sm',
 				width       : '25%',
 				rules       : {
 					required : true,
 					min      : {
 						value   : -1,
-						message : 'Should be greater than or equal to -1',
+						message : t('saasSubscription:assign_plan_config_count_err_msg'),
 					},
 				},
 			},
 			{
 				name        : 'discount',
 				type        : 'number',
-				placeholder : 'Enter Discount',
+				placeholder : t('saasSubscription:assign_plan_config_discount_placeholder'),
 				size        : 'sm',
 				width       : '25%',
 				rules       : {
 					required : true,
 					min      : {
 						value   : 0,
-						message : 'Should be greater than or equal to 0',
+						message : t('saasSubscription:assign_plan_config_discount_err_msg'),
 					},
 				},
 			},
@@ -108,4 +108,4 @@ const createPlanControl = [
 	},
 ];
 
-export default createPlanControl;
+export default getCreatePlanControl;

@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSettings } from '@cogoport/icons-react';
 
-const itemFunction = ({ setEditModal }) => ({
+const itemFunction = ({ setEditModal, t }) => ({
 	renderId: (item) => {
 		const { organization = {} } = item || {};
 		const { serial_id = '' } = organization || {};
@@ -34,7 +34,12 @@ const itemFunction = ({ setEditModal }) => ({
 	},
 	renderFamily: (item) => {
 		const { partner_id = '' } = item || {};
-		return	<span>{partner_id ? 'Channel Partner' : 'Importer Exporter'}</span>;
+		return	(
+			<span>
+				{partner_id
+					? t('saasSubscription:channel_partner') : t('saasSubscription:importer_exporter')}
+			</span>
+		);
 	},
 	renderEdit: (item) => (
 		<span>

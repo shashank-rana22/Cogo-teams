@@ -1,7 +1,8 @@
 import { Button, Modal, Tabs, TabPanel } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import assignPlanControl from '../../../../configuration/assignPlanControl';
+import getAssignPlanControl from '../../../../configuration/assignPlanControl';
 import useAssignPlan from '../../../../hooks/useAssignPlan';
 import { getFieldController } from '../../../../utils/getFieldController';
 
@@ -9,6 +10,10 @@ import CreatePlan from './CreatePlan';
 import styles from './styles.module.css';
 
 function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
+	const { t } = useTranslation(['saasSubscription']);
+
+	const assignPlanControl = getAssignPlanControl({ t });
+
 	const { formHook, submitHandler, loading, closeModal } = useAssignPlan({
 		setOpenPlanModal,
 		refectUserList,
@@ -22,14 +27,14 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 
 	return (
 		<Modal show={openPlanModal} onClose={closeModal} size="lg">
-			<Modal.Header title="Assign Plan" />
+			<Modal.Header title={t('saasSubscription:assign_plan')} />
 			<Tabs
 				activeTab={activeTab}
 				fullWidth
 				themeType="secondary"
 				onChange={setActiveTab}
 			>
-				<TabPanel name="select" title="Select Existing Plan">
+				<TabPanel name="select" title={t('saasSubscription:assign_plan_existing_plan')}>
 					<Modal.Body>
 						{(assignPlanControl || []).map((element) => {
 							const { name, label, type } = element;
@@ -56,7 +61,7 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 							onClick={closeModal}
 							disabled={loading}
 						>
-							Cancel
+							{t('saasSubscription:cancel')}
 						</Button>
 						<Button
 							themeType="accent"
@@ -65,12 +70,12 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 							onClick={handleSubmit(submitHandler)}
 							loading={loading}
 						>
-							Assign
+							{t('saasSubscription:assign')}
 						</Button>
 					</Modal.Footer>
 				</TabPanel>
 
-				<TabPanel name="create" title="Create New Plan">
+				<TabPanel name="create" title={t('saasSubscription:assign_plan_new_plan')}>
 					<CreatePlan closeModal={closeModal} />
 				</TabPanel>
 			</Tabs>

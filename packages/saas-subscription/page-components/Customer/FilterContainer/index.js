@@ -1,12 +1,15 @@
 import { Input, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 import AssignPlanModal from './AssignPlanModal';
 import styles from './styles.module.css';
 
 function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const { debounceQuery, query } = useDebounceQuery();
 	const [searchTerm, setSearchTerm] = useState('');
 	const [openPlanModal, setOpenPlanModal] = useState(false);
@@ -30,11 +33,11 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 
 	return (
 		<div className={styles.container}>
-			<h2>Customer</h2>
+			<h2>{t('saasSubscription:customer_title')}</h2>
 			<div className={styles.flex_box}>
 				<Input
 					size="sm"
-					placeholder="Search By Id"
+					placeholder={t('saasSubscription:filter_placeholder')}
 					prefix={<IcMSearchlight />}
 					value={searchTerm}
 					onChange={setSearchTerm}
@@ -45,7 +48,7 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 					type="button"
 					onClick={() => setOpenPlanModal((prev) => !prev)}
 				>
-					Assign Plan
+					{t('saasSubscription:assign_plan')}
 				</Button>
 			</div>
 

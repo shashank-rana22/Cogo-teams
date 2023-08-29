@@ -1,11 +1,11 @@
-const updatePlanFeatureControl = 	[{
+const getUpdatePlanFeatureControl = ({ t }) =>	[{
 	name     : 'updatePlanFeature',
 	type     : 'fieldArray',
 	controls : [
 		{
 			name        : 'value',
 			type        : 'text',
-			placeholder : 'Enter value',
+			placeholder : t('saasSubscription:update_plan_value'),
 			size        : 'sm',
 			width       : '25%',
 			rules       : {
@@ -15,7 +15,7 @@ const updatePlanFeatureControl = 	[{
 		{
 			name        : 'display_name',
 			type        : 'text',
-			placeholder : 'Enter Name',
+			placeholder : t('saasSubscription:update_plan_name'),
 			size        : 'sm',
 			width       : '45%',
 			rules       : {
@@ -25,24 +25,24 @@ const updatePlanFeatureControl = 	[{
 		{
 			name        : 'sequence',
 			type        : 'number',
-			placeholder : 'Enter Sequence',
+			placeholder : t('saasSubscription:update_plan_seq'),
 			size        : 'sm',
 			width       : '20%',
 			rules       : {
 				required : true,
 				min      : {
 					value   : 0,
-					message : 'Should be greater than or equal to 0',
+					message : t('saasSubscription:update_plan_seq_err'),
 				},
 			},
 		},
 	],
 }];
 
-const planFeatureDefaultValue = {
+const PLAN_FEATURE_DEFAULT_VALUE = {
 	value        : '',
 	display_name : '',
 	sequence     : '',
 };
-export default updatePlanFeatureControl;
-export { planFeatureDefaultValue };
+export default getUpdatePlanFeatureControl;
+export { PLAN_FEATURE_DEFAULT_VALUE };

@@ -1,12 +1,12 @@
-const editQuotaControl = [
+const getEditQuotaControl = ({ t }) => [
 	{
 		name    : 'action',
-		label   : 'Action',
+		label   : t('saasSubscription:edit_config_action'),
 		type    : 'radioGroup',
 		options : [
-			{ label: 'Credit', value: 'credit' },
-			{ label: 'Debit', value: 'debit' },
-			{ label: 'Reset', value: 'reset' },
+			{ label: t('saasSubscription:edit_config_action_label_1'), value: 'credit' },
+			{ label: t('saasSubscription:edit_config_action_label_2'), value: 'debit' },
+			{ label: t('saasSubscription:edit_config_action_label_3'), value: 'reset' },
 		],
 		rules: {
 			required: true,
@@ -14,25 +14,25 @@ const editQuotaControl = [
 	},
 	{
 		name        : 'quantity',
-		label       : 'Enter Quantity',
+		label       : t('saasSubscription:edit_config_quantity'),
 		size        : 'sm',
 		type        : 'number',
-		placeholder : 'Enter Quantity',
+		placeholder : t('saasSubscription:edit_config_quantity'),
 		rules       : {
 			required : true,
 			min      : {
 				value   : -1,
-				message : 'Should be greater than -1',
+				message : t('saasSubscription:edit_config_quantity_err'),
 			},
 		},
 	},
 	{
 		name    : 'is_addon',
-		label   : 'Is addon',
+		label   : t('saasSubscription:edit_config_is_addon'),
 		type    : 'radioGroup',
 		options : [
-			{ label: 'True', value: 'true' },
-			{ label: 'False', value: 'false' },
+			{ label: t('saasSubscription:edit_config_is_addon_true'), value: 'true' },
+			{ label: t('saasSubscription:edit_config_is_addon_false'), value: 'false' },
 		],
 		rules: {
 			required: true,
@@ -40,4 +40,4 @@ const editQuotaControl = [
 	},
 ];
 
-export default editQuotaControl;
+export default getEditQuotaControl;
