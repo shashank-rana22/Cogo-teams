@@ -1,40 +1,38 @@
-// import { asyncListPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
-import { useSelector } from '@cogoport/store';
-
 const useGetCallControls = () => {
-	const profile = useSelector((state) => state.profile || {});
-
-	const { id = '' } = profile?.user || {};
-
 	const controls = [
 		{
 			label          : 'Agent',
 			name           : 'agent',
 			controllerType : 'asyncSelect',
-			asyncKey       : 'list_chat_agents',
+			asyncKey       : 'partner_users',
 			initialCall    : true,
 			value          : '',
+			finalValueKey  : 'user_id',
 			className      : 'escalation_field_controller',
-			placeholder    : 'Select Agent',
+			placeholder    : 'Select Agent Name or email',
 			isClearable    : true,
-			params         : { filters: { agentId: id || {} } },
+			// size           : 'sm',
 		},
+		// {
+		// 	label          : 'User',
+		// 	labelKey       : 'name',
+		// 	name           : 'user',
+		// 	controllerType : 'asyncSelect',
+		// 	value          : '',
+		// 	finalValueKey  : 'user_id',
+		// 	asyncKey       : 'organization_users',
+		// 	className      : 'escalation_field_controller',
+		// 	// filterKey      : 'organization_id',
+		// 	placeholder    : 'Select User',
+		// 	isClearable    : true,
+		// 	// size           : 'sm',
+		// },
 		{
-			label          : 'User',
-			name           : 'user',
-			controllerType : 'asyncSelect',
-			value          : '',
-			asyncKey       : 'list_partner_users',
-			className      : 'escalation_field_controller',
-			placeholder    : 'Select User',
-			isClearable    : true,
-		},
-		{
-			label          : 'Mobile No',
-			name           : 'mobile_no',
+			label          : 'User Number',
+			name           : 'user_number',
 			controllerType : 'input',
-			placeholder    : 'enter here',
-			size           : 'md',
+			placeholder    : 'Enter here',
+			// size           : 'sm',
 			type           : 'number',
 		},
 	];

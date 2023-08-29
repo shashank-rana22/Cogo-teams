@@ -1,13 +1,29 @@
 import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
 import useGetCallControls from '../../../../../../configurations/useGetCallControls';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
+function getDefaultValues({ filters, filterControls }) {
+	let defaultValues = {};
+
+	filterControls.forEach((item) => {
+		defaultValues = {
+			...defaultValues,
+			[item.name]: filters[item.name] || '',
+		};
+	});
+
+	return defaultValues;
+}
+
 function CallsFilterComponents({
 	setFilterVisible = () => {},
+	appliedFilters = {},
+	setAppliedFilters = () => {},
 }) {
 	const filterControls = useGetCallControls();
 
@@ -16,20 +32,43 @@ function CallsFilterComponents({
 		formState: { errors },
 		watch,
 		setValue,
-		// handleSubmit,
-	} = useForm();
+		handleSubmit,
+	} = useForm({
+		defaultValues: getDefaultValues(
+			{
+				filters: appliedFilters,
+				filterControls,
+			},
+		),
+	});
 
-	const formValues = watch();
+	const agentWatch = watch('agent');
+	const userNumberWatch = watch('user_number');
+
+	const isDisabled = isEmpty(agentWatch) && isEmpty(userNumberWatch);
+
+	const resetForm = () => {
+		filterControls.forEach((item) => {
+			setValue(item.name, getDefaultValues({ filters: {}, filterControls })[item.name]);
+		});
+		setAppliedFilters({});
+	};
+
+	const checkFiltersCount = Object.keys(appliedFilters).length;
+
+	const handleClick = (val) => {
+		setAppliedFilters(val);
+		setFilterVisible(false);
+	};
 
 	return (
-		<form className={styles.container}>
+		<form className={styles.container} onSubmit={handleSubmit(handleClick)}>
 			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.header}`}>
 				<div className={styles.title}>
 					Filters
-					{/* {checkFiltersCount ? ` (${checkFiltersCount})` : ''} */}
 				</div>
 				<div className={styles.styled_icon}>
-					{/* {checkFiltersCount
+					{checkFiltersCount
 						? (
 							<Button
 								size="md"
@@ -38,7 +77,7 @@ function CallsFilterComponents({
 							>
 								Clear All
 							</Button>
-						) : null} */}
+						) : null}
 				</div>
 			</div>
 			<div className={styles.filters_container}>
@@ -51,7 +90,7 @@ function CallsFilterComponents({
 							<Item
 								{...singleField}
 								control={control}
-								value={formValues[singleField.name]}
+								value={appliedFilters[singleField.name]}
 								setValue={setValue}
 								error={errors[singleField.name]}
 							/>
@@ -72,6 +111,7 @@ function CallsFilterComponents({
 					size="md"
 					themeType="accent"
 					type="submit"
+					disabled={isDisabled}
 				>
 					Apply
 				</Button>

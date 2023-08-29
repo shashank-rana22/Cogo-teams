@@ -886,16 +886,6 @@ function asyncListLeadOrganizationUsers() {
 	};
 }
 
-function asyncListPartnerUsers() {
-	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_partner_users',
-		initialCall : true,
-		params      : {},
-	};
-}
-
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -968,5 +958,4 @@ export {
 	asyncListResources,
 	asyncFieldsLocationsMapping,
 	asyncListLeadOrganizationUsers,
-	asyncListPartnerUsers,
 };

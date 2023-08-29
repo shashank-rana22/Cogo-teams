@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import { VOICE_ICON_MAPPING, SHOW_LOG_STATUS_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
@@ -21,13 +20,13 @@ function VoiceList(voiceProps) {
 		activeTab = '',
 	} = voiceProps;
 
-	const [searchValue, setSearchValue] = useState('');
-
 	const {
 		loading,
 		data = {},
 		handleScroll = () => { },
-	} = useGetVoiceCallList({ activeTab, searchValue });
+		appliedFilters = {},
+		setAppliedFilters = () => {},
+	} = useGetVoiceCallList({ activeTab });
 
 	const { list = [] } = data;
 
@@ -54,7 +53,10 @@ function VoiceList(voiceProps) {
 
 	return (
 		<div className={styles.main_container}>
-			<CallsHeader setSearchValue={setSearchValue} searchValue={searchValue} />
+			<CallsHeader
+				appliedFilters={appliedFilters}
+				setAppliedFilters={setAppliedFilters}
+			/>
 			<div
 				className={styles.list_container}
 				onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
