@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import AdditionalInformation from './AdditionalInformation';
@@ -39,9 +39,17 @@ const KEY_COMPONENT_MAPPING = {
 	},
 };
 
-function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
+function TabComponents({
+	data = {},
+	informationPage = '',
+	setInformationPage = () => {},
+	getEmployeeDetails = () => {},
+	getEmployeeDetailsLoading = false,
+}) {
 	const { progress_stats, signed_documents, offer_letter, detail } = data || {};
 	const { share_company_policies, is_offer_letter_applicable } = detail || {};
+
+	const router = useRouter();
 
 	const {
 		// offer_letter_signed,
@@ -65,12 +73,11 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		// },
 	};
 
-	if (!is_offer_letter_applicable) {
-		delete MAPPING.offer_letter;
-	}
+	if (!is_offer_letter_applicable) delete MAPPING.offer_letter;
 
 	const onClickTiles = ({ item }) => {
 		if (MAPPING[item]) {
+			router.push('/employee-portal', `/employee-portal?activeTile=${item}`);
 			setInformationPage(item);
 		}
 	};

@@ -24,15 +24,15 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		mobile_country_code,
 		mobile_number,
 		permanent_address, present_address, cogoport_email, date_of_birth,
-		date_of_joining, designation, emergency_contact_details,
+		date_of_joining, role, emergency_contact_details,
 		employee_code, hiring_manager, hr, hrbp, office_location,
 	} = detail || {};
 
 	const { address = '', city = '', country = '', pincode = '', state = '' } = permanent_address || {};
-	const permanentAddress = !isEmpty(permanent_address)
+	const permanentAddress = (!isEmpty(city) && !isEmpty(pincode))
 		? `${address}, ${city}, ${state}, ${country} - ${pincode}` : '-';
 
-	const presentAddress = !isEmpty(present_address)
+	const presentAddress = (!isEmpty(city) && !isEmpty(pincode))
 		? `${present_address?.address || ''}, ${present_address?.city || ''}, 
 	${present_address?.state || ''}, ${present_address?.country || ''} - ${present_address?.pincode || ''}` : '-';
 
@@ -52,16 +52,16 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		cogoport_email,
 		date_of_birth             : formatdate({ date: date_of_birth }),
 		date_of_joining           : formatdate({ date: date_of_joining }),
-		designation               : startCase(designation),
+		role,
 		employee_code,
-		office_location,
-		hiring_manager            : startCase(hiring_manager?.userName),
-		hiring_manager_email      : hiring_manager?.userEmail,
+		office_location           : startCase(office_location),
+		hiring_manager            : startCase(hiring_manager?.name),
+		hiring_manager_email      : hiring_manager?.cogoport_email,
 		emergency_contact_details : emergencyContactDetails,
-		HR_name                   : startCase(hr?.userName),
-		HR_email                  : hr?.userEmail,
-		HRBP_name                 : startCase(hrbp?.userName),
-		HRBP_email                : hrbp?.userEmail,
+		HR_name                   : startCase(hr?.name),
+		HR_email                  : hr?.cogoport_email,
+		HRBP_name                 : startCase(hrbp?.name),
+		HRBP_email                : hrbp?.cogoport_email,
 	};
 
 	if (getEmployeeDetailsLoading) return <CommonLoader />;
