@@ -1,9 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import RTE_QUILL_STYLES from '../constants/rteQuillStyles';
+import RTE_QUILL_STYLES from '../constants/rteQuillStyles.json';
 
-function objectToInlineStyles(obj) {
-	return Object.entries(obj)
+function objectToInlineStyles(obj = {}) {
+	return Object.entries(obj || {})
 		.map(([property, value]) => `${property}:${value}`)
 		.join(';');
 }
@@ -12,10 +12,10 @@ function getRenderEmailBody({ html = '' }) {
 	return html.replace(
 		GLOBAL_CONSTANTS.regex_patterns.html_class_regex,
 		(match, classNames) => {
-			const classNamesArray = classNames.split(' ');
+			const classNamesArray = classNames?.split(' ') || [];
 
 			const inlineStyles = classNamesArray
-				.map(
+				?.map(
 					(className) => (RTE_QUILL_STYLES[className]
 						? objectToInlineStyles(RTE_QUILL_STYLES[className]) : ''),
 				)
