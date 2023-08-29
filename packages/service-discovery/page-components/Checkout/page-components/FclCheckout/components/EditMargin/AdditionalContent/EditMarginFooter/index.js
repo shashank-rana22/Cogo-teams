@@ -71,9 +71,9 @@ function EditMarginFooter({
 	const {
 		updateCheckoutMargin,
 		loading: updateCheckoutMarginLoading,
-	} = useUpdateCheckoutMargin();
+	} = useUpdateCheckoutMargin({ updateCheckout, id });
 
-	const updateQuotation = async () => {
+	const updateQuotation = () => {
 		try {
 			const marginValues = rateDetails.reduce((acc, curr) => {
 				const { id: currId = '', line_items = [] } = curr;
@@ -115,15 +115,7 @@ function EditMarginFooter({
 				is_applicable_for_approval_confirmation : false,
 			};
 
-			await updateCheckoutMargin({ finalPayload });
-
-			updateCheckout({
-				values: {
-					id,
-					state: 'locked',
-				},
-				scrollToTop: true,
-			});
+			updateCheckoutMargin({ finalPayload });
 		} catch (error) {
 			const { config = {} } = error.response;
 

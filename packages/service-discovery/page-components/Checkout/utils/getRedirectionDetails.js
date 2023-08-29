@@ -22,7 +22,7 @@ const getRedirectionDetails = ({
 		};
 	}
 
-	if (!tags.includes('new_admin')) {
+	if (!tags.includes('new_admin') && redirect_required === 'true') {
 		return {
 			url: `/${partner_id}/checkout/${checkout_id}`,
 			message:

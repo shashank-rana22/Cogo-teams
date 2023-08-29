@@ -52,7 +52,7 @@ function Checkout({ checkout_type = '' }) {
 		!isCheckoutApiSuccess
 		|| !isServiceSupported
 		|| (shipment_id && redirect_required === 'true')
-		|| !tags.includes('new_admin')
+		|| (!tags.includes('new_admin') && redirect_required === 'true')
 	) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,

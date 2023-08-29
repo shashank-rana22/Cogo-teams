@@ -20,7 +20,7 @@ import ConfirmTerminalChargeModal from './TerminalChargeModal';
 const LESS_PAGE_LIMIT = 8;
 const MORE_PAGE_LIMIT = 100;
 
-function List({ isSeller = false }) {
+function List({ isSeller = false, source = '' }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
 	);
@@ -123,6 +123,7 @@ function List({ isSeller = false }) {
 					<Button
 						onClick={() => setTerminalChargeModal(true)}
 						className={styles.terminal_charges}
+						disabled
 					>
 						<div className={styles.add_icon}>+</div>
 						Add Terminal Charge
@@ -149,6 +150,8 @@ function List({ isSeller = false }) {
 					<Modal.Body>
 						<AddRate
 							item={item?.serviceListItem}
+							setAddRate={setShowModal}
+							refetch={refetch}
 							status={item?.status}
 							closeModal={closeModal}
 							updateResponse={updateResponse}
@@ -167,6 +170,7 @@ function List({ isSeller = false }) {
 					setItem={setItem}
 					closeModal={closeModal}
 					tradeType={tradeType}
+					source={source}
 				/>
 			)}
 			{terminalChargeModal

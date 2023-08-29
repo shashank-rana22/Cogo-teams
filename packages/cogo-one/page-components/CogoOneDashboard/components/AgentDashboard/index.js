@@ -15,10 +15,10 @@ import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
 import TotalChatsHandled from './TotalChatshandled';
 
-function AgentDashboard({ isRolePresent = false }) {
+function AgentDashboard({ isRolePresent = false, viewType = '' }) {
 	const { query } = useRouter();
 
-	const { id = '' } = query || {};
+	const { id = '', agentType = '' } = query || {};
 
 	const [timeline, setTimeline] = useState('day');
 	const [calendarData, setCalendarData] = useState([]);
@@ -32,7 +32,7 @@ function AgentDashboard({ isRolePresent = false }) {
 		loading = false,
 		data = {},
 		getCogoOneDashboard = () => {},
-	} = useGetCogoOneAgentStats({ timeline, selectedDate, id, isRolePresent });
+	} = useGetCogoOneAgentStats({ timeline, selectedDate, id, isRolePresent, viewType: agentType || viewType });
 
 	const props = {
 		timeline,

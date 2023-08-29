@@ -1,6 +1,7 @@
 const DEFAULT_TOTAL_MARGIN_VALUE = 0;
 
 const ONE = 1;
+const PERCENT_VALUE = 100;
 
 export const convertCurrencyValue = (
 	value,
@@ -118,7 +119,12 @@ export const displayTotal = (
 	return total;
 };
 
-export const displayMarginValue = (value, { lineItem = {}, editedMargin }) => {
+export const displayMarginValue = (value, {
+	lineItem = {},
+	editedMargin,
+	value: PromotionPercentage = 0,
+	isautoDiscountApplicable = false,
+}) => {
 	const { value:finalValue = 0, type = '' } = editedMargin;
 
 	const { quantity = 1 } = lineItem;
@@ -133,6 +139,10 @@ export const displayMarginValue = (value, { lineItem = {}, editedMargin }) => {
 		derivedMarginValue = quantity * finalValue;
 	} else {
 		derivedMarginValue = Number(finalValue);
+	}
+
+	if (isautoDiscountApplicable) {
+		derivedMarginValue *= ONE - PromotionPercentage / PERCENT_VALUE;
 	}
 
 	return derivedMarginValue;

@@ -18,7 +18,7 @@ function ObjectiveActivation(props) {
 		formState,
 	} = useActivateObjective({ objectiveId, setShowActionModal, refetch });
 
-	const { control, handleSubmit, watch, setValue } = formState;
+	const { control, handleSubmit, watch, setValue, formState: { errors } } = formState;
 
 	const watchCommunicationDetails = watch('communication_details');
 
@@ -42,7 +42,15 @@ function ObjectiveActivation(props) {
 						<DatepickerController
 							name="activation_date"
 							control={control}
+							showTimeSelect
+							placement="right"
+							shouldCloseOnSelect
+							rules={{
+								required: 'Date is required',
+							}}
 						/>
+
+						<p className={styles.error}>{errors?.activation_date?.message}</p>
 					</div>
 
 					<div className={styles.communication_details}>

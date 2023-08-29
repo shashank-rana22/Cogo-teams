@@ -14,6 +14,7 @@ import ShippingPreferences from '../ShippingPreferences';
 import UnpreferredShippingLines from '../UnpreferredShippingLines';
 
 import styles from './styles.module.css';
+import useHandleAdditionalContent from './useHandleAdditionalContent';
 
 function ActiveComponent({
 	formProps = {},
@@ -57,8 +58,8 @@ function AdditionalContent({
 	infoBanner = {},
 }) {
 	const {
-		rate,
-		detail,
+		rate = {},
+		detail = {},
 		primaryService,
 		getCheckout,
 		isChannelPartner,
@@ -74,7 +75,19 @@ function AdditionalContent({
 
 	const { primary_service = '', services = {}, trade_type = '', source_id: search_id } = detail || {};
 
-	const { source = '' } = rate;
+	const { source = '' } = rate || {};
+
+	const {
+		updateCheckoutServiceLoading,
+		onClickNextButton,
+		noRatesPresent,
+	} = useHandleAdditionalContent({
+		formProps,
+		updateCheckout,
+		cargoDetails,
+		detail,
+		rate,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -163,10 +176,11 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				agreeTandC={agreeTandC}
-				cargoDetails={cargoDetails}
-				formProps={formProps}
 				infoBanner={infoBanner}
 				setInfoBanner={setInfoBanner}
+				noRatesPresent={noRatesPresent}
+				updateCheckoutServiceLoading={updateCheckoutServiceLoading}
+				onClickNextButton={onClickNextButton}
 			/>
 		</div>
 	);

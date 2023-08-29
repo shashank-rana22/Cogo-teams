@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 
-const useUpdateCheckoutMargin = () => {
+const useUpdateCheckoutMargin = ({ updateCheckout = () => {}, id = '' }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_checkout_margin',
 		method : 'POST',
@@ -13,9 +14,17 @@ const useUpdateCheckoutMargin = () => {
 			await trigger({ data: finalPayload });
 
 			Toast.success('Margin updated successfully');
+
+			updateCheckout({
+				values: {
+					id,
+					state: 'locked',
+				},
+				scrollToTop: true,
+			});
 		} catch (error) {
 			if (error?.response) {
-				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				Toast.error(startCase(getApiErrorString(error?.response?.data) || 'Something went wrong'));
 			}
 		}
 	};

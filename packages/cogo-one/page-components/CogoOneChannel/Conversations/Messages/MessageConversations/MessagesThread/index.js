@@ -5,11 +5,11 @@ import { isEmpty } from '@cogoport/utils';
 import React, { forwardRef, useEffect } from 'react';
 
 import { updateUnreadMessagesCount } from '../../../../../../helpers/updateUnreadMessagesCount';
-import NewUserOutBound from '../NewUserOutBound';
-import TimeLine from '../TimeLine';
 
 import { ReceiveDivComponent, SentDivComponent } from './conversationDivMappings';
+import NewUserOutBound from './NewUserOutBound';
 import styles from './styles.module.css';
+import TimeLine from './TimeLine';
 
 const DEFAULT_VALUE = 0;
 const DEFAULT_UNREAD_MESSAGES = 0;
@@ -112,13 +112,20 @@ function MessagesThread(
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
 
+				const modtifiedEachMessage = {
+					...(eachMessage || {}),
+					...(channel_type === 'platform_chat'
+						? {
+							message_status: (!(index >= unreadIndex)) ? 'seen' : 'delivered',
+						}
+						: {}),
+				};
 				return (
 					<Component
 						key={eachMessage?.created_at}
 						conversation_type={eachMessage?.conversation_type || 'unknown'}
-						eachMessage={eachMessage}
+						eachMessage={modtifiedEachMessage}
 						activeMessageCard={activeMessageCard}
-						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}

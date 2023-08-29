@@ -1,9 +1,12 @@
-import { Input } from '@cogoport/components';
-
-import StyledSelect from '../../../../StyledSelect';
+import { Input, Select, Tooltip } from '@cogoport/components';
+import { IcMInformation } from '@cogoport/icons-react';
 
 import CodeMargin from './CodeMargin';
 import styles from './styles.module.css';
+
+const ONE = 1;
+const PERCENT_VALUE = 100;
+const ROUND_OFF_VALUE = 2;
 
 function ServiceMargin({
 	serviceIndex = 0,
@@ -12,23 +15,29 @@ function ServiceMargin({
 	item = {},
 	onChangeLineItem = () => {},
 	shouldEditMargin = false,
+	isautoDiscountApplicable = false,
+	description = '',
+	promotion_discounts = {},
 }) {
 	const { type, value } = filteredMargins;
 
-	const onChange = ({ selectedValue, setShowPopover }) => {
-		onChangeLineItem({ selectedValue, setShowPopover, lineItemKey: 'type' });
+	const { value:discountValue = 0 } = promotion_discounts || {};
+
+	const onChange = (selectedValue) => {
+		onChangeLineItem({ selectedValue, lineItemKey: 'type' });
 	};
 
 	return (
 		<>
 			<div className={styles.currency} style={{ width: '10%' }}>
-				<StyledSelect
-					defaultValue={type}
+				<Select
+					value={type}
 					onChange={onChange}
 					disabled={!shouldEditMargin}
+					size="sm"
 					options={[
 						{
-							label : ' Total',
+							label : 'Total',
 							value : 'absolute_total',
 						},
 						{
@@ -46,6 +55,23 @@ function ServiceMargin({
 					value={value}
 					onChange={(selectedValue) => onChangeLineItem({ selectedValue, lineItemKey: 'value' })}
 				/>
+
+				{isautoDiscountApplicable ? (
+					<div className={styles.flex}>
+						<div className={styles.applicable_margin}>
+							Applied:
+							{' '}
+							{(value * (ONE - discountValue / PERCENT_VALUE)).toFixed(ROUND_OFF_VALUE)}
+						</div>
+
+						<Tooltip
+							interactive
+							content={description || `There is discount of ${value}% on this line item`}
+						>
+							<IcMInformation width={12} height={12} fill="#849e4c" />
+						</Tooltip>
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.currency}>
@@ -53,6 +79,8 @@ function ServiceMargin({
 					item={item}
 					editedDemandMargin={filteredMargins}
 					id_prefix={`${serviceIndex}_${lineItemIndex}`}
+					isautoDiscountApplicable={isautoDiscountApplicable}
+					promotion_discounts={promotion_discounts}
 				/>
 			</div>
 		</>

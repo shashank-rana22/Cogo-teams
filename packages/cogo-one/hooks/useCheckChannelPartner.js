@@ -111,7 +111,7 @@ const useCheckChannelPartner = ({
 	const {
 		openNewTab, hideCpButton, disableQuickActions,
 	} = formatData({
-		data,
+		data: (!orgId || loading) ? {} : data,
 		loading,
 		orgId,
 		activeConversationTab,
@@ -122,7 +122,12 @@ const useCheckChannelPartner = ({
 	});
 
 	return {
-		openNewTab, loading, disableQuickActions, hideCpButton, getOrgDetails,
+		openNewTab,
+		loading,
+		disableQuickActions,
+		hideCpButton,
+		getOrgDetails,
+		organizationData: data?.data || {},
 	};
 };
 export default useCheckChannelPartner;

@@ -9,7 +9,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
-import AddService from '../../commons/AdditionalServices/components/List/AddService';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -22,7 +21,7 @@ const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
 	sales  	  : dynamic(() => import('../SalesInvoice'), { ssr: false }),
-	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
+	purchase  : dynamic(() => import('../PurchaseInvoice'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 	tracking  : dynamic(() => import('@cogoport/air-modules/components/Tracking'), { ssr: false }),
@@ -31,12 +30,32 @@ const TAB_MAPPING = {
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
 
+function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = () => {}, isGettingShipment = false }) {
+	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
+
+	if (!shipment_data?.is_job_closed && isTrue) {
+		return (
+			<div className={styles.raise_alarm_container}>
+				<RaiseAlarm
+					alarmId={alarmId}
+					setAlarmId={setAlarmId}
+					loading={isGettingShipment}
+				/>
+			</div>
+		);
+	}
+	if (shipment_data?.is_job_closed) {
+		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
+	}
+	return null;
+}
+
 function DefaultView() {
 	const router = useRouter();
 
 	const {
 		shipment_data = {}, stakeholderConfig = {},
-		servicesList = [], getShipmentStatusCode = 0, isGettingShipment = false,
+		getShipmentStatusCode = 0, isGettingShipment = false,
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
@@ -73,11 +92,6 @@ function DefaultView() {
 			pre_subject_text : `${shipment_data.serial_id}`,
 			shipment_type  	 : shipment_data.shipment_type,
 		},
-		purchase: {
-			shipmentData : shipment_data,
-			servicesData : servicesList,
-			AddService,
-		},
 		tracking: {
 			shipmentData: shipment_data,
 		},
@@ -108,26 +122,6 @@ function DefaultView() {
 		);
 	}
 
-	const handleRaiseContainer = () => {
-		const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
-
-		if (!shipment_data?.is_job_closed && isTrue) {
-			return (
-				<div className={styles.raise_alarm_container}>
-					<RaiseAlarm
-						alarmId={alarmId}
-						setAlarmId={setAlarmId}
-						loading={isGettingShipment}
-					/>
-				</div>
-			);
-		}
-		if (shipment_data?.is_job_closed) {
-			return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
-		}
-		return null;
-	};
-
 	return (
 		<div>
 			<div className={styles.top_header}>
@@ -139,7 +133,12 @@ function DefaultView() {
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
-					{handleRaiseContainer()}
+					<HandleRaiseContainer
+						shipment_data={shipment_data}
+						alarmId={alarmId}
+						setAlarmId={setAlarmId}
+						isGettingShipment={isGettingShipment}
+					/>
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>

@@ -4,17 +4,17 @@ import { useState, useContext, useMemo } from 'react';
 
 import useGetInsuranceDraftDetails from '../../../../../hooks/useGetInsuranceDraftDetails';
 
-import Step1 from './step1';
-import Step2 from './step2';
-import Step3 from './step3';
+import StepOne from './step1';
+import StepTwo from './step2';
+import StepThree from './step3';
 import getDefaultValues from './utils/getDefaultValues';
 
 const FIRST_STEP = 1;
 
 const stepMapping = {
-	1 : Step1,
-	2 : Step2,
-	3 : Step3,
+	1 : StepOne,
+	2 : StepTwo,
+	3 : StepThree,
 };
 
 function CargoInsurance({

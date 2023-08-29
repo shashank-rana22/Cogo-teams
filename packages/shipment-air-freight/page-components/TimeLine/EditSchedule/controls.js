@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../utils/getDate';
+import { getCustomDate } from '../utils/getCustomDate';
 
 const FLIGHT_STATE_ORIGIN = ['flight_arrived', 'flight_departed', 'cargo_handed_over_at_origin'];
 const FLIGHT_STATE_DEPART = ['flight_arrived', 'flight_departed'];
@@ -9,6 +9,7 @@ const FLIGHT_STATE_DEPART = ['flight_arrived', 'flight_departed'];
 const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) => {
 	const state = primary_service?.state || '';
 
+	const handedOverDate = getCustomDate(primary_service?.cargo_handed_over_at_origin_at);
 	const disabledState = !TIMELINE_EDITABLE?.primary_service?.state?.includes(state);
 	const editableFields = stakeholderConfig?.timeline?.editable_fields;
 
@@ -25,6 +26,7 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			name                  : 'schedule_departure',
 			label                 : 'Actual time of departure',
 			maxDate               : null,
+			minDate               : handedOverDate,
 			disable               : disabledState || FLIGHT_STATE_DEPART.includes(state),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
@@ -46,7 +48,7 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 
 	finalControls.forEach((control) => {
 		const { name } = control;
-		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
+		DEFAULT_VALUES[name] = getCustomDate(primary_service?.[name]);
 	});
 
 	const newControls = finalControls.map((control) => ({

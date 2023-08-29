@@ -86,6 +86,7 @@ function NewWhatsappMessage({
 				dialNumber={dialNumber}
 				key={type}
 				userName={userName}
+				viewType={viewType}
 			/>
 		</Modal>
 	);

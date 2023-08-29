@@ -1,8 +1,6 @@
-import { Button, Popover, Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { Button, Popover } from '@cogoport/components';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
 import { useRef, useEffect, useContext } from 'react';
 
 import InfoBannerContent from '../../../../common/InfoBannerContent';
@@ -31,10 +29,11 @@ function PreviewBookingFooter({
 	updateLoading = false,
 	isVeryRisky = false,
 	agreeTandC = false,
-	cargoDetails = {},
-	formProps = {},
 	setInfoBanner = () => {},
 	infoBanner = {},
+	noRatesPresent = false,
+	updateCheckoutServiceLoading = false,
+	onClickNextButton = () => {},
 }) {
 	const { push } = useRouter();
 
@@ -42,111 +41,11 @@ function PreviewBookingFooter({
 
 	const timerRef = useRef(null);
 
-	const {
-		validity_end,
-		id = '',
-		primary_service = '',
-		services = {},
-	} = detail;
+	const { validity_end, id = '' } = detail;
 
 	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
-	const { getValues, handleSubmit } = formProps;
-
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
-
-	const [{ loading :updateCheckoutServiceLoading }, triggerUpdateCheckoutService] = useRequest(
-		{
-			method : 'post',
-			url    : '/update_checkout_service',
-		},
-		{ manual: true },
-	);
-
-	const handleNextButton = async () => {
-		const primaryServicesArray = Object.values(services).filter(
-			(item) => item.service_type === primary_service,
-		);
-
-		const {
-			cargo_readiness_date = '',
-			cargo_value = '',
-			cargo_value_currency = '',
-			commodity_category = '',
-		} = cargoDetails || {};
-
-		const {
-			sailing_range = {},
-			max_price,
-			min_price,
-			agreed_for_partial_shipment = false,
-			...restValues
-		} = getValues();
-
-		const { startDate = '', endDate = '' } = sailing_range;
-
-		if ((startDate && !endDate) || (!startDate && endDate)) {
-			Toast.error('Select sailing range correctly');
-			return;
-		}
-
-		if (Number(min_price) > Number(max_price)) {
-			Toast.error('Min price cannot be greater than max price');
-			return;
-		}
-
-		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
-			Toast.error('Please select cargo details');
-			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-			return;
-		}
-
-		try {
-			await triggerUpdateCheckoutService({
-				data: {
-					id,
-					update_rates                    : false,
-					service                         : primary_service,
-					fcl_freight_services_attributes : primaryServicesArray.map(
-						({ id: service_id }) => ({
-							id                   : service_id,
-							cargo_readiness_date : cargo_readiness_date || undefined,
-							cargo_value          : Number(cargo_value) || undefined,
-							cargo_value_currency : cargo_value_currency || undefined,
-							commodity_category   : commodity_category || commodity_category,
-							shipping_preferences : {
-								sailing_start_date          : startDate || undefined,
-								sailing_end_date            : endDate || undefined,
-								min_price                   : Number(min_price) || undefined,
-								max_price                   : Number(max_price) || undefined,
-								agreed_for_partial_shipment : agreed_for_partial_shipment === 'yes',
-								...restValues,
-							},
-						}),
-					),
-				},
-			});
-
-			updateCheckout({
-				values: {
-					id,
-					state: 'booking_confirmation',
-				},
-				scrollToTop: true,
-			});
-		} catch (error) {
-			const { config = {} } = error.response;
-
-			const { url = '' } = config;
-			Toast.error(`${getApiErrorString(error.response?.data)} in ${url}`);
-		}
-	};
-
-	const onError = () => {
-		Toast.error('Please select shipping preferences');
-
-		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-	};
 
 	const onClickSaveForLater = () => {
 		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
@@ -157,7 +56,7 @@ function PreviewBookingFooter({
 		);
 	};
 
-	const disableButton = isVeryRisky || !agreeTandC
+	const disableButton = isVeryRisky || !agreeTandC || noRatesPresent
 		|| (detail?.importer_exporter?.kyc_status !== 'verified'
 			&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
 
@@ -179,7 +78,7 @@ function PreviewBookingFooter({
 			disabled  : isVeryRisky || !agreeTandC || disableButton,
 			style     : { marginLeft: '16px' },
 			key       : 'place_booking',
-			onClick   : () => handleSubmit(handleNextButton, onError)(),
+			onClick   : onClickNextButton,
 		},
 	];
 
@@ -205,6 +104,12 @@ function PreviewBookingFooter({
 
 	return (
 		<div className={styles.container} id="proceed_button">
+			{noRatesPresent ? (
+				<div className={styles.error}>
+					Please remove services with no rates
+				</div>
+			) : null}
+
 			<div className={styles.validity_time}>
 				{!hasExpired ? (
 					<div className={styles.flex}>
