@@ -66,7 +66,7 @@ function Status({
 	const cross_entity_check = 	ALLOWED_ENTITY_ID_FOR_CN.includes(invoice?.entity_id) && invoice?.status === 'approved';
 
 	const showRequestCN = (showCN || cross_entity_check)
-	&& !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
+	&& !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice?.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
 	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
 

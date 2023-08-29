@@ -30,7 +30,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 					collectionParty={collectionParty}
 					refetch={refetch}
 					servicesData={servicesData}
-					key={collectionParty.id}
+					key={collectionParty?.id}
 					AddService={AddService}
 					fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
 				/>

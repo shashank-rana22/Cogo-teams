@@ -11,7 +11,7 @@
 	box-shadow: 0 0 10px rgb(0 0 0 / 25%);
 }
 
-.servicename {
+.service_name {
 	display: flex;
 	font-size: var(--font-size-sm);
 	font-weight: 500;
@@ -49,6 +49,11 @@
 	display: flex;
 	flex: 4;
 	justify-content: center;
+
+	&.active {
+		text-decoration: underline;
+		cursor: pointer;
+	}
 }
 
 .invoice_value {
@@ -60,4 +65,9 @@
 
 .spankey {
 	padding-right: 4px;
+}
+
+.live_invoice_amount {
+	margin-left: 4px;
+	color: #5936f0;
 }
