@@ -10,7 +10,9 @@
 
 .orgin_port {
 	width: 22%;
-	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .arrow_logo {
@@ -19,7 +21,9 @@
 
 .destination_port {
 	width: 22%;
-	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .high_demand_port_pairs {
@@ -39,4 +43,18 @@
 
 .action_logo {
 	width: 4%;
+}
+
+.destination_port_name {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.origin_port_name {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

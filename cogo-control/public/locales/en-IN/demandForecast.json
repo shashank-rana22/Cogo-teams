@@ -13,7 +13,7 @@
 	"supplier": "SUPPLIER",
 	"win_probability": "WIN PROBABILITY",
 	"capability": "CAPABILITY",
-	"forecasted_demands": "Forecasted Demands",
+	"forecasted_demands": "Forecasted Demand",
 	"forecasted_dates": "Forecasted Dates",
 	"win_probability_tooltip_content": "Your Win Probability indicates your chances of winning this demand based on your rates and service quality"
 }

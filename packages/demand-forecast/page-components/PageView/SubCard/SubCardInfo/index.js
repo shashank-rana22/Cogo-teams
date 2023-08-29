@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
@@ -23,15 +23,32 @@ function SubCardInfo({ portInfo = {}, info_key = 'remaining_clusters' }) {
 	return (
 
 		<div className={styles.row}>
-			<dv className={styles.orgin_port}>
-				{info_key === 'remaining_clusters' ? origin_cluster?.name : origin_location?.display_name }
-			</dv>
+			<div className={styles.orgin_port}>
+				<Tooltip
+					content={info_key === 'remaining_clusters' ? origin_cluster?.name : origin_location?.display_name}
+					placement="top"
+				>
+					<div className={styles.origin_port_name}>
+						{info_key === 'remaining_clusters' ? origin_cluster?.name : origin_location?.display_name }
+					</div>
+				</Tooltip>
+			</div>
+
 			<div className={styles.arrow_logo}>
 				<IcMPortArrow />
 			</div>
 
 			<div className={styles.destination_port}>
-				{info_key === 'remaining_clusters' ? destination_cluster?.name : destination_location?.display_name}
+				<Tooltip
+					content={info_key === 'remaining_clusters'
+						? destination_cluster?.name : destination_location?.display_name}
+					placement="top"
+				>
+					<div className={styles.destination_port_name}>
+						{info_key === 'remaining_clusters'
+							? destination_cluster?.name : destination_location?.display_name}
+					</div>
+				</Tooltip>
 			</div>
 
 			<div className={styles.high_demand_port_pairs}>

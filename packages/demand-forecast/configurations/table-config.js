@@ -3,7 +3,7 @@ const getTableConfig = ({ t }) => {
 		{
 			key   : 'origin',
 			title : t('demandForecast:origin'),
-			width : '24%',
+			width : '27%',
 		},
 		{
 			key   : 'destination',

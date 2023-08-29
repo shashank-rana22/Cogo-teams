@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMPortArrow } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -17,15 +18,27 @@ function Card({ card = {} }) {
 	return (
 		<div>
 			<div className={styles.row}>
-				<dv className={styles.orgin_port}>
-					{origin?.name || '-'}
-				</dv>
+
+				<div className={styles.orgin_port}>
+					<Tooltip
+						content={origin?.name || '-'}
+						placement="top"
+					>
+						<div className={styles.origin_port_name}>{origin?.name || '-'}</div>
+					</Tooltip>
+				</div>
+
 				<div className={styles.arrow_logo}>
 					<IcMPortArrow />
 				</div>
 
 				<div className={styles.destination_port}>
-					{destination?.name || '-'}
+					<Tooltip
+						content={destination?.name || '-'}
+						placement="top"
+					>
+						<div className={styles.destination_port_name}>{destination?.name || '-'}</div>
+					</Tooltip>
 				</div>
 
 				<div className={styles.high_demand_port_pairs}>
