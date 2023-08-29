@@ -7,7 +7,7 @@ import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
-import mobileNumberPads from '../../../../../configurations/number-pad';
+import MOBILE_NUMBER_KEYS from '../../../../../configurations/number-pad';
 
 import styles from './styles.module.css';
 
@@ -80,31 +80,40 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 					placeholder="Enter number"
 				/>
 				<div className={styles.number_div}>
-					{mobileNumberPads.map(({ label, lowerlabel, icon }) => (
-						<>
-							{label !== '' && (
-								<div
-									role="presentation"
-									className={styles.number_pad}
-									onClick={() => handleChange(label)}
-								>
-									<div className={styles.number}>{label}</div>
-									<div className={styles.letter}>{lowerlabel}</div>
-								</div>
-							)}
-							<div className={styles.delete_div}>
-								{icon && (
+					{MOBILE_NUMBER_KEYS.map((item) => {
+						const {
+							label = '',
+							key = '',
+							lowerlabel = '',
+							icon = null,
+						} = item || {};
+
+						return (
+							<div key={key}>
+								{label && (
 									<div
 										role="presentation"
-										className={styles.delete_icon}
-										onClick={handleDelete}
+										className={styles.number_pad}
+										onClick={() => handleChange(label)}
 									>
-										{icon}
+										<div className={styles.number}>{label}</div>
+										<div className={styles.letter}>{lowerlabel}</div>
 									</div>
 								)}
+								<div className={styles.delete_div}>
+									{icon ? (
+										<div
+											role="presentation"
+											className={styles.delete_icon}
+											onClick={handleDelete}
+										>
+											{icon}
+										</div>
+									) : null}
+								</div>
 							</div>
-						</>
-					))}
+						);
+					})}
 				</div>
 				<div
 					role="presentation"

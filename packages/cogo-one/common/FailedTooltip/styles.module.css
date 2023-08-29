@@ -1,0 +1,24 @@
+.tooltip_styles {
+	width: 400px;
+	padding: 8px !important;
+
+	ul {
+		padding-left: 12px !important;
+		margin: 4px 0 !important;
+	}
+
+	:global {
+		.tippy-content {
+			padding: 0 !important;
+		}
+	}
+}
+
+.text_styles {
+	font-size: 12px;
+	word-break: break-word;
+}
+
+.heading {
+	font-weight: 600;
+}
