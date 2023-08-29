@@ -12,8 +12,8 @@ function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => 
 		bucket_type,
 		allocation_percentage,
 		suppliers_count,
-		current_promised_containers,
 		current_allocated_containers,
+		current_forecast,
 		past_fulfilled_containers,
 		past_allocated_containers,
 	} = item;
@@ -58,8 +58,8 @@ function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => 
 		{
 			component: (
 				<CustomProgressBar
-					allocatedCount={current_promised_containers}
-					promisedCount={current_allocated_containers}
+					currentForecastCount={current_forecast}
+					currentAllocatedCount={current_allocated_containers}
 					uploadText=" done"
 					view="current_container_allocation"
 				/>
@@ -70,8 +70,8 @@ function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => 
 		{
 			component: (
 				<CustomProgressBar
-					promisedCount={past_fulfilled_containers}
-					allocatedCount={past_allocated_containers}
+					pastFulfilledCount={past_fulfilled_containers}
+					pastAllocatedCount={past_allocated_containers}
 					uploadText=" done"
 					view="past_container_allocation"
 				/>
