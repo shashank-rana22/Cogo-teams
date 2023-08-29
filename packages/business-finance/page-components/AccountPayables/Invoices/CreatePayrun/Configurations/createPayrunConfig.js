@@ -29,7 +29,7 @@ export const CREATE_PAYRUN_CONFIG = {
 			key       : 'organizationName',
 			func      : 'renderToolTip',
 			maxLength : 36,
-			span      : 1.6,
+			span      : 1,
 		},
 		{
 			label  : 'Invoice Number',
@@ -86,7 +86,7 @@ export const CREATE_PAYRUN_CONFIG = {
 			editable    : true,
 			currencyKey : 'currency',
 			fallBackKey : 'tdsValue',
-			span        : 1,
+			span        : 1.5,
 		},
 		{
 			label       : 'Paid',
@@ -100,7 +100,14 @@ export const CREATE_PAYRUN_CONFIG = {
 			key         : 'payableAmount',
 			span        : 1,
 			editable    : true,
-			fallBackKey : 'payableValue',
+			currencyKey : 'currency',
+		},
+		{
+			label       : 'To be Paid',
+			key         : 'inputAmount',
+			span        : 1.5,
+			editable    : true,
+			fallBackKey : 'payableAmount',
 			func        : 'renderEditablePayable',
 			currencyKey : 'currency',
 		},
@@ -114,7 +121,7 @@ export const CREATE_PAYRUN_CONFIG = {
 		{
 			label : 'Bank Details',
 			key   : 'bank_details',
-			span  : 1.5,
+			span  : 2,
 			func  : 'renderBankDetails',
 		},
 		{

@@ -22,19 +22,32 @@ const FIRST_PAGE = 1;
 const getFunctions = ({ GetTableBodyCheckbox, setEditedValue, refetch }) => ({
 	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
 	renderToolTip  : (itemData, field) => (
-		<RenderToolTip itemData={itemData} field={field} />
+		<RenderToolTip
+			itemData={itemData}
+			field={field}
+		/>
 	),
 	renderInvoiceDates: (itemData, field) => (
-		<RenderInvoiceDates itemData={itemData} field={field} />
+		<RenderInvoiceDates
+			itemData={itemData}
+			field={field}
+		/>
 	),
 	renderUrgencyTag: (itemData, field) => (
-		<RenderUrgency itemData={itemData} field={field} />
+		<RenderUrgency
+			itemData={itemData}
+			field={field}
+		/>
 	),
 	renderAction: (itemData) => (
 		<RenderAction itemData={itemData} />
 	),
 	renderEditableTds: (itemData, field) => (
-		<EditableTdsInput itemData={itemData} field={field} setEditedValue={setEditedValue} />
+		<EditableTdsInput
+			itemData={itemData}
+			field={field}
+			setEditedValue={setEditedValue}
+		/>
 	),
 	renderEditablePayable: (itemData, field) => (
 		<EditablePayableAmount

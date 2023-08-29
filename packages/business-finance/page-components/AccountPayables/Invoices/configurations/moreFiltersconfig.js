@@ -18,6 +18,7 @@ export const moreFilters = [
 					{ label: 'Proforma', value: 'PROFORMA' },
 					{ label: 'Credit Note', value: 'CREDIT_NOTE' },
 					{ label: 'Reimbursement', value: 'REIMBURSEMENT' },
+					{ label: 'Expense', value: 'expense' },
 				],
 			},
 		],

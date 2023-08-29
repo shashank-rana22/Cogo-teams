@@ -1,8 +1,8 @@
-import { Input, Tooltip } from '@cogoport/components';
+import { Input, Tooltip, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMInformation, IcMLineundo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -20,17 +20,23 @@ const getFormattedAmount = ({ amount, currency }) => (
 	})
 );
 
-function EditablePayableAmount({ itemData, field, setEditedValue }) {
+function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () => {} }) {
 	const newItem = itemData;
 	const { key, fallBackKey } = field;
 	const [edit, setEdit] = useState(false);
+
 	const [value, setValue] = useState(getByKey(newItem, key));
+
 	const {
 		currency,
-		payableValue,
+		payableAmount,
 	} = newItem;
 
-	const maxValueCrossed = +value > +payableValue;
+	useEffect(() => {
+		setValue(itemData.inputAmount);
+	}, [itemData.inputAmount]);
+
+	const maxValueCrossed = +value > +payableAmount;
 	const lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
 
 	const isError = lessValueCrossed || maxValueCrossed;
@@ -44,21 +50,23 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 			amount: value,
 			currency,
 		})} (To Be Paid) cannot be greater than payable: ${getFormattedAmount({
-			amount: payableValue,
+			amount: payableAmount,
 			currency,
 		})}`;
 	} else {
 		errorMessege = getFormattedAmount({ amount: value, currency });
 	}
 
-	const content = (
-		<div className={styles.flex}>
-			<div>
-				{!isError && <div className={styles.text}>Actual payable value</div>}
-				<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>{errorMessege}</div>
+	function ToolTipContent() {
+		return (
+			<div className={styles.flex}>
+				<div>
+					{!isError && <div className={styles.text}>Actual payable value</div>}
+					<div className={cl`${styles.message} ${isError ? styles.errormessage : ''}`}>{errorMessege}</div>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	const handleUndo = () => {
 		setEditedValue(newItem, newItem[fallBackKey], key, false);
@@ -68,7 +76,7 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 
 	if (edit) {
 		return (
-			<div className={`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
+			<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 				<Input
 					onChange={(val) => {
 						setEditedValue(newItem, val, key, true);
@@ -79,11 +87,11 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 					placeholder="Amount"
 					type="number"
 				/>
-				<Tooltip content={content}>
+				<Tooltip content={<ToolTipContent />}>
 					<IcMInformation
 						height={14}
 						width={14}
-						className={`${styles.icon} ${isError ? styles.error : ''}`}
+						className={cl`${styles.icon} ${isError ? styles.error : ''}`}
 					/>
 				</Tooltip>
 				<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />
@@ -93,7 +101,7 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 	return (
 		<div>
 			{getFormattedAmount({
-				amount   : value,
+				amount   : getByKey(newItem, key),
 				currency : getByKey(newItem, field?.currencyKey),
 			})}
 			<span className={styles.edit}>

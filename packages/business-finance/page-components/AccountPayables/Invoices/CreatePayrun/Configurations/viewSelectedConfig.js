@@ -77,7 +77,7 @@ export const VIEW_SELECTED_CONFIG = {
 			span        : 1,
 		},
 		{
-			label       : 'Payable',
+			label       : 'To be Paid',
 			key         : 'payableAmount',
 			span        : 1,
 			func        : 'renderAmount',

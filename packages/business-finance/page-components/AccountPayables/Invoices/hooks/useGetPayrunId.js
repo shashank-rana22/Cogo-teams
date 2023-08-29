@@ -79,7 +79,7 @@ const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceTyp
 			} else if (categoryValue === 'overheads') {
 				push(
 					`/business-finance/account-payables/invoices/create-pay-run?payrun=${resp?.data.id}
-							&currency=${currency}&entity=${activeEntity}&payrun_type=overheads`,
+							&currency=${currency}&entity=${activeEntity}&payrun_type=${type}`,
 				);
 			}
 

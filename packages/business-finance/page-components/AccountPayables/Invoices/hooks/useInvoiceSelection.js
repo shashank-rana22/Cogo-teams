@@ -18,8 +18,10 @@ import { CREATE_OVER_SEAS_CONFIG } from '../OverSeasAgent/Configurations/createO
 
 const API_ARRAY_VARIABLE_ONE = 1;
 const INCREEMENT_BY = 1;
-const VALUE_ZERO = 0;
-const POSITIVE_NO_CHECK = -1;
+const MIN_AMOUNT = 0;
+const ELEMENT_NOT_FOUND = -1;
+const HUNDERED_PERCENT = 100;
+const TEN_PERCENT = 10;
 
 const useGetInvoiceSelection = ({ sort }) => {
 	const { push } = useRouter();
@@ -194,7 +196,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			const data = list?.[i];
 
 			const {
-				tdsValue = 0,
+				tdsAmount = 0,
 				checked = false,
 				id = '',
 				bankDetail = undefined,
@@ -232,13 +234,14 @@ const useGetInvoiceSelection = ({ sort }) => {
 
 				SELECTED_INVOICE.push({
 					billId        : id,
-					tdsAmount     : +tdsValue,
+					tdsAmount     : +tdsAmount,
 					payableAmount : +inputAmount,
 					bankDetail    : formattedBank,
 					invoiceType,
 				});
 			}
 		}
+
 		try {
 			const res = await addInvoiceToSelectedAPI[API_ARRAY_VARIABLE_ONE]({
 				data: {
@@ -278,7 +281,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 	const onChangeTableHeaderCheckbox = (event) => {
 		setApiData((p) => {
 			const newValue = { ...p };
-			const len = newValue?.list?.length || VALUE_ZERO;
+			const len = newValue?.list?.length || MIN_AMOUNT;
 			for (let i = 0; i < len; i += INCREEMENT_BY) newValue.list[i].checked = event;
 			return newValue;
 		});
@@ -288,7 +291,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			(value) => value?.checked,
 		)?.length;
 		const isAllRowsChecked = isCheckedLength === api?.data?.list?.length;
-		const isSemiRowsChecked = isCheckedLength > VALUE_ZERO;
+		const isSemiRowsChecked = isCheckedLength > MIN_AMOUNT;
 
 		return (
 			<Checkbox
@@ -306,7 +309,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			const index = newValue?.list?.findIndex(
 				(item) => item?.id === itemData?.id,
 			);
-			if (index !== POSITIVE_NO_CHECK) {
+			if (index !== ELEMENT_NOT_FOUND) {
 				newValue.list[index] = {
 					...itemData,
 					checked: !itemData?.checked,
@@ -331,120 +334,58 @@ const useGetInvoiceSelection = ({ sort }) => {
 	}
 
 	const setEditedValue = (itemData, value, key, checked = false) => {
-		setApiData((p) => {
-			const newValue = { ...p };
+		setApiData((prevApiData) => {
+			const newValue = { ...prevApiData };
 			const index = newValue?.list?.findIndex(
 				(item) => item?.id === itemData?.id,
 			);
-			const oldDataIndex = listInvoices?.data?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			if (index !== POSITIVE_NO_CHECK) {
+			const {
+				payableValue,
+				invoiceAmount,
+				tdsDeducted,
+				payableAmount,
+				tdsAmount,
+			} = newValue.list[index];
+			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
+
+			let maxValueCrossed = false;
+			let lessValueCrossed = false;
+			let lessTdsValueCrossed = false;
+			let maxTdsValueCrossed = false;
+
+			if (key === 'payableAmount') {
+				maxValueCrossed = +value > +payableValue;
+				lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
+				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+			} else if (key === 'tdsAmount') {
+				maxValueCrossed = +payableAmount > +payableValue;
+				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
+				lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
+
+				newValue.list[index].payableAmount = payableValue - value;
+				newValue.list[index].inputAmount = payableValue - value;
+			} else {
+				maxValueCrossed = +payableAmount > +payableValue;
+				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+			}
+
+			const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
+
+			if (index !== ELEMENT_NOT_FOUND) {
 				newValue.list[index] = {
 					...itemData,
+					hasError: isError,
 					checked,
-					oldBankData: { ...listInvoices?.data?.list[oldDataIndex].bankDetail },
 				};
 				newValue.list[index][key] = value;
 			}
 			return newValue;
 		});
 	};
-	const setRestValue = (
-		itemData,
-		value,
-		key,
-		editable = false,
-		checked = true,
-	) => {
-		setApiData((p) => {
-			const newValue = { ...p };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			if (index !== POSITIVE_NO_CHECK) {
-				newValue.list[index] = {
-					...itemData,
-					editable,
-					checked,
-				};
-				newValue.list[index][key] = value;
-			}
-
-			return newValue;
-		});
-	};
-
-	const setEditedTdsValue = (itemData, value, key, paidAmountValue) => {
-		setApiTdsData((p) => {
-			const newValue = { ...p };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			if (index !== POSITIVE_NO_CHECK) {
-				newValue.list[index] = {
-					...itemData,
-					payableAmount : paidAmountValue,
-					inputAmount   : paidAmountValue,
-				};
-				newValue.list[index][key] = value;
-			}
-			return newValue;
-		});
-	};
-
-	const setRestTds = (itemData, value, key) => {
-		setApiTdsData((p) => {
-			const newValue = { ...p };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			if (index !== POSITIVE_NO_CHECK) {
-				newValue.list[index] = {
-					...itemData,
-					payableAmount : itemData?.payableValue,
-					inputAmount   : itemData?.payableValue,
-					tdsEditable   : false,
-				};
-				newValue.list[index][key] = value;
-			}
-			return newValue;
-		});
-	};
-
-	const setEditeable = (itemData) => {
-		setApiData((p) => {
-			const newValue = { ...p };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			if (index !== POSITIVE_NO_CHECK) {
-				newValue.list[index] = {
-					...itemData,
-					editable : true,
-					checked  : true,
-				};
-			}
-			return newValue;
-		});
-	};
-	const setEditeableTds = (itemData) => {
-		setApiTdsData((p) => {
-			const newValue = { ...p };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			if (index !== POSITIVE_NO_CHECK) {
-				newValue.list[index] = {
-					...itemData,
-					tdsEditable : true,
-					checked     : true,
-				};
-			}
-			return newValue;
-		});
-	};
-
 	const onClear = () => {
 		setGlobalFilters({
 			pageIndex   : 1,
@@ -490,12 +431,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		GetTableHeaderCheckbox,
 		GetTableBodyCheckbox,
 		setEditedValue,
-		setEditeableTds,
-		setEditeable,
-		setRestTds,
 		delete_payrun_invoice,
-		setEditedTdsValue,
-		setRestValue,
 		deleteInvoices,
 		loading       : api[GLOBAL_CONSTANTS.zeroth_index]?.loading,
 		payrun_type,

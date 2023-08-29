@@ -29,8 +29,8 @@ const HUNDERED_PERCENT = 100;
 
 const TEN_PERCENT = 10;
 
-const getFunctions = ({ getTableBodyCheckbox, setEditedValue }) => ({
-	renderCheckbox : (itemData) => getTableBodyCheckbox(itemData),
+const getFunctions = ({ GetTableBodyCheckbox, setEditedValue }) => ({
+	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
 	renderToolTip  : (itemData, field) => (
 		<RenderToolTip itemData={itemData} field={field} />
 	),
@@ -70,8 +70,8 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		orderBy,
 		setOrderBy,
 		getPayrunInvoices,
-		getTableBodyCheckbox,
-		getTableHeaderCheckbox,
+		GetTableBodyCheckbox,
+		GetTableHeaderCheckbox,
 	} = useGetPayrunInvoices({ apiData, setApiData });
 
 	const setEditedValue = (itemData, value, key, checked = false) => {
@@ -104,6 +104,9 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
 				lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
+
+				newValue.list[index].payableAmount = payableValue - value;
+				newValue.list[index].inputAmount = payableValue - value;
 			} else {
 				maxValueCrossed = +payableAmount > +payableValue;
 				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
@@ -129,7 +132,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		getPayrunInvoices,
 	}));
 
-	const FUNCTIONS = getFunctions({ getTableBodyCheckbox, setEditedValue });
+	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue });
 
 	return (
 		<div>
@@ -188,7 +191,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 						...filters,
 						pageIndex: val,
 					})}
-					renderHeaderCheckbox={getTableHeaderCheckbox}
+					renderHeaderCheckbox={GetTableHeaderCheckbox}
 					rowStyle="border"
 					showPagination
 					paginationType="number"

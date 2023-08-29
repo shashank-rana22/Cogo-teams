@@ -21,7 +21,10 @@ function FilterModal({
 	// clearMoreFilters = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
-	const [modalFilters, setModalFilters] = useState({ currency: filters?.currency });
+	const [modalFilters, setModalFilters] = useState({
+		currency    : filters?.currency,
+		invoiceType : filters?.invoiceType || undefined,
+	});
 	const { currency = '' } = modalFilters || {};
 
 	const handleClose = () => {
@@ -88,6 +91,7 @@ function FilterModal({
 										category    : filters?.category || undefined,
 										currency    : filters?.currency || '',
 										entity      : filters?.entity || '',
+										// invoiceType : filters?.invoiceType || undefined,
 									});
 									onClear();
 									setModalFilters({ currency: filters?.currency || '' });

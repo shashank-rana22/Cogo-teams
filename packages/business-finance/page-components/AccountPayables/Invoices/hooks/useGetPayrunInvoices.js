@@ -35,6 +35,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		entity = '',
 		currency,
 		payrun,
+		payrun_type = '',
 	} = urlQuery || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -48,7 +49,14 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	const [orderBy, setOrderBy] = useState({});
 
 	const [filters, setFilters] = useState(
-		{ invoiceView: 'coe_accepted', pageSize: 10, pageIndex: 1, currency, entity },
+		{
+			invoiceView : 'coe_accepted',
+			pageSize    : 10,
+			pageIndex   : 1,
+			currency,
+			entity,
+			invoiceType : payrun_type === 'OVERHEADS' ? 'expense' : undefined,
+		},
 	);
 
 	const {
@@ -82,6 +90,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 					payableValue : payableAmount,
 					tdsValue     : tdsAmount,
 					bankValue    : bankDetail,
+					inputAmount  : item?.payableAmount,
 				};
 			});
 		}
@@ -159,7 +168,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		});
 	};
 
-	const getTableHeaderCheckbox = () => {
+	function GetTableHeaderCheckbox() {
 		const { list = [] } = apiData || {};
 		const { list: dataList = [] } = data || {};
 		const isCheckedLength = list.filter((value) => value?.checked).length;
@@ -171,7 +180,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 				onChange={onChangeTableHeaderCheckbox}
 			/>
 		);
-	};
+	}
 
 	const onChangeTableBodyCheckbox = (itemData) => {
 		const { id = '' } = itemData || {};
@@ -208,7 +217,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 			return prevData;
 		});
 	};
-	const getTableBodyCheckbox = (itemData) => {
+	function GetTableBodyCheckbox(itemData) {
 		const { id = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(
@@ -225,16 +234,16 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 				)}
 			</div>
 		);
-	};
+	}
 
 	return {
 		billsLoading: loading,
 		filters,
 		setFilters,
 		entity,
-		getTableBodyCheckbox,
+		GetTableBodyCheckbox,
 		apiData,
-		getTableHeaderCheckbox,
+		GetTableHeaderCheckbox,
 		currency,
 		setOrderBy,
 		orderBy,

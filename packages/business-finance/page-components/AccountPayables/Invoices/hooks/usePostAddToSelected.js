@@ -13,9 +13,9 @@ const getSelectedInvoices = ({ list }) => {
 			tdsAmount = 0,
 			checked = false,
 			id = '',
+			inputAmount = 0,
 			bankDetail = undefined,
 			invoiceNumber = ' ',
-			payableAmount = 0,
 			invoiceType,
 		} = addToSelectdata || {};
 
@@ -53,7 +53,7 @@ const getSelectedInvoices = ({ list }) => {
 			SELECTED_INVOICES.push({
 				billId        : id,
 				tdsAmount     : +tdsAmount,
-				payableAmount : +payableAmount,
+				payableAmount : +inputAmount,
 				bankDetail    : formattedBank,
 				invoiceType,
 			});

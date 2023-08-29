@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcCError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -34,6 +35,15 @@ function Footer({
 		setViewSelectedInvoices(true);
 		setShowHeader(false);
 	};
+
+	function RenderContent() {
+		return (
+			<div className={styles.popover_modal}>
+				Please ensure to move the checked invoices
+				to the selected bucket or else you’ll lose the edited fields.
+			</div>
+		);
+	}
 	return (
 		<div>
 			<div className={styles.container}>
@@ -83,6 +93,21 @@ function Footer({
 						)
 						: (
 							<div className={styles.button_container}>
+								{!isEmpty(checkedList) && (
+									<div className={styles.alert}>
+										<Tooltip
+											animation="scale"
+											placement="top"
+											content={RenderContent()}
+											maxWidth="none"
+										>
+											<div>
+												<IcCError className={styles.alert_icon} height={24} width={24} />
+											</div>
+										</Tooltip>
+									</div>
+								)}
+
 								<div>
 									<Button
 										themeType="secondary"

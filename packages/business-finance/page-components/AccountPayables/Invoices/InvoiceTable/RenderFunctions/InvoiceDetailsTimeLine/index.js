@@ -21,7 +21,7 @@ import SupplierInformation from './SupplierInformation';
 const PLACEHOLDERS = 3;
 const TIMELINEKEY = '4';
 const geo = geoConstants();
-function InvoiceDetailsTimeLine({ item }) {
+function InvoiceDetailsTimeLine({ item = {} }) {
 	const {
 		invoiceDetailsLoading,
 		invoiceDetails,
@@ -39,7 +39,7 @@ function InvoiceDetailsTimeLine({ item }) {
 		{
 			id                : item?.id,
 			serviceProviderId : item?.serviceProviderId,
-			billId            : item?.id,
+			billId            : item?.billId || item?.id,
 			jobId             : item?.jobId,
 			objectId          : item?.objectId || '',
 		},
@@ -66,64 +66,68 @@ function InvoiceDetailsTimeLine({ item }) {
 
 	const { invoiceNumber = '', jobNumber = '', billNumber = '', sid = '', objectNumber = '' } = item || {};
 
-	const invoiceDetailsComp = (
-		<div className={styles.content_caret}>
-			<div
-				className={styles.icon_container}
-				onClick={() => {
-					setShowDetailsCard(false);
-				}}
-				role="presentation"
-			>
-				<IcMArrowRotateLeft />
-			</div>
+	function InvoiceDetailsComp() {
+		return (
+			<div className={styles.content_caret}>
+				<div
+					className={styles.icon_container}
+					onClick={() => {
+						setShowDetailsCard(false);
+					}}
+					role="presentation"
+				>
+					<IcMArrowRotateLeft />
+				</div>
 
-			<div className={styles.header_details}>
-				INVOICE DETAILS -
-				<span style={{ textDecorationLine: 'underline' }}>
-					{objectNumber || invoiceNumber || billNumber}
-				</span>
-				{' '}
-				- SID :-
-				<span>
-					{jobNumber || sid}
-				</span>
-			</div>
-		</div>
-	);
-
-	const supplierComp = (
-		<div className={styles.body_details_card}>
-			<div className={styles.invoice_card_data}>
-				<div className={styles.supplier_data_header}>
-					<span style={{ fontWeight: '600' }}>
-						Supplier Name :
+				<div className={styles.header_details}>
+					INVOICE DETAILS -
+					<span style={{ textDecorationLine: 'underline' }}>
+						{objectNumber || invoiceNumber || billNumber}
 					</span>
-					<span style={{ fontWeight: '600' }}>
-						{item?.organizationName}
+					{' '}
+					- SID :-
+					<span>
+						{jobNumber || sid}
 					</span>
 				</div>
-				<div className={styles.flex}>
-					{DETAILS?.map((detail) => (
-						<div className={styles.supplier_data_body} key={detail.key}>
-							<div>{detail?.label}</div>
-							<div>
-								{getFormattedPrice(
-									invoiceDetails?.[detail?.key],
-									geo.country.currency.code,
-									{
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								)}
+			</div>
+		);
+	}
+
+	function SupplierComp() {
+		return (
+			<div className={styles.body_details_card}>
+				<div className={styles.invoice_card_data}>
+					<div className={styles.supplier_data_header}>
+						<span style={{ fontWeight: '600' }}>
+							Supplier Name :
+						</span>
+						<span style={{ fontWeight: '600' }}>
+							{item?.organizationName}
+						</span>
+					</div>
+					<div className={styles.flex}>
+						{DETAILS?.map((detail) => (
+							<div className={styles.supplier_data_body} key={detail.key}>
+								<div>{detail?.label}</div>
+								<div>
+									{getFormattedPrice(
+										invoiceDetails?.[detail?.key],
+										geo.country.currency.code,
+										{
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 0,
+										},
+									)}
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	const ComponentMappings = {
 		Profitability: <Profitability
@@ -159,9 +163,9 @@ function InvoiceDetailsTimeLine({ item }) {
 					<div className={styles.invoice_details_container_bg} />
 					<div className={styles.invoice_details_container}>
 						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
-							{invoiceDetailsComp}
+							{InvoiceDetailsComp()}
 							<div className={styles.body_details}>
-								{supplierComp}
+								{SupplierComp()}
 								{invoiceDetailsLoading ? (
 									[...Array(PLACEHOLDERS).keys()].map((key) => (
 										<Placeholder
