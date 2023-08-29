@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../../common/EmptyState';
 
@@ -11,6 +12,8 @@ const THREE = 3;
 const FOUR = 4;
 
 function KamOverview(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		overviewList = [],
 		overviewLoading,
@@ -36,7 +39,7 @@ function KamOverview(props) {
 					height={108}
 					width={180}
 					textSize="16px"
-					emptyText="Overview Data Not Found"
+					emptyText={t('allocation:overview_data_not_found')}
 				/>
 			</div>
 		);

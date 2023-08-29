@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 function useEditEngagementScoringConfiguration(props) {
-	const { refetch = () => {}, setEditMode = () => {} } = props;
+	const { refetch = () => {}, setEditMode = () => {}, t = () => {} } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'engagement_scoring_event_configurations_attributes',
@@ -21,7 +21,7 @@ function useEditEngagementScoringConfiguration(props) {
 
 			await trigger({ data: payload });
 
-			Toast.success('Changes made successfully');
+			Toast.success(t('allocation:changes_made_successfully'));
 
 			setEditMode('');
 
