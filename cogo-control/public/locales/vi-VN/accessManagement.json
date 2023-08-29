@@ -119,6 +119,7 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Lưu",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Cho phép Điều hướng",
     "roles_and_permission_crm_dashboard_permission_module": "Cấu hình các quyền của bạn theo ý muốn và lưu. Để sửa đổi quyền truy cập hàng loạt, hãy nhấp vào các nút radio tính năng ở trên.",
+    "roles_and_permission_crm_dashboard_permission_decision": "Quyền này sẽ quyết định các lượt xem trong mô-đun này",
     "roles_and_permission_create_role_modal_heading": "Tạo Vai trò",
     "roles_and_permission_create_role_modal_sub_heading": "Đặt tên và mô tả vai trò",
     "roles_and_permission_create_role_modal_role_name": "Tên Vai trò",

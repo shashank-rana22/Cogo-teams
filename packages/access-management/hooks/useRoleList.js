@@ -6,6 +6,7 @@ import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { changeFilters, getFilter, onResetFilters } from '../page-components/RoleList/Filters/utils/controls';
 import styles from '../page-components/RoleList/styles.module.css';
@@ -13,8 +14,9 @@ import { API } from '../utils/api';
 
 const FIRST_INDEX = 1;
 
-const useRoleList = ({ t }) => {
+const useRoleList = () => {
 	const router = useRouter();
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 	const [stakeHolderType, setStakeHolderType] = useState('all');
 	const [filters, setFilters] = useState({});

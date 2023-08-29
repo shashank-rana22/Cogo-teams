@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Heading from '../../../common/Heading';
 import useCreateRole from '../../../hooks/useCreateRole';
@@ -11,11 +12,12 @@ function CreateRoleModal({
 	showCreateRoleModal = false,
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
-	t = () => {},
 }) {
 	const onChange = () => {
 		onChangeShowCreateRoleModal(false);
 	};
+
+	const { t } = useTranslation(['accessManagement', 'common']);
 
 	const {
 		controls, formProps, onSubmit, createRoleApi,

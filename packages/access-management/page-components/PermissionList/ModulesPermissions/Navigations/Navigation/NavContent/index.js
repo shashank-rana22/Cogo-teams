@@ -14,7 +14,6 @@ function NavContent({
 	show = null,
 	onDepartmentChange = () => {},
 	selectedDepartments = {},
-	t = () => {},
 }) {
 	return (
 		<section>
@@ -22,7 +21,6 @@ function NavContent({
 				<Departments
 					onChange={onDepartmentChange}
 					selectedDepartments={selectedDepartments}
-					t={t}
 				/>
 			) : (
 				<Permissions
@@ -31,7 +29,6 @@ function NavContent({
 					roleData={roleData}
 					selectedDepartments={selectedDepartments}
 					creatingNavs={creatingNavs}
-					t={t}
 				/>
 			)}
 		</section>

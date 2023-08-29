@@ -25,7 +25,7 @@ function RoleList() {
 		stakeHolderType,
 		setStakeHolderType,
 		columns,
-	} = useRoleList({ t });
+	} = useRoleList();
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0 } = listAuthRolesApi.data || {};
 
@@ -47,7 +47,6 @@ function RoleList() {
 					searchString={searchString}
 					setSearchString={setSearchString}
 					stakeHolderType={stakeHolderType}
-					t={t}
 				/>
 
 				<section className={styles.list_container} id="rnp_role_list_list_and_pagination_container">
@@ -74,7 +73,6 @@ function RoleList() {
 				showCreateRoleModal={showCreateRoleModal}
 				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
 				redirect={redirect}
-				t={t}
 			/>
 		</section>
 	);

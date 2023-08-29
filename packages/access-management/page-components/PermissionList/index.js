@@ -41,7 +41,6 @@ function PermissionList() {
 				getRole={getRole}
 				activeNavs={activeNavs}
 				activeNavsLoading={activeNavsLoading}
-				t={t}
 			/>
 
 			<ModulesPermissions {...props} />

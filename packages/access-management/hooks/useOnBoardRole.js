@@ -17,14 +17,17 @@ import getNavigationOptions from '../utils/get-navigation-options';
  */
 
 const useOnBoardRole = () => {
-	const [initialLoading, setInitialLoad] = useState(true);
-	const [showImportRole, setShowImportRole] = useState(false);
-	const [importedPermissions, setImportedPermissions] = useState(null);
+	const router = useRouter();
+
+	const { t } = useTranslation(['accessManagement', 'common']);
+
 	const { role_id } = useSelector(({ general }) => ({
 		role_id: general?.query?.role_id,
 	}));
-	const router = useRouter();
 
+	const [initialLoading, setInitialLoad] = useState(true);
+	const [showImportRole, setShowImportRole] = useState(false);
+	const [importedPermissions, setImportedPermissions] = useState(null);
 	const [{ loading, data }, trigger] = useAuthRequest({
 		url    : '/list_roles',
 		method : 'get',
@@ -45,8 +48,6 @@ const useOnBoardRole = () => {
 	const { navigations: activeNavs = [] } = activeNavsData || {};
 
 	const { permissions } = possiblePermissionsData || {};
-
-	const { t } = useTranslation(['accessManagement', 'common']);
 
 	const navigationMappingAdmin = navigationMapping({ t });
 
@@ -125,7 +126,6 @@ const useOnBoardRole = () => {
 		onImport,
 		activeNavs,
 		activeNavsLoading,
-		t,
 	};
 };
 

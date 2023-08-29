@@ -16,7 +16,6 @@ function Permissions(props) {
 		roleData = {},
 		selectedDepartments,
 		creatingNavs = false,
-		t = () => {},
 	} = props;
 
 	return (
@@ -33,7 +32,6 @@ function Permissions(props) {
 						navigation={navigationApis}
 						selectedDepartments={selectedDepartments}
 						creatingNavs={creatingNavs}
-						t={t}
 					/>
 				);
 			})}

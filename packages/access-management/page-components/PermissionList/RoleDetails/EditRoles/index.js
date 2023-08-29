@@ -1,13 +1,16 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useEditRole from '../../../../hooks/useEditRole';
 
 import Edit from './edit';
 import styles from './styles.module.css';
 
-function EditRoleModal({ roleData, getRole, t = () => {} }) {
+function EditRoleModal({ roleData, getRole }) {
+	const { t } = useTranslation(['accessManagement', 'common']);
+
 	const [show, setShow] = useState(false);
 
 	const {

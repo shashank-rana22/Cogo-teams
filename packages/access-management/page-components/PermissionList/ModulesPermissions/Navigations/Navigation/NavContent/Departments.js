@@ -1,5 +1,6 @@
 import { Chips, MultiSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -47,7 +48,8 @@ const getDepartment = (item) => {
 	return ALL_DEPARTMENTS;
 };
 
-function Departments({ onChange = () => {}, selectedDepartments = {}, t = () => {} }) {
+function Departments({ onChange = () => {}, selectedDepartments = {} }) {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const OPTIONS_Select = [
 		{
 			label : t('accessManagement:roles_and_permission_allow'),

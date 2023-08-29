@@ -1,6 +1,7 @@
 import { ButtonIcon, RadioGroup } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import displayNames from '../../../../../../configurations/feature-descriptions';
@@ -41,8 +42,8 @@ function Grouped(props) {
 		navigation = {},
 		featureKey = '',
 		creatingNavs = false,
-		t = () => {},
 	} = props || {};
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const { possible_apis = [], ...rest } = apiGroup || {};
 	const {
 		handleApiStatus,

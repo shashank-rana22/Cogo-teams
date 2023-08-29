@@ -2,6 +2,7 @@ import { Placeholder, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDoubleLeft } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Heading from '../../../common/Heading';
 
@@ -15,14 +16,16 @@ function RoleDetails({
 	onImport = () => {},
 	getRole = () => {},
 	activeNavs = [],
-	t = () => {},
 }) {
+	const { t } = useTranslation(['accessManagement', 'common']);
+
 	const {
 		name = '',
 		remarks: descriptions = '',
 		stakeholder_type = '',
 		importedPermissions,
 	} = roleData;
+
 	const details = useMemo(
 		() => [
 			{
@@ -85,7 +88,7 @@ function RoleDetails({
 				/>
 
 				<section className={styles.permissions_container}>
-					<EditRoles roleData={roleData} getRole={getRole} t={t} />
+					<EditRoles roleData={roleData} getRole={getRole} />
 					{importPermissionsButton}
 				</section>
 

@@ -71,13 +71,12 @@ function Navigation(props) {
 		isNested = false,
 		activeNavs,
 	} = props;
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const [show, setShow] = useState(null);
 	const [showStatus, setShowStatus] = useState(null);
 	const [navigationRefs, setNavigationRefs] = useState({});
 	const [selectedDepartments, setSelectedDepartments] = useState({ scopes: ['allowed'] });
 	const { createRole, loading: creatingNavs } = useCreateRole();
-
-	const { t } = useTranslation(['accessManagement', 'common']);
 
 	const navigationApis = getNavOptions(navigation.key);
 	const [{ data = {}, loading: loadingPermissions = false }, trigger] = useAuthRequest({
@@ -230,7 +229,6 @@ function Navigation(props) {
 							show={show}
 							onDepartmentChange={onDepartmentChange}
 							selectedDepartments={selectedDepartments}
-							t={t}
 						/>
 					</Modal.Body>
 

@@ -119,6 +119,7 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "บันทึก",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "อนุญาตให้นำทาง",
     "roles_and_permission_crm_dashboard_permission_module": "กำหนดการอนุญาตของคุณตามที่คุณต้องการและบันทึก สำหรับการแก้ไขการอนุญาตแบบจำนวนมากคลิกที่ปุ่มวงกลมข้างบน",
+    "roles_and_permission_crm_dashboard_permission_decision": "การอนุญาตนี้จะตัดสินมุมมองในโมดูลนี้",
     "roles_and_permission_create_role_modal_heading": "สร้างบทบาท",
     "roles_and_permission_create_role_modal_sub_heading": "ตั้งชื่อบทบาทและคำอธิบายบทบาท",
     "roles_and_permission_create_role_modal_role_name": "ชื่อบทบาท",

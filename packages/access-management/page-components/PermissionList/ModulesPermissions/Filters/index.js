@@ -1,5 +1,6 @@
 import { Popover, Chips, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import SearchInput from '../../../../common/SearchInput';
@@ -11,8 +12,8 @@ function Filters({
 	onChangeSearchNavigation = () => {},
 	navStatus = {},
 	setNavStatus = () => {},
-	t = () => {},
 }) {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const content = (
 		<section className={styles.filters_popover_content}>
 			<span>{t('accessManagement:roles_and_permission_filters_navigation_status_heading')}</span>

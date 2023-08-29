@@ -119,6 +119,7 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Save",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Allow Navigation",
     "roles_and_permission_crm_dashboard_permission_module": "Configure your permissions according to you and save. For modifying permissions in bulk click on feature radio buttons above",
+    "roles_and_permission_crm_dashboard_permission_decision": "This Permission will decide views in this module",
     "roles_and_permission_create_role_modal_heading": "Create Role",
     "roles_and_permission_create_role_modal_sub_heading": "Set role name and role description",
     "roles_and_permission_create_role_modal_role_name": "Role Name",

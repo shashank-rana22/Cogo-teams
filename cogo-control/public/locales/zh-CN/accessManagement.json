@@ -119,6 +119,7 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "保存",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "允许导航",
     "roles_and_permission_crm_dashboard_permission_module": "根据您的需要配置权限并保存。要批量修改权限，请单击上方的功能单选按钮",
+    "roles_and_permission_crm_dashboard_permission_decision": "该权限将决定该模块中的视图",
     "roles_and_permission_create_role_modal_heading": "创建角色",
     "roles_and_permission_create_role_modal_sub_heading": "设置角色名称和角色描述",
     "roles_and_permission_create_role_modal_role_name": "角色名称",

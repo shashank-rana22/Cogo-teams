@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React, { memo, useState } from 'react';
 
 import Heading from '../../../common/Heading';
@@ -7,7 +8,8 @@ import Navigations from './Navigations';
 import styles from './styles.module.css';
 
 function ModulesPermissions(props) {
-	const { roleData = {}, t = () => {} } = props || {};
+	const { roleData = {} } = props || {};
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const [searchString, setSearchString] = useState('');
 	const [navStatus, setNavStatus] = useState('all');
 
@@ -26,7 +28,6 @@ function ModulesPermissions(props) {
 					onChangeSearchNavigation={(value) => setSearchString(value)}
 					navStatus={navStatus}
 					setNavStatus={setNavStatus}
-					t={t}
 				/>
 			</div>
 
