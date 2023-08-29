@@ -18,7 +18,7 @@ function EditInvoice({
 }) {
 	const { profile } = useSelector((state) => state);
 
-	const isRoleAllowed = GLOBAL_CONSTANTS.uuid.air_admin_roles.includes(profile?.user?.id);
+	const isRoleAllowed = GLOBAL_CONSTANTS.uuid.air_admin_user_ids.includes(profile?.user?.id);
 
 	const {
 		controls,
