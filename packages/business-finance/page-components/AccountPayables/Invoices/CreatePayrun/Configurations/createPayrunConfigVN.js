@@ -92,6 +92,7 @@ export const CREATE_PAYRUN_CONFIG_VN = {
 			span        : 1,
 			editable    : true,
 			currencyKey : 'currency',
+			func        : 'renderAmount',
 		},
 		{
 			label       : 'To be Paid',
