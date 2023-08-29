@@ -21,6 +21,7 @@
     "roles_and_permission_select_sales_acquisition": "ฝ่ายจัดหา",
     "roles_and_permission_select_cp_portfolio": "พอร์ตการจัดหา CP",
     "roles_and_permission_select_customer_operations": "การดำเนินงานลูกค้า",
+    "roles_and_permission_select_lead_convertor": "ตัวแปลงตะกั่ว",
     "roles_and_permission_select_supply_shippling_line": "บริษัทเรือ",
     "roles_and_permission_select_supply_freight_forwarder": "บริษัทส่งสินค้า",
     "roles_and_permission_select_supply_transportation": "การขนส่ง",
