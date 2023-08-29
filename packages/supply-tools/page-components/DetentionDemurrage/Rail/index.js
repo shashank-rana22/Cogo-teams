@@ -6,6 +6,7 @@ import ListView from '../common/ListView';
 import ShipmentTabs from '../common/ShipmentTabs';
 
 import AddEdit from './AddEdit';
+import Form from './AddEdit/Form';
 import Filter from './Filter';
 import listFieldsColumns from './listFieldsColumns';
 import styles from './styles.module.css';
@@ -29,9 +30,11 @@ function Rail({ activeShipment = '' }) {
 
 	const invoiceProps = { listFilters: LIST_INVOICE_DEFAULT_FILTERS, shipment_type: SHIPMENT_TYPE };
 
+	const handleEditSubmit = (values) => console.log({ values }, 'EDIT RAIL');
+
 	const tabMapping = {
-		active   : <ListView {...listViewProps} />,
-		inactive : <ListView {...listViewProps} />,
+		active   : <ListView {...listViewProps} EditForm={Form} handleSubmitForm={handleEditSubmit} />,
+		inactive : <ListView {...listViewProps} EditForm={Form} handleSubmitForm={handleEditSubmit} />,
 		invoice  : <Invoice {...invoiceProps} />,
 	};
 
@@ -41,10 +44,10 @@ function Rail({ activeShipment = '' }) {
 				<h2>Rail Domestic</h2>
 
 				<div className={styles.button_group_container}>
-					<Filter />
+					<Filter filters={filters} setFilters={setFilters} />
+
 					{activeTab === 'active' ? <AddEdit /> : null}
 				</div>
-
 			</div>
 
 			<ShipmentTabs activeTab={activeTab} setActiveTab={setActiveTab} activeShipment={activeShipment} />

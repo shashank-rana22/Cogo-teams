@@ -5,7 +5,47 @@ import FREE_DAYS_TYPES from '../../../../../configs/FREE_DAYS_TYPE.json';
 import LOCATION_TYPES from '../../../../../configs/LOCATION_TYPE.json';
 import SPECIFICITY_TYPES from '../../../../../configs/SPECIFICITY_TYPE.json';
 import TRADE_TYPES from '../../../../../configs/TRADE_TYPE.json';
-// eslint-disable-next-line max-lines-per-function
+
+const fieldArrayField = [
+	{
+		label       : 'Lower Limit',
+		name        : 'lower_limit',
+		type        : 'number',
+		span        : 3,
+		placeholder : 'Lower Limit (in Days)',
+		size        : 'sm',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'upper_limit',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		label       : 'Upper Limit',
+		placeholder : 'Upper Limit (in Days)',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'currency',
+		type        : 'async_select',
+		asyncKey    : 'list_exchange_rate_currencies',
+		span        : 3,
+		label       : 'Currency',
+		size        : 'sm',
+		placeholder : 'Currency',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'price',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		label       : 'Price',
+		placeholder : 'Price',
+		rules       : { required: 'This is required' },
+	},
+];
+
 const getControls = ({ item = {} }) => [
 	{
 		label : 'Location Details',
@@ -98,7 +138,6 @@ const getControls = ({ item = {} }) => [
 		valueKey    : 'user_id',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Container Details',
 		name  : 'container_details',
@@ -126,7 +165,6 @@ const getControls = ({ item = {} }) => [
 		rules       : { required: 'This is required' },
 		options     : containerTypes,
 	},
-
 	{
 		label : 'Free Limit Details',
 		span  : 12,
@@ -156,7 +194,6 @@ const getControls = ({ item = {} }) => [
 		span  : 12,
 		name  : 'validity_details',
 	},
-	// check for css
 	{
 		name  : 'validity',
 		type  : 'date_range_picker',
@@ -166,7 +203,6 @@ const getControls = ({ item = {} }) => [
 		placeholder : 'Select Validity Range',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Previous Days Applicable',
 		name  : 'previous_days_applicable_label',
@@ -199,13 +235,12 @@ const getControls = ({ item = {} }) => [
 		type        : 'select',
 		span        : 4,
 		value       : item?.free_days_type || undefined,
-		// disabled  : !!task.id,
+		disabled    : !!item.free_days_type,
 		size        : 'sm',
 		options     : FREE_DAYS_TYPES,
 		placeholder : 'Free Days Type',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Demurrage',
 		name  : 'demurrage_label',
@@ -218,47 +253,8 @@ const getControls = ({ item = {} }) => [
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
 		value              : item?.free_days_type === 'demurrage' ? item?.slabs : [{ lower_limit: '' }],
-		controls           : [
-			{
-				label       : 'Lower Limit',
-				name        : 'lower_limit',
-				type        : 'number',
-				span        : 3,
-				placeholder : 'Lower Limit (in Days)',
-				size        : 'sm',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'upper_limit',
-				type        : 'number',
-				span        : 3,
-				size        : 'sm',
-				label       : 'Upper Limit',
-				placeholder : 'Upper Limit (in Days)',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'currency',
-				type        : 'async_select',
-				asyncKey    : 'list_exchange_rate_currencies',
-				span        : 3,
-				label       : 'Currency',
-				size        : 'sm',
-				placeholder : 'Currency',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'price',
-				type        : 'number',
-				span        : 3,
-				size        : 'sm',
-				label       : 'Price',
-				placeholder : 'Price',
-				rules       : { required: 'This is required' },
-			},
-		],
+		controls           : fieldArrayField,
 	},
-
 	{
 		label : 'Detention',
 		name  : 'detention_label',
@@ -271,43 +267,8 @@ const getControls = ({ item = {} }) => [
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
 		value              : item?.free_days_type === 'detention' ? item?.slabs : [{ lower_limit: '' }],
-		controls           : [
-			{
-				name        : 'lower_limit',
-				type        : 'number',
-				size        : 'sm',
-				placeholder : 'Lower Limit (in Days)',
-				span        : 3,
-				rules       : { required: 'This is required', min: 1 },
-			},
-			{
-				name        : 'upper_limit',
-				type        : 'number',
-				size        : 'sm',
-				span        : 3,
-				placeholder : 'Upper Limit (in Days)',
-				rules       : { required: 'This is required', min: 1 },
-			},
-			{
-				name        : 'currency',
-				placeholder : 'Currency',
-				size        : 'sm',
-				type        : 'async_select',
-				asyncKey    : 'list_exchange_rate_currencies', // component
-				span        : 3,
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'price',
-				placeholder : 'Enter Price',
-				size        : 'sm',
-				type        : 'number',
-				span        : 2,
-				rules       : { required: 'This is required' },
-			},
-		],
+		controls           : fieldArrayField,
 	},
-
 ];
 
 export default getControls;

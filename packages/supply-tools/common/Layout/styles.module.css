@@ -19,3 +19,8 @@
 	margin-top: 0;
 	font-weight: 500;
 }
+
+.errors {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}

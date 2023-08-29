@@ -5,10 +5,10 @@ import Layout from '../../../../../common/Layout';
 
 import getControls from './getControls';
 
-function Form({ item = {} }, ref) {
-	const controls = getControls({ item });
-
+function Form({ item = {}, handleSubmitForm = () => {} }, ref) {
 	const DEFAULT_VALUES = {};
+
+	const controls = getControls({ item });
 
 	controls.forEach((ctrl) => {
 		if (ctrl?.value) {
@@ -29,20 +29,21 @@ function Form({ item = {} }, ref) {
 		}
 	});
 
-	const onSubmit = (values) => (values);
+	const onSubmit = (values) => handleSubmitForm(values);
 
-	const onError = (err) => (err);
+	const isDemmurage = watchFreeDaysType === 'demurrage';
+	const isDetention = watchFreeDaysType === 'detention';
 
 	const showElements = {
-		demurrage       : watchFreeDaysType === 'demurrage',
-		demurrage_label : watchFreeDaysType === 'demurrage',
-		detention       : watchFreeDaysType === 'detention',
-		detention_label : watchFreeDaysType === 'detention',
+		demurrage       : isDemmurage,
+		demurrage_label : isDemmurage,
+		detention       : isDetention,
+		detention_label : isDetention,
 	};
 
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
-			handleSubmit(onSubmit, onError)();
+			handleSubmit(onSubmit)();
 		},
 	}));
 

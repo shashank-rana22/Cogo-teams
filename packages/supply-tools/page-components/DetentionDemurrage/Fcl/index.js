@@ -20,9 +20,11 @@ function Fcl({ activeShipment = '' }) {
 
 	const listViewProps = { filters, setFilters, data, columns: listFieldsColumns, loading };
 
+	const handleEditSubmit = (values) => console.log({ values }, 'EDIT FCL');
+
 	const tabMapping = {
-		active   : <ListView {...listViewProps} EditForm={Form} />,
-		inactive : <ListView {...listViewProps} EditForm={Form} />,
+		active   : <ListView {...listViewProps} EditForm={Form} handleSubmitForm={handleEditSubmit} />,
+		inactive : <ListView {...listViewProps} EditForm={Form} handleSubmitForm={handleEditSubmit} />,
 	};
 
 	return (

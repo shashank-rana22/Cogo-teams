@@ -1,13 +1,63 @@
 import containerSize from '@cogoport/constants/rail-container-sizes.json';
 import containerTypes from '@cogoport/constants/rail-container-types.json';
 
-// eslint-disable-next-line max-lines-per-function
-const getControls = ({ item = {} }) => [
+import COMMODITY_TYPES from '../../../../../configs/COMMODITY_TYPE.json';
+import FREE_DAYS_TYPES from '../../../../../configs/FREE_DAYS_TYPE.json';
+import SPECIFICITY_TYPES from '../../../../../configs/SPECIFICITY_TYPE.json';
+
+const CONTAINER_LOAD_TYPE = [
+	{ label: 'Container Rake', value: 'container_rake' },
+	{ label: 'Rake', value: 'rake' },
+];
+
+const CONTAINER_LOAD_SUB_TYPE = [
+	{ label: 'Piece Mile', value: 'piece_mile' },
+	{ label: 'Full Rake', value: 'full_rake' },
+];
+const fieldArrayField = [
 	{
-		label : 'Location Details Rail',
-		span  : 12,
-		name  : 'location_details',
+		label       : 'Lower Limit',
+		name        : 'lower_limit',
+		type        : 'number',
+		span        : 3,
+		placeholder : 'Lower Limit (in Days)',
+		size        : 'sm',
+		rules       : { required: 'This is required' },
 	},
+	{
+		name        : 'upper_limit',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		label       : 'Upper Limit',
+		placeholder : 'Upper Limit (in Days)',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'currency',
+		type        : 'async_select',
+		asyncKey    : 'list_exchange_rate_currencies',
+		span        : 3,
+		label       : 'Currency',
+		size        : 'sm',
+		placeholder : 'Currency',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'price',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		label       : 'Price',
+		placeholder : 'Price',
+		rules       : { required: 'This is required' },
+	},
+];
+
+const getLabel = ({ label, name }) => ({ label, name, span: 12 });
+
+const getControls = ({ item = {} }) => [
+	getLabel({ label: 'Location Details Rail', name: 'location_details' }),
 	{
 		name        : 'location_id',
 		size        : 'sm',
@@ -15,41 +65,26 @@ const getControls = ({ item = {} }) => [
 		value       : item?.location_id,
 		asyncKey    : 'list_locations',
 		type        : 'async_select',
-		// disabled : !!item?.id,
+		disabled    : !!item?.location_id,
 		isClearable : true,
 		placeholder : 'Locations',
-		params      : {
-			filters: {
-				type: ['railway_terminal'],
-			},
-		},
-		// rules       : { required: 'This is required' },
+		params      : { filters: { type: ['railway_terminal'] } },
+		rules       : { required: 'This is required' },
 	},
-	{
-		label : 'Service Provider Details',
-		span  : 12,
-		name  : 'service_details',
-		// showOptional : false,
-	},
+	getLabel({ label: 'Service Provider Details', name: 'service_details' }),
 	{
 		name        : 'service_provider_id',
 		placeholder : 'Service Provider',
 		type        : 'async_select',
 		size        : 'sm',
 		value       : item?.service_provider_id || undefined,
-		// disabled       : !!task.id,
+		disabled    : !!item?.service_provider_id,
 		asyncKey    : 'organizations',
 		initialCall : true,
 		span        : 4,
 		rules       : { required: 'This is required' },
-		params      : {
-			filters: {
-				account_type : 'service_provider',
-				status       : 'active',
-				kyc_status   : 'verified',
-			},
-		},
-		isClearable: true,
+		params      : { filters: { account_type: 'service_provider', status: 'active', kyc_status: 'verified' } },
+		isClearable : true,
 	},
 	{
 		name        : 'sourced_by_id',
@@ -74,12 +109,9 @@ const getControls = ({ item = {} }) => [
 		type        : 'select',
 		size        : 'sm',
 		value       : item?.container_load_type || undefined,
-		// disabled       : !!item.id,
-		options     : [
-			{ label: 'Container Rake', value: 'container_rake' },
-			{ label: 'Rake', value: 'rake' },
-		],
-		span: 3,
+		disabled    : !!item?.container_load_type,
+		options     : CONTAINER_LOAD_TYPE,
+		span        : 3,
 	},
 	{
 		name        : 'container_size',
@@ -87,7 +119,7 @@ const getControls = ({ item = {} }) => [
 		size        : 'sm',
 		span        : 3,
 		value       : item?.container_size || undefined,
-		// disabled       : !!task.id,
+		disabled    : !!item?.container_size,
 		placeholder : 'Container Size',
 		options     : containerSize,
 		rules       : { required: 'This is required' },
@@ -98,7 +130,7 @@ const getControls = ({ item = {} }) => [
 		size        : 'sm',
 		span        : 3,
 		value       : item?.container_type || undefined,
-		// disabled    : !!task.id,
+		disabled    : !!item?.container_type,
 		placeholder : 'Container Type',
 		rules       : { required: 'This is required' },
 		options     : containerTypes,
@@ -108,16 +140,12 @@ const getControls = ({ item = {} }) => [
 		type        : 'select',
 		span        : 3,
 		size        : 'sm',
-		value       : item?.container_type || undefined,
-		// disabled: !!item.id,
+		value       : item?.container_load_sub_type || undefined,
+		disabled    : !!item.container_load_sub_type,
 		placeholder : 'Container Load Sub Type',
 		rules       : { required: 'This is required' },
-		options     : [
-			{ label: 'Piece Mile', value: 'piece_mile' },
-			{ label: 'Full Rake', value: 'full_rake' },
-		],
+		options     : CONTAINER_LOAD_SUB_TYPE,
 	},
-
 	{
 		label : 'Commodity Details',
 		name  : 'commodity_details',
@@ -130,12 +158,8 @@ const getControls = ({ item = {} }) => [
 		span        : 4,
 		size        : 'sm',
 		value       : item?.commodity || undefined,
-		// disabled    : !!item.id,
-		options     : [
-			{ label: 'General', value: 'general' },
-			{ label: 'Dangerous', value: 'dangerous' },
-			{ label: 'Temprature Controlled', value: 'temp_controlled' },
-		],
+		disabled    : !!item.commodity,
+		options     : COMMODITY_TYPES.rail,
 	},
 	{
 		name        : 'commodity_sub_type',
@@ -143,7 +167,7 @@ const getControls = ({ item = {} }) => [
 		type        : 'select',
 		size        : 'sm',
 		value       : item?.commodity_sub_type || undefined,
-		// disabled: !!item.id,
+		disabled    : !!item.commodity_sub_type,
 		span        : 4,
 		// opitons based on commodity
 	},
@@ -169,28 +193,18 @@ const getControls = ({ item = {} }) => [
 		// disabled: !!task.id,
 		size        : 'sm',
 		placeholder : 'Specificity Type',
-		options     : [
-			{
-				label : 'Cogoport',
-				value : 'cogoport',
-			},
-			{
-				label : 'Rate Specific',
-				value : 'rate_specific',
-			},
-		],
+		options     : SPECIFICITY_TYPES.rail,
 	},
-
 	{
 		label : 'Validity Start and End Date',
 		span  : 12,
 		name  : 'validity_details',
 	},
-	// check for css
 	{
-		name        : 'validity',
-		type        : 'date_range_picker',
-		// value       : { startDate: task?.validity_start, endDate: task?.validity_end },
+		name  : 'validity',
+		type  : 'date_range_picker',
+		value : (item?.validity_start && item?.validity_end)
+			? { startDate: new Date(item?.validity_start), endDate: new Date(item?.validity_end) } : {},
 		span        : 8,
 		placeholder : 'Select Validity Range',
 		rules       : { required: 'This is required' },
@@ -201,8 +215,22 @@ const getControls = ({ item = {} }) => [
 		name  : 'previous_days_applicable_label',
 		span  : 12,
 	},
-	// REMAINING
-
+	{
+		name    : 'previous_days_applicable',
+		type    : 'chips',
+		span    : 4,
+		value   : item?.previous_days_applicable ? 'yes' : 'no',
+		options : [
+			{
+				children : 'Yes',
+				key      : 'yes',
+			},
+			{
+				children : 'No',
+				key      : 'no',
+			},
+		],
+	},
 	{
 		label : 'Container Limit',
 		name  : 'container_limit',
@@ -216,7 +244,7 @@ const getControls = ({ item = {} }) => [
 		span              : 4,
 		removeLabelMargin : true,
 		value             : item?.containers_count_lower_limit || undefined,
-		// disabled       : !!item.id,
+		disabled          : !!item?.containers_count_lower_limit,
 		placeholder       : 'Containers Count Lower Limit',
 		rules             : { required: 'This is required' },
 	},
@@ -228,45 +256,55 @@ const getControls = ({ item = {} }) => [
 		span              : 4,
 		removeLabelMargin : true,
 		value             : item?.containers_count_upper_limit || undefined,
-		// disabled       : !!item.id,
+		disabled          : !!item?.containers_count_upper_limit,
 		placeholder       : 'Containers Count Upper Limit',
 		rules             : { required: 'This is required' },
 	},
-
 	{
 		label : 'Free Days Type',
 		name  : 'free_days_type_label',
 		span  : 12,
 	},
 	{
-		name      : 'free_days_type',
-		type      : 'select',
-		span      : 4,
-		value     : item?.free_days_type || undefined,
+		name        : 'free_days_type',
+		type        : 'select',
+		span        : 4,
+		value       : item?.free_days_type || undefined,
 		// disabled  : !!task.id,
-		className : 'primary lg',
-		size      : 'sm',
-		options   : [
-			{
-				label : 'Detention',
-				value : 'detention',
-			},
-			{
-				label : 'Demurrage',
-				value : 'demurrage',
-			},
-		],
-
+		className   : 'primary lg',
+		size        : 'sm',
+		options     : FREE_DAYS_TYPES,
 		placeholder : 'Free Days Type',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Demurrage',
 		name  : 'demurrage_label',
 		span  : 12,
 	},
-
+	{
+		type               : 'fieldArray',
+		showButtons        : true,
+		name               : 'demurrage',
+		buttonText         : 'Add Slab',
+		noDeleteButtonTill : 0,
+		value              : item?.free_days_type === 'demurrage' ? item?.slabs : [{ lower_limit: '' }],
+		controls           : fieldArrayField,
+	},
+	{
+		label : 'Detention',
+		name  : 'detention_label',
+		span  : 12,
+	},
+	{
+		name               : 'detention',
+		type               : 'fieldArray',
+		showButtons        : true,
+		buttonText         : 'Add Slab',
+		noDeleteButtonTill : 0,
+		value              : item?.free_days_type === 'detention' ? item?.slabs : [{ lower_limit: '' }],
+		controls           : fieldArrayField,
+	},
 ];
 
 export default getControls;

@@ -11,6 +11,10 @@ function AddEdit() {
 		formRef.current.formSubmit();
 	};
 
+	const handleSubmitForm = (values) => {
+		console.log({ values }, 'ADD FCL');
+	};
+
 	return (
 		<div>
 			<Button onClick={() => setShowModal(true)}>ADD + </Button>
@@ -19,7 +23,7 @@ function AddEdit() {
 				<Modal show={showModal} onClose={() => setShowModal(false)} size="lg" placement="top">
 					<Modal.Header title="Add Detention / Demurrage" />
 					<Modal.Body>
-						<Form ref={formRef} />
+						<Form ref={formRef} handleSubmitForm={handleSubmitForm} />
 					</Modal.Body>
 
 					<Modal.Footer>

@@ -22,9 +22,9 @@ function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow =
 	return (
 		<div>
 			<div className={styles.button_container}>
-				<Button onClick={onReset}>Reset</Button>
+				<Button onClick={onReset} themeType="secondary" size="sm">Reset</Button>
 
-				<Button onClick={handleSubmit(onSubmit)}>Show Result</Button>
+				<Button onClick={handleSubmit(onSubmit)} size="sm">Show Result</Button>
 			</div>
 
 			<div>

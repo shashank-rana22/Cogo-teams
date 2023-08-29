@@ -12,5 +12,15 @@
             "label" : "Rate Specific",
             "value" : "rate_specific"
         }
+    ],
+    "rail":[
+        {
+            "label" : "Cogoport",
+            "value" : "cogoport"
+        },
+        {
+            "label" : "Rate Specific",
+            "value" : "rate_specific"
+        }
     ]
 }

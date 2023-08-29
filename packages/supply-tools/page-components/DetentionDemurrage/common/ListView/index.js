@@ -23,7 +23,7 @@ const getWidthPercent = (span) => {
 
 function ListView({
 	data = {}, columns = [], EditForm = () => {}, loading = false,
-	filters = {}, setFilters = () => {},
+	filters = {}, setFilters = () => {}, handleSubmitForm = () => {},
 }) {
 	const [showEdit, setShowEdit] = useState(false);
 
@@ -97,7 +97,7 @@ function ListView({
 				>
 					<Modal.Header title="Edit Detention / Demurrage" />
 					<Modal.Body>
-						<EditForm item={showEdit} ref={editRef} />
+						<EditForm item={showEdit} ref={editRef} handleSubmitForm={handleSubmitForm} />
 					</Modal.Body>
 					<Modal.Footer>
 						<Button

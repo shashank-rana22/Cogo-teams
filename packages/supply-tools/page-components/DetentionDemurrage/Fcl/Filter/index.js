@@ -18,20 +18,23 @@ function Filter({ filters = {}, setFilters = () => {} }) {
 				FILTERS
 			</Button>
 
-			<div className={styles.popver}>
-				<Popover
-					visible={show}
-					render={(
-						<Filters
-							controls={controls}
-							filters={filters}
-							setFilters={setFilters}
-							setShow={setShow}
-						/>
-					)}
-					placement="bottom"
-				/>
-			</div>
+			{show ? (
+				<div className={styles.popver}>
+					<Popover
+						visible={show}
+						render={(
+							<Filters
+								controls={controls}
+								filters={filters}
+								setFilters={setFilters}
+								setShow={setShow}
+							/>
+						)}
+						placement="bottom"
+						onClickOutside={() => setShow(false)}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }
