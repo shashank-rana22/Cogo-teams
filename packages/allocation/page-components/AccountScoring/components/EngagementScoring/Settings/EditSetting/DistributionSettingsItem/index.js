@@ -1,25 +1,29 @@
 import { Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
 function DistributionSettingsItem(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		item = {}, useGetControls = () => {}, index = 0, inputStyle, control, errors,
 		handleClick = () => {}, statsList = [], statsLoading = false,
 	} = props;
 
-	const controls = useGetControls(item);
+	const controls = useGetControls(item, t);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.warmth_container}>
 				{
-								index === 0 && (
+								index === GLOBAL_CONSTANTS.zeroth_index && (
 									<div className={styles.label}>
-										WARMTH
+										{t('allocation:average_warmth')}
 									</div>
 								)
 							}
@@ -35,7 +39,7 @@ function DistributionSettingsItem(props) {
 
 					return (
 						<div key={element.name} className={styles?.[inputStyle] || styles.input}>
-							{index === 0 && (
+							{index === GLOBAL_CONSTANTS.zeroth_index && (
 								<div className={styles.label}>
 									{element.label}
 								</div>
@@ -57,25 +61,25 @@ function DistributionSettingsItem(props) {
 
 			<div className={styles.accounts_container}>
 				{
-					index === 0 ? (
+					index === GLOBAL_CONSTANTS.zeroth_index ? (
 						<>
 							<div className={styles.accounts}>
 								<div className={styles.accounts_label}>
-									NUMBER OF ACCOUNTS
+									{t('allocation:number_of_accounts')}
 								</div>
 
-								<Button size="sm" onClick={handleClick}>Update</Button>
+								<Button size="sm" onClick={handleClick}>{t('allocation:update_button')}</Button>
 							</div>
 							<div className={styles.account_headers}>
 								{ statsLoading ? <Placeholder height={20} width="78%" />
-									: (statsList?.[index]?.warmth_count || 0)}
+									: (statsList?.[index]?.warmth_count || GLOBAL_CONSTANTS.zeroth_index)}
 							</div>
 						</>
 					)
 						: (
 							<div className={styles.headers}>
 								{ statsLoading ? <Placeholder height={20} width="80%" />
-									: (statsList?.[index]?.warmth_count || 0)}
+									: (statsList?.[index]?.warmth_count || GLOBAL_CONSTANTS.zeroth_index)}
 							</div>
 						)
 				}
