@@ -585,7 +585,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis   : ['list_checkouts'],
 			module_type : 'crm',
 		},
-
 		saas_tracking: {
 			key           : 'saas_tracking',
 			title         : t('common:container_tracking'),
