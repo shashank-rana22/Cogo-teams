@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 const isFormValid = (values, setErrors) => {
 	let isValid = true;
+
 	Object.keys(values).forEach((key) => {
 		if (!values[key] || isEmpty(values[key])) {
 			setErrors((prev) => ({
@@ -41,6 +42,7 @@ function Routes({
 		const isValid = isFormValid(organization, setErrors);
 
 		if (!isValid) {
+			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
 		}
 
