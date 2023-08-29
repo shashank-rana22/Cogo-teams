@@ -24,8 +24,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-bottom: 12px;
-	border-bottom: 1px solid #e0e0e0;
+	padding: 12px 0 20px;
 }
 
 .styled_search_text {
@@ -38,10 +37,41 @@
 }
 
 .pop_over_style {
-	width: 320px;
-	max-height: fit-content;
+	display: flex;
+	align-items: flex-start;
+	width: fit-content;
+	min-height: 320px;
 }
 
 .margin_span {
 	margin-top: 12px;
+}
+
+.filter_div_style {
+	display: flex;
+}
+
+.tab_container {
+	:global {
+		.ui_tabs_container .ui_tab_list_container.ui_ps_themeType_primary-vertical {
+			width: 300px;
+		}
+
+		.ui_select_container {
+			width: 220px;
+		}
+	}
+}
+
+.tabpanel_style {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.style_radio {
+	flex-direction: column;
+}
+
+.style_filter_button {
+	color: var(--color-primary-error-red-2);
 }

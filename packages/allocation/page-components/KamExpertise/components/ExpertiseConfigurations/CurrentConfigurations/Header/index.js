@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useTranslation } from 'next-i18next';
 
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useSetVersionFilter from '../../../../hooks/useSetVersionFilter';
@@ -22,6 +23,8 @@ const CREATE_CONFIGURATION_MAPPING = {
 };
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list = [],
 		refetch,
@@ -38,6 +41,7 @@ function Header(props) {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		t,
 	});
 
 	const componentProps = {
@@ -46,11 +50,13 @@ function Header(props) {
 			list,
 			versionName,
 			setVersionName,
+			t,
 		},
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
 			scrollDraftRef,
+			t,
 		},
 		[NEW_VERSION]: {
 			setMode,
@@ -59,14 +65,16 @@ function Header(props) {
 			createModalLoading,
 			versionName,
 			setVersionName,
+			t,
 		},
 		[INITIAL_MODE]: {
 			setMode,
 			list,
+			t,
 		},
 	};
 
-	const liveVersionList = list.filter((item) => item?.status === 'live')?.[0] || {};
+	const liveVersionList = list.filter((item) => item?.status === 'live')?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { version_number = '', audit_data = {} } = liveVersionList;
 
 	const Component = CREATE_CONFIGURATION_MAPPING[mode] || null;
@@ -82,18 +90,18 @@ function Header(props) {
 		<div className={styles.container}>
 			<div>
 				<div className={styles.heading}>
-					Live Configuration
+					{t('allocation:live_configuration')}
 					{' '}
 					:
 					{' '}
 					<strong>
-						{version_number ? `Version ${version_number}` : ' '}
+						{version_number ? `${t('allocation:version_label')} ${version_number}` : ' '}
 					</strong>
 				</div>
 
 				<div className={styles.sub_container}>
 					<div className={styles.left_text}>
-						Published On
+						{t('allocation:published_on_label')}
 						{' '}
 						:
 						{' '}
@@ -108,7 +116,7 @@ function Header(props) {
 					</div>
 
 					<div>
-						Published by
+						{t('allocation:published_by_label')}
 						{' '}
 						:
 						{' '}
@@ -123,11 +131,11 @@ function Header(props) {
 					themeType="secondary"
 					className={styles.config_button}
 				>
-					View All Configurations
+					{t('allocation:view_all_configurations')}
 				</Button>
 
 				<Button onClick={() => setShowModal(true)}>
-					Create
+					{t('allocation:create_button_label')}
 				</Button>
 			</div>
 			{showModal && (
@@ -137,7 +145,7 @@ function Header(props) {
 					onClose={onClose}
 					placement="top"
 				>
-					<Modal.Header title="Create" />
+					<Modal.Header title={t('allocation:create_button_label')} />
 
 					<Modal.Body>
 						{Component && (

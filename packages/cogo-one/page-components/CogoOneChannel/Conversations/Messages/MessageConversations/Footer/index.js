@@ -1,9 +1,9 @@
-import { cl, Textarea, RTE } from '@cogoport/components';
+import { cl, Textarea, RTEditor } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef, useEffect } from 'react';
 
-import { TOOLBARCONFIG } from '../../../../../../constants';
+import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import useSendChat from '../../../../../../hooks/useSendChat';
 import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMail';
 import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
@@ -14,7 +14,7 @@ import FooterHead from './FooterHead';
 import SendActions from './SendActions';
 
 const TEXTBOX_COMPONENT_MAPPING = {
-	email    : RTE,
+	email    : RTEditor,
 	whatsapp : Textarea,
 	default  : Textarea,
 };
@@ -235,7 +235,7 @@ function Footer({
 					disabled={!hasPermissionToEdit}
 					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
 					onKeyDown={handleKeyPress}
-					toolbarConfig={TOOLBARCONFIG}
+					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 					showToolbar={false}
 				/>
 				<div className={styles.flex_space_between}>

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import {
@@ -94,7 +95,7 @@ function useClaimChat({ userId, setCarouselState, firestore }) {
 				toggleCarouselState({ firestore, setCarouselState });
 			}, (timeoutValue || DEFAULT_TIMEOUT_VALUE));
 		} catch (error) {
-			Toast.error('something went wrong');
+			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 			await updateClaimKey({ id, channel_type, firestore, value: true });
 			toggleCarouselState({ firestore, setCarouselState });
 		}
