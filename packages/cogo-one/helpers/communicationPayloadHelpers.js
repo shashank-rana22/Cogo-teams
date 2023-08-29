@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
+import getRenderEmailBody from './getRenderEmailBody';
+
 const ENDPOINT_MAPPING = {
 	forward : '/forward_mail',
 	reply   : '/reply_mail',
@@ -34,7 +36,7 @@ export const getCommunicationPayload = ({
 		ccrecipients,
 		bccrecipients,
 		subject,
-		content     : draftMessage,
+		content     : getRenderEmailBody({ html: draftMessage }),
 		msgId       : message_id,
 		userId,
 		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,

@@ -553,6 +553,7 @@ const GLOBAL_CONSTANTS = {
 		h3_html_tag_text           : /<h3>([\s\S]*?)<\/h3>/gm,
 		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
 		iframe_html_tag_text       : /<iframe([\s\S]*?)<\/iframe>/gm,
+		html_class_regex           : /class="([^"]+)"/g,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,
