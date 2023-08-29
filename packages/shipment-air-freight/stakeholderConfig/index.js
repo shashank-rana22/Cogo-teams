@@ -17,12 +17,12 @@ const CONFIG_MAPPING = {
 	booking_desk          : bookingDeskConfig,
 	booking_desk_manager  : bookingDeskManagerConfig,
 	document_desk         : documentDeskConfig,
-	document_desk_manager : documentDeskManagerConfig,
+	document_desk_manager : documentDeskConfig,
 	prod_process_owner    : prodProcessOwnerConfig,
 	coe_head              : adminConfig,
 	credit_control        : adminConfig,
 	cost_booking_manager  : costBookingManagerConfig,
-	so1_so2_ops           : documentDeskConfig,
+	so1_so2_ops           : documentDeskManagerConfig,
 	ff_cost_booking       : ffCostBooking,
 };
 

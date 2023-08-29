@@ -234,6 +234,11 @@ const GLOBAL_CONSTANTS = {
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
 			'20f59087-12cf-4e6d-8463-27d41e23da6f',
 		],
+		air_admin_roles: [
+			'6d713339-c528-4696-9f7b-c01f86887ac1',
+			'039a0141-e6f3-43b0-9c51-144b22b9fc84',
+			'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',
+		],
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
