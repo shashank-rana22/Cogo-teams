@@ -19,7 +19,11 @@
 .attendance_date {
 	width: 11%;
 	padding: 12px;
-	background: #f7faef;
+}
+
+.header_attendance_date {
+	width: 11%;
+	padding: 12px;
 }
 
 .header_container {
@@ -31,4 +35,24 @@
 .attendace_time_container {
 	display: flex;
 	align-items: center;
+}
+
+.fw_600 {
+	font-weight: 600;
+}
+
+.present_color {
+	background: #f7faef;
+}
+
+.absent_color {
+	background: #fdebe9;
+}
+
+.weekly_off_color {
+	background: #f8c7a9;
+}
+
+.invalid_color {
+	background: #e0e0e0;
 }

@@ -6,8 +6,8 @@ import useGetEmployeeLeaveBalances from '../../../../hooks/useGetEmployeeLeaveBa
 
 import styles from './styles.module.css';
 
-function LeaveStats() {
-	const { data, refetch } = useGetEmployeeLeaveBalances();
+function LeaveStats({ value }) {
+	const { data, refetch } = useGetEmployeeLeaveBalances({ value });
 
 	const {
 		available_privilege_leaves,

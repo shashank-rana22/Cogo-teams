@@ -1,9 +1,9 @@
 /* eslint-disable import/order */
 import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useGeolocated } from '../../utils/getCurrentLocation';
+import { getCurrentLocation } from '../../utils/getCurrentLocation';
 import AttendanceManagement from '../AttendanceManagement';
 import LeavesManagement from '../LeavesManagement';
 import Policies from '../Policies';
@@ -18,19 +18,23 @@ const MANAGER = true;
 
 function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
-	const [show, setShow] = useState(false);
+	// const [show, setShow] = useState(false);
 
-	const { coords } = useGeolocated({
-		positionOptions: {
-			enableHighAccuracy: false,
-		},
-		watchPosition                 : true,
-		watchLocationPermissionChange : true,
-	});
+	const [coords, setCoords] = useState(null);
+
+	useEffect(() => {
+		getCurrentLocation()
+			.then((location) => {
+				setCoords(location);
+			})
+			.catch((error) => {
+				console.error('Error getting location:', error);
+			});
+	}, []);
 
 	const { data, loading, refetch } = useGetCheckinStats(coords);
 
-	console.log(show);
+	console.log('qquu', coords);
 
 	// console.log('data', data);
 
@@ -45,7 +49,7 @@ function AttendanceLeaveDashboard() {
 						size="md"
 						themeType="primary"
 						className={styles.request_btn}
-						onClick={() => setShow(true)}
+						// onClick={() => setShow(true)}
 					>
 						My Requests
 						<IcMLiveChat />
@@ -55,7 +59,7 @@ function AttendanceLeaveDashboard() {
 						size="md"
 						themeType="primary"
 						className={styles.request_btn}
-						onClick={() => setShow(true)}
+						// onClick={() => setShow(true)}
 					>
 						My Inbox
 						<IcMLiveChat />

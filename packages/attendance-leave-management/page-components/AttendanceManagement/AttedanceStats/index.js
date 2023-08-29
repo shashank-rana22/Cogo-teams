@@ -78,7 +78,7 @@ function AttendanceStats({ selectMonth = {} }) {
 				</div>
 			</div>
 			<div className={styles.leave_team_stats}>
-				<LeaveStats />
+				<LeaveStats value={value} />
 				{!loading && !isEmpty(team_stats) && <TeamStats teamStats={team_stats} />}
 			</div>
 		</div>

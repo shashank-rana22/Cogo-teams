@@ -26,11 +26,11 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 		const { start_time, end_time } = shift_timings || {};
 
 		return `${formatDate({
-			date       : start_time,
+			date       : new Date(start_time),
 			dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 			formatType : 'time',
 		})} - ${formatDate({
-			date       : end_time,
+			date       : new Date(end_time),
 			dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 			formatType : 'time',
 		})}`;
@@ -114,7 +114,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 		{
 			Header   : <div className={styles.header_text}>DAY</div>,
 			accessor : (item) => formatDate({
-				date       : item.date,
+				date       : new Date(item.date),
 				dateFormat : GLOBAL_CONSTANTS.formats.date['EEE, dd'],
 				formatType : 'date',
 			}),
@@ -123,7 +123,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 		{
 			Header   : <div className={styles.header_text}>CHECK IN</div>,
 			accessor : (item) => (item.check_in ? formatDate({
-				date       : item.check_in,
+				date       : new Date(item.check_in),
 				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'time',
 			}) : '--'),
@@ -136,7 +136,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 					<div className={cl`${styles.dot} ${styles[getLeftDotColor(item.day_status)]}`} />
 					<div className={getSeparatorColor(item.day_status)}>
 						<div className={cl`${styles.title_text} ${styles[getBorderColor(item.day_status)]}`}>
-							{ATTENDANCE_LOGS_STATUS_MAPPING[item.day_status]}
+							{ATTENDANCE_LOGS_STATUS_MAPPING[item.day_status]?.label}
 						</div>
 					</div>
 					<div className={cl`${styles.right_dot} ${styles[getRightDotColor(item.day_status)]}`} />

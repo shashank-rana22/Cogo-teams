@@ -10,7 +10,7 @@ const useCreateLeaveApplication = ({ onClose, refetch, refetchList, setSelectedD
 	}, { manual: true });
 
 	const createLeaveApplication = async (values) => {
-		const { date_of_joining, half_day, ...rest } = values || {};
+		const { date_of_joining, half_day, half_day_date, ...rest } = values || {};
 
 		const { startDate, endDate } = date_of_joining || {};
 
@@ -26,6 +26,11 @@ const useCreateLeaveApplication = ({ onClose, refetch, refetchList, setSelectedD
 						}),
 						leave_end_date: formatDate({
 							date       : endDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+							formatType : 'date',
+						}),
+						half_day_date: formatDate({
+							date       : half_day_date,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							formatType : 'date',
 						}),

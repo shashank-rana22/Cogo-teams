@@ -28,22 +28,66 @@ export const ATTENDANCE_CONSTANT = [
 ];
 
 export const ATTENDANCE_LOGS_STATUS_MAPPING = {
-	present                         : 'Present',
-	absent                          : 'Absent',
-	weekly_off                      : 'Weekly Off',
-	invalid                         : 'Invalid',
-	half_day_absent                 : 'HDA',
-	holiday                         : 'Holiday',
-	sick_leave                      : 'SL',
-	privilege_leave                 : 'PL',
-	casual_leave                    : 'CL',
-	half_day_sick_leave             : 'HDSL',
-	half_day_privilege_leave        : 'HDPL',
-	half_day_casual_leave           : 'HDCL',
-	leave_without_pay               : 'LWP',
-	half_day_absent_sick_leave      : 'HDASL',
-	half_day_absent_privilege_leave : 'HDAPL',
-	half_day_absent_casual_leave    : 'HDACL',
+	present: {
+		label     : 'Present',
+		className : 'present_color',
+	},
+	absent: {
+		label     : 'Absent',
+		className : 'absent_color',
+	},
+	weekly_off: {
+		label     : 'Weekly Off',
+		className : 'weekly_off_color',
+	},
+	invalid: {
+		label     : 'Invalid',
+		className : 'invalid_color',
+	},
+	holiday: {
+		label     : 'Holiday',
+		className : 'present_color',
+	},
+	sick_leave: {
+		label     : 'SL',
+		className : 'present_color',
+	},
+	privilege_leave: {
+		label     : 'PL',
+		className : 'present_color',
+	},
+	casual_leave: {
+		label     : 'CL',
+		className : 'present_color',
+	},
+	half_day_sick_leave: {
+		label     : 'HDSL',
+		className : 'present_color',
+	},
+	half_day_privilege_leave: {
+		label     : 'HDPL',
+		className : 'present_color',
+	},
+	half_day_casual_leave: {
+		label     : 'HDCL',
+		className : 'present_color',
+	},
+	leave_without_pay: {
+		label     : 'LWP',
+		className : 'absent_color',
+	},
+	half_day_absent_sick_leave: {
+		label     : 'HDASL',
+		className : 'absent_color',
+	},
+	half_day_absent_privilege_leave: {
+		label     : 'HDAPL',
+		className : 'absent_color',
+	},
+	half_day_absent_casual_leave: {
+		label     : 'HDACL',
+		className : 'absent_color',
+	},
 };
 
 export const ATTENDANCE_STATS_MAPPING = [

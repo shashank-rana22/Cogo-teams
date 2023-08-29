@@ -93,7 +93,7 @@ function MobileView({ data, loading, handleOpenModal }) {
 					</div>
 					<div className={cl`${styles.attendance_status} ${styles[getClassName(val.day_status, true)]}`}>
 						<div className={cl`${styles.attendance_dot} ${styles[getClassName(val.day_status)]}`} />
-						{ATTENDANCE_LOGS_STATUS_MAPPING[val.day_status]}
+						{ATTENDANCE_LOGS_STATUS_MAPPING[val.day_status]?.label}
 					</div>
 				</div>
 			))}

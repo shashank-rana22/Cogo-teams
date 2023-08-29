@@ -15,7 +15,7 @@ function LeavesManagement() {
 	const [selectedMonth, setSelectedMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
 
-	const { data, refetch } = useGetEmployeeLeaveBalances();
+	const { data, refetch } = useGetEmployeeLeaveBalances({ value: selectedMonth?.value });
 
 	useEffect(() => {
 		if (!isEmpty(formattedData)) {
