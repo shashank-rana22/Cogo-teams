@@ -5,9 +5,9 @@ import bookingDeskManagerConfig from './bookingDeskManager.json';
 import costBookingManagerConfig from './costBookingManager.json';
 import defaultConfig from './default.json';
 import documentDeskConfig from './documentDesk.json';
-import documentDeskManagerConfig from './documentDeskManager.json';
 import ffCostBooking from './ffCostBooking.json';
 import prodProcessOwnerConfig from './prodProcessOwner.json';
+import so1So2Ops from './so1So2Ops.json';
 import superadminConfig from './superadmin.json';
 
 const CONFIG_MAPPING = {
@@ -22,7 +22,7 @@ const CONFIG_MAPPING = {
 	coe_head              : adminConfig,
 	credit_control        : adminConfig,
 	cost_booking_manager  : costBookingManagerConfig,
-	so1_so2_ops           : documentDeskManagerConfig,
+	so1_so2_ops           : so1So2Ops,
 	ff_cost_booking       : ffCostBooking,
 };
 
