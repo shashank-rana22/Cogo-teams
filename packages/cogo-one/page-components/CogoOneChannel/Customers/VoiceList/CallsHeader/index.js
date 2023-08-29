@@ -1,17 +1,30 @@
-import { Popover } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { Popover, Input } from '@cogoport/components';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CallsFilterComponents from './CallsFilterComponent';
 import styles from './styles.module.css';
 
-function CallsHeader({ appliedFilters = {}, setAppliedFilters = () => {} }) {
+function CallsHeader({
+	appliedFilters = {},
+	setAppliedFilters = () => {},
+	searchValue = '',
+	setSearchValue = () => {},
+}) {
 	const [filterVisible, setFilterVisible] = useState(false);
 
 	return (
 		<div className={styles.header_container}>
-			<div className={styles.source_types} />
+			<div className={styles.source_types}>
+				<Input
+					size="sm"
+					prefix={<IcMSearchlight width={18} height={18} />}
+					placeholder="Enter Mobile Number..."
+					value={searchValue}
+					onChange={(val) => setSearchValue(val)}
+				/>
+			</div>
 			<div className={styles.filter_icon}>
 				<Popover
 					placement="right"

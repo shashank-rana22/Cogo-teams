@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import { VOICE_ICON_MAPPING, SHOW_LOG_STATUS_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
@@ -20,13 +21,15 @@ function VoiceList(voiceProps) {
 		activeTab = '',
 	} = voiceProps;
 
+	const [searchValue, setSearchValue] = useState('');
+
 	const {
 		loading,
 		data = {},
 		handleScroll = () => { },
 		appliedFilters = {},
 		setAppliedFilters = () => {},
-	} = useGetVoiceCallList({ activeTab });
+	} = useGetVoiceCallList({ activeTab, searchValue });
 
 	const { list = [] } = data;
 
@@ -45,17 +48,13 @@ function VoiceList(voiceProps) {
 		return status;
 	};
 
-	if (isEmpty(list) && !loading) {
-		return (
-			<EmptyCard />
-		);
-	}
-
 	return (
 		<div className={styles.main_container}>
 			<CallsHeader
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 			/>
 			<div
 				className={styles.list_container}
@@ -166,6 +165,7 @@ function VoiceList(voiceProps) {
 					);
 				})}
 				{loading && <LoadingState />}
+				{isEmpty(list) && !loading && <EmptyCard />}
 			</div>
 		</div>
 

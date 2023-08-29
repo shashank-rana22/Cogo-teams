@@ -43,15 +43,15 @@ function CallsFilterComponents({
 	});
 
 	const agentWatch = watch('agent');
-	const userNumberWatch = watch('user_number');
 
-	const isDisabled = isEmpty(agentWatch) && isEmpty(userNumberWatch);
+	const isDisabled = isEmpty(agentWatch);
 
 	const resetForm = () => {
 		filterControls.forEach((item) => {
 			setValue(item.name, getDefaultValues({ filters: {}, filterControls })[item.name]);
 		});
 		setAppliedFilters({});
+		setFilterVisible(false);
 	};
 
 	const checkFiltersCount = Object.keys(appliedFilters).length;

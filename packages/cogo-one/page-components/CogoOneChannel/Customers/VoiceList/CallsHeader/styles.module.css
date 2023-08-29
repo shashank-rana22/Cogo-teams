@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 10px 0;
+	margin: 20px 0 0 10px;
 }
 
 .filter_icon {
@@ -25,7 +25,7 @@
 	:global {
 		.tippy-content {
 			width: 260px;
-			height: 350px;
+			height: 250px;
 			padding: 0;
 
 			>div {

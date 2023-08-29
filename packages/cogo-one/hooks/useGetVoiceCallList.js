@@ -1,22 +1,22 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-// import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
 const DEFAULT_PAGINATION = 1;
 const MIN_HEIGHT = 0;
 
-const getPayload = ({ pagination = 1, agent = '', user_number = '' }) => ({
+const getPayload = ({ pagination = 1, appliedFilters = {}, searchQuery = '' }) => ({
 	params: {
 		page    : pagination,
 		source  : 'omnichannel',
 		filters : {
-			agent_id : agent || undefined,
-			q        : user_number || undefined,
+			agent_id : appliedFilters?.agent || undefined,
+			q        : searchQuery || undefined,
 		},
 	},
 });
 
-const useGetVoiceCallList = () => {
+const useGetVoiceCallList = ({ searchValue = '' }) => {
 	const [listData, setListData] = useState({
 		list  : [],
 		total : 0,
@@ -25,7 +25,7 @@ const useGetVoiceCallList = () => {
 	const [pagination, setPagination] = useState(DEFAULT_PAGINATION);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
-	const { agent = '', user_number = '' } = appliedFilters || {};
+	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_user_call_details',
@@ -34,16 +34,10 @@ const useGetVoiceCallList = () => {
 
 	const voiceCallList = useCallback(async () => {
 		try {
-			// if (!isEmpty(appliedFilters)) {
-			// 	setListData({
-			// 		list  : [],
-			// 		total : 0,
-			// 	});
-			// }
 			const res = await trigger(getPayload({
 				pagination,
-				agent,
-				user_number,
+				appliedFilters,
+				searchQuery,
 			}));
 
 			if (res.data) {
@@ -53,7 +47,11 @@ const useGetVoiceCallList = () => {
 		} catch (error) {
 			console.error(error);
 		}
-	}, [agent, pagination, trigger, user_number]);
+	}, [appliedFilters, pagination, searchQuery, trigger]);
+
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [debounceQuery, searchValue]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= MIN_HEIGHT;
@@ -63,6 +61,11 @@ const useGetVoiceCallList = () => {
 			setPagination((p) => p + DEFAULT_PAGINATION);
 		}
 	};
+
+	useEffect(() => {
+		setListData((previous) => ({ ...previous, list: [] }));
+		setPagination(DEFAULT_PAGINATION);
+	}, [appliedFilters, searchQuery]);
 
 	useEffect(() => {
 		voiceCallList();
