@@ -24,6 +24,7 @@
 
 .filters {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 100%;
 
@@ -38,6 +39,10 @@
 	display: flex;
 	gap: 6px;
 	align-items: center;
+
+	@media screen and (max-width: 768px) {
+		margin-top: 10px;
+	}
 }
 
 .card_container {

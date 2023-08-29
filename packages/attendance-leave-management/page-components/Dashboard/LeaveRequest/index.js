@@ -19,7 +19,9 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'Barath',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Pending',
+					reason      : 'Reason for leaving',
+					timestamp   : '2023-08-29T16:56:00',
 				},
 				{
 					leaveType   : 'Sick',
@@ -28,6 +30,8 @@ const data = {
 					name        : 'hritik',
 					appliedDate : '16 Aug',
 					leaveStatus : 'Approved',
+					reason      : 'Reason for leaving',
+					timestamp   : '2023-08-29T16:56:00',
 				},
 				{
 					leaveType   : 'Sick',
@@ -35,7 +39,9 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'yash',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Pending',
+					reason      : 'Reason for leaving',
+					timestamp   : '2023-08-29T16:56:00',
 				},
 			],
 		},
@@ -49,7 +55,9 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'hritik',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Pending',
+					reason      : 'Reason for leaving',
+					timestamp   : '2023-08-28T12:00:00',
 				},
 				{
 					leaveType   : 'Sick',
@@ -57,7 +65,9 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'akshay',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Pending',
+					reason      : 'Reason for leaving',
+					timestamp   : '2023-08-28T12:00:00',
 				},
 				{
 					leaveType   : 'Sick',
@@ -65,7 +75,9 @@ const data = {
 					endDate     : '8 Aug',
 					name        : 'yash',
 					appliedDate : '16 Aug',
-					leaveStatus : 'pending',
+					leaveStatus : 'Pending',
+					reason      : 'Reason for leaving',
+					timestamp   : '2023-08-28T12:00:00',
 				},
 			],
 		},
@@ -79,10 +91,14 @@ function LeaveRequest() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.left_header}>
-					<div><IcMArrowLeft width={20} height={20} /></div>
+					<div>
+						<IcMArrowLeft width={20} height={20} />
+					</div>
 					<div className={styles.card_content}>
 						<span className={styles.above_text}>INBOX</span>
-						<span className={styles.below_text}>View and manage all requests</span>
+						<span className={styles.below_text}>
+							View and manage all requests
+						</span>
 					</div>
 				</div>
 			</div>
@@ -93,7 +109,11 @@ function LeaveRequest() {
 						themeType="tertiary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="employee_requests" title="Employee Requests" badge={3} />
+						<TabPanel
+							name="employee_requests"
+							title="Employee Requests"
+							badge={3}
+						/>
 						<TabPanel name="my_requests" title="My Requests" badge={5} />
 					</Tabs>
 				</div>
@@ -101,11 +121,7 @@ function LeaveRequest() {
 					<div className={styles.select}>
 						<Select placeholder="Request Type" />
 					</div>
-					<Input
-						size="md"
-						prefix={<IcMSearchdark />}
-						placeholder="Search"
-					/>
+					<Input size="md" prefix={<IcMSearchdark />} placeholder="Search" />
 				</div>
 			</div>
 			{/* <div className={styles.card_container} onClick={() => setAccordion(!accordion)}>
