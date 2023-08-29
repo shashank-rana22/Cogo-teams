@@ -15,10 +15,6 @@ function useDeleteConfiguration({
 		},
 	);
 
-	const handleOnClose = () => {
-		setDeleteZone(false);
-	};
-
 	const handleDelete = async () => {
 		try {
 			await trigger({
@@ -28,7 +24,7 @@ function useDeleteConfiguration({
 			});
 			Toast.success('Zone deleted');
 			listAPI();
-			handleOnClose();
+			setDeleteZone(false);
 		} catch (err) {
 			toastApiError(err);
 		}

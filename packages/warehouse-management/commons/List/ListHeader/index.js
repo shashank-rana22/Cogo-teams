@@ -5,7 +5,7 @@ import styles from '../styles.module.css';
 const SPAN_ONE = 1;
 
 function ListHeader({
-	fields = {},
+	fields = [],
 }) {
 	return (
 		<header className={styles.header}>

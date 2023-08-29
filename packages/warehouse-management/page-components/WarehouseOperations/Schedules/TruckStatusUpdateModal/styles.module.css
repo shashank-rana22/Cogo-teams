@@ -7,7 +7,7 @@
 
 .heading {
 	font-weight: bold;
-	color: red;
+	color: var(--color-primary-error-red-2);
 }
 
 .file_upload_box {

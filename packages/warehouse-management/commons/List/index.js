@@ -11,11 +11,11 @@ import styles from './styles.module.css';
 const INITIAL_PAGE = 1;
 const SIZE_FOR_SHIPMENT_PAGE = 10;
 const SHOW_LIST_SIZE = 6;
-const ONE = 1;
-const ZERO = 0;
+const DEFAULT_LIST_SIZE_ONE = 1;
+const CLOSED_LENGTH = 0;
 
 function List({
-	fields = {},
+	fields = [],
 	data = {},
 	loading = false,
 	listAPI = () => {},
@@ -40,7 +40,7 @@ function List({
 	const [isOpen, setIsOpen] = useState('');
 
 	function Render() {
-		const showList = list.length ? list : Array(SHOW_LIST_SIZE).fill(ONE);
+		const showList = list.length ? list : Array(SHOW_LIST_SIZE).fill(DEFAULT_LIST_SIZE_ONE);
 		if (loading || list.length) {
 			return (showList).map((item) => (
 				<div key={item.warehouseTransferId}>
@@ -56,7 +56,7 @@ function List({
 					/>
 					{['schedules', 'inventory'].includes(activeTab) && (
 						<div
-							style={{ '--length': isOpen ? ZERO : '-20px' }}
+							style={{ '--length': isOpen ? CLOSED_LENGTH : '-20px' }}
 							className={styles.amaendment_accordian_style}
 						>
 							{(isOpen === item?.warehouseTransferId || isOpen === item?.shipmentId) ? (

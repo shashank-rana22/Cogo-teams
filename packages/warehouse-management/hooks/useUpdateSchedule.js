@@ -1,4 +1,3 @@
-/* eslint-disable custom-eslint/uuid-check */
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';

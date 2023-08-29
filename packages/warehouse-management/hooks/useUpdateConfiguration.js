@@ -22,10 +22,6 @@ function useUpdateConfiguration({
 		userId: profile.id,
 	}));
 
-	const handleOnClose = () => {
-		setEditZone(false);
-	};
-
 	const onSubmit = async () => {
 		try {
 			await trigger({
@@ -40,7 +36,7 @@ function useUpdateConfiguration({
 			});
 			Toast.success('Updated Successfully');
 			listAPI();
-			handleOnClose();
+			setEditZone(false);
 		} catch (err) {
 			toastApiError(err);
 		}

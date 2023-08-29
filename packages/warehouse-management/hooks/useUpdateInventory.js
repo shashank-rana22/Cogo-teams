@@ -17,9 +17,6 @@ function useUpdateInventory({
 			authKey : 'put_air_coe_warehouse_management_inventory',
 		},
 	);
-	const handleOnClose = () => {
-		setShowUpdateStatusModal({});
-	};
 
 	const handleUpdate = async () => {
 		try {
@@ -31,7 +28,7 @@ function useUpdateInventory({
 			});
 			Toast.success('Updated Successfully');
 			listAPI();
-			handleOnClose();
+			setShowUpdateStatusModal({});
 		} catch (err) {
 			toastApiError(err);
 		}

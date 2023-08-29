@@ -8,7 +8,7 @@ const SPAN_ONE = 1;
 
 function ListItem({
 	activeTab = '',
-	fields = {},
+	fields = [],
 	item = [],
 	functions = {},
 	loading = false,

@@ -139,7 +139,7 @@ function useHandleSubmit({
 			if (task.task === 'update_truck_details') {
 				const warehouseService = services.find(
 					(service) => service?.service_type === 'warehouse_service',
-				);
+				) || {};
 
 				await createWarehouseSchedule({
 					data: {

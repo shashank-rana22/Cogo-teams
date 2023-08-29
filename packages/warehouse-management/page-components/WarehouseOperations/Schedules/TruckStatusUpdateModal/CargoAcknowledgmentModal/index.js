@@ -3,17 +3,18 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const COLUMNS = [
+	{ Header: 'Cargo ID', accessor: 'cargoId' },
+	{ Header: 'Services', accessor: 'services' },
+];
+
 function CargoAcknowledgmentModal({
 	showCargoAcknowledgmentModal = [],
 	setShowCargoAcknowledgmentModal = () => {},
 	cargoData = [],
 }) {
-	const columns = [
-		{ Header: 'Cargo ID', accessor: 'cargoId' },
-		{ Header: 'Services', accessor: 'services' },
-	];
 	const DATA = [];
-	cargoData.forEach((item) => {
+	cargoData?.forEach((item) => {
 		const MP = {};
 		MP.cargoId = item?.cargoNumber;
 		MP.services = item?.services;
@@ -30,7 +31,7 @@ function CargoAcknowledgmentModal({
 		>
 			<Modal.Header title="Cargo Details" />
 			<Modal.Body>
-				<Table columns={columns} data={DATA} />
+				<Table columns={COLUMNS} data={DATA} />
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.modal_footer}>
