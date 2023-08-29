@@ -78,34 +78,18 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 										name={name}
 										isCompleted={isCompleted}
 									/>
+
 									<Button
 										className={styles.styled_button}
 										themeType="secondary"
-										onClick={() => setShow(name)}
+										onClick={(e) => {
+											setShow(name);
+											e.stopPropagation();
+										}}
 									>
 										<IcMEdit style={{ marginRight: '8px' }} />
 										Edit
 									</Button>
-									{show === name ? (
-										<Modal
-											size="xl"
-											show={show}
-											onClose={() => setShow('')}
-											placement="top"
-											closeOnOuterClick
-										>
-											<Modal.Header title={name} />
-											<div className={styles.styled_body}>
-												<Modal.Body>
-													<ModalComponent
-														data={profileData}
-														getEmployeeDetails={getEmployeeDetails}
-													/>
-												</Modal.Body>
-											</div>
-
-										</Modal>
-									) : null}
 								</div>
 							)}
 							animate={false}
@@ -118,6 +102,28 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 							/>
 							{' '}
 						</Accordion>
+
+						{show === name ? (
+							<Modal
+								size="xl"
+								show={show}
+								onClose={() => setShow('')}
+								placement="top"
+								closeOnOuterClick
+							>
+								<Modal.Header title={startCase(name)} />
+								<div className={styles.styled_body}>
+									<Modal.Body>
+										<ModalComponent
+											data={profileData}
+											getEmployeeDetails={getEmployeeDetails}
+											setShow={setShow}
+										/>
+									</Modal.Body>
+								</div>
+
+							</Modal>
+						) : null}
 					</div>
 				);
 			})}

@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 import Thread from './Thread';
 
 function EmailView({
-	activeMail,
-	onAction,
+	activeMail = {},
+	onAction = () => {},
 }) {
 	const { source } = activeMail || {};
 	const message_id = activeMail?.message_id || activeMail?.id;
@@ -38,7 +38,7 @@ function EmailView({
 	const emailData = isFromRpa ? rpaMailData : getMailApi?.data;
 	const loading = isFromRpa ? getMailRpaApi?.loading : getMailApi?.loading;
 
-	const attachmentPaylaod = { source: email_address, message_id };
+	const attachmentPaylaod = { email_address, message_id };
 	const { getAttachementsApi } = useGetAttachements({ payload: attachmentPaylaod });
 	let content = emailData?.body?.content || '';
 
