@@ -6,7 +6,7 @@ import ContainerDetails from '../ContainerDetails';
 
 import styles from './styles.module.css';
 
-function ShipmentDetails({ selectedCard }) {
+function ShipmentDetails({ selectedCard = {} }) {
 	const ZEROVALUE = 0;
 	const serviceLocation = selectedCard?.detail;
 

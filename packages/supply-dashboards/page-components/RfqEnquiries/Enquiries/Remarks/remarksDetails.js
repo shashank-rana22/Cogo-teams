@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
-function RemarksDetails({ loading, selectedCard, isEmpty }) {
+function RemarksDetails({ loading = false, selectedCard = {}, isEmpty = false }) {
 	const ZEROVALUE = 0;
 	const ONEVALUE = 1;
 	const TWOVALUE = 2;

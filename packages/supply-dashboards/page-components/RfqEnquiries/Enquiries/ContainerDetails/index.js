@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function ContainerDetails({ selectedCard }) {
+function ContainerDetails({ selectedCard = {} }) {
 	const ZEROVALUE = 0;
 	const CONTAINER_SIZE_MAPPING = {
 		20     : '20 Ft',

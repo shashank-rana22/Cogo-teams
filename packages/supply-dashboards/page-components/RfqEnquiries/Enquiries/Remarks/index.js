@@ -1,9 +1,9 @@
 import NegotiationRemarks from './negotitionRemarks';
 import RemarksDetails from './remarksDetails';
 
-function Remarks({ loading, showMore, selectedCard }) {
+function Remarks({ loading = false, showMore = false, selectedCard = {} }) {
 	const ZEROVALUE = 0;
-	const isEmpty =		(selectedCard?.negotiation_remarks === null
+	const isEmpty =	(selectedCard?.negotiation_remarks === null
 			|| selectedCard?.negotiation_remarks?.length === ZEROVALUE)
 			&& !selectedCard?.commodity_remarks;
 

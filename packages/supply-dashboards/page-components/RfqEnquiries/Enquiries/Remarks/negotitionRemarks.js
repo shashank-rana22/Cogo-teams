@@ -4,9 +4,9 @@ import { format } from '@cogoport/utils';
 import styles from '../styles.module.css';
 
 function NegotitionRemarks({
-	loading,
-	selectedCard,
-	isEmpty,
+	loading = false,
+	selectedCard = {},
+	isEmpty = false,
 }) {
 	const ZEROVALUE = 0;
 	const ONEVALUE = 1;

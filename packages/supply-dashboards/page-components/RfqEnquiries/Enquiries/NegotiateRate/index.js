@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Service from './Service';
 import styles from './styles.module.css';
 
-function NegotiateRate({ selectedCard, setRevertCounts }) {
+function NegotiateRate({ selectedCard = {}, setRevertCounts = () => {} }) {
 	const SERVICE = [];
 	const ZERO_VALUE = 0;
 	selectedCard?.detail?.spot_negotiations.forEach((card) => {
