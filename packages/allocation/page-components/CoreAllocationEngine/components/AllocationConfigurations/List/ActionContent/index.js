@@ -1,8 +1,14 @@
 import { IcMDelete, IcMDoubleTick, IcMEdit, IcMEyeopen, IcMListView, IcMScreenShare } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function ActionContent({ status, onClickCta }) {
+function ActionContent({
+	status,
+	onClickCta,
+}) {
+	const { t } = useTranslation(['allocation']);
+
 	const WORKFLOW_CTA_MAPPING = {
 		draft: (
 			<>
@@ -13,7 +19,7 @@ function ActionContent({ status, onClickCta }) {
 				>
 					<div className={styles.cta_text}>
 						<IcMEdit width={16} height={16} style={{ marginRight: '10px' }} />
-						Edit
+						{t('allocation:edit_button')}
 					</div>
 				</div>
 				<div
@@ -23,7 +29,7 @@ function ActionContent({ status, onClickCta }) {
 				>
 					<div className={styles.cta_text}>
 						<IcMDoubleTick width={16} height={16} style={{ marginRight: '10px' }} />
-						Check
+						{t('allocation:check_button')}
 					</div>
 				</div>
 			</>
@@ -37,7 +43,7 @@ function ActionContent({ status, onClickCta }) {
 			>
 				<div className={styles.cta_text}>
 					<IcMScreenShare width={16} height={16} style={{ marginRight: '10px' }} />
-					Publish
+					{t('allocation:publish_button')}
 				</div>
 			</div>
 		),
@@ -50,7 +56,7 @@ function ActionContent({ status, onClickCta }) {
 			>
 				<div className={styles.cta_text}>
 					<IcMEyeopen width={16} height={16} style={{ marginRight: '10px' }} />
-					View
+					{t('allocation:view_button')}
 				</div>
 			</div>
 		),
@@ -63,7 +69,7 @@ function ActionContent({ status, onClickCta }) {
 			>
 				<div className={styles.cta_text}>
 					<IcMListView width={16} height={16} style={{ marginRight: '10px' }} />
-					Instances
+					{t('allocation:instances_label')}
 				</div>
 			</div>
 		),
@@ -77,10 +83,11 @@ function ActionContent({ status, onClickCta }) {
 				className={styles.workflow_cta_last}
 				onClick={() => onClickCta('delete')}
 				role="presentation"
+
 			>
 				<div className={styles.cta_text}>
 					<IcMDelete width={16} height={16} style={{ marginRight: '10px' }} />
-					{status === 'active' ? 'Deactivate' : 'Delete'}
+					{status === 'active' ? t('allocation:deactivate_button') : t('allocation:delete_button') }
 				</div>
 			</div>
 		</div>

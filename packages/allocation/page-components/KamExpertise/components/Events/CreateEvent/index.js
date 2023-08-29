@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
@@ -10,6 +11,7 @@ import AttributePage from './AttributesPage';
 import styles from './styles.module.css';
 
 function CreateEvent(props) {
+	const { t } = useTranslation(['allocation']);
 	const {
 		listRefetch = () => {},
 		eventListData = {},
@@ -31,14 +33,14 @@ function CreateEvent(props) {
 	const {
 		onSave,
 		loading: createLoading,
-	} = useCreateNewEvent({ attributeList, listRefetch, setEventListData });
+	} = useCreateNewEvent({ attributeList, listRefetch, setEventListData, t });
 
 	const {
 		onUpdate,
 		formProps,
 		controls,
 		loading: updateLoading,
-	} = useUpdateEvent({ eventListData, listRefetch, attributeList, setEventListData });
+	} = useUpdateEvent({ eventListData, listRefetch, attributeList, setEventListData, t });
 
 	const {
 		control,
@@ -52,9 +54,9 @@ function CreateEvent(props) {
 		<div>
 			<div className={styles.create_new_event}>
 				<p>
-					{createEventMode ? 'Create' : 'Update'}
+					{createEventMode ? t('allocation:create_button_label') : t('allocation:update_button') }
 					{' '}
-					New Event
+					{t('allocation:new_event_label')}
 				</p>
 			</div>
 
@@ -62,7 +64,7 @@ function CreateEvent(props) {
 				<div className={styles.rule_and_attribute}>
 					<div className={styles.add_rule_container}>
 						<div className={styles.add_rule_text}>
-							Add Rule
+							{t('allocation:add_rule_label')}
 						</div>
 
 						<section className={styles.rule_form_container}>
@@ -113,7 +115,7 @@ function CreateEvent(props) {
 						onClick={onClose}
 						disabled={(createEventMode) ? createLoading : updateLoading}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 
 					<Button
@@ -122,7 +124,7 @@ function CreateEvent(props) {
 						onClick={createEventMode ? handleSubmit(onSave) : handleSubmit(onUpdate)}
 						loading={createEventMode ? createLoading : updateLoading}
 					>
-						Save
+						{t('allocation:save_button')}
 					</Button>
 				</div>
 			</div>

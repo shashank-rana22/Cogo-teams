@@ -1,12 +1,15 @@
+import { useTranslation } from 'next-i18next';
+
 import ServiceCard from './ServiceCard';
 import styles from './styles.module.css';
 
 function ServiceRequirements(props) {
+	const { t } = useTranslation(['allocation']);
 	const { serviceRequirementsDetails, service_requirement_operator } = props;
 
 	return (
 		<div>
-			<h4 className={styles.heading}>Service Requirements</h4>
+			<h4 className={styles.heading}>{t('allocation:service_requirements')}</h4>
 
 			<div className={styles.card_list}>
 				{serviceRequirementsDetails.map((item, index) => (

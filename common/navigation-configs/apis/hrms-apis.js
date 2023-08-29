@@ -106,6 +106,18 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
 	],
 	employee_portal: [
 		{
@@ -163,6 +175,12 @@ const HRMS = {
 			api          : 'list_company_documents',
 			access_type  : 'private',
 			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+
 		},
 	],
 	performance_management_configuration: [

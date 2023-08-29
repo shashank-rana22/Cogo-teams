@@ -1,18 +1,29 @@
 import { Pill, Modal, Button } from '@cogoport/components';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useDeleteEvent from '../../../../../hooks/useDeleteEvent';
 
 import styles from './styles.module.css';
 
-const COMPLETION_MAPPING = {
-	completed   : 'Shipment Completion',
-	in_progress : 'Shipment Creation',
+const FIRST_INDEX = 1;
 
-};
+const getCompletionMapping = ({ t = () => {} }) => ({
+	completed   : t('allocation:shipment_completion_label'),
+	in_progress : t('allocation:shipment_creation_label'),
+});
 
-function EventListItem({ data, index, setEventListData, listRefetch }) {
+function EventListItem({
+	data,
+	index,
+	setEventListData,
+	listRefetch,
+}) {
+	const { t } = useTranslation(['allocation']);
+
+	const completionMapping = getCompletionMapping({ t });
+
 	const {
 		condition_name: conditionName = '',
 		expertise_type: expertiseType = '',
@@ -21,13 +32,13 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 		id = '',
 	} = data || {};
 
-	const { onDelete, showDeleteModal, setShowDeleteModal, deleteLoading } = useDeleteEvent({ id, listRefetch });
+	const { onDelete, showDeleteModal, setShowDeleteModal, deleteLoading } = useDeleteEvent({ id, listRefetch, t });
 
 	return (
 		<section className={styles.container}>
 			<div className={styles.top_div}>
 				#
-				{index + 1}
+				{index + FIRST_INDEX}
 
 				<div>
 					<IcMEdit
@@ -43,20 +54,27 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 			</div>
 
 			<div>
+
 				<p className={styles.info_tag}>
-					Expertise :
+					{t('allocation:expertise_header')}
+					{' '}
+					:
 					{' '}
 					<b className={styles.margin_left}>{startCase(expertiseType || '')}</b>
 				</p>
 
 				<p className={styles.info_tag}>
-					Event Name :
+					{t('allocation:event_name_label')}
+					{' '}
+					:
 					{' '}
 					<b className={styles.margin_left}>{conditionName || ''}</b>
 				</p>
 
 				<p className={styles.info_tag}>
-					Description :
+					{t('allocation:description_label')}
+					{' '}
+					:
 					{' '}
 					<i className={styles.margin_left}>{description || ''}</i>
 				</p>
@@ -64,7 +82,7 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 
 			<div>
 				<div className={styles.rule_head}>
-					Rule
+					{t('allocation:rule_label')}
 				</div>
 
 				{rules.map((res, i) => {
@@ -75,8 +93,10 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 					return (
 						<div className={styles.rule_body} key={res.id}>
 							<div className={styles.margin_right}>
-								Rule #
-								{i + 1}
+								{t('allocation:rule_label')}
+								{' '}
+								#
+								{i + FIRST_INDEX}
 							</div>
 							<span className={styles.margin_right}>
 								<Pill
@@ -89,7 +109,7 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 							</span>
 
 							<div className={styles.margin_right}>
-								is triggered on
+								{t('allocation:is_triggered_on')}
 							</div>
 
 							<span className={styles.margin_right}>
@@ -98,12 +118,12 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 									size="lg"
 									color="#FEF3E9"
 								>
-									{COMPLETION_MAPPING[data.event_state_on] || 'Event'}
+									{completionMapping[data.event_state_on] || t('allocation:event_label')}
 								</Pill>
 							</span>
 
 							<span className={styles.margin_right}>
-								having parameter
+								{t('allocation:having_parameter')}
 							</span>
 
 							{' '}
@@ -129,15 +149,18 @@ function EventListItem({ data, index, setEventListData, listRefetch }) {
 					showCloseIcon
 					onClose={() => setShowDeleteModal(false)}
 				>
-					<Modal.Header title="Delete Event" />
+					<Modal.Header title={t('allocation:delete_event_heading')} />
 
 					<Modal.Body>
-						<p> Are you sure you want to delete this event?</p>
+						<p>
+							{' '}
+							{t('allocation:confirmation_text_to_delete_event')}
+						</p>
 					</Modal.Body>
 
 					<Modal.Footer>
 						<Button onClick={() => onDelete()} loading={deleteLoading}>
-							Yes
+							{t('allocation:yes_label')}
 						</Button>
 					</Modal.Footer>
 
