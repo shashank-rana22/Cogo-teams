@@ -24,8 +24,8 @@ function List({ search_id = '' }) {
 		} = curr;
 
 		const {
-			current_promised_containers = 0,
 			current_allocated_containers = 0,
+			current_forecast = 0,
 		} = current_container_allocation;
 
 		const { past_fulfilled_containers = 0, past_allocated_containers = 0 } = past_container_fulfillment;
@@ -36,7 +36,7 @@ function List({ search_id = '' }) {
 				bucket_type,
 				allocation_percentage,
 				suppliers_count,
-				current_promised_containers,
+				current_forecast,
 				current_allocated_containers,
 				past_fulfilled_containers,
 				past_allocated_containers,

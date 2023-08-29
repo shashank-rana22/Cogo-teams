@@ -3,45 +3,51 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const COLORS_MAPPING = {
-	current_container_allocation : '#DDEBC0',
-	past_container_allocation    : '#E0E0E0',
-};
-
 const C = 100;
 
-function CustomProgressBar({
-	id = '',
-	className = '',
-	style = {},
-	allocatedCount = 0,
-	promisedCount = 0,
-	view = '',
-}) {
-	const progress = (promisedCount / allocatedCount) * C;
+const getProps = (props) => {
+	const {
+		currentForecastCount = 0,
+		currentAllocatedCount = 0,
+		pastFulfilledCount = 0,
+		pastAllocatedCount = 0,
+		view = '',
+	} = props;
+
+	const PROPERTIES_MAPPING = {
+		current_container_allocation: {
+			color         : '#ddebc0',
+			leftSideText  : `${currentAllocatedCount}TEU Allocated`,
+			rightSideText : `${currentForecastCount} TEU Forecast`,
+			percent       : 'ff',
+			progress      : Math.min(((currentAllocatedCount / currentForecastCount) * C), C),
+		},
+		past_container_allocation: {
+			color         : '#e0e0e0',
+			leftSideText  : `${pastFulfilledCount} TEU Fulfilled`,
+			rightSideText : `${pastAllocatedCount} TEU Allocated`,
+			progress      : Math.min(((pastFulfilledCount / pastAllocatedCount) * C), C),
+		},
+	};
+
+	return PROPERTIES_MAPPING[view];
+};
+
+function CustomProgressBar(props) {
+	const { color, leftSideText, rightSideText, progress } = getProps(props);
 
 	return (
 		<div
-			id={id}
 			className={cl`
-			${className}
 			${styles.container}
 			${cl.ns('progressbar_container')}`}
-			style={style}
 		>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				<div>
-					{promisedCount}
-					{' '}
-					TEU ALLOCATED
-				</div>
+				<div>{leftSideText}</div>
 
-				<div>
-					{allocatedCount}
-					{' '}
-					TEU FULFILLED
-				</div>
+				<div>{rightSideText}</div>
 			</div>
+
 			<div
 				className={cl`
 				${styles.progress_bar}
@@ -53,7 +59,7 @@ function CustomProgressBar({
 						${cl.ns('progressbar_progress')}`}
 					style={{
 						width      : `${progress}%`,
-						background : `${COLORS_MAPPING[view]}`,
+						background : `${color}`,
 					}}
 				/>
 			</div>

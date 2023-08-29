@@ -78,8 +78,8 @@ const getSubBucketColumns = ({
 					</div>
 				</>
 			),
-			accessor: ({ allocated_containers = 0 }) => (allocated_containers
-				? (`${allocated_containers} TEU`) : ('0')),
+			accessor: ({ fulfilled = 0 }) => (fulfilled
+				? (`${fulfilled} TEU`) : ('0 TEU')),
 		},
 		{
 			id     : 'avg_deviation',
