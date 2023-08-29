@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -10,13 +11,15 @@ import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import controls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
 import reFormatServices from '../utils/reFormatServices';
-import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 
 function useVendorServices({
-	setActiveStepper = () => { },
+	setActiveStepper = () => {},
 	vendorInformation = {},
-	setVendorInformation = () => { },
+	setVendorInformation = () => {},
 }) {
+	const {
+		general: { query = {} },
+	} = useSelector((state) => state);
 	const {
 		handleSubmit,
 		control,
@@ -26,25 +29,21 @@ function useVendorServices({
 		...rest
 	} = useForm();
 
-	const {
-		general: { query = {} },
-	} = useSelector((state) => state);
-
 	const { vendor_services } = vendorInformation || {};
 
 	const { vendor_details } = vendorInformation || {};
 
-	const entityCode = Object.values(ENTITY_MAPPING).find((val) => vendor_details?.cogo_entity_id === val?.id)?.code
+	const entityCode = Object.values(ENTITY_MAPPING).find((val) => vendor_details?.cogo_entity_id === val?.id)?.code;
 
-	const getControls = controls({ entityCode })
+	const getControls = controls({ entityCode });
 
 	const { partner_id = '', vendor_id } = query;
 
 	const isUpdateAction = !isEmpty(vendor_services);
 
 	const [{ loading }, trigger] = useRequest({
-		url: isUpdateAction ? '/update_vendor_services' : '/create_vendor_services',
-		method: 'POST',
+		url    : isUpdateAction ? '/update_vendor_services' : '/create_vendor_services',
+		method : 'POST',
 	}, { manual: true });
 
 	const onSubmit = async ({ data, step }) => {
@@ -82,6 +81,7 @@ function useVendorServices({
 		getControls.forEach((item) => {
 			setValue(`${item.name}`, vendor_services?.[item.name] || reformattedDataFromApi[item.name]);
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [setValue, vendorInformation, vendor_services]);
 
 	return {
