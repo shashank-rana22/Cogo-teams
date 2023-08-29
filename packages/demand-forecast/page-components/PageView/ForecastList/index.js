@@ -6,7 +6,6 @@ import React from 'react';
 import EmptyState from '../../../common/EmptyState/EmptyState';
 import ListLoading from '../../../common/EmptyState/ListLoading';
 import getTableConfig from '../../../configurations/table-config';
-import useGetForecastFclFreightClusters from '../../../hooks/useGetForecastResults';
 import Card from '../Card';
 
 import styles from './styles.module.css';
@@ -15,13 +14,16 @@ const DEFAULT_PAGE_SIZE = 0;
 const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
 
-function ForecastList({ filters = {} }) {
+function ForecastList({
+
+	loading = false,
+	dataList = [],
+	page = 1,
+	setPage = () => {},
+	pageData = {},
+}) {
 	const { t } = useTranslation(['saasSubscription']);
 	const tableConfig = getTableConfig({ t });
-
-	const {
-		loading, list: dataList, page, setPage, pageData,
-	} = useGetForecastFclFreightClusters({ filters });
 
 	if (isEmpty(dataList) && !loading) {
 		return (

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useGetForecastFclFreightClusters from '../../hooks/useGetForecastResults';
+
 import Filters from './Filters';
 import ForecastList from './ForecastList';
 import Header from './Header';
@@ -11,14 +13,27 @@ function PageView() {
 
 	const [filters, setFilters] = useState({});
 
+	const {
+		loading, list: dataList, page, setPage, pageData,
+	} = useGetForecastFclFreightClusters({ filters });
+
 	return (
 		<div>
 			<Header />
+
 			<div className={styles.secondary_header}>
 				<Tab activeTab={activeTab} setActiveTab={setActiveTab} />
-				<Filters setFilters={setFilters} filters={filters} />
+				<Filters setFilters={setFilters} setPage={setPage} filters={filters} />
 			</div>
-			<ForecastList filters={filters} />
+
+			<ForecastList
+				filters={filters}
+				loading={loading}
+				dataList={dataList}
+				page={page}
+				setPage={setPage}
+				pageData={pageData}
+			/>
 		</div>
 	);
 }

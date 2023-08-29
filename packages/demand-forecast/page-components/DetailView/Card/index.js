@@ -26,7 +26,7 @@ function Card({ card = {}, origin_location_id = '', destination_location_id = ''
 					{winning_profitability.toFixed(NUMBER_FIXED_TO_DECIMAL)}
 					%
 				</div>
-				<div className={styles.capability}>{capability || '-'}</div>
+				<div className={styles.capability}>{capability || 'N/A'}</div>
 				<div className={styles.rates_added}>{rates_added || '-'}</div>
 				<div className={styles.ask_for_rates}>
 					<Button

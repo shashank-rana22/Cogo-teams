@@ -9,7 +9,9 @@ import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function Content({ setFilters = () => {}, setVisible, visible }) {
+const DEFAULT_PAGE = 1;
+
+function Content({ setFilters = () => {}, setVisible, visible,	setPage = () => {} }) {
 	const { t } = useTranslation(['demandForecast']);
 	const formProps = useForm();
 	const { control, handleSubmit } = formProps;
@@ -26,6 +28,7 @@ function Content({ setFilters = () => {}, setVisible, visible }) {
 		});
 
 		setFilters(filterKeys);
+		setPage(DEFAULT_PAGE);
 		setVisible(!visible);
 	};
 
@@ -59,7 +62,7 @@ function Content({ setFilters = () => {}, setVisible, visible }) {
 	);
 }
 
-function Filters({ filters = {}, setFilters = () => {} }) {
+function Filters({ filters = {}, setFilters = () => {},		setPage = () => {} }) {
 	const { t } = useTranslation(['demandForecast']);
 	const [visible, setVisible] = useState(false);
 
@@ -75,7 +78,15 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 			render="bottom"
 			visible={visible}
 			onClickOutside={onClickFilterButton}
-			content={<Content filters={filters} setFilters={setFilters} visible={visible} setVisible={setVisible} />}
+			content={(
+				<Content
+					filters={filters}
+					setFilters={setFilters}
+					visible={visible}
+					setPage={setPage}
+					setVisible={setVisible}
+				/>
+			)}
 		>
 			<div
 				role="presentation"
