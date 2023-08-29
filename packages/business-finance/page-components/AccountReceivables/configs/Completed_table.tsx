@@ -63,6 +63,7 @@ interface InvoiceTable {
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
+const NINE = 9;
 
 const completedColumn = ({
 	refetch,
@@ -370,7 +371,7 @@ const completedColumn = ({
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>
-						{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
+						{(startCase(row?.invoiceStatus)).length > NINE ? (
 							<Tooltip
 								interactive
 								placement="top"
@@ -378,29 +379,21 @@ const completedColumn = ({
 									<div
 										className={styles.tool_tip}
 									>
-										{row?.eInvoicePdfUrl
-											? 'E INVOICE GENERATED'
-											: startCase(getStatus({
-												entityCode,
-												invoiceStatus: row?.invoiceStatus,
-											}))}
-
+										{startCase(getStatus({
+											entityCode,
+											invoiceStatus: row?.invoiceStatus,
+										}))}
 									</div>
 								)}
 							>
 								<text className={styles.style_text}>
-									{row?.eInvoicePdfUrl
-										? `${'E INVOICE GENERATED'.substring(
-											0,
-											10,
-										)}...`
-										: `${startCase(getStatus({
-											entityCode,
-											invoiceStatus: row?.invoiceStatus,
-										})).substring(
-											0,
-											10,
-										)}...`}
+									{`${startCase(getStatus({
+										entityCode,
+										invoiceStatus: row?.invoiceStatus,
+									})).substring(
+										MIN_NAME_STRING,
+										NINE,
+									)}...`}
 
 								</text>
 							</Tooltip>
