@@ -57,8 +57,8 @@ function useCreateCommunicationLog({
 			} = singleFeedback || {};
 
 			return ({
-				feedback_type : singleFeedback?.feedback_type,
-				feedback_data : [
+				feedback_type,
+				feedback_data: [
 					{
 						general_feedback: feedback_type === 'general_feedback'
 							? general_feedback_text : undefined,
