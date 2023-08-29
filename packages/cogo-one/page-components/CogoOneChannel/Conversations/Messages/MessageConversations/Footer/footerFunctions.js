@@ -1,5 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
+const CHECK_REPLAY_TYPE = ['reply', 'reply_all'];
+
 export const getCanSendMessage = ({
 	emailState = {},
 	channelType = '',
@@ -26,7 +28,7 @@ export const getPlaceHolder = ({ hasPermissionToEdit = false, canMessageOnBotSes
 export const getEmailState = ({ mailActions = {}, email = '' }) => {
 	const { data, actionType = '' } = mailActions || {};
 	const { response, conversation_type } = data || {};
-	const { sender = '', subject = '', to_mails = [] } = response || {};
+	const { sender = '', subject = '', to_mails = [], bcc_mails = [], cc_mails = [] } = response || {};
 
 	let toEmail = [sender || email];
 
@@ -35,7 +37,9 @@ export const getEmailState = ({ mailActions = {}, email = '' }) => {
 	}
 
 	return {
-		toUserEmail: actionType === 'reply' ? toEmail : [],
+		toUserEmail   : CHECK_REPLAY_TYPE.includes(actionType) ? toEmail : [],
+		bccrecipients : actionType === 'reply_all' ? bcc_mails : [],
+		ccrecipients  : actionType === 'reply_all' ? cc_mails : [],
 		subject,
 	};
 };
