@@ -1,4 +1,3 @@
-// import Item from './Item';
 import Item from '../CreditNote/Item';
 
 import styles from './styles.module.css';

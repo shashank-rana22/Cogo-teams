@@ -136,8 +136,8 @@ function InvoiceDetail({
 							<div className={styles.payment_method}>
 								{startCase(
 									`${
-										// eslint-disable-next-line max-len
-										creditSource?.[(creditSource?.length ?? CREDIT_SOURCE_FIRST) - CREDIT_INDEX_OFFSET]
+										creditSource?.
+											[(creditSource?.length ?? CREDIT_SOURCE_FIRST) - CREDIT_INDEX_OFFSET]
 									} deferred payment`,
 								)}
 							</div>

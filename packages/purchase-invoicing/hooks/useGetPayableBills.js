@@ -1,5 +1,3 @@
-// import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
-
 import { useRequestBf } from '@cogoport/request';
 
 const useGetPayableBills = ({ shipment_data = {} }) => {
