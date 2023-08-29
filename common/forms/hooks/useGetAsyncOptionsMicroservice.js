@@ -16,6 +16,28 @@ const REQUEST_HOOK_MAPPING = {
 	cx_automation    : useCxAutomationRequest,
 };
 
+function getOptions({ data = [] }) {
+	if (Array.isArray(data)) {
+		return data;
+	}
+
+	let options = [];
+
+	if (typeof data === 'object' && data) {
+		Object.keys(data).some((key) => {
+			if (Array.isArray(data[key])) {
+				options = data[key];
+				return true;
+			}
+			if (typeof data[key] === 'object') {
+				options = getOptions({ data: data[key] });
+			}
+			return !isEmpty(options);
+		});
+	}
+	return options;
+}
+
 function useGetAsyncOptionsMicroservice({
 	endpoint = '',
 	initialCall = false,
@@ -42,8 +64,7 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	let options = data?.list || data?.items || data || [];
-
+	let options = getOptions({ data });
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });
 	}

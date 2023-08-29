@@ -1,51 +1,71 @@
-const mobileNumberPads = [
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+
+const MOBILE_NUMBER_KEYS = [
 	{
-		label: '1',
+		key   : 'one',
+		label : '1',
 	},
 	{
+		key        : 'two',
 		label      : '2',
 		lowerlabel : 'ABC',
 	},
 	{
+		key        : 'three',
 		label      : '3',
 		lowerlabel : 'DEF',
 	},
 	{
+		key        : 'four',
 		label      : '4',
 		lowerlabel : 'GHI',
 	},
 	{
+		key        : 'five',
 		label      : '5',
 		lowerlabel : 'JKL',
 	},
 	{
+		key        : 'six',
 		label      : '6',
 		lowerlabel : 'MNO',
 	},
 	{
+		key        : 'seven',
 		label      : '7',
 		lowerlabel : 'PQRS',
 	},
 	{
+		key        : 'eight',
 		label      : '8',
 		lowerlabel : 'TUV',
 	},
 	{
+		key        : 'nine',
 		label      : '9',
 		lowerlabel : 'WXYZ',
 	},
 	{
-		label: '',
+		key   : 'dummy_button',
+		label : '',
 	},
-	{ label: '0' },
 	{
+		key   : 'zero',
+		label : '0',
+	},
+	{
+		key   : 'delete_icon',
 		label : '',
 		icon  : (
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/delete-icon.svg"
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.backSpaceIcon}
 				alt="delete"
+				height={25}
+				width={25}
 			/>
 		),
 	},
 ];
-export default mobileNumberPads;
+
+export default MOBILE_NUMBER_KEYS;

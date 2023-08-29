@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../constants/create-form-stepper-keys-mapping';
 
@@ -11,6 +12,8 @@ import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
 const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function SetObjectiveWeightage(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { activeMode, setActiveMode, setActiveStep, formValues, flushRefCallback } = props;
 
 	const { list, listLoading, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
@@ -20,7 +23,7 @@ function SetObjectiveWeightage(props) {
 		setValue,
 		createLoading,
 		onCreate,
-	} = useCreateObjective({ formValues, setActiveMode, flushRefCallback });
+	} = useCreateObjective({ formValues, setActiveMode, flushRefCallback, t });
 
 	const { page, total } = paginationData || {};
 
@@ -30,12 +33,10 @@ function SetObjectiveWeightage(props) {
 		<div className={styles.container}>
 			<div className={styles.header_container}>
 				<div className={styles.heading_container}>
-					<h3>Set Objective Weightage</h3>
+					<h3>{t('allocation:set_objective_weightage')}</h3>
 
 					<p className={styles.subheading}>
-						You may Custom Set Weightage of Each Objective per User here. If nothing is set,
-						system will auto assign equal weightage for all Objectives.
-						The sum of weightage per User must total to 100.
+						{t('allocation:set_objective_weightage_phrase')}
 					</p>
 				</div>
 			</div>
@@ -57,11 +58,11 @@ function SetObjectiveWeightage(props) {
 					themeType="link"
 					onClick={() => setActiveStep(REVIEW_OBJECTIVE)}
 				>
-					Back
+					{t('allocation:back_button')}
 				</Button>
 
 				<div className={styles.button_container}>
-					{getModeWiseButtons({ activeMode, onCreate, createLoading, createDisabled })}
+					{getModeWiseButtons({ activeMode, onCreate, createLoading, createDisabled, t })}
 				</div>
 			</div>
 		</div>

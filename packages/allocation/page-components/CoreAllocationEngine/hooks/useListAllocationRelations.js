@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Checkbox, Tooltip, Pill, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
@@ -8,7 +9,7 @@ import { useState, useEffect, useMemo } from 'react';
 import ActionContent from '../components/AllocationRelations/List/ActionContent';
 import styles from '../components/AllocationRelations/List/styles.module.css';
 
-const useAllocationRelations = () => {
+const useAllocationRelations = ({ t = () => {} }) => {
 	const [showActions, setShowActions] = useState(null);
 
 	const [activeTab, setActiveTab] = useState('active');
@@ -158,7 +159,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'business_name',
-			Header   : 'Business Name',
+			Header   : t('allocation:business_name_label'),
 			accessor : ({ organization = '' }) => (
 				<Tooltip content={startCase(organization.business_name.toLowerCase())} placement="bottom">
 					<div className={styles.tooltip_text}>
@@ -170,7 +171,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'user',
-			Header   : 'User',
+			Header   : t('allocation:user_label'),
 			accessor : ({ user_id = '' }) => (
 				<div className={styles.name_container}>
 					<div className={styles.tooltip_text}>{startCase((user_id.name || '___').toLowerCase())}</div>
@@ -184,7 +185,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'stakeholder',
-			Header   : 'Stakeholder',
+			Header   : t('allocation:stakeholder_label'),
 			accessor : ({ stakeholder_id = '', stakeholder_type = '' }) => (
 				<div className={styles.name_container}>
 					<div className={styles.tooltip_text}>{startCase((stakeholder_id.name || '___').toLowerCase())}</div>
@@ -198,7 +199,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'reason',
-			Header   : 'Reason',
+			Header   : t('allocation:reason_short_label'),
 			accessor : ({ reason = '' }) => (
 				<Tooltip placement="bottom" content={(reason || '___')}>
 					<div className={styles.reason_text}>{(reason || '___')}</div>
@@ -208,7 +209,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'created_by',
-			Header   : 'Created By',
+			Header   : t('allocation:created_by'),
 			accessor : ({ created_by = '' }) => (
 				<div className={styles.name_container}>
 					<div className={styles.tooltip_text}>
@@ -221,7 +222,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'expiry_date',
-			Header   : 'Expiry Date',
+			Header   : t('allocation:expiry_date_label'),
 			accessor : ({ expiry_date = '' }) => (
 				<div className={styles.expiry_date}>
 					<div>
@@ -239,7 +240,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'relation_type',
-			Header   : 'Relation Type',
+			Header   : t('allocation:relation_type_label'),
 			accessor : ({ relation_type = '' }) => (
 				<Pill size="sm" color={relation_type === 'remove' ? 'red' : 'green'}>
 
@@ -250,7 +251,7 @@ const useAllocationRelations = () => {
 		},
 		{
 			id       : 'actions',
-			Header   : 'Actions',
+			Header   : t('allocation:actions_label'),
 			accessor : (item) => {
 				const { id = '' } = item;
 				const onClickCta = (workflow) => {

@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import Form from '../../../../../../common/Form';
 import usePublishConfiguration from '../../../../hooks/usePublishConfiguration';
@@ -8,13 +9,20 @@ function PublishConfiguration({
 	setShow,
 	listRefetch,
 }) {
-	const { onPublish, loadingPublish, formProps, controls } = usePublishConfiguration({ item, listRefetch, setShow });
+	const { t } = useTranslation(['allocation']);
+
+	const {
+		onPublish,
+		loadingPublish,
+		formProps,
+		controls,
+	} = usePublishConfiguration({ item, listRefetch, setShow, t });
 
 	const { handleSubmit } = formProps;
 
 	return (
 		<>
-			<Modal.Header title="Publish Configuration" />
+			<Modal.Header title={t('allocation:publish_configuration')} />
 
 			<form onSubmit={handleSubmit(onPublish)}>
 				<Modal.Body>
@@ -28,7 +36,7 @@ function PublishConfiguration({
 						themeType="primary"
 						disabled={loadingPublish}
 					>
-						Publish
+						{t('allocation:publish_button')}
 					</Button>
 				</Modal.Footer>
 			</form>

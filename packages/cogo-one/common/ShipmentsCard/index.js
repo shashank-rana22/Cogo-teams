@@ -17,6 +17,7 @@ function ShipmentsCard({
 	showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
+	handleShipmentChat = () => {},
 }) {
 	const {
 		shipment_type = '',
@@ -39,6 +40,7 @@ function ShipmentsCard({
 					setShowPocDetails={setShowPocDetails}
 					type={type}
 					setShowBookingNote={setShowBookingNote}
+					handleShipmentChat={handleShipmentChat}
 					setShowPopover={setShowPopover}
 					showPopover={showPopover}
 					setShowPocModal={setShowPocModal}

@@ -31,7 +31,9 @@ function FooterHead({
 	uploaderRef = {},
 	setMailActions = () => {},
 }) {
-	const [openReceipients, setOpenReceipents] = useState(false);
+	const { actionType = '', data = {} } = mailActions || {};
+
+	const [openReceipients, setOpenReceipents] = useState(actionType === 'reply_all');
 
 	const emailReceipientProps = mailFunction({
 		setErrorValue,
@@ -41,7 +43,6 @@ function FooterHead({
 		setEmailState,
 	});
 
-	const { actionType, data } = mailActions || {};
 	const { response } = data || {};
 	const { subject } = response || {};
 
