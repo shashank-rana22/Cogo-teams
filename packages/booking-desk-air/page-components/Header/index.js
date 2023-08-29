@@ -2,10 +2,11 @@ import { Tabs, TabPanel, Input, Popover, ButtonIcon, Button } from '@cogoport/co
 import { IcMAppSearch, IcMFilter, IcMCross, IcCRedCircle } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
-import SERVICE_WISE_MAPPINGS from '../../constants/service-tabs-mappings';
-import SHIPMENT_STATE_MAPPINGS from '../../constants/shipment-state-mappings';
+import serviceWiseMappings from '../../constants/service-tabs-mappings';
+import shipmentStateMappings from '../../constants/shipment-state-mappings';
 
 import Filter from './Filter';
 import styles from './styles.module.css';
@@ -19,8 +20,12 @@ function Header({
 	setFilters = () => {},
 	filters = {},
 }) {
+	const { t } = useTranslation(['airBookingDesk']);
 	const [filterPopover, setFilterPopover] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
+
+	const SERVICE_WISE_MAPPINGS = serviceWiseMappings(t);
+	const SHIPMENT_STATE_MAPPINGS = shipmentStateMappings(t);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -73,7 +78,7 @@ function Header({
 					<Input
 						size="sm"
 						prefix={<IcMAppSearch />}
-						placeholder="Search via SID/AWB No"
+						placeholder={t('airBookingDesk:placeholder_input_search_via_sid_awb_number')}
 						style={{ marginRight: '8px', width: 350 }}
 						onChange={(e) => setSearchValue(e)}
 						value={searchValue}

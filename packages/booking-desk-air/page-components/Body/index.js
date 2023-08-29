@@ -1,6 +1,7 @@
 import { EmptyState } from '@cogoport/air-modules';
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import Loader from '../../commons/Loader';
 
@@ -12,6 +13,7 @@ const TOTAL_COUNT_FOR_PAGINATION = 0;
 const SIZE_FOR_SHIPMENT_PAGE = 10;
 
 function Body({ data = {}, loading = false, setPage = () => {} }) {
+	const { t } = useTranslation(['airBookingDesk']);
 	const { list = [], total_count = 0, page = 0 } = data;
 
 	const handlePageChange = (pageVal) => {
@@ -26,8 +28,8 @@ function Body({ data = {}, loading = false, setPage = () => {} }) {
 							<EmptyState
 								height="50%"
 								width="50%"
-								emptyText="No Shipments found !!"
-								subEmptyText="Looks like no results were found..."
+								emptyText={t('airBookingDesk:empty_state_empty_text')}
+								subEmptyText={t('airBookingDesk:empty_state_sub_empty_text')}
 							/>
 						) : (
 							<div>

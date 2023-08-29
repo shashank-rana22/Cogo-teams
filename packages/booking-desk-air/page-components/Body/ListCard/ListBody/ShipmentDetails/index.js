@@ -1,16 +1,19 @@
 import { Tooltip } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-const SERIAL_ID_LABEL = {
-	consol       : 'Consol ID',
-	coload       : 'Coload ID',
-	defaultValue : 'Shipment ID',
-};
+const serialIdLabel = (t = () => {}) => ({
+	consol       : t('airBookingDesk:serial_id_label_consol'),
+	coload       : t('airBookingDesk:serial_id_label_coload'),
+	defaultValue : t('airBookingDesk:serial_id_label_default_value'),
+});
 
 const INCLUDES_SHIPMENT = ['air_freight', 'domestic_air_freight'];
 
 function ShipmentDetails({ item = {} }) {
+	const { t } = useTranslation(['airBookingDesk']);
+
 	const {
 		serial_id = '',
 		source = '',
@@ -23,6 +26,8 @@ function ShipmentDetails({ item = {} }) {
 	const { business_name = '' } = importer_exporter;
 
 	const { business_name:airline_business_name = '' } = airline || {};
+
+	const SERIAL_ID_LABEL = serialIdLabel(t);
 
 	return (
 		<div className={styles.shipment_details_container}>
@@ -51,14 +56,14 @@ function ShipmentDetails({ item = {} }) {
 						content={<div>{airline_business_name}</div>}
 					>
 						<div className={styles.business_name}>
-							<span>Airline:</span>
+							<span>{t('airBookingDesk:heading_airline')}</span>
 							{' '}
 							{airline_business_name}
 						</div>
 					</Tooltip>
 				)}
 				<div className={styles.agent_name}>
-					KAM :
+					{t('airBookingDesk:heading_kam')}
 					{' '}
 					{entity_manager?.name || booking_agent?.name}
 				</div>
