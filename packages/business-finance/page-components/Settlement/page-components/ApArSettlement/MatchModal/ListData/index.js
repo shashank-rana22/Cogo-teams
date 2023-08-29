@@ -2,15 +2,20 @@ import React from 'react';
 
 import CardItem from './Card';
 
-export default function ListData({ selectedData = [], setSelectedData }) {
-	// const [restEdit, setRestEdit] = useState(false);
-	// const [cardsData, setCardsData] = useState(updatedData);
-	// useEffect(() => {
-	// 	setCardsData(updatedData); // Update cardsData whenever updatedData changes
-	// }, [updatedData]);
+export default function ListData({
+	selectedData = [],
+	setSelectedData,
+	stackData,
+	// reRender,
+	// setReRender
+}) {
+	// console.log('stack', stackData);
+	// console.log('what', reRender);
+	const updatedData = selectedData.map((item) => ({ ...item }));
+	// console.log('from card', updatedData);
 	return (
 		<div>
-			{selectedData.map((tile) => (
+			{(stackData || (updatedData)).map((tile) => (
 				<div
 					key={tile.id}
 				>
@@ -20,22 +25,7 @@ export default function ListData({ selectedData = [], setSelectedData }) {
 						selectedData={selectedData}
 						originalAllocation={tile.allocationAmount}
 						originalTDS={tile.tds}
-						// handleClick={handleClick}
-						// setEditedValue={setEditedValue}
-						// setEditeable={setEditeable}
-						// isEditable={isEditable}
-						// handleCrossClick={handleCrossClick}
-						// setAllocationValue={setAllocationValue}
-						// onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
-						// setCheckedIdData={setCheckedIdData}
-						// type={type}
-						// setRestEdit={setRestEdit}
-						// restEdit={restEdit}
-						// changeData={changeData}
-						// setEditedNostro={setEditedNostro}
-						// nostroButton={nostroButton}
-						// setCanCheck={setCanCheck}
-						// isVietnamUser={isVietnamUser}
+						updatedData={updatedData}
 					/>
 				</div>
 			))}

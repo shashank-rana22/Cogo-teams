@@ -4,7 +4,14 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-export default function CardItem({ itm, selectedData, setSelectedData, originalAllocation, originalTDS }) {
+export default function CardItem({
+	itm,
+	selectedData,
+	setSelectedData,
+	originalAllocation,
+	originalTDS,
+	// updatedData,
+}) {
 	const new_itm = itm;
 	const {
 		documentValue = '',
@@ -14,14 +21,11 @@ export default function CardItem({ itm, selectedData, setSelectedData, originalA
 		settledTds = 0,
 		exchangeRate = 0,
 	} = new_itm || {};
-	// console.log(selectedData);
-
+	// console.log('select', selectedData);
+	// console.log('updated', updatedData);
 	const [prevTDS, setPrevTDS] = useState(new_itm.tds);
-	// console.log('origTds', originalTDS);
 	const [newTDS, setNewTDS] = useState(new_itm.tds);
 	const [editedAllocation, setEditedAllocation] = useState(new_itm.allocationAmount);
-	console.log('originalAllocation', originalAllocation);
-	console.log('finalAllocation', editedAllocation);
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
 	const STATUS = {
@@ -51,33 +55,20 @@ export default function CardItem({ itm, selectedData, setSelectedData, originalA
 			// hb
 		}
 	};
-	console.log('alloc', new_itm?.allocationAmount);
 	const handleEditTDS = () => {
-		// Calculate the difference between the new TDS and the original TDS
 		const tdsDifference = new_itm.tds - prevTDS;
 
-		// Update TDS amount
-		// new_itm.tds = newTDS;
-
-		// Update balance amount and allocation amount
 		new_itm.balanceAmount -= tdsDifference;
 		new_itm.allocationAmount -= tdsDifference;
+		setEditedAllocation(new_itm.allocationAmount);
 		setPrevTDS(new_itm.tds);
-		// Apply your logic to submit changes and update UI
-		// ...
-
-		// setIsTDSEdnew_itmode(false); // Exit TDS edit mode
 	};
 
 	useEffect(() => {
-		// Additional actions or effects to perform when selectedData changes
-		// For example, you might update the UI or make an API call here
 	}, [selectedData]);
 	return (
 		<div className={styles.Row}>
-			{/* <Row onClick={handleClick}> */}
 			<div className={styles.Card} style={{ '--colortype': STATUS[new_itm.status] }}>
-				{/* <Card colortype={Status[new_itm.status]}> */}
 				<div className={styles.ribbon}>{new_itm.status}</div>
 				<div>
 					<img
@@ -87,9 +78,7 @@ export default function CardItem({ itm, selectedData, setSelectedData, originalA
 				</div>
 				<div>
 					<div className={styles.ContainerDiv}>
-						{/* <ContainerDiv> */}
 						{documentValue}
-						{/* </ContainerDiv> */}
 					</div>
 				</div>
 				<div>
@@ -115,7 +104,6 @@ export default function CardItem({ itm, selectedData, setSelectedData, originalA
 									themeType="primary"
 									onClick={() => {
 										setIsTdsEdnew_itmode(false);
-										// handleEditTdsAllocation();
 										new_itm.tds = newTDS;
 										handleEditTDS();
 									}}
@@ -195,11 +183,8 @@ export default function CardItem({ itm, selectedData, setSelectedData, originalA
 									icon={<IcMLineundo />}
 									themeType="primary"
 									onClick={() => {
-										// setEditedAllocation(new_itm.allocationAmount);
-										// handleUndoAllocation();
 										setIsEdnew_itmode(false);
 										new_itm.allocationAmount = originalAllocation;
-										// setEditedAllocation(originalAllocation);
 										handleEditAllocation();
 									}}
 								/>
@@ -209,7 +194,6 @@ export default function CardItem({ itm, selectedData, setSelectedData, originalA
 							<>
 								{currency}
 								{'  '}
-								{/* {console.log('fint', new_itm.allocationAmount)} */}
 								{new_itm?.allocationAmount}
 								<ButtonIcon
 									size="lg"

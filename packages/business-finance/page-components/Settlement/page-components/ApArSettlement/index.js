@@ -41,6 +41,7 @@ function ApArSettlement() {
 	};
 
 	const [selectedData, setSelectedData] = useState([]);
+	const [reRender, setReRender] = useState(false);
 
 	const [pageCheckedRows, setPageCheckedRows] = useState({});
 	const [matchModalShow, setMatchModalShow] = useState(false);
@@ -72,8 +73,6 @@ function ApArSettlement() {
 					setSortBy={setSortBy}
 					sortType={sortType}
 					setSortType={setSortType}
-				// arrowDirections={arrowDirections}
-				// setArrowDirections={setArrowDirections}
 					setSortData={setSorting}
 					sortData={sorting}
 					pageCheckedRows={pageCheckedRows}
@@ -97,10 +96,8 @@ function ApArSettlement() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sorting]);
 	useEffect(() => {
-		// Create a set of selected IDs for quick lookups
 		const selectedIds = new Set(selectedData.map((row) => row.id));
 
-		// Filter out IDs that are not in selectedData
 		const UPDATEDPAGECHECKEDROWS = {};
 		Object.keys(pageCheckedRows).forEach((pageNo) => {
 			UPDATEDPAGECHECKEDROWS[pageNo] = pageCheckedRows[pageNo].filter((id) => selectedIds.has(id));
@@ -109,7 +106,6 @@ function ApArSettlement() {
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedData]);
-	// console.log(selectedData);
 
 	return (
 		<div>
@@ -162,26 +158,10 @@ function ApArSettlement() {
 					setSelectedData={setSelectedData}
 					loading={loading}
 					filters={filters}
+					reRender={reRender}
+					setReRender={setReRender}
 				/>
 			) : null}
-			{/* {matchModalShow && (
-				<MatchModal
-					key={selectedData.length}
-					show={matchModalShow}
-					setShow={setMatchModalShow}
-					// checkedRowsSerialId={checkedRowsSerialId}
-					checkedData={selectedData}
-					// onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
-					matchbal={totalMatchingBalance}
-					refetch={refetch}
-					// setCheckedRows={setCheckedRows}
-					// matchHead={isVietnamUser ? MATCHING_VN : MATCHING}
-					globalFilters={filters}
-					// userInfo={userInfo}
-					setGlobalFilters={setFilters}
-					setCheckedData={setSelectedData}
-				/>
-			)} */}
 		</div>
 
 	);
