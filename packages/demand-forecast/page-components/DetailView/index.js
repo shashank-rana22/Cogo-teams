@@ -41,6 +41,7 @@ function DetailView() {
 				origin_location_id={origin_id}
 				destination_location_id={destination_id}
 				total_estimated_demand={total_estimated_demand}
+				isMiniCluster={isMiniCluster}
 			/>
 		</div>
 	);

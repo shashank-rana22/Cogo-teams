@@ -12,12 +12,12 @@ const DEFAULT_PAGE_SIZE = 0;
 const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
 
-function SupplierList({ origin_location_id = '', destination_location_id = '' }) {
+function SupplierList({ origin_location_id = '', destination_location_id = '', isMiniCluster = false }) {
 	const { t } = useTranslation(['demandForecast']);
 
 	const {
 		list:dataList = [], pageData, page, setPage, loading,
-	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id });
+	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id, isMiniCluster });
 
 	const tableConfig = getSupplierTableConfig({ t });
 

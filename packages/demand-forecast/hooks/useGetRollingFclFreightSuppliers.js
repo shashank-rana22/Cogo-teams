@@ -5,7 +5,11 @@ import { useCallback, useState, useEffect } from 'react';
 
 const DEFAULT_PAGE = 1;
 
-const useGetRollingFclFreightSuppliers = ({ filters = {}, origin_location_id = '', destination_location_id = '' }) => {
+const useGetRollingFclFreightSuppliers = ({
+	filters = {}, origin_location_id = '',
+	destination_location_id = '',
+	isMiniCluster = false,
+}) => {
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const [{ data, loading = false }, trigger] = useRequest({
@@ -21,6 +25,7 @@ const useGetRollingFclFreightSuppliers = ({ filters = {}, origin_location_id = '
 					destination_location_id,
 					filters,
 					page,
+					...(isMiniCluster ? { mini_clusters_data_required: true } : {}),
 				},
 			});
 		} catch (error) {
