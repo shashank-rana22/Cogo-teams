@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import Agents from './components/Agents';
@@ -8,26 +9,30 @@ import styles from './styles.module.css';
 
 const { OBJECTIVES, AGENTS } = TAB_PANNEL_KEYS;
 
-const TAB_PANEL_MAPPING = {
+const getTabPanelMappings = ({ t = () => {} }) => ({
 	[OBJECTIVES]: {
 		name      : OBJECTIVES,
-		title     : 'Objectives',
+		title     : t('allocation:tab_objectives_label'),
 		Component : Objectives,
 	},
 	[AGENTS]: {
 		name      : AGENTS,
-		title     : 'Agents',
+		title     : t('allocation:tab_agent_label'),
 		Component : Agents,
 	},
-};
+});
 
 function ObjectiveConfigurations() {
+	const { t } = useTranslation(['allocation']);
+
 	const [activeTab, setActiveTab] = useState(OBJECTIVES);
+
+	const tabPanelMappings = getTabPanelMappings({ t });
 
 	return (
 		<section className={styles.container}>
 			<div className={styles.heading_container}>
-				Objective Configurations
+				{t('allocation:objective_configuration_heading')}
 			</div>
 
 			<section className={styles.tabs}>
@@ -37,7 +42,7 @@ function ObjectiveConfigurations() {
 					fullWidth
 					themeType="secondary"
 				>
-					{Object.values(TAB_PANEL_MAPPING).map((item) => {
+					{Object.values(tabPanelMappings).map((item) => {
 						const { name, title, Component } = item;
 
 						if (!Component) return null;

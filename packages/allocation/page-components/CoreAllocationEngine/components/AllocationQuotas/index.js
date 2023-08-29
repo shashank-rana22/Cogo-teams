@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useListAllocationQuotas from '../../hooks/useListAllocationQuotas';
 
@@ -8,6 +9,8 @@ import QuotaModal from './QuotaModal';
 import styles from './styles.module.css';
 
 function AllocationQuotas() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data,
 		columns,
@@ -21,7 +24,7 @@ function AllocationQuotas() {
 		getNextPage,
 		quotaItem,
 		setQuotaItem,
-	} = useListAllocationQuotas();
+	} = useListAllocationQuotas({ t });
 
 	const toggleRoleType = params?.filters?.quota_type;
 

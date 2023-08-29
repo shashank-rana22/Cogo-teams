@@ -1,5 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import useGetEngagementScoringSettings from '../../../hooks/useGetEngagementScoringSettings';
 
@@ -9,6 +10,8 @@ import PercentileSetting from './PercentileSetting';
 import styles from './styles.module.css';
 
 function Settings({ setToggleComponent = () => {} }) {
+	const { t } = useTranslation(['allocation']);
+
 	const formProps = useForm();
 	const { control, handleSubmit, formState: { errors }, watch, reset } = formProps;
 
@@ -30,7 +33,7 @@ function Settings({ setToggleComponent = () => {} }) {
 				<div
 					className={styles.back_text}
 				>
-					Account Scoring
+					{t('allocation:account_scoring')}
 				</div>
 			</div>
 
