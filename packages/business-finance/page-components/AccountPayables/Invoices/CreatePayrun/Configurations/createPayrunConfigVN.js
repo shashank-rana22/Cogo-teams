@@ -1,4 +1,4 @@
-export const CREATE_OVER_SEAS_CONFIG = {
+export const CREATE_PAYRUN_CONFIG_VN = {
 	showHeader         : true,
 	showHeaderCheckbox : true,
 	headerStyles       : {
@@ -23,6 +23,13 @@ export const CREATE_OVER_SEAS_CONFIG = {
 		{
 			func : 'renderCheckbox',
 			span : 0.2,
+		},
+		{
+			label     : 'Collection Party',
+			key       : 'organizationName',
+			func      : 'renderToolTip',
+			maxLength : 36,
+			span      : 1,
 		},
 		{
 			label  : 'Invoice Number',
@@ -73,15 +80,6 @@ export const CREATE_OVER_SEAS_CONFIG = {
 			},
 		},
 		{
-			label       : 'Tds',
-			key         : 'tdsAmount',
-			func        : 'renderEditableTds',
-			editable    : true,
-			currencyKey : 'currency',
-			fallBackKey : 'tdsValue',
-			span        : 1,
-		},
-		{
 			label       : 'Paid',
 			key         : 'paidAmount',
 			span        : 1,
@@ -92,13 +90,13 @@ export const CREATE_OVER_SEAS_CONFIG = {
 			label       : 'Payable',
 			key         : 'payableAmount',
 			span        : 1,
+			editable    : true,
 			currencyKey : 'currency',
-			func        : 'renderAmount',
 		},
 		{
 			label       : 'To be Paid',
 			key         : 'inputAmount',
-			span        : 1,
+			span        : 1.5,
 			editable    : true,
 			fallBackKey : 'payableAmount',
 			func        : 'renderEditablePayable',
@@ -114,7 +112,7 @@ export const CREATE_OVER_SEAS_CONFIG = {
 		{
 			label : 'Bank Details',
 			key   : 'bank_details',
-			span  : 1.5,
+			span  : 2,
 			func  : 'renderBankDetails',
 		},
 		{

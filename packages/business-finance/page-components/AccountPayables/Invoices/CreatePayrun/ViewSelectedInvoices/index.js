@@ -9,7 +9,6 @@ import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip';
 import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency';
-import { VIEW_SELECTED_CONFIG } from '../Configurations/viewSelectedConfig';
 
 import BankDetails from './BankDetails';
 import Delete from './Delete';
@@ -40,6 +39,7 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) 
 		filters,
 		setFilters,
 		getInvoices,
+		config,
 	} = useGetSelectedInvoices({ apiData, setApiData });
 
 	const FUNCTIONS = getFunctions({ getInvoices });
@@ -74,7 +74,7 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) 
 				<List
 					itemData={apiData}
 					loading={selectedInvoiceLoading}
-					config={VIEW_SELECTED_CONFIG}
+					config={config}
 					functions={FUNCTIONS}
 					page={filters?.pageIndex || FIRST_PAGE}
 					pageSize={10}

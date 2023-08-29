@@ -19,6 +19,8 @@ function Footer({
 	setActive = () => {},
 	setBLData = () => {},
 	listSelectedInvoice,
+	selectButton = false,
+	createloading = false,
 }) {
 	const {
 		list = [],
@@ -112,7 +114,7 @@ function Footer({
 									<Button
 										themeType="secondary"
 										onClick={submitSelectedInvoices}
-										disabled={buttonDisabled}
+										disabled={buttonDisabled || selectButton || createloading}
 									>
 										+ Add to selected
 									</Button>

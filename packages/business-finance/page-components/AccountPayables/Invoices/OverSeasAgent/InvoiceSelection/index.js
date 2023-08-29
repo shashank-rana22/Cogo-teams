@@ -89,18 +89,11 @@ function InvoiceSelection({
 		filterClear,
 		listSelectedInvoice,
 		submitSelectedInvoices,
-		// createloading,
+		createloading,
 		GetTableHeaderCheckbox,
-		// deleteInvoices,
-		// delete_payrun_invoice,
 		GetTableBodyCheckbox,
 		resetPage,
 		setEditedValue,
-		// setEditeableTds,
-		// setEditeable,
-		// setRestTds,
-		// setEditedTdsValue,
-		// setRestValue,
 		loading,
 		// payrun_type,
 		goBack,
@@ -115,8 +108,8 @@ function InvoiceSelection({
 	const isCreditChecked = list.filter(
 		(item) => item.checked && item.invoiceType === 'CREDIT NOTE',
 	);
-	// const TDS_ERROR = isChecked.filter((item) => item.tdsError);
-	// const paidError = isChecked.filter((item) => item.paidError);
+	const tdsError = isChecked.filter((item) => item.tdsError);
+	const paidError = isChecked.filter((item) => item.paidError);
 
 	const totalCreditInvoiceAmount = isCreditChecked.reduce((acc, obj) => +acc + +obj.invoiceAmount, MORE_THAN_ZERO);
 
@@ -135,7 +128,9 @@ function InvoiceSelection({
 	}, [totalCalc, setShowPayableAmount, active]);
 
 	useEffect(() => {
-		if (isEmpty(invoiceData?.list)) setShowSaveAsDraft(true);
+		if (isEmpty(invoiceData?.list)) {
+			setShowSaveAsDraft(true);
+		}
 	}, [invoiceData, setShowSaveAsDraft]);
 
 	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue, refetch });
@@ -183,8 +178,10 @@ function InvoiceSelection({
 				submitSelectedInvoices={submitSelectedInvoices}
 				setShowHeader={setShowHeader}
 				listSelectedInvoice={listSelectedInvoice}
+				selectButton={tdsError.length || paidError.length}
 				setActive={setActive}
 				setBLData={setBLData}
+				createloading={createloading}
 			/>
 		</div>
 	);

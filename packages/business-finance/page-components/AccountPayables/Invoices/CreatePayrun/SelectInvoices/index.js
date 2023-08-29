@@ -12,7 +12,6 @@ import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInv
 import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip';
 import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency';
 import FilterModal from '../../MoreFilters';
-import { CREATE_PAYRUN_CONFIG } from '../Configurations/createPayrunConfig';
 
 import BankDetails from './EditableBankDetails/BankDetails';
 import EditableTdsInput from './EditableInput';
@@ -72,6 +71,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		getPayrunInvoices,
 		GetTableBodyCheckbox,
 		GetTableHeaderCheckbox,
+		config,
 	} = useGetPayrunInvoices({ apiData, setApiData });
 
 	const setEditedValue = (itemData, value, key, checked = false) => {
@@ -181,7 +181,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 				<List
 					itemData={apiData}
 					loading={billsLoading}
-					config={CREATE_PAYRUN_CONFIG}
+					config={config}
 					functions={FUNCTIONS}
 					sort={orderBy}
 					setSort={setOrderBy}

@@ -1,7 +1,6 @@
-export const CREATE_OVER_SEAS_CONFIG = {
-	showHeader         : true,
-	showHeaderCheckbox : true,
-	headerStyles       : {
+export const VIEW_SELECTED_CONFIG_VN = {
+	showHeader   : true,
+	headerStyles : {
 		borderRadius : '8px',
 		background   : 'none',
 		color        : '#000',
@@ -21,8 +20,11 @@ export const CREATE_OVER_SEAS_CONFIG = {
 	},
 	fields: [
 		{
-			func : 'renderCheckbox',
-			span : 0.2,
+			label     : 'Collection Party',
+			key       : 'organizationName',
+			func      : 'renderToolTip',
+			maxLength : 36,
+			span      : 1.8,
 		},
 		{
 			label  : 'Invoice Number',
@@ -40,17 +42,12 @@ export const CREATE_OVER_SEAS_CONFIG = {
 			},
 		},
 		{
-			label : 'Entity',
-			key   : 'entityCode',
-			span  : 0.6,
-		},
-		{
 			label  : 'SID',
 			key    : 'sid',
 			func   : 'renderFieldPair',
-			span   : 1,
+			span   : 1.2,
 			topKey : {
-				key: 'jobNumber',
+				key: 'sid',
 			},
 			lowerKey: {
 				key  : 'serviceType',
@@ -73,15 +70,6 @@ export const CREATE_OVER_SEAS_CONFIG = {
 			},
 		},
 		{
-			label       : 'Tds',
-			key         : 'tdsAmount',
-			func        : 'renderEditableTds',
-			editable    : true,
-			currencyKey : 'currency',
-			fallBackKey : 'tdsValue',
-			span        : 1,
-		},
-		{
 			label       : 'Paid',
 			key         : 'paidAmount',
 			span        : 1,
@@ -89,45 +77,35 @@ export const CREATE_OVER_SEAS_CONFIG = {
 			currencyKey : 'currency',
 		},
 		{
-			label       : 'Payable',
+			label       : 'To be Paid',
 			key         : 'payableAmount',
 			span        : 1,
-			currencyKey : 'currency',
 			func        : 'renderAmount',
-		},
-		{
-			label       : 'To be Paid',
-			key         : 'inputAmount',
-			span        : 1,
-			editable    : true,
-			fallBackKey : 'payableAmount',
-			func        : 'renderEditablePayable',
 			currencyKey : 'currency',
-		},
-		{
-			label   : 'Invoice Dates',
-			key     : 'invoice_dates',
-			sorting : { name: 'dueDateSortType' },
-			span    : 1.4,
-			func    : 'renderInvoiceDates',
 		},
 		{
 			label : 'Bank Details',
-			key   : 'bank_details',
-			span  : 1.5,
+			key   : 'invoice_dates',
+			span  : 2,
 			func  : 'renderBankDetails',
 		},
 		{
 			label : 'Urgency',
 			key   : 'urgencyTag',
-			span  : 0.7,
+			span  : 1,
 			func  : 'renderUrgencyTag',
 		},
 		{
 			label : 'Action',
 			key   : 'action',
-			span  : 0.4,
+			span  : 0.6,
 			func  : 'renderAction',
+		},
+		{
+			label : '',
+			key   : 'id',
+			span  : 0.4,
+			func  : 'renderDelete',
 		},
 	],
 };

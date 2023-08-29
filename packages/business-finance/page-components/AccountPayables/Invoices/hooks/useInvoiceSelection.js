@@ -9,12 +9,12 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-// import UserContext from '../components/UserContext';
-// import { CREATE_OVER_SEAS_CONFIG_VN } from '../configurations/invoices/create-over-seas-table-vn';
 import { SUPPLIER_CONFIG } from '../CreatePayrun/Configurations/supplierConfig';
 import { VIEW_SELECTED_CONFIG } from '../CreatePayrun/Configurations/viewSelectedConfig';
-// import { VIEW_SELECTED_VN } from '../configurations/payruns/view-selected-table-vn';
+import { VIEW_SELECTED_CONFIG_VN } from '../CreatePayrun/Configurations/viewSelectedConfigVN';
 import { CREATE_OVER_SEAS_CONFIG } from '../OverSeasAgent/Configurations/createOverSeasConfig';
+import { CREATE_OVER_SEAS_CONFIG_VN } from '../OverSeasAgent/Configurations/createOverSeasConfigVN';
+import getKeyByValue from '../utils/getKeyByValue';
 
 const API_ARRAY_VARIABLE_ONE = 1;
 const INCREEMENT_BY = 1;
@@ -41,7 +41,21 @@ const useGetInvoiceSelection = ({ sort }) => {
 	const [apiData, setApiData] = useState({});
 	const [apiTdsData, setApiTdsData] = useState({});
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
-	// const { country } = useContext(UserContext) || {};
+
+	const {
+		entity = '',
+		currency: queryCurr = '',
+		payrun = '',
+		organizationId = '',
+		services = '',
+		payrun_type = '',
+		partner_id = '',
+	} = urlQuery || {};
+
+	const country = getKeyByValue(
+		GLOBAL_CONSTANTS.country_entity_ids,
+		partner_id,
+	);
 
 	const listInvoices = useRequestBf(
 		{
@@ -83,31 +97,22 @@ const useGetInvoiceSelection = ({ sort }) => {
 
 	const configures = SUPPLIER_CONFIG;
 
-	// const createOverSeasConfigMapping = {
-	// 	IN : CREATE_OVER_SEAS_CONFIG,
-	// 	VN : CREATE_OVER_SEAS_CONFIG_VN,
-	// };
+	const createOverSeasConfigMapping = {
+		IN : CREATE_OVER_SEAS_CONFIG,
+		VN : CREATE_OVER_SEAS_CONFIG_VN,
+	};
 
-	// const viewSelectedConfigMapping = {
-	// 	IN : VIEW_SELECTED_CONFIG,
-	// 	VN : VIEW_SELECTED_VN,
-	// };
+	const viewSelectedConfigMapping = {
+		IN : VIEW_SELECTED_CONFIG,
+		VN : VIEW_SELECTED_CONFIG_VN,
+	};
 
-	const createOverSeasConfig = CREATE_OVER_SEAS_CONFIG;
-	const viewSelectedConfig = VIEW_SELECTED_CONFIG;
+	const createOverSeasConfig = createOverSeasConfigMapping[country];
+	const viewSelectedConfig = viewSelectedConfigMapping[country];
 	const config = viewSelectedInvoice
 		? viewSelectedConfig
 		: createOverSeasConfig;
 	const { query = '', debounceQuery } = useDebounceQuery();
-
-	const {
-		entity = '',
-		currency: queryCurr = '',
-		payrun = '',
-		organizationId = '',
-		services = '',
-		payrun_type = '',
-	} = urlQuery || {};
 
 	const [globalFilters, setGlobalFilters] = useState({
 		pageIndex   : 1,

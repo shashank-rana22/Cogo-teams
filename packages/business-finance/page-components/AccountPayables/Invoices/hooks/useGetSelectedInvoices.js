@@ -1,8 +1,12 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
+import { VIEW_SELECTED_CONFIG } from '../CreatePayrun/Configurations/viewSelectedConfig';
+import { VIEW_SELECTED_CONFIG_VN } from '../CreatePayrun/Configurations/viewSelectedConfigVN';
+import getKeyByValue from '../utils/getKeyByValue';
 
 const useGetSelectedInvoices = ({ apiData, setApiData }) => {
 	const { query: urlQuery } = useSelector(({ general }) => ({
@@ -12,7 +16,19 @@ const useGetSelectedInvoices = ({ apiData, setApiData }) => {
 		entity = '',
 		currency,
 		payrun,
+		partner_id,
 	} = urlQuery || {};
+
+	const country = getKeyByValue(
+		GLOBAL_CONSTANTS.country_entity_ids,
+		partner_id,
+	);
+
+	const viewSelectedConfigMapping = {
+		IN : VIEW_SELECTED_CONFIG,
+		VN : VIEW_SELECTED_CONFIG_VN,
+	};
+
 	const [filters, setFIlters] = useState({ pageIndex: 1, pageSize: 10 });
 	const { pageIndex, pageSize } = filters;
 	const [
@@ -59,7 +75,14 @@ const useGetSelectedInvoices = ({ apiData, setApiData }) => {
 		}
 	}, [getInvoices, payrun]);
 
-	return ({ apiData, setFIlters, filters, selectedInvoiceLoading, getInvoices });
+	return ({
+		apiData,
+		setFIlters,
+		filters,
+		selectedInvoiceLoading,
+		getInvoices,
+		config: viewSelectedConfigMapping[country],
+	});
 };
 
 export default useGetSelectedInvoices;

@@ -7,6 +7,9 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
+import { CREATE_PAYRUN_CONFIG } from '../CreatePayrun/Configurations/createPayrunConfig';
+import { CREATE_PAYRUN_CONFIG_VN } from '../CreatePayrun/Configurations/createPayrunConfigVN';
+import getKeyByValue from '../utils/getKeyByValue';
 
 import styles from './styles.module.css';
 
@@ -36,7 +39,18 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		currency,
 		payrun,
 		payrun_type = '',
+		partner_id = '',
 	} = urlQuery || {};
+
+	const country = getKeyByValue(
+		GLOBAL_CONSTANTS.country_entity_ids,
+		partner_id,
+	);
+
+	const createPayRunConfigMapping = {
+		IN : CREATE_PAYRUN_CONFIG,
+		VN : CREATE_PAYRUN_CONFIG_VN,
+	};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -237,7 +251,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	}
 
 	return {
-		billsLoading: loading,
+		billsLoading : loading,
 		filters,
 		setFilters,
 		entity,
@@ -248,6 +262,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		setOrderBy,
 		orderBy,
 		getPayrunInvoices,
+		config       : createPayRunConfigMapping[country],
 	};
 };
 
