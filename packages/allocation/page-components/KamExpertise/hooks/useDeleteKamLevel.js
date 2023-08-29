@@ -7,6 +7,7 @@ function useDeleteKamLevel(props) {
 		refetch,
 		transition_level,
 		cardRefetch,
+		t = () => {},
 	} = props;
 
 	const [{ loading : deleteLoading }, trigger] = useAllocationRequest({
@@ -30,7 +31,7 @@ function useDeleteKamLevel(props) {
 
 			cardRefetch();
 
-			Toast.success('Level Deleted');
+			Toast.success(t('allocation:level_deleted_toast_error'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

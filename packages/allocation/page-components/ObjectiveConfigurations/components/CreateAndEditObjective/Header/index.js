@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import ACTIVE_MODE_KEYS_MAPPING from '../../../constants/active-mode-keys-mapping';
 
@@ -6,23 +7,25 @@ import styles from './styles.module.css';
 
 const { LIST, CREATE, EDIT } = ACTIVE_MODE_KEYS_MAPPING;
 
-const HEADING_MAPPING = {
+const getHeadingMapping = ({ t = () => {} }) => ({
 	[CREATE]: {
-		heading    : 'New Objective Configuration',
-		// eslint-disable-next-line max-len
-		subheading : 'Here, you can create Company and Team Objectives for Lead Scoring. Leads that meet the criteria of a specific objective can be assigned separate Lead Scoring.After creating an Objective, it will be sent for verification and can be activated once verified.',
+		heading    : t('allocation:create_heading'),
+		subheading : t('allocation:create_subheading_phrase'),
 	},
 	[EDIT]: {
-		heading    : 'Edit Objective Configuration',
-		// eslint-disable-next-line max-len
-		subheading : 'You can edit the previously set Objective from here. You can edit and replace the same objective or choose to edit and create a duplicate of the previous objective.',
+		heading    : t('allocation:edit_heading'),
+		subheading : t('allocation:edit_subheading_phrase'),
 	},
-};
+});
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { activeMode, setActiveMode, flushRefCallback } = props;
 
-	const { heading, subheading } = HEADING_MAPPING[activeMode];
+	const headingMapping = getHeadingMapping({ t });
+
+	const { heading, subheading } = headingMapping[activeMode];
 
 	return (
 		<section className={styles.container}>
@@ -39,7 +42,7 @@ function Header(props) {
 					flushRefCallback();
 				}}
 			>
-				Existing Objectives
+				{t('allocation:existing_objectives')}
 			</Button>
 		</section>
 	);

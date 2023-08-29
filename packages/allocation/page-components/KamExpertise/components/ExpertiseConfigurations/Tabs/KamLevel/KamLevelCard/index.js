@@ -1,6 +1,7 @@
 import { Modal, Button, ButtonIcon } from '@cogoport/components';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useDeleteKamLevel from '../../../../../hooks/useDeleteKamLevel';
@@ -9,7 +10,11 @@ import styles from './styles.module.css';
 
 const COLUMN_MAPPING = ['customer_expertise', 'trade_expertise', 'commodity_expertise', 'misc_expertise'];
 
+const FIRST_INDEX = 1;
+
 function KamLevelCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data = {},
 		isActiveCard,
@@ -25,15 +30,15 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level, cardRefetch });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level, cardRefetch, t });
 
 	return (
 		<div className={styles.whole}>
 			<div className={styles.card_container}>
 				<div className={styles.text}>
-					<div style={{ marginRight: '8px' }}>KAM</div>
+					<div style={{ marginRight: '8px' }}>{t('allocation:kam')}</div>
 
-					<b>{transition_level - 1}</b>
+					<b>{transition_level - FIRST_INDEX}</b>
 
 					<IcMArrowNext className={styles.arrow} />
 
@@ -58,25 +63,24 @@ function KamLevelCard(props) {
 			{isActiveCard
 				? (
 					<div className={styles.title_show}>
-						To level up from KAM
+						{t('allocation:to_level_up_from_kam')}
 						{' '}
-						{transition_level - 1}
+						{transition_level - FIRST_INDEX}
 						{' '}
-						TO KAM
+						{t('allocation:to_kam_label')}
 						{' '}
 						{transition_level}
-						, A KAM needs to fulfill all of the following criteria
-						as defined :
+						{t('allocation:kam_needs_to_fulfill_the_following_criteria')}
 					</div>
 				)
 				: (
 					<div className={styles.score_container}>
 						{COLUMN_MAPPING.map((item) => (
-							<div className={styles.list_item}>
+							<div key={item} className={styles.list_item}>
 								<div className={styles.label_text}>
 									{startCase(item)}
 									{' '}
-									Score
+									{t('allocation:score_label')}
 								</div>
 
 								<div style={{ fontWeight: '700' }}>
@@ -93,10 +97,10 @@ function KamLevelCard(props) {
 				show={showModal}
 				onClose={() => setShowModal(false)}
 			>
-				<Modal.Header title="DELETE KAM LEVEL" />
+				<Modal.Header title={t('allocation:delete_kam_level')} />
 
 				<Modal.Body>
-					Are you sure you wish to permanently delete this KAM level?
+					{t('allocation:delete_kam_level_phrase')}
 				</Modal.Body>
 
 				<Modal.Footer>
@@ -108,7 +112,7 @@ function KamLevelCard(props) {
 							e.stopPropagation();
 						}}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 
 					<Button
@@ -119,7 +123,7 @@ function KamLevelCard(props) {
 						}}
 						themeType="primary"
 					>
-						Yes
+						{t('allocation:yes_label')}
 					</Button>
 				</Modal.Footer>
 			</Modal>

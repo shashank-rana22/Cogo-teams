@@ -30,6 +30,7 @@ const useDeleteHistorySettlement = ({ refetch = () => {}, setShowDeleteConfirmat
 					settlementType : accountType,
 					deletedBy      : profile?.user?.id,
 				},
+				data: {},
 			});
 
 			Toast.success('Deleted Successfully');
