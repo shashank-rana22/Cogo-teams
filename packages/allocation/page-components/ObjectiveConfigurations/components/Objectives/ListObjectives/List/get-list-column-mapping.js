@@ -14,15 +14,15 @@ const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 const { EDIT } = ACTIVE_MODE_KEYS_MAPPING;
 
 const getListColumnMapping = (props) => {
-	const { setActiveMode, setShowActionModal, setRefCallback } = props;
+	const { setActiveMode, setShowActionModal, setRefCallback, t = () => {} } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
 			key      : 'status',
 			flex     : 1,
-			Header   : <div className={styles.top_heading}>STATUS</div>,
+			Header   : <div className={styles.top_heading}>{t('allocation:status')}</div>,
 			accessor : ({ lead_objective_status, status }) => {
-				const showStatus = status === 'live' ? 'live' : lead_objective_status;
+				const showStatus = status === 'live' ? t('allocation:live_status') : lead_objective_status;
 
 				if (!showStatus) return '___';
 
@@ -41,8 +41,8 @@ const getListColumnMapping = (props) => {
 			flex   : 1,
 			Header : (
 				<>
-					<div className={styles.top_heading}>OBJECTIVE NAME</div>
-					<div className={styles.sub_heading}>Type</div>
+					<div className={styles.top_heading}>{t('allocation:objective_name_uppercase')}</div>
+					<div className={styles.sub_heading}>{t('allocation:type_short_label')}</div>
 				</>
 			),
 			accessor: ({ name, objective_type }) => (
@@ -57,8 +57,8 @@ const getListColumnMapping = (props) => {
 			flex   : 1,
 			Header : (
 				<>
-					<div className={styles.top_heading}>ENTITY</div>
-					<div className={styles.sub_heading}>Channel</div>
+					<div className={styles.top_heading}>{t('allocation:entity_uppercase')}</div>
+					<div className={styles.sub_heading}>{t('allocation:channels_short_label')}</div>
 				</>
 			),
 			accessor: ({ partner, channels }) => (
@@ -76,8 +76,8 @@ const getListColumnMapping = (props) => {
 			flex   : 2,
 			Header : (
 				<>
-					<div className={styles.top_heading}>AGENT ROLES</div>
-					<div className={styles.sub_heading}>No. Of Users</div>
+					<div className={styles.top_heading}>{t('allocation:agent_roles_uppercase')}</div>
+					<div className={styles.sub_heading}>{t('allocation:no_of_users')}</div>
 				</>
 			),
 			accessor: ({ roles }) => (
@@ -110,7 +110,7 @@ const getListColumnMapping = (props) => {
 		{
 			key      : 'updated_at',
 			flex     : 1,
-			Header   : <div className={styles.top_heading}>CREATION/UPDATION</div>,
+			Header   : <div className={styles.top_heading}>{t('allocation:creation_updation')}</div>,
 			accessor : ({ updated_at }) => (updated_at ? formatDate({
 				date       : updated_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -120,7 +120,7 @@ const getListColumnMapping = (props) => {
 		{
 			key      : 'activate_at',
 			flex     : 1,
-			Header   : <div className={styles.top_heading}>ACTIVATION</div>,
+			Header   : <div className={styles.top_heading}>{t('allocation:activation_uppercase')}</div>,
 			accessor : ({ activate_at }) => (activate_at ? formatDate({
 				date       : activate_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -141,7 +141,7 @@ const getListColumnMapping = (props) => {
 					}}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
-					<strong>Edit</strong>
+					<strong>{t('allocation:edit_button')}</strong>
 				</Button>
 			),
 		},
@@ -173,11 +173,10 @@ const getListColumnMapping = (props) => {
 								objectiveId : id,
 							})}
 						>
-							<b>Deactivate</b>
+							<b>{t('allocation:deactivate_button')}</b>
 						</Button>
 					);
 				}
-
 				return (
 					<Button
 						type="button"
@@ -188,7 +187,11 @@ const getListColumnMapping = (props) => {
 							objectiveId : id,
 						})}
 					>
-						<b>{isEmpty(activate_at) ? 'Set Activation' : 'Update Activation'}</b>
+						<b>
+							{isEmpty(activate_at) ? t('allocation:set_activation')
+								: t('allocation:update_activation')}
+
+						</b>
 					</Button>
 				);
 			},

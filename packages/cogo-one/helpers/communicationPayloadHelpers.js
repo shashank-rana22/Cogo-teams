@@ -4,8 +4,9 @@ import { isEmpty } from '@cogoport/utils';
 import getRenderEmailBody from './getRenderEmailBody';
 
 const ENDPOINT_MAPPING = {
-	forward : '/forward_mail',
-	reply   : '/reply_mail',
+	forward   : '/forward_mail',
+	reply     : '/reply_mail',
+	reply_all : '/reply_all',
 };
 
 export const getCommunicationPayload = ({
@@ -60,7 +61,7 @@ export const getCommunicationPayload = ({
 		service_id      : userId,
 		sender          : payload?.sender,
 		cc_emails       : isEmpty(ccrecipients) ? undefined : ccrecipients,
-		bcc_emails      : isEmpty(bccrecipients) ? undefined : ccrecipients,
+		bcc_emails      : isEmpty(bccrecipients) ? undefined : bccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		source          : 'CogoOne:AdminPlatform',
 	};

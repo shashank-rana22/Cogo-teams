@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -12,6 +13,8 @@ function BulkUpdateMode({
 	searchQuery,
 	onClearSelection = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const applyBulkFilter = async () => {
 		setConfirmModalState((prev) => ({
 			...prev,
@@ -40,7 +43,7 @@ function BulkUpdateMode({
 					disabled={isEmpty(checkedRowsId)}
 					onClick={applyBulkFilter}
 				>
-					Apply bulk filter
+					{t('allocation:apply_bulk_filter_button_label')}
 					{' '}
 				</Button>
 
@@ -48,11 +51,11 @@ function BulkUpdateMode({
 					<div className={styles.selection_text}>
 						<div className={styles.text}>
 							{' '}
-							You have selected
+							{t('allocation:selection_text')}
 							{' '}
 							{checkedRowsId.length}
 							{' '}
-							row(s)
+							{t('allocation:rows_label')}
 						</div>
 
 						<div className={styles.clear_selection_button_container}>
@@ -61,7 +64,7 @@ function BulkUpdateMode({
 								themeType="linkUi"
 								onClick={() => onClearSelection()}
 							>
-								Clear Selection
+								{t('allocation:clear_selection_button_label')}
 							</Button>
 						</div>
 					</div>
@@ -80,7 +83,7 @@ function BulkUpdateMode({
 					}));
 				}}
 			>
-				APPROVE ALL
+				{t('allocation:approve_all_button_label')}
 				{' '}
 				{selectedItemsForUpdate}
 			</Button>
