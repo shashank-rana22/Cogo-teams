@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import DotLoader from '../../../../../../../common/DotLoader';
+import DotLoader from '../../../../../../../common/LoadingState/DotLoader';
 
 import styles from './styles.module.css';
 import UserCard from './UsersCard';

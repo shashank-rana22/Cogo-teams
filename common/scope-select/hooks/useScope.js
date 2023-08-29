@@ -1,4 +1,4 @@
-import { Router } from '@cogoport/next';
+// import { Router } from '@cogoport/next';
 import { useSelector, useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useEffect, useCallback, useRef } from 'react';
@@ -9,9 +9,9 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 	const { profile } = useSelector((store) => store);
 	const dispatch = useDispatch();
 
-	const { authParams, selected_agent_id: selectedAgentId, ...restProfile } = profile || {};
+	const { authParams, selected_agent_id: selectedAgentId, savedAuthDetails, ...restProfile } = profile || {};
 
-	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider });
+	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider, savedAuthDetails });
 
 	const [, scope, viewType = ''] = (authParams || '').split(':');
 
@@ -26,20 +26,24 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 
 			dispatch(setProfileState({
 				...restProfile,
-				authParams: newAuthParams,
+				authParams       : newAuthParams,
 				selected_agent_id,
+				savedAuthDetails : {
+					scope            : newScope,
+					through_criteria : newViewType,
+				},
 			}));
 			closePopover();
 		}
-	}, [dispatch, navigation, closePopover, restProfile]);
+	}, [navigation, dispatch, restProfile, closePopover]);
 
-	const resetProfile = useCallback(() => {
-		dispatch(setProfileState({
-			...restProfile,
-			authParams        : '',
-			selected_agent_id : '',
-		}));
-	}, [restProfile, dispatch]);
+	// const resetProfile = useCallback(() => {
+	// 	dispatch(setProfileState({
+	// 		...restProfile,
+	// 		authParams        : '',
+	// 		selected_agent_id : '',
+	// 	}));
+	// }, [restProfile, dispatch]);
 
 	useEffect(() => {
 		if (!initialValues.current.scope && pathname === initialValues.current.pathname) {
@@ -54,7 +58,7 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 		}
 	}, [scopeData, handleApply, pathname]);
 
-	useEffect(() => Router.events.on('routeChangeStart', resetProfile), [resetProfile]);
+	// useEffect(() => Router.events.on('routeChangeStart', resetProfile), [resetProfile]);
 
 	return { handleApply, scopeData, scope, viewType, selectedAgentId };
 }

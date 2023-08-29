@@ -1,4 +1,4 @@
-import DotLoader from '../../../../common/DotLoader';
+import DotLoader from '../../../../common/LoadingState/DotLoader';
 
 import styles from './styles.module.css';
 

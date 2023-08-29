@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import CardLoadingState from '../../../../../../../../LoadingState/CardLoadingState';
+import CardLoadingState from '../../../../../../../../../../../common/LoadingState/CardLoadingState';
 import EmptyState from '../../../../../../EmptyState';
 
 import SelfInvoice from './components/SelfInvoice';

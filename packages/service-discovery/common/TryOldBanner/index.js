@@ -7,7 +7,9 @@ import styles from './styles.module.css';
 
 const TIMEOUT = 500;
 
-function TryOldBanner() {
+function TryOldBanner(props) {
+	const { setIsBannerVisible = () => {} } = props || {};
+
 	const { partnerId } = useSelector(({ profile }) => ({
 		partnerId: profile?.partner?.id,
 	}));
@@ -42,7 +44,13 @@ function TryOldBanner() {
 				</Button>
 			</div>
 
-			<IcMCross style={{ cursor: 'pointer' }} onClick={() => setShowBanner(false)} />
+			<IcMCross
+				style={{ cursor: 'pointer' }}
+				onClick={() => {
+					setShowBanner(false);
+					setIsBannerVisible(false);
+				}}
+			/>
 		</div>
 	);
 }
