@@ -1,20 +1,23 @@
 import { Modal, Popover, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Attachements({ externalAttachements }) {
+const NUMRICAL_ONE = 1;
+
+function Attachements({ externalAttachements = [] }) {
 	const [showPreview, setShowPreview] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
-	function base64ToArrayBuffer(base64) {
+	function baseToArrayBuffer(base64) {
 		const binaryString = window.atob(base64);
 		const binaryLen = binaryString.length;
 		const bytes = new Uint8Array(binaryLen);
 		for (let i = 0; i < binaryLen;) {
 			const ascii = binaryString.charCodeAt(i);
 			bytes[i] = ascii;
-			i += 1;
+			i += NUMRICAL_ONE;
 		}
 		return bytes;
 	}
@@ -29,7 +32,7 @@ function Attachements({ externalAttachements }) {
 	}
 
 	const handleDownLoad = (data) => {
-		const sampleArr = base64ToArrayBuffer(data.contentBytes);
+		const sampleArr = baseToArrayBuffer(data.contentBytes);
 		saveByteArray(data, sampleArr);
 	};
 
@@ -101,19 +104,19 @@ function Attachements({ externalAttachements }) {
 
 			{showPreview ? (
 				<Modal
-					size="lg"
+					size="xl"
 					placement="top"
 					show={showPreview}
-					closeOnOuterClick={false}
+					closeOnOuterClick
 					onClose={() => setShowPreview(null)}
 				>
 					<Modal.Body>
 						<object
 							height="700px"
-							width="800px"
+							width="1090px"
 							aria-label="Doc Preview"
-							data={`data:${externalAttachements[0].contentType};base64,
-						${externalAttachements[0].contentBytes}`}
+							data={`data:${externalAttachements[GLOBAL_CONSTANTS.zeroth_index].contentType};base64,
+						${externalAttachements[GLOBAL_CONSTANTS.zeroth_index].contentBytes}`}
 						/>
 					</Modal.Body>
 				</Modal>
