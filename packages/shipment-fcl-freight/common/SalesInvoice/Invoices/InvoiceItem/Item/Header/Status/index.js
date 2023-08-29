@@ -74,7 +74,7 @@ function Status({
 		return (
 			<div className={styles.invoice_container}>
 				<div className={styles.invoice_status}>
-					{startCase(invoice.status)}
+					{startCase(invoice?.status)}
 				</div>
 				{showRequestCN ? (
 					<Button
@@ -91,14 +91,14 @@ function Status({
 
 	return (
 		<div className={styles.invoice_container}>
-			{invoice.status
-					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
+			{invoice?.status
+					&& RESTRICT_REVOKED_STATUS.includes(invoice?.status) ? (
 						<div className={styles.invoice_status}>
-							{startCase(invoice.status)}
+							{startCase(invoice?.status)}
 						</div>
 				) : null}
 
-			{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
+			{!invoice?.is_revoked && invoice?.status !== 'finance_rejected' ? (
 				<Actions
 					invoice={invoice}
 					refetch={refetchAferApiCall}

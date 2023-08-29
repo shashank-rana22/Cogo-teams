@@ -120,13 +120,13 @@ function Actions({
 
 				{!(invoice?.parent_invoice_id) ? (
 					<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-						{!isEmpty(invoice.remarks) ? (
+						{!isEmpty(invoice?.remarks) ? (
 							<Tooltip
 								placement="bottom"
 								content={(
 									<>
 										<h6 className={styles.title}>Invoice Remarks</h6>
-										<p className={styles.value}>{invoice.remarks}</p>
+										<p className={styles.value}>{invoice?.remarks}</p>
 									</>
 								)}
 								className={styles.remark_container}
