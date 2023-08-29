@@ -2,8 +2,8 @@ import { Placeholder, Input } from '@cogoport/components';
 import { IcMArrowBack, IcMAppSearch } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
+import UserCard from '../../../../../../common/UserCard';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
-import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
 
@@ -119,7 +119,7 @@ function OrgUsersList({
 								});
 							}}
 						>
-							<UserCard userData={userData} />
+							<UserCard userData={userData} showDirection showWorkScope={false} />
 						</div>
 					);
 				}) : <div className={styles.no_data_found}>No Users Found</div>}

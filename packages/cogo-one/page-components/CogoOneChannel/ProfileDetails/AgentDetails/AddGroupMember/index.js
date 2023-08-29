@@ -50,7 +50,7 @@ function AddGroupMember({ addGroupMember = () => {}, viewType = '' }) {
 					isClearable
 					params={{
 						filters: {
-							common_agent_type: VIEW_TYPE_GLOBAL_MAPPING[viewType]?.group_agents_api_filter || undefined,
+							agent_type: VIEW_TYPE_GLOBAL_MAPPING[viewType]?.group_agents_api_filter || undefined,
 						},
 					}}
 					renderLabel={(item) => <RenderSelectLabel item={item} />}

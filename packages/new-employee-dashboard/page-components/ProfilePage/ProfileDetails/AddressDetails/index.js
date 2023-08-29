@@ -113,6 +113,9 @@ function AddressDetails({
 
 	return (
 		<div className={styles.whole_container}>
+			<div className={styles.heading_label}>
+				Address Details
+			</div>
 			<div className={styles.sub_navigation}>
 				<div className={styles.first}>
 					<div className={styles.address}>

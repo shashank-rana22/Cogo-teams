@@ -85,12 +85,11 @@ const controls = () => [
 		disabled    : true,
 	},
 	{
-		name        : 'designation',
-		label       : 'Employee Designation*',
+		name        : 'role',
 		type        : 'input',
+		label       : 'Role',
+		placeholder : 'Role',
 		disabled    : true,
-		placeholder : 'Employee Designation',
-		rules       : { required: 'This is required' },
 	},
 	{
 		name                  : 'date_of_birth',

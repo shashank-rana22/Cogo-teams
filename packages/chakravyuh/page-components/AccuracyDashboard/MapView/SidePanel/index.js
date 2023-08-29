@@ -19,8 +19,7 @@ const SCOPE_MAPPING = {
 	region     : 'ports',
 };
 
-const TIMEOUT_TIME = 1000;
-const SCROLLING_LIMIT = 30;
+const TIMEOUT_TIME = 400;
 const START_PAGE = 1;
 
 function SidePanel({
@@ -41,7 +40,7 @@ function SidePanel({
 	accuracyLoading = false,
 	setActiveList = () => {},
 	setSort = () => {},
-	sort = 'accuracy',
+	sort = {},
 }) {
 	const { sort_by, sort_type } = sort;
 	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;
@@ -49,24 +48,35 @@ function SidePanel({
 	const destination = destinationType.includes('port')
 		? locationFilters?.destination?.name : SCOPE_MAPPING[destinationType];
 
-	const { list = [], total_count = 0 } = mapStatisticsData;
-	const hasMore = page < Math.ceil(total_count / SCROLLING_LIMIT);
+	const { list = [], total_pages = 0 } = mapStatisticsData;
+	const hasMore = page < total_pages;
 	const { service_type } = globalFilters;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
 			if (!accuracyLoading) {
-				setPage((prev) => prev + START_PAGE);
+				setPage(page + START_PAGE);
 			}
 		}, TIMEOUT_TIME);
-	}, [accuracyLoading, setPage]);
+	}, [accuracyLoading, page, setPage]);
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
 			if (page === START_PAGE) {
 				setActiveList([...list]);
 			} else {
-				setActiveList((prev) => prev.concat(list));
+				setActiveList((prev) => {
+					const uniqueSet = new Set(prev);
+					const uniqueItems = list.filter((item) => {
+						if (!uniqueSet.has(item)) {
+							uniqueSet.add(item);
+							return true;
+						}
+						return false;
+					});
+
+					return prev.concat(uniqueItems);
+				});
 			}
 		}
 	}, [list, page, setActiveList]);
@@ -99,8 +109,8 @@ function SidePanel({
 				<div className={styles.list_container}>
 					<div className={styles.list_header}>
 						<h4>
-							{`${startCase(originName)} to 
-							${startCase(destination || 'Countries')}`}
+							<span className={styles.elipsis}>{startCase(originName)}</span>
+							<span>{` to ${startCase(destination || 'Countries')}`}</span>
 						</h4>
 						<SortButton
 							type={sort_type}
@@ -118,7 +128,7 @@ function SidePanel({
 					<InfiniteScroll
 						pageStart={1}
 						initialLoad={false}
-						loadMore={loadMore}
+						loadMore={hasMore && loadMore}
 						hasMore={hasMore}
 						loader={accuracyLoading ? (
 							<div className={styles.loading_style}>
@@ -126,7 +136,6 @@ function SidePanel({
 							</div>
 						) : null}
 						useWindow={false}
-						threshold={600}
 					>
 						<List
 							setActiveId={setActiveId}
@@ -134,13 +143,12 @@ function SidePanel({
 							finalList={activeList}
 							originName={originName}
 						/>
-						{!hasMore && !isEmpty(activeList) && !accuracyLoading && (
-							<p className={styles.has_more}>
-								You reached the end!!
-							</p>
-						)}
-
 					</InfiniteScroll>
+					{!hasMore && !isEmpty(activeList) && !accuracyLoading && (
+						<h4 className={styles.has_more}>
+							You reached the end!!
+						</h4>
+					)}
 				</div>
 			</div>
 			<button

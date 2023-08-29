@@ -1,5 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest } from '@cogoport/request';
+import {
+	useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest,
+	useCxAutomationRequest,
+} from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +13,7 @@ const REQUEST_HOOK_MAPPING = {
 	allocation       : useAllocationRequest,
 	tickets          : useTicketsRequest,
 	auth             : useAuthRequest,
+	cx_automation    : useCxAutomationRequest,
 };
 
 function useGetAsyncOptionsMicroservice({
@@ -38,7 +42,11 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	let options = data?.list || data?.items || data || [];
+	let options = data?.list || data?.items || data?.data || data?.data?.list || data || [];
+
+	if (!Array.isArray(options)) {
+		options = [];
+	}
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });
