@@ -9,5 +9,6 @@ export { default as useLensRequest } from './hooks/useLensRequest';
 export { default as useTicketsRequest } from './hooks/useTicketsRequest';
 export { default as useHarbourRequest } from './hooks/useHarbourRequest';
 export { default as useAuthRequest } from './hooks/useAuthRequest';
+export { default as useCxAutomationRequest } from './hooks/useCxAutomationRequest';
 export { publicRequest } from './helpers/public-request';
 export { request } from './helpers/request';
