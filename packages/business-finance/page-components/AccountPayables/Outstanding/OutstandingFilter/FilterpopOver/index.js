@@ -20,7 +20,7 @@ function FilterpopOver({
 	refetch = () => { },
 }) {
 	const [show, setShow] = useState(false);
-	const [receivables, setReceivables] = useState('kamOwner');
+	const [receivables, setReceivables] = useState('salesAgent');
 
 	const onChange = (val, name) => {
 		setFilters((p) => ({ ...p, [name]: val }));
@@ -68,21 +68,6 @@ function FilterpopOver({
 						themeType="primary-vertical"
 						style={{ display: 'flex', width: '440px' }}
 					>
-						<TabPanel name="kamOwner" title="KAM Owner">
-							<div className={styles.tabpanel_style}>
-								<AsyncSelect
-									name="user_id"
-									asyncKey="partner_users"
-									valueKey="user_id"
-									initialCall={false}
-									onChange={(userId) => onChange(userId, 'kamId')}
-									value={filters.kamId}
-									placeholder="Select Kam Owner"
-									size="sm"
-									isClearable
-								/>
-							</div>
-						</TabPanel>
 						<TabPanel name="salesAgent" title="Sales Agent">
 							<div className={styles.tabpanel_style}>
 								<AsyncSelect

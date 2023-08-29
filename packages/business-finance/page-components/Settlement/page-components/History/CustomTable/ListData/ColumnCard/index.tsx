@@ -27,12 +27,12 @@ interface ListItem {
 
 interface Props {
 	item: ListItem;
-	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+	getTableBodyCheckbox?: Function;
 	refetch: ()=>void
 
 }
 
-function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
@@ -95,14 +95,6 @@ function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
 						className={styles.icon}
 						onClick={() => { handleClickIcon(); }}
 					/>
-				</div>
-				<div className={styles.ribbon_render}>
-					<div
-						className={item?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
-
-					>
-						{item?.accMode}
-					</div>
 				</div>
 
 			</div>

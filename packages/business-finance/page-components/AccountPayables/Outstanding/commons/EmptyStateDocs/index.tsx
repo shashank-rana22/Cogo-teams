@@ -13,8 +13,8 @@ function EmptyStateDocs({ text = 'No Data Found' }) {
 				className={styles.img_height}
 				src={NODATA_IMAGE}
 				alt="No Data"
-				height={240}
-				width={180}
+				height={440}
+				width={280}
 
 			/>
 			<div>{text}</div>

@@ -60,10 +60,10 @@ function OutstandingList({
 	const {
 		tradeType: collectionPartyType = [],
 		countryCode,
-		organizationSerialId,
-		lastUpdatedAt,
+		createdAt,
 		organizationName,
 		selfOrganizationId = '',
+		tradePartySerialId = '',
 		creditDays,
 	} = item;
 
@@ -73,7 +73,7 @@ function OutstandingList({
 			entityCode,
 			showName: false,
 		},
-		payments_list: {
+		settlement: {
 			organizationId,
 			entityCode,
 		},
@@ -86,8 +86,8 @@ function OutstandingList({
 	const handleViewDetailClick = () => {
 		router.push(
 			`/business-finance/account-payables/outstanding/
-			viewOrgDetail/?orgSerialId=${organizationSerialId}&entityCode=${entityCode}
-			&organizationId=${organizationId}`,
+			viewOrgDetail?entityCode=${entityCode}
+			&organizationId=${organizationId}&serialId=${tradePartySerialId}`,
 		);
 	};
 
@@ -107,22 +107,32 @@ function OutstandingList({
 								{' '}
 								-
 								{' '}
-								{item?.[itemdetail?.key]}
+								{item?.[itemdetail?.key] ? startCase(item?.[itemdetail?.key]) : 'N/A'}
 							</div>
 						</div>
 					))}
 				</div>
 
 				<div className={styles.serial_id_card}>
-					<div className={styles.custom_tag}>
-						<div>Credit Days:</div>
-						<div className={styles.Value}>{creditDays || DEFAULT_LEN}</div>
-					</div>
-					<div className={styles.custom_tag}>
+					{countryCode ? (
+						<div className={styles.custom_tag_end}>
+							<div className={styles.country}>
+								Country Code:
+							</div>
+							<div className={styles.Value}>{countryCode}</div>
+						</div>
+					) : null}
+					{creditDays ? (
+						<div className={styles.credit_days}>
+							<div>Credit Days:</div>
+							<div className={styles.Value}>{creditDays || DEFAULT_LEN}</div>
+						</div>
+					) : null}
+					<div className={styles.updated_at}>
 						<div>Last Updated At : </div>
 						<div className={styles.value}>
 							{formatDate({
-								date: lastUpdatedAt,
+								date: createdAt,
 								dateFormat:
 									GLOBAL_CONSTANTS.formats.date[
 										'dd MMM yyyy'
@@ -130,20 +140,16 @@ function OutstandingList({
 								timeFormat:
 									GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'dateTime',
-								separator  : '|',
+								separator  : ' | ',
 							})}
 						</div>
-					</div>
-					<div className={styles.custom_tag}>
-						<div>Country Code:</div>
-						<div className={styles.Value}>{countryCode}</div>
 					</div>
 				</div>
 			</div>
 			<div style={{ padding: '2px 16px' }}>
 				<div className={styles.org_name_conatiner}>
 					<div className={styles.sub_org_name_conatiner}>
-						<div style={{ display: 'flex' }}>
+						<div className={styles.orgdetails}>
 							<div className={styles.styled_name}>
 								{organizationName}
 							</div>
@@ -172,12 +178,6 @@ function OutstandingList({
 								</div>
 							)}
 						</div>
-						{' '}
-						{organizationName && (
-							<div className={styles.legal_business_name}>
-								{organizationName}
-							</div>
-						)}
 					</div>
 					<div className={styles.ledger_style}>
 						<Tooltip content="Ledger Download" placement="top">

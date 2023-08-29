@@ -15,7 +15,7 @@ export const details = ({ entityCode }) => [
 	},
 	{
 		label : ENTITY_FEATURE_MAPPING?.[entityCode]?.labels?.sage_label,
-		key   : 'sageId',
+		key   : 'bpr',
 	},
 	{
 		label : 'Company Type',

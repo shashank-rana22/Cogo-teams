@@ -9,14 +9,13 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		pageLimit : 10,
 	});
 
-	const [queryKey, setQueryKey] = useState('q');
 	const [orderBy, setOrderBy] = useState({
-		key   : 'totalOutstandingLedgerAmount',
+		key   : 'totalOutstandingAmount',
 		order : 'Desc',
 		label : 'Total Outstanding Amount',
 	});
 	const {
-		search, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
+		search, organizationSerialId, pageLimit, page, sageId, tradePartySerialId,
 	} = outStandingFilters || {};
 
 	const { order, key } = orderBy || {};
@@ -26,9 +25,9 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/outstanding/by-customer',
+			url     : '/payments/outstanding/by-supplier-v2',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_by_customer',
+			authKey : 'get_payments_outstanding_by_supplier_v2',
 		},
 		{ manual: true },
 	);
@@ -54,41 +53,17 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 					organizationSerialId : organizationSerialId || undefined,
 					sageId               : sageId || undefined,
 					tradePartySerialId   : tradePartySerialId || undefined,
-					q                    : q || undefined,
+					q                    : query || undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	}, [entityCode, key, order, organizationSerialId, page, pageLimit, q, sageId, tradePartySerialId, trigger]);
+	}, [entityCode, key, order, organizationSerialId, page, pageLimit, query, sageId, tradePartySerialId, trigger]);
 
 	useEffect(() => {
 		refetch();
-	}, [entityCode, orderBy, organizationSerialId, page,
-		pageLimit, sageId, tradePartySerialId, q, key, order, refetch]);
-
-	useEffect(() => {
-		const resetQuery = {
-			sageId               : undefined,
-			q                    : undefined,
-			organizationSerialId : undefined,
-			tradePartySerialId   : undefined,
-		};
-		if (query) {
-			setoutStandingFilters((p) => ({
-				...p,
-				...resetQuery,
-				[queryKey] : query?.toUpperCase() || undefined,
-				page       : 1,
-			}));
-		} else {
-			setoutStandingFilters((p) => ({
-				...p,
-				...resetQuery,
-				page: 1,
-			}));
-		}
-	}, [query, queryKey]);
+	}, [refetch]);
 
 	return {
 		outstandingLoading : loading,
@@ -97,8 +72,6 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		outStandingFilters,
 		orderBy,
 		setOrderBy,
-		setQueryKey,
-		queryKey,
 		refetch,
 	};
 };

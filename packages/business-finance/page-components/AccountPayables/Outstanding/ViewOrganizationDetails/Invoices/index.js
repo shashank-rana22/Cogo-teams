@@ -1,6 +1,5 @@
-import { Button, Input, Toggle } from '@cogoport/components';
+import { Button, Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
@@ -21,8 +20,6 @@ const FIRST_PAGE = 1;
 const DEFAULT_FILTER_LEN = 4;
 
 function Invoices({ organizationId = '' }) {
-	const { query } = useRouter();
-
 	const {
 		billsData,
 		billsLoading,
@@ -38,10 +35,6 @@ function Invoices({ organizationId = '' }) {
 		size          : stats?.all,
 		globalFilters : billsFilters,
 	});
-
-	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices`;
-	};
 
 	const functions = {
 		renderToolTip: (itemData, field) => (
@@ -67,13 +60,6 @@ function Invoices({ organizationId = '' }) {
 					<FilterModal filters={billsFilters} setFilters={setBillsFilters} filterlen={DEFAULT_FILTER_LEN} />
 				</div>
 				<div className={styles.search_filter}>
-					<Toggle
-						name="toggle"
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/>
 					<Button
 						onClick={generateInvoice}
 						className={styles.button}

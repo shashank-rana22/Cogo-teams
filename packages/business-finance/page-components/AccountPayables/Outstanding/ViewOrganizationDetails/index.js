@@ -12,12 +12,12 @@ function ViewOrganizationDetails() {
 	const router = useRouter();
 
 	const {
-		orgSerialId = '',
 		entityCode = '',
 		organizationId = '',
+		serialId = '',
 	} = router.query || {};
 
-	const { outStandingData } = useGetCustomerOutstanding({ orgSerialId });
+	const { outStandingData } = useGetCustomerOutstanding({ orgId: organizationId, serialId, entityCode });
 
 	const { list = [] } = outStandingData || {};
 

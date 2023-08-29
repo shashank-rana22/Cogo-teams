@@ -19,6 +19,10 @@
 		.ui_input_container {
 			width: 400px;
 		}
+
+		.react-datepicker-wrapper {
+			width: 200px;
+		}
 	}
 }
 

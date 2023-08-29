@@ -10,8 +10,8 @@ const TabsOptions = [
 		component : Invoices,
 	},
 	{
-		key       : 'payments_list',
-		name      : 'Payments',
+		key       : 'settlement',
+		name      : 'Settlement',
 		component : History,
 	},
 	{

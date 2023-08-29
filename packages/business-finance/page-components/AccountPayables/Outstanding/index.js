@@ -1,12 +1,15 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyStateDocs from './commons/EmptyStateDocs/index.tsx';
+import useGetEntityLevelOutstanding from './hooks/useGetEntityLevelOutstanding';
 import useGetOrgOutstanding from './hooks/useGetOrgOutstanding';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
+import StatsOutstanding from './OutstandingList/StatsOutstanding';
 import styles from './styles.module.css';
 
 const LOADER_LEN = 7;
@@ -19,6 +22,7 @@ function Outstanding({ entityCode = '' }) {
 		companyType        : '',
 	});
 
+	const { entityData, entityDataLoading } = useGetEntityLevelOutstanding({ entityCode });
 	const {
 		outStandingData,
 		outstandingLoading,
@@ -26,8 +30,6 @@ function Outstanding({ entityCode = '' }) {
 		outStandingFilters,
 		orderBy,
 		setOrderBy,
-		setQueryKey,
-		queryKey,
 		refetch,
 	} = useGetOrgOutstanding({ entityCode });
 
@@ -53,6 +55,14 @@ function Outstanding({ entityCode = '' }) {
 
 	return (
 		<>
+			<div className={styles.topcard}>
+				{entityDataLoading ? <Placeholder height="200px" /> : (
+					<StatsOutstanding
+						item={entityData?.[GLOBAL_CONSTANTS.zeroth_index]}
+						source="topcard"
+					/>
+				)}
+			</div>
 			<OutstandingFilter
 				params={outStandingFilters}
 				setParams={setoutStandingFilters}
@@ -63,8 +73,6 @@ function Outstanding({ entityCode = '' }) {
 				setFormFilters={setFormFilters}
 				clearFilter={clearFilter}
 				handleInputReset={handleInputReset}
-				queryKey={queryKey}
-				setQueryKey={setQueryKey}
 				entityCode={entityCode}
 				refetch={refetch}
 			/>

@@ -11,7 +11,6 @@
 	width: 100%;
 	padding: 12px 0 10px;
 	margin-top: 8px;
-	background-color: #f2f2f2;
 	border-radius: 8px;
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
 }
@@ -43,7 +42,7 @@
 
 .count {
 	font-size: var(--font-size-md);
-	color: #356efd;
+	color: #09f;
 }
 
 .icon {
@@ -128,7 +127,7 @@
 	margin-left: 4px;
 	font-size: var(--font-size-lg);
 	font-weight: 500;
-	color: #356efd;
+	color: #09f;
 }
 
 .statsfull {
@@ -164,7 +163,7 @@
 
 .counts {
 	font-size: 10px;
-	color: #356efd;
+	color: #09f;
 }
 
 .total {

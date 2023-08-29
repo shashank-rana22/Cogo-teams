@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_AMOUNT = 0;
 
-function StatsOutstanding({ item = {}, showOutStanding = true }) {
+function StatsOutstanding({ item = {}, source = '' }) {
 	const {
 		entityCode = '',
 	} = item || {};
@@ -35,7 +35,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 	];
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ padding: source ? '12px 16px' : '#F9F9F9' }}>
 			<div className={styles.invoices_wrapper}>
 				<div className={styles.flex}>
 					<div className={styles.empty_container} />
@@ -50,6 +50,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 						<div
 							className={styles.invoices_card}
 							key={invoiceObject.name}
+							style={{ background: source ? '#fff' : '#f2f2f2' }}
 						>
 							<div className={styles.left_container}>
 								<div className={styles.styled_heading}>
@@ -106,56 +107,33 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 						</div>
 					))
 				}
-				{
-					!showOutStanding ? (
-						<div className={styles.outstanding}>
-							<div className={styles.headings}>Total Outstanding</div>
-							<div className={styles.totaloutstanding}>
-								{formatAmount({
-									amount: item?.totalInvoiceAmount || DEFAULT_AMOUNT,
-									currency:
-										item?.ledCurrency || currency,
-									options: {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : DEFAULT_AMOUNT,
-									},
-								})}
 
-							</div>
-						</div>
-					) : null
-				}
 			</div>
-			{
-				showOutStanding ? (
-					<div
-						className={styles.outstanding_card}
-						style={{ background: '#F9F9F9' }}
-					>
-						<div className={styles.flex_column}>
-							<div className={styles.total}>Total Outstanding</div>
-							<div className={styles.amountout}>
-								{formatAmount({
-									amount: item?.totalInvoiceAmount || DEFAULT_AMOUNT,
-									currency:
-										item?.ledCurrency || currency,
-									options: {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : DEFAULT_AMOUNT,
-									},
-								})}
-							</div>
-							<div className={styles.counttotal}>
-								Count -
-								{' '}
-								<span className={styles.counts}>{item?.totalInvoicesCount || DEFAULT_AMOUNT}</span>
-							</div>
-						</div>
+			<div
+				className={styles.outstanding_card}
+				style={{ background: source ? '#fff' : '#F9F9F9' }}
+			>
+				<div className={styles.flex_column}>
+					<div className={styles.total}>Total Outstanding</div>
+					<div className={styles.amountout}>
+						{formatAmount({
+							amount: item?.totalInvoiceAmount || DEFAULT_AMOUNT,
+							currency:
+												item?.ledCurrency || currency,
+							options: {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : DEFAULT_AMOUNT,
+							},
+						})}
 					</div>
-				) : null
-			}
+					<div className={styles.counttotal}>
+						Count -
+						{' '}
+						<span className={styles.counts}>{item?.totalInvoicesCount || DEFAULT_AMOUNT}</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }

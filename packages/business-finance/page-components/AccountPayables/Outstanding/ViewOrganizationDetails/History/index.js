@@ -1,26 +1,43 @@
-import { Input, Toggle } from '@cogoport/components';
+import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
-import { historyFilters } from '../../../../Settlement/configurations/history-filters.tsx';
 import CustomTable from '../../../../Settlement/page-components/History/CustomTable/index.tsx';
-import SelectState from '../../../../Settlement/page-components/History/SelectState/index.tsx';
 import EmptyStateDocs from '../../commons/EmptyStateDocs/index.tsx';
 import useHistorySettlement from '../../hooks/useGetSettlement';
 
 import styles from './styles.module.css';
 
+const historyFilters = [
+	{
+		name    : 'accountType',
+		type    : 'select',
+		theme   : 'admin',
+		options : [
+			{ label: 'All', value: 'All' },
+			{ label: 'On Account Payment', value: 'REC' },
+			{ label: 'Credit Note', value: 'PCN' },
+			{ label: 'Invoice', value: 'SINV' },
+		],
+		placeholder: 'All',
+	},
+	{
+		name                  : 'date',
+		type                  : 'singleDateRange',
+		placeholder           : 'Date',
+		theme                 : 'admin',
+		maxDate               : new Date(),
+		className             : 'primary md',
+		defaultValue          : null,
+		isPreviousDaysAllowed : true,
+		span                  : 3,
+	},
+];
+
 function History({ organizationId = '' }) {
-	const { query } = useRouter();
-
 	const { data, loading, filters, setFilters, apiData, refetch } = useHistorySettlement({ organizationId });
-
-	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/settlement/history`;
-	};
 
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
@@ -29,15 +46,8 @@ function History({ organizationId = '' }) {
 	return (
 		<div>
 			<div className={styles.filter_container}>
-				<Filter controls={historyFilters()} setFilters={setFilters} filters={filters} pageKey="page" />
+				<Filter controls={historyFilters} setFilters={setFilters} filters={filters} pageKey="page" />
 				<div className={styles.toggle_Div}>
-					<Toggle
-						name="toggle"
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/>
 					<Input
 						name="query"
 						onChange={(val) => { setFilters({ ...filters, query: val, page: 1 }); }}
@@ -48,17 +58,15 @@ function History({ organizationId = '' }) {
 					/>
 				</div>
 			</div>
-			{filters?.orgId && (
-				<CustomTable
-					apiData={apiData}
-					filters={filters}
-					setFilters={setFilters}
-					loading={loading}
-					onPageChange={onPageChange}
-					refetch={refetch}
-				/>
-			)}
-			{!filters?.orgId && <SelectState />}
+			<CustomTable
+				apiData={apiData}
+				filters={filters}
+				setFilters={setFilters}
+				loading={loading}
+				onPageChange={onPageChange}
+				refetch={refetch}
+				showFooter={false}
+			/>
 			{!loading && isEmpty(data?.list) && <EmptyStateDocs />}
 		</div>
 	);

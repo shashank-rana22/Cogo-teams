@@ -2,15 +2,15 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetCustomerOutstanding = ({ orgSerialId }) => {
+const useGetCustomerOutstanding = ({ orgId = '', serialId = '', entityCode = '' }) => {
 	const [
 		{ data, loading },
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/outstanding/by-customer',
+			url     : '/payments/outstanding/by-supplier-v2',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_by_customer',
+			authKey : 'get_payments_outstanding_by_supplier_v2',
 		},
 		{ manual: true },
 	);
@@ -19,13 +19,19 @@ const useGetCustomerOutstanding = ({ orgSerialId }) => {
 		try {
 			trigger({
 				params: {
-					organizationSerialId: orgSerialId || undefined,
+					page               : 1,
+					pageLimit          : 10,
+					organizationId     : orgId || undefined,
+					sortBy             : 'totalOutstandingAmount' || undefined,
+					sortType           : 'Desc' || undefined,
+					entityCode,
+					tradePartySerialId : serialId,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	}, [orgSerialId, trigger]);
+	}, [orgId, trigger, entityCode, serialId]);
 
 	useEffect(() => {
 		refetch();

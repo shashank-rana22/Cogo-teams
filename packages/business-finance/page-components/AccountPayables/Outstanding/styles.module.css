@@ -10,3 +10,9 @@
 .empty_state {
 	margin-top: 12px;
 }
+
+.topcard {
+	margin-top: 12px;
+	background-color: #acdadf;
+	border: 1px solid #acdadf;
+}

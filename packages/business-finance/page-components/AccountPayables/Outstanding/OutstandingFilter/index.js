@@ -1,5 +1,4 @@
 import { Input, Popover } from '@cogoport/components';
-import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
@@ -22,8 +21,6 @@ function Filters({
 	formFilters = {},
 	setFormFilters = () => { },
 	clearFilter = () => { },
-	queryKey = '',
-	entityCode = '',
 	refetch = () => { },
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
@@ -32,16 +29,6 @@ function Filters({
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
 
-	let placeholder;
-	if (queryKey === 'q') {
-		placeholder = ENTITY_FEATURE_MAPPING[entityCode]?.placeholder?.tax_number;
-	} else if (queryKey === 'tradePartySerialId') {
-		placeholder = 'Search By Trade Party';
-	} else if (queryKey === 'sageId') {
-		placeholder = 'Search By Sage Organization Id';
-	} else if (queryKey === 'organizationSerialId') {
-		placeholder = 'Search By Serial Id';
-	}
 	const { search = '' } = params || {};
 
 	return (
@@ -131,7 +118,7 @@ function Filters({
 				<div className={styles.flex_wrap}>
 					<div className={styles.flex_wrap}>
 						<Input
-							placeholder={placeholder}
+							placeholder="Search"
 							value={search}
 							onChange={(e) => handleChange(e)}
 							suffix={
