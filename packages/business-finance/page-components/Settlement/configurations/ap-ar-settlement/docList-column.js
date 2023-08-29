@@ -6,29 +6,18 @@ import { useState, useMemo, useEffect } from 'react';
 import styles from './styles.module.css';
 
 const useGetColumns = ({
-	// columnsToShow = [],
 	data,
 	loading,
 	selectedData,
 	setSelectedData,
-	// sortBy,
-	// setSortBy,
-	// sortType,
-	// setSortType,
 	sortData, setSortData,
-	// arrowDirections,
-	// setArrowDirections,
 	pageCheckedRows,
 	setPageCheckedRows,
 }) => {
-	// const [isChecked, setIsChecked] = useState(true);
 	const { list = [] } = data || {};
 	const { sortBy, sortType } = sortData || {};
 	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
-	// console.log('f', data);
 	const [selectAll, setSelectAll] = useState(false);
-	// const [pageCheckedRows, setPageCheckedRows] = useState({});
-	// const [selectedData, setSelectedData] = useState([]);
 	const pageNumber = data?.pageNo;
 	const checkedRowsId = pageCheckedRows?.[pageNumber] || [];
 	const DOC_LENGTH = 10;
@@ -36,8 +25,6 @@ const useGetColumns = ({
 	const ZEROTH_INDEX = 0;
 
 	useEffect(() => {
-		// Update selectAll based on checkboxes of current page
-		console.log('v');
 		const currentPageCheckedIds = pageCheckedRows?.[pageNumber] || [];
 		const isRowsChecked = currentPageListIds.every((id) => currentPageCheckedIds.includes(id));
 		setSelectAll(isRowsChecked);
@@ -45,6 +32,8 @@ const useGetColumns = ({
 
 	const onChangeBodyCheckbox = (event, id) => {
 		const rowData = data?.list.find((row) => row.id === id);
+
+		// const dataPrev = { ...(data?.list.find((row) => row.id === id) || []) };
 
 		if (!rowData) {
 			return;
@@ -71,42 +60,26 @@ const useGetColumns = ({
 
 	const onChangeTableHeadCheckbox = () => {
 		setPageCheckedRows((previousPageCheckedRows) => {
-			// const currentPageCheckedIds = previousPageCheckedRows[pageNumber] || [];
 			let newSelectedData = [...selectedData];
 			let newPageCheckedIds = [];
 
 			if (selectAll) {
-				// Unselect all checkboxes, including header
 				newPageCheckedIds = [];
 				newSelectedData = selectedData.filter((item) => !currentPageListIds.includes(item.id));
-			//  else if (currentPageCheckedIds.length > 0) {
-			// 	// Clear all checkboxes if some are selected
-			// 	newPageCheckedIds = [];
-			// 	newSelectedData = selectedData.filter(item => !currentPageListIds.includes(item.id));
-			// }
 			} else {
-				// Select all checkboxes, including header
-				// newPageCheckedIds = currentPageListIds;
-				// newSelectedData = [...new Set([...selectedData, ...list])];
-				// console.log('vsd');
 				const newIdsToAdd = currentPageListIds.filter((id) => !selectedData.some((item) => item.id === id));
-				console.log('n', newIdsToAdd);
-				// newPageCheckedIds = [...selectedData.map((item) => item.id), ...newIdsToAdd];
 				newPageCheckedIds = currentPageListIds;
 				const newDataToAdd = list.filter((item) => newIdsToAdd.includes(item.id));
 				newSelectedData = [...selectedData, ...newDataToAdd];
-				// newSelectedData = [...new Set([...selectedData, ...list])];
 			}
-			console.log('new', newSelectedData);
-			console.log(previousPageCheckedRows, 'previous');
 			setSelectedData(newSelectedData);
+			// setPrevData([...newSelectedData]);
 			return {
 				...previousPageCheckedRows,
 				[pageNumber]: newPageCheckedIds,
 			};
 		});
 	};
-	// console.log(sortData.sortBy, sortType);
 
 	const renderSortingArrows = (key) => {
 		(
@@ -132,8 +105,6 @@ const useGetColumns = ({
 			</div>
 		);
 	};
-	// console.log(checkedRowsId);
-	// console.log(pageCheckedRows);
 	const columns = [
 		{
 			id     : 'checkbox',
@@ -148,11 +119,7 @@ const useGetColumns = ({
 			accessor: ({ id = '' }) => (
 				<Checkbox
 					checked={checkedRowsId.includes(id)}
-					// checked={isChecked}
 					onChange={(event) => onChangeBodyCheckbox(event, id)}
-					// onChange={() => {
-					// 	setIsChecked(!isChecked);
-					// }}
 				/>
 
 			),
@@ -178,7 +145,6 @@ const useGetColumns = ({
 						interactive
 					>
 						<div>
-							{/* {row?.documentValue || '-'} */}
 							{(row?.documentValue && row?.documentValue.length > DOC_LENGTH
 								? `${row?.documentValue.substr(ZEROTH_INDEX, DOC_LENGTH)}...`
 								: row?.documentValue) || '-'}
@@ -203,33 +169,6 @@ const useGetColumns = ({
 			Header: (
 				<span style={{ fontSize: '12px', display: 'flex' }}>
 					DOC. DATE
-					{/* {
-							(arrowDirections.transactionDate === 'Desc')
-								? (
-									<span
-										onClick={() => {
-											setSortType('Asc');
-											setSortBy('transactionDate');
-											arrowDirections.transactionDate('Asc');
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										▼
-									</span>
-								)
-								: (
-									<span
-										onClick={() => {
-											setSortType('Desc');
-											setSortBy('transactionDate');
-											arrowDirections.transactionDate('Desc');
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										▲
-									</span>
-								)
-					} */}
 					{renderSortingArrows('transactionDate')}
 				</span>
 			),
@@ -240,37 +179,9 @@ const useGetColumns = ({
 			Header: (
 				<div style={{ fontSize: '12px', display: 'flex' }}>
 					DOC AMOUNT
-					{/* {
-							(arrowDirections.documentAmount === 'Desc')
-								? (
-									<span
-										onClick={() => {
-											setSortType('Asc');
-											setSortBy('documentAmount');
-											arrowDirections.documentAmount('Asc');
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										▼
-									</span>
-								)
-								: (
-									<span
-										onClick={() => {
-											setSortType('Desc');
-											setSortBy('documentAmount');
-											arrowDirections.documentAmount('Desc');
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										▲
-									</span>
-								)
-					} */}
 					{renderSortingArrows('documentAmount')}
 				</div>
 			),
-			// accessor : (item) => `${item?.currency} ${item?.documentAmount}` || '--',
 			id       : 'documentAmount',
 			accessor : (item) => (
 				<div>
@@ -301,7 +212,6 @@ const useGetColumns = ({
 					TDS
 					{renderSortingArrows('tdsAmount')}
 				</div>),
-			// accessor : (item) => `${item?.currency} ${item?.tds}` || '--',
 			id       : 'tds',
 			accessor : (item) => (
 				<div>
@@ -335,7 +245,6 @@ const useGetColumns = ({
 					BALANCE
 					{renderSortingArrows('balanceAmount')}
 				</div>),
-			// accessor : (item) => `${item?.currency} ${item?.balanceAmount}` || '--',
 			id       : 'balanceAmount',
 			accessor : (item) => (
 				<div>
@@ -351,7 +260,6 @@ const useGetColumns = ({
 		},
 		{
 			Header   : (<div style={{ fontSize: '12px' }}>STATUS</div>),
-			// accessor : (item) => item?.status || '--',
 			id       : 'status',
 			accessor : (item) => (
 				<Pill
@@ -367,12 +275,6 @@ const useGetColumns = ({
 			),
 		},
 	];
-	// const finalColumns = [];
-
-	// columnsToShow.forEach((item) => {
-	// 	const column = columns.find((col) => col.id === item);
-	// 	finalColumns.push(column);
-	// });
 
 	return columns;
 };

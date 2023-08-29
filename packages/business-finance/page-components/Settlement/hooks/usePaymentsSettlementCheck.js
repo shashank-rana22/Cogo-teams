@@ -1,14 +1,8 @@
 import { Toast } from '@cogoport/components';
-// import { useDebounceQuery } from '@cogoport/forms';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import formatDate from '@cogoport/globalization/utils/formatDate';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-// import { useState } from 'react';
-// import { useSelector } from '@cogoport/store';
-// import React, {  } from 'react';
 
 const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 	const [
@@ -26,16 +20,8 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 		{ manual: true },
 	);
 	const { profile } = useSelector((state) => state || {});
-	// const { page = '', pageLimit = '' } = filters || {};
-	// const { query = '', debounceQuery } = useDebounceQuery();
-	// useEffect(() => {
-	// 	debounceQuery(filters?.query);
-	// }, [debounceQuery, filters?.query]);
 	const postPaymentsSettlementCheck = async () => {
 		try {
-			// if (filters.tradeParty && filters.entityCode) {
-			// const { ...res } = filters || {};
-
 			await checkTrigger({
 				data: {
 					stackDetails   : selectedData,
@@ -51,8 +37,7 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 				},
 			});
 		} catch (error) {
-			// setApiData({});
-			Toast.error(error?.error?.message);
+			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

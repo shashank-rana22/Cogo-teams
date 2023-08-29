@@ -44,27 +44,12 @@
 			height: 32px;
 		}
 
-		/* .reqMargin .ui_multiselect_display_container{
-            height:32px;
-        } */
-
-		/* .ui_select_display_container {
-            height: 32px;
-        } */
-
 		.ui_select_container div:first-child {
 			height: 32px;
 			padding-top: 4px;
 			font-size: 14px;
 		}
 
-		/* .ui_select_container.ui_ps_size_md{
-            height: 32px;
-        } */
-
-		/* .ui_select_input_control {
-            font-size: 14px;
-        } */
 		.ui_select_toggle_button .ui_select_input_control {
 			font-size: 14px;
 		}
@@ -87,10 +72,4 @@
 
 .entity {
 	width: 200px;
-
-	/* :global{
-        .ui_select_container div:first-child{
-            height:32px;
-        }
-    } */
 }

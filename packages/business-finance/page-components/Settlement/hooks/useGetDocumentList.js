@@ -1,11 +1,8 @@
 import { Toast } from '@cogoport/components';
-// import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
-// import { useSelector } from '@cogoport/store';
-// import React, {  } from 'react';
 
 const useGetDocumentList = ({ filters, sorting }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -24,19 +21,12 @@ const useGetDocumentList = ({ filters, sorting }) => {
 		},
 		{ manual: true },
 	);
-	// const { query = '', debounceQuery } = useDebounceQuery();
-	// useEffect(() => {
-	// 	debounceQuery(filters?.query);
-	// }, [debounceQuery, filters?.query]);
 	const INITIAL_BAL = 0;
 	const { status = '', docType = '', accMode = '', date = {}, tradeParty = '', ...rest } = filters || {};
 	const [balanceData, setBalanceData] = useState(INITIAL_BAL);
 	const balanceRefetch = async () => {
 		try {
 			if (filters.tradeParty && filters.entityCode) {
-				// console.log('filters', filters);
-
-				// const { query = '', date = {}, tradeParty = '', ...rest } = filters || {};
 				const rep = await balanceTrigger({
 					params: {
 						...rest,
@@ -74,11 +64,8 @@ const useGetDocumentList = ({ filters, sorting }) => {
 	const refetch = async () => {
 		try {
 			if (filters.tradeParty && filters.entityCode) {
-				// const { ...res } = filters || {};
-
 				await trigger({
 					params: {
-						// ...(res || {}),
 						...rest,
 						orgId                 : filters.tradeParty,
 						accModes              : accMode || undefined,
@@ -102,7 +89,6 @@ const useGetDocumentList = ({ filters, sorting }) => {
 							separator  : ' ',
 						})) || undefined,
 
-						// query   : query !== '' ? query : undefined,
 						docType  : docType || undefined,
 						sortBy   : sorting?.sortBy || undefined,
 						sortType : sorting?.sortType || undefined,
@@ -111,7 +97,6 @@ const useGetDocumentList = ({ filters, sorting }) => {
 				});
 			}
 		} catch (error) {
-			// setApiData({});
 			Toast.error(error?.error?.message);
 		}
 	};

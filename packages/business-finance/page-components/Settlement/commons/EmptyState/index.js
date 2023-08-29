@@ -8,10 +8,7 @@ const EMPTY_STATE_IMAGE_URL = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault
 function EmptyState({
 	height = 125,
 	width = 225,
-	// emptyText = 'Data not found',
-	// subEmptyText = '',
 	flexDirection = 'row',
-	// textSize = '16px',
 	Text = '',
 }) {
 	return (
@@ -24,10 +21,6 @@ function EmptyState({
 				className={styles.image}
 			/>
 
-			{/* <div>
-				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
-				{subEmptyText && <p className={styles.text}>{subEmptyText}</p> }
-			</div> */}
 			<div>
 				<span className={styles.criteria}>
 					No Results Found
