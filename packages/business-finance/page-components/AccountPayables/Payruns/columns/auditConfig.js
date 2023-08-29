@@ -5,7 +5,7 @@ export const AUDIT_CONFIG = {
 		background   : 'none',
 		color        : '#000',
 		fontSize     : '12px',
-		fontWeight   : '600',
+		fontWeight   : '500',
 	},
 	bodyStyles: {
 		color     : ' #333333',
@@ -22,7 +22,7 @@ export const AUDIT_CONFIG = {
 			label     : 'Name',
 			key       : 'organizationName',
 			func      : 'renderTooltip',
-			maxLength : 36,
+			maxLength : 70,
 			span      : 1.8,
 		},
 		{
@@ -32,15 +32,17 @@ export const AUDIT_CONFIG = {
 				type        : 'href',
 				redirectKey : 'documentUrl',
 			},
+			lowerKey: {
+				key  : 'typeOfInvoice',
+				type : 'tag',
+			},
 			func : 'renderFieldPair',
 			span : 1.2,
 		},
 		{
 			label  : 'SID',
 			topKey : {
-				key         : 'sid',
-				type        : 'href',
-				redirectKey : 'shipmentId',
+				key: 'sid',
 			},
 			lowerKey: {
 				key  : 'serviceType',
@@ -50,18 +52,24 @@ export const AUDIT_CONFIG = {
 			span : 1,
 		},
 		{
-			label : 'Invoice Amount',
-			key   : 'invoiceAmount',
-			type  : 'text',
-			span  : 1.5,
-			func  : 'renderAmount',
+			label  : 'Invoice Amount',
+			topKey : {
+				key         : 'invoiceAmount',
+				type        : 'amount',
+				currencyKey : 'currency',
+			},
+			func : 'renderFieldPair',
+			span : 1.2,
 		},
-
 		{
-			label : 'Payable',
-			key   : 'payableAmount',
-			func  : 'renderAmount',
-			span  : 1,
+			label  : 'Payable',
+			topKey : {
+				key         : 'payableAmount',
+				type        : 'amount',
+				currencyKey : 'currency',
+			},
+			func : 'renderFieldPair',
+			span : 1.2,
 		},
 		{
 			key   : 'bankDetails',
@@ -72,14 +80,14 @@ export const AUDIT_CONFIG = {
 		},
 		{
 			label : 'Audit',
-			span  : 2,
-			func  : 'renderApprove',
+			span  : 1.6,
+			func  : 'renderAcceptAudit',
 		},
 		{
 			key   : 'remarks',
 			label : 'Remarks',
-			func  : 'renderRemarks',
-			span  : 1.5,
+			func  : 'renderAuditRemarks',
+			span  : 1.2,
 		},
 		{
 			key  : 'invoiceDetails',

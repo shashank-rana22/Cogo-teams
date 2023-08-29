@@ -13,7 +13,7 @@ const useGetAudit = () => {
 		authKey : 'get_purchase_audit',
 	}, { manual: true, autoCancel: false });
 
-	const { trigger: updateTrigger, loading: updateLoading } = useRequestBf({
+	const [{ loading: updateLoading }, updateTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill',
 		method  : 'put',
 		authKey : 'put_purchase_payrun-bill',
@@ -24,7 +24,7 @@ const useGetAudit = () => {
 	const { payrun_id, performedBy, performedByType } = useSelector(
 		({ general, profile }) => ({
 			payrun_id       : general.query.payrun_id,
-			performedBy     : profile.id,
+			performedBy     : profile.user.id,
 			performedByType : profile.session_type,
 		}),
 	);
@@ -35,22 +35,23 @@ const useGetAudit = () => {
 	});
 
 	const config = AUDIT_CONFIG;
-	const { search, ...rest } = globalFilters;
+	const { search, pageIndex, ...rest } = globalFilters;
 
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
 
-	const refetch = useCallback(() => {
+	const refetch = useCallback((q) => {
 		trigger({
 			params: {
 				payrunId : payrun_id,
 				...rest,
-				query    : query || undefined,
+				query    : q || undefined,
+				pageIndex,
 			},
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, payrun_id, query, JSON.stringify(rest)]);
+	}, [trigger, payrun_id, query, pageIndex, JSON.stringify(rest)]);
 
 	const updateInvoice = async (type, payload, invoice_id) => {
 		try {
@@ -71,9 +72,8 @@ const useGetAudit = () => {
 	};
 
 	useEffect(() => {
-		refetch();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		refetch(query);
+	}, [query, refetch]);
 
 	const { stats = {} } = data || {};
 

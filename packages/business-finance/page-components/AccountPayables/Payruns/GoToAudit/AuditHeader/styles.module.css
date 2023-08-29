@@ -3,3 +3,40 @@
 	font-weight: 600;
 	color: #221f20;
 }
+
+.navbar_container {
+	width: fit-content;
+	padding: 5px;
+	margin-top: 15px;
+	background-color: white;
+}
+
+.search {
+	width: 340px;
+	height: 32px;
+}
+
+.search_icon {
+	margin-right: 10px;
+}
+
+.data_container {
+	margin: 20px 0;
+}
+
+.card {
+	width: fit-content;
+	padding: 6px 15px;
+	margin-right: 20px;
+	background-color: white;
+}
+
+.invoice_data {
+	display: flex;
+	margin-bottom: 15px;
+}
+
+.payrun_container {
+	display: flex;
+	justify-content: space-between;
+}
