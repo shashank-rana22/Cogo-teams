@@ -24,16 +24,22 @@
 }
 
 .select {
-	width: 18%;
+	display: flex;
+	column-gap: 20px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-	.select {
-		width: 30%;
-	}
+.dropdown {
+	width: 20vw;
 }
+
 @media (max-width: 767px) {
 	.select {
+		flex-direction: column;
+		row-gap: 10px;
 		width: 50%;
+	}
+	
+	.dropdown {
+		width: 100%;
 	}
 }

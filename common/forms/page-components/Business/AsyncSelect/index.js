@@ -64,6 +64,7 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
 } from '../../../utils/getAsyncFields';
 
@@ -146,6 +147,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
+	list_truck_types                     : asyncListTruckTypes,
 	resources                            : asyncListResources,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
 };
