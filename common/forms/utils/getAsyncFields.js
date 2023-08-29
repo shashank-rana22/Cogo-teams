@@ -875,12 +875,11 @@ function asyncListResources() {
 
 function asyncListCompanyLocations() {
 	return {
-		labelKey     : 'display_name',
-		valueKey     : 'id',
-		endpoint     : 'list_company_location',
-		initialCall  : true,
-		microService : 'auth',
-		params       : {},
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_company_location',
+		initialCall : true,
+		params      : {},
 	};
 }
 

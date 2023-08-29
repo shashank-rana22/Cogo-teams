@@ -136,7 +136,7 @@ export const EMPLOYEE_LIST_CONTROLS = {
 		placeholder : 'Search Location',
 		asyncKey    : 'list_company_locations',
 		isClearable : true,
-		multiple    : true,
 		initialCall : true,
+		multiple    : true,
 	},
 };

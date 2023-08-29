@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 const useGetEmployeeList = (selectedLocation) => {
 	const [filters, setFilters] = useState({
-		page_limit : 2,
+		page_limit : 20,
 		page       : 1,
 	});
 
@@ -37,7 +37,7 @@ const useGetEmployeeList = (selectedLocation) => {
 		if (selectedLocation) getEmployeeList();
 	}, [getEmployeeList, selectedLocation]);
 
-	return { loading, data, filters, setFilters, debounceQuery };
+	return { loading, data, filters, setFilters, debounceQuery, refetch: getEmployeeList };
 };
 
 export default useGetEmployeeList;

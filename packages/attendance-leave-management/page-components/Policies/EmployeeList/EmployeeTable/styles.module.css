@@ -24,15 +24,16 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 16px 24px;
+	margin-top: 16px;
 	background: #fff;
 	border: 1px solid #e0e0e0;
+	border-radius: 6px;
 }
 
 .footer_text {
+	margin-right: 16px;
 	font-size: 16px;
-	font-style: normal;
 	font-weight: 600;
-	line-height: 150%;
 	color: #221f20;
 	text-align: center;
 	text-transform: capitalize;
@@ -42,4 +43,13 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
+	margin-top: 16px;
+}
+
+.all_select {
+	font-size: 16px;
+	color: #034afd;
+	text-decoration-line: underline;
+	text-transform: capitalize;
+	cursor: pointer;
 }

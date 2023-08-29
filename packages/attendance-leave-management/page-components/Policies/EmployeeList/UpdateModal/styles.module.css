@@ -1,0 +1,14 @@
+.label {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+}
+
+.controller {
+	margin-bottom: 16px;
+}
+
+.cancel_btn {
+	margin-right: 12px;
+}

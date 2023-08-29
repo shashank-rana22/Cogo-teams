@@ -9,11 +9,13 @@ function Locations({ data, setSelectedLocation, loading }) {
 		return <Placeholder height="50px" width="324px" margin="0px 0px 20px 0px" />;
 	}
 
+	const { list } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.above_text}>BRANCHES</div>
 			<div className={styles.branches_container}>
-				{(data || []).map((item) => (
+				{(list || []).map((item) => (
 					<div
 						key={item.id}
 						aria-hidden

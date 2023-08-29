@@ -15,7 +15,7 @@ function EmployeeList({ selectedLocation }) {
 	console.log('selectedLocation', selectedLocation);
 	// const [editItemId, setEditItemId] = useState(null);
 	// const [selectedIds, setSelectedIds] = useState([]);
-	const { loading, data, setFilters, filters, debounceQuery } = useGetEmployeeList(selectedLocation);
+	const { loading, data, setFilters, filters, debounceQuery, refetch } = useGetEmployeeList(selectedLocation);
 	console.log(data);
 
 	const handleSearch = (val) => {
@@ -27,11 +27,6 @@ function EmployeeList({ selectedLocation }) {
 		<div className={styles.card}>
 			<div className={styles.header}>
 				<span className={styles.heading}>Assign Employee</span>
-				<div className={styles.selected}>
-					<span className={styles.num_selected}>Selected:</span>
-					<span className={styles.num_show}>20 Employees</span>
-				</div>
-
 			</div>
 			<div className={styles.emplist_header}>
 				<span className={styles.emp_heading}>Employee List</span>
@@ -63,6 +58,10 @@ function EmployeeList({ selectedLocation }) {
 					data={data}
 					setFilters={setFilters}
 					loading={loading}
+					filters={filters}
+					searchQuery={searchQuery}
+					selectedLocation={selectedLocation}
+					refetch={refetch}
 					// editItemId={editItemId}
 					// setEditItemId={setEditItemId}
 					// selectedIds={selectedIds}

@@ -1,15 +1,31 @@
-import { Select, Checkbox } from '@cogoport/components';
-// import { IcMEdit } from '@cogoport/icons-react';
+import { Checkbox, Pill } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const useGetLocationColumn = () => {
+const useGetLocationColumn = ({
+	handleModal, handleAllSelect, handleSelectId, list = [],
+	selectedIds,
+}) => {
 	const columns = [
 		{
-			Header   : <Checkbox />,
-			accessor : () => (
-				<Checkbox />
+			Header: (
+				<div className={styles.table_header}>
+					<Checkbox
+						checked={(list || []).length === selectedIds.length}
+						onChange={(e) => handleAllSelect(e)}
+					/>
+				</div>
+			),
+			accessor: (item) => (
+				<div className={styles.table_header}>
+					<Checkbox
+						checked={selectedIds.includes(item.employee_id)}
+						onChange={(e) => handleSelectId(e, item.employee_id)}
+					/>
+				</div>
 			),
 			id: 'select_all',
 		},
@@ -25,7 +41,7 @@ const useGetLocationColumn = () => {
 		},
 		{
 			Header   : <div className={styles.table_header}>DEPARTMENT</div>,
-			accessor : (item) => <div className={styles.item_data}>{item.department}</div>,
+			accessor : (item) => <div className={styles.item_data}>{startCase(item.department) || '--'}</div>,
 			id       : 'department',
 		},
 		{
@@ -35,20 +51,49 @@ const useGetLocationColumn = () => {
 		},
 		{
 			Header   : <div className={styles.table_header}>ACCESS STATUS</div>,
-			accessor : (item) => <div className={styles.item_data}>{item.active}</div>,
-			id       : 'active',
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					<Pill
+						key={item.is_active}
+						size="md"
+						color={item.is_active ? 'green' : 'red'}
+					>
+						{item.is_active ? 'Active' : 'Inactive'}
+					</Pill>
+				</div>
+			),
+			id: 'active',
 		},
 		{
 			Header   : <div className={styles.table_header}>ALLOWED OFFICES</div>,
 			accessor : (item) => (
 				<div>
-					<Select
-						size="sm"
-						placeholder={item.allowed_offices}
-					/>
+					{!isEmpty(item.locations.length) ? item.locations.map((val) => (
+						<Pill
+							key={val}
+							size="md"
+							color="green"
+						>
+							{val || '--'}
+						</Pill>
+					)) : '--'}
 				</div>
 			),
 			id: 'allowed_offices',
+		},
+		{
+			Header   : <div className={styles.table_header}>ACTION</div>,
+			accessor : (item) => (
+				<div className={styles.icon_container}>
+					<IcMEdit
+						className={styles.edit_icon}
+						width={18}
+						height={18}
+						onClick={() => handleModal(item)}
+					/>
+				</div>
+			),
+			id: 'action',
 		},
 	];
 	return columns;

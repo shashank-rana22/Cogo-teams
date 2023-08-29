@@ -1,5 +1,6 @@
 .container {
 	width: 100%;
+	overflow: auto;
 
 	:global {
 		table {
@@ -64,4 +65,8 @@
 			}
 		}
 	}
+}
+
+.table_height {
+	max-height: 700px;
 }

@@ -1,16 +1,23 @@
-import { Pagination } from '@cogoport/components';
-// import { IcMEdit } from '@cogoport/icons-react';
-import React from 'react';
+import { Pagination, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import React, { useState } from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
 import useGetLocationColumn from '../../../../common/useGetLocationColumn';
+import UpdateModal from '../UpdateModal';
 
 import styles from './styles.module.css';
 
+const ARRAY_COUNT = 1;
+
 function EmployeeTable({
-	data, setFilters,
+	data, setFilters, filters, searchQuery, selectedLocation, refetch,
 }) {
-	const columns = useGetLocationColumn();
+	const [selectBulk, setSelectBulk] = useState(false);
+	const [selectedIds, setSelectedIds] = useState([]);
+	const [openUpdateModal, setOpenUpdateModal] = useState(false);
+	const [selectedData, setSelectedData] = useState({});
+
 	const { list, page, page_limit, total_count } = data || {};
 
 	const onPageChange = (pageNumber) => {
@@ -20,9 +27,56 @@ function EmployeeTable({
 		}));
 	};
 
+	const handleModal = (val) => {
+		setSelectedData(val);
+		setOpenUpdateModal(true);
+	};
+
+	const handleAllSelect = (e) => {
+		const { checked } = e.target;
+
+		if (checked) {
+			const ids = list.map((val) => val.employee_id);
+			return setSelectedIds(ids);
+		}
+
+		return setSelectedIds([]);
+	};
+
+	const handleSelectId = (e, id) => {
+		const { checked } = e.target;
+		if (checked) {
+			return setSelectedIds((prev) => ([...prev, id]));
+		}
+		const filterArr = selectedIds.filter((val) => val !== id);
+		return setSelectedIds(filterArr);
+	};
+
+	const columns = useGetLocationColumn({
+		handleModal,
+		handleAllSelect,
+		handleSelectId,
+		list,
+		selectedIds,
+	});
+
+	const handleBulk = () => {
+		setSelectBulk(true);
+		setSelectedIds([]);
+		setSelectedData({});
+		setOpenUpdateModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setOpenUpdateModal(false);
+		setSelectedIds([]);
+		setSelectedData({});
+		setSelectBulk(false);
+	};
+
 	return (
 		<>
-			<StyledTable columns={columns} data={list} />
+			<StyledTable columns={columns} data={list} className="table_height" />
 			<div className={styles.pagination}>
 				<Pagination
 					type="table"
@@ -32,20 +86,41 @@ function EmployeeTable({
 					onPageChange={onPageChange}
 				/>
 			</div>
-			{/* {selectedIds.length !== CHECKSIZE ? (
+			{openUpdateModal && (
+				<UpdateModal
+					show={openUpdateModal}
+					onClose={handleCloseModal}
+					selectedData={selectedData}
+					filtersData={filters}
+					searchQuery={searchQuery}
+					selectedLocation={selectedLocation}
+					refetch={refetch}
+					setSelectedData={setSelectedData}
+					selectedIds={selectedIds}
+					setSelectedIds={setSelectedIds}
+					isBulkUpdate={selectBulk}
+				/>
+			)}
+			{selectedIds.length > GLOBAL_CONSTANTS.zeroth_index && (
 				<div className={styles.footer}>
 					<div>
 						<span className={styles.footer_text}>
-							{selectedIds.length === data.length
-								? `All ${selectedIds.length} employee are selected.`
-								: `${selectedIds.length} employees are selected on this page.`}
+							{selectedIds.length === list?.length
+								? `All ${selectedIds.length} employees are selected.`
+								: `${selectedIds.length} employee${selectedIds.length > ARRAY_COUNT ? 's are' : ' is'}
+								selected on this page.`}
 						</span>
-
+						<span className={styles.all_select} aria-hidden onClick={handleBulk}>
+							Select All
+							{' '}
+							{total_count}
+							{' '}
+							Employees
+						</span>
 					</div>
-					<Button size="md" themeType="primary">Make Changes</Button>
+					<Button size="md" themeType="primary" onClick={() => handleModal('')}>Make Changes</Button>
 				</div>
-			)
-				} */}
+			)}
 		</>
 	);
 }

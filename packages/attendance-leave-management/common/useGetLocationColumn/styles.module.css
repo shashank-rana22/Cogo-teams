@@ -7,4 +7,19 @@
 	font-size: 12px;
 	font-weight: 700;
 	color: #4f4f4f;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.edit_icon {
+	cursor: pointer;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
 }
