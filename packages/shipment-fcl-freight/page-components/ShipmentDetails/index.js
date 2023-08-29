@@ -36,6 +36,7 @@ function ShipmentDetails() {
 
 	const stakeholdersComponents = {
 		booking_agent            : kamLoggedIn === 'booking_agent' ? Kam : DKam,
+		booking_agent_manager    : kamLoggedIn === 'booking_agent' ? Kam : DKam,
 		sales_agent              : Kam,
 		booking_desk             : BookingDesk,
 		booking_desk_manager     : BookingDeskManager,

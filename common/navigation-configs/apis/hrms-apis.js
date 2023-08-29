@@ -106,6 +106,18 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
 	],
 	employee_portal: [
 		{
@@ -163,6 +175,12 @@ const HRMS = {
 			api          : 'list_company_documents',
 			access_type  : 'private',
 			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+
 		},
 	],
 	performance_management_configuration: [
@@ -522,6 +540,100 @@ const HRMS = {
 			api          : 'update_bulk_employee_details',
 			access_type  : 'private',
 			service_name : 'hrms',
+		},
+	],
+	employee_dashboard: [
+		{
+			api          : 'create_employee_device_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
+	employee_list: [
+		{
+			api          : 'list_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_device_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
+	byod_admin_dashboard: [
+		{
+			api          : 'create_employee_device_reimbursement_group',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_device_reimbursement_group',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_department_role_reimbursement_group_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_device_reimbursement_group',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_department_role_reimbursement_group_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'update_department_role_reimbursement_group_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'list_employee_device_reimbursement_groups',
+			access_type  : 'private',
+			service_name : 'hrms',
+
 		},
 	],
 };

@@ -5,6 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect, useCallback } from 'react';
 
 import { checkObjectValues } from '../utils/checkObjectValues';
@@ -16,6 +17,8 @@ const formattedDate = (item) => formatDate({
 });
 
 const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
+	const { t } = useTranslation(['managerDashboard']);
+
 	const { user }	 = useSelector((state) => state?.profile || {});
 	const [filters, setFilters] = useState({});
 
@@ -47,11 +50,11 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(
-					getApiErrorString(error?.response?.data) || 'Something went wrong',
+					getApiErrorString(error?.response?.data) || t('managerDashboard:something_went_wrong_toast_error'),
 				);
 			}
 		}
-	}, [trigger, id, filters, level, ratingCycle, isReportingManager]);
+	}, [trigger, id, filters, level, ratingCycle, isReportingManager, t]);
 
 	useEffect(() => {
 		if (level && !isEmpty(ratingCycle)) {

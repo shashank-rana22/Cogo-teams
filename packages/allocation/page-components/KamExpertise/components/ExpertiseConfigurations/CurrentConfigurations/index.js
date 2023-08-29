@@ -6,6 +6,8 @@ import LoadingState from '../LoadingState';
 import Header from './Header';
 
 function CurrentConfigurations(props) {
+	const router = useRouter();
+
 	const {
 		configCardLoading,
 		list,
@@ -14,8 +16,6 @@ function CurrentConfigurations(props) {
 		cardRefetch,
 		scrollDraftRef,
 	} = props;
-
-	const router = useRouter();
 
 	const liveAndDraftVersions = list.filter((item) => ['draft', 'live'].includes(item?.status));
 
@@ -40,6 +40,7 @@ function CurrentConfigurations(props) {
 
 			{liveAndDraftVersions?.map((item) => (
 				<ConfigurationCard
+					key={item?.version_number}
 					{...item}
 				/>
 			))}

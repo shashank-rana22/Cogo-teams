@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../../utils/serviceDescriptionMappings';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
@@ -8,6 +8,7 @@ function Terms({
 	tradeParty = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_BANK_DETAILS = {} } = getFortigoDetails();
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
 	);
@@ -29,7 +30,7 @@ function Terms({
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = CUSTOMER_TO_BANK_DETAILS[importerExporterId] || {};
 	return (
 		<>
 			<div style={{ padding: '5px', borderWidth: '0 2px 0 2px', borderColor: 'black', borderStyle: 'solid' }}>
@@ -64,13 +65,13 @@ function Terms({
 							<li>
 								<b>
 									All Payments should be to the account of
-									&nbsp;
+									{' '}
 									{billing_address?.business_name || ''}
 									. Bank account details:
 								</b>
 								<p>
 									<b>Bank Name:</b>
-									&nbsp;
+									{' '}
 									{bankDetailObj?.data?.bank_name || bank_name}
 								</p>
 								<p>

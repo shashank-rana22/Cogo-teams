@@ -13,6 +13,7 @@ function FlashRevertLogs() {
 				size="md"
 				themeType="linkUi"
 				onClick={() => setShowLogs(true)}
+				className={styles.button_container}
 			>
 				Flash Revert Logs
 			</Button>

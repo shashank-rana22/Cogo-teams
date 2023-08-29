@@ -54,7 +54,7 @@ function useListShipments({ dateFilters = {} }) {
 
 	const handlePageChange = (val) => {
 		getShipmentsList({
-			pagination   : val,
+			pagination   : val || params?.pagination,
 			serialId     : searchQuery,
 			shipmentType : params?.shipmentType,
 		});

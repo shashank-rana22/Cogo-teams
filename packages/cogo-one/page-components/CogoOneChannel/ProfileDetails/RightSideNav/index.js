@@ -4,7 +4,7 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import FormatData from '../../../../utils/formatData';
+import getFormatData from '../../../../utils/getFormatData';
 import getIconMapping from '../../../../utils/getIconMapping';
 
 import SearchSpotModal from './SearchSpotModal';
@@ -25,7 +25,7 @@ function RightSideNav({
 	quotationEmailSentAt = '',
 	orgId = '',
 	viewType = '',
-	userData = {},
+	formattedMessageData = {},
 }) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
@@ -66,7 +66,7 @@ function RightSideNav({
 
 	const disabledSpotSearch = loading || disableQuickActions;
 
-	const { userId = '', userMobile = '', leadUserId = '' } = FormatData({
+	const { userId = '', userMobile = '', leadUserId = '' } = getFormatData({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
@@ -128,7 +128,7 @@ function RightSideNav({
 					setSearchSpotmodal={setSearchSpotmodal}
 					openNewTab={openNewTab}
 					loading={loading}
-					userData={userData}
+					formattedMessageData={formattedMessageData}
 				/>
 			) : null}
 		</>

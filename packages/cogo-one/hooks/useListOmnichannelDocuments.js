@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback, useMemo, useState } from 'react';
 
-import FormatData from '../utils/formatData';
+import getFormatData from '../utils/getFormatData';
 
 const FIRST_PAGE = 1;
 
@@ -22,7 +22,12 @@ function useListOmnichannelDocuments({
 		method : 'get',
 	}, { manual: true });
 
-	const { userId = '', userMobile = '', leadUserId = '', orgId = '' } = FormatData({
+	const {
+		userId = '',
+		userMobile = '',
+		leadUserId = '',
+		orgId = '',
+	} = getFormatData({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
@@ -59,7 +64,7 @@ function useListOmnichannelDocuments({
 				},
 			});
 
-			setFilterVisible(false);
+			setFilterVisible?.(false);
 		} catch (error) {
 			console.error('error', error);
 		}

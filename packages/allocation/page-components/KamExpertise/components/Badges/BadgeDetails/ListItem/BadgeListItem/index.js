@@ -2,11 +2,16 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+
 function BadgeListItem(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { data = {}, index, setToggleScreen, setBadgeItemData, listRefetch } = props;
 
 	const {
@@ -35,15 +40,17 @@ function BadgeListItem(props) {
 		},
 	};
 
-	const updated_at = audits?.[0]?.created_at || null;
+	const updated_at = audits?.[GLOBAL_CONSTANTS.zeroth_index]?.created_at || null;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
 				#
 				{' '}
-				{index + 1}
-				<Button themeType="secondary" onClick={handleEdit}>Edit</Button>
+				{index + FIRST_INDEX}
+				<Button themeType="secondary" onClick={handleEdit}>
+					{t('allocation:edit_button')}
+				</Button>
 			</div>
 
 			<div className={styles.main_card}>
@@ -51,7 +58,7 @@ function BadgeListItem(props) {
 					<div className={styles.details}>
 						<div className={styles.badge_name_tag}>
 							<p>
-								Badge Name
+								{t('allocation:badge_name_label')}
 								{' '}
 								:
 								{'  '}
@@ -63,14 +70,18 @@ function BadgeListItem(props) {
 
 						<div className={styles.desc}>
 							<p>
-								Description :
+								{t('allocation:description_label')}
+								{' '}
+								:
 								{' '}
 								{description}
 							</p>
 						</div>
 
 						<div className={styles.events}>
-							Events :
+							{t('allocation:events_label')}
+							{' '}
+							:
 							{' '}
 							{
 								badge_condition_name.map((item) => (
@@ -84,7 +95,9 @@ function BadgeListItem(props) {
 
 					<div className={styles.modified}>
 						<div style={{ paddingRight: '4px' }}>
-							Last Modified :
+							{t('allocation:last_modified_label')}
+							{' '}
+							:
 							{' '}
 							{updated_at ? formatDate({
 								date       : updated_at,
@@ -94,7 +107,9 @@ function BadgeListItem(props) {
 						</div>
 
 						<div>
-							Last Modified By :
+							{t('allocation:last_modified_by_label')}
+							{' '}
+							:
 							{' '}
 							{created_by?.name}
 						</div>
@@ -102,7 +117,7 @@ function BadgeListItem(props) {
 				</div>
 
 				<div className={styles.score_container}>
-					<h3 style={{ color: '#4f4f4f' }}>Scores</h3>
+					<h3 style={{ color: '#4f4f4f' }}>{t('allocation:scores_label')}</h3>
 					<div className={styles.score_badge}>
 						{
 							Object.values(MEDAL_DETAILS_MAPPING).map((item) => {

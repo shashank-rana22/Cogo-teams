@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../utils/serviceDescriptionMappings';
+import { getFortigoDetails } from '../../utils/serviceDescriptionMappings';
 
 import Quotation from './Quotation';
 import TruckDetail from './TruckDetail';
@@ -12,6 +12,7 @@ function InvoiceVarun({
 	customData = {},
 	importerExporterId = '',
 }) {
+	const { CUSTOMER_TO_BANK_DETAILS = {} } = getFortigoDetails();
 	const [tradeParty] = tradePartyData?.list || [];
 
 	const bankDetails = (tradeParty?.documents || []).filter(
@@ -37,7 +38,7 @@ function InvoiceVarun({
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = CUSTOMER_TO_BANK_DETAILS[importerExporterId] || {};
 
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>
@@ -124,7 +125,7 @@ function InvoiceVarun({
 							</p>
 							<p style={{ fontSize: '10px' }}>
 								5) Payment advice should be mailed to
-								&nbsp;
+								{' '}
 								<b>collection@4tigo.com</b>
 								.
 							</p>

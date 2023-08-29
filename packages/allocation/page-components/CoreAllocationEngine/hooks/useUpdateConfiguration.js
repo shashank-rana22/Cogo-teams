@@ -6,6 +6,7 @@ const useUpdateConfiguration = ({
 	item = {},
 	setShow = () => {},
 	listRefetch = () => {},
+	t = () => {},
 }) => {
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/configuration_attributes',
@@ -25,7 +26,7 @@ const useUpdateConfiguration = ({
 
 			listRefetch();
 
-			Toast.success('Configuration deleted successfully!');
+			Toast.success(t('allocation:delete_configuration_toast_succeess'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

@@ -1,21 +1,27 @@
 import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StakeHolderTimeline from '../../StakeHolderTimeline';
 import StyledTable from '../../StyledTable';
+import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 import { toTitleCase } from '../../utils/titleCase';
 
 import {
+	CREDIT_NOTE_APPROVAL_TYPE_OPTIONS,
 	CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS,
 	requestCreditNoteColumns, REVENUE_OPTIONS,
 } from './credit-note-config';
 import styles from './style.module.css';
 
 const MAX_LEN = 40;
+const CN_VALUES_DATA = ['revenueOthers', 'nonRevenueOthers'];
+const STATUS_LIST = ['APPROVED', 'REJECTED'];
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -25,9 +31,11 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remarks  : null,
 	});
 
+	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
+
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
-	const { data = {}, type } = row || {};
+	const { level3 = {}, level2 = {}, level1 = {}, data = {}, type } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest, consolidatedCreditNoteRequest, organization } = data;
 	const {
@@ -45,6 +53,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		currency,
 		documentUrls,
 		revoked,
+		creditNoteApprovalType: approvalType,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -55,6 +64,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remark,
 		CNCategoryValues,
 		isConsolidated,
+		creditNoteApprovalType,
+		level2,
 	});
 
 	const { businessName } = organization || {};
@@ -66,24 +77,24 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 	const { referenceId = '' } = row || {};
 
-	const content = () => (
-		<div className={styles.container}>
-			<div>
-				<div className={styles.texts}>CN Category Type*</div>
-				<div className={styles.select_container}>
-					<Select
-						className="primary md"
-						placeholder="CN Category Type.."
-						value={creditNoteType || CNCategoryValues?.CNType}
-						disabled={!isEditable}
-						onChange={(e:any) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
-						options={CATEGORY_OPTIONS}
-					/>
+	function ShowContent() {
+		return (
+			<div className={styles.container}>
+				<div>
+					<div className={styles.texts}>CN Category Type*</div>
+					<div className={styles.select_container}>
+						<Select
+							className="primary md"
+							placeholder="CN Category Type.."
+							value={creditNoteType || CNCategoryValues?.CNType}
+							disabled={!isEditable || level1?.status === 'APPROVED'}
+							onChange={(e:string) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
+							options={CATEGORY_OPTIONS}
+						/>
+					</div>
 				</div>
-			</div>
-			{(CNCategoryValues?.CNType
-				|| status === 'APPROVED'
-				|| status === 'REJECTED') && (
+				{(CNCategoryValues?.CNType
+				|| STATUS_LIST.includes(status)) && (
 					<div>
 						{RevenueImpacting && <div className={styles.texts}>Revenue Impacting*</div>}
 						{NonRevenueImpacting && <div className={styles.texts}>Non-Revenue Impacting*</div>}
@@ -93,7 +104,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									className="primary md"
 									placeholder="Type here..."
 									value={creditNoteRemarks || CNCategoryValues?.CNValues}
-									disabled={!isEditable}
+									disabled={!isEditable || level1?.status === 'APPROVED'}
 									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 									options={
 									creditNoteRemarks
@@ -114,7 +125,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 										? creditNoteRemarks
 										: creditNoteRemarks || CNCategoryValues?.CNValues
 								}
-									disabled={!isEditable}
+									disabled={!isEditable || level1?.status === 'APPROVED'}
 									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 									options={
 									creditNoteRemarks
@@ -128,9 +139,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							)}
 						</div>
 					</div>
-			)}
-			{(CNCategoryValues?.CNValues === 'revenueOthers'
-				|| CNCategoryValues?.CNValues === 'nonRevenueOthers') && (
+				)}
+				{CN_VALUES_DATA.includes(CNCategoryValues?.CNValues) && (
 					<div>
 						<div className={styles.texts}>Remark</div>
 
@@ -145,14 +155,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						/>
 
 					</div>
-			)}
-			<div className={styles.button_container}>
-				<Button themeType="primary" onClick={() => setShowPopover(false)}>
-					Done
-				</Button>
+				)}
+				<div className={styles.button_container}>
+					<Button themeType="primary" onClick={() => setShowPopover(false)}>
+						Done
+					</Button>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	useEffect(() => {
 		setCNCategoryValues({
@@ -179,21 +190,27 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 			</div>
 			{showTdsModal && (
 				<Modal
-					size="lg"
+					size="xl"
 					show={showTdsModal}
 					onClose={() => {
 						setShowTdsModal(false);
 					}}
 				>
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
-					<Modal.Body>
+					<Modal.Body className={styles.body_section}>
 						{!isEditable && <ApproveAndReject row={row} />}
+						{
+							(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
+
 						<div className={styles.credit}>
 							<div className={styles.button_container_data}>
 								<Popover
 									placement="bottom"
 									visible={showPopover}
-									render={content()}
+									render={<ShowContent />}
 									{...rest}
 								>
 									<Button
@@ -208,6 +225,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 										</div>
 									</Button>
 								</Popover>
+								<Select
+									value={approvalType || creditNoteApprovalType}
+									disabled={level1?.status === 'APPROVED'}
+									onChange={(e) => setCreditNoteApprovalType(e)}
+									placeholder="CN Approval Type"
+									options={CREDIT_NOTE_APPROVAL_TYPE_OPTIONS}
+									size="sm"
+									style={{ paddingLeft: '12px' }}
+								/>
 							</div>
 
 							{typeof (revoked) === 'boolean' && (
@@ -366,7 +392,9 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading}
+									disabled={!(remarks.length) || loading
+										|| (isEmpty(creditNoteApprovalType)
+										&& isEmpty(approvalType))}
 									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
@@ -378,7 +406,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<Button
 									size="md"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading}
+									disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
+										&& isEmpty(approvalType))}
 									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');

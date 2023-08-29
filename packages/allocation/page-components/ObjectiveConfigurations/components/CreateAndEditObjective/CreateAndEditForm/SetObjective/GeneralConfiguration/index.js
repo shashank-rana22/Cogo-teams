@@ -2,16 +2,19 @@ import { Button, Toast, cl } from '@cogoport/components';
 import { RadioGroupController } from '@cogoport/forms';
 import { IcMEdit, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { forwardRef } from 'react';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
-import LIFECYCLE_STAGE_OPTIONS from '../../../../../configurations/lifecycle-stage-options';
+import getLifeCyleStageOptions from '../../../../../configurations/lifecycle-stage-options';
 
 import EditApplicableAgentsModal from './EditApplicableAgentsModal';
 import styles from './styles.module.css';
 import useSetGeneralConfiguration from './useSetGeneralConfigurations';
 
 const GeneralConfiguration = forwardRef((props, ref) => {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		formValues,
 		setFormValues,
@@ -30,11 +33,13 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 		controls,
 		onSave,
 		onReset,
-	} = useSetGeneralConfiguration({ formValues, setFormValues, onSaveCallback, onResetCallback, disabled });
+	} = useSetGeneralConfiguration({ formValues, setFormValues, onSaveCallback, onResetCallback, disabled, t });
+
+	const lifeCycleStageOptions = getLifeCyleStageOptions({ t });
 
 	return (
 		<div ref={ref} className={styles.container}>
-			<h3 className={styles.heading}>General Configuration</h3>
+			<h3 className={styles.heading}>{t('allocation:general_configuration')}</h3>
 
 			<form className={styles.form_container} onSubmit={handleSubmit(onSave)}>
 				<div className={styles.upper_form}>
@@ -73,14 +78,14 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 							themeType="secondary"
 							onClick={() => {
 								if (isEmpty(watchRoles)) {
-									return Toast.error('Please Select a role first');
+									return Toast.error(t('allocation:select_role_first'));
 								}
 								return setShowEditAgentsModal(true);
 							}}
 							disabled={disabled}
 						>
 							<IcMEdit style={{ marginRight: '4px' }} />
-							Edit Applicable Agents
+							{t('allocation:edit_applicable_agents')}
 						</Button>
 					</div>
 				</div>
@@ -89,7 +94,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 					<RadioGroupController
 						control={control}
 						name="lifecycle_stage"
-						options={LIFECYCLE_STAGE_OPTIONS.map((option) => ({ ...option, disabled }))}
+						options={(lifeCycleStageOptions || []).map((option) => ({ ...option, disabled }))}
 					/>
 
 					{disabled ? (
@@ -100,7 +105,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 							onClick={onReset}
 						>
 							<IcMRefresh style={{ marginRight: '4px' }} />
-							Reset
+							{t('allocation:reset_button')}
 						</Button>
 					) : (
 						<Button
@@ -108,7 +113,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 							themeType="secondary"
 							size="md"
 						>
-							Save
+							{t('allocation:save_button')}
 						</Button>
 					)}
 				</div>

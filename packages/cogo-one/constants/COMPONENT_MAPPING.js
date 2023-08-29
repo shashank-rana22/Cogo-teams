@@ -1,3 +1,4 @@
+import AddOnServices from '../page-components/CogoOneChannel/ProfileDetails/AddOnServices';
 import AgentDetails from '../page-components/CogoOneChannel/ProfileDetails/AgentDetails';
 import AgentNotes from '../page-components/CogoOneChannel/ProfileDetails/AgentNotes';
 import AgentReminder from '../page-components/CogoOneChannel/ProfileDetails/AgentReminder';
@@ -22,6 +23,7 @@ const COMPONENT_MAPPING = {
 	documents               : Documents,
 	tickets                 : Tickets,
 	flash_shipment_bookings : FlashReverts,
+	add_on_services         : AddOnServices,
 };
 
 export default COMPONENT_MAPPING;

@@ -21,7 +21,7 @@ const LOADER_COUNT = 6;
 
 export function Preview({
 	previewData = '',
-	variables = [],
+	variables = null,
 	setCustomizableData = () => {},
 	tags = [],
 	fileValue = '',
@@ -67,7 +67,7 @@ export function Preview({
 					shipment_id      : serial_id,
 				};
 
-				const variabledData = variables?.filter(
+				const variabledData = (variables || [])?.filter(
 					(itm) => !['origin_port', 'destination_port', 'shipment_id'].includes(itm),
 				);
 
