@@ -1,4 +1,4 @@
-export const tabs = (t) => [
+export const tabs = (t = () => {}) => [
 	{
 		key   : 'airline',
 		label : t('operators:header_tab_option_airline'),

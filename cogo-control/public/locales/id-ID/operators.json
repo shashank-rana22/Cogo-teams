@@ -11,9 +11,8 @@
     "apply_button": "Menerapkan",
     "cancel_button": "Membatalkan",
     "logo_alt": "logo",
-    "handle_operators_action_successful": "Berhasil",
-    "handle_operators_action_added": "Ditambahkan",
-    "handle_operators_action_updated": "Diperbarui",
+    "handle_operators_action_added": "Operator Berhasil Ditambahkan",
+    "handle_operators_action_updated": "Operator Berhasil Diperbarui",
     "card_list_no_data": "Tidak ada lagi data untuk ditampilkan",
     "card_list_empty_state_content_try_another_way": "Kami mohon maaf atas apa yang Anda cari. Silakan coba cara lain",
     "card_list_empty_state_content_sorry": "Maaf tidak",
@@ -64,5 +63,6 @@
     "error_message_cannot_be_greater_than": "tidak bisa lebih besar dari",
     "error_message_should_be": "seharusnya",
     "error_message_character_long": "karakter yang panjang",
-    "error_message_should_be_less_than": "harus kurang dari"
+    "error_message_should_be_less_than": "harus kurang dari",
+    "operators_default_value":"operators"
 }

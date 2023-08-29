@@ -18,7 +18,7 @@ function Item({
 	rules = {},
 	...props
 }) {
-	const { t } = useTranslation('operators');
+	const { t } = useTranslation(['operators']);
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,

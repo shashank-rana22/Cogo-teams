@@ -26,7 +26,7 @@ function CardList({
 	setFinalList = () => {},
 	functions = {},
 }) {
-	const { t } = useTranslation('operators');
+	const { t } = useTranslation(['operators']);
 
 	const { list = [], total_count:totalCount } = data || {};
 

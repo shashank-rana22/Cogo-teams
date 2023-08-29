@@ -1,4 +1,4 @@
-export const operators = (t) => ({
+export const operators = (t = () => {}) => ({
 	common_first: [
 		{
 			key   : 'logo',

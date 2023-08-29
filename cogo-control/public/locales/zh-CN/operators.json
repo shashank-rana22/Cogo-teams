@@ -11,9 +11,8 @@
     "apply_button": "申请",
     "cancel_button": "取消",
     "logo_alt": "标识",
-    "handle_operators_action_successful": "成功地",
-    "handle_operators_action_added": "添加",
-    "handle_operators_action_updated": "更新",
+    "handle_operators_action_added": "操作员添加成功",
+    "handle_operators_action_updated": "运营商更新成功",
     "card_list_no_data": "没有更多数据可显示",
     "card_list_empty_state_content_try_another_way": "我们对您所寻找的内容感到抱歉。请尝试其他方式",
     "card_list_empty_state_content_sorry": "抱歉，没有",
@@ -64,5 +63,6 @@
     "error_message_cannot_be_greater_than": "不能大于",
     "error_message_should_be": "应该",
     "error_message_character_long": "长字符",
-    "error_message_should_be_less_than": "应该小于"
+    "error_message_should_be_less_than": "应该小于",
+    "operators_default_value":"运营商"
 }

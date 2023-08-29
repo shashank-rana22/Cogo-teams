@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
-const fields = (t) => [
+const fields = (t = () => {}) => [
 	{
 		name        : 'short_name',
 		type        : 'text',

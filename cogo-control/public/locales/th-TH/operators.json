@@ -11,9 +11,8 @@
     "apply_button": "นำมาใช้",
     "cancel_button": "ยกเลิก",
     "logo_alt": "โลโก้",
-    "handle_operators_action_successful": "สำเร็จ",
-    "handle_operators_action_added": "เพิ่ม",
-    "handle_operators_action_updated": "อัปเดต",
+    "handle_operators_action_added": "เพิ่มโอเปอเรเตอร์เรียบร้อยแล้ว",
+    "handle_operators_action_updated": "โอเปอเรเตอร์อัปเดตเรียบร้อยแล้ว",
     "card_list_no_data": "ไม่มีข้อมูลที่จะแสดงอีกต่อไป",
     "card_list_empty_state_content_try_another_way": "ขออภัยในสิ่งที่คุณกำลังมองหา โปรดลองวิธีอื่น",
     "card_list_empty_state_content_sorry": "ขออภัย! ไม่",
@@ -64,5 +63,6 @@
     "error_message_cannot_be_greater_than": "ไม่สามารถมากกว่า",
     "error_message_should_be": "ควรจะเป็น",
     "error_message_character_long": "ตัวอักษรยาว",
-    "error_message_should_be_less_than": "ควรจะน้อยกว่า"
+    "error_message_should_be_less_than": "ควรจะน้อยกว่า",
+    "operators_default_value":"ผู้ประกอบการ"
 }

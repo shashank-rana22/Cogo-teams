@@ -5,6 +5,11 @@ import { useTranslation } from 'next-i18next';
 
 import CONSTANTS from '../constants/constants';
 
+const toastMapping = (t = () => {}) => ({
+	added   : t('operators:handle_operators_action_added'),
+	updated : t('operators:handle_operators_action_updated'),
+});
+
 const useHandleOperators = ({
 	item = {},
 	edit = false,
@@ -15,7 +20,7 @@ const useHandleOperators = ({
 	setFinalList = () => {},
 	page = CONSTANTS.START_PAGE,
 }) => {
-	const { t } = useTranslation('operators');
+	const { t } = useTranslation(['operators']);
 	const api = edit ? '/update_operator' : '/create_operators';
 
 	const [{ loading }, trigger] = useRequest({
@@ -41,9 +46,7 @@ const useHandleOperators = ({
 		const data = payload(value);
 		try {
 			await trigger({ data });
-			Toast.success(`${t('operators:header_operators_title')} ${edit
-				? t('operators:handle_operators_action_updated')
-				: t('operators:handle_operators_action_added')} ${t('operators:handle_operators_action_successful')}`);
+			Toast.success(toastMapping(t)[edit ? 'updated' : 'added']);
 			setFinalList([]);
 			setShow(false);
 			setEdit(false);

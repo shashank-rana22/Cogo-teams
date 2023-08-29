@@ -3,8 +3,8 @@ import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function EmptyState({ heading = 'operators' }) {
-	const { t } = useTranslation('operators');
+function EmptyState({ heading = '' }) {
+	const { t } = useTranslation(['operators']);
 
 	return (
 		<div className={styles.container}>
@@ -14,7 +14,7 @@ function EmptyState({ heading = 'operators' }) {
 				</div>
 				<div className={styles.heading}>
 					{`${t('operators:card_list_empty_state_content_sorry')} 
-					${heading} 
+					${heading || t('operators:operators_default_value')} 
 					${t('operators:card_list_empty_state_content_nothing_found')}`}
 				</div>
 				<div className={styles.content}>

@@ -11,9 +11,8 @@
     "apply_button": "Apply",
     "cancel_button": "Cancel",
     "logo_alt": "logo",
-    "handle_operators_action_successful": "Successfully",
-    "handle_operators_action_added": "Added",
-    "handle_operators_action_updated": "Updated",
+    "handle_operators_action_added": "Operator Added Successfully",
+    "handle_operators_action_updated": "Operator Updated Successfully",
     "card_list_no_data": "No more data to show",
     "card_list_empty_state_content_try_another_way": "We are sorry what you were looking for. Please try another way",
     "card_list_empty_state_content_sorry": "Sorry! no",
@@ -64,5 +63,6 @@
     "error_message_cannot_be_greater_than": "cannot be greater than",
     "error_message_should_be": "should be",
     "error_message_character_long": "character(s) long",
-    "error_message_should_be_less_than": "should be less than"
+    "error_message_should_be_less_than": "should be less than",
+    "operators_default_value":"operators"
 }
