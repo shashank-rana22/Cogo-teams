@@ -35,11 +35,12 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 	isAuthorized = false,
 	disableAction = false,
+	invoiceData = {},
 }) {
-	const [show, setShow] = useState(false);
-	const [showModal, setShowModal] = useState();
-
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const [show, setShow] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const handleSetter = (selected_modal) => {
 		setShowModal(selected_modal);
@@ -53,8 +54,9 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-	|| isAuthorized;
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
+		&& !invoice?.is_igst && !!invoice?.edit_invoice
+	) || isAuthorized;
 
 	const modalComponents = {
 		changeCurrency: <ChangeCurrency
@@ -86,6 +88,7 @@ function Actions({
 			handleRefetch={handleRefetch}
 			invoice={invoice}
 			shipmentData={shipment_data}
+			invoiceData={invoiceData}
 		/>,
 	};
 

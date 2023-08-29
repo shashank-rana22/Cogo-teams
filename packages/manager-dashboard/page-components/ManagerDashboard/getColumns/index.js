@@ -10,6 +10,7 @@ const getColumns = ({
 	setOpenKraModal,
 	setSortData,
 	sortData,
+	t = () => {},
 }) => {
 	const handleEmployeeId = (item) => {
 		setEmployeeId(item?.employee_id);
@@ -18,33 +19,35 @@ const getColumns = ({
 
 	const { sortBy, sortOrder } = sortData || {};
 
-	const renderSortingArrows = (key) => (
-		<div className={styles.icon_flex}>
-			<IcMArrowRotateUp
-				className={sortBy === key && sortOrder === 'asc' && styles.active}
-				cursor="pointer"
-				onClick={() => setSortData({
-					...sortData,
-					sortOrder : 'asc',
-					sortBy    : key,
-				})}
-			/>
-			<IcMArrowRotateDown
-				className={sortBy === key && sortOrder === 'desc' && styles.active}
-				cursor="pointer"
-				onClick={() => setSortData({
-					...sortData,
-					sortOrder : 'desc',
-					sortBy    : key,
-				})}
-			/>
-		</div>
-	);
+	function RenderSortingArrows({ key }) {
+		return (
+			<div className={styles.icon_flex}>
+				<IcMArrowRotateUp
+					className={sortBy === key && sortOrder === 'asc' && styles.active}
+					cursor="pointer"
+					onClick={() => setSortData({
+						...sortData,
+						sortOrder : 'asc',
+						sortBy    : key,
+					})}
+				/>
+				<IcMArrowRotateDown
+					className={sortBy === key && sortOrder === 'desc' && styles.active}
+					cursor="pointer"
+					onClick={() => setSortData({
+						...sortData,
+						sortOrder : 'desc',
+						sortBy    : key,
+					})}
+				/>
+			</div>
+		);
+	}
 
 	const getTableColumns = () => {
 		const columns = [
 			{
-				Header   : 'Name',
+				Header   : t('managerDashboard:name_column'),
 				accessor : (item) => (
 					<div
 						className={styles.employee_name}
@@ -58,8 +61,8 @@ const getColumns = ({
 			{
 				Header: (
 					<div className={styles.header_text}>
-						Calculated Rating
-						{renderSortingArrows('system_rating')}
+						{t('managerDashboard:calculated_rating')}
+						<RenderSortingArrows key="system_rating" />
 					</div>
 				),
 				accessor: (item) => (
@@ -70,7 +73,7 @@ const getColumns = ({
 				id: 'system_rating',
 			},
 			{
-				Header   : <div className={styles.table_text}>Revised Rating</div>,
+				Header   : <div className={styles.table_text}>{t('managerDashboard:revised_rating')}</div>,
 				accessor : (item) => (
 					<div className={styles.table_text}>
 						{startCase(item?.revised_rating) || '-'}
@@ -81,8 +84,8 @@ const getColumns = ({
 			{
 				Header: (
 					<div className={styles.header_text}>
-						Final Rating
-						{renderSortingArrows('final_rating')}
+						{t('managerDashboard:final_rating')}
+						<RenderSortingArrows key="final_rating" />
 					</div>
 				),
 				accessor: (item) => (
@@ -93,7 +96,7 @@ const getColumns = ({
 				id: 'final_rating',
 			},
 			{
-				Header   : <div className={styles.table_text}>Average Rating</div>,
+				Header   : <div className={styles.table_text}>{t('managerDashboard:average_rating')}</div>,
 				accessor : (item) => (
 					<div className={styles.table_text}>
 						{startCase(item?.average_rating) || '-'}
@@ -104,8 +107,8 @@ const getColumns = ({
 			{
 				Header: (
 					<div className={styles.header_text}>
-						Z-score
-						{renderSortingArrows('z_score')}
+						{t('managerDashboard:z_score')}
+						<RenderSortingArrows key="z_score" />
 					</div>
 				),
 				accessor: (item) => (
@@ -133,7 +136,7 @@ const getColumns = ({
 
 		const surpriseGift = [
 			{
-				Header   : <div className={styles.table_text}>Surprise Gift</div>,
+				Header   : <div className={styles.table_text}>{t('managerDashboard:surprise_gift')}</div>,
 				accessor : (item) => (
 					<div className={styles.rating_flag}>
 						{startCase(item?.surprise_gift) || '-'}

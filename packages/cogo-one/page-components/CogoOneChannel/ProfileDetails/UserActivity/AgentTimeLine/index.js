@@ -19,6 +19,7 @@ function AgentTimeLine({ timeLineList = [] }) {
 					channel = '',
 					status = '',
 					user_data = {},
+					reason = '',
 				} = item || {};
 				const { name : presentAgent } = agent_data || {};
 				const { name : previousAgent } = performed_by_data || {};
@@ -50,6 +51,7 @@ function AgentTimeLine({ timeLineList = [] }) {
 										previous        : channel === 'voice_call' ? voiceCallUserName : previousAgent,
 										startAt         : conversation_started_at,
 										voiceCallStatus : status,
+										reason,
 									})}
 								</div>
 								<div className={styles.user_avatar}>

@@ -1,17 +1,20 @@
 import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
 function CrmTable({ columns, data, loading }) {
+	const { t } = useTranslation(['allocation']);
+
 	if (isEmpty(data) && !loading) {
 		return (
 			<EmptyState
 				height={280}
 				width={440}
-				emptyText="No records found"
+				emptyText={t('allocation:no_records_found')}
 				textSize="20px"
 				flexDirection="column"
 			/>

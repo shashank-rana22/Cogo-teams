@@ -1,14 +1,19 @@
 import { Button, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import Filters from '../../../../../../common/Filters';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
-const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
+function conditionalWrapper({ condition, wrapper, children }) {
+	return condition ? wrapper(children) : children;
+}
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		setParams,
 	} = props;
@@ -21,7 +26,7 @@ function Header(props) {
 		handleReset,
 		applyFilters,
 		filtersApplied,
-	} = useFilterContent({ setParams });
+	} = useFilterContent({ setParams, t });
 
 	return (
 		<div className={styles.container}>
@@ -39,18 +44,17 @@ function Header(props) {
 					themeType="secondary"
 					onClick={() => setShowFilters(!showFilters)}
 				>
-					Filter
+					{t('allocation:filter_label')}
 
-					<ConditionalWrapper
-						condition={filtersApplied}
-						wrapper={(children) => (
+					{conditionalWrapper({
+						condition : filtersApplied,
+						wrapper   : (children) => (
 							<Badge color="red" size="md" text="">
 								{children}
 							</Badge>
-						)}
-					>
-						<IcMFilter style={{ marginLeft: '4px' }} />
-					</ConditionalWrapper>
+						),
+						children: <IcMFilter style={{ marginLeft: '4px' }} />,
+					})}
 				</Button>
 			</Filters>
 		</div>

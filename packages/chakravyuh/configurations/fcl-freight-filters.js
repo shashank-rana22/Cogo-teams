@@ -14,7 +14,7 @@ const controls = [
 		label   : 'Service Type',
 	},
 	{
-		name      : 'mode',
+		name      : 'parent_mode',
 		type      : 'pills',
 		label     : 'Rate Source',
 		options   : MODE_OPTIONS,

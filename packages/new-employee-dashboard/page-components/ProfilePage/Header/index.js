@@ -20,10 +20,15 @@ function Header({
 	offerLetterApiLoading,
 }) {
 	const router = useRouter();
-	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
+	const { id, name, employee_code, designation, passport_size_photo_url, employee_status } = detail || {};
 	const SOURCE = 'reject';
 
-	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails, SOURCE });
+	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({
+		id,
+		employee_status,
+		getEmployeeDetails,
+		SOURCE,
+	});
 
 	const { personal_information, identification_documents, address_details } = personalDetails || {};
 
@@ -89,7 +94,7 @@ function Header({
 			</div>
 
 			<div className={styles.button_container}>
-				{(status === 'active' && isEmpty(offer_letter_active)) ? (
+				{(employee_status === 'offered' && isEmpty(offer_letter_active)) ? (
 					<Button
 						onClick={() => setShowCtcBreakupModal(true)}
 						type="button"
@@ -108,7 +113,7 @@ function Header({
 					onClick={() => updateEmployeeStatus()}
 					loading={isLoading || btnloading || offerLetterApiLoading}
 				>
-					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
+					{employee_status === 'offered' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>
 
 			</div>

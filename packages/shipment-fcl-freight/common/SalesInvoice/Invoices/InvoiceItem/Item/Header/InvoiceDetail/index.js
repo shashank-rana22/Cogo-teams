@@ -33,7 +33,7 @@ function InvoiceDetail({
 	} = invoice;
 
 	const bfInvoice = invoicesList?.filter(
-		(item) => item?.proformaNumber === live_invoice_number,
+		(item) => [item?.proformaNumber, item?.invoiceNumber].includes(live_invoice_number),
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleDownload = (invoiceLink) => {

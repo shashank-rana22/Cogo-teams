@@ -74,6 +74,7 @@ const useCreateVesselSchedules = ({
 					haz_bk_cutoff             : formValues?.haz_bk_cutoff || undefined,
 					origin_terminal_name      : formValues?.origin_terminal_name || undefined,
 					destination_terminal_name : formValues?.destination_terminal_name || undefined,
+					schedule_type             : formValues?.schedule_type || 'direct',
 				},
 			};
 			await trigger({ data: formattedFormValues });

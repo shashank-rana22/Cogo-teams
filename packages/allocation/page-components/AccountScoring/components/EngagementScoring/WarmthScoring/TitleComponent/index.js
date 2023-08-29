@@ -1,17 +1,23 @@
 import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useRemoveEngagementScoringConfiguration from '../../../../hooks/useRemoveEngagementScoringConfiguration';
 
 import styles from './styles.module.css';
 
 function TitleComponent({
-	item, editMode = '', activeCollapse = '', refetch,
+	item,
+	editMode = '',
+	activeCollapse = '',
+	refetch,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const { engagement_type } = item;
 
-	const { onDelete } = useRemoveEngagementScoringConfiguration({ refetch });
+	const { onDelete } = useRemoveEngagementScoringConfiguration({ refetch, t });
 
 	return (
 		<div className={styles.title_container}>
@@ -31,7 +37,7 @@ function TitleComponent({
 							}}
 						>
 							<IcMDelete style={{ marginRight: '8px' }} />
-							Delete
+							{t('allocation:delete_button')}
 						</Button>
 					</div>
 

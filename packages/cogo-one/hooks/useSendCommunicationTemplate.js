@@ -44,7 +44,7 @@ const getPayload = ({
 		template_name,
 		recipient      : isOtherChannels ? otherChannelRecipient : mobile_no,
 		source         : 'CogoOne:AdminPlatform',
-		variables      : GET_VARIABLE[type],
+		variables      : { ...(GET_VARIABLE[type] || {}), prev_tag: 'talk_to_agent' },
 		sender_user_id : id,
 		...(restArgs || {}),
 	};

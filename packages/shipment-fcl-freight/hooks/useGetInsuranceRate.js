@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} } = {}) => {
+const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {}, setPremiumData = () => {} } = {}) => {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 	const {
@@ -16,10 +16,10 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} } = {}) =>
 	} = formValues || insuranceDetails;
 
 	const [{ loading, data }, trigger] = useRequestBf({
-		auth   : 'get_saas_insurance_rate',
-		url    : 'saas/insurance/rate',
-		method : 'GET',
-		params : {
+		authKey : 'get_saas_insurance_rate',
+		url     : 'saas/insurance/rate',
+		method  : 'GET',
+		params  : {
 			performedBy        : userId,
 			policyType         : insuranceDetails?.policyType,
 			descriptionOfCargo : cargoDescription,
@@ -32,10 +32,13 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} } = {}) =>
 
 	const premiumRate = useCallback(async (payload) => {
 		try {
-			await trigger({ ...(payload && { params: { ...payload } }) });
+			const res = await trigger({ ...(payload && { params: { ...payload } }) });
+			setPremiumData(res?.data);
 		} catch (err) {
+			setPremiumData({});
 			toastApiError(err);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trigger]);
 
 	useEffect(() => {

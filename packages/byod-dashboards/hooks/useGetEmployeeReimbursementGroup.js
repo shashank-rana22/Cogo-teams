@@ -9,7 +9,7 @@ const useGetEmployeeReimbursementGroup = (groupId = '') => {
 		query: general?.query || {},
 	}));
 
-	const [{ data, btnloading }, trigger] = useHarbourRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/get_employee_device_reimbursement_group',
 		method : 'GET',
 	}, { manual: true });
@@ -32,7 +32,7 @@ const useGetEmployeeReimbursementGroup = (groupId = '') => {
 	}, [getEmployeeReimbursementGroup]);
 
 	return {
-		btnloading,
+		loading,
 		data,
 		getEmployeeReimbursementGroup,
 	};
