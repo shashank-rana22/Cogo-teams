@@ -16,7 +16,7 @@ const REQUEST_HOOK_MAPPING = {
 	cx_automation    : useCxAutomationRequest,
 };
 
-function getOptions(data = []) {
+function getOptions(data = {}) {
 	if (Array.isArray(data)) {
 		return data;
 	}
