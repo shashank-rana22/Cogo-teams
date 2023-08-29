@@ -1,67 +1,69 @@
+import { CONTAINER_SIZE_MAPPING } from './constant';
 import styles from './styles.module.css';
 
 function ContainerDetails({ selectedCard = {} }) {
 	const ZEROVALUE = 0;
-	const CONTAINER_SIZE_MAPPING = {
-		20     : '20 Ft',
-		40     : '40Ft',
-		'40HC' : '40 Ft HC',
-		'45HC' : '45 Ft HC',
-	};
 
-	const serviceTypeMapping =	selectedCard?.search_params?.lcl_freight_services_attributes?.[ZEROVALUE]
-		|| selectedCard?.search_params?.fcl_freight_services_attributes?.[ZEROVALUE]
-		|| selectedCard?.search_params?.air_freight_services_attributes?.[ZEROVALUE];
+	const { search_params = {}, search_type: searchType = '' } = selectedCard || {};
 
-	const fcl_type = selectedCard?.search_params?.search_type;
+	const {
+		lcl_freight_services_attributes = {},
+		fcl_freight_services_attributes = {},
+		air_freight_services_attributes = {},
+		search_type = '',
+	} = search_params || {};
+
+	const serviceTypeMapping = lcl_freight_services_attributes?.[ZEROVALUE]
+	|| fcl_freight_services_attributes?.[ZEROVALUE] || air_freight_services_attributes?.[ZEROVALUE];
+
+	const {
+		containers_count, container_size, weight, volume, packages_count,
+		commodity, inco_term, container_type, payment_type,
+	} = serviceTypeMapping || {};
 
 	return (
 		<div>
 			<div className={styles.shipment_header}>
-				{selectedCard?.search_type === 'air_freight' ? 'Airlines Details' : 'Shipment Details'}
+				{searchType === 'air_freight' ? 'Airlines Details' : 'Shipment Details'}
 			</div>
 
 			<div className={styles.shipment_specification}>
-				{fcl_type === 'fcl_freight' && (
+				{search_type === 'fcl_freight' && (
 					<>
-						<span className={styles.tag}>{CONTAINER_SIZE_MAPPING[serviceTypeMapping?.container_size]}</span>
+						<span className={styles.tag}>{CONTAINER_SIZE_MAPPING[container_size]}</span>
 						<span className={styles.tag}>
-							{`${serviceTypeMapping?.containers_count || '-'} Container`}
+							{`${containers_count || '-'} Container`}
 						</span>
 					</>
 				)}
-				{fcl_type !== 'fcl_freight' && (
+				{search_type !== 'fcl_freight' && (
 					<>
 						<span className={styles.tag}>
-							{serviceTypeMapping?.weight
-								? `${serviceTypeMapping?.weight || '-'} kg`
-								: ''}
+							{weight ? `${weight || '-'} kg` : ''}
 						</span>
 						<span className={styles.tag}>
-							{serviceTypeMapping?.volume
-								? `${serviceTypeMapping?.volume || '-'} cbm`
-								: ''}
+							{volume ? `${volume || '-'} cbm` : ''}
 						</span>
-						{serviceTypeMapping?.packages_count
+						{packages_count
 							&& (
 								<span className={styles.tag}>
-									{serviceTypeMapping?.packages_count || '-'}
+									{packages_count || '-'}
 								&nbsp;
 									{serviceTypeMapping?.packages?.[ZEROVALUE]?.packing_type || 'packages' }
 								</span>
 							)}
 					</>
 				)}
-				<span className={styles.tag}>{serviceTypeMapping?.commodity?.toUpperCase()}</span>
-				{serviceTypeMapping?.inco_term && (
+				<span className={styles.tag}>{commodity?.toUpperCase()}</span>
+				{inco_term && (
 					<span className={styles.tag}>
-						{`Inco - ${serviceTypeMapping?.inco_term?.toUpperCase()}`}
+						{`Inco - ${inco_term?.toUpperCase()}`}
 					</span>
 				)}
-				{serviceTypeMapping?.container_type
-					&& <span className={styles.tag}>{serviceTypeMapping?.container_type?.toUpperCase()}</span>}
-				{serviceTypeMapping?.payment_type
-							&& <span className={styles.tag}>{serviceTypeMapping?.payment_type}</span>}
+				{container_type
+					&& <span className={styles.tag}>{container_type?.toUpperCase()}</span>}
+				{payment_type
+							&& <span className={styles.tag}>{payment_type}</span>}
 			</div>
 		</div>
 	);
