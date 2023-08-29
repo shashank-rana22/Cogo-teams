@@ -1775,7 +1775,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'sync_shipment_invoices',
+		api          : 'send_invoice_combination_to_finance',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
