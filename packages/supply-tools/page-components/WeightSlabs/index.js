@@ -1,5 +1,11 @@
+import React from 'react';
+
 function WeightSlabs() {
-	return <div>WeightSlabs</div>;
+	return (
+		<div>
+			<h1>WeightSlabs</h1>
+		</div>
+	);
 }
 
 export default WeightSlabs;
