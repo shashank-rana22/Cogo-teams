@@ -43,10 +43,9 @@ function ChangePassword({
 			<div className={styles.checkbox}>
 				<CheckboxController
 					name="deactivate_sessions"
-					placeholder={t('profile:controls_password_placeholder')}
 					control={control}
 				/>
-				<label>Do you wanna log out of all accounts?</label>
+				<label>{t('profile:account_logout_message')}</label>
 			</div>
 
 		</div>
