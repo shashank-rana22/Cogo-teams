@@ -84,16 +84,14 @@ const data = {
 	],
 };
 
-function LeaveRequest() {
+function LeaveRequest({ setShowInbox }) {
 	const { isManager, list } = data;
 	const [activeTab, setActiveTab] = useState('my_requests');
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.left_header}>
-					<div>
-						<IcMArrowLeft width={20} height={20} />
-					</div>
+					<IcMArrowLeft width={20} height={20} onClick={() => setShowInbox(false)} />
 					<div className={styles.card_content}>
 						<span className={styles.above_text}>INBOX</span>
 						<span className={styles.below_text}>
