@@ -12,7 +12,8 @@
 }
 
 .topcard {
+	padding: 8px 0;
 	margin-top: 24px;
-	background-color: #f0f8ff;
+	background-color: #f3fafa;
 	border: 1px solid #acdadf;
 }

@@ -1,8 +1,7 @@
-.left_card {
+.card {
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	width: 75%;
 	padding-bottom: 8px;
 	padding-left: 20px;
 	background-color: #f9fef8;
@@ -10,17 +9,12 @@
 	box-shadow: 0 0 10px rgb(0 0 0 / 20%);
 }
 
-.right_card {
-	box-sizing: border-box;
-	display: flex;
-	align-items: center;
+.widthright {
 	width: 25%;
-	padding-bottom: 8px;
-	padding-left: 20px;
-	margin-left: 16px;
-	background-color: rgb(254 249 254);
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+}
+
+.widthleft {
+	width: 75%;
 }
 
 .flex {

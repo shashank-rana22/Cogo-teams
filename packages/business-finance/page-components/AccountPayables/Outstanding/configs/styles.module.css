@@ -21,11 +21,6 @@
 	cursor: pointer;
 }
 
-.center {
-	display: flex;
-	justify-content: center;
-}
-
 .width {
 	width: 14px;
 }
@@ -86,11 +81,6 @@
 	}
 }
 
-.action_div {
-	display: flex;
-	align-items: center;
-}
-
 .icon_style {
 	width: 16px;
 	height: 16px;
@@ -117,25 +107,4 @@
 .call_btn {
 	color: var(--color-accent-orange-2) !important;
 	background-color: #fff !important;
-}
-
-.title {
-	font-size: 12px;
-	font-weight: 500;
-	color: #333;
-}
-
-.feedback {
-	display: flex;
-	flex-direction: column;
-}
-
-.nocommitment {
-	width: fit-content;
-	padding: 3px 8px;
-	font-size: 10px;
-	font-weight: 400;
-	color: #393f70;
-	background: #f7cdcd;
-	border-radius: 4px;
 }

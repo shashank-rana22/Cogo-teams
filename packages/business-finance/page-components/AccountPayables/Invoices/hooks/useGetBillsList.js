@@ -17,7 +17,7 @@ function formatToTimeStamp(dateString) {
 	return formatedDate;
 }
 
-function useGetBillsList({ organizationId }) {
+function useGetBillsList({ organizationId = '' }) {
 	const [billsFilters, setBillsFilters] = useState({ invoiceView: 'coe_accepted', pageSize: 10, pageIndex: 1 });
 	const [orderBy, setOrderBy] = useState({});
 

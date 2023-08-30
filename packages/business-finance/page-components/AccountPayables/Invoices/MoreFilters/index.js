@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_LENGTH }) {
+function FilterModal({ filters = {}, setFilters = () => { }, filterlen = FILTER_LENGTH }) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalFilters, setModalFilters] = useState({});
 	const { currency = '' } = modalFilters || {};
@@ -112,7 +112,7 @@ function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_L
 				</span>
 				{Object.keys(filters)?.filter((key) => ((key !== 'category')
 					&& (!isEmpty(filters?.[key])))).length > filterlen
-					&& <IcCRedCircle height={8} width={8} />}
+					? <IcCRedCircle height={8} width={8} /> : null}
 			</div>
 		</div>
 	);

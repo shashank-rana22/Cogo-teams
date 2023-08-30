@@ -11,6 +11,11 @@ import { SORTBY_OPTION } from '../constants';
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
 
+const COLOR_MAP = {
+	Asc  : '#303B67',
+	Desc : '#BDBDBD',
+};
+
 function Filters({
 	handleChange = () => {},
 	handleInputReset = () => {},
@@ -25,102 +30,96 @@ function Filters({
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 
-	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
-
-	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
-
 	const { search = '' } = params || {};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.filter_container}>
-				<div className={styles.upper_sort_div}>
-					<div className={styles.sort_container}>
-						<Popover
-							placement="bottom"
-							render={(
-								<div className={styles.styled_row}>
-									{SORTBY_OPTION.map((item) => (
+		<div className={styles.filter_container}>
+			<div className={styles.upper_sort_div}>
+				<div className={styles.sort_container}>
+					<Popover
+						placement="bottom"
+						render={(
+							<div className={styles.styled_row}>
+								{SORTBY_OPTION.map((item) => (
+									<div
+										key={item.value}
+										className={styles.styled_col}
+										onClick={() => {
+											setOrderBy({
+												key   : item.value,
+												order : 'Desc',
+												label : item.label,
+											});
+											setShowSortPopover(
+												!showSortPopover,
+											);
+											setParams({
+												...params,
+												page: 1,
+											});
+										}}
+										role="presentation"
+									>
 										<div
-											key={item.value}
-											className={styles.styled_col}
-											onClick={() => {
-												setOrderBy({
-													key   : item.value,
-													order : 'Desc',
-													label : item.label,
-												});
-												setShowSortPopover(
-													!showSortPopover,
-												);
-												setParams({
-													...params,
-													page: 1,
-												});
-											}}
-											role="presentation"
+											className={styles.tile_heading}
 										>
-											<div
-												className={styles.tile_heading}
-											>
-												{item.label}
-											</div>
+											{item.label}
 										</div>
-									))}
-								</div>
-							)}
-						>
-							<div
-								style={{ display: 'flex', cursor: 'pointer' }}
-								onClick={() => setShowSortPopover(!showSortPopover)}
-								role="presentation"
-							>
-								Sort By:
-								{' '}
-								<div className={styles.filter_value}>
-									{orderBy.label}
-									{' '}
-									<div className={styles.sort_icon_style}>
-										{showSortPopover ? (
-											<IcMArrowRotateUp />
-										) : (
-											<IcMArrowRotateDown />
-										)}
 									</div>
+								))}
+							</div>
+						)}
+					>
+						<div
+							style={{ display: 'flex', cursor: 'pointer' }}
+							onClick={() => setShowSortPopover(!showSortPopover)}
+							role="presentation"
+						>
+							Sort By:
+							{' '}
+							<div className={styles.filter_value}>
+								{orderBy.label}
+								{' '}
+								<div className={styles.sort_icon_style}>
+									{showSortPopover ? (
+										<IcMArrowRotateUp />
+									) : (
+										<IcMArrowRotateDown />
+									)}
 								</div>
 							</div>
-						</Popover>
-					</div>
-					<div
-						role="presentation"
-						className={styles.icon_div}
-						onClick={() => {
-							setOrderBy((prev) => ({
-								key   : prev.key,
-								order : prev.order === 'Asc' ? 'Desc' : 'Asc',
-								label : prev.label,
-							}));
-							setParams({ ...params, page: 1 });
-						}}
-					>
-						<IcMArrowRotateUp style={{ color: sortStyleAsc }} />
-						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
-					</div>
-
-					<FilterpopOver
-						filters={formFilters}
-						setFilters={setFormFilters}
-						clearFilter={clearFilter}
-						refetch={refetch}
-					/>
+						</div>
+					</Popover>
 				</div>
-				<div className={styles.flex_wrap}>
-					<div className={styles.flex_wrap}>
-						<Input
-							placeholder="Search"
-							value={search}
-							onChange={(e) => handleChange(e)}
-							suffix={
+				<div
+					role="presentation"
+					className={styles.icon_div}
+					onClick={() => {
+						setOrderBy((prev) => ({
+							key   : prev.key,
+							order : prev.order === 'Asc' ? 'Desc' : 'Asc',
+							label : prev.label,
+						}));
+						setParams({ ...params, page: 1 });
+					}}
+				>
+					<IcMArrowRotateUp style={{ color: COLOR_MAP[orderBy?.order] }} />
+					<IcMArrowRotateDown style={{ color: COLOR_MAP[orderBy?.order] }} />
+				</div>
+
+				<FilterpopOver
+					filters={formFilters}
+					setFilters={setFormFilters}
+					clearFilter={clearFilter}
+					refetch={refetch}
+				/>
+			</div>
+			<div className={styles.flex_wrap}>
+				<Input
+					placeholder="Search"
+					value={search}
+					onChange={(e) => handleChange(e)}
+					suffix={
 								search ? (
 									<IcMCross
 										onClick={handleInputReset}
@@ -129,11 +128,9 @@ function Filters({
 									/>
 								) : null
 							}
-							prefix={null}
-							className={styles.styled_input}
-						/>
-					</div>
-				</div>
+					prefix={null}
+					className={styles.styled_input}
+				/>
 			</div>
 		</div>
 	);

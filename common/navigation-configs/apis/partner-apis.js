@@ -7781,6 +7781,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_outstanding_by_supplier_v2',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_outstanding_entity_level_stats',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',

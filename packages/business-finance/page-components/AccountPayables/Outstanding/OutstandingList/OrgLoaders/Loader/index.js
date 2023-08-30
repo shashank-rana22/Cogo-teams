@@ -14,7 +14,6 @@ function Loader() {
 	return (
 		<div className={styles.flex_column}>
 			<Row />
-			<Row />
 		</div>
 	);
 }

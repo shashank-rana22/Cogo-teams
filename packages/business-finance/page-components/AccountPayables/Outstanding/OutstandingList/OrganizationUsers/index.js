@@ -11,11 +11,11 @@ function Users({
 	organizationId = '',
 	orgData = {},
 }) {
-	const { organizationData, param, setParam, loading } = useGetOrganizationUsers({
+	const { organizationData = {}, param = {}, setParam = () => {}, loading = false } = useGetOrganizationUsers({
 		organizationId,
 	});
 
-	const { list = [], page, totalRecords } = organizationData || {};
+	const { list = [], page = 1, totalRecords = 10 } = organizationData || {};
 
 	return (
 		<div>

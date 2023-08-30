@@ -79,51 +79,15 @@
 	flex-direction: column;
 }
 
-.tag_text {
-	font-size: 10px;
-	font-weight: 600;
-	color: #333;
-}
-
-.tag_text_left {
-	margin-left: 8px;
-	font-size: 10px;
-	font-weight: 600;
-	color: #333;
-}
-
 .category_container {
 	display: flex;
 	padding: 6px;
-}
-
-.sub_category_container {
-	display: flex;
-	align-items: center;
-	padding: 6px;
-	margin-left: 12px;
-	background-color: rgb(242 242 242);
-	border-radius: 4px;
 }
 
 .value {
 	margin-left: 4px;
 	font-size: 10px;
 	font-weight: 500;
-}
-
-.legal_business_name {
-	font-size: 10px;
-	font-weight: 500;
-	line-height: 11px;
-	color: #616161;
-}
-
-.popover_wrapper {
-	display: flex;
-	justify-content: flex-end;
-	width: 75%;
-	margin-top: -22px;
 }
 
 .org_list {
@@ -139,33 +103,11 @@
 }
 
 .updated_at {
-	display: flex;
-	padding: 4px 8px;
-	margin-left: 4px;
-	font-size: 10px;
-	font-weight: 500;
 	background-color: #cdf7d4;
-	border-radius: 4px;
-}
-
-.download_icon_div {
-	width: 32px;
-	height: 32px;
-	padding: 8px;
-	color: var(--color-secondary-5);
-	cursor: pointer;
-	background-color: var(--color-secondary-greyscale-2);
-	border-radius: 4px;
 }
 
 .credit_days {
-	display: flex;
-	padding: 4px 8px;
-	margin-left: 4px;
-	font-size: 10px;
-	font-weight: 500;
 	background-color: #fdebe9;
-	border-radius: 4px;
 }
 
 .ledger_style {
@@ -177,13 +119,7 @@
 }
 
 .custom_tag_end {
-	display: flex;
-	padding: 4px 8px;
-	margin-left: 4px;
-	font-size: 10px;
-	font-weight: 500;
 	background-color: #f2f2f2;
-	border-radius: 4px;
 }
 
 .tabsstats {

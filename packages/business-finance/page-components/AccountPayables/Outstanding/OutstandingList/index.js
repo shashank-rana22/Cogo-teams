@@ -1,4 +1,4 @@
-import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
+import { Button, cl, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -59,7 +59,7 @@ function OutstandingList({
 		creditDays,
 		organizationId = '',
 		entityCode = '',
-	} = item;
+	} = item || {};
 
 	const propsData = {
 		invoice_details: {
@@ -101,7 +101,7 @@ function OutstandingList({
 
 				<div className={styles.serial_id_card}>
 					{countryCode ? (
-						<div className={styles.custom_tag_end}>
+						<div className={cl`${styles.custom_tag_end} ${styles.custom_tag}`}>
 							<div className={styles.country}>
 								Country Code:
 							</div>
@@ -109,12 +109,12 @@ function OutstandingList({
 						</div>
 					) : null}
 					{creditDays ? (
-						<div className={styles.credit_days}>
+						<div className={cl`${styles.credit_days} ${styles.custom_tag}`}>
 							<div>Credit Days:</div>
 							<div className={styles.Value}>{creditDays || DEFAULT_LEN}</div>
 						</div>
 					) : null}
-					<div className={styles.updated_at}>
+					<div className={cl`${styles.updated_at} ${styles.custom_tag}`}>
 						<div>Last Updated At : </div>
 						<div className={styles.value}>
 							{formatDate({
