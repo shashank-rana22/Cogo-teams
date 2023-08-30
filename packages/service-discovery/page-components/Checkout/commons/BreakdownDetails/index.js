@@ -56,6 +56,8 @@ function BreakdownDetails({
 
 	const disableForm = ['preview_booking', 'booking_confirmation'].includes(source);
 
+	const showTaxes = ['preview_booking', 'booking_confirmation'].includes(source);
+
 	const { primary_service = '' } = detail || {};
 
 	const { source: rateSource = '' } = rate;
@@ -250,6 +252,7 @@ function BreakdownDetails({
 					detail?.convenience_rate_configurations
 						?.convenience_rate_options
 				}
+				showTaxes={showTaxes}
 			/>
 
 			<LandingCost
@@ -258,6 +261,7 @@ function BreakdownDetails({
 				conversions={conversions}
 				rate={rate}
 				otherCharges={otherCharges}
+				showTaxes={showTaxes}
 			/>
 		</div>
 	);

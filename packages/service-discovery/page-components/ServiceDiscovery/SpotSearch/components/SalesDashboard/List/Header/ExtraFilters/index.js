@@ -15,7 +15,7 @@ const SERVICES = [
 	{ label: 'Ltl freight', value: 'ltl_freight' },
 	{ label: 'Lcl customs', value: 'lcl_customs' },
 	{ label: 'Fcl Cfs', value: 'fcl_cfs' },
-	{ label: 'Fcl freight local agent', value: 'fcl_freight_local' },
+	{ label: 'Fcl freight local', value: 'fcl_freight_local' },
 	{ label: 'Lcl local', value: 'lcl_freight_local' },
 	{ label: 'Air local', value: 'air_freight_local' },
 ];
