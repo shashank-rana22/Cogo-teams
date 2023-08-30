@@ -1,10 +1,7 @@
 import { cl, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import {
-	IcMEmail,
-	// IcMPdf
-} from '@cogoport/icons-react';
+import { IcMEmail } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -42,7 +39,6 @@ function TemplateList({
 				const {
 					html_template = '',
 					language = '',
-					// source = '',
 					tags = [],
 					updated_at = '',
 					id = '',
@@ -64,17 +60,8 @@ function TemplateList({
 							</Tooltip>
 						</div>
 						<div className={styles.content_section}>
-							<div className={styles.content}>
-								<div className={styles.html_container}>
-									<PreviewHtml html={html_template} />
-								</div>
-							</div>
-							{/* <div className={styles.overlay_section}>
-										<div className={styles.overlay_footer}>
-											<IcMPdf />
-											{startCase(source)}
-										</div>
-									</div> */}
+							<div className={styles.overlay} />
+							<PreviewHtml html={html_template} />
 						</div>
 						<div className={styles.updated_text}>
 							Update on :

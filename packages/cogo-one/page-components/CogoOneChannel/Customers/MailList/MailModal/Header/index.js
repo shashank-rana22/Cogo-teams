@@ -12,6 +12,7 @@ const HEADER_MAPPING = {
 	forward   : 'Forward Mail',
 	reply_all : 'Reply All',
 	reply     : 'Reply',
+	email     : 'Choose Template',
 };
 
 function RenderUploadIcon({ uploading = false }) {
@@ -41,6 +42,7 @@ function RenderHeader({
 	buttonType = '',
 	setEmailTemplate = () => {},
 	isTemplateView = false,
+	setButtonType = () => {},
 }) {
 	return (
 		<>
@@ -75,9 +77,12 @@ function RenderHeader({
 						<Button
 							size="sm"
 							themeType="accent"
-							onClick={() => setEmailTemplate((prev) => ({ ...prev, isTemplateView: true }))}
+							onClick={() => {
+								setButtonType('email');
+								setEmailTemplate((prev) => ({ ...prev, isTemplateView: true }));
+							}}
 						>
-							Email Template
+							Add Template
 						</Button>
 					</div>
 					<div className={styles.file_uploader_div}>
