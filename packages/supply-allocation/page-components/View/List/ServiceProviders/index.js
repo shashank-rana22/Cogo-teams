@@ -26,7 +26,7 @@ function ServiceProviders({
 	const formProps = useForm();
 
 	const { bulkUpdateFclFreightAllocation, bulkUpdateLoading } = useBulkUpdateFclFreightAllocation({
-		refetchServiceProvidersData,
+		refetchServiceProvidersData, refetchBucketsData,
 	});
 
 	const { control, unregister, formState, handleSubmit, reset } = formProps;

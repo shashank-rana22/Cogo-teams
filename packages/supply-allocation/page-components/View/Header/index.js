@@ -82,12 +82,14 @@ function Header({ searchId = '' }) {
 				<div style={{ display: 'flex' }}>
 					<div className={styles.sub_container}>
 						<div className={styles.sub_heading}>Avg Profitability</div>
-
-						<div className={styles.bold}>
-							{profitability}
-							{' '}
-							%
-						</div>
+						{profitability
+							? (
+								<div className={styles.bold}>
+									{profitability}
+									{' '}
+									%
+								</div>
+							) : 'N/A'}
 
 					</div>
 
