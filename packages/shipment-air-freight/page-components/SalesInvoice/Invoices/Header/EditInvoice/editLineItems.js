@@ -23,6 +23,7 @@ const useEditLineItems = ({
 	info,
 }) => {
 	const services = invoice.services || [];
+
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 	const [error, setError] = useState({});
