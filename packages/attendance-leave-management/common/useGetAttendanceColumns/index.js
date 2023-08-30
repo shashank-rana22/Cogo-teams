@@ -91,7 +91,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 	};
 
 	const getBorderColor = (val) => {
-		if (val === 'half_day_absent') {
+		if (SEPARATOR_CONDITION.includes(val)) {
 			return 'hda_border';
 		}
 

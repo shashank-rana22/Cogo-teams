@@ -34,7 +34,9 @@ function AttendanceLeaveDashboard() {
 
 	const { data, loading, refetch } = useGetCheckinStats(coords);
 
-	console.log('qquu', coords);
+	const { is_manager } = data || {};
+
+	console.log('qquu', data);
 
 	// console.log('data', data);
 
@@ -57,7 +59,7 @@ function AttendanceLeaveDashboard() {
 			{/* <div className={`${styles.modal_container} ${styles[show ? 'show' : 'hide']}`}>
 				{show && <RequestModal show={show} onClose={onClose} />}
 			</div> */}
-			{ showInbox ? <LeaveRequest setShowInbox={setShowInbox} /> : (
+			{ showInbox ? <LeaveRequest setShowInbox={setShowInbox} isManager={is_manager} /> : (
 				<div className={styles.tab_container}>
 					<Tabs
 						activeTab={activeTab}

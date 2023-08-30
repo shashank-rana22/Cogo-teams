@@ -732,6 +732,21 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_employee_groupings',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_request_collection',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_leave_request',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

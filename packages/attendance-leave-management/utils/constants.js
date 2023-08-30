@@ -88,6 +88,10 @@ export const ATTENDANCE_LOGS_STATUS_MAPPING = {
 		label     : 'HDACL',
 		className : 'absent_color',
 	},
+	half_day_absent: {
+		label     : 'HDA',
+		className : 'hda',
+	},
 };
 
 export const ATTENDANCE_STATS_MAPPING = [
