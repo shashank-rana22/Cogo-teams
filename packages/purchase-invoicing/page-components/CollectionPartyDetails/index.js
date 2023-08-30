@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
@@ -22,6 +23,7 @@ import TitleCard from './TitleCard';
 const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
+const ONE = 1;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
@@ -52,6 +54,7 @@ function CollectionPartyDetails({
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
+	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -93,6 +96,15 @@ function CollectionPartyDetails({
 		shipment_id: shipment_data?.id || '',
 		shipment_data,
 	});
+
+	const filteredServices = servicesData.filter(
+		(singleItem) => singleItem?.service_type !== 'subsidiary_service',
+	);
+
+	const showGenerate = showUpload
+	&& shipment_data.shipment_type === 'ftl_freight'
+	&& !shipment_data?.is_job_closed
+	&& filteredServices.length === ONE;
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -166,6 +178,20 @@ function CollectionPartyDetails({
 							) : null}
 						</div>
 						) : null}
+					{
+							showGenerate && (
+								<div>
+									<Button
+										size="md"
+										themeType="secondary"
+										className={styles.marginright}
+										onClick={() => { setGenerateInvoiceModal(true); }}
+									>
+										Generate Invoice
+									</Button>
+								</div>
+							)
+						}
 					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
 						<div className={styles.not_added}>
 							<Button
@@ -259,6 +285,22 @@ function CollectionPartyDetails({
 							refetch();
 						}}
 					/>
+				) : null}
+
+				{generateInvoiceModal ? (
+					<Modal
+						size="fullscreen"
+						show={generateInvoiceModal}
+						placement="left"
+						onClose={() => {
+							setGenerateInvoiceModal(false);
+						}}
+					>
+						<Modal.Header title="Generate Invoice" />
+						<Modal.Body>
+							lorem ipsum waha se hato
+						</Modal.Body>
+					</Modal>
 				) : null}
 			</AccordianView>
 		</div>
