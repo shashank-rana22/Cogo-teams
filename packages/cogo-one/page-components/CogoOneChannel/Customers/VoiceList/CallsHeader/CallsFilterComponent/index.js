@@ -69,7 +69,7 @@ function CallsFilterComponents({
 				</div>
 				<div className={styles.styled_icon}>
 					<Button
-						size="md"
+						size="sm"
 						themeType="accent"
 						type="submit"
 						disabled={isDisabled}
@@ -99,7 +99,7 @@ function CallsFilterComponents({
 
 			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.footer}`}>
 				<Button
-					size="md"
+					size="sm"
 					themeType="tertiary"
 					onClick={() => setFilterVisible(false)}
 				>
@@ -108,7 +108,7 @@ function CallsFilterComponents({
 				{checkFiltersCount
 					? (
 						<Button
-							size="md"
+							size="sm"
 							themeType="tertiary"
 							onClick={() => resetForm()}
 						>
