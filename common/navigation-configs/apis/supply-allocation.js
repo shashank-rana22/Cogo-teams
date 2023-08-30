@@ -15,7 +15,7 @@ const APIS = [
 		service_name : 'rolling_forecast',
 	},
 	{
-		api          : 'get_rolling_forecast_buckets_data',
+		api          : 'get_rolling_forecast_grouped_buckets_data',
 		access_type  : 'private',
 		service_name : 'rolling_forecast',
 	},
