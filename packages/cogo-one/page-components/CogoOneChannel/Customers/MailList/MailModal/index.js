@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
+import getRenderEmailBody from '../../../../../helpers/getRenderEmailBody';
 import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
 
@@ -87,13 +88,15 @@ function MailModal({
 			return;
 		}
 
+		const emailBody = getRenderEmailBody({ html: emailState?.body });
+
 		const payload = {
 			sender        : emailState?.from_mail || activeMailAddress,
 			toUserEmail   : emailState?.toUserEmail,
 			ccrecipients  : emailState?.ccrecipients,
 			bccrecipients : emailState?.bccrecipients,
 			subject       : emailState?.subject,
-			content       : emailState?.body,
+			content       : emailBody,
 			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,

@@ -1,15 +1,19 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../../../commons/EmptyStateDocs';
-import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding';
+import EmptyState from '../../../commons/EmptyStateDocs/index.tsx';
+import useGetCallPriority from '../../hooks/useGetCallPriority';
+import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding.ts';
 
 import OutstandingFilter from './OutstandingFilter';
-import OutstandingList from './OutstandingList';
-import OrgLoader from './OutstandingList/OrgLoaders';
+import OutstandingList from './OutstandingList/index.tsx';
+import OrgLoader from './OutstandingList/OrgLoaders/index.tsx';
 import styles from './styles.module.css';
 
-function Outstanding({ entityCode }) {
+const LOADER_LEN = 7;
+
+function Outstanding({ entityCode = '' }) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -26,12 +30,15 @@ function Outstanding({ entityCode }) {
 		setOrderBy,
 		setQueryKey,
 		queryKey,
-	} = useGetOrgOutstanding({ formFilters, entityCode });
+		refetch,
+	} = useGetOrgOutstanding({ entityCode });
+
+	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
 
-	const handleChange = (val:string) => {
+	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
 	};
 
@@ -63,21 +70,33 @@ function Outstanding({ entityCode }) {
 				queryKey={queryKey}
 				setQueryKey={setQueryKey}
 				entityCode={entityCode}
+				refetch={refetch}
+				callPriorityData={callPriorityData}
+				callPriorityLoading={callPriorityLoading}
 			/>
 
 			{outstandingLoading ? (
 				<div>
-					{[1, 2, 3, 4, 5, 6, 7].map((key) => (
+					{ [...Array(LOADER_LEN).keys()].map((key) => (
 						<OrgLoader key={key} />
 					))}
 				</div>
 			) : (
 				<>
 					{list?.map((item) => (
-						<OutstandingList item={item} entityCode={entityCode} key={item?.serialId} />
+						<OutstandingList
+							item={item}
+							entityCode={entityCode}
+							key={item?.serialId}
+							showElement={false}
+							orderBy={orderBy}
+							outStandingFilters={outStandingFilters}
+							formFilters={formFilters}
+							organizationId={item?.organizationId}
+						/>
 					))}
-					{list?.length === 0 && <div className={styles.empty_state}><EmptyState /></div>}
-					{list?.length > 0 && (
+					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
+					{!isEmpty(list) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
