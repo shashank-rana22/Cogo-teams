@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useCreateRole from '../../../../../hooks/useCreateRoles';
-import descriptions from '../../../../../utils/descriptions';
+import roleDescriptions from '../../../../../utils/descriptions';
 
 import ChangeStatus from './ChangeStatus';
 import NavContent from './NavContent';
@@ -77,6 +77,8 @@ function Navigation(props) {
 	const [navigationRefs, setNavigationRefs] = useState({});
 	const [selectedDepartments, setSelectedDepartments] = useState({ scopes: ['allowed'] });
 	const { createRole, loading: creatingNavs } = useCreateRole();
+
+	const descriptions = roleDescriptions(t);
 
 	const navigationApis = getNavOptions(navigation.key);
 	const [{ data = {}, loading: loadingPermissions = false }, trigger] = useAuthRequest({
