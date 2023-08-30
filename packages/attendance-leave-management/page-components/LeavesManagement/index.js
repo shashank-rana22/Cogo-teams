@@ -15,7 +15,7 @@ function LeavesManagement() {
 	const [selectedMonth, setSelectedMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
 
-	const { data, refetch } = useGetEmployeeLeaveBalances({ value: selectedMonth?.value });
+	const { data, refetch, loading : balanceLoading } = useGetEmployeeLeaveBalances({ value: selectedMonth?.value });
 
 	useEffect(() => {
 		if (!isEmpty(formattedData)) {
@@ -38,7 +38,7 @@ function LeavesManagement() {
 			/>
 			<div className={styles.body_container}>
 				<div className={styles.leave_balance_style}>
-					<LeaveBalancesComponent data={data} refetch={refetch} />
+					<LeaveBalancesComponent data={data} refetch={refetch} loading={balanceLoading} />
 				</div>
 				<div className={styles.leave_stats_style}>
 					<LeaveStatsApplicationsComponent selectedMonth={selectedMonth} />

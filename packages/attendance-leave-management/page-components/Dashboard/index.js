@@ -1,8 +1,8 @@
-/* eslint-disable import/order */
 import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
+import useGetCheckinStats from '../../hooks/useGetCheckinStats';
 import { getCurrentLocation } from '../../utils/getCurrentLocation';
 import AttendanceManagement from '../AttendanceManagement';
 import LeavesManagement from '../LeavesManagement';
@@ -10,9 +10,8 @@ import Policies from '../Policies';
 import TeamAttendance from '../TeamAttendance';
 
 // import RequestModal from './RequestModal';
-import styles from './styles.module.css';
-import useGetCheckinStats from '../../hooks/useGetCheckinStats';
 import LeaveRequest from './LeaveRequest';
+import styles from './styles.module.css';
 
 const MANAGER = true;
 

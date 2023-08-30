@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -34,7 +36,13 @@ const useGetEmployeeList = (selectedLocation) => {
 	);
 
 	useEffect(() => {
-		if (selectedLocation) getEmployeeList();
+		if (selectedLocation) {
+			try {
+				getEmployeeList();
+			} catch (error) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
+		}
 	}, [getEmployeeList, selectedLocation]);
 
 	return { loading, data, filters, setFilters, debounceQuery, refetch: getEmployeeList };

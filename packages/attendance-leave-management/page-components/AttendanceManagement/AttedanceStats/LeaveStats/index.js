@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ApplyLeave from '../../../../common/ApplyLeave';
@@ -7,7 +7,7 @@ import useGetEmployeeLeaveBalances from '../../../../hooks/useGetEmployeeLeaveBa
 import styles from './styles.module.css';
 
 function LeaveStats({ value }) {
-	const { data, refetch } = useGetEmployeeLeaveBalances({ value });
+	const { loading, data, refetch } = useGetEmployeeLeaveBalances({ value });
 
 	const {
 		available_privilege_leaves,
@@ -22,12 +22,15 @@ function LeaveStats({ value }) {
 			<div className={styles.container}>
 				<div className={styles.header_flex}>
 					<div className={styles.title}>Leaves Stats</div>
-					<div className={styles.pending_approval}>
-						<div className={styles.pending_dot} />
-						{pending_casual_leaves + pending_privilege_leaves + pending_sick_leaves}
-						{' '}
-						Pending Approval
-					</div>
+					{loading ? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+						: (
+							<div className={styles.pending_approval}>
+								<div className={styles.pending_dot} />
+								{ pending_casual_leaves + pending_privilege_leaves + pending_sick_leaves}
+								{' '}
+								Pending Approval
+							</div>
+						)}
 				</div>
 				<div className={styles.leave_stats_data}>
 					<div className={styles.leave_data}>
@@ -35,7 +38,9 @@ function LeaveStats({ value }) {
 							Privilege Leaves
 						</div>
 						<div className={styles.stats_number}>
-							{available_privilege_leaves}
+							{loading
+								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+								: available_privilege_leaves }
 						</div>
 					</div>
 					<div className={styles.leave_data}>
@@ -43,7 +48,9 @@ function LeaveStats({ value }) {
 							Casual Leaves
 						</div>
 						<div className={styles.stats_number}>
-							{available_casual_leaves}
+							{loading
+								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+								: available_casual_leaves }
 						</div>
 					</div>
 					<div className={styles.leave_data}>
@@ -51,7 +58,9 @@ function LeaveStats({ value }) {
 							Sick Leaves
 						</div>
 						<div className={styles.stats_number}>
-							{ available_sick_leaves}
+							{loading
+								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+								: available_sick_leaves }
 						</div>
 					</div>
 				</div>

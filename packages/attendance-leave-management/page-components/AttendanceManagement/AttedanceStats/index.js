@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
-import { upperCase, isEmpty } from '@cogoport/utils';
+import { upperCase } from '@cogoport/utils';
 
 import useGetAttendanceStats from '../../../hooks/useGetAttendanceStats';
 // import useGetLeaveBalance from '../../../hooks/useGetLeaveBalance';
@@ -44,42 +44,49 @@ function AttendanceStats({ selectMonth = {} }) {
 			</div>
 
 			<div className={styles.stats_wrapper}>
-				<div className={styles.flex}>
-					<div className={styles.stats_header}>
-						Attendance Stats
-					</div>
-					<div className={styles.present_days}>
-						{`${completed_days}/${total_days}`}
-						{' '}
-						Days
-					</div>
-				</div>
-
-				<div className={styles.gradient_lines} style={{ width: '100%' }}>
-					{ATTENDANCE_STATS_MAPPING.map((val) => (
-						<div
-							key={val.key}
-							className={styles[val.className]}
-							style={{ width: getWidth(attendance_stats?.[val.key]) }}
-						/>
-					))}
-				</div>
-
-				<div className={styles.attendance_stats}>
-					{ATTENDANCE_CONSTANT.map((val) => (
-						<div className={styles.attendance_stats_data} key={val.key}>
-							<div className={`${styles.attendance_dot} ${styles?.[val.colorDot]}`} />
-							<span className={styles.span}>{val.label}</span>
-							{attendance_stats?.[val.key]}
+				Insights about your attendance
+				{loading ? <Placeholder height="20px" width="100%" margin="0px 0px 20px 0px" /> : (
+					<div className={styles.flex}>
+						<div className={styles.stats_header}>
+							Attendance Stats
+						</div>
+						<div className={styles.present_days}>
+							{`${completed_days}/${total_days}`}
 							{' '}
 							Days
 						</div>
-					))}
-				</div>
+					</div>
+				) }
+
+				{loading ? <Placeholder height="20px" width="100%" margin="0px 0px 20px 0px" /> : (
+					<div className={styles.gradient_lines} style={{ width: '100%' }}>
+						{ATTENDANCE_STATS_MAPPING.map((val) => (
+							<div
+								key={val.key}
+								className={styles[val.className]}
+								style={{ width: getWidth(attendance_stats?.[val.key]) }}
+							/>
+						))}
+					</div>
+				)}
+
+				{loading ? <Placeholder height="20px" width="100%" margin="0px 0px 20px 0px" /> : (
+					<div className={styles.attendance_stats}>
+						{ATTENDANCE_CONSTANT.map((val) => (
+							<div className={styles.attendance_stats_data} key={val.key}>
+								<div className={`${styles.attendance_dot} ${styles?.[val.colorDot]}`} />
+								<span className={styles.span}>{val.label}</span>
+								{attendance_stats?.[val.key]}
+								{' '}
+								Days
+							</div>
+						))}
+					</div>
+				)}
 			</div>
 			<div className={styles.leave_team_stats}>
 				<LeaveStats value={value} />
-				{!loading && !isEmpty(team_stats) && <TeamStats teamStats={team_stats} />}
+				<TeamStats teamStats={team_stats} loading={loading} />
 			</div>
 		</div>
 	);
