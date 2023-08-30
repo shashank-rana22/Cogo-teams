@@ -21,11 +21,9 @@ const useGetRollingFclFreightSuppliers = ({
 		try {
 			await trigger({
 				params: {
-					params: {
-						origin_location_id          : origin_location_id || undefined,
-						destination_location_id     : destination_location_id || undefined,
-						mini_clusters_data_required : isMiniCluster,
-					},
+					origin_location_id          : origin_location_id || undefined,
+					destination_location_id     : destination_location_id || undefined,
+					mini_clusters_data_required : isMiniCluster,
 					filters,
 					page,
 				},
