@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import useGetAccountLeaderboardData from '../../hooks/useGetAccountLeaderboardData';
 
 import HeaderFilters from './HeaderFilters/index';
@@ -6,6 +8,8 @@ import ScoreDistributionGraph from './ScoreDistributionGraph/index';
 import styles from './styles.module.css';
 
 function AccountLeaderboard() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		graphData,
 		graphLoading,
@@ -32,7 +36,7 @@ function AccountLeaderboard() {
 
 	return (
 		<section className={styles.container}>
-			<div className={styles.header_text}>Account Score Distribution</div>
+			<div className={styles.header_text}>{t('allocation:account_score_distribution')}</div>
 
 			<HeaderFilters
 				control={control}

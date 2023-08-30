@@ -1,11 +1,12 @@
-import { Toast, Modal, RTE, Input, Select } from '@cogoport/components';
+import { Toast, Modal, RTEditor, Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
-import { TOOLBARCONFIG } from '../../../../../constants';
+import RTE_TOOL_BAR_CONFIG from '../../../../../constants/rteToolBarConfig';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
+import getRenderEmailBody from '../../../../../helpers/getRenderEmailBody';
 import mailFunction from '../../../../../utils/mailFunctions';
 
 import RenderHeader from './Header';
@@ -85,13 +86,15 @@ function MailModal({
 			return;
 		}
 
+		const emailBody = getRenderEmailBody({ html: emailState?.body });
+
 		const payload = {
 			sender        : emailState?.from_mail || activeMailAddress,
 			toUserEmail   : emailState?.toUserEmail,
 			ccrecipients  : emailState?.ccrecipients,
 			bccrecipients : emailState?.bccrecipients,
 			subject       : emailState?.subject,
-			content       : emailState?.body,
+			content       : emailBody,
 			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
@@ -165,11 +168,11 @@ function MailModal({
 				</div>
 
 				<div className={styles.rte_container}>
-					<RTE
+					<RTEditor
 						value={emailState?.body}
 						onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-						toolbarConfig={TOOLBARCONFIG}
 						className={styles.styled_editor}
+						modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 					/>
 
 					<div className={styles.attachments_scroll}>

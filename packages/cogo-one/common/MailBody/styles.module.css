@@ -69,13 +69,12 @@
 }
 
 .icon {
-	width: 12px;
-	height: 12px;
+	margin-right: 4px;
 }
 
 .button_text {
 	margin-left: 4px;
-	font-size: 15px;
+	font-size: 13px;
 	color: #221f20;
 }
 

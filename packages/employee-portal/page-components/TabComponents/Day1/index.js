@@ -2,12 +2,15 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
-function Day1({ setInformationPage }) {
+function DayOne({ setInformationPage = () => {} }) {
+	const { back } = useRouter();
+
 	const [{ data }, listTrigger] = useHarbourRequest({
 		method : 'get',
 		url    : '/list_company_documents',
@@ -46,7 +49,10 @@ function Day1({ setInformationPage }) {
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>DAY 1</div>
 			</div>
@@ -62,4 +68,4 @@ function Day1({ setInformationPage }) {
 	);
 }
 
-export default Day1;
+export default DayOne;

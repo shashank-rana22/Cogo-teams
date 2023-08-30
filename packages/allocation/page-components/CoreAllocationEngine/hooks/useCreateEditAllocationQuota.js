@@ -5,25 +5,25 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const getFormattedValues = (formValues) => {
-	const quotaAttributes = {};
+	const QUOTA_ATTRIBUTES = {};
 
 	Object.keys(formValues).forEach((keyName) => {
 		const inputValue = Number(formValues[keyName] || '');
 
-		quotaAttributes[keyName] = inputValue;
+		QUOTA_ATTRIBUTES[keyName] = inputValue;
 	});
 
-	return quotaAttributes;
+	return QUOTA_ATTRIBUTES;
 };
 
 const getPrefillValues = (quota_attributes) => {
-	const newQuotaAttributes = {};
+	const NEW_QUOTA_ATTRIBUTES = {};
 
 	Object.keys(quota_attributes).forEach((keyName) => {
-		newQuotaAttributes[keyName] = quota_attributes[keyName]?.toString();
+		NEW_QUOTA_ATTRIBUTES[keyName] = quota_attributes[keyName]?.toString();
 	});
 
-	return newQuotaAttributes;
+	return NEW_QUOTA_ATTRIBUTES;
 };
 
 const useCreateEditAllocationQuota = (props) => {
@@ -35,6 +35,7 @@ const useCreateEditAllocationQuota = (props) => {
 		isUpdatable,
 		quotaItem,
 		setRoleTypeId,
+		t = () => {},
 	} = props;
 
 	const { quota_attributes: quotaAttributes = {}, id } = quotaItem;
@@ -80,11 +81,12 @@ const useCreateEditAllocationQuota = (props) => {
 
 			refetch();
 
-			Toast.success(`Quota ${isUpdatable ? 'updated' : 'added'} successfully`);
+			Toast.success(`${t('allocation:quota_label')} ${isUpdatable ? t('allocation:updated_label')
+				: t('allocation:added_label')} ${t('allocation:successfully_label')}`);
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data)
-					|| 'Unable to Save, Please try again!!',
+					|| t('allocation:save_error_default'),
 			);
 		}
 	};

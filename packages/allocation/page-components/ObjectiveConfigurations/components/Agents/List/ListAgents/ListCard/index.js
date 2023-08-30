@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import ACTIVE_MODE_KEYS_MAPPING from '../../../../../constants/active-mode-keys-mapping';
 
 import Header from './Header';
@@ -8,6 +10,8 @@ import useEditWeightage from './useEditWeightage';
 const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 
 function ListCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { item, refetch, setActiveMode, setRefCallback } = props;
 
 	const { objectives = [], ...userDetails } = item;
@@ -22,7 +26,7 @@ function ListCard(props) {
 		onDistributeEqually,
 		onDiscardChanges,
 		loading,
-	} = useEditWeightage({ objectives, userDetails, refetch });
+	} = useEditWeightage({ objectives, userDetails, refetch, t });
 
 	const { control, handleSubmit } = formProps;
 
@@ -54,7 +58,7 @@ function ListCard(props) {
 					setRefCallback({ role, user, partner });
 				}}
 			>
-				+ Create New Objective For Agent
+				{t('allocation:create_new_objective_for_agent')}
 			</div>
 		</div>
 	);
