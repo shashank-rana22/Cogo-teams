@@ -3,8 +3,8 @@ import { IcMCross } from '@cogoport/icons-react';
 
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
-import Recipients from '../Recipients';
 
+import Recipients from './Recipients';
 import styles from './styles.module.css';
 
 function ComposeEmailBody(props) {
@@ -90,7 +90,7 @@ function ComposeEmailBody(props) {
 				<div className={styles.attachments_scroll}>
 					{uploading && (
 						<div className={styles.uploading}>
-							{uploading && 'Uploading...'}
+							Uploading...
 						</div>
 					)}
 

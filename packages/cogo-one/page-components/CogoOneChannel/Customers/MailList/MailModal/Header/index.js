@@ -50,7 +50,7 @@ function RenderHeader({
 				{isTemplateView ? (
 					<div className={styles.back_icon}>
 						<IcMArrowBack
-							onClick={() => setEmailTemplate((prev) => ({ ...prev, isTemplateView: false }))}
+							onClick={() => setEmailTemplate(() => ({ emailData: {}, isTemplateView: false }))}
 							width={20}
 							height={20}
 							cursor="pointer"

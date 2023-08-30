@@ -5,8 +5,7 @@ import { IcMEmail } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import PreviewHtml
-	from '../../../../../../../common/MessageBody/UserActivityMessages/EmailClicked/PreviewModal/PreviewHtml';
+import PreviewHtml from '../../../../../../../common/PreviewHtml';
 import RenderTemplateTags from '../RenderTemplateTags';
 
 import styles from './styles.module.css';

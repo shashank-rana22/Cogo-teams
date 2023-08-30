@@ -57,7 +57,7 @@ function RenderTemplateTags({ tags = [] }) {
 				),
 			)}
 
-			{(showMoreList)
+			{showMoreList
 				? <ToolTipComp moreList={moreList} />
 				: null}
 		</div>
