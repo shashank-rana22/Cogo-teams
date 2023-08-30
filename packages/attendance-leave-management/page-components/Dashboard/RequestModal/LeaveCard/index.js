@@ -2,19 +2,26 @@
 /* eslint-disable react/jsx-key */
 import { Button } from '@cogoport/components';
 import {
-	IcMArrowUp, IcMLocation, IcMCross, IcMTick, IcMArrowDown, IcMCalendar,
-}
-	from '@cogoport/icons-react';
+	IcMArrowUp,
+	IcMLocation,
+	IcMCross,
+	IcMTick,
+	IcMArrowDown,
+	IcMCalendar,
+} from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function LeaveCard({ isManager, data }) {
+function LeaveCard({ isManager = false, data = null }) {
 	const { leaveData, pendingCount, request_type } = data;
 	const [accordion, setAccordion] = useState(false);
 	return (
 		<div className={styles.leavecard}>
-			<div className={styles.card_container} onClick={() => setAccordion(!accordion)}>
+			<div
+				className={styles.card_container}
+				onClick={() => setAccordion(!accordion)}
+			>
 				<div>
 					<div className={styles.heading_sp1}>{request_type}</div>
 					<div className={styles.heading_sp2}>
@@ -24,8 +31,18 @@ function LeaveCard({ isManager, data }) {
 					</div>
 				</div>
 				<div className={styles.yes_no}>
-					<Button size="md" themeType="link" onClick={(e) => e.stopPropagation()}>Approve All</Button>
-					{accordion ? <IcMArrowUp width={16} height={16} /> : <IcMArrowDown width={16} height={16} />}
+					<Button
+						size="md"
+						themeType="link"
+						onClick={(e) => e.stopPropagation()}
+					>
+						Approve All
+					</Button>
+					{accordion ? (
+						<IcMArrowUp width={16} height={16} />
+					) : (
+						<IcMArrowDown width={16} height={16} />
+					)}
 				</div>
 			</div>
 			{accordion && (
@@ -35,68 +52,44 @@ function LeaveCard({ isManager, data }) {
 							<div className={styles.details}>
 								<div className={styles.design}>
 									<div className={styles.img}>
-										{request_type !== 'Leave Request'
-											? <IcMLocation width={18} height={18} />
-											: <IcMCalendar width={18} height={18} />}
-
+										{request_type !== 'Leave Request' ? (
+											<IcMLocation width={18} height={18} />
+										) : (
+											<IcMCalendar width={18} height={18} />
+										)}
 									</div>
 									<div className={styles.sec2}>
 										<div className={styles.text1}>
 											<span className={styles.text_name}>{val.name}</span>
-
 											{' '}
-
-											requested Geolocation Access
-											for 2 Days, from August 21, 2023 - August 22, 2023
-
+											requested Geolocation Access for 2 Days, from August 21,
+											2023 - August 22, 2023
 											{' '}
-
 										</div>
-										<div className={styles.text2}>
-											{val.startDate}
-											{' '}
-											-
-											{' '}
-											{val.endDate}
-										</div>
+										<div className={styles.text2}>{val.reason}</div>
 										<div className={styles.leave_details}>
-											<span className={styles.name}>
-												{val.name}
-											</span>
-											<span className={styles.dot}>
-												.
-											</span>
-											<div className={styles.name}>
-												{val.leaveType}
-											</div>
-
+											<span className={styles.name}>{val.name}</span>
+											<span className={styles.dot} />
+											<div className={styles.name}>{val.timestamp}</div>
 										</div>
-
 									</div>
 								</div>
-								{isManager ?	(
+								{isManager ? (
 									<div className={styles.yes_no}>
 										<div className={styles.deny}>
 											<Button size="md" themeType="secondary">
 												<div className={styles.reject}>
-
 													<IcMCross width={16} height={22} fill="#BF291E" />
 													<span className={styles.rej_content}>Reject</span>
-
 												</div>
-
 											</Button>
 										</div>
 										<div className={styles.approve}>
 											<Button size="md" themeType="secondary">
-
 												<div className={styles.accept}>
-
 													<IcMTick width={25} height={22} fill="#849E4C" />
 													<span className={styles.acc_content}>Approve</span>
-
 												</div>
-
 											</Button>
 										</div>
 									</div>
@@ -111,19 +104,18 @@ function LeaveCard({ isManager, data }) {
 								// 	</Button>
 								// </div>
 
-									<div className={` ${styles[val.leaveStatus === 'pending'
-										? 'pending' : 'accepted']}`}
+									<div
+										className={` ${styles[val.leaveStatus === 'Pending' ? 'pending' : 'accepted']
+										}`}
 									>
-										{val.leaveStatus }
+										{val.leaveStatus}
 									</div>
-
-								) }
+								)}
 							</div>
-
 						</div>
 					))}
 				</div>
-			) }
+			)}
 		</div>
 	);
 }
