@@ -37,11 +37,10 @@
 
 .filters_applied {
 	position: absolute;
-	top: -2px;
-	right: -2px;
+	bottom: 70%;
+	left: 60%;
 	width: 10px;
 	height: 10px;
-	margin-left: 3px;
 	background: #f68b21;
 	border-radius: 8px;
 }
