@@ -1,7 +1,6 @@
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import roleDescriptions from '../../../../../utils/descriptions';
+import descriptions from '../../../../../utils/descriptions';
 import Navigation from '../Navigation';
 
 import styles from './styles.module.css';
@@ -15,8 +14,6 @@ function NestedNavigations({
 	loading,
 	activeNavs,
 }) {
-	const { t } = useTranslation(['accessManagement']);
-	const descriptions = roleDescriptions(t);
 	return (
 		<section className={styles.container}>
 			<div>
