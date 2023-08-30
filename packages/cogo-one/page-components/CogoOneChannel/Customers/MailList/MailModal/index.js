@@ -6,6 +6,7 @@ import { useState, useRef } from 'react';
 import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../constants/rteToolBarConfig';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
+import getRenderEmailBody from '../../../../../helpers/getRenderEmailBody';
 import mailFunction from '../../../../../utils/mailFunctions';
 
 import RenderHeader from './Header';
@@ -85,13 +86,15 @@ function MailModal({
 			return;
 		}
 
+		const emailBody = getRenderEmailBody({ html: emailState?.body });
+
 		const payload = {
 			sender        : emailState?.from_mail || activeMailAddress,
 			toUserEmail   : emailState?.toUserEmail,
 			ccrecipients  : emailState?.ccrecipients,
 			bccrecipients : emailState?.bccrecipients,
 			subject       : emailState?.subject,
-			content       : emailState?.body,
+			content       : emailBody,
 			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
