@@ -1,14 +1,11 @@
 import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { details } from '../constants/details';
 
-import DownloadLedgerModal from './DownloadLedgerModal';
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
@@ -22,7 +19,7 @@ function Content({ types = [], head = '' }) {
 		<div className={styles.padding_container}>
 			<div className={styles.heading}>{head}</div>
 			<div className={styles.hr} />
-			<div className={styles.width_container}>
+			<div>
 				{types?.map((party) => (
 					<div className={styles.style_margin_top} key={party}>
 						<div className={styles.styled_tag}>
@@ -37,13 +34,10 @@ function Content({ types = [], head = '' }) {
 
 function OutstandingList({
 	item = {},
-	entityCode = '',
 	showElement = false,
-	organizationId = '',
+	setSelectedOrg = () => { },
 }) {
-	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('invoice_details');
-	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 
@@ -62,9 +56,9 @@ function OutstandingList({
 		countryCode,
 		createdAt,
 		organizationName,
-		selfOrganizationId = '',
-		tradePartySerialId = '',
 		creditDays,
+		organizationId = '',
+		entityCode = '',
 	} = item;
 
 	const propsData = {
@@ -78,17 +72,9 @@ function OutstandingList({
 			entityCode,
 		},
 		organization_users: {
-			selfOrganizationId,
+			organizationId,
 			orgData: item,
 		},
-	};
-
-	const handleViewDetailClick = () => {
-		router.push(
-			`/business-finance/account-payables/outstanding/
-			viewOrgDetail?entityCode=${entityCode}
-			&organizationId=${organizationId}&serialId=${tradePartySerialId}`,
-		);
 	};
 
 	return (
@@ -146,7 +132,7 @@ function OutstandingList({
 					</div>
 				</div>
 			</div>
-			<div style={{ padding: '2px 16px' }}>
+			<div style={{ padding: '8px 16px' }}>
 				<div className={styles.org_name_conatiner}>
 					<div className={styles.sub_org_name_conatiner}>
 						<div className={styles.orgdetails}>
@@ -180,17 +166,11 @@ function OutstandingList({
 						</div>
 					</div>
 					<div className={styles.ledger_style}>
-						<Tooltip content="Ledger Download" placement="top">
-							<IcMDownload
-								className={styles.download_icon_div}
-								onClick={() => setShowLedgerModal(true)}
-							/>
-						</Tooltip>
 						{!showElement && (
 							<Button
 								size="md"
 								style={{ marginLeft: '20px' }}
-								onClick={() => handleViewDetailClick()}
+								onClick={() => setSelectedOrg(item)}
 							>
 								View Details
 							</Button>
@@ -201,34 +181,27 @@ function OutstandingList({
 				<div className={styles.org_list}>
 					<StatsOutstanding item={item} />
 				</div>
-
-				{showElement && (
-					<Tabs
-						activeTab={activeTab}
-						onChange={(val) => handleActiveTabs(val)}
-						fullWidth
-						themeType="primary"
-					>
-						{(TabsOptions || []).map(
-							({ key, name, component: Component }) => (
-								<TabPanel key={key} name={key} title={name}>
-									{activeTab && (
-										<Component {...propsData[activeTab]} />
-									)}
-								</TabPanel>
-							),
-						)}
-					</Tabs>
-				)}
+				<div className={styles.tabsstats}>
+					{showElement && (
+						<Tabs
+							activeTab={activeTab}
+							onChange={(val) => handleActiveTabs(val)}
+							fullWidth
+							themeType="primary"
+						>
+							{(TabsOptions || []).map(
+								({ key, name, component: Component }) => (
+									<TabPanel key={key} name={key} title={name}>
+										{activeTab && (
+											<Component {...propsData[activeTab]} />
+										)}
+									</TabPanel>
+								),
+							)}
+						</Tabs>
+					)}
+				</div>
 			</div>
-
-			{showLedgerModal ? (
-				<DownloadLedgerModal
-					showLedgerModal={showLedgerModal}
-					setShowLedgerModal={setShowLedgerModal}
-					item={item}
-				/>
-			) : null}
 		</div>
 	);
 }

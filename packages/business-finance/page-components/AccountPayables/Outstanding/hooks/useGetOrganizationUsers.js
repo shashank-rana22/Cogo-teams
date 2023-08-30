@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetOrganizationUsers = ({ selfOrganizationId }) => {
+const useGetOrganizationUsers = ({ organizationId }) => {
 	const [param, setParam] = useState({ page: 1, page_limit: 10 });
 
 	const [
@@ -21,13 +21,13 @@ const useGetOrganizationUsers = ({ selfOrganizationId }) => {
 			await trigger({
 				params: {
 					filters: {
-						organization_id: selfOrganizationId,
+						organization_id: organizationId,
 					},
 				},
 			});
 		};
 		fetchListDataApi();
-	}, [param.page, trigger, selfOrganizationId]);
+	}, [param?.page, trigger, organizationId]);
 
 	return {
 		organizationData: data,

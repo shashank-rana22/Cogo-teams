@@ -19,8 +19,8 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	min-width: 20%;
-	padding: 0 8px 10px 12px;
+	min-width: 16%;
+	padding: 0 8px 2px 12px;
 }
 
 .styled_heading {
@@ -75,6 +75,24 @@
 	word-break: break-all;
 }
 
+.onaccount {
+	display: flex;
+	margin-top: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #00a36c;
+	word-break: break-all;
+}
+
+.onaccount_stat {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #00a36c;
+	word-break: break-all;
+}
+
 .amount {
 	display: flex;
 	margin-top: 2px;
@@ -115,7 +133,7 @@
 }
 
 .empty_container {
-	min-width: 20%;
+	min-width: 16%;
 }
 
 .stats_lable {
@@ -159,6 +177,7 @@
 .counttotal {
 	margin-left: 12px;
 	font-size: var(--font-size-md);
+	font-weight: 500;
 }
 
 .counts {
@@ -170,4 +189,31 @@
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 600;
+}
+
+.totalOnAccount {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #00a36c;
+	word-break: break-all;
+}
+
+.amount_open_inv {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+	word-break: break-all;
+}
+
+.positive {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #00a36c;
+	word-break: break-all;
 }

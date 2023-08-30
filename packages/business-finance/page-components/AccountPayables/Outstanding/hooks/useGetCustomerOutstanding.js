@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetCustomerOutstanding = ({ orgId = '', serialId = '', entityCode = '' }) => {
+const useGetCustomerOutstanding = ({ serialId = '', entityCode = '', orgSerialId }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -19,19 +19,19 @@ const useGetCustomerOutstanding = ({ orgId = '', serialId = '', entityCode = '' 
 		try {
 			trigger({
 				params: {
-					page               : 1,
-					pageLimit          : 10,
-					organizationId     : orgId || undefined,
-					sortBy             : 'totalOutstandingAmount' || undefined,
-					sortType           : 'Desc' || undefined,
+					page                 : 1,
+					pageLimit            : 10,
+					sortBy               : 'totalOutstandingAmount' || undefined,
+					sortType             : 'Desc' || undefined,
 					entityCode,
-					tradePartySerialId : serialId,
+					organizationSerialId : orgSerialId,
+					tradePartySerialId   : serialId,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	}, [orgId, trigger, entityCode, serialId]);
+	}, [trigger, entityCode, serialId, orgSerialId]);
 
 	useEffect(() => {
 		refetch();

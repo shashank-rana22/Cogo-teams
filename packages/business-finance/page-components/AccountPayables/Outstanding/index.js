@@ -11,10 +11,15 @@ import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import StatsOutstanding from './OutstandingList/StatsOutstanding';
 import styles from './styles.module.css';
+import ViewOrganizationDetails from './ViewOrganizationDetails';
 
 const LOADER_LEN = 7;
 
-function Outstanding({ entityCode = '' }) {
+function Outstanding({
+	entityCode = '',
+	setSelectedOrg = () => {},
+	selectedOrg = {},
+}) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -54,66 +59,67 @@ function Outstanding({ entityCode = '' }) {
 	};
 
 	return (
-		<>
-			<div className={styles.topcard}>
-				{entityDataLoading ? <Placeholder height="200px" /> : (
-					<StatsOutstanding
-						item={entityData?.[GLOBAL_CONSTANTS.zeroth_index]}
-						source="topcard"
-					/>
-				)}
-			</div>
-			<OutstandingFilter
-				params={outStandingFilters}
-				setParams={setoutStandingFilters}
-				orderBy={orderBy}
-				setOrderBy={setOrderBy}
-				handleChange={handleChange}
-				formFilters={formFilters}
-				setFormFilters={setFormFilters}
-				clearFilter={clearFilter}
-				handleInputReset={handleInputReset}
-				entityCode={entityCode}
-				refetch={refetch}
-			/>
-
-			{outstandingLoading ? (
-				<div>
-					{Array(LOADER_LEN)
-						.fill(null).map((key) => (
-							<OrgLoader key={key} />
-						))}
-				</div>
-			) : (
+		!isEmpty(selectedOrg)
+			? <ViewOrganizationDetails selectedOrg={selectedOrg} setSelectedOrg={setSelectedOrg} />
+			: (
 				<>
-					{list?.map((item) => (
-						<OutstandingList
-							item={item}
-							entityCode={entityCode}
-							key={item?.organizationId}
-							showElement={false}
-							orderBy={orderBy}
-							outStandingFilters={outStandingFilters}
-							formFilters={formFilters}
-							organizationId={item?.organizationId}
-						/>
-					))}
-					{isEmpty(list) && <div className={styles.empty_state}><EmptyStateDocs /></div>}
-					{!isEmpty(list) && (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={totalRecords}
-								pageSize={pageLimit}
-								onPageChange={(val) => setoutStandingFilters({ ...outStandingFilters, page: val })}
+					<div className={styles.topcard}>
+						{entityDataLoading ? <Placeholder height="200px" /> : (
+							<StatsOutstanding
+								item={entityData?.[GLOBAL_CONSTANTS.zeroth_index]}
+								source="topcard"
 							/>
+						)}
+					</div>
+					<OutstandingFilter
+						params={outStandingFilters}
+						setParams={setoutStandingFilters}
+						orderBy={orderBy}
+						setOrderBy={setOrderBy}
+						handleChange={handleChange}
+						formFilters={formFilters}
+						setFormFilters={setFormFilters}
+						clearFilter={clearFilter}
+						handleInputReset={handleInputReset}
+						entityCode={entityCode}
+						refetch={refetch}
+					/>
+					{outstandingLoading ? (
+						<div>
+							{Array(LOADER_LEN)
+								.fill(null).map((key) => (
+									<OrgLoader key={key} />
+								))}
 						</div>
+					) : (
+						<>
+							{list?.map((item) => (
+								<OutstandingList
+									item={item}
+									key={item?.organizationId}
+									showElement={false}
+									setSelectedOrg={setSelectedOrg}
+								/>
+							))}
+							{isEmpty(list) && <div className={styles.empty_state}><EmptyStateDocs /></div>}
+							{!isEmpty(list) && (
+								<div className={styles.pagination_container}>
+									<Pagination
+										type="table"
+										currentPage={page}
+										totalItems={totalRecords}
+										pageSize={pageLimit}
+										onPageChange={(val) => setoutStandingFilters({
+											...outStandingFilters,
+											page: val,
+										})}
+									/>
+								</div>
+							)}
+						</>
 					)}
 				</>
-			)}
-
-		</>
+			)
 	);
 }
 

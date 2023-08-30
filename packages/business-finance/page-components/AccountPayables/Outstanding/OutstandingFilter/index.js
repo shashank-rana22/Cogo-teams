@@ -12,16 +12,16 @@ import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
 
 function Filters({
-	handleChange = () => { },
-	handleInputReset = () => { },
-	setOrderBy = () => { },
+	handleChange = () => {},
+	handleInputReset = () => {},
+	setOrderBy = () => {},
 	orderBy = { key: '', order: '', label: '' },
-	setParams = () => { },
+	setParams = () => {},
 	params = {},
 	formFilters = {},
-	setFormFilters = () => { },
-	clearFilter = () => { },
-	refetch = () => { },
+	setFormFilters = () => {},
+	clearFilter = () => {},
+	refetch = () => {},
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 
@@ -104,7 +104,6 @@ function Filters({
 						}}
 					>
 						<IcMArrowRotateUp style={{ color: sortStyleAsc }} />
-
 						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
 					</div>
 

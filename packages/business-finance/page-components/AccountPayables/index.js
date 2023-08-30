@@ -2,7 +2,7 @@ import { Select, TabPanel, Tabs, Placeholder } from '@cogoport/components';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AdvancePayment from './AdvancePayment/index.tsx';
@@ -30,6 +30,8 @@ function AccountPayables() {
 		query?.active_tab || 'dashboard',
 	);
 
+	const [selectedOrg, setSelectedOrg] = useState({});
+
 	const { loading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 
@@ -37,7 +39,7 @@ function AccountPayables() {
 
 	const handleTabChange = (v) => {
 		if (
-			['invoices', 'payruns', 'outstanding'].includes(v)
+			['invoices', 'payruns'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
@@ -86,7 +88,7 @@ function AccountPayables() {
 					</div>
 				)}
 			</div>
-			<div className={styles.container}>
+			<div className={isEmpty(selectedOrg) ? styles.container : styles.nodisplay}>
 				<Tabs
 					activeTab={activePayables}
 					fullWidth
@@ -106,7 +108,11 @@ function AccountPayables() {
 						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
-						<Outstanding entityCode={activeEntity} />
+						<Outstanding
+							entityCode={activeEntity}
+							setSelectedOrg={setSelectedOrg}
+							selectedOrg={selectedOrg}
+						/>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
 						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />

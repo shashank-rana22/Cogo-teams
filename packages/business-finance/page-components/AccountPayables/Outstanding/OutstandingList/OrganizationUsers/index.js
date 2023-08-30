@@ -7,9 +7,12 @@ import useGetOrganizationUsers from '../../hooks/useGetOrganizationUsers';
 
 import styles from './styles.module.css';
 
-function Users({ selfOrganizationId = '', orgData = {} }) {
+function Users({
+	organizationId = '',
+	orgData = {},
+}) {
 	const { organizationData, param, setParam, loading } = useGetOrganizationUsers({
-		selfOrganizationId,
+		organizationId,
 	});
 
 	const { list = [], page, totalRecords } = organizationData || {};

@@ -15,7 +15,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		label : 'Total Outstanding Amount',
 	});
 	const {
-		search, organizationSerialId, pageLimit, page, sageId, tradePartySerialId,
+		search = '', organizationSerialId, pageLimit, page, sageId, tradePartySerialId,
 	} = outStandingFilters || {};
 
 	const { order, key } = orderBy || {};
@@ -32,7 +32,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		{ manual: true },
 	);
 
-	const { query, debounceQuery } = useDebounceQuery();
+	const { query = '', debounceQuery } = useDebounceQuery();
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);

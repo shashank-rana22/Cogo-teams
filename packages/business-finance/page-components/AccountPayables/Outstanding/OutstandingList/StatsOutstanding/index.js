@@ -7,6 +7,19 @@ import styles from './styles.module.css';
 
 const DEFAULT_AMOUNT = 0;
 
+const getStyles = ({ item, val, key }) => {
+	if (key === 'totalOnAccountAmount') {
+		return styles.totalOnAccount;
+	}
+	if (key === 'totalOpenInvoiceAmount') {
+		return styles.amount_open_inv;
+	}
+	if (item?.[val?.valueKey] > DEFAULT_AMOUNT) {
+		return styles.positive;
+	}
+	return styles.amount;
+};
+
 function StatsOutstanding({ item = {}, source = '' }) {
 	const {
 		entityCode = '',
@@ -22,10 +35,12 @@ function StatsOutstanding({ item = {}, source = '' }) {
 			countKey : 'totalOpenInvoicesCount',
 		},
 		{
-			name     : 'ON ACCOUNT PAYMENTS',
-			statsKey : StatsKeyMappingPayment,
-			key      : 'totalOnAccountAmount',
-			countKey : 'totalOnAccountCount',
+			name             : 'ON ACCOUNT PAYMENTS',
+			statsKey         : StatsKeyMappingPayment,
+			key              : 'totalOnAccountAmount',
+			fallbackKey      : 'totalOpenOnAccountAmount',
+			fallbackCountKey : 'totalOpenOnAccountCount',
+			countKey         : 'totalOnAccountCount',
 		},
 		{
 			name     : 'OutStanding',
@@ -57,10 +72,12 @@ function StatsOutstanding({ item = {}, source = '' }) {
 									{invoiceObject.name}
 									{' '}
 								</div>
-								<div className={styles.amount_open}>
+								<div className={invoiceObject.key === 'totalOnAccountAmount'
+									? styles.onaccount : styles.amount_open}
+								>
 									{formatAmount({
 										amount:
-											item?.[invoiceObject?.key],
+											item?.[invoiceObject?.key] || item?.[invoiceObject?.fallbackKey],
 										currency:
 											item?.ledCurrency || currency,
 										options: {
@@ -72,7 +89,8 @@ function StatsOutstanding({ item = {}, source = '' }) {
 									{invoiceObject?.countKey ? (
 										<div className={styles.count_open}>
 											(
-											{item?.[invoiceObject?.countKey] || DEFAULT_AMOUNT}
+											{item?.[invoiceObject?.countKey]
+												|| item?.[invoiceObject?.fallbackCountKey] || DEFAULT_AMOUNT}
 											)
 										</div>
 									) : null}
@@ -81,7 +99,7 @@ function StatsOutstanding({ item = {}, source = '' }) {
 							<div className={styles.flex}>
 								{(invoiceObject.statsKey || []).map((val) => (
 									<div key={val.label} className={styles.label}>
-										<div className={styles.amount}>
+										<div className={getStyles({ item, val, key: invoiceObject?.key })}>
 											{formatAmount({
 												amount:
 													item?.[val?.valueKey] || DEFAULT_AMOUNT,
@@ -117,9 +135,9 @@ function StatsOutstanding({ item = {}, source = '' }) {
 					<div className={styles.total}>Total Outstanding</div>
 					<div className={styles.amountout}>
 						{formatAmount({
-							amount: item?.totalInvoiceAmount || DEFAULT_AMOUNT,
+							amount: item?.totalInvoiceAmount || item?.totalOutstanding || DEFAULT_AMOUNT,
 							currency:
-												item?.ledCurrency || currency,
+								item?.ledCurrency || currency,
 							options: {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -127,11 +145,13 @@ function StatsOutstanding({ item = {}, source = '' }) {
 							},
 						})}
 					</div>
-					<div className={styles.counttotal}>
-						Count -
-						{' '}
-						<span className={styles.counts}>{item?.totalInvoicesCount || DEFAULT_AMOUNT}</span>
-					</div>
+					{!source ? (
+						<div className={styles.counttotal}>
+							Count -
+							{' '}
+							<span className={styles.counts}>{item?.totalInvoicesCount || DEFAULT_AMOUNT}</span>
+						</div>
+					) : null}
 				</div>
 			</div>
 		</div>

@@ -7832,6 +7832,11 @@ const partner = {
 			feature     : 'Outstanding',
 		},
 		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api         : 'get_purchase_bills_by_id_bill_time_line',
 			access_type : 'private',
 		},
