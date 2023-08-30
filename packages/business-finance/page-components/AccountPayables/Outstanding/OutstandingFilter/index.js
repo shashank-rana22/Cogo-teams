@@ -16,6 +16,11 @@ const COLOR_MAP = {
 	Desc : '#BDBDBD',
 };
 
+const COLOR_MAP_UP = {
+	Desc : '#303B67',
+	Asc  : '#BDBDBD',
+};
+
 function Filters({
 	handleChange = () => {},
 	handleInputReset = () => {},
@@ -104,7 +109,7 @@ function Filters({
 					}}
 				>
 					<IcMArrowRotateUp style={{ color: COLOR_MAP[orderBy?.order] }} />
-					<IcMArrowRotateDown style={{ color: COLOR_MAP[orderBy?.order] }} />
+					<IcMArrowRotateDown style={{ color: COLOR_MAP_UP[orderBy?.order] }} />
 				</div>
 
 				<FilterpopOver
