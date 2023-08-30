@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import useGetWeeklySchedules from '../../../../../../hooks/useGetWeeklySchedules';
+import useGetWeeklySchedules from '../../hooks/useGetWeeklySchedules';
 
 import Footer from './Footer';
 import ScheduleItem from './ScheduleItem';
@@ -16,7 +16,6 @@ function Schedules({
 	selectedWeek = {},
 	setSelectedWeek = () => {},
 	setFilters = () => {},
-	setPage = () => {},
 	setComparisonRates = () => {},
 	loading = false,
 }) {
@@ -62,7 +61,6 @@ function Schedules({
 
 					<Footer
 						paginationProps={paginationProps}
-						setPage={setPage}
 						selectedWeek={selectedWeek}
 						loading={loading}
 						schedules={schedules}

@@ -1,18 +1,18 @@
-import { Loader, Pagination } from '@cogoport/components';
+import { Loader } from '@cogoport/components';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
 import RequestRate from '../../../../common/RequestRate';
+import Schedules from '../../../../common/Schedules';
 
 import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
 import RateCard from './components/RateCard';
-import Schedules from './components/Schedules';
 import styles from './styles.module.css';
-
-const MINIMUM_RATE_CARDS_FOR_PAGINATION = 5;
 
 function ListRates({
 	rates = [],
@@ -33,6 +33,8 @@ function ListRates({
 	const [openAccordian, setOpenAccordian] = useState('');
 
 	const showComparison = !isEmpty(comparisonRates);
+
+	const { total_count, page_limit, page } = paginationProps;
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -115,18 +117,28 @@ function ListRates({
 				/>
 			))}
 
-			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
-
-			{(rates || []).length > MINIMUM_RATE_CARDS_FOR_PAGINATION && !loading ? (
-				<Pagination
-					type="table"
-					currentPage={paginationProps?.page}
-					totalItems={paginationProps?.total_count}
-					pageSize={paginationProps?.page_limit}
-					onPageChange={(val) => setPage(val)}
-					className={styles.pagination}
-				/>
+			{!loading && page < Math.ceil(total_count / page_limit) ? (
+				<div className={styles.show_more_button}>
+					<div
+						role="presentation"
+						onClick={() => refetch({ show_more: true })}
+						className={styles.button}
+					>
+						Show more results
+						{' '}
+						<IcMArrowRotateDown style={{ marginLeft: '8px' }} />
+					</div>
+				</div>
 			) : null}
+
+			{loading && (
+				<div className={styles.spinner_container}>
+					<DotLoader size="lg" />
+					<div className={styles.text}>Fetching rates, please wait</div>
+				</div>
+			)}
+
+			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
 		</div>
 	);
 }
