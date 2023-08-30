@@ -1774,6 +1774,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_trucks',
+		access_type  : 'public',
+		service_name : 'fcl_freight_rate',
+	},
 ];
 
 export default apis;

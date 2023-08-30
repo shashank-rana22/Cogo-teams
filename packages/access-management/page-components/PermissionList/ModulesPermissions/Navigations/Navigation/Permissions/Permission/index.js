@@ -1,6 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import getFormValues from '../../../../../../../utils/get-form-values';
@@ -17,6 +18,7 @@ function Permission({
 	setNavigationRefs = () => {},
 	creatingNavs = false,
 }) {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const formValues = getFormValues(permission, navigation, customPermissions);
 	const [errors, setErrors] = useState({});
 	const controls = [
@@ -108,7 +110,7 @@ function Permission({
 				</p>
 				{(navigation?.main_apis || []).includes(permission?.value) ? (
 					<p style={{ margin: 0, fontSize: 10 }}>
-						This Permission will decide views in this module
+						{t('accessManagement:roles_and_permission_crm_dashboard_permission_decision')}
 					</p>
 				) : null}
 			</div>
