@@ -5,7 +5,7 @@ import OutstandingList from '../OutstandingList';
 
 import styles from './styles.module.css';
 
-function ViewOrganizationDetails({ selectedOrg = {}, setSelectedOrg = () => { } }) {
+function ViewOrganizationDetails({ selectedOrg = {}, setSelectedOrg = () => {} }) {
 	return (
 		<div>
 			<div className={styles.button_div}>

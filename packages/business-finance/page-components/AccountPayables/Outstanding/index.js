@@ -17,7 +17,7 @@ const LOADER_LEN = 7;
 
 function Outstanding({
 	entityCode = '',
-	setSelectedOrg = () => {},
+	setSelectedOrg = () => { },
 	selectedOrg = {},
 }) {
 	const [formFilters, setFormFilters] = useState({
@@ -86,10 +86,9 @@ function Outstanding({
 					/>
 					{outstandingLoading ? (
 						<div>
-							{Array(LOADER_LEN)
-								.fill(null).map((key) => (
-									<OrgLoader key={key} />
-								))}
+							{[...Array(LOADER_LEN)].map((key) => (
+								<OrgLoader key={key} />
+							))}
 						</div>
 					) : (
 						<>
@@ -101,8 +100,8 @@ function Outstanding({
 									setSelectedOrg={setSelectedOrg}
 								/>
 							))}
-							{isEmpty(list) && <div className={styles.empty_state}><EmptyStateDocs /></div>}
-							{!isEmpty(list) && (
+							{isEmpty(list) ? <div className={styles.empty_state}><EmptyStateDocs /></div> : null}
+							{!isEmpty(list) ? (
 								<div className={styles.pagination_container}>
 									<Pagination
 										type="table"
@@ -115,7 +114,7 @@ function Outstanding({
 										})}
 									/>
 								</div>
-							)}
+							) : null}
 						</>
 					)}
 				</>

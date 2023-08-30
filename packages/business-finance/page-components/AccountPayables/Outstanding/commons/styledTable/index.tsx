@@ -26,7 +26,7 @@ function StyledTable({
 					{...rest}
 				/>
 			)}
-			{!data?.length && !loading && <EmptyState />}
+			{(!data?.length && !loading) ? <EmptyState /> : null}
 		</div>
 	);
 }

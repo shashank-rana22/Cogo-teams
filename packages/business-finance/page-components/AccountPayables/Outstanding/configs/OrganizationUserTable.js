@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { startCase, getByKey, isEmpty } from '@cogoport/utils';
 
-const organizationColumn = () => [
+const organizationColumn = [
 	{
 		Header   : 'Name',
 		id       : 'name',

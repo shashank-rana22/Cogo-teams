@@ -39,7 +39,7 @@ const historyFilters = [
 function History({ organizationId = '' }) {
 	const {
 		data = {}, loading = false, filters = {},
-		setFilters = () => {}, apiData = {}, refetch = () => {},
+		setFilters = () => { }, apiData = {}, refetch = () => { },
 	} = useHistorySettlement({ organizationId });
 
 	const onPageChange = (val) => {
@@ -71,7 +71,7 @@ function History({ organizationId = '' }) {
 				showFooter={false}
 				source="outstanding"
 			/>
-			{!loading && isEmpty(data?.list) && <EmptyStateDocs />}
+			{(!loading && isEmpty(data?.list)) ? <EmptyStateDocs /> : null}
 		</div>
 	);
 }

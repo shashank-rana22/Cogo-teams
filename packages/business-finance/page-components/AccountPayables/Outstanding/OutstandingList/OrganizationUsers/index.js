@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 
 function Users({
 	organizationId = '',
-	orgData = {},
 }) {
 	const { organizationData = {}, param = {}, setParam = () => {}, loading = false } = useGetOrganizationUsers({
 		organizationId,
@@ -21,7 +20,7 @@ function Users({
 		<div>
 			<StyledTable
 				data={list}
-				columns={organizationColumn({ orgData })}
+				columns={organizationColumn}
 				loading={loading}
 			/>
 

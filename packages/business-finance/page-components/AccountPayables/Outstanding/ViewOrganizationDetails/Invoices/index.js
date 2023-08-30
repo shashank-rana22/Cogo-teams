@@ -31,7 +31,7 @@ function Invoices({ organizationId = '' }) {
 
 	const { stats = {} } = billsData || {};
 
-	const { generateInvoice, loading: generating } = useGetDownloadReport({
+	const { generateInvoice = () => {}, loading: generating = false } = useGetDownloadReport({
 		size          : stats?.all,
 		globalFilters : billsFilters,
 	});

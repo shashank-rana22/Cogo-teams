@@ -74,16 +74,6 @@
 	background: #2c3e50;
 }
 
-.flex_column {
-	display: flex;
-	flex-direction: column;
-}
-
-.category_container {
-	display: flex;
-	padding: 6px;
-}
-
 .value {
 	margin-left: 4px;
 	font-size: 10px;
