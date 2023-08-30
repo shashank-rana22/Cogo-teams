@@ -1,4 +1,4 @@
-import { Button, ProgressBar } from '@cogoport/components';
+import { Button, ProgressBar, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const MAX = 100;
 
-function LeaveBalancesComponent({ data, refetch }) {
+function LeaveBalancesComponent({ data, refetch, loading }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 
 	const {
@@ -33,74 +33,81 @@ function LeaveBalancesComponent({ data, refetch }) {
 				<div className={styles.header_text1}>These are your leave balances</div>
 			</div>
 			<div className={styles.leaves_cotegory_body}>
-				<div className={styles.leave_ctn_privilege}>
-					<div className={styles.leave_icon_ctn}>
-						<img
-							src={image_url.previlege_leave_icon}
-							alt="loading"
-						/>
-						<div className={styles.leaves_text}>Privilege Leave</div>
-					</div>
-					<div className={styles.text2}>
-						<div>
-							{available_privilege_leaves}
-							{' '}
-							available
+				{loading ? <Placeholder height="60px" width="100%" margin="0px 0px 20px 0px" /> : (
+					<div className={styles.leave_ctn_privilege}>
+						<div className={styles.leave_icon_ctn}>
+							<img
+								src={image_url.previlege_leave_icon}
+								alt="loading"
+							/>
+							<div className={styles.leaves_text}>Privilege Leave</div>
 						</div>
-						<div>
-							{approved_privilege_leaves}
-							{' '}
-							Used
+						<div className={styles.text2}>
+							<div>
+								{available_privilege_leaves}
+								{' '}
+								available
+							</div>
+							<div>
+								{approved_privilege_leaves}
+								{' '}
+								Used
+							</div>
 						</div>
+						<ProgressBar className={styles.previlege_progress} progress={PROGRESS_PL} />
 					</div>
-					<ProgressBar className={styles.previlege_progress} progress={PROGRESS_PL} />
-				</div>
-				<div className={styles.leave_ctn}>
-					<div className={styles.leave_icon_ctn}>
-						<img
-							src={image_url.sick_leave_icon}
-							alt="loading"
-						/>
-						<div className={styles.leaves_text}>Sick Leave</div>
-					</div>
-					<div className={styles.text2}>
-						<div>
-							{available_sick_leaves}
-							{' '}
-							available
+				)}
+
+				{loading ? <Placeholder height="60px" width="100%" margin="0px 0px 20px 0px" /> : (
+					<div className={styles.leave_ctn}>
+						<div className={styles.leave_icon_ctn}>
+							<img
+								src={image_url.sick_leave_icon}
+								alt="loading"
+							/>
+							<div className={styles.leaves_text}>Sick Leave</div>
 						</div>
-						<div>
-							{' '}
-							{approved_sick_leaves}
-							{' '}
-							Used
+						<div className={styles.text2}>
+							<div>
+								{available_sick_leaves}
+								{' '}
+								available
+							</div>
+							<div>
+								{' '}
+								{approved_sick_leaves}
+								{' '}
+								Used
+							</div>
 						</div>
+						<ProgressBar progress={PROGRESS_SL} />
 					</div>
-					<ProgressBar progress={PROGRESS_SL} />
-				</div>
-				<div className={styles.last_leave_ctn}>
-					<div className={styles.leave_icon_ctn}>
-						<img
-							src={image_url.casual_leave_icon}
-							alt="loading"
-						/>
-						<div className={styles.leaves_text}>Casual Leave</div>
-					</div>
-					<div className={styles.text2}>
-						<div>
-							{available_casual_leaves}
-							{' '}
-							available
+				)}
+				{loading ? <Placeholder height="60px" width="100%" margin="0px 0px 20px 0px" /> : (
+					<div className={styles.last_leave_ctn}>
+						<div className={styles.leave_icon_ctn}>
+							<img
+								src={image_url.casual_leave_icon}
+								alt="loading"
+							/>
+							<div className={styles.leaves_text}>Casual Leave</div>
 						</div>
-						<div>
-							{' '}
-							{approved_casual_leaves}
-							{' '}
-							Used
+						<div className={styles.text2}>
+							<div>
+								{available_casual_leaves}
+								{' '}
+								available
+							</div>
+							<div>
+								{' '}
+								{approved_casual_leaves}
+								{' '}
+								Used
+							</div>
 						</div>
+						<ProgressBar progress={PROGRESS_CL} />
 					</div>
-					<ProgressBar progress={PROGRESS_CL} />
-				</div>
+				)}
 				<div className={styles.button_ctn}>
 					<Button size="lg" themeType="accent" onClick={() => setOpenLeaveModal(true)}>Apply Leave</Button>
 				</div>

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useHarbourRequest } from '@cogoport/request';
@@ -43,7 +44,7 @@ const useCreateLeaveApplication = ({ onClose, refetch, refetchList, setSelectedD
 				onClose();
 				Toast.success('Leave Application Sucessfully');
 			} catch (error) {
-				Toast.error('Something went wrong');
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		} else {
 			Toast.error('Please select correct date');

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useDeleteLeave = ({ onClose, refetch, refetchList }) => {
@@ -19,7 +20,7 @@ const useDeleteLeave = ({ onClose, refetch, refetchList }) => {
 			onClose();
 			Toast.success('Leave Deleted Sucessfully');
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
 	};
 

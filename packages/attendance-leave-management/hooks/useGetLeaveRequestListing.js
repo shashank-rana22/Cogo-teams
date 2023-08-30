@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -26,7 +28,11 @@ const useGetLeaveRequestListing = () => {
 	);
 
 	useEffect(() => {
-		getLeaveRequestListing();
+		try {
+			getLeaveRequestListing();
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+		}
 	}, [getLeaveRequestListing]);
 	return { loading, data, filters, setFilters };
 };

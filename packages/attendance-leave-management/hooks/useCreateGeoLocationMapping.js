@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useCreateGeoLocationMapping = ({ refetch, onClose }) => {
@@ -18,7 +19,7 @@ const useCreateGeoLocationMapping = ({ refetch, onClose }) => {
 			onClose();
 			Toast.success('Details updated successfully');
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
 	};
 

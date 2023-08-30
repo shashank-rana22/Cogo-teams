@@ -18,6 +18,11 @@
 	gap: 16px;
 	align-items: flex-start;
 	align-self: stretch;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		width: 100%;
+	}
 }
 
 .location {

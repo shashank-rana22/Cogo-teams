@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -20,7 +22,11 @@ const useGetAttendanceStats = (cycle_id) => {
 
 	useEffect(() => {
 		if (cycle_id) {
-			getAttendaceStats();
+			try {
+				getAttendaceStats();
+			} catch (error) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	}, [cycle_id, getAttendaceStats]);
 

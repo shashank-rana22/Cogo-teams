@@ -1,9 +1,11 @@
 .header {
 	font-size: 24px;
+	font-weight: 500;
 	color: #221f20;
 }
 
 .sub_header {
+	font-weight: 500;
 	color: #4f4f4f;
 }
 
@@ -21,7 +23,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-weight: 550;
 
 	@media (max-width: 768px) {
 		flex-wrap: wrap;
