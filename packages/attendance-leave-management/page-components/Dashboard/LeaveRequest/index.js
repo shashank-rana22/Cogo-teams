@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowLeft, IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import Loader from '../../../common/Loader';
 import useGetLeaveGroupings from '../../../hooks/useGetLeaveGroupings';
 import LeaveCard from '../RequestModal/LeaveCard';
 
@@ -11,7 +12,7 @@ import styles from './styles.module.css';
 function LeaveRequest({ setShowInbox, isManager }) {
 	const [activeTab, setActiveTab] = useState('employee');
 
-	const { data } = useGetLeaveGroupings(activeTab);
+	const { loading, data } = useGetLeaveGroupings(activeTab);
 
 	const { total_self_pending_count, list, total_employees_pending_count } = data || {};
 
@@ -53,12 +54,13 @@ function LeaveRequest({ setShowInbox, isManager }) {
 					<Input size="md" prefix={<IcMSearchdark />} placeholder="Search" />
 				</div>
 			</div>
-			{(list || []).map((leaveData) => (
+			{loading ? <Loader /> : (list || []).map((leaveData) => (
 				<LeaveCard
 					isManager={activeTab === 'manager'}
 					data={leaveData}
 					activeTab={activeTab}
 					key={leaveData.leave_request}
+					loading={loading}
 				/>
 			))}
 		</div>
