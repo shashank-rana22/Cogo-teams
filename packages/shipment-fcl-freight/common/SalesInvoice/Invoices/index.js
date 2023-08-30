@@ -26,7 +26,7 @@ function Invoices({
 	isCustomer = false,
 	isIRNGenerated = false,
 }) {
-	const filteredGroupedInvoices = Object.entries(groupedInvoices).reduce(
+	const filteredGroupedInvoices = Object.entries(groupedInvoices)?.reduce(
 		(acc, [key, value]) => {
 			const present = value?.invoices?.every((val) => isEmpty(val?.parent_invoice_id));
 			if (present) {
