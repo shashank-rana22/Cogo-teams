@@ -124,7 +124,6 @@ function DefaultView() {
 
 	return (
 		<div>
-			<div>HAHAHA</div>
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>

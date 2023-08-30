@@ -18,6 +18,7 @@ function CostBookingDesk() {
 	const [shipmentType, setShipmentType] = useState(defaultValues?.shipmentType);
 	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
 	const [scopeFilters] = useState(defaultValues?.scopeFilters);
+	const [paymentType, setPaymentType] = useState(defaultValues?.paymentType);
 
 	const contextValues = useMemo(() => ({
 		activeTab,
@@ -29,8 +30,10 @@ function CostBookingDesk() {
 		setStepperTab,
 		stepperTab,
 		shipmentType,
+		paymentType,
+		setPaymentType,
 	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters,
-		shipmentType, setShipmentType, stepperTab, setStepperTab]);
+		shipmentType, setShipmentType, stepperTab, setStepperTab, paymentType, setPaymentType]);
 
 	const RenderDesk = shipmentType in ResolveCostBookingDesk
 		? ResolveCostBookingDesk[shipmentType]

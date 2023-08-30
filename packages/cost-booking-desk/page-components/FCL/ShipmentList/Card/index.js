@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFfcl, IcMFcustoms, IcMFlocalCharges } from '@cogoport/icons-react';
@@ -39,7 +39,10 @@ const SHIPMENT_TYPE = {
 
 const STEPPER_TAB = ['import', 'export'];
 
-function Card({ item = {} }) {
+function Card({
+	item = {},
+	setShowRequest = () => {},
+}) {
 	const router = useRouter();
 	const contextValues = useContext(CostBookingDeskContext);
 
@@ -63,6 +66,11 @@ function Card({ item = {} }) {
 	const isShipmentCritical = getCriticalShipment({ contextValues, shipment: item });
 
 	const showGateInCutOff = ['assigned', 'in_progress'].includes(activeTab) && item?.gate_in_cutoff;
+
+	const handleRequest = (e) => {
+		e.preventDefault();
+		setShowRequest(item?.id);
+	};
 
 	return (
 		<a
@@ -98,6 +106,14 @@ function Card({ item = {} }) {
 						? <CargoDetailsLocal item={item} />
 						: <CargoDetails cargo_details={item?.cargo_details || []} item={item} />}
 				</div>
+				{activeTab === 'security_deposit' ? (
+					<Button
+						themeType="secondary"
+						onClick={handleRequest}
+					>
+						Request
+					</Button>
+				) : null}
 			</div>
 
 			{showGateInCutOff ? (

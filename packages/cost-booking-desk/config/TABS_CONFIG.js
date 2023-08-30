@@ -21,6 +21,10 @@ const importExportFcl = [
 		name  : 'job_closed',
 		title : 'Closed Jobs',
 	},
+	{
+		name  : 'security_deposit',
+		title : 'Security Deposits',
+	},
 ];
 
 const commonTabs = [
