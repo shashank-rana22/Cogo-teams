@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 import getAddonConfig from '../configuration/addonConfig';
 import { getUpdatePlanFeatureConfig } from '../configuration/planFeatureConfig';
@@ -33,7 +34,7 @@ const createDrafultValue = (list, name) => {
 const getFeatureMapping = (info, name, t) => ({
 	addon: {
 		name         : 'updateAddon',
-		title        : 'Add Add-ons',
+		title        : t('saasSubscription:pricing_feature_mapping_addon'),
 		configs      : getAddonConfig({ t }),
 		formControls : getUpdateAddonControl({ t }),
 		defaultValue : createDrafultValue(info, name),
@@ -41,7 +42,7 @@ const getFeatureMapping = (info, name, t) => ({
 	},
 	planFeature: {
 		name         : 'updatePlanFeature',
-		title        : 'Add Plan Feature',
+		title        : t('saasSubscription:pricing_feature_mapping_plan'),
 		configs      : getUpdatePlanFeatureConfig({ t }),
 		formControls : getUpdatePlanFeatureControl({ t }),
 		defaultValue : createDrafultValue(info, name),
@@ -50,6 +51,7 @@ const getFeatureMapping = (info, name, t) => ({
 });
 
 const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
+	const { t } = useTranslation(['saasSubscription']);
 	const [{ loading: addonLoading }, addonTrigger] = useRequest({
 		url    : '/update_saas_product_plan_mapping',
 		method : 'post',
@@ -73,7 +75,7 @@ const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
 				},
 			});
 			modalCloseHandler(true);
-			Toast.success('SuccessFully updated Add-ons');
+			Toast.success(t('saasSubscription:update_addon_success'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
@@ -88,7 +90,7 @@ const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
 				},
 			});
 			modalCloseHandler(true);
-			Toast.success('SuccessFully updated Plan Feature');
+			Toast.success(t('saasSubscription:update_addon_success'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

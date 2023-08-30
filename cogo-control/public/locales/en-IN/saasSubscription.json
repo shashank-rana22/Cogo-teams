@@ -82,6 +82,8 @@
     "pricing_update_plan_config_val": "Value",
     "pricing_update_plan_config_name":"Display Name",
     "pricing_update_plan_config_seq":"Sequence",
+    "pricing_feature_mapping_addon":"Add Add-ons",
+    "pricing_feature_mapping_plan":"Add Plan Feature",
     "update_addon_name":"Enter Name",
     "update_addon_count":"Enter Count",
     "update_addon_count_err":"Should be greater than or equal to -1",
@@ -90,5 +92,8 @@
     "update_plan_value":"Enter Value",
     "update_plan_name":"Enter Name",
     "update_plan_seq":"Enter Sequence",
-    "update_plan_seq_err":"Should be greater than or equal to 0"
+    "update_plan_seq_err":"Should be greater than or equal to 0",
+    "create_plan_success":"Plan Successfully Created",
+    "update_addon_success":"SuccessFully updated Add-ons",
+    "update_plan_success":"SuccessFully updated Plan Feature"
 }

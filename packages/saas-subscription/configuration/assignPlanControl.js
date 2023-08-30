@@ -5,6 +5,7 @@ const getAssignPlanControl = ({ t }) => [
 		type        : 'asyncSelect',
 		placeholder : t('saasSubscription:assign_plan_config_org'),
 		asyncKey    : 'organizations',
+		initialCall : true,
 		rules       : {
 			required: true,
 		},
@@ -19,7 +20,8 @@ const getAssignPlanControl = ({ t }) => [
 			filters    : { is_active: true, plan_type: 'P' },
 			page_limit : 50,
 		},
-		rules: {
+		initialCall : true,
+		rules       : {
 			required: true,
 		},
 	},
