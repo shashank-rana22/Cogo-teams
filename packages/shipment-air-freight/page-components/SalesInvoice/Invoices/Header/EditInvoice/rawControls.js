@@ -68,7 +68,6 @@ const rawControls = (
 					</>
 				),
 				placeholder : 'Enter alias name/code',
-				disabled    : handleDisableCond(shipment_type, isRoleAllowed),
 				span        : 2,
 			},
 			{
