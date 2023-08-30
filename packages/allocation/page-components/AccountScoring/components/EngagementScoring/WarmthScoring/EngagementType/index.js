@@ -1,26 +1,33 @@
 import { Table, Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
-import tableColumns from '../../../../constants/get-configuration-columns';
-import editHeaders from '../../../../constants/get-edit-headers';
+import getTableColumns from '../../../../constants/get-configuration-columns';
+import getEditHeaders from '../../../../constants/get-edit-headers';
 import useEditEngagementScoringConfiguration from '../../../../hooks/useEditEngagementScoringConfiguration';
 import FieldArray from '../FieldArray';
 
 import styles from './styles.module.css';
 
 function EngagementType(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { item, editMode, setEditMode = () => {}, formProps, refetch } = props;
 
 	const { engagement_type_details = [], engagement_type = '' } = item;
 
 	const { control, setValue, watch, handleSubmit } = formProps;
 
-	const { onSave, editLoading } = useEditEngagementScoringConfiguration({ refetch, setEditMode });
+	const { onSave, editLoading } = useEditEngagementScoringConfiguration({ refetch, setEditMode, t });
 
 	const handleSave = (formValues) => {
 		onSave(formValues, engagement_type);
 	};
+
+	const editHeaders = getEditHeaders({ t });
+
+	const tableColumns = getTableColumns({ t });
 
 	useEffect(() => {
 		setValue('single_item', engagement_type_details);
@@ -38,8 +45,7 @@ function EngagementType(props) {
 							onClick={() => { setEditMode(''); setValue('single_item', engagement_type_details); }}
 							disabled={editLoading}
 						>
-							Cancel
-
+							{t('allocation:cancel_engagement_type_button')}
 						</Button>
 
 						<Button
@@ -50,7 +56,7 @@ function EngagementType(props) {
 							onClick={handleSubmit(handleSave)}
 							loading={editLoading}
 						>
-							Save
+							{t('allocation:save_button')}
 						</Button>
 					</>
 
@@ -63,7 +69,7 @@ function EngagementType(props) {
 					>
 						<IcMEdit style={{ marginRight: '8px' }} />
 
-						Edit
+						{t('allocation:edit_button')}
 					</Button>
 				)}
 			</div>

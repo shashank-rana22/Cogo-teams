@@ -1,5 +1,6 @@
 import { Button, Placeholder } from '@cogoport/components';
-import { React, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 
 import useGetKamExpertiseLevelConfig from '../../../../../hooks/useGetKamExpertiseLevelConfig';
 import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
@@ -7,7 +8,14 @@ import Card from '../Card';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
+const THIRD_INDEX = 3;
+const FOUR_INDEX = 4;
+
 function KamLevelDropDown({ refetch, cardRefetch, transition_level }) {
+	const { t } = useTranslation(['allocation']);
+
 	const [editMode, setEditMode] = useState(false);
 
 	const {
@@ -27,8 +35,8 @@ function KamLevelDropDown({ refetch, cardRefetch, transition_level }) {
 	if (listLoading) {
 		return (
 			<div style={{ padding: '4px' }}>
-				{[1, 2, 3, 4].map(() => (
-					<div style={{ padding: '4px' }}>
+				{[FIRST_INDEX, SECOND_INDEX, THIRD_INDEX, FOUR_INDEX].map((item) => (
+					<div key={item} style={{ padding: '4px' }}>
 						<Placeholder width="200px" height="30px" margin="8px" />
 						<Placeholder width="100px" height="20px" margin="8px" />
 						<Placeholder width="50px" height="20px" margin="8px" />
@@ -50,7 +58,7 @@ function KamLevelDropDown({ refetch, cardRefetch, transition_level }) {
 						type="submit"
 					>
 						{' '}
-						Save
+						{t('allocation:save_button')}
 					</Button>
 
 					<Button
@@ -63,7 +71,7 @@ function KamLevelDropDown({ refetch, cardRefetch, transition_level }) {
 							setEditMode(false);
 						}}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 				</>
 			) : (
@@ -74,7 +82,7 @@ function KamLevelDropDown({ refetch, cardRefetch, transition_level }) {
 						setEditMode(true);
 					}}
 				>
-					Edit
+					{t('allocation:edit_button')}
 				</Button>
 			)}
 

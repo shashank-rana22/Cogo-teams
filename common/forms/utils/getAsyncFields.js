@@ -886,7 +886,7 @@ function asyncListLeadOrganizationUsers() {
 	};
 }
 
-function asyncListPricingZones() {
+async function asyncListPricingZones() {
 	return {
 		valueKey    : 'id',
 		labelKey    : 'name',
@@ -895,6 +895,21 @@ function asyncListPricingZones() {
 		params      : {
 			page_limit : 100,
 			page       : 1,
+		},
+	};
+}
+
+function asyncListTruckTypes() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'truck_name',
+		endpoint    : 'list_trucks',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
 		},
 	};
 }
@@ -971,5 +986,6 @@ export {
 	asyncListResources,
 	asyncFieldsLocationsMapping,
 	asyncListPricingZones,
+	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
 };

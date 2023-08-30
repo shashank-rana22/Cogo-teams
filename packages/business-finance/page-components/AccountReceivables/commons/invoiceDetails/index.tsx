@@ -23,7 +23,11 @@ const INVOICE_DATA_MAPPING = [
 	{ id: '3', label: 'UTR Number' },
 	{ id: '4', label: 'Cancellation Agreement' },
 ];
-function InvoiceDetails({ item, entityCode = '' }) {
+
+function InvoiceDetails({
+	item = { id: '', invoiceNumber: '', sidNo: '', organizationName: '' },
+	entityCode = '',
+}) {
 	const { loading, data, getInvoiceDetailsApi } = useInvoiceDetails({
 		id: item?.id,
 	});
@@ -39,7 +43,7 @@ function InvoiceDetails({ item, entityCode = '' }) {
 	};
 
 	const handleDropdown = (key = '') => {
-		setDropDownData((previousActions:object) => ({
+		setDropDownData((previousActions: object) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
@@ -61,8 +65,17 @@ function InvoiceDetails({ item, entityCode = '' }) {
 				<>
 					<div className={styles.invoice_details_container_bg} />
 
-					<div className={styles.invoice_details_container} style={{ width: '35vw' }}>
-						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
+					<div
+						className={styles.invoice_details_container}
+						style={{ width: '35vw' }}
+					>
+						<div
+							className={
+								showDetailsCard
+									? styles.enter_left
+									: styles.exit_left
+							}
+						>
 							<div className={styles.content_caret}>
 								<div
 									className={styles.icon_container}
@@ -77,7 +90,11 @@ function InvoiceDetails({ item, entityCode = '' }) {
 
 								<div className={styles.header_details}>
 									INVOICE DETAILS -
-									<span style={{ textDecorationLine: 'underline' }}>
+									<span
+										style={{
+											textDecorationLine: 'underline',
+										}}
+									>
 										{item?.invoiceNumber}
 									</span>
 									{' '}
@@ -96,62 +113,108 @@ function InvoiceDetails({ item, entityCode = '' }) {
 									/>
 								) : (
 									<div className={styles.body_details_card}>
-										<div className={styles.invoice_card_data}>
-											<div className={styles.supplier_data_header}>
-												<span style={{ fontWeight: '600' }}>
+										<div
+											className={styles.invoice_card_data}
+										>
+											<div
+												className={
+													styles.supplier_data_header
+												}
+											>
+												<span
+													style={{
+														fontWeight: '600',
+													}}
+												>
 													{item?.organizationName}
 												</span>
-												<div className={styles.tag_container}>
-													{startCase(data?.invoicePartyType)}
+												<div
+													className={
+														styles.tag_container
+													}
+												>
+													{startCase(
+														data?.invoicePartyType,
+													)}
 												</div>
 											</div>
 
-											<div className={styles.supplier_data_body}>
+											<div
+												className={
+													styles.supplier_data_body
+												}
+											>
 												Invoice Amount -
-												<span style={{ marginLeft: '4px' }}>
-													{
-														formatAmount({
-															amount   : data?.summary?.grandTotal,
-															currency : data?.summary?.currency,
-															options  : {
-																currencyDisplay       : 'code',
-																maximumFractionDigits : 0,
-																style                 : 'currency',
-															},
-														})
-													}
+												<span
+													style={{
+														marginLeft: '4px',
+													}}
+												>
+													{formatAmount({
+														amount: data?.summary
+															?.grandTotal,
+														currency:
+															data?.summary
+																?.currency,
+														options: {
+															currencyDisplay:
+																'code',
+															maximumFractionDigits : 0,
+															style                 : 'currency',
+														},
+													})}
 												</span>
 											</div>
-											<div className={styles.supplier_data_body}>
+											<div
+												className={
+													styles.supplier_data_body
+												}
+											>
 												Ledger Amount -
-												<span style={{ marginLeft: '4px' }}>
-													{
-														formatAmount({
-															amount   : data?.summary?.ledgerTotal,
-															currency : data?.summary?.ledgerCurrency,
-															options  : {
-																currencyDisplay       : 'code',
-																maximumFractionDigits : 0,
-																style                 : 'currency',
-															},
-														})
-}
+												<span
+													style={{
+														marginLeft: '4px',
+													}}
+												>
+													{formatAmount({
+														amount: data?.summary
+															?.ledgerTotal,
+														currency:
+															data?.summary
+																?.ledgerCurrency,
+														options: {
+															currencyDisplay:
+																'code',
+															maximumFractionDigits : 0,
+															style                 : 'currency',
+														},
+													})}
 												</span>
 											</div>
-											<div className={styles.supplier_data_body}>
+											<div
+												className={
+													styles.supplier_data_body
+												}
+											>
 												Balance Amount -
-												<span style={{ marginLeft: '4px' }}>
-													{
-														formatAmount({
-															amount   : data?.summary?.balanceAmount,
-															currency : data?.summary?.currency,
-															options  : {
-																currencyDisplay       : 'code',
-																maximumFractionDigits : 0,
-																style                 : 'currency',
-															},
-														})
-}
+												<span
+													style={{
+														marginLeft: '4px',
+													}}
+												>
+													{formatAmount({
+														amount: data?.summary
+															?.balanceAmount,
+														currency:
+															data?.summary
+																?.currency,
+														options: {
+															currencyDisplay:
+																'code',
+															maximumFractionDigits : 0,
+															style                 : 'currency',
+														},
+													})}
 												</span>
 											</div>
 										</div>
@@ -159,63 +222,131 @@ function InvoiceDetails({ item, entityCode = '' }) {
 								)}
 								{loading ? (
 									<>
-										<Placeholder className={styles.placeholder_container} />
-										<Placeholder className={styles.placeholder_container} />
-										<Placeholder className={styles.placeholder_container} />
+										<Placeholder
+											className={
+												styles.placeholder_container
+											}
+										/>
+										<Placeholder
+											className={
+												styles.placeholder_container
+											}
+										/>
+										<Placeholder
+											className={
+												styles.placeholder_container
+											}
+										/>
 									</>
 								) : (
-									(INVOICE_DATA_MAPPING || [{}]).map((items) => {
-										const { id, label } = items;
+									(INVOICE_DATA_MAPPING || [{}]).map(
+										(items) => {
+											const { id, label } = items;
 
-										return (
-											<div className={styles.information} key={id}>
+											return (
 												<div
-													className={styles.data_container}
-													onClick={() => {
-														handleDropdown(id);
-													}}
-													role="presentation"
-
+													className={
+														styles.information
+													}
+													key={id}
 												>
-													{label}
-													<div className={styles.dropdown_container}>
-														{dropDownData[id] ? (
-															<IcMArrowRotateUp width={15} height={15} />
-														) : (
-															<IcMArrowRotateDown width={15} height={15} />
-														)}
-													</div>
-												</div>
-
-												{dropDownData[id] && <div className={styles.hr} />}
-
-												{dropDownData[id] && (
 													<div
-														className={dropDownData ? styles.enter_down : styles.exit_down}
+														className={
+															styles.data_container
+														}
+														onClick={() => {
+															handleDropdown(id);
+														}}
+														role="presentation"
 													>
-														<div className={styles.information_data}>
-															{label === 'POC' && (
-																<Poc data={data} />
-															)}
-															{label === 'Timeline' && (
-																<Timeline
-																	data={data}
-																	loading={loading}
-																	entityCode={entityCode}
+														{label}
+														<div
+															className={
+																styles.dropdown_container
+															}
+														>
+															{dropDownData[
+																id
+															] ? (
+																<IcMArrowRotateUp
+																	width={15}
+																	height={15}
 																/>
-															)}
-															{label === 'UTR Number' && (
-																<UtrNumber eventData={data} />
-															)}
-															{label === 'Cancellation Agreement' && (
-																<CancellationAgreement data={data} />
-															)}
+																) : (
+																	<IcMArrowRotateDown
+																		width={15}
+																		height={15}
+																	/>
+																)}
 														</div>
 													</div>
-												)}
-											</div>
-										);
-									})
+
+													{dropDownData[id] && (
+														<div
+															className={
+																styles.hr
+															}
+														/>
+													)}
+
+													{dropDownData[id] && (
+														<div
+															className={
+																dropDownData
+																	? styles.enter_down
+																	: styles.exit_down
+															}
+														>
+															<div
+																className={
+																	styles.information_data
+																}
+															>
+																{label
+																	=== 'POC' && (
+																		<Poc
+																			data={
+																			data
+																		}
+																		/>
+																)}
+																{label
+																	=== 'Timeline' && (
+																		<Timeline
+																			data={
+																			data
+																		}
+																			loading={
+																			loading
+																		}
+																			entityCode={
+																			entityCode
+																		}
+																		/>
+																)}
+																{label
+																	=== 'UTR Number' && (
+																		<UtrNumber
+																			eventData={
+																			data
+																		}
+																		/>
+																)}
+																{label
+																	=== 'Cancellation Agreement' && (
+																		<CancellationAgreement
+																			data={
+																			data
+																		}
+																		/>
+																)}
+															</div>
+														</div>
+													)}
+												</div>
+											);
+										},
+									)
 								)}
 							</div>
 						</div>

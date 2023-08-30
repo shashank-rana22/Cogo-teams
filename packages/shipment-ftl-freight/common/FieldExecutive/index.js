@@ -1,5 +1,6 @@
 import { Button, Input, CreatableSelect } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { AsyncSelect } from '@cogoport/forms';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import Loader from './commons/Loader';
@@ -22,6 +23,8 @@ function FieldExecutive(props) {
 		setInitFormattedData = () => {},
 		truckNumber = {},
 		setTruckNumber = () => {},
+		truckType = {},
+		setTruckType = () => {},
 		otherFormattedData = {},
 		setOtherFormattedData = () => {},
 		filterOptions = {},
@@ -49,16 +52,28 @@ function FieldExecutive(props) {
 			<div className={styles.truck_number}>Truck Number</div>
 			<div className={styles.heading}>
 				<div className={styles.select}>
-					<CreatableSelect
-						value={truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]}
-						onChange={(e) => setTruckNumber({
-							...truckNumber,
-							[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]: e,
-						})}
-						options={filterOptions}
-						placeholder="Select Truck Number"
-						size="md"
-					/>
+					<div className={styles.dropdown}>
+						<CreatableSelect
+							value={truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]}
+							onChange={(e) => setTruckNumber((prev) => ({
+								...prev,
+								[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]: e,
+							}))}
+							options={filterOptions}
+							placeholder="Select Truck Number"
+							size="md"
+						/>
+					</div>
+					<div className={styles.dropdown}>
+						<AsyncSelect
+							asyncKey="list_truck_types"
+							labelKey="display_name"
+							valueKey="truck_name"
+							value={truckType}
+							onChange={setTruckType}
+							renderLabel={(opt) => `${startCase(opt?.truck_name)} - ${startCase(opt?.display_name)}`}
+						/>
+					</div>
 				</div>
 				{fieldExecTabConfig?.edit_details_visible ? (
 					<div>
