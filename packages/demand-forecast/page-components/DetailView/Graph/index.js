@@ -116,7 +116,6 @@ function Graph({
 								<div key={legend.key} className={styles.legend_info}>
 
 									<div style={{ display: 'flex', alignItems: 'center' }}>
-										{' '}
 										<div
 											className={styles.circle}
 											style={{ background: `${colors[index]}` }}

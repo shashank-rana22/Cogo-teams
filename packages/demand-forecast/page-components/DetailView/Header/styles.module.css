@@ -6,6 +6,12 @@
 	padding: 10px;
 	font-weight: 600;
 	background: var(--greyscale-secondary-white, #fff);
+
+	@media (max-width: 576px) {
+		height: fit-content;
+		margin-top: 50px;
+		overflow: scroll;
+	}
 }
 
 .location_info {
