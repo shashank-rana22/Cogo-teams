@@ -14,6 +14,7 @@ function IncomingCallUserDetails() {
 	const { userLastCallLoading = false, userLastCallDetails } = useGetLastVoiceCallDetails({ userData });
 	console.log('userLastCallDetails:', userLastCallDetails);
 	console.log('userLastCallLoading:', userLastCallLoading);
+
 	return (
 		<div className={styles.container}>
 			IncomingCallUserDetailsIncomingCall
