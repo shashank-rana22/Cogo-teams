@@ -14,10 +14,6 @@ function EmailTemplateList({
 	emailData = {},
 	setEmailState = () => {},
 }) {
-	const handleClearSearch = () => {
-		setSearch('');
-	};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -27,7 +23,12 @@ function EmailTemplateList({
 					onChange={setSearch}
 					placeholder="Search by name"
 					className={styles.search_input}
-					suffix={<IcMCross className={styles.cross_icon} onClick={handleClearSearch} />}
+					suffix={(
+						<IcMCross
+							className={styles.cross_icon}
+							onClick={() => setSearch('')}
+						/>
+					)}
 				/>
 			</div>
 			<div className={styles.template_content}>

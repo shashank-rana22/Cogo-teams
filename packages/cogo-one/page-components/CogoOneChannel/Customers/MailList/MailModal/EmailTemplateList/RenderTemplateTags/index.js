@@ -38,7 +38,6 @@ function ToolTipComp({ moreList = [] }) {
 }
 
 function RenderTemplateTags({ tags = [] }) {
-	// const tags = ['apple', 'mango', 'pppppppppppp', 'watermelon'];
 	const showMoreList = (tags || []).length > MAX_SHOW_LENGTH;
 	const lessList = (tags || []).slice(GLOBAL_CONSTANTS.zeroth_index, MAX_SHOW_LENGTH);
 	const moreList = (tags || []).slice(MAX_SHOW_LENGTH);

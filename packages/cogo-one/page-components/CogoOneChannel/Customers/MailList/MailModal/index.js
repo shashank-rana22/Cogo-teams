@@ -47,6 +47,7 @@ function MailModal({
 		search = '',
 		setSearch = () => {},
 	} = useListEmailTemplates();
+
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 
 	const {
