@@ -58,7 +58,14 @@ function ListLocations({ data = {} }) {
 
 				<div className={styles.space_between}>
 					<p className={styles.sub_location}>
-						<span>{data.history ? `${startCase(data.type)} | ` : ''}</span>
+						{data?.history ? (
+							<span>
+								{startCase(data.type)}
+								{' '}
+								|
+								{' '}
+							</span>
+						) : null}
 						{subLocation}
 					</p>
 				</div>
