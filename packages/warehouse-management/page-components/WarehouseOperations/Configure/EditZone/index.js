@@ -4,8 +4,8 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import controls from '../../../../configurations/add-zone-controls';
 import useUpdateConfiguration from '../../../../hooks/useUpdateConfiguration';
-import controls from '../AddZone/controls';
 
 import styles from './styles.module.css';
 
@@ -18,25 +18,22 @@ function EditZoneModal({
 }) {
 	const {
 		control,
-		watch,
 		formState:{ errors = {} },
 		setValue,
 		handleSubmit,
 	} = useForm();
 
-	const formValues = watch();
 	useEffect(() => {
 		if (!isEmpty(editZone)) {
 			setValue('zoneName', item?.zoneName);
 			setValue('commodity', item?.commodity);
 			setValue('aisles', item?.aisles);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [editZone, setValue]);
+	}, [editZone, item, setValue]);
 	const {
 		loading = false,
 		onSubmit = () => {},
-	} = useUpdateConfiguration({ id: item?.id, formValues, listAPI, setEditZone, warehouseLocationId });
+	} = useUpdateConfiguration({ id: item?.id, listAPI, setEditZone, warehouseLocationId });
 	return (
 		<Modal
 			show={editZone}

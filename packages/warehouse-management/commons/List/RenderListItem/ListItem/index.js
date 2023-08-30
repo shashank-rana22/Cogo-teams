@@ -47,12 +47,12 @@ function ListItem({
 							{loading ? <Placeholder />
 								: (
 									<div>
-										{field.render ? field.render(item) : getValue(
-											item,
-											field,
+										{field.render ? field.render(item) : getValue({
+											itemData   : item,
+											itemField  : field,
 											functions,
-											'-',
-										)}
+											emptyState : '-',
+										})}
 									</div>
 								)}
 						</div>

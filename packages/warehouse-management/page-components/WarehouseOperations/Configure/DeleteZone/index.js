@@ -15,7 +15,6 @@ function DeleteZoneModal({
 
 	return (
 		<Modal
-			className={styles.modal_styled}
 			placement="center"
 			show={deleteZone}
 			onClose={() => setDeleteZone(false)}

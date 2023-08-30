@@ -1,18 +1,13 @@
-import { EmptyState } from '@cogoport/air-modules';
-import { Pagination, Button } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ListHeader from './ListHeader';
-import ListItem from './ListItem/index';
+import RenderListItem from './RenderListItem';
 import styles from './styles.module.css';
 
 const INITIAL_PAGE = 1;
 const SIZE_FOR_SHIPMENT_PAGE = 10;
-const SHOW_LIST_SIZE = 6;
-const DEFAULT_LIST_SIZE_ONE = 1;
-const CLOSED_LENGTH = 0;
 
 function List({
 	fields = [],
@@ -39,75 +34,21 @@ function List({
 
 	const [isOpen, setIsOpen] = useState('');
 
-	function Render() {
-		const showList = list.length ? list : Array(SHOW_LIST_SIZE).fill(DEFAULT_LIST_SIZE_ONE);
-		if (loading || list.length) {
-			return (showList).map((item) => (
-				<div key={item.warehouseTransferId}>
-					<ListItem
-						item={item}
-						activeTab={activeTab}
-						loading={loading}
-						fields={fields}
-						functions={functions}
-						Child={Child}
-						listAPI={listAPI}
-						isOpen={isOpen}
-					/>
-					{['schedules', 'inventory'].includes(activeTab) && (
-						<div
-							style={{ '--length': isOpen ? CLOSED_LENGTH : '-20px' }}
-							className={styles.amaendment_accordian_style}
-						>
-							{(isOpen === item?.warehouseTransferId || isOpen === item?.shipmentId) ? (
-								<Button
-									themeType="linkUi"
-									onClick={() => {
-										setIsOpen(null);
-									}}
-								>
-									Show Less
-									<IcMArrowDown
-										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
-									/>
-								</Button>
-							) : (!loading
-								&& (
-									<Button
-										size="md"
-										themeType="linkUi"
-										onClick={() => {
-											setIsOpen(activeTab === 'schedules'
-												? item?.warehouseTransferId : item?.shipmentId);
-										}}
-									>
-										<span>Show More</span>
-										<IcMArrowDown
-											style={{ cursor: 'pointer' }}
-										/>
-									</Button>
-								)
-							)}
-						</div>
-					)}
-				</div>
-			));
-		}
-		return (
-			<EmptyState
-				height="50%"
-				width="50%"
-				emptyText={`No ${activeTab} found !!`}
-				subEmptyText="Looks like no results were found..."
-			/>
-		);
-	}
-
 	return (
 		<section>
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
-				<Render />
+				<RenderListItem
+					activeTab={activeTab}
+					list={list}
+					loading={loading}
+					Child={Child}
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					listAPI={listAPI}
+					fields={fields}
+					functions={functions}
+				/>
 				{!loading && !isEmpty(data) && (
 					<div className={styles.pagination_container}>
 						<Pagination

@@ -51,15 +51,15 @@ function Inventory({
 			);
 		},
 		handleStatus: (singleItem) => {
-			let flag = true;
+			let isReceived = true;
 			singleItem?.details?.forEach((item) => {
 				if (item?.serviceStatus === 'not_received') {
-					flag = false;
+					isReceived = false;
 				}
 			});
 			return (
 				<div>
-					{flag
+					{isReceived
 						? 'Received'
 						: 'Not received'}
 				</div>

@@ -1,25 +1,25 @@
 import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import controls from '../../../../configurations/update-status-modal-controls';
 import useUpdateInventory from '../../../../hooks/useUpdateInventory';
 
-import controls from './controls';
 import styles from './styles.module.css';
 
 function UpdateStatusModal({
 	item = {},
-	showUpdateStatusModal = '',
+	showUpdateStatusModal = {},
 	setShowUpdateStatusModal = () => {},
 	listAPI = () => {},
 }) {
-	const { control, formState:{ errors = {} }, watch, setValue } = useForm();
-	const formValues = watch();
+	const { control, formState:{ errors = {} }, setValue, handleSubmit } = useForm();
 	const {
 		loading,
 		handleUpdate,
-	} = useUpdateInventory({ id: item?.id, formValues, setShowUpdateStatusModal, listAPI });
+	} = useUpdateInventory({ id: item?.id, setShowUpdateStatusModal, listAPI });
 
 	useEffect(() => {
 		const selectedServices = item?.services.reduce((acc, service) => {
@@ -32,8 +32,8 @@ function UpdateStatusModal({
 	}, [item?.services, setValue]);
 	return (
 		<Modal
-			show={showUpdateStatusModal}
-			onClose={() => setShowUpdateStatusModal(false)}
+			show={!isEmpty(Object.keys(showUpdateStatusModal))}
+			onClose={() => setShowUpdateStatusModal({})}
 		>
 			<Modal.Header title="Update Inventory Status" />
 			<Modal.Body>
@@ -46,14 +46,14 @@ function UpdateStatusModal({
 			<Modal.Footer>
 				<Button
 					className={styles.cancel_button}
-					onClick={() => setShowUpdateStatusModal(false)}
+					onClick={() => setShowUpdateStatusModal({})}
 					themeType="secondary"
 				>
 					Cancel
 				</Button>
 				<Button
 					disabled={loading}
-					onClick={handleUpdate}
+					onClick={handleSubmit(handleUpdate)}
 				>
 					Apply
 				</Button>

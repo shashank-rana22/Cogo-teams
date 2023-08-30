@@ -7,7 +7,7 @@ function useDeleteConfiguration({
 	setDeleteZone = () => {},
 	listAPI = () => {},
 }) {
-	const [{ loading }, trigger] = useRequestAir(
+	const [{ loading = true }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/configuration',
 			method  : 'DELETE',

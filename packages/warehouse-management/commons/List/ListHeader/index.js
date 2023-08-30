@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 const SPAN_ONE = 1;
 
@@ -15,7 +15,7 @@ function ListHeader({
 					className={cl`${styles.col} ${field.className || ''}`}
 					style={{ '--span': field.span || SPAN_ONE }}
 				>
-					{ field.label }
+					{ field.label || '' }
 				</div>
 			))}
 		</header>

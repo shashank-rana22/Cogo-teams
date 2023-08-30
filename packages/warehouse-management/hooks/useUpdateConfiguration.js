@@ -5,12 +5,11 @@ import { useSelector } from '@cogoport/store';
 
 function useUpdateConfiguration({
 	id = '',
-	formValues = {},
 	listAPI = () => {},
 	setEditZone = () => {},
 	warehouseLocationId = '',
 }) {
-	const [{ loading }, trigger] = useRequestAir(
+	const [{ loading = true }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/configuration',
 			method  : 'PUT',
@@ -22,7 +21,7 @@ function useUpdateConfiguration({
 		userId: profile.id,
 	}));
 
-	const onSubmit = async () => {
+	const onSubmit = async (formValues) => {
 		try {
 			await trigger({
 				data: {

@@ -12,7 +12,7 @@ const useListConfiguration = ({
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
-	const [{ data = {}, loading }, trigger] = useRequestAir(
+	const [{ data = {}, loading = true }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/warehouse-management/list-configurations',
 			method  : 'get',

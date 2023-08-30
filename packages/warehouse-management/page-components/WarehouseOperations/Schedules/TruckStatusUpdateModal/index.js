@@ -6,10 +6,10 @@ import { IcCError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import controls from '../../../../configurations/truck-status-update-modal-controls';
 import useUpdateSchedule from '../../../../hooks/useUpdateSchedule';
 
 import CargoAcknowledgmentModal from './CargoAcknowledgmentModal';
-import controls from './controls';
 import styles from './styles.module.css';
 
 function TruckStatusUpdateModal({
@@ -33,7 +33,7 @@ function TruckStatusUpdateModal({
 	const {
 		loading = false,
 		handleUpdate = () => {},
-		data,
+		data = {},
 	} = useUpdateSchedule({
 		item,
 		truckStatus,

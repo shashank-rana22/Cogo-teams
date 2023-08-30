@@ -1,6 +1,6 @@
 import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 
-const getValue = (itemData = {}, itemField = {}, functions = {}, emptyState = '') => {
+const getValue = ({ itemData = {}, itemField = {}, functions = {}, emptyState = '' }) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState;
 	}

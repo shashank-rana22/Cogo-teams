@@ -16,16 +16,14 @@ const SEARCH_BAR_PLACEHOLDER_MAPPING = {
 	configure : 'Search via Zone name/Commodity Type',
 };
 
-function Header({
-	activeTab = 'schedules',
-	setActiveTab = () => {},
-	truckStatus = 'truck_in',
+const getComponentMapping = ({
+	activeTab = '',
+	truckStatus = '',
 	setTruckStatus = () => {},
 	searchValue = '',
 	setSearchValue = () => {},
 	setAddNewZone = () => {},
-	setSelectedWarehouseLocation = () => {},
-}) {
+}) => {
 	const COMPONENT_MAPPING = {
 		schedules: (
 			<>
@@ -115,7 +113,19 @@ function Header({
 			</>
 		),
 	};
+	return COMPONENT_MAPPING[activeTab];
+};
 
+function Header({
+	activeTab = 'schedules',
+	setActiveTab = () => {},
+	truckStatus = 'truck_in',
+	setTruckStatus = () => {},
+	searchValue = '',
+	setSearchValue = () => {},
+	setAddNewZone = () => {},
+	setSelectedWarehouseLocation = () => {},
+}) {
 	const { watch, control } = useForm();
 	const warehouseLocationId = watch('warehouseLocationId');
 
@@ -158,7 +168,13 @@ function Header({
 				</div>
 			</div>
 			<div className={styles.header_footer_part}>
-				{COMPONENT_MAPPING[activeTab]}
+				{getComponentMapping({
+					truckStatus,
+					setTruckStatus,
+					searchValue,
+					setSearchValue,
+					setAddNewZone,
+				})}
 			</div>
 
 		</>

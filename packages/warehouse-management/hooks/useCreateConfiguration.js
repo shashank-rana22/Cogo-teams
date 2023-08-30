@@ -4,12 +4,11 @@ import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useCreateConfiguration = ({
-	formValues = {},
 	listAPI = () => {},
 	setAddNewZone = () => {},
 	warehouseLocationId = '',
 }) => {
-	const [{ loading }, trigger] = useRequestAir(
+	const [{ loading = true }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/configuration',
 			method  : 'POST',
@@ -25,14 +24,16 @@ const useCreateConfiguration = ({
 		setAddNewZone(false);
 	};
 
-	const onSubmit = async () => {
+	const onSubmit = async (formValues) => {
+		const { zoneName = '', commodity = '', aisles = '' } = formValues;
+
 		try {
 			await trigger({
 				data: {
-					zoneName            : formValues.zoneName,
-					commodityType       : formValues.commodity,
-					commodity           : formValues.commodity,
-					aisles              : formValues.aisles,
+					zoneName,
+					commodityType       : commodity,
+					commodity,
+					aisles,
 					warehouseLocationId : warehouseLocationId || undefined,
 					warehouseManagerId  : userId,
 					status              : 'active',

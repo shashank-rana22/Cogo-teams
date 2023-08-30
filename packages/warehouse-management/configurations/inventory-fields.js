@@ -56,21 +56,18 @@ const inventoryFields = {
 			key    : 'warehouseLocation',
 			label  : 'Warehouse Location',
 			span   : 2.2,
-			render : (item) => (
-				<div>
-					{item?.warehouseLocation?.zoneNumber}
-					-
-					{item?.warehouseLocation?.aisleNumber}
-					-
-					{item?.warehouseLocation?.rackNumber}
-					-
-					{item?.warehouseLocation?.shelfNumber}
-					-
-					{
-					item?.warehouseLocation?.binNumber
-}
-				</div>
-			),
+			render : (item) => {
+				const { warehouseLocation = {} } = item;
+				const {
+					zoneNumber = '',
+					aisleNumber = '', rackNumber = '', shelfNumber = '', binNumber = '',
+				} = warehouseLocation;
+				return (
+					<div>
+						{`${zoneNumber}-${aisleNumber}-${rackNumber}-${shelfNumber}-${binNumber}`}
+					</div>
+				);
+			},
 		},
 		{
 			key    : 'dimensions',

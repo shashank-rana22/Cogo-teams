@@ -19,7 +19,6 @@ function Configure({
 	searchValue = '',
 	warehouseLocationId = '',
 }) {
-	const { fields } = configureFields;
 	const [editZone, setEditZone] = useState({});
 	const [deleteZone, setDeleteZone] = useState({});
 
@@ -88,7 +87,7 @@ function Configure({
 		<div className={styles.body_container}>
 			<div className={styles.details_list}>
 				<List
-					fields={fields}
+					fields={configureFields}
 					activeTab={activeTab}
 					data={data}
 					loading={loading}

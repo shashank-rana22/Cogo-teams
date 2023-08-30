@@ -11,31 +11,27 @@ const TABS_COMPONENT_MAPPING = {
 };
 
 function WarehouseOperations({
-	activeTab = 'schedule',
+	activeTab = 'schedules',
 	truckStatus = 'truck_in',
 	searchValue = '',
 	addNewZone = false,
 	setAddNewZone = () => {},
 	selectedWarehouse = '',
 }) {
-	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
+	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab];
 	const [item, setItem] = useState({});
 
 	return (
-		<div>
-			{ActiveTabComponent && (
-				<ActiveTabComponent
-					activeTab={activeTab}
-					truckStatus={truckStatus}
-					searchValue={searchValue}
-					addNewZone={addNewZone}
-					setAddNewZone={setAddNewZone}
-					warehouseLocationId={selectedWarehouse}
-					setItem={setItem}
-					item={item}
-				/>
-			)}
-		</div>
+		<ActiveTabComponent
+			activeTab={activeTab}
+			truckStatus={truckStatus}
+			searchValue={searchValue}
+			addNewZone={addNewZone}
+			setAddNewZone={setAddNewZone}
+			warehouseLocationId={selectedWarehouse}
+			setItem={setItem}
+			item={item}
+		/>
 	);
 }
 

@@ -60,22 +60,6 @@
 	}
 }
 
-.icon_wrapper {
-	position: relative;
-	margin: 4px;
-	font-size: 20px;
-}
-
-.scope_select_wrapper {
-	margin-right: 8px;
-}
-
-.active_filter_icon {
-	position: absolute;
-	top: 4px;
-	right: 23px;
-}
-
 .search_text {
 	width: 30%;
 }
@@ -85,26 +69,6 @@
 	font-size: var(--font-size-xl);
 }
 
-.date_picker {
-	position: relative;
-	width: 20%;
-}
-
-.calendar_icon {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
-
 .select_input {
 	width: 20%;
-}
-
-.truck_in_out_tabs {
-	position: relative;
-	width: 50%;
-}
-
-.profile-icon {
-	position: absolute;
 }

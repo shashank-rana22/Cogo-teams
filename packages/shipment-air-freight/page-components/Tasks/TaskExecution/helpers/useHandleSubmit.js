@@ -141,12 +141,15 @@ function useHandleSubmit({
 					(service) => service?.service_type === 'warehouse_service',
 				) || {};
 
+				const { shipment_id = '', cargo_gated_in = '', location_id = '' } = warehouseService;
+				const { truck_details } = transformedRawValues;
+
 				await createWarehouseSchedule({
 					data: {
-						shipmentId          : warehouseService.shipment_id,
-						truckDetails        : transformedRawValues.truck_details,
-						truckInEta          : warehouseService.cargo_gated_in,
-						warehouseLocationId : warehouseService.location_id,
+						shipmentId          : shipment_id,
+						truckDetails        : truck_details,
+						truckInEta          : cargo_gated_in,
+						warehouseLocationId : location_id,
 					},
 				});
 			}

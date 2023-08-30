@@ -3,7 +3,13 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestAir } from '@cogoport/request';
 
-const getParams = ({ shipmentId, warehouseLocationId, warehouseTransferId, truckStatus, fileValue }) => {
+const getParams = ({
+	shipmentId = '',
+	warehouseLocationId = '',
+	warehouseTransferId = '',
+	truckStatus = '',
+	fileValue = '',
+}) => {
 	let req = {
 		shipmentId,
 		warehouseLocationId,
@@ -38,7 +44,7 @@ const useUpdateSchedule = ({
 	warehouseLocationId = '',
 
 }) => {
-	const [{ loading, data }, trigger] = useRequestAir(
+	const [{ loading = true, data }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/schedule',
 			method  : 'PUT',

@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 
-import getValue from '../../../../../commons/List/ListItem/getValue';
+import getValue from '../../../../../commons/List/RenderListItem/ListItem/getValue';
 import CONSTANTS from '../../../../../constants/constants';
 import styles from '../styles.module.css';
 
@@ -26,12 +26,12 @@ function CargoListItem({
 							key={field.key}
 						>
 							<div>
-								{field.render ? field.render(item) : getValue(
-									item,
-									field,
+								{field.render ? field.render(item) : getValue({
+									itemData   : item,
+									itemField  : field,
 									functions,
-									'-',
-								)}
+									emptyState : '-',
+								})}
 							</div>
 						</div>
 					);

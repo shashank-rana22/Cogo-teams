@@ -2,9 +2,9 @@ import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
+import controls from '../../../../configurations/add-zone-controls';
 import useCreateConfiguration from '../../../../hooks/useCreateConfiguration';
 
-import controls from './controls';
 import styles from './styles.module.css';
 
 function AddNewZoneModal({
@@ -15,16 +15,14 @@ function AddNewZoneModal({
 }) {
 	const {
 		control,
-		watch,
 		formState:{ errors = {} },
 		handleSubmit,
 	} = useForm();
 
-	const formValues = watch();
 	const {
 		loading = false,
 		onSubmit = () => {},
-	} = useCreateConfiguration({ formValues, listAPI, setAddNewZone, warehouseLocationId });
+	} = useCreateConfiguration({ listAPI, setAddNewZone, warehouseLocationId });
 
 	return (
 		<Modal

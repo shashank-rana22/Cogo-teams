@@ -6,11 +6,10 @@ const getServices = (services) => services.map((service) => ({ serviceName: serv
 
 function useUpdateInventory({
 	id = '',
-	formValues = {},
 	setShowUpdateStatusModal = () => {},
 	listAPI = () => {},
 }) {
-	const [{ loading }, trigger] = useRequestAir(
+	const [{ loading = true }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/inventory',
 			method  : 'PUT',
@@ -18,7 +17,7 @@ function useUpdateInventory({
 		},
 	);
 
-	const handleUpdate = async () => {
+	const handleUpdate = async (formValues) => {
 		try {
 			await trigger({
 				data: {
