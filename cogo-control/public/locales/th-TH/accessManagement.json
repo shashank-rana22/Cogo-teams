@@ -200,5 +200,15 @@
     "roles_and_permission_role_description_rate_sheet": "จัดการและอัพโหลดแผ่นอัตราค่าบริการ",
     "roles_and_permission_role_description_file_uploader": "รับ URL สาธารณะของไฟล์ที่อัพโหลด",
     "roles_and_permission_role_description_cms": "จัดการเนื้อหาในแพลตฟอร์ม",
-    "roles_and_permission_role_description_incentives": "โมดูลสิ่งตอบแทนสำหรับคู่ค้า"
+    "roles_and_permission_role_description_incentives": "โมดูลสิ่งตอบแทนสำหรับคู่ค้า",
+    "roles_and_permission_permission_list_navigations_crm": "CRM",
+    "roles_and_permission_permission_list_navigations_dashboards": "แดชบอร์ด",
+    "roles_and_permission_permission_list_import_roles_heading": "นำเข้าบทบาท",
+    "roles_and_permission_permission_list_import_roles_disclainer": "ข้อปฏิเสธ",
+    "roles_and_permission_permission_list_import_roles_description": "โปรดทราบว่าการนำเข้าบทบาทจะเติมค่าสิทธิ์ลงในการนำทางเท่านั้น คุณยังต้องไปที่แต่ละการนำทางและบันทึกค่าสิทธิ์",
+    "roles_and_permission_permission_list_import_roles_select_partner": "เลือกพาร์ทเนอร์",
+    "roles_and_permission_permission_list_import_roles_select_partner_role": "เลือกบทบาทของพาร์ทเนอร์",
+    "roles_and_permission_permission_list_import_roles_select_cancel_button": "ยกเลิก",
+    "roles_and_permission_permission_list_import_roles_select_import_button": "นำเข้า",
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "กำหนดลำดับความสำคัญ"
 }

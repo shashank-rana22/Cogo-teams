@@ -200,5 +200,15 @@
     "roles_and_permission_role_description_rate_sheet": "管理和上传费率表",
     "roles_and_permission_role_description_file_uploader": "获取已上传文件的公共 URL",
     "roles_and_permission_role_description_cms": "管理平台上的内容",
-    "roles_and_permission_role_description_incentives": "合作伙伴的激励模块"
+    "roles_and_permission_role_description_incentives": "合作伙伴的激励模块",
+    "roles_and_permission_permission_list_navigations_crm": "客户关系管理 (CRM)",
+    "roles_and_permission_permission_list_navigations_dashboards": "仪表盘",
+    "roles_and_permission_permission_list_import_roles_heading": "导入角色",
+    "roles_and_permission_permission_list_import_roles_disclainer": "免责声明",
+    "roles_and_permission_permission_list_import_roles_description": "请注意，导入角色仅会填充权限到导航中。您仍需前往每个导航并保存权限。",
+    "roles_and_permission_permission_list_import_roles_select_partner": "选择合作伙伴",
+    "roles_and_permission_permission_list_import_roles_select_partner_role": "选择合作伙伴角色",
+    "roles_and_permission_permission_list_import_roles_select_cancel_button": "取消",
+    "roles_and_permission_permission_list_import_roles_select_import_button": "导入",
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "分配优先级"
 }

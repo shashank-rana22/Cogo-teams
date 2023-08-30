@@ -200,5 +200,15 @@
     "roles_and_permission_role_description_rate_sheet": "Quản lý và tải lên bảng giá",
     "roles_and_permission_role_description_file_uploader": "Nhận URL công khai của tệp được tải lên",
     "roles_and_permission_role_description_cms": "Quản lý nội dung trên nền tảng",
-    "roles_and_permission_role_description_incentives": "Mô-đun khuyến mãi cho đối tác"
+    "roles_and_permission_role_description_incentives": "Mô-đun khuyến mãi cho đối tác",
+    "roles_and_permission_permission_list_navigations_crm": "CRM",
+    "roles_and_permission_permission_list_navigations_dashboards": "Bảng điều khiển",
+    "roles_and_permission_permission_list_import_roles_heading": "Nhập Vai trò",
+    "roles_and_permission_permission_list_import_roles_disclainer": "Cảnh báo",
+    "roles_and_permission_permission_list_import_roles_description": "Vui lòng lưu ý rằng việc nhập vai trò chỉ sẽ điền trước quyền vào các điều hướng. Bạn vẫn cần phải vào từng điều hướng và lưu chúng",
+    "roles_and_permission_permission_list_import_roles_select_partner": "Chọn Đối tác",
+    "roles_and_permission_permission_list_import_roles_select_partner_role": "Chọn Vai trò Đối tác",
+    "roles_and_permission_permission_list_import_roles_select_cancel_button": "Hủy",
+    "roles_and_permission_permission_list_import_roles_select_import_button": "Nhập",
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "Gán Ưu tiên"
 }

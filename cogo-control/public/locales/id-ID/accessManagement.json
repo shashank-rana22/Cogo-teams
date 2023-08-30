@@ -200,6 +200,15 @@
     "roles_and_permission_role_description_rate_sheet": "Mengelola dan mengunggah lembar tarif",
     "roles_and_permission_role_description_file_uploader": "Mendapatkan URL publik dari file yang diunggah",
     "roles_and_permission_role_description_cms": "Mengelola konten di platform",
-    "roles_and_permission_role_description_incentives": "Modul insentif untuk mitra"
-      
+    "roles_and_permission_role_description_incentives": "Modul insentif untuk mitra",
+    "roles_and_permission_permission_list_navigations_crm": "CRM",
+    "roles_and_permission_permission_list_navigations_dashboards": "Dasbor",
+    "roles_and_permission_permission_list_import_roles_heading": "Impor Peran",
+    "roles_and_permission_permission_list_import_roles_disclainer": "Pemberitahuan",
+    "roles_and_permission_permission_list_import_roles_description": "Harap dicatat bahwa mengimpor peran hanya akan mengisi izin ke dalam navigasi. Anda masih perlu pergi ke setiap navigasi dan menyimpannya",
+    "roles_and_permission_permission_list_import_roles_select_partner": "Pilih Mitra",
+    "roles_and_permission_permission_list_import_roles_select_partner_role": "Pilih Peran Mitra",
+    "roles_and_permission_permission_list_import_roles_select_cancel_button": "Batal",
+    "roles_and_permission_permission_list_import_roles_select_import_button": "Impor",
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "Tetapkan Prioritas"
 }

@@ -200,5 +200,15 @@
     "roles_and_permission_role_description_rate_sheet": "Manage and upload rate sheets",
     "roles_and_permission_role_description_file_uploader": "Get public url of the uploaded file",
     "roles_and_permission_role_description_cms": "Manage content on the platform",
-    "roles_and_permission_role_description_incentives": "Incentives module for partners"
+    "roles_and_permission_role_description_incentives": "Incentives module for partners",
+    "roles_and_permission_permission_list_navigations_crm": "CRM",
+    "roles_and_permission_permission_list_navigations_dashboards": "Dashboards",
+    "roles_and_permission_permission_list_import_roles_heading": "Import Roles",
+    "roles_and_permission_permission_list_import_roles_disclainer": "Disclaimer",
+    "roles_and_permission_permission_list_import_roles_description": "Please note that importing roles will only prefill permissions into the navigations. You still need to go to each navigation and save them",
+    "roles_and_permission_permission_list_import_roles_select_partner": "Select Partner",
+    "roles_and_permission_permission_list_import_roles_select_partner_role": "Select Partner Roles",
+    "roles_and_permission_permission_list_import_roles_select_cancel_button": "Cancel",
+    "roles_and_permission_permission_list_import_roles_select_import_button": "Import",
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "Assign Priority"
 }
