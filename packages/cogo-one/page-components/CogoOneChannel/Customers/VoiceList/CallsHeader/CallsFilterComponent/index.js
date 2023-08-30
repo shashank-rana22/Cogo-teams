@@ -2,7 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
-import getCallFilterControls from '../../../../../../configurations/getCallFilterControls';
+import CALLS_FILTER_CONTROLS from '../../../../../../configurations/getCallFilterControls';
 
 import Item from './Item';
 import styles from './styles.module.css';
@@ -25,8 +25,6 @@ function CallsFilterComponents({
 	appliedFilters = {},
 	setAppliedFilters = () => {},
 }) {
-	const filterControls = getCallFilterControls();
-
 	const {
 		control,
 		formState: { errors },
@@ -36,8 +34,8 @@ function CallsFilterComponents({
 	} = useForm({
 		defaultValues: getDefaultValues(
 			{
-				filters: appliedFilters,
-				filterControls,
+				filters        : appliedFilters,
+				filterControls : CALLS_FILTER_CONTROLS,
 			},
 		),
 	});
@@ -47,8 +45,10 @@ function CallsFilterComponents({
 	const isDisabled = isEmpty(agentWatch);
 
 	const resetForm = () => {
-		filterControls.forEach((item) => {
-			setValue(item.name, getDefaultValues({ filters: {}, filterControls })[item.name]);
+		const defaultValues = getDefaultValues({ filters: {}, filterControls: CALLS_FILTER_CONTROLS });
+
+		CALLS_FILTER_CONTROLS.forEach((item) => {
+			setValue(item.name, defaultValues?.[item.name]);
 		});
 		setAppliedFilters({});
 		setFilterVisible(false);
@@ -79,7 +79,7 @@ function CallsFilterComponents({
 				</div>
 			</div>
 			<div className={styles.filters_container}>
-				{filterControls.map(
+				{CALLS_FILTER_CONTROLS.map(
 					(singleField) => (
 						<div
 							className={styles.filter_container}

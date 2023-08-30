@@ -1,4 +1,4 @@
-const getCallFilterControls = () => [
+const CALLS_FILTER_CONTROLS = [
 	{
 		label          : 'Agents',
 		name           : 'agent',
@@ -13,4 +13,4 @@ const getCallFilterControls = () => [
 	},
 ];
 
-export default getCallFilterControls;
+export default CALLS_FILTER_CONTROLS;
