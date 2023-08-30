@@ -17,7 +17,11 @@ function BottomTabs({
 				className={styles.tabs_style}
 			>
 				{Object.values(TABS_MAPPING).map((tabItem) => {
-					const { key, label, component: ActiveComponent, props } = tabItem;
+					const { key, label, component: ActiveComponent, props, visible = true } = tabItem;
+
+					if (!visible) {
+						return null;
+					}
 
 					return (
 						<TabPanel key={key} name={key} title={label}>

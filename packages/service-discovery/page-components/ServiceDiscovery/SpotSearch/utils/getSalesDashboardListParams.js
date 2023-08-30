@@ -81,6 +81,8 @@ const getSalesDashboardListParams = (
 				}),
 				...rest,
 				...locationFilter,
+				state                   : 'save_for_later',
+				is_email_quotation_sent : undefined,
 			},
 			...otherParams,
 			quotation_sent_to_details_required : true,
