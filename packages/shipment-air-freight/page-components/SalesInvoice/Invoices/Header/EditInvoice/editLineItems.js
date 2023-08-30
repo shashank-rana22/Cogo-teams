@@ -1,8 +1,10 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useCallback } from 'react';
 
@@ -13,6 +15,7 @@ const TRADE_MAPPING = {
 	export : 'Origin',
 };
 const INITIAL_STATE_OF_FIELD_VALUE = 0;
+const geo = getGeoConstants();
 
 const useEditLineItems = ({
 	invoice = {},
@@ -23,10 +26,12 @@ const useEditLineItems = ({
 	info,
 }) => {
 	const services = invoice.services || [];
-
+	const { profile } = useSelector((state) => state);
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 	const [error, setError] = useState({});
+	const isEditAliasAllowed = [...geo.uuid.kam_ids, ...GLOBAL_CONSTANTS.uuid.air_admin_user_ids]
+		.includes(profile?.user?.id);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -73,6 +78,7 @@ const useEditLineItems = ({
 			shipment_data,
 			index,
 			TRADE_MAPPING,
+			isEditAliasAllowed,
 		),
 		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => {
