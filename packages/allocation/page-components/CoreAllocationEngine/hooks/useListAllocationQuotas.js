@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import Actions from '../components/AllocationQuotas/List/Actions';
 import styles from '../components/AllocationQuotas/List/styles.module.css';
 
-const useListAllocationQuotas = () => {
+const useListAllocationQuotas = ({ t = () => {} }) => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState();
@@ -55,32 +55,32 @@ const useListAllocationQuotas = () => {
 	const columns = [
 		{
 			key      : 'role',
-			Header   : 'Role',
+			Header   : t('allocation:role_label'),
 			accessor : ({ role }) => <div>{role?.name || '___'}</div>,
 		},
 		{
 			key      : 'user',
-			Header   : 'User',
+			Header   : t('allocation:user_label'),
 			accessor : ({ user }) => <div>{user?.name || '___'}</div>,
 		},
 		{
 			key      : 'user_email',
-			Header   : 'User Email',
+			Header   : t('allocation:user_email'),
 			accessor : ({ user }) => <div className={styles.email_id}>{user?.email || '___'}</div>,
 		},
 		{
 			key      : 'created_by',
-			Header   : 'Created by',
+			Header   : t('allocation:created_by'),
 			accessor : ({ created_by }) => <div>{created_by.name || '___'}</div>,
 		},
 		{
 			key      : 'email',
-			Header   : 'Email',
+			Header   : t('allocation:email_label'),
 			accessor : ({ created_by }) => (<div className={styles.email_id}>{created_by.email || '___'}</div>),
 		},
 		{
 			key      : 'created_at',
-			Header   : 'Created At',
+			Header   : t('allocation:created_at'),
 			accessor : ({ created_at }) => (
 				<div>
 					{created_at	 ? (
@@ -98,7 +98,7 @@ const useListAllocationQuotas = () => {
 		},
 		{
 			key      : 'action',
-			Header   : 'Action',
+			Header   : t('allocation:action_header'),
 			accessor : (item) => {
 				const { id } = item;
 

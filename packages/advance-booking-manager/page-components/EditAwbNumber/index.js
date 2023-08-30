@@ -16,16 +16,20 @@ function EditAwbNumber({
 	const { control, handleSubmit, watch, setValue, formState:{ errors } } = useForm();
 
 	const formValues = watch();
-	const { commodity, bookingDate } = formValues;
+	const { commodity, booking_date } = formValues;
 
-	const mutatedControls = awbControls({ commodity, bookingDate });
+	const mutatedControls = awbControls({ commodity, booking_date });
 
 	useEffect(() => {
 		mutatedControls.forEach((controlFields) => {
 			setValue(controlFields.name, item[controlFields.name] || controlFields?.value);
 		});
-		setValue('bookingDate', item?.bookingDate ? new Date(item?.bookingDate) : undefined);
-		setValue('customClearanceDate', item?.customClearanceDate ? new Date(item?.customClearanceDate) : undefined);
+		setValue('booking_date', item?.bookingDate ? new Date(item?.bookingDate) : undefined);
+		setValue('custom_clearance_date', item?.customClearanceDate ? new Date(item?.customClearanceDate) : undefined);
+		setValue('destination_location_id', item?.destinationLocationId || undefined);
+		setValue('commodity', item?.commodityDetails?.commodity || undefined);
+		setValue('commodity_type', item?.commodityDetails?.commodityType || undefined);
+		setValue('chargeable_weight', item?.chargeableWeight || undefined);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

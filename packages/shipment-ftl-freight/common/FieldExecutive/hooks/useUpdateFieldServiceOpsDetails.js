@@ -9,6 +9,7 @@ const useUpdateFieldServiceOpsDetails = ({
 	shipment_id = '',
 	initFormattedData = {},
 	otherFormattedData = {},
+	truck_type = '',
 	callback: updateCallback = () => {},
 	updateTruckMsg = 'Truck Number Updated Successfully!!',
 	updateDetailMsg = 'Data Updated Successfully!!',
@@ -22,6 +23,7 @@ const useUpdateFieldServiceOpsDetails = ({
 		const formattedData = formatFinalData({
 			shipment_id,
 			truck_number,
+			truck_type,
 			initFormattedData,
 			otherFormattedData,
 		});

@@ -1,26 +1,32 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
-import SINGLE_ACCOUNT_STATS from '../../../../constants/get-single-account-stats';
+import getSingleAccountStats from '../../../../constants/get-single-account-stats';
 
 import styles from './styles.module.css';
 
 function SingleCheckedAccount({ modalDetailsArray = [] }) {
+	const { t } = useTranslation(['allocation']);
+
+	const singleAccountStats = getSingleAccountStats({ t });
+
 	return (
 		<div className={styles.single_container}>
 			<div className={styles.heading}>
-				You are about to
-				<strong> de-allocate </strong>
+				{t('allocation:you_are_about_to')}
+				{' '}
+				<strong>{t('allocation:deallocate_label')}</strong>
+				{' '}
 				&quot;
 				{startCase(modalDetailsArray[GLOBAL_CONSTANTS.zeroth_index].business_name || '')}
 				&quot;.
-				Please verify from the list below before de-allocation
-
+				{t('allocation:please_verify_deallocation_phrase')}
 			</div>
 
 			<div className={styles.details_card}>
 
-				{SINGLE_ACCOUNT_STATS.map((detailsObject) => {
+				{singleAccountStats.map((detailsObject) => {
 					const { detail_label, stats, detail_key } = detailsObject;
 					return (
 						<>

@@ -1,4 +1,5 @@
 import { Breadcrumb } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useGetEventList from '../../hooks/useGetEventList';
 
@@ -19,6 +20,8 @@ const EVENTS_COMPONENTS_MAPPING = {
 };
 
 function Events() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list = [],
 		loading = false,
@@ -63,23 +66,41 @@ function Events() {
 		<section className={styles.main}>
 			<Breadcrumb className={styles.breadcrumb}>
 				<Breadcrumb.Item
-					label={<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>Dashboard</a>}
+					label={(
+						<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>
+							{t('allocation:dashboard_label')}
+						</a>
+					)}
 				/>
 
-				{ (eventListData.toggleEvent === EVENT_LIST) && <Breadcrumb.Item label={(<b>All Events</b>)} /> }
+				{ (eventListData.toggleEvent === EVENT_LIST) && (
+					<Breadcrumb.Item label={(
+						<b>
+							{t('allocation:all_events_label')}
+						</b>
+					)}
+					/>
+				) }
 
 				{ (eventListData.toggleEvent === POST_EVENT)
 					&& (
 						<Breadcrumb.Item
 							label={(
 								<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/events`}>
-									All Events
+									{t('allocation:all_events_label')}
 								</a>
 							)}
 						/>
 					)}
 
-				{ (eventListData.toggleEvent === POST_EVENT) && <Breadcrumb.Item label={(<b>Add Event</b>)} />}
+				{ (eventListData.toggleEvent === POST_EVENT) && (
+					<Breadcrumb.Item label={(
+						<b>
+							{t('allocation:add_event_label')}
+						</b>
+					)}
+					/>
+				)}
 			</Breadcrumb>
 
 			{Component && (

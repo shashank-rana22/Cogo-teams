@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 import BadgeUpdateCard from '../BadgeUpdateCard';
@@ -10,7 +11,11 @@ import styles from './styles.module.css';
 
 const MEDALS_MAPPING = ['Bronze', 'Silver', 'Gold'];
 
+const FIRST_INDEX = 1;
+
 function CreateBadge(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { setToggleScreen, badgeItemData = {}, listRefetch } = props;
 
 	const {
@@ -20,13 +25,13 @@ function CreateBadge(props) {
 
 	const {
 		onSave, getFieldController, loading = false, getAddBadgesControls, formProps,
-	} = useCreateBadgeConfiguration({ setToggleScreen, badgeItemData, listRefetch });
+	} = useCreateBadgeConfiguration({ setToggleScreen, badgeItemData, listRefetch, t });
 
 	const {
 		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
 
-	const updated_at = audits?.[0]?.created_at || null;
+	const updated_at = audits?.[GLOBAL_CONSTANTS.zeroth_index]?.created_at || null;
 
 	return (
 		<section className={styles.container}>
@@ -34,7 +39,9 @@ function CreateBadge(props) {
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
-							Last Modified :
+							{t('allocation:last_modified_label')}
+							{' '}
+							:
 							{' '}
 							{updated_at ? formatDate({
 								date       : updated_at,
@@ -44,7 +51,9 @@ function CreateBadge(props) {
 						</p>
 
 						<p className={styles.text_styles}>
-							Last Modified By :
+							{t('allocation:last_modified_by_label')}
+							{' '}
+							:
 							{' '}
 							{created_by?.name}
 						</p>
@@ -52,12 +61,11 @@ function CreateBadge(props) {
 				)}
 
 			<h2 style={{ color: '#4f4f4f' }}>
-				{isEmpty(badgeItemData) ? 'Add Badge' : 'Update Badge'}
+				{isEmpty(badgeItemData) ? t('allocation:add_badge_label') : t('allocation:update_badge_label')}
 			</h2>
 
 			<p className={styles.text_styles2}>
-				Select the conditions and number of completions necessary to obtain
-				the badge.
+				{t('allocation:create_mastery_phrase')}
 			</p>
 
 			<form onSubmit={handleSubmit(onSave)}>
@@ -96,7 +104,9 @@ function CreateBadge(props) {
 				</section>
 
 				<div className={styles.lower_background}>
-					<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
+					<h3 style={{ color: '#4f4f4f' }}>
+						{t('allocation:score_and_image')}
+					</h3>
 
 					<div className={styles.display_flex}>
 						{MEDALS_MAPPING.map((medalType, index) => (
@@ -108,7 +118,7 @@ function CreateBadge(props) {
 								loading={loading}
 								errors={errors}
 								watch={watch}
-								isLastItem={index === MEDALS_MAPPING.length - 1}
+								isLastItem={index === MEDALS_MAPPING.length - FIRST_INDEX}
 							/>
 						))}
 					</div>
@@ -123,7 +133,7 @@ function CreateBadge(props) {
 						disabled={loading}
 						onClick={() => setToggleScreen('badge_details')}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 
 					<Button
@@ -132,7 +142,7 @@ function CreateBadge(props) {
 						themeType="primary"
 						loading={loading}
 					>
-						Save
+						{t('allocation:save_button')}
 					</Button>
 				</div>
 			</form>

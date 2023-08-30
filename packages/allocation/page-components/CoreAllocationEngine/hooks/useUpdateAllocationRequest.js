@@ -1,10 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 
 const useUpdateRequestStatus = (props) => {
-	const { fetchList, requestStatusItem, setRequestStatusItem } = props;
+	const { fetchList, requestStatusItem, setRequestStatusItem, t = () => {} } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/request_status',
@@ -14,7 +15,7 @@ const useUpdateRequestStatus = (props) => {
 
 	const formProps = useForm();
 
-	 const { reset } = formProps;
+	const { reset } = formProps;
 
 	const onStatusUpdate = async (formValues) => {
 		const { rejection_reasons } = formValues || {};
@@ -22,7 +23,8 @@ const useUpdateRequestStatus = (props) => {
 		try {
 			const payload = {
 				...requestStatusItem,
-				rejection_reasons: rejection_reasons?.length !== 0 ? rejection_reasons : undefined,
+				rejection_reasons: rejection_reasons?.length
+				!== GLOBAL_CONSTANTS.zeroth_index ? rejection_reasons : undefined,
 			};
 
 			await trigger({
@@ -35,7 +37,7 @@ const useUpdateRequestStatus = (props) => {
 
 			reset();
 
-			Toast.success('Request updated successfully!');
+			Toast.success(t('allocation:request_updated_successfully'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
