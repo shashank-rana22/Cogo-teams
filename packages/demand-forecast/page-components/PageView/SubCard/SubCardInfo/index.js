@@ -13,11 +13,29 @@ function SubCardInfo({ portInfo = {}, info_key = 'remaining_clusters' }) {
 	} = portInfo;
 
 	const onView = () => {
+		let route = '/demand-forecast/view?';
+
 		if (info_key === 'remaining_clusters') {
-			router.push(`/demand-forecast/${origin_cluster?.id}/${destination_cluster?.id}/remaining_clusters`);
+			route += 'type=remaining_clusters';
+
+			if (origin_cluster?.id) {
+				route += `&origin_id=${origin_cluster.id}`;
+			}
+
+			if (destination_cluster?.id) {
+				route += `&destination_id=${destination_cluster.id}`;
+			}
 		} else {
-			router.push(`/demand-forecast/${origin_location?.id}/${destination_location?.id}`);
+			if (origin_location?.id) {
+				route += `&origin_id=${origin_location.id}`;
+			}
+
+			if (destination_location?.id) {
+				route += `&destination_id=${destination_location.id}`;
+			}
 		}
+
+		router.push(route);
 	};
 
 	return (

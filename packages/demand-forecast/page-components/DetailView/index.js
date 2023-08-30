@@ -1,5 +1,4 @@
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useGetRollingForecastFclFreightData from '../../hooks/useGetRollingForecastFclFreightData';
@@ -10,11 +9,10 @@ import SupplierList from './SupplierList';
 
 function DetailView() {
 	const { query } = useRouter();
-	const { general = {} } = useSelector((state) => state);
 
-	const isMiniCluster = general?.pathname.includes('remaining_clusters');
+	const { origin_id = '', destination_id = '', type = '' } = query || {};
 
-	const { origin_id = '', destination_id = '' } = query || {};
+	const isMiniCluster = type === 'remaining_clusters';
 
 	const { getRollingForecastPortPairs, data, loading } = useGetRollingForecastFclFreightData({ isMiniCluster });
 
