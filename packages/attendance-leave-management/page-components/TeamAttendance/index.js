@@ -9,6 +9,7 @@ import useGetCycles from '../../hooks/useGetCycles';
 import useGetTeamAttendance from '../../hooks/useGetTeamAttendance';
 
 import AttendanceData from './AttendanceData';
+import AttendanceMobile from './AttendanceMobile';
 import styles from './styles.module.css';
 
 const DEFAULT_COUNT = 1;
@@ -70,8 +71,8 @@ function TeamAttendance() {
 							/>
 						)}
 					</div>
-					<Button themeType="secondary" size="lg">
-						<span style={{ paddingRight: 10 }}>
+					<Button className={styles.download} themeType="secondary" size="lg">
+						<span className={styles.download_text}>
 							Download Report
 						</span>
 						<IcMDownload />
@@ -94,7 +95,12 @@ function TeamAttendance() {
 			</div>
 			{}
 			<div className={styles.table_container}>
-				<AttendanceData data={data} />
+				<div className={styles.attendance_data}>
+					<AttendanceData data={data} />
+				</div>
+				<div className={styles.attendance_mobile}>
+					<AttendanceMobile data={data} />
+				</div>
 			</div>
 			<div className={styles.pagination_container}>
 				<div
