@@ -32,7 +32,7 @@ export const getEmailState = ({ mailActions = {}, email = '' }) => {
 	const isReplyAll = actionType === 'reply_all';
 
 	let toEmail = [sender || email];
-	const replyAllSenderDetails = (to_mails || []).filter((item) => item !== source);
+	const replyAllSenderDetails = (to_mails || []).filter((item) => item.toLowerCase() !== source.toLowerCase());
 
 	if (isReplyAll && conversation_type === 'sent') {
 		toEmail = (replyAllSenderDetails || []).concat(sender);
