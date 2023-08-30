@@ -13,7 +13,6 @@ const rawControls = (
 	isRoleAllowed,
 	shipment_data,
 	index,
-	isEditAliasAllowed = false,
 	TRADE_MAPPING = {},
 ) => {
 	const { shipment_type = 'air_freight' } = shipment_data || {};
@@ -69,7 +68,6 @@ const rawControls = (
 					</>
 				),
 				placeholder : 'Enter alias name/code',
-				disabled    : handleDisableCond(shipment_type, isEditAliasAllowed),
 				span        : 2,
 			},
 			{
