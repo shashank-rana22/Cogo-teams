@@ -25,21 +25,21 @@
 
 .select {
 	display: flex;
-	column-gap: 20px;
 }
 
 .dropdown {
 	width: 20vw;
+	margin-right: 20px;
 }
 
 @media (max-width: 767px) {
 	.select {
 		flex-direction: column;
-		row-gap: 10px;
 		width: 50%;
 	}
 
 	.dropdown {
 		width: 100%;
+		margin-bottom: 20px;
 	}
 }

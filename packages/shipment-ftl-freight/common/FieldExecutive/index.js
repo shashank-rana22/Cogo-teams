@@ -55,10 +55,10 @@ function FieldExecutive(props) {
 					<div className={styles.dropdown}>
 						<CreatableSelect
 							value={truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]}
-							onChange={(e) => setTruckNumber({
-								...truckNumber,
+							onChange={(e) => setTruckNumber((prev) => ({
+								...prev,
 								[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]: e,
-							})}
+							}))}
 							options={filterOptions}
 							placeholder="Select Truck Number"
 							size="md"
@@ -71,15 +71,7 @@ function FieldExecutive(props) {
 							valueKey="truck_name"
 							value={truckType}
 							onChange={(val) => (setTruckType(val))}
-							renderLabel={(opt) => (
-								<div>
-									{startCase(opt?.truck_name)}
-									{' '}
-									-
-									{' '}
-									{startCase(opt?.display_name)}
-								</div>
-							)}
+							renderLabel={(opt) => `${startCase(opt?.truck_name)} - ${startCase(opt?.display_name)}`}
 						/>
 					</div>
 				</div>
