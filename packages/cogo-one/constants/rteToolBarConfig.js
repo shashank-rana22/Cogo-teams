@@ -19,10 +19,6 @@ const RTE_TOOL_BAR_CONFIG = [
 		{ script: 'super' },
 	],
 	[
-		{ indent: '-1' },
-		{ indent: '+1' },
-	],
-	[
 		{ direction: 'rtl' },
 	],
 	[
@@ -30,7 +26,7 @@ const RTE_TOOL_BAR_CONFIG = [
 		{ background: [] },
 	],
 	['clean'],
-	['link', 'image', 'video'],
+	['link', 'image'],
 ];
 
 export default RTE_TOOL_BAR_CONFIG;

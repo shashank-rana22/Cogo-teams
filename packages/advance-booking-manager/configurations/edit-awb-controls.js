@@ -12,7 +12,7 @@ const COMMODITY_TYPE_OPTIONS = {
 	],
 };
 
-const awbControls = ({ commodity, bookingDate }) => [
+const awbControls = ({ commodity, booking_date }) => [
 	{
 		name        : 'serviceProviderId',
 		type        : 'async-select',
@@ -130,7 +130,7 @@ const awbControls = ({ commodity, bookingDate }) => [
 		},
 	},
 	{
-		name                  : 'bookingDate',
+		name                  : 'booking_date',
 		type                  : 'date_picker',
 		label                 : 'Booking Date',
 		placeholder           : 'Select Date',
@@ -141,7 +141,7 @@ const awbControls = ({ commodity, bookingDate }) => [
 		},
 	},
 	{
-		name                  : 'customClearanceDate',
+		name                  : 'custom_clearance_date',
 		type                  : 'date_picker',
 		label                 : 'Custom Clearance Date',
 		placeholder           : 'Select Date',
@@ -149,7 +149,7 @@ const awbControls = ({ commodity, bookingDate }) => [
 		span                  : 6,
 		rules                 : {
 			required : true,
-			validate : (value) => checkClearanceDate({ value, bookingDate }),
+			validate : (value) => checkClearanceDate({ value, booking_date }),
 		},
 	},
 	{

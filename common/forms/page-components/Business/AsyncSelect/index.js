@@ -65,6 +65,7 @@ import {
 	asyncListResources,
 	asyncFieldsLocationsMapping,
 	asyncListCompanyLocations,
+	asyncFieldsOrganizationUsers,
 	asyncListLeadOrganizationUsers,
 } from '../../../utils/getAsyncFields';
 
@@ -149,6 +150,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 	resources                            : asyncListResources,
 	list_company_locations               : asyncListCompanyLocations,
+	list_organization_users              : asyncFieldsOrganizationUsers,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
 };
 
