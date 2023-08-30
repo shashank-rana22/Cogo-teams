@@ -10,6 +10,7 @@ import secsToDurationConverter from '../utils/secsToDurationConverter';
 
 import Attendees from './Attendees';
 import ConferenceForm from './ConferenceForm';
+import IncomingCallUserDetails from './IncomingCallUserDetails';
 import styles from './styles.module.css';
 
 function CallModal({
@@ -78,6 +79,7 @@ function CallModal({
 							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
 						</div>
 					</div>
+					<IncomingCallUserDetails />
 					{!status && conferenceType
 					&& <div className={styles.call_text}>{getConferenceText({ callState })}</div>}
 					{status && isInConferenceCall && <Attendees attendees={attendees} />}
