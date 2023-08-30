@@ -62,6 +62,7 @@ function Items({
 	refetch = () => {},
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
+	t = () => {},
 }) {
 	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
@@ -201,13 +202,13 @@ function Items({
 						onClick={notificationRedirect}
 						disabled={loadingState}
 					>
-						You have
+						{t('common:you_have')}
 						{' '}
 						{notificationCount}
 						{' '}
-						new
+						{t('common:new')}
 						{' '}
-						{notificationCount > ONE ? 'notifications' : 'notification'}
+						{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
 					</Button>
 				</div>
 			)}
@@ -221,7 +222,7 @@ function Items({
 						onClick={redirect}
 						disabled={loadingState}
 					>
-						Add Account
+						{t('common:add_account')}
 					</Button>
 				</div>
 			)}
