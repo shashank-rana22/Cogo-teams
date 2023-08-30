@@ -23,9 +23,10 @@ interface Props {
 	list: ListItem[];
 	getTableBodyCheckbox: (item: object) => React.JSX.Element;
 	refetch: () => void;
+	source?: string;
 }
 
-function ListData({ list = [], getTableBodyCheckbox, refetch }: Props) {
+function ListData({ list = [], getTableBodyCheckbox, refetch, source = '' }: Props) {
 	return (
 		<div className={styles.list}>
 			{(list || []).map((item) => (
@@ -34,6 +35,7 @@ function ListData({ list = [], getTableBodyCheckbox, refetch }: Props) {
 						item={item}
 						getTableBodyCheckbox={getTableBodyCheckbox}
 						refetch={refetch}
+						source={source}
 					/>
 					<div className={ribbonstyles.ribbon_render}>
 						<div

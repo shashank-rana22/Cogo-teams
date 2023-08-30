@@ -45,6 +45,7 @@ interface Props {
 	refetch: () => void;
 	setCheckedRows: (p: object) => void;
 	showFooter?: boolean;
+	source?: string;
 }
 
 function CustomTable({
@@ -61,6 +62,7 @@ function CustomTable({
 	refetch,
 	setCheckedRows,
 	showFooter = true,
+	source = '',
 }: Props) {
 	const {
 		list = [],
@@ -77,6 +79,7 @@ function CustomTable({
 				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
 				showHeaderCheckbox={showHeaderCheckbox}
 				loading={loading}
+
 			/>
 
 			{loading ? (
@@ -86,6 +89,7 @@ function CustomTable({
 					list={list}
 					getTableBodyCheckbox={getTableBodyCheckbox}
 					refetch={refetch}
+					source={source}
 				/>
 			)}
 			{!isEmpty(list) ? (

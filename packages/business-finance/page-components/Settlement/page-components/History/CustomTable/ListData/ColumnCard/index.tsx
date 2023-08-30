@@ -29,10 +29,11 @@ interface Props {
 	item: ListItem;
 	getTableBodyCheckbox?: Function;
 	refetch: ()=>void
+	source?: string;
 
 }
 
-function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch, source }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
@@ -105,6 +106,7 @@ function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch }: Props) {
 					loading={loading}
 					refetch={refetch}
 					onPageChange={onPageChange}
+					source={source}
 				/>
 			) : null}
 		</div>

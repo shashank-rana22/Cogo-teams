@@ -32,7 +32,7 @@ function StatsOutstanding({ item = {}, source = '' }) {
 			name     : 'OPEN INVOICES',
 			statsKey : StatsKeyMapping,
 			key      : 'totalOpenInvoiceAmount',
-			countKey : 'totalOpenInvoicesCount',
+			countKey : 'totalOpenInvoiceCount',
 		},
 		{
 			name             : 'ON ACCOUNT PAYMENTS',
