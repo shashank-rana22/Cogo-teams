@@ -110,9 +110,12 @@ const getSubBucketColumns = ({
 			id       : 'avg_rank',
 			Header   : (<div>Avg Rate rank</div>),
 			accessor : ({ avg_rate_rank = '' }) => (
-				<div>
-					<GetOrdinalNumber number={avg_rate_rank} />
-				</div>
+				avg_rate_rank
+					? (
+						<div>
+							<GetOrdinalNumber number={avg_rate_rank} />
+						</div>
+					) : 'N/A'
 			),
 		},
 	];

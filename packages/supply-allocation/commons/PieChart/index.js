@@ -37,7 +37,6 @@ function PieChart({ data = [], count = 0, heading = '', legendsData = [] }) {
 						fontSize   : '18px',
 						fontWeight : 500,
 						color      : '#221F20',
-
 					}}
 				>
 					{count}
