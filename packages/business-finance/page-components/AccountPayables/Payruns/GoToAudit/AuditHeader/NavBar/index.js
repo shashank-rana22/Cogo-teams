@@ -3,6 +3,8 @@ import { Link } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
+const AUDIT_INDEX = 3;
+
 function NavBar() {
 	const breadcrumbItems = [
 		{
@@ -27,7 +29,7 @@ function NavBar() {
 				{breadcrumbItems.map((item) => (
 					<Breadcrumb.Item
 						key={item.id}
-						className={styles.text}
+						className={item.id !== AUDIT_INDEX && styles.text}
 						label={item.href ? (
 							<Link href={item.href}>
 								<div>{item.label}</div>
