@@ -107,29 +107,12 @@ const getSubBucketColumns = ({
 			),
 		},
 		{
-			id     : 'avg_rank',
-			Header : (
-				<>
-					<div>Avg Rate rank</div>
-					<div className={styles.profitability}>
-						(Cogoport Profitability)
-
-					</div>
-				</>
-			),
-			accessor: ({ avg_rate_rank = '', profitability }) => (
-				<>
-					<div>
-						<GetOrdinalNumber number={avg_rate_rank} />
-					</div>
-
-					<div className={styles.profitability}>
-						(Profitability
-						{' '}
-						{profitability}
-						%)
-					</div>
-				</>
+			id       : 'avg_rank',
+			Header   : (<div>Avg Rate rank</div>),
+			accessor : ({ avg_rate_rank = '' }) => (
+				<div>
+					<GetOrdinalNumber number={avg_rate_rank} />
+				</div>
 			),
 		},
 	];
