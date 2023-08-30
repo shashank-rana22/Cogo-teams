@@ -2,7 +2,6 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AdditionalServices from '../../../../../../../../common/OtherServices/AdditionalServices';
-import CargoInsurance from '../../../../../../../../common/OtherServices/CargoInsurance';
 import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';
 
 import styles from './styles.module.css';
@@ -29,12 +28,6 @@ function OtherServices({
 				refetchSearch={refetch}
 				source="search-results"
 				refetchLoading={loading}
-			/>
-
-			<CargoInsurance
-				data={detail}
-				refetch={refetch}
-				rateCardData={rateCardData}
 			/>
 
 			<TotalLandedCost
