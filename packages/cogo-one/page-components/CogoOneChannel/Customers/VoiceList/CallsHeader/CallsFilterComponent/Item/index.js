@@ -28,7 +28,7 @@ function Item(props) {
 					{...props}
 					control={control}
 				/>
-				{error?.type && <div className={styles.error_text}>This is Required</div>}
+				{error?.type ? <div className={styles.error_text}>This is Required</div> : null}
 			</div>
 		</div>
 	);
