@@ -886,7 +886,7 @@ function asyncListLeadOrganizationUsers() {
 	};
 }
 
-async function asyncListPricingZones() {
+function asyncListPricingZones() {
 	return {
 		valueKey    : 'id',
 		labelKey    : 'name',
