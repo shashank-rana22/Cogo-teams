@@ -15,7 +15,7 @@ const getParams = ({ page, query }) => ({
 	},
 });
 
-function useListEmailTemplates() {
+function useListEmailTemplates({ isTemplateView = false }) {
 	const [search, setSearch] = useState('');
 
 	const { query, debounceQuery } = useDebounceQuery();
@@ -26,6 +26,9 @@ function useListEmailTemplates() {
 	}, { manual: true });
 
 	const fetchEmailTemplate = useCallback(async ({ page }) => {
+		if (!isTemplateView) {
+			return;
+		}
 		try {
 			await trigger({
 				params: getParams({ page, query }),
@@ -33,7 +36,7 @@ function useListEmailTemplates() {
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, query]);
+	}, [trigger, query, isTemplateView]);
 
 	useEffect(() => {
 		debounceQuery(search);

@@ -46,7 +46,7 @@ function MailModal({
 		fetchEmailTemplate = () => {},
 		search = '',
 		setSearch = () => {},
-	} = useListEmailTemplates();
+	} = useListEmailTemplates({ isTemplateView });
 
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 

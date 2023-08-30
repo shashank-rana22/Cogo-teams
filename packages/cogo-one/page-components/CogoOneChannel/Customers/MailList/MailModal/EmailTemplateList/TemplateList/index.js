@@ -26,7 +26,7 @@ function TemplateList({
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty_image}>
-				<Image src={GLOBAL_CONSTANTS.image_url.empty_image} width={150} height={150} />
+				<Image src={GLOBAL_CONSTANTS.image_url.empty_image} alt="empty" width={150} height={150} />
 				<div>No Data Found</div>
 			</div>
 		);
