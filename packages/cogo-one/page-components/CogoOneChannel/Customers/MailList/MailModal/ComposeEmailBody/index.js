@@ -83,7 +83,6 @@ function ComposeEmailBody(props) {
 				<RTEditor
 					value={emailState?.body}
 					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-					// toolbarConfig={TOOLBARCONFIG}
 					className={styles.styled_editor}
 					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 				/>

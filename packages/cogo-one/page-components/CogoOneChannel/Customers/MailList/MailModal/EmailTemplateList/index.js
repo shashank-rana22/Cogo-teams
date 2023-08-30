@@ -21,7 +21,6 @@ function EmailTemplateList({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<div className={styles.title}>Choose Template</div>
 				<Input
 					value={search}
 					size="sm"

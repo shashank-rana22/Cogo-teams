@@ -23,6 +23,7 @@ function MailModal({
 		activeMailAddress,
 		emailState,
 		setEmailState,
+		setButtonType,
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
@@ -126,6 +127,7 @@ function MailModal({
 						buttonType={buttonType}
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
+						setButtonType={setButtonType}
 					/>
 				)}
 				className={isTemplateView ? styles.template_view : ''}
