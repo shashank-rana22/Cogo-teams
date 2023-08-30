@@ -28,12 +28,15 @@ export const getPlaceHolder = ({ hasPermissionToEdit = false, canMessageOnBotSes
 export const getEmailState = ({ mailActions = {}, email = '' }) => {
 	const { data, actionType = '' } = mailActions || {};
 	const { response, conversation_type } = data || {};
-	const { sender = '', subject = '', to_mails = [], bcc_mails = [], cc_mails = [] } = response || {};
+	const { source = '', sender = '', subject = '', to_mails = [], bcc_mails = [], cc_mails = [] } = response || {};
 	const isReplyAll = actionType === 'reply_all';
 
 	let toEmail = [sender || email];
+	const replyAllSenderDetails = (to_mails || []).filter((item) => item !== source);
 
-	if (isReplyAll && conversation_type !== 'received') {
+	if (isReplyAll && conversation_type === 'sent') {
+		toEmail = (replyAllSenderDetails || []).concat(sender);
+	} else if (conversation_type === 'received') {
 		toEmail = to_mails;
 	}
 
