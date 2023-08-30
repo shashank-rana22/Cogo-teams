@@ -292,12 +292,20 @@ function AttendanceData({ data }) {
 							<div style={{ fontWeight: 600 }}>
 								{ ATTENDANCE_LOGS_STATUS_MAPPING[item.day_status]?.label || '--'}
 							</div>
-							<div style={{ fontSize: 12 }}>
-								{item.check_in}
+							<div style={{ fontSize: 10 }}>
+								{formatDate({
+									date       : item.check_in,
+									dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'time',
+								})}
 								{' '}
 								-
 								{' '}
-								{item.checkout}
+								{formatDate({
+									date       : item.check_out,
+									dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'time',
+								})}
 							</div>
 						</div>
 					))}

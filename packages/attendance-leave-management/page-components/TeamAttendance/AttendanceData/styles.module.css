@@ -17,6 +17,10 @@
 }
 
 .attendance_date {
+	display: flex;
+	flex-direction: column;
+	align-self: stretch;
+	justify-content: center;
 	width: 11%;
 	padding: 12px;
 }
