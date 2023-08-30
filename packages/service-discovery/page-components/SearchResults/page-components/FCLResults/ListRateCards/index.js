@@ -1,8 +1,10 @@
-import { Loader, Pagination, cl } from '@cogoport/components';
+import { Loader, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import DotLoader from '../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../common/AppliedFilters';
 import RequestRate from '../../../common/RequestRate';
 import CogoAssuredCard from '../CogoAssuredCard';
@@ -14,8 +16,6 @@ import EmptyState from './EmptyState';
 import Header from './Header';
 import Schedules from './Schedules';
 import styles from './styles.module.css';
-
-const MAXIMUM_RATE_CARDS = 5;
 
 const ONE = 1;
 
@@ -30,7 +30,6 @@ function LoaderComponent() {
 
 function RateCard({
 	rateCardData = {},
-	loading = false,
 	detail = {},
 	setScreen = () => {},
 	setComparisonRates = () => {},
@@ -42,10 +41,6 @@ function RateCard({
 	showGuide = false,
 	cogoAssuredRates = [],
 }) {
-	if (loading) {
-		return null;
-	}
-
 	return (
 		<FclCard
 			key={rateCardData.id}
@@ -73,7 +68,6 @@ function ListRateCards({
 	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
-	setPage = () => {},
 	refetchSearch = () => {},
 	selectedWeek = {},
 	setSelectedWeek = () => {},
@@ -97,6 +91,8 @@ function ListRateCards({
 	const showComparison = !isEmpty(comparisonRates);
 
 	if (!primary_service) { return null; }
+
+	const { total_count, page_limit, page } = paginationProps;
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -144,7 +140,6 @@ function ListRateCards({
 				paginationProps={paginationProps}
 				filters={filters}
 				setFilters={setFilters}
-				setPage={setPage}
 				setComparisonRates={setComparisonRates}
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
@@ -158,7 +153,7 @@ function ListRateCards({
 				setFilters={setFilters}
 			/>
 
-			{loading || isEmpty(cogoAssuredRates) ? null : (
+			{isEmpty(cogoAssuredRates) ? null : (
 				<CogoAssuredCard
 					cogoAssuredRates={cogoAssuredRates}
 					loading={loading}
@@ -188,7 +183,6 @@ function ListRateCards({
 				<>
 					<RateCard
 						key={rateCardData.id}
-						loading={loading}
 						rateCardData={rateCardData}
 						detail={detail}
 						setSelectedCard={setSelectedCard}
@@ -212,18 +206,28 @@ function ListRateCards({
 				</>
 			))}
 
-			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
-
-			{(rates || []).length > MAXIMUM_RATE_CARDS && !loading ? (
-				<Pagination
-					type="table"
-					currentPage={paginationProps?.page}
-					totalItems={paginationProps?.total_count}
-					pageSize={paginationProps?.page_limit}
-					onPageChange={(val) => setPage(val)}
-					className={styles.pagination}
-				/>
+			{!loading && page < Math.ceil(total_count / page_limit) ? (
+				<div className={styles.show_more_button}>
+					<div
+						role="presentation"
+						onClick={() => refetchSearch({ show_more: true })}
+						className={styles.button}
+					>
+						Show more results
+						{' '}
+						<IcMArrowRotateDown style={{ marginLeft: '8px' }} />
+					</div>
+				</div>
 			) : null}
+
+			{loading && (
+				<div className={styles.spinner_container}>
+					<DotLoader size="lg" />
+					<div className={styles.text}>Fetching rates, please wait</div>
+				</div>
+			)}
+
+			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
 		</div>
 	);
 }

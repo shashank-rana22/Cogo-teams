@@ -10,7 +10,7 @@ import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
 import { footerValues } from '../Helpers/configurations/footerValues';
-import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
+import { footerImages } from '../Helpers/configurations/imageCopies';
 import useUpdateIndividualEditing from '../Helpers/hooks/useUpdateIndividualEditing';
 
 import getFileObject from './getFileObject';
@@ -60,6 +60,8 @@ const UPDATE_CHECK_INDEX = 1;
 const PDF_HEIGHT_ADJUST_VALUE = 14;
 const PDF_SCALE = 4.5;
 const TWELEVE_COPIES_LAST_INDEX = 1;
+
+const { image_url: BACK_IMAGE_URL } = GLOBAL_CONSTANTS;
 
 function GenerateMawb({
 	taskItem = {},
@@ -236,7 +238,14 @@ function GenerateMawb({
 					if (download24) {
 						if (INCLUDE_TNC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
 							pdf.addPage();
-							pdf.addImage(backPage, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
+							pdf.addImage(
+								BACK_IMAGE_URL.awb_docs_tnc_page,
+								'jpeg',
+								ZERO_COORDINATE,
+								ZERO_COORDINATE,
+								pdfWidth,
+								pdfHeight,
+							);
 						} else {
 							pdf.addPage();
 						}

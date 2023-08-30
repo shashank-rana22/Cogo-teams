@@ -13,7 +13,7 @@ const ONE_VALUE = 1;
 const isObjEmpty = (obj) => {
 	let objIsEmpty = true;
 	Object.keys(obj).forEach((key) => {
-		if (obj[key]) { objIsEmpty = false; }
+		if (obj[key] && !isEmpty(obj[key])) { objIsEmpty = false; }
 	});
 	return isEmpty(obj) || objIsEmpty;
 };
@@ -27,10 +27,13 @@ function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
 	const formValues = watch();
 
 	const onClickOutside = () => {
+		if (filtersCount) {
+			Object.keys(filters).forEach((key) => setValue(key, filters[key]));
+		} else {
+			reset();
+		}
+
 		setVisible(false);
-		Object.keys(filters).forEach((key) => setValue(key, filters[key]));
-		if (filtersCount) return;
-		reset();
 	};
 
 	const handleReset = () => {
@@ -53,6 +56,7 @@ function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
 		if (isObjEmpty(formValues)) {
 			return;
 		}
+
 		setFilters(formValues);
 		setVisible(false);
 

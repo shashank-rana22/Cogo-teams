@@ -1,19 +1,21 @@
 import { Modal, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useDeactivateObjective from './useDeativateObjective';
 
 function ObjectiveDeactivation(props) {
+	const { t } = useTranslation(['allocation']);
 	const { objectiveId, setShowActionModal, refetch } = props;
 
 	const { loading, onDeactivation } = useDeactivateObjective({ objectiveId, setShowActionModal, refetch });
 
 	return (
 		<>
-			<Modal.Header title="Set Objective Activation Date" />
+			<Modal.Header title={t('allocation:set_objective_activation_date')} />
 
 			<Modal.Body>
 				<p>
-					Are you sure you want to deactivate this objective?
+					{t('allocation:are_you_sure_you_want_to_deactivate_this_objective')}
 				</p>
 			</Modal.Body>
 
@@ -25,7 +27,7 @@ function ObjectiveDeactivation(props) {
 					disabled={loading}
 					onClick={() => setShowActionModal({})}
 				>
-					Cancel
+					{t('allocation:cancel_button')}
 				</Button>
 
 				<Button
@@ -34,7 +36,7 @@ function ObjectiveDeactivation(props) {
 					loading={loading}
 					onClick={onDeactivation}
 				>
-					Yes, I do
+					{t('allocation:yes_i_do_button')}
 				</Button>
 			</Modal.Footer>
 		</>

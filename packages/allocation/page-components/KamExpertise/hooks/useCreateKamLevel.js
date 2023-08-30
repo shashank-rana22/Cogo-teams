@@ -5,8 +5,10 @@ import { useAllocationRequest } from '@cogoport/request';
 
 import Transacting_Accounts_Threshold_Type from '../constants/transacting-accounts-threshold-type';
 
+const SECOND_INDEX = 2;
+
 function useCreateKamLevel(props) {
-	const { dataLength = '', setCreateKam, refetch, cardRefetch } = props;
+	const { dataLength = '', setCreateKam, refetch, cardRefetch, t = () => {} } = props;
 
 	const formProps = useForm();
 
@@ -19,7 +21,7 @@ function useCreateKamLevel(props) {
 	}, { manual: true });
 
 	const onCreate = async (formValues) => {
-		const configDetails = [];
+		const CONFIG_DETAILS = [];
 
 		Object.keys(formValues).forEach((key) => {
 			let expertise_type = key;
@@ -31,7 +33,7 @@ function useCreateKamLevel(props) {
 				threshold_score_type = Transacting_Accounts_Threshold_Type[key].threshold_score_type;
 			}
 
-			configDetails.push({
+			CONFIG_DETAILS.push({
 				expertise_type,
 				threshold_score,
 				threshold_score_type,
@@ -40,9 +42,9 @@ function useCreateKamLevel(props) {
 
 		try {
 			const payload = {
-				transition_level      : dataLength + 2,
+				transition_level      : dataLength + SECOND_INDEX,
 				configuration_type    : 'kam',
-				configuration_details : configDetails,
+				configuration_details : CONFIG_DETAILS,
 			};
 
 			await trigger({
@@ -57,7 +59,7 @@ function useCreateKamLevel(props) {
 
 			cardRefetch();
 
-			Toast.success('Level Added!');
+			Toast.success(t('allocation:level_added_toast'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

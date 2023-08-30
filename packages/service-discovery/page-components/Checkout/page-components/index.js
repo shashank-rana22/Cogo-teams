@@ -4,9 +4,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import Header from '../../../common/Header';
+import { LoadingState } from '../../../common/LoadingState';
+import DotLoader from '../../../common/LoadingState/DotLoader';
 import TryOldBanner from '../../../common/TryOldBanner';
-import { LoadingState } from '../commons/LoadingState';
-import DotLoader from '../commons/LoadingState/DotLoader';
 import { CheckoutContext } from '../context';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
 

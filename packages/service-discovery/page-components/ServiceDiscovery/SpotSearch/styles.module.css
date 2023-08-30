@@ -38,3 +38,14 @@
 .other_services {
 	padding: 24px 40px;
 }
+
+.scope_select {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.label {
+	margin-right: 8px;
+	font-weight: 600;
+}

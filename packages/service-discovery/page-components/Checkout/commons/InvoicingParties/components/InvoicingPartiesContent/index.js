@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-import CardLoadingState from '../../../LoadingState/CardLoadingState';
+import CardLoadingState from '../../../../../../common/LoadingState/CardLoadingState';
 import AddInvoicingParty from '../AddInvoicingParty';
 import EmptyState from '../EmptyState';
 

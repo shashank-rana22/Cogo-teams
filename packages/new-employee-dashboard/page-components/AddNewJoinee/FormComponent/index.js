@@ -19,7 +19,7 @@ const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
 const EMPLOYEE_DETAILS_MAPPING = [
 	'employee_code',
-	'designation',
+	'role_id',
 	'date_of_joining',
 	'office_location',
 	'cogoport_email',
@@ -27,7 +27,7 @@ const EMPLOYEE_DETAILS_MAPPING = [
 	'attendance',
 	'learning_indicator',
 	'predictive_index',
-	'department',
+	'department_id',
 ];
 
 const HR_DETAILS_MAPPING = ['hr_id', 'reporting_manager_id', 'hiring_manager_id', 'hrbp_id'];

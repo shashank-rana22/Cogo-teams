@@ -104,14 +104,14 @@ function DetentionDemurrage({
 			<span className={styles.tag}>Origin</span>
 
 			<div className={styles.days_count}>
-				<span>{`DET. ${additionalDays('origin_detention')} Days,`}</span>
+				<span>{`Detention. ${additionalDays('origin_detention')} Days,`}</span>
 				<span>{`Demurrage. ${additionalDays('origin_demurrage')} Days`}</span>
 			</div>
 
 			<span className={styles.tag}>Destination</span>
 
 			<div className={styles.days_count}>
-				<span>{`DET. ${additionalDays('destination_detention')} Days,`}</span>
+				<span>{`Detention. ${additionalDays('destination_detention')} Days,`}</span>
 				<span>{`Demurrage. ${additionalDays('destination_demurrage')} Days`}</span>
 			</div>
 

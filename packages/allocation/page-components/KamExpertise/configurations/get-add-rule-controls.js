@@ -1,7 +1,7 @@
 import { asyncKamExpertiseGroupOptions } from '@cogoport/forms';
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
 
-const useGetControls = ({ expertiseTypeWatch }) => {
+const useGetControls = ({ expertiseTypeWatch, t = () => {} }) => {
 	const asyncControlOptions = useGetAsyncOptionsMicroservice({
 		...asyncKamExpertiseGroupOptions(),
 		initialCall : false,
@@ -16,31 +16,34 @@ const useGetControls = ({ expertiseTypeWatch }) => {
 	return [
 		{
 			name    : 'expertise_type',
-			label   : 'Select Expertise',
+			label   : t('allocation:expertise_type_label'),
 			type    : 'select',
 			options : [
-				{ value: 'customer_expertise', label: 'Customer Expertise' },
-				{ value: 'trade_expertise', label: 'Trade Expertise' },
-				{ value: 'commodity_expertise', label: 'Commodity Expertise' },
-				{ value: 'miscellaneous_expertise', label: 'Miscellaneous' },
+				{ value: 'customer_expertise', label: t('allocation:expertise_type_options_customer_expertise') },
+				{ value: 'trade_expertise', label: t('allocation:expertise_type_options_trade_expertise') },
+				{ value: 'commodity_expertise', label: t('allocation:expertise_type_options_commodity_expertise') },
+				{
+					value : 'miscellaneous_expertise',
+					label : t('allocation:expertise_type_options_miscellaneous_expertise'),
+				},
 			],
 			rules: {
-				required: 'Expertise is required',
+				required: t('allocation:expertise_type_rules_required'),
 			},
 			isClearable: true,
 		},
 		{
 			name  : 'condition_name',
-			label : 'Condition Name',
+			label : t('allocation:condition_name_label'),
 			type  : 'text',
 			rules : {
-				required : 'Specify Condition',
-				validate : (value) => (value.includes("'") ? 'Apostrophe is not allowed' : undefined),
+				required : t('allocation:condition_name_rules_required'),
+				validate : (value) => (value.includes("'") ? t('allocation:condition_name_rules_validate') : undefined),
 			},
 		},
 		{
 			name        : 'group_name',
-			label       : 'Group Name',
+			label       : t('allocation:group_name_label'),
 			type        : 'creatableSelect',
 			isClearable : true,
 			disabled    : !expertiseTypeWatch,
@@ -48,22 +51,22 @@ const useGetControls = ({ expertiseTypeWatch }) => {
 		},
 		{
 			name    : 'event_state_on',
-			label   : 'Event Trigger',
+			label   : t('allocation:event_state_on_label'),
 			type    : 'select',
 			options : [
-				{ value: 'in_progress', label: 'Shipment Creation' },
-				{ value: 'completed', label: 'Shipment Completed' },
+				{ value: 'in_progress', label: t('allocation:event_state_on_options_in_progress') },
+				{ value: 'completed', label: t('allocation:event_state_on_options_completed') },
 			],
 			rules: {
-				required: 'Event Trigger is required',
+				required: t('allocation:event_state_on_rules_required'),
 			},
 			isClearable: true,
 		},
 		{
 			name        : 'description',
-			label       : 'Description',
+			label       : t('allocation:description_label'),
 			type        : 'textarea',
-			placeholder : 'Type here...',
+			placeholder : t('allocation:description_placeholder'),
 		},
 	];
 };

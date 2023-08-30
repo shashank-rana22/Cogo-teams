@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { React } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../common/EmptyState';
 import useListEmployeeSignedDocuments from '../../hooks/useListEmployeeSignedDocuments';

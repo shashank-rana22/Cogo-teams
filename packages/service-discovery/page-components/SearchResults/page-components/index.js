@@ -4,8 +4,8 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import DotLoader from '../../../common/DotLoader';
 import Header from '../../../common/Header';
+import DotLoader from '../../../common/LoadingState/DotLoader';
 import TryOldBanner from '../../../common/TryOldBanner';
 import useGetSpotSearch from '../hooks/useGetSpotSearch';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
@@ -97,13 +97,12 @@ function SearchResults() {
 		setSelectedCard,
 		selectedCard,
 		page = 1,
-		setPage = () => {},
+		rates = [],
 	} = useGetSpotSearch({ setComparisonRates });
 
 	const {
 		spot_search_detail:detail = {},
 		contract_detail = {},
-		list:rates = [],
 		possible_subsidiary_services = [],
 		total_count,
 		page_limit,
@@ -194,7 +193,6 @@ function SearchResults() {
 					comparisonRates={comparisonRates}
 					filters={filters}
 					setFilters={setFilters}
-					setPage={setPage}
 					paginationProps={paginationProps}
 					loading={loading}
 					setHeaderProps={setHeaderProps}

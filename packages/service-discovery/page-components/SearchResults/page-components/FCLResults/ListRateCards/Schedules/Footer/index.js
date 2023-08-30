@@ -1,4 +1,3 @@
-import { Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
@@ -11,10 +10,9 @@ const ONE_VALUE = 1;
 function Footer({
 	paginationProps = {},
 	selectedWeek = {},
-	setPage = () => {},
 	schedules = [],
 }) {
-	const { page, page_limit, total_count } = paginationProps;
+	const { total_count } = paginationProps;
 
 	const { count = 0, start_date = '', end_date = '' } = selectedWeek;
 
@@ -64,18 +62,6 @@ function Footer({
 					</strong>
 				</span>
 			</div>
-
-			{isEmpty(total_count) ? null : (
-				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						onPageChange={(val) => setPage(val)}
-					/>
-				</div>
-			)}
 		</div>
 	);
 }
