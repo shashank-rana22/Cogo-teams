@@ -123,7 +123,7 @@ function Item({
 									{startCase(CN_STATUS_MAPPING[itemStatus])}
 								</div>
 
-								{itemStatus === 'rejected' && !isCrossEntity ? (
+								{itemStatus === 'rejected' ? (
 									<IcCError width={16} height={16} />
 								) : null}
 							</div>
@@ -138,7 +138,7 @@ function Item({
 							) : null}
 						</div>
 
-						{itemStatus === 'pending' && !isCrossEntity ? (
+						{itemStatus === 'pending' ? (
 							<div
 								onClick={() => setOpen('edit')}
 								role="button"
@@ -175,7 +175,7 @@ function Item({
 				) : null}
 			</main>
 
-			{open === 'review' && !isCrossEntity ? (
+			{open === 'review' ? (
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
@@ -183,7 +183,7 @@ function Item({
 				/>
 			) : null}
 
-			{open === 'edit' && !isCrossEntity ? (
+			{open === 'edit' ? (
 				<Edit
 					setOpen={setOpen}
 					prevData={prevData}
