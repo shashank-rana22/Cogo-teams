@@ -23,21 +23,16 @@ const format = ({ value = '', type = '' }) => {
 	});
 };
 
-function Route({ detail = {}, rate = {}, isCogoAssured = false }) {
-	const {
-		arrival = '',
-		departure = '',
-		validity_start = '',
-		validity_end = '',
-		transit_time = 0,
-		schedule_source = '',
-	} = rate;
+function Route({ detail = {}, rate = {} }) {
+	const { transit_time = 0, schedules = {} } = rate;
+
+	const { arrival = '', departure = '', source:schedule_source = '' } = schedules || {};
 
 	const scheduleData = {
-		arrival: `${format({ value: arrival || validity_end, type: 'time' })}, 
-                  ${format({ value: arrival || validity_end, type: 'date' })}`,
-		departure: `${format({ value: departure || validity_start, type: 'time' })}, 
-                  ${format({ value: departure || validity_start, type: 'date' })}`,
+		arrival: `${format({ value: arrival, type: 'time' })}, 
+                  ${format({ value: arrival, type: 'date' })}`,
+		departure: `${format({ value: departure, type: 'time' })}, 
+                  ${format({ value: departure, type: 'date' })}`,
 		transit_time,
 		schedule_source,
 	};
@@ -65,7 +60,7 @@ function Route({ detail = {}, rate = {}, isCogoAssured = false }) {
 			<div className={styles.schedule_container}>
 				<div className={styles.origin}>
 					<span className={styles.schedule_item}>
-						{!isCogoAssured ? scheduleData.departure : origin?.port_code}
+						{scheduleData.departure}
 					</span>
 				</div>
 
@@ -73,7 +68,7 @@ function Route({ detail = {}, rate = {}, isCogoAssured = false }) {
 
 				<div className={styles.destination}>
 					<span className={styles.schedule_item}>
-						{!isCogoAssured ? scheduleData.arrival : origin?.port_code}
+						{scheduleData.arrival}
 					</span>
 				</div>
 			</div>

@@ -26,11 +26,8 @@ function Footer({
 	rate = {},
 	detail = {},
 	isSelectedCard = false,
-	isCogoAssured = false,
 }) {
 	const [activeTab, setActiveTab] = useState('');
-
-	const templateStyles = isCogoAssured ? 'cogo_assured' : {};
 
 	const TABS = getTabs({ rate, detail });
 
@@ -46,7 +43,7 @@ function Footer({
 
 	return (
 		<div className={styles.container}>
-			<div className={cl`${styles.wrapper} ${styles[templateStyles]}`}>
+			<div className={styles.wrapper}>
 				<div className={styles.left_section}>
 					{detail?.chargeable_weight ? (
 						<div className={styles.info_item}>

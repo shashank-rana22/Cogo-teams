@@ -53,8 +53,8 @@ const getPayload = (serviceType, origin, destination) => {
 				},
 			],
 			payment_type : 'prepaid',
-			weight       : 1,
-			volume       : 1,
+			weight       : 0.8,
+			volume       : 135,
 			status       : 'active',
 		},
 		ftl_freight: {

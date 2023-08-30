@@ -22,7 +22,7 @@ function SelectedCardScreen({
 		data = {},
 		refetch = () => {},
 		loading = false,
-	} = useGetRateCard();
+	} = useGetRateCard({ service_type: 'fcl_freight' });
 
 	const {
 		rate_card: rateCardData = {},

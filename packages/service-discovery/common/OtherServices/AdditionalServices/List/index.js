@@ -1,6 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import CargoInsurance from '../../CargoInsurance';
 import AccordianView from '../../common/AccordianView';
 
 import ItemContent from './ItemContent';
@@ -51,34 +52,47 @@ function List({
 			/>
 
 			<div className={styles.accordian_container}>
-				{list.map((serviceItem) => (
-					<AccordianView
-						key={serviceItem.name}
-						itemKey={serviceItem.name}
-						active={active}
-						isOpen={serviceItem.isSelected}
-						setActive={setActive}
-						title={(
-							<ListItem
+				{(list || []).map((serviceItem) => {
+					if (serviceItem === 'cargo_insurance') {
+						return (
+							<CargoInsurance
+								key="cargo_insurance"
+								data={detail}
+								refetch={refetch}
+								rateCardData={rateCardData}
+							/>
+						);
+					}
+
+					return (
+						<AccordianView
+							key={serviceItem.name}
+							itemKey={serviceItem.name}
+							active={active}
+							isOpen={serviceItem.isSelected}
+							setActive={setActive}
+							title={(
+								<ListItem
+									serviceItem={serviceItem}
+									detail={detail}
+									rateCardData={rateCardData}
+									setHeaderProps={setHeaderProps}
+									refetch={refetch}
+									SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+									startingPrices={startingPrices}
+									startingPriceLoading={startingPriceLoading}
+									refetchLoading={refetchLoading}
+								/>
+							)}
+						>
+							<ItemContent
 								serviceItem={serviceItem}
 								detail={detail}
 								rateCardData={rateCardData}
-								setHeaderProps={setHeaderProps}
-								refetch={refetch}
-								SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
-								startingPrices={startingPrices}
-								startingPriceLoading={startingPriceLoading}
-								refetchLoading={refetchLoading}
 							/>
-						)}
-					>
-						<ItemContent
-							serviceItem={serviceItem}
-							detail={detail}
-							rateCardData={rateCardData}
-						/>
-					</AccordianView>
-				))}
+						</AccordianView>
+					);
+				})}
 			</div>
 		</div>
 	);

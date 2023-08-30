@@ -38,7 +38,6 @@ function Filters({
 	showFilterModal = false,
 	setShowFilterModal = () => {},
 }) {
-	console.log('filters', filters);
 	const filtersApplied = checkIfFiltersChanged(FILTERS_DEFAULT_VALUES, filters);
 
 	const onClickButton = () => {

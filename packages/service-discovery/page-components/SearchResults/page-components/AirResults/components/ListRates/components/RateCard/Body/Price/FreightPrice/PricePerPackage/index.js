@@ -32,6 +32,10 @@ function PricePerPackage({
 							maximumFractionDigits : 0,
 						},
 					})}
+
+					{isTotalPrice ? null : (
+						<span className={styles.per_package_label}>Per Pkg.</span>
+					)}
 				</span>
 
 				{isTotalPrice ? (

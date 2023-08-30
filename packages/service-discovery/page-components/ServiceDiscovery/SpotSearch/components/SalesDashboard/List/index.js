@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetSalesDashboardData from '../../../hooks/useGetSalesDashboardData';
 
@@ -17,7 +17,7 @@ function List({
 	placement = 'center',
 	...rest
 }) {
-	const [serviceType, setServiceType] = useState(() => (service_type || 'fcl_freight'));
+	const [serviceType, setServiceType] = useState(service_type || 'fcl_freight');
 
 	const {
 		statsData,
@@ -29,6 +29,10 @@ function List({
 	} = useGetSalesDashboardData({ serviceType, api, stats, importer_exporter_id, ...rest });
 
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
+
+	useEffect(() => {
+		setServiceType(service_type || 'fcl_freight');
+	}, [service_type]);
 
 	return (
 		<div className={styles.container}>

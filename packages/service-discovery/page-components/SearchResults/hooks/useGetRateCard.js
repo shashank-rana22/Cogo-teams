@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const useGetRateCard = () => {
+const useGetRateCard = ({ service_type = 'fcl_freight' }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 
 	const { rate_card_id } = query;
@@ -17,14 +17,14 @@ const useGetRateCard = () => {
 	const getRateDetails = useCallback(async () => {
 		try {
 			await trigger({
-				params: { rate_card_id, service_type: 'fcl_freight' },
+				params: { rate_card_id, service_type },
 			});
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	}, [rate_card_id, trigger]);
+	}, [rate_card_id, service_type, trigger]);
 
 	useEffect(() => {
 		if (!rate_card_id) return;

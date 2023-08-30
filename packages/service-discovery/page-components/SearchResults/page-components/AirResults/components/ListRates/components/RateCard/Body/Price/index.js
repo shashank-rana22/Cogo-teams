@@ -6,10 +6,9 @@ function Price({
 	rate = {},
 	detail = {},
 	isSelectedCard = false,
-	isCogoAssured = false,
 }) {
 	const { service_rates = {} } = rate;
-	const { service_details = {}, primary_service_id:serviceId = '' } = detail;
+	const { service_details = {}, primary_service_id: serviceId = '' } = detail;
 
 	const primary_service = {
 		...(service_rates[serviceId] || {}),
@@ -23,7 +22,6 @@ function Price({
 			<Buttons
 				detail={detail}
 				rate={rate}
-				isCogoAssured={isCogoAssured}
 				isSelectedCard={isSelectedCard}
 			/>
 		</div>

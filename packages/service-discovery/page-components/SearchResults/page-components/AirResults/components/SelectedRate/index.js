@@ -1,8 +1,82 @@
-import React from 'react';
+import { useSelector } from '@cogoport/store';
+import { useState } from 'react';
 
-function SelectedRate() {
+import CargoModal from '../../../../common/CargoModal';
+import LoadingState from '../../../../common/Loading';
+import useCreateCheckout from '../../../../hooks/useCreateCheckout';
+import useGetRateCard from '../../../../hooks/useGetRateCard';
+import RateCard from '../ListRates/components/RateCard';
+
+import Header from './Header';
+import Services from './Services';
+import styles from './styles.module.css';
+
+function SelectedRate({
+	setHeaderProps = () => {},
+	headerProps = {},
+}) {
+	const { query = {} } = useSelector(({ general }) => ({
+		query: general?.query,
+	}));
+
+	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
+
+	const {
+		data = {},
+		refetch = () => {},
+		loading = false,
+	} = useGetRateCard({ service_type: 'air_freight' });
+
+	const {
+		rate_card:selectedRate = {},
+		possible_subsidiary_services = [],
+		spot_search_detail:detail = {},
+	} = data || {};
+
+	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
+		rateCardData   : selectedRate,
+		spot_search_id : query?.spot_search_id,
+	});
+
+	if (loading) {
+		return <LoadingState />;
+	}
+
 	return (
-		<div>SelectedRate</div>
+		<div className={styles.container}>
+			<Header rate={selectedRate} />
+
+			<RateCard
+				loading={loading}
+				isSelectedCard
+				rate={selectedRate}
+				detail={detail}
+			/>
+
+			<Services
+				rateCardData={selectedRate}
+				detail={detail}
+				createCheckoutLoading={createCheckoutLoading}
+				refetch={refetch}
+				loading={loading}
+				headerProps={headerProps}
+				setHeaderProps={setHeaderProps}
+				possible_subsidiary_services={possible_subsidiary_services}
+				cargoModal={cargoModal}
+				setCargoModal={setCargoModal}
+				handleBook={handleBook}
+			/>
+
+			{cargoModal === 'progress' ? (
+				<CargoModal
+					refetch={refetch}
+					cargoModal={cargoModal}
+					setCargoModal={setCargoModal}
+					detail={detail}
+					goToCheckout={handleBook}
+				/>
+			) : null}
+		</div>
 	);
 }
 

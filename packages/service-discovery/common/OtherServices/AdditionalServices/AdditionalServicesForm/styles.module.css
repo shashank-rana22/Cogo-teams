@@ -17,16 +17,15 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	width: 90%;
+	margin-top: 16px;
 }
 
 .control_style {
-	margin: 16px 16px 16px 0;
+	margin-right: 16px;
 }
 
 .primary_buttton {
 	margin-top: 20px;
-	margin-left: 20px;
 }
 
 .label {

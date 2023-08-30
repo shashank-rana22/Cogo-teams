@@ -138,6 +138,7 @@ function HandleBookValue({
 
 const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContract) => {
 	const keys = Object.keys(STATIC_COMPARISON_KEY[mode || 'default']);
+
 	const otherComparisonKeys = keys.map((key) => {
 		const comparisonKey = {
 			code : key,
@@ -170,7 +171,7 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 			),
 			validity_end: () => createValueObject(
 				formatDate({
-					date       : item.schedules?.departure || item.schedules?.validity_end,
+					date       : item.departure || item.schedules?.departure || item.schedules?.validity_end,
 					formattype : 'date',
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
 				}),
@@ -235,7 +236,9 @@ function Comparison({
 	const DYNMAIC_LINE_ITEMS = {};
 
 	selectedCards.forEach((cardItem) => {
-		const { service_rates = [], shipping_line = {}, source } = cardItem;
+		const { service_rates = [], source, shipping_line, airline } = cardItem;
+
+		const line = shipping_line || airline || {};
 
 		const services = Object.entries(service_rates);
 
@@ -256,12 +259,12 @@ function Comparison({
 		const dynamicLineItems = getDyanmicLineItems(lineItems);
 
 		const logo = source === 'cogo_assured_rate'
-			? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line.logo_url;
+			? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : line.logo_url;
 
-		LOGO_MAPPING[toSnakeCase(shipping_line.short_name)] = logo;
+		LOGO_MAPPING[toSnakeCase(line.short_name)] = logo;
 
-		STATIC_LINE_ITEMS[`${toSnakeCase(shipping_line.short_name)}-${cardItem.id}`] = staticLineItems;
-		DYNMAIC_LINE_ITEMS[`${toSnakeCase(shipping_line.short_name)}-${cardItem.id}`] = dynamicLineItems;
+		STATIC_LINE_ITEMS[`${toSnakeCase(line.short_name)}-${cardItem.id || cardItem.card}`] = staticLineItems;
+		DYNMAIC_LINE_ITEMS[`${toSnakeCase(line.short_name)}-${cardItem.id || cardItem.card}`] = dynamicLineItems;
 	});
 
 	const allLineItems = getAllLineItems(STATIC_LINE_ITEMS, DYNMAIC_LINE_ITEMS);

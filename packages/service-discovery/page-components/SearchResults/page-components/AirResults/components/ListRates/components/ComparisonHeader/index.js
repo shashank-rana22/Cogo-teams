@@ -6,11 +6,6 @@ import styles from './styles.module.css';
 
 const ONE = 1;
 
-const renderName = (name) => {
-	if (name.includes('COGO')) return 'COGO ASSURED';
-	return name;
-};
-
 function ComparisonHeader({
 	comparisonRates = {},
 	setComparisonRates = () => {},
@@ -23,8 +18,7 @@ function ComparisonHeader({
 	const handleDeleteAll = () => setComparisonRates({});
 
 	const handleDelete = (rate) => {
-		// const { id: idOfCardToBeDeleted = '' } = rate;
-		const { card: idOfCardToBeDeleted = '' } = rate;
+		const { id: idOfCardToBeDeleted = '' } = rate;
 
 		setComparisonRates((pv) => {
 			const tempObj = { ...pv };
@@ -52,20 +46,18 @@ function ComparisonHeader({
 
 				<div className={styles.pills_container}>
 					{selectedCards.map((cardItem) => {
-						const { airline = {}, source = '' } = cardItem;
+						const { airline = {} } = cardItem;
 
 						const { short_name = '', id: airline_id = '' } = airline || {};
 
 						return (
 							<div key={`${airline_id}_${cardItem.id}`} className={styles.pill}>
-								{renderName(short_name)}
+								{short_name}
 
-								{source === 'cogo_assured_rate' ? null : (
-									<IcMCross
-										className={styles.cross_icon}
-										onClick={() => handleDelete(cardItem)}
-									/>
-								)}
+								<IcMCross
+									className={styles.cross_icon}
+									onClick={() => handleDelete(cardItem)}
+								/>
 							</div>
 						);
 					})}

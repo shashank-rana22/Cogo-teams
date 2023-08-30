@@ -5,12 +5,11 @@ import { useState } from 'react';
 import AppliedFilters from '../../../../common/AppliedFilters';
 import RequestRate from '../../../../common/RequestRate';
 
-// import CogoAssuredCard from './components/CogoAssuredCard';
 import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
 import RateCard from './components/RateCard';
-// import Schedules from './components/Schedules';
+import Schedules from './components/Schedules';
 import styles from './styles.module.css';
 
 const MINIMUM_RATE_CARDS_FOR_PAGINATION = 5;
@@ -26,20 +25,12 @@ function ListRates({
 	setScreen = () => {},
 	setComparisonRates = () => {},
 	setPage = () => {},
-	// selectedWeek = {},
-	// setSelectedWeek = () => {},
+	selectedWeek = {},
+	setSelectedWeek = () => {},
 	paginationProps = {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
-
-	const { cogoAssuredRates, marketplaceRates } = (rates || []).reduce((acc, rate) => {
-		if (rate.source === 'cogo_assured_rate') {
-			return { ...acc, cogoAssuredRates: [...acc.cogoAssuredRates, rate] };
-		}
-
-		return { ...acc, marketplaceRates: [...acc.marketplaceRates, rate] };
-	}, { cogoAssuredRates: [], marketplaceRates: [] });
 
 	const showComparison = !isEmpty(comparisonRates);
 
@@ -85,7 +76,7 @@ function ListRates({
 				</div>
 			</div>
 
-			{/* <Schedules
+			<Schedules
 				paginationProps={paginationProps}
 				filters={filters}
 				setFilters={setFilters}
@@ -94,7 +85,7 @@ function ListRates({
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
 				loading={loading}
-			/> */}
+			/>
 
 			<AppliedFilters
 				setShowFilterModal={setShowFilterModal}
@@ -103,20 +94,6 @@ function ListRates({
 				setFilters={setFilters}
 			/>
 
-			{/* {loading ? null : (
-				<CogoAssuredCard
-					cogoAssuredRates={marketplaceRates}
-					detail={detail}
-					setScreen={setScreen}
-					setComparisonRates={setComparisonRates}
-					comparisonRates={comparisonRates}
-					refetch={refetch}
-					// infoBanner={infoBanner}
-					// setInfoBanner={setInfoBanner}
-					// isGuideViewed={isGuideViewed}
-				/>
-			)} */}
-
 			{loading ? (
 				<div className={styles.loading}>
 					<span className={styles.loading_text}>Looking for Rates</span>
@@ -124,13 +101,12 @@ function ListRates({
 				</div>
 			) : null}
 
-			{(marketplaceRates || []).map((rateItem) => (
+			{(rates || []).map((rateItem) => (
 				<RateCard
 					key={rateItem.id}
 					loading={loading}
 					rate={rateItem}
 					detail={detail}
-					cogoAssuredRates={cogoAssuredRates}
 					setComparisonRates={setComparisonRates}
 					comparisonRates={comparisonRates}
 						// infoBanner={infoBanner}

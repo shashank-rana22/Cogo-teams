@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import getIncoterm from './getIncoterm';
 
 const LB_TO_KG = 2.205;
@@ -29,10 +27,9 @@ const getAirPayload = (values, origin, destination) => {
 			total_volume,
 			volume_unit,
 			weight_unit,
-			packages:packagesData = [],
+			handling_type = '',
+			packing_type = '',
 		} = values;
-
-		const { handling_type = '', packing_type = '' } = packagesData[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		totalWeight = Number(total_weight);
 		totalQuantity = Number(total_quantity);

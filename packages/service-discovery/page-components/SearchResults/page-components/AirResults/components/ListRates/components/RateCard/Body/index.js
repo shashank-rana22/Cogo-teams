@@ -7,18 +7,16 @@ function Body({
 	detail = {},
 	// infoBanner = {},
 	// showGuide = false,
-	isCogoAssured = false,
 	isSelectedCard = false,
 }) {
 	return (
 		<div className={styles.container}>
-			<Route detail={detail} isCogoAssured={isCogoAssured} rate={rate} />
+			<Route detail={detail} rate={rate} />
 
 			<Price
 				detail={detail}
 				rate={rate}
 				isSelectedCard={isSelectedCard}
-				isCogoAssured={isCogoAssured}
 			/>
 		</div>
 	);

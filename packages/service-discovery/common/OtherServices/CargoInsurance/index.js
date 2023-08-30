@@ -73,8 +73,6 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Other Services</div>
-
 			<AccordianView
 				itemKey="cargo_insurance"
 				active={active}

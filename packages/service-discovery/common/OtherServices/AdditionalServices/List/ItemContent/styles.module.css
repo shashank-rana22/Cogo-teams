@@ -23,6 +23,7 @@
 .pill {
 	width: max-content;
 	padding: 4px 12px;
+	margin-right: 12px;
 	font-size: 12px;
 	font-weight: 400;
 	color: #1295a3;

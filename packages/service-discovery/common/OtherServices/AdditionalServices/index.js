@@ -1,4 +1,7 @@
 import { Select } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -11,6 +14,8 @@ import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
 import getServiceName from './utils/getServiceName';
+
+const OTHER_SERVICES_ARRAY = ['warehouse'];
 
 const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
 const singleLocationServices = ['fcl_freight_local'];
@@ -29,6 +34,14 @@ function AdditionalServices({ // used in search results and checkout
 	searchLoading = false,
 	refetchLoading = false,
 }) {
+	const { country: { id: countryId = '' } } = getGeoConstants();
+
+	const COUNTRY_CODE = getCountryDetails({
+		country_id: countryId,
+	})?.country_code;
+
+	const cargoInsuranceSupportedServices = GLOBAL_CONSTANTS.cargo_insurance[COUNTRY_CODE] || [];
+
 	const { service_rates = [], total_price_currency = 'USD' } = rateCardData;
 
 	const {
@@ -155,12 +168,19 @@ function AdditionalServices({ // used in search results and checkout
 	const SHIPPER_SIDE_SERVICES = [];
 	const CONSIGNEE_SIDE_SERVICES = [];
 	const MAIN_SERVICES = [];
+	const OTHER_SERVICES = [];
+
+	if (cargoInsuranceSupportedServices.includes(primaryService)) {
+		OTHER_SERVICES.push('cargo_insurance');
+	}
 
 	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
 			CONSIGNEE_SIDE_SERVICES.push(item);
 		} else if (item.name.includes('export')) {
 			SHIPPER_SIDE_SERVICES.push(item);
+		} else if (OTHER_SERVICES_ARRAY.includes(item.name)) {
+			OTHER_SERVICES.push(item);
 		} else MAIN_SERVICES.push(item);
 	});
 
@@ -183,6 +203,11 @@ function AdditionalServices({ // used in search results and checkout
 			key  : 'buyer_side_services',
 			type : 'buyer',
 			list : CONSIGNEE_SIDE_SERVICES,
+		},
+		other_services: {
+			key  : 'other_services',
+			type : 'other_services',
+			list : OTHER_SERVICES,
 		},
 	};
 

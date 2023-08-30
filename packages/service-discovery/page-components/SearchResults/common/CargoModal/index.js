@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import CargoInsuranceModal from '../../../../../../../common/OtherServices/CargoInsurance/CargoInsuranceModal';
+import CargoInsuranceModal from '../../../../common/OtherServices/CargoInsurance/CargoInsuranceModal';
 
 import Content from './Content';
 

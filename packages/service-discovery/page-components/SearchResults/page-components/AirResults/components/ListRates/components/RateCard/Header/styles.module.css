@@ -59,10 +59,6 @@
 	display: flex;
 	align-items: center;
 	margin-top: 16px;
-
-	&.cogo_assured_rate {
-		margin-top: 0;
-	}
 }
 
 .airline_info {

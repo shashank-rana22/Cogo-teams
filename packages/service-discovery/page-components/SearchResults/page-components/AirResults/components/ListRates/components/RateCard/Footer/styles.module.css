@@ -10,10 +10,6 @@
 	width: 100%;
 	padding: 12px 20px;
 	background: #f3f9f9;
-
-	&.cogo_assured {
-		background: #fef3e9;
-	}
 }
 
 .left_section {
