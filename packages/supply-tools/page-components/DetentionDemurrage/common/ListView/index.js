@@ -3,6 +3,7 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState } from 'react';
 
+import EmptyState from '../EmptyState';
 import ListPagination from '../ListPagination';
 
 import Footer from './Footer';
@@ -24,6 +25,7 @@ const getWidthPercent = (span) => {
 function ListView({
 	data = {}, columns = [], EditForm = () => {}, loading = false,
 	filters = {}, setFilters = () => {}, handleSubmitForm = () => {},
+	createLoading = false,
 }) {
 	const [showEdit, setShowEdit] = useState(false);
 
@@ -38,8 +40,10 @@ function ListView({
 	}
 
 	if (isEmpty(data?.list)) {
-		return <div>No Result Found</div>; // do better
+		return <EmptyState />; // do better
 	}
+
+	const callBack = () => setShowEdit(null);
 
 	return (
 		<div>
@@ -80,7 +84,6 @@ function ListView({
 								<ButtonIcon icon={<IcMEdit />} themeType="tertiary" onClick={() => setShowEdit(item)} />
 							</div>
 						</div>
-
 						<Footer item={item} />
 					</div>
 				))}
@@ -97,17 +100,29 @@ function ListView({
 				>
 					<Modal.Header title="Edit Detention / Demurrage" />
 					<Modal.Body>
-						<EditForm item={showEdit} ref={editRef} handleSubmitForm={handleSubmitForm} />
+						<EditForm
+							item={showEdit}
+							ref={editRef}
+							handleSubmitForm={handleSubmitForm}
+							callBack={callBack}
+						/>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button
 							themeType="secondary"
 							style={{ marginRight: 8 }}
+							disabled={createLoading}
+							onClick={() => setShowEdit(null)}
 						>
 							Cancel
 						</Button>
 
-						<Button onClick={onEditSubmit}>Submit</Button>
+						<Button
+							onClick={onEditSubmit}
+							disabled={createLoading}
+						>
+							Submit
+						</Button>
 					</Modal.Footer>
 				</Modal>
 			) : null}

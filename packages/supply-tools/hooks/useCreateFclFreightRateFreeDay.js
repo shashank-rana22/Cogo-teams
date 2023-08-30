@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import getCreateFclRatePayload from '../helpers/getCreateFclRatePayload';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateFclFreightRateFreeDay = ({
 	successMessage = 'Created Successfully!',
@@ -15,12 +16,14 @@ const useCreateFclFreightRateFreeDay = ({
 	const apiTrigger = async (val) => {
 		try {
 			const payload = getCreateFclRatePayload({ data: val });
+
 			const res = await trigger({ data: payload });
+
 			Toast.success(successMessage);
 			refetch();
 			return res;
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 			return err;
 		}
 	};

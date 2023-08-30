@@ -1,10 +1,11 @@
-const getCreateFclRatePayload = ({ data = {}, user_profile = {} }) => {
+const getUpdateFclRatePayload = ({ data = {}, item = {}, user_profile = {} }) => {
 	const {
 		detention = [],
 		demurrage = [],
-		previous_days_applicable,
 		validity = {},
-		...rest
+		previous_days_applicable,
+		free_limit,
+		sourced_by_id,
 	} = data || {};
 
 	const slabs = [...detention, ...demurrage].filter((i) => !!i.upper_limit);
@@ -14,14 +15,17 @@ const getCreateFclRatePayload = ({ data = {}, user_profile = {} }) => {
 		validity_end   : validity?.endDate,
 	};
 
-	const createPayload = {
-		...rest,
+	const updatePayload = {
+		free_limit,
+		sourced_by_id,
 		slabs,
-		procured_by_id           : user_profile?.id || undefined,
+		procured_by_id           : user_profile?.id,
 		previous_days_applicable : previous_days_applicable === 'yes',
+		id                       : item?.id,
 		...convertedValidity,
 	};
 
-	return createPayload;
+	return updatePayload;
 };
-export default getCreateFclRatePayload;
+
+export default getUpdateFclRatePayload;

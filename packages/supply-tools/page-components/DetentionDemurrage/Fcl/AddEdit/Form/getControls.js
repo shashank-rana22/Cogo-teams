@@ -74,6 +74,14 @@ const getControls = ({ item = {} }) => [
 		isClearable : true,
 		placeholder : 'Origin Location',
 		rules       : { required: 'This is required' },
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { city: true, country: true, default_params_required: true },
+			recommendations : true,
+		},
 	},
 	{
 		name        : 'shipping_line_id',

@@ -35,16 +35,6 @@ const listFieldsColumns = [
 		),
 	},
 	{
-		label  : 'Trade Type',
-		key    : 'trade_type',
-		name   : 'trade_type',
-		span   : 0.8,
-		render : (item) => (
-			<div className={styles.wrap_text}>{startCase(item?.trade_type) || '-'}</div>
-		),
-	},
-
-	{
 		label  : 'Commodity',
 		key    : 'commodity',
 		name   : 'commodity',

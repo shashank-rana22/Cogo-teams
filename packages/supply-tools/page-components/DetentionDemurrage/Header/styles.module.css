@@ -8,6 +8,12 @@
 	font-weight: 600;
 }
 
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+	width: 25%;
+}
+
 .select_container {
-	width: 20%;
+	width: 70%;
 }

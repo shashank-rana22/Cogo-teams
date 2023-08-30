@@ -1,27 +1,34 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+
+import getUpdateFclRatePayload from '../helpers/getUpdateFclRatePayload';
+import toastApiError from '../utils/toastApiError';
 
 const useUpdateFclFreightRateFreeDay = ({
 	successMessage = 'Updated Successfully!',
 	refetch = () => {},
 }) => {
+	const user_profile = useSelector(({ profile }) => profile.user || {});
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_fcl_freight_rate_free_day',
 		method : 'POST',
-	});
+	}, { manual: true });
 
-	const apiTrigger = async (val) => {
+	const apiTrigger = async ({ data, item, callBack = () => {} }) => {
 		try {
-			const res = await trigger({ data: val });
+			const payload = getUpdateFclRatePayload({ data, item, user_profile });
 
-			Toast.success(successMessage);
+			const res = await trigger({ data: payload });
 
 			refetch();
 
-			return res;
+			callBack(res);
+
+			Toast.success(successMessage);
 		} catch (err) {
-			console.error(err);
-			return err;
+			toastApiError(err);
 		}
 	};
 

@@ -26,6 +26,14 @@ const controls = [
 		span        : 12,
 		asyncKey    : 'list_locations',
 		isClearable : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { city: true, country: true, default_params_required: true },
+			recommendations : true,
+		},
 	},
 	{
 		name        : 'shipping_line_id',

@@ -6,8 +6,19 @@ import Layout from '../../../../common/Layout';
 import styles from './styles.module.css';
 
 function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow = () => {} }) {
+	const finalControls = controls;
+
 	const { page, ...restFilters } = filters || {};
-	const { control, handleSubmit } = useForm({ defaultValues: restFilters });
+
+	const { control, handleSubmit, watch } = useForm({ defaultValues: restFilters });
+
+	const { location_type = '' } = watch();
+
+	finalControls.forEach((_c, index) => {
+		if (finalControls[index]?.name === 'location_id' && location_type) {
+			finalControls[index].params.filters.type = location_type;
+		}
+	});
 
 	const onReset = () => {
 		setFilters({ page });
@@ -22,13 +33,13 @@ function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow =
 	return (
 		<div>
 			<div className={styles.button_container}>
-				<Button onClick={onReset} themeType="secondary" size="sm">Reset</Button>
+				<Button onClick={onReset} themeType="secondary">Reset</Button>
 
-				<Button onClick={handleSubmit(onSubmit)} size="sm">Show Result</Button>
+				<Button onClick={handleSubmit(onSubmit)}>Show Result</Button>
 			</div>
 
 			<div>
-				<Layout controls={controls} control={control} />
+				<Layout controls={finalControls} control={control} />
 			</div>
 		</div>
 	);

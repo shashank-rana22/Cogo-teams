@@ -1,10 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+
+import getCreateRailPayload from '../helpers/getCreateRailRatePayload';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateRailDomesticFreightRateFreeDay = ({
 	successMessage = 'Created Successfully!',
 	refetch = () => {},
 }) => {
+	const user_profile = useSelector(({ profile }) => profile.user || {});
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_rail_domestic_freight_rate_free_day',
 		method : 'POST',
@@ -12,7 +18,8 @@ const useCreateRailDomesticFreightRateFreeDay = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ data: val });
+			const payload = getCreateRailPayload({ data: val, user_profile });
+			const res = await trigger({ data: payload });
 
 			Toast.success(successMessage);
 
@@ -20,7 +27,7 @@ const useCreateRailDomesticFreightRateFreeDay = ({
 
 			return res;
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 			return err;
 		}
 	};

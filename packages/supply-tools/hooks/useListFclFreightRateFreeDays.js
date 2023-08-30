@@ -2,6 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 import removeObjEmptyValue from '../helpers/removeObjEmptyValue';
+import toastApiError from '../utils/toastApiError';
 
 const useListFclFreightRateFreeDays = ({ activeTab = '', isApiTrigger = true, defaultFilters = {} }) => {
 	const [apiData, setApiData] = useState({});
@@ -30,9 +31,7 @@ const useListFclFreightRateFreeDays = ({ activeTab = '', isApiTrigger = true, de
 			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData({});
-
-			// toastApiError(err);
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [trigger]);
 
