@@ -7,7 +7,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ContractAd({ loading = false, importerExporterId = '', contractDetail = {} }) {
-	const { query } = useSelector(({ general }) => ({ query: general.query }));
+	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
 
 	const { partner_id = '' } = query;
 
@@ -19,11 +19,12 @@ function ContractAd({ loading = false, importerExporterId = '', contractDetail =
 		window.location.href = newHref;
 	};
 
-	if (!count || isEmpty(count) || loading) return null;
+	if (!count || isEmpty(count) || loading) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
-
 			<img
 				src={GLOBAL_CONSTANTS.image_url.cogo_contract_banner}
 				alt="cogo-contract-banner"

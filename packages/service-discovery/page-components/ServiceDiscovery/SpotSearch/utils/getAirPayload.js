@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import getIncoterm from './getIncoterm';
 
 const LB_TO_KG = 2.205;
@@ -9,6 +11,8 @@ const ROUNDOFF_TO_POWER_6 = 1000000;
 const ROUNDOFF_TO_POWER_3 = 1000;
 
 const getAirPayload = (values, origin, destination) => {
+	const incoTerm = getIncoterm(origin, destination);
+
 	const {
 		cargo_clearance_date,
 		commodity = '',
@@ -29,6 +33,7 @@ const getAirPayload = (values, origin, destination) => {
 			weight_unit,
 			handling_type = '',
 			packing_type = '',
+			packages:packagesData = [],
 		} = values;
 
 		totalWeight = Number(total_weight);
@@ -51,8 +56,9 @@ const getAirPayload = (values, origin, destination) => {
 		packages = [
 			{
 				packages_count : Number(total_quantity),
-				packing_type,
-				handling_type  : handling_type || 'non_stackable',
+				packing_type   : packing_type || packagesData?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_type,
+				handling_type  : handling_type
+				|| packagesData?.[GLOBAL_CONSTANTS.zeroth_index]?.handling_type || 'non_stackable',
 			},
 		];
 	} else {
@@ -121,7 +127,7 @@ const getAirPayload = (values, origin, destination) => {
 		cargo_clearance_date,
 		commodity,
 		commodity_details      : [{ commodity_type: 'all' }],
-		inco_term              : getIncoterm(origin, destination) || undefined,
+		inco_term              : incoTerm || undefined,
 		packages,
 		packages_count         : totalQuantity,
 		weight                 : Math.round(totalWeight * ROUNDOFF_TO_POWER_6) / ROUNDOFF_TO_POWER_6,

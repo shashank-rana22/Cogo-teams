@@ -1,4 +1,5 @@
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CargoModal from '../../../../common/CargoModal';
@@ -38,7 +39,7 @@ function SelectedRate({
 		spot_search_id : query?.spot_search_id,
 	});
 
-	if (loading) {
+	if (loading && isEmpty(data)) {
 		return <LoadingState />;
 	}
 

@@ -6,13 +6,13 @@ import { useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../common/AppliedFilters';
+import ContractAd from '../../../common/ContractAd';
 import RequestRate from '../../../common/RequestRate';
 import Schedules from '../../../common/Schedules';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
-import ContractAd from './ContractAd';
 import EmptyState from './EmptyState';
 import Header from './Header';
 import styles from './styles.module.css';

@@ -65,6 +65,7 @@ function AdditionalServicesForm({
 					style={{ cursor: 'pointer' }}
 				/>
 			</div>
+
 			<div className={styles.control_container}>
 				{service.controls.map((controlItem) => {
 					let newControl = { ...controlItem };
@@ -103,6 +104,12 @@ function AdditionalServicesForm({
 						<div key={newControl.name} className={styles.control_style}>
 							<div className={styles.label}>
 								{ newControl.label}
+								{newControl?.rules?.required ? (
+									<div className={styles.required_mark}>*</div>
+								) : null}
+								{newControl?.showOptional ? (
+									<div className={styles.optional_text}>(Optional)</div>
+								) : null}
 							</div>
 
 							<Element {...newControl} control={control} value={value} />

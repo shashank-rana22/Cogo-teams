@@ -1,10 +1,11 @@
-import { Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
+import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
 import Schedules from '../../../../common/Schedules';
 
@@ -28,6 +29,10 @@ function ListRates({
 	selectedWeek = {},
 	setSelectedWeek = () => {},
 	paginationProps = {},
+	contract_detail = {},
+	// infoBanner = {},
+	// setInfoBanner = () => {},
+	// isGuideViewed = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -96,25 +101,25 @@ function ListRates({
 				setFilters={setFilters}
 			/>
 
-			{loading ? (
-				<div className={styles.loading}>
-					<span className={styles.loading_text}>Looking for Rates</span>
-					<Loader themeType="primary" className={styles.loader} background="#000" />
-				</div>
-			) : null}
+			{(rates || []).map((rateItem, index) => (
+				<div key={rateItem.id}>
+					<RateCard
+						key={rateItem.id}
+						loading={loading}
+						rate={rateItem}
+						detail={detail}
+						setComparisonRates={setComparisonRates}
+						comparisonRates={comparisonRates}
+					/>
 
-			{(rates || []).map((rateItem) => (
-				<RateCard
-					key={rateItem.id}
-					loading={loading}
-					rate={rateItem}
-					detail={detail}
-					setComparisonRates={setComparisonRates}
-					comparisonRates={comparisonRates}
-						// infoBanner={infoBanner}
-						// setInfoBanner={setInfoBanner}
-						// showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
-				/>
+					{index === GLOBAL_CONSTANTS.zeroth_index ? (
+						<ContractAd
+							loading={loading}
+							importerExporterId={detail.importer_exporter_id}
+							contractDetail={contract_detail}
+						/>
+					) : null}
+				</div>
 			))}
 
 			{!loading && page < Math.ceil(total_count / page_limit) ? (

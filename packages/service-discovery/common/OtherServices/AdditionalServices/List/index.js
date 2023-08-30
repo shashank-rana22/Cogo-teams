@@ -53,7 +53,7 @@ function List({
 
 			<div className={styles.accordian_container}>
 				{(list || []).map((serviceItem) => {
-					if (serviceItem === 'cargo_insurance') {
+					if (serviceItem.name === 'cargo_insurance') {
 						return (
 							<CargoInsurance
 								key="cargo_insurance"

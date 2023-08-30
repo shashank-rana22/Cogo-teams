@@ -64,6 +64,7 @@ function Footer({
 						</div>
 					) : null}
 				</div>
+
 				<div className={styles.right_section}>
 					<div className={cl`${styles.tabs} ${showCogoPoints ? styles.less_width : styles.more_width}`}>
 						{Object.keys(TABS).map((item) => (
