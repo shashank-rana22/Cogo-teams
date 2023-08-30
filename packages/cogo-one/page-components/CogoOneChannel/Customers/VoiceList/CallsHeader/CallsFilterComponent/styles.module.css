@@ -3,10 +3,6 @@
 	height: 100%;
 }
 
-.container::-webkit-scrollbar {
-	display: none;
-}
-
 .sticky_boxshadow_styles {
 	position: sticky;
 	display: flex;
@@ -40,31 +36,7 @@
 	flex-direction: column;
 }
 
-.styled_flex {
-	display: flex;
-	align-items: center;
-	padding-bottom: 5px;
-	font-size: 14px;
-	color: #26323d;
-	border-bottom: 1px solid #e0e0e0;
-
-	:global {
-		.ui_checkbox_container {
-			padding: 3px 0 !important;
-		}
-
-		.ui_checkbox_style {
-			margin: 0 5px 0 0 !important;
-		}
-	}
-}
-
 .filters_container {
-	height: 68%;
+	height: 58%;
 	padding: 10px 20px;
-	overflow-y: auto;
-}
-
-.filters_container::-webkit-scrollbar {
-	display: none;
 }

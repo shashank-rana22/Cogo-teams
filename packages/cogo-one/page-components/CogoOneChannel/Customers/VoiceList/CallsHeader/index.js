@@ -22,21 +22,21 @@ function CallsHeader({
 					prefix={<IcMSearchlight width={18} height={18} />}
 					placeholder="Enter Mobile Number..."
 					value={searchValue}
-					onChange={(val) => setSearchValue(val)}
+					onChange={setSearchValue}
+					arrow={false}
 				/>
 			</div>
 			<div className={styles.filter_icon}>
 				<Popover
 					placement="right"
 					render={(
-							filterVisible && (
-								<CallsFilterComponents
-									setFilterVisible={setFilterVisible}
-									filterVisible={filterVisible}
-									appliedFilters={appliedFilters}
-									setAppliedFilters={setAppliedFilters}
-								/>
-							)
+						filterVisible && (
+							<CallsFilterComponents
+								setFilterVisible={setFilterVisible}
+								appliedFilters={appliedFilters}
+								setAppliedFilters={setAppliedFilters}
+							/>
+						)
 					)}
 					className={styles.styled_popover}
 					visible={filterVisible}

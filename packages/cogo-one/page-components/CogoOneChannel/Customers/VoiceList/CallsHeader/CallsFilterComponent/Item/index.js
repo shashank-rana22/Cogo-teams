@@ -27,7 +27,6 @@ function Item(props) {
 				<Element
 					{...props}
 					control={control}
-					className={styles.field_controller}
 				/>
 				{error?.type && <div className={styles.error_text}>This is Required</div>}
 			</div>

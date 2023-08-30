@@ -2,7 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
-import useGetCallControls from '../../../../../../configurations/useGetCallControls';
+import getCallFilterControls from '../../../../../../configurations/getCallFilterControls';
 
 import Item from './Item';
 import styles from './styles.module.css';
@@ -25,7 +25,7 @@ function CallsFilterComponents({
 	appliedFilters = {},
 	setAppliedFilters = () => {},
 }) {
-	const filterControls = useGetCallControls();
+	const filterControls = getCallFilterControls();
 
 	const {
 		control,
@@ -68,16 +68,14 @@ function CallsFilterComponents({
 					Filters
 				</div>
 				<div className={styles.styled_icon}>
-					{checkFiltersCount
-						? (
-							<Button
-								size="md"
-								themeType="tertiary"
-								onClick={() => { resetForm(); }}
-							>
-								Clear All
-							</Button>
-						) : null}
+					<Button
+						size="md"
+						themeType="accent"
+						type="submit"
+						disabled={isDisabled}
+					>
+						Apply
+					</Button>
 				</div>
 			</div>
 			<div className={styles.filters_container}>
@@ -107,14 +105,16 @@ function CallsFilterComponents({
 				>
 					Cancel
 				</Button>
-				<Button
-					size="md"
-					themeType="accent"
-					type="submit"
-					disabled={isDisabled}
-				>
-					Apply
-				</Button>
+				{checkFiltersCount
+					? (
+						<Button
+							size="md"
+							themeType="tertiary"
+							onClick={() => resetForm()}
+						>
+							Clear All
+						</Button>
+					) : null}
 			</div>
 		</form>
 	);

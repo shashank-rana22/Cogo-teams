@@ -1,6 +1,5 @@
 .label {
-	margin-bottom: 7px;
-	font-size: 14px;
+	margin-bottom: 6px;
 	font-weight: 600;
 	color: #4f4f4f;
 }
@@ -14,24 +13,10 @@
 	flex-direction: column;
 
 	:global {
-		.ui_radio_container {
-			padding: 3px 0;
-		}
-
-		.ui_checkbox_container {
-			padding: 3px 0;
-		}
-
-		.ui_checkbox_style {
-			margin: 0 5px 0 0;
+		.ui_multiselect_input_control {
+			font-size: 14px !important;
 		}
 	}
-}
-
-.field_controller {
-	display: flex;
-	flex-direction: column;
-	padding: 0;
 }
 
 .disabled {
