@@ -99,3 +99,7 @@
 	pointer-events: none;
 	opacity: 0.4;
 }
+
+.loader_container {
+	margin: 16px 0;
+}

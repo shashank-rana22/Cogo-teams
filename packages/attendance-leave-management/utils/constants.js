@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 export const ATTENDANCE_CONSTANT = [
 	{
 		label    : 'Present',

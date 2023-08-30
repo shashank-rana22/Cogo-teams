@@ -1,24 +1,24 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable custom-eslint/function-name-check */
 import { useEffect, useState } from 'react';
 
 const CLOCK_INTERVAL = 1000;
+const DEFAULT_VALUE = 10;
+const DEFAULT_HOURS = 12;
 
 function formatWithLeadingZero(value) {
-	return value < 10 ? `0${value}` : value.toString();
+	return value < DEFAULT_VALUE ? `0${value}` : value.toString();
 }
 
-function getCurrentTimeIn12HourFormat(date) {
+function getCurrentTimeInHourFormat(date) {
 	const hours = date.getHours();
-	const ampm = hours >= 12 ? 'PM' : 'AM';
-	const formattedHours = formatWithLeadingZero(hours % 12 || 12);
+	const ampm = hours >= DEFAULT_HOURS ? 'PM' : 'AM';
+	const formattedHours = formatWithLeadingZero(hours % DEFAULT_HOURS || DEFAULT_HOURS);
 	const minutes = formatWithLeadingZero(date.getMinutes());
 	const seconds = formatWithLeadingZero(date.getSeconds());
 
 	return `${formattedHours} : ${minutes} : ${seconds} ${ampm}`;
 }
 
-function CurrentTimeClock() {
+function useGetCurrentTime() {
 	const [dateState, setDateState] = useState(new Date());
 
 	useEffect(() => {
@@ -28,9 +28,9 @@ function CurrentTimeClock() {
 		};
 	}, []);
 
-	const formattedTime = getCurrentTimeIn12HourFormat(dateState);
+	const formattedTime = getCurrentTimeInHourFormat(dateState);
 
 	return formattedTime;
 }
 
-export default CurrentTimeClock;
+export default useGetCurrentTime;

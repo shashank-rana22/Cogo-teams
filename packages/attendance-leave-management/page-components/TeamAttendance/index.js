@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 // import StyledTable from '../../common/StyledTable';
 
+import Loader from '../../common/Loader';
 import useGetCycles from '../../hooks/useGetCycles';
 import useGetTeamAttendance from '../../hooks/useGetTeamAttendance';
 
@@ -18,7 +19,7 @@ function TeamAttendance() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [month, setMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
-	const { data, setFilters, debounceQuery } = useGetTeamAttendance(month);
+	const { data, setFilters, debounceQuery, loading : statsLoading } = useGetTeamAttendance(month);
 
 	const { page_no, total_pages } = data || {};
 
@@ -93,31 +94,38 @@ function TeamAttendance() {
 					/>
 				</div>
 			</div>
-			{}
-			<div className={styles.table_container}>
-				<div className={styles.attendance_data}>
-					<AttendanceData data={data} />
+			{ statsLoading ? (
+				<div className={styles.loader_container}>
+					<Loader />
 				</div>
-				<div className={styles.attendance_mobile}>
-					<AttendanceMobile data={data} />
-				</div>
-			</div>
-			<div className={styles.pagination_container}>
-				<div
-					className={cl`${styles.arrow_container} ${styles.mr_12}`}
-					onClick={handlePrev}
-					aria-hidden
-				>
-					<IcMArrowLeft width={25} height={25} />
-				</div>
-				<div
-					className={styles.arrow_container}
-					onClick={handleNext}
-					aria-hidden
-				>
-					<IcMArrowRight width={25} height={25} />
-				</div>
-			</div>
+			) : (
+				<>
+					<div className={styles.table_container}>
+						<div className={styles.attendance_data}>
+							<AttendanceData data={data} />
+						</div>
+						<div className={styles.attendance_mobile}>
+							<AttendanceMobile data={data} />
+						</div>
+					</div>
+					<div className={styles.pagination_container}>
+						<div
+							className={cl`${styles.arrow_container} ${styles.mr_12}`}
+							onClick={handlePrev}
+							aria-hidden
+						>
+							<IcMArrowLeft width={25} height={25} />
+						</div>
+						<div
+							className={styles.arrow_container}
+							onClick={handleNext}
+							aria-hidden
+						>
+							<IcMArrowRight width={25} height={25} />
+						</div>
+					</div>
+				</>
+			)}
 		</>
 	);
 }

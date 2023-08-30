@@ -4,8 +4,8 @@ import { IcMArrowLeft, IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetLeaveGroupings from '../../../hooks/useGetLeaveGroupings';
-import LeaveCard from '../RequestModal/LeaveCard';
 
+import LeaveCard from './LeaveCard';
 import styles from './styles.module.css';
 
 function LeaveRequest({ setShowInbox, isManager }) {

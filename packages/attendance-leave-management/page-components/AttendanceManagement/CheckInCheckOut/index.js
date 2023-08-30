@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import useGetCheckinStats from '../../../hooks/useGetCheckinStats';
+import useGetCurrentTime from '../../../hooks/useGetCurrentTime';
 import useGetUpdateAttendance from '../../../hooks/useGetUpdateAttendance';
 
 import CompletedTime from './CompletedTime';
-import CurrentTimeClock from './CurrentTimeClock';
 import styles from './styles.module.css';
 
 function ChecInCheckOut({ data, loading, coords, refetch }) {
@@ -89,7 +87,7 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 							Current Time
 						</div>
 						<div className={styles.formatted_time}>
-							<CurrentTimeClock />
+							{useGetCurrentTime()}
 						</div>
 					</div>
 

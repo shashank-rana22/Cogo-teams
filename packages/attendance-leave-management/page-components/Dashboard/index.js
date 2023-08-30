@@ -9,7 +9,6 @@ import LeavesManagement from '../LeavesManagement';
 import Policies from '../Policies';
 import TeamAttendance from '../TeamAttendance';
 
-// import RequestModal from './RequestModal';
 import LeaveRequest from './LeaveRequest';
 import styles from './styles.module.css';
 
@@ -34,10 +33,6 @@ function AttendanceLeaveDashboard() {
 	const { data, loading, refetch } = useGetCheckinStats(coords);
 
 	const { is_manager } = data || {};
-
-	console.log('qquu', data);
-
-	// console.log('data', data);
 
 	return (
 		<div>
