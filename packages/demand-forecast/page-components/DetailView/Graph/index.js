@@ -42,20 +42,22 @@ const getGraphData = ({ graphInfo = {}, key }) => {
 				value : graphInfo[graphInfoKey],
 			};
 		}
+
 		return {
 			id    : startCase(graphInfoKey),
-			label : startCase(graphInfoKey),
+			label : `${startCase(graphInfoKey)} ${key === 'container_size_forecasts' ? 'ft' : ''}`,
 			value : graphInfo[graphInfoKey],
+
 		};
 	});
 	return graphData;
 };
 
 const GRAPH_COLOR_MAPPING = {
-	weekly_forecasts         : ['#ACDADF', '#F3FAFA', '#CFEAED', '#63BEC8', '#ACDADF'],
-	container_type_forecasts : ['#C26D1A', '#E8BE95', '#A87441', '#F9AE64', '#FEF3E9', '#FBD1A6'],
+	weekly_forecasts         : ['#CFEAED', '#ACDADF', '#63BEC8', '#F3FAFA'],
+	container_type_forecasts : ['#E8BE95', '#FBD1A6', '#A87441', '#C26D1A', '#F9AE64', '#FEF3E9'],
 	container_size_forecasts : ['#DDEBC0', '#C4DC91', '#ABCD62', '#F7FAEF'],
-	persona_forecasts        : ['#ABB0DE', '#CED1ED', '#9BA0CB', '#7278AD', '#F2F3FA'],
+	persona_forecasts        : ['#CED1ED', '#ABB0DE', '#9BA0CB', '#7278AD', '#F2F3FA'],
 };
 
 function Graph({
@@ -89,62 +91,55 @@ function Graph({
 				const colors = GRAPH_COLOR_MAPPING[key];
 
 				return (
-					<div key={key} className={styles.single_chart_container}>
+					<div key={graphicalData.id} className={styles.single_chart_container}>
 						<div className={styles.title}>
 							{GRAPH_TTTLE[key]}
 						</div>
-						<div className={styles.parent_asd}>
-							<div className={styles.graph}>
-								<ResponsivePie
-									loading={loading}
-									data={graphicalData}
-									innerRadius={0.6}
-									activeOuterRadiusOffset={6}
-									enableArcLinkLabels={false}
-									enableArcLabels={false}
-									colors={colors}
-									colorBy="index"
-									layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
-								/>
-							</div>
-						</div>
-						<div className={styles.legends}>
-							{
-							graphicalData.map((legend, index) => (
-								<div key="123" className={styles.legend_info}>
-									<div className={styles.legend_title}>
-										<Logo backgroundColor={colors[index]} />
-										<div>{legend?.label}</div>
-									</div>
 
-									<div className={styles.legend_value}>
+						<div className={styles.graph}>
+							<ResponsivePie
+								loading={loading}
+								data={graphicalData}
+								innerRadius={0.8}
+								margin={{ top: 20, bottom: 20, right: 20, left: 20 }}
+								activeOuterRadiusOffset={6}
+								enableArcLinkLabels={false}
+								enableArcLabels={false}
+								colors={colors}
+								colorBy="index"
+								layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
+							/>
+						</div>
+
+						<div className={styles.legends_container}>
+							{graphicalData.map((legend, index) => (
+								<div key={legend.key} className={styles.legend_info}>
+
+									<div style={{ display: 'flex', alignItems: 'center' }}>
+										{' '}
+										<div
+											className={styles.circle}
+											style={{ background: `${colors[index]}` }}
+										/>
+
+										{legend?.label}
+									</div>
+									<div style={{ textAlign: 'center' }}>
+										(
 										{legend?.value}
 										{' '}
-										TEUs
+										TEUs)
 									</div>
 								</div>
-							))
-}
+
+							))}
 						</div>
 					</div>
 				);
 			})
 			}
-
 		</div>
 	);
 }
 
 export default Graph;
-
-function Logo({ backgroundColor = '' }) {
-	const logoStyle = {
-		width        : '16px',
-		height       : '16px',
-		marginRight  : '8px',
-		backgroundColor,
-		borderRadius : '50%',
-	};
-
-	return <div className={styles.logo} style={logoStyle} />;
-}

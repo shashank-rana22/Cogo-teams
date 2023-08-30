@@ -16,34 +16,16 @@
 }
 
 .graph {
-	width: 100%;
+	width: 200px;
 	height: 200px;
-	padding: 12px;
+	margin: auto;
 }
 
-.legends {
+.legends_container {
 	display: flex;
 	flex-wrap: wrap;
 	width: 90%;
-}
-
-.logo {
-	width: 16px;
-	height: 16px;
-	margin-right: 8px;
-	background-color: blue;
-	border: solid 0.2px;
-	border-radius: 50%;
-}
-
-.legend_title {
-	display: flex;
-	align-items: center;
-}
-
-.legend_info {
-	width: 170px;
-	padding: 12px;
+	margin: auto;
 }
 
 .legend_value {
@@ -54,4 +36,15 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 20px 0;
+}
+
+.circle {
+	width: 14px;
+	height: 14px;
+	margin-right: 8px;
+	border-radius: 50%;
+}
+
+.legend_info {
+	padding: 4px 6px;
 }
