@@ -55,7 +55,7 @@ export const SERVICE_WISE_COLORS = [
 	'#B5C3D2',
 ];
 
-export const barColors = [
+export const BAR_COLORS = [
 	'#FDE74D',
 	'#ABB0DE',
 	'#BDBDBD',

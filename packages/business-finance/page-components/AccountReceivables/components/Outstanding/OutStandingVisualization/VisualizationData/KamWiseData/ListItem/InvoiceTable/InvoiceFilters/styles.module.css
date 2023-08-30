@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	justify-content: end;
+	padding: 0 16px;
+	margin-top: 16px;
+}
+
+.flex {
+	.core-ui-input-root {
+		width: 230px;
+	}
+
+	svg {
+		margin-top: 4px;
+	}
+}
+
+.wrapper {
+	.core-ui-select__control {
+		width: 230px;
+		margin-right: 12px;
+	}
+}

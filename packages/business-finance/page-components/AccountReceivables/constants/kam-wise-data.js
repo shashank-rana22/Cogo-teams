@@ -652,3 +652,76 @@ export const CC_COMMUNICATION_DATA = [
 		meeting_duration          : 0,
 	},
 ];
+
+export const KAM_DATA_LIST = {
+	list: [
+		{
+			kam_owner_name : 'Sagar Mehrotra',
+			kam_owner_id   : '0849d0ab-5a2f-40e7-b110-971572a86192',
+		},
+		{
+			kam_owner_name : 'others',
+			kam_owner_id   : 'others',
+		},
+		{
+			kam_owner_name : 'Umesh Kumar Tiwari',
+			kam_owner_id   : 'ff4de18f-22ff-4b37-a201-8834c0caca19',
+		},
+		{
+			kam_owner_name : 'Bhaskar Priyadarshi',
+			kam_owner_id   : '0ccfc574-f942-4fb4-971d-a34c7ae691c3',
+		},
+		{
+			kam_owner_name : 'Rakesh Singh',
+			kam_owner_id   : '308c9961-dacb-4929-acee-89b3d9ce5163',
+		},
+		{
+			kam_owner_name : 'Parth Samnani',
+			kam_owner_id   : '8c22817f-4246-43ef-a7f5-fdf77e37ca72',
+		},
+		{
+			kam_owner_name : 'Harprem  Mann',
+			kam_owner_id   : 'eaa14484-aed4-47aa-bade-17235a04d515',
+		},
+		{
+			kam_owner_name : 'RICHARD',
+			kam_owner_id   : '56673bb5-872f-4750-b322-2ee98d326300',
+		},
+		{
+			kam_owner_name : 'Deeshant Rathi',
+			kam_owner_id   : 'bfb2b53e-0510-425f-9de4-cff8eb846934',
+		},
+		{
+			kam_owner_name : 'Amit Bajaj',
+			kam_owner_id   : 'b8dc5862-b7c0-4304-95e0-9d8a2b4c5c85',
+		},
+		{
+			kam_owner_name : 'Sagar Bankar',
+			kam_owner_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
+		},
+		{
+			kam_owner_name : 'Anuj Bajaj',
+			kam_owner_id   : '2eef6d5c-9ab0-4b97-8e5c-e9e8f57b8e61',
+		},
+		{
+			kam_owner_name : 'Ayushi Singh',
+			kam_owner_id   : 'c3a9dd79-bd7b-45ad-93c7-20f34bfdb30e',
+		},
+		{
+			kam_owner_name : 'Bhumika Malik',
+			kam_owner_id   : 'c0bbbb82-2180-4fbb-8ca2-3e1874143dbe',
+		},
+		{
+			kam_owner_name : 'Nitasha Gupta',
+			kam_owner_id   : 'eddf622e-3c3e-4530-9b80-2d01215f9227',
+		},
+		{
+			kam_owner_name : 'Revati Bargale',
+			kam_owner_id   : 'f8347fff-f447-4adc-a9e4-fd785e16f4c2',
+		},
+	],
+	page        : 1,
+	total       : 1,
+	total_count : 16,
+	page_limit  : 100,
+};

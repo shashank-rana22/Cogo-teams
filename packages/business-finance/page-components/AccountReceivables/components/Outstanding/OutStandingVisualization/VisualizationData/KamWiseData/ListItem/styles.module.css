@@ -1,0 +1,144 @@
+.card {
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+
+	/* padding: ${({ organizationId }) =>
+		organizationId ? '0px 16px 16px 0px' : '8px 16px 12px 0px'}; */
+}
+
+.organization_card_padding {
+	padding: 0 16px 16px 0;
+}
+
+.card_padding {
+	padding: 8px 16px 12px 0;
+}
+
+.container {
+	margin-bottom: 16px;
+}
+
+.org_list {
+	display: flex;
+	padding-left: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.business_name {
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+	font-size: 14px;
+	font-weight: 550;
+	color: #333;
+
+	:global {
+		& span {
+			margin-left: 8px;
+			font-size: 12px;
+			font-weight: 500;
+		}
+
+		& .os {
+			color: #cb6464;
+		}
+
+		& .p {
+			margin-left: 12px;
+			color: rgb(103 198 118);
+		}
+	}
+}
+
+.flex_wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 16px;
+	margin-bottom: 12px;
+
+	:global {
+		.core-ui-tag-root {
+			margin-right: 8px;
+			margin-bottom: 4px;
+		}
+	}
+}
+
+.stats_container {
+	padding-left: 16px;
+	margin-top: 16px;
+
+	:global {
+		& .ui-tabs-list-container.active {
+			padding: 8px 16px 6px;
+			color: #7a5ef3;
+			background: #cbcff5;
+			border-bottom: 3px solid #7a5ef3;
+			border-radius: 4px;
+		}
+
+		& .ui-tabs-list-container {
+			width: 100%;
+			padding-bottom: 2px;
+		}
+	}
+
+	/* :global {
+		.ui-tabs-list.horizontal.two {
+			display: flex;
+			justify-content: space-around;
+			margin-bottom: 8px !important;
+			border-bottom: none !important;
+			box-shadow: 0 1px 4px rgb(169 188 218 / 65%);
+
+			::-webkit-scrollbar {
+				display: none;
+			}
+
+			@media (max-width: 768px) {
+				padding-left: 260px;
+			}
+
+			.ui-tabs-list-container.horizontal.two {
+				flex: 1;
+				padding: 10px 32px;
+				border-right: 1px solid #d9eafd;
+
+				:hover {
+					background-color: #f7faff !important;
+					transition: 0.4s;
+				}
+
+				&:last-child {
+					border-right: none;
+				}
+
+				p {
+					width: 100%;
+					color: #393f70;
+				}
+
+				&.active {
+					background-color: #f7faff !important;
+					border-bottom: none !important;
+
+					p {
+						color: #034afd;
+					}
+				}
+			}
+		}
+	} */
+}
+
+.legal_business_name {
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 11px;
+	color: #616161;
+}

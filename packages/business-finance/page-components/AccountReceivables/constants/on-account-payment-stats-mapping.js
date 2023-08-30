@@ -1,31 +1,31 @@
 const ON_ACCOUNTS_PAYMENTS_STATS = [
 	{
-		valueKey : 'amount_not_due',
-		countKey : 'pan_count_not_due',
+		valueKey : 'notDueLedAmount',
+		countKey : 'notDueCount',
 	},
 	{
-		valueKey : 'amount_1_30',
-		countKey : 'pan_count_1_30',
+		valueKey : 'thirtyLedAmount',
+		countKey : 'thirtyCount',
 	},
 	{
-		valueKey : 'amount_31_60',
-		countKey : 'pan_count_31_60',
+		valueKey : 'fortyFiveLedAmount',
+		countKey : 'fortyFiveCount',
 	},
 	{
-		valueKey : 'amount_61_90',
-		countKey : 'pan_count_61_90',
+		valueKey : 'sixtyLedAmount',
+		countKey : 'sixtyCount',
 	},
 	{
-		valueKey : 'amount_91_180',
-		countKey : 'pan_count_91_180',
+		valueKey : 'ninetyLedAmount',
+		countKey : 'ninetyCount',
 	},
 	{
-		valueKey : 'amount_181_365',
-		countKey : 'pan_count__181_365',
+		valueKey : 'oneEightyLedAmount',
+		countKey : 'oneEightyCount',
 	},
 	{
-		valueKey : 'amount_365',
-		countKey : 'pan_count_365',
+		valueKey : 'oneEightyPlusLedAmount',
+		countKey : 'oneEightyPlusCount',
 	},
 ];
 
