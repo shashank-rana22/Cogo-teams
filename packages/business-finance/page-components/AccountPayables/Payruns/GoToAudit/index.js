@@ -1,4 +1,6 @@
+import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import List from '../../../commons/List/index.tsx';
@@ -9,8 +11,15 @@ import FooterCard from './FooterCard';
 import renderFunction from './renderFunction';
 import styles from './styles.module.css';
 
+const FIRST_PAGE = 1;
+
 function GoToAudit() {
-	const [remarks, setRemarks] = useState({});
+	const { query } = useRouter();
+	const handleVersionChange = () => {
+		window.location.href = `/${query.partner_id}/business-finance/account-payables/audit/${query.payrun_id}`;
+	};
+
+	const [remarks, setRemarks] = useState([]);
 	const {
 		loading,
 		auditData,
@@ -18,19 +27,26 @@ function GoToAudit() {
 		setGlobalFilters,
 		globalFilters,
 		updateInvoice,
-		// updateLoading,
+		updateLoading,
 	} = useGetAudit();
 
 	const { list, totalNumberOfInvoices = 0 } = auditData || {};
-	const FIRST_PAGE = 1;
 	const pickNameFromElement = (list || [])[GLOBAL_CONSTANTS.zeroth_index]?.name || 'No Payrun Found';
 
-	const { functions } = renderFunction({ remarks, setRemarks, updateInvoice });
+	const { functions } = renderFunction({ remarks, setRemarks, updateInvoice, updateLoading });
 
 	return (
-		<div>
+		<>
 			<div className={styles.div_container}>
 				<div className={styles.heading}>Account Payables</div>
+
+				<Toggle
+					name="toggle"
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleVersionChange}
+				/>
 			</div>
 
 			<AuditHeader
@@ -58,9 +74,9 @@ function GoToAudit() {
 					}))}
 				/>
 			</div>
-
 			<FooterCard />
-		</div>
+
+		</>
 	);
 }
 export default GoToAudit;

@@ -6,6 +6,9 @@ import { useEffect, useState, useCallback } from 'react';
 
 import { AUDIT_CONFIG } from '../columns/auditConfig';
 
+const DEFAULT_PAGE_INDEX = 1;
+const DEFAULT_PAGE_SIZE = 10;
+
 const useGetAudit = () => {
 	const [{ data, loading }, trigger] = useRequestBf({
 		url     : '/purchase/audit',
@@ -23,15 +26,15 @@ const useGetAudit = () => {
 
 	const { payrun_id, performedBy, performedByType } = useSelector(
 		({ general, profile }) => ({
-			payrun_id       : general.query.payrun_id,
-			performedBy     : profile.user.id,
+			payrun_id       : general.query?.payrun_id,
+			performedBy     : profile.user?.id,
 			performedByType : profile.session_type,
 		}),
 	);
 
 	const [globalFilters, setGlobalFilters] = useState({
-		pageIndex : 1,
-		pageSize  : 10,
+		pageIndex : DEFAULT_PAGE_INDEX,
+		pageSize  : DEFAULT_PAGE_SIZE,
 	});
 
 	const config = AUDIT_CONFIG;

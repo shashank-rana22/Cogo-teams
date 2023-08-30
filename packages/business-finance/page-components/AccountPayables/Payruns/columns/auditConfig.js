@@ -3,19 +3,18 @@ export const AUDIT_CONFIG = {
 	headerStyles : {
 		borderRadius : '8px',
 		background   : 'none',
-		color        : '#000',
+		color        : 'var(--color-secondary-greyscale-2)',
 		fontSize     : '12px',
 		fontWeight   : '500',
 	},
 	bodyStyles: {
 		color     : ' #333333',
-		fontSize  : '12px',
-		borderTop : '1.8px solid #F68B21',
+		fontSize  : 'var(--font-size-md)',
+		borderTop : '1.8px solid var(--color-accent-orange-2)',
 	},
 	itemStyles: {
 		padding      : '8px',
-		paddingLeft  : '0px',
-		borderBottom : '1px solid #F8F2E7',
+		borderBottom : '1px solid var(--color-tertiary-beige-4)',
 	},
 	fields: [
 		{
@@ -87,12 +86,12 @@ export const AUDIT_CONFIG = {
 			key   : 'remarks',
 			label : 'Remarks',
 			func  : 'renderAuditRemarks',
-			span  : 1.2,
+			span  : 1.4,
 		},
 		{
 			key  : 'invoiceDetails',
-			func : 'renderInvoiceDetails',
-			span : 0.5,
+			func : 'renderInvoiceData',
+			span : 0.6,
 		},
 	],
 };

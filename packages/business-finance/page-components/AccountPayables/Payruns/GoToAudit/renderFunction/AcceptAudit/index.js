@@ -3,34 +3,36 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const STATUS = ['APPROVED', 'REJECTED'];
+
 function AcceptAudit({
 	item = {},
-	remarks = {},
+	remarks = [],
 	setRemarks = () => {},
 	updateInvoice = () => {},
+	updateLoading = false,
 }) {
 	const [openModal, setOpenModal] = useState(false);
 	const [type, setType] = useState('');
 
-	if (['APPROVED', 'REJECTED'].includes(item?.status)) {
+	if (STATUS.includes(item?.status)) {
 		return <div>{item?.status}</div>;
 	}
 
 	const handleClick = (status) => {
 		setType(status);
-		setOpenModal(item?.id);
+		setOpenModal(true);
 	};
 
 	const onSubmit = (value, invoice_id) => {
 		updateInvoice(type, value, invoice_id);
-		setRemarks({});
+		setRemarks([]);
 	};
 	const handleRemarkChange = (value) => {
-		setRemarks((p) => {
-			const newValue = { ...p };
-			newValue[item?.id] = value;
-			return newValue;
-		});
+		setRemarks((prev) => ({
+			...prev,
+			[item?.id]: value,
+		}));
 	};
 
 	return (
@@ -58,7 +60,7 @@ function AcceptAudit({
 						<Textarea
 							name="remarks"
 							value={remarks?.[item?.id]}
-							onChange={(val) => handleRemarkChange(val)}
+							onChange={handleRemarkChange}
 							placeholder="Enter Remark Here"
 						/>
 					</Modal.Body>
@@ -66,6 +68,7 @@ function AcceptAudit({
 						<Button
 							themeType="primary"
 							disabled={!remarks}
+							loading={updateLoading}
 							onClick={() => onSubmit(remarks?.[item?.id], item?.id)}
 						>
 							Submit

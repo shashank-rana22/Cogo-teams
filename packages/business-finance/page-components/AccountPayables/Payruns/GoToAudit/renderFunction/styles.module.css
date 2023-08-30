@@ -1,4 +1,4 @@
 .remarks_container {
 	margin-left: 5px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }

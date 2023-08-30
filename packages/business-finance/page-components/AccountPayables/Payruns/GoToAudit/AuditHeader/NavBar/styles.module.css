@@ -7,5 +7,5 @@
 	width: fit-content;
 	padding: 5px;
 	margin-top: 15px;
-	background-color: white;
+	background-color: var(--color-secondary-5);
 }

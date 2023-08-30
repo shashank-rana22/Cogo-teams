@@ -18,7 +18,7 @@ function PayrunButtons({
 	globalFilters = {},
 	selectedPayrun = null,
 	setSelectedPayrun = () => {},
-	checkedRow = null,
+	checkedRow = {},
 	setCheckedRow = () => {},
 	itemData = {},
 	activeEntity = '',

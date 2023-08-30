@@ -1,14 +1,14 @@
-import InvoiceDetailsTimeLine from '../../../Invoices/InvoiceTable/RenderFunctions/InvoiceDetailsTimeLine';
-
 import AcceptAudit from './AcceptAudit';
 import BankPair from './BankPair';
+import InvoiceData from './InvoiceData';
 import styles from './styles.module.css';
 
 const renderFunction = (
 	{
-		remarks,
-		setRemarks,
-		updateInvoice,
+		remarks = [],
+		setRemarks = () => {},
+		updateInvoice = () => {},
+		updateLoading = false,
 	},
 ) => {
 	const functions = {
@@ -21,13 +21,14 @@ const renderFunction = (
 				remarks={remarks}
 				setRemarks={setRemarks}
 				updateInvoice={updateInvoice}
+				updateLoading={updateLoading}
 			/>
 		),
 		renderAuditRemarks: (item) => (
 			<div className={styles.remarks_container}>{item?.remarks}</div>
 		),
-		renderInvoiceDetails: (item) => (
-			<InvoiceDetailsTimeLine item={item} />
+		renderInvoiceData: (item) => (
+			<InvoiceData item={item} />
 		),
 	};
 	return {

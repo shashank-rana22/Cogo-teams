@@ -21,3 +21,16 @@ export const RIBBON_VALUE_MAPPING = {
 	OVERSEAS        : 'OVERSEAS',
 	ADVANCE_PAYMENT : 'Adv.Payment',
 };
+export const INVOICE_DATA_MAPPING = [
+	{ id: '1', label: 'Profitability' },
+	{ id: '2', label: 'Supplier Information' },
+	{ id: '3', label: 'Customer Information' },
+	{ id: '4', label: 'Invoice Timeline' },
+];
+
+export const DETAILS = [
+	{ label: 'Overall Expense', key: 'overallExpense' },
+	{ label: 'Total Payables', key: 'totalPayables' },
+	{ label: 'Overall Income', key: 'overallIncome' },
+	{ label: 'Total Receivable', key: 'totalReceivable' },
+];

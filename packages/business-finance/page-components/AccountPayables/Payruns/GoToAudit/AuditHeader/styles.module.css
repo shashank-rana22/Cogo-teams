@@ -1,18 +1,19 @@
 .heading {
 	font-size: 20px;
 	font-weight: 600;
-	color: #221f20;
+	color: (--color-secondary-greyscale-2);
 }
 
 .navbar_container {
 	width: fit-content;
 	padding: 5px;
 	margin-top: 15px;
-	background-color: white;
+	background-color: var(--color-secondary-5);
 }
 
 .search {
-	width: 340px;
+	width: 25%;
+	max-width: 340;
 	height: 32px;
 }
 
@@ -21,22 +22,30 @@
 }
 
 .data_container {
-	margin: 20px 0;
+	display: flex;
+	margin: 20px 0 15px;
 }
 
 .card {
 	width: fit-content;
 	padding: 6px 15px;
 	margin-right: 20px;
-	background-color: white;
-}
-
-.invoice_data {
-	display: flex;
-	margin-bottom: 15px;
+	background-color: var(--color-secondary-5);
 }
 
 .payrun_container {
 	display: flex;
 	justify-content: space-between;
+}
+
+.payrun_div {
+	display: flex;
+}
+
+.payrun_name {
+	font-weight: 500;
+}
+
+.name_container {
+	padding-left: 5px;
 }
