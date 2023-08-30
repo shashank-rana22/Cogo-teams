@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const C = 100;
+const HUNDRED = 100;
 
 const getProps = (props) => {
 	const {
@@ -17,16 +17,16 @@ const getProps = (props) => {
 	const PROPERTIES_MAPPING = {
 		current_container_allocation: {
 			color         : '#ddebc0',
-			leftSideText  : `${currentAllocatedCount}TEU Allocated`,
+			leftSideText  : `${currentAllocatedCount} TEU Allocated`,
 			rightSideText : `${currentForecastCount} TEU Forecast`,
 			percent       : 'ff',
-			progress      : Math.min(((currentAllocatedCount / currentForecastCount) * C), C),
+			progress      : Math.min(((currentAllocatedCount / currentForecastCount) * HUNDRED), HUNDRED),
 		},
 		past_container_allocation: {
 			color         : '#e0e0e0',
 			leftSideText  : `${pastFulfilledCount} TEU Fulfilled`,
 			rightSideText : `${pastAllocatedCount} TEU Allocated`,
-			progress      : Math.min(((pastFulfilledCount / pastAllocatedCount) * C), C),
+			progress      : Math.min(((pastFulfilledCount / pastAllocatedCount) * HUNDRED), HUNDRED),
 		},
 	};
 
