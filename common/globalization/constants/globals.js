@@ -28,26 +28,6 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'individualist', label: 'Individualist' },
 		{ value: 'scholar', label: 'Scholar' },
 	],
-	department_options: [
-		{ value: 'admin', label: 'Admin' },
-		{ value: 'business_finance', label: 'Business Finance' },
-		{ value: 'air_exports_bd', label: 'Air Exports BD' },
-		{ value: 'channel_partner', label: 'Channel Partner' },
-		{ value: 'design', label: 'Design' },
-		{ value: 'enterprise_sales', label: 'Enterprise Sales' },
-		{ value: 'experience_(COE)', label: 'Experience (COE)' },
-		{ value: 'fintech', label: 'Fintech' },
-		{ value: 'human_resources', label: 'Human Resources' },
-		{ value: 'marketing', label: 'Marketing' },
-		{ value: 'MM_business_development', label: 'MM Business Development' },
-		{ value: 'process_excellence', label: 'Process Excellence' },
-		{ value: 'product', label: 'Product' },
-		{ value: 'rail_business_development', label: 'Rail business development' },
-		{ value: 'SME_demand', label: 'SME Demand' },
-		{ value: 'supply', label: 'Supply' },
-		{ value: 'supply_management', label: 'Supply Management' },
-		{ value: 'technology', label: 'Technology' },
-	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
@@ -121,7 +101,7 @@ const GLOBAL_CONSTANTS = {
 	},
 	sample_document_url: {
 		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
-						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
+						3dbb0e12ed2336171d1d32cb72ed2d4e/new_employee_bulk_upload_sample.csv`,
 	},
 	upload_utr_sample_file: {
 		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57'
@@ -233,6 +213,11 @@ const GLOBAL_CONSTANTS = {
 		cogo_course_notification_user_ids: [
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
 			'20f59087-12cf-4e6d-8463-27d41e23da6f',
+		],
+		air_admin_user_ids: [
+			'6d713339-c528-4696-9f7b-c01f86887ac1',		// Vinod's ID
+			'039a0141-e6f3-43b0-9c51-144b22b9fc84',		// Santram's ID
+			'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',		// Linh's ID
 		],
 	},
 	view_key_mappings: {
@@ -556,6 +541,7 @@ const GLOBAL_CONSTANTS = {
 		h3_html_tag_text           : /<h3>([\s\S]*?)<\/h3>/gm,
 		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
 		iframe_html_tag_text       : /<iframe([\s\S]*?)<\/iframe>/gm,
+		html_class_regex           : /class="([^"]+)"/g,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,
