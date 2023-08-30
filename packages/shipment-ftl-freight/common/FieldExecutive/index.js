@@ -70,7 +70,7 @@ function FieldExecutive(props) {
 							labelKey="display_name"
 							valueKey="truck_name"
 							value={truckType}
-							onChange={(val) => (setTruckType(val))}
+							onChange={setTruckType}
 							renderLabel={(opt) => `${startCase(opt?.truck_name)} - ${startCase(opt?.display_name)}`}
 						/>
 					</div>
