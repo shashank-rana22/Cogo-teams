@@ -1,0 +1,38 @@
+.button_container {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.button {
+	margin: 6px;
+}
+
+.details {
+	max-width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+
+	.core-date-dash {
+		margin-left: 25px;
+	}
+
+	.core-ui-button-root.info {
+		background-color: transparent;
+		border: none;
+	}
+}
+
+.title_back {
+	max-width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
