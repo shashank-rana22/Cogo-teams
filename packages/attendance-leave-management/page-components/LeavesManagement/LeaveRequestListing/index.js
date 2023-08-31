@@ -8,7 +8,7 @@ import DesktopView from './DesktopView';
 import MobileView from './MobileView';
 import styles from './styles.module.css';
 
-function LeaveRequestListing({ leaveData, refetchLeaves }) {
+function LeaveRequestListing({ leaveData, refetchLeaves, leaveRequestsRef = null }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 	const [selectedData, setSelectedData] = useState({});
@@ -36,7 +36,7 @@ function LeaveRequestListing({ leaveData, refetchLeaves }) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} ref={leaveRequestsRef}>
 			<div className={styles.heading_container}>
 				<div className={styles.heading}>Leave requests</div>
 				<div className={styles.sub_heading}>

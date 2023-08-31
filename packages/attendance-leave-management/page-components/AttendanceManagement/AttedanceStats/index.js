@@ -12,7 +12,7 @@ import TeamStats from './TeamStats';
 
 const PERCENTAGE_VALUE = 100;
 
-function AttendanceStats({ selectMonth = {} }) {
+function AttendanceStats({ selectMonth = {}, executeScroll = () => {} }) {
 	const { value, month } = selectMonth;
 
 	const { data, loading } = useGetAttendanceStats(value);
@@ -34,7 +34,7 @@ function AttendanceStats({ selectMonth = {} }) {
 						Insights about your attendance
 					</div>
 				</div>
-				<Button size="md" themeType="linkUi">
+				<Button size="md" themeType="linkUi" onClick={executeScroll}>
 					Detailed View
 					<IcMArrowNext className={styles.arrow_icon} />
 				</Button>

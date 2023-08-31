@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import LeaveStats from './LeaveStats';
 import styles from './styles.module.css';
 
-function LeaveStatsApplicationsComponent({ selectedMonth, loading }) {
+function LeaveStatsApplicationsComponent({ selectedMonth, loading, executeScroll = () => {} }) {
 	const { month, value } = selectedMonth || {};
 
 	return (
@@ -16,7 +16,7 @@ function LeaveStatsApplicationsComponent({ selectedMonth, loading }) {
 					<div className={styles.header_text2}>Insights about your leaves</div>
 				</div>
 				<div>
-					<Button size="md" themeType="tertiary" className={styles.button_styles}>
+					<Button size="md" themeType="tertiary" className={styles.button_styles} onClick={executeScroll}>
 						Detailed View
 						{' '}
 						<IcMArrowNext />
