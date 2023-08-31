@@ -12759,6 +12759,11 @@ const partner = {
 			service_name : 'voice_call',
 		},
 		{
+			api          : 'update_voice_call_record',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'update_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',
