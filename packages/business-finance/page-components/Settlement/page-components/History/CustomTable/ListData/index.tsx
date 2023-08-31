@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ColumnCard from './ColumnCard';
+import ribbonstyles from './ColumnCard/styles.module.css';
 import styles from './styles.module.css';
 
 interface ListItem {
@@ -15,26 +16,41 @@ interface ListItem {
 	documentNo: string;
 	accountType: string;
 	accMode: string;
-	notPostedSettlementIds : Array<number>;
+	notPostedSettlementIds: Array<number>;
 	ledCurrency: string;
 }
 interface Props {
 	list: ListItem[];
-	getTableBodyCheckbox: (item: object) => React.JSX.Element;
-	refetch: ()=> void;
-
+	getTableBodyCheckbox: Function;
+	refetch: () => void;
+	source?: string;
 }
 
-function ListData({ list = [], getTableBodyCheckbox, refetch }:Props) {
+function ListData({ list = [], getTableBodyCheckbox = () => {}, refetch = () => {}, source = '' }: Props) {
 	return (
 		<div className={styles.list}>
 			{(list || []).map((item) => (
-				<ColumnCard
-					key={item?.id}
-					item={item}
-					getTableBodyCheckbox={getTableBodyCheckbox}
-					refetch={refetch}
-				/>
+				<div key={item?.id} className={styles.position}>
+					<ColumnCard
+						item={item}
+						getTableBodyCheckbox={getTableBodyCheckbox}
+						refetch={refetch}
+						source={source}
+					/>
+					{source ? null : (
+						<div className={ribbonstyles.ribbon_render}>
+							<div
+								className={
+									item?.accMode === 'AP'
+										? ribbonstyles.ribbon_red
+										: ribbonstyles.ribbon_orange
+								}
+							>
+								{item?.accMode}
+							</div>
+						</div>
+					)}
+				</div>
 			))}
 		</div>
 	);
