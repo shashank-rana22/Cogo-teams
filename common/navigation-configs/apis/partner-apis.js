@@ -8892,6 +8892,57 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api         : 'get_sage_ar_outstanding_stat',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api          : 'get_kam_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_service_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_data_bifurcation',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'list_outstanding_invoices',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+
+		},
+		{
+			api          : 'get_cc_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+
+		},
+
 	],
 	compliance: [
 		{
