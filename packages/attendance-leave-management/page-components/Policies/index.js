@@ -55,7 +55,7 @@ function Policies() {
 						<div className={styles.left_card}>
 							<div className={styles.left_header}>
 								{' '}
-								<div className={styles.text_icon}><IcMTimer /></div>
+								<div className={styles.text_icon2}><IcMTimer /></div>
 								<span className={styles.left_text_content}>Attendance Management</span>
 
 							</div>

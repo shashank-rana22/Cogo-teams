@@ -21,7 +21,7 @@ import styles from './styles.module.css';
 const TOTAL_COUNT = 10;
 const DEFAULT_COUNT = 1;
 
-function LeaveCard({ isManager = false, data = null, activeTab }) {
+function LeaveCard({ isManager = false, data = null, activeTab = ' ' }) {
 	const { request_label, pending_count, request_key } = data;
 	const [accordion, setAccordion] = useState(false);
 

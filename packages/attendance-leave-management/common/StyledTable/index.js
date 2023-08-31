@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../EmptyState';
+import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
@@ -17,7 +18,8 @@ function StyledTable({ columns = [], data = [], loading = false, emptyText, onRo
 
 	return (
 		<section className={cl`${styles.container} ${styles[className]}`}>
-			<Table columns={columns} data={data} loading={loading} onRowClick={onRowClick} />
+			{loading ? <Loader />
+				: <Table columns={columns} data={data} loading={loading} onRowClick={onRowClick} />}
 		</section>
 	);
 }

@@ -12,7 +12,7 @@ function LeaveRequestListing({ leaveData, refetchLeaves }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 	const [selectedData, setSelectedData] = useState({});
-	const { data, filters, setFilters } = useGetLeaveRequestListing();
+	const { data, filters, setFilters, loading } = useGetLeaveRequestListing();
 
 	const onClose = () => {
 		setOpenLeaveModal(false);
@@ -54,10 +54,11 @@ function LeaveRequestListing({ leaveData, refetchLeaves }) {
 					setFilters={setFilters}
 					handleOpenModal={handleOpenModal}
 					handleDeleteModal={handleDeleteModal}
+					loading={loading}
 				/>
 			</div>
 			<div className={styles.mobile_view}>
-				<MobileView data={data} setFilters={setFilters} />
+				<MobileView data={data} setFilters={setFilters} loading={loading} />
 			</div>
 			{openLeaveModal && (
 				<ApplyLeave
