@@ -63,6 +63,7 @@ import {
 	IcMFsoppoc,
 	IcMBookingDesk,
 	IcASecureCloudStorage,
+	IcMUpwardGraph,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2584,7 +2585,37 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.resourceApis,
 			icon          : IcASecureCloudStorage,
 		},
+		forecast: {
+			key         : 'forecast',
+			title       : 'Forecast',
+			isSubNavs   : true,
+			module_type : 'dashboards',
+			icon        : IcMUpwardGraph,
+			options     : [
+				{
+					key           : 'forecast-supply_allocation',
+					title         : 'Supply Allocation',
+					href          : '/v2/supply-allocation',
+					as            : '/v2/supply-allocation',
+					type          : 'link',
+					possible_apis : apis.supply_allocation,
+
+					main_apis: [],
+				},
+				{
+					key           : 'forecast-demand_forecast',
+					title         : 'Demand Forecast',
+					href          : '/v2//demand-forecast',
+					as            : '/v2/demand-forecast',
+					type          : 'link',
+					possible_apis : apis.demand_forecast,
+
+					main_apis: [],
+				},
+			],
+		},
 	};
+
 	return navigationMappingAdmin;
 };
 
