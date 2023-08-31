@@ -100,5 +100,6 @@
     "my_profile_path": "Hồ sơ Của Tôi",
     "dashboard_path": "Bảng điều khiển",
     "all_badges": "Tất cả Huy hiệu",
-    "badges_unlocked_mastery": "Huy hiệu mở khóa cho thành thạo"
+    "badges_unlocked_mastery": "Huy hiệu mở khóa cho thành thạo",
+    "account_logout_message": "bạn có muốn đăng xuất khỏi tất cả các tài khoản không?"
 }

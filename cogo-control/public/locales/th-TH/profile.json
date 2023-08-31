@@ -100,5 +100,6 @@
     "my_profile_path": "โปรไฟล์ของฉัน",
     "dashboard_path": "แดชบอร์ด",
     "all_badges": "แผนกทั้งหมด",
-    "badges_unlocked_mastery": "แผนกที่ปลดล็อคสำหรับความเชี่ยวชาญ"
+    "badges_unlocked_mastery": "แผนกที่ปลดล็อคสำหรับความเชี่ยวชาญ",
+    "account_logout_message": "คุณต้องการออกจากระบบบัญชีทั้งหมดหรือไม่?"
 }

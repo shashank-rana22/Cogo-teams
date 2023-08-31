@@ -1,7 +1,6 @@
 import { ButtonIcon, RadioGroup } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import displayNames from '../../../../../../configurations/feature-descriptions';
@@ -43,7 +42,6 @@ function Grouped(props) {
 		featureKey = '',
 		creatingNavs = false,
 	} = props || {};
-	const { t } = useTranslation(['accessManagement', 'common']);
 	const { possible_apis = [], ...rest } = apiGroup || {};
 	const {
 		handleApiStatus,
@@ -84,7 +82,8 @@ function Grouped(props) {
 			{show ? (
 				<div className={styles.accordion}>
 					<p className={styles.description}>
-						{t('accessManagement:roles_and_permission_crm_dashboard_permission_module')}
+						Configure your permissions according to you and save. For modifying
+						permissions in bulk click on feature radio buttons above
 					</p>
 					{allignAPis(possible_apis || []).map((api) => (
 						<Permission
