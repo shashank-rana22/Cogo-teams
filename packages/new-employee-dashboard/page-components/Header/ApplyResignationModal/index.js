@@ -13,14 +13,14 @@ const RESIGNATION_COMPONENT_MAPPING = {
 };
 
 function ApplyResignationModal({ showModal = false, setShowModal = () => {} }) {
-	const [currentState, setCurrentState] = useState('ticket_generation');
+	const [currentState, setCurrentState] = useState('resignation_form');
 
 	const RenderComponent = RESIGNATION_COMPONENT_MAPPING[currentState];
 
 	return (
 		<div className={styles.modal_container}>
 			<Modal
-				size="md"
+				size="xl"
 				show={showModal}
 				closeOnOuterClick={false}
 				showCloseIcon={false}
