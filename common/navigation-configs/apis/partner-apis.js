@@ -8505,6 +8505,16 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_dunning_emails',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'list_organization_communication_logs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'get_organization_zone_via_org_id',
 			access_type : 'private',
 		},
@@ -8806,6 +8816,11 @@ const partner = {
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
+		},
+		{
+			api          : 'create_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api         : 'get_sales_report_download_outstanding_list',
