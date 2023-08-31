@@ -6,7 +6,7 @@ import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
 
 import styles from './styles.module.css';
 
-const DATE_FORMATE = `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`;
+const DATE_FORMAT = `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`;
 
 function FormItem({ finalControl = {}, control = {}, errors = {} }) {
 	const { name, label, lowerlabel, ...rest } = finalControl;
@@ -29,7 +29,7 @@ function FormItem({ finalControl = {}, control = {}, errors = {} }) {
 				showTimeSelect
 				{...rest}
 				formatType="dateTime"
-				dateFormat={DATE_FORMATE}
+				dateFormat={DATE_FORMAT}
 			/>
 
 			{errorMessage ? (
