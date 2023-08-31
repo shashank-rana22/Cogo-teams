@@ -6,7 +6,7 @@ import VoiceCall from './VoiceCall';
 const CONVERSATION_COMPONENT_MAPPING = {
 	message : MessageComponent,
 	voice   : VoiceCall,
-	mail    : MailConversation,
+	outlook : MailConversation,
 };
 
 function Conversations({
@@ -37,7 +37,7 @@ function Conversations({
 		voice: {
 			activeVoiceCard: activeTab?.data || {},
 		},
-		mail: {
+		outlook: {
 			mailProps,
 		},
 	};

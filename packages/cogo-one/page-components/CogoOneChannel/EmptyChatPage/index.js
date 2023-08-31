@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const MESSAGE_MAPPING = {
 	message : 'chat',
 	voice   : 'call log',
-	mail    : 'mail',
+	outlook : 'mail',
 };
 
 function EmptyChatPage({

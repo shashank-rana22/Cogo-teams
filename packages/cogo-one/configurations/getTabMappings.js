@@ -17,7 +17,12 @@ const getTabMappings = ({ unReadChatsCount }) => {
 		},
 		{
 			label : 'Mail',
-			value : 'mail',
+			value : 'outlook',
+			show  : true,
+		},
+		{
+			label : 'Mails',
+			value : 'firebase-email',
 			show  : true,
 		},
 	];

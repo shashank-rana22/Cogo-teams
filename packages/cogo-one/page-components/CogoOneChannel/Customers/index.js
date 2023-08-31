@@ -16,7 +16,7 @@ import VoiceList from './VoiceList';
 const COMPONENT_MAPPING = {
 	message : MessageList,
 	voice   : VoiceList,
-	mail    : MailList,
+	outlook : MailList,
 };
 
 function Customers({
@@ -72,7 +72,7 @@ function Customers({
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
 		},
-		mail: {
+		outlook: {
 			...mailProps,
 			viewType,
 		},

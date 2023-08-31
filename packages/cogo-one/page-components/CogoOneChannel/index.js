@@ -204,7 +204,7 @@ function CogoOne() {
 					) : (
 						<>
 							<div
-								className={activeTab?.tab === 'mail'
+								className={activeTab?.tab === 'outlook'
 									? styles.mail_layout : styles.chats_layout}
 							>
 								<Conversations
@@ -221,7 +221,7 @@ function CogoOne() {
 								/>
 							</div>
 
-							{activeTab?.tab !== 'mail' && (
+							{activeTab?.tab !== 'outlook' && (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}`}
 								>
