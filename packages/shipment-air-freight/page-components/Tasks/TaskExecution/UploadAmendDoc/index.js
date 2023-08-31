@@ -29,7 +29,10 @@ function UploadAmendDoc({
 		refetch();
 	};
 
-	const { updateDocument, taskUpdateLoading } = useUpdateShipmentDocuments({ refetch: newRefetch });
+	const {
+		updateDocument = () => {},
+		taskUpdateLoading = false,
+	} = useUpdateShipmentDocuments({ refetch: newRefetch });
 
 	const allControls = controls(task) || [];
 

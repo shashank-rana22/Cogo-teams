@@ -43,7 +43,7 @@ function ReviewDoc({
 			performed_by_org_id : task.organization_id,
 		};
 	}
-	const { updateDocument, taskUpdateLoading } = useUpdateShipmentDocuments(
+	const { updateDocument = () => {}, taskUpdateLoading = false } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
 	);
 
