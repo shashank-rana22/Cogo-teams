@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import StyledTable from '../../../commons/StyledTable/index.tsx';
 import useGetStatus from '../../hooks/useGetStatus';
@@ -30,7 +31,7 @@ function Outward({ filters, setFilters }) {
 		year   : filters?.year,
 		setFilters,
 	});
-
+	const { t } = useTranslation(['compliance']);
 	const { refresh, refreshLoading } = useRefreshData({ refetch });
 
 	const { deleteId, deleteIdLoading, uploadId, uploadIdLoading } = useUploadAndDelete({ refetch });
@@ -50,7 +51,7 @@ function Outward({ filters, setFilters }) {
 			<div>
 				<StyledTable
 					data={list}
-					columns={column(refresh, deleteId, statusId, uploadId)}
+					columns={column(refresh, deleteId, statusId, uploadId, t)}
 					imageFind={EMPTY_STATE_IMG}
 					loading={
             listLoading

@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 const tabs = (t) => [
 	{
 		key   : 'dashboard',
-		label : t('compliance:Dashboard'),
+		label : t('compliance:dashboard_label'),
 	},
 	{
 		key   : 'register',
-		label : t('compliance:Register'),
+		label : t('compliance:register_label'),
 	},
 ];
 

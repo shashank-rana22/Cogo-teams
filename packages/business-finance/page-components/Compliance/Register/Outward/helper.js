@@ -18,10 +18,10 @@ export const optionEntity = keysWithCompliance.map((item) => ({ value: item, lab
 export const optionsGSTIN = (entityVal) => (ENTITY_MAPPING[entityVal]
 	? ENTITY_MAPPING[entityVal]?.GSTIN.map((item) => ({ value: item, label: item })) : []);
 
-export 	const getSupplierData = (supplierName, suppGstIn, entityCode) => [
-	{ heading: 'Supplier Name :', value: supplierName || '--' },
-	{ heading: 'GSTIN  :', value: suppGstIn || '--' },
-	{ heading: 'Entity :', value: entityCode || '--' },
+export 	const getSupplierData = (supplierName, suppGstIn, entityCode, t) => [
+	{ heading: t('compliance:supplier_name'), value: supplierName || '--' },
+	{ heading: `${t('compliance:gstin')} :`, value: suppGstIn || '--' },
+	{ heading: `${t('compliance:entity')} :`, value: entityCode || '--' },
 ];
 
 const YEAR_MINS = 1;

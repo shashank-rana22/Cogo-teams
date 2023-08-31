@@ -5,7 +5,7 @@ import { IcMDownload, IcMOverflowDot, IcMRefresh, IcMInfo, IcMOpenlink } from '@
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import {
-	MAPPING_ENABLE_STATUS, MAPPING_FILE_STATUS,
+	MAPPING_ENABLE_STATUS, mappingFileStatus,
 	MAPPING_FILE_STATUS_COLOR, MAPPING_TOOLTIP_DATA_STATUS,
 } from '../utils';
 
@@ -16,7 +16,7 @@ const PERCENTAGE_FACTOR = 100;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
 const DEFAULT_AMOUNT = 0;
 const STATUS_KEYS = ['PROCESSING', 'UPLOAD_IN_PROGRESS', 'ERROR'];
-const column = (refresh, deleteId, statusId, uploadId) => {
+const column = (refresh, deleteId, statusId, uploadId, t) => {
 	const handleErrorReport = (errorReportFile) => {
 		if (errorReportFile !== 'ERROR') {
 			window.open(errorReportFile, '_blank');
@@ -26,7 +26,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 
 	return [
 		{
-			Header   : <div>File Name</div>,
+			Header   : <div>{t('compliance:file_name')}</div>,
 			id       : 'fileName',
 			accessor : ({ fileName }) => (
 				fileName &&	(
@@ -39,7 +39,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>Entity</div>,
+			Header   : <div>{t('compliance:entity')}</div>,
 			id       : 'entity',
 			accessor : ({ entityCode }) => (
 				<div>
@@ -48,7 +48,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div style={{ marginLeft: '4px' }}>GSTIN</div>,
+			Header   : <div style={{ marginLeft: '4px' }}>{t('compliance:gstin')}</div>,
 			id       : 'GSTIN',
 			accessor : ({ gstIn }) => (
 				<div className={styles.gstin}>
@@ -57,14 +57,14 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div style={{ marginLeft: '10px' }}>File Status</div>,
+			Header   : <div style={{ marginLeft: '10px' }}>{t('compliance:file_status')}</div>,
 			id       : 'fileStatus',
 			accessor : ({ fileStatus, id, ackNumber, errorReportFile }) => (
 				fileStatus && 	(
 					<div style={{ display: 'flex' }}>
 						<div>
 							<Pill size="md" color={MAPPING_FILE_STATUS_COLOR[fileStatus]}>
-								{MAPPING_FILE_STATUS[fileStatus]}
+								{mappingFileStatus(t)[fileStatus]}
 							</Pill>
 							{fileStatus === 'UPLOAD_IN_PROGRESS' && ackNumber && (
 								<div
@@ -102,7 +102,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 									placement="top"
 									content={(
 										<div className={styles.tooltip_value_style}>
-											Download Report
+											{t('compliance:download_report')}
 										</div>
 									)}
 								>
@@ -115,7 +115,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div style={{ marginLeft: '6px' }}>Enable Status</div>,
+			Header   : <div style={{ marginLeft: '6px' }}>{t('compliance:enable_status')}</div>,
 			id       : 'enableStatus',
 			accessor : ({ status }) => (
 				status && (
@@ -126,7 +126,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>Date & Time</div>,
+			Header   : <div>{t('compliance:date_time')}</div>,
 			id       : 'date',
 			accessor : ({ date }) => (
 				<div>
@@ -141,7 +141,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>Filled Month Year</div>,
+			Header   : <div>{t('compliance:filled_month_year')}</div>,
 			id       : 'monthYear',
 			accessor : ({ month, year }) => (
 				<div>
@@ -151,7 +151,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>IRN Summary</div>,
+			Header   : <div>{t('compliance:irn_summary')}</div>,
 			id       : 'irn',
 			accessor : ({ failureCount, successCount, status }) => {
 				const total = failureCount + successCount;

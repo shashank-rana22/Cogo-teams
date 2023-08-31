@@ -1,4 +1,5 @@
 import { Button, Select } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import { optionEntity, optionsGSTIN, optionsMonth, optionsYear } from '../helper';
 
@@ -6,14 +7,15 @@ import styles from './styles.module.css';
 
 function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 	const { entity, gstIn, month, year } = filters || {};
+	const { t } = useTranslation(['compliance']);
 	return (
 		<div className={styles.header_container}>
 			<div>
-				<div className={styles.filter_heading}>Entity</div>
+				<div className={styles.filter_heading}>{t('compliance:entity')}</div>
 				<Select
 					value={entity}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, entity: val })); }}
-					placeholder="Select Cogo Entity"
+					placeholder={t('compliance:select_entity')}
 					options={optionEntity}
 					isClearable
 					style={{ width: '250px' }}
@@ -22,12 +24,12 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			</div>
 
 			<div className={styles.margin_select}>
-				<div className={styles.filter_heading}>GSTIN</div>
+				<div className={styles.filter_heading}>{t('compliance:gstin')}</div>
 				<Select
 					value={gstIn}
 					disabled={!entity}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, gstIn: val })); }}
-					placeholder="Select Cogo GSTIN"
+					placeholder={t('compliance:select_cogo_gstin')}
 					options={optionsGSTIN(entity)}
 					isClearable
 					style={{ width: '250px' }}
@@ -36,11 +38,11 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			</div>
 
 			<div className={styles.margin_select}>
-				<div className={styles.filter_heading}>Return Period</div>
+				<div className={styles.filter_heading}>{t('compliance:return_period')}</div>
 				<Select
 					value={month}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, month: val })); }}
-					placeholder="Month"
+					placeholder={t('compliance:month')}
 					options={optionsMonth}
 					isClearable
 					style={{ width: '120px' }}
@@ -49,11 +51,11 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			</div>
 
 			<div className={styles.margin_select}>
-				<div className={styles.filter_heading}>Year</div>
+				<div className={styles.filter_heading}>{t('compliance:year')}</div>
 				<Select
 					value={year}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, year: val })); }}
-					placeholder="Year"
+					placeholder={t('compliance:year')}
 					options={optionsYear}
 					isClearable
 					style={{ width: '120px' }}
@@ -67,7 +69,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 					disabled={!(year && gstIn && month && entity)}
 					onClick={exportTrigger}
 				>
-					Export
+					{t('compliance:export')}
 					{' '}
 
 				</Button>

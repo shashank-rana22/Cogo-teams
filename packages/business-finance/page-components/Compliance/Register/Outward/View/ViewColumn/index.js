@@ -2,7 +2,7 @@ import { Pill } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { MAPPING_IRN_STATUS, MAPPING_IRN_STATUS_COLOR } from '../../utils';
+import { mappingIrnStatus, MAPPING_IRN_STATUS_COLOR } from '../../utils';
 
 import styles from './styles.module.css';
 
@@ -20,9 +20,10 @@ const viewColumn = ({
 	setShowDeleteModal,
 	setOutWardId,
 	isChecked,
+	t,
 }) => [
 	{
-		Header   : <div className={styles.header}>Invoice No</div>,
+		Header   : <div className={styles.header}>{t('compliance:invoice_number')}</div>,
 		id       : 'invoiceNo',
 		accessor : ({ invoiceNumber, invoicePdfUrl }) => (
 			<div className={invoicePdfUrl ? styles.invoice_number : styles.invoice_number_val}>
@@ -35,7 +36,7 @@ const viewColumn = ({
 		),
 	},
 	{
-		Header   : <div className={styles.header}>Trade party’s GST</div>,
+		Header   : <div className={styles.header}>{t('compliance:trade_party_gst')}</div>,
 		id       : 'tradePartyGst',
 		accessor : ({ tradePartyGst }) => (
 			<div className={styles.trade_party}>
@@ -44,7 +45,7 @@ const viewColumn = ({
 		),
 	},
 	{
-		Header   : <div className={styles.header}>Type</div>,
+		Header   : <div className={styles.header}>{t('compliance:invoice_type')}</div>,
 		id       : 'type',
 		accessor : ({ invoiceType }) => (
 			<div>
@@ -53,7 +54,7 @@ const viewColumn = ({
 		),
 	},
 	{
-		Header   : <div className={styles.header}>Taxable Value</div>,
+		Header   : <div className={styles.header}>{t('compliance:taxable_value')}</div>,
 		id       : 'taxableValue',
 		accessor : ({ taxableValue, invoiceCurrency }) => (
 			<div>
@@ -65,14 +66,14 @@ const viewColumn = ({
 		),
 	},
 	{
-		Header   : <div className={styles.header}>Line Count</div>,
+		Header   : <div className={styles.header}>{t('compliance:line_count')}</div>,
 		id       : 'lineCount',
 		accessor : ({ lineCount }) => (
 			lineCount &&	(
 				<div>
 					{lineCount}
 					{' '}
-					Line Items
+					{t('compliance:line_items')}
 				</div>
 			)
 		),
@@ -81,11 +82,11 @@ const viewColumn = ({
 	{
 		Header:
 	<div className={styles.combine_tax}>
-		<div className={styles.tax_value}>Total Tax</div>
+		<div className={styles.tax_value}>{t('compliance:total_tax')}</div>
 		<div className={styles.combine_values}>
-			<div>IGST</div>
-			<div>CGST</div>
-			<div>SGST</div>
+			<div>{t('compliance:igst')}</div>
+			<div>{t('compliance:cgst')}</div>
+			<div>{t('compliance:sgst')}</div>
 		</div>
 	</div>,
 		id       : 'combineValue',
@@ -112,7 +113,7 @@ const viewColumn = ({
 		),
 	},
 	{
-		Header   : <div className={styles.invoice_value}>Invoice Value</div>,
+		Header   : <div className={styles.invoice_value}>{t('compliance:invoice_value')}</div>,
 		id       : 'invoiceValue',
 		accessor : ({ invoiceValue, invoiceCurrency }) => (
 			<div className={styles.invoice_value}>
@@ -123,13 +124,13 @@ const viewColumn = ({
 		),
 	},
 	{
-		Header   : <div className={styles.header}>IRN Status</div>,
+		Header   : <div className={styles.header}>{t('compliance:irn_status')}</div>,
 		id       : 'irnStatus',
 		accessor : ({ irnStatus }) => (
 			irnStatus && (
 				<div>
 					<Pill size="md" color={MAPPING_IRN_STATUS_COLOR[irnStatus]}>
-						{MAPPING_IRN_STATUS[irnStatus] || 'N/A'}
+						{mappingIrnStatus(t)[irnStatus] || 'N/A'}
 					</Pill>
 				</div>
 			)

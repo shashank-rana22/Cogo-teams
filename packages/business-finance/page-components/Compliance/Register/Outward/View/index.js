@@ -1,6 +1,7 @@
 import { Input, Pagination, Placeholder } from '@cogoport/components';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
@@ -19,6 +20,7 @@ const TOTAL_RECORDS = 0;
 const PAGE_SIZE = 10;
 
 function View() {
+	const { t } = useTranslation(['compliance']);
 	const [filters, setFilters] = useState({});
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [outWardId, setOutWardId] = useState(null);
@@ -52,6 +54,7 @@ function View() {
 			setShowDeleteModal,
 			setOutWardId,
 			isChecked,
+			t,
 		},
 	);
 
@@ -59,11 +62,11 @@ function View() {
 		<div>
 			<div className={styles.back_button} onClick={goBack} role="presentation">
 				<IcMArrowBack height="20px" width="20px" />
-				<div className={styles.go_back}>GO BACK</div>
+				<div className={styles.go_back}>{t('compliance:go_back')}</div>
 			</div>
 			<div className={styles.supplier_card}>
 				{ loading ? <Placeholder />
-					: getSupplierData(supplierName, suppGstIn, entityCode).map((item) => (
+					: getSupplierData(supplierName, suppGstIn, entityCode, t).map((item) => (
 						<div key={item?.heading} className={styles.name_value}>
 							{item?.heading}
 							<div className={styles.value_data}>{item?.value}</div>
@@ -72,7 +75,7 @@ function View() {
 			</div>
 
 			<div className={styles.filters_data}>
-				<Filter controls={filterControls} setFilters={setFilters} filters={filters} pageKey="page" />
+				<Filter controls={filterControls(t)} setFilters={setFilters} filters={filters} pageKey="page" />
 
 				<div>
 					<Input
@@ -83,7 +86,7 @@ function View() {
 								tradePartyGst: value,
 							}));
 						}}
-						placeholder="Search by Trade Party GST"
+						placeholder={t('compliance:search_by_trade_party')}
 						size="sm"
 						style={{ width: '340px' }}
 						suffix={(

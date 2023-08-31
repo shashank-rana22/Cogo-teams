@@ -1,24 +1,25 @@
-const filterControls = [
+const filterControls = (t) => ([
 	{
 		name        : 'docType',
 		type        : 'select',
 		span        : 1,
-		placeholder : 'Document Type',
+		placeholder : t('compliance:doc_type'),
 		isClearable : true,
 		size        : 'sm',
 		options     : [
-			{ label: 'Invoice', value: 'INVOICE' },
-			{ label: 'Credit Note', value: 'CREDIT_NOTE' },
+			{ label: t('compliance:invoice'), value: 'INVOICE' },
+			{ label: t('compliance:credit_note'), value: 'CREDIT_NOTE' },
 		],
 	},
 	{
 		name        : 'irnStatus',
 		type        : 'select',
 		span        : 1,
-		placeholder : 'IRN Status',
+		placeholder : t('compliance:irn_status'),
 		isClearable : true,
 		size        : 'sm',
-		options     : [{ value: 'true', label: 'Success' }, { value: 'false', label: 'Fail' }],
+		options     : [{ value: 'true', label: t('compliance:success') },
+			{ value: 'false', label: t('compliance:fail') }],
 	},
-];
+]);
 export default filterControls;

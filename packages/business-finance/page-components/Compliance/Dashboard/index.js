@@ -35,23 +35,23 @@ function Dashboard() {
 				<div>{t('compliance:return_status')}</div>
 				<div className={styles.return_label} />
 				<div className={styles.card_return}>
-					<div className={styles.gstr1_label}>GSTR-1</div>
+					<div className={styles.gstr1_label}>{t('compliance:gstr-1')}</div>
 					<div className={styles.pie_chart_value}>
 						<PieData
-							data={dataValue(filedCount, remainCount)}
+							data={dataValue(filedCount, remainCount, t)}
 							COLORS={COLORS}
 							filedCount={filedCount}
 							loadingGstr1={loadingGstr1}
 						/>
 						<div className={styles.data_show}>
-							Out of
+							{t('compliance:out_of')}
 							{' '}
 							{loadingGstr1 ? <Placeholder height="15px" width="80px" /> : totalCount}
 						</div>
 					</div>
 					<div className={styles.date_data}>
 						<div className={styles.data_show}>
-							<span className={styles.date_label}>Last Filed on :</span>
+							<span className={styles.date_label}>{t('compliance:last_filed_on')}</span>
 							{' '}
 							<span className={styles.date_show}>
 								{loadingGstr1 ? <Placeholder height="15px" width="80px" /> : formatDate({
@@ -63,7 +63,7 @@ function Dashboard() {
 							</span>
 						</div>
 						<div className={styles.data_show}>
-							<span className={styles.date_label}> Due Date :</span>
+							<span className={styles.date_label}>{t('compliance:due_date')}</span>
 							{' '}
 							<span className={styles.date_due_show}>
 								{' '}
@@ -92,7 +92,7 @@ function Dashboard() {
 					/>
 				</div>
 				<div className={styles.invoice_show_data}>
-					{getInvoiceData(totalUploaded, erroredOutTotal, fullMatchTotal).map((item) => (
+					{getInvoiceData(totalUploaded, erroredOutTotal, fullMatchTotal, t).map((item) => (
 						<div key={item?.label} className={styles.invoice_data}>
 							<div className={styles.label_value}>
 								<div className={styles.icon}>{item?.icon}</div>

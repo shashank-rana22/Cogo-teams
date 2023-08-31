@@ -1,4 +1,5 @@
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -6,6 +7,7 @@ function ContentDotsData({ row, deleteId, uploadId }) {
 	const { push } = useRouter();
 
 	const { fileStatus, status, fileUrl, id } = row || {};
+	const { t } = useTranslation(['compliance']);
 	return (
 		<div>
 			<div
@@ -18,7 +20,7 @@ function ContentDotsData({ row, deleteId, uploadId }) {
 				}}
 				role="presentation"
 			>
-				View
+				{t('compliance:view')}
 			</div>
 			{status === 'DISABLE' || fileStatus === 'ERROR_IN_EXPORT' ? (
 				<div
@@ -26,7 +28,7 @@ function ContentDotsData({ row, deleteId, uploadId }) {
 					onClick={() => { deleteId(id); }}
 					role="presentation"
 				>
-					Delete
+					{t('compliance:delete')}
 				</div>
 			) : fileStatus === 'READY' && (
 				<div
@@ -34,7 +36,7 @@ function ContentDotsData({ row, deleteId, uploadId }) {
 					onClick={() => { uploadId(id); }}
 					role="presentation"
 				>
-					Upload
+					{t('compliance:upload')}
 				</div>
 			) }
 			<div
@@ -42,7 +44,7 @@ function ContentDotsData({ row, deleteId, uploadId }) {
 				onClick={() => { window.open(fileUrl, '_blank'); }}
 				role="presentation"
 			>
-				Download
+				{t('compliance:download')}
 			</div>
 		</div>
 	);

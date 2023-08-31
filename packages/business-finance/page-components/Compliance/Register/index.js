@@ -1,18 +1,19 @@
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import Inward from './Inward';
 import Outward from './Outward';
 import styles from './styles.module.css';
 
-const TABS = [
+const tabs = (t) => [
 	{
 		key   : 'outward',
-		label : 'Outward',
+		label : t('compliance:outward_label'),
 	},
 	{
 		key   : 'inward',
-		label : 'Inward',
+		label : t('compliance:inward_label'),
 	},
 ];
 
@@ -22,6 +23,7 @@ const TABS_KEY_COMPONENT_MAPPING = {
 };
 
 function Register() {
+	const { t } = useTranslation(['compliance']);
 	const { query, push } = useRouter();
 	const { sub_active_tab:queryValue } = query || {};
 	const [filters, setFilters] = useState({});
@@ -50,7 +52,7 @@ function Register() {
 
 				<div className={styles.flex}>
 
-					{TABS.map((tab) => (
+					{tabs(t).map((tab) => (
 						<div
 							key={tab.key}
 							onClick={() => {

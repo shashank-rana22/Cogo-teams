@@ -1,5 +1,6 @@
 import { Modal, Button, Checkbox } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -12,6 +13,7 @@ function DeleteComfirmationModal({
 	setIsModalOnetime = () => {},
 	isModalOnetime = false,
 }) {
+	const { t } = useTranslation(['compliance']);
 	return (
 		<Modal size="md" show={showDeleteModal} onClose={() => setShowDeleteModal(false)} placement="top">
 
@@ -20,15 +22,15 @@ function DeleteComfirmationModal({
 					<IcMCross width={20} height={20} onClick={() => setShowDeleteModal(false)} />
 				</div>
 				<div className={styles.boddy_text_style}>
-					<div className={styles.text}>Are you sure you want to do delete this?</div>
+					<div className={styles.text}>{t('compliance:sure_to_delete')}</div>
 					<div className={styles.text_style}>
-						You can’t undo this step & the deleted data can’t be recovered later.
+						{t('compliance:delete_undo_warning')}
 					</div>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<Checkbox
-					label="Don’t show this again"
+					label={t('compliance:dont_show_again')}
 					checked={isModalOnetime}
 					onChange={() => {
 						setIsModalOnetime(!isModalOnetime);
@@ -39,7 +41,7 @@ function DeleteComfirmationModal({
 					onClick={() => deleteInvoice(outWardId)}
 					style={{ marginTop: '6px' }}
 				>
-					Confirm
+					{t('compliance:confirm')}
 
 				</Button>
 			</Modal.Footer>
