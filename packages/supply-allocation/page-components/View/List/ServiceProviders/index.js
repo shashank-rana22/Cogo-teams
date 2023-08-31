@@ -7,6 +7,7 @@ import useBulkUpdateFclFreightAllocation from '../../../../hooks/useBulkUpdateFc
 import useGetRollingForecastBucketData from '../../../../hooks/useGetRollingForecastBucketData';
 
 import BucketTable from './ServiceProvidersTable';
+import styles from './styles.module.css';
 import WarningModal from './WarningModal';
 
 function ServiceProviders({
@@ -47,19 +48,9 @@ function ServiceProviders({
 		bulkUpdateFclFreightAllocation({ payload });
 	};
 	return (
-		<div>
-			<div
-				style={{
-					background: '#f9f9f9',
-				}}
-			>
-				<div
-					style={{
-						display        : 'flex',
-						justifyContent : 'flex-end',
-						padding        : '20px 20px 10px 10px',
-					}}
-				>
+		<>
+			<div className={styles.container}>
+				<div className={styles.button_container}>
 					<Button
 						style={{ marginRight: '10px' }}
 						size="md"
@@ -79,7 +70,7 @@ function ServiceProviders({
 					</Button>
 				</div>
 
-				<div style={{ padding: '10px 0', background: '#f9f9f9', marginBottom: '10px' }}>
+				<div className={styles.bucket_container}>
 					<BucketTable
 						control={control}
 						unregister={unregister}
@@ -101,8 +92,7 @@ function ServiceProviders({
 					setBulkEditMode={setBulkEditMode}
 				/>
 			) : (null)}
-
-		</div>
+		</>
 	);
 }
 
