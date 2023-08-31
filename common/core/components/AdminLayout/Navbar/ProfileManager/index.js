@@ -102,7 +102,6 @@ function ProfileManager({
 				notificationPopover={notificationPopover}
 				setNotificationPopover={setNotificationPopover}
 				notificationCount={data?.is_not_seen_count}
-				t={t}
 			/>
 		</ul>
 	);
