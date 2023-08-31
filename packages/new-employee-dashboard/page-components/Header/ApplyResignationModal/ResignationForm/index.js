@@ -5,7 +5,7 @@ import EmployeeData from '../EmployeeDetail';
 
 import styles from './styles.module.css';
 
-function ResignationForm({ setShowModal = () => {} }) {
+function ResignationForm({ setShowModal = () => {}, setCurrentState = () => {} }) {
 	const [reason, setReason] = useState('');
 	const [error, setError] = useState(false);
 
@@ -13,7 +13,7 @@ function ResignationForm({ setShowModal = () => {} }) {
 		if (!reason) { setError(true); return; }
 		setError(false);
 
-		console.log('reason :: ', reason);
+		setCurrentState('ticket_generation');
 	};
 
 	return (

@@ -7,20 +7,30 @@ import styles from './styles.module.css';
 import TicketGenerated from './TicketGenerated';
 
 const RESIGNATION_COMPONENT_MAPPING = {
-	resignation_form  : ResignationForm,
-	ticket_generation : TicketGenerated,
-	feedback_form     : FeedbackForm,
+	resignation_form: {
+		render     : ResignationForm,
+		modal_size : 'xl',
+	},
+	ticket_generation: {
+		render     : TicketGenerated,
+		modal_size : 'md',
+	},
+	feedback_form: {
+		render     : FeedbackForm,
+		modal_size : 'xl',
+	},
 };
 
 function ApplyResignationModal({ showModal = false, setShowModal = () => {} }) {
 	const [currentState, setCurrentState] = useState('resignation_form');
 
-	const RenderComponent = RESIGNATION_COMPONENT_MAPPING[currentState];
+	const modalSize = RESIGNATION_COMPONENT_MAPPING[currentState].modal_size;
+	const RenderComponent = RESIGNATION_COMPONENT_MAPPING[currentState].render;
 
 	return (
 		<div className={styles.modal_container}>
 			<Modal
-				size="xl"
+				size={modalSize}
 				show={showModal}
 				closeOnOuterClick={false}
 				showCloseIcon={false}

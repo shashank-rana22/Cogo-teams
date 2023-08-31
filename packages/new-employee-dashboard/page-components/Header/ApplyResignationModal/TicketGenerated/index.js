@@ -5,7 +5,7 @@ import AnimatedTick from '../../../../common/AnimatedTick';
 
 import styles from './styles.module.css';
 
-function TicketGenerated({ setShowModal = () => {} }) {
+function TicketGenerated({ setCurrentState = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<AnimatedTick />
@@ -18,7 +18,7 @@ function TicketGenerated({ setShowModal = () => {} }) {
 				<span className={styles.request_id}>SEP202308310012</span>
 			</div>
 
-			<Button style={{ marginLeft: 8 }} onClick={() => setShowModal(false)}>Done</Button>
+			<Button style={{ marginLeft: 8 }} onClick={() => setCurrentState('feedback_form')}>Done</Button>
 		</div>
 	);
 }
