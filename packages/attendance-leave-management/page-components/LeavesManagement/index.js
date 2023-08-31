@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import useGetCycles from '../../hooks/useGetCycles';
 import useGetEmployeeLeaveBalances from '../../hooks/useGetEmployeeLeaveBalances';
@@ -28,6 +28,12 @@ function LeavesManagement() {
 		}
 	}, [formattedData]);
 
+	const leaveRequestsRef = useRef(null);
+	const executeScroll = () => leaveRequestsRef.current.scrollIntoView({
+		behavior : 'smooth',
+		block    : 'start',
+	});
+
 	return (
 		<div className={styles.container}>
 			<Header
@@ -41,11 +47,11 @@ function LeavesManagement() {
 					<LeaveBalancesComponent data={data} refetch={refetch} loading={balanceLoading} />
 				</div>
 				<div className={styles.leave_stats_style}>
-					<LeaveStatsApplicationsComponent selectedMonth={selectedMonth} />
+					<LeaveStatsApplicationsComponent selectedMonth={selectedMonth} executeScroll={executeScroll} />
 				</div>
 			</div>
 			<div>
-				<LeaveRequestListing leaveData={data} refetchLeaves={refetch} />
+				<LeaveRequestListing leaveData={data} refetchLeaves={refetch} leaveRequestsRef={leaveRequestsRef} />
 			</div>
 		</div>
 	);

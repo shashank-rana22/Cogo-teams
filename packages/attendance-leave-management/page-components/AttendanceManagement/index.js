@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import useGetCycles from '../../hooks/useGetCycles';
 
@@ -25,6 +25,11 @@ function AttendanceComponent({ data, loading : statsLoading, coords, refetch }) 
 		}
 	}, [formattedData]);
 
+	const attendanceLogsRef = useRef(null);
+	const executeScroll = () => attendanceLogsRef.current.scrollIntoView({
+		behavior : 'smooth',
+		block    : 'start',
+	});
 	return (
 		<div className={styles.content}>
 			<div className={styles.header}>
@@ -42,11 +47,17 @@ function AttendanceComponent({ data, loading : statsLoading, coords, refetch }) 
 				</div>
 
 				<div className={styles.attendance_stats}>
-					<AttendanceStats selectMonth={selectMonth} />
+					<AttendanceStats
+						selectMonth={selectMonth}
+						executeScroll={executeScroll}
+					/>
 				</div>
 			</div>
-			<div className={styles.container}>
-				<AttendanceLogs formattedData={formattedData} selectMonth={selectMonth} />
+			<div className={styles.container} ref={attendanceLogsRef}>
+				<AttendanceLogs
+					formattedData={formattedData}
+					selectMonth={selectMonth}
+				/>
 			</div>
 		</div>
 	);
