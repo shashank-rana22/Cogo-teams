@@ -54,9 +54,6 @@ function ApplyLeave({
 
 	const isHalfDay = watch('half_day');
 	const leaveType = watch('leave_type');
-
-	console.log('zzzz', `total_pending_${leaveType}s`, leaveType, 'total_pending_sick_leave_approvals');
-
 	const controls = getLeaveControls(isHalfDay);
 
 	const onSubmit = (values) => {
