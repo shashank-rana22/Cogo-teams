@@ -14,10 +14,10 @@ export const moreFilters = [
 				className : 'primary md',
 				span      : 12,
 				options   : [
-					{ label: 'Purchase', value: 'PURCHASE' },
-					{ label: 'Proforma', value: 'PROFORMA' },
-					{ label: 'Credit Note', value: 'CREDIT_NOTE' },
-					{ label: 'Reimbursement', value: 'REIMBURSEMENT' },
+					{ label: 'Purchase', value: 'bill' },
+					{ label: 'Proforma', value: 'proforma' },
+					{ label: 'Credit Note', value: 'creditNote' },
+					{ label: 'Reimbursement', value: 'reimbursement' },
 					{ label: 'Expense', value: 'expense' },
 				],
 			},
@@ -25,7 +25,7 @@ export const moreFilters = [
 	},
 	{
 		label          : 'Service Type',
-		name           : 'serviceType',
+		name           : 'services',
 		type           : 'multiSelect',
 		className      : 'primaryfilter primary md',
 		isClearable    : true,
@@ -103,6 +103,7 @@ export const moreFilters = [
 		initialCall    : true,
 		style          : { width: '170px' },
 		labelKey       : 'entity_code',
+		disabled       : true,
 	},
 	{
 		label                 : 'Invoice Date',

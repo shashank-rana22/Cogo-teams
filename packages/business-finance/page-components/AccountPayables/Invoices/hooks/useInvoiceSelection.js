@@ -3,6 +3,7 @@
 import { Toast, Checkbox } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -23,6 +24,16 @@ const ELEMENT_NOT_FOUND = -1;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
+function changeFormat(time) {
+	return formatDate({
+		date: time,
+		dateFormat:
+					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
+		formatType : 'dateTime',
+		separator  : 'T',
+	});
+}
 const useGetInvoiceSelection = ({ sort }) => {
 	const { push } = useRouter();
 
@@ -121,7 +132,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
 	});
-	const { search, dueDate, invoiceDate, uploadDate, ...rest } = globalFilters;
+	const { search, dueDate, invoiceDate, updatedDate, ...rest } = globalFilters;
 
 	useEffect(() => {
 		const newData = { ...api[GLOBAL_CONSTANTS.zeroth_index]?.data };
@@ -154,14 +165,14 @@ const useGetInvoiceSelection = ({ sort }) => {
 				performedByType,
 				performedByName,
 				organizationId,
-				serviceType        : services,
+				services,
 				...(rest || {}),
-				startDate          : dueDate?.startDate || undefined,
-				endDate            : dueDate?.endDate || undefined,
-				fromBillDate       : invoiceDate?.startDate || undefined,
-				toBillDate         : invoiceDate?.endDate || undefined,
-				fromUploadBillDate : uploadDate?.startDate || undefined,
-				toUploadBillDate   : uploadDate?.endDate || undefined,
+				startDate          : changeFormat(dueDate?.startDate) || undefined,
+				endDate            : changeFormat(dueDate?.endDate) || undefined,
+				fromBillDate       : changeFormat(invoiceDate?.startDate) || undefined,
+				toBillDate         : changeFormat(invoiceDate?.endDate) || undefined,
+				fromUploadBillDate : changeFormat(updatedDate?.startDate) || undefined,
+				toUploadBillDate   : changeFormat(updatedDate?.endDate) || undefined,
 				q,
 				...sort,
 			},
@@ -277,7 +288,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		JSON.stringify(rest),
 		dueDate,
 		invoiceDate,
-		uploadDate,
+		updatedDate,
 		query,
 		viewSelectedInvoice,
 		sort,

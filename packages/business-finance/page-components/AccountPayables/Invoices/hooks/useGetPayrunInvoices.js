@@ -20,14 +20,14 @@ const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
 function formatToTimeStamp(dateString) {
-	const date = new Date(dateString);
-	const formatedDate = formatDate({
-		date,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	return formatDate({
+		date: dateString,
+		dateFormat:
+					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 		formatType : 'dateTime',
-		seperator  : 'T',
+		separator  : 'T',
 	});
-	return formatedDate;
 }
 
 const useGetPayrunInvoices = ({ apiData, setApiData }) => {
@@ -76,7 +76,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	const {
 		search = '', pageSize, pageIndex, invoiceView, category, invoiceType,
 		urgencyTag, currency: filterCurrency, entity: filterEntity,
-		serviceType, invoiceDate, dueDate, updatedDate,
+		services, invoiceDate, dueDate, updatedDate,
 	} = filters || {};
 	const { dueDateSortType } = orderBy || {};
 
@@ -85,6 +85,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
+	console.log(fromUploadBillDate, 'kjk');
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
@@ -125,13 +126,13 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 						invoiceType        : invoiceType || undefined,
 						entity             : filterEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
-						serviceType        : serviceType || undefined,
+						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
 						startDate          : startDate ? formatToTimeStamp(startDate) : undefined,
 						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
 						fromBillDate       : fromBillDate ? formatToTimeStamp(fromBillDate) : undefined,
 						toBillDate         : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
-						fromUploadBillDate : toBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
+						fromUploadBillDate : fromUploadBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
 						toUploadBillDate   : toUploadBillDate ? formatToTimeStamp(toUploadBillDate) : undefined,
 						payrunId           : payrun,
 					},
@@ -143,7 +144,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		},
 		[pageIndex, pageSize,
 			query, filterCurrency, urgencyTag, filterEntity, invoiceType,
-			invoiceView, category, dueDateSortType, serviceType, startDate,
+			invoiceView, category, dueDateSortType, services, startDate,
 			endDate, fromBillDate, setApiData,
 			toBillDate, fromUploadBillDate,
 			toUploadBillDate, trigger, payrun],

@@ -16,14 +16,12 @@ function FilterModal({
 	setFilters = () => { },
 	filterLength = FILTER_LENGTH,
 	onClear = () => {},
-	// type,
-	// filterClear,
-	// clearMoreFilters = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalFilters, setModalFilters] = useState({
 		currency    : filters?.currency,
 		invoiceType : filters?.invoiceType || undefined,
+		entity      : filters.entity,
 	});
 	const { currency = '' } = modalFilters || {};
 
@@ -91,7 +89,6 @@ function FilterModal({
 										category    : filters?.category || undefined,
 										currency    : filters?.currency || '',
 										entity      : filters?.entity || '',
-										// invoiceType : filters?.invoiceType || undefined,
 									});
 									onClear();
 									setModalFilters({ currency: filters?.currency || '' });
