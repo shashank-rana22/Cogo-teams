@@ -1,8 +1,10 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useBulkUpdateFclFreightAllocation = ({
 	refetchServiceProvidersData = () => { },
 	refetchBucketsData = () => { },
+	reset = () => { },
 }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -15,10 +17,13 @@ const useBulkUpdateFclFreightAllocation = ({
 	const bulkUpdateFclFreightAllocation = async ({ payload }) => {
 		try {
 			await trigger({ data: payload });
+			reset();
 			refetchBucketsData();
 			refetchServiceProvidersData();
+			Toast.success('Allocation Updated Successfully');
 		} catch (err) {
 			console.error(err);
+			Toast.error('Something went wrong');
 		}
 	};
 

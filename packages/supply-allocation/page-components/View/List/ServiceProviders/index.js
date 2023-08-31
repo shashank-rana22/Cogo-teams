@@ -26,13 +26,13 @@ function ServiceProviders({
 
 	const formProps = useForm();
 
-	const { bulkUpdateFclFreightAllocation, bulkUpdateLoading } = useBulkUpdateFclFreightAllocation({
-		refetchServiceProvidersData, refetchBucketsData,
-	});
-
 	const { control, unregister, formState, handleSubmit, reset } = formProps;
 
 	const { dirtyFields = {} } = formState;
+
+	const { bulkUpdateFclFreightAllocation, bulkUpdateLoading } = useBulkUpdateFclFreightAllocation({
+		refetchServiceProvidersData, refetchBucketsData, reset,
+	});
 
 	const onClickSaveChanges = (values) => {
 		const modifiedValues = Object.entries(values).reduce(
@@ -47,6 +47,8 @@ function ServiceProviders({
 		};
 		bulkUpdateFclFreightAllocation({ payload });
 	};
+
+	console.log('isEmpty(dirtyFields)', isEmpty(dirtyFields));
 	return (
 		<>
 			<div className={styles.container}>
@@ -80,6 +82,7 @@ function ServiceProviders({
 						bulkEditMode={bulkEditMode}
 						serviceProvidersApiLoading={loading}
 						refetchBucketsData={refetchBucketsData}
+						refetchServiceProvidersData={refetchServiceProvidersData}
 						serviceProvidersData={data}
 					/>
 				</div>

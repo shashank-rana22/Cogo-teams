@@ -19,10 +19,12 @@ const useCreateSupplySearch = ({
 	const createSupplySearch = async ({ payload }) => {
 		try {
 			const res = await trigger({ data: payload });
+
 			refetchListFclSearches();
 
 			const searchId = res?.data?.id;
-			router.push(`/supply-allocation/view/${searchId}`);
+
+			if (searchId) { router.push(`/supply-allocation/view/${searchId}`); }
 
 			setLocationDetails({});
 			reset();
