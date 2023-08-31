@@ -7,7 +7,7 @@ import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
 import styles from './styles.module.css';
 
-const C = 100;
+const HUNDRED = 100;
 const DEF = GLOBAL_CONSTANTS.zeroth_index;
 const SUB = 20;
 const ANO_SUB = 10;
@@ -15,7 +15,7 @@ const ROUNDING_BASE = 10;
 
 function GetOrdinalNumber({ number = 0 }) {
 	const suffix = ['th', 'st', 'nd', 'rd'];
-	const quotient = number % C;
+	const quotient = number % HUNDRED;
 	const ordinal =	suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
 	return (
 		<>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import functionSubFunctionMapping from '../../../../configurations/function-sub-function-mapping';
@@ -6,17 +7,20 @@ import { getElementController } from '../../../../utils/get-element-controller';
 import styles from './styles.module.css';
 
 function Edit({ formProps, controls }) {
+	const { t } = useTranslation(['accessManagement']);
 	const {
 		control, watch, formState: { errors },
 	} = formProps;
 
 	const type = watch('role_functions') || [];
 
-	const subRoleFunctionOptionsEdit = [];
+	const SUB_ROLE_FUNCTION_OPTIONS_EDIT = [];
+
+	const subFunctionMapping = functionSubFunctionMapping(t);
 
 	type?.forEach((subType) => {
-		subRoleFunctionOptionsEdit.push(
-			...(functionSubFunctionMapping[subType] || []),
+		SUB_ROLE_FUNCTION_OPTIONS_EDIT.push(
+			...(subFunctionMapping[subType] || []),
 		);
 	});
 
@@ -26,7 +30,7 @@ function Edit({ formProps, controls }) {
 				const el = { ...controlItem };
 
 				if (el.name === 'role_sub_functions') {
-					el.options = subRoleFunctionOptionsEdit;
+					el.options = SUB_ROLE_FUNCTION_OPTIONS_EDIT;
 				}
 
 				const Element = getElementController(el.type);
@@ -34,7 +38,7 @@ function Edit({ formProps, controls }) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.form_group}>
+					<div className={styles.form_group} key={el.name}>
 						<span>{el.label}</span>
 						<div className={styles.input_group}>
 							<Element
