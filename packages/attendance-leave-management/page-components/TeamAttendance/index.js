@@ -44,7 +44,11 @@ function TeamAttendance() {
 		});
 	};
 
+	const [employeeValue, setEmployeeValue] = useState('');
+	const [daysAttendance, setDaysAttendance] = useState([]);
 	const handleSearch = (e) => {
+		setEmployeeValue('');
+		setDaysAttendance([]);
 		debounceQuery(e);
 		setSearchQuery(e);
 	};
@@ -105,7 +109,13 @@ function TeamAttendance() {
 							<AttendanceData data={data} />
 						</div>
 						<div className={styles.attendance_mobile}>
-							<AttendanceMobile data={data} />
+							<AttendanceMobile
+								data={data}
+								employeeValue={employeeValue}
+								setEmployeeValue={setEmployeeValue}
+								daysAttendance={daysAttendance}
+								setDaysAttendance={setDaysAttendance}
+							/>
 						</div>
 					</div>
 					<div className={styles.pagination_container}>

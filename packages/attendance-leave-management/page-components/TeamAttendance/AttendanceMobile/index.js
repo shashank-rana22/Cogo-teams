@@ -1,29 +1,33 @@
 import { cl, CreatableSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { ATTENDANCE_LOGS_STATUS_MAPPING } from '../../../utils/constants';
 
 import styles from './styles.module.css';
 
-function AttendanceMobile({ data }) {
+function AttendanceMobile({
+	data,
+	employeeValue,
+	setEmployeeValue,
+	daysAttendance,
+	setDaysAttendance,
+}) {
 	const { attendanceDates = [], dataArr } = data || {};
 	const filteredArray = [...(dataArr || [])]?.filter((item) => item !== null);
 
-	const [value, setValue] = useState('');
 	const options = filteredArray.map((employee) => ({
 		label : `${employee.employee_name} (${employee.employee_code})`,
 		value : employee.employee_code,
 	}));
 
-	const [days, setDays] = useState([]);
 	useEffect(() => {
-		if (value !== '') {
-			const currentEmployee = filteredArray.find((employee) => employee.employee_code === value);
-			setDays(currentEmployee.days);
+		if (employeeValue !== '') {
+			const currentEmployee = filteredArray.find((employee) => employee.employee_code === employeeValue);
+			setDaysAttendance(currentEmployee.days);
 		}
-	}, [filteredArray, value]);
+	}, [filteredArray, employeeValue, setDaysAttendance]);
 
 	const GREEN_STATUS = ['present', 'holiday', 'sick_leave', 'privilege_leave', 'casual_leave',
 		'half_day_sick_leave', 'half_day_privilege_leave', 'half_day_casual_leave'];
@@ -59,13 +63,13 @@ function AttendanceMobile({ data }) {
 		<div className={styles.container}>
 			<div className={styles.header}>Employee Name</div>
 			<CreatableSelect
-				value={value}
-				onChange={setValue}
+				value={employeeValue}
+				onChange={setEmployeeValue}
 				placeholder="Select employee"
 				options={options}
 				className={styles.select}
 			/>
-			{(days.length !== GLOBAL_CONSTANTS.zeroth_index)
+			{(daysAttendance.length !== GLOBAL_CONSTANTS.zeroth_index)
             && (attendanceDates.length !== GLOBAL_CONSTANTS.zeroth_index)
             && (attendanceDates.map((date, index) => (
 	<div
@@ -84,7 +88,7 @@ function AttendanceMobile({ data }) {
 				Check in & out
 			</div>
 			{formatDate({
-				date       : days[index]?.check_in,
+				date       : daysAttendance[index]?.check_in,
 				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'time',
 			})}
@@ -92,14 +96,18 @@ function AttendanceMobile({ data }) {
 			-
 			{' '}
 			{formatDate({
-				date       : days[index]?.check_out,
+				date       : daysAttendance[index]?.check_out,
 				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'time',
 			})}
 		</div>
-		<div className={cl`${styles.attendance_status} ${styles[getClassName(days[index]?.day_status, true)]}`}>
-			<div className={cl`${styles.attendance_dot} ${styles[getClassName(days[index]?.day_status)]}`} />
-			{ATTENDANCE_LOGS_STATUS_MAPPING[days[index]?.day_status]?.label}
+		<div className={
+			cl`${styles.attendance_status} 
+			${styles[getClassName(daysAttendance[index]?.day_status, true)]}`
+			}
+		>
+			<div className={cl`${styles.attendance_dot} ${styles[getClassName(daysAttendance[index]?.day_status)]}`} />
+			{ATTENDANCE_LOGS_STATUS_MAPPING[daysAttendance[index]?.day_status]?.label}
 		</div>
 	</div>
 
