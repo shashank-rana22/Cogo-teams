@@ -1,9 +1,9 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import Call from '../../OverAllOutstanding/OutstandingFilter/CallPriorityModal/Call';
-import Email from '../../OverAllOutstanding/OutstandingFilter/CallPriorityModal/Email';
-import Meeting from '../../OverAllOutstanding/OutstandingFilter/CallPriorityModal/Meeting';
+import Call from '../../OutstandingFilter/CallPriorityModal/Call';
+import Email from '../../OutstandingFilter/CallPriorityModal/Email';
+import Meeting from '../../OutstandingFilter/CallPriorityModal/Meeting';
 
 import styles from './styles.module.css';
 
