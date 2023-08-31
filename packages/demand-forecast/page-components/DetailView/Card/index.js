@@ -13,7 +13,7 @@ function Card({ card = {}, origin_location_id = '', destination_location_id = ''
 	const [isEmail, setIsEmail] = useState(false);
 
 	const sendEmail = () => {
-		setIsEmail(!isEmail);
+		setIsEmail((prev) => !prev);
 	};
 
 	return (
