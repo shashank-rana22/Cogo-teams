@@ -35,10 +35,6 @@ function LeaveRequestListing({ leaveData, refetchLeaves }) {
 		setOpenDeleteModal(true);
 	};
 
-	// const handleLeaveDelete = () => {
-
-	// }
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>

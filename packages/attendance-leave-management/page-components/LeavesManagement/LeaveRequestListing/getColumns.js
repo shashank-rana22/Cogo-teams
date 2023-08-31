@@ -54,9 +54,9 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 	{
 		Header   : 'REMARKS',
 		accessor : (item) => (
-			<Tooltip content={item?.approval_remarks} placement="top">
+			<Tooltip content={item?.leave_reason} placement="top">
 				<div className={styles.remarks}>
-					{startCase(item?.approval_remarks) || '-'}
+					{startCase(item?.leave_reason) || '-'}
 				</div>
 			</Tooltip>
 		),
@@ -89,12 +89,12 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 		Header   : 'ACTION',
 		accessor : (item) => (
 			<div className={styles.action}>
-				{item.leave_status === 'pending' && (
+				{item.leave_status === 'pending' ? (
 					<IcMEdit
 						className={styles.cursor}
 						onClick={() => handleOpenModal(item)}
 					/>
-				)}
+				) : <div style={{ marginRight: '14px' }} />}
 				<IcMDelete className={styles.cursor} onClick={() => handleDeleteModal(item)} />
 			</div>
 		),

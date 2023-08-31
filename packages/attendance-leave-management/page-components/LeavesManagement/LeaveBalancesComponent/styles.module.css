@@ -8,7 +8,7 @@
 
 .header_text {
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .header_text1 {
@@ -32,8 +32,16 @@
 	border-bottom: 1px solid #e0e0e0;
 
 	:global {
+		.ui_progressbar_container {
+			padding: 4px 0;
+		}
+
 		.ui_progressbar_progress {
 			background-color: #abb0de;
+		}
+
+		.ui_progressbar_bar {
+			box-shadow: none;
 		}
 	}
 }
@@ -67,6 +75,7 @@
 	display: flex;
 	align-items: center;
 	padding: 8px 0;
+	margin-bottom: 4px;
 }
 
 .leaves_text {
@@ -87,6 +96,7 @@
 .text2 {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 4px;
 	font-size: 14px;
 	font-weight: 500;
 }

@@ -4,22 +4,12 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTimer } from '@cogoport/icons-react';
 import React from 'react';
 
-import { ATTENDANCE_LOGS_STATUS_MAPPING } from '../../utils/constants';
+import {
+	ATTENDANCE_LOGS_STATUS_MAPPING, GREEN_STATUS, INVALID_STATUS, RED_DOT,
+	SEPARATOR_CONDITION, WEEKLY_OFF,
+} from '../../utils/constants';
 
 import styles from './styles.module.css';
-
-const GREEN_DOT = ['present', 'holiday', 'sick_leave', 'privilege_leave',
-	'casual_leave', 'half_day_sick_leave', 'half_day_privilege_leave', 'half_day_casual_leave'];
-
-const RED_DOT = ['absent', 'half_day_absent', 'leave_without_pay', 'half_day_absent_sick_leave',
-	'half_day_absent_privilege_leave', 'half_day_absent_casual_leave'];
-
-const GRAY_DOT = ['invalid'];
-
-const ORANGE_DOT = ['weekly_off'];
-
-const SEPARATOR_CONDITION = ['half_day_absent_sick_leave', 'half_day_absent_privilege_leave',
-	'half_day_absent_casual_leave', 'half_day_absent'];
 
 const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal }) => {
 	const getTimings = (shift_timings) => {
@@ -37,7 +27,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 	};
 
 	const getLeftDotColor = (val) => {
-		if (ORANGE_DOT.includes(val)) {
+		if (WEEKLY_OFF.includes(val)) {
 			return 'color_orange';
 		}
 
@@ -45,7 +35,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 			return 'color_red';
 		}
 
-		if (GRAY_DOT.includes(val)) {
+		if (INVALID_STATUS.includes(val)) {
 			return 'color_grey';
 		}
 
@@ -53,13 +43,13 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 	};
 
 	const getRightDotColor = (val) => {
-		const greenDot = [...GREEN_DOT, ...SEPARATOR_CONDITION];
+		const greenDot = [...GREEN_STATUS, ...SEPARATOR_CONDITION];
 
-		if (ORANGE_DOT.includes(val)) {
+		if (WEEKLY_OFF.includes(val)) {
 			return 'color_orange';
 		}
 
-		if (GRAY_DOT.includes(val)) {
+		if (INVALID_STATUS.includes(val)) {
 			return 'color_grey';
 		}
 
@@ -75,11 +65,11 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 			return styles.hda;
 		}
 
-		if (GREEN_DOT.includes(val)) {
+		if (GREEN_STATUS.includes(val)) {
 			return styles.separator;
 		}
 
-		if (ORANGE_DOT.includes(val)) {
+		if (WEEKLY_OFF.includes(val)) {
 			return styles.orange_separator;
 		}
 
@@ -95,11 +85,11 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 			return 'hda_border';
 		}
 
-		if (GREEN_DOT.includes(val)) {
+		if (GREEN_STATUS.includes(val)) {
 			return 'border_green';
 		}
 
-		if (ORANGE_DOT.includes(val)) {
+		if (WEEKLY_OFF.includes(val)) {
 			return 'border_orange';
 		}
 
@@ -167,7 +157,7 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 		{
 			Header   : <div className={styles.header_text}>SHIFT TIMINGS</div>,
 			accessor : (item) => (
-				<div>
+				<div style={{ fontWeight: 400 }}>
 					{getTimings(item.day === 'Saturday' ? weekend_shift : normal_shift)}
 				</div>
 			),

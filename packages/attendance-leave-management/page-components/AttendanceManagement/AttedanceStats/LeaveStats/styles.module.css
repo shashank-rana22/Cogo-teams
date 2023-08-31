@@ -22,7 +22,7 @@
 
 .title {
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 500;
 	color: #221f20;
 
 	@media (max-width: 768px) {
@@ -68,7 +68,7 @@
 .stats_number {
 	margin-top: 4px;
 	font-size: 24px;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .apply_btn {
