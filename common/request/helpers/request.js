@@ -5,11 +5,9 @@ import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
-// eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate',
-	'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -55,19 +53,10 @@ request.interceptors.request.use((oldConfig) => {
 		.split('/')
 		.filter((t) => t)
 		.join('/');
-	// delete all the extra code in this file
 
-	let serviceName = newConfig?.service_name || microServices[apiPath];
+	const serviceName = newConfig?.service_name || microServices[apiPath];
 
 	newConfig.paramsSerializer = { serialize: customSerializer };
-
-	console.log('apiPath::', apiPath);
-
-	if (apiPath === 'list_pricing_zones' && isDevMode) {
-		serviceName = 'public_location';
-	}
-
-	console.log('serviceName:', serviceName);
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${originalApiPath}`;
@@ -82,13 +71,6 @@ request.interceptors.request.use((oldConfig) => {
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
-
-	if (serviceName === 'public_location') {
-		newConfig.baseURL = 'https://api.cogoport.com';
-		newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
-	}
-
-	console.log('newConfig::', newConfig);
 
 	return {
 		...newConfig,
