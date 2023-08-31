@@ -1,5 +1,4 @@
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
 import { CheckoutContext } from '../../../../context';
@@ -25,9 +24,9 @@ function PreviewBooking() {
 
 	const [cargoDetails, setCargoDetails] = useState(() => ({
 		commodity_category,
-		cargo_readiness_date : cargo_readiness_date ? new Date(cargo_readiness_date) : undefined,
+		cargo_readiness_date: cargo_readiness_date ? new Date(cargo_readiness_date) : undefined,
 		cargo_value,
-		cargo_value_currency : cargo_value_currency || GLOBAL_CONSTANTS.currency_code.USD,
+		cargo_value_currency,
 	}));
 
 	const [agreeTandC, setAgreeTandC] = useState(false);

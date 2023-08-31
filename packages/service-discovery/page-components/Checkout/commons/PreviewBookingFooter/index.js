@@ -11,12 +11,12 @@ import TotalCost from './TotalCost';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function SubmitButton({ rate = {} }) {
+function SubmitButton({ rate = {}, disabled = false }) {
 	return (
 		<div className={styles.flex}>
 			Select Invoicing Parties
 
-			<TotalCost rate={rate} />
+			<TotalCost rate={rate} disabled={disabled} />
 
 			<IcMArrowDoubleRight width={14} height={14} />
 		</div>
@@ -66,7 +66,7 @@ function PreviewBookingFooter({
 			disabled  : updateCheckoutServiceLoading,
 		},
 		{
-			label     : <SubmitButton rate={rate} />,
+			label     : <SubmitButton rate={rate} disabled={isVeryRisky || !agreeTandC || disableButton} />,
 			themeType : 'accent',
 			size      : 'lg',
 			loading   : updateLoading || updateCheckoutServiceLoading,
