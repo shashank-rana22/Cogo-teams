@@ -57,7 +57,7 @@ function LandingCost({
 	return (
 		<div className={styles.container}>
 			<div className={styles.convenience_container}>
-				<div className={styles.text}>Total Landed Cost :</div>
+				<div className={styles.text}>Total Cost :</div>
 
 				<div className={styles.amount}>
 					{formatAmount({
