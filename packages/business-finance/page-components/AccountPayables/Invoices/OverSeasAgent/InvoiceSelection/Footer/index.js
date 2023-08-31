@@ -8,6 +8,15 @@ import styles from './styles.module.css';
 
 const INITIAL_VALUE = 0;
 
+function RenderContent() {
+	return (
+		<div className={styles.popover_modal}>
+			Please ensure to move the checked invoices
+			to the selected bucket or else you’ll lose the edited fields.
+		</div>
+	);
+}
+
 function Footer({
 	apiData = {},
 	viewSelectedInvoices = false,
@@ -38,14 +47,6 @@ function Footer({
 		setShowHeader(false);
 	};
 
-	function RenderContent() {
-		return (
-			<div className={styles.popover_modal}>
-				Please ensure to move the checked invoices
-				to the selected bucket or else you’ll lose the edited fields.
-			</div>
-		);
-	}
 	return (
 		<div>
 			<div className={styles.container}>

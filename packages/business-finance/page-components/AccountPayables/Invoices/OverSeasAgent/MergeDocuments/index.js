@@ -19,6 +19,102 @@ const SUBSTRING_CONDITON_MAX = 15;
 const SUBSTRING_CONDITON_MIN = 0;
 const TAGGED_DOC_CONDITION = 4;
 
+function GetInvoiceData({ selectBankShow = false, setShowConfirmationModal = () => {}, list = {} }) {
+	return (
+		selectBankShow
+			? (
+				<div style={{ display: 'flex' }}>
+					<IcCFtick />
+					<div className={styles.success}>
+						Invoices successfully merged
+					</div>
+				</div>
+			)
+			:						(
+				<Button
+					onClick={() => setShowConfirmationModal(true)}
+					disabled={!list.length}
+				>
+					Merge Invoices
+				</Button>
+			)
+	);
+}
+
+function GetData({
+	documents = {},
+	documentsList = [],
+	getDate = () => {},
+	deleteTaggedDocuments = () => {},
+	setSelectBankShow = () => {},
+}) {
+	if (
+		documents.billPdfUrl === undefined
+		&& documents.shipmentPdfUrl === undefined
+	) {
+		return (
+			<div className={styles.merge_doc_msg}>
+				PLEASE MERGE INVOICES
+			</div>
+		);
+	}
+
+	return documentsList.map((item) => {
+		if (item.documentUrl !== '') {
+			return (
+				<div className={styles.document_card} key={item.docName}>
+					<div className={styles.document_sub_card}>
+						<div className={styles.pdf_container}>
+							<div>
+								<IcMPdf width={30} height={30} />
+							</div>
+							<div>
+								<div>
+									<div className={styles.doc_name_text}>{item.docName}</div>
+									<div className={styles.uploaded_by}>
+										uploaded at:
+										{' '}
+										{getDate(item.uploadedAt)}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className={styles.download_doc}>
+							<Button
+								style={{ marginRight: '20px' }}
+								onClick={() => window.open(item.documentUrl, '_blank')}
+								themeType="linkUi"
+							>
+								View
+							</Button>
+
+							<Button
+								onClick={() => saveAs(item.documentUrl)}
+								themeType="linkUi"
+							>
+								Download
+							</Button>
+
+							{item.showDeleteIcon && (
+								<IcMDelete
+									width={24}
+									height={24}
+									onClick={() => {
+										deleteTaggedDocuments(item);
+										setSelectBankShow(false);
+									}}
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+			);
+		}
+		return null;
+	});
+}
+
 function MergeDocuments({ setActive = () => {} }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [selectBankShow, setSelectBankShow] = useState(false);
@@ -112,95 +208,6 @@ function MergeDocuments({ setActive = () => {} }) {
 			showDeleteIcon : true,
 		},
 	];
-	function GetInvoiceData() {
-		return (
-			selectBankShow
-				? (
-					<div style={{ display: 'flex' }}>
-						<IcCFtick />
-						<div className={styles.success}>
-							Invoices successfully merged
-						</div>
-					</div>
-				)
-				:						(
-					<Button
-						onClick={() => setShowConfirmationModal(true)}
-						disabled={!list.length}
-					>
-						Merge Invoices
-					</Button>
-				)
-		);
-	}
-
-	function GetData() {
-		if (
-			documents.billPdfUrl === undefined
-			&& documents.shipmentPdfUrl === undefined
-		) {
-			return (
-				<div className={styles.merge_doc_msg}>
-					PLEASE MERGE INVOICES
-				</div>
-			);
-		}
-
-		return documentsList.map((item) => {
-			if (item.documentUrl !== '') {
-				return (
-					<div className={styles.document_card} key={item.docName}>
-						<div className={styles.document_sub_card}>
-							<div className={styles.pdf_container}>
-								<div>
-									<IcMPdf width={30} height={30} />
-								</div>
-								<div>
-									<div>
-										<div className={styles.doc_name_text}>{item.docName}</div>
-										<div className={styles.uploaded_by}>
-											uploaded at:
-											{' '}
-											{getDate(item.uploadedAt)}
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className={styles.download_doc}>
-								<Button
-									style={{ marginRight: '20px' }}
-									onClick={() => window.open(item.documentUrl, '_blank')}
-									themeType="linkUi"
-								>
-									View
-								</Button>
-
-								<Button
-									onClick={() => saveAs(item.documentUrl)}
-									themeType="linkUi"
-								>
-									Download
-								</Button>
-
-								{item.showDeleteIcon && (
-									<IcMDelete
-										width={24}
-										height={24}
-										onClick={() => {
-											deleteTaggedDocuments(item);
-											setSelectBankShow(false);
-										}}
-									/>
-								)}
-							</div>
-						</div>
-					</div>
-				);
-			}
-			return null;
-		});
-	}
 
 	return (
 		<>
@@ -237,7 +244,11 @@ function MergeDocuments({ setActive = () => {} }) {
 								<Placeholder width="80%" height="35px" />
 							</div>
 						) : (
-							<GetInvoiceData />
+							<GetInvoiceData
+								selectBankShow={selectBankShow}
+								setShowConfirmationModal={setShowConfirmationModal}
+								list={list}
+							/>
 						)}
 					</div>
 				</div>
@@ -254,7 +265,15 @@ function MergeDocuments({ setActive = () => {} }) {
 								<Placeholder width="80%" height="35px" />
 							</div>
 						))
-							: <GetData />}
+							: (
+								<GetData
+									documents={documents}
+									documentsList={documentsList}
+									getDate={getDate}
+									deleteTaggedDocuments={deleteTaggedDocuments}
+									setSelectBankShow={setSelectBankShow}
+								/>
+							)}
 					</div>
 				</div>
 			</div>

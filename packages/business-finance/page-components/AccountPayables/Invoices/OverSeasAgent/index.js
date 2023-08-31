@@ -21,6 +21,47 @@ const STEPS_MAPPING = [
 	{ title: 'Final Confirmation', key: 'final_confirmation' },
 ];
 
+function RenderData({
+	active = '',
+	setActive = () => {},
+	bLData = {},
+	setShowSaveAsDraft = () => {},
+	setBLData = () => {},
+	setShowHeader = () => {},
+	showHeader = '',
+	setShowPayableAmount = () => {},
+
+}) {
+	if (active === 'merge_documents') {
+		return <MergeDocuments setActive={setActive} />;
+	}
+	if (active === 'invoice_bl_check') {
+		return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
+	}
+	if (active === 'final_confirmation') {
+		return (
+			<FinalConfirmation
+				setActive={setActive}
+				setShowSaveAsDraft={setShowSaveAsDraft}
+			/>
+		);
+	}
+	if (active === 'upload_documents') {
+		return <UploadDocuments setActive={setActive} />;
+	}
+	return (
+		<InvoiceSelection
+			setActive={setActive}
+			active={active}
+			setBLData={setBLData}
+			setShowHeader={setShowHeader}
+			showHeader={showHeader}
+			setShowPayableAmount={setShowPayableAmount}
+			setShowSaveAsDraft={setShowSaveAsDraft}
+		/>
+	);
+}
+
 const MIN_AMOUNT = 0;
 
 function OverSeasAgent() {
@@ -50,37 +91,6 @@ function OverSeasAgent() {
 			setActive('merge_documents');
 		} else setActive('invoice_selection');
 	}, [payrunState]);
-
-	function RenderData() {
-		if (active === 'merge_documents') {
-			return <MergeDocuments setActive={setActive} />;
-		}
-		if (active === 'invoice_bl_check') {
-			return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
-		}
-		if (active === 'final_confirmation') {
-			return (
-				<FinalConfirmation
-					setActive={setActive}
-					setShowSaveAsDraft={setShowSaveAsDraft}
-				/>
-			);
-		}
-		if (active === 'upload_documents') {
-			return <UploadDocuments setActive={setActive} />;
-		}
-		return (
-			<InvoiceSelection
-				setActive={setActive}
-				active={active}
-				setBLData={setBLData}
-				setShowHeader={setShowHeader}
-				showHeader={showHeader}
-				setShowPayableAmount={setShowPayableAmount}
-				setShowSaveAsDraft={setShowSaveAsDraft}
-			/>
-		);
-	}
 
 	return (
 		<div className={styles.container}>
@@ -123,7 +133,16 @@ function OverSeasAgent() {
 				</>
 			)}
 
-			<RenderData />
+			<RenderData
+				active={active}
+				setActive={setActive}
+				bLData={bLData}
+				setShowSaveAsDraft={setShowSaveAsDraft}
+				setBLData={setBLData}
+				setShowHeader={setShowHeader}
+				showHeader={showHeader}
+				setShowPayableAmount={setShowPayableAmount}
+			/>
 
 		</div>
 	);

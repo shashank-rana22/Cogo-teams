@@ -7,6 +7,73 @@ import useOverSeasHeader from '../../hooks/useOverSeasHeader';
 
 import styles from './styles.module.css';
 
+function Content({ panUrl = '', businessAddressProofUrl = '' }) {
+	return (
+		<>
+			<div>
+				{panUrl ? (
+					<Button
+						size="md"
+						themeType="linkUi"
+						onClick={() => window.open(panUrl, '_blank')}
+					>
+						Pan Document
+					</Button>
+				) : (
+					<text>Pan not present :-</text>
+				) }
+			</div>
+
+			<div>
+				{businessAddressProofUrl ? (
+					<Button
+						size="md"
+						themeType="linkUi"
+						onClick={() => window.open(businessAddressProofUrl, '_blank')}
+					>
+						Business Address Proof
+					</Button>
+				) : (
+					<text>Business Address Proof not present :-</text>
+				) }
+			</div>
+		</>
+	);
+}
+
+function Contents({ supplierAgreementWithCogoport = '', cogoportAgreementWithSupplier = '' }) {
+	return (
+		<>
+			<div>
+				{supplierAgreementWithCogoport ? (
+					<Button
+						size="md"
+						themeType="linkUi"
+						onClick={() => window.open(supplierAgreementWithCogoport, '_blank')}
+					>
+						Supplier&apos;s Agreement With Cogoport
+					</Button>
+				) : (
+					<text>Supplier&apos;s Agreement not present :-</text>
+				) }
+			</div>
+			<div>
+				{cogoportAgreementWithSupplier ? (
+					<Button
+						size="md"
+						themeType="linkUi"
+						onClick={() => window.open(cogoportAgreementWithSupplier, '_blank')}
+					>
+						Cogoport Agreement With Supplier
+					</Button>
+				) : (
+					<text>Cogoport&apos;s Agreement not present :-</text>
+				) }
+			</div>
+		</>
+	);
+}
+
 function PayabledDetails({ organizationId = '', showPayableAmount = '', currency = 'INR' }) {
 	const { data } = useOverSeasHeader({ organizationId });
 
@@ -20,73 +87,6 @@ function PayabledDetails({ organizationId = '', showPayableAmount = '', currency
 		cogoportAgreementWithSupplier = '',
 	} = data || {};
 	const [isOpen, setIsOpen] = useState(false);
-
-	function Content() {
-		return (
-			<>
-				<div>
-					{panUrl ? (
-						<Button
-							size="md"
-							themeType="linkUi"
-							onClick={() => window.open(panUrl, '_blank')}
-						>
-							Pan Document
-						</Button>
-					) : (
-						<text>Pan not present :-</text>
-					) }
-				</div>
-
-				<div>
-					{businessAddressProofUrl ? (
-						<Button
-							size="md"
-							themeType="linkUi"
-							onClick={() => window.open(businessAddressProofUrl, '_blank')}
-						>
-							Business Address Proof
-						</Button>
-					) : (
-						<text>Business Address Proof not present :-</text>
-					) }
-				</div>
-			</>
-		);
-	}
-
-	function Contents() {
-		return (
-			<>
-				<div>
-					{supplierAgreementWithCogoport ? (
-						<Button
-							size="md"
-							themeType="linkUi"
-							onClick={() => window.open(supplierAgreementWithCogoport, '_blank')}
-						>
-							Supplier&apos;s Agreement With Cogoport
-						</Button>
-					) : (
-						<text>Supplier&apos;s Agreement not present :-</text>
-					) }
-				</div>
-				<div>
-					{cogoportAgreementWithSupplier ? (
-						<Button
-							size="md"
-							themeType="linkUi"
-							onClick={() => window.open(cogoportAgreementWithSupplier, '_blank')}
-						>
-							Cogoport Agreement With Supplier
-						</Button>
-					) : (
-						<text>Cogoport&apos;s Agreement not present :-</text>
-					) }
-				</div>
-			</>
-		);
-	}
 
 	return (
 		<div className={styles.container}>
@@ -145,14 +145,29 @@ function PayabledDetails({ organizationId = '', showPayableAmount = '', currency
 
 			<div className={styles.btn_container}>
 				<div>
-					<Popover show={isOpen} content={<Content />} theme="light" interactive>
+					<Popover
+						show={isOpen}
+						content={<Content panUrl={panUrl} businessAddressProofUrl={businessAddressProofUrl} />}
+						theme="light"
+						interactive
+					>
 						<Button onClick={() => setIsOpen(true)} className={styles.btn} themeType="secondary">
 							Agreement
 						</Button>
 					</Popover>
 				</div>
 				<div>
-					<Popover show={isOpen} content={<Contents />} theme="light" interactive>
+					<Popover
+						show={isOpen}
+						content={(
+							<Contents
+								supplierAgreementWithCogoport={supplierAgreementWithCogoport}
+								cogoportAgreementWithSupplier={cogoportAgreementWithSupplier}
+							/>
+						)}
+						theme="light"
+						interactive
+					>
 						<Button onClick={() => setIsOpen(true)} className={styles.btn} themeType="accent">
 							Other Documents
 						</Button>
