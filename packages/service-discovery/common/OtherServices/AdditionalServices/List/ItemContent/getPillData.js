@@ -23,6 +23,16 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		commodity ? COMMODITY_NAME_MAPPING[commodity]?.name : '',
 	];
 
+	const SUBSIDIARY_CONTENT_MAPPING = {
+		fcl_freight       : commonContainerDetails,
+		fcl_freight_local : commonContainerDetails,
+		fcl_customs       : commonContainerDetails,
+		fcl_cfs           : commonContainerDetails,
+		air_freight       : commonPackageDetails,
+		air_freight_local : commonPackageDetails,
+		air_customs       : commonPackageDetails,
+	};
+
 	const MAPPING = {
 		fcl_freight : commonContainerDetails,
 		lcl_freight : [
@@ -57,6 +67,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		fcl_freight_local : commonContainerDetails,
 		air_freight_local : commonPackageDetails,
 		transportation    : [startCase(truck_type)],
+		subsidiary        : SUBSIDIARY_CONTENT_MAPPING[item?.service],
 	};
 
 	return MAPPING[service_type] || [];
