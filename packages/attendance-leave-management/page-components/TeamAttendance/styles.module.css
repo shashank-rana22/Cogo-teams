@@ -24,6 +24,7 @@
 	row-gap: 10px;
 	align-items: center;
 	justify-content: flex-end;
+	margin-bottom: 20px;
 
 	@media (max-width: 768px) {
 		flex-direction: row;
@@ -58,10 +59,6 @@
 		width: 100%;
 		margin: 0;
 	}
-}
-
-.table_container {
-	margin-top: 20px;
 }
 
 .attendance_data {

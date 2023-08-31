@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 // import StyledTable from '../../common/StyledTable';
 
+import EmptyState from '../../common/EmptyState';
 import Loader from '../../common/Loader';
 import useGetCycles from '../../hooks/useGetCycles';
 import useGetTeamAttendance from '../../hooks/useGetTeamAttendance';
@@ -104,20 +105,22 @@ function TeamAttendance() {
 				</div>
 			) : (
 				<>
-					<div className={styles.table_container}>
-						<div className={styles.attendance_data}>
-							<AttendanceData data={data} />
+					{(!loading && isEmpty(data?.dataArr)) ? <EmptyState /> : (
+						<div className={styles.table_container}>
+							<div className={styles.attendance_data}>
+								<AttendanceData data={data} />
+							</div>
+							<div className={styles.attendance_mobile}>
+								<AttendanceMobile
+									data={data}
+									employeeValue={employeeValue}
+									setEmployeeValue={setEmployeeValue}
+									daysAttendance={daysAttendance}
+									setDaysAttendance={setDaysAttendance}
+								/>
+							</div>
 						</div>
-						<div className={styles.attendance_mobile}>
-							<AttendanceMobile
-								data={data}
-								employeeValue={employeeValue}
-								setEmployeeValue={setEmployeeValue}
-								daysAttendance={daysAttendance}
-								setDaysAttendance={setDaysAttendance}
-							/>
-						</div>
-					</div>
+					)}
 					<div className={styles.pagination_container}>
 						<div
 							className={cl`${styles.arrow_container} ${styles.mr_12}`}
