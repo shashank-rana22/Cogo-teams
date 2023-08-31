@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -9,13 +10,6 @@ import OutStandingStatsCommonCard from './OutStandingStatsCommonCard';
 import styles from './styles.module.css';
 
 function OverallOutstandingStats({ item = {}, statsLoading = false }) {
-	if (statsLoading) {
-		return (
-			<div>
-				{/* <OrgLoader /> */}
-			</div>
-		);
-	}
 	const { openInvoiceBucket, onAccountBucket, totalOutstandingBucket, creditNoteBucket } = item || {};
 	const { totalLedAmount, ledCurrency, totalCount } = totalOutstandingBucket || {};
 
@@ -50,23 +44,26 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 						label="Open invoices"
 						item={openInvoiceBucket}
 						amountValue={OverallStatsKeyMapping}
+						statsLoading={statsLoading}
 					/>
 					<OutStandingStatsCommonCard
 						label="On Account Payments"
 						item={onAccountBucket}
 						amountValue={ON_ACCOUNTS_PAYMENTS_STATS}
+						statsLoading={statsLoading}
 					/>
 					<OutStandingStatsCommonCard
 						label="Credit Notes"
 						item={creditNoteBucket}
 						amountValue={ON_ACCOUNTS_PAYMENTS_STATS}
+						statsLoading={statsLoading}
 					/>
 				</div>
 			</div>
 			<div className={styles.outstanding_card}>
 				<div className={styles.total_outstanding_label}>Total Outstanding</div>
 				<div className={styles.amount}>
-					{formatAmount({
+					{statsLoading ? <Placeholder /> : formatAmount({
 						amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
 						currency : ledCurrency,
 						options  : {
@@ -78,9 +75,7 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 					})}
 				</div>
 				<div style={{ fontSize: '12px', color: '#0099FF' }}>
-					(
-					{totalCount}
-					)
+					{statsLoading ? <Placeholder width="60px" style={{ marginTop: 8 }} /> : `(${totalCount})`}
 				</div>
 			</div>
 		</div>

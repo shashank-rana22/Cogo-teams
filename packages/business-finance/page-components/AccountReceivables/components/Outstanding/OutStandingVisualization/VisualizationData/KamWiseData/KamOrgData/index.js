@@ -26,7 +26,11 @@ function KamOrgData({
 		barGraphData          : barData,
 	});
 
-	if (loading) return <Loader />;
+	if (loading) {
+		return (
+			<div className={styles.loader}><Loader themeType="primary" style={{ height: 30, width: 30 }} /></div>
+		);
+	}
 
 	const { list, page, page_limit, total_count } = data || {};
 

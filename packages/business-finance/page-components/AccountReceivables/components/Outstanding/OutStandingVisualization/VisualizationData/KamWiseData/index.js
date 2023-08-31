@@ -38,11 +38,11 @@ function KamWiseData({
 	useEffect(() => {
 		if (list && (list || []).length > DATA_LENGTH) {
 			setkamOwner('all');
-			setFilters({ ...filters, page: 1 });
+			setFilters((prevFilters) => ({ ...prevFilters, page: 1 }));
 		} else {
 			setkamOwner();
 		}
-	}, [filters, list]);
+	}, [list, setFilters]);
 
 	const handleKamId = (val) => {
 		const VALUE = [];
@@ -63,8 +63,8 @@ function KamWiseData({
 	function RenderKamData() {
 		if (loading) {
 			return (
-				<div className={styles.container}>
-					<Loader />
+				<div className={styles.loader}>
+					<Loader themeType="primary" style={{ height: 30, width: 30 }} />
 				</div>
 			);
 		}

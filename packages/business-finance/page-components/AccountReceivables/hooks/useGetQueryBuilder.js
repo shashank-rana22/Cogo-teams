@@ -172,8 +172,15 @@ const useGetQueryBuilder = ({
 
 	useEffect(() => {
 		getResult();
-	}, [queryBuilderForm, filters, outstandingPagination,
-		filterValues, kamOwner, authorizationparameters, selectedBarData, getResult]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [
+		queryBuilderForm,
+		filters,
+		filterValues,
+		kamOwner,
+		authorizationparameters,
+		selectedBarData,
+	]);
 
 	return {
 		getQueryBuilder,

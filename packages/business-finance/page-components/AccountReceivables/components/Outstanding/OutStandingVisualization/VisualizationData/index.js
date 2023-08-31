@@ -65,7 +65,6 @@ function VisualizationData({
 			return (
 				<div className={styles.container}>
 					<Loader themeType="primary" style={{ height: 64, width: 64 }} />
-
 				</div>
 			);
 		}

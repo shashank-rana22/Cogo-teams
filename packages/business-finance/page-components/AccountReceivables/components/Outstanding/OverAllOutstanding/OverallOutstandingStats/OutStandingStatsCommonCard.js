@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 function OutStandingStatsCommonCard({
 	label, item = {},
 	amountValue,
+	statsLoading = false,
 }) {
 	const { totalLedAmount, totalCount, ledCurrency } = item || {};
 
@@ -15,21 +16,20 @@ function OutStandingStatsCommonCard({
 			<div className={styles.left_container}>
 				<div className={styles.heading_styled}>{label}</div>
 				<div className={styles.amount}>
-					{formatAmount({
-						amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
-						currency : ledCurrency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 0,
-							minimumFractionDigits : 0,
-						},
-					})}
+					{statsLoading ? <Placeholder />
+						: formatAmount({
+							amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
+							currency : ledCurrency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 0,
+								minimumFractionDigits : 0,
+							},
+						})}
 				</div>
 				<div style={{ fontSize: '12px', color: '#0099FF' }}>
-					(
-					{totalCount}
-					)
+					{statsLoading ? <Placeholder width="60px" style={{ marginTop: 8 }} /> : `(${totalCount})`}
 				</div>
 			</div>
 			<div className={styles.right_container}>
@@ -41,7 +41,7 @@ function OutStandingStatsCommonCard({
                                 ${val.label === 'ON ACCOUNTS PAYMENTS' ? styles.on_account_amount
 								: styles.overall_stats_amount}`}
 						>
-							{formatAmount({
+							{ statsLoading ? <Placeholder /> : formatAmount({
 								amount   : item[val?.valueKey] || GLOBAL_CONSTANTS.zeroth_index,
 								currency : ledCurrency,
 								options  : {
@@ -53,9 +53,8 @@ function OutStandingStatsCommonCard({
 							})}
 						</div>
 						<div style={{ fontSize: '12px', color: '#0099FF' }}>
-							(
-							{item[val?.countKey]}
-							)
+							{statsLoading
+								? <Placeholder width="60px" style={{ marginTop: 8 }} /> : `(${item[val?.countKey]})`}
 						</div>
 					</div>
 				))}

@@ -27,3 +27,8 @@
 	margin-top: 4px;
 	border-top: 1px solid #e0e0e0;
 }
+
+.loader {
+	display: flex;
+	justify-content: center;
+}

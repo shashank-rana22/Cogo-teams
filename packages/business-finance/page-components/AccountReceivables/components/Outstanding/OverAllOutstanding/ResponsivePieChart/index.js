@@ -20,7 +20,7 @@ function ResponsivePieChart({
 	loading = false,
 }) {
 	const { legendPaddingTop } = graphStyles || {};
-	const [showListView, setShowListView] = useState(false);
+	const [showListView, setShowListView] = useState(true);
 	const [isSortBy, setIsSortBy] = useState('');
 	// const isEmpty = (data || []).every((el) => el.value === 0);
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
@@ -39,7 +39,11 @@ function ResponsivePieChart({
 		// }
 
 		if (loading) {
-			return <Loader themeType="primary" style={{ height: 64, width: 64 }} />;
+			return (
+				<div className={styles.loader}>
+					<Loader themeType="primary" style={{ height: 64, width: 64 }} />
+				</div>
+			);
 		}
 		if (!showListView) {
 			return (

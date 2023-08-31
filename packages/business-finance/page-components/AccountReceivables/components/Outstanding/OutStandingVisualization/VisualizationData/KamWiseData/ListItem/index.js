@@ -140,12 +140,12 @@ function ListItem({
 				<div className={styles.org_list}>
 					<StatsCard item={item} activeBucket={getAgeingBucket} />
 				</div>
-
-				<div className={styles.stats_container}>
+				<div style={{ margin: '10px 0px 0px 16px' }}>
 					<Tabs
 						activeTab={activeTab}
+						themeType="primary"
 						onChange={(val) => handleActiveTabs(val)}
-						className="horizontal two"
+						className={styles.custom_tabs}
 					>
 						{(TABS_OPTIONS || []).map(({ key, name, component: Component }) => (
 							<TabPanel key={key} name={key} title={name}>
