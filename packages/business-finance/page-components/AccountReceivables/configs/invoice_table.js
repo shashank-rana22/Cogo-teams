@@ -1,3 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+
 const invoiceTable = () => ([
 	{
 		Header   : 'Invoice Number',
@@ -26,7 +30,15 @@ const invoiceTable = () => ([
 		id       : 'balance',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.call_duration}
+				{formatAmount({
+					amount   : row?.balance,
+					currency : row?.invoice_currency,
+					options  : {
+						style                 : 'currency',
+						currencyDisplay       : 'code',
+						maximumFractionDigits : 2,
+					},
+				})}
 			</div>
 
 		),
@@ -36,7 +48,15 @@ const invoiceTable = () => ([
 		id       : 'grand_total',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.grand_total}
+				{formatAmount({
+					amount   : row?.grand_total,
+					currency : row?.invoice_currency,
+					options  : {
+						style                 : 'currency',
+						currencyDisplay       : 'code',
+						maximumFractionDigits : 2,
+					},
+				})}
 			</div>
 
 		),
@@ -46,7 +66,11 @@ const invoiceTable = () => ([
 		id       : 'invoice_date',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.invoice_date}
+				{formatDate({
+					date       : row?.invoice_date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+					formatType : 'date',
+				})}
 			</div>
 
 		),
@@ -56,7 +80,11 @@ const invoiceTable = () => ([
 		id       : 'due_date',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.due_date}
+				{formatDate({
+					date       : row?.due_date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+					formatType : 'date',
+				})}
 			</div>
 
 		),
@@ -83,10 +111,10 @@ const invoiceTable = () => ([
 	},
 	{
 		Header   : 'Stakeholder Name',
-		id       : 'stakeholder_id',
+		id       : 'stakeholder_name',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.stakeholder_id}
+				{row?.stakeholder_name}
 			</div>
 
 		),

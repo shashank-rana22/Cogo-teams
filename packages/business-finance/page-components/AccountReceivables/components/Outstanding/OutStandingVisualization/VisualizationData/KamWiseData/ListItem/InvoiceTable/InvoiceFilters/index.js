@@ -19,7 +19,7 @@ function InvoiceFilters({
 				<Select
 					placeholder="Select Status"
 					options={STATUS_OPTIONS}
-					className="primary md"
+					size="sm"
 					value={invoiceStatus}
 					multiple
 					onChange={(e) => {
@@ -39,6 +39,7 @@ function InvoiceFilters({
 							}}
 							size={1}
 							cursor="pointer"
+							style={{ marginRight: '4px' }}
 						/>
 					)}
 					onChange={(e) => {
@@ -48,7 +49,7 @@ function InvoiceFilters({
 					value={searchQuery}
 					placeholder="Search by Invoice Number"
 					type="text"
-					className="primary md"
+					size="sm"
 				/>
 			</div>
 		</div>

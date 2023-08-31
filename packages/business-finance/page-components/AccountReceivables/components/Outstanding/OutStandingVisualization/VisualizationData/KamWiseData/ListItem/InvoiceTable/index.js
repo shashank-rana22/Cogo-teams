@@ -45,7 +45,7 @@ function InvoiceTable({
 				invoiceStatus={invoiceStatus}
 			/>
 			<div>
-				<Table columns={invoiceTable} data={data || []} />
+				<Table columns={invoiceTable()} data={data?.list || []} />
 			</div>
 		</div>
 	);

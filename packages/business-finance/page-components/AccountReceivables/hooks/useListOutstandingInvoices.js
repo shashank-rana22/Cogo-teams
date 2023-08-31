@@ -137,7 +137,13 @@ const useListOutstandingInvoices = ({
 
 	useEffect(() => {
 		fetchOutstandingInvoices();
-	}, [params.page, orderBy, searchQuery, invoiceStatus, fetchOutstandingInvoices, filters]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.page,
+		orderBy,
+		searchQuery,
+		invoiceStatus,
+		// fetchOutstandingInvoices,
+		filters]);
 
 	return {
 		loading,

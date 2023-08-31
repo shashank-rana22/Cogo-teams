@@ -6,18 +6,10 @@
 }
 
 .flex {
-	.core-ui-input-root {
-		width: 230px;
-	}
-
-	svg {
-		margin-top: 4px;
-	}
+	width: 250px;
+	margin: 0 0 10px 10px;
 }
 
 .wrapper {
-	.core-ui-select__control {
-		width: 230px;
-		margin-right: 12px;
-	}
+	width: 150px;
 }
