@@ -48,7 +48,6 @@ function ServiceProviders({
 		bulkUpdateFclFreightAllocation({ payload });
 	};
 
-	console.log('isEmpty(dirtyFields)', isEmpty(dirtyFields));
 	return (
 		<>
 			<div className={styles.container}>
