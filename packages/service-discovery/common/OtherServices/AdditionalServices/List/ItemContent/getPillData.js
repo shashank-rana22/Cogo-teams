@@ -68,6 +68,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		air_freight_local : commonPackageDetails,
 		transportation    : [startCase(truck_type)],
 		subsidiary        : SUBSIDIARY_CONTENT_MAPPING[item?.service],
+		haulage_freight   : commonContainerDetails,
 	};
 
 	return MAPPING[service_type] || [];

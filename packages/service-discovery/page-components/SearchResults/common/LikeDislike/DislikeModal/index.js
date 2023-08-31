@@ -17,7 +17,13 @@ function DislikeModal({
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
-	const { onSubmitFeedback, loading } = useDislikeFeedback({ details, rate, onClose, setLikeState, likeState });
+	const { onSubmitFeedback, loading } = useDislikeFeedback({
+		details,
+		rate,
+		onClose,
+		setLikeState,
+		likeState,
+	});
 
 	const formValues = watch();
 
@@ -51,7 +57,6 @@ function DislikeModal({
 			<Modal.Body>
 				<DislikeFeedbackForm
 					details={details}
-					rate={rate}
 					control={control}
 					errors={errors}
 					formValues={formValues}

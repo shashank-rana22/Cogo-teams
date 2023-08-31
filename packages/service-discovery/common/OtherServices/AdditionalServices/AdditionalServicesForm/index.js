@@ -103,11 +103,13 @@ function AdditionalServicesForm({
 					return (
 						<div key={newControl.name} className={styles.control_style}>
 							<div className={styles.label}>
-								{ newControl.label}
-								{newControl?.rules?.required ? (
+								{newControl.label}
+
+								{newControl?.rules?.required && newControl.label ? (
 									<div className={styles.required_mark}>*</div>
 								) : null}
-								{newControl?.showOptional ? (
+
+								{newControl?.showOptional && newControl.label ? (
 									<div className={styles.optional_text}>(Optional)</div>
 								) : null}
 							</div>
@@ -133,9 +135,7 @@ function AdditionalServicesForm({
 				>
 					Update Details
 				</Button>
-
 			</div>
-
 		</div>
 
 	);
