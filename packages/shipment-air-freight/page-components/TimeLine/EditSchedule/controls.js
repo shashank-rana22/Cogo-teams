@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 import { getCustomDate } from '../utils/getCustomDate';
 
@@ -18,9 +16,8 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			name                  : 'cargo_handed_over_at_origin_at',
 			label                 : 'Cargo Handover At Airport',
 			disable               : disabledState || FLIGHT_STATE_ORIGIN.includes(state),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
-			showTimeSelect        : true,
+			placement             : 'left-end',
 			isPreviousDaysAllowed : true,
 		},
 		{
@@ -29,10 +26,9 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			maxDate               : null,
 			minDate               : handedOverDate,
 			disable               : disabledState || FLIGHT_STATE_DEPART.includes(state),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
-			showTimeSelect        : true,
 			isPreviousDaysAllowed : true,
+			placement             : 'right-end',
 		},
 		{
 			name                  : 'schedule_arrival',
@@ -40,10 +36,9 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			maxDate               : null,
 			minDate               : departureDate,
 			disable               : disabledState,
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
-			showTimeSelect        : true,
 			isPreviousDaysAllowed : true,
+			placement             : 'top',
 		},
 	];
 
