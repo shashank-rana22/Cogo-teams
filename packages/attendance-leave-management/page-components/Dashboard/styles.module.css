@@ -12,24 +12,6 @@
 	}
 }
 
-.modal_container {
-	position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 10;
-
-	/* width: 40%; */
-	height: 100vh;
-	min-height: 50vh;
-	max-height: 100vh;
-	padding: 0 1.6rem 1.6rem;
-	overflow: auto;
-	background: #fff;
-	border-radius: 8px;
-	box-shadow: -2px 2px 25px rgb(0 0 0 / 15%);
-	transition: all 0.3s;
-}
-
 .request_btn {
 	gap: 6px;
 }
@@ -58,15 +40,11 @@
 .title {
 	margin-bottom: 0;
 	font-size: 24px;
-	font-weight: 600;
+	font-weight: 500;
 	color: #221f20;
 }
 
 @media screen and (max-width: 768px) {
-	.modal_container {
-		width: 100%;
-	}
-
 	.parent_div {
 		padding: 16px 0;
 	}

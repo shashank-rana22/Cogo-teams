@@ -86,3 +86,16 @@
 	width: 30px;
 	height: 30px;
 }
+
+.template_button {
+	margin-right: 6px;
+}
+
+.back_icon {
+	display: flex;
+}
+
+.top_left_section {
+	display: flex;
+	align-items: center;
+}

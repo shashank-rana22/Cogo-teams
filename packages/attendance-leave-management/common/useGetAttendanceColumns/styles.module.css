@@ -163,7 +163,7 @@
 .title_text {
 	padding: 0 12px;
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 500;
 	color: #4f4f4f;
 	border-radius: 4px;
 }
@@ -194,7 +194,7 @@
 }
 
 .total_hrs {
-	font-weight: 600;
+	font-weight: 500;
 	color: #221f20;
 }
 

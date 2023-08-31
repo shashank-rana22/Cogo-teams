@@ -16,13 +16,10 @@ function AttendanceStats({ selectMonth = {} }) {
 	const { value, month } = selectMonth;
 
 	const { data, loading } = useGetAttendanceStats(value);
-	// const { leaveData, leaveLoading } = useGetLeaveBalance();
 
 	const { attendance_stats, team_stats = {} } = data || {};
 
 	const { total_days, completed_days } = attendance_stats || {};
-
-	console.log('data AttendanceStats', data);
 
 	const getWidth = (item) => `${(item / total_days) * PERCENTAGE_VALUE}%`;
 
@@ -44,7 +41,6 @@ function AttendanceStats({ selectMonth = {} }) {
 			</div>
 
 			<div className={styles.stats_wrapper}>
-				Insights about your attendance
 				{loading ? <Placeholder height="20px" width="100%" margin="0px 0px 20px 0px" /> : (
 					<div className={styles.flex}>
 						<div className={styles.stats_header}>

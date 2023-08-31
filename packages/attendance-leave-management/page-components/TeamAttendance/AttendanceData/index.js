@@ -20,7 +20,7 @@ function AttendanceData({ data }) {
 				</div>
 				{(attendanceDates || []).map((val) => (
 					<div key={val.day} className={styles.header_attendance_date}>
-						<div className={styles.fw_600}>
+						<div className={styles.fw_500}>
 							{formatDate({
 								date       : val.date,
 								dateFormat : GLOBAL_CONSTANTS.formats.date['MMM dd yyyy'],
@@ -53,7 +53,7 @@ function AttendanceData({ data }) {
 							className={cl`${styles.attendance_date} 
 							${styles[ATTENDANCE_LOGS_STATUS_MAPPING[item.day_status]?.className]}`}
 						>
-							<div style={{ fontWeight: 600 }}>
+							<div style={{ fontWeight: 500 }}>
 								{ ATTENDANCE_LOGS_STATUS_MAPPING[item.day_status]?.label || '--'}
 							</div>
 							<div style={{ fontSize: 10 }}>

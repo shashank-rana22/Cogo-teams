@@ -81,12 +81,12 @@ function ApplyLeave({
 									<div className={styles.pending}>
 										Pending :
 										{' '}
-										{data[`available_${leaveType}s`] || GLOBAL_CONSTANTS.zeroth_index}
+										{data[`pending_${leaveType}s`] || GLOBAL_CONSTANTS.zeroth_index}
 									</div>
 									<div className={styles.available}>
 										Available :
 										{' '}
-										{data[`pending_${leaveType}s`] || GLOBAL_CONSTANTS.zeroth_index}
+										{data[`available_${leaveType}s`] || GLOBAL_CONSTANTS.zeroth_index}
 									</div>
 								</div>
 							)}
