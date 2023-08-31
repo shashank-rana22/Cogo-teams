@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import FeedbackForm from './FeedbackForm';
@@ -13,7 +13,7 @@ const RESIGNATION_COMPONENT_MAPPING = {
 };
 
 function ApplyResignationModal({ showModal = false, setShowModal = () => {} }) {
-	const [currentState, setCurrentState] = useState('resignation_form');
+	const [currentState, setCurrentState] = useState('ticket_generation');
 
 	const RenderComponent = RESIGNATION_COMPONENT_MAPPING[currentState];
 
