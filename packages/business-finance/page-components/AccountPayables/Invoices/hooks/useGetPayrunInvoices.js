@@ -85,7 +85,6 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	console.log(fromUploadBillDate, 'kjk');
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
