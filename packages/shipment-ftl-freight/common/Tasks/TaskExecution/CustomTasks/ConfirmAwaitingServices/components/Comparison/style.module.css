@@ -1,33 +1,32 @@
-.container{
-    display: flex;
-    justify-content: space-evenly;
-    border: 1px solid rgba(249, 125, 1, 0.75);
-    border-radius: 5px;
-
-    padding: 5px;
-    font-weight: 600;
-    margin-bottom: 20px;
+.container {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 5px;
+	margin-bottom: 20px;
+	font-weight: 600;
+	border: 1px solid rgb(249 125 1 / 75%);
+	border-radius: 5px;
 }
 
-.card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.divider{
-    border-left: 1px solid rgba(249, 125, 1, 0.75);
-    height: 55px;
+.divider {
+	height: 55px;
+	border-left: 1px solid rgb(249 125 1 / 75%);
 }
 
-.heading{
-    font-size: 15px;
+.heading {
+	font-size: 15px;
 }
 
-.info{
-    font-size: 22.5px;
+.info {
+	font-size: 22.5px;
 }
 
-.isZero{
-    color: red;
+.isZero {
+	color: red;
 }
