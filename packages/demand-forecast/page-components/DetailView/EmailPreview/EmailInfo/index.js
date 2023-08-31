@@ -1,19 +1,20 @@
+import { useTranslation } from 'next-i18next';
+
 import styles from './styles.module.css';
 
 function EmailInfo() {
+	const { t } = useTranslation(['demandForecast']);
 	return (
 		<div>
 			<div className={styles.title}>
-				Dear Valued Supplier,
+				{t('demandForecast:email_message_head')}
 			</div>
 
 			<div className={styles.body}>
-				We would like to receive quotes from
-				you for the below requirements (Please refer to attachment). Please feel free to reach out to the
-				Supplier Relations Team if you have any doubts or concerns.
+				{t('demandForecast:email_message_body')}
 			</div>
 			<div className={styles.footer}>
-				Thanks & Regards,
+				{t('demandForecast:email_message_footer')}
 			</div>
 		</div>
 	);

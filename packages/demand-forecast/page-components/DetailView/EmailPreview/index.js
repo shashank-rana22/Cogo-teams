@@ -1,5 +1,6 @@
 import { Button, Modal, MultiSelect, Tags, Toggle, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 import EmailPreviewLoading from '../../../common/EmptyState/EmailPreviewLoding';
@@ -17,6 +18,7 @@ function EmailPreview({
 	service_provider = {}, origin_location_id = '',
 	destination_location_id = '',
 }) {
+	const { t } = useTranslation(['demandForecast']);
 	const [emailSelected, setEmailSelected] = useState([]);
 	const [tagsOption, setTagsOption] = useState([]);
 	const [isSinglePortPair, setIsSinglePortPair] = useState(false);
@@ -124,10 +126,8 @@ function EmailPreview({
 										Email Preview
 									</div>
 									<div className={styles.email_info}>
-										(You are about to share
-										information with the supplier, please verify the following details.)
+										{t('demandForecast:email_preview')}
 									</div>
-
 								</div>
 								<div className={styles.divider} />
 
@@ -197,7 +197,7 @@ function EmailPreview({
 				<Modal.Footer>
 					<div className={styles.footer}>
 						<div className={styles.footer_title}>
-							Note : The selected report will be generated and sent automatically
+							{t('demandForecast:email_sent_message')}
 						</div>
 						<div className={styles.footer_buttons}>
 							<Button
