@@ -2,17 +2,17 @@ import { Toast, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
-import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
-import getRenderEmailBody from '../../../../../helpers/getRenderEmailBody';
-import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
-import mailFunction from '../../../../../utils/mailFunctions';
+import getFormatedEmailBody from '../../../helpers/getFormatedEmailBody';
+import getRenderEmailBody from '../../../helpers/getRenderEmailBody';
+import useListEmailTemplates from '../../../hooks/useListEmailTemplates';
+import mailFunction from '../../../utils/mailFunctions';
 
 import ComposeEmailBody from './ComposeEmailBody';
 import EmailTemplateList from './EmailTemplateList';
 import RenderHeader from './Header';
 import styles from './styles.module.css';
 
-function MailModal({
+function MailEditorModal({
 	mailProps = {},
 	userId = '',
 	activeMail = {},
@@ -180,4 +180,4 @@ function MailModal({
 	);
 }
 
-export default MailModal;
+export default MailEditorModal;

@@ -16,13 +16,13 @@ const getTabMappings = ({ unReadChatsCount }) => {
 			show  : geo.others.navigations.cogo_one.has_voice_call_access,
 		},
 		{
-			label : 'Mail',
+			label : 'Outlook',
 			value : 'outlook',
 			show  : true,
 		},
 		{
 			label : 'Mails',
-			value : 'firebase-email',
+			value : 'firebase_email',
 			show  : true,
 		},
 	];

@@ -8,15 +8,17 @@ import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount'
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
-import MailList from './MailList';
+import EmailList from './EmailList';
 import MessageList from './MessageList';
+import OutlookList from './OutlookList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
-	message : MessageList,
-	voice   : VoiceList,
-	outlook : MailList,
+	message        : MessageList,
+	voice          : VoiceList,
+	outlook        : OutlookList,
+	firebase_email : EmailList,
 };
 
 function Customers({

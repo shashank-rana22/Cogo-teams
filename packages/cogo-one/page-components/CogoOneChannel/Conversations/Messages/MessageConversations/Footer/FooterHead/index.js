@@ -2,7 +2,7 @@ import { Input, cl, Button } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import MailRecipientType from '../../../../../../../common/MailRecipientType';
+import MailRecipientType from '../../../../../../../common/CommonMailModules/MailRecipientType';
 import MAIL_RECIEPIENTS_MAPPING from '../../../../../../../helpers/getMailReciepientMapping';
 import mailFunction from '../../../../../../../utils/mailFunctions';
 

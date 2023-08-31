@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import MAIL_FILTERS from '../../../../configurations/mail-filters';
-import getFiltersCount from '../../../../helpers/getFiltersCount';
-import { getFieldController } from '../../../../utils/getFieldController';
+import MAIL_FILTERS from '../../../../../configurations/mail-filters';
+import getFiltersCount from '../../../../../helpers/getFiltersCount';
+import { getFieldController } from '../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 

@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMArrowBack } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
-import CustomFileUploader from '../../../../../../common/CustomFileUploader';
+import CustomFileUploader from '../../../CustomFileUploader';
 
 import styles from './styles.module.css';
 

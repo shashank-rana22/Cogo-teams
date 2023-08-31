@@ -2,14 +2,14 @@ import { Avatar, Tooltip } from '@cogoport/components';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import MailDetails from '../../../../common/MailDetails';
+import MailDetails from '../../../../common/CommonMailModules/MailDetails';
 import getUserNameFromEmail from '../../../../helpers/getUserNameFromEmail';
 
 import MailSideBar from './MailSideBar';
 import styles from './styles.module.css';
 import SwitchMail from './SwitchMail';
 
-function MailList(mailprops) {
+function OutlookList(mailprops) {
 	const {
 		setActiveMail = () => {},
 		activeMail = {},
@@ -81,4 +81,4 @@ function MailList(mailprops) {
 	);
 }
 
-export default MailList;
+export default OutlookList;

@@ -2,9 +2,9 @@ import { cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import MailModal from '../../../../common/CommonMailModules/MailEditorModal';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useReplyMail from '../../../../hooks/useReplyMail';
-import MailModal from '../MailList/MailModal';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import DialCallModal from './DialCallModal';
