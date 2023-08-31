@@ -14,7 +14,7 @@ const DEFAULT_PAGE = 1;
 function Content({ setFilters = () => {}, setVisible, visible,	setPage = () => {} }) {
 	const { t } = useTranslation(['demandForecast']);
 	const formProps = useForm();
-	const { control, handleSubmit } = formProps;
+	const { control, handleSubmit, reset } = formProps;
 	const controls = getControls({ t });
 
 	const applyFilters = (value) => {
@@ -30,6 +30,11 @@ function Content({ setFilters = () => {}, setVisible, visible,	setPage = () => {
 		setFilters(filterKeys);
 		setPage(DEFAULT_PAGE);
 		setVisible(!visible);
+	};
+
+	const removeFilters = () => {
+		setFilters({});
+		reset();
 	};
 
 	return (
@@ -56,6 +61,15 @@ function Content({ setFilters = () => {}, setVisible, visible,	setPage = () => {
 				);
 			})}
 			<div className={styles.apply}>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={removeFilters}
+					className={styles.remove_filter}
+				>
+					Remove Filters
+
+				</Button>
 				<Button size="md" themeType="accent" onClick={handleSubmit(applyFilters)}>Apply Filter</Button>
 			</div>
 		</div>

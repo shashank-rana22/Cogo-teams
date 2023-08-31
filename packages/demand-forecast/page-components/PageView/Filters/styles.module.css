@@ -33,3 +33,7 @@
 .container {
 	width: 250px;
 }
+
+.remove_filter {
+	margin-right: 6px;
+}
