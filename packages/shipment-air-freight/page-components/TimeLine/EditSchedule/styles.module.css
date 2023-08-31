@@ -29,6 +29,14 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+
+	:global {
+		.react-datepicker {
+			position: absolute;
+			bottom: 50px;
+			left: 0;
+		}
+	}
 }
 
 .error_message {

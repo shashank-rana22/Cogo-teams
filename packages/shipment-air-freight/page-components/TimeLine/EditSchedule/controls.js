@@ -20,6 +20,7 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			disable               : disabledState || FLIGHT_STATE_ORIGIN.includes(state),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
+			showTimeSelect        : true,
 			isPreviousDaysAllowed : true,
 		},
 		{
@@ -30,6 +31,7 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			disable               : disabledState || FLIGHT_STATE_DEPART.includes(state),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
+			showTimeSelect        : true,
 			isPreviousDaysAllowed : true,
 		},
 		{
@@ -40,6 +42,7 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			disable               : disabledState,
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
+			showTimeSelect        : true,
 			isPreviousDaysAllowed : true,
 		},
 	];
