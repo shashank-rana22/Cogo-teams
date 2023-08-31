@@ -65,7 +65,7 @@ function LeaveCard({ isManager = false, data = null, activeTab }) {
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => handleLeaveUpdate(undefined)}
+								onClick={() => handleLeaveUpdate(undefined, 'approved')}
 							>
 								Approve All
 							</Button>
