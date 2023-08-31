@@ -18,7 +18,6 @@ import styles from './styles.module.css';
 
 const PLACEHOLDERS = 3;
 const TIMELINEKEY = '4';
-const geo = geoConstants();
 
 function InvoiceInfo({ billNumber = 0, sid = 0, setShowDetailsCard = () => {} }) {
 	return (
@@ -49,6 +48,8 @@ function InvoiceInfo({ billNumber = 0, sid = 0, setShowDetailsCard = () => {} })
 }
 
 function SupplierData({ item = {}, invoiceDetails = {} }) {
+	const geo = geoConstants();
+
 	return (
 		<div className={styles.body_details_card}>
 			<div className={styles.invoice_card_data}>
@@ -139,11 +140,9 @@ function InvoiceData({ item = {} }) {
 				onClick={handleShow}
 				role="presentation"
 			>
-
 				<div>
 					<IcMOverview width={24} height={24} />
 				</div>
-
 			</div>
 			{showDetailsCard && (
 				<>

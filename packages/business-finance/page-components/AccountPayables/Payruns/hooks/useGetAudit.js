@@ -45,14 +45,16 @@ const useGetAudit = () => {
 	}, [debounceQuery, search]);
 
 	const refetch = useCallback((q) => {
-		trigger({
-			params: {
-				payrunId : payrun_id,
-				...rest,
-				query    : q || undefined,
-				pageIndex,
-			},
-		});
+		if (payrun_id) {
+			trigger({
+				params: {
+					payrunId : payrun_id,
+					...rest,
+					query    : q || undefined,
+					pageIndex,
+				},
+			});
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trigger, payrun_id, query, pageIndex, JSON.stringify(rest)]);
 
