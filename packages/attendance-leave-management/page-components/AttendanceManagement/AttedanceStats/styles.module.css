@@ -12,7 +12,7 @@
 }
 
 .stats_wrapper {
-	padding: 24px 8px;
+	padding: 24px 16px;
 	margin: 16px 0;
 	background-color: #fff;
 	border-radius: 16px;
@@ -63,7 +63,6 @@
 .attendance_stats {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 32px;
 	align-items: center;
 
 	@media (max-width: 768px) {
@@ -110,6 +109,8 @@
 .attendance_stats_data {
 	display: flex;
 	align-items: center;
+	margin-right: 32px;
+	margin-bottom: 8px;
 }
 
 .leave_team_stats {

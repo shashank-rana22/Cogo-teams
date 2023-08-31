@@ -66,7 +66,7 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 		Header   : 'APPROVER',
 		accessor : (item) => (
 			<div className={styles.table_data_item}>
-				{startCase(item?.approved_by_id) || '-'}
+				{startCase(item?.approver_name) || '-'}
 			</div>
 		),
 		id: 'approver',
