@@ -41,7 +41,6 @@
 .tile_heading {
 	display: flex;
 	align-items: center;
-	padding: 0 8px;
 	font-size: 14px;
 	font-weight: 450;
 }
@@ -87,7 +86,6 @@
 	align-items: center;
 	justify-content: center;
 	height: 40px;
-	padding: 4px 16px;
 	background-color: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
@@ -113,36 +111,10 @@
 	color: black;
 }
 
-.call {
+.buttons {
 	display: flex;
-	align-items: center;
-	height: 39px;
-	padding-left: 8px;
-	margin-right: 8px;
-	background-color: #fdebe9;
-	border: 1px solid #f37166;
-	border-radius: 6px;
-}
-
-.callpriority {
-	display: flex;
-	align-items: center;
-	height: 39px;
-	padding: 4px;
-	font-size: 10px;
-	font-weight: 500;
-	color: #fff;
-	background-color: #ee3425;
-	border-radius: 0 6px 6px 0;
-}
-
-.calllabel {
-	display: flex;
-	align-items: center;
-	max-width: 180px;
-	padding-right: 4px;
-	overflow: hidden;
-	font-size: 10px;
-	font-weight: 500;
-	text-overflow: ellipsis;
+	justify-content: flex-start;
+	width: 100%;
+	border-bottom: 1px solid #fde74d !important;
+	border-radius: 0;
 }

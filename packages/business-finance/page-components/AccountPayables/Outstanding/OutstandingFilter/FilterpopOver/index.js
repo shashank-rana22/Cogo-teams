@@ -5,7 +5,7 @@ import {
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { companyType } from '../../constants/companyType';
+import { companyTypeOptions } from '../../constants/companyType';
 
 import Content from './Content';
 import styles from './styles.module.css';
@@ -36,7 +36,7 @@ function FilterpopOver({
 						receivables={receivables}
 						onChange={onChange}
 						setReceivables={setReceivables}
-						companyType={companyType}
+						companyType={companyTypeOptions}
 					/>
 				)}
 				className={styles.pop_over_style}

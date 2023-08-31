@@ -1,4 +1,4 @@
-import { Input, Popover } from '@cogoport/components';
+import { Button, Input, Popover } from '@cogoport/components';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
@@ -55,9 +55,10 @@ function Filters({
 						render={(
 							<div className={styles.styled_row}>
 								{SORTBY_OPTION.map((item) => (
-									<div
+									<Button
+										size="lg"
 										key={item.value}
-										className={styles.styled_col}
+										className={styles.buttons}
 										onClick={() => {
 											setOrderBy({
 												key   : item.value,
@@ -72,22 +73,22 @@ function Filters({
 												page: 1,
 											});
 										}}
-										role="presentation"
+										themeType="tertiary"
 									>
 										<div
 											className={styles.tile_heading}
 										>
 											{item.label}
 										</div>
-									</div>
+									</Button>
 								))}
 							</div>
 						)}
 					>
-						<div
-							style={{ display: 'flex', cursor: 'pointer' }}
+						<Button
+							size="lg"
 							onClick={() => setShowSortPopover(!showSortPopover)}
-							role="presentation"
+							themeType="tertiary"
 						>
 							Sort By:
 							{' '}
@@ -102,7 +103,7 @@ function Filters({
 									)}
 								</div>
 							</div>
-						</div>
+						</Button>
 					</Popover>
 				</div>
 				<div
@@ -127,14 +128,14 @@ function Filters({
 					value={search}
 					onChange={(e) => handleChange(e)}
 					suffix={
-								search ? (
-									<IcMCross
-										onClick={handleInputReset}
-										cursor="pointer"
-										className={styles.icon_style}
-									/>
-								) : null
-							}
+						search ? (
+							<IcMCross
+								onClick={handleInputReset}
+								cursor="pointer"
+								className={styles.icon_style}
+							/>
+						) : null
+					}
 					prefix={null}
 					className={styles.styled_input}
 				/>
