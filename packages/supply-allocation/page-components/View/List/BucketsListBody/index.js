@@ -87,15 +87,8 @@ function BucketsListBody({ item = {}, searchId = '', refetchBucketsData = () => 
 				{bucketControls.map(({ component, flexBasis, key }) => (
 					<div
 						key={key}
-						style={{
-							flexBasis,
-							padding        : '20px 5px',
-							display        : 'flex',
-							justifyContent : 'center',
-							alignItems     : 'center',
-							borderBottom   : '1px solid #f9f9f9',
-							background     : ' #fff',
-						}}
+						className={styles.component}
+						style={{ flexBasis }}
 					>
 						{component}
 					</div>
