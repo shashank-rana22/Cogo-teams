@@ -45,6 +45,7 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 		<div>
 			<div className={styles.header}>
 				TODAY,
+				{' '}
 				{formatToday}
 			</div>
 
@@ -86,7 +87,7 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 						</div>
 					</div>
 
-					<div>
+					<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
 						<div style={{ color: '#4F4F4F', paddingBottom: 2 }}>
 							Completed Time
 						</div>
