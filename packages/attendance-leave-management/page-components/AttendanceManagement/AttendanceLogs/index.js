@@ -21,7 +21,6 @@ function AttendanceLogs({ formattedData, selectMonth = {} }) {
 	const { data, loading } = useGetAttendanceLogs(monthlyCycle);
 
 	const handleMonthChange = (item, val) => {
-		console.log('clickl');
 		setSelectedMonth({
 			month : val?.label.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
 			value : item,

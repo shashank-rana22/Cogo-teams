@@ -46,7 +46,7 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 		Header   : 'TOTAL DAYS',
 		accessor : (item) => (
 			<div className={styles.table_data_item}>
-				{startCase(item?.leave_count) || '-'}
+				{item?.leave_count || '-'}
 			</div>
 		),
 		id: 'total_days',

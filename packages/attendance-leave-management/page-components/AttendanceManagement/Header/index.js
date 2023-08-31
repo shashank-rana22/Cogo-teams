@@ -11,8 +11,6 @@ function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
 
 	const { user } = profile || {};
 
-	console.log('profile', profile);
-
 	const handleMonthChange = (id, val) => {
 		setSelectMonth({
 			month : val?.label?.split(' ')[GLOBAL_CONSTANTS.zeroth_index],

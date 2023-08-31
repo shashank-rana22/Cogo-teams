@@ -11,8 +11,6 @@ import styles from './styles.module.css';
 function MobileView({ data, setFilters, loading }) {
 	const { list = [], page, page_limit, total_count } = data || {};
 
-	console.log('listssss', list);
-
 	const onPageChange = (val) => {
 		setFilters((prev) => ({
 			...prev,

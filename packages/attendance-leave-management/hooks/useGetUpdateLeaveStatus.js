@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const DEFAULT_PAGE = 1;
@@ -19,7 +20,7 @@ const useUpdateLeaveStatus = (setFilters) => {
 			setFilters(DEFAULT_PAGE);
 			Toast.success('Status Updated Sucessfully');
 		} catch (error) {
-			console.log('errror', error);
+			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
 	};
 
