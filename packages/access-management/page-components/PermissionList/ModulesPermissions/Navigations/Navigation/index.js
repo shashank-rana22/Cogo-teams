@@ -1,11 +1,10 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAuthRequest } from '@cogoport/request';
-import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useCreateRole from '../../../../../hooks/useCreateRoles';
-import roleDescriptions from '../../../../../utils/descriptions';
+import descriptions from '../../../../../utils/descriptions';
 
 import ChangeStatus from './ChangeStatus';
 import NavContent from './NavContent';
@@ -71,14 +70,11 @@ function Navigation(props) {
 		isNested = false,
 		activeNavs,
 	} = props;
-	const { t } = useTranslation(['accessManagement', 'common']);
 	const [show, setShow] = useState(null);
 	const [showStatus, setShowStatus] = useState(null);
 	const [navigationRefs, setNavigationRefs] = useState({});
 	const [selectedDepartments, setSelectedDepartments] = useState({ scopes: ['allowed'] });
 	const { createRole, loading: creatingNavs } = useCreateRole();
-
-	const descriptions = roleDescriptions(t);
 
 	const navigationApis = getNavOptions(navigation.key);
 	const [{ data = {}, loading: loadingPermissions = false }, trigger] = useAuthRequest({
@@ -151,22 +147,20 @@ function Navigation(props) {
 		}
 	};
 
-	let buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_assign_now');
+	let buttonText = 'Assign Now';
 	let background = 'accent';
 	if (isActive) {
-		buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_un_assign_now');
+		buttonText = 'Un-Assign Now';
 		background = 'secondary';
 	}
 
-	let btnText = creatingNavs
-		? t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait')
-		: t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save');
+	let btnText = creatingNavs ? 'Saving, Please wait...' : 'Save';
 	if (show === FIRST_INDEX) {
-		btnText = t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_next');
+		btnText = 'NEXT';
 	}
 
 	if (roleData?.isImported) {
-		buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_allow_navigation');
+		buttonText = 'Allow Navigation';
 		background = 'primary';
 	}
 
@@ -198,7 +192,7 @@ function Navigation(props) {
 								onClick={() => handleDepartmentToPermissions()}
 								disabled={loading}
 							>
-								{t('accessManagement:roles_and_permission_crm_dashboard_button_edit')}
+								Edit
 							</Button>
 						) : null}
 					</div>
@@ -249,9 +243,7 @@ function Navigation(props) {
 									}
 								}}
 							>
-								{show === FIRST_INDEX || roleData.isImported
-									? t('accessManagement:roles_and_permission_crm_dashboard_btn_text_cancel')
-									: t('accessManagement:roles_and_permission_crm_dashboard_btm_text_back')}
+								{show === FIRST_INDEX || roleData.isImported ? 'Cancel' : 'BACK'}
 							</Button>
 							<Button
 								size="md"

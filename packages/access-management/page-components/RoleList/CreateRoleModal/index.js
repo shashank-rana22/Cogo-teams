@@ -1,5 +1,4 @@
 import { Modal, Button } from '@cogoport/components';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import Heading from '../../../common/Heading';
@@ -16,8 +15,6 @@ function CreateRoleModal({
 	const onChange = () => {
 		onChangeShowCreateRoleModal(false);
 	};
-
-	const { t } = useTranslation(['accessManagement', 'common']);
 
 	const {
 		controls, formProps, onSubmit, createRoleApi,
@@ -38,8 +35,8 @@ function CreateRoleModal({
 			<Modal.Header
 				title={(
 					<Heading
-						title={t('accessManagement:roles_and_permission_create_role_modal_heading')}
-						subTitle={t('accessManagement:roles_and_permission_create_role_modal_sub_heading')}
+						title="Create Role"
+						subTitle="Set role name and role description"
 					/>
 				)}
 			/>
@@ -63,14 +60,14 @@ function CreateRoleModal({
 						themeType="secondary"
 						onClick={onChange}
 					>
-						{t('accessManagement:roles_and_permission_crm_dashboard_btn_text_cancel')}
+						Cancel
 					</Button>
 					<Button
 						size="md"
 						loading={loading}
 						type="submit"
 					>
-						{t('accessManagement:roles_and_permission_crm_dashboard_btm_text_create')}
+						Create
 					</Button>
 				</Modal.Footer>
 			</form>

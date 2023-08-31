@@ -1,136 +1,118 @@
-export const controls = (partnerOptions, t) => [
+export const controls = (partnerOptions) => [
 	{
 		name        : 'name',
-		label       : t('accessManagement:roles_and_permission_create_role_modal_role_name'),
+		label       : 'Role Name',
 		type        : 'text',
-		placeholder : t('accessManagement:roles_and_permission_create_role_modal_role_name_placeholder'),
-		rules       : {
-			required:
-			t('accessManagement:roles_and_permission_create_role_modal_role_name_rules_required'),
-		},
+		placeholder : 'Enter Role Name',
+		rules       : { required: 'Role Name is required' },
 	},
 	{
 		name        : 'short_name',
-		label       : t('accessManagement:roles_and_permission_create_role_modal_role_short_name'),
+		label       : 'Role Short Name',
 		maxLength   : 16,
 		type        : 'text',
-		placeholder : t('accessManagement:roles_and_permission_create_role_modal_role_short_name_placeholder'),
-		rules       : {
-			required:
-			t('accessManagement:roles_and_permission_create_role_modal_role_short_name_rules_required'),
-		},
+		placeholder : 'Enter Role Short Name',
+		rules       : { required: 'Role Short Name is required' },
 	},
 	{
 		...partnerOptions,
 		name        : 'stakeholder_id',
-		label       : t('accessManagement:roles_and_permission_create_role_modal_stakeholder_id_partner'),
+		label       : 'Partner',
 		type        : 'select',
 		isClearable : true,
-		placeholder : t('accessManagement:roles_and_permission_create_role_modal_stakeholder_id_partner_placeholder'),
-		rules       : {
-			required:
-			t('accessManagement:roles_and_permission_create_role_modal_stakeholder_id_partner_rules_required'),
-		},
-		params: { page_limit: 10 },
+		placeholder : 'Choose Partner',
+		rules       : { required: 'Partner is required' },
+		params      : { page_limit: 10 },
 	},
 	{
 		name    : 'role_functions',
-		label   : t('accessManagement:roles_and_permission_create_role_modal_role_function_label'),
+		label   : 'Role Functions',
 		options : [
 			{
-				label : t('accessManagement:roles_and_permission_select_role_functions_select_sales'),
+				label : 'Sales',
 				value : 'sales',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_role_functions_select_supply'),
+				label : 'Supply',
 				value : 'supply',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_role_functions_select_operations'),
+				label : 'Operations',
 				value : 'operations',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_role_functions_select_finance'),
+				label : 'Finance',
 				value : 'finance',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_update_edit_role_role_functions_training'),
+				label : 'Training',
 				value : 'training',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_update_edit_role_role_functions_hr'),
+				label : 'HR',
 				value : 'hr',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_role_functions_select_external'),
+				label : 'External',
 				value : 'external',
 			},
 		],
 		type        : 'multiSelect',
 		isClearable : true,
-		placeholder : t('accessManagement:roles_and_permission_create_role_modal_role_function_label_placeholder'),
-		rules       : {
-			required:
-			t('accessManagement:roles_and_permission_create_role_modal_role_function_rules_required'),
-		},
+		placeholder : 'Choose role functions',
+		rules       : { required: 'Function is required' },
 	},
 	{
 		name        : 'role_sub_functions',
-		label       : t('accessManagement:roles_and_permission_create_role_modal_role_sub_functions'),
+		label       : 'Role Sub Functions',
 		type        : 'multiSelect',
 		isClearable : true,
-		placeholder : t('accessManagement:roles_and_permission_create_role_modal_role_sub_functions_placeholder'),
+		placeholder : 'Choose role sub functions',
 	},
 	{
 		name    : 'hierarchy_level',
-		label   : t('accessManagement:roles_and_permission_create_role_modal_role_hierarchy_level_label'),
+		label   : 'Hierarchy Level',
 		options : [
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_owner'),
+				label : 'Owner',
 				value : 'owner',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_manager'),
+				label : 'Manager',
 				value : 'manager',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_function_head'),
+				label : 'Function Head',
 				value : 'function_head',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_head'),
+				label : 'Head',
 				value : 'head',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_zone_head'),
+				label : 'Zone Head',
 				value : 'zone_head',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_region_head'),
+				label : 'Region Head',
 				value : 'region_head',
 			},
 			{
-				label : t('accessManagement:roles_and_permission_select_hierarchy_level_cluster_head'),
+				label : 'Cluster Head',
 				value : 'cluster_head',
 			},
 		],
 		type        : 'select',
 		caret       : true,
 		isClearable : true,
-		rules       : {
-			required:
-			t('accessManagement:roles_and_permission_create_role_modal_role_hierarchy_level_rules_required'),
-		},
-		placeholder: t('accessManagement:roles_and_permission_create_role_modal_role_hierarchy_level_placeholder'),
+		rules       : { required: 'Hierarchy Level is required' },
+		placeholder : 'Choose Hierarchy Level',
 	},
 	{
 		name        : 'remarks',
-		label       : t('accessManagement:roles_and_permission_create_role_modal_role_remarks_label'),
+		label       : 'Description',
 		type        : 'text',
-		placeholder : t('accessManagement:roles_and_permission_create_role_modal_role_remarks_placeholder'),
-		rules       : {
-			required:
-			t('accessManagement:roles_and_permission_create_role_modal_role_remarks_rules_requried'),
-		},
+		placeholder : 'Enter role description',
+		rules       : { required: 'Description is required' },
 	},
 ];
