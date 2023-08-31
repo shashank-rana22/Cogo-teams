@@ -124,3 +124,10 @@
 		#00000030 0 10px 20px,
 		#0000003b 0 6px 6px;
 }
+
+.generate_button {
+	width: 100px;
+	min-height: 40px;
+	margin-top: 40px;
+	margin-left: 50%;
+}

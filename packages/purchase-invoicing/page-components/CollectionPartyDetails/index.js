@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { useForm } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -15,6 +16,11 @@ import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
 import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
+import AdditionalDetails from '../InvoiceFormLayout/AdditionalDetails';
+import BillingPartyDetails from '../InvoiceFormLayout/BillingPartyDetails';
+import InvoiceCollectionPartyDetails from '../InvoiceFormLayout/CollectionPartyDetails';
+import LineItemDetails from '../InvoiceFormLayout/LineItemDetails';
+import PurchaseInvoiceDates from '../InvoiceFormLayout/PurchaseInvoiceDates';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
@@ -105,6 +111,8 @@ function CollectionPartyDetails({
 	&& shipment_data.shipment_type === 'ftl_freight'
 	&& !shipment_data?.is_job_closed
 	&& filteredServices.length === ONE;
+
+	const { control, watch, setValue } = useForm();
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -297,8 +305,26 @@ function CollectionPartyDetails({
 						}}
 					>
 						<Modal.Header title="Generate Invoice" />
-						<Modal.Body>
-							lorem ipsum waha se hato
+						<Modal.Body style={{ maxHeight: '780px' }}>
+							<>
+								<AdditionalDetails control={control} />
+								<PurchaseInvoiceDates control={control} />
+								<BillingPartyDetails control={control} />
+								<InvoiceCollectionPartyDetails
+									control={control}
+									watch={watch}
+									setValue={setValue}
+									open={open}
+								/>
+								<LineItemDetails control={control} collectionParty={collectionParty} watch={watch} />
+								<Button
+									size="md"
+									className={styles.generate_button}
+									// onClick={handleSubmit(handleClick)}
+								>
+									Generate
+								</Button>
+							</>
 						</Modal.Body>
 					</Modal>
 				) : null}

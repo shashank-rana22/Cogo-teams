@@ -61,6 +61,37 @@ export const renderLineItemFunctions = {
 			) : null}
 		</div>
 	),
+	truck_number: ({ control, index, setCodes, errors }) => (
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+			<AsyncSelectController
+				control={control}
+				name={`line_items.${index}.code`}
+				placeholder="Enter"
+				// asyncKey="search_products_v2" // this will change
+				getModifiedOptions={handleModifiedOptions}
+				initialCall
+				// params={{
+				// 	organization_id         : extradata?.organization_id,
+				// 	organization_billing_id : extradata?.organization_billing_id,
+				// 	entity_id               : extradata?.entity_id,
+				// 	organization_trade_party_detail_id:
+				// 		extradata?.organization_trade_party_detail_id,
+				// 	filters: {
+				// 		service_names: isEmpty(extradata?.serviceNames)
+				// 			? [extradata?.shipment_type] : extradata?.serviceNames,
+				// 		invoicing_type: 'PURCHASE',
+				// 	},
+				// }}
+				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
+				rules={{ required: true }}
+			/>
+			{errors?.line_items?.[index]?.code ? (
+				<div className={styles.errors}>
+					Code is Required
+				</div>
+			) : null}
+		</div>
+	),
 	code: ({ control, index, extradata, setCodes, errors }) => (
 		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController

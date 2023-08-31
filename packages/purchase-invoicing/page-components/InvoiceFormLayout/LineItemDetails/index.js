@@ -10,8 +10,13 @@ import { renderLineItemFunctions } from '../../RenderFunctions/renderLineItemFun
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+const HUNDRED = 100;
+const TWELVE = 12;
+const ZERO = 0;
+
 function LineItemDetails({
-	control,
+	control = {},
 	watch = () => {},
 	serviceProvider = {},
 	collectionParty = {},
@@ -31,12 +36,12 @@ function LineItemDetails({
 		name: 'line_items',
 	});
 
-	const serviceNames = [];
+	const SERVICE_NAMES = [];
 	(serviceProvider?.services || []).map((service) => {
 		if (service?.service_type !== 'subsidiary_service') {
-			serviceNames.push(service?.service_type);
+			SERVICE_NAMES.push(service?.service_type);
 		}
-		return serviceNames;
+		return SERVICE_NAMES;
 	});
 
 	const collectionPartyTaxNumber = watch('collection_party_address');
@@ -63,8 +68,8 @@ function LineItemDetails({
 					{(finalLineItemConfig).map((field) => (
 						<div
 							style={{
-								flex  : (field.span || 1),
-								width : `${((field.span || 1) * (100 / 12))}px`,
+								flex  : (field.span || ONE),
+								width : `${((field.span || ONE) * (HUNDRED / TWELVE))}px`,
 							}}
 							className={styles.fieldstyle}
 							key={field.key || field.label}
@@ -79,18 +84,19 @@ function LineItemDetails({
 							{finalLineItemConfig.map((field) => (
 								<div
 									style={{
-										flex  : (field.span || 1),
-										width : `${((field.span || 1) * (100 / 12))}px`,
+										flex  : (field.span || ONE),
+										width : `${((field.span || ONE) * (HUNDRED / TWELVE))}px`,
 									}}
 									className={styles.value}
 									key={field.key || field.label}
 								>
+									{console.log('hello', renderLineItemFunctions[field?.key])}
 									{renderLineItemFunctions[field?.key]
 										? renderLineItemFunctions[field?.key]({
 											control,
 											index,
 											remove,
-											showDelete       : fields?.length > 1,
+											showDelete       : fields?.length > ONE,
 											calculatedValues : calculatedValues?.newItems,
 											extradata        : {
 												organization_id         : serviceProvider?.service_provider_id,
@@ -98,7 +104,7 @@ function LineItemDetails({
 												entity_id               : billingParty?.id,
 												organization_trade_party_detail_id:
 													collectionParty?.organization_trade_party_detail_id,
-												serviceNames,
+												SERVICE_NAMES,
 												shipment_type: shipment_data?.shipment_type,
 											},
 											errors,
@@ -128,7 +134,7 @@ function LineItemDetails({
 									Total Tax
 								</div>
 								<div className={styles.label}>
-									{getFormattedAmount(calculatedValues?.total_tax_amount || 0, invoiceCurrency)}
+									{getFormattedAmount(calculatedValues?.total_tax_amount || ZERO, invoiceCurrency)}
 								</div>
 							</div>
 							<div className={styles.amount}>
@@ -136,7 +142,7 @@ function LineItemDetails({
 									Total Cost
 								</div>
 								<div className={styles.label}>
-									{getFormattedAmount(calculatedValues?.sub_total_amount || 0, invoiceCurrency)}
+									{getFormattedAmount(calculatedValues?.sub_total_amount || ZERO, invoiceCurrency)}
 								</div>
 							</div>
 						</div>
@@ -145,7 +151,7 @@ function LineItemDetails({
 				<div className={`${styles.total} ${styles.tax}`}>
 					<div>Total Amount After Tax :</div>
 					<span className={styles.keyvalue}>
-						{getFormattedAmount(calculatedValues?.invoice_amount || 0, invoiceCurrency)}
+						{getFormattedAmount(calculatedValues?.invoice_amount || ZERO, invoiceCurrency)}
 					</span>
 				</div>
 			</div>
