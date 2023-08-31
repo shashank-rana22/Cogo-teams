@@ -1,6 +1,7 @@
 import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
@@ -109,6 +110,7 @@ function Filters({ filters = {}, setFilters = () => {},		setPage = () => {} }) {
 			>
 				<IcMFilter />
 				<div className={styles.filter_title}>{t('demandForecast:filters')}</div>
+				{!isEmpty(filters) && <div className={styles.filter_applied} />}
 			</div>
 		</Popover>
 	);
