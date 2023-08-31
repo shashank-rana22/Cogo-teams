@@ -10,7 +10,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function RoleList() {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const {
 		showCreateRoleModal = false,
 		onChangeShowCreateRoleModal = () => {},

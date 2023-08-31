@@ -7,7 +7,7 @@ import { getElementController } from '../../../../../../utils/get-element-contro
 import styles from './styles.module.css';
 
 function Form({ controls = () => [], formProps = {} }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const { control, watch, formState: { errors } } = formProps;
 
 	const type = watch('role_functions') || [];

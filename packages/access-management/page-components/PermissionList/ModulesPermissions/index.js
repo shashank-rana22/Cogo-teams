@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function ModulesPermissions(props) {
 	const { roleData = {} } = props || {};
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const [searchString, setSearchString] = useState('');
 	const [navStatus, setNavStatus] = useState('all');
 

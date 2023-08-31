@@ -17,7 +17,7 @@ function RoleDetails({
 	getRole = () => {},
 	activeNavs = [],
 }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 
 	const {
 		name = '',

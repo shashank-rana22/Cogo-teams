@@ -17,7 +17,7 @@ function CreateRoleModal({
 		onChangeShowCreateRoleModal(false);
 	};
 
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 
 	const {
 		controls, formProps, onSubmit, createRoleApi,

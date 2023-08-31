@@ -11,7 +11,7 @@ import RoleDetails from './RoleDetails';
 import styles from './styles.module.css';
 
 function PermissionList() {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const props = useOnBoardRole();
 	const {
 		loading,

@@ -7,7 +7,7 @@ import { getElementController } from '../../../../utils/get-element-controller';
 import styles from './styles.module.css';
 
 function Edit({ formProps, controls }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const {
 		control, watch, formState: { errors },
 	} = formProps;
