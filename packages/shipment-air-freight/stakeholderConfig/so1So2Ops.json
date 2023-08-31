@@ -12,18 +12,19 @@
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
         "checked_show_my_tasks":true,
-        "is_task_assigned":false
+        "is_task_assigned":true
     },
     "documents":{
         "tab_title":"Documents",
-        "default_wallet":"trade_documents"
+        "default_wallet":"trade_documents",
+        "allow_update":true
     },
     "emails":{
         "tab_title":"Emails"
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "role": "sales"
+        "role": "supply"
     },
     "purchase":{
         "tab_title": "Live Invoices"
@@ -50,6 +51,9 @@
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
         "can_edit":["notifying_party","collection_party"],
-        "can_add_service_provider_poc":true
+        "edit_internal_poc":["service_ops1","service_ops2"],
+        "can_add_service_provider_poc":true,
+        "add_external_import_poc":true,	
+        "add_external_export_poc":true
     }
 }
