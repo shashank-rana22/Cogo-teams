@@ -55,6 +55,8 @@ function ApplyLeave({
 	const isHalfDay = watch('half_day');
 	const leaveType = watch('leave_type');
 
+	console.log('zzzz', `total_pending_${leaveType}s`, leaveType, 'total_pending_sick_leave_approvals');
+
 	const controls = getLeaveControls(isHalfDay);
 
 	const onSubmit = (values) => {
@@ -81,7 +83,7 @@ function ApplyLeave({
 									<div className={styles.pending}>
 										Pending :
 										{' '}
-										{data[`pending_${leaveType}s`] || GLOBAL_CONSTANTS.zeroth_index}
+										{data[`total_pending_${leaveType}_approvals`] || GLOBAL_CONSTANTS.zeroth_index}
 									</div>
 									<div className={styles.available}>
 										Available :
