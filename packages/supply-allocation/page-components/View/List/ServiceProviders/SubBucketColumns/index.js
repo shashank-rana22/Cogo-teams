@@ -30,7 +30,7 @@ const getSubBucketColumns = ({
 	bucket_type,
 	bulkEditMode = false,
 	rollingFclFreightSearchId,
-	refetchBucketsData = () => {},
+	refetchBucketsData = () => { },
 }) => {
 	const subBucketColumns = [
 		{
@@ -91,11 +91,14 @@ const getSubBucketColumns = ({
 			),
 			accessor: ({ avg_deviation_from_best_rate, rolling_shipments }) => (
 				<>
-					<div>
-						{avg_deviation_from_best_rate}
-						{' '}
-						%
-					</div>
+					{avg_deviation_from_best_rate
+						? (
+							<div>
+								{ avg_deviation_from_best_rate }
+								{' '}
+								%
+							</div>
+						) : 'N/A'}
 
 					{rolling_shipments
 						? (
