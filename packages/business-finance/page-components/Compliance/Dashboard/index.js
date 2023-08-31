@@ -1,6 +1,7 @@
 import { Placeholder, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useDashboard from '../hooks/useDashboard';
@@ -25,13 +26,13 @@ function Dashboard() {
 	} = data || {};
 
 	const { filedCount, totalCount, lastFiledDate, dueDate } = gstr1Data || {};
-
+	const { t } = useTranslation(['compliance']);
 	const remainCount = totalCount - filedCount;
 
 	return (
 		<div>
 			<div className={styles.container_return}>
-				<div>Returns Status</div>
+				<div>{t('compliance:return_status')}</div>
 				<div className={styles.return_label} />
 				<div className={styles.card_return}>
 					<div className={styles.gstr1_label}>GSTR-1</div>

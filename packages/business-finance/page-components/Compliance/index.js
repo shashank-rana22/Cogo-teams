@@ -1,19 +1,20 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import Dashboard from './Dashboard';
 import Register from './Register';
 import styles from './styles.module.css';
 
-const TABS = [
+const tabs = (t) => [
 	{
 		key   : 'dashboard',
-		label : 'Dashboard',
+		label : t('compliance:Dashboard'),
 	},
 	{
 		key   : 'register',
-		label : 'Register',
+		label : t('compliance:Register'),
 	},
 ];
 
@@ -23,6 +24,7 @@ const TABS_KEY_COMPONENT_MAPPING = {
 };
 
 function Compliance() {
+	const { t } = useTranslation(['compliance']);
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState(query?.active_tab || 'dashboard');
 
@@ -49,7 +51,7 @@ function Compliance() {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.header_style}>
-					Compliance
+					{t('compliance:dashboard_compliance')}
 				</div>
 			</div>
 			<div className={styles.tabs_container}>
@@ -59,7 +61,7 @@ function Compliance() {
 					fullWidth
 					themeType="primary"
 				>
-					{TABS.map(({ key = '', label = '' }) => (
+					{tabs(t).map(({ key = '', label = '' }) => (
 						<TabPanel
 							name={key}
 							key={key}
