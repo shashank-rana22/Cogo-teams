@@ -6,6 +6,7 @@ import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerms';
 
 import ChangeIncoTermModal from './ChangeIncoTermModal';
+import getAddedServices from './getAddedServices';
 import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
@@ -155,6 +156,7 @@ function AdditionalServices({ // used in search results and checkout
 	const SHIPPER_SIDE_SERVICES = [];
 	const CONSIGNEE_SIDE_SERVICES = [];
 	const MAIN_SERVICES = [];
+	const SUBSIDIARY_SERVICES = getAddedServices(finalServiceDetails);
 
 	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
@@ -183,6 +185,11 @@ function AdditionalServices({ // used in search results and checkout
 			key  : 'buyer_side_services',
 			type : 'buyer',
 			list : CONSIGNEE_SIDE_SERVICES,
+		},
+		subsidiary_services: {
+			key  : 'subsidiary_services',
+			type : 'subsidiary_services',
+			list : SUBSIDIARY_SERVICES,
 		},
 	};
 
