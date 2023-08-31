@@ -5,9 +5,10 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const LABEL_MAPPING = {
-	seller       : 'Seller Responsibilities',
-	buyer        : 'Buyer Responsibilities',
-	main_service : 'Main Service',
+	seller              : 'Seller Responsibilities',
+	buyer               : 'Buyer Responsibilities',
+	main_service        : 'Main Service',
+	subsidiary_services : 'Selected Subsidiary Services',
 };
 
 function ListHeader({ type = '', currency = '', totalPrice = 0 }) {

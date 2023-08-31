@@ -1,44 +1,18 @@
 import { Tooltip, Loader, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { IcMPlus } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
-import DeleteServiceModal from '../../common/DeleteServiceModal';
 import useAddSubsidiaryService from '../hooks/useAddSubsidiaryService';
-import useDeleteSubsidiaryService from '../hooks/useDeleteSubsidiaryService';
 
 import styles from './styles.module.css';
 
 function IconComponent({
 	addServiceLoading = false,
-	selectedServices = [],
-	value = '',
-	setShowDelete = () => {},
 	onClickAdd = () => {},
 	disabled = false,
 }) {
-	const [isHovered, setIsHovered] = useState(false);
-
-	const handleMouseEnter = () => { setIsHovered(true); };
-	const handleMouseLeave = () => { setIsHovered(false); };
-
-	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
-
 	if (addServiceLoading) {
 		return <Loader themeType="primary" />;
-	}
-
-	if (selectedServices.some((item) => item.value === value)) {
-		return (
-			<SelectedIcon
-				className={styles.selected_icon}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
-				height={22}
-				width={22}
-				onClick={() => setShowDelete(true)}
-			/>
-		);
 	}
 
 	return (
@@ -55,8 +29,6 @@ function IconComponent({
 function ServiceItem({
 	itemData = {},
 	data = {},
-	selectedServices = [],
-	popularServices = [],
 	possible_subsidiary_services = [],
 	setPopularServices = () => {},
 	refetch = () => {},
@@ -64,8 +36,6 @@ function ServiceItem({
 	setIsDisabled = () => {},
 	checkout_id = '',
 }) {
-	const [showDelete, setShowDelete] = useState(false);
-
 	const {
 		loading: addServiceLoading,
 		handleAddSubsidiaryService: handleAddService,
@@ -76,37 +46,22 @@ function ServiceItem({
 		checkout_id,
 	});
 
-	const { loading: deleteLoading, handleDeleteService } = useDeleteSubsidiaryService({
-		refetch,
-		data,
-		setShow        : setShowDelete,
-		checkout_id,
-		spot_search_id : data?.spot_search_id,
-	});
-
 	const { label, value } = itemData || {};
-
-	const onClickDelete = async () => {
-		const deleted = await handleDeleteService(value.split('_')[GLOBAL_CONSTANTS.zeroth_index]);
-		if (!deleted) return;
-
-		setPopularServices([...popularServices, { ...itemData }]);
-	};
 
 	const onClickAdd = async () => {
 		setIsDisabled(value);
 
 		const added = await handleAddService(value);
+
 		setIsDisabled('');
 		if (!added) return;
-
 		setPopularServices((prev) => (prev.filter((item) => item.value !== value)));
 	};
 
 	return (
 		<div className={styles.container}>
 			<Tooltip
-				content={<div className={styles.tooltip_content}>{label}</div>}
+				content={<div className={styles.tooltip_content}>{`${label} (${startCase(itemData?.service)})`}</div>}
 				placement="top"
 			>
 				<div className={styles.text}>{label}</div>
@@ -115,22 +70,8 @@ function ServiceItem({
 			<IconComponent
 				onClickAdd={onClickAdd}
 				addServiceLoading={addServiceLoading}
-				selectedServices={selectedServices}
 				disabled={disabled}
-				value={value}
-				setShowDelete={setShowDelete}
 			/>
-
-			{showDelete ? (
-				<DeleteServiceModal
-					loading={deleteLoading}
-					show={showDelete}
-					setShow={setShowDelete}
-					service_name={label}
-					onClick={onClickDelete}
-				/>
-			) : null}
-
 		</div>
 	);
 }
