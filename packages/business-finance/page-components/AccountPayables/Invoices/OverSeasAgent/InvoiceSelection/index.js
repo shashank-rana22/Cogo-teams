@@ -19,7 +19,7 @@ import styles from './styles.module.css';
 const MORE_THAN_ZERO = 0;
 const FIRST_PAGE = 1;
 
-const getFunctions = ({ GetTableBodyCheckbox, setEditedValue, refetch }) => ({
+const getFunctions = ({ GetTableBodyCheckbox = () => {}, setEditedValue = () => {}, refetch = () => {} }) => ({
 	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
 	renderToolTip  : (itemData, field) => (
 		<RenderToolTip
@@ -76,7 +76,6 @@ function InvoiceSelection({
 	setShowSaveAsDraft = () => {},
 }) {
 	const [sort, setSort] = useState({});
-	// const [showMoreFilters, setshowMoreFilters] = useState(false);
 
 	const {
 		config,
@@ -95,7 +94,6 @@ function InvoiceSelection({
 		resetPage,
 		setEditedValue,
 		loading,
-		// payrun_type,
 		goBack,
 		refetch,
 	} = useGetInvoiceSelection({ sort });

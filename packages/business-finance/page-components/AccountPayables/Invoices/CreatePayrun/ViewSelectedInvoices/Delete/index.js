@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import DeleteModal from './DeleteModal';
 import styles from './styles.module.css';
 
-function Delete({ refetch, itemData }) {
+function Delete({ refetch = () => {}, itemData = {} }) {
 	const [show, setShow] = useState(false);
 	return (
 		<div>

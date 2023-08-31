@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function BankDetails({ itemData }) {
+function BankDetails({ itemData = {} }) {
 	const {
 		bankDetail,
 	} = itemData || {};

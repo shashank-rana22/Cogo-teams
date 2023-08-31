@@ -123,7 +123,7 @@ function OverSeasAgent() {
 				</>
 			)}
 
-			{RenderData()}
+			<RenderData />
 
 		</div>
 	);

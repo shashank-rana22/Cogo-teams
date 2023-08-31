@@ -95,7 +95,6 @@ function Documents({
 									<>
 										<div className={styles.radiobtn}>
 											<RadioGroup
-												className="primary lg"
 												options={OPTIONS || [{}]}
 												value={radioSet || ''}
 												onChange={(item) => setRadioSet(item)}

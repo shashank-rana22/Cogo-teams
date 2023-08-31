@@ -8,7 +8,7 @@ import useGetPayrunId from '../../hooks/useGetPayrunId';
 
 import styles from './styles.module.css';
 
-function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
+function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, activeEntity = '' }) {
 	const [categoryValue, setCategoryValue] = useState('normal_payrun');
 	const [toggleValue, setToggleValue] = useState(true);
 	const [serviceType, setServiceType] = useState('');
@@ -17,7 +17,7 @@ function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
 	const { text = '', id = '' } = currencyValue || {};
 
 	const onToggleChange = () => {
-		if (toggleValue === true) {
+		if (toggleValue) {
 			setCategoryValue('overheads');
 		} else {
 			setCategoryValue('normal_payrun');
@@ -46,131 +46,128 @@ function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
 	});
 
 	return (
-		<div>
-			<Modal size="md" show={showPayrunModal} onClose={() => setShowPayrunModal(false)} placement="top">
-				<Modal.Header title="Select Filters" />
-				<Modal.Body>
-					<div className={styles.category}>
-						<div className={styles.header}>
-							Category
-						</div>
-
-						<Toggle
-							onLabel="expense"
-							offLabel="bill"
-							size="sm"
-							value={toggleValue}
-							onChange={(val) => onToggleChange(val)}
-						/>
-					</div>
-
-					<div className="radiogrp">
-						<RadioGroup
-							className="primary lg"
-							options={
-							toggleValue === true ? CATEGORY_OPTIONS : EXPENSE_OPTIONS
-						}
-							value={categoryValue}
-							onChange={(item) => onOptionChange(item)}
-						/>
-
-						{categoryValue === 'overseas_agent' && (
-							<div className={styles.form}>
-								<div className={styles.element}>
-									<div>Select Agent</div>
-
-									<AsyncSelect
-										size="sm"
-										placeholder="Select Agent"
-										valueKey="organizationId"
-										labelKey="organizationName"
-										asyncKey="list_overseas_trade_parties"
-										value={serviceAgent}
-										onChange={(val) => setServiceAgent(val)}
-									/>
-								</div>
-
-								<div className={styles.element}>
-									<div>Select Service</div>
-
-									<Select
-										size="sm"
-										placeholder="Select Service"
-										options={SERVICE_TYPE}
-										value={serviceType}
-										onChange={(val) => setServiceType(val)}
-									/>
-								</div>
-
-							</div>
-						)}
-					</div>
-
+		<Modal size="md" show={showPayrunModal} onClose={() => setShowPayrunModal(false)} placement="top">
+			<Modal.Header title="Select Filters" />
+			<Modal.Body>
+				<div className={styles.category}>
 					<div className={styles.header}>
-						Currency
+						Category
 					</div>
-					<div className={styles.currency}>
-						{(CURRENCY_DATA).map((item) => {
-							const { id: itemId, icon: Icon, text: itemText } = item || {};
-							return (
-								<div
-									key={itemId}
-									className={id === itemId ? styles.selected_currency_values
-										: styles.unselected_currency_values}
-									onClick={() => {
-										setCurrencyValue(item);
-									}}
-									role="presentation"
-								>
-									<div className={styles.icon_show}>
-										<Icon height={35} width={35} />
-									</div>
-									<div className={styles.text_show}>{itemText}</div>
+
+					<Toggle
+						onLabel="expense"
+						offLabel="bill"
+						size="sm"
+						value={toggleValue}
+						onChange={(val) => onToggleChange(val)}
+					/>
+				</div>
+
+				<div className="radiogrp">
+					<RadioGroup
+						options={
+							toggleValue ? CATEGORY_OPTIONS : EXPENSE_OPTIONS
+						}
+						value={categoryValue}
+						onChange={(item) => onOptionChange(item)}
+					/>
+
+					{categoryValue === 'overseas_agent' && (
+						<div className={styles.form}>
+							<div className={styles.element}>
+								<div>Select Agent</div>
+
+								<AsyncSelect
+									size="sm"
+									placeholder="Select Agent"
+									valueKey="organizationId"
+									labelKey="organizationName"
+									asyncKey="list_overseas_trade_parties"
+									value={serviceAgent}
+									onChange={(val) => setServiceAgent(val)}
+								/>
+							</div>
+
+							<div className={styles.element}>
+								<div>Select Service</div>
+
+								<Select
+									size="sm"
+									placeholder="Select Service"
+									options={SERVICE_TYPE}
+									value={serviceType}
+									onChange={(val) => setServiceType(val)}
+								/>
+							</div>
+
+						</div>
+					)}
+				</div>
+
+				<div className={styles.header}>
+					Currency
+				</div>
+				<div className={styles.currency}>
+					{(CURRENCY_DATA).map((item) => {
+						const { id: itemId, icon: Icon, text: itemText } = item || {};
+						return (
+							<div
+								key={itemId}
+								className={id === itemId ? styles.selected_currency_values
+									: styles.unselected_currency_values}
+								onClick={() => {
+									setCurrencyValue(item);
+								}}
+								role="presentation"
+							>
+								<div className={styles.icon_show}>
+									<Icon height={35} width={35} />
 								</div>
-							);
-						})}
-					</div>
-					<div className={styles.entity}>
-						Entity
-					</div>
-					<div>
-						{Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
-							const { name, icon: Icon } = value || {};
-							return (
-								<div key={key}>
-									{key === activeEntity ? (
-										<div className={styles.entity_container}>
-											<Radio name="selected" disabled={false} checked />
-											<div className={styles.text}>
-												{key}
-												-
-												{name}
-											</div>
-											<div className={styles.entity_icon}>
-												<Icon height={20} width={20} />
-											</div>
+								<div className={styles.text_show}>{itemText}</div>
+							</div>
+						);
+					})}
+				</div>
+				<div className={styles.entity}>
+					Entity
+				</div>
+				<div>
+					{Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
+						const { name, icon: Icon } = value || {};
+						return (
+							<div key={key}>
+								{key === activeEntity ? (
+									<div className={styles.entity_container}>
+										<Radio name="selected" disabled={false} checked />
+										<div className={styles.text}>
+											{key}
+											-
+											{name}
 										</div>
-									) : null}
-								</div>
-							);
-						})}
-					</div>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button themeType="secondary" onClick={() => setShowPayrunModal(false)}>Cancel</Button>
-					<div className={styles.button}>
-						<Button
-							onClick={getPayrunId}
-							disabled={loading
+										<div className={styles.entity_icon}>
+											<Icon height={20} width={20} />
+										</div>
+									</div>
+								) : null}
+							</div>
+						);
+					})}
+				</div>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button themeType="secondary" onClick={() => setShowPayrunModal(false)}>Cancel</Button>
+				<div className={styles.button}>
+					<Button
+						onClick={getPayrunId}
+						disabled={loading
 							|| (categoryValue === 'overseas_agent'
 								&& (serviceAgent === '' || serviceType === ''))}
-						>
-							Create
-						</Button>
-					</div>
-				</Modal.Footer>
-			</Modal>
-		</div>
+					>
+						Create
+					</Button>
+				</div>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 export default PayRunModal;

@@ -42,7 +42,7 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) =>
 				performedByName : name,
 			};
 			await trigger({ data: payload });
-			Toast.error('Delete Sucessfully');
+			Toast.error('Deleted Sucessfully');
 			refetch();
 		} catch (err) {
 			toastApiError(err);
@@ -60,7 +60,7 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) =>
 		});
 	};
 
-	const getTableHeaderCheckbox = () => {
+	function GetTableHeaderCheckbox() {
 		const { list: dataList = [] } = apiData || {};
 		const isCheckedLength = dataList.filter((value) => value?.checked).length;
 		const isAllRowsChecked = isCheckedLength === dataList.length;
@@ -70,7 +70,7 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) =>
 				onChange={onChangeTableHeaderCheckbox}
 			/>
 		);
-	};
+	}
 
 	const onChangeTableBodyCheckbox = (itemData) => {
 		const { organizationId = '' } = itemData || {};
@@ -92,7 +92,7 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) =>
 			return prevData;
 		});
 	};
-	const getTableBodyCheckbox = (itemData) => {
+	function GetTableBodyCheckbox(itemData) {
 		const { organizationId = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(
@@ -107,11 +107,11 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) =>
 				/>
 			</div>
 		);
-	};
+	}
 	return ({
-		getTableBodyCheckbox,
+		GetTableBodyCheckbox,
 		onChangeTableBodyCheckbox,
-		getTableHeaderCheckbox,
+		GetTableHeaderCheckbox,
 		onChangeTableHeaderCheckbox,
 		loading,
 		onExclude,

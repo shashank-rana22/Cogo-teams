@@ -9,16 +9,16 @@ import styles from './styles.module.css';
 const INITIAL_VALUE = 0;
 
 function Footer({
-	apiData,
-	viewSelectedInvoices,
-	setViewSelectedInvoices,
-	submitSelectedInvoices,
-	loading,
-	selectedCurrency,
-	setShowHeader,
+	apiData = {},
+	viewSelectedInvoices = false,
+	setViewSelectedInvoices = () => {},
+	submitSelectedInvoices = () => {},
+	loading = false,
+	selectedCurrency = 'INR',
+	setShowHeader = () => {},
 	setActive = () => {},
 	setBLData = () => {},
-	listSelectedInvoice,
+	listSelectedInvoice = {},
 	selectButton = false,
 	createloading = false,
 }) {
@@ -100,7 +100,7 @@ function Footer({
 										<Tooltip
 											animation="scale"
 											placement="top"
-											content={RenderContent()}
+											content={<RenderContent />}
 											maxWidth="none"
 										>
 											<div>

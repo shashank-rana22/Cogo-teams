@@ -1,15 +1,14 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
+import toastApiError from '../../../commons/toastApiError.ts';
+
 const API_ARRAY_VARIABLE_ONE = 1;
 
 const useListTaggedInvoices = () => {
-	// const { query } = useRouter();
-
 	const {
 		query,
 		performedBy,
@@ -90,7 +89,7 @@ const useListTaggedInvoices = () => {
 			callback();
 			Toast.success('Bank Save Successfully');
 		} catch (e) {
-			Toast.error('Please Select bank');
+			toastApiError('Please Select bank');
 		}
 	};
 
@@ -121,7 +120,7 @@ const useListTaggedInvoices = () => {
 			Toast.success('Invoice deleted successfully');
 			generateInvoice();
 		} catch (e) {
-			Toast.error(e?.data?.message);
+			toastApiError(e);
 		}
 	};
 	const deleteTaggedDocuments = async (itemData) => {
@@ -144,7 +143,7 @@ const useListTaggedInvoices = () => {
 			Toast.success(`${itemData.docName} Deleted successfully`);
 			generateInvoice();
 		} catch (e) {
-			Toast.error(e?.data?.message);
+			toastApiError(e);
 		}
 	};
 	useEffect(() => {
@@ -157,7 +156,7 @@ const useListTaggedInvoices = () => {
 			await mergedPdfById[API_ARRAY_VARIABLE_ONE]({ data: {} });
 			generateInvoice();
 		} catch (e) {
-			Toast.error(e?.error?.message || 'Failed to Merge');
+			toastApiError(e);
 		}
 	};
 

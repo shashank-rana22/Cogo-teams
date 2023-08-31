@@ -14,7 +14,7 @@ const viewDocument = (url) => {
 	}
 };
 
-function BankDetails({ itemData, setEditedValue }) {
+function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 	const newItem = itemData;
 	const [bankEdit, setBankEdit] = useState(false);
 	const [rollback, showRollback] = useState(true);

@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
-const getFunctions = ({ getInvoices }) => ({
+const getFunctions = ({ getInvoices = () => {} }) => ({
 	renderToolTip: (itemData, field) => (
 		<RenderToolTip itemData={itemData} field={field} />
 	),
@@ -33,7 +33,7 @@ const getFunctions = ({ getInvoices }) => ({
 	renderDelete      : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),
 });
 
-function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) {
+function ViewSelectedInvoices({ apiData = {}, setApiData = () => {}, setViewSelectedInvoices = () => {} }) {
 	const {
 		selectedInvoiceLoading,
 		filters,

@@ -163,9 +163,9 @@ function InvoiceDetailsTimeLine({ item = {} }) {
 					<div className={styles.invoice_details_container_bg} />
 					<div className={styles.invoice_details_container}>
 						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
-							{InvoiceDetailsComp()}
+							<InvoiceDetailsComp />
 							<div className={styles.body_details}>
-								{SupplierComp()}
+								<SupplierComp />
 								{invoiceDetailsLoading ? (
 									[...Array(PLACEHOLDERS).keys()].map((key) => (
 										<Placeholder

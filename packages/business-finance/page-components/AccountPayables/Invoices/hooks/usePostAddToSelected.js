@@ -108,7 +108,6 @@ const usePostAddToSelected = ({ getPayrunInvoices, apiData }) => {
 		} catch (e) {
 			toastApiError(e);
 		}
-		return null;
 	};
 	return { submitSelectedInvoices, loading };
 };

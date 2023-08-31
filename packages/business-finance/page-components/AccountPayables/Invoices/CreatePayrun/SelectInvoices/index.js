@@ -28,7 +28,7 @@ const HUNDERED_PERCENT = 100;
 
 const TEN_PERCENT = 10;
 
-const getFunctions = ({ GetTableBodyCheckbox, setEditedValue }) => ({
+const getFunctions = ({ GetTableBodyCheckbox = () => {}, setEditedValue = () => {} }) => ({
 	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
 	renderToolTip  : (itemData, field) => (
 		<RenderToolTip itemData={itemData} field={field} />
@@ -61,7 +61,7 @@ const getFunctions = ({ GetTableBodyCheckbox, setEditedValue }) => ({
 	),
 });
 
-function SelectInvoices({ apiData, setApiData }, ref) {
+function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 	const {
 		billsLoading,
 		filters,
@@ -74,7 +74,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		config,
 	} = useGetPayrunInvoices({ apiData, setApiData });
 
-	const setEditedValue = (itemData, value, key, checked = false) => {
+	const setEditedValue = (itemData = {}, value = '', key = '', checked = false) => {
 		setApiData((prevApiData) => {
 			const newValue = { ...prevApiData };
 			const index = newValue?.list?.findIndex(

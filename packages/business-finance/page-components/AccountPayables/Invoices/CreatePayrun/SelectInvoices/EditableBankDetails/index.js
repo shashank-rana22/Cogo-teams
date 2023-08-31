@@ -8,10 +8,10 @@ import useGetBankDetails from '../../../hooks/usGetBankDetails';
 import styles from './styles.module.css';
 
 function BankSelect({
-	itemData,
-	setBankEdit,
-	showRollback,
-	setEditedValue,
+	itemData = {},
+	setBankEdit = () => {},
+	showRollback = () => {},
+	setEditedValue = () => {},
 }) {
 	const newItem = itemData;
 	const [bankObject, setBankObject] = useState({});

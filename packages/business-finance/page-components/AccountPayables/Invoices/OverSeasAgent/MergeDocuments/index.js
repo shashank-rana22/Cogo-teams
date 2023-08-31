@@ -237,7 +237,7 @@ function MergeDocuments({ setActive = () => {} }) {
 								<Placeholder width="80%" height="35px" />
 							</div>
 						) : (
-							GetInvoiceData()
+							<GetInvoiceData />
 						)}
 					</div>
 				</div>
@@ -254,7 +254,7 @@ function MergeDocuments({ setActive = () => {} }) {
 								<Placeholder width="80%" height="35px" />
 							</div>
 						))
-							: GetData()}
+							: <GetData />}
 					</div>
 				</div>
 			</div>

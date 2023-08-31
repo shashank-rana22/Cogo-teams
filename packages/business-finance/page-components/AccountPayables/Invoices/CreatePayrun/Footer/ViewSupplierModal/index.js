@@ -9,7 +9,7 @@ import { CN_CONFIG } from '../../Configurations/viewCnConfig';
 
 import styles from './styles.module.css';
 
-function RenderAccordianData(item) {
+function RenderAccordianData(item = {}) {
 	return (
 		<div className={styles.listdata}>
 			<List itemData={{ list: item?.creditNotes }} config={CN_CONFIG} showPagination={false} />
@@ -17,7 +17,7 @@ function RenderAccordianData(item) {
 	);
 }
 
-const getFunctions = ({ setShowId, showId, getTableBodyCheckbox }) => ({
+const getFunctions = ({ setShowId = () => { }, showId = '', GetTableBodyCheckbox = () => { } }) => ({
 	renderCn: (itemData) => (
 		<Button
 			onClick={() => setShowId(itemData?.organizationId === showId ? null : itemData?.organizationId)}
@@ -26,26 +26,26 @@ const getFunctions = ({ setShowId, showId, getTableBodyCheckbox }) => ({
 			{itemData?.organizationId === showId ? 'View Less' : 'View CN'}
 		</Button>
 	),
-	renderCheckbox: (itemData) => getTableBodyCheckbox(itemData),
+	renderCheckbox: (itemData) => GetTableBodyCheckbox(itemData),
 });
 
 function ViewSupplierModal({
-	suppliers,
-	viewSupplier,
-	showViewSupplier,
-	refetch = () => { },
-	setApiData,
-	setFilters,
+	suppliers = {},
+	viewSupplier = false,
+	showViewSupplier = () => { },
+	refetch = () => {},
+	setApiData = () => {},
+	setFilters = () => {},
 }) {
 	const [showId, setShowId] = useState(null);
 	const {
 		onExclude,
 		loading,
-		getTableHeaderCheckbox,
-		getTableBodyCheckbox,
+		GetTableHeaderCheckbox,
+		GetTableBodyCheckbox,
 	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers });
 
-	const FUNCTIONS = getFunctions({ setShowId, showId, getTableBodyCheckbox });
+	const FUNCTIONS = getFunctions({ setShowId, showId, GetTableBodyCheckbox });
 
 	const { list: dataList = [] } = suppliers || {};
 
@@ -73,7 +73,7 @@ function ViewSupplierModal({
 							itemData={suppliers}
 							config={SUPPLIER_CONFIG}
 							functions={FUNCTIONS}
-							renderHeaderCheckbox={getTableHeaderCheckbox}
+							renderHeaderCheckbox={GetTableHeaderCheckbox}
 							RenderAccordianData={RenderAccordianData}
 							showId={showId}
 							idKey="organizationId"

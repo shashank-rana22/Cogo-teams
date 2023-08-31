@@ -2,8 +2,9 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
+
+import toastApiError from '../../../commons/toastApiError.ts';
 
 const API_ARRAY_VARIABLE_ONE = 1;
 
@@ -95,7 +96,7 @@ const useUploadDocuments = (fileUploader) => {
 			Toast.success(`${key} Deleted successfully`);
 			generateInvoice();
 		} catch (e) {
-			Toast.error(e?.data?.message);
+			toastApiError(e);
 		}
 	};
 

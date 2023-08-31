@@ -26,7 +26,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 		}
 	});
 
-	list.forEach((item) => {
+	(list || []).forEach((item) => {
 		if (showCheckInvoices && item?.payrunBillStatus === 'INITIATED') {
 			ID_DATA.push(item?.id);
 			const Data = Object.keys(showCheckInvoices);
@@ -88,7 +88,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 
 			<div className={styles.accordians}>
 				{
-				list.map((item) => (
+				(list || []).map((item) => (
 					<Accordian
 						key={item.id}
 						itemData={item}

@@ -1,5 +1,5 @@
 .container {
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 }
 
 .edit {
@@ -27,11 +27,11 @@
 }
 
 .error {
-	color: red;
+	color: var(--color-primary-error-red-2);
 
 	:global {
 		.ui_input_container {
-			border: 1px solid red;
+			border: 1px solid var(--color-primary-error-red-2);
 		}
 	}
 }
@@ -55,7 +55,7 @@
 }
 
 .errormessage {
-	color: red;
+	color: var(--color-primary-error-red-2);
 }
 
 .pointer {

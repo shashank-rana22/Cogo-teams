@@ -11,9 +11,9 @@ import styles from './styles.module.css';
 const DEFAULT_CN = 0;
 
 function SavePayRunModal({
-	savePayrunModal,
-	setSavePayrunModal,
-	setViewSelectedInvoice,
+	savePayrunModal = false,
+	setSavePayrunModal = () => {},
+	setViewSelectedInvoice = () => {},
 }) {
 	const { push } = useRouter();
 	const [viewSupplier, showViewSupplier] = useState(null);

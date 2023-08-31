@@ -4,7 +4,6 @@
 
 .display_documents {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 }
 
@@ -49,8 +48,6 @@
 	width: 100%;
 	height: calc(100vh - 220px);
 	overflow: scroll;
-
-	/* background-color: black; */
 }
 
 .empty_data {

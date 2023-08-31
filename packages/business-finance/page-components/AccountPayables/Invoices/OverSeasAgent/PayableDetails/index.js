@@ -7,7 +7,7 @@ import useOverSeasHeader from '../../hooks/useOverSeasHeader';
 
 import styles from './styles.module.css';
 
-function PayabledDetails({ organizationId, showPayableAmount, currency }) {
+function PayabledDetails({ organizationId = '', showPayableAmount = '', currency = 'INR' }) {
 	const { data } = useOverSeasHeader({ organizationId });
 
 	const {
@@ -19,7 +19,7 @@ function PayabledDetails({ organizationId, showPayableAmount, currency }) {
 		supplierAgreementWithCogoport = '',
 		cogoportAgreementWithSupplier = '',
 	} = data || {};
-	const [isOpen, setIsOpen] = useState();
+	const [isOpen, setIsOpen] = useState(false);
 
 	function Content() {
 		return (
@@ -145,14 +145,14 @@ function PayabledDetails({ organizationId, showPayableAmount, currency }) {
 
 			<div className={styles.btn_container}>
 				<div>
-					<Popover show={isOpen} content={Content()} theme="light" interactive>
+					<Popover show={isOpen} content={<Content />} theme="light" interactive>
 						<Button onClick={() => setIsOpen(true)} className={styles.btn} themeType="secondary">
 							Agreement
 						</Button>
 					</Popover>
 				</div>
 				<div>
-					<Popover show={isOpen} content={Contents()} theme="light" interactive>
+					<Popover show={isOpen} content={<Contents />} theme="light" interactive>
 						<Button onClick={() => setIsOpen(true)} className={styles.btn} themeType="accent">
 							Other Documents
 						</Button>

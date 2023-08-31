@@ -232,7 +232,6 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 								handleClick();
 							}}
 							disabled={loadingSaveBank || selectBankShow}
-							className="primary sm"
 						>
 							{saveBankButtonValue}
 						</Button>

@@ -24,7 +24,7 @@ const useGetSelectedInvoices = ({ apiData, setApiData }) => {
 		partner_id,
 	);
 
-	const viewSelectedConfigMapping = {
+	const VIEW_SELECTED_CONFIG_MAPPING = {
 		IN : VIEW_SELECTED_CONFIG,
 		VN : VIEW_SELECTED_CONFIG_VN,
 	};
@@ -81,7 +81,7 @@ const useGetSelectedInvoices = ({ apiData, setApiData }) => {
 		filters,
 		selectedInvoiceLoading,
 		getInvoices,
-		config: viewSelectedConfigMapping[country],
+		config: VIEW_SELECTED_CONFIG_MAPPING[country],
 	});
 };
 

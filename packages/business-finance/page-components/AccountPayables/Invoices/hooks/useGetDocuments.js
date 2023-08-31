@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import toastApiError from '../../../commons/toastApiError.ts';
+
 const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
@@ -35,7 +37,7 @@ const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
 				params: payload,
 			});
 		} catch (error) {
-			Toast.error(error?.error);
+			toastApiError(error);
 		}
 	};
 	const onApproveReject = async (
@@ -74,7 +76,7 @@ const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
 			handleDropdown(id);
 			setIsOpen(null);
 		} catch (error) {
-			Toast.error(error?.error);
+			toastApiError(error);
 		}
 	};
 	return {

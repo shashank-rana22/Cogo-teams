@@ -10,6 +10,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
+import toastApiError from '../../../commons/toastApiError.ts';
 import { SUPPLIER_CONFIG } from '../CreatePayrun/Configurations/supplierConfig';
 import { VIEW_SELECTED_CONFIG } from '../CreatePayrun/Configurations/viewSelectedConfig';
 import { VIEW_SELECTED_CONFIG_VN } from '../CreatePayrun/Configurations/viewSelectedConfigVN';
@@ -23,6 +24,16 @@ const MIN_AMOUNT = 0;
 const ELEMENT_NOT_FOUND = -1;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
+
+const CREATE_OVERSEAS_CONFIG_MAPPING = {
+	IN : CREATE_OVER_SEAS_CONFIG,
+	VN : CREATE_OVER_SEAS_CONFIG_VN,
+};
+
+const VIEW_SELECTED_CONFIG_MAPPING = {
+	IN : VIEW_SELECTED_CONFIG,
+	VN : VIEW_SELECTED_CONFIG_VN,
+};
 
 function changeFormat(time) {
 	return formatDate({
@@ -108,18 +119,8 @@ const useGetInvoiceSelection = ({ sort }) => {
 
 	const configures = SUPPLIER_CONFIG;
 
-	const createOverSeasConfigMapping = {
-		IN : CREATE_OVER_SEAS_CONFIG,
-		VN : CREATE_OVER_SEAS_CONFIG_VN,
-	};
-
-	const viewSelectedConfigMapping = {
-		IN : VIEW_SELECTED_CONFIG,
-		VN : VIEW_SELECTED_CONFIG_VN,
-	};
-
-	const createOverSeasConfig = createOverSeasConfigMapping[country];
-	const viewSelectedConfig = viewSelectedConfigMapping[country];
+	const createOverSeasConfig = CREATE_OVERSEAS_CONFIG_MAPPING[country];
+	const viewSelectedConfig = VIEW_SELECTED_CONFIG_MAPPING[country];
 	const config = viewSelectedInvoice
 		? viewSelectedConfig
 		: createOverSeasConfig;
@@ -202,7 +203,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			Toast.success('Invoice deleted successfully');
 			refetch();
 		} catch (e) {
-			Toast.error(e?.message);
+			toastApiError(e);
 		}
 	};
 	const submitSelectedInvoices = async () => {
@@ -223,7 +224,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 			} = data ?? {};
 
 			if (checked) {
-				if (!bankDetail) { return Toast.error(`Select Bank for Invoice Number ${invoiceNumber}`); }
+				if (!bankDetail) { return toastApiError(`Select Bank for Invoice Number ${invoiceNumber}`); }
 
 				const {
 					bank_account_number = '',
@@ -273,13 +274,13 @@ const useGetInvoiceSelection = ({ sort }) => {
 			});
 
 			if (res?.data?.message) {
-				Toast.error(res.data.message);
+				toastApiError(res.data.message);
 			} else {
 				Toast.success('Invoice added to Payrun Successfully');
 				refetch();
 			}
 		} catch (e) {
-			Toast.error(e?.message);
+			toastApiError(e);
 		}
 		return null;
 	};

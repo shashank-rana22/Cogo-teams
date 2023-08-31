@@ -1,4 +1,4 @@
-import { Input, Tooltip } from '@cogoport/components';
+import { Input, Tooltip, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMInformation, IcMLineundo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
@@ -23,12 +23,12 @@ const getFormattedAmount = ({ amount, currency }) => (
 );
 
 const getErrorMessage = ({
-	lessValueCrossed,
-	maxValueCrossed,
-	value,
-	currency,
-	invoiceAmount,
-	totalTds,
+	lessValueCrossed = false,
+	maxValueCrossed = false,
+	value = '',
+	currency = 'INR',
+	invoiceAmount = '',
+	totalTds = '',
 }) => {
 	if (lessValueCrossed) {
 		return 'TDS cannot be less than 0';
@@ -45,20 +45,20 @@ const getErrorMessage = ({
 };
 
 function Content({
-	isError,
-	lessValueCrossed,
-	maxValueCrossed,
-	value,
-	currency,
-	invoiceAmount,
-	totalTds,
-	tdsDeducted,
+	isError = true,
+	lessValueCrossed = false,
+	maxValueCrossed = false,
+	value = '',
+	currency = 'INR',
+	invoiceAmount = '',
+	totalTds = '',
+	tdsDeducted = '',
 }) {
 	return (
 		<div>
 			<div className={styles.flex}>
 				{!isError && <div className={styles.text}>Actual TDS:</div>}
-				<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>
+				<div className={cl`${styles.message} ${isError ? styles.errormessage : ''}`}>
 					{getErrorMessage({
 						lessValueCrossed,
 						maxValueCrossed,
@@ -72,7 +72,7 @@ function Content({
 			{!isError && (
 				<div className={styles.flex}>
 					<div className={styles.text}>Deducted TDS:</div>
-					<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>
+					<div className={cl`${styles.message} ${isError ? styles.errormessage : ''}`}>
 						{getFormattedAmount({ amount: tdsDeducted, currency })}
 					</div>
 				</div>
@@ -81,9 +81,9 @@ function Content({
 	);
 }
 
-function EditableTdsInput({ itemData, field, setEditedValue }) {
+function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {} }) {
 	const newItem = itemData;
-	const { key, fallBackKey } = field;
+	const { key, fallBackKey } = field || {};
 	const [edit, setEdit] = useState(false);
 	const [value, setValue] = useState(getByKey(newItem, key));
 	const {
@@ -105,7 +105,7 @@ function EditableTdsInput({ itemData, field, setEditedValue }) {
 	};
 
 	return (edit ? (
-		<div className={`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
+		<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 			<Input
 				onChange={(val) => {
 					setEditedValue(newItem, val, key, true);
@@ -132,7 +132,7 @@ function EditableTdsInput({ itemData, field, setEditedValue }) {
 				<IcMInformation
 					height={14}
 					width={14}
-					className={`${styles.icon} ${isError ? styles.error : ''}`}
+					className={cl`${styles.icon} ${isError ? styles.error : ''}`}
 				/>
 			</Tooltip>
 			<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />

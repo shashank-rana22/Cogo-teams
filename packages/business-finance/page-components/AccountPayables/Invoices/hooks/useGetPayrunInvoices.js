@@ -47,7 +47,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		partner_id,
 	);
 
-	const createPayRunConfigMapping = {
+	const CREATE_PAYRUN_CONFIG_MAPPING = {
 		IN : CREATE_PAYRUN_CONFIG,
 		VN : CREATE_PAYRUN_CONFIG_VN,
 	};
@@ -262,7 +262,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		setOrderBy,
 		orderBy,
 		getPayrunInvoices,
-		config       : createPayRunConfigMapping[country],
+		config       : CREATE_PAYRUN_CONFIG_MAPPING[country],
 	};
 };
 
