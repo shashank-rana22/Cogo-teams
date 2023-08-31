@@ -1,7 +1,6 @@
 .filters {
 	display: flex;
 	align-items: center;
-	height: 8%;
 	padding: 12px;
 	cursor: pointer;
 	background-color: #fff;
