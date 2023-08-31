@@ -1,6 +1,6 @@
 import { Input, Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowLeft, IcMSearchdark } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Loader from '../../../common/Loader';
@@ -51,7 +51,7 @@ function LeaveRequest({ setShowInbox, isManager }) {
 					</Tabs>
 				</div>
 				<div className={styles.selection_options}>
-					<Input size="md" prefix={<IcMSearchdark />} placeholder="Search" />
+					<Input size="md" prefix={<IcMSearchlight />} placeholder="Search" />
 				</div>
 			</div>
 			{loading ? <Loader /> : (list || []).map((leaveData) => (
