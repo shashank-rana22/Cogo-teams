@@ -11,8 +11,8 @@ import Loading from './Loading';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-const A_FIRST = -1;
-const B_FIRST = 1;
+const PROMOTION_ONE_FIRST = -1;
+const PROMOTION_TWO__FIRST = 1;
 const BOTH_EQUAL = 0;
 
 function PromocodesModal({
@@ -78,15 +78,15 @@ function PromocodesModal({
 		}
 	}, [list]);
 
-	const reorderedList = eligiblePromotions?.sort((a, b) => {
-		const aIsApplicable = a?.eligibility_checks?.is_applicable;
-		const bIsApplicable = b?.eligibility_checks?.is_applicable;
+	const reorderedList = eligiblePromotions?.sort((promotionOne, promotionTwo) => {
+		const isPromotionOneApplicable = promotionOne?.eligibility_checks?.is_applicable;
+		const isPromotionTwoApplicable = promotionTwo?.eligibility_checks?.is_applicable;
 
-		if (aIsApplicable && !bIsApplicable) {
-			return A_FIRST;
+		if (isPromotionOneApplicable && !isPromotionTwoApplicable) {
+			return PROMOTION_ONE_FIRST;
 		}
-		if (!aIsApplicable && bIsApplicable) {
-			return B_FIRST;
+		if (!isPromotionOneApplicable && isPromotionTwoApplicable) {
+			return PROMOTION_TWO__FIRST;
 		}
 		return BOTH_EQUAL;
 	});
