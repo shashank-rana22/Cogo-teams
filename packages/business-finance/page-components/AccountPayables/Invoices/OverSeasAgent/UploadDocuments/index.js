@@ -25,9 +25,6 @@ function UploadDocuments({ setActive = () => {} }) {
 
 	const otherDocumentsUrlList = otherDocumentsUrl?.split(',');
 
-	// console.log('documents', fileUploader);
-	// console.log('documents', documents);
-
 	const handlefileUpload = async (value, key) => {
 		if (key === 'singleFileUpload') {
 			if (value == null && taxDeclarationFormUrl !== '') {

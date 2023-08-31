@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { Button, Loader, Placeholder, Tooltip } from '@cogoport/components';
+import { Button, Placeholder, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMPdf, IcCFtick } from '@cogoport/icons-react';
@@ -205,12 +205,6 @@ function MergeDocuments({ setActive = () => {} }) {
 	return (
 		<>
 			<div className={styles.container}>
-
-				{loadingMerged && (
-					<div className={styles.loaderWrapperStyles}>
-						<Loader />
-					</div>
-				)}
 
 				<div className={styles.left}>
 					<div className={styles.header}>

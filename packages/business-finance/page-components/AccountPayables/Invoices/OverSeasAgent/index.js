@@ -21,6 +21,8 @@ const STEPS_MAPPING = [
 	{ title: 'Final Confirmation', key: 'final_confirmation' },
 ];
 
+const MIN_AMOUNT = 0;
+
 function OverSeasAgent() {
 	const {
 		query,
@@ -31,7 +33,7 @@ function OverSeasAgent() {
 	const INITIAL_ACTIVE = 'invoice_selection';
 	const [active, setActive] = useState(INITIAL_ACTIVE);
 	const [bLData, setBLData] = useState([{}]);
-	const [showPayableAmount, setShowPayableAmount] = useState();
+	const [showPayableAmount, setShowPayableAmount] = useState(MIN_AMOUNT);
 	const [showSaveAsDraft, setShowSaveAsDraft] = useState(false);
 	const { organizationId = '' } = query || {};
 	const { goBack, resetPage, currency } = useGetInvoiceSelection({});
@@ -102,6 +104,7 @@ function OverSeasAgent() {
 						resetPage();
 					}}
 					disabled={showSaveAsDraft}
+					style={{ width: '100px' }}
 				>
 					Save as Draft
 

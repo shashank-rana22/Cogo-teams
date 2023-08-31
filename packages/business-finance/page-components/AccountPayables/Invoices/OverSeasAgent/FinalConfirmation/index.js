@@ -11,6 +11,8 @@ import useListTaggedInvoices from '../../hooks/useListTaggedInvoice';
 
 import styles from './styles.module.css';
 
+const MAX_LENGTH_MINUS = 1;
+
 function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {} }) {
 	const { push } = useRouter();
 
@@ -80,15 +82,26 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 		return documentsList.map((item) => {
 			if (item.documentUrl !== '') {
 				if (item.docName === 'Other Document') {
-					return item.documentUrl.map((doc) => (
-						<div className={styles.document_sub_card} key={item.docName}>
-							<div className={styles.pdf_container}>
-								<div>
-									<IcMPdf width={30} height={30} />
-								</div>
-								<div>
+					return item.documentUrl.map((doc) => {
+						const parts = doc.split('/');
+						const lastPart = parts[parts.length - MAX_LENGTH_MINUS];
+
+						return (
+							<div className={styles.document_sub_card} key={item.docName}>
+								<div className={styles.pdf_container}>
 									<div>
-										<div className={styles.doc_name_text}>{item.docName}</div>
+										<IcMPdf width={30} height={30} />
+									</div>
+
+									<div className={styles.display_name}>
+										<div className={styles.doc_name_text}>
+											<div>{item.docName}</div>
+											<div className={styles.file_name}>
+												(
+												<span>{lastPart}</span>
+												)
+											</div>
+										</div>
 										<div className={styles.uploaded_by}>
 											uploaded at:
 											{' '}
@@ -96,26 +109,26 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<div className={styles.download_doc}>
-								<Button
-									style={{ marginRight: '20px' }}
-									onClick={() => window.open(doc, '_blank')}
-									themeType="linkUi"
-								>
-									View
-								</Button>
+								<div className={styles.download_doc}>
+									<Button
+										style={{ marginRight: '20px' }}
+										onClick={() => window.open(doc, '_blank')}
+										themeType="linkUi"
+									>
+										View
+									</Button>
 
-								<Button
-									onClick={() => saveAs(doc)}
-									themeType="linkUi"
-								>
-									Download
-								</Button>
+									<Button
+										onClick={() => saveAs(doc)}
+										themeType="linkUi"
+									>
+										Download
+									</Button>
+								</div>
 							</div>
-						</div>
-					));
+						);
+					});
 				}
 				return (
 					<div className={styles.document_sub_card} key={item.docName}>

@@ -75,7 +75,7 @@ export const CREATE_OVER_SEAS_CONFIG = {
 		{
 			label       : 'Tds',
 			key         : 'tdsAmount',
-			func        : 'renderEditableTds',
+			// func        : 'renderEditableTds',
 			editable    : true,
 			currencyKey : 'currency',
 			fallBackKey : 'tdsValue',
@@ -126,7 +126,7 @@ export const CREATE_OVER_SEAS_CONFIG = {
 		{
 			label : 'Action',
 			key   : 'action',
-			span  : 0.4,
+			span  : 0.8,
 			func  : 'renderAction',
 		},
 	],

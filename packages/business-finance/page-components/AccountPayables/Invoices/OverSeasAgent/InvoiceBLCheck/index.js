@@ -1,15 +1,13 @@
 import { Badge, Button } from '@cogoport/components';
-// import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import Accordian from './Accordian';
 import styles from './styles.module.css';
 
 const DEFAULT_MIN_VALUE = 0;
+const MAX_ARRAY_LENGTH_MINUS = 1;
 
 function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
-	// const { query } = useRouter();
-	// const { services } = query;
 	const [isOpen, setIsOpen] = useState(null);
 	const [showCheckInvoices, setShowCheckInvoices] = useState({});
 
@@ -59,7 +57,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 						placement="right"
 						color="yellow"
 						size="md"
-						text={PENDING_DATA.length || DEFAULT_MIN_VALUE}
+						text={PENDING_DATA[PENDING_DATA.length - MAX_ARRAY_LENGTH_MINUS]?.length || DEFAULT_MIN_VALUE}
 					>
 						Pending
 					</Badge>

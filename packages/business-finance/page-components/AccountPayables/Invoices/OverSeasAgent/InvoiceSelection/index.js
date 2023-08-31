@@ -115,11 +115,8 @@ function InvoiceSelection({
 
 	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.invoiceAmount, MORE_THAN_ZERO);
 
-	// const { currency = 'INR' } = globalFilters || {};
-
 	const calc = overAllValue - +totalInvoiceAmount;
 	const totalCalc = calc + +totalCreditInvoiceAmount;
-	// const type = 'Search by Name /Invoices Number /SID';
 
 	useEffect(() => {
 		if (active === 'invoice_selection' && totalCalc > MORE_THAN_ZERO) {
