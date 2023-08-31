@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import functionSubFunctionMapping from '../../../../../../configurations/function-sub-function-mapping';
@@ -7,17 +6,14 @@ import { getElementController } from '../../../../../../utils/get-element-contro
 import styles from './styles.module.css';
 
 function Form({ controls = () => [], formProps = {} }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
 	const { control, watch, formState: { errors } } = formProps;
 
 	const type = watch('role_functions') || [];
 
-	const SUB_ROLE_FUNCTION_OPTIONS_EDIT = [];
-
-	const subFunctionMapping = functionSubFunctionMapping(t);
+	const subRoleFunctionOptions = [];
 
 	type?.forEach((subType) => {
-		SUB_ROLE_FUNCTION_OPTIONS_EDIT.push(...(subFunctionMapping[subType] || []));
+		subRoleFunctionOptions.push(...(functionSubFunctionMapping[subType] || []));
 	});
 
 	return (
@@ -27,13 +23,13 @@ function Form({ controls = () => [], formProps = {} }) {
 				const Element = getElementController(el.type);
 
 				if (el.name === 'role_sub_functions') {
-					el.options = SUB_ROLE_FUNCTION_OPTIONS_EDIT;
+					el.options = subRoleFunctionOptions;
 				}
 
 				if (!Element) return null;
 
 				return (
-					<div className={styles.form_group} key={el.name}>
+					<div className={styles.form_group}>
 						<span>{el.label}</span>
 						<div className={styles.input_group}>
 							<Element

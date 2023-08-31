@@ -2,7 +2,6 @@ import { Select, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import SearchInput from '../../../common/SearchInput';
@@ -17,7 +16,6 @@ function Filters({
 	setSearchString = () => {},
 	stakeHolderType = '',
 }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
 	const partnerOptions = useGetAsyncOptions({
 		...asyncFieldsPartner(),
 		initialCall : false,
@@ -30,7 +28,7 @@ function Filters({
 		},
 	});
 
-	const modifiedControls = controls(filters?.role_functions || [], partnerOptions, t);
+	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);
 
 	const getElements = (type) => {
 		switch (type) {
@@ -49,7 +47,7 @@ function Filters({
 				value={searchString || ''}
 				onChange={(value) => setSearchString(value || '')}
 				size="md"
-				placeholder={t('accessManagement:roles_and_permission_search_search_role')}
+				placeholder="Search Role"
 			/>
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {

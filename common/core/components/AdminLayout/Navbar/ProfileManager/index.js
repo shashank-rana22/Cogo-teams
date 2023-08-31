@@ -3,7 +3,6 @@ import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/i
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
@@ -22,7 +21,7 @@ function ProfileManager({
 	checkIfSessionExpiring,
 }) {
 	const router = useRouter();
-	const { t } = useTranslation(['common']);
+
 	const { general } = useSelector((state) => state);
 	const { scope } = general;
 
@@ -53,30 +52,30 @@ function ProfileManager({
 	const profileComponents = [
 
 		{
-			title : t('common:my_profile'),
+			title : 'My Profile',
 			name  : 'my_profile',
 			fun   : routerFunction,
 			icon  : IcMProfile,
 		},
 		{
-			title : t('common:switch_account'),
+			title : 'Switch Account',
 			name  : 'switch_account',
 			icon  : IcMReactivatedUsers,
 		},
 		{
-			title : t('common:help'),
+			title : 'Help',
 			name  : 'help',
 			href  : 'https://www.cogoport.com/en/contact-us/',
 			icon  : IcMHelp,
 		},
 		{
-			title : t('common:logout'),
+			title : 'Logout',
 			name  : 'logout',
 			fun   : removeProfile,
 			icon  : IcMLogout,
 		},
 		{
-			title : t('common:logout_all_accounts'),
+			title : 'Logout of ALL accounts',
 			name  : 'logout_all_accounts',
 			fun   : logoutOfAllAccounts,
 			icon  : IcMLogout,
@@ -102,7 +101,6 @@ function ProfileManager({
 				notificationPopover={notificationPopover}
 				setNotificationPopover={setNotificationPopover}
 				notificationCount={data?.is_not_seen_count}
-				t={t}
 			/>
 		</ul>
 	);
