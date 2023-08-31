@@ -1,6 +1,7 @@
 import { Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCCheckOut, IcCCheckIn } from '@cogoport/icons-react';
 
 import useGetCurrentTime from '../../../hooks/useGetCurrentTime';
 import useGetUpdateAttendance from '../../../hooks/useGetUpdateAttendance';
@@ -54,10 +55,7 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 			<div className={styles.time_container}>
 				<div className={styles.arrow_time_wrapper}>
 					<div>
-						<img
-							src={GLOBAL_CONSTANTS.image_url.green_arrow}
-							alt="arrow"
-						/>
+						<IcCCheckIn width={25} height={25} />
 					</div>
 
 					<div className={styles.time_wrapper}>
@@ -68,10 +66,7 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 
 				<div className={styles.arrow_time_wrapper}>
 					<div>
-						<img
-							src={GLOBAL_CONSTANTS.image_url.red_arrow}
-							alt="arrow"
-						/>
+						<IcCCheckOut width={25} height={25} />
 					</div>
 
 					<div className={styles.time_wrapper_out}>

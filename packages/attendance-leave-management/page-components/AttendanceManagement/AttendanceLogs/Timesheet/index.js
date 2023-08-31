@@ -1,6 +1,7 @@
 import { Modal, Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCCheckIn, IcCCheckOut } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -10,7 +11,6 @@ import styles from './styles.module.css';
 
 const SKELETON_COUNT = 5;
 const INDEX_VALUE = 1;
-const DEFAULT_INDEX = 0;
 
 function Timesheet({ show, onClose, selectedDate }) {
 	const { loading, data } = useGetAttendanceTimesheet(selectedDate);
@@ -59,17 +59,15 @@ function Timesheet({ show, onClose, selectedDate }) {
 							{ logs?.map((val, index) => (
 								<div className={styles.flex} key={`${total_hrs}_${index + INDEX_VALUE}`}>
 									<div className={styles.icon_container}>
-										<img
-											src={GLOBAL_CONSTANTS.image_url[index === DEFAULT_INDEX
-												? 'green_arrow' : 'red_arrow']}
-											alt="arrow"
-										/>
+										{index === GLOBAL_CONSTANTS.zeroth_index
+											? <IcCCheckIn width={20} height={20} />
+											: <IcCCheckOut width={20} height={20} />}
 									</div>
 									<div className={styles.timesheet_title}>
 										<div className={styles.title_text}>
 											Check
 											{' '}
-											{index === DEFAULT_INDEX ? 'in' : 'out'}
+											{index === GLOBAL_CONSTANTS.zeroth_index ? 'in' : 'out'}
 										</div>
 										<div>
 											{val.in_out_time ? formatDate({
