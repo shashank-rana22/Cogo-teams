@@ -40,7 +40,7 @@ function ApplyLeave({
 			} = selectedData || {};
 
 			setValues({
-				date_of_joining: {
+				date_range: {
 					startDate : new Date(leave_start_date),
 					endDate   : new Date(leave_end_date),
 				},

@@ -1,13 +1,34 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
 const useGetAttendanceLogs = (cycle_id) => {
-	const [{ loading, data }] = useHarbourRequest({
+	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_attendance_logs',
-		params : {
-			cycle_id,
+	}, { manual: true });
+
+	const getAttendanceLogs = useCallback(
+		() => {
+			trigger({
+				params: {
+					cycle_id,
+				},
+			});
 		},
-	}, { manual: false });
+		[cycle_id, trigger],
+	);
+
+	useEffect(() => {
+		if (cycle_id) {
+			try {
+				getAttendanceLogs();
+			} catch (error) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
+		}
+	}, [cycle_id, getAttendanceLogs]);
 
 	return { loading, data };
 };
