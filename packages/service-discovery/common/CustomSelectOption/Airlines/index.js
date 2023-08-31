@@ -6,7 +6,16 @@ import styles from './styles.module.css';
 function Airlines(props) {
 	const { data, option } = props;
 
-	const { business_name = '', logo_url = '', iata_code = '' } = data || option || {};
+	const {
+		business_name = '',
+		logo_url = '',
+		iata_code = '',
+		label,
+	} = data || option || {};
+
+	if (label) {
+		return label;
+	}
 
 	return (
 		<div className={styles.container}>

@@ -1,11 +1,12 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
+import { useEffect } from 'react';
 
 import getControls from '../controls';
 import FeedBackForm from '../FeedBackForm';
 
 import styles from './styles.module.css';
+import useGetPriorityAirlineOptions from './useGetPriorityAirlineOptions';
 import useRequestForRate from './useRequestForRate';
 
 const MARGIN_FIRST_BUTTON = 12;
@@ -18,12 +19,33 @@ function FeedBackModal({
 	onClose = () => {},
 	requestService = {},
 	proceeedWithFeedback = true,
+	rates = [],
 }) {
+	const rates_id = rates.map(
+		(item) => item?.shipping_line_id || item?.airline_id,
+	);
+
+	const rates_excludes_ids = rates_id.filter(
+		(value, index) => rates_id?.indexOf(value) === index,
+	);
+
+	const { priorityAirlineOptions, airlineOptions } = useGetPriorityAirlineOptions();
+
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
-	const controls = getControls(requestService?.service_type || details?.service_type);
+	const controls = getControls({
+		service: requestService?.service_type || details?.service_type,
+		rates_excludes_ids,
+		airlineOptions,
+	});
 
-	const { loading, onSubmitFeedback } = useRequestForRate({
+	const showElements = {
+		temperature : details?.container_type === 'refer',
+		ventilation : details?.container_type === 'refer',
+		humidity    : details?.container_type === 'refer',
+	};
+
+	const { loading = false, onSubmitFeedback = () => {} } = useRequestForRate({
 		onClose,
 		reset,
 		details,
@@ -31,7 +53,10 @@ function FeedBackModal({
 		requestService,
 	});
 
-	const onSubmit = (values) => { onSubmitFeedback(values); };
+	const onSubmit = (values) => {
+		onSubmitFeedback(values);
+	};
+
 	const BUTTON_MAPPING = [
 		{
 			label     : 'Cancel',
@@ -47,6 +72,15 @@ function FeedBackModal({
 		},
 	];
 
+	useEffect(() => {
+		const { origin_airport_id = '', destination_airport_id = '' } = details;
+
+		priorityAirlineOptions({
+			origin_airport_id,
+			destination_airport_id,
+		});
+	}, [details, priorityAirlineOptions]);
+
 	return (
 		<Modal
 			size="md"
@@ -57,11 +91,13 @@ function FeedBackModal({
 			{proceeedWithFeedback ? (
 				<>
 					<Modal.Header title="Rate Market Intelligence" />
+
 					<Modal.Body>
 						<FeedBackForm
 							controls={controls}
 							control={control}
 							errors={errors}
+							showElements={showElements}
 						/>
 					</Modal.Body>
 
@@ -86,6 +122,7 @@ function FeedBackModal({
 			) : (
 				<>
 					<Modal.Header title="Add The Mandatory Additional Services First" />
+
 					<Modal.Body>
 						<div>
 							<li>

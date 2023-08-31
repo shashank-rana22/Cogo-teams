@@ -9,11 +9,20 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 
-function FeedBackForm({ controls = [], control = () => {}, errors = {} }) {
+function FeedBackForm({
+	controls = [],
+	control = () => {},
+	errors = {},
+	showElements = {},
+}) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
 				const { name, label, type, span } = controlItem;
+
+				const show = !(controlItem.name in showElements) || showElements[controlItem.name];
+
+				if (!show) return null;
 
 				const Element = getElementController(type || 'text');
 				if (!Element) return null;
