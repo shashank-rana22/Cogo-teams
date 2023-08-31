@@ -33,6 +33,7 @@ const getSubBucketColumns = ({
 	bulkEditMode = false,
 	rollingFclFreightSearchId,
 	refetchBucketsData = () => { },
+	refetchServiceProvidersData = () => {},
 }) => {
 	const subBucketColumns = [
 		{
@@ -45,6 +46,7 @@ const getSubBucketColumns = ({
 					current_allocated_containers={current_allocated_containers}
 					rollingFclFreightSearchId={rollingFclFreightSearchId}
 					refetchBucketsData={refetchBucketsData}
+					refetchServiceProvidersData={refetchServiceProvidersData}
 				/>
 			),
 		},

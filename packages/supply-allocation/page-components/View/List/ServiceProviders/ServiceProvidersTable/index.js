@@ -12,7 +12,8 @@ function BucketTable({
 	bulkEditMode = false,
 	serviceProvidersData = [],
 	serviceProvidersApiLoading = false,
-	refetchBucketsData = () => {},
+	refetchBucketsData = () => { },
+	refetchServiceProvidersData = () => {},
 }) {
 	const { subBucketColumns } = getSubBucketColumns({
 		control,
@@ -22,6 +23,7 @@ function BucketTable({
 		rollingFclFreightSearchId: id,
 		bulkEditMode,
 		refetchBucketsData,
+		refetchServiceProvidersData,
 	});
 
 	return (
