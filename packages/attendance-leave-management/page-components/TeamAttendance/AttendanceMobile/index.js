@@ -1,4 +1,4 @@
-import { cl, CreatableSelect } from '@cogoport/components';
+import { cl, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useEffect } from 'react';
@@ -8,11 +8,11 @@ import { ATTENDANCE_LOGS_STATUS_MAPPING } from '../../../utils/constants';
 import styles from './styles.module.css';
 
 function AttendanceMobile({
-	data,
-	employeeValue,
-	setEmployeeValue,
-	daysAttendance,
-	setDaysAttendance,
+	data = {},
+	employeeValue = '',
+	setEmployeeValue = () => {},
+	daysAttendance = [],
+	setDaysAttendance = () => {},
 }) {
 	const { attendanceDates = [], dataArr } = data || {};
 	const filteredArray = [...(dataArr || [])]?.filter((item) => item !== null);
@@ -62,7 +62,7 @@ function AttendanceMobile({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>Employee Name</div>
-			<CreatableSelect
+			<Select
 				value={employeeValue}
 				onChange={setEmployeeValue}
 				placeholder="Select employee"
