@@ -29,7 +29,7 @@ const commonLocationProps = {
 	asyncKey : 'list_locations',
 	params   : {
 		filters: {
-			type: ['seaport', 'country', 'continent'],
+			type: ['seaport', 'country', 'continent', 'trade'],
 		},
 		page_limit : 10,
 		sort_by    : 'name',
