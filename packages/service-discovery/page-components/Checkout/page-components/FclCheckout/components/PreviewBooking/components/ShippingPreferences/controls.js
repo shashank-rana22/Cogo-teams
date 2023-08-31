@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import currencies from '../../../../../../helpers/currencies';
 
 const getControls = ({ search_id = '' }) => [
@@ -37,7 +35,6 @@ const getControls = ({ search_id = '' }) => [
 				name        : 'price_currency',
 				type        : 'select',
 				placeholder : 'currency',
-				value       : GLOBAL_CONSTANTS.currency_code.INR,
 				options     : currencies,
 				styles      : { flexBasis: '30%' },
 			},
