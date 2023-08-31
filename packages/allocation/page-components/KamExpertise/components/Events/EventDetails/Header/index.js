@@ -1,29 +1,32 @@
 import { Button, Select } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
-const OPTIONS = [
+const getOptions = ({ t = () => {} }) => [
 	{
-		label : 'Customer Expertise',
+		label : t('allocation:expertise_type_options_customer_expertise'),
 		value : 'customer_expertise',
 	},
 	{
-		label : 'Trade Expertise',
+		label : t('allocation:expertise_type_options_trade_expertise'),
 		value : 'trade_expertise',
 	},
 	{
-		label : 'Commodity Expertise',
+		label : t('allocation:expertise_type_options_commodity_expertise'),
 		value : 'commodity_expertise',
 	},
 	{
-		label : 'Misc Expertise',
+		label : t('allocation:misc_expertise_label'),
 		value : 'miscellaneous',
 	},
 ];
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		setEventListData = () => {},
 		loading = false,
@@ -34,6 +37,8 @@ function Header(props) {
 		setExpertise = () => {},
 	} = props;
 
+	const options = getOptions({ t });
+
 	const onAdd = () => {
 		setEventListData({
 			data        : {},
@@ -43,16 +48,18 @@ function Header(props) {
 
 	return (
 		<div>
-			<div className={styles.all_events}>All Events</div>
+			<div className={styles.all_events}>
+				{t('allocation:all_events_label')}
+			</div>
 
 			<div className={styles.header_container}>
 				<div className={styles.filter_container}>
 					<Select
 						size="sm"
 						isClearable
-						placeholder="Expertise Type"
+						placeholder={t('allocation:expertise_label')}
 						value={expertise}
-						options={OPTIONS}
+						options={options}
 						onChange={(value) => (
 							setExpertise(value)
 						)}
@@ -62,7 +69,7 @@ function Header(props) {
 
 					<SearchInput
 						size="sm"
-						placeholder="Search"
+						placeholder={t('allocation:search_label')}
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
@@ -78,7 +85,7 @@ function Header(props) {
 					disabled={loading}
 					className={styles.add_button}
 				>
-					Add New Event
+					{t('allocation:add_new_event_label')}
 				</Button>
 			</div>
 		</div>

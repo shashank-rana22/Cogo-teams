@@ -18,7 +18,9 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : ['agents_status'],
 	accessible_new_communications : ['new_mail'],
-	group_agents_api_filter       : ['support', 'shipment_specialist'],
+	stats_feedback_count          : [],
+	to_show_agent_activity_graph  : false,
+	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
@@ -39,6 +41,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		customer_org_users          : true,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
+		show_lead_voice_calls       : false,
 	},
 };
 

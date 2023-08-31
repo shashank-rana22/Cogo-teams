@@ -24,7 +24,8 @@ function Header({
 	const user_data = useSelector(({ profile }) => profile || {});
 	const { shipment_data } = useContext(ShipmentDetailContext) || {};
 
-	const showExchangeRate = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const showExchangeRate = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
 	const refetch = () => {
 		bfInvoiceRefetch();

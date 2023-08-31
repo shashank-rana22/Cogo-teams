@@ -1,10 +1,11 @@
 import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import getDistributionControl from '../../../../configurations/get-add-distribution-controls';
-import distributionColumns from '../../../../constants/get-distribution-columns';
+import getDistributionColumns from '../../../../constants/get-distribution-columns';
 import useGetDistributionScoringSettings from '../../../../hooks/useGetDistributionScoringSettings ';
 import EditSetting from '../EditSetting/index';
 
@@ -12,6 +13,8 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function DistributionSetting(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		control, handleSubmit, errors, watch, reset,
 	} = props;
@@ -23,6 +26,8 @@ function DistributionSetting(props) {
 
 	const [editing, setEditing] = useState(false);
 
+	const distributionColumns = getDistributionColumns({ t });
+
 	if (isEmpty(distributionList) && !settingsLoading) {
 		return (
 			<div className={styles.empty_container}>
@@ -30,7 +35,7 @@ function DistributionSetting(props) {
 					height={220}
 					width={380}
 					flexDirection="row"
-					emptyText="Distribution Data not found"
+					emptyText={t('allocation:distribution_setting_empty_state')}
 					textSize={20}
 				/>
 			</div>
@@ -50,8 +55,8 @@ function DistributionSetting(props) {
 				watch={watch}
 				reset={reset}
 				inputStyle="distribution_input"
-				heading="Distribution Settings"
-				tooltipData="Multiplier to calculate warmness of the KAM based on the region they lie in."
+				heading={t('allocation:distribution_setting_heading')}
+				tooltipData={t('allocation:distribution_setting_tooltip_data')}
 			/>
 		);
 	}

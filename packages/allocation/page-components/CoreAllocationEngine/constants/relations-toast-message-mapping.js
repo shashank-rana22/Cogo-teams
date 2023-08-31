@@ -1,8 +1,8 @@
-const TOAST_MESSAGE_MAPPING = {
-	approve     : 'Request Approved',
-	reject      : 'Request Rejected',
-	delete      : 'Deleted',
-	approve_all : 'Requests Approved',
-};
+const getToastMessageMapping = ({ t = () => {} }) => ({
+	approve     : t('allocation:request_approved'),
+	reject      : t('allocation:request_rejected'),
+	delete      : t('allocation:request_deleted'),
+	approve_all : t('allocation:requests_approved'),
+});
 
-export default TOAST_MESSAGE_MAPPING;
+export default getToastMessageMapping;

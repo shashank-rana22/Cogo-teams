@@ -99,7 +99,7 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 			});
 
 			if (typeof data !== 'string') {
-				series?.data?.setAll(data);
+				series?.data?.setAll(data || []);
 			}
 		}
 

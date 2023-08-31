@@ -18,6 +18,8 @@ const MARKETING = {
 		observer : ['closed_session'],
 		all      : ['chat_tags'],
 	},
+	stats_feedback_count          : [],
+	to_show_agent_activity_graph  : false,
 	extra_side_bar_navs_access    : ['spot_search'],
 	get_accesible_assign_buttons  : getSalesAgentButtons,
 	accesible_agent_types_query   : [where('agent_type', 'in', [...COMMON_AGENT_TYPES, 'marketing_event'])],
@@ -46,6 +48,7 @@ const MARKETING = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
+		show_lead_voice_calls       : false,
 	},
 };
 

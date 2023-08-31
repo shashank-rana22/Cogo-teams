@@ -1,11 +1,13 @@
 import { Input, Button } from '@cogoport/components';
 import { IcMAlert } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function NewVersion(props) {
+	const { t } = useTranslation(['allocation']);
 	const { setMode, onCreate, createModalLoading, versionName, setVersionName } = props;
 
 	return (
@@ -14,14 +16,14 @@ function NewVersion(props) {
 
 			<Input
 				size="sm"
-				placeholder="Enter a Version Name"
+				placeholder={t('allocation:version_name_placeholder')}
 				style={{ width: '75%' }}
 				value={versionName}
 				onChange={(value) => { setVersionName(value); }}
 			/>
 
 			<div className={styles.supporting_text}>
-				Creating a new version will overwrite the existing saved draft.
+				{t('allocation:version_name_supporting_text_phrase')}
 			</div>
 
 			<div className={styles.button_container}>
@@ -33,7 +35,7 @@ function NewVersion(props) {
 					}}
 					style={{ marginRight: '16px' }}
 				>
-					Back
+					{t('allocation:back_button')}
 				</Button>
 
 				<Button
@@ -43,7 +45,7 @@ function NewVersion(props) {
 						onCreate();
 					}}
 				>
-					Proceed
+					{t('allocation:proceed_button')}
 				</Button>
 			</div>
 

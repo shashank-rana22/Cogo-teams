@@ -16,6 +16,9 @@ const CP_SUPPORT = {
 		observer : ['closed_session'],
 		all      : ['chat_tags'],
 	},
+	stats_feedback_count: ['no_of_quotation_send', 'no_of_bookings', 'customer_satisfaction_score',
+		'calls_made', 'calls_received', 'chats_assigned'],
+	to_show_agent_activity_graph  : true,
 	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
 	extra_side_bar_navs_access    : ['spot_search'],
 	get_accesible_assign_buttons  : getKamButtons,
@@ -44,6 +47,7 @@ const CP_SUPPORT = {
 		customer_org_users          : false,
 		convert_account_to_cp       : true,
 		show_shipment_reminder      : true,
+		show_lead_voice_calls       : false,
 	},
 };
 
