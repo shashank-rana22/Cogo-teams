@@ -8,7 +8,6 @@
 	:global {
 		.ui_popover_container {
 			max-width: 300px !important;
-			word-break: keep-all;
 			pointer-events: auto;
 			background-color: #fef199;
 			box-shadow: 0 0 9px 0 #f2f3fab2;

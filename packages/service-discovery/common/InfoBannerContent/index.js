@@ -3,14 +3,7 @@ import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 
-function InfoBannerContent({
-	popoverComponentData = {},
-	totalBanners = 1,
-	setInfoBanner = () => {},
-	guideKey = 'guide_completed_for',
-	nextGuide = 'comparision_button',
-	prevGuide = 'edit_button',
-}) {
+function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInfoBanner = () => {} }) {
 	const { user:{ id } } = useSelector(({ profile }) => ({
 		user: profile.user,
 	}));
@@ -23,21 +16,22 @@ function InfoBannerContent({
 		subText = '',
 	} = popoverComponentData;
 
-	const onButtonClick = ({ name, onclickFunction = () => {}, event }) => {
+	const onButtonClick = ({ name }) => {
+		if (name === 'close' && totalBanners === sequence_number) {
+			localStorage.setItem(`guide_completed_for_${id}`, true);
+		}
+
 		if (name === 'close') {
 			setInfoBanner((prev) => ({ ...prev, current: '' }));
-			localStorage.setItem(`${guideKey}_${id}`, true);
 			return;
 		}
 
 		if (name === 'next') {
-			onclickFunction(event);
-			setInfoBanner((prev) => ({ ...prev, current: nextGuide }));
+			setInfoBanner((prev) => ({ ...prev, current: 'comparision_button' }));
 			return;
 		}
 
-		onclickFunction(event);
-		setInfoBanner((prev) => ({ ...prev, current: prevGuide }));
+		setInfoBanner((prev) => ({ ...prev, current: 'edit_button' }));
 	};
 
 	return (
@@ -59,14 +53,10 @@ function InfoBannerContent({
 
 				<div className={styles.button_container}>
 					{buttons.map((item) => {
-						const { label, name, onclickFunction, ...restProps } = item;
+						const { label, name, ...restProps } = item;
 
 						return (
-							<Button
-								key={name}
-								{...restProps}
-								onClick={(event) => onButtonClick({ name, onclickFunction, event })}
-							>
+							<Button key={name} {...restProps} onClick={() => onButtonClick({ name })}>
 								{label}
 							</Button>
 						);
