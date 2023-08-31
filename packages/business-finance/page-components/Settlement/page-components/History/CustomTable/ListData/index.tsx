@@ -37,17 +37,19 @@ function ListData({ list = [], getTableBodyCheckbox, refetch, source = '' }: Pro
 						refetch={refetch}
 						source={source}
 					/>
-					<div className={ribbonstyles.ribbon_render}>
-						<div
-							className={
-								item?.accMode === 'AP'
-									? ribbonstyles.ribbon_red
-									: ribbonstyles.ribbon_orange
-							}
-						>
-							{item?.accMode}
+					{source ? null : (
+						<div className={ribbonstyles.ribbon_render}>
+							<div
+								className={
+									item?.accMode === 'AP'
+										? ribbonstyles.ribbon_red
+										: ribbonstyles.ribbon_orange
+								}
+							>
+								{item?.accMode}
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 			))}
 		</div>

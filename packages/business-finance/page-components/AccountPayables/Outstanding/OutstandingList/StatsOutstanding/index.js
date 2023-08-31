@@ -21,13 +21,13 @@ const getAmount = ({ amount, currency }) => formatAmount({
 
 const invoiceContainer = [
 	{
-		name     : 'OPEN INVOICES',
+		name     : 'Open Invoices',
 		statsKey : StatsKeyMapping,
 		key      : 'totalOpenInvoiceAmount',
 		countKey : 'totalOpenInvoiceCount',
 	},
 	{
-		name     : 'ON ACCOUNT PAYMENTS',
+		name     : 'On Account Payments',
 		statsKey : StatsKeyMappingPayment,
 		key      : 'totalOpenOnAccountAmount',
 		countKey : 'totalOpenOnAccountCount',

@@ -202,49 +202,49 @@ export const IRN_CANCEL_OPTIONS = [
 
 export const StatsKeyMapping = [
 	{
-		label     : 'NOT DUE',
+		label     : 'Not Due',
 		valueKey  : 'invoiceNotDueAmount',
 		countKey  : 'invoiceNotDueCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : 'TODAY',
+		label     : 'Today',
 		valueKey  : 'invoiceTodayAmount',
 		countKey  : 'invoiceTodayCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '0-30 DAYS',
+		label     : '0-30 Days',
 		valueKey  : 'invoiceThirtyAmount',
 		countKey  : 'invoiceThirtyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '30-60 DAYS',
+		label     : '30-60 Days',
 		valueKey  : 'invoiceSixtyAmount',
 		countKey  : 'invoiceSixtyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '61-90 DAYS',
+		label     : '61-90 Days',
 		valueKey  : 'invoiceNinetyAmount',
 		countKey  : 'invoiceNinetyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '91-180 DAYS',
+		label     : '91-180 Days',
 		valueKey  : 'invoiceOneEightyAmount',
 		countKey  : 'invoiceOneEightyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '185-365 DAYS',
+		label     : '185-365 Days',
 		valueKey  : 'invoiceThreeSixtyFiveAmount',
 		countKey  : 'invoiceThreeSixtyFiveCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '365+ DAYS',
+		label     : '365+ Days',
 		valueKey  : 'invoiceThreeSixtyFivePlusAmount',
 		countKey  : 'invoiceThreeSixtyFivePlusCount',
 		textColor : '#cb6464',
@@ -253,94 +253,51 @@ export const StatsKeyMapping = [
 
 export const StatsKeyMappingPayment = [
 	{
-		label     : 'NOT DUE',
+		label     : 'Not Due',
 		valueKey  : 'onAccountNotDueAmount',
 		countKey  : 'onAccountNotDueCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : 'TODAY',
+		label     : 'Today',
 		valueKey  : 'onAccountTodayAmount',
 		countKey  : 'onAccountTodayCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '0-30 DAYS',
+		label     : '0-30 Days',
 		valueKey  : 'onAccountThirtyAmount',
 		countKey  : 'onAccountThirtyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '30-60 DAYS',
+		label     : '30-60 Days',
 		valueKey  : 'onAccountSixtyAmount',
 		countKey  : 'onAccountSixtyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '61-90 DAYS',
+		label     : '61-90 Days',
 		valueKey  : 'onAccountNinetyAmount',
 		countKey  : 'onAccountNinetyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '91-180 DAYS',
+		label     : '91-180 Days',
 		valueKey  : 'onAccountOneEightyAmount',
 		countKey  : 'onAccountOneEightyCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '185-365 DAYS',
+		label     : '185-365 Days',
 		valueKey  : 'onAccountThreeSixtyFiveAmount',
 		countKey  : 'onAccountThreeSixtyFiveCount',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '365+ DAYS',
+		label     : '365+ Days',
 		valueKey  : 'onAccountThreeSixtyFivePlusAmount',
 		countKey  : 'onAccountThreeSixtyFivePlusCount',
-		textColor : '#cb6464',
-	},
-];
-
-export const StatsKeyMappingOutstanding = [
-	{
-		label     : 'NOT DUE',
-		valueKey  : 'notDueOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : 'TODAY',
-		valueKey  : 'todayOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '0-30 DAYS',
-		valueKey  : 'thirtyOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '30-60 DAYS',
-		valueKey  : 'sixtyOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '61-90 DAYS',
-		valueKey  : 'ninetyOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '91-180 DAYS',
-		valueKey  : 'oneEightyOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '185-365 DAYS',
-		valueKey  : 'threeSixtyFiveOutstanding',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '365+ DAYS',
-		valueKey  : 'threeSixtyFivePlusOutstanding',
 		textColor : '#cb6464',
 	},
 ];

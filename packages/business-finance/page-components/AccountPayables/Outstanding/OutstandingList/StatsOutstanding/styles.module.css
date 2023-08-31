@@ -41,7 +41,8 @@
 }
 
 .count {
-	font-size: var(--font-size-md);
+	font-size: 12px;
+	font-weight: 500;
 	color: #09f;
 }
 
@@ -103,7 +104,7 @@
 
 .count_open {
 	margin-left: 4px;
-	font-size: var(--font-size-lg);
+	font-size: 12px;
 	font-weight: 500;
 	color: #09f;
 }
@@ -150,7 +151,7 @@
 }
 
 .positive {
-	color: #00a36c !important;
+	color: #67c676 !important;
 }
 
 .amount {

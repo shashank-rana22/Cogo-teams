@@ -201,13 +201,15 @@ function Details({
 								{startCase(singleitem?.settlementStatus)}
 							</Pill>
 						</div>
-						<div className={styles.ribbon_render}>
-							<div
-								className={singleitem?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
-							>
-								{singleitem?.accMode}
+						{source ? null : (
+							<div className={styles.ribbon_render}>
+								<div
+									className={singleitem?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
+								>
+									{singleitem?.accMode}
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 				))}
 			</div>

@@ -59,66 +59,68 @@ function Outstanding({
 	};
 
 	return (
-		!isEmpty(selectedOrg)
-			? <ViewOrganizationDetails selectedOrg={selectedOrg} setSelectedOrg={setSelectedOrg} />
-			: (
-				<>
-					<div className={styles.topcard}>
-						{entityDataLoading ? <Placeholder height="200px" /> : (
-							<StatsOutstanding
-								item={entityData?.[GLOBAL_CONSTANTS.zeroth_index]}
-								source="topcard"
-							/>
-						)}
-					</div>
-					<OutstandingFilter
-						params={outStandingFilters}
-						setParams={setoutStandingFilters}
-						orderBy={orderBy}
-						setOrderBy={setOrderBy}
-						handleChange={handleChange}
-						formFilters={formFilters}
-						setFormFilters={setFormFilters}
-						clearFilter={clearFilter}
-						handleInputReset={handleInputReset}
-						entityCode={entityCode}
-						refetch={refetch}
-					/>
-					{outstandingLoading ? (
-						<div>
-							{[...Array(LOADER_LEN)].map((key) => (
-								<OrgLoader key={key} />
-							))}
-						</div>
-					) : (
-						<>
-							{list?.map((item) => (
-								<OutstandingList
-									item={item}
-									key={item?.organizationId}
-									showElement={false}
-									setSelectedOrg={setSelectedOrg}
+		<div className={styles.font}>
+			{!isEmpty(selectedOrg)
+				? <ViewOrganizationDetails selectedOrg={selectedOrg} setSelectedOrg={setSelectedOrg} />
+				: (
+					<>
+						<div className={styles.topcard}>
+							{entityDataLoading ? <Placeholder height="200px" /> : (
+								<StatsOutstanding
+									item={entityData?.[GLOBAL_CONSTANTS.zeroth_index]}
+									source="topcard"
 								/>
-							))}
-							{isEmpty(list) ? <div className={styles.empty_state}><EmptyStateDocs /></div> : null}
-							{!isEmpty(list) ? (
-								<div className={styles.pagination_container}>
-									<Pagination
-										type="table"
-										currentPage={page}
-										totalItems={totalRecords}
-										pageSize={pageLimit}
-										onPageChange={(val) => setoutStandingFilters({
-											...outStandingFilters,
-											page: val,
-										})}
+							)}
+						</div>
+						<OutstandingFilter
+							params={outStandingFilters}
+							setParams={setoutStandingFilters}
+							orderBy={orderBy}
+							setOrderBy={setOrderBy}
+							handleChange={handleChange}
+							formFilters={formFilters}
+							setFormFilters={setFormFilters}
+							clearFilter={clearFilter}
+							handleInputReset={handleInputReset}
+							entityCode={entityCode}
+							refetch={refetch}
+						/>
+						{outstandingLoading ? (
+							<div>
+								{[...Array(LOADER_LEN)].map((key) => (
+									<OrgLoader key={key} />
+								))}
+							</div>
+						) : (
+							<>
+								{list?.map((item) => (
+									<OutstandingList
+										item={item}
+										key={item?.organizationId}
+										showElement={false}
+										setSelectedOrg={setSelectedOrg}
 									/>
-								</div>
-							) : null}
-						</>
-					)}
-				</>
-			)
+								))}
+								{isEmpty(list) ? <div className={styles.empty_state}><EmptyStateDocs /></div> : null}
+								{!isEmpty(list) ? (
+									<div className={styles.pagination_container}>
+										<Pagination
+											type="table"
+											currentPage={page}
+											totalItems={totalRecords}
+											pageSize={pageLimit}
+											onPageChange={(val) => setoutStandingFilters({
+												...outStandingFilters,
+												page: val,
+											})}
+										/>
+									</div>
+								) : null}
+							</>
+						)}
+					</>
+				)}
+		</div>
 	);
 }
 
