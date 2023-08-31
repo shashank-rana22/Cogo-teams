@@ -12,11 +12,8 @@ import styles from './styles.module.css';
 function EmployeeList({ selectedLocation }) {
 	const [searchQuery, setSearchQuery] = useState('');
 	const { designation } = EMPLOYEE_LIST_CONTROLS;
-	console.log('selectedLocation', selectedLocation);
-	// const [editItemId, setEditItemId] = useState(null);
-	// const [selectedIds, setSelectedIds] = useState([]);
+
 	const { loading, data, setFilters, filters, debounceQuery, refetch } = useGetEmployeeList(selectedLocation);
-	console.log(data);
 
 	const handleSearch = (val) => {
 		debounceQuery(val);

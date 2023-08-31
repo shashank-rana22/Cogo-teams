@@ -6,8 +6,6 @@ import { getDates } from '../../../../utils/getDates';
 import styles from './styles.module.css';
 
 function LeaveStats({ cycle_id }) {
-	console.log('cycle_id_qqqq', cycle_id);
-
 	const datesArr = getDates();
 	const { data, loading } = useGetLeaveStats(cycle_id);
 	const { leave_dates } = data || [];
