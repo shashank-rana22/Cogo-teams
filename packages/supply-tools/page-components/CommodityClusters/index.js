@@ -1,5 +1,7 @@
+import CommodityForm from './CommodityForm';
+
 function CommodityClusters() {
-	return <div>CommodityClusters</div>;
+	return <CommodityForm />;
 }
 
 export default CommodityClusters;

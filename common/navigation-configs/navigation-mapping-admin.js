@@ -1807,8 +1807,8 @@ const navigationMappingAdmin = {
 			},
 			{
 				title : 'Commodity Cluster',
-				href  : '/supply-tools/commodity-clusters',
-				as    : '/supply-tools/commodity-clusters',
+				href  : '/v2/supply-tools/commodity-clusters',
+				as    : '/v2/supply-tools/commodity-clusters',
 				type  : 'link',
 			},
 			{
