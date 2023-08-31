@@ -6,7 +6,7 @@ import {
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { SORTBY_OPTION } from '../constants';
+import { SORTBY_OPTION } from '../constants/sortByOptions';
 
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
@@ -36,6 +36,15 @@ function Filters({
 	const [showSortPopover, setShowSortPopover] = useState(false);
 
 	const { search = '' } = params || {};
+
+	const onFilters = () => {
+		setOrderBy((prev) => ({
+			key   : prev.key,
+			order : prev.order === 'Asc' ? 'Desc' : 'Asc',
+			label : prev.label,
+		}));
+		setParams({ ...params, page: 1 });
+	};
 
 	return (
 		<div className={styles.filter_container}>
@@ -99,14 +108,7 @@ function Filters({
 				<div
 					role="presentation"
 					className={styles.icon_div}
-					onClick={() => {
-						setOrderBy((prev) => ({
-							key   : prev.key,
-							order : prev.order === 'Asc' ? 'Desc' : 'Asc',
-							label : prev.label,
-						}));
-						setParams({ ...params, page: 1 });
-					}}
+					onClick={onFilters}
 				>
 					<IcMArrowRotateUp style={{ color: COLOR_MAP[orderBy?.order] }} />
 					<IcMArrowRotateDown style={{ color: COLOR_MAP_UP[orderBy?.order] }} />

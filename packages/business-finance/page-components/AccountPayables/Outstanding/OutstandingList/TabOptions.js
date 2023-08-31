@@ -3,7 +3,7 @@ import Invoices from '../ViewOrganizationDetails/Invoices';
 
 import OrganizationUsers from './OrganizationUsers';
 
-const TabsOptions = [
+const TAB_OPTIONS = [
 	{
 		key       : 'invoice_details',
 		name      : 'Invoice Details',
@@ -21,4 +21,4 @@ const TabsOptions = [
 	},
 ];
 
-export default TabsOptions;
+export default TAB_OPTIONS;

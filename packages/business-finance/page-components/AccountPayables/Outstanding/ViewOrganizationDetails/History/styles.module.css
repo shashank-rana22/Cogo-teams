@@ -4,7 +4,8 @@
 	justify-content: space-between;
 
 	:global {
-		.ui_select_display_container {
+		.ui_select_display_container,
+		.react-datepicker-wrapper {
 			width: 200px;
 		}
 
@@ -19,10 +20,6 @@
 		.ui_input_container {
 			width: 400px;
 		}
-
-		.react-datepicker-wrapper {
-			width: 200px;
-		}
 	}
 }
 
@@ -30,7 +27,7 @@
 	width: 24%;
 }
 
-.toggle_Div {
+.toggle_div {
 	display: flex;
 	align-items: center;
 }

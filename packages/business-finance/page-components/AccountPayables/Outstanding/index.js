@@ -27,22 +27,22 @@ function Outstanding({
 		companyType        : '',
 	});
 
-	const { entityData, entityDataLoading } = useGetEntityLevelOutstanding({ entityCode });
+	const { entityData = {}, entityDataLoading = false } = useGetEntityLevelOutstanding({ entityCode });
 	const {
-		outStandingData,
-		outstandingLoading,
-		setoutStandingFilters,
-		outStandingFilters,
-		orderBy,
-		setOrderBy,
-		refetch,
+		outStandingData = {},
+		outstandingLoading = false,
+		setoutStandingFilters = () => { },
+		outStandingFilters = {},
+		orderBy = {},
+		setOrderBy = () => { },
+		refetch = () => { },
 	} = useGetOrgOutstanding({ entityCode });
 
-	const { page, pageLimit } = outStandingFilters || {};
-	const { totalRecords, list = [] } = outStandingData || {};
+	const { page = 1, pageLimit = 10 } = outStandingFilters || {};
+	const { totalRecords = 10, list = [] } = outStandingData || {};
 
 	const handleChange = (val) => {
-		setoutStandingFilters({ ...outStandingFilters, search: val });
+		setoutStandingFilters({ ...(outStandingFilters || {}), search: val });
 	};
 
 	const clearFilter = () => {
@@ -52,10 +52,6 @@ function Outstanding({
 			creditControllerId : '',
 			companyType        : '',
 		});
-	};
-
-	const handleInputReset = () => {
-		setoutStandingFilters({ ...outStandingFilters, search: '' });
 	};
 
 	return (
@@ -81,13 +77,13 @@ function Outstanding({
 							formFilters={formFilters}
 							setFormFilters={setFormFilters}
 							clearFilter={clearFilter}
-							handleInputReset={handleInputReset}
+							handleInputReset={() => handleChange('')}
 							entityCode={entityCode}
 							refetch={refetch}
 						/>
 						{outstandingLoading ? (
 							<div>
-								{[...Array(LOADER_LEN)].map((key) => (
+								{[...Array(LOADER_LEN).keys()].map((key) => (
 									<OrgLoader key={key} />
 								))}
 							</div>
@@ -101,7 +97,6 @@ function Outstanding({
 										setSelectedOrg={setSelectedOrg}
 									/>
 								))}
-								{isEmpty(list) ? <div className={styles.empty_state}><EmptyStateDocs /></div> : null}
 								{!isEmpty(list) ? (
 									<div className={styles.pagination_container}>
 										<Pagination
@@ -115,7 +110,7 @@ function Outstanding({
 											})}
 										/>
 									</div>
-								) : null}
+								) : <div className={styles.empty_state}><EmptyStateDocs /></div>}
 							</>
 						)}
 					</>

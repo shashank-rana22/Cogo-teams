@@ -5,16 +5,16 @@ import {
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { companyType } from '../../constants';
+import { companyType } from '../../constants/companyType';
 
 import Content from './Content';
 import styles from './styles.module.css';
 
 function FilterpopOver({
 	filters = {},
-	setFilters = () => {},
-	clearFilter = () => {},
-	refetch = () => {},
+	setFilters = () => { },
+	clearFilter = () => { },
+	refetch = () => { },
 }) {
 	const [show, setShow] = useState(false);
 	const [receivables, setReceivables] = useState('salesAgent');
@@ -22,7 +22,6 @@ function FilterpopOver({
 	const onChange = (val, name) => {
 		setFilters((p) => ({ ...p, [name]: val }));
 	};
-	const rest = { onClickOutside: () => setShow(false) };
 	return (
 		<div>
 			<Popover
@@ -41,7 +40,7 @@ function FilterpopOver({
 					/>
 				)}
 				className={styles.pop_over_style}
-				{...rest}
+				onClickOutside={() => setShow(false)}
 			>
 				<Button
 					themeType="secondary"

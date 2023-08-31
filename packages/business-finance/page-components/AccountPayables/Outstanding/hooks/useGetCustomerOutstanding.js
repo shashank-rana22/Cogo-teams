@@ -1,8 +1,9 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetCustomerOutstanding = ({ serialId = '', entityCode = '', orgSerialId }) => {
+import toastApiError from '../../../commons/toastApiError.ts';
+
+const useGetCustomerOutstanding = ({ serialId = '', entityCode = '', orgSerialId = '' }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -29,7 +30,7 @@ const useGetCustomerOutstanding = ({ serialId = '', entityCode = '', orgSerialId
 				},
 			});
 		} catch (e) {
-			Toast.error(e?.message);
+			toastApiError(e);
 		}
 	}, [trigger, entityCode, serialId, orgSerialId]);
 

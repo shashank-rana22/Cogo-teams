@@ -1,23 +1,21 @@
 import { Button } from '@cogoport/components';
-import { startCase, getByKey, isEmpty } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 const organizationColumn = [
 	{
 		Header   : 'Name',
 		id       : 'name',
-		accessor : (row) => <div>{getByKey(row, 'name') }</div>,
+		accessor : (row) => <div>{row?.name || '_'}</div>,
 	},
 	{
 		Header   : 'Email',
 		id       : 'email',
-		accessor : (row) => <div>{getByKey(row, 'email') }</div>,
+		accessor : (row) => <div>{row?.email || '_' }</div>,
 	},
 	{
 		Header   : 'Mobile Number',
 		accessor : (row) => (
-			<div>
-				<div>{getByKey(row, 'mobile_number') }</div>
-			</div>
+			<div>{row?.mobile_number || '_'}</div>
 		),
 	},
 
@@ -27,7 +25,7 @@ const organizationColumn = [
 			<div>
 				{!isEmpty(row?.work_scopes) ? (
 					<div>
-						{(getByKey(row, 'work_scopes')).map((val) => (
+						{(row?.work_scopes || []).map((val) => (
 							<div key={val}>{startCase(val)}</div>
 						))}
 					</div>

@@ -4,11 +4,11 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { details } from '../constants/details';
+import { getDetails } from '../constants/details';
 
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
-import TabsOptions from './TabOptions';
+import TAB_OPTIONS from './TabOptions';
 
 const DEFAULT_TYPE_LEN = 1;
 
@@ -86,7 +86,7 @@ function OutstandingList({
 		>
 			<div className={styles.serial_card}>
 				<div className={styles.serial_id_card}>
-					{details({ entityCode }).map((itemdetail) => (
+					{getDetails({ entityCode }).map((itemdetail) => (
 						<div className={styles.custom_tag} key={itemdetail.key}>
 							<div>
 								{itemdetail?.label}
@@ -185,16 +185,16 @@ function OutstandingList({
 					{showElement && (
 						<Tabs
 							activeTab={activeTab}
-							onChange={(val) => handleActiveTabs(val)}
+							onChange={handleActiveTabs}
 							fullWidth
 							themeType="primary"
 						>
-							{(TabsOptions || []).map(
+							{(TAB_OPTIONS || []).map(
 								({ key, name, component: Component }) => (
 									<TabPanel key={key} name={key} title={name}>
-										{activeTab && (
+										{activeTab ? (
 											<Component {...propsData[activeTab]} />
-										)}
+										) : null}
 									</TabPanel>
 								),
 							)}

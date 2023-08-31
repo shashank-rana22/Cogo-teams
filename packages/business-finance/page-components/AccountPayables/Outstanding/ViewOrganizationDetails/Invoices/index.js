@@ -21,12 +21,12 @@ const DEFAULT_FILTER_LEN = 4;
 
 function Invoices({ organizationId = '' }) {
 	const {
-		billsData,
-		billsLoading,
-		billsFilters,
-		setBillsFilters,
-		orderBy,
-		setOrderBy,
+		billsData = {},
+		billsLoading = false,
+		billsFilters = {},
+		setBillsFilters = () => {},
+		orderBy = {},
+		setOrderBy = () => {},
 	} = useGetBillsList({ activeTab: 'all', organizationId });
 
 	const { stats = {} } = billsData || {};

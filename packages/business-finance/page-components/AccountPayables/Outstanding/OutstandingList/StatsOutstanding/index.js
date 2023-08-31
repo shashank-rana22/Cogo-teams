@@ -2,7 +2,8 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import { StatsKeyMapping, StatsKeyMappingPayment } from '../../constants';
+import { StatsKeyMapping } from '../../constants/statsKeyMap';
+import { StatsKeyMappingPayment } from '../../constants/statsKeyPayment';
 
 import styles from './styles.module.css';
 
@@ -35,11 +36,9 @@ const invoiceContainer = [
 ];
 
 function StatsOutstanding({ item = {}, source = '' }) {
-	const {
-		entityCode = '',
-	} = item || {};
+	const { entityCode = '' } = item || {};
 
-	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+	const { currency = '' } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	return (
 		<div className={styles.container} style={{ padding: source ? '12px 16px' : '0px' }}>
@@ -109,22 +108,19 @@ function StatsOutstanding({ item = {}, source = '' }) {
 						</div>
 					))
 				}
-
 			</div>
 			<div
 				className={styles.outstanding_card}
 				style={{ background: source ? '#fff' : '#f9fbfe' }}
 			>
-				<div className={styles.flex_column}>
-					<div className={styles.total}>Total Outstanding</div>
-					<div className={cl`${styles.amount} ${styles.marginleft}`}>
-						{getAmount({
-							amount:
+				<div className={styles.total}>Total Outstanding</div>
+				<div className={cl`${styles.amount} ${styles.marginleft}`}>
+					{getAmount({
+						amount:
 								item?.totalOutstanding,
-							currency:
+						currency:
 								item?.ledCurrency || currency,
-						})}
-					</div>
+					})}
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,7 @@ const useHistorySettlement = ({ organizationId }) => {
 					sortType  : sortType || undefined,
 				},
 			});
-			setApiData(res.data);
+			setApiData(res?.data || []);
 		} catch (error) {
 			setApiData({});
 		}

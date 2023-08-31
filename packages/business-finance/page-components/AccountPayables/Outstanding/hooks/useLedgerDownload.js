@@ -12,11 +12,11 @@ const convertDate = (dateToConvert) => formatDate({
 	formatType : 'date',
 });
 
-const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
+const useLedgerDownload = ({ date = '', entities = '', item = {}, setShowLedgerModal = () => {} }) => {
 	const { profile } = useSelector((state) => state || {});
 
-	const { startDate, endDate } = date || {};
-	const { businessName, organizationId } = item;
+	const { startDate = '', endDate = '' } = date || {};
+	const { businessName = '', organizationId = '' } = item || {};
 
 	const [
 		{ data, loading },

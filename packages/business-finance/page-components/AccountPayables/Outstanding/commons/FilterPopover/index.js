@@ -17,11 +17,6 @@ function FilterPopover({
 	const onChange = (val, name) => {
 		setFilters((p) => ({ ...p, [name]: val }));
 	};
-	const rest = { onClickOutside: () => setShow(false) };
-
-	const handleChange = (val) => {
-		setReceivables(val);
-	};
 
 	return (
 		<div>
@@ -35,12 +30,12 @@ function FilterPopover({
 						setShow={setShow}
 						receivables={receivables}
 						filters={filters}
-						handleChange={handleChange}
+						handleChange={setReceivables}
 						onChange={onChange}
 					/>
 				)}
 				className={styles.pop_over_style}
-				{...rest}
+				onClickOutside={() => setShow(false)}
 			>
 				<Button
 					themeType="secondary"

@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => { }, filterlen = FILTER_LENGTH }) {
+function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_LENGTH }) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalFilters, setModalFilters] = useState({});
 	const { currency = '' } = modalFilters || {};
@@ -37,7 +37,7 @@ function FilterModal({ filters = {}, setFilters = () => { }, filterlen = FILTER_
 					<div className={styles.currencys}>Currency</div>
 					<div className={styles.currencycontainer}>
 						{CURRENCY_DATA.map((item) => {
-							const { icon: Icon, text } = item;
+							const { icon: Icon, text } = item || {};
 							return (
 								<div
 									className={cl`${styles.currency_values} 

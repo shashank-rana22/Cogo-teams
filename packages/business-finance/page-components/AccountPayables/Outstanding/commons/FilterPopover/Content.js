@@ -46,7 +46,7 @@ function Content({
 			</div>
 			<Tabs
 				activeTab={receivables}
-				onChange={(val) => handleChange(val)}
+				onChange={handleChange}
 				themeType="primary-vertical"
 				style={{ display: 'flex', width: '440px' }}
 			>

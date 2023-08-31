@@ -1,6 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
+
+import toastApiError from '../../../commons/toastApiError.ts';
 
 const useGetEntityLevelOutstanding = ({ entityCode = '' }) => {
 	const [
@@ -23,7 +24,7 @@ const useGetEntityLevelOutstanding = ({ entityCode = '' }) => {
 				},
 			});
 		} catch (e) {
-			Toast.error(e?.message);
+			toastApiError(e);
 		}
 	}, [entityCode, trigger]);
 

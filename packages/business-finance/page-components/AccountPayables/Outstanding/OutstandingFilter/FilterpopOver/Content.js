@@ -4,13 +4,13 @@ import { AsyncSelect } from '@cogoport/forms';
 import styles from './styles.module.css';
 
 function Content({
-	clearFilter = () => {},
-	refetch = () => {},
-	setShow = () => {},
+	clearFilter = () => { },
+	refetch = () => { },
+	setShow = () => { },
 	filters = {},
 	receivables = '',
-	onChange = () => {},
-	setReceivables = () => {},
+	onChange = () => { },
+	setReceivables = () => { },
 	companyType = '',
 }) {
 	return (
@@ -45,7 +45,7 @@ function Content({
 				</div>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val) => setReceivables(val)}
+					onChange={setReceivables}
 					themeType="primary-vertical"
 					style={{ display: 'flex', width: '440px' }}
 				>
@@ -64,10 +64,7 @@ function Content({
 							/>
 						</div>
 					</TabPanel>
-					<TabPanel
-						name="creditController"
-						title="Credit Controller"
-					>
+					<TabPanel name="creditController" title="Credit Controller">
 						<div className={styles.tabpanel_style}>
 							<AsyncSelect
 								name="credit_controller_id"

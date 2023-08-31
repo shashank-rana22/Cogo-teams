@@ -1,7 +1,8 @@
-import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
+
+import toastApiError from '../../../commons/toastApiError.ts';
 
 const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	const [outStandingFilters, setoutStandingFilters] = useState({
@@ -15,7 +16,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		label : 'Total Outstanding Amount',
 	});
 	const {
-		search = '', organizationSerialId, pageLimit, page, sageId, tradePartySerialId,
+		search = '', organizationSerialId = '', pageLimit = 10, page = 1, sageId = '', tradePartySerialId = '',
 	} = outStandingFilters || {};
 
 	const { order, key } = orderBy || {};
@@ -57,7 +58,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 				},
 			});
 		} catch (e) {
-			Toast.error(e?.message);
+			toastApiError(e);
 		}
 	}, [entityCode, key, order, organizationSerialId, page, pageLimit, query, sageId, tradePartySerialId, trigger]);
 

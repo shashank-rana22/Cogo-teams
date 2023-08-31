@@ -1,6 +1,6 @@
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
-export const details = ({ entityCode }) => [
+export const getDetails = ({ entityCode = '' }) => [
 	{
 		label : 'Serial Id',
 		key   : 'organizationSerialId',

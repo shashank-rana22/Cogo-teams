@@ -50,7 +50,7 @@ function History({ organizationId = '' }) {
 		<div>
 			<div className={styles.filter_container}>
 				<Filter controls={historyFilters} setFilters={setFilters} filters={filters} pageKey="page" />
-				<div className={styles.toggle_Div}>
+				<div className={styles.toggle_div}>
 					<Input
 						name="query"
 						onChange={(val) => { setFilters({ ...filters, query: val, page: 1 }); }}

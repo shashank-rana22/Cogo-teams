@@ -1,4 +1,4 @@
-import { Button, Pagination, Pill } from '@cogoport/components';
+import { Button, Pagination, Pill, cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -204,7 +204,8 @@ function Details({
 						{source ? null : (
 							<div className={styles.ribbon_render}>
 								<div
-									className={singleitem?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
+									className={singleitem?.accMode === 'AP' ? styles.ribbon
+										: cl`${styles.ribbon} ${styles.ribbon_orange}`}
 								>
 									{singleitem?.accMode}
 								</div>

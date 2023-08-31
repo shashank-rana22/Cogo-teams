@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
+import toastApiError from '../../../commons/toastApiError.ts';
+
 const useGetOrganizationUsers = ({ organizationId }) => {
 	const [param, setParam] = useState({ page: 1, page_limit: 10 });
 
@@ -17,16 +19,20 @@ const useGetOrganizationUsers = ({ organizationId }) => {
 	);
 
 	useEffect(() => {
-		const fetchListDataApi = async () => {
-			await trigger({
-				params: {
-					filters: {
-						organization_id: organizationId,
+		try {
+			const fetchListDataApi = async () => {
+				await trigger({
+					params: {
+						filters: {
+							organization_id: organizationId,
+						},
 					},
-				},
-			});
-		};
-		fetchListDataApi();
+				});
+			};
+			fetchListDataApi();
+		} catch (e) {
+			toastApiError(e);
+		}
 	}, [param?.page, trigger, organizationId]);
 
 	return {
