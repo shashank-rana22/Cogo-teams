@@ -36,8 +36,8 @@ function PromocodesModal({
 	const promoCodesDashedBorderColors = [
 		'1px dashed #8cc1f9',
 		'1px dashed #f48e8e',
-		'1px dashed #8CC1F9',
-		'1px dashed #DA9A3B',
+		'1px dashed #8cc1f9',
+		'1px dashed #da9a3b',
 	];
 
 	const {
@@ -67,6 +67,7 @@ function PromocodesModal({
 			await refetch();
 			setCouponApplied(false);
 			setDisableCursor('');
+			setShowCoupons(false);
 		}
 	};
 
