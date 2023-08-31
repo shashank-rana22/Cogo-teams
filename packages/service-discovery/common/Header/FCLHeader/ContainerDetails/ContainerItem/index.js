@@ -38,7 +38,6 @@ function ContainerItem({
 								popoverComponentData={popoverComponentData}
 								totalBanners={totalBanners}
 								setInfoBanner={setInfoBanner}
-								nextGuide="comparision_button"
 							/>
 						)}
 						visible={showPopover}

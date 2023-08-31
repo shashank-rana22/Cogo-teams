@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMAirport } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useGetPriorityAirlineOptions = () => {
 	const [{ loading = false, data }, trigger] = useRequest({
@@ -9,9 +10,9 @@ const useGetPriorityAirlineOptions = () => {
 		url    : '/list_priority_airlines',
 	}, { manual: true });
 
-	const priorityAirlineOptions = async (params) => {
+	const priorityAirlineOptions = useCallback((params) => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					filters: { operator_type: 'airline', status: 'active' },
 					...params,
@@ -22,7 +23,7 @@ const useGetPriorityAirlineOptions = () => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	};
+	}, [trigger]);
 
 	const AIRLINE_OPTIONS = [];
 
@@ -30,8 +31,19 @@ const useGetPriorityAirlineOptions = () => {
 		(data?.list || []).forEach((option) => {
 			AIRLINE_OPTIONS.push({
 				label: (
-					<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-						<span>
+					<div style={{
+						display        : 'flex',
+						alignItems     : 'center',
+						justifyContent : 'space-between',
+						width          : '100%',
+						padding        : '0 12px',
+					}}
+					>
+						<span style={{
+							display    : 'flex',
+							alignItems : 'center',
+						}}
+						>
 							{option?.airline?.logo_url ? (
 								<img
 									alt="logo"
@@ -58,7 +70,7 @@ const useGetPriorityAirlineOptions = () => {
 	}
 	return {
 		priorityAirlineOptions,
-		AIRLINE_OPTIONS,
+		airlineOptions: AIRLINE_OPTIONS,
 	};
 };
 export default useGetPriorityAirlineOptions;

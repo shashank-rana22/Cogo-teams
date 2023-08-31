@@ -57,24 +57,29 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 		function RenderRate() {
 			const conditionToRequestRate = !(total_price_discounted || is_rate_available);
 
+			const showRequestRateButton = serviceItem.service_type !== 'subsidiary';
+
 			if (conditionToRequestRate) {
 				if (serviceItem.service_type === 'fcl_freight_local') {
 					if (serviceItem.source === 'cogo_assured_rate') {
 						return 'No Rates';
 					} return 'At Actuals';
 				}
+
 				return (
 					<div className={styles.no_rates_found}>
 						<strong>No Rates Found</strong>
 
-						<Button
-							size="sm"
-							themeType="accent"
-							className={styles.request_rate_button}
-							onClick={handleRateFeedback}
-						>
-							Request Rate
-						</Button>
+						{showRequestRateButton ? (
+							<Button
+								size="sm"
+								themeType="accent"
+								className={styles.request_rate_button}
+								onClick={handleRateFeedback}
+							>
+								Request Rate
+							</Button>
+						) : null}
 					</div>
 				);
 			}

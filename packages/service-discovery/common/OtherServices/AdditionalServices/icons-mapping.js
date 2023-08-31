@@ -1,5 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcAAirTracking, IcMAppCfs, IcMAppCustoms, IcMAppTruck, IcAWarehouse } from '@cogoport/icons-react';
+import {
+	IcAAirTracking,
+	IcMAppCfs,
+	IcMAppCustoms,
+	IcMAppTruck,
+	IcAWarehouse,
+	IcMServices,
+} from '@cogoport/icons-react';
 
 const ICONS_MAPPING = {
 	transportation    : <IcMAppTruck width={30} height={30} />,
@@ -17,6 +24,7 @@ const ICONS_MAPPING = {
 		width={32}
 		height={32}
 	/>,
+	subsidiary: <IcMServices width={28} height={28} />,
 };
 
 export default ICONS_MAPPING;

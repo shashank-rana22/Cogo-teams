@@ -1,9 +1,8 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRef, useEffect, useContext } from 'react';
 
-import InfoBannerContent from '../../../../common/InfoBannerContent';
 import { CheckoutContext } from '../../context';
 import handleTimer from '../../utils/handleTimer';
 
@@ -12,12 +11,12 @@ import TotalCost from './TotalCost';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function SubmitButton({ rate = {} }) {
+function SubmitButton({ rate = {}, disabled = false }) {
 	return (
 		<div className={styles.flex}>
 			Select Invoicing Parties
 
-			<TotalCost rate={rate} />
+			<TotalCost rate={rate} disabled={disabled} />
 
 			<IcMArrowDoubleRight width={14} height={14} />
 		</div>
@@ -29,8 +28,6 @@ function PreviewBookingFooter({
 	updateLoading = false,
 	isVeryRisky = false,
 	agreeTandC = false,
-	setInfoBanner = () => {},
-	infoBanner = {},
 	noRatesPresent = false,
 	updateCheckoutServiceLoading = false,
 	onClickNextButton = () => {},
@@ -42,8 +39,6 @@ function PreviewBookingFooter({
 	const timerRef = useRef(null);
 
 	const { validity_end, id = '' } = detail;
-
-	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -71,7 +66,7 @@ function PreviewBookingFooter({
 			disabled  : updateCheckoutServiceLoading,
 		},
 		{
-			label     : <SubmitButton rate={rate} />,
+			label     : <SubmitButton rate={rate} disabled={isVeryRisky || !agreeTandC || disableButton} />,
 			themeType : 'accent',
 			size      : 'lg',
 			loading   : updateLoading || updateCheckoutServiceLoading,
@@ -133,37 +128,21 @@ function PreviewBookingFooter({
 				</span>
 			</div>
 
-			<Popover
-				placement="bottom"
-				caret
-				visible={current === 'proceed_button'}
-				className={styles.popover_container}
-				render={(
-					<InfoBannerContent
-						popoverComponentData={buttonProps.proceed_button || {}}
-						totalBanners={totalBanners}
-						setInfoBanner={setInfoBanner}
-						guideKey="preview_booking_guide_completed_for"
-						prevGuide="additional_services"
-					/>
-				)}
-			>
-				<div className={styles.button_container}>
-					{MAPPING.map((item) => {
-						const { key, label, ...restProps } = item;
+			<div className={styles.button_container}>
+				{MAPPING.map((item) => {
+					const { key, label, ...restProps } = item;
 
-						if (hasExpired) {
-							return null;
-						}
+					if (hasExpired) {
+						return null;
+					}
 
-						return (
-							<Button key={key} {...restProps}>
-								{label}
-							</Button>
-						);
-					})}
-				</div>
-			</Popover>
+					return (
+						<Button key={key} {...restProps}>
+							{label}
+						</Button>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

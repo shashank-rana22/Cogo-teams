@@ -4,7 +4,6 @@ import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
 
-import getAddedServices from './getAddedServices';
 import ServiceItem from './ServiceItem';
 import styles from './styles.module.css';
 
@@ -23,17 +22,8 @@ function SubsidiaryServices({
 	const [searchValue, setSearchValue] = useState('');
 	const [disabled, setIsDisabled] = useState('');
 
-	const addedOptions = getAddedServices(data.service_details || {});
-
-	const uniqueAddedOptions = Object.values(
-		addedOptions.reduce((acc, obj) => {
-			const key = JSON.stringify(obj);
-			if (!acc[key]) {
-				acc[key] = obj;
-			}
-			return acc;
-		}, {}),
-	);
+	const added_services = Object.values(data.service_details || {})
+		.filter((serviceItem) => serviceItem.service_type === 'subsidiary');
 
 	const SUBSIDIARY_OPTIONS = [];
 
@@ -46,12 +36,13 @@ function SubsidiaryServices({
 		}
 
 		const formattedName = startCase(item?.name);
-		const formattedLabel = formattedName.includes(tradeType) ? formattedName : `${tradeType} ${formattedName}`;
+		// const formattedLabel = formattedName.includes(tradeType) ? formattedName : `${tradeType} ${formattedName}`;
 
 		const service = {
-			label : formattedLabel,
-			value : item?.key,
-			code  : item.code,
+			label   : `${tradeType} ${formattedName}`,
+			value   : item?.key,
+			code    : item.code,
+			service : item.service,
 		};
 		SUBSIDIARY_OPTIONS.push(service);
 	});
@@ -60,16 +51,17 @@ function SubsidiaryServices({
 	const [popularServices, setPopularServices] = useState(mostPopularArray);
 
 	const removeSelectedOptions = (array) => {
-		const finalArray = array.filter((item) => !uniqueAddedOptions.some(
-			(selectedItem) => selectedItem.value === item.value,
+		const finalArray = array.filter((item) => !added_services.some(
+			(selectedItem) => `${selectedItem.code}_${selectedItem.service}_${selectedItem.trade_type}` === item.value,
 		));
-		return finalArray;
+		return slice(finalArray, POPULAR_OPTIONS_COUNT);
 	};
 
 	useEffect(() => {
-		let searchArray = [];
+		let searchArray = SUBSIDIARY_OPTIONS;
+
 		if (!searchValue) {
-			searchArray = removeSelectedOptions(mostPopularArray);
+			searchArray = removeSelectedOptions(searchArray);
 		} else {
 			searchArray = SUBSIDIARY_OPTIONS.filter(
 				(serviceItem) => serviceItem.value.includes(startCase(searchValue))
@@ -81,6 +73,8 @@ function SubsidiaryServices({
 		setPopularServices(searchArray);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
+
+	const servicesToShow = useMemo(() => [...popularServices], [popularServices]);
 
 	function InputSuffix() {
 		return (
@@ -102,11 +96,6 @@ function SubsidiaryServices({
 			</div>
 		);
 	}
-
-	const servicesToShow = useMemo(
-		() => [...uniqueAddedOptions, ...popularServices],
-		[uniqueAddedOptions, popularServices],
-	);
 
 	return (
 		<div className={styles.container}>
@@ -137,7 +126,6 @@ function SubsidiaryServices({
 							data={data}
 							itemData={item}
 							key={`${item.label}_${item.value}`}
-							selectedServices={uniqueAddedOptions}
 							popularServices={popularServices}
 							setPopularServices={setPopularServices}
 							possible_subsidiary_services={possible_subsidiary_services}

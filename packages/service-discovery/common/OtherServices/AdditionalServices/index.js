@@ -9,6 +9,7 @@ import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerms';
 
 import ChangeIncoTermModal from './ChangeIncoTermModal';
+import getAddedServices from './getAddedServices';
 import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
@@ -25,6 +26,7 @@ const SERVICES_CANNOT_BE_REMOVED_MAPPING = {
 	import : 'import_fcl_freight_local',
 };
 
+// eslint-disable-next-line max-lines-per-function
 function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
 	detail = {},
@@ -177,6 +179,7 @@ function AdditionalServices({ // used in search results and checkout
 	const CONSIGNEE_SIDE_SERVICES = [];
 	const MAIN_SERVICES = [];
 	const OTHER_SERVICES = [];
+	const SUBSIDIARY_SERVICES = getAddedServices(finalServiceDetails);
 
 	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
@@ -216,6 +219,11 @@ function AdditionalServices({ // used in search results and checkout
 			key  : 'other_services',
 			type : 'other_services',
 			list : OTHER_SERVICES,
+		},
+		subsidiary_services: {
+			key  : 'subsidiary_services',
+			type : 'subsidiary_services',
+			list : SUBSIDIARY_SERVICES,
 		},
 	};
 

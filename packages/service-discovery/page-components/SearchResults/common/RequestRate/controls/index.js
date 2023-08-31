@@ -1,33 +1,46 @@
-import airCustomsFeedbackControls from './air-customs-feedback-controls';
-import airFeedbackControls from './air-feedback-controls';
-import fclCfsFeedbackControls from './fcl-cfs-feedback-controls';
-import fclCustomsFeedbackControls from './fcl-customs-feedback-controls';
-import fclFeedbackControls from './fcl-feedback-controls';
-import fclLocalFeedbackControls from './fcl-local-feedback-controls';
-import ftlFeedbackControls from './ftl-feedback-controls';
-import haulageFeedbackControls from './haulage-feedback-controls';
-import lclCustomsFeedbackControls from './lcl-customs-feedback-controls';
-import lclFeedbackControls from './lcl-feedback-controls';
-import ltlFeedbackControls from './ltl-feedback-controls';
-import subsidiaryFeedbackControls from './subsidiary-feedback-controls';
-import trailerFeedbackControls from './trailer-feedback-controls';
+import getAirCustomsFeedbackControls from './air-customs-feedback-controls';
+import getAirFeedbackControls from './air-feedback-controls';
+import getFclCfsFeedbackControls from './fcl-cfs-feedback-controls';
+import getFclCustomsFeedbackControls from './fcl-customs-feedback-controls';
+import getFclFeedbackControls from './fcl-feedback-controls';
+import getFclLocalFeedbackControls from './fcl-local-feedback-controls';
+import getFtlFeedbackControls from './ftl-feedback-controls';
+import getHaulageFeedbackControls from './haulage-feedback-controls';
+import getLclCustomsFeedbackControls from './lcl-customs-feedback-controls';
+import getLclFeedbackControls from './lcl-feedback-controls';
+import getLtlFeedbackControls from './ltl-feedback-controls';
+import getSubsidiaryFeedbackControls from './subsidiary-feedback-controls';
+import getTrailerFeedbackControls from './trailer-feedback-controls';
 
 const CONTROLS_MAPPING = {
-	fcl_freight       : fclFeedbackControls,
-	lcl_freight       : lclFeedbackControls,
-	air_freight       : airFeedbackControls,
-	ftl_freight       : ftlFeedbackControls,
-	ltl_freight       : ltlFeedbackControls,
-	haulage_freight   : haulageFeedbackControls,
-	trailer_freight   : trailerFeedbackControls,
-	fcl_customs       : fclCustomsFeedbackControls,
-	lcl_customs       : lclCustomsFeedbackControls,
-	air_customs       : airCustomsFeedbackControls,
-	fcl_cfs           : fclCfsFeedbackControls,
-	fcl_freight_local : fclLocalFeedbackControls,
-	subsidiary        : subsidiaryFeedbackControls,
+	fcl_freight       : getFclFeedbackControls,
+	lcl_freight       : getLclFeedbackControls,
+	air_freight       : getAirFeedbackControls,
+	ftl_freight       : getFtlFeedbackControls,
+	ltl_freight       : getLtlFeedbackControls,
+	haulage_freight   : getHaulageFeedbackControls,
+	trailer_freight   : getTrailerFeedbackControls,
+	fcl_customs       : getFclCustomsFeedbackControls,
+	lcl_customs       : getLclCustomsFeedbackControls,
+	air_customs       : getAirCustomsFeedbackControls,
+	fcl_cfs           : getFclCfsFeedbackControls,
+	fcl_freight_local : getFclLocalFeedbackControls,
+	subsidiary        : getSubsidiaryFeedbackControls,
 };
 
-const getControls = (service) => CONTROLS_MAPPING[service] || [];
+const getControls = ({
+	service = 'fcl_freight',
+	rates_excludes_ids = [],
+	airlineOptions = [],
+}) => {
+	const controlProps = {
+		rates_excludes_ids,
+		airlineOptions,
+	};
+
+	const getControlsFunction = CONTROLS_MAPPING[service];
+
+	return getControlsFunction?.(controlProps) || [];
+};
 
 export default getControls;

@@ -1,9 +1,7 @@
 // import { Checkbox } from '@cogoport/components';  //commented for now, may use in future
-import { Popover } from '@cogoport/components';
 import { ChipsController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-import InfoBannerContent from '../../../../../../../../common/InfoBannerContent';
 import getElementController from '../../../../../../commons/forms/getElementController';
 
 import getControls from './controls';
@@ -41,8 +39,6 @@ function ShippingPreferences({
 	primaryService = {},
 	search_id = '',
 	updateLoading = false,
-	setInfoBanner = () => {},
-	infoBanner = {},
 }) {
 	const {
 		control,
@@ -53,8 +49,6 @@ function ShippingPreferences({
 	const controls = getControls({ search_id });
 
 	const { shipping_preferences = {} } = primaryService;
-
-	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
 	useEffect(() => {
 		const {
@@ -76,24 +70,8 @@ function ShippingPreferences({
 	}, [setValue, shipping_preferences]);
 
 	return (
-		<div className={styles.container} id="shipping_preferences">
-			<Popover
-				placement="bottom"
-				caret
-				visible={current === 'shipping_preferences'}
-				render={(
-					<InfoBannerContent
-						popoverComponentData={buttonProps.shipping_preferences || {}}
-						totalBanners={totalBanners}
-						setInfoBanner={setInfoBanner}
-						guideKey="preview_booking_guide_completed_for"
-						nextGuide="additional_services"
-						prevGuide="cargo_details"
-					/>
-				)}
-			>
-				<div className={styles.header}>Shipping Preference</div>
-			</Popover>
+		<div className={styles.container}>
+			<div className={styles.header}>Shipping Preference</div>
 
 			<div className={styles.text}>
 				Alternate shipping preference may be considered when your initial option

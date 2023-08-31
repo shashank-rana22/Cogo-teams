@@ -227,7 +227,13 @@ function ListRateCards({
 				</div>
 			)}
 
-			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
+			{loading ? null : (
+				<RequestRate
+					details={detail}
+					className={styles.request_rate}
+					rates={rates}
+				/>
+			)}
 		</div>
 	);
 }
