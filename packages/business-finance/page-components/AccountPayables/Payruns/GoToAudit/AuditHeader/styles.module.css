@@ -1,7 +1,7 @@
 .heading {
 	font-size: 20px;
 	font-weight: 600;
-	color: (--color-secondary-greyscale-2);
+	color: var(--color-secondary-greyscale-2);
 }
 
 .navbar_container {

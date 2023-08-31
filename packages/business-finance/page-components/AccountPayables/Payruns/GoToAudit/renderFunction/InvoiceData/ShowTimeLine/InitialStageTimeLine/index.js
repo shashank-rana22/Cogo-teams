@@ -30,7 +30,7 @@ function InitialStageTimeLine({ loading = false, data = [], dateWithTimeForPayme
 		<div className={styles.subcontainer}>
 			{PAID_STATUS.includes(timeLine[zeroth_index]?.eventName) ? null : (
 				<div className={styles.datecontainer}>
-					{dateWithTimeForPaymentDueDate[zeroth_index]}
+					{dateWithTimeForPaymentDueDate?.[zeroth_index]}
 					<div>
 						{formatDate({
 							date       : (new Date(timeLine[zeroth_index]?.paymentDueDate)),

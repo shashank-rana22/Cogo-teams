@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function BankPair({ item = {} }) {
-	const { bankDetails } = item;
+	const { bankDetails = [] } = item || {};
 	const {
 		beneficiary_name = '',
 		account_number = '',

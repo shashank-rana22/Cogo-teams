@@ -1,99 +1,33 @@
 import { Placeholder } from '@cogoport/components';
-import geoConstants from '@cogoport/globalization/constants/geo';
 import {
-	IcMArrowRotateLeft,
 	IcMArrowRotateDown,
 	IcMOverview,
 	IcMArrowRotateUp,
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice.ts';
 import useInvoiceDetails from '../../../../Invoices/hooks/useGetInvoiceTimeline';
-import { DETAILS, INVOICE_DATA_MAPPING } from '../../../constants';
+import { INVOICE_DATA_MAPPING } from '../../../constants';
 
 import CustomerData from './CustomerData';
+import InvoiceInfo from './InvoiceInfo';
 import ShowTimeLine from './ShowTimeLine';
 import styles from './styles.module.css';
+import SupplierData from './SupplierData';
 
 const PLACEHOLDERS = 3;
 const TIMELINEKEY = '4';
 
-function InvoiceInfo({ billNumber = 0, sid = 0, setShowDetailsCard = () => {} }) {
-	return (
-		<div className={styles.content_caret}>
-			<div
-				className={styles.icon_container}
-				onClick={() => {
-					setShowDetailsCard(false);
-				}}
-				role="presentation"
-			>
-				<IcMArrowRotateLeft />
-			</div>
-
-			<div className={styles.header_details}>
-				INVOICE DETAILS -
-				<span style={{ textDecorationLine: 'underline' }}>
-					{billNumber}
-				</span>
-				{' '}
-				- SID :-
-				<span>
-					{sid}
-				</span>
-			</div>
-		</div>
-	);
-}
-
-function SupplierData({ item = {}, invoiceDetails = {} }) {
-	const geo = geoConstants();
-
-	return (
-		<div className={styles.body_details_card}>
-			<div className={styles.invoice_card_data}>
-				<div className={styles.supplier_data_header}>
-					<span style={{ fontWeight: '600' }}>
-						Supplier Name :
-					</span>
-					<span style={{ fontWeight: '600' }}>
-						{item?.organizationName}
-					</span>
-				</div>
-				<div className={styles.flex}>
-					{DETAILS?.map((detail) => (
-						<div className={styles.supplier_data_body} key={detail.key}>
-							<div>{detail?.label}</div>
-							<div>
-								{getFormattedPrice(
-									invoiceDetails?.[detail?.key],
-									geo.country.currency.code,
-									{
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								)}
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
-	);
-}
-
 function InvoiceData({ item = {} }) {
 	const {
-		invoiceDetailsLoading,
-		invoiceDetails,
-		timeLineDetails,
-		timeLineDetailsLoading,
-		getInvoiceDetailsApi,
-		getTimeLineDetailsApi,
-		getProfitabilityApi,
-		getSupplierDetailsApi,
+		invoiceDetailsLoading = false,
+		invoiceDetails = {},
+		timeLineDetails = [],
+		timeLineDetailsLoading = false,
+		getInvoiceDetailsApi = () => {},
+		getTimeLineDetailsApi = () => {},
+		getProfitabilityApi = () => {},
+		getSupplierDetailsApi = () => {},
 	} = useInvoiceDetails(
 		{
 			id                : item?.id,
@@ -144,11 +78,11 @@ function InvoiceData({ item = {} }) {
 					<IcMOverview width={24} height={24} />
 				</div>
 			</div>
-			{showDetailsCard && (
+			{showDetailsCard ? (
 				<>
 					<div className={styles.invoice_details_container_bg} />
 					<div className={styles.invoice_details_container}>
-						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
+						<div className={styles.enter_left}>
 							{InvoiceInfo({
 								billNumber,
 								sid,
@@ -168,7 +102,7 @@ function InvoiceData({ item = {} }) {
 									))
 								) : (
 									(INVOICE_DATA_MAPPING || [{}]).map((items) => {
-										const { id, label } = items;
+										const { id, label } = items || {};
 										return (
 											<div className={styles.information} key={id}>
 												<div
@@ -208,7 +142,7 @@ function InvoiceData({ item = {} }) {
 						</div>
 					</div>
 				</>
-			)}
+			) : null }
 		</>
 	);
 }

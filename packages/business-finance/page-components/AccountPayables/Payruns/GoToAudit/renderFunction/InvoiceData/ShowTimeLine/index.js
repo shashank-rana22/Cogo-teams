@@ -9,13 +9,11 @@ import { useState, useEffect, useMemo } from 'react';
 import InitialStageTimeLine from './InitialStageTimeLine';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
-const { zeroth_index } = GLOBAL_CONSTANTS || {};
-
 const INITIAL_EVENT = 1;
 
 function ShowTimeLine({ data = [], loading = false }) {
+	const { zeroth_index } = GLOBAL_CONSTANTS || {};
+
 	const [complete, setComplete] = useState(false);
 
 	const timeLine = useMemo(() => data || [{}], [data]);
@@ -31,10 +29,11 @@ function ShowTimeLine({ data = [], loading = false }) {
 	const dateWithTimeForPaymentDueDate = timeLine[zeroth_index]?.paymentDueDate?.split(' ') || '';
 
 	const dateWithTimeForPosted = timeLine[zeroth_index]?.occurredAt?.split(' ') || '';
-
+	const geo = getGeoConstants();
+	console.log(timeLine, 'timeLine');
 	useEffect(() => {
 		setComplete(timeLine[zeroth_index]?.eventName === 'POSTED');
-	}, [timeLine]);
+	}, [timeLine, zeroth_index]);
 
 	return (
 		<div className={styles.container}>
@@ -70,12 +69,12 @@ function ShowTimeLine({ data = [], loading = false }) {
 
 			{(gettimeLineData() || [])?.map((item) => {
 				const {
-					id,
-					eventName,
-					payingAmount,
-					occurredAt,
-					performedByUser,
-					userEmail,
+					id = 0,
+					eventName = '',
+					payingAmount = 0,
+					occurredAt = '',
+					performedByUser = '',
+					userEmail = '',
 				} = item || {};
 
 				const dateWithTime = occurredAt?.split(' ') || '';

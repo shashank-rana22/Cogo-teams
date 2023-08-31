@@ -21,19 +21,19 @@ function GoToAudit() {
 
 	const [remarks, setRemarks] = useState([]);
 	const {
-		loading,
-		auditData,
-		config,
-		setGlobalFilters,
-		globalFilters,
-		updateInvoice,
-		updateLoading,
+		loading = false,
+		auditData = {},
+		config = {},
+		setGlobalFilters = () => {},
+		globalFilters = {},
+		updateInvoice = () => {},
+		updateLoading = false,
 	} = useGetAudit();
 
-	const { list, totalNumberOfInvoices = 0 } = auditData || {};
+	const { list = [], totalNumberOfInvoices = 0 } = auditData || {};
 	const pickNameFromElement = (list || [])[GLOBAL_CONSTANTS.zeroth_index]?.name || 'No Payrun Found';
 
-	const { functions } = renderFunction({ remarks, setRemarks, updateInvoice, updateLoading });
+	const { functions = {} } = renderFunction({ remarks, setRemarks, updateInvoice, updateLoading });
 
 	return (
 		<>

@@ -37,8 +37,7 @@ const useGetAudit = () => {
 		pageSize  : DEFAULT_PAGE_SIZE,
 	});
 
-	const config = AUDIT_CONFIG;
-	const { search, pageIndex, ...rest } = globalFilters;
+	const { search, pageIndex, pageSize } = globalFilters;
 
 	useEffect(() => {
 		debounceQuery(search);
@@ -49,16 +48,15 @@ const useGetAudit = () => {
 			trigger({
 				params: {
 					payrunId : payrun_id,
-					...rest,
+					pageSize,
 					query    : q || undefined,
 					pageIndex,
 				},
 			});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, payrun_id, query, pageIndex, JSON.stringify(rest)]);
+	}, [trigger, payrun_id, pageIndex, pageSize]);
 
-	const updateInvoice = async (type, payload, invoice_id) => {
+	const updateInvoice = async ({ type, payload, invoice_id }) => {
 		try {
 			await updateTrigger({
 				data: {
@@ -88,7 +86,7 @@ const useGetAudit = () => {
 		setGlobalFilters,
 		auditData  : data,
 		auditStats : stats,
-		config,
+		config     : AUDIT_CONFIG,
 		refetch,
 		updateInvoice,
 		updateLoading,

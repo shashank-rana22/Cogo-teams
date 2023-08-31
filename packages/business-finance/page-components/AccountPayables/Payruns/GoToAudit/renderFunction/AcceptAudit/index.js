@@ -24,8 +24,8 @@ function AcceptAudit({
 		setOpenModal(true);
 	};
 
-	const onSubmit = (value, invoice_id) => {
-		updateInvoice(type, value, invoice_id);
+	const onSubmit = ({ value, invoice_id }) => {
+		updateInvoice({ type, payload: value, invoice_id });
 		setRemarks([]);
 	};
 	const handleRemarkChange = (value) => {
@@ -53,30 +53,30 @@ function AcceptAudit({
 			</Button>
 
 			{openModal
-			&& (
-				<Modal show={openModal} onClose={() => setOpenModal(false)} size="sm">
-					<Modal.Header title="Remarks" />
-					<Modal.Body>
-						<Textarea
-							name="remarks"
-							value={remarks?.[item?.id]}
-							onChange={handleRemarkChange}
-							placeholder="Enter Remark Here"
-						/>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							themeType="primary"
-							disabled={!remarks}
-							loading={updateLoading}
-							onClick={() => onSubmit(remarks?.[item?.id], item?.id)}
-						>
-							Submit
-						</Button>
-					</Modal.Footer>
+				? (
+					<Modal show={openModal} onClose={() => setOpenModal(false)} size="sm">
+						<Modal.Header title="Remarks" />
+						<Modal.Body>
+							<Textarea
+								name="remarks"
+								value={remarks?.[item?.id]}
+								onChange={handleRemarkChange}
+								placeholder="Enter Remark Here"
+							/>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button
+								themeType="primary"
+								disabled={!remarks}
+								loading={updateLoading}
+								onClick={() => onSubmit({ value: remarks?.[item?.id], invoice_id: item?.id })}
+							>
+								Submit
+							</Button>
+						</Modal.Footer>
 
-				</Modal>
-			)}
+					</Modal>
+				) : null }
 		</div>
 	);
 }
