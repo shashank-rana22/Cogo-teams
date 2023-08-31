@@ -409,8 +409,8 @@ const GLOBAL_CONSTANTS = {
 		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
 		truck_image : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
 		forward     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
-		replay_all  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
-		replay      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		reply_all   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
+		reply       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
 	},
 
 	video_call_ring_tone_url:
