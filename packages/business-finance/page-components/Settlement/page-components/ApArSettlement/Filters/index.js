@@ -3,23 +3,31 @@ import { AsyncSelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 
-import { accOptions } from '../../../configurations/ap-ar-settlement/acc-filter';
+import { ACC_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter';
 
 import styles from './styles.module.css';
 
-function Filters({ filters = [], onFiltersChange = {}, loading = false }) {
+function Filters({
+	filters = [],
+	onFiltersChange = {},
+	loading = false,
+}) {
 	const handleFilterChange = (filterName, value) => {
 		onFiltersChange(filterName, value);
 	};
+
 	const { control } = useForm();
+
 	return (
 		<div className={styles.container}>
+
 			<div>
 				<span className={styles.criteria}>
 					Selection Criteria
 					<IcMInfo style={{ marginLeft: '4px' }} />
 				</span>
 			</div>
+
 			<div className={styles.horizontal} />
 			<br />
 			<div className={cl`${styles.select}  `}>
@@ -37,11 +45,11 @@ function Filters({ filters = [], onFiltersChange = {}, loading = false }) {
 						initialCall
 						rules={{ required: true }}
 						isClearable
-						isSingleEntity
 						onChange={(e) => handleFilterChange('entityCode', e)}
 						loading={loading}
 					/>
 				</div>
+
 				<div className={styles.reqMargin}>
 					Date
 					<SingleDateRange
@@ -54,6 +62,7 @@ function Filters({ filters = [], onFiltersChange = {}, loading = false }) {
 						maxDate={new Date()}
 					/>
 				</div>
+
 				<div className={styles.reqMargin}>
 					Trade Party
 					<AsyncSelectController
@@ -67,12 +76,12 @@ function Filters({ filters = [], onFiltersChange = {}, loading = false }) {
 						initialCall
 						rules={{ required: true }}
 						isClearable
-						isSingleEntity
 						style={{ width: '250px' }}
 						onChange={(e) => handleFilterChange('tradeParty', e)}
 						loading={loading}
 					/>
 				</div>
+
 				<div className={styles.reqMargin}>
 					Acc Mode
 					<MultiSelect
@@ -80,11 +89,12 @@ function Filters({ filters = [], onFiltersChange = {}, loading = false }) {
 						className={styles.reqMargin}
 						onChange={(e) => handleFilterChange('accMode', e)}
 						placeholder="Acc Mode"
-						options={accOptions}
+						options={ACC_OPTIONS}
 						isClearable
 						style={{ width: '250px' }}
 					/>
 				</div>
+
 			</div>
 
 		</div>

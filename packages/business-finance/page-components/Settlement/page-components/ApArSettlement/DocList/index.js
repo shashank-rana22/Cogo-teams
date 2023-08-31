@@ -6,31 +6,22 @@ import useGetColumns from '../../../configurations/ap-ar-settlement/docList-colu
 import styles from './styles.module.css';
 
 function DocList({
-	data,
-	loading,
-	onPageChange,
-	selectedData,
-	setSelectedData,
-	sortBy,
-	setSortBy,
-	sortType, setSortType, arrowDirections, setArrowDirections, sortData, setSortData,
-	pageCheckedRows,
-	setPageCheckedRows,
+	data = [],
+	loading = false,
+	onPageChange = () => {},
+	selectedData = [],
+	setSelectedData = () => {},
+	sortData = {},
+	setSortData = () => {},
+	pageCheckedRows = [],
+	setPageCheckedRows = () => {},
 }) {
 	const { list = [] } = data || {};
-	const col = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 	const colo = useGetColumns({
-		columnsToShow: col,
 		data,
 		loading,
 		selectedData,
 		setSelectedData,
-		sortBy,
-		setSortBy,
-		sortType,
-		setSortType,
-		arrowDirections,
-		setArrowDirections,
 		sortData,
 		setSortData,
 		pageCheckedRows,

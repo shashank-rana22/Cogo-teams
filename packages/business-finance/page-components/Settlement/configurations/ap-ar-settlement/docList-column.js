@@ -1,18 +1,24 @@
 /* eslint-disable max-lines-per-function */
 import { Tooltip, Checkbox, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useMemo, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const DOC_LENGTH = 10;
+const AMT_LENGTH = 8;
+const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+
 const useGetColumns = ({
 	data,
 	loading,
-	selectedData,
-	setSelectedData,
-	sortData, setSortData,
-	pageCheckedRows,
-	setPageCheckedRows,
+	selectedData = [],
+	setSelectedData = () => {},
+	sortData = [],
+	setSortData = () => {},
+	pageCheckedRows = [],
+	setPageCheckedRows = () => {},
 }) => {
 	const { list = [] } = data || {};
 	const { sortBy, sortType } = sortData || {};
@@ -20,9 +26,6 @@ const useGetColumns = ({
 	const [selectAll, setSelectAll] = useState(false);
 	const pageNumber = data?.pageNo;
 	const checkedRowsId = pageCheckedRows?.[pageNumber] || [];
-	const DOC_LENGTH = 10;
-	const AMT_LENGTH = 8;
-	const ZEROTH_INDEX = 0;
 
 	useEffect(() => {
 		const currentPageCheckedIds = pageCheckedRows?.[pageNumber] || [];

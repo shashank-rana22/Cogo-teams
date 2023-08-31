@@ -1,4 +1,5 @@
 import { Modal, Button, Datepicker, ButtonIcon } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -11,16 +12,16 @@ import styles from './styles.module.css';
 import UploadFile from './UploadDocument';
 
 export default function MatchModal({
-	matchModalShow,
-	setMatchModalShow,
-	totalMatchingBalance,
-	selectedData,
-	filters,
-	setSelectedData,
-	isDelete,
-	setIsDelete,
-	reRender,
-	setReRender,
+	matchModalShow = false,
+	setMatchModalShow = () => {},
+	totalMatchingBalance = 0,
+	selectedData = [],
+	filters = [],
+	setSelectedData = () => {},
+	isDelete = false,
+	setIsDelete = () => {},
+	reRender = false,
+	setReRender = () => {},
 
 }) {
 	function onClose() {
@@ -30,17 +31,14 @@ export default function MatchModal({
 	const {
 		jvListRefetch,
 	} = useGetJVList({ filters });
-	const INDEX = 0;
 	const [date, setDate] = useState('');
 	const [dryRun, setDryRun] = useState(false);
 	const [showJV, setShowJV] = useState(false);
-	// const [showStack, setShowStack] = useState(false);
 	const updatedData = selectedData?.map((item) => ({ ...item })) || [];
 	const {
 		checkData,
 		postPaymentsSettlementCheck,
 	} = usePaymentsSettlementCheck({ selectedData: updatedData, date });
-	// const [stackData, setStackData] = useState(checkData?.stackDetails || []);
 	const [showDocument, setShowDocument] = useState(false);
 	const [fileValue, setFileValue] = useState('');
 	const onClick = () => {
@@ -99,7 +97,7 @@ export default function MatchModal({
 					marginBottom : '0px',
 				}}
 				>
-					{`${selectedData[INDEX]?.currency}     ${totalMatchingBalance}    `}
+					{`${selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency}     ${totalMatchingBalance}    `}
 				</p>
 			</div>
 			<div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '80px' }}>
@@ -119,6 +117,13 @@ export default function MatchModal({
 				<div>
 					<Button
 						style={{ marginRight: '10px' }}
+					>
+						set tds zero
+					</Button>
+				</div>
+				<div>
+					<Button
+						style={{ marginRight: '10px' }}
 						onClick={() => onClick('primary sm')}
 					>
 						Upload File
@@ -132,8 +137,6 @@ export default function MatchModal({
 						>
 							<Modal.Body>
 								<UploadFile
-									showDocument={showDocument}
-									setShowDocument={setShowDocument}
 									fileValue={fileValue}
 									setFileValue={setFileValue}
 								/>
@@ -193,8 +196,6 @@ export default function MatchModal({
 						selectedData={selectedData}
 						setSelectedData={setSelectedData}
 						stackData={checkData?.stackDetails}
-						// stackData={stackData}
-						// setStackData={setStackData}
 						dryRun={dryRun}
 						reRender={reRender}
 						isDelete={isDelete}

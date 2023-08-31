@@ -6,10 +6,15 @@ import { statusOptions } from '../../../configurations/ap-ar-settlement/status-o
 
 import styles from './styles.module.css';
 
-export function SearchFilters({ filters = [], onFiltersChange = {}, loading = false }) {
+export function SearchFilters({
+	filters = [],
+	onFiltersChange = () => {},
+	loading = false,
+}) {
 	const handleFilterChange = (filterName, value) => {
 		onFiltersChange(filterName, value);
 	};
+
 	return (
 		<div className={styles.docFilter}>
 			<div>
@@ -43,8 +48,8 @@ export function SearchFilters({ filters = [], onFiltersChange = {}, loading = fa
 				<Input
 					name="search"
 					size="sm"
-					value={filters?.query || ''}
-					onChange={(e) => handleFilterChange('query', e)}
+					value={filters?.search || ''}
+					onChange={(e) => handleFilterChange('search', e)}
 					placeholder="Search By Document Number"
 				/>
 			</div>

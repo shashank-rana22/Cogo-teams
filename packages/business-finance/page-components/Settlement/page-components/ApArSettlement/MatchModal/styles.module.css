@@ -18,7 +18,7 @@
 .tableStyle {
 	:global {
 		.ui_table_head_cell {
-			background-color: #cfeaed;
+			background-color: var(--color-tertiary-blue-4);
 		}
 	}
 }
@@ -39,8 +39,8 @@
 .uploadStyle {
 	:global {
 		.ui_button_container {
-			color: black;
-			background: white;
+			color: var(--color-secondary-greyscale-2);
+			background: var(--color-secondary-5);
 			box-shadow: 0 0 1px;
 		}
 	}
@@ -49,8 +49,8 @@
 .refreshStyle {
 	display: flex;
 	align-items: center;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
-	border: 1px solid #e0e0e0;
+	border: 1px solid var(--color-secondary-greyscale-5);
 	border-radius: 4px;
 }

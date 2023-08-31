@@ -1,4 +1,4 @@
-export const accOptions = [
+export const ACC_OPTIONS = [
 	{ label: 'AP', value: 'AP' },
 	{ label: 'AR', value: 'AR' },
 	{ label: 'CSD', value: 'CSD' },

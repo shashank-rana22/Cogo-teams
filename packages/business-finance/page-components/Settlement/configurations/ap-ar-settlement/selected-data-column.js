@@ -11,14 +11,10 @@ const useGetMatchingColumns = (
 	const AMT_LENGTH = 8;
 	const ZEROTH_INDEX = 0;
 	const handleDeleteClick = (idToDelete) => {
-		// Remove the item with the given ID from selectedData
 		const updatedSelectedData = selectedData.filter((item) => item.id !== idToDelete);
-		// Update the selectedData state
 		setSelectedData(updatedSelectedData);
 	};
 	useEffect(() => {
-		// Additional actions or effects to perform when selectedData changes
-		// For example, you might update the UI or make an API call here
 	}, [selectedData]);
 
 	const columns = [

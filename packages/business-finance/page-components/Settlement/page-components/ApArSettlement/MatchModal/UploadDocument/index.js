@@ -1,7 +1,7 @@
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import React from 'react';
 
-function UploadDocument({ setFileValue, fileValue }) {
+function UploadDocument({ setFileValue = () => {}, fileValue = '' }) {
 	return (
 		<div>
 			<div style={{ display: 'block', alignItems: 'center', marginBottom: '16px' }}>

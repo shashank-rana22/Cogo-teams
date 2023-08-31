@@ -1,4 +1,6 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import useGetExcRate from '../../../hooks/useGetExcRate';
@@ -6,18 +8,17 @@ import useGetJVList from '../../../hooks/useGetJvsList';
 
 import styles from './styles.module.css';
 
+const INITIAL_BAL = 0;
 function Amount({
 	data = [],
 	loading = false,
 	selectedData = [],
-	filters,
-	matchModalShow,
-	setMatchModalShow = false,
+	filters = [],
+	matchModalShow = false,
+	setMatchModalShow = () => {},
 	totalMatchingBalance = 0,
 }) {
-	const INITIAL_BAL = 0;
-	const ZEROTH_INDEX = 0;
-	const { currency, ledCurrency } = selectedData?.[ZEROTH_INDEX] || {};
+	const { currency, ledCurrency } = selectedData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const {
 		jvListRefetch,
 	} = useGetJVList({ filters });
@@ -72,7 +73,7 @@ function Amount({
 					<Button
 						size="md"
 						themeType="accent"
-						disabled={selectedData.length === INITIAL_BAL}
+						disabled={isEmpty(selectedData)}
 						loading={loading}
 						onClick={() => { setMatchModalShow(true); jvListRefetch(); getExchangeRate(); }}
 					>

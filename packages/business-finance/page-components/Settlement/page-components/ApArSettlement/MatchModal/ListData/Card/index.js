@@ -5,15 +5,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
 export default function CardItem({
-	itm,
-	selectedData,
-	setSelectedData,
-	originalAllocation,
-	originalTDS,
-	// updatedData,
-	reRender,
-	// cardsData,
-	setIsDelete,
+	itm = {},
+	selectedData = [],
+	setSelectedData = () => {},
+	originalAllocation = 0,
+	originalTDS = 0,
+	reRender = false,
+	setIsDelete = () => {},
 }) {
 	const new_itm = itm;
 	const {
@@ -24,23 +22,16 @@ export default function CardItem({
 		settledTds = 0,
 		exchangeRate = 0,
 	} = new_itm || {};
-	// console.log('select', selectedData);
-	// console.log('updated', updatedData);
-	// console.log('card', cardsData);
 
 	const [prevTDS, setPrevTDS] = useState(new_itm.tds);
 	const [newTDS, setNewTDS] = useState(new_itm.tds);
 	const [editedAllocation, setEditedAllocation] = useState(new_itm.allocationAmount);
 	useEffect(() => {
-		// setCardsData(updatedData);
-		// setReRender(false);
-		// Update cardsData whenever updatedData changes
 		setNewTDS(new_itm.tds);
 		setPrevTDS(new_itm.tds);
 		setEditedAllocation(new_itm.allocationAmount);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reRender]);
-	// console.log('newtds', newTDS);
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
 	const STATUS = {
@@ -135,7 +126,6 @@ export default function CardItem({
 										setNewTDS(originalTDS);
 										setPrevTDS(originalTDS);
 										handleEditTDS();
-										// setEditedAllocation(new_itm.allocationAmount);
 									}}
 								/>
 							</>

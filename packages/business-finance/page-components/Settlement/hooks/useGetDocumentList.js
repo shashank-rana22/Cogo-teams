@@ -1,8 +1,23 @@
 import { Toast } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+export function toastApiError(err) {
+	let message = '';
+	if (err?.response?.data) {
+		if (err.response.data?.base) {
+			message = err.response.data.base;
+		} else if (err.response.data.message) {
+			message = err.response.data.message;
+		}
+	} else if (err?.message) {
+		message = err.message;
+	}
+	if (message !== 'canceled') { Toast.error(message || 'Something went wrong !!'); }
+}
 
 const useGetDocumentList = ({ filters, sorting }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -21,8 +36,10 @@ const useGetDocumentList = ({ filters, sorting }) => {
 		},
 		{ manual: true },
 	);
+
+	const { query, debounceQuery } = useDebounceQuery();
 	const INITIAL_BAL = 0;
-	const { status = '', docType = '', accMode = '', date = {}, tradeParty = '', ...rest } = filters || {};
+	const { search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '', ...rest } = filters || {};
 	const [balanceData, setBalanceData] = useState(INITIAL_BAL);
 	const balanceRefetch = async () => {
 		try {
@@ -51,6 +68,7 @@ const useGetDocumentList = ({ filters, sorting }) => {
 
 						orgId                 : tradeParty,
 						accModes              : accMode || undefined,
+						query                 : query || undefined,
 						docType               : undefined,
 						documentPaymentStatus : undefined,
 					},
@@ -59,6 +77,8 @@ const useGetDocumentList = ({ filters, sorting }) => {
 			}
 		} catch (error) {
 			setBalanceData(INITIAL_BAL);
+			Toast.error(error?.error?.message);
+			toastApiError(error);
 		}
 	};
 	const refetch = async () => {
@@ -90,6 +110,7 @@ const useGetDocumentList = ({ filters, sorting }) => {
 						})) || undefined,
 
 						docType  : docType || undefined,
+						query    : query || undefined,
 						sortBy   : sorting?.sortBy || undefined,
 						sortType : sorting?.sortType || undefined,
 						...filters.sort,
@@ -98,8 +119,15 @@ const useGetDocumentList = ({ filters, sorting }) => {
 			}
 		} catch (error) {
 			Toast.error(error?.error?.message);
+			toastApiError(error);
 		}
 	};
+	useEffect(() => {
+		debounceQuery(search);
+	}, [search, debounceQuery]);
+	// useEffect(() => {
+	// 	refetch(query);
+	// }, [query, refetch]);
 
 	return {
 		data,
@@ -107,6 +135,7 @@ const useGetDocumentList = ({ filters, sorting }) => {
 		balanceData,
 		accountData,
 		accountLoading,
+		query,
 		balanceRefetch,
 		refetch,
 	};
