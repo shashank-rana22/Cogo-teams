@@ -13,11 +13,8 @@
 	margin-top: 10px;
 }
 
-.service_type {
-	margin-left: 15px;
-}
-
 .icon {
+	display: flex;
 	cursor: pointer;
 }
 
@@ -25,7 +22,7 @@
 	display: inline-flex;
 	height: fit-content;
 	padding: 2px 6px;
-	background-color: rgb(242 242 242);
+	background: #f9f9f9;
 	border: 1px solid rgb(242 242 242);
 	border-radius: 4px;
 }
