@@ -210,5 +210,8 @@
     "roles_and_permission_permission_list_import_roles_select_partner_role": "Pilih Peran Mitra",
     "roles_and_permission_permission_list_import_roles_select_cancel_button": "Batal",
     "roles_and_permission_permission_list_import_roles_select_import_button": "Impor",
-    "roles_and_permission_permission_list_import_roles_select_assign_priority": "Tetapkan Prioritas"
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "Tetapkan Prioritas",
+    "roles_and_permission_use_create_roles_successfull": "Peran berhasil diperbarui",
+    "roles_and_permission_use_create_roles_unable": "Tidak dapat memperbarui peran, silakan coba lagi",
+    "roles_and_permission_use_create_roles_no_change": "Tidak ada perubahan dalam izin."
 }

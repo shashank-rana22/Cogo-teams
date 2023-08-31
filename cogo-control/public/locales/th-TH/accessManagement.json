@@ -210,5 +210,8 @@
     "roles_and_permission_permission_list_import_roles_select_partner_role": "เลือกบทบาทของพาร์ทเนอร์",
     "roles_and_permission_permission_list_import_roles_select_cancel_button": "ยกเลิก",
     "roles_and_permission_permission_list_import_roles_select_import_button": "นำเข้า",
-    "roles_and_permission_permission_list_import_roles_select_assign_priority": "กำหนดลำดับความสำคัญ"
+    "roles_and_permission_permission_list_import_roles_select_assign_priority": "กำหนดลำดับความสำคัญ",
+    "roles_and_permission_use_create_roles_successfull": "อัปเดตบทบาทเรียบร้อยแล้ว",
+    "roles_and_permission_use_create_roles_unable": "ไม่สามารถอัปเดตบทบาทได้ โปรดลองอีกครั้ง",
+    "roles_and_permission_use_create_roles_no_change": "ไม่มีการเปลี่ยนแปลงในสิทธิ์"
 }
