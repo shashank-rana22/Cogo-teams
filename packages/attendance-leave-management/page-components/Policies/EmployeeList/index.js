@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetEmployeeList from '../../../hooks/useGetEmployeeList';
@@ -36,14 +36,10 @@ function EmployeeList({ selectedLocation }) {
 								value={filters.designation}
 							/>
 						</div>
-
-						{/* <div className={styles.select}>
-							<AsyncSelect {...location} />
-						</div> */}
 					</div>
 					<Input
 						size="md"
-						prefix={<IcMSearchdark />}
+						prefix={<IcMSearchlight />}
 						placeholder="Search"
 						onChange={(e) => handleSearch(e)}
 						value={searchQuery}
@@ -59,10 +55,6 @@ function EmployeeList({ selectedLocation }) {
 					searchQuery={searchQuery}
 					selectedLocation={selectedLocation}
 					refetch={refetch}
-					// editItemId={editItemId}
-					// setEditItemId={setEditItemId}
-					// selectedIds={selectedIds}
-					// setSelectedIds={setSelectedIds}
 				/>
 			</div>
 		</div>

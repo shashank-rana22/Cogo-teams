@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const ARRAY_COUNT = 1;
 
 function EmployeeTable({
-	data, setFilters, filters, searchQuery, selectedLocation, refetch,
+	data, setFilters, filters, searchQuery, selectedLocation, refetch, loading,
 }) {
 	const [selectBulk, setSelectBulk] = useState(false);
 	const [selectedIds, setSelectedIds] = useState([]);
@@ -76,7 +76,7 @@ function EmployeeTable({
 
 	return (
 		<>
-			<StyledTable columns={columns} data={list} className="table_height" />
+			<StyledTable columns={columns} data={list} className="table_height" loading={loading} />
 			<div className={styles.pagination}>
 				<Pagination
 					type="table"

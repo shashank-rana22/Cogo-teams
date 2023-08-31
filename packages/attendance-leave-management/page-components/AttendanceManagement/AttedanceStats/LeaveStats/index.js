@@ -10,9 +10,9 @@ function LeaveStats({ value }) {
 	const { loading, data, refetch } = useGetEmployeeLeaveBalances({ value });
 
 	const {
-		available_privilege_leaves,
-		available_casual_leaves, available_sick_leaves,
-		pending_casual_leaves = 0, pending_sick_leaves = 0, pending_privilege_leaves = 0,
+		available_privilege_leaves = 0,
+		available_casual_leaves = 0, available_sick_leaves = 0,
+		total_pending_leave_approvals = 0,
 	} = data || {};
 
 	const [applyLeave, setApplyLeave] = useState(false);
@@ -26,7 +26,7 @@ function LeaveStats({ value }) {
 						: (
 							<div className={styles.pending_approval}>
 								<div className={styles.pending_dot} />
-								{ pending_casual_leaves + pending_privilege_leaves + pending_sick_leaves}
+								{ total_pending_leave_approvals}
 								{' '}
 								Pending Approval
 							</div>
