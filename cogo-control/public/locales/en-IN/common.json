@@ -251,5 +251,6 @@
     "new": "new",
     "notification": "notification",
     "add_account": "Add Account",
-    "search_bar": "Search menu..."
+    "search_bar": "Search menu...",
+    "switching_profile": "Switching Profile"
 }

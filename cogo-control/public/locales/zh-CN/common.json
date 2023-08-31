@@ -251,5 +251,6 @@
     "new": "新的",
     "notification": "通知",
     "add_account": "添加账号",
-    "search_bar": "搜索菜单..."
+    "search_bar": "搜索菜单...",
+    "switching_profile": "切换配置文件"
 }

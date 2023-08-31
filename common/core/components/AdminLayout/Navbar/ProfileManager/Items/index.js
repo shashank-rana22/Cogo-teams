@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import SwitchAccounts from '../../SwitchAccounts';
@@ -62,8 +63,9 @@ function Items({
 	refetch = () => {},
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
-	t = () => {},
 }) {
+	const { t } = useTranslation(['common']);
+
 	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
