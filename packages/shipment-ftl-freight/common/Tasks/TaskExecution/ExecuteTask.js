@@ -12,6 +12,7 @@ import {
 	UploadEWB,
 	PickAndDropTasks,
 	FtlConfirmationBooking,
+	ConfirmAwaitingServices,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -145,6 +146,17 @@ function ExecuteTask({
 				shipment_data={shipment_data}
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task === 'confirm_awaiting_services') {
+		return (
+			<ConfirmAwaitingServices
+				task={task}
+				services={servicesList}
+				onCancel={onCancel}
 				refetch={taskListRefetch}
 			/>
 		);
