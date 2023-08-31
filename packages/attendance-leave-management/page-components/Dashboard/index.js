@@ -81,11 +81,13 @@ function AttendanceLeaveDashboard() {
 							</div>
 						</TabPanel>
 
-						<TabPanel name="my_team" title="My Team">
-							<div className={styles.tab_panel}>
-								<TeamAttendance />
-							</div>
-						</TabPanel>
+						{is_manager && (
+							<TabPanel name="my_team" title="My Team">
+								<div className={styles.tab_panel}>
+									<TeamAttendance />
+								</div>
+							</TabPanel>
+						)}
 					</Tabs>
 				</div>
 			)}
