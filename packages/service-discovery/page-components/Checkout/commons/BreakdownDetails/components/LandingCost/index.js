@@ -12,6 +12,7 @@ function LandingCost({
 	rate = {},
 	total = 0,
 	otherCharges = [],
+	showTaxes = false,
 }) {
 	const {
 		tax_price_discounted,
@@ -22,10 +23,6 @@ function LandingCost({
 	const { convenience_rate } = convenienceDetails;
 
 	const { price = 0, currency = '', quantity = 1 } = convenience_rate;
-
-	const totalBeforeDiscount = rate?.tax_total_price || DEFAULT_VALUE;
-	const totalPrice = rate?.tax_total_price_discounted || DEFAULT_VALUE;
-	const discount = totalPrice - totalBeforeDiscount;
 
 	const finalConvenienceFee = convertCurrencyValue(
 		price * quantity,
@@ -53,7 +50,9 @@ function LandingCost({
 		return acc;
 	}, DEFAULT_VALUE);
 
-	const totalCost = total + finalConvenienceFee + finalTaxValue + discount + otherChargesPrice;
+	const totalCostExcludingTax = total + finalConvenienceFee + otherChargesPrice;
+
+	const totalCost = totalCostExcludingTax + finalTaxValue;
 
 	return (
 		<div className={styles.container}>
@@ -62,7 +61,7 @@ function LandingCost({
 
 				<div className={styles.amount}>
 					{formatAmount({
-						amount   : totalCost,
+						amount   : showTaxes ? totalCost : totalCostExcludingTax,
 						currency : rate?.total_price_currency,
 						options  : {
 							style                 : 'currency',

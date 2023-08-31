@@ -1,0 +1,68 @@
+.agent_title {
+	margin-top: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.organization_users {
+	max-height: 40vh;
+	padding: 2px 4px;
+	margin-top: 3px;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.agent_loading_state {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 0 9px 22px;
+	margin-top: 12px;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.points {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 8px 30px 8px 35px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.cogopoints {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ff7a71;
+}
+
+.value {
+	padding-left: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #ff7a71;
+}
+
+.loader_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 32px;
+}
+
+.cogocoins_icon {
+	width: 20px;
+	height: 20px;
+}
+
+.cogo_icon {
+	margin: 6px 10px 0 0;
+}

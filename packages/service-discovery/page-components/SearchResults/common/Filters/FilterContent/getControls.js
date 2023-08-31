@@ -1,4 +1,4 @@
-import { EXTRA_FILTERS } from './extra-filter-controls';
+import { getExtraFilters } from './extra-filter-controls';
 
 export const CONTROLS_MAPPING = {
 	fcl_freight: [
@@ -29,11 +29,13 @@ const getFilterControls = ({
 }) => {
 	const service_type = data[service_key];
 
+	const { id = '' } = data;
+
 	if (!service_type) return [];
 
 	const controlsArray = CONTROLS_MAPPING[service_type];
 
-	const controls = controlsArray.map((item) => EXTRA_FILTERS[item]) || [];
+	const controls = controlsArray.map((item) => getExtraFilters({ item, id })) || [];
 
 	return controls || [];
 };

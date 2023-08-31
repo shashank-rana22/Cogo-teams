@@ -11,7 +11,7 @@ function MailActions({
 	return (
 		<div className={styles.buttons_flex}>
 			{BUTTON_MAPPING.map((eachButton) => {
-				const { buttonName, icon: Icon, key } = eachButton || {};
+				const { buttonName = '', icon = '', key = '' } = eachButton || {};
 
 				return (
 					<Button
@@ -21,7 +21,7 @@ function MailActions({
 						className={styles.styled_button}
 						onClick={() => handleClick({ buttonType: key })}
 					>
-						<Icon className={styles.icon} />
+						<div className={styles.icon}>{icon}</div>
 						<div className={styles.button_text}>
 							{buttonName}
 						</div>

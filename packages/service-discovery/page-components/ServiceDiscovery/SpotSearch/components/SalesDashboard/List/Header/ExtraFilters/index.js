@@ -4,18 +4,20 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const SERVICES = [
-	{ label: 'FCL', value: 'fcl_freight' },
-	{ label: 'LCL', value: 'lcl_freight' },
-	{ label: 'AIR International', value: 'air_freight' },
-	{ label: 'AIR Domestic', value: 'domestic_air_freight' },
-	{ label: 'AIR Customs', value: 'air_customs' },
-	{ label: 'FCL Customs', value: 'fcl_customs' },
-	{ label: 'LCL Customs', value: 'lcl_customs' },
-	{ label: 'FTL', value: 'ftl_freight' },
-	{ label: 'LTL', value: 'ltl_freight' },
-	{ label: 'Haulage Freight', value: 'haulage_freight' },
+	{ label: 'Fcl Freight', value: 'fcl_freight' },
+	{ label: 'Ftl Freight', value: 'ftl_freight' },
 	{ label: 'Trailer Freight', value: 'trailer_freight' },
-	{ label: 'FCL Locals', value: 'fcl_freight_local' },
+	{ label: 'Haulage Freight', value: 'haulage_freight' },
+	{ label: 'Fcl customs', value: 'fcl_customs' },
+	{ label: 'Air freight', value: 'air_freight' },
+	{ label: 'Air Customs', value: 'air_customs' },
+	{ label: 'Lcl freight', value: 'lcl_freight' },
+	{ label: 'Ltl freight', value: 'ltl_freight' },
+	{ label: 'Lcl customs', value: 'lcl_customs' },
+	{ label: 'Fcl Cfs', value: 'fcl_cfs' },
+	{ label: 'Fcl freight local', value: 'fcl_freight_local' },
+	{ label: 'Lcl local', value: 'lcl_freight_local' },
+	{ label: 'Air local', value: 'air_freight_local' },
 ];
 
 function ExtraFilters({

@@ -102,7 +102,7 @@ const useGetSalesDashboardData = ({
 	useEffect(() => {
 		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user_profile?.authorizationparameters,
+	}, [user_profile?.authParams,
 		extraParams,
 		serviceType,
 		importer_exporter_id,
