@@ -28,12 +28,12 @@ function ApplyResignationModal({ showModal = false, setShowModal = () => {} }) {
 				<Modal.Header title="Apply Resignation" />
 
 				<Modal.Body>
-					<RenderComponent currentState={currentState} setCurrentState={setCurrentState} />
+					<RenderComponent
+						setShowModal={setShowModal}
+						currentState={currentState}
+						setCurrentState={setCurrentState}
+					/>
 				</Modal.Body>
-
-				<Modal.Footer>
-					<Button onClick={() => setShowModal(false)}>CLOSE</Button>
-				</Modal.Footer>
 			</Modal>
 		</div>
 	);

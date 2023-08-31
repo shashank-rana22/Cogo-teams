@@ -1,0 +1,18 @@
+.container {
+    :global {
+        .ui_text_area_container {
+            min-height: 120px;
+        }
+    }
+}
+
+.title {
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.button_container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
