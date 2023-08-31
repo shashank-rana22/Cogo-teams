@@ -48,9 +48,10 @@ const useChangePassword = ({
 	const onCreate = async (values = {}) => {
 		try {
 			const payload = {
-				id       : personDetails.user_id,
-				name     : personDetails.name,
-				password : values?.password,
+				id                  : personDetails.user_id,
+				name                : personDetails.name,
+				password            : values?.password,
+				deactivate_sessions : values?.deactivate_sessions,
 			};
 
 			await trigger({ data: payload });

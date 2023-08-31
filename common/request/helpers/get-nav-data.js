@@ -1,10 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
 
 const MIN_LENGTH = 1;
 
-const getNavData = ({ navigation, projectNavigationMappings = null, t = () => {} }) => {
-	const navigationMappingAdmin = navigationMapping({ t });
+const getNavData = (navigation, projectNavigationMappings = null) => {
 	const navigationMappings = projectNavigationMappings || navigationMappingAdmin;
 	const navs = navigation.split('-');
 
