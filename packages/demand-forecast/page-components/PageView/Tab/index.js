@@ -8,7 +8,7 @@ const TABS_MAPPING = [
 	},
 ];
 
-function Tab({ activeTab, setActiveTab }) {
+function Tab({ activeTab = '', setActiveTab = () => {} }) {
 	return (
 		<div>
 			<Tabs

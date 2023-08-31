@@ -41,7 +41,7 @@ function SubCardInfo({ portInfo = {}, info_key = 'remaining_clusters' }) {
 	return (
 
 		<div className={styles.row}>
-			<div className={styles.orgin_port}>
+			<div className={styles.origin_port}>
 				<Tooltip
 					content={info_key === 'remaining_clusters' ? origin_cluster?.name : origin_location?.display_name}
 					placement="top"

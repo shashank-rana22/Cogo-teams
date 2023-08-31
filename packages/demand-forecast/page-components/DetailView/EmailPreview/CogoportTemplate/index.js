@@ -1,12 +1,17 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+
 import styles from './styles.module.css';
 
 function CogoportTemplate({ from = {} }) {
 	return (
 		<div className={styles.container}>
-			<img
-				alt=""
+			<Image
+				alt="empty image"
+				width={16}
+				height={16}
 				className={styles.img}
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogoport_email_logo}
 			/>
 			<div className={styles.best_importer}>
 				The best import and export services at one place

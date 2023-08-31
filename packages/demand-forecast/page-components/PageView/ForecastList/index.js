@@ -15,7 +15,6 @@ const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
 
 function ForecastList({
-
 	loading = false,
 	dataList = [],
 	page = 1,
@@ -29,8 +28,8 @@ function ForecastList({
 		return (
 			<div>
 				<EmptyState
-					height="250"
-					width="400"
+					height={250}
+					width={400}
 					flexDirection="column"
 					alignItems="center"
 					emptyText="Data Not Found"

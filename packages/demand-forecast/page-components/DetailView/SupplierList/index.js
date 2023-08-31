@@ -41,7 +41,6 @@ function SupplierList({ origin_location_id = '', destination_location_id = '', i
 			}
 			<div className={styles.pagination_container}>
 				<Pagination
-					className="md"
 					totalItems={pageData?.total_count || DEFAULT_TOTAL_ITEM}
 					currentPage={page || DEFAULT_CURRENT_PAGE}
 					pageSize={pageData?.page_limit || DEFAULT_PAGE_SIZE}

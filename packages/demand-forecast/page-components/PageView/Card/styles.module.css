@@ -68,14 +68,7 @@
 	cursor: pointer;
 }
 
-.destination_port_name {
-	width: 100%;
-	overflow: hidden;
-	color: #f68b21;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
+.destination_port_name,
 .origin_port_name {
 	width: 100%;
 	overflow: hidden;

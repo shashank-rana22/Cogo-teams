@@ -39,7 +39,7 @@ function PopOverContent({ remaining_port_pairs = [] }) {
 							</div>
 						</div>
 						<div className={styles.arrow}>
-							<IcMPortArrow width={16} />
+							<IcMPortArrow width={16} height={16} />
 						</div>
 						<div className={styles.name}>
 							<div className={styles.port_code}>
@@ -78,8 +78,8 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 		return (
 			<div>
 				<EmptyState
-					height="250"
-					width="400"
+					height={250}
+					width={400}
 					flexDirection="column"
 					alignItems="center"
 					emptyText="Data Not Found"
@@ -128,7 +128,7 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 						{key === 'high_demanding_port_pairs' && (
 							<div>
 								{portPairData[key].map((port_info) => (
-									<SubCardInfo portInfo={port_info} key="123" info_key={key} />
+									<SubCardInfo portInfo={port_info} key={port_info} info_key={key} />
 								))}
 							</div>
 						)}
