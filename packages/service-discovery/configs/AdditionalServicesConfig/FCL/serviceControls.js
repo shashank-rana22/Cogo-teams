@@ -8,6 +8,7 @@ const currencyOptions = Object.keys(GLOBAL_CONSTANTS.currency_code).map((currenc
 	value : currency,
 }));
 
+// eslint-disable-next-line max-lines-per-function
 const controls = ({ destination_country_id, origin_country_id }) => [
 	{
 		name    : 'origin_cargo_handling_type',
@@ -230,25 +231,43 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 	},
 	{
 		name    : 'haulage_type',
-		type    : 'pills',
-		label   : 'Haulage type',
+		type    : 'radio',
 		options : [
 			{
-				label : 'Merchant',
-				value : 'merchant',
+				label: (
+					<div>
+						<b>Merchant</b>
+						<div>
+							<i>1. Cargo handed over to carrier after reaching main port</i>
+							<br />
+							<i>2. Detention days counted till Cargo reaches main port</i>
+						</div>
+					</div>
+				),
+				value: 'merchant',
 			},
 			{
-				label : 'Carrier',
-				value : 'carrier',
+				label: (
+					<div>
+						<b>Carrier</b>
+						<div>
+							<i>1. Cargo handed over to carrier at ICD port itself</i>
+							<br />
+							<i>
+								2. Detention days count stops once cargo is handed over to Carrier
+								for haulage
+							</i>
+						</div>
+					</div>
+				),
+				value: 'carrier',
 			},
 		],
-		style     : { width: 200 },
-		condition : {
+		condition: {
 			services: ['export_haulage_freight', 'import_haulage_freight'],
 		},
 		rules: { required: 'Haulage Type is required' },
 	},
-
 ];
 
 export default controls;
