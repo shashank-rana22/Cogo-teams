@@ -16,7 +16,7 @@ function SupplierList({ origin_location_id = '', destination_location_id = '', i
 	const { t } = useTranslation(['demandForecast']);
 
 	const {
-		list:dataList = [], pageData, page, setPage, loading,
+		list: dataList = [], pageData, page, setPage, loading,
 	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id, isMiniCluster });
 
 	const tableConfig = getSupplierTableConfig({ t });

@@ -6,7 +6,7 @@ import { useCallback, useState, useEffect } from 'react';
 const DEFAULT_PAGE = 1;
 
 const useGetRollingFclFreightSuppliers = ({
-	filters = {}, origin_location_id = '',
+	origin_location_id = '',
 	destination_location_id = '',
 	isMiniCluster = false,
 }) => {
@@ -24,15 +24,13 @@ const useGetRollingFclFreightSuppliers = ({
 					origin_location_id          : origin_location_id || undefined,
 					destination_location_id     : destination_location_id || undefined,
 					mini_clusters_data_required : isMiniCluster,
-					filters,
 					page,
 				},
 			});
 		} catch (error) {
 			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, page, origin_location_id, destination_location_id]);
+	}, [trigger, origin_location_id, destination_location_id, isMiniCluster, page]);
 
 	useEffect(() => {
 		fetchRollingForecastPortPairs();

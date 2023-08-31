@@ -29,7 +29,7 @@ function PortNames({ locationInfo = {} }) {
 
 	const displayNameLength = splitDisplayName?.length;
 
-	const countryName = (locationInfo?.country || {}).name
+	const countryName = locationInfo?.country?.name
         || splitDisplayName[displayNameLength - NEGATIVE_INDEX]
         || '';
 

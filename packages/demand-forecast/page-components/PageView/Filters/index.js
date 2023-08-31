@@ -12,25 +12,24 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE = 1;
 
-function Content({ setFilters = () => {}, setVisible, visible,	setPage = () => {} }) {
+function Content({ setFilters = () => {}, setVisible = () => {},	setPage = () => {} }) {
 	const { t } = useTranslation(['demandForecast']);
 	const formProps = useForm();
 	const { control, handleSubmit, reset } = formProps;
 	const controls = getControls({ t });
 
 	const applyFilters = (value) => {
-		// eslint-disable-next-line custom-eslint/variables-name-check
-		const filterKeys = {};
+		const FILTER_KEYS = {};
 
 		Object.keys(value).forEach((key) => {
 			if (value[key]) {
-				filterKeys[key] = value[key];
+				FILTER_KEYS[key] = value[key];
 			}
 		});
 
-		setFilters(filterKeys);
+		setFilters(FILTER_KEYS);
 		setPage(DEFAULT_PAGE);
-		setVisible(!visible);
+		setVisible((prev) => !prev);
 	};
 
 	const removeFilters = () => {

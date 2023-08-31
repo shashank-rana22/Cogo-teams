@@ -10,7 +10,7 @@ function Card({ card = {} }) {
 	const [showDetails, sethowDetails] = useState(false);
 
 	const handleChange = () => {
-		sethowDetails(!showDetails);
+		sethowDetails((prev) => !prev);
 	};
 
 	const { origin = {}, destination = {}, forecasted_demand, high_demand_port_pairs, rated_acquired = 0 } = card;

@@ -25,6 +25,8 @@ function DetailView() {
 		= '',
 	} = data || {};
 
+	console.log('data::', data);
+
 	return (
 		<div>
 			<Header

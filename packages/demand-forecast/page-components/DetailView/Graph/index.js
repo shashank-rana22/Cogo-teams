@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_LENGTH = 1;
 
-const GRAPH_TTTLE = {
+const GRAPH_TITLE = {
 	container_size_forecasts : 'Container Size Distribution',
 	container_type_forecasts : 'Container Type Distribution',
 	persona_forecasts        : 'Persona Distribution',
@@ -85,7 +85,7 @@ function Graph({
 	return (
 		<div className={styles.container}>
 			{
-			Object.keys(GRAPH_TTTLE).map((key) => {
+			Object.keys(GRAPH_TITLE).map((key) => {
 				const graphicalData = getGraphData({ graphInfo: data[key], key });
 
 				const colors = GRAPH_COLOR_MAPPING[key];
@@ -93,7 +93,7 @@ function Graph({
 				return (
 					<div key={graphicalData.id} className={styles.single_chart_container}>
 						<div className={styles.title}>
-							{GRAPH_TTTLE[key]}
+							{GRAPH_TITLE[key]}
 						</div>
 
 						<div className={styles.graph}>

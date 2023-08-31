@@ -22,15 +22,14 @@ function EmailPreview({
 	const [isSinglePortPair, setIsSinglePortPair] = useState(false);
 	const [errors, setErrors] = useState(false);
 
-	const { getEmailPreview, data:emailPrevieData, loading: getLoading } = useGetEmailPreview();
+	const { getEmailPreview, data: emailPreviewData, loading: getLoading } = useGetEmailPreview();
 	const { sendRequirementEmail, loading: sendLoading } = useSendRequirementEmail();
 
 	const { id: organization_id } = service_provider;
 
 	useEffect(() => {
 		getEmailPreview({ organization_id });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getEmailPreview, organization_id]);
 
 	useEffect(() => {
 		if (!isEmpty(emailSelected)) {
@@ -38,7 +37,7 @@ function EmailPreview({
 		}
 	}, [emailSelected]);
 
-	const { from = {}, organization_users = [], subject = '' } = emailPrevieData?.data || {};
+	const { from = {}, organization_users = [], subject = '' } = emailPreviewData?.data || {};
 
 	const options = organization_users.map((user) => ({
 		label : user?.name,
@@ -52,24 +51,27 @@ function EmailPreview({
 	const onConfirm = async () => {
 		if (isEmpty(emailSelected)) {
 			setErrors(true);
-		} else {
-			const payload = {
-				organization_id,
-				organization_user_ids : emailSelected,
-				email_sent_type       : isSinglePortPair ? 'port_pair' : 'all',
-				...(isSinglePortPair ? { origin_location_id, destination_location_id } : {}),
-			};
-			const response = await sendRequirementEmail({ payload });
-			if (response?.status === API_RESPONSE) {
-				Toast.success('Your email will be sent');
-				setIsEmail(false);
-			}
+			return;
+		}
+
+		const payload = {
+			organization_id,
+			organization_user_ids : emailSelected,
+			email_sent_type       : isSinglePortPair ? 'port_pair' : 'all',
+			...(isSinglePortPair ? { origin_location_id, destination_location_id } : {}),
+		};
+
+		const response = await sendRequirementEmail({ payload });
+
+		if (response?.status === API_RESPONSE) {
+			Toast.success('Your email will be sent');
+			setIsEmail(false);
 		}
 	};
 
 	const onTagChange = (val) => {
 		setTagsOption(val);
-		const multiSelectOptions = val.map((value) => value?.key);
+		const multiSelectOptions = val?.map((value) => value?.key);
 		setEmailSelected(multiSelectOptions);
 	};
 
@@ -105,7 +107,7 @@ function EmailPreview({
 								disabled={false}
 								onLabel="Selected Port Pair"
 								offLabel="All Assigned Port Pairs"
-								onChange={() => setIsSinglePortPair(!isSinglePortPair)}
+								onChange={() => setIsSinglePortPair((prev) => !prev)}
 								showOnOff
 								value={isSinglePortPair}
 							/>

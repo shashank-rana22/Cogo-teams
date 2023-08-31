@@ -5,7 +5,7 @@
 	height: 80px;
 	padding: 10px;
 	font-weight: 600;
-	background: var(--greyscale-secondary-white, #fff);
+	background: #fff;
 
 	@media (max-width: 576px) {
 		height: fit-content;

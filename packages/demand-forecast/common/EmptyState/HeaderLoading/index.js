@@ -2,15 +2,19 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const PLACE_HOLDER_WIDTH = ['100px', '300px', '100px', '300px', '200px', '200px'];
+
 function HeaderLoading() {
 	return (
 		<div className={styles.container}>
-			<Placeholder height="25px" width="100px" margin="10px 4px" />
-			<Placeholder height="25px" width="300px" margin="10px 4px" />
-			<Placeholder height="25px" width="100px" margin="10px 4px" />
-			<Placeholder height="25px" width="300px" margin="10px 4px" />
-			<Placeholder height="25px" width="200px" margin="10px 4px" />
-			<Placeholder height="25px" width="200px" margin="10px 4px" />
+			{PLACE_HOLDER_WIDTH.map((width) => (
+				<Placeholder
+					key={width}
+					height="25px"
+					width={width}
+					margin="10px 4px"
+				/>
+			))}
 		</div>
 	);
 }

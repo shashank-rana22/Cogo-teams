@@ -14,16 +14,8 @@
 	text-align: center;
 }
 
-.winning_profitability {
-	width: 15%;
-	text-align: center;
-}
-
-.capability {
-	width: 15%;
-	text-align: center;
-}
-
+.winning_profitability,
+.capability,
 .rates_added {
 	width: 15%;
 	text-align: center;
