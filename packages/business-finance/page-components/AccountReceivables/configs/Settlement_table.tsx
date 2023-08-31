@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
-import GetSortingData from '../components/OutStanding/OverAllOutstanding/OutstandingList/SettlementTable/sorting';
+import GetSortingData from '../components/Outstanding/OverAllOutstanding/OutstandingList/SettlementTable/sorting';
 
 interface Sort {
 	sortType?: string;
