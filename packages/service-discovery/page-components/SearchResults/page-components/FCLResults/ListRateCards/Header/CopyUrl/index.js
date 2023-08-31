@@ -8,9 +8,9 @@ function CopyUrl({ details = {} }) {
 	}));
 
 	const handleCopy = async () => {
-		await navigator.clipboard.writeText(`https://app.cogoport.com/app/${details?.importer_exporter_id}/${
+		await navigator.clipboard.writeText(`https://app.cogoport.com/${details?.importer_exporter_id}/${
 			details?.importer_exporter_branch_id
-		}/importer-exporter/book/${spot_search_id}`);
+		}/book/${spot_search_id}`);
 
 		Toast.success('Copied to clipboard');
 	};
