@@ -106,14 +106,18 @@ function Filters({
 						</Button>
 					</Popover>
 				</div>
-				<div
-					role="presentation"
-					className={styles.icon_div}
+				<Button
+					size="lg"
 					onClick={onFilters}
+					themeType="tertiary"
 				>
-					<IcMArrowRotateUp style={{ color: COLOR_MAP[orderBy?.order] }} />
-					<IcMArrowRotateDown style={{ color: COLOR_MAP_UP[orderBy?.order] }} />
-				</div>
+					<div
+						className={styles.icon_div}
+					>
+						<IcMArrowRotateUp style={{ color: COLOR_MAP[orderBy?.order] }} />
+						<IcMArrowRotateDown style={{ color: COLOR_MAP_UP[orderBy?.order] }} />
+					</div>
+				</Button>
 
 				<FilterpopOver
 					filters={formFilters}
