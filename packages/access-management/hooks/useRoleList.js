@@ -5,7 +5,6 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 import { useState, useEffect, useCallback } from 'react';
 
 import { changeFilters, getFilter, onResetFilters } from '../page-components/RoleList/Filters/utils/controls';
@@ -16,7 +15,6 @@ const FIRST_INDEX = 1;
 
 const useRoleList = () => {
 	const router = useRouter();
-	const { t } = useTranslation(['accessManagement', 'common']);
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 	const [stakeHolderType, setStakeHolderType] = useState('all');
 	const [filters, setFilters] = useState({});
@@ -76,7 +74,7 @@ const useRoleList = () => {
 
 	const columns = [
 		{
-			Header   : t('accessManagement:roles_and_permission_column_role_description'),
+			Header   : 'Role Description',
 			accessor : ({ name = '', remarks = '' }) => (
 				<section className={styles.role_description_container}>
 					<div className={styles.title}>{name}</div>
@@ -85,7 +83,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : t('accessManagement:roles_and_permission_column_role_type'),
+			Header   : 'Role Type',
 			accessor : ({ role_type = '' }) => {
 				const roleType = (role_type).toLowerCase() === 'default';
 				return (
@@ -96,7 +94,7 @@ const useRoleList = () => {
 			},
 		},
 		{
-			Header   : t('accessManagement:roles_and_permission_column_partner'),
+			Header   : 'Partner',
 			accessor : ({ partner = {} }) => (
 				<section className={styles.partner_container}>
 					{partner?.business_name}
@@ -104,7 +102,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : t('accessManagement:roles_and_permission_column_users'),
+			Header   : 'Users',
 			accessor : ({ user_count = '' }) => (
 				<section className={styles.partner_container}>
 					{user_count}
@@ -112,7 +110,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : t('accessManagement:roles_and_permission_column_level'),
+			Header   : 'Level',
 			accessor : ({ hierarchy_level = '' }) => (
 				<section className={styles.partner_container}>
 					{startCase(hierarchy_level)}
@@ -120,7 +118,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : t('accessManagement:roles_and_permission_column_functions'),
+			Header   : 'Functions',
 			accessor : ({ role_functions = [] }) => {
 				const totalFunctionPills = role_functions.length;
 
@@ -171,7 +169,7 @@ const useRoleList = () => {
 			},
 		},
 		{
-			Header   : t('accessManagement:roles_and_permission_column_sub_functions'),
+			Header   : 'Sub Functions',
 			accessor : ({ role_sub_functions = [] }) => {
 				const totalSubFunctionPills = role_sub_functions.length;
 
@@ -227,7 +225,7 @@ const useRoleList = () => {
 				<section>
 					<Button size="md" themeType="secondary" onClick={() => redirect(id)}>
 						<IcMEdit style={{ marginRight: 5 }} />
-						{t('accessManagement:roles_and_permission_update_role_edit_button')}
+						Edit
 					</Button>
 				</section>
 			),
