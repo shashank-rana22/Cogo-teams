@@ -18,7 +18,7 @@
 .header1 {
 	font-size: 14px;
 	font-style: normal;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: 150%;
 	color: #221f20;
 	text-transform: uppercase;
@@ -43,9 +43,10 @@
 	display: flex;
 	flex: 1 0 0;
 	flex-direction: column;
-	gap: 16px;
 	align-items: flex-start;
-	padding: 16px 12px;
+	padding: 18px;
+	margin-top: 12px;
+	margin-bottom: 12px;
 	background: #fff;
 }
 
@@ -56,6 +57,16 @@
 	padding: 8px;
 	color: #c26d1a;
 	background: #fef3e9;
+	border-radius: 4px;
+}
+
+.text_icon2 {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	padding: 8px;
+	color: #7278ad;
+	background: #f2f3fa;
 	border-radius: 4px;
 }
 
@@ -100,7 +111,7 @@
 .above_text {
 	font-size: 14px;
 	font-style: normal;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: 150%;
 	color: #221f20;
 	text-align: center;

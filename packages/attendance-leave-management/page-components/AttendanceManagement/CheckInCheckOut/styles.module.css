@@ -4,7 +4,7 @@
 }
 
 .header {
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .time_container {
@@ -24,12 +24,14 @@
 	padding-left: 10px;
 	margin-bottom: 10px;
 	font-size: 40px;
+	font-weight: 300;
 }
 
 .time_wrapper_out {
 	padding-left: 10px;
 	margin-bottom: 10px;
 	font-size: 40px;
+	font-weight: 300;
 }
 
 .arrow_time_wrapper {
@@ -39,11 +41,11 @@
 
 .formatted_time {
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .button_wrapper {
-	margin-top: 46px;
+	margin-top: 52px;
 
 	:global {
 		.ui_button_container {

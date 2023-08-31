@@ -13,7 +13,7 @@ const tempaccess = [
 	{
 		id         : 1,
 		teamname   : 'Temporary Access',
-		num_people : 600,
+		num_people : 500,
 		status     : 'active',
 		location   : 'Mumbai, Gurgaon',
 	},

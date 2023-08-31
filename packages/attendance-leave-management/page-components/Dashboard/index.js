@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Toast } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -27,6 +27,7 @@ function AttendanceLeaveDashboard() {
 			})
 			.catch((error) => {
 				console.error('Error getting location:', error);
+				Toast.error('Please Enable Location');
 			});
 	}, []);
 
@@ -50,9 +51,6 @@ function AttendanceLeaveDashboard() {
 					{MANAGER ? <IcMLiveChat /> : <IcMLiveChat />}
 				</Button>
 			</div>
-			{/* <div className={`${styles.modal_container} ${styles[show ? 'show' : 'hide']}`}>
-				{show && <RequestModal show={show} onClose={onClose} />}
-			</div> */}
 			{ showInbox ? <LeaveRequest setShowInbox={setShowInbox} isManager={is_manager} /> : (
 				<div className={styles.tab_container}>
 					<Tabs

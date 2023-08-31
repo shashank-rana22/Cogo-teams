@@ -12,7 +12,7 @@ function LeaveStats({ value }) {
 	const {
 		available_privilege_leaves,
 		available_casual_leaves, available_sick_leaves,
-		pending_casual_leaves, pending_sick_leaves, pending_privilege_leaves,
+		pending_casual_leaves = 0, pending_sick_leaves = 0, pending_privilege_leaves = 0,
 	} = data || {};
 
 	const [applyLeave, setApplyLeave] = useState(false);

@@ -187,3 +187,19 @@ export const EMPLOYEE_LIST_CONTROLS = {
 		multiple    : true,
 	},
 };
+
+export const GREEN_STATUS = ['present', 'holiday', 'sick_leave', 'privilege_leave', 'casual_leave',
+	'half_day_sick_leave', 'half_day_privilege_leave', 'half_day_casual_leave'];
+
+export const INVALID_STATUS = ['invalid'];
+
+export const HALF_DAY_STATUS = ['half_day_absent', 'half_day_absent_sick_leave',
+	'half_day_absent_privilege_leave', 'half_day_absent_casual_leave'];
+
+export const WEEKLY_OFF = ['weekly_off'];
+
+export const RED_DOT = ['absent', 'half_day_absent', 'leave_without_pay', 'half_day_absent_sick_leave',
+	'half_day_absent_privilege_leave', 'half_day_absent_casual_leave'];
+
+export const SEPARATOR_CONDITION = ['half_day_absent_sick_leave', 'half_day_absent_privilege_leave',
+	'half_day_absent_casual_leave', 'half_day_absent'];

@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 const useGetLeaveRequestListing = () => {
 	const [filters, setFilters] = useState({
-		page_limit : 4,
+		page_limit : 20,
 		page       : 1,
 	});
 
