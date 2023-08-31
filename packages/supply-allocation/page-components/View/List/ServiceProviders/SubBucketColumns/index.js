@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { getItemDisplayString } from '../../../../../utils/generateDisplayName';
 
+import Actions from './Actions';
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
 import styles from './styles.module.css';
@@ -34,15 +35,24 @@ const getSubBucketColumns = ({
 }) => {
 	const subBucketColumns = [
 		{
-			id       : 'service_provider',
-			Header   : 'Service Provider',
+			id       : 'actions',
+			Header   : '',
 			accessor : (item) => (
-				<ServiceProvider
+				<Actions
 					item={item}
 					bucket_type={bucket_type}
 					current_allocated_containers={current_allocated_containers}
 					rollingFclFreightSearchId={rollingFclFreightSearchId}
 					refetchBucketsData={refetchBucketsData}
+				/>
+			),
+		},
+		{
+			id       : 'service_provider',
+			Header   : 'Service Provider',
+			accessor : (item) => (
+				<ServiceProvider
+					item={item}
 				/>
 			),
 		},
