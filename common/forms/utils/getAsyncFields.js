@@ -1,4 +1,4 @@
-function asyncFieldsLocations2() {
+function asyncFieldsLocationsTwo() {
 	return {
 		valueKey    : 'id',
 		labelKey    : 'name',
@@ -100,6 +100,11 @@ function asyncFieldsOperators() {
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
 		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
 	};
 }
 
@@ -871,10 +876,34 @@ function asyncListResources() {
 		params       : {},
 	};
 }
+function asyncListLeadOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'lead_user_id',
+		endpoint    : 'list_lead_organization_users',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncListTruckTypes() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'truck_name',
+		endpoint    : 'list_trucks',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
+		},
+	};
+}
 
 export {
 	asyncFieldsLocations,
-	asyncFieldsLocations2,
+	asyncFieldsLocationsTwo as asyncFieldsLocations2,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
@@ -943,4 +972,6 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListTruckTypes,
+	asyncListLeadOrganizationUsers,
 };

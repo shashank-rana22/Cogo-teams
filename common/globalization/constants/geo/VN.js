@@ -124,7 +124,6 @@ export default {
 			'264a83ab-d438-48c3-8095-bb503f5b619c',
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
-			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -195,7 +194,7 @@ export default {
 			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
 			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
 		],
-		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
+		costbooking_ops_role_ids         : 'd18eb944-a53d-4205-ada1-585e300c6675',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
@@ -225,7 +224,7 @@ export default {
 			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
-
+			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
 		],
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
@@ -267,7 +266,7 @@ export default {
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 		],
-		fortigo_agencies_mapping: {
+		ftl_agencies_mapping: {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},

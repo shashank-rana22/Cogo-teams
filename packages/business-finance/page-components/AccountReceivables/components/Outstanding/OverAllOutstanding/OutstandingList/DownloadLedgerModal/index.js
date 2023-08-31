@@ -31,7 +31,7 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 		downloadLedger();
 	};
 	const isEnabled = date?.startDate && date?.endDate && !isEmpty(entities)
-	&& !loading;
+		&& !loading;
 
 	useEffect(() => {
 		// functionality to select the entity combination of same country only
@@ -61,7 +61,7 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 				<Modal.Header title="Download Ledger" />
 				<Modal.Body>
 					<div className={styles.container}>
-						<div>
+						<div className={styles.date}>
 							<h5>Date Range*</h5>
 							<SingleDateRange
 								placeholder="Select Date Range"

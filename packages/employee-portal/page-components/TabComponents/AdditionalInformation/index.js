@@ -1,5 +1,6 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import BankDetails from './BankDetails';
@@ -27,7 +28,7 @@ const KEY_CONTENT_MAPPING = {
 	},
 };
 
-function RenderPills({ isCompleted, bankDetails }) {
+function RenderPills({ isCompleted = false, bankDetails = [] }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
@@ -39,7 +40,9 @@ function RenderPills({ isCompleted, bankDetails }) {
 	return <Pill color="yellow">Pending</Pill>;
 }
 
-function AdditionalInformation({ setInformationPage, data, getEmployeeDetails }) {
+function AdditionalInformation({ setInformationPage = () => {}, data = {}, getEmployeeDetails = () => {} }) {
+	const { back } = useRouter();
+
 	const { progress_stats = {}, bank_details: bankDetails } = data || {};
 	const { additional_info_added = {} } = progress_stats;
 
@@ -77,7 +80,10 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>Additional Information</div>
 			</div>

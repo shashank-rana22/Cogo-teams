@@ -1,56 +1,77 @@
-import { Input, Popover } from '@cogoport/components';
+import { Input, Placeholder, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
-import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import {
+	IcMArrowRotateUp,
+	IcMArrowRotateDown,
+	IcMCross,
+} from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { GenericObject } from '../../../../commons/Interfaces';
-import { SORTBY_OPTION, getSearchOptionsLabels } from '../../../../constants/index';
+import {
+	SORTBY_OPTION,
+} from '../../../../constants';
 
+import CallPriorityModal from './CallPriorityModal';
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
 
-interface OrderBy {
-	key: string
-	order: string,
-	label: string
-}
-
-interface OutstandingFilterProps {
-	handleChange: (p:string) => void,
-	handleInputReset: () => void,
-	setOrderBy: Function,
-	orderBy: OrderBy,
-	setParams: (p: object) => void;
-	params: GenericObject,
-	formFilters: GenericObject,
-	setFormFilters: (p: object) => void;
-	clearFilter: () => void;
-	queryKey: string,
-	setQueryKey: (p:string) => void,
-	entityCode
-}
-
 function Filters({
-	handleChange,
-	handleInputReset,
-	setOrderBy,
-	orderBy,
-	setParams,
-	params,
-	formFilters,
-	setFormFilters,
-	clearFilter,
-	queryKey,
-	entityCode,
-	setQueryKey,
-}: OutstandingFilterProps) {
+	handleChange = {},
+	handleInputReset = () => { },
+	setOrderBy = () => { },
+	orderBy = { key: '', order: '', label: '' },
+	setParams = () => { },
+	params = {},
+	formFilters = {},
+	setFormFilters = () => { },
+	clearFilter = () => { },
+	queryKey = '',
+	entityCode = '',
+	refetch = () => { },
+	callPriorityData = {},
+	callPriorityLoading = false,
+}) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
-
-	const [showSearchPopover, setShowSearchPopover] = useState(false);
+	const [showCallPriority, setShowCallPriority] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
+
+	function Content() {
+		return ((
+			<div className={styles.styled_row}>
+				{SORTBY_OPTION.map((item) => (
+					<div
+						key={item.value}
+						className={styles.styled_col}
+						onClick={() => {
+							setOrderBy({
+								key   : item.value,
+								order : 'Desc',
+								label : item.label,
+							});
+							setShowSortPopover(
+								!showSortPopover,
+							);
+							setParams({
+								...params,
+								page: 1,
+							});
+						}}
+						role="presentation"
+					>
+						<div
+							className={styles.tile_heading}
+						>
+							{item.label}
+						</div>
+					</div>
+				))}
+			</div>
+		));
+	}
 
 	let placeholder;
 	if (queryKey === 'q') {
@@ -62,50 +83,38 @@ function Filters({
 	} else if (queryKey === 'organizationSerialId') {
 		placeholder = 'Search By Serial Id';
 	}
-	const { search } = params || {};
+	const { search = '' } = params || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.filter_container}>
-				<div className={styles.sort_container}>
-					<Popover
-						placement="bottom"
-						render={(
-							<div className={styles.styled_row}>
-								{SORTBY_OPTION.map((item) => (
-									<div
-										key={item.value}
-										className={styles.styled_col}
-										onClick={() => {
-											setOrderBy({
-												key   : item.value,
-												order : 'Desc',
-												label : item.label,
-											});
-											setShowSortPopover(!showSortPopover);
-											setParams({ ...params, page: 1 });
-										}}
-										role="presentation"
-									>
-										<div className={styles.tile_heading}>{item.label}</div>
-									</div>
-								))}
-							</div>
-						)}
-					>
-						<div
-							style={{ display: 'flex', cursor: 'pointer' }}
-							onClick={() => setShowSortPopover(true)}
-							role="presentation"
+				<div className={styles.upper_sort_div}>
+					<div className={styles.sort_container}>
+						<Popover
+							placement="bottom"
+							render={<Content />}
 						>
-							Sort By:
-							{' '}
-							<div className={styles.filter_value}>
-								{orderBy.label}
+							<div
+								style={{ display: 'flex', cursor: 'pointer' }}
+								onClick={() => setShowSortPopover(!showSortPopover)}
+								role="presentation"
+							>
+								Sort By:
 								{' '}
+								<div className={styles.filter_value}>
+									{orderBy.label}
+									{' '}
+									<div className={styles.sort_icon_style}>
+										{showSortPopover ? (
+											<IcMArrowRotateUp />
+										) : (
+											<IcMArrowRotateDown />
+										)}
+									</div>
+								</div>
 							</div>
-						</div>
-					</Popover>
+						</Popover>
+					</div>
 					<div
 						role="presentation"
 						className={styles.icon_div}
@@ -123,74 +132,59 @@ function Filters({
 						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
 					</div>
 
+					<FilterpopOver
+						filters={formFilters}
+						setFilters={setFormFilters}
+						clearFilter={clearFilter}
+						refetch={refetch}
+					/>
 				</div>
 				<div className={styles.flex_wrap}>
-					<div className={styles.sort_container}>
-						<Popover
-							placement="bottom"
-							render={(
-								<div className={styles.styled_row}>
-									{getSearchOptionsLabels(entityCode)?.map((item) => {
-										if (!item.label) {
-											return null;
-										}
-										return (
-											<div
-												key={item.value}
-												className={styles.styled_col}
-												onClick={() => {
-													setQueryKey(item?.value || 'q');
-													setShowSearchPopover(!showSearchPopover);
-													setParams((prev) => ({ ...prev, page: 1 }));
-												}}
-												role="presentation"
-											>
-												<div className={styles.tile_heading}>{item.label}</div>
-											</div>
-										);
-									})}
-								</div>
-							)}
+					<div className={styles.call}>
+						<div
+							style={{ display: 'flex', cursor: 'pointer' }}
+							onClick={() => setShowCallPriority(true)}
+							role="presentation"
 						>
-							<div
-								style={{ display: 'flex', cursor: 'pointer' }}
-								onClick={() => setShowSearchPopover(true)}
-								role="presentation"
-							>
-								Searched By:
-								{' '}
-								<div className={styles.filter_value}>
-									{placeholder?.replace('Search By ', '')}
-									{' '}
-								</div>
+							<div className={styles.calllabel}>
+								{callPriorityLoading ? <Placeholder width="60px" />
+									: callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]
+										?.businessName}
 							</div>
-						</Popover>
+							<div className={styles.callpriority}>
+								Call Priority
+							</div>
+						</div>
 					</div>
 					<div className={styles.flex_wrap}>
 						<Input
 							placeholder={placeholder}
 							value={search}
 							onChange={(e) => handleChange(e)}
-							suffix={(
-								<IcMCross
-									onClick={handleInputReset}
-									cursor="pointer"
-									className={styles.icon_style}
-								/>
-							)}
-							prefix={(
-								<IcMSearchdark />
-							)}
+							suffix={
+								search ? (
+									<IcMCross
+										onClick={handleInputReset}
+										cursor="pointer"
+										className={styles.icon_style}
+									/>
+								) : null
+							}
+							prefix={null}
 							className={styles.styled_input}
 						/>
 					</div>
-					<FilterpopOver
-						filters={formFilters}
-						setFilters={setFormFilters}
-						clearFilter={clearFilter}
-					/>
 				</div>
 			</div>
+			{
+				showCallPriority ? (
+					<CallPriorityModal
+						showCallPriority={showCallPriority}
+						setShowCallPriority={setShowCallPriority}
+						data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
+					/>
+				) : null
+			}
 		</div>
 	);
 }

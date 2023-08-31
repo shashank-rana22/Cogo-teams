@@ -1,5 +1,5 @@
 import { Pagination, Table } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
@@ -7,6 +7,7 @@ import ccCallListTable from '../../../configs/CC_Call_List_Table';
 import {
 	CC_COMMUNICATION_DATA,
 } from '../../../constants/kam-wise-data';
+import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
 import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstandingsStats';
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
@@ -21,6 +22,7 @@ import ResponsivePieChart from './ResponsivePieChart';
 import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
 
+const LOADER_LEN = 7;
 function OverAllOutstanding({ entityCode = '' }) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
@@ -36,9 +38,11 @@ function OverAllOutstanding({ entityCode = '' }) {
 		outStandingFilters,
 		orderBy,
 		setOrderBy,
-		setQueryKey,
 		queryKey,
-	} = useGetOrgOutstanding({ formFilters, entityCode });
+		refetch,
+	} = useGetOrgOutstanding({ entityCode });
+
+	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
 	});
@@ -191,22 +195,33 @@ function OverAllOutstanding({ entityCode = '' }) {
 				clearFilter={clearFilter}
 				handleInputReset={handleInputReset}
 				queryKey={queryKey}
-				setQueryKey={setQueryKey}
 				entityCode={entityCode}
+				refetch={refetch}
+				callPriorityData={callPriorityData}
+				callPriorityLoading={callPriorityLoading}
 			/>
 			{outstandingLoading ? (
 				<div>
-					{[1, 2, 3, 4, 5, 6, 7].map((key) => (
+					{ [...Array(LOADER_LEN).keys()].map((key) => (
 						<OrgLoader key={key} />
 					))}
 				</div>
 			) : (
 				<>
 					{list?.map((item) => (
-						<OutstandingList item={item} entityCode={entityCode} key={item?.serialId} />
+						<OutstandingList
+							item={item}
+							entityCode={entityCode}
+							key={item?.serialId}
+							showElement={false}
+							orderBy={orderBy}
+							outStandingFilters={outStandingFilters}
+							formFilters={formFilters}
+							organizationId={item?.organizationId}
+						/>
 					))}
-					{list?.length === 0 && <div className={styles.empty_state}><EmptyState /></div>}
-					{list?.length > 0 && (
+					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
+					{!isEmpty(list) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"

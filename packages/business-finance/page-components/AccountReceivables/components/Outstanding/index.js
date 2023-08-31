@@ -5,7 +5,7 @@ import OutStandingVisualization from './OutStandingVisualization';
 import OverAllOutstanding from './OverAllOutstanding/index.tsx';
 import styles from './styles.module.css';
 
-function Outstanding({ entityCode }) {
+function Outstanding({ entityCode = '' }) {
 	const [activeTab, setActiveTab] = useState('overall_outstanding');
 
 	return (

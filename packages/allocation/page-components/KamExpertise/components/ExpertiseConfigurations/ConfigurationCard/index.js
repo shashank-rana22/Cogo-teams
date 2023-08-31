@@ -2,6 +2,7 @@ import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import CardItem from './CardItem';
 import styles from './styles.module.css';
@@ -12,15 +13,15 @@ const STATUS_COLOR_MAPPING = {
 	expired : 'red',
 };
 
-const HEADING_MAPPING = {
+const getHeadingMapping = ({ t = () => {} }) => ({
 	draft: () => (
 		<div className={styles.heading}>
-			Saved Draft
+			{t('allocation:saved_draft_label')}
 		</div>
 	),
 	live: (version_number) => (
 		<div className={styles.heading}>
-			Version
+			{t('allocation:version_label')}
 			{' '}
 			{' '}
 			{version_number}
@@ -28,22 +29,26 @@ const HEADING_MAPPING = {
 	),
 	expired: (version_number) => (
 		<div className={styles.heading}>
-			Version
+			{t('allocation:version_label')}
 			{' '}
 			{' '}
 			{version_number}
 		</div>
 	),
-};
+});
 
 function ConfigurationCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { version_number = '', status = '', expertise_details = [], audit_data = {}, total_levels } = props;
+
+	const headingMapping = getHeadingMapping({ t });
 
 	return (
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-					{HEADING_MAPPING[status]?.(version_number) || ''}
+					{headingMapping[status]?.(version_number) || ''}
 
 					<Pill
 						size="lg"
@@ -54,7 +59,7 @@ function ConfigurationCard(props) {
 
 					</Pill>
 					<div style={{ marginRight: '28px' }}>
-						Total Levels:
+						{t('allocation:total_levels_header')}
 						{' '}
 						<strong>
 							{total_levels || '-'}
@@ -64,7 +69,7 @@ function ConfigurationCard(props) {
 
 					<div className={styles.last_modified}>
 						<div style={{ marginRight: '28px' }}>
-							Last Edit by
+							{t('allocation:last_edit_by_label')}
 							{' '}
 							:
 							{' '}
@@ -75,7 +80,7 @@ function ConfigurationCard(props) {
 						</div>
 
 						<div>
-							Last Modified
+							{t('allocation:last_modified_label')}
 							{' '}
 							:
 							{' '}

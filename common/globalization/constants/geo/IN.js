@@ -132,7 +132,6 @@ export default {
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
 			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand
 			'a35fbbbe-38ea-4ee8-82a8-06d1245a23a4', // KAM - Enterprise Demand
-			'4c6f6036-2383-4c40-9b84-fa2b598031e1', // KAM SO1
 			'eb292d80-a05f-4a56-a0f7-ef51255583aa', // Prod_KAM_Transport_Supply
 			'b5dd96b2-11a2-4655-8319-040614262f3d', // OKAM (Operational Key Account Manager)
 			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
@@ -144,7 +143,6 @@ export default {
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 			'8e0c7f28-f77c-44ae-9fef-901ca85fada5', // Portfolio Team Lead
-			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 		],
 		kam_manager_ids: [
 			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
@@ -154,6 +152,7 @@ export default {
 			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
+			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
 
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
@@ -270,8 +269,10 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_admin_user_ids     : [], // todo
-		cogo_one_shipment_agent_ids : [
+		cogo_one_admin_user_ids: [
+			'660ee2d6-3ea4-4c50-a722-d3f886503437', // Akshay Deshpande
+		],
+		cogo_one_shipment_agent_ids: [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
 		cogo_one_kam_agent_ids: [
@@ -282,7 +283,7 @@ export default {
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 		],
-		fortigo_agencies_mapping: {
+		ftl_agencies_mapping: {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},

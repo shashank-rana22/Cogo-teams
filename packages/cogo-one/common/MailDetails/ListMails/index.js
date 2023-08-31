@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
+import { SEARCH_QUERY_LIMIT } from '../../../constants/mailConstants';
+
 import MailLoading from './MailLoading';
 import styles from './styles.module.css';
 
@@ -13,7 +15,10 @@ function ListMails({
 	activeMail = '',
 	loading = false,
 	setActiveMail = () => {},
+	searchQuery = '',
 }) {
+	const emailsShown = (list || [])?.length;
+
 	return (
 		<div
 			className={styles.list_container}
@@ -71,6 +76,17 @@ function ListMails({
 				},
 			)}
 			{loading && <MailLoading />}
+
+			{(searchQuery && emailsShown >= SEARCH_QUERY_LIMIT)
+				? (
+					<div className={styles.search_list_error}>
+						Only recent
+						{' '}
+						{SEARCH_QUERY_LIMIT}
+						{' '}
+						mails will be shown with search filter.
+					</div>
+				) : null}
 		</div>
 	);
 }
