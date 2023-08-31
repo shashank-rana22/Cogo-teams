@@ -79,7 +79,6 @@ function CallModal({
 							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
 						</div>
 					</div>
-					<IncomingCallUserDetails />
 					{!status && conferenceType
 					&& <div className={styles.call_text}>{getConferenceText({ callState })}</div>}
 					{status && isInConferenceCall && <Attendees attendees={attendees} />}
@@ -112,6 +111,7 @@ function CallModal({
 						)}
 					</div>
 				</div>
+				<IncomingCallUserDetails />
 			</Modal.Body>
 		</Modal>
 	);
