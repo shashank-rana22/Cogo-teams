@@ -72,15 +72,13 @@ const notificationRedirect = ({ link, push, partner_id, NAVIGATION_LINKS }) => {
 function Notifications() {
 	const { push } = useRouter();
 
-	const { t } = useTranslation(['notifications']);
+	const { t } = useTranslation(['notifications', 'common']);
 
 	const { general } = useSelector((state) => state);
 	const [page, setPage] = useState(INITIAL_PAGE);
 	const [disabled, setDisabled] = useState(false);
 
 	const { scope, query: { partner_id } = {} } = general;
-
-	const { t } = useTranslation(['common']);
 
 	const navigationMappingAdmin = navigationMapping({ t });
 
