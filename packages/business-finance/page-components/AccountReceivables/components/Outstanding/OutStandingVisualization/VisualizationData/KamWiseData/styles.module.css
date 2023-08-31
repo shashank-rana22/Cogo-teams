@@ -3,10 +3,6 @@
 	padding: 16px;
 	background: #fff;
 	border-radius: 10px;
-
-	& .mb-32 {
-		margin-bottom: 32px;
-	}
 }
 
 .heading {

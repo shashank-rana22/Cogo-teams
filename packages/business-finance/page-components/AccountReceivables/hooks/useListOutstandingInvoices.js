@@ -130,7 +130,7 @@ const useListOutstandingInvoices = ({
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}, [cogoEntityValue, filters, getAgeingBucket, getDates,
 		invoiceStatus, orderBy.key, orderBy.order, params, registrationNumber, searchQuery, trigger]);
@@ -142,7 +142,6 @@ const useListOutstandingInvoices = ({
 		orderBy,
 		searchQuery,
 		invoiceStatus,
-		// fetchOutstandingInvoices,
 		filters]);
 
 	return {

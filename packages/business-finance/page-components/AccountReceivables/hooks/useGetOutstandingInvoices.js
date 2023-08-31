@@ -51,13 +51,10 @@ const useGetOutstandingInvoices = (filter, kamOwnerId, toggleValue) => {
 			dateRangePickerValue?.endDate,
 			dateRangePickerValue?.startDate,
 			entity_code,
-			// rest,
 			trigger,
 			view_type,
 		],
 	);
-
-	console.log('rest', rest);
 
 	useEffect(() => {
 		getOutstandingInvoices();

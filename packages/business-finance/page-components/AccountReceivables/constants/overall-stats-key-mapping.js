@@ -1,4 +1,4 @@
-const OverallStatsKeyMapping = [
+const OVERALL_STATS_KEY_MAPPING = [
 	{
 		valueKey : 'notDueLedAmount',
 		countKey : 'notDueCount',
@@ -29,4 +29,4 @@ const OverallStatsKeyMapping = [
 	},
 ];
 
-export default OverallStatsKeyMapping;
+export default OVERALL_STATS_KEY_MAPPING;

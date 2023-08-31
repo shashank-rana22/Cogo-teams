@@ -2,7 +2,7 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import React from 'react';
 
 function LineChart({ data = [] }) {
-	const formattedData = data.map((val) => ({
+	const formattedData = (data || []).map((val) => ({
 		x : val.duration,
 		y : val.dso,
 	}));

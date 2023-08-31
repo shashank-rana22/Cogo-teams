@@ -18,13 +18,4 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: end;
-
-	.space-left {
-		margin-left: 3px;
-		font-weight: 500;
-	}
-
-	.space-right {
-		margin-right: 0;
-	}
 }

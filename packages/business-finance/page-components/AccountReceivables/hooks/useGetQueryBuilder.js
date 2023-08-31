@@ -151,7 +151,7 @@ const useGetQueryBuilder = ({
 						: formattedPayload[path],
 			});
 		} catch (error) {
-			console.log('err', error);
+			console.error(error);
 		}
 	}, [bifurcation_type, entity_code, filters.kam_id, filters.page, getDates,
 		id, kamOwner, outstandingPagination?.page, path, queryBuilderEntity, query_conditions, trigger]);

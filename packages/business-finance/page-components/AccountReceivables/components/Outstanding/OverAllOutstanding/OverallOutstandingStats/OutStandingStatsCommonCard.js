@@ -5,8 +5,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import styles from './styles.module.css';
 
 function OutStandingStatsCommonCard({
-	label, item = {},
-	amountValue,
+	label = '', item = {},
+	amountValue = [],
 	statsLoading = false,
 }) {
 	const { totalLedAmount, totalCount, ledCurrency } = item || {};

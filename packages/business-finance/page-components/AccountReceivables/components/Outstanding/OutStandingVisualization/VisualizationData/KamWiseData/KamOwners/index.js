@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { KAM_OWNERS_ARR } from '../../../../../../constants/account-type';
 
@@ -15,16 +14,15 @@ function KamOwners({ kamOwner = '', handleKamId = {}, list = [] }) {
 		}
 
 		return null;
-	}).filter((o) => !!o);
+	}).filter((prev) => !!prev);
 
 	return (
 		<div className={styles.kam_container}>
 			<div
 				className={cl` ${styles.kam_container_box} ${kamOwner === 'all' ? styles.kam_container_color
 					: styles.kam_container_style}`}
-				color={kamOwner === 'all'}
 				onClick={() => handleKamId('all')}
-				key={uuid()}
+				key={kamOwner}
 				role="presentation"
 			>
 				All
@@ -34,7 +32,7 @@ function KamOwners({ kamOwner = '', handleKamId = {}, list = [] }) {
 					className={cl` ${styles.kam_container_box} ${kamOwner === val.kam_owner_id
 						? styles.kam_container_color : styles.kam_container_style}`}
 					onClick={() => handleKamId(val.kam_owner_id)}
-					key={uuid()}
+					key={val?.kam_owner_id}
 					role="presentation"
 				>
 					{val.kam_owner_name}

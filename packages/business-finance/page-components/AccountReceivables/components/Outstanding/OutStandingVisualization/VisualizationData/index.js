@@ -115,7 +115,7 @@ function VisualizationData({
 								onClick={renderOnClick}
 							/>
 						</div>
-						{RenderBarChart()}
+						<RenderBarChart />
 						<div
 							className={cl`${disabled ? styles.arrow_container_disabled : styles.arrow_container} `}
 							disabled={page_number < PAGE_SIZE}

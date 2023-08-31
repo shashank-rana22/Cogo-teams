@@ -3,36 +3,10 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 16px 12px;
-
-	/* & .business-select {
-		width: 200px;
-		margin-right: 12px;
-	}
-
-	& .ui-tabs-list {
-		margin-bottom: 0;
-	} */
 }
 
 .flex {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-
-	/* & .ml-16 {
-		margin-left: 16px;
-	}
-
-	& .core-ui-date-time-picker-container {
-		margin-left: 16px;
-	}
-
-	& .filter-span {
-		margin-left: 8px;
-		font-size: 12px;
-	}
-
-	& .filter-btn {
-		position: relative;
-	} */
 }

@@ -27,10 +27,10 @@ const ONE_POINT_SIX = 1.6;
 const TWO_EIGHT = 28;
 const FIVE = 5;
 const { zeroth_index } = GLOBAL_CONSTANTS || {};
-function BarChart({ data, filterValues = {}, setSelectedBarData }) {
+function BarChart({ data = [], filterValues = {}, setSelectedBarData = () => {} }) {
 	const { bifurcation_type, entity_code, view_type } = filterValues;
 
-	const formattedData = data.map((val) => ({
+	const formattedData = (data || []).map((val) => ({
 		...val,
 		...SERVICE_WISE_BAR_COLORS,
 	}));

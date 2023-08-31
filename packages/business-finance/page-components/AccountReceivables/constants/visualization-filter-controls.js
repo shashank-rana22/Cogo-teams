@@ -1,4 +1,4 @@
-export const getOptions = (view_type) => {
+export const getOptions = (view_type = '') => {
 	const options = [
 		{ label: 'Overall', value: 'overall' },
 		{ label: 'Account Type', value: 'account_type' },

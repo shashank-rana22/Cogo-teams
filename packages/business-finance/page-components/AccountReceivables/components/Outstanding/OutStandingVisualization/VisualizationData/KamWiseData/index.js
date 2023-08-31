@@ -1,5 +1,5 @@
 import { Loader } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import { OUTSTANDING_AMOUNT_KEYS } from '../../../../../constants/account-type';
@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const DATA_LENGTH = 0;
 function KamWiseData({
-	selectedBarData,
+	selectedBarData = undefined,
 	filterValues = {},
 	barData = [],
 	setKamOwnerId = () => {},
@@ -69,13 +69,13 @@ function KamWiseData({
 			);
 		}
 
-		// if (!loading && isEmpty(list || [])) {
-		// 	return (
-		// 		<div className={styles.container}>
-		// 			{/* <EmptyState /> */}
-		// 		</div>
-		// 	);
-		// }
+		if (!loading && isEmpty(list || [])) {
+			return (
+				<div className={styles.container}>
+					NO DATA FOUND
+				</div>
+			);
+		}
 		return (
 			<>
 				<KamOwners list={list} handleKamId={handleKamId} kamOwner={kamOwner} />
@@ -110,7 +110,7 @@ function KamWiseData({
 				</span>
 				{' '}
 			</div>
-			{RenderKamData()}
+			<RenderKamData />
 		</div>
 	);
 }

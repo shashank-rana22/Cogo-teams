@@ -51,7 +51,6 @@ function Headers({
 				<div className={styles.flex}>
 					<div>
 						<Select
-							className="business-select primary md"
 							placeholder="Search by Cogo entity"
 							optionsListKey="cogo-entities-id"
 							defaultOptions
@@ -69,7 +68,6 @@ function Headers({
 					</div>
 					<div>
 						<Select
-							className="business-select primary md"
 							placeholder="Select Duration Type"
 							defaultOptions
 							onChange={(e) => handleApply({ period_type: e })}
@@ -92,7 +90,6 @@ function Headers({
 						}}
 					>
 						<Select
-							className="business-select primary md"
 							placeholder="Select Bifurcation Type"
 							onChange={(e) => handleApply({ bifurcation_type: e })}
 							value={bifurcation_type}
@@ -101,7 +98,7 @@ function Headers({
 							style={{ width: '150px' }}
 						/>
 						{(bifurcation_type !== 'overall' || entity_code) && (
-							<Button className="primary sm" onClick={handleReset} style={{ marginLeft: '20px' }}>
+							<Button size="md" themeType="primary" onClick={handleReset} style={{ marginLeft: '20px' }}>
 								Reset
 							</Button>
 						)}

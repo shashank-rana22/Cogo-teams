@@ -5,7 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import styles from './styles.module.css';
 
 function PieChartLegends({ data = [], colors = [], listTitle = {}, legendPaddingTop = '' }) {
-	const { valueTitle } = listTitle;
+	const { valueTitle } = listTitle || {};
 	const { zeroth_index } = GLOBAL_CONSTANTS || {};
 	return (
 		<div className={styles.overflow_wrapper} style={{ paddingTop: legendPaddingTop || '0px' }}>

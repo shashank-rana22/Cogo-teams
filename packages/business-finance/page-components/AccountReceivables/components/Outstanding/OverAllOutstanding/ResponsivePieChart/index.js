@@ -22,7 +22,6 @@ function ResponsivePieChart({
 	const { legendPaddingTop } = graphStyles || {};
 	const [showListView, setShowListView] = useState(true);
 	const [isSortBy, setIsSortBy] = useState('');
-	// const isEmpty = (data || []).every((el) => el.value === 0);
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
 
 	const sortedData = [...data];
@@ -34,10 +33,6 @@ function ResponsivePieChart({
 	}
 
 	function RenderBody() {
-		// if (isEmpty && !loading) {
-		// 	return <EmptyState containerHeight="250px" />;
-		// }
-
 		if (loading) {
 			return (
 				<div className={styles.loader}>

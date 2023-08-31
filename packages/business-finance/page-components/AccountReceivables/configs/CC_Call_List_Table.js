@@ -46,7 +46,7 @@ const ccCallListTable = () => ([
 		id       : 'meeting_duration',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.call_duration}
+				{row?.meeting_duration}
 			</div>
 
 		),
@@ -56,7 +56,7 @@ const ccCallListTable = () => ([
 		id       : 'average_minutes_per_call',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.call_duration}
+				{row?.average_minutes_per_call}
 			</div>
 
 		),
@@ -66,7 +66,7 @@ const ccCallListTable = () => ([
 		id       : 'average_calls_per_day',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.call_duration}
+				{row?.average_calls_per_day}
 			</div>
 
 		),
@@ -76,7 +76,7 @@ const ccCallListTable = () => ([
 		id       : 'unique_customer_contacted',
 		accessor : (row) => (
 			<div style={{ fontWeight: 600 }}>
-				{row?.call_duration}
+				{row?.unique_customer_contacted}
 			</div>
 
 		),

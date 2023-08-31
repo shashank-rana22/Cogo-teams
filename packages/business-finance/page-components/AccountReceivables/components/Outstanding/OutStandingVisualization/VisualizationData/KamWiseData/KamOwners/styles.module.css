@@ -12,19 +12,10 @@
 	padding: 4px 12px;
 	margin: 0 16px 12px 0;
 	font-size: 12px;
-
-	/* background: ${({ color }) => (color === true ? '#FFFBFB' : '#FFFFFF')}; */
 	color: #6b6d81;
 	white-space: nowrap;
 	cursor: pointer;
-
-	/* background: #fffbfb; */
-
-	/* border: 1.5px solid #d5483a; */
 	border-radius: 4px;
-
-	/* border: ${({ color }) =>
-		color === true ? '1.5px solid #D5483A' : '1px solid #b2b2b2'};  */
 	box-shadow: 0 0 7px 1px #dde0e0;
 }
 

@@ -4,7 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import ON_ACCOUNTS_PAYMENTS_STATS from '../../../../constants/on-account-payment-stats-mapping';
 import OVERALL_OUTSTANDING_STATS_LABEL from '../../../../constants/overall-outstanding-stats-label';
-import OverallStatsKeyMapping from '../../../../constants/overall-stats-key-mapping';
+import OVERALL_STATS_KEY_MAPPING from '../../../../constants/overall-stats-key-mapping';
 
 import OutStandingStatsCommonCard from './OutStandingStatsCommonCard';
 import styles from './styles.module.css';
@@ -43,7 +43,7 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 					<OutStandingStatsCommonCard
 						label="Open invoices"
 						item={openInvoiceBucket}
-						amountValue={OverallStatsKeyMapping}
+						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 					/>
 					<OutStandingStatsCommonCard

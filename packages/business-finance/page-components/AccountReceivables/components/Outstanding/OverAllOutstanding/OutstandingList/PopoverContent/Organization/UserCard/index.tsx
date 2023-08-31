@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { cl, Popover } from '@cogoport/components';
 import { IcCTick, IcMCall, IcMEmail } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -78,7 +78,7 @@ function UserCard({ userData = {}, type = '' }:Props) {
 	return (
 		<Popover
 			placement="right"
-			render={RenderUserDetails()}
+			render={<RenderUserDetails />}
 			trigger="mouseenter"
 		>
 
@@ -100,7 +100,7 @@ function UserCard({ userData = {}, type = '' }:Props) {
 						</div>
 					) : (
 						<div
-							className={`${styles.avatar} ${userData?.block_access ? '#ffe3e3' : getColor()}`}
+							className={cl`${styles.avatar} ${userData?.block_access ? '#ffe3e3' : getColor()}`}
 							style={{ background: userData?.block_access ? '#ffe3e3' : getColor() }}
 
 						>

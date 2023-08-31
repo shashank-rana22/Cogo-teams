@@ -1,7 +1,6 @@
 import { Pagination, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
 import useGetQueryBuilder from '../../../../../../hooks/useGetQueryBuilder';
 import ListItem from '../ListItem';
@@ -36,9 +35,7 @@ function KamOrgData({
 
 	if (!loading && isEmpty(list || [])) {
 		return (
-			<div>
-				{/* <EmptyState /> */}
-			</div>
+			<h2>NO DATA FOUND</h2>
 		);
 	}
 
@@ -49,7 +46,7 @@ function KamOrgData({
 					item={val}
 					selectedBarData={selectedBarData}
 					filterValues={filterValues}
-					key={uuid()}
+					key={val?.credit_controller_id}
 					barData={barData}
 				/>
 			))}

@@ -25,12 +25,12 @@ const TABS_OPTIONS = [
 const DEFAULT_AMOUNT = 0;
 function ListItem({
 	item = {},
-	selectedBarData,
+	selectedBarData = {},
 	filterValues = {},
 	queryBuilderForm,
 	KamAndAgeingArr,
 	barData = [],
-	path,
+	path = '',
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();

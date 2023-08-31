@@ -6,16 +6,13 @@ import useListOutstandingInvoices from '../../../../../../../hooks/useListOutsta
 import InvoiceFilters from './InvoiceFilters';
 
 function InvoiceTable({
-	registrationNumber,
-	cogoEntityValue,
-	// popoverLoading,
-	// partnersMapping,
-	// handleClick,
+	registrationNumber = '',
+	cogoEntityValue = [],
 	ageingArr,
-	selectedBarData,
-	filterValues,
-	barData,
-	path,
+	selectedBarData = {},
+	filterValues = {},
+	barData = [],
+	path = '',
 }) {
 	const {
 		data,

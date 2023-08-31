@@ -9,7 +9,7 @@ function InvoiceFilters({
 	setSearchQuery = () => {},
 	searchQuery = '',
 	setParams = () => {},
-	params,
+	params = {},
 	setInvoiceStatus = () => {},
 	invoiceStatus = '',
 }) {
