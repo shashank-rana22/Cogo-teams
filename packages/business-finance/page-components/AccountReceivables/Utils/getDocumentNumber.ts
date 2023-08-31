@@ -3,6 +3,9 @@ import { isEmpty, getByKey } from '@cogoport/utils';
 
 import { Object } from '../commons/Interfaces';
 
+const FIRST = 1;
+const SECOND = 2;
+
 export const getDocumentNumber = ({ itemData }: Object) => {
 	const isPresent = ['irnNumber', 'invoiceNumber'].some((item) => !isEmpty(getByKey(itemData, item)));
 
@@ -41,8 +44,8 @@ export const getDocumentInfo = ({ itemData }: Object) => {
 	].filter((item) => (item[1] || undefined) !== undefined)[GLOBAL_CONSTANTS.zeroth_index];
 
 	return {
-		invoice_number : invoiceNumberPriority[GLOBAL_CONSTANTS.zeroth_index],
-		invoice_pdf    : invoiceNumberPriority[1],
-		invoice_type   : invoiceNumberPriority[2],
+		invoice_number : invoiceNumberPriority?.[GLOBAL_CONSTANTS.zeroth_index],
+		invoice_pdf    : invoiceNumberPriority?.[FIRST],
+		invoice_type   : invoiceNumberPriority?.[SECOND],
 	};
 };

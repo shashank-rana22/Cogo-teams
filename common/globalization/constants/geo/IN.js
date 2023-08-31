@@ -269,8 +269,10 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_admin_user_ids     : [], // todo
-		cogo_one_shipment_agent_ids : [
+		cogo_one_admin_user_ids: [
+			'660ee2d6-3ea4-4c50-a722-d3f886503437', // Akshay Deshpande
+		],
+		cogo_one_shipment_agent_ids: [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
 		cogo_one_kam_agent_ids: [
