@@ -125,6 +125,7 @@ function Graph({
 									</div>
 									<div style={{ textAlign: 'center' }}>
 										(
+										{' '}
 										{legend?.value}
 										{' '}
 										TEUs)
