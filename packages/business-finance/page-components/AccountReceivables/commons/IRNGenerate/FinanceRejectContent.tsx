@@ -94,7 +94,7 @@ function FinanceRejectContent({ itemData, refetch }: Content) {
 	});
 
 	const financeRejected = () => {
-		setOpenReject(!openReject);
+		setOpenReject((p) => !p);
 	};
 	const onChange = (e) => {
 		setTextValue(e);
@@ -230,9 +230,7 @@ function FinanceRejectContent({ itemData, refetch }: Content) {
 			{openReject && (
 				<Modal
 					show={openReject}
-					onClose={() => {
-						setOpenReject(false);
-					}}
+					onClose={financeRejected}
 				>
 					<Modal.Header title="Remarks*" />
 					<Modal.Body>
@@ -245,18 +243,18 @@ function FinanceRejectContent({ itemData, refetch }: Content) {
 					</Modal.Body>
 					<Modal.Footer>
 						<div className={styles.button_val}>
-							<div className={styles.style_cancel}>
-								<Button
-									className="secondary sm"
-									onClick={() => {
-										setOpenReject(false);
-									}}
-								>
-									Cancel
-								</Button>
-							</div>
 							<Button
-								className="primary sm"
+								size="md"
+								themeType="secondary"
+								onClick={financeRejected}
+								style={{ margin: '5px' }}
+							>
+								Cancel
+							</Button>
+							<Button
+								size="md"
+								style={{ margin: '5px' }}
+								themeType="primary"
 								disabled={!textValue || loadingReject}
 								onClick={financeReject}
 							>
