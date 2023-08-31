@@ -1,4 +1,5 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -15,7 +16,9 @@ function PackageItem({
 	setShowModal = () => {},
 	setInfoBanner = () => {},
 }) {
-	const { commodity = '', total_volume = 1, total_weight = 1 } = loadItem;
+	const { commodity = '', commodity_details = [], total_volume = 1, total_weight = 1 } = loadItem;
+
+	const { commodity_type = '' } = commodity_details[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div className={styles.container}>
@@ -55,7 +58,7 @@ function PackageItem({
 
 			<div className={styles.load_item} style={{ margin: '0 12px' }}>
 				<span className={styles.text}>
-					{startCase(commodity) || 'All Commodities'}
+					{startCase(commodity === 'general' ? commodity : commodity_type)}
 				</span>
 			</div>
 		</div>

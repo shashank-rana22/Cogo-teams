@@ -1,4 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
+
+import CLASS_MAPPING from '../../../SearchResults/configurations/air/classMapping';
 
 import getIncoterm from './getIncoterm';
 
@@ -10,14 +13,30 @@ const INCH_TO_CM = 2.54;
 const ROUNDOFF_TO_POWER_6 = 1000000;
 const ROUNDOFF_TO_POWER_3 = 1000;
 
+const COMMODITY_TYPE_MAPPING = {
+	general         : 'general',
+	dangerous       : 'special_consideration',
+	temp_controlled : 'special_consideration',
+	other_special   : 'special_consideration',
+};
+
 const getAirPayload = (values, origin, destination) => {
 	const incoTerm = getIncoterm(origin, destination);
 
 	const {
 		cargo_clearance_date,
-		commodity = '',
+		commodity_type = '',
+		commodity_subtype = '',
 		load_selection_type = '',
+		packing_list = '',
 	} = values;
+
+	const {
+		class_id = '',
+		class_description = '',
+		subclass_id = '',
+		subclass_codes = [],
+	} = CLASS_MAPPING?.[commodity_subtype] || {};
 
 	let totalWeight = 0;
 	let totalQuantity = 0;
@@ -121,12 +140,57 @@ const getAirPayload = (values, origin, destination) => {
 		});
 	}
 
+	let commodity_details = [];
+
+	if (commodity_type === 'general') {
+		commodity_details = [
+			{
+				commodity_type : commodity_subtype || 'all',
+				packing_list   : packing_list || undefined,
+				commodity_subtype,
+			},
+		];
+	} else if (commodity_type === 'temp_controlled') {
+		const commoditySubTypeArray = commodity_subtype.split('-');
+		const [temp_controlled_type, temp_controlled_range] = commoditySubTypeArray || [];
+
+		commodity_details = [
+			{
+				commodity_type,
+				temp_controlled_type,
+				temp_controlled_range,
+				packing_list: packing_list || undefined,
+			},
+		];
+	} else if (commodity_type === 'dangerous') {
+		commodity_details = [
+			{
+				commodity_type,
+				commodity_class: {
+					class_id,
+					class_description,
+					subclass_id,
+					subclass_codes: subclass_codes && !isEmpty(subclass_codes) ? subclass_codes : undefined,
+				},
+				packing_list: packing_list || undefined,
+			},
+		];
+	} else if (commodity_type === 'other_special') {
+		commodity_details = [
+			{
+				commodity_type,
+				commodity_subtype,
+				packing_list: packing_list || undefined,
+			},
+		];
+	}
+
 	const airPayload = {
 		origin_airport_id      : origin?.id,
 		destination_airport_id : destination?.id,
 		cargo_clearance_date,
-		commodity,
-		commodity_details      : [{ commodity_type: 'all' }],
+		commodity              : COMMODITY_TYPE_MAPPING[commodity_type],
+		commodity_details,
 		inco_term              : incoTerm || undefined,
 		packages,
 		packages_count         : totalQuantity,
