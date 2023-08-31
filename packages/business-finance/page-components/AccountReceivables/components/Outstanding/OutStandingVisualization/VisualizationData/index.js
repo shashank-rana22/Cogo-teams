@@ -1,6 +1,5 @@
-import { Tabs, TabPanel, Loader, Button, cl } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, cl } from '@cogoport/components';
 import {
-	IcMArrowRotateDown,
 	IcMArrowLeft,
 	IcMArrowRight,
 } from '@cogoport/icons-react';
@@ -22,7 +21,6 @@ const CHECK_DATA_LENGTH = 0;
 
 function VisualizationData({
 	openVisualization = false,
-	setOpenVisualization = () => {},
 }) {
 	const [selectedBarData, setSelectedBarData] = useState();
 	const [kamOwnerId, setKamOwnerId] = useState([]);
@@ -94,17 +92,6 @@ function VisualizationData({
 	const disabled = isEmpty(data) || (data || []).length < DATA_LENGTH;
 	return (
 		<div className={styles.visualization_container}>
-			<Button
-				className={styles.title_container}
-				onClick={() => setOpenVisualization(!openVisualization)}
-			>
-				<div className="fw-500" size="16px">
-					Visualization
-				</div>
-				<IcMArrowRotateDown
-					className={openVisualization ? 'inactive' : 'active'}
-				/>
-			</Button>
 			{openVisualization && (
 				<>
 					<Headers
