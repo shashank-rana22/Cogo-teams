@@ -13,6 +13,14 @@
 	}
 }
 
+.nodisplay {
+	:global {
+		.ui_tab_list_container {
+			display: none;
+		}
+	}
+}
+
 .div_container {
 	display: flex;
 	justify-content: space-between;

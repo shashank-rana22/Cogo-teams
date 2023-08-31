@@ -11,10 +11,11 @@ function Pocs({
 	tradePartnersData = {},
 	setAddPoc = () => {},
 	shipmentStakeholderData = [],
-	stakeHolderLoading,
+	stakeHolderLoading = false,
 	servicesList = [],
 	shipment_data = {},
 	rolesPermission = {},
+	activeStakeholder = '',
 }) {
 	const [isInternal, setIsInternal] = useState(true);
 
@@ -39,12 +40,14 @@ function Pocs({
 					servicesList={servicesList}
 					shipment_data={shipment_data}
 					rolesPermission={rolesPermission}
+					activeStakeholder={activeStakeholder}
 				/>
 			) : (
 				<External
 					tradePartnersData={tradePartnersData}
 					setAddPoc={setAddPoc}
 					rolesPermission={rolesPermission}
+					activeStakeholder={activeStakeholder}
 				/>
 			)}
 		</Card>

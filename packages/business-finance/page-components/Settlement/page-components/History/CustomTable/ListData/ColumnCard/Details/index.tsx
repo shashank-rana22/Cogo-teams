@@ -1,11 +1,14 @@
-import { Button, Pagination, Pill } from '@cogoport/components';
+import { Button, Pagination, Pill, cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { INVOICE_STATUS, INVOICE_STATUS_MAPPING } from '../../../../../../Constants';
+import {
+	INVOICE_STATUS,
+	INVOICE_STATUS_MAPPING,
+} from '../../../../../../Constants';
 import useDeleteHistorySettlement from '../../../../../../hooks/useDeleteHistorySettlement';
 import usePostSettlementToSage from '../../../../../../hooks/usePostSettlementToSage';
 import Loader from '../../../../../Loader';
@@ -26,7 +29,7 @@ interface ListItem {
 	documentNo: string;
 	accountType: string;
 	accMode: string;
-	notPostedSettlementIds : Array<number>;
+	notPostedSettlementIds: Array<number>;
 	ledCurrency: string;
 }
 
@@ -44,7 +47,6 @@ interface List {
 	status?: string;
 	settlementStatus?: string;
 	accMode?: string;
-
 }
 
 interface SettlementData {
@@ -55,10 +57,11 @@ interface SettlementData {
 
 interface Props {
 	item: ListItem;
-	refetch: ()=>void;
+	refetch: () => void;
 	data: SettlementData;
 	loading: boolean;
-	onPageChange: (val:number) =>void;
+	onPageChange: (val: number) => void;
+	source?: string;
 }
 
 const DEFAULT_VALUE = {
@@ -75,7 +78,6 @@ const DEFAULT_VALUE = {
 	accMode                : '',
 	notPostedSettlementIds : [],
 	ledCurrency            : '',
-
 };
 const DATA_DEFAULT_VALUE = {
 	list         : [],
@@ -84,8 +86,12 @@ const DATA_DEFAULT_VALUE = {
 };
 
 function Details({
-	data = DATA_DEFAULT_VALUE, refetch = () => {}, item = DEFAULT_VALUE,
-	loading = false, onPageChange = () => {},
+	data = DATA_DEFAULT_VALUE,
+	refetch = () => {},
+	item = DEFAULT_VALUE,
+	loading = false,
+	onPageChange = () => {},
+	source = '',
 }: Props) {
 	const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
@@ -107,34 +113,35 @@ function Details({
 	return (
 		<div className={styles.details}>
 			<div className={styles.line} />
-			<div className={styles.actions_container}>
-				{' '}
-
-				<div>
-					<Button size="sm" disabled>
-						Edit
-					</Button>
+			{source !== 'outstanding' ? (
+				<div className={styles.actions_container}>
+					{' '}
+					<div>
+						<Button size="sm" disabled>
+							Edit
+						</Button>
+					</div>
+					<div className={styles.margin_left}>
+						<Button
+							size="sm"
+							disabled={!isEmpty(disabledStatusPosted)}
+							onClick={() => { setShowDeleteConfirmationModal(true); }}
+						>
+							Delete
+						</Button>
+					</div>
+					<div className={styles.margin_left}>
+						<Button
+							size="sm"
+							onClick={() => bulkPostToSageAction(notPostedSettlementIds)}
+							disabled={bulkPostToSageLoading || !notPostedSettlementIds.length
+								|| ledCurrency === GLOBAL_CONSTANTS.currency_code.VND}
+						>
+							Post Settlement to SAGE
+						</Button>
+					</div>
 				</div>
-				<div className={styles.margin_left}>
-					<Button
-						size="sm"
-						disabled={!isEmpty(disabledStatusPosted)}
-						onClick={() => { setShowDeleteConfirmationModal(true); }}
-					>
-						Delete
-					</Button>
-				</div>
-				<div className={styles.margin_left}>
-					<Button
-						size="sm"
-						onClick={() => bulkPostToSageAction(notPostedSettlementIds)}
-						disabled={bulkPostToSageLoading || !notPostedSettlementIds.length
-							|| ledCurrency === GLOBAL_CONSTANTS.currency_code.VND}
-					>
-						Post Settlement to SAGE
-					</Button>
-				</div>
-			</div>
+			) : null}
 			<div className={styles.table}>
 				<LineItemsHeader />
 				{list.map((singleitem, index) => (
@@ -194,13 +201,16 @@ function Details({
 								{startCase(singleitem?.settlementStatus)}
 							</Pill>
 						</div>
-						<div className={styles.ribbon_render}>
-							<div
-								className={singleitem?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
-							>
-								{singleitem?.accMode}
+						{source ? null : (
+							<div className={styles.ribbon_render}>
+								<div
+									className={singleitem?.accMode === 'AP' ? styles.ribbon
+										: cl`${styles.ribbon} ${styles.ribbon_orange}`}
+								>
+									{singleitem?.accMode}
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 				))}
 			</div>
