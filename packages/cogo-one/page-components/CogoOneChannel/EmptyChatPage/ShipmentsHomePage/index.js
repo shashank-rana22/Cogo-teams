@@ -15,6 +15,7 @@ import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
 import BookingNoteModal from './BookingNoteModal';
 import Filter from './Filter';
 import LoadingState from './LoadingState';
+import NotesModal from './NotesModal';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 
@@ -34,6 +35,7 @@ function ListShipmentCards({
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	mailProps = {},
+	showModalType = () => {},
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -64,6 +66,7 @@ function ListShipmentCards({
 				setShowPocModal={setShowPocModal}
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
 				mailProps={mailProps}
+				showModalType={showModalType}
 			/>
 		),
 	);
@@ -79,6 +82,8 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 	const [showPopover, setShowPopover] = useState('');
 	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
 
+	const [modalState, setModalState] = useState({ show: '', shipmentData: {} });
+
 	const {
 		listLoading,
 		shipmentsData,
@@ -93,6 +98,10 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 		page_limit = PAGE_LIMIT,
 		total_count = DEFAULT_SHIPMENTS_COUNT,
 	} = shipmentsData || {};
+
+	const showModalType = ({ modalType = '', shipmentData = {} }) => {
+		setModalState({ show: modalType, shipmentData });
+	};
 
 	const contextValues = useMemo(() => ({
 		shipment_data: showShipmentChat,
@@ -149,6 +158,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								setShowPocModal={setShowPocModal}
 								showAddPrimaryUserButton={showAddPrimaryUserButton}
 								mailProps={mailProps}
+								showModalType={showModalType}
 							/>
 						)}
 				</div>
@@ -185,6 +195,13 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 						setActiveTab={setActiveTab}
 					/>
 				) : null}
+
+			{modalState?.show === 'show_notes_modal' ? (
+				<NotesModal
+					modalState={modalState}
+					setModalState={setModalState}
+				/>
+			) : null}
 		</>
 	);
 }

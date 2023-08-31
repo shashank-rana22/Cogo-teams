@@ -52,6 +52,7 @@ function ShipmentCard({
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	mailProps = {},
+	showModalType = () => {},
 }) {
 	const {
 		serial_id = '',
@@ -94,6 +95,7 @@ function ShipmentCard({
 				setShowPocModal={setShowPocModal}
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
 				handleShipmentChat={handleShipmentChat}
+				showModalType={showModalType}
 			/>
 		</div>
 	);
