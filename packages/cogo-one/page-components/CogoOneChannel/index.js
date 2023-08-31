@@ -75,7 +75,7 @@ function CogoOne() {
 	const {
 		viewType: initialViewType = '',
 		loading: workPrefernceLoading = false,
-		userMails = [],
+		userSharedMails = [],
 	} = useAgentWorkPrefernce();
 
 	const {
@@ -102,7 +102,7 @@ function CogoOne() {
 		activeMailAddress,
 		setActiveMailAddress,
 		viewType,
-		userMails,
+		userSharedMails,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));

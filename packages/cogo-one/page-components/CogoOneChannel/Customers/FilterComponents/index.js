@@ -31,8 +31,8 @@ function FilterComponents({
 	appliedFilters = {},
 	setIsBotSession = () => {},
 	tagOptions = [],
-	viewType,
-	activeSubTab,
+	viewType = '',
+	activeSubTab = '',
 }) {
 	const filterControls = useGetControls({
 		tagOptions,

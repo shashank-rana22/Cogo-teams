@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import MailModal from '../../../../common/CommonMailModules/MailEditorModal';
+import { MailEditorModal } from '../../../../common/MailModules';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useReplyMail from '../../../../hooks/useReplyMail';
 import NewWhatsappMessage from '../NewWhatsappMessage';
@@ -96,7 +96,7 @@ function CommunicationModals({
 			/>
 
 			{!!buttonType && (
-				<MailModal
+				<MailEditorModal
 					mailProps={mailProps}
 					userId={userId}
 					activeMail={activeMail}

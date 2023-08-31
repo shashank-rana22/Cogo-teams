@@ -22,7 +22,7 @@ const getTabMappings = ({ unReadChatsCount }) => {
 		},
 		{
 			label : 'Mails',
-			value : 'firebase_email',
+			value : 'firebase_emails',
 			show  : true,
 		},
 	];

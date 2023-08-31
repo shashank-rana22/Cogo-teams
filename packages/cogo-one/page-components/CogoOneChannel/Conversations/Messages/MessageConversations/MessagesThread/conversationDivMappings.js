@@ -1,4 +1,4 @@
-import MailBody from '../../../../../../common/MailBody';
+import { MailBody } from '../../../../../../common/MailModules';
 import ReceiveDiv from '../../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../../common/SentDiv';
 

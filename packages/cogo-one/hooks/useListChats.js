@@ -29,6 +29,7 @@ function useListChats({
 	setActiveTab,
 	setCarouselState,
 	workPrefernceLoading = false,
+	listOnlyMails = false,
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -66,8 +67,9 @@ function useListChats({
 			isBotSession,
 			viewType,
 			activeSubTab,
+			listOnlyMails,
 		}),
-		[appliedFilters, isBotSession, userId, viewType, activeSubTab],
+		[appliedFilters, isBotSession, userId, viewType, activeSubTab, listOnlyMails],
 	);
 
 	const queryForSearch = useMemo(() => (

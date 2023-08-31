@@ -4,21 +4,21 @@ import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
+import { getUserActiveMails } from '../../../configurations/mail-configuration';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
-import EmailList from './EmailList';
+import MailsList from './MailsList';
 import MessageList from './MessageList';
-import OutlookList from './OutlookList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
-	message        : MessageList,
-	voice          : VoiceList,
-	outlook        : OutlookList,
-	firebase_email : EmailList,
+	message         : MessageList,
+	voice           : VoiceList,
+	outlook         : MailsList,
+	firebase_emails : MailsList,
 };
 
 function Customers({
@@ -42,7 +42,13 @@ function Customers({
 	autoAssignChats = {},
 	setAutoAssignChats = () => {},
 }) {
+	const {
+		userEmailAddress = '',
+		userSharedMails = [],
+	} = mailProps || {};
+
 	const [isBotSession, setIsBotSession] = useState(false);
+	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -75,14 +81,25 @@ function Customers({
 			activeTab       : activeTab?.tab,
 		},
 		outlook: {
-			...mailProps,
+			mailProps,
 			viewType,
+			mailsToBeShown: userActiveMails,
+		},
+		firebase_emails: {
+			mailProps,
+			viewType,
+			mailsToBeShown: userSharedMails,
+			firestore,
 		},
 	};
 
 	const tabMappings = getTabMappings({ unReadChatsCount });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
+
+	const handleChangeTab = (val) => {
+		setActiveTab({ tab: val, data: {}, subTab: 'all' });
+	};
 
 	return (
 		<div className={styles.container}>
@@ -116,9 +133,7 @@ function Customers({
 					activeTab={activeTab?.tab}
 					fullWidth
 					themeType="secondary"
-					onChange={(val) => {
-						setActiveTab({ tab: val, data: {}, subTab: 'all' });
-					}}
+					onChange={handleChangeTab}
 				>
 					{tabMappings.map((eachTab) => {
 						if (!eachTab.show) {
