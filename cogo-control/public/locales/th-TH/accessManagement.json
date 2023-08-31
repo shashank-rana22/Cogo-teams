@@ -213,5 +213,6 @@
     "roles_and_permission_permission_list_import_roles_select_assign_priority": "กำหนดลำดับความสำคัญ",
     "roles_and_permission_use_create_roles_successfull": "อัปเดตบทบาทเรียบร้อยแล้ว",
     "roles_and_permission_use_create_roles_unable": "ไม่สามารถอัปเดตบทบาทได้ โปรดลองอีกครั้ง",
-    "roles_and_permission_use_create_roles_no_change": "ไม่มีการเปลี่ยนแปลงในสิทธิ์"
+    "roles_and_permission_use_create_roles_no_change": "ไม่มีการเปลี่ยนแปลงในสิทธิ์",
+    "roles_and_permission_permission_value_is_required": "ต้องระบุค่าสิทธิ์"
 }

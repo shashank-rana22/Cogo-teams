@@ -13,7 +13,7 @@ function Filters({
 	navStatus = {},
 	setNavStatus = () => {},
 }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const content = (
 		<section className={styles.filters_popover_content}>
 			<span>{t('accessManagement:roles_and_permission_filters_navigation_status_heading')}</span>

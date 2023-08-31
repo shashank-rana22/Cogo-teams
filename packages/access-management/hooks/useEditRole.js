@@ -1,9 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useMemo } from 'react';
 
-const useEditRole = ({ roleData, setShow, getRole, t = () => {} }) => {
+const useEditRole = ({ roleData, setShow, getRole }) => {
+	const { t } = useTranslation(['accessManagement']);
 	const controls = useMemo(() => [
 		{
 			name        : 'short_name',

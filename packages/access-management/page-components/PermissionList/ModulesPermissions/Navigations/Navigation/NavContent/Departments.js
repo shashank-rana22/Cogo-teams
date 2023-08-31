@@ -49,7 +49,7 @@ const getDepartment = (item) => {
 };
 
 function Departments({ onChange = () => {}, selectedDepartments = {} }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const OPTIONS_Select = [
 		{
 			label : t('accessManagement:roles_and_permission_allow'),

@@ -18,7 +18,7 @@ function Permission({
 	setNavigationRefs = () => {},
 	creatingNavs = false,
 }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 	const formValues = getFormValues(permission, navigation, customPermissions);
 	const [errors, setErrors] = useState({});
 	const controls = [
@@ -31,7 +31,7 @@ function Permission({
 			valueKey : 'view_type',
 			multiple : true,
 			disabled : creatingNavs,
-			rules    : { required: 'Permission value is required' },
+			rules    : { required: t('accessManagement:roles_and_permission_permission_value_is_required') },
 		},
 	];
 	const OTHER_CONTROLS = [];

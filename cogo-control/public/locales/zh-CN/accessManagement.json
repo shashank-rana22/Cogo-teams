@@ -213,5 +213,6 @@
     "roles_and_permission_permission_list_import_roles_select_assign_priority": "分配优先级",
     "roles_and_permission_use_create_roles_successfull": "角色更新成功",
     "roles_and_permission_use_create_roles_unable": "无法更新角色，请重试",
-    "roles_and_permission_use_create_roles_no_change": "权限未更改。"
+    "roles_and_permission_use_create_roles_no_change": "权限未更改。",
+    "roles_and_permission_permission_value_is_required": "需要权限值"
 }

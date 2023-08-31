@@ -9,7 +9,7 @@ import Edit from './edit';
 import styles from './styles.module.css';
 
 function EditRoleModal({ roleData, getRole }) {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	const { t } = useTranslation(['accessManagement']);
 
 	const [show, setShow] = useState(false);
 
@@ -19,7 +19,7 @@ function EditRoleModal({ roleData, getRole }) {
 		handleSubmit,
 		editRoleApi,
 		editRole,
-	} = useEditRole({ roleData, setShow, getRole, t });
+	} = useEditRole({ roleData, setShow, getRole });
 
 	const onClick = () => {
 		setShow(true);

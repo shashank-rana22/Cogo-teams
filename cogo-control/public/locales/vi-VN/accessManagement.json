@@ -213,5 +213,6 @@
     "roles_and_permission_permission_list_import_roles_select_assign_priority": "Gán Ưu tiên",
     "roles_and_permission_use_create_roles_successfull": "Cập nhật vai trò thành công",
     "roles_and_permission_use_create_roles_unable": "Không thể cập nhật vai trò, vui lòng thử lại",
-    "roles_and_permission_use_create_roles_no_change": "Không có thay đổi về quyền."
+    "roles_and_permission_use_create_roles_no_change": "Không có thay đổi về quyền.",
+    "roles_and_permission_permission_value_is_required": "Giá trị quyền là bắt buộc"
 }
