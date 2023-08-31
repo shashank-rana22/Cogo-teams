@@ -132,7 +132,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
 	});
-	const { search, dueDate, invoiceDate, updatedDate, ...rest } = globalFilters;
+	const { search, dueDate, invoiceDate, updatedDate, category, ...rest } = globalFilters;
 
 	useEffect(() => {
 		const newData = { ...api[GLOBAL_CONSTANTS.zeroth_index]?.data };
@@ -166,6 +166,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 				performedByName,
 				organizationId,
 				services,
+				category           : category || undefined,
 				...(rest || {}),
 				startDate          : changeFormat(dueDate?.startDate) || undefined,
 				endDate            : changeFormat(dueDate?.endDate) || undefined,
@@ -290,6 +291,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		invoiceDate,
 		updatedDate,
 		query,
+		category,
 		viewSelectedInvoice,
 		sort,
 	]);
