@@ -29,6 +29,8 @@ const getAirPayload = (values, origin, destination) => {
 		commodity_subtype = '',
 		load_selection_type = '',
 		packing_list = '',
+		commodity = '',
+		commodity_details = [],
 	} = values;
 
 	const {
@@ -140,10 +142,10 @@ const getAirPayload = (values, origin, destination) => {
 		});
 	}
 
-	let commodity_details = [];
+	let commodity_details_values = [];
 
 	if (commodity_type === 'general') {
-		commodity_details = [
+		commodity_details_values = [
 			{
 				commodity_type : commodity_subtype || 'all',
 				packing_list   : packing_list || undefined,
@@ -154,7 +156,7 @@ const getAirPayload = (values, origin, destination) => {
 		const commoditySubTypeArray = commodity_subtype.split('-');
 		const [temp_controlled_type, temp_controlled_range] = commoditySubTypeArray || [];
 
-		commodity_details = [
+		commodity_details_values = [
 			{
 				commodity_type,
 				temp_controlled_type,
@@ -163,7 +165,7 @@ const getAirPayload = (values, origin, destination) => {
 			},
 		];
 	} else if (commodity_type === 'dangerous') {
-		commodity_details = [
+		commodity_details_values = [
 			{
 				commodity_type,
 				commodity_class: {
@@ -176,7 +178,7 @@ const getAirPayload = (values, origin, destination) => {
 			},
 		];
 	} else if (commodity_type === 'other_special') {
-		commodity_details = [
+		commodity_details_values = [
 			{
 				commodity_type,
 				commodity_subtype,
@@ -189,8 +191,8 @@ const getAirPayload = (values, origin, destination) => {
 		origin_airport_id      : origin?.id,
 		destination_airport_id : destination?.id,
 		cargo_clearance_date,
-		commodity              : COMMODITY_TYPE_MAPPING[commodity_type],
-		commodity_details,
+		commodity              : commodity || COMMODITY_TYPE_MAPPING[commodity_type],
+		commodity_details      : !isEmpty(commodity_details) ? commodity_details : commodity_details_values,
 		inco_term              : incoTerm || undefined,
 		packages,
 		packages_count         : totalQuantity,
