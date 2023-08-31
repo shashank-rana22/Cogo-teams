@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { orderBy } from 'firebase/firestore';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
@@ -15,6 +16,16 @@ const TAB_WISE_QUERY_KEY_MAPPING = {
 	kamContacts : 'kam_contacts_base_query',
 };
 
+const getModifiedFilters = ({ appliedFilters }) => ({
+	...(appliedFilters || {}),
+	channels: isEmpty(appliedFilters?.channels) ? [
+		'platform_chat',
+		'telegram',
+		'whatsapp',
+		'zalo',
+	] : appliedFilters?.channels,
+});
+
 function getFireStoreQuery({
 	userId,
 	appliedFilters,
@@ -30,14 +41,16 @@ function getFireStoreQuery({
 	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 	const epochTimestamp = currentTime.getTime();
 
+	const modifiedFilters = getModifiedFilters({ appliedFilters });
+
 	const queryFilterMapping = getQueryFilterMapping({
-		appliedFilters,
+		appliedFilters: modifiedFilters,
 		isBotSession,
 		epochTimestamp,
 		filterId,
 	});
 
-	const queryFilters = Object.keys(appliedFilters).reduce(
+	const queryFilters = Object.keys(modifiedFilters).reduce(
 		(accumulator, currentValue) => [
 			...accumulator,
 			...(queryFilterMapping?.[currentValue] || []),
