@@ -25,11 +25,7 @@
 	border-left: 1px dashed #bdbdbd;
 }
 
-.forecasted_demand {
-	flex: 2;
-	margin-left: 30px;
-}
-
+.forecasted_demand,
 .forecasted_dates {
 	flex: 2;
 	margin-left: 30px;

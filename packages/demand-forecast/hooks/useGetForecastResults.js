@@ -29,7 +29,6 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[page, trigger, filters],
 	);
 

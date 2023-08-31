@@ -114,13 +114,11 @@ function Graph({
 						<div className={styles.legends_container}>
 							{graphicalData.map((legend, index) => (
 								<div key={legend.key} className={styles.legend_info}>
-
 									<div style={{ display: 'flex', alignItems: 'center' }}>
 										<div
 											className={styles.circle}
 											style={{ background: `${colors[index]}` }}
 										/>
-
 										{legend?.label}
 									</div>
 									<div style={{ textAlign: 'center' }}>
