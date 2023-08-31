@@ -169,8 +169,8 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 				<div className={styles.action_flex}>
 					<IcMTimer
 						className={cl`${styles.cursor_pointer} ${styles.timer_icon}`}
-						width={25}
-						height={25}
+						width={20}
+						height={20}
 						onClick={() => handleOpenModal(item.date)}
 					/>
 				</div>
