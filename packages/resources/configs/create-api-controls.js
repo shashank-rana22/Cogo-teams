@@ -34,6 +34,7 @@ const createApiResourceControls = [
 		type    : 'select',
 		options : [
 			{ label: 'Rolling Forecast', value: 'rolling_forecast' },
+			{ label: 'Lead', value: 'lead' },
 			{ label: 'Condition', value: 'condition' },
 			{ label: 'Ltl freight rate', value: 'ltl_freight_rate' },
 			{ label: 'Sage', value: 'sage' },

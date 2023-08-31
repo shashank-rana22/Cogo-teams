@@ -1,16 +1,10 @@
 import { RatingComponent, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import Actions from '../Actions';
-
 import styles from './styles.module.css';
 
 function ServiceProvider({
 	item = {},
-	bucket_type = '',
-	current_allocated_containers = '',
-	rollingFclFreightSearchId = '',
-	refetchBucketsData = () => {},
 }) {
 	const {
 		service_provider,
@@ -24,16 +18,9 @@ function ServiceProvider({
 			style={{
 				display        : 'flex',
 				alignItems     : 'center',
-				justifyContent : 'space-between',
+				justifyContent : 'center',
 			}}
 		>
-			<Actions
-				item={item}
-				bucket_type={bucket_type}
-				current_allocated_containers={current_allocated_containers}
-				rollingFclFreightSearchId={rollingFclFreightSearchId}
-				refetchBucketsData={refetchBucketsData}
-			/>
 			<div
 				style={{
 					display       : 'flex',
