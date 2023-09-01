@@ -16,7 +16,7 @@ const getPayload = ({ values }) => {
 		primary_lead_user : {
 			name,
 			email               : email_id,
-			mobile_number       : Number(number),
+			mobile_number       : number,
 			mobile_country_code : country_code,
 		},
 	};
