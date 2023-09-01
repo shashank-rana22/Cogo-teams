@@ -1,0 +1,20 @@
+/* .container {
+
+} */
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.sub_text {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.style_controller {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,5 @@
-import { Textarea, Button } from '@cogoport/components';
+import { Textarea, Button, Toast } from '@cogoport/components';
+import { useHarbourRequest } from '@cogoport/request';
 import React, { useState } from 'react';
 
 import EmployeeData from '../EmployeeDetail';
@@ -9,11 +10,22 @@ function ResignationForm({ setShowModal = () => {}, setCurrentState = () => {} }
 	const [reason, setReason] = useState('');
 	const [error, setError] = useState(false);
 
-	const onClickSubmit = () => {
+	const [{ loading }, trigger] = useHarbourRequest({
+		url    : '/create_application',
+		method : 'POST',
+	}, { manual: true });
+
+	const onClickSubmit = async () => {
 		if (!reason) { setError(true); return; }
 		setError(false);
 
-		setCurrentState('ticket_generation');
+		try {
+			await trigger({ data: { reason } });
+
+			setCurrentState('ticket_generation');
+		} catch (err) {
+			if (err?.response) Toast.error(err?.response?.data);
+		}
 	};
 
 	return (
@@ -32,8 +44,14 @@ function ResignationForm({ setShowModal = () => {}, setCurrentState = () => {} }
 			{error ? <div className={styles.error}>Reason is required</div> : null}
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
-				<Button style={{ marginLeft: 8 }} onClick={onClickSubmit}>Submit</Button>
+				<Button themeType="secondary" onClick={() => setShowModal(false)} disabled={loading}>Cancel</Button>
+				<Button
+					style={{ marginLeft: 8 }}
+					onClick={onClickSubmit}
+					loading={loading}
+				>
+					Submit
+				</Button>
 			</div>
 		</div>
 	);
