@@ -4,8 +4,12 @@
 }
 
 .form_container {
-	height: 90%;
+	height: calc(100% - 50px);
 	overflow: scroll;
+}
+
+.form_container::-webkit-scrollbar {
+	display: none;
 }
 
 .footer {

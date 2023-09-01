@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 
 import FormLayout from '../../../../../../common/FormLayout';
 import { MODE_CONTROLS_MAPPING } from '../../../../../../configurations/addNotesConfig';
+import useCreateModewiseSop from '../../../../../../hooks/useCreateModewiseSop';
 
 import styles from './styles.module.css';
 
@@ -17,14 +18,24 @@ const MODE_WISE_DEFAULTS = {
 		],
 	},
 };
-function AddNotes({ mode = '', shipmentData = {} }) {
-	console.log('shipmentData', shipmentData);
+function AddNotes({
+	mode = '',
+	shipmentData = {},
+	setShowForm = () => {},
+	procedureId = '',
+	getModeSopData = () => {},
+}) {
 	const {
 		control, formState:{ errors = {} },
-		// handleSubmit,
+		handleSubmit,
 	} = useForm(
 		{ defaultValues: MODE_WISE_DEFAULTS[mode] || {} },
 	);
+
+	const {
+		createModewiseSop = () => {},
+		loading = false,
+	} = useCreateModewiseSop({ shipmentData, procedureId, getModeSopData, setShowForm });
 
 	const modeControls = MODE_CONTROLS_MAPPING[mode];
 
@@ -41,17 +52,17 @@ function AddNotes({ mode = '', shipmentData = {} }) {
 				<Button
 					size="md"
 					themeType="secondary"
-					// disabled={loading}
-					// onClick={onCloseForm}
+					disabled={loading}
+					onClick={() => setShowForm(false)}
 				>
 					Cancel
 				</Button>
 				<Button
 					size="md"
-					themeType="accent"
+					themeType="primary"
 					className={styles.button_styles}
-					// onClick={handleSubmit(createLeadOrgUserLog)}
-					// loading={loading}
+					onClick={handleSubmit(createModewiseSop)}
+					loading={loading}
 				>
 					Submit
 				</Button>

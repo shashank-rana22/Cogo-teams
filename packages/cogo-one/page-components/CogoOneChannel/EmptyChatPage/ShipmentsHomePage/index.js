@@ -200,6 +200,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 				<NotesModal
 					modalState={modalState}
 					setModalState={setModalState}
+					key={modalState?.shipmentData?.id}
 				/>
 			) : null}
 		</>

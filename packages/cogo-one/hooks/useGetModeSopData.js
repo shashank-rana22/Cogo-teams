@@ -16,10 +16,20 @@ const getOceanParams = ({
 	org_data_required: false,
 });
 
+const oceanFormatter = ({ data = {} }) => {
+	const { operating_instructions = [], operating_procedure = {} } = data || {};
+
+	return {
+		data        : operating_instructions.filter((item) => item?.instruction === 'additional_preference'),
+		procedureId : operating_procedure?.id,
+	};
+};
+
 const MODE_WISE_PAYLOAD_MAPPING = {
 	ocean: {
-		endpoint  : '/get_shipment_operating_procedure',
-		getParams : getOceanParams,
+		endpoint      : '/get_shipment_operating_procedure',
+		getParams     : getOceanParams,
+		dataFormatter : oceanFormatter,
 	},
 };
 
@@ -27,7 +37,11 @@ const useGetModeSopData = ({
 	shipmentData = {},
 	mode = '',
 }) => {
-	const { endpoint = '', getParams = () => {} } = MODE_WISE_PAYLOAD_MAPPING[mode] || MODE_WISE_PAYLOAD_MAPPING.ocean;
+	const {
+		endpoint = '',
+		getParams = () => {},
+		dataFormatter = () => {},
+	} = MODE_WISE_PAYLOAD_MAPPING[mode] || MODE_WISE_PAYLOAD_MAPPING.ocean;
 
 	const [{ data, loading }, trigger] = useRequest({
 		url: endpoint,
@@ -52,9 +66,14 @@ const useGetModeSopData = ({
 	useEffect(() => {
 		getModeSopData();
 	}, [getModeSopData]);
+
+	const { data:notesData, procedureId } = dataFormatter({ data }) || {};
+
 	return {
 		loading,
-		data,
+		notesData,
+		procedureId,
+		getModeSopData,
 	};
 };
 export default useGetModeSopData;

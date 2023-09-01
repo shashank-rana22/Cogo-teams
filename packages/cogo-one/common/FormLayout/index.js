@@ -21,9 +21,9 @@ function FormLayout({
 				}
 
 				return (
-					<div className={styles.each_element} key={name} style={{ width, ...customStyles }}>
+					<div className={styles.each_element} key={name} style={{ width }}>
 						<label className={styles.label_styles}>{label}</label>
-						<Element control={control} {...eachControl} error={errors?.[name]} />
+						<Element control={control} {...eachControl} error={errors?.[name]} style={customStyles} />
 						<div className={styles.error_text}>
 							{controlType !== 'fieldArray'
 							&& (errors?.[name] && (errors[name]?.message || 'This is Required'))}

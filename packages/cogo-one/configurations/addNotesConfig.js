@@ -3,19 +3,28 @@ const OCEAN_CONTROLS = [
 		name               : 'additional',
 		controlType        : 'fieldArray',
 		noDeleteButtonTill : 1,
-		defaultValues      : [
+		defaultValues:
 			{
 				category : '',
 				remarks  : '',
 				document : '',
 			},
-		],
-		width    : '100%',
-		controls : [
+		width        : '100%',
+		customStyles : {
+			flexDirection : 'column',
+			alignItems    : 'flex-start',
+			border        : '1px solid #e0e0e0',
+			borderRadius  : '8px',
+			padding       : '8px',
+		},
+		showAddButton : true,
+		buttonText    : '+ Add More',
+		controls      : [
 			{
 				name        : 'category',
 				controlType : 'select',
 				placeholder : 'Category',
+				label       : 'Select Category',
 				width       : '70%',
 				options     : [
 					{
@@ -39,16 +48,21 @@ const OCEAN_CONTROLS = [
 						value : 'others',
 					},
 				],
+				customStyles: {
+					width: '100%',
+				},
 				rules: {
 					required: 'Category is required',
 				},
 			},
 			{
 				name        : 'remarks',
-				controlType : 'input',
+				controlType : 'textarea',
+
 				type        : 'text',
-				placeholder : 'Comment',
-				width       : '70%',
+				placeholder : 'Add Comments here...',
+				width       : '100%',
+				rows        : 4,
 				rules       : {
 					required: 'Comment is required',
 				},
@@ -56,8 +70,8 @@ const OCEAN_CONTROLS = [
 			{
 				name        : 'document',
 				controlType : 'fileUpload',
-				type        : 'text',
 				width       : '100%',
+				type        : 'card',
 			},
 		],
 	},
