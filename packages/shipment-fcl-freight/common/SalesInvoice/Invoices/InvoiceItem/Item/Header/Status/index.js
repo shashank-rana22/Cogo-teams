@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -82,7 +82,7 @@ function Status({
 			{invoice?.processing
 				? (
 					<div className={styles.relaod}>
-						<div className={styles.text}>This Invoice is still processing</div>
+						<div className={cl`${styles.payment_method} ${styles.processing}`}>Processing</div>
 						<Button
 							size="sm"
 							themeType="tertiary"

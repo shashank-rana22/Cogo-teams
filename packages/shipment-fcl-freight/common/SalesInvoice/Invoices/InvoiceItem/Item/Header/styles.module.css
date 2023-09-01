@@ -151,6 +151,10 @@
 	}
 }
 
+.processing {
+	background-color: var(--color-primary-error-red-5);
+}
+
 .icon_wrapper {
 	display: flex;
 	align-items: center;
