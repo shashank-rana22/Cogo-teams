@@ -30,7 +30,7 @@ function ShowTimeLine({ data = [], loading = false }) {
 
 	const dateWithTimeForPosted = timeLine[zeroth_index]?.occurredAt?.split(' ') || '';
 	const geo = getGeoConstants();
-	console.log(timeLine, 'timeLine');
+
 	useEffect(() => {
 		setComplete(timeLine[zeroth_index]?.eventName === 'POSTED');
 	}, [timeLine, zeroth_index]);

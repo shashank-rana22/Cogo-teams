@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 import SupplierData from './SupplierData';
 
 const PLACEHOLDERS = 3;
-const TIMELINEKEY = '4';
+const TIMELINEKEY = 2;
 
 function InvoiceData({ item = {} }) {
 	const {
@@ -60,11 +60,11 @@ function InvoiceData({ item = {} }) {
 	const { billNumber = '', sid = '' } = item || {};
 
 	const ComponentMappings = {
-		'Invoice Timeline': <ShowTimeLine
+		1 : <CustomerData data={invoiceDetails} />,
+		2 : <ShowTimeLine
 			data={timeLineDetails}
 			loading={timeLineDetailsLoading}
 		/>,
-		'Customer Information': <CustomerData data={invoiceDetails} />,
 	};
 
 	return (
@@ -129,7 +129,7 @@ function InvoiceData({ item = {} }) {
 																? styles.enter_down : styles.exit_down}
 														>
 															<div className={styles.information_data}>
-																{ComponentMappings[label]}
+																{ComponentMappings[id]}
 															</div>
 														</div>
 													</>

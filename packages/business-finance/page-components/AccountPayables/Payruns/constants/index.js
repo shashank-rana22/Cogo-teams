@@ -22,10 +22,10 @@ export const RIBBON_VALUE_MAPPING = {
 	ADVANCE_PAYMENT : 'Adv.Payment',
 };
 export const INVOICE_DATA_MAPPING = [
-	{ id: '1', label: 'Profitability' },
-	{ id: '2', label: 'Supplier Information' },
-	{ id: '3', label: 'Customer Information' },
-	{ id: '4', label: 'Invoice Timeline' },
+	{ id: 1, label: 'Customer Information' },
+	{ id: 2, label: 'Invoice Timeline' },
+	{ id: 3, label: 'Profitability' },
+	{ id: 4, label: 'Supplier Information' },
 ];
 
 export const DETAILS = [
