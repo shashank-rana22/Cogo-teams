@@ -9,6 +9,8 @@ import AutomationWalletDetails from './Details';
 import styles from './styles.module.css';
 
 function AutomationWallet() {
+	const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
+	const ZERO_VALUE = 0;
 	const { data, filters = {}, setFilter = () => {}, refetch = () => {}, loading } = useListRevenueDeskWallet();
 	const [createWallet, setCreateWallet] = useState(false);
 
@@ -35,11 +37,25 @@ function AutomationWallet() {
 					Create New Wallet
 				</Button>
 			</div>
-			{data?.map((val) => (
-				<div key={val?.id}>
-					<AutomationWalletDetails data={val} refetch={refetch} loading={loading} />
+
+			{data?.length === ZERO_VALUE ? (
+				<div className={styles.empty_icon}>
+					<img
+						src={SRC}
+						alt="empty_page"
+						height="50%"
+						width="50%"
+					/>
 				</div>
-			))}
+			) : (
+				<div>
+					{data?.map((val) => (
+						<div key={val?.id}>
+							<AutomationWalletDetails data={val} refetch={refetch} loading={loading} />
+						</div>
+					))}
+				</div>
+			)}
 
 			{createWallet && (
 				<CreateWallet

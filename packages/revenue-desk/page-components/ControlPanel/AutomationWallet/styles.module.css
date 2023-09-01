@@ -3,3 +3,8 @@
 	justify-content: space-between;
 	margin-top: 15px;
 }
+
+.empty_icon {
+	margin-top: 40px;
+	text-align: center;
+}

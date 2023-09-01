@@ -1,4 +1,4 @@
-import { Button, Input } from '@cogoport/components';
+import { Button, Input, Loader } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -6,12 +6,12 @@ import useUpdateRevenueDeskWallet from '../../../../hooks/useUpdateRevenueDeskWa
 
 import styles from './styles.module.css';
 
-function AutomationWalletDetails({ data = [], refetch = () => {}, loading = false }) {
+function AutomationWalletDetails({ data = {}, refetch = () => {}, loading = false }) {
 	const [disabledValue, setDisabledValue] = useState(false);
 	const [walletAmount, setWalletAmount] = useState(data?.wallet_amount);
 
-	const { service_type, shipment_parameters } = data;
-	const { origin_location, destination_location } = shipment_parameters;
+	const { service_type, shipment_parameters } = data || {};
+	const { trade_type, origin_location, destination_location } = shipment_parameters || {};
 
 	const { updateRevenueDeskWallet } = useUpdateRevenueDeskWallet({
 		service_type,
@@ -20,7 +20,7 @@ function AutomationWalletDetails({ data = [], refetch = () => {}, loading = fals
 	});
 
 	if (loading) {
-		return <>123</>;
+		return <Loader />;
 	}
 
 	return (
@@ -28,21 +28,25 @@ function AutomationWalletDetails({ data = [], refetch = () => {}, loading = fals
 			<div>{startCase(service_type)}</div>
 			<div className={styles.service}>
 				<div className={styles.content_details}>
-					<div className={styles.content}>
-						Trade Type : Import
-					</div>
+					{trade_type && (
+						<div className={styles.content}>
+							Trade Type :
+							{' '}
+							{trade_type}
+						</div>
+					)}
 					{origin_location &&	(
 						<div className={styles.content}>
 							Origin Location :
 							{' '}
-							{origin_location}
+							{origin_location?.name}
 						</div>
 					)}
 					{destination_location
 					&& (
 						<div className={styles.content}>
 							Destination Location :
-							{destination_location}
+							{destination_location?.name}
 						</div>
 					)}
 
