@@ -6,23 +6,23 @@ import { useContext, useState, useEffect, useMemo } from 'react';
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
 const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
-	const { user_id } = useSelector(({ profile }) => ({ user_id: profile?.user?.id }));
+	const { user_id } = useSelector(({ profile }) => ({	user_id: profile?.user?.id }));
 
-	const { stakeholderConfig : { tasks = {} } = {} } = useContext(ShipmentDetailContext);
-	const stakeholder_types = useMemo(() => (shipment_data?.stakeholder_types
-		? shipment_data?.stakeholder_types[GLOBAL_CONSTANTS.zeroth_index]
-		: ''), [shipment_data]);
+	const { stakeholderConfig : { tasks = {} } = {}, activeStakeholder } = useContext(ShipmentDetailContext);
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
 	const [showMyTasks, setShowMyTasks] = useState(!!tasks.checked_show_my_tasks);
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters, setFilters] = useState({});
-
 	const { data, loading, apiTrigger:taskListRefetch } = useListShipmentPendingTasks({
 		defaultFilters : { shipment_id: shipment_data.id, shipment_type: 'air_freight' },
 		defaultParams  : { page_limit: 100, sort_by: 'created_at', sort_type: 'asc' },
 		filters,
 	});
+
+	let stakeholder_types = useMemo(() => (shipment_data?.stakeholder_types
+		? shipment_data?.stakeholder_types[GLOBAL_CONSTANTS.zeroth_index]
+		: ''), [shipment_data]);
 
 	let completedTaskCount = 0;
 
@@ -45,6 +45,10 @@ const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
 			setSelectedTaskId(task.id);
 		}
 	};
+	if (activeStakeholder === 'booking_agent') {
+		stakeholder_types = 'booking_agent';
+	}
+
 	useEffect(() => {
 		if (!!tasks.is_task_assigned && showMyTasks) {
 			setFilters({
