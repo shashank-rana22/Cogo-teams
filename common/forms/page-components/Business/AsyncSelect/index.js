@@ -64,6 +64,7 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncFieldsOrganizationUsers,
 	asyncListLeadOrganizationUsers,
@@ -150,6 +151,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 	list_truck_types                     : asyncListTruckTypes,
 	resources                            : asyncListResources,
+	list_pricing_zones                   : asyncListPricingZones,
 	list_organization_users              : asyncFieldsOrganizationUsers,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
 };

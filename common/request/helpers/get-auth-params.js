@@ -22,7 +22,7 @@ const getAuthParam = (permissions_navigations, pathname) => {
 		});
 	}
 
-	const navigationData = getNavData(navigation);
+	const navigationData = getNavData({ navigation });
 	const userNavigationPermissions = permissions_navigations?.[navigation];
 	let defaultScope = null;
 	let defaultView = null;
