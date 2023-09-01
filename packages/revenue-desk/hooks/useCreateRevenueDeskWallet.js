@@ -12,7 +12,13 @@ const useCreateRevenueDeskWallet = ({ setCreateWallet }) => {
 
 	const createRevenueDeskWallet = async (data) => {
 		try {
-			const res =	await trigger({ data });
+			const { trade_type = '', origin_location_id = '', destination_location_id = '', ...rest } = data;
+			const res =	await trigger({
+				data: {
+					shipment_parameter: { trade_type, origin_location_id, destination_location_id },
+					...rest,
+				},
+			});
 			if (!res.hasError) {
 				Toast.success(SUCCESS_MESSAGE);
 				setCreateWallet(false);

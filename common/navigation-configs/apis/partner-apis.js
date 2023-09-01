@@ -7781,6 +7781,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_outstanding_by_supplier_v2',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_outstanding_entity_level_stats',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -7830,6 +7838,11 @@ const partner = {
 			access_type : 'private',
 			module      : 'Outstanding',
 			feature     : 'Outstanding',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_purchase_bills_by_id_bill_time_line',
@@ -8500,6 +8513,16 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_dunning_emails',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'list_organization_communication_logs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'get_organization_zone_via_org_id',
 			access_type : 'private',
 		},
@@ -8801,6 +8824,11 @@ const partner = {
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
+		},
+		{
+			api          : 'create_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api         : 'get_sales_report_download_outstanding_list',

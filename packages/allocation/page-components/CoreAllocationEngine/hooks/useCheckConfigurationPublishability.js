@@ -6,6 +6,7 @@ const useCheckConfigurationPublishability = ({
 	item = {},
 	listRefetch = () => {},
 	setShow = () => {},
+	t = () => {},
 }) => {
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/configuration_check_publishability',
@@ -27,7 +28,7 @@ const useCheckConfigurationPublishability = ({
 
 			setShow(false);
 
-			Toast.success('Checking for Publishability. Please check after some time.');
+			Toast.success(t('allocation:check_publishability_success_toast'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

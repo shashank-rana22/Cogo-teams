@@ -1,5 +1,6 @@
 import { Card, Placeholder, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import ICON_MAPPING from '../../../../../../constants/icon-mapping';
 
@@ -9,6 +10,8 @@ const ONE = 1;
 const TWO = 2;
 
 function OverviewCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { data = {}, overviewLoading = false } = props;
 
 	const { expertise_type = '', avg_score = 0, max_condition } = data;
@@ -57,7 +60,7 @@ function OverviewCard(props) {
 
 			<Card.Description className={styles.content}>
 				<div className={styles.display_flex}>
-					<span>Avg. Score</span>
+					<span>{t('allocation:avg_score')}</span>
 
 					<span className={styles.values}>
 						{avg_score}
@@ -67,17 +70,17 @@ function OverviewCard(props) {
 				<Tooltip
 					content={(
 						<div className={styles.tooltip_text}>
-							{startCase(max_condition) || 'NA'}
+							{startCase(max_condition) || t('allocation:not_available')}
 						</div>
 					)}
 					disabled={!(max_condition)}
 					placement="top"
 				>
 					<div className={styles.display_flex}>
-						<span> Most Points in</span>
+						<span>{t('allocation:mosts_points_in')}</span>
 
 						<div className={styles.values}>
-							{startCase(max_condition) || 'NA'}
+							{startCase(max_condition) || t('allocation:not_available')}
 						</div>
 					</div>
 				</Tooltip>

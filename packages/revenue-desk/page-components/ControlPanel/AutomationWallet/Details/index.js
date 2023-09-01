@@ -65,7 +65,13 @@ function AutomationWalletDetails({ data = [] }) {
 					>
 						Edit
 					</Button>
-					<Button size="md" themeType="secondary">Mark InActive</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => updateRevenueDeskWallet({ status: 'in_active' })}
+					>
+						Mark InActive
+					</Button>
 				</div>
 			</div>
 		</div>

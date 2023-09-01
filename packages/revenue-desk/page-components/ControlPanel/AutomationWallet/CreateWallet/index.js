@@ -25,6 +25,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {} }) {
 	const isOrigin = watch('origin_location_id');
 
 	const onSubmit = (data) => {
+		console.log(data, '::data');
 		setSubmitValue(data);
 		if (data?.wallet_amount !== undefined) createRevenueDeskWallet(data);
 	};

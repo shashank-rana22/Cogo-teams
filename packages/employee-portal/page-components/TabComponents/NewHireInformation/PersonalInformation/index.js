@@ -19,7 +19,7 @@ const MOBILE_NUMBER = 'mobile_number';
 const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
 const EMERGENCY_CONTACT_DETAILS = 'emergency_contact_details';
-const DESIGNATION = 'designation';
+const ROLE = 'role';
 const HIRING_MANAGER = 'hiring_manager';
 
 const removeTypeField = (controlItem) => {
@@ -30,7 +30,7 @@ const removeTypeField = (controlItem) => {
 const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth',
 	'personal_email', 'mobile_number', 'passport_size_photo_url'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'role', 'date_of_joining',
 	'cogoport_email', 'hiring_manager',
 ];
 
@@ -92,7 +92,7 @@ const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING
 	</div>
 ));
 
-function PersonalInformation({ data: content, getEmployeeDetails }) {
+function PersonalInformation({ data: content = {}, getEmployeeDetails = () => {} }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const controlsvalue = controls({ content });
@@ -148,10 +148,10 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 					mapping[item.name]?.mobile_number
 					|| content?.detail?.[item.name].mobile_number,
 				);
-			} else if (item?.name === DESIGNATION) {
+			} else if (item?.name === ROLE) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else if (item?.name === HIRING_MANAGER) {
-				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
+				setValue(item.name, startCase(content?.detail?.[item?.name]?.name));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}

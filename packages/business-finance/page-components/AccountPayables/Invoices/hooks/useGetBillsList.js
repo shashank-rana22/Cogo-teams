@@ -17,7 +17,7 @@ function formatToTimeStamp(dateString) {
 	return formatedDate;
 }
 
-function useGetBillsList({ activeTab }) {
+function useGetBillsList({ organizationId = '' }) {
 	const [billsFilters, setBillsFilters] = useState({ invoiceView: 'coe_accepted', pageSize: 10, pageIndex: 1 });
 	const [orderBy, setOrderBy] = useState({});
 
@@ -61,7 +61,6 @@ function useGetBillsList({ activeTab }) {
 						invoiceType        : invoiceType || undefined,
 						entity             : entity || undefined,
 						urgencyTag         : urgencyTag || undefined,
-						type               : activeTab || undefined,
 						serviceType        : serviceType || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
 						startDate          : startDate ? formatToTimeStamp(startDate) : undefined,
@@ -70,6 +69,7 @@ function useGetBillsList({ activeTab }) {
 						toBillDate         : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
 						fromUploadBillDate : toBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
 						toUploadBillDate   : toUploadBillDate ? formatToTimeStamp(toUploadBillDate) : undefined,
+						organizationId     : organizationId || undefined,
 					},
 				});
 			} catch (e) {
@@ -81,7 +81,7 @@ function useGetBillsList({ activeTab }) {
 			invoiceView, category, dueDateSortType, serviceType, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
-			toUploadBillDate, activeTab, billsTrigger],
+			toUploadBillDate, billsTrigger, organizationId],
 	);
 
 	useEffect(() => {

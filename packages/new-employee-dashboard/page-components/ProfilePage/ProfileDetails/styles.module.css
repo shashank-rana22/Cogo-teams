@@ -40,5 +40,7 @@
 		.ui_modal_body_container {
 			max-height: 60vh !important;
 		}
+
+		padding-left: 16px;
 	}
 }

@@ -7,9 +7,9 @@ const useUpdateRevenueDeskWallet = ({ service_type, wallet_amount }) => {
 		method : 'post',
 	}, { manual: true });
 
-	const updateRevenueDeskWallet = async () => {
+	const updateRevenueDeskWallet = async ({ status }) => {
 		try {
-			await trigger({ params: { service_type, wallet_amount } });
+			await trigger({ params: { service_type, wallet_amount, status } });
 		} catch (err) {
 			toastApiError(err);
 		}

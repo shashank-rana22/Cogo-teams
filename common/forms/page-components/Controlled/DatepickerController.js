@@ -14,7 +14,7 @@ function DatepickerController(props) {
 			name={name}
 			rules={rules}
 			defaultValue={value}
-			render={({ field: { onChange, onBlur, value:newValue } }) => (
+			render={({ field: { onChange, onBlur, value: newValue } }) => (
 				<Datepicker
 					disable={rest?.disabled || false}
 					showTimeSelect={rest?.withTimePicker || false}
