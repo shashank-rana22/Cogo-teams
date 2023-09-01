@@ -1,15 +1,23 @@
 import { Button, Modal } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
+import useCreateFclFreightCommodityCluster from '../../../hooks/useCreateFclFreightCommodityCluster';
 import CommodityForm from '../CommodityForm';
 
-function CreateCommodity() {
+function CreateCommodity({ refetch = () => {} }) {
 	const [show, setShow] = useState(false);
 
 	const formRef = useRef(null);
 
+	const { apiTrigger = () => {}, loading } = useCreateFclFreightCommodityCluster({
+		refetch: () => {
+			refetch();
+			setShow(false);
+		},
+	});
+
 	const handleSubmitForm = ({ data }) => {
-		console.log({ data });
+		apiTrigger({ values: data });
 	};
 
 	const onSubmit = () => {
@@ -31,7 +39,7 @@ function CreateCommodity() {
 						<Button
 							themeType="secondary"
 							style={{ marginRight: 8 }}
-							// disabled={loading}
+							disabled={loading}
 							onClick={() => setShow(false)}
 						>
 							Cancel
@@ -39,7 +47,7 @@ function CreateCommodity() {
 
 						<Button
 							onClick={onSubmit}
-							// disabled={loading}
+							disabled={loading}
 						>
 							Submit
 						</Button>

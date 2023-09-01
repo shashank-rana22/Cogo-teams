@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useImperativeHandle } from 'react';
+import { useImperativeHandle, forwardRef } from 'react';
 
 import Layout from '../../../common/Layout';
 
@@ -18,9 +18,19 @@ const handleContainerTypeChange = ({ setValue = () => {}, name }) => {
 };
 
 function CommodityForm({ item = {}, handleSubmitForm = () => {} }, ref) {
+	const DEFAULT_VALUES = {};
+
 	const controls = getControls({ item });
 
-	const { control, formState:{ errors = {} } = {}, watch, setValue, handleSubmit } = useForm();
+	controls.forEach((ctrl) => {
+		if (ctrl?.value) {
+			DEFAULT_VALUES[ctrl.name] = ctrl.value;
+		}
+	});
+
+	const { control, formState:{ errors = {} } = {}, watch, setValue, handleSubmit } = useForm({
+		defaultValues: DEFAULT_VALUES,
+	});
 
 	controls[COMMODITY_INDEX].controls[GLOBAL_CONSTANTS.zeroth_index].onChange = (
 		_o,
@@ -46,4 +56,4 @@ function CommodityForm({ item = {}, handleSubmitForm = () => {} }, ref) {
 	);
 }
 
-export default CommodityForm;
+export default forwardRef(CommodityForm);
