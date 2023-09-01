@@ -9,6 +9,9 @@ const newEmployeeDashboard = {
 	'/[partner_id]/new-employee-dashboard/[profile_id]': {
 		navigation: 'new_employee_dashboard',
 	},
+	'/[partner_id]/new-employee-dashboard/separation': {
+		navigation: 'new_employee_dashboard',
+	},
 };
 
 module.exports = newEmployeeDashboard;
