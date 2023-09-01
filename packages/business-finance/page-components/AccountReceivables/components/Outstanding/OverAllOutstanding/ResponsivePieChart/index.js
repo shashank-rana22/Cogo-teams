@@ -4,6 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useState } from 'react';
 
 import { SERVICE_WISE_COLORS, KAM_WISE_COLORS } from '../../../../constants/color';
+import EmptyStateOutStanding from '../../EmptyStateOutStanding';
 
 import GraphListView from './GraphListView';
 import PieChartLegends from './PieChartLegends';
@@ -23,7 +24,7 @@ function ResponsivePieChart({
 	const [showListView, setShowListView] = useState(true);
 	const [isSortBy, setIsSortBy] = useState('');
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
-
+	const isEmpty = (data || []).every((el) => isEmpty(el.value));
 	const sortedData = [...data];
 
 	if (isSortBy === 'asc') {
@@ -33,6 +34,12 @@ function ResponsivePieChart({
 	}
 
 	function RenderBody() {
+		if (isEmpty && !loading) {
+			return (
+				<EmptyStateOutStanding smallCard="kamWiseCard" />
+			);
+		}
+
 		if (loading) {
 			return (
 				<div className={styles.loader}>

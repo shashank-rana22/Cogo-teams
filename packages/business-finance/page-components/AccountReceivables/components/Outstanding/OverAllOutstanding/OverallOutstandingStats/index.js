@@ -18,7 +18,8 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 		<div className={styles.container}>
 			<div style={{ width: '87%' }}>
 				<div style={{
-					margin: '1% 4% 0 23%',
+					margin : '16px 0px 0px 252px',
+					width  : '74.5%',
 				}}
 				>
 					<div style={{

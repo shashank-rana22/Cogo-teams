@@ -28,7 +28,6 @@ const useGetCcCommunicationStats = ({
 			},
 		});
 	}, [dateFilter?.endDate, dateFilter?.startDate, trigger]);
-
 	return {
 		ccCommLoading : loading,
 		ccCommStats   : data || [],

@@ -8947,7 +8947,7 @@ const partner = {
 			access_type  : 'private',
 			module       : 'outstanding',
 			feature      : 'outstanding',
-			service_name : 'unified_dashboard',
+			service_name : 'sage',
 
 		},
 		{

@@ -11,6 +11,7 @@ import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstand
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
+import EmptyStateOutStanding from '../EmptyStateOutStanding';
 
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
@@ -175,12 +176,17 @@ function OverAllOutstanding({ entityCode = '' }) {
 							</div>
 							<div className={styles.cc_call_table}>
 								<div className={styles.cc_list}>CC Call Stats</div>
-								<div style={{ display: 'flex' }}>
-									<Table
-										columns={ccCallListTable()}
-										data={ccCommStats || []}
-										loading={ccCommLoading}
-									/>
+								<div style={{ display: 'flex', justifyContent: 'center' }}>
+									{
+									(isEmpty(ccCommStats || []) && !ccCommLoading)
+										? <EmptyStateOutStanding smallCard="kamWiseCard" /> : (
+											<Table
+												columns={ccCallListTable()}
+												data={ccCommStats || []}
+												loading={ccCommLoading}
+											/>
+										)
+									}
 								</div>
 							</div>
 						</div>
