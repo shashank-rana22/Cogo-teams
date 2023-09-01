@@ -1,16 +1,35 @@
 import { Popover, Input, Pagination, Button } from '@cogoport/components';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
+import { upperCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import FilterContent from './FilterContent';
 import Header from './Header';
+import useListCogoEntities from './hooks/useListCogoEntities';
 import useVendorList from './hooks/useVendorList';
 import useVendorStats from './hooks/useVendorStats';
 import KycStatusTabs from './KycStatusTabs';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
 
+const PAGE_LEN = 10;
+
 function ListVendors() {
+	const router = useRouter();
+	const profile = useSelector((state) => state);
+	const {
+		profile: { partner },
+	} = profile || {};
+	const { id: partnerId } = partner || {};
+	const { entityLoading, entityData = [] } = useListCogoEntities();
+	const entityDataCount = entityData.length;
+
+	const entity = getDefaultEntityCode(partnerId);
+
+	const [activeEntity, setActiveEntity] = useState(entity);
 	const {
 		loading,
 		data = {},
@@ -22,7 +41,7 @@ function ListVendors() {
 		searchValue,
 		handleChangeQuery,
 		isFilterInUse,
-	} = useVendorList();
+	} = useVendorList({ activeEntity });
 
 	const {
 		data: dataStats,
@@ -30,13 +49,29 @@ function ListVendors() {
 
 	const { total_count, page_limit: pageLimit } = data || {};
 
-	const router = useRouter();
+	const ENTITY_OPTIONS = (entityData || []).map((item) => {
+		const {
+			business_name: companyName = '',
+			entity_code: entityCode = '',
+		} = item || {};
+
+		return {
+			label : `${upperCase(companyName)} (${entityCode})`,
+			value : entityCode,
+		};
+	});
 
 	const { list = [] } = data;
 
 	return (
 		<>
-			<Header />
+			<Header
+				activeEntity={activeEntity}
+				setActiveEntity={setActiveEntity}
+				entityOptions={ENTITY_OPTIONS}
+				entityDataCount={entityDataCount}
+				entityLoading={entityLoading}
+			/>
 
 			<KycStatusTabs
 				params={params}
@@ -108,7 +143,7 @@ function ListVendors() {
 				columns={columns}
 			/>
 
-			{list?.length > 10 && (
+			{list?.length > PAGE_LEN && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="number"
