@@ -61,10 +61,10 @@ function ListView({
 		}
 
 		return {
-			sage_organization_id: globalSearch,
+			sage_organization_id: query,
 		};
 	};
-	const [trigger] = useRequest(
+	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_organization_trade_party_details',
 			params : {
@@ -92,10 +92,10 @@ function ListView({
 			// console.log("error occured");
 			/// /console.log(err);
 		}
-	}, [trigger, setTotalCount, setTotalPages, setListData, setPageLimit]);
+	}, [setTotalCount, setTotalPages, setListData, setPageLimit, trigger]);
 	useEffect(() => {
 		apiTrigger();
-	}, [page, typeOfSearch, globalSearch, query, filterParams, apiTrigger]);
+	}, [apiTrigger, filterParams, query, page, typeOfSearch]);
 
 	// useEffect(()=>{
 	//   useListOrganizationTradePartyDetails({
@@ -160,9 +160,10 @@ function ListView({
 		setTableData(DATA);
 	}, [listData]);
 
+	if (loading) return <div>Loading....</div>;
 	return (
 		<div>
-			<Table columns={tableColumns} DATA={tableData} className={styles.table} />
+			<Table columns={tableColumns} data={tableData} className={styles.table} />
 		</div>
 	);
 }

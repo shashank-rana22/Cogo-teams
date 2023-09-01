@@ -53,10 +53,9 @@ function TradeParties() {
 				setPage={(value) => setPage(value)}
 				totalCount={totalCount}
 				totalPages={totalPages}
+				pageLimit={pageLimit}
 			/>
-
 		</div>
-
 	);
 }
 
