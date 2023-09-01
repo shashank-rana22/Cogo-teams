@@ -80,7 +80,7 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 			<div className={styles.container}>
 				<div className={styles.flex}>
 
-					{(tabs || []).map((tab) => (
+					{tabs.map((tab) => (
 						<div
 							key={tab.key}
 							onClick={() => {
