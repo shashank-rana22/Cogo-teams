@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
-const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'treasury-chest'];
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'outstanding', 'treasury-chest'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
