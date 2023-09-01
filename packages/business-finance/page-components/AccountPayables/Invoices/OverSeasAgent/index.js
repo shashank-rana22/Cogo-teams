@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, Stepper } from '@cogoport/components';
+import { Breadcrumb, Button, Stepper, Toggle } from '@cogoport/components';
 import { Link } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
@@ -70,6 +70,13 @@ function OverSeasAgent() {
 	} = useSelector(({ general }) => ({
 		query: general.query,
 	}));
+
+	const handleVersionChange = () => {
+		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices/over-seas-agent?
+		organizationId=${query.organizationId}&services=${query.services}&payrun_type=${query.payrun_type}
+		&payrun=${query.payrun}&currency=${query.currency}&entity=${query.entity}`;
+	};
+
 	const [showHeader, setShowHeader] = useState(true);
 	const INITIAL_ACTIVE = 'invoice_selection';
 	const [active, setActive] = useState(INITIAL_ACTIVE);
@@ -106,19 +113,29 @@ function OverSeasAgent() {
 					<Breadcrumb.Item label="Select Invoices(Overseas Agent)" />
 				</Breadcrumb>
 
-				<Button
-					size="sm"
-					themeType="accent"
-					onClick={() => {
-						goBack();
-						resetPage();
-					}}
-					disabled={showSaveAsDraft}
-					style={{ width: '100px' }}
-				>
-					Save as Draft
+				<div className={styles.breadcrumb}>
+					<Toggle
+						name="toggle"
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
 
-				</Button>
+					<Button
+						size="sm"
+						themeType="accent"
+						onClick={() => {
+							goBack();
+							resetPage();
+						}}
+						disabled={showSaveAsDraft}
+						style={{ width: '100px', margin: '0px 10px' }}
+					>
+						Save as Draft
+
+					</Button>
+				</div>
 			</div>
 
 			{showHeader && (

@@ -1,4 +1,5 @@
 import { Checkbox, Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -8,7 +9,9 @@ import styles from './styles.module.css';
 
 const ELEMENT_NOT_FOUND = -1;
 
-const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) => {
+const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, apiData = {}, type = '' }) => {
+	const { push } = useRouter();
+
 	const { user_data: userData, query: urlQuery } = useSelector(({ profile, general }) => ({
 		user_data: profile || {}, query: general.query,
 	}));
@@ -42,6 +45,19 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) =>
 				performedByName : name,
 			};
 			await trigger({ data: payload });
+
+			if (payrun && type === 'audit') {
+				push(
+					'/business-finance/account-payables/audit/[payrun_id]',
+					`/business-finance/account-payables/audit/${payrun}`,
+				);
+			} else {
+				push(
+					'/business-finance/account-payables/[active_tab]',
+					'/business-finance/account-payables/payruns',
+				);
+			}
+
 			Toast.error('Deleted Sucessfully');
 			refetch();
 		} catch (err) {

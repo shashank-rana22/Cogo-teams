@@ -16,12 +16,14 @@ function Footer({
 	submitSelectedInvoices = () => {},
 	loading = false,
 	selectedCurrency = 'INR',
+	isAuditAllowed = true,
 }) {
 	const {
 		list = [],
 	} = apiData || {};
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
+	const [type, setType] = useState('');
 	const { totalValue = '', invoiceCount = '' } = apiData || {};
 	const { list: viewSelectedList = [] } = apiData || {};
 	const checkedList = (list || []).filter((item) => item.checked);
@@ -48,6 +50,7 @@ function Footer({
 					<div className={styles.text}>
 						Total Payments
 					</div>
+
 					<div className={styles.amount_container}>
 						<div className={styles.amount}>
 							{formatAmount({
@@ -60,6 +63,7 @@ function Footer({
 							})}
 						</div>
 					</div>
+
 					<div className={styles.sid_count}>
 						<div>
 							SID :
@@ -75,10 +79,26 @@ function Footer({
 							<div className={styles.view_button}>
 								<Button
 									disabled={isEmpty(viewSelectedList)}
-									onClick={() => { setSavePayrunModal(true); }}
+									onClick={() => {
+										setSavePayrunModal(true);
+										setType('save');
+									}}
 								>
 									Save PayRun
 								</Button>
+
+								{isAuditAllowed && (
+									<Button
+										style={{ margin: '0px 18px' }}
+										onClick={() => {
+											setSavePayrunModal(true);
+											setType('audit');
+										}}
+										disabled={!list.length}
+									>
+										Audit
+									</Button>
+								)}
 							</div>
 						)
 						: (
@@ -125,6 +145,7 @@ function Footer({
 					savePayrunModal={savePayrunModal}
 					setSavePayrunModal={setSavePayrunModal}
 					setViewSelectedInvoice={setViewSelectedInvoices}
+					type={type}
 				/>
 			)}
 		</div>

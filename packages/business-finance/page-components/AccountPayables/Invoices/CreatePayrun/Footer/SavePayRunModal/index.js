@@ -1,6 +1,5 @@
-import { Modal, Button, Toast, Placeholder } from '@cogoport/components';
+import { Modal, Button, Placeholder } from '@cogoport/components';
 import { IcCError } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useGetListSupplier from '../../../hooks/useGetListSupplier';
@@ -14,8 +13,8 @@ function SavePayRunModal({
 	savePayrunModal = false,
 	setSavePayrunModal = () => {},
 	setViewSelectedInvoice = () => {},
+	type = '',
 }) {
-	const { push } = useRouter();
 	const [viewSupplier, showViewSupplier] = useState(null);
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
@@ -27,17 +26,8 @@ function SavePayRunModal({
 		trigger,
 		setApiData,
 		setFilters,
-	} = useGetListSupplier();
-
-	const handleClick = () => {
-		setViewSelectedInvoice(false);
-		push(
-			'/business-finance/account-payables/[active_tab]',
-			'/business-finance/account-payables/payruns',
-		);
-		setSavePayrunModal(false);
-		Toast.success('Please wait while Payrun Saves...');
-	};
+		handleClick,
+	} = useGetListSupplier({ setViewSelectedInvoice, setSavePayrunModal, type });
 
 	return (
 		<div>
@@ -64,7 +54,7 @@ function SavePayRunModal({
 					>
 						View Suppliers
 					</Button>
-					<Button onClick={handleClick}>
+					<Button onClick={() => handleClick()}>
 						Next
 					</Button>
 				</Modal.Footer>
@@ -77,6 +67,7 @@ function SavePayRunModal({
 					setApiData={setApiData}
 					refetch={trigger}
 					setFilters={setFilters}
+					type={type}
 				/>
 			) : null}
 		</div>

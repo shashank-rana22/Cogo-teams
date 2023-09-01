@@ -1,6 +1,6 @@
-import { Breadcrumb, Input } from '@cogoport/components';
+import { Breadcrumb, Input, Toggle } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import { Link } from '@cogoport/next';
+import { Link, useRouter } from '@cogoport/next';
 import React, { useImperativeHandle, forwardRef } from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
@@ -62,6 +62,12 @@ const getFunctions = ({ GetTableBodyCheckbox = () => {}, setEditedValue = () => 
 });
 
 function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
+	const { query } = useRouter();
+	const handleVersionChange = () => {
+		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices/create-pay-run?
+		payrun=${query.payrun}&currency=${query.currency}&entity=${query.entity}&payrun_type=${query.payrun_type}`;
+	};
+
 	const {
 		billsLoading,
 		filters,
@@ -136,7 +142,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 
 	return (
 		<div>
-			<div>
+			<div className={styles.breadcrumb}>
 				<Breadcrumb>
 					<Breadcrumb.Item label={(
 						<Link href="/business-finance/account-payables/invoices">
@@ -147,6 +153,14 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 					<Breadcrumb.Item label="PayRun Creation" />
 					<Breadcrumb.Item label="Select Invoices" />
 				</Breadcrumb>
+
+				<Toggle
+					name="toggle"
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleVersionChange}
+				/>
 			</div>
 
 			<div className={styles.filters}>
