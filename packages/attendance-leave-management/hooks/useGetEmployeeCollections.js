@@ -1,7 +1,8 @@
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
-const useGetEmployeeCollections = ({ isManager, request_type, isOpen }) => {
+const useGetEmployeeCollections = ({ isManager, request_type, isOpen, searchQuery }) => {
 	const [filters, setFilters] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -19,17 +20,18 @@ const useGetEmployeeCollections = ({ isManager, request_type, isOpen }) => {
 					view_requests_type : isManager ? 'view_employee_requests' : 'view_my_requests',
 					required_listing   : request_type,
 					...filters,
+					q                  : searchQuery,
 				},
 			});
 		},
-		[filters, isManager, request_type, trigger],
+		[filters, isManager, request_type, searchQuery, trigger],
 	);
 
 	useEffect(() => {
-		if (request_type && isOpen) {
+		if (!isEmpty(searchQuery) || (request_type && isOpen)) {
 			getEmployeeRequestCollections();
 		}
-	}, [getEmployeeRequestCollections, isOpen, request_type]);
+	}, [getEmployeeRequestCollections, isOpen, request_type, searchQuery]);
 
 	return { loading, data, setFilters };
 };

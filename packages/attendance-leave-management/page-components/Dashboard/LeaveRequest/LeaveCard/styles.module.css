@@ -348,3 +348,8 @@
 	width: 100%;
 	margin-top: 12px;
 }
+
+.padding_top {
+	height: 12px;
+	background-color: white;
+}
