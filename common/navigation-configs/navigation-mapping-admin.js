@@ -70,6 +70,7 @@ import apis from './apis';
 import business_finance from './apis/business-finance-apis';
 
 const navigationMapping = ({ t = () => {} }) => {
+	console.log({ t });
 	const navigationMappingAdmin = {
 		welcome: {
 			key           : 'welcome',

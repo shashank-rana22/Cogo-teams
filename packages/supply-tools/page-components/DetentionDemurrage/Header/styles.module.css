@@ -8,12 +8,6 @@
 	font-weight: 600;
 }
 
-.sub_container {
-	display: flex;
-	justify-content: space-between;
+.shipment_type {
 	width: 25%;
-}
-
-.select_container {
-	width: 70%;
 }

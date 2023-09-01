@@ -1,7 +1,6 @@
-import { Input, Table, Toggle } from '@cogoport/components';
+import { Input, Table } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import { useRouter } from 'next/router';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import useListFclFreightCommodityClusters from '../../hooks/useListFclFreightCommodityClusters';
 
@@ -12,8 +11,6 @@ import { Delete, Update } from './TableActions';
 import TablePagination from './TablePagination';
 
 function CommodityClusters() {
-	const router = useRouter();
-
 	const [showUpdate, setShowUpdate] = useState(null);
 	const [showDelete, setShowDelete] = useState(null);
 
@@ -26,27 +23,13 @@ function CommodityClusters() {
 
 	const paginationProps = { setFilters, filters, data };
 
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-	}, [router.asPath]);
-
 	return (
 		<div>
 			<div className={styles.header}>
 				<h1>COMMODITY CLUSTERS</h1>
 
 				<div className={styles.filters_add}>
-					<div>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
-					</div>
-
-					<div className={styles.width_44}>
+					<div className={styles.width_49}>
 						<Input
 							size="sm"
 							prefix={<IcMSearchlight />}
@@ -55,6 +38,7 @@ function CommodityClusters() {
 							value={q}
 						/>
 					</div>
+
 					<CreateCommodity refetch={refetch} />
 				</div>
 			</div>
