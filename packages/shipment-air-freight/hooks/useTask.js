@@ -1,20 +1,17 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useMemo } from 'react';
 
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
-
-const STAKEHOLDER_MAPPINGS = {
-	booking_agent : 'booking_agent',
-	booking_desk  : 'service_ops1',
-	document_desk : 'service_ops2',
-};
 
 const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
 	const { user_id } = useSelector(({ profile }) => ({ user_id: profile?.user?.id }));
 
-	const { stakeholderConfig : { tasks = {} } = {}, activeStakeholder } = useContext(ShipmentDetailContext);
-
+	const { stakeholderConfig : { tasks = {} } = {} } = useContext(ShipmentDetailContext);
+	const stakeholder_types = useMemo(() => (shipment_data?.stakeholder_types
+		? shipment_data?.stakeholder_types[GLOBAL_CONSTANTS.zeroth_index]
+		: ''), [shipment_data]);
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
 	const [showMyTasks, setShowMyTasks] = useState(!!tasks.checked_show_my_tasks);
@@ -51,13 +48,13 @@ const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
 	useEffect(() => {
 		if (!!tasks.is_task_assigned && showMyTasks) {
 			setFilters({
-				[`${STAKEHOLDER_MAPPINGS[activeStakeholder]}_id`] : user_id,
-				show_stakeholder_all_task                         : STAKEHOLDER_MAPPINGS[activeStakeholder],
+				[`${stakeholder_types}_id`] : user_id,
+				show_stakeholders_all_task  : stakeholder_types,
 			});
 		} else {
 			setFilters({});
 		}
-	}, [showMyTasks, activeStakeholder, tasks.is_task_assigned, user_id]);
+	}, [showMyTasks, stakeholder_types, tasks.is_task_assigned, user_id]);
 
 	return {
 		showMyTasks,
