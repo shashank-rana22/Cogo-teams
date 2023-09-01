@@ -1,7 +1,7 @@
 .modal_container {
 	:global {
 		.ui_modal_body_container {
-			max-height: 500px !important;
+			padding: 0 16px 16px !important;
 			border-top: none !important;
 			border-bottom: none !important;
 		}

@@ -13,6 +13,7 @@ const getPayload = ({ values }) => {
 	return {
 		country_id,
 		business_name     : company_name,
+		lead_user_tags    : ['cogo_one'],
 		primary_lead_user : {
 			name,
 			email               : email_id,

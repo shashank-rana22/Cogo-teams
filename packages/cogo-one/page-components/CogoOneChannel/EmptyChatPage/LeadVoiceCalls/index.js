@@ -121,7 +121,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 				<div className={styles.filter_section}>
 					<Button
 						size="md"
-						themeType="primary"
+						themeType="accent"
 						className={styles.add_button}
 						onClick={() => setCreateLeadModal(true)}
 					>
@@ -134,14 +134,12 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 						prefix={<IcMSearchlight className={styles.search_icon} />}
 						placeholder="Search By Name"
 						className={styles.input_styled}
-						suffix={
-						(search ? (
+						suffix={search ? (
 							<IcMCross
 								className={styles.cross_icon}
 								onClick={() => setSearch('')}
 							/>
-						) : null)
-				}
+						) : null}
 					/>
 				</div>
 			</div>
