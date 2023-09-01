@@ -88,7 +88,7 @@ function CancelEinvoice({
 							<div className={styles.date_container}>
 								{response?.agreementDocument ? (
 									<>
-										<div>
+										<div className={styles.agreement}>
 											<div className={styles.lable_style}>Agreement Proof *</div>
 											<UploadController
 												control={control}
@@ -105,51 +105,54 @@ function CancelEinvoice({
 												</span>
 											) : null}
 										</div>
-										<div className={styles.div_width}>
-											<div className={styles.lable_style}>
-												Agreement No. *
+										<div className={styles.agreement_block}>
+											<div className={styles.div_width}>
+												<div className={styles.lable_style}>
+													Agreement No. *
+												</div>
+												<InputController
+													control={control}
+													name="agreementNumber"
+													placeholder="Agreement Number"
+													type="text"
+													value={response?.agreementNumber}
+													onChange={(e) => {
+														setResponse((resp) => ({ ...resp, agreementNumber: e }));
+													}}
+													rules={{ required: 'Agreement Number is required' }}
+												/>
+												{(response?.agreementNumber === '') && (
+													<span className={styles.errors}>
+														{' '}
+														{errorVal?.agreementNumber?.message}
+													</span>
+												)}
 											</div>
-											<InputController
-												control={control}
-												name="agreementNumber"
-												placeholder="Agreement Number"
-												type="text"
-												value={response?.agreementNumber}
-												onChange={(e) => {
-													setResponse((resp) => ({ ...resp, agreementNumber: e }));
-												}}
-												rules={{ required: 'Agreement Number is required' }}
-											/>
-											{(response?.agreementNumber === '') && (
-												<span className={styles.errors}>
-													{' '}
-													{errorVal?.agreementNumber?.message}
-												</span>
-											)}
-										</div>
-										<div className={styles.div_width}>
-											<div className={styles.lable_style}>
-												Aggreement Date *
+											<div className={styles.div_width}>
+												<div className={styles.lable_style}>
+													Aggreement Date *
+												</div>
+												<DatepickerController
+													control={control}
+													placement="bottom"
+													name="agreementDate"
+													type="datepicker"
+													value={response?.agreementDate}
+													isPreviousDaysAllowed
+													minDate={new Date(invoiceDate)}
+													onChange={
+														(e) => setResponse((resp) => ({ ...resp, agreementDate: e }))
+													}
+													placeholder="Agreement Date"
+													rules={{ required: 'Agreement Date is required' }}
+												/>
+												{response?.agreementDate ? (
+													<span className={styles.errors}>
+														{errorVal?.agreementDate?.message}
+													</span>
+												) : null}
 											</div>
-											<DatepickerController
-												control={control}
-												placement="bottom"
-												name="agreementDate"
-												type="datepicker"
-												value={response?.agreementDate}
-												isPreviousDaysAllowed
-												minDate={new Date(invoiceDate)}
-												onChange={(e) => setResponse((resp) => ({ ...resp, agreementDate: e }))}
-												placeholder="Agreement Date"
-												rules={{ required: 'Agreement Date is required' }}
-											/>
-											{response?.agreementDate ? (
-												<span className={styles.errors}>
-													{errorVal?.agreementDate?.message}
-												</span>
-											) : null}
 										</div>
-
 									</>
 								) : null}
 							</div>

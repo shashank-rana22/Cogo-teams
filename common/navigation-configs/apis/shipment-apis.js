@@ -1725,12 +1725,32 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_shipments_for_report',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_report_schedule',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
 		api          : 'create_shipment_terminal_service_task',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_report_url',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1753,6 +1773,11 @@ const apis = [
 		api          : 'list_trade_party_shipments',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_trucks',
+		access_type  : 'public',
+		service_name : 'fcl_freight_rate',
 	},
 ];
 

@@ -98,10 +98,12 @@ const controls = () => [
 		placeholder : 'Employee Code',
 	},
 	{
-		name        : 'designation',
-		label       : 'Employee Designation',
-		type        : 'input',
-		placeholder : 'Employee Designation',
+		name        : 'role_id',
+		type        : 'asyncSelect',
+		label       : 'Role*',
+		placeholder : 'Role',
+		initialCall : true,
+		asyncKey    : 'list_employee_roles',
 	},
 	{
 		name                  : 'date_of_birth',
@@ -164,7 +166,7 @@ const controls = () => [
 	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Hiring Manager',
 		placeholder : 'Hiring Manager',
 		initialCall : true,
@@ -174,7 +176,7 @@ const controls = () => [
 				partner_entity_types : ['cogoport'],
 
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	},
 	{
@@ -199,11 +201,12 @@ const controls = () => [
 		placeholder : 'Enter PI',
 	},
 	{
-		name        : 'department',
-		type        : 'select',
-		label       : 'Department',
+		name        : 'department_id',
+		type        : 'asyncSelect',
+		label       : 'Department*',
 		placeholder : 'Select Department',
-		options     : GLOBAL_CONSTANTS.department_options,
+		initialCall : true,
+		asyncKey    : 'list_employee_departments',
 	},
 	{
 		name        : 'office_location',

@@ -21,10 +21,9 @@ const getPayload = ({
 		panDoc,
 		gstDoc,
 		invoiceDoc,
+		customerConfirmationDoc,
 		...rest
-	} = policyForSelf
-		? insuranceDetails
-		: { ...insuranceDetails, ...billingData };
+	} = { ...insuranceDetails, ...billingData };
 
 	payload = {
 		...addressId,
@@ -50,8 +49,9 @@ const getPayload = ({
 
 			} : undefined,
 		},
+		customerConfirmationDoc : customerConfirmationDoc?.finalUrl,
 		policyForSelf,
-		billingType: 'CORPORATE',
+		billingType             : 'CORPORATE',
 		policyId,
 		gstAmount,
 	};

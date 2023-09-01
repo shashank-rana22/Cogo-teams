@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import getSopPayload from '../components/Sop/helpers/format-sop-payload';
+import toastApiError from '../utils/toastApiError';
 
 const useAddSopData = ({
 	formValues,
@@ -85,7 +86,7 @@ const useAddSopData = ({
 		try {
 			if (status) {
 				const res = await trigger({
-					params: payload,
+					data: payload,
 				});
 				if (!res.hasError) {
 					Toast.success(' Added Succesfully');
@@ -98,7 +99,7 @@ const useAddSopData = ({
 				Toast.info('Instruction or Attachment, atleast one is required!');
 			}
 		} catch (error) {
-			Toast.error(error || 'Something went wrong');
+			toastApiError(error);
 		}
 	};
 

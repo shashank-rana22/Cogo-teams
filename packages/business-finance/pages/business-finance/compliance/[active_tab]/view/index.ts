@@ -4,12 +4,8 @@ export { default } from '@cogoport/business-finance/page-components/Compliance/R
 
 export async function getServerSideProps({ locale }) {
 	return {
-
 		props: {
-
-			...(await serverSideTranslations(locale, ['common', 'compliance'])),
-
+			...(await serverSideTranslations(locale, ['common'])),
 		},
-
 	};
 }

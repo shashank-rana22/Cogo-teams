@@ -13,6 +13,7 @@ const useGetActiveStakeholder = () => {
 			role_ids    : [...geo.uuid.kam_ids, ...geo.uuid.cogo_fx_settings_allowed_role_ids],
 			stakeholder : 'booking_agent',
 		},
+		{ role_ids: geo.uuid.so1_so2_ops_role_id, stakeholder: 'so1_so2_ops' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.air_so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
@@ -27,11 +28,13 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{ role_ids: [geo.uuid.coe_finance_head, geo.uuid.prod_settlement_executive], stakeholder: 'credit_control' },
 		{
-			role_ids: [geo.uuid.ff_cost_booking_executive,
-				geo.uuid.costbooking_ops_role_ids, geo.uuid.costbooking_ops_manager_role_ids],
-			stakeholder: 'cost_booking_manager',
+			role_ids    : [geo.uuid.costbooking_ops_role_ids, geo.uuid.costbooking_ops_manager_role_ids],
+			stakeholder : 'cost_booking_manager',
 		},
-		{ role_ids: geo.uuid.so1_so2_ops_role_id, stakeholder: 'so1_so2_ops' },
+		{
+			role_ids    : [geo.uuid.ff_cost_booking_executive],
+			stakeholder : 'ff_cost_booking',
+		},
 	];
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || [])

@@ -20,7 +20,11 @@ const formatBody = ({ mailResData = {}, attachmentResData = {} }) => {
 	);
 };
 
-function useGetMailContent({ messageId = '', source = '' }) {
+function useGetMailContent({
+	messageId = '',
+	source = '',
+	setExpandedState = () => {},
+}) {
 	const [message, setMessage] = useState('');
 
 	const [{ loading }, trigger] = useLensRequest({
@@ -53,10 +57,11 @@ function useGetMailContent({ messageId = '', source = '' }) {
 
 			const newContent = formatBody({ mailResData, attachmentResData });
 			setMessage(newContent);
+			setExpandedState(true);
 		} catch (err) {
 			console.error(err);
 		}
-	}, [attachmentTrigger, combinedLoading, message, messageId, trigger, source]);
+	}, [combinedLoading, message, trigger, messageId, source, attachmentTrigger, setExpandedState]);
 
 	return {
 		getEmailBody,
