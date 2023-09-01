@@ -32,8 +32,8 @@ function AccuracyDashboard() {
 	const [globalFilters, setGlobalFilters] = useState({
 		service_type : 'fcl',
 		parent_mode  : null,
-		startDate    : subtractDays(new Date(), MONTH_DAYS),
-		endDate      : new Date(),
+		start_date   : subtractDays(new Date(), MONTH_DAYS),
+		end_date     : new Date(),
 	});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];

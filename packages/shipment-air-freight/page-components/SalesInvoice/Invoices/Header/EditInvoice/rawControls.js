@@ -1,4 +1,5 @@
 import AIR_UNITS from '@cogoport/air-modules/constants/AIR_UNITS';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import { convertObjectMappingToArray } from '@cogoport/air-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
@@ -79,13 +80,13 @@ const rawControls = (
 				span     : 2,
 			},
 			{
-				name           : 'currency',
-				label          : 'Currency',
-				type           : 'select',
-				optionsListKey : 'exchange-rate-currencies',
-				placeholder    : 'Select Currency',
-				rules          : { required: 'currency is required' },
-				span           : 1.5,
+				name        : 'currency',
+				label       : 'Currency',
+				type        : 'select',
+				options     : currencies,
+				placeholder : 'Select Currency',
+				rules       : { required: 'currency is required' },
+				span        : 1.5,
 				disabled:
 				handleDisableCond(shipment_type, isRoleAllowed),
 			},

@@ -1,4 +1,4 @@
-import { Select, cl, DateRangepicker } from '@cogoport/components';
+import { Select, cl, Datepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { service_type, startDate, endDate } = globalFilters;
+	const { service_type, start_date, end_date } = globalFilters;
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
@@ -28,11 +28,11 @@ function Filters(props) {
 		changePrimaryFilters(key, value);
 		setGlobalFilters((prev) => ({
 			...prev,
-			[`${key}_type`]         : TYPE_MAPPING[obj?.type] || obj?.type,
-			[`is_${key}_icd`]       : !!obj?.is_icd,
-			[`${key}_country_id`]   : obj?.country_id,
-			[`${key}_region_id`]    : obj?.region_id,
-			[`${key}_continent_id`] : obj?.continent_id,
+			[`${key}_type`]       : TYPE_MAPPING[obj?.type] || obj?.type,
+			[`is_${key}_icd`]     : !!obj?.is_icd,
+			[`${key}_country_id`] : obj?.country_id,
+			// [`${key}_region_id`]    : obj?.region_id,
+			// [`${key}_continent_id`] : obj?.continent_id,
 		}));
 	};
 
@@ -92,15 +92,29 @@ function Filters(props) {
 			</div>
 			<div className={cl`${styles.single_filter} ${styles.time_range}`}>
 				<p className={styles.title_label}>Time Range</p>
-				<DateRangepicker
-					value={{ startDate, endDate }}
-					onChange={(value) => {
-						setGlobalFilters((prev) => ({ ...prev, ...value }));
-					}}
-					isPreviousDaysAllowed
-					maxDate={new Date()}
-					showTimeSelect={false}
-				/>
+				<div className={styles.flex}>
+					<Datepicker
+						value={start_date}
+						onChange={(value) => {
+							changePrimaryFilters('start_date', value);
+						}}
+						isPreviousDaysAllowed
+						maxDate={end_date || new Date()}
+						showTimeSelect={false}
+						placeholder="Start Date"
+					/>
+					<Datepicker
+						value={end_date}
+						onChange={(value) => {
+							changePrimaryFilters('end_date', value);
+						}}
+						isPreviousDaysAllowed
+						maxDate={new Date()}
+						minDate={start_date || undefined}
+						showTimeSelect={false}
+						placeholder="End Date"
+					/>
+				</div>
 			</div>
 			<FilterButton
 				showText
