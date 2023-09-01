@@ -6,7 +6,8 @@ import getLocationInfo from '../../../../utils/locations-search';
 import styles from './styles.module.css';
 
 function DottedLineWithTag({ scheduleData = {} }) {
-	const { transit_time, transit_time_unit, schedule_type } = scheduleData;
+	const { transit_time, schedule_type } = scheduleData;
+
 	return (
 		<div style={{
 			color         : '#000',
@@ -21,7 +22,7 @@ function DottedLineWithTag({ scheduleData = {} }) {
 		>
 			{transit_time ? (
 				<span style={{ padding: 4, background: '#F7FAEF' }}>
-					{`${transit_time} ${transit_time_unit}`}
+					{`${transit_time} Days`}
 				</span>
 			) : null}
 			{startCase(schedule_type)}
@@ -45,19 +46,19 @@ function Route({ detail = {}, scheduleData = {}, isCogoAssured = false }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.locationNameGroup}>
-				<div className={styles.locationName}>
+			<div className={styles.location_name_group}>
+				<div className={styles.location_name}>
 					{originPortName}
 				</div>
 
-				<div className={styles.locationName}>
+				<div className={styles.location_name}>
 					{destinationPortName}
 				</div>
 			</div>
 
-			<div className={styles.locationNameGroup}>
+			<div className={styles.location_name_group}>
 				<div className={styles.origin}>
-					<div className={styles.locationCode}>
+					<div className={styles.location_code}>
 						{!isCogoAssured ? scheduleData.departure : originPortCode}
 					</div>
 				</div>
@@ -65,15 +66,15 @@ function Route({ detail = {}, scheduleData = {}, isCogoAssured = false }) {
 				<div style={{ display: 'flex', alignItems: 'center', width: '100%', marginLeft: 8, marginRight: 8 }}>
 
 					<div className={styles.circle} />
-					<div className={styles.dottedLine} />
+					<div className={styles.dotted_line} />
 					<DottedLineWithTag tag="tag" scheduleData={scheduleData} />
-					<div className={styles.dottedLine} />
-					<div className={styles.activeCircle} />
+					<div className={styles.dotted_line} />
+					<div className={styles.active_circle} />
 
 				</div>
 
 				<div className={styles.destination}>
-					<div className={styles.locationCode}>
+					<div className={styles.location_code}>
 						{!isCogoAssured ? scheduleData.arrival : destinationPortCode}
 					</div>
 				</div>

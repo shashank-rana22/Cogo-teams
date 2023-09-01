@@ -48,7 +48,8 @@
 	display: flex;
 	align-items: center;
 	margin-top: 28px;
-	font-weight: 600;
+	font-weight: 500;
+	animation: fade-in 0.8s ease-in-out forwards;
 
 	:global {
 		.ui_chips_container {
@@ -90,6 +91,20 @@
 			cursor: pointer;
 			border-radius: 24px;
 		}
+
+		.ui_input_number_container {
+			max-width: 80px;
+		}
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
 	}
 }
 

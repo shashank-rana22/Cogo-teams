@@ -10,15 +10,10 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 	const {
 		scope,
 		permissions_navigations,
-		entity_types,
 	} = useSelector(({ general, profile }) => ({
 		scope                   : general?.scope,
 		permissions_navigations : profile?.permissions_navigations,
-		entity_types            : profile?.partner?.entity_types,
 	}));
-
-	const isChannelPartner = entity_types?.includes('channel_partner')
-		&& !entity_types?.includes('cogoport');
 
 	const isApiAllowed = (condition) => {
 		const {
@@ -155,10 +150,8 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 	return {
 		scope,
 		permissions_navigations,
-		entity_types,
 		isConditionMatches,
 		authorizedToSee,
-		isChannelPartner,
 	};
 };
 

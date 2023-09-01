@@ -14,7 +14,6 @@ function PointOfContact({
 	bookingConfirmationMode = [],
 	getCheckout = () => {},
 	detail = {},
-	isChannelPartner = false,
 }) {
 	const {
 		importer_exporter_poc = {},
@@ -95,7 +94,6 @@ function PointOfContact({
 					}}
 					branch_id={importer_exporter_branch_id}
 					loading={updateLoading}
-					isChannelPartner={isChannelPartner}
 					setShowEditContact={setShowEditContact}
 				/>
 			) : null}

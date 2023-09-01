@@ -20,8 +20,8 @@ const useCreateSearch = () => {
 				organization_id,
 				service_type,
 				user_id,
-				origin,
-				destination,
+				origin = {},
+				destination = {},
 				formValues = {},
 			} = values;
 
@@ -50,7 +50,7 @@ const useCreateSearch = () => {
 				source                      : 'platform',
 				search_type                 : service_type,
 				user_id,
-				tags                        : ['new_admin'],
+				tags                        : ['version2'],
 			};
 
 			const res = await trigger({ data: payload });

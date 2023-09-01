@@ -61,7 +61,7 @@ function BreakdownDetails({
 	const { source: rateSource = '' } = rate;
 
 	return (
-		<div>
+		<>
 			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
 
 			{rateDetails.map((item, index) => {
@@ -255,7 +255,7 @@ function BreakdownDetails({
 				otherCharges={otherCharges}
 				showTaxes={showTaxes}
 			/>
-		</div>
+		</>
 	);
 }
 

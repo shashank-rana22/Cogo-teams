@@ -47,17 +47,7 @@
 	display: flex;
 	justify-content: space-between;
 	max-width: 88%;
-}
-
-.text_container {
-	padding-top: 4px;
-	padding-right: 50px;
-	padding-left: 2px;
-	font-size: 14px;
-}
-
-.link_container {
-	font-size: 14px;
+	padding: 4px 50px 0 2px;
 }
 
 .refresh_text {

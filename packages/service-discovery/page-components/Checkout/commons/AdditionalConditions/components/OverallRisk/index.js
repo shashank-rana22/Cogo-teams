@@ -61,20 +61,18 @@ function OverallRisk({ detail = {}, setIsVeryRisky = () => {} }) {
 				title={(
 					<div className={styles.header}>
 						<div className={styles.flex}>
-							<div className={styles.flex}>
-								Overall Credit Risk :
-								{overall_credit_risk && (
-									<Pill
-										style={{
-											background : `${background}`,
-											color      : `${color}`,
-										}}
-									>
-										{startCase(overall_credit_risk)}
-										{' '}
-									</Pill>
-								)}
-							</div>
+							Overall Credit Risk :
+							{overall_credit_risk && (
+								<Pill
+									style={{
+										background : `${background}`,
+										color      : `${color}`,
+									}}
+								>
+									{startCase(overall_credit_risk)}
+									{' '}
+								</Pill>
+							)}
 						</div>
 
 						<div className={styles.flex}>

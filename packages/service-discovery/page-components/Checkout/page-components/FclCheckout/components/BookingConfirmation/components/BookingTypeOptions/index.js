@@ -23,7 +23,6 @@ function BookingTypeOptions({
 		updateLoading = false,
 		invoice = {},
 		orgData = {},
-		isChannelPartner = false,
 	} = useContext(CheckoutContext);
 
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
@@ -82,7 +81,6 @@ function BookingTypeOptions({
 					setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
 					bookingConfirmationMode={bookingConfirmationMode}
 					detail={detail}
-					isChannelPartner={isChannelPartner}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
 				/>

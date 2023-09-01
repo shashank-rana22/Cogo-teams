@@ -5,7 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 function CustomButton({ item = {}, field = {}, router = {} }) {
 	const { query = {} } = router;
 
-	const isNewS2C = item?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('new_admin');
+	const isNewS2C = item?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('version2');
 
 	const searchUrl = `/book/${item?.latest_spot_search_id || item?.id}${isNewS2C
 		? '' : `/${item?.importer_exporter_id}`}`;

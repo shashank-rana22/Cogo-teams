@@ -55,16 +55,14 @@ function CreditApprovalCard({
 					</div>
 
 					<div className={styles.credit_approval_container}>
-						<div className={styles.text_container}>
-							<div>
-								Before you avail deferred payment, you need to accept the TnC on
-								our agreement for credit approval, Please accept to proceed.
-							</div>
+						<div>
+							Before you avail deferred payment, you need to accept the TnC on
+							our agreement for credit approval, Please accept to proceed.
+						</div>
 
-							<div style={{ fontSize: 12, fontStyle: 'italic', marginTop: '4px' }}>
-								If you have already accepted the TnC for credit approval, Kindly
-								Refresh the page.
-							</div>
+						<div style={{ fontSize: 12, marginTop: '4px' }}>
+							If you have already accepted the TnC for credit approval, Kindly
+							Refresh the page.
 						</div>
 					</div>
 				</div>

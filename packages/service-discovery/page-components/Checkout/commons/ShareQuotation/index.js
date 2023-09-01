@@ -12,7 +12,6 @@ function ShareQuotation({ noRatesPresent = false }) {
 	const {
 		rate,
 		detail,
-		isChannelPartner,
 		invoice,
 		orgData,
 		updateCheckout,
@@ -47,7 +46,6 @@ function ShareQuotation({ noRatesPresent = false }) {
 						bookingConfirmationMode={selectedModes}
 						showWhatsappVerificationModal={showWhatsappVerificationModal}
 						setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
-						isChannelPartner={isChannelPartner}
 						updateCheckout={updateCheckout}
 						updateLoading={updateLoading}
 					/>

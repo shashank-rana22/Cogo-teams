@@ -13,7 +13,6 @@ function PocDetails({
 	bookingConfirmationMode = '',
 	showWhatsappVerificationModal = false,
 	setShowWhatsappVerificationModal = () => {},
-	isChannelPartner = false,
 	updateCheckout = () => {},
 	updateLoading = false,
 }) {
@@ -79,7 +78,6 @@ function PocDetails({
 						}}
 						branch_id={importer_exporter_branch_id}
 						loading={updateLoading}
-						isChannelPartner={isChannelPartner}
 						setShowEditContact={setShowEditContact}
 					/>
 				) : null}

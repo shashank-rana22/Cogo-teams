@@ -5,7 +5,7 @@ const serviceDiscovery = {
 	},
 	'/[partner_id]/book/[spot_search_id]': {
 		navigation : 'service_discovery',
-		isMainNav  : true,
+		isMainNav  : false,
 	},
 	'/[partner_id]/checkout/[checkout_id]': {
 		navigation : 'service_discovery',

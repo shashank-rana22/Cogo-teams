@@ -149,13 +149,56 @@ const getDefaultPayload = ({
 	origin = {},
 	destination = {},
 }) => {
+	const { is_icd:isOriginIcd = false, id: originId = '' } = origin;
+	const { is_icd:isDestinationIcd = false, id: destinationId = '' } = destination;
+
 	const payloadObject = {
 		...getPayload(service_type, origin, destination),
 	};
 
 	const payloadKey = [service_type, 'services_attributes'].join('_');
 
-	const payload = { [payloadKey]: [payloadObject] };
+	let payload = { [payloadKey]: [payloadObject] };
+
+	if (isOriginIcd && service_type === 'fcl_freight') {
+		payload = {
+			...payload,
+			haulage_freight_services_attributes:
+			[...(payload.haulage_freight_services_attributes || []),
+				{
+					cargo_weight_per_container : 18,
+					commodity                  : null,
+					container_size             : '20',
+					container_type             : 'standard',
+					containers_count           : 1,
+					origin_location_id         : originId,
+					status                     : 'active',
+					trade_type                 : 'export',
+					transport_mode             : 'rail',
+					haulage_type               : 'carrier',
+				}],
+		};
+	}
+
+	if (isDestinationIcd && service_type === 'fcl_freight') {
+		payload = {
+			...payload,
+			haulage_freight_services_attributes:
+			[...(payload.haulage_freight_services_attributes || []),
+				{
+					cargo_weight_per_container : 18,
+					commodity                  : null,
+					container_size             : '20',
+					container_type             : 'standard',
+					containers_count           : 1,
+					destination_location_id    : destinationId,
+					status                     : 'active',
+					trade_type                 : 'import',
+					transport_mode             : 'rail',
+					haulage_type               : 'carrier',
+				}],
+		};
+	}
 
 	return payload || {};
 };

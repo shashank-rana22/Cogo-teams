@@ -23,11 +23,11 @@ function BreakdownDetailsHeader({
 }) {
 	const { rate = {}, conversions = {} } = useContext(CheckoutContext);
 
-	const { isConditionMatches, isChannelPartner } = useGetPermission({ navigation: 'service_discovery' });
+	const { isConditionMatches } = useGetPermission({ navigation: 'service_discovery' });
 
 	const condition = canSeeMargin(
 		'partner',
-		{ isConditionMatches, isChannelPartner },
+		{ isConditionMatches },
 		[],
 	);
 

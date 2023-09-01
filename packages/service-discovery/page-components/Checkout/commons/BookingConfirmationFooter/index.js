@@ -117,7 +117,6 @@ function BookingConfirmationFooter({
 		activated_on_paylater = {},
 		checkout_type = '',
 		invoice = {},
-		isChannelPartner = false,
 		rate = {},
 	} = useContext(CheckoutContext);
 
@@ -147,7 +146,6 @@ function BookingConfirmationFooter({
 		);
 
 	const disableCondition = (typeof invoice?.selected_credit_days === 'undefined'
-			&& !isChannelPartner
 			&& !shipment_id
 			&& !domesticService)
 		|| (is_any_invoice_on_credit

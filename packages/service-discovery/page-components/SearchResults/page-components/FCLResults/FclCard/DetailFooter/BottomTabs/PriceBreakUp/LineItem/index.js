@@ -12,13 +12,12 @@ import styles from './styles.module.css';
 const DEFAULT_VALUE = 0;
 
 function LineItem({ lineItem = {} }) {
-	const { isConditionMatches, isChannelPartner } = useGetPermission({ navigation: 'service_discovery' });
+	const { isConditionMatches } = useGetPermission({ navigation: 'service_discovery' });
 
 	const {
 		currency,
 		margins,
 		total_price_discounted = 0,
-		price = 0,
 	} = lineItem || {};
 
 	let totalMarginValue = 0;
@@ -43,22 +42,6 @@ function LineItem({ lineItem = {} }) {
 	const priceWithoutMargin = totalMarginValue
 		? total_price_discounted - totalMarginValue
 		: total_price_discounted;
-
-	if (isChannelPartner) {
-		return (
-			<div className={styles.container}>
-				{formatAmount({
-					amount  : price,
-					currency,
-					options : {
-						style                 : 'currency',
-						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
-					},
-				})}
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>

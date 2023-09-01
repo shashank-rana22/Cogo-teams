@@ -322,9 +322,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.checkout_promotions,
 			],
 			main_apis: [
-				'list_shipments',
 				'list_spot_searches',
-				'list_margins',
 				'list_checkouts',
 				'list_partners',
 				'list_organizations',

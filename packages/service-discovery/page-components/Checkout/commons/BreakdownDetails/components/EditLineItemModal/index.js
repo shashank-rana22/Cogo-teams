@@ -44,9 +44,7 @@ function EditLineItemModal({
 	return (
 		<Modal
 			show={!isEmpty(editLineItemData)}
-			onClose={() => {
-				setEditLineItemData({});
-			}}
+			onClose={() => setEditLineItemData({})}
 		>
 			<Modal.Header title="Edit Line Item (Alias Creation)" />
 

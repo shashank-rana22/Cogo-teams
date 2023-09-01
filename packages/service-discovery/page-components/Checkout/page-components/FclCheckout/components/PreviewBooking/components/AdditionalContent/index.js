@@ -54,7 +54,6 @@ function AdditionalContent({
 		detail = {},
 		primaryService,
 		getCheckout,
-		isChannelPartner,
 		kycShowCondition,
 		tncPresent,
 		updateCheckout,
@@ -112,7 +111,6 @@ function AdditionalContent({
 			<BookingContent
 				detail={detail}
 				getCheckout={getCheckout}
-				isChannelPartner={isChannelPartner}
 			/>
 
 			<AdditionalConditions

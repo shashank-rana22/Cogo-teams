@@ -115,12 +115,12 @@ function SearchResults() {
 		);
 	}
 
-	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(detail?.service_type);
+	const isServiceSupported = GLOBAL_CONSTANTS.new_search_supported_services.includes(detail?.service_type);
 
 	if (
 		!isEmpty(detail)
 		&& redirect_required === 'true'
-		&& (!detail?.tags?.includes('new_admin') || !isServiceSupported)
+		&& (!detail?.tags?.includes('version2') || !isServiceSupported)
 	) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			tags                 : detail.tags,

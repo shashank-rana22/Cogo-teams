@@ -1,4 +1,4 @@
-import { AsyncSelectController, ChipsController } from '@cogoport/forms';
+import { AsyncSelectController, ChipsController, InputNumberController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -11,6 +11,7 @@ function UnpreferredShippingLines({
 		control,
 		formState: { errors = {} },
 		setValue = () => {},
+		watch,
 	} = formProps;
 
 	const { shipping_preferences = {} } = primaryService;
@@ -24,6 +25,8 @@ function UnpreferredShippingLines({
 		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
 		setValue('unpreferred_shipping_line_ids', unpreferred_shipping_line_ids);
 	}, [setValue, shipping_preferences]);
+
+	const agreedForPartialShipmentWatch = watch('agreed_for_partial_shipment');
 
 	return (
 		<div className={styles.container}>
@@ -72,6 +75,19 @@ function UnpreferredShippingLines({
 					enableMultiSelect={false}
 				/>
 			</div>
+
+			{agreedForPartialShipmentWatch === 'yes' && (
+				<div className={styles.partial_load} style={{ marginTop: '16px' }}>
+					How many minimum containers would you like to ship in one go?
+
+					<InputNumberController
+						style={{ marginLeft: '12px' }}
+						control={control}
+						name="partial_shipment_min_limit"
+						size="md"
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

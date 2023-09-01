@@ -1,5 +1,5 @@
 // import { Checkbox } from '@cogoport/components';  //commented for now, may use in future
-import { ChipsController } from '@cogoport/forms';
+import { ChipsController, InputNumberController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../commons/forms/getElementController';
@@ -44,6 +44,7 @@ function ShippingPreferences({
 		control,
 		formState: { errors = {} },
 		setValue,
+		watch,
 	} = formProps;
 
 	const controls = getControls({ search_id });
@@ -68,6 +69,8 @@ function ShippingPreferences({
 
 		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
 	}, [setValue, shipping_preferences]);
+
+	const agreedForPartialShipmentWatch = watch('agreed_for_partial_shipment');
 
 	return (
 		<div className={styles.container}>
@@ -158,6 +161,19 @@ function ShippingPreferences({
 					enableMultiSelect={false}
 				/>
 			</div>
+
+			{agreedForPartialShipmentWatch === 'yes' && (
+				<div className={styles.partial_load} style={{ marginTop: '16px' }}>
+					How many minimum containers would you like to ship in one go?
+
+					<InputNumberController
+						style={{ marginLeft: '12px' }}
+						control={control}
+						name="partial_shipment_min_limit"
+						size="sm"
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

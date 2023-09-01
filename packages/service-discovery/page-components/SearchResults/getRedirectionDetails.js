@@ -13,7 +13,7 @@ const getRedirectionDetails = ({
 		};
 	}
 
-	if (!tags.includes('new_admin')) {
+	if (!tags.includes('version2')) {
 		return {
 			url: `/${partner_id}/book/${id}/${importer_exporter_id}`,
 			message:

@@ -15,7 +15,6 @@ function ChangeOpsExecutive({
 	onUpdate = () => {},
 	loading = false,
 	branch_id = '',
-	isChannelPartner = false,
 	setShowEditContact = () => {},
 }) {
 	const [addExecutive, setAddExecutive] = useState(false);
@@ -59,7 +58,6 @@ function ChangeOpsExecutive({
 					onUpdate={onUpdate}
 					user_id={user_id}
 					branch_id={branch_id}
-					isChannelPartner={isChannelPartner}
 					data={data}
 					setShowEditContact={setShowEditContact}
 				/>

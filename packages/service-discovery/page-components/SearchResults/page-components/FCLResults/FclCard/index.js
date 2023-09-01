@@ -9,6 +9,7 @@ import FreightPriceDetail from '../../../common/BasicFreightDetail';
 
 import DetailFooter from './DetailFooter';
 import HaulageText from './HaulageText';
+import IcdRoute from './IcdRoute';
 import PromoCode from './Promocode';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
@@ -79,13 +80,35 @@ function MiddleSection({
 
 	const remainingRates = primaryServiceRates.slice(TWO);
 
+	const { origin_port = {}, destination_port = {} } = detail || {};
+
+	const isIcdPortPresent = origin_port?.is_icd || destination_port?.is_icd;
+
+	const MAPPING = {
+		false: {
+			component : Route,
+			props     : {
+				detail,
+				scheduleData,
+				isCogoAssured,
+			},
+		},
+		true: {
+			component : IcdRoute,
+			props     : {
+				detail,
+				scheduleData,
+				isCogoAssured,
+				rateCardData,
+			},
+		},
+	};
+
+	const { component:RouteComponent, props } = MAPPING[isIcdPortPresent];
+
 	return (
 		<div className={styles.middle}>
-			<Route
-				detail={detail}
-				scheduleData={scheduleData}
-				isCogoAssured={isCogoAssured}
-			/>
+			<RouteComponent {...props} />
 
 			<div className={styles.rate_details}>
 				<div style={{ marginRight: 24 }}>
