@@ -40,7 +40,6 @@ function useGetListSupplier({ setViewSelectedInvoice = () => {}, setSavePayrunMo
 		try {
 			trigger({ params: { payrunId: payrun, searchType: query || undefined } });
 		} catch (e) {
-			console.log('error', e);
 			toastApiError(e);
 		}
 	}, [payrun, trigger, query]);
