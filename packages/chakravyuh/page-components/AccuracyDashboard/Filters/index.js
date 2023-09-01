@@ -1,7 +1,7 @@
 import { Select, cl, Datepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { merge, startCase } from '@cogoport/utils';
+import { addDays, merge, startCase } from '@cogoport/utils';
 
 import {
 	LOCATIONS_PROPS, MAIN_PORT_PROPS, TYPE_MAPPING,
@@ -16,9 +16,11 @@ import { LOCATION_KEYS } from '../../../constants/map_constants';
 import FilterButton from './FilterButton';
 import styles from './styles.module.css';
 
+const MONTH_DAYS = 30;
+
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { service_type, start_date, end_date } = globalFilters;
+	const { service_type, start_date, end_date, chartType = 'trend' } = globalFilters;
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
@@ -116,7 +118,7 @@ function Filters(props) {
 							changePrimaryFilters('end_date', value);
 						}}
 						isPreviousDaysAllowed
-						maxDate={new Date()}
+						maxDate={chartType === 'trend' ? addDays(new Date(), MONTH_DAYS) : new Date()}
 						minDate={start_date || undefined}
 						showTimeSelect={false}
 						placeholder="End Date"

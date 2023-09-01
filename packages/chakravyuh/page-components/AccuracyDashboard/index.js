@@ -1,4 +1,4 @@
-import { subtractDays } from '@cogoport/utils';
+import { addDays, subtractDays } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import DashboardView from './Dashboard';
@@ -33,7 +33,7 @@ function AccuracyDashboard() {
 		service_type : 'fcl',
 		parent_mode  : null,
 		start_date   : subtractDays(new Date(), MONTH_DAYS),
-		end_date     : new Date(),
+		end_date     : addDays(new Date(), MONTH_DAYS),
 		chartType    : 'trend',
 	});
 
