@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import SELECT_AGENTS_KEYS_MAPPING from '../../../../../constants/select-agents-keys-mapping';
 
@@ -9,20 +10,20 @@ const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const { SELECT_ALL, EXCLUDE_ONLY } = SELECT_AGENTS_KEYS_MAPPING;
 
-const CARD_DATA_MAPPING = [
+const getCardDataMapping = ({ t = () => {} }) => ([
 	{
 		name     : 'objective_type',
-		label    : 'Objective Type',
+		label    : t('allocation:objective_type_label'),
 		accessor : ({ objective_type }) => <div>{startCase(objective_type || '')}</div>,
 	},
 	{
 		name     : 'partner',
-		label    : 'Entity',
+		label    : t('allocation:entity_label'),
 		accessor : ({ partner }) => <div>{partner.business_name}</div>,
 	},
 	{
 		name     : 'channels',
-		label    : 'Channels',
+		label    : t('allocation:channels_label'),
 		accessor : ({ channels }) => (
 			<div>
 				{channels.map((item, index) => ((
@@ -35,7 +36,7 @@ const CARD_DATA_MAPPING = [
 	},
 	{
 		name     : 'roles',
-		label    : 'Agent Role',
+		label    : t('allocation:agent_role_label'),
 		accessor : ({ roles }) => (
 			!isEmpty(roles) ? (
 				<Tooltip content={(
@@ -61,32 +62,36 @@ const CARD_DATA_MAPPING = [
 	},
 	{
 		name     : 'agents',
-		label    : 'Applicable On',
+		label    : t('allocation:applicable_on_label'),
 		accessor : ({ selectMode, user_ids }) => {
 			if (selectMode === SELECT_ALL) {
-				return 'All Agents';
+				return t('allocation:all_agents_text');
 			}
 			if (selectMode === EXCLUDE_ONLY) {
-				return `All Except ${user_ids.length} Agents`;
+				return `${t('allocation:all_except_agents_text')} ${user_ids.length} ${t('allocation:agents_text')}`;
 			}
-			return `${user_ids.length} Agents`;
+			return `${user_ids.length} ${t('allocation:agents_text')}`;
 		},
 	},
-];
+]);
 
 function ReviewGeneralConfigCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { generalConfiguration } = props;
+
+	const cardDataMapping = getCardDataMapping({ t });
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
-				<h4 className={styles.heading}>General Configuration</h4>
+				<h4 className={styles.heading}>{t('allocation:general_configuration')}</h4>
 
 				<h4 className={styles.objective_name}>{generalConfiguration.name || ''}</h4>
 			</div>
 
 			<div className={styles.card}>
-				{CARD_DATA_MAPPING.map((item) => {
+				{(cardDataMapping || []).map((item) => {
 					const { name, label, accessor } = item;
 
 					return (

@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
@@ -17,6 +18,7 @@ function TimeLine({ eachMessage = {} }) {
 		user_data,
 		status = '',
 		channel = '',
+		reason = '',
 	} = eachMessage;
 
 	const { name : presentAgent } = agent_data || {};
@@ -30,6 +32,7 @@ function TimeLine({ eachMessage = {} }) {
 		startAt         : conversation_started_at,
 		voiceCallStatus : status,
 		channel,
+		reason,
 	});
 
 	if (!timelineText) {
@@ -43,11 +46,11 @@ function TimeLine({ eachMessage = {} }) {
 				<div className={styles.timeline_container}>
 					{timelineText}
 				</div>
-				<div className={styles.timeline_container}>
+				<div className={cl`${styles.timeline_container} ${styles.datetime_styles}`}>
 					{formatDate({
 						date       : new Date(created_at),
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						separator  : ', ',
 					})}

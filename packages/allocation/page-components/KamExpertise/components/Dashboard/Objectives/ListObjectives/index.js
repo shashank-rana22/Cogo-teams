@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import useGetListObjectives from '../../../../hooks/useGetListObjectives';
 
 import Body from './Body';
@@ -5,6 +7,8 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function ListObjectives(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { ...rest } = props;
 
 	const {
@@ -19,7 +23,7 @@ function ListObjectives(props) {
 	return (
 		<>
 			<div className={styles.heading_container}>
-				Objectives list
+				{t('allocation:objectives_list')}
 			</div>
 
 			<Header

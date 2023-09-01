@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 import PrimaryTabs from './Tabs';
 
 function Responses() {
+	const router = useRouter();
+
 	const {
 		general: {
 			query: {
@@ -20,8 +22,6 @@ function Responses() {
 	} = useSelector((state) => state);
 
 	const routeDetailsRef = useRef({ organization, third_party });
-
-	const router = useRouter();
 
 	return (
 		<>

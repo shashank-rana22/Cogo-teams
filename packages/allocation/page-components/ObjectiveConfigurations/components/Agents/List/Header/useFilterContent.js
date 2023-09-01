@@ -6,10 +6,8 @@ import getAgentsFilterControls from '../../../../configurations/get-agents-filte
 
 const MIN_LENGTH = 0;
 
-const controls = getAgentsFilterControls();
-
 const useFilterContent = (props) => {
-	const { setParams } = props;
+	const { setParams, t = () => {} } = props;
 
 	const [showFilters, setShowFilters] = useState(false);
 
@@ -18,6 +16,8 @@ const useFilterContent = (props) => {
 	const formProps = useForm();
 
 	const { reset, getValues } = formProps;
+
+	const controls = getAgentsFilterControls({ t });
 
 	const resetParams = () => {
 		const FILTER_VALUES = {};

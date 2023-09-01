@@ -21,6 +21,10 @@
 	}
 }
 
+.nomargin {
+	margin-bottom: 0;
+}
+
 .send_report {
 	margin-right: 20px;
 	font-size: 14px;
@@ -33,4 +37,18 @@
 .filter_div {
 	display: flex;
 	align-items: center;
+}
+
+.inputstyles {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.table {
+	:global {
+		.ui_table_head_cell {
+			max-width: 140px !important;
+		}
+	}
 }
