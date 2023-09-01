@@ -1,6 +1,7 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
@@ -8,7 +9,11 @@ import getEventControlType from '../../../../utils/get-event-control-type';
 
 import styles from './styles.module.css';
 
+const LOADINGROWS = 6;
+
 function AttributePage(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { loading, attributeList = [], formProps = {} } = props;
 
 	const {
@@ -20,11 +25,11 @@ function AttributePage(props) {
 		return (
 			<div className={styles.account_attributes}>
 				<div className={styles.account_attribute_text}>
-					Attributes
+					{t('allocation:attributes_label')}
 				</div>
 
 				<section className={styles.row_container}>
-					{[1, 2, 3, 4, 5, 6].map((item) => (
+					{[...Array(LOADINGROWS).keys()].map((item) => (
 						<div key={item} className={styles.attribute_form_group}>
 							<Placeholder height="40px" width="250px" margin="8px 16px 32px 0" />
 						</div>
@@ -52,7 +57,7 @@ function AttributePage(props) {
 	return (
 		<div className={styles.account_attributes}>
 			<div className={styles.account_attribute_text}>
-				Attributes
+				{t('allocation:attributes_label')}
 			</div>
 
 			<section className={styles.row_container}>

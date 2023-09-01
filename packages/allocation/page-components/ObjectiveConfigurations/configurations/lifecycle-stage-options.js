@@ -1,14 +1,14 @@
-const LIFECYCLE_STAGE_OPTIONS = [
+const getLifeCyleStageOptions = ({ t = () => {} }) => ([
 	{
-		label : 'Create Objective for Transacting Users Only',
+		label : t('allocation:transacting_objective'),
 		name  : 'transacting',
 		value : 'transacting',
 	},
 	{
-		label : 'Create Objective for Organic Leads Only',
+		label : t('allocation:organic_leads_objective'),
 		name  : 'organic_leads',
 		value : 'organic_leads',
 	},
-];
+]);
 
-export default LIFECYCLE_STAGE_OPTIONS;
+export default getLifeCyleStageOptions;

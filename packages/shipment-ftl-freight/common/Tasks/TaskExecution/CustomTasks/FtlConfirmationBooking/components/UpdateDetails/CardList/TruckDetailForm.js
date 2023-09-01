@@ -43,8 +43,8 @@ function TruckDetailForm({
 					if (subControl.name === 'truck_number') {
 						tempControl.type = 'select';
 						tempControl.options = truckDetailsList?.map((truck) => ({
-							label : truck?.name,
-							value : truck?.name,
+							label : truck?.data?.asset_registration_number,
+							value : truck?.data?.asset_registration_number,
 						}));
 					}
 				});

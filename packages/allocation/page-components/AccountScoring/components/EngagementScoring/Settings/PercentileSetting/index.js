@@ -1,22 +1,27 @@
 import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import getPercentileControl from '../../../../configurations/get-add-percentile-controls';
-import percentileColumns from '../../../../constants/get-percentile-columns';
+import getPercentileColumns from '../../../../constants/get-percentile-columns';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
 function PercentileSetting(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		settingsLoading, settingsRefetch, percentileList,
 		control, handleSubmit, errors, reset,
 	} = props;
 
 	const [editing, setEditing] = useState(false);
+
+	const percentileColumns = getPercentileColumns({ t });
 
 	if (isEmpty(percentileList) && !settingsLoading) {
 		return (
@@ -25,7 +30,7 @@ function PercentileSetting(props) {
 					height={220}
 					width={380}
 					flexDirection="row"
-					emptyText="Percentile Data not found"
+					emptyText={t('allocation:percentile_setting_empty_state')}
 					textSize={20}
 				/>
 			</div>
@@ -44,10 +49,8 @@ function PercentileSetting(props) {
 				errors={errors}
 				reset={reset}
 				inputStyle="percentile_input"
-				heading="Percentile Setting"
-				tooltipData="When the account lies in the respective percentile it would be assigned
-				a score at that time based on the table given below to show the region in which
-				the account lies whether (COLD , ICE COLD , WARM , HOT , FLAMING HOT)."
+				heading={t('allocation:percentile_setting_heading')}
+				tooltipData={t('allocation:percentile_setting_tooltip_data')}
 			/>
 		);
 	}

@@ -23,6 +23,11 @@ const ChipsController = dynamic(
 	{ ssr: false },
 );
 
+const MultiSelectController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.MultiselectController),
+	{ ssr: false },
+);
+
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
 
@@ -31,6 +36,8 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'date_range_picker') return <DateRangePickerController {...rest} />;
 
 	if (type === 'chips') return <ChipsController {...rest} />;
+
+	if (type === 'multi_select') return <MultiSelectController {...rest} />;
 
 	return <InputController {...rest} type={type} />;
 }

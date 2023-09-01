@@ -1,7 +1,51 @@
 import containerSize from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-// eslint-disable-next-line max-lines-per-function
+import FREE_DAYS_TYPES from '../../../../../configs/FREE_DAYS_TYPE.json';
+import LOCATION_TYPES from '../../../../../configs/LOCATION_TYPE.json';
+import SPECIFICITY_TYPES from '../../../../../configs/SPECIFICITY_TYPE.json';
+import TRADE_TYPES from '../../../../../configs/TRADE_TYPE.json';
+
+const fieldArrayField = [
+	{
+		label       : 'Lower Limit',
+		name        : 'lower_limit',
+		type        : 'number',
+		span        : 3,
+		placeholder : 'Lower Limit (in Days)',
+		size        : 'sm',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'upper_limit',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		label       : 'Upper Limit',
+		placeholder : 'Upper Limit (in Days)',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'currency',
+		type        : 'async_select',
+		asyncKey    : 'list_exchange_rate_currencies',
+		span        : 3,
+		label       : 'Currency',
+		size        : 'sm',
+		placeholder : 'Currency',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'price',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		label       : 'Price',
+		placeholder : 'Price',
+		rules       : { required: 'This is required' },
+	},
+];
+
 const getControls = ({ item = {} }) => [
 	{
 		label : 'Location Details',
@@ -15,28 +59,9 @@ const getControls = ({ item = {} }) => [
 		type        : 'select',
 		placeholder : 'Location Type ',
 		size        : 'sm',
-		rules       : {
-			required: true,
-		},
-		span    : 3,
-		options : [
-			{
-				label : 'Seaport',
-				value : 'seaport',
-			},
-			{
-				label : 'Country',
-				value : 'country',
-			},
-			{
-				label : 'Trade',
-				value : 'trade',
-			},
-			{
-				label : 'Continent',
-				value : 'continent',
-			},
-		],
+		rules       : { required: true },
+		span        : 3,
+		options     : LOCATION_TYPES.fcl,
 	},
 	{
 		name        : 'location_id',
@@ -49,19 +74,26 @@ const getControls = ({ item = {} }) => [
 		isClearable : true,
 		placeholder : 'Origin Location',
 		rules       : { required: 'This is required' },
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { city: true, country: true, default_params_required: true },
+			recommendations : true,
+		},
 	},
 	{
-		name     : 'shipping_line_id',
-		size     : 'sm',
-		type     : 'async_select',
-		span     : 3,
-		value    : item?.shipping_line_id,
-		disabled : !!item?.shipping_line_id,
-
+		name        : 'shipping_line_id',
+		size        : 'sm',
+		type        : 'async_select',
+		span        : 3,
+		value       : item?.shipping_line_id,
+		disabled    : !!item?.shipping_line_id,
 		asyncKey    : 'list_operators',
 		placeholder : 'Shipping Line',
 		params      : {
-			page_limit : 100,
+			page_limit : 10,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
 			filters    : { operator_type: 'shipping_line', status: 'active' },
@@ -69,26 +101,16 @@ const getControls = ({ item = {} }) => [
 		},
 	},
 	{
-		name      : 'trade_type',
-		size      : 'sm',
-		type      : 'select',
-		span      : 2.5,
-		className : 'primary lg',
-		value     : item?.trade_type || undefined,
-		disabled  : !!item?.trade_type,
-		options   : [
-			{
-				label : 'Import',
-				value : 'import',
-			},
-			{
-				label : 'Export',
-				value : 'export',
-			},
-		],
-		placeholder: 'Trade Type',
+		name        : 'trade_type',
+		size        : 'sm',
+		type        : 'select',
+		span        : 2.5,
+		className   : 'primary lg',
+		value       : item?.trade_type || undefined,
+		disabled    : !!item?.trade_type,
+		options     : TRADE_TYPES.fcl,
+		placeholder : 'Trade Type',
 	},
-
 	{
 		label : 'Service Provider Details',
 		span  : 12,
@@ -122,9 +144,8 @@ const getControls = ({ item = {} }) => [
 		isClearable : true,
 		span        : 4,
 		valueKey    : 'user_id',
-		// rules       : { required: 'This is required' },
+		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Container Details',
 		name  : 'container_details',
@@ -152,7 +173,6 @@ const getControls = ({ item = {} }) => [
 		rules       : { required: 'This is required' },
 		options     : containerTypes,
 	},
-
 	{
 		label : 'Free Limit Details',
 		span  : 12,
@@ -174,20 +194,7 @@ const getControls = ({ item = {} }) => [
 		disabled    : !!item?.specificity_type,
 		size        : 'sm',
 		placeholder : 'Specificity Type',
-		options     : [
-			{
-				label : 'Cogoport',
-				value : 'cogoport',
-			},
-			{
-				label : 'Shipping Line',
-				value : 'shipping_line',
-			},
-			{
-				label : 'Rate Specific',
-				value : 'rate_specific',
-			},
-		],
+		options     : SPECIFICITY_TYPES.fcl,
 	},
 
 	{
@@ -195,7 +202,6 @@ const getControls = ({ item = {} }) => [
 		span  : 12,
 		name  : 'validity_details',
 	},
-	// check for css
 	{
 		name  : 'validity',
 		type  : 'date_range_picker',
@@ -205,7 +211,6 @@ const getControls = ({ item = {} }) => [
 		placeholder : 'Select Validity Range',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Previous Days Applicable',
 		name  : 'previous_days_applicable_label',
@@ -234,27 +239,16 @@ const getControls = ({ item = {} }) => [
 		span  : 12,
 	},
 	{
-		name    : 'free_days_type',
-		type    : 'select',
-		span    : 4,
-		value   : item?.free_days_type || undefined,
-		// disabled  : !!task.id,
-		size    : 'sm',
-		options : [
-			{
-				label : 'Detention',
-				value : 'detention',
-			},
-			{
-				label : 'Demurrage',
-				value : 'demurrage',
-			},
-		],
-
+		name        : 'free_days_type',
+		type        : 'select',
+		span        : 4,
+		value       : item?.free_days_type || undefined,
+		disabled    : !!item.free_days_type,
+		size        : 'sm',
+		options     : FREE_DAYS_TYPES,
 		placeholder : 'Free Days Type',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		label : 'Demurrage',
 		name  : 'demurrage_label',
@@ -267,47 +261,8 @@ const getControls = ({ item = {} }) => [
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
 		value              : item?.free_days_type === 'demurrage' ? item?.slabs : [{ lower_limit: '' }],
-		controls           : [
-			{
-				label       : 'Lower Limit',
-				name        : 'lower_limit',
-				type        : 'number',
-				span        : 3,
-				placeholder : 'Lower Limit (in Days)',
-				size        : 'sm',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'upper_limit',
-				type        : 'number',
-				span        : 3,
-				size        : 'sm',
-				label       : 'Upper Limit',
-				placeholder : 'Upper Limit (in Days)',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'currency',
-				type        : 'async_select',
-				asyncKey    : 'list_exchange_rate_currencies',
-				span        : 3,
-				label       : 'Currency',
-				size        : 'sm',
-				placeholder : 'Currency',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'price',
-				type        : 'number',
-				span        : 3,
-				size        : 'sm',
-				label       : 'Price',
-				placeholder : 'Price',
-				rules       : { required: 'This is required' },
-			},
-		],
+		controls           : fieldArrayField,
 	},
-
 	{
 		label : 'Detention',
 		name  : 'detention_label',
@@ -320,43 +275,8 @@ const getControls = ({ item = {} }) => [
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
 		value              : item?.free_days_type === 'detention' ? item?.slabs : [{ lower_limit: '' }],
-		controls           : [
-			{
-				name        : 'lower_limit',
-				type        : 'number',
-				size        : 'sm',
-				placeholder : 'Lower Limit (in Days)',
-				span        : 3,
-				rules       : { required: 'This is required', min: 1 },
-			},
-			{
-				name        : 'upper_limit',
-				type        : 'number',
-				size        : 'sm',
-				span        : 3,
-				placeholder : 'Upper Limit (in Days)',
-				rules       : { required: 'This is required', min: 1 },
-			},
-			{
-				name        : 'currency',
-				placeholder : 'Currency',
-				size        : 'sm',
-				type        : 'async_select',
-				asyncKey    : 'list_exchange_rate_currencies', // component
-				span        : 3,
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'price',
-				placeholder : 'Enter Price',
-				size        : 'sm',
-				type        : 'number',
-				span        : 2,
-				rules       : { required: 'This is required' },
-			},
-		],
+		controls           : fieldArrayField,
 	},
-
 ];
 
 export default getControls;

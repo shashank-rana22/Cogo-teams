@@ -1,4 +1,4 @@
-const GRAPH_PROPS_MAPPING = {
+const getGraphPropsMapping = ({ t = () => {} }) => ({
 	leaderboard: {
 		margin: {
 			top    : 0,
@@ -26,7 +26,7 @@ const GRAPH_PROPS_MAPPING = {
 			tickSize       : 5,
 			tickPadding    : 5,
 			tickRotation   : -45,
-			legend         : 'Date',
+			legend         : t('allocation:date'),
 			legendOffset   : 70,
 			legendPosition : 'middle',
 		},
@@ -34,13 +34,13 @@ const GRAPH_PROPS_MAPPING = {
 			tickSize       : 5,
 			tickPadding    : 5,
 			tickRotation   : 0,
-			legend         : 'Engagement Score',
+			legend         : t('allocation:engagement_score'),
 			legendOffset   : -70,
 			legendPosition : 'middle',
 		},
 		enableArea   : true,
 		enablePoints : true,
 	},
-};
+});
 
-export default GRAPH_PROPS_MAPPING;
+export default getGraphPropsMapping;

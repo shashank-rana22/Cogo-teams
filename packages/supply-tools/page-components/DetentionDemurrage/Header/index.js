@@ -9,14 +9,14 @@ function Header({ setActiveShipment = () => {}, activeShipment = '' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>Detention & Demurrage</div>
-
-			<div className={styles.select_container}>
+			<div className={styles.shipment_type}>
 				<Select
 					options={SHIPMENT_TYPES.shipment_types}
 					value={activeShipment}
 					size="md"
 					onChange={setActiveShipment}
 				/>
+
 			</div>
 		</div>
 	);

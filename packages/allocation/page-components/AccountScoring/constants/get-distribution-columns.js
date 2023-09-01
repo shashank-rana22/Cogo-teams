@@ -1,8 +1,8 @@
 import { startCase } from '@cogoport/utils';
 
-const distributionColumns = [
+const distributionColumns = ({ t }) => [
 	{
-		Header   : 'WARMTH',
+		Header   : t('allocation:distribution_columns_warmth'),
 		accessor : ({ warmth = '' }) => (
 			<section>
 				{startCase(warmth)}
@@ -10,7 +10,7 @@ const distributionColumns = [
 		),
 	},
 	{
-		Header   : 'RANGE',
+		Header   : t('allocation:distribution_columns_range'),
 		accessor : ({ lower_limit = 0, upper_limit = 0 }) => (
 			<section>
 				{lower_limit}
@@ -20,7 +20,7 @@ const distributionColumns = [
 		),
 	},
 	{
-		Header   : 'CURRENT NUMBER OF ACCOUNTS',
+		Header   : t('allocation:distribution_columns_current_number_of_accounts'),
 		accessor : ({ warmth_count = 0 }) => (
 			<section>
 				{warmth_count}

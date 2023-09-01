@@ -2,6 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 import removeObjEmptyValue from '../helpers/removeObjEmptyValue';
+import toastApiError from '../utils/toastApiError';
 
 const useListShipmentInvoiceCombinations = ({ defaultFilters = {} }) => {
 	const [apiData, setApiData] = useState({});
@@ -31,8 +32,7 @@ const useListShipmentInvoiceCombinations = ({ defaultFilters = {} }) => {
 		} catch (err) {
 			setApiData({});
 
-			// toastApiError(err);
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [trigger]);
 
