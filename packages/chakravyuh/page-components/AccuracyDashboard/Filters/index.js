@@ -1,7 +1,7 @@
 import { Select, cl, Datepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { addDays, merge, startCase } from '@cogoport/utils';
 
 import {
 	LOCATIONS_PROPS, MAIN_PORT_PROPS, TYPE_MAPPING,
@@ -15,6 +15,8 @@ import { LOCATION_KEYS } from '../../../constants/map_constants';
 
 import FilterButton from './FilterButton';
 import styles from './styles.module.css';
+
+const MONTH_DAYS = 30;
 
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
@@ -63,7 +65,14 @@ function Filters(props) {
 									onChange={(value, obj) => handleChange(key, value, obj)}
 									value={globalFilters[key]}
 									className={styles.location_select}
-									params={getLocationParams(service_type)}
+									params={merge(getLocationParams(service_type), {
+										filters: {
+											type: [
+												`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
+												'country',
+											],
+										},
+									})}
 									{...LOCATIONS_PROPS}
 								/>
 							</div>
@@ -99,7 +108,7 @@ function Filters(props) {
 							changePrimaryFilters('start_date', value);
 						}}
 						isPreviousDaysAllowed
-						maxDate={end_date || new Date()}
+						maxDate={end_date || addDays(new Date(), MONTH_DAYS)}
 						showTimeSelect={false}
 						placeholder="Start Date"
 					/>
@@ -109,7 +118,7 @@ function Filters(props) {
 							changePrimaryFilters('end_date', value);
 						}}
 						isPreviousDaysAllowed
-						maxDate={new Date()}
+						maxDate={addDays(new Date(), MONTH_DAYS)}
 						minDate={start_date || undefined}
 						showTimeSelect={false}
 						placeholder="End Date"

@@ -2463,13 +2463,6 @@ const navigationMapping = ({ t = () => {} }) => {
 					possible_apis : apis.pricing_trends,
 				},
 				{
-					key           : 'chakravyuh-feedback',
-					title         : t('common:feedback_dashboard'),
-					href          : '/v2/chakravyuh/feedback-dashboard',
-					as            : '/v2/chakravyuh/feedback-dashboard',
-					possible_apis : apis.pricing_trends,
-				},
-				{
 					key           : 'chakravyuh-accuracy',
 					title         : t('common:feedback_accuracy'),
 					href          : '/v2/chakravyuh/accuracy-dashboard',
