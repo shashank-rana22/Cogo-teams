@@ -1,62 +1,62 @@
-const descriptions = {
-	things_to_do: 'View Cogoport value propositions',
+const roleDescriptions = (t) => ({
+	things_to_do: t('accessManagement:roles_and_permission_role_description_things_to_do'),
 	dashboards:
-		'View Stats and reports across multiple functions - Sales, Supply, Operation and Finance',
-	roles_permissions   : 'Create roles and configure its permissions',
-	partner_application : 'View partner leads',
-	partner             : 'View onboarded partners on the platform',
-	user                : 'View onboarded users on the partner platform',
+		t('accessManagement:roles_and_permission_role_description_dashboards'),
+	roles_permissions   : t('accessManagement:roles_and_permission_role_description_roles_permissions'),
+	partner_application : t('accessManagement:roles_and_permission_role_description_partner_application'),
+	partner             : t('accessManagement:roles_and_permission_role_description_partner'),
+	user                : t('accessManagement:roles_and_permission_role_description_user'),
 	user_allocation:
-		'View and create default stakeholders for assignment across functionalities like shipment and account',
-	business       : 'View and create the business entity',
-	demand_crm     : 'Manage importer exporter accounts',
-	supply_crm     : 'Manage service provider accounts',
-	support_crm    : 'Handle customer queries',
-	onboarding_crm : 'Verify customer and service provider KYC',
+		t('accessManagement:roles_and_permission_role_description_user_allocation'),
+	business       : t('accessManagement:roles_and_permission_role_description_business'),
+	demand_crm     : t('accessManagement:roles_and_permission_role_description_demand_crm'),
+	supply_crm     : t('accessManagement:roles_and_permission_role_description_supply_crm'),
+	support_crm    : t('accessManagement:roles_and_permission_role_description_support_crm'),
+	onboarding_crm : t('accessManagement:roles_and_permission_role_description_onboarding_crm'),
 	finance_crm:
-		'Assign sage customer id to the onboarded customers and service providers',
+		t('accessManagement:roles_and_permission_role_description_finance_crm'),
 	business_dashboard:
-		'Dynamic dashboard for agents, managers and business heads',
+		t('accessManagement:roles_and_permission_role_description_business_dashboard'),
 	sales_dashboard:
-		'View stats and reports for customer related activities on the platform',
+		t('accessManagement:roles_and_permission_role_description_sales_dashboard'),
 	supply_dashboard:
-		'View stats and reports for the service provider related activites on the platform',
+		t('accessManagement:roles_and_permission_role_description_supply_dashboard'),
 	operations_dashboard:
-		'View stats and reports regarding shipments on the platform',
-	logistics_rate        : 'View and manage rates for each product(Fcl, Lcl, Air)',
-	port_management       : 'View and manage local charges on ocean ports',
-	booking_note_desk     : 'View and manage shipments requiring booking note upload',
-	booking_management    : 'View and manage shipments booked on the platform',
-	enquiries             : 'View and revert on the enquiries placed by the customer',
-	special_rate_requests : 'View and create enquiries on the platform',
+		t('accessManagement:roles_and_permission_role_description_operations_dashboard'),
+	logistics_rate        : t('accessManagement:roles_and_permission_role_description_logistics_rate'),
+	port_management       : t('accessManagement:roles_and_permission_role_description_port_management'),
+	booking_note_desk     : t('accessManagement:roles_and_permission_role_description_booking_note_desk'),
+	booking_management    : t('accessManagement:roles_and_permission_role_description_booking_management'),
+	enquiries             : t('accessManagement:roles_and_permission_role_description_enquiries'),
+	special_rate_requests : t('accessManagement:roles_and_permission_role_description_special_rate_requests'),
 	discount:
-		'View and configure discount on multiple parameters for spot search',
-	margin             : 'View and configure margin on multiple parameters for spot search',
-	margin_approval    : 'View and approve margin configured for spot search',
-	shipment_approval  : 'View and approve shipments booked by sales owner',
-	quotation_approval : 'View and approve quotations created by sales owner',
-	ocean_schedules    : 'View and create ocean schedules for Fcl',
-	convenience_rate   : 'View and configure platform fee for spot search',
+		t('accessManagement:roles_and_permission_role_description_discount'),
+	margin             : t('accessManagement:roles_and_permission_role_description_margin'),
+	margin_approval    : t('accessManagement:roles_and_permission_role_description_margin_approval'),
+	shipment_approval  : t('accessManagement:roles_and_permission_role_description_shipment_approval'),
+	quotation_approval : t('accessManagement:roles_and_permission_role_description_quotation_approval'),
+	ocean_schedules    : t('accessManagement:roles_and_permission_role_description_ocean_schedules'),
+	convenience_rate   : t('accessManagement:roles_and_permission_role_description_convenience_rate'),
 	condition:
-		'Configure condition on multiple data points in the db for campaign',
-	cashflow       : 'Stats and reports regarding invoices',
-	credit_request : "View and assess customer's request for getting credit",
+		t('accessManagement:roles_and_permission_role_description_condition'),
+	cashflow       : t('accessManagement:roles_and_permission_role_description_cashflow'),
+	credit_request : t('accessManagement:roles_and_permission_role_description_credit_request'),
 	shipment_permissible_loss:
-		'View and configure maximum loss allowed per shipment',
+		t('accessManagement:roles_and_permission_role_description_shipment_permissible_loss'),
 	product_code:
-		'View and create mapping for product codes across all the product/services',
+		t('accessManagement:roles_and_permission_role_description_product_code'),
 	organization_service_management:
-		'View and approve service applied by Service Provider',
+		t('accessManagement:roles_and_permission_role_description_organization_service_management'),
 	local_agent_management:
-		'View and create agents providing local service across different countries',
-	locations: 'Manage locations on the platform',
+		t('accessManagement:roles_and_permission_role_description_local_agent_management'),
+	locations: t('accessManagement:roles_and_permission_role_description_locations'),
 	ocean_port_pair:
-		'View and create serviceable ocean port pairs and shipping lines serving on them',
+		t('accessManagement:roles_and_permission_role_description_ocean_port_pair'),
 	air_port_pair:
-		'View and create serviceable airport pairs and airlines serving on them',
-	rate_sheet    : 'Manage and upload rate sheets',
-	file_uploader : 'Get public url of the uploaded file',
-	cms           : 'Manage content on the platform',
-	incentives    : 'Incentives module for partners',
-};
-export default descriptions;
+		t('accessManagement:roles_and_permission_role_description_air_port_pair'),
+	rate_sheet    : t('accessManagement:roles_and_permission_role_description_rate_sheet'),
+	file_uploader : t('accessManagement:roles_and_permission_role_description_file_uploader'),
+	cms           : t('accessManagement:roles_and_permission_role_description_cms'),
+	incentives    : t('accessManagement:roles_and_permission_role_description_incentives'),
+});
+export default roleDescriptions;
