@@ -2,7 +2,7 @@ import { Pagination } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function ListPagination({ filters = {}, setFilters = () => {}, data = {} }) {
+function TablePagination({ filters = {}, setFilters = () => {}, data = {} }) {
 	const { page, ...restFilters } = filters || {};
 
 	const { page_limit = 10, total_count = 1 } = data || {};
@@ -23,4 +23,4 @@ function ListPagination({ filters = {}, setFilters = () => {}, data = {} }) {
 	);
 }
 
-export default ListPagination;
+export default TablePagination;
