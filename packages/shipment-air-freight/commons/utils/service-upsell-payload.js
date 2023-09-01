@@ -45,7 +45,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	};
 
 	if (search_type === 'air_customs') {
-		const air_customs_commodity = commodity === 'hazardous' ? 'hazardous' : 'all_commodities';
+		const air_customs_commodity = commodity !== 'all_commodity' ? commodity : 'all_commodities';
 		if (trade_type === 'export') {
 			return [{
 				airport_id     : primary_service?.origin_airport?.id,
