@@ -1,5 +1,4 @@
-import { Popover, Input, Pagination, Button } from '@cogoport/components';
-import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
+import { Popover, Input, Pagination, Button, Toggle } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -27,21 +26,20 @@ function ListVendors() {
 	const { entityLoading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 
-	const entity = getDefaultEntityCode(partnerId);
-
-	const [activeEntity, setActiveEntity] = useState(entity);
+	const [activeEntity, setActiveEntity] = useState(partnerId);
+	const [active, setActive] = useState(true);
 	const {
 		loading,
 		data = {},
 		params = {},
-		setParams = () => {},
+		setParams = () => { },
 		columns,
 		showFilter,
 		setShowFilter,
 		searchValue,
 		handleChangeQuery,
 		isFilterInUse,
-	} = useVendorList({ activeEntity });
+	} = useVendorList({ activeEntity, active });
 
 	const {
 		data: dataStats,
@@ -52,12 +50,13 @@ function ListVendors() {
 	const ENTITY_OPTIONS = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
+			id = '',
 			entity_code: entityCode = '',
 		} = item || {};
 
 		return {
 			label : `${upperCase(companyName)} (${entityCode})`,
-			value : entityCode,
+			value : id,
 		};
 	});
 
@@ -85,6 +84,14 @@ function ListVendors() {
 				</div>
 
 				<div className={styles.actions_container}>
+					<Toggle
+						offLabel="Active"
+						onLabel="In Active"
+						size="sm"
+						onChange={() => setActive(!active)}
+						showOnOff
+						value={active}
+					/>
 					<Popover
 						theme="light"
 						placement="bottom"

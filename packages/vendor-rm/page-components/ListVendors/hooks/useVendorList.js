@@ -93,16 +93,16 @@ function RenderUniqueServices({ services = [], type = '' }) {
 	);
 }
 
-const useVendorList = ({ activeEntity = '' }) => {
+const useVendorList = ({ activeEntity = '', active = '' }) => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState();
 
 	const [params, setParams] = useState({
 		filters: {
-			status      : 'active',
-			q           : searchQuery || undefined,
-			entity_code : activeEntity,
+			status         : active || 'active',
+			q              : searchQuery || undefined,
+			cogo_entity_id : activeEntity,
 		},
 		page                     : 1,
 		pagination_data_required : true,
@@ -123,11 +123,12 @@ const useVendorList = ({ activeEntity = '' }) => {
 			...prevParams,
 			filters: {
 				...prevParams.filters,
-				q           : searchQuery || undefined,
-				entity_code : activeEntity || undefined,
+				status         : active ? 'active' : 'inactive',
+				q              : searchQuery || undefined,
+				cogo_entity_id : activeEntity || undefined,
 			},
 		}));
-	}, [searchQuery, activeEntity]);
+	}, [searchQuery, activeEntity, active]);
 
 	const handleViewMore = (id) => {
 		const HREF = '/vendors/[vendor_id]';
@@ -151,21 +152,21 @@ const useVendorList = ({ activeEntity = '' }) => {
 				</div>
 				<div className={styles.filter_icon_container}>
 					{
-					iconFilterMapping.map((item) => {
-						const { icon: Icon, filterType = '', style = {} } = item;
-						return (
-							<Icon
-								key={filterType}
-								fill={item[params?.sort_type] || '#000'}
-								onClick={() => setParams((pv) => ({
-									...pv,
-									sort_type: filterType,
-								}))}
-								style={style}
-							/>
-						);
-					})
-				}
+						iconFilterMapping.map((item) => {
+							const { icon: Icon, filterType = '', style = {} } = item;
+							return (
+								<Icon
+									key={filterType}
+									fill={item[params?.sort_type] || '#000'}
+									onClick={() => setParams((pv) => ({
+										...pv,
+										sort_type: filterType,
+									}))}
+									style={style}
+								/>
+							);
+						})
+					}
 				</div>
 			</div>
 		);
