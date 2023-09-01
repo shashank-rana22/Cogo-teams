@@ -56,7 +56,8 @@ function Rail({ activeShipment = '' }) {
 				<h2>Rail Domestic</h2>
 
 				<div className={styles.button_group_container}>
-					<Filter filters={filters} setFilters={setFilters} />
+					{['active', 'inactive'].includes(activeTab)
+						? <Filter filters={filters} setFilters={setFilters} /> : null}
 
 					{activeTab === 'active' ? <AddEdit refetchList={refetch} /> : null}
 				</div>
