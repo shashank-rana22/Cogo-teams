@@ -5,7 +5,7 @@ import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import controls from '../utils/controls';
@@ -35,7 +35,7 @@ function useVendorServices({
 
 	const entityCode = Object.values(ENTITY_MAPPING).find((val) => vendor_details?.cogo_entity_id === val?.id)?.code;
 
-	const getControls = controls({ entityCode });
+	const getControls = useMemo(() => controls({ entityCode }), [entityCode]);
 
 	const { partner_id = '', vendor_id } = query;
 
@@ -81,8 +81,7 @@ function useVendorServices({
 		getControls.forEach((item) => {
 			setValue(`${item.name}`, vendor_services?.[item.name] || reformattedDataFromApi[item.name]);
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [setValue, vendorInformation, vendor_services]);
+	}, [setValue, vendorInformation, vendor_services, getControls]);
 
 	return {
 		controls: getControls,
