@@ -1,6 +1,7 @@
 import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -24,6 +25,7 @@ function Column({
 	item = {},
 	level = '',
 }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const { approvalLevelConditions } = errors;
 	const { fields = [] } = config;
 
@@ -41,7 +43,7 @@ function Column({
 	const DATA = {
 		levels: (
 			<div className={styles.center}>
-				Level -
+				{t('incidentManagement:level')}
 				{index + DEFAULT_VAL}
 			</div>
 		),
@@ -71,7 +73,7 @@ function Column({
 				<InputController
 					control={control}
 					name={`approvalLevelConditions.${index}.condition`}
-					placeholder="Criteria"
+					placeholder={t('incidentManagement:criteria_placeholder')}
 					rules={{ required: { value: true, message: 'Criteria is required' } }}
 				/>
 				{approvalLevelConditions?.[index]?.condition?.message

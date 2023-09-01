@@ -1,9 +1,10 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useImperativeHandle, forwardRef, useEffect } from 'react';
 
-import { LEVELS_CONFIG } from '../../Config/levels-config';
+import { levelsConfig } from '../../Config/levels-config';
 import Header from '../../Header';
 
 import Column from './Column';
@@ -17,6 +18,7 @@ function LevelForm({ background = '#f3fafa', item = {}, level = '' }, ref) {
 	const { userId: userLevel2 } = stakeholderLevel2;
 	const { stakeholder: stakeholderLevel3 = {}, condition: conditionLevel3 = '' } = level3 || {};
 	const { userId: userLevel3 } = stakeholderLevel3;
+	const { t } = useTranslation(['incidentManagement']);
 
 	const getDefaultVal = () => {
 		if (!isEmpty(level3)) {
@@ -57,12 +59,12 @@ function LevelForm({ background = '#f3fafa', item = {}, level = '' }, ref) {
 	}, [level, remove, fields]);
 	return (
 		<div className={styles.container} style={{ backgroundColor: background }}>
-			<Header config={LEVELS_CONFIG} />
+			<Header config={levelsConfig(t)} />
 			<div className={styles.paddingbottom}>
 				{fields.map((field, index) => (
 					<Column
 						key={field.id}
-						config={LEVELS_CONFIG}
+						config={levelsConfig(t)}
 						control={control}
 						remove={remove}
 						append={append}

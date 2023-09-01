@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import Filters from '../common/Filters';
@@ -22,7 +23,9 @@ function TabComponent({
 
 	const { page } = filters || {};
 
-	const columns = getColumns({ activeTab, setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
+	const { t } = useTranslation(['incidentManagement']);
+
+	const columns = getColumns({ activeTab, setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, t });
 
 	return (
 		<div>
