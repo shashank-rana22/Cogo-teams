@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { LOCATION_KEYS } from '../constants/map_constants';
 
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
-	'is_origin_icd', 'is_destination_icd', 'page'];
+	'is_origin_icd', 'is_destination_icd', 'page', 'chartType'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const keysToExclude = [...EXCLUDE_KEYS, ...excludeKeys];

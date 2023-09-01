@@ -34,6 +34,7 @@ function AccuracyDashboard() {
 		parent_mode  : null,
 		start_date   : subtractDays(new Date(), MONTH_DAYS),
 		end_date     : new Date(),
+		chartType    : 'trend',
 	});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
