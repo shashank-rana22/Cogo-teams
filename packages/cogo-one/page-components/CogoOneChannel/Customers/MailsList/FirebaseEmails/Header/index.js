@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 function Header({
 	searchValue = '',
 	setSearchValue = () => {},
-	activeSubTab = '',
 	viewType = '',
 	tagOptions = [],
 	setAppliedFilters = () => {},
@@ -46,7 +45,6 @@ function Header({
 									showBotMessages={isBotSession}
 									tagOptions={tagOptions}
 									viewType={viewType}
-									activeSubTab={activeSubTab}
 								/>
 							)
 					)}

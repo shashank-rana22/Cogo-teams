@@ -1,44 +1,31 @@
-import { cl, Tooltip, Checkbox, Button } from '@cogoport/components';
+import { cl, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCPin, IcMPin } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import UserAvatar from '../../../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../../../constants';
+// import getUserNameFromEmail from '../../../../../../helpers/getUserNameFromEmail';
 import updatePin from '../../../../../../helpers/updatePin';
-import dateTimeConverter from '../../../../../../utils/dateTimeConverter';
-import formatLastMessage from '../../../../../../utils/formatLastMessage';
 import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
-const DEFAULT_UNREAD_MESSAGES = 0;
-const MAXIMUM_UNREAD_MESSAGES = 100;
 const LAST_UPDATED_PIN_TIME = 0;
 
 function MessageCardData({
 	item = {},
 	activeTab = {},
 	userId = '',
-	setActiveMessage = () => {},
+	// setActiveMessage = () => {},
 	firestore = {},
-	autoAssignChats = true,
-	handleCheckedChats = () => {},
-	source = '',
-	claimChat = () => {},
-	claimLoading = false,
-	viewType = '',
+	activeFolder = '',
 }) {
 	const formattedData = getActiveCardDetails(item) || {};
 
 	const {
-		user_name = '',
-		organization_name = '',
-		user_type = '',
 		search_user_name = '',
 		chat_tags = [],
-		chat_status = '',
 		id = '',
 		channel_type: channelType = '',
 		new_message_sent_at = '',
@@ -46,24 +33,31 @@ function MessageCardData({
 		last_message = '',
 		last_message_document = null,
 		new_message_count = 0,
-		is_likely_to_book_shipment = false,
+		last_inbound_document = null,
+		last_outbound_document = null,
+		// user_name = '',
 	} = formattedData || {};
 
-	const lastMessageVar = last_message_document || last_message;
+	const reqLastDocumentMapping = {
+		sent_items : last_outbound_document,
+		inbox      : last_inbound_document,
+	};
+
+	const lastMessageVar = isEmpty(reqLastDocumentMapping[activeFolder])
+		? last_message_document
+		: reqLastDocumentMapping[activeFolder];
+
+	const { response = {} } = lastMessageVar || {};
+
+	const {
+		subject = '',
+		body = '',
+		body_preview: bodyPreview = '',
+	} = response || {};
+
 	const isImportant = chat_tags?.includes('important') || false;
-	const lastActive = new Date(new_message_sent_at);
 
 	const checkActiveCard = activeTab?.data?.id === id;
-
-	const { renderTime } = dateTimeConverter(
-		Date.now() - Number(lastActive),
-		Number(lastActive),
-	);
-
-	const orgName = (user_name?.toLowerCase() || '').includes('anonymous')
-		? startCase(PLATFORM_MAPPING[user_type] || '') : startCase(organization_name);
-
-	const isFlashMessages = source === 'flash_messages';
 
 	const updatePinnedChats = (e, type) => {
 		e.stopPropagation();
@@ -76,135 +70,76 @@ function MessageCardData({
 			userId,
 		});
 	};
+	// const { shortName } = getUserNameFromEmail({ query: search_user_name || user_name || 'User' });
 
 	return (
 		<div
-			key={id}
-			className={cl`${styles.chat_card_main_container} ${isFlashMessages ? styles.flash_height : ''}`}
-		>
-			{!autoAssignChats && (
-				<Checkbox
-					onChange={() => handleCheckedChats(item, id)}
-					disabled={channelType !== 'whatsapp'}
-				/>
-			)}
+			role="presentation"
+			onClick={() => {
+				// if (source === 'flash_messages') {
+				// 	return;
+				// }
 
-			<div
-				role="presentation"
-				onClick={() => {
-					if (source === 'flash_messages') {
-						return;
-					}
-
-					setActiveMessage(item);
-				}}
-				className={cl`
+				// setActiveMessage(item);
+			}}
+			className={cl`
 						${styles.card_container} 
-						${autoAssignChats ? '' : styles.card_with_checkbox}
-						${checkActiveCard ? styles.active_card : ''} 
-						${isFlashMessages ? styles.flash_messages_padding : ''} 
+						${checkActiveCard ? styles.active_card : ''}
+						${new_message_count ? styles.border_left : styles.no_border_left}
 					`}
-			>
-				<div className={styles.card}>
-					<div className={styles.user_information}>
-						<div className={styles.avatar_container}>
-							<UserAvatar
-								type={channelType}
-								event={last_message_document?.source}
-							/>
-							<div className={styles.user_details}>
-								<Tooltip
-									content={startCase(search_user_name) || 'User'}
-									placement="top"
-								>
-									<div className={styles.user_name}>
-										{startCase(search_user_name) || 'User'}
-									</div>
-								</Tooltip>
-								<div className={styles.organisation}>
-									{orgName}
-								</div>
-							</div>
-						</div>
+		>
+			<div className={styles.header_card}>
+				<Avatar
+					src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
+					alt="user-img"
+					// personName={shortName}
+					disabled={false}
+					size="30px"
+				/>
 
-						<div className={styles.user_activity}>
-							<div className={styles.tags_container}>
-								{!isEmpty(chat_status) && (
-									<div
-										className={cl`
-											${styles.tags}
-											${chat_status === 'warning' ? styles.warning : ''}
-											${chat_status === 'escalated' ? styles.escalated : ''}
-										`}
-									>
-										{startCase(chat_status)}
-									</div>
-								)}
-							</div>
-							<div className={styles.activity_duration}>
-								{renderTime}
-							</div>
-						</div>
+				<div className={styles.header_title}>
+					<div className={styles.user_name_title}>
+						{startCase(search_user_name) || 'User'}
 					</div>
 
-					<div className={styles.content_div}>
-						{formatLastMessage({
-							lastMessage: channelType === 'email' ? last_message : lastMessageVar,
-							viewType,
+					<div className={styles.header_time}>
+						{formatDate({
+							date       : new_message_sent_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ', ',
 						})}
-
-						<div className={styles.flex_div}>
-							{new_message_count > DEFAULT_UNREAD_MESSAGES && (
-								<div className={styles.new_message_count}>
-									{new_message_count > MAXIMUM_UNREAD_MESSAGES
-										? '99+'
-										: new_message_count}
-								</div>
-							)}
-
-							{is_likely_to_book_shipment && (
-								<div className={styles.likely_to_book_shipment}>
-									<IcMShip className={styles.ship_icon_container} />
-								</div>
-							)}
-						</div>
 					</div>
 				</div>
+			</div>
 
-				{isImportant && (
-					<div className={styles.important_icon}>
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
-							alt="important"
-							width="10"
-							height="10"
-						/>
-					</div>
-				)}
+			<div className={styles.subject_container}>
+				{subject || last_message}
+			</div>
 
-				{isFlashMessages ? (
-					<Button
-						size="xs"
-						themeType="primary"
-						className={styles.claim_button_styles}
-						disabled={claimLoading}
-						onClick={(e) => {
-							e.stopPropagation();
-							claimChat(formattedData);
-						}}
-					>
-						CLAIM
-					</Button>
-				) : (
-					<div className={styles.pinned_div}>
-						{pinnedTime[userId] > LAST_UPDATED_PIN_TIME
-							? <IcCPin onClick={(e) => updatePinnedChats(e, 'unpin')} />
-							: <IcMPin onClick={(e) => updatePinnedChats(e, 'pin')} />}
-					</div>
-				)}
+			<div
+				className={styles.message_content}
+				dangerouslySetInnerHTML={{ __html: bodyPreview || body }}
+			/>
+
+			{isImportant ? (
+				<div className={styles.important_icon}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
+						alt="important"
+						width="10"
+						height="10"
+					/>
+				</div>
+			) : null}
+
+			<div className={styles.pinned_div}>
+				{pinnedTime[userId] > LAST_UPDATED_PIN_TIME
+					? <IcCPin onClick={(e) => updatePinnedChats(e, 'unpin')} />
+					: <IcMPin onClick={(e) => updatePinnedChats(e, 'pin')} />}
 			</div>
 		</div>
-
 	);
 }
 

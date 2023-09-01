@@ -2,8 +2,8 @@ import { Toast, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import React, { useState } from 'react';
 
-import Templates from '../../../../common/Templates';
-import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTemplate';
+import Templates from '../../../../../common/Templates';
+import useSendUserWhatsappTemplate from '../../../../../hooks/useSendUserWhatsappTemplate';
 
 import styles from './styles.module.css';
 

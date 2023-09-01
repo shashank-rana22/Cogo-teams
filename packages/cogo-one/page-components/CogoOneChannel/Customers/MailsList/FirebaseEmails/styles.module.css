@@ -1,7 +1,7 @@
 .main_container {
 	width: calc(100% - 43px);
 	height: 100%;
-	padding: 4px 4px 0 8px;
+	padding: 4px 0 0;
 }
 
 .container {
@@ -13,6 +13,7 @@
 }
 
 .active_folder_title {
+	padding-left: 8px;
 	font-size: 16px;
 	font-weight: 600;
 	color: #6f6f6f;
@@ -130,7 +131,6 @@
 
 .pinned_chats_div {
 	margin-bottom: 10px;
-	border-bottom: 0.5px solid #b0b0b0;
 }
 
 .icon {
@@ -142,20 +142,21 @@
 .pinned_chat_flex {
 	display: flex;
 	align-items: center;
-	padding: 0 3px 10px 0;
+	padding: 0 3px 10px 6px;
 	cursor: pointer;
 	user-select: none;
 }
 
 .pin_text {
 	margin-left: 5px;
-	font-size: 10px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #828282;
 }
 
 .recent_text {
-	font-size: 10px;
+	padding-left: 6px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #828282;
 	user-select: none;

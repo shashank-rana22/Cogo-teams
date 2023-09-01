@@ -35,6 +35,8 @@ const updatePin = async ({ pinnedID, channelType, type, userId, firestore }) => 
 			...payload,
 		});
 	} catch (error) {
+		console.log('payload:', payload);
+		console.log('error:', error);
 		Toast.error('Updated Failed');
 	}
 };

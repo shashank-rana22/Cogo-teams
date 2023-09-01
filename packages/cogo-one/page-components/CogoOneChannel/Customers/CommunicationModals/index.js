@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { MailEditorModal } from '../../../../common/MailModules';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useReplyMail from '../../../../hooks/useReplyMail';
-import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import DialCallModal from './DialCallModal';
 import { ICONS_MAPPING } from './iconsMappings';
+import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
 
 const ICON_STYLES = ['position_1', 'position_2', 'position_3', 'position_4', 'position_5'];

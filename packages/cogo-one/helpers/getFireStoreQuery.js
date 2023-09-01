@@ -16,13 +16,21 @@ const TAB_WISE_QUERY_KEY_MAPPING = {
 	kamContacts : 'kam_contacts_base_query',
 };
 
-const getModifiedFilters = ({ appliedFilters = {}, listOnlyMails = false }) => {
+const getModifiedFilters = ({
+	appliedFilters = {},
+	listOnlyMails = false,
+	activeFolder = '',
+}) => {
 	const requiredChannels = listOnlyMails
 		? ['email']
 		: ['platform_chat', 'telegram', 'whatsapp', 'zalo'];
 
 	return {
 		...(appliedFilters || {}),
+		...(
+			(activeFolder && (activeFolder !== 'all_mails'))
+				? { activeFolder: `show_in_${activeFolder}` } : {}
+		),
 		channels: isEmpty(appliedFilters?.channels) ? requiredChannels : appliedFilters?.channels,
 	};
 };
@@ -34,6 +42,7 @@ function getFireStoreQuery({
 	viewType = '',
 	activeSubTab = '',
 	listOnlyMails = false,
+	activeFolder = '',
 }) {
 	const filterId = appliedFilters.assigned_to === 'me'
 		? userId
@@ -43,7 +52,7 @@ function getFireStoreQuery({
 	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 	const epochTimestamp = currentTime.getTime();
 
-	const modifiedFilters = getModifiedFilters({ appliedFilters, listOnlyMails });
+	const modifiedFilters = getModifiedFilters({ appliedFilters, listOnlyMails, activeFolder });
 
 	const queryFilterMapping = getQueryFilterMapping({
 		appliedFilters: modifiedFilters,

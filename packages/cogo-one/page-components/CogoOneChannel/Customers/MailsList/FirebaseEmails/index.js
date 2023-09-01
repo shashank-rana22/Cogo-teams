@@ -3,7 +3,7 @@ import {
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useListChats from '../../../../../hooks/useListChats';
 import LoadingState from '../../LoadingState';
@@ -19,14 +19,10 @@ function FirebaseEmails(messageProps) {
 		activeTab = '',
 		tagOptions = [],
 		userId = '',
-		firestore,
+		firestore = {},
 		viewType = '',
 		isBotSession = false,
 		setIsBotSession = () => {},
-		selectedAutoAssign = {},
-		setSelectedAutoAssign = () => {},
-		autoAssignChats = true,
-		setAutoAssignChats = () => {},
 		workPrefernceLoading = false,
 	} = messageProps;
 
@@ -52,46 +48,22 @@ function FirebaseEmails(messageProps) {
 		activeSubTab  : subTab,
 		workPrefernceLoading,
 		listOnlyMails : true,
+		activeFolder,
 	});
 
-	const setActiveSubTab = (val) => {
-		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
-	};
-
-	const {
-		messagesList,
-		sortedPinnedChatList,
-	} = chatsData;
+	const { messagesList, sortedPinnedChatList } = chatsData;
 
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
-
-	const handleCheckedChats = (item, id) => {
-		if (id in selectedAutoAssign) {
-			setSelectedAutoAssign((prev) => {
-				const arg = prev;
-				delete (arg[id]);
-				return { ...prev };
-			});
-		} else {
-			setSelectedAutoAssign((prev) => ({ ...prev, [id]: item }));
-		}
-	};
-
-	useEffect(() => {
-		setAutoAssignChats(true);
-		setSelectedAutoAssign({});
-	}, [isBotSession, appliedFilters, setSelectedAutoAssign, setAutoAssignChats]);
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.active_folder_title}>
 				{startCase(activeFolder)}
 			</div>
+
 			<Header
-				activeSubTab={subTab}
-				setActiveSubTab={setActiveSubTab}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
 				viewType={viewType}
@@ -102,10 +74,7 @@ function FirebaseEmails(messageProps) {
 				isBotSession={isBotSession}
 			/>
 
-			{(isEmpty(messagesList)
-				&& isPinnedChatEmpty
-				&& !loadingState?.chatsLoading
-			)
+			{(isEmpty(messagesList) && isPinnedChatEmpty && !loadingState?.chatsLoading)
 				? (
 					<div className={styles.list_container}>
 						<div className={styles.empty_state}>
@@ -137,12 +106,11 @@ function FirebaseEmails(messageProps) {
 													item={item}
 													userId={userId}
 													firestore={firestore}
-													autoAssignChats={autoAssignChats}
-													handleCheckedChats={handleCheckedChats}
 													isBotSession={isBotSession}
 													setActiveMessage={setActiveMessage}
 													activeTab={activeTab}
 													viewType={viewType}
+													activeFolder={activeFolder}
 												/>
 											),
 										)}
@@ -154,6 +122,7 @@ function FirebaseEmails(messageProps) {
 						<div className={styles.recent_text}>
 							Recent
 						</div>
+
 						{(messagesList || []).map(
 							(item) => (
 								<MessageCardData
@@ -161,11 +130,10 @@ function FirebaseEmails(messageProps) {
 									item={item}
 									userId={userId}
 									firestore={firestore}
-									autoAssignChats={autoAssignChats}
-									handleCheckedChats={handleCheckedChats}
 									setActiveMessage={setActiveMessage}
 									activeTab={activeTab}
 									viewType={viewType}
+									activeFolder={activeFolder}
 								/>
 							),
 						)}

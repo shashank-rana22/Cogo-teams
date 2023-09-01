@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDocument, IcMSend } from '@cogoport/icons-react';
+import { IcMDocument, IcMSend, IcMEmail } from '@cogoport/icons-react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
@@ -14,7 +14,7 @@ export const GMAIL_OPTIONS_CONFIG = [
 	{
 		label       : 'Draft',
 		value       : 'draft',
-		allowedTabs : ['outlook', 'firebase_emails'],
+		allowedTabs : ['outlook'],
 		icon        : <IcMDocument
 			fill="#BDBDBD"
 			height={24}
@@ -23,7 +23,7 @@ export const GMAIL_OPTIONS_CONFIG = [
 	},
 	{
 		label       : 'Sent',
-		value       : 'sent',
+		value       : 'sent_items',
 		allowedTabs : ['outlook', 'firebase_emails'],
 		icon        : <IcMSend
 			fill="#BDBDBD"
@@ -37,6 +37,16 @@ export const GMAIL_OPTIONS_CONFIG = [
 		allowedTabs : ['outlook'],
 		image       : GLOBAL_CONSTANTS.image_url.email_spam_icon,
 		hoverImage  : GLOBAL_CONSTANTS.image_url.spam_flag_icon,
+	},
+	{
+		label       : 'All',
+		value       : 'all_mails',
+		allowedTabs : ['firebase_emails'],
+		icon        : <IcMEmail
+			fill="#BDBDBD"
+			height={24}
+			width={24}
+		/>,
 	},
 ];
 

@@ -21,6 +21,8 @@ const COMPONENT_MAPPING = {
 	firebase_emails : MailsList,
 };
 
+const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];
+
 function Customers({
 	setActiveTab = () => {},
 	activeTab = '',
@@ -90,6 +92,7 @@ function Customers({
 			viewType,
 			mailsToBeShown: userSharedMails,
 			firestore,
+			userId,
 		},
 	};
 
@@ -102,8 +105,16 @@ function Customers({
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.filters_container}>
+		<div
+			className={styles.container}
+			style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+				? { padding: 0 } : {}}
+		>
+			<div
+				className={styles.filters_container}
+				style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+					? { padding: '10px 10px 0 10px' } : {}}
+			>
 				<div className={styles.logo}>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.cogo_one_logo}
@@ -128,7 +139,11 @@ function Customers({
 				/>
 			</div>
 
-			<div className={styles.tabs}>
+			<div
+				className={styles.tabs}
+				style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+					? { padding: '0 10px' } : {}}
+			>
 				<Tabs
 					activeTab={activeTab?.tab}
 					fullWidth

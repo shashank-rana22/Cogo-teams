@@ -7,11 +7,11 @@ import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import useSendChat from '../../../../../../hooks/useSendChat';
 import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMail';
 import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
-import styles from '../styles.module.css';
 
 import { getPlaceHolder, getEmailState } from './footerFunctions';
 import FooterHead from './FooterHead';
 import SendActions from './SendActions';
+import styles from './styles.module.css';
 
 const TEXTBOX_COMPONENT_MAPPING = {
 	email    : RTEditor,
@@ -200,7 +200,7 @@ function Footer({
 			>
 				{!isEmail && !isEmpty(suggestions) && (
 					<div className={styles.suggestions_div}>
-						<div className={styles.flex}>
+						<div className={styles.flex_container}>
 							<div className={styles.suggestions_text}>
 								Suggestions:
 							</div>

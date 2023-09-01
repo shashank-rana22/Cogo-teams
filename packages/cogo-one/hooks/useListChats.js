@@ -18,18 +18,20 @@ import {
 import sortChats from '../helpers/sortChats';
 
 const MAX_DISTANCE_FROM_BOTTOM = 150;
+const noFunction = () => {};
 
 function useListChats({
-	firestore,
-	userId,
+	firestore = {},
+	userId = '',
 	isBotSession = false,
 	searchValue = '',
 	viewType = '',
-	activeSubTab,
-	setActiveTab,
-	setCarouselState,
+	activeSubTab = '',
+	setActiveTab = noFunction,
+	setCarouselState = noFunction,
 	workPrefernceLoading = false,
 	listOnlyMails = false,
+	activeFolder = '',
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -68,8 +70,9 @@ function useListChats({
 			viewType,
 			activeSubTab,
 			listOnlyMails,
+			activeFolder,
 		}),
-		[appliedFilters, isBotSession, userId, viewType, activeSubTab, listOnlyMails],
+		[userId, appliedFilters, isBotSession, viewType, activeSubTab, listOnlyMails, activeFolder],
 	);
 
 	const queryForSearch = useMemo(() => (
@@ -140,13 +143,14 @@ function useListChats({
 			activeSubTab,
 			updateLoadingState,
 			workPrefernceLoading,
+			listOnlyMails,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
 	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab,
-		updateLoadingState, workPrefernceLoading]);
+		updateLoadingState, workPrefernceLoading, listOnlyMails]);
 
 	useEffect(() => {
 		mountSnapShot({
