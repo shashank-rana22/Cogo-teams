@@ -328,7 +328,6 @@ const navigationMapping = ({ t = () => {} }) => {
 				'list_checkouts',
 				'list_partners',
 				'list_organizations',
-				'list_spot_search_stats',
 			],
 			module_type: 'dashboards',
 		},

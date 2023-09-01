@@ -6,7 +6,6 @@ import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import React, { useMemo, useEffect, useCallback } from 'react';
 
-import setItemInQuery from '../../helpers/setItemInQuery';
 import CustomSelectOption from '../CustomSelectOption';
 
 import styles from './styles.module.css';
@@ -65,11 +64,6 @@ function OrganisationForm({
 			business_name = '',
 		} = obj;
 
-		setItemInQuery({
-			key   : 'organization_branch_id',
-			value : organization_branch_ids?.[GLOBAL_CONSTANTS.zeroth_index],
-		});
-
 		setOrganization({
 			organization_id        : id,
 			organization_branch_id : organization_branch_ids?.[GLOBAL_CONSTANTS.zeroth_index],
@@ -97,10 +91,9 @@ function OrganisationForm({
 	}, [userData]);
 
 	useEffect(() => {
-		if (!organization?.organization_id) {
-			return;
+		if (organization?.organization_id) {
+			fetchUsers();
 		}
-		fetchUsers();
 	}, [fetchUsers, organization?.organization_id]);
 
 	useEffect(() => {
@@ -129,8 +122,6 @@ function OrganisationForm({
 					value={organization?.organization_id}
 					onChange={(_, obj) => {
 						handleOrgChange(obj);
-
-						setItemInQuery({ key: 'organization_id', value: obj?.id });
 					}}
 					renderLabel={renderOrgLabel}
 					prefix={<IcMManufacturing fontSize={16} />}
@@ -157,8 +148,6 @@ function OrganisationForm({
 					options={organization?.organization_id ? userOptions : []}
 					onChange={(val) => {
 						handleUserChange(val);
-
-						setItemInQuery({ key: 'user_id', value: val });
 					}}
 					prefix={<IcMProfile fontSize={16} />}
 					loading={loading}

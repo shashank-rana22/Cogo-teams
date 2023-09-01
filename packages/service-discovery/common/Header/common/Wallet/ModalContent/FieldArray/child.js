@@ -10,8 +10,8 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 
-const FIRST_INDEX = 1;
-const TWO_VALUE = 2;
+const NUMBER_OF_ITEMS_TO_DELETE = 1;
+const MIN_LENGTH_TO_SHOW_DELETE = 2;
 
 function Child({
 	controls = [],
@@ -86,10 +86,10 @@ function Child({
 
 			</div>
 
-			{length >= TWO_VALUE && !disabled ? (
+			{length >= MIN_LENGTH_TO_SHOW_DELETE && !disabled ? (
 				<IcMDelete
 					className={styles.remove_icon}
-					onClick={() => remove(index, FIRST_INDEX)}
+					onClick={() => remove(index, NUMBER_OF_ITEMS_TO_DELETE)}
 				/>
 			) : null}
 		</div>

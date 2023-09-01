@@ -1,8 +1,6 @@
 import { AsyncSelect } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import setItemInQuery from '../../../../helpers/setItemInQuery';
-
 import styles from './styles.module.css';
 
 const DEFAULT_SPAN = 12;
@@ -34,8 +32,6 @@ function LocationControl({ controlItem = {}, formValues = {}, setFormValues = ()
 				value={formValues?.[key]?.id}
 				onChange={(_, obj) => {
 					setFormValues((prev) => ({ ...prev, [key]: obj }));
-
-					setItemInQuery({ key, value: obj?.id });
 				}}
 				{...rest}
 			/>

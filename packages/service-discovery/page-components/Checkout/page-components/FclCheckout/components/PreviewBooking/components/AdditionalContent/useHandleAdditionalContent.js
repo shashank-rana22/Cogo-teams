@@ -63,7 +63,7 @@ const useHandleAdditionalContent = ({
 		}
 
 		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
-			Toast.error('Please select cargo details');
+			Toast.error('Please enter cargo details');
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
 		}

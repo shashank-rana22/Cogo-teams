@@ -4,8 +4,7 @@
 	min-width: 28%;
 	max-width: 38%;
 	padding: 16px 24px;
-	margin-right: 20px;
-	margin-left: -24px;
+	margin: 0 20px 0 -24px;
 	border-radius: 0 6px 0 0;
 
 	&.light {

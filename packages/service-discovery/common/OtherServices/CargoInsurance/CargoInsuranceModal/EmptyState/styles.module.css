@@ -1,8 +1,3 @@
-.no_support {
-	display: flex;
-	padding: 20px;
-}
-
 .sad_text {
 	width: 70%;
 	margin: 10px 0;
@@ -18,6 +13,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+	padding: 20px;
 	background: #fff;
 }
 

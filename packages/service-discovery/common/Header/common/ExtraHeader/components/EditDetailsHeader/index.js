@@ -92,7 +92,6 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 					<OrganisationForm
 						organization={organization}
 						setOrganization={setOrganization}
-						errors={{}}
 						action="edit"
 					/>
 				</div>

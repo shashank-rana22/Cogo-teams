@@ -80,7 +80,7 @@ function FieldArray({
 						themeType="link"
 						onClick={handleSubmit(handleAppendChild)}
 					>
-						<IcMPlus height={22} width={22} className={styles.add_icon} fill="black" />
+						<IcMPlus height={22} width={22} className={styles.add_icon} fill="#000" />
 						{buttonText}
 					</Button>
 				</div>

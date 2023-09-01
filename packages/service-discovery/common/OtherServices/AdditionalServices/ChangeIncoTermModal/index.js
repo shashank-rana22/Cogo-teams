@@ -20,9 +20,7 @@ function ChangeIncoTermModal({
 	return (
 		<Modal
 			show={!isEmpty(incoTermModalData)}
-			onClose={() => {
-				setIncoTermModalData({});
-			}}
+			onClose={() => setIncoTermModalData({})}
 		>
 			<Modal.Header title="Add Line Item" />
 

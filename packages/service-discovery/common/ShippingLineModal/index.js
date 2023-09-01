@@ -152,6 +152,7 @@ function ShippingLineModal({
 					<Button
 						type="button"
 						onClick={() => router.push(
+							`/book/[spot_search_id]?rate_card_id=${selectedCard}`,
 							`/book/${router.query.spot_search_id}?rate_card_id=${selectedCard}`,
 						)}
 						style={{ marginLeft: '12px' }}

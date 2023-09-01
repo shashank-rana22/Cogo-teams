@@ -9,7 +9,7 @@
 	min-width: 28%;
 	margin-right: 24px;
 	text-align: center;
-	border-right: 1px solid rgb(236 239 248);
+	border-right: 1px solid #eceff8;
 }
 
 .amount_item {
@@ -29,14 +29,14 @@
 .amount_label {
 	font-size: 12px;
 	font-weight: 700;
-	color: rgb(51 51 51);
+	color: #212121;
 	text-align: center;
 }
 
 .amount_value {
 	font-size: 20px;
 	font-weight: 700;
-	color: rgb(51 51 51);
+	color: #212121;
 }
 
 .right_section {

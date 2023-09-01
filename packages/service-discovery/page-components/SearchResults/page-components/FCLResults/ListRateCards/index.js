@@ -60,7 +60,8 @@ function RateCard({
 }
 
 function ListRateCards({
-	rates = [], detail = {},
+	rates = [],
+	detail = {},
 	contract_detail = {},
 	setSelectedCard = () => {},
 	setScreen = () => {},
