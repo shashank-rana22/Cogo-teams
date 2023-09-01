@@ -31,7 +31,7 @@ function Filters(props) {
 			[`${key}_type`]         : TYPE_MAPPING[obj?.type] || obj?.type,
 			[`is_${key}_icd`]       : !!obj?.is_icd,
 			[`${key}_country_id`]   : obj?.country_id,
-			[`${key}_region_id`]    : obj?.region_id,
+			// [`${key}_region_id`]    : obj?.region_id,
 			[`${key}_continent_id`] : obj?.continent_id,
 		}));
 	};
