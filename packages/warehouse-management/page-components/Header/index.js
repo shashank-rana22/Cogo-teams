@@ -169,6 +169,7 @@ function Header({
 			</div>
 			<div className={styles.header_footer_part}>
 				{getComponentMapping({
+					activeTab,
 					truckStatus,
 					setTruckStatus,
 					searchValue,

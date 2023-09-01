@@ -2,7 +2,8 @@ import { cl } from '@cogoport/components';
 
 import getValue from '../../../../../commons/List/RenderListItem/ListItem/getValue';
 import CONSTANTS from '../../../../../constants/constants';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 function CargoListItem({
 	fields = [],

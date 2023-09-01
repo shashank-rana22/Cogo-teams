@@ -33,7 +33,7 @@ function Inventory({
 			locations = [...new Set(locations)];
 			return (
 				<>
-					-
+					{locations.join(', ')}
 				</>
 			);
 		},

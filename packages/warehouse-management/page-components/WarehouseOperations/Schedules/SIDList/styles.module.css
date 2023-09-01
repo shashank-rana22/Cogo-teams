@@ -5,13 +5,6 @@
 	border-radius: 4px;
 }
 
-.row {
-	display: flex;
-	align-items: center;
-	min-height: 40px;
-	border-radius: 4px;
-}
-
 .col {
 	display: flex;
 	flex: var(--span);
@@ -19,17 +12,6 @@
 	padding: 4px;
 	font-size: var(--font-size-md);
 	font-weight: 500;
-}
-
-.hawb_container {
-	position: relative;
-	bottom: 20px;
-	padding: 20px;
-	text-align: center;
-	background: var(--color-secondary-5);
-	border-bottom-right-radius: 5px;
-	border-bottom-left-radius: 5px;
-	box-shadow: 0 5px 10px #0000000d;
 }
 
 .sid_list {
