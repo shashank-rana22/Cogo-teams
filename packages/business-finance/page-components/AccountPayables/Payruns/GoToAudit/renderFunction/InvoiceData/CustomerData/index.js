@@ -14,6 +14,7 @@ const CustomerData = ({ data = {} }) => {
 		currencyDisplay       : 'code',
 		maximumFractionDigits : 0,
 	};
+	const customAmount = ({ amount }) => formatAmount({ amount, currency: CURRENCY, options: OPTIONS });
 
 	return (customerDetails || []).map((item) => {
 		const {
@@ -34,22 +35,14 @@ const CustomerData = ({ data = {} }) => {
 				<div className={styles.subcontainer}>
 					Total Outstanding -
 					<span className={styles.text_container}>
-						{formatAmount({
-							amount   : customerOutstandingAmount,
-							currency : CURRENCY,
-							options  : OPTIONS,
-						})}
+						{customAmount({	amount: customerOutstandingAmount })}
 					</span>
 				</div>
 
 				<div className={styles.subcontainer}>
 					On Account Payments -
 					<span className={styles.text_container}>
-						{formatAmount({
-							amount   : customerOutstandingAmountOnSid,
-							currency : CURRENCY,
-							options  : OPTIONS,
-						})}
+						{customAmount({ amount: customerOutstandingAmountOnSid })}
 					</span>
 				</div>
 			</div>
