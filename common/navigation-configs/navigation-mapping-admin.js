@@ -1600,25 +1600,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon        : IcCCogoassured,
 			options     : [
 				{
-					key           : 'cogo_assured-fcl_freight',
-					title         : t('common:fcl_freight'),
-					href          : '/cogo-assured/fcl_freight',
-					as            : '/cogo-assured/fcl_freight',
-					type          : 'link',
-					possible_apis : apis.cogo_assured,
-					main_apis     : [],
-				},
-				{
-					key           : 'cogo_assured-fcl_freight_local',
-					title         : t('common:fcl_freight_local'),
-					href          : '/cogo-assured/fcl_freight_local',
-					as            : '/cogo-assured/fcl_freight_local',
-					type          : 'link',
-					possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-					main_apis: [],
-				},
-				{
 					key           : 'cogo_assured-haulage_freight',
 					title         : t('common:haulage_freight'),
 					href          : '/cogo-assured/haulage_freight',
