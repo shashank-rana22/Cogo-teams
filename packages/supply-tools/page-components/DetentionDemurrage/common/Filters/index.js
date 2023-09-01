@@ -21,12 +21,12 @@ function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow =
 	});
 
 	const onReset = () => {
-		setFilters({ page });
+		setFilters({ page: 1 });
 		setShow(false);
 	};
 
 	const onSubmit = (values) => {
-		setFilters({ page, ...restFilters, ...(values || {}) });
+		setFilters({ ...restFilters, ...(values || {}), page: 1 });
 		setShow(false);
 	};
 
