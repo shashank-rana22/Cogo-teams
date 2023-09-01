@@ -194,7 +194,7 @@ export default {
 			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
 			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
 		],
-		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
+		costbooking_ops_role_ids         : 'd18eb944-a53d-4205-ada1-585e300c6675',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
