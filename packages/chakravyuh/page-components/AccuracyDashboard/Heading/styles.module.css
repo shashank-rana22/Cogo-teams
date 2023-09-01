@@ -14,7 +14,7 @@
 	.back_icon {
 		margin-right: 12px;
 		font-size: 16px;
-		stroke: #d6d6d6;
+		stroke: #333;
 		transform: scaleX(1.2);
 
 		&:hover {
