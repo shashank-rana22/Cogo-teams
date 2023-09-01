@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 
 const TEXT_COLOR_FACTOR = 2;
 const BORDER_COLOR_FACTOR = 0.2;
+const DEFAULT_VALUE = 0;
 function ResponsivePieChart({
 	data = [],
 	heading = '',
@@ -24,7 +25,7 @@ function ResponsivePieChart({
 	const [showListView, setShowListView] = useState(true);
 	const [isSortBy, setIsSortBy] = useState('');
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
-	const isEmpty = (data || []).every((el) => isEmpty(el.value));
+	const isEmpty = (data || []).every((el) => el.value === DEFAULT_VALUE);
 	const sortedData = [...data];
 
 	if (isSortBy === 'asc') {

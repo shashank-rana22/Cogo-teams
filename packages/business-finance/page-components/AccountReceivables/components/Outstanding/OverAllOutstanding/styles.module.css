@@ -56,7 +56,7 @@
 .cc_call_table {
 	width: 50%;
 	min-width: 50%;
-	max-height: 34vh;
+	max-height: 300px;
 	overflow: auto;
 }
 
