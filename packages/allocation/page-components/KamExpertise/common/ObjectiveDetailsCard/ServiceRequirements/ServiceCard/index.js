@@ -1,16 +1,21 @@
 import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
-import SERVICE_DETAILS_MAPPING from './service-details-mapping';
+import getServiceDetailsMapping from './service-details-mapping';
 import styles from './styles.module.css';
 
 function ServiceCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		index,
 		item = {},
 		operator = 'AND',
 	} = props;
+
+	const serviceDetailsMapping = getServiceDetailsMapping({ t });
 
 	const {
 		shipment_mode = '',
@@ -41,7 +46,7 @@ function ServiceCard(props) {
 				</div>
 			</div>
 
-			{SERVICE_DETAILS_MAPPING.map((value) => {
+			{serviceDetailsMapping.map((value) => {
 				const { accessor } = value;
 
 				return accessor(item);

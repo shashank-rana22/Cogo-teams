@@ -1,12 +1,12 @@
-const getMutatedControls = ({ controls, service, bulkDeallocateFilter, duration }) => {
+const getMutatedControls = ({ controls, service, bulkDeallocateFilter, duration, t = () => {} }) => {
 	const CONTROL_CONFIGURATION = {
 		user_id : { prop: 'disabled', value: false, condition: service },
 		role_id : { prop: 'disabled', value: false, condition: service },
 		warmth  : {
 			prop  : 'options',
 			value : [
-				{ label: 'Ice Cold', value: 'ice_cold' },
-				{ label: 'Cold', value: 'cold' },
+				{ label: t('allocation:ice_cold'), value: 'ice_cold' },
+				{ label: t('allocation:cold'), value: 'cold' },
 			],
 			condition: bulkDeallocateFilter,
 		},
