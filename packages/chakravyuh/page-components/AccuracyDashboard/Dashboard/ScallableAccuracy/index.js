@@ -10,13 +10,13 @@ import TrendChart from './TrendChart';
 
 const TIME_LIMIT = 200;
 
-const tabsList = [
+const TABS_LIST = [
 	{
 		key       : 'trend',
 		name      : 'trend',
 		title     : 'Trend',
 		Component : TrendChart,
-		heading   : 'Rate Trend with Time',
+		heading   : 'Rate Trend with Time (USD)',
 	},
 	{
 		key       : 'accuracy',
@@ -37,7 +37,7 @@ function ScallableAccuracy(props) {
 	const { chartType = 'trend' } = globalFilters;
 	const [isAnimating, setIsAnimating] = useState(false);
 
-	const changeChartType = (val) => {
+	const onChange = (val) => {
 		setGlobalFilters((prev) => ({ ...prev, chartType: val }));
 	};
 
@@ -68,10 +68,10 @@ function ScallableAccuracy(props) {
 			<Tabs
 				activeTab={chartType}
 				themeType="primary"
-				onChange={changeChartType}
+				onChange={onChange}
 				size="sm"
 			>
-				{tabsList.map((tabItem) => {
+				{TABS_LIST.map((tabItem) => {
 					const { key = '', name = '', title = '', Component, heading = '' } = tabItem;
 					if (Component) {
 						return (
@@ -83,7 +83,7 @@ function ScallableAccuracy(props) {
 					}
 					return (
 						<TabPanel key={key} name={name} title={title}>
-							<h1>Null</h1>
+							<span>Tab not found</span>
 						</TabPanel>
 					);
 				})}
