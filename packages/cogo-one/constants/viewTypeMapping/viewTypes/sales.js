@@ -30,7 +30,7 @@ const SALES = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
 	group_agents_api_filter       : ['sales'],
-	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
+	accessible_new_communications : ['new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
@@ -50,7 +50,7 @@ const SALES = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
-		show_lead_voice_calls       : false,
+		show_lead_voice_calls       : true,
 	},
 };
 

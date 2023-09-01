@@ -100,5 +100,6 @@
     "my_profile_path": "我的个人资料",
     "dashboard_path": "仪表板",
     "all_badges": "所有徽章",
-    "badges_unlocked_mastery": "已解锁的精通徽章"
+    "badges_unlocked_mastery": "已解锁的精通徽章",
+    "account_logout_message": "您想退出所有帐户吗?"
 }
