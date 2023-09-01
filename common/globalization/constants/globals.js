@@ -398,10 +398,11 @@ const GLOBAL_CONSTANTS = {
 		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
 		custom_plan:
 		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
-		truck_image : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
-		forward     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
-		replay_all  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
-		replay      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		truck_image         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
+		forward             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
+		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
+		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
 	},
 
 	video_call_ring_tone_url:

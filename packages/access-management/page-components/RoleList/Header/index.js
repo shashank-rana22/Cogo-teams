@@ -9,24 +9,28 @@ import styles from './styles.module.css';
 function Header({
 	onChangeShowCreateRoleModal = () => {},
 	onResetFilters = () => {},
-	stakeHolderType,
-	setStakeHolderType,
+	stakeHolderType = '',
+	setStakeHolderType = '',
+	t = () => {},
 }) {
 	return (
 		<section className={styles.container} id="rnp_role_list_header_container">
 			<section className={styles.heading_container}>
 				<Heading
-					title="Roles and Permission"
-					subTitle="Manage and create new roles and their permissions"
+					title={t('accessManagement:roles_and_permission_header_title')}
+					subTitle={t('accessManagement:roles_and_permission_subheader_title')}
 				/>
 
 				<Chips
 					selectedItems={stakeHolderType}
 					items={[
-						{ children: 'All Roles', key: 'all' },
-						{ children: 'Cogoport', key: 'cogoport' },
-						{ children: 'Channel Partner', key: 'channel_partner' },
-						{ children: 'Customer', key: 'customer' },
+						{ children: t('accessManagement:roles_and_permission_pills_all_roles'), key: 'all' },
+						{ children: t('accessManagement:roles_and_permission_pills_cogoport'), key: 'cogoport' },
+						{
+							children : t('accessManagement:roles_and_permission_pills_channel_partner'),
+							key      : 'channel_partner',
+						},
+						{ children: t('accessManagement:roles_and_permission_pills_customer'), key: 'customer' },
 					]}
 					onItemChange={(val) => {
 						setStakeHolderType(val);

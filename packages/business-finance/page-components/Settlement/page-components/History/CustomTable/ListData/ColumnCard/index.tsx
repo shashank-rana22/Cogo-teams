@@ -27,12 +27,13 @@ interface ListItem {
 
 interface Props {
 	item: ListItem;
-	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+	getTableBodyCheckbox?: Function;
 	refetch: ()=>void
+	source?: string;
 
 }
 
-function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch, source }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
@@ -96,14 +97,6 @@ function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
 						onClick={() => { handleClickIcon(); }}
 					/>
 				</div>
-				<div className={styles.ribbon_render}>
-					<div
-						className={item?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
-
-					>
-						{item?.accMode}
-					</div>
-				</div>
 
 			</div>
 			{showDetails ? (
@@ -113,6 +106,7 @@ function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
 					loading={loading}
 					refetch={refetch}
 					onPageChange={onPageChange}
+					source={source}
 				/>
 			) : null}
 		</div>
