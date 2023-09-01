@@ -9,7 +9,7 @@ import AutomationWalletDetails from './Details';
 import styles from './styles.module.css';
 
 function AutomationWallet() {
-	const { data, filters = {}, setFilter = () => {} } = useListRevenueDeskWallet();
+	const { data, filters = {}, setFilter = () => {}, refetch = () => {}, loading } = useListRevenueDeskWallet();
 	const [createWallet, setCreateWallet] = useState(false);
 
 	const onChange = (item, key) => {
@@ -37,11 +37,17 @@ function AutomationWallet() {
 			</div>
 			{data?.map((val) => (
 				<div key={val?.id}>
-					<AutomationWalletDetails data={val} />
+					<AutomationWalletDetails data={val} refetch={refetch} loading={loading} />
 				</div>
 			))}
 
-			{createWallet && <CreateWallet createWallet={createWallet} setCreateWallet={setCreateWallet} />}
+			{createWallet && (
+				<CreateWallet
+					createWallet={createWallet}
+					setCreateWallet={setCreateWallet}
+					refetch={refetch}
+				/>
+			)}
 		</>
 	);
 }

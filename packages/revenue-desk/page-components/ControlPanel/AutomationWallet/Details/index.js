@@ -6,14 +6,22 @@ import useUpdateRevenueDeskWallet from '../../../../hooks/useUpdateRevenueDeskWa
 
 import styles from './styles.module.css';
 
-function AutomationWalletDetails({ data = [] }) {
+function AutomationWalletDetails({ data = [], refetch = () => {}, loading = false }) {
 	const [disabledValue, setDisabledValue] = useState(false);
 	const [walletAmount, setWalletAmount] = useState(data?.wallet_amount);
 
 	const { service_type, shipment_parameters } = data;
 	const { origin_location, destination_location } = shipment_parameters;
 
-	const { updateRevenueDeskWallet } = useUpdateRevenueDeskWallet({ service_type, wallet_amount: walletAmount });
+	const { updateRevenueDeskWallet } = useUpdateRevenueDeskWallet({
+		service_type,
+		wallet_amount: walletAmount,
+		refetch,
+	});
+
+	if (loading) {
+		return <>123</>;
+	}
 
 	return (
 		<div className={styles.container}>

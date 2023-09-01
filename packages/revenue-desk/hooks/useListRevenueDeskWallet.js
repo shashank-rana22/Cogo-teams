@@ -16,11 +16,13 @@ const useListRevenueDeskWallet = () => {
 		}
 	}, [filters, trigger]);
 
+	const refetch = () => { listRevenueDesk(); };
+
 	useEffect(() => {
 		listRevenueDesk();
 	}, [listRevenueDesk, filters]);
 
-	return { loading, data: data?.list, filters, setFilter };
+	return { loading, data: data?.list, filters, setFilter, refetch };
 };
 
 export default useListRevenueDeskWallet;

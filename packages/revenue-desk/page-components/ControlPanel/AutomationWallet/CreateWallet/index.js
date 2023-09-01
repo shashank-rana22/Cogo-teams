@@ -10,8 +10,8 @@ import useCreateRevenueDeskWallet from '../../../../hooks/useCreateRevenueDeskWa
 
 import styles from './styles.module.css';
 
-function CreateWallet({ createWallet = false, setCreateWallet = () => {} }) {
-	const { createRevenueDeskWallet, loading } = useCreateRevenueDeskWallet({ setCreateWallet });
+function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetch = () => {} }) {
+	const { createRevenueDeskWallet, loading } = useCreateRevenueDeskWallet({ setCreateWallet, refetch });
 	const originAsyncOptions = useGetAsyncOptions(asyncFieldsLocations());
 	const destinationAsyncoptios = useGetAsyncOptions(asyncFieldsLocations());
 	const [submitValue, setSubmitValue] = useState();
@@ -25,7 +25,6 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {} }) {
 	const isOrigin = watch('origin_location_id');
 
 	const onSubmit = (data) => {
-		console.log(data, '::data');
 		setSubmitValue(data);
 		if (data?.wallet_amount !== undefined) createRevenueDeskWallet(data);
 	};

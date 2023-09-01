@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useCreateRevenueDeskWallet = ({ setCreateWallet }) => {
+const useCreateRevenueDeskWallet = ({ setCreateWallet = () => {}, refetch = () => {} }) => {
 	const SUCCESS_MESSAGE = 'Successfully created';
 
 	const [{ loading }, trigger] = useRequest({
@@ -15,13 +15,14 @@ const useCreateRevenueDeskWallet = ({ setCreateWallet }) => {
 			const { trade_type = '', origin_location_id = '', destination_location_id = '', ...rest } = data;
 			const res =	await trigger({
 				data: {
-					shipment_parameter: { trade_type, origin_location_id, destination_location_id },
+					shipment_parameters: { trade_type, origin_location_id, destination_location_id },
 					...rest,
 				},
 			});
 			if (!res.hasError) {
 				Toast.success(SUCCESS_MESSAGE);
 				setCreateWallet(false);
+				refetch();
 			}
 		} catch (err) {
 			toastApiError(err);

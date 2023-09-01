@@ -31,10 +31,11 @@ const updateApiControls = ({ selectedApi }) => [
 		disabled : !selectedApi,
 	},
 	{
-		name     : 'service',
-		label    : 'Service',
-		type     : 'select',
-		options: [
+		name    : 'service',
+		label   : 'Service',
+		type    : 'select',
+		options : [
+			{ label: 'Rolling Forecast', value: 'rolling_forecast' },
 			{ label: 'Lead', value: 'lead' },
 			{ label: 'Condition', value: 'condition' },
 			{ label: 'Ltl freight rate', value: 'ltl_freight_rate' },
@@ -140,8 +141,8 @@ const updateApiControls = ({ selectedApi }) => [
 			{ label: 'Plutus', value: 'plutus' },
 			{ label: 'Iris', value: 'iris' },
 			{ label: 'Heimdall', value: 'heimdall' },
-			{ label: 'Hades', value: 'hades' }
-		  ],	
+			{ label: 'Hades', value: 'hades' },
+		],
 		width    : '20%',
 		disabled : !selectedApi,
 	},

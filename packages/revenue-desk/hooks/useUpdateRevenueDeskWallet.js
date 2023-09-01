@@ -1,7 +1,7 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateRevenueDeskWallet = ({ service_type, wallet_amount }) => {
+const useUpdateRevenueDeskWallet = ({ service_type, wallet_amount, refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_revenue_desk_wallet',
 		method : 'post',
@@ -10,6 +10,7 @@ const useUpdateRevenueDeskWallet = ({ service_type, wallet_amount }) => {
 	const updateRevenueDeskWallet = async ({ status }) => {
 		try {
 			await trigger({ params: { service_type, wallet_amount, status } });
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}
