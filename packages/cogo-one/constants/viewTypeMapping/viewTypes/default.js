@@ -5,7 +5,7 @@ import {
 } from '../../../helpers/viewTypeFunctions';
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
-const SUPPORT = {
+const DEFAULT = {
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
@@ -50,4 +50,4 @@ const SUPPORT = {
 	},
 };
 
-export default SUPPORT;
+export default DEFAULT;
