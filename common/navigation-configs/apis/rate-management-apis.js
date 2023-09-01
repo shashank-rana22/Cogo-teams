@@ -133,12 +133,12 @@ const rms = [
 		service_name : 'air_freight_rate',
 	},
 	{
-		api      			 : 'delete_air_freight_rate_local',
+		api          : 'delete_air_freight_rate_local',
 		access_type	 : 'private',
 		service_name : 'air_freight_rate',
 	},
 	{
-		api      			 : 'delete_air_freight_rate_surcharge',
+		api          : 'delete_air_freight_rate_surcharge',
 		access_type  : 'private',
 		service_name : 'air_freight_rate',
 	},
