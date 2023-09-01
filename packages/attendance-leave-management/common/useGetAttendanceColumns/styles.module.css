@@ -29,8 +29,15 @@
 	width: 12px;
 	min-width: 12px;
 	height: 12px;
-	margin-right: 8px;
 	border-radius: 50%;
+}
+
+.mr_8 {
+	margin-right: 8px;
+}
+
+.ml_8 {
+	margin-left: 8px;
 }
 
 .color_orange {

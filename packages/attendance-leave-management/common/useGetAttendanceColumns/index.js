@@ -123,13 +123,15 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 			Header   : '',
 			accessor : (item) => (
 				<div className={styles.flex}>
-					<div className={cl`${styles.dot} ${styles[getLeftDotColor(item.day_status)]}`} />
+					<div className={cl`${styles.dot} ${styles.mr_8} ${styles[getLeftDotColor(item.day_status)]}`} />
 					<div className={getSeparatorColor(item.day_status)}>
 						<div className={cl`${styles.title_text} ${styles[getBorderColor(item.day_status)]}`}>
 							{ATTENDANCE_LOGS_STATUS_MAPPING[item.day_status]?.label}
 						</div>
 					</div>
-					<div className={cl`${styles.right_dot} ${styles[getRightDotColor(item.day_status)]}`} />
+					<div className={cl`${styles.right_dot}
+					${styles.ml_8} ${styles[getRightDotColor(item.day_status)]}`}
+					/>
 				</div>
 			),
 			id: 'data_visualization',
