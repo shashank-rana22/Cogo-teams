@@ -8,15 +8,13 @@ import useUpdateConfirmAwaitingServices from './hooks/useUpdateConfirmAwaitingSe
 import styles from './styles.module.css';
 
 function ConfirmAwaitingServices(
-	props,
-) {
-	const {
+	{
 		task = {},
 		onCancel = () => {},
 		refetch = () => {},
 		services = [],
-	} = props || {};
-
+	},
+) {
 	const { data } = useGetRateComparison({
 		shipment_id          : task?.shipment_id,
 		trip_type            : services[GLOBAL_CONSTANTS?.zeroth_index]?.trip_type,
@@ -35,26 +33,23 @@ function ConfirmAwaitingServices(
 	return (
 		<div>
 			<Comparison
-				data={data}
+				ftl_freight_rates_count={data?.ftl_freight_rates_count}
+				shipment_flash_booking_rates_count={data?.shipment_flash_booking_rates_count}
 			/>
 			<div className={styles.container}>
-				<div className={styles.button}>
-					<Button
-						themeType="secondary"
-						onClick={() => onCancel()}
-					>
-						CANCEL
-					</Button>
-				</div>
+				<Button
+					themeType="secondary"
+					onClick={() => onCancel()}
+				>
+					CANCEL
+				</Button>
 
-				<div className={styles.button}>
-					<Button
-						themeType="primary"
-						onClick={updateConfirmAwaitingServices}
-					>
-						SUBMIT
-					</Button>
-				</div>
+				<Button
+					themeType="primary"
+					onClick={updateConfirmAwaitingServices}
+				>
+					SUBMIT
+				</Button>
 			</div>
 		</div>
 	);

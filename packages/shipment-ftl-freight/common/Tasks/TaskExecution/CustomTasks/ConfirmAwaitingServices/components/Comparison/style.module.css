@@ -4,29 +4,29 @@
 	padding: 5px;
 	margin-bottom: 20px;
 	font-weight: 600;
-	border: 1px solid rgb(249 125 1 / 75%);
+	border: 1px solid var(--color-accent-orange-3);
 	border-radius: 5px;
 }
 
 .card {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	text-align: center;
 }
 
 .divider {
 	height: 55px;
-	border-left: 1px solid rgb(249 125 1 / 75%);
+	border-left: 1px solid var(--color-accent-orange-3);
 }
 
 .heading {
-	font-size: 15px;
+	font-size: var(--font-size-xl);
 }
 
 .info {
-	font-size: 22.5px;
+	font-size: 23px;
 }
 
-.isZero {
-	color: red;
+.red_text {
+	color: var(--color-primary-error-red-2);
 }

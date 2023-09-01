@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
@@ -11,10 +12,10 @@ const useUpdateConfirmAwaitingServices = ({ task = {}, callback = () => {} }) =>
 		try {
 			await trigger({
 				data: {
-					id                  : task?.id,
-					ftl_freight_service : {},
+					id: task?.id,
 				},
 			});
+			Toast.success('Task Completed Successfully');
 			callback();
 		} catch (error) {
 			toastApiError(error);

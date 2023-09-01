@@ -11,16 +11,12 @@ const useGetRateComparison = (params = {}) => {
 		},
 	}, { manual: true });
 
-	const getRateComparison = useCallback(() => {
-		(
-			async () => {
-				try {
-					await trigger();
-				} catch (err) {
-					toastApiError(err);
-				}
-			}
-		)();
+	const getRateComparison = useCallback(async () => {
+		try {
+			await trigger();
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [trigger]);
 
 	useEffect(() => {
