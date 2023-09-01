@@ -20,7 +20,7 @@ const MONTH_DAYS = 30;
 
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { service_type, start_date, end_date, chartType = 'trend' } = globalFilters;
+	const { service_type, start_date, end_date } = globalFilters;
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
@@ -108,7 +108,7 @@ function Filters(props) {
 							changePrimaryFilters('start_date', value);
 						}}
 						isPreviousDaysAllowed
-						maxDate={end_date || new Date()}
+						maxDate={end_date || addDays(new Date(), MONTH_DAYS)}
 						showTimeSelect={false}
 						placeholder="Start Date"
 					/>
@@ -118,7 +118,7 @@ function Filters(props) {
 							changePrimaryFilters('end_date', value);
 						}}
 						isPreviousDaysAllowed
-						maxDate={chartType === 'trend' ? addDays(new Date(), MONTH_DAYS) : new Date()}
+						maxDate={addDays(new Date(), MONTH_DAYS)}
 						minDate={start_date || undefined}
 						showTimeSelect={false}
 						placeholder="End Date"
