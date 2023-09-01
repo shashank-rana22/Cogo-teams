@@ -3,7 +3,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useGetDownloadTeamAttendance = ({ cycleId }) => {
-	console.log('cycleId', cycleId);
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/download_team_attendance',

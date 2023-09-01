@@ -21,7 +21,6 @@ function TeamAttendance() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [month, setMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
-	console.log('🚀 ~ file: index.js:25 ~ TeamAttendance ~ month:', month);
 	const {
 		data:downloadData, createDownload,
 		loading:downloadLoading,
@@ -70,8 +69,7 @@ function TeamAttendance() {
 
 	const handleDownload = async () => {
 		const res = await createDownload();
-		console.log('🚀 ~ file: index.js:28 ~ handleDownload ~ res:', res);
-
+		console.log(res);
 		window.open(downloadData, '_self');
 	};
 
