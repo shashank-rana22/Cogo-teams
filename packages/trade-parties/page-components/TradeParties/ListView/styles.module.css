@@ -1,0 +1,10 @@
+.serial_id {
+	align-items: "center";
+	justify-content: "flex-start";
+}
+
+.table {
+	padding: 8px;
+	margin-top: 16px;
+	background-color: white;
+}
