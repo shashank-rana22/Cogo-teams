@@ -7781,6 +7781,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_outstanding_by_supplier_v2',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_outstanding_entity_level_stats',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -7830,6 +7838,11 @@ const partner = {
 			access_type : 'private',
 			module      : 'Outstanding',
 			feature     : 'Outstanding',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_purchase_bills_by_id_bill_time_line',
@@ -8879,6 +8892,57 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api         : 'get_sage_ar_outstanding_stat',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api          : 'get_kam_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_service_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_data_bifurcation',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'list_outstanding_invoices',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+
+		},
+		{
+			api          : 'get_cc_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+
+		},
+
 	],
 	compliance: [
 		{
@@ -13774,6 +13838,48 @@ const partner = {
 			api          : 'list_rate_charge_codes',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+	],
+	demand_forecast: [
+		{
+			api          : 'list_rolling_forecast_fcl_freight_clusters',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_port_pairs',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_data',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_suppliers',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_email_preview',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'list_pricing_zones',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'send_requirement_email',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_clusters',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
 		},
 	],
 };
