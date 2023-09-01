@@ -69,6 +69,12 @@ function PrintDocument({ shipment_data = {}, primary_service = {}, show = {}, se
 						Print Non-Negotiable
 					</Button>
 					<Button
+						themeType="primary"
+						onClick={() => handlePrintOnButton('draft')}
+					>
+						Print Draft
+					</Button>
+					<Button
 						themeType="secondary"
 						onClick={() => setShow(false)}
 					>
