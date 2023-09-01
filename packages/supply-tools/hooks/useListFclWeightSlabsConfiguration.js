@@ -5,11 +5,12 @@ const useListFclWeightSlabsConfiguration = () => {
 	const [filters, setFilters] = useState({
 		page: 1,
 	});
-	const { data, trigger, loading } = useRequest(
-		'get',
-		false,
-		'partner',
-	)('/list_fcl_weight_slabs_configuration');
+
+	const [{ data, loading }, trigger] = useRequest({
+		method : 'get',
+		url    : '/list_fcl_weight_slabs_configuration',
+		scope  : 'partner',
+	});
 
 	const listWeightSlabs = useCallback(async () => {
 		try {
