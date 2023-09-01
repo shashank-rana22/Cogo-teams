@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 function useGetOrganizationDueDiligence({ organization_id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/get_organization_due_diligence',
+		url    : '/get_organization_due_diligence_report',
 	}, { manual: true });
 
 	const getOrganizationDueDiligence = async () => {

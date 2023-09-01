@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 function useListOrganizationExpertiseSuppliers({ organization_id, service_type, page, service_id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_organization_service_expertise_suppliers',
+		url    : 'list_location_expert_service_provider_stats',
 	}, { manual: true });
 
 	const getOrganizationExpertiseSuppliers = async () => {

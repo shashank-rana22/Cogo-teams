@@ -10,12 +10,12 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'list_organization_service_expertise_suppliers',
+		api          : 'list_location_expert_service_provider_stats',
 		access_type  : 'private',
 		service_name : 'organization',
 	},
 	{
-		api          : 'update_organization_service_expertise_feedback',
+		api          : 'update_organization_service_expertise_parameter',
 		access_type  : 'private',
 		service_name : 'organization',
 	},
@@ -60,22 +60,17 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'get_organization_due_diligence',
+		api          : 'get_organization_due_diligence_report',
 		access_type  : 'private',
 		service_name : 'organization',
 	},
 	{
-		api          : 'create_organization_due_diligence',
+		api          : 'create_organization_due_diligence_report',
 		access_type  : 'private',
 		service_name : 'organization',
 	},
 	{
-		api          : 'update_organization_service_due_diligence_status',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'get_organization_service_due_diligence_status',
+		api          : 'update_organization_due_diligence_report',
 		access_type  : 'private',
 		service_name : 'organization',
 	},
@@ -85,7 +80,7 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'get_organization_service_supplier_verification_details',
+		api          : 'get_organization_service_verification_details',
 		access_type  : 'private',
 		service_name : 'organization',
 	},

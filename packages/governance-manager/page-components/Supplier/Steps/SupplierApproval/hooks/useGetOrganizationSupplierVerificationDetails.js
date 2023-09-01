@@ -5,7 +5,7 @@ const ZERO = 0;
 function useGetOrganizationSupplierVerificationDetails({ organization_id, organization_service_id, setVerify }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/get_organization_service_supplier_verification_details',
+		url    : '/get_organization_service_verification_details',
 	}, { manual: true });
 
 	const getOrganizationSupplierVerificationDetails = async () => {
@@ -19,12 +19,12 @@ function useGetOrganizationSupplierVerificationDetails({ organization_id, organi
 
 			setVerify(
 				{
-					need_analysis_report   : res?.data?.need_analysis_details?.[ZERO]?.manager_approval_status,
+					need_analysis_report   : res?.data?.need_analysis_details?.[ZERO]?.verification_status,
 					market_feedback_report : res?.data?.market_feedback_details?.verification_status,
 					evaluation_paramenter_report:
                      res?.data?.organization_service_evaluation_details?.verification_status,
 					financial_due_diligence_report:
-                    res?.data?.organization_service_due_diligence_status?.manager_approval_status,
+                    res?.data?.organization_due_diligence?.verification_status,
 				},
 			);
 		} catch (err) {

@@ -21,16 +21,15 @@ const TWO = 2;
 function SupplierApprovalDueDiligenceModal({
 	open, setOpen,
 	getOrganizationSupplierVerificationDetails,
-	organization_id, organization_service_id,
+	organization_id,
 }) {
 	const {
 		data,
 	} = useGetOrganizationDueDiligence({ organization_id });
 
 	const { UpdateOrganizationDueDiligenceStatus } = useUpdateOrganizationDueDiligence({
-		organization_due_diligence_id: data?.id,
+		id: data?.id,
 		organization_id,
-		organization_service_id,
 		setOpen,
 		getOrganizationSupplierVerificationDetails,
 	});
@@ -39,10 +38,10 @@ function SupplierApprovalDueDiligenceModal({
 		setOpen(ZERO);
 	};
 	const handleVerify = () => {
-		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'verified' });
+		UpdateOrganizationDueDiligenceStatus({ verification_status: 'verified' });
 	};
 	const handleReject = () => {
-		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'rejected' });
+		UpdateOrganizationDueDiligenceStatus({ verification_status: 'rejected' });
 	};
 
 	const [state, setState] = useState(ONE);

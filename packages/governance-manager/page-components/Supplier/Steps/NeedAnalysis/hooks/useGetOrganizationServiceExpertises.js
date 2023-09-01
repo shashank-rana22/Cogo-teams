@@ -16,7 +16,7 @@ function useGetOrganizationServiceExpertises({ show }) {
 					destination_location_id : show?.destination_location_id,
 					service_type            : show?.service_type,
 					status                  : 'active',
-					neglect_organization_id : show?.organization_id,
+					except_organization_id  : show?.organization_id,
 				},
 				location_details_required  : true,
 				service_type_required      : true,
