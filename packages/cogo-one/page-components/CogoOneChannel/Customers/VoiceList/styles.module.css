@@ -12,6 +12,10 @@
 	cursor: pointer;
 }
 
+.count_visible {
+	padding-bottom: 0;
+}
+
 .user_information {
 	display: flex;
 	justify-content: space-between;
@@ -118,6 +122,11 @@
 	flex-direction: column;
 	align-items: center;
 	width: 38px;
+}
+
+.cards_footer {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .new_message_count {

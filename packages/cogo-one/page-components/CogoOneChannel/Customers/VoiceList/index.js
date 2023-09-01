@@ -58,16 +58,16 @@ function VoiceList(voiceProps) {
 
 	const handleCardClick = (item) => {
 		const { missed_call_count: missedCallCount, id } = item;
+
 		setActiveVoiceCard(item);
+
 		if (missedCallCount > DEFAULT_UNREAD_CALLS) {
-			// Update the missed_call_count to zero and call the updateMissedVoiceCount function
 			const updatedItem = {
 				...item,
 				missed_call_count: 0,
 			};
 			updateMissedVoiceCount({ id });
 
-			// Update the list in state with the updated item
 			const updatedList = list.map((listItem) => (listItem.id === id ? updatedItem : listItem));
 			setListData((prevState) => ({
 				...prevState,
@@ -121,7 +121,10 @@ function VoiceList(voiceProps) {
 				 `}
 							onClick={() => handleCardClick(item)}
 						>
-							<div className={styles.card}>
+							<div className={cl`
+							${styles.card}
+							${missedCallCount > DEFAULT_UNREAD_CALLS ? styles.count_visible : ''}
+				 `}>
 								<div className={styles.user_information}>
 									<div className={styles.avatar_container}>
 										<div className={styles.status_icons}>
@@ -187,14 +190,16 @@ function VoiceList(voiceProps) {
 												formatType : 'time',
 											}) : ''}
 										</div>
-										{missedCallCount > DEFAULT_UNREAD_CALLS && (
-											<div className={styles.new_message_count}>
-												{missedCallCount > MAXIMUM_UNREAD_CALLS
-													? '99+'
-													: missedCallCount}
-											</div>
-										)}
 									</div>
+								</div>
+								<div className={styles.cards_footer}>
+									{missedCallCount > DEFAULT_UNREAD_CALLS && (
+										<div className={styles.new_message_count}>
+											{missedCallCount > MAXIMUM_UNREAD_CALLS
+												? '99+'
+												: missedCallCount}
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
