@@ -16,7 +16,7 @@ const TABS_LIST = [
 		name      : 'trend',
 		title     : 'Trend',
 		Component : TrendChart,
-		heading   : 'Rate Trend with Time',
+		heading   : 'Rate Trend with Time (USD)',
 	},
 	{
 		key       : 'accuracy',
