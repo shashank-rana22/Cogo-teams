@@ -1,5 +1,4 @@
 import { Breadcrumb, Button } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import React from 'react';
 
@@ -46,7 +45,7 @@ function ViewSelectedInvoices({ apiData = {}, setApiData = () => {}, setViewSele
 
 	return (
 		<div>
-			<div>
+			<div className={styles.back}>
 				<Breadcrumb>
 					<Breadcrumb.Item label={(
 						<Link href="/business-finance/account-payables/invoices">
@@ -57,19 +56,16 @@ function ViewSelectedInvoices({ apiData = {}, setApiData = () => {}, setViewSele
 					<Breadcrumb.Item label="PayRun Creation" />
 					<Breadcrumb.Item label="Select Invoices" />
 				</Breadcrumb>
+
+				<Button
+					themeType="accent"
+					onClick={() => { setViewSelectedInvoices(false); }}
+					style={{ width: '100px' }}
+				>
+					Go Back
+				</Button>
 			</div>
-			<div className={styles.back}>
-				<div>
-					<IcMArrowBack height={20} width={20} />
-				</div>
-				<div>
-					<Button size="lg" themeType="linkUi" onClick={() => { setViewSelectedInvoices(false); }}>
-						<div className={styles.button}>
-							Go back to invoice selection
-						</div>
-					</Button>
-				</div>
-			</div>
+
 			<div className={styles.list_container}>
 				<List
 					itemData={apiData}

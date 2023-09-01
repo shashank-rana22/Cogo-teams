@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function FilePreview({ url = {} }) {
+function FilePreview({ url = '' }) {
 	return (
 		<div className={styles.upload_invoice}>
 			<object
