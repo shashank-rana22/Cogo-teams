@@ -1771,8 +1771,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
 					possible_apis : apis.convenience_rate,
-
-					module_type: 'crm',
+					module_type   : 'crm',
 				},
 				{
 					key           : 'transaction_setting-payment_modes_and_methods',
@@ -1816,8 +1815,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:commodity_cluster'),
-					href  : '/supply-tools/commodity-clusters',
-					as    : '/supply-tools/commodity-clusters',
+					href  : '/v2/supply-tools/commodity-clusters',
+					as    : '/v2/supply-tools/commodity-clusters',
 				},
 				{
 					title : t('common:fcl_freight_rate_extension'),
@@ -1826,8 +1825,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:detention_demurrage'),
-					href  : '/supply-tools/detention-demurrage',
-					as    : '/supply-tools/detention-demurrage',
+					href  : '/v2/supply-tools/detention-demurrage',
+					as    : '/v2/supply-tools/detention-demurrage',
 				},
 			],
 			module_type: 'dashboards',
