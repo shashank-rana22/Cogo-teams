@@ -15,17 +15,24 @@ import getTerminalChargeRateControl from './terminalChargeRateControl';
 import useCreateShipmentAdditionalService from './useCreateShipmentAdditionalService';
 
 function TerminalChargeRate({
-	sheetData = {}, mainServicesData = {}, refetch = () => {},
-	onCancel = () => {}, task_id = '',
+	sheetData = {},
+	mainServicesData = {},
+	refetch = () => {},
+	onCancel = () => {},
+	task_id = '',
 	shipmentData = {},
 	csr_data = {},
 }) {
 	const [entityData, setEntityData] = useState({});
 	const [irnGenerated, setIRNGenerated] = useState(true);
+
 	const controls = getTerminalChargeRateControl({ setEntityData });
 	const { formState:{ errors }, control, handleSubmit, setValue } = useForm();
 
-	const { createShipmentAdditionalService } =	 useCreateShipmentAdditionalService({ shipmentData, setIRNGenerated });
+	const { createShipmentAdditionalService } =	useCreateShipmentAdditionalService({
+		shipmentData,
+		setIRNGenerated,
+	});
 
 	const {
 		createShipmentAirFreightConsolidatedInvoice,
@@ -40,13 +47,14 @@ function TerminalChargeRate({
 
 	const {
 		updateShipmentAirFreightConsolidatedInvoice = () => {},
-		loading:updateConsolidatedLoading,
-		updateLoading:taskUpdateLoading,
+		loading: updateConsolidatedLoading,
+		updateLoading: taskUpdateLoading,
 	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id, invoiceData });
 
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);
 	};
+
 	const handleIRNGeneration = () => {
 		updateShipmentAirFreightConsolidatedInvoice();
 	};

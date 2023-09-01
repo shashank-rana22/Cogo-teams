@@ -1,0 +1,9 @@
+.title {
+	margin-bottom: 12px;
+	font-weight: 500;
+}
+
+.body,
+.footer {
+	margin-bottom: 12px;
+}
