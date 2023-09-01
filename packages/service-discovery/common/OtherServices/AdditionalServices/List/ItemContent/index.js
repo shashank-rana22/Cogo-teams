@@ -51,6 +51,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 				fcl_cfs           : commonDetails,
 				fcl_freight_local : commonDetails,
 				fcl_freight       : commonDetails,
+				haulage_freight   : commonDetails,
 				subsidiary        : commonDetails,
 			};
 

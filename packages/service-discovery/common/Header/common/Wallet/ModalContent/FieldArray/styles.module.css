@@ -8,18 +8,8 @@
 	overflow: scroll;
 }
 
-.container {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
-.childs_container {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
+.container,
+.childs_container,
 .child {
 	display: flex;
 	flex-direction: column;
