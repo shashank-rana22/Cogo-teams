@@ -1,4 +1,4 @@
-import { Button, Select, Input, ButtonIcon, cl } from '@cogoport/components';
+import { Button, Select, Input, ButtonIcon, cl, Loader as SpinLoader } from '@cogoport/components';
 import { IcMDownload, IcMProfile, IcMAppSearch, IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 import EmptyState from '../../common/EmptyState';
 import Loader from '../../common/Loader';
 import useGetCycles from '../../hooks/useGetCycles';
+import useGetDownloadTeamAttendance from '../../hooks/useGetDownloadTeamAttendance';
 import useGetTeamAttendance from '../../hooks/useGetTeamAttendance';
 
 import AttendanceData from './AttendanceData';
@@ -20,6 +21,12 @@ function TeamAttendance() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [month, setMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
+	console.log('🚀 ~ file: index.js:25 ~ TeamAttendance ~ month:', month);
+	const {
+		data:downloadData, createDownload,
+		loading:downloadLoading,
+	} = useGetDownloadTeamAttendance({ cycleId: month });
+
 	const { data, setFilters, debounceQuery, loading : statsLoading } = useGetTeamAttendance(month);
 
 	const { page_no, total_pages } = data || {};
@@ -61,6 +68,13 @@ function TeamAttendance() {
 		}
 	}, [formattedData]);
 
+	const handleDownload = async () => {
+		const res = await createDownload();
+		console.log('🚀 ~ file: index.js:28 ~ handleDownload ~ res:', res);
+
+		window.open(downloadData, '_self');
+	};
+
 	return (
 		<>
 			<div className={styles.header_container}>
@@ -77,11 +91,15 @@ function TeamAttendance() {
 							/>
 						)}
 					</div>
-					<Button className={styles.download} themeType="secondary" size="lg">
+					<Button className={styles.download} themeType="secondary" size="lg" onClick={handleDownload}>
 						<span className={styles.download_text}>
 							Download Report
 						</span>
-						<IcMDownload />
+						{downloadLoading ? (
+							<div style={{ display: 'flex' }}>
+								<SpinLoader />
+							</div>
+						) : <IcMDownload />}
 					</Button>
 					<Input
 						className={styles.input_search}
