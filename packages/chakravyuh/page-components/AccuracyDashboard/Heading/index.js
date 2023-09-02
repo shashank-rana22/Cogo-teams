@@ -85,7 +85,7 @@ function Heading({
 							</Tooltip>
 						)}
 
-					<span>Active Rates</span>
+					<span>Active Rates from Today</span>
 					{show
 						? <IcMEyeclose className={styles.redirect} onClick={() => setShow(false)} />
 						: <IcMEyeopen className={styles.redirect} onClick={() => setShow(true)} />}
