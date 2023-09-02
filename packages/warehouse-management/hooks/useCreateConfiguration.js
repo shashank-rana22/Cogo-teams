@@ -20,10 +20,6 @@ const useCreateConfiguration = ({
 		userId: profile.id,
 	}));
 
-	const handleOnClose = () => {
-		setAddNewZone(false);
-	};
-
 	const onSubmit = async (formValues) => {
 		const { zoneName = '', commodity = '', aisles = '' } = formValues;
 
@@ -41,7 +37,7 @@ const useCreateConfiguration = ({
 			});
 			Toast.success('New Zone added');
 			listAPI();
-			handleOnClose();
+			setAddNewZone(false);
 		} catch (err) {
 			toastApiError(err);
 		}
