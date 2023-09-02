@@ -2,7 +2,10 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 const useListRevenueDeskWallet = () => {
+	const ONE_VALUE = 1;
 	const [filters, setFilter] = useState({ service_type: 'fcl_freight', status: 'active' });
+	const [page, setPage] = useState(ONE_VALUE);
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_revenue_desk_wallet',
 		method : 'get',
@@ -10,19 +13,19 @@ const useListRevenueDeskWallet = () => {
 
 	const listRevenueDesk = useCallback(async () => {
 		try {
-			await trigger({ params: { filters } });
+			await trigger({ params: { filters }, page, pagination_data_required: true });
 		} catch (error) {
 			console.log(error);
 		}
-	}, [filters, trigger]);
+	}, [filters, trigger, page]);
 
 	const refetch = () => { listRevenueDesk(); };
 
 	useEffect(() => {
 		listRevenueDesk();
-	}, [listRevenueDesk, filters]);
+	}, [listRevenueDesk, filters, page]);
 
-	return { loading, data: data?.list, filters, setFilter, refetch };
+	return { loading, data, filters, setFilter, refetch, page, setPage };
 };
 
 export default useListRevenueDeskWallet;

@@ -3,6 +3,7 @@ import {
 	RadioGroupController, SelectController,
 	InputController, useForm, useGetAsyncOptions, asyncFieldsLocations,
 } from '@cogoport/forms';
+import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import controls from '../../../../configurations';
@@ -11,10 +12,21 @@ import useCreateRevenueDeskWallet from '../../../../hooks/useCreateRevenueDeskWa
 import styles from './styles.module.css';
 
 function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetch = () => {} }) {
+	const filterOption = {
+		fcl_freight     : ['seaport'],
+		lcl_freight     : ['seaport'],
+		air_freight     : ['airport'],
+		fcl_customs     : ['seaport'],
+		lcl_customs     : ['seaport'],
+		air_customs     : ['airport'],
+		haulage_freight : ['pincode', 'seaport'],
+		trailer_freight : ['pincode', 'seaport'],
+		ltl_freight     : ['pincode', 'seaport'],
+		ftl_freight     : ['pincode', 'seaport'],
+		fcl_cfs         : ['seaport'],
+	};
+
 	const { createRevenueDeskWallet, loading } = useCreateRevenueDeskWallet({ setCreateWallet, refetch });
-	const originAsyncOptions = useGetAsyncOptions(asyncFieldsLocations());
-	const destinationAsyncoptios = useGetAsyncOptions(asyncFieldsLocations());
-	const [submitValue, setSubmitValue] = useState();
 
 	const { handleSubmit, control, watch, formState:{ errors } } = useForm();
 
@@ -23,6 +35,16 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 	const isService = watch('service_type');
 	const isTrade = watch('trade_type');
 	const isOrigin = watch('origin_location_id');
+
+	console.log(isService, isTrade, 'isService');
+
+	const locationOptions = useGetAsyncOptions(
+		merge(asyncFieldsLocations(), {
+			params: { filters: { type: filterOption[isService] } },
+		}),
+	);
+
+	const [submitValue, setSubmitValue] = useState();
 
 	const onSubmit = (data) => {
 		setSubmitValue(data);
@@ -44,7 +66,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 							/>
 							<div className={styles.errors}>{errors?.service_type?.message}</div>
 						</div>
-						{isService
+						{(isService === 'fcl_freight' || isService === 'lcl_freight' || isService === 'air_freight')
 					&& (
 						<div>
 							<div className={styles.label}>Select Trade Type</div>
@@ -61,7 +83,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 									size="md"
 									control={control}
 									name="origin_location_id"
-									{...originAsyncOptions}
+									{...locationOptions}
 									style={{ width: '250px' }}
 								/>
 							</div>
@@ -73,8 +95,8 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 									size="md"
 									control={control}
 									name="destination_location_id"
-									{...destinationAsyncoptios}
 									style={{ width: '250px' }}
+									{...locationOptions}
 								/>
 							</div>
 						)}

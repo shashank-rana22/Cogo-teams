@@ -1,4 +1,4 @@
-import { Button, Select } from '@cogoport/components';
+import { Button, Select, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import { serviceOptions } from '../../../helpers/filterOptionMapping';
@@ -11,7 +11,13 @@ import styles from './styles.module.css';
 function AutomationWallet() {
 	const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 	const ZERO_VALUE = 0;
-	const { data, filters = {}, setFilter = () => {}, refetch = () => {}, loading } = useListRevenueDeskWallet();
+	const ONE_VALUE = 1;
+	const TEN_VALUE = 10;
+	const {
+		data, filters = {}, setFilter = () => {},
+		refetch = () => {}, loading, page, setPage,
+	} = useListRevenueDeskWallet();
+
 	const [createWallet, setCreateWallet] = useState(false);
 
 	const onChange = (item, key) => {
@@ -38,7 +44,7 @@ function AutomationWallet() {
 				</Button>
 			</div>
 
-			{data?.length === ZERO_VALUE ? (
+			{data?.list?.length === ZERO_VALUE ? (
 				<div className={styles.empty_icon}>
 					<img
 						src={SRC}
@@ -49,11 +55,22 @@ function AutomationWallet() {
 				</div>
 			) : (
 				<div>
-					{data?.map((val) => (
+					{data?.list?.map((val) => (
 						<div key={val?.id}>
 							<AutomationWalletDetails data={val} refetch={refetch} loading={loading} />
 						</div>
 					))}
+					{(data?.total_count || ZERO_VALUE) > TEN_VALUE ? (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								totalItems={data?.total_count || ZERO_VALUE}
+								currentPage={page || ONE_VALUE}
+								pageSize={data?.page_limit}
+								onPageChange={setPage}
+							/>
+						</div>
+					) : null}
 				</div>
 			)}
 
