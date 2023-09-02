@@ -12,6 +12,7 @@ const getParams = ({ page, query }) => ({
 		q      : query?.trim() || undefined,
 		type   : 'email',
 		source : 'rich_text',
+		tags   : ['shipment_specialist'],
 	},
 });
 

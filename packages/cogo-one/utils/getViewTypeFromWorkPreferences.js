@@ -28,9 +28,10 @@ const COGOVERSE_AGENT_MAPPINGS = {
 	sales_admin               : ['sales_admin'],
 	shipment_specialist_admin : ['shipment_specialist_admin'],
 	cogoone_admin             : ['tech_support'],
+	credit_controller         : ['credit_controller'],
 };
 
-const DEFAULT_VIEW_TYPE = 'sales';
+const DEFAULT_VIEW_TYPE = 'default';
 
 const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds = '', agentType = '' }) => {
 	if (viewTypeFromRoleIds === 'cogoone_admin') {

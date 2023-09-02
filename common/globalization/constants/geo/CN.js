@@ -198,6 +198,7 @@ export default {
 		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
+		account_receivable_executive     : 'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3',
 		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716',
