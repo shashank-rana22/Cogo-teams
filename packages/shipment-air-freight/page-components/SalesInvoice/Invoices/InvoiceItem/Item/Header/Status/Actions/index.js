@@ -94,6 +94,7 @@ function Actions({
 							</div>
 						) : null}
 
+						{/* TODO (anmol): disable on FC */}
 						{!INVOICE_STATUS.includes(invoice.status) && (
 							<Button
 								size="sm"
@@ -105,6 +106,7 @@ function Actions({
 							</Button>
 						)}
 
+						{/* TODO (anmol): disable on FC */}
 						{invoice?.status === 'reviewed' && (
 							<Button size="sm" onClick={() => setShowOTPModal(true)}>
 								Send OTP for Approval
