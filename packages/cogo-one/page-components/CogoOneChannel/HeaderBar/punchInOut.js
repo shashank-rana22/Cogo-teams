@@ -140,7 +140,7 @@ function PunchInOut({
 						)}
 				</div>
 			)}
-			{showStats ? <IcMArrowDown className={cl`${showDetails ? styles.up_arrow : styles.arrow_down}`} /> : null}
+			{showStats ? <IcMArrowDown className={showDetails ? styles.up_arrow : styles.arrow_down} /> : null}
 		</div>
 	);
 }
