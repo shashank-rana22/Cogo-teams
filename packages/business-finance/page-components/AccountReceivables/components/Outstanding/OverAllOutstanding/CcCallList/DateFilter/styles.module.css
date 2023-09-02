@@ -22,7 +22,7 @@
 }
 
 .radio_group_container {
-	display: coloum !important;
+	display: column;
 	flex: 1;
 	padding: 12px;
 
