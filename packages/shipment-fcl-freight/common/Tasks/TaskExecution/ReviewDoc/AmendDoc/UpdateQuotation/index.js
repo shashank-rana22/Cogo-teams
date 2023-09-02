@@ -2,20 +2,21 @@ import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import useGetStepThreeData from '../../../CustomTasks/UploadBookingNote/helpers/useGetStep3Data';
+import useUpdateQuotationOnBnAmend from '../../../../../../hooks/useUpdateQuotationOnBnAmend';
 
 import EditQuotation from './EditQuotation';
 import styles from './styles.module.css';
 
 function UpdateQuotation({ task = {}, setIsQuotation = () => {}, onClose = () => {} }) {
-	const { primary_service, shipment_data, servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
-	const quotationData = useGetStepThreeData({
-		primary_service,
+	const quotationData = useUpdateQuotationOnBnAmend({
 		servicesList,
 		shipment_data,
 		task,
+		setIsQuotation,
 	});
+
 	const { serviceQuotationLoading = true, loading: quotationLoading = false } = quotationData || {};
 
 	if (serviceQuotationLoading) {

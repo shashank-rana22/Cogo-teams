@@ -6,7 +6,7 @@ import useUpdateShipmentDocuments from '../../../../../hooks/useUpdateShipmentDo
 import styles from './styles.module.css';
 import UpdateQuotation from './UpdateQuotation';
 
-function AmmendDoc({ task = {}, onClose = () => {}, newRefetch = () => {} }) {
+function AmendDoc({ task = {}, onClose = () => {}, newRefetch = () => {} }) {
 	const isApproveBookingNote = task?.task === 'approve_booking_note';
 
 	const [remarkValue, setRemarkValue] = useState('');
@@ -88,4 +88,4 @@ function AmmendDoc({ task = {}, onClose = () => {}, newRefetch = () => {} }) {
 	);
 }
 
-export default AmmendDoc;
+export default AmendDoc;

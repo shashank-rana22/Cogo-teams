@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
-import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -10,7 +9,6 @@ const DEFAULT_QUANTITY_VALUE = 0;
 
 function EditQuotation({
 	data = {},
-	setIsQuotation = () => {},
 	shipment_id = '',
 	loading = false,
 	onClose = () => {},
@@ -49,10 +47,7 @@ function EditQuotation({
 	});
 
 	const handleFinalSubmit = async (values) => {
-		const { error = {} } = await onSubmit(values, true);
-		if (!isEmpty(error)) {
-			setIsQuotation(false);
-		}
+		await onSubmit(values);
 	};
 
 	return (

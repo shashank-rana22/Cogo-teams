@@ -1,13 +1,12 @@
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
-import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
-import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
-import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
+import checkLineItemsSum from '../common/Tasks/TaskExecution/CustomTasks/UploadBookingNote/helpers/checkLineItemSum';
+import endToEndCheck from '../common/Tasks/TaskExecution/CustomTasks/UploadBookingNote/helpers/end2EndCheck';
+import getStep3Controls from '../common/Tasks/TaskExecution/CustomTasks/UploadBookingNote/helpers/getStep3Controls';
 
-import checkLineItemsSum from './checkLineItemSum';
-import end2EndCheck from './end2EndCheck';
-import getStep3Controls from './getStep3Controls';
+import useGetShipmentServicesQuotation from './useGetShipmentServicesQuotation';
+import useUpdateBuyQuotations from './useUpdateBuyQuotations';
 
 const TRADE_MAPPING = {
 	import    : 'Destination',
@@ -15,19 +14,17 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
-const HTTP_SUCCESS_CODE = 200;
-
-const useGetStepThreeData = ({
+const useUpdateQuotationOnBnAmend = ({
 	servicesList = [],
 	shipment_data = {},
-	onCancel = () => {},
 	task = {},
-	taskListRefetch = () => {},
-	formattedRate = {},
+	setIsQuotation = () => {},
 }) => {
-	let notMainService = false;
 	const SERVICE_IDS = [];
+
+	let notMainService = false;
 	let trade_type;
+	let chargeCodes = {};
 
 	const incoTerm = (servicesList || []).find(
 		(serviceObj) => serviceObj.service_type === 'fcl_freight_service',
@@ -38,7 +35,7 @@ const useGetStepThreeData = ({
 			|| serviceObj.service_type === 'fcl_freight_local_service')
 			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
-			if (end2EndCheck({ serviceObj, shipment_data, incoTerm })) {
+			if (endToEndCheck({ serviceObj, shipment_data, incoTerm })) {
 				SERVICE_IDS.push(serviceObj.id);
 			}
 		}
@@ -62,13 +59,6 @@ const useGetStepThreeData = ({
 	});
 	const { apiTrigger:updateBuyQuotationTrigger, loading: quotationLoading } = useUpdateBuyQuotations({});
 
-	const { apiTrigger:updateTask, loading } = useUpdateShipmentPendingTask({
-		refetch: () => {
-			onCancel();
-			taskListRefetch();
-		},
-	});
-
 	const service_charges = servicesQuotation?.service_charges || [];
 
 	const service_charges_with_trade = (service_charges || []).map((charge) => {
@@ -85,11 +75,9 @@ const useGetStepThreeData = ({
 		return chargeDetails;
 	});
 
-	let chargeCodes = {};
-
-	const handleChange = (vals) => {
-		if (!chargeCodes?.vals?.code) {
-			chargeCodes = { ...chargeCodes, [vals?.code]: vals?.name };
+	const handleChange = (values) => {
+		if (!chargeCodes?.values?.code) {
+			chargeCodes = { ...chargeCodes, [values?.code]: values?.name };
 		}
 	};
 
@@ -102,27 +90,14 @@ const useGetStepThreeData = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		if (Object.keys(formattedRate).includes(service_charge?.service_id)
-		&& (formattedRate?.[service_charge?.service_id]?.line_items || []).length) {
-			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
-				?.line_items?.map((line_item) => ({
-					code     : line_item?.code,
-					currency : line_item?.currency,
-					price    : line_item?.price,
-					quantity : line_item?.quantity,
-					unit     : line_item?.unit,
-					total    : line_item?.total,
-				}));
-		} else {
-			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
-				code     : line_item?.code,
-				currency : line_item?.currency,
-				price    : line_item?.price,
-				quantity : line_item?.quantity,
-				unit     : line_item?.unit,
-				total    : line_item?.total,
-			}));
-		}
+		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+			code     : line_item?.code,
+			currency : line_item?.currency,
+			price    : line_item?.price,
+			quantity : line_item?.quantity,
+			unit     : line_item?.unit,
+			total    : line_item?.total,
+		}));
 	});
 
 	const onSubmit = async (values) => {
@@ -154,11 +129,9 @@ const useGetStepThreeData = ({
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
+				await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
 
-				if (res?.status === HTTP_SUCCESS_CODE) {
-					await updateTask({ id: task?.id });
-				}
+				setIsQuotation(false);
 			} catch (err) {
 				toastApiError(err);
 			}
@@ -166,14 +139,12 @@ const useGetStepThreeData = ({
 	};
 
 	return {
-		service_charges_with_trade,
-		updateBuyQuotationTrigger,
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		loading       : quotationLoading || loading,
+		loading       : quotationLoading,
 		defaultValues : DEFAULT_VALUES,
 	};
 };
 
-export default useGetStepThreeData;
+export default useUpdateQuotationOnBnAmend;

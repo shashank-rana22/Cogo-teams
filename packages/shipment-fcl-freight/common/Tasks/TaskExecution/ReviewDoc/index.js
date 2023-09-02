@@ -8,7 +8,7 @@ import { useState } from 'react';
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
-import AmmendDoc from './AmmendDoc';
+import AmendDoc from './AmendDoc';
 import styles from './styles.module.css';
 
 const GET_FINAL_URL = 1;
@@ -18,7 +18,7 @@ function ReviewDoc({
 	refetch = () => {},
 	onClose = () => {},
 }) {
-	const [isAmmend, setIsAmmend] = useState(false);
+	const [isAmend, setIsAmend] = useState(false);
 
 	const newRefetch = () => {
 		onClose();
@@ -110,8 +110,8 @@ function ReviewDoc({
 				</div>
 			</div>
 
-			{isAmmend ? (
-				<AmmendDoc
+			{isAmend ? (
+				<AmendDoc
 					task={task}
 					onClose={onClose}
 					newRefetch={newRefetch}
@@ -129,7 +129,7 @@ function ReviewDoc({
 
 					<div className={styles.action_buttons}>
 						<Button
-							onClick={() => { setIsAmmend(true); }}
+							onClick={() => { setIsAmend(true); }}
 							themeType="secondary"
 							disabled={loading}
 						>
