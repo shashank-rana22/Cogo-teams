@@ -10,8 +10,9 @@ import styles from './styles.module.css';
 import UploadedFiles from './UploadedFiles';
 
 const HEADER_TEXT_MAPPING = {
-	forward : 'Forwarding',
-	reply   : 'Replying to',
+	forward   : 'Forwarding',
+	reply     : 'Replying to',
+	reply_all : 'Replying All',
 };
 
 function FooterHead({
