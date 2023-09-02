@@ -21,17 +21,19 @@ const COLOR_MAP_UP = {
 	Asc  : '#BDBDBD',
 };
 
+const SEARCH_WIDTH = 20;
+
 function Filters({
-	handleChange = () => {},
-	handleInputReset = () => {},
-	setOrderBy = () => {},
+	handleChange = () => { },
+	handleInputReset = () => { },
+	setOrderBy = () => { },
 	orderBy = { key: '', order: '', label: '' },
-	setParams = () => {},
+	setParams = () => { },
 	params = {},
 	formFilters = {},
-	setFormFilters = () => {},
-	clearFilter = () => {},
-	refetch = () => {},
+	setFormFilters = () => { },
+	clearFilter = () => { },
+	refetch = () => { },
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 
@@ -127,8 +129,8 @@ function Filters({
 							onClick={handleInputReset}
 							cursor="pointer"
 							className={styles.icon_style}
-							height={20}
-							width={20}
+							height={SEARCH_WIDTH}
+							width={SEARCH_WIDTH}
 						/>
 					)}
 					prefix={null}

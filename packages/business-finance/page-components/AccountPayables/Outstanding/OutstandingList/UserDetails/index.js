@@ -9,7 +9,7 @@ function UserDetails({ agent = [] }) {
 	return (
 		<>
 			<IcMProfile onClick={() => setShowDetailsCard(true)} />
-			{showDetailsCard && (
+			{showDetailsCard ? (
 				<>
 					<div className={styles.invoice_details_container_bg} />
 					<div className={styles.invoice_details_container}>
@@ -30,7 +30,7 @@ function UserDetails({ agent = [] }) {
 							</div>
 							<div className={styles.body_details}>
 								{(agent || []).map((singleagent) => (
-									<div key={singleagent.name} className={styles.containers}>
+									<div key={singleagent?.name} className={styles.containers}>
 										<div className={styles.stakeholder}>
 											{startCase(singleagent?.stakeholder_type || '-')}
 										</div>
@@ -46,7 +46,7 @@ function UserDetails({ agent = [] }) {
 						</div>
 					</div>
 				</>
-			)}
+			) : null}
 		</>
 	);
 }
