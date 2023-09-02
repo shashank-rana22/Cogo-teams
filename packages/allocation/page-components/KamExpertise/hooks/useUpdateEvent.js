@@ -10,6 +10,7 @@ function useUpdateEvent(props) {
 	const {
 		eventListData = {}, listRefetch = () => {}, attributeList = [],
 		setEventListData = () => {},
+		t = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -42,16 +43,16 @@ function useUpdateEvent(props) {
 
 	const expertiseTypeWatch = watch('expertise_type');
 
-	const controls = getAddRuleControls({ expertiseTypeWatch });
+	const controls = getAddRuleControls({ expertiseTypeWatch, t });
 
 	const onUpdate = async (formValues, e) => {
 		e.preventDefault();
 
-		const payloadAttribute = [];
+		const PAYLOAD_ATTRIBUTE = [];
 		attributeList.forEach((res) => {
 			Object.keys(formValues).forEach((response) => {
 				if (response === res?.name && formValues[response]) {
-					payloadAttribute.push({
+					PAYLOAD_ATTRIBUTE.push({
 						rule_id   : res?.id,
 						parameter : formValues[response],
 					});
@@ -59,13 +60,13 @@ function useUpdateEvent(props) {
 			});
 		});
 
-		if (isEmpty(payloadAttribute)) {
-			Toast.error('Enter Attribute Value');
+		if (isEmpty(PAYLOAD_ATTRIBUTE)) {
+			Toast.error(t('allocation:enter_attribute_value'));
 		} else {
 			try {
 				const payload = {
 					event_detail_id : eventDetailId,
-					attributes      : payloadAttribute,
+					attributes      : PAYLOAD_ATTRIBUTE,
 				};
 
 				await trigger({
@@ -76,12 +77,13 @@ function useUpdateEvent(props) {
 					data        : {},
 					toggleEvent : 'eventList',
 				});
-				Toast.success('Sucessfully Updated Event!');
+
+				Toast.success(t('allocation:event_successfully_updated_toast'));
 				listRefetch();
 			} catch (error) {
 				Toast.error(
 					getApiErrorString(error?.response?.data)
-						|| 'Unable to Update, Please try again!!',
+						|| t('allocation:unable_to_update_event'),
 				);
 			}
 		}

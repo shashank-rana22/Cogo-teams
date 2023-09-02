@@ -26,7 +26,6 @@ function Poc({
 }) {
 	const {
 		id:shipment_id, importer_exporter_id, services,
-		is_rate_reverted = true, shipment_type = '',
 	} = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -48,14 +47,7 @@ function Poc({
 		shipment_id,
 	});
 
-	const checkForStakeholders = ['booking_agent',
-		'sales_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
-
 	const serviceProviders = getServiceProviderData(servicesList);
-
-	const isPocStakeholdersVisible = checkForStakeholders && shipment_type === 'fcl_freight'
-		? is_rate_reverted
-		: true;
 
 	return (
 		<div>
@@ -74,7 +66,7 @@ function Poc({
 							rolesPermission={rolesPermission}
 						/>
 
-						{rolesViewPermission?.includes('pocs') && isPocStakeholdersVisible ? (
+						{rolesViewPermission?.includes('pocs') ? (
 							<Pocs
 								tradePartnersData={data}
 								setAddPoc={setAddPoc}
@@ -83,6 +75,7 @@ function Poc({
 								servicesList={servicesList}
 								shipment_data={shipment_data}
 								rolesPermission={rolesPermission}
+								activeStakeholder={activeStakeholder}
 							/>
 						) : null}
 

@@ -1,7 +1,8 @@
-import { RadioGroup, Chips, SingleDateRange, Tags } from '@cogoport/components';
+import { RadioGroup, Chips, SingleDateRange, Tags, Select } from '@cogoport/components';
 
 import { statusOptions, tradeOptions, shipmentSourceOptions, rdStatusOptions } from '../../helpers/filterOptionMapping';
 import getFiltersTagsArray from '../../helpers/getFiltersTagsArray';
+import useGetEntityId from '../../hooks/useGetEntityId';
 import { VALUE_TWO, VALUE_ZERO } from '../constants';
 
 import FilterLocation from './FilterLocation';
@@ -12,6 +13,8 @@ function Filters({ filters, setFilters }) {
 		shipmentStatusArray, tradeTypeArray, rdStatusArray,
 		shipmentSourceArray, departureDateArray, createdDateArray, cargoDateArray,
 	} = getFiltersTagsArray(filters);
+	const { data } = useGetEntityId();
+	const entityIdOptions = data?.list?.map((x) => ({ label: x?.business_name, value: x?.id }));
 
 	return (
 		<div className={styles.filter}>
@@ -142,6 +145,22 @@ function Filters({ filters, setFilters }) {
 						</div>
 					</div>
 				) : null}
+
+			<div className={styles.sub_section}>
+				<div className={styles.sub_heading}>
+					Cogo Entity Id
+				</div>
+				<div className={styles.select}>
+					<Select
+						value={filters?.cogo_entity_id}
+						onChange={(val) => setFilters({ ...filters, cogo_entity_id: val, page: 1 })}
+						placeholder="Select Entity"
+						options={entityIdOptions}
+						isClearable
+						size="sm"
+					/>
+				</div>
+			</div>
 
 			<div className={styles.sub_section}>
 				<div className={styles.sub_heading}>

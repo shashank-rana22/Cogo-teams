@@ -1,11 +1,10 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
-import { Placeholder, cl } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import RenderCardHeader from '../Common/RenderCardHeader';
-import { LABEL_MAPPING } from '../constants';
 
 import { getData } from './getData';
 import { getGraphData } from './getGraphData';
@@ -53,15 +52,15 @@ function ClosedShipmentCard({
 	loading = false,
 	taxType = '',
 	setActiveBar = () => {},
+	infoContent = '',
+	isHomeCard = false,
 }) {
 	const {
 		currency,
 	} = cardData;
 
-	const totalCost = Number(cardData[`estimatedCost${taxType}`] || DEFAULT_VALUE)
-		+ Number(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`] || DEFAULT_VALUE);
-	const totalRevenue = Number(cardData[`estimatedRevenue${taxType}`] || DEFAULT_VALUE)
-		+ Number(cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`] || DEFAULT_VALUE);
+	const totalCost = Number(cardData[`estimatedCost${taxType}`] || DEFAULT_VALUE);
+	const totalRevenue = Number(cardData[`estimatedRevenue${taxType}`] || DEFAULT_VALUE);
 
 	const data = getData({ taxType, type, cardData, totalCost, totalRevenue });
 
@@ -90,23 +89,33 @@ function ClosedShipmentCard({
 	};
 
 	return (
-		<div className={styles.financially_closed_container}>
+		<div
+			className={isHomeCard ? styles.financially_closed_container : styles.financially_closed_child}
+			style={{ height: isAdditonalView ? '100%' : 'auto' }}
+			data-tour={type === 'Financially' ? 'financial-closed-card-clickable' : null}
+		>
 			{showHeading && (
-				<div style={{ marginBottom: '16px' }}>
+				<div
+					style={{ padding: '16px 32px' }}
+					data-tour={type === 'Financially' ? 'financially-closed-heading' : 'operationally-closed-heading'}
+				>
 					<RenderCardHeader
 						title={`${type} Closed Shipments`}
 						showInfo
+						infoContent={infoContent}
 					/>
 				</div>
 			)}
 
 			{!loading ? (
 				<div
-					className={cl`${styles.chart_data_combine} 
-					${!isDeviationVisible ? styles.additional_margin : null}`}
+					className={styles.chart_data_combine}
 					role="presentation"
 					onClick={onCardClick}
-					style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
+					style={{
+						flexWrap : wrapElement ? 'wrap' : 'nowrap',
+						cursor   : isHomeCard ? 'pointer' : 'auto',
+					}}
 				>
 					<div
 						className={styles.responsive_graph_circular}
@@ -145,7 +154,7 @@ function ClosedShipmentCard({
 						/>
 
 					</div>
-					<div className={styles.show_graph_data}>
+					<div className={styles.show_graph_data} style={{ height: isHomeCard ? '100%' : 'auto' }}>
 						{(graphData || []).map((item) => (
 							<div
 								key={item?.id}
@@ -179,8 +188,11 @@ function ClosedShipmentCard({
 					</div>
 				</div>
 			) : (
-				<div style={{ margin: '8px 0px' }}>
-					<Placeholder height={200} width="100%" />
+				<div
+					className={styles.placeholder_container}
+					style={{ height: type === 'Financially' ? '90%' : '60%' }}
+				>
+					<Placeholder height="60%" width="96%" />
 				</div>
 			)}
 

@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import PreviewDocumet from '../../../commons/PreviewDocument';
@@ -9,7 +10,14 @@ import AcceptOfferModal from './acceptOfferModal';
 import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
-function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployeeDetailsLoading }) {
+function OfferLetter({
+	setInformationPage = () => {},
+	data = {},
+	getEmployeeDetails = () => {},
+	getEmployeeDetailsLoading = false,
+}) {
+	const { back } = useRouter();
+
 	const { id, document_url, status, signed_document_url: detail_signed_document_url } = data?.offer_letter || {};
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails, setInformationPage });
@@ -31,7 +39,10 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>OFFER LETTER</div>
 			</div>
@@ -63,6 +74,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 						setShowAcceptModal={setShowAcceptModal}
 						id={id}
 						getEmployeeDetails={getEmployeeDetails}
+						document_url={document_url}
 					/>
 
 				</div>

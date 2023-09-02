@@ -1,5 +1,5 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
-import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoiceRemarks = ({
@@ -20,7 +20,7 @@ const useUpdateInvoiceRemarks = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (error) {
-			Toast.error(getApiError(error?.response?.data));
+			toastApiError(error);
 		}
 	};
 	return { onSubmitRemarks, loading };

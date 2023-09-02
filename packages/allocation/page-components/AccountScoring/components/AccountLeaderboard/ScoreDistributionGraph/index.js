@@ -1,18 +1,23 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
-import data from '../../../constants/get-default-graph-data';
+import getData from '../../../constants/get-default-graph-data';
 
 import styles from './styles.module.css';
 
 function ScoreDistributionGraph(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { graphData } = props;
 
 	if (isEmpty(graphData)) {
 		return null;
 	}
 
-	const newData = data.map((element) => {
+	const data = getData({ t });
+
+	const newData = (data || []).map((element) => {
 		const datum = graphData.find((item) => element.warmth === item.warmth);
 
 		return { ...element, ...(datum && { count: datum.count }) };
@@ -34,7 +39,7 @@ function ScoreDistributionGraph(props) {
 					tickSize       : 0,
 					tickPadding    : 5,
 					tickRotation   : 0,
-					legend         : 'Warmth',
+					legend         : t('allocation:warmth_legend'),
 					legendPosition : 'middle',
 					legendOffset   : 60,
 				}}
@@ -42,7 +47,7 @@ function ScoreDistributionGraph(props) {
 					tickSize       : 0,
 					tickPadding    : 5,
 					tickRotation   : 0,
-					legend         : 'Accounts',
+					legend         : t('allocation:accounts_legend'),
 					legendPosition : 'middle',
 					legendOffset   : -80,
 					tickValues     : 1,

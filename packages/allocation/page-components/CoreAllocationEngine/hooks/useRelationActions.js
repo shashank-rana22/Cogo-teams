@@ -3,13 +3,14 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 import ACTIONS_STATUS_MAPPING from '../constants/relations-actions-status-mapping';
-import TOAST_MESSAGE_MAPPING from '../constants/relations-toast-message-mapping';
+import getToastMessageMapping from '../constants/relations-toast-message-mapping';
 
 const useRelationActions = ({
 	confirmModalState = {},
 	setConfirmModalState = () => {},
 	checkedRowsId = [],
 	onClearSelection = () => {},
+	t = () => {},
 }) => {
 	const apiName =	confirmModalState.type === 'approve_all'
 		? 'relation_bulk_approve'
@@ -17,6 +18,8 @@ const useRelationActions = ({
 
 	const authkey = confirmModalState.type === 'approve_all'
 		? 'post_allocation_relation_bulk_approve' : 'post_allocation_relation_status';
+
+	const toastMessageMapping = getToastMessageMapping({ t });
 
 	const UpdateAllocationRelationsAPI = useAllocationRequest({
 		url    : `/${apiName}`,
@@ -45,8 +48,8 @@ const useRelationActions = ({
 				relationData          : {},
 			}));
 
-			Toast.success(`${TOAST_MESSAGE_MAPPING[confirmModalState.type]} successfully! Please wait 
-			for the changes to be reflected`);
+			Toast.success(`${toastMessageMapping[confirmModalState.type]}${' '}
+			${t('allocation:please_wait_some_time_for_changes_reflected')}`);
 
 			onClearSelection();
 		} catch (error) {

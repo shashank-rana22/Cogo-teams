@@ -1,19 +1,21 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from '../styles.module.css';
 
 function DeleteList() {
+	const { t } = useTranslation(['allocation']);
 	return (
 		<div className={styles.delete_modal_body}>
 			<div>
 				<strong>
-					Are you sure you want to Delete List?
+					{t('allocation:delete_list_heading')}
 					{' '}
 				</strong>
-				The current list will not be available for use once deleted.
+				{t('allocation:delete_list_phrase')}
 			</div>
 			<div style={{ marginTop: '24px' }}>
-				You may Regenerate a new List after deletion.
+				{t('allocation:delete_list_description')}
 			</div>
 		</div>
 	);

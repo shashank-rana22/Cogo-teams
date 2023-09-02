@@ -197,6 +197,18 @@ export const requestColumn = ({
 		id: 'request_date',
 	},
 	{
+		Header   : 'Status',
+		accessor : ({ currentLevel = 0 }) => (
+			<span className={styles.status_level}>
+				Level
+				{' '}
+				{currentLevel}
+				: Pending
+			</span>
+		),
+		id: 'status',
+	},
+	{
 		accessor: (row) => (
 			<AccessorComponent row={row} getIncidentData={getIncidentData} />
 		),

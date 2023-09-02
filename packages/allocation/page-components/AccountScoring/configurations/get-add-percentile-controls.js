@@ -1,46 +1,46 @@
 const MIN = 0;
-const MAX = 90;
+const MAX = 100;
 
-const controls = (item) => {
+const controls = (item, t = () => {}) => {
 	const { id = '', lower_limit = 0, upper_limit = 0, score = 0 } = item || {};
 
 	return ([
 		{
 			name        : `${id}_percentile_from`,
-			label       : 'PERCENTILE FROM',
+			label       : t('allocation:percentile_from'),
 			placeholder : '0',
 			type        : 'number',
-			value       : `${lower_limit}`,
+			value       : lower_limit,
 			rules       : {
-				required : 'Required',
-				validate : (value) => ((value < MIN || value > MAX) ? 'invalid' : true),
+				required : t('allocation:rules_required'),
+				validate : (value) => ((value < MIN || value > MAX) ? t('allocation:rules_validate') : true),
 			},
 			isClearable : true,
 			min         : 0,
-			max         : 90,
+			max         : 100,
 		},
 		{
 			name        : `${id}_percentile_to`,
-			label       : 'PERCENTILE TO',
+			label       : t('allocation:percentile_to'),
 			placeholder : '0',
 			type        : 'number',
-			value       : `${upper_limit}`,
+			value       : upper_limit,
 			rules       : {
-				required : 'Required',
-				validate : (value) => ((value < MIN || value > MAX) ? 'invalid' : true),
+				required : t('allocation:rules_required'),
+				validate : (value) => ((value < MIN || value > MAX) ? t('allocation:rules_validate') : true),
 			},
 			isClearable : true,
 			min         : 0,
-			max         : 90,
+			max         : 100,
 		},
 		{
 			name        : `${id}_bias_score`,
-			label       : 'BIAS SCORE',
+			label       : t('allocation:bias_score'),
 			placeholder : '0',
 			type        : 'number',
 			value       : score,
 			rules       : {
-				required: 'Required',
+				required: t('allocation:rules_required'),
 			},
 			isClearable : true,
 			min         : 0,

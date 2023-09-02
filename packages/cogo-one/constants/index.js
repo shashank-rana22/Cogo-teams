@@ -7,6 +7,10 @@ import {
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
 	IcMVideoCall, IcMVideoCallMute,
+	IcMUp,
+	IcMDown,
+	IcCVerySad,
+	IcCHappy,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -356,6 +360,18 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const RATING_ELEMENTS = {
+	happy: {
+		image : <IcCHappy width={30} height={30} />,
+		arrow : <IcMUp fill="#ee3425" />,
+
+	},
+	sad: {
+		image : <IcCVerySad width={30} height={30} />,
+		arrow : <IcMDown fill="#ee3425" />,
+	},
+};
 
 export const OFFLINE_REASONS_OPTIONS = [
 	{

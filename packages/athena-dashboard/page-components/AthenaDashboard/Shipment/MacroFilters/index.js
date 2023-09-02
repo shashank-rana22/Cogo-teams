@@ -1,22 +1,32 @@
 import { Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
-import controls from '../../../../configurations/Shipment/filter-controls';
+import getControls from '../../../../configurations/Shipment/filter-controls';
 
 import styles from './styles.module.css';
 
-function Filter({ control, handleSubmit, handleClick, loading }) {
+function Filter({
+	control,
+	handleSubmit,
+	handleClick,
+	loading,
+}) {
+	const { t } = useTranslation(['athenaDashboard']);
+
+	const controls = getControls({ t });
+
 	return (
 		<div className={styles.filter_container}>
 			<div className={styles.search_bar}>
 				<InputController
-					placeholder="Enter a product name or a HS Code"
+					placeholder={t('athenaDashboard:hs_code_placeholder')}
 					name="hs_code"
 					control={control}
 				/>
 			</div>
 
-			{controls.map((item) => {
+			{(controls || []).map((item) => {
 				const ele = { ...item };
 
 				return (
@@ -39,7 +49,7 @@ function Filter({ control, handleSubmit, handleClick, loading }) {
 				disabled={loading}
 				style={{ height: '40px' }}
 			>
-				Search
+				{t('athenaDashboard:search_button')}
 			</Button>
 
 		</div>

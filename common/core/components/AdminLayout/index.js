@@ -4,9 +4,11 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
+import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
 import { FIREBASE_CONFIG } from './LockScreen/configurations/firebase-config';
 import Navbar from './Navbar';
@@ -27,6 +29,8 @@ const WHITE_BACKGROUND_MAPPING = [
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
+	const { t } = useTranslation(['common']);
+
 	const {
 		user_data,
 		pathname,
@@ -60,7 +64,7 @@ function AdminLayout({
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
-	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });
+	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys, t });
 
 	const { nav_items = {} } = configs || {};
 
@@ -118,6 +122,7 @@ function AdminLayout({
 				firestore={firestore}
 				inCall={inCall}
 			/>
+			<LeadFeedBackVoiceCallForm />
 		</div>
 	);
 }

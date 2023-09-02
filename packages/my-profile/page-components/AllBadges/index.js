@@ -12,9 +12,9 @@ import MasteryDescription from './MasteryDescription';
 import styles from './styles.module.css';
 
 function AllBadges() {
-	const [modalDetail, setModalDetail] = useState('');
-
 	const router = useRouter();
+
+	const [modalDetail, setModalDetail] = useState('');
 
 	const { query = {} } = router;
 

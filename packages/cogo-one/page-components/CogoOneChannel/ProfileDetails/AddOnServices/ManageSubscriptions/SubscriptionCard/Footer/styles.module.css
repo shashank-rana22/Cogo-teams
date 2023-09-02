@@ -1,0 +1,38 @@
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.align_content_middle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.change_color_on_hover {
+	color: #fff;
+}
+
+.subscription_currency {
+	margin: 0 2px;
+	font-size: 18px;
+}
+
+.rate_per_month_with_currency {
+	margin: 0 4px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.call_to_action {
+	margin: 10px 0;
+}
+
+.active_plan_label {
+	padding: 4px 0;
+	font-weight: 600;
+	color: #abcd62;
+	text-align: center;
+}

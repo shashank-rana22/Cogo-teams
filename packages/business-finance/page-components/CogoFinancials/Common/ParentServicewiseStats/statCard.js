@@ -16,13 +16,14 @@ function StatCard({
 	return (
 		<div
 			key={service}
-			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
+			className={cl`${styles.statscontainer} ${!isMain && styles.child_styles}`}
 			style={{
 				cursor : !isMain ? 'pointer' : null,
-				width  : !isMain ? '47%' : null,
+				width  : !isMain ? '48%' : null,
 			}}
 			role="presentation"
 			onClick={() => setActiveService(service)}
+			data-tour={isMain ? 'parent-service-main' : null}
 		>
 			{!isMain && (
 				<div className={styles.service}>
@@ -35,9 +36,13 @@ function StatCard({
 				style={{
 					flexDirection: isMain ? 'column' : 'row',
 				}}
+				data-tour={!isMain ? 'single-parent-service' : null}
 			>
 				{mappingCards.map((item) => (
-					<div className={cl`${styles.stats} ${isMain && styles.margin}`} key={item.label}>
+					<div
+						className={cl`${styles.stats} ${isMain && styles.margin}`}
+						key={item.label}
+					>
 						<div className={cl`${styles.stathead} ${!isMain && styles.fontlabel}`}>
 							{item.label}
 						</div>

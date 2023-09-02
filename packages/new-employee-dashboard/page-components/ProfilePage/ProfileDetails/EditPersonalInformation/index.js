@@ -15,6 +15,7 @@ const CONTROL_SELECT_TYPE = 'fileUpload';
 const DEFAULT_MOBILE_CODE = '+91';
 
 const PERSONAL_INFO = 'personal_info';
+
 const MOBILE_NUMBER = 'mobile_number';
 const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
@@ -24,7 +25,7 @@ const HIRING_MANAGER = 'hiring_manager_id';
 const ATTENDENCE = 'attendance';
 const LEARNING_INDICATOR = 'learning_indicator';
 const PREDICTIVE_INDEX = 'predictive_index';
-const DEPARTMENT = 'department';
+const ROLE = 'role';
 
 const SOURCE = 'save';
 
@@ -36,9 +37,9 @@ const removeTypeField = (controlItem) => {
 const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth',
 	'personal_email', 'mobile_number', 'passport_size_photo_url'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'role_id', 'date_of_joining',
 	'cogoport_email', 'hiring_manager_id', 'attendance', 'learning_indicator', 'predictive_index',
-	'department',
+	'department_id', 'office_location',
 ];
 
 const ADDITIONAL_DETAILS_MAPPING = ['relation_type',
@@ -101,17 +102,20 @@ const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING
 	</div>
 ));
 
-function PersonalDetails({ data: content, getEmployeeDetails }) {
+function PersonalDetails({ data: content = {}, getEmployeeDetails = () => {}, setShow = () => {} }) {
 	const { handleSubmit, control, formState: { errors }, setValue, watch, getValues } = useForm();
 
 	const controlsvalue = controls({ content });
 
 	const id = content?.detail?.id;
-	const status = content?.detail?.status;
 	const cogo_mail = content?.detail?.cogoport_email;
 	const additional_information_id = content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]?.id;
-
-	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, SOURCE, status });
+	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({
+		id,
+		getEmployeeDetails,
+		SOURCE,
+		setShow,
+	});
 
 	const onSubmit = (values) => {
 		const {
@@ -155,7 +159,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 				cogoport_email,
 			};
 		}
-		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
+		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO, content });
 	};
 
 	useEffect(() => {
@@ -195,7 +199,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			} else if (item?.name === DESIGNATION) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else if (item?.name === HIRING_MANAGER) {
-				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
+				setValue(item.name, content?.detail?.[item?.name]);
 			} else if (item?.name === ATTENDENCE) {
 				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
 					?.attendance));
@@ -205,7 +209,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			} else if (item?.name === PREDICTIVE_INDEX) {
 				setValue(item.name, startCase(content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
 					?.predictive_index));
-			} else if (item?.name === DEPARTMENT) {
+			} else if (item?.name === ROLE) {
 				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
 					?.department));
 			} else {
@@ -218,7 +222,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				<div> Edit Employee details here !</div>
+				<div>Edit Employee details here !</div>
 			</div>
 			<div className={styles.container}>
 				<RenderComponents controlsvalue={controlsvalue} control={control} errors={errors} />

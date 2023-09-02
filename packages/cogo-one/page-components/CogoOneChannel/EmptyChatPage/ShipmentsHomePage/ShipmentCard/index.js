@@ -9,14 +9,17 @@ import styles from './styles.module.css';
 const handleShipmentClick = ({
 	importerExporterPoc = {},
 	setActiveTab = () => {},
+	primaryPocDetails = {},
 }) => {
+	const showActiveUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
+
 	const {
 		id: userId = '',
 		name = '',
 		email = '',
 		mobile_country_code = '',
 		mobile_number = '',
-	} = importerExporterPoc || {};
+	} = showActiveUserChat || {};
 
 	const chatData = {
 		user_id                 : userId,
@@ -42,19 +45,33 @@ function ShipmentCard({
 	setShowPocDetails = () => {},
 	setActiveTab = () => {},
 	setShowBookingNote = () => {},
+	key = '',
+	setShowShipmentChat = () => {},
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
+	mailProps = {},
 }) {
 	const {
 		serial_id = '',
 		importer_exporter_poc: importerExporterPoc = {},
+		primary_poc_details: primaryPocDetails = {},
 	} = shipmentItem;
+
+	const handleShipmentChat = ({ shipmentDetails }) => {
+		setShowShipmentChat(shipmentDetails);
+	};
 
 	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === serial_id) {
 		return (
-			<div className={styles.container}>
+			<div className={styles.container} key={key}>
 				<PocContainer
 					showPocDetails={showPocDetails}
 					setShowPocDetails={setShowPocDetails}
 					setActiveTab={setActiveTab}
+					handleShipmentChat={handleShipmentChat}
+					mailProps={mailProps}
 				/>
 			</div>
 		);
@@ -64,13 +81,19 @@ function ShipmentCard({
 		<div
 			role="presentation"
 			className={styles.container}
-			onClick={() => handleShipmentClick({ importerExporterPoc, setActiveTab })}
+			key={key}
+			onClick={() => handleShipmentClick({ importerExporterPoc, primaryPocDetails, setActiveTab })}
 		>
 			<ShipmentsCard
 				setShowPocDetails={setShowPocDetails}
 				shipmentItem={shipmentItem}
 				type="all_shipments"
 				setShowBookingNote={setShowBookingNote}
+				setShowPopover={setShowPopover}
+				showPopover={showPopover}
+				setShowPocModal={setShowPocModal}
+				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				handleShipmentChat={handleShipmentChat}
 			/>
 		</div>
 	);

@@ -11,6 +11,11 @@
 	}
 }
 
+.heading_label {
+	padding: 20px 0;
+	font-weight: 800;
+}
+
 .sub_navigation {
 	display: flex;
 
