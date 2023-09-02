@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 
 import EmptyState from './EmptyState';
 
-const HOVER_DELAY = 100;
+const HOVER_DELAY = 300;
 const TO_FIXED = 2;
 
 function List({ loading = false, finalList = [], setActiveId = () => {}, originName = '' }) {

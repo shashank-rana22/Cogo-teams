@@ -1,4 +1,4 @@
-import { Select, cl, Loader } from '@cogoport/components';
+import { Select, cl } from '@cogoport/components';
 import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -54,32 +54,22 @@ function SidePanel({
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
-			if (!accuracyLoading) {
+			if (!accuracyLoading && !hasMore) {
 				setPage(page + START_PAGE);
 			}
 		}, TIMEOUT_TIME);
-	}, [accuracyLoading, page, setPage]);
+	}, [accuracyLoading, hasMore, page, setPage]);
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
 			if (page === START_PAGE) {
 				setActiveList([...list]);
 			} else {
-				setActiveList((prev) => {
-					const uniqueSet = new Set(prev);
-					const uniqueItems = list.filter((item) => {
-						if (!uniqueSet.has(item)) {
-							uniqueSet.add(item);
-							return true;
-						}
-						return false;
-					});
-
-					return prev.concat(uniqueItems);
-				});
+				setActiveList((prev) => prev.concat(list));
 			}
 		}
-	}, [list, page, setActiveList]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list, page]);
 
 	return (
 		<>
@@ -128,13 +118,8 @@ function SidePanel({
 					<InfiniteScroll
 						pageStart={1}
 						initialLoad={false}
-						loadMore={hasMore && loadMore}
+						loadMore={loadMore}
 						hasMore={hasMore}
-						loader={accuracyLoading ? (
-							<div className={styles.loading_style}>
-								<Loader />
-							</div>
-						) : null}
 						useWindow={false}
 					>
 						<List
