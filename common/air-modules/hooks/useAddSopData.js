@@ -15,6 +15,7 @@ const useAddSopData = ({
 	trade_partners_details,
 	primary_service,
 	shipment_data,
+	refetch = () => {},
 }) => {
 	let create_payload = {};
 	const apiToCall = api === 'create'
@@ -92,6 +93,7 @@ const useAddSopData = ({
 					Toast.success(' Added Succesfully');
 					setReload(!reload);
 					setSopAddForm(false);
+					refetch();
 				} else {
 					Toast.error('Something went wrong');
 				}

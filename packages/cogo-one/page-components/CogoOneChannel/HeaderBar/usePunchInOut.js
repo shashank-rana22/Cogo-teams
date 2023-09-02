@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPreferences';
 
@@ -31,14 +31,14 @@ function usePunchInOut({
 
 	const lastBreakTime = list?.[GLOBAL_CONSTANTS.zeroth_index]?.break_started_at;
 
-	const shakeButton = () => {
+	const shakeButton = useCallback(() => {
 		setIsShaking(true);
 		const timerFunction = setTimeout(() => {
 			setIsShaking(false);
 		}, BUTTON_SHAKE_DURATION);
 
 		return () => clearTimeout(timerFunction);
-	};
+	}, []);
 
 	const handlePunchIn = (event) => {
 		event.stopPropagation();
