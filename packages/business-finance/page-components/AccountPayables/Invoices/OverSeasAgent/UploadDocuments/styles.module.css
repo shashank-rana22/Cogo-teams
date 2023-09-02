@@ -22,8 +22,6 @@
 .forms {
 	display: flex;
 	flex-flow: row wrap;
-
-	/* align-items: center; */
 	justify-content: space-between;
 	width: 100%;
 	margin-bottom: 60px;
@@ -32,8 +30,6 @@
 .box {
 	display: flex;
 	flex-direction: column;
-
-	/* justify-content: space-between; */
 	width: 49.5%;
 	height: fit-content;
 	padding: 12px 24px;
@@ -54,4 +50,10 @@
 	font-size: 16px;
 	font-weight: 500;
 	border-bottom: 2px solid var(--color-primary-error-red-2);
+}
+
+.msg {
+	margin: 0 6px;
+	font-size: 12px;
+	font-weight: 300;
 }

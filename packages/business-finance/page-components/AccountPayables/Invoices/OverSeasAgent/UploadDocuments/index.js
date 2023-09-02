@@ -102,6 +102,7 @@ function UploadDocuments({ setActive = () => {} }) {
 					<div className={styles.box}>
 						<div className={styles.header}>
 							Upload Other Documents
+							<span className={styles.msg}>(if multiple documents, upload all at Once..)</span>
 							<div className={styles.dash} />
 						</div>
 
