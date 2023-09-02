@@ -2,7 +2,7 @@ import containerSize from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
 import { MODE_OPTIONS } from '../constants/air_commodities_mapping';
-import { SERVICE_TYPE_OPTIONS, RATE_TYPES_OPTIONS } from '../constants/dashboard_filter_controls';
+import { RATE_TYPES_OPTIONS } from '../constants/dashboard_filter_controls';
 
 const controls = [
 	{
@@ -12,14 +12,6 @@ const controls = [
 		span    : 12,
 		label   : 'Rate Type',
 		size    : 'md',
-	},
-	{
-		name    : 'service_type',
-		options : SERVICE_TYPE_OPTIONS,
-		type    : 'select',
-		span    : 12,
-		size    : 'md',
-		label   : 'Service Type',
 	},
 	{
 		name      : 'parent_mode',

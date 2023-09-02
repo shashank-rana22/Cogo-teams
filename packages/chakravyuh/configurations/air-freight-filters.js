@@ -1,15 +1,6 @@
 import { AIR_COMMODITIES, SOURCE_OPTIONS } from '../constants/air_commodities_mapping';
-import { SERVICE_TYPE_OPTIONS } from '../constants/dashboard_filter_controls';
 
 const controls = [
-	{
-		name    : 'service_type',
-		options : SERVICE_TYPE_OPTIONS,
-		type    : 'select',
-		span    : 12,
-		size    : 'md',
-		label   : 'Service Type',
-	},
 	{
 		name      : 'source',
 		type      : 'pills',
