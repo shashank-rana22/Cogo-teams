@@ -1,13 +1,9 @@
 .card_container {
 	position: relative;
 	width: 100%;
-	padding: 4px 4px 4px 8px;
+	padding: 8px 4px 8px 8px;
 	cursor: pointer;
 	border-bottom: 1px solid #e0e0e0;
-
-	/* &:last-child {
-		border-bottom: none;
-	} */
 
 	&:hover {
 		background: #fdfbf6;
@@ -34,7 +30,7 @@
 .header_card {
 	display: flex;
 	width: 100%;
-	padding: 0 10px 0 0;
+	padding: 0 10px 6px 0;
 
 	:global {
 		.ui_avatar_container {
@@ -66,7 +62,6 @@
 
 .subject_container {
 	width: 96%;
-	margin-top: 2px;
 	overflow: hidden;
 	font-size: 13px;
 	font-weight: 500;

@@ -27,6 +27,8 @@ import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
+const ENABLE_SIDE_BAR = ['message', 'voice_call'];
+
 function CogoOne() {
 	const {
 		query: {
@@ -204,8 +206,8 @@ function CogoOne() {
 					) : (
 						<>
 							<div
-								className={activeTab?.tab === 'outlook'
-									? styles.mail_layout : styles.chats_layout}
+								className={ENABLE_SIDE_BAR.includes(activeTab?.tab)
+									? styles.chats_layout : styles.mail_layout}
 							>
 								<Conversations
 									activeTab={activeTab}
@@ -221,7 +223,7 @@ function CogoOne() {
 								/>
 							</div>
 
-							{activeTab?.tab !== 'outlook' && (
+							{ENABLE_SIDE_BAR.includes(activeTab?.tab) && (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}`}
 								>

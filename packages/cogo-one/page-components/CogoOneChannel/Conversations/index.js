@@ -4,9 +4,10 @@ import styles from './styles.module.css';
 import VoiceCall from './VoiceCall';
 
 const CONVERSATION_COMPONENT_MAPPING = {
-	message : MessageComponent,
-	voice   : VoiceCall,
-	outlook : MailConversation,
+	message         : MessageComponent,
+	voice           : VoiceCall,
+	outlook         : MailConversation,
+	firebase_emails : MessageComponent,
 };
 
 function Conversations({
@@ -38,6 +39,18 @@ function Conversations({
 			activeVoiceCard: activeTab?.data || {},
 		},
 		outlook: {
+			mailProps,
+		},
+		firebase_emails: {
+			firestore,
+			activeTab,
+			userId,
+			viewType,
+			setRaiseTicketModal,
+			setActiveRoomLoading,
+			setActiveTab,
+			suggestions,
+			setModalType,
 			mailProps,
 		},
 	};

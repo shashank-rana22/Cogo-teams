@@ -115,6 +115,7 @@ function Header({
 					{!isEmpty(filteredSpectators) && (
 						<Assignes filteredSpectators={filteredSpectators} />
 					)}
+
 					{activeAgentName && (
 						<div className={styles.active_agent}>
 							<AssigneeAvatar
@@ -124,6 +125,7 @@ function Header({
 							/>
 						</div>
 					)}
+
 					<RightButton
 						assignChat={assignChat}
 						openAssignModal={openAssignModal}

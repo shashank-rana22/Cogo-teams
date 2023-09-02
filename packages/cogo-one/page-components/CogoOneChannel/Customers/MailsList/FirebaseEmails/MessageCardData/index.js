@@ -17,7 +17,7 @@ function MessageCardData({
 	item = {},
 	activeTab = {},
 	userId = '',
-	// setActiveMessage = () => {},
+	setActiveMessage = () => {},
 	firestore = {},
 	activeFolder = '',
 }) {
@@ -75,13 +75,7 @@ function MessageCardData({
 	return (
 		<div
 			role="presentation"
-			onClick={() => {
-				// if (source === 'flash_messages') {
-				// 	return;
-				// }
-
-				// setActiveMessage(item);
-			}}
+			onClick={() => setActiveMessage(item)}
 			className={cl`
 						${styles.card_container} 
 						${checkActiveCard ? styles.active_card : ''}
