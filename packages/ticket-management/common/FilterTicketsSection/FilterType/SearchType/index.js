@@ -29,7 +29,7 @@ function SearchType({
 					text: val,
 				}))}
 			/>
-			{!isAdmin &&	(
+			{!isAdmin && (
 				<Select
 					size="sm"
 					placeholder={t('myTickets:spectator_placeholder_text')}
