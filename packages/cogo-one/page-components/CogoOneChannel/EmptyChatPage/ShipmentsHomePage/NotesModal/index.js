@@ -33,7 +33,7 @@ function Header({
 				themeType="accent"
 				onClick={() => setShowForm(true)}
 			>
-				Add Comment
+				Add Notes
 
 			</Button>
 		</div>
