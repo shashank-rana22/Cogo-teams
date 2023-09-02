@@ -1313,8 +1313,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'coe-cancellation_policies',
 					title         : t('common:cancellation_policies'),
-					href          : '/cancellation-policies',
-					as            : '/cancellation-policies',
+					href          : '/v2/cancellation-policies',
+					as            : '/v2/cancellation-policies',
 					type          : 'link',
 					main_apis     : ['list_shipment_cancellation_charges'],
 					possible_apis : apis.shipment_cancellation_policies,
