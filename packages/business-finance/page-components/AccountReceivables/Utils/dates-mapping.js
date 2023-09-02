@@ -7,7 +7,7 @@ const TOTAL_MONTH_COUNT = 11;
 const TOTAL_DATE_COUNT = 31;
 const WEEK_FOCTOR = 7;
 const LAST_WEEK_FOCTOR = 6;
-const datesMapping = (range = '') => {
+const getDateMapping = (range = '') => {
 	const date = new Date();
 	let startDate = date;
 	let endDate = date;
@@ -56,4 +56,4 @@ const datesMapping = (range = '') => {
 	return { startDate, endDate };
 };
 
-export default datesMapping;
+export default getDateMapping;

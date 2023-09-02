@@ -14,14 +14,9 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 	const { totalLedAmount, ledCurrency, totalCount } = totalOutstandingBucket || {};
 
 	return (
-
 		<div className={styles.container}>
 			<div style={{ width: '87%' }}>
-				<div style={{
-					margin : '16px 0px 0px 252px',
-					width  : '74.5%',
-				}}
-				>
+				<div className={styles.stats_lebal}>
 					<div style={{
 						display        : 'flex',
 						justifyContent : 'space-around',

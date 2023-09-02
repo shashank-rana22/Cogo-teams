@@ -25,7 +25,7 @@ function ResponsivePieChart({
 	const [showListView, setShowListView] = useState(true);
 	const [isSortBy, setIsSortBy] = useState('');
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
-	const isEmpty = (data || []).every((el) => el.value === DEFAULT_VALUE);
+	const isEmpty = (data || []).every((el) => el?.value === DEFAULT_VALUE);
 	const sortedData = [...data];
 
 	if (isSortBy === 'asc') {

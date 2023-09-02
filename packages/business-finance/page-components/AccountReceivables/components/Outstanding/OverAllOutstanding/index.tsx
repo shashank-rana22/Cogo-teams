@@ -61,7 +61,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({
 		globalFilters: formFilters,
 	});
-	const { ccCommStats, ccCommLoading } = useGetCcCommunicationStats({
+	const { ccCommStats = [], ccCommLoading = false } = useGetCcCommunicationStats({
 		dateFilter,
 	});
 	const { page, pageLimit } = outStandingFilters || {};

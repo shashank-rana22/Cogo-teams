@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import { DATE_RANGES } from '../../../../../constants/date-range';
 import useOutsideClick from '../../../../../constants/handle-outside-click';
-import datesMapping from '../../../../../Utils/dates-mapping';
+import getDateMapping from '../../../../../Utils/dates-mapping';
 
 import styles from './styles.module.css';
 
@@ -21,7 +21,7 @@ function DatesFilterContent({
 	};
 	const ref = useOutsideClick(() => setOpen(false));
 	useEffect(() => {
-		const min_max = datesMapping(range);
+		const min_max = getDateMapping(range);
 		setDate({ ...min_max });
 	}, [range, setDate]);
 
