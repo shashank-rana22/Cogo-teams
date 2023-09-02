@@ -23,7 +23,7 @@ const useBookShipment = ({
 	const bookShipment = async () => {
 		const params = {
 			id                   : checkout_id,
-			existing_shipment_id : shipment_id,
+			existing_shipment_id : shipment_id || undefined,
 		};
 
 		try {

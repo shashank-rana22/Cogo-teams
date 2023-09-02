@@ -324,7 +324,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis: [
 				'list_spot_searches',
 				'list_checkouts',
-				'list_partners',
 				'list_organizations',
 			],
 			module_type: 'dashboards',
