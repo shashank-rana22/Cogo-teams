@@ -62,11 +62,9 @@ function SidePanel({
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			if (page === START_PAGE) {
-				setActiveList([...list]);
-			} else {
-				setActiveList((prev) => prev.concat(list));
-			}
+			setActiveList(page === START_PAGE ? [...list] : activeList.concat(list));
+		} else if (page === START_PAGE) {
+			setActiveList([]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list, page]);
