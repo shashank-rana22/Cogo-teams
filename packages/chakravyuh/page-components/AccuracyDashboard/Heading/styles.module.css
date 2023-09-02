@@ -65,7 +65,7 @@
 		}
 
 		.leaflet-tile {
-			filter: hue-rotate(45deg) !important;
+			filter: grayscale(1) !important;
 		}
 
 		.leaflet-container {
@@ -109,8 +109,9 @@
 	justify-content: space-between;
 	width: 18px;
 	height: 180px;
-	background: linear-gradient(to top, #edf6f8, #a4d1db, #49a2b6, #2c616d, #0f2024);
+	background: linear-gradient(to top, #ffeacc, #ffc680, #f0883e, #db6d28, #bd561d, #9b4215, #762d0a, #5a1e02, #3d1300);
 	border-radius: 2px;
+	box-shadow: 0 0 8px #a1a1a1;
 
 	p {
 		margin: 0 0 0 28px;

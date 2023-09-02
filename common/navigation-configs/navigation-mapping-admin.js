@@ -1627,25 +1627,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon        : IcCCogoassured,
 			options     : [
 				{
-					key           : 'cogo_assured-fcl_freight',
-					title         : t('common:fcl_freight'),
-					href          : '/cogo-assured/fcl_freight',
-					as            : '/cogo-assured/fcl_freight',
-					type          : 'link',
-					possible_apis : apis.cogo_assured,
-					main_apis     : [],
-				},
-				{
-					key           : 'cogo_assured-fcl_freight_local',
-					title         : t('common:fcl_freight_local'),
-					href          : '/cogo-assured/fcl_freight_local',
-					as            : '/cogo-assured/fcl_freight_local',
-					type          : 'link',
-					possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-					main_apis: [],
-				},
-				{
 					key           : 'cogo_assured-haulage_freight',
 					title         : t('common:haulage_freight'),
 					href          : '/cogo-assured/haulage_freight',
@@ -1798,8 +1779,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
 					possible_apis : apis.convenience_rate,
-
-					module_type: 'crm',
+					module_type   : 'crm',
 				},
 				{
 					key           : 'transaction_setting-payment_modes_and_methods',
@@ -1843,8 +1823,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:commodity_cluster'),
-					href  : '/supply-tools/commodity-clusters',
-					as    : '/supply-tools/commodity-clusters',
+					href  : '/v2/supply-tools/commodity-clusters',
+					as    : '/v2/supply-tools/commodity-clusters',
 				},
 				{
 					title : t('common:fcl_freight_rate_extension'),
@@ -1853,8 +1833,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:detention_demurrage'),
-					href  : '/supply-tools/detention-demurrage',
-					as    : '/supply-tools/detention-demurrage',
+					href  : '/v2/supply-tools/detention-demurrage',
+					as    : '/v2/supply-tools/detention-demurrage',
 				},
 			],
 			module_type: 'dashboards',
@@ -2507,13 +2487,6 @@ const navigationMapping = ({ t = () => {} }) => {
 					title         : t('common:pricing_trends'),
 					href          : '/v2/pricing/trends',
 					as            : '/v2/pricing/trends',
-					possible_apis : apis.pricing_trends,
-				},
-				{
-					key           : 'chakravyuh-feedback',
-					title         : t('common:feedback_dashboard'),
-					href          : '/v2/chakravyuh/feedback-dashboard',
-					as            : '/v2/chakravyuh/feedback-dashboard',
 					possible_apis : apis.pricing_trends,
 				},
 				{
