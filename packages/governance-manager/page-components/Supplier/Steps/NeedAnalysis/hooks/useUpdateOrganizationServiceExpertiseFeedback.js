@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
 function useUpdateOrganizationServiceExpertiseFeedback({
@@ -5,7 +6,7 @@ function useUpdateOrganizationServiceExpertiseFeedback({
 	feedback, service_requirement, setShow,
 	getOrganizationExpertiseSuppliers,
 }) {
-	const FIFTY = 50;
+	const FIFTY = GLOBAL_CONSTANTS.fifty;
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_service_expertise_parameter',

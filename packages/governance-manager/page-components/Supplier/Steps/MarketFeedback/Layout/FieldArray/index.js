@@ -1,12 +1,13 @@
 /* eslint-disable import/no-cycle */
 import { useFieldArray } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTranslation } from 'next-i18next';
 
 import EachField from './EachField';
 import styles from './styles.module.css';
 
 function FieldArrayController({ control, name, controls, error = [] }) {
-	const ONE = 1;
+	const ONE = GLOBAL_CONSTANTS.one;
 	const { fields, append } = useFieldArray({ control, name });
 	const { t } = useTranslation(['governanceManager']);
 	return (

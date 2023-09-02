@@ -20,19 +20,18 @@ function SupplierEvaluationData({ t, setShow, organization_id, setStatus, id, ge
 					data={filterData(organizationEvaluationDetails)}
 				/>
 				<div className={styles.flex}>
-					Will They provide BL delivery via Courier or Runner
-					{' '}
+					{t('supplier_page_supplier_evaluation_table_will_they_provide_bl_delivery_text')}
 					{organizationEvaluation?.act_basis_consignee_mbl ? <IcCFtick /> : <IcCFcrossInCircle />}
 				</div>
 				<div className={styles.flex}>
-					Agress to Act Basic Consignee MBL with Us?
+					{t('supplier_page_supplier_evaluation_table_agrees_to_act_text')}
 					{' '}
 					{organizationEvaluation?.provide_bl ? <IcCFtick /> : <IcCFcrossInCircle />}
 				</div>
 
 				<div className={styles.feedback}>
 					<div className={styles.feedback_heading}>
-						Feedback
+						{t('supplier_page_supplier_evaluation_table_feedback_label')}
 					</div>
 					{organizationEvaluation?.feedback}
 				</div>

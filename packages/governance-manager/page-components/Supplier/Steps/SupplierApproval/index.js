@@ -76,7 +76,7 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 						report({ t, service_type })?.map((item) => (
 							<Item
 								t={t}
-								key={item}
+								key={item?.type}
 								title={item?.title}
 								verify={verify}
 								setVerify={setVerify}

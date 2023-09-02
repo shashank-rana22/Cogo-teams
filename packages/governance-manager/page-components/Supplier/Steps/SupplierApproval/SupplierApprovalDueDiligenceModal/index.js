@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import useUpdateOrganizationDueDiligence from '../hooks/ModalHooks/useUpdateDueDiligenceStatus';
@@ -6,26 +7,27 @@ import useGetOrganizationDueDiligence from '../hooks/useGetOrganizationDuedilige
 
 import styles from './styles.module.css';
 import {
-	comapany_detail_objects,
-	director_detail_objects,
-	financial_detail_objects,
-	generic_detail_objects,
-	legal_detail_objects,
-	shareholder_detail_objects,
+	comapanyDetailObjects,
+	directorDetailObjects,
+	financialDetailObjects,
+	genericDetailObjects,
+	legalDetailObjects,
+	shareholderDetailObjects,
 } from './utils/supplier-approval-keys-values';
 
-const ZERO = 0;
-const ONE = 1;
-const TWO = 2;
+const ZERO = GLOBAL_CONSTANTS.zeroth_index;
+const ONE = GLOBAL_CONSTANTS.one;
+const TWO = GLOBAL_CONSTANTS.two;
 
 function SupplierApprovalDueDiligenceModal({
 	open, setOpen,
 	getOrganizationSupplierVerificationDetails,
 	organization_id,
+	t,
 }) {
 	const {
 		data,
-	} = useGetOrganizationDueDiligence({ organization_id });
+	} = useGetOrganizationDueDiligence({ organization_id, t });
 
 	const { updateOrganizationDueDiligenceStatus } = useUpdateOrganizationDueDiligence({
 		id              : data?.organization_due_diligence?.id,
@@ -66,12 +68,12 @@ function SupplierApprovalDueDiligenceModal({
 							<>
 								<div className={styles.parent}>
 									<div className={styles.heading}>
-										Company Details
+										{t('supplier_page_supplier_approval_due_diligence_modal_company_details_label')}
 									</div>
 									<div className="styles_main_parent__ed_a_">
 										<div className={styles.container}>
 											{
-                                comapany_detail_objects({ data }).map((object) => (
+                                comapanyDetailObjects({ data, t })?.map((object) => (
 	<div key={object} className={styles.head_container}>
 		<div>
 			{object?.key}
@@ -88,12 +90,14 @@ function SupplierApprovalDueDiligenceModal({
 
 								<div className={styles.parent}>
 									<div className={styles.heading}>
-										Financial Details
+										{t(
+											'supplier_page_supplier_approval_due_diligence_modal_finencial_details',
+										)}
 									</div>
 									<div className="styles_main_parent__ed_a_">
 										<div className={styles.container}>
 											{
-                                financial_detail_objects({ data }).map((object) => (
+                                financialDetailObjects({ data, t })?.map((object) => (
 	<div key={object} className={styles.head_container}>
 		<div>
 			{object?.key}
@@ -110,12 +114,14 @@ function SupplierApprovalDueDiligenceModal({
 
 								<div className={styles.parent}>
 									<div className={styles.heading}>
-										Other Directorship(S) Companies
+										{t(
+											'supplier_page_supplier_approval_due_diligence_modal_other_directorship',
+										)}
 									</div>
 									<div className="styles_main_parent__ed_a_">
 										<div className={styles.container}>
 											{
-                                director_detail_objects({ data }).map((object) => (
+                                directorDetailObjects({ data, t })?.map((object) => (
 	<div key={object} className={styles.head_container}>
 		<div>
 			{object?.key}
@@ -139,12 +145,16 @@ function SupplierApprovalDueDiligenceModal({
 							<>
 								<div className={styles.parent}>
 									<div className={styles.heading}>
-										Generic Details
+
+										{t(
+											'supplier_page_supplier_approval_due_diligence_modal_other_directorship',
+										)}
+
 									</div>
 									<div className="styles_main_parent__ed_a_">
 										<div className={styles.container}>
 											{
-                                generic_detail_objects({ data }).map((object) => (
+                                genericDetailObjects({ data, t })?.map((object) => (
 	<div key={object} className={styles.head_container}>
 		<div>
 			{object?.key}
@@ -161,12 +171,15 @@ function SupplierApprovalDueDiligenceModal({
 
 								<div className={styles.parent}>
 									<div className={styles.heading}>
-										Shareholder & Management Details
+										{t(
+											'supplier_page_supplier_approval_due_diligence_modal_share_mgmt_label',
+										)}
+
 									</div>
 									<div className="styles_main_parent__ed_a_">
 										<div className={styles.container}>
 											{
-                                shareholder_detail_objects({ data }).map((object) => (
+                                shareholderDetailObjects({ data, t })?.map((object) => (
 	<div key={object} className={styles.head_container}>
 		<div>
 			{object?.key}
@@ -183,12 +196,15 @@ function SupplierApprovalDueDiligenceModal({
 
 								<div className={styles.parent}>
 									<div className={styles.heading}>
-										Course of Legal Cases
+										{
+											t('supplier_page_supplier_approval_due_diligence_modal_course_label')
+										}
+
 									</div>
 									<div className="styles_main_parent__ed_a_">
 										<div className={styles.container}>
 											{
-                                legal_detail_objects({ data }).map((object) => (
+                                legalDetailObjects({ data, t })?.map((object) => (
 	<div key={object} className={styles.head_container}>
 		<div>
 			{object?.key}
@@ -211,16 +227,34 @@ function SupplierApprovalDueDiligenceModal({
 				{
 						state === ONE
 						&& (
-							<Button onClick={nextClick}>Next</Button>
+							<Button onClick={nextClick}>
+								{
+											t('supplier_page_supplier_approval_due_diligence_modal_next_btn_label')
+										}
+
+							</Button>
 						)
 				}
 				{
 						state === TWO
 						&& (
 							<>
-								<Button onClick={previousClick}>Go Back</Button>
-								<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>Verify</Button>
-								<Button onClick={handleReject}>Reject</Button>
+								<Button onClick={previousClick}>
+									{
+											t('supplier_page_supplier_approval_due_diligence_modal_go_back_btn_label')
+									}
+								</Button>
+								<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>
+									{
+											t('supplier_page_supplier_approval_due_diligence_modal_verify_btn_label')
+									}
+								</Button>
+								<Button onClick={handleReject}>
+									{' '}
+									{
+											t('supplier_page_supplier_approval_due_diligence_modal_reject_btn_label')
+									}
+								</Button>
 							</>
 						)
 					}

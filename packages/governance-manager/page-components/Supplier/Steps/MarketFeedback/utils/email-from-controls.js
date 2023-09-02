@@ -32,7 +32,7 @@ export	const controls = ({ t }) => [
 			{
 				controlType : 'input',
 				name        : 'user_name',
-				label       : 'name',
+				label       : t('supplier_page_market_feedback_email_controls_user_name_label'),
 				placeholder : t('supplier_page_market_feedback_email_controls_user_name_label'),
 				rules       : { required: t('supplier_page_market_feedback_email_controls_user_name_required') },
 			},

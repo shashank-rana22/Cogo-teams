@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -16,8 +17,8 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 	const { push } = useRouter();
 	const [step, setStep] = useState(
 		{
-			governance_manager : 1,
-			governance_lead    : 2,
+			governance_manager : GLOBAL_CONSTANTS.one,
+			governance_lead    : GLOBAL_CONSTANTS.two,
 		}[role],
 	);
 	const { data, id, getOrganizationContract } = useGetOrganizationContract({ organization_id, service_type, step });

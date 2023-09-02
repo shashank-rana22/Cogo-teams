@@ -1,4 +1,5 @@
 import { Button, Modal, Table, Radio, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import useGetOrganizationServiceExpertises from '../hooks/useGetOrganizationServiceExpertises';
@@ -7,7 +8,7 @@ import useUpdateOrganizationServiceExpertiseFeedback from '../hooks/useUpdateOrg
 import styles from './styles.module.css';
 
 function EvaluateModal({ t, show, setShow, getOrganizationExpertiseSuppliers }) {
-	const FIFTY = 50;
+	const FIFTY = GLOBAL_CONSTANTS.fifty;
 	const [feedback, setFeedback] = useState('');
 	const [checkbox, setCheckbox] = useState('');
 	const { updateOrganizationServiceExpertiseFeedback } = useUpdateOrganizationServiceExpertiseFeedback({

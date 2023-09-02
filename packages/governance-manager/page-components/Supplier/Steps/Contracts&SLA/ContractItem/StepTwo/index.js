@@ -1,4 +1,5 @@
 import { Button, Input, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import useUpdateOrganizationContract from '../../hooks/useUpdateOrganizationContract';
@@ -13,8 +14,8 @@ function StepTwo({
 	setNegotiationIds,
 	getOrganizationContract,
 }) {
-	const ZERO = 0;
-	const ONE = 1;
+	const ZERO = GLOBAL_CONSTANTS.zeroth_index;
+	const ONE = GLOBAL_CONSTANTS.one;
 	const [value, setValue] = useState(item?.variables_details?.[ZERO]?.updated_value);
 	const { updateOrganizationContract } = useUpdateOrganizationContract({
 		item,
@@ -73,7 +74,6 @@ function StepTwo({
 								width       : '90px',
 								marginRight : '24px',
 							}}
-							placeholder=" "
 							disabled
 							value={item?.variables_details?.[ZERO]?.default_value}
 						/>
@@ -89,7 +89,6 @@ function StepTwo({
 								width       : '90px',
 								marginRight : '24px',
 							}}
-							placeholder=" "
 							disabled
 							value={item?.variables_details?.[ZERO]?.updated_value}
 						/>

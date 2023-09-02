@@ -30,9 +30,15 @@ export const chaColumns = ({ t, setShow, service_type, isForApproval }) => {
 	} else {
 		columns.push(
 			{
-				id       : 'service_requirement',
-				Header   : () => (<div style={{ textAlign: 'center' }}>Service Requirement</div>),
-				accessor : (row) => (
+				id     : 'service_requirement',
+				Header : () => (
+					<div style={{ textAlign: 'center' }}>
+						{
+							t('supplier_page_need_analysis_table_cha_service_requirement')
+						}
+					</div>
+				),
+				accessor: (row) => (
 					<div style={{ textAlign: 'center' }}>
 						{row?.service_requirement === 'yes' ? <IcCFtick /> : <IcCFcrossInCircle />}
 					</div>
@@ -46,7 +52,9 @@ export const chaColumns = ({ t, setShow, service_type, isForApproval }) => {
 					<div>
 						<Tooltip content={row?.feedback}>
 							<Button size="sm" themeType="secondary">
-								View
+								{
+									t('supplier_page_need_analysis_table_cha_view_btn')
+								}
 							</Button>
 						</Tooltip>
 					</div>

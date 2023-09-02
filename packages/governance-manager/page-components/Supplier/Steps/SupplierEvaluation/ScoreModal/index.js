@@ -1,4 +1,5 @@
 import { Button, Modal, Input, Textarea, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useEffect } from 'react';
 
 import useUpdateOrganizationEvaluationTask from '../hooks/useUpdateOrganizationEvaluationTask';
@@ -6,7 +7,7 @@ import useUpdateOrganizationEvaluationTask from '../hooks/useUpdateOrganizationE
 import styles from './styles.module.css';
 
 function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails }) {
-	const ZERO = 0;
+	const ZERO = GLOBAL_CONSTANTS.zeroth_index;
 	const [yourScore, setYourScore] = useState(ZERO);
 	const [reason, setReason] = useState('');
 

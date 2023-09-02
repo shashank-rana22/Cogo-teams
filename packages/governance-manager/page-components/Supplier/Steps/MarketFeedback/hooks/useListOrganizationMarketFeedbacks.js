@@ -8,15 +8,19 @@ const useListOrganizationMarketFeedbacks = ({ organization_id, service_id }) => 
 	}, { manual: true });
 
 	const listOrganizationMarketFeedbacks = async () => {
-		await trigger({
-			params: {
-				filters: {
-					organization_id,
-					service_id,
-					status: ['active', 'draft'],
+		try {
+			await trigger({
+				params: {
+					filters: {
+						organization_id,
+						service_id,
+						status: ['active', 'draft'],
+					},
 				},
-			},
-		});
+			});
+		} catch (err) {
+			console.log(err);
+		}
 	};
 	useEffect(() => {
 		listOrganizationMarketFeedbacks();

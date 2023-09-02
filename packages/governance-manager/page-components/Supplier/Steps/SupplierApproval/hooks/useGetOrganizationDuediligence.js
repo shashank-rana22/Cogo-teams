@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetOrganizationDueDiligence({ organization_id }) {
+function useGetOrganizationDueDiligence({ organization_id, t }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_organization_due_diligence_report',
@@ -16,7 +16,7 @@ function useGetOrganizationDueDiligence({ organization_id }) {
 				},
 			});
 		} catch (err) {
-			Toast.error('Due diligence Report Not Present.');
+			Toast.error(t('supplier_page_supplier_approval_modal_due_diligence_not_present_label'));
 			console.log(err);
 		}
 	};

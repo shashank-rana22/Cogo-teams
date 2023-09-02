@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
@@ -11,7 +12,12 @@ import Layout from './Layout';
 import styles from './styles.module.css';
 import { controls, defaultValues } from './utils/email-from-controls';
 
-function MarketFeedback({ t, organization_id, service, getOrganizationService, id:service_id }) {
+function MarketFeedback({
+	t, organization_id,
+	service,
+	getOrganizationService,
+	id:service_id,
+}) {
 	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
 		approval_stage: 'organization_evaluation',
@@ -42,7 +48,7 @@ function MarketFeedback({ t, organization_id, service, getOrganizationService, i
 	});
 
 	useEffect(() => {
-		if (data && data.length >= 1) {
+		if (data && data.length >= GLOBAL_CONSTANTS.one) {
 			setValue('emails', data?.map((item) => ({
 				user_role  : item?.user_role,
 				user_name  : item?.user_name,
@@ -65,7 +71,9 @@ function MarketFeedback({ t, organization_id, service, getOrganizationService, i
 					{t('supplier_page_market_feedback_save_and_do_it_later')}
 				</Button>
 
-				<Button onClick={handleSubmit(createMarketFeedbackActive)}>Submit & Next</Button>
+				<Button onClick={handleSubmit(createMarketFeedbackActive)}>
+					{t('supplier_page_market_feedback_save_and_next')}
+				</Button>
 			</div>
 		</div>
 	);

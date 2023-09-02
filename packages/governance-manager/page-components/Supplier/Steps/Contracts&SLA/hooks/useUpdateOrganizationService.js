@@ -1,13 +1,12 @@
 import { useRequest } from '@cogoport/request';
 
-// this will get called in step 1
 function useUpdateOrganizationService({ organization_id, approval_stage, service, getOrganizationService }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_service',
 	}, { manual: true });
 
-	const UpdateOrganizationService = async () => {
+	const updateOrganizationService = async () => {
 		try {
 			await trigger({
 				params: {
@@ -24,7 +23,7 @@ function useUpdateOrganizationService({ organization_id, approval_stage, service
 	return {
 		data,
 		loading,
-		UpdateOrganizationService,
+		updateOrganizationService,
 	};
 }
 

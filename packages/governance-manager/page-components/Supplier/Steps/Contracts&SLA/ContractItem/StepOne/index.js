@@ -1,4 +1,5 @@
 import { Button, Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -6,8 +7,8 @@ import useUpdateOrganizationContract from '../../hooks/useUpdateOrganizationCont
 import styles from '../../styles.module.css';
 
 function StepOne({ t, item, index, id, getOrganizationContract }) {
-	const ZERO = 0;
-	const ONE = 1;
+	const ZERO = GLOBAL_CONSTANTS.zeroth_index;
+	const ONE = GLOBAL_CONSTANTS.one;
 	const [value, setValue] = useState(item?.variables_details?.[ZERO]?.updated_value);
 	const { updateOrganizationContract } = useUpdateOrganizationContract({
 		item,
@@ -38,7 +39,7 @@ function StepOne({ t, item, index, id, getOrganizationContract }) {
 								value={value}
 								onChange={setValue}
 								style={{ marginLeft: '12px', height: '20px', width: '140px' }}
-								placeholder=" "
+								placeholder="Enter Value"
 								disabled={item?.state === 'approved'}
 							/>
 							<Button

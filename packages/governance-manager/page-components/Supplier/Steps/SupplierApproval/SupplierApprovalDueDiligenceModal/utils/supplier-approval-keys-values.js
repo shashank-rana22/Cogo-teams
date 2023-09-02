@@ -1,126 +1,111 @@
-const ZERO = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-export const comapany_detail_objects = ({ data }) => [{
-	key   : 'Company Name',
+const ZERO = GLOBAL_CONSTANTS.zeroth_index;
+
+export const comapanyDetailObjects = ({ data, t }) => [{
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_company_name_label'),
 	value : data?.data?.statutoryRegistration?.lei?.[ZERO].name,
 }, {
-	key   : 'Corporate Indentification Number (CIN)',
-	// value : 'CIN1234413409',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_corporate_indentification_label'),
 	value : data?.a,
 }, {
-	key   : 'E-Filling Status',
-	// value : 'Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_e_billing_status_label'),
 	value : data?.a,
 }, {
-	key   : 'Director Name',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_director_name_label'),
 	value : data?.data?.statutoryRegistration?.gst?.[ZERO].legalName,
 }, {
-	key   : 'LEI Code',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_lei_code_label'),
 	value : data?.data?.statutoryRegistration?.lei?.[ZERO].lei,
 }, {
-	key   : 'LEI Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_lei_status_label'),
 	value : data?.data?.statutoryRegistration?.lei?.[ZERO].entityStatus,
 },
 ];
 
-export const financial_detail_objects = ({ data }) => [{
-	key   : 'Net Revenue',
-	// value : 'INR 30,00,000.24',
+export const financialDetailObjects = ({ data, t }) => [{
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_net_revenue_label'),
 	value : data?.a,
 }, {
-	key   : 'Long Term Borrowings',
-	// value : 'INR 30,00,000.24',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_long_term_borrowings_label'),
 	value : data?.a,
 }, {
-	key   : 'Deferred Tax Liabilities Net',
-	// value : 'INR 30,00,000.24',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_deferred_tax_liabilies_label'),
 	value : data?.a,
 }, {
-	key   : 'Reserves',
-	// value : 'INR 30,00,000.24',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_reserves_label'),
 	value : data?.a,
 }, {
-	key   : 'EBITDA',
-	// value : 'INR 30,00,000.24',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_ebitda_label'),
 	value : data?.a,
 }, {
-	key   : 'Current Ratio',
-	// value : '1.2',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_current_ratio_label'),
 	value : data?.a,
 }, {
-	key   : 'D/E Ratio',
-	// value : '1.4',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_de_ratio_label'),
 	value : data?.a,
 },
 ];
 
-export const director_detail_objects = ({ data }) => [{
-	key   : 'Company Name',
-	// value : 'Salman Khan Cab Services',
+export const directorDetailObjects = ({ data, t }) => [{
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_company_name_label'),
 	value : data?.a,
 }, {
-	key   : 'Corporate Indentification Number (CIN)',
-	// value : 'CIN1234413409',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_corporate_indentification_label'),
 	value : data?.a,
 }, {
-	key   : 'E-Filling Status',
-	// value : 'Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_e_billing_status_label'),
 	value : data?.a,
 },
 ];
 
-export const generic_detail_objects = ({ data }) => [{
-	key   : 'Company Registered Since',
-	// value : '2016',
+export const genericDetailObjects = ({ data, t }) => [{
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_company_registered_since_label'),
 	value : data?.data?.statutoryRegistration?.gst?.[ZERO]?.dateOfRegistration,
 }, {
-	key   : 'Charge ID',
-	// value : 'CIN1234413409',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_charge_id_label'),
 	value : data?.a,
 }, {
-	key   : 'Status',
-	// value : 'Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_status_label'),
 	value : data?.a,
 }, {
-	key   : 'Date',
-	// value : 'Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_date_label'),
 	value : data?.a,
 }, {
-	key   : 'Holder Name',
-	// value : 'Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_holder_name_label'),
 	value : data?.a,
 },
 ];
 
-export const shareholder_detail_objects = ({ data }) => [{
-	key   : 'Financial Year',
+export const shareholderDetailObjects = ({ data, t }) => [{
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_finencial_year_label'),
 	value : data?.a,
 }, {
-	key   : 'Total No. of Equity Shares',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_total_no_of_equity_shares_label'),
 	value : data?.a,
 }, {
-	key   : 'Total No. of Preference Shares',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_total_no_of_preference_shares_label'),
 	value : data?.a,
 }, {
-	key   : 'No. of Promoter Shareholders',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_no_of_promoter_shareholders_label'),
 	value : data?.a,
 }, {
-	key   : 'No. of Public Shareholders',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_no_of_public_shareholders_label'),
 	value : data?.a,
 }, {
-	key   : 'Total No. of Shareholders',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_total_no_of_shareholders_label'),
 	value : data?.a,
 },
 ];
 
-export const legal_detail_objects = ({ data }) => [{
-	key   : 'Case Type',
+export const legalDetailObjects = ({ data, t }) => [{
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_case_type_label'),
 	value : data?.a,
 }, {
-	key   : 'Filed by or Filed Against',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_filed_by_or_filed_against_label'),
 	value : data?.a,
 }, {
-	key   : 'Case Status',
+	key   : t('supplier_page_supplier_approval_modal_due_diligence_case_status_label'),
 	value : data?.a,
 },
 ];

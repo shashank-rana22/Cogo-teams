@@ -37,9 +37,13 @@ export const cfsColumns = ({ t, setShow, service_type, isForApproval }) => {
 	} else {
 		columns.push(
 			{
-				id       : 'service_requirement',
-				Header   : () => (<div style={{ textAlign: 'center' }}>Service Requirement</div>),
-				accessor : (row) => (
+				id     : 'service_requirement',
+				Header : () => (
+					<div style={{ textAlign: 'center' }}>
+						{t('supplier_page_need_analysis_table_cfs_service_requirement')}
+					</div>
+				),
+				accessor: (row) => (
 					<div style={{ textAlign: 'center' }}>
 						{row?.service_requirement === 'yes' ? <IcCFtick /> : <IcCFcrossInCircle />}
 					</div>

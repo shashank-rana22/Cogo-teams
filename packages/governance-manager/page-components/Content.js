@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -11,8 +12,8 @@ import StatusBar from './StatusBar';
 function Content() {
 	const { t } = useTranslation(['governanceManager']);
 
-	const GOVERNANCE_MANAGER_ROLE_ID = '31fc7e90-84e0-4ffc-828c-ceaa87e5fa4f';
-	const GOVERNANCE_LEAD_ROLE_ID = 'ebafce31-75ef-4865-9060-775574e9606f';
+	const GOVERNANCE_MANAGER_ROLE_ID = GLOBAL_CONSTANTS.governance_manager_role_id;
+	const GOVERNANCE_LEAD_ROLE_ID = GLOBAL_CONSTANTS.governancee_lead_role_id;
 	const { id:roleId } = useSelector((s) => s?.profile?.auth_role_data);
 	const [role] = useState(
 		{
@@ -21,7 +22,7 @@ function Content() {
 		}[roleId],
 	);
 
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(GLOBAL_CONSTANTS.one);
 	const [activeTab, setActiveTab] = useState(
 		role === 'governance_manager'
 			? 'need_analysis' : 'organization_approval',

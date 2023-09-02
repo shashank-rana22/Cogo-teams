@@ -13,29 +13,37 @@ const useCreateOrganizationMarketFeedback = ({
 	}, { manual: true });
 
 	const createMarketFeedbackActive = async (values) => {
-		await trigger({
-			params: {
-				service_id,
-				service_type,
-				users  : values?.emails,
-				status : 'active',
-				organization_id,
-			},
-		});
-		await updateOrganizationService();
+		try {
+			await trigger({
+				params: {
+					service_id,
+					service_type,
+					users  : values?.emails,
+					status : 'active',
+					organization_id,
+				},
+			});
+			await updateOrganizationService();
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const createMarketFeedbackDraft = async (values) => {
-		await trigger({
-			params: {
-				service_id,
-				service_type,
-				users  : values?.emails,
-				status : 'draft',
-				organization_id,
-			},
-		});
-		Toast.success('Saved');
+		try {
+			await trigger({
+				params: {
+					service_id,
+					service_type,
+					users  : values?.emails,
+					status : 'draft',
+					organization_id,
+				},
+			});
+			Toast.success('Saved');
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return {

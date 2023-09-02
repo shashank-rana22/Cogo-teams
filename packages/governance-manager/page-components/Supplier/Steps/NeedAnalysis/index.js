@@ -1,4 +1,5 @@
 import { Button, Pagination, Placeholder, Table } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
@@ -9,7 +10,7 @@ import styles from './styles.module.css';
 import { columns } from './utils/need-analysis-utils';
 
 function NeedAnalysis({ t, organization_id, service, getOrganizationService, service_type, id }) {
-	const ONE = 1;
+	const ONE = GLOBAL_CONSTANTS.one;
 	const [currentPage, setCurrentPage] = useState(ONE);
 
 	const {
