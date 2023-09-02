@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import useGetCustomerOutstanding from '../../../hooks/useGetCustomerOutstanding';
-import OutstandingList from '../OutstandingList';
+import OutstandingList from '../OverAllOutstanding/OutstandingList';
 
 import styles from './styles.module.css';
 

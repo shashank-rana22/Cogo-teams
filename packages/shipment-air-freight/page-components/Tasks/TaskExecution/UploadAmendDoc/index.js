@@ -29,7 +29,10 @@ function UploadAmendDoc({
 		refetch();
 	};
 
-	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
+	const {
+		updateDocument = () => {},
+		taskUpdateLoading = false,
+	} = useUpdateShipmentDocuments({ refetch: newRefetch });
 
 	const allControls = controls(task) || [];
 
@@ -60,10 +63,10 @@ function UploadAmendDoc({
 			pending_task_id     : task.id,
 			data                : { ...documentPayloadData, status: 'uploaded' },
 			document_url        : values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]
-				?.url?.url?.finalUrl || values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.finalUrl,
+				?.url?.url?.finalUrl || values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url,
 			documents: (values.documents || []).map((documentData) => ({
 				file_name    : documentData?.url?.fileName || documentData?.name,
-				document_url : documentData?.url?.url?.finalUrl || documentData?.url?.finalUrl,
+				document_url : documentData?.url?.url || documentData?.url,
 				data         : {
 					...documentData,
 					status   : 'uploaded',
@@ -90,7 +93,7 @@ function UploadAmendDoc({
 			<div className={styles.button_wrap}>
 				<Button
 					onClick={handleSubmit(handleSubmitFinal)}
-					disabled={loading}
+					disabled={loading || taskUpdateLoading}
 				>
 					Submit
 				</Button>

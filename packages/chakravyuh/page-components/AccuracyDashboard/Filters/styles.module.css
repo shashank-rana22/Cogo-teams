@@ -164,3 +164,16 @@
 		margin-right: 30px;
 	}
 }
+
+.flex {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+
+	:global {
+		.react-datepicker__input-container {
+			width: 120px;
+		}
+	}
+}
