@@ -1,5 +1,5 @@
-import { Button, CheckboxGroup, Input, Modal } from '@cogoport/components';
-import React, { useRef } from 'react';
+import { Button, Checkbox, Modal } from '@cogoport/components';
+import React from 'react';
 
 import { CLOSE_REASON_OPTIONS } from '../../../../helpers/constants';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
@@ -13,7 +13,6 @@ function CloseModal({
 	getListCoverage = () => {},
 	filter = {},
 }) {
-	const inputRef = useRef(null);
 	const {
 		loading,
 		deleteRateJob,
@@ -22,28 +21,27 @@ function CloseModal({
 	} = useDeleteRateJob({ service: filter?.service, data });
 
 	const handleSubmit = async () => {
-		const otherReason = inputRef?.current?.value;
-		await deleteRateJob(otherReason);
+		if (!checkboxValue) return;
+		await deleteRateJob();
 		setShowModal(false);
 		getListCoverage();
 	};
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="lg">
 			<Modal.Header title="Please select reason for closing" />
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+			<Modal.Body style={{ maxHeight: '300px', minHeight: '200px' }}>
 				<p className={styles.bold_text} style={{ marginLeft: '20px' }}>Reasons</p>
-				<CheckboxGroup
-					options={CLOSE_REASON_OPTIONS}
-					onChange={setCheckboxValue}
-					value={checkboxValue}
-					style={{ display: 'flex', flexDirection: 'column' }}
-				/>
-				{checkboxValue.includes('other') && (
-					<div className={styles.col}>
-						<p className={styles.bold_text}>Other Reason</p>
-						<Input ref={inputRef} />
-					</div>
-				)}
+				<div>
+					{CLOSE_REASON_OPTIONS.map((reason) => (
+						<div style={{ display: 'flex', alignItems: 'center' }} key={reason}>
+							<Checkbox
+								checked={checkboxValue === reason?.value}
+								onChange={() => { setCheckboxValue(reason?.value); }}
+							/>
+							{reason?.label}
+						</div>
+					))}
+				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<div>

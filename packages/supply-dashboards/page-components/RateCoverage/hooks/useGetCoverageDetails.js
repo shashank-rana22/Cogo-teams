@@ -26,21 +26,24 @@ const useGetCoverageDetails = () => {
 	}, { manual: true });
 
 	const getCoverageDetails = useCallback(async () => {
-		const { releventToMeValue, ...restFilters } = filter;
+		const { page, releventToMeValue, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {
-				FINAL_FILTERS[ele] = restFilters[ele];
+				if (ele === 'origin_port_id' && (filter?.service === 'air_freight')) {
+					FINAL_FILTERS.origin_airport_id = restFilters[ele];
+				} else if (ele === 'destination_port_id' && (filter?.service === 'air_freight')) {
+					FINAL_FILTERS.destination_airport_id = restFilters[ele];
+				} else FINAL_FILTERS[ele] = restFilters[ele];
 			}
 		});
 
 		try {
 			await trigger({
 				params: {
-					filters : { ...FINAL_FILTERS },
-					user_id : filter?.releventToMeValue ? user_id : undefined,
+					filters: { ...FINAL_FILTERS, user_id: releventToMeValue ? user_id : undefined },
 				},
 			});
 		} catch (err) {

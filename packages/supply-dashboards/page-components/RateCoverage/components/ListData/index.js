@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
 
+const DEFAULT_PAGE_VALUE = 1;
+
 function ListData({
 	data = {},
 	list = [],
@@ -37,7 +39,10 @@ function ListData({
 						key={card}
 						tabIndex="0"
 						role="button"
-						onClick={() => { setSource(card); }}
+						onClick={() => {
+							setSource(card);
+							setPage(DEFAULT_PAGE_VALUE);
+						}}
 					>
 						<Card
 							detail={CARDS_MAPPING[card]}

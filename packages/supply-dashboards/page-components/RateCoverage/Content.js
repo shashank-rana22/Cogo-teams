@@ -24,7 +24,8 @@ function RateCoverageContent() {
 		data:listData,
 		loading:listLoading,
 		getListCoverage,
-		source, setSource,
+		source,
+		setSource,
 		page,
 		setPage,
 	} = useGetListCoverage(filter);

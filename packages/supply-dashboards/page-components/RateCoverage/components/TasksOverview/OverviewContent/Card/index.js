@@ -1,4 +1,4 @@
-import { Placeholder, Toast } from '@cogoport/components';
+import { Placeholder, Loader } from '@cogoport/components';
 import { IcMArrowDown, IcMDownload } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -12,22 +12,16 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 	const { title = 'Previous Backlogs', color = '#000' } = detail;
 	const { loading, data:csvData, getCsvFile } = useGetCsvFile(filter, activeCard);
 
-	const handleDownload = async () => {
-		await getCsvFile();
-		if (!loading) {
-			if (csvData) {
-				window.open(csvData?.url);
-			} else {
-				Toast.error('download failed');
-			}
-		}
+	const handleDownload = () => {
+		getCsvFile();
+		window.open(csvData?.url);
 	};
 
 	return (
 		<div>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
-				{activeCard === detail?.status && <IcMDownload onClick={handleDownload} />}
+				{activeCard === detail?.status && ((loading) ? <Loader /> : <IcMDownload onClick={handleDownload} />) }
 			</div>
 			<div className={styles.hr_line} />
 			<div className={styles.row}>

@@ -1,4 +1,4 @@
-import { IcMArrowLeft } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import OverviewContent from './OverviewContent';
@@ -20,6 +20,9 @@ function TasksOverview({ data = {}, statsLoading = false }) {
 				{showWeekData
 					? <WeeklyOverviewContent data={data} statsLoading={statsLoading} />
 					: <OverviewContent data={data} statsLoading={statsLoading} />}
+			</div>
+			<div className={styles.swipe_button}>
+				<IcMArrowRight onClick={handleClick} />
 			</div>
 		</div>
 	);

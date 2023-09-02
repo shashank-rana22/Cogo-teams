@@ -15,7 +15,7 @@ const CONSTANT_SIXTEEN = 16;
 // const CONSTANT_SEVEN = 7;
 
 function Filter({ getCoverageDetails = () => {}, filter = {}, setFilter = () => {}, getListCoverage = () => {} }) {
-	const type = (filter?.service === 'air_freight') ? ['country', 'airport'] : ['country', 'trade', 'seaport'];
+	const type = (filter?.service === 'air_freight') ? 'airport' : 'seaport';
 	const operator_type = (filter?.service === 'air_freight') ? 'air_line' : 'shipping_line';
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type } },
@@ -74,29 +74,29 @@ function Filter({ getCoverageDetails = () => {}, filter = {}, setFilter = () => 
 						options={serviceOptions}
 						value={filter?.service}
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, service: value, page: 1 }));
+							setFilter({ service: value, status: 'pending', releventToMeValue: true });
 						}}
 					/>
 				</div>
 				<div className={styles.filter_option_width}>
 					<p>Origin</p>
 					<Select
-						placeholder="Country/Port Pair"
+						placeholder="Select"
 						{...originLocationOptions}
-						value={filter?.origin_location_id}
+						value={filter?.origin_port_id}
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, origin_location_id: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, origin_port_id: value, page: 1 }));
 						}}
 					/>
 				</div>
 				<div className={styles.filter_option_width}>
 					<p>Destination</p>
 					<Select
-						placeholder="Country/Port Pair"
+						placeholder="Select"
 						{...destinationLocationOptions}
-						value={filter?.destination_location_id}
+						value={filter?.destination_port_id}
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, destination_location_id: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, destination_port_id: value, page: 1 }));
 						}}
 					/>
 				</div>

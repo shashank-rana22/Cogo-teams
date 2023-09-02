@@ -12,26 +12,19 @@ const useDeleteRateJob = ({ service = 'fcl_freight', data = {} }) => {
 
 	const endPoint = API_NAME[service];
 
-	const [checkboxValue, setCheckboxValue] = useState([]);
+	const [checkboxValue, setCheckboxValue] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : endPoint,
 		method : 'POST',
 	}, { manual: true });
 
-	const deleteRateJob = useCallback(async (otherReason) => {
-		let closing_remarks = [];
-		if (checkboxValue) {
-			closing_remarks = [...checkboxValue];
-		}
-		if (otherReason) {
-			closing_remarks = [...closing_remarks, otherReason];
-		}
+	const deleteRateJob = useCallback(async () => {
 		try {
 			await trigger({
 				data: {
 					id,
-					closing_remarks,
+					closing_remarks: checkboxValue,
 				},
 			});
 		} catch (err) {

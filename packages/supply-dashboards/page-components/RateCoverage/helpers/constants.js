@@ -48,7 +48,7 @@ export const CLOSE_REASON_OPTIONS = [
 	{ label: 'Shipping/Airline not serviceable', value: 'not_serviceable' },
 	{ label: 'Rate not available', value: 'rate_not_available' },
 	{ label: 'No change in rate', value: 'no_change_in_rate' },
-	{ label: 'Other reason', value: 'other' },
+	// { label: 'Other reason', value: 'other' },
 ];
 export const serviceOptions = [
 	{
