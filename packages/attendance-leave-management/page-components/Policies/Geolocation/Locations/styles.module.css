@@ -15,7 +15,6 @@
 
 .branches_container {
 	display: flex;
-	gap: 16px;
 	align-items: flex-start;
 	align-self: stretch;
 
@@ -23,6 +22,10 @@
 		flex-wrap: wrap;
 		width: 100%;
 	}
+}
+
+.branches_container > :not(:last-child) {
+	margin-right: 16px;
 }
 
 .location {
@@ -36,14 +39,16 @@
 
 .arrow_section {
 	display: flex;
-	gap: 6px;
 	align-items: flex-start;
+}
+
+.arrow_section > :not(:last-child) {
+	margin-right: 6px;
 }
 
 .card_content {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
 	align-items: flex-start;
 	justify-content: center;
 }
@@ -51,7 +56,6 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
 	align-items: flex-start;
 	align-self: stretch;
 	width: 100%;
@@ -67,18 +71,24 @@
 
 .below_text {
 	display: flex;
-	gap: 8px;
 	align-items: center;
 	margin-right: 10px;
+}
+
+.below_text > :not(:last-child) {
+	margin-right: 18px;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
 	align-items: flex-start;
 	width: 100%;
 	padding: 16px 12px;
 	background: #f9f9f9;
 	border-radius: 16px;
+}
+
+.container > :not(:last-child) {
+	margin-bottom: 6px;
 }

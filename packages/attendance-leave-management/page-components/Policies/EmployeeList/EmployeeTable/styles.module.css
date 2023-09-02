@@ -7,17 +7,6 @@
 	border-radius: 6px;
 }
 
-.pill {
-	display: flex;
-	gap: 6px;
-	align-items: center;
-}
-
-.editContainer {
-	display: flex;
-	gap: 6px;
-}
-
 .footer {
 	display: flex;
 	flex-shrink: 0;

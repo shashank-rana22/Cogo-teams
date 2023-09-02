@@ -2,12 +2,15 @@
 	display: flex;
 	flex: 1 0 0;
 	flex-direction: column;
-	gap: 16px;
 	align-items: flex-start;
 	width: 100%;
 	padding: 16px 12px;
 	background: #fff;
 	border-radius: 16px;
+}
+
+.card > :not(:last-child) {
+	margin-bottom: 16px;
 }
 
 .header {
@@ -26,12 +29,6 @@
 	line-height: 150%;
 	color: #221f20;
 	text-align: center;
-}
-
-.selected {
-	display: flex;
-	gap: 8px;
-	align-items: center;
 }
 
 .num_selected {
@@ -57,11 +54,14 @@
 .emplist_header {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
 	align-items: flex-start;
 	align-self: stretch;
 	justify-content: center;
 	padding: 12px;
+}
+
+.emplist_header > :not(:last-child) {
+	margin-bottom: 16px;
 }
 
 .emp_heading {
@@ -87,7 +87,6 @@
 .selection_options {
 	display: flex;
 	flex: 1 0 0;
-	gap: 8px;
 	align-items: center;
 }
 

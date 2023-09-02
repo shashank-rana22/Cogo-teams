@@ -87,6 +87,7 @@ function AttendanceStats({ selectMonth = {}, executeScroll = () => {} }) {
 			</div>
 			<div className={styles.leave_team_stats}>
 				<LeaveStats value={value} />
+				<div className={styles.gap} />
 				<TeamStats teamStats={team_stats} loading={loading} />
 			</div>
 		</div>

@@ -1,8 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import Manage from '../Manage/Manage';
-
+import Manage from './Manage/Manage';
 import styles from './styles.module.css';
 
 function GeoTabs() {

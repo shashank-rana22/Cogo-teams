@@ -17,7 +17,6 @@
 .design {
 	display: flex;
 	flex: 1 0 0;
-	gap: 12px;
 	align-items: flex-start;
 
 	@media screen and (max-width: 768px) {
@@ -28,9 +27,16 @@
 	}
 }
 
+.design > :not(:last-child) {
+	margin-right: 24px;
+
+	@media (max-width: 1024px) {
+		margin-right: 12px;
+	}
+}
+
 .img {
 	display: flex;
-	gap: 8px;
 	align-items: center;
 	justify-content: center;
 	padding: 8px;
@@ -68,7 +74,6 @@
 
 .leave_details {
 	display: flex;
-	gap: 8px;
 	align-items: center;
 }
 
@@ -79,11 +84,14 @@
 
 .yes_no {
 	display: flex;
-	gap: 12px;
 	align-items: center;
 	align-self: stretch;
 	justify-content: flex-end;
 	margin-top: 12px;
+}
+
+.yes_no > :not(:last-child) {
+	margin-right: 12px;
 }
 
 .deny {
@@ -93,9 +101,12 @@
 
 .reject {
 	display: flex;
-	gap: 2px;
 	align-items: center;
 	padding: 7px 12px;
+}
+
+.reject > :not(:last-child) {
+	margin-right: 2px;
 }
 
 .rej_content {
@@ -115,10 +126,14 @@
 
 .accept {
 	display: flex;
-	gap: 2px;
 	align-items: center;
 	padding: 7px 12px;
 }
+
+.accept > :not(:last-child) {
+	margin-right: 2px;
+}
+
 
 .acc_content {
 	font-size: 12px;
@@ -132,7 +147,6 @@
 
 .pending {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 	align-self: center;
 	padding: 4px 8px;

@@ -39,7 +39,6 @@
 
 .attendance_status {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 	width: 25%;
 	height: 100%;
@@ -56,6 +55,7 @@
 .attendance_dot {
 	width: 8px;
 	height: 8px;
+	margin-right: 4px;
 	border-radius: 50%;
 }
 
