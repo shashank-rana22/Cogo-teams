@@ -15,7 +15,7 @@ function StepTwo({
 }) {
 	const ZERO = 0;
 	const ONE = 1;
-	const [value, setValue] = useState(item?.variables_details?.[ZERO]?.updated_value);
+	const [value, setValue] = useState(item?.variable_details?.[ZERO]?.updated_value);
 	const { updateOrganizationContract } = useUpdateOrganizationContract({
 		item,
 		id,
@@ -58,7 +58,7 @@ function StepTwo({
 				<div className={styles.term_content}>
 					{item?.display_content}
 				</div>
-				{item?.variables_details?.[ZERO] && (
+				{item?.variable_details?.[ZERO] && (
 					<div className={styles.update}>
 
 						<span className={styles.icon}>
@@ -75,7 +75,7 @@ function StepTwo({
 							}}
 							placeholder=" "
 							disabled
-							value={item?.variables_details?.[ZERO]?.default_value}
+							value={item?.variable_details?.[ZERO]?.default_value}
 						/>
 						<span className={styles.icon}>
 							{t('supplier_page_contract_sla_step2_updated_label')}
@@ -91,7 +91,7 @@ function StepTwo({
 							}}
 							placeholder=" "
 							disabled
-							value={item?.variables_details?.[ZERO]?.updated_value}
+							value={item?.variable_details?.[ZERO]?.updated_value}
 						/>
 
 						<Button
