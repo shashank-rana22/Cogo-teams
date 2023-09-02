@@ -38,9 +38,10 @@ function Item(props) {
 		const asyncKey = props?.optionsListKey;
 
 		const asyncFields = getAsyncFields(asyncKey) || {};
+		console.log(asyncKey, asyncFields, '???????___');
 
 		const finalParams = props?.params || asyncFields?.defaultParams;
-
+		console.log(finalParams, 'asyncKey1234');
 		if (Object.keys(asyncFields)?.includes('defaultParams')) { delete asyncFields?.defaultParams; }
 
 		newProps = {

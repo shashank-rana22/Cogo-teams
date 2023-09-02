@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-const fclControls = ({ data }) => [
+const fclControls = ({ data, containerSizes, containerTypes }) => [
 	{
 		label         : 'Service Provider Details',
 		span          : 12,
@@ -9,7 +9,7 @@ const fclControls = ({ data }) => [
 	{
 		name           : 'service_provider_id',
 		placeholder    : 'Service Provider',
-		type           : 'creatable-select',
+		type           : 'select',
 		className      : 'primary lg',
 		optionsListKey : 'verified-service-providers',
 		defaultOptions : true,
@@ -31,13 +31,19 @@ const fclControls = ({ data }) => [
 		placeholder    : 'Rate Provided by user',
 		type           : 'select',
 		className      : 'primary lg',
-		optionsListKey : 'organization-users',
+		optionsListKey : 'organization-user',
+		defaultOptions : true,
 		isClearable    : true,
 		span           : 4,
-		// showForScope   : ['partner'],
+		showForScope   : ['partner'],
 		valueKey       : 'user_id',
 		showIfMissing  : true,
-		rules          : { required: 'This is required' },
+		params         : {
+			filters: {
+				// Organization_id
+			},
+		},
+		// rules          : { required: 'This is required' },
 	},
 	{
 		name           : 'shipping_line_id',
@@ -109,26 +115,26 @@ const fclControls = ({ data }) => [
 		showOnlyLabel : true,
 	},
 	{
-		name           : 'container_type',
-		type           : 'select',
-		span           : 3,
-		className      : 'primary lg',
-		value          : data?.container_type || 'standard',
-		// disabled       : data?.container_type,
-		placeholder    : 'Container Type',
-		rules          : { required: 'This is required' },
-		optionsListKey : 'container-types',
+		name        : 'container_type',
+		type        : 'select',
+		span        : 3,
+		className   : 'primary lg',
+		value       : data?.container_type || 'standard',
+		disabled    : data?.container_type,
+		placeholder : 'Container Type',
+		rules       : { required: 'This is required' },
+		options     : containerTypes,
 	},
 	{
-		name           : 'container_size',
-		type           : 'select',
-		span           : 3,
-		value          : data?.container_size || '20',
-		// disabled       : data?.container_size,
-		className      : 'primary lg',
-		placeholder    : 'Container Size',
-		optionsListKey : 'container-sizes',
-		rules          : { required: 'This is required' },
+		name        : 'container_size',
+		type        : 'select',
+		span        : 3,
+		value       : data?.container_size || '20',
+		disabled    : data?.container_size,
+		className   : 'primary lg',
+		placeholder : 'Container Size',
+		options     : containerSizes,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name          : 'commodity',
@@ -182,13 +188,24 @@ const fclControls = ({ data }) => [
 		showOnlyLabel : true,
 	},
 	{
-		name        : 'validity',
-		type        : 'datepicker',
-		span        : 3,
-		pickerType  : 'datepicker',
-		placeholder : 'Date Validty',
-		minDate     : new Date(),
-		rules       : {
+		name           : 'validity_start',
+		type           : 'datepicker',
+		withTimePicker : true,
+		span           : 2,
+		placeholder    : 'Validity Start',
+		minDate        : new Date(),
+		rules          : {
+			required: 'Validity End date is required',
+		},
+	},
+	{
+		name           : 'validity_end',
+		type           : 'datepicker',
+		withTimePicker : true,
+		span           : 2,
+		placeholder    : 'Validity End',
+		minDate        : new Date(),
+		rules          : {
 			required: 'Validity End date is required',
 		},
 	},
@@ -334,7 +351,7 @@ const fclControls = ({ data }) => [
 				valueKey    : 'code',
 				placeholder : 'Charge Name',
 				className   : 'primary lg',
-				rules       : { required: 'This is required' },
+				// rules       : { required: 'This is required' },
 			},
 			{
 				name        : 'unit',
@@ -342,7 +359,6 @@ const fclControls = ({ data }) => [
 				type        : 'select',
 				className   : 'primary lg',
 				placeholder : 'Unit',
-				rules       : { required: 'This is required' },
 			},
 			{
 				name           : 'currency',
@@ -352,7 +368,6 @@ const fclControls = ({ data }) => [
 				className      : 'primary lg',
 				optionsListKey : 'currencies',
 				showOptional   : false,
-				rules          : { required: 'This is required' },
 			},
 			{
 				name         : 'price',
@@ -361,7 +376,6 @@ const fclControls = ({ data }) => [
 				showOptional : false,
 				className    : 'primary lg',
 				placeholder  : 'Amount',
-				rules        : { required: 'This is required' },
 			},
 			{
 				name         : 'market_price',
@@ -401,7 +415,6 @@ const fclControls = ({ data }) => [
 				span         : 3,
 				showOptional : false,
 				className    : 'primary lg',
-				rules        : { required: 'This is required', min: 1 },
 			},
 			{
 				name         : 'upper_limit',
@@ -410,7 +423,6 @@ const fclControls = ({ data }) => [
 				placeholder  : 'Upper Limit',
 				showOptional : false,
 				className    : 'primary lg',
-				rules        : { required: 'This is required', min: 1 },
 			},
 			{
 				name           : 'currency',
@@ -420,7 +432,6 @@ const fclControls = ({ data }) => [
 				span           : 3,
 				showOptional   : false,
 				className      : 'primary lg',
-				rules          : { required: 'This is required' },
 			},
 			{
 				name         : 'price',
@@ -429,7 +440,6 @@ const fclControls = ({ data }) => [
 				span         : 2,
 				showOptional : false,
 				className    : 'primary lg',
-				rules        : { required: 'This is required' },
 			},
 		],
 	},

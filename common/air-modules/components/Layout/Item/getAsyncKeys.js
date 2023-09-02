@@ -133,6 +133,14 @@ const OPTIONS = {
 		defaultOptions : true,
 		isSearchable   : true,
 	},
+	'organization-user': {
+		valueKey       : 'id',
+		labelKey       : 'name',
+		asyncKey       : 'organization_users',
+		defaultParams  : {},
+		defaultOptions : true,
+		isSearchable   : true,
+	},
 	'partner-addresses': {
 		valueKey       : 'id',
 		labelKey       : 'name',
