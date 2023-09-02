@@ -13,8 +13,6 @@ import SupplierApprovalDueDiligenceModal from './SupplierApprovalDueDiligenceMod
 import SupplierApprovalModal from './SupplierApprovalModal';
 import { report } from './utils/report';
 
-const FOUR = 4;
-
 function SupplierApproval({ t, id, organization_id, service_type, getOrganizationService, role }) {
 	const [verify, setVerify] = useState({
 		need_analysis_report           : null,
@@ -75,7 +73,7 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 				</div>
 				<div className={styles.container}>
 					{
-						report({ t })?.map((item) => (
+						report({ t, service_type })?.map((item) => (
 							<Item
 								t={t}
 								key={item}
@@ -115,7 +113,7 @@ function SupplierApproval({ t, id, organization_id, service_type, getOrganizatio
 											}}
 											disabled={Object.values(verify)
 												?.filter((i) => i === 'verified'
-													|| i === 'rejected').length !== FOUR}
+													|| i === 'rejected').length !== report({ t, service_type }).length}
 										>
 											{t('supplier_page_supplier_approval_submit_button_label')}
 										</Button>

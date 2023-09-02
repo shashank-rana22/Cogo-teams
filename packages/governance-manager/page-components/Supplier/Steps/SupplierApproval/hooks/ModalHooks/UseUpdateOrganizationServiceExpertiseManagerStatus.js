@@ -8,7 +8,7 @@ function useUpdateOrganizationServiceExpertiseManagerStatus({
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_organization_service_expertise_manager_status',
+		url    : '/update_organization_service_expertise_verification_status',
 	}, { manual: true });
 
 	const updateOrganizationServiceExpertiseManagerStatus = async ({ verification_status }) => {

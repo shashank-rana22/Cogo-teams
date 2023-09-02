@@ -75,7 +75,7 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'update_organization_service_expertise_manager_status',
+		api          : 'update_organization_service_expertise_verification_status',
 		access_type  : 'private',
 		service_name : 'organization',
 	},

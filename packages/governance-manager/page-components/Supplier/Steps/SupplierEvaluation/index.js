@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { Table, Toggle, Textarea, Button } from '@cogoport/components';
+import { Table, Textarea, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -16,8 +16,6 @@ import { columns, filterData } from './utils/supplier-evaluation-utils';
 function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganizationService, service }) {
 	const [show, setShow] = useState('');
 	const [feedback, setFeedback] = useState('');
-	const [provideBl, setProvideBl] = useState(false);
-	const [basisConsignee, setBasisConsignee] = useState(false);
 
 	const { push } = useRouter();
 
@@ -36,8 +34,6 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 		organization_id,
 		id,
 		feedback,
-		provideBl,
-		basisConsignee,
 		updateOrganizationService,
 	});
 
@@ -49,27 +45,6 @@ function SupplierEvaluation({ t, organization_id, id, setStatus, getOrganization
 					<div className={styles.middle_left}>
 						{organizationEvaluationDetails
 						&& <Table columns={columns({ t, setShow })} data={filterData(organizationEvaluationDetails)} />}
-					</div>
-					<div className={styles.lower_left}>
-						<div className={styles.lower_left_data}>
-							{t('supplier_page_supplier_evaluation_table_bl_delivery')}
-							<Toggle
-								onChange={() => { setProvideBl(!provideBl); }}
-								name="a2"
-								size="md"
-								disabled={false}
-							/>
-						</div>
-						<div className={styles.lower_left_data}>
-							{t('supplier_page_supplier_evaluation_table_basic_consignee_mbl')}
-							<Toggle
-								onChange={() => { setBasisConsignee(!basisConsignee); }}
-								name="a2"
-								size="md"
-								disabled={false}
-							/>
-						</div>
-
 					</div>
 				</div>
 				<div className={styles.right}>

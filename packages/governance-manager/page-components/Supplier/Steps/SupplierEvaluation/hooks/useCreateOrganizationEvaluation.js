@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 
 function useCreateOrganizationEvaluation({
-	id, organization_id, feedback, provideBl, basisConsignee,
+	id, organization_id, feedback,
 	updateOrganizationService,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
@@ -15,9 +15,7 @@ function useCreateOrganizationEvaluation({
 				params: {
 					feedback,
 					organization_id,
-					organization_service_id : id,
-					provide_bl              : provideBl,
-					act_basis_consignee_mbl : basisConsignee,
+					organization_service_id: id,
 					status,
 				},
 			});

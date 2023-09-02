@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -15,6 +16,7 @@ function useGetOrganizationDueDiligence({ organization_id }) {
 				},
 			});
 		} catch (err) {
+			Toast.error('Due diligence Report Not Present.');
 			console.log(err);
 		}
 	};

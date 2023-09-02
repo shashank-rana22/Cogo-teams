@@ -11,9 +11,9 @@ function useUpdateOrganizationDueDiligenceStatus({
 		url    : '/update_organization_due_diligence_report',
 	}, { manual: true });
 
-	const UpdateOrganizationDueDiligenceStatus = async ({ verification_status }) => {
+	const updateOrganizationDueDiligenceStatus = async ({ verification_status }) => {
 		try {
-			if (!organization_due_diligence_id || !organization_id) { return; }
+			if (!id || !organization_id) { return; }
 			await trigger({
 				params: {
 					id,
@@ -30,7 +30,7 @@ function useUpdateOrganizationDueDiligenceStatus({
 	return {
 		data,
 		loading,
-		UpdateOrganizationDueDiligenceStatus,
+		updateOrganizationDueDiligenceStatus,
 	};
 }
 
