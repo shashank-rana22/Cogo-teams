@@ -41,37 +41,54 @@ function Route({ detail = {}, scheduleData = {}, isCogoAssured = false, rateCard
 
 	const { port_code: destinationPortCode = '' } = destination || {};
 
+	const originMainPort = originMainPortCode || originPortCode;
+	const destinationMainPort = destinationMainPortCode || destinationPortCode;
+
+	let destinationPort = '';
+
+	let originPort = '';
+
+	if (origin_main_port) {
+		originPort = originPortCode;
+	}
+
+	if (destination_main_port) {
+		destinationPort = destinationPortCode;
+	}
+
 	return (
 		<div className={styles.container}>
 			<div
 				className={styles.location_name}
 				style={isCogoAssured ? { margin: 'auto 0px' } : { marginTop: '24px' }}
 			>
-				{originPortCode}
+				{originPort}
 			</div>
 
-			<div
-				style={{
-					display     : 'flex',
-					alignItems  : 'center',
-					marginLeft  : 8,
-					marginRight : 8,
-					...(!isCogoAssured && { marginTop: 16 }),
-				}}
-			>
-				<div className={styles.circle} />
-				<div className={styles.dotted_line} />
-			</div>
+			{origin_main_port ? (
+				<div
+					style={{
+						display     : 'flex',
+						alignItems  : 'center',
+						marginLeft  : 8,
+						marginRight : 8,
+						...(!isCogoAssured && { marginTop: 16 }),
+					}}
+				>
+					<div className={styles.circle} />
+					<div className={styles.dotted_line} />
+				</div>
+			) : null}
 
 			<div>
 				{!isCogoAssured ? (
 					<div className={styles.location_name_group}>
 						<div className={styles.location_name}>
-							{originMainPortCode}
+							{originMainPort}
 						</div>
 
 						<div className={styles.location_name}>
-							{destinationMainPortCode}
+							{destinationMainPort}
 						</div>
 					</div>
 				) : null}
@@ -79,7 +96,7 @@ function Route({ detail = {}, scheduleData = {}, isCogoAssured = false, rateCard
 				<div className={styles.location_name_group}>
 					<div className={styles.origin}>
 						<div className={styles.location_code}>
-							{!isCogoAssured ? scheduleData.departure : originMainPortCode}
+							{!isCogoAssured ? scheduleData.departure : originMainPort}
 						</div>
 					</div>
 
@@ -116,30 +133,32 @@ function Route({ detail = {}, scheduleData = {}, isCogoAssured = false, rateCard
 
 					<div className={styles.destination}>
 						<div className={styles.location_code}>
-							{!isCogoAssured ? scheduleData.arrival : destinationMainPortCode}
+							{!isCogoAssured ? scheduleData.arrival : destinationMainPort}
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div
-				style={{
-					display     : 'flex',
-					alignItems  : 'center',
-					marginLeft  : 8,
-					marginRight : 8,
-					...(!isCogoAssured && { marginTop: 16 }),
-				}}
-			>
-				<div className={styles.dotted_line} />
-				<div className={styles.circle} />
-			</div>
+			{destination_main_port ? (
+				<div
+					style={{
+						display     : 'flex',
+						alignItems  : 'center',
+						marginLeft  : 8,
+						marginRight : 8,
+						...(!isCogoAssured && { marginTop: 16 }),
+					}}
+				>
+					<div className={styles.dotted_line} />
+					<div className={styles.circle} />
+				</div>
+			) : null}
 
 			<div
 				className={styles.location_name}
 				style={isCogoAssured ? { margin: 'auto 0px' } : { marginTop: '24px' }}
 			>
-				{destinationPortCode}
+				{destinationPort}
 			</div>
 		</div>
 	);

@@ -4,7 +4,6 @@
 	padding: 6px 0;
 
 	&.rate_card {
-		margin-top: 12px;
 		background: rgb(254 243 233);
 	}
 }
