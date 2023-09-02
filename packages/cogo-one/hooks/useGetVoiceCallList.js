@@ -13,7 +13,7 @@ const getPayload = ({ pagination = 1, appliedFilters = {}, searchQuery = '' }) =
 			agent_id : appliedFilters?.agent || undefined,
 			q        : searchQuery || undefined,
 		},
-		cogo_one_missed_call_count_required: true,
+		missed_call_count_required: true,
 	},
 });
 

@@ -3,7 +3,9 @@ import { useEffect, useCallback } from 'react';
 
 const getPayload = () => ({
 	params: {
-		only_total_missed_call_count_required: true,
+		additional_data_required  : false,
+		pagination_data_required  : false,
+		missed_call_stat_required : true,
 	},
 });
 
