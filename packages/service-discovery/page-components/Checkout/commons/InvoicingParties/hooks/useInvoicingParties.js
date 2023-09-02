@@ -1,8 +1,10 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
-import useGetPaymentModes from './hooks/useGetPaymentModes';
+import useGetPaymentModes from './useGetPaymentModes';
 
 const formatSavedServicesInvoiceTo = ({ services }) => {
 	const TRADE_TYPE_MAPPING = {
@@ -82,9 +84,13 @@ const useInvoicingParties = ({
 	);
 
 	const getCheckoutInvoices = () => {
-		trigger({
-			params: { filters: { checkout_id: detail.id, status: 'active' } },
-		});
+		try {
+			trigger({
+				params: { filters: { checkout_id: detail.id, status: 'active' } },
+			});
+		} catch (error) {
+			Toast.error(getApiErrorString(error.response?.data));
+		}
 	};
 
 	useEffect(() => {

@@ -15,6 +15,9 @@ function List({
 	api = '',
 	stats = [],
 	placement = 'center',
+	organization = {},
+	createSearch = () => {},
+	createSearchLoading = false,
 	...rest
 }) {
 	const [serviceType, setServiceType] = useState(() => (service_type || 'fcl_freight'));
@@ -73,6 +76,9 @@ function List({
 					setFilters={setFilters}
 					heading={heading}
 					placement={placement}
+					organization={organization}
+					createSearchLoading={createSearchLoading}
+					createSearch={createSearch}
 				/>
 			</div>
 		</div>

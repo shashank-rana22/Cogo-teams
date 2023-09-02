@@ -56,7 +56,6 @@ function BookingProof({
 			<div className={cl`${styles.container} ${file && styles.uploaded}`}>
 				<FileUploader
 					onChange={(value) => setFile(value?.finalUrl || value)}
-					onlyURLOnChange
 					value={file}
 					drag
 					defaultValues={booking_proof}

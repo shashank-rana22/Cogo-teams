@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -7,90 +8,18 @@ import { useEffect, useRef, useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 import handleTimer from '../../utils/handleTimer';
-import OTPLayout from '../WhatsappNoVerificationModal/WhatsappVerification/OTPLayout';
 
 import CogoPoint from './CogoPoint';
 import domesticServices from './domestic-services.json';
 import styles from './styles.module.css';
 import TotalCost from './TotalCost';
 import useHandleBookingConfirmationFooter from './useHandleBookingConfirmationFooter';
+import getButtonLabel from './utils/getButtonLabel';
+import getDisabledCondition from './utils/getDisabledCondition';
 
 const SECOND_TO_MILLISECOND = 1000;
 
 const OTP_LENGTH = 4;
-
-const getButtonLabel = ({
-	checkoutMethod,
-	booking_status,
-	bookingConfirmationMode,
-}) => {
-	if (
-		checkoutMethod === 'controlled_checkout'
-		&& booking_status === 'pending_approval'
-	) {
-		return 'Sent For Approval, Please wait...';
-	}
-
-	if (
-		checkoutMethod === 'controlled_checkout'
-		&& booking_status === 'rejected'
-	) {
-		return 'This Booking has been Rejected';
-	}
-
-	if (checkoutMethod === 'controlled_checkout') {
-		return 'Send for Approval';
-	}
-
-	if (bookingConfirmationMode === 'mobile_otp') {
-		return 'Send OTP For Approval';
-	}
-
-	if (bookingConfirmationMode === 'whatsapp') {
-		return 'Get Confirmation on Whatsapp';
-	}
-
-	return 'Place Booking';
-};
-
-const getDisabledCondition = ({
-	checkoutMethod,
-	booking_status,
-	manager_approval_proof,
-	isControlBookingDetailsFilled,
-	bookingConfirmationMode = '',
-	detail = {},
-}) => {
-	const {
-		booking_proof,
-		importer_exporter_poc = {},
-		importer_exporter_poc_id,
-	} = detail;
-
-	const { whatsapp_number_eformat = '', whatsapp_verified = '' } = importer_exporter_poc;
-
-	if (checkoutMethod === 'controlled_checkout') {
-		return (
-			['pending_approval', 'rejected'].includes(booking_status)
-			|| !manager_approval_proof
-			|| !isControlBookingDetailsFilled
-		);
-	}
-
-	if (bookingConfirmationMode === 'whatsapp') {
-		return (
-			!whatsapp_number_eformat
-			|| !whatsapp_verified
-			|| !importer_exporter_poc_id
-		);
-	}
-
-	if (bookingConfirmationMode === 'booking_proof') {
-		return isEmpty(booking_proof);
-	}
-
-	return false;
-};
 
 function BookingConfirmationFooter({
 	detail = {},
@@ -145,7 +74,7 @@ function BookingConfirmationFooter({
 				&& primaryService.bl_type,
 		);
 
-	const disableCondition = (typeof invoice?.selected_credit_days === 'undefined'
+	const disableConditionForTncAndPaymentMethods = (typeof invoice?.selected_credit_days === 'undefined'
 			&& !shipment_id
 			&& !domesticService)
 		|| (is_any_invoice_on_credit
@@ -203,14 +132,7 @@ function BookingConfirmationFooter({
 		manager_approval_proof = '',
 	} = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const disableButton = isAssistedBookingNotAllowed
-	|| !quotation_email_sent_at
-	|| disableConditionForFcl
-	|| disableCondition
-	|| isVeryRisky
-	|| noRatesPresent
-	|| isEmpty(invoicingParties)
-	|| getDisabledCondition({
+	const disableConditionForBookingMethods = getDisabledCondition({
 		checkoutMethod,
 		booking_status,
 		manager_approval_proof,
@@ -218,6 +140,15 @@ function BookingConfirmationFooter({
 		bookingConfirmationMode,
 		detail,
 	});
+
+	const disableButton = isAssistedBookingNotAllowed
+	|| !quotation_email_sent_at
+	|| disableConditionForFcl
+	|| disableConditionForTncAndPaymentMethods
+	|| isVeryRisky
+	|| noRatesPresent
+	|| isEmpty(invoicingParties)
+	|| disableConditionForBookingMethods;
 
 	return (
 		<div className={styles.container}>
@@ -239,9 +170,11 @@ function BookingConfirmationFooter({
 					ref={timerRef}
 				/>
 
-				<span style={{ fontWeight: 400, marginLeft: '4px', color: '#eb3425' }}>
-					{hasExpired ? 'This Quotation has expired' : ''}
-				</span>
+				{hasExpired ? (
+					<span style={{ fontWeight: 400, marginLeft: '4px', color: '#eb3425' }}>
+						This Quotation has expired
+					</span>
+				) : null}
 			</div>
 
 			{!isEmpty(error) ? (
@@ -251,8 +184,8 @@ function BookingConfirmationFooter({
 				</div>
 			) : null}
 
-			<div className={styles.button_container}>
-				{!hasExpired && bookingConfirmationMode !== 'email' ? (
+			{!hasExpired && bookingConfirmationMode !== 'email' ? (
+				<div className={styles.button_container}>
 					<Button
 						type="button"
 						size="xl"
@@ -277,8 +210,8 @@ function BookingConfirmationFooter({
 							<CogoPoint cogopoint={earnable_cogopoints} />
 						</div>
 					</Button>
-				) : null}
-			</div>
+				</div>
+			) : null}
 
 			{showOtpModal ? (
 				<Modal
@@ -289,7 +222,7 @@ function BookingConfirmationFooter({
 					<Modal.Header title="ENTER OTP RECEIVED" />
 
 					<Modal.Body>
-						<OTPLayout
+						<OTPInput
 							otpLength={OTP_LENGTH}
 							setOtpValue={setOtpValue}
 							loading={false}

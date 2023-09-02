@@ -106,8 +106,6 @@ function PaymentTermsLabel({ paymentTerm = '', detail = {} }) {
 		>
 			<span style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
 				{startCase(paymentTerm)}
-				{' '}
-				{'  '}
 				<IcMInfo style={{ marginLeft: '4px' }} />
 			</span>
 		</Tooltip>

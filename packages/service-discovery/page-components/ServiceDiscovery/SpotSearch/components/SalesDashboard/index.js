@@ -13,6 +13,9 @@ function SalesDashboard({
 	destination_location_id = '',
 	origin_location_id = '',
 	setLocation = () => {},
+	organization = {},
+	createSearch = () => {},
+	createSearchLoading = false,
 }) {
 	const allLists = configurations;
 
@@ -39,7 +42,7 @@ function SalesDashboard({
 
 				let finalFields = [...fields];
 
-				if (['most_searched', 'most_booked'].includes(type)) {
+				if (['most_searched', 'most_booked', 'spot_searches'].includes(type)) {
 					let btnObj = fields.filter((fieldItem) => fieldItem.func === 'renderButton');
 					const remainingBtnFields = fields.filter((fieldItem) => fieldItem.func !== 'renderButton');
 
@@ -74,6 +77,9 @@ function SalesDashboard({
 							origin_location_id={origin_location_id || undefined}
 							destination_location_id={destination_location_id || undefined}
 							dashboard="sales"
+							organization={organization}
+							createSearch={createSearch}
+							createSearchLoading={createSearchLoading}
 						/>
 					</StyledTabPanel>
 				);

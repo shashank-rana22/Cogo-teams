@@ -34,7 +34,6 @@ const useHandleBookingConfirmationFooter = ({
 		checkout_approvals = [],
 		importer_exporter_id,
 		importer_exporter,
-		id,
 		id: checkout_id = '',
 		quotation_email_sent_at = '',
 		booking_proof = '',
@@ -68,7 +67,7 @@ const useHandleBookingConfirmationFooter = ({
 	const { sendWhatsappBooking, whatsappLoading } = useSendWhatsappBooking();
 
 	const { bookShipment, loading: bookCheckoutLoading } = useBookShipment({
-		checkout_id: id,
+		checkout_id,
 		rfq_id,
 		checkout_type,
 		setIsShipmentCreated,
@@ -122,7 +121,7 @@ const useHandleBookingConfirmationFooter = ({
 		}
 		const whatsappNumberEformat = detail?.importer_exporter_poc?.whatsapp_number_eformat;
 
-		if (checkoutMethod === 'whatsapp') {
+		if (checkoutMethod === 'whatsapp' && whatsappNumberEformat) {
 			sendWhatsappBooking(whatsappNumberEformat);
 			return;
 		}
@@ -140,27 +139,27 @@ const useHandleBookingConfirmationFooter = ({
 		}
 
 		if (noRatesPresent) {
-			setError('please remove services with no rates');
+			setError('Please remove services with no rates');
 			return;
 		}
 
 		if (!quotation_email_sent_at) {
-			setError('please send quotation Email to continue');
+			setError('Please send quotation Email to continue');
 			return;
 		}
 
 		if (isEmpty(invoicingParties)) {
-			setError('Ther should be atleast 1 invoicing party');
+			setError('There should be atleast 1 invoicing party');
 			return;
 		}
 
 		if (disableConditionForFcl) {
-			setError('please select document preferences in Invoicing party that contains FCL freight');
+			setError('Please select document preferences in Invoicing party that contains FCL freight');
 			return;
 		}
 
 		if (bookingConfirmationMode === 'booking_proof' && isEmpty(booking_proof)) {
-			setError('please select Booking Proof');
+			setError('Please upload Booking Proof');
 			return;
 		}
 
