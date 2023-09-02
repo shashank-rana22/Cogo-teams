@@ -49,9 +49,19 @@ function DashboardView(props) {
 	useEffect(() => {
 		if (service_type === 'air') {
 			setIsHighlighted(true);
-			setGlobalFilters((prev) => ({ ...prev, chartType: 'trend' }));
+			setGlobalFilters((prev) => ({
+				...prev,
+				chartType   : 'trend',
+				parent_mode : undefined,
+				source      : undefined,
+			}));
 		} else {
 			setIsHighlighted(false);
+			setGlobalFilters((prev) => ({
+				...prev,
+				parent_mode : undefined,
+				source      : undefined,
+			}));
 		}
 	}, [service_type, setIsHighlighted, setGlobalFilters]);
 	return (

@@ -51,10 +51,10 @@ export const COLOR_MAPPINGS = {
 	supply            : ['#63BEC8', '#B1DFE4', '#8ACED6', '#59ABB4'],
 	rate_extension    : ['#9BA0CB', '#CDD0E5', '#B4B8D8', '#8C90B7'],
 	cluster_extension : ['#f37166', '#F9B8B3', '#F5867D', '#CF6057'],
-	cargo_ai          : ['#dc143c'],
-	freight_look      : ['#ffd700'],
-	manual            : ['#adf802'],
-	rate_sheet        : ['#3525c4'],
+	cargo_ai          : ['#00b300'],
+	freight_look      : ['#63BEC8'],
+	manual            : ['#ffb01e'],
+	rate_sheet        : ['#f37166'],
 };
 
 export const usePieChartConfigs = (type, data) => {
