@@ -98,7 +98,7 @@ function Status({
 					</Button>
 				</div>
 			) : (
-				!invoice.is_revoked && invoice.status !== 'finance_rejected' && (
+				!invoice?.is_revoked && invoice?.status !== 'finance_rejected' && (
 					<Actions
 						invoice={invoice}
 						refetch={refetchAferApiCall}
