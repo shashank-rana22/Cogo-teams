@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
 import Layout from '../../common/Layout';
@@ -7,23 +8,6 @@ import fields from '../../configurations/controls';
 import useHandleOperators from '../../hooks/useHandleOperators';
 
 import styles from './styles.module.css';
-
-interface NestedObj {
-	[key: string]: string;
-}
-
-interface ModalProps {
-	item?: NestedObj;
-	setItem?: (p:object)=>void,
-	show?: boolean;
-	setShow?: (p:boolean)=>void,
-	edit?: boolean,
-	setEdit?: (p:boolean)=>void,
-	refetch?: Function
-	page?: number,
-	setPage?: Function,
-	setFinalList?: Function,
-}
 
 const showElements = (type) => ({
 	iata_code          : type === 'airline',
@@ -43,7 +27,9 @@ function OperatorsModal({
 	setPage = () => {},
 	setFinalList = () => {},
 	page = 1,
-}:ModalProps) {
+}) {
+	const { t } = useTranslation(['operators']);
+
 	const { control, watch, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	const operatorType = watch('operator_type');
@@ -62,19 +48,22 @@ function OperatorsModal({
 		page,
 	});
 
-	(fields || []).forEach((ctrl, index) => {
+	const fieldControls = fields(t);
+
+	(fieldControls || []).forEach((ctrl, index) => {
 		if (ctrl.name === 'operator_type') {
-			fields[index].disabled = edit;
+			fieldControls[index].disabled = edit;
 		}
 	});
 
 	useEffect(() => {
 		if (edit) {
-			fields.forEach((c) => {
+			fieldControls.forEach((c) => {
 				setValue(c.name, item[c.name]);
 			});
 			setValue('is_nvocc', String(item.is_nvocc));
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [item, edit, setValue]);
 
 	return (
@@ -83,9 +72,12 @@ function OperatorsModal({
 			onClose={() => { setShow(false); setEdit(false); setItem({}); }}
 			className={styles.modal_container}
 		>
-			<Modal.Header title={`${edit ? 'Edit' : 'Create'} Operator`} />
+			<Modal.Header title={`${edit
+				? t('operators:operators_modal_edit_operator')
+				: t('operators:operators_modal_create_operator')} ${t('operators:operators_modal_function_operator')}`}
+			/>
 			<Layout
-				fields={fields}
+				fields={fieldControls}
 				control={control}
 				errors={errors}
 				showElements={{ ...showElements(operatorType), status: edit }}
@@ -98,10 +90,14 @@ function OperatorsModal({
 					style={{ marginRight: 12 }}
 					onClick={() => { setShow(false); setEdit(false); setItem({}); }}
 				>
-					Cancel
+					{t('operators:cancel_button')}
 				</Button>
-				<Button size="md" disabled={loading} onClick={handleSubmit(handleOperators)}>
-					Apply
+				<Button
+					size="md"
+					disabled={loading}
+					onClick={handleSubmit(handleOperators)}
+				>
+					{t('operators:apply_button')}
 				</Button>
 			</div>
 		</Modal>

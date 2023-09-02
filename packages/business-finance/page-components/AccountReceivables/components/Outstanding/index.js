@@ -10,7 +10,7 @@ function Outstanding({ entityCode = '' }) {
 
 	return (
 		<div className={styles.container}>
-			<Tabs activeTab={activeTab} onChange={setActiveTab}>
+			<Tabs activeTab={activeTab} onChange={setActiveTab} themeType="primary">
 				<TabPanel
 					size={12}
 					name="overall_outstanding"

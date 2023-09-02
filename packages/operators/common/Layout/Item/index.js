@@ -1,4 +1,4 @@
-import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 import CONSTANTS from '../../../constants/constants';
 import getElementController from '../getController';
@@ -18,10 +18,12 @@ function Item({
 	rules = {},
 	...props
 }) {
+	const { t } = useTranslation(['operators']);
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,
 		label,
+		t,
 	});
 
 	if (!type) {

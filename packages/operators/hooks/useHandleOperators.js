@@ -1,19 +1,26 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 import CONSTANTS from '../constants/constants';
 
+const toastMapping = (t = () => {}) => ({
+	added   : t('operators:handle_operators_action_added'),
+	updated : t('operators:handle_operators_action_updated'),
+});
+
 const useHandleOperators = ({
-	item,
-	edit,
-	setShow,
-	setEdit,
-	refetch,
-	setPage,
-	setFinalList,
-	page,
+	item = {},
+	edit = false,
+	setShow = () => {},
+	setEdit = () => {},
+	refetch = () => {},
+	setPage = () => {},
+	setFinalList = () => {},
+	page = CONSTANTS.START_PAGE,
 }) => {
+	const { t } = useTranslation(['operators']);
 	const api = edit ? '/update_operator' : '/create_operators';
 
 	const [{ loading }, trigger] = useRequest({
@@ -39,7 +46,7 @@ const useHandleOperators = ({
 		const data = payload(value);
 		try {
 			await trigger({ data });
-			Toast.success(`Operators ${edit ? 'Updated' : 'Added'} Successfully`);
+			Toast.success(toastMapping(t)[edit ? 'updated' : 'added']);
 			setFinalList([]);
 			setShow(false);
 			setEdit(false);
