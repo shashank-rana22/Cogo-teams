@@ -100,3 +100,11 @@
 	font-size: 14px;
 	font-weight: 500;
 }
+
+.previlege_progress {
+	:global {
+		.ui_progressbar_bar {
+			width: 100%;
+		}
+	}
+}

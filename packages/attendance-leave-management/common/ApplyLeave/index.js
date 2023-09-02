@@ -65,7 +65,7 @@ function ApplyLeave({
 	};
 
 	return (
-		<Modal size="md" show={show} onClose={onClose} placement="top">
+		<Modal size="md" show={show} onClose={onClose} placement="top" className={styles.modal}>
 			<Modal.Header title={`${selectedData ? 'Edit' : 'Apply'} Leave`} />
 			<Modal.Body>
 				{controls.map((val) => {
@@ -80,7 +80,8 @@ function ApplyLeave({
 									<div className={styles.pending}>
 										Pending :
 										{' '}
-										{data[`total_pending_${leaveType}_approvals`] || GLOBAL_CONSTANTS.zeroth_index}
+										{data[`total_pending_${leaveType}_approvals`]
+										|| GLOBAL_CONSTANTS.zeroth_index}
 									</div>
 									<div className={styles.available}>
 										Available :

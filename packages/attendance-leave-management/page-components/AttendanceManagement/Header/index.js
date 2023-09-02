@@ -1,6 +1,5 @@
-import { Button, Select } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDownload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -43,12 +42,6 @@ function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
 						/>
 					)}
 				</div>
-				<Button className={styles.donwload_btn} themeType="secondary" size="lg">
-					<span style={{ paddingRight: 10 }}>
-						Download Report
-					</span>
-					<IcMDownload />
-				</Button>
 			</div>
 
 		</div>
