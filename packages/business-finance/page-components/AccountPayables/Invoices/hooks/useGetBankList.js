@@ -1,15 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
-
-const API_ARRAY_VARIABLE_ONE = 1;
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetBankList = () => {
 	const { query } = useRouter();
 	const [bankDetails, setBankDetails] = useState([]);
 
-	const getBankList = useRequestBf(
+	const [{ loading }, Trigger] = useRequestBf(
 		{
 			url     : '/purchase/payable/bank/list',
 			method  : 'get',
@@ -20,8 +18,8 @@ const useGetBankList = () => {
 
 	const { entity } = query;
 
-	const getBankDetails = async () => {
-		const resp = await getBankList[API_ARRAY_VARIABLE_ONE]({
+	const getBankDetails = useCallback(async () => {
+		const resp = await Trigger({
 			params: {
 				entityCode: entity,
 			},
@@ -32,15 +30,15 @@ const useGetBankList = () => {
 			value : item?.account_number,
 			id    : item?.id,
 		})));
-	};
+	}, [entity, Trigger]);
 
 	useEffect(() => {
 		getBankDetails();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getBankDetails]);
 
 	return {
 		bankDetails,
+		loading,
 	};
 };
 
