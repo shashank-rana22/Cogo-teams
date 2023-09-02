@@ -1,9 +1,19 @@
+.request_label_container {
+	display: flex;
+	margin: 10px 0;
+}
+
+.request_label_header {
+	margin-right: 150px;
+}
+
 .request_label {
 	margin: 5px 10px;
 }
 
-.request_label_container {
-	margin: 10px 0;
+.request_value {
+	margin: 5px 10px;
+	font-weight: 500;
 }
 
 .approved_request {

@@ -18,6 +18,10 @@
 		.react-datepicker-wrapper {
 			width: 100%;
 		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
 	}
 }
 

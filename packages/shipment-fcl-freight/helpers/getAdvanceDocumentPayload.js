@@ -1,3 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+
 import getAdBuyerAddress from './getAdBuyerAddress';
 import getAdSellerAddress from './getAdSellerAddress';
 import getAdSellerBankDetails from './getAdSellerBankDetails';
@@ -22,7 +25,16 @@ const getAdvanceDocumentPayload = ({
 		place_of_supply = '',
 		place_of_destination = '',
 		due_date = null,
+		payment_mode = '',
 	} = formValues || {};
+
+	const dueDate = formatDate({
+		date       : due_date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	});
 
 	const documentUrls = (upload || []).reduce(
 		(prev, item) => {
@@ -59,15 +71,17 @@ const getAdvanceDocumentPayload = ({
 			amountPerContainer         : amount,
 			numberOfContainers         : quantity,
 			containerSecurityDepositId : null,
-			bookingProof               : documentUrls,
+			bookingProof               : null,
 			quotation                  : [],
 			referenceIncidentId        : null,
 			description                : remarks,
 			isTaxApplicable            : null,
 			placeOfSupply              : place_of_supply,
 			placeOfDestination         : place_of_destination,
+			paymentMode                : payment_mode,
+			paymentDocUrls             : documentUrls,
 		},
-		dueDate      : due_date,
+		dueDate,
 		performedBy  : performedById,
 		isReconciled : false,
 	};

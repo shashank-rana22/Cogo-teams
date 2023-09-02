@@ -11,6 +11,21 @@ const billingAddresses = (billingParty = {}) => (
 	}))
 );
 
+const PAYMENT_MODE_OPTIONS = [
+	{
+		label : 'NEFT',
+		value : 'NEFT',
+	},
+	{
+		label : 'RTGS',
+		value : 'RTGS',
+	},
+	{
+		label : 'Demand Draft',
+		value : 'DEMAND_DRAFT',
+	},
+];
+
 const formControls = ({
 	listEntities = {},
 	billingParty = {},
@@ -59,6 +74,16 @@ const formControls = ({
 			rules       : { required: 'Amount of Containers are required', min: 0 },
 			size        : 'sm',
 			style       : { width: '200px' },
+		},
+		{
+			name        : 'payment_mode',
+			label       : 'Mode of Payment',
+			type        : 'select',
+			placeholder : 'Enter Payment Mode',
+			rules       : { required: 'Payment Mode is required' },
+			size        : 'sm',
+			style       : { width: '270px' },
+			options     : PAYMENT_MODE_OPTIONS,
 		},
 		{
 			name        : 'remarks',
@@ -160,7 +185,7 @@ const formControls = ({
 			type                  : 'datepicker',
 			rules                 : { required: 'Due Date is required' },
 			size                  : 'sm',
-			style                 : { width: '265px' },
+			style                 : { width: '265px', marginRight: '100px' },
 			isPreviousDaysAllowed : true,
 		},
 		{

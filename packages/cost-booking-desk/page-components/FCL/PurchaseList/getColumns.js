@@ -1,5 +1,6 @@
 import { Button, Pill, Tooltip } from '@cogoport/components';
 import { IcMPortArrow, IcMFfcl } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -12,8 +13,7 @@ const getColumns = ({
 		id       : 'shipment_id',
 		accessor : (item) => (
 			<div className={styles.serial_id}>
-				#
-				{item?.serialId}
+				{item?.jobNumber ? `#${item?.jobNumber}` : ''}
 			</div>
 		),
 	},
@@ -72,9 +72,7 @@ const getColumns = ({
 		Header   : <div className={styles.header}>Container Details</div>,
 		key      : 'container_details',
 		id       : 'container_details',
-		accessor : () => (
-			<div className={styles.container_details}>console</div>
-		),
+		accessor : '',
 	},
 	{
 		Header   : <div className={styles.header}>Shipment Type</div>,
@@ -83,7 +81,7 @@ const getColumns = ({
 		accessor : (item) => (
 			<div className={styles.shipment_type}>
 				<Pill color="#CFEAED">
-					{item?.shipmentType}
+					{startCase(item?.shipmentType)}
 				</Pill>
 			</div>
 		),
@@ -100,8 +98,8 @@ const getColumns = ({
 		Header   : '',
 		key      : 'action',
 		id       : 'action',
-		accessor : () => (
-			<Button onClick={() => setViewRequestModal(true)}>View</Button>
+		accessor : (item) => (
+			<Button onClick={() => setViewRequestModal(item)}>View</Button>
 		),
 	},
 ];

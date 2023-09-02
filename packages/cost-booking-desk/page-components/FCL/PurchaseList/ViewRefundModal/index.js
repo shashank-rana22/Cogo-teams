@@ -1,15 +1,16 @@
 import { Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function ViewRefundModal({
-	viewRefundModal = false,
+	viewRefundModal = {},
 	setViewRefundModal = () => {},
 }) {
 	return (
 		<Modal
-			show={viewRefundModal}
-			onClose={() => setViewRefundModal(false)}
+			show={!isEmpty(viewRefundModal)}
+			onClose={() => setViewRefundModal({})}
 		>
 			<Modal.Header title="Refund Details" />
 			<Modal.Body>

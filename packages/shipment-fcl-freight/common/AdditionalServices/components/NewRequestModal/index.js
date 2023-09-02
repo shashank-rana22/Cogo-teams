@@ -147,11 +147,6 @@ function NewRequestModal({
 		});
 		apiTrigger(payload);
 	};
-	console.log('billingParty:', billingParty);
-	console.log('billingPartyAddress:', billingPartyAddress);
-	console.log('collectionParty:', collectionParty);
-	console.log('collectionPartyAddress:', collectionPartyAddress);
-	console.log('collectionPartyBankDetails:', collectionPartyBankDetails);
 
 	const showElements = {
 		billing_address : !!watch('billing_party'),
