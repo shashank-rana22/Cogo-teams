@@ -1,0 +1,48 @@
+.main_container {
+	padding: 20px;
+	margin-top: 20px;
+	background: #f9f9f9;
+	border-radius: 6px;
+}
+
+.details_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.card_container {
+	display: flex;
+	flex-direction: column;
+	width: 21%;
+	padding: 12px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid transparent;
+	border-radius: 8px;
+}
+
+.blue_color_container {
+	display: flex;
+	flex-direction: column;
+	width: 25%;
+	padding: 12px;
+	cursor: pointer;
+	background: #f2f3fa;
+	border: 1px solid transparent;
+	border-radius: 8px;
+}
+
+.scroll_bar {
+	max-height: 400px;
+	overflow: scroll;
+}
