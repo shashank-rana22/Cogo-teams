@@ -209,6 +209,7 @@ const GLOBAL_CONSTANTS = {
 		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
+			'f896df94-f77d-4e6d-b5dd-3a4b936f8401',
 		],
 		cogo_course_notification_user_ids: [
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
