@@ -45,7 +45,7 @@ function InvoiceTable({
 				invoiceStatus={invoiceStatus}
 			/>
 			<div>
-				{isEmpty(data?.list || []) && !loading ? (
+				{isEmpty(data?.list) && !loading ? (
 					<EmptyStateOutStanding />
 				) : (
 					<Table columns={invoiceTable()} data={data?.list || []} loading={loading} />

@@ -1,9 +1,8 @@
-import { Pagination, Table } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
-import ccCallListTable from '../../../configs/CC_Call_List_Table';
 import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
@@ -11,8 +10,8 @@ import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstand
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
-import EmptyStateOutStanding from '../EmptyStateOutStanding';
 
+import CcCallList from './CcCallList';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
@@ -45,8 +44,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 		startDate : startOfMonth(new Date()),
 		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
 	});
-	console.log(setDateFilter, 'setDateFilter');
-
+	const [range, setRange] = useState('this_month');
 	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
@@ -175,19 +173,14 @@ function OverAllOutstanding({ entityCode = '' }) {
 								))}
 							</div>
 							<div className={styles.cc_call_table}>
-								<div className={styles.cc_list}>CC Call Stats</div>
-								<div style={{ display: 'flex', justifyContent: 'center' }}>
-									{
-									(isEmpty(ccCommStats || []) && !ccCommLoading)
-										? <EmptyStateOutStanding smallCard="kamWiseCard" /> : (
-											<Table
-												columns={ccCallListTable()}
-												data={ccCommStats || []}
-												loading={ccCommLoading}
-											/>
-										)
-									}
-								</div>
+								<CcCallList
+									data={ccCommStats || []}
+									loading={ccCommLoading}
+									dateFilter={dateFilter}
+									setDateFilter={setDateFilter}
+									range={range}
+									setRange={setRange}
+								/>
 							</div>
 						</div>
 					</div>
