@@ -121,6 +121,7 @@ function SidePanel({
 						loadMore={loadMore}
 						hasMore={hasMore}
 						useWindow={false}
+						key={`${sort_by} ${sort_type}`}
 					>
 						<List
 							setActiveId={setActiveId}

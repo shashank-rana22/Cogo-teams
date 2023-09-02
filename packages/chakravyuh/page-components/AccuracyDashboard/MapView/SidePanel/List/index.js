@@ -37,32 +37,36 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 		);
 	}
 	if (loading || finalList.length) {
-		return finalList.map(({ total_rates = 0, destination_id, destination_name, total_accuracy = 0 }) => (
-			// eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-			<button
-				onMouseOver={() => handleMouseOver(destination_id)}
-				onMouseOut={handleMouseOut}
-				key={destination_id}
-				className={styles.card}
-			>
-				<div className={styles.left}>
-					<div className={styles.locations_container}>
-						<Tooltip content={originName}>
-							{originName}
-						</Tooltip>
-						<IcMPortArrow className={styles.anchor_icon} />
-						<Tooltip content={destination_name}>
-							{destination_name}
-						</Tooltip>
-					</div>
-					<p>{`${total_rates} Rates`}</p>
-				</div>
-				<div className={styles.right}>
-					<p>Accuracy</p>
-					<h4>{`${Number(total_accuracy).toFixed(TO_FIXED)}%`}</h4>
-				</div>
-			</button>
-		));
+		return (
+			<>
+				{finalList.map(({ total_rates = 0, destination_id, destination_name, total_accuracy = 0 }) => (
+					// eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
+					<button
+						onMouseOver={() => handleMouseOver(destination_id)}
+						onMouseOut={handleMouseOut}
+						key={destination_id}
+						className={styles.card}
+					>
+						<div className={styles.left}>
+							<div className={styles.locations_container}>
+								<Tooltip content={originName}>
+									{originName}
+								</Tooltip>
+								<IcMPortArrow className={styles.anchor_icon} />
+								<Tooltip content={destination_name}>
+									{destination_name}
+								</Tooltip>
+							</div>
+							<p>{`${total_rates} Rates`}</p>
+						</div>
+						<div className={styles.right}>
+							<p>Accuracy</p>
+							<h4>{`${Number(total_accuracy).toFixed(TO_FIXED)}%`}</h4>
+						</div>
+					</button>
+				))}
+			</>
+		);
 	}
 	return <EmptyState emptyText="There are no rates to show for selected filters" />;
 }
