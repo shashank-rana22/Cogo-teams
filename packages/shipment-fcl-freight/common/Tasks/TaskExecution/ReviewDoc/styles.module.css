@@ -41,11 +41,3 @@
 	height: 65vh;
 	margin: 12px 0;
 }
-
-.remark {
-	margin: 12px 0;
-
-	.ui-textarea {
-		padding: 6px;
-	}
-}

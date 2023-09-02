@@ -125,7 +125,7 @@ const useGetStepThreeData = ({
 		}
 	});
 
-	const onSubmit = async (values) => {
+	const onSubmit = async (values, isAmmendDoc = false) => {
 		const QUOTATIONS = [];
 
 		Object.keys(values || {}).forEach((key) => {
@@ -156,13 +156,17 @@ const useGetStepThreeData = ({
 			try {
 				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
 
-				if (res?.status === HTTP_SUCCESS_CODE) {
+				if (res?.status === HTTP_SUCCESS_CODE && !isAmmendDoc) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
 				toastApiError(err);
+				return {
+					error: err,
+				};
 			}
 		}
+		return {};
 	};
 
 	return {
