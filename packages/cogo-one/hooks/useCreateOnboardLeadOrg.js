@@ -22,7 +22,7 @@ const getPayload = ({ values }) => {
 	};
 };
 
-function useCreateOnboardLeadOrg({ setCreateLeadModal = () => {}, reset = () => {} }) {
+function useCreateOnboardLeadOrg({ setCreateLeadModal = () => {}, reset = () => {}, getOrganizationUsers = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/onboard_lead_organization',
 		method : 'post',
@@ -35,6 +35,7 @@ function useCreateOnboardLeadOrg({ setCreateLeadModal = () => {}, reset = () => 
 			});
 			reset();
 			setCreateLeadModal(false);
+			getOrganizationUsers({ page: 1 });
 			Toast.success('Successfully added the contact');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');

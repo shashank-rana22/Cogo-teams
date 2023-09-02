@@ -25,6 +25,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		setSearch,
 		handlePagination,
 		partnerId,
+		getOrganizationUsers = () => {},
 	} = useListLeadOrgUsers();
 
 	const geo = getGeoConstants();
@@ -188,7 +189,11 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 					/>
 				) : null}
 			</div>
-			<CreateLeadAccount createLeadModal={createLeadModal} setCreateLeadModal={setCreateLeadModal} />
+			<CreateLeadAccount
+				createLeadModal={createLeadModal}
+				setCreateLeadModal={setCreateLeadModal}
+				getOrganizationUsers={getOrganizationUsers}
+			/>
 
 		</div>
 	);

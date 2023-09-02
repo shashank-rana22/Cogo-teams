@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 function CreateLeadAccount({
 	createLeadModal = false,
 	setCreateLeadModal = () => {},
+	getOrganizationUsers = () => {},
 }) {
 	const geo = getGeoConstants();
 
@@ -25,7 +26,11 @@ function CreateLeadAccount({
 		},
 	});
 
-	const { loading = false, createLeadUser = () => {} } = useCreateOnboardLeadOrg({ setCreateLeadModal, reset });
+	const { loading = false, createLeadUser = () => {} } = 	useCreateOnboardLeadOrg({
+		setCreateLeadModal,
+		reset,
+		getOrganizationUsers,
+	});
 
 	const handleClick = (values) => {
 		createLeadUser(values);
