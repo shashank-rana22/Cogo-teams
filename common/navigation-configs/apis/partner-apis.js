@@ -13876,7 +13876,7 @@ const partner = {
 			service_name : 'rolling_forecast',
 		},
 		{
-			api          : 'get_email_preview',
+			api          : 'get_rolling_forecast_email_preview',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
@@ -13886,7 +13886,7 @@ const partner = {
 			service_name : 'location',
 		},
 		{
-			api          : 'send_requirement_email',
+			api          : 'send_rolling_forecast_requirement_email',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
