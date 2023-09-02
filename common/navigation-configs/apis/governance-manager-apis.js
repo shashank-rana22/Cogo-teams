@@ -80,7 +80,7 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'get_organization_service_verification_details',
+		api          : 'get_organization_service_supplier_verification_details',
 		access_type  : 'private',
 		service_name : 'organization',
 	},

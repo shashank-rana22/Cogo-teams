@@ -11,13 +11,13 @@ function useUpdateOrganizationServiceExpertiseManagerStatus({
 		url    : '/update_organization_service_expertise_manager_status',
 	}, { manual: true });
 
-	const updateOrganizationServiceExpertiseManagerStatus = async ({ manager_approval_status }) => {
+	const updateOrganizationServiceExpertiseManagerStatus = async ({ verification_status }) => {
 		try {
 			await trigger({
 				params: {
 					service_id,
 					organization_id,
-					manager_approval_status,
+					verification_status,
 				},
 			});
 			getOrganizationSupplierVerificationDetails();

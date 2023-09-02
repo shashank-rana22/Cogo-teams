@@ -47,7 +47,7 @@ function SupplierApprovalModal({
 	};
 	const handleVerify = () => {
 		if (open === 'need_analysis_report') {
-			updateOrganizationServiceExpertiseManagerStatus({ manager_approval_status: 'verified' });
+			updateOrganizationServiceExpertiseManagerStatus({ verification_status: 'verified' });
 		} else if (open === 'market_feedback_report') {
 			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'verified' });
 		} else if (open === 'evaluation_paramenter_report') {
@@ -56,7 +56,7 @@ function SupplierApprovalModal({
 	};
 	const handleReject = () => {
 		if (open === 'need_analysis_report') {
-			updateOrganizationServiceExpertiseManagerStatus({ manager_approval_status: 'rejected' });
+			updateOrganizationServiceExpertiseManagerStatus({ verification_status: 'rejected' });
 		} else if (open === 'market_feedback_report') {
 			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'rejected' });
 		} else if (open === 'evaluation_paramenter_report') {
