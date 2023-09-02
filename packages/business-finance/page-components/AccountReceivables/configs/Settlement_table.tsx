@@ -5,21 +5,27 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
-import GetSortingData from '../components/Outstanding/OutstandingList/SettlementTable/sorting';
+import GetSortingData from '../components/Outstanding/OverAllOutstanding/OutstandingList/SettlementTable/sorting';
 
 interface Sort {
 	sortType?: string;
 	sortBy?: string;
+}
+interface InvoiceKey {
+	document_key?: string;
+	irn_key?: string;
 }
 interface Props {
 	sort?: Sort;
 	setSort?: React.Dispatch<React.SetStateAction<object>>;
 	settlementFilters?: object;
 	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
+	invoiceKeys: InvoiceKey;
 }
 const MAX_LEN_FOR_TEXT = 12;
 
-const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }:Props) => [
+// eslint-disable-next-line custom-eslint/function-name-check
+const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters, invoiceKeys }:Props) => [
 	{
 		Header   : 'Reference Number',
 		id       : 'name',
@@ -56,14 +62,14 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 
 			<div style={{ display: 'flex' }}>
 				<div style={{ marginRight: '10px' }}>
-					{showOverflowingNumber(row?.destinationDocumentValue, MAX_LEN_FOR_TEXT)}
+					{showOverflowingNumber(row?.[invoiceKeys.document_key], MAX_LEN_FOR_TEXT)}
 				</div>
 				{row?.destinationIrnNumber ? (
 					<div>
 						<Tooltip
 							content={(
 								<div>
-									{row?.destinationIrnNumber}
+									{row?.[invoiceKeys.irn_key]}
 								</div>
 							)}
 							placement="top"

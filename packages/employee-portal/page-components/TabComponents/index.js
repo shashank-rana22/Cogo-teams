@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import AdditionalInformation from './AdditionalInformation';
@@ -39,8 +39,17 @@ const KEY_COMPONENT_MAPPING = {
 	},
 };
 
-function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
-	const { progress_stats, signed_documents } = data || {};
+function TabComponents({
+	data = {},
+	informationPage = '',
+	setInformationPage = () => {},
+	getEmployeeDetails = () => {},
+	getEmployeeDetailsLoading = false,
+}) {
+	const { progress_stats, signed_documents, offer_letter, detail } = data || {};
+	const { share_company_policies, is_offer_letter_applicable } = detail || {};
+
+	const router = useRouter();
 
 	const {
 		// offer_letter_signed,
@@ -51,11 +60,12 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	const MAPPING = {
 		new_hire_information   : true,
-		// offer_letter           : !isEmpty(offer_letter),
+		offer_letter           : !(isEmpty(offer_letter) || offer_letter?.status === 'active'),
 		additional_information : true,
 		day_1                  : signDocEnableContd,
 		sign_your_docs         : signDocEnableContd && !isEmpty(signed_documents),
-		company_policies       : signDocEnableContd && documents_signed?.documents_signed && !isEmpty(signed_documents),
+		company_policies       : signDocEnableContd
+			&& documents_signed?.documents_signed && !isEmpty(signed_documents) && share_company_policies,
 		// maps: {
 		// icon: GLOBAL_CONSTANTS.image_url.map_png,
 		// 	component : Maps,
@@ -63,8 +73,11 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		// },
 	};
 
+	if (!is_offer_letter_applicable) delete MAPPING.offer_letter;
+
 	const onClickTiles = ({ item }) => {
 		if (MAPPING[item]) {
+			router.push('/employee-portal', `/employee-portal?activeTile=${item}`);
 			setInformationPage(item);
 		}
 	};

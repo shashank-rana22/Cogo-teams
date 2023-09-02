@@ -11,6 +11,10 @@
 	border-radius: 8px;
 }
 
+.invoice_container {
+	margin-left: 10px;
+}
+
 .line_item {
 	width: 58%;
 	padding: 8px;

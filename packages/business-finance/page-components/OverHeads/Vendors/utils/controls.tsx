@@ -1,25 +1,10 @@
+import { PAYMENT_OPTIONS } from '../../constants/REPEAT_FREQUENCY';
+
 const Controls = {
-	KYC_STATUS: {
-		value       : 'KYC_STATUS',
-		placeholder : 'KYC Status',
-		options     : [
-			{
-				label : 'Verified',
-				value : 'VERIFIED',
-			},
-			{
-				label : 'Rejected',
-				value : 'REJECTED',
-			},
-			{
-				label : 'Pending from user',
-				value : 'PENDING_FROM_USER',
-			},
-			{
-				label : 'Pending Verification',
-				value : 'PENDING_VERIFICATION',
-			},
-		],
+	paymentStatus: {
+		value       : 'paymentStatus',
+		placeholder : 'Payment Status',
+		options     : PAYMENT_OPTIONS,
 	},
 	CATEGORY: {
 		value       : 'CATEGORY',

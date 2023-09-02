@@ -9,4 +9,9 @@ export default [{
 {
 	label : 'Telex',
 	value : 'telex',
-}];
+},
+{
+	label : 'Email',
+	value : 'email',
+},
+];

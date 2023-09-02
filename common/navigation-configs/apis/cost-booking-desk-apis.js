@@ -268,7 +268,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_checkout_applicable_promocodes',
+		api          : 'get_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
@@ -301,6 +301,16 @@ const apis = [
 		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api         : 'get_purchase_bills_stats',
+		access_type : 'private',
+		feature     : 'coe_finance',
+	},
+	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'bookings',
 	},
 ];
 

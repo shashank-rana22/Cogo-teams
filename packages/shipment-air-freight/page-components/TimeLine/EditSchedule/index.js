@@ -1,11 +1,14 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { DatepickerController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
 
 import styles from './styles.module.css';
 
-function FormItem({ finalControl = {}, control, errors = {} }) {
+const DATE_FORMAT = `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`;
+
+function FormItem({ finalControl = {}, control = {}, errors = {} }) {
 	const { name, label, lowerlabel, ...rest } = finalControl;
 
 	const { message: errorMessage } = errors[name] || {};
@@ -14,13 +17,20 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 
 	return (
 		<div className={styles.form_item}>
-			<div className={`${styles.label} ${required ? styles.required : ''}`}>
+			<div className={cl`${styles.label} ${required ? styles.required : ''}`}>
 				{label}
 			</div>
 
 			{lowerlabel ? <div className={styles.lower_label}>{lowerlabel}</div> : null}
 
-			<DatepickerController name={name} control={control} {...rest} />
+			<DatepickerController
+				name={name}
+				control={control}
+				showTimeSelect
+				{...rest}
+				formatType="dateTime"
+				dateFormat={DATE_FORMAT}
+			/>
 
 			{errorMessage ? (
 				<span className={styles.error_message}>
@@ -31,7 +41,7 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 	);
 }
 
-export default function EditSchedule({ setShow = () => {} }) {
+export default function EditSchedule({ setShow = () => {}, stakeholderConfig = {} }) {
 	const {
 		loading,
 		updateData,
@@ -39,7 +49,7 @@ export default function EditSchedule({ setShow = () => {} }) {
 		formSubmit,
 		errors,
 		control,
-	} = useEditServiceSchedule({ setShow });
+	} = useEditServiceSchedule({ setShow, stakeholderConfig });
 
 	const closeModal = () => setShow(false);
 

@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 6px 14px 14px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	cursor: pointer;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		margin-right: 4px;
+	}
+}
+
+.title {
+	margin-bottom: 2px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.poc_users_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 78%;
+}
+
+.recognizations {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2px 0;
+}
+
+.single_container {
+	display: flex;
+	align-items: center;
+}
+
+.circle {
+	width: 8px;
+	height: 8px;
+	margin-right: 4px;
+	border-radius: 100%;
+}
+
+.color_title {
+	font-size: 11px;
+}

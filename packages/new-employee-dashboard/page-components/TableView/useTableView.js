@@ -2,18 +2,31 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
 import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
+const INITIAL_PAGE_LIMIT = 10;
 
-const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
+const useTableView = ({
+	btnloading, updateEmployeeStatus,
+	selectedIds, setSelectedIds,
+}) => {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('active');
-	const [page, setPage] = useState(INITIAL_PAGE);
-	const [filters, setFilters] = useState({});
+	const profileData = useSelector(({ profile }) => profile);
+
+	const { user } = profileData || {};
+	const { new_hire_dashboard } = user || {};
+
+	const [activeTab, setActiveTab] = useState(new_hire_dashboard?.activeTab || 'offered');
+	const [page, setPage] = useState(new_hire_dashboard?.page || INITIAL_PAGE);
+	const [filters, setFilters] = useState(new_hire_dashboard?.filters || {});
+	const [search, setSearch] = useState(new_hire_dashboard?.search || '');
+	const [pageLimit, setPageLimit] = useState(new_hire_dashboard?.page_limit || INITIAL_PAGE_LIMIT);
+	const [bulkAction, setBulkAction] = useState(false);
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
@@ -28,13 +41,15 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 			await trigger({
 				params: {
 					filters: {
-						q              : search || undefined,
-						status         : activeTab,
-						joining_after  : filters?.joining_date?.startDate || undefined,
-						joining_before : filters?.joining_date?.endDate || undefined,
-						designation    : filters?.roles || undefined,
+						q               : search || undefined,
+						employee_status : activeTab,
+						joining_after   : filters?.joining_date?.startDate || undefined,
+						joining_before  : filters?.joining_date?.endDate || undefined,
+						role_id         : filters?.roles || undefined,
+						department_id   : filters?.department || undefined,
 					},
-					page: search ? INITIAL_PAGE : page,
+					page       : search ? INITIAL_PAGE : page,
+					page_limit : pageLimit,
 				},
 			});
 		} catch (error) {
@@ -42,17 +57,32 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [activeTab, search, trigger, page, filters]);
+	}, [activeTab, search, trigger, page, filters, pageLimit]);
+	const { list } = data || {};
+
+	const handleAllSelect = (e) => {
+		const { checked } = e.target;
+		if (checked) {
+			const ids = list.map((val) => val.id);
+			return setSelectedIds(ids);
+		}
+
+		return setSelectedIds([]);
+	};
+
+	const handleSelectId = (e, id) => {
+		const { checked } = e.target;
+		if (checked) { return setSelectedIds((prev) => ([...prev, id])); }
+		const filterArr = selectedIds.filter((val) => val !== id);
+		return setSelectedIds(filterArr);
+	};
 
 	useEffect(() => {
 		fetch();
 	}, [fetch, search]);
 
 	const onClickNewJoinerColumn = (id) => {
-		router.push(
-			`/new-employee-dashboard/${id}`,
-			`/new-employee-dashboard/${id}`,
-		);
+		router.push('/new-employee-dashboard/[profile_id]', `/new-employee-dashboard/${id}`);
 	};
 
 	const { downloadDocuments, loading:documentLoading } = useGetZipFile();
@@ -64,6 +94,12 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 		fetch,
 		downloadDocuments,
 		documentLoading,
+		bulkAction,
+		handleAllSelect,
+		handleSelectId,
+		selectedIds,
+		dataArr: list,
+		activeTab,
 	});
 
 	if (activeTab !== 'rejected_by_user') {
@@ -82,6 +118,12 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 		filters,
 		setFilters,
 		fetch,
+		pageLimit,
+		setPageLimit,
+		setSearch,
+		search,
+		setBulkAction,
+		bulkAction,
 	};
 };
 

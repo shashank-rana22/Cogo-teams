@@ -6,6 +6,7 @@ import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotatio
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
+import end2EndCheck from './end2EndCheck';
 import getStep3Controls from './getStep3Controls';
 
 const TRADE_MAPPING = {
@@ -16,7 +17,7 @@ const TRADE_MAPPING = {
 
 const HTTP_SUCCESS_CODE = 200;
 
-const useGetStep3Data = ({
+const useGetStepThreeData = ({
 	servicesList = [],
 	shipment_data = {},
 	onCancel = () => {},
@@ -28,12 +29,18 @@ const useGetStep3Data = ({
 	const SERVICE_IDS = [];
 	let trade_type;
 
+	const incoTerm = (servicesList || []).find(
+		(serviceObj) => serviceObj.service_type === 'fcl_freight_service',
+	)?.inco_term;
+
 	(servicesList || []).forEach((serviceObj) => {
 		if ((serviceObj.service_type === 'fcl_freight_service'
 			|| serviceObj.service_type === 'fcl_freight_local_service')
 			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
-			SERVICE_IDS.push(serviceObj.id);
+			if (end2EndCheck({ serviceObj, shipment_data, incoTerm })) {
+				SERVICE_IDS.push(serviceObj.id);
+			}
 		}
 		if (serviceObj.id === task.service_id) {
 			trade_type = serviceObj?.trade_type;
@@ -53,9 +60,9 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger, loading: quotationLoading } = useUpdateBuyQuotations({});
 
-	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
+	const { apiTrigger:updateTask, loading } = useUpdateShipmentPendingTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
@@ -121,14 +128,14 @@ const useGetStep3Data = ({
 	const onSubmit = async (values) => {
 		const QUOTATIONS = [];
 
-		Object.keys(values).forEach((key) => {
-			const items = values[key];
+		Object.keys(values || {}).forEach((key) => {
+			const items = values[key] || [];
 
 			const newQuote = {
 				id: (service_charges || []).find((charge) => charge?.service_id === key)
 					?.id,
 				service_id : key,
-				line_items : items.map((line_item) => ({
+				line_items : items?.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
 					name     : chargeCodes?.[line_item?.code] || '',
@@ -147,7 +154,7 @@ const useGetStep3Data = ({
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
 
 				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
@@ -164,8 +171,9 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues: DEFAULT_VALUES,
+		loading       : quotationLoading || loading,
+		defaultValues : DEFAULT_VALUES,
 	};
 };
 
-export default useGetStep3Data;
+export default useGetStepThreeData;

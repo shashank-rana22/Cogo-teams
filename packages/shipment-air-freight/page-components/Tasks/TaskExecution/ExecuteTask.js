@@ -5,7 +5,10 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
 import {
-	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, ConfirmSellPrice, ConfirmCargoAir,
+	MarkConfirmServices,
+	GenerateMawb,
+	ConfirmBookingWithAirline,
+	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
@@ -22,6 +25,7 @@ function ExecuteTask({
 	primary_service = {},
 	getShipment = () => {},
 	getShipmentTimeline = () => {},
+	servicesLoading = false,
 
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
@@ -80,7 +84,7 @@ function ExecuteTask({
 
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
 
-	if (loading) {
+	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
 	}
 
@@ -179,6 +183,16 @@ function ExecuteTask({
 				refetch={taskListRefetch}
 				timeLineRefetch={getShipmentTimeline}
 				shipment_data={shipment_data}
+			/>
+		);
+	}
+	if (task.task === 'upload_terminal_handling_charge_receipt') {
+		return (
+			<TerminalChargeReceipt
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
 			/>
 		);
 	}

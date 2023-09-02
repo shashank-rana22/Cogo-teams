@@ -1,0 +1,63 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.icons_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 40%;
+}
+
+.shipper_details {
+	width: 68%;
+}
+
+.sid_id {
+	font-weight: 600;
+	color: #4f4f4f;
+	cursor: pointer;
+
+	&:hover {
+		color: #f68b21;
+	}
+}
+
+.importer_exporter_styles {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.overflow_container {
+	width: 18px;
+	height: 18px;
+	color: #8f8e8e;
+	cursor: pointer;
+}
+
+.message_icon_styles {
+	margin-right: 10px;
+}
+
+.copy_icon {
+	margin-right: 8px;
+}
+
+.poc_details {
+	margin-right: 10px;
+}
+
+.common_style {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	fill: #9f9f9f;
+}

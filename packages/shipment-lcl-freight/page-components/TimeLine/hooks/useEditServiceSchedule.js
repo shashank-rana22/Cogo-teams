@@ -3,8 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useState, useEffect, useContext } from 'react';
 
 import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
+import { getDate } from '../../../utils/getDate';
 import controls from '../EditSchedule/controls';
-import { getDate } from '../utils/getDate';
 
 export default function useEditServiceSchedule({ setShow = () => {} }) {
 	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
@@ -31,16 +31,16 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 		if (schedule_departure && schedule_departure?.toDateString() !== departureDate?.toDateString()) {
 			setDepartureDate(schedule_departure);
 
-			const newDefaultValues = {};
+			const NEW_DEFAULT_VALUES = {};
 
 			finalControls.forEach(({ name }) => {
-				newDefaultValues[name] = (name === 'schedule_arrival'
+				NEW_DEFAULT_VALUES[name] = (name === 'schedule_arrival'
 					? formValues?.[name] < schedule_departure
 					: formValues?.[name] > schedule_departure)
 					? null : formValues?.[name];
 			});
 
-			reset(newDefaultValues);
+			reset(NEW_DEFAULT_VALUES);
 		}
 	}, [formValues, departureDate, reset, finalControls]);
 

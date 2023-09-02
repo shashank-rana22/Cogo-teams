@@ -1,9 +1,6 @@
-import { useForm } from '@cogoport/forms';
-import { useEffect } from 'react';
+import { useTranslation } from 'next-i18next';
 
-import leaderboardColumns from '../../constants/get-leaderboard-columns';
-import useGetAccountDistributionGraph from '../../hooks/useGetAccountDistributionGraph';
-import useGetEngagementScoringLeaderboard from '../../hooks/useGetEngagementScoringLeaderboard';
+import useGetAccountLeaderboardData from '../../hooks/useGetAccountLeaderboardData';
 
 import HeaderFilters from './HeaderFilters/index';
 import Leaderboard from './Leaderboard/index';
@@ -11,58 +8,39 @@ import ScoreDistributionGraph from './ScoreDistributionGraph/index';
 import styles from './styles.module.css';
 
 function AccountLeaderboard() {
-	const { control, watch, resetField } = useForm({
-		defaultValues: {
-			date: new Date(),
-		},
-	});
+	const { t } = useTranslation(['allocation']);
 
 	const {
-		graphData = [], graphLoading = false,
-		setGraphParams = () => {},
-	} = useGetAccountDistributionGraph();
+		graphData,
+		graphLoading,
+		leaderboardLoading,
+		leaderboardList,
+		paginationData,
+		getNextPage,
+		control,
+		filterControls,
+		checkedRowsId,
+		setCheckedRowsId = () => {},
+		currentPageListIds = [],
+		isAllChecked,
+		setIsAllChecked = () => {},
+		selectAllHelper = () => {},
+		setLeaderboardParams = () => {},
+		setValue = () => {},
+		bulkDeallocateFilter,
+		setBulkDeallocateFilter = () => {},
+		refetch,
+	} = useGetAccountLeaderboardData();
 
-	const {
-		leaderboardLoading = false, leaderboardList = [],
-		setLeaderboardParams = () => {}, page = 0, page_limit = 0, total_count = 0, getNextPage,
-	} = useGetEngagementScoringLeaderboard();
-
-	const { organization, user_id, date, service } = watch();
-
-	useEffect(() => {
-		setGraphParams((pv) => ({
-			...pv,
-			created_at : date || undefined,
-			service    : service || undefined,
-			filters    : {
-				service_id : organization || undefined,
-				user_id    : user_id || undefined,
-			},
-		}));
-
-		setLeaderboardParams((pv) => ({
-			...pv,
-			created_at : date || undefined,
-			service    : service || undefined,
-			filters    : {
-				service_id : organization || undefined,
-				user_id    : user_id || undefined,
-
-			},
-		}));
-	}, [organization, user_id, date, service, setGraphParams, setLeaderboardParams]);
-
-	useEffect(() => {
-		resetField('user_id');
-	}, [service, resetField]);
+	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	return (
 		<section className={styles.container}>
-			<div className={styles.header_text}>Account Score Distribution</div>
+			<div className={styles.header_text}>{t('allocation:account_score_distribution')}</div>
 
 			<HeaderFilters
 				control={control}
-				service={service}
+				filterControls={filterControls}
 			/>
 
 			<ScoreDistributionGraph
@@ -71,13 +49,23 @@ function AccountLeaderboard() {
 			/>
 
 			<Leaderboard
-				columns={leaderboardColumns}
 				leaderboardList={leaderboardList}
 				leaderboardLoading={leaderboardLoading}
 				page={page}
 				page_limit={page_limit}
 				total_count={total_count}
 				getNextPage={getNextPage}
+				checkedRowsId={checkedRowsId}
+				setCheckedRowsId={setCheckedRowsId}
+				currentPageListIds={currentPageListIds}
+				isAllChecked={isAllChecked}
+				setIsAllChecked={setIsAllChecked}
+				selectAllHelper={selectAllHelper}
+				setLeaderboardParams={setLeaderboardParams}
+				setValue={setValue}
+				bulkDeallocateFilter={bulkDeallocateFilter}
+				setBulkDeallocateFilter={setBulkDeallocateFilter}
+				refetch={refetch}
 			/>
 		</section>
 	);

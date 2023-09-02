@@ -27,6 +27,7 @@ function CargoInsurance({
 	primary_service = {},
 }) {
 	const [commodity, setCommodity] = useState('');
+	const [premiumData, setPremiumData] = useState({});
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -40,9 +41,9 @@ function CargoInsurance({
 	};
 
 	const {
-		premiumLoading: loading, premiumData,
+		premiumLoading: loading,
 		premiumRate,
-	} = useGetInsuranceRate();
+	} = useGetInsuranceRate({ setPremiumData });
 
 	const cargoInsuranceCountryId =	primary_service?.trade_type === 'export'
 		? primary_service?.destination_port?.country_id : primary_service?.origin_port?.country_id;
@@ -62,7 +63,7 @@ function CargoInsurance({
 		refetch                : refetchAfterApiCall,
 	});
 
-	const { list = [] } = useGetInsuranceListCommodities();
+	const { list = [], loadingCommodity } = useGetInsuranceListCommodities();
 
 	const {
 		control,
@@ -73,6 +74,7 @@ function CargoInsurance({
 	} = useForm();
 
 	const formValues = watch();
+	const newControls = controls({ list });
 
 	useEffect(() => {
 		if (!isEmpty(formValues?.cargo_value) && !isEmpty(formValues?.cargo_insurance_commodity)) {
@@ -111,7 +113,7 @@ function CargoInsurance({
 		);
 	}, [formValues?.cargo_insurance_commodity, list, setValue]);
 
-	if (apiLoading) {
+	if (apiLoading || loadingCommodity) {
 		return <Loading />;
 	}
 
@@ -137,13 +139,14 @@ function CargoInsurance({
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 			<Modal.Body>
-				<Layout control={control} fields={controls} errors={errors} />
+				<Layout control={control} fields={newControls} errors={errors} />
 
 				{loading ? <Loading /> : null}
 
 				{!isEmpty(premiumData) && !loading ? (
 					<PremiumRate rateData={premiumData} />
 				) : null}
+
 			</Modal.Body>
 			<Modal.Footer>
 				<Button

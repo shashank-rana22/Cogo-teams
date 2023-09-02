@@ -1,5 +1,6 @@
 import { Button, Loader, Tooltip } from '@cogoport/components';
 import { IcCFtick, IcMArrowBack, IcMRefresh } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import PreviewDocument from '../../../commons/PreviewDocument';
 import useGetCompanyDocument from '../../../hooks/useGetCompanyDocument';
@@ -7,7 +8,8 @@ import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 
 import styles from './styles.module.css';
 
-function SignYourDocuments({ setInformationPage, data }) {
+function SignYourDocuments({ setInformationPage = () => {}, data = {} }) {
+	const { back } = useRouter;
 	const { companyDoc, loading, getDocRefetch } = useGetCompanyDocument({
 		detail: data?.detail,
 	});
@@ -24,7 +26,10 @@ function SignYourDocuments({ setInformationPage, data }) {
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>SIGN YOUR DOCUMENTS</div>
 
@@ -53,11 +58,11 @@ function SignYourDocuments({ setInformationPage, data }) {
 			) : (
 				<div className={styles.signed_document_container}>
 					{(companyDoc || []).map((item) => (
-						<div key={item?.id} style={{ padding: '0 12px', flexWrap: 'wrap' }}>
+						<div key={item?.id} className={styles.signed_documents_display}>
 
 							<PreviewDocument document_url={item?.signed_document_url || item?.document_url} />
 
-							<div>
+							<div className={styles.signed_document_status}>
 								{item?.status === 'accepted' ? (
 									<div className={styles.already_signed}>
 										<span style={{ paddingRight: 4 }}>Already Signed</span>

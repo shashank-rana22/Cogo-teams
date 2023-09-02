@@ -10,7 +10,7 @@ import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
 import { footerValues } from '../Helpers/configurations/footerValues';
-import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
+import { footerImages } from '../Helpers/configurations/imageCopies';
 import useUpdateIndividualEditing from '../Helpers/hooks/useUpdateIndividualEditing';
 
 import getFileObject from './getFileObject';
@@ -18,7 +18,6 @@ import SelectDocumentCopies from './SelectDocumentCopies';
 import styles from './styles.module.css';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
-import Watermark from './watermark';
 
 interface NestedObj {
 	[key: string]: ReactFragment;
@@ -35,7 +34,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: string;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<NestedObj>;
 	activeHawb?: NestedObj;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
@@ -61,6 +60,8 @@ const UPDATE_CHECK_INDEX = 1;
 const PDF_HEIGHT_ADJUST_VALUE = 14;
 const PDF_SCALE = 4.5;
 const TWELEVE_COPIES_LAST_INDEX = 1;
+
+const { image_url: BACK_IMAGE_URL } = GLOBAL_CONSTANTS;
 
 function GenerateMawb({
 	taskItem = {},
@@ -237,7 +238,14 @@ function GenerateMawb({
 					if (download24) {
 						if (INCLUDE_TNC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
 							pdf.addPage();
-							pdf.addImage(backPage, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
+							pdf.addImage(
+								BACK_IMAGE_URL.awb_docs_tnc_page,
+								'jpeg',
+								ZERO_COORDINATE,
+								ZERO_COORDINATE,
+								pdfWidth,
+								pdfHeight,
+							);
 						} else {
 							pdf.addPage();
 						}
@@ -246,7 +254,7 @@ function GenerateMawb({
 						pdf.addPage();
 					}
 				});
-				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
+				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		} else {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
@@ -255,7 +263,7 @@ function GenerateMawb({
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 				pdf.addImage(imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
-				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
+				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		}
 		setSaveDocument(false);
@@ -381,8 +389,6 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{((viewDoc && documentState !== 'document_accepted') || (!viewDoc && editCopies === null))
-				&& <Watermark text="draft" rotateAngle="315deg" />}
 
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails

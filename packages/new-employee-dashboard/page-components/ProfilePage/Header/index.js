@@ -8,7 +8,7 @@ import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
 
 import styles from './styles.module.css';
 
-const STATUS_MAPPING = ['approved', 'active', 'accepted'];
+const DISABLE_ADD_CTC_BUTTON_STATUS_LIST = ['approved', 'active', 'accepted', 'draft'];
 
 function Header({
 	detail,
@@ -20,9 +20,15 @@ function Header({
 	offerLetterApiLoading,
 }) {
 	const router = useRouter();
-	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
+	const { id, name, employee_code, designation, passport_size_photo_url, employee_status } = detail || {};
+	const SOURCE = 'reject';
 
-	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails });
+	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({
+		id,
+		employee_status,
+		getEmployeeDetails,
+		SOURCE,
+	});
 
 	const { personal_information, identification_documents, address_details } = personalDetails || {};
 
@@ -33,7 +39,7 @@ function Header({
 	const isLoading = loading || isEmpty(detail || {}) || false;
 
 	const offer_letter_active = (offerLetter || []).find((element) => (
-		STATUS_MAPPING.includes(element?.status)
+		DISABLE_ADD_CTC_BUTTON_STATUS_LIST.includes(element?.status)
 	));
 
 	return (
@@ -88,7 +94,7 @@ function Header({
 			</div>
 
 			<div className={styles.button_container}>
-				{(status === 'active' && isEmpty(offer_letter_active)) ? (
+				{(employee_status === 'offered' && isEmpty(offer_letter_active)) ? (
 					<Button
 						onClick={() => setShowCtcBreakupModal(true)}
 						type="button"
@@ -107,7 +113,7 @@ function Header({
 					onClick={() => updateEmployeeStatus()}
 					loading={isLoading || btnloading || offerLetterApiLoading}
 				>
-					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
+					{employee_status === 'offered' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>
 
 			</div>

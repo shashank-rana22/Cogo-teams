@@ -1,77 +1,54 @@
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback } from 'react';
 
 const useCloseVoiceCall = ({
-	localStateReducer,
-	voice_call_recipient_data,
+	setCallState,
 }) => {
-	const [counter, setCounter] = useState(0);
-	const apiCallIntervalRef = useRef(null);
-	const counterIntervalRef = useRef(null);
-
 	const dispatch = useDispatch();
-	const { userId = '', orgId = '' } = voice_call_recipient_data || {};
 
-	const clearApiInterval = useCallback(() => {
-		clearInterval(apiCallIntervalRef.current);
-	}, []);
+	const unmountVoiceCall = useCallback(({ lead_user_id = '', lead_organization_id = '', callStartAt = '' } = {}) => {
+		setCallState({});
 
-	const stopSecsCounter = useCallback(() => {
-		setCounter(0);
-		clearInterval(counterIntervalRef.current);
-	}, []);
+		dispatch(
+			setProfileState({
+				voice_call_recipient_data : {},
+				is_in_voice_call          : false,
+				...(lead_organization_id ? {
+					lead_feedback_form_type : 'lead_org_feedback',
+					lead_feedback_form_data : {
+						lead_user_id,
+						lead_organization_id,
+						refetch_list             : false,
+						communication_start_time : callStartAt,
+						communication_end_time   : Date.now(),
+						source                   : 'voice_call',
+					},
+				} : {}),
 
-	const startApiCallInterval = useCallback((intervalFunc = () => {}) => {
-		apiCallIntervalRef.current = setInterval(intervalFunc, 5000);
-	}, []);
+			}),
+		);
+	}, [dispatch, setCallState]);
 
-	const startSecsCounter = useCallback(() => {
-		counterIntervalRef.current = setInterval(() => {
-			setCounter((prevCounter) => prevCounter + 1);
-		}, 1000);
-	}, []);
-
-	const unmountVoiceCall = useCallback(() => {
-		localStateReducer({
-			showCallModalType    : '',
-			status               : '',
-			attendees            : [],
-			callRecordId         : '',
-			callId               : '',
-			hasAgentPickedCall   : false,
-			latestAddedAgentName : '',
-			voiceCallEndAt       : null,
-		});
+	const openFeedbackform = useCallback(() => {
 		dispatch(
 			setProfileState({
 				voice_call_recipient_data : {},
 				is_in_voice_call          : false,
 			}),
 		);
-	}, [dispatch, localStateReducer]);
 
-	const checkToOpenFeedBack = useCallback(({ hasAgentPickedCall = false }) => {
-		stopSecsCounter();
-		clearInterval(apiCallIntervalRef.current);
-		if (orgId && userId && hasAgentPickedCall) {
-			localStateReducer({
-				showCallModalType : 'feedbackModal',
-				voiceCallEndAt    : new Date(),
-			});
-			return;
-		}
-		unmountVoiceCall();
-	}, [localStateReducer, orgId, unmountVoiceCall, userId, stopSecsCounter]);
+		setCallState((p) => ({
+			...p,
+			showCallModalType : 'feedbackModal',
+			status            : 'completed',
+			callEndAt         : new Date(),
+		}));
+	}, [dispatch, setCallState]);
 
 	return {
 		unmountVoiceCall,
-		checkToOpenFeedBack,
-		startApiCallInterval,
-		clearApiInterval,
-		startSecsCounter,
-		stopSecsCounter,
-		counter,
+		openFeedbackform,
 	};
 };
 export default useCloseVoiceCall;

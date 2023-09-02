@@ -1,0 +1,31 @@
+.header {
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.control_container {
+	display: flex;
+	flex-direction: column;
+	margin: 0 12px;
+
+	:global(.react-datepicker__aria-live) {
+		display: none;
+	}
+}
+
+.label {
+	margin-bottom: 8px;
+}
+
+.select_container {
+	min-width: 220px;
+}
+
+.score_graph {
+	height: 70vh;
+}

@@ -19,6 +19,7 @@ function UpdateButton({
 	task = {},
 	handleClick = () => {},
 	handleChange = () => {},
+	handleEmail = () => {},
 	hideButton = false,
 	show = false,
 	tasksList = [],
@@ -47,7 +48,15 @@ function UpdateButton({
 		buttonText = 'Review';
 	}
 
+	if (task?.task_type === 'send_email' && task?.status === 'completed') {
+		buttonText = 'View';
+	}
+
 	let disableTask = DISABLE_TASK_FOR_STAKEHOLDERS.includes(task?.assigned_stakeholder);
+
+	if (task?.task === 'upload_igm_document') {
+		disableTask = false;
+	}
 
 	if (task.task === 'upload_si'
 	&& task.status === 'pending'
@@ -91,7 +100,8 @@ function UpdateButton({
 		<div className={styles.container}>
 			<Button
 				className={styles.upload_button}
-				onClick={() => handleClick(task)}
+				themeType={task?.status === 'completed' ? 'secondary' : 'primary'}
+				onClick={() => (task?.status === 'completed' ? handleEmail() : handleClick(task))}
 				disabled={disableTask}
 			>
 				{buttonText}

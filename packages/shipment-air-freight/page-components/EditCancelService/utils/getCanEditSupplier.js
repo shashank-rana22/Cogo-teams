@@ -8,7 +8,8 @@ const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];
 const OLD_SHIPMENT_ID = 120347;
 
 export default function getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig }) {
-	if (user_data?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id) {
+	if (user_data?.id
+		&& GLOBAL_CONSTANTS.uuid.air_admin_user_ids.includes(user_data?.id)) {
 		return true;
 	}
 

@@ -1,16 +1,23 @@
 import { Modal, Button, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useCreateRole from '../../../../../hooks/useCreateRoles';
-import descriptions from '../../../../../utils/descriptions';
+import roleDescriptions from '../../../../../utils/descriptions';
 
 import ChangeStatus from './ChangeStatus';
 import NavContent from './NavContent';
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
+const TIMEOUT = 200;
+
 const getFormValues = (navigationRefs, isActive) => new Promise((resolve) => {
 	let allValuesFilled = true;
-	const allValues = {};
+	const ALL_VALUES = {};
 	Object.keys(navigationRefs).forEach((featureKey) => {
 		const {
 			handleSubmit: hS,
@@ -31,15 +38,15 @@ const getFormValues = (navigationRefs, isActive) => new Promise((resolve) => {
 		let apiKey = null;
 		valueKeys.forEach((key) => {
 			const splittedKey = key.split('-');
-			if (splittedKey.length === 1) {
-				apiKey = splittedKey?.[0];
+			if (splittedKey.length === FIRST_INDEX) {
+				apiKey = splittedKey?.[GLOBAL_CONSTANTS.zeroth_index];
 			}
 		});
-		allValues[apiKey] = { ...values, is_inactive: !isActive };
+		ALL_VALUES[apiKey] = { ...values, is_inactive: !isActive };
 	});
 	setTimeout(() => {
-		resolve({ allValuesFilled, allValues });
-	}, 200);
+		resolve({ allValuesFilled, allValues: ALL_VALUES });
+	}, TIMEOUT);
 });
 
 /**
@@ -62,19 +69,42 @@ function Navigation(props) {
 		getNavOptions = () => {},
 		loading = false,
 		isNested = false,
+		activeNavs,
 	} = props;
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const [show, setShow] = useState(null);
 	const [showStatus, setShowStatus] = useState(null);
 	const [navigationRefs, setNavigationRefs] = useState({});
 	const [selectedDepartments, setSelectedDepartments] = useState({ scopes: ['allowed'] });
 	const { createRole, loading: creatingNavs } = useCreateRole();
 
+	const descriptions = roleDescriptions(t);
+
 	const navigationApis = getNavOptions(navigation.key);
+	const [{ data = {}, loading: loadingPermissions = false }, trigger] = useAuthRequest({
+		url    : 'list_role_permissions',
+		method : 'get',
+	}, { manual: true });
 
-	const navPermissions = (roleData?.old_permissions || [])
-		.find((nav) => nav.navigation === navigation.key && nav.status === 'active');
+	const getNavigationPermissions = async () => {
+		await trigger({
+			params: {
+				filters: {
+					role_id    : authRoleId,
+					navigation : navigation?.key,
+					status     : true,
+				},
+				all_role_permissions_required: true,
+			},
+		});
 
-	const isActive = navPermissions?.status === 'active';
+		setShow(SECOND_INDEX);
+	};
+
+	const { list: rolePermissionsList = [] } = data;
+	const isActive = (activeNavs || []).includes(navigation.key);
+
+	const updatedRoleData = { ...roleData, permissions: rolePermissionsList };
 
 	const afterSave = () => {
 		getRole(authRoleId, false);
@@ -83,8 +113,12 @@ function Navigation(props) {
 
 	const handleSubmit = (vals) => {
 		if (authRoleId) {
-			createRole(authRoleId, vals, afterSave, roleData);
+			createRole(authRoleId, vals, afterSave, updatedRoleData);
 		}
+	};
+
+	const handleDepartmentToPermissions = () => {
+		getNavigationPermissions();
 	};
 
 	const handleSave = async () => {
@@ -111,26 +145,28 @@ function Navigation(props) {
 		} else if (!containsApis) {
 			setShowStatus('active');
 		} else if (roleData?.isImported) {
-			setShow(2);
+			setShow(SECOND_INDEX);
 		} else {
-			setShow(1);
+			setShow(FIRST_INDEX);
 		}
 	};
 
-	let buttonText = 'Assign Now';
+	let buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_assign_now');
 	let background = 'accent';
 	if (isActive) {
-		buttonText = 'Un-Assign Now';
+		buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_un_assign_now');
 		background = 'secondary';
 	}
 
-	let btnText = creatingNavs ? 'Saving, Please wait...' : 'Save';
-	if (show === 1) {
-		btnText = 'NEXT';
+	let btnText = creatingNavs
+		? t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait')
+		: t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save');
+	if (show === FIRST_INDEX) {
+		btnText = t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_next');
 	}
 
 	if (roleData?.isImported) {
-		buttonText = 'Allow Navigation';
+		buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_allow_navigation');
 		background = 'primary';
 	}
 
@@ -159,11 +195,10 @@ function Navigation(props) {
 							<Button
 								size="md"
 								className={styles.edit}
-								onClick={() => setShow(2)}
+								onClick={() => handleDepartmentToPermissions()}
 								disabled={loading}
-
 							>
-								Edit
+								{t('accessManagement:roles_and_permission_crm_dashboard_button_edit')}
 							</Button>
 						) : null}
 					</div>
@@ -190,7 +225,7 @@ function Navigation(props) {
 							setNavigationRefs={(newValues) => {
 								setNavigationRefs((prev) => ({ ...prev, ...newValues }));
 							}}
-							roleData={roleData}
+							roleData={updatedRoleData}
 							creatingNavs={creatingNavs}
 							handleSave={handleSave}
 							show={show}
@@ -207,19 +242,21 @@ function Navigation(props) {
 								themeType="secondary"
 								disabled={creatingNavs}
 								onClick={() => {
-									if (show === 1 || roleData.isImported) {
+									if (show === FIRST_INDEX || roleData.isImported) {
 										setShow(null);
 									} else {
-										setShow(1);
+										setShow(FIRST_INDEX);
 									}
 								}}
 							>
-								{show === 1 || roleData.isImported ? 'Cancel' : 'BACK'}
+								{show === FIRST_INDEX || roleData.isImported
+									? t('accessManagement:roles_and_permission_crm_dashboard_btn_text_cancel')
+									: t('accessManagement:roles_and_permission_crm_dashboard_btm_text_back')}
 							</Button>
 							<Button
 								size="md"
-								onClick={show === 1 ? () => setShow(2) : handleSave}
-								loading={creatingNavs}
+								onClick={show === FIRST_INDEX ? () => handleDepartmentToPermissions() : handleSave}
+								loading={loadingPermissions || creatingNavs}
 								disabled={creatingNavs}
 							>
 								{btnText}
@@ -240,4 +277,5 @@ function Navigation(props) {
 		</section>
 	);
 }
+
 export default Navigation;

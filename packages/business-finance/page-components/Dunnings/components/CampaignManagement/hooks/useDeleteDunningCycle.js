@@ -12,9 +12,9 @@ function useDeleteDunningCycle({ id, getDunningList, setActionModal }) {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/dunning/delete-dunning-cycle',
+			url     : '/payments/dunning/dunning-cycle',
 			method  : 'delete',
-			authKey : 'delete_payments_dunning_delete_dunning_cycle',
+			authKey : 'delete_payments_dunning_dunning_cycle',
 		},
 		{ manual: true },
 	);

@@ -9,7 +9,7 @@ function CancelEinvoice({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
-	IRNLabel,
+	irnLabel,
 	refetch,
 	entityCode,
 }) {
@@ -19,7 +19,7 @@ function CancelEinvoice({
 		formState: { errors: errorVal },
 	} = useForm();
 
-	const { id, invoiceNumber, invoiceDate } = itemData || {};
+	const { id = '', invoiceNumber = '', invoiceDate = '' } = itemData || {};
 
 	const { onSubmit, loading, response, setResponse } = useGetIrnCancellation({
 		id,
@@ -32,13 +32,12 @@ function CancelEinvoice({
 	return (
 		<Modal show={showCancellationModal} onClose={() => setShowCancellationModal(false)} size="lg">
 			<div className={styles.cancel_modal}>
-
 				<Modal.Header
 					title={(
 						<div className={styles.cancel_invoice}>
 							Cancel
 							{' '}
-							{IRNLabel}
+							{irnLabel}
 							{' '}
 							<span className={styles.styled_invoice}>
 								{invoiceNumber}
@@ -50,86 +49,6 @@ function CancelEinvoice({
 					<Modal.Body>
 						<div>
 							<div className={styles.date_container}>
-								<div className={styles.div_width}>
-									<div className={styles.lable_style}>
-										Agreement No. *
-									</div>
-									<InputController
-										control={control}
-										name="agreementNumber"
-										placeholder="Agreement Number"
-										type="text"
-										value={response?.agreementNumber}
-										onChange={(e) => {
-											setResponse((resp) => ({ ...resp, agreementNumber: e }));
-										}}
-										rules={{ required: 'Agreement Number is required' }}
-									/>
-									{(response?.agreementNumber === '') && (
-										<span className={styles.errors}>
-											{' '}
-											{errorVal?.agreementNumber?.message.toString()}
-										</span>
-									)}
-								</div>
-								<div className={styles.div_width}>
-									<div className={styles.lable_style}>
-										Aggreement Date *
-									</div>
-									<DatepickerController
-										control={control}
-										placement="bottom"
-										name="agreementDate"
-										type="datepicker"
-										value={response?.agreementDate}
-										isPreviousDaysAllowed
-										onChange={(e) => setResponse((resp) => ({ ...resp, agreementDate: e }))}
-										placeholder="Agreement Date"
-										rules={{ required: 'Agreement Date is required' }}
-									/>
-									{response?.agreementDate ? (
-										<span className={styles.errors}>
-											{errorVal?.agreementDate?.message.toString()}
-										</span>
-									) : null}
-								</div>
-								<div className={styles.div_width}>
-									<div className={styles.lable_style}>E-Invoice Date</div>
-									<DatepickerController
-										control={control}
-										name="E_invoice_date"
-										value={new Date(invoiceDate)}
-										type="datepicker"
-										isPreviousDaysAllowed
-										placeholder="E-invoice Date"
-										rules={{ required: 'E invoice Date is required.' }}
-									/>
-									{(invoiceDate === '') ? (
-										<span className={styles.errors}>
-											{' '}
-											{errorVal?.invoiceDate?.message.toString()}
-										</span>
-									) : null}
-								</div>
-							</div>
-							<div className={styles.upload_container}>
-								<div className={styles.upload_Width}>
-									<div className={styles.lable_style}>Agreement Proof *</div>
-									<UploadController
-										control={control}
-										name="agreementDocument"
-										value={response?.agreementDocument}
-										defaultValues={response?.agreementDocument}
-										onChange={(e) => setResponse((resp) => ({ ...resp, agreementDocument: e }))}
-										rules={{ required: 'Agreement file is required' }}
-									/>
-									{(response?.agreementDocument === '') ? (
-										<span className={styles.errors}>
-											{' '}
-											{errorVal?.agreementDocument?.message.toString()}
-										</span>
-									) : null}
-								</div>
 								<div className={styles.upload_Width}>
 									<div className={styles.lable_style}>Cancellation Reason *</div>
 									<InputController
@@ -142,11 +61,102 @@ function CancelEinvoice({
 									{(response?.remarks === '') ? (
 										<span className={styles.errors}>
 											{' '}
-											{errorVal?.remarks?.message.toString()}
+											{errorVal?.remarks?.message}
+										</span>
+									) : null}
+								</div>
+								<div className={styles.div_width}>
+									<div className={styles.lable_style}>E-Invoice Date</div>
+									<DatepickerController
+										control={control}
+										name="E_invoice_date"
+										value={new Date(invoiceDate)}
+										type="datepicker"
+										isPreviousDaysAllowed
+										disabled
+										placeholder="E-invoice Date"
+										rules={{ required: 'E invoice Date is required.' }}
+									/>
+									{(invoiceDate === '') ? (
+										<span className={styles.errors}>
+											{' '}
+											{errorVal?.invoiceDate?.message}
 										</span>
 									) : null}
 								</div>
 							</div>
+							<div className={styles.date_container}>
+								{response?.agreementDocument ? (
+									<>
+										<div className={styles.agreement}>
+											<div className={styles.lable_style}>Agreement Proof *</div>
+											<UploadController
+												control={control}
+												name="agreementDocument"
+												value={response?.agreementDocument}
+												defaultValues={response?.agreementDocument}
+												disabled
+												rules={{ required: 'Agreement file is required' }}
+											/>
+											{(response?.agreementDocument === '') ? (
+												<span className={styles.errors}>
+													{' '}
+													{errorVal?.agreementDocument?.message}
+												</span>
+											) : null}
+										</div>
+										<div className={styles.agreement_block}>
+											<div className={styles.div_width}>
+												<div className={styles.lable_style}>
+													Agreement No. *
+												</div>
+												<InputController
+													control={control}
+													name="agreementNumber"
+													placeholder="Agreement Number"
+													type="text"
+													value={response?.agreementNumber}
+													onChange={(e) => {
+														setResponse((resp) => ({ ...resp, agreementNumber: e }));
+													}}
+													rules={{ required: 'Agreement Number is required' }}
+												/>
+												{(response?.agreementNumber === '') && (
+													<span className={styles.errors}>
+														{' '}
+														{errorVal?.agreementNumber?.message}
+													</span>
+												)}
+											</div>
+											<div className={styles.div_width}>
+												<div className={styles.lable_style}>
+													Aggreement Date *
+												</div>
+												<DatepickerController
+													control={control}
+													placement="bottom"
+													name="agreementDate"
+													type="datepicker"
+													value={response?.agreementDate}
+													isPreviousDaysAllowed
+													minDate={new Date(invoiceDate)}
+													onChange={
+														(e) => setResponse((resp) => ({ ...resp, agreementDate: e }))
+													}
+													placeholder="Agreement Date"
+													rules={{ required: 'Agreement Date is required' }}
+												/>
+												{response?.agreementDate ? (
+													<span className={styles.errors}>
+														{errorVal?.agreementDate?.message}
+													</span>
+												) : null}
+											</div>
+										</div>
+									</>
+								) : null}
+							</div>
+
 						</div>
 					</Modal.Body>
 

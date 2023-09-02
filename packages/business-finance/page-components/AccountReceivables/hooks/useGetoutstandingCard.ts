@@ -1,48 +1,23 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-type DueDate = {
-	startDate?: Date,
-	endDate?: Date,
-};
+const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
+	const { userData } = useSelector(({ profile }) => ({
+		userData: profile?.user || {},
+	}));
 
-type InvoiceDate = {
-	startDate?: Date,
-	endDate?: Date,
-};
-
-type DateObj = {
-	startDate?: Date,
-	endDate?: Date,
-};
-
-interface InvoiceFilterProps {
-	page : number,
-	pageLimit: number,
-	date?: DateObj,
-	search?: string,
-	dueDate?: DueDate,
-	invoiceDate?: InvoiceDate,
-	orgId?: string,
-	migrated?: string,
-	status?: string,
-	invoiceStatus?: string,
-	services?: string[],
-	currency?: string
-}
-
-const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
-		page      : 1,
-		pageLimit : 10,
-		orgId     : organizationId,
-		status    : 'unpaid',
+	const [invoiceFilters, setinvoiceFilters] = useState({
+		page              : 1,
+		pageLimit         : limit,
+		orgId             : organizationId,
+		paymentStatusList : ['unpaid'],
 	});
 
 	const [sort, setSort] = useState({
@@ -50,14 +25,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		sortBy   : 'invoiceDate',
 	});
 
-	const { userData } = useSelector(({ profile }) => ({
-		userData: profile?.user || {},
-	}));
-
-	const [
-		{ data: listData, loading: listLoading },
-		listApi,
-	] = useRequestBf(
+	const [{ data: listData, loading: listLoading }, listApi] = useRequestBf(
 		{
 			url     : '/sales/outstanding/invoice-list',
 			method  : 'get',
@@ -76,54 +44,128 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	);
 
 	const {
-		page, pageLimit, migrated, status, invoiceStatus,
-		services, search, dueDate, invoiceDate, orgId, currency,
+		page,
+		pageLimit,
+		migrated,
+		paymentStatusList,
+		invoiceStatus,
+		services,
+		search,
+		dueDate,
+		invoiceDate,
+		orgId,
 	} = invoiceFilters || {};
 
-	const dueDateStart = dueDate && format(dueDate?.startDate, 'yyyy-MM-dd', {}, false);
-	const dueDateEnd = dueDate && format(dueDate?.endDate, 'yyyy-MM-dd', {}, false);
+	const dueDateStart = dueDate && format(
+		dueDate?.startDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
+	const dueDateEnd = dueDate && format(
+		dueDate?.endDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
 
-	const invoiceDateStart = invoiceDate && format(invoiceDate?.startDate, 'yyyy-MM-dd', {}, false);
-	const invoiceDateEnd = invoiceDate && format(invoiceDate?.endDate, 'yyyy-MM-dd', {}, false);
+	const invoiceDateStart = invoiceDate && format(
+		invoiceDate?.startDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
+	const invoiceDateEnd = invoiceDate && format(
+		invoiceDate?.endDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
 
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	const getOrganizationInvoices = useCallback(async () => {
-		try {
-			await listApi({
-				params: {
-					page,
-					pageLimit,
-					migrated      : migrated || undefined,
-					status        : status || undefined,
-					invoiceStatus : invoiceStatus || undefined,
-					services      : services || undefined,
-					query         : query !== '' ? query : undefined,
-					role          : userData.id,
-					orgId         : orgId || undefined,
-					dueDateStart,
-					dueDateEnd,
-					invoiceDateStart,
-					invoiceDateEnd,
-					cogoEntity    : entityCode || undefined,
-					currency      : currency || undefined,
-					sortBy        : sort.sortBy || undefined,
-					sortType      : sort.sortType || undefined,
-				},
+	const getOrganizationInvoices = useCallback(
+		async (filters) => {
+			const dueDateStartFilter = filters?.dueDate && format(
+				filters?.dueDate?.startDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
+			const dueDateEndFilter = filters?.dueDate && format(
+				filters?.dueDate?.endDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
 
-			});
+			const invoiceDateStartFilter = filters?.invoiceDate && format(
+				filters?.invoiceDate?.startDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
+			const invoiceDateEndFilter = filters?.invoiceDate && format(
+				filters?.invoiceDate?.endDate,
+				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				{},
+				false,
+			);
 
-			if (sort.sortBy === 'grandTotal' && currency === undefined) {
-				Toast.warn('Please apply currency filter to sort invoice amount accurately');
+			try {
+				await listApi({
+					params: {
+						page,
+						pageLimit,
+						migrated          : migrated || undefined,
+						paymentStatusList : paymentStatusList || undefined,
+						invoiceStatus     : invoiceStatus || undefined,
+						services          : filters?.services || undefined,
+						query             : query !== '' ? query : undefined,
+						role              : userData.id,
+						orgId             : orgId || undefined,
+						dueDateStart      : dueDateStartFilter || undefined,
+						dueDateEnd        : dueDateEndFilter || undefined,
+						invoiceDateStart  : invoiceDateStartFilter || undefined,
+						invoiceDateEnd    : invoiceDateEndFilter || undefined,
+						cogoEntity        : entityCode || undefined,
+						currency          : filters?.currency || undefined,
+						sortBy            : sort.sortBy || undefined,
+						sortType          : sort.sortType || undefined,
+					},
+				});
+
+				if (
+					sort.sortBy === 'grandTotal'
+					&& filters?.currency === undefined
+				) {
+					Toast.warn(
+						'Please apply currency filter to sort invoice amount accurately',
+					);
+				}
+			} catch (e) {
+				if (e?.error?.message) {
+					Toast.error(e?.error?.message || 'Failed');
+				}
 			}
-		} catch (e) {
-			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
-		}
-	}, [listApi, page, pageLimit, migrated, status, invoiceStatus, services,
-		query, userData.id, orgId, dueDateStart, dueDateEnd, invoiceDateStart,
-		invoiceDateEnd, entityCode, currency, sort.sortBy, sort.sortType]);
+		},
+		[
+			listApi,
+			page,
+			pageLimit,
+			migrated,
+			paymentStatusList,
+			invoiceStatus,
+			query,
+			userData.id,
+			orgId,
+			entityCode,
+			sort.sortBy,
+			sort.sortType,
+		],
+	);
 
 	const sendReport = async () => {
 		try {
@@ -131,41 +173,43 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 				params: {
 					page,
 					pageLimit,
-					migrated      : migrated || undefined,
-					status        : status || undefined,
-					invoiceStatus : invoiceStatus || undefined,
-					services      : services || undefined,
+					migrated          : migrated || undefined,
+					paymentStatusList : paymentStatusList || undefined,
+					invoiceStatus     : invoiceStatus || undefined,
+					services          : services || undefined,
 					orgId,
 					dueDateStart,
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
-					query         : query !== '' ? query : undefined,
-					performedBy   : userData.id,
+					query             : query !== '' ? query : undefined,
+					performedBy       : userData.id,
 				},
 			});
 			Toast.success('Report Sent Successfully');
 		} catch (e) {
-			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed to Send Report'); }
+			if (e?.error?.message) {
+				Toast.error(e?.error?.message || 'Failed to Send Report');
+			}
 		}
 	};
 
 	useEffect(() => {
-		getOrganizationInvoices();
-	}, [query, dueDate, invoiceDate, getOrganizationInvoices]);
+		getOrganizationInvoices({});
+	}, [query, getOrganizationInvoices]);
 
 	const clearInvoiceFilters = () => {
 		setinvoiceFilters((prev) => ({
 			...prev,
-			page          : 1,
-			invoiceStatus : undefined,
-			search        : undefined,
-			status        : undefined,
-			services      : undefined,
-			migrated      : undefined,
-			invoiceDate   : undefined,
-			dueDate       : undefined,
-			currency      : undefined,
+			page              : 1,
+			invoiceStatus     : undefined,
+			search            : undefined,
+			paymentStatusList : undefined,
+			services          : undefined,
+			migrated          : undefined,
+			invoiceDate       : undefined,
+			dueDate           : undefined,
+			currency          : undefined,
 		}));
 	};
 

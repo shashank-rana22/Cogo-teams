@@ -14,6 +14,7 @@ const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
 const EVENTS = ['click', 'keypress', 'scroll', 'pointermove'];
 
+const STOP_TRACK_ACTIVITY = ['locked_screen', 'in_call', 'inactive', 'break', 'punched_out', 'on_leave'];
 const DEBOUNCE_LIMIT = 60000;
 
 export const getTimeoutConstant = async (firestore) => {
@@ -25,6 +26,7 @@ export const getTimeoutConstant = async (firestore) => {
 	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
 
 	const {
+		enable_for_roles = [],
 		screen_lock_timeout = DEFAULT_TIMEOUT,
 		is_locked_screen = false,
 	} = cogoOneConstantsDocs?.data() || {};
@@ -32,6 +34,7 @@ export const getTimeoutConstant = async (firestore) => {
 	return {
 		timeoutValue : screen_lock_timeout,
 		isLockedBool : is_locked_screen,
+		enableRole   : enable_for_roles,
 	};
 };
 
@@ -39,14 +42,14 @@ export async function activityTracker({ trackerRef, roomDoc, activity }) {
 	clearTimeout(trackerRef.current);
 	const refForTracker = trackerRef;
 
-	const userDocData = await getDoc(roomDoc);
-	const lastActivity = userDocData?.data()?.last_activity;
+	refForTracker.current = setTimeout(async () => {
+		const userDocData = await getDoc(roomDoc);
+		const lastActivity = userDocData?.data()?.last_activity;
 
-	if (lastActivity === 'locked_screen') {
-		return;
-	}
+		if (STOP_TRACK_ACTIVITY.includes(lastActivity)) {
+			return;
+		}
 
-	refForTracker.current = setTimeout(() => {
 		setDoc(roomDoc, {
 			last_activity_timestamp : Date.now(),
 			last_activity           : activity,
@@ -64,10 +67,10 @@ export function mountActivityTracker({ FUNC_MAPPING }) {
 	});
 }
 
-export async function unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePresent = false }) {
+export async function unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePresent = false, inCall = false }) {
 	const { isLockedBool } = await getTimeoutConstant(firestore);
 
-	if (!isLockedBool || !isRolePresent) {
+	if (!isLockedBool || !isRolePresent || inCall) {
 		return;
 	}
 
@@ -78,4 +81,10 @@ export async function unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePr
 			true,
 		);
 	});
+}
+
+export async function getRolesIsLocked({ firestore = {} }) {
+	const { enableRole = [] } = await getTimeoutConstant(firestore);
+
+	return enableRole;
 }

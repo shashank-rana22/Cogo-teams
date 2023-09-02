@@ -1,67 +1,99 @@
 import { asyncFieldsPartner, asyncFieldsPartnerRoles } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
+import { useAuthRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
+const FIRST_INDEX = 1;
+
 const useImportRoles = ({ onSubmit = () => {} }) => {
+	const { t } = useTranslation(['accessManagement']);
 	const [formValues, setFormvalues] = useState({});
 	const [view, setView] = useState('import'); // import/priority
 	const [options, setOptions] = useState([]);
 
-	const hashedOptions = {};
-	(options || []).forEach((role) => {
-		const hashedRole = {};
-		(role.permissions || []).forEach((permission) => {
-			hashedRole[`${permission.navigation}:${permission.resource_name}`] = permission;
-		});
+	const [{ loading: isImportingRole = false }, trigger] = useAuthRequest({
+		url    : 'list_role_permissions',
+		method : 'get',
+	}, { manual: true });
 
-		hashedOptions[role.id] = hashedRole;
-	});
-
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (view === 'import') {
-			if (options.length > 1) {
+			if (options.length > FIRST_INDEX) {
 				setView('priority');
 			} else {
 				const [firstRoleId] = formValues?.role_ids || [];
-				const permissions =	options.find((role) => role.id === firstRoleId)?.permissions || [];
+				const response = await trigger({
+					params: {
+						filters                       : { role_id: firstRoleId },
+						all_role_permissions_required : true,
+					},
+				});
 
-				onSubmit(permissions);
+				onSubmit(((response.data || {}).list || []));
 			}
 		} else {
 			const [firstRoleId, ...rest] = formValues?.role_ids || [];
 
-			const permissions =	options.find((role) => role.id === firstRoleId)?.permissions || [];
-
-			const takenPermissions = Object.keys(hashedOptions[firstRoleId]);
-
-			rest.forEach((id) => {
-				const hashedRole = hashedOptions[id] || {};
-				const remainigPermissions = Object.keys(hashedRole).filter(
-					(key) => !takenPermissions.includes(key),
-				);
-
-				const permissionsToTake = remainigPermissions.map(
-					(item) => hashedRole[item],
-				);
-
-				permissions.push(...permissionsToTake);
-				takenPermissions.push(...remainigPermissions);
+			const response = await trigger({
+				params: {
+					filters                       : { role_id: formValues?.role_ids || [] },
+					all_role_permissions_required : !isEmpty(formValues.role_ids),
+				},
 			});
 
-			onSubmit(permissions);
+			const permissionList = (response.data || {}).list || [];
+			const firstRolePermissions = permissionList.filter((perm) => perm.role_id === firstRoleId);
+
+			const takenPermissions = new Set(firstRolePermissions.map((perm) => {
+				if (!isEmpty(perm.resource)) {
+					return `${perm.navigation}-${perm.resource}`;
+				}
+				return perm.navigation;
+			}));
+
+			rest.forEach((id) => {
+				const remainingPermissions = permissionList.filter(
+					(perm) => {
+						let isPermissionTaken = false;
+
+						if (!isEmpty(perm.resource)) {
+							isPermissionTaken = takenPermissions.has(`${perm.navigation}-${perm.resource}`);
+						} else {
+							isPermissionTaken = takenPermissions.has(perm.navigation);
+						}
+
+						return perm.role_id === id && !isPermissionTaken;
+					},
+				);
+
+				firstRolePermissions.push(...remainingPermissions);
+
+				remainingPermissions.forEach((perm) => {
+					if (!isEmpty(perm.resource)) {
+						takenPermissions.add(`${perm.navigation}-${perm.resource}`);
+					} else {
+						takenPermissions.add(perm.navigation);
+					}
+				});
+			});
+
+			onSubmit(firstRolePermissions);
 		}
 	};
 
-	let submitText = 'Import';
-	if ((options || []).length > 1 && view === 'import') {
-		submitText = 'Assign Priority';
+	let submitText = t('accessManagement:roles_and_permission_permission_list_import_roles_select_import_button');
+	if ((options || []).length > FIRST_INDEX && view === 'import') {
+		submitText = t('accessManagement:roles_and_permission_permission_list_import_roles_select_assign_priority');
 	}
 
 	const partnerOptions = useGetAsyncOptions({
 		...asyncFieldsPartner(),
 	});
 
-	const partnerRoleOptions = useGetAsyncOptions({
+	const partnerRoleOptions = useGetAsyncOptionsMicroservice({
 		...asyncFieldsPartnerRoles(),
 		initialCall : false,
 		params      : {
@@ -80,6 +112,7 @@ const useImportRoles = ({ onSubmit = () => {} }) => {
 		setOptions,
 		formValues,
 		submitText,
+		isImportingRole,
 		view,
 		partnerOptions,
 		partnerRoleOptions,

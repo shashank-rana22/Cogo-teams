@@ -10,7 +10,8 @@ const getParams = ({ agentType, page, query }) => ({
 		agent_type : agentType || undefined,
 	},
 	page,
-	page_limit: PAGE_LIMIT,
+	page_limit : PAGE_LIMIT,
+	sort_by    : 'agent_type',
 });
 
 function useListChatAgents() {

@@ -4,8 +4,16 @@
 	height: 8vh;
 	padding-right: 20px;
 	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 40%;
+	}
 }
 
 .right_button_container {
 	display: flex;
+
+	@media (max-width: 768px) {
+		margin-left: 4%;
+	}
 }

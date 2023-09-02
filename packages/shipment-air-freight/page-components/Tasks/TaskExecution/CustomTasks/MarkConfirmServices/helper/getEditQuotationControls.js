@@ -1,4 +1,5 @@
 import AIR_UNITS from '@cogoport/air-modules/constants/AIR_UNITS';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import { convertObjectMappingToArray } from '@cogoport/air-modules/utils/convertObjectMappingToArray';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
@@ -38,12 +39,12 @@ const getEditQuotationControls = ({ service_charge, shipment_data, handleChange 
 				},
 			},
 			{
-				label          : 'Currency',
-				name           : 'currency',
-				type           : 'select',
-				optionsListKey : 'exchange-rate-currencies',
-				size           : 'sm',
-				span           : 1,
+				label   : 'Currency',
+				name    : 'currency',
+				type    : 'select',
+				options : currencies,
+				size    : 'sm',
+				span    : 1,
 			},
 			{
 				label : 'Rate',

@@ -1,18 +1,18 @@
-const controls = [
+const getControls = ({ t = () => {} }) => [
 	{
 		name        : 'mastery_name',
-		label       : 'Mastery Name',
-		placeholder : 'Multi Modal',
+		label       : t('allocation:mastery_name_label'),
+		placeholder : t('allocation:mastery_name_placeholder'),
 		type        : 'text',
 		rules       : {
-			required: 'Mastery name is required',
+			required: t('allocation:mastery_name_rules_required'),
 		},
 		isClearable: true,
 	},
 	{
 		name        : 'badges',
-		label       : 'Badges',
-		placeholder : 'Select',
+		label       : t('allocation:badges_label'),
+		placeholder : t('allocation:select_placeholder'),
 		type        : 'asyncSelect',
 		asyncKey    : 'badge_name',
 		multiple    : true,
@@ -25,7 +25,7 @@ const controls = [
 			},
 		},
 		rules: {
-			required: 'Select a Badge',
+			required: t('allocation:badges_rules_required'),
 		},
 		styles: {
 			width: '200px',
@@ -33,4 +33,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;

@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
@@ -8,6 +9,8 @@ import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 import commonFunctions from '../../utils/commonFunctions';
 import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
+
+import styles from './styles.module.css';
 
 function ApprovedAWB({
 	data = {},
@@ -19,8 +22,10 @@ function ApprovedAWB({
 	setEdit = () => {},
 	listAPI = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	const [triggerManifest, setTriggerManifest] = useState('');
-	const { fields } = approvedAWBFields;
+	const [handoverModal, setHandoverModal] = useState(false);
+	const { fields } = approvedAWBFields({ t });
 
 	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
 
@@ -36,13 +41,43 @@ function ApprovedAWB({
 				documentUrl,
 			};
 			return (
-				<Button
-					themeType="secondary"
-					onClick={() => { updateShipment({ payload }); }}
-					disabled={updateLoading}
-				>
-					Handover
-				</Button>
+				<>
+					<Button
+						themeType="secondary"
+						onClick={() => setHandoverModal(true)}
+						disabled={updateLoading}
+					>
+						{t('printingDesk:approve_awb_handover_button')}
+					</Button>
+					{handoverModal && (
+						<Modal
+							show={handoverModal}
+							onClose={() => { setHandoverModal(false); }}
+						>
+							<Modal.Header title="Confirm Handover?" />
+							<Modal.Body className={styles.modal_body}>
+								{t('printingDesk:approve_awb_body_text')}
+							</Modal.Body>
+							<Modal.Footer>
+								<Button
+									themeType="secondary"
+									disabled={updateLoading}
+									onClick={() => setHandoverModal(false)}
+								>
+									{t('printingDesk:approve_awb_cancel_button')}
+
+								</Button>
+								<Button
+									className={styles.confirm_button}
+									disabled={updateLoading}
+									onClick={() => updateShipment({ payload })}
+								>
+									{t('printingDesk:approve_awb_confirm_button')}
+								</Button>
+							</Modal.Footer>
+						</Modal>
+					)}
+				</>
 			);
 		},
 	};

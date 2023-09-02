@@ -5,9 +5,11 @@ import { useRequest, request } from '@cogoport/request';
 import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
+import useUpdatePendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 const useDraftBLHelper = ({
 	pendingTask = {},
+	shipmentData = {},
 }) => {
 	const {
 		refetch: getShipmentRefetch,
@@ -20,9 +22,11 @@ const useDraftBLHelper = ({
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_shipment_document',
+		url    : 'fcl_freight/create_document',
 		method : 'POST',
 	}, { manual: true });
+
+	const { apiTrigger : updatePendingTaskTrigger, loading : updatePendingTaskLoading } = useUpdatePendingTask({});
 
 	const createHBL = async ({ hblData }) => {
 		setCreateTradeDocLoading(true);
@@ -34,7 +38,7 @@ const useDraftBLHelper = ({
 					shipment_id     : pendingTask?.shipment_id,
 					service_id      : pendingTask?.service_id,
 					service_type    : pendingTask?.service_type,
-					organization_id : pendingTask?.organization_id,
+					organization_id : shipmentData?.importer_exporter_id,
 					data            : {
 						...data,
 						service_id   : pendingTask?.service_id,
@@ -72,8 +76,7 @@ const useDraftBLHelper = ({
 				uploaded_by_org_id : pendingTask?.organization_id,
 				document_type      : 'draft_bill_of_lading',
 				service_id         : pendingTask?.service_id,
-				service_type       : pendingTask?.service_type,
-				pending_task_id    : pendingTask?.id,
+				service_type       : pendingTask.service_type,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.fileName,
 					document_url : value?.url?.finalUrl,
@@ -87,7 +90,15 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			await trigger({ data: body });
+			const res = await trigger({ data: body });
+
+			if (!res?.hasError) {
+				const val = {
+					id     : pendingTask?.id,
+					status : 'completed',
+				};
+				await updatePendingTaskTrigger(val);
+			}
 
 			try {
 				const rpaMappings = {
@@ -107,7 +118,7 @@ const useDraftBLHelper = ({
 	return {
 		createHBL,
 		submitMBL,
-		loading,
+		loading: loading || updatePendingTaskLoading,
 		createTradeDocLoading,
 	};
 };

@@ -1,33 +1,35 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import getDateParams from '../../utils/get-date-params';
+import getDashboardComponentsMapping from '../../constants/dashboard-components-mapping';
 
-import Header from './Header';
-import KamData from './KamData';
 import styles from './styles.module.css';
 
 function KamExpertise() {
-	const [activeTab, setActiveTab] = useState('this_week');
+	const { t } = useTranslation(['allocation']);
+	const [activeMainTab, setActiveMainTab] = useState('global');
 
-	const TAB_PANEL_MAPPING = getDateParams();
+	const dashboardComponentsMapping = getDashboardComponentsMapping({ t });
 
 	return (
 		<section className={styles.container} id="kam_expertise_container">
 			<section className={styles.heading_container}>
-				KAM Expertise
+				{t('allocation:kam_expertise_heading')}
 			</section>
-
-			<Header />
 
 			<div className={styles.tab_list}>
 				<Tabs
-					activeTab={activeTab}
-					themeType="primary"
-					onChange={setActiveTab}
+					activeTab={activeMainTab}
+					themeType="secondary"
+					onChange={setActiveMainTab}
 				>
-					{Object.values(TAB_PANEL_MAPPING).map((item) => {
-						const { name = '', title = '', params = {} } = item;
+					{Object.values(dashboardComponentsMapping).map((item) => {
+						const {
+							name = '',
+							title = '',
+							component: ActiveComponent = null,
+						} = item || {};
 
 						return (
 							<TabPanel
@@ -35,12 +37,13 @@ function KamExpertise() {
 								name={name}
 								title={title}
 							>
-								<KamData date_params={params} />
+								<ActiveComponent />
 							</TabPanel>
 						);
 					})}
 				</Tabs>
 			</div>
+
 		</section>
 
 	);

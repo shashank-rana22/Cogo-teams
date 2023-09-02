@@ -1,0 +1,14 @@
+{
+    "title": "请提供您的电子邮件和密码进行登录",
+    "email_placeholder": "电子邮件",
+    "email_rules_required": "必须提供电子邮件。",
+    "password_placeholder": "密码",
+    "password_rules_required": "必须提供密码。",
+    "forgot_your_password": "忘记密码？",
+    "login_button": "登录",
+    "go_back_button": "返回",
+    "or_label": "或",
+    "continue_with_microsoft": "继续使用微软账号登录",
+    "already_login_toast_error": "无法使用已经激活的账号登录",
+    "failed_to_login_toast_error": "登录失败，请重试..."
+}  

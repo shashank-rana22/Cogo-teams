@@ -8,8 +8,8 @@ import LinersExchangeRateConfirm from './LinersExchangeRate';
 import styles from './styles.module.css';
 
 function ReviewServices({
-	showReview = false,
-	setShowReview = () => {},
+	show = false,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -20,8 +20,8 @@ function ReviewServices({
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
 
 	const refetchAfterCall = () => {
-		setShowReview(false);
 		refetch();
+		onClose();
 	};
 
 	const { loading, apiTrigger } = useUpdateInvoiceStatus({ refetch: refetchAfterCall });
@@ -36,23 +36,24 @@ function ReviewServices({
 	return showExchangeRateConfirmation ? (
 		<LinersExchangeRateConfirm
 			invoice={invoice}
-			setShowExchangeRateConfirmation={setShowExchangeRateConfirmation}
-			showExchangeRateConfirmation={showExchangeRateConfirmation}
-			setShow={setShowReview}
+			show={showExchangeRateConfirmation}
+			setShow={setShowExchangeRateConfirmation}
+			onClose={onClose}
 		/>
 	) : (
-		<Modal show={showReview} onClose={() => setShowReview(false)} closeOnOuterClick={false}>
+		<Modal show={show} onClose={onClose} closeOnOuterClick={false} showCloseIcon={!loading}>
 			<Modal.Header title="MARK AS REVIEWED" />
+
 			<Modal.Body>
 				<div className={styles.form}>
 					<Confirmation value={value} setValue={setValue} />
 				</div>
 			</Modal.Body>
+
 			<Modal.Footer className={styles.btn_div}>
 				<Button
-					size="md"
 					themeType="secondary"
-					onClick={() => setShowReview(false)}
+					onClick={onClose}
 					disabled={loading}
 				>
 					Close

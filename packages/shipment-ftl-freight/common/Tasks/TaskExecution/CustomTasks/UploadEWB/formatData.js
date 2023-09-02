@@ -1,4 +1,4 @@
-const INDEX_VALUE = 1;
+import { getFileName } from '../../utils/get-file-name';
 
 export const formatBulkUpdateData = ({ val = {}, shipment_data = {} }) => {
 	const { documents = [] } = val;
@@ -55,16 +55,6 @@ export const formatPendingTaskData = ({ val = {}, task = {} }) => {
 			ewb_validity = '',
 			description = '',
 		} = documentItem;
-		const getFileName = (fileUrl) => {
-			const values = fileUrl?.split('/');
-			const lastVal = values[values.length - INDEX_VALUE];
-			const words = lastVal.split('%');
-			let filename = '';
-			words.forEach((word) => {
-				filename += word;
-			});
-			return filename;
-		};
 
 		return {
 			document_type : 'ftl_eway_bill_copy',

@@ -16,6 +16,7 @@ function Header({
 	trade_partners_details,
 	shipment_data,
 	primary_service,
+	refetch = () => {},
 }) {
 	const [sopaddForm, setSopAddForm] = useState(false);
 	const [showFilter, setShowFilters] = useState(false);
@@ -80,6 +81,7 @@ function Header({
 					setSopAddForm={setSopAddForm}
 					reload={reload}
 					setReload={setReload}
+					refetch={refetch}
 				/>
 			) : null}
 		</div>

@@ -1,19 +1,22 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 0;
+function DayOne({ setInformationPage = () => {} }) {
+	const { back } = useRouter();
 
-function Day1({ setInformationPage }) {
 	const [{ data }, listTrigger] = useHarbourRequest({
 		method : 'get',
 		url    : '/list_company_documents',
 	}, { manual: true });
 
+	const day = data?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.html_template;
 	const fetch = useCallback(
 		async () => {
 			try {
@@ -46,17 +49,23 @@ function Day1({ setInformationPage }) {
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setInformationPage('')}
+					onClick={() => {
+						back();
+						setInformationPage('');
+					}}
 				/>
 				<div className={styles.title}>DAY 1</div>
 			</div>
 
 			<div className={styles.rich_text}>
-				<div dangerouslySetInnerHTML={{ __html: data?.list?.[DEFAULT_INDEX]?.html_template || 'Day 1!' }} />
+				<div
+					className={styles.day1_text}
+					dangerouslySetInnerHTML={{ __html: day || 'Day 1!' }}
+				/>
 
 			</div>
 		</div>
 	);
 }
 
-export default Day1;
+export default DayOne;

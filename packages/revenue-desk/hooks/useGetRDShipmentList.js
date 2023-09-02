@@ -1,15 +1,9 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
 import { VALUE_ZERO, VALUE_TWO } from '../page-components/constants';
 
 const useGetRDShipmentList = () => {
-	const { profile = {} } = useSelector((state) => state);
-
-	const { partner = {} } = profile;
-	const { id: cogo_entity_id = '' } = partner;
-
 	const [filters, setFilters] = useState({
 		service  : 'fcl_freight',
 		sort_by  : 'created_at_desc',
@@ -50,8 +44,9 @@ const useGetRDShipmentList = () => {
 			origin_airport_id               : filters?.origin_airport_id || undefined,
 			destination_airport_id          : filters?.destination_airport_id || undefined,
 			port_id                         : filters?.port_id || undefined,
-			airpot_id                       : filters?.airpot_id || undefined,
+			airport_id                      : filters?.airport_id || undefined,
 			trade_type                      : filters?.trade_type || undefined,
+			cogo_entity_id                  : filters?.cogo_entity_id || undefined,
 			state                           : shipmentStatusMapping[filters?.state] || undefined,
 			source                          : filters?.source || undefined,
 			schedule_departure_greater_than : filters?.departure_date?.startDate || undefined,
@@ -64,8 +59,9 @@ const useGetRDShipmentList = () => {
 			sort_type                       : filters?.sort_by.split('_').pop() || undefined,
 			sort_by                         : filters?.sort_by.split('_').slice(VALUE_ZERO, VALUE_TWO).join('_')
 												|| undefined,
-			cargo_readiness_greater_than : filters?.cargo_readiness_date?.startDate || undefined,
-			cargo_readiness_less_than    : filters?.cargo_readiness_date?.endDate || undefined,
+			cargo_readiness_greater_than     : filters?.cargo_readiness_date?.startDate || undefined,
+			cargo_readiness_less_than        : filters?.cargo_readiness_date?.endDate || undefined,
+			primary_service_reverts_recieved : filters?.reverts_recieved ? true : undefined,
 		};
 		try {
 			const resp = await trigger({
@@ -75,7 +71,6 @@ const useGetRDShipmentList = () => {
 						page      : undefined,
 						sort_by   : undefined,
 						sort_type : undefined,
-						cogo_entity_id,
 					},
 					page               : requiredFilterChange?.page,
 					sort_by            : requiredFilterChange?.sort_by || undefined,
@@ -89,7 +84,8 @@ const useGetRDShipmentList = () => {
 		} catch (err) {
 			setShipmentList([]);
 		}
-	}, [trigger, filters, cogo_entity_id]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [trigger, JSON.stringify(filters)]);
 
 	useEffect(() => {
 		fetchShipments();

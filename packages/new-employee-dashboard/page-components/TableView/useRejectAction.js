@@ -8,10 +8,10 @@ const useRejectAction = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateEmployeeStatus = async (id, status, fetch) => {
+	const updateEmployeeStatus = async (id, employee_status, fetch) => {
 		const payload = {
 			id,
-			status: status === 'active' ? 'inactive' : 'active',
+			employee_status: employee_status === 'offered' ? 'rejected' : 'offered',
 		};
 		try {
 			await trigger({

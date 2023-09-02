@@ -48,6 +48,7 @@ function AssignUsers({
 							common_agent_type : getCommonAgentType({ viewType }) || undefined,
 							agent_type        : watchAgentType || undefined,
 						},
+						sort_by: 'agent_type',
 					}}
 					className={errors?.assign_user ? styles.error_class : ''}
 					renderLabel={(item) => (
@@ -215,6 +216,7 @@ export const ASSIGN_TYPE_PAYLOAD_MAPPING = {
 		agent_type         : val?.assign_role,
 		is_allowed_to_chat : val?.allow_user !== 'observe',
 		service_type       : val?.assign_service_type || undefined,
+		is_transferred     : true,
 	}),
 
 };

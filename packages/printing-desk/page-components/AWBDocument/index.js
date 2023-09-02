@@ -41,6 +41,22 @@ function AWBDocument({
 
 	const category = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
 
+	let agentCharge = 0;
+	taskItem?.agentOtherCharges?.forEach((itm) => {
+		agentCharge += Number(itm.price);
+	});
+	let carrierCharge = 0;
+	taskItem?.carrierOtherCharges?.forEach((itm) => {
+		carrierCharge += Number(itm.price);
+	});
+	const chargeData = {
+		totalCharge: Number(taskItem.amount),
+		agentCharge,
+		carrierCharge,
+		finalCharge:
+		Number(taskItem.amount) + agentCharge + carrierCharge,
+	};
+
 	return (
 		<div className={styles.file_container}>
 			{(back || viewDoc) && (
@@ -89,6 +105,7 @@ function AWBDocument({
 								<ChargeDetails
 									taskItem={taskItem}
 									footerValues={FOOTER_VALUES}
+									data={chargeData}
 									formData={taskItem}
 									whiteout={whiteout}
 									activeCategory={category}

@@ -1,6 +1,9 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
+
+const FIRST_INDEX = 1;
 
 export const formatNavigations = (navigationPermissions) => Object.keys(navigationPermissions)
 	.map((navigation) => {
@@ -10,21 +13,22 @@ export const formatNavigations = (navigationPermissions) => Object.keys(navigati
 				navigation,
 				permissions: Object.keys(item).map((api) => {
 					const apiItem = item[api];
-					const scopes = [];
+					const DETAILS = [];
 					const scopeValues = apiItem[api];
 					scopeValues.forEach((scope) => {
 						const key = `${api}-${scope}`;
 						if (key !== api) {
-							scopes.push({
-								type             : scope,
+							DETAILS.push({
+								view_type        : scope,
 								through_criteria : apiItem[key] || [],
+								status           : true,
 							});
 						}
 					});
 					return {
-						resource_name : api,
-						scopes,
-						is_inactive   : apiItem?.is_inactive,
+						resource    : api,
+						details     : DETAILS,
+						is_inactive : apiItem?.is_inactive,
 					};
 				}),
 			};
@@ -34,14 +38,14 @@ export const formatNavigations = (navigationPermissions) => Object.keys(navigati
 	.filter((item) => !!item);
 
 const getChangedPayload = (previousData, formattedPermissions) => {
-	const newPayload = [];
+	const NEW_PAYLOAD = [];
 	formattedPermissions?.forEach((item) => {
-		const newFormattedNavPerms = {};
-		newFormattedNavPerms.navigation = item?.navigation;
-		newFormattedNavPerms.permissions = [];
-		if (item?.permissions?.length === 0) {
+		const NEW_FORMATTED_NAV_PERMS = {};
+		NEW_FORMATTED_NAV_PERMS.navigation = item?.navigation;
+		NEW_FORMATTED_NAV_PERMS.permissions = [];
+		if (item?.permissions?.length === GLOBAL_CONSTANTS.zeroth_index) {
 			// if no possible apis in navigation
-			newPayload.push(newFormattedNavPerms);
+			NEW_PAYLOAD.push(NEW_FORMATTED_NAV_PERMS);
 		} else {
 			const navSpecificPrevData = previousData?.permissions?.filter(
 				(p) => p?.navigation === item?.navigation,
@@ -50,54 +54,72 @@ const getChangedPayload = (previousData, formattedPermissions) => {
 				const { is_inactive, ...permission } = permissionI;
 				let isScopeTypeChanged = false;
 				let isThroughCriteriaChanged = false;
-				const permission_scopes = permission?.scopes;
+				let removedPermissions = [];
+				const permission_scopes = permission?.details;
 				const previous_scopes = navSpecificPrevData?.find(
-					(navData) => navData?.resource_name === permission?.resource_name,
-				)?.scopes;
+					(navData) => navData?.resource === permission?.resource,
+				)?.role_permission_details;
 				let prevTypes = [];
 				if (!previous_scopes) {
 					isScopeTypeChanged = true;
 				} else {
 					permission_scopes?.forEach((scope) => {
 						prevTypes = previous_scopes?.filter(
-							(prevScope) => prevScope?.type === scope?.type,
+							(prevScope) => prevScope?.view_type === scope?.view_type,
 						);
 						if (
-							prevTypes?.length === 0
+							prevTypes?.length === GLOBAL_CONSTANTS.zeroth_index
 							|| previous_scopes?.length !== permission_scopes?.length
 						) {
 							isScopeTypeChanged = true;
 						}
-						if (scope?.through_criteria?.length > 0 && !isScopeTypeChanged) {
+						if (scope?.through_criteria?.length > GLOBAL_CONSTANTS.zeroth_index && !isScopeTypeChanged) {
 							const difference = scope?.through_criteria?.filter(
-								(x) => !prevTypes[0]?.through_criteria?.includes(x),
+								(x) => !prevTypes[GLOBAL_CONSTANTS.zeroth_index]?.through_criteria?.includes(x),
 							);
 							isThroughCriteriaChanged =								isThroughCriteriaChanged
-								|| difference?.length > 0
+								|| difference?.length > GLOBAL_CONSTANTS.zeroth_index
 								|| scope?.through_criteria?.length
-									!== prevTypes[0]?.through_criteria?.length;
+									!== prevTypes[GLOBAL_CONSTANTS.zeroth_index]?.through_criteria?.length;
 						}
 					});
+					if (isScopeTypeChanged) {
+						removedPermissions = previous_scopes?.filter(
+							(prevScope) => !permission_scopes.some((newScp) => newScp.view_type
+							=== prevScope.view_type),
+						).map((removedPerms) => ({
+							view_type        : removedPerms.view_type,
+							through_criteria : removedPerms.through_criteria || [],
+							status           : false,
+						}));
+					}
 				}
 				if (isScopeTypeChanged || isThroughCriteriaChanged || is_inactive) {
-					newFormattedNavPerms.permissions.push(permission);
+					if (!(isThroughCriteriaChanged || is_inactive)) {
+						if (removedPermissions.length) {
+							permission.details = [...permission.details, ...removedPermissions];
+						}
+					}
+					NEW_FORMATTED_NAV_PERMS.permissions.push(permission);
 				}
 			});
-			if (newFormattedNavPerms.permissions?.length > 0) {
-				newPayload.push(newFormattedNavPerms);
+			if (NEW_FORMATTED_NAV_PERMS.permissions?.length > GLOBAL_CONSTANTS.zeroth_index) {
+				NEW_PAYLOAD.push(NEW_FORMATTED_NAV_PERMS);
 			}
 		}
 	});
-	return newPayload;
+	return NEW_PAYLOAD;
 };
 
 const BATCH_SIZE = 80;
 
 const useCreateRole = () => {
-	const [{ loading }, trigger] = useRequest({
-		url    : '/onboard_auth_role',
+	const [{ loading }, trigger] = useAuthRequest({
+		url    : '/onboard_role',
 		method : 'POST',
-	}, { autoCancel: false });
+	}, { autoCancel: false, manual: true });
+
+	const { t } = useTranslation(['accessManagement']);
 
 	const createRole = async (
 		auth_role_id,
@@ -105,73 +127,74 @@ const useCreateRole = () => {
 		refetch,
 		previousData,
 	) => {
-		let payload = { auth_role_id };
+		let payload = { role_id: auth_role_id };
 		const formattedPermissions = formatNavigations(navigationPermissions);
 		const permissionPayload = getChangedPayload(
 			previousData,
 			formattedPermissions,
 		);
-		const permissions = permissionPayload[0]?.permissions || [];
-		const navigation = permissionPayload[0]?.navigation;
+		const permissions = permissionPayload[GLOBAL_CONSTANTS.zeroth_index]?.permissions || [];
+		const navigation = permissionPayload[GLOBAL_CONSTANTS.zeroth_index]?.navigation;
+		payload.navigation = navigation;
 		if (permissionPayload.length) {
 			if (permissions.length > BATCH_SIZE) {
 				let isBatchesAvailble = true;
 				let currentBatch = 0;
-				const allPromises = [];
+				const ALL_PROMISES = [];
 				while (isBatchesAvailble) {
-					const permissionArray = [];
+					const PERMISSION_ARRAY = [];
 					for (
 						let i = currentBatch * BATCH_SIZE;
-						i < (currentBatch + 1) * BATCH_SIZE && i < permissions.length;
+						i < (currentBatch + FIRST_INDEX) * BATCH_SIZE && i < permissions.length;
 						// eslint-disable-next-line no-plusplus
 						i++
 					) {
-						permissionArray.push(permissions[i]);
-						if (i === permissions.length - 1) {
+						PERMISSION_ARRAY.push(permissions[i]);
+						if (i === permissions.length - FIRST_INDEX) {
 							isBatchesAvailble = false;
 							break;
 						}
 					}
-					allPromises.push(
+					ALL_PROMISES.push(
 						trigger({
 							data: {
 								...payload,
-								navigation_permission_pairs: [
-									{ navigation, permissions: permissionArray },
-								],
+								permissions: PERMISSION_ARRAY,
 							},
 						}),
 					);
-					currentBatch += 1;
+					currentBatch += FIRST_INDEX;
 				}
 				try {
-					await Promise.all(allPromises);
-					Toast.success('Role Updated successfully');
+					await Promise.all(ALL_PROMISES);
+					Toast.success(t('accessManagement:roles_and_permission_use_create_roles_successfull'));
 					if (refetch) {
 						refetch();
 					}
 				} catch (err) {
-					getApiErrorString(err?.data);
+					Toast.error(err.response?.data.error
+						|| t('accessManagement:roles_and_permission_use_create_roles_unable'));
 				}
 			} else {
 				payload = {
 					...payload,
-					navigation_permission_pairs: permissionPayload,
+					permissions,
 				};
 				try {
 					const res = await trigger({ data: payload });
 					if (!res.hasError) {
-						Toast.success('Role Updated successfully');
+						Toast.success(t('accessManagement:roles_and_permission_use_create_roles_successfull'));
 						if (refetch) {
 							refetch();
 						}
 					}
 				} catch (err) {
-					getApiErrorString(err.data);
+					Toast.error(err.response?.data.error
+						|| t('accessManagement:roles_and_permission_use_create_roles_unable'));
 				}
 			}
 		} else {
-			Toast.error('No change in permissions.');
+			Toast.error(t('accessManagement:roles_and_permission_use_create_roles_no_change'));
 		}
 	};
 	return { createRole, loading };

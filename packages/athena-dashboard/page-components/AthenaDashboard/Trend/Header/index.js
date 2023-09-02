@@ -1,17 +1,24 @@
 import { Select } from '@cogoport/components';
 import { RadioGroupController } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function Header({ countryname_value, controls, control }) {
+function Header({
+	countryNameValue,
+	controls,
+	control,
+}) {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	return (
 		<div className={styles.header}>
 			<div>
-				Country/Region
+				{t('athenaDashboard:country_region')}
 				<Select
 					value="INDIA"
-					placeholder="Select here..."
-					options={countryname_value}
+					placeholder={t('athenaDashboard:select_here')}
+					options={countryNameValue}
 					style={{ width: '250px' }}
 					size="sm"
 					disabled

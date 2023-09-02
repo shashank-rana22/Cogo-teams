@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -6,8 +7,6 @@ import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
-const PAYMENT_DETAILS_CONSTANT = 0;
-
 const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 
 function PaymentDetails({
@@ -15,7 +14,7 @@ function PaymentDetails({
 }) {
 	const FIELDS_TO_SHOW = fieldsInPaymentDetails();
 	const getDisplayValue = ({ fieldName }) => {
-		const val = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName] || '';
+		const val = detail?.[GLOBAL_CONSTANTS.zeroth_index]?.[fieldName] || '';
 
 		if (!val) {
 			return '-';
@@ -62,11 +61,11 @@ function PaymentDetails({
 								key={fieldName}
 								className={styles.fields_to_show}
 								style={{
-									flexBasis: detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName]
+									flexBasis: detail?.[GLOBAL_CONSTANTS.zeroth_index]?.[fieldName]
 										? `${fieldName === 'address' ? '40%' : '20%'}` : 'none',
 								}}
 							>
-								{detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName]
+								{detail?.[GLOBAL_CONSTANTS.zeroth_index]?.[fieldName]
 						&& (
 							<div>
 								<div className={styles.label}>

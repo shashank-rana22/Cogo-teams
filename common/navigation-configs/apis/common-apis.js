@@ -173,6 +173,78 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_recommended_spot_searches',
+			access_type  : 'private',
+			feature      : 'search',
+			service_name : 'spot_search',
+		},
+		{
+			api          : 'list_saas_container_subscriptions_summary',
+			access_type  : 'private',
+			feature      : 'tracking',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'create_saas_container_subscription',
+			access_type  : 'private',
+			feature      : 'tracking',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'get_organization_profile_progress',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'create_saas_air_subscription',
+			access_type  : 'private',
+			service_name : 'air_tracking',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'get_shipping_line_for_search_value',
+			access_type  : 'private',
+			service_name : 'air_tracking',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'get_airline_from_airway_bill',
+			access_type  : 'private',
+			service_name : 'air_tracking',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'get_multiple_sea_routes',
+			access_type  : 'public',
+			service_name : 'location',
+		},
+		{
+			api          : 'get_saas_container_shipping_lines',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+			feature      : 'tracking',
+		},
+		{
+			api         : 'list_operators',
+			access_type : 'public',
+		},
 	],
 	forecast: [
 		{
@@ -232,6 +304,11 @@ const common_apis = {
 			api          : 'create_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'create_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'update_organization',
@@ -459,7 +536,7 @@ const common_apis = {
 			service_name : 'credit',
 		},
 		{
-			api          : 'create_credit',
+			api          : 'create_export_factoring_request',
 			access_type  : 'private',
 			service_name : 'credit',
 		},
@@ -613,6 +690,16 @@ const common_apis = {
 			api          : 'get_ef_agreement',
 			access_type  : 'private',
 			service_name : 'credit',
+		},
+		{
+			api        	 : 'send_ef_offer_letter_signatory_to_cogowallet',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };

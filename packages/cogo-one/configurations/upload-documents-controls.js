@@ -29,7 +29,7 @@ const getControls = (fileType = '') => {
 			rules : {
 				required : `${fileType === 'pan' ? 'PAN' : 'GST'} Number is required`,
 				pattern  : {
-					value   : fileType === 'pan' ? geo.regex.PAN : geo.regex.GST,
+					value   : fileType === 'pan' ? geo.regex.TAX : geo.regex.GST,
 					message : `Enter a valid ${fileType === 'pan' ? 'PAN' : 'GST'} number`,
 				},
 			},

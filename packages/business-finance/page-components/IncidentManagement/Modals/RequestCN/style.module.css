@@ -10,6 +10,8 @@
 .flex {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .name {
@@ -119,6 +121,14 @@
 .button_container_data {
 	display: flex;
 	width: fit-content;
+
+	:global {
+		.ui_select_options_relative_container {
+			.ui_select_options_container {
+				z-index: 2;
+			}
+		}
+	}
 }
 
 .list_container {
@@ -168,4 +178,9 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
+}
+
+.body_section {
+	max-height: 82vh !important;
+	padding: 20px 28px;
 }

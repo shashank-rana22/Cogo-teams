@@ -1,20 +1,34 @@
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../utils/getDate';
+import { getCustomDate } from '../utils/getCustomDate';
 
-const controls = ({ primary_service, departureDate }) => {
-	const disabledState = primary_service?.state === 'flight_arrived'
-		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
+const FLIGHT_STATE_ORIGIN = ['flight_arrived', 'flight_departed', 'cargo_handed_over_at_origin'];
+const FLIGHT_STATE_DEPART = ['flight_arrived', 'flight_departed'];
+
+const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) => {
+	const state = primary_service?.state || '';
+
+	const handedOverDate = getCustomDate(primary_service?.cargo_handed_over_at_origin_at);
+	const disabledState = !TIMELINE_EDITABLE?.primary_service?.state?.includes(state);
+	const editableFields = stakeholderConfig?.timeline?.editable_fields;
 
 	const finalControls = [
+		{
+			name                  : 'cargo_handed_over_at_origin_at',
+			label                 : 'Cargo Handover At Airport',
+			disable               : disabledState || FLIGHT_STATE_ORIGIN.includes(state),
+			placeholder           : 'Select Date',
+			placement             : 'left-end',
+			isPreviousDaysAllowed : true,
+		},
 		{
 			name                  : 'schedule_departure',
 			label                 : 'Actual time of departure',
 			maxDate               : null,
-			disable               : disabledState,
-			dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
+			minDate               : handedOverDate,
+			disable               : disabledState || FLIGHT_STATE_DEPART.includes(state),
 			placeholder           : 'Select Date',
 			isPreviousDaysAllowed : true,
-			showTimeSelect        : true,
+			placement             : 'right-end',
 		},
 		{
 			name                  : 'schedule_arrival',
@@ -22,10 +36,9 @@ const controls = ({ primary_service, departureDate }) => {
 			maxDate               : null,
 			minDate               : departureDate,
 			disable               : disabledState,
-			dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
 			placeholder           : 'Select Date',
 			isPreviousDaysAllowed : true,
-			showTimeSelect        : true,
+			placement             : 'top',
 		},
 	];
 
@@ -33,10 +46,15 @@ const controls = ({ primary_service, departureDate }) => {
 
 	finalControls.forEach((control) => {
 		const { name } = control;
-		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
+		DEFAULT_VALUES[name] = getCustomDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues: DEFAULT_VALUES };
+	const newControls = finalControls.map((control) => ({
+		...control,
+		disable: control.disable || !editableFields.includes(control.name),
+	}));
+
+	return { finalControls: newControls, defaultValues: DEFAULT_VALUES };
 };
 
 export default controls;

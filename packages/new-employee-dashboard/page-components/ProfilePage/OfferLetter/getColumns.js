@@ -13,10 +13,10 @@ const COLOR_MAPPING = {
 	inactive : '#FFF2A9',
 };
 
-const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
+const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal, is_offer_letter_applicable }) => {
 	const onClickView = (item) => {
-		if (item?.status === 'accepted') {
-			window.open(item?.signed_document_url, '_blank');
+		if (['accepted', 'approved'].includes(item?.status)) {
+			window.open(item?.signed_document_url || item?.document_url, '_blank');
 		} else setViewCtcBreakupModal(item);
 	};
 
@@ -53,6 +53,7 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 						<ViewCtcBreakup
 							viewCtcBreakupModal={viewCtcBreakupModal}
 							setViewCtcBreakupModal={setViewCtcBreakupModal}
+							is_offer_letter_applicable={is_offer_letter_applicable}
 						/>
 					)}
 				</div>

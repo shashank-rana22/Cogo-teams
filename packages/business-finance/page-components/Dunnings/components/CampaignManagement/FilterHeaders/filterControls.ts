@@ -1,14 +1,6 @@
-import { CYCLE_OPTIONS, CYCLE_TYPE, FREQUENCY_OPTIONS } from '../constants';
+import { CYCLE_TYPE, FREQUENCY_OPTIONS } from '../constants';
 
 const filterControls = [
-	{
-		name        : 'cycleStatus',
-		placeholder : 'Cycle Status',
-		type        : 'select',
-		span        : 3,
-		options     : CYCLE_OPTIONS,
-		isClearable : true,
-	},
 	{
 		name        : 'dunningCycleType',
 		placeholder : 'Cycle Type',

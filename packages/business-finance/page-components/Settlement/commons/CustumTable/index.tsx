@@ -45,7 +45,7 @@ function CustumTable({ data = {}, onPageChange, loading, refetch, setFilters, fi
 		<div className={styles.table}>
 			<Header setFilters={setFilters} filters={filters} />
 			{loading ? <Loader /> : <List list={list} refetch={refetch} /> }
-			{ !isEmpty(list.length) ? null : (
+			{ isEmpty(list) ? null : (
 				<Pagination
 					className={styles.pagination}
 					type="number"

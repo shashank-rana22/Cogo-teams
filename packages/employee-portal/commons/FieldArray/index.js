@@ -34,7 +34,7 @@ function FieldArray(props) {
 	}
 
 	return (
-		<div>
+		<div style={{ width: '100%' }}>
 			{fields.map((field, index) => (
 				<Child
 					{...rest}

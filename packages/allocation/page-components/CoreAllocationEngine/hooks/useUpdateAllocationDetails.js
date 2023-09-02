@@ -5,8 +5,8 @@ import { useAllocationRequest } from '@cogoport/request';
 
 import getUpdateDetailsControls from '../configurations/get-details-update-controls';
 
-const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, listRefetch }) => {
-	const controls = getUpdateDetailsControls(stakeholderDetail);
+const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, listRefetch, t = () => {} }) => {
+	const controls = getUpdateDetailsControls({ stakeholderDetail, t });
 
 	const defaultValues = {
 		stakeholder_id: stakeholderDetail.stakeholder_id || '',
@@ -37,7 +37,7 @@ const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, l
 
 			listRefetch();
 
-			Toast.success('Stakeholer updated succesfully!');
+			Toast.success(t('allocation:stakeholer_updated_succesfully'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

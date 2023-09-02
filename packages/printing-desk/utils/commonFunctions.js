@@ -10,6 +10,26 @@ const BL_MAPPING = {
 	draft_house_airway_bill : 'HAWB',
 };
 
+function EditDocumentButton({ singleItem = {}, handleEditMAWB = () => {} }) {
+	const { documentType } = singleItem || {};
+	return (
+		<Button
+			themeType="linkUi"
+			onClick={() => { handleEditMAWB(singleItem); }}
+		>
+			<div className={styles.tooltip_container}>
+				<Tooltip
+					content={`Edit ${BL_MAPPING[documentType]}`}
+					placement="right"
+					interactive
+				>
+					<IcMEdit fill="var(--color-accent-orange-2)" />
+				</Tooltip>
+			</div>
+		</Button>
+	);
+}
+
 const commonFunctions = ({
 	setViewDoc = () => {},
 	setItem = () => {},
@@ -30,8 +50,8 @@ const commonFunctions = ({
 		setItem(singleItem);
 	};
 
-	const handleEditMAWB = (singleItem, action) => {
-		setEdit(action || true);
+	const handleEditMAWB = (singleItem) => {
+		setEdit(true);
 		setItem(singleItem);
 	};
 
@@ -84,24 +104,18 @@ const commonFunctions = ({
 			)
 		),
 		handleEdit: (singleItem) => {
-			const { documentData, documentType } = singleItem || {};
+			const { documentData, documentType, blCategory } = singleItem || {};
+			if (documentData?.status === 'uploaded') {
+				return null;
+			}
 			return (
-				(documentData?.status !== 'uploaded' && (isVinodTalapaProfile
-					|| BL_MAPPING[documentType] === 'HAWB')) && (
-						<Button
-							themeType="linkUi"
-							onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
-						>
-							<div className={styles.tooltip_container}>
-								<Tooltip
-									content={`Edit ${BL_MAPPING[documentType]}`}
-									placement="right"
-									interactive
-								>
-									<IcMEdit fill="var(--color-accent-orange-2)" />
-								</Tooltip>
-							</div>
-						</Button>
+				blCategory === 'mawb' ? (
+					<EditDocumentButton
+						singleItem={singleItem}
+						handleEditMAWB={handleEditMAWB}
+					/>
+				) : ((isVinodTalapaProfile || BL_MAPPING[documentType] === 'HAWB')) && (
+					<EditDocumentButton singleItem={singleItem} handleEditMAWB={handleEditMAWB} />
 				)
 			);
 		},

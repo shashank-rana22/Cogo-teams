@@ -1,0 +1,21 @@
+.conatiner {
+	display: flex;
+	flex-direction: column;
+}
+
+.account_stats {
+	display: flex;
+	margin: 12px;
+}
+
+.label {
+	flex: 1;
+	margin-bottom: 4px;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.value {
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+	line-height: 24px;
+}

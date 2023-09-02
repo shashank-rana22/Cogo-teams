@@ -490,7 +490,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_checkout_applicable_promocodes',
+		api          : 'get_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
@@ -532,7 +532,7 @@ const apis = [
 	{
 		api          : 'list_partner_addresses',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'partner',
 	},
 	{
 		api          : 'generate_bluetide_hbl',
@@ -543,6 +543,11 @@ const apis = [
 		api          : 'get_pending_task_authorization',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'bookings',
 	},
 ];
 export default apis;
