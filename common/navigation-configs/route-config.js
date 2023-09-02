@@ -18,6 +18,7 @@ import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
+import convenienceRates from './config/convenience-rates';
 import costBookingDesk from './config/cost-booking-desk';
 import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
@@ -138,6 +139,7 @@ const routeConfig = {
 	...liabilityDashboard,
 	...rfqDashboard,
 	...byodDashboard,
+	...convenienceRates,
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
