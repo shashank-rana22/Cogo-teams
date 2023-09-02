@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
@@ -15,8 +16,14 @@ const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 
 	const { start_date, end_date } = globalFilters;
 
-	filters.start_date = start_date ? start_date.toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index] : undefined;
-	filters.end_date = end_date ? end_date.toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index] : undefined;
+	filters.start_date = start_date ? formatDate({
+		date       : start_date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	}) : undefined;
+	filters.end_date = end_date ? formatDate({
+		date       : end_date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	}) : undefined;
 	filters.commodity = !isEmpty(filters?.commodity) ? filters.commodity : undefined;
 
 	LOCATION_KEYS.forEach((key) => {
