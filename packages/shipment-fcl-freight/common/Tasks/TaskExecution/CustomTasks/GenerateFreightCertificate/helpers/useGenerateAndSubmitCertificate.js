@@ -78,7 +78,7 @@ const useGenerateAndSubmitCertificate = ({
 
 	useEffect(() => {
 		const FREIGHT_DECLARATION = [];
-		commodityTypes.forEach((type) => {
+		commodityTypes?.forEach((type) => {
 			const rateObject = {
 				item      : type,
 				commodity : startCase(type),
@@ -101,15 +101,15 @@ const useGenerateAndSubmitCertificate = ({
 
 		const res = await generateCertificate(data);
 
-		if (res.status === SUCCESS_CODE && !isEmpty(task?.id)) {
+		if (res?.status === SUCCESS_CODE && !isEmpty(task?.id)) {
 			const resTask = await updateTask({
 				id   : task?.id,
 				data : {
-					shipment: { id: shipmentData.id },
+					shipment: { id: shipmentData?.id },
 				},
 			});
 
-			if (resTask.status === SUCCESS_CODE) {
+			if (resTask?.status === SUCCESS_CODE) {
 				onCancel();
 				refetch();
 			}
