@@ -9,7 +9,7 @@ import List from './List';
 import styles from './styles.module.css';
 
 const MODES_MAPPING = {
-	ocean: ['fcl_freight'],
+	ocean: ['fcl', 'lcl'],
 };
 
 function Header({
@@ -47,7 +47,9 @@ function NotesModal({ modalState = {}, setModalState = () => {} }) {
 
 	const { shipment_type = '' } = shipmentData || {};
 
-	const mode = Object.keys(MODES_MAPPING).find((key) => MODES_MAPPING[key]?.includes(shipment_type));
+	const mode = Object.keys(MODES_MAPPING).find((
+		key,
+	) => MODES_MAPPING[key].find((eachModePrefix) => shipment_type.includes(eachModePrefix)));
 
 	const {
 		loading = false,

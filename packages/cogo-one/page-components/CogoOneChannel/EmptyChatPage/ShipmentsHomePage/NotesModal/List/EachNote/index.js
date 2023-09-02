@@ -13,7 +13,7 @@ function Document({ eachFile = {} }) {
 	return (
 		<div className={styles.attachments_div}>
 			<div className={styles.attachments}>{fileName}</div>
-			<Button size="md" themeType="linkUi" onClick={() => window.open(fileUrl, '_blank')}>
+			<Button size="xs" themeType="linkUi" onClick={() => window.open(fileUrl, '_blank')}>
 				open
 			</Button>
 		</div>
