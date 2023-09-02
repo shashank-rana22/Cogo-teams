@@ -4,12 +4,14 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function AttachementsUrl({ externalAttachements }) {
+const NUMRICAL_ONE = 1;
+
+function AttachementsUrl({ externalAttachements = [] }) {
 	const [showPreview, setShowPreview] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 	const attachements = (externalAttachements || []).map((attachment) => {
 		const parts = attachment.split('/');
-		const file_name = parts[parts.length - 1];
+		const file_name = parts[parts.length - NUMRICAL_ONE];
 		return {
 			name : file_name,
 			id   : attachment,
@@ -91,7 +93,7 @@ function AttachementsUrl({ externalAttachements }) {
 					size="lg"
 					placement="top"
 					show={showPreview}
-					closeOnOuterClick={false}
+					closeOnOuterClick
 					onClose={() => setShowPreview(null)}
 				>
 					<Modal.Body>

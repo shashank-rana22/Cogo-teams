@@ -1,0 +1,57 @@
+.time_title {
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+.duration_section {
+	margin: 10px 20px;
+
+	:global {
+		.react-datepicker {
+			bottom: 46px;
+		}
+
+		.ui_text_area_container {
+			margin-top: 8px;
+		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
+
+		.ui_time_options_container {
+			top: unset;
+			bottom: 46px;
+
+			> div > div > div {
+				height: 100px;
+			}
+		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.last_button {
+	width: 130px;
+	margin-left: 80px;
+}
+
+.styled_modal {
+	top: 40px !important;
+
+	:global {
+		.ui_modal_body_container {
+			padding: 0;
+		}
+	}
+}

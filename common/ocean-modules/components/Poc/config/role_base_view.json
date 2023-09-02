@@ -33,7 +33,7 @@
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee","self"],
         "can_edit":["notifying_party","collection_party"],
-        "edit_internal_poc":["service_ops2"],
+        "edit_internal_poc":["service_ops2","document_desk"],
         "can_add_service_provider_poc":true
     },
     "superadmin":{
@@ -81,6 +81,14 @@
         "can_edit":["notifying_party","invoicing_party","self","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
         "add_external_import_poc":true,
         "add_external_export_poc":true
+    },
+    "booking_agent_manager": {
+        "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "can_edit":["notifying_party","invoicing_party","self","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "add_external_import_poc":true,
+        "add_external_export_poc":true,
+        "edit_internal_poc":["booking_agent","entity_manager"]
     },
     "consignee_shipper_booking_agent":{
         "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],

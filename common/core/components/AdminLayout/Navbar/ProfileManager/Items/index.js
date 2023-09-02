@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import SwitchAccounts from '../../SwitchAccounts';
@@ -63,6 +64,8 @@ function Items({
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
 }) {
+	const { t } = useTranslation(['common']);
+
 	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
@@ -201,13 +204,13 @@ function Items({
 						onClick={notificationRedirect}
 						disabled={loadingState}
 					>
-						You have
+						{t('common:you_have')}
 						{' '}
 						{notificationCount}
 						{' '}
-						new
+						{t('common:new')}
 						{' '}
-						{notificationCount > ONE ? 'notifications' : 'notification'}
+						{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
 					</Button>
 				</div>
 			)}
@@ -221,7 +224,7 @@ function Items({
 						onClick={redirect}
 						disabled={loadingState}
 					>
-						Add Account
+						{t('common:add_account')}
 					</Button>
 				</div>
 			)}

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 const useDeleteAllocationQuota = (props) => {
-	const { id, onCloseModal, refetch } = props;
+	const { id, onCloseModal, refetch, t = () => {} } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/quota_attributes',
@@ -26,7 +26,7 @@ const useDeleteAllocationQuota = (props) => {
 
 			refetch();
 
-			Toast.success('Quota deleted successfully!');
+			Toast.success(t('allocation:quota_deleted_successfully'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

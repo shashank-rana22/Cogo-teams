@@ -100,5 +100,6 @@
     "my_profile_path": "My Profile",
     "dashboard_path": "Dashboard",
     "all_badges": "All Badges",
-    "badges_unlocked_mastery": "Badges unlocked for mastery"
+    "badges_unlocked_mastery": "Badges unlocked for mastery",
+    "account_logout_message": "Do you wanna log out of all accounts?"
 }

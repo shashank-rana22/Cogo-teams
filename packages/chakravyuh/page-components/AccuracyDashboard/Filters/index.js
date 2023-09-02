@@ -1,7 +1,7 @@
-import { Chips, Select, Tooltip, cl } from '@cogoport/components';
+import { Select, cl, Datepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { IcMArrowRotateDown, IcMPortArrow } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { IcMPortArrow } from '@cogoport/icons-react';
+import { addDays, merge, startCase } from '@cogoport/utils';
 
 import {
 	LOCATIONS_PROPS, MAIN_PORT_PROPS, TYPE_MAPPING,
@@ -10,19 +10,17 @@ import {
 import {
 	SELECT_ICON_MAPPING,
 	SERVICE_TYPE_OPTIONS,
-	TIME_RANGE_OPTIONS,
 } from '../../../constants/dashboard_filter_controls';
 import { LOCATION_KEYS } from '../../../constants/map_constants';
 
 import FilterButton from './FilterButton';
 import styles from './styles.module.css';
 
+const MONTH_DAYS = 30;
+
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { service_type } = globalFilters;
-
-	const defaultOptions = [...TIME_RANGE_OPTIONS.default,
-		...TIME_RANGE_OPTIONS.more_options.filter(({ key }) => key === globalFilters.date_diff)];
+	const { service_type, start_date, end_date } = globalFilters;
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
@@ -32,11 +30,11 @@ function Filters(props) {
 		changePrimaryFilters(key, value);
 		setGlobalFilters((prev) => ({
 			...prev,
-			[`${key}_type`]         : TYPE_MAPPING[obj?.type] || obj?.type,
-			[`is_${key}_icd`]       : !!obj?.is_icd,
-			[`${key}_country_id`]   : obj?.country_id,
-			[`${key}_region_id`]    : obj?.region_id,
-			[`${key}_continent_id`] : obj?.continent_id,
+			[`${key}_type`]       : TYPE_MAPPING[obj?.type] || obj?.type,
+			[`is_${key}_icd`]     : !!obj?.is_icd,
+			[`${key}_country_id`] : obj?.country_id,
+			// [`${key}_region_id`]    : obj?.region_id,
+			// [`${key}_continent_id`] : obj?.continent_id,
 		}));
 	};
 
@@ -67,7 +65,14 @@ function Filters(props) {
 									onChange={(value, obj) => handleChange(key, value, obj)}
 									value={globalFilters[key]}
 									className={styles.location_select}
-									params={getLocationParams(service_type)}
+									params={merge(getLocationParams(service_type), {
+										filters: {
+											type: [
+												`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
+												'country',
+											],
+										},
+									})}
 									{...LOCATIONS_PROPS}
 								/>
 							</div>
@@ -96,32 +101,28 @@ function Filters(props) {
 			</div>
 			<div className={cl`${styles.single_filter} ${styles.time_range}`}>
 				<p className={styles.title_label}>Time Range</p>
-				<div className={styles.time_range_container}>
-					{defaultOptions.map(({ children, key }) => (
-						<button
-							key={children}
-							className={cl`${styles.custom_pill}
-							 ${key === globalFilters.date_diff ? styles.active : ''}`}
-							onClick={() => changePrimaryFilters('date_diff', key)}
-						>
-							{children}
-						</button>
-					))}
-					<Tooltip
-						interactive
-						trigger="click"
-						content={(
-							<Chips
-								size="md"
-								items={TIME_RANGE_OPTIONS.more_options}
-								selectedItems={globalFilters.date_diff}
-								onItemChange={(val) => { if (val) changePrimaryFilters('date_diff', val); }}
-							/>
-						)}
-						placement="bottom-end"
-					>
-						<IcMArrowRotateDown className={styles.rotate_icon} />
-					</Tooltip>
+				<div className={styles.flex}>
+					<Datepicker
+						value={start_date}
+						onChange={(value) => {
+							changePrimaryFilters('start_date', value);
+						}}
+						isPreviousDaysAllowed
+						maxDate={end_date || addDays(new Date(), MONTH_DAYS)}
+						showTimeSelect={false}
+						placeholder="Start Date"
+					/>
+					<Datepicker
+						value={end_date}
+						onChange={(value) => {
+							changePrimaryFilters('end_date', value);
+						}}
+						isPreviousDaysAllowed
+						maxDate={addDays(new Date(), MONTH_DAYS)}
+						minDate={start_date || undefined}
+						showTimeSelect={false}
+						placeholder="End Date"
+					/>
 				</div>
 			</div>
 			<FilterButton

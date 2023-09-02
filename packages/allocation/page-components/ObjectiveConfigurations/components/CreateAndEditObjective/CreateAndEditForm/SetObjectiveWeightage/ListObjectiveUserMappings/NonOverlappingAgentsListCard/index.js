@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import ObjectiveAccordian from '../ObjectiveAccordian';
 
@@ -8,6 +9,8 @@ import styles from './styles.module.css';
 import useGetNonOverlappingList from './useGetNonOverlappingList';
 
 function NonOverlappingAgentsListCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { formValues, control } = props;
 
 	const { list, loading, getNextPage, paginationData } = useGetNonOverlappingList({ formValues });
@@ -18,7 +21,7 @@ function NonOverlappingAgentsListCard(props) {
 
 	return (
 		<div className={styles.card_container}>
-			<h4>Users</h4>
+			<h4>{t('allocation:users_label')}</h4>
 
 			<AgentsList
 				loading={loading}

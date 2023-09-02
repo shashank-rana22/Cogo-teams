@@ -5,6 +5,7 @@ import { useEffect, useRef, useCallback } from 'react';
 
 import useGetMessages from '../../../../../hooks/useGetMessages';
 
+import ChatRequests from './ChatRequests';
 import Footer from './Footer';
 import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
@@ -35,6 +36,8 @@ function MessageConversations({
 	actionType = '',
 	assignLoading = false,
 	assignChat = () => {},
+	supportAgentId = '',
+	userId = '',
 }) {
 	const conversationsDivRef = useRef(null);
 
@@ -70,6 +73,16 @@ function MessageConversations({
 			key={id}
 			className={cl`${styles.container} ${channel_type === 'email' ? styles.mail_container : ''}`}
 		>
+			<ChatRequests
+				firestore={firestore}
+				activeMessageCard={activeMessageCard}
+				formattedData={formattedData}
+				userId={userId}
+				viewType={viewType}
+				supportAgentId={supportAgentId}
+				assignLoading={assignLoading}
+				assignChat={assignChat}
+			/>
 			<div
 				className={styles.message_container}
 				onScroll={handleScroll}

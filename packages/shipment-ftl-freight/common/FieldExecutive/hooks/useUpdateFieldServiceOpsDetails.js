@@ -1,14 +1,18 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
+import { isEmpty } from '@cogoport/utils';
 
 import { formatFinalData } from '../utils/formatFinalData';
 
 const useUpdateFieldServiceOpsDetails = ({
 	shipment_id = '',
-	initFormattedData = '',
-	otherFormattedData = '',
+	initFormattedData = {},
+	otherFormattedData = {},
+	truck_type = '',
 	callback: updateCallback = () => {},
+	updateTruckMsg = 'Truck Number Updated Successfully!!',
+	updateDetailMsg = 'Data Updated Successfully!!',
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/create_shipment_field_service_ops_detail',
@@ -19,17 +23,28 @@ const useUpdateFieldServiceOpsDetails = ({
 		const formattedData = formatFinalData({
 			shipment_id,
 			truck_number,
+			truck_type,
 			initFormattedData,
 			otherFormattedData,
 		});
+
+		const isDocPresent = Object.values(initFormattedData).some(
+			(values) => !isEmpty(values),
+		);
+
+		if (!isDocPresent) {
+			Toast.error('Please Upload Atleast a Single Document');
+			return;
+		}
 
 		try {
 			await trigger({
 				data: { ...formattedData, is_data_append_required: false },
 			});
+			Toast.success(updateDetailMsg);
 			updateCallback();
 		} catch (error) {
-			Toast.error(error?.data);
+			toastApiError(error);
 		}
 	};
 
@@ -46,9 +61,10 @@ const useUpdateFieldServiceOpsDetails = ({
 					updated_truck_number,
 				},
 			});
+			Toast.success(updateTruckMsg);
 			callback();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data) || 'Something went wrong');
+			toastApiError(error);
 		}
 	};
 

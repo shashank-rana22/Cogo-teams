@@ -51,6 +51,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'ftl_task_date_validation',
 			'terminal_charge',
 			'refresh',
+			'ftl_customer_invoice',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
@@ -76,7 +77,7 @@ const ENTITY_FEATURE_MAPPING = {
 	},
 	501: {
 		labels: {
-			irn_label                 : 'E-Invoice',
+			irn_label                 : 'E-INVOICE',
 			tax_label                 : 'VAT Number',
 			sage_label                : null,
 			search_options_label_pan  : 'Business Name/VAT Number',
@@ -87,6 +88,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
 			'upload_invoice',
+			'refetch-pdfs',
 			'dunning',
 		],
 		placeholder: {
@@ -95,7 +97,7 @@ const ENTITY_FEATURE_MAPPING = {
 	},
 	601: {
 		labels: {
-			irn_label                 : 'E-invoice',
+			irn_label                 : 'E-INVOICE',
 			tax_label                 : 'TIN Number',
 			sage_label                : null,
 			search_options_label_pan  : 'Business Name/TIN Number',
@@ -114,7 +116,7 @@ const ENTITY_FEATURE_MAPPING = {
 	},
 	701: {
 		labels: {
-			irn_label                 : 'E-invoice',
+			irn_label                 : 'E-INVOICE',
 			tax_label                 : 'NPWP Number',
 			sage_label                : null,
 			search_options_label_pan  : 'Business Name/NPWP Number',
@@ -133,7 +135,7 @@ const ENTITY_FEATURE_MAPPING = {
 	},
 	801: {
 		labels: {
-			irn_label                 : 'E-invoice',
+			irn_label                 : 'E-INVOICE',
 			tax_label                 : 'USCC Number',
 			sage_label                : null,
 			search_options_label_pan  : 'Business Name/USCC Number',

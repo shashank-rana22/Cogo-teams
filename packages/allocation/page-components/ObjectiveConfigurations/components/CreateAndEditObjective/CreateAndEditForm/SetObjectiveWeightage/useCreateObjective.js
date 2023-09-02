@@ -10,7 +10,7 @@ import validateTotalWeightage from '../../../../helpers/validate-total-weightage
 const { LIST } = ACTIVE_MODE_KEYS_MAPPING;
 
 const useCreateObjective = (props) => {
-	const { formValues, setActiveMode, flushRefCallback } = props;
+	const { formValues, setActiveMode, flushRefCallback, t = () => {} } = props;
 
 	const { control, setValue, getValues } = useForm();
 
@@ -23,7 +23,7 @@ const useCreateObjective = (props) => {
 	const onCreate = async ({ distribute_equally }) => {
 		try {
 			const payload = getCreateObjectivePayload(
-				{ data: formValues, weightageData: getValues(), distribute_equally },
+				{ data: formValues, weightageData: getValues(), distribute_equally, t },
 			);
 
 			const { objective_weightages } = payload;
@@ -31,12 +31,12 @@ const useCreateObjective = (props) => {
 			const isValidWeightages = validateTotalWeightage({ objective_weightages });
 
 			if (!isValidWeightages) {
-				throw new Error('Weightage sum should be 100 for all users');
+				throw new Error(t('allocation:weight_sum_length_toast_error'));
 			}
 
 			await trigger({ data: payload });
 
-			Toast.success('Objective has been created and sent for verification. Please check after some time');
+			Toast.success(t('allocation:objectives_sent_for_vericification_toast'));
 
 			setActiveMode(LIST);
 
@@ -44,7 +44,7 @@ const useCreateObjective = (props) => {
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data) || err?.message
-					|| 'Unable to Create Objective!!',
+					|| t('allocation:unable_to_create_objective'),
 			);
 		}
 	};

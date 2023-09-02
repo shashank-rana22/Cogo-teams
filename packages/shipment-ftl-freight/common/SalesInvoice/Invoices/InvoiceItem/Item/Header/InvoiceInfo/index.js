@@ -36,6 +36,7 @@ function InvoiceInfo({
 	setShowOTPModal = () => {},
 	setAskNullify = () => {},
 	salesInvoicesRefetch = () => {},
+	invoiceData = {},
 
 }) {
 	const {
@@ -167,6 +168,7 @@ function InvoiceInfo({
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						isAuthorized={isAuthorized}
 						disableAction={disableAction}
+						invoiceData={invoiceData}
 					/>
 				) : null}
 

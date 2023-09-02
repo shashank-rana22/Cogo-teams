@@ -13,7 +13,7 @@ import { billingAddressControlForSelf } from '../controls/billingAddressControlF
 import styles from './styles.module.css';
 
 function BillingAddressDetails({
-	policyForSelf = false,
+	policyForSelf = true,
 	formProps = {},
 	billingData = {},
 	setBillingData = () => {},
@@ -40,43 +40,6 @@ function BillingAddressDetails({
 	return (
 		<div>
 			{policyForSelf ? (
-				<div className={styles.popover}>
-					<Layout
-						fields={billingAddressControl({ setValue })}
-						control={control}
-						errors={errors}
-					/>
-					<Popover
-						placement="bottom"
-						visible={showFilters && !addAddressModal}
-						trigger="click"
-						render={AddressListPopover({
-							data,
-							checked,
-							setChecked,
-							loading      : addressLoading,
-							setShowFilters,
-							policyForSelf,
-							addAddressModal,
-							setAddAddressModal,
-							setProsporerAddress,
-							shipmentData : shipment_data,
-						})}
-					>
-						<div
-							className={styles.align_div}
-							role="presentation"
-							onClick={() => {
-								setShowFilters(!showFilters);
-							}}
-						>
-							<IcMPlus />
-							{' '}
-							Add/Change proposer address
-						</div>
-					</Popover>
-				</div>
-			) : (
 				<div>
 					{addressLoading ? (
 						<Loader />
@@ -129,6 +92,44 @@ function BillingAddressDetails({
 							/>
 						</div>
 					)}
+				</div>
+
+			) : (
+				<div className={styles.popover}>
+					<Layout
+						fields={billingAddressControl({ setValue })}
+						control={control}
+						errors={errors}
+					/>
+					<Popover
+						placement="bottom"
+						visible={showFilters && !addAddressModal}
+						trigger="click"
+						render={AddressListPopover({
+							data,
+							checked,
+							setChecked,
+							loading      : addressLoading,
+							setShowFilters,
+							policyForSelf,
+							addAddressModal,
+							setAddAddressModal,
+							setProsporerAddress,
+							shipmentData : shipment_data,
+						})}
+					>
+						<div
+							className={styles.align_div}
+							role="presentation"
+							onClick={() => {
+								setShowFilters(!showFilters);
+							}}
+						>
+							<IcMPlus />
+							{' '}
+							Add/Change proposer address
+						</div>
+					</Popover>
 				</div>
 			) }
 

@@ -52,6 +52,7 @@ function CogoOne() {
 		} : {},
 	});
 
+	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
@@ -71,7 +72,11 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType, loading: workPrefernceLoading = false, userMails = [] } = useAgentWorkPrefernce();
+	const {
+		viewType: initialViewType = '',
+		loading: workPrefernceLoading = false,
+		userMails = [],
+	} = useAgentWorkPrefernce();
 
 	const {
 		fetchWorkStatus = () => {},
@@ -132,6 +137,13 @@ function CogoOne() {
 		}
 	}, [token]);
 
+	useEffect(
+		() => {
+			setViewType(initialViewType);
+		},
+		[initialViewType],
+	);
+
 	return (
 		<>
 			<HeaderBar
@@ -143,6 +155,9 @@ function CogoOne() {
 				agentTimeline={agentTimeline}
 				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
+				userId={userId}
+				initialViewType={initialViewType}
+				setViewType={setViewType}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -171,6 +186,7 @@ function CogoOne() {
 					<PortPairOrgFilters
 						setSelectedAutoAssign={setSelectedAutoAssign}
 						sendBulkTemplates={sendBulkTemplates}
+						viewType={viewType}
 						{...commonProps}
 					/>
 				) : null}
@@ -182,6 +198,7 @@ function CogoOne() {
 								activeTab={activeTab}
 								viewType={viewType}
 								setActiveTab={setActiveTab}
+								mailProps={mailProps}
 							/>
 						</div>
 					) : (
@@ -244,6 +261,7 @@ function CogoOne() {
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
 				orgId={orgId}
+				viewType={viewType}
 			/>
 		</>
 	);

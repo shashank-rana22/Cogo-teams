@@ -55,7 +55,9 @@ const useUpdateRatesPreferences = ({
 						? sellRateDetails?.[service_id]
 						: [],
 		};
-		REVENUE_DESK_DECISION.push(final_payload);
+		if (SERVICE_PROVIDERS.length) {
+			REVENUE_DESK_DECISION.push(final_payload);
+		}
 	});
 
 	const updateTrigger = async () => {

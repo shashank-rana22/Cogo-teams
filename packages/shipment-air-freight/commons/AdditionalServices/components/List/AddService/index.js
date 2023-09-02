@@ -17,6 +17,7 @@ function AddService({
 	isSeller = '',
 	refetch = () => {},
 	closeModal = () => {},
+	source = '',
 	tradeType = '',
 }) {
 	const [showAddRate, setAddRate] = useState(null);
@@ -94,7 +95,7 @@ function AddService({
 							closeModal={closeModal}
 							refetch={refetch}
 							filters={filters}
-							source="overview"
+							source={source}
 						/>
 					) : null}
 

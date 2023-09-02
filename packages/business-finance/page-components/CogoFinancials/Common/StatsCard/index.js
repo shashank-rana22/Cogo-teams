@@ -44,9 +44,10 @@ function StatsCard({
 		<div
 			className={styles.container}
 			style={{ height: isAdditonalView ? '100%' : '49%' }}
+
 		>
 			<div className={styles.flexhead}>
-				<div>
+				<div data-tour="ongoing-shipments-heading">
 					<RenderCardHeader
 						title={heading}
 						showInfo
@@ -64,6 +65,7 @@ function StatsCard({
 				<div
 					className={styles.statscontainer}
 					onClick={() => setActiveShipmentCard(cardId)}
+					data-tour="ongoing-card"
 					role="presentation"
 					style={{ cursor: !isEmpty(cardId) ? 'pointer' : null }}
 				>
