@@ -66,6 +66,14 @@ const formatAmountValue = (amount, currency) => (
 	}) || '-'
 );
 
+const formatDateValue = (date) => (
+	formatDate({
+		date,
+		formattype : 'date',
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
+	}) || '-'
+);
+
 function getAllLineItems(staticLineItems = {}, dynamicLineItems = {}) {
 	const combinedLineItems = Object.keys(staticLineItems).reduce(
 		(result, key) => ({ ...result, [key]: [...staticLineItems[key]] }),
@@ -137,6 +145,10 @@ function HandleBookValue({
 }
 
 const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContract) => {
+	const { source = '', schedules = {} } = item || {};
+
+	const { validity_start = '', validity_end = '' } = schedules || {};
+
 	const keys = Object.keys(STATIC_COMPARISON_KEY[mode || 'default']);
 	const otherComparisonKeys = keys.map((key) => {
 		const comparisonKey = {
@@ -169,11 +181,10 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 				getFreeDaysValue(item?.origin_detention, item?.origin_demmurage),
 			),
 			validity_end: () => createValueObject(
-				formatDate({
-					date       : item.schedules?.departure || item.schedules?.validity_end,
-					formattype : 'date',
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
-				}),
+				source === 'cogo_assured_rate'
+					? `${formatDateValue(validity_start)} to ${formatDateValue(validity_end)}`
+					: formatDateValue(item.schedules?.departure || item.schedules?.validity_end),
+
 			),
 			book_and_lock: () => ({
 				...comparisonKey,
