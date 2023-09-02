@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
@@ -28,7 +28,7 @@ const useListTaggedInvoices = () => {
 
 	const { payrun, entity } = query;
 
-	const listPayrunBill = useRequestBf(
+	const [{ data, loading }, Trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun-bill',
 			method  : 'get',
@@ -93,9 +93,9 @@ const useListTaggedInvoices = () => {
 		}
 	};
 
-	const generateInvoice = async () => {
+	const generateInvoice = useCallback(async () => {
 		try {
-			listPayrunBill[API_ARRAY_VARIABLE_ONE]({
+			Trigger({
 				params: {
 					payrunId  : payrun,
 					pageSize  : 10,
@@ -105,7 +105,7 @@ const useListTaggedInvoices = () => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Failed to Fetch Data');
 		}
-	};
+	}, [payrun, Trigger]);
 	const deleteInvoices = async (id) => {
 		try {
 			await delete_payrun_invoice.trigger({
@@ -148,8 +148,7 @@ const useListTaggedInvoices = () => {
 	};
 	useEffect(() => {
 		generateInvoice();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params]);
+	}, [generateInvoice]);
 
 	const mergeInvoices = async () => {
 		try {
@@ -161,8 +160,8 @@ const useListTaggedInvoices = () => {
 	};
 
 	return {
-		data            : listPayrunBill[GLOBAL_CONSTANTS.zeroth_index].data,
-		loadingList     : listPayrunBill[GLOBAL_CONSTANTS.zeroth_index].loading,
+		data,
+		loadingList     : loading,
 		loadingMerged   : mergedPdfById[GLOBAL_CONSTANTS.zeroth_index].loading,
 		generateInvoice,
 		mergeInvoices,
