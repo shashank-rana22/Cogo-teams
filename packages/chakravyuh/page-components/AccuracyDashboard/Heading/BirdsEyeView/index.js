@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../common/MapTooltip';
-import { BASE_LAYER } from '../../../../constants/map_constants';
 import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
 import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
 import styles from '../styles.module.css';
@@ -17,7 +16,7 @@ const MAX_BOUNDS = [
 	[-MAX_LNG, -MAX_LAT],
 	[MAX_LNG, MAX_LAT]];
 
-const COLORS = ['#EDF6F8', '#A4D1DB', '#49A2B6', '#2C616D', '#0F2024'];
+const COLORS = ['#FFEACC', '#ffc680', '#f0883e', '#db6d28', '#bd561d', '#9b4215', '#762d0a', '#3d1300'];
 function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
 	const [map, setMap] = useState(null);
 	const { data = [] } = useGetSimplifiedGeometry({ type: 'country' });
@@ -55,9 +54,9 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
 			setMap={setMap}
 			zoom={1}
 			key={data?.length}
-			baseLayer={BASE_LAYER}
 			maxBounds={MAX_BOUNDS}
 			maxZoom={2}
+			minZoom={1}
 			zoomControls={false}
 			scaleControl={false}
 			attributionControl={false}
