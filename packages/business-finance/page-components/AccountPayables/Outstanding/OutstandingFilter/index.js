@@ -2,7 +2,7 @@ import { Button, Input, Popover } from '@cogoport/components';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
-	IcMCross,
+	IcMAppSearch,
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -85,39 +85,30 @@ function Filters({
 							</div>
 						)}
 					>
-						<Button
-							size="lg"
-							onClick={() => setShowSortPopover(!showSortPopover)}
-							themeType="tertiary"
-						>
-							Sort By:
-							{' '}
-							<div className={styles.filter_value}>
-								{orderBy.label}
+						<div className={styles.flexjustifiy}>
+							<Button
+								size="lg"
+								onClick={() => setShowSortPopover(!showSortPopover)}
+								themeType="tertiary"
+							>
+								Sort By:
 								{' '}
-								<div className={styles.sort_icon_style}>
-									{showSortPopover ? (
-										<IcMArrowRotateUp />
-									) : (
-										<IcMArrowRotateDown />
-									)}
+								<div className={styles.filter_value}>
+									{orderBy.label}
+
 								</div>
-							</div>
-						</Button>
+							</Button>
+						</div>
 					</Popover>
-				</div>
-				<Button
-					size="lg"
-					onClick={onFilters}
-					themeType="tertiary"
-				>
 					<div
 						className={styles.icon_div}
+						onClick={onFilters}
+						role="presentation"
 					>
 						<IcMArrowRotateUp style={{ color: COLOR_MAP[orderBy?.order] }} />
 						<IcMArrowRotateDown style={{ color: COLOR_MAP_UP[orderBy?.order] }} />
 					</div>
-				</Button>
+				</div>
 
 				<FilterpopOver
 					filters={formFilters}
@@ -128,18 +119,18 @@ function Filters({
 			</div>
 			<div className={styles.flex_wrap}>
 				<Input
-					placeholder="Search"
+					placeholder="BusinessName/Pan/Organization ID/Sage ID"
 					value={search}
 					onChange={(e) => handleChange(e)}
-					suffix={
-						search ? (
-							<IcMCross
-								onClick={handleInputReset}
-								cursor="pointer"
-								className={styles.icon_style}
-							/>
-						) : null
-					}
+					suffix={(
+						<IcMAppSearch
+							onClick={handleInputReset}
+							cursor="pointer"
+							className={styles.icon_style}
+							height={20}
+							width={20}
+						/>
+					)}
 					prefix={null}
 					className={styles.styled_input}
 				/>
