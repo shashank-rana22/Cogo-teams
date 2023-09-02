@@ -20,7 +20,7 @@
 }
 
 .rate_accuracy_chart_container {
-	height: 258px;
+	height: 248px;
 	transition: all 0.1s ease;
 
 	&.highlighted_container {
@@ -92,4 +92,9 @@
 	left: 24px;
 	font-size: 16px;
 	font-weight: 600;
+}
+
+.bottom_label {
+	width: fit-content;
+	margin: -16px auto 0;
 }

@@ -11,7 +11,7 @@ import {
 	TOTAL_DEVIATION,
 	DIMENSIONS, BOTTOM_AXIS_UNIT, SEPARATION_INDEX,
 } from '../../../../constants/histogram_config';
-import { section_header, section_container } from '../styles.module.css';
+import { section_header, section_container, bottom_label } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
@@ -34,7 +34,7 @@ const getRandomArray = () => {
 	).flat();
 };
 
-function Deviation({ data = [], loading = false }) {
+function Deviation({ data = [], loading = false, dateString = '' }) {
 	const [loadingData, setLoadingData] = useState([]);
 
 	const formatedData = data.map(({ range, count }, idx) => ({
@@ -193,6 +193,9 @@ function Deviation({ data = [], loading = false }) {
 						/>
 					)
 			}
+			<h5 className={cl`${styles.bottom_label} ${bottom_label}`}>
+				{dateString}
+			</h5>
 		</div>
 	);
 }

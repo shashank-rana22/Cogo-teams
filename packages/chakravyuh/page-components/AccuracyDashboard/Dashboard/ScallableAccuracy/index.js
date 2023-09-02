@@ -2,7 +2,7 @@ import { cl, Tabs, TabPanel } from '@cogoport/components';
 import { IcMCross, IcMExpand } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
-import { section_container } from '../styles.module.css';
+import { section_container, bottom_label } from '../styles.module.css';
 
 import RateAccuracyChart from './RateAccuracyChart';
 import styles from './styles.module.css';
@@ -33,6 +33,7 @@ function ScallableAccuracy(props) {
 		isHighlighted = false,
 		globalFilters = {},
 		setGlobalFilters = () => {},
+		dateString = '',
 	} = props;
 	const { chartType = 'trend' } = globalFilters;
 	const [isAnimating, setIsAnimating] = useState(false);
@@ -53,7 +54,7 @@ function ScallableAccuracy(props) {
 	}, [isHighlighted]);
 
 	return (
-		<div className={cl`${styles.container} ${section_container} `}>
+		<div className={cl`${section_container} ${styles.container} `}>
 			{isHighlighted ? (
 				<IcMCross
 					className={styles.expand_icon}
@@ -78,6 +79,9 @@ function ScallableAccuracy(props) {
 							<TabPanel key={key} name={name} title={title}>
 								<h2 className={styles.tab_title}>{heading}</h2>
 								<Component {...props} isAnimating={isAnimating} isHighlighted={isHighlighted} />
+								<h5 className={cl`${styles.bottom_label} ${bottom_label}`}>
+									{dateString}
+								</h5>
 							</TabPanel>
 						);
 					}

@@ -6,12 +6,12 @@ import NoDataState from '../../../../common/NoDataState';
 import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
 import useGetFclFreightDistribution from '../../../../hooks/useGetFclFreightRateDistribution';
 import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
-import { section_header, section_container } from '../styles.module.css';
+import { section_header, section_container, bottom_label } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
 const LOADING_COUNT = 5;
-function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
+function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, dateString = '' }) {
 	const { parent_mode = null } = globalFilters;
 	const {
 		data = {},
@@ -149,6 +149,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 					)
 					: <NoDataState flow="column" visible={!loading} />
 			}
+			<h5 className={cl`${styles.bottom_label} ${bottom_label}`}>{dateString}</h5>
 		</div>
 	);
 }

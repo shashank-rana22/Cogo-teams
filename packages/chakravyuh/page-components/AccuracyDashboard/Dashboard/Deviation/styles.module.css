@@ -66,3 +66,8 @@
 		border: 1px solid var(--negative-stroke-color);
 	}
 }
+
+.bottom_label {
+	width: fit-content;
+	margin: 0 auto -12px;
+}
