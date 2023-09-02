@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import CategoriesCard from './CategoriesCard';
 import PerformanceCard from './PerformanceCard';
@@ -11,7 +12,12 @@ const cardComponentMapping = {
 	Performance : PerformanceCard,
 };
 
-function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, loading, isMargin }) {
+function Widget({
+	label = '', subLabel = '', data = [],
+	type = '', loading = false, isMargin = false,
+}) {
+	const { t } = useTranslation(['myTickets']);
+
 	const CardComponent = cardComponentMapping[type];
 
 	return (
@@ -19,10 +25,12 @@ function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, lo
 			className={cl`${styles.container} ${styles[isMargin ? 'is_margin' : '']}`}
 		>
 			<div className={styles.header}>
-				<div className={styles.title}>{label}</div>
-				<div className={styles.title}>{subLabel}</div>
+				<div className={styles.title}>{label || t('myTickets:top_users')}</div>
+				<div className={styles.title}>{subLabel || t('myTickets:no_of_issues')}</div>
 			</div>
-			{CardComponent && <CardComponent key={type} data={data} loading={loading} />}
+
+			{CardComponent
+			&& <CardComponent key={type} data={data} loading={loading} />}
 		</div>
 
 	);

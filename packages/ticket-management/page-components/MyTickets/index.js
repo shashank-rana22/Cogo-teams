@@ -12,7 +12,7 @@ function MyTickets() {
 	const { t } = useTranslation(['myTickets']);
 
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
-	const [spectatorType, setSpectatorType] = useState(`${t('myTickets:reviewer')}`);
+	const [spectatorType, setSpectatorType] = useState('reviewer');
 	const [refreshList, setRefreshList] = useState({
 		Open      : false,
 		Pending   : false,
