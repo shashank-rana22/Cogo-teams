@@ -54,7 +54,7 @@ function SidePanel({
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
-			if (!accuracyLoading && !hasMore) {
+			if (!accuracyLoading && hasMore) {
 				setPage(page + START_PAGE);
 			}
 		}, TIMEOUT_TIME);
