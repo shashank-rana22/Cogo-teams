@@ -47,12 +47,17 @@ function FilterContainer({
 	}, [parent_mode, setValue]);
 
 	const onReset = () => {
-		setGlobalFilters((prev) => ({ ...prev, parent_mode: undefined }));
+		setGlobalFilters((prev) => ({ ...prev, parent_mode: undefined, source: undefined }));
 		reset();
 	};
 
 	const onSumbit = () => {
-		setGlobalFilters((prev) => ({ ...prev, ...values, service_type, parent_mode: values?.parent_mode }));
+		setGlobalFilters((prev) => ({
+			...prev,
+			...values,
+			service_type,
+			parent_mode: values?.source || values?.parent_mode,
+		}));
 		setVisible(false);
 	};
 

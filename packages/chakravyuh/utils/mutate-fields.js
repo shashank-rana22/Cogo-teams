@@ -18,6 +18,11 @@ const mutateFields = ({ controls, containerType, setGlobalFilters, globalFilters
 				newCtr.options = newCtr.options.filter(({ value }) => value !== 'predicted');
 			}
 		}
+		if (ctr.name === 'source') {
+			if (chartType === 'trend') {
+				newCtr.options = newCtr.options.filter(({ value }) => value !== 'predicted');
+			}
+		}
 		return newCtr;
 	});
 

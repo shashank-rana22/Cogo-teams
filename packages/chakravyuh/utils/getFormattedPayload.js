@@ -7,7 +7,9 @@ const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'd
 	'is_origin_icd', 'is_destination_icd', 'page', 'chartType'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
-	const keysToExclude = [...EXCLUDE_KEYS, ...excludeKeys];
+	const { service_type } = globalFilters;
+	const key_to_remove = service_type === 'fcl' ? 'source' : 'parent_mode';
+	const keysToExclude = [...EXCLUDE_KEYS, ...excludeKeys, key_to_remove];
 	const filters = Object.fromEntries(Object.entries(globalFilters)
 		.filter(([key, v]) => v && !keysToExclude.includes(key)));
 

@@ -9,7 +9,8 @@ import useGetFclFreightRateTrends from '../../../../../hooks/useGetFclFreightRat
 import SeriesChart from '../SeriesChart';
 import styles from '../styles.module.css';
 
-const VALID_IDS = ['supply', 'rate_extension', 'cluster_extension'];
+const FCL_VALID_IDS = ['supply', 'rate_extension', 'cluster_extension'];
+const AIR_IDS = ['cargo_ai', 'freight_look', 'manual', 'rate_extension', 'rate_sheet'];
 
 function TrendChart({
 	parent_mode = null,
@@ -17,6 +18,8 @@ function TrendChart({
 	isHighlighted = false,
 	globalFilters = {},
 }) {
+	const { service_type = 'fcl' } = globalFilters;
+	const VALID_IDS = service_type === 'fcl' ? FCL_VALID_IDS : AIR_IDS;
 	const IDS = parent_mode ? [parent_mode] : VALID_IDS;
 	const { loading, trendsData } = useGetFclFreightRateTrends({ filters: globalFilters });
 	const filteredDataForChart = trendsData?.map(({ predicted, ...rest }) => ({ ...rest })) || [];
