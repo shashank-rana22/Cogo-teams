@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getPayload = ({ values }) => {
+const getPayload = ({ values = {} }) => {
 	const { company_name = '', name = '', email_id = '', country_id = '', mobile_number = {} } = values || {};
 	const {
 		country_code = '',
