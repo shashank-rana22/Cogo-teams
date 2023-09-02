@@ -81,7 +81,7 @@ function Status({
 
 			{invoice?.processing
 				? (
-					<div className={styles.relaod}>
+					<div className={styles.reload}>
 						<div className={cl`${styles.payment_method} ${styles.processing}`}>Processing</div>
 						<Button
 							size="sm"
@@ -96,7 +96,7 @@ function Status({
 						</Button>
 					</div>
 				)
-				: !invoice.is_revoked && invoice.status !== 'finance_rejected' && (
+				: !invoice?.is_revoked && invoice?.status !== 'finance_rejected' && (
 					<Actions
 						invoice={invoice}
 						refetch={refetchAferApiCall}

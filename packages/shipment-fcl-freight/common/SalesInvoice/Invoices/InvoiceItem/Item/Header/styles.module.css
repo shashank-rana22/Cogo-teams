@@ -268,13 +268,8 @@
 	text-transform: capitalize;
 }
 
-.relaod {
+.reload {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-}
-
-.text {
-	font-weight: 500;
-	color: var(--color-primary-error-red-2);
 }
