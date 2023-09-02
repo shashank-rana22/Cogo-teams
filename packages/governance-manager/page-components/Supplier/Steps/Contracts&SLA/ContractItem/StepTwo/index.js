@@ -59,7 +59,7 @@ function StepTwo({
 				<div className={styles.term_content}>
 					{item?.display_content}
 				</div>
-				{item?.variables_details?.[ZERO] && (
+				{item?.variable_details?.[ZERO] && (
 					<div className={styles.update}>
 
 						<span className={styles.icon}>
@@ -75,7 +75,7 @@ function StepTwo({
 								marginRight : '24px',
 							}}
 							disabled
-							value={item?.variables_details?.[ZERO]?.default_value}
+							value={item?.variable_details?.[ZERO]?.default_value}
 						/>
 						<span className={styles.icon}>
 							{t('supplier_page_contract_sla_step2_updated_label')}
@@ -90,7 +90,7 @@ function StepTwo({
 								marginRight : '24px',
 							}}
 							disabled
-							value={item?.variables_details?.[ZERO]?.updated_value}
+							value={item?.variable_details?.[ZERO]?.updated_value}
 						/>
 
 						<Button

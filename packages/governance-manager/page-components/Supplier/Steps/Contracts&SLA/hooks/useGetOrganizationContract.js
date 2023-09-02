@@ -25,7 +25,7 @@ const useGetOrganizationContract = ({ organization_id, step, service_type }) => 
 	}, [step]);
 
 	return {
-		data : data?.data?.terms_details,
+		data : data?.data?.term_details,
 		id   : data?.data?.id,
 		loading,
 		getOrganizationContract,

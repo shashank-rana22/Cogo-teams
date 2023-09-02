@@ -31,7 +31,7 @@ function StepOne({ t, item, index, id, getOrganizationContract }) {
 					{item?.display_content}
 				</div>
 				<div className={styles.update}>
-					{item?.variables_details?.[ZERO] && (
+					{item?.variable_details?.[ZERO] && (
 						<>
 							<div className={styles.icon}><IcMInfo height={26} width={26} /></div>
 							<Input

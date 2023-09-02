@@ -12,8 +12,8 @@ function useUpdateOrganizationContract({ item, id, updatedValue, getOrganization
 					id,
 					config_id : item?.config_id,
 					status    : item?.status,
-					variables_details:
-					item?.variables_details?.map((variable) => ({ ...variable, updated_value: updatedValue })),
+					variable_details:
+					item?.variable_details?.map((variable) => ({ ...variable, updated_value: updatedValue })),
 					state,
 				},
 			});
