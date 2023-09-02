@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ id }) => ({
@@ -18,7 +20,7 @@ function useUpdateVoiceCallRecord({ fetchUnreadCall = () => {} }) {
 			await trigger(getPayload({ id }));
 			fetchUnreadCall();
 		} catch (error) {
-			console.error(error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

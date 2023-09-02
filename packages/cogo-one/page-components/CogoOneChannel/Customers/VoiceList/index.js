@@ -123,7 +123,7 @@ function VoiceList(voiceProps) {
 						>
 							<div className={cl`
 							${styles.card}
-							${missedCallCount > DEFAULT_UNREAD_CALLS ? styles.count_visible : ''}
+							${(missedCallCount > DEFAULT_UNREAD_CALLS) ? styles.count_visible : ''}
 				 `}>
 								<div className={styles.user_information}>
 									<div className={styles.avatar_container}>

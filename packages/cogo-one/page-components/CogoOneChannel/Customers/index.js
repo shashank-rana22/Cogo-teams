@@ -22,7 +22,7 @@ const COMPONENT_MAPPING = {
 
 function Customers({
 	setActiveTab = () => {},
-	activeTab = '',
+	activeTab = {},
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
