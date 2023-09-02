@@ -1,5 +1,6 @@
 import { Tooltip, Table } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
@@ -14,6 +15,8 @@ interface OutsatndingKamProps {
 }
 
 function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode }: OutsatndingKamProps) {
+	const { t } = useTranslation(['accountRecievables']);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.styled_container}>
@@ -23,16 +26,14 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode 
 					<div
 						className={styles.styled_text}
 					>
-						Outstanding By KAM
+						{t('outstanding_by_KAM')}
 					</div>
 
 					<div className={styles.styled_kam_text}>
 						<Tooltip
 							content={(
-								<div>
-									KAM outstanding amount
-									<br />
-									and invoices.
+								<div className={styles.tooltip}>
+									{t('outstanding_by_KAM_tooltip')}
 								</div>
 							)}
 							placement="top"

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import CardComponent from './CardComponent';
@@ -15,18 +16,18 @@ interface TabDataProps {
 	entityCode?: string
 }
 
-const tabs = [
+const tabs = (t) => [
 	{
 		key   : 'SALES_INVOICE',
-		label : 'Revenue',
+		label : t('revenue'),
 	},
 	{
 		key   : 'CREDIT_NOTE',
-		label : 'Credit Note',
+		label : t('credit_note'),
 	},
 	{
 		key   : 'SHIPMENT_CREATED',
-		label : 'Shipments Created',
+		label : t('shipments_created'),
 	},
 ];
 
@@ -70,6 +71,7 @@ function TabData({
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
+	const { t } = useTranslation(['accountRecievables']);
 
 	const onChange = (view:string) => {
 		setSubActiveTab(view);
@@ -82,7 +84,7 @@ function TabData({
 
 				<div className={styles.flex}>
 
-					{tabs.map((tab) => (
+					{tabs(t).map((tab) => (
 						<div
 							key={tab.key}
 							onClick={() => {

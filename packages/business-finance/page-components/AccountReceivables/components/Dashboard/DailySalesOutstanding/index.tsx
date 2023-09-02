@@ -2,6 +2,7 @@ import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import BarChart from '../../../commons/BarChart';
@@ -32,6 +33,8 @@ function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }: DailySalesProps) {
+	const { t } = useTranslation(['accountRecievables']);
+
 	const [params, onChangeParams] = useState({
 		quarterView : 'normalView',
 		graphView   : 'normalView',
@@ -90,7 +93,7 @@ function DailySalesOutstanding({
 							<div
 								className={styles.styled_daily_text}
 							>
-								Days Sales Outstanding
+								{t('days_sales_outstanding')}
 							</div>
 
 							<Tooltip

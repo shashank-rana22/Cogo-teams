@@ -169,3 +169,8 @@
 	height: 20px;
 	margin-left: 4px;
 }
+
+.tooltip {
+	word-break: break-word;
+	word-wrap: break-word;
+}

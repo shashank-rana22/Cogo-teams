@@ -2,6 +2,7 @@ import { Tooltip, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import CardData from './CardData';
@@ -41,6 +42,8 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({ outstandingData, outstandingLoading, entityCode }: ServiceCardProps) {
+	const { t } = useTranslation(['accountRecievables']);
+
 	const {
 		outstandingServiceWise = {},
 	} = outstandingData || {};
@@ -82,7 +85,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 	const getCardData = [
 		{
-			label        : 'Ocean',
+			label        : t('ocean'),
 			amount       : oceanOpen,
 			currency     : oceanCurrency || currency,
 			openInvoices : oceanOpen || 0,
@@ -91,7 +94,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 			icon         : <IcMShip style={{ width: '24px', height: '24px' }} />,
 		},
 		{
-			label        : 'Air',
+			label        : t('air'),
 			currency     : airCurrency || currency,
 			amount       : airOpen,
 			openInvoices : airOpen || 0,
@@ -100,7 +103,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 			icon         : <IcMAirport style={{ width: '24px', height: '24px' }} />,
 		},
 		{
-			label        : 'Surface',
+			label        : t('surface'),
 			currency     : surfaceCurrency || currency,
 			amount       : surfaceOpen,
 			tradeType    : surfaceTradeType,
@@ -112,19 +115,19 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 	const serviceCard = [
 		{
-			label    : 'Ocean',
+			label    : t('ocean'),
 			amount   : oceanOpen || 0,
 			currency : oceanCurrency || currency,
 			icon     : <IcMShip className={styles.icon_container} />,
 		},
 		{
-			label    : 'Air',
+			label    : t('air'),
 			currency : airCurrency || currency,
 			amount   : airOpen || 0,
 			icon     : <IcMAirport className={styles.icon_container} />,
 		},
 		{
-			label    : 'Surface',
+			label    : t('surface'),
 			currency : surfaceCurrency || currency,
 			amount   : surfaceOpen || 0,
 			icon     : <IcMTransport className={styles.icon_container} />,
@@ -153,7 +156,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 						: (
 							<div className={styles.styled_text}>
-								Account Receivables By Service
+								{t('account_receivables_by_service')}
 							</div>
 						)}
 
@@ -310,7 +313,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 						<div
 							className={styles.sub_view_less}
 						>
-							view Less
+							{t('view_less')}
 						</div>
 					</div>
 				</div>

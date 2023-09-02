@@ -1,6 +1,7 @@
 import { Tooltip, Placeholder, Select } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { SALES_FUNNEL_OPTIONS } from '../../../constants';
@@ -29,6 +30,8 @@ function SalesFunnel({
 	salesFunnelData, salesFunnelMonth, setSalesFunnelMonth,
 	salesFunnelLoading, entityCode,
 }: SalesFunnelProps) {
+	const { t } = useTranslation(['accountRecievables']);
+
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',
@@ -82,15 +85,13 @@ function SalesFunnel({
 						<div
 							className={styles.styled_text}
 						>
-							Sales Funnel
+							{t('sales_funnel')}
 						</div>
 
 						<Tooltip
 							content={(
-								<div>
-									Current month Invoice
-									<br />
-									journey.
+								<div className={styles.tooltip}>
+									{t('sales_funnel_tooltip')}
 								</div>
 							)}
 							placement="top"
@@ -105,7 +106,7 @@ function SalesFunnel({
 					<Select
 						value={salesFunnelMonth}
 						onChange={(val:string) => onChange(val)}
-						placeholder="By Month"
+						placeholder={t('by_month_placeholder')}
 						options={SALES_FUNNEL_OPTIONS}
 						isClearable
 					/>
