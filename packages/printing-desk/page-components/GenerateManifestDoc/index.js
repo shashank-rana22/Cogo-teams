@@ -1,4 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import useCreateManifest from '../../hooks/useCreateManifest';
@@ -9,6 +10,7 @@ import styles from './styles.module.css';
 import { stylesTHC } from './stylesTHC';
 
 function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
+	const { t } = useTranslation(['printingDesk']);
 	const { data, getManifest, loading:manifestLoading } = useGetManifest();
 	const { createManifest, loading:createManifestLoading } = useCreateManifest();
 
@@ -57,18 +59,22 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 					disabled={loading || createManifestLoading}
 					style={{ marginLeft: 'auto' }}
 				>
-					Download
+					{t('printingDesk:generate_manifest_doc_download_button_text')}
 				</Button>
 				<div
 					className={styles.container}
 					id="manifest"
 				>
 					<div className="flex_column">
-						<div className="manifest_heading">CARGO MANIFEST</div>
+						<div className="manifest_heading">
+							{t('printingDesk:generate_manifest_doc_heading_cargo_manifest')}
+						</div>
 						<div style={{ margin: '12px 40px' }}>
 							<div className="flex_row">
 								<div className="shipper">
-									<p className="shipper_head">SHIPPER:</p>
+									<p className="shipper_head">
+										{t('printingDesk:generate_manifest_doc_shipper_header')}
+									</p>
 									<p className="shipper_info">
 										{mawbData.shipperName || '-'}
 										<br />
@@ -79,7 +85,9 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 							</div>
 							<div className="flex_row">
 								<div className="consignee font_style">
-									<p className="consignee_head">CONSIGNEE:</p>
+									<p className="consignee_head">
+										{t('printingDesk:generate_manifest_doc_consignee_header')}
+									</p>
 									<p className="consignee_info">
 										{mawbData.consigneeName || '-'}
 										<br />
@@ -91,12 +99,12 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 							<table>
 								<tr>
 									<td className="font_style">
-										MAWB:
+										{t('printingDesk:generate_manifest_doc_mawb_header')}
 										{' '}
 										{mawbData.document_number || '-'}
 									</td>
 									<td className="font_style">
-										DESTINATION:
+										{t('printingDesk:generate_manifest_doc_destination_header')}
 										{' '}
 										{mawbData.destinationPortCode || '-'}
 									</td>
@@ -105,12 +113,12 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 						</div>
 						<table>
 							<tr className="font_style">
-								<th>HAWB NO</th>
-								<th>PKGS</th>
-								<th>GROSS WEIGHT</th>
-								<th>COMMODITY</th>
-								<th>SHIPPER</th>
-								<th>CONSIGNEE</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_hawb_number_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_pkgs_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_gross_weight_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_commodity_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_shipper_label')}</th>
+								<th>{t('printingDesk:generate_manifest_doc_table_consignee_label')}</th>
 							</tr>
 							{HAWB_DATA.map((item) => {
 								const {
