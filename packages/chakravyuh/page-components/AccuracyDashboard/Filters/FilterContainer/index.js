@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function FilterContainer({
 	globalFilters = {}, setGlobalFilters = () => {}, showText = true,
-	setVisible = () => {}, view = '',
+	setVisible = () => {},
 }) {
 	const { service_type = 'fcl', parent_mode = null } = globalFilters;
 
@@ -61,10 +61,6 @@ function FilterContainer({
 		setVisible(false);
 	};
 
-	const showElements = {
-		service_type: view === 'map_view',
-	};
-
 	return (
 		<div className={cl`${styles.main_container} ${!showText ? styles.small_view : ''}`}>
 			<div className={styles.header_row}>
@@ -79,7 +75,6 @@ function FilterContainer({
 				fields={newFields}
 				errors={errors}
 				control={control}
-				showElements={showElements}
 			/>
 		</div>
 	);
