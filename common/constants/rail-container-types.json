@@ -1,0 +1,38 @@
+[
+    {
+      "label": "Conventional End Opening",
+      "value": "conventional_end_opening"
+    },
+    {
+      "label": "High Cube End Opening",
+      "value": "high_cube_end_opening"
+    },
+    {
+      "label": "Side Access",
+      "value": "side_access"
+    },
+    {
+      "label": "Refrigerated",
+      "value": "refrigerated"
+    },
+    {
+      "label": "Flast Rack",
+      "value": "flat_rack"
+    },
+    {
+      "label": "Flat Rack Collapsible",
+      "value": "flat_rack_collapsible"
+    },
+    {
+      "label": "Platform",
+      "value": "platform"
+    },
+    {
+      "label": "Open Top",
+      "value": "open_top"
+    },
+    {
+      "label": "Tank",
+      "value": "tank"
+    }
+]

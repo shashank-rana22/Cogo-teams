@@ -1,10 +1,12 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 
 const READY_STATE_RESPONSE = 4;
 const SUCCESS_RESPONSE_CODE = 200;
 
 const useGetMediaUrl = () => {
+	const { t } = useTranslation(['printingDesk']);
 	const uploadDocument = (file, documentData) => new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
 		const { url, headers } = JSON.parse(documentData);
@@ -16,7 +18,7 @@ const useGetMediaUrl = () => {
 						resolve(documentData);
 					} else {
 						reject(
-							Toast.error('There as an issue uploading the document'),
+							Toast.error(t('printingDesk:common_error_issue_uploading_doc_message')),
 						);
 					}
 				}
@@ -24,7 +26,7 @@ const useGetMediaUrl = () => {
 			Object.keys(headers).forEach((header) => xhr.setRequestHeader(header, headers[header]));
 			xhr.send(file);
 		} else {
-			Toast.error('Error in Uploading File, Try again!');
+			Toast.error(t('printingDesk:common_error_error_uploading_file_message'));
 		}
 	});
 
@@ -37,7 +39,7 @@ const useGetMediaUrl = () => {
 					resolve(xhr.responseText);
 				} else {
 					reject(
-						Toast.error('There as an issue uploading the document.'),
+						Toast.error(t('printingDesk:common_error_issue_uploading_doc_message')),
 					);
 				}
 			}
