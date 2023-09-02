@@ -2,8 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 14px;
-	margin-top: 22px;
+	padding: 18px 14px;
+	margin-top: 28px;
 	background-color: #fff;
 }
 
@@ -31,6 +31,7 @@
 	font-size: 28px;
 	font-weight: 700;
 	line-height: 42px;
+	color: #7278ad;
 }
 
 .download_link {
@@ -82,4 +83,10 @@
 
 .bold_text {
 	font-weight: 600;
+}
+
+.button {
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
 }

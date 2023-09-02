@@ -1,28 +1,84 @@
+import { Button, Toggle } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import Filter from './components/Filter';
-import RateCoverageDetails from './components/RateCoverageDetails';
-import Stats from './components/Stats';
-import useGetStats from './hooks/useGetStats';
-
-const defaultFilterData = {
-	service                : 'fcl_freight',
-	origin_country_id      : undefined,
-	destination_country_id : undefined,
-	commodity              : undefined,
-	container_type         : undefined,
-	container_size         : undefined,
-};
+import ListData from './components/ListData';
+// import RateCoverageDetails from './components/RateCoverageDetails';
+// import Stats from './components/Stats';
+import TasksOverview from './components/TasksOverview';
+import useGetCoverageDetails from './hooks/useGetCoverageDetails';
+// import useGetStats from './hooks/useGetStats';
+import useGetListCoverage from './hooks/useGetListCoverages';
+import styles from './styles.module.css';
 
 function RateCoverageContent() {
-	const [filter, setFilter] = useState(defaultFilterData);
-	const { loading, data, getStats } = useGetStats(filter.service || 'lcl_freight');
+	const [showFilters, setShowFilters] = useState(false);
+
+	const handleFilterClick = () => {
+		setShowFilters((prev) => !prev);
+	};
+
+	const { data:statsData, loading:statsLoading, getCoverageDetails, filter, setFilter } = useGetCoverageDetails();
+	const {
+		data:listData,
+		loading:listLoading,
+		getListCoverage,
+		source, setSource,
+		page,
+		setPage,
+	} = useGetListCoverage(filter);
+	const finalList = listData?.list;
+	const statsList = listData?.stats;
+	const handleToggle = () => {
+		setFilter((prevFilters) => ({ ...prevFilters, releventToMeValue: !prevFilters?.releventToMeValue }));
+	};
 
 	return (
 		<div>
-			<Filter getStats={getStats} filter={filter} setFilter={setFilter} defaultFilterData={defaultFilterData} />
-			<Stats data={data} />
-			<RateCoverageDetails data={data} loading={loading} filter={filter} />
+			<div className={styles.header_container}>
+				<div className={styles.relevent_toggle}>
+					<Toggle
+						name="a4"
+						size="md"
+						disabled={false}
+						onLabel="Relevent to all"
+						offLabel="Relevent to me"
+						onChange={handleToggle}
+					/>
+				</div>
+				<Button
+					themeType="none"
+					className={styles.filter_button}
+					onClick={handleFilterClick}
+				>
+					<IcMFilter />
+					Filter
+				</Button>
+			</div>
+			{showFilters
+			&& (
+				<Filter
+					getCoverageDetails={getCoverageDetails}
+					getListCoverage={getListCoverage}
+					filter={filter}
+					setFilter={setFilter}
+				/>
+			)}
+			<TasksOverview data={statsData} statsLoading={statsLoading} />
+			<ListData
+				data={statsList}
+				list={finalList}
+				getListCoverage={getListCoverage}
+				filter={filter}
+				listLoading={listLoading}
+				source={source}
+				setSource={setSource}
+				page={page}
+				setPage={setPage}
+			/>
+			{/* <Stats data={data} /> */}
+			{/* <RateCoverageDetails data={data} loading={loading} filter={filter} /> */}
 		</div>
 	);
 }

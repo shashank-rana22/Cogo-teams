@@ -1,62 +1,18 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable custom-eslint/function-name-check */
 import { useGetAsyncOptions } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { merge } from '@cogoport/utils';
 
 const serviceOptions = [
 	{
-		label : 'FCL Freight',
+		label : 'FCL',
 		value : 'fcl_freight',
 	},
 	{
-		label : 'LCL Freight',
-		value : 'lcl_freight',
-	},
-	{
-		label : 'Air Freight',
+		label : 'Air',
 		value : 'air_freight',
 	},
-	{
-		label : 'FCL Customs',
-		value : 'fcl_customs',
-	},
-	{
-		label : 'LCL Customs',
-		value : 'lcl_customs',
-	},
-	{
-		label : 'Air Customs',
-		value : 'air_customs',
-	},
-	{
-		label : 'Haulage',
-		value : 'haulage_freight',
-	},
-	{
-		label : 'FTL Transportation',
-		value : 'ftl_freight',
-	},
-	{
-		label : 'Trailer Transportation',
-		value : 'trailer_freight',
-	},
-	{
-		label : 'LTL Transportation',
-		value : 'ltl_freight',
-	},
-
-	{
-		label : 'FCL CFS',
-		value : 'fcl_cfs',
-	},
-	{
-		label : 'Additional Service',
-		value : 'subsidiary',
-	},
-	{
-		label : 'Rail Domestic Freight',
-		value : 'rail_domestic_freight',
-	},
-
 ];
 
 const commodityOptions = [
@@ -77,6 +33,21 @@ const containerTypeOptions = [
 	{ label: 'Tank', value: 'tank' },
 ];
 
+const taskStatusOptions = [
+	{
+		label : 'Pending',
+		value : 'pending',
+	},
+	{
+		label : 'Completed',
+		value : 'completed',
+	},
+	{
+		label : 'Backlogs',
+		value : 'backlogs',
+	},
+];
+
 const Controls = () => {
 	const countryOptions1 = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country', 'seaport'] } },
@@ -90,34 +61,50 @@ const Controls = () => {
 			heading : 'Service',
 			name    : 'service',
 			options : serviceOptions,
+			width   : '80px',
 		},
 		{
-			heading : 'Origin Country/Port Pair',
-			name    : 'origin_country_id',
+			heading     : 'Origin Country/Port Pair',
+			name        : 'origin_country_id',
+			placeholder : 'Country / Port Pair',
+			width       : '200px',
 			...countryOptions1,
 		},
 		{
-			heading : 'Destination Country/Port Pair',
-			name    : 'destination_country_id',
+			heading     : 'Destination Country/Port Pair',
+			name        : 'destination_country_id',
+			placeholder : 'Country / Port Pair',
+			width       : '200px',
 			...countryOptions2,
 		},
 		{
-			heading : 'Commodity Type',
-			name    : 'commodity',
-			options : commodityOptions,
+			heading     : 'Shipping Line',
+			name        : 'shipping_line',
+			options     : [],
+			placeholder : 'Select Shipping Line',
+			width       : '200px',
 		},
 		{
-			heading : 'Container Type',
-			name    : 'container_type',
-			options : containerTypeOptions,
+			heading     : 'Commodity Type',
+			name        : 'commodity',
+			options     : commodityOptions,
+			placeholder : 'Select Commodity',
+			width       : '200px',
 		},
-
 		{
-			heading : 'Container Size',
-			name    : 'container_size',
-			options : [],
+			heading     : 'Task Status',
+			name        : 'task_status',
+			options     : taskStatusOptions,
+			placeholder : 'Search here',
+			width       : '200px',
 		},
-
+		// {
+		// 	heading     : 'Date Range',
+		// 	name        : 'task_status',
+		// 	options     : [],
+		// 	placeholder : 'Search here',
+		// 	width       : '200px',
+		// },
 	];
 	return controls;
 };

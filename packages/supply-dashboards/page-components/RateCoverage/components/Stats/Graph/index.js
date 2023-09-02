@@ -1,74 +1,109 @@
-import { ResponsiveLine } from '@cogoport/charts/line';
+/* eslint-disable indent */
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { ResponsiveBar } from '@cogoport/charts/bar';
 
-function Graph({ data }) {
+const DATA = [
+	{
+		label         : 'India(Import)',
+		ExpectedRates : 58,
+
+		ActualRates: 93,
+
+	},
+	{
+		label: 'India(Export)',
+
+	  ExpectedRates : 136,
+	  ActualRates   : 82,
+
+	},
+	{
+		label: 'Vietnam(Import)',
+
+	  ExpectedRates : 44,
+	  ActualRates   : 139,
+
+	},
+	{
+		label: 'Vietnam(Export)',
+
+	  ExpectedRates : 9,
+	  ActualRates   : 160,
+
+	},
+
+];
+function Graph() {
 	return (
-		<ResponsiveLine
-			data={data}
-			margin={{ top: 50, right: 20, bottom: 50, left: 60 }}
-			xScale={{ type: 'point' }}
-			yScale={{
-				type    : 'linear',
-				min     : 'auto',
-				max     : 'auto',
-				stacked : true,
-				reverse : false,
+		<ResponsiveBar
+			data={DATA}
+			keys={['ExpectedRates', 'ActualRates']}
+			groupMode="grouped"
+			layout="vertical"
+			indexBy="label"
+			margin={{ top: 30, right: 30, bottom: 50, left: 100 }}
+			padding={0.5}
+			valueScale={{
+				type: 'linear', base: 5,
 			}}
-			yFormat=" >-.2f"
-			axisTop={null}
-			axisRight={null}
-			axisBottom={{
-				orient         : 'bottom',
-				tickSize       : 5,
-				tickPadding    : 5,
-				tickRotation   : 0,
-				legend         : 'transportation',
-				legendOffset   : 36,
-				legendPosition : 'middle',
-			}}
-			axisLeft={{
-				orient         : 'left',
-				tickSize       : 5,
-				tickPadding    : 5,
-				tickRotation   : 0,
-				legend         : 'count',
-				legendOffset   : -40,
-				legendPosition : 'middle',
-			}}
-			colors={{ scheme: 'nivo' }}
-			lineWidth={1}
-			pointSize={3}
-			pointColor={{ theme: 'background' }}
-			pointBorderWidth={2}
-			pointBorderColor={{ from: 'serieColor' }}
-			pointLabelYOffset={-12}
-			crosshairType="x"
-			useMesh
-			legends={[
+			theme={
 				{
-					anchor        : 'top-left',
-					direction     : 'row',
-					justify       : false,
-					translateX    : 0,
-					translateY    : -37,
-					itemWidth     : 100,
-					itemHeight    : 20,
-					itemsSpacing  : 0,
-					symbolSize    : 18,
-					symbolShape   : 'circle',
-					itemDirection : 'left-to-right',
-					itemTextColor : '#777',
-					effects       : [
-						{
-							on    : 'hover',
-							style : {
-								itemBackground : 'rgba(0, 0, 0, .03)',
-								itemOpacity    : 1,
+
+					grid: {
+						line: {
+							stroke      : '#EFEFEF',
+							strokeWidth : 1,
+						},
+					},
+					axis: {
+						domain: {
+							line: {
+								stroke      : '#e0e0e0',
+								strokeWidth : 1,
 							},
 						},
-					],
-				},
-			]}
+						legend: {
+							text: {
+								font         : 'poppins',
+								fontSize     : 12,
+								fill         : '#bdbdbd',
+								outlineWidth : 0,
+								outlineColor : 'transparent',
+							},
+						},
+
+						ticks: {
+							line: {
+								stroke      : '#BDBDBD',
+								strokeWidth : 1,
+							},
+							text: {
+								font         : 'poppins',
+								fontSize     : 12,
+								fill         : '#BDBDBD',
+								outlineWidth : 0,
+								outlineColor : 'transparent',
+							},
+						},
+					},
+			}
+			}
+			borderRadius={4}
+			colors={['#88CAD1', '#CFEAED']}
+			axisLeft={{
+				tickSize       : 10,
+				tickPadding    : 5,
+				tickRotation   : 0,
+				legend         : 'Rate Count',
+				legendPosition : 'middle',
+				legendOffset   : -80,
+				tickValues     : 5,
+			}}
+			enableGridX={false}
+			enableLabel={false}
+
 		/>
+
 	);
 }
 

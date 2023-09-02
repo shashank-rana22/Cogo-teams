@@ -1,72 +1,73 @@
-import { ButtonGroup } from '@cogoport/components';
-import { IcMArrowRight } from '@cogoport/icons-react';
+import { Button, Placeholder } from '@cogoport/components';
+import { IcMDownload, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 
 import styles from '../styles.module.css';
 
-function Card({ value, type, setIndex }) {
-	const backgroundImgs = [{
-		backgroundImage:
-		'url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/rate-coverage-full-card1.png)',
-	},
-	{
-		backgroundImage:
-		'url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/rate-coverage-full-card2.png)',
-	}, {
-		backgroundImage:
-		'url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/rate-coverage-full-card3)',
-	}];
+const CONSTANT_SIX_HUNDERED = 600;
+const CONSTANT_TWELVE = 12;
+const CONSTANT_MINUS_ONE = -1;
+const CONSTANT_ZERO = 0;
+const CONSTANT_FOUR = 4;
+const CONSTANT_SIX = 6;
 
-	const backgroundColorOnHover = [
-		{ backgroundColor: '#F2F3FA' },
-		{ backgroundColor: '#FDEBE9' },
-		{ backgroundColor: '#E0E0E0' },
-	];
-
-	const options = [
-		{
-			children: (
-				<div className={styles.view_details_btn}>
-					<div>View Details</div>
-					<IcMArrowRight />
-				</div>
-			),
-			onClick: () => {
-				setIndex(type);
-			},
-		},
-	];
-
-	const colors = ['#7278AD', '#828282', '#F37166', '#7278AD'];
-	const title = ['Avg. Rate density as per today', 'Missing Rates as per today', 'Expiring Rates', 'Dislike Rates'];
-	const downloadTitle = ['Rate Density', 'Missing Rates', 'Expiring Rates', 'Dislike Rates'];
+function Card({ value = CONSTANT_ZERO, type, setIndex, index, downloadLink = '', loading = false }) {
+	const title = ['Critical Port Pairs', 'Expiring Rates',
+		'Spot Searches', 'Monitoring Dashboard', 'Cancelled Shipments'];
 
 	return (
-		<div>
-			<div className={styles.card_on_hover}>
-				<div className={styles.card_on_hover_heading} style={backgroundColorOnHover[type]}>
-					<span className={styles.bold_text}>
-						{`${downloadTitle[type]}: `}
-					</span>
-					Lorem Ipsum Lorem Ipsum Lorem Ipsum eew
-					Lorem  Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lo
-				</div>
-				<ButtonGroup
-					size="md"
-					options={options}
-					disabled={false}
-					className={styles.view_details_btn}
-				/>
+		<div className={styles.card}>
+			<div className={styles.title}>
+				{title[type]}
+
+				<a
+					href={downloadLink}
+					download="Example-PDF-document"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<IcMDownload />
+				</a>
+
 			</div>
-			<div className={styles.card} style={backgroundImgs[type]}>
-				<div className={styles.title}>{title[type]}</div>
-				<div className={styles.value} style={{ color: colors[type] }}>{ !isNaN(value) ? value : 0}</div>
-			</div>
-			<div className={styles.download_link}>
-				Download
-				{' '}
-				{downloadTitle[type]}
-				{' '}
-				Results
+			<div style={{ borderBottom: '1px dashed #ABB0DE', marginTop: CONSTANT_SIX }} />
+			<div style={{
+				display        : 'flex',
+				justifyContent : 'space-between',
+				alignItems     : 'center',
+			}}
+			>
+				{loading ? <Placeholder height={50} width={60} margin="5px" />
+					: <div className={styles.value} style={{ color: '#7278AD' }}>{value}</div>}
+				{index !== type ? (
+					<Button
+						themeType="secondary"
+						style={{
+							fontWeight : CONSTANT_SIX_HUNDERED,
+							fontSize   : CONSTANT_TWELVE,
+							color      : '#221F20',
+						}}
+						onClick={() => { setIndex(type); }}
+					>
+						View All
+						{' '}
+						<IcMArrowDown style={{ marginLeft: CONSTANT_FOUR, alignItems: 'center' }} />
+					</Button>
+				) : (
+					<Button
+						themeType="secondary"
+						className={styles.button}
+						style={{
+							fontWeight : CONSTANT_SIX_HUNDERED,
+							fontSize   : CONSTANT_TWELVE,
+							color      : '#221F20',
+						}}
+						onClick={() => { setIndex(CONSTANT_MINUS_ONE); }}
+					>
+						Hide All
+						{' '}
+						<IcMArrowUp style={{ marginLeft: CONSTANT_FOUR, alignItems: 'center' }} />
+					</Button>
+				)}
 			</div>
 
 		</div>

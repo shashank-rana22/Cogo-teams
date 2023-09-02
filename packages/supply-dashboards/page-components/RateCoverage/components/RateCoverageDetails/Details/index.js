@@ -1,33 +1,52 @@
+import CriticalRates from './CriticalRates';
 import DislikeRates from './DislikeRates';
 import ExpiringRates from './ExpiringRates';
-import MissingRates from './MissingRates';
-import RateDensity from './RateDenisty';
+import SpotSearchesDetails from './SpotSearches';
+
+const CONSTANT_ZERO = 0;
+const CONSTANT_ONE = 1;
+const CONSTANT_TWO = 2;
+const CONSTANT_THREE = 3;
+const CONSTANT_FOUR = 4;
 
 function Details({ setIndex, index, value, filter }) {
-	if (index === 0) {
+	if (index === CONSTANT_ZERO) {
 		return (
-			<RateDensity setIndex={setIndex} value={Intl.NumberFormat().format(value?.rate_density)} />
-		);
-	}
-	if (index === 1) {
-		return (
-			<MissingRates
+			<CriticalRates
 				setIndex={setIndex}
-				value={Intl.NumberFormat().format(value?.missing_rates_count)}
+				value={value?.count || CONSTANT_ZERO}
 				filter={filter}
+				data={value}
 			/>
 		);
 	}
-	if (index === 2) {
+	if (index === CONSTANT_ONE) {
 		return (
 			<ExpiringRates
 				setIndex={setIndex}
-				value={Intl.NumberFormat().format(value?.expiring_rates_count)}
+				value={value?.count || CONSTANT_ZERO}
+				filter={filter}
+				data={value}
+			/>
+
+		);
+	}
+	if (index === CONSTANT_TWO) {
+		return (
+
+			<SpotSearchesDetails setIndex={setIndex} value={value?.count || CONSTANT_ZERO} data={value} />
+		);
+	}
+	if (index === CONSTANT_THREE) {
+		return (
+			<DislikeRates
+				setIndex={setIndex}
+				value={Intl.NumberFormat().format(value?.dislike_rates_count)}
 				filter={filter}
 			/>
 		);
 	}
-	if (index === 3) {
+	if (index === CONSTANT_FOUR) {
 		return (
 			<DislikeRates
 				setIndex={setIndex}

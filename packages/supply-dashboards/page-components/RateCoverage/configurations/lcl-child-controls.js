@@ -12,9 +12,7 @@ const CONSTANT_ONE_HALF = 1.5;
 const UNITS = [{ label: 'Per kg', value: 'Per kg' }];
 const childControls = ({ heading = '', charge_code_name, line_item_data = [] }) => {
 	const name = NAMEMAPPING[charge_code_name];
-	console.log(line_item_data, 'kkkkk');
 	const option = line_item_data?.map((item) => ({ label: item?.code, value: item?.code }));
-	console.log(option);
 	const controls = {
 		type        : 'fieldArray',
 		showButtons : true,
