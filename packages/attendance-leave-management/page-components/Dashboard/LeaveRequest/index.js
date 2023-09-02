@@ -1,8 +1,10 @@
 import { Input, Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowLeft, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import Loader from '../../../common/Loader';
 import useGetLeaveGroupings from '../../../hooks/useGetLeaveGroupings';
 
@@ -15,6 +17,9 @@ function LeaveRequest({ setShowInbox, isManager }) {
 	const { loading, data } = useGetLeaveGroupings(activeTab);
 
 	const { total_self_pending_count, list, total_employees_pending_count } = data || {};
+
+	const [searchQuery, setSearchQuery] = useState('');
+	const handleSearch = (event) => setSearchQuery(event);
 
 	return (
 		<div className={styles.container}>
@@ -50,19 +55,34 @@ function LeaveRequest({ setShowInbox, isManager }) {
 						)}
 					</Tabs>
 				</div>
-				<div className={styles.selection_options}>
-					<Input size="md" prefix={<IcMSearchlight />} placeholder="Search" />
-				</div>
+				{(activeTab !== 'employee') ? (
+					<div className={styles.selection_options}>
+						<Input
+							size="md"
+							prefix={<IcMSearchlight />}
+							placeholder="Search"
+							value={searchQuery}
+							onChange={handleSearch}
+						/>
+					</div>
+				) : null}
 			</div>
-			{loading ? <Loader /> : (list || []).map((leaveData) => (
-				<LeaveCard
-					isManager={activeTab === 'manager'}
-					data={leaveData}
-					activeTab={activeTab}
-					key={leaveData.leave_request}
-					loading={loading}
-				/>
-			))}
+			{loading ? (<Loader />) : (
+				<div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+					{!isEmpty(list) ? (
+						(list || []).map((leaveData) => (
+							<LeaveCard
+								isManager={activeTab === 'manager'}
+								data={leaveData}
+								activeTab={activeTab}
+								key={leaveData.leave_request}
+								loading={loading}
+								searchQuery={searchQuery}
+							/>
+						))
+					) : <EmptyState />}
+				</div>
+			)}
 		</div>
 	);
 }

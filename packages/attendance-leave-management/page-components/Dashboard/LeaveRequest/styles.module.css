@@ -22,6 +22,12 @@
 	cursor: pointer;
 }
 
+.tab_switch {
+	@media screen and (max-width: 768px) {
+		margin-bottom: 10px;
+	}
+}
+
 .filters {
 	display: flex;
 	flex-wrap: wrap;
@@ -38,11 +44,6 @@
 .selection_options {
 	display: flex;
 	gap: 6px;
-	align-items: center;
-
-	@media screen and (max-width: 768px) {
-		margin-top: 10px;
-	}
 }
 
 .card_container {
