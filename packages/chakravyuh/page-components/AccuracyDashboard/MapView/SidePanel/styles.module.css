@@ -129,6 +129,7 @@
 	width: 100%;
 	padding: 18px;
 	margin: 16px 0;
+	cursor: default !important;
 	background: #fdfbf7;
 	border: 1px solid transparent;
 	border-radius: 6px;

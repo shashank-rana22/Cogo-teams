@@ -27,7 +27,7 @@
 		--card-color: #0a9396;
 	}
 
-	&.disliked_rates {
+	&.dislike {
 		--card-color: #ca6702;
 	}
 

@@ -1,3 +1,5 @@
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAir, IcMShip } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -11,7 +13,9 @@ const COMMON_START_COLUMNS = [
 			return (
 				<div className={styles.row_port_cell}>
 					<div className={styles.row_port_code}>{port_code}</div>
-					<div className={styles.row_port_name}>{name}</div>
+					<Tooltip content={name} placement="bottom">
+						<div className={styles.row_port_name}>{name}</div>
+					</Tooltip>
 				</div>
 			);
 		},
@@ -23,7 +27,9 @@ const COMMON_START_COLUMNS = [
 			return (
 				<div className={styles.row_port_cell}>
 					<div className={styles.row_port_code}>{port_code}</div>
-					<div className={styles.row_port_name}>{name}</div>
+					<Tooltip content={name} placement="bottom">
+						<div className={styles.row_port_name}>{name}</div>
+					</Tooltip>
 				</div>
 			);
 		},
@@ -35,10 +41,12 @@ const SHIPPING_LINES = [
 		accessor : ({ shipping_line = {} }) => {
 			const { business_name = '' } = shipping_line;
 			return (
-				<div className={styles.row_shipping_cell}>
-					<IcMShip className={styles.ship_icon} />
-					{business_name}
-				</div>
+				<Tooltip content={business_name} placement="bottom">
+					<div className={styles.row_shipping_cell}>
+						<IcMShip className={styles.ship_icon} />
+						<p>{business_name}</p>
+					</div>
+				</Tooltip>
 			);
 		},
 	},
@@ -48,9 +56,11 @@ const SEA_COLUMNS = [
 	{
 		Header   : 'COMMODITY',
 		accessor : ({ commodity = '' }) => (
-			<div className={styles.row_commodity_cell}>
-				<div>{startCase(commodity)}</div>
-			</div>
+			<Tooltip content={commodity} placement="bottom">
+				<div className={styles.row_commodity_cell}>
+					<p>{startCase(commodity)}</p>
+				</div>
+			</Tooltip>
 		),
 	},
 	{
@@ -105,10 +115,40 @@ const COMMON_END_COLUMNS = [
 		),
 	},
 	{
-		Header   : 'DEVIATION',
-		accessor : ({ deviation = '' }) => (
+		Header   : 'BOOKINGS',
+		accessor : ({ aggregate_bookings_created = '' }) => (
 			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>{`${deviation}%` }</div>
+				<div className={styles.percent}>
+					{`${aggregate_bookings_created || GLOBAL_CONSTANTS.zeroth_index}%` }
+				</div>
+			</div>
+		),
+	},
+	{
+		Header   : 'CHECKOUT COUNT',
+		accessor : ({ aggregate_checkout_count = '' }) => (
+			<div className={styles.row_commodity_cell}>
+				<div className={styles.percent}>{`${aggregate_checkout_count || GLOBAL_CONSTANTS.zeroth_index}%` }</div>
+			</div>
+		),
+	},
+	{
+		Header   : 'DEVIATION',
+		accessor : ({ aggregate_rate_deviation_from_booking_rate = '' }) => (
+			<div className={styles.row_commodity_cell}>
+				<div className={styles.percent}>
+					{`${aggregate_rate_deviation_from_booking_rate || GLOBAL_CONSTANTS.zeroth_index}%` }
+				</div>
+			</div>
+		),
+	},
+	{
+		Header   : 'SPOT SEARCH',
+		accessor : ({ aggregate_spot_search_count = '' }) => (
+			<div className={styles.row_commodity_cell}>
+				<div className={styles.percent}>
+					{`${aggregate_spot_search_count || GLOBAL_CONSTANTS.zeroth_index}%` }
+				</div>
 			</div>
 		),
 	},

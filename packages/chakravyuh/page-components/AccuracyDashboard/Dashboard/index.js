@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
@@ -16,7 +16,7 @@ import Views from './Views';
 function DashboardView(props) {
 	const [isHighlighted, setIsHighlighted] = useState(false);
 	const { setView = () => {}, globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { start_date, end_date, parent_mode } = globalFilters;
+	const { start_date, end_date, parent_mode, service_type } = globalFilters;
 
 	const {
 		data, loading,
@@ -45,6 +45,15 @@ function DashboardView(props) {
 	} else {
 		dateString = dateString.join(' -');
 	}
+
+	useEffect(() => {
+		if (service_type === 'air') {
+			setIsHighlighted(true);
+			setGlobalFilters((prev) => ({ ...prev, chartType: 'trend' }));
+		} else {
+			setIsHighlighted(false);
+		}
+	}, [service_type, setIsHighlighted, setGlobalFilters]);
 	return (
 		<>
 			<div className={styles.main_container}>
@@ -66,13 +75,16 @@ function DashboardView(props) {
 					<Distribution {...props} dateString={dateString} />
 				</div>
 			</div>
-			{parent_mode
-			&& (
-				<SupplyRates
-					heading={`${startCase(parent_mode)} ${parent_mode.includes('rate') ? '' : 'Rates'}`}
-					{...props}
-				/>
-			)}
+			{
+				service_type === 'fcl'
+					? (
+						<SupplyRates
+							heading={`${startCase(parent_mode || 'All')} 
+							${parent_mode?.includes('rate') ? '' : 'Rates'}`}
+							{...props}
+						/>
+					) : null
+			}
 		</>
 	);
 }

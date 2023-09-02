@@ -53,9 +53,12 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	const dependency = Object.values(filters).map(({ id }) => id).join('_');
 
 	useEffect(() => {
-		const params = getFormattedPayload(globalFilters, EXCLUDE_KEYS);
-		setPage(START_PAGE);
-		getStats(merge(params, { filters, ...sort, page: 1 }));
+		const { service_type } = globalFilters;
+		if (service_type === 'fcl') {
+			const params = getFormattedPayload(globalFilters, EXCLUDE_KEYS);
+			setPage(START_PAGE);
+			getStats(merge(params, { filters, ...sort, page: 1 }));
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dependency, globalFilters, sort, getStats]);
 

@@ -20,8 +20,11 @@ const useGetDrillDownStats = ({ globalFilters = {} }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		const params = getFormattedPayload(globalFilters);
-		getDrillDownStats(params);
+		const { service_type } = globalFilters;
+		if (service_type === 'fcl') {
+			const params = getFormattedPayload(globalFilters);
+			getDrillDownStats(params);
+		}
 	}, [globalFilters, getDrillDownStats]);
 
 	return {

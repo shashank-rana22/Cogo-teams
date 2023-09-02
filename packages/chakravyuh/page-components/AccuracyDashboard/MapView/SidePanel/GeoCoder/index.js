@@ -76,6 +76,7 @@ function GeoCoder({
 						onChange={(val, obj) => handleChange(key, val, obj)}
 						onOptionsChange={(options) => handleOptionsChange(key, options)}
 						isClearable={!!idx}
+						labelKey="display_name"
 						params={getLocationParams(service_type)}
 					/>
 				))}

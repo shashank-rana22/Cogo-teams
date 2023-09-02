@@ -21,10 +21,10 @@ export const CUSTOM_THEME = {
 
 const EXPLORED_VIEW_DATA = [
 	{
-		key          : 'shipment_confirmed_by_service_provider_count',
+		key          : 'shipment_confirmed_by_importer_exporter_count',
 		id           : 'Confirmed Booking',
 		label        : 'Confirmed Booking',
-		cancellation : 'shipment_confirmed_by_service_provider_percentage',
+		cancellation : 'shipment_confirmed_by_importer_exporter_percentage',
 	},
 	{
 		key          : 'shipment_cancelled_count',

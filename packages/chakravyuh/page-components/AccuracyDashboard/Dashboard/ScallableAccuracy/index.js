@@ -10,7 +10,7 @@ import TrendChart from './TrendChart';
 
 const TIME_LIMIT = 200;
 
-const TABS_LIST = [
+const ALL_TABS_LIST = [
 	{
 		key       : 'trend',
 		name      : 'trend',
@@ -35,7 +35,7 @@ function ScallableAccuracy(props) {
 		setGlobalFilters = () => {},
 		dateString = '',
 	} = props;
-	const { chartType = 'trend' } = globalFilters;
+	const { chartType = 'trend', service_type } = globalFilters;
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const onChange = (val) => {
@@ -53,8 +53,12 @@ function ScallableAccuracy(props) {
 		};
 	}, [isHighlighted]);
 
+	const TABS_LIST = service_type === 'fcl' ? ALL_TABS_LIST : ALL_TABS_LIST.filter(({ key }) => key !== 'accuracy');
+
 	return (
-		<div className={cl`${section_container} ${styles.container} `}>
+		<div className={cl`${section_container} ${styles.container} 
+		${service_type === 'air' ? styles.expand_icon_hidden : ''}`}
+		>
 			{isHighlighted ? (
 				<IcMCross
 					className={styles.expand_icon}

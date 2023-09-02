@@ -1,4 +1,5 @@
-import { Loader } from '@cogoport/components';
+import { Loader, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack, IcMEyeclose, IcMEyeopen } from '@cogoport/icons-react';
 import dynamic from 'next/dynamic';
 import React, { useState, useRef, useEffect } from 'react';
@@ -25,7 +26,7 @@ function Heading({
 		maxCount,
 		minCount,
 		loading,
-	} = useGetFclFreightRateWorld({ flag: !showFilters });
+	} = useGetFclFreightRateWorld({ flag: !showFilters, globalFilters });
 	const { total_rates } = data;
 
 	const handleClickOutside = (event) => {
@@ -56,6 +57,9 @@ function Heading({
 				{heading}
 			</h1>
 
+			{!backView
+				&& <h5>From 1st September</h5>}
+
 			{showFilters ? (
 				<div className={styles.right_container}>
 					<FilterButton
@@ -68,7 +72,18 @@ function Heading({
 			) : (
 				<h1 className={styles.counter}>
 					{loading
-						? <Loader /> : formatBigNumbers(total_rates || 'NA')}
+						? <Loader /> : (
+							<Tooltip
+								content={(
+									<span>
+										{total_rates || GLOBAL_CONSTANTS.zeroth_index}
+									</span>
+								)}
+								placement="bottom"
+							>
+								{formatBigNumbers(total_rates || 'NA')}
+							</Tooltip>
+						)}
 
 					<span>Active Rates</span>
 					{show

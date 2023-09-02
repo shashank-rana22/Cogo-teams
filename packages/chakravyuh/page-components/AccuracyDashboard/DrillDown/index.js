@@ -1,4 +1,4 @@
-import { Button, Placeholder, cl } from '@cogoport/components';
+import { Button, Placeholder, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -64,8 +64,20 @@ function DrillDown({ globalFilters = {} }) {
 						{!loading && <BranchAnimation parent_mode={parent_mode} />}
 
 						<div className={cl`${styles.source_card} ${styles.main_card}`}>
-							<h4>{formatBigNumbers(totalSearches)}</h4>
-							<span>Searches</span>
+							<h4>
+								<Tooltip
+									content={<span>{totalSearches || GLOBAL_CONSTANTS.zeroth_index}</span>}
+									placement="bottom"
+								>
+									{formatBigNumbers(totalSearches || GLOBAL_CONSTANTS.zeroth_index)}
+								</Tooltip>
+
+							</h4>
+							<p>
+								<label>Rates</label>
+								<label>Displayed</label>
+								<span>via Spot Search</span>
+							</p>
 						</div>
 					</>
 				) : (
@@ -130,7 +142,7 @@ function DrillDown({ globalFilters = {} }) {
 				<SupplyRates
 					globalFilters={globalFilters}
 					activeParent={activeParent}
-					className={styles.list}
+					heading={`Rates Corrosponding to ${startCase(activeParent)}`}
 				/>
 			)}
 		</div>

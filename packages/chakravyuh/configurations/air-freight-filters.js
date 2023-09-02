@@ -1,4 +1,4 @@
-import { AIR_COMMODITIES, MODE_OPTIONS } from '../constants/air_commodities_mapping';
+import { AIR_COMMODITIES, SOURCE_OPTIONS } from '../constants/air_commodities_mapping';
 import { SERVICE_TYPE_OPTIONS } from '../constants/dashboard_filter_controls';
 
 const controls = [
@@ -11,10 +11,10 @@ const controls = [
 		label   : 'Service Type',
 	},
 	{
-		name      : 'mode',
+		name      : 'source',
 		type      : 'pills',
 		label     : 'Rate Source',
-		options   : MODE_OPTIONS,
+		options   : SOURCE_OPTIONS,
 		span      : 12,
 		className : 'filter-row-flex md',
 	},

@@ -24,8 +24,11 @@ const useGetFclFreightDistribution = ({ filters }) => {
 	);
 
 	useEffect(() => {
-		const params = getFormattedPayload(rest);
-		getStats(params);
+		const { service_type } = rest;
+		if (service_type === 'fcl') {
+			const params = getFormattedPayload(rest);
+			getStats(params);
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [(JSON.stringify(rest)), getStats]);
 

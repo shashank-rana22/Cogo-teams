@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -31,29 +31,49 @@ function DrillDownCard({
 			/>
 
 			<div className={styles.flex_between}>
-				<p className={styles.card_name}>{startCase(data?.action_type)}</p>
+				<p className={styles.card_name}>{`${startCase(data?.action_type)} Count`}</p>
 				{(isAtTop || isMainCard) && (
 					<h3 className={styles.rate_amount}>
-						{formatBigNumbers(data?.rates_count)}
+						<Tooltip
+							content={<span>{data?.rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
+							placement="bottom"
+						>
+							{formatBigNumbers(data?.rates_count || GLOBAL_CONSTANTS.zeroth_index)}
+						</Tooltip>
 					</h3>
 				)}
 			</div>
 			<div className={styles.flex_between}>
-				<p className={styles.drop_off_text}>
-					<img
-						src={GLOBAL_CONSTANTS.image_url.drop_down_red}
-						alt="drop"
-						className={styles.drop_icon}
-					/>
-					{`${formatBigNumbers(data?.drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
-				</p>
+				{
+					data?.action_type !== 'revenue_desk'
+						? (
+							<p className={styles.drop_off_text}>
+								<img
+									src={GLOBAL_CONSTANTS.image_url.drop_down_red}
+									alt="drop"
+									className={styles.drop_icon}
+								/>
+								{`${formatBigNumbers(data?.drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
+							</p>
+						)
+						: <p> </p>
+				}
 				{isAtTop && (
 					<p className={styles.parent_action_text}>{`from ${action_text}`}</p>
 				)}
 				{!isAtTop
 				&& (isMainCard
 					? <Button themeType="linkUi" onClick={() => handleClick(parent)}>View Dropoff</Button>
-					: <h3 className={styles.rate_amount}>{formatBigNumbers(data?.rates_count)}</h3>
+					: (
+						<h3 className={styles.rate_amount}>
+							<Tooltip
+								content={<span>{data?.rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
+								placement="bottom"
+							>
+								{formatBigNumbers(data?.rates_count || GLOBAL_CONSTANTS.zeroth_index)}
+							</Tooltip>
+						</h3>
+					)
 				)}
 			</div>
 		</div>

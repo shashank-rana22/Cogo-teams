@@ -9,7 +9,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 0 6px 16px;
+	padding: 0 6px 16px 0;
 
 	.back_icon {
 		margin-right: 12px;
@@ -21,6 +21,15 @@
 			cursor: pointer;
 			transform: scale(1.4, 1.2);
 		}
+	}
+
+	>h5 {
+		position: absolute;
+		top: 60px;
+		left: 100px;
+		font-size: 14px;
+		font-weight: 600;
+		color: #626060;
 	}
 }
 

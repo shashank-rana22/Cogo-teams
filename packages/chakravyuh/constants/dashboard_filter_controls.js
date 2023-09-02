@@ -7,10 +7,10 @@ export const SERVICE_TYPE_OPTIONS = [
 		label : <p className={styles.dropdown_label}>FCL</p>,
 		value : 'fcl',
 	},
-	// {
-	// 	label : <p className={styles.dropdown_label}>AIR</p>,
-	// 	value : 'air',
-	// },
+	{
+		label : <p className={styles.dropdown_label}>AIR</p>,
+		value : 'air',
+	},
 ];
 
 export const RATE_TYPES_OPTIONS = [
