@@ -9,7 +9,7 @@
 }
 
 .select_container {
-	width: 160px;
+	width: 200px;
 
 	@media (max-width: 768px) {
 		width: 100%;
