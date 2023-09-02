@@ -8942,6 +8942,20 @@ const partner = {
 			service_name : 'unified_dashboard',
 
 		},
+		{
+			api          : 'get_cc_communication_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
+			api         : 'get_payments_outstanding_overall_customer_outstanding',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 
 	],
 	compliance: [
