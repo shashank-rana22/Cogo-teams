@@ -11,7 +11,7 @@ function Pocs({
 	tradePartnersData = {},
 	setAddPoc = () => {},
 	shipmentStakeholderData = [],
-	stakeHolderLoading,
+	stakeHolderLoading = false,
 	servicesList = [],
 	shipment_data = {},
 	rolesPermission = {},

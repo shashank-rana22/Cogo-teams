@@ -2,6 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import getFormattedPayload from '../utils/getFormattedPayload';
+import toastApiError from '../utils/toastApiError';
 
 const useGetFclFreightDistribution = ({ filters }) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -9,14 +10,14 @@ const useGetFclFreightDistribution = ({ filters }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const { mode, ...rest } = filters;
+	const { parent_mode, ...rest } = filters;
 
 	const getStats = useCallback(
 		async (params) => {
 			try {
 				await trigger({ params });
 			} catch (err) {
-				// console.log(err);
+				toastApiError(err);
 			}
 		},
 		[trigger],

@@ -19,6 +19,10 @@ interface StatsDataInterface {
 	expenseAccruedSum?: number
 	incomeBookedSum?: number
 	incomeAccruedSum?: number
+	expenseBilledSum?: number
+	expenseUnbilledSum?: number
+	incomeBilledSum?: number
+	incomeUnbilledSum?: number
 	incomeCurrency?: string
 	varianceCurrency?: string
 }

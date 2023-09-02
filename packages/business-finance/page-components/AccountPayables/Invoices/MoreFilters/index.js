@@ -46,7 +46,7 @@ function FilterModal({
 					<div className={styles.currencys}>Currency</div>
 					<div className={styles.currencycontainer}>
 						{CURRENCY_DATA.map((item) => {
-							const { icon: Icon, text } = item;
+							const { icon: Icon, text } = item || {};
 							return (
 								<div
 									className={cl`${styles.currency_values} 

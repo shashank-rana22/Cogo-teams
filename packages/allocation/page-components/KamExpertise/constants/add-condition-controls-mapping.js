@@ -1,58 +1,58 @@
-const CONTROL_MAPPING = {
+const getControlMapping = ({ t = () => {} }) => ({
 	percentage: [{
 		name               : 'milestones',
-		label              : 'Enter milestones (%) and score allocated at each milestone',
+		label              : t('allocation:percentage_fieldarray_label'),
 		type               : 'fieldArray',
-		buttonText         : 'Add More',
+		buttonText         : t('allocation:percentage_fieldarray_button_text'),
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
 				name        : 'percentage',
 				type        : 'number',
-				label       : 'Milestone',
+				label       : t('allocation:milestone_label'),
 				placeholder : '0',
-				rules       : { required: 'Milestone is required' },
+				rules       : { required: t('allocation:milestone_is_required') },
 				min         : 0,
 			},
 			{
 				name        : 'score',
 				type        : 'number',
-				label       : 'Score',
+				label       : t('allocation:score_label'),
 				placeholder : '0',
-				rules       : { required: 'Score is required' },
+				rules       : { required: t('allocation:score_is_required') },
 				min         : 0,
 			},
 		],
 	}],
 	tat: [{
 		name               : 'tat',
-		label              : 'Enter duration (days) and score allocated on completion',
+		label              : t('allocation:tat_fieldarray_label'),
 		type               : 'fieldArray',
-		buttonText         : 'Add More',
+		buttonText         : t('allocation:percentage_fieldarray_button_text'),
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
 				name        : 'lower',
 				type        : 'number',
-				label       : 'From',
+				label       : t('allocation:from_label'),
 				placeholder : '0',
-				rules       : { required: 'From is required' },
+				rules       : { required: t('allocation:from_is_required') },
 				min         : 0,
 			},
 			{
 				name        : 'upper',
 				type        : 'number',
-				label       : 'To',
+				label       : t('allocation:to_label'),
 				placeholder : '0',
-				rules       : { required: 'To is required' },
+				rules       : { required: t('allocation:to_is_required') },
 				min         : 0,
 			},
 			{
 				name        : 'score',
 				type        : 'number',
-				label       : 'Score',
+				label       : t('allocation:score_label'),
 				placeholder : '0',
-				rules       : { required: 'Score is required' },
+				rules       : { required: t('allocation:score_is_required') },
 				min         : 0,
 			},
 		],
@@ -60,20 +60,20 @@ const CONTROL_MAPPING = {
 	absolute: [{
 		name        : 'first_completion',
 		type        : 'number',
-		label       : 'Score on Completion',
+		label       : t('allocation:first_completion_label'),
 		placeholder : '0',
-		rules       : { required: 'Score on Completion is required' },
+		rules       : { required: t('allocation:first_completion_rules_required') },
 		min         : 0,
 	},
 	{
 		name        : 'second_completion',
 		type        : 'number',
-		label       : 'Score on Repetition',
+		label       : t('allocation:second_completion_label'),
 		placeholder : '0',
-		rules       : { required: 'Score on Repetition is required' },
+		rules       : { required: t('allocation:second_completion_rules_required') },
 		min         : 0,
 	},
 	],
-};
+});
 
-export default CONTROL_MAPPING;
+export default getControlMapping;

@@ -1,9 +1,12 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function ModalFooter(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		setMode, setSelectedVersion, selectedVersion, onCreate,
 		createModalLoading, versionName,
@@ -13,7 +16,7 @@ function ModalFooter(props) {
 		<div className={styles.modal_footer}>
 			{selectedVersion?.version_number ? (
 				<span className={styles.footer_text}>
-					Selected Version:
+					{t('allocation:selected_version_label')}
 					{' '}
 					{selectedVersion?.version_number}
 				</span>
@@ -29,7 +32,7 @@ function ModalFooter(props) {
 						setSelectedVersion({});
 					}}
 				>
-					Back
+					{t('allocation:back_button')}
 				</Button>
 
 				<Button
@@ -40,7 +43,7 @@ function ModalFooter(props) {
 					}}
 					loading={createModalLoading}
 				>
-					Create
+					{t('allocation:create_button_label')}
 				</Button>
 			</span>
 		</div>

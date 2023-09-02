@@ -2,6 +2,7 @@ import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Table, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useTranslation } from 'next-i18next';
 
 import Map from '../../../common/responsive-choropleth';
 import tableDataColumns from '../../../constants/table-data-columns';
@@ -10,7 +11,11 @@ import useSetReport from '../hooks/useSetReport';
 
 import styles from './styles.module.css';
 
+const SECOND_INDEX = 2;
+
 function Report() {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	const {
 		hsdesc,
 		share,
@@ -26,20 +31,20 @@ function Report() {
 	const hscodesToShow = tableDataColumns.hsCodesDescription;
 	const globalSuppliersToShow = tableDataColumns.topGlobalSuppliers;
 
-	const COLUMNS_HSCODE_DESCRIPTION = useGetColumns({ columnsToShow: hscodesToShow });
-	const TOP_GLOBAL_SUPPLIER_MAPPING = useGetColumns({ columnsToShow: globalSuppliersToShow });
+	const COLUMNS_HSCODE_DESCRIPTION = useGetColumns({ columnsToShow: hscodesToShow, t });
+	const TOP_GLOBAL_SUPPLIER_MAPPING = useGetColumns({ columnsToShow: globalSuppliersToShow, t });
 
 	return (
 		<>
 			<div className={styles.report_heading}>
-				Trend Report
+				{t('athenaDashboard:trend_report')}
 			</div>
 			{!loading ? hsdesc
 				&& <Table className={styles.hscode_table} columns={COLUMNS_HSCODE_DESCRIPTION} data={hsdesc} />
 				: <Placeholder height="100px" width="100%" />}
 			<>
 				<div className={styles.trending_over_time}>
-					Trending Over Time:
+					{t('athenaDashboard:trending_over_time')}
 				</div>
 				{!loading ? (
 					<div className={styles.responsive_line}>
@@ -62,7 +67,7 @@ function Report() {
 								tickSize       : 5,
 								tickPadding    : 5,
 								tickRotation   : 0,
-								legend         : 'Month',
+								legend         : t('athenaDashboard:bar_chart_legend'),
 								legendOffset   : 36,
 								legendPosition : 'middle',
 							}}
@@ -115,8 +120,8 @@ function Report() {
 
 			</>
 			<div className={styles.value_of_goods}>
-				{shipment_type === 'import' ? 'Value of Goods (INR) entering India last year:'
-					: 'Value of Goods (INR) leaving India last year'}
+				{shipment_type === 'import' ? t('athenaDashboard:value_of_goods_import')
+					: t('athenaDashboard:value_of_goods_export')}
 			</div>
 
 			{!loading ? (
@@ -126,12 +131,12 @@ function Report() {
 							<div className={styles.individual_stats} key={item.country}>
 								{item.country}
 								<div>
-									Rs.
+									{t('athenaDashboard:ruppee_label')}
 									{' '}
 									{formatAmount({ amount: item.total, currency: GLOBAL_CONSTANTS.currency_code.INR })}
 									{' '}
 									(
-									{item.percent_share.toFixed(2)}
+									{item.percent_share.toFixed(SECOND_INDEX)}
 									%
 									)
 								</div>
@@ -149,7 +154,7 @@ function Report() {
 			)}
 
 			<div className={styles.value_of_goods} style={{ 'margin-top': '50px' }}>
-				Change in market share last year:
+				{t('athenaDashboard:change_in_market_share')}
 			</div>
 			{
 						!loading ? (
@@ -161,7 +166,7 @@ function Report() {
 											{item.country}
 											<div>
 												(
-												{item.percent_share.toFixed(2)}
+												{item.percent_share.toFixed(SECOND_INDEX)}
 												%
 												)
 											</div>
@@ -186,7 +191,7 @@ function Report() {
 					}
 
 			<div className={styles.top_global_suppliers}>
-				Top Global Suppliers:
+				{t('athenaDashboard:top_global_suppliers')}
 			</div>
 			{!loading ? (
 				<div className={styles.global_supplier_table}>

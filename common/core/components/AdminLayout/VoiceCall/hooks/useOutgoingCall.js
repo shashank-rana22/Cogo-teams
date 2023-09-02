@@ -10,6 +10,7 @@ const getPayload = ({
 	orgId = '',
 	userId = '',
 	loggedInAgentId = '',
+	source = 'cogo_one',
 }) => {
 	let payload = {};
 	if (isUnkownUser) {
@@ -26,7 +27,7 @@ const getPayload = ({
 		};
 	}
 
-	return { ...payload, source: 'cogo_one', agent_id: loggedInAgentId };
+	return { ...payload, source, agent_id: loggedInAgentId };
 };
 
 const setCallStateData = ({
@@ -35,16 +36,29 @@ const setCallStateData = ({
 	userId = '',
 	userName = '',
 	setCallState = () => {},
+	selfOrganizationId = {},
+	source = '',
+	lead_user_id = '',
+	lead_organization_id = '',
 }) => {
 	const receiverUserDetails = {
 		mobile_number,
 		user_id         : userId,
-		lead_user_id    : '',
 		userName,
 		organization_id : orgId,
+		lead_user_id,
+		lead_organization_id,
 	};
 
-	setCallState((p) => ({ ...p, receiverUserDetails, showCallModalType: 'fullCallModal', isSelfIntiated: true }));
+	setCallState((p) => ({
+		...p,
+		selfOrganizationId,
+		source,
+		receiverUserDetails,
+		lead_organization_id,
+		showCallModalType : 'fullCallModal',
+		isSelfIntiated    : true,
+	}));
 };
 
 function useOutgoingCall({
@@ -68,7 +82,13 @@ function useOutgoingCall({
 		mobile_number = '',
 		mobile_country_code = '',
 		userName = '',
+		source = '',
+		orgData = {},
+		lead_user_id = '',
+		lead_organization_id = '',
 	} = voiceCallData || {};
+
+	const { selfOrganizationId = '' } = orgData || {};
 
 	const makeCallApi = useCallback(async () => {
 		try {
@@ -78,6 +98,10 @@ function useOutgoingCall({
 				userId,
 				userName,
 				setCallState,
+				selfOrganizationId,
+				source,
+				lead_user_id,
+				lead_organization_id,
 			});
 
 			await trigger({
@@ -88,14 +112,18 @@ function useOutgoingCall({
 					orgId,
 					userId,
 					loggedInAgentId,
+					source,
 				}),
 			});
 		} catch (error) {
 			Toast.error(error?.response?.data?.message?.[GLOBAL_CONSTANTS.zeroth_index] || 'Something Went Wrong');
 			unmountVoiceCall();
 		}
-	}, [isUnkownUser, loggedInAgentId, mobile_country_code,
-		mobile_number, orgId, setCallState, trigger, unmountVoiceCall, userId, userName]);
+	}, [
+		isUnkownUser, lead_organization_id, lead_user_id,
+		loggedInAgentId, mobile_country_code, mobile_number, orgId,
+		setCallState, trigger, unmountVoiceCall, userId, userName, selfOrganizationId, source,
+	]);
 
 	return {
 		makeCallApi,

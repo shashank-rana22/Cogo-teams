@@ -10,7 +10,6 @@ import Loader from '../Loader';
 
 import Info from './Info';
 import ItemAdded from './ItemAdded';
-import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
@@ -22,7 +21,7 @@ const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false })
 const DEFAULT_PAGE_LIMIT = 8;
 const SHOW_MORE_PAGE_LIMIT = 16;
 
-const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
+const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager',
 	'superadmin', 'admin'];
 
 function List({ isSeller = false, source = '' }) {
@@ -79,18 +78,14 @@ function List({ isSeller = false, source = '' }) {
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}
-								actionButton={actions({
-									status,
-									serviceListItem,
-									setShowModal,
-									setItem,
-									shipment_data,
-									activeStakeholder,
-									canEditCancelService,
-								})}
+								stakeholderConfig={stakeholderConfig}
 								refetch={handleRefetch}
 								services={servicesList}
 								isSeller={isSeller}
+								serviceListItem={serviceListItem}
+								setShowModal={setShowModal}
+								setItem={setItem}
+								activeStakeholder={activeStakeholder}
 							/>
 						);
 					})}
@@ -178,6 +173,7 @@ function List({ isSeller = false, source = '' }) {
 								refetch={refetch}
 								source="add_sell_price"
 								refetchServices={refetchServices}
+
 							/>
 						</Modal.Body>
 					</Modal>

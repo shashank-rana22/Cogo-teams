@@ -21,6 +21,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 	service        : 'user',
 	service_id     : userId,
 	sender         : payload?.sender,
+	source         : 'CogoOne:AdminPlatform',
 });
 
 const API_MAPPING = {
@@ -76,7 +77,7 @@ function useReplyMail(mailProps) {
 			setEmailState(DEFAULT_EMAIL_STATE);
 			setButtonType('');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data) || 'Something Went Wrong');
 		}
 	};
 

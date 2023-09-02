@@ -1,0 +1,12 @@
+.element_column {
+	width: 45%;
+}
+
+.form_item_styled {
+	margin-bottom: 10px;
+}
+
+.error_text {
+	font-size: 10px;
+	color: #ee3425;
+}

@@ -37,14 +37,7 @@ function ReAllocation({ activeTab = '' }) {
 
 	return (
 		<div>
-			<SearchShipment
-				keyName="q"
-				isMultiSelect={false}
-				lowerLabel=""
-				placeholder="Search SID"
-				upperLabel="Search SID"
-				setFilters={setFilters}
-			/>
+			<SearchShipment setFilters={setFilters} keyName="serial_id" />
 			{loading ? <Loader /> : (
 				<ShipmentList
 					data={data}

@@ -61,6 +61,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 			caret       : true,
 			isClearable : true,
 			options     : optionsVal,
+			className   : styles.category_section,
 		},
 		{
 			name        : 'urgency',
@@ -72,6 +73,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 				{ value: 'all', label: 'All' },
 				{ value: 'urgent', label: 'Urgent' },
 			],
+			className: styles.urgency_section,
 		},
 		{
 			name                  : 'date',
@@ -80,7 +82,15 @@ export const requestControls = (isSettlementExecutive = false) => {
 			isPreviousDaysAllowed : true,
 			caret                 : true,
 			isClearable           : true,
-			className             : styles.date,
+			className             : styles.date_section,
+		},
+		{
+			name      : 'isMyTaskOnly',
+			type      : 'toggle',
+			size      : 'sm',
+			onLabel   : 'Show only my Tasks',
+			offLabel  : '',
+			className : styles.toggle,
 		},
 	];
 };
@@ -129,11 +139,11 @@ export const remainControls = (isSettlementExecutive = false) => {
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'EXPENSE APPROVAL',
+				label : 'Expense Approval',
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'NON Recurring EXpense Approval',
+				label : 'Non Recurring Expense Approval',
 			},
 		];
 	}

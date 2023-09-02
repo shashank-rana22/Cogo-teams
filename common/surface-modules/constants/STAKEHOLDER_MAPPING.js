@@ -1,5 +1,5 @@
 const STAKEHOLDER_MAPPING = {
-	supply_agent              : 'Supply Owner',
+	supply_agent              : 'Supply Agent',
 	booking_agent             : 'KAM',
 	service_ops1              : 'Booking Desk',
 	service_ops2              : 'Document Desk',
@@ -14,10 +14,12 @@ const STAKEHOLDER_MAPPING = {
 	costbooking_ops           : 'Cost Booking Ops',
 	origin_booking_agent      : 'OKAM',
 	destination_booking_agent : 'DKAM',
+	field_service_ops         : 'Field Service Ops',
+	ftl_ground_ops            : 'FTL Ground Ops',
 };
 
 export const STAKEHOLDER_CAN_BE_ADDED = {
-	supply_agent              : 'Supply Owner',
+	supply_agent              : 'Supply Agent',
 	booking_agent             : 'KAM',
 	service_ops1              : 'Booking Desk',
 	service_ops2              : 'Document Desk',

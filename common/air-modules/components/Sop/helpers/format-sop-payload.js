@@ -62,9 +62,9 @@ const getSopPayload = (
 		}
 	});
 	const payload = {
-		organization_id : shipment_data?.importer_exporter_id,
-		heading         : formValues?.heading,
-		SOP_INSTRUCTIONS,
+		organization_id  : shipment_data?.importer_exporter_id,
+		heading          : formValues?.heading,
+		sop_instructions : SOP_INSTRUCTIONS,
 	};
 
 	const SOP_CONDITIONS = {};

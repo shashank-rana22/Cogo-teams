@@ -2,19 +2,20 @@ import { Select, TabPanel, Tabs, Placeholder } from '@cogoport/components';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AdvancePayment from './AdvancePayment/index.tsx';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
 import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
+import Outstanding from './Outstanding';
 import Payruns from './Payruns';
 import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
-const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'treasury-chest'];
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'outstanding', 'treasury-chest'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -28,6 +29,8 @@ function AccountPayables() {
 	const [activePayables, setActivePayables] = useState(
 		query?.active_tab || 'dashboard',
 	);
+
+	const [selectedOrg, setSelectedOrg] = useState({});
 
 	const { loading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
@@ -85,7 +88,7 @@ function AccountPayables() {
 					</div>
 				)}
 			</div>
-			<div className={styles.container}>
+			<div className={isEmpty(selectedOrg) ? styles.container : styles.nodisplay}>
 				<Tabs
 					activeTab={activePayables}
 					fullWidth
@@ -105,7 +108,11 @@ function AccountPayables() {
 						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
-						<h1>Outstandings</h1>
+						<Outstanding
+							entityCode={activeEntity}
+							setSelectedOrg={setSelectedOrg}
+							selectedOrg={selectedOrg}
+						/>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
 						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />

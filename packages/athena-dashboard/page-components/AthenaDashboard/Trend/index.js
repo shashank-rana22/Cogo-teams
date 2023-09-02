@@ -1,5 +1,7 @@
-import controls from '../../../configurations/trend-controls';
-import countryname_value from '../../../constants/country-name-value';
+import { useTranslation } from 'next-i18next';
+
+import getControls from '../../../configurations/trend-controls';
+import getCountryOptions from '../../../constants/country-name-value';
 import useTrendSearch from '../hooks/useTrendSearch';
 
 import Header from './Header';
@@ -9,6 +11,8 @@ import SearchContainer from './SearchContainer';
 import styles from './styles.module.css';
 
 function Trends() {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	const {
 		searchValue,
 		setSearchValue,
@@ -23,10 +27,14 @@ function Trends() {
 		addCheckedHSCodes,
 	} = useTrendSearch();
 
+	const countryNameValue = getCountryOptions({ t });
+
+	const controls = getControls({ t });
+
 	return (
 		<div className={styles.main_container}>
 			<Header
-				countryname_value={countryname_value}
+				countryNameValue={countryNameValue}
 				control={control}
 				controls={controls}
 			/>

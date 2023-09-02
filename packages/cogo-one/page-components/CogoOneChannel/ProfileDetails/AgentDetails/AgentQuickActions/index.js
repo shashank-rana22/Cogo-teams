@@ -1,5 +1,8 @@
 import { Button, Pill } from '@cogoport/components';
+import { getMobilePrefixFromCountryCode } from '@cogoport/forms/utils/getMobilePrefixFromCountryCode';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 
 import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
 
@@ -8,28 +11,54 @@ import styles from './styles.module.css';
 const COUNTRY_CODE_PREFIX = '%2B';
 
 function AgentQuickActions({
-	userData = {},
 	orgId = '',
 	userId = '',
 	leadUserId = '',
 	organizationData = {},
 	fetchOrganization = () => {},
 	partnerId = '',
+	formattedMessageData = {},
 }) {
-	const { email = '', mobile_number = '', mobile_country_code = '' } = userData || {};
+	const dispatch = useDispatch();
+
+	const {
+		email = '',
+		lead_user_details : leadUserDetails = {},
+		mobile_no : mobileNo = '', country_code : countryCode = '', lead_organization_id = '',
+	} = formattedMessageData || {};
+
+	const mobileCountryCode = getMobilePrefixFromCountryCode({ countryCode });
+
+	const mobileNumber = (
+		mobileNo?.substr(GLOBAL_CONSTANTS.zeroth_index, mobileCountryCode.length) === mobileCountryCode
+	) ? mobileNo?.substr(mobileCountryCode.length) : mobileNo;
+
+	const userEmail = email || leadUserDetails?.email;
 
 	const { submitKyc = () => {}, loading = false } = useSubmitOmniChannelKyc();
 
 	const { kyc_status } = organizationData || {};
 
-	const emailParams = email ? `&email=${email}` : '';
-	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
-	const countryCode = mobile_country_code?.replace(countryCodeRegex, COUNTRY_CODE_PREFIX);
+	const emailParams = userEmail ? `&email=${userEmail}` : '';
+	const formatCountryCode = COUNTRY_CODE_PREFIX + mobileCountryCode;
 
-	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode}${emailParams}`;
+	const queryParams = `?mobile=${mobileNumber}&mobile_country_code=${formatCountryCode}${emailParams}`;
 
 	const handleRoute = () => {
 		window.open(`/${partnerId}/create-importer-exporter${queryParams}`, '_blank');
+	};
+
+	const openLeadOrgModal = () => {
+		dispatch(
+			setProfileState({
+				lead_feedback_form_data: {
+					lead_organization_id,
+					lead_user_id : leadUserId,
+					source       : 'cogo_one',
+				},
+				lead_feedback_form_type: 'lead_org_feedback',
+			}),
+		);
 	};
 
 	return (
@@ -72,7 +101,16 @@ function AgentQuickActions({
 				))
 			)
 			}
-
+			{(lead_organization_id && !orgId) ? (
+				<Button
+					size="sm"
+					themeType="accent"
+					onClick={openLeadOrgModal}
+					className={styles.feedback_button}
+				>
+					Create Feedback
+				</Button>
+			) : null}
 		</div>
 
 	);

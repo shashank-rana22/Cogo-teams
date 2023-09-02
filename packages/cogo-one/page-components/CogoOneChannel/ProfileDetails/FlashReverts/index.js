@@ -37,7 +37,7 @@ function FlashReverts({
 		return (
 			<div className={styles.loader_div}>
 				<IcMServices className={styles.icon} />
-				<text>User is Not a Service Provider</text>
+				<div>User is Not a Service Provider</div>
 			</div>
 		);
 	}
@@ -47,8 +47,7 @@ function FlashReverts({
 			<div className={styles.header_flex}>
 				{REVERT_RATE_FILTERS.map((eachItem) => (
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						key={eachItem.value}
 						className={cl`${styles.each_filter} 
 						${loading ? styles.on_loading : ''} ${eachItem.value === activeTab ? styles.selected_tab : ''}`}
@@ -63,7 +62,12 @@ function FlashReverts({
 			<div className={styles.list}>
 				{loading ? (
 					<div className={styles.loader_div}>
-						<Image src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading} height={50} width={50} />
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading}
+							height={50}
+							width={50}
+							alt="loading"
+						/>
 					</div>
 				) : (
 					<Card
@@ -74,7 +78,7 @@ function FlashReverts({
 				)}
 				{(!loading && isEmpty(list)) ? (
 					<div className={styles.loader_div}>
-						<Image src={GLOBAL_CONSTANTS.image_url.empty_state} height={100} width={150} />
+						<Image src={GLOBAL_CONSTANTS.image_url.empty_state} height={100} width={150} alt="empty" />
 					</div>
 				) : null}
 			</div>

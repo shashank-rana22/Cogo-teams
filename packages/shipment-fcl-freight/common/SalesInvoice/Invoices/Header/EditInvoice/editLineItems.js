@@ -173,7 +173,8 @@ const useEditLineItems = ({
 
 				if (
 					val.price_discounted < originalValue.price_discounted
-					&& shipment_data?.shipment_type === 'fcl_freight' && serviceType !== 'fcl_freight_local_service'
+					&& ((shipment_data?.shipment_type === 'fcl_freight'
+					&& serviceType !== 'fcl_freight_local_service') || (originalValue?.code === 'BookingCONV'))
 				) {
 					const priceDiscountedRefKey = `${key}.${idx}.price_discounted`;
 

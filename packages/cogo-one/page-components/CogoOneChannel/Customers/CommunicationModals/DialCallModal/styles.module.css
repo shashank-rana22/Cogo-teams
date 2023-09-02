@@ -107,3 +107,7 @@
 		fill: #fff;
 	}
 }
+
+.disable_icon {
+	cursor: not-allowed;
+}

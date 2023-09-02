@@ -6,10 +6,10 @@ const useGetInsuranceCountrySupported = ({
 	country_id = '',
 }) => {
 	const [{ loading, data }, trigger] = useRequestBf({
-		auth   : 'get_saas_insurance_country_supported',
-		url    : 'saas/insurance/country-supported',
-		method : 'GET',
-		params : {
+		authKey : 'get_saas_insurance_country_supported',
+		url     : 'saas/insurance/country-supported',
+		method  : 'GET',
+		params  : {
 			policyCountryId: country_id,
 		},
 	}, { manual: true });

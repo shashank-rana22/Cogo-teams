@@ -49,6 +49,7 @@ import {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncListDepartment,
 	asyncFieldsTicketTypes,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
@@ -64,6 +65,10 @@ import {
 	asyncListResources,
 	asyncFieldsLocationsMapping,
 	asyncListOverSeasParties,
+	asyncListPricingZones,
+	asyncListTruckTypes,
+	asyncFieldsOrganizationUsers,
+	asyncListLeadOrganizationUsers,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -132,6 +137,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
 	list_employee_roles                  : asyncListRoles,
+	list_employee_departments            : asyncListDepartment,
 	default_types                        : asyncFieldsTicketTypes,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
@@ -144,8 +150,12 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
+	list_truck_types                     : asyncListTruckTypes,
 	resources                            : asyncListResources,
 	list_overseas_trade_parties          : asyncListOverSeasParties,
+	list_pricing_zones                   : asyncListPricingZones,
+	list_organization_users              : asyncFieldsOrganizationUsers,
+	lead_org_users                       : asyncListLeadOrganizationUsers,
 };
 
 const SINGLE_ENTITY = 1;
