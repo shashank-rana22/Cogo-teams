@@ -48,7 +48,7 @@
 	},
 	{
 		"service_type"  : "warehouse_service",
-		"display_label" : "Origin Warehouse Service",
+		"display_label" : "Destination Warehouse Service",
 		"trade_type"    : "import",
 		"is_main"       : false
 	},

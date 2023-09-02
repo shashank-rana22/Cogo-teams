@@ -2,7 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const geo = getGeoConstants();
 
-const useGetControls = ({ truckTypeToggle }) => {
+const useGetControls = ({ truckTypeToggle, warehouseLocationFilter = '' }) => {
 	const serviceWiseControls = {
 		ftl_freight: [
 			{
@@ -51,6 +51,23 @@ const useGetControls = ({ truckTypeToggle }) => {
 		air_customs : [],
 		warehouse   : [
 			{
+				label       : 'Warehouse Location',
+				name        : 'location_id',
+				placeholder : 'please select warehouse location',
+				type        : 'async-select',
+				asyncKey    : 'list_locations',
+				initialCall : true,
+				params      : {
+					filters: {
+						type       : ['warehouse'],
+						airport_id : warehouseLocationFilter,
+						status     : 'active',
+					},
+				},
+				span  : 12,
+				rules : { required: true },
+			},
+			{
 				label       : 'Expected Cargo Gated In',
 				name        : 'expected_cargo_gated_in',
 				placeholder : 'Select Date',
@@ -63,7 +80,6 @@ const useGetControls = ({ truckTypeToggle }) => {
 				name        : 'expected_cargo_gated_out',
 				placeholder : 'Select Date',
 				type        : 'datepicker',
-				rules       : { required: 'This is required' },
 				span        : 6,
 			},
 		],
