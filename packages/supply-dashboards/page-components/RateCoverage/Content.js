@@ -43,6 +43,7 @@ function RateCoverageContent() {
 						name="a4"
 						size="md"
 						disabled={false}
+						checked={!filter?.releventToMeValue}
 						onLabel="Relevent to all"
 						offLabel="Relevent to me"
 						onChange={handleToggle}

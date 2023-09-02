@@ -51,7 +51,7 @@ function Filter({ getCoverageDetails = () => {}, filter = {}, setFilter = () => 
 					size="md"
 					themeType="tertiary"
 					onClick={() => {
-						setFilter({ page: 1, service: 'fcl_freight' });
+						setFilter({ service: 'fcl_freight', status: 'pending', releventToMeValue: true, page: 1 });
 					}}
 					style={{
 						float         : 'right',

@@ -28,7 +28,7 @@
 .container {
 	display: flex;
 	justify-content: space-between;
-	width: 65%;
+	max-width: 65%;
 }
 
 .flex-wrapper {
