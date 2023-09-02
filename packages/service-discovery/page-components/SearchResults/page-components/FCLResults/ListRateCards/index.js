@@ -1,4 +1,4 @@
-import { Loader, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -18,15 +18,6 @@ import Schedules from './Schedules';
 import styles from './styles.module.css';
 
 const ONE = 1;
-
-function LoaderComponent() {
-	return (
-		<div className={styles.loading}>
-			<span className={styles.loading_text}>Looking for Rates</span>
-			<Loader themeType="primary" className={styles.loader} background="#000" />
-		</div>
-	);
-}
 
 function RateCard({
 	rateCardData = {},
@@ -177,8 +168,6 @@ function ListRateCards({
 					contractDetail={contract_detail}
 				/>
 			)}
-
-			{loading ? <LoaderComponent /> : null}
 
 			{(marketplaceRates || []).map((rateCardData, index) => (
 				<>
