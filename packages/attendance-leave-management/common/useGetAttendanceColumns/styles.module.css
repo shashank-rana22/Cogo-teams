@@ -12,38 +12,10 @@
 	min-width: 300px;
 }
 
-.separator {
-	position: relative;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	text-align: center;
-}
-
-.red_separator {
-	position: relative;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	text-align: center;
-}
-
-.orange_separator {
-	position: relative;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	text-align: center;
-}
-
-.invalid {
-	position: relative;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	text-align: center;
-}
-
+.separator,
+.red_separator,
+.orange_separator,
+.invalid,
 .hda {
 	position: relative;
 	display: flex;
@@ -52,12 +24,20 @@
 	text-align: center;
 }
 
-.dot {
+.dot,
+.right_dot {
 	width: 12px;
 	min-width: 12px;
 	height: 12px;
-	margin-right: 8px;
 	border-radius: 50%;
+}
+
+.mr_8 {
+	margin-right: 8px;
+}
+
+.ml_8 {
+	margin-left: 8px;
 }
 
 .color_orange {
@@ -74,14 +54,6 @@
 
 .color_grey {
 	background-color: #bdbdbd;
-}
-
-.right_dot {
-	width: 12px;
-	min-width: 12px;
-	height: 12px;
-	margin-left: 8px;
-	border-radius: 50%;
 }
 
 .separator::after {

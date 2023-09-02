@@ -1,4 +1,4 @@
-import { IcMArrowLeft, IcMAppProfile, IcMLocation, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMTeam, IcMLocation, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -22,11 +22,6 @@ const tempaccess = [
 function Geolocation({ handlePolicy }) {
 	const [selectedLocation, setSelectedLocation] = useState('');
 	const { loading, data } = useGetBranchStats();
-
-	// const {
-	// 	loading : locationMappingLoading,
-	// 	createGeoLocationMapping,
-	// } = useCreateGeoLocationMapping();
 
 	const handleBack = () => {
 		if (isEmpty(selectedLocation)) {
@@ -66,7 +61,7 @@ function Geolocation({ handlePolicy }) {
 									</div>
 									<div className={styles.arrow_section}>
 										<div className={styles.below_text}>
-											<IcMAppProfile />
+											<IcMTeam />
 											<span>{item.num_people}</span>
 											<IcMLocation />
 											<span>{item.location}</span>

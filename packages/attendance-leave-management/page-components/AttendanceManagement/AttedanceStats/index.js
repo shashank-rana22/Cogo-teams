@@ -1,4 +1,5 @@
 import { Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { upperCase } from '@cogoport/utils';
 
@@ -47,7 +48,11 @@ function AttendanceStats({ selectMonth = {}, executeScroll = () => {} }) {
 							Attendance Stats
 						</div>
 						<div className={styles.present_days}>
-							{`${completed_days}/${total_days}`}
+							{total_days !== undefined ? (
+								`${completed_days}/${total_days}`
+							) : (
+								GLOBAL_CONSTANTS.zeroth_index
+							)}
 							{' '}
 							Days
 						</div>
@@ -72,7 +77,7 @@ function AttendanceStats({ selectMonth = {}, executeScroll = () => {} }) {
 							<div className={styles.attendance_stats_data} key={val.key}>
 								<div className={`${styles.attendance_dot} ${styles?.[val.colorDot]}`} />
 								<span className={styles.span}>{val.label}</span>
-								{attendance_stats?.[val.key]}
+								{attendance_stats?.[val.key] || GLOBAL_CONSTANTS.zeroth_index}
 								{' '}
 								Days
 							</div>

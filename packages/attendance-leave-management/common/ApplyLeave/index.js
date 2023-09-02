@@ -40,7 +40,7 @@ function ApplyLeave({
 			} = selectedData || {};
 
 			setValues({
-				date_of_joining: {
+				date_range: {
 					startDate : new Date(leave_start_date),
 					endDate   : new Date(leave_end_date),
 				},
@@ -54,7 +54,6 @@ function ApplyLeave({
 
 	const isHalfDay = watch('half_day');
 	const leaveType = watch('leave_type');
-
 	const controls = getLeaveControls(isHalfDay);
 
 	const onSubmit = (values) => {
@@ -81,7 +80,7 @@ function ApplyLeave({
 									<div className={styles.pending}>
 										Pending :
 										{' '}
-										{data[`pending_${leaveType}s`] || GLOBAL_CONSTANTS.zeroth_index}
+										{data[`total_pending_${leaveType}_approvals`] || GLOBAL_CONSTANTS.zeroth_index}
 									</div>
 									<div className={styles.available}>
 										Available :

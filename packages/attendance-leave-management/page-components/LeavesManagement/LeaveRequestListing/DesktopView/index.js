@@ -1,10 +1,12 @@
-import { Pagination, Placeholder } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
 import getColumns from '../getColumns';
 
 import styles from './styles.module.css';
+
+const MAX_PAGE_LIMIT = 10;
 
 function DesktopView({ dataArr, setFilters, handleOpenModal, handleDeleteModal, loading }) {
 	const { list, page, page_limit, total_count } = dataArr || {};
@@ -21,12 +23,12 @@ function DesktopView({ dataArr, setFilters, handleOpenModal, handleDeleteModal, 
 		<>
 			<StyledTable
 				columns={columns}
-				data={list}
+				data={list || []}
 				emptyText="No Data Found"
 				loading={loading}
 			/>
-			<div className={styles.pagination}>
-				{loading ? <Placeholder height="50px" width="324px" margin="0px 0px 20px 0px" /> : (
+			{total_count > MAX_PAGE_LIMIT && (
+				<div className={styles.pagination}>
 					<Pagination
 						type="table"
 						currentPage={page}
@@ -34,8 +36,8 @@ function DesktopView({ dataArr, setFilters, handleOpenModal, handleDeleteModal, 
 						pageSize={page_limit}
 						onPageChange={onPageChange}
 					/>
-				)}
-			</div>
+				</div>
+			)}
 		</>
 	);
 }

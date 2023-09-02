@@ -33,7 +33,7 @@ function AttendanceLeaveDashboard() {
 
 	const { data, loading, refetch } = useGetCheckinStats(coords);
 
-	const { is_manager } = data || {};
+	const { is_manager, is_policy_view_allowed } = data || {};
 
 	return (
 		<div>
@@ -75,17 +75,21 @@ function AttendanceLeaveDashboard() {
 							</div>
 						</TabPanel>
 
-						<TabPanel name="policies" title="Policies">
-							<div className={styles.tab_panel}>
-								<Policies />
-							</div>
-						</TabPanel>
+						{is_policy_view_allowed && (
+							<TabPanel name="policies" title="Policies">
+								<div className={styles.tab_panel}>
+									<Policies />
+								</div>
+							</TabPanel>
+						)}
 
-						<TabPanel name="my_team" title="My Team">
-							<div className={styles.tab_panel}>
-								<TeamAttendance />
-							</div>
-						</TabPanel>
+						{is_manager && (
+							<TabPanel name="my_team" title="My Team">
+								<div className={styles.tab_panel}>
+									<TeamAttendance />
+								</div>
+							</TabPanel>
+						)}
 					</Tabs>
 				</div>
 			)}

@@ -55,9 +55,9 @@ const LEAVE_CONTROLS = [
 	},
 	{
 		controlLabel          : 'Select Date Range for this Leave',
-		name                  : 'Select Date Range',
+		name                  : 'date_range',
 		controlType           : 'range_datepicker',
-		placeholder           : 'Date of joining',
+		placeholder           : 'Select Date Range',
 		isPreviousDaysAllowed : true,
 		dateFormat            : 'dd-MM-yyyy',
 		rules                 : {

@@ -67,7 +67,7 @@
 
 .below_text {
 	display: flex;
-	gap: 12px;
+	gap: 8px;
 	align-items: center;
 	margin-right: 10px;
 }

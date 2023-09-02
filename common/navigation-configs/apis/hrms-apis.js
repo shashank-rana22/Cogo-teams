@@ -747,6 +747,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'download_team_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

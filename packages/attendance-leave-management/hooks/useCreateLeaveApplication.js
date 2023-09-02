@@ -11,9 +11,9 @@ const useCreateLeaveApplication = ({ onClose, refetch, refetchList, setSelectedD
 	}, { manual: true });
 
 	const createLeaveApplication = async (values) => {
-		const { date_of_joining, half_day, half_day_date, ...rest } = values || {};
+		const { date_range, half_day, half_day_date, ...rest } = values || {};
 
-		const { startDate, endDate } = date_of_joining || {};
+		const { startDate, endDate } = date_range || {};
 
 		if (startDate && endDate) {
 			try {

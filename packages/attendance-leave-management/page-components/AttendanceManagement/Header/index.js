@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
 	const profile = useSelector((state) => state.profile || {});
-
 	const { user } = profile || {};
 
 	const handleMonthChange = (id, val) => {
@@ -17,7 +16,6 @@ function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
 			value : id,
 		});
 	};
-
 	return (
 		<div className={styles.main_container}>
 			<div>
@@ -45,14 +43,12 @@ function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
 						/>
 					)}
 				</div>
-
 				<Button className={styles.donwload_btn} themeType="secondary" size="lg">
 					<span style={{ paddingRight: 10 }}>
 						Download Report
 					</span>
 					<IcMDownload />
 				</Button>
-
 			</div>
 
 		</div>

@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { IcMArrowRight, IcMAppProfile } from '@cogoport/icons-react';
+import { IcMArrowRight, IcMTeam } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -28,7 +28,7 @@ function Locations({ data, setSelectedLocation, loading }) {
 								</div>
 								<div className={styles.arrow_section}>
 									<div className={styles.below_text}>
-										<IcMAppProfile />
+										<IcMTeam />
 										<span>{item.employee_count}</span>
 									</div>
 									<div><IcMArrowRight width={20} height={20} /></div>

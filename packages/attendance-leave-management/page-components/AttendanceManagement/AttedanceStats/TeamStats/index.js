@@ -13,7 +13,7 @@ function TeamStats({ teamStats = {}, loading }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
-				Team Stats
+				Monthly Team Stats
 			</div>
 			{loading ? <Placeholder height="30px" width="100%" margin="0px 0px 20px 0px" /> : (
 				<div className={styles.flex_stats1}>
