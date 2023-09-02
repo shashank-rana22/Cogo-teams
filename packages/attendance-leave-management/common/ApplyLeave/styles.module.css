@@ -47,3 +47,9 @@
 	background-color: #c4dc91;
 	border-radius: 6px;
 }
+
+@media (max-width: 768px) {
+	.modal {
+		width: 100% !important;
+	}
+}

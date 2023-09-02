@@ -98,3 +98,9 @@
 .approved_color_bg {
 	background-color: #abcd62;
 }
+
+.action {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}

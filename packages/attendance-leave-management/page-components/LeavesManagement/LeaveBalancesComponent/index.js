@@ -80,7 +80,7 @@ function LeaveBalancesComponent({ data, refetch, loading }) {
 								Used
 							</div>
 						</div>
-						<ProgressBar progress={PROGRESS_SL} />
+						<ProgressBar className={styles.previlege_progress} progress={PROGRESS_SL} />
 					</div>
 				)}
 				{loading ? <Placeholder height="60px" width="100%" margin="0px 0px 20px 0px" /> : (
@@ -105,7 +105,7 @@ function LeaveBalancesComponent({ data, refetch, loading }) {
 								Used
 							</div>
 						</div>
-						<ProgressBar progress={PROGRESS_CL} />
+						<ProgressBar className={styles.previlege_progress} progress={PROGRESS_CL} />
 					</div>
 				)}
 				<div className={styles.button_ctn}>

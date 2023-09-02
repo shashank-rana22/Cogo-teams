@@ -54,7 +54,13 @@ function LeaveRequestListing({ leaveData, refetchLeaves, leaveRequestsRef = null
 				/>
 			</div>
 			<div className={styles.mobile_view}>
-				<MobileView data={data} setFilters={setFilters} loading={loading} />
+				<MobileView
+					data={data}
+					setFilters={setFilters}
+					loading={loading}
+					handleOpenModal={handleOpenModal}
+					handleDeleteModal={handleDeleteModal}
+				/>
 			</div>
 			{openLeaveModal && (
 				<ApplyLeave

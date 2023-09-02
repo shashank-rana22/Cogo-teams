@@ -1,14 +1,15 @@
-import { Pagination, cl, Placeholder } from '@cogoport/components';
+import { Pagination, cl, Placeholder, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMOverflowDot, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Loader from '../../../../common/Loader';
 
 import styles from './styles.module.css';
 
-function MobileView({ data, setFilters, loading }) {
+function MobileView({ data, setFilters, loading, handleDeleteModal, handleOpenModal }) {
 	const { list = [], page, page_limit, total_count } = data || {};
 
 	const onPageChange = (val) => {
@@ -16,6 +17,23 @@ function MobileView({ data, setFilters, loading }) {
 			...prev,
 			page: val,
 		}));
+	};
+	const [popoverVisibility, setPopoverVisibility] = useState({});
+
+	const togglePopover = (id) => {
+		setPopoverVisibility({
+			id,
+			open: true,
+		});
+	};
+
+	const handleEditDelete = (val, isEdit) => {
+		if (isEdit) {
+			handleOpenModal(val);
+		} else {
+			handleDeleteModal(val);
+		}
+		setPopoverVisibility({});
 	};
 
 	return (
@@ -59,7 +77,30 @@ function MobileView({ data, setFilters, loading }) {
 							>
 								{ startCase(val.leave_status) }
 							</div>
+							<Popover
+								placement="left"
+								trigger="click"
+								caret={false}
+								render={(
+									<div className={styles.action}>
+										{val.leave_status === 'pending' ? (
+											<IcMEdit
+												className={styles.cursor}
+												onClick={() => handleEditDelete(val, true)}
+											/>
+										) : <div style={{ marginRight: '14px' }} />}
+										<IcMDelete
+											className={styles.cursor}
+											onClick={() => handleEditDelete(val)}
+										/>
+									</div>
+								)}
+								visible={val.id === popoverVisibility?.id}
+							>
+								<IcMOverflowDot onClick={() => togglePopover(val.id)} />
+							</Popover>
 						</div>
+
 					</div>
 				))}
 			<div className={styles.pagination_container}>
