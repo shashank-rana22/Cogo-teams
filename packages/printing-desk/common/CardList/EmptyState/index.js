@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -6,9 +7,9 @@ import styles from './styles.module.css';
 function EmptyState({
 	height = 250,
 	width = 375,
-	emptyText = 'Data not found',
 	textSize = '20px',
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	return (
 		<div className={styles.container}>
 			<img
@@ -19,8 +20,10 @@ function EmptyState({
 				className={styles.image}
 			/>
 			<div>
-				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
-				<p className={styles.text}>We are sorry what you were looking for. Please try another way</p>
+				<div className={styles.text} style={{ fontSize: textSize }}>
+					{t('printingDesk:card_list_empty_state_header')}
+				</div>
+				<p className={styles.text}>{t('printingDesk:card_list_empty_state_text')}</p>
 			</div>
 		</div>
 	);

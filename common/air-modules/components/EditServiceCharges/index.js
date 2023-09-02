@@ -1,4 +1,4 @@
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import useGetServiceChargeCodes from '../../hooks/useGetServiceChargeCodes';
@@ -66,14 +66,14 @@ function EditServiceCharges(props) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [allOptions.length]);
 
+	if (loading || isEmpty(data)) return null;
+
 	return (
 		<div>
-			{!loading ? (
-				<EditLineItems
-					{...props}
-					controls={finalControls}
-				/>
-			) : null}
+			<EditLineItems
+				{...props}
+				controls={finalControls}
+			/>
 		</div>
 	);
 }
