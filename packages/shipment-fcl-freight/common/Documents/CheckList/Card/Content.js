@@ -238,6 +238,7 @@ function Content({
 				size="xl"
 				show={updateFreightCertificate}
 				onClose={() => setUpdateFreightCertificate(false)}
+				closeOnOuterClick={false}
 			>
 				<Modal.Header title="Update Freight Certificate" />
 				<Modal.Body>
