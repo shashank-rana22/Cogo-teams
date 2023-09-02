@@ -574,5 +574,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api          : 'send_rate_comparison_emails',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
 ];
 export default apis;
