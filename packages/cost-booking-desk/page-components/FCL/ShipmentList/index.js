@@ -1,16 +1,17 @@
-import { Modal, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
+import Loader from '../../../common/Loader';
+import useListCostBookingDeskShipments from '../../../hooks/useListCostBookingDeskShipments';
 
 import Card from './Card';
 import ShipmentPagination from './ShipmentPagination';
 import styles from './styles.module.css';
 
-function ShipmentList({ data = {} }) {
+function ShipmentList() {
+	const { loading, data } = useListCostBookingDeskShipments();
+
 	const { list = [] } = data || {};
-	const [showRequest, setShowRequest] = useState('');
 
 	function Pagination() {
 		return (
@@ -20,33 +21,24 @@ function ShipmentList({ data = {} }) {
 		);
 	}
 
-	return isEmpty(list) ? <EmptyState /> : (
+	if (isEmpty(list)) {
+		return <EmptyState />;
+	}
+
+	return (loading ? <Loader /> : (
 		<div>
 			<Pagination />
 
 			{(list || [])?.map((item) => (
 				<Card
-					showRequest={showRequest}
-					setShowRequest={setShowRequest}
 					item={item}
 					key={item?.id}
 				/>
 			))}
 
 			<Pagination />
-			{showRequest ? (
-				<Modal
-					show={showRequest}
-					onClose={() => setShowRequest('')}
-				>
-					<Modal.Header title="Request Advance Payment" />
-					<Modal.Footer>
-						<Button>Send For Approval</Button>
-					</Modal.Footer>
-				</Modal>
-			) : null}
-
 		</div>
+	)
 	);
 }
 
