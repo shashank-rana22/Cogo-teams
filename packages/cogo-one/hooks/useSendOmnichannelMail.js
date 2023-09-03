@@ -12,7 +12,7 @@ const useSendOmnichannelMail = ({
 	emailState = {},
 	draftMessage = '',
 	uploadedFiles = [],
-	mailActions = {},
+	mailActions = {}, // remove
 	resetEmailStates = () => {},
 	source = '',
 }) => {

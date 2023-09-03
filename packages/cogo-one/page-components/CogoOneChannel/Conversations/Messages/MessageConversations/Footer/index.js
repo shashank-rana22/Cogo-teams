@@ -33,8 +33,8 @@ function Footer({
 	communicationLoading = false,
 	assignChat = () => {},
 	assignLoading = false,
-	mailActions = {},
-	setMailActions = () => {},
+	mailActions = {}, // remove
+	setMailActions = () => {}, // remove
 }) {
 	const uploaderRef = useRef(null);
 

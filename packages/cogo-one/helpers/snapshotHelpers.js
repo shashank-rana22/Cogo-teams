@@ -124,7 +124,6 @@ export function mountPinnedSnapShot({
 		newChatsQuery,
 		(pinSnapShot) => {
 			const { resultList } = dataFormatter(pinSnapShot);
-			console.log('resultList:', resultList);
 
 			setListData((prev) => ({
 				...prev,

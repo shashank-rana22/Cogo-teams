@@ -72,6 +72,7 @@ export function getRecipientData({
 	activeMailAddress = '',
 	subject = '',
 	isDraft = false,
+	emailVia = '',
 }) {
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
@@ -101,12 +102,15 @@ export function getRecipientData({
 				filteredBccData,
 			});
 		}
+
 		const newSubject = getSubject({ subject, val });
 
 		setEmailState(
 			(prev) => ({
 				...prev,
+				emailVia,
 				body          : '',
+				from_mail     : activeMailAddress,
 				subject       : newSubject || subject,
 				toUserEmail   : mailData?.toUserEmail || [],
 				ccrecipients  : mailData?.ccrecipients || [],

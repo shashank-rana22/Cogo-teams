@@ -51,6 +51,7 @@
 	overflow: hidden;
 	font-size: 13px;
 	font-weight: 500;
+	color: #6c6b6b;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -65,7 +66,8 @@
 	overflow: hidden;
 	font-size: 13px;
 	font-weight: 500;
-	color: #6c6b6b;
+
+	/* color: #6c6b6b; */
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
