@@ -101,7 +101,7 @@ function Customers({
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
 	const handleChangeTab = (val) => {
-		setActiveTab({ tab: val, data: {}, subTab: 'all' });
+		setActiveTab((prev) => ({ ...prev, tab: val, data: {}, subTab: 'all' }));
 	};
 
 	return (
