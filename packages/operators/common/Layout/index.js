@@ -1,12 +1,13 @@
-import React from 'react';
-
 import CONSTANTS from '../../constants/constants';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control = {}, fields = [], showElements = {}, errors = {},
+	control = {},
+	fields = [],
+	showElements = {},
+	errors = {},
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
