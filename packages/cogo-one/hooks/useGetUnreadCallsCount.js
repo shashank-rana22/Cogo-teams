@@ -6,6 +6,7 @@ const getPayload = () => ({
 		additional_data_required  : false,
 		pagination_data_required  : false,
 		missed_call_stat_required : true,
+		source                    : 'omnichannel',
 	},
 });
 
