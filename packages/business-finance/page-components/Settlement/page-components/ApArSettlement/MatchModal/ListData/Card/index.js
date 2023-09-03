@@ -4,14 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+const INITIAL_BAL = 0;
 export default function CardItem({
 	itm = {},
 	selectedData = [],
 	setSelectedData = () => {},
 	originalAllocation = 0,
 	originalTDS = 0,
-	reRender = false,
 	setIsDelete = () => {},
+	updatedData,
+	setUpdateBal,
 }) {
 	const new_itm = itm;
 	const {
@@ -30,8 +32,11 @@ export default function CardItem({
 		setNewTDS(new_itm.tds);
 		setPrevTDS(new_itm.tds);
 		setEditedAllocation(new_itm.allocationAmount);
+		const total = updatedData.reduce((sum, item) => +sum + +item.balanceAmount
+		* +item.exchangeRate * item.signFlag, INITIAL_BAL);
+		setUpdateBal(total);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [reRender]);
+	}, [new_itm.tds, new_itm.allocationAmount]);
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
 	const STATUS = {
@@ -51,22 +56,25 @@ export default function CardItem({
 	};
 	const ZERO_BALANCE = 0;
 	const handleEditAllocation = () => {
-		const newAllocation = new_itm.allocationAmount;
+		const newAllocation = parseFloat(new_itm.allocationAmount);
 		const newBalanceAfterAllocation = parseFloat(
-			balanceAmount - new_itm.allocationAmount,
+			+balanceAmount - parseFloat(new_itm.allocationAmount),
 		);
 		if (newAllocation >= ZERO_BALANCE && newAllocation <= balanceAmount) {
 			setEditedAllocation(new_itm.allocationAmount);
 			new_itm.balanceAfterAllocation = newBalanceAfterAllocation;
 		} else {
-			// hb
+			// j
 		}
 	};
 	const handleEditTDS = () => {
-		const tdsDifference = new_itm.tds - prevTDS;
-
-		new_itm.balanceAmount -= tdsDifference;
-		new_itm.allocationAmount -= tdsDifference;
+		const tdsDifference = parseFloat(+new_itm.tds - +prevTDS);
+		console.log(tdsDifference);
+		console.log(new_itm.allocationAmount);
+		new_itm.balanceAmount -= +tdsDifference;
+		new_itm.allocationAmount -= +tdsDifference;
+		console.log(new_itm.balanceAmount);
+		console.log(new_itm.allocationAmount);
 		setEditedAllocation(new_itm.allocationAmount);
 		setNewTDS(new_itm.tds);
 		setPrevTDS(new_itm.tds);
@@ -112,7 +120,7 @@ export default function CardItem({
 									themeType="primary"
 									onClick={() => {
 										setIsTdsEdnew_itmode(false);
-										new_itm.tds = newTDS;
+										new_itm.tds = parseFloat(newTDS);
 										handleEditTDS();
 									}}
 								/>
@@ -181,7 +189,7 @@ export default function CardItem({
 									themeType="primary"
 									onClick={() => {
 										setIsEdnew_itmode(false);
-										new_itm.allocationAmount = editedAllocation;
+										new_itm.allocationAmount = parseFloat(editedAllocation);
 										handleEditAllocation();
 									}}
 								/>

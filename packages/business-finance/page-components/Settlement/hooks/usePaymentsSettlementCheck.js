@@ -3,8 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useState } from 'react';
+// import React from 'react';
 
 const usePaymentsSettlementCheck = ({ selectedData, date }) => {
+	const [success, setSuccess] = useState(true);
 	const [
 		{
 			loading:checkLoading,
@@ -36,7 +39,9 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 						})) || undefined,
 				},
 			});
+			// setCheckedData(checkData?.stackDetails || [])
 		} catch (error) {
+			setSuccess(false);
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
 	};
@@ -45,6 +50,8 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 		checkLoading,
 		checkData,
 		postPaymentsSettlementCheck,
+		success,
+		setSuccess,
 	};
 };
 export default usePaymentsSettlementCheck;

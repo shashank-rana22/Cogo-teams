@@ -1,33 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import CardItem from './Card';
 
+const ZERO_VALUE = 0;
 export default function ListData({
 	selectedData = [],
 	setSelectedData = () => {},
-	stackData = [],
+	// checkedData,
+	// setCheckedData,
 	dryRun = false,
+	// setDryRun,
 	reRender = false,
-	setReRender = () => {},
-	isDelete = false,
+	// setReRender = () => {},
+	// isDelete = false,
 	setIsDelete = () => {},
 	updatedData = [],
+	setUpdatedData,
+	// dryRunData,
+	checkLoading,
+	setUpdateBal,
 }) {
-	let stackedData = stackData;
-	const [cardsData, setCardsData] = useState(updatedData);
-	useEffect(() => {
-		setCardsData(updatedData);
-		setIsDelete(false);
-		setReRender(false);
+	// const [cardsData, setCardsData] = useState(updatedData);
+	// const [stackedData, setStackedData] = useState(stackData);
+	// useEffect(() => {
+	// 	setCardsData(updatedData);
+	// 	setIsDelete(false);
+	// 	setReRender(false);
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		stackedData = [];
-	}, [reRender]);
-	useEffect(() => {
-		setCardsData(updatedData);
-		setIsDelete(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isDelete]);
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// 	// stackedData = [];
+	// 	// setStackedData([]);
+	// }, [reRender]);
+	// useEffect(() => {
+	// 	setCardsData(updatedData);
+	// 	setIsDelete(false);
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [isDelete]);
+
 	const handleDragStart = (e, index) => {
 		e.dataTransfer.setData('text/plain', index.toString());
 	};
@@ -41,33 +50,45 @@ export default function ListData({
 		const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
 		const ZERO_INDEX = 0;
 		const SOURCE_LENGTH = 1;
-		const newCardsData = [...cardsData];
+		const newCardsData = [...updatedData];
 		const [draggedItem] = newCardsData.splice(sourceIndex, SOURCE_LENGTH);
 		newCardsData.splice(targetIndex, ZERO_INDEX, draggedItem);
-
-		setCardsData(newCardsData);
+		setUpdatedData(newCardsData);
 	};
+	// console.log('checked',checkedData);
+	// console.log('selected',selectedData);
+	// console.log('updated',updatedData);
+	// console.log('dry',dryRunData);
 	return (
 		<div>
-			{((!dryRun ? undefined : stackedData) || (cardsData)).map((tile, index) => (
-				<div
-					key={tile.id}
-					draggable
-					onDragStart={(e) => handleDragStart(e, index)}
-					onDragOver={handleDragOver}
-					onDrop={(e) => handleDrop(e, index)}
-				>
-					<CardItem
-						itm={tile}
-						setSelectedData={setSelectedData}
-						selectedData={selectedData}
-						originalAllocation={tile.allocationAmount}
-						originalTDS={tile.tds}
-						reRender={reRender}
-						setIsDelete={setIsDelete}
-					/>
-				</div>
-			))}
+			{
+				checkLoading
+					? (<div>Please wait...</div>)
+
+					: updatedData?.map((tile, index) => (
+						<div
+							key={tile.id}
+							draggable
+							onDragStart={(e) => handleDragStart(e, index)}
+							onDragOver={handleDragOver}
+							onDrop={(e) => handleDrop(e, index)}
+						>
+							<CardItem
+								itm={tile}
+								setSelectedData={setSelectedData}
+								selectedData={selectedData}
+								originalAllocation={selectedData[index]?.allocationAmount || ZERO_VALUE}
+								originalTDS={selectedData[index]?.tds || ZERO_VALUE}
+								reRender={reRender}
+								setIsDelete={setIsDelete}
+								dryRun={dryRun}
+								updatedData={updatedData}
+								setUpdateBal={setUpdateBal}
+							/>
+						</div>
+					))
+
+			}
 		</div>
 	);
 }

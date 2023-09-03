@@ -77,7 +77,7 @@ const useGetDocumentList = ({ filters, sorting }) => {
 			}
 		} catch (error) {
 			setBalanceData(INITIAL_BAL);
-			Toast.error(error?.error?.message);
+			// Toast.error(error?.error?.message);
 			toastApiError(error);
 		}
 	};
@@ -118,7 +118,7 @@ const useGetDocumentList = ({ filters, sorting }) => {
 				});
 			}
 		} catch (error) {
-			Toast.error(error?.error?.message);
+			// Toast.error(error?.error?.message);s
 			toastApiError(error);
 		}
 	};
