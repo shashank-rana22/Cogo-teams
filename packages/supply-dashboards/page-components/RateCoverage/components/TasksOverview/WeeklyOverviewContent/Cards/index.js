@@ -13,7 +13,7 @@ const FIFTY = 50;
 const SEVENTY_FIVE = 75;
 
 const getColor = (value) => {
-	if (value > DEFAULT_VALUE && value < FIFTY) { return '#F8AEA8'; }
+	if (value >= DEFAULT_VALUE && value < FIFTY) { return '#F8AEA8'; }
 	if (value >= FIFTY && value < SEVENTY_FIVE) { return '#FEF199'; }
 	return '#C4DC91';
 };
@@ -58,8 +58,9 @@ function Cards({ data = {}, statsLoading = false }) {
 				<div className={styles.box} key={key}>
 					<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
 						<circle cx="40" cy="40" r="36" stroke="#F3FAFA" strokeWidth="8" />
-						<text x="30" y="40" fontSize="12" fill="black">
+						<text x="32" y="40" fontSize="12" fill="black">
 							{weekly_completed_percentage[key]}
+							%
 						</text>
 						<text x="16" y="55" fontSize="10" fill="black">
 							completed
