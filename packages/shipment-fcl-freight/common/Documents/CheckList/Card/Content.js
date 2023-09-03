@@ -179,7 +179,7 @@ function Content({
 						</Button>
 					)}
 
-				{(docType === 'freight_certificate' && document_type === 'freight_certificate') ? (
+				{(document_type === 'freight_certificate') ? (
 					<Button
 						themeType="link"
 						onClick={() => setUpdateFreightCertificate(true)}
