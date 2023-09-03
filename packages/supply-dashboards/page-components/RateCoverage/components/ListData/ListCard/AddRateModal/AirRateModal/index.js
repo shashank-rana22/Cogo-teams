@@ -1,0 +1,425 @@
+/* eslint-disable max-lines-per-function */
+import { Button } from '@cogoport/components';
+import {
+	DatepickerController,
+	InputController,
+	SelectController,
+	asyncFieldsLocations,
+	asyncFieldsOperators,
+	asyncFieldsOrganization,
+	useForm,
+	useGetAsyncOptions,
+} from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { merge } from '@cogoport/utils';
+import React, { useEffect } from 'react';
+
+import {
+	PackagingTypeOptions,
+	PriceTypeOptions,
+	RateTypeOptions,
+	commodityOptions,
+	currencyOptions,
+	flighOperationTypeOptions,
+	handlingtype,
+	densityCargoOptions,
+	densityRatioOptions,
+} from '../../../../../helpers/constants';
+import useCreateFreightRate from '../../../../../hooks/useCreateFreightRate';
+
+import styles from './styles.module.css';
+
+const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
+const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
+
+function AirRateModal({ data = {} }) {
+	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: 'airport' } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+
+	const destinationLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: 'airport' } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+
+	const airLineOptions = useGetAsyncOptions(merge(
+		asyncFieldsOperators(),
+		{ params: { filters: { operator_type: 'airline' } } },
+	));
+
+	const serviceProviderOptions = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganization(),
+			{ params: { filters: { account_type: 'service_provider', kyc_status: 'verified' } } },
+		),
+	);
+
+	// const shipperOptions = useGetAsyncOptions(
+	// 	merge(
+	// 		asyncFieldsOrganization(),
+	// 		{ params: { filters: { account_type: 'service_provider', kyc_status: 'verified' } } },
+	// 	),
+	// );
+
+	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
+	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
+	const formControls = watch();
+
+	const { createRate } = useCreateFreightRate('air_freight');
+	// const { loading, createRate } = useCreateFreightRate('air_freight');
+
+	console.log(formControls, '?formControls');
+	const onSubmit = (val) => {
+		createRate(val);
+	};
+
+	useEffect(() => {
+		setValue('origin_airport', data?.origin_airport?.id);
+		setValue('destination_airport', data?.destination_airport?.id);
+		setValue('commodity', data?.commodity);
+		setValue('handling_type', data?.stacking_type);
+		setValue('airline', data?.airline?.id);
+	}, [data, setValue]);
+
+	return (
+		<div style={{ padding: '20px' }}>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Rate type</p>
+					<div>
+						<SelectController
+							options={RateTypeOptions}
+							control={control}
+							name="rate_type"
+							placeholder="Select rate Type"
+							rules={{ required: 'rate type is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>{errors?.rate_type ? errors?.rate_type?.message : ''}</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Origin Airport</p>
+					<div>
+						<SelectController
+							{...originLocationOptions}
+							control={control}
+							name="origin_airport"
+							disabled
+							placeholder="Select Origin"
+							rules={{ required: 'origin airport is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.origin_airport ? errors?.origin_airport?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Destination Airport</p>
+					<div>
+						<SelectController
+							{...destinationLocationOptions}
+							control={control}
+							disabled
+							name="destination_airport"
+							placeholder="Select Destination"
+							rules={{ required: 'destination airport is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.destination_airport ? errors?.destination_airport?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Service Provider</p>
+					<div>
+						<SelectController
+							{...serviceProviderOptions}
+							control={control}
+							name="service_provider"
+							placeholder="Select service provider"
+							rules={{ required: 'service provider is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.service_provider ? errors?.service_provider?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Rate Provided By LSP User</p>
+					<div>
+						<SelectController
+							options={RateTypeOptions}
+							control={control}
+							name="rate_provided_by_lsp_user"
+							placeholder="Rate Provided By LSP User"
+							rules={{ required: 'rate provided by lsp user is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.rate_provided_by_lsp_user ? errors?.rate_provided_by_lsp_user?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>
+						Rate Procured by Cogoport Agent
+					</p>
+					<div>
+						<SelectController
+							options={RateTypeOptions}
+							control={control}
+							name="rate_procured_by_cogoport_agent"
+							placeholder="Rate Procured by Cogoport Agent"
+							rules={{ required: 'rate procured by agent is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.rate_procured_by_cogoport_agent
+							? errors?.rate_procured_by_cogoport_agent?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Commodity</p>
+					<div>
+						<SelectController
+							options={commodityOptions}
+							control={control}
+							name="commodity"
+							disabled
+							placeholder="commodity"
+							rules={{ required: 'commodity is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.commodity ? errors?.commodity?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Air Line</p>
+					<div>
+						<SelectController
+							{...airLineOptions}
+							control={control}
+							name="air_line"
+							placeholder="air line"
+							rules={{ required: 'air line is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.air_line ? errors?.air_line?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Flight Operation Type</p>
+					<div>
+						<SelectController
+							options={flighOperationTypeOptions}
+							control={control}
+							name="flight_operation_type"
+							placeholder="flight operation type"
+							rules={{ required: 'flight operation type is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.flight_operation_type ? errors?.flight_operation_type?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Start Date</p>
+					<div>
+						<DatepickerController
+							placeholder="Select Date"
+							showTimeSelect
+							dateFormat={`${date} ${time}`}
+							name="startDateTime"
+							isPreviousDaysAllowed
+							control={control}
+							rules={{ required: 'start date is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.startDateTime ? errors?.startDateTime?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>End Date</p>
+					<div>
+						<DatepickerController
+							placeholder="Select Date"
+							showTimeSelect
+							dateFormat={`${date} ${time}`}
+							name="endDateTime"
+							isPreviousDaysAllowed
+							control={control}
+							rules={{ required: 'end date is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.endDateTime ? errors?.endDateTime?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Packaging Type</p>
+					<div>
+						<SelectController
+							options={PackagingTypeOptions}
+							control={control}
+							name="packaging_type"
+							placeholder="packaging type"
+							rules={{ required: 'packaging type is required' }}
+
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.packaging_type ? errors?.packaging_type?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Handling Type</p>
+					<div>
+						<SelectController
+							options={handlingtype}
+							control={control}
+							name="handling_type"
+							placeholder="handling type"
+							rules={{ required: 'handling type is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.handling_type ? errors?.handling_type?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Minimum Price</p>
+					<div>
+						<InputController
+							options={RateTypeOptions}
+							control={control}
+							name="minimum_price"
+							placeholder="enter price"
+							rules={{
+								required : 'minimum price is required',
+								value    : Number,
+							}}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.minimum_price ? errors?.minimum_price?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Currency</p>
+					<div>
+						<SelectController
+							options={currencyOptions}
+							control={control}
+							name="currency"
+							placeholder="Select Currency"
+							rules={{ required: 'currency is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.currency ? errors?.currency?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Price Type</p>
+					<div>
+						<SelectController
+							options={PriceTypeOptions}
+							control={control}
+							value="net"
+							name="price_type"
+							placeholder="price type"
+							rules={{ required: 'price type is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.price_type ? errors?.price_type?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Density Cargo</p>
+					<div>
+						<SelectController
+							options={densityCargoOptions}
+							control={control}
+							value="high_density"
+							name="density_cargo"
+							disabled
+							placeholder="density cargo"
+							rules={{ required: 'density cargo is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.density_cargo ? errors?.density_cargo?.message : ''}
+					</p>
+				</div>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Density Ratio</p>
+					<div>
+						<SelectController
+							options={densityRatioOptions}
+							control={control}
+							name="density_ratio"
+							value="1_500"
+							disabled
+							placeholder="density ratio"
+							rules={{ required: 'density ratio is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.density_ratio ? errors?.density_ratio?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Shipper</p>
+					<div>
+						<SelectController
+							options={RateTypeOptions}
+							control={control}
+							name="shipper"
+							placeholder="Select shipper"
+							rules={{ required: 'shipper is required' }}
+						/>
+					</div>
+					<p className={styles.error_message}>
+						{errors?.shipper ? errors?.shipper?.message : ''}
+					</p>
+				</div>
+			</div>
+			<div className={styles.sub_container}>
+				<div style={{ width: '30%' }}>
+					<p className={styles.label_text}>Weight Slabs (in Kgs)</p>
+					{/* <div>
+						<InputController
+							options={RateTypeOptions}
+							control={control}
+							name="shipper"
+							placeholder="Select shipper"
+						/>
+					</div> */}
+				</div>
+			</div>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Button onClick={handleSubmit(onSubmit)}>Confirm</Button>
+			</div>
+		</div>
+	);
+}
+
+export default AirRateModal;

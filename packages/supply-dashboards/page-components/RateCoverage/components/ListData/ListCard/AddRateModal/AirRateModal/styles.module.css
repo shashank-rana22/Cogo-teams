@@ -1,0 +1,15 @@
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.label_text {
+	font-weight: 600;
+	color: #828282;
+}
+
+.error_message {
+	color: #b40000;
+}
