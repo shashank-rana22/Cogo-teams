@@ -10,11 +10,14 @@ const DEFAULT_VALUE = 0;
 
 function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, filter = {} }) {
 	const { title = 'Previous Backlogs', color = '#000' } = detail;
-	const { loading, data:csvData, getCsvFile } = useGetCsvFile(filter, activeCard);
+	const { loading, url, setUrl, getCsvFile } = useGetCsvFile(filter, activeCard);
 
 	const handleDownload = () => {
 		getCsvFile();
-		window.open(csvData?.url);
+		if (url) {
+			window.open(url);
+		}
+		setUrl(null);
 	};
 
 	return (

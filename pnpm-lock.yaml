@@ -3763,6 +3763,9 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.366
         version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/constants':
+        specifier: workspace:0.1.0
+        version: link:../../common/constants
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms

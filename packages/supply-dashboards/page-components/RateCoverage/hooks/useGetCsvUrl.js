@@ -1,9 +1,11 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 const useGetCsvFile = (filter, activeCard) => {
 	const END_POINT = 'generate_csv_file_url';
-	const [{ loading, data }, trigger] = useRequest({
+	const [url, setUrl] = useState(null);
+
+	const [{ loading }, trigger] = useRequest({
 		url    : END_POINT,
 		method : 'GET',
 	}, { manual: true });
@@ -18,12 +20,15 @@ const useGetCsvFile = (filter, activeCard) => {
 		});
 
 		try {
-			await trigger({
+			const resp = await trigger({
 				params: {
 					filters: { ...FINAL_FILTERS, source: activeCard },
 					page,
 				},
 			});
+			if (resp?.data) {
+				await setUrl(resp?.data?.url);
+			}
 		} catch (err) {
 			// console.log(err);
 		}
@@ -31,8 +36,9 @@ const useGetCsvFile = (filter, activeCard) => {
 
 	return {
 		loading,
-		data,
 		getCsvFile,
+		url,
+		setUrl,
 	};
 };
 
