@@ -26,7 +26,7 @@ export default function MatchModal({
 	const [showJV, setShowJV] = useState(false);
 	const [updatedData, setUpdatedData] = useState(JSON.parse(JSON.stringify(selectedData)));
 	const [showDocument, setShowDocument] = useState(false);
-	const [fileValue, setFileValue] = useState('');
+	const [fileValue, setFileValue] = useState('Upload Your File');
 	const {
 		checkData, postPaymentsSettlementCheck, checkLoading,
 		success, setSuccess,
@@ -105,13 +105,12 @@ export default function MatchModal({
 			<sub>( Drag and drop to set the matching hierarchy )</sub>
 		</div>
 		<br />
-		<div style={{ display: 'flex', alignItems: 'center' }}>
+		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-			<div style={{ display: 'flex', alignItems: 'center' }}>
+			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				Matching Balance
 				<p style={{
 					color        : '#F68B21',
-					marginLeft   : '4px',
 					display      : 'flex',
 					alignItems   : 'center',
 					marginBottom : '0px',
@@ -120,7 +119,7 @@ export default function MatchModal({
 					{`${selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency}     ${updateBal}    `}
 				</p>
 			</div>
-			<div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '20px' }}>
+			<div style={{ display: 'flex', alignItems: 'baseline' }}>
 				<span className={styles.Datepicker}>
 					<p style={{ margin: '0px 6px' }}>
 						Settlement Date
@@ -138,14 +137,16 @@ export default function MatchModal({
 					<Button
 						style={{ marginRight: '10px' }}
 						onClick={() => { handleSetTdsZero(); }}
+						themeType="secondary"
 					>
-						set tds zero
+						Set TDS Zero
 					</Button>
 				</div>
 				<div>
 					<Button
 						style={{ marginRight: '10px' }}
 						onClick={() => onClick('primary sm')}
+						themeType="secondary"
 					>
 						Upload File
 					</Button>
@@ -167,10 +168,16 @@ export default function MatchModal({
 								<Button
 									style={{ marginRight: '6px' }}
 									onClick={() => { setShowDocument(false); }}
+									themeType="secondary"
 								>
 									Upload
 								</Button>
-								<Button onClick={() => { setShowDocument(false); setFileValue(''); }}>Cancel</Button>
+								<Button
+									themeType="secondary"
+									onClick={() => { setShowDocument(false); setFileValue(''); }}
+								>
+									Cancel
+								</Button>
 							</Modal.Footer>
 						</Modal>
 					)}
@@ -203,7 +210,6 @@ export default function MatchModal({
 					)}
 				</div>
 				<div className={styles.refreshStyle}>
-
 					<ButtonIcon
 						style={{ height: '30px', alignItems: 'center' }}
 						size="lg"
@@ -220,7 +226,6 @@ export default function MatchModal({
 				)
         }
 				/>
-
 				<Modal.Body>
 					<ListData
 						selectedData={selectedData}

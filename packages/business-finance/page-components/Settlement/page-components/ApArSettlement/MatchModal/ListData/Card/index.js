@@ -69,12 +69,8 @@ export default function CardItem({
 	};
 	const handleEditTDS = () => {
 		const tdsDifference = parseFloat(+new_itm.tds - +prevTDS);
-		console.log(tdsDifference);
-		console.log(new_itm.allocationAmount);
 		new_itm.balanceAmount -= +tdsDifference;
 		new_itm.allocationAmount -= +tdsDifference;
-		console.log(new_itm.balanceAmount);
-		console.log(new_itm.allocationAmount);
 		setEditedAllocation(new_itm.allocationAmount);
 		setNewTDS(new_itm.tds);
 		setPrevTDS(new_itm.tds);
