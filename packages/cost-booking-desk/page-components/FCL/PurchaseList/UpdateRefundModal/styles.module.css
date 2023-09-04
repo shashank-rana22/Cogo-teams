@@ -6,3 +6,25 @@
 .errors {
 	color: #ee3425;
 }
+
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		.ui_upload_filesuccess_container {
+			margin-bottom: 30px;
+		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
+}

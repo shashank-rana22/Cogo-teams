@@ -4,9 +4,24 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = ({
-	setViewRequestModal = () => {},
-}) => [
+const PILL_COLOR = {
+	REQUESTED : '#FEF099',
+	APPROVED  : '#C4DC91',
+	REJECTED  : '#F8AEA8',
+};
+
+const REFUND_PILLS = {
+	true  : '#C4DC91',
+	false : '#FEF099',
+};
+
+const handleClick = ({
+	item = {},
+	setViewRefundModal = () => {},
+	setUpdateRefundModal = () => {},
+}) => (item?.reconciled ? setViewRefundModal(item) : setUpdateRefundModal(item));
+
+const getCommonColumns = () => [
 	{
 		Header   : <div className={styles.header}>Shipment ID</div>,
 		key      : 'shipment_id',
@@ -74,6 +89,9 @@ const getColumns = ({
 		id       : 'container_details',
 		accessor : '',
 	},
+];
+
+const getPaymentRequestColumns = ({ setViewRequestModal = () => {} }) => [
 	{
 		Header   : <div className={styles.header}>Shipment Type</div>,
 		key      : 'shipment_type',
@@ -91,7 +109,32 @@ const getColumns = ({
 		key      : 'status',
 		id       : 'status',
 		accessor : (item) => (
-			<div className={styles.status}><Pill color="green">{item?.status}</Pill></div>
+			<div className={styles.status}>
+				<Pill color={PILL_COLOR[item?.status]}>
+					{item?.status}
+				</Pill>
+			</div>
+		),
+	},
+	{
+		Header   : '',
+		key      : 'action',
+		id       : 'action',
+		accessor : (item) => <Button onClick={() => setViewRequestModal(item)}>View</Button>,
+	},
+];
+
+const getRefundColumns = ({ setViewRefundModal = () => {}, setUpdateRefundModal = () => {} }) => [
+	{
+		Header   : <div className={styles.header}>Refund Status</div>,
+		key      : 'refund_status',
+		id       : 'refund_status',
+		accessor : (item) => (
+			<div className={styles.shipment_type}>
+				<Pill color={REFUND_PILLS[item?.reconciled]}>
+					{item?.reconciled ? 'REFUNDED' : 'PENDING'}
+				</Pill>
+			</div>
 		),
 	},
 	{
@@ -99,9 +142,27 @@ const getColumns = ({
 		key      : 'action',
 		id       : 'action',
 		accessor : (item) => (
-			<Button onClick={() => setViewRequestModal(item)}>View</Button>
+			<Button
+				onClick={() => handleClick({ item, setViewRefundModal, setUpdateRefundModal })}
+			>
+				{item?.reconciled ? 'View' : 'Request'}
+			</Button>
 		),
 	},
 ];
+
+const getColumns = ({
+	paymentActiveTab = 'payment_request',
+	setViewRequestModal = () => {},
+	setViewRefundModal = () => {},
+	setUpdateRefundModal = () => {},
+}) => {
+	const commonColumns = getCommonColumns();
+	const paymentRequestColumns = getPaymentRequestColumns({ setViewRequestModal });
+	const refundColumns = getRefundColumns({ setViewRefundModal, setUpdateRefundModal });
+
+	return paymentActiveTab === 'payment_request'
+		? [...commonColumns, ...paymentRequestColumns] : [...commonColumns, ...refundColumns];
+};
 
 export default getColumns;
