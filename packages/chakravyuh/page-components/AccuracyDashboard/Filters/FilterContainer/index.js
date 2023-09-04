@@ -32,6 +32,7 @@ function FilterContainer({
 		controls,
 		containerType: values?.container_type,
 		setGlobalFilters,
+		globalFilters,
 	});
 
 	useEffect(() => {

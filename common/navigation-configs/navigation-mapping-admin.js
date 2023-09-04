@@ -1600,25 +1600,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon        : IcCCogoassured,
 			options     : [
 				{
-					key           : 'cogo_assured-fcl_freight',
-					title         : t('common:fcl_freight'),
-					href          : '/cogo-assured/fcl_freight',
-					as            : '/cogo-assured/fcl_freight',
-					type          : 'link',
-					possible_apis : apis.cogo_assured,
-					main_apis     : [],
-				},
-				{
-					key           : 'cogo_assured-fcl_freight_local',
-					title         : t('common:fcl_freight_local'),
-					href          : '/cogo-assured/fcl_freight_local',
-					as            : '/cogo-assured/fcl_freight_local',
-					type          : 'link',
-					possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-					main_apis: [],
-				},
-				{
 					key           : 'cogo_assured-haulage_freight',
 					title         : t('common:haulage_freight'),
 					href          : '/cogo-assured/haulage_freight',
@@ -2482,13 +2463,6 @@ const navigationMapping = ({ t = () => {} }) => {
 					possible_apis : apis.pricing_trends,
 				},
 				{
-					key           : 'chakravyuh-feedback',
-					title         : t('common:feedback_dashboard'),
-					href          : '/v2/chakravyuh/feedback-dashboard',
-					as            : '/v2/chakravyuh/feedback-dashboard',
-					possible_apis : apis.pricing_trends,
-				},
-				{
 					key           : 'chakravyuh-accuracy',
 					title         : t('common:feedback_accuracy'),
 					href          : '/v2/chakravyuh/accuracy-dashboard',
@@ -2586,14 +2560,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		forecast: {
 			key         : 'forecast',
-			title       : 'Forecast',
+			title       : t('common:forecast'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcMUpwardGraph,
 			options     : [
 				{
-					key           : 'forecast-supply_allocation',
-					title         : 'Supply Allocation',
+					key         	 : 'forecast-supply_allocation',
+					title         : t('common:supply_allocation'),
 					href          : '/v2/supply-allocation',
 					as            : '/v2/supply-allocation',
 					type          : 'link',
@@ -2602,8 +2576,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 				{
-					key           : 'forecast-demand_forecast',
-					title         : 'Demand Forecast',
+					key   : 'forecast-demand_forecast',
+					title : t('common:demand_forecast'),
+
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',

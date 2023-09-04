@@ -4,6 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
+const DEFAULT_COUNT = 0;
 function OutStandingStatsCommonCard({
 	label = '', item = {},
 	amountValue = [],
@@ -29,7 +30,8 @@ function OutStandingStatsCommonCard({
 						})}
 				</div>
 				<div style={{ fontSize: '12px', color: '#0099FF' }}>
-					{statsLoading ? <Placeholder width="60px" style={{ marginTop: 8 }} /> : `(${totalCount})`}
+					{statsLoading ? <Placeholder width="60px" style={{ marginTop: 8 }} />
+						: `(${totalCount || DEFAULT_COUNT})`}
 				</div>
 			</div>
 			<div className={styles.right_container}>
@@ -38,7 +40,7 @@ function OutStandingStatsCommonCard({
 						<div className={styles.label}>{val?.label}</div>
 						<div
 							className={cl`${styles.amount} 
-                                ${val.label === 'ON ACCOUNTS PAYMENTS' ? styles.on_account_amount
+                                ${val?.label === 'ON ACCOUNTS PAYMENTS' ? styles.on_account_amount
 								: styles.overall_stats_amount}`}
 						>
 							{ statsLoading ? <Placeholder /> : formatAmount({
@@ -54,7 +56,8 @@ function OutStandingStatsCommonCard({
 						</div>
 						<div style={{ fontSize: '12px', color: '#0099FF' }}>
 							{statsLoading
-								? <Placeholder width="60px" style={{ marginTop: 8 }} /> : `(${item[val?.countKey]})`}
+								? <Placeholder width="60px" style={{ marginTop: 8 }} />
+								: `(${item[val?.countKey] || DEFAULT_COUNT})`}
 						</div>
 					</div>
 				))}
