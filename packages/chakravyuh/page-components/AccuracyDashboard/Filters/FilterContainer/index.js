@@ -22,7 +22,14 @@ function FilterContainer({
 		watch,
 		setValue,
 		handleSubmit,
-	} = useForm({ defaultValues: { service_type: 'fcl' } });
+	} = useForm({
+		defaultValues: {
+			service_type   : 'fcl',
+			container_size : '20',
+			container_type : 'standard',
+			commodity      : ['general'],
+		},
+	});
 
 	const controls = service_type === 'air' ? airControls : fclControls;
 
