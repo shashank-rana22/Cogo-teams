@@ -44,7 +44,6 @@
 .btn_text {
 	font-size: 16px;
 	font-weight: 500;
-	line-height: 130%;
 	color: #221f20;
 	text-align: center;
 	text-transform: capitalize;
@@ -61,7 +60,6 @@
 .team_heading {
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 150%;
 	color: #4f4f4f;
 	text-align: center;
 }
@@ -76,7 +74,6 @@
 .above_text {
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 150%;
 	color: #4f4f4f;
 	text-align: center;
 }
@@ -122,9 +119,7 @@
 
 .location {
 	font-size: 14px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #221f20;
 	text-align: center;
 }

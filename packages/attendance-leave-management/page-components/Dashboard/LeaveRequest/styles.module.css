@@ -76,17 +76,13 @@
 
 .above_text {
 	font-size: 14px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #221f20;
 	text-align: center;
 }
 
 .below_text {
 	font-size: 12px;
-	font-style: normal;
 	font-weight: 400;
-	line-height: 150%;
 	color: #828282;
 }

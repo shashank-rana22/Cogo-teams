@@ -14,7 +14,6 @@
 
 .heading_sp1 {
 	font-size: 14px;
-	font-style: normal;
 	font-weight: 500;
 	color: #221f20;
 	text-transform: uppercase;
@@ -111,9 +110,7 @@
 
 .num {
 	font-size: 10px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #fef3e9;
 }
 
@@ -141,9 +138,7 @@
 
 .rej_content {
 	font-size: 12px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #bf291e;
 	text-align: center;
 	text-transform: capitalize;
@@ -151,9 +146,7 @@
 
 .acc_content {
 	font-size: 12px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #849e4c;
 	text-align: center;
 	text-transform: capitalize;
@@ -175,9 +168,7 @@
 
 .edit_text {
 	font-size: 12px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #221f20;
 	text-align: center;
 	text-transform: capitalize;
