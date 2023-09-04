@@ -2085,8 +2085,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		manage_rfq: {
 			key           : 'manage_rfq',
 			title         : t('common:manage_rfq'),
-			href          : '/manage-rfq',
-			as            : '/manage-rfq',
+			href          : '/manage-rfq?activeTab=draft&page=1',
+			as            : '/manage-rfq?activeTab=draft&page=1',
 			type          : 'link',
 			main_apis     : ['list_rfqs'],
 			possible_apis : apis.manage_rfq,
