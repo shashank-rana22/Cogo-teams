@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
 import { getUserActiveMails } from '../../../configurations/mail-configuration';
+import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentSettings from './AgentSettings';
@@ -25,7 +26,7 @@ const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];
 
 function Customers({
 	setActiveTab = () => {},
-	activeTab = '',
+	activeTab = {},
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
@@ -58,6 +59,10 @@ function Customers({
 		agentId: userId,
 		isBotSession,
 	});
+
+	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
+
+	const unReadMissedCallCount = data?.total_missed_call_count;
 
 	const componentPropsMapping = {
 		message: {
@@ -96,7 +101,7 @@ function Customers({
 		},
 	};
 
-	const tabMappings = getTabMappings({ unReadChatsCount, viewType });
+	const tabMappings = getTabMappings({ unReadChatsCount, unReadMissedCallCount, viewType });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
@@ -173,6 +178,7 @@ function Customers({
 					{...(componentPropsMapping[activeTab?.tab] || {})}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
+					fetchUnreadCall={fetchUnreadCall}
 				/>
 			)}
 
