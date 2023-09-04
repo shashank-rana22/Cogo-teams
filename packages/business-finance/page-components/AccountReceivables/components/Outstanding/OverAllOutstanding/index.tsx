@@ -52,15 +52,9 @@ function OverAllOutstanding({ entityCode = '' }) {
 	const ref = useRef(null);
 	const RIGHT_OFF_SET = 2000;
 	const LEFT_OFF_SET = -2000;
-	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats({
-		globalFilters: formFilters,
-	});
-	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({
-		globalFilters: formFilters,
-	});
-	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({
-		globalFilters: formFilters,
-	});
+	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats();
+	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats();
+	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats();
 	const { ccCommStats = [], ccCommLoading = false } = useGetCcCommunicationStats({
 		dateFilter,
 	});
@@ -126,7 +120,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 				legendPaddingTop: '10px',
 			},
 			listTitle: {
-				nameTitle  : 'KAM Owners',
+				nameTitle  : 'Service Wise',
 				valueTitle : 'Total Open Invoice Amount',
 			},
 		},
