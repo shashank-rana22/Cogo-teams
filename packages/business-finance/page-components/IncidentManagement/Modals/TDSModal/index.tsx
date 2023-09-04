@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-key */
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
@@ -24,6 +23,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		currentTdsRate, requestedTdsRate,
 		validFrom, validTo, documentUrls, currentTdsStyle, requestedTdsStyle,
 	} = tdsData;
+	console.log(documentUrls, 'documentUrls');
 
 	const getRatePercentageData = [
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
@@ -80,7 +80,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						</div>
 						<div className={styles.flex}>
 							{getRatePercentageData.map((itemData) => (
-								<div className={styles.rates_data}>
+								<div className={styles.rates_data} key={itemData?.label}>
 									<div className={styles.rates}>
 										{itemData?.value || '-'}
 										%
@@ -91,7 +91,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						</div>
 						<div className={styles.flex}>
 							{getAllValidData.map((item) => (
-								<div className={styles.value_data}>
+								<div className={styles.value_data} key={item?.id}>
 									<div className={styles.label_value}>
 										{item?.label || '-'}
 									</div>
@@ -107,17 +107,16 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						<div className={styles.document_flex}>
 							<div className={styles.document}>{`${t('incidentManagement:doc')} -`}</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
-								<a href={url} target="_blank" rel="noreferrer">
+								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
 										<div className={styles.view}>
 											{`${t('incidentManagement:view_doc_link')} -`}
-
 										</div>
 										<IcMEyeopen />
 									</div>
 								</a>
 							) : (
-								<div>
+								<div key={url}>
 									{' '}
 									{`${t('incidentManagement:no_doc_available')} -`}
 								</div>
@@ -126,11 +125,10 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						{isEditable && (
 							<>
 								<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
-
 								<Textarea
 									name="remark"
 									size="md"
-									placeholder={t('incidentManagement:remarks_placeholder')}
+									placeholder={t('incidentManagement:remarks_placeholder') || ''}
 									onChange={(value: string) => setRemark(value)}
 									style={{ width: '700', height: '100px', marginBottom: '12px' }}
 								/>

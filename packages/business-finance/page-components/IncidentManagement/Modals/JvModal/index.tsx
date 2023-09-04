@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-key */
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useGetJvData from '../../apisModal/useGetJvData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
@@ -75,7 +74,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
 							{getAllValidData.map((item) => (
-								<div className={styles.value_data}>
+								<div className={styles.value_data} key={item?.id}>
 									<div className={styles.label_value}>
 										{item?.label || '-'}
 									</div>
@@ -92,7 +91,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 
 						<div className={styles.flex}>
 							{getAllData.map((item) => (
-								<div className={styles.value_data}>
+								<div className={styles.value_data} key={item?.id}>
 									<div className={styles.label_value}>
 										{item?.label || '-'}
 									</div>
