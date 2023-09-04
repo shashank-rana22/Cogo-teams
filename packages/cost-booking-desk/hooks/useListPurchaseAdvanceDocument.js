@@ -8,7 +8,7 @@ import CostBookingDeskContext from '../context/CostBookingDeskContext';
 
 const INIT_PAGE = 1;
 
-const getParams = ({ pagination, extraFilters }) => ({
+const getParams = ({ pagination = INIT_PAGE, extraFilters = {} }) => ({
 	tradeType  : 'import',
 	type       : 'CONTAINER_SECURITY_DEPOSIT',
 	page       : pagination,

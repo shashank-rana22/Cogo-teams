@@ -168,7 +168,7 @@ function NewRequestModal({
 	useEffect(() => {
 		const parseOptions = JSON.parse(stringifyCollectionPartyAddresses || []);
 		if (parseOptions?.length === ONE_OPTION) {
-			setValue('cp_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index].id);
+			setValue('cp_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.id || '');
 			setCollectionPartyAddress(parseOptions?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [stringifyCollectionPartyAddresses, setValue]);

@@ -20,7 +20,7 @@ const controlTypeMapping = {
 
 function FormElement({ name = '', label = '', type = '', errors = {}, showElements = {}, ...rest }) {
 	const Element = controlTypeMapping[type];
-	if (Element === null) return null;
+	if (!Element) return null;
 
 	const show = !isEmpty(showElements[name]) ? showElements[name] : true;
 
