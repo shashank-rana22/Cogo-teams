@@ -29,9 +29,7 @@ function useVendorServices({
 		...rest
 	} = useForm();
 
-	const { vendor_services } = vendorInformation || {};
-
-	const { vendor_details } = vendorInformation || {};
+	const { vendor_services = {}, vendor_details = {} } = vendorInformation || {};
 
 	const entityCode = Object.values(ENTITY_MAPPING).find((val) => vendor_details?.cogo_entity_id === val?.id)?.code;
 
