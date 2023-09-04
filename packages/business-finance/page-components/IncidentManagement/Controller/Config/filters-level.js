@@ -48,7 +48,7 @@ const controls = (t = () => {}) => [
 				label : t('incidentManagement:expense_approval'),
 			},
 		],
-		rules: { required: 'Incident Type is required' },
+		rules: { required: t('incidentManagement:incident_type_required_message') },
 	},
 	{
 		name        : 'incidentSubtype',

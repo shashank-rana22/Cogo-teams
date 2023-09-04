@@ -222,5 +222,11 @@
   "approval_type_label": "ประเภทการอนุมัติ",
   "approval_type_single_label": "เดี่ยว",
   "approval_type_multiple_label": "หลายรายการ",
-  "updated_successfully_message": "อัปเดตเรียบร้อย"
+  "updated_successfully_message": "อัปเดตเรียบร้อย",
+  "incident_type_required_message": "ต้องระบุประเภทเหตุการณ์",
+  "incident_sub_type_required_message": "ต้องระบุประเภทย่อยของเหตุการณ์",
+  "approval_type_required_message": "ต้องระบุประเภทการอนุมัติ",
+  "entity_code_required_message": "ต้องระบุรหัส EntityCode",
+  "user_required_message": "ต้องระบุผู้ใช้งาน",
+  "criteria_required_message": "ต้องระบุเกณฑ์"
 }

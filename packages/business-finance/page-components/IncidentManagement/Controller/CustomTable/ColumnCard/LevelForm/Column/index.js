@@ -62,7 +62,7 @@ function Column({
 							userEmail : obj?.email,
 						});
 					}}
-					rules={{ required: { value: true, message: 'User is required' } }}
+					rules={{ required: { value: true, message: t('incidentManagement:user_required_message') } }}
 				/>
 				{approvalLevelConditions?.[index]?.user?.message
 					? <div className={styles.message}>{approvalLevelConditions?.[index]?.user?.message}</div> : null}
@@ -74,7 +74,7 @@ function Column({
 					control={control}
 					name={`approvalLevelConditions.${index}.condition`}
 					placeholder={t('incidentManagement:criteria_placeholder')}
-					rules={{ required: { value: true, message: 'Criteria is required' } }}
+					rules={{ required: { value: true, message: t('incidentManagement:criteria_required_message') } }}
 				/>
 				{approvalLevelConditions?.[index]?.condition?.message
 					? (

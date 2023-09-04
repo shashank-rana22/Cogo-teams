@@ -222,5 +222,11 @@
   "approval_type_label": "Loại Duyệt",
   "approval_type_single_label": "Duyệt Một lần",
   "approval_type_multiple_label": "Duyệt Nhiều lần",
-  "updated_successfully_message": "Cập Nhật Thành Công"
+  "updated_successfully_message": "Cập Nhật Thành Công",
+  "incident_type_required_message": "Yêu cầu loại sự cố",
+  "incident_sub_type_required_message": "Yêu cầu loại sự cố phụ",
+  "approval_type_required_message": "Yêu cầu loại phê duyệt",
+  "entity_code_required_message": "Yêu cầu mã đơn vị",
+  "user_required_message": "Yêu cầu người dùng",
+  "criteria_required_message": "Yêu cầu tiêu chí"
 }

@@ -54,7 +54,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 				label : t('incidentManagement:expense_approval'),
 			},
 		],
-		rules: { required: 'Incident Type is required' },
+		rules: { required: t('incidentManagement:incident_type_required_message') },
 	},
 	{
 		name        : 'incidentSubtype',
@@ -66,7 +66,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 		placeholder : t('incidentManagement:incident_sub_type_label'),
 		disabled    : isEmpty(incidentType),
 		params      : { incidentType: incidentType || undefined },
-		rules       : { required: 'Incident Subtype is required' },
+		rules       : { required: t('incidentManagement:incident_sub_type_required_message') },
 	},
 	{
 		name        : 'approvalType',
@@ -84,7 +84,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 				value : 'SINGLE',
 			},
 		],
-		rules: { required: 'Approval Type is required' },
+		rules: { required: t('incidentManagement:approval_type_required_message') },
 	},
 	{
 		name        : 'entityCode',
@@ -95,6 +95,6 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 		placeholder : t('incidentManagement:entity_label'),
 		renderLabel : (item) => (`${item?.entity_code} - ${item?.business_name}`),
 		initialCall : true,
-		rules       : { required: 'EntityCode is required' },
+		rules       : { required: t('incidentManagement:entity_code_required_message') },
 	},
 ];

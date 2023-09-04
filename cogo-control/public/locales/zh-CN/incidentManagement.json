@@ -222,5 +222,11 @@
     "approval_type_label": "批准类型",
     "approval_type_single_label": "单一",
     "approval_type_multiple_label": "多个",
-    "updated_successfully_message": "更新成功"
+    "updated_successfully_message": "更新成功",
+    "incident_type_required_message": "必须填写事故类型",
+    "incident_sub_type_required_message": "必须填写事故子类型",
+    "approval_type_required_message": "必须填写批准类型",
+    "entity_code_required_message": "必须填写实体代码",
+    "user_required_message": "必须填写用户",
+    "criteria_required_message": "必须填写标准"
 }

@@ -222,5 +222,11 @@
     "approval_type_label": "Jenis Persetujuan",
     "approval_type_single_label": "Tunggal",
     "approval_type_multiple_label": "Ganda",
-    "updated_successfully_message": "Berhasil Diperbarui"
+    "updated_successfully_message": "Berhasil Diperbarui",
+    "incident_type_required_message": "Jenis Insiden dibutuhkan",
+    "incident_sub_type_required_message": "Subjenis Insiden dibutuhkan",
+    "approval_type_required_message": "Jenis Persetujuan dibutuhkan",
+    "entity_code_required_message": "Kode Entitas dibutuhkan",
+    "user_required_message": "Pengguna dibutuhkan",
+    "criteria_required_message": "Kriteria dibutuhkan"
 }

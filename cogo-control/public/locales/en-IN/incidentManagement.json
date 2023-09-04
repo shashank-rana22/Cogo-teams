@@ -222,5 +222,11 @@
     "approval_type_label": "Approval Type",
     "approval_type_single_label": "Single",
     "approval_type_multiple_label": "Multiple",
-    "updated_successfully_message": "Updated Successfully"
+    "updated_successfully_message": "Updated Successfully",
+    "incident_type_required_message": "Incident Type is required",
+    "incident_sub_type_required_message": "Incident Subtype is required",
+    "approval_type_required_message": "Approval Type is required",
+    "entity_code_required_message": "EntityCode is required",
+    "user_required_message": "User is required",
+    "criteria_required_message": "Criteria is required"
 }
