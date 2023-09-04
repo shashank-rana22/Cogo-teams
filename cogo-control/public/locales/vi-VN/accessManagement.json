@@ -112,7 +112,7 @@
     "roles_and_permission_department_description": "Phòng ban cho phép vai trò này xem dữ liệu thông qua các tiêu chí khác nhau trong phạm vi cụ thể. Ví dụ: Nếu bạn đã chọn bán hàng, vai trò sẽ có thể xem dữ liệu trong đó họ được gắn thẻ là người sở hữu bán hàng hoặc dữ liệu của các thành viên trong nhóm của họ được gắn thẻ là người sở hữu bán hàng",
     "roles_and_permission_crm_dashboard_button_edit": "Chỉnh sửa",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "Phân công Ngay",
-    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Hủy phân công Ngay",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Không được ký ngay bây giờ",
     "roles_and_permission_crm_dashboard_btn_text_modal_next": "TIẾP THEO",
     "roles_and_permission_crm_dashboard_btn_text_cancel": "Hủy",
     "roles_and_permission_crm_dashboard_btm_text_back": "QUAY LẠI",
