@@ -5,12 +5,16 @@ import containerTypes from '@cogoport/constants/container-types.json';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
+import {
+	flighOperationTypeOptions,
+	PackagingTypeOptions, handlingtype,
+	RateTypeOptions, currencyOptions, PriceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
+} from '../../../../helpers/constants';
 import useCreateFclFreightRate from '../../../../hooks/useCreateFclFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 
 import airControls from './AirControls';
-import AirRateModal from './AirRateModal';
 import fclControls from './FclControls';
 
 function AddRateModal({
@@ -28,7 +32,18 @@ function AddRateModal({
 		}
 	));
 	const FCL_CONTROLS = fclControls({ data, containerSizes, containerTypes, options });
-	const AIR_CONTROLS = airControls();
+	const AIR_CONTROLS = airControls({
+		data,
+		flighOperationTypeOptions,
+		PackagingTypeOptions,
+		handlingtype,
+		RateTypeOptions,
+		currencyOptions,
+		PriceTypeOptions,
+		densityCargoOptions,
+		densityRatioOptions,
+		commodityOptions,
+	});
 	const finalControls = filter?.service === 'fcl_freight' ? FCL_CONTROLS : AIR_CONTROLS;
 	const {
 		control,
@@ -60,13 +75,18 @@ function AddRateModal({
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please add rate" />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
-				{filter?.service === 'fcl_freight' ? (
+				<Layout
+					fields={newCotrols}
+					control={control}
+					errors={errors}
+				/>
+				{/* {filter?.service === 'fcl_freight' ? (
 					<Layout
 						fields={newCotrols}
 						control={control}
 						errors={errors}
 					/>
-				) : <AirRateModal data={data} showModal={showModal} setShowModal={setShowModal} />}
+				) : <AirRateModal data={data} showModal={showModal} setShowModal={setShowModal} />} */}
 			</Modal.Body>
 			<Modal.Footer>
 				<div>
