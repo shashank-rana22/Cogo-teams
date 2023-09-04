@@ -75,3 +75,15 @@
 .total_outstanding_label {
 	font-weight: 600;
 }
+
+.invoices_wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.stats_lebal {
+	width: 74.5%;
+	margin: 16px 0 0 252px;
+}
