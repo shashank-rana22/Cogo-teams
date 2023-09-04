@@ -10,8 +10,8 @@ import useUpdateApprovalRequest from './Hooks/useUpdateApprovalRequest';
 import styles from './styles.module.css';
 
 const ROUTE_MAPPING = {
-	Test   : '/learning/test-module/create-test?mode=edit&id=',
-	Course : '/learning/course/create?mode=edit&id=',
+	Test              : '/learning/test-module/create-test?mode=edit&id=',
+	CogoAcademyCourse : '/learning/course/create?mode=edit&id=',
 };
 
 const INITIAL_PAGE = 1;
