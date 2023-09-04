@@ -28,11 +28,11 @@ const STATIC_COMPARISON_KEY = {
 		schedule_type         : 'Schedule Type',
 		free_origin_days      : 'Free Origin days',
 		free_destination_days : 'Free Destination days',
-		validity_end          : 'Estimated Time Departure ',
+		validity_end          : 'Estimated Departure ',
 		book_and_lock         : '',
 	},
 	air_freight: {
-		validity_end       : 'Estimated Time Departure ',
+		validity_end       : 'Estimated Departure ',
 		total_landed_price : 'Total Landed Cost',
 		book_and_lock      : '',
 	},
@@ -163,9 +163,11 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 			|| DEFAULT_FREE_DAYS_VALUE}`;
 
 		const keyHandlers = {
-			bls_count          : () => createValueObject(summary.bls_count),
-			schedule_type      : () => createValueObject(SCHEDULE_TYPE_MAPPING[item.schedule_type]),
-			total_landed_price : () => createValueObject(
+			bls_count     : () => createValueObject(summary.bls_count),
+			schedule_type : () => createValueObject(
+				source === 'cogo_assured_rate' ? '-' : SCHEDULE_TYPE_MAPPING[item.schedule_type],
+			),
+			total_landed_price: () => createValueObject(
 				formatAmountValue(
 					item?.total_price_discounted,
 					item?.total_price_currency,

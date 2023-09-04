@@ -22,8 +22,11 @@ function DislikeModal({
 	const formValues = watch();
 
 	const onSubmit = async (values) => {
-		await onSubmitFeedback(values);
-		setShowSuccessModal(true);
+		const done = await onSubmitFeedback(values);
+
+		if (done) {
+			setShowSuccessModal(true);
+		}
 	};
 
 	const BUTTONS_MAPPING = [
