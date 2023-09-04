@@ -188,10 +188,10 @@ function ReviewAndCriteria(props) {
 			{!(value.includes(email)) ? (
 
 				<div className={styles.publish_note}>
-					<span style={{ color: 'red', fontWeight: 'bold' }}>Important Note : </span>
+					<span style={{ color: '#FF0000', fontWeight: 'bold' }}>Important Note : </span>
 					Once you publish the test, request will be sent to the
 					{' '}
-					<b>COGO ACADEMY</b>
+					<strong>COGO ACADEMY</strong>
 					{' '}
 					admin. The test will be published after the approval process is completed.
 				</div>

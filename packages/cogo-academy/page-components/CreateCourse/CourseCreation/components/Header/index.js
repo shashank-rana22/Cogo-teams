@@ -74,10 +74,10 @@ function Header() {
 
 				{!(value.includes(email)) ? (
 					<div className={styles.publish_note}>
-						<span style={{ color: 'red', fontWeight: 'bold' }}> Note : </span>
+						<span style={{ color: '#FF0000', fontWeight: 'bold' }}> Note : </span>
 						Once you publish the course, request will be sent to the
 						{' '}
-						<b>COGO ACADEMY</b>
+						<strong>COGO ACADEMY</strong>
 						{' '}
 						admin. The course will be published after the approval process is completed.
 					</div>
