@@ -1,165 +1,125 @@
 import { Tooltip, Button } from '@cogoport/components';
+import { format } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const getColumns = () => ([
-	{
-		Header   : 'NAME',
-		accessor : ({ name }) => (
-			<section className={styles.name_container}>
-				<Tooltip
-					maxWidth={400}
-					content={name || '-'}
-					placement="top"
-				>
-					<div className={styles.name}>
-						{name || '-'}
-					</div>
-				</Tooltip>
-			</section>
-		),
-	},
-
-	{
-		Header   : 'COURSE/TEST',
-		accessor : ({ type }) => (
-			<div className={styles.name}>
-				{type || '-'}
-			</div>
-		),
-	},
-
-	{
-		Header   : 'CREATED BY',
-		accessor : ({ created_by }) => (
-			<section className={styles.name_container}>
-				<Tooltip
-					maxWidth={400}
-					content={created_by || '-'}
-					placement="top"
-				>
-					<div className={styles.name}>
-						{created_by || '-'}
-					</div>
-				</Tooltip>
-			</section>
-		),
-	},
-
-	{
-		Header   : 'CREATED BY MAIL ID',
-		accessor : ({ created_by_mail }) => (
-			<section className={styles.name_container}>
-				<Tooltip
-					maxWidth={400}
-					content={created_by_mail || '-'}
-					placement="top"
-				>
-					<div className={styles.name}>
-						{created_by_mail || '-'}
-					</div>
-				</Tooltip>
-			</section>
-		),
-	},
-
-	{
-		Header   : 'created_at',
-		accessor : ({ created_at }) => (
-			<section className={styles.name_container}>
-				<Tooltip
-					maxWidth={400}
-					content={created_at || '-'}
-					placement="top"
-				>
-					<div className={styles.time}>
-						<span>{created_at || '-'}</span>
-					</div>
-				</Tooltip>
-			</section>
-		),
-
-	},
-
-	// {
-	// 	Header   : 'TOPICS',
-	// 	accessor : ({ course_data }) => (
-	// 		<section className={styles.courses}>
-
-	// 			{!isEmpty(course_data) ? (
-	// 				<Tooltip
-	// 					maxWidth={400}
-	// 					content={startCase(course_data[GLOBAL_CONSTANTS.zeroth_index])}
-	// 					placement="top"
-	// 					key={course_data[GLOBAL_CONSTANTS.zeroth_index]}
-	// 				>
-	// 					<Pill
-	// 						className={styles.styled_pill}
-	// 						size="lg"
-	// 						color="#F3FAFA"
-	// 					>
-	// 						{startCase(course_data[GLOBAL_CONSTANTS.zeroth_index])}
-	// 					</Pill>
-	// 				</Tooltip>
-	// 			) : '-'}
-
-	// 			{course_data.length > MORE_THAN_ONE && (
-	// 				<Tooltip
-	// 					maxWidth={400}
-	// 					content={(course_data.map((course, index) => ((index >= MORE_THAN_ONE) ? (
-	// 						<Pill
-	// 							key={course}
-	// 							size="lg"
-	// 							color="#F3FAFA"
-	// 						>
-	// 							{startCase(course)}
-	// 						</Pill>
-	// 					) : null)))}
-	// 					placement="top"
-	// 					interactive
-	// 				>
-	// 					<Pill
-	// 						className={styles.topic_pill}
-	// 						size="lg"
-	// 						color="#F3FAFA"
-	// 					>
-	// 						+
-	// 						{course_data.length - MORE_THAN_ONE}
-	// 						{' '}
-	// 						More
-	// 					</Pill>
-	// 				</Tooltip>
-	// 			)}
-	// 		</section>
-	// 	),
-	// },
-
-	{
-		Header   : 'ACTIONS',
-		accessor : () => (
-			<div>
-				<div className={styles.options}>
-					<Button
-						size="md"
-						style={{ width: '60px' }}
+const getColumns = ({ btnLoading, updateApprovalRequest = () => {}, handleRedirect = () => {} }) => {
+	const handleUpdate = (item, status) => {
+		const id = item?.id;
+		updateApprovalRequest({ id, status });
+	};
+	return ([
+		{
+			Header   : 'NAME',
+			accessor : (item) => (
+				<section className={styles.name_container}>
+					<Tooltip
+						maxWidth={400}
+						content={item?.test?.name || item?.course?.name || '-'}
+						placement="top"
 					>
-						Redirect
-					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ width: '60px', marginLeft: '4px' }}
+						<div className={styles.name}>
+							{item?.test?.name || item?.course?.name || '-'}
+						</div>
+					</Tooltip>
+				</section>
+			),
+		},
+
+		{
+			Header   : 'COURSE/TEST',
+			accessor : ({ object_type }) => (
+				<div className={styles.name}>
+					{object_type || '-'}
+				</div>
+			),
+		},
+
+		{
+			Header   : 'CREATED BY',
+			accessor : ({ requested_by_user }) => (
+				<section className={styles.name_container}>
+					<Tooltip
+						maxWidth={400}
+						content={requested_by_user?.name || '-'}
+						placement="top"
 					>
-						Reject
-					</Button>
+						<div className={styles.name}>
+							{requested_by_user?.name || '-'}
+						</div>
+					</Tooltip>
+				</section>
+			),
+		},
+
+		{
+			Header   : 'CREATED BY MAIL ID',
+			accessor : ({ requested_by_user }) => (
+				<section className={styles.name_container}>
+					<Tooltip
+						maxWidth={400}
+						content={requested_by_user?.email || '-'}
+						placement="top"
+					>
+						<div className={styles.name}>
+							{requested_by_user?.email || '-'}
+						</div>
+					</Tooltip>
+				</section>
+			),
+		},
+
+		{
+			Header   : 'CREATED AT',
+			accessor : ({ created_at }) => (
+				<div className={styles.time}>
+					<span style={{ marginRight: '4px' }}>
+						{format(created_at, 'dd MMM yy')}
+					</span>
+					<span>{format(created_at, 'h:mm a')}</span>
+				</div>
+			),
+
+		},
+
+		{
+			Header   : 'ACTIONS',
+			accessor : (item) => (
+				<div>
+					<div className={styles.options}>
+						<Button
+							size="sm"
+							style={{ width: '60px' }}
+							onClick={() => handleRedirect(item?.object_id, item?.object_type)}
+						>
+							Redirect
+						</Button>
+						<Button
+							size="sm"
+							themeType="secondary"
+							loading={btnLoading}
+							style={{ width: '60px', marginLeft: '4px' }}
+							onClick={() => handleUpdate(item, 'approved')}
+						>
+							Approve
+						</Button>
+						<Button
+							size="sm"
+							themeType="secondary"
+							loading={btnLoading}
+							style={{ width: '60px', marginLeft: '4px' }}
+							onClick={() => handleUpdate(item, 'rejected')}
+						>
+							Reject
+						</Button>
+					</div>
 
 				</div>
-
-			</div>
-		),
-	},
-]
-);
+			),
+		},
+	]
+	);
+};
 
 export default getColumns;

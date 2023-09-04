@@ -1,82 +1,32 @@
 import { Modal } from '@cogoport/components';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
 
 import getColumns from './getColumns';
+import useListApprovals from './Hooks/useListApprovals';
+import useUpdateApprovalRequest from './Hooks/useUpdateApprovalRequest';
 import styles from './styles.module.css';
-
-const APPROVAL_TABLE_DATA = [
-	{
-		name            : 'air',
-		type            : 'course',
-		created_by      : 'karthik',
-		created_by_mail : 'Vakani.karthik@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-	{
-		name            : 'Customs',
-		type            : 'test',
-		created_by      : 'karthik',
-		created_by_mail : 'shivam.singh@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js', 'css', 'html'],
-	},
-	{
-		name            : 'air',
-		type            : 'course',
-		created_by      : 'karthik',
-		created_by_mail : 'sanjay@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-	{
-		name            : 'air',
-		type            : 'course',
-		created_by      : 'karthik',
-		created_by_mail : 'karthik@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-	{
-		name            : 'air',
-		type            : 'test',
-		created_by      : 'karthik',
-		created_by_mail : 'karthik@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-	{
-		name            : 'air',
-		type            : 'test',
-		created_by      : 'karthik',
-		created_by_mail : 'karthik@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-	{
-		name            : 'air',
-		type            : 'course',
-		created_by      : 'karthik',
-		created_by_mail : 'karthik@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-	{
-		name            : 'air',
-		type            : 'course',
-		created_by      : 'karthik',
-		created_by_mail : 'karthik@cogoport.com',
-		created_at      : '21-08-2023',
-		course_data     : ['air', 'custom', 'js'],
-	},
-];
 
 function ApprovalsModal({ showApprovalsModal = false, setShowApprovalsModal = () => {} }) {
 	const router = useRouter();
-	const approvalColumns = getColumns({ router });
+
+	const { data, loading, getListApprovalRequests } = useListApprovals();
+	const { loading:btnLoading, updateApprovalRequest } = useUpdateApprovalRequest({ getListApprovalRequests });
+
+	const handleRedirect = (id, type) => {
+		if (type === 'Test') {
+			router.push(`/learning/test-module/create-test?mode=edit&id=${id}`);
+		} else if (type === 'Course') {
+			router.push(`/learning/course/create?mode=edit&id=${id}`);
+		}
+	};
+
+	const approvalColumns = getColumns({ handleRedirect, updateApprovalRequest, btnLoading });
+
+	const { list } = data || {};
+
 	return (
 		<div>
 			<Modal
@@ -84,10 +34,15 @@ function ApprovalsModal({ showApprovalsModal = false, setShowApprovalsModal = ()
 				onClose={() => setShowApprovalsModal(false)}
 				className={styles.modal_container}
 			>
-				<Modal.Header title="Approve the Tests and Courses" />
+				<Modal.Header title="Approve Tests and Courses" />
 				<Modal.Body>
 					<div>
-						<StyledTable columns={approvalColumns} data={APPROVAL_TABLE_DATA} />
+						<StyledTable
+							columns={approvalColumns}
+							data={list}
+							loading={loading}
+							emptyText="No Approvals Found"
+						/>
 					</div>
 				</Modal.Body>
 			</Modal>
