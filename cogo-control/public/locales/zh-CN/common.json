@@ -251,5 +251,8 @@
     "notification": "通知",
     "add_account": "添加账号",
     "search_bar": "搜索菜单...",
-    "switching_profile": "切换配置文件"
+    "switching_profile": "切换配置文件",
+    "forecast": "预测",
+    "supply_allocation": "供应分配",
+    "demand_forecast": "需求预测"
 }

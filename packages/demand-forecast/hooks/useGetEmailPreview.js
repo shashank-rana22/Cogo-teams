@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 
 const useGetEmailPreview = () => {
 	const [{ data, loading = false }, trigger] = useRequest({
-		url    : '/get_email_preview',
+		url    : '/get_rolling_forecast_email_preview',
 		method : 'GET',
 	}, { manual: true });
 

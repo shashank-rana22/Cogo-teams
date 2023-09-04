@@ -1,31 +1,11 @@
 import { Button, Input, Tabs, TabPanel } from '@cogoport/components';
 import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
-import React, { useCallback } from 'react';
+import { useTranslation } from 'next-i18next';
+import { useCallback } from 'react';
+
+import { tabs } from '../../configurations/tabs';
 
 import styles from './styles.module.css';
-
-const TABS = [
-	{
-		key   : 'airline',
-		label : 'Airline',
-	},
-	{
-		key   : 'shipping_line',
-		label : 'Shipping Line',
-	},
-	{
-		key   : 'others',
-		label : 'Others',
-	},
-];
-
-interface HeaderProps {
-	setShow?: (p:boolean)=>void,
-	searchValue?: string;
-	setSearchValue?: (p:string)=>void,
-	activeTab?: string;
-	setActiveTab?: (p:string)=>void,
-}
 
 function Header({
 	setShow = () => {},
@@ -33,7 +13,9 @@ function Header({
 	setSearchValue = () => {},
 	activeTab = '',
 	setActiveTab = () => {},
-}:HeaderProps) {
+}) {
+	const { t } = useTranslation(['operators']);
+	const tabOptions = tabs(t);
 	const setSearchFunc = useCallback(
 		(value) => {
 			setSearchValue(value);
@@ -42,14 +24,16 @@ function Header({
 	);
 	return (
 		<header>
-			<div className={styles.heading}>Operators</div>
+			<div className={styles.heading}>
+				{t('operators:header_operators_title')}
+			</div>
 			<div className={styles.container}>
 				<Tabs
 					themeType="tertiary"
 					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
-					{TABS.map((item) => {
+					{tabOptions.map((item) => {
 						const { key = '', label = '' } = item;
 						return (
 							<TabPanel
@@ -76,11 +60,16 @@ function Header({
 						className={styles.input_search}
 						onChange={setSearchFunc}
 						value={searchValue}
-						placeholder="Search"
+						placeholder={t('operators:header_placeholder_search')}
 						type="text"
 						size="sm"
 					/>
-					<Button themeType="accent" onClick={() => setShow(true)}>+ Create</Button>
+					<Button
+						themeType="accent"
+						onClick={() => setShow(true)}
+					>
+						{t('operators:header_create_button')}
+					</Button>
 				</div>
 			</div>
 		</header>

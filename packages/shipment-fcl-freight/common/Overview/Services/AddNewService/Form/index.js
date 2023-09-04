@@ -156,7 +156,7 @@ function Form({
 						asyncKey="organization_users"
 						isClearable
 						valueKey="custom_key"
-						initialCall={false}
+						initialCall
 						placeholder="Select Organization User"
 						params={{
 							filters: {

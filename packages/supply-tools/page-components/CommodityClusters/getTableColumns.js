@@ -6,17 +6,17 @@ import styles from './styles.module.css';
 
 function CommodityFormat({ commodities = {} }) {
 	return (
-		<div>
+		<div className={styles.commodity_container}>
 			{Object.keys(commodities || {}).map((key) => (
-				<div key={key}>
+				<div key={key} className={styles.commodity_container}>
 					<div className={styles.commodity_label}>
 						{startCase(key)}
 						{' '}
 						:
 					</div>
-					<span>
+					<div className={styles.commodity_value}>
 						{commodities[key].map((i) => COMMODITY_NAME_MAPPING?.[i]?.name).join(', ')}
-					</span>
+					</div>
 				</div>
 			))}
 		</div>
