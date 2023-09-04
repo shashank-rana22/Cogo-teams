@@ -5,7 +5,6 @@ import BreakdownDetails from '../../../../commons/BreakdownDetails';
 import { CheckoutContext } from '../../../../context';
 
 import AdditionalContent from './AdditionalContent';
-import styles from './styles.module.css';
 
 function EditMargin({ state = '' }) {
 	const { rate } = useContext(CheckoutContext);
@@ -24,7 +23,7 @@ function EditMargin({ state = '' }) {
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
 	return (
-		<div>
+		<>
 			<BreakdownDetails
 				rateDetails={rateDetails}
 				setRateDetails={setRateDetails}
@@ -34,12 +33,6 @@ function EditMargin({ state = '' }) {
 				source="edit_margin"
 			/>
 
-			{noRatesPresent ? (
-				<div className={styles.error}>
-					** REMOVE SERVICES WITH (NO RATES) TAG TO SEND QUOTATION.
-				</div>
-			) : null}
-
 			<AdditionalContent
 				rateDetails={rateDetails}
 				convenienceDetails={convenienceDetails}
@@ -47,7 +40,7 @@ function EditMargin({ state = '' }) {
 				noRatesPresent={noRatesPresent}
 				state={state}
 			/>
-		</div>
+		</>
 	);
 }
 

@@ -18,12 +18,13 @@ function UnpreferredShippingLines({
 
 	useEffect(() => {
 		const {
-			agreed_for_partial_shipment = false,
 			unpreferred_shipping_line_ids = [],
+			partial_shipment_min_limit = 0,
 		} = shipping_preferences || {};
 
-		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
+		setValue('agreed_for_partial_shipment', partial_shipment_min_limit ? 'yes' : 'no');
 		setValue('unpreferred_shipping_line_ids', unpreferred_shipping_line_ids);
+		setValue('partial_shipment_min_limit', partial_shipment_min_limit);
 	}, [setValue, shipping_preferences]);
 
 	const agreedForPartialShipmentWatch = watch('agreed_for_partial_shipment');

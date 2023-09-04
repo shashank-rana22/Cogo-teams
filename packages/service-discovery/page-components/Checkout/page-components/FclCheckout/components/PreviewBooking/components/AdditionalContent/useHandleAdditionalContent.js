@@ -46,7 +46,6 @@ const useHandleAdditionalContent = ({
 			sailing_range = {},
 			max_price,
 			min_price,
-			agreed_for_partial_shipment = false,
 			...restValues
 		} = getValues();
 
@@ -86,8 +85,8 @@ const useHandleAdditionalContent = ({
 								sailing_end_date            : endDate || undefined,
 								min_price                   : Number(min_price) || undefined,
 								max_price                   : Number(max_price) || undefined,
-								agreed_for_partial_shipment : agreed_for_partial_shipment === 'yes',
 								...restValues,
+								agreed_for_partial_shipment : undefined,
 							},
 						}),
 					),

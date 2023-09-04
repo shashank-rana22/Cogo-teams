@@ -55,9 +55,10 @@ function ShippingPreferences({
 		const {
 			sailing_start_date = '',
 			sailing_end_date = '',
-			agreed_for_partial_shipment = false,
 			...restValues
 		} = shipping_preferences || {};
+
+		const { partial_shipment_min_limit = 0 } = restValues || {};
 
 		Object.entries(restValues).forEach(([key, value]) => {
 			setValue(key, value);
@@ -67,7 +68,7 @@ function ShippingPreferences({
 			setValue('sailing_range', { startDate: new Date(sailing_start_date), endDate: new Date(sailing_end_date) });
 		}
 
-		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
+		setValue('agreed_for_partial_shipment', partial_shipment_min_limit ? 'yes' : 'no');
 	}, [setValue, shipping_preferences]);
 
 	const agreedForPartialShipmentWatch = watch('agreed_for_partial_shipment');
