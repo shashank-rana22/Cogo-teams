@@ -2,7 +2,14 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const MIN_CARGO_WEIGHT = 18;
-const fclControls = ({ data, containerSizes, containerTypes, options, listShippingLineOptions }) => [
+const fclControls = ({
+	data,
+	containerSizes,
+	containerTypes,
+	options,
+	listShippingLineOptions,
+	fclCommodityOptions,
+}) => [
 	{
 		label         : 'Service Provider Details',
 		span          : 12,
@@ -115,6 +122,7 @@ const fclControls = ({ data, containerSizes, containerTypes, options, listShippi
 		value         : data?.commodity || 'general',
 		placeholder   : 'Commodity',
 		className     : 'primary lg',
+		options       : fclCommodityOptions,
 		commodityType : 'freight',
 		rules         : { required: 'This is required' },
 		style         : {

@@ -6,12 +6,13 @@ import { asyncFieldsListOperators, useForm, useGetAsyncOptions } from '@cogoport
 import { merge } from '@cogoport/utils';
 import React from 'react';
 
+import { fclCommodityOptions } from '../../../../helpers/constants';
 import useCreateFclFreightRate from '../../../../hooks/useCreateFclFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 
 import airControls from './AirControls';
-import AirRateModal from './AirRateModal';
+// import AirRateModal from './AirRateModal';
 import fclControls from './FclControls';
 
 function AddRateModal({
@@ -43,8 +44,10 @@ function AddRateModal({
 		),
 	);
 
-	const FCL_CONTROLS = fclControls({ data, containerSizes, containerTypes, options, listShippingLineOptions });
-	const AIR_CONTROLS = airControls();
+	const FCL_CONTROLS = fclControls({
+		data, containerSizes, containerTypes, options, listShippingLineOptions, fclCommodityOptions,
+	});
+	const AIR_CONTROLS = airControls({ data });
 	const finalControls = filter?.service === 'fcl_freight' ? FCL_CONTROLS : AIR_CONTROLS;
 	const {
 		control,
@@ -80,34 +83,26 @@ function AddRateModal({
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please add rate" />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
-				{filter?.service === 'fcl_freight' ? (
-					<>
-						<Layout
-							fields={newCotrols}
-							control={control}
-							errors={errors}
-						/>
-						<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-							<Button onClick={handleSubmit(handleSubmitData)}>
-								Submit
-							</Button>
-						</div>
-					</>
-				) : (
+				<Layout
+					fields={newCotrols}
+					control={control}
+					errors={errors}
+				/>
+				{/* ) : (
 					<AirRateModal
 						data={data}
 						setShowModal={setShowModal}
 						handleSubmitData={handleSubmitData}
 					/>
-				)}
+				)} */}
 			</Modal.Body>
-			{/* <Modal.Footer>
+			<Modal.Footer>
 				<div>
 					<Button onClick={handleSubmit(handleSubmitData)}>
 						Submit
 					</Button>
 				</div>
-			</Modal.Footer> */}
+			</Modal.Footer>
 		</Modal>
 	);
 }
