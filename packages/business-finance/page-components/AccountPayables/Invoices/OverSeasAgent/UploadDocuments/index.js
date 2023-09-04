@@ -13,7 +13,7 @@ function UploadDocuments({ setActive = () => {} }) {
 		multiFileUpload  : null,
 	});
 
-	const { upload, listData, listLoading, deleteTaggedDocuments } = useUploadDocuments(fileUploader);
+	const { upload, listData, listLoading, deleteTaggedDocuments } = useUploadDocuments({ fileUploader });
 
 	const { documents = '' } = listData || {};
 

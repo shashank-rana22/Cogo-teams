@@ -154,3 +154,7 @@
 .merged_doc {
 	margin-top: 10px;
 }
+
+.delete {
+	cursor: pointer;
+}

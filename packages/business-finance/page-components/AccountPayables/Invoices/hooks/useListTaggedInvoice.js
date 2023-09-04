@@ -133,7 +133,7 @@ const useListTaggedInvoices = () => {
 		}
 
 		try {
-			await delete_tagged_documents.trigger({
+			await delete_tagged_documents[API_ARRAY_VARIABLE_ONE]({
 				data: {
 					payrunId: payrun,
 					key,

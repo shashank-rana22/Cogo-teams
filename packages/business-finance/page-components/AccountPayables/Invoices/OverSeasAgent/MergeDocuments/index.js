@@ -99,6 +99,7 @@ function GetData({
 								<IcMDelete
 									width={24}
 									height={24}
+									className={styles.delete}
 									onClick={() => {
 										deleteTaggedDocuments(item);
 										setSelectBankShow(false);
