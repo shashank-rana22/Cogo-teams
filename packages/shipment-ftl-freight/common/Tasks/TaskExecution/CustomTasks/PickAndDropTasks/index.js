@@ -18,6 +18,7 @@ function FTLPickAndDropTasks(props) {
 		onCancel = () => {},
 		refetch = () => {},
 		services = [],
+		refetchServices = () => {},
 	} = props || {};
 
 	const taskRefData = useRef(null);
@@ -32,6 +33,7 @@ function FTLPickAndDropTasks(props) {
 		task,
 		doc_type,
 		callback: () => {
+			refetchServices();
 			refetch();
 			onCancel();
 		},
