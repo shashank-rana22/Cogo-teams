@@ -60,6 +60,7 @@
 }
 
 .item_label {
+	display: flex;
 	max-height: 16px;
 	margin-bottom: 6px;
 	font-size: 12px;

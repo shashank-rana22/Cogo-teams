@@ -30,6 +30,7 @@
 }
 
 .label {
+	display: flex;
 	margin-bottom: 6px;
 	font-size: var(--font-size-md);
 	font-weight: 600;
