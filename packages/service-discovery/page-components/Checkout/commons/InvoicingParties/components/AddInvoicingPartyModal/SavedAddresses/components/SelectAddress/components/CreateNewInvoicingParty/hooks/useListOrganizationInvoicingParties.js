@@ -27,7 +27,9 @@ const useListOrganizationInvoicingParties = ({ organizationId, bookingType }) =>
 		try {
 			trigger({ payload: params });
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	};
 
