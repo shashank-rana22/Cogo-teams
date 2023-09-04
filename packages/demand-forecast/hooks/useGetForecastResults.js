@@ -1,11 +1,16 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 const DEFAULT_PAGE = 1;
 
 const useGetForecastFclFreightClusters = ({ filters = {} }) => {
+	const { profile } = useSelector((state) => state);
+
+	const { authParams = '', selected_agent_id = '' } = profile;
+
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const [{ data, loading = false }, trigger] = useRequest({
@@ -34,7 +39,7 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 
 	useEffect(() => {
 		fetch();
-	}, [fetch, page]);
+	}, [fetch, page, authParams, selected_agent_id]);
 
 	const { list = [], ...pageData } = data || {};
 
