@@ -43,7 +43,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 
 				{task?.assigned_stakeholder === 'system' && startCase(task?.assigned_stakeholder)}
 
-				{task?.status === 'pending' && !isEmpty(otherStakeholders) && (
+				{task?.status === 'pending' && task?.label === 'Confirm Booking' && !isEmpty(otherStakeholders) && (
 					<div className={styles.other_stakeholders}>
 						<Tooltip
 							interactive
