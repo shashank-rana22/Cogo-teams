@@ -63,6 +63,7 @@ import {
 	IcMFsoppoc,
 	IcMBookingDesk,
 	IcASecureCloudStorage,
+	IcAWarehouse,
 	IcMUpwardGraph,
 } from '@cogoport/icons-react';
 
@@ -2546,6 +2547,15 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			possible_apis : apis.centralised_customer_service,
 			icon          : IcMDashboard,
+		},
+		warehouse_app: {
+			key           : 'warehouse_app',
+			title         : 'Warehouse App',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			possible_apis : apis.warehouse_app,
+			icon          : IcAWarehouse,
 		},
 		resources: {
 			key           : 'resources',
