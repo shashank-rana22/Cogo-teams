@@ -368,6 +368,19 @@ const apis = [
 		api          : 'update_checkout_promotion',
 		access_type  : 'private',
 		service_name : 'checkout',
+		feature      : 'promotion',
+	},
+	{
+		api          : 'send_checkout_for_approval',
+		access_type  : 'private',
+		service_name : 'checkout',
+		feature      : 'checkout',
+	},
+	{
+		api          : 'bulk_update_controlled_checkout_service',
+		access_type  : 'private',
+		service_name : 'checkout',
+		feature      : 'checkout',
 	},
 ];
 
