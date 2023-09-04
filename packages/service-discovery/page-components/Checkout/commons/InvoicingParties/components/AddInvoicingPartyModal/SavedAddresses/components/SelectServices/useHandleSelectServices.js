@@ -104,7 +104,7 @@ const useHandleSelectServices = ({
 			label     : 'Back',
 			themeType : 'link',
 			key       : 'back',
-			diasbled  : createLoading || loading,
+			disabled  : createLoading || loading,
 			onClick   : () => {
 				setSelectedAddress({});
 				setCurrentView('select_address');
@@ -115,7 +115,7 @@ const useHandleSelectServices = ({
 			style     : { marginLeft: '16px' },
 			themeType : 'secondary',
 			key       : 'cancel',
-			diasbled  : createLoading || loading,
+			disabled  : createLoading || loading,
 			onClick   : () => setShowAddInvoicingPartyModal(false),
 		},
 		{

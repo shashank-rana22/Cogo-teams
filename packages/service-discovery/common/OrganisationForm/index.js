@@ -99,9 +99,9 @@ function OrganisationForm({
 	useEffect(() => {
 		setOrganization((prev) => ({
 			...prev,
-			user_id: organization?.user_id || userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+			user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 		}));
-	}, [organization?.user_id, setOrganization, userOptions]);
+	}, [setOrganization, userOptions]);
 
 	return (
 		<div className={styles.container} style={rest.style}>

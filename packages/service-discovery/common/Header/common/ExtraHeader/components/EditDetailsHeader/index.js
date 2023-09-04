@@ -48,6 +48,11 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 	const onClickApply = async () => {
 		const { origin:originValues = {}, destination:destinationValues = {} } = locationValues;
 
+		const {
+			organization_id: orgId = '',
+			user_id: userId = '',
+		} = organization || {};
+
 		const { id: origin_id = '' } = originValues;
 		const { id: destination_id = '' } = destinationValues;
 
@@ -57,6 +62,11 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 
 		if (origin_id === destination_id) {
 			Toast.error('Origin and Destination cannot be same');
+			return;
+		}
+
+		if (!orgId || !userId) {
+			Toast.error('Please provide organization details');
 			return;
 		}
 

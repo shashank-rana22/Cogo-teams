@@ -54,8 +54,7 @@
 			"label": "",
 			"btnLabel":"Show Rates",
 			"func": "renderButton",
-			"inDifferentWindow": true,
-			"showPrice": true
+			"inDifferentWindow": true
 		}
 	],
 	"filterProps": {

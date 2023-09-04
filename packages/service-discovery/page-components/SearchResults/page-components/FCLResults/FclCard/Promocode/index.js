@@ -48,9 +48,9 @@ function PromoCode({ promotion = {} }) {
 			>
 				<div className={styles.text}>
 					Apply
-					{' '}
+					{' "'}
 					{promotion.codes?.[GLOBAL_CONSTANTS.zeroth_index]?.promocode}
-					{' '}
+					{'" '}
 					to
 					get
 					{' '}
