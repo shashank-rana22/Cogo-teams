@@ -112,7 +112,7 @@
     "roles_and_permission_department_description":"Department allow this role too see data via different criterias in a particular scope. For e.g If you have selected sales then role will be able to see data in which they are tagged as sales owner or team members data in which their team members are tagged as sales owner",
     "roles_and_permission_crm_dashboard_button_edit": "Edit",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "Assign Now",
-    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Un-Assgn Now",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Un-Assign Now",
     "roles_and_permission_crm_dashboard_btn_text_modal_next": "NEXT",
     "roles_and_permission_crm_dashboard_btn_text_cancel": "Cancel",
     "roles_and_permission_crm_dashboard_btm_text_back": "BACK",

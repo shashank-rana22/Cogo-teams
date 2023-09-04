@@ -2,9 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetKamWiseOutstandingsStats = ({
-	globalFilters,
-}) => {
+const useGetKamWiseOutstandingsStats = () => {
 	const {
 		profile: { authorizationparameters, selected_agent_id },
 	} = useSelector((state) => state);
@@ -22,7 +20,6 @@ const useGetKamWiseOutstandingsStats = ({
 	}, [
 		authorizationparameters,
 		selected_agent_id,
-		globalFilters,
 		trigger,
 	]);
 

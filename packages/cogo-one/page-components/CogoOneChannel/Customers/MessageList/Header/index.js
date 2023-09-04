@@ -3,24 +3,31 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useGetControls from '../../../../../configurations/filter-controls';
 import FilterComponents from '../../FilterComponents';
 
 import styles from './styles.module.css';
 import SubTabs from './subTabs';
 
 function Header({
-	searchValue,
-	setSearchValue,
-	activeSubTab,
-	setActiveSubTab,
-	viewType,
-	tagOptions,
-	setAppliedFilters,
-	setIsBotSession,
-	appliedFilters,
-	isBotSession,
+	searchValue = '',
+	setSearchValue = () => {},
+	activeSubTab = '',
+	setActiveSubTab = () => {},
+	viewType = '',
+	tagOptions = [],
+	setAppliedFilters = () => {},
+	setIsBotSession = () => {},
+	appliedFilters = {},
+	isBotSession = false,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
+
+	const filterControls = useGetControls({
+		tagOptions,
+		viewType,
+		activeSubTab,
+	});
 
 	return (
 		<>
@@ -58,6 +65,7 @@ function Header({
 									tagOptions={tagOptions}
 									viewType={viewType}
 									activeSubTab={activeSubTab}
+									filterControls={filterControls}
 								/>
 							)
 						)}
