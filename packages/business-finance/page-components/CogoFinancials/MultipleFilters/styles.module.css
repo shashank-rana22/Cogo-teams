@@ -2,7 +2,7 @@
 	position: relative;
 	height: 38px;
 	padding: 6px 8px 2px;
-	margin: 0 12px;
+	margin: 0 20px;
 	cursor: pointer;
 	background-color: var(--color-primary-error-red-2);
 	border-radius: 8px;
