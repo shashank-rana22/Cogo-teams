@@ -1,18 +1,15 @@
 import { Button } from '@cogoport/components';
 import { IcMEdit, IcMAirport, IcMShip, IcMTransport } from '@cogoport/icons-react';
-import { React, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 
 import CardList from '../common/CardList';
-import { OPERATORS } from '../configurations/operators';
+import { operators } from '../configurations/operators';
 import useGetListData from '../hooks/useGetListData';
 
 import Header from './Header';
 import OperatorsModal from './OperatorsModal';
 import styles from './styles.module.css';
-
-interface NestedObj {
-	[key: string]: string;
-}
 
 const DEFAULT_LOGO_MAPPING = {
 	airline       : <IcMAirport width={40} height={40} fill="#ee3425" />,
@@ -20,17 +17,17 @@ const DEFAULT_LOGO_MAPPING = {
 	others        : <IcMTransport width={40} height={40} fill="#ee3425" />,
 };
 
-const functions = (activeTab, setShow, setEdit, setItem) => ({
-	handleLogo: (singleItem:NestedObj) => (
+const functions = (activeTab, setShow, setEdit, setItem, t) => ({
+	handleLogo: (singleItem) => (
 		<div className={styles.title_black}>
 			{singleItem?.logo_url ? (
-				<img className={styles.image} alt="logo" src={singleItem.logo_url} />
+				<img className={styles.image} alt={t('operators:logo_alt')} src={singleItem.logo_url} />
 			) : (
 				DEFAULT_LOGO_MAPPING[activeTab]
 			)}
 		</div>
 	),
-	handleStatus: (singleItem:NestedObj) => (
+	handleStatus: (singleItem) => (
 		<div className={styles.title_black}>
 			{singleItem?.status === 'active' ? (
 				<div className={styles.event} style={{ backgroundColor: '#b4f3be' }}>{singleItem?.status}</div>
@@ -41,7 +38,7 @@ const functions = (activeTab, setShow, setEdit, setItem) => ({
 			)}
 		</div>
 	),
-	handleEdit: (singleItem:NestedObj) => (
+	handleEdit: (singleItem) => (
 		<Button
 			size="lg"
 			themeType="tertiary"
@@ -57,6 +54,8 @@ const functions = (activeTab, setShow, setEdit, setItem) => ({
 });
 
 function Operators() {
+	const { t } = useTranslation(['operators']);
+
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [item, setItem] = useState({});
@@ -74,9 +73,14 @@ function Operators() {
 		getLocationData,
 	} = useGetListData(activeTab);
 
-	const airlineFields = [...OPERATORS.common_first, ...OPERATORS.airline, ...OPERATORS.common_second];
-	const shippingLineFields = [...OPERATORS.common_first, ...OPERATORS.common_second];
-	const otherFields = [...OPERATORS.common_first, ...OPERATORS.others, ...OPERATORS.common_second];
+	const operator_options = operators(t);
+
+	const airlineFields = [
+		...operator_options.common_first, ...operator_options.airline, ...operator_options.common_second];
+	const shippingLineFields = [
+		...operator_options.common_first, ...operator_options.common_second];
+	const otherFields = [
+		...operator_options.common_first, ...operator_options.others, ...operator_options.common_second];
 
 	const FIELDS_MAPPING = {
 		airline       : airlineFields,
@@ -116,7 +120,7 @@ function Operators() {
 				setPage={setPage}
 				finalList={finalList}
 				setFinalList={setFinalList}
-				functions={functions(activeTab, setShow, setEdit, setItem)}
+				functions={functions(activeTab, setShow, setEdit, setItem, t)}
 			/>
 		</div>
 	);

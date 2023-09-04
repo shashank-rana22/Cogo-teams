@@ -1,19 +1,17 @@
-import { Pagination, Table } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { Pagination } from '@cogoport/components';
+import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
-import ccCallListTable from '../../../configs/CC_Call_List_Table';
-import {
-	CC_COMMUNICATION_DATA,
-} from '../../../constants/kam-wise-data';
 import useGetCallPriority from '../../../hooks/useGetCallPriority';
+import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
 import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstandingsStats';
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
 
+import CcCallList from './CcCallList';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
@@ -42,6 +40,11 @@ function OverAllOutstanding({ entityCode = '' }) {
 		refetch,
 	} = useGetOrgOutstanding({ entityCode });
 
+	const [dateFilter, setDateFilter] = useState({
+		startDate : startOfMonth(new Date()),
+		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+	});
+	const [range, setRange] = useState('this_month');
 	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
@@ -57,6 +60,9 @@ function OverAllOutstanding({ entityCode = '' }) {
 	});
 	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({
 		globalFilters: formFilters,
+	});
+	const { ccCommStats = [], ccCommLoading = false } = useGetCcCommunicationStats({
+		dateFilter,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -167,10 +173,14 @@ function OverAllOutstanding({ entityCode = '' }) {
 								))}
 							</div>
 							<div className={styles.cc_call_table}>
-								<div className={styles.cc_list}>CC Call Stats</div>
-								<div style={{ display: 'flex' }}>
-									<Table columns={ccCallListTable()} data={CC_COMMUNICATION_DATA || []} />
-								</div>
+								<CcCallList
+									data={ccCommStats || []}
+									loading={ccCommLoading}
+									dateFilter={dateFilter}
+									setDateFilter={setDateFilter}
+									range={range}
+									setRange={setRange}
+								/>
 							</div>
 						</div>
 					</div>
