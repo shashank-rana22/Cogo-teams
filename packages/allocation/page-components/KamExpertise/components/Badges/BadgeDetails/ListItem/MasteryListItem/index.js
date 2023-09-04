@@ -1,10 +1,15 @@
 import { Pill, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+
 function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMasteryItemData = () => {} }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		badge_name = '_', description = '_',
 		audits = [], created_by = {},
@@ -17,19 +22,19 @@ function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMast
 		setToggleScreen('create_mastery');
 	};
 
-	const updated_at = audits?.[0]?.created_at || null;
+	const updated_at = audits?.[GLOBAL_CONSTANTS.zeroth_index]?.created_at || null;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				#
 				{' '}
-				{index + 1}
+				{index + FIRST_INDEX}
 				<Button
 					themeType="secondary"
 					onClick={handleEdit}
 				>
-					Edit
+					{t('allocation:edit_button')}
 				</Button>
 			</div>
 
@@ -37,13 +42,17 @@ function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMast
 				<div className={styles.details}>
 					<div>
 						<div style={{ paddingBottom: '12px' }}>
-							Event Name :
+							{t('allocation:event_name_label')}
+							{' '}
+							:
 							{' '}
 							<b>{badge_name}</b>
 						</div>
 
 						<div>
-							Description :
+							{t('allocation:description_label')}
+							{' '}
+							:
 							{' '}
 							{description}
 						</div>
@@ -51,7 +60,9 @@ function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMast
 
 					<div className={styles.modified}>
 						<div>
-							Last Modified :
+							{t('allocation:last_modified_label')}
+							{' '}
+							:
 							{' '}
 							{updated_at ? formatDate({
 								date       : updated_at,
@@ -61,7 +72,8 @@ function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMast
 						</div>
 
 						<div>
-							Last Modified By:
+							{t('allocation:last_modified_by_label')}
+							:
 							{' '}
 							{created_by?.name}
 						</div>
@@ -70,9 +82,9 @@ function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMast
 
 				<div className={styles.badge_icon_container}>
 					<div className={styles.rules}>
-						<div className={styles.rule_heading}>Rules</div>
+						<div className={styles.rule_heading}>{t('allocation:rules_label')}</div>
 
-						<span>Mastery in</span>
+						<span>{t('allocation:mastery_in_label')}</span>
 
 						{(mastery_badges_detail || []).map((item) => (
 							<div key={item?.id} className={styles.pill}>

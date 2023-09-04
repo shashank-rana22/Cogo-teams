@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useDeactivateRequest = ({ feedback_request_id = '', refetch = () => {} }) => {
+const useDeactivateRequest = ({ feedback_request_id = '', refetch = () => {}, t = () => {} }) => {
 	const [isOpenModal, setisOpenModal] = useState(false);
 
 	const onCloseModal = () => {
@@ -27,7 +27,7 @@ const useDeactivateRequest = ({ feedback_request_id = '', refetch = () => {} }) 
 				data: payload,
 			});
 
-			Toast.success('Request has been deactivated successfully.');
+			Toast.success(t('allocation:request_deactivated_successfully'));
 
 			refetch();
 

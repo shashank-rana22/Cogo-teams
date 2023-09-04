@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../common/EmptyState';
 import useGetKamExpertiseCurrentConfig from '../../hooks/useGetKamExpertiseCurrentConfig';
@@ -12,6 +13,8 @@ import styles from './styles.module.css';
 
 function ViewAllConfigurations() {
 	const router = useRouter();
+
+	const { t } = useTranslation(['allocation']);
 
 	const {
 		configCardLoading,
@@ -33,12 +36,12 @@ function ViewAllConfigurations() {
 					<IcMArrowBack width={16} height={16} />
 				</div>
 				<div className={styles.back_text}>
-					Back to Configurations
+					{t('allocation:back_to_configurations')}
 				</div>
 			</div>
 			<div className={styles.button_container}>
 				<Button size="md" themeType="secondary">
-					View Details
+					{t('allocation:view_details')}
 				</Button>
 			</div>
 			{(isEmpty(list))
@@ -48,7 +51,7 @@ function ViewAllConfigurations() {
 							height="250px"
 							width="400px"
 							flexDirection="column"
-							emptyText="Versions not Found"
+							emptyText={t('allocation:versions_not_found_empty_state')}
 							textSize="20px"
 						/>
 					</div>

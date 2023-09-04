@@ -1,11 +1,14 @@
 import { Pill } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import LoadingState from '../../../../../../../common/LoadingState';
 
 import styles from './styles.module.css';
 
 function AgentsList(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { loading, list } = props;
 
 	if (loading) {
@@ -32,7 +35,7 @@ function AgentsList(props) {
 
 						{!isEmpty(partner) && (
 							<Pill>
-								Entity:
+								{t('allocation:entity_label')}
 								{' '}
 								{partner.business_name}
 							</Pill>

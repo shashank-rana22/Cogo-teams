@@ -2,6 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../../common/Form/getFieldController';
@@ -14,6 +15,8 @@ import styles from './styles.module.css';
 const FIRST_INDEX_NORMALIZATION = 1;
 
 function Service(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		control,
 		index,
@@ -41,6 +44,7 @@ function Service(props) {
 		watchDestinationLocation,
 		lifecycleStage,
 		disabled,
+		t,
 	});
 
 	useEffect(() => {
@@ -85,7 +89,9 @@ function Service(props) {
 						</Pill>
 					)}
 
-					<h4 className={styles.heading}>{`1.${index + FIRST_INDEX_NORMALIZATION} Service Requirements`}</h4>
+					<h4 className={styles.heading}>
+						{`1.${index + FIRST_INDEX_NORMALIZATION} ${t('allocation:service_requirements_label')}`}
+					</h4>
 				</div>
 
 				{index >= FIRST_INDEX_NORMALIZATION ? (
@@ -95,7 +101,7 @@ function Service(props) {
 						onClick={() => remove(index, FIRST_INDEX_NORMALIZATION)}
 					>
 						<IcMCrossInCircle style={{ marginRight: '4px' }} />
-						Remove
+						{t('allocation:remove_button')}
 					</Button>
 				) : null}
 			</div>

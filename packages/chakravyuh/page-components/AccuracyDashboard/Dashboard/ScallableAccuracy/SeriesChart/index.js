@@ -6,6 +6,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
+import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
+
 const STROKE_WIDTH = 2;
 
 function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
@@ -25,12 +27,10 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 			}),
 		);
 
-		chart.get('colors').set('colors', [
-			am5.color('#F9AE64'),
-			am5.color('#63BEC8'),
-			am5.color('#9BA0CB'),
-			am5.color('#f37166'),
-		]);
+		chart.get('colors').set(
+			'colors',
+			seriesIds.map((id) => am5.color(COLOR_MAPPINGS?.[id]?.[GLOBAL_CONSTANTS.zeroth_index])),
+		);
 
 		const yAxis = chart.yAxes.push(
 			am5xy.ValueAxis.new(root, {

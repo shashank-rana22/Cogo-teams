@@ -54,11 +54,25 @@ function PrintDocument({ shipment_data = {}, primary_service = {}, show = {}, se
 			<header className={styles.header_action}>
 				<p>Create House BL</p>
 				<div>
+					{primary_service?.bl_type !== 'seaway' && (
+						<Button
+							themeType="primary"
+							onClick={() => handlePrintOnButton('Original')}
+						>
+							Print Original
+						</Button>
+					)}
 					<Button
 						themeType="primary"
-						onClick={() => handlePrintOnButton('Draft')}
+						onClick={() => handlePrintOnButton('Non-Negotiable')}
 					>
-						Print draft
+						Print Non-Negotiable
+					</Button>
+					<Button
+						themeType="primary"
+						onClick={() => handlePrintOnButton('draft')}
+					>
+						Print Draft
 					</Button>
 					<Button
 						themeType="secondary"

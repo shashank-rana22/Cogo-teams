@@ -1,6 +1,6 @@
-const biasColumns = [
+const getBiasColumns = ({ t = () => {} }) => [
 	{
-		Header   : 'AGE',
+		Header   : t('allocation:age'),
 		accessor : ({ lower_limit = '', upper_limit = '' }) => (
 			<section>
 				{lower_limit}
@@ -10,7 +10,7 @@ const biasColumns = [
 		),
 	},
 	{
-		Header   : 'MULTIPLIER',
+		Header   : t('allocation:multiplier'),
 		accessor : ({ score = 0 }) => (
 			<section>
 				{score}
@@ -19,4 +19,4 @@ const biasColumns = [
 	},
 ];
 
-export default biasColumns;
+export default getBiasColumns;
