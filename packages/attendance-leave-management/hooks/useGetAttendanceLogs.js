@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const useGetAttendanceLogs = (cycle_id) => {
@@ -21,7 +22,7 @@ const useGetAttendanceLogs = (cycle_id) => {
 	);
 
 	useEffect(() => {
-		if (cycle_id) {
+		if (!isEmpty(cycle_id)) {
 			try {
 				getAttendanceLogs();
 			} catch (error) {
@@ -30,7 +31,7 @@ const useGetAttendanceLogs = (cycle_id) => {
 		}
 	}, [cycle_id, getAttendanceLogs]);
 
-	return { loading, data };
+	return { loading, data, refetchLogs: getAttendanceLogs };
 };
 
 export default useGetAttendanceLogs;

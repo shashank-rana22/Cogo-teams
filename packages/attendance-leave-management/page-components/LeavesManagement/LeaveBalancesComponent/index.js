@@ -8,7 +8,10 @@ import styles from './styles.module.css';
 
 const MAX = 100;
 
-function LeaveBalancesComponent({ data, refetch, loading }) {
+function LeaveBalancesComponent({
+	data = {}, refetch = () => {},
+	loading = false, refetchLeaves = () => {},
+}) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 
 	const {
@@ -118,6 +121,7 @@ function LeaveBalancesComponent({ data, refetch, loading }) {
 					onClose={() => setOpenLeaveModal(false)}
 					data={data}
 					refetch={refetch}
+					refetchList={refetchLeaves}
 				/>
 			) }
 		</div>

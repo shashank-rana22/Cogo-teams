@@ -9,7 +9,10 @@ import useGetUpdateAttendance from '../../../hooks/useGetUpdateAttendance';
 import CompletedTime from './CompletedTime';
 import styles from './styles.module.css';
 
-function ChecInCheckOut({ data, loading, coords, refetch }) {
+function ChecInCheckOut({
+	data = {}, loading = false, coords = {},
+	refetch = () => {}, refetchLogs = () => {},
+}) {
 	const formatToday = formatDate({
 		date       : new Date(),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
@@ -30,7 +33,7 @@ function ChecInCheckOut({ data, loading, coords, refetch }) {
 
 	const { check_in, check_out, enable_check_out } = data || {};
 
-	const { loading : updateLoading, updateAttendance } = useGetUpdateAttendance(check_in, refetch);
+	const { loading : updateLoading, updateAttendance } = useGetUpdateAttendance({ check_in, refetch, refetchLogs });
 
 	const handleCheckOut = () => {
 		const { latitude, longitude } = coords || {};

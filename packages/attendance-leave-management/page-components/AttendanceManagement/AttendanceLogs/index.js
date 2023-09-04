@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useGetAttendanceLogs from '../../../hooks/useGetAttendanceLogs';
 import Summary from '../Summary';
 
 import DesktopView from './DesktopView';
@@ -11,14 +10,13 @@ import MobileView from './MobileView';
 import styles from './styles.module.css';
 import Timesheet from './Timesheet';
 
-function AttendanceLogs({ formattedData, selectMonth = {} }) {
-	const { month, value } = selectMonth;
-	const [selectedMonth, setSelectedMonth] = useState();
+function AttendanceLogs({
+	formattedData = [], selectedMonth = {}, setSelectedMonth = () => {},
+	data = {}, loading = false,
+}) {
+	const { month, value } = selectedMonth;
 	const [openTimesheet, setOpenTimesheet] = useState(false);
 	const [selectedDate, setSelectedDate] = useState('');
-
-	const monthlyCycle = selectedMonth?.value || value;
-	const { data, loading } = useGetAttendanceLogs(monthlyCycle);
 
 	const handleMonthChange = (item, val) => {
 		setSelectedMonth({
@@ -67,7 +65,7 @@ function AttendanceLogs({ formattedData, selectMonth = {} }) {
 					<MobileView data={data} loading={loading} handleOpenModal={handleOpenModal} />
 				</div>
 			</div>
-			<Summary cycle={monthlyCycle} />
+			<Summary cycle={value} />
 			{openTimesheet && (
 				<Timesheet
 					show={openTimesheet}

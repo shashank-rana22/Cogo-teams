@@ -6,7 +6,7 @@ import useGetEmployeeLeaveBalances from '../../../../hooks/useGetEmployeeLeaveBa
 
 import styles from './styles.module.css';
 
-function LeaveStats({ value = {} }) {
+function LeaveStats({ value = '' }) {
 	const { loading, data, refetch } = useGetEmployeeLeaveBalances({ value });
 
 	const {
@@ -16,6 +16,7 @@ function LeaveStats({ value = {} }) {
 	} = data || {};
 
 	const [applyLeave, setApplyLeave] = useState(false);
+
 	function LoadingPlaceholder() {
 		return (
 			<Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />

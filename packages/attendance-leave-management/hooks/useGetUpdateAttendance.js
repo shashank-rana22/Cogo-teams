@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useGetUpdateAttendance = (check_in, refetch) => {
+const useGetUpdateAttendance = ({ check_in, refetch, refetchLogs }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
 		url    : '/update_attendance',
@@ -16,6 +16,7 @@ const useGetUpdateAttendance = (check_in, refetch) => {
 				},
 			});
 			refetch();
+			refetchLogs();
 			Toast.success(`${check_in ? 'Checkout' : 'Checkin'} Sucessfully`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');

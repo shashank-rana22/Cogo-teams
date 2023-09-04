@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 
 import ApplyLeave from '../../../common/ApplyLeave';
-import useGetLeaveRequestListing from '../../../hooks/useGetLeaveRequestListing';
 
 import DeleteLeave from './DeleteLeave';
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
 import styles from './styles.module.css';
 
-function LeaveRequestListing({ leaveData, refetchLeaves, leaveRequestsRef = null }) {
+function LeaveRequestListing({
+	leaveData = {}, data = {}, filters = {},
+	setFilters = () => {}, refetchLeaves = () => {}, loading = false, leaveRequestsRef = null,
+}) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 	const [selectedData, setSelectedData] = useState({});
-	const { data, filters, setFilters, loading } = useGetLeaveRequestListing();
 
 	const onClose = () => {
 		setOpenLeaveModal(false);

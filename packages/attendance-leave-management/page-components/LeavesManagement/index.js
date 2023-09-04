@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import useGetCycles from '../../hooks/useGetCycles';
 import useGetEmployeeLeaveBalances from '../../hooks/useGetEmployeeLeaveBalances';
+import useGetLeaveRequestListing from '../../hooks/useGetLeaveRequestListing';
 
 import Header from './Header';
 import LeaveBalancesComponent from './LeaveBalancesComponent';
@@ -16,6 +17,10 @@ function LeavesManagement() {
 	const { loading, formattedData } = useGetCycles();
 
 	const { data, refetch, loading : balanceLoading } = useGetEmployeeLeaveBalances({ value: selectedMonth?.value });
+	const {
+		data : leavesRequested, filters, setFilters,
+		loading : leaveRequestLoading, refetchLeaves,
+	} = useGetLeaveRequestListing();
 
 	useEffect(() => {
 		if (!isEmpty(formattedData)) {
@@ -44,14 +49,27 @@ function LeavesManagement() {
 			/>
 			<div className={styles.body_container}>
 				<div className={styles.leave_balance_style}>
-					<LeaveBalancesComponent data={data} refetch={refetch} loading={balanceLoading} />
+					<LeaveBalancesComponent
+						data={data}
+						refetch={refetch}
+						loading={balanceLoading}
+						refetchLeaves={refetchLeaves}
+					/>
 				</div>
 				<div className={styles.leave_stats_style}>
 					<LeaveStatsApplicationsComponent selectedMonth={selectedMonth} executeScroll={executeScroll} />
 				</div>
 			</div>
 			<div>
-				<LeaveRequestListing leaveData={data} refetchLeaves={refetch} leaveRequestsRef={leaveRequestsRef} />
+				<LeaveRequestListing
+					data={leavesRequested}
+					loading={leaveRequestLoading}
+					leaveData={data}
+					refetchLeaves={refetch}
+					leaveRequestsRef={leaveRequestsRef}
+					filters={filters}
+					setFilters={setFilters}
+				/>
 			</div>
 		</div>
 	);

@@ -34,7 +34,7 @@ const useGetLeaveRequestListing = () => {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
 	}, [getLeaveRequestListing]);
-	return { loading, data, filters, setFilters };
+	return { loading, data, filters, setFilters, refetchLeaves: getLeaveRequestListing };
 };
 
 export default useGetLeaveRequestListing;
