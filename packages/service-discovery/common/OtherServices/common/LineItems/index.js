@@ -3,18 +3,20 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import styles from './styles.module.css';
+
 const DEFAULT_VALUE = 0;
 
 const getPriceBreakUpColumn = [
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Service name</div>,
+		Header   : <div className={styles.label}>Service name</div>,
 		id       : 'service_name',
 		accessor : ({ name = '' }) => (
 			<strong>{startCase(name)}</strong>
 		),
 	},
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Currency</div>,
+		Header   : <div className={styles.label}>Currency</div>,
 		id       : 'currency',
 		accessor : ({ currency = '' }) => (
 			<span>
@@ -23,7 +25,7 @@ const getPriceBreakUpColumn = [
 		),
 	},
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Original Price</div>,
+		Header   : <div className={styles.label}>Original Price</div>,
 		id       : 'price',
 		accessor : ({ price = '', currency }) => (
 			<strong>
@@ -40,7 +42,7 @@ const getPriceBreakUpColumn = [
 		),
 	},
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Unit</div>,
+		Header   : <div className={styles.label}>Unit</div>,
 		id       : 'unit',
 		accessor : ({ unit = '' }) => (
 			<span>
@@ -49,7 +51,7 @@ const getPriceBreakUpColumn = [
 		),
 	},
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>QTY.</div>,
+		Header   : <div className={styles.label}>QTY.</div>,
 		id       : 'quantity',
 		accessor : ({ quantity = '' }) => (
 			<span>
@@ -58,7 +60,7 @@ const getPriceBreakUpColumn = [
 		),
 	},
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 600 }}>Final Price</div>,
+		Header   : <div className={styles.bold_label}>Final Price</div>,
 		id       : 'total_price_discounted',
 		accessor : ({ total_price_discounted = '', currency = '' }) => (
 			<strong>

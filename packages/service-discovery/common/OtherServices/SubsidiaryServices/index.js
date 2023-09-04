@@ -36,7 +36,6 @@ function SubsidiaryServices({
 		}
 
 		const formattedName = startCase(item?.name);
-		// const formattedLabel = formattedName.includes(tradeType) ? formattedName : `${tradeType} ${formattedName}`;
 
 		const service = {
 			label   : `${tradeType} ${formattedName}`,

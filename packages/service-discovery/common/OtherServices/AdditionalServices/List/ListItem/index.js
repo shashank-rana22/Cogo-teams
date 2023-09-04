@@ -238,7 +238,7 @@ function ListItem({
 						show={showDeleteModal}
 						setShow={setShowDeleteModal}
 						service_name={serviceItem.title}
-						onClick={handleRemoveService}
+						onClickDelete={handleRemoveService}
 						loading={deleteLoading}
 					/>
 				</div>
