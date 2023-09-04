@@ -152,18 +152,27 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 							items={items.filter((item) => !!item.children)}
 						/>
 					</div>
-					<div className={styles.vertical_line} />
-					<div className={styles.button_grp}>
-						<Button themeType="secondary" onClick={() => { setShowCloseModal(true); }}>
-							Close
-						</Button>
-						<Button
-							style={{ marginLeft: '16px' }}
-							onClick={() => { setShowAddRateModal((prev) => !prev); }}
-						>
-							Add Rate
-						</Button>
-					</div>
+					{filter?.status !== 'completed'
+						&& (
+							<>
+								<div className={styles.vertical_line} />
+								<div className={styles.button_grp}>
+									{filter?.status !== 'aborted'
+									&& (
+										<Button themeType="secondary" onClick={() => { setShowCloseModal(true); }}>
+											Close
+										</Button>
+									)}
+									<Button
+										style={{ marginLeft: '16px' }}
+										onClick={() => { setShowAddRateModal((prev) => !prev); }}
+									>
+										{filter?.status !== 'aborted' ? 'Add Rate' : 'Edit Rate'}
+									</Button>
+								</div>
+							</>
+						)}
+
 				</div>
 			</div>
 			{
