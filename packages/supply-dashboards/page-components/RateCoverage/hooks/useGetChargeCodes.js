@@ -1,39 +1,64 @@
 import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
-// const api = {
-// 	fcl_freight : 'list_fcl_freight_rates',
-// 	lcl_freight : 'list_lcl_freight_rates',
-// 	air_freight : 'list_air_freight_rates',
-// };
+const SERVICE_NAMES = [
+	'fcl_customs_charges',
+	'air_customs_charges',
+	'lcl_customs_charges',
+	'lcl_freight_charges',
+	'fcl_freight_charges',
+	'haulage_freight_charges',
+	'air_freight_surcharges',
+	'air_freight_local_charges',
+	'fcl_freight_local_charges',
+	'air_freight_charges',
+];
 
-const useListRateChargeCodes = ({ service }) => {
-	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_rate_charge_codes',
-		method : 'GET',
-	}, { manual: true });
+const useGetChargeCodes = ({
+	service_name = 'fcl_customs_charges',
+	trade_type = null,
+	cfsChargeRequired = false,
+}) => {
+	const [{ data }, trigger] = useRequest(
+		{
+			url    : '/list_rate_charge_codes',
+			method : 'get',
+		},
+		{ manual: true },
+	);
 
-	const listRateChargeCodes = async () => {
-		// const finalFilter = Object.fromEntries(
-		// 	Object.entries(filter).filter(([, value]) => value !== ''),
-		// );
+	const listApi = async () => {
 		try {
 			await trigger({
 				params: {
-					filters: {
-						status: 'active',
-					},
-					service_name: service,
+					service_name,
 				},
 			});
-		} catch (err) {
-			console.log(err);
+		} catch (error) {
+			// console.error(error);
 		}
 	};
 
-	return {
-		data,
-		loading,
-		listRateChargeCodes,
-	};
+	const list = (data?.list || [])
+		.map((item) => ({
+			...item,
+			label : `${item.code} ${item.name}`,
+			value : item.code,
+		}))
+		.filter(
+			(item) => !trade_type
+				|| !item?.trade_types
+				|| (item?.trade_types || []).includes(trade_type),
+		);
+
+	useEffect(() => {
+		if (SERVICE_NAMES.includes(service_name) || cfsChargeRequired) {
+			listApi();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [service_name, cfsChargeRequired]);
+
+	return { list };
 };
-export default useListRateChargeCodes;
+
+export default useGetChargeCodes;
