@@ -1,4 +1,4 @@
-import { Button, Placeholder } from '@cogoport/components';
+import { cl, Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { upperCase } from '@cogoport/utils';
@@ -74,7 +74,7 @@ function AttendanceStats({ selectMonth = {}, executeScroll = () => {} }) {
 					<div className={styles.attendance_stats}>
 						{ATTENDANCE_CONSTANT.map((val) => (
 							<div className={styles.attendance_stats_data} key={val.key}>
-								<div className={`${styles.attendance_dot} ${styles?.[val.colorDot]}`} />
+								<div className={cl`${styles.attendance_dot} ${styles?.[val.colorDot]}`} />
 								<span className={styles.span}>{val.label}</span>
 								{attendance_stats?.[val.key] || GLOBAL_CONSTANTS.zeroth_index}
 								{' '}

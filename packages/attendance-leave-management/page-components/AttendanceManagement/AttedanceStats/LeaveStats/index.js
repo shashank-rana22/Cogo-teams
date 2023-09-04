@@ -6,7 +6,7 @@ import useGetEmployeeLeaveBalances from '../../../../hooks/useGetEmployeeLeaveBa
 
 import styles from './styles.module.css';
 
-function LeaveStats({ value }) {
+function LeaveStats({ value = {} }) {
 	const { loading, data, refetch } = useGetEmployeeLeaveBalances({ value });
 
 	const {
@@ -16,13 +16,18 @@ function LeaveStats({ value }) {
 	} = data || {};
 
 	const [applyLeave, setApplyLeave] = useState(false);
+	function LoadingPlaceholder() {
+		return (
+			<Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+		);
+	}
 
 	return (
 		<>
 			<div className={styles.container}>
 				<div className={styles.header_flex}>
 					<div className={styles.title}>Leaves Stats</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+					{loading ? <LoadingPlaceholder />
 						: (
 							<div className={styles.pending_approval}>
 								<div className={styles.pending_dot} />
@@ -39,7 +44,7 @@ function LeaveStats({ value }) {
 						</div>
 						<div className={styles.stats_number}>
 							{loading
-								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+								? <LoadingPlaceholder />
 								: available_privilege_leaves }
 						</div>
 					</div>
@@ -49,7 +54,7 @@ function LeaveStats({ value }) {
 						</div>
 						<div className={styles.stats_number}>
 							{loading
-								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+								? <LoadingPlaceholder />
 								: available_casual_leaves }
 						</div>
 					</div>
@@ -59,7 +64,7 @@ function LeaveStats({ value }) {
 						</div>
 						<div className={styles.stats_number}>
 							{loading
-								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+								? <LoadingPlaceholder />
 								: available_sick_leaves }
 						</div>
 					</div>

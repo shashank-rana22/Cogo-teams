@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const SKELETON_COUNT = 5;
 
-function MobileView({ data, loading, handleOpenModal }) {
+function MobileView({ data = {}, loading = false, handleOpenModal = false }) {
 	const { details } = data || {};
 
 	const getClassName = (status, color) => {
@@ -48,20 +48,20 @@ function MobileView({ data, loading, handleOpenModal }) {
 			{(details || [])?.map((val) => (
 				<div
 					className={styles.card}
-					key={val.date}
-					onClick={() => handleOpenModal(val.date)}
+					key={val?.date}
+					onClick={() => handleOpenModal(val?.date)}
 					aria-hidden
 				>
 					<div className={styles.attendance_date}>
 						<div className={styles.attendance_day}>
 							{formatDate({
-								date       : val.date,
+								date       : val?.date,
 								dateFormat : GLOBAL_CONSTANTS.formats.date.EEEE,
 								formatType : 'date',
 							})}
 						</div>
 						{formatDate({
-							date       : val.date,
+							date       : val?.date,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['MMM, dd'],
 							formatType : 'date',
 						})}
@@ -71,7 +71,7 @@ function MobileView({ data, loading, handleOpenModal }) {
 							Check in & out
 						</div>
 						{formatDate({
-							date       : val.check_in,
+							date       : val?.check_in,
 							dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType : 'time',
 						})}
@@ -79,14 +79,14 @@ function MobileView({ data, loading, handleOpenModal }) {
 						-
 						{' '}
 						{formatDate({
-							date       : val.check_out,
+							date       : val?.check_out,
 							dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType : 'time',
 						})}
 					</div>
-					<div className={cl`${styles.attendance_status} ${styles[getClassName(val.day_status, true)]}`}>
-						<div className={cl`${styles.attendance_dot} ${styles[getClassName(val.day_status)]}`} />
-						{ATTENDANCE_LOGS_STATUS_MAPPING[val.day_status]?.label}
+					<div className={cl`${styles.attendance_status} ${styles[getClassName(val?.day_status, true)]}`}>
+						<div className={cl`${styles.attendance_dot} ${styles[getClassName(val?.day_status)]}`} />
+						{ATTENDANCE_LOGS_STATUS_MAPPING[val?.day_status]?.label}
 					</div>
 				</div>
 			))}

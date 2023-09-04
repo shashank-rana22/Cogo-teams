@@ -7,7 +7,7 @@ import { getDecimalValue } from '../../../../utils/getDecimalValue';
 
 import styles from './styles.module.css';
 
-function TeamStats({ teamStats = {}, loading }) {
+function TeamStats({ teamStats = {}, loading = false }) {
 	const { self, team } = teamStats;
 
 	return (
@@ -45,7 +45,7 @@ function TeamStats({ teamStats = {}, loading }) {
 			{loading ? <Placeholder height="30px" width="100%" margin="0px 0px 20px 0px" /> : (
 				<div className={styles.team_stats}>
 					<div className={styles.avatar_container}>
-						<div className={`${styles.avatar_icon} ${styles.team_stats_color}`}>
+						<div className={cl`${styles.avatar_icon} ${styles.team_stats_color}`}>
 							<IcMTeam fill="#7278AD" width={14} height={14} />
 						</div>
 						My Team
