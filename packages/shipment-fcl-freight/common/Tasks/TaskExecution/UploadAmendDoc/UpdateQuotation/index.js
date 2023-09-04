@@ -16,7 +16,7 @@ function UpdateQuotation({
 	onClose = () => { },
 	refetch = () => {},
 }) {
-	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, servicesList = [] } = useContext(ShipmentDetailContext);
 
 	const quotationData = useGetStepThreeData({
 		servicesList,

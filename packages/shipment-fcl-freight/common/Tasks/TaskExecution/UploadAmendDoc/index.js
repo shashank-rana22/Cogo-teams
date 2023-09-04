@@ -21,7 +21,7 @@ function UploadAmendDoc({
 	onClose = () => {},
 	refetch = () => {},
 }) {
-	const { primary_service } = useContext(ShipmentDetailContext);
+	const { primary_service = {} } = useContext(ShipmentDetailContext);
 
 	const isAmendBookingNote = task?.task === 'amend_booking_note';
 
@@ -60,8 +60,7 @@ function UploadAmendDoc({
 	allControls[GLOBAL_CONSTANTS.zeroth_index].value = [REQUIRED_OBJ];
 	const defaultValues = getDefaultValues(allControls);
 
-	const formProps = useForm({ defaultValues });
-	const { control, formState: { errors }, handleSubmit } = formProps;
+	const { control, formState: { errors }, handleSubmit } = useForm({ defaultValues });
 
 	const handleSubmitFinal = async (values) => {
 		const payload = {

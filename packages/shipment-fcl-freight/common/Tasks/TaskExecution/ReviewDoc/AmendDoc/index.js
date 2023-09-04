@@ -1,4 +1,5 @@
 import { Button, Textarea, Toast } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateShipmentDocuments from '../../../../../hooks/useUpdateShipmentDocuments';
@@ -17,17 +18,17 @@ function AmendDoc({
 	);
 
 	const handleRemarkSubmit = async () => {
-		if (!remarkValue) {
+		if (!isEmpty(remarkValue)) {
+			const amendParams = {
+				...params,
+				state   : 'document_amendment_requested',
+				remarks : [remarkValue],
+			};
+
+			await updateDocument(amendParams);
+		} else {
 			Toast.error('Please provide amendment reason');
 		}
-
-		const amendParams = {
-			...params,
-			state   : 'document_amendment_requested',
-			remarks : [remarkValue],
-		};
-
-		await updateDocument(amendParams);
 	};
 
 	return (

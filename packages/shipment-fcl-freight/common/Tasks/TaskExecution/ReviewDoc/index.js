@@ -129,7 +129,7 @@ function ReviewDoc({
 
 					<div className={styles.action_buttons}>
 						<Button
-							onClick={() => { setIsAmend(true); }}
+							onClick={() => setIsAmend(true)}
 							themeType="secondary"
 							disabled={loading}
 						>
