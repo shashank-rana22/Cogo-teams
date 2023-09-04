@@ -128,7 +128,7 @@ function MergeDocuments({ setActive = () => {} }) {
 		setParams,
 		deleteTaggedDocuments,
 		params,
-	} = useListTaggedInvoice({ setSelectBankShow });
+	} = useListTaggedInvoice();
 
 	const { documents = ' ', list = [] } = data || {};
 
