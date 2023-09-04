@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getPrefillForm from '../../../../../../../../SearchResults/utils/getPrefillForm';
 
@@ -104,20 +103,6 @@ function CustomButton({
 					{BUTTON_LABEL_MAPPING[field.key] || 'Show Rates'}
 				</span>
 			</Button>
-
-			{field.showPrice ? (
-				<span style={{ fontSize: 12, fontWeight: 500 }}>
-					{formatAmount({
-						amount   : item?.total_price || GLOBAL_CONSTANTS.zeroth_index,
-						currency : item?.total_price_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
-						},
-					})}
-				</span>
-			) : null}
 		</div>
 	);
 }

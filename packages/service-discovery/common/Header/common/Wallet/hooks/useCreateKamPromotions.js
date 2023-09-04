@@ -50,7 +50,7 @@ const useCreateKamPromotion = ({ setShowSuccessModal = () => {}, refetchStats = 
 
 			const res = await trigger({ data: payload });
 
-			publishPromotion(res?.data?.id);
+			await publishPromotion(res?.data?.id);
 
 			onClose();
 			setShowSuccessModal(true);

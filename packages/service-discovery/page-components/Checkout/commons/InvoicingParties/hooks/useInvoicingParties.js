@@ -94,58 +94,60 @@ const useInvoicingParties = ({
 	};
 
 	useEffect(() => {
-		if (!isEmpty(list)) {
-			setInvoicingParties(
-				list.map((savedInvoicingParty) => ({
-					...savedInvoicingParty,
-					services: formatServices({
-						savedServicesInvoiceTo,
-						invoicingPartyServices: savedInvoicingParty?.services || [],
-					}),
-				})),
-			);
-
-			setEditInvoice(
-				list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}),
-			);
-
-			setPaymentModes(
-				list.reduce((acc, savedInvoicingParty) => {
-					const {
-						credit_option = {},
-						organization_trade_party_id = '',
-						id = '',
-						payment_mode_details = {},
-					} = savedInvoicingParty;
-
-					const {
-						payment_mode = '',
-						payment_term = '',
-						payment_method = '',
-						documentCategory = '',
-						documentType = '',
-						documentDeliveryMode = '',
-					} = payment_mode_details;
-
-					const { selected_credit_days = 0, interest_percent = 0 } = credit_option;
-
-					return {
-						...acc,
-						[id || savedInvoicingParty.length]: {
-							credit_days    : selected_credit_days,
-							interest       : interest_percent,
-							paymentMode    : payment_mode || 'cash',
-							paymentTerms   : payment_term,
-							paymentMethods : payment_method,
-							documentCategory,
-							documentType,
-							documentDeliveryMode,
-							organization_trade_party_id,
-						},
-					};
-				}, {}),
-			);
+		if (isEmpty(list)) {
+			return;
 		}
+
+		setInvoicingParties(
+			list.map((savedInvoicingParty) => ({
+				...savedInvoicingParty,
+				services: formatServices({
+					savedServicesInvoiceTo,
+					invoicingPartyServices: savedInvoicingParty?.services || [],
+				}),
+			})),
+		);
+
+		setEditInvoice(
+			list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}),
+		);
+
+		setPaymentModes(
+			list.reduce((acc, savedInvoicingParty) => {
+				const {
+					credit_option = {},
+					organization_trade_party_id = '',
+					id = '',
+					payment_mode_details = {},
+				} = savedInvoicingParty;
+
+				const {
+					payment_mode = '',
+					payment_term = '',
+					payment_method = '',
+					documentCategory = '',
+					documentType = '',
+					documentDeliveryMode = '',
+				} = payment_mode_details;
+
+				const { selected_credit_days = 0, interest_percent = 0 } = credit_option;
+
+				return {
+					...acc,
+					[id || savedInvoicingParty.length]: {
+						credit_days    : selected_credit_days,
+						interest       : interest_percent,
+						paymentMode    : payment_mode || 'cash',
+						paymentTerms   : payment_term,
+						paymentMethods : payment_method,
+						documentCategory,
+						documentType,
+						documentDeliveryMode,
+						organization_trade_party_id,
+					},
+				};
+			}, {}),
+		);
 	}, [list, savedServicesInvoiceTo, setInvoicingParties]);
 
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({

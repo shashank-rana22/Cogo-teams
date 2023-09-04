@@ -7794,6 +7794,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8946,6 +8950,20 @@ const partner = {
 			feature      : 'outstanding',
 			service_name : 'unified_dashboard',
 
+		},
+		{
+			api          : 'get_cc_communication_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
+			api         : 'get_payments_outstanding_overall_customer_outstanding',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 
 	],
@@ -13867,7 +13885,7 @@ const partner = {
 			service_name : 'rolling_forecast',
 		},
 		{
-			api          : 'get_email_preview',
+			api          : 'get_rolling_forecast_email_preview',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
@@ -13877,7 +13895,7 @@ const partner = {
 			service_name : 'location',
 		},
 		{
-			api          : 'send_requirement_email',
+			api          : 'send_rolling_forecast_requirement_email',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
