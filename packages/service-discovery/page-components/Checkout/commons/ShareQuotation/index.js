@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 
+import EmailConfirmation from './EmailConfirmation';
 import PocDetails from './PocDetails';
 import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
@@ -29,6 +30,9 @@ function ShareQuotation({ noRatesPresent = false }) {
 		setSelectedModes,
 		selectedModes,
 		setShowShareQuotationModal,
+		confirmation,
+		setConfirmation,
+		handleCopyQuoteLink,
 	} = useHandleShareQuotation({
 		detail,
 		updateCheckout,
@@ -72,6 +76,14 @@ function ShareQuotation({ noRatesPresent = false }) {
 					widths={widths}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
+				/>
+			) : null}
+
+			{confirmation ? (
+				<EmailConfirmation
+					confirmation={confirmation}
+					handleSendEmail={handleCopyQuoteLink}
+					setConfirmation={setConfirmation}
 				/>
 			) : null}
 

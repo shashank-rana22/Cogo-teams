@@ -16,6 +16,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
 	const [selectedModes, setSelectedModes] = useState(['email']);
+	const [confirmation, setConfirmation] = useState(false);
 
 	const quotationOptions = [
 		{
@@ -39,7 +40,6 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			handleCopy({ detail, shipment_id, checkout_id });
 			return;
 		}
-
 		updateCheckout({
 			values: {
 				id                      : checkout_id,
@@ -95,6 +95,9 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		setSelectedModes,
 		selectedModes,
 		setShowShareQuotationModal,
+		confirmation,
+		setConfirmation,
+		handleCopyQuoteLink,
 	};
 };
 

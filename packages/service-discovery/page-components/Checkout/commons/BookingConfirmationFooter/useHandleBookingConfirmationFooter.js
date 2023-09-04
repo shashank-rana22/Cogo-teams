@@ -17,6 +17,7 @@ const URL_MAPPING = {
 };
 
 const useHandleBookingConfirmationFooter = ({
+	rate = {},
 	detail = {},
 	checkoutMethod = '',
 	bookingConfirmationMode = '',
@@ -51,6 +52,7 @@ const useHandleBookingConfirmationFooter = ({
 	} = detail;
 
 	const [showOtpModal, setShowOtpModal] = useState(false);
+	const [showMarginModal, setShowMarginModal] = useState(false);
 	const [otpValue, setOtpValue] = useState('');
 
 	const [{ loading: sendOtpLoading }, trigger] = useRequest(
@@ -127,7 +129,12 @@ const useHandleBookingConfirmationFooter = ({
 		}
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async ({ source = '' } = {}) => {
+		if (!rate?.total_margins?.demand && !source) {
+			setShowMarginModal(true);
+			return;
+		}
+
 		if (bookingConfirmationMode === 'mobile_otp') {
 			submitForOtpVerification();
 			return;
@@ -144,7 +151,8 @@ const useHandleBookingConfirmationFooter = ({
 			return;
 		}
 
-		bookShipment();
+		await bookShipment();
+		setShowMarginModal(false);
 	};
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
@@ -207,6 +215,8 @@ const useHandleBookingConfirmationFooter = ({
 		submitForOtpVerification,
 		validity_end,
 		whatsappLoading,
+		showMarginModal,
+		setShowMarginModal,
 	};
 };
 
