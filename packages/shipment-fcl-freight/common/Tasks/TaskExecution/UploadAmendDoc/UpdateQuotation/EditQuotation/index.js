@@ -57,9 +57,9 @@ function EditQuotation({
 				await updateDocument(documentPayload);
 			}
 
-			return res1;
+			return null;
 		} catch (error) {
-			return error;
+			return null;
 		}
 	};
 
