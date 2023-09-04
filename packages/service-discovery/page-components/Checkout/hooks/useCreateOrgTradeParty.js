@@ -27,6 +27,7 @@ const useCreateOrgTradeParty = ({
 	savedDetails = {},
 	setSavedDetails = () => [],
 	source,
+	listOrgIps = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -179,6 +180,7 @@ const useCreateOrgTradeParty = ({
 
 			Toast.success('Trade Party Created Successfully!!');
 
+			await listOrgIps();
 			setActiveState('view_billing_addresses');
 			setShowModal(false);
 		} catch (err) {
