@@ -223,7 +223,7 @@ const useHandleQuotationModal = ({
 			component      : Customize,
 			compoenntProps : {
 				detail,
-				organization: organization?.data,
+				organization,
 				selectedModes,
 				widths,
 				billing_addresses,
@@ -259,7 +259,7 @@ const useHandleQuotationModal = ({
 				recipientsControl,
 				setValue,
 				emailPreviews,
-				organization: organization?.data,
+				organization,
 				selected,
 				recipientWatch,
 				orgUsersData,

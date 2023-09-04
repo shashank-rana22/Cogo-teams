@@ -79,7 +79,7 @@ const useDislikeFeedback = ({
 					[keyCurrency] : values.preferred_freight_rate_currency || undefined,
 					preferred_detention_free_days:
 						values.preferred_detention_free_days || undefined,
-					selected_card         : rate.card,
+					selected_card         : rate.id,
 					performed_by_org_id   : details.importer_exporter.id,
 					attachment_file_urls,
 					commodity_description : values.commodity_description || undefined,
