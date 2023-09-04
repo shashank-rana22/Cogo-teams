@@ -6,7 +6,7 @@ const MIN_SECONDS = 0;
 const NULL_RETURN = '0h 0m 0s';
 const PAD_START_COUNT = 2;
 
-const TIME_LABEL_MAPPING = [
+const TIME_MAPPING = [
 	{
 		key   : 'days',
 		label : 'd',
@@ -32,7 +32,7 @@ function DisplayTime({ sec = 0 }) {
 
 	return (
 		<div className={styles.container}>
-			{TIME_LABEL_MAPPING.map((item) => {
+			{TIME_MAPPING.map((item) => {
 				const { key, label } = item || {};
 
 				if (time[key] === MIN_SECONDS) return null;

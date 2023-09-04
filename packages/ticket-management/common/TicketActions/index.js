@@ -43,7 +43,7 @@ function RenderContent({
 	filteredActions = [], isModal = false, isCurrentReviewer = false, handleAction = () => {},
 	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
 }) {
-	const { t } = useTranslation(['myTicktes']);
+	const { t } = useTranslation(['myTickets']);
 
 	const handleConfirmation = ({ e, item }) => {
 		if (isModal) {

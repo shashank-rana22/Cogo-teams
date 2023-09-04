@@ -35,7 +35,9 @@ function TicketSummary({
 	} = ticket || {};
 
 	const { t } = useTranslation(['myTickets']);
-	const { color: textColor, label } =	getStatusLabelMapping(t)?.[STATUS_MAPPING[ticketStatus]] || {};
+
+	const { color: textColor, label } = getStatusLabelMapping(t)
+		?.[STATUS_MAPPING[ticketStatus]] || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
