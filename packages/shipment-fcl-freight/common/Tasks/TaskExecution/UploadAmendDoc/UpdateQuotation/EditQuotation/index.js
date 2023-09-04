@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_PRICE_VALUE = 0;
 const DEFAULT_QUANTITY_VALUE = 0;
+const HTTP_STATUS_CODE = 200;
 
 function EditQuotation({
 	data = {},
@@ -50,11 +51,13 @@ function EditQuotation({
 
 	const handleFinalSubmit = async (values) => {
 		try {
-			const res1 = await updateDocument(documentPayload);
+			const res1 = await onSubmit(values);
 
-			const res2 = await onSubmit(values);
+			if (res1 === HTTP_STATUS_CODE) {
+				await updateDocument(documentPayload);
+			}
 
-			return { res1, res2 };
+			return res1;
 		} catch (error) {
 			return error;
 		}

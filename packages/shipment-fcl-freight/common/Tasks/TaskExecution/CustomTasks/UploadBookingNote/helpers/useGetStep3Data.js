@@ -151,17 +151,23 @@ const useGetStepThreeData = ({
 		const checkSum = checkLineItemsSum(QUOTATIONS);
 
 		if (!checkSum.check) {
-			Toast.error(checkSum.message.join(','));
-		} else {
-			try {
-				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
+			const message = checkSum.message.join(',');
+			Toast.error(message);
 
-				if (res?.status === HTTP_SUCCESS_CODE) {
-					await updateTask({ id: task?.id });
-				}
-			} catch (err) {
-				toastApiError(err);
+			return message;
+		}
+		try {
+			const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
+
+			if (res?.status === HTTP_SUCCESS_CODE && task?.task !== 'amend_booking_note') {
+				await updateTask({ id: task?.id });
 			}
+
+			return res?.status;
+		} catch (err) {
+			toastApiError(err);
+
+			return err;
 		}
 	};
 

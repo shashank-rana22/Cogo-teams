@@ -43,7 +43,7 @@ function UploadAmendDoc({
 	};
 
 	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments({
-		refetch: isAmendBookingNote ? undefined : newRefetch,
+		refetch: newRefetch,
 	});
 
 	const movementDetails = primary_service?.movement_details || [];
@@ -70,7 +70,7 @@ function UploadAmendDoc({
 			document_type       : task?.document_type,
 			performed_by_org_id : task?.organization_id,
 			id                  : details?.id,
-			pending_task_id     : !isAmendBookingNote ? task?.id : undefined,
+			pending_task_id     : task?.id,
 			data                : { ...payloadData, status: 'uploaded' },
 			document_url:
 				values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.url?.finalUrl
