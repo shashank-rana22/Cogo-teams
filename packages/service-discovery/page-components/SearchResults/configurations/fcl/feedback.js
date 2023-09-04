@@ -55,6 +55,7 @@ const fclFeedBackControls = [
 		name           : 'preferred_shipping_line_ids',
 		label          : 'Preferred Shipping lines',
 		type           : 'async-select',
+		multiple       : true,
 		asyncKey       : 'list_operators',
 		initialCall    : true,
 		params         : SHIPPING_LINE_PARAMS,
