@@ -18,32 +18,30 @@ const useDeleteRateJob = (service) => {
 	}, { manual: true });
 
 	const deleteRateJob = useCallback(async ({ rate_id, data = {}, id }) => {
-		const weight_slabs = [
-			{
-				lower_limit  : data?.lower_limit,
-				upper_limit  : data?.upper_limit,
-				tariff_price : data?.price_per_unit,
-				currency     : data && 'INR',
-			},
-		];
+		const weight_slabs = (data?.weight_slabs || []).map((item) => ({
+			lower_limit  : item?.lower_limit,
+			upper_limit  : item?.upper_limit,
+			tariff_price : item?.price_per_unit,
+			currency     : data?.currency,
+		}));
 
 		try {
 			const resp = await trigger({
 				data: {
 					rate_id,
 					id,
-					origin_airport_id      : data?.origin_airport,
-					destination_airport_id : data?.destination_airport,
+					origin_airport_id      : data?.origin_airport_id,
+					destination_airport_id : data?.destination_airport_id,
 					commodity              : rate_id ? data?.commodity : undefined,
-					airline_id             : data?.air_line,
+					airline_id             : data?.airline_id,
 					operation_type         : data?.flight_operation_type,
 					currency               : data?.currency,
 					price_type             : data?.price_type,
-					service_provider_id    : data?.service_provider,
-					procured_by_id         : data?.rate_procured_by_cogoport_agent,
-					sourced_by_id          : data?.rate_provided_by_lsp_user,
-					validity_start         : data?.startDateTime,
-					validity_end           : data?.endDateTime,
+					service_provider_id    : data?.service_provider_id,
+					procured_by_id         : data?.procured_by_id,
+					sourced_by_id          : data?.sourced_by_id,
+					validity_start         : data?.validity_start,
+					validity_end           : data?.validity_end,
 					commodity_type         : rate_id ? 'all' : undefined,
 					weight_slabs           : rate_id ? weight_slabs : undefined,
 					closing_remarks        : checkboxValue !== '' ? checkboxValue : undefined,
