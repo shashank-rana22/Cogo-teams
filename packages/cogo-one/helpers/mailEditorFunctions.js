@@ -63,7 +63,7 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		if (isEmptyMail || subject) {
+		if (isEmptyMail || !subject) {
 			Toast.error('Both Subject and Body are Requied');
 			return;
 		}
