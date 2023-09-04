@@ -3,8 +3,8 @@ import { useSelector } from '@cogoport/store';
 
 import getCustomAuthParams from './getCustomAuthParams';
 
-const ONE = 1;
-const TWO = 2;
+const SCOPE_INDEX = 1;
+const VIEW_TYPE_INDEX = 2;
 
 const useGetPermission = ({ navigation: currNav = '' }) => {
 	const {
@@ -74,7 +74,7 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 			}
 			return isViewScope;
 		}
-		const viewscope = authParams[ONE];
+		const viewscope = authParams[SCOPE_INDEX];
 		return !!(viewscope && viewscope === value);
 	};
 	const isInViewType = (condition) => {
@@ -107,7 +107,7 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 			}
 			return isViewType;
 		}
-		const viewtype = authParams[TWO];
+		const viewtype = authParams[VIEW_TYPE_INDEX];
 		return !!(viewtype && viewtype === value);
 	};
 	// type can be -> api / viewscope / viewtype / scope
