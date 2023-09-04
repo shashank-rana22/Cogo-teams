@@ -144,6 +144,7 @@ function CogoFinancials() {
 							activeBar={activeBar}
 							setActiveBar={setActiveBar}
 							setTableFilters={setTableFilters}
+							isCancelledExcluded={isCancelledExcluded}
 						/>
 						<div className={styles.remaining_shipment_cards}>
 							{activeShipmentCard !== 'ongoing' && !showShipmentList && (

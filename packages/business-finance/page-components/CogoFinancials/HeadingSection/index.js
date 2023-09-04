@@ -48,13 +48,16 @@ function HeadingSection({
 
 	return (
 		<div className={styles.header}>
-			<div
-				role="presentation"
-				onClick={handleClick}
-			>
-				<div>
-					<span className={styles.main_heading} data-tour="main-heading">COGO Financials</span>
-				</div>
+			<div>
+				<span
+					role="presentation"
+					onClick={handleClick}
+					className={styles.main_heading}
+					data-tour="main-heading"
+				>
+					COGO Financials
+				</span>
+
 				<div className={styles.filter_group}>
 					<div className={styles.segmented_section}>
 						<SegmentedControl

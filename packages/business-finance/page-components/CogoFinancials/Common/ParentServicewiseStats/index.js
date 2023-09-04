@@ -38,7 +38,7 @@ const displayAmount = (amount, currency) => formatAmount({
 function ParentServicewiseStats({
 	setActiveShipmentCard = () => {}, mainCardData = {}, taxType = '',
 	activeShipmentCard = '', entity = '', timeRange = '', filter = {},
-	customDate = new Date(),
+	customDate = new Date(), isCancelledExcluded = false,
 }) {
 	const { tour, setTour } = useContext(TourContext);
 	const [activeService, setActiveService] = useState('');
@@ -52,6 +52,7 @@ function ParentServicewiseStats({
 		activeShipmentCard,
 		activeService,
 		customDate,
+		isCancelledExcluded,
 	});
 
 	const cardData = getCardData({ displayAmount, mainCardData, invoiceCount, taxType, currency, jobCount });
@@ -145,6 +146,7 @@ function ParentServicewiseStats({
 					activeShipmentCard={activeShipmentCard}
 					setActiveShipmentCard={setActiveShipmentCard}
 					customDate={customDate}
+					isCancelledExcluded={isCancelledExcluded}
 				/>
 			)}
 		</div>
