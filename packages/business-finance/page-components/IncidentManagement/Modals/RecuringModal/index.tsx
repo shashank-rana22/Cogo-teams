@@ -4,7 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import usePostExpense from '../../apisModal/usePostExpense';
@@ -182,7 +182,7 @@ const summeryMappings = ({
 	{ key: '4', val: summaryDataFourth },
 ];
 
-function RecuringModal({ id, refetch, row, isEditable = true }) {
+function RecuringModal({ id = '', refetch = () => {}, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
