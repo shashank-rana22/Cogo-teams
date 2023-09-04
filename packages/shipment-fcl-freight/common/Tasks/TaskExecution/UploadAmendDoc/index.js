@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
-import React, { useContext, useMemo } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
@@ -11,6 +11,7 @@ import getDefaultValues from '../utils/get-default-values';
 
 import controls from './controls';
 import styles from './styles.module.css';
+import UpdateQuotation from './UpdateQuotation';
 
 const REQUIRED_OBJ = {};
 
@@ -19,6 +20,12 @@ function UploadAmendDoc({
 	onClose = () => {},
 	refetch = () => {},
 }) {
+	const { primary_service } = useContext(ShipmentDetailContext);
+
+	const isAmendBookingNote = task?.task === 'amend_booking_note';
+
+	const [isQuotation, setIsQuotation] = useState(false);
+
 	const { list = {}, loading = true } = useListDocuments({
 		defaultFilters: {
 			shipment_id: task.shipment_id, id: task.task_field_id,
@@ -28,18 +35,20 @@ function UploadAmendDoc({
 		},
 	});
 
-	const { primary_service } = useContext(ShipmentDetailContext);
-	const movementDetails = primary_service?.movement_details || [];
-
-	const keysForMovementDetails = useMemo(() => Array(movementDetails.length)
-		.fill(null).map(() => Math.random()), [movementDetails.length]);
-
 	const newRefetch = () => {
-		onClose();
-		refetch();
+		if (isAmendBookingNote && !isQuotation) {
+			setIsQuotation(true);
+		} else {
+			onClose();
+			refetch();
+		}
 	};
 
 	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
+
+	const movementDetails = primary_service?.movement_details || [];
+	const keysForMovementDetails = useMemo(() => Array(movementDetails.length)
+		.fill(null).map(() => Math.random()), [movementDetails.length]);
 
 	const allControls = controls(task) || [];
 	const details = list.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
@@ -63,7 +72,7 @@ function UploadAmendDoc({
 			document_type       : task.document_type,
 			performed_by_org_id : task.organization_id,
 			id                  : details?.id,
-			pending_task_id     : task.id,
+			pending_task_id     : !isAmendBookingNote ? task.id : undefined,
 			data                : { ...documentPayloadData, status: 'uploaded' },
 			document_url:
 				values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.url?.finalUrl
@@ -106,16 +115,27 @@ function UploadAmendDoc({
 				))}
 			</div>
 
-			<Layout control={control} fields={allControls} errors={errors} />
+			{isQuotation ? (
+				<UpdateQuotation
+					task={task}
+					setIsQuotation={setIsQuotation}
+					newRefetch={newRefetch}
+				/>
+			) : (
+				<>
+					<Layout control={control} fields={allControls} errors={errors} />
+					<div className={styles.button_wrap}>
+						<Button themeType="secondary" onClick={() => onClose()}>Close</Button>
+						<Button
+							onClick={handleSubmit(handleSubmitFinal)}
+							disabled={loading}
+						>
+							{isAmendBookingNote ? 'Next' : 'Submit'}
+						</Button>
+					</div>
+				</>
+			)}
 
-			<div className={styles.button_wrap}>
-				<Button
-					onClick={handleSubmit(handleSubmitFinal)}
-					disabled={loading}
-				>
-					Submit
-				</Button>
-			</div>
 		</div>
 	);
 }

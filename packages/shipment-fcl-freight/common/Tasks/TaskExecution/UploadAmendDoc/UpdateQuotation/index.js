@@ -2,19 +2,19 @@ import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import useUpdateQuotationOnBnAmend from '../../../../../../hooks/useUpdateQuotationOnBnAmend';
+import useUpdateQuotationOnBnAmend from '../../../../../hooks/useUpdateQuotationOnBnAmend';
 
 import EditQuotation from './EditQuotation';
 import styles from './styles.module.css';
 
-function UpdateQuotation({ task = {}, setIsQuotation = () => {}, onClose = () => {} }) {
+function UpdateQuotation({ task = {}, setIsQuotation = () => {}, newRefetch = () => {} }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	const quotationData = useUpdateQuotationOnBnAmend({
 		servicesList,
 		shipment_data,
 		task,
-		setIsQuotation,
+		newRefetch,
 	});
 
 	const { serviceQuotationLoading = true, loading: quotationLoading = false } = quotationData || {};
@@ -31,10 +31,9 @@ function UpdateQuotation({ task = {}, setIsQuotation = () => {}, onClose = () =>
 	return (
 		<EditQuotation
 			data={quotationData}
-			setIsQuotation={setIsQuotation}
 			shipment_id={task?.shipment_id}
 			loading={quotationLoading}
-			onClose={onClose}
+			setIsQuotation={setIsQuotation}
 		/>
 	);
 }

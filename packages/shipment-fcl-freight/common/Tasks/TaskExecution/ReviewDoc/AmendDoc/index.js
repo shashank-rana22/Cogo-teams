@@ -4,13 +4,13 @@ import { useState } from 'react';
 import useUpdateShipmentDocuments from '../../../../../hooks/useUpdateShipmentDocuments';
 
 import styles from './styles.module.css';
-import UpdateQuotation from './UpdateQuotation';
 
-function AmendDoc({ task = {}, onClose = () => {}, newRefetch = () => {} }) {
-	const isApproveBookingNote = task?.task === 'approve_booking_note';
-
+function AmendDoc({
+	params = {},
+	onClose = () => {},
+	newRefetch = () => {},
+}) {
 	const [remarkValue, setRemarkValue] = useState('');
-	const [isQuotation, setIsQuotation] = useState(isApproveBookingNote);
 
 	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
@@ -21,23 +21,14 @@ function AmendDoc({ task = {}, onClose = () => {}, newRefetch = () => {} }) {
 			Toast.error('Please provide amendment reason');
 		}
 
-		const params = {
+		const amendParams = {
+			...params,
 			state   : 'document_amendment_requested',
 			remarks : [remarkValue],
 		};
 
-		await updateDocument(params);
+		await updateDocument(amendParams);
 	};
-
-	if (isQuotation) {
-		return (
-			<UpdateQuotation
-				task={task}
-				setIsQuotation={setIsQuotation}
-				onClose={onClose}
-			/>
-		);
-	}
 
 	return (
 		<>
@@ -52,28 +43,15 @@ function AmendDoc({ task = {}, onClose = () => {}, newRefetch = () => {} }) {
 			</div>
 
 			<div className={styles.action_buttons}>
-				{isApproveBookingNote ? (
-					<Button
-						onClick={() => {
-							setIsQuotation(true);
-						}}
-						themeType="secondary"
-						disabled={taskUpdateLoading}
-					>
-						Back
-					</Button>
-
-				) : (
-					<Button
-						onClick={() => {
-							onClose();
-						}}
-						themeType="secondary"
-						disabled={taskUpdateLoading}
-					>
-						Cancel
-					</Button>
-				)}
+				<Button
+					onClick={() => {
+						onClose();
+					}}
+					themeType="secondary"
+					disabled={taskUpdateLoading}
+				>
+					Cancel
+				</Button>
 
 				<Button
 					onClick={() => {

@@ -112,7 +112,7 @@ function ReviewDoc({
 
 			{isAmend ? (
 				<AmendDoc
-					task={task}
+					params={params}
 					onClose={onClose}
 					newRefetch={newRefetch}
 				/>

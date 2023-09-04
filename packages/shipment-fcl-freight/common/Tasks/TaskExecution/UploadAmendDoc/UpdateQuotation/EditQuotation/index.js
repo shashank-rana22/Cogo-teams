@@ -11,7 +11,7 @@ function EditQuotation({
 	data = {},
 	shipment_id = '',
 	loading = false,
-	onClose = () => {},
+	setIsQuotation = () => {},
 }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
@@ -61,7 +61,7 @@ function EditQuotation({
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => onClose()}>Close</Button>
+				<Button themeType="secondary" onClick={() => setIsQuotation(false)}>Back</Button>
 
 				<Button
 					themeType="primary"
@@ -69,7 +69,7 @@ function EditQuotation({
 					loading={loading}
 					disabled={loading}
 				>
-					Next
+					Submit
 				</Button>
 			</div>
 		</>

@@ -7,18 +7,20 @@ import getStep3Controls from '../common/Tasks/TaskExecution/CustomTasks/UploadBo
 
 import useGetShipmentServicesQuotation from './useGetShipmentServicesQuotation';
 import useUpdateBuyQuotations from './useUpdateBuyQuotations';
+import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
 const TRADE_MAPPING = {
 	import    : 'Destination',
 	export    : 'Origin',
 	undefined : '',
 };
+const HTTP_SUCCESS_CODE = 200;
 
 const useUpdateQuotationOnBnAmend = ({
 	servicesList = [],
 	shipment_data = {},
 	task = {},
-	setIsQuotation = () => {},
+	newRefetch = () => {},
 }) => {
 	const SERVICE_IDS = [];
 
@@ -57,7 +59,13 @@ const useUpdateQuotationOnBnAmend = ({
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger, loading: quotationLoading } = useUpdateBuyQuotations({});
+	const { apiTrigger: updateBuyQuotationTrigger, loading: quotationLoading } = useUpdateBuyQuotations({});
+
+	const { apiTrigger:updateTask, loading } = useUpdateShipmentPendingTask({
+		refetch: () => {
+			newRefetch();
+		},
+	});
 
 	const service_charges = servicesQuotation?.service_charges || [];
 
@@ -129,9 +137,11 @@ const useUpdateQuotationOnBnAmend = ({
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
 
-				setIsQuotation(false);
+				if (res?.status === HTTP_SUCCESS_CODE) {
+					await updateTask({ id: task?.id });
+				}
 			} catch (err) {
 				toastApiError(err);
 			}
@@ -142,7 +152,7 @@ const useUpdateQuotationOnBnAmend = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		loading       : quotationLoading,
+		loading       : quotationLoading || loading,
 		defaultValues : DEFAULT_VALUES,
 	};
 };
