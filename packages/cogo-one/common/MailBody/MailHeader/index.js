@@ -67,7 +67,7 @@ function MailHeader({ eachMessage = {}, handleClick = () => {}, hasPermissionToE
 									role="presentation"
 									key={key}
 									className={styles.icon_styles}
-									onClick={() => handleClick({ buttonType: key })}
+									onClick={() => handleClick(key)}
 								>
 									{icon}
 								</div>
