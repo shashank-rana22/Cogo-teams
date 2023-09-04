@@ -1,10 +1,12 @@
 // eslint-disable-next-line max-lines-per-function
 const airControls = ({
 	data,
-
 	flighOperationTypeOptions,
 	PackagingTypeOptions, handlingtype,
-	RateTypeOptions, currencyOptions, PriceTypeOptions, densityCargoOptions, densityRatioOptions, commodityOptions,
+	listPartnerUserOptions,
+	RateTypeOptions,
+	currencyOptions, PriceTypeOptions, densityCargoOptions, densityRatioOptions, commodityOptions,
+	user_id,
 }) => [
 	{
 		name           : 'rate_type',
@@ -81,12 +83,13 @@ const airControls = ({
 		rules: { required: 'This is required' },
 	},
 	{
-		name           : 'cogoport_by_id',
+		name           : 'procured_by_id',
 		placeholder    : 'Rate Procured by Cogoport Agent',
 		label          : 'Rate Procured by Cogoport Agent',
 		type           : 'select',
 		className      : 'primary lg',
-		optionsListKey : 'organization-user',
+		...listPartnerUserOptions,
+		value          : user_id,
 		defaultOptions : true,
 		isClearable    : true,
 		span           : 4,
@@ -148,7 +151,7 @@ const airControls = ({
 	},
 	{
 		label         : 'Validity End',
-		name          : 'validity_endt',
+		name          : 'validity_end',
 		type          : 'datepicker',
 		span          : 4,
 		showOptional  : false,
@@ -203,7 +206,7 @@ const airControls = ({
 	},
 	{
 		label        : 'Density Cargo',
-		name         : 'density_crgo',
+		name         : 'density_cargo',
 		span         : 4,
 		value        : 'high_density',
 		disabled     : true,

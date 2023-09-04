@@ -2,7 +2,8 @@ import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, Modal, Toast } from '@cogoport/components';
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
-import { asyncFieldsListOperators, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import { asyncFieldsListOperators, asyncFieldsPartnerUsersIds, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import React from 'react';
 
@@ -13,6 +14,7 @@ import {
 	fclCommodityOptions,
 } from '../../../../helpers/constants';
 import useCreateFclFreightRate from '../../../../hooks/useCreateFclFreightRate';
+import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 
@@ -25,6 +27,11 @@ function AddRateModal({
 	filter = {},
 	data = {},
 }) {
+	const { user_data } = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+	const { user: { id: user_id = '' } = {} } = user_data;
+
 	const SERVICE_NAME = 'fcl_freight_charges';
 	const { list } = useGetChargeCodes({ service_name: SERVICE_NAME });
 	const options = list.map((item) => (
@@ -33,6 +40,15 @@ function AddRateModal({
 			value : item?.value,
 		}
 	));
+
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+		watch,
+	} = useForm();
+
+	const values = watch();
 
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
@@ -45,6 +61,13 @@ function AddRateModal({
 					},
 				},
 			},
+		),
+	);
+
+	const listPartnerUserOptions = useGetAsyncOptions(
+		merge(
+			asyncFieldsPartnerUsersIds(),
+			{ params: { filters: { organization_id: values?.service_provider } } },
 		),
 	);
 
@@ -62,16 +85,10 @@ function AddRateModal({
 		densityCargoOptions,
 		densityRatioOptions,
 		commodityOptions,
+		listPartnerUserOptions,
+		user_id,
 	});
 	const finalControls = filter?.service === 'fcl_freight' ? FCL_CONTROLS : AIR_CONTROLS;
-	const {
-		control,
-		formState: { errors },
-		handleSubmit,
-		watch,
-	} = useForm();
-
-	const values = watch();
 	const newCotrols = [...finalControls];
 	if (values?.service_provider_id) {
 		newCotrols.forEach((ctr) => {
@@ -85,13 +102,25 @@ function AddRateModal({
 	}
 
 	const { fclFreightRate, fclData } = useCreateFclFreightRate();
+	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
-	const handleSubmitData = async (dataa) => {
-		await fclFreightRate({ dataa });
-		const succ_id = await deleteRateJob({ rate_id: fclData?.id, data: dataa, id: data?.id });
-		if (succ_id) {
+	const handleSubmitData = async (formData) => {
+		if (filter?.service === 'air_freight') {
+			const rate_id = await createRate(formData);
+			if (!rate_id) {
+				return;
+			}
+			const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
+			if (!id) { return; }
 			Toast.success('Rate added successfully');
 			setShowModal(false);
+		} else {
+			await fclFreightRate({ dataa: formData });
+			const succ_id = await deleteRateJob({ rate_id: fclData?.id, data: formData, id: data?.id });
+			if (succ_id) {
+				Toast.success('Rate added successfully');
+				setShowModal(false);
+			}
 		}
 	};
 	return (
