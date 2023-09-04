@@ -19,11 +19,15 @@ function Upper({ vessel, loading }) {
 					{loading ? <Placeholder width="200px" height="30px" /> : (
 						<>
 							<div>
-								<img
-									alt="shipping_line_logo"
-									className={styles.logo_url}
-									src={vessel?.operator?.logo_url}
-								/>
+								{vessel?.operator?.logo_url ? (
+									<img
+										alt="shipping_line_logo"
+										className={styles.logo_url}
+										src={vessel?.operator?.logo_url}
+										width="80px"
+										height="40px"
+									/>
+								) : null}
 							</div>
 							<div>
 								{vessel?.operator?.short_name}

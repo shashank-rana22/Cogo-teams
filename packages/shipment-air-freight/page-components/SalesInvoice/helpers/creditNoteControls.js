@@ -60,6 +60,7 @@ const rawControls = (charge, isEdit) => ({
 	type             : 'edit_service_charges',
 	name             : charge?.service_id || charge?.id,
 	service_name     : charge?.display_name || charge?.service_type,
+	shipment_id      : charge?.detail?.shipment_id,
 	showHeader       : true,
 	showAddButtons   : false,
 	showDeleteButton : false,
