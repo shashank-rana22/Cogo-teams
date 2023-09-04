@@ -46,7 +46,7 @@ const useGetListCoverage = (filter) => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						serial_id : parseInt(sid, 10),
+						serial_id : sid ? parseInt(sid, 10) : undefined,
 						source,
 						user_id   : releventToMeValue ? user_id : undefined,
 					},

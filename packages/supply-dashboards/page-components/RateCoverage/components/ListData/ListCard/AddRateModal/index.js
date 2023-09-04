@@ -61,11 +61,18 @@ function AddRateModal({
 			<Modal.Header title="Please add rate" />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				{filter?.service === 'fcl_freight' ? (
-					<Layout
-						fields={newCotrols}
-						control={control}
-						errors={errors}
-					/>
+					<>
+						<Layout
+							fields={newCotrols}
+							control={control}
+							errors={errors}
+						/>
+						<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+							<Button onClick={handleSubmit(handleSubmitData)}>
+								Submit
+							</Button>
+						</div>
+					</>
 				) : (
 					<AirRateModal
 						data={data}
@@ -74,13 +81,13 @@ function AddRateModal({
 					/>
 				)}
 			</Modal.Body>
-			<Modal.Footer>
+			{/* <Modal.Footer>
 				<div>
 					<Button onClick={handleSubmit(handleSubmitData)}>
 						Submit
 					</Button>
 				</div>
-			</Modal.Footer>
+			</Modal.Footer> */}
 		</Modal>
 	);
 }

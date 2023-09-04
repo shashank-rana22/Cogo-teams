@@ -454,7 +454,7 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 				</div>
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<Button onClick={handleSubmit(onSubmit)}>Confirm</Button>
+				<Button onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>
 	);
