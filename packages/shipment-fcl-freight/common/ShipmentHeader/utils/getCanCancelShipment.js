@@ -10,6 +10,7 @@ const SHIPMENT_CANCEL_STAKEHOLDERS = [
 	'superadmin',
 	'admin',
 	'booking_agent',
+	'booking_agent_manager',
 	'sales_agent',
 	'booking_desk',
 	'booking_desk_manager',

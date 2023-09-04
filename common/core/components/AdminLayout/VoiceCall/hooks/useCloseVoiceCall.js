@@ -1,98 +1,54 @@
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { setDoc, doc } from 'firebase/firestore';
-import { useCallback, useRef, useState } from 'react';
-
-const INTERVAL = 5000;
-const DEBOUNCE_LIMIT = 1000;
-const COUNTER_ZERO = 0;
-const DEFAULT_ZERO = 0;
-const INCREMENT_BY_ONE = 1;
-
-const updateRoom = async ({ agentId, firestore }) => {
-	const docRef = doc(
-		firestore,
-		`/users/${agentId}`,
-	);
-
-	setDoc(docRef, {
-		last_activity_timestamp : Date.now(),
-		last_activity           : 'call_end',
-	}, { merge: true });
-};
+import { useCallback } from 'react';
 
 const useCloseVoiceCall = ({
-	localStateReducer,
-	voice_call_recipient_data,
-	firestore,
+	setCallState,
 }) => {
-	const [counter, setCounter] = useState(DEFAULT_ZERO);
-	const apiCallIntervalRef = useRef(null);
-	const counterIntervalRef = useRef(null);
-
 	const dispatch = useDispatch();
-	const { userId = '', orgId = '', loggedInAgentId = '' } = voice_call_recipient_data || {};
 
-	const clearApiInterval = useCallback(() => {
-		clearInterval(apiCallIntervalRef.current);
-	}, []);
+	const unmountVoiceCall = useCallback(({ lead_user_id = '', lead_organization_id = '', callStartAt = '' } = {}) => {
+		setCallState({});
 
-	const stopSecsCounter = useCallback(() => {
-		setCounter(COUNTER_ZERO);
-		clearInterval(counterIntervalRef.current);
-	}, []);
+		dispatch(
+			setProfileState({
+				voice_call_recipient_data : {},
+				is_in_voice_call          : false,
+				...(lead_organization_id ? {
+					lead_feedback_form_type : 'lead_org_feedback',
+					lead_feedback_form_data : {
+						lead_user_id,
+						lead_organization_id,
+						refetch_list             : false,
+						communication_start_time : callStartAt,
+						communication_end_time   : Date.now(),
+						source                   : 'voice_call',
+					},
+				} : {}),
 
-	const startApiCallInterval = useCallback((intervalFunc = () => {}) => {
-		apiCallIntervalRef.current = setInterval(intervalFunc, INTERVAL);
-	}, []);
+			}),
+		);
+	}, [dispatch, setCallState]);
 
-	const startSecsCounter = useCallback(() => {
-		counterIntervalRef.current = setInterval(() => {
-			setCounter((prevCounter) => prevCounter + INCREMENT_BY_ONE);
-		}, DEBOUNCE_LIMIT);
-	}, []);
-
-	const unmountVoiceCall = useCallback(() => {
-		localStateReducer({
-			showCallModalType    : '',
-			status               : '',
-			attendees            : [],
-			callRecordId         : '',
-			callId               : '',
-			hasAgentPickedCall   : false,
-			latestAddedAgentName : '',
-			voiceCallEndAt       : null,
-		});
+	const openFeedbackform = useCallback(() => {
 		dispatch(
 			setProfileState({
 				voice_call_recipient_data : {},
 				is_in_voice_call          : false,
 			}),
 		);
-		updateRoom({ agentId: loggedInAgentId, firestore });
-	}, [dispatch, localStateReducer, loggedInAgentId, firestore]);
 
-	const checkToOpenFeedBack = useCallback(({ hasAgentPickedCall = false }) => {
-		stopSecsCounter();
-		clearInterval(apiCallIntervalRef.current);
-		if (orgId && userId && hasAgentPickedCall) {
-			localStateReducer({
-				showCallModalType : 'feedbackModal',
-				voiceCallEndAt    : new Date(),
-			});
-			return;
-		}
-		unmountVoiceCall();
-	}, [localStateReducer, orgId, unmountVoiceCall, userId, stopSecsCounter]);
+		setCallState((p) => ({
+			...p,
+			showCallModalType : 'feedbackModal',
+			status            : 'completed',
+			callEndAt         : new Date(),
+		}));
+	}, [dispatch, setCallState]);
 
 	return {
 		unmountVoiceCall,
-		checkToOpenFeedBack,
-		startApiCallInterval,
-		clearApiInterval,
-		startSecsCounter,
-		stopSecsCounter,
-		counter,
+		openFeedbackform,
 	};
 };
 export default useCloseVoiceCall;

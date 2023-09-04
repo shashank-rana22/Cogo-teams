@@ -4,10 +4,9 @@ import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
 interface InvoiceAdditionals {
-	reqAgreementDate?: string
-	reqAgreementNumber?: string
 	reqCancelReason?: string
-	reqDocumentUrl?: string
+	reqCancelDocumentUrl?: string
+	reqReplaceDocumentUrl?:string
 }
 interface InvoiceData {
 	invoiceAdditionals?: InvoiceAdditionals
@@ -31,9 +30,10 @@ const useGetIrnCancellation = ({
 	const [response, setResponse] = useState({
 		remarks           : itemData?.invoiceAdditionals?.reqCancelReason,
 		value             : '',
-		agreementDocument : itemData?.invoiceAdditionals?.reqDocumentUrl,
-		agreementNumber   : itemData?.invoiceAdditionals?.reqAgreementNumber,
-		agreementDate     : new Date(itemData?.invoiceAdditionals?.reqAgreementDate),
+		agreementDocument : itemData?.invoiceAdditionals?.reqCancelDocumentUrl
+		|| itemData?.invoiceAdditionals?.reqReplaceDocumentUrl,
+		agreementNumber : '',
+		agreementDate   : new Date(),
 	});
 	const [
 		{ loading },
@@ -62,8 +62,8 @@ const useGetIrnCancellation = ({
 				payload = {
 					cancelReason      : response?.remarks,
 					agreementDocument : response?.agreementDocument,
-					agreementNumber   : response?.agreementNumber,
-					agreementDate     : response?.agreementDate,
+					agreementNumber   : response?.agreementDocument ? response?.agreementNumber : undefined,
+					agreementDate     : response?.agreementDocument ? response?.agreementDate : undefined,
 				};
 			} else if (CANCEL_IRN) {
 				payload = {
@@ -82,7 +82,7 @@ const useGetIrnCancellation = ({
 			}
 			refetch();
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

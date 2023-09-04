@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import SupplierReallocation from '../../../../SupplierReallocation';
 import CancelAdditionalService from '../../CancelAdditionalService';
 
+import Action from './Action';
 import styles from './styles.module.css';
 
 const serviceCancelAllowedBy = [
@@ -16,11 +17,15 @@ const serviceCancelAllowedBy = [
 
 function Item({
 	item = {},
-	actionButton,
 	status = {},
 	refetch = () => {},
 	services = [],
-	isSeller,
+	isSeller = false,
+	stakeholderConfig = {},
+	serviceListItem = {},
+	activeStakeholder = '',
+	setShowModal = () => {},
+	setItem = () => {},
 }) {
 	const [show, setShow] = useState(false);
 	const [showCancel, setShowCancel] = useState(false);
@@ -29,9 +34,13 @@ function Item({
 	const showCancelInfo = serviceCancelAllowedBy.includes(item?.state)
 	|| (item?.state === 'quoted_by_service_provider');
 
+	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
+
 	const showEditBtn = status?.status === 'approved';
 
-	const serviceData = services?.filter((service) => service?.service_type === item?.name);
+	const serviceData = services?.filter(
+		(service) => service?.service_name === item?.name,
+	);
 
 	const price = isSeller ? item?.buy_price : item?.price;
 
@@ -48,7 +57,7 @@ function Item({
 							<div className={styles.circle} />
 							<div className={styles.price}>
 								Price:
-								&nbsp;
+								{' '}
 								{formatAmount({
 									amount   : price,
 									currency : item?.currency,
@@ -114,7 +123,14 @@ function Item({
 				<div className={cl`${styles.tag} ${styles[status.status]}`}>
 					{status?.statusName}
 				</div>
-				{actionButton}
+				<Action
+					status={status}
+					serviceListItem={serviceListItem}
+					setShowModal={setShowModal}
+					setItem={setItem}
+					activeStakeholder={activeStakeholder}
+					canEditCancelService={canEditCancelService}
+				/>
 			</div>
 
 			{showCancel ? (

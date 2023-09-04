@@ -1,15 +1,7 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
 
-const CURRENCY_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.EUR,
-	GLOBAL_CONSTANTS.currency_code.GBP,
-].map((currency) => ({
-	label : currency,
-	value : currency,
-}));
+const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase', 'add_sell_price'];
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];
@@ -22,9 +14,9 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			name    : 'currency',
 			label   : 'Currency',
 			type    : 'select',
-			options : CURRENCY_OPTIONS,
+			options : currencies,
 			rules   : { required: 'Currency is required' },
-			show    : ['task', 'overview'].includes(source),
+			show    : COMMON_SHOW_SOURCE.includes(source),
 			size    : 'sm',
 
 		},
@@ -46,7 +38,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			span     : 6,
 			options  : UNIT_OPTIONS,
 			rules    : { required: 'Unit is required' },
-			show     : ['task', 'overview'].includes(source),
+			show     : COMMON_SHOW_SOURCE.includes(source),
 			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter' || source === 'add_sell_price',
 			size     : 'sm',
 		},
@@ -56,8 +48,24 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter quantity here',
 			rules       : { required: 'Quantity is required', min: 0 },
-			show        : ['task', 'overview'].includes(source),
+			show        : COMMON_SHOW_SOURCE.includes(source),
 			size        : 'sm',
+		},
+		{
+			name        : 'service_provider_id',
+			label      	: 'Service Provider',
+			type        : 'asyncSelect',
+			placeholder : 'Select Service Provider',
+			asyncKey    : 'organizations',
+			params      : {
+				filters: {
+					account_type : 'service_provider',
+					kyc_status   : 'verified',
+				},
+			},
+			show  : source === 'purchase',
+			size  : 'sm',
+			rules : { required: 'Service Provider is required' },
 		},
 		{
 			name        : 'price',
@@ -65,7 +73,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : ['task', 'overview'].includes(source),
+			show        : ['task', 'overview', 'add_sell_price'].includes(source),
 			size        : 'sm',
 		},
 		{
@@ -73,7 +81,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			label       : 'Alias (Optional)',
 			type        : 'text',
 			placeholder : 'Enter Alias (Only if required)',
-			show        : ['task', 'overview'].includes(source),
+			show        : COMMON_SHOW_SOURCE.includes(source),
 			size        : 'sm',
 		},
 	];

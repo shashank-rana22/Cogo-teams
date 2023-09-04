@@ -1,5 +1,5 @@
-import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -10,8 +10,8 @@ import styles from './styles.module.css';
 function TaskContainer({
 	children = null,
 	loading = false,
-	pendingTask,
-	actions,
+	pendingTask = {},
+	actions = '',
 }) {
 	const { primary_service = {} } = useContext(ShipmentDetailContext);
 
@@ -29,7 +29,7 @@ function TaskContainer({
 
 			{loading ? (
 				<div className={styles.loader}>
-					<Loader />
+					<ThreeDotLoader message="Loading Data" />
 				</div>
 			) : children}
 		</div>

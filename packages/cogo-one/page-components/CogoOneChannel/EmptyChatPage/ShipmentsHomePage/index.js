@@ -1,12 +1,19 @@
-import { Pagination, Input } from '@cogoport/components';
+import { Pagination, Input, Select } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
+import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
+import ShipmentChatModal from '../../../../common/ShipmentChatModal';
+import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
+import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
 
+import BookingNoteModal from './BookingNoteModal';
+import Filter from './Filter';
 import LoadingState from './LoadingState';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
@@ -20,6 +27,13 @@ function ListShipmentCards({
 	setActiveTab = () => {},
 	showPocDetails = {},
 	setShowPocDetails = () => {},
+	setShowBookingNote = () => {},
+	setShowShipmentChat = () => {},
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
+	mailProps = {},
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -29,6 +43,7 @@ function ListShipmentCards({
 					height={400}
 					width={400}
 					className={styles.empty_shipments_image}
+					alt="no-shipments"
 				/>
 			</div>
 		);
@@ -38,17 +53,31 @@ function ListShipmentCards({
 		(shipmentItem) => (
 			<ShipmentCard
 				setActiveTab={setActiveTab}
-				key={shipmentItem?.sid}
+				key={shipmentItem?.id}
 				shipmentItem={shipmentItem}
 				showPocDetails={showPocDetails}
 				setShowPocDetails={setShowPocDetails}
+				setShowBookingNote={setShowBookingNote}
+				setShowShipmentChat={setShowShipmentChat}
+				setShowPopover={setShowPopover}
+				showPopover={showPopover}
+				setShowPocModal={setShowPocModal}
+				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				mailProps={mailProps}
 			/>
 		),
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {} }) {
+function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
+	const [range, setRange] = useState('current_month');
+	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
+	const [showShipmentChat, setShowShipmentChat] = useState({});
+
+	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
+	const [showPopover, setShowPopover] = useState('');
+	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
 
 	const {
 		listLoading,
@@ -56,7 +85,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 		setParams,
 		params,
 		handlePageChange = () => {},
-	} = useListShipments();
+	} = useListShipments({ dateFilters });
 
 	const {
 		list = [],
@@ -65,49 +94,98 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 		total_count = DEFAULT_SHIPMENTS_COUNT,
 	} = shipmentsData || {};
 
+	const contextValues = useMemo(() => ({
+		shipment_data: showShipmentChat,
+	}), [showShipmentChat]);
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.header_title}>
-					Bookings
+		<>
+			<div className={styles.container}>
+				<div className={styles.header}>
+					<div className={styles.header_title}>
+						Bookings
+					</div>
+					<div className={styles.filter_container}>
+						<Input
+							size="sm"
+							value={params?.value}
+							onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
+							prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
+							placeholder="Search SID..."
+							type="number"
+						/>
+						<Select
+							size="sm"
+							value={params?.shipmentType}
+							className={styles.select_field}
+							onChange={(val) => setParams((prev) => ({ ...prev, shipmentType: val }))}
+							placeholder="Shipment Type"
+							options={SHIPMENT_TYPE_OPTIONS}
+							isClearable
+						/>
+						<div className={styles.custom_date_filter}>
+							<Filter
+								setDateFilters={setDateFilters}
+								range={range}
+								setRange={setRange}
+							/>
+						</div>
+
+					</div>
 				</div>
-				<div className={styles.filter_container}>
-					<Input
-						size="sm"
-						value={params?.value}
-						onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
-						prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
-						placeholder="Search SID..."
-						type="number"
-					/>
+				<div className={styles.shipments_cards_container}>
+					{listLoading
+						? <LoadingState />
+						: (
+							<ListShipmentCards
+								list={list}
+								setActiveTab={setActiveTab}
+								showPocDetails={showPocDetails}
+								setShowPocDetails={setShowPocDetails}
+								setShowBookingNote={setShowBookingNote}
+								setShowShipmentChat={setShowShipmentChat}
+								setShowPopover={setShowPopover}
+								showPopover={showPopover}
+								setShowPocModal={setShowPocModal}
+								showAddPrimaryUserButton={showAddPrimaryUserButton}
+								mailProps={mailProps}
+							/>
+						)}
 				</div>
-			</div>
-			<div className={styles.shipments_cards_container}>
-				{listLoading
-					? <LoadingState />
-					: (
-						<ListShipmentCards
-							list={list}
-							setActiveTab={setActiveTab}
-							showPocDetails={showPocDetails}
-							setShowPocDetails={setShowPocDetails}
+
+				<div className={styles.pagination_container}>
+					{!isEmpty(list) && (
+						<Pagination
+							type="number"
+							currentPage={page}
+							totalItems={total_count}
+							pageSize={page_limit}
+							disabled={listLoading}
+							onPageChange={handlePageChange}
 						/>
 					)}
+				</div>
 			</div>
+			{showBookingNote?.show
+				? <BookingNoteModal setShowBookingNote={setShowBookingNote} showBookingNote={showBookingNote} /> : null}
 
-			<div className={styles.pagination_container}>
-				{!isEmpty(list) && (
-					<Pagination
-						type="number"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						disabled={listLoading}
-						onPageChange={handlePageChange}
+			<ShipmentDetailContext.Provider value={contextValues}>
+				<ShipmentChatModal
+					showShipmentChat={showShipmentChat}
+					setShowShipmentChat={setShowShipmentChat}
+				/>
+			</ShipmentDetailContext.Provider>
+
+			{showPocModal?.show
+				? (
+					<AddPrimaryPocModal
+						showPocModal={showPocModal}
+						setShowPocModal={setShowPocModal}
+						getShipmentsList={handlePageChange}
+						setActiveTab={setActiveTab}
 					/>
-				)}
-			</div>
-		</div>
+				) : null}
+		</>
 	);
 }
 

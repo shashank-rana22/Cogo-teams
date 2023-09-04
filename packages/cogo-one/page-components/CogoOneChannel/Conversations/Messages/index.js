@@ -7,13 +7,10 @@ import { getHasPermissionToEdit } from '../../../../helpers/conversationHelpers'
 import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
-import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
-import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
-import useUpdateUserRoom from '../../../../hooks/useUpdateUserRoom';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
@@ -32,20 +29,17 @@ function Messages({
 	setActiveTab = () => {},
 	newUserRoomLoading = false,
 	setModalType = () => {},
+	mailProps = {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
-	const [headertags, setheaderTags] = useState('');
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
-	const [draftMessages, setDraftMessages] = useState({});
-	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
-	const [uploading, setUploading] = useState({});
+	const [mailActions, setMailActions] = useState({ actionType: '', data: {} });
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
 
 	const formattedData = getActiveCardDetails(activeTab?.data) || {};
-
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	const closeModal = () => {
@@ -91,20 +85,7 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
-		firestore,
-		channelType: channel_type,
-		id,
-		draftMessages,
-		setDraftMessages,
-		activeChatCollection,
-		draftUploadedFiles,
-		setDraftUploadedFiles,
-		formattedData,
-	});
-
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
-		messageFireBaseDoc,
 		firestore,
 		closeModal,
 		activeMessageCard: activeTab?.data,
@@ -112,21 +93,11 @@ function Messages({
 		canMessageOnBotSession,
 	});
 
-	const {
-		getNextData = () => {}, lastPage, firstLoadingMessages,
-		messagesData, loadingPrevMessages,
-	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom });
-
 	const { updateChat, loading } = useUpdateAssignedChat({
 		onClose           : closeModal,
 		activeMessageCard : activeTab?.data,
 		formattedData,
 	});
-
-	const {
-		updateRoomLoading,
-		updateUserRoom,
-	} = useUpdateUserRoom();
 
 	const {
 		requestForAssignChat,
@@ -136,20 +107,23 @@ function Messages({
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
 
-	const changeSessionAndMessage = (type = '') => {
-		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
-
-		if (!canMessageOnBotSession) {
-			return callbackFunc;
-		}
-
-		return (scrollToBottom, val) => assignChat(
-			{
-				payload      : { agent_id: userId, is_allowed_to_chat: true },
-				callBackFunc : () => callbackFunc(scrollToBottom, val),
-			},
-		);
+	const commonProps = {
+		firestore,
+		formattedData,
+		hasPermissionToEdit,
+		closeModal,
+		canMessageOnBotSession,
+		viewType,
+		hasNoFireBaseRoom,
+		assignLoading,
+		setOpenModal,
+		assignChat,
+		userId,
+		supportAgentId,
+		activeMessageCard: activeTab?.data,
 	};
+
+	const { actionType = '' } = mailActions || {};
 
 	useEffect(() => {
 		mountActiveRoomSnapShot({
@@ -161,78 +135,50 @@ function Messages({
 			setActiveTab,
 		});
 
+		setMailActions({ actionType: '', data: {} });
+
 		return () => {
 			snapshotCleaner({ ref: activeRoomSnapshotListener });
 		};
-	}, [activeCardId, activeChannelType, activeTab.data.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
+	}, [activeCardId, activeChannelType, firestore, setActiveRoomLoading, setActiveTab]);
 
 	return (
-		<div className={styles.container}>
-			<Header
-				setOpenModal={setOpenModal}
-				setheaderTags={setheaderTags}
-				headertags={headertags}
-				assignChat={assignChat}
-				formattedData={formattedData}
-				updateChat={updateChat}
-				loading={loading}
-				activeMessageCard={activeTab?.data}
-				closeModal={closeModal}
-				assignLoading={assignLoading}
-				activeAgentName={activeAgentName}
-				hasPermissionToEdit={hasPermissionToEdit}
-				filteredSpectators={filteredSpectators}
-				tagOptions={tagOptions}
-				supportAgentId={supportAgentId}
-				showBotMessages={showBotMessages}
-				userId={userId}
-				updateRoomLoading={updateRoomLoading}
-				updateUserRoom={updateUserRoom}
-				requestForAssignChat={requestForAssignChat}
-				requestAssignLoading={requestAssignLoading}
-				canMessageOnBotSession={canMessageOnBotSession}
-				viewType={viewType}
-				firestore={firestore}
-				escalateToSupplyRm={escalateToSupplyRm}
-				supplierLoading={supplierLoading}
-				hasNoFireBaseRoom={hasNoFireBaseRoom}
-				setActiveTab={setActiveTab}
-			/>
-			<div className={styles.message_container} key={id}>
-				<MessageConversations
-					firestore={firestore}
-					formattedData={formattedData}
-					messagesData={messagesData}
-					uploading={uploading}
-					draftMessage={draftMessages?.[id]}
-					draftUploadedFile={draftUploadedFiles?.[id]}
-					setDraftMessages={setDraftMessages}
-					setDraftUploadedFiles={setDraftUploadedFiles}
-					sendChatMessage={changeSessionAndMessage('chat_message')}
-					getNextData={getNextData}
-					firstLoadingMessages={firstLoadingMessages || newUserRoomLoading}
-					lastPage={lastPage}
-					setOpenModal={setOpenModal}
-					activeMessageCard={activeTab?.data}
-					suggestions={suggestions}
-					setUploading={setUploading}
-					sentQuickSuggestions={changeSessionAndMessage('quick_message')}
-					hasPermissionToEdit={hasPermissionToEdit}
-					loadingPrevMessages={loadingPrevMessages}
-					sendCommunicationTemplate={sendCommunicationTemplate}
-					communicationLoading={communicationLoading}
-					closeModal={closeModal}
-					messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
-					setRaiseTicketModal={setRaiseTicketModal}
-					canMessageOnBotSession={canMessageOnBotSession}
-					changeSessionAndMessage={changeSessionAndMessage}
-					viewType={viewType}
-					hasNoFireBaseRoom={hasNoFireBaseRoom}
-					setModalType={setModalType}
-					activeTab={activeTab}
-				/>
+		<>
+			<div className={styles.container}>
+				<div className={styles.header}>
+					<Header
+						{...commonProps}
+						updateChat={updateChat}
+						loading={loading}
+						activeAgentName={activeAgentName}
+						filteredSpectators={filteredSpectators}
+						tagOptions={tagOptions}
+						showBotMessages={showBotMessages}
+						requestForAssignChat={requestForAssignChat}
+						requestAssignLoading={requestAssignLoading}
+						escalateToSupplyRm={escalateToSupplyRm}
+						supplierLoading={supplierLoading}
+						setActiveTab={setActiveTab}
+					/>
+				</div>
+				<div className={styles.message_container}>
+					<MessageConversations
+						{...commonProps}
+						suggestions={suggestions}
+						setRaiseTicketModal={setRaiseTicketModal}
+						setModalType={setModalType}
+						activeTab={activeTab}
+						activeChatCollection={activeChatCollection}
+						newUserRoomLoading={newUserRoomLoading}
+						setMailActions={setMailActions}
+						mailActions={mailActions}
+						actionType={actionType}
+						communicationLoading={communicationLoading}
+						mailProps={mailProps}
+						sendCommunicationTemplate={sendCommunicationTemplate}
+					/>
+				</div>
 			</div>
-
 			<MessageModals
 				openModal={openModal}
 				closeModal={closeModal}
@@ -240,8 +186,9 @@ function Messages({
 				loading={loading}
 				assignLoading={assignLoading}
 				viewType={viewType}
+				formattedData={formattedData}
 			/>
-		</div>
+		</>
 	);
 }
 

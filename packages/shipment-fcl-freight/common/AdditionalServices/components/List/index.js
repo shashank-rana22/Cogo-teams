@@ -2,7 +2,7 @@ import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -10,7 +10,6 @@ import Loader from '../Loader';
 
 import Info from './Info';
 import ItemAdded from './ItemAdded';
-import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
@@ -22,16 +21,14 @@ const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false })
 const DEFAULT_PAGE_LIMIT = 8;
 const SHOW_MORE_PAGE_LIMIT = 16;
 
-const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
+const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager',
 	'superadmin', 'admin'];
 
-function List({ isSeller = false }) {
+function List({ isSeller = false, source = '' }) {
 	const {
-		servicesList, refetchServices = () => {},
-		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
-	} = useContext(
-		ShipmentDetailContext,
-	);
+		servicesList = [], refetchServices = () => {},
+		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
@@ -42,7 +39,10 @@ function List({ isSeller = false }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
+	const {
+		list: additionalServiceList = [],
+		refetch = () => {}, loading, totalCount,
+	} = useListAdditionalServices({ pageLimit });
 
 	const handleRefetch = () => {
 		refetchServices();
@@ -52,6 +52,7 @@ function List({ isSeller = false }) {
 	const refetchForUpdateSubService = () => {
 		setShowModal(false);
 		refetch();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
@@ -77,18 +78,14 @@ function List({ isSeller = false }) {
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}
-								actionButton={actions({
-									status,
-									serviceListItem,
-									setShowModal,
-									setItem,
-									shipment_data,
-									activeStakeholder,
-									canEditCancelService,
-								})}
+								stakeholderConfig={stakeholderConfig}
 								refetch={handleRefetch}
 								services={servicesList}
 								isSeller={isSeller}
+								serviceListItem={serviceListItem}
+								setShowModal={setShowModal}
+								setItem={setItem}
+								activeStakeholder={activeStakeholder}
 							/>
 						);
 					})}
@@ -173,7 +170,10 @@ function List({ isSeller = false }) {
 								status={item?.status}
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
+								refetch={refetch}
 								source="add_sell_price"
+								refetchServices={refetchServices}
+
 							/>
 						</Modal.Body>
 					</Modal>
@@ -199,6 +199,7 @@ function List({ isSeller = false }) {
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
+						source={source}
 					/>
 				)
 				: null}

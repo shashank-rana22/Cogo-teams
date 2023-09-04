@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -8,13 +9,14 @@ import getPocRole from '../../utils/getPocRole';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-const fieldsToShow = {
+const FIRST_INDEX = 1;
+
+const FIELDS_TO_SHOW = {
 	category           : 'Service category',
-	sub_category       : 'Service Sub-Category',
 	cogoport_office_id : 'Cogoport Office',
 };
 
-const pocsMapping = {
+const POCS_MAPPING = {
 	name          : 'Name',
 	email         : 'Email ID',
 	mobile_number : 'Mobile Number',
@@ -50,10 +52,10 @@ function ServicePOC({
 			{(allServicesAndPocs || []).map((singleServicePoc) => (
 				<>
 					<div key={singleServicePoc.id} className={styles.head}>
-						{Object.keys(fieldsToShow).map((item) => (
-							<div className={styles.item}>
+						{Object.keys(FIELDS_TO_SHOW).map((item) => (
+							<div className={styles.item} key={item}>
 								<span className={styles.top}>
-									{fieldsToShow[item]}
+									{FIELDS_TO_SHOW[item]}
 									{' '}
 									:
 								</span>
@@ -71,19 +73,19 @@ function ServicePOC({
 						{(singleServicePoc?.poc_details || []).map((poc) => (
 							<>
 								{(Object.entries(poc) || []).map((item) => {
-									if (item[0] === 'id') {
+									if (item[GLOBAL_CONSTANTS.zeroth_index] === 'id') {
 										return null;
 									}
 
 									return (
-										<div className={styles.label_value_container}>
+										<div className={styles.label_value_container} key={item?.id}>
 											<div className={styles.top}>
-												{pocsMapping[item[0]]}
+												{POCS_MAPPING[item[GLOBAL_CONSTANTS.zeroth_index]]}
 											</div>
 
 											<div className={styles.bottom}>
-												{item?.[0] === 'poc_role'
-													? getPocRole(item?.[1]) : item?.[1]}
+												{item?.[GLOBAL_CONSTANTS.zeroth_index] === 'poc_role'
+													? getPocRole(item?.[FIRST_INDEX]) : item?.[FIRST_INDEX]}
 											</div>
 										</div>
 									);

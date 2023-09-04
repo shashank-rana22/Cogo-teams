@@ -27,8 +27,7 @@ function Header({
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
-	const show_others_tasks = !!stakeholderConfig?.tasks?.show_others_tasks;
-
+	const showOthersTasks = !!stakeholderConfig?.tasks?.show_others_tasks;
 	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
@@ -51,7 +50,7 @@ function Header({
 						</Tooltip>
 					) : null }
 
-					{show_others_tasks ? (
+					{showOthersTasks ? (
 						<div className={styles.toggle_container}>
 							<span>Hide completed tasks</span>
 							<Toggle
@@ -61,7 +60,7 @@ function Header({
 						</div>
 					) : null}
 
-					{show_others_tasks ? (
+					{showOthersTasks ? (
 						<div className={styles.toggle_container}>
 							<span>Show only my tasks</span>
 							<Toggle

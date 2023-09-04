@@ -68,7 +68,7 @@ function UploadBookingNote({
 		taskListRefetch,
 		formattedRate,
 	});
-	const { serviceQuotationLoading = true } = step3_data || {};
+	const { serviceQuotationLoading = true, loading } = step3_data || {};
 
 	return (
 
@@ -108,6 +108,7 @@ function UploadBookingNote({
 						data={step3_data}
 						setStep={setStep}
 						shipment_id={task?.shipment_id}
+						loading={loading}
 					/>
 				) : null
 			}

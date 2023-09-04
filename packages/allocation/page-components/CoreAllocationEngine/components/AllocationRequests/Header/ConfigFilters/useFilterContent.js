@@ -2,12 +2,14 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import controls from '../../../../configurations/get-requests-filter-controls';
+import getControls from '../../../../configurations/get-requests-filter-controls';
 
-const useFilterContent = ({ params, setParams }) => {
+const useFilterContent = ({ params, setParams, t = () => {} }) => {
 	const [showFilters, setShowFilters] = useState(false);
 
 	const formProps = useForm({ defaultValues: { status: 'pending' } });
+
+	const controls = getControls({ t });
 
 	const { reset, getValues } = formProps;
 
@@ -30,20 +32,20 @@ const useFilterContent = ({ params, setParams }) => {
 	const applyFilters = () => {
 		const data = getValues();
 
-		const values = {};
+		const VALUES = {};
 		controls.forEach((control) => {
 			const { name } = control;
 
 			if (!isEmpty(data[name] || {})) {
 				if (name === 'created_at') {
-					values.created_at_greater_than = data[name]?.startDate || undefined;
-					values.created_at_less_than = data[name]?.endDate || undefined;
+					VALUES.created_at_greater_than = data[name]?.startDate || undefined;
+					VALUES.created_at_less_than = data[name]?.endDate || undefined;
 				} else {
-					values[name] = data[name];
+					VALUES[name] = data[name];
 				}
 			}
 		});
-		setFilters(values);
+		setFilters(VALUES);
 	};
 
 	const handleReset = () => {

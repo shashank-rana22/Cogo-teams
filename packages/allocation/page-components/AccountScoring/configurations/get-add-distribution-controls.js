@@ -1,30 +1,37 @@
-const controls = (item) => {
+const MIN = 0;
+const MAX = 90;
+
+const controls = (item, t = () => {}) => {
 	const { id = '', lower_limit = 0, upper_limit = 0 } = item || {};
 
 	return ([
 		{
 			name        : `${id}_range_from`,
-			label       : 'RANGE FROM',
+			label       : t('allocation:range_from'),
 			placeholder : '0',
 			type        : 'number',
 			value       : `${lower_limit}`,
 			rules       : {
-				required : 'Required',
-				validate : (value) => ((value < 0 || value > 10) ? 'invalid' : true),
+				required : t('allocation:rules_required'),
+				validate : (value) => ((value < MIN || value > MAX) ? t('allocation:rules_validate') : true),
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
+			max         : 90,
 		},
 		{
 			name        : `${id}_range_to`,
-			label       : 'RANGE TO',
+			label       : t('allocation:range_to'),
 			placeholder : '0',
 			type        : 'number',
 			value       : `${upper_limit}`,
 			rules       : {
-				required : 'Required',
-				validate : (value) => ((value < 0 || value > 10) ? 'invalid' : true),
+				required : t('allocation:rules_required'),
+				validate : (value) => ((value < MIN || value > MAX) ? t('allocation:rules_validate') : true),
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
+			max         : 90,
 		},
 	]);
 };

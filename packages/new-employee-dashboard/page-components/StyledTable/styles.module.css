@@ -1,10 +1,24 @@
 .container {
 	width: 100%;
-	padding-top: 10px;
+	max-height: 840px;
+	padding-bottom: 4px;
+	margin-top: 10px;
+	overflow: auto;
 
 	:global {
 		table {
 			padding: 0;
+		}
+
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			height: 65px;
+		}
+
+		.ui_table_head_row {
+			margin-bottom: 20px;
 		}
 
 		background-color: transparent;
@@ -12,6 +26,7 @@
 
 		.ui_table_head_cell {
 			padding: 10px;
+			white-space: nowrap;
 			background-color: #deebed;
 		}
 
@@ -20,6 +35,10 @@
 			padding: 12px 8px;
 			background: #fff;
 			background-color: #fff;
+
+			& > div:first-child {
+				display: inline-block;
+			}
 		}
 
 		.ui_table_body_row {
@@ -40,6 +59,10 @@
 
 		.ui_table_head_cell:last-child {
 			border-radius: 0 6px 6px 0;
+		}
+
+		.ui_table_container {
+			margin-bottom: 0;
 		}
 	}
 

@@ -1,4 +1,4 @@
-function asyncFieldsLocations2() {
+function asyncFieldsLocationsTwo() {
 	return {
 		valueKey    : 'id',
 		labelKey    : 'name',
@@ -100,6 +100,11 @@ function asyncFieldsOperators() {
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
 		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
 	};
 }
 
@@ -120,12 +125,13 @@ function asyncFieldsPartnerUsers() {
 
 function asyncFieldsPartnerRoles() {
 	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_auth_roles',
-		initialCall : true,
-		params      : {
-			filters    : { status: 'active' },
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_roles',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {
+			filters    : { status: true },
 			page_limit : 100,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
@@ -360,6 +366,20 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
 function asyncListHsCodes() {
 	return {
 		labelKey    : 'name',
@@ -430,6 +450,18 @@ function asyncAccMode() {
 		endpoint     : 'payments/parent-jv/acc-mode',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_acc_mode',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncIncidentSubtypeList() {
+	return {
+		labelKey     : 'incidentSubtype',
+		valueKey     : 'incidentSubtype',
+		endpoint     : 'incident-management/incident/incident-sub-type',
+		initialCall  : true,
+		authkey      : 'get_incident_management_incident_incident_sub_type',
 		microService : 'business_finance',
 		searchByq    : true,
 	};
@@ -657,7 +689,20 @@ function asyncListRoles() {
 	return {
 		labelKey    : 'role_name',
 		valueKey    : 'id',
-		endpoint    : 'list_roles',
+		endpoint    : 'list_employee_roles',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+function asyncListDepartment() {
+	return {
+		labelKey    : 'department_name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_departments',
 		initialCall : true,
 		params      : {
 			filters: {
@@ -770,6 +815,17 @@ function asyncListShipmentServices() {
 		},
 	};
 }
+function asyncFieldsLocationsMapping() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_locations_mapping',
+		initialCall : true,
+		params      : {
+			page_limit: 20,
+		},
+	};
+}
 
 function asyncListAllManagers() {
 	return {
@@ -786,9 +842,81 @@ function asyncListAllManagers() {
 	};
 }
 
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncListExpenseCategories() {
+	return {
+		labelKey     : 'categoryName',
+		valueKey     : 'id',
+		endpoint     : 'purchase/expense/expense-category',
+		microService : 'business_finance',
+		authkey      : 'get_purchase_expense_expense_category',
+		initialCall  : true,
+		searchByq    : true,
+		params       : { pageSize: 10000 },
+	};
+}
+
+function asyncListResources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_resources',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {},
+	};
+}
+function asyncListLeadOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'lead_user_id',
+		endpoint    : 'list_lead_organization_users',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncListPricingZones() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_pricing_zones',
+		initialCall : true,
+		params      : {
+			page_limit : 100,
+			page       : 1,
+		},
+	};
+}
+
+function asyncListTruckTypes() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'truck_name',
+		endpoint    : 'list_trucks',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
-	asyncFieldsLocations2,
+	asyncFieldsLocationsTwo as asyncFieldsLocations2,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
@@ -843,11 +971,21 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncListDepartment,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
 	asyncListAllManagers,
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
+	asyncIncidentSubtypeList,
+	asyncListResources,
+	asyncFieldsLocationsMapping,
+	asyncListPricingZones,
+	asyncListTruckTypes,
+	asyncListLeadOrganizationUsers,
 };

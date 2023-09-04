@@ -1,50 +1,73 @@
-import { Tabs, TabPanel, Input, cl } from '@cogoport/components';
+import { Tabs, TabPanel, Input, cl, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
+
+const TAB_MAPPING = [
+	{
+		label : 'Recent',
+		name  : 'recent',
+	},
+	{
+		label : 'Active',
+		name  : 'active',
+	},
+	{
+		label : 'Inactive',
+		name  : 'inactive',
+	},
+];
 
 function ListHeader({
 	status = '',
 	setStatus = () => {},
-	filters = {},
 	setFilters = () => {},
-	showUnreadChat,
+	showUnreadChat = false,
 	handleClick = () => {},
 }) {
+	const [search, setSearch] = useState('');
+	const { query, debounceQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		debounceQuery(search);
+	}, [debounceQuery, search]);
+
+	useEffect(() => {
+		setFilters((prev) => ({
+			...prev,
+			page : 1,
+			q    : query,
+		}));
+	}, [query, setFilters]);
+
 	return (
 		<div>
-			<div className={styles.container}>
-
-				<div className={styles.tabs_container}>
-					<Tabs activeTab={status} onChange={setStatus}>
-						<TabPanel name="active" title="Active" />
-						<TabPanel name="inactive" title="Inactive" />
-					</Tabs>
-				</div>
-
-			</div>
-
 			<div className={styles.search}>
 				<Input
-					value={filters?.q}
+					value={search}
 					placeholder="Search"
-					onChange={(e) => setFilters({
-						...(filters || {}),
-						q: e,
-					})}
+					onChange={(val) => setSearch(val)}
 					suffix={<IcMSearchlight />}
 				/>
 
-				<div
+				<Button
 					className={cl` ${styles.filter_box} ${showUnreadChat ? styles.filled : ''}`}
-					role="button"
-					tabIndex={0}
+					themeType="linkUi"
 					onClick={() => handleClick()}
 				>
 					<IcMUnread />
-				</div>
+				</Button>
 			</div>
+
+			<Tabs activeTab={status} onChange={setStatus} themeType="secondary" fullWidth>
+				{(TAB_MAPPING || []).map((item) => {
+					const { name = '', label = '' } = item;
+
+					return <TabPanel key={name} name={name} title={label} />;
+				})}
+			</Tabs>
 		</div>
 	);
 }

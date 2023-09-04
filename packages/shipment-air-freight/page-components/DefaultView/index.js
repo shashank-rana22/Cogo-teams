@@ -1,4 +1,6 @@
-import { Tabs, TabPanel, Toggle, Button } from '@cogoport/components';
+import { RaiseAlarm, RaiseAlarmCard } from '@cogoport/air-modules/components/RaiseAlarm';
+import useGetShipmentFaultAlarmDescription from '@cogoport/air-modules/hooks/useGetShipmentFaultAlarmDescription';
+import { Tabs, TabPanel, Toggle, Button, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
@@ -7,7 +9,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
-import AddService from '../../commons/AdditionalServices/components/List/AddService';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -19,26 +20,52 @@ import styles from './styles.module.css';
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
-	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
+	sales  	  : dynamic(() => import('../SalesInvoice'), { ssr: false }),
+	purchase  : dynamic(() => import('../PurchaseInvoice'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 	tracking  : dynamic(() => import('@cogoport/air-modules/components/Tracking'), { ssr: false }),
 };
 
 const UNAUTHORIZED_STATUS_CODE = 403;
+const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
+
+function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = () => {}, isGettingShipment = false }) {
+	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
+
+	if (!shipment_data?.is_job_closed && isTrue) {
+		return (
+			<div className={styles.raise_alarm_container}>
+				<RaiseAlarm
+					alarmId={alarmId}
+					setAlarmId={setAlarmId}
+					loading={isGettingShipment}
+				/>
+			</div>
+		);
+	}
+	if (shipment_data?.is_job_closed) {
+		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
+	}
+	return null;
+}
 
 function DefaultView() {
 	const router = useRouter();
 
 	const {
 		shipment_data = {}, stakeholderConfig = {},
-		servicesList = [], getShipmentStatusCode,
+		getShipmentStatusCode = 0, isGettingShipment = false,
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
 
+	const [alarmId, setAlarmId] = useState('');
+	const [reload, setReload] = useState(false);
+
+	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
 		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
 		window.location.replace(newHref);
@@ -48,8 +75,8 @@ function DefaultView() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
-		shipment_info       : !!features.includes('shipment_info'),
 		shipment_header     : !!features.includes('shipment_header'),
+		sales              	: !!features.includes('sales'),
 		purchase            : !!features.includes('purchase'),
 		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
 		chat                : !!features.includes('chat'),
@@ -64,11 +91,6 @@ function DefaultView() {
 			filters          : { q: shipment_data.serial_id },
 			pre_subject_text : `${shipment_data.serial_id}`,
 			shipment_type  	 : shipment_data.shipment_type,
-		},
-		purchase: {
-			shipmentData : shipment_data,
-			servicesData : servicesList,
-			AddService,
 		},
 		tracking: {
 			shipmentData: shipment_data,
@@ -111,9 +133,25 @@ function DefaultView() {
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
+					<HandleRaiseContainer
+						shipment_data={shipment_data}
+						alarmId={alarmId}
+						setAlarmId={setAlarmId}
+						isGettingShipment={isGettingShipment}
+					/>
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
+			{!isEmpty(alarmData) && !isGettingShipment
+						&& alarmData?.map((item) => (
+							<div style={{ marginBottom: '10px' }} key={item}>
+								<RaiseAlarmCard
+									data={item}
+									reload={reload}
+									setReload={setReload}
+								/>
+							</div>
+						))}
 			<ShipmentTags shipmentData={shipment_data} />
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}

@@ -5,6 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import { getDocumentInfo } from '../../../../../../Helpers/getDocumentInfo';
 import styles from '../styles.module.css';
 
 const API_SUCCESS_MESSAGE = {
@@ -32,7 +33,7 @@ function InvoiceDetail({
 	} = invoice;
 
 	const bfInvoice = invoicesList?.filter(
-		(item) => item?.proformaNumber === live_invoice_number,
+		(item) => [item?.proformaNumber, item?.invoiceNumber].includes(live_invoice_number),
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleDownload = (invoiceLink) => {
@@ -43,10 +44,7 @@ function InvoiceDetail({
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
-	let invoiceStatus = invoicesList?.filter(
-		(item) => item?.invoiceNumber === live_invoice_number
-			|| item?.proformaNumber === live_invoice_number,
-	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
+	let invoiceStatus = bfInvoice?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -62,7 +60,16 @@ function InvoiceDetail({
 		});
 	};
 
+	const {
+		invoice_number = '',
+		invoice_pdf = '',
+	} = getDocumentInfo({ bfInvoice });
+
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
+
+	const invoiceUrl = invoice_pdf || '';
+
+	const invoiceNo = invoice_number || live_invoice_number;
 
 	return (
 		<div className={styles.invoice_info}>
@@ -72,14 +79,10 @@ function InvoiceDetail({
 					role="button"
 					tabIndex={0}
 					onClick={() => (!isEmpty(bfInvoice)
-						? handleDownload(
-							bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,
-						)
+						? handleDownload(invoiceUrl)
 						: null)}
 				>
-					{bfInvoice?.invoiceNumber
-								|| bfInvoice?.proformaNumber
-								|| live_invoice_number}
+					{invoiceNo}
 				</div>
 
 				<div className={styles.status_container}>

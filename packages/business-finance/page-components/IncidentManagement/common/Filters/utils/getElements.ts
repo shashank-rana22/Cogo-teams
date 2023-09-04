@@ -1,4 +1,4 @@
-import { MultiSelect, Select, SingleDateRange } from '@cogoport/components';
+import { MultiSelect, Select, SingleDateRange, Toggle } from '@cogoport/components';
 
 export const getElements = (type: string) => {
 	switch (type) {
@@ -8,6 +8,8 @@ export const getElements = (type: string) => {
 			return MultiSelect;
 		case 'singleDateRange':
 			return SingleDateRange;
+		case 'toggle':
+			return Toggle;
 		default:
 			return null;
 	}

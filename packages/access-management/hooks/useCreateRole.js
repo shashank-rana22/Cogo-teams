@@ -1,7 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsPartner, useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 import { controls } from '../configurations/create-controls';
 
@@ -9,12 +10,13 @@ const useCreateRole = ({
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
 }) => {
+	const { t } = useTranslation(['accessManagement']);
 	const formProps = useForm();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/create_auth_role',
+	const [{ loading }, trigger] = useAuthRequest({
+		url    : '/create_role',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const onSubmit = async (values) => {
 		if (!values) return;
@@ -28,17 +30,19 @@ const useCreateRole = ({
 
 			const response = await trigger({ data: payload });
 			if (response.hasError) {
-				Toast.error(response?.message || 'Something went wrong');
+				Toast.error(response?.message
+					|| t('accessManagement:roles_and_permission_hooks_toast_something_went_wrong'));
 				return;
 			}
 
-			Toast.success('Role created successfully...');
+			Toast.success(t('accessManagement:roles_and_permission_hooks_toast_role_created_successfully'));
 
 			onChangeShowCreateRoleModal(false);
 
 			redirect(response?.data?.id);
 		} catch (error) {
-			Toast.error(error?.message || 'Something went wrong');
+			Toast.error(error.response?.data.error
+				|| t('accessManagement:roles_and_permission_hooks_toast_something_went_wrong'));
 		}
 	};
 
@@ -47,7 +51,7 @@ const useCreateRole = ({
 		initialCall: false,
 	});
 
-	const modifiedControls = controls(partnerOptions);
+	const modifiedControls = controls(partnerOptions, t);
 
 	return {
 		controls      : modifiedControls,

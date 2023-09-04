@@ -113,3 +113,29 @@
 	word-break: break-word;
 	word-wrap: break-word;
 }
+
+.call_btn {
+	color: var(--color-accent-orange-2) !important;
+	background-color: #fff !important;
+}
+
+.title {
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
+}
+
+.feedback {
+	display: flex;
+	flex-direction: column;
+}
+
+.nocommitment {
+	width: fit-content;
+	padding: 3px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #393f70;
+	background: #f7cdcd;
+	border-radius: 4px;
+}

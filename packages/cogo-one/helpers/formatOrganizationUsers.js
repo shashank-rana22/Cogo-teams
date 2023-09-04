@@ -15,6 +15,8 @@ function formatOrganizationUsers({ data, filterKey }) {
 			email,
 			whatsapp_country_code,
 			mobile_country_code,
+			organization = {},
+			work_scopes = [],
 		} = item || {};
 
 		const countryCode = whatsapp_country_code || mobile_country_code || geo.country.mobile_country_code;
@@ -28,6 +30,8 @@ function formatOrganizationUsers({ data, filterKey }) {
 			email,
 			countryCode,
 			mobile_no               : mobileNumber,
+			business_name           : organization?.business_name,
+			work_scopes,
 		};
 	});
 }

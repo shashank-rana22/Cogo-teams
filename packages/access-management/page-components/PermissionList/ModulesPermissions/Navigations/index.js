@@ -1,4 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import applyRegEx from '../../../../utils/apply-regex';
@@ -18,7 +19,8 @@ import styles from './styles.module.css';
  * @returns  Navigations UI
  */
 
-function Navigations(props) {
+function Navigations(props = {}) {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const {
 		roleData = {},
 		navigationMappings = {},
@@ -28,6 +30,8 @@ function Navigations(props) {
 		searchString,
 		navStatus = 'all',
 		loading = false,
+		activeNavsLoading = false,
+		activeNavs = [],
 	} = props || {};
 
 	const [activeTab, setActiveTab] = React.useState('crm');
@@ -37,15 +41,10 @@ function Navigations(props) {
 	let navigationOptions = applyRegEx(searchString, navigationvalues, 'title', ['key']);
 
 	if (navStatus === 'assigned') {
-		navigationOptions = navigationOptions.filter((nav) => !!(roleData?.permissions || []).find(
-			(item) => item.navigation === nav.key && item.status === 'active',
-		));
+		navigationOptions = navigationOptions.filter((nav) => (activeNavs || []).includes(nav.key));
 	}
 	if (navStatus === 'not_assigned') {
-		navigationOptions = navigationOptions.filter((nav) => !(roleData?.permissions || [])
-			.find((item) => item.navigation === nav.key) || !!(roleData?.permissions || []).find(
-			(item) => item.navigation === nav.key && item.status === 'inactive',
-		));
+		navigationOptions = navigationOptions.filter((nav) => !(activeNavs || []).includes(nav.key));
 	}
 	const crmNavs = navigationOptions.filter((nav) => nav?.module_type === 'crm');
 	const dashBoardNavs = navigationOptions.filter((nav) => nav?.module_type === 'dashboards' || !nav?.module_type);
@@ -54,11 +53,12 @@ function Navigations(props) {
 	return (
 		<section className={styles.container}>
 			<Tabs activeTab={activeTab} onChange={setActiveTab}>
-				<TabPanel title="CRM" name="crm">
+				<TabPanel title={t('accessManagement:roles_and_permission_permission_list_navigations_crm')} name="crm">
 					{(crmNavs || []).map((navigation) => {
 						const NavElement = navElement(navigation);
 						return (
 							<NavElement
+								key={navigation.key}
 								navigation={navigation}
 								roleData={{
 									...(roleData || {}),
@@ -68,16 +68,21 @@ function Navigations(props) {
 								authRoleId={authRoleId}
 								getRole={getRole}
 								getNavOptions={getNavOptions}
-								loading={loading}
+								loading={loading || activeNavsLoading}
+								activeNavs={activeNavs}
 							/>
 						);
 					})}
 				</TabPanel>
-				<TabPanel title="Dashboards" name="dashboard">
+				<TabPanel
+					title={t('accessManagement:roles_and_permission_permission_list_navigations_dashboards')}
+					name="dashboard"
+				>
 					{(dashBoardNavs || []).map((navigation) => {
 						const NavElement = navElement(navigation);
 						return (
 							<NavElement
+								key={navigation.key}
 								navigation={navigation}
 								roleData={{
 									...(roleData || {}),
@@ -87,7 +92,8 @@ function Navigations(props) {
 								authRoleId={authRoleId}
 								getRole={getRole}
 								getNavOptions={getNavOptions}
-								loading={loading}
+								loading={loading || activeNavsLoading}
+								activeNavs={activeNavs}
 							/>
 						);
 					})}

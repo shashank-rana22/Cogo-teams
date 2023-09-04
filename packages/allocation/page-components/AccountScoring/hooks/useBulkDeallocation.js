@@ -10,6 +10,7 @@ const useBulkDeallocation = ({
 	setCheckedRowsId = () => {},
 	setModalDetailsArray = () => {},
 	refetch = () => {},
+	t = () => {},
 }) => {
 	const isSingleSelected = modalDetailsArray?.length === DEFAULT_CHECKED_ACCOUNT;
 
@@ -31,8 +32,9 @@ const useBulkDeallocation = ({
 			refetch();
 
 			Toast.success(isSingleSelected
-				? `${modalDetailsArray[GLOBAL_CONSTANTS.zeroth_index].business_name} was successfully de-allocated`
-				: `${modalDetailsArray?.length} Users were successfully de-allocated `);
+				? `${modalDetailsArray[GLOBAL_CONSTANTS.zeroth_index].business_name} 
+				 ${t('allocation:successfullly_deallocated_toast')}`
+				: `${modalDetailsArray?.length} ${t('allocation:users_successfullly_deallocated_toast')} `);
 		} catch (error) {
 			Toast.error(error.message);
 		}

@@ -1,12 +1,14 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import VerticleLine from '../VerticleLine';
+import { GenerateFreightCertificate } from '../../../Tasks/TaskExecution/CustomTasks';
+import VerticalLine from '../VerticleLine';
 
+import PrintDocument from './PrintDocument';
 import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
 
@@ -20,14 +22,7 @@ const SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
 ];
 
-const BL_SHOW_STATUS = [
-	'approved',
-	'released',
-	'surrendered',
-	'delivered',
-	'surrender_pending',
-	'release_pending',
-];
+const PRINTABLE_DOCS = ['draft_house_bill_of_lading'];
 
 function Content({
 	uploadedItem = {},
@@ -48,19 +43,30 @@ function Content({
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
+	do_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
+	const [printDoc, setPrintDoc] = useState(false);
+	const [updateFreightCertificate, setUpdateFreightCertificate] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
-	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
-
-	const isBlReleased = BL_SHOW_STATUS.includes(isBlUploaded?.status);
 
 	const tradeType = primary_service?.trade_type;
 
+	const isSeaway = primary_service?.bl_type === 'seaway';
+
+	const isHBLMBL = [
+		'house_bill_of_lading',
+		'bill_of_lading',
+	].includes(uploadedItem?.document_type);
+
+	const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
+	&& isEmpty(do_details) && activeStakeholder !== 'document_control_manager');
+
 	const { document_type, state } = uploadedItem;
 
-	const getUploadButton = () => {
+	function GetUploadButton() {
 		if (showUploadText.length && canEditDocuments) {
 			return (
 				<Button
@@ -86,13 +92,13 @@ function Content({
 			);
 		}
 		return null;
-	};
+	}
 
 	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
 
 	return (
 		<div className={styles.single_item}>
-			<VerticleLine
+			<VerticalLine
 				checked={isChecked}
 				isLast={taskList.length === idx + INCREMENT_BY_ONE}
 			/>
@@ -146,7 +152,7 @@ function Content({
 							{receivedViaEmail && (
 								<div className={styles.message_text}>
 									<IcCError width={14} height={14} />
-									Document recieved - Please confirm
+									Document received - Please confirm
 								</div>
 							)}
 
@@ -163,16 +169,31 @@ function Content({
 					</Button>
 				) : null}
 
+				{PRINTABLE_DOCS.includes(document_type)
+					&& (
+						<Button
+							themeType="link"
+							onClick={() => setPrintDoc(true)}
+						>
+							Print
+						</Button>
+					)}
+
+				{(document_type === 'freight_certificate') ? (
+					<Button
+						themeType="link"
+						onClick={() => setUpdateFreightCertificate(true)}
+						disabled={uploadedItem?.state === 'document_rejected'}
+					>
+						Update
+					</Button>
+				) : null}
+
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(
-							[
-								'house_bill_of_lading',
-								'bill_of_lading',
-							].includes(uploadedItem?.document_type) && tradeType === 'export'
-						)
-						|| isBlReleased)
-							? (
+						{isRestrictedExportBlDo || isRestrictedImportBlDo
+							? null : (
+
 								<>
 									<Button
 										themeType="link"
@@ -187,10 +208,10 @@ function Content({
 										Download
 									</Button>
 								</>
-							) : null}
+							) }
 
 					</div>
-				) : getUploadButton()}
+				) : <GetUploadButton />}
 
 			</div>
 
@@ -202,6 +223,32 @@ function Content({
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
 				/>
 			) : null}
+
+			{printDoc ? (
+				<PrintDocument
+					shipment_data={shipment_data}
+					primary_service={primary_service}
+					data={bl_data}
+					show={printDoc}
+					setShow={setPrintDoc}
+				/>
+			) : null}
+
+			<Modal
+				size="xl"
+				show={updateFreightCertificate}
+				onClose={() => setUpdateFreightCertificate(false)}
+				closeOnOuterClick={false}
+			>
+				<Modal.Header title="Update Freight Certificate" />
+				<Modal.Body>
+					<GenerateFreightCertificate
+						task={taskList?.filter((task) => task?.document_type === document_type)}
+						refetch={shipmentDocumentRefetch}
+						onCancel={() => setUpdateFreightCertificate(false)}
+					/>
+				</Modal.Body>
+			</Modal>
 
 		</div>
 	);

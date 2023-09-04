@@ -19,6 +19,7 @@ const getLeaderBoardColumns = ({
 	bulkDeallocateFilter = () => {},
 	setModalDetailsArray,
 	leaderboardList,
+	t = () => {},
 }) => {
 	const onChangeBodyCheckbox = ({ event, service_user_id, item }) => {
 		setCheckedRowsId((previousIds) => {
@@ -98,7 +99,7 @@ const getLeaderBoardColumns = ({
 
 		},
 		{
-			Header   : 'Position',
+			Header   : t('allocation:position'),
 			accessor : ({ current_position, previous_position }) => {
 				const trend = (!current_position || !previous_position)
 					? GLOBAL_CONSTANTS.zeroth_index : current_position - previous_position;
@@ -131,7 +132,7 @@ const getLeaderBoardColumns = ({
 			},
 		},
 		{
-			Header   : 'Score Trend',
+			Header   : t('allocation:score_trend'),
 			accessor : (item) => (
 				<div
 					className={styles.score_trend}
@@ -147,15 +148,15 @@ const getLeaderBoardColumns = ({
 			),
 		},
 		{
-			Header   : 'WARMTH',
-			accessor : ({ warmth = '' }) => (
+			Header   : t('allocation:average_warmth'),
+			accessor : ({ average_warmth = '' }) => (
 				<div>
-					{startCase(warmth || '') }
+					{startCase(average_warmth || '') }
 				</div>
 			),
 		},
 		{
-			Header   : 'SEGMENT',
+			Header   : t('allocation:segment'),
 			accessor : ({ segment = '' }) => (
 				<div>
 					{startCase(segment || '') }
@@ -163,7 +164,7 @@ const getLeaderBoardColumns = ({
 			),
 		},
 		{
-			Header   : 'ORG NAME',
+			Header   : t('allocation:org_name'),
 			accessor : ({ business_name = '' }) => (
 				<Tooltip content={startCase(business_name || '')} placement="bottom">
 
@@ -176,7 +177,7 @@ const getLeaderBoardColumns = ({
 			),
 		},
 		{
-			Header   : 'USER NAME',
+			Header   : t('allocation:user_name'),
 			accessor : ({ user_name }) => (
 				<div>
 					{startCase(user_name) || '-'}
@@ -184,7 +185,7 @@ const getLeaderBoardColumns = ({
 			),
 		},
 		{
-			Header   : 'LAST TRANSACTION',
+			Header   : t('allocation:last_booking_date'),
 			accessor : ({ last_booking_date }) => (
 				<div>
 					{last_booking_date ? formatDate({
@@ -196,29 +197,28 @@ const getLeaderBoardColumns = ({
 			),
 		},
 		{
-			Header   : 'ALLOCATED KAM',
-			accessor : ({ stakeholder_name = '', role_name = '' }) => {
-				const renderToolTip = () => (
-					<>
-						<div>{startCase(stakeholder_name) || '-'}</div>
-						<div className={styles.tooltip_lower_label}>{role_name || ''}</div>
-					</>
-				);
+			Header   : t('allocation:allocated_kam'),
+			accessor : ({ stakeholder_name = '', role_name = '' }) => (
+				<Tooltip
+					content={(
+						<>
+							<div>{startCase(stakeholder_name) || '-'}</div>
+							<div className={styles.tooltip_lower_label}>{role_name || ''}</div>
+						</>
+					)}
+					placement="bottom"
+				>
+					<div className={styles.stakeholder_name_container}>
+						<div className={styles.stakeholder_name}>{startCase(stakeholder_name) || '-'}</div>
+						<div className={styles.lower_label}>{role_name || ''}</div>
+					</div>
 
-				return (
-					<Tooltip content={renderToolTip()} placement="bottom">
-						<div className={styles.stakeholder_name_container}>
-							<div className={styles.stakeholder_name}>{startCase(stakeholder_name) || '-'}</div>
-							<div className={styles.lower_label}>{role_name || ''}</div>
-						</div>
-
-					</Tooltip>
-				);
-			},
+				</Tooltip>
+			),
 
 		},
 		{
-			Header   : 'ALLOCATED AT',
+			Header   : t('allocation:allocated_at'),
 			accessor : ({ allocated_at }) => {
 				const daysSinceAllocated = Math.floor((Date.now() - new Date(allocated_at))
 				/ GLOBAL_CONSTANTS.milliseconds_in_one_day);
@@ -230,7 +230,10 @@ const getLeaderBoardColumns = ({
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
 						}) : '-'}
-						<div className={styles.lower_label}>{`${daysSinceAllocated} days`}</div>
+						<div className={styles.lower_label}>
+							{`${daysSinceAllocated} ${t('allocation:days')}`}
+
+						</div>
 					</div>
 
 				);

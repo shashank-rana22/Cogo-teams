@@ -8,3 +8,7 @@
 		}
 	}
 }
+
+.button_container {
+	padding: 0 12px !important;
+}

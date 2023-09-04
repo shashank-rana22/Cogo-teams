@@ -18,6 +18,9 @@ export default {
 	JPY : 'JPY',
 	SGD : 'SGD',
 	CAD : 'CAD',
+	IDR : 'IDR',
+	THB : 'THB',
+	CNY : 'CNY',
 };
 
 export const CURRENCY_MAPPING = {

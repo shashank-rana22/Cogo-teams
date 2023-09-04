@@ -1,18 +1,20 @@
-import { Pill, Placeholder, Toast } from '@cogoport/components';
+import { Placeholder, Toast, Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
-import { isEmpty, snakeCase } from '@cogoport/utils';
+import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
-import useGetUser from '../../../../hooks/useGetUser';
+import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
 import AddGroupMember from './AddGroupMember';
+import AgentQuickActions from './AgentQuickActions';
+import ContactVerification from './ContactVerification';
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
 import GroupMembers from './GroupMembers';
@@ -32,7 +34,6 @@ function AgentDetails({
 	activeTab = '',
 	activeVoiceCard = {},
 	formattedMessageData = {},
-	customerId = '',
 	setModalType = () => {},
 	activeRoomLoading = false,
 	activeSelect = '',
@@ -43,7 +44,11 @@ function AgentDetails({
 	viewType = '',
 	setActiveTab = () => {},
 	mailProps = {},
+	userData = {},
+	getUserLoading = false,
 }) {
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
 		name         : '',
@@ -55,17 +60,9 @@ function AgentDetails({
 	const geo = getGeoConstants();
 
 	const {
-		user_id,
-		lead_user_id,
-		email,
-		user_name: messageName,
-		mobile_no,
-		organization_id,
-		sender,
-		channel_type = '',
-		user_type,
-		id = '',
-		lead_user_details = {},
+		user_id, lead_user_id, email, user_name: messageName, mobile_no, organization_id, sender,
+		channel_type = '', user_type, id = '', lead_user_details = {},
+		user_details = {},
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
@@ -88,6 +85,10 @@ function AgentDetails({
 		organization_id: voiceOrgId = '',
 	} = activeVoiceCard || {};
 
+	const userMessageMobileNumber = mobile_no || user_details?.whatsapp_number_eformat
+	|| user_details?.mobile_number_eformat || lead_user_details?.whatsapp_number_eformat
+	|| lead_user_details?.mobile_number_eformat;
+
 	const DATA_MAPPING = {
 		voice: {
 			userId        : user_data?.id,
@@ -101,14 +102,13 @@ function AgentDetails({
 			userId        : user_id,
 			name          : messageName || lead_user_details?.name,
 			userEmail     : email || lead_user_details?.email,
-			mobile_number : mobile_no,
+			mobile_number : userMessageMobileNumber,
 			orgId         : organization_id,
-			leadUserId    : lead_user_id,
+			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
 		},
 	};
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
-
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
 		sender,
@@ -116,23 +116,13 @@ function AgentDetails({
 		firestore,
 	});
 
-	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
+	const { organizationData = {}, fetchOrganization = () => {}, orgLoading = false } = useGetOrganization({
+		organizationId     : orgId,
+		leadOrganizationId : lead_user_details.lead_organization_id,
+	});
 
-	const { mobile_verified, whatsapp_verified } = userData || {};
-	const VERIFICATION_STATUS = [
-		{
-			label      : mobile_verified ? 'Verified' : 'Not Verified',
-			color      : mobile_verified ? 'green' : '#f8aea8',
-			size       : 'sm',
-			prefixIcon : <IcMCall />,
-		},
-		{
-			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
-			color      : whatsapp_verified ? 'green' : '#f8aea8',
-			size       : 'sm',
-			prefixIcon : <IcCWhatsapp />,
-		},
-	];
+	const isAddFeedBackButton = !getUserLoading && !orgId && lead_user_details?.lead_organization_id;
+
 	const handleSubmit = async () => {
 		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
 			await leadUserProfile({ profileValue });
@@ -143,14 +133,13 @@ function AgentDetails({
 		}
 	};
 
-	const handleSummary = () => {
-		setShowMore(true);
-		setActiveSelect('user_activity');
+	const handleRoute = () => {
+		window.open(`/${partnerId}/lead-organization/${lead_user_details?.lead_organization_id}`, '_blank');
 	};
 
-	const setActiveMessage = (val) => {
-		switchUserChats({ val, firestore, setActiveTab });
-	};
+	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
+
+	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
 
 	if (!userId && !leadUserId && !mobile_no) {
 		return (
@@ -175,48 +164,45 @@ function AgentDetails({
 	return (
 		<>
 			<div className={styles.top_div}>
+
 				<div className={styles.title}>Profile</div>
-				{activeTab === 'message' && (
-					<div
-						role="presentation"
-						className={styles.copy_link}
-						onClick={() => handleClick({ id, channel_type })}
-					>
-						Share
-					</div>
-				)}
-			</div>
-			<Profile loading={loading} name={name} userEmail={userEmail} />
-			{(leadUserId || userId) && (
-				<div className={styles.verification_pills}>
-					{VERIFICATION_STATUS.map((item, index) => {
-						const itemKey = `${snakeCase(item.label)}_${index}`;
-						return (
-							<div key={itemKey}>
-								{loading ? (
-									<Placeholder
-										height="20px"
-										width="120px"
-										margin="10px 0px 10px 0px"
-									/>
-								) : (
-									<Pill
-										key={item.label}
-										prefix={item.prefixIcon}
-										size="md"
-										color={item.color}
-									>
-										<div className={styles.pill_name}>
-											{item.label}
-										</div>
-									</Pill>
-								)}
-							</div>
-						);
-					})}
+				<div className={styles.quick_actions}>
+					{activeTab === 'message' && (
+						<div
+							role="presentation"
+							className={styles.copy_link}
+							onClick={() => handleClick({ id, channel_type })}
+						>
+							Share
+						</div>
+					)}
+
 				</div>
+			</div>
+
+			<Profile loading={getUserLoading} name={name} userEmail={userEmail || userData?.email} />
+
+			<ContactVerification leadUserId={leadUserId} userId={userId} loading={getUserLoading} userData={userData} />
+
+			{(activeTab === 'message' && !getUserLoading && !orgLoading)
+			&& (
+				<AgentQuickActions
+					userEmail={userEmail}
+					userId={user_id}
+					leadUserId={lead_user_id}
+					orgId={orgId}
+					mobileNumber={mobile_number}
+					organizationData={organizationData}
+					fetchOrganization={fetchOrganization}
+					partnerId={partnerId}
+					formattedMessageData={formattedMessageData}
+				/>
 			)}
-			{loading ? (
+
+			{isAddFeedBackButton ? (
+				<Button size="sm" themeType="secondary" onClick={handleRoute}>Add Feedback</Button>
+			) : null}
+			{getUserLoading ? (
 				<Placeholder
 					height="50px"
 					width="220px"
@@ -233,18 +219,20 @@ function AgentDetails({
 					hasVoiceCallAccess={geo.others.navigations.cogo_one.has_voice_call_access}
 				/>
 			)}
-			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
+			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} viewType={viewType} /> }
 			<GroupMembersRequests
 				deleteGroupRequest={deleteGroupRequest}
 				approveGroupRequest={approveGroupRequest}
 				groupMembers={activeMessageCard.requested_group_members}
 				partnerUsers={partnerUsers}
+				agentId={agentId}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			<GroupMembers
 				deleteGroupMember={deleteGroupMember}
 				groupMembers={activeMessageCard?.group_members}
 				partnerUsers={partnerUsers}
+				agentId={agentId}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			{(mobile_no || user_number) && (
@@ -253,7 +241,7 @@ function AgentDetails({
 					<ConversationContainer
 						userData={userData}
 						noData={!leadUserId && !userId}
-						loading={loading}
+						loading={getUserLoading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
 						activeMessageCard={activeMessageCard}
 						setActiveMessage={setActiveMessage}

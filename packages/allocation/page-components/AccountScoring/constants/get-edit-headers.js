@@ -1,6 +1,9 @@
-const editHeaders = ['LIFECYCLE ITEM',
-	'DIY SCORE & WARMTH DURATION',
-	'ASSISTED SCORE & WARMTH DURATION',
-	'SYSTEM SCORE & WARMTH DURATION', 'COGOVERSE SCORE & WARMTH DURATION'];
+const getEditHeaders = ({ t = () => {} }) => [
+	t('allocation:lifecycle_item'),
+	t('allocation:diy_score_warmth_duration'),
+	t('allocation:assisted_score_warmth_duration'),
+	t('allocation:system_score_warmth_duration'),
+	t('allocation:cogoverse_score_warmth_duration'),
+];
 
-export default editHeaders;
+export default getEditHeaders;

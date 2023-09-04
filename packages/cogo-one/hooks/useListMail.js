@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import { MAIL_FOLDER_OPTIONS } from '../constants/mailConstants';
+import { MAIL_FOLDER_OPTIONS, SEARCH_QUERY_LIMIT } from '../constants/mailConstants';
 
 const PAGE_LIMIT = 10;
 const NEXT_PAGE_COUNT = 1;
@@ -13,7 +13,7 @@ const MIN_HEIGHT_FOR_API_CALL = 50;
 const getParams = ({ activeMailAddress = '', activeFolder = '', page = '', query = '', filters = {} }) => ({
 	page,
 	email_address : activeMailAddress,
-	page_limit    : PAGE_LIMIT,
+	page_limit    : query ? SEARCH_QUERY_LIMIT : PAGE_LIMIT,
 	foldername    : MAIL_FOLDER_OPTIONS[activeFolder],
 	search        : query || undefined,
 	filters       : JSON.stringify({
@@ -67,6 +67,10 @@ function useListMail({
 	}, [trigger, activeMailAddress, activeFolder, query, appliedFilters]);
 
 	const handleScroll = (e) => {
+		if (query) {
+			return;
+		}
+
 		const { clientHeight, scrollTop, scrollHeight } = e.target;
 
 		const reachBottom = scrollTop + clientHeight + MIN_HEIGHT_FOR_API_CALL >= scrollHeight;

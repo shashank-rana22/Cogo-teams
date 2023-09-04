@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { React, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import useCreateTaskList from '../../hooks/useCreateTaskList';
 import useGetShipmentMails from '../../hooks/useListRpaMails';
@@ -18,7 +18,7 @@ function RenderContent({
 	loading = true, activeToggle = true, canEditDocuments = true, filteredTaskList = [], emailList = [],
 	completedDocs = {}, setShowDoc = () => {}, setShowApproved = () => {},
 	showIgmDocs = false, refetch = () => {}, activeStakeholder = '',
-	bl_details = [], activeWallet = '', orgDocService = '',
+	bl_details = [], do_details = [], activeWallet = '', orgDocService = '',
 }) {
 	if (loading) {
 		return <LoadingState />;
@@ -36,6 +36,7 @@ function RenderContent({
 				shipmentDocumentRefetch={refetch}
 				activeStakeholder={activeStakeholder}
 				bl_details={bl_details}
+				do_details={do_details}
 			/>
 		);
 	}
@@ -72,6 +73,7 @@ function Documents() {
 		setFilters,
 		refetch,
 		bl_details,
+		do_details,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
 	const emailPayload = {
@@ -152,6 +154,7 @@ function Documents() {
 				completedDocs={completedDocs}
 				refetch={refetch}
 				bl_details={bl_details}
+				do_details={do_details}
 				activeWallet={activeWallet}
 				orgDocService={orgDocService}
 			/>

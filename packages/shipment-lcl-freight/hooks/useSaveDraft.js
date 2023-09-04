@@ -17,9 +17,9 @@ const useSaveDraft = ({
 	const { id: userId } = user || {};
 
 	const [{ loading }, trigger] = useRequestBf({
-		url    : 'saas/insurance/draft',
-		auth   : 'post_insurance_draft',
-		method : 'POST',
+		url     : 'saas/insurance/draft',
+		authKey : 'post_insurance_draft',
+		method  : 'POST',
 	}, { manual: true });
 
 	const saveData = async ({ key, payload }) => {
@@ -37,6 +37,7 @@ const useSaveDraft = ({
 					userId,
 					...payload,
 					sid            : shipmentData?.serial_id,
+					performedBy    : userId,
 				},
 			});
 			Toast.success(successMessage);

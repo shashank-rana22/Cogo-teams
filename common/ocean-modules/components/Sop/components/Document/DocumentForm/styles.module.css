@@ -4,6 +4,16 @@
 
 .form_item_container {
 	margin: 8px 0;
+
+	:global {
+		.ui_radio_container {
+			padding: 10px 14px 0 0;
+		}
+
+		.ui_select_options_container {
+			max-height: 74px;
+		}
+	}
 }
 
 .contact_form_item {
@@ -37,4 +47,15 @@
 .form_label {
 	font-size: 12px;
 	font-weight: 600;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_checkbox_container {
+			padding-left: 0;
+		}
+	}
 }

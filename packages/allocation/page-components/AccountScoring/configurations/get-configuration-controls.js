@@ -1,4 +1,4 @@
-const getControls = ({ eventsToExclude, engagementType }) => {
+const getControls = ({ eventsToExclude, engagementType, t = () => {} }) => {
 	const controlItem = {
 		name     : 'single_item',
 		type     : 'fieldArray',
@@ -6,7 +6,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'event_name',
 				type        : 'asyncSelect',
-				placeholder : 'Select...',
+				placeholder : t('allocation:event_name_placeholder'),
 				asyncKey    : 'engagement_scoring_events',
 				initialCall : false,
 				params      : {
@@ -22,7 +22,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'diy_score',
 				type        : 'number',
-				placeholder : 'score',
+				placeholder : t('allocation:score_placeholder'),
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '16px',
@@ -31,7 +32,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'diy_warmth_duration',
 				type        : 'number',
-				placeholder : 'days',
+				placeholder : t('allocation:days_placeholder'),
+				min         : 0,
 				style       : {
 					width: '74px',
 				},
@@ -39,7 +41,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'assisted_score',
 				type        : 'number',
-				placeholder : 'score',
+				placeholder : t('allocation:score_placeholder'),
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '90px',
@@ -48,7 +51,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'assisted_warmth_duration',
 				type        : 'number',
-				placeholder : 'days',
+				placeholder : t('allocation:days_placeholder'),
+				min         : 0,
 				style       : {
 					width: '74px',
 				},
@@ -56,7 +60,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'system_score',
 				type        : 'number',
-				placeholder : 'score',
+				placeholder : t('allocation:score_placeholder'),
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '90px',
@@ -65,7 +70,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'system_warmth_duration',
 				type        : 'number',
-				placeholder : 'days',
+				placeholder : t('allocation:days_placeholder'),
+				min         : 0,
 				style       : {
 					width: '74px',
 				},
@@ -73,7 +79,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'cogoverse_score',
 				type        : 'number',
-				placeholder : 'score',
+				placeholder : t('allocation:score_placeholder'),
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '90px',
@@ -82,7 +89,8 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 			{
 				name        : 'cogoverse_warmth_duration',
 				type        : 'number',
-				placeholder : 'days',
+				placeholder : t('allocation:days_placeholder'),
+				min         : 0,
 				style       : {
 					width       : '74px',
 					marginRight : '30px',

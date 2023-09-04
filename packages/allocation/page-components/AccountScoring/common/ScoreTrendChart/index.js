@@ -1,17 +1,22 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import { useTranslation } from 'next-i18next';
 
 import GRAPH_COLOUR_MAPPING from './graph-colour-mapping';
-import GRAPH_PROPS_MAPPING from './graph-props-mapping';
+import getGraphPropsMapping from './graph-props-mapping';
 
 function ScoreTrendChart(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { trend, data, source } = props;
 
 	const graphData = [{ id: 'trend', data }];
 
+	const graphPropsMapping = getGraphPropsMapping({ t });
+
 	const {
 		margin, enableGridX, enableGridY, axisBottom, axisLeft, enableArea,
 		enablePoints,
-	} = GRAPH_PROPS_MAPPING[source] || {};
+	} = graphPropsMapping[source] || {};
 
 	return (
 		<ResponsiveLine

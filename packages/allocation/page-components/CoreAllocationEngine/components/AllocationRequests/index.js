@@ -1,5 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useListAllocationRequests from '../../hooks/useListAllocationRequests';
 
@@ -10,6 +11,8 @@ import List from './List';
 import styles from './styles.module.css';
 
 function Requests() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data,
 		columns,
@@ -30,7 +33,7 @@ function Requests() {
 		setShowModal,
 		onCloseModal,
 		...restProps
-	} = useListAllocationRequests();
+	} = useListAllocationRequests({ t });
 
 	return (
 		<section className={styles.container}>

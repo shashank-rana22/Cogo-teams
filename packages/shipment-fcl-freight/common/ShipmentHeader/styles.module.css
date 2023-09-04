@@ -3,7 +3,7 @@
 	align-items: center;
 	width: 90%;
 	padding: 10px 24px;
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
 
@@ -102,5 +102,25 @@
 
 	& > svg {
 		cursor: pointer;
+	}
+}
+
+.cancel_popover {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			padding: 0;
+		}
+	}
+}
+
+.popover_text_button {
+	width: fit-content;
+	background-color: var(--color-secondary-greyscale-5);
+
+	&:hover {
+		color: var(--color-primary-error-red-2);
+		background-color: transparent !important;
 	}
 }

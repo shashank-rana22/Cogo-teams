@@ -41,6 +41,7 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 				{ label: 'Platform Chat', value: 'platform_chat' },
 				{ label: 'Telegram', value: 'telegram' },
 				{ label: 'Zalo', value: 'zalo' },
+				{ label: 'Email', value: 'email' },
 			],
 		},
 		{
@@ -95,8 +96,8 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : 'Tags',
 			name           : 'chat_tags',
-			controllerType : 'select',
-			value          : '',
+			controllerType : 'multi-select',
+			value          : [],
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Tags',
 			isClearable    : true,

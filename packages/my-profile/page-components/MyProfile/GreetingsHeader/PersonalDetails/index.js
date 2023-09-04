@@ -1,6 +1,7 @@
 import { IcCFtick, IcMCall, IcMEmail, IcMLiveChat, IcMEdit } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import MobileNoVerificationModal from '../../MobileVerificationModal';
@@ -14,6 +15,8 @@ function PersonDetails({
 	showMobileVerificationModal,
 	setEditNameModal,
 }) {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		profile: { mobile_verified = false },
 	} = useSelector((state) => state);
@@ -88,7 +91,7 @@ function PersonDetails({
 							role="presentation"
 							onClick={() => onClickVerifyMobileNoButton()}
 						>
-							{mobile_verified ? 'Change' : 'Verify'}
+							{mobile_verified ? t('profile:change_button') : t('profile:verify_button')}
 						</div>
 					</div>
 

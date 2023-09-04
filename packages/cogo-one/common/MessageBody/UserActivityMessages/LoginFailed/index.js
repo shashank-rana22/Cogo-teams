@@ -22,17 +22,17 @@ const USER_EVENT_TITLE_MAPPING = {
 	'System: Auth: App user logged in'             : 'Logged In',
 };
 
-function LoginFailed({ name = '', data = {}, scope = '' }) {
+function LoginFailed({ name = '', data = {}, scope = '', eventName = '' }) {
 	const eventTitle = getEventTitle({ name });
 
 	return (
 		<>
 			<div className={styles.title}>
-				{(USER_EVENT || []).includes(name) ? (
+				{(USER_EVENT || []).includes(eventName) ? (
 					<>
 						{startCase(scope)}
 						{' '}
-						{USER_EVENT_TITLE_MAPPING[name]}
+						{USER_EVENT_TITLE_MAPPING[eventName]}
 					</>
 
 				) : eventTitle }

@@ -12,7 +12,6 @@ export default function getControls({
 	shipment_type,
 	documents,
 	isAdditional,
-	trade_type,
 	payment_term,
 }) {
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
@@ -39,7 +38,7 @@ export default function getControls({
 		services = displayServiceType;
 	}
 
-	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
+	const blCategoryOptions = primary_service?.trade_type === 'export' && payment_term === 'prepaid'
 		? [
 			{ label: 'MBL', value: 'mbl' },
 			{ label: 'HBL', value: 'hbl' },

@@ -1,5 +1,6 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Layout, useShipmentBack } from '@cogoport/ocean-modules';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -8,17 +9,20 @@ import React, { useState } from 'react';
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import Footer from '../Footer';
 
+import DestinationPortStep from './DestinationPortStep';
 import styles from './styles.module.css';
 
-const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
+const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager'];
+const FIRST_STEP = 1;
+const SECOND_STEP = 2;
 
 function Form({
 	upsellableService = {},
 	servicesList = [],
 	shipmentData = {},
-	primary_service,
+	primary_service = {},
 	closeModal = () => {},
-	haveToUpsell,
+	haveToUpsell = false,
 	activeStakeholder = '',
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
@@ -27,7 +31,7 @@ function Form({
 
 	const { handleShipmentsClick = () => {} } = useShipmentBack();
 
-	const [step, setStep] = useState(1);
+	const [step, setStep] = useState(FIRST_STEP);
 
 	const {
 		consignee_shipper = {},
@@ -35,6 +39,16 @@ function Form({
 		importer_exporter_id = '',
 		consignee_shipper_id = '',
 	} = shipmentData;
+
+	const {
+		destination_port = {},
+		origin_port = {},
+		cargo_details = [],
+		inco_term = '',
+	} = primary_service;
+
+	const { name: destination_port_name = '' } = destination_port;
+	const { name : origin_port_name = '' } = origin_port;
 
 	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
 
@@ -51,7 +65,7 @@ function Form({
 		organization_id,
 	});
 
-	const { errors, formValues, control } = formProps;
+	const { errors, formValues, control, resetField } = formProps;
 
 	const formOrganizationId = formValues?.organization_id;
 
@@ -67,8 +81,10 @@ function Form({
 	];
 
 	const getModifiedOptions = (option) => option?.options?.map(
-		(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
+		(op) => ({ ...op, custom_key: `${op.user_id}:${op.branch.id}` }),
 	);
+
+	const [customValueUserId, customValueBranchId] = (formValues?.user_id || '').split(':');
 
 	return (
 		<Modal
@@ -82,76 +98,77 @@ function Form({
 			<Modal.Header title={(
 				<div className={styles.header}>
 					{haveToUpsell ? (
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.button}
+						<Button
+							themeType="tertiary"
 							onClick={handleShipmentsClick}
 						>
-							<IcMArrowBack />
-						</div>
+							<IcMArrowBack height={16} width={16} />
+						</Button>
 					) : null}
 
 					{startCase(upsellableService.trade_type)}
-					&nbsp;
+					{' '}
 					{startCase(service)}
 				</div>
 			)}
 			/>
 
-			<Modal.Body>
-				{ controls?.length === 0 && step === 1
-					? (
-						<div> Are you sure you want to upsell this service?</div>
-					)
-					: null }
-				{ controls?.length !== 0 && step === 1
-					? (
-						<Layout
-							control={control}
-							errors={errors}
-							fields={controls}
-						/>
-					)
-					: null }
+			<Modal.Body className={styles.modal_body}>
+				{isEmpty(controls) && step === FIRST_STEP ? (
+					<DestinationPortStep
+						cargoDetails={{
+							...(cargo_details[GLOBAL_CONSTANTS.zeroth_index] || {}),
+							trade_type: upsellableService.trade_type,
+							inco_term,
+						}}
+						destination_port_name={destination_port_name}
+						origin_port_name={origin_port_name}
+					/>
+				) : null }
 
-				{ step === 2 && haveToAskOrgDetails
-					? (
-						<>
-							<div> Choose The organisation for which you want to upsell- </div>
+				{!isEmpty(controls) && step === FIRST_STEP ? (
+					<Layout
+						control={control}
+						errors={errors}
+						fields={controls}
+					/>
+				) : null }
 
-							<RadioGroupController
-								options={orgOptions}
-								control={formProps.control}
-								name="organization_id"
-								rules={{ required: 'Organisation is required' }}
-							/>
-						</>
-					) : null}
+				{step === SECOND_STEP && haveToAskOrgDetails ? (
+					<>
+						<div> Choose the organisation for which you want to upsell - </div>
 
-				{
-					step === 2 ? (
-						<AsyncSelectController
-							className={styles.select}
+						<RadioGroupController
+							options={orgOptions}
 							control={formProps.control}
-							name="user_id"
-							asyncKey="organization_users"
-							isClearable
-							valueKey="custom_key"
-							initialCall={false}
-							placeholder="Select Organization User"
-							params={{
-								filters: {
-									organization_id : formOrganizationId,
-									status          : 'active',
-								},
-								page_limit: 30,
-							}}
-							getModifiedOptions={getModifiedOptions}
-							rules={{ required: 'User is required' }}
+							name="organization_id"
+							onChange={() => resetField('user_id')}
+							rules={{ required: 'Organisation is required' }}
 						/>
-					) : null
-}
+					</>
+				) : null}
+
+				{step === SECOND_STEP ? (
+					<AsyncSelectController
+						className={styles.select}
+						control={formProps.control}
+						name="user_id"
+						asyncKey="organization_users"
+						isClearable
+						valueKey="custom_key"
+						initialCall
+						placeholder="Select Organization User"
+						params={{
+							filters: {
+								organization_id : formOrganizationId,
+								status          : 'active',
+							},
+							page_limit: 30,
+						}}
+						getModifiedOptions={getModifiedOptions}
+						rules={{ required: 'User is required' }}
+					/>
+				) : null}
 
 				{!isEmpty(errors?.user_id)
 					? <div className={styles.error}>{errors?.user_id?.message}</div>
@@ -169,7 +186,7 @@ function Form({
 					step={step}
 					setStep={setStep}
 					organization_id={formOrganizationId}
-					user={formValues?.user_id}
+					user={{ user_id: customValueUserId, branch_id: customValueBranchId }}
 				/>
 			</Modal.Footer>
 		</Modal>

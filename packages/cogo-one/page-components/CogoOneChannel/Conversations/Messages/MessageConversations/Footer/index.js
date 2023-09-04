@@ -1,104 +1,204 @@
-import { cl, Popover, Textarea } from '@cogoport/components';
-import {
-	IcMHappy,
-	IcMAttach,
-	IcMDelete,
-} from '@cogoport/icons-react';
+import { cl, Textarea, RTEditor } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import { useState, useRef, useEffect } from 'react';
 
-import CustomFileUploader from '../../../../../../common/CustomFileUploader';
-import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
-import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
-import EmojisBody from '../EmojisBody';
+import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
+import useSendChat from '../../../../../../hooks/useSendChat';
+import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMail';
+import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
 import styles from '../styles.module.css';
 
+import { getPlaceHolder, getEmailState } from './footerFunctions';
+import FooterHead from './FooterHead';
 import SendActions from './SendActions';
 
-const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
-	if (canMessageOnBotSession) {
-		return 'This chat is currently in bot session, send a message to talk with customer';
-	}
-	if (hasPermissionToEdit) {
-		return 'Type your message...';
-	}
-	return 'You do not have permission to chat';
+const TEXTBOX_COMPONENT_MAPPING = {
+	email    : RTEditor,
+	whatsapp : Textarea,
+	default  : Textarea,
 };
 
 function Footer({
-	draftMessage = '',
-	sentQuickSuggestions = () => {},
-	messageLoading = false,
-	canMessageOnBotSession,
-	handleProgress,
-	openInstantMessages = () => {},
+	canMessageOnBotSession = false,
 	hasPermissionToEdit = false,
 	suggestions = [],
 	scrollToBottom = () => {},
-	setDraftMessages = () => {},
-	sendChatMessage = () => {},
-	setDraftUploadedFiles = () => {},
-	uploading,
-	uploadedFileName,
-	fileIcon,
-	finalUrl = '',
 	formattedData = {},
 	viewType = '',
+	firestore = {},
+	activeChatCollection = {},
+	setOpenModal = () => {},
+	sendCommunicationTemplate = () => {},
+	communicationLoading = false,
+	assignChat = () => {},
+	assignLoading = false,
+	mailActions = {},
+	setMailActions = () => {},
 }) {
-	const { id = '', channel_type = '' } = formattedData;
+	const uploaderRef = useRef(null);
+
+	const { id = '', channel_type = '', email = '', source = '' } = formattedData;
+
+	const [draftMessages, setDraftMessages] = useState({});
+	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
+	const [uploading, setUploading] = useState({});
+	const [emailState, setEmailState] = useState(() => getEmailState({ mailActions }));
+	const [showControl, setShowControl] = useState('');
+	const [errorValue, setErrorValue] = useState('');
+
+	const uploadedFiles = draftUploadedFiles?.[id];
+	const draftMessage = draftMessages?.[id];
+
+	const fileMetaData = formatFileAttributes({ uploadedFiles: draftUploadedFiles?.[id] });
+
+	const hasUploadedFiles = !isEmpty(draftUploadedFiles?.[id]);
+
+	const resetEmailStates = () => {
+		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
+		setEmailState({
+			toUserEmail   : [email],
+			subject       : '',
+			ccrecipients  : [],
+			bccrecipients : [],
+		});
+		uploaderRef?.current?.externalHandleDelete?.(channel_type === 'email' ? [] : '');
+		setMailActions({ actionType: '', data: {} });
+	};
 
 	const {
-		emojisList = {},
-		setOnClicked = () => {},
-		onClicked = false,
-	} = useGetEmojiList({ formattedData });
+		sendChatMessage,
+		sendQuickSuggestions,
+		messageLoading,
+	} = useSendChat({
+		firestore,
+		channelType  : channel_type,
+		id,
+		draftMessages,
+		setDraftMessages,
+		activeChatCollection,
+		uploadedFile : fileMetaData?.[GLOBAL_CONSTANTS.zeroth_index] || {},
+		setDraftUploadedFiles,
+		formattedData,
+		assignChat,
+		canMessageOnBotSession,
+		scrollToBottom,
+		hasUploadedFiles,
+	});
+
+	const {
+		mailLoading = false,
+		sendMail = () => {},
+	} = useSendOmnichannelMail({
+		scrollToBottom,
+		formattedData,
+		emailState,
+		draftUploadedFiles,
+		draftMessage,
+		uploadedFiles,
+		setDraftMessages,
+		setDraftUploadedFiles,
+		mailActions,
+		id,
+		resetEmailStates,
+		source,
+	});
+
+	const SEND_FUNC_MAPPING = {
+		whatsapp: {
+			function           : sendChatMessage,
+			sendMessageLoading : messageLoading,
+			sendOnEnter        : true,
+		},
+		email: {
+			function           : sendMail,
+			sendMessageLoading : mailLoading,
+			sendOnEnter        : false,
+		},
+		default: {
+			function           : sendChatMessage,
+			sendMessageLoading : messageLoading,
+			sendOnEnter        : true,
+		},
+	};
+
+	const {
+		function: sendMessage = () => {},
+		sendMessageLoading,
+		sendOnEnter,
+	} = SEND_FUNC_MAPPING[channel_type] || SEND_FUNC_MAPPING.default;
 
 	const handleKeyPress = (event) => {
-		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
+		if (sendOnEnter && event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
-			sendChatMessage(scrollToBottom);
+			sendMessage();
 		}
 	};
 
+	const handleProgress = (val) => {
+		setUploading((prev) => ({ ...prev, [id]: val }));
+	};
+
+	const openInstantMessages = () => {
+		setOpenModal({
+			type : 'instant_messages',
+			data : {
+				updateMessage: (val) => {
+					setDraftMessages((prev) => ({ ...prev, [id]: val }));
+					setOpenModal({ type: null, data: {} });
+				},
+				sendCommunicationTemplate,
+				communicationLoading,
+				channel_type,
+			},
+		});
+	};
+
+	const isEmail = channel_type === 'email';
+
+	const TextAreaComponent = TEXTBOX_COMPONENT_MAPPING[channel_type] || TEXTBOX_COMPONENT_MAPPING.default;
+
+	useEffect(() => {
+		setEmailState(getEmailState({ mailActions, email }));
+
+		const defaultValue = channel_type === 'email' ? [] : '';
+
+		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: defaultValue }));
+
+		uploaderRef?.current?.externalHandleDelete?.(defaultValue);
+	}, [mailActions, email, id, channel_type]);
+
 	return (
 		<>
-			<div
-				className={cl`${styles.nofile_container}
-				${((finalUrl) || uploading?.[id]) ? styles.upload_file_container : ''}`}
-			>
-				{(finalUrl) && !uploading?.[id] && (
-					<>
-						<div className={styles.files_view}>
-							<div className={styles.file_icon_container}>
-								{fileIcon}
-							</div>
-							<div
-								role="presentation"
-								className={styles.file_name_container}
-								onClick={() => {
-									window.open(finalUrl, '_blank', 'noreferrer');
-								}}
-							>
-								{uploadedFileName}
-							</div>
-						</div>
-						<div className={styles.delete_icon_container}>
-							<IcMDelete
-								className={styles.delete_icon}
-								onClick={() => setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }))}
-							/>
-						</div>
-					</>
-				)}
-				{uploading?.[id] && (
-					<div className={styles.uploading}>uploading.....</div>
-				)}
-			</div>
+			{hasPermissionToEdit && (
+				<FooterHead
+					isEmail={isEmail}
+					mailActions={mailActions}
+					setErrorValue={setErrorValue}
+					emailState={emailState}
+					setShowControl={setShowControl}
+					showControl={showControl}
+					setEmailState={setEmailState}
+					errorValue={errorValue}
+					uploading={uploading}
+					roomId={id}
+					fileMetaData={fileMetaData}
+					setDraftUploadedFiles={setDraftUploadedFiles}
+					hasUploadedFiles={hasUploadedFiles}
+					uploaderRef={uploaderRef}
+					hasPermissionToEdit={hasPermissionToEdit}
+					key={mailActions?.actionType}
+					setMailActions={setMailActions}
+				/>
+			)}
 			<div
 				className={cl`${styles.text_area_div} ${
 					hasPermissionToEdit ? '' : styles.opacity
 				}`}
 			>
-				{!isEmpty(suggestions) && (
+				{!isEmail && !isEmpty(suggestions) && (
 					<div className={styles.suggestions_div}>
 						<div className={styles.flex}>
 							<div className={styles.suggestions_text}>
@@ -108,103 +208,58 @@ function Footer({
 								<div
 									key={eachSuggestion}
 									className={styles.tag_div}
-									role="button"
-									tabIndex={0}
+									role="presentation"
 									onClick={() => {
-										if (hasPermissionToEdit && !messageLoading) {
-											sentQuickSuggestions(scrollToBottom, eachSuggestion);
+										if (hasPermissionToEdit && !sendMessageLoading) {
+											sendQuickSuggestions({ val: eachSuggestion });
 										}
 									}}
 									style={{
 										cursor:
-										(!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
+										(!hasPermissionToEdit || sendMessageLoading) ? 'not-allowed' : 'pointer',
 									}}
 								>
 									{eachSuggestion}
 								</div>
 							))}
 						</div>
-
 					</div>
 				)}
-
-				<Textarea
+				<TextAreaComponent
+					key={mailActions?.actionType}
 					rows={5}
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
 					className={styles.text_area}
 					value={draftMessage || ''}
-					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e }))}
+					onChange={(val) => setDraftMessages((prev) => ({ ...prev, [id]: val }))}
 					disabled={!hasPermissionToEdit}
-					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'text' }}
-					onKeyDown={(e) => handleKeyPress(e)}
+					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
+					onKeyDown={handleKeyPress}
+					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
+					showToolbar={false}
 				/>
-
 				<div className={styles.flex_space_between}>
-					<div className={styles.icon_tools}>
-						{hasPermissionToEdit && (
-							<CustomFileUploader
-								disabled={uploading?.[id]}
-								handleProgress={handleProgress}
-								showProgress={false}
-								draggable
-								accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
-								className="file_uploader"
-								uploadIcon={(
-									<IcMAttach
-										className={styles.upload_icon}
-										style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
-									/>
-								)}
-								channel={channel_type}
-								onChange={(val) => {
-									setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }));
-								}}
-							/>
-						)}
-						<Popover
-							placement="top"
-							render={(
-								<EmojisBody
-									emojisList={emojisList}
-									setOnClicked={setOnClicked}
-									updateMessage={(val) => setDraftMessages((p) => ({
-										...p,
-										[id]: !p?.[id] ? val
-											: p?.[id]?.concat(val),
-									}))}
-								/>
-							)}
-							visible={onClicked}
-							maxWidth={355}
-							onClickOutside={() => {
-								if (hasPermissionToEdit) {
-									setOnClicked(false);
-								}
-							}}
-						>
-							<IcMHappy
-								fill="#828282"
-								onClick={() => {
-									if (hasPermissionToEdit) {
-										setOnClicked((p) => !p);
-									}
-								}}
-								style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
-							/>
-						</Popover>
-					</div>
 					<SendActions
 						hasPermissionToEdit={hasPermissionToEdit}
 						openInstantMessages={openInstantMessages}
-						sendChatMessage={sendChatMessage}
-						messageLoading={messageLoading}
+						sendMessage={sendMessage}
+						messageLoading={((canMessageOnBotSession && assignLoading) || sendMessageLoading)}
 						scrollToBottom={scrollToBottom}
-						finalUrl={finalUrl}
 						draftMessage={draftMessage}
 						formattedData={formattedData}
 						viewType={viewType}
+						uploading={uploading}
+						roomId={id}
+						handleProgress={handleProgress}
+						setDraftUploadedFiles={setDraftUploadedFiles}
+						setDraftMessages={setDraftMessages}
+						hasUploadedFiles={hasUploadedFiles}
+						draftUploadedFiles={draftUploadedFiles}
+						ref={uploaderRef}
+						emailState={emailState}
+						isEmail={isEmail}
+						mailActions={mailActions}
 					/>
-
 				</div>
 			</div>
 		</>

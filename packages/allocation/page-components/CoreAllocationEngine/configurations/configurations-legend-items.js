@@ -1,29 +1,29 @@
-const legendItems = [
+const getLegendItems = ({ t = () => {} }) => [
 	{
-		label : 'Active',
+		label : t('allocation:active_status'),
 		color : '#abcd62',
 		key   : 'active',
 	},
 	{
-		label : 'Publishable',
+		label : t('allocation:publishable_status'),
 		color : '#f68b21',
 		key   : 'publishable',
 	},
 	{
-		label : 'Not Publishable',
+		label : t('allocation:not_publishable_status'),
 		color : '#ee3425',
 		key   : 'not_publishable',
 	},
 	{
-		label : 'Draft',
+		label : t('allocation:draft_status'),
 		color : '#ac55ac',
 		key   : 'draft',
 	},
 	{
-		label : 'Checking',
+		label : t('allocation:checking_status'),
 		color : '#bdbdbd',
 		key   : 'checking',
 	},
 ];
 
-export default legendItems;
+export default getLegendItems;
