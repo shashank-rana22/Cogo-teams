@@ -71,7 +71,7 @@ function SelectAddress({
 		id: organizationId = '',
 		is_tax_applicable = false,
 		organization_trade_party_id = '',
-	} = orgData?.data || {};
+	} = orgData || {};
 
 	const { data = {}, loading } = useListOrganizationInvoicingParties({
 		organizationId,
@@ -83,7 +83,7 @@ function SelectAddress({
 			bookingType,
 			is_tax_applicable,
 			disabledInvoicingParties,
-			organization: orgData?.data,
+			organization: orgData,
 			setActiveState,
 			setSelectedAddress,
 			setInvoiceToTradePartyDetails,
@@ -92,14 +92,14 @@ function SelectAddress({
 			setCurrentView,
 		},
 		create_billing_address: {
-			organization: orgData?.data,
+			organization: orgData,
 			setActiveState,
 			invoiceToTradePartyDetails,
 			setInvoiceToTradePartyDetails,
 			source,
 		},
 		create_trade_party: {
-			organization: orgData?.data,
+			organization: orgData,
 			setActiveState,
 			source,
 		},
