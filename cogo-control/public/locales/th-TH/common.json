@@ -251,5 +251,8 @@
     "notification": "การแจ้งเตือน",
     "add_account": "เพิ่มบัญชี",
     "search_bar": "เมนูค้นหา...",
-    "switching_profile": "การสลับโปรไฟล์"
+    "switching_profile": "การสลับโปรไฟล์",
+    "forecast": "การพยากรณ์",
+    "supply_allocation": "การจัดสรรสินค้า",
+    "demand_forecast": "การพยากรณ์ความต้องการ"
 }
