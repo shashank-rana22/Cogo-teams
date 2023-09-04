@@ -1,4 +1,4 @@
-import { Button, Checkbox, Modal } from '@cogoport/components';
+import { Button, Checkbox, Modal, Toast } from '@cogoport/components';
 import React from 'react';
 
 import { CLOSE_REASON_OPTIONS } from '../../../../helpers/constants';
@@ -19,13 +19,15 @@ function CloseModal({
 		checkboxValue,
 		setCheckboxValue,
 	} = useDeleteRateJob(filter?.service);
-	// } = useDeleteRateJob({ service: filter?.service, data });
 
 	const handleSubmit = async () => {
 		if (!checkboxValue) return;
-		await deleteRateJob({ service: filter?.service, id: data?.id });
-		setShowModal(false);
-		getListCoverage();
+		const id = await deleteRateJob({ service: filter?.service, id: data?.id });
+		if (id) {
+			Toast.success('closed successfully');
+			setShowModal(false);
+			getListCoverage();
+		}
 	};
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="lg">

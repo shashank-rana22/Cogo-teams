@@ -1,7 +1,7 @@
 /* eslint-disable custom-eslint/check-element-role-button */
 import { Placeholder, Pagination, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { CARDS_MAPPING, HEADINGS } from '../../helpers/constants';
@@ -24,15 +24,16 @@ function ListData({
 	listLoading = false,
 	page = 1,
 	setPage = () => {},
-	setFilter = () => {},
+	serialId = '',
+	setSerialId = () => {},
 }) {
 	const handlePageChange = (pageNumber) => {
 		setPage(pageNumber);
 	};
 
-	const handleSID = (val) => {
-		setFilter((prevFilter) => ({ ...prevFilter, sid: val }));
-	};
+	useEffect(() => {
+		getListCoverage(serialId);
+	}, [getListCoverage, serialId]);
 
 	return (
 		<div className={styles.main_container}>
@@ -47,6 +48,7 @@ function ListData({
 						onClick={() => {
 							setSource(card);
 							setPage(DEFAULT_PAGE_VALUE);
+							setSerialId('');
 						}}
 					>
 						<Card
@@ -60,20 +62,17 @@ function ListData({
 				))}
 			</div>
 			<div className={styles.pagination_container}>
-				{/* <div style={{ display: 'flex', width: '50%', alignItems: 'center' }}> */}
 				{data[source] || DEFAULT_VALUE}
 				{' '}
 				{HEADINGS[source] || 'Critical Port Pairs'}
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					SID:
 					<Input
 						style={{ width: 'fit-content', marginLeft: '20px' }}
-						value={filter?.sid}
-						onChange={(val) => handleSID(val)}
+						value={serialId}
+						onChange={(val) => setSerialId(val)}
 						placeholder="Search by SID"
 					/>
 				</div>
-				{/* </div> */}
 				{!isEmpty(list)
 					&& (
 						<Pagination

@@ -14,12 +14,19 @@ import styles from './styles.module.css';
 
 function RateCoverageContent() {
 	const [showFilters, setShowFilters] = useState(false);
+	const [serialId, setSerialId] = useState('');
 
 	const handleFilterClick = () => {
 		setShowFilters((prev) => !prev);
 	};
 
-	const { data:statsData, loading:statsLoading, getCoverageDetails, filter, setFilter } = useGetCoverageDetails();
+	const {
+		data:statsData,
+		loading:statsLoading,
+		getCoverageDetails,
+		filter,
+		setFilter,
+	} = useGetCoverageDetails();
 	const {
 		data:listData,
 		loading:listLoading,
@@ -44,8 +51,8 @@ function RateCoverageContent() {
 						size="md"
 						disabled={false}
 						checked={!filter?.releventToMeValue}
-						onLabel="Relevent to all"
-						offLabel="Relevent to me"
+						onLabel="Relevant to all"
+						offLabel="Relevant to me"
 						onChange={handleToggle}
 					/>
 				</div>
@@ -65,6 +72,7 @@ function RateCoverageContent() {
 					getListCoverage={getListCoverage}
 					filter={filter}
 					setFilter={setFilter}
+					setSerialId={setSerialId}
 				/>
 			)}
 			<TasksOverview data={statsData} statsLoading={statsLoading} />
@@ -79,6 +87,8 @@ function RateCoverageContent() {
 				page={page}
 				setPage={setPage}
 				setFilter={setFilter}
+				serialId={serialId}
+				setSerialId={setSerialId}
 			/>
 			{/* <Stats data={data} /> */}
 			{/* <RateCoverageDetails data={data} loading={loading} filter={filter} /> */}

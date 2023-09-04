@@ -1,14 +1,16 @@
 import Layout from '@cogoport/air-modules/components/Layout';
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
-import { useForm } from '@cogoport/forms';
+import { asyncFieldsListOperators, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import { merge } from '@cogoport/utils';
 import React from 'react';
 
 import {
 	flighOperationTypeOptions,
 	PackagingTypeOptions, handlingtype,
 	RateTypeOptions, currencyOptions, PriceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
+	fclCommodityOptions,
 } from '../../../../helpers/constants';
 import useCreateFclFreightRate from '../../../../hooks/useCreateFclFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
@@ -31,7 +33,24 @@ function AddRateModal({
 			value : item?.value,
 		}
 	));
-	const FCL_CONTROLS = fclControls({ data, containerSizes, containerTypes, options });
+
+	const listShippingLineOptions = useGetAsyncOptions(
+		merge(
+			asyncFieldsListOperators(),
+			{
+				params: {
+					filters: {
+						operator_type : 'shipping_line',
+						status        : 'active',
+					},
+				},
+			},
+		),
+	);
+
+	const FCL_CONTROLS = fclControls({
+		data, containerSizes, containerTypes, options, listShippingLineOptions, fclCommodityOptions,
+	});
 	const AIR_CONTROLS = airControls({
 		data,
 		flighOperationTypeOptions,
@@ -69,7 +88,11 @@ function AddRateModal({
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const handleSubmitData = async (dataa) => {
 		await fclFreightRate({ dataa });
-		deleteRateJob({ rate_id: fclData?.id, data: dataa, id: data?.id });
+		const succ_id = await deleteRateJob({ rate_id: fclData?.id, data: dataa, id: data?.id });
+		if (succ_id) {
+			Toast.success('Rate added successfully');
+			setShowModal(false);
+		}
 	};
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
