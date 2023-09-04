@@ -22,7 +22,7 @@ function HandedOver({
 	const { t } = useTranslation(['printingDesk']);
 	const { profile } = useSelector((state) => state);
 	const [triggerManifest, setTriggerManifest] = useState('');
-	const { fields = {} } = handedOverFields({ t });
+	const fields = handedOverFields({ t });
 
 	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit, profile }) };
 
