@@ -6,17 +6,13 @@ import { useSelector } from '@cogoport/store';
 
 import getShipmentTypeFromUrl from '../../../helpers/getShipmentTypeFromUrl';
 
-const URL_MAPPING = {
-	fcl_freight : 'fcl',
-	air_freight : 'air-freight',
-};
-
 const useBookShipment = ({
 	checkout_id = '',
 	rfq_id = '',
 	checkout_type = '',
 	detail = {},
 	setIsShipmentCreated = () => {},
+	urlMapping = {},
 }) => {
 	const { push } = useRouter();
 
@@ -51,8 +47,8 @@ const useBookShipment = ({
 
 			Toast.success('Shipment booked successflly');
 
-			if (URL_MAPPING[shipmentType]) {
-				push(`booking/${URL_MAPPING[shipmentType]}/${
+			if (urlMapping[shipmentType]) {
+				push(`booking/${urlMapping[shipmentType]}/${
 					shipment_id || res?.data?.shipment_id
 				}`);
 			} else {

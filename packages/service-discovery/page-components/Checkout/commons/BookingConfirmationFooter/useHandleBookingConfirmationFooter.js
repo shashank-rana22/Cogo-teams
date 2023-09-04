@@ -83,6 +83,7 @@ const useHandleBookingConfirmationFooter = ({
 		checkout_type,
 		setIsShipmentCreated,
 		detail,
+		urlMapping: URL_MAPPING,
 	});
 
 	const submitForOtpVerification = async () => {
