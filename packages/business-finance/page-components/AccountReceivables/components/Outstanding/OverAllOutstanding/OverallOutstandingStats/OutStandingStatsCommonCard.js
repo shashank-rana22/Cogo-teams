@@ -39,7 +39,7 @@ function OutStandingStatsCommonCard({
 				{(amountValue || [])?.map((val) => (
 					<div className={styles.due_ageing} key={val?.label}>
 						<div
-							style={{ color: [val?.textColor] }}
+							style={{ color: val?.textColor }}
 							className={styles.amount}
 						>
 							{ statsLoading ? <Placeholder /> : formatAmount({

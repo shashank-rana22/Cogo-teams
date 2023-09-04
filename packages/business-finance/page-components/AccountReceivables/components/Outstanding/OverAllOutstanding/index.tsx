@@ -120,7 +120,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 				legendPaddingTop: '10px',
 			},
 			listTitle: {
-				nameTitle  : 'Service Wise',
+				nameTitle  : 'Services Wise',
 				valueTitle : 'Total Open Invoice Amount',
 			},
 		},

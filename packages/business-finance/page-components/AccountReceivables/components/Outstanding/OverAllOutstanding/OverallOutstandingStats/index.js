@@ -18,7 +18,7 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 	return (
 		<div className={styles.container}>
 			<div style={{ width: '87%' }}>
-				<div className={styles.stats_lebal}>
+				<div className={styles.stats_label}>
 					{(OVERALL_OUTSTANDING_STATS_LABEL || []).map((val) => (
 						<div
 							key={val?.label}
