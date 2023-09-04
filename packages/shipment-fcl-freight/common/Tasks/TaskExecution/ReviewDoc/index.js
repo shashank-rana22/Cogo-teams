@@ -1,4 +1,4 @@
-import { Button, Toast, Textarea, Modal } from '@cogoport/components';
+import { Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
@@ -8,6 +8,7 @@ import { useState } from 'react';
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
+import ApprovalModal from './ApprovalModal';
 import styles from './styles.module.css';
 
 const GET_FINAL_URL = 1;
@@ -196,25 +197,12 @@ function ReviewDoc({
 				</div>
 			)}
 
-			<Modal show={showModal} size="md" placement="center" onClose={onCloseModal}>
-				<Modal.Header title="Confirmation" />
-				<Modal.Body style={{ fontSize: '16px', fontWeight: 500 }}>
-					{`Are u sure you want to ${startCase(task?.task)}?`}
-				</Modal.Body>
-
-				<Modal.Footer>
-					<div>
-						<Button themeType="secondary" onClick={onCloseModal}>
-							No
-						</Button>
-					</div>
-					<div className={styles.approve}>
-						<Button themeType="primary" onClick={handleFinalApprove}>
-							Yes, approve
-						</Button>
-					</div>
-				</Modal.Footer>
-			</Modal>
+			<ApprovalModal
+				showModal={showModal}
+				onCloseModal={onCloseModal}
+				task={task}
+				handleFinalApprove={handleFinalApprove}
+			/>
 
 		</div>
 	);
