@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCalendar } from '@cogoport/icons-react';
+import ScopeSelect from '@cogoport/scope-select';
 import { useState } from 'react';
 
 import useGetForecastFclFreightClusters from '../../hooks/useGetForecastResults';
@@ -41,6 +42,7 @@ function PageView() {
 	return (
 		<div>
 			<Header />
+			<ScopeSelect size="md" apisToConsider={['get_rolling_forecast_fcl_freight_clusters']} />
 
 			<div className={styles.secondary_header}>
 				<Tab activeTab={activeTab} setActiveTab={setActiveTab} />
