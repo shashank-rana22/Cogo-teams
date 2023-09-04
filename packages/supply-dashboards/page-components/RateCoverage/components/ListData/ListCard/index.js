@@ -85,6 +85,13 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 								Assigned to:
 								{data?.assigned_to?.name}
 							</Pill>
+							{data?.closed_by && (
+								<Pill size="md" color="#EEF0F0">
+									Closed by:
+									{data?.closed_by?.name}
+								</Pill>
+							)}
+
 						</div>
 					)}
 					<div>
