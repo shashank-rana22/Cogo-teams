@@ -36,7 +36,7 @@ const SHIPMENT_SPECIALIST = {
 		send_promotional_rate       : false,
 		agent_type_filter           : false,
 		flash_revert_logs           : false,
-		punch_in_out                : false,
+		punch_in_out                : true,
 		show_shipments_home_page    : true,
 		customer_org_users          : true,
 		convert_account_to_cp       : false,

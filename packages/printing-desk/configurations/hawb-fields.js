@@ -1,20 +1,20 @@
-export const hawbFields = {
-	fields: [
+export const hawbFields = ({ t = () => {} }) => {
+	const fields = [
 		{
 			key   : 'serialId',
-			label : 'SID',
+			label : t('printingDesk:hawb_fields_sid_label'),
 			span  : 2,
 			func  : 'handleSerialId',
 		},
 		{
 			key   : 'documentNumber',
-			label : 'Document Number',
+			label : t('printingDesk:hawb_fields_doc_number_label'),
 			span  : 2,
 			func  : 'handleDocumentNumber',
 		},
 		{
 			key   : 'documentType',
-			label : 'AWB',
+			label : t('printingDesk:hawb_fields_awb_label'),
 			span  : 2,
 			func  : 'startCase',
 		},
@@ -24,5 +24,7 @@ export const hawbFields = {
 			span  : 1,
 			func  : 'handleDownload',
 		},
-	],
+	];
+
+	return fields;
 };
