@@ -112,7 +112,7 @@ const useHandleBookingConfirmationFooter = ({
 				setIsShipmentCreated(true);
 
 				if (URL_MAPPING[shipmentType]) {
-					push(`booking/${URL_MAPPING[shipmentType]}/${
+					push(`/booking/${URL_MAPPING[shipmentType]}/${
 						shipment_id || res?.data?.shipment_id
 					}`);
 				} else {
