@@ -13,7 +13,9 @@
 }
 
 .request_btn {
-	gap: 6px;
+	display: flex;
+	justify-content: space-between;
+	width: 120px;
 }
 
 .show {
@@ -22,12 +24,6 @@
 
 .hide {
 	transform: translateX(150%);
-}
-
-.header {
-	display: flex;
-	gap: 8px;
-	align-items: center;
 }
 
 .heading {

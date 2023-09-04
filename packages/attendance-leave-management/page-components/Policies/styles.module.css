@@ -1,11 +1,14 @@
 .main_div {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
 	align-items: flex-start;
 	padding: 16px 12px;
 	background: #f9f9f9;
 	border-radius: 16px;
+}
+
+.main_div > :not(:last-child) {
+	margin-bottom: 16px;
 }
 
 .header {
@@ -34,9 +37,12 @@
 
 .card {
 	display: flex;
-	gap: 16px;
 	align-items: flex-start;
 	align-self: stretch;
+}
+
+.card > :not(:last-child) {
+	margin-right: 16px;
 }
 
 .left_card {
@@ -52,7 +58,6 @@
 
 .text_icon {
 	display: flex;
-	gap: 10px;
 	align-items: flex-start;
 	padding: 8px;
 	color: #c26d1a;
@@ -62,7 +67,6 @@
 
 .text_icon2 {
 	display: flex;
-	gap: 10px;
 	align-items: flex-start;
 	padding: 8px;
 	color: #7278ad;
@@ -103,9 +107,12 @@
 .card_content {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
 	align-items: flex-start;
 	justify-content: center;
+}
+
+.card_content > :not(:last-child) {
+	margin-bottom: 4px;
 }
 
 .above_text {

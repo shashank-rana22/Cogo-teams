@@ -1,11 +1,14 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
 	align-items: flex-start;
 	padding: 16px 12px;
 	background: #f9f9f9;
 	border-radius: 16px;
+}
+
+.container > :not(:last-child) {
+	margin-bottom: 20px;
 }
 
 .header {
@@ -17,9 +20,12 @@
 
 .left_header {
 	display: flex;
-	gap: 12px;
 	align-items: center;
 	cursor: pointer;
+}
+
+.left_header > :not(:last-child) {
+	margin-right: 12px;
 }
 
 .tab_switch {
@@ -43,7 +49,6 @@
 
 .selection_options {
 	display: flex;
-	gap: 6px;
 }
 
 .card_container {
@@ -61,9 +66,12 @@
 .card_content {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
 	align-items: flex-start;
 	justify-content: center;
+}
+
+.card_content > :not(:last-child) {
+	margin-bottom: 4px;
 }
 
 .above_text {

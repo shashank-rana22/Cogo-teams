@@ -5,9 +5,11 @@ import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
+// eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate',
+	'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {

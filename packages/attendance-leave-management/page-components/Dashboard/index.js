@@ -41,15 +41,17 @@ function AttendanceLeaveDashboard() {
 				<h1 className={styles.title}>
 					Attendance & Leaves
 				</h1>
-				<Button
-					size="md"
-					themeType="primary"
-					className={styles.request_btn}
-					onClick={() => setShowInbox(true)}
-				>
-					My Requests
-					{MANAGER ? <IcMLiveChat /> : <IcMLiveChat />}
-				</Button>
+				{!showInbox && (
+					<Button
+						size="md"
+						themeType="primary"
+						className={styles.request_btn}
+						onClick={() => setShowInbox(true)}
+					>
+						My Requests
+						{MANAGER ? <IcMLiveChat /> : <IcMLiveChat />}
+					</Button>
+				)}
 			</div>
 			{ showInbox ? <LeaveRequest setShowInbox={setShowInbox} isManager={is_manager} /> : (
 				<div className={styles.tab_container}>

@@ -1,4 +1,5 @@
 import AIR_UNITS from '@cogoport/air-modules/constants/AIR_UNITS';
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import { convertObjectMappingToArray } from '@cogoport/air-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
@@ -22,15 +23,15 @@ const commonControls = (handleChange, charge) => [
 		span     : 2,
 	},
 	{
-		name           : 'currency',
-		label          : 'Currency',
-		type           : 'select',
-		className      : 'size-sm',
-		optionsListKey : 'exchange-rate-currencies',
-		placeholder    : 'Select Currency',
-		disabled       : true,
-		rules          : { required: 'currency is required' },
-		span           : 2,
+		name        : 'currency',
+		label       : 'Currency',
+		type        : 'select',
+		className   : 'size-sm',
+		options     : currencies,
+		placeholder : 'Select Currency',
+		disabled    : true,
+		rules       : { required: 'currency is required' },
+		span        : 2,
 	},
 	{
 		label : 'Price',

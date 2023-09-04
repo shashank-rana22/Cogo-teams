@@ -1,12 +1,15 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
 	align-items: flex-start;
 	width: 100%;
 	padding: 16px 12px;
 	background: #f9f9f9;
 	border-radius: 16px;
+}
+
+.container > :not(:first-child) {
+	margin-top: 6px;
 }
 
 .header {
@@ -19,17 +22,23 @@
 
 .left_header {
 	display: flex;
-	gap: 12px;
 	align-items: center;
 	cursor: pointer;
+}
+
+.left_header > :not(:last-child) {
+	margin-right: 12px;
 }
 
 .card_content {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
 	align-items: flex-start;
 	justify-content: center;
+}
+
+.card_content > :not(:last-child) {
+	margin-bottom: 4px;
 }
 
 .btn_text {
@@ -44,17 +53,9 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
 	align-items: flex-start;
 	align-self: stretch;
 	width: 100%;
-}
-
-.num_people {
-	display: flex;
-	flex-grow: 1;
-	gap: 4px;
-	align-items: center;
 }
 
 .team_heading {
@@ -69,7 +70,6 @@
 	display: flex;
 	flex: 1 0 0;
 	flex-direction: column;
-	gap: 6px;
 	align-items: flex-start;
 }
 
@@ -83,9 +83,11 @@
 
 .below_text {
 	display: flex;
-	gap: 12px;
 	align-items: center;
-	margin-right: 10px;
+}
+
+.below_text > :not(:last-child) {
+	margin-right: 12px;
 }
 
 .card_container {
@@ -98,17 +100,6 @@
 	cursor: pointer;
 	background: #fff;
 	border-radius: 10px;
-}
-
-.active {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-	padding: 4px 8px;
-	margin-right: 10px;
-	color: #849e4c;
-	background-color: #f7faef;
-	border-radius: 100px;
 }
 
 .g_dot {
@@ -125,32 +116,8 @@
 	border-radius: 50%;
 }
 
-.inactive {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-	padding: 4px 8px;
-	margin-right: 10px;
-	color: red;
-	background-color: #fdebe9;
-	border-radius: 100px;
-}
-
 .cohort {
 	display: flex;
-}
-
-.branches_container {
-	display: flex;
-	gap: 16px;
-	align-items: flex-start;
-	align-self: stretch;
-	justify-content: center;
-
-	@media (max-width: 768px) {
-		flex-wrap: wrap;
-		width: 100%;
-	}
 }
 
 .location {
@@ -164,6 +131,9 @@
 
 .arrow_section {
 	display: flex;
-	gap: 6px;
 	align-items: flex-start;
+}
+
+.arrow_section > :not(:last-child) {
+	margin-right: 16px;
 }

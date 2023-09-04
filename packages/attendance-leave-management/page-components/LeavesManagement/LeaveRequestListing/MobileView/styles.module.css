@@ -21,7 +21,6 @@
 .leave_count {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 	align-items: center;
 	justify-content: center;
 	width: 42px;
@@ -33,10 +32,17 @@
 	border-radius: 50%;
 }
 
+.leave_count > :not(:last-child) {
+	margin-bottom: 2px;
+}
+
 .leave_status {
 	display: flex;
-	gap: 6px;
 	align-items: center;
+}
+
+.leave_status > :not(:last-child) {
+	margin-right: 6px;
 }
 
 .leave_dot {
@@ -51,8 +57,11 @@
 
 .flex {
 	display: flex;
-	gap: 12px;
 	align-items: center;
+}
+
+.flex > :not(:last-child) {
+	margin-right: 12px;
 }
 
 .leave_type {
@@ -92,6 +101,9 @@
 
 .action {
 	display: flex;
-	gap: 16px;
 	align-items: center;
+}
+
+.action > :not(:last-child) {
+	margin-right: 16px;
 }
