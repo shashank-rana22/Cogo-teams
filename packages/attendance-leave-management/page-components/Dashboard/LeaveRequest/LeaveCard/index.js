@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import { Button, Pagination } from '@cogoport/components';
 import {
 	IcMArrowUp,
@@ -85,7 +84,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 												updateLoading={updateLoading}
 												isManager={isManager}
 												handleLeaveUpdate={handleLeaveUpdate}
-												// key={val.id}
+												key={`${val.id}${val.employee_code}`}
 											/>
 										),
 									)}
@@ -109,7 +108,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 											updateLoading={updateLoading}
 											isManager={isManager}
 											handleLeaveUpdate={handleLeaveUpdate}
-											// key={val.id}
+											key={val.id}
 										/>
 									),
 								)}
