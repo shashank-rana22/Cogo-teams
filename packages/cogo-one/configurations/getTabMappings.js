@@ -1,6 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-const getTabMappings = ({ unReadChatsCount }) => {
+const getTabMappings = ({ unReadChatsCount, unReadMissedCallCount = 0 }) => {
 	const geo = getGeoConstants();
 
 	return [
@@ -13,6 +13,7 @@ const getTabMappings = ({ unReadChatsCount }) => {
 		{
 			label : 'Calls',
 			value : 'voice',
+			badge : unReadMissedCallCount,
 			show  : geo.others.navigations.cogo_one.has_voice_call_access,
 		},
 		{
