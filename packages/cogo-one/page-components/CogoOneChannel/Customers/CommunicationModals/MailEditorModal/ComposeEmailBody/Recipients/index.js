@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import MailRecipientType from '../../../MailRecipientType';
+import MailRecipientType from '../../../../../../../common/MailRecipientType';
 
 import styles from './styles.module.css';
 

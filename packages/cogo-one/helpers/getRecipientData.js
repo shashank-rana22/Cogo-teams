@@ -73,6 +73,7 @@ export function getRecipientData({
 	subject = '',
 	isDraft = false,
 	emailVia = '',
+	formattedData = {},
 }) {
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
@@ -115,6 +116,7 @@ export function getRecipientData({
 				toUserEmail   : mailData?.toUserEmail || [],
 				ccrecipients  : mailData?.ccrecipients || [],
 				bccrecipients : mailData?.bccrecipients || [],
+				formattedData,
 			}),
 		);
 	};

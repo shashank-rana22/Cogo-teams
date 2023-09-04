@@ -2,7 +2,7 @@ import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
-import { TAGS_COLORS } from '../../../../../constants';
+import { TAGS_COLORS } from '../../../../../../../constants';
 
 import styles from './styles.module.css';
 

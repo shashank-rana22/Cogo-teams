@@ -2,12 +2,11 @@ import { cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { MailEditorModal } from '../../../../common/MailModules';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
-import useReplyMail from '../../../../hooks/useReplyMail';
 
 import DialCallModal from './DialCallModal';
 import { ICONS_MAPPING } from './iconsMappings';
+import MailEditorModal from './MailEditorModal';
 import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
 
@@ -24,11 +23,6 @@ function CommunicationModals({
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
-
-	const {
-		replyMailApi = () => {},
-		replyLoading = false,
-	} = useReplyMail(mailProps);
 
 	const { buttonType, setButtonType, activeMail } = mailProps;
 
@@ -100,8 +94,6 @@ function CommunicationModals({
 					mailProps={mailProps}
 					userId={userId}
 					activeMail={activeMail}
-					replyMailApi={replyMailApi}
-					replyLoading={replyLoading}
 				/>
 			)}
 

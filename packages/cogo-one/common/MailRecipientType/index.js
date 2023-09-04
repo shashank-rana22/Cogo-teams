@@ -3,7 +3,7 @@ import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetListEmailSuggestions from '../../../hooks/useGetListEmailSuggestions';
+import useGetListEmailSuggestions from '../../hooks/useGetListEmailSuggestions';
 
 import EmailCustomTag from './EmailCustomTag';
 import ListEmails from './ListEmails';

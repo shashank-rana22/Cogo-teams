@@ -15,13 +15,6 @@ const RTE_TOOL_BAR_CONFIG = [
 		{ list: 'bullet' },
 	],
 	[
-		{ script: 'sub' },
-		{ script: 'super' },
-	],
-	[
-		{ direction: 'rtl' },
-	],
-	[
 		{ color: [] },
 		{ background: [] },
 	],

@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import getUserNameFromEmail from '../../../../helpers/getUserNameFromEmail';
+import getUserNameFromEmail from '../../../../../../../../helpers/getUserNameFromEmail';
 
 import styles from './styles.module.css';
 

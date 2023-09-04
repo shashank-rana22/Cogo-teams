@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { ViewAttachmentsModal } from '../../../../../common/MailModules';
+import ViewAttachmentsModal from '../../../../../common/ViewAttachmentsModal';
 import saveByteArray from '../../../../../utils/mailAttachment';
 import base64ToArrayBuffer from '../../../../../utils/mailAttachmentToBytes';
 
