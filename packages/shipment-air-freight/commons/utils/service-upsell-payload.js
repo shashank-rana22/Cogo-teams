@@ -66,14 +66,14 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			return [{
 				location_id              : formValues?.location_id,
 				expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
-				expected_cargo_gated_out : formValues?.expected_cargo_gated_in,
+				expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
 				...common,
 				...common2,
 			}];
 		} return [{
 			location_id              : formValues?.location_id,
 			expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
-			expected_cargo_gated_out : formValues?.expected_cargo_gated_in,
+			expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
 			...common,
 			...common2,
 		}];
