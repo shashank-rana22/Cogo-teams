@@ -42,15 +42,6 @@ function findClosestValue(targetValue) {
 
 function Cards({ data = {}, statsLoading = false }) {
 	const { weekly_completed_percentage = {} } = data;
-	// const weekly_completed_percentage = {
-	// 	a : '5',
-	// 	b : '10',
-	// 	c : '35',
-	// 	d : '15',
-	// 	e : '77',
-	// 	f : '70',
-	// 	g : '90',
-	// };
 
 	return (
 		<div className={styles.container}>
@@ -58,7 +49,7 @@ function Cards({ data = {}, statsLoading = false }) {
 				<div className={styles.box} key={key}>
 					<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
 						<circle cx="40" cy="40" r="36" stroke="#F3FAFA" strokeWidth="8" />
-						<text x="32" y="40" fontSize="12" fill="black">
+						<text x="30" y="40" fontSize="12" fill="black">
 							{weekly_completed_percentage[key]}
 							%
 						</text>
