@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const SKELETON_COUNT = 5;
 
-function MobileView({ data = {}, loading = false, handleOpenModal = false }) {
+function MobileView({ data = {}, loading = false, handleOpenModal = () => {} }) {
 	const { details } = data || {};
 
 	const getClassName = (status, color) => {

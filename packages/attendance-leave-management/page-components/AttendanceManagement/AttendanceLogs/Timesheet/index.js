@@ -13,7 +13,7 @@ const SKELETON_COUNT = 5;
 const INDEX_VALUE = 1;
 const DECIMAL_POINTS = 11;
 
-function Timesheet({ show, onClose, selectedDate }) {
+function Timesheet({ show = false, onClose = () => {}, selectedDate = '' }) {
 	const { loading, data } = useGetAttendanceTimesheet(selectedDate);
 
 	const { deviation_hrs, total_hrs, logs } = data || {};
