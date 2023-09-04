@@ -30,13 +30,19 @@ function useCreateOnboardLeadOrg({ setCreateLeadModal = () => {}, reset = () => 
 
 	const createLeadUser = async (values = {}) => {
 		try {
-			await trigger({
+			const res = await trigger({
 				data: getPayload({ values }),
 			});
 			reset();
 			setCreateLeadModal(false);
+			if (res?.data?.lead_user_error_messages?.mobile_number) {
+				Toast.warn('Number is Invalid');
+			} else if (res?.data?.lead_user_error_messages?.email) {
+				Toast.warn('Email already exit');
+			} else {
+				Toast.success('Successfully added the contact');
+			}
 			getOrganizationUsers({ page: 1 });
-			Toast.success('Successfully added the contact');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}
