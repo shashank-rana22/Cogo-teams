@@ -19,6 +19,7 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 	const [otherFormattedData, setOtherFormattedData] = useState({});
 	const [isEdit, setIsEdit] = useState(false);
 	const [truckNumber, setTruckNumber] = useState(DEFAULT_TRUCK_SELECTION_STATE);
+	const [truckType, setTruckType] = useState('');
 
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 
@@ -34,12 +35,14 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 		shipment_id: shipment_data?.id,
 		setInitFormattedData,
 		setOtherFormattedData,
+		setTruckType,
 	});
 
 	const { updateDetails, updateTruckNumber, loading } = useUpdateFieldServiceOpsDetails({
 		shipment_id : shipment_data?.id,
 		initFormattedData,
 		otherFormattedData,
+		truck_type  : truckType,
 		callback    : () => {
 			getDetails(truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]);
 			refetchList();
@@ -87,6 +90,8 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 		setOtherFormattedData,
 		truckNumber,
 		setTruckNumber,
+		truckType,
+		setTruckType,
 		truckLoading,
 		listLoading,
 		fieldExecTabConfig: stakeholderConfig?.field_executive,

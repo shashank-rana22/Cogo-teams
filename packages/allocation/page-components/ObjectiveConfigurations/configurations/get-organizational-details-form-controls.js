@@ -5,13 +5,13 @@ import RenderListLocationOption from '../../../common/RenderListLocationOption';
 import getSeparatedIdData from '../helpers/get-separated-id-data';
 
 const getOrganizationalDetailsControls = (props) => {
-	const { watchCountries, watchStates, watchCities, disabled } = props;
+	const { watchCountries, watchStates, watchCities, disabled, t = () => {} } = props;
 
 	const controls = [
 		{
 			name        : 'country',
-			label       : 'Select Country of Registration',
-			placeholder : 'Country',
+			label       : t('allocation:select_country_of_registration'),
+			placeholder : t('allocation:country'),
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
@@ -35,8 +35,8 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'state',
-			label       : 'Select State of Registration',
-			placeholder : 'State',
+			label       : t('allocation:select_state_of_registration'),
+			placeholder : t('allocation:state'),
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
@@ -64,8 +64,8 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'city',
-			label       : 'Select City of Registration',
-			placeholder : 'City',
+			label       : t('allocation:select_city_of_registration'),
+			placeholder : t('allocation:city'),
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
@@ -93,8 +93,8 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'pincode',
-			label       : 'Select Pincode of Registration',
-			placeholder : 'Pincode',
+			label       : t('allocation:select_pincode_of_registration'),
+			placeholder : t('allocation:pincode'),
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
@@ -122,24 +122,24 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'segments',
-			label       : 'Select Segment',
-			placeholder : 'Segment',
+			label       : t('allocation:select_segment'),
+			placeholder : t('allocation:segment_label'),
 			type        : 'multiSelect',
 			options     : [
 				{
-					label : 'Long Tail',
+					label : t('allocation:long_tail'),
 					value : 'long_tail',
 				},
 				{
-					label : 'Mid Size',
+					label : t('allocation:mid_size'),
 					value : 'mid_size',
 				},
 				{
-					label : 'Enterprise',
+					label : t('allocation:enterprise'),
 					value : 'enterprise',
 				},
 				{
-					label : 'Channel Partner',
+					label : t('allocation:channel_partner'),
 					value : 'cp',
 				},
 			],

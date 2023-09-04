@@ -13,6 +13,11 @@ function ShipmentsCard({
 	shipmentItem = {},
 	type = '',
 	setShowBookingNote = () => {},
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
+	handleShipmentChat = () => {},
 }) {
 	const {
 		shipment_type = '',
@@ -35,6 +40,11 @@ function ShipmentsCard({
 					setShowPocDetails={setShowPocDetails}
 					type={type}
 					setShowBookingNote={setShowBookingNote}
+					handleShipmentChat={handleShipmentChat}
+					setShowPopover={setShowPopover}
+					showPopover={showPopover}
+					setShowPocModal={setShowPocModal}
+					showAddPrimaryUserButton={showAddPrimaryUserButton}
 				/>
 
 				<ShippingRoute

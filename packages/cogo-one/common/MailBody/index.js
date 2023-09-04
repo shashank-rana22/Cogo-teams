@@ -1,6 +1,7 @@
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useState } from 'react';
 
 import { getSubject } from '../../helpers/getRecipientData';
 import useGetMailContent from '../../hooks/useGetMailContent';
@@ -17,6 +18,7 @@ function MailBody({
 	hasPermissionToEdit = false,
 	formattedData = {},
 }) {
+	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
 
 	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
@@ -31,7 +33,7 @@ function MailBody({
 		getEmailBody = () => {},
 		message: bodyMessage = '',
 		loading = false,
-	} = useGetMailContent({ messageId: message_id, source });
+	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
 
 	const { data } = mailActions || {};
 	const { response: selectedResponse = {} } = data || {};
@@ -64,6 +66,14 @@ function MailBody({
 		});
 	};
 
+	const handleExpandClick = () => {
+		if (!expandedState && !bodyMessage) {
+			getEmailBody();
+			return;
+		}
+		setExpandedState((prev) => !prev);
+	};
+
 	return (
 		<div>
 			<div className={styles.send_by_name}>
@@ -84,26 +94,25 @@ function MailBody({
 				/>
 
 				<div className={styles.subject}>
+					Sub:
+					{' '}
 					{subject}
 				</div>
 
 				<div
-					className={styles.body}
+					className={cl`${styles.body} ${expandedState ? styles.expanded_body : styles.collapsed_body}`}
 					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
 				/>
 
-				{!bodyMessage && (
-					<Button
-						onClick={getEmailBody}
-						role="presentation"
-						style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
-						size="xs"
-						className={styles.dots_body}
-						themeType="tertiary"
-					>
-						...
-					</Button>
-				)}
+				<Button
+					onClick={handleExpandClick}
+					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+					size="xs"
+					className={styles.dots_body}
+					themeType="linkUi"
+				>
+					{expandedState ? 'Collapse' : 'Expand'}
+				</Button>
 
 				{hasPermissionToEdit && (
 					<MailActions

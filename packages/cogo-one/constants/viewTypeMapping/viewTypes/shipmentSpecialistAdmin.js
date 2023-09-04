@@ -36,11 +36,12 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		send_promotional_rate       : false,
 		agent_type_filter           : false,
 		flash_revert_logs           : false,
-		punch_in_out                : false,
+		punch_in_out                : true,
 		show_shipments_home_page    : true,
 		customer_org_users          : true,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
+		show_lead_voice_calls       : false,
 	},
 };
 

@@ -1,10 +1,10 @@
-export const bookingControl = (setLocationData, edit) => [
+export const bookingControl = (setLocationData = () => {}, edit = false, t = () => {}) => [
 	{
 		name        : 'source',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		initialCall : true,
-		placeholder : 'Source',
+		placeholder : t('airlineBookingPlugin:source_placeholder'),
 		span        : 1.7,
 		onChange    : (val, obj) => setLocationData((pre) => ({ ...pre, source: obj?.name })),
 		params      : {
@@ -13,7 +13,7 @@ export const bookingControl = (setLocationData, edit) => [
 			},
 		},
 		rules: {
-			required: 'Source is required',
+			required: t('airlineBookingPlugin:source_rules'),
 		},
 	},
 	{
@@ -21,7 +21,7 @@ export const bookingControl = (setLocationData, edit) => [
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		initialCall : true,
-		placeholder : 'Destination',
+		placeholder : t('airlineBookingPlugin:destination_placeholder'),
 		span        : 1.7,
 		onChange    : (val, obj) => setLocationData((pre) => ({ ...pre, destination: obj?.name })),
 		params      : {
@@ -30,62 +30,62 @@ export const bookingControl = (setLocationData, edit) => [
 			},
 		},
 		rules: {
-			required: 'Destination is required',
+			required: t('airlineBookingPlugin:destination_rules'),
 		},
 	},
 	{
 		name        : 'commodity',
 		type        : 'text',
-		placeholder : 'Commodity',
+		placeholder : t('airlineBookingPlugin:commodity_placeholder'),
 		span        : 1.5,
 		rules       : {
-			required: 'Commodity is required',
+			required: t('airlineBookingPlugin:commodity_rules'),
 		},
 	},
 	{
 		name        : 'number_of_pieces',
 		type        : 'number',
-		placeholder : 'No. of Pieces',
+		placeholder : t('airlineBookingPlugin:number_of_pieces_placeholder'),
 		span        : 1.4,
 		rules       : {
-			required: 'No. of Pieces is required',
+			required: t('airlineBookingPlugin:number_of_pieces_rules'),
 		},
 	},
 	{
 		name        : 'weight',
 		type        : 'number',
-		placeholder : 'Weight',
+		placeholder : t('airlineBookingPlugin:weight_placeholder'),
 		span        : 1.4,
 		rules       : {
-			required: 'Weight is required',
+			required: t('airlineBookingPlugin:weight_rules'),
 		},
 	},
 	{
 		name        : 'volume',
 		type        : 'number',
-		placeholder : 'Volume',
+		placeholder : t('airlineBookingPlugin:volume_placeholder'),
 		span        : 1.4,
 		rules       : {
-			required: 'Volume is required',
+			required: t('airlineBookingPlugin:volume_rules'),
 		},
 	},
 	{
 		name        : 'flight_number',
 		type        : 'text',
-		placeholder : 'Flight No.',
+		placeholder : t('airlineBookingPlugin:flight_number_placeholder'),
 		span        : 1.4,
 		rules       : {
-			required: 'Flight No. is required',
+			required: t('airlineBookingPlugin:flight_number_rules'),
 		},
 	},
 	{
 		name        : 'flight_date',
 		type        : edit ? 'date_picker' : 'date_range',
-		placeholder : 'Flight Date',
+		placeholder : t('airlineBookingPlugin:flight_date_placeholder'),
 		span        : 2,
 		minDate     : new Date(),
 		rules       : {
-			required: 'Flight Date is required',
+			required: t('airlineBookingPlugin:flight_date_rules'),
 		},
 	},
 ];

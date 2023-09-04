@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import CrmTable from '../../../../common/CrmTable';
 // import EnrichmentRequest from '../../../../common/EnrichmentRequest';
@@ -8,25 +9,22 @@ import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
 
 function FeedbacksReceived({ organization_id = '', type = '' }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data = {},
 		loading = false,
 		onChangeParams = () => {},
 		paginationData = {},
-		checkedRowsId = [],
-		selectAll = false,
-		onChangeTableHeadCheckbox = () => {},
-		onChangeBodyCheckbox = () => {},
+		// checkedRowsId = [],
+		// selectAll = false,
+		// onChangeTableHeadCheckbox = () => {},
+		// onChangeBodyCheckbox = () => {},
 	} = useFeedbackTableData({ organizationId: organization_id, type, route: 'organization_feedbacks' });
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = getFeedbackColumns({
-		selectAll,
-		onChangeTableHeadCheckbox,
-		checkedRowsId,
-		onChangeBodyCheckbox,
-	});
+	const columns = getFeedbackColumns({ t });
 
 	return (
 		<div className={styles.container}>

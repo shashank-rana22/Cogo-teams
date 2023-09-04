@@ -1,0 +1,45 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.back_icon {
+	width: 30px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.label {
+	margin-top: 14px;
+	font-size: 18px;
+
+	span {
+		margin-left: 6px;
+		font-size: 12px;
+	}
+}
+
+.styled_select {
+	width: 60%;
+	margin-top: 8px;
+}
+
+.button_section {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 60%;
+	margin: 18px 0 0;
+}
+
+.padding_inner {
+	padding: 0 12px;
+}

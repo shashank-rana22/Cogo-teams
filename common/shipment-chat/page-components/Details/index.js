@@ -27,6 +27,7 @@ const shipmentChatStakeholders = [
 	'service_ops3',
 	'booking_agent',
 	'supply_agent',
+	'sales_agent',
 ];
 
 function Details({

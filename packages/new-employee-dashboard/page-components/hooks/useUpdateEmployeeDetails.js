@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const getPayload = ({ SOURCE, companyPolicyValue, status, id }) => {
+const getPayload = ({ SOURCE, companyPolicyValue, employee_status, id }) => {
 	const payload = { id };
 
 	if (SOURCE === 'save') {
@@ -10,7 +10,7 @@ const getPayload = ({ SOURCE, companyPolicyValue, status, id }) => {
 	}
 
 	if (SOURCE === 'reject') {
-		payload.status = status === 'active' ? 'inactive' : 'active';
+		payload.employee_status = employee_status === 'offered' ? 'rejected' : 'offered';
 	}
 
 	return payload;
@@ -18,7 +18,7 @@ const getPayload = ({ SOURCE, companyPolicyValue, status, id }) => {
 
 const useUpdateEmployeeDeatils = ({
 	id,
-	status,
+	employee_status,
 	getEmployeeDetails = () => {},
 	companyPolicyValue = false,
 	SOURCE = 'save',
@@ -29,7 +29,7 @@ const useUpdateEmployeeDeatils = ({
 	}, { manual: true });
 
 	const updateEmployeeStatus = async () => {
-		const payload = getPayload({ SOURCE, id, companyPolicyValue, status });
+		const payload = getPayload({ SOURCE, id, companyPolicyValue, employee_status });
 
 		try {
 			await trigger({

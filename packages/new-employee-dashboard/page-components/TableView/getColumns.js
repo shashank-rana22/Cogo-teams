@@ -1,20 +1,13 @@
-import { Button, Pill, Checkbox } from '@cogoport/components';
+import { Button, Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const NUMBER = 100;
 const PROGRESS_PERCENTAGE = 0;
-
-const COLOR_MAPPING = {
-	active           : '#ddebc0',
-	rejected_by_user : '#ffcbd1',
-	inactive         : '#f1ee8e',
-};
 
 const getColumns = ({
 	onClickNewJoinerColumn,
@@ -26,6 +19,7 @@ const getColumns = ({
 	handleSelectId,
 	selectedIds,
 	dataArr,
+	activeTab,
 }) => {
 	const columns = [
 		{
@@ -43,15 +37,15 @@ const getColumns = ({
 		},
 		{
 			Header   : 'ROLE',
-			accessor : (item) => <div>{startCase(item?.designation)}</div>,
+			accessor : (item) => <div>{(item?.role || '-')}</div>,
 		},
 		{
 			Header   : 'REPORTING MANAGER',
-			accessor : (item) => <div>{item?.reporting_manager?.userName || '-'}</div>,
+			accessor : (item) => <div>{item?.reporting_manager?.name || '-'}</div>,
 		},
 		{
 			Header   : 'HIRING MANAGER',
-			accessor : (item) => <div>{item?.hiring_manager?.userName || '-'}</div>,
+			accessor : (item) => <div>{item?.hiring_manager?.name || '-'}</div>,
 		},
 		{
 			Header   : 'DATE OF JOINING',
@@ -88,16 +82,6 @@ const getColumns = ({
 			},
 		},
 		{
-			Header   : 'STATUS',
-			accessor : (item) => (
-				<div>
-					<Pill size="md" color={COLOR_MAPPING[item?.status]}>
-						{startCase(item?.status)}
-					</Pill>
-				</div>
-			),
-		},
-		{
 			Header   : 'DOWNLOAD ZIP FILE',
 			accessor : (item) => (
 				<div>
@@ -118,14 +102,14 @@ const getColumns = ({
 		{
 			Header   : 'ACTION',
 			accessor : (item) => {
-				const { id, status } = item;
+				const { id, employee_status } = item;
 
 				return (
 					<div>
-						{status === 'rejected_by_user' ? (
+						{employee_status === 'rejected_by_user' ? (
 							<Button
 								loading={btnloading}
-								onClick={() => { updateEmployeeStatus(id, 'active', fetch).then(() => fetch()); }}
+								onClick={() => { updateEmployeeStatus(id, 'offered', fetch).then(() => fetch()); }}
 								themeType="secondary"
 							>
 								Re-Apply
@@ -137,7 +121,8 @@ const getColumns = ({
 		},
 
 	];
-	if (bulkAction) {
+
+	if (bulkAction && activeTab === 'offered') {
 		columns.unshift({
 			id     : 'action',
 			Header : () => (
@@ -158,6 +143,7 @@ const getColumns = ({
 			),
 		});
 	}
+
 	return columns;
 };
 

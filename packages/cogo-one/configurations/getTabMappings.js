@@ -11,7 +11,7 @@ const getTabMappings = ({ unReadChatsCount }) => {
 			show  : true,
 		},
 		{
-			label : 'Voice',
+			label : 'Calls',
 			value : 'voice',
 			show  : geo.others.navigations.cogo_one.has_voice_call_access,
 		},

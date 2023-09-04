@@ -27,7 +27,12 @@ const getParams = ({
 	urgency,
 	endDate,
 	entityCode,
-
+	isMyTaskOnly = false,
+	userProfile = {
+		user: {
+			id: '',
+		},
+	},
 }) => ({
 	...rest,
 	status          : activeTab.toUpperCase(),
@@ -58,6 +63,7 @@ const getParams = ({
 			separator  : ' ',
 		})
 		: undefined,
+	toBeApprovedBy: isMyTaskOnly ? userProfile.user?.id : undefined,
 });
 
 const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
@@ -75,7 +81,9 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 		activeTab,
 		searchQuery : '',
 	});
-	const { search, category, date, page, urgency, pageLimit, ...rest } =		filters || {};
+	const {
+		search, category, date, page, urgency, pageLimit, isMyTaskOnly = false, ...rest
+	} =		filters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -126,7 +134,8 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 					urgency,
 					endDate,
 					entityCode,
-
+					isMyTaskOnly,
+					userProfile,
 				}),
 			});
 		} catch (err) {
@@ -149,7 +158,7 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 		incidentId,
 		activeTab,
 		entityCode,
-
+		isMyTaskOnly,
 	]);
 
 	useEffect(() => {
