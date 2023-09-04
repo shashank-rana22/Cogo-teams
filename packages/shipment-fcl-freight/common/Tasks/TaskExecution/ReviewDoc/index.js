@@ -67,18 +67,10 @@ function ReviewDoc({
 	};
 
 	const handleSubmit = () => {
-		if (approvalState?.ammend) {
-			if (!remarkValue) {
-				Toast.error('Please provide amendment reason');
-			}
-
-			setShowAmendModal(true);
+		if (!remarkValue) {
+			Toast.error('Please provide amendment reason');
 		} else {
-			// params = {
-			// 	...params,
-			// 	state: 'document_accepted',
-			// };
-			// await updateDocument(params);
+			setShowAmendModal(true);
 		}
 	};
 

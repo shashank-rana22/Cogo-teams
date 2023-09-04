@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 function AmendModal({
 	showModal = false,
 	setShowModal = () => {},
-	// task = {},
 	handleFinalSubmit = () => {},
 	remarkValue = '',
 	document_type = '',
@@ -21,7 +20,7 @@ function AmendModal({
 		>
 			<Modal.Header title="Confirmation" />
 			<Modal.Body>
-				{`Are you sure you want to amend ${startCase(document_type)} with the follwing remark: ${remarkValue}?`}
+				{`Are you sure you want to Amend ${startCase(document_type)} with the follwing remark: ${remarkValue}?`}
 			</Modal.Body>
 
 			<Modal.Footer>
