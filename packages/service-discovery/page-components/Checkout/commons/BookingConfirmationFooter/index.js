@@ -11,6 +11,7 @@ import handleTimer from '../../utils/handleTimer';
 
 import CogoPoint from './CogoPoint';
 import domesticServices from './domestic-services.json';
+import MarginModal from './MarginModal';
 import styles from './styles.module.css';
 import TotalCost from './TotalCost';
 import useHandleBookingConfirmationFooter from './useHandleBookingConfirmationFooter';
@@ -94,7 +95,10 @@ function BookingConfirmationFooter({
 		otpValue = '',
 		submitForOtpVerification = () => {},
 		validity_end = '',
+		showMarginModal = false,
+		setShowMarginModal = () => {},
 	} = useHandleBookingConfirmationFooter({
+		rate,
 		detail,
 		checkoutMethod,
 		bookingConfirmationMode,
@@ -211,6 +215,16 @@ function BookingConfirmationFooter({
 						</div>
 					</Button>
 				</div>
+			) : null}
+
+			{showMarginModal ? (
+				<MarginModal
+					bookingConfirmationMode={bookingConfirmationMode}
+					showMarginModal={showMarginModal}
+					setShowMarginModal={setShowMarginModal}
+					handleSubmit={handleSubmit}
+					loading={submitButtonLoading}
+				/>
 			) : null}
 
 			{showOtpModal ? (
