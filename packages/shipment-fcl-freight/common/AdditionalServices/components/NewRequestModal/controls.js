@@ -68,7 +68,7 @@ const formControls = ({
 		},
 		{
 			name        : 'quantity',
-			label       : 'Amount of Containers',
+			label       : 'Number of Containers',
 			type        : 'number',
 			placeholder : 'Enter number of containers',
 			rules       : { required: 'Amount of Containers are required', min: 0 },
@@ -190,7 +190,7 @@ const formControls = ({
 		},
 		{
 			name  : 'place_of_supply',
-			label : 'Enter Place of Supply',
+			label : 'Place of Supply',
 			type  : 'text',
 			rules : { required: 'Place of Supply is required' },
 			size  : 'sm',
@@ -198,7 +198,7 @@ const formControls = ({
 		},
 		{
 			name  : 'place_of_destination',
-			label : 'Enter Place of Destination',
+			label : 'Place of Destination',
 			type  : 'text',
 			rules : { required: 'Place of Destination is required' },
 			size  : 'sm',

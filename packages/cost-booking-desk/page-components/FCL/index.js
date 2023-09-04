@@ -39,7 +39,7 @@ function FclFreight() {
 				<DeskTabs />
 			</div>
 
-			{activeTab !== SECURITY_DEPOSIT_TAB ? <ShipmentList /> : <PurchaseList />}
+			{activeTab === SECURITY_DEPOSIT_TAB ? <PurchaseList /> : <ShipmentList />}
 		</div>
 	);
 }
