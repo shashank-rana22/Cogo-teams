@@ -1,4 +1,4 @@
-import { Badge, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Accordian from './Accordian';
@@ -53,36 +53,27 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 
 			<div className={styles.stats_container}>
 				<div className={styles.stat}>
-					<Badge
-						placement="right"
-						color="yellow"
-						size="md"
-						text={PENDING_DATA[PENDING_DATA.length - MAX_ARRAY_LENGTH_MINUS]?.length || DEFAULT_MIN_VALUE}
-					>
-						Pending
-					</Badge>
+					Pending
+					{' '}
+					<span className={styles.pending}>
+						{PENDING_DATA[PENDING_DATA.length - MAX_ARRAY_LENGTH_MINUS]?.length || DEFAULT_MIN_VALUE}
+					</span>
 				</div>
 
 				<div className={styles.stat}>
-					<Badge
-						placement="right"
-						color="green"
-						size="md"
-						text={TAGGEG_DATA.length || DEFAULT_MIN_VALUE}
-					>
-						Tagged
-					</Badge>
+					Tagged
+					{' '}
+					<span className={styles.tagged}>
+						{TAGGEG_DATA.length || DEFAULT_MIN_VALUE}
+					</span>
 				</div>
 
 				<div className={styles.stat}>
-					<Badge
-						placement="right"
-						color="red"
-						size="md"
-						text={REJECTED_DATA.length || DEFAULT_MIN_VALUE}
-					>
-						Rejected
-					</Badge>
+					Rejected
+					{' '}
+					<span className={styles.rejected}>
+						{REJECTED_DATA.length || DEFAULT_MIN_VALUE}
+					</span>
 				</div>
 			</div>
 

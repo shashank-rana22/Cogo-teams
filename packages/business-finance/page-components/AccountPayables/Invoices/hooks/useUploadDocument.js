@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useCallBack } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
@@ -61,7 +61,7 @@ const useUploadDocuments = (fileUploader) => {
 		}
 	};
 
-	const generateInvoice = useCallBack(async () => {
+	const generateInvoice = useCallback(async () => {
 		try {
 			trigger({
 				params: {
@@ -73,7 +73,7 @@ const useUploadDocuments = (fileUploader) => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Failed to Fetch Data');
 		}
-	}, []);
+	}, [payrun, trigger]);
 
 	const deleteTaggedDocuments = async (key, myArray = null) => {
 		let payload;

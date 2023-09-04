@@ -23,6 +23,24 @@
 	margin: 10px 20px;
 }
 
+.pending {
+	padding: 4px;
+	background-color: var(--color-primary-yellow-2);
+	border-radius: 6px;
+}
+
+.tagged {
+	padding: 4px;
+	background-color: var(--color-tertiary-success-green-2);
+	border-radius: 6px;
+}
+
+.rejected {
+	padding: 4px;
+	background-color: var(--color-primary-error-red-3);
+	border-radius: 6px;
+}
+
 .accordians {
 	margin-bottom: 80px;
 }
