@@ -1,5 +1,5 @@
 /* eslint-disable custom-eslint/check-element-role-button */
-import { Placeholder, Pagination } from '@cogoport/components';
+import { Placeholder, Pagination, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -24,9 +24,14 @@ function ListData({
 	listLoading = false,
 	page = 1,
 	setPage = () => {},
+	setFilter = () => {},
 }) {
 	const handlePageChange = (pageNumber) => {
 		setPage(pageNumber);
+	};
+
+	const handleSID = (val) => {
+		setFilter((prevFilter) => ({ ...prevFilter, sid: val }));
 	};
 
 	return (
@@ -55,9 +60,20 @@ function ListData({
 				))}
 			</div>
 			<div className={styles.pagination_container}>
+				{/* <div style={{ display: 'flex', width: '50%', alignItems: 'center' }}> */}
 				{data[source] || DEFAULT_VALUE}
 				{' '}
 				{HEADINGS[source] || 'Critical Port Pairs'}
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					SID:
+					<Input
+						style={{ width: 'fit-content', marginLeft: '20px' }}
+						value={filter?.sid}
+						onChange={(val) => handleSID(val)}
+						placeholder="Search by SID"
+					/>
+				</div>
+				{/* </div> */}
 				{!isEmpty(list)
 					&& (
 						<Pagination

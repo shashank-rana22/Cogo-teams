@@ -78,6 +78,7 @@ function RateCoverageContent() {
 				setSource={setSource}
 				page={page}
 				setPage={setPage}
+				setFilter={setFilter}
 			/>
 			{/* <Stats data={data} /> */}
 			{/* <RateCoverageDetails data={data} loading={loading} filter={filter} /> */}

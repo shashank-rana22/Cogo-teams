@@ -18,11 +18,12 @@ function CloseModal({
 		deleteRateJob,
 		checkboxValue,
 		setCheckboxValue,
-	} = useDeleteRateJob({ service: filter?.service, data });
+	} = useDeleteRateJob(filter?.service);
+	// } = useDeleteRateJob({ service: filter?.service, data });
 
 	const handleSubmit = async () => {
 		if (!checkboxValue) return;
-		await deleteRateJob();
+		await deleteRateJob({ service: filter?.service, id: data?.id });
 		setShowModal(false);
 		getListCoverage();
 	};

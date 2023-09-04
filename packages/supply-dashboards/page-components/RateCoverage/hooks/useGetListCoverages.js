@@ -36,6 +36,8 @@ const useGetListCoverage = (filter) => {
 					FINAL_FILTERS.origin_airport_id = restFilters[ele];
 				} else if (ele === 'destination_port_id' && (filter?.service === 'air_freight')) {
 					FINAL_FILTERS.destination_airport_id = restFilters[ele];
+				} else if (ele === 'shipping_line_id' && (filter?.service === 'air_freight')) {
+					FINAL_FILTERS.airline_id = restFilters[ele];
 				} else FINAL_FILTERS[ele] = restFilters[ele];
 			}
 		});

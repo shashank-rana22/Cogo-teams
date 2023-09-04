@@ -43,11 +43,11 @@ function findClosestValue(targetValue) {
 function Cards({ data = {}, statsLoading = false }) {
 	const { weekly_completed_percentage = {} } = data;
 	// const weekly_completed_percentage = {
-	// 	a : '35',
-	// 	b : '45',
-	// 	c : '50',
-	// 	d : '60',
-	// 	e : '75',
+	// 	a : '5',
+	// 	b : '10',
+	// 	c : '35',
+	// 	d : '15',
+	// 	e : '77',
 	// 	f : '70',
 	// 	g : '90',
 	// };

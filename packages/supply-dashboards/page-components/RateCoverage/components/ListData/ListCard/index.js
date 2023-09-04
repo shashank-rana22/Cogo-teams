@@ -69,6 +69,15 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 					</div>
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
+					{data?.serial_id
+					&& (
+						<div style={{ marginRight: '20px' }}>
+							<Pill size="md" color="#ffe7d5">
+								SID:
+								{data?.serial_id}
+							</Pill>
+						</div>
+					)}
 					{data?.assigned_to?.name
 					&& (
 						<div style={{ marginRight: '20px' }}>

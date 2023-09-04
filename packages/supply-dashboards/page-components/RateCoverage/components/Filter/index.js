@@ -16,7 +16,7 @@ const CONSTANT_SIXTEEN = 16;
 
 function Filter({ getCoverageDetails = () => {}, filter = {}, setFilter = () => {}, getListCoverage = () => {} }) {
 	const type = (filter?.service === 'air_freight') ? 'airport' : 'seaport';
-	const operator_type = (filter?.service === 'air_freight') ? 'air_line' : 'shipping_line';
+	const operator_type = (filter?.service === 'air_freight') ? 'airline' : 'shipping_line';
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type } },
 		includes : { default_params_required: true },

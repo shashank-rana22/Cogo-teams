@@ -17,7 +17,7 @@ const useDeleteRateJob = (service) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const deleteRateJob = useCallback(async ({ id = '', data = {} }) => {
+	const deleteRateJob = useCallback(async ({ rate_id, data = {}, id }) => {
 		const weight_slabs = [
 			{
 				lower_limit  : data?.lower_limit,
@@ -26,25 +26,30 @@ const useDeleteRateJob = (service) => {
 				currency     : 'INR',
 			},
 		];
+
+		const params = {
+			origin_airport_id      : data?.origin_airport,
+			destination_airport_id : data?.destination_airport,
+			commodity              : data?.commodity,
+			airline_id             : data?.air_line,
+			operation_type         : data?.flight_operation_type,
+			currency               : data?.currency,
+			price_type             : data?.price_type,
+			service_provider_id    : data?.service_provider,
+			procured_by_id         : data?.rate_procured_by_cogoport_agent,
+			sourced_by_id          : data?.rate_provided_by_lsp_user,
+			validity_start         : data?.startDateTime,
+			validity_end           : data?.endDateTime,
+			commodity_type         : 'all',
+			weight_slabs,
+		};
 		try {
 			await trigger({
 				data: {
 					id,
-					origin_airport_id      : data?.origin_airport,
-					destination_airport_id : data?.destination_airport,
-					commodity              : data?.commodity,
-					airline_id             : data?.air_line,
-					operation_type         : data?.flight_operation_type,
-					currency               : data?.currency,
-					price_type             : data?.price_type,
-					service_provider_id    : data?.service_provider,
-					procured_by_id         : data?.rate_procured_by_cogoport_agent,
-					sourced_by_id          : data?.rate_provided_by_lsp_user,
-					validity_start         : data?.startDateTime,
-					validity_end           : data?.endDateTime,
-					commodity_type         : 'all',
-					weight_slabs,
-					closing_remarks        : checkboxValue !== '' ? checkboxValue : undefined,
+					rate_id,
+					data            : (rate_id) ? params : undefined,
+					closing_remarks : checkboxValue !== '' ? checkboxValue : undefined,
 				},
 			});
 		} catch (err) {

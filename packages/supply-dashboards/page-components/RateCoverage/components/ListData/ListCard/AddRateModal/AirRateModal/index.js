@@ -7,6 +7,8 @@ import {
 	asyncFieldsLocations,
 	asyncFieldsOperators,
 	asyncFieldsOrganization,
+	asyncFieldsOrganizationUsers,
+	asyncFieldsPartnerUsersIds,
 	useForm,
 	useGetAsyncOptions,
 } from '@cogoport/forms';
@@ -26,6 +28,7 @@ import {
 	densityRatioOptions,
 } from '../../../../../helpers/constants';
 import useCreateFreightRate from '../../../../../hooks/useCreateFreightRate';
+import useDeleteRateJob from '../../../../../hooks/useDeleteRateJob';
 
 import styles from './styles.module.css';
 
@@ -33,6 +36,10 @@ const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 
 function AirRateModal({ data = {} }) {
+	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
+	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
+	const formControls = watch();
+
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type: 'airport' } },
 		includes : { default_params_required: true },
@@ -57,23 +64,28 @@ function AirRateModal({ data = {} }) {
 		),
 	);
 
-	// const shipperOptions = useGetAsyncOptions(
-	// 	merge(
-	// 		asyncFieldsOrganization(),
-	// 		{ params: { filters: { account_type: 'service_provider', kyc_status: 'verified' } } },
-	// 	),
-	// );
+	const listOrganizationUserOptions = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganizationUsers(),
+			{ params: { filters: { organization_id: formControls?.service_provider } } },
+		),
+	);
 
-	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
-	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
-	const formControls = watch();
+	const listPartnerUserOptions = useGetAsyncOptions(
+		merge(
+			asyncFieldsPartnerUsersIds(),
+			{ params: { filters: { organization_id: formControls?.service_provider } } },
+		),
+	);
 
 	const { createRate } = useCreateFreightRate('air_freight');
 	// const { loading, createRate } = useCreateFreightRate('air_freight');
 
-	console.log(formControls, '?formControls');
-	const onSubmit = (val) => {
-		createRate(val);
+	const { deleteRateJob } = useDeleteRateJob('air_freight');
+
+	const onSubmit = async (val) => {
+		const rate_id = await createRate(val);
+		await deleteRateJob({ rate_id, data: val, id: data?.id });
 	};
 
 	useEffect(() => {
@@ -94,7 +106,7 @@ function AirRateModal({ data = {} }) {
 							options={RateTypeOptions}
 							control={control}
 							name="rate_type"
-							placeholder="Select rate Type"
+							placeholder="Select Rate Type"
 							rules={{ required: 'rate type is required' }}
 						/>
 					</div>
@@ -140,6 +152,7 @@ function AirRateModal({ data = {} }) {
 						<SelectController
 							{...serviceProviderOptions}
 							control={control}
+							value={data?.service_provider?.id}
 							name="service_provider"
 							placeholder="Select service provider"
 							rules={{ required: 'service provider is required' }}
@@ -153,10 +166,11 @@ function AirRateModal({ data = {} }) {
 					<p className={styles.label_text}>Rate Provided By LSP User</p>
 					<div>
 						<SelectController
-							options={RateTypeOptions}
+							{...listOrganizationUserOptions}
 							control={control}
 							name="rate_provided_by_lsp_user"
 							placeholder="Rate Provided By LSP User"
+							disabled={!formControls?.service_provider}
 							rules={{ required: 'rate provided by lsp user is required' }}
 						/>
 					</div>
@@ -170,7 +184,7 @@ function AirRateModal({ data = {} }) {
 					</p>
 					<div>
 						<SelectController
-							options={RateTypeOptions}
+							{...listPartnerUserOptions}
 							control={control}
 							name="rate_procured_by_cogoport_agent"
 							placeholder="Rate Procured by Cogoport Agent"
@@ -306,10 +320,10 @@ function AirRateModal({ data = {} }) {
 							options={RateTypeOptions}
 							control={control}
 							name="minimum_price"
-							placeholder="enter price"
+							placeholder="Minimum Price"
+							type="number"
 							rules={{
-								required : 'minimum price is required',
-								value    : Number,
+								required: 'minimum price is required',
 							}}
 						/>
 					</div>
@@ -342,7 +356,7 @@ function AirRateModal({ data = {} }) {
 							control={control}
 							value="net"
 							name="price_type"
-							placeholder="price type"
+							placeholder="Price Type"
 							rules={{ required: 'price type is required' }}
 						/>
 					</div>
@@ -359,7 +373,7 @@ function AirRateModal({ data = {} }) {
 							value="high_density"
 							name="density_cargo"
 							disabled
-							placeholder="density cargo"
+							placeholder="Density Cargo"
 							rules={{ required: 'density cargo is required' }}
 						/>
 					</div>
@@ -376,7 +390,7 @@ function AirRateModal({ data = {} }) {
 							name="density_ratio"
 							value="1_500"
 							disabled
-							placeholder="density ratio"
+							placeholder="Density Ratio"
 							rules={{ required: 'density ratio is required' }}
 						/>
 					</div>
@@ -403,16 +417,31 @@ function AirRateModal({ data = {} }) {
 				</div>
 			</div>
 			<div className={styles.sub_container}>
-				<div style={{ width: '30%' }}>
+				<div style={{ width: '100%' }}>
 					<p className={styles.label_text}>Weight Slabs (in Kgs)</p>
-					{/* <div>
-						<InputController
-							options={RateTypeOptions}
-							control={control}
-							name="shipper"
-							placeholder="Select shipper"
-						/>
-					</div> */}
+					<div style={{ display: 'flex', width: '100%' }}>
+						<div style={{ width: '10%', marginRight: '12px' }}>
+							<InputController
+								control={control}
+								name="lower_limit"
+								placeholder="Lower limit"
+							/>
+						</div>
+						<div style={{ width: '10%', marginRight: '12px' }}>
+							<InputController
+								control={control}
+								name="upper_limit"
+								placeholder="Upper limit"
+							/>
+						</div>
+						<div style={{ width: '10%' }}>
+							<InputController
+								control={control}
+								name="price_per_unit"
+								placeholder="Price Per Unit"
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
