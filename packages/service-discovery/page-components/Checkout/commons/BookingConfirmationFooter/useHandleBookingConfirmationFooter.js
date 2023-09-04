@@ -71,6 +71,7 @@ const useHandleBookingConfirmationFooter = ({
 		rfq_id,
 		checkout_type,
 		setIsShipmentCreated,
+		detail,
 	});
 
 	const submitForOtpVerification = async () => {

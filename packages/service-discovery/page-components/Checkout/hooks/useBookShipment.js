@@ -1,17 +1,30 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+
+import getShipmentTypeFromUrl from '../../../helpers/getShipmentTypeFromUrl';
+
+const URL_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
 
 const useBookShipment = ({
 	checkout_id = '',
 	rfq_id = '',
 	checkout_type = '',
+	detail = {},
 	setIsShipmentCreated = () => {},
 }) => {
+	const { push } = useRouter();
+
 	const {
 		general: { query = {} },
 	} = useSelector((reduxState) => reduxState);
+
+	const shipmentType = getShipmentTypeFromUrl() || detail?.primary_service;
 
 	const { partner_id = '', shipment_id = '' } = query;
 
@@ -38,8 +51,16 @@ const useBookShipment = ({
 
 			Toast.success('Shipment booked successflly');
 
-			const newHref = `${window.location.origin}/${partner_id}/shipments/${shipment_id || res.data.shipment_id}`;
-			window.location.href = newHref;
+			if (URL_MAPPING[shipmentType]) {
+				push(`booking/${URL_MAPPING[shipmentType]}/${
+					shipment_id || res?.data?.shipment_id
+				}`);
+			} else {
+				const newHref = `${window.location.origin}/
+				${partner_id}/shipments/${shipment_id || res?.data?.shipment_id}`;
+
+				window.location.href = newHref;
+			}
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));
