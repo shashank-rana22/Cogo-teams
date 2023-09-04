@@ -19,7 +19,7 @@ const getTabMappings = ({ unReadChatsCount = 0, viewType = '' }) => {
 			show  : geo.others.navigations.cogo_one.has_voice_call_access,
 		},
 		{
-			label : 'Outlook',
+			label : 'Mails',
 			value : 'outlook',
 			show  : true,
 		},

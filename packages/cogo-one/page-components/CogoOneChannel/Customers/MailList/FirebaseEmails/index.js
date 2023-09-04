@@ -29,8 +29,6 @@ function FirebaseEmails(messageProps) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
 
-	const { subTab } = activeTab || {};
-
 	const {
 		chatsData,
 		appliedFilters,
@@ -45,7 +43,7 @@ function FirebaseEmails(messageProps) {
 		searchValue,
 		viewType,
 		setActiveTab,
-		activeSubTab  : subTab,
+		activeSubTab  : 'all',
 		workPrefernceLoading,
 		listOnlyMails : true,
 		activeFolder,
