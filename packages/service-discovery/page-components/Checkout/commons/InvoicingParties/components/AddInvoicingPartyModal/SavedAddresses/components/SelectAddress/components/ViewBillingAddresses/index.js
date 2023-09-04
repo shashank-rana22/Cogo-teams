@@ -108,7 +108,7 @@ function ViewBillingAddresses({
 	const ActiveComponent = MAPPING[bookingType];
 
 	return (
-		<div>
+		<>
 			{newList.map((item) => (
 				<ActiveComponent
 					key={item.id}
@@ -123,7 +123,7 @@ function ViewBillingAddresses({
 					disabledInvoicingParties={disabledInvoicingParties}
 				/>
 			))}
-		</div>
+		</>
 	);
 }
 

@@ -49,9 +49,9 @@ function AdditionalConditions({
 			show      : ['locked'],
 			props     : {
 				detail,
-				status       : orgData.data?.kyc_status,
+				status       : orgData?.kyc_status,
 				importer_exporter_id,
-				organization : orgData?.data,
+				organization : orgData,
 				getCheckout,
 				loading,
 			},
