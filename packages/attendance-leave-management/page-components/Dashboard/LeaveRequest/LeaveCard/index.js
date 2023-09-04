@@ -30,8 +30,6 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 	const { loading : updateLoading, updateLeaveStatus } = useUpdateLeaveStatus(setFilters);
 
 	const { page, page_limit, total_count, list } = requestData || {};
-	console.log('list', list);
-
 	useEffect(() => {
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setAccordion(false);
@@ -44,9 +42,6 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 		};
 		updateLeaveStatus(valObj);
 	};
-
-	console.log('search:', searchQuery, isEmpty(searchQuery));
-
 	return (
 		<div className={styles.leavecard}>
 			{isEmpty(searchQuery) ? (
