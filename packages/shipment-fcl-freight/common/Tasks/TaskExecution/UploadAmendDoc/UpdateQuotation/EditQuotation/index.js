@@ -15,7 +15,7 @@ function EditQuotation({
 	updateDocument = () => {},
 	documentPayload = {},
 }) {
-	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
+	const { finalControls = [], defaultValues = {}, onSubmit = () => { } } = data || {};
 
 	const formProps = useForm({ defaultValues });
 
@@ -41,7 +41,7 @@ function EditQuotation({
 	const newFormValues = prepareFormValues();
 	const CUSTOM_FORM_VALUES = {};
 
-	Object.keys(formValues).forEach((key) => {
+	(Object.keys(formValues) || []).forEach((key) => {
 		CUSTOM_FORM_VALUES[key] = {
 			formValues : newFormValues[key],
 			id         : key,

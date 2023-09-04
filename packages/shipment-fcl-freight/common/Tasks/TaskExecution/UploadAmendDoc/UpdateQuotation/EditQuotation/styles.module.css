@@ -1,7 +1,7 @@
 .button_container {
 	display: flex;
 	justify-content: flex-end;
-	margin-top: 10px;
+	margin-top: 12px;
 
 	:global {
 		.ui_button_container:first-child {

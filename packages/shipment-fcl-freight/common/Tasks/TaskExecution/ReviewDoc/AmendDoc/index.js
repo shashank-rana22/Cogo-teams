@@ -12,7 +12,7 @@ function AmendDoc({
 }) {
 	const [remarkValue, setRemarkValue] = useState('');
 
-	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments(
+	const { taskUpdateLoading = false, updateDocument = () => {} } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
 	);
 

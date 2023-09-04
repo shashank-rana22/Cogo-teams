@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useMemo } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
@@ -63,16 +64,15 @@ function UploadAmendDoc({
 	const { control, formState: { errors }, handleSubmit } = formProps;
 
 	const handleSubmitFinal = async (values) => {
-		const documentPayloadData = payloadData;
-		setDocumentPayload({
-			shipment_id         : task.shipment_id,
-			service_id          : task.service_id,
-			service_type        : task.service_type,
-			document_type       : task.document_type,
-			performed_by_org_id : task.organization_id,
+		const payload = {
+			shipment_id         : task?.shipment_id,
+			service_id          : task?.service_id,
+			service_type        : task?.service_type,
+			document_type       : task?.document_type,
+			performed_by_org_id : task?.organization_id,
 			id                  : details?.id,
-			pending_task_id     : !isAmendBookingNote ? task.id : undefined,
-			data                : { ...documentPayloadData, status: 'uploaded' },
+			pending_task_id     : !isAmendBookingNote ? task?.id : undefined,
+			data                : { ...payloadData, status: 'uploaded' },
 			document_url:
 				values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.url?.finalUrl
 				|| values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.finalUrl
@@ -88,12 +88,13 @@ function UploadAmendDoc({
 					currency : documentData?.amount?.currency || undefined,
 				},
 			})),
-		});
+		};
 
 		if (isAmendBookingNote) {
+			setDocumentPayload(payload);
 			setIsQuotation(true);
 		} else {
-			updateDocument(documentPayload);
+			updateDocument(payload);
 		}
 	};
 
@@ -118,14 +119,15 @@ function UploadAmendDoc({
 				))}
 			</div>
 
-			{isQuotation ? (
+			{isQuotation && !isEmpty(documentPayload) ? (
 				<UpdateQuotation
 					task={task}
 					setIsQuotation={setIsQuotation}
-					newRefetch={newRefetch}
 					updateDocument={updateDocument}
 					documentPayload={documentPayload}
 					documentUpdateLoading={taskUpdateLoading}
+					onClose={onClose}
+					refetch={refetch}
 				/>
 			) : (
 				<>
