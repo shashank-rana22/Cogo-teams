@@ -113,7 +113,7 @@ function TaskDetails({
 										date       : task?.updated_at,
 										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 										formatType : 'date',
-										separator  : ' - ',
+
 									})}`}
 								</div>
 							</Tooltip>
