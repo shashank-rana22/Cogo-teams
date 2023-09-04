@@ -1,13 +1,20 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import getShipmentTypeFromUrl from '../../../../helpers/getShipmentTypeFromUrl';
 import useBookShipment from '../../hooks/useBookShipment';
 import useControlBookingApproval from '../../hooks/useControlBookingApproval';
 import useSendWhatsappBooking from '../../hooks/useSendWhatsappBooking';
+
+const URL_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
 
 const useHandleBookingConfirmationFooter = ({
 	detail = {},
@@ -21,6 +28,8 @@ const useHandleBookingConfirmationFooter = ({
 	disableConditionForFcl = false,
 	noRatesPresent = false,
 }) => {
+	const { push } = useRouter();
+
 	const {
 		partner_id,
 		query: { shipment_id, rfq_id },
@@ -28,6 +37,8 @@ const useHandleBookingConfirmationFooter = ({
 		partner_id : profile?.partner?.id,
 		query      : general?.query,
 	}));
+
+	const shipmentType = getShipmentTypeFromUrl() || detail?.primary_service;
 
 	const {
 		validity_end,
@@ -99,11 +110,16 @@ const useHandleBookingConfirmationFooter = ({
 			} else {
 				setIsShipmentCreated(true);
 
-				const newHref = `${window.location.origin}/${partner_id}/shipments/${
-					shipment_id || res.data.shipment_id
-				}`;
+				if (URL_MAPPING[shipmentType]) {
+					push(`booking/${URL_MAPPING[shipmentType]}/${
+						shipment_id || res?.data?.shipment_id
+					}`);
+				} else {
+					const newHref = `${window.location.origin}/
+					${partner_id}/shipments/${shipment_id || res?.data?.shipment_id}`;
 
-				window.location.href = newHref;
+					window.location.href = newHref;
+				}
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
