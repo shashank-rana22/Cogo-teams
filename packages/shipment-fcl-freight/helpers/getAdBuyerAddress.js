@@ -38,9 +38,6 @@ const getAdBuyerAddress = ({
 		countryId            : country?.id,
 		registrationNumber   : registration_number,
 		taxNumber            : gst_number,
-		sageOrganizationId   : null,
-		taggedOrganizationId : null,
-		tradePartyMappingId  : null,
 	};
 };
 

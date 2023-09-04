@@ -1,11 +1,12 @@
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 
 const useAdvanceDocument = (setShowRequestModal) => {
-	const [{ loading }, trigger] = useRequest({
-		url    : '/purchase/advance-document',
-		method : 'POST',
+	const [{ loading }, trigger] = useRequestBf({
+		url     : '/purchase/advance-document',
+		method  : 'POST',
+		authKey : 'post_purchase_advance_document',
 	}, { manual: true });
 
 	const apiTrigger = async (val) => {

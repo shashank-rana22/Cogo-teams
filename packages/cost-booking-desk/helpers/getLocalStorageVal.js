@@ -14,7 +14,7 @@ export default function getLocalStorageVal() {
 		shipmentType = 'fcl_freight';
 		stepperTab = 'export';
 		activeTab = 'assigned';
-		paymentType = 'payment_requests';
+		paymentType = 'payment_request';
 		filters.page = 1;
 	}
 

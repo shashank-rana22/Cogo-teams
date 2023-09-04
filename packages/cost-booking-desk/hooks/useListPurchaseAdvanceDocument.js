@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback, useState, useContext } from 'react';
 
@@ -17,10 +17,11 @@ function useListPurchaseAdvanceDocument(searchValue = '') {
 	const [pagination, setPagination] = useState(INIT_PAGE);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/purchase/advance-document/list/v2',
-		method : 'GET',
-		params : {
+	const [{ loading }, trigger] = useRequestBf({
+		url     : '/purchase/advance-document/list/v2',
+		method  : 'GET',
+		authKey : 'get_purchase_advance_document_list_v2',
+		params  : {
 			filters: {
 				q: query,
 			},

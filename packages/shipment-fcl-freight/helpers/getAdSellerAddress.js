@@ -27,15 +27,11 @@ const getAdSellerAddress = ({
 		address,
 		entityCode           : entity_code,
 		entityCodeId         : cogo_entity_id,
-		cityName             : null,
 		countryName          : country?.name,
 		countryCode          : country?.country_code,
 		countryId            : country_id,
 		registrationNumber   : registration_number,
 		taxNumber            : tax_number,
-		sageOrganizationId   : null,
-		taggedOrganizationId : null,
-		tradePartyMappingId  : null,
 	};
 };
 

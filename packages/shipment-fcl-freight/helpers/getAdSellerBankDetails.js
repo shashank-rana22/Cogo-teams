@@ -13,10 +13,8 @@ const getAdSellerBankDetails = ({ collectionPartyBankDetails = {}, collectionPar
 		collectionPartyId : collectionParty?.id,
 		bankName          : bank_name,
 		branchName        : branch_name,
-		branchCode        : null,
 		ifscCode          : ifsc_number,
 		accountNumber     : bank_account_number,
-		swiftCode         : null,
 	};
 };
 
