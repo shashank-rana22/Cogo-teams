@@ -51,10 +51,6 @@ function ReviewDoc({
 		{ refetch: newRefetch },
 	);
 
-	const handleApprove = () => {
-		setShowModal(true);
-	};
-
 	const handleFinalApprove = async () => {
 		params = {
 			...params,
@@ -103,10 +99,6 @@ function ReviewDoc({
 		}
 
 		return url;
-	};
-
-	const onCloseModal = () => {
-		setShowModal(false);
 	};
 
 	return (
@@ -176,7 +168,7 @@ function ReviewDoc({
 						Amend
 					</Button>
 
-					<Button onClick={handleApprove} disabled={loading}>
+					<Button onClick={() => setShowModal(true)} disabled={loading}>
 						Approve
 					</Button>
 				</div>
@@ -199,7 +191,7 @@ function ReviewDoc({
 
 			<ApprovalModal
 				showModal={showModal}
-				onCloseModal={onCloseModal}
+				setShowModal={setShowModal}
 				task={task}
 				handleFinalApprove={handleFinalApprove}
 			/>
