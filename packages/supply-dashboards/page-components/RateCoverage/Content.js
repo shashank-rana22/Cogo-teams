@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 function RateCoverageContent() {
 	const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
+	const [showWeekData, setShowWeekData] = useState(false);
 
 	const handleFilterClick = () => {
 		setShowFilters((prev) => !prev);
@@ -73,9 +74,15 @@ function RateCoverageContent() {
 					filter={filter}
 					setFilter={setFilter}
 					setSerialId={setSerialId}
+					setShowWeekData={setShowWeekData}
 				/>
 			)}
-			<TasksOverview data={statsData} statsLoading={statsLoading} />
+			<TasksOverview
+				data={statsData}
+				statsLoading={statsLoading}
+				showWeekData={showWeekData}
+				setShowWeekData={setShowWeekData}
+			/>
 			<ListData
 				data={statsList}
 				list={finalList}

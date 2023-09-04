@@ -3,16 +3,12 @@ import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-// import Controls from '../../configurations/filter';
-
 import { serviceOptions, taskStatusOptions, commodityOptions } from '../../helpers/constants';
 
 import styles from './styles.module.css';
 
 const CONSTANT_SIX_HUNDERED = 600;
 const CONSTANT_SIXTEEN = 16;
-// const CONSTANT_TWENTY = 20;
-// const CONSTANT_SEVEN = 7;
 
 function Filter({
 	getCoverageDetails = () => {},
@@ -20,6 +16,7 @@ function Filter({
 	setFilter = () => {},
 	getListCoverage = () => {},
 	setSerialId = () => {},
+	setShowWeekData = () => {},
 }) {
 	const type = (filter?.service === 'air_freight') ? 'airport' : 'seaport';
 	const operator_type = (filter?.service === 'air_freight') ? 'airline' : 'shipping_line';
@@ -82,6 +79,7 @@ function Filter({
 						value={filter?.service}
 						onChange={(value) => {
 							setFilter({ service: value, status: 'pending', releventToMeValue: true });
+							setShowWeekData(false);
 						}}
 					/>
 				</div>

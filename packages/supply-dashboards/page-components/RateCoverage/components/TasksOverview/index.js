@@ -1,12 +1,11 @@
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import OverviewContent from './OverviewContent';
 import styles from './styles.module.css';
 import WeeklyOverviewContent from './WeeklyOverviewContent';
 
-function TasksOverview({ data = {}, statsLoading = false }) {
-	const [showWeekData, setShowWeekData] = useState(false);
+function TasksOverview({ data = {}, statsLoading = false, showWeekData = false, setShowWeekData = () => {} }) {
 	const handleClick = () => {
 		setShowWeekData((prev) => !prev);
 	};
