@@ -252,5 +252,8 @@
     "notification": "notification",
     "add_account": "Add Account",
     "search_bar": "Search menu...",
-    "switching_profile": "Switching Profile"
+    "switching_profile": "Switching Profile",
+    "forecast": "Forecast",
+    "supply_allocation": "Supply Allocation",
+    "demand_forecast": "Demand Forecast"
 }

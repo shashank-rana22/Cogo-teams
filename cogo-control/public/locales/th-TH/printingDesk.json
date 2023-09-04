@@ -33,7 +33,7 @@
     "awb_document_download_document_container_download_button": "ดาวน์โหลด 12 สำเนา",
     "awb_document_download_document_container_downloading_button": "การดาวน์โหลด...",
     "awb_document_download_document_container_download_other__button": "การดาวน์โหลด",
-    "approve_awb_Handover_button": "ส่งมอบ",
+    "approve_awb_handover_button": "ส่งมอบ",
     "approve_awb_body_text": "แน่ใจหรือว่าต้องการยืนยันการส่งมอบ?",
     "approve_awb_cancel_button": "ยกเลิก",
     "approve_awb_confirm_button": "ยืนยัน",

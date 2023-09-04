@@ -2587,14 +2587,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		forecast: {
 			key         : 'forecast',
-			title       : 'Forecast',
+			title       : t('common:forecast'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcMUpwardGraph,
 			options     : [
 				{
-					key           : 'forecast-supply_allocation',
-					title         : 'Supply Allocation',
+					key         	 : 'forecast-supply_allocation',
+					title         : t('common:supply_allocation'),
 					href          : '/v2/supply-allocation',
 					as            : '/v2/supply-allocation',
 					type          : 'link',
@@ -2603,8 +2603,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 				{
-					key           : 'forecast-demand_forecast',
-					title         : 'Demand Forecast',
+					key   : 'forecast-demand_forecast',
+					title : t('common:demand_forecast'),
+
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',

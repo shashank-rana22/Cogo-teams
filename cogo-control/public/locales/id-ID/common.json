@@ -252,5 +252,8 @@
     "notification": "notifikasi",
     "add_account": "Tambah Akun",
     "search_bar": "Menu pencarian...",
-    "switching_profile": "Beralih Profil"
+    "switching_profile": "Beralih Profil",
+    "forecast": "Peramalan",
+    "supply_allocation": "Pengalokasian Persediaan",
+    "demand_forecast": "Peramalan Permintaan"
 }

@@ -252,5 +252,8 @@
     "notification": "thông báo",
     "add_account": "Thêm tài khoản",
     "search_bar": "Thực đơn tìm kiếm...",
-    "switching_profile": "Chuyển hồ sơ"
+    "switching_profile": "Chuyển hồ sơ",
+    "forecast": "Dự báo",
+    "supply_allocation": "Phân bổ nguồn cung cấp",
+    "demand_forecast": "Dự báo nhu cầu"
 }

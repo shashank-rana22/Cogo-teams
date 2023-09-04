@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { OUTSTANDING_AMOUNT_KEYS } from '../../../../../constants/account-type';
 import useGetQueryBuilder from '../../../../../hooks/useGetQueryBuilder';
+import EmptyStateOutStanding from '../../../EmptyStateOutStanding';
 
 import KamOrgData from './KamOrgData';
 import KamOwners from './KamOwners';
@@ -72,7 +73,7 @@ function KamWiseData({
 		if (!loading && isEmpty(list || [])) {
 			return (
 				<div className={styles.container}>
-					NO DATA FOUND
+					<EmptyStateOutStanding width={400} height={200} />
 				</div>
 			);
 		}
