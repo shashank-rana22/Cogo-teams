@@ -1,8 +1,9 @@
 import { Textarea, Datepicker, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload, IcMRadioLoader, IcMRefresh } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useSettlement from '../../../apisModal/useSettlement';
 import { MatchModalInterface } from '../../../common/interface';
@@ -51,7 +52,13 @@ function MatchModal({
 		t,
 	});
 
-	const newDate = format(settlementDate, 'yyyy-mm-dd 00:00:00', {}, false) || new Date();
+	const newDate = formatDate({
+		date       : settlementDate || new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-mm-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	});
 
 	const checkReact = () => {
 		setChangeData(checkedData);
@@ -60,12 +67,13 @@ function MatchModal({
 
 	const onApprove = (item:string) => {
 		const { date } = value;
-		const setDate = format(
-			date || settlementDate,
-			'yyyy-mm-dd 00:00:00',
-			{},
-			false,
-		);
+		const setDate = formatDate({
+			date       : date || settlementDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-mm-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
+			separator  : ' ',
+		});
 		return item === 'settle'
 			? submitMatch(changeData, setShow, setDate, value)
 			: setReject(value, setShow);
@@ -78,8 +86,8 @@ function MatchModal({
 					{t('incidentManagement:settlement_date')}
 					<div className={styles.date_range}>
 						<Datepicker
-							placeholder={t('incidentManagement:select_date_placeholder')}
-							dateFormat="dd/MM/yyyy"
+							placeholder={t('incidentManagement:select_date_placeholder') || ''}
+							dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 							name="date"
 							disable={!isEditable}
 							value={value?.date}

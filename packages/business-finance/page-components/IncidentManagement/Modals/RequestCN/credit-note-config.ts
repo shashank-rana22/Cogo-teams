@@ -1,10 +1,13 @@
 import { startCase } from '@cogoport/utils';
 
-export const categoryOptions = (t) => [
+interface Props {
+	t?: Function;
+}
+export const categoryOptions = ({ t = () => {} }:Props) => [
 	{ label: t('incidentManagement:revenue_impacting'), value: 'REVENUE_IMPACTING' },
 	{ label: t('incidentManagement:non_revenue_impacting'), value: 'NON_REVENUE_IMPACTING' },
 ];
-export const revenueOptions = (t) => [
+export const revenueOptions = ({ t = () => {} }:Props) => [
 	{ label: t('incidentManagement:invoicing_currency_change_label'), value: 'Invoicing Currency Change' },
 	{ label: t('incidentManagement:line_item_currency_change_label'), value: 'Line Item Currency Change' },
 	{
@@ -24,7 +27,7 @@ export const revenueOptions = (t) => [
 	},
 	{ label: t('incidentManagement:others'), value: 'revenueOthers' },
 ];
-export const nonRevenueOptions = (t) => [
+export const nonRevenueOptions = ({ t = () => {} }:Props) => [
 	{ label: t('incidentManagement:customer_address_change'), value: 'Customer Address Change' },
 	{ label: t('incidentManagement:invoice_data_change'), value: 'Invoice Date Change' },
 	{ label: t('incidentManagement:gst_change'), value: 'GST Change' },
@@ -38,14 +41,14 @@ export const NON_REVENUE_DATA = [
 	'Billing Party Name Change',
 ];
 
-export const creditNoteApprovalTypeOptions = (t) => [
+export const creditNoteApprovalTypeOptions = ({ t = () => {} }:Props) => [
 	{ label: t('incidentManagement:non_revenue_impacting'), value: 'NON_REVENUE_IMPACTING' },
 	{ label: t('incidentManagement:cancellation_invoice'), value: 'CANCELLATION_INVOICE' },
 	{ label: t('incidentManagement:revenue_impacting'), value: 'REVENUE_IMPACTING' },
 	{ label: t('incidentManagement:profit_impact_cases'), value: 'PROFIT_IMPACTING_CASES' },
 ];
 
-export const requestCreditNoteColumns = (t) => [
+export const requestCreditNoteColumns = ({ t = () => {} }:Props) => [
 	{
 		Header   : t('incidentManagement:name_header'),
 		accessor : 'name',

@@ -91,7 +91,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							value={creditNoteType || CNCategoryValues?.CNType}
 							disabled={!isEditable || level1?.status === 'APPROVED'}
 							onChange={(e:string) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
-							options={categoryOptions(t)}
+							options={categoryOptions({ t })}
 						/>
 					</div>
 				</div>
@@ -119,10 +119,10 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									options={
 									creditNoteRemarks
 										? [
-											...(revenueOptions(t)),
+											...(revenueOptions({ t })),
 											{ label: creditNoteRemarks, value: creditNoteRemarks },
 										]
-										: revenueOptions(t)
+										: revenueOptions({ t })
 								}
 								/>
 							)}
@@ -140,10 +140,10 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									options={
 									creditNoteRemarks
 										? [
-											...(nonRevenueOptions(t)),
+											...(nonRevenueOptions({ t })),
 											{ label: creditNoteRemarks, value: creditNoteRemarks },
 										]
-										: nonRevenueOptions(t)
+										: nonRevenueOptions({ t })
 								}
 								/>
 							)}
@@ -242,7 +242,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									disabled={level1?.status === 'APPROVED'}
 									onChange={(e) => setCreditNoteApprovalType(e)}
 									placeholder={t('incidentManagement:cn_approval_type_placeholder')}
-									options={creditNoteApprovalTypeOptions(t)}
+									options={creditNoteApprovalTypeOptions({ t })}
 									size="sm"
 									style={{ paddingLeft: '12px' }}
 								/>
@@ -383,7 +383,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						{lineItems?.length > 0 ? (
 							<div className={styles.list_container}>
 								<StyledTable
-									columns={requestCreditNoteColumns(t)}
+									columns={requestCreditNoteColumns({ t })}
 									showPagination={false}
 									data={lineItems}
 								/>

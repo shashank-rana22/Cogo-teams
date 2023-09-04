@@ -2,6 +2,7 @@ import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import React from 'react';
 
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
@@ -104,7 +105,6 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
 							<span>
 								{t('incidentManagement:icjv_approval')}
-								{' '}
 							</span>
 						)
 							: toTitleCase(requestType ? startCase(requestType) : '-')}

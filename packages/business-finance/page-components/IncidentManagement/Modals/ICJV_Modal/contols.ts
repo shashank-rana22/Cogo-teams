@@ -1,4 +1,7 @@
-const controls = (t) => [
+interface Props {
+	t?: Function;
+}
+const controls = ({ t = () => {} }:Props) => [
 	{
 		Header   : t('incidentManagement:jv_number_header'),
 		accessor : 'jvNum',

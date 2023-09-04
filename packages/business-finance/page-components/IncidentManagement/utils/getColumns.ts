@@ -5,7 +5,7 @@ import { ColumnInterface } from './interface';
 
 const getColumns = ({
 	activeTab, setIsAscendingActive, setFilters,
-	isAscendingActive, getIncidentData, t,
+	isAscendingActive, getIncidentData, t = () => {},
 }:ColumnInterface) => {
 	if (activeTab === 'requested') {
 		return requestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, t });

@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -93,7 +93,7 @@ function NostroInput({
 						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
 					>
 						<Tooltip
-							content={Content()}
+							content={<Content />}
 						>
 							<Button
 								className={styles.edit_icon}

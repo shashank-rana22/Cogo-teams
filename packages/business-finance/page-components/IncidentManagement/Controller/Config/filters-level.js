@@ -1,4 +1,4 @@
-const controls = (t) => [
+const controls = (t = () => {}) => [
 	{
 		name        : 'incidentType',
 		type        : 'select',

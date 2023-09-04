@@ -15,7 +15,10 @@ import Controller from './Controller';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
 
-const tabs = (t) => [
+interface Props {
+	t?: Function;
+}
+const tabs = ({ t = () => {} }:Props) => [
 	{
 		key   : 'requested',
 		label : t('incidentManagement:requested_tab'),
@@ -79,7 +82,7 @@ function IncidentManagement() {
 		};
 	});
 	const [activeTab, setActiveTab] = useState<string>(
-		query.activeTab || tabs(t)[GLOBAL_CONSTANTS.zeroth_index].key,
+		query.activeTab || tabs({ t })[GLOBAL_CONSTANTS.zeroth_index].key,
 	);
 	const {
 		incidentData,
@@ -182,7 +185,7 @@ function IncidentManagement() {
 					fullWidth
 					themeType="primary"
 				>
-					{tabs(t).map(({ key = '', label = '' }) => (
+					{tabs({ t }).map(({ key = '', label = '' }) => (
 						<TabPanel
 							name={key}
 							key={key}

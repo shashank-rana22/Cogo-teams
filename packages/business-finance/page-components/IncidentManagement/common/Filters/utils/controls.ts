@@ -1,6 +1,10 @@
 import styles from './styles.module.css';
 
-export const requestControls = (t, isSettlementExecutive = false) => {
+interface Props {
+	t?: Function;
+	isSettlementExecutive?: boolean;
+}
+export const requestControls = ({ t = () => {}, isSettlementExecutive = false }:Props) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
 		optionsVal = [
@@ -95,7 +99,7 @@ export const requestControls = (t, isSettlementExecutive = false) => {
 	];
 };
 
-export const remainControls = (t, isSettlementExecutive = false) => {
+export const remainControls = ({ t = () => {}, isSettlementExecutive = false }:Props) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
 		optionsVal = [

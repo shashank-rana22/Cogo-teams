@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 interface DetailsInterface {
 	title?:string,
 	value?:any,
+
 }
 interface Props {
 	securityDepositDetails?:DetailsInterface[],
@@ -20,6 +21,7 @@ interface Props {
 	loading?:boolean,
 	setRemarkValue?:React.Dispatch<React.SetStateAction<string>>,
 	type?:string,
+
 }
 function SecurityDepositCommonModal({
 	securityDepositDetails,

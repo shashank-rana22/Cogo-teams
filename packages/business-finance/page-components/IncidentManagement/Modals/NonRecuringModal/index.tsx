@@ -136,7 +136,7 @@ function NonRecuringModal({
 					{!isEmpty(lineItems) ? (
 						<div className={styles.list_container}>
 							<StyledTable
-								columns={overHeadConfigs(t)}
+								columns={overHeadConfigs({ t })}
 								showPagination={false}
 								data={lineItems}
 							/>

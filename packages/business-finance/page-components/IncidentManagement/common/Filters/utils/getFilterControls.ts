@@ -6,14 +6,14 @@ interface Controls {
 	t?:Function;
 }
 
-export const getFilterControls = ({ activeTab, isSettlementExecutive, t }: Controls) => {
+export const getFilterControls = ({ activeTab, isSettlementExecutive, t = () => {} }: Controls) => {
 	switch (activeTab) {
 		case 'requested':
-			return requestControls(t, isSettlementExecutive);
+			return requestControls({ t, isSettlementExecutive });
 		case 'approved':
-			return remainControls(t, isSettlementExecutive);
+			return remainControls({ t, isSettlementExecutive });
 		case 'rejected':
-			return remainControls(t, isSettlementExecutive);
+			return remainControls({ t, isSettlementExecutive });
 		default:
 			return [{}];
 	}

@@ -66,7 +66,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 						<div>
 							<StyledTableICJV
 								data={list || []}
-								columns={controls(t)}
+								columns={controls({ t })}
 								loading={false}
 							/>
 						</div>

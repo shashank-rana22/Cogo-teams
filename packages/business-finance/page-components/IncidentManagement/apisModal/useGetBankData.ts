@@ -36,7 +36,7 @@ const useGetBankData = ({
 	refetch,
 	bankId,
 	value,
-	t,
+	t = () => {},
 }:HookInterface) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,

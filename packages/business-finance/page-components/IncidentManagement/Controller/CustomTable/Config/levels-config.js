@@ -1,4 +1,4 @@
-export const levelsConfig = (t) => ({
+export const levelsConfig = (t = () => {}) => ({
 	fields: [
 		{
 			label : t('incidentManagement:levels_label'),

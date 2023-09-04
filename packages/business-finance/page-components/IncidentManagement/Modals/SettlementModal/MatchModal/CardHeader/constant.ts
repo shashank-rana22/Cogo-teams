@@ -1,4 +1,7 @@
-export 	const headerData = (t) => [
+interface Props {
+	t?: Function;
+}
+export 	const headerData = ({ t = () => {} }:Props) => [
 	{ id: '1', label: t('incidentManagement:doc_number_label') },
 	{ id: '2', label: t('incidentManagement:doc_amount_label') },
 	{ id: '3', label: t('incidentManagement:exc_rate_label') },

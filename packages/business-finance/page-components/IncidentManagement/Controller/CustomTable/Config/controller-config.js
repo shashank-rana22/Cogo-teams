@@ -1,4 +1,4 @@
-export const controllerConfig = (t) => ({
+export const controllerConfig = (t = () => {}) => ({
 	headerClass : 'border',
 	fields      : [
 		{
