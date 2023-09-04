@@ -1,4 +1,5 @@
 import { Modal, Button, Textarea } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import ApproveAndReject from '../../common/ApproveAndRejectData';
@@ -31,6 +32,7 @@ function SecurityDepositCommonModal({
 	setRemarkValue,
 	type,
 }:Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	return (
 		<Modal
 			size="md"
@@ -40,7 +42,7 @@ function SecurityDepositCommonModal({
 			}}
 		>
 			<Modal.Header title={type === 'SecurityDeposit'
-				? 'Advance Container Security Deposit' : 'Advance Container Security Deposit Refund'}
+				? t('incidentManagement:adv_cont_sec_deposit') : t('incidentManagement:adv_cont_sec_deposit_refund')}
 			/>
 			<Modal.Body>
 				{!isEditable && <ApproveAndReject row={row} />}
@@ -63,13 +65,13 @@ function SecurityDepositCommonModal({
 
 				{isEditable && (
 					<>
-						<div className={styles.remarks}>Remarks*</div>
+						<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 						<Textarea
 							name="remark"
 							size="md"
 							rows={4}
 							cols={20}
-							placeholder="Enter Remark Here..."
+							placeholder={t('incidentManagement:remarks_placeholder')}
 							onChange={(e: string) => setRemarkValue(e)}
 						/>
 					</>
@@ -87,7 +89,7 @@ function SecurityDepositCommonModal({
 								getData({ status: 'REJECTED' });
 							}}
 						>
-							Reject
+							{t('incidentManagement:reject_btn')}
 						</Button>
 
 						<Button
@@ -98,7 +100,7 @@ function SecurityDepositCommonModal({
 								getData({ status: 'APPROVED' });
 							}}
 						>
-							Approve
+							{t('incidentManagement:approve_btn')}
 						</Button>
 					</div>
 				</Modal.Footer>

@@ -1,6 +1,7 @@
 import { Button, Placeholder, cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useRef } from 'react';
 
 import useUpdateLevel from '../../../common/hooks/useUpdateLevel';
@@ -19,6 +20,7 @@ const DEFAULT_VALUE = 1;
 function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch = () => { } }) {
 	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
+	const { t } = useTranslation(['incidentManagement']);
 	const {
 		id = '',
 		referenceId = '',
@@ -83,9 +85,9 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 							themeType="secondary"
 							disabled={loading}
 						>
-							Cancel
+							{t('incidentManagement:cancel_btn')}
 						</Button>
-						<Button onClick={onUpdate} disabled={loading}>Confirm</Button>
+						<Button onClick={onUpdate} disabled={loading}>{t('incidentManagement:confirm_btn')}</Button>
 					</>
 				)}
 			</div>

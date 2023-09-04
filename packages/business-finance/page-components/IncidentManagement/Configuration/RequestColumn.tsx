@@ -15,9 +15,10 @@ export const requestColumn = ({
 	setFilters,
 	isAscendingActive,
 	getIncidentData,
+	t,
 }) => [
 	{
-		Header   : 'INCIDENT ID',
+		Header   : t('incidentManagement:incident_id_header'),
 		accessor : 'incident_id',
 		id       : 'incident_id',
 		Cell     : ({ row: { original } }) => {
@@ -28,7 +29,7 @@ export const requestColumn = ({
 		},
 	},
 	{
-		Header   : 'COMPANY NAME',
+		Header   : t('incidentManagement:company_name_header'),
 		accessor : 'company_name',
 		id       : 'company_name',
 		Cell     : ({ row: { original } }) => {
@@ -100,7 +101,7 @@ export const requestColumn = ({
 		},
 	},
 	{
-		Header   : 'REQUESTED BY',
+		Header   : t('incidentManagement:requested_by_header'),
 		accessor : 'requested_by',
 		id       : 'requested_by',
 		Cell     : ({ row: { original } }) => {
@@ -110,7 +111,7 @@ export const requestColumn = ({
 		},
 	},
 	{
-		Header   : 'REQUEST TYPE',
+		Header   : t('incidentManagement:request_type_header'),
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
@@ -124,7 +125,10 @@ export const requestColumn = ({
 					<span>
 						{requestType
 						=== 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
-							<span>ICJV Approval </span>
+							<span>
+								{t('incidentManagement:icjv_approval')}
+								{' '}
+							</span>
 							) : (
 								toTitleCase(startCase(requestType || '-'))
 							)}
@@ -134,11 +138,11 @@ export const requestColumn = ({
 							<div>
 								{revoked ? (
 									<Pill size="md" color="#C4DC91">
-										Fully
+										{t('incidentManagement:fully_revoked')}
 									</Pill>
 								) : (
 									<Pill size="md" color="#FEF199">
-										Partial
+										{t('incidentManagement:partial_revoked')}
 									</Pill>
 								)}
 							</div>
@@ -149,12 +153,12 @@ export const requestColumn = ({
 		},
 	},
 	{
-		Header   : 'REQUEST SUB TYPE',
+		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
 	},
 	{
-		Header   : 'SOURCE',
+		Header   : t('incidentManagement:source_header'),
 		accessor : 'source',
 		id       : 'source',
 		Cell     : ({ row: { original } }) => {
@@ -165,7 +169,7 @@ export const requestColumn = ({
 	{
 		Header: () => (
 			<div className={styles.flex}>
-				REQUEST DATE
+				{t('incidentManagement:request_date')}
 				<SortIcon
 					setIsAscendingActive={setIsAscendingActive}
 					setFilters={setFilters}
@@ -197,13 +201,13 @@ export const requestColumn = ({
 		id: 'request_date',
 	},
 	{
-		Header   : 'Status',
+		Header   : t('incidentManagement:status_header'),
 		accessor : ({ currentLevel = 0 }) => (
 			<span className={styles.status_level}>
-				Level
+				{t('incidentManagement:levels_label')}
 				{' '}
 				{currentLevel}
-				: Pending
+				{t('incidentManagement:_pending_status')}
 			</span>
 		),
 		id: 'status',
@@ -229,7 +233,7 @@ export const requestColumn = ({
 									deadlineTag === 'RED' && styles.ribbon_red
 								}
 							>
-								Urgent
+								{t('incidentManagement:urgent')}
 							</div>
 						)}
 						{deadlineTag === 'ORANGE' && (
@@ -239,7 +243,7 @@ export const requestColumn = ({
 									&& styles.ribbon_orange
 								}
 							>
-								Urgent
+								{t('incidentManagement:urgent')}
 							</div>
 						)}
 					</div>

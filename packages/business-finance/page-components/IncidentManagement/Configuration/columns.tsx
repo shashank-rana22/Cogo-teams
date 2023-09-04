@@ -10,9 +10,9 @@ import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab }) => [
+export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t }) => [
 	{
-		Header   : 'INCIDENT ID',
+		Header   : t('incidentManagement:incident_id_header'),
 		accessor : 'incident_id',
 		id       : 'incident_id',
 		Cell     : ({ row: { original } }) => {
@@ -21,7 +21,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'COMPANY NAME',
+		Header   : t('incidentManagement:company_name_header'),
 		accessor : 'company_name',
 		id       : 'company_name',
 		Cell     : ({ row: { original } }) => {
@@ -79,7 +79,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'REQUESTED BY',
+		Header   : t('incidentManagement:requested_by_header'),
 		accessor : 'requested_by',
 		id       : 'requested_by',
 		Cell     : ({ row: { original } }) => {
@@ -89,7 +89,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'REQUEST TYPE',
+		Header   : t('incidentManagement:request_type_header'),
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
@@ -101,7 +101,12 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.credit}>
 					<span>
-						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
+							<span>
+								{t('incidentManagement:icjv_approval')}
+								{' '}
+							</span>
+						)
 							: toTitleCase(requestType ? startCase(requestType) : '-')}
 
 					</span>
@@ -109,8 +114,8 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 						{typeof (revoked) === 'boolean' && (
 							<div>
 								{revoked
-									? <Pill size="md" color="#C4DC91">Fully</Pill>
-									: <Pill size="md" color="#FEF199">Partial</Pill>}
+									? <Pill size="md" color="#C4DC91">{t('incidentManagement:fully_revoked')}</Pill>
+									: <Pill size="md" color="#FEF199">{t('incidentManagement:partial_revoked')}</Pill>}
 							</div>
 						)}
 					</span>
@@ -120,12 +125,12 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'REQUEST SUB TYPE',
+		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
 	},
 	{
-		Header   : 'SOURCE',
+		Header   : t('incidentManagement:source_header'),
 		accessor : 'source',
 		id       : 'source',
 		Cell     : ({ row: { original } }) => {
@@ -136,7 +141,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 	{
 		Header: () => (
 			<div className={styles.flex}>
-				REQUEST DATE
+				{t('incidentManagement:request_date')}
 				<SortIcon
 					setIsAscendingActive={setIsAscendingActive}
 					setFilters={setFilters}
@@ -168,7 +173,8 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		id: 'request_date',
 	},
 	{
-		Header   : activeTab === 'approved' ? 'APPROVED BY & ON' : 'REJECTED BY & ON',
+		Header: activeTab === 'approved' ? t('incidentManagement:approved_by_n_on')
+			: t('incidentManagement:rejected_by_n_on'),
 		accessor : 'updatedBy',
 		id       : 'username',
 		Cell     : ({ row: { original } }) => {
@@ -190,7 +196,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'REMARK',
+		Header   : t('incidentManagement:remark_header'),
 		accessor : 'remark',
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {

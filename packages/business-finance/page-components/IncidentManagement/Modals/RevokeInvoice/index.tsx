@@ -1,5 +1,6 @@
 import { Button, Modal, Textarea } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetRevokeInvoiceData from '../../apisModal/useGetRevokeInvoiceData';
@@ -15,13 +16,14 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState(remark);
 	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
-
+	const { t } = useTranslation(['incidentManagement']);
 	const { useOnAction:OnAction, loading } = useGetRevokeInvoiceData({
 		refetch,
 		setShowModal,
 		id,
 		reqRevokeInvoiceRequest,
 		remarks,
+		t,
 	});
 
 	return (
@@ -35,13 +37,13 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title="Revoke Invoice" />
+					<Modal.Header title={t('incidentManagement:invoice_revoke')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 
 						<div>
 							<div className={styles.label_flex}>
-								Invoice Number
+								{t('incidentManagement:invoice_number')}
 							</div>
 							<div className={styles.date_value}>
 								{invoiceNumber || '-'}
@@ -49,23 +51,26 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 						</div>
 						<div className={styles.label_flex}>
 							<div className={styles.document}>
-								Document -
+								{`${t('incidentManagement:doc')} -`}
 							</div>
 							{agreementDocument !== '' ? (
 								<a href={agreementDocument} target="_blank" rel="noreferrer" key={agreementDocument}>
 									<div className={styles.view_flex}>
-										<div className={styles.view}>View Agreement</div>
+										<div className={styles.view}>{t('incidentManagement:view_agreement_link')}</div>
 										<IcMEyeopen />
 									</div>
 
 								</a>
 							) : (
-								<div key={agreementDocument}> No document available</div>
+								<div key={agreementDocument}>
+									{' '}
+									{t('incidentManagement:no_doc_available')}
+								</div>
 							)}
 						</div>
 
 						<div>
-							Cancel Reason
+							{t('incidentManagement:cancel_reason')}
 						</div>
 						<Textarea
 							value={reqRevokeInvoiceRequest?.cancelReason}
@@ -74,17 +79,17 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 								...reqRevokeInvoiceRequest,
 								cancelReason: e,
 							})}
-							placeholder="Cancel E-invoice Reason ..."
+							placeholder={t('incidentManagement:cancel_invoice_reason')}
 						/>
 
 						<div>
-							Remark
+							{t('incidentManagement:remarks')}
 						</div>
 						<Textarea
 							value={remarks}
 							disabled={!isEditable}
 							onChange={setRemarks}
-							placeholder="Remark here ...."
+							placeholder={t('incidentManagement:remarks_placeholder')}
 						/>
 
 					</Modal.Body>
@@ -101,7 +106,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 										OnAction('REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 
 								<Button
@@ -113,7 +118,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 										OnAction('APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

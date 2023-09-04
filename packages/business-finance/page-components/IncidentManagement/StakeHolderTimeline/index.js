@@ -1,5 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -15,9 +16,10 @@ const STATUS_COLOR_MAPPING = {
 
 function StakeHolderTimeline({ timeline = [] }) {
 	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
+	const { t } = useTranslation(['incidentManagement']);
 	return (
 		<div style={{ marginTop: '28px' }}>
-			<h3>Approval</h3>
+			<h3>{t('incidentManagement:approval')}</h3>
 			<div className={styles.container}>
 				{(stakeHolders || []).map((item, index) => (
 					<div className={styles.section} key={item.key}>
@@ -41,13 +43,13 @@ function StakeHolderTimeline({ timeline = [] }) {
 								className={styles.status}
 								style={{ background: STATUS_COLOR_MAPPING[item?.status || 'PENDING'] }}
 							>
-								{item?.status || 'PENDING'}
+								{item?.status || t('incidentManagement:pending_status')}
 							</div>
 						</div>
 
 						<div className={styles.popover_section}>
-							<Popover placement="bottom" render={item?.remarks || 'No remarks'}>
-								<span>Remarks</span>
+							<Popover placement="bottom" render={item?.remarks || t('incidentManagement:no_remarks')}>
+								<span>{t('incidentManagement:remarks')}</span>
 							</Popover>
 						</div>
 

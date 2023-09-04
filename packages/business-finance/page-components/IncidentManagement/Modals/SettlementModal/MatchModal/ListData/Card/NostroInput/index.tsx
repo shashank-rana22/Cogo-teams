@@ -2,6 +2,7 @@ import { Button, Input, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -14,6 +15,7 @@ function NostroInput({
 	setEditedNostro,
 	types,
 }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const {
 		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		nostroEditable = false,
@@ -40,9 +42,9 @@ function NostroInput({
 	}) || '';
 
 	if (lessValue) {
-		errorMessege = 'Nostro cannot be less than 0';
+		errorMessege = t('incidentManagement:error_message_nostro_1');
 	} else if (maxValue) {
-		errorMessege = 'Nostro cannot be greater than Doc. Amount - TDS';
+		errorMessege = t('incidentManagement:error_message_nostro_2');
 	} else {
 		errorMessege = formatted(nostroAmount, currency);
 	}
@@ -50,25 +52,31 @@ function NostroInput({
 		const value = types === 'history' ? +constBalanceAmount : +currentBalance;
 		return value - (+changedValue + tds) || value;
 	};
-	const content = () => (
-		<div>
-
+	function Content() {
+		return (
 			<div>
-				{!isError && <div className={styles.text_styles}>Actual Nostro Value</div>}
-				<div
-					className={styles.input_container}
-					style={{ color: isError ? 'red' : 'black' }}
-				>
-					{errorMessege}
 
+				<div>
+					{!isError && (
+						<div className={styles.text_styles}>
+							{t('incidentManagement:actual_nostro_value')}
+						</div>
+					)}
+					<div
+						className={styles.input_container}
+						style={{ color: isError ? 'red' : 'black' }}
+					>
+						{errorMessege}
+
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 	const handleOnChangeNostroInput = (value) => {
 		setChangedValue(value);
 	};
-	const Submit = () => {
+	const submit = () => {
 		setEditedNostro(itemData, +changedValue, +changeValueBalanceAmount());
 	};
 	return (
@@ -85,7 +93,7 @@ function NostroInput({
 						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
 					>
 						<Tooltip
-							content={content()}
+							content={Content()}
 						>
 							<Button
 								className={styles.edit_icon}
@@ -114,7 +122,7 @@ function NostroInput({
 							<Button
 								className={styles.edit_icon}
 								onClick={() => {
-									Submit();
+									submit();
 									setRestEdit(!restEdit);
 								}}
 							>

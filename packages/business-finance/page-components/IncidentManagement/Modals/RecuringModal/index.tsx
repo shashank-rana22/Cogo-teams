@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
@@ -38,17 +39,17 @@ function RenderSummary({ summary = [] }) {
 	);
 }
 
-const summaryDataOne = ({ businessName, categoryName, cogoEntity }) => [
+const summaryDataOne = ({ businessName, categoryName, cogoEntity, t }) => [
 	{
-		title : 'Vendor Name',
+		title : t('incidentManagement:vendor_name_title'),
 		value : businessName ? showOverflowingNumber(businessName, 18) : '-',
 	},
 	{
-		title : 'Expense Category',
+		title : t('incidentManagement:expense_category_title'),
 		value : startCase(categoryName),
 	},
 	{
-		title : 'Entity',
+		title : t('incidentManagement:entity_label'),
 		value : cogoEntity || '-',
 	},
 ];
@@ -59,13 +60,14 @@ const summaryDataTwo = ({
 	maxPayoutAllowed,
 	ledgerMaxPayoutAllowed,
 	ledgerCurrency,
+	t,
 }) => [
 	{
-		title : 'Branch ',
+		title : t('incidentManagement:branch_title'),
 		value : branchName || '-',
 	},
 	{
-		title: 'Maximum Payout Allowed',
+		title: t('incidentManagement:max_payout_title'),
 		value:
 			currency && maxPayoutAllowed ? (
 				<div>
@@ -83,7 +85,7 @@ const summaryDataTwo = ({
 			),
 	},
 	{
-		title: 'Ledger Account',
+		title: t('incidentManagement:ledger_acount_title'),
 		value:
 			formatAmount({
 				amount   : ledgerMaxPayoutAllowed,
@@ -96,9 +98,9 @@ const summaryDataTwo = ({
 	},
 ];
 
-const summaryDataThree = ({ startDate, endDate, repeatFrequency }) => [
+const summaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
 	{
-		title : 'Start Date',
+		title : t('incidentManagement:end_date_title'),
 		value : (
 			<div>
 				{startDate
@@ -113,7 +115,7 @@ const summaryDataThree = ({ startDate, endDate, repeatFrequency }) => [
 		),
 	},
 	{
-		title : 'End Date',
+		title : t('incidentManagement:end_date_title'),
 		value : (
 			<div>
 				{endDate
@@ -128,14 +130,14 @@ const summaryDataThree = ({ startDate, endDate, repeatFrequency }) => [
 		),
 	},
 	{
-		title : 'Repeat Frequency',
+		title : t('incidentManagement:repeat_frequency_title'),
 		value : DURATION_MAPPING[repeatFrequency] || '-',
 	},
 ];
 
-const summaryDataFour = ({ proofDocuments, agreementNumber }) => [
+const summaryDataFour = ({ proofDocuments, agreementNumber, t }) => [
 	{
-		title : 'Uploaded Documents',
+		title : t('incidentManagement:uploaded_documents_title'),
 		value : (
 			<div className={styles.document_flex}>
 				{(proofDocuments || []).map((url, index) => (url !== '' ? (
@@ -147,20 +149,23 @@ const summaryDataFour = ({ proofDocuments, agreementNumber }) => [
 					>
 						<div className={styles.view_flex}>
 							<div className={styles.view}>
-								View Document
+								{t('incidentManagement:view_doc_link')}
 								{' '}
 								{index + FIRST_INDEX}
 							</div>
 						</div>
 					</a>
 				) : (
-					<div key={url}> No document available</div>
+					<div key={url}>
+						{' '}
+						{t('incidentManagement:no_doc_available')}
+					</div>
 				)))}
 			</div>
 		),
 	},
 	{
-		title : 'Agreement Number',
+		title : t('incidentManagement:agreement_number_title'),
 		value : agreementNumber || '-',
 	},
 ];
@@ -179,7 +184,7 @@ const summeryMappings = ({
 
 function RecuringModal({ id, refetch, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
-
+	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, level3, level2, level1 } = row || {};
 	const { reccuringExpenseApproval, organization } = data;
@@ -213,6 +218,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		businessName,
 		categoryName,
 		cogoEntity,
+		t,
 	});
 
 	const summaryDataSecond = summaryDataTwo({
@@ -221,17 +227,20 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		maxPayoutAllowed,
 		ledgerCurrency,
 		ledgerMaxPayoutAllowed,
+		t,
 	});
 
 	const summaryDataThird = summaryDataThree({
 		startDate,
 		endDate,
 		repeatFrequency,
+		t,
 	});
 
 	const summaryDataFourth = summaryDataFour({
 		proofDocuments,
 		agreementNumber,
+		t,
 	});
 
 	const summeryMapping = summeryMappings({
@@ -252,7 +261,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 				onClose={() => setShowModal(false)}
 			>
 				<Modal.Header
-					title={`Expense Approval - ${toTitleCase(
+					title={`${t('incidentManagement:expense_approval')} - ${toTitleCase(
 						businessName,
 					)} (${toTitleCase(expenseType)})`}
 				/>
@@ -273,16 +282,16 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 						<RenderSummary key={key} summary={val} />
 					))}
 					<div>
-						<div className={styles.title}>Remarks:</div>
+						<div className={styles.title}>{`${t('incidentManagement:remarks')}:`}</div>
 						<div className={styles.remarkval}>{remarkData}</div>
 					</div>
 					{isEditable ? (
 						<>
-							<div className={styles.remarks}>Remarks*</div>
+							<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 							<Textarea
 								name="remark"
 								size="md"
-								placeholder="Enter Remark Here..."
+								placeholder={t('incidentManagement:remarks_placeholder') || ''}
 								onChange={(value: string) => setRemarks(value)}
 								style={{
 									width        : '700',
@@ -307,7 +316,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 									onAction('REJECTED');
 								}}
 							>
-								Reject
+								{t('incidentManagement:reject_btn')}
 							</Button>
 
 							<Button
@@ -319,7 +328,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 									onAction('APPROVED');
 								}}
 							>
-								Approve
+								{t('incidentManagement:approve_btn')}
 							</Button>
 						</div>
 					</Modal.Footer>

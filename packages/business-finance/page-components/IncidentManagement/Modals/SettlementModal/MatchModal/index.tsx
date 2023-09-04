@@ -1,6 +1,7 @@
 import { Textarea, Datepicker, Button } from '@cogoport/components';
 import { IcMDownload, IcMRadioLoader, IcMRefresh } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useSettlement from '../../../apisModal/useSettlement';
@@ -24,7 +25,7 @@ function MatchModal({
 	isEditable,
 }:MatchModalInterface) {
 	const [checkResetButton, setCheckResetButton] = useState(false);
-
+	const { t } = useTranslation(['incidentManagement']);
 	const {
 		setEditedValue,
 		handleCrossClick,
@@ -47,6 +48,7 @@ function MatchModal({
 		checkResetButton,
 		incidentMappingId,
 		supportingDocUrl,
+		t,
 	});
 
 	const newDate = format(settlementDate, 'yyyy-mm-dd 00:00:00', {}, false) || new Date();
@@ -73,10 +75,10 @@ function MatchModal({
 		<div>
 			<div className={styles.flex}>
 				<div className={styles.flex_settle}>
-					Settlement Date
+					{t('incidentManagement:settlement_date')}
 					<div className={styles.date_range}>
 						<Datepicker
-							placeholder="Enter Date"
+							placeholder={t('incidentManagement:select_date_placeholder')}
 							dateFormat="dd/MM/yyyy"
 							name="date"
 							disable={!isEditable}
@@ -96,7 +98,7 @@ function MatchModal({
 									style={{ marginRight: '10px' }}
 									onClick={() => window.open(supportingDocUrl, '_blank')}
 								>
-									Supporting Doc
+									{t('incidentManagement:supporting_doc')}
 									<IcMDownload width="20px" />
 								</Button>
 							)}
@@ -108,7 +110,7 @@ function MatchModal({
 								{checkLoading ? (
 									<IcMRadioLoader style={{ width: 55, height: 16 }} />
 								) : (
-									'Dry Run'
+									t('incidentManagement:dry_run_btn')
 								)}
 							</Button>
 							<Button
@@ -147,12 +149,12 @@ function MatchModal({
 
 			{isEditable && (
 				<>
-					<div className={styles.remarks}>Remarks*</div>
+					<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 					<div className={styles.textarea}>
 						<Textarea
 							name="remark"
 							size="md"
-							placeholder="Enter Remark Here..."
+							placeholder={t('incidentManagement:remarks_placeholder') || ''}
 							onChange={(v: string) => setValue((prev) => ({ ...prev, remarks: v }))}
 							style={{ width: '700', height: '100px', marginBottom: '12px' }}
 						/>
@@ -173,7 +175,7 @@ function MatchModal({
 							onApprove('reject');
 						}}
 					>
-						Reject
+						{t('incidentManagement:reject_btn')}
 					</Button>
 
 					<Button
@@ -185,7 +187,7 @@ function MatchModal({
 							onApprove('settle');
 						}}
 					>
-						Settle
+						{t('incidentManagement:settle_btn')}
 					</Button>
 				</div>
 

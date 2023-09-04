@@ -7,6 +7,7 @@ const usePostExpense = ({
 	setShowModal,
 	id = null,
 	remark = '',
+	t,
 }) => {
 	const { user_id: userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -34,7 +35,7 @@ const usePostExpense = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
+				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 				setShowModal(false);
 				refetch();
 			} else {

@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-key */
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetJvData from '../../apisModal/useGetJvData';
@@ -11,7 +13,7 @@ import styles from './styles.module.css';
 function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row }) {
 	const [showJvModal, setShowJVModal] = useState(false);
 	const [remark, setRemark] = useState('');
-
+	const { t } = useTranslation(['incidentManagement']);
 	const {
 		currency,
 		ledCurrency,
@@ -27,19 +29,23 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 	} = journalVoucherRequest || {};
 
 	const getAllValidData = [
-		{ id: '1', label: 'Entity', value: entityCode },
-		{ id: '2', label: 'Business Partner', value: tradePartyName },
-		{ id: '3', label: 'JV Type', value: type },
-		{ id: '4', label: 'JV Category', value: category },
-		{ id: '5', label: 'JV Mode', value: accMode },
+		{ id: '1', label: t('incidentManagement:entity_label'), value: entityCode },
+		{ id: '2', label: t('incidentManagement:business_partner_label'), value: tradePartyName },
+		{ id: '3', label: t('incidentManagement:jv_type'), value: type },
+		{ id: '4', label: t('incidentManagement:jv_category'), value: category },
+		{ id: '5', label: t('incidentManagement:jv_mode'), value: accMode },
 	];
 
 	const getAllData = [
-		{ id: '1', label: 'Currency', value: currency },
-		{ id: '2', label: 'Amount', value: amount.toFixed(2) },
-		{ id: '3', label: 'Exchange Rate', value: exchangeRate },
-		{ id: '4', label: 'Ledger Currency', value: ledCurrency },
-		{ id: '5', label: 'Validity Date', value: format(new Date(validityDate), 'dd MMM yyyy', {}, false) },
+		{ id: '1', label: t('incidentManagement:currency_label'), value: currency },
+		{ id: '2', label: t('incidentManagement:amount_label'), value: amount.toFixed(2) },
+		{ id: '3', label: t('incidentManagement:exchange_rate_label'), value: exchangeRate },
+		{ id: '4', label: t('incidentManagement:ledger_currency_label'), value: ledCurrency },
+		{
+			id    : '5',
+			label : t('incidentManagement:validity_date_label'),
+			value : format(new Date(validityDate), 'dd MMM yyyy', {}, false),
+		},
 	];
 
 	const { useOnAction:OnAction, loading } = useGetJvData({
@@ -48,6 +54,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 		id,
 		journalVoucherRequest,
 		remark,
+		t,
 	});
 
 	return (
@@ -63,7 +70,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 						setShowJVModal(false);
 					}}
 				>
-					<Modal.Header title="Journal Voucher" />
+					<Modal.Header title={t('incidentManagement:journal_voucher_label')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
@@ -90,7 +97,8 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 										{item?.label || '-'}
 									</div>
 									<div className={styles.date_value}>
-										{ item?.label === 'Amount' || item?.label === 'Exchange Rate'
+										{ item?.label === t('incidentManagement:amount_label')
+										|| item?.label === t('incidentManagement:exchange_rate_label')
 											? item?.value : startCase(item?.value)}
 									</div>
 								</div>
@@ -98,18 +106,18 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 						</div>
 
 						<div className={styles.document_flex}>
-							<div className={styles.document}>Remark -</div>
+							<div className={styles.document}>{`${t('incidentManagement:remark_title')} -`}</div>
 							<div>{description}</div>
 						</div>
 
 						{isEditable && (
 							<>
-								<div className={styles.remarks}>Remarks*</div>
+								<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 
 								<Textarea
 									name="remark"
 									size="md"
-									placeholder="Enter Remark Here..."
+									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(value: string) => setRemark(value)}
 									style={{ width: '700', height: '100px', marginBottom: '12px' }}
 								/>
@@ -130,7 +138,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 										OnAction('REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 
 								<Button
@@ -142,7 +150,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 										OnAction('APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>
