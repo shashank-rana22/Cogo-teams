@@ -93,7 +93,7 @@ function AirRateModal({ data = {} }) {
 		setValue('destination_airport', data?.destination_airport?.id);
 		setValue('commodity', data?.commodity);
 		setValue('handling_type', data?.stacking_type);
-		setValue('airline', data?.airline?.id);
+		setValue('air_line', data?.airline_id);
 	}, [data, setValue]);
 
 	return (
