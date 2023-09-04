@@ -2,6 +2,8 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+import useGetFormatedPath from '../utils/useGetFormatedPath';
+
 const DEFAULT_PAGE = 1;
 const FILTERS_STATES = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'];
 
@@ -25,10 +27,12 @@ const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }
 };
 
 function useListShipments({ dateFilters = {} }) {
+	const { queryParams = {} } = useGetFormatedPath();
+
 	const [params, setParams] = useState({
-		query        : '',
+		query        : queryParams.sid || '',
 		pagination   : DEFAULT_PAGE,
-		shipmentType : '',
+		shipmentType : queryParams.shipmentType || '',
 	});
 
 	const { query: searchQuery, debounceQuery } = useDebounceQuery();

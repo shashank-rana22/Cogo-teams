@@ -22,8 +22,10 @@ function DatesContentFilter({
 	};
 
 	useEffect(() => {
-		const minMax = DATES_MAPPING[range]?.(new Date());
-		setDate({ ...minMax });
+		if (range !== 'custom') {
+			const minMax = DATES_MAPPING[range]?.(new Date());
+			setDate({ ...minMax });
+		}
 	}, [range, setDate]);
 
 	const handleReset = () => {
@@ -39,7 +41,6 @@ function DatesContentFilter({
 				{range !== 'today' ? (
 					<Button
 						themeType="tertiary"
-						className={styles.cancel_btn}
 						onClick={handleReset}
 					>
 						Reset

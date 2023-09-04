@@ -11,6 +11,7 @@ import ShipmentChatModal from '../../../../common/ShipmentChatModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
+import useGetFormatedPath from '../../../../utils/useGetFormatedPath';
 
 import BookingNoteModal from './BookingNoteModal';
 import Filter from './Filter';
@@ -34,6 +35,9 @@ function ListShipmentCards({
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	mailProps = {},
+	params = {},
+	dateFilters = {},
+	range = '',
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -64,17 +68,21 @@ function ListShipmentCards({
 				setShowPocModal={setShowPocModal}
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
 				mailProps={mailProps}
+				params={params}
+				dateFilters={dateFilters}
+				range={range}
 			/>
 		),
 	);
 }
 
 function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
+	const { queryParams = {} } = useGetFormatedPath();
+
 	const [showPocDetails, setShowPocDetails] = useState({});
-	const [range, setRange] = useState('today');
+	const [range, setRange] = useState(queryParams?.range || 'today');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 	const [showShipmentChat, setShowShipmentChat] = useState({});
-
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
 	const [showPopover, setShowPopover] = useState('');
 	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
@@ -108,7 +116,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 					<div className={styles.filter_container}>
 						<Input
 							size="sm"
-							value={params?.value}
+							value={params?.query}
 							onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
 							prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
 							placeholder="Search SID..."
@@ -152,6 +160,9 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								setShowPocModal={setShowPocModal}
 								showAddPrimaryUserButton={showAddPrimaryUserButton}
 								mailProps={mailProps}
+								params={params}
+								dateFilters={dateFilters}
+								range={range}
 							/>
 						)}
 				</div>

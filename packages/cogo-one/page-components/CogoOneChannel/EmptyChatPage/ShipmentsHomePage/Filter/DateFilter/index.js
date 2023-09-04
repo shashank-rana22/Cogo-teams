@@ -1,17 +1,34 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { startCase, subtractDays } from '@cogoport/utils';
+import React, { useEffect, useState } from 'react';
 
 import { startDateOfMonth } from '../../../../../../utils/startDateOfMonth';
+import useGetFormatedPath from '../../../../../../utils/useGetFormatedPath';
 
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-function DateFilter({ setDateFilters = () => {}, range = 'current_month', setRange = () => {} }) {
+const SUBSTRACT_ONE_DAY = 1;
+
+function DateFilter({
+	setDateFilters = () => {}, range = '', setRange = () => {},
+}) {
 	const [openCalendar, setOpenCalendar] = useState(false);
-	const [date, setDate] = useState({});
+	const { queryParams } = useGetFormatedPath();
+	const [date, setDate] = useState({
+		startDate : new Date(queryParams?.start_date),
+		endDate   : subtractDays(new Date(queryParams?.end_date), SUBSTRACT_ONE_DAY),
+	});
+
+	useEffect(() => {
+		const dates = startDateOfMonth({ date });
+		setDateFilters((prevFilters) => ({
+			...prevFilters,
+			...dates,
+		}));
+	}, [date, setDateFilters]);
 
 	const handleApplyFilters = () => {
 		const dates = startDateOfMonth({ date });
