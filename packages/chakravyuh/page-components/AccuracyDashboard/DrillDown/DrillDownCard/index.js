@@ -45,7 +45,7 @@ function DrillDownCard({
 			</div>
 			<div className={styles.flex_between}>
 				{
-					data?.action_type !== 'revenue_desk'
+					!['revenue_desk', 'idle_rates'].includes(data?.action_type)
 						? (
 							<p className={styles.drop_off_text}>
 								<img

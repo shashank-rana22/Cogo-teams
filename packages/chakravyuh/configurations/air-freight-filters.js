@@ -35,7 +35,7 @@ const controls = [
 				label : '500-1000',
 			},
 			{
-				value : '1000_plus',
+				value : '1000_100000',
 				label : '1000+',
 			},
 		],
@@ -43,7 +43,7 @@ const controls = [
 		className : 'filter-row-flex md',
 	},
 	{
-		name     : 'airline',
+		name     : 'airline_id',
 		label    : 'Airline',
 		type     : 'async-select',
 		asyncKey : 'list_operators',

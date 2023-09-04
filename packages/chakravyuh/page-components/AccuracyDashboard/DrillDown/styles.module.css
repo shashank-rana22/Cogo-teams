@@ -12,6 +12,10 @@
 	justify-content: center;
 	box-shadow: 0 0 8px #e0e0e0;
 	animation: pulse var(--animation-duration) 500ms infinite;
+
+	>[data-tippy-root] {
+		inset: 28px auto auto 0 !important;
+	}
 }
 
 .source_card {
@@ -19,6 +23,7 @@
 	left: 36px;
 	z-index: 2;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	width: 100px;
@@ -34,7 +39,7 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 0;
-		margin-bottom: -4px;
+		margin-bottom: 0;
 		font-size: 12px;
 
 		span {
@@ -42,6 +47,10 @@
 			font-size: 9px;
 			color: #000;
 		}
+	}
+
+	.rate_mode_count {
+		font-weight: 600;
 	}
 }
 

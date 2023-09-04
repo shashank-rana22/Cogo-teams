@@ -1,4 +1,4 @@
-import { Button, Placeholder, cl, Tooltip } from '@cogoport/components';
+import { Button, Placeholder, cl, Tooltip, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -11,6 +11,7 @@ import SupplyRates from '../RatesList';
 
 import BranchAnimation from './BranchAnimation';
 import DrillDownCard from './DrillDownCard';
+import InfoCard from './InfoCard';
 import styles from './styles.module.css';
 
 const RATE_MODES = ['supply', 'predicted', 'extended'];
@@ -24,12 +25,13 @@ function DrillDown({ globalFilters = {} }) {
 	const { parent_mode } = globalFilters;
 	const rateModes = parent_mode ? [parent_mode] : RATE_MODES;
 	const [activeParent, setActiveParent] = useState(null);
+	const [showMainCardInfo, setShowMainCardInfo] = useState(true);
 
 	const handleClick = (val) => {
 		setActiveParent(val);
 	};
 
-	const { drillDownCards = [], totalSearches, loading } = useGetDrillDownStats({
+	const { drillDownCards = [], modeWiseCount = {}, totalSearches, loading } = useGetDrillDownStats({
 		globalFilters,
 	});
 
@@ -52,6 +54,14 @@ function DrillDown({ globalFilters = {} }) {
 						{rateModes.map((type) => (
 							<div className={styles.source_card} key={type}>
 								{startCase(type)}
+								<p className={styles.rate_mode_count}>
+									<Tooltip
+										content={<span>{modeWiseCount[type] || GLOBAL_CONSTANTS.zeroth_index}</span>}
+										placement="bottom"
+									>
+										{formatBigNumbers(modeWiseCount[type] || GLOBAL_CONSTANTS.zeroth_index)}
+									</Tooltip>
+								</p>
 							</div>
 						))}
 						<img
@@ -63,21 +73,30 @@ function DrillDown({ globalFilters = {} }) {
 						/>
 						{!loading && <BranchAnimation parent_mode={parent_mode} />}
 
-						<div className={cl`${styles.source_card} ${styles.main_card}`}>
-							<h4>
-								<Tooltip
-									content={<span>{totalSearches || GLOBAL_CONSTANTS.zeroth_index}</span>}
-									placement="bottom"
-								>
-									{formatBigNumbers(totalSearches || GLOBAL_CONSTANTS.zeroth_index)}
-								</Tooltip>
+						<div
+							className={cl`${styles.source_card} ${styles.main_card}`}
+							role="presentation"
+							onClick={() => setShowMainCardInfo(true)}
+						>
+							<Popover
+								render={<InfoCard handleClose={() => setShowMainCardInfo(false)} />}
+								trigger="click"
+								placement="bottom"
+								visible={showMainCardInfo}
+							>
+								<h4>
+									<Tooltip
+										content={<span>{totalSearches || GLOBAL_CONSTANTS.zeroth_index}</span>}
+										placement="bottom"
+									>
+										{formatBigNumbers(totalSearches || GLOBAL_CONSTANTS.zeroth_index)}
+									</Tooltip>
 
-							</h4>
-							<p>
-								<label>Rates</label>
-								<label>Displayed</label>
-								<span>via Spot Search</span>
-							</p>
+								</h4>
+								<p>
+									<label>Search Count</label>
+								</p>
+							</Popover>
 						</div>
 					</>
 				) : (

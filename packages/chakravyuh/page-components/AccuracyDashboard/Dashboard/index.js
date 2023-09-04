@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import { DEFAULT_GLOBAL_FILTERS } from '../../../constants/default_global_filters';
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
 
@@ -49,19 +50,10 @@ function DashboardView(props) {
 	useEffect(() => {
 		if (service_type === 'air') {
 			setIsHighlighted(true);
-			setGlobalFilters((prev) => ({
-				...prev,
-				chartType   : 'trend',
-				parent_mode : undefined,
-				source      : undefined,
-			}));
+			setGlobalFilters({ ...DEFAULT_GLOBAL_FILTERS, service_type });
 		} else {
 			setIsHighlighted(false);
-			setGlobalFilters((prev) => ({
-				...prev,
-				parent_mode : undefined,
-				source      : undefined,
-			}));
+			setGlobalFilters({ ...DEFAULT_GLOBAL_FILTERS, service_type });
 		}
 	}, [service_type, setIsHighlighted, setGlobalFilters]);
 	return (

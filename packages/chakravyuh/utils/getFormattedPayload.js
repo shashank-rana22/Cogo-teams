@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { LOCATION_KEYS } from '../constants/map_constants';
 
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
-	'is_origin_icd', 'is_destination_icd', 'page', 'chartType'];
+	'is_origin_icd', 'is_destination_icd', 'page', 'chartType', 'weight_slab_in_kg'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const { service_type } = globalFilters;
@@ -14,7 +14,7 @@ const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const filters = Object.fromEntries(Object.entries(globalFilters)
 		.filter(([key, v]) => v && !keysToExclude.includes(key)));
 
-	const { start_date, end_date } = globalFilters;
+	const { start_date, end_date, weight_slab_in_kg } = globalFilters;
 
 	filters.start_date = start_date ? formatDate({
 		date       : start_date,
@@ -25,6 +25,12 @@ const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	}) : undefined;
 	filters.commodity = !isEmpty(filters?.commodity) ? filters.commodity : undefined;
+
+	if (weight_slab_in_kg) {
+		const [lower_limit, upper_limit] = weight_slab_in_kg.split('_');
+		filters.lower_limit = lower_limit;
+		filters.upper_limit = upper_limit;
+	}
 
 	LOCATION_KEYS.forEach((key) => {
 		if (!excludeKeys.includes(key) && globalFilters[key]) {

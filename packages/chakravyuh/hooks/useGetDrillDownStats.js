@@ -29,7 +29,20 @@ const useGetDrillDownStats = ({ globalFilters = {} }) => {
 
 	return {
 		drillDownCards : data?.cards || [],
-		totalSearches  : data?.searches || GLOBAL_CONSTANTS.zeroth_index,
+		modeWiseCount  : data?.mode_wise_rate_count?.reduce((obj, { parent_mode, rate_count }) => {
+			const newObj = obj;
+			if (['rate_extension', 'cluster_extension'].includes(parent_mode)) {
+				if ('extended' in newObj) {
+					newObj.extended += rate_count;
+				} else {
+					newObj.extended = rate_count;
+				}
+			} else {
+				newObj[parent_mode] = rate_count;
+			}
+			return newObj;
+		}, {}) || {},
+		totalSearches: data?.searches || GLOBAL_CONSTANTS.zeroth_index,
 		loading,
 	};
 };

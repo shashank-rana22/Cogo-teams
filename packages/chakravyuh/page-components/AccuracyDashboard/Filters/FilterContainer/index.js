@@ -1,6 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import Layout from '../../../../common/Layout';
 import airControls from '../../../../configurations/air-freight-filters';
@@ -46,10 +46,10 @@ function FilterContainer({
 		);
 	}, [parent_mode, setValue]);
 
-	const onReset = () => {
+	const onReset = useCallback(() => {
 		setGlobalFilters((prev) => ({ ...prev, parent_mode: undefined, source: undefined }));
 		reset();
-	};
+	}, [setGlobalFilters, reset]);
 
 	const onSumbit = () => {
 		setGlobalFilters((prev) => ({
@@ -60,6 +60,10 @@ function FilterContainer({
 		}));
 		setVisible(false);
 	};
+
+	useEffect(() => {
+		onReset();
+	}, [service_type, onReset]);
 
 	return (
 		<div className={cl`${styles.main_container} ${!showText ? styles.small_view : ''}`}>

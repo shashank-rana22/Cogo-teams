@@ -1,21 +1,21 @@
 export const AIR_COMMODITIES = [
 	{
-		value : 'special_commodity',
+		value : 'all',
+		label : 'All',
+
+	},
+	{
+		value : 'other_special',
 		label : 'Special Commodity',
 
 	},
 	{
-		value : 'general',
-		label : 'General',
+		value : 'temp_controlled',
+		label : 'Temperature Controlled',
 
 	},
 	{
-		value : 'temperature_controlled_pharma',
-		label : 'Temperature Controlled/Pharma',
-
-	},
-	{
-		value : 'dangerous_goods',
+		value : 'dangerous',
 		label : 'Dangerous Goods',
 
 	},
