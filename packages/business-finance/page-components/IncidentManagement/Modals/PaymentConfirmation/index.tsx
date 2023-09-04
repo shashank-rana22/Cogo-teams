@@ -77,7 +77,7 @@ function PaymentConfirmation({
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title={t('incidentManagement:payemnt_confirmation_approval')} />
+					<Modal.Header title={t('incidentManagement:payment_confirmation_approval')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 

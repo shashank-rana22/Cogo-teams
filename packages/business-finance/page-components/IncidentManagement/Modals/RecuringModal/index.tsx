@@ -85,7 +85,7 @@ const summaryDataTwo = ({
 			),
 	},
 	{
-		title: t('incidentManagement:ledger_acount_title'),
+		title: t('incidentManagement:ledger_account_title'),
 		value:
 			formatAmount({
 				amount   : ledgerMaxPayoutAllowed,
