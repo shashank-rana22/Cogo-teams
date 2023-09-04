@@ -26,6 +26,12 @@ function useMailEditorFunctions({
 		emailVia = '',
 		formattedData = {},
 		eachMessage = {},
+		toUserEmail = [],
+		subject = '',
+		from_mail = [],
+		ccrecipients = [],
+		bccrecipients = [],
+		body = '',
 	} = emailState || {};
 
 	const {
@@ -52,33 +58,33 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		if (isEmpty(emailState?.toUserEmail)) {
+		if (isEmpty(toUserEmail)) {
 			Toast.error('To Mail is Required');
 			return;
 		}
 
-		if (isEmptyMail || !emailState?.subject) {
+		if (isEmptyMail || subject) {
 			Toast.error('Both Subject and Body are Requied');
 			return;
 		}
 
-		const emailBody = getRenderEmailBody({ html: emailState?.body });
+		const emailBody = getRenderEmailBody({ html: body });
 
 		const payload = {
-			sender        : emailState?.from_mail || activeMailAddress,
-			toUserEmail   : emailState?.toUserEmail,
-			ccrecipients  : emailState?.ccrecipients,
-			bccrecipients : emailState?.bccrecipients,
-			subject       : emailState?.subject,
-			content       : emailBody,
-			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
+			sender  : from_mail || activeMailAddress,
+			toUserEmail,
+			ccrecipients,
+			bccrecipients,
+			subject,
+			content : emailBody,
+			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
 
 		};
 		if (emailVia === 'firebase_emails') {
 			sendMail({
-				source        : emailState?.from_mail || activeMailAddress,
+				source        : from_mail || activeMailAddress,
 				uploadedFiles : attachments,
 				formattedData,
 				mailActions   : {
