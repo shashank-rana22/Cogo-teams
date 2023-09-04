@@ -18,8 +18,8 @@ const getParams = ({ pagination, extraFilters }) => ({
 
 function useListPurchaseAdvanceDocument(searchValue = '') {
 	const {
-		activeTab, paymentActiveTab, shipmentType,
-		stepperTab, filters, newScopeFilters,
+		activeTab = '', paymentActiveTab = '', shipmentType = '',
+		stepperTab = '', filters = {}, newScopeFilters = {},
 	} = useContext(CostBookingDeskContext);
 
 	const [apiData, setApiData] = useState('');

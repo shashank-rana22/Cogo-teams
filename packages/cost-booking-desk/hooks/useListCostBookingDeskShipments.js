@@ -16,8 +16,8 @@ function useListCostBookingDeskShipments() {
 	const costBookingContextValues = useContext(CostBookingDeskContext);
 
 	const {
-		filters, setFilters, shipmentType,
-		stepperTab, activeTab, paymentActiveTab,
+		filters = {}, setFilters = () => {}, shipmentType = '',
+		stepperTab = '', activeTab = '', paymentActiveTab = '',
 	} = costBookingContextValues || {};
 
 	const { page = INIT_PAGE, ...restFilters } = filters || {};

@@ -29,6 +29,7 @@ function List({ isSeller = false, source = '' }) {
 	const {
 		servicesList = [], refetchServices = () => {},
 		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
+		showRequestCSD,
 	} = useContext(ShipmentDetailContext);
 
 	const { trade_type = '', security_dd_type = '' } = primary_service || {};
@@ -133,7 +134,7 @@ function List({ isSeller = false, source = '' }) {
 
 			<div className={styles.not_added}>
 
-				{security_dd_type === 'cogoport' && trade_type === 'import' ? (
+				{security_dd_type === 'cogoport' && trade_type === 'import' && showRequestCSD ? (
 					<Button
 						onClick={() => setShowRequestModal(true)}
 						className={styles.request_button}

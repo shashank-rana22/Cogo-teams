@@ -32,7 +32,7 @@ function AdvanceSecurityDeposit({
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 
-	const { getData, loading } = useGetSecurityDepositData({
+	const { getData = () => {}, loading = false } = useGetSecurityDepositData({
 		advanceSecurityDeposit,
 		refetch,
 		setShowDepositModal,

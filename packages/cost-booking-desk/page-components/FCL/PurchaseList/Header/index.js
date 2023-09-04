@@ -36,7 +36,7 @@ function Header({
 					size="sm"
 					prefix={<IcMAppSearch />}
 					placeholder="Search by Shipment ID"
-					onChange={(e) => setSearchValue(e)}
+					onChange={setSearchValue}
 					value={searchValue}
 					suffix={(
 						<ButtonIcon
