@@ -41,7 +41,6 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 				{ label: 'Platform Chat', value: 'platform_chat' },
 				{ label: 'Telegram', value: 'telegram' },
 				{ label: 'Zalo', value: 'zalo' },
-				{ label: 'Email', value: 'email' },
 			],
 		},
 		{
