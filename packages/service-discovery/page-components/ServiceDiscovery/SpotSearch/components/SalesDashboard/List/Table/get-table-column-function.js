@@ -155,10 +155,10 @@ const getTableColumnFunction = (key) => {
 				) : '-'}
 			</strong>
 		),
-		renderConversionRate: ({ booking_count = 0, quotation_count = 1 }) => (
+		renderConversionRate: ({ booking_count = 0, total_search_count = 1 }) => (
 			<strong>
-				{quotation_count ? (
-					`${((booking_count / quotation_count) * PERCENTAGE_FACTOR).toFixed(TO_FIXED_DECIMAL_COUNT)}%`
+				{total_search_count ? (
+					`${((booking_count / total_search_count) * PERCENTAGE_FACTOR).toFixed(TO_FIXED_DECIMAL_COUNT)}%`
 				) : '-'}
 			</strong>
 		),
