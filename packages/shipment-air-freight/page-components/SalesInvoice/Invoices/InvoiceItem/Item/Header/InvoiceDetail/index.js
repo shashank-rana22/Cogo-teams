@@ -91,15 +91,19 @@ function InvoiceDetail({
 	return (
 		<div className={styles.invoice_info}>
 			<div className={styles.so_container}>
-				<Button
-					className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
-					themeType="linkUi"
-					onClick={() => (!isEmpty(bfInvoice)
+				{invoiceUrl ? (
+					<Button
+						className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
+						themeType="linkUi"
+						onClick={() => (!isEmpty(bfInvoice)
 						&& handleDownload(invoiceUrl)
-					)}
-				>
-					{invoiceNo}
-				</Button>
+						)}
+					>
+						{invoiceNo}
+					</Button>
+				) : (
+					<div>{ invoiceNo }</div>
+				)}
 
 				<div className={styles.status_container}>
 					{invoiceStatus === 'FINANCE_REJECTED' ? (

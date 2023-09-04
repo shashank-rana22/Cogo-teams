@@ -144,6 +144,7 @@ function ListItem({
 					<Tabs
 						activeTab={activeTab}
 						themeType="primary"
+						fullWidth
 						onChange={(val) => handleActiveTabs(val)}
 						className={styles.custom_tabs}
 					>
