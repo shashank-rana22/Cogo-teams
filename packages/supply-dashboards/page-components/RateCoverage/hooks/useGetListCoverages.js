@@ -16,7 +16,6 @@ const useGetListCoverage = (filter) => {
 	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const [source, setSource] = useState('critical_ports');
-
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
@@ -25,7 +24,7 @@ const useGetListCoverage = (filter) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getListCoverage = useCallback(async () => {
+	const getListCoverage = useCallback(async (sid) => {
 		const { releventToMeValue, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
@@ -45,7 +44,12 @@ const useGetListCoverage = (filter) => {
 		try {
 			await trigger({
 				params: {
-					filters: { ...FINAL_FILTERS, source, user_id: releventToMeValue ? user_id : undefined },
+					filters: {
+						...FINAL_FILTERS,
+						serial_id : parseInt(sid, 10),
+						source,
+						user_id   : releventToMeValue ? user_id : undefined,
+					},
 					page,
 				},
 			});

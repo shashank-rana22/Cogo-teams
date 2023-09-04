@@ -8,6 +8,7 @@ import {
 	asyncFieldsOperators,
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
+	asyncFieldsOrganizations,
 	asyncFieldsPartnerUsersIds,
 	useForm,
 	useGetAsyncOptions,
@@ -64,6 +65,12 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 		),
 	);
 
+	const shipperOptions = useGetAsyncOptions(merge(asyncFieldsOrganizations(), {
+		params   : { filters: { account_type: 'importer_exporter', status: 'active' } },
+		includes : { default_params_required: true },
+		labelKey : 'business_name',
+	}));
+
 	const listOrganizationUserOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -79,7 +86,6 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 	);
 
 	const { createRate } = useCreateFreightRate('air_freight');
-	// const { loading, createRate } = useCreateFreightRate('air_freight');
 
 	const { deleteRateJob } = useDeleteRateJob('air_freight');
 
@@ -94,7 +100,9 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 		setValue('destination_airport', data?.destination_airport?.id);
 		setValue('commodity', data?.commodity);
 		setValue('handling_type', data?.stacking_type);
-		setValue('airline', data?.airline?.id);
+		setValue('air_line', data?.airline?.id);
+		setValue('packaging_type', data?.shipment_type);
+		setValue('flight_operation_type', data?.operation_type);
 	}, [data, setValue]);
 
 	return (
@@ -402,10 +410,11 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 			</div>
 			<div className={styles.sub_container}>
 				<div style={{ width: '30%' }}>
-					<p className={styles.label_text}>Shipper</p>
+					<span className={styles.label_text}>Shipper</span>
+					<span className={styles.optional_message}>(Optional)</span>
 					<div>
 						<SelectController
-							options={[]}
+							{...shipperOptions}
 							control={control}
 							name="shipper"
 							placeholder="Select shipper"

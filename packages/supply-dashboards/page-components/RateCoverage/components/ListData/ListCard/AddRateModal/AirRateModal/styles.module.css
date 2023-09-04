@@ -13,3 +13,8 @@
 .error_message {
 	color: #b40000;
 }
+
+.optional_message {
+	margin-left: 4px;
+	color: #d2903a;
+}
