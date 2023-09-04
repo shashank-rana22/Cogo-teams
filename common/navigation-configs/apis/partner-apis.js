@@ -12475,6 +12475,7 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+
 	],
 	cogo_fx: [
 		{
@@ -12678,6 +12679,11 @@ const partner = {
 			api          : 'get_contract_port_pair_projected_stats',
 			access_type  : 'private',
 			service_name : 'contract',
+		},
+		{
+			api          : 'bulk_update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
 		},
 	],
 	ground_ops: [
