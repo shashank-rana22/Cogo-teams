@@ -33,7 +33,7 @@ const useCreateFclFreightRate = () => {
 			});
 		} catch (err) {
 			// console.log(err);
-			Toast.error('failed to cancel');
+			Toast.error('failed to create');
 		}
 	};
 

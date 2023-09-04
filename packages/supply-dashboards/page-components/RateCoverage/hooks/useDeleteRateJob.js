@@ -23,9 +23,10 @@ const useDeleteRateJob = (service) => {
 				lower_limit  : data?.lower_limit,
 				upper_limit  : data?.upper_limit,
 				tariff_price : data?.price_per_unit,
-				currency     : 'INR',
+				currency     : data && 'INR',
 			},
 		];
+
 		try {
 			const resp = await trigger({
 				data: {
@@ -43,8 +44,8 @@ const useDeleteRateJob = (service) => {
 					sourced_by_id          : data?.rate_provided_by_lsp_user,
 					validity_start         : data?.startDateTime,
 					validity_end           : data?.endDateTime,
-					commodity_type         : 'all',
-					weight_slabs,
+					commodity_type         : rate_id ? 'all' : undefined,
+					weight_slabs           : rate_id ? weight_slabs : undefined,
 					closing_remarks        : checkboxValue !== '' ? checkboxValue : undefined,
 				},
 			});
