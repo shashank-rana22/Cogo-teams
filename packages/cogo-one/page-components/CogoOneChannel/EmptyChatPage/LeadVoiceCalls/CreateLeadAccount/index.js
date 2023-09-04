@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import React from 'react';
 
 import CREATE_LEAD_CONTROLS from '../../../../../configurations/create-lead-user-control';
 import useCreateOnboardLeadOrg from '../../../../../hooks/useCreateOnboardLeadOrg';
@@ -62,18 +63,17 @@ function CreateLeadAccount({
 					}
 
 					return (
-						<>
+						<React.Fragment key={name}>
 							<div className={styles.label}>{label}</div>
 							<Element
 								{...item}
-								key={name}
 								control={control}
 								error={errors?.[name]}
 							/>
 							<div className={styles.error_text}>
 								{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
 							</div>
-						</>
+						</React.Fragment>
 					);
 				})}
 			</Modal.Body>
