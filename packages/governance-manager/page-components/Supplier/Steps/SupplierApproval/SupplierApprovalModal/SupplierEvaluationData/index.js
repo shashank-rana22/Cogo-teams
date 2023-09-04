@@ -1,5 +1,4 @@
 import { Table } from '@cogoport/components';
-import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 
 import useGetOrganizationEvaluationDetails from '../../../SupplierEvaluation/hooks/useGetOrganizationEvaluationDetails';
 import { columns, filterData } from '../../../SupplierEvaluation/utils/supplier-evaluation-utils';
@@ -19,15 +18,6 @@ function SupplierEvaluationData({ t, setShow, organization_id, setStatus, id, ge
 					columns={columns({ t, setShow, isForApproval: true })}
 					data={filterData(organizationEvaluationDetails)}
 				/>
-				<div className={styles.flex}>
-					{t('supplier_page_supplier_evaluation_table_will_they_provide_bl_delivery_text')}
-					{organizationEvaluation?.act_basis_consignee_mbl ? <IcCFtick /> : <IcCFcrossInCircle />}
-				</div>
-				<div className={styles.flex}>
-					{t('supplier_page_supplier_evaluation_table_agrees_to_act_text')}
-					{' '}
-					{organizationEvaluation?.provide_bl ? <IcCFtick /> : <IcCFcrossInCircle />}
-				</div>
 
 				<div className={styles.feedback}>
 					<div className={styles.feedback_heading}>

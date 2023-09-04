@@ -25,11 +25,11 @@ function StepTwo({
 	});
 
 	return (
-		<div key={item}>
+		<div key={item?.config_id}>
 			<div className={styles.box_layout}>
 				<div className={styles.term}>
 					{
-                    item?.state !== 'approved'
+                    item?.state !== 'approved' && item?.variable_details?.[ZERO]?.updated_value
 					&& (
 						<Checkbox
 							style={{ paddingLeft: '0px' }}

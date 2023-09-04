@@ -55,7 +55,6 @@ function SupplierApprovalDueDiligenceModal({
 	const previousClick = () => {
 		setState(ONE);
 	};
-
 	return (
 
 		<Modal size="xl" show={open} onClose={() => { onClose(); }} placement="centre">
@@ -63,7 +62,7 @@ function SupplierApprovalDueDiligenceModal({
 			<div className={styles.header} />
 			<Modal.Body className={styles.body}>
 				{
-						state === ONE && data
+						state === ONE && data?.organization_data
 						&& (
 							<>
 								<div className={styles.parent}>
@@ -74,7 +73,7 @@ function SupplierApprovalDueDiligenceModal({
 										<div className={styles.container}>
 											{
                                 comapanyDetailObjects({ data, t })?.map((object) => (
-	<div key={object} className={styles.head_container}>
+	<div key={object?.key} className={styles.head_container}>
 		<div>
 			{object?.key}
 		</div>
@@ -98,7 +97,7 @@ function SupplierApprovalDueDiligenceModal({
 										<div className={styles.container}>
 											{
                                 financialDetailObjects({ data, t })?.map((object) => (
-	<div key={object} className={styles.head_container}>
+	<div key={object?.key} className={styles.head_container}>
 		<div>
 			{object?.key}
 		</div>
@@ -122,7 +121,7 @@ function SupplierApprovalDueDiligenceModal({
 										<div className={styles.container}>
 											{
                                 directorDetailObjects({ data, t })?.map((object) => (
-	<div key={object} className={styles.head_container}>
+	<div key={object?.key} className={styles.head_container}>
 		<div>
 			{object?.key}
 		</div>
@@ -140,7 +139,7 @@ function SupplierApprovalDueDiligenceModal({
 
 }
 				{
-						state === TWO && data
+						state === TWO && data?.organization_data
 						&& (
 							<>
 								<div className={styles.parent}>
@@ -155,7 +154,7 @@ function SupplierApprovalDueDiligenceModal({
 										<div className={styles.container}>
 											{
                                 genericDetailObjects({ data, t })?.map((object) => (
-	<div key={object} className={styles.head_container}>
+	<div key={object?.key} className={styles.head_container}>
 		<div>
 			{object?.key}
 		</div>
@@ -180,7 +179,7 @@ function SupplierApprovalDueDiligenceModal({
 										<div className={styles.container}>
 											{
                                 shareholderDetailObjects({ data, t })?.map((object) => (
-	<div key={object} className={styles.head_container}>
+	<div key={object?.key} className={styles.head_container}>
 		<div>
 			{object?.key}
 		</div>
@@ -189,7 +188,7 @@ function SupplierApprovalDueDiligenceModal({
 		</div>
 	</div>
                                 ))
-}
+											}
 										</div>
 									</div>
 								</div>
@@ -205,7 +204,7 @@ function SupplierApprovalDueDiligenceModal({
 										<div className={styles.container}>
 											{
                                 legalDetailObjects({ data, t })?.map((object) => (
-	<div key={object} className={styles.head_container}>
+	<div key={object?.key} className={styles.head_container}>
 		<div>
 			{object?.key}
 		</div>

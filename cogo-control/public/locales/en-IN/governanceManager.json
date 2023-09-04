@@ -122,8 +122,11 @@
     "supplier_page_supplier_approval_due_diligence_modal_other_directorship": "Other Directorship(S) Companies",    
     "supplier_page_supplier_approval_due_diligence_modal_share_mgmt_label":"Shareholder & Management Details",    
     "supplier_page_supplier_approval_due_diligence_modal_course_label":"Course of Legal Cases",    
-
-
+    "supplier_page_supplier_approval_due_diligence_modal_next_btn_label":"Next",
+    "supplier_page_supplier_approval_due_diligence_modal_go_back_btn_label":"Back",
+    "supplier_page_supplier_approval_due_diligence_modal_verify_btn_label":"Verify",
+    "supplier_page_supplier_approval_due_diligence_modal_reject_btn_label":"Reject",
+ 
     "supplier_page_contract_sla_title": "Contract & SLA",    
     "supplier_page_contract_sla_renegotiate_button_label": "Renegotiate",    
     "supplier_page_contract_sla_save_and_do_it_later_button_label": "Save & Do It Later",    

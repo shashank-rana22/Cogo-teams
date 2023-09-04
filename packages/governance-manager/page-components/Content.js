@@ -13,7 +13,7 @@ function Content() {
 	const { t } = useTranslation(['governanceManager']);
 
 	const GOVERNANCE_MANAGER_ROLE_ID = GLOBAL_CONSTANTS.governance_manager_role_id;
-	const GOVERNANCE_LEAD_ROLE_ID = GLOBAL_CONSTANTS.governancee_lead_role_id;
+	const GOVERNANCE_LEAD_ROLE_ID = GLOBAL_CONSTANTS.governance_lead_role_id;
 	const { id:roleId } = useSelector((s) => s?.profile?.auth_role_data);
 	const [role] = useState(
 		{

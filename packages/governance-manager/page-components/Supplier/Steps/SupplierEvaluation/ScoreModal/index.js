@@ -10,7 +10,7 @@ function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails 
 	const ZERO = GLOBAL_CONSTANTS.zeroth_index;
 	const [yourScore, setYourScore] = useState(ZERO);
 	const [reason, setReason] = useState('');
-
+	console.log(show, 'show');
 	const {
 		updateOrganizationEvaluationTask,
 	} = useUpdateOrganizationEvaluationTask({
@@ -65,7 +65,7 @@ function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails 
 								className={styles.reason}
 								name="a4"
 								size="md"
-								defaultValue=""
+								defaultValue={show?.feedback}
 								placeholder=""
 							/>
 

@@ -18,7 +18,7 @@ function StepOne({ t, item, index, id, getOrganizationContract }) {
 	});
 
 	return (
-		<div key={item}>
+		<div key={item?.config_id}>
 			<div className={styles.box_layout}>
 				<div className={styles.term}>
 					<div>
