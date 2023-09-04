@@ -9,8 +9,9 @@ import React from 'react';
 import useCreateFclFreightRate from '../../../../hooks/useCreateFclFreightRate';
 
 import airControls from './AirControls';
+import AirRateModal from './AirRateModal';
 import fclControls from './FclControls';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 function AddRateModal({
 	showModal = true,
@@ -52,12 +53,20 @@ function AddRateModal({
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please add rate" />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
-				<p className={styles.bold_text} style={{ marginLeft: '20px' }}>Reasons</p>
+				{filter?.service === 'fcl_freight' ? (
+					<Layout
+						fields={newCotrols}
+						control={control}
+						errors={errors}
+					/>
+				) : <AirRateModal data={data} />}
+				{/* <p className={styles.bold_text} style={{ marginLeft: '20px' }}>Reasons</p>
 				<Layout
 					fields={newCotrols}
 					control={control}
 					errors={errors}
-				/>
+				/> */}
+				{/* <AirRateModal data={data} /> */}
 
 			</Modal.Body>
 			<Modal.Footer>
