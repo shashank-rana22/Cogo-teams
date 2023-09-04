@@ -25,7 +25,7 @@ function ApprovedAWB({
 	const { t } = useTranslation(['printingDesk']);
 	const [triggerManifest, setTriggerManifest] = useState('');
 	const [handoverModal, setHandoverModal] = useState(false);
-	const { fields } = approvedAWBFields({ t });
+	const fields = approvedAWBFields({ t });
 
 	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
 

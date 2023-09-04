@@ -1,28 +1,45 @@
-import { Popover, Input, Pagination, Button } from '@cogoport/components';
+import { Popover, Input, Pagination, Button, Toggle } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
+import { upperCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import FilterContent from './FilterContent';
 import Header from './Header';
+import useListCogoEntities from './hooks/useListCogoEntities';
 import useVendorList from './hooks/useVendorList';
 import useVendorStats from './hooks/useVendorStats';
 import KycStatusTabs from './KycStatusTabs';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
 
+const PAGE_LEN = 10;
+
 function ListVendors() {
+	const router = useRouter();
+	const profile = useSelector((state) => state);
+	const {
+		profile: { partner },
+	} = profile || {};
+	const { id: partnerId } = partner || {};
+	const { entityLoading, entityData = [] } = useListCogoEntities();
+	const entityDataCount = entityData.length;
+
+	const [activeEntity, setActiveEntity] = useState(partnerId);
+	const [active, setActive] = useState(true);
 	const {
 		loading,
 		data = {},
 		params = {},
-		setParams = () => {},
+		setParams = () => { },
 		columns,
 		showFilter,
 		setShowFilter,
 		searchValue,
 		handleChangeQuery,
 		isFilterInUse,
-	} = useVendorList();
+	} = useVendorList({ activeEntity, active });
 
 	const {
 		data: dataStats,
@@ -30,13 +47,30 @@ function ListVendors() {
 
 	const { total_count, page_limit: pageLimit } = data || {};
 
-	const router = useRouter();
+	const ENTITY_OPTIONS = (entityData || []).map((item) => {
+		const {
+			business_name: companyName = '',
+			id = '',
+			entity_code: entityCode = '',
+		} = item || {};
+
+		return {
+			label : `${upperCase(companyName)} (${entityCode})`,
+			value : id,
+		};
+	});
 
 	const { list = [] } = data;
 
 	return (
 		<>
-			<Header />
+			<Header
+				activeEntity={activeEntity}
+				setActiveEntity={setActiveEntity}
+				entityOptions={ENTITY_OPTIONS}
+				entityDataCount={entityDataCount}
+				entityLoading={entityLoading}
+			/>
 
 			<KycStatusTabs
 				params={params}
@@ -50,6 +84,14 @@ function ListVendors() {
 				</div>
 
 				<div className={styles.actions_container}>
+					<Toggle
+						offLabel="Active"
+						onLabel="In Active"
+						size="sm"
+						onChange={() => setActive(!active)}
+						showOnOff
+						value={active}
+					/>
 					<Popover
 						theme="light"
 						placement="bottom"
@@ -108,7 +150,7 @@ function ListVendors() {
 				columns={columns}
 			/>
 
-			{list?.length > 10 && (
+			{list?.length > PAGE_LEN && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="number"

@@ -4,6 +4,7 @@ import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
+import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentSettings from './AgentSettings';
@@ -21,7 +22,7 @@ const COMPONENT_MAPPING = {
 
 function Customers({
 	setActiveTab = () => {},
-	activeTab = '',
+	activeTab = {},
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
@@ -48,6 +49,10 @@ function Customers({
 		agentId: userId,
 		isBotSession,
 	});
+
+	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
+
+	const unReadMissedCallCount = data?.total_missed_call_count;
 
 	const componentPropsMapping = {
 		message: {
@@ -78,7 +83,7 @@ function Customers({
 		},
 	};
 
-	const tabMappings = getTabMappings({ unReadChatsCount });
+	const tabMappings = getTabMappings({ unReadChatsCount, unReadMissedCallCount });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
@@ -141,6 +146,7 @@ function Customers({
 					{...(componentPropsMapping[activeTab?.tab] || {})}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
+					fetchUnreadCall={fetchUnreadCall}
 				/>
 			)}
 
