@@ -1,4 +1,4 @@
-import { Pagination, Input, Select } from '@cogoport/components';
+import { Pagination, Input, Select, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
@@ -71,7 +71,7 @@ function ListShipmentCards({
 
 function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
-	const [range, setRange] = useState('current_month');
+	const [range, setRange] = useState('today');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 	const [showShipmentChat, setShowShipmentChat] = useState({});
 
@@ -123,12 +123,15 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 							options={SHIPMENT_TYPE_OPTIONS}
 							isClearable
 						/>
-						<div className={styles.custom_date_filter}>
+						<div className={cl`${styles.custom_date_filter}
+						${params?.query ? styles.not_applicable : ''}`}
+						>
 							<Filter
 								setDateFilters={setDateFilters}
 								range={range}
 								setRange={setRange}
 							/>
+							{params?.query ? <div className={styles.overlay} /> : null }
 						</div>
 
 					</div>
