@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import {
 	DatepickerController,
 	InputController,
@@ -14,6 +14,7 @@ import {
 	useGetAsyncOptions,
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
@@ -38,6 +39,11 @@ const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 
 function AirRateModal({ data = {}, setShowModal = () => {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
+	const { user_data } = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+	const { user: { id: user_id = '' } = {} } = user_data;
+
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
 	const formControls = watch();
 
@@ -91,8 +97,14 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 
 	const onSubmit = async (val) => {
 		const rate_id = await createRate(val);
+		if (!rate_id) {
+			return;
+		}
 		const succ_id = await deleteRateJob({ rate_id, data: val, id: data?.id });
-		if (succ_id) { setShowModal(false); }
+		if (succ_id) {
+			Toast.success('Rate created successfully');
+			setShowModal(false);
+		}
 	};
 
 	useEffect(() => {
@@ -103,7 +115,8 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 		setValue('air_line', data?.airline?.id);
 		setValue('packaging_type', data?.shipment_type);
 		setValue('flight_operation_type', data?.operation_type);
-	}, [data, setValue]);
+		setValue('rate_procured_by_cogoport_agent', user_id);
+	}, [data, setValue, user_id]);
 
 	return (
 		<div style={{ padding: '20px' }}>

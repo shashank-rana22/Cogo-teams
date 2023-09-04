@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 
 const API_NAME = {
 	fcl_freight : '/create_fcl_freight_rate',
@@ -18,7 +19,7 @@ const useCreateFreightRate = (service) => {
 				lower_limit  : data?.lower_limit,
 				upper_limit  : data?.upper_limit,
 				tariff_price : data?.price_per_unit,
-				currency     : 'INR',
+				currency     : data?.currency,
 			},
 		];
 		try {
@@ -38,17 +39,11 @@ const useCreateFreightRate = (service) => {
 					validity_end           : data?.endDateTime,
 					commodity_type         : 'all',
 					weight_slabs,
-					// validity_start         : data?.validity_start,
-					// validity_end           : data?.validity_end,
-					// service_provider_id    : data?.service_provider_id,
-					// shipping_line_id       : data?.shipping_line_id,
-					// sourced_by_id          : data?.sourced_by_id,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }
 		} catch (err) {
-			// console.log(err);
-			Toast.error('failed to create');
+			Toast.error(startCase(err?.response?.data?.detail));
 		}
 		return null;
 	};
