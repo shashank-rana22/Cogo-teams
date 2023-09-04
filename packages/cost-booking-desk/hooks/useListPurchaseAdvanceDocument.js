@@ -8,6 +8,14 @@ import CostBookingDeskContext from '../context/CostBookingDeskContext';
 
 const INIT_PAGE = 1;
 
+const getParams = ({ pagination, extraFilters }) => ({
+	tradeType  : 'import',
+	type       : 'CONTAINER_SECURITY_DEPOSIT',
+	page       : pagination,
+	page_limit : 10,
+	...extraFilters,
+});
+
 function useListPurchaseAdvanceDocument(searchValue = '') {
 	const {
 		activeTab, paymentActiveTab, shipmentType,
@@ -18,19 +26,13 @@ function useListPurchaseAdvanceDocument(searchValue = '') {
 	const [pagination, setPagination] = useState(INIT_PAGE);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
+	const extraFilters = paymentActiveTab === 'refunds_and_settlements' ? { status: 'APPROVED' } : {};
+
 	const [{ loading }, trigger] = useRequestBf({
-		url     : '/purchase/advance-document/list/v2',
+		url     : '/purchase/advance-document/list-csd-advance-documents',
 		method  : 'GET',
-		authKey : 'get_purchase_advance_document_list_v2',
-		params  : {
-			filters: {
-				q: query,
-			},
-			tradeType  : 'import',
-			type       : 'CONTAINER_SECURITY_DEPOSIT',
-			page       : pagination,
-			page_limit : 10,
-		},
+		authKey : 'get_purchase_advance_document_list_csd_advance_documents',
+		params  : getParams({ query, pagination, extraFilters }),
 	}, { manual: false });
 
 	const apiTrigger = useCallback(async () => {

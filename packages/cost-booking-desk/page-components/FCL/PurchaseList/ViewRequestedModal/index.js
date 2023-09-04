@@ -1,16 +1,57 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 const ONE_OPTION = 1;
+const REMARK_LENGTH_LIMIT = 30;
+
+const getRequestAdvanceDocumentData = ({ viewRequestModal = {} }) => {
+	const { details = {}, currency = 'INR', paymentMode = '', remarks = '' } = viewRequestModal || {};
+	const { numberOfContainers = '', amountPerContainer = '' } = details || {};
+	return (
+		[
+			{ title: 'Amount per container', value: `${currency} ${amountPerContainer}` },
+			{
+				title : 'Number of containers',
+				value : `${numberOfContainers} Container${numberOfContainers > ONE_OPTION ? 's' : ''}`,
+			},
+			{
+				title : 'Total Amount to be paid',
+				value : `${currency} ${(amountPerContainer && numberOfContainers)
+					? amountPerContainer * numberOfContainers : ''}`,
+			},
+			{ title: 'Payment Mode', value: paymentMode },
+			{
+				title: 'Remark',
+				value:
+	<div>
+		{remarks?.length >= REMARK_LENGTH_LIMIT ? (
+			<Tooltip
+				placement="top"
+				content={<div className={styles.tooltip_text}>{remarks}</div>}
+				interactive
+			>
+				<div className={styles.remark_overflow}>
+					{remarks}
+					...
+				</div>
+			</Tooltip>
+		) : (
+			remarks
+		)}
+	</div>,
+			},
+		]
+	);
+};
 
 function ViewRequestModal({
 	viewRequestModal = {},
 	setViewRequestModal = () => {},
 }) {
-	const { details = {}, currency = 'INR', status = '' } = viewRequestModal;
-	const { numberOfContainers, amountPerContainer } = details;
+	const { status = '' } = viewRequestModal || {};
+	const requestAdvanceDocumentData = getRequestAdvanceDocumentData({ viewRequestModal });
 
 	const handleClick = () => {
 		setViewRequestModal({});
@@ -28,26 +69,16 @@ function ViewRequestModal({
 				{status.toLowerCase() === 'rejected'
 					? <div className={styles.rejected_request}>Reason For Rejection: </div> : null}
 
-				<div className={styles.request_label_container}>
-					<div className={styles.request_label_header}>
-						<div className={styles.request_label}>Amount per container</div>
-						<div className={styles.request_label}>Number of containers</div>
-						<div className={styles.request_label}>Total Amount to be paid</div>
-						<div className={styles.request_label}>Payment Mode</div>
-						<div className={styles.request_label}>Remark</div>
-					</div>
-					<div>
-						<div className={styles.request_value}>{`:  ${currency} ${amountPerContainer}`}</div>
-						<div className={styles.request_value}>
-							{`:  ${numberOfContainers} Container${numberOfContainers > ONE_OPTION ? 's' : ''}`}
+				{requestAdvanceDocumentData.map((itm) => {
+					const { title, value } = itm || {};
+					return (
+						<div key={title} className={styles.flex}>
+							<div className={styles.title}>{title}</div>
+							<div className={styles.divider}>:</div>
+							<div className={styles.name}><div>{value || ''}</div></div>
 						</div>
-						<div className={styles.request_value}>
-							{`:  ${currency} ${amountPerContainer * numberOfContainers}`}
-						</div>
-						<div className={styles.request_value}>{':  '}</div>
-						<div className={styles.request_value}>{':  '}</div>
-					</div>
-				</div>
+					);
+				})}
 			</Modal.Body>
 			{status.toLowerCase() === 'rejected'
 				? (
