@@ -44,6 +44,8 @@ function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = (
 			</div>
 		);
 	}
+
+	// TODO (anmol): Job Closed Div
 	if (shipment_data?.is_job_closed) {
 		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
 	}

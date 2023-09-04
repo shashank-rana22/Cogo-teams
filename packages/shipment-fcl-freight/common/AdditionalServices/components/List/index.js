@@ -129,6 +129,7 @@ function List({ isSeller = false, source = '' }) {
 
 			<div className={styles.not_added}>
 
+				{/* TODO (anmol): disable on OC */}
 				{isAdditionalServiceAllowed
 					? (
 						<Button
@@ -141,11 +142,12 @@ function List({ isSeller = false, source = '' }) {
 					)
 					: null }
 
+				{/* TODO (anmol): disable on OC */}
 				{canEditCancelService ? (
 					<Button
 						onClick={() => setShowModal('cargo_insurance_service')}
 						className={styles.btn_div}
-						disabled={!!isCargoInsured}
+						disabled={!!isCargoInsured || shipment_data?.is_job_closed}
 					>
 						<span className={styles.add_icon}>+</span>
 						Add Cargo Insurance

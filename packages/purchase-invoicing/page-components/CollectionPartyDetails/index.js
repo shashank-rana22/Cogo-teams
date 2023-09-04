@@ -151,6 +151,8 @@ function CollectionPartyDetails({
 					{(showUpload || user?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id)
 					&& !airServiceProviderConfirmation ? (
 						<div className={styles.uploadbuttonwrapper}>
+
+							{/* TODO(anmol): Disable on OC */}
 							<Button
 								size="md"
 								themeType="secondary"

@@ -61,6 +61,7 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
+					{/* TODO (anmol): Job Closed Div */}
 					{shipment_data?.is_job_closed
 						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
 						: null}

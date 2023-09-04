@@ -128,6 +128,8 @@ function List({ isSeller = false, source = '' }) {
 						Add Terminal Charge
 					</Button>
 				) : null}
+
+				{/* TODO (anmol): disable on OC */}
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}

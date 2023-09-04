@@ -35,6 +35,8 @@ function Actions({
 	isIRNGenerated = false,
 	bfInvoice = {},
 }) {
+	console.log('shipment_data:: ', shipment_data);
+
 	const { role_id } = useSelector(({ profile }) => ({
 		role_id: profile?.auth_role_data?.id,
 	}));

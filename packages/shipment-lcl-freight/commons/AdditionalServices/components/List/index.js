@@ -121,6 +121,7 @@ function List({ isSeller = false }) {
 			) : null}
 
 			<div className={styles.not_added}>
+				{/* TODO (anmol): disable on OC */}
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
@@ -128,10 +129,12 @@ function List({ isSeller = false }) {
 					<span className={styles.add_icon}>+</span>
 					Add Additional Services
 				</Button>
+
+				{/* TODO (anmol): disable on OC */}
 				<Button
 					onClick={() => setShowModal('cargo_insurance_service')}
 					className={styles.btn_div}
-					disabled={!!isCargoInsured}
+					disabled={!!isCargoInsured || shipment_data?.is_job_closed}
 				>
 					<span className={styles.add_icon}>+</span>
 					Add Cargo Insurance

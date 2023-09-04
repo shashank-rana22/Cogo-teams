@@ -112,6 +112,7 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
+			{/* TODO (anmol): disable on OC */}
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setShowModal('charge_code')}

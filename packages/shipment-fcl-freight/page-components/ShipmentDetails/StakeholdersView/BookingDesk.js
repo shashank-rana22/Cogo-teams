@@ -63,6 +63,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
+					{/* TODO (anmol): Job Closed Div */}
 					{shipment_data?.is_job_closed
 						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
 						: null}
