@@ -5,7 +5,6 @@ import { IcCPin, IcMPin } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-// import getUserNameFromEmail from '../../../../../../helpers/getUserNameFromEmail';
 import updatePin from '../../../../../../helpers/updatePin';
 import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
@@ -35,7 +34,6 @@ function MessageCardData({
 		new_message_count = 0,
 		last_inbound_document = null,
 		last_outbound_document = null,
-		// user_name = '',
 	} = formattedData || {};
 
 	const reqLastDocumentMapping = {
@@ -70,7 +68,6 @@ function MessageCardData({
 			userId,
 		});
 	};
-	// const { shortName } = getUserNameFromEmail({ query: search_user_name || user_name || 'User' });
 
 	return (
 		<div
@@ -86,7 +83,6 @@ function MessageCardData({
 				<Avatar
 					src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 					alt="user-img"
-					// personName={shortName}
 					disabled={false}
 					size="30px"
 				/>

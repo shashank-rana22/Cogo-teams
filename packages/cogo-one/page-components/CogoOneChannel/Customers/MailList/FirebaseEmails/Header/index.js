@@ -3,6 +3,7 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import FILTER_CONTROLS from '../../../../../../configurations/email-filter-controls';
 import FilterComponents from '../../../FilterComponents';
 
 import styles from './styles.module.css';
@@ -45,6 +46,7 @@ function Header({
 									showBotMessages={isBotSession}
 									tagOptions={tagOptions}
 									viewType={viewType}
+									filterControls={FILTER_CONTROLS}
 								/>
 							)
 					)}

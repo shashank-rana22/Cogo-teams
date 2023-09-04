@@ -18,7 +18,7 @@ import {
 import sortChats from '../helpers/sortChats';
 
 const MAX_DISTANCE_FROM_BOTTOM = 150;
-const noFunction = () => {};
+const emptyFunction = () => {};
 
 function useListChats({
 	firestore = {},
@@ -27,8 +27,8 @@ function useListChats({
 	searchValue = '',
 	viewType = '',
 	activeSubTab = '',
-	setActiveTab = noFunction,
-	setCarouselState = noFunction,
+	setActiveTab = emptyFunction,
+	setCarouselState = emptyFunction,
 	workPrefernceLoading = false,
 	listOnlyMails = false,
 	activeFolder = '',
@@ -75,12 +75,25 @@ function useListChats({
 		[userId, appliedFilters, isBotSession, viewType, activeSubTab, listOnlyMails, activeFolder],
 	);
 
-	const queryForSearch = useMemo(() => (
-		searchQuery
-			? [where('user_name', '>=', searchQuery),
-				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : []
+	const queryForSearch = useMemo(() => {
+		if (!searchQuery) {
+			return [];
+		}
 
-	), [searchQuery]);
+		if (!listOnlyMails) {
+			return [
+				where('user_name', '>=', searchQuery),
+				where('user_name', '<=', `${searchQuery}\\uf8ff`),
+				orderBy('user_name', 'asc'),
+			];
+		}
+
+		return [
+			where('q', '>=', searchQuery),
+			where('q', '<=', `${searchQuery}\\uf8ff`),
+			orderBy('q', 'asc'),
+		];
+	}, [listOnlyMails, searchQuery]);
 
 	const setActiveMessage = useCallback((val) => {
 		const { channel_type, id } = val || {};

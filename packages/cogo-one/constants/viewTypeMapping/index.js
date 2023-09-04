@@ -1,7 +1,6 @@
-import { merge } from '@cogoport/utils';
-
 import COGOONE_ADMIN from './viewTypes/cogooneAdmin';
 import CP_SUPPORT from './viewTypes/cpSupport';
+import CREDIT_CONTROLLER from './viewTypes/creditController';
 import DEFAULT from './viewTypes/default';
 import MARKETING from './viewTypes/marketing';
 import SALES from './viewTypes/sales';
@@ -26,5 +25,5 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	cp_support                : CP_SUPPORT,
 	marketing                 : MARKETING,
 	default                   : DEFAULT,
-	credit_controller         : merge(DEFAULT, { chat_tabs_to_be_shown: ['firebase_emails'] }),
+	credit_controller         : CREDIT_CONTROLLER,
 };
