@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 const SKELETON_COUNT = 5;
 const INDEX_VALUE = 1;
+const DECIMAL_POINTS = 11;
 
 function Timesheet({ show, onClose, selectedDate }) {
 	const { loading, data } = useGetAttendanceTimesheet(selectedDate);
@@ -90,7 +91,8 @@ function Timesheet({ show, onClose, selectedDate }) {
 											Latitude
 										</div>
 										<div>
-											{val.location.latitude || '--'}
+											{val.location.latitude
+												? parseFloat(val.location.latitude).toFixed(DECIMAL_POINTS) : '--'}
 										</div>
 									</div>
 									<div className={styles.lat_long}>
@@ -98,7 +100,8 @@ function Timesheet({ show, onClose, selectedDate }) {
 											Longitude
 										</div>
 										<div>
-											{val.location.longitude || '--'}
+											{val.location.longitude
+												? parseFloat(val.location.longitude).toFixed(DECIMAL_POINTS) : '--'}
 										</div>
 									</div>
 								</div>
