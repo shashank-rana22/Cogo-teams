@@ -3,6 +3,9 @@ const tradeParties = {
 		navigation : 'trade_parties',
 		isMainNav  : true,
 	},
+	'/[partner_id]/trade-parties/[trade_parties_id]': {
+		navigation: 'trade_parties',
+	},
 };
 
 export default tradeParties;
