@@ -85,7 +85,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 	const getCardData = [
 		{
-			label        : t('ocean'),
+			label        : t('ocean_label'),
 			amount       : oceanOpen,
 			currency     : oceanCurrency || currency,
 			openInvoices : oceanOpen || 0,
@@ -94,7 +94,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 			icon         : <IcMShip style={{ width: '24px', height: '24px' }} />,
 		},
 		{
-			label        : t('air'),
+			label        : t('air_label'),
 			currency     : airCurrency || currency,
 			amount       : airOpen,
 			openInvoices : airOpen || 0,
@@ -103,7 +103,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 			icon         : <IcMAirport style={{ width: '24px', height: '24px' }} />,
 		},
 		{
-			label        : t('surface'),
+			label        : t('surface_label'),
 			currency     : surfaceCurrency || currency,
 			amount       : surfaceOpen,
 			tradeType    : surfaceTradeType,
@@ -115,19 +115,19 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 	const serviceCard = [
 		{
-			label    : t('ocean'),
+			label    : t('ocean_label'),
 			amount   : oceanOpen || 0,
 			currency : oceanCurrency || currency,
 			icon     : <IcMShip className={styles.icon_container} />,
 		},
 		{
-			label    : t('air'),
+			label    : t('air_label'),
 			currency : airCurrency || currency,
 			amount   : airOpen || 0,
 			icon     : <IcMAirport className={styles.icon_container} />,
 		},
 		{
-			label    : t('surface'),
+			label    : t('surface_label'),
 			currency : surfaceCurrency || currency,
 			amount   : surfaceOpen || 0,
 			icon     : <IcMTransport className={styles.icon_container} />,

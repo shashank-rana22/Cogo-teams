@@ -2,6 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, format } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import useGetGraph from '../../../../../hooks/useGetGraph';
@@ -19,6 +20,8 @@ function SalesComponent({
 	entityCode,
 }) {
 	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
+
+	const { t } = useTranslation(['accountRecievables']);
 
 	const { SALES_INVOICE = [] } = dailyStatsData || {};
 
@@ -112,10 +115,12 @@ function SalesComponent({
 					<td>
 
 						<div>
-							Sales
+							{t('sales')}
 						</div>
 						<div className={styles.credit_note_text}>
-							Credit Notes (-)
+							{t('credit_notes')}
+							{' '}
+							(-)
 						</div>
 					</td>
 					{[1, 2, 3, 4].map((val) => (
@@ -165,7 +170,7 @@ function SalesComponent({
 				</tr>
 				<tr>
 					<td>
-						Revenue
+						{t('revenue')}
 					</td>
 
 					{[1, 2, 3, 4].map((val) => (

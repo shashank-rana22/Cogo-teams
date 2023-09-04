@@ -91,7 +91,7 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 						size="md"
 						onChange={(event) => { setToggleData(event?.target?.checked); }}
 						showOnOff
-						offLabel="Line Graph View"
+						offLabel={t('line_graph_view')}
 						disabled={false}
 					/>
 					<Filter

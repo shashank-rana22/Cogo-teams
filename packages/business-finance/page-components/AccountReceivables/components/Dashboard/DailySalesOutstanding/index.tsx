@@ -98,13 +98,8 @@ function DailySalesOutstanding({
 
 							<Tooltip
 								content={(
-									<div>
-										Calculation(Monthly):
-										(open invoices - onAccount
-										{' '}
-										<br />
-										Payments)/Total Sales X No. of Days
-
+									<div className={styles.tooltip}>
+										{t('days_sales_outstanding_tooltip')}
 									</div>
 								)}
 								placement="top"
@@ -116,7 +111,7 @@ function DailySalesOutstanding({
 					</div>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<div className={styles.styled_text}>
-							Quarter View
+							{t('quarter_view')}
 						</div>
 						<div style={{ marginRight: '16px' }}>
 							<Toggle
@@ -131,7 +126,7 @@ function DailySalesOutstanding({
 							/>
 						</div>
 						<div className={styles.styled_text}>
-							Graph View
+							{t('graph_view')}
 						</div>
 						<div>
 							<Toggle
