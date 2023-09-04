@@ -35,7 +35,7 @@ import styles from './styles.module.css';
 const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 
-function AirRateModal({ data = {} }) {
+function AirRateModal({ data = {}, setShowModal = () => {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
 	const formControls = watch();
@@ -85,7 +85,8 @@ function AirRateModal({ data = {} }) {
 
 	const onSubmit = async (val) => {
 		const rate_id = await createRate(val);
-		await deleteRateJob({ rate_id, data: val, id: data?.id });
+		const succ_id = await deleteRateJob({ rate_id, data: val, id: data?.id });
+		if (succ_id) { setShowModal(false); }
 	};
 
 	useEffect(() => {
@@ -404,11 +405,10 @@ function AirRateModal({ data = {} }) {
 					<p className={styles.label_text}>Shipper</p>
 					<div>
 						<SelectController
-							options={RateTypeOptions}
+							options={[]}
 							control={control}
 							name="shipper"
 							placeholder="Select shipper"
-							rules={{ required: 'shipper is required' }}
 						/>
 					</div>
 					<p className={styles.error_message}>

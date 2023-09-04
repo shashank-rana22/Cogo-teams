@@ -59,7 +59,7 @@ function AddRateModal({
 						control={control}
 						errors={errors}
 					/>
-				) : <AirRateModal data={data} />}
+				) : <AirRateModal data={data} showModal={showModal} setShowModal={setShowModal} />}
 				{/* <p className={styles.bold_text} style={{ marginLeft: '20px' }}>Reasons</p>
 				<Layout
 					fields={newCotrols}

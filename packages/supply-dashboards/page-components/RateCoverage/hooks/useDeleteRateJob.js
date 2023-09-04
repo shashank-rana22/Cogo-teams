@@ -44,7 +44,7 @@ const useDeleteRateJob = (service) => {
 			weight_slabs,
 		};
 		try {
-			await trigger({
+			const resp = await trigger({
 				data: {
 					id,
 					rate_id,
@@ -52,10 +52,11 @@ const useDeleteRateJob = (service) => {
 					closing_remarks : checkboxValue !== '' ? checkboxValue : undefined,
 				},
 			});
+			if (resp?.data) { return resp?.data?.id; }
 		} catch (err) {
-			// console.log(err);
 			Toast.error('failed to cancel');
 		}
+		return null;
 	}, [trigger, checkboxValue]);
 
 	return {
