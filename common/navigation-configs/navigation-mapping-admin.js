@@ -308,20 +308,8 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/service-discovery',
 			type          : 'link',
 			icon          : IcMFinanceDashboard,
-			possible_apis : [
-				...apis.sales_dashboard,
-				...apis.search,
-				...apis.shipment,
-				...apis.demand_crm,
-				...apis.payments,
-				...apis.sales,
-				...apis.rfq,
-				...apis.forecast,
-				...apis.contract_rates,
-				...apis.feedback,
-				...apis.checkout_promotions,
-			],
-			main_apis: [
+			possible_apis : apis.service_discovery,
+			main_apis     : [
 				'list_spot_searches',
 				'list_checkouts',
 				'list_organizations',

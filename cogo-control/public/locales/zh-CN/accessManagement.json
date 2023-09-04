@@ -112,7 +112,7 @@
     "roles_and_permission_department_description": "部门允许此角色通过特定范围的不同标准查看数据。例如，如果您选择了销售，那么角色将能够查看以其为销售负责人的数据，或查看其团队成员被标记为销售负责人的数据。",
     "roles_and_permission_crm_dashboard_button_edit": "编辑",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "立即分配",
-    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "取消分配",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "现在不分配",
     "roles_and_permission_crm_dashboard_btn_text_modal_next": "下一步",
     "roles_and_permission_crm_dashboard_btn_text_cancel": "取消",
     "roles_and_permission_crm_dashboard_btm_text_back": "返回",
