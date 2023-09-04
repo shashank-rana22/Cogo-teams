@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import GetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
+import useGetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
 import ViewButton from '../../common/ViewButton';
 import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
@@ -22,11 +22,17 @@ interface Props {
 	row?:object,
 }
 
-function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetch, isEditable = true, row }:Props) {
+function AdvanceSecurityDepositRefund({
+	advanceSecurityDepositRefund = {},
+	id = '',
+	refetch = () => {},
+	isEditable = true,
+	row = {},
+}:Props) {
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 
-	const { getData, loading } = GetSecurityDepositData({
+	const { getData, loading } = useGetSecurityDepositData({
 		refetch,
 		setShowDepositModal,
 		id,

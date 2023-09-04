@@ -8,7 +8,7 @@ import {
 } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
-import formControls from './formControls';
+import formControls from './controls';
 import styles from './styles.module.css';
 
 const ONLINE_PAYMENT_MODES = ['NEFT', 'RTGS'];
