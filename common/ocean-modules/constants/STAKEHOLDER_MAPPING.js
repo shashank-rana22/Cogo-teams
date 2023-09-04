@@ -22,6 +22,14 @@ const STAKEHOLDER_MAPPING = {
 	destination_credit_controller : 'Destination Credit Controller',
 };
 
+export const DEFAULT_STAKEHOLDERS = {
+	booking_agent             : 'KAM',
+	sales_agent               : 'Sales Agent',
+	entity_manager            : 'Entity Manager',
+	origin_booking_agent      : 'OKAM',
+	destination_booking_agent : 'DKAM',
+};
+
 export const STAKEHOLDER_CAN_BE_ADDED = {
 	supply_agent              : 'Supply Owner',
 	booking_agent             : 'KAM',

@@ -89,7 +89,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				console.error(err);
 			}
 		})();
 	}, [activeTab, filter, page, query, relevantToMe, trigger, userData.user.id]);
@@ -108,7 +108,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 
 	useEffect(() => {
 		listAPI();
-	}, [listAPI, page, query]);
+	}, [listAPI, activeTab, page, query]);
 
 	return {
 		data,
