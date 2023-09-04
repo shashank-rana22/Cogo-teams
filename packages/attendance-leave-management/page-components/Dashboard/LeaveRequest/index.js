@@ -1,4 +1,5 @@
 import { Input, Tabs, TabPanel } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowLeft, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -15,11 +16,15 @@ function LeaveRequest({ setShowInbox, isManager }) {
 	const [activeTab, setActiveTab] = useState('employee');
 
 	const { loading, data } = useGetLeaveGroupings(activeTab);
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const { total_self_pending_count, list, total_employees_pending_count } = data || {};
 
 	const [searchQuery, setSearchQuery] = useState('');
-	const handleSearch = (event) => setSearchQuery(event);
+	const handleSearch = (event) => {
+		debounceQuery(event);
+		setSearchQuery(event);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -77,7 +82,7 @@ function LeaveRequest({ setShowInbox, isManager }) {
 								activeTab={activeTab}
 								key={leaveData.leave_request}
 								loading={loading}
-								searchQuery={searchQuery}
+								searchQuery={query}
 							/>
 						))
 					) : <EmptyState />}
