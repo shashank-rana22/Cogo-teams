@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
-import { ChipsController, TextAreaController, useForm } from '@cogoport/forms';
+import { ChipsController, TextAreaController, useForm, AsyncSelectController } from '@cogoport/forms';
 
-import controls from '../configurations/feedback-form-controls';
+import getControls from '../configurations/feedback-form-controls';
 import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
 
 import styles from './styles.module.css';
@@ -13,7 +13,8 @@ function FeedbackModal({
 	callStartAt = '',
 	callEndAt = '',
 }) {
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { organization_id = '', user_id = '', mobile_number = '' } = receiverUserDetails || {};
+	const { handleSubmit, control, formState: { errors }, watch } = useForm();
 	const {
 		createCommunicationLog,
 		loading,
@@ -25,7 +26,16 @@ function FeedbackModal({
 		callEndAt,
 	});
 
-	const { feedbackType, feedbackDesc } = controls;
+	const formValues = watch();
+
+	const { title = '' } = formValues || {};
+
+	const { feedbackType, feedbackDesc, sid } = getControls({
+		orgId        : organization_id,
+		userId       : user_id,
+		mobileNumber : mobile_number,
+		title,
+	});
 
 	return (
 		<Modal
@@ -39,18 +49,33 @@ function FeedbackModal({
 			<Modal.Body>
 				<form onSubmit={handleSubmit(createCommunicationLog)}>
 					<div className={styles.feed_title}>Feedback</div>
-					<div className={styles.label}>Reason for contact ?</div>
 					<ChipsController
 						className={styles.styled_chips}
 						control={control}
 						{...feedbackType}
 					/>
 					<div className={styles.error_message}>{errors?.title && 'This is Required'}</div>
+					{title === 'shipment_enquiry' ? (
+						<>
+							<div className={styles.shipment_details}>
+								<div className={styles.label}>Select SID</div>
+								<AsyncSelectController
+									control={control}
+									{...sid}
+								/>
+							</div>
+							<div className={styles.error_message}>{errors?.sid && 'This is Required'}</div>
+						</>
+					) : null}
+
 					<TextAreaController
 						control={control}
 						{...feedbackDesc}
 					/>
-					<div className={styles.error_message}>{errors?.communication_summary && 'This is Required'}</div>
+					<div className={styles.error_message}>
+						{errors?.communication_summary && 'This is Required'}
+					</div>
+
 					<div className={styles.button_container}>
 						<Button
 							size="md"

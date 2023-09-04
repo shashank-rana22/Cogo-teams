@@ -914,6 +914,21 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncListUserShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'serial_id',
+		endpoint    : 'list-shipment-feedback',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -988,4 +1003,5 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncListUserShipments,
 };
