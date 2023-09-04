@@ -66,7 +66,7 @@ function AddRateModal({
 						control={control}
 						errors={errors}
 					/>
-				) : <AirRateModal data={data} />}
+				) : <AirRateModal data={data} showModal={showModal} setShowModal={setShowModal} />}
 			</Modal.Body>
 			<Modal.Footer>
 				<div>

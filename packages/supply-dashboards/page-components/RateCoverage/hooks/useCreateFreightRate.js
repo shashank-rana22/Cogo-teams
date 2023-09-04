@@ -48,10 +48,9 @@ const useCreateFreightRate = (service) => {
 			if (resp?.data) { return resp?.data?.id; }
 		} catch (err) {
 			// console.log(err);
-			Toast.error('failed to cancel');
+			Toast.error('failed to create');
 		}
-
-		return '';
+		return null;
 	};
 
 	return {
