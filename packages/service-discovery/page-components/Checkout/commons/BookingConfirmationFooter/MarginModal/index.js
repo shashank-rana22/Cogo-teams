@@ -4,13 +4,14 @@ import styles from './styles.module.css';
 
 function MarginModal({
 	bookingConfirmationMode = '',
-	showMarginModal = false, setShowMarginModal = () => {}, handleSubmit = () => {}, loading = false,
+	showMarginModal = false,
+	setShowMarginModal = () => {},
+	handleSubmit = () => {},
+	loading = false,
 }) {
 	return (
 		<Modal show={showMarginModal} onClose closable={false}>
-
 			<div className={styles.container}>
-
 				<div className={styles.info_text}>
 					{bookingConfirmationMode === 'whatsapp'
 						? 'You are sending booking confirmation to whatsapp with 0 margin. Do you want to proceed?'
@@ -35,7 +36,6 @@ function MarginModal({
 					</Button>
 				</div>
 			</div>
-
 		</Modal>
 	);
 }

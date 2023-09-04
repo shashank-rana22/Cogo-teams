@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useGetCheckout = ({ checkout_id, setIsLoadingStateRequired = () => [] }) => {
+const useGetCheckout = ({ checkout_id, setIsLoadingStateRequired = () => {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_checkout',

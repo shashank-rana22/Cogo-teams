@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const useAddSubsidiaryService = ({
 	possible_subsidiary_services = [],
-	refetch = () => [],
+	refetch = () => {},
 	data = {},
 	checkout_id = '',
 }) => {

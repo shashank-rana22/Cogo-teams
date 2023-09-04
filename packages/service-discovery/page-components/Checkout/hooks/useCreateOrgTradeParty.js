@@ -23,9 +23,9 @@ const useCreateOrgTradeParty = ({
 	organization = {},
 	setActiveState = () => {},
 	tradePartyType = {},
-	setShowModal = () => [],
+	setShowModal = () => {},
 	savedDetails = {},
-	setSavedDetails = () => [],
+	setSavedDetails = () => {},
 	source,
 	listOrgIps = () => {},
 }) => {
