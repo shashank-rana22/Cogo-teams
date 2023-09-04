@@ -102,7 +102,7 @@ function AirRateModal({ data = {}, setShowModal = () => {} }) {
 		}
 		const succ_id = await deleteRateJob({ rate_id, data: val, id: data?.id });
 		if (succ_id) {
-			Toast.success('Rate created successfully');
+			Toast.success('Rate added successfully');
 			setShowModal(false);
 		}
 	};

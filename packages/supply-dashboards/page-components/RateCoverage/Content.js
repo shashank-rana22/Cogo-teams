@@ -51,8 +51,8 @@ function RateCoverageContent() {
 						size="md"
 						disabled={false}
 						checked={!filter?.releventToMeValue}
-						onLabel="Relevent to all"
-						offLabel="Relevent to me"
+						onLabel="Relevant to all"
+						offLabel="Relevant to me"
 						onChange={handleToggle}
 					/>
 				</div>
