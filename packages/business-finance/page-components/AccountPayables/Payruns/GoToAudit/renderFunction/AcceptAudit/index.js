@@ -12,7 +12,6 @@ function AcceptAudit({
 	updateInvoice = () => {},
 	updateLoading = false,
 }) {
-	console.log(remarks, 'ljhj');
 	const [openModal, setOpenModal] = useState(false);
 	const [type, setType] = useState('');
 
