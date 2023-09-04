@@ -713,8 +713,8 @@ const GLOBAL_CONSTANTS = {
 		fortigo  : 'www.4tigo.com',
 	},
 	days                       : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-	governance_manager_role_id : '31fc7e90-84e0-4ffc-828c-ceaa87e5fa4f',
-	governance_lead_role_id    : 'ebafce31-75ef-4865-9060-775574e9606f',
+	governance_manager_role_id : 'ebafce31-75ef-4865-9060-775574e9606f',
+	governance_lead_role_id    : 'ae80297f-e30d-45fb-845c-61c302523476',
 	governance_manager_pending_image_url:
 	'https://cogoport-testing.sgp1.digitaloceanspaces.com/93e7e3ef7b8aaea36010c16608eb8bef/openmoji_timer.svg',
 	governance_manager_approved_image_url:

@@ -58,7 +58,7 @@ function SupplierApprovalDueDiligenceModal({
 	return (
 
 		<Modal size="xl" show={open} onClose={() => { onClose(); }} placement="centre">
-			<Modal.Header title="Supplier Approval - Step 1" className={styles.header} />
+			<Modal.Header title={t('supplier_page_supplier_approval_title')} className={styles.header} />
 			<div className={styles.header} />
 			<Modal.Body className={styles.body}>
 				{
