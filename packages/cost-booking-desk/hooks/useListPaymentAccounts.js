@@ -2,18 +2,19 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 
-const useAdvanceDocument = (setShowRequestModal) => {
+const useListPaymentAccounts = ({ setUpdateRefundModal = () => {}, exchangeRateApiTrigger = () => {} }) => {
 	const [{ loading }, trigger] = useRequestBf({
-		url     : '/purchase/advance-document',
+		url     : '/payments/accounts',
 		method  : 'POST',
-		authKey : 'post_purchase_advance_document',
+		authKey : 'post_payments_accounts',
 	}, { manual: true });
 
-	const apiTrigger = async (val) => {
+	const apiTrigger = async ({ payload = {} }) => {
 		try {
-			await trigger({ data: { ...val } });
+			await exchangeRateApiTrigger();
+			await trigger({ data: { ...payload } });
 			Toast.success('Success');
-			setShowRequestModal({});
+			setUpdateRefundModal({});
 		} catch (err) {
 			toastApiError(err);
 		}
@@ -25,4 +26,4 @@ const useAdvanceDocument = (setShowRequestModal) => {
 	};
 };
 
-export default useAdvanceDocument;
+export default useListPaymentAccounts;

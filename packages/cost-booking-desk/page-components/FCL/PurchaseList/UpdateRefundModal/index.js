@@ -5,13 +5,18 @@ import {
 	UploadController,
 	DatepickerController,
 	useForm,
+	TextAreaController,
 } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
+
+import getPaymentAccountsPayload from '../../../../helpers/getPaymentAccountsPayload';
+import useGetEntities from '../../../../hooks/useGetEntities';
+import useGetExchangeRate from '../../../../hooks/useGetExchangeRate';
+import useListPaymentAccounts from '../../../../hooks/useListPaymentAccounts';
 
 import formControls from './controls';
 import styles from './styles.module.css';
-
-const ONLINE_PAYMENT_MODES = ['NEFT', 'RTGS'];
 
 const controlTypeMapping = {
 	text       : InputController,
@@ -19,7 +24,10 @@ const controlTypeMapping = {
 	number     : InputController,
 	upload     : UploadController,
 	datepicker : DatepickerController,
+	textarea   : TextAreaController,
 };
+
+const ONLINE_PAYMENT_OPTIONS = ['NEFT', 'RTGS'];
 
 function FormElement({ name, label, type, errors, showElements, ...rest }) {
 	const Element = controlTypeMapping[type];
@@ -38,33 +46,53 @@ function UpdateRefundModal({
 	updateRefundModal = {},
 	setUpdateRefundModal = () => {},
 }) {
-	const controls = formControls();
+	const { listEntities = {}, entitiesLoading = false } = useGetEntities();
 
-	const { payment_mode } = updateRefundModal || {};
+	const [billingParty, setBillingParty] = useState({});
+
+	const controls = formControls({ listEntities, setBillingParty });
 
 	const {
 		handleSubmit,
 		control,
-		formState: { errors },
 		watch,
-		// setValue,
+		formState: { errors },
 	} = useForm();
 
+	const formValues = watch();
+	const { payment_mode: paymentMode = '' } = formValues || {};
+
+	const {
+		exchangeRateApiData = {},
+		exchangeRateApiTrigger = () => {},
+		exchangeRateLoading = false,
+	} = useGetExchangeRate({ billingParty, formValues });
+
+	const {
+		loading = false,
+		apiTrigger = () => {},
+	} = useListPaymentAccounts({ setUpdateRefundModal, exchangeRateApiTrigger });
+
 	const onSubmit = () => {
-		console.log('huihuihui');
+		const payload = getPaymentAccountsPayload({
+			exchangeRateApiData,
+			billingParty,
+			updateRefundModal,
+			formValues,
+		});
+		apiTrigger({ payload });
 	};
 
-	const formValues = watch();
-	console.log('formValues:', formValues);
-
 	const showElements = {
-		utr_number: ONLINE_PAYMENT_MODES.includes(payment_mode),
+		utr_number : ONLINE_PAYMENT_OPTIONS.includes(paymentMode),
+		upload     : paymentMode === 'DEMAND_DRAFT',
 	};
 
 	return (
 		<Modal
-			show={updateRefundModal}
-			onClose={() => setUpdateRefundModal(false)}
+			className={styles.modal_container}
+			show={!isEmpty(updateRefundModal)}
+			onClose={() => setUpdateRefundModal({})}
 		>
 			<Modal.Header title="Update Refund Details" />
 			<Modal.Body>
@@ -79,7 +107,13 @@ function UpdateRefundModal({
 				))}
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+				<Button
+					disabled={loading || entitiesLoading || exchangeRateLoading}
+					onClick={handleSubmit(onSubmit)}
+				>
+					Submit
+
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

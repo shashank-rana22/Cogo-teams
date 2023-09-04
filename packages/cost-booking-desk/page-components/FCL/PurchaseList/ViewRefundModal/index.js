@@ -3,10 +3,33 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const ONE_OPTION = 1;
+
+const getRefundAdvanceDocumentData = ({ viewRefundModal = {} }) => {
+	const { details = {}, currency = 'INR', paymentMode = '' } = viewRefundModal || {};
+	const { numberOfContainers = '', amountPerContainer = '' } = details || {};
+	return (
+		[
+			{ title: 'Amount', value: `${currency} ${amountPerContainer}` },
+			{
+				title : 'Date',
+				value : `${numberOfContainers} Container${numberOfContainers > ONE_OPTION ? 's' : ''}`,
+			},
+			{
+				title : 'UTR Number',
+				value : `${currency} ${(amountPerContainer && numberOfContainers)
+					? amountPerContainer * numberOfContainers : ''}`,
+			},
+			{ title: 'Proof', value: paymentMode },
+		]
+	);
+};
+
 function ViewRefundModal({
 	viewRefundModal = {},
 	setViewRefundModal = () => {},
 }) {
+	const refundAdvanceDocumentData = getRefundAdvanceDocumentData(viewRefundModal);
 	return (
 		<Modal
 			show={!isEmpty(viewRefundModal)}
@@ -14,12 +37,16 @@ function ViewRefundModal({
 		>
 			<Modal.Header title="Refund Details" />
 			<Modal.Body>
-				<div className={styles.refund_label_container}>
-					<div className={styles.refund_label}>Amount:</div>
-					<div className={styles.refund_label}>Date:</div>
-					<div className={styles.refund_label}>UTR Number:</div>
-					<div className={styles.refund_label}>Proof:</div>
-				</div>
+				{refundAdvanceDocumentData.map((itm) => {
+					const { title, value } = itm || {};
+					return (
+						<div key={title} className={styles.flex}>
+							<div className={styles.title}>{title}</div>
+							<div className={styles.divider}>:</div>
+							<div className={styles.name}><div>{value || ''}</div></div>
+						</div>
+					);
+				})}
 			</Modal.Body>
 		</Modal>
 	);
