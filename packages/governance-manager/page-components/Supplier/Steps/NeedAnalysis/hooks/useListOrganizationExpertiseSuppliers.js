@@ -28,7 +28,7 @@ function useListOrganizationExpertiseSuppliers({ organization_id, service_type, 
 	useEffect(() => {
 		if (organization_id) { getOrganizationExpertiseSuppliers(); }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [organization_id]);
+	}, [organization_id, page]);
 	return {
 		data          : data?.list,
 		loading,

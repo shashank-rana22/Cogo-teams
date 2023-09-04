@@ -229,8 +229,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		governance_manager: {
 			key           : 'governance_manager',
 			title         : 'Governance Manager',
-			href          : '/governance-manager',
-			as            : '/governance-manager',
+			href          : '/v2/governance-manager',
+			as            : '/v2/governance-manager',
 			type          : 'link',
 			icon          : IcMCrm,
 			possible_apis : [

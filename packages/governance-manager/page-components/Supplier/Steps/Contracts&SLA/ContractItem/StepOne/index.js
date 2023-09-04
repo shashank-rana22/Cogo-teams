@@ -1,6 +1,5 @@
 import { Button, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useUpdateOrganizationContract from '../../hooks/useUpdateOrganizationContract';
@@ -33,7 +32,6 @@ function StepOne({ t, item, index, id, getOrganizationContract }) {
 				<div className={styles.update}>
 					{item?.variable_details?.[ZERO] && (
 						<>
-							<div className={styles.icon}><IcMInfo height={26} width={26} /></div>
 							<Input
 								size="sm"
 								value={value}

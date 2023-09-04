@@ -224,7 +224,7 @@ function SupplierApprovalDueDiligenceModal({
 			</Modal.Body>
 			<Modal.Footer style={{ gap: '15px' }}>
 				{
-						state === ONE
+						state === ONE && data?.organization_data
 						&& (
 							<Button onClick={nextClick}>
 								{
@@ -235,7 +235,7 @@ function SupplierApprovalDueDiligenceModal({
 						)
 				}
 				{
-						state === TWO
+						state === TWO && data?.organization_data
 						&& (
 							<>
 								<Button onClick={previousClick}>
@@ -248,13 +248,18 @@ function SupplierApprovalDueDiligenceModal({
 											t('supplier_page_supplier_approval_due_diligence_modal_verify_btn_label')
 									}
 								</Button>
-								<Button onClick={handleReject}>
-									{' '}
-									{
-											t('supplier_page_supplier_approval_due_diligence_modal_reject_btn_label')
-									}
-								</Button>
 							</>
+						)
+					}
+				{
+						(!data?.organization_data || state === TWO)
+						&& (
+							<Button onClick={handleReject}>
+								{' '}
+								{
+									t('supplier_page_supplier_approval_due_diligence_modal_reject_btn_label')
+							}
+							</Button>
 						)
 					}
 			</Modal.Footer>

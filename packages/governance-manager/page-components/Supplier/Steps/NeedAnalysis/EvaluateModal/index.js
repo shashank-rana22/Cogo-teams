@@ -38,7 +38,7 @@ function EvaluateModal({ t, show, setShow, getOrganizationExpertiseSuppliers }) 
 				maxHeight={100}
 				scroll={false}
 			>
-				<Modal.Header title={t('supplier_page_need_analysis_table_evaluating')} />
+				<Modal.Header title="Evaluating Modal" />
 				<Modal.Body>
 					<div className={styles.parent}>
 						<div className={styles.left}>
