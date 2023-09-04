@@ -13,6 +13,25 @@ export const SERVICE_TYPE_OPTIONS = [
 	// },
 ];
 
+export const RATE_TYPES_OPTIONS = [
+	{
+		label : 'Market Place',
+		value : 'market_place',
+	},
+	{
+		label : 'Promotional',
+		value : 'promotional',
+	},
+	{
+		label : 'Spot Booking',
+		value : 'spot_booking',
+	},
+	{
+		label : 'Cogo Assured',
+		value : 'cogo_assured',
+	},
+];
+
 export const SELECT_ICON_MAPPING = {
 	fcl : <IcMFcl />,
 	air : <IcMAir />,
