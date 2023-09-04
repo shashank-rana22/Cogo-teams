@@ -10,7 +10,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { REQUEST_TYPE_OPTIONS } from '../constants';
 
 const useRaiseTicketcontrols = ({
-	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '',
+	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '', watchCategory = '',
 	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
 }) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
@@ -27,6 +27,7 @@ const useRaiseTicketcontrols = ({
 		params: {
 			Audience    : 'cogoport_user',
 			RequestType : watchRequestType || undefined,
+			Category    : watchCategory || undefined,
 		},
 	});
 	const organizationUserOptions = useGetAsyncOptions({
@@ -58,6 +59,7 @@ const useRaiseTicketcontrols = ({
 			name           : 'organization_id',
 			controllerType : 'select',
 			placeholder    : 'Select Organization',
+			rules          : { required: true },
 			isClearable    : true,
 		},
 
@@ -110,7 +112,6 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'select',
 			placeholder    : 'Select Type',
 			isClearable    : true,
-			rules          : { required: true },
 			defaultOptions : true,
 			onChange       : () => resetField('issue_type'),
 		},
@@ -144,8 +145,8 @@ const useRaiseTicketcontrols = ({
 					value : 'medium',
 				},
 				{
-					label : 'low',
-					value : 'Low',
+					label : 'Low',
+					value : 'low',
 				},
 				{
 					label : 'High',
