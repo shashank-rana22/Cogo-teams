@@ -9,7 +9,7 @@
     "credit_notes": "ใบลดหนี้",
     "amount": "จำนวน",
     "date": "วันที่",
-    "shipments_created": "สร้างการขนส่ง",
+    "shipments_created": "สร้างการจัดส่งแล้ว",
     "ocean_label": "ทะเล",
     "air_label": "อากาศ",
     "surface_label": "พื้นผิว",
