@@ -1,6 +1,6 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Pagination } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
 
@@ -9,24 +9,28 @@ import useListApprovals from './Hooks/useListApprovals';
 import useUpdateApprovalRequest from './Hooks/useUpdateApprovalRequest';
 import styles from './styles.module.css';
 
+const ROUTE_MAPPING = {
+	Test   : '/learning/test-module/create-test?mode=edit&id=',
+	Course : '/learning/course/create?mode=edit&id=',
+};
+
+const INITIAL_PAGE = 1;
 function ApprovalsModal({ showApprovalsModal = false, setShowApprovalsModal = () => {} }) {
 	const router = useRouter();
 
-	const { data, loading, getListApprovalRequests } = useListApprovals();
+	const [page, setPage] = useState(INITIAL_PAGE);
+
+	const { data, loading, getListApprovalRequests } = useListApprovals(page);
 	const { loading:btnLoading, updateApprovalRequest } = useUpdateApprovalRequest({ getListApprovalRequests });
 
+	const { list, total_count, page_limit, page:pageNumber } = data || {};
+
 	const handleRedirect = (id, type) => {
-		if (type === 'Test') {
-			router.push(`/learning/test-module/create-test?mode=edit&id=${id}`);
-		} else if (type === 'Course') {
-			router.push(`/learning/course/create?mode=edit&id=${id}`);
-		}
+		const url = ROUTE_MAPPING[type];
+		router.push(url + id);
 	};
 
 	const approvalColumns = getColumns({ handleRedirect, updateApprovalRequest, btnLoading });
-
-	const { list } = data || {};
-
 	return (
 		<div>
 			<Modal
@@ -44,6 +48,17 @@ function ApprovalsModal({ showApprovalsModal = false, setShowApprovalsModal = ()
 							emptyText="No Approvals Found"
 						/>
 					</div>
+					{total_count > page_limit ? (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={pageNumber}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={(v) => setPage(v)}
+							/>
+						</div>
+					) : null}
 				</Modal.Body>
 			</Modal>
 		</div>

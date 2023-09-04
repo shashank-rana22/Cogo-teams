@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useHarbourRequest } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 
 function useUpdateApprovalRequest({ getListApprovalRequests = () => {} }) {
-	const [{ loading }, trigger] = useHarbourRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/update_cogo_academy_request',
 		method : 'POST',
 	}, { manual: true });
