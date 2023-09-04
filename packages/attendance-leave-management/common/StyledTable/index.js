@@ -6,7 +6,10 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function StyledTable({ columns = [], data = [], loading = false, emptyText, onRowClick, className }) {
+function StyledTable({
+	columns = [], data = [], loading = false,
+	emptyText = '', onRowClick = () => {}, className = '',
+}) {
 	if (isEmpty(data) && !loading) {
 		return (
 			<div style={{ paddingTop: 6, paddingLeft: 6 }}>
