@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function AccordianView({
+function AccordionView({
 	itemKey = '',
 	active = '',
 	title = null,
@@ -17,17 +17,17 @@ function AccordianView({
 	};
 
 	return (
-		<div className={cl`${styles.container} custom_accordian_main_container`}>
+		<div className={cl`${styles.container} custom_accordion_main_container`}>
 			<div
 				role="presentation"
-				className={cl`${styles.title} custom_accordian_title_container`}
+				className={cl`${styles.title} custom_accordion_title_container`}
 				onClick={handleClick}
 			>
 				{title}
 			</div>
 
 			{(active === itemKey && isOpen) ? (
-				<div className={cl`${styles.content} custom_accordian_content_container`}>
+				<div className={cl`${styles.content} custom_accordion_content_container`}>
 					{children}
 				</div>
 			) : null}
@@ -35,4 +35,4 @@ function AccordianView({
 	);
 }
 
-export default AccordianView;
+export default AccordionView;

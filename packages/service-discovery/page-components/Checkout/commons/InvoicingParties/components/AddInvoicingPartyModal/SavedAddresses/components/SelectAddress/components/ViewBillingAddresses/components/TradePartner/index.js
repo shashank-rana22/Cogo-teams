@@ -50,27 +50,19 @@ function TradePartner({
 						<Pill className={verification_status}>{verification_status}</Pill>
 
 						<Tooltip
-							content={(
-								<div>
-									Please provide a proof of agreement that verifies the trade
-									party&apos;s authorization to make payment on behalf of the
-									Booking party.
-									{' '}
-								</div>
-							)}
+							content={`Please provide a proof of agreement that verifies the tradeparty&apos;s 
+							authorization to make payment on behalf of the Booking party.`}
 							placement="top"
 							caret={false}
 							interactive
 						>
 							{verification_status === 'pending' && (
-								<div>
-									<IcMInfo
-										className="image"
-										fill="red"
-										height={16}
-										width={16}
-									/>
-								</div>
+								<IcMInfo
+									className="image"
+									fill="red"
+									height={16}
+									width={16}
+								/>
 							)}
 						</Tooltip>
 					</div>

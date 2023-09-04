@@ -10,6 +10,7 @@ function CreateBillingAddress({
 	invoiceToTradePartyDetails = {},
 	setInvoiceToTradePartyDetails = () => {},
 	source = '',
+	trigger = () => {},
 }) {
 	const {
 		id = '',
@@ -32,49 +33,50 @@ function CreateBillingAddress({
 		isDefaultData : false,
 	});
 
+	const onSuccess = async () => {
+		await trigger();
+		setActiveState('view_billing_addresses');
+		setInvoiceToTradePartyDetails({});
+	};
+
 	const { common } = countrySpecificData || {};
 
 	const { validate_registration_number = false } = common || {};
 
 	return (
-		<div>
-			<AddressForm
-				organizationId={id}
-				tradePartyId={tradePartyId}
-				isAddressRegisteredUnderGst={false}
-				addressData={{}}
-				addressType="billingAddress"
-				showInvoiceTradeParty={false}
-				onSuccess={() => {
-					setActiveState('view_billing_addresses');
-					setInvoiceToTradePartyDetails({});
-				}}
-				onFailure={({ error }) => {
-					Toast.error(getApiErrorString(error.response?.data));
-				}}
-				saveAddressData
-				showSavedPOC={false}
-				formState={{}}
-				submitButtonLabel="Submit"
-				optionalButtons={[
-					{
-						className : 'secondary',
-						label     : 'Back',
-						onClick   : () => {
-							setActiveState('view_billing_addresses');
-							setInvoiceToTradePartyDetails({});
-						},
+		<AddressForm
+			organizationId={id}
+			tradePartyId={tradePartyId}
+			isAddressRegisteredUnderGst={false}
+			addressData={{}}
+			addressType="billingAddress"
+			showInvoiceTradeParty={false}
+			onSuccess={onSuccess}
+			onFailure={({ error }) => {
+				Toast.error(getApiErrorString(error.response?.data));
+			}}
+			saveAddressData
+			showSavedPOC={false}
+			formState={{}}
+			submitButtonLabel="Submit"
+			optionalButtons={[
+				{
+					className : 'secondary',
+					label     : 'Back',
+					onClick   : () => {
+						setActiveState('view_billing_addresses');
+						setInvoiceToTradePartyDetails({});
 					},
-				]}
-				loading={false}
-				validateGst={validate_registration_number}
-				registrationNumber={
+				},
+			]}
+			loading={false}
+			validateGst={validate_registration_number}
+			registrationNumber={
 					registrationNumber || organizationRegistrationNumber
 				}
-				organizationCountryId={organizationCountryId}
-				source={source}
-			/>
-		</div>
+			organizationCountryId={organizationCountryId}
+			source={source}
+		/>
 	);
 }
 

@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import AccordianView from '../../common/AccordianView';
+import AccordionView from '../../common/AccordionView';
 
 import ItemContent from './ItemContent';
 import ListHeader from './ListHeader';
@@ -52,7 +52,7 @@ function List({
 
 			<div className={styles.accordian_container}>
 				{list.map((serviceItem) => (
-					<AccordianView
+					<AccordionView
 						key={serviceItem.name}
 						itemKey={serviceItem.name}
 						active={active}
@@ -77,7 +77,7 @@ function List({
 							detail={detail}
 							rateCardData={rateCardData}
 						/>
-					</AccordianView>
+					</AccordionView>
 				))}
 			</div>
 		</div>

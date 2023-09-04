@@ -174,6 +174,12 @@ function EditMarginFooter({
 
 	return (
 		<div className={styles.container}>
+			{noRatesPresent ? (
+				<div className={styles.error}>
+					** REMOVE SERVICES WITH (NO RATES) TAG TO SEND QUOTATION
+				</div>
+			) : null}
+
 			<div className={styles.validity_time}>
 				{!hasExpired ? (
 					<div className={styles.flex}>

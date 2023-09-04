@@ -7,7 +7,7 @@ function DeleteServiceModal({
 	setShow = () => {},
 	service = {},
 	loading = false,
-	onClick = () => {},
+	onClickDelete = () => {},
 	cancelText = 'Cancel',
 	deleteText = 'Delete',
 	title = '',
@@ -23,7 +23,7 @@ function DeleteServiceModal({
 		event.stopPropagation();
 		event.preventDefault();
 
-		const deleted = await onClick();
+		const deleted = await onClickDelete();
 
 		if (deleted) {
 			setShow(false);

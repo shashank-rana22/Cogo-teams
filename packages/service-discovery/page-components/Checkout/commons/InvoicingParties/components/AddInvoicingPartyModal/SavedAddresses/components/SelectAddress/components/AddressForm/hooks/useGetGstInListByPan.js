@@ -10,7 +10,7 @@ const useGetGstInListByPan = ({ registrationNumber = '', action }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogoscore_tax_numbers',
 		method : 'get',
-	}, { manual: false });
+	}, { manual: true });
 
 	useEffect(() => {
 		if (action === 'edit' || (registrationNumber || '').length !== REGISTARTION_NUMBER_LENGTH) {

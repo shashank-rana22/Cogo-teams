@@ -33,7 +33,7 @@ function ChangeIncoTermModal({
 					to
 					{' '}
 					<b>{upperCase(incoTermModalData?.selectedValue)}</b>
-					. As a result, we will remove services( if any) that are not applicable fot this incoterm.
+					. As a result, we will remove services( if any) that are not applicable for this incoterm.
 					If you want to keep the same services, please leave the Incoterm unchanged
 				</div>
 			</Modal.Body>

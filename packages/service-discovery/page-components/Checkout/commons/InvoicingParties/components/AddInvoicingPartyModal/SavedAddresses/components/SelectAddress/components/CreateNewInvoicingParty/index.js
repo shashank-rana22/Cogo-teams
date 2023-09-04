@@ -57,6 +57,7 @@ function CreateNewInvoicingParty({
 	setActiveState = () => {},
 	source = '',
 	setShowModal = () => {},
+	trigger = () => {},
 }) {
 	const [savedDetails, setSavedDetails] = useState({});
 	const [currentStep, setCurrentStep] = useState('company_details');
@@ -73,11 +74,12 @@ function CreateNewInvoicingParty({
 	const { onSubmit = () => {}, loading = false } = useCreateOrgTradeParty({
 		organization,
 		setActiveState,
-		tradePartyType: TRADE_PARTY_TYPE,
+		tradePartyType : TRADE_PARTY_TYPE,
 		setShowModal,
 		savedDetails,
 		setSavedDetails,
 		source,
+		listOrgIps     : trigger,
 	});
 
 	const countrySpecificData = getCountrySpecificData({

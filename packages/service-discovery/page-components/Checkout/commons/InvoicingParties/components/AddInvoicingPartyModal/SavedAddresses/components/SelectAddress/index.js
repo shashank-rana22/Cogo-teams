@@ -73,7 +73,7 @@ function SelectAddress({
 		organization_trade_party_id = '',
 	} = orgData || {};
 
-	const { data = {}, loading } = useListOrganizationInvoicingParties({
+	const { data = {}, loading, trigger } = useListOrganizationInvoicingParties({
 		organizationId,
 		bookingType,
 	});
@@ -97,11 +97,13 @@ function SelectAddress({
 			invoiceToTradePartyDetails,
 			setInvoiceToTradePartyDetails,
 			source,
+			trigger,
 		},
 		create_trade_party: {
 			organization: orgData,
 			setActiveState,
 			source,
+			trigger,
 		},
 	};
 
