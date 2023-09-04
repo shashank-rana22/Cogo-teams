@@ -11,7 +11,7 @@ const DAYS_TO_EXPIRE = 4;
 function SearchType({ item = {}, field = {}, type = '' }) {
 	if (type === 'expiry') {
 		const daysToExpire = differenceInDays(item?.expiration_time, new Date());
-		if (daysToExpire < ZERO_DAYS_TO_EXPIRE || item.expired) {
+		if (daysToExpire < ZERO_DAYS_TO_EXPIRE || item?.expired) {
 			return <span className="expired">Expired</span>;
 		}
 		return daysToExpire < DAYS_TO_EXPIRE ? <span className="expiring">Expiring Soon</span> : null;
@@ -27,7 +27,7 @@ function SearchType({ item = {}, field = {}, type = '' }) {
 			</div>
 
 			<div className={styles.label} style={{ color }}>
-				{label}
+				{label || '-'}
 			</div>
 		</div>
 	);

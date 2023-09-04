@@ -48,7 +48,7 @@ const useBookShipment = ({
 			Toast.success('Shipment booked successflly');
 
 			if (urlMapping[shipmentType]) {
-				push(`booking/${urlMapping[shipmentType]}/${
+				push(`/booking/${urlMapping[shipmentType]}/${
 					shipment_id || res?.data?.shipment_id
 				}`);
 			} else {

@@ -7,6 +7,8 @@ import {
 	IcMLcl,
 	IcMLtl,
 	IcMTrailorFull,
+	IcMCfs,
+	IcMLocalCharges,
 } from '@cogoport/icons-react';
 
 const SERVICE_TYPE_ICON_MAPPING = {
@@ -50,6 +52,11 @@ const SERVICE_TYPE_ICON_MAPPING = {
 		color : '#6892FE',
 		label : 'FCL Customs',
 	},
+	fcl_cfs: {
+		icon  : IcMCfs,
+		color : '#6892FE',
+		label : 'FCL CFS',
+	},
 	lcl_customs: {
 		icon  : IcMCustoms,
 		color : '#7278AD',
@@ -59,6 +66,21 @@ const SERVICE_TYPE_ICON_MAPPING = {
 		icon  : IcMCustoms,
 		color : '#F9AE64',
 		label : 'AIR Customs',
+	},
+	fcl_freight_local: {
+		icon  : IcMLocalCharges,
+		color : '#6892FE',
+		label : 'FCL Locals',
+	},
+	lcl_freight_local: {
+		icon  : IcMLocalCharges,
+		color : '#7278AD',
+		label : 'LCL Locals',
+	},
+	air_freight_local: {
+		icon  : IcMLocalCharges,
+		color : '#F9AE64',
+		label : 'AIR Locals',
 	},
 };
 

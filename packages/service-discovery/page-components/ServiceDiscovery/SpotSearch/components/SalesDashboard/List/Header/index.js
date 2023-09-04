@@ -30,10 +30,17 @@ function Header({
 			<SearchInput
 				type="search"
 				style={{ marginRight: 8 }}
-				onChange={(val) => {
+				onSearch={(val) => {
 					setFilters({
 						...otherFilters,
 						[searchKey] : val,
+						page        : 1,
+					});
+				}}
+				onReset={() => {
+					setFilters({
+						...otherFilters,
+						[searchKey] : undefined,
 						page        : 1,
 					});
 				}}
