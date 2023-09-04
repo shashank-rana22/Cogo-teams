@@ -14,6 +14,8 @@ import { CREATE_OVER_SEAS_CONFIG } from '../OverSeasAgent/Configurations/createO
 import { CREATE_OVER_SEAS_CONFIG_VN } from '../OverSeasAgent/Configurations/createOverSeasConfigVN';
 import getKeyByValue from '../utils/getKeyByValue';
 
+import styles from './styles.module.css';
+
 const API_ARRAY_VARIABLE_ONE = 1;
 const INCREEMENT_BY = 1;
 const MIN_AMOUNT = 0;
@@ -179,7 +181,18 @@ const settingApiData = (itemData, value, key, checked, setApiData) => {
 	});
 };
 
-const useGetInvoiceSelection = ({ sort }) => {
+const checkboxSelectionChecks = (item = {}) => {
+	const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = item || {};
+	const maxValueCrossed = +payableAmount > +payableValue;
+	const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+	const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
+	const maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+	const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+
+	return (lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed);
+};
+
+const useGetInvoiceSelection = ({ sort = {} }) => {
 	const { push } = useRouter();
 
 	const {
@@ -214,7 +227,6 @@ const useGetInvoiceSelection = ({ sort }) => {
 		},
 		{ manual: false },
 	);
-
 	const listSelectedInvoice =	useRequestBf(
 		{
 			url     : '/purchase/payrun-bill',
@@ -223,7 +235,6 @@ const useGetInvoiceSelection = ({ sort }) => {
 		},
 		{ manual: false },
 	);
-
 	const addInvoiceToSelectedAPI = useRequestBf(
 		{
 			url     : '/purchase/payrun',
@@ -232,7 +243,6 @@ const useGetInvoiceSelection = ({ sort }) => {
 		},
 		{ manual: false },
 	);
-
 	const delete_payrun_invoice = 	useRequestBf(
 		{
 			url     : '/purchase/payrun-bill',
@@ -254,6 +264,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 	});
 	const { search, dueDate, invoiceDate, updatedDate, category, ...rest } = globalFilters;
 	const restParse = JSON.stringify(rest);
+	const sortParse = JSON.stringify(sort);
 
 	useEffect(() => {
 		const newData = { ...data };
@@ -266,12 +277,12 @@ const useGetInvoiceSelection = ({ sort }) => {
 				constPayableAmount : item?.invoiceAmount,
 			}));
 		}
-
 		setApiData(newData);
 		setApiTdsData(newData);
 	}, [data]);
 
 	useEffect(() => { debounceQuery(search); }, [search, debounceQuery]);
+
 	const refetch = useCallback(() => {
 		const q = query || undefined;
 
@@ -294,23 +305,19 @@ const useGetInvoiceSelection = ({ sort }) => {
 				fromUploadBillDate : changeFormat(updatedDate?.startDate) || undefined,
 				toUploadBillDate   : changeFormat(updatedDate?.endDate) || undefined,
 				q,
-				...sort,
+				...(JSON.parse(sortParse) || {}),
 			},
 		});
-	}, [restParse, dueDate, invoiceDate, updatedDate, query, category, sort, trigger,
+	}, [restParse, dueDate, invoiceDate, updatedDate, query, category, sortParse, trigger,
 		entity, organizationId, payrun, performedBy, performedByName, performedByType, queryCurr, services]);
 
 	const deleteInvoices = async (id, handleModal) => {
 		try {
-			await delete_payrun_invoice.trigger({
-				data: { id, performedBy, performedByType, performedByName },
-			});
+			await delete_payrun_invoice.trigger({ data: { id, performedBy, performedByType, performedByName } });
 			handleModal();
 			Toast.success('Invoice deleted successfully');
 			refetch();
-		} catch (e) {
-			toastApiError(e);
-		}
+		} catch (e) { toastApiError(e); }
 	};
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData ?? {};
@@ -334,9 +341,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 				Toast.success('Invoice added to Payrun Successfully');
 				refetch();
 			}
-		} catch (e) {
-			toastApiError(e);
-		}
+		} catch (e) { toastApiError(e); }
 		return null;
 	};
 	useEffect(() => {
@@ -344,50 +349,65 @@ const useGetInvoiceSelection = ({ sort }) => {
 	}, [refetch]);
 
 	const onChangeTableHeaderCheckbox = (event) => {
-		setApiData((p) => {
-			const newValue = { ...p };
-			const len = newValue?.list?.length || MIN_AMOUNT;
-			for (let i = 0; i < len; i += INCREEMENT_BY) newValue.list[i].checked = event;
-			return newValue;
+		setApiData((prevData) => {
+			const { list = [] } = prevData || {};
+			const newList = list.map((item) => {
+				const isError = checkboxSelectionChecks(item);
+				return ({
+					...item,
+					checked  : item?.invoiceType === 'CREDIT NOTE' ? false : event.target.checked,
+					hasError : isError,
+				});
+			});
+			return { ...prevData, list: newList };
 		});
 	};
 	function GetTableHeaderCheckbox() {
-		const isCheckedLength = apiData?.list?.filter((value) => value?.checked)?.length;
-		const isAllRowsChecked = isCheckedLength === api?.data?.list?.length;
-		const isSemiRowsChecked = isCheckedLength > MIN_AMOUNT;
-
+		const { list = [] } = apiData || {};
+		const { list: dataList = [] } = data || {};
+		const isCheckedLength = list.filter((value) => value?.checked).length;
+		const invoicesLength = dataList?.filter((val) => (val.invoiceType !== 'CREDIT NOTE'))?.length;
+		const isAllRowsChecked = isCheckedLength === invoicesLength;
 		return (
-			<Checkbox
-				themeType="white"
-				indeterminate={!!isSemiRowsChecked && !api?.loading}
-				checked={isAllRowsChecked && !api?.loading}
-				onChange={(x) => onChangeTableHeaderCheckbox(x)}
-			/>
+			<Checkbox checked={isAllRowsChecked && !loading} onChange={onChangeTableHeaderCheckbox} />
 		);
 	}
 
 	const onChangeTableBodyCheckbox = (itemData) => {
-		setApiData((p) => {
-			const newValue = { ...p };
-			const index = newValue?.list?.findIndex((item) => item?.id === itemData?.id);
+		const { id = '' } = itemData || {};
+		setApiData((prevData) => {
+			const index = (prevData.list || []).findIndex(
+				(item) => item.id === id,
+			);
+
 			if (index !== ELEMENT_NOT_FOUND) {
-				newValue.list[index] = { ...itemData, checked: !itemData?.checked };
+				const newList = [...prevData.list];
+				const isError = checkboxSelectionChecks(newList[index]);
+				newList[index] = {
+					...newList[index],
+					checked  : !newList[index].checked,
+					hasError : isError,
+				};
+				return { ...prevData, list: newList };
 			}
-			return newValue;
+			return prevData;
 		});
 	};
 
 	function GetTableBodyCheckbox(itemData) {
-		const isChecked = apiData?.list?.find(
-			(item) => item?.id === itemData?.id,
-		).checked;
+		const { id = '' } = itemData || {};
+		const { list = [] } = apiData || {};
+		const isChecked = list.find((item) => item?.id === id)?.checked;
 
 		return (
-			<Checkbox
-				themeType="white"
-				checked={isChecked}
-				onChange={() => onChangeTableBodyCheckbox(itemData)}
-			/>
+			<div className={styles.checkbox_style}>
+				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
+					<Checkbox
+						checked={isChecked}
+						onChange={() => onChangeTableBodyCheckbox(itemData)}
+					/>
+				)}
+			</div>
 		);
 	}
 

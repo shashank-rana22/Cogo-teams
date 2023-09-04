@@ -5,10 +5,10 @@ import { isEmpty } from '@cogoport/utils';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const getSelectedInvoices = ({ list }) => {
+const getSelectedInvoices = ({ list = [] }) => {
 	const SELECTED_INVOICES = [];
 
-	list.forEach((addToSelectdata) => {
+	(list || []).forEach((addToSelectdata) => {
 		const {
 			tdsAmount = 0,
 			checked = false,
@@ -62,7 +62,7 @@ const getSelectedInvoices = ({ list }) => {
 	return SELECTED_INVOICES;
 };
 
-const usePostAddToSelected = ({ getPayrunInvoices, apiData }) => {
+const usePostAddToSelected = ({ getPayrunInvoices = () => {}, apiData = {} }) => {
 	const { user_data: userData, query: urlQuery } = useSelector(({ profile, general }) => ({
 		user_data: profile || {}, query: general.query,
 	}));

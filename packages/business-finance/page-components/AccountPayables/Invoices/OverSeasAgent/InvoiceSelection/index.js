@@ -149,7 +149,7 @@ function InvoiceSelection({
 					functions={FUNCTIONS}
 					setSort={setSort}
 					page={globalFilters?.pageIndex || FIRST_PAGE}
-					pageSize={10}
+					pageSize={20}
 					handlePageChange={(val) => setGlobalFilters({
 						...globalFilters,
 						pageIndex: val,

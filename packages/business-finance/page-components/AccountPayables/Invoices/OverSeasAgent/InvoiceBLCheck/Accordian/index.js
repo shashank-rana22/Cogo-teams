@@ -26,7 +26,7 @@ function Accordian({
 
 	const {
 		onGetDocument,
-		DocumentData, onApproveReject, ApproveRejectLoading,
+		DocumentData, onApproveReject, ApproveRejectLoading, billsLoading,
 	} =		useGetDocument({ setShowCheckInvoices, setIsOpen });
 
 	const handleDropdown = (key = invoiceNumber) => {
@@ -98,6 +98,7 @@ function Accordian({
 					handleDropdown={handleDropdown}
 					setShowCheckInvoices={setShowCheckInvoices}
 					DocumentData={DocumentData}
+					billsLoading={billsLoading}
 					onApproveReject={onApproveReject}
 					ApproveRejectLoading={ApproveRejectLoading}
 					payrunBillStatus={payrunBillStatus}

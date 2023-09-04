@@ -1,4 +1,4 @@
-import { Button, RadioGroup } from '@cogoport/components';
+import { Button, RadioGroup, Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
@@ -17,6 +17,7 @@ function Documents({
 	showCheckInvoices = false,
 	handleDropdown = () => {},
 	setShowCheckInvoices = () => {},
+	billsLoading = false,
 }) {
 	const [radioSet, setRadioSet] = useState('mbl');
 	const [radioAir, setRadioAir] = useState('mawb');
@@ -82,10 +83,11 @@ function Documents({
 					<FilePreview url={documentUrl} />
 				</div>
 
-				{DocumentData?.loading ? (
-					<div className={styles.right}>
-						Loading .....
-						{' '}
+				{billsLoading ? (
+					<div className={cl`${styles.right} ${styles.paddingdiv}`}>
+						<Placeholder style={{ height: '50px' }} />
+
+						<Placeholder style={{ marginTop: '10px', height: '200px' }} />
 					</div>
 				) : (
 					<div className={styles.right}>
@@ -106,7 +108,6 @@ function Documents({
 								<>
 									<div className={styles.radiobtn}>
 										<RadioGroup
-											className="primary lg"
 											options={OptionAIR || [{}]}
 											value={radioAir || ''}
 											onChange={(item) => setRadioAir(item)}

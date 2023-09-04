@@ -85,6 +85,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 									asyncKey="list_overseas_trade_parties"
 									value={serviceAgent}
 									onChange={(val) => setServiceAgent(val)}
+									initialCall
 								/>
 							</div>
 

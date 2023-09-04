@@ -13,7 +13,6 @@ function BankSelect({
 	showRollback = () => {},
 	setEditedValue = () => {},
 }) {
-	const newItem = itemData;
 	const [bankObject, setBankObject] = useState({});
 	const { tradePartyMappingId = '', serviceProviderId = '' } = itemData || {};
 
@@ -44,7 +43,7 @@ function BankSelect({
 					className={styles.pointer}
 					onClick={() => {
 						if (!isEmpty(bankObject)) {
-							setEditedValue(newItem, bankObject, 'bankDetail', true);
+							setEditedValue(itemData, bankObject, 'bankDetail', true);
 							showRollback(true);
 						}
 						setBankEdit(false);

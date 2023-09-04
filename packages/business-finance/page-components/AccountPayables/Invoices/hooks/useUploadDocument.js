@@ -8,9 +8,9 @@ import toastApiError from '../../../commons/toastApiError.ts';
 
 const API_ARRAY_VARIABLE_ONE = 1;
 
-const useUploadDocuments = (fileUploader) => {
+const useUploadDocuments = ({ fileUploader = {} }) => {
 	const { query } = useRouter();
-	const { singleFileUpload, fileBank, multiFileUpload } = fileUploader;
+	const { singleFileUpload, fileBank, multiFileUpload } = fileUploader || {};
 
 	const { payrun } = query;
 

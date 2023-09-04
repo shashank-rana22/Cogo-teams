@@ -30,7 +30,7 @@ function formatToTimeStamp(dateString) {
 	});
 }
 
-const useGetPayrunInvoices = ({ apiData, setApiData }) => {
+const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	const { query: urlQuery } = useSelector(({ general }) => ({
 		query: general.query,
 	}));

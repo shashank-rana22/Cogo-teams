@@ -21,6 +21,10 @@
 	border-radius: 8px;
 }
 
+.paddingdiv {
+	padding: 10px;
+}
+
 .btn_container {
 	display: flex;
 	align-items: center;

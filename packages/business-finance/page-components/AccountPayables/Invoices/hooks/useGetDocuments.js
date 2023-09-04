@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useGetDocument = ({ setShowCheckInvoices, setIsOpen = () => {} }) => {
+const useGetDocument = ({ setShowCheckInvoices = () => {}, setIsOpen = () => {} }) => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
