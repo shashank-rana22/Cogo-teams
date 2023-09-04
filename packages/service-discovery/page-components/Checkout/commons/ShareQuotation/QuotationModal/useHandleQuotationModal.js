@@ -32,6 +32,7 @@ const useHandleQuotationModal = ({
 	const [emailContent, setEmailContent] = useState({});
 	const [emailPreviews, setEmailPreviews] = useState({});
 	const [selected, setSelected] = useState('main');
+	const [confirmation, setConfirmation] = useState(false);
 
 	const { quotation_type, checkout_ids } = detail || {};
 
@@ -300,6 +301,8 @@ const useHandleQuotationModal = ({
 		handleEmailSend,
 		setActiveState,
 		buttonDisabled: loading || updateLoading,
+		confirmation,
+		setConfirmation,
 	};
 };
 
