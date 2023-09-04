@@ -21,7 +21,7 @@ const airControls = ({
 		value          : data?.rate_type,
 		showForScope   : ['partner'],
 		showIfMissing  : true,
-		rules          : { required: 'This is required' },
+		rules          : { required: 'rate type is required' },
 	},
 	{
 		name           : 'origin_airport_id',
@@ -34,7 +34,7 @@ const airControls = ({
 		optionsListKey : 'locations',
 		placeholder    : 'Origin Location',
 		params         : { filters: { type: ['airport'] } },
-		rules          : { required: 'This is required' },
+		rules          : { required: 'origin airport is required' },
 	},
 	{
 		name           : 'destination_airport_id',
@@ -47,7 +47,7 @@ const airControls = ({
 		optionsListKey : 'locations',
 		placeholder    : 'Destination Location',
 		params         : { filters: { type: ['airport'] } },
-		rules          : { required: 'This is required' },
+		rules          : { required: 'destination airport is required' },
 	},
 	{
 		name           : 'service_provider_id',
@@ -62,7 +62,7 @@ const airControls = ({
 		value          : data?.service_provider_id,
 		showForScope   : ['partner'],
 		showIfMissing  : true,
-		rules          : { required: 'This is required' },
+		rules          : { required: 'service provider is required' },
 	},
 	{
 		name           : 'sourced_by_id',
@@ -80,7 +80,7 @@ const airControls = ({
 		params         : {
 			filters: {},
 		},
-		rules: { required: 'This is required' },
+		rules: { required: 'sourced by is required' },
 	},
 	{
 		name           : 'procured_by_id',
@@ -99,7 +99,7 @@ const airControls = ({
 		params         : {
 			filters: {},
 		},
-		rules: { required: 'This is required' },
+		rules: { required: 'procured by is required' },
 	},
 	{
 		name          : 'commodity',
@@ -111,7 +111,7 @@ const airControls = ({
 		options       : commodityOptions,
 		className     : 'primary lg',
 		commodityType : 'freight',
-		rules         : { required: 'This is required' },
+		rules         : { required: 'commodity is required' },
 		style         : {
 			menu: {
 				width: '264px',
@@ -128,7 +128,7 @@ const airControls = ({
 		optionsListKey : 'operators',
 		placeholder    : 'AirLine Line',
 		showOptional   : false,
-		rules          : { required: 'This is required' },
+		rules          : { required: 'airline is required' },
 	},
 	{
 		label         : 'Flight Operation Type',
@@ -138,7 +138,7 @@ const airControls = ({
 		options       : flighOperationTypeOptions,
 		showOptional  : false,
 		showOnlyLabel : true,
-		rules         : { required: 'This is required' },
+		rules         : { required: 'flight operation type is required' },
 	},
 	{
 		label         : 'Validity Start',
@@ -147,7 +147,7 @@ const airControls = ({
 		span          : 4,
 		showOptional  : false,
 		showOnlyLabel : true,
-		rules         : { required: 'This is required' },
+		rules         : { required: 'validity is required' },
 	},
 	{
 		label         : 'Validity End',
@@ -156,7 +156,7 @@ const airControls = ({
 		span          : 4,
 		showOptional  : false,
 		showOnlyLabel : true,
-		rules         : { required: 'This is required' },
+		rules         : { required: 'validity end is required' },
 	},
 	{
 		label         : 'Packaging Type',
@@ -166,7 +166,7 @@ const airControls = ({
 		options       : PackagingTypeOptions,
 		showOptional  : false,
 		showOnlyLabel : true,
-		rules         : { required: 'This is required' },
+		rules         : { required: 'packaging type is required' },
 	},
 	{
 		label        : 'Handling Type',
@@ -175,7 +175,7 @@ const airControls = ({
 		span         : 4,
 		options      : handlingtype,
 		showOptional : false,
-		rules        : { required: 'This is required' },
+		rules        : { required: 'handling type is required' },
 	},
 	{
 		label        : 'Minimum Price',
@@ -184,7 +184,7 @@ const airControls = ({
 		options      : RateTypeOptions,
 		type         : 'select',
 		showOptional : false,
-		rules        : { required: 'This is required' },
+		rules        : { required: 'min price is required' },
 	},
 	{
 		label        : 'Currency',
@@ -193,7 +193,7 @@ const airControls = ({
 		options      : currencyOptions,
 		type         : 'select',
 		showOptional : false,
-		rules        : { required: 'This is required' },
+		rules        : { required: 'currency is required' },
 	},
 	{
 		label        : 'Price Type',
@@ -202,7 +202,7 @@ const airControls = ({
 		options      : PriceTypeOptions,
 		type         : 'select',
 		showOptional : false,
-		rules        : { required: 'This is required' },
+		rules        : { required: 'price type is required' },
 	},
 	{
 		label        : 'Density Cargo',
@@ -213,7 +213,7 @@ const airControls = ({
 		options      : densityCargoOptions,
 		type         : 'select',
 		showOptional : false,
-		rules        : { required: 'This is required' },
+		rules        : { required: 'density cargo is required' },
 	},
 	{
 		label        : 'Density Ratio',
