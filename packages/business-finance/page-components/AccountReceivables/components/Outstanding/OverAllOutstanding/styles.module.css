@@ -56,16 +56,11 @@
 .cc_call_table {
 	width: 50%;
 	min-width: 50%;
-	max-height: 34vh;
+	max-height: 300px;
 	overflow: auto;
 }
 
 .card {
 	width: 50%;
 	border-right: 1px solid red;
-}
-
-.cc_list {
-	margin-left: 10px;
-	font-weight: 600;
 }
