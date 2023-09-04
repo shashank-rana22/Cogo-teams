@@ -20,6 +20,11 @@
 	color: #cb6464;
 }
 
+.requiredFiled {
+	margin-left: 4px;
+	color: red;
+}
+
 .element {
 	padding: 4px;
 

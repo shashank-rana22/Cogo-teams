@@ -10,12 +10,17 @@ const controlTypeMapping = {
 	asyncSelect : AsyncSelectController,
 };
 
-function FormElement({ name, label, type, show, errors, ...rest }) {
+function FormElement({ name, label, type, show, rules, errors, ...rest }) {
 	const Element = controlTypeMapping[type];
 
 	return Element && show ? (
 		<div>
-			<div className={styles.label}>{label}</div>
+			<div className={styles.label}>
+				{label}
+				<div className={styles.requiredField}>
+					{rules?.required ? '*' : ''}
+				</div>
+			</div>
 
 			<Element name={name} type={type} {...rest} />
 
@@ -31,6 +36,7 @@ function RenderAddRateForm({
 	source = '',
 }) {
 	const { formControl } = controls({ serviceData, source });
+	console.log(formControl, 'formControl');
 
 	return (
 		<form className={styles.form_container}>

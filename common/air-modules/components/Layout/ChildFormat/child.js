@@ -118,6 +118,9 @@ function Child({
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.label}>
 									{controlItem?.label}
+									<h4 className={styles.requiredField}>
+										{controlItem?.rules?.required ? '*' : ''}
+									</h4>
 								</h4>
 
 								{Element

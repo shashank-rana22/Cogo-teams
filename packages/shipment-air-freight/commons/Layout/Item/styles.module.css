@@ -66,6 +66,11 @@
 	font-weight: 500;
 }
 
+.requiredField {
+	margin-left: 4px;
+	color: red;
+}
+
 .error {
 	padding-left: 4px;
 	margin: 0;

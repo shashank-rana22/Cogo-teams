@@ -35,6 +35,11 @@
 	font-weight: 600;
 }
 
+.requiredField {
+	margin-left: 4px;
+	color: red;
+}
+
 .add_button_text {
 	font-size: var(--font-size-md);
 }

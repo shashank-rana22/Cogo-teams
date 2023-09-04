@@ -39,6 +39,9 @@ function Item({
 			</div>
 			<h4 className={styles.item_label}>
 				{label}
+				<h4 className={styles.requiredField}>
+					{rules?.required ? '*' : ''}
+				</h4>
 			</h4>
 			<Element
 				{...props}
