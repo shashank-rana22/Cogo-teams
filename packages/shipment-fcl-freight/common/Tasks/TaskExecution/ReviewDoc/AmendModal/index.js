@@ -3,11 +3,13 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function ApprovalModal({
+function AmendModal({
 	showModal = false,
 	setShowModal = () => {},
-	task = {},
-	handleFinalApprove = () => {},
+	// task = {},
+	handleFinalSubmit = () => {},
+	remarkValue = '',
+	document_type = '',
 }) {
 	return (
 		<Modal
@@ -19,7 +21,7 @@ function ApprovalModal({
 		>
 			<Modal.Header title="Confirmation" />
 			<Modal.Body>
-				{`Are you sure you want to ${startCase(task?.task)}?`}
+				{`Are you sure you want to amend ${startCase(document_type)} with the follwing remark: ${remarkValue}?`}
 			</Modal.Body>
 
 			<Modal.Footer>
@@ -27,12 +29,12 @@ function ApprovalModal({
 					No
 				</Button>
 
-				<Button themeType="primary" onClick={handleFinalApprove}>
-					Yes, approve
+				<Button themeType="primary" onClick={handleFinalSubmit}>
+					Yes, amend
 				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
 }
 
-export default ApprovalModal;
+export default AmendModal;

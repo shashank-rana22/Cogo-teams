@@ -8,6 +8,7 @@ import { useState } from 'react';
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
+import AmendModal from './AmendModal';
 import ApprovalModal from './ApprovalModal';
 import styles from './styles.module.css';
 
@@ -21,6 +22,7 @@ function ReviewDoc({
 	const [approvalState, setApprovalState] = useState(null);
 	const [remarkValue, setRemarkValue] = useState('');
 	const [showModal, setShowModal] = useState(false);
+	const [showAmendModal, setShowAmendModal] = useState(false);
 	const newRefetch = () => {
 		onClose();
 		refetch();
@@ -64,24 +66,29 @@ function ReviewDoc({
 		setApprovalState({ ammend: true });
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = () => {
 		if (approvalState?.ammend) {
 			if (!remarkValue) {
 				Toast.error('Please provide amendment reason');
 			}
-			params = {
-				...params,
-				state   : 'document_amendment_requested',
-				remarks : [remarkValue],
-			};
-			await updateDocument(params);
+
+			setShowAmendModal(true);
 		} else {
-			params = {
-				...params,
-				state: 'document_accepted',
-			};
-			await updateDocument(params);
+			// params = {
+			// 	...params,
+			// 	state: 'document_accepted',
+			// };
+			// await updateDocument(params);
 		}
+	};
+
+	const handleFinalSubmit = async () => {
+		params = {
+			...params,
+			state   : 'document_amendment_requested',
+			remarks : [remarkValue],
+		};
+		await updateDocument(params);
 	};
 
 	if (loading) {
@@ -194,6 +201,15 @@ function ReviewDoc({
 				setShowModal={setShowModal}
 				task={task}
 				handleFinalApprove={handleFinalApprove}
+			/>
+
+			<AmendModal
+				showModal={showAmendModal}
+				setShowModal={setShowAmendModal}
+				task={task}
+				handleFinalSubmit={handleFinalSubmit}
+				remarkValue={remarkValue}
+				document_type={docData.document_type}
 			/>
 
 		</div>
