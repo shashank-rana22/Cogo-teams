@@ -101,7 +101,7 @@ function AddRateModal({
 		});
 	}
 
-	const { fclFreightRate, fclData } = useCreateFclFreightRate();
+	const { fclFreightRate } = useCreateFclFreightRate();
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const handleSubmitData = async (formData) => {
@@ -115,8 +115,9 @@ function AddRateModal({
 			Toast.success('Rate added successfully');
 			setShowModal(false);
 		} else {
-			await fclFreightRate({ dataa: formData });
-			const succ_id = await deleteRateJob({ rate_id: fclData?.id, data: formData, id: data?.id });
+			const rate_id = await fclFreightRate({ dataa: formData });
+			if (!rate_id) { return; }
+			const succ_id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
 			if (succ_id) {
 				Toast.success('Rate added successfully');
 				setShowModal(false);
