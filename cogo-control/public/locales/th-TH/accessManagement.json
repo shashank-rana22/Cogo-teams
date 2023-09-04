@@ -112,7 +112,7 @@
     "roles_and_permission_department_description": "แผนกที่ให้บทบาทนี้เห็นข้อมูลผ่านหลักเกณฑ์ที่แตกต่างกันในขอบเขตที่เฉพาะเจาะจง เช่น หากคุณเลือกการขาย บทบาทจะสามารถเห็นข้อมูลที่พวกเขาถูกแท็กเป็นเจ้าของการขายหรือข้อมูลสมาชิกทีมของพวกเขาที่ถูกแท็กเป็นเจ้าของการขาย",
     "roles_and_permission_crm_dashboard_button_edit": "แก้ไข",
     "roles_and_permission_crm_dashboard_button_text_assign_now": "กำหนดเดี๋ยวนี้",
-    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "ยกเลิกการกำหนดเดี๋ยวนี้",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "ตอนนี้ไม่ได้รับการออกแบบ",
     "roles_and_permission_crm_dashboard_btn_text_modal_next": "ถัดไป",
     "roles_and_permission_crm_dashboard_btn_text_cancel": "ยกเลิก",
     "roles_and_permission_crm_dashboard_btm_text_back": "กลับ",
