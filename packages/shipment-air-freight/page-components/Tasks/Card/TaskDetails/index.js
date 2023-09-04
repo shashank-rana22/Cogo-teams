@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import CargoDetails from '../../../../commons/CargoDetails';
 
@@ -64,13 +64,13 @@ function TaskDetails({
 								theme="light"
 								content={(
 									<div style={{ fontSize: '10px' }}>
-										{format(
-											task?.deadline,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
-											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
-											null,
-											true,
-										)}
+										{formatDate({
+											date       : task?.deadline,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : ' ',
+										})}
 									</div>
 								)}
 							>
@@ -96,13 +96,13 @@ function TaskDetails({
 								theme="light"
 								content={(
 									<div style={{ fontSize: '10px' }}>
-										{format(
-											task?.updated_at,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
-											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
-											null,
-											true,
-										)}
+										{formatDate({
+											date       : task?.updated_at,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : ' ',
+										})}
 									</div>
 								)}
 							>
