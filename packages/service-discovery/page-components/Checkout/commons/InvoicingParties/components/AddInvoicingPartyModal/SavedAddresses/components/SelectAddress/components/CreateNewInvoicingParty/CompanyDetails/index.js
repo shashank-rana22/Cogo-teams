@@ -37,15 +37,13 @@ function CompanyDetails({
 		<div className={styles.container}>
 			<div className={styles.title}>Company Details</div>
 
-			<div>
-				<Layout
-					controls={orgControls}
-					fields={fields}
-					errors={errors}
-					showElements={SHOW_ELEMENTS}
-					control={control}
-				/>
-			</div>
+			<Layout
+				controls={orgControls}
+				fields={fields}
+				errors={errors}
+				showElements={SHOW_ELEMENTS}
+				control={control}
+			/>
 
 			<div className={styles.btn_grp}>
 				{showBackButton && (

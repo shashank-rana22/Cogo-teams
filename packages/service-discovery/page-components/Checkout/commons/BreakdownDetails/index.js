@@ -253,7 +253,7 @@ function BreakdownDetails({
 				conversions={conversions}
 				rate={rate}
 				otherCharges={otherCharges}
-				showTaxes={showTaxes}
+				disableForm={disableForm}
 			/>
 		</>
 	);

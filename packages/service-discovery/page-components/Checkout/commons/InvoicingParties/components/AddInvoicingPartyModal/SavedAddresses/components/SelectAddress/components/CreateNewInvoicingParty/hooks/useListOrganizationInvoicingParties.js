@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useListOrganizationInvoicingParties = ({ organizationId, bookingType }) => {
@@ -22,7 +24,13 @@ const useListOrganizationInvoicingParties = ({ organizationId, bookingType }) =>
 	);
 
 	const listOrganizationInvoicingParties = () => {
-		trigger({ payload: params });
+		try {
+			trigger({ payload: params });
+		} catch (error) {
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
+		}
 	};
 
 	return {
