@@ -111,9 +111,7 @@
 
 .rej_content {
 	font-size: 12px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #bf291e;
 	text-align: center;
 	text-transform: capitalize;
@@ -136,9 +134,7 @@
 
 .acc_content {
 	font-size: 12px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #849e4c;
 	text-align: center;
 	text-transform: capitalize;
