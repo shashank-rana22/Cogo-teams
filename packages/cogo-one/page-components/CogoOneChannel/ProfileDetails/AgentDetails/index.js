@@ -23,6 +23,8 @@ import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
+const ENABLE_SHARE_BUTTON_FOR = ['message', 'firebase_emails'];
+
 const handleClick = ({ id, channel_type }) => {
 	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
 	navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
@@ -175,7 +177,7 @@ function AgentDetails({
 
 				<div className={styles.title}>Profile</div>
 				<div className={styles.quick_actions}>
-					{activeTab === 'message' && (
+					{ENABLE_SHARE_BUTTON_FOR.includes(activeTab) && (
 						<div
 							role="presentation"
 							className={styles.copy_link}
