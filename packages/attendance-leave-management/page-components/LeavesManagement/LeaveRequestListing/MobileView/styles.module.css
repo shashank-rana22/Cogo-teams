@@ -101,6 +101,9 @@
 
 .action {
 	display: flex;
-	gap: 16px;
 	align-items: center;
+}
+
+.action > :not(:last-child) {
+	margin-right: 16px;
 }
