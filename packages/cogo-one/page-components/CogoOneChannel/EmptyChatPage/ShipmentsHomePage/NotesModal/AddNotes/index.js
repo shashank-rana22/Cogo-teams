@@ -8,7 +8,7 @@ import useCreateModewiseSop from '../../../../../../hooks/useCreateModewiseSop';
 import styles from './styles.module.css';
 
 const MODE_WISE_DEFAULTS = {
-	ocean: {
+	get_api: {
 		additional: [
 			{
 				category : '',
@@ -17,9 +17,15 @@ const MODE_WISE_DEFAULTS = {
 			},
 		],
 	},
+	list_api: {
+		instruction_items: [{
+			file        : '',
+			instruction : '',
+		}],
+	},
 };
 function AddNotes({
-	mode = '',
+	controlType = '',
 	shipmentData = {},
 	setShowForm = () => {},
 	procedureId = '',
@@ -29,7 +35,7 @@ function AddNotes({
 		control, formState:{ errors = {} },
 		handleSubmit,
 	} = useForm(
-		{ defaultValues: MODE_WISE_DEFAULTS[mode] || {} },
+		{ defaultValues: MODE_WISE_DEFAULTS[controlType] || {} },
 	);
 
 	const {
@@ -37,7 +43,7 @@ function AddNotes({
 		loading = false,
 	} = useCreateModewiseSop({ shipmentData, procedureId, getModeSopData, setShowForm });
 
-	const modeControls = MODE_CONTROLS_MAPPING[mode];
+	const modeControls = MODE_CONTROLS_MAPPING[controlType];
 
 	return (
 		<div className={styles.container}>

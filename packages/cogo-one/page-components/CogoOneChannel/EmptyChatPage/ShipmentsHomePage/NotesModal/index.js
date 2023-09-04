@@ -2,15 +2,12 @@ import { Modal, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { getControlType } from '../../../../../constants/shipmentWiseControlsMapping';
 import useGetModeSopData from '../../../../../hooks/useGetModeSopData';
 
 import AddNotes from './AddNotes';
 import List from './List';
 import styles from './styles.module.css';
-
-const MODES_MAPPING = {
-	ocean: ['fcl', 'lcl'],
-};
 
 function Header({
 	showForm = false,
@@ -47,15 +44,13 @@ function NotesModal({ modalState = {}, setModalState = () => {} }) {
 
 	const { shipment_type = '' } = shipmentData || {};
 
-	const mode = Object.keys(MODES_MAPPING).find((
-		key,
-	) => MODES_MAPPING[key].find((eachModePrefix) => shipment_type.includes(eachModePrefix)));
+	const controlType = getControlType({ shipmentType: shipment_type });
 
 	const {
 		loading = false,
 		notesData = [], procedureId = '',
 		getModeSopData = () => {},
-	} = useGetModeSopData({ shipmentData, mode });
+	} = useGetModeSopData({ shipmentData, controlType });
 
 	return (
 		<Modal
@@ -78,7 +73,7 @@ function NotesModal({ modalState = {}, setModalState = () => {} }) {
 				{showForm
 					? (
 						<AddNotes
-							mode={mode}
+							controlType={controlType}
 							shipmentData={shipmentData}
 							setShowForm={setShowForm}
 							procedureId={procedureId}

@@ -16,6 +16,17 @@ const getOceanParams = ({
 	org_data_required: false,
 });
 
+const getListParams = ({
+	shipmentId = '',
+	organizationId = '',
+}) => ({
+	filters: {
+		organization_id : organizationId,
+		shipment_id     : shipmentId,
+	},
+	page_limit: 100,
+});
+
 const oceanFormatter = ({ data = {} }) => {
 	const { operating_instructions = [], operating_procedure = {} } = data || {};
 
@@ -25,23 +36,33 @@ const oceanFormatter = ({ data = {} }) => {
 	};
 };
 
+const listDataFormatter = ({ data = {} }) => {
+	console.log('data', data);
+	return {};
+};
+
 const MODE_WISE_PAYLOAD_MAPPING = {
-	ocean: {
+	get_api: {
 		endpoint      : '/get_shipment_operating_procedure',
 		getParams     : getOceanParams,
 		dataFormatter : oceanFormatter,
+	},
+	list_api: {
+		endpoint      : '/list_shipment_operating_procedures',
+		getParams     : getListParams,
+		dataFormatter : listDataFormatter,
 	},
 };
 
 const useGetModeSopData = ({
 	shipmentData = {},
-	mode = '',
+	controlType = '',
 }) => {
 	const {
 		endpoint = '',
 		getParams = () => {},
 		dataFormatter = () => {},
-	} = MODE_WISE_PAYLOAD_MAPPING[mode] || MODE_WISE_PAYLOAD_MAPPING.ocean;
+	} = MODE_WISE_PAYLOAD_MAPPING[controlType] || MODE_WISE_PAYLOAD_MAPPING.get_api;
 
 	const [{ data, loading }, trigger] = useRequest({
 		url: endpoint,
