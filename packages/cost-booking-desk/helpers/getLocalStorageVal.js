@@ -8,7 +8,7 @@ export default function getLocalStorageVal() {
 
 	const { scopeFilters = {}, filters = {} } = storedValues || {};
 
-	let { shipmentType, stepperTab, activeTab, paymentActiveTab } = storedValues || {};
+	let { shipmentType = '', stepperTab = '', activeTab = '', paymentActiveTab = '' } = storedValues || {};
 
 	if (!CONTROLS_CONFIG.shipment_types.some((t) => t.value === shipmentType)) {
 		shipmentType = 'fcl_freight';

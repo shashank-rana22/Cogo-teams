@@ -21,8 +21,10 @@ const controlTypeMapping = {
 	datepicker : DatepickerController,
 };
 
-function FormElement({ name, label, type, errors, showElements, ...rest }) {
+function FormElement({ name = '', label = '', type = '', errors = {}, showElements = {}, ...rest }) {
 	const Element = controlTypeMapping[type];
+	if (Element === null) return null;
+
 	const show = !isEmpty(showElements[name]) ? showElements[name] : true;
 
 	return (Element && show) ? (
