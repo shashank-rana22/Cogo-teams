@@ -2,12 +2,18 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useCreateFclFreightRate = () => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : '/create_fcl_freight_rate',
 		method : 'POST',
 	}, { manual: true });
 
 	const fclFreightRate = async ({ dataa }) => {
+		const updatedLineItems = dataa.line_items.map((item) => {
+			if (typeof item.remarks === 'string') {
+				return { ...item, remarks: [item.remarks] };
+			}
+			return item;
+		});
 		try {
 			await trigger({
 				data: {
@@ -21,6 +27,8 @@ const useCreateFclFreightRate = () => {
 					service_provider_id : dataa?.service_provider_id,
 					shipping_line_id    : dataa?.shipping_line_id,
 					sourced_by_id       : dataa?.sourced_by_id,
+					line_items          : updatedLineItems,
+					procured_by_id      : dataa?.sourced_by_id,
 				},
 			});
 		} catch (err) {
@@ -30,6 +38,7 @@ const useCreateFclFreightRate = () => {
 	};
 
 	return {
+		fclData: data,
 		loading,
 		fclFreightRate,
 	};

@@ -1,5 +1,8 @@
 /* eslint-disable max-lines-per-function */
-const fclControls = ({ data, containerSizes, containerTypes }) => [
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const MIN_CARGO_WEIGHT = 18;
+const fclControls = ({ data, containerSizes, containerTypes, options }) => [
 	{
 		label         : 'Service Provider Details',
 		span          : 12,
@@ -19,12 +22,6 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		showForScope   : ['partner'],
 		showIfMissing  : true,
 		rules          : { required: 'This is required' },
-		// params         : {
-		// 	filters: {
-		// 		service     : 'fcl_freight',
-		// 		exclude_ids : [geo.uuid.cogo_freight_pvt_ltd_pr_supplier],
-		// 	},
-		// },
 	},
 	{
 		name           : 'sourced_by_id',
@@ -39,11 +36,8 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		valueKey       : 'user_id',
 		showIfMissing  : true,
 		params         : {
-			filters: {
-				// Organization_id
-			},
+			filters: {},
 		},
-		// rules          : { required: 'This is required' },
 	},
 	{
 		name           : 'shipping_line_id',
@@ -65,48 +59,26 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		name           : 'origin_location_id',
 		type           : 'select',
 		span           : 4,
-		value          : data?.origin_location_id || data?.origin_port?.country_id,
-		// disabled:
-		// 	data?.origin_location_id || data?.origin_port?.country_id,
+		value          : data?.origin_port?.id,
+		disabled   	   : data?.origin_port?.id,
 		className      : 'primary lg',
 		optionsListKey : 'locations',
 		placeholder    : 'Origin Location',
 		params         : { filters: { type: ['seaport'] } },
 		rules          : { required: 'This is required' },
 	},
-	// {
-	// 	name        : 'origin_main_port_id',
-	// 	type        : 'select',
-	// 	span        : 4,
-	// 	className   : 'primary lg',
-	// 	placeholder : 'Origin Main port',
-	// 	rules       : { required: 'This is required' },
-	// },
 	{
-		name : 'destination_location_id',
-		type : 'location-select',
-		span : 4,
-		// value:
-		// 	data?.destination_location_id
-		// 	|| data?.destination_port_id,
-		// value : 'Hanimaadhoo (MV)',
-		disabled:
-			data?.destination_location_id
-			|| data?.destination_port_id,
+		name           : 'destination_location_id',
+		type           : 'location-select',
+		span           : 4,
+		value          : data?.destination_port?.id,
+		disabled       : data?.destination_port?.id,
 		className      : 'primary lg',
 		optionsListKey : 'locations',
 		params         : { filters: { type: ['seaport'] } },
 		placeholder    : 'Destination Location',
 		rules          : { required: 'This is required' },
 	},
-	// {
-	// 	name        : 'destination_main_port_id',
-	// 	type        : 'select',
-	// 	span        : 4,
-	// 	className   : 'primary lg',
-	// 	placeholder : 'Destination main port',
-	// 	rules       : { required: 'This is required' },
-	// },
 	{
 		label         : 'Container Details',
 		name          : 'container_details',
@@ -191,7 +163,7 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		name           : 'validity_start',
 		type           : 'datepicker',
 		withTimePicker : true,
-		span           : 2,
+		span           : 3,
 		placeholder    : 'Validity Start',
 		minDate        : new Date(),
 		rules          : {
@@ -202,7 +174,7 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		name           : 'validity_end',
 		type           : 'datepicker',
 		withTimePicker : true,
-		span           : 2,
+		span           : 3,
 		placeholder    : 'Validity End',
 		minDate        : new Date(),
 		rules          : {
@@ -242,11 +214,11 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		className    : 'primary lg',
 		showOptional : false,
 		placeholder  : 'Free Weight Limit',
-		// value:
-		// 	data?.cargo_weight_per_container <= 18
-		// 		? data?.cargo_weight_per_container
-		// 		: 18,
-		rules        : { required: 'This is required' },
+		value:
+			data?.cargo_weight_per_container <= MIN_CARGO_WEIGHT
+				? data?.cargo_weight_per_container
+				: MIN_CARGO_WEIGHT,
+		rules: { required: 'This is required' },
 	},
 	{
 		name         : 'schedule_type',
@@ -270,18 +242,18 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		showButtons        : false,
 		buttonText         : 'Add Weight Slabs',
 		noDeleteButtonTill : 0,
-		// value:
-		// 	expertise_item?.cargo_weight_per_container > 18
-		// 		? [
-		// 			{
-		// 				lower_limit : 18.1,
-		// 				upper_limit : expertise_item?.cargo_weight_per_container,
-		// 				currency    : GLOBAL_CONSTANTS.currency_code.USD,
-		// 				price       : 0,
-		// 			},
-		// 		  ]
-		// 		: undefined,
-		controls           : [
+		value:
+			data?.cargo_weight_per_container > MIN_CARGO_WEIGHT
+				? [
+					{
+						lower_limit : 18.1,
+						upper_limit : data?.cargo_weight_per_container,
+						currency    : GLOBAL_CONSTANTS.currency_code.USD,
+						price       : 0,
+					},
+				]
+				: undefined,
+		controls: [
 			{
 				name         : 'lower_limit',
 				type         : 'number',
@@ -335,30 +307,36 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 		name               : 'line_items',
 		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 1,
-		value              : [
-			{
-				code  : 'BAS',
-				unit  : 'per_container',
-				// currency : GLOBAL_CONSTANTS.currency_code.USD,
-				price : null,
-			},
-		],
-		controls: [
+		// value              : [
+		// 	{
+		// 		code  : 'BAS',
+		// 		unit  : 'per_container',
+		// 		// currency : GLOBAL_CONSTANTS.currency_code.USD,
+		// 		price : null,
+		// 	},
+		// ],
+		controls           : [
 			{
 				name        : 'code',
 				type        : 'select',
 				span        : 2,
-				valueKey    : 'code',
 				placeholder : 'Charge Name',
 				className   : 'primary lg',
-				// rules       : { required: 'This is required' },
+				disabled    : false,
+				options,
+				rules       : { required: 'This is required' },
 			},
 			{
-				name        : 'unit',
-				span        : 2,
-				type        : 'select',
-				className   : 'primary lg',
-				placeholder : 'Unit',
+				name      : 'unit',
+				span      : 2,
+				type      : 'select',
+				className : 'primary lg',
+				value     : 'per_container',
+				options   : [{
+					label : 'Per Container',
+					value : 'per_container',
+				}],
+				placeholder: 'Unit',
 			},
 			{
 				name           : 'currency',
@@ -366,6 +344,7 @@ const fclControls = ({ data, containerSizes, containerTypes }) => [
 				type           : 'select',
 				placeholder    : 'Curr...',
 				className      : 'primary lg',
+				value          : 'USD',
 				optionsListKey : 'currencies',
 				showOptional   : false,
 			},
