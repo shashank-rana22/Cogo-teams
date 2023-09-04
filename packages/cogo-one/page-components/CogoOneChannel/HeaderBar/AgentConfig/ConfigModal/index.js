@@ -7,8 +7,8 @@ import useListChatAgents from '../../../../../hooks/useListChatAgents';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 
 import AgentWiseLockScreen from './AgentWiseLockScreen';
+import FireBaseConfiguration from './FireBaseConfiguration';
 import LeaveStatusView from './LeaveStatusView';
-import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
 import SwitchView from './SwitchView';
 
@@ -21,8 +21,8 @@ const TAB_CONFIG_MAPPING = {
 		headerText : 'Agents List',
 	},
 	lock_configuration: {
-		Component  : RoleWiseLockScreen,
-		headerText : 'Lock Screen Configuration',
+		Component  : FireBaseConfiguration,
+		headerText : 'Fire Base Configuration',
 	},
 	agents_status: {
 		Component  : LeaveStatusView,

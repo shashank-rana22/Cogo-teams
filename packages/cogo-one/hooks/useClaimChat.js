@@ -61,7 +61,7 @@ const getTimeoutConstant = async ({ firestore, viewType = '' }) => {
 
 	const commonAgentType = getCommonAgentType({ viewType });
 
-	return flash_messages_timeout_mapping[commonAgentType];
+	return flash_messages_timeout_mapping[commonAgentType] || DEFAULT_TIMEOUT_VALUE;
 };
 
 const getPayload = ({ payload, userId }) => {

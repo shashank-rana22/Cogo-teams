@@ -1,4 +1,4 @@
-const getCommonAgentType = ({ viewType }) => {
+const getCommonAgentType = ({ viewType = '' }) => {
 	if (viewType.includes('supply')) {
 		return 'supply';
 	}

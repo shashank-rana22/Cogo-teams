@@ -9,7 +9,7 @@ const AGENT_CONFIG_MAPPING = [
 		icon  : <IcMAgentManagement width={40} height={40} />,
 	},
 	{
-		label : 'Lock Screen',
+		label : 'Fire Base',
 		name  : 'lock_configuration',
 		icon  : <IcMLock width={40} height={40} />,
 	},
