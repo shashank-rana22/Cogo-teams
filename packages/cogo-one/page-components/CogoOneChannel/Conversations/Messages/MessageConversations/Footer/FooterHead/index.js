@@ -16,7 +16,7 @@ function FooterHead({
 			className={cl`${styles.nofile_container}
 				${((hasUploadedFiles) || uploading?.[roomId]) ? styles.upload_file_container : ''}`}
 		>
-			{(hasUploadedFiles) && !uploading?.[roomId] && (
+			{(hasUploadedFiles) && !uploading?.[roomId] ? (
 				fileMetaData?.map(
 					(eachFileData) => (
 						<UploadedFiles
@@ -28,12 +28,13 @@ function FooterHead({
 						/>
 					),
 				)
-			)}
-			{uploading?.[roomId] && (
+			) : null}
+
+			{uploading?.[roomId] ? (
 				<div className={styles.uploading}>
 					uploading.....
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }
