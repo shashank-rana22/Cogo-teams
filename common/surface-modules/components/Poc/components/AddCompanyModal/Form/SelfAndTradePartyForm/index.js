@@ -47,7 +47,7 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const { trade_party_id, address, not_reg_under_gst } = watch() || {};
+	const { trade_party_id = '', address = '', not_reg_under_gst = false } = watch();
 	const geo = getGeoConstants();
 
 	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
