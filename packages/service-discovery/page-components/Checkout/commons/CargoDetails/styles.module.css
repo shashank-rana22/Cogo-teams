@@ -35,6 +35,14 @@
 	&.cargo_value_currency {
 		width: 72%;
 	}
+
+	:global {
+		.ui_datepicker_container {
+			.react-datepicker__aria-live {
+				display: none;
+			}
+		}
+	}
 }
 
 .flex {
