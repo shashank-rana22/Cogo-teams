@@ -2,9 +2,9 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import ViewAttachmentsModal from '../../../../../../../../common/ViewAttachmentsModal';
-import getDownloadFiles from '../../../../../../../../utils/getDownloadFiles';
-import { formatFileAttributes } from '../../../../../../../../utils/getFileAttributes';
+import getDownloadFiles from '../../../utils/getDownloadFiles';
+import { formatFileAttributes } from '../../../utils/getFileAttributes';
+import ViewAttachmentsModal from '../../ViewAttachmentsModal';
 
 import styles from './styles.module.css';
 

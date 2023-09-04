@@ -1,7 +1,6 @@
+import MailBody from '../../../../../../common/MailBody';
 import ReceiveDiv from '../../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../../common/SentDiv';
-
-import MailBody from './MailBody';
 
 const RECEIVE_DIV_MAPPING = {
 	whatsapp : ReceiveDiv,

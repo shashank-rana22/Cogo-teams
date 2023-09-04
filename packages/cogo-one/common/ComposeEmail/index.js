@@ -2,11 +2,11 @@ import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
 import { IcMCross, IcMAttach } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import { TOOLBARCONFIG } from '../../../constants';
-import getFormatedEmailBody from '../../../helpers/getFormatedEmailBody';
-import { getFileAttributes } from '../../../utils/getFileAttributes';
-import hideDetails from '../../../utils/hideDetails';
-import CustomFileUploader from '../../CustomFileUploader';
+import { TOOLBARCONFIG } from '../../constants';
+import getFormatedEmailBody from '../../helpers/getFormatedEmailBody';
+import { getFileAttributes } from '../../utils/getFileAttributes';
+import hideDetails from '../../utils/hideDetails';
+import CustomFileUploader from '../CustomFileUploader';
 
 import styles from './styles.module.css';
 

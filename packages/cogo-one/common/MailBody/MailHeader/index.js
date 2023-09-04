@@ -3,8 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
-import { BUTTON_MAPPING } from '../../../../../../../../constants/mailConstants';
-import getUserNameFromEmail from '../../../../../../../../helpers/getUserNameFromEmail';
+import { BUTTON_MAPPING } from '../../../constants/mailConstants';
+import getUserNameFromEmail from '../../../helpers/getUserNameFromEmail';
 
 import ReceipientComp from './receipientComp';
 import styles from './styles.module.css';

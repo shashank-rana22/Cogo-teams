@@ -3,8 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
-import { getRecipientData } from '../../../../../../../helpers/getRecipientData';
-import useGetMailContent from '../../../../../../../hooks/useGetMailContent';
+import { getRecipientData } from '../../helpers/getRecipientData';
+import useGetMailContent from '../../hooks/useGetMailContent';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';

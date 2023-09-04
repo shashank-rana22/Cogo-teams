@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import useSendCommunicationTemplate from '../../hooks/useSendCommunicationTemplate';
 import useSendUserWhatsappTemplate from '../../hooks/useSendUserWhatsappTemplate';
+import ComposeEmail from '../ComposeEmail';
 import Templates from '../Templates';
 
-import ComposeEmail from './ComposeEmail';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {

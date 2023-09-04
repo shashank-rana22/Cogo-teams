@@ -9,7 +9,7 @@ import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount'
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
-import MailsList from './MailsList';
+import MailsList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';

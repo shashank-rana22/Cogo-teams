@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import { BUTTON_MAPPING } from '../../../../../../../constants/mailConstants';
+import { BUTTON_MAPPING } from '../../constants/mailConstants';
 
 import styles from './styles.module.css';
 

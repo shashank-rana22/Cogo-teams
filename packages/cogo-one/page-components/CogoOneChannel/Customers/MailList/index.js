@@ -1,9 +1,10 @@
 import { cl } from '@cogoport/components';
 import { useState } from 'react';
 
+import OutlookMails from '../../../../common/MailDetails';
+
 import FirebaseEmails from './FirebaseEmails';
 import MailSideBar from './MailSideBar';
-import OutlookMails from './OutlookMails';
 import styles from './styles.module.css';
 import SwitchMail from './SwitchMail';
 

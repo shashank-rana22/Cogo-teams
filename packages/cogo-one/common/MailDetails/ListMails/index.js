@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
-import { SEARCH_QUERY_LIMIT } from '../../../../../../constants/mailConstants';
+import { SEARCH_QUERY_LIMIT } from '../../../constants/mailConstants';
 
 import MailLoading from './MailLoading';
 import styles from './styles.module.css';

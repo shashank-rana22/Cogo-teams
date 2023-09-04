@@ -5,9 +5,9 @@ import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../../../../constants/mailConstants';
-import getFiltersCount from '../../../../../helpers/getFiltersCount';
-import useListMail from '../../../../../hooks/useListMail';
+import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/mailConstants';
+import getFiltersCount from '../../helpers/getFiltersCount';
+import useListMail from '../../hooks/useListMail';
 
 import FilterComponent from './FilterComponent';
 import ListMails from './ListMails';

@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const DISTANCE_FROM_TOP = 10;
 const TIMEOUT_FOR_SCROLL = 200;
-const MIN_HEIGHT_FOR_API_CALL = 20;
+const MIN_HEIGHT_FOR_API_CALL = 10;
 const DISABLE_FOOTER_FOR = ['email'];
 const LATEST_MESSAGES_AT_TOP_FOR = ['email'];
 
