@@ -36,7 +36,6 @@ function RenderAddRateForm({
 	source = '',
 }) {
 	const { formControl } = controls({ serviceData, source });
-	console.log(formControl, 'formControl');
 
 	return (
 		<form className={styles.form_container}>
