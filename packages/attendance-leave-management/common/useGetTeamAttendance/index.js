@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTimer, IcMPlus } from '@cogoport/icons-react';
@@ -67,7 +68,7 @@ const useGetAttendanceColumns = () => {
 			Header   : <div className={styles.header_text}>ACTIONS</div>,
 			accessor : () => (
 				<div className={styles.action_flex}>
-					<IcMTimer className={`${styles.cursor_pointer} ${styles.timer_icon}`} width={25} height={25} />
+					<IcMTimer className={cl`${styles.cursor_pointer} ${styles.timer_icon}`} width={25} height={25} />
 					<IcMPlus className={styles.cursor_pointer} width={25} height={25} />
 				</div>
 			),
