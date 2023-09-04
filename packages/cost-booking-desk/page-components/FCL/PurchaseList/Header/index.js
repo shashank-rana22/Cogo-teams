@@ -12,15 +12,15 @@ function Header({
 	searchValue = '',
 	setSearchValue = () => {},
 }) {
-	const { paymentType = '', setPaymentType = () => {} } = useContext(CostBookingDeskContext);
+	const { paymentActiveTab = '', setPaymentActiveTab = () => {} } = useContext(CostBookingDeskContext);
 
 	return (
 		<div className={styles.tab_search_container}>
 			<div className={styles.header_footer_part}>
 				<Tabs
 					themeType="tertiary"
-					activeTab={paymentType}
-					onChange={setPaymentType}
+					activeTab={paymentActiveTab}
+					onChange={setPaymentActiveTab}
 				>
 					{PAYMENT_TYPE?.map((tab) => (
 						<TabPanel

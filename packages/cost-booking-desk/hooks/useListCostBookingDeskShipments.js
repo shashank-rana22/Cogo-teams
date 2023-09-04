@@ -9,14 +9,18 @@ import getCostBookingFilters from '../helpers/getCostBookingFilters';
 
 const TIME_INTERVAL = 600;
 const INIT_PAGE = 1;
+const PAGE_LIMIT = 10;
 
 function useListCostBookingDeskShipments() {
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const costBookingContextValues = useContext(CostBookingDeskContext);
 
-	const { filters, setFilters, shipmentType, stepperTab, activeTab, paymentType } = costBookingContextValues || {};
+	const {
+		filters, setFilters, shipmentType,
+		stepperTab, activeTab, paymentActiveTab,
+	} = costBookingContextValues || {};
 
-	const { page = 1, ...restFilters } = filters || {};
+	const { page = INIT_PAGE, ...restFilters } = filters || {};
 
 	const debounceQuery = useRef({ q: filters.q });
 
@@ -34,7 +38,7 @@ function useListCostBookingDeskShipments() {
 			},
 			additional_methods : ['pagination'],
 			page,
-			page_limit         : 10,
+			page_limit         : PAGE_LIMIT,
 			sort_by            : 'serial_id',
 			sort_type          : 'desc',
 		},
@@ -44,7 +48,7 @@ function useListCostBookingDeskShipments() {
 		try {
 			const res = await trigger();
 
-			if (isEmpty(res?.data?.list) && page > INIT_PAGE) setFilters({ ...filters, page: 1 });
+			if (isEmpty(res?.data?.list) && page > INIT_PAGE) setFilters({ ...filters, page: INIT_PAGE });
 			setApiData(res?.data);
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
@@ -73,9 +77,9 @@ function useListCostBookingDeskShipments() {
 			scopeFilters: newScopeFilters,
 			stepperTab,
 			shipmentType,
-			paymentType,
+			paymentActiveTab,
 		}));
-	}, [apiTrigger, filters, activeTab, authParams, selected_agent_id, stepperTab, shipmentType, paymentType]);
+	}, [apiTrigger, filters, activeTab, authParams, selected_agent_id, stepperTab, shipmentType, paymentActiveTab]);
 
 	return {
 		loading,

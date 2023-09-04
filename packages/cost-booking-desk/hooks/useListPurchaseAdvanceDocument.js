@@ -9,9 +9,10 @@ import CostBookingDeskContext from '../context/CostBookingDeskContext';
 const INIT_PAGE = 1;
 
 function useListPurchaseAdvanceDocument(searchValue = '') {
-	const contextValues = useContext(CostBookingDeskContext);
-
-	const { activeTab, paymentType, shipmentType, stepperTab } = contextValues || {};
+	const {
+		activeTab, paymentActiveTab, shipmentType,
+		stepperTab, filters, newScopeFilters,
+	} = useContext(CostBookingDeskContext);
 
 	const [apiData, setApiData] = useState('');
 	const [pagination, setPagination] = useState(INIT_PAGE);
@@ -48,9 +49,16 @@ function useListPurchaseAdvanceDocument(searchValue = '') {
 		apiTrigger();
 		localStorage.setItem(
 			'cost_booking_desk_values',
-			JSON.stringify({ paymentType, activeTab, shipmentType, stepperTab }),
+			JSON.stringify({
+				filters,
+				activeTab,
+				scopeFilters: newScopeFilters,
+				stepperTab,
+				shipmentType,
+				paymentActiveTab,
+			}),
 		);
-	}, [apiTrigger, paymentType, activeTab, shipmentType, stepperTab]);
+	}, [apiTrigger, paymentActiveTab, activeTab, shipmentType, stepperTab, filters, newScopeFilters]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);

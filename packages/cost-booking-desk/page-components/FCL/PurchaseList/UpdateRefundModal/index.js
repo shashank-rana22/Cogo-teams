@@ -1,31 +1,31 @@
 import { Modal, Button } from '@cogoport/components';
 import {
-	AsyncSelectController,
 	InputController,
 	SelectController,
-	TextAreaController,
 	UploadController,
 	DatepickerController,
 	useForm,
 } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
 import formControls from './formControls';
 import styles from './styles.module.css';
 
+const ONLINE_PAYMENT_MODES = ['NEFT', 'RTGS'];
+
 const controlTypeMapping = {
-	text        : InputController,
-	select      : SelectController,
-	textarea    : TextAreaController,
-	number      : InputController,
-	asyncSelect : AsyncSelectController,
-	upload      : UploadController,
-	datepicker  : DatepickerController,
+	text       : InputController,
+	select     : SelectController,
+	number     : InputController,
+	upload     : UploadController,
+	datepicker : DatepickerController,
 };
 
 function FormElement({ name, label, type, errors, showElements, ...rest }) {
 	const Element = controlTypeMapping[type];
+	const show = !isEmpty(showElements[name]) ? showElements[name] : true;
 
-	return Element ? (
+	return (Element && show) ? (
 		<div>
 			<div className={styles.label}>{label}</div>
 			<Element name={name} type={type} {...rest} />
@@ -35,10 +35,12 @@ function FormElement({ name, label, type, errors, showElements, ...rest }) {
 }
 
 function UpdateRefundModal({
-	updateRefundModal = false,
+	updateRefundModal = {},
 	setUpdateRefundModal = () => {},
 }) {
 	const controls = formControls();
+
+	const { payment_mode } = updateRefundModal || {};
 
 	const {
 		handleSubmit,
@@ -55,6 +57,10 @@ function UpdateRefundModal({
 	const formValues = watch();
 	console.log('formValues:', formValues);
 
+	const showElements = {
+		utr_number: ONLINE_PAYMENT_MODES.includes(payment_mode),
+	};
+
 	return (
 		<Modal
 			show={updateRefundModal}
@@ -67,6 +73,7 @@ function UpdateRefundModal({
 						key={item?.name}
 						control={control}
 						errors={errors}
+						showElements={showElements}
 						{...item}
 					/>
 				))}
