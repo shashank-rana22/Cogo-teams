@@ -50,6 +50,6 @@
 
 @media (max-width: 768px) {
 	.modal {
-		width: 100%;
+		width: 100% !important;
 	}
 }
