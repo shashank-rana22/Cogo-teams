@@ -12,13 +12,12 @@ function FilterContainers({
 	filters = '',
 	setFilters = () => {},
 	goBack = () => {},
-	resetPage = () => {},
 	active = '',
 	showHeader = '',
 	setShowHeader = () => {},
 	viewSelectedInvoice = false,
 	onClear = () => {},
-	filterClear = [],
+
 }) {
 	return (
 		<div className={styles.filters}>
@@ -31,7 +30,6 @@ function FilterContainers({
 						setFilters={setFilters}
 						filterLength={5}
 						onClear={onClear}
-						filterClear={filterClear}
 					/>
 				</div>
 			)}
@@ -59,7 +57,7 @@ function FilterContainers({
 						themeType="accent"
 						onClick={() => {
 							goBack();
-							resetPage();
+							onClear();
 							setShowHeader(true);
 						}}
 						style={{ width: '100px', margin: '0px 10px', height: '40px' }}

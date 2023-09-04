@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable max-lines-per-function */
 import { Toast, Checkbox } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -7,11 +5,9 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
-import { SUPPLIER_CONFIG } from '../CreatePayrun/Configurations/supplierConfig';
 import { VIEW_SELECTED_CONFIG } from '../CreatePayrun/Configurations/viewSelectedConfig';
 import { VIEW_SELECTED_CONFIG_VN } from '../CreatePayrun/Configurations/viewSelectedConfigVN';
 import { CREATE_OVER_SEAS_CONFIG } from '../OverSeasAgent/Configurations/createOverSeasConfig';
@@ -35,6 +31,14 @@ const VIEW_SELECTED_CONFIG_MAPPING = {
 	VN : VIEW_SELECTED_CONFIG_VN,
 };
 
+function getConfig(country, viewSelectedInvoice) {
+	const createOverSeasConfig = CREATE_OVERSEAS_CONFIG_MAPPING[country];
+	const viewSelectedConfig = VIEW_SELECTED_CONFIG_MAPPING[country];
+	return (viewSelectedInvoice
+		? viewSelectedConfig
+		: createOverSeasConfig);
+}
+
 function changeFormat(time) {
 	return formatDate({
 		date: time,
@@ -45,6 +49,136 @@ function changeFormat(time) {
 		separator  : 'T',
 	});
 }
+
+const onClearing = (setGlobalFilters, entity, queryCurr) => {
+	setGlobalFilters({
+		pageIndex   : 1,
+		pageSize    : 20,
+		entity,
+		currency    : queryCurr,
+		invoiceView : 'coe_accepted',
+	});
+};
+
+const goGoingBack = (viewSelectedInvoice, setViewSelectedInvoice, push) => {
+	if (!viewSelectedInvoice) {
+		push(
+			'/business-finance/account-payables/[active_tab]',
+			'/business-finance/account-payables/invoices',
+		);
+	} else setViewSelectedInvoice(false);
+};
+
+const getSelectedInvoice = (list) => {
+	const SELECTED_INVOICE = [];
+
+	for (let i = 0; i < list.length; i += INCREEMENT_BY) {
+		const data = list?.[i];
+
+		const {
+			tdsAmount = 0,
+			checked = false,
+			id = '',
+			bankDetail = undefined,
+			invoiceNumber = ' ',
+			inputAmount = 0,
+			invoiceType,
+		} = data ?? {};
+
+		if (checked) {
+			if (!bankDetail) { return toastApiError(`Select Bank for Invoice Number ${invoiceNumber}`); }
+
+			const {
+				bank_account_number = '',
+				accountNo = '',
+				bankName = '',
+				branchName = '',
+				ifscCode = '',
+				ifsc_number = '',
+				branch_name = '',
+				bank_name = '',
+				imageUrl = '',
+				bankId,
+				beneficiaryName,
+			} = bankDetail || {};
+
+			const formattedBank = {
+				bankName        : bank_name || bankName,
+				branchName      : branch_name || branchName,
+				ifscCode        : ifsc_number || ifscCode,
+				accountNo       : bank_account_number || accountNo,
+				beneficiaryName : beneficiaryName || undefined,
+				imageUrl,
+				bankId,
+			};
+
+			SELECTED_INVOICE.push({
+				billId        : id,
+				tdsAmount     : +tdsAmount,
+				payableAmount : +inputAmount,
+				bankDetail    : formattedBank,
+				invoiceType,
+			});
+		}
+	}
+
+	return SELECTED_INVOICE;
+};
+
+const settingApiData = (itemData, value, key, checked, setApiData) => {
+	setApiData((prevApiData) => {
+		const newValue = { ...prevApiData };
+		const index = newValue?.list?.findIndex(
+			(item) => item?.id === itemData?.id,
+		);
+		const {
+			payableValue,
+			invoiceAmount,
+			tdsDeducted,
+			payableAmount,
+			tdsAmount,
+		} = newValue.list[index];
+		const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
+
+		let maxValueCrossed = false;
+		let lessValueCrossed = false;
+		let lessTdsValueCrossed = false;
+		let maxTdsValueCrossed = false;
+
+		if (key === 'payableAmount') {
+			maxValueCrossed = +value > +payableValue;
+			lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
+			maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+			lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+		} else if (key === 'tdsAmount') {
+			maxValueCrossed = +payableAmount > +payableValue;
+			lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+			maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
+			lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
+
+			newValue.list[index].payableAmount = payableValue - value;
+			newValue.list[index].inputAmount = payableValue - value;
+		} else {
+			maxValueCrossed = +payableAmount > +payableValue;
+			lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+			maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+			lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+		}
+
+		const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
+
+		if (index !== ELEMENT_NOT_FOUND) {
+			newValue.list[index] = {
+				...itemData,
+				hasError: isError,
+				checked,
+			};
+			newValue.list[index][key] = value;
+		}
+		return newValue;
+	});
+};
+
 const useGetInvoiceSelection = ({ sort }) => {
 	const { push } = useRouter();
 
@@ -65,19 +199,12 @@ const useGetInvoiceSelection = ({ sort }) => {
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
 	const {
-		entity = '',
-		currency: queryCurr = '',
-		payrun = '',
-		organizationId = '',
-		services = '',
-		payrun_type = '',
-		partner_id = '',
+		entity = '', currency: queryCurr = '', payrun = '', organizationId = '',
+		services = '', payrun_type = '', partner_id = '',
 	} = urlQuery || {};
 
-	const country = getKeyByValue(
-		GLOBAL_CONSTANTS.country_entity_ids,
-		partner_id,
-	);
+	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
+	const config = getConfig(country, viewSelectedInvoice);
 
 	const listInvoices = useRequestBf(
 		{
@@ -116,16 +243,8 @@ const useGetInvoiceSelection = ({ sort }) => {
 	);
 
 	const api = viewSelectedInvoice ? listSelectedInvoice : listInvoices;
-
-	const configures = SUPPLIER_CONFIG;
-
-	const createOverSeasConfig = CREATE_OVERSEAS_CONFIG_MAPPING[country];
-	const viewSelectedConfig = VIEW_SELECTED_CONFIG_MAPPING[country];
-	const config = viewSelectedInvoice
-		? viewSelectedConfig
-		: createOverSeasConfig;
+	const [{ data, loading }, trigger] = api || [];
 	const { query = '', debounceQuery } = useDebounceQuery();
-
 	const [globalFilters, setGlobalFilters] = useState({
 		pageIndex   : 1,
 		pageSize    : 10,
@@ -134,9 +253,10 @@ const useGetInvoiceSelection = ({ sort }) => {
 		invoiceView : 'coe_accepted',
 	});
 	const { search, dueDate, invoiceDate, updatedDate, category, ...rest } = globalFilters;
+	const restParse = JSON.stringify(rest);
 
 	useEffect(() => {
-		const newData = { ...api[GLOBAL_CONSTANTS.zeroth_index]?.data };
+		const newData = { ...data };
 		if (newData.list) {
 			newData.list = newData?.list?.map((item) => ({
 				...item,
@@ -149,15 +269,13 @@ const useGetInvoiceSelection = ({ sort }) => {
 
 		setApiData(newData);
 		setApiTdsData(newData);
-	}, [JSON.stringify(api[GLOBAL_CONSTANTS.zeroth_index]?.data)]);
+	}, [data]);
 
-	useEffect(() => {
-		debounceQuery(search);
-	}, [search]);
-
-	const refetch = () => {
+	useEffect(() => { debounceQuery(search); }, [search, debounceQuery]);
+	const refetch = useCallback(() => {
 		const q = query || undefined;
-		api[API_ARRAY_VARIABLE_ONE]({
+
+		trigger({
 			params: {
 				payrunId           : payrun,
 				entityCode         : entity,
@@ -168,7 +286,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 				organizationId,
 				services,
 				category           : category || undefined,
-				...(rest || {}),
+				...(JSON.parse(restParse) || {}),
 				startDate          : changeFormat(dueDate?.startDate) || undefined,
 				endDate            : changeFormat(dueDate?.endDate) || undefined,
 				fromBillDate       : changeFormat(invoiceDate?.startDate) || undefined,
@@ -179,25 +297,13 @@ const useGetInvoiceSelection = ({ sort }) => {
 				...sort,
 			},
 		});
-	};
-	const resetPage = () => {
-		setGlobalFilters({
-			pageIndex   : 1,
-			pageSize    : 20,
-			entity,
-			currency    : queryCurr,
-			invoiceView : 'coe_accepted',
-		});
-	};
+	}, [restParse, dueDate, invoiceDate, updatedDate, query, category, sort, trigger,
+		entity, organizationId, payrun, performedBy, performedByName, performedByType, queryCurr, services]);
+
 	const deleteInvoices = async (id, handleModal) => {
 		try {
 			await delete_payrun_invoice.trigger({
-				data: {
-					id,
-					performedBy,
-					performedByType,
-					performedByName,
-				},
+				data: { id, performedBy, performedByType, performedByName },
 			});
 			handleModal();
 			Toast.success('Invoice deleted successfully');
@@ -208,57 +314,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 	};
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData ?? {};
-		const SELECTED_INVOICE = [];
-
-		for (let i = 0; i < list.length; i += INCREEMENT_BY) {
-			const data = list?.[i];
-
-			const {
-				tdsAmount = 0,
-				checked = false,
-				id = '',
-				bankDetail = undefined,
-				invoiceNumber = ' ',
-				inputAmount = 0,
-				invoiceType,
-			} = data ?? {};
-
-			if (checked) {
-				if (!bankDetail) { return toastApiError(`Select Bank for Invoice Number ${invoiceNumber}`); }
-
-				const {
-					bank_account_number = '',
-					accountNo = '',
-					bankName = '',
-					branchName = '',
-					ifscCode = '',
-					ifsc_number = '',
-					branch_name = '',
-					bank_name = '',
-					imageUrl = '',
-					bankId,
-					beneficiaryName,
-				} = bankDetail || {};
-
-				const formattedBank = {
-					bankName        : bank_name || bankName,
-					branchName      : branch_name || branchName,
-					ifscCode        : ifsc_number || ifscCode,
-					accountNo       : bank_account_number || accountNo,
-					beneficiaryName : beneficiaryName || undefined,
-					imageUrl,
-					bankId,
-				};
-
-				SELECTED_INVOICE.push({
-					billId        : id,
-					tdsAmount     : +tdsAmount,
-					payableAmount : +inputAmount,
-					bankDetail    : formattedBank,
-					invoiceType,
-				});
-			}
-		}
+		const SELECTED_INVOICE = getSelectedInvoice(list);
 
 		try {
 			const res = await addInvoiceToSelectedAPI[API_ARRAY_VARIABLE_ONE]({
@@ -272,7 +328,6 @@ const useGetInvoiceSelection = ({ sort }) => {
 					performedByName,
 				},
 			});
-
 			if (res?.data?.message) {
 				toastApiError(res.data.message);
 			} else {
@@ -286,16 +341,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 	};
 	useEffect(() => {
 		refetch();
-	}, [
-		JSON.stringify(rest),
-		dueDate,
-		invoiceDate,
-		updatedDate,
-		query,
-		category,
-		viewSelectedInvoice,
-		sort,
-	]);
+	}, [refetch]);
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		setApiData((p) => {
@@ -306,9 +352,7 @@ const useGetInvoiceSelection = ({ sort }) => {
 		});
 	};
 	function GetTableHeaderCheckbox() {
-		const isCheckedLength = apiData?.list?.filter(
-			(value) => value?.checked,
-		)?.length;
+		const isCheckedLength = apiData?.list?.filter((value) => value?.checked)?.length;
 		const isAllRowsChecked = isCheckedLength === api?.data?.list?.length;
 		const isSemiRowsChecked = isCheckedLength > MIN_AMOUNT;
 
@@ -325,14 +369,9 @@ const useGetInvoiceSelection = ({ sort }) => {
 	const onChangeTableBodyCheckbox = (itemData) => {
 		setApiData((p) => {
 			const newValue = { ...p };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
+			const index = newValue?.list?.findIndex((item) => item?.id === itemData?.id);
 			if (index !== ELEMENT_NOT_FOUND) {
-				newValue.list[index] = {
-					...itemData,
-					checked: !itemData?.checked,
-				};
+				newValue.list[index] = { ...itemData, checked: !itemData?.checked };
 			}
 			return newValue;
 		});
@@ -353,83 +392,11 @@ const useGetInvoiceSelection = ({ sort }) => {
 	}
 
 	const setEditedValue = (itemData, value, key, checked = false) => {
-		setApiData((prevApiData) => {
-			const newValue = { ...prevApiData };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
-			const {
-				payableValue,
-				invoiceAmount,
-				tdsDeducted,
-				payableAmount,
-				tdsAmount,
-			} = newValue.list[index];
-			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
-
-			let maxValueCrossed = false;
-			let lessValueCrossed = false;
-			let lessTdsValueCrossed = false;
-			let maxTdsValueCrossed = false;
-
-			if (key === 'payableAmount') {
-				maxValueCrossed = +value > +payableValue;
-				lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
-				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
-			} else if (key === 'tdsAmount') {
-				maxValueCrossed = +payableAmount > +payableValue;
-				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
-				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
-
-				newValue.list[index].payableAmount = payableValue - value;
-				newValue.list[index].inputAmount = payableValue - value;
-			} else {
-				maxValueCrossed = +payableAmount > +payableValue;
-				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
-				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
-			}
-
-			const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
-
-			if (index !== ELEMENT_NOT_FOUND) {
-				newValue.list[index] = {
-					...itemData,
-					hasError: isError,
-					checked,
-				};
-				newValue.list[index][key] = value;
-			}
-			return newValue;
-		});
+		settingApiData(itemData, value, key, checked, setApiData);
 	};
-	const onClear = () => {
-		setGlobalFilters({
-			pageIndex   : 1,
-			pageSize    : 20,
-			entity,
-			currency    : queryCurr,
-			invoiceView : 'coe_accepted',
-		});
-	};
-	const filtervalue = Object.values(globalFilters);
+	const onClear = () => { onClearing(setGlobalFilters, entity, queryCurr); };
+	const goBack = () => { goGoingBack(viewSelectedInvoice, setViewSelectedInvoice, push); };
 
-	const filterClear = filtervalue.filter((item) => {
-		if (Array.isArray(item) && isEmpty(item)) {
-			return false;
-		}
-		return item !== undefined && item !== '';
-	});
-	const goBack = () => {
-		if (!viewSelectedInvoice) {
-			push(
-				'/business-finance/account-payables/[active_tab]',
-				'/business-finance/account-payables/invoices',
-			);
-		} else setViewSelectedInvoice(false);
-	};
 	return {
 		config,
 		refetch,
@@ -437,22 +404,19 @@ const useGetInvoiceSelection = ({ sort }) => {
 		tdsData       : apiTdsData,
 		createloading : addInvoiceToSelectedAPI?.loading,
 		onClear,
-		filterClear,
 		listSelectedInvoice,
-		configures,
 		globalFilters,
 		setGlobalFilters,
 		viewSelectedInvoice,
 		setViewSelectedInvoice,
 		submitSelectedInvoices,
 		goBack,
-		resetPage,
 		GetTableHeaderCheckbox,
 		GetTableBodyCheckbox,
 		setEditedValue,
 		delete_payrun_invoice,
 		deleteInvoices,
-		loading       : api[GLOBAL_CONSTANTS.zeroth_index]?.loading,
+		loading,
 		payrun_type,
 		currency      : urlQuery?.currency,
 	};

@@ -84,7 +84,7 @@ function OverSeasAgent() {
 	const [showPayableAmount, setShowPayableAmount] = useState(MIN_AMOUNT);
 	const [showSaveAsDraft, setShowSaveAsDraft] = useState(false);
 	const { organizationId = '' } = query || {};
-	const { goBack, resetPage, currency } = useGetInvoiceSelection({});
+	const { goBack, onClear, currency } = useGetInvoiceSelection({});
 	const { payrunState = '' } = bLData || {};
 
 	useEffect(() => {
@@ -127,7 +127,7 @@ function OverSeasAgent() {
 						themeType="accent"
 						onClick={() => {
 							goBack();
-							resetPage();
+							onClear();
 						}}
 						disabled={showSaveAsDraft}
 						style={{ width: '100px', margin: '0px 10px' }}

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallBack } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
@@ -14,7 +14,8 @@ const useUploadDocuments = (fileUploader) => {
 
 	const { payrun } = query;
 
-	const [{ data, loading }, trigger] = useRequestBf(
+	const uploadDocuments = useRequestBf(
+
 		{
 			url     : '/purchase/payrun/upload-documents',
 			method  : 'post',
@@ -23,7 +24,7 @@ const useUploadDocuments = (fileUploader) => {
 		{ manual: false },
 	);
 
-	const listPayrunBill = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun-bill',
 			method  : 'get',
@@ -45,7 +46,7 @@ const useUploadDocuments = (fileUploader) => {
 		const formattedUrls = multiFileUpload?.map((item) => item);
 
 		try {
-			await trigger({
+			await uploadDocuments[API_ARRAY_VARIABLE_ONE]({
 				data: {
 					payrunId              : payrun,
 					taxDeclarationFormUrl : singleFileUpload || undefined,
@@ -60,9 +61,9 @@ const useUploadDocuments = (fileUploader) => {
 		}
 	};
 
-	const generateInvoice = async () => {
+	const generateInvoice = useCallBack(async () => {
 		try {
-			listPayrunBill[API_ARRAY_VARIABLE_ONE]({
+			trigger({
 				params: {
 					payrunId  : payrun,
 					pageSize  : 10,
@@ -72,7 +73,7 @@ const useUploadDocuments = (fileUploader) => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Failed to Fetch Data');
 		}
-	};
+	}, []);
 
 	const deleteTaggedDocuments = async (key, myArray = null) => {
 		let payload;
@@ -102,15 +103,14 @@ const useUploadDocuments = (fileUploader) => {
 
 	useEffect(() => {
 		generateInvoice();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [generateInvoice]);
 
 	return {
 		upload,
-		loading,
-		data,
-		listData    : listPayrunBill[GLOBAL_CONSTANTS.zeroth_index].data,
-		listLoading : listPayrunBill[GLOBAL_CONSTANTS.zeroth_index].loading,
+		loading     : uploadDocuments[GLOBAL_CONSTANTS.zeroth_index].loading,
+		data        : uploadDocuments[GLOBAL_CONSTANTS.zeroth_index].data,
+		listData    : data,
+		listLoading : loading,
 		deleteTaggedDocuments,
 	};
 };

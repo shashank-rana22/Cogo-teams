@@ -85,13 +85,11 @@ function InvoiceSelection({
 		setViewSelectedInvoice,
 		viewSelectedInvoice,
 		onClear,
-		filterClear,
 		listSelectedInvoice,
 		submitSelectedInvoices,
 		createloading,
 		GetTableHeaderCheckbox,
 		GetTableBodyCheckbox,
-		resetPage,
 		setEditedValue,
 		loading,
 		goBack,
@@ -136,13 +134,11 @@ function InvoiceSelection({
 				filters={globalFilters}
 				setFilters={setGlobalFilters}
 				goBack={goBack}
-				resetPage={resetPage}
 				active={active}
 				showHeader={showHeader}
 				setShowHeader={setShowHeader}
 				viewSelectedInvoice={viewSelectedInvoice}
 				onClear={onClear}
-				filterClear={filterClear}
 			/>
 
 			<div className={styles.list_container}>

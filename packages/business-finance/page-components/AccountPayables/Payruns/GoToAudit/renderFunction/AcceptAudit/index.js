@@ -12,6 +12,7 @@ function AcceptAudit({
 	updateInvoice = () => {},
 	updateLoading = false,
 }) {
+	console.log(remarks, 'ljhj');
 	const [openModal, setOpenModal] = useState(false);
 	const [type, setType] = useState('');
 
@@ -67,7 +68,7 @@ function AcceptAudit({
 						<Modal.Footer>
 							<Button
 								themeType="primary"
-								disabled={!remarks}
+								disabled={!(remarks?.[item?.id])}
 								loading={updateLoading}
 								onClick={() => onSubmit({ value: remarks?.[item?.id], invoice_id: item?.id })}
 							>
