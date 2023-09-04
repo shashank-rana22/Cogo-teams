@@ -82,6 +82,7 @@ const useListLeadOrgUsers = () => {
 		setSearch,
 		handlePagination,
 		partnerId,
+		getOrganizationUsers,
 	};
 };
 export default useListLeadOrgUsers;
