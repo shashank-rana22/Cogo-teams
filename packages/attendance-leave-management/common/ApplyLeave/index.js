@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function ApplyLeave({
 	show = false, onClose = () => {}, data = {},
-	refetch = () => {}, selectedData, refetchList = () => {},
+	refetch = () => {}, selectedData = {}, refetchList = () => {},
 	setSelectedData = () => {},
 }) {
 	const { handleSubmit, control, formState : { errors }, watch, setValue } = useForm();
