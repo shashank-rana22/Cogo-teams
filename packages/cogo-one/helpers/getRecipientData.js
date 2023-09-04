@@ -29,9 +29,9 @@ const getReplyMails = ({
 	filteredBccData = [],
 }) => {
 	if (
-		activeMailAddress.toLowerCase() !== senderAddress.toLowerCase()
+		activeMailAddress?.toLowerCase() !== senderAddress?.toLowerCase()
 		|| filteredRecipientData.length !== CHECK_ONE_OR_MORE_ELEMENTS
-		|| (filteredRecipientData.length === CHECK_ONE_OR_MORE_ELEMENTS
+		|| !(filteredRecipientData.length === CHECK_ONE_OR_MORE_ELEMENTS
 			&& isEmpty(filteredCcData)
 			&& isEmpty(filteredBccData)
 		) || isEmpty(filteredRecipientData)
@@ -51,7 +51,7 @@ const getReplyAllMails = ({
 }) => {
 	let toUserEmail = filteredRecipientData;
 
-	if (senderAddress.toLowerCase() !== activeMailAddress.toLowerCase()) {
+	if (senderAddress?.toLowerCase() !== activeMailAddress?.toLowerCase()) {
 		toUserEmail = [senderAddress, ...toUserEmail];
 	}
 
@@ -74,10 +74,11 @@ export function getRecipientData({
 	isDraft = false,
 	emailVia = '',
 	formattedData = {},
+	eachMessage = {},
 }) {
-	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
-	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
-	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
+	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
+	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
+	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 
 	const handleClick = (val) => {
 		if (isDraft) {
@@ -93,6 +94,8 @@ export function getRecipientData({
 				filteredRecipientData,
 				senderAddress,
 				activeMailAddress,
+				filteredCcData,
+				filteredBccData,
 			});
 		} else if (val === 'reply_all') {
 			mailData = getReplyAllMails({
@@ -117,6 +120,7 @@ export function getRecipientData({
 				ccrecipients  : mailData?.ccrecipients || [],
 				bccrecipients : mailData?.bccrecipients || [],
 				formattedData,
+				eachMessage,
 			}),
 		);
 	};

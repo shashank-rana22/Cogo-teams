@@ -96,7 +96,7 @@ function Customers({
 		},
 	};
 
-	const tabMappings = getTabMappings({ unReadChatsCount });
+	const tabMappings = getTabMappings({ unReadChatsCount, viewType });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 

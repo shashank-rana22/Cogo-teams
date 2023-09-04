@@ -25,6 +25,7 @@ function useMailEditorFunctions({
 	const {
 		emailVia = '',
 		formattedData = {},
+		eachMessage = {},
 	} = emailState || {};
 
 	const {
@@ -82,10 +83,7 @@ function useMailEditorFunctions({
 				formattedData,
 				mailActions   : {
 					actionType : buttonType,
-					data       : {
-						response: buttonType !== 'send_mail'
-							? activeMail?.id : undefined,
-					},
+					data       : eachMessage,
 				},
 				emailState,
 			});

@@ -4,6 +4,7 @@ import { getSupplySessionQuery } from '../../../helpers/viewTypeFunctions';
 import { COMMON_ADMIN_ACCESIBLE_BUTTONS } from '../defaultViewOptions';
 
 const COGOONE_ADMIN = {
+	chat_tabs_to_be_shown  : ['message', 'voice', 'outlook', 'firebase_emails'],
 	group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	session_type_query     : getSupplySessionQuery,
@@ -20,7 +21,7 @@ const COGOONE_ADMIN = {
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 	default_side_nav              : 'profile',
 	show_relevant_templates       : ['quick_reply', 'supply'],
-	mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
+	mails_to_be_shown             : ['danampally.rahul@cogoport.com'],
 	bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
 	configurations_to_be_shown    : ['lock_configuration', 'list_agents', 'switch_views'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],

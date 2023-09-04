@@ -11,27 +11,25 @@
 	margin-right: 10px;
 }
 
-.chats_layout {
-	width: 47%;
+.chat_body {
 	height: 100%;
-	margin-right: 10px;
 	background-color: #fff;
 	border-radius: 4px;
+	transition: 0.3s ease-in-out;
+}
+
+.chats_layout {
+	width: 47%;
+	margin-right: 10px;
 }
 
 .mail_layout {
 	width: calc(75% - 60px);
-	height: 100%;
 	margin-right: 10px;
-	background-color: #fff;
-	border-radius: 4px;
 }
 
 .nosidebar_layout {
 	width: 75%;
-	height: 100%;
-	background-color: #fff;
-	border-radius: 4px;
 }
 
 .user_profile_layout {
@@ -41,6 +39,7 @@
 	overflow-x: hidden;
 	background-color: #fff;
 	border-radius: 4px;
+	transition: 0.3s ease-in-out;
 }
 
 .collapsed_side_bar {

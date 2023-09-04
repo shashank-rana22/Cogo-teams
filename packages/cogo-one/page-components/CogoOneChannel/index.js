@@ -210,7 +210,7 @@ function CogoOne() {
 					) : (
 						<>
 							<div
-								className={cl`${expandedSideBar ? styles.chats_layout : ''} 
+								className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
 								${collapsedSideBar ? styles.mail_layout : ''} 
 								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}`}
 							>

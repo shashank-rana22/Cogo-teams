@@ -1,9 +1,12 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-const getTabMappings = ({ unReadChatsCount }) => {
-	const geo = getGeoConstants();
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-	return [
+const getTabMappings = ({ unReadChatsCount = 0, viewType = '' }) => {
+	const geo = getGeoConstants();
+	const tabsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.chat_tabs_to_be_shown || [];
+
+	const TABS_MAPPING = [
 		{
 			label : 'Chats',
 			value : 'message',
@@ -26,6 +29,8 @@ const getTabMappings = ({ unReadChatsCount }) => {
 			show  : true,
 		},
 	];
+
+	return TABS_MAPPING.filter((itm) => tabsToBeShown.includes(itm.value) && itm.show);
 };
 
 export default getTabMappings;

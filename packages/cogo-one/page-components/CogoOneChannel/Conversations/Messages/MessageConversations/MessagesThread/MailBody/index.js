@@ -59,6 +59,7 @@ function MailBody({
 		ccData,
 		bccData,
 		formattedData,
+		eachMessage,
 		activeMailAddress : source,
 		isDraft           : false,
 		subject,
