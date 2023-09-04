@@ -16,7 +16,6 @@
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #221f20;
 	text-transform: uppercase;
 }
@@ -105,9 +104,7 @@
 
 .type1_content {
 	font-size: 14px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 150%;
 	color: #ee3425;
 	text-align: center;
 }

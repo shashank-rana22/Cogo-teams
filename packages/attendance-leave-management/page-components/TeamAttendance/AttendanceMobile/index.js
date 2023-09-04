@@ -3,7 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useEffect } from 'react';
 
-import { ATTENDANCE_LOGS_STATUS_MAPPING } from '../../../utils/constants';
+import {
+	ATTENDANCE_LOGS_STATUS_MAPPING, INVALID_STATUS,
+	GREEN_STATUS, HALF_DAY_STATUS, WEEKLY_OFF,
+}
+	from '../../../utils/constants';
 
 import styles from './styles.module.css';
 
@@ -28,16 +32,6 @@ function AttendanceMobile({
 			setDaysAttendance(currentEmployee.days);
 		}
 	}, [filteredArray, employeeValue, setDaysAttendance]);
-
-	const GREEN_STATUS = ['present', 'holiday', 'sick_leave', 'privilege_leave', 'casual_leave',
-		'half_day_sick_leave', 'half_day_privilege_leave', 'half_day_casual_leave'];
-
-	const INVALID_STATUS = ['invalid'];
-
-	const HALF_DAY_STATUS = ['half_day_absent', 'half_day_absent_sick_leave',
-		'half_day_absent_privilege_leave', 'half_day_absent_casual_leave'];
-
-	const WEEKLY_OFF = ['weekly_off'];
 
 	const getClassName = (status, color) => {
 		if (GREEN_STATUS.includes(status)) {

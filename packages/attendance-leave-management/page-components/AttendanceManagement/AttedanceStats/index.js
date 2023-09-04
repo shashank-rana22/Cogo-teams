@@ -4,7 +4,6 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 import { upperCase } from '@cogoport/utils';
 
 import useGetAttendanceStats from '../../../hooks/useGetAttendanceStats';
-// import useGetLeaveBalance from '../../../hooks/useGetLeaveBalance';
 import { ATTENDANCE_CONSTANT, ATTENDANCE_STATS_MAPPING } from '../../../utils/constants';
 
 import LeaveStats from './LeaveStats';

@@ -26,10 +26,10 @@ export function useGeolocated(config = {}) {
 
 	const [isGeolocationEnabled, setIsGeolocationEnabled] = useState(isOptimisticGeolocationEnabled);
 
-	const [coords, setCoords] = useState();
-	const [timestamp, setTimestamp] = useState();
-	const [positionError, setPositionError] = useState();
-	const [permissionState, setPermissionState] = useState();
+	const [coords, setCoords] = useState(null);
+	const [timestamp, setTimestamp] = useState(null);
+	const [positionError, setPositionError] = useState(null);
+	const [permissionState, setPermissionState] = useState(null);
 
 	const cancelUserDecisionTimeout = useCallback(() => {
 		if (userDecisionTimeoutId.current) {
@@ -118,7 +118,7 @@ export function useGeolocated(config = {}) {
 				permission.onchange = null;
 			}
 		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [geolocationProvider, watchLocationPermissionChange]);
 
 	useEffect(() => {
 		if (!suppressLocationOnMount) {
@@ -131,7 +131,8 @@ export function useGeolocated(config = {}) {
 				geolocationProvider?.clearWatch(watchId.current);
 			}
 		};
-	}, [permissionState]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [cancelUserDecisionTimeout, geolocationProvider,
+		getPosition, permissionState, suppressLocationOnMount, watchPosition]);
 
 	return {
 		getPosition,
