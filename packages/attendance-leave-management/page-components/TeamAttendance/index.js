@@ -3,8 +3,6 @@ import { IcMDownload, IcMProfile, IcMAppSearch, IcMArrowLeft, IcMArrowRight } fr
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-// import StyledTable from '../../common/StyledTable';
-
 import EmptyState from '../../common/EmptyState';
 import Loader from '../../common/Loader';
 import useGetCycles from '../../hooks/useGetCycles';
