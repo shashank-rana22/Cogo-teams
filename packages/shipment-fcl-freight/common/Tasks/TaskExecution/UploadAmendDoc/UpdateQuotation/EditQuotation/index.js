@@ -12,6 +12,8 @@ function EditQuotation({
 	shipment_id = '',
 	loading = false,
 	setIsQuotation = () => {},
+	updateDocument = () => {},
+	documentPayload = {},
 }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
@@ -47,7 +49,15 @@ function EditQuotation({
 	});
 
 	const handleFinalSubmit = async (values) => {
-		await onSubmit(values);
+		try {
+			const res1 = await updateDocument(documentPayload);
+
+			const res2 = await onSubmit(values);
+
+			return { res1, res2 };
+		} catch (error) {
+			return error;
+		}
 	};
 
 	return (

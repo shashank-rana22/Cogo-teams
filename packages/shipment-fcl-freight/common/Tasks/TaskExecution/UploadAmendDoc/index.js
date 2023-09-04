@@ -25,6 +25,7 @@ function UploadAmendDoc({
 	const isAmendBookingNote = task?.task === 'amend_booking_note';
 
 	const [isQuotation, setIsQuotation] = useState(false);
+	const [documentPayload, setDocumentPayload] = useState({});
 
 	const { list = {}, loading = true } = useListDocuments({
 		defaultFilters: {
@@ -36,15 +37,13 @@ function UploadAmendDoc({
 	});
 
 	const newRefetch = () => {
-		if (isAmendBookingNote && !isQuotation) {
-			setIsQuotation(true);
-		} else {
-			onClose();
-			refetch();
-		}
+		onClose();
+		refetch();
 	};
 
-	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
+	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments({
+		refetch: isAmendBookingNote ? undefined : newRefetch,
+	});
 
 	const movementDetails = primary_service?.movement_details || [];
 	const keysForMovementDetails = useMemo(() => Array(movementDetails.length)
@@ -65,7 +64,7 @@ function UploadAmendDoc({
 
 	const handleSubmitFinal = async (values) => {
 		const documentPayloadData = payloadData;
-		const finalPayload = {
+		setDocumentPayload({
 			shipment_id         : task.shipment_id,
 			service_id          : task.service_id,
 			service_type        : task.service_type,
@@ -89,9 +88,13 @@ function UploadAmendDoc({
 					currency : documentData?.amount?.currency || undefined,
 				},
 			})),
-		};
+		});
 
-		updateDocument(finalPayload);
+		if (isAmendBookingNote) {
+			setIsQuotation(true);
+		} else {
+			updateDocument(documentPayload);
+		}
 	};
 
 	return (
@@ -120,6 +123,9 @@ function UploadAmendDoc({
 					task={task}
 					setIsQuotation={setIsQuotation}
 					newRefetch={newRefetch}
+					updateDocument={updateDocument}
+					documentPayload={documentPayload}
+					documentUpdateLoading={taskUpdateLoading}
 				/>
 			) : (
 				<>

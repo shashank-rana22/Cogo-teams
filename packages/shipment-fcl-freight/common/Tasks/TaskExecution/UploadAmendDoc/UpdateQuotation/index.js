@@ -7,7 +7,14 @@ import useUpdateQuotationOnBnAmend from '../../../../../hooks/useUpdateQuotation
 import EditQuotation from './EditQuotation';
 import styles from './styles.module.css';
 
-function UpdateQuotation({ task = {}, setIsQuotation = () => {}, newRefetch = () => {} }) {
+function UpdateQuotation({
+	task = {},
+	setIsQuotation = () => {},
+	newRefetch = () => {},
+	updateDocument = () => {},
+	documentPayload = {},
+	documentUpdateLoading = false,
+}) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	const quotationData = useUpdateQuotationOnBnAmend({
@@ -32,8 +39,10 @@ function UpdateQuotation({ task = {}, setIsQuotation = () => {}, newRefetch = ()
 		<EditQuotation
 			data={quotationData}
 			shipment_id={task?.shipment_id}
-			loading={quotationLoading}
+			loading={quotationLoading || documentUpdateLoading}
 			setIsQuotation={setIsQuotation}
+			updateDocument={updateDocument}
+			documentPayload={documentPayload}
 		/>
 	);
 }
