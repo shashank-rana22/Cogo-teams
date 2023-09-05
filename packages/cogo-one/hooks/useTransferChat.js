@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { updateDoc, doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -21,12 +22,21 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 
 	const { user: { id: logginInAgentId } } = profile || {};
 
-	const roomRef = doc(
-		firestore,
-		`${FIRESTORE_PATH[channel_type]}/${id}`,
-	);
+	let roomRef;
+
+	if (id) {
+		roomRef = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
+	}
 
 	const requestToJoinGroup = async () => {
+		if (isEmpty(roomRef)) {
+			Toast.error('Invalid Chat!');
+			return;
+		}
+
 		if (group_members.includes(logginInAgentId)) {
 			Toast.warn('You are alredy in group');
 			return;
@@ -54,6 +64,11 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 
 	const dissmissTransferRequest = async () => {
 		const agentId = has_requested_by?.agent_id;
+
+		if (isEmpty(roomRef)) {
+			Toast.error('Invalid Chat!');
+			return;
+		}
 
 		await updateDoc(roomRef, {
 			has_requested_by: {},
