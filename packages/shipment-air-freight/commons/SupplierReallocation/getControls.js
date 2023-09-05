@@ -1,3 +1,4 @@
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { IcMFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -8,6 +9,7 @@ const SPLIT_SERVICE_TEXT = 2;
 
 const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => {
 	const code = option?.cogo_entity?.entity_code;
+	const { country_code = '' } = ENTITY_MAPPING[code];
 	const verified = option?.kyc_status === 'verified';
 
 	return ({
@@ -16,7 +18,7 @@ const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map(
 			<div className={styles.async_label_container}>
 				<div>
 					<div>{option?.business_name}</div>
-					<div className={styles.under_text}>{code ? `Entity Code : ${code}` : null}</div>
+					<div className={styles.under_text}>{country_code ? `Country Code : ${country_code}` : null}</div>
 				</div>
 				{verified && <IcMFtick fill="#67C676" height={24} width={24} />}
 			</div>
