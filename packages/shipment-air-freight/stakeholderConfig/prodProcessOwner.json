@@ -11,7 +11,7 @@
     "tasks":{
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
-        "checked_show_my_tasks":true,
+        "checked_show_my_tasks":false,
         "is_task_assigned":false
     },
     "documents":{
