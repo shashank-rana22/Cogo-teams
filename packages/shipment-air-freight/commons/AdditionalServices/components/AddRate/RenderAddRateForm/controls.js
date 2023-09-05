@@ -28,9 +28,8 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			rules       : { required: 'Buy Price is required', min: 0 },
 			show        : source !== 'task' || source === 'overview'
 			|| serviceData?.state === 'amendment_requested_by_importer_exporter',
-			disabled: serviceData?.state === 'amendment_requested_by_importer_exporter'
-			|| source === 'add_sell_price',
-			size: 'sm',
+			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter' || source === 'add_sell_price',
+			size     : 'sm',
 		},
 		{
 			name     : 'unit',
@@ -40,9 +39,8 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			options  : UNIT_OPTIONS,
 			rules    : { required: 'Unit is required' },
 			show     : COMMON_SHOW_SOURCE.includes(source),
-			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter'
-			|| source === 'add_sell_price',
-			size: 'sm',
+			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter' || source === 'add_sell_price',
+			size     : 'sm',
 		},
 		{
 			name        : 'quantity',
@@ -77,7 +75,6 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			rules       : { required: 'Price is required', min: 0 },
 			show        : !['purchase'].includes(source),
 			size        : 'sm',
-
 		},
 		{
 			name        : 'alias',

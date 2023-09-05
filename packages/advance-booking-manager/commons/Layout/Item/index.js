@@ -45,14 +45,14 @@ function Item({
 						rules={rules}
 						control={control}
 					/>
-					<h4 className={styles.item_label}>
+					<h4 className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 						{label}
 					</h4>
 
 				</div>
 			) : (
 				<>
-					<h4 className={styles.item_label}>
+					<h4 className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 						{label}
 					</h4>
 					<Element

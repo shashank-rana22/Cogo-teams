@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -41,7 +42,7 @@ function Item({
 			<div className={styles.item_heading}>
 				{heading}
 			</div>
-			<h4 className={styles.item_label}>
+			<h4 className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 				{label}
 			</h4>
 			<Element

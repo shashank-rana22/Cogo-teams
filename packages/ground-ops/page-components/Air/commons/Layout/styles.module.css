@@ -23,3 +23,8 @@
 	flex-direction: column;
 	width: 100%;
 }
+
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: "*";
+}

@@ -40,9 +40,11 @@ function Item(props) {
 			>
 				{heading}
 			</div>
-			<h4 style={{
-				height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-			}}
+			<h4
+				className={rules?.required ? styles.required_field : ''}
+				style={{
+					height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
+				}}
 			>
 				{label}
 			</h4>

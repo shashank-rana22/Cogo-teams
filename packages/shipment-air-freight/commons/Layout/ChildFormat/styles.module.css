@@ -20,9 +20,9 @@
 	color: #cb6464;
 }
 
-.requiredFiled {
-	margin-left: 4px;
-	color: red;
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: "*";
 }
 
 .element {
@@ -84,7 +84,6 @@
 }
 
 .child_label {
-	display: flex;
 	max-height: 16px;
 	margin-bottom: 6px;
 	font-size: 12px;

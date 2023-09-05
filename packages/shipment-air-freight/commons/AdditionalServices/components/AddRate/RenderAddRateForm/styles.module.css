@@ -12,16 +12,15 @@
 }
 
 .label {
-	display: flex;
 	margin: 8px 0;
 	font-weight: 900;
 	line-height: 14px;
 	letter-spacing: 0.02em;
 }
 
-.requiredField {
-	margin-left: 4px;
-	color: red;
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: "*";
 }
 
 .button_wrapper {

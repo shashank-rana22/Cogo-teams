@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import CONSTANTS from '../../../constants/CONSTANTS';
@@ -37,11 +38,8 @@ function Item({
 			<div className={styles.item_heading}>
 				{heading}
 			</div>
-			<h4 className={styles.item_label}>
+			<h4 className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 				{label}
-				<h4 className={styles.requiredField}>
-					{rules?.required ? '*' : ''}
-				</h4>
 			</h4>
 			<Element
 				{...props}
