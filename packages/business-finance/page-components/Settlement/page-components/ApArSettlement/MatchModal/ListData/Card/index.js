@@ -1,10 +1,14 @@
 import { ButtonIcon } from '@cogoport/components';
-import { IcMDelete, IcMEdit, IcMTick, IcMLineundo } from '@cogoport/icons-react';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
+import EditFields from './EditFields';
 import styles from './styles.module.css';
 
 const INITIAL_BAL = 0;
+const KEY_TDS = 'tds';
+const KEY_ALLOCATION = 'allocation';
+
 export default function CardItem({
 	itm = {},
 	selectedData = [],
@@ -14,6 +18,7 @@ export default function CardItem({
 	setIsDelete = () => {},
 	updatedData,
 	setUpdateBal,
+	isError = false,
 }) {
 	const new_itm = itm;
 	const {
@@ -104,53 +109,32 @@ export default function CardItem({
 					{
 					isTdsEdnew_itmode
 						? (
-							<>
-								<input
-									type="number"
-									value={newTDS}
-									onChange={(e) => setNewTDS(e.target.value)}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMTick />}
-									themeType="primary"
-									onClick={() => {
-										setIsTdsEdnew_itmode(false);
-										new_itm.tds = parseFloat(newTDS);
-										handleEditTDS();
-									}}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMLineundo />}
-									themeType="primary"
-									onClick={() => {
-										setIsTdsEdnew_itmode(false);
-										new_itm.tds = originalTDS;
-										setNewTDS(originalTDS);
-										setPrevTDS(originalTDS);
-										handleEditTDS();
-									}}
-								/>
-							</>
+							<EditFields
+								isError={isError}
+								inputvalue={newTDS}
+								inputSet={setNewTDS}
+								originalTDS={originalTDS}
+								doneSet={setIsTdsEdnew_itmode}
+								handleFunc={handleEditTDS}
+								newItem={new_itm}
+								setNewTDS={setNewTDS}
+								setPrevTDS={setPrevTDS}
+								fieldType={KEY_TDS}
+							/>
 						)
 						:					(
-							<>
+							<div className={styles.flex}>
 								{currency}
 								{'  '}
 								{new_itm?.tds}
-								<ButtonIcon
-									size="lg"
-									icon={(
-										<IcMEdit
-											height={14}
-											width={14}
-											onClick={() => { setIsTdsEdnew_itmode(true); }}
-										/>
-									)}
+								<IcMEdit
+									height={14}
+									width={14}
+									className={styles.btn}
+									onClick={() => { setIsTdsEdnew_itmode(true); }}
 									themeType="primary"
 								/>
-							</>
+							</div>
 						)
                     }
 				</div>
@@ -173,48 +157,27 @@ export default function CardItem({
 					{
 					isEdnew_itmode
 						? (
-							<>
-								<input
-									type="number"
-									value={editedAllocation}
-									onChange={(e) => { setEditedAllocation(e.target.value); }}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMTick />}
-									themeType="primary"
-									onClick={() => {
-										setIsEdnew_itmode(false);
-										new_itm.allocationAmount = parseFloat(editedAllocation);
-										handleEditAllocation();
-									}}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMLineundo />}
-									themeType="primary"
-									onClick={() => {
-										setIsEdnew_itmode(false);
-										new_itm.allocationAmount = originalAllocation;
-										handleEditAllocation();
-									}}
-								/>
-							</>
+							<EditFields
+								isError={isError}
+								inputvalue={editedAllocation}
+								inputSet={setEditedAllocation}
+								doneSet={setIsEdnew_itmode}
+								handleFunc={handleEditAllocation}
+								newItem={new_itm}
+								originalAllocation={originalAllocation}
+								fieldType={KEY_ALLOCATION}
+							/>
 						)
 						:					(
 							<>
 								{currency}
 								{'  '}
 								{new_itm?.allocationAmount}
-								<ButtonIcon
-									size="lg"
-									icon={(
-										<IcMEdit
-											height={14}
-											width={14}
-											onClick={() => { setIsEdnew_itmode(true); }}
-										/>
-									)}
+								<IcMEdit
+									height={14}
+									width={14}
+									className={styles.btn}
+									onClick={() => { setIsEdnew_itmode(true); }}
 									themeType="primary"
 								/>
 							</>
