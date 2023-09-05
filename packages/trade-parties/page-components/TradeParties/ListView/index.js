@@ -7,6 +7,8 @@ import useListOrganizationTradePartyDetails from '../../../hooks/useListOrganiza
 import styles from './styles.module.css';
 import tableColumns from './tableColumns';
 
+const ZERO = 0;
+
 function ListView({
 	typeOfSearch,
 	globalSearch,
@@ -43,6 +45,10 @@ function ListView({
 	}, [data]);
 
 	if (loading) return <div>Loading....</div>;
+
+	if (data?.total_count === ZERO) {
+		return <div className={styles.center}><h2>No Results found !!</h2></div>;
+	}
 	return (
 		<div>
 			<Pagination
