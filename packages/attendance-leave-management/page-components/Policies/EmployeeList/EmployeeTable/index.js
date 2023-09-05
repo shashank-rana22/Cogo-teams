@@ -25,6 +25,9 @@ function EmployeeTable({
 			...prev,
 			page: pageNumber,
 		}));
+		setSelectedData({});
+		selectBulk(false);
+		setSelectedIds([]);
 	};
 
 	const handleModal = (val) => {
