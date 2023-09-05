@@ -15,19 +15,20 @@ const handleShipmentClick = ({
 }) => {
 	const { query = '', shipmentType = '' } = params || {};
 
-	const NEW_HASH_URL = `sid=${query}${shipmentType ? `&shipmentType=${shipmentType}` : ''}`
-  + `${range && range !== 'custom' ? `&range=${range}` : ''}`;
+	const newHashUrl = `sid=${query}${shipmentType ? `&shipmentType=${shipmentType}` : ''}
+	${range && range !== 'custom' ? `&range=${range}` : ''}`;
 
-	window.location.hash = NEW_HASH_URL;
+	window.location.hash = newHashUrl;
 
-	const showActiveUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
+	const activeUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
+
 	const {
 		id: userId = '',
 		name = '',
 		email = '',
 		mobile_country_code = '',
 		mobile_number = '',
-	} = showActiveUserChat || {};
+	} = activeUserChat || {};
 
 	const chatData = {
 		user_id                 : userId,

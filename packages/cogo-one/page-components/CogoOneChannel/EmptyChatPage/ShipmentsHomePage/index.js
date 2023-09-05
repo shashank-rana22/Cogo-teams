@@ -10,8 +10,8 @@ import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
 import ShipmentChatModal from '../../../../common/ShipmentChatModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
+import getFormatedPath from '../../../../utils/getFormatedPath';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
-import useGetFormatedPath from '../../../../utils/useGetFormatedPath';
 
 import BookingNoteModal from './BookingNoteModal';
 import Filter from './Filter';
@@ -75,14 +75,18 @@ function ListShipmentCards({
 }
 
 function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
-	const { queryParams = {} } = useGetFormatedPath();
+	const { queryParams = {} } = getFormatedPath();
+
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState(queryParams?.range || 'today');
-	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 	const [showShipmentChat, setShowShipmentChat] = useState({});
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
 	const [showPopover, setShowPopover] = useState('');
 	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
+
+	const defaultFilters = getDefaultFilters({ range });
+
+	const [dateFilters, setDateFilters] = useState({ ...defaultFilters });
 
 	const {
 		listLoading,
