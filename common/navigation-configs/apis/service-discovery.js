@@ -116,7 +116,7 @@ const apis = [
 		api          : 'update_spot_search',
 		access_type  : 'private',
 		feature      : 'search',
-		service_name : 'search',
+		service_name : 'spot_search',
 	},
 	{
 		api          : 'update_organization_billing_address',
