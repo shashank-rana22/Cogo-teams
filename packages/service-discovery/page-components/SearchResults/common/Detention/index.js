@@ -73,6 +73,7 @@ function Detention({
 		refetch,
 		spot_search_id,
 		setShow,
+		defaultValues,
 	});
 
 	const { handleDeleteService, loading: removeLoading = false } = useRemoveDetentionDumurrage({

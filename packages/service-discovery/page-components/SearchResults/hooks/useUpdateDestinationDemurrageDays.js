@@ -10,6 +10,7 @@ const useUpdateDestinationDemurrageDays = ({
 	refetch = () => {},
 	setShow = () => {},
 	spot_search_id = '',
+	defaultValues = {},
 }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 
@@ -28,12 +29,19 @@ const useUpdateDestinationDemurrageDays = ({
 		}
 	});
 
-	const onSubmit = async (values) => {
+	const onSubmit = async (formValues = {}) => {
+		const changedValues = Object.keys(formValues).reduce((acc, key) => {
+			if (Number(formValues[key]) !== Number(defaultValues[key])) {
+				return ({ ...acc, [key]: formValues[key] });
+			}
+			return acc;
+		}, {});
+
 		try {
 			const payload = {
 				spot_search_id                 : query?.spot_search_id || spot_search_id,
 				service                        : 'subsidiary',
-				subsidiary_services_attributes : formatDaysPayload({ services, values }),
+				subsidiary_services_attributes : formatDaysPayload({ services, values: changedValues }),
 			};
 
 			await trigger({ data: payload });
