@@ -42,7 +42,7 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({ outstandingData, outstandingLoading, entityCode }: ServiceCardProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
 		outstandingServiceWise = {},

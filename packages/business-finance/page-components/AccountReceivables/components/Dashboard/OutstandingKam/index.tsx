@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
-import { OutstandingKamColumn } from '../../../configs/OutstandingKamColumns';
+import { outstandingKamColumn } from '../../../configs/OutstandingKamColumns';
 
 import styles from './styles.module.css';
 
@@ -15,7 +15,7 @@ interface OutsatndingKamProps {
 }
 
 function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode }: OutsatndingKamProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +51,7 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode 
 					<div>
 						<div className={styles.table}>
 							<Table
-								columns={OutstandingKamColumn({ entityCode })}
+								columns={outstandingKamColumn({ entityCode, t })}
 								data={kamOutstandingData || [{}]}
 								loading={kamOutstandingLoading}
 							/>

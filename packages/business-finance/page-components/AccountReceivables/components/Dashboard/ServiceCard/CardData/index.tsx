@@ -20,7 +20,7 @@ interface CardDataProps {
 }
 
 function CardData({ tab }: CardDataProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	return (
 		<div className={styles.container}>

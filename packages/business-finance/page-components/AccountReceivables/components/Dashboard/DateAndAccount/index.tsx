@@ -29,7 +29,7 @@ interface DateAndAccountProps {
 }
 
 function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: DateAndAccountProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
 		overallStats = {},

@@ -23,7 +23,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 		return dateA.getTime() - dateB.getTime();
 	});
 
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 

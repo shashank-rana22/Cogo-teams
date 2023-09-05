@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { SALES_FUNNEL_OPTIONS } from '../../../constants';
+import { salesFunnelOptions } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -30,7 +30,7 @@ function SalesFunnel({
 	salesFunnelData, salesFunnelMonth, setSalesFunnelMonth,
 	salesFunnelLoading, entityCode,
 }: SalesFunnelProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
 		draftInvoicesCount = '',
@@ -47,25 +47,25 @@ function SalesFunnel({
 	const salesFunnel = [
 		{
 			id         : 1,
-			name       : 'Draft',
+			name       : t('draft'),
 			count      : draftInvoicesCount || 0,
 			percentage : draftToFinanceAcceptedPercentage || 0,
 		},
 		{
 			id         : 2,
-			name       : 'Finance Accepted',
+			name       : t('finance_accepted'),
 			count      : financeAcceptedInvoiceCount || 0,
 			percentage : financeToIrnPercentage || 0,
 		},
 		{
 			id         : 3,
-			name       : `${irnLabel} Generated`,
+			name       : `${irnLabel} ${t('generated')}`,
 			count      : irnGeneratedInvoicesCount || 0,
 			percentage : settledPercentage || 0,
 		},
 		{
 			id    : 4,
-			name  : 'Settled',
+			name  : t('settled'),
 			count : settledInvoicesCount || 0,
 		},
 	];
@@ -107,7 +107,7 @@ function SalesFunnel({
 						value={salesFunnelMonth}
 						onChange={(val:string) => onChange(val)}
 						placeholder={t('by_month_placeholder')}
-						options={SALES_FUNNEL_OPTIONS}
+						options={salesFunnelOptions(t)}
 						isClearable
 					/>
 				</div>

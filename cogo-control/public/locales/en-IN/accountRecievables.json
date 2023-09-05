@@ -41,5 +41,20 @@
     "customers": "Customers",
     "on_account_payment": "On Account Payment",
     "total_outstanding": "Total Outstanding",
-    "entity": "Entity"
+    "entity": "Entity",
+    "select_date_placeholder": "Select Date",
+    "jan_month": "January",
+    "feb_month": "February",
+    "mar_month": "March",
+    "apr_month": "April",
+    "may_month": "May",
+    "jun_month": "June",
+    "jul_month": "July",
+    "aug_month": "August",
+    "sep_month": "September",
+    "oct_month": "October",
+    "nov_month": "November",
+    "dec_month": "December",
+    "KAM_name_column": "KAM Name",
+    "outstanding_amount_column": "Outstanding Amt."
 }

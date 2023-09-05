@@ -21,7 +21,7 @@ function SalesComponent({
 }) {
 	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
 
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { SALES_INVOICE = [] } = dailyStatsData || {};
 
@@ -82,15 +82,16 @@ function SalesComponent({
 		return 'dd MMM YYYY';
 	};
 
-	const getData = () => (
-		<div className={styles.container}>
+	function GetData() {
+		return (
+			<div className={styles.container}>
 
-			<table className={styles.table_style}>
-				<tr>
-					<td>{' '}</td>
-					{[1, 2, 3].map((val) => (
-						<td className={styles.styled_date} key={val}>
-							{
+				<table className={styles.table_style}>
+					<tr>
+						<td>{' '}</td>
+						{[1, 2, 3].map((val) => (
+							<td className={styles.styled_date} key={val}>
+								{
 										format(
 											DURATIONS[val - 1],
 											yearFormat(),
@@ -98,37 +99,37 @@ function SalesComponent({
 											false,
 										)
                     }
+							</td>
+						))}
+
+						<td className={styles.styled_date_last}>
+							{	format(
+								DURATIONS[3],
+								yearFormat(),
+								{},
+								false,
+							)}
+
 						</td>
-					))}
+					</tr>
+					<tr className={styles.credit_note}>
+						<td>
 
-					<td className={styles.styled_date_last}>
-						{	format(
-							DURATIONS[3],
-							yearFormat(),
-							{},
-							false,
-						)}
+							<div>
+								{t('sales')}
+							</div>
+							<div className={styles.credit_note_text}>
+								{t('credit_notes')}
+								{' '}
+								(-)
+							</div>
+						</td>
+						{[1, 2, 3, 4].map((val) => (
 
-					</td>
-				</tr>
-				<tr className={styles.credit_note}>
-					<td>
-
-						<div>
-							{t('sales')}
-						</div>
-						<div className={styles.credit_note_text}>
-							{t('credit_notes')}
-							{' '}
-							(-)
-						</div>
-					</td>
-					{[1, 2, 3, 4].map((val) => (
-
-						<td key={val}>
-							{' '}
-							<div className={styles.styled_credit}>
-								{
+							<td key={val}>
+								{' '}
+								<div className={styles.styled_credit}>
+									{
 								formatAmount({
 									amount   : getDataFromDuration(INVOICE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
 									currency : getDataFromDuration(
@@ -142,64 +143,66 @@ function SalesComponent({
 									},
 								})
 }
-							</div>
-							<div className={styles.styled_credit}>
+								</div>
+								<div className={styles.styled_credit}>
 
-								{' '}
+									{' '}
 
-								{formatAmount({
-									amount:
+									{formatAmount({
+										amount:
 									getDataFromDuration(CREDIT_NOTE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
-									currency: getDataFromDuration(
-										CREDIT_NOTE_ARRAY,
-										DURATIONS[val - 1],
-									)?.[0]?.dashboardCurrency || currency,
-									options: {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								})}
-								{' '}
-								<span className={styles.credit_note_text}>(-)</span>
-							</div>
+										currency: getDataFromDuration(
+											CREDIT_NOTE_ARRAY,
+											DURATIONS[val - 1],
+										)?.[0]?.dashboardCurrency || currency,
+										options: {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 0,
+										},
+									})}
+									{' '}
+									<span className={styles.credit_note_text}>(-)</span>
+								</div>
 
+							</td>
+
+						))}
+					</tr>
+					<tr>
+						<td>
+							{t('revenue')}
 						</td>
 
-					))}
-				</tr>
-				<tr>
-					<td>
-						{t('revenue')}
-					</td>
+						{[1, 2, 3, 4].map((val) => (
 
-					{[1, 2, 3, 4].map((val) => (
+							<td key={val}>
 
-						<td key={val}>
+								<span className={styles.styled_amount}>
 
-							<span className={styles.styled_amount}>
+									{formatAmount({
+										amount:
+										getDataFromDuration(REVENUE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
+										currency: getDataFromDuration(
+											REVENUE_ARRAY,
+											DURATIONS[val - 1],
+										)?.[0]?.dashboardCurrency || currency,
+										options: {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 0,
+										},
+									})}
+								</span>
 
-								{formatAmount({
-									amount   : getDataFromDuration(REVENUE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
-									currency : getDataFromDuration(
-										REVENUE_ARRAY,
-										DURATIONS[val - 1],
-									)?.[0]?.dashboardCurrency || currency,
-									options: {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								})}
-							</span>
+							</td>
+						))}
 
-						</td>
-					))}
-
-				</tr>
-			</table>
-		</div>
-	);
+					</tr>
+				</table>
+			</div>
+		);
+	}
 	if (loading) {
 		return (
 			<div className={styles.place}>
@@ -223,7 +226,7 @@ function SalesComponent({
 						showCount={false}
 					/>
 				</div>
-			) : getData()}
+			) : GetData()}
 		</div>
 	);
 }

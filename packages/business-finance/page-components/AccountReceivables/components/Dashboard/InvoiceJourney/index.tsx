@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { SALES_FUNNEL_OPTIONS } from '../../../constants';
+import { salesFunnelOptions } from '../../../constants';
 import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
@@ -15,7 +15,7 @@ interface InvoiceJourneyProps {
 }
 
 function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
 		journeyData, journeyLoading, dateFilter,
@@ -126,7 +126,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 							value={dateFilter.month}
 							onChange={(val:string) => onChange(val, 'month')}
 							placeholder={t('by_month_placeholder')}
-							options={SALES_FUNNEL_OPTIONS}
+							options={salesFunnelOptions(t)}
 							isClearable
 						/>
 					</div>

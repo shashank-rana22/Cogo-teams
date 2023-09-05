@@ -71,7 +71,7 @@ function TabData({
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const onChange = (view:string) => {
 		setSubActiveTab(view);

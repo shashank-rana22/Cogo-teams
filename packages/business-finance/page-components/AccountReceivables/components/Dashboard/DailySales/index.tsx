@@ -22,7 +22,7 @@ interface DailySalesProps {
 }
 
 function DailySales({ filterValue, entityCode }: DailySalesProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const [filters, setFilters] = useState<ObjectProps>({});
 	const [subActiveTab, setSubActiveTab] = useState<string>('SALES_INVOICE');
@@ -97,7 +97,7 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 					<Filter
 						filters={filters}
 						setFilters={setFilters}
-						controls={filterControls(toggleData, disabledConfig, filters)}
+						controls={filterControls(toggleData, disabledConfig, filters, t)}
 					/>
 				</div>
 			</div>

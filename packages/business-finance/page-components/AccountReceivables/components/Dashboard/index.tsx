@@ -16,7 +16,7 @@ import ServiceCard from './ServiceCard';
 import styles from './styles.module.css';
 
 function Dashboard({ entityCode }) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
 		dashboard,

@@ -8,7 +8,7 @@ interface ItemProps {
 	entityCode:string;
 }
 function Entity({ entityCode }:ItemProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { icon : Icon } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 

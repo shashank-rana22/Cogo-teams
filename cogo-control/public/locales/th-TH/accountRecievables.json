@@ -41,5 +41,20 @@
     "customers": "ลูกค้า",
     "on_account_payment": "การชำระเงินบนบัญชี",
     "total_outstanding": "ยอดค้างชำระทั้งหมด",
-    "entity": "หน่วยงาน"
+    "entity": "หน่วยงาน",
+    "select_date_placeholder": "เลือกวันที่",
+    "jan_month": "มกราคม",
+    "feb_month": "กุมภาพันธ์",
+    "mar_month": "มีนาคม",
+    "apr_month": "เมษายน",
+    "may_month": "พฤษภาคม",
+    "jun_month": "มิถุนายน",
+    "jul_month": "กรกฎาคม",
+    "aug_month": "สิงหาคม",
+    "sep_month": "กันยายน",
+    "oct_month": "ตุลาคม",
+    "nov_month": "พฤศจิกายน",
+    "dec_month": "ธันวาคม",
+    "KAM_name_column": "KAM ชื่อ",
+    "outstanding_amount_column": "จำนวนเงินที่โดดเด่น"
 }

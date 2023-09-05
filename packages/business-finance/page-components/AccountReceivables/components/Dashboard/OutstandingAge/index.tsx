@@ -22,7 +22,7 @@ const MARGIN = {
 };
 
 function OutstandingAge({ data, loading }: OutsatndingProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const outstandingData = Object.keys(data).map((key) => data[key]);
 

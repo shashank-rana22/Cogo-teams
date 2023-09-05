@@ -33,7 +33,7 @@ function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }: DailySalesProps) {
-	const { t } = useTranslation(['accountRecievables']);
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const [params, onChangeParams] = useState({
 		quarterView : 'normalView',
