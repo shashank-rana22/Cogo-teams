@@ -2573,8 +2573,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/supply-allocation',
 					type          : 'link',
 					possible_apis : apis.supply_allocation,
-
-					main_apis: [],
+					main_apis     : [],
 				},
 				{
 					key   : 'forecast-demand_forecast',
@@ -2584,8 +2583,24 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/demand-forecast',
 					type          : 'link',
 					possible_apis : apis.demand_forecast,
-
-					main_apis: [],
+					main_apis     : [],
+				},
+			],
+		},
+		performance_and_incentives: {
+			key         : 'performance_and_incentives',
+			title       : t('common:performance_and_incentives'),
+			isSubNavs   : true,
+			module_type : 'dashboards',
+			icon        : IcMIncentives,
+			options     : [
+				{
+					key           : 'performance_and_incentives-scoring_configurations',
+					title         : t('common:scoring_configurations'),
+					href          : '/v2/incentives/scoring-configurations',
+					as            : '/v2/incentives/scoring-configurations',
+					type          : 'link',
+					possible_apis : apis.socring_configurations,
 				},
 			],
 		},

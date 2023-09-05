@@ -254,5 +254,7 @@
     "switching_profile": "Chuyển hồ sơ",
     "forecast": "Dự báo",
     "supply_allocation": "Phân bổ nguồn cung cấp",
-    "demand_forecast": "Dự báo nhu cầu"
+    "demand_forecast": "Dự báo nhu cầu",
+    "performance_and_incentives": "Hiệu suất và ưu đãi",
+    "scoring_configurations": "Cấu hình tính điểm"
 }

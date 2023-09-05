@@ -42,6 +42,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
+import performanceAndIncentives from './config/performance-and-incentives';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
@@ -153,6 +154,7 @@ const routeConfig = {
 	...centralisedCustomerService,
 	...resource,
 	...supplyTools,
+	...performanceAndIncentives,
 };
 
 export default routeConfig;

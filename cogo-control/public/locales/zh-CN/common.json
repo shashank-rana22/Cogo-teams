@@ -254,5 +254,7 @@
     "switching_profile": "切换配置文件",
     "forecast": "预测",
     "supply_allocation": "供应分配",
-    "demand_forecast": "需求预测"
+    "demand_forecast": "需求预测",
+    "performance_and_incentives": "绩效与激励",
+    "scoring_configurations": "评分配置"
 }

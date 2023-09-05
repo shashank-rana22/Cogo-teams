@@ -39,6 +39,7 @@ import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
+import performance_and_incentives from './performance-and-incentives-apis';
 import performance_management from './performance-managment-apis';
 import poc from './poc-apis';
 import pms from './port-management';
@@ -171,6 +172,7 @@ const apis = {
 	centralised_customer_service,
 	...authApis,
 	ssr,
+	...performance_and_incentives,
 };
 
 export default apis;
