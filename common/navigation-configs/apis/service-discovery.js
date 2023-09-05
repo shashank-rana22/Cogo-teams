@@ -382,6 +382,12 @@ const apis = [
 		service_name : 'checkout',
 		feature      : 'checkout',
 	},
+	{
+		api          : 'create_planet_search_history',
+		access_type  : 'private',
+		service_name : 'location',
+		feature      : 'search',
+	},
 ];
 
 export default apis;
