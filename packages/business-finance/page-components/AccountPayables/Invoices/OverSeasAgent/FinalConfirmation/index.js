@@ -16,12 +16,11 @@ const MAX_LENGTH_MINUS = 1;
 function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {} }) {
 	const { push } = useRouter();
 
+	const PAYMENT_INITIATED = 'PAYMENT_INITIATED';
 	const { data, loadingList, selectBank, loadingSaveBank } = useListTaggedInvoices();
 	const [selectBankShow, setSelectBankShow] = useState(false);
 	const [bankObject, setBankObject] = useState({});
-
 	const { bankDetails } = useGetBankList();
-
 	const { documents = '' } = data || {};
 
 	const getDate = (date) => formatDate({
@@ -35,8 +34,6 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 		const callback = () => setSelectBankShow(true) || setShowSaveAsDraft(true);
 		selectBank(bankObject?.id, callback);
 	};
-
-	const PAYMENT_INITIATED = 'PAYMENT_INITIATED';
 
 	const handleSavePayrun = () => {
 		push(
@@ -85,7 +82,6 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 					return item.documentUrl.map((doc) => {
 						const parts = doc.split('/');
 						const lastPart = parts[parts.length - MAX_LENGTH_MINUS];
-
 						return (
 							<div className={styles.document_sub_card} key={item.docName}>
 								<div className={styles.pdf_container}>
@@ -119,12 +115,7 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 										View
 									</Button>
 
-									<Button
-										onClick={() => saveAs(doc)}
-										themeType="linkUi"
-									>
-										Download
-									</Button>
+									<Button onClick={() => saveAs(doc)} themeType="linkUi">Download</Button>
 								</div>
 							</div>
 						);
@@ -219,18 +210,14 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 								placeholder="Select bank"
 								options={bankDetails}
 								value={bankObject?.value}
-								onChange={(val, obj) => {
-									setBankObject(obj);
-								}}
+								onChange={(val, obj) => { setBankObject(obj); }}
 							/>
 						</div>
 
 						<Button
 							size="lg"
 							themeType="accent"
-							onClick={() => {
-								handleClick();
-							}}
+							onClick={() => { handleClick(); }}
 							disabled={loadingSaveBank || selectBankShow}
 						>
 							{saveBankButtonValue}
@@ -243,10 +230,7 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 				<div className={styles.btn}>
 					<Button
 						size="md"
-						onClick={() => {
-							setActive('invoice_selection');
-							handleSavePayrun();
-						}}
+						onClick={() => { setActive('invoice_selection'); handleSavePayrun(); }}
 						disabled={!selectBankShow || loadingSaveBank}
 					>
 						Save Pay Run
