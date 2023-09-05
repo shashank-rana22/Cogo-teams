@@ -2,6 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import {
 	useForm,
 } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -21,6 +22,9 @@ function UpdateRefundModal({
 	setUpdateRefundModal = () => {},
 }) {
 	const { listEntities = {}, entitiesLoading = false } = useGetEntities();
+	const { user_id } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
+	}));
 
 	const [billingParty, setBillingParty] = useState({});
 
@@ -53,6 +57,7 @@ function UpdateRefundModal({
 			billingParty,
 			updateRefundModal,
 			formValues,
+			user_id,
 		});
 		apiTrigger({ payload });
 	};

@@ -3,6 +3,7 @@ const getPaymentAccountsPayload = ({
 	billingParty = {},
 	updateRefundModal = {},
 	formValues = {},
+	user_id = '',
 }) => {
 	const {
 		advanceDocumentSellerAddress = {},
@@ -43,6 +44,8 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentId,
 		paymentDocUrl     : upload?.finalUrl || upload,
 		serviceType       : shipmentType.toUpperCase(),
+		createdBy         : user_id,
+		updatedBy         : user_id,
 	};
 };
 
