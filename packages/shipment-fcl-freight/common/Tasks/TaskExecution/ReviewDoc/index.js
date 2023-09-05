@@ -148,13 +148,13 @@ function ReviewDoc({
 					</div>
 					<div className={styles.action_buttons}>
 						<Button
-							onClick={() => onClose()}
+							onClick={onClose}
 							themeType="secondary"
 							disabled={loading}
 						>
 							Cancel
 						</Button>
-						<Button onClick={() => handleSubmit()}>
+						<Button onClick={handleSubmit}>
 							Submit
 						</Button>
 					</div>

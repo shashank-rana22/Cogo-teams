@@ -35,7 +35,7 @@ function AmendModal({
 
 				<Button
 					themeType="primary"
-					onClick={() => handleFinalSubmit()}
+					onClick={handleFinalSubmit}
 					loading={taskUpdateLoading}
 					disabled={taskUpdateLoading}
 				>

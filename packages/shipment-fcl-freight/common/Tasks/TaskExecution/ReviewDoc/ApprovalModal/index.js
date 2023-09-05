@@ -34,7 +34,7 @@ function ApprovalModal({
 
 				<Button
 					themeType="primary"
-					onClick={() => handleFinalApprove()}
+					onClick={handleFinalApprove}
 					loading={taskUpdateLoading}
 					disabled={taskUpdateLoading}
 				>
