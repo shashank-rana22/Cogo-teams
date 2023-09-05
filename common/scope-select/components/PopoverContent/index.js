@@ -5,8 +5,10 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const commonProps = {	initialCall: true };
+
 export default function PopoverContent({
-	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent,userId
+	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent, userId,
 }) {
 	const { scopes, viewTypes } = scopeData;
 	const defaultValues = {
@@ -109,12 +111,14 @@ export default function PopoverContent({
 						asyncKey="partner_users"
 						params={{
 							filters: {
-							reporting_manager_id:userId
+								reporting_manager_id: userId,
 							},
-						status:'active'}}
-						filters={{reporting_manager_id:userId}}
+							status: 'active',
+						}}
+						filters={{ reporting_manager_id: userId }}
 						isClearable
 						valueKey="user_id"
+						{...commonProps}
 					/>
 				</>
 			) : null }

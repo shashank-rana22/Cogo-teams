@@ -25,8 +25,7 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 					params: {
 						filters: {
 							...filters,
-							...(selected_agent_id ?
-								{ selected_agent_id } : {})
+							supply_agent_id: selected_agent_id || undefined,
 						},
 						sort_by_cluster: true,
 						page,
@@ -36,7 +35,7 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
-		[page, trigger, filters],
+		[page, trigger, filters, selected_agent_id],
 	);
 
 	useEffect(() => {
