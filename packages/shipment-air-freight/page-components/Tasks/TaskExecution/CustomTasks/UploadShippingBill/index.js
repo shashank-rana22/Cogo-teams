@@ -12,17 +12,20 @@ import { uploadChecklistFields } from './configs/upload-checklist-fields';
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
-function UploadChecklist({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
+function UploadShippingBill({ shipment_data = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { fields = [] } = uploadChecklistFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
 
 	const DEFAULT_FILTERS = {
-		document_type : 'invoice',
+		document_type : 'checklist',
 		shipment_id   : shipment_data?.id,
 	};
 
-	const { data = {}, loading = false } = useListShipmentDocuments({ defaultFilters: DEFAULT_FILTERS });
+	const { data = {}, loading = false } = useListShipmentDocuments({
+		defaultFilters : DEFAULT_FILTERS,
+		defaultParams  : { page_limit: 100 },
+	});
 
 	const { loading:updateLoading, apiTrigger } = useUpdateTask({ refetch });
 
@@ -71,21 +74,20 @@ function UploadChecklist({ shipment_data = {}, task = {}, refetch = () => {}, on
 		handleUploadDoc: (singleItem) => (
 			<UploadDocument
 				singleItem={singleItem}
+				invoiceData={invoiceData}
 				setInvoiceData={setInvoiceData}
 			/>
 		),
 	};
 
 	const payload = {
-		id   : task?.id,
-		data : {
-			documents: invoiceData,
-		},
+		shipment_id   : shipment_data?.id,
+		document_data : [...invoiceData],
 	};
 
 	const handleFormSubmit = () => {
-		if (payload?.data?.documents?.length !== data?.total_count) {
-			Toast.error('Please upload all the documents');
+		if (payload?.document_data?.length !== data?.total_count) {
+			Toast.error('Please fill all the details');
 		} else {
 			apiTrigger(payload).then(() => {
 				onCancel();
@@ -113,4 +115,4 @@ function UploadChecklist({ shipment_data = {}, task = {}, refetch = () => {}, on
 	);
 }
 
-export default UploadChecklist;
+export default UploadShippingBill;

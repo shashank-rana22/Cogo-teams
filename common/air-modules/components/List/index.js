@@ -42,10 +42,9 @@ function List({
 	setPage = () => {},
 	functions = {},
 }) {
-	console.log('data', listData);
 	const [isMobile, setIsMobile] = useState(false);
 
-	const { list = [], total_count:totalCount } = listData;
+	const { list = [], total_count:totalCount, page_limit:pageLimit } = listData;
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -75,7 +74,7 @@ function List({
 					functions={functions}
 					isMobile={isMobile}
 				/>
-				{!loading && !isEmpty(list) ? (
+				{!loading && !isEmpty(list) && pageLimit < PAGE_SIZE ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

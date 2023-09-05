@@ -10,9 +10,9 @@ function UploadDocument({ singleItem = {}, setInvoiceData = () => {} }) {
 		if (!isEmpty(uploadDocument)) {
 			setInvoiceData((prev) => [...prev,
 				{
-					file_name     : 'Invoice Document',
+					file_name     : 'Checklist Document',
 					document_url  : uploadDocument,
-					document_type : 'invoice',
+					document_type : 'checklist',
 					data          : { ...itemData, checklist_document_url: uploadDocument },
 				}]);
 		}
