@@ -12,7 +12,7 @@
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
         "checked_show_my_tasks":true,
-        "is_task_assigned":false
+        "is_task_assigned":true
     },
     "documents":{
         "tab_title":"Documents",
