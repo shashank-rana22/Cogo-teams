@@ -47,6 +47,23 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 		},
 	);
 
+	const submitApproval = async (status) => {
+		if (status === 'active') {
+			await finalApproval('active');
+			Toast.success('Updated');
+		} else if (status === 'inactive') {
+			await finalApproval('inactive');
+			Toast.success('Saved');
+		} else if (status === 'skip') {
+			await updateOrganizationService();
+			Toast.success('Updated');
+		}
+		push(
+			'/governance-manager/',
+			'/governance-manager/',
+		);
+	};
+
 	return (
 		<div className={styles.parent}>
 			<div className={styles.heading}>
@@ -105,14 +122,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 					{' '}
 					<Button
 						style={{ fontWeight: 600 }}
-						onClick={async () => {
-							await updateOrganizationService();
-							Toast.success('Updated');
-							push(
-								'/governance-manager/',
-								'/governance-manager/',
-							);
-						}}
+						onClick={() => { submitApproval('skip'); }}
 					>
 						{t('supplier_page_contract_sla_submit_and_next_button_label')}
 
@@ -131,14 +141,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 					<div className={styles.side_line_buttons}>
 						<Button
 							style={{ fontWeight: 600 }}
-							onClick={async () => {
-								await finalApproval('active');
-								Toast.success('Updated');
-								push(
-									'/governance-manager/',
-									'/governance-manager/',
-								);
-							}}
+							onClick={() => { submitApproval('active'); }}
 						>
 							{t('supplier_page_contract_sla_approve_button_label')}
 
@@ -147,14 +150,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 						<Button
 							themeType="secondary"
 							style={{ fontWeight: 600 }}
-							onClick={async () => {
-								await finalApproval('inactive');
-								Toast.success('Saved');
-								push(
-									'/governance-manager/',
-									'/governance-manager/',
-								);
-							}}
+							onClick={() => { submitApproval('inactive'); }}
 						>
 							{t('supplier_page_contract_sla_reject_button_label')}
 

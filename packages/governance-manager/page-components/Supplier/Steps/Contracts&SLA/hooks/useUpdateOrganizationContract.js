@@ -7,7 +7,6 @@ function useUpdateOrganizationContract({ item, id, updatedValue, getOrganization
 		url    : '/update_organization_service_contract',
 	}, { manual: true });
 	const updateOrganizationContract = async (state) => {
-		console.log(item?.variable_details, 'varrr', state);
 		try {
 			await trigger({
 				params: {

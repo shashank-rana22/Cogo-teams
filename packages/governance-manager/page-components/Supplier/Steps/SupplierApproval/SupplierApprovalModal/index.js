@@ -45,23 +45,14 @@ function SupplierApprovalModal({
 	const onClose = () => {
 		setOpen(null);
 	};
-	const handleVerify = () => {
-		if (open === 'need_analysis_report') {
-			updateOrganizationServiceExpertiseManagerStatus({ verification_status: 'verified' });
-		} else if (open === 'market_feedback_report') {
-			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'verified' });
-		} else if (open === 'evaluation_paramenter_report') {
-			createOrganizationEvaluation({ verification_status: 'verified' });
-		}
-	};
-	const handleReject = () => {
-		if (open === 'need_analysis_report') {
-			updateOrganizationServiceExpertiseManagerStatus({ verification_status: 'rejected' });
-		} else if (open === 'market_feedback_report') {
-			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'rejected' });
-		} else if (open === 'evaluation_paramenter_report') {
-			createOrganizationEvaluation({ verification_status: 'rejected' });
-		}
+
+	const submitStatus = (status) => {
+		const func = {
+			need_analysis_report         : updateOrganizationServiceExpertiseManagerStatus,
+			market_feedback_report       : updateOrganizationMarketFeedbackVerificationStatus,
+			evaluation_paramenter_report : createOrganizationEvaluation,
+		};
+		func({ verification_status: status });
 	};
 
 	return (
@@ -93,10 +84,10 @@ function SupplierApprovalModal({
 				}[open]}
 			</Modal.Body>
 			<Modal.Footer style={{ gap: '15px' }}>
-				<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>
+				<Button onClick={() => submitStatus('verified')} style={{ backgroundColor: '#ABCD62' }}>
 					{t('supplier_page_supplier_approval_modal_verify_button_label')}
 				</Button>
-				<Button onClick={handleReject}>
+				<Button onClick={() => { submitStatus('rejected'); }}>
 					{t('supplier_page_supplier_approval_modal_reject_button_label')}
 				</Button>
 			</Modal.Footer>

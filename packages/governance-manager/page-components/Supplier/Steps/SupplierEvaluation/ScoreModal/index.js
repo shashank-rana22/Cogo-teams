@@ -10,7 +10,7 @@ function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails 
 	const ZERO = GLOBAL_CONSTANTS.zeroth_index;
 	const [yourScore, setYourScore] = useState(ZERO);
 	const [reason, setReason] = useState('');
-	console.log(show, 'show');
+
 	const {
 		updateOrganizationEvaluationTask,
 	} = useUpdateOrganizationEvaluationTask({
@@ -23,6 +23,12 @@ function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails 
 
 	const onClose = () => {
 		setShow(null);
+	};
+
+	const checkScore = (value) => {
+		if (value <= show?.total_score) {
+			setYourScore(value);
+		} else { Toast.error(t('supplier_page_supplier_evaluation_table_score_limit')); }
 	};
 
 	useEffect(() => {
@@ -50,9 +56,7 @@ function ScoreModal({ t, show = null, setShow, getOrganizationEvaluationDetails 
 								size="sm"
 								value={yourScore}
 								onChange={(value) => {
-									if (value <= show?.total_score) {
-										setYourScore(value);
-									} else { Toast.error(t('supplier_page_supplier_evaluation_table_score_limit')); }
+									checkScore(value);
 								}}
 								style={{ width: '132px', height: '32 px' }}
 								placeholder={t('supplier_page_supplier_evaluation_table_score_placeholder')}

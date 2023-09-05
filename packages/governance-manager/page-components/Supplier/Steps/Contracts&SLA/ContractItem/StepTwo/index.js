@@ -24,6 +24,20 @@ function StepTwo({
 		getOrganizationContract,
 	});
 
+	const toggleCheckbox = (val) => {
+		if (val) {
+			setNegotiationIds(
+				[...negotiationIds, item?.config_id],
+			);
+		} else {
+			setNegotiationIds(
+				(prev) => prev.filter(
+					(i) => i !== item?.config_id,
+				),
+			);
+		}
+	};
+
 	return (
 		<div key={item?.config_id}>
 			<div className={styles.box_layout}>
@@ -34,17 +48,7 @@ function StepTwo({
 						<Checkbox
 							style={{ paddingLeft: '0px' }}
 							onChange={(e) => {
-								if (e.target.checked) {
-									setNegotiationIds(
-										[...negotiationIds, item?.config_id],
-									);
-								} else {
-									setNegotiationIds(
-										(prev) => prev.filter(
-											(i) => i !== item?.config_id,
-										),
-									);
-								}
+								toggleCheckbox(e.target.value);
 							}}
 						/>
 					)

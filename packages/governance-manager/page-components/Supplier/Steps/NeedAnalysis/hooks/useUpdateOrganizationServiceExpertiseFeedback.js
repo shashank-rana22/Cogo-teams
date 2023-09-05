@@ -24,7 +24,7 @@ function useUpdateOrganizationServiceExpertiseFeedback({
 					},
 				});
 				getOrganizationExpertiseSuppliers();
-				setShow('');
+				setShow(null);
 			}
 		} catch (err) {
 			console.log(err);
