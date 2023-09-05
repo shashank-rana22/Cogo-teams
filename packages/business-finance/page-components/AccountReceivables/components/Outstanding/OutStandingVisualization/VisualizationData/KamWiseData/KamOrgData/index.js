@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useGetQueryBuilder from '../../../../../../hooks/useGetQueryBuilder';
+import EmptyStateOutStanding from '../../../../EmptyStateOutStanding';
 import ListItem from '../ListItem';
 
 import styles from './styles.module.css';
@@ -35,7 +36,8 @@ function KamOrgData({
 
 	if (!loading && isEmpty(list || [])) {
 		return (
-			<h2>NO DATA FOUND</h2>
+
+			<EmptyStateOutStanding width={400} height={200} />
 		);
 	}
 

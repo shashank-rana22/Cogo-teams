@@ -22,6 +22,7 @@ const rawControls = (
 		type             : 'edit_service_charges',
 		name             : `${charge?.service_id}:${index}`,
 		service_name     : charge?.service_type,
+		shipment_id      : charge?.detail?.shipment_id,
 		showHeader       : true,
 		showButtons      : true,
 		showDeleteButton : isRoleAllowed,
