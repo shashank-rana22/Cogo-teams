@@ -70,8 +70,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 					{/* TODO (anmol): Job Closed Div */}
 					{shipment_data?.is_job_closed ? (
-						<div className={styles.job_close_container}>
-							<Pill className={styles.job_close_pill} size="lg">Operationally Closed</Pill>
+						<div className={styles.job_closed_container}>
+							<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
 							<Button
 								className={styles.job_undo_button}
 								themeType="link"

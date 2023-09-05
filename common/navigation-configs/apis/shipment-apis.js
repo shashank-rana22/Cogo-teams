@@ -1779,6 +1779,11 @@ const apis = [
 		access_type  : 'public',
 		service_name : 'fcl_freight_rate',
 	},
+	{
+		api          : 'incident',
+		access_type  : 'private',
+		service_name : 'incident-management',
+	},
 ];
 
 export default apis;

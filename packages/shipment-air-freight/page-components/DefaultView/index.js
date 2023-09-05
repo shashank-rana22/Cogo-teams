@@ -1,6 +1,6 @@
 import { RaiseAlarm, RaiseAlarmCard } from '@cogoport/air-modules/components/RaiseAlarm';
 import useGetShipmentFaultAlarmDescription from '@cogoport/air-modules/hooks/useGetShipmentFaultAlarmDescription';
-import { Tabs, TabPanel, Toggle, Button, cl } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Button, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
@@ -9,6 +9,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
+import ReOpenJob from '../../commons/ReOpenJob';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -30,7 +31,13 @@ const TAB_MAPPING = {
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
 
-function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = () => {}, isGettingShipment = false }) {
+function HandleRaiseContainer({
+	shipment_data = {},
+	alarmId = '',
+	setAlarmId = () => { },
+	isGettingShipment = false,
+	setReOpenJobModal = () => { },
+}) {
 	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
 
 	if (!shipment_data?.is_job_closed && isTrue) {
@@ -47,8 +54,21 @@ function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = (
 
 	// TODO (anmol): Job Closed Div
 	if (shipment_data?.is_job_closed) {
-		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
+		return (
+			<div className={styles.job_closed_container}>
+				<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
+				<Button
+					className={styles.job_undo_button}
+					themeType="link"
+					size="md"
+					onClick={() => setReOpenJobModal(true)}
+				>
+					Undo
+				</Button>
+			</div>
+		);
 	}
+
 	return null;
 }
 
@@ -66,6 +86,7 @@ function DefaultView() {
 
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
+	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
@@ -140,6 +161,7 @@ function DefaultView() {
 						alarmId={alarmId}
 						setAlarmId={setAlarmId}
 						isGettingShipment={isGettingShipment}
+						setReOpenJobModal={setReOpenJobModal}
 					/>
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
@@ -176,6 +198,14 @@ function DefaultView() {
 					))}
 				</Tabs>
 			</div>
+
+			{reOpenJobModal ? (
+				<ReOpenJob
+					showModal={reOpenJobModal}
+					setShowModal={setReOpenJobModal}
+					shipmentData={shipment_data}
+				/>
+			) : null}
 		</div>
 	);
 }

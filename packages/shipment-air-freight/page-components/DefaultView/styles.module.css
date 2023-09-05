@@ -63,12 +63,27 @@
 	justify-content: flex-end;
 }
 
-.job_closed {
-	padding: 8px 14px;
+.job_closed_container {
+	display: flex;
+	margin-right: 16px;
+}
+
+.job_closed_pill {
+	font-weight: 600;
+	background-color: var(--color-tertiary-success-green-3);
+
+	:global {
+		.ui_pill_text {
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
+}
+
+.job_undo_button {
 	margin-left: 8px;
-	font-size: var(--font-size-xl);
-	font-weight: 500;
-	color: var(--color-primary-error-red-3);
-	background: var(--color-primary-yellow-5);
-	border-radius: 4px;
+	font-weight: 600;
+
+	& span {
+		color: var(--color-primary-error-red-2);
+	}
 }
