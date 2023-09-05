@@ -1,6 +1,28 @@
+import { IcMFtick } from '@cogoport/icons-react';
+
+import styles from './styles.module.css';
+
 const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
 const displayServiceType = ['ftl_freight', 'haulage_freight'];
 const SPLIT_SERVICE_TEXT = 2;
+
+const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => {
+	const code = option?.cogo_entity?.entity_code;
+	const verified = option?.kyc_status === 'verified';
+
+	return ({
+		...option,
+		business_name: (
+			<div className={styles.async_label_container}>
+				<div>
+					<div>{option?.business_name}</div>
+					<div className={styles.under_text}>{code ? `Entity Code : ${code}` : null}</div>
+				</div>
+				{verified && <IcMFtick fill="#67C676" height={24} width={24} />}
+			</div>
+		),
+	});
+});
 
 export default function getControls({
 	primary_service_type = '',
@@ -30,8 +52,9 @@ export default function getControls({
 					service      : services,
 				},
 			},
-			size  : 'sm',
-			rules : { required: 'Service Provider is required' },
+			size               : 'sm',
+			rules              : { required: 'Service Provider is required' },
+			getModifiedOptions : handleModifiedOptions,
 		},
 	];
 
