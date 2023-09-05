@@ -34,7 +34,7 @@ const useDeleteRateJob = (service) => {
 					id,
 					origin_airport_id      : data?.origin_airport,
 					destination_airport_id : data?.destination_airport,
-					commodity              : data?.commodity,
+					commodity              : rate_id ? data?.commodity : undefined,
 					airline_id             : data?.air_line,
 					operation_type         : data?.flight_operation_type,
 					currency               : data?.currency,

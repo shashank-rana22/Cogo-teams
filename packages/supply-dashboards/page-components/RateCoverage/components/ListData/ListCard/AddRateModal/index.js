@@ -7,6 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import React from 'react';
 
+import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import {
 	flighOperationTypeOptions,
 	PackagingTypeOptions, handlingtype,
@@ -27,6 +28,9 @@ function AddRateModal({
 	filter = {},
 	data = {},
 }) {
+	const mainPortOptions1 = useGetMainPortsOptions({ location_id: data?.origin_port?.id });
+	const mainPortOptions2 = useGetMainPortsOptions({ location_id: data?.destination_port?.id });
+
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -72,7 +76,14 @@ function AddRateModal({
 	);
 
 	const FCL_CONTROLS = fclControls({
-		data, containerSizes, containerTypes, options, listShippingLineOptions, fclCommodityOptions,
+		data,
+		containerSizes,
+		containerTypes,
+		options,
+		listShippingLineOptions,
+		fclCommodityOptions,
+		mainPortOptions1,
+		mainPortOptions2,
 	});
 	const AIR_CONTROLS = airControls({
 		data,
@@ -89,9 +100,9 @@ function AddRateModal({
 		user_id,
 	});
 	const finalControls = filter?.service === 'fcl_freight' ? FCL_CONTROLS : AIR_CONTROLS;
-	const newCotrols = [...finalControls];
+	const newControls = [...finalControls];
 	if (values?.service_provider_id) {
-		newCotrols.forEach((ctr) => {
+		newControls.forEach((ctr) => {
 			const newCtr = { ...ctr };
 			if (newCtr.name === 'sourced_by_id') {
 				newCtr.params.filters = {
@@ -100,6 +111,16 @@ function AddRateModal({
 			}
 		});
 	}
+	const CONTROLS = [];
+	(newControls || []).forEach((cntrl) => {
+		if (cntrl.name === 'origin_main_port_id' && !data?.origin_port?.is_icd) {
+			return;
+		}
+		if (cntrl.name === 'destination_main_port_id' && !data?.destination_port?.is_icd) {
+			return;
+		}
+		CONTROLS.push(cntrl);
+	});
 
 	const { fclFreightRate, fclData } = useCreateFclFreightRate();
 	const { createRate } = useCreateFreightRate(filter?.service);
@@ -128,17 +149,10 @@ function AddRateModal({
 			<Modal.Header title="Please add rate" />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<Layout
-					fields={newCotrols}
+					fields={CONTROLS}
 					control={control}
 					errors={errors}
 				/>
-				{/* {filter?.service === 'fcl_freight' ? (
-					<Layout
-						fields={newCotrols}
-						control={control}
-						errors={errors}
-					/>
-				) : <AirRateModal data={data} showModal={showModal} setShowModal={setShowModal} />} */}
 			</Modal.Body>
 			<Modal.Footer>
 				<div>

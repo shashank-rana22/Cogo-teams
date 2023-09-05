@@ -9,6 +9,8 @@ const fclControls = ({
 	options,
 	listShippingLineOptions,
 	fclCommodityOptions,
+	mainPortOptions1,
+	mainPortOptions2,
 }) => [
 	{
 		label         : 'Service Provider Details',
@@ -75,6 +77,15 @@ const fclControls = ({
 		rules          : { required: 'This is required' },
 	},
 	{
+		name        : 'origin_main_port_id',
+		type        : 'select',
+		span        : 4,
+		...mainPortOptions1,
+		className   : 'primary lg',
+		placeholder : 'Origin Main port',
+		rules       : { required: 'This is required' },
+	},
+	{
 		name           : 'destination_location_id',
 		type           : 'location-select',
 		span           : 4,
@@ -85,6 +96,15 @@ const fclControls = ({
 		params         : { filters: { type: ['seaport'] } },
 		placeholder    : 'Destination Location',
 		rules          : { required: 'This is required' },
+	},
+	{
+		name        : 'destination_main_port_id',
+		type        : 'select',
+		span        : 4,
+		className   : 'primary lg',
+		...mainPortOptions2,
+		placeholder : 'Destination main port',
+		rules       : { required: 'This is required' },
 	},
 	{
 		label         : 'Container Details',
@@ -119,7 +139,7 @@ const fclControls = ({
 		name          : 'commodity',
 		type          : 'select',
 		span          : 3,
-		value         : data?.commodity || 'general',
+		value         : data?.commodity,
 		placeholder   : 'Commodity',
 		className     : 'primary lg',
 		options       : fclCommodityOptions,
