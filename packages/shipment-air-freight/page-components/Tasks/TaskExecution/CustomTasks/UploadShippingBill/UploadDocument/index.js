@@ -18,7 +18,7 @@ function UploadDocument({ singleItem = {}, invoiceData = [], setInvoiceData = ()
 					updatedItems[index] = {
 						id,
 						data          : [{ ...itemData, shipping_bill_number: shippingBillValue }],
-						document_type : 'checklist',
+						document_type : 'shipping_bill',
 					};
 					return [...updatedItems];
 				});
@@ -27,7 +27,7 @@ function UploadDocument({ singleItem = {}, invoiceData = [], setInvoiceData = ()
 					{
 						id,
 						data          : [{ ...itemData, shipping_bill_number: shippingBillValue }],
-						document_type : 'checklist',
+						document_type : 'shipping_bill',
 					}]);
 			}
 		}

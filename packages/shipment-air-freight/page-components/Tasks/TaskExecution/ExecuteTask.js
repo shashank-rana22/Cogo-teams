@@ -8,7 +8,7 @@ import {
 	MarkConfirmServices,
 	GenerateMawb,
 	ConfirmBookingWithAirline,
-	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill,
+	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill, UploadLeo,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
@@ -191,6 +191,18 @@ function ExecuteTask({
 	) {
 		return (
 			<UploadChecklist
+				shipment_data={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+	if (
+		task.task === 'upload_leo'
+	) {
+		return (
+			<UploadLeo
 				shipment_data={shipment_data}
 				task={task}
 				refetch={taskListRefetch}
