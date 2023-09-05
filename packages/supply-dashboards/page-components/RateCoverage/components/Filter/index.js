@@ -1,17 +1,14 @@
 import { Button, DateRangepicker, Select } from '@cogoport/components';
 import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
 import { merge } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import { serviceOptions, taskStatusOptions, commodityOptions } from '../../helpers/constants';
 
 import styles from './styles.module.css';
 
 function Filter({
-	getCoverageDetails = () => {},
 	filter = {},
 	setFilter = () => {},
-	getListCoverage = () => {},
 	setSerialId = () => {},
 	setShowWeekData = () => {},
 }) {
@@ -34,14 +31,6 @@ function Filter({
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type } } },
 	));
-
-	useEffect(() => {
-		getCoverageDetails();
-	}, [filter, getCoverageDetails]);
-
-	useEffect(() => {
-		getListCoverage();
-	}, [getListCoverage, filter]);
 
 	return (
 		<div className={styles.parent}>
@@ -134,7 +123,7 @@ function Filter({
 						}}
 					/>
 				</div>
-				<div className={styles.filter_option_width} style={{ width: '220px' }}>
+				<div className={styles.date_range_filter_width}>
 					<p>Date Range</p>
 					<DateRangepicker
 						value={filter?.date_range}

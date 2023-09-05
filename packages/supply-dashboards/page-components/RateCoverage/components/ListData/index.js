@@ -1,4 +1,4 @@
-/* eslint-disable custom-eslint/check-element-role-button */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import { Placeholder, Pagination, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -36,16 +36,15 @@ function ListData({
 			<div className={styles.details_container}>
 				{Object.keys(CARDS_MAPPING).map((card) => (
 					<div
+						key={card}
 						className={(card === source)
 							? styles.blue_color_container : styles.card_container}
-						key={card}
-						tabIndex="0"
-						role="button"
 						onClick={() => {
 							setSource(card);
 							setPage(DEFAULT_PAGE_VALUE);
 							setSerialId('');
 						}}
+						role="button"
 					>
 						<Card
 							detail={CARDS_MAPPING[card]}
@@ -99,15 +98,14 @@ function ListData({
 							/>
 						))}
 					</>
-				)
-					: (
-						<EmptyState
-							height={220}
-							width={380}
-							flexDirection="column"
-							textSize="20px"
-						/>
-					)}
+				) : (
+					<EmptyState
+						height={220}
+						width={380}
+						flexDirection="column"
+						textSize="20px"
+					/>
+				)}
 			</div>
 		</div>
 	);

@@ -20,7 +20,7 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 	};
 
 	return (
-		<div>
+		<>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
 				{activeCard === detail?.status && ((loading) ? <Loader /> : <IcMDownload onClick={handleDownload} />) }
@@ -39,7 +39,7 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 					</div>
 				)}
 			</div>
-		</div>
+		</>
 	);
 }
 export default Card;
