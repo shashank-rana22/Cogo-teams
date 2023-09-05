@@ -67,8 +67,8 @@ function ProfileDetails({
 		{ orgId },
 	);
 	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
-	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.tab)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.tab) && chatsConfig?.expandSideBar));
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.data?.channel_type) && chatsConfig?.expandSideBar));
 
 	useEffect(() => {
 		setShowMore(false);
