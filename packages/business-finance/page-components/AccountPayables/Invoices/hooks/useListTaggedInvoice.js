@@ -108,7 +108,7 @@ const useListTaggedInvoices = () => {
 	}, [payrun, Trigger]);
 	const deleteInvoices = async (id) => {
 		try {
-			await delete_payrun_invoice.trigger({
+			await delete_payrun_invoice[API_ARRAY_VARIABLE_ONE]({
 				data: {
 					id,
 					performedBy,
@@ -169,7 +169,7 @@ const useListTaggedInvoices = () => {
 		selectBank,
 		setParams,
 		deleteTaggedDocuments,
-		loadingSaveBank : saveBank.loading,
+		loadingSaveBank : saveBank[GLOBAL_CONSTANTS.zeroth_index].loading,
 		params,
 	};
 };

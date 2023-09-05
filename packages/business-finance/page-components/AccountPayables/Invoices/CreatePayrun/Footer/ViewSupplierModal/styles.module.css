@@ -19,5 +19,7 @@
 }
 
 .listdata {
-	padding: 10px 32px;
+	padding: 10px;
+	border: 1px solid #000;
+	border-radius: 6px;
 }
