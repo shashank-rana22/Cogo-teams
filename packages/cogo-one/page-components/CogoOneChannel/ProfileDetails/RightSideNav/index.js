@@ -26,6 +26,8 @@ function RightSideNav({
 	orgId = '',
 	viewType = '',
 	formattedMessageData = {},
+	expandSideBar = false,
+	setActiveTab = () => {},
 }) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
@@ -34,13 +36,23 @@ function RightSideNav({
 
 	const [searchSpotModal, setSearchSpotmodal] = useState(false);
 
+	const disabledSpotSearch = loading || disableQuickActions;
+
+	const { userId = '', userMobile = '', leadUserId = '' } = getFormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
+
+	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
+
+	const ICON_MAPPING = getIconMapping({ viewType, expandSideBar, activeTab }) || [];
+
 	const check = () => {
 		dispatch(
 			setProfileState({
 				...profileData,
-
 				showFaq: true,
-
 			}),
 		);
 	};
@@ -59,22 +71,13 @@ function RightSideNav({
 			openNewTab({ crm: 'searches', prm: 'searches' });
 		} else if (val === 'help_desk') {
 			check();
+		} else if (val === 'sidebar_control') {
+			setActiveTab((prev) => ({ ...prev, expandSideBar: !prev?.expandSideBar }));
+			setActiveSelect('profile');
 		} else {
 			setActiveSelect(val);
 		}
 	};
-
-	const disabledSpotSearch = loading || disableQuickActions;
-
-	const { userId = '', userMobile = '', leadUserId = '' } = getFormatData({
-		activeMessageCard,
-		activeVoiceCard,
-		activeTab,
-	});
-
-	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
-
-	const ICON_MAPPING = getIconMapping(viewType) || [];
 
 	return (
 		<>
