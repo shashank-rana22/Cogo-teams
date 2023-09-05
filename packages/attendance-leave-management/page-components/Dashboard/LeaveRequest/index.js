@@ -12,7 +12,7 @@ import useGetLeaveGroupings from '../../../hooks/useGetLeaveGroupings';
 import LeaveCard from './LeaveCard';
 import styles from './styles.module.css';
 
-function LeaveRequest({ setShowInbox, isManager }) {
+function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 	const [activeTab, setActiveTab] = useState('employee');
 
 	const { loading, data } = useGetLeaveGroupings(activeTab);

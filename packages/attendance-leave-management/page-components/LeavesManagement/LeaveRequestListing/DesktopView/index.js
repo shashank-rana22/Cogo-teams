@@ -8,7 +8,10 @@ import styles from './styles.module.css';
 
 const MAX_PAGE_LIMIT = 10;
 
-function DesktopView({ dataArr, setFilters, handleOpenModal, handleDeleteModal, loading }) {
+function DesktopView({
+	dataArr = {}, setFilters = () => {}, handleOpenModal = () => {},
+	handleDeleteModal = () => {}, loading = false,
+}) {
 	const { list, page, page_limit, total_count } = dataArr || {};
 
 	const columns = getColumns({ handleOpenModal, handleDeleteModal });

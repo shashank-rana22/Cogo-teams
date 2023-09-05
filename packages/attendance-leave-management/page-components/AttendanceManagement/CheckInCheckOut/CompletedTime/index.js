@@ -7,7 +7,7 @@ const SIXTY = 60;
 const TEN_THOUSAND = 10000;
 const DEFAULT_VALUE_COUNT = 10;
 
-function CompletedTime({ checkInTimeStr, checkOutTimeStr }) {
+function CompletedTime({ checkInTimeStr = '', checkOutTimeStr = '' }) {
 	const [timeElapsed, setTimeElapsed] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
 	const formatTimeUnit = (value) => (value < DEFAULT_VALUE_COUNT ? `0${value}` : value.toString());

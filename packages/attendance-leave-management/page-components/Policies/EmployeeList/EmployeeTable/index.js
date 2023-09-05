@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 const ARRAY_COUNT = 1;
 
 function EmployeeTable({
-	data, setFilters, filters, searchQuery, selectedLocation, refetch, loading,
+	data = {}, setFilters = () => {}, filters = {}, searchQuery = '',
+	selectedLocation = '', refetch = () => {}, loading = false,
 }) {
 	const [selectBulk, setSelectBulk] = useState(false);
 	const [selectedIds, setSelectedIds] = useState([]);

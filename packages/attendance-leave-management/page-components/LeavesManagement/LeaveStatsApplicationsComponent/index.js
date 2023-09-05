@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import LeaveStats from './LeaveStats';
 import styles from './styles.module.css';
 
-function LeaveStatsApplicationsComponent({ selectedMonth, loading, executeScroll = () => {} }) {
+function LeaveStatsApplicationsComponent({ selectedMonth = '', executeScroll = () => {} }) {
 	const { month, value } = selectedMonth || {};
 
 	return (
@@ -24,7 +24,7 @@ function LeaveStatsApplicationsComponent({ selectedMonth, loading, executeScroll
 				</div>
 			</div>
 			<div className={styles.leave_stats_style}>
-				<LeaveStats cycle_id={value} loading={loading} />
+				<LeaveStats cycle_id={value} />
 			</div>
 		</div>
 	);
