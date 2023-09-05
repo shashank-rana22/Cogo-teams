@@ -48,6 +48,8 @@ function UpdateAssignedStakeholder({
 							{ label: 'Collection Desk', value: 'collection_desk' },
 							{ label: 'Release Desk', value: 'release_desk' },
 							{ label: 'Lastmile Desk', value: 'lastmile_ops' },
+							{ label: 'Service Ops2 Docs', value: 'service_ops2_docs' },
+							{ label: 'Printing Desk', value: 'printing_desk' },
 						]}
 						control={control}
 						name="assigned_stakeholder"
