@@ -57,14 +57,15 @@ function LevelForm({ background = '#f3fafa', item = {}, level = '' }, ref) {
 			});
 		}
 	}, [level, remove, fields]);
+	const getLevelsConfigData = getLevelsConfig(t);
 	return (
 		<div className={styles.container} style={{ backgroundColor: background }}>
-			<Header config={getLevelsConfig(t)} />
+			<Header config={getLevelsConfigData} />
 			<div className={styles.paddingbottom}>
 				{fields.map((field, index) => (
 					<Column
 						key={field.id}
-						config={getLevelsConfig(t)}
+						config={getLevelsConfigData}
 						control={control}
 						remove={remove}
 						append={append}

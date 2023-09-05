@@ -1,7 +1,7 @@
 interface TabTranslationInterface {
 	t?: Function;
 }
-export const tabs = ({ t = () => {} }: TabTranslationInterface) => [
+export const getTabs = ({ t = () => {} }: TabTranslationInterface) => [
 	{
 		key   : 'requested',
 		label : t('incidentManagement:requested_tab'),

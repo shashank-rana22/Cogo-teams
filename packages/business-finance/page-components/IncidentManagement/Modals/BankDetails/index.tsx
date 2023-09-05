@@ -69,7 +69,7 @@ function BankDetails({
 	const checkData = () => {
 		push('/details/supply/[organization_id]', `/details/supply/${id}`);
 	};
-
+	const getOptionsData = getOptions({ isEditable, t });
 	return (
 		<div>
 			<div>
@@ -122,7 +122,7 @@ function BankDetails({
 								<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
 								<div>
 									<RadioGroup
-										options={getOptions({ isEditable, t })}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({ ...prev, radioName: item }))}
 										value={value?.radioName}
 									/>
@@ -137,7 +137,7 @@ function BankDetails({
 								<div className={styles.font_name}>{accountNumber || '-'}</div>
 								<div>
 									<RadioGroup
-										options={getOptions({ isEditable, t })}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioNumber: item,
@@ -160,7 +160,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={getOptions({ isEditable, t })}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioBranchName: item,
@@ -182,7 +182,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={getOptions({ isEditable, t })}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioIFSC: item,

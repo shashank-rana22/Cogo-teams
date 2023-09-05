@@ -109,7 +109,6 @@ export const requestColumn = ({
 		Cell     : ({ row: { original } }) => {
 			const { createdBy = {} } = original || {};
 			const { name = '' } = createdBy || {};
-			// return <span>{name || '-'}</span>;
 			return <span>{showOverflowingNumber(name || '-', 10)}</span>;
 		},
 	},

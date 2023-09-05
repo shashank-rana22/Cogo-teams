@@ -11,7 +11,7 @@ import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoE
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
-import { tabs } from './Constants/Tabs';
+import { getTabs } from './Constants/getTabs';
 import Controller from './Controller';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
@@ -49,7 +49,7 @@ function IncidentManagement() {
 	const [entityCode, setEntityCode] = useState(entity);
 
 	const entityDataCount = entityData.length;
-
+	const tabsMappingData = getTabs({ t });
 	const entityOptions = (entityData || []).map((item: ItemProps) => {
 		const {
 			business_name: companyName = '',
@@ -61,7 +61,7 @@ function IncidentManagement() {
 		};
 	});
 	const [activeTab, setActiveTab] = useState<string>(
-		query.activeTab || tabs({ t })[GLOBAL_CONSTANTS.zeroth_index].key,
+		query.activeTab || tabsMappingData[GLOBAL_CONSTANTS.zeroth_index].key,
 	);
 	const {
 		incidentData,
@@ -164,7 +164,7 @@ function IncidentManagement() {
 					fullWidth
 					themeType="primary"
 				>
-					{tabs({ t }).map(({ key = '', label = '' }) => (
+					{tabsMappingData.map(({ key = '', label = '' }) => (
 						<TabPanel
 							name={key}
 							key={key}
