@@ -1,0 +1,42 @@
+.container {
+    background: #f9f9f9;
+    padding: 16px 12px;
+    border-radius: 16px;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.sub_title {
+    font-weight: 200;
+    font-size: 12px;
+}
+
+.details {
+    background: #fff;
+    border-radius: 16px;
+    padding: 12px;
+    margin-top: 16px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    margin-left: 6px;
+}
+
+.cogo_id {
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.single_detail {
+    display: flex;
+    align-items: center;
+    margin: 8px 0 0 8px;
+    font-weight: 300;
+}
