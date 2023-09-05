@@ -60,6 +60,7 @@ function Checkout({ checkout_type = '' }) {
 			checkout_id: detail.id,
 			shipment_id,
 			redirect_required,
+			primary_service,
 		});
 
 		window.location.replace(url);
