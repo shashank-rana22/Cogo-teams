@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 const API_NAME = {
@@ -8,6 +9,11 @@ const API_NAME = {
 };
 
 const useCreateFreightRate = (service) => {
+	const { user_data } = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+	const { user: { id: user_id = '' } = {} } = user_data;
+
 	const [{ loading }, trigger] = useRequest({
 		url    : API_NAME[service],
 		method : 'POST',
@@ -21,25 +27,43 @@ const useCreateFreightRate = (service) => {
 			currency     : data?.currency,
 		}));
 
+		const updatedLineItems = (data?.line_items || []).map((item) => {
+			if (typeof item.remarks === 'string') {
+				return { ...item, remarks: [item.remarks] };
+			}
+			return item;
+		});
+
+		const params = (service === 'air_freight') ? {
+			origin_airport_id      : data?.origin_airport_id,
+			destination_airport_id : data?.destination_airport_id,
+			commodity_type         : 'all',
+			weight_slabs,
+		} : {
+			origin_port_id      : data?.origin_location_id,
+			destination_port_id : data?.destination_location_id,
+			line_items          : updatedLineItems,
+		};
+
 		try {
 			const resp = await trigger({
 				data: {
-					origin_airport_id        : data?.origin_airport_id,
-					destination_airport_id   : data?.destination_airport_id,
+					...params,
 					commodity                : data?.commodity,
 					airline_id               : data?.airline_id,
+					shipping_line_id         : data?.shipping_line_id,
 					operation_type           : data?.flight_operation_type,
+					container_size           : data?.container_size,
+					container_type           : data?.container_type,
 					currency                 : data?.currency,
 					price_type               : data?.price_type,
 					service_provider_id      : data?.service_provider_id,
-					procured_by_id           : data?.procured_by_id,
+					procured_by_id           : data?.procured_by_id || user_id,
 					sourced_by_id            : data?.sourced_by_id,
 					validity_start           : data?.validity_start,
 					validity_end             : data?.validity_end,
 					origin_main_port_id      : data?.origin_main_port_id,
 					destination_main_port_id : data?.destination_main_port_id,
-					commodity_type           : 'all',
-					weight_slabs,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }

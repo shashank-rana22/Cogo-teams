@@ -14,7 +14,6 @@ import {
 	RateTypeOptions, currencyOptions, PriceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
 	fclCommodityOptions,
 } from '../../../../helpers/constants';
-import useCreateFclFreightRate from '../../../../hooks/useCreateFclFreightRate';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
@@ -122,28 +121,17 @@ function AddRateModal({
 		CONTROLS.push(cntrl);
 	});
 
-	const { fclFreightRate } = useCreateFclFreightRate();
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const handleSubmitData = async (formData) => {
-		if (filter?.service === 'air_freight') {
-			const rate_id = await createRate(formData);
-			if (!rate_id) {
-				return;
-			}
-			const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-			if (!id) { return; }
-			Toast.success('Rate added successfully');
-			setShowModal(false);
-		} else {
-			const rate_id = await fclFreightRate({ dataa: formData });
-			if (!rate_id) { return; }
-			const succ_id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-			if (succ_id) {
-				Toast.success('Rate added successfully');
-				setShowModal(false);
-			}
+		const rate_id = await createRate(formData);
+		if (!rate_id) {
+			return;
 		}
+		const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
+		if (!id) { return; }
+		Toast.success('Rate added successfully');
+		setShowModal(false);
 	};
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
