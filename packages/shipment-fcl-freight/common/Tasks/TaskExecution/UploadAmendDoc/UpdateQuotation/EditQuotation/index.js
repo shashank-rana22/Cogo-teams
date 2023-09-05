@@ -47,16 +47,10 @@ function EditQuotation({
 	});
 
 	const handleFinalSubmit = async (values) => {
-		try {
-			const res1 = await onSubmit(values);
+		const res = await onSubmit(values);
 
-			if (res1 === HTTP_STATUS_CODE) {
-				await updateDocument(documentPayload);
-			}
-
-			return null;
-		} catch (error) {
-			return null;
+		if (res === HTTP_STATUS_CODE) {
+			await updateDocument(documentPayload);
 		}
 	};
 
