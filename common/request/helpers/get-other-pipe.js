@@ -17,7 +17,7 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 		const globalDefaultScope = authParams?.[FIRST_INDEX];
 		const globalDefaultView = authParams?.[SECOND_INDEX];
 
-		const navigationData = getNavData(navigation);
+		const navigationData = getNavData({ navigation });
 
 		const { main_apis } = navigationData || {};
 		const actualApi = url?.split('/')?.[FIRST_INDEX] || url?.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];

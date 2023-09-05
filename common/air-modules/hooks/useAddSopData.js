@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import getSopPayload from '../components/Sop/helpers/format-sop-payload';
+import toastApiError from '../utils/toastApiError';
 
 const useAddSopData = ({
 	formValues,
@@ -14,6 +15,7 @@ const useAddSopData = ({
 	trade_partners_details,
 	primary_service,
 	shipment_data,
+	refetch = () => {},
 }) => {
 	let create_payload = {};
 	const apiToCall = api === 'create'
@@ -85,12 +87,13 @@ const useAddSopData = ({
 		try {
 			if (status) {
 				const res = await trigger({
-					params: payload,
+					data: payload,
 				});
 				if (!res.hasError) {
 					Toast.success(' Added Succesfully');
 					setReload(!reload);
 					setSopAddForm(false);
+					refetch();
 				} else {
 					Toast.error('Something went wrong');
 				}
@@ -98,7 +101,7 @@ const useAddSopData = ({
 				Toast.info('Instruction or Attachment, atleast one is required!');
 			}
 		} catch (error) {
-			Toast.error(error || 'Something went wrong');
+			toastApiError(error);
 		}
 	};
 
