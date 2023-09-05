@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAirport, IcMTransport, IcMShip } from '@cogoport/icons-react';
 
 export const getCardData = ({
-	t = () => {},
+	t,
 	oceanOpen,
 	oceanCurrency,
 	currency,
@@ -43,7 +43,7 @@ export const getCardData = ({
 	},
 ];
 export const getServiceData = ({
-	t = () => {},
+	t,
 	oceanOpen,
 	oceanCurrency,
 	currency,
