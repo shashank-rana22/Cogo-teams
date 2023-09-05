@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function securityDepositRefundData({ advanceSecurityDepositRefund, t }) {
+function getSecurityDepositRefundData({ advanceSecurityDepositRefund, t }) {
 	const {
 		supplierName = '',
 		totalAmount = 0,
@@ -46,7 +46,7 @@ function securityDepositRefundData({ advanceSecurityDepositRefund, t }) {
 		{(uploadProof || []).map((url:any) => (url !== '' ? (
 			<a href={url} target="_blank" rel="noreferrer" key={url}>
 				<div className={styles.view_flex}>
-					<div className={styles.view}>{t('incidentManagement:link')}</div>
+					{t('incidentManagement:link')}
 				</div>
 			</a>
 		) : (
@@ -61,4 +61,4 @@ function securityDepositRefundData({ advanceSecurityDepositRefund, t }) {
 	);
 }
 
-export default securityDepositRefundData;
+export default getSecurityDepositRefundData;

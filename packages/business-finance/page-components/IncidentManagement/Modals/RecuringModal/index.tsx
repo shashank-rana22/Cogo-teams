@@ -39,7 +39,7 @@ function RenderSummary({ summary = [] }) {
 	);
 }
 
-const summaryDataOne = ({ businessName, categoryName, cogoEntity, t }) => [
+const getSummaryDataOne = ({ businessName, categoryName, cogoEntity, t }) => [
 	{
 		title : t('incidentManagement:vendor_name_title'),
 		value : businessName ? showOverflowingNumber(businessName, 18) : '-',
@@ -54,7 +54,7 @@ const summaryDataOne = ({ businessName, categoryName, cogoEntity, t }) => [
 	},
 ];
 
-const summaryDataTwo = ({
+const getSummaryDataTwo = ({
 	branchName,
 	currency,
 	maxPayoutAllowed,
@@ -98,7 +98,7 @@ const summaryDataTwo = ({
 	},
 ];
 
-const summaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
+const getSummaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
 	{
 		title : t('incidentManagement:end_date_title'),
 		value : (
@@ -135,7 +135,7 @@ const summaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
 	},
 ];
 
-const summaryDataFour = ({ proofDocuments, agreementNumber, t }) => [
+const getSummaryDataFour = ({ proofDocuments, agreementNumber, t }) => [
 	{
 		title : t('incidentManagement:uploaded_documents_title'),
 		value : (
@@ -183,8 +183,8 @@ const summeryMappings = ({
 ];
 
 function RecuringModal({ id = '', refetch = () => {}, row, isEditable = true }) {
-	const [showModal, setShowModal] = useState(false);
 	const { t } = useTranslation(['incidentManagement']);
+	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, level3, level2, level1 } = row || {};
 	const { reccuringExpenseApproval, organization } = data;
@@ -214,14 +214,14 @@ function RecuringModal({ id = '', refetch = () => {}, row, isEditable = true }) 
 
 	const { businessName } = organization || {};
 
-	const summaryDataFirst = summaryDataOne({
+	const summaryDataFirst = getSummaryDataOne({
 		businessName,
 		categoryName,
 		cogoEntity,
 		t,
 	});
 
-	const summaryDataSecond = summaryDataTwo({
+	const summaryDataSecond = getSummaryDataTwo({
 		branchName,
 		currency,
 		maxPayoutAllowed,
@@ -230,14 +230,14 @@ function RecuringModal({ id = '', refetch = () => {}, row, isEditable = true }) 
 		t,
 	});
 
-	const summaryDataThird = summaryDataThree({
+	const summaryDataThird = getSummaryDataThree({
 		startDate,
 		endDate,
 		repeatFrequency,
 		t,
 	});
 
-	const summaryDataFourth = summaryDataFour({
+	const summaryDataFourth = getSummaryDataFour({
 		proofDocuments,
 		agreementNumber,
 		t,

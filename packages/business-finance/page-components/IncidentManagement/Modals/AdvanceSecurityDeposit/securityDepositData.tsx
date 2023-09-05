@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function securityDepositData({ advanceSecurityDeposit, t }) {
+function getSecurityDepositData({ advanceSecurityDeposit, t }) {
 	const {
 		advanceDocumentId = '',
 		amountPerContainer = 0,
@@ -45,4 +45,4 @@ function securityDepositData({ advanceSecurityDeposit, t }) {
 	);
 }
 
-export default securityDepositData;
+export default getSecurityDepositData;

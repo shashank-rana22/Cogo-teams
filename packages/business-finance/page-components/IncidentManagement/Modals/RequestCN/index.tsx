@@ -31,7 +31,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		CNValues : null,
 		remarks  : null,
 	});
-
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
 	const { t } = useTranslation(['incidentManagement']);
 	const [showPopover, setShowPopover] = useState(false);

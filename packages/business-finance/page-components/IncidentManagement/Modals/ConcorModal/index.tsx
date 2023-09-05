@@ -55,9 +55,9 @@ function ConcorModal({
 	remark = '',
 	row = {},
 }: Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({ remarks: null });
-	const { t } = useTranslation(['incidentManagement']);
 	const { useOnAction: onAction, loading } = useApproveConcor({
 		refetch,
 		setShowModal,

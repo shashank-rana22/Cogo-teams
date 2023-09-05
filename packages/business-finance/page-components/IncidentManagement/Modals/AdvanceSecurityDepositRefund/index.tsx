@@ -5,7 +5,7 @@ import useGetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
 import ViewButton from '../../common/ViewButton';
 import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
-import securityDepositRefundData from './securityDeositRefundData';
+import getSecurityDepositRefundData from './securityDeositRefundData';
 
 interface DepositRefundInterface {
 	totalAmount?:number,
@@ -24,9 +24,9 @@ interface Props {
 }
 
 function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetch, isEditable = true, row }:Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
-	const { t } = useTranslation(['incidentManagement']);
 
 	const { getData, loading } = useGetSecurityDepositData({
 		refetch,
@@ -43,7 +43,7 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 			{showDepositModal
 			&& (
 				<SecurityDepositCommonModal
-					securityDepositDetails={securityDepositRefundData({ advanceSecurityDepositRefund, t })}
+					securityDepositDetails={getSecurityDepositRefundData({ advanceSecurityDepositRefund, t })}
 					showDepositModal={showDepositModal}
 					setShowDepositModal={setShowDepositModal}
 					isEditable={isEditable}

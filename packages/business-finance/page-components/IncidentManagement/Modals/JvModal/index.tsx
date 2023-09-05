@@ -1,5 +1,7 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
@@ -10,9 +12,9 @@ import ViewButton from '../../common/ViewButton';
 import styles from './styles.module.css';
 
 function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showJvModal, setShowJVModal] = useState(false);
 	const [remark, setRemark] = useState('');
-	const { t } = useTranslation(['incidentManagement']);
 	const {
 		currency,
 		ledCurrency,
@@ -43,7 +45,11 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 		{
 			id    : '5',
 			label : t('incidentManagement:validity_date_label'),
-			value : format(new Date(validityDate), 'dd MMM yyyy', {}, false),
+			value : formatDate({
+				date       : new Date(validityDate),
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			}) || '___',
 		},
 	];
 

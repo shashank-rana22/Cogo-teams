@@ -25,8 +25,8 @@ function MatchModal({
 	refetch,
 	isEditable,
 }:MatchModalInterface) {
-	const [checkResetButton, setCheckResetButton] = useState(false);
 	const { t } = useTranslation(['incidentManagement']);
+	const [checkResetButton, setCheckResetButton] = useState(false);
 	const {
 		setEditedValue,
 		handleCrossClick,

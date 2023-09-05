@@ -5,7 +5,7 @@ import useGetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
 import ViewButton from '../../common/ViewButton';
 import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
-import securityDepositData from './securityDepositData';
+import getSecurityDepositData from './securityDepositData';
 
 interface DepositInterface {
 	advanceDocumentId?: string,
@@ -24,9 +24,9 @@ interface Props {
 	row?:object,
 }
 function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditable = true, row }:Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
-	const { t } = useTranslation(['incidentManagement']);
 	const { getData, loading } = useGetSecurityDepositData({
 		refetch,
 		setShowDepositModal,
@@ -42,7 +42,7 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 			{showDepositModal
 			&& (
 				<SecurityDepositCommonModal
-					securityDepositDetails={securityDepositData({ advanceSecurityDeposit, t })}
+					securityDepositDetails={getSecurityDepositData({ advanceSecurityDeposit, t })}
 					showDepositModal={showDepositModal}
 					setShowDepositModal={setShowDepositModal}
 					isEditable={isEditable}

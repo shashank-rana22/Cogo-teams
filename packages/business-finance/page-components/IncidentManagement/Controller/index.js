@@ -7,7 +7,7 @@ import Filter from '../../commons/Filters/index.tsx';
 import CreateLevelModal from '../common/CreateForm';
 import useGetLevels from '../common/hooks/useGetLevels';
 
-import controls from './Config/filters-level';
+import getControls from './Config/filters-level';
 import CustomTable from './CustomTable';
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ function Controller() {
 	return (
 		<div>
 			<div className={styles.filter}>
-				<Filter filters={filters} setFilters={setFilters} controls={controls(t)} />
+				<Filter filters={filters} setFilters={setFilters} controls={getControls(t)} />
 				<div className={styles.search}>
 					<Input
 						prefix={<IcMSearchlight />}

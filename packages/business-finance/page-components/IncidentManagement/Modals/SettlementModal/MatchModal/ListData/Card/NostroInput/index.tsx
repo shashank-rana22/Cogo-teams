@@ -7,6 +7,27 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+function Content({ isError, errorMessege, t }) {
+	return (
+		<div>
+
+			<div>
+				{!isError && (
+					<div className={styles.text_styles}>
+						{t('incidentManagement:actual_nostro_value')}
+					</div>
+				)}
+				<div
+					className={styles.input_container}
+					style={{ color: isError ? 'red' : 'black' }}
+				>
+					{errorMessege}
+
+				</div>
+			</div>
+		</div>
+	);
+}
 function NostroInput({
 	itemData,
 	handleCrossClick,
@@ -32,7 +53,7 @@ function NostroInput({
 	const isError = lessValue || maxValue;
 	let errorMessege = '';
 
-	const formatted = (field, curr) => formatAmount({
+	const getFormattedAmount = (field, curr) => formatAmount({
 		amount   :	field,
 		currency : curr,
 		options  : {
@@ -46,37 +67,17 @@ function NostroInput({
 	} else if (maxValue) {
 		errorMessege = t('incidentManagement:error_message_nostro_2');
 	} else {
-		errorMessege = formatted(nostroAmount, currency);
+		errorMessege = getFormattedAmount(nostroAmount, currency);
 	}
 	const changeValueBalanceAmount = () => {
 		const value = types === 'history' ? +constBalanceAmount : +currentBalance;
 		return value - (+changedValue + tds) || value;
 	};
-	function Content() {
-		return (
-			<div>
 
-				<div>
-					{!isError && (
-						<div className={styles.text_styles}>
-							{t('incidentManagement:actual_nostro_value')}
-						</div>
-					)}
-					<div
-						className={styles.input_container}
-						style={{ color: isError ? 'red' : 'black' }}
-					>
-						{errorMessege}
-
-					</div>
-				</div>
-			</div>
-		);
-	}
 	const handleOnChangeNostroInput = (value) => {
 		setChangedValue(value);
 	};
-	const submit = () => {
+	const onSubmit = () => {
 		setEditedNostro(itemData, +changedValue, +changeValueBalanceAmount());
 	};
 	return (
@@ -93,7 +94,7 @@ function NostroInput({
 						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
 					>
 						<Tooltip
-							content={<Content />}
+							content={<Content isError={isError} errorMessege={errorMessege} t={t} />}
 						>
 							<Button
 								className={styles.edit_icon}
@@ -122,7 +123,7 @@ function NostroInput({
 							<Button
 								className={styles.edit_icon}
 								onClick={() => {
-									submit();
+									onSubmit();
 									setRestEdit(!restEdit);
 								}}
 							>

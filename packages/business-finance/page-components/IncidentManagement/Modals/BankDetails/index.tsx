@@ -9,7 +9,7 @@ import useGetBankData from '../../apisModal/useGetBankData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
-import { optionsManual, options } from './constant';
+import { getOptionsManual, getOptions } from './constant';
 import styles from './styles.module.css';
 
 function BankDetails({
@@ -21,8 +21,9 @@ function BankDetails({
 	isEditable = true,
 	remark = '',
 }) {
-	const { t } = useTranslation(['incidentManagement']);
 	const { push } = useRouter();
+	const { t } = useTranslation(['incidentManagement']);
+
 	const {
 		accountNumber,
 		bankHolderName,
@@ -121,7 +122,7 @@ function BankDetails({
 								<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
 								<div>
 									<RadioGroup
-										options={options({ isEditable, t })}
+										options={getOptions({ isEditable, t })}
 										onChange={(item: string) => setValue((prev) => ({ ...prev, radioName: item }))}
 										value={value?.radioName}
 									/>
@@ -136,7 +137,7 @@ function BankDetails({
 								<div className={styles.font_name}>{accountNumber || '-'}</div>
 								<div>
 									<RadioGroup
-										options={options({ isEditable, t })}
+										options={getOptions({ isEditable, t })}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioNumber: item,
@@ -159,7 +160,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={options({ isEditable, t })}
+										options={getOptions({ isEditable, t })}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioBranchName: item,
@@ -181,7 +182,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={options({ isEditable, t })}
+										options={getOptions({ isEditable, t })}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioIFSC: item,
@@ -195,7 +196,7 @@ function BankDetails({
 								<div className={styles.font_name}>{t('incidentManagement:verification_method')}</div>
 								<div>
 									<RadioGroup
-										options={optionsManual({ isEditable, t })}
+										options={getOptionsManual({ isEditable, t })}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioMethod: item,

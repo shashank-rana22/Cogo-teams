@@ -2,7 +2,7 @@ const DEFAULT_UNIT = 1;
 interface Props {
 	t?: Function;
 }
-export const overHeadConfigs = ({ t = () => {} }:Props) => [
+export const getOverHeadConfigs = ({ t = () => {} }:Props) => [
 	{
 		Header   : t('incidentManagement:name_header'),
 		accessor : 'name',

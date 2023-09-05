@@ -1,7 +1,7 @@
 interface Props {
 	t?: Function;
 }
-const controls = ({ t = () => {} }:Props) => [
+const getControls = ({ t = () => {} }:Props) => [
 	{
 		Header   : t('incidentManagement:jv_number_header'),
 		accessor : 'jvNum',
@@ -48,4 +48,4 @@ const controls = ({ t = () => {} }:Props) => [
 		id       : 'description',
 	},
 ];
-export default controls;
+export default getControls;

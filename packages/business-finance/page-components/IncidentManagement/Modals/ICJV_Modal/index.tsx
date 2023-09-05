@@ -6,14 +6,14 @@ import useGetInterJvData from '../../apisModal/useGetInterJvData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
-import controls from './contols';
+import getControls from './contols';
 import StyledTableICJV from './StyledTableICJV';
 import styles from './styles.module.css';
 
 function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable = true, row }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showICJvModal, setShowICJvModal] = useState(false);
 	const [remark, setRemark] = useState('');
-	const { t } = useTranslation(['incidentManagement']);
 
 	const { list, totalDebit, totalCredit } = interCompanyJournalVoucherRequest || {};
 
@@ -66,7 +66,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 						<div>
 							<StyledTableICJV
 								data={list || []}
-								columns={controls({ t })}
+								columns={getControls({ t })}
 								loading={false}
 							/>
 						</div>

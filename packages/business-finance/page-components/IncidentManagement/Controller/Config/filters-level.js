@@ -1,4 +1,4 @@
-const controls = (t = () => {}) => [
+const getControls = (t = () => {}) => [
 	{
 		name        : 'incidentType',
 		type        : 'select',
@@ -86,4 +86,4 @@ const controls = (t = () => {}) => [
 	},
 ];
 
-export default controls;
+export default getControls;

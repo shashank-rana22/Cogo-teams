@@ -10,14 +10,14 @@ import ViewButton from '../../common/ViewButton';
 import styles from './style.module.css';
 
 function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const { data: { revokeInvoiceRequest = {} } } = row || {};
 	const { documentUrls = [], invoiceNumber = '' } = revokeInvoiceRequest;
 	const agreementDocument = documentUrls[0] || '';
 	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState(remark);
 	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
-	const { t } = useTranslation(['incidentManagement']);
-	const { useOnAction:OnAction, loading } = useGetRevokeInvoiceData({
+	const { useOnAction:onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
 		setShowModal,
 		id,
@@ -103,7 +103,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 									disabled={!(remarks?.length) || loading}
 									loading={loading}
 									onClick={() => {
-										OnAction('REJECTED');
+										onAction('REJECTED');
 									}}
 								>
 									{t('incidentManagement:reject_btn')}
@@ -115,7 +115,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 									disabled={!(remarks?.length) || loading}
 									loading={loading}
 									onClick={() => {
-										OnAction('APPROVED');
+										onAction('APPROVED');
 									}}
 								>
 									{t('incidentManagement:approve_btn')}

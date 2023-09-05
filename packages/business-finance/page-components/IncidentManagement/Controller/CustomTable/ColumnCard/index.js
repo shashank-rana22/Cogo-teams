@@ -18,9 +18,9 @@ const TOTAL_SPAN = 12;
 const DEFAULT_VALUE = 1;
 
 function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch = () => { } }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
-	const { t } = useTranslation(['incidentManagement']);
 	const {
 		id = '',
 		referenceId = '',
@@ -29,7 +29,6 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 	const { update, createApi } = useUpdateLevel({ refetch, setShow, createdBy, referenceId, id });
 
 	const { loading } = createApi;
-
 	const ref = useRef();
 
 	const onShow = () => {

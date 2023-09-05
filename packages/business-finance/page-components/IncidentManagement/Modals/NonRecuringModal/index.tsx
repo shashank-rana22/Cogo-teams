@@ -13,7 +13,7 @@ import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 import mappingNonRecurring from '../../utils/mappingNonRecurring';
 import { toTitleCase } from '../../utils/titleCase';
 
-import { overHeadConfigs } from './overheadsConfig';
+import { getOverHeadConfigs } from './overheadsConfig';
 import styles from './style.module.css';
 
 const DEFAULT_MAX_LENGTH = 40;
@@ -24,8 +24,8 @@ function NonRecuringModal({
 	row = {},
 	isEditable = true,
 }: any) {
-	const [showModal, setShowModal] = useState(false);
 	const { t } = useTranslation(['incidentManagement']);
+	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, level3, level2, level1 } = row || {};
 	const {
@@ -136,7 +136,7 @@ function NonRecuringModal({
 					{!isEmpty(lineItems) ? (
 						<div className={styles.list_container}>
 							<StyledTable
-								columns={overHeadConfigs({ t })}
+								columns={getOverHeadConfigs({ t })}
 								showPagination={false}
 								data={lineItems}
 							/>

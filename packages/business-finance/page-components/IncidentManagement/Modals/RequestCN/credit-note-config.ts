@@ -1,13 +1,13 @@
 import { startCase } from '@cogoport/utils';
 
-interface Props {
+interface OptionsInterface {
 	t?: Function;
 }
-export const categoryOptions = ({ t = () => {} }:Props) => [
+export const categoryOptions = ({ t = () => {} }:OptionsInterface) => [
 	{ label: t('incidentManagement:revenue_impacting'), value: 'REVENUE_IMPACTING' },
 	{ label: t('incidentManagement:non_revenue_impacting'), value: 'NON_REVENUE_IMPACTING' },
 ];
-export const revenueOptions = ({ t = () => {} }:Props) => [
+export const revenueOptions = ({ t = () => {} }:OptionsInterface) => [
 	{ label: t('incidentManagement:invoicing_currency_change_label'), value: 'Invoicing Currency Change' },
 	{ label: t('incidentManagement:line_item_currency_change_label'), value: 'Line Item Currency Change' },
 	{
@@ -27,7 +27,7 @@ export const revenueOptions = ({ t = () => {} }:Props) => [
 	},
 	{ label: t('incidentManagement:others'), value: 'revenueOthers' },
 ];
-export const nonRevenueOptions = ({ t = () => {} }:Props) => [
+export const nonRevenueOptions = ({ t = () => {} }:OptionsInterface) => [
 	{ label: t('incidentManagement:customer_address_change'), value: 'Customer Address Change' },
 	{ label: t('incidentManagement:invoice_data_change'), value: 'Invoice Date Change' },
 	{ label: t('incidentManagement:gst_change'), value: 'GST Change' },
@@ -41,14 +41,14 @@ export const NON_REVENUE_DATA = [
 	'Billing Party Name Change',
 ];
 
-export const creditNoteApprovalTypeOptions = ({ t = () => {} }:Props) => [
+export const creditNoteApprovalTypeOptions = ({ t = () => {} }:OptionsInterface) => [
 	{ label: t('incidentManagement:non_revenue_impacting'), value: 'NON_REVENUE_IMPACTING' },
 	{ label: t('incidentManagement:cancellation_invoice'), value: 'CANCELLATION_INVOICE' },
 	{ label: t('incidentManagement:revenue_impacting'), value: 'REVENUE_IMPACTING' },
 	{ label: t('incidentManagement:profit_impact_cases'), value: 'PROFIT_IMPACTING_CASES' },
 ];
 
-export const requestCreditNoteColumns = ({ t = () => {} }:Props) => [
+export const requestCreditNoteColumns = ({ t = () => {} }:OptionsInterface) => [
 	{
 		Header   : t('incidentManagement:name_header'),
 		accessor : 'name',

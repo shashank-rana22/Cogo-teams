@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React, { useImperativeHandle, forwardRef, useEffect } from 'react';
 
-import { levelsConfig } from '../../Config/levels-config';
+import { getLevelsConfig } from '../../Config/levels-config';
 import Header from '../../Header';
 
 import Column from './Column';
@@ -59,12 +59,12 @@ function LevelForm({ background = '#f3fafa', item = {}, level = '' }, ref) {
 	}, [level, remove, fields]);
 	return (
 		<div className={styles.container} style={{ backgroundColor: background }}>
-			<Header config={levelsConfig(t)} />
+			<Header config={getLevelsConfig(t)} />
 			<div className={styles.paddingbottom}>
 				{fields.map((field, index) => (
 					<Column
 						key={field.id}
-						config={levelsConfig(t)}
+						config={getLevelsConfig(t)}
 						control={control}
 						remove={remove}
 						append={append}
