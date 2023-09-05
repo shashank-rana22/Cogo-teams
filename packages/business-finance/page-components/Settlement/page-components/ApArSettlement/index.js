@@ -38,6 +38,7 @@ function ApArSettlement() {
 		: 'Select filters to find what you\'re looking for';
 
 	const [selectedData, setSelectedData] = useState([]);
+	const [matchBal, setMatchBal] = useState(INITIAL_MAT_BAL);
 	const totalMatchingBalance = selectedData.reduce((sum, item) => sum + item.balanceAmount, INITIAL_MAT_BAL);
 	const [reRender, setReRender] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -105,6 +106,10 @@ function ApArSettlement() {
 		});
 
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
+
+		const total = selectedData.reduce((sum, item) => +sum + +item.balanceAmount
+		* +item.exchangeRate * item.signFlag, INITIAL_MAT_BAL);
+		setMatchBal(total);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedData]);
 
@@ -149,6 +154,8 @@ function ApArSettlement() {
 				matchModalShow={matchModalShow}
 				setMatchModalShow={setMatchModalShow}
 				totalMatchingBalance={totalMatchingBalance}
+				matchBal={matchBal}
+				setMatchBal={setMatchBal}
 				filters={filters}
 			/>
 			{matchModalShow ? (
@@ -164,6 +171,8 @@ function ApArSettlement() {
 					setReRender={setReRender}
 					isDelete={isDelete}
 					setIsDelete={setIsDelete}
+					matchBal={matchBal}
+					setMatchBal={setMatchBal}
 				/>
 			) : null}
 		</div>

@@ -16,7 +16,9 @@ function Amount({
 	filters = [],
 	matchModalShow = false,
 	setMatchModalShow = () => {},
-	totalMatchingBalance = 0,
+	// totalMatchingBalance = 0,
+	matchBal,
+	// setMatchBal,
 }) {
 	const { currency, ledCurrency } = selectedData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const {
@@ -65,7 +67,7 @@ function Amount({
 					<div className={styles.amount}>
 						{data?.ledgerCurrency}
 						{' '}
-						{loading ? 'Loading...' : (totalMatchingBalance) || INITIAL_BAL}
+						{loading ? 'Loading...' : (matchBal) || INITIAL_BAL}
 					</div>
 					<div>Matching Balance</div>
 				</div>
