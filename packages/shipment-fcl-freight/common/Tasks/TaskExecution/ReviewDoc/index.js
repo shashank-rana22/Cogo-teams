@@ -50,7 +50,7 @@ function ReviewDoc({
 			performed_by_org_id : task.organization_id,
 		};
 	}
-	const { updateDocument } = useUpdateShipmentDocuments(
+	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
 	);
 
@@ -193,6 +193,7 @@ function ReviewDoc({
 					setShowModal={setShowApprovalModal}
 					task={task}
 					handleFinalApprove={handleFinalApprove}
+					taskUpdateLoading={taskUpdateLoading}
 				/>
 			) : null}
 
@@ -203,6 +204,7 @@ function ReviewDoc({
 					handleFinalSubmit={handleFinalSubmit}
 					remarkValue={remarkValue}
 					document_type={docData?.document_type}
+					taskUpdateLoading={taskUpdateLoading}
 				/>
 			) : null}
 		</div>

@@ -9,13 +9,14 @@ function AmendModal({
 	handleFinalSubmit = () => {},
 	remarkValue = '',
 	document_type = '',
+	taskUpdateLoading = false,
 }) {
 	return (
 		<Modal
 			show={showModal}
 			size="md"
 			placement="center"
-			onClose={() => setShowModal(false)}
+			onClose={() => setShowModal(!!taskUpdateLoading)}
 			className={styles.modal_container}
 		>
 			<Modal.Header title="Confirmation" />
@@ -24,11 +25,20 @@ function AmendModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={() => setShowModal(false)}>
+				<Button
+					themeType="secondary"
+					onClick={() => setShowModal(false)}
+					disabled={taskUpdateLoading}
+				>
 					No
 				</Button>
 
-				<Button themeType="primary" onClick={handleFinalSubmit}>
+				<Button
+					themeType="primary"
+					onClick={handleFinalSubmit}
+					loading={taskUpdateLoading}
+					disabled={taskUpdateLoading}
+				>
 					Yes, amend
 				</Button>
 			</Modal.Footer>

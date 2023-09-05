@@ -8,13 +8,14 @@ function ApprovalModal({
 	setShowModal = () => {},
 	task = {},
 	handleFinalApprove = () => {},
+	taskUpdateLoading = false,
 }) {
 	return (
 		<Modal
 			show={showModal}
 			size="md"
 			placement="center"
-			onClose={() => setShowModal(false)}
+			onClose={() => setShowModal(!!taskUpdateLoading)}
 			className={styles.modal_container}
 		>
 			<Modal.Header title="Confirmation" />
@@ -23,11 +24,20 @@ function ApprovalModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={() => setShowModal(false)}>
+				<Button
+					themeType="secondary"
+					onClick={() => setShowModal(false)}
+					disabled={taskUpdateLoading}
+				>
 					No
 				</Button>
 
-				<Button themeType="primary" onClick={handleFinalApprove}>
+				<Button
+					themeType="primary"
+					onClick={handleFinalApprove}
+					loading={taskUpdateLoading}
+					disabled={taskUpdateLoading}
+				>
 					Yes, approve
 				</Button>
 			</Modal.Footer>
