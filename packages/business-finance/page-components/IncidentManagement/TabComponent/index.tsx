@@ -15,6 +15,7 @@ function TabComponent({
 	incidentLoading,
 	getIncidentData,
 }:IncidentDataInterface) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [isAscendingActive, setIsAscendingActive] = useState();
 
 	const { list = [], paginationData } = incidentData || {};
@@ -22,8 +23,6 @@ function TabComponent({
 	const { total = 0, pageSize = 10 } = paginationData || {};
 
 	const { page } = filters || {};
-
-	const { t } = useTranslation(['incidentManagement']);
 
 	const columns = getColumns({ activeTab, setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, t });
 

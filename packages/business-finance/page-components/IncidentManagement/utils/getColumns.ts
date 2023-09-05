@@ -11,7 +11,6 @@ const getColumns = ({
 		return requestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, t });
 	}
 	return (
-
 		columns({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t })
 	);
 };

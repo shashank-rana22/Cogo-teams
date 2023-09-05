@@ -9,8 +9,9 @@ import MatchModal from './MatchModal';
 import styles from './styles.module.css';
 
 function SettlementModal({ settlementData, id, refetch, row, isEditable = true }) {
-	const [show, setShow] = useState(false);
 	const { t } = useTranslation(['incidentManagement']);
+	const [show, setShow] = useState(false);
+
 	const {
 		list = {},
 		incidentMappingId,

@@ -25,6 +25,7 @@ const CN_VALUES_DATA = ['revenueOthers', 'nonRevenueOthers'];
 const STATUS_LIST = ['APPROVED', 'REJECTED'];
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showTdsModal, setShowTdsModal] = useState(false);
 	const [CNCategoryValues, setCNCategoryValues] = useState({
 		CNType   : null,
@@ -32,7 +33,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remarks  : null,
 	});
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
-	const { t } = useTranslation(['incidentManagement']);
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { level3 = {}, level2 = {}, level1 = {}, data = {}, type } = row || {};

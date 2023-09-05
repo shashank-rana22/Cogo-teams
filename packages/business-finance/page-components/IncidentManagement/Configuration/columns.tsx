@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
@@ -86,7 +87,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		Cell     : ({ row: { original } }) => {
 			const { createdBy = {} } = original || {};
 			const { name = '' } = createdBy || {};
-			return <span>{name}</span>;
+			return <span>{showOverflowingNumber(name || '-', 10)}</span>;
 		},
 	},
 	{
@@ -153,20 +154,14 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			const { createdAt } = row;
 			return (
 				<div>
-					{formatDate({
+					{createdAt ? formatDate({
 						date: createdAt,
 						dateFormat:
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType: 'date',
-					})}
-					<div>
-						{formatDate({
-							date: createdAt,
-							timeFormat:
-								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType: 'time',
-						})}
-					</div>
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : ' ',
+					}) : '_'}
 				</div>
 			);
 		},
@@ -183,14 +178,14 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.flex_reverse}>
 					<div>{name}</div>
-					{formatDate({
+					{updatedAt ? formatDate({
 						date: updatedAt,
 						dateFormat:
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						seperator  : ' ',
-					})}
+					}) : '_'}
 				</div>
 			);
 		},

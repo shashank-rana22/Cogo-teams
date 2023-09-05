@@ -11,31 +11,10 @@ import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoE
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
+import { tabs } from './Constants/Tabs';
 import Controller from './Controller';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
-
-interface Props {
-	t?: Function;
-}
-const tabs = ({ t = () => {} }:Props) => [
-	{
-		key   : 'requested',
-		label : t('incidentManagement:requested_tab'),
-	},
-	{
-		key   : 'approved',
-		label : t('incidentManagement:approved_tab'),
-	},
-	{
-		key   : 'rejected',
-		label : t('incidentManagement:rejected_tab'),
-	},
-	{
-		key   : 'controller',
-		label : t('incidentManagement:approval_management_tab'),
-	},
-];
 
 const tabsKeyComponentMapping = {
 	requested  : TabComponent,

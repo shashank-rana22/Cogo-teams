@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
+import React from 'react';
 
 interface StateInterface {
 	state: React.Dispatch<React.SetStateAction<boolean>>

@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
@@ -108,7 +109,8 @@ export const requestColumn = ({
 		Cell     : ({ row: { original } }) => {
 			const { createdBy = {} } = original || {};
 			const { name = '' } = createdBy || {};
-			return <span>{name || '-'}</span>;
+			// return <span>{name || '-'}</span>;
+			return <span>{showOverflowingNumber(name || '-', 10)}</span>;
 		},
 	},
 	{

@@ -23,7 +23,6 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		currentTdsRate, requestedTdsRate,
 		validFrom, validTo, documentUrls, currentTdsStyle, requestedTdsStyle,
 	} = tdsData;
-	console.log(documentUrls, 'documentUrls');
 
 	const getRatePercentageData = [
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },

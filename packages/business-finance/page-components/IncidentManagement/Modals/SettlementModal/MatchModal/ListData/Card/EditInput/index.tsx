@@ -90,7 +90,7 @@ function EditInput({
 		setChangedValue(value);
 	};
 
-	const submit = () => {
+	const onSubmit = () => {
 		setEditedValue(
 			itemData,
 			+changedValue,
@@ -141,7 +141,7 @@ function EditInput({
 							<Button
 								className={styles.edit_icon}
 								onClick={() => {
-									submit();
+									onSubmit();
 									setRestEdit(!restEdit);
 								}}
 							>

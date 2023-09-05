@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function CreateLevelModal({
 	refetch = () => {},
 }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showCreateModal, setShowCreateModal] = useState(false);
 	const [level, setLevel] = useState(null);
 	const ref = useRef();
@@ -21,8 +22,6 @@ function CreateLevelModal({
 	const {
 		controls, onSubmit, loading, onCancel, updating,
 	} = useCreateRequest({ refetch, setShowCreateModal, ref, lineItemsRef });
-
-	const { t } = useTranslation(['incidentManagement']);
 
 	return (
 		<>
