@@ -28,6 +28,11 @@
 	align-items: center;
 }
 
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
 .port_name {
 	display: flex;
 	align-items: center;
@@ -74,6 +79,15 @@
 }
 
 .service_icon {
+	display: flex;
+	align-items: center;
+}
+
+.margin_right_20 {
+	margin-right: 20px;
+}
+
+.pill_container {
 	display: flex;
 	align-items: center;
 }

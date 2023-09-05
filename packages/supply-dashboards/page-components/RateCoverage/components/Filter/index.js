@@ -7,9 +7,6 @@ import { serviceOptions, taskStatusOptions, commodityOptions } from '../../helpe
 
 import styles from './styles.module.css';
 
-const CONSTANT_SIX_HUNDERED = 600;
-const CONSTANT_SIXTEEN = 16;
-
 function Filter({
 	getCoverageDetails = () => {},
 	filter = {},
@@ -18,8 +15,10 @@ function Filter({
 	setSerialId = () => {},
 	setShowWeekData = () => {},
 }) {
-	const type = (filter?.service === 'air_freight') ? 'airport' : 'seaport';
-	const operator_type = (filter?.service === 'air_freight') ? 'airline' : 'shipping_line';
+	const isAirService = filter?.service === 'air_freight';
+
+	const type = (isAirService) ? 'airport' : 'seaport';
+	const operator_type = (isAirService) ? 'airline' : 'shipping_line';
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type } },
 		includes : { default_params_required: true },
@@ -50,22 +49,18 @@ function Filter({
 				<span className={styles.apply_filters}>Apply Filter</span>
 				{' '}
 				(These filters will be applied throughout the page)
-				<Button
-					size="md"
-					themeType="tertiary"
-					onClick={() => {
-						setFilter({ service: 'fcl_freight', status: 'pending', releventToMeValue: true, page: 1 });
-						setSerialId('');
-					}}
-					style={{
-						float         : 'right',
-						color         : '#828282',
-						fontWeight    : CONSTANT_SIX_HUNDERED,
-						paddingBottom : CONSTANT_SIXTEEN,
-					}}
-				>
-					Clear All Filters
-				</Button>
+				<div className={styles.clear_all_filters}>
+					<Button
+						size="md"
+						themeType="tertiary"
+						onClick={() => {
+							setFilter({ service: 'fcl_freight', status: 'pending', releventToMeValue: true, page: 1 });
+							setSerialId('');
+						}}
+					>
+						Clear All Filters
+					</Button>
+				</div>
 			</div>
 
 			<div className={styles.filter_container}>
@@ -106,7 +101,7 @@ function Filter({
 					/>
 				</div>
 				<div className={styles.filter_option_width}>
-					<p>{(filter?.service === 'air_freight') ? 'Air Line' : 'Shipping Line'}</p>
+					<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
 					<Select
 						placeholder="search here"
 						{...shippingLineOptions}

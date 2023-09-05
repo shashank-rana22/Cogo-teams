@@ -270,3 +270,7 @@ export const fclCommodityOptions = [
 		value : 'miscellaneous_dangerous_goods-9',
 	},
 ];
+
+export const DEFAULT_VALUE = 0;
+export const FIFTY = 50;
+export const SEVENTY_FIVE = 75;

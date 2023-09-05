@@ -6,14 +6,10 @@ import styles from './styles.module.css';
 import WeeklyOverviewContent from './WeeklyOverviewContent';
 
 function TasksOverview({ data = {}, statsLoading = false, showWeekData = false, setShowWeekData = () => {} }) {
-	const handleClick = () => {
-		setShowWeekData((prev) => !prev);
-	};
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.swipe_button}>
-				<IcMArrowLeft onClick={handleClick} />
+				<IcMArrowLeft onClick={() => { setShowWeekData((prev) => !prev); }} />
 			</div>
 			<div className={styles.stats_container}>
 				{showWeekData
@@ -21,7 +17,7 @@ function TasksOverview({ data = {}, statsLoading = false, showWeekData = false, 
 					: <OverviewContent data={data} statsLoading={statsLoading} />}
 			</div>
 			<div className={styles.swipe_button}>
-				<IcMArrowRight onClick={handleClick} />
+				<IcMArrowRight onClick={() => { setShowWeekData((prev) => !prev); }} />
 			</div>
 		</div>
 	);

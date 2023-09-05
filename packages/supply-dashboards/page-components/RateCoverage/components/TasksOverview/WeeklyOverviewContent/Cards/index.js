@@ -1,16 +1,10 @@
-/* eslint-disable custom-eslint/variables-name-check */
-/* eslint-disable no-restricted-syntax */
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { SVG_PATH_D } from '../../../../helpers/constants';
+import { SVG_PATH_D, DEFAULT_VALUE, FIFTY, SEVENTY_FIVE } from '../../../../helpers/constants';
 
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 0;
-const FIFTY = 50;
-const SEVENTY_FIVE = 75;
 
 const getColor = (value) => {
 	if (value >= DEFAULT_VALUE && value < FIFTY) { return '#F8AEA8'; }
@@ -20,7 +14,6 @@ const getColor = (value) => {
 
 function findClosestValue(targetValue) {
 	const keys = Object.keys(SVG_PATH_D);
-
 	if (isEmpty(keys)) {
 		return null;
 	}
@@ -28,14 +21,13 @@ function findClosestValue(targetValue) {
 	let [closestKey] = keys;
 	let closestDiff = Math.abs(targetValue - closestKey);
 
-	for (const key of keys) {
+	(keys || []).forEach((key) => {
 		const diff = Math.abs(targetValue - key);
-
 		if (diff < closestDiff) {
 			closestKey = key;
 			closestDiff = diff;
 		}
-	}
+	});
 
 	return SVG_PATH_D[closestKey];
 }

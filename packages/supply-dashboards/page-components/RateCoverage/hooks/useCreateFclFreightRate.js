@@ -15,7 +15,7 @@ const useCreateFclFreightRate = () => {
 			return item;
 		});
 		try {
-			await trigger({
+			const resp = await trigger({
 				data: {
 					origin_port_id      : dataa?.origin_location_id,
 					destination_port_id : dataa?.destination_location_id,
@@ -31,10 +31,12 @@ const useCreateFclFreightRate = () => {
 					procured_by_id      : dataa?.sourced_by_id,
 				},
 			});
+			if (resp?.data) { return resp?.data?.id; }
 		} catch (err) {
 			// console.log(err);
 			Toast.error('failed to create');
 		}
+		return null;
 	};
 
 	return {

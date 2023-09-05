@@ -40,6 +40,7 @@ function Item(props) {
 		const asyncFields = getAsyncFields(asyncKey) || {};
 
 		const finalParams = props?.params || asyncFields?.defaultParams;
+
 		if (Object.keys(asyncFields)?.includes('defaultParams')) { delete asyncFields?.defaultParams; }
 
 		newProps = {

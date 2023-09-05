@@ -4,11 +4,8 @@ import { useState } from 'react';
 
 import Filter from './components/Filter';
 import ListData from './components/ListData';
-// import RateCoverageDetails from './components/RateCoverageDetails';
-// import Stats from './components/Stats';
 import TasksOverview from './components/TasksOverview';
 import useGetCoverageDetails from './hooks/useGetCoverageDetails';
-// import useGetStats from './hooks/useGetStats';
 import useGetListCoverage from './hooks/useGetListCoverages';
 import styles from './styles.module.css';
 
@@ -16,10 +13,6 @@ function RateCoverageContent() {
 	const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
 	const [showWeekData, setShowWeekData] = useState(false);
-
-	const handleFilterClick = () => {
-		setShowFilters((prev) => !prev);
-	};
 
 	const {
 		data:statsData,
@@ -39,6 +32,7 @@ function RateCoverageContent() {
 	} = useGetListCoverage(filter);
 	const finalList = listData?.list;
 	const statsList = listData?.stats;
+
 	const handleToggle = () => {
 		setFilter((prevFilters) => ({ ...prevFilters, releventToMeValue: !prevFilters?.releventToMeValue }));
 	};
@@ -60,7 +54,7 @@ function RateCoverageContent() {
 				<Button
 					themeType="none"
 					className={styles.filter_button}
-					onClick={handleFilterClick}
+					onClick={() => { setShowFilters((prev) => !prev); }}
 				>
 					<IcMFilter />
 					Filter
@@ -97,8 +91,6 @@ function RateCoverageContent() {
 				serialId={serialId}
 				setSerialId={setSerialId}
 			/>
-			{/* <Stats data={data} /> */}
-			{/* <RateCoverageDetails data={data} loading={loading} filter={filter} /> */}
 		</div>
 	);
 }

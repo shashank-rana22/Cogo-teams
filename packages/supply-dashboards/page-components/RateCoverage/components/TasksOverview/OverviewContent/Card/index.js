@@ -32,15 +32,12 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 						? <Placeholder style={{ width: '60px', height: '28px' }} />
 						: (data[detail?.status] || DEFAULT_VALUE)}
 				</div>
-				{
-					detail?.showViewMore
-				&& (
+				{detail?.showViewMore && (
 					<div className={styles.link}>
 						View all
 						<IcMArrowDown />
 					</div>
-				)
-				}
+				)}
 			</div>
 		</div>
 	);
