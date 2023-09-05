@@ -15,6 +15,7 @@ import LeaveSubCard from './LeaveSubCard';
 import styles from './styles.module.css';
 
 const TOTAL_COUNT = 10;
+
 function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuery = '' }) {
 	const { request_label, pending_count, request_key } = data;
 	const [accordion, setAccordion] = useState(false);
@@ -90,9 +91,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 									)}
 								</div>
 							)}
-
 						</div>
-
 					)}
 				</div>
 			) : (
@@ -117,7 +116,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 					)}
 				</div>
 			)}
-			{total_count > TOTAL_COUNT && (
+			{total_count > TOTAL_COUNT && accordion && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						className="md"

@@ -112,11 +112,15 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 		},
 		{
 			Header   : <div className={styles.header_text}>CHECK IN</div>,
-			accessor : (item) => (item.check_in ? formatDate({
-				date       : new Date(item.check_in),
-				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-				formatType : 'time',
-			}) : '--'),
+			accessor : (item) => (
+				<div style={{ fontWeight: 400 }}>
+					{item.check_in ? formatDate({
+						date       : new Date(item.check_in),
+						dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'time',
+					}) : '--'}
+				</div>
+			),
 			id: 'check_in',
 		},
 		{
@@ -138,11 +142,15 @@ const useGetAttendanceColumns = ({ normal_shift, weekend_shift, handleOpenModal 
 		},
 		{
 			Header   : <div className={styles.header_text}>CHECK OUT</div>,
-			accessor : (item) => (item.check_out ? formatDate({
-				date       : item.check_out,
-				dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-				formatType : 'time',
-			}) : '--'),
+			accessor : (item) => (
+				<div style={{ fontWeight: 400 }}>
+					{item.check_out ? formatDate({
+						date       : item.check_out,
+						dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'time',
+					}) : '--'}
+				</div>
+			),
 			id: 'check_out',
 		},
 		{

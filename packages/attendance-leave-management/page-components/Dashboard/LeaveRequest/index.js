@@ -73,7 +73,7 @@ function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 				) : null}
 			</div>
 			{loading ? (<Loader />) : (
-				<div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+				<div className={styles.leave_card_container}>
 					{!isEmpty(list) ? (
 						(list || []).map((leaveData) => (
 							<LeaveCard

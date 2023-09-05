@@ -120,7 +120,7 @@
 	align-items: flex-start;
 	align-self: stretch;
 	justify-content: center;
-	padding: 4px 16px 16px;
+	padding: 4px;
 	background: #fff;
 }
 
@@ -179,7 +179,9 @@
 	align-items: center;
 	align-self: stretch;
 	justify-content: space-between;
-	padding: 16px;
+	margin-bottom: 12px;
+
+	/* padding: 16px; */
 	cursor: pointer;
 	background: #fff;
 	border-radius: 16px;
@@ -211,6 +213,10 @@
 
 .leavecard {
 	width: 100%;
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: #fff;
+	border-radius: 16px;
 }
 
 .pagination_container {

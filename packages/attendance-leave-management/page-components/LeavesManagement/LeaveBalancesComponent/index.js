@@ -51,7 +51,7 @@ function LeaveBalancesComponent({
 								{' '}
 								available
 							</div>
-							<div>
+							<div className={styles.used_balance}>
 								{approved_privilege_leaves}
 								{' '}
 								Used
@@ -76,7 +76,7 @@ function LeaveBalancesComponent({
 								{' '}
 								available
 							</div>
-							<div>
+							<div className={styles.used_balance}>
 								{' '}
 								{approved_sick_leaves}
 								{' '}
@@ -101,7 +101,7 @@ function LeaveBalancesComponent({
 								{' '}
 								available
 							</div>
-							<div>
+							<div className={styles.used_balance}>
 								{' '}
 								{approved_casual_leaves}
 								{' '}
