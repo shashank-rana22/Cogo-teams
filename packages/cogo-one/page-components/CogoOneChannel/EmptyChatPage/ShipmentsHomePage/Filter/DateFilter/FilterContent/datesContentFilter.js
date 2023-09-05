@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 
 import getDateRangeFilterMapping from '../../../../../../../constants/getDateRangeFilterMapping';
 import { DATES_MAPPING } from '../../../../../../../utils/datesMapping';
-import useGetFormatedPath from '../../../../../../../utils/useGetFormatedPath';
 
 import styles from './styles.module.css';
 
@@ -16,9 +15,6 @@ function DatesContentFilter({
 	setRange = () => {},
 }) {
 	const dateRanges = getDateRangeFilterMapping();
-	const { queryParams = {} } = useGetFormatedPath();
-
-	const { range: selectedRange = '', start_date = '', end_date = '' } = queryParams || {};
 
 	const handleClick = () => {
 		applyFilters();
@@ -28,7 +24,7 @@ function DatesContentFilter({
 	useEffect(() => {
 		const minMax = DATES_MAPPING[range]?.(new Date());
 		setDate({ ...minMax });
-	}, [end_date, range, selectedRange, setDate, start_date]);
+	}, [range, setDate]);
 
 	const handleReset = () => {
 		setRange('today');

@@ -7,10 +7,7 @@ import useGetFormatedPath from '../utils/useGetFormatedPath';
 const DEFAULT_PAGE = 1;
 const FILTERS_STATES = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'];
 
-const getParams = ({
-	pagination, serialId, shipmentType = '', dateFilters = {},
-
-}) => {
+const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }) => {
 	const { start_date = '', end_date = '' } = dateFilters;
 
 	return {
