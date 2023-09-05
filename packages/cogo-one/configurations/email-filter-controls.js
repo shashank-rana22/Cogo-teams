@@ -47,6 +47,20 @@ const FILTER_CONTROLS = [
 			required: 'This is Requied',
 		},
 	},
+	{
+		label          : 'User Email',
+		name           : 'user_email',
+		controllerType : 'input',
+		className      : 'status_field_controller',
+		value          : '',
+	},
+	{
+		label          : 'SID',
+		name           : 'shipment_serial_id',
+		controllerType : 'input',
+		className      : 'status_field_controller',
+		value          : '',
+	},
 ];
 
 export default FILTER_CONTROLS;
