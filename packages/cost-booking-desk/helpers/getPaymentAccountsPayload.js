@@ -1,5 +1,5 @@
 const getPaymentAccountsPayload = ({
-	exchangeRateApiData = {},
+	exchangeRateApiData = '',
 	billingParty = {},
 	updateRefundModal = {},
 	formValues = {},
@@ -13,7 +13,6 @@ const getPaymentAccountsPayload = ({
 	const { accountNumber = '', bankName = '' } = advanceDocumentSellerBankDetail || {};
 	const { tradePartyMappingId = '', entityCode = '' } = advanceDocumentSellerAddress || {};
 	const { ledger_currency = '', id = '' } = billingParty || {};
-	const { data = '' } = exchangeRateApiData || {};
 
 	const {
 		amount = '',
@@ -30,8 +29,8 @@ const getPaymentAccountsPayload = ({
 		paymentDate       : date,
 		currency,
 		ledCurrency       : ledger_currency,
-		amount            : (amount && data) ? amount * data : '',
-		exchangeRate      : data,
+		amount            : (amount && exchangeRateApiData) ? amount * exchangeRateApiData : '',
+		exchangeRate      : exchangeRateApiData,
 		payMode           : payment_mode,
 		remarks,
 		utr               : utr_number,
