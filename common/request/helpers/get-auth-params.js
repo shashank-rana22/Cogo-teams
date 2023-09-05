@@ -35,7 +35,7 @@ const getAuthParam = (permissions_navigations, pathname) => {
 			}
 		});
 	});
-
+	console.log(`${navigation}:${defaultScope}`);
 	let authorizationparameters = `${navigation}:${defaultScope}`;
 
 	if (defaultView) {

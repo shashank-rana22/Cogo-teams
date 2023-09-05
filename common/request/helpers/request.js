@@ -7,7 +7,8 @@ import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];
+const PEEWEE_SERVICES = [
+	'fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -42,11 +43,11 @@ const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_UR
 request.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
-
+	console.log(store, newConfig.url);
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
-
+	console.log('Auth', authorizationparameters);
 	const apiPath = newConfig.url.split('/').pop();
 
 	const originalApiPath = newConfig.url

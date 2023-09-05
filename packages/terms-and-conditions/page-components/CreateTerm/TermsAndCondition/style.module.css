@@ -1,0 +1,38 @@
+.container {
+	padding: 8px;
+}
+
+.layout_container {
+	& .form_item_label {
+		margin-top: 16px;
+		margin-bottom: 8px;
+		font-size: 12px;
+		font-weight: 400;
+		color: #393f70;
+	}
+
+	& .ui-textarea {
+		::placeholder {
+			padding: 2px;
+			color: #cbcff5;
+		}
+	}
+}
+
+.title {
+	font-size: 16px;
+	color: #393f70;
+}
+
+.btn_align {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	padding: 16px 0;
+	margin-top: 24px;
+	background: #fff;
+	border-top: 1px solid #cddbff;
+}

@@ -6,7 +6,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const useRaiseTicketcontrols = ({
+const useCreateTermcontrols = ({
 	watchOrgId = '', setAdditionalInfo = () => {}, formattedSubCategories = [], setSubCategories = () => {},
 	watchCategory = '', watchSubCategory = '', watchService = '', watchTradeType = '', resetField = () => {},
 }) => {
@@ -29,7 +29,7 @@ const useRaiseTicketcontrols = ({
 		},
 		valueKey: 'user_id',
 	});
-	console.log('console', organizationOptions, categoryOptions, ticketTypeOptions);
+
 	return [
 		{
 			label          : 'Select Service',
@@ -112,40 +112,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 
 		},
-		{
-			label          : 'Priority',
-			name           : 'priority',
-			controllerType : 'select',
-			value          : 'medium',
-			placeholder    : 'Select Type',
-			options        : [
-				{
-					label : 'Medium',
-					value : 'medium',
-				},
-				{
-					label : 'low',
-					value : 'Low',
-				},
-				{
-					label : 'High',
-					value : 'high',
-				},
-			],
-			theme     : 'admin',
-			className : 'primary md',
-		},
-		{
-			label          : 'Upload Supporting Document',
-			name           : 'file_url',
-			controllerType : 'uploader',
-		},
-		{
-			label          : 'Notify customer',
-			name           : 'notify_customer',
-			controllerType : 'checkbox',
-		},
 	];
 };
 
-export default useRaiseTicketcontrols;
+export default useCreateTermcontrols;

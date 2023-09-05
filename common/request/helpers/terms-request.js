@@ -7,22 +7,23 @@ import getAuthorizationParams from './get-final-authpipe';
 import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
+	// console.log('params', params);
 	const paramsStringify = qs.stringify(params, {
 		arrayFormat: 'brackets', serializeDate: (date) => format(date, 'isoUtcDateTime'),
 	});
 	return paramsStringify;
 };
-const ticketsRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_TICKET_REST_BASE_API_URL });
+const termsRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
-ticketsRequest.interceptors.request.use((oldConfig) => {
+termsRequest.interceptors.request.use((oldConfig) => {
 	const { authkey = '', ...axiosConfig } = oldConfig;
-	console.log(oldConfig);
-	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
+
+	// const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
 	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
-	if (!isDevMode) {
-		axiosConfig.baseURL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/tickets`;
-	}
+	// if (!isDevMode) {
+	// 	axiosConfig.baseURL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/list_terms_and_conditions`;
+	// }
 	const token = getCookie(auth, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, authkey);
 
@@ -37,4 +38,4 @@ ticketsRequest.interceptors.request.use((oldConfig) => {
 	};
 });
 
-export { ticketsRequest };
+export { termsRequest };
