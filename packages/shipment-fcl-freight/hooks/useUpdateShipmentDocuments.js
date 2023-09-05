@@ -14,16 +14,10 @@ function useUpdateShipmentDocuments({
 	const updateDocument = async (val) => {
 		try {
 			await trigger({ data: val });
-
 			Toast.success(successMessage);
-
 			refetch();
-
-			return Promise.resolve();
 		} catch (err) {
 			toastApiError(err);
-
-			return Promise.reject(err);
 		}
 	};
 
