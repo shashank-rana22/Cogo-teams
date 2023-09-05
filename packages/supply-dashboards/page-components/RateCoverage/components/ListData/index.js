@@ -27,10 +27,6 @@ function ListData({
 	serialId = '',
 	setSerialId = () => {},
 }) {
-	const handlePageChange = (pageNumber) => {
-		setPage(pageNumber);
-	};
-
 	useEffect(() => {
 		getListCoverage(serialId);
 	}, [getListCoverage, serialId]);
@@ -80,7 +76,7 @@ function ListData({
 							currentPage={page}
 							totalItems={data[source]}
 							pageSize={10}
-							onPageChange={handlePageChange}
+							onPageChange={(pageNumber) => { setPage(pageNumber); }}
 						/>
 					)}
 			</div>

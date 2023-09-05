@@ -126,20 +126,13 @@ function AddRateModal({
 	};
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
-			<Modal.Header title="Please add rate" />
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+			<Modal.Header title="Please Add Rate" />
+			<Modal.Body style={{ maxHeight: '600px', minHeight: '300px' }}>
 				<Layout
 					fields={newCotrols}
 					control={control}
 					errors={errors}
 				/>
-				{/* {filter?.service === 'fcl_freight' ? (
-					<Layout
-						fields={newCotrols}
-						control={control}
-						errors={errors}
-					/>
-				) : <AirRateModal data={data} showModal={showModal} setShowModal={setShowModal} />} */}
 			</Modal.Body>
 			<Modal.Footer>
 				<div>

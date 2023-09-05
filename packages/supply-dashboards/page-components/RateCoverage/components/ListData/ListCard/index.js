@@ -13,32 +13,15 @@ import styles from './styles.module.css';
 
 function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
-	const items = [
-		{
-			children : data?.container_size,
-			disabled : false,
-			color    : '#F7F7F7',
-			tooltip  : false,
-		},
-		{
-			children : startCase(data?.container_type),
-			disabled : false,
-			color    : '#F7F7F7',
-			tooltip  : false,
-		},
-		{
-			children : startCase(data?.commodity),
-			disabled : false,
-			color    : '#F7F7F7',
-			tooltip  : false,
-		},
-		{
-			children : data?.weight_slabs,
-			disabled : false,
-			color    : '#F7F7F7',
-			tooltip  : false,
-		},
-	];
+
+	const itemList = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
+
+	const items = (itemList || []).map((item) => ({
+		children : startCase(data[item]),
+		disabled : false,
+		color    : '#F7F7F7',
+		tooltip  : false,
+	}));
 
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
@@ -68,10 +51,10 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 						{data?.service_provider?.business_name || data?.service_provider?.name}
 					</div>
 				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div className={styles.pill_container}>
 					{data?.serial_id
 					&& (
-						<div style={{ marginRight: '20px' }}>
+						<div className={styles.margin_right_20}>
 							<Pill size="md" color="#ffe7d5">
 								SID:
 								{data?.serial_id}
@@ -80,7 +63,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 					)}
 					{data?.assigned_to?.name
 					&& (
-						<div style={{ marginRight: '20px' }}>
+						<div className={styles.margin_right_20}>
 							<Pill size="md" color="#EEF0F0">
 								Assigned to:
 								{data?.assigned_to?.name}
@@ -89,7 +72,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 					)}
 					{data?.closed_by?.name
 					&& (
-						<div style={{ marginRight: '20px' }}>
+						<div className={styles.margin_right_20}>
 							<Pill size="md" color="#EEF0F0">
 								Closed by:
 								{data?.closed_by?.name}
@@ -120,7 +103,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 							placement="top"
 						>
 							<p className={styles.port_name}>
-								<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<div className={styles.column}>
 									<p className={styles.port_code_color}>
 										&#40;
 										{data?.origin_port?.port_code || data?.origin_airport?.port_code}
@@ -140,7 +123,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 							placement="top"
 						>
 							<p className={styles.port_name}>
-								<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<div className={styles.column}>
 									<p className={styles.port_code_color}>
 										&#40;
 										{data?.destination_port?.port_code || data?.destination_airport?.port_code }
@@ -177,29 +160,23 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 					</div>
 				</div>
 			</div>
-			{
-				showCloseModal
-				&& (
-					<CloseModal
-						setShowModal={setShowCloseModal}
-						showModal={showCloseModal}
-						data={data}
-						getListCoverage={getListCoverage}
-						filter={filter}
-					/>
-				)
-			}
-			{
-				showAddRateModal
-				&& (
-					<AddRateModal
-						showModal={showAddRateModal}
-						setShowModal={setShowAddRateModal}
-						filter={filter}
-						data={data}
-					/>
-				)
-			}
+			{showCloseModal && (
+				<CloseModal
+					setShowModal={setShowCloseModal}
+					showModal={showCloseModal}
+					data={data}
+					getListCoverage={getListCoverage}
+					filter={filter}
+				/>
+			)}
+			{showAddRateModal && (
+				<AddRateModal
+					showModal={showAddRateModal}
+					setShowModal={setShowAddRateModal}
+					filter={filter}
+					data={data}
+				/>
+			)}
 		</div>
 	);
 }
