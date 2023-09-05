@@ -148,7 +148,7 @@ function ReviewDoc({
 					</div>
 					<div className={styles.action_buttons}>
 						<Button
-							onClick={() => { onClose(); }}
+							onClick={() => onClose()}
 							themeType="secondary"
 							disabled={loading}
 						>
