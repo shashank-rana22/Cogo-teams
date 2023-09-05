@@ -67,6 +67,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				location_id              : formValues?.location_id,
 				expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
 				expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
+				load_selection_type      : 'cargo_per_package',
 				...common,
 				...common2,
 			}];
@@ -74,6 +75,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			location_id              : formValues?.location_id,
 			expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
 			expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
+			load_selection_type      : 'cargo_per_package',
 			...common,
 			...common2,
 		}];
