@@ -9,7 +9,7 @@ import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
 import useHandleShareQuotation from './useHandleShareQuotation';
 
-function ShareQuotation({ noRatesPresent = false }) {
+function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }) {
 	const {
 		rate,
 		detail,
@@ -76,6 +76,7 @@ function ShareQuotation({ noRatesPresent = false }) {
 					widths={widths}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
+					bookingConfirmationMode={bookingConfirmationMode}
 				/>
 			) : null}
 

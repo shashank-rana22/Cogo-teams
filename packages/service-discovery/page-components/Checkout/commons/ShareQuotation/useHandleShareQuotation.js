@@ -6,7 +6,7 @@ import handleCopy from '../../helpers/handleCopyUrl';
 
 const ONE = 1;
 
-const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRatesPresent = () => {} }) => {
+const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRatesPresent = false }) => {
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
