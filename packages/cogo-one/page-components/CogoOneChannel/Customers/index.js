@@ -1,10 +1,11 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
 import { getUserActiveMails } from '../../../configurations/mail-configuration';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
@@ -108,6 +109,17 @@ function Customers({
 	const handleChangeTab = (val) => {
 		setActiveTab((prev) => ({ ...prev, tab: val, data: {}, subTab: 'all' }));
 	};
+
+	useEffect(() => {
+		const chatTabsActive = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.chat_tabs_to_be_shown || [];
+
+		if (!chatTabsActive?.includes(activeTab?.tab)) {
+			setActiveTab((prev) => ({
+				...prev,
+				tab: chatTabsActive[GLOBAL_CONSTANTS.zeroth_index],
+			}));
+		}
+	}, [activeTab?.tab, setActiveTab, viewType]);
 
 	return (
 		<div
