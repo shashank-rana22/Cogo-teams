@@ -39,18 +39,21 @@ function RoleWiseFlashAgentChat({
 				{(FLASH_MESSAGES_ROLES_LIST || []).map((item) => (
 					<div className={styles.roles_timeout_section_parts} key={item.key}>
 						<div className={styles.roles_label}>{item.label}</div>
-						<InputNumber
-							size="sm"
-							placeholder="Timeout (min)"
-							min={0}
-							value={timeoutValues?.[item.key]}
-							arrow={false}
-							onChange={(val) => setTimeoutValues((prev) => ({
-								...prev,
-								[item?.key]: val,
-							}))}
-							className={styles.styled_select}
-						/>
+						<div className={styles.select_section}>
+							<InputNumber
+								size="sm"
+								placeholder="Timeout"
+								min={0}
+								value={timeoutValues?.[item.key]}
+								arrow={false}
+								onChange={(val) => setTimeoutValues((prev) => ({
+									...prev,
+									[item?.key]: val,
+								}))}
+								className={styles.styled_select}
+							/>
+							<span className={styles.minute_label}>min</span>
+						</div>
 					</div>
 				))}
 			</div>

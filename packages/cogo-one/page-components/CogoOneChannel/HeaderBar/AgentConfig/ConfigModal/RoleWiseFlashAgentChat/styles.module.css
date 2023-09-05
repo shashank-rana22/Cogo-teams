@@ -28,14 +28,26 @@
 	}
 }
 
+.select_section {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
 .styled_select {
-	width: 40%;
+	/* width: 40%; */
+	width: 75px;
 
 	:global {
 		.ui_input_number_control {
 			font-size: 12px !important;
 		}
 	}
+}
+
+.minute_label {
+	margin-left: 8px;
+	font-size: 12px;
 }
 
 .button_section {
