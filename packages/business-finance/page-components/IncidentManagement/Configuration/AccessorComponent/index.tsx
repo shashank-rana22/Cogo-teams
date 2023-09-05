@@ -31,7 +31,10 @@ const TYPE_COMPONENT_MAPPING = {
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
 	REVOKE_INVOICE                         : RevokeInvoice,
+	// JOB_OPEN                               : JvModal,
 };
+
+// todo anmol add view card here
 
 function AccessorComponent({ row, getIncidentData }) {
 	const { type = '', id = '', data, remark = '', status = '', referenceId = '' } = row || {};

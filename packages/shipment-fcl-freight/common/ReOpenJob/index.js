@@ -1,9 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import useGetShipmentStakeholder from '../../hooks/useGetShipmentStakeholder';
 import useIncidentReOpenJob from '../../hooks/useIncidentReOpenJob';
 
 import controls from './controls';
@@ -20,7 +22,12 @@ function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData =
 	}));
 	const [isSuccess, setIsSuccess] = useState(false);
 
-	const { loading = false, onReOpenJob = () => {} } = useIncidentReOpenJob({
+	const { data = [], loading = false } = useGetShipmentStakeholder({
+		shipment_id      : shipmentData?.id,
+		stakeholder_type : 'booking_agent',
+	});
+
+	const { loading: incidentLoading = false, onReOpenJob = () => {} } = useIncidentReOpenJob({
 		shipmentData,
 		setIsSuccess,
 	});
@@ -33,6 +40,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData =
 	} = useForm();
 
 	const { serial_id = '' } = shipmentData || {};
+	const kam_name = data?.[GLOBAL_CONSTANTS.zeroth_index]?.user?.name || '--';
 
 	return (
 		<form onSubmit={handleSubmit(onReOpenJob)}>
@@ -63,7 +71,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData =
 							</div>
 							<div>
 								<label>KAM</label>
-								<span>Anmol Bansal</span>
+								<span>{kam_name}</span>
 							</div>
 						</div>
 
@@ -88,7 +96,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData =
 						themeType="secondary"
 						size="md"
 						onClick={() => setShowModal(false)}
-						disabled={loading}
+						disabled={incidentLoading}
 					>
 						Cancel
 					</Button>
@@ -96,8 +104,8 @@ function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData =
 						themeType="primary"
 						size="md"
 						onClick={handleSubmit(onReOpenJob)}
-						disabled={loading}
-						loading={loading}
+						disabled={incidentLoading}
+						loading={incidentLoading}
 					>
 						Submit
 					</Button>
