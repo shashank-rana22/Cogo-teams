@@ -1,13 +1,14 @@
 import { Button, Placeholder, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDelete, IcMPdf, IcCFtick } from '@cogoport/icons-react';
-import { saveAs } from 'file-saver';
+import { IcMDelete } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../../../commons/List/index.tsx';
 import useListTaggedInvoice from '../../hooks/useListTaggedInvoice';
 import { OVERSEAS_FINAL_CONFIRMATION_LIST } from '../Configurations/overseasFinalConfirmationListConfig';
+import GetData from '../utils/GetData';
+import GetInvoiceData from '../utils/GetInvoiceData';
 
 import ConfirmationModal from './ConfirmationModal/index';
 import styles from './styles.module.css';
@@ -17,103 +18,6 @@ const TOOLTIP_SHOW_CONDITION = 15;
 const SUBSTRING_CONDITON_MAX = 15;
 const SUBSTRING_CONDITON_MIN = 0;
 const TAGGED_DOC_CONDITION = 4;
-
-function GetInvoiceData({ selectBankShow = false, setShowConfirmationModal = () => {}, list = {} }) {
-	return (
-		selectBankShow
-			? (
-				<div style={{ display: 'flex' }}>
-					<IcCFtick />
-					<div className={styles.success}>
-						Invoices successfully merged
-					</div>
-				</div>
-			)
-			:						(
-				<Button
-					onClick={() => setShowConfirmationModal(true)}
-					disabled={!list.length}
-				>
-					Merge Invoices
-				</Button>
-			)
-	);
-}
-
-function GetData({
-	documents = {},
-	documentsList = [],
-	getDate = () => {},
-	deleteTaggedDocuments = () => {},
-	setSelectBankShow = () => {},
-}) {
-	if (
-		documents.billPdfUrl === undefined
-		&& documents.shipmentPdfUrl === undefined
-	) {
-		return (
-			<div className={styles.merge_doc_msg}>
-				PLEASE MERGE INVOICES
-			</div>
-		);
-	}
-
-	return documentsList.map((item) => {
-		if (item.documentUrl !== '') {
-			return (
-				<div className={styles.document_card} key={item.docName}>
-					<div className={styles.document_sub_card}>
-						<div className={styles.pdf_container}>
-							<div>
-								<IcMPdf width={30} height={30} />
-							</div>
-							<div>
-								<div>
-									<div className={styles.doc_name_text}>{item.docName}</div>
-									<div className={styles.uploaded_by}>
-										uploaded at:
-										{' '}
-										{getDate(item.uploadedAt)}
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className={styles.download_doc}>
-							<Button
-								style={{ marginRight: '20px' }}
-								onClick={() => window.open(item.documentUrl, '_blank')}
-								themeType="linkUi"
-							>
-								View
-							</Button>
-
-							<Button
-								onClick={() => saveAs(item.documentUrl)}
-								themeType="linkUi"
-							>
-								Download
-							</Button>
-
-							{item.showDeleteIcon && (
-								<IcMDelete
-									width={24}
-									height={24}
-									className={styles.delete}
-									onClick={() => {
-										deleteTaggedDocuments(item);
-										setSelectBankShow(false);
-									}}
-								/>
-							)}
-						</div>
-					</div>
-				</div>
-			);
-		}
-		return null;
-	});
-}
 
 function MergeDocuments({ setActive = () => {} }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);

@@ -39,13 +39,6 @@
 	}
 }
 
-.merge_doc_msg {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 20px;
-}
-
 .header {
 	font-size: 18px;
 	font-weight: 600;
@@ -104,43 +97,11 @@
 	margin: 30px 0;
 }
 
-.document_card {
-	width: 90%;
-	padding: 10px;
-	margin: 10px 0 15px 32px;
-	border: 1px solid #cbd1f8;
-	border-radius: 8px;
-}
-
 .document_sub_card {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 	margin: 10px 0;
-}
-
-.pdf_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	width: 40%;
-}
-
-.doc_name_text {
-	font-size: 14px;
-	font-weight: 500;
-	color: #393f70;
-}
-
-.uploaded_by {
-	font-size: 12px;
-	font-weight: 500;
-	color: #bdbdbd;
-}
-
-.download_doc {
-	display: flex;
-	align-items: center;
 }
 
 .success {

@@ -1,0 +1,50 @@
+.success {
+	margin-left: 8px;
+	font-size: 10px;
+	font-weight: 500;
+	color: var(--color-tertiary-success-green-2);
+	text-decoration: underline;
+}
+
+.merge_doc_msg {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.document_card {
+	width: 90%;
+	padding: 10px;
+	margin: 10px 0 15px 32px;
+	border: 1px solid #cbd1f8;
+	border-radius: 8px;
+}
+
+.pdf_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 40%;
+}
+
+.doc_name_text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.uploaded_by {
+	font-size: 12px;
+	font-weight: 500;
+	color: #bdbdbd;
+}
+
+.download_doc {
+	display: flex;
+	align-items: center;
+}
+
+.delete {
+	cursor: pointer;
+}
