@@ -1,1 +1,1 @@
-export { default as ScoringConfigurations } from './page-components/ScoringConfigurations';
+export { default as Incentive } from './page-components/IncentivePlans';

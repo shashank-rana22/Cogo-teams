@@ -2595,12 +2595,12 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon        : IcMIncentives,
 			options     : [
 				{
-					key           : 'performance_and_incentives-scoring_configurations',
-					title         : t('common:scoring_configurations'),
-					href          : '/v2/incentives/scoring-configurations',
-					as            : '/v2/incentives/scoring-configurations',
+					key           : 'performance_and_incentives-incentive_plans',
+					title         : 'Incentive Plans',
+					href          : '/v2/performance-and-incentives/incentive-plans',
+					as            : '/v2/performance-and-incentives/incentive-plans',
 					type          : 'link',
-					possible_apis : apis.socring_configurations,
+					possible_apis : apis.incentivePlans,
 				},
 			],
 		},

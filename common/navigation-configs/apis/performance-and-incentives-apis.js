@@ -1,5 +1,5 @@
 const performance_and_incentives = {
-	socring_configurations: [],
+	incentivePlans: [],
 };
 
 export default performance_and_incentives;
