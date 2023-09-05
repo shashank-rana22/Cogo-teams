@@ -66,7 +66,7 @@ function ReviewDoc({
 		if (isEmpty(remarkValue)) {
 			Toast.error('Please provide amendment reason');
 		} else {
-			setShowModal({ display: true, type: 'Amend' });
+			setShowModal({ display: true, type: 'amend' });
 		}
 	};
 
@@ -178,7 +178,7 @@ function ReviewDoc({
 							Amend
 						</Button>
 
-						<Button onClick={() => setShowModal({ display: true, type: 'Approve' })}>
+						<Button onClick={() => setShowModal({ display: true, type: 'approve' })}>
 							Approve
 						</Button>
 					</div>
@@ -186,7 +186,7 @@ function ReviewDoc({
 
 			)}
 
-			{(showModal.display && showModal.type === 'Approve') ? (
+			{(showModal.display && showModal.type === 'approve') ? (
 				<ApprovalModal
 					showModal={showModal}
 					setShowModal={setShowModal}
