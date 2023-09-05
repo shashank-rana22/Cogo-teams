@@ -3,8 +3,8 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 const API_NAME = {
-	fcl_freight : 'list_fcl_freight_rate_coverages',
-	air_freight : 'list_air_freight_rate_coverages',
+	fcl_freight : 'list_fcl_freight_rate_jobs',
+	air_freight : 'list_air_freight_rate_jobs',
 };
 
 const DEFAULT_PAGE = 1;

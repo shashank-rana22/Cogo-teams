@@ -3,8 +3,8 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 const API_NAME = {
-	fcl_freight : 'get_fcl_freight_rate_coverage_stats',
-	air_freight : 'get_air_freight_rate_coverage_stats',
+	fcl_freight : 'get_fcl_freight_rate_job_stats',
+	air_freight : 'get_air_freight_rate_job_stats',
 };
 
 const useGetCoverageDetails = () => {

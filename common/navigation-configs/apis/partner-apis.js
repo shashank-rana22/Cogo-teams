@@ -1551,22 +1551,22 @@ const partner = {
 			service_name : 'air_freight_rate',
 		},
 		{
-			api          : 'get_fcl_freight_rate_coverage_stats',
+			api          : 'get_fcl_freight_rate_job_stats',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
 		{
-			api          : 'get_air_freight_rate_coverage_stats',
+			api          : 'get_air_freight_rate_job_stats',
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
 		{
-			api          : 'list_fcl_freight_rate_coverages',
+			api          : 'list_fcl_freight_rate_jobs',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
 		{
-			api          : 'list_air_freight_rate_coverages',
+			api          : 'list_air_freight_rate_jobs',
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
