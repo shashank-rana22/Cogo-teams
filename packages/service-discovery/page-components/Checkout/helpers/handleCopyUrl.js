@@ -1,11 +1,22 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const handleCopy = async ({ detail = {}, shipment_id = '', checkout_id = '' }) => {
-	const url = shipment_id
-		? `https://app.cogoport.com/${detail?.importer_exporter_id}/
-		   ${detail?.importer_exporter_branch_id}/checkout/${checkout_id}/${shipment_id}`
-		: `https://app.cogoport.com/${detail?.importer_exporter_id}/
-		   ${detail?.importer_exporter_branch_id}/checkout/${checkout_id}`;
+	const { importer_exporter_id, importer_exporter_branch_id, importer_exporter = {} } = detail;
+
+	let url = '';
+
+	if (importer_exporter.tags?.[GLOBAL_CONSTANTS.zeroth_index] === 'partner') {
+		url = `https://partners.cogoport.com/${
+			importer_exporter.partner_id
+		}/checkout/${checkout_id}`;
+	} else if (shipment_id) {
+		url = `https://app.cogoport.com/${importer_exporter_id}/
+			${importer_exporter_branch_id}/checkout/${checkout_id}/${shipment_id}`;
+	} else {
+		url = `https://app.cogoport.com/${importer_exporter_id}/
+			${importer_exporter_branch_id}/checkout/${checkout_id}`;
+	}
 
 	try {
 		await navigator.clipboard.writeText(url);
