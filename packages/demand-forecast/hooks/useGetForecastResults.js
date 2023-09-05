@@ -25,6 +25,8 @@ const useGetForecastFclFreightClusters = ({ filters = {} }) => {
 					params: {
 						filters: {
 							...filters,
+							...(selected_agent_id ?
+								{ selected_agent_id } : {})
 						},
 						sort_by_cluster: true,
 						page,

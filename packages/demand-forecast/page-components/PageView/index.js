@@ -42,10 +42,11 @@ function PageView() {
 	return (
 		<div>
 			<Header />
-			<ScopeSelect size="md" apisToConsider={['get_rolling_forecast_fcl_freight_clusters']} />
+
 
 			<div className={styles.secondary_header}>
 				<Tab activeTab={activeTab} setActiveTab={setActiveTab} />
+				<ScopeSelect size="md" apisToConsider={['get_rolling_forecast_fcl_freight_clusters']} />
 				<div className={styles.dates}>
 					{!loading && start_date && end_date && (
 						<div className={styles.forecast_date}>
@@ -61,6 +62,7 @@ function PageView() {
 							{end_date}
 						</div>
 					)}
+
 					<Filters setFilters={setFilters} setPage={setPage} filters={filters} />
 				</div>
 
