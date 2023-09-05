@@ -1,8 +1,8 @@
+import { Layout } from '@cogoport/air-modules';
 import { Modal, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useContext } from 'react';
 

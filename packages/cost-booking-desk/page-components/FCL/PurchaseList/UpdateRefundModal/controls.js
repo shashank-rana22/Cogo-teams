@@ -107,12 +107,13 @@ const getFormControls = ({
 			span        : 12,
 		},
 		{
-			name  : 'upload',
-			label : 'Upload Proof',
-			type  : 'file',
-			rules : { required: 'Proof is required' },
-			size  : 'sm',
-			span  : 12,
+			name       : 'upload',
+			label      : 'Upload Proof',
+			type       : 'file',
+			uploadType : 'aws',
+			rules      : { required: 'Proof is required' },
+			size       : 'sm',
+			span       : 12,
 		},
 	];
 };
