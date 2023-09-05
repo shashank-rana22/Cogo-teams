@@ -1,7 +1,7 @@
 const ONE_OPTION = 1;
 
 const getRefundAdvanceDocumentData = ({ viewRefundModal = {} }) => {
-	const { details = {}, currency = 'INR', paymentMode = '' } = viewRefundModal || {};
+	const { details = {}, currency = '', paymentMode = '' } = viewRefundModal || {};
 	const { numberOfContainers = '', amountPerContainer = '' } = details || {};
 	return (
 		[

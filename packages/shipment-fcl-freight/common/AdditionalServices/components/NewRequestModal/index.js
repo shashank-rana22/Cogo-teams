@@ -1,17 +1,8 @@
 import { Modal, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import {
-	AsyncSelectController,
-	DatepickerController,
-	InputController,
-	SelectController,
-	TextAreaController,
-	UploadController,
-	useForm,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useContext } from 'react';
 
 import getAdvanceDocumentPayload from '../../../../helpers/getAdvanceDocumentPayload';
@@ -19,35 +10,14 @@ import useAdvanceDocument from '../../../../hooks/useAdvanceDocument';
 import useGetEntities from '../../../../hooks/useGetEntities';
 
 import formControls from './controls';
+import FormElement from './FormElement';
 import { getCollectionPartyDetails } from './getCollectionPartyDetails';
 import styles from './styles.module.css';
 
 const ONE_OPTION = 1;
+const BANK_VERIFICATION_STATUS = ['pending', 'verified'];
 
-const controlTypeMapping = {
-	text        : InputController,
-	select      : SelectController,
-	textarea    : TextAreaController,
-	number      : InputController,
-	asyncSelect : AsyncSelectController,
-	upload      : UploadController,
-	datepicker  : DatepickerController,
-};
-
-function FormElement({ name, label, type, errors, showElements, ...rest }) {
-	const Element = controlTypeMapping[type];
-	const show = !isEmpty(showElements[name]) ? showElements[name] : true;
-
-	return (Element && show) ? (
-		<div>
-			<div className={styles.label}>{label}</div>
-			<Element name={name} type={type} {...rest} />
-			{errors[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
-		</div>
-	) : null;
-}
-
-const getCollectionPartyParams = (organization_id) => ({
+const getCollectionPartyParams = (organization_id = '') => ({
 	documents_data_required         : true,
 	other_addresses_data_required   : true,
 	poc_data_required               : true,
@@ -65,14 +35,14 @@ function NewRequestModal({
 	const { profile } = useSelector((state) => state);
 	const { partner, user } = profile || {};
 
-	const { loading, apiTrigger } = useAdvanceDocument({ setShowRequestModal });
-	const { listEntities } = useGetEntities();
+	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal });
+	const { listEntities = {} } = useGetEntities();
 
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 	const serial_id = shipment_data?.serial_id;
 
 	const organization_id = primary_service?.service_provider?.id || '';
-	const { handleModifiedOptions } = getCollectionPartyDetails();
+	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
 	const PARAMS = getCollectionPartyParams(organization_id);
 
 	const [billingParty, setBillingParty] = useState({});
@@ -96,7 +66,7 @@ function NewRequestModal({
 	);
 	(bank_details || []).forEach((bank) => {
 		if (
-			['pending', 'verified'].includes(bank?.verification_status)
+			BANK_VERIFICATION_STATUS.includes(bank?.verification_status)
 				&& bank?.status === 'active'
 		) {
 			COLLECTION_PARTY_BANK_OPTIONS.push({

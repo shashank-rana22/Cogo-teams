@@ -1,7 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import {
-	useForm,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';

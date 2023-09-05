@@ -14,6 +14,8 @@ import UpdateRefundModal from './UpdateRefundModal';
 import ViewRefundModal from './ViewRefundModal';
 import ViewRequestModal from './ViewRequestedModal';
 
+const INIT_RECORDS = 0;
+const INIT_PAGE = 1;
 const PAGE_LIMIT = 10;
 
 function PurchaseList() {
@@ -27,11 +29,11 @@ function PurchaseList() {
 	const {
 		loading = false,
 		data = {},
-		pagination = 1,
+		pagination = INIT_PAGE,
 		setPagination = () => {},
 	} = useListPurchaseAdvanceDocument({ searchValue });
 
-	const { list = [], totalRecords } = data || {};
+	const { list = [], totalRecords = INIT_RECORDS } = data || {};
 
 	const columns = getColumns({ paymentActiveTab, setViewRequestModal, setViewRefundModal, setUpdateRefundModal });
 

@@ -40,8 +40,16 @@ const getRequestAdvanceDocumentData = ({ viewRequestModal = {} }) => {
 			},
 			{
 				title : 'Total Amount to be paid',
-				value : `${currency} ${(amountPerContainer && numberOfContainers)
-					? amountPerContainer * numberOfContainers : ''}`,
+				value : (amountPerContainer && numberOfContainers)
+					? formatAmount({
+						amount  : amountPerContainer * numberOfContainers,
+						currency,
+						options : {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : MAXIMUM_FRACTION_DIGITS,
+						},
+					}) : currency,
 			},
 			{ title: 'Payment Mode', value: paymentMode },
 			{

@@ -17,7 +17,7 @@ function ViewRefundModal({
 		>
 			<Modal.Header title="Refund Details" />
 			<Modal.Body>
-				{refundAdvanceDocumentData.map((itm) => {
+				{(refundAdvanceDocumentData || []).map((itm) => {
 					const { title, value } = itm || {};
 					return (
 						<div key={title} className={styles.flex}>

@@ -8,7 +8,11 @@ import CostBookingDeskContext from '../context/CostBookingDeskContext';
 
 const INIT_PAGE = 1;
 
-const getParams = ({ query = '', pagination = INIT_PAGE, extraFilters = {} }) => {
+const getParams = ({
+	query = '',
+	pagination = INIT_PAGE,
+	extraFilters = {},
+}) => {
 	const searchQuery = query ? { q: query } : {};
 
 	return {
@@ -44,7 +48,7 @@ function useListPurchaseAdvanceDocument({ searchValue = '' }) {
 		params  : getParams({ query, pagination, extraFilters }),
 	}, { manual: false });
 
-	const documentListIds = useMemo(() => data?.list.map((item) => item?.advanceDocumentId), [data?.list]);
+	const documentListIds = useMemo(() => (data?.list || []).map((item) => item?.advanceDocumentId), [data?.list]);
 
 	const apiTrigger = useCallback(() => {
 		try {

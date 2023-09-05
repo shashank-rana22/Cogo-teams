@@ -1,34 +1,27 @@
 import {
+	AsyncSelectController,
+	DatepickerController,
 	InputController,
 	SelectController,
-	UploadController,
-	DatepickerController,
 	TextAreaController,
+	UploadController,
 } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 const controlTypeMapping = {
-	text       : InputController,
-	select     : SelectController,
-	number     : InputController,
-	upload     : UploadController,
-	datepicker : DatepickerController,
-	textarea   : TextAreaController,
+	text        : InputController,
+	select      : SelectController,
+	textarea    : TextAreaController,
+	number      : InputController,
+	asyncSelect : AsyncSelectController,
+	upload      : UploadController,
+	datepicker  : DatepickerController,
 };
 
-function FormElement({
-	name = '',
-	label = '',
-	type = '',
-	errors = {},
-	showElements = {},
-	...rest
-}) {
+function FormElement({ name = '', label = '', type = '', errors = {}, showElements = {}, ...rest }) {
 	const Element = controlTypeMapping[type];
-	if (!Element) return null;
-
 	const show = !isEmpty(showElements[name]) ? showElements[name] : true;
 
 	return (Element && show) ? (

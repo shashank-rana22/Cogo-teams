@@ -2,13 +2,20 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const getParams = ({ ledger_currency = '', currency = 'INR' }) => ({
+const getParams = ({
+	ledger_currency = '',
+	currency = 'INR',
+}) => ({
 	from_currency : currency,
 	to_currency   : ledger_currency,
 	exchange_date : Date.now(),
 });
 
-const useGetExchangeRate = ({ billingParty = {}, formValues = {}, setValue = () => {} }) => {
+const useGetExchangeRate = ({
+	billingParty = {},
+	formValues = {},
+	setValue = () => {},
+}) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_exchange_rate',
 		method : 'GET',

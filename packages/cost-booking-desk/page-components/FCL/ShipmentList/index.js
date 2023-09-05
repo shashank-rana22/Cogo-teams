@@ -9,7 +9,7 @@ import ShipmentPagination from './ShipmentPagination';
 import styles from './styles.module.css';
 
 function ShipmentList() {
-	const { loading, data } = useListCostBookingDeskShipments();
+	const { loading = false, data = {} } = useListCostBookingDeskShipments();
 
 	const { list = [] } = data || {};
 

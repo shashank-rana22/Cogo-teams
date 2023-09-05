@@ -9,7 +9,7 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentSellerAddress = {},
 		advanceDocumentSellerBankDetail = {},
 		advanceDocumentId = '',
-		shipmentType,
+		shipmentType = '',
 	} = updateRefundModal || {};
 
 	const { accountNumber = '', bankName = '' } = advanceDocumentSellerBankDetail || {};
