@@ -1,7 +1,8 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import React, { useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 import { toTitleCase } from './utils';
 
 function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showTdsModal, setShowTdsModal] = useState(false);
 	const [remark, setRemark] = useState('');
 	const { data = {} } = row || {};
@@ -23,14 +25,14 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 	} = tdsData;
 
 	const getRatePercentageData = [
-		{ label: 'Current Rate', value: currentTdsRate },
-		{ label: 'Requested Rate', value: requestedTdsRate },
+		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
+		{ label: t('incidentManagement:requested_tds_rate'), value: requestedTdsRate },
 	];
 	const getAllValidData = [
-		{ id: '1', label: 'Valid From', value: validFrom },
-		{ id: '2', label: 'Valid Till', value: validTo },
-		{ id: '3', label: 'Current TDS style', value: currentTdsStyle },
-		{ id: '4', label: 'New TDS style Requested ', value: requestedTdsStyle },
+		{ id: '1', label: t('incidentManagement:valid_data_from'), value: validFrom },
+		{ id: '2', label: t('incidentManagement:valid_data_till'), value: validTo },
+		{ id: '3', label: t('incidentManagement:current_tds_style'), value: currentTdsStyle },
+		{ id: '4', label: t('incidentManagement:requested_tds_style'), value: requestedTdsStyle },
 	];
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -39,6 +41,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		id,
 		row,
 		remark,
+		t,
 	});
 
 	return (
@@ -54,11 +57,14 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						setShowTdsModal(false);
 					}}
 				>
-					<Modal.Header title="TDS Deviation" />
+					<Modal.Header title={t('incidentManagement:tds_deviation')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
-							<div className={styles.org_name}>Organization Name - </div>
+							<div className={styles.org_name}>
+								{`${t('incidentManagement:org_name')} -`}
+								{' '}
+							</div>
 							<div className={styles.name}>
 								{tdsTradePartyName ? (
 									<div>
@@ -73,7 +79,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						</div>
 						<div className={styles.flex}>
 							{getRatePercentageData.map((itemData) => (
-								<div className={styles.rates_data}>
+								<div className={styles.rates_data} key={itemData?.label}>
 									<div className={styles.rates}>
 										{itemData?.value || '-'}
 										%
@@ -84,7 +90,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						</div>
 						<div className={styles.flex}>
 							{getAllValidData.map((item) => (
-								<div className={styles.value_data}>
+								<div className={styles.value_data} key={item?.id}>
 									<div className={styles.label_value}>
 										{item?.label || '-'}
 									</div>
@@ -98,26 +104,30 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 							))}
 						</div>
 						<div className={styles.document_flex}>
-							<div className={styles.document}>Document -</div>
+							<div className={styles.document}>{`${t('incidentManagement:doc')} -`}</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
-								<a href={url} target="_blank" rel="noreferrer">
+								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
-										<div className={styles.view}>View Document</div>
+										<div className={styles.view}>
+											{`${t('incidentManagement:view_doc_link')} -`}
+										</div>
 										<IcMEyeopen />
 									</div>
 								</a>
 							) : (
-								<div> No document available</div>
+								<div key={url}>
+									{' '}
+									{`${t('incidentManagement:no_doc_available')} -`}
+								</div>
 							)))}
 						</div>
 						{isEditable && (
 							<>
-								<div className={styles.remarks}>Remarks*</div>
-
+								<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 								<Textarea
 									name="remark"
 									size="md"
-									placeholder="Enter Remark Here..."
+									placeholder={t('incidentManagement:remarks_placeholder') || ''}
 									onChange={(value: string) => setRemark(value)}
 									style={{ width: '700', height: '100px', marginBottom: '12px' }}
 								/>
@@ -138,7 +148,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 										OnAction('REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 
 								<Button
@@ -150,7 +160,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 										OnAction('APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

@@ -22,6 +22,7 @@ interface PropsData {
 	setShowDepositModal?:(p:boolean)=>void,
 	id?: string | number,
 	remarkValue?:string,
+	t?: Function,
 }
 
 const useGetSecurityDepositData = ({
@@ -30,6 +31,7 @@ const useGetSecurityDepositData = ({
 	setShowDepositModal,
 	id,
 	remarkValue,
+	t,
 }:PropsData) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -64,7 +66,7 @@ const useGetSecurityDepositData = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
+				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 				setShowDepositModal(false);
 				refetch();
 			} else {
