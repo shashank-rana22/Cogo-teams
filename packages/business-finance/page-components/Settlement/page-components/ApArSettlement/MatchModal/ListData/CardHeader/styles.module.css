@@ -3,10 +3,10 @@
 	align-items: center;
 	width: 100%;
 	padding: 16px;
-	margin: 16px 0 16px 10px;
+	margin: 16px 0;
 	font-size: 12px;
 	text-align: center;
-	background-color: #f8f2e7;
+	background-color: #cfeaed;
 	border-radius: 8px;
 
 	:first-child {

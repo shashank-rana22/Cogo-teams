@@ -56,10 +56,7 @@ export default function ListData({
 		newCardsData.splice(targetIndex, ZERO_INDEX, draggedItem);
 		setUpdatedData(newCardsData);
 	};
-	// console.log('checked',checkedData);
-	// console.log('selected',selectedData);
-	// console.log('updated',updatedData);
-	// console.log('dry',dryRunData);
+
 	return (
 		<div>
 			<CardHeader />

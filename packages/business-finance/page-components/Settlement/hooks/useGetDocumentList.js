@@ -1,9 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
+
+import { getFormatDates } from '../utils/getFormatDate';
 
 export function toastApiError(err) {
 	let message = '';
@@ -19,7 +20,13 @@ export function toastApiError(err) {
 	if (message !== 'canceled') { Toast.error(message || 'Something went wrong !!'); }
 }
 
-const useGetDocumentList = ({ filters, sorting }) => {
+const useGetDocumentList = ({
+	filters = {}, sorting = {},
+	setMatchModalShow = () => {},
+	setSelectedData = () => {},
+}) => {
+	const { profile } = useSelector((state) => state || {});
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/settlement/documents',
@@ -36,41 +43,35 @@ const useGetDocumentList = ({ filters, sorting }) => {
 		},
 		{ manual: true },
 	);
+	const [{ loading: settleLoading }, settleTrigger] = useRequestBf(
+		{
+			url     : 'payments/settlement/settle',
+			method  : 'POST',
+			authKey : 'post_payments_settlement_settle',
+		},
+		{ manual: true },
+	);
 
 	const { query, debounceQuery } = useDebounceQuery();
 	const INITIAL_BAL = 0;
-	const { search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '', ...rest } = filters || {};
+	const {
+		search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '', entityCode, sort, ...rest
+	} = filters || {};
 	const [balanceData, setBalanceData] = useState(INITIAL_BAL);
 	const balanceRefetch = async () => {
 		try {
-			if (filters.tradeParty && filters.entityCode) {
+			if (tradeParty && entityCode) {
 				const rep = await balanceTrigger({
 					params: {
 						...rest,
-						startDate:
-					(date?.startDate
-						&& formatDate({
-							date       : date?.startDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						})) || undefined,
-						endDate:
-					(date?.endDate
-						&& formatDate({
-							date       : date?.endDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						})) || undefined,
-
+						startDate             : (date?.startDate && getFormatDates(date?.startDate)) || undefined,
+						endDate               : (date?.endDate && getFormatDates(date?.endDate)) || undefined,
 						orgId                 : tradeParty,
 						accModes              : accMode || undefined,
 						query                 : query || undefined,
 						docType               : undefined,
 						documentPaymentStatus : undefined,
+						entityCode,
 					},
 				});
 				setBalanceData(rep.data);
@@ -83,37 +84,21 @@ const useGetDocumentList = ({ filters, sorting }) => {
 	};
 	const refetch = async () => {
 		try {
-			if (filters.tradeParty && filters.entityCode) {
+			if (tradeParty && entityCode) {
 				await trigger({
 					params: {
 						...rest,
-						orgId                 : filters.tradeParty,
+						orgId                 : tradeParty,
 						accModes              : accMode || undefined,
 						documentPaymentStatus : status || undefined,
-						startDate:
-                    (filters.date?.startDate
-						&& formatDate({
-							date       : filters.date?.startDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						})) || undefined,
-						endDate:
-                    (filters.date?.endDate
-						&& formatDate({
-							date       : filters.date?.endDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						})) || undefined,
-
-						docType  : docType || undefined,
-						query    : query || undefined,
-						sortBy   : sorting?.sortBy || undefined,
-						sortType : sorting?.sortType || undefined,
-						...filters.sort,
+						startDate             : (date?.startDate && getFormatDates(date?.startDate)) || undefined,
+						endDate               : (date?.endDate && getFormatDates(date?.endDate)) || undefined,
+						docType               : docType || undefined,
+						query                 : query || undefined,
+						sortBy                : sorting?.sortBy || undefined,
+						sortType              : sorting?.sortType || undefined,
+						entityCode,
+						...sort,
 					},
 				});
 			}
@@ -122,12 +107,29 @@ const useGetDocumentList = ({ filters, sorting }) => {
 			toastApiError(error);
 		}
 	};
+	const submitSettleMatch = async ({ updatedData, date:settleDate, fileValue }) => {
+		try {
+			const response = await settleTrigger({
+				data: {
+					stackDetails     : updatedData,
+					settlementDate   : getFormatDates(settleDate) || undefined,
+					createdBy        : profile?.user?.id,
+					supportingDocUrl : fileValue,
+				},
+			});
+			if (response?.hasError) return;
+			setMatchModalShow(false);
+			refetch();
+			setSelectedData([]);
+			Toast.success('Settle successfully');
+		} catch (error) {
+			Toast.error(error?.data?.message);
+		}
+	};
+
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
-	// useEffect(() => {
-	// 	refetch(query);
-	// }, [query, refetch]);
 
 	return {
 		data,
@@ -138,6 +140,8 @@ const useGetDocumentList = ({ filters, sorting }) => {
 		query,
 		balanceRefetch,
 		refetch,
+		submitSettleMatch,
+		settleLoading,
 	};
 };
 export default useGetDocumentList;

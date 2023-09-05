@@ -18,7 +18,7 @@ export default function MatchModal({
 	selectedData = [], filters = [], setSelectedData = () => {},
 	isDelete = false, setIsDelete = () => {},
 	reRender = false, setReRender = () => {},
-	matchBal,
+	matchBal, submitSettleMatch, settleLoading,
 }) {
 	const [updateBal, setUpdateBal] = useState(matchBal);
 	const [date, setDate] = useState('');
@@ -185,15 +185,7 @@ export default function MatchModal({
 				<div style={{ marginRight: '6px' }}>
 					<Button size="md" themeType="secondary" onClick={() => setShowJV(true)}>CREATE JV</Button>
 				</div>
-				<div
-					style={{
-						marginRight   : '6px',
-						display       : 'flex',
-						flexDirection : 'column',
-						flexWrap      : 'wrap',
-						width         : '90px',
-					}}
-				>
+				<div className={styles.dry_button}>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -246,7 +238,12 @@ export default function MatchModal({
 					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button disabled={!(checkData?.canSettle) || !dryRun} onClick={() => onClose()}>Settle</Button>
+					<Button
+						disabled={!(checkData?.canSettle) || !dryRun || settleLoading}
+						onClick={() => submitSettleMatch({ updatedData, date, fileValue })}
+					>
+						Settle
+					</Button>
 				</Modal.Footer>
 			</Modal>
 			{showJV && (

@@ -2,9 +2,20 @@ import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete, IcMEdit, IcMTick, IcMLineundo } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
+import { getFormatAmount } from '../../../../../utils/getFormatAmount';
+
 import styles from './styles.module.css';
 
 const INITIAL_BAL = 0;
+const STATUS = {
+	Unpaid               : '#FEF1DF',
+	Unutilized           : '#FEF1DF',
+	Utilized             : '#CDF7D4',
+	'Partially Paid'     : '#D9EAFD',
+	Paid                 : '#CDF7D4',
+	'Knocked Off'        : '#CDF7D4',
+	'Partially Utilized' : '#D9EAFD',
+};
 export default function CardItem({
 	itm = {},
 	selectedData = [],
@@ -23,8 +34,8 @@ export default function CardItem({
 		currency,
 		settledTds = 0,
 		exchangeRate = 0,
+		nostroAmount = 0,
 	} = new_itm || {};
-
 	const [prevTDS, setPrevTDS] = useState(new_itm.tds);
 	const [newTDS, setNewTDS] = useState(new_itm.tds);
 	const [editedAllocation, setEditedAllocation] = useState(new_itm.allocationAmount);
@@ -35,19 +46,10 @@ export default function CardItem({
 		const total = updatedData.reduce((sum, item) => +sum + +item.balanceAmount
 		* +item.exchangeRate * item.signFlag, INITIAL_BAL);
 		setUpdateBal(total);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [new_itm.tds, new_itm.allocationAmount]);
+	}, [new_itm.tds, new_itm.allocationAmount, setUpdateBal, updatedData]);
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
-	const STATUS = {
-		Unpaid               : '#FEF1DF',
-		Unutilized           : '#FEF1DF',
-		Utilized             : '#CDF7D4',
-		'Partially Paid'     : '#D9EAFD',
-		Paid                 : '#CDF7D4',
-		'Knocked Off'        : '#CDF7D4',
-		'Partially Utilized' : '#D9EAFD',
-	};
+
 	const EXC_RATE_FIXED = 2;
 	const handleDeleteClick = (idToDelete) => {
 		const updatedSelectedData = selectedData.filter((item) => item.id !== idToDelete);
@@ -75,7 +77,6 @@ export default function CardItem({
 		setNewTDS(new_itm.tds);
 		setPrevTDS(new_itm.tds);
 	};
-
 	useEffect(() => {
 	}, [selectedData]);
 	return (
@@ -94,51 +95,44 @@ export default function CardItem({
 					</div>
 				</div>
 				<div>
-					{currency}
-					{'  '}
-					{documentAmount}
+					{getFormatAmount(documentAmount, currency)}
 				</div>
 				<div className={styles.rate}>{exchangeRate?.toFixed(EXC_RATE_FIXED)}</div>
 				<div>
-
-					{
-					isTdsEdnew_itmode
-						? (
-							<>
-								<input
-									type="number"
-									value={newTDS}
-									onChange={(e) => setNewTDS(e.target.value)}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMTick />}
-									themeType="primary"
-									onClick={() => {
-										setIsTdsEdnew_itmode(false);
-										new_itm.tds = parseFloat(newTDS);
-										handleEditTDS();
-									}}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMLineundo />}
-									themeType="primary"
-									onClick={() => {
-										setIsTdsEdnew_itmode(false);
-										new_itm.tds = originalTDS;
-										setNewTDS(originalTDS);
-										setPrevTDS(originalTDS);
-										handleEditTDS();
-									}}
-								/>
-							</>
-						)
+					{isTdsEdnew_itmode ? (
+						<>
+							<input
+								type="number"
+								value={newTDS}
+								onChange={(e) => setNewTDS(e.target.value)}
+							/>
+							<ButtonIcon
+								size="lg"
+								icon={<IcMTick />}
+								themeType="primary"
+								onClick={() => {
+									setIsTdsEdnew_itmode(false);
+									new_itm.tds = parseFloat(newTDS);
+									handleEditTDS();
+								}}
+							/>
+							<ButtonIcon
+								size="lg"
+								icon={<IcMLineundo />}
+								themeType="primary"
+								onClick={() => {
+									setIsTdsEdnew_itmode(false);
+									new_itm.tds = originalTDS;
+									setNewTDS(originalTDS);
+									setPrevTDS(originalTDS);
+									handleEditTDS();
+								}}
+							/>
+						</>
+					)
 						:					(
 							<>
-								{currency}
-								{'  '}
-								{new_itm?.tds}
+								{getFormatAmount(new_itm?.tds, currency)}
 								<ButtonIcon
 									size="lg"
 									icon={(
@@ -151,23 +145,16 @@ export default function CardItem({
 									themeType="primary"
 								/>
 							</>
-						)
-                    }
+						)}
 				</div>
 				<div>
-					{currency}
-					{'  '}
-					{new_itm?.nostroAmount}
+					{getFormatAmount(nostroAmount, currency)}
 				</div>
 				<div>
-					{currency}
-					{'  '}
-					{settledTds}
+					{getFormatAmount(settledTds, currency)}
 				</div>
 				<div>
-					{currency}
-					{'  '}
-					{balanceAmount}
+					{getFormatAmount(balanceAmount, currency)}
 				</div>
 				<div>
 					{
@@ -203,9 +190,7 @@ export default function CardItem({
 						)
 						:					(
 							<>
-								{currency}
-								{'  '}
-								{new_itm?.allocationAmount}
+								{getFormatAmount(new_itm?.allocationAmount, currency)}
 								<ButtonIcon
 									size="lg"
 									icon={(
@@ -222,9 +207,7 @@ export default function CardItem({
                     }
 				</div>
 				<div>
-					{currency}
-					{'  '}
-					{new_itm?.balanceAfterAllocation}
+					{getFormatAmount(new_itm?.balanceAfterAllocation, currency)}
 				</div>
 				<div>
 					<ButtonIcon

@@ -48,9 +48,13 @@ function ApArSettlement() {
 	const {
 		data, loading, refetch,
 		balanceRefetch, accountData, accountLoading, query,
+		submitSettleMatch,
+		settleLoading,
 	} = useGetDocumentList({
 		filters,
 		sorting,
+		setMatchModalShow,
+		setSelectedData,
 	});
 
 	const handleFilterChange = (filterName, value) => {
@@ -173,6 +177,8 @@ function ApArSettlement() {
 					setIsDelete={setIsDelete}
 					matchBal={matchBal}
 					setMatchBal={setMatchBal}
+					submitSettleMatch={submitSettleMatch}
+					settleLoading={settleLoading}
 				/>
 			) : null}
 		</div>
