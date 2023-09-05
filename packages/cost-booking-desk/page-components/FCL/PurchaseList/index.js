@@ -22,9 +22,10 @@ function PurchaseList() {
 	const { paymentActiveTab } = useContext(CostBookingDeskContext);
 
 	const [searchValue, setSearchValue] = useState('');
-	const [viewRequestModal, setViewRequestModal] = useState({});
-	const [viewRefundModal, setViewRefundModal] = useState({});
-	const [updateRefundModal, setUpdateRefundModal] = useState({});
+	const [modalData, setModalData] = useState({
+		data : {},
+		type : '',
+	});
 
 	const {
 		loading = false,
@@ -35,7 +36,7 @@ function PurchaseList() {
 
 	const { list = [], totalRecords = INIT_RECORDS } = data || {};
 
-	const columns = getColumns({ paymentActiveTab, setViewRequestModal, setViewRefundModal, setUpdateRefundModal });
+	const columns = getColumns({ paymentActiveTab, setModalData });
 
 	return (
 		<div>
@@ -62,24 +63,24 @@ function PurchaseList() {
 				</div>
 			)}
 
-			{!isEmpty(viewRequestModal) ? (
+			{!isEmpty(modalData?.data) && modalData?.type === 'viewDeposit' ? (
 				<ViewRequestModal
-					viewRequestModal={viewRequestModal}
-					setViewRequestModal={setViewRequestModal}
+					viewRequestModal={modalData}
+					setViewRequestModal={setModalData}
 				/>
 			) : null}
 
-			{!isEmpty(viewRefundModal) ? (
+			{!isEmpty(modalData?.data) && modalData?.type === 'viewRefund' ? (
 				<ViewRefundModal
-					viewRefundModal={viewRefundModal}
-					setViewRefundModal={setViewRefundModal}
+					viewRefundModal={modalData}
+					setViewRefundModal={setModalData}
 				/>
 			) : null}
 
-			{!isEmpty(updateRefundModal) ? (
+			{!isEmpty(modalData?.data) && modalData?.type === 'requestRefund' ? (
 				<UpdateRefundModal
-					updateRefundModal={updateRefundModal}
-					setUpdateRefundModal={setUpdateRefundModal}
+					updateRefundModal={modalData}
+					setUpdateRefundModal={setModalData}
 				/>
 			) : null}
 		</div>
