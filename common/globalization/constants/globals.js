@@ -209,6 +209,7 @@ const GLOBAL_CONSTANTS = {
 		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
+			'f896df94-f77d-4e6d-b5dd-3a4b936f8401',
 		],
 		cogo_course_notification_user_ids: [
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
@@ -398,10 +399,11 @@ const GLOBAL_CONSTANTS = {
 		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
 		custom_plan:
 		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
-		truck_image : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
-		forward     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
-		replay_all  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
-		replay      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		truck_image         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
+		forward             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
+		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
+		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
 	},
 
 	video_call_ring_tone_url:

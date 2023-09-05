@@ -100,5 +100,6 @@
     "my_profile_path": "Profil Saya",
     "dashboard_path": "Dasbor",
     "all_badges": "Semua Lencana",
-    "badges_unlocked_mastery": "Lencana terbuka untuk keahlian"
+    "badges_unlocked_mastery": "Lencana terbuka untuk keahlian",
+    "account_logout_message": "Apakah Anda ingin keluar dari semua akun?"
 }

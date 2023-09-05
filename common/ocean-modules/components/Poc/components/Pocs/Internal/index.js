@@ -6,7 +6,10 @@ import getInternalPocData from '../../../helpers/getInternalPocData';
 import ServiceIDGroup from './ServiceIDGroup';
 import styles from './styles.module.css';
 
-function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPermission = {}, shipment_data = {} }) {
+function Internal({
+	data = [], setAddPoc = () => { }, loading = false,
+	rolesPermission = {}, shipment_data = {}, activeStakeholder = '',
+}) {
 	const internalData = getInternalPocData(data);
 	const canAddPoc = !!rolesPermission?.add_internal_poc;
 
@@ -40,7 +43,8 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPerm
 										data={internalData[key]}
 										setAddPoc={setAddPoc}
 										rolesPermission={rolesPermission}
-										shipment_type={shipment_data?.shipment_type}
+										shipment_data={shipment_data}
+										activeStakeholder={activeStakeholder}
 									/>
 								</div>
 							</div>
