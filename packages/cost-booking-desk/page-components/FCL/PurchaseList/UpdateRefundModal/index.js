@@ -87,7 +87,7 @@ function UpdateRefundModal({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					disabled={loading || entitiesLoading || exchangeRateLoading}
+					disabled={loading || entitiesLoading || exchangeRateLoading || isEmpty(exchangeRateApiData)}
 					onClick={handleSubmit(onSubmit)}
 				>
 					Submit

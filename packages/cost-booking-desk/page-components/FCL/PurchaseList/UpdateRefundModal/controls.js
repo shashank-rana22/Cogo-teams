@@ -47,13 +47,6 @@ const formControls = ({
 			style       : { width: '230px' },
 		},
 		{
-			name     : 'exchange_rate',
-			label    : 'Exchange Rate',
-			type     : 'number',
-			disabled : true,
-			size     : 'sm',
-		},
-		{
 			name                  : 'date',
 			label                 : 'Date',
 			type                  : 'datepicker',
@@ -95,6 +88,14 @@ const formControls = ({
 			onChange    : (_, item) => {
 				setBillingParty(item);
 			},
+		},
+		{
+			name     : 'exchange_rate',
+			label    : 'Exchange Rate',
+			type     : 'number',
+			disabled : true,
+			size     : 'sm',
+			style    : { width: '270px' },
 		},
 		{
 			name        : 'remarks',
