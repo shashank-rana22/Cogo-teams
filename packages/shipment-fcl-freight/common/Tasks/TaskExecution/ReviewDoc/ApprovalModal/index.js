@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function ApprovalModal({
-	showModal = false,
+	showModal = { display: false, type: '' },
 	setShowModal = () => {},
 	task = {},
 	handleFinalApprove = () => {},
@@ -12,10 +12,10 @@ function ApprovalModal({
 }) {
 	return (
 		<Modal
-			show={showModal}
+			show={showModal.display}
 			size="md"
 			placement="center"
-			onClose={() => setShowModal(!!taskUpdateLoading)}
+			onClose={() => setShowModal({ display: !!taskUpdateLoading, type: '' })}
 			className={styles.modal_container}
 		>
 			<Modal.Header title="Confirmation" />
@@ -26,7 +26,7 @@ function ApprovalModal({
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
-					onClick={() => setShowModal(false)}
+					onClick={() => setShowModal({ display: false, type: '' })}
 					disabled={taskUpdateLoading}
 				>
 					No

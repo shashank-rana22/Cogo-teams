@@ -21,8 +21,7 @@ function ReviewDoc({
 }) {
 	const [isAmend, setIsAmend] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
-	const [showApprovalModal, setShowApprovalModal] = useState(false);
-	const [showAmendModal, setShowAmendModal] = useState(false);
+	const [showModal, setShowModal] = useState({ display: false, type: '' });
 
 	const newRefetch = () => {
 		onClose();
@@ -67,7 +66,7 @@ function ReviewDoc({
 		if (isEmpty(remarkValue)) {
 			Toast.error('Please provide amendment reason');
 		} else {
-			setShowAmendModal(true);
+			setShowModal({ display: true, type: 'Amend' });
 		}
 	};
 
@@ -179,7 +178,7 @@ function ReviewDoc({
 							Amend
 						</Button>
 
-						<Button onClick={() => setShowApprovalModal(true)}>
+						<Button onClick={() => setShowModal({ display: true, type: 'Approve' })}>
 							Approve
 						</Button>
 					</div>
@@ -187,26 +186,24 @@ function ReviewDoc({
 
 			)}
 
-			{showApprovalModal ? (
+			{(showModal.display && showModal.type === 'Approve') ? (
 				<ApprovalModal
-					showModal={showApprovalModal}
-					setShowModal={setShowApprovalModal}
+					showModal={showModal}
+					setShowModal={setShowModal}
 					task={task}
 					handleFinalApprove={handleFinalApprove}
 					taskUpdateLoading={taskUpdateLoading}
 				/>
-			) : null}
-
-			{showAmendModal ? (
+			) : (
 				<AmendModal
-					showModal={showAmendModal}
-					setShowModal={setShowAmendModal}
+					showModal={showModal}
+					setShowModal={setShowModal}
 					handleFinalSubmit={handleFinalSubmit}
 					remarkValue={remarkValue}
 					document_type={docData?.document_type}
 					taskUpdateLoading={taskUpdateLoading}
 				/>
-			) : null}
+			) }
 		</div>
 
 	);
