@@ -1779,6 +1779,10 @@ const apis = [
 		access_type  : 'public',
 		service_name : 'fcl_freight_rate',
 	},
+	{
+		api         : 'post_purchase_advance_document',
+		access_type : 'private',
+	},
 ];
 
 export default apis;

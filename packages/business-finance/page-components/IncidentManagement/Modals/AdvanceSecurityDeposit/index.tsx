@@ -23,15 +23,23 @@ interface Props {
 	isEditable?:boolean,
 	row?:object,
 }
-function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditable = true, row }:Props) {
+function AdvanceSecurityDeposit({
+	advanceSecurityDeposit = {},
+	id = '',
+	refetch = () => {},
+	isEditable = true,
+	row = {},
+}:Props) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 	const { getData, loading } = useGetSecurityDepositData({
+		advanceSecurityDeposit,
 		refetch,
 		setShowDepositModal,
 		id,
 		remarkValue,
+		t,
 	});
 
 	return (
