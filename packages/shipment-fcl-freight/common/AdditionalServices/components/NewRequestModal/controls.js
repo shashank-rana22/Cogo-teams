@@ -26,13 +26,13 @@ const PAYMENT_MODE_OPTIONS = [
 	},
 ];
 
-const formControls = ({
+const getFormControls = ({
 	listEntities = {},
 	billingParty = {},
 	setBillingParty = () => {},
 	setBillingPartyAddress = () => {},
 	setValue = () => {},
-	PARAMS = {},
+	cpParams = {},
 	handleModifiedOptions = () => {},
 	setCollectionParty = () => {},
 	collectionPartyAddresses,
@@ -137,7 +137,7 @@ const formControls = ({
 			rules              : { required: 'Collection Party is required' },
 			size               : 'sm',
 			style              : { width: '265px' },
-			params             : PARAMS,
+			params             : cpParams,
 			getModifiedOptions : ({ options }) => handleModifiedOptions({ options }),
 			initialCall        : true,
 			onChange           : (_, item) => {
@@ -216,4 +216,4 @@ const formControls = ({
 	];
 };
 
-export default formControls;
+export default getFormControls;

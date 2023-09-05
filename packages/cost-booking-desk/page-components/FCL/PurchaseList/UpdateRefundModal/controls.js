@@ -15,7 +15,7 @@ const PAYMENT_MODE_OPTIONS = [
 	},
 ];
 
-const formControls = ({
+const getFormControls = ({
 	listEntities = {},
 	setBillingParty = () => {},
 }) => {
@@ -117,4 +117,4 @@ const formControls = ({
 	];
 };
 
-export default formControls;
+export default getFormControls;

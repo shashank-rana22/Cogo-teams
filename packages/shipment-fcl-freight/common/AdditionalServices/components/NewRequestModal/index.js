@@ -9,7 +9,7 @@ import getAdvanceDocumentPayload from '../../../../helpers/getAdvanceDocumentPay
 import useAdvanceDocument from '../../../../hooks/useAdvanceDocument';
 import useGetEntities from '../../../../hooks/useGetEntities';
 
-import formControls from './controls';
+import getFormControls from './controls';
 import FormElement from './FormElement';
 import { getCollectionPartyDetails } from './getCollectionPartyDetails';
 import styles from './styles.module.css';
@@ -32,18 +32,16 @@ function NewRequestModal({
 	showRequestModal = false,
 	setShowRequestModal = () => {},
 }) {
-	const { profile } = useSelector((state) => state);
-	const { partner, user } = profile || {};
+	const { partner, user } = useSelector((profile) => profile);
 
 	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal });
 	const { listEntities = {} } = useGetEntities();
 
-	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
-	const serial_id = shipment_data?.serial_id;
+	const { primary_service = {}, shipment_data: { serial_id } } = useContext(ShipmentDetailContext);
 
 	const organization_id = primary_service?.service_provider?.id || '';
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
-	const PARAMS = getCollectionPartyParams(organization_id);
+	const cpParams = getCollectionPartyParams(organization_id);
 
 	const [billingParty, setBillingParty] = useState({});
 	const [billingPartyAddress, setBillingPartyAddress] = useState({});
@@ -88,14 +86,14 @@ function NewRequestModal({
 
 	const formValues = watch();
 
-	const controls = formControls({
+	const controls = getFormControls({
 		listEntities,
 		billingParty,
 		setBillingParty,
 		setBillingPartyAddress,
 		setValue,
 		handleModifiedOptions,
-		PARAMS,
+		cpParams,
 		setCollectionParty,
 		collectionPartyAddresses,
 		COLLECTION_PARTY_BANK_OPTIONS,

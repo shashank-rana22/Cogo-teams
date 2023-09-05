@@ -9,7 +9,7 @@ import useGetEntities from '../../../../hooks/useGetEntities';
 import useGetExchangeRate from '../../../../hooks/useGetExchangeRate';
 import useRefundRequest from '../../../../hooks/useRefundRequest';
 
-import formControls from './controls';
+import getFormControls from './controls';
 import FormElement from './FormElement';
 import styles from './styles.module.css';
 
@@ -26,7 +26,7 @@ function UpdateRefundModal({
 
 	const [billingParty, setBillingParty] = useState({});
 
-	const controls = formControls({ listEntities, setBillingParty });
+	const controls = getFormControls({ listEntities, setBillingParty });
 
 	const {
 		handleSubmit,
