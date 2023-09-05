@@ -2595,6 +2595,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			href          : '/v2/attendance-leave-management',
 			as            : '/v2/attendance-leave-management',
 			type          : 'link',
+			module_type   : 'dashboards',
 			possible_apis : apis.attendance_leave_management,
 		},
 	};
