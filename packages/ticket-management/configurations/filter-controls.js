@@ -47,7 +47,7 @@ const useRaiseTicketcontrols = ({
 			label          : 'Request Type',
 			name           : 'request_type',
 			controllerType : 'select',
-			placeholder    : 'Select Trade Type',
+			placeholder    : 'Select Request Type',
 			rules          : { required: true },
 			value          : 'shipment',
 			options        : REQUEST_TYPE_OPTIONS,
