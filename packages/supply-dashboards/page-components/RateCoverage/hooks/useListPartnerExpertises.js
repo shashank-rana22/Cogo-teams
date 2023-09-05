@@ -16,7 +16,6 @@ const useListPartnerExpertises = ({ currentPage }) => {
 					filters                : {
 						status       : 'active',
 						service_type : 'lcl_freight',
-						// partner_user_id : user_id,
 					},
 				},
 			});
