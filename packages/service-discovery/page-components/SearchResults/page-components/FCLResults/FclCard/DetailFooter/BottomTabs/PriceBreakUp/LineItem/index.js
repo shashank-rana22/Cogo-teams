@@ -17,31 +17,31 @@ function LineItem({ lineItem = {} }) {
 	const {
 		currency,
 		margins,
-		total_price_discounted = 0,
+		price_discounted = 0,
 	} = lineItem || {};
 
 	let totalMarginValue = 0;
 	if (isConditionMatches(CC.SEE_SALES_MARGIN, 'or')) {
 		totalMarginValue = !isEmpty(margins)
 			? (margins || []).filter((margin) => margin?.margin_type === 'demand')[GLOBAL_CONSTANTS.zeroth_index]
-				?.total_margin_value
+				?.margin_value
 			: DEFAULT_VALUE;
 	}
 	if (isConditionMatches(CC.SEE_SUPPLY_MARGIN, 'or')) {
 		totalMarginValue = !isEmpty(margins)
 			? (margins || []).filter((margin) => margin?.margin_type === 'supply')[GLOBAL_CONSTANTS.zeroth_index]
-				?.total_margin_value
+				?.margin_value
 			: DEFAULT_VALUE;
 	}
 	if (isConditionMatches(CC.SEE_ALL_MARGINS, 'or')) {
 		(margins || []).forEach((margin) => {
-			totalMarginValue += margin.total_margin_value || DEFAULT_VALUE;
+			totalMarginValue += margin.margin_value || DEFAULT_VALUE;
 		});
 	}
 
 	const priceWithoutMargin = totalMarginValue
-		? total_price_discounted - totalMarginValue
-		: total_price_discounted;
+		? price_discounted - totalMarginValue
+		: price_discounted;
 
 	return (
 		<div className={styles.container}>

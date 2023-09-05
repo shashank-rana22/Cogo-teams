@@ -100,8 +100,16 @@ export const getExtraFilters = ({ item, id }) => {
 							value : 'cogo_assured_rate',
 						},
 						{
+							label : 'System Rate',
+							value : 'system_rate',
+						},
+						{
+							label : 'Promotional',
+							value : 'promotional',
+						},
+						{
 							label : 'Spot Booking',
-							value : 'spot_rates',
+							value : 'spot_booking',
 						},
 					],
 				},

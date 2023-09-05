@@ -10,11 +10,10 @@ import LikeDislike from '../LikeDislike';
 import styles from './styles.module.css';
 
 const RATE_SOURCE_MAPPING = {
-	spot_rates            : 'System Rate',
-	spot_negotiation_rate : 'Enquiry Reverted Rate',
-	predicted             : 'System Rate',
-	promotional           : 'Promotional',
-	spot_booking          : 'Spot booking',
+	spot_rates   : 'System Rate',
+	predicted    : 'System Rate',
+	promotional  : 'Promotional',
+	spot_booking : 'Spot booking',
 };
 
 const MAX_COMPARABLE_RATE_CARD_INDEX = 3;

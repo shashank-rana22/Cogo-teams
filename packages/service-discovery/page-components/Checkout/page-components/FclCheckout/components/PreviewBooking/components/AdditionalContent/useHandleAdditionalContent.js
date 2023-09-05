@@ -61,7 +61,7 @@ const useHandleAdditionalContent = ({
 			return;
 		}
 
-		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
+		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency) {
 			Toast.error('Please enter cargo details');
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
@@ -79,7 +79,7 @@ const useHandleAdditionalContent = ({
 							cargo_readiness_date : cargo_readiness_date || undefined,
 							cargo_value          : Number(cargo_value) || undefined,
 							cargo_value_currency : cargo_value_currency || undefined,
-							commodity_category   : commodity_category || commodity_category,
+							commodity_category,
 							shipping_preferences : {
 								sailing_start_date          : startDate || undefined,
 								sailing_end_date            : endDate || undefined,
