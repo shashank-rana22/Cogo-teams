@@ -1,45 +1,45 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect, useCallback } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useCallback } from 'react';
 
-const getParams = ({ billingParty = {}, currency = 'INR' }) => {
-	const { ledger_currency = '' } = billingParty || {};
+const getParams = ({ ledger_currency = '', currency = 'INR' }) => ({
+	from_currency : currency,
+	to_currency   : ledger_currency,
+	exchange_date : Date.now(),
+});
 
-	return {
-		from_currency : currency,
-		to_currency   : ledger_currency,
-		exchange_date : Date.now(),
-	};
-};
-
-const useGetExchangeRate = ({ billingParty = {}, formValues = {} }) => {
-	const [apiData, setApiData] = useState({});
-
-	const [{ loading }, trigger] = useRequest({
+const useGetExchangeRate = ({ billingParty = {}, formValues = {}, setValue = () => {} }) => {
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_exchange_rate',
 		method : 'GET',
 	}, { manual: false });
 
-	const apiTrigger = useCallback(() => async () => {
+	const { currency = '' } = formValues || {};
+	const { ledger_currency = '' } = billingParty || {};
+
+	const apiTrigger = useCallback(() => {
 		try {
-			const { currency = '' } = formValues || {};
-			const res = await trigger({
-				params: getParams({ billingParty, currency }),
-			});
-			setApiData(res);
+			if (ledger_currency) {
+				trigger({
+					params: getParams({ ledger_currency, currency }),
+				});
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [billingParty, formValues, trigger]);
+	}, [currency, trigger, ledger_currency]);
 
 	useEffect(() => {
-		apiTrigger();
-	}, [apiTrigger, billingParty]);
+		if (!isEmpty(ledger_currency)) {
+			apiTrigger();
+			setValue('exchange_rate', data);
+		}
+	}, [setValue, apiTrigger, data, ledger_currency]);
 
 	return {
-		exchangeRateApiData    : apiData,
-		exchangeRateApiTrigger : apiTrigger,
-		exchangeRateloading    : loading,
+		exchangeRateApiData : data,
+		exchangeRateloading : loading,
 	};
 };
 

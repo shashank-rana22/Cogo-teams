@@ -30,6 +30,7 @@ function UpdateRefundModal({
 		handleSubmit,
 		control,
 		watch,
+		setValue,
 		formState: { errors },
 	} = useForm();
 
@@ -38,14 +39,13 @@ function UpdateRefundModal({
 
 	const {
 		exchangeRateApiData = {},
-		exchangeRateApiTrigger = () => {},
 		exchangeRateLoading = false,
-	} = useGetExchangeRate({ billingParty, formValues });
+	} = useGetExchangeRate({ billingParty, formValues, setValue });
 
 	const {
 		loading = false,
 		apiTrigger = () => {},
-	} = useListPaymentAccounts({ setUpdateRefundModal, exchangeRateApiTrigger });
+	} = useListPaymentAccounts({ setUpdateRefundModal });
 
 	const onSubmit = () => {
 		const payload = getPaymentAccountsPayload({
