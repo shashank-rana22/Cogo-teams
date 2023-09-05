@@ -10,7 +10,7 @@ function OverviewContent({ data = {}, statsLoading = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
-				Here is todays&rsquo;s tasks overview
+				Here is today&rsquo;s tasks overview
 			</div>
 			<div className={styles.cards_container}>
 				<MainCard data={data} statsLoading={statsLoading} />
