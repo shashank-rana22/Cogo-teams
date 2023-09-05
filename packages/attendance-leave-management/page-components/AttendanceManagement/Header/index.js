@@ -5,7 +5,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
+function Header({ selectMonth = '', setSelectMonth = () => {}, formattedData = [], loading = false }) {
 	const profile = useSelector((state) => state.profile || {});
 	const { user } = profile || {};
 
@@ -25,7 +25,7 @@ function Header({ selectMonth, setSelectMonth, formattedData, loading }) {
 					!
 				</div>
 				<div className={styles.sub_header}>
-					Let’s see your attendance for
+					Let&apos;s see your attendance for
 					{' '}
 					{startCase(selectMonth.month)}
 				</div>

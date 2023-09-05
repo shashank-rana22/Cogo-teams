@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ formattedData, selectedMonth, setSelectedMonth }) {
+function Header({ formattedData = [], selectedMonth = '', setSelectedMonth = () => {} }) {
 	const handleMonthChange = (val, obj) => {
 		setSelectedMonth({
 			month : obj.label.split(' ')[GLOBAL_CONSTANTS.zeroth_index],

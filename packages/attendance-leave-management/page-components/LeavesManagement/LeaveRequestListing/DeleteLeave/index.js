@@ -4,7 +4,10 @@ import useDeleteLeave from '../../../../hooks/useDeleteLeave';
 
 import styles from './styles.module.css';
 
-function DeleteLeave({ show, onClose, refetch, refetchList, selectedData }) {
+function DeleteLeave({
+	show = false, onClose = () => {}, refetch = () => {},
+	refetchList = () => {}, selectedData = {},
+}) {
 	const { deleteLeave, loading } = useDeleteLeave({ onClose, refetch, refetchList });
 
 	const handleDeleteLeave = () => {

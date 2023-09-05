@@ -9,7 +9,10 @@ import Loader from '../../../../common/Loader';
 
 import styles from './styles.module.css';
 
-function MobileView({ data, setFilters, loading, handleDeleteModal, handleOpenModal }) {
+function MobileView({
+	data = {}, setFilters = () => {},
+	loading = false, handleDeleteModal = () => {}, handleOpenModal = () => {},
+}) {
 	const { list = [], page, page_limit, total_count } = data || {};
 
 	const onPageChange = (val) => {

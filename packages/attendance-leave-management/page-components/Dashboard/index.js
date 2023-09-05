@@ -41,7 +41,7 @@ function AttendanceLeaveDashboard() {
 				<h1 className={styles.title}>
 					Attendance & Leaves
 				</h1>
-				{!showInbox && (
+				{!showInbox ? (
 					<Button
 						size="md"
 						themeType="primary"
@@ -51,7 +51,7 @@ function AttendanceLeaveDashboard() {
 						My Requests
 						{MANAGER ? <IcMLiveChat /> : <IcMLiveChat />}
 					</Button>
-				)}
+				) : null}
 			</div>
 			{ showInbox ? <LeaveRequest setShowInbox={setShowInbox} isManager={is_manager} /> : (
 				<div className={styles.tab_container}>
@@ -77,21 +77,21 @@ function AttendanceLeaveDashboard() {
 							</div>
 						</TabPanel>
 
-						{is_policy_view_allowed && (
+						{is_policy_view_allowed ? (
 							<TabPanel name="policies" title="Policies">
 								<div className={styles.tab_panel}>
 									<Policies />
 								</div>
 							</TabPanel>
-						)}
+						) : null}
 
-						{is_manager && (
+						{is_manager ? (
 							<TabPanel name="my_team" title="My Team">
 								<div className={styles.tab_panel}>
 									<TeamAttendance />
 								</div>
 							</TabPanel>
-						)}
+						) : null}
 					</Tabs>
 				</div>
 			)}
