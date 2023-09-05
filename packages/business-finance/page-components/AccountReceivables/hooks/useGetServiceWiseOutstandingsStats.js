@@ -2,9 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetServiceWiseOutstandingsStats = ({
-	globalFilters,
-}) => {
+const useGetServiceWiseOutstandingsStats = () => {
 	const {
 		profile: { authorizationparameters, selected_agent_id },
 	} = useSelector((state) => state);
@@ -16,13 +14,12 @@ const useGetServiceWiseOutstandingsStats = ({
 	useEffect(() => {
 		trigger({
 			params: {
-				is_precovid: 'No',
+				is_precovid: 'NO',
 			},
 		});
 	}, [
 		authorizationparameters,
 		selected_agent_id,
-		globalFilters,
 		trigger,
 	]);
 

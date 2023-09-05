@@ -13,6 +13,7 @@ const getPayload = ({ pagination = 1, appliedFilters = {}, searchQuery = '' }) =
 			agent_id : appliedFilters?.agent || undefined,
 			q        : searchQuery || undefined,
 		},
+		missed_call_count_required: true,
 	},
 });
 
@@ -77,6 +78,7 @@ const useGetVoiceCallList = ({ searchValue = '' }) => {
 		handleScroll,
 		setAppliedFilters,
 		appliedFilters,
+		setListData,
 	};
 };
 export default useGetVoiceCallList;

@@ -4,24 +4,29 @@ import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
+import { getUserActiveMails } from '../../../configurations/mail-configuration';
+import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
-import MailList from './MailList';
+import MailsList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
-	message : MessageList,
-	voice   : VoiceList,
-	mail    : MailList,
+	message         : MessageList,
+	voice           : VoiceList,
+	outlook         : MailsList,
+	firebase_emails : MailsList,
 };
+
+const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];
 
 function Customers({
 	setActiveTab = () => {},
-	activeTab = '',
+	activeTab = {},
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
@@ -40,7 +45,13 @@ function Customers({
 	autoAssignChats = {},
 	setAutoAssignChats = () => {},
 }) {
+	const {
+		userEmailAddress = '',
+		userSharedMails = [],
+	} = mailProps || {};
+
 	const [isBotSession, setIsBotSession] = useState(false);
+	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -48,6 +59,10 @@ function Customers({
 		agentId: userId,
 		isBotSession,
 	});
+
+	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
+
+	const unReadMissedCallCount = data?.total_missed_call_count;
 
 	const componentPropsMapping = {
 		message: {
@@ -72,19 +87,39 @@ function Customers({
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
 		},
-		mail: {
-			...mailProps,
+		outlook: {
+			mailProps,
 			viewType,
+			mailsToBeShown: userActiveMails,
+		},
+		firebase_emails: {
+			mailProps,
+			viewType,
+			mailsToBeShown: userSharedMails,
+			firestore,
+			userId,
 		},
 	};
 
-	const tabMappings = getTabMappings({ unReadChatsCount });
+	const tabMappings = getTabMappings({ unReadChatsCount, unReadMissedCallCount, viewType });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
+	const handleChangeTab = (val) => {
+		setActiveTab((prev) => ({ ...prev, tab: val, data: {}, subTab: 'all' }));
+	};
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.filters_container}>
+		<div
+			className={styles.container}
+			style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+				? { padding: 0 } : {}}
+		>
+			<div
+				className={styles.filters_container}
+				style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+					? { padding: '10px 10px 0 10px' } : {}}
+			>
 				<div className={styles.logo}>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.cogo_one_logo}
@@ -109,14 +144,16 @@ function Customers({
 				/>
 			</div>
 
-			<div className={styles.tabs}>
+			<div
+				className={styles.tabs}
+				style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+					? { padding: '0 10px' } : {}}
+			>
 				<Tabs
 					activeTab={activeTab?.tab}
 					fullWidth
 					themeType="secondary"
-					onChange={(val) => {
-						setActiveTab({ tab: val, data: {}, subTab: 'all' });
-					}}
+					onChange={handleChangeTab}
 				>
 					{tabMappings.map((eachTab) => {
 						if (!eachTab.show) {
@@ -141,6 +178,7 @@ function Customers({
 					{...(componentPropsMapping[activeTab?.tab] || {})}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
+					fetchUnreadCall={fetchUnreadCall}
 				/>
 			)}
 

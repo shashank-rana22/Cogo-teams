@@ -1,7 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-const useGetFiniteList = (hook) => {
+const useGetFiniteList = (hook, revelantToUser) => {
 	const { pathname } = useSelector(({ general, profile }) => ({
 		...general,
 		user_profile: profile,
@@ -53,7 +53,7 @@ const useGetFiniteList = (hook) => {
 			refetch();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(filters)]);
+	}, [JSON.stringify(filters), revelantToUser]);
 
 	const hookSetters = {
 		setLoading,

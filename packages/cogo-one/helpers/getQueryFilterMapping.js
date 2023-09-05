@@ -36,7 +36,11 @@ function getQueryFilterMapping({
 					orderBy('last_message_document.created_at', 'desc'),
 				] : [],
 		events: appliedFilters?.events?.includes('events')
-			? [where('last_message_document.message_type', '==', 'event')] : [],
+			? [where('last_message_document.message_type', '==', 'event')]
+			: [],
+		activeFolder: appliedFilters?.activeFolder
+			? [where(appliedFilters?.activeFolder, '==', true)]
+			: [],
 	};
 }
 

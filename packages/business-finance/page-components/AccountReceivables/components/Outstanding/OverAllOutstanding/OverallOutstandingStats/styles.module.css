@@ -60,7 +60,7 @@
 	justify-content: center;
 	width: 11%;
 	padding: 10px;
-	margin: 10px 0 20px 4px;
+	margin: 38px 0 20px 4px;
 	background: #fff;
 }
 
@@ -83,7 +83,10 @@
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
 }
 
-.stats_lebal {
-	width: 74.5%;
-	margin: 16px 0 0 252px;
+.stats_label {
+	display: flex;
+	margin-top: 8px;
+	margin-left: 22%;
+	font-size: 12px;
+	font-weight: 600;
 }
