@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { salesFunnelOptions } from '../../../constants';
+import { getSalesFunnelOptions } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -107,7 +107,7 @@ function SalesFunnel({
 						value={salesFunnelMonth}
 						onChange={(val:string) => onChange(val)}
 						placeholder={t('by_month_placeholder')}
-						options={salesFunnelOptions(t)}
+						options={getSalesFunnelOptions(t)}
 						isClearable
 					/>
 				</div>

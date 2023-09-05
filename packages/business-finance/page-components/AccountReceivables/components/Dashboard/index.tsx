@@ -15,7 +15,7 @@ import SalesFunnel from './SalesFunnel';
 import ServiceCard from './ServiceCard';
 import styles from './styles.module.css';
 
-function Dashboard({ entityCode }) {
+function Dashboard({ entityCode = '' }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {

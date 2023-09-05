@@ -73,10 +73,6 @@ function TabData({
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
-	const onChange = (view:string) => {
-		setSubActiveTab(view);
-	};
-
 	return (
 		<div>
 
@@ -88,7 +84,7 @@ function TabData({
 						<div
 							key={tab.key}
 							onClick={() => {
-								onChange(tab.key);
+								setSubActiveTab(tab.key);
 							}}
 							role="presentation"
 						>

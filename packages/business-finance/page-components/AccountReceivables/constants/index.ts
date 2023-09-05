@@ -318,7 +318,7 @@ export const SHIPMENT_TYPE_OPTIONS = [
 	{ value: 'AIR_CUSTOMS', label: 'AIR Customs' },
 ];
 
-export const salesFunnelOptions = (t) => [
+export const getSalesFunnelOptions = (t) => [
 	{ value: 'JAN', label: t('jan_month') },
 	{ value: 'FEB', label: t('feb_month') },
 	{ value: 'MAR', label: t('mar_month') },

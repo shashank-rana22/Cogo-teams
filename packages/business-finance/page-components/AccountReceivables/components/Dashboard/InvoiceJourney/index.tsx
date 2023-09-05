@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { salesFunnelOptions } from '../../../constants';
+import { getSalesFunnelOptions } from '../../../constants';
 import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
@@ -31,7 +31,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 		irnGeneratedInvoiceEventCount, financeAcceptedInvoiceEventCount,
 	} = journeyData || {};
 
-	const GetCircleData = [
+	const getCircleData = [
 		{ id: 1, number: draftInvoicesCount || 0, label: t('draft') },
 		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: t('finance_accepted') },
 		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: `${irnLabel} ${t('generated')}` },
@@ -105,7 +105,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					: (
 						<div className={styles.sub_container}>
 
-							{ GetCircleData.map((item) => (
+							{ getCircleData.map((item) => (
 								<div key={item.id} className={styles.column_flex}>
 									<div className={styles.circle}>
 										<div className={styles.number}>{item?.number}</div>
@@ -126,7 +126,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 							value={dateFilter.month}
 							onChange={(val:string) => onChange(val, 'month')}
 							placeholder={t('by_month_placeholder')}
-							options={salesFunnelOptions(t)}
+							options={getSalesFunnelOptions(t)}
 							isClearable
 						/>
 					</div>
