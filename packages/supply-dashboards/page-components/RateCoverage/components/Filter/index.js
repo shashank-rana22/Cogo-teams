@@ -126,9 +126,11 @@ function Filter({
 				<div className={styles.date_range_filter_width}>
 					<p>Date Range</p>
 					<DateRangepicker
-						value={filter?.date_range}
+						value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
 						onChange={(value) => {
-							setFilter((prev) => ({ ...prev, date_range: value, page: 1 }));
+							setFilter((prev) => ({
+								...prev, start_date: value?.startDate, end_date: value?.endDate, page: 1,
+							}));
 						}}
 						isPreviousDaysAllowed
 						maxDate={new Date()}

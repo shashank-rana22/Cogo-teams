@@ -12,7 +12,8 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 	const { title = 'Previous Backlogs', color = '#000' } = detail;
 	const { loading, getCsvFile } = useGetCsvFile(filter, activeCard);
 
-	const handleDownload = async () => {
+	const handleDownload = async (e) => {
+		e.stopPropagation();
 		const url = await getCsvFile();
 		if (url) {
 			window.open(url);
