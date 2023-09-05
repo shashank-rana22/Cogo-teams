@@ -9,6 +9,7 @@ import React, { useState, useContext, useMemo } from 'react';
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 import getDefaultValues from '../utils/get-default-values';
+import isFileUploaded from '../utils/isFileUploaded';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -63,6 +64,8 @@ function UploadAmendDoc({
 	const { control, formState: { errors }, handleSubmit } = useForm({ defaultValues });
 
 	const handleSubmitFinal = async (values) => {
+		if (!isFileUploaded(values)) return null;
+
 		const payload = {
 			shipment_id         : task?.shipment_id,
 			service_id          : task?.service_id,
@@ -95,6 +98,8 @@ function UploadAmendDoc({
 		} else {
 			updateDocument(payload);
 		}
+
+		return null;
 	};
 
 	return (
