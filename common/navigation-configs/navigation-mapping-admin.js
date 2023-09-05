@@ -201,6 +201,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.app_saas_cogo_subscription,
 				...apis.sales_dashboard,
 				...apis.cogopoints,
+				...apis.ssr,
 			],
 			main_apis: [
 				'list_organization_users',

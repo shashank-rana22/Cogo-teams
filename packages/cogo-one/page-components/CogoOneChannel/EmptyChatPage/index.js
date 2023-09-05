@@ -9,9 +9,10 @@ import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
 
 const MESSAGE_MAPPING = {
-	message : 'chat',
-	voice   : 'call log',
-	mail    : 'mail',
+	message         : 'chat',
+	voice           : 'call log',
+	outlook         : 'mail',
+	firebase_emails : 'mail',
 };
 
 function EmptyChatPage({
