@@ -1,12 +1,12 @@
 import { ButtonIcon } from '@cogoport/components';
-import { IcMDelete, IcMEdit, IcMTick, IcMLineundo } from '@cogoport/icons-react';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import { getFormatAmount } from '../../../../../utils/getFormatAmount';
 
+import EditFields from './EditFields';
 import styles from './styles.module.css';
 
-const INITIAL_BAL = 0;
 const STATUS = {
 	Unpaid               : '#FEF1DF',
 	Unutilized           : '#FEF1DF',
@@ -16,6 +16,10 @@ const STATUS = {
 	'Knocked Off'        : '#CDF7D4',
 	'Partially Utilized' : '#D9EAFD',
 };
+const INITIAL_BAL = 0;
+const KEY_TDS = 'tds';
+const KEY_ALLOCATION = 'allocation';
+
 export default function CardItem({
 	itm = {},
 	selectedData = [],
@@ -25,6 +29,7 @@ export default function CardItem({
 	setIsDelete = () => {},
 	updatedData,
 	setUpdateBal,
+	isError = false,
 }) {
 	const new_itm = itm;
 	const {
@@ -99,53 +104,35 @@ export default function CardItem({
 				</div>
 				<div className={styles.rate}>{exchangeRate?.toFixed(EXC_RATE_FIXED)}</div>
 				<div>
-					{isTdsEdnew_itmode ? (
-						<>
-							<input
-								type="number"
-								value={newTDS}
-								onChange={(e) => setNewTDS(e.target.value)}
+					{
+					isTdsEdnew_itmode
+						? (
+							<EditFields
+								isError={isError}
+								inputvalue={newTDS}
+								inputSet={setNewTDS}
+								originalTDS={originalTDS}
+								doneSet={setIsTdsEdnew_itmode}
+								handleFunc={handleEditTDS}
+								newItem={new_itm}
+								setNewTDS={setNewTDS}
+								setPrevTDS={setPrevTDS}
+								fieldType={KEY_TDS}
 							/>
-							<ButtonIcon
-								size="lg"
-								icon={<IcMTick />}
-								themeType="primary"
-								onClick={() => {
-									setIsTdsEdnew_itmode(false);
-									new_itm.tds = parseFloat(newTDS);
-									handleEditTDS();
-								}}
-							/>
-							<ButtonIcon
-								size="lg"
-								icon={<IcMLineundo />}
-								themeType="primary"
-								onClick={() => {
-									setIsTdsEdnew_itmode(false);
-									new_itm.tds = originalTDS;
-									setNewTDS(originalTDS);
-									setPrevTDS(originalTDS);
-									handleEditTDS();
-								}}
-							/>
-						</>
-					)
+						)
 						:					(
-							<>
+							<div className={styles.flex}>
 								{getFormatAmount(new_itm?.tds, currency)}
-								<ButtonIcon
-									size="lg"
-									icon={(
-										<IcMEdit
-											height={14}
-											width={14}
-											onClick={() => { setIsTdsEdnew_itmode(true); }}
-										/>
-									)}
+								<IcMEdit
+									height={14}
+									width={14}
+									className={styles.btn}
+									onClick={() => { setIsTdsEdnew_itmode(true); }}
 									themeType="primary"
 								/>
-							</>
-						)}
+							</div>
+						)
+                    }
 				</div>
 				<div>
 					{getFormatAmount(nostroAmount, currency)}
@@ -160,46 +147,25 @@ export default function CardItem({
 					{
 					isEdnew_itmode
 						? (
-							<>
-								<input
-									type="number"
-									value={editedAllocation}
-									onChange={(e) => { setEditedAllocation(e.target.value); }}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMTick />}
-									themeType="primary"
-									onClick={() => {
-										setIsEdnew_itmode(false);
-										new_itm.allocationAmount = parseFloat(editedAllocation);
-										handleEditAllocation();
-									}}
-								/>
-								<ButtonIcon
-									size="lg"
-									icon={<IcMLineundo />}
-									themeType="primary"
-									onClick={() => {
-										setIsEdnew_itmode(false);
-										new_itm.allocationAmount = originalAllocation;
-										handleEditAllocation();
-									}}
-								/>
-							</>
+							<EditFields
+								isError={isError}
+								inputvalue={editedAllocation}
+								inputSet={setEditedAllocation}
+								doneSet={setIsEdnew_itmode}
+								handleFunc={handleEditAllocation}
+								newItem={new_itm}
+								originalAllocation={originalAllocation}
+								fieldType={KEY_ALLOCATION}
+							/>
 						)
 						:					(
 							<>
 								{getFormatAmount(new_itm?.allocationAmount, currency)}
-								<ButtonIcon
-									size="lg"
-									icon={(
-										<IcMEdit
-											height={14}
-											width={14}
-											onClick={() => { setIsEdnew_itmode(true); }}
-										/>
-									)}
+								<IcMEdit
+									height={14}
+									width={14}
+									className={styles.btn}
+									onClick={() => { setIsEdnew_itmode(true); }}
 									themeType="primary"
 								/>
 							</>

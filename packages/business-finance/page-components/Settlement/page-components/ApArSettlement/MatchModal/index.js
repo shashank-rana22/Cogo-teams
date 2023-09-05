@@ -13,6 +13,51 @@ import styles from './styles.module.css';
 import UploadFile from './UploadDocument';
 
 const ZERO_VALUE = 0;
+
+const handleSetTdsZero = (updatedData = [], setUpdatedData = () => {}) => {
+	const updatedDataWithZeroTds = updatedData.map((item) => ({
+		...item,
+		allocationAmount : parseFloat(+item.allocationAmount) + parseFloat(+item.tds),
+		balanceAmount    : +item.balanceAmount + +item.tds,
+		tds              : 0,
+	}));
+	setUpdatedData(updatedDataWithZeroTds);
+};
+
+function UploadModal({ showDocument, setShowDocument, onOuterClick, fileValue, setFileValue }) {
+	return (
+		<Modal
+			show={showDocument}
+			onClose={() => { setShowDocument(false); }}
+			onOuterClick={onOuterClick}
+			size="md"
+		>
+			<Modal.Body>
+				<UploadFile
+					fileValue={fileValue}
+					setFileValue={setFileValue}
+				/>
+			</Modal.Body>
+			<Modal.Footer>
+
+				<Button
+					style={{ marginRight: '6px' }}
+					onClick={() => { setShowDocument(false); }}
+					themeType="secondary"
+				>
+					Upload
+				</Button>
+				<Button
+					themeType="secondary"
+					onClick={() => { setShowDocument(false); setFileValue(''); }}
+				>
+					Cancel
+				</Button>
+			</Modal.Footer>
+		</Modal>
+	);
+}
+
 export default function MatchModal({
 	matchModalShow = false, setMatchModalShow = () => {},
 	selectedData = [], filters = [], setSelectedData = () => {},
@@ -76,15 +121,7 @@ export default function MatchModal({
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
 	};
 	const line_items = lineItems(filters, updateBal);
-	const handleSetTdsZero = () => {
-		const updatedDataWithZeroTds = updatedData.map((item) => ({
-			...item,
-			allocationAmount : parseFloat(+item.allocationAmount) + parseFloat(+item.tds),
-			balanceAmount    : +item.balanceAmount + +item.tds,
-			tds              : 0,
-		}));
-		setUpdatedData(updatedDataWithZeroTds);
-	};
+
 	return (
 		<div>
 			<Modal
@@ -99,31 +136,26 @@ export default function MatchModal({
 				<Modal.Header title={
                 (
 	<>
-		<div>
-			MATCHING
+		<div className={styles.header}>
+			<span className={styles.supheader}>MATCHING</span>
 			{' '}
-			<sub>( Drag and drop to set the matching hierarchy )</sub>
+			<span className={styles.subheader}>( Drag and drop to set the matching hierarchy )</span>
 		</div>
 		<br />
-		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
+		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				Matching Balance
-				<p style={{
-					color        : '#F68B21',
-					display      : 'flex',
-					alignItems   : 'center',
-					marginBottom : '0px',
-				}}
-				>
+				<p className={styles.paragraph}>
 					{`${selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency}     ${updateBal}    `}
 				</p>
 			</div>
-			<div style={{ display: 'flex', alignItems: 'baseline' }}>
-				<span className={styles.Datepicker}>
-					<p style={{ margin: '0px 6px' }}>
+
+			<div className={styles.btn_container}>
+				<div className={styles.Datepicker}>
+					<div style={{ margin: '0px 6px' }}>
 						Settlement Date
-					</p>
+					</div>
 
 					<Datepicker
 						placeholder="Enter Date"
@@ -132,62 +164,47 @@ export default function MatchModal({
 						onChange={(e) => { setDate(e); }}
 						value={date}
 					/>
-				</span>
-				<div>
-					<Button
-						style={{ marginRight: '10px' }}
-						onClick={() => { handleSetTdsZero(); }}
-						themeType="secondary"
-					>
-						Set TDS Zero
-					</Button>
 				</div>
+
+				<Button
+					className={styles.btn}
+					onClick={() => { handleSetTdsZero(updatedData, setUpdatedData); }}
+					themeType="secondary"
+				>
+					Set TDS Zero
+				</Button>
+
 				<div>
 					<Button
-						style={{ marginRight: '10px' }}
+						className={styles.btn}
 						onClick={() => onClick('primary sm')}
 						themeType="secondary"
 					>
 						Upload File
 					</Button>
 					{showDocument && (
-						<Modal
-							show={showDocument}
-							onClose={() => { setShowDocument(false); }}
+						<UploadModal
+							showDocument={showDocument}
+							setShowDocument={setShowDocument}
 							onOuterClick={onOuterClick}
-							size="md"
-						>
-							<Modal.Body>
-								<UploadFile
-									fileValue={fileValue}
-									setFileValue={setFileValue}
-								/>
-							</Modal.Body>
-							<Modal.Footer>
-
-								<Button
-									style={{ marginRight: '6px' }}
-									onClick={() => { setShowDocument(false); }}
-									themeType="secondary"
-								>
-									Upload
-								</Button>
-								<Button
-									themeType="secondary"
-									onClick={() => { setShowDocument(false); setFileValue(''); }}
-								>
-									Cancel
-								</Button>
-							</Modal.Footer>
-						</Modal>
+							fileValue={fileValue}
+							setFileValue={setFileValue}
+						/>
 					)}
 				</div>
-				<div style={{ marginRight: '6px' }}>
-					<Button size="md" themeType="secondary" onClick={() => setShowJV(true)}>CREATE JV</Button>
-				</div>
-				<div className={styles.dry_button}>
+
+				<Button
+					className={styles.btn}
+					themeType="secondary"
+					onClick={() => setShowJV(true)}
+				>
+					CREATE JV
+
+				</Button>
+
+				<div className={styles.dryrun}>
 					<Button
-						size="md"
+						className={styles.btn}
 						themeType="secondary"
 						disabled={dryRun}
 						onClick={() => {
@@ -198,13 +215,12 @@ export default function MatchModal({
 					</Button>
 					{dryRun
 					&& (
-						<p style={{ fontSize: '10px' }}>Please refresh to dry run again !</p>
+						<p className={styles.error}>Please refresh to dry run again !</p>
 					)}
 				</div>
+
 				<div className={styles.refreshStyle}>
 					<ButtonIcon
-						style={{ height: '30px', alignItems: 'center' }}
-						size="lg"
 						icon={<IcMRefresh />}
 						themeType="primary"
 						onClick={() => {
@@ -216,7 +232,7 @@ export default function MatchModal({
 		</div>
 	</>
 				)
-        }
+}
 				/>
 				<Modal.Body>
 					<ListData

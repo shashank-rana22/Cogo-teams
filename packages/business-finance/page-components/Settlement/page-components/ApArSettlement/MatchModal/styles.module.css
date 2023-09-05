@@ -9,10 +9,49 @@
 	}
 }
 
+.header {
+	display: flex;
+	align-items: flex-end;
+}
+
+.supheader {
+	display: flex;
+	align-items: flex-end;
+}
+
+.subheader {
+	display: flex;
+	align-items: flex-end;
+	font-size: 12px;
+}
+
+.paragraph {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+	color: #f68b21;
+}
+
 .pagination {
 	display: flex;
 	justify-content: flex-end;
 	padding: 12px 26px;
+}
+
+.btn_container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+
+	:global {
+		.ui_button_container {
+			height: 36px;
+		}
+	}
+}
+
+.btn {
+	margin-right: 10px;
 }
 
 .tableStyle {
@@ -24,16 +63,16 @@
 }
 
 .Datepicker {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 10px;
+
 	:global {
 		.react-datepicker__aria-live {
 			display: none;
 		}
 	}
-
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	margin: 1rem;
 }
 
 .uploadStyle {
@@ -46,9 +85,21 @@
 	}
 }
 
+.dryrun {
+	display: flex;
+	flex-flow: column wrap;
+	width: 90px;
+}
+
+.error {
+	font-size: 10px;
+	color: var(--color-primary-error-red-2);
+}
+
 .refreshStyle {
 	display: flex;
 	align-items: center;
+	height: 36px;
 	color: var(--color-accent-orange-2);
 	cursor: pointer;
 	border: 1px solid var(--color-secondary-greyscale-5);
