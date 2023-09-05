@@ -18,9 +18,7 @@ function EditQuotation({
 }) {
 	const { finalControls = [], defaultValues = {}, onSubmit = () => { } } = data || {};
 
-	const formProps = useForm({ defaultValues });
-
-	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
+	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = useForm({ defaultValues });
 
 	const formValues = watch();
 
@@ -30,8 +28,7 @@ function EditQuotation({
 			if (key && formValues[key]) {
 				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
 					...value,
-					total    : (value.price || DEFAULT_PRICE_VALUE) * (value.quantity || DEFAULT_QUANTITY_VALUE),
-					currency : 'INR',
+					total: (value.price || DEFAULT_PRICE_VALUE) * (value.quantity || DEFAULT_QUANTITY_VALUE),
 				}));
 			}
 		});
