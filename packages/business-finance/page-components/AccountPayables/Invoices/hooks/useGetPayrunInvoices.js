@@ -20,9 +20,8 @@ const TEN_PERCENT = 10;
 
 function formatToTimeStamp(dateString) {
 	return formatDate({
-		date: dateString,
-		dateFormat:
-					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		date       : dateString,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 		formatType : 'dateTime',
 		separator  : 'T',
