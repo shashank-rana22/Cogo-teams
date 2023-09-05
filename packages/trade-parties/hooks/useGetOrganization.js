@@ -1,31 +1,37 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-const useGetOrganization = ({ id }) => {
+const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
 	const [data, setData] = useState([]);
 	const [{ loading }, trigger] = useRequest(
 		{
-			url    : '/get_organization',
-			params : { id },
+			url: '/get_organization',
 		},
 		{
 			manual: true,
 		},
 
 	);
-	const apiTrigger = useCallback(async () => {
+	const apiTrigger = useCallback(async (val) => {
 		try {
-			const res = await trigger({});
-			setData(res.data);
+			const res = await trigger({ params: val });
+
+			if (res?.data) {
+				setData(res?.data);
+				refetch(res?.data);
+			}
 		} catch (err) {
 			// console.log("error occured");
 			/// /console.log(err);
 		}
-	}, [trigger]);
-	useEffect(() => {
-		apiTrigger();
-	}, [apiTrigger]);
+	}, [trigger, refetch]);
 
-	return { data, loading };
+	useEffect(() => {
+		if (initialCall) {
+			apiTrigger();
+		}
+	}, [apiTrigger, initialCall]);
+
+	return { data, loading, apiTrigger };
 };
 export default useGetOrganization;
