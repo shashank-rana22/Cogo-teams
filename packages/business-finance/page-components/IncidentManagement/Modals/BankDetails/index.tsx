@@ -2,13 +2,14 @@ import { RadioGroup, Textarea, Modal, Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetBankData from '../../apisModal/useGetBankData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
-import { optionsManual, options } from './constant';
+import { getOptionsManual, getOptions } from './constant';
 import styles from './styles.module.css';
 
 function BankDetails({
@@ -21,6 +22,8 @@ function BankDetails({
 	remark = '',
 }) {
 	const { push } = useRouter();
+	const { t } = useTranslation(['incidentManagement']);
+
 	const {
 		accountNumber,
 		bankHolderName,
@@ -52,6 +55,7 @@ function BankDetails({
 		refetch,
 		bankId,
 		value,
+		t,
 	});
 
 	const {
@@ -65,7 +69,7 @@ function BankDetails({
 	const checkData = () => {
 		push('/details/supply/[organization_id]', `/details/supply/${id}`);
 	};
-
+	const getOptionsData = getOptions({ isEditable, t });
 	return (
 		<div>
 			<div>
@@ -79,11 +83,11 @@ function BankDetails({
 						setShowBankModal(false);
 					}}
 				>
-					<Modal.Header title="Bank Account - Add/Edit" />
+					<Modal.Header title={t('incidentManagement:bank_acc_title')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.name_data}>
-							<div>Organization Name - </div>
+							<div>{`${t('incidentManagement:org_name')} -`}</div>
 							<div role="presentation" onClick={() => checkData()} className={styles.name}>
 								{tradePartyType === 'SELF'
 									? businessName || '-' : tradePartyName || '-'}
@@ -92,14 +96,14 @@ function BankDetails({
 
 						</div>
 						<div className={styles.name_data}>
-							<div>Trade Party Type - </div>
+							<div>{`${t('incidentManagement:trade_party_type')} -`}</div>
 							<div className={styles.party_name}>
 								{startCase(tradePartyType) || '-'}
 							</div>
 						</div>
 
 						<div className={styles.name_data}>
-							<div>Category - </div>
+							<div>{`${t('incidentManagement:select_category_placeholder')} -`}</div>
 							{categoryTypes ? (
 								<div className={styles.category}>
 									{categoryTypes.map((itm, index) => {
@@ -113,24 +117,27 @@ function BankDetails({
 						<div className={styles.border} />
 
 						<div>
-							<div className={styles.simple_name}>Bank Holder Name </div>
+							<div className={styles.simple_name}>{t('incidentManagement:bank_holder_name')}</div>
 							<div className={styles.flex}>
 								<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
 								<div>
 									<RadioGroup
-										options={options(isEditable)}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({ ...prev, radioName: item }))}
 										value={value?.radioName}
 									/>
 								</div>
 							</div>
 
-							<div className={styles.simple_name}>Account Number </div>
+							<div className={styles.simple_name}>
+								{t('incidentManagement:account_number')}
+								{' '}
+							</div>
 							<div className={styles.flex}>
 								<div className={styles.font_name}>{accountNumber || '-'}</div>
 								<div>
 									<RadioGroup
-										options={options(isEditable)}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioNumber: item,
@@ -140,7 +147,7 @@ function BankDetails({
 								</div>
 							</div>
 
-							<div className={styles.simple_name}>Bank & Branch Name </div>
+							<div className={styles.simple_name}>{t('incidentManagement:bank_branch_name')}</div>
 
 							<div className={styles.flex}>
 								<div className={styles.font_name_data}>
@@ -153,7 +160,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={options(isEditable)}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioBranchName: item,
@@ -165,7 +172,8 @@ function BankDetails({
 
 							<div className={styles.simple_name}>
 								{ifscCode
-									? 'IFSC Code' : 'Swift Code'}
+									? t('incidentManagement:ifsc_code')
+									: t('incidentManagement:swift_code')}
 							</div>
 
 							<div className={styles.flex}>
@@ -174,7 +182,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={options(isEditable)}
+										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioIFSC: item,
@@ -185,10 +193,10 @@ function BankDetails({
 							</div>
 
 							<div className={styles.flex}>
-								<div className={styles.font_name}>Method of Verification</div>
+								<div className={styles.font_name}>{t('incidentManagement:verification_method')}</div>
 								<div>
 									<RadioGroup
-										options={optionsManual(isEditable)}
+										options={getOptionsManual({ isEditable, t })}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioMethod: item,
@@ -200,32 +208,36 @@ function BankDetails({
 						</div>
 						{remark && (
 							<div className={styles.flex_remark}>
-								Remark -
+								{`${t('incidentManagement:remark_title')} -`}
 								<div className={styles.font_name}>
 									{remark || '-'}
 								</div>
 							</div>
 						)}
 						<div className={styles.document_flex}>
-							<div className={styles.document}>Document -</div>
+							<div className={styles.document}>{`${t('incidentManagement:doc')} -`}</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
-										<div className={styles.view}>View Document</div>
+										<div className={styles.view}>{t('incidentManagement:view_doc_link')}</div>
 										<IcMEyeopen />
 									</div>
 								</a>
 							) : (
-								<div key={url}> No document available</div>
+								<div key={url}>
+									{' '}
+									{t('incidentManagement:no_doc_available')}
+									{' '}
+								</div>
 							)))}
 						</div>
 						{isEditable && (
 							<>
-								<div className={styles.remarks}>Remarks*</div>
+								<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 								<Textarea
 									name="remark"
 									size="md"
-									placeholder="Enter Remark Here..."
+									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(v: string) => setValue((prev) => ({ ...prev, text: v }))}
 									style={{ width: '700', height: '100px', marginBottom: '12px' }}
 								/>
@@ -246,7 +258,7 @@ function BankDetails({
 										OnAction('REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 
 								<Button
@@ -259,7 +271,7 @@ function BankDetails({
 										OnAction('APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

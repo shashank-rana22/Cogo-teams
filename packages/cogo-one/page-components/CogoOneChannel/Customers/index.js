@@ -7,6 +7,7 @@ import getTabMappings from '../../../configurations/getTabMappings';
 import { getUserActiveMails } from '../../../configurations/mail-configuration';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
+import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentSettings from './AgentSettings';
@@ -62,6 +63,13 @@ function Customers({
 		isBotSession,
 	});
 
+	const { unReadMailsCount = 0 } = useGetUnreadMailsCount({
+		firestore,
+		viewType,
+		agentId: userId,
+		isBotSession,
+	});
+
 	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
 	const unReadMissedCallCount = data?.total_missed_call_count;
@@ -103,7 +111,12 @@ function Customers({
 		},
 	};
 
-	const tabMappings = getTabMappings({ unReadChatsCount, unReadMissedCallCount, viewType });
+	const tabMappings = getTabMappings({
+		unReadChatsCount,
+		unReadMissedCallCount,
+		unReadMailsCount,
+		viewType,
+	});
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
