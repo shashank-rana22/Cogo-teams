@@ -1,14 +1,15 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
-import AmendDoc from './AmendDoc';
+import AmendModal from './AmendModal';
+import ApprovalModal from './ApprovalModal';
 import styles from './styles.module.css';
 
 const GET_FINAL_URL = 1;
@@ -19,6 +20,8 @@ function ReviewDoc({
 	onClose = () => {},
 }) {
 	const [isAmend, setIsAmend] = useState(false);
+	const [remarkValue, setRemarkValue] = useState('');
+	const [showModal, setShowModal] = useState({ display: false, type: '' });
 
 	const newRefetch = () => {
 		onClose();
@@ -46,11 +49,11 @@ function ReviewDoc({
 			performed_by_org_id : task.organization_id,
 		};
 	}
-	const { updateDocument } = useUpdateShipmentDocuments(
+	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
 	);
 
-	const handleApprove = async () => {
+	const handleFinalApprove = async () => {
 		params = {
 			...params,
 			state: 'document_accepted',
@@ -59,11 +62,31 @@ function ReviewDoc({
 		await updateDocument(params);
 	};
 
+	const handleSubmit = () => {
+		if (isEmpty(remarkValue)) {
+			Toast.error('Please provide amendment reason');
+		} else {
+			setShowModal({ display: true, type: 'amend' });
+		}
+	};
+
+	const handleFinalSubmit = async () => {
+		if (!isEmpty(remarkValue)) {
+			const amendParams = {
+				...params,
+				state   : 'document_amendment_requested',
+				remarks : [remarkValue],
+			};
+
+			await updateDocument(amendParams);
+		} else {
+			Toast.error('Please provide amendment reason');
+		}
+	};
+
 	if (loading) {
 		return (
-			<div>
-				<ThreeDotLoader message="Loading Document" />
-			</div>
+			<ThreeDotLoader message="Loading Document" />
 		);
 	}
 
@@ -77,6 +100,7 @@ function ReviewDoc({
 	};
 
 	return (
+
 		<div className={styles.container}>
 			<div className={styles.display_details}>
 				<div className={styles.sub_half_detail}>
@@ -111,11 +135,29 @@ function ReviewDoc({
 			</div>
 
 			{isAmend ? (
-				<AmendDoc
-					params={params}
-					onClose={onClose}
-					newRefetch={newRefetch}
-				/>
+				<>
+					<div className={styles.remark}>
+						<div className={styles.sub_heading}>Please specify the reason for this </div>
+						<Textarea
+							className="remark_text"
+							value={remarkValue}
+							onChange={(e) => setRemarkValue(e)}
+							placeholder="Type Remarks"
+						/>
+					</div>
+					<div className={styles.action_buttons}>
+						<Button
+							onClick={onClose}
+							themeType="secondary"
+							disabled={loading}
+						>
+							Cancel
+						</Button>
+						<Button onClick={handleSubmit}>
+							Submit
+						</Button>
+					</div>
+				</>
 			) : (
 				<>
 					<div className={styles.file_view}>
@@ -136,13 +178,35 @@ function ReviewDoc({
 							Amend
 						</Button>
 
-						<Button onClick={handleApprove} disabled={loading}>
+						<Button onClick={() => setShowModal({ display: true, type: 'approve' })}>
 							Approve
 						</Button>
 					</div>
 				</>
+
 			)}
+
+			{(showModal.display && showModal.type === 'approve') ? (
+				<ApprovalModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					task={task}
+					handleFinalApprove={handleFinalApprove}
+					taskUpdateLoading={taskUpdateLoading}
+				/>
+			) : (
+				<AmendModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					handleFinalSubmit={handleFinalSubmit}
+					remarkValue={remarkValue}
+					document_type={docData?.document_type}
+					taskUpdateLoading={taskUpdateLoading}
+				/>
+			) }
 		</div>
+
 	);
 }
+
 export default ReviewDoc;
