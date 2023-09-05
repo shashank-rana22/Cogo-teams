@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import ScopeSelect from '@cogoport/scope-select/components';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useSelector } from '@cogoport/store';
 import { useRouter } from 'next/router';
@@ -69,6 +70,11 @@ function ShipmentDetails() {
 		router.prefetch(router.asPath);
 	}, [router]);
 
+	useEffect(() => {
+		setActiveTab(default_tab);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [authParams]);
+
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => visible_tabs.includes(t));
 
 	const conditionMapping = {
@@ -79,6 +85,7 @@ function ShipmentDetails() {
 		cancelDetails       : (features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
 		documentHoldDetails : features.includes('document_hold_details'),
 		timeline            : features.includes('timeline'),
+		scope               : activeStakeholder === 'kam_so1',
 	};
 
 	const tabProps = {
@@ -151,6 +158,13 @@ function ShipmentDetails() {
 					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
+						{conditionMapping?.scope ? (
+							<ScopeSelect
+								size="md"
+								apisToConsider={['list_shipments']}
+								className={styles.scope}
+							/>
+						) : null}
 						<Toggle
 							size="md"
 							onLabel="Old"
