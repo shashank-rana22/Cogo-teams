@@ -1,7 +1,6 @@
 import { Checkbox } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -9,6 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import toastApiError from '../../../commons/toastApiError.ts';
 import { CREATE_PAYRUN_CONFIG } from '../CreatePayrun/Configurations/createPayrunConfig';
 import { CREATE_PAYRUN_CONFIG_VN } from '../CreatePayrun/Configurations/createPayrunConfigVN';
+import changeFormat from '../utils/changeFormat';
 import getKeyByValue from '../utils/getKeyByValue';
 
 import styles from './styles.module.css';
@@ -17,16 +17,6 @@ const ELEMENT_NOT_FOUND = -1;
 const MIN_AMOUNT = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
-
-function formatToTimeStamp(dateString) {
-	return formatDate({
-		date       : dateString,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-		formatType : 'dateTime',
-		separator  : 'T',
-	});
-}
 
 const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	const { query: urlQuery } = useSelector(({ general }) => ({
@@ -112,12 +102,12 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 						urgencyTag         : urgencyTag || undefined,
 						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
-						startDate          : startDate ? formatToTimeStamp(startDate) : undefined,
-						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
-						fromBillDate       : fromBillDate ? formatToTimeStamp(fromBillDate) : undefined,
-						toBillDate         : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
-						fromUploadBillDate : fromUploadBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
-						toUploadBillDate   : toUploadBillDate ? formatToTimeStamp(toUploadBillDate) : undefined,
+						startDate          : startDate ? changeFormat(startDate) : undefined,
+						endDate            : endDate ? changeFormat(endDate) : undefined,
+						fromBillDate       : fromBillDate ? changeFormat(fromBillDate) : undefined,
+						toBillDate         : toBillDate ? changeFormat(toBillDate) : undefined,
+						fromUploadBillDate : fromUploadBillDate ? changeFormat(fromUploadBillDate) : undefined,
+						toUploadBillDate   : toUploadBillDate ? changeFormat(toUploadBillDate) : undefined,
 						payrunId           : payrun,
 					},
 				});

@@ -21,6 +21,13 @@
 	border-radius: 8px;
 }
 
+.document_sub_card {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin: 10px 0;
+}
+
 .pdf_container {
 	display: flex;
 	align-items: center;
