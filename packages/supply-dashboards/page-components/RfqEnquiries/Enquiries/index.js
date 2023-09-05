@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 
 function Enquiries() {
 	const ZEROVALUE = 0;
+	const [relevantToUser, setRelevantToUser] = useState(true);
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [revertCounts, setRevertCounts] = useState({});
 	const [showMore, setShowMore] = useState(true);
@@ -25,10 +26,12 @@ function Enquiries() {
 		loading,
 		list:data,
 		setPage,
-	} = useGetRfqSearches({ rfqId });
+	} = useGetRfqSearches({ rfqId, relevantToUser });
 
 	const negotiation_remarks = data?.data[ZEROVALUE]?.negotiation_remarks;
-
+	const onChange = () => {
+		setRelevantToUser((prev) => !prev);
+	};
 	useEffect(() => {
 		if (data) {
 			const OBJ = {};
@@ -53,6 +56,17 @@ function Enquiries() {
 					RFQ ID:
 					{' '}
 					{data?.data[ZEROVALUE]?.rfq_data?.serial_id}
+				</div>
+				<div className={styles.toggle_section}>
+					<Toggle
+						size="md"
+						name="revelant_to_user"
+						value={!relevantToUser}
+						onChange={onChange}
+						onLabel="All"
+						offLabel="Revelant To Me"
+					/>
+
 				</div>
 			</div>
 
