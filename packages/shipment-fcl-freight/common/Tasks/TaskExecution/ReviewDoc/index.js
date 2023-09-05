@@ -148,15 +148,13 @@ function ReviewDoc({
 					</div>
 					<div className={styles.action_buttons}>
 						<Button
-							onClick={() => {
-								onClose();
-							}}
+							onClick={() => { onClose(); }}
 							themeType="secondary"
 							disabled={loading}
 						>
 							Cancel
 						</Button>
-						<Button onClick={() => handleSubmit()} disabled={loading}>
+						<Button onClick={() => handleSubmit()}>
 							Submit
 						</Button>
 					</div>
@@ -181,7 +179,7 @@ function ReviewDoc({
 							Amend
 						</Button>
 
-						<Button onClick={() => setShowApprovalModal(true)} disabled={loading}>
+						<Button onClick={() => setShowApprovalModal(true)}>
 							Approve
 						</Button>
 					</div>
@@ -204,7 +202,7 @@ function ReviewDoc({
 					setShowModal={setShowAmendModal}
 					handleFinalSubmit={handleFinalSubmit}
 					remarkValue={remarkValue}
-					document_type={docData.document_type}
+					document_type={docData?.document_type}
 				/>
 			) : null}
 		</div>
