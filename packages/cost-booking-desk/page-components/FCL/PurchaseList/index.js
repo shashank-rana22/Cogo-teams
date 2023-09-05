@@ -63,21 +63,21 @@ function PurchaseList() {
 				</div>
 			)}
 
-			{!isEmpty(modalData?.data) && modalData?.type === 'viewDeposit' ? (
+			{modalData?.type === 'viewDeposit' ? (
 				<ViewRequestModal
 					viewRequestModal={modalData}
 					setViewRequestModal={setModalData}
 				/>
 			) : null}
 
-			{!isEmpty(modalData?.data) && modalData?.type === 'viewRefund' ? (
+			{modalData?.type === 'viewRefund' ? (
 				<ViewRefundModal
 					viewRefundModal={modalData}
 					setViewRefundModal={setModalData}
 				/>
 			) : null}
 
-			{!isEmpty(modalData?.data) && modalData?.type === 'requestRefund' ? (
+			{modalData?.type === 'requestRefund' ? (
 				<UpdateRefundModal
 					updateRefundModal={modalData}
 					setUpdateRefundModal={setModalData}

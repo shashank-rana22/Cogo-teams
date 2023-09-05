@@ -9,10 +9,10 @@ function ViewRefundModal({
 	viewRefundModal = {},
 	setViewRefundModal = () => {},
 }) {
-	const refundAdvanceDocumentData = getRefundAdvanceDocumentData(viewRefundModal);
+	const refundAdvanceDocumentData = getRefundAdvanceDocumentData({ viewRefundModal });
 	return (
 		<Modal
-			show={!isEmpty(viewRefundModal)}
+			show={!isEmpty(viewRefundModal?.data)}
 			onClose={() => setViewRefundModal({})}
 		>
 			<Modal.Header title="Refund Details" />

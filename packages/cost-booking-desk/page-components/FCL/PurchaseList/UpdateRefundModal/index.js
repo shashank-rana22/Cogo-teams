@@ -68,7 +68,7 @@ function UpdateRefundModal({
 	return (
 		<Modal
 			className={styles.modal_container}
-			show={!isEmpty(updateRefundModal)}
+			show={!isEmpty(updateRefundModal?.data)}
 			onClose={() => setUpdateRefundModal({})}
 		>
 			<Modal.Header title="Update Refund Details" />

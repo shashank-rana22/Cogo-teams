@@ -14,7 +14,7 @@ function ViewRequestModal({
 
 	return (
 		<Modal
-			show={!isEmpty(viewRequestModal)}
+			show={!isEmpty(viewRequestModal?.data)}
 			onClose={() => setViewRequestModal({})}
 		>
 			<Modal.Header title="Request Advance Payment" />

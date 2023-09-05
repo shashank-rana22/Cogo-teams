@@ -7,13 +7,13 @@ const ONE_OPTION = 1;
 const MAXIMUM_FRACTION_DIGITS = 2;
 const REMARK_LENGTH_LIMIT = 30;
 
-const getRequestAdvanceDocumentData = ({ viewRequestModal = {} }) => {
+const getRequestAdvanceDocumentData = ({ viewRequestModal:{ data = {} } = {} }) => {
 	const {
 		details = {},
 		currency = '',
 		paymentMode = '',
 		remarks = '',
-	} = viewRequestModal || {};
+	} = data || {};
 
 	const {
 		numberOfContainers = '',

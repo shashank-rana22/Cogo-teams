@@ -1,7 +1,7 @@
 const getPaymentAccountsPayload = ({
 	exchangeRateApiData = 0,
 	billingParty = {},
-	updateRefundModal = {},
+	updateRefundModal: { data = {} } = {},
 	formValues = {},
 	user_id = '',
 }) => {
@@ -10,7 +10,7 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentSellerBankDetail = {},
 		advanceDocumentId = '',
 		shipmentType = '',
-	} = updateRefundModal || {};
+	} = data || {};
 
 	const { accountNumber = '', bankName = '' } = advanceDocumentSellerBankDetail || {};
 	const { tradePartyMappingId = '', entityCode = '' } = advanceDocumentSellerAddress || {};

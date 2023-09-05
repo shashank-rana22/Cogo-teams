@@ -32,7 +32,7 @@ function NewRequestModal({
 	showRequestModal = false,
 	setShowRequestModal = () => {},
 }) {
-	const { partner, user } = useSelector((profile) => profile);
+	const { partner, user } = useSelector(({ profile }) => profile);
 
 	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal });
 	const { listEntities = {} } = useGetEntities();
