@@ -80,6 +80,7 @@ const useGetControls = ({ truckTypeToggle, warehouseLocationFilter = '' }) => {
 				name        : 'expected_cargo_gated_out',
 				placeholder : 'Select Date',
 				type        : 'datepicker',
+				rules       : { required: 'This is required' },
 				span        : 6,
 			},
 		],
