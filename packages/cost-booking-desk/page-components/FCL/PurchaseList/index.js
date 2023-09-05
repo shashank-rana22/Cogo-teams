@@ -19,7 +19,7 @@ const PAGE_LIMIT = 10;
 function PurchaseList() {
 	const { paymentActiveTab } = useContext(CostBookingDeskContext);
 	const [searchValue, setSearchValue] = useState('');
-	const { loading, data, pagination, setPagination } = useListPurchaseAdvanceDocument(searchValue);
+	const { loading, data, pagination, setPagination } = useListPurchaseAdvanceDocument({ searchValue });
 	const { list = [], totalRecords } = data || {};
 
 	const [viewRequestModal, setViewRequestModal] = useState({});

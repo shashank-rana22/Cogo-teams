@@ -13,7 +13,7 @@ const useGetExchangeRate = ({ billingParty = {}, formValues = {}, setValue = () 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_exchange_rate',
 		method : 'GET',
-	}, { manual: false });
+	}, { manual: true });
 
 	const { currency = '' } = formValues || {};
 	const { ledger_currency = '' } = billingParty || {};

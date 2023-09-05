@@ -2,27 +2,37 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback, useState, useContext } from 'react';
+import { useEffect, useCallback, useState, useContext, useMemo } from 'react';
 
 import CostBookingDeskContext from '../context/CostBookingDeskContext';
 
 const INIT_PAGE = 1;
 
-const getParams = ({ pagination = INIT_PAGE, extraFilters = {} }) => ({
-	tradeType  : 'import',
-	type       : 'CONTAINER_SECURITY_DEPOSIT',
-	page       : pagination,
-	page_limit : 10,
-	...extraFilters,
-});
+const getParams = ({ query = '', pagination = INIT_PAGE, extraFilters = {} }) => {
+	const searchQuery = query ? { q: query } : {};
 
-function useListPurchaseAdvanceDocument(searchValue = '') {
+	return {
+		tradeType : 'import',
+		type      : 'CONTAINER_SECURITY_DEPOSIT',
+		pageIndex : pagination,
+		pageSize  : 10,
+		...searchQuery,
+		...extraFilters,
+	};
+};
+
+function useListPurchaseAdvanceDocument({ searchValue = '' }) {
 	const {
-		activeTab = '', paymentActiveTab = '', shipmentType = '',
-		stepperTab = '', filters = {}, newScopeFilters = {},
+		activeTab = '',
+		paymentActiveTab = '',
+		shipmentType = '',
+		stepperTab = '',
+		filters = {},
+		newScopeFilters = {},
 	} = useContext(CostBookingDeskContext);
 
 	const [pagination, setPagination] = useState(INIT_PAGE);
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const extraFilters = paymentActiveTab === 'refunds_and_settlements' ? { status: 'APPROVED' } : {};
@@ -34,19 +44,21 @@ function useListPurchaseAdvanceDocument(searchValue = '') {
 		params  : getParams({ query, pagination, extraFilters }),
 	}, { manual: false });
 
+	const documentListIds = useMemo(() => data?.list.map((item) => item?.advanceDocumentId), [data?.list]);
+
 	const apiTrigger = useCallback(() => {
 		try {
 			trigger();
-			if (isEmpty(data?.list) && pagination > INIT_PAGE) {
-				setPagination(INIT_PAGE);
-			}
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 		}
-	}, [trigger, pagination, data]);
+	}, [trigger]);
 
 	useEffect(() => {
-		// apiTrigger();
+		if (isEmpty(documentListIds) && pagination > INIT_PAGE) {
+			setPagination(INIT_PAGE);
+		}
+
 		localStorage.setItem(
 			'cost_booking_desk_values',
 			JSON.stringify({
@@ -58,7 +70,7 @@ function useListPurchaseAdvanceDocument(searchValue = '') {
 				paymentActiveTab,
 			}),
 		);
-	}, [apiTrigger, paymentActiveTab, activeTab, shipmentType, stepperTab, filters, newScopeFilters]);
+	}, [activeTab, documentListIds, filters, newScopeFilters, pagination, paymentActiveTab, shipmentType, stepperTab]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -67,6 +79,7 @@ function useListPurchaseAdvanceDocument(searchValue = '') {
 	return {
 		loading,
 		data,
+		apiTrigger,
 		pagination,
 		setPagination,
 	};
