@@ -37,7 +37,7 @@ function EditInputAllocation({
 
 	let errorMessege = '';
 
-	const formatted = (field, curr) => formatAmount({
+	const getFormattedAmount = (field, curr) => formatAmount({
 		amount   :	field,
 		currency : curr,
 		options  : {
@@ -58,7 +58,7 @@ function EditInputAllocation({
 			? t('incidentManagement:allocation_error_message_2')
 			: t('incidentManagement:allocation_error_message_3');
 	} else {
-		errorMessege = formatted(allocationAmountValue, currency);
+		errorMessege = getFormattedAmount(allocationAmountValue, currency);
 	}
 
 	function Content() {
@@ -90,7 +90,7 @@ function EditInputAllocation({
 		setChangedValue(value);
 	};
 
-	const submit = () => {
+	const onSubmit = () => {
 		setAllocationValue(
 			itemData,
 			+changedValue,
@@ -140,7 +140,7 @@ function EditInputAllocation({
 							<Button
 								className={styles.edit_icon}
 								onClick={() => {
-									submit();
+									onSubmit();
 									setRestEdit(!restEdit);
 								}}
 							>
