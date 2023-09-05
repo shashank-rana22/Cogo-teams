@@ -14,7 +14,6 @@ import getKeyByValue from '../utils/getKeyByValue';
 import styles from './styles.module.css';
 
 const ELEMENT_NOT_FOUND = -1;
-
 const MIN_AMOUNT = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
@@ -34,17 +33,19 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	const { query: urlQuery } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
-	const {
-		entity = '',
-		currency,
-		payrun,
-		payrun_type = '',
-		partner_id = '',
-	} = urlQuery || {};
 
-	const country = getKeyByValue(
-		GLOBAL_CONSTANTS.country_entity_ids,
-		partner_id,
+	const { entity = '', currency, payrun, payrun_type = '', partner_id = '' } = urlQuery || {};
+	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
+	const [orderBy, setOrderBy] = useState({});
+	const [filters, setFilters] = useState(
+		{
+			invoiceView : 'coe_accepted',
+			pageSize    : 10,
+			pageIndex   : 1,
+			currency,
+			entity,
+			invoiceType : payrun_type === 'OVERHEADS' ? 'expense' : undefined,
+		},
 	);
 
 	const CREATE_PAYRUN_CONFIG_MAPPING = {
@@ -60,18 +61,6 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 		},
 		{ manual: true },
 	);
-	const [orderBy, setOrderBy] = useState({});
-
-	const [filters, setFilters] = useState(
-		{
-			invoiceView : 'coe_accepted',
-			pageSize    : 10,
-			pageIndex   : 1,
-			currency,
-			entity,
-			invoiceType : payrun_type === 'OVERHEADS' ? 'expense' : undefined,
-		},
-	);
 
 	const {
 		search = '', pageSize, pageIndex, invoiceView, category, invoiceType,
@@ -79,15 +68,12 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 		services, invoiceDate, dueDate, updatedDate,
 	} = filters || {};
 	const { dueDateSortType } = orderBy || {};
-
 	const { startDate, endDate } = invoiceDate || {};
 	const { startDate: fromBillDate, endDate: toBillDate } = dueDate || {};
 	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	useEffect(() => {
-		debounceQuery(search);
-	}, [debounceQuery, search]);
+	useEffect(() => { debounceQuery(search); }, [debounceQuery, search]);
 
 	useEffect(() => {
 		const newData = { ...data };
@@ -149,29 +135,20 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 			toUploadBillDate, trigger, payrun],
 	);
 
-	useEffect(() => {
-		if (payrun) {
-			getPayrunInvoices();
-		}
-	}, [getPayrunInvoices, payrun]);
+	useEffect(() => { if (payrun) { getPayrunInvoices(); } }, [getPayrunInvoices, payrun]);
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		setApiData((prevData) => {
 			const { list = [] } = prevData || {};
 			const newList = list.map((item) => {
-				const {
-					payableValue,
-					invoiceAmount,
-					tdsDeducted,
-					payableAmount,
-					tdsAmount,
-				} = item;
+				const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = item;
 				const maxValueCrossed = +payableAmount > +payableValue;
 				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 				const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 				const maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
 				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 				const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
+
 				return ({
 					...item,
 					checked  : item?.invoiceType === 'CREDIT NOTE' ? false : event.target.checked,
@@ -189,29 +166,18 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 		const invoicesLength = dataList?.filter((val) => (val.invoiceType !== 'CREDIT NOTE'))?.length;
 		const isAllRowsChecked = isCheckedLength === invoicesLength;
 		return (
-			<Checkbox
-				checked={isAllRowsChecked && !loading}
-				onChange={onChangeTableHeaderCheckbox}
-			/>
+			<Checkbox checked={isAllRowsChecked && !loading} onChange={onChangeTableHeaderCheckbox} />
 		);
 	}
 
 	const onChangeTableBodyCheckbox = (itemData) => {
 		const { id = '' } = itemData || {};
 		setApiData((prevData) => {
-			const index = (prevData.list || []).findIndex(
-				(item) => item.id === id,
-			);
+			const index = (prevData.list || []).findIndex((item) => item.id === id);
 
 			if (index !== ELEMENT_NOT_FOUND) {
 				const newList = [...prevData.list];
-				const {
-					payableValue,
-					invoiceAmount,
-					tdsDeducted,
-					payableAmount,
-					tdsAmount,
-				} = newList[index];
+				const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = newList[index];
 				const maxValueCrossed = +payableAmount > +payableValue;
 				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 				const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
@@ -223,10 +189,8 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 					checked  : !newList[index].checked,
 					hasError : isError,
 				};
-				return {
-					...prevData,
-					list: newList,
-				};
+
+				return { ...prevData, list: newList };
 			}
 			return prevData;
 		});
@@ -234,17 +198,12 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	function GetTableBodyCheckbox(itemData) {
 		const { id = '' } = itemData || {};
 		const { list = [] } = apiData || {};
-		const isChecked = list.find(
-			(item) => item?.id === id,
-		)?.checked;
+		const isChecked = list.find((item) => item?.id === id)?.checked;
 
 		return (
 			<div className={styles.checkbox_style}>
 				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
-					<Checkbox
-						checked={isChecked}
-						onChange={() => onChangeTableBodyCheckbox(itemData)}
-					/>
+					<Checkbox checked={isChecked} onChange={() => onChangeTableBodyCheckbox(itemData)} />
 				)}
 			</div>
 		);
