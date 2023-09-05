@@ -6,7 +6,7 @@
 		}
 
 		.ui_modal_footer_container {
-			:first-child {
+			button:first-child {
 				margin-right: 12px;
 			}
 		}

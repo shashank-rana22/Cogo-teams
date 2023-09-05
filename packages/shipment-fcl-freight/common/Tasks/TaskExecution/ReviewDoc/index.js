@@ -19,7 +19,7 @@ function ReviewDoc({
 	refetch = () => {},
 	onClose = () => {},
 }) {
-	const [approvalState, setApprovalState] = useState(null);
+	const [isAmend, setIsAmend] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 	const [showApprovalModal, setShowApprovalModal] = useState(false);
 	const [showAmendModal, setShowAmendModal] = useState(false);
@@ -63,10 +63,6 @@ function ReviewDoc({
 		await updateDocument(params);
 	};
 
-	const handleAmmend = () => {
-		setApprovalState({ ammend: true });
-	};
-
 	const handleSubmit = () => {
 		if (isEmpty(remarkValue)) {
 			Toast.error('Please provide amendment reason');
@@ -91,9 +87,7 @@ function ReviewDoc({
 
 	if (loading) {
 		return (
-			<div>
-				<ThreeDotLoader message="Loading Document" />
-			</div>
+			<ThreeDotLoader message="Loading Document" />
 		);
 	}
 
@@ -141,58 +135,58 @@ function ReviewDoc({
 				</div>
 			</div>
 
-			{!approvalState ? (
-				<div className={styles.file_view}>
-					<object
-						title="review_file"
-						data={getFileUrl(docData?.document_url)}
-						width="100%"
-						type="application/pdf"
-					/>
-				</div>
-			) : null}
-
-			{approvalState?.ammend ? (
-				<div className={styles.remark}>
-					<div className={styles.sub_heading}>Please specify the reason for this </div>
-					<Textarea
-						className="remark_text"
-						value={remarkValue}
-						onChange={(e) => setRemarkValue(e)}
-						placeholder="Type Remarks"
-					/>
-				</div>
-			) : null}
-
-			{!approvalState ? (
-				<div className={styles.action_buttons}>
-					<Button
-						onClick={handleAmmend}
-						themeType="secondary"
-						disabled={loading}
-					>
-						Amend
-					</Button>
-
-					<Button onClick={() => setShowApprovalModal(true)} disabled={loading}>
-						Approve
-					</Button>
-				</div>
+			{isAmend ? (
+				<>
+					<div className={styles.remark}>
+						<div className={styles.sub_heading}>Please specify the reason for this </div>
+						<Textarea
+							className="remark_text"
+							value={remarkValue}
+							onChange={(e) => setRemarkValue(e)}
+							placeholder="Type Remarks"
+						/>
+					</div>
+					<div className={styles.action_buttons}>
+						<Button
+							onClick={() => {
+								onClose();
+							}}
+							themeType="secondary"
+							disabled={loading}
+						>
+							Cancel
+						</Button>
+						<Button onClick={() => handleSubmit()} disabled={loading}>
+							Submit
+						</Button>
+					</div>
+				</>
 			) : (
-				<div className={styles.action_buttons}>
-					<Button
-						onClick={() => {
-							onClose();
-						}}
-						themeType="secondary"
-						disabled={loading}
-					>
-						Cancel
-					</Button>
-					<Button onClick={handleSubmit} disabled={loading}>
-						Submit
-					</Button>
-				</div>
+				<>
+					<div className={styles.file_view}>
+						<object
+							title="review_file"
+							data={getFileUrl(docData?.document_url)}
+							width="100%"
+							type="application/pdf"
+						/>
+					</div>
+
+					<div className={styles.action_buttons}>
+						<Button
+							onClick={() => setIsAmend(true)}
+							themeType="secondary"
+							disabled={loading}
+						>
+							Amend
+						</Button>
+
+						<Button onClick={() => setShowApprovalModal(true)} disabled={loading}>
+							Approve
+						</Button>
+					</div>
+				</>
+
 			)}
 
 			{showApprovalModal ? (
