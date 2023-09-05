@@ -12,8 +12,8 @@ import checkboxSelectionChecks from '../utils/checkboxSelectionChecks';
 import getConfig from '../utils/getConfig';
 import getKeyByValue from '../utils/getKeyByValue';
 import getSelectedInvoice from '../utils/getSelectedInvoice';
-import goGoingBack from '../utils/goGoingBack';
-import onClearing from '../utils/onClearing';
+import onClearingFilters from '../utils/onClearingFilters';
+import onGoingBack from '../utils/onGoingBack';
 import settingApiData from '../utils/settingApiData';
 
 import styles from './styles.module.css';
@@ -212,8 +212,8 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	const setEditedValue = (itemData, value, key, checked = false) => {
 		settingApiData(itemData, value, key, checked, setApiData);
 	};
-	const onClear = () => { onClearing(setGlobalFilters, entity, queryCurr); };
-	const goBack = () => { goGoingBack(viewSelectedInvoice, setViewSelectedInvoice, push); };
+	const onClear = () => { onClearingFilters(setGlobalFilters, entity, queryCurr); };
+	const goBack = () => { onGoingBack(viewSelectedInvoice, setViewSelectedInvoice, push); };
 
 	return {
 		config,

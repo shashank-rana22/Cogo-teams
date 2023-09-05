@@ -1,4 +1,4 @@
-const onClearing = (setGlobalFilters, entity, queryCurr) => {
+const onClearingFilters = (setGlobalFilters, entity, queryCurr) => {
 	setGlobalFilters({
 		pageIndex   : 1,
 		pageSize    : 20,
@@ -8,4 +8,4 @@ const onClearing = (setGlobalFilters, entity, queryCurr) => {
 	});
 };
 
-export default onClearing;
+export default onClearingFilters;
