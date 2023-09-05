@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import styles from './styles.module.css';
 
 export default function PopoverContent({
-	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent,
+	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent,userId
 }) {
 	const { scopes, viewTypes } = scopeData;
 	const defaultValues = {
@@ -107,6 +107,12 @@ export default function PopoverContent({
 						control={control}
 						size={size}
 						asyncKey="partner_users"
+						params={{
+							filters: {
+							reporting_manager_id:userId
+							},
+						status:'active'}}
+						filters={{reporting_manager_id:userId}}
 						isClearable
 						valueKey="user_id"
 					/>

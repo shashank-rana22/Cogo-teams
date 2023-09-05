@@ -10,6 +10,8 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 	const dispatch = useDispatch();
 
 	const { authParams, selected_agent_id: selectedAgentId, ...restProfile } = profile || {};
+	const { user } = restProfile;
+	const { id: userId } = user;
 
 	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider });
 
@@ -56,5 +58,5 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 
 	useEffect(() => Router.events.on('routeChangeStart', resetProfile), [resetProfile]);
 
-	return { handleApply, scopeData, scope, viewType, selectedAgentId };
+	return { handleApply, scopeData, scope, viewType, selectedAgentId,userId };
 }
