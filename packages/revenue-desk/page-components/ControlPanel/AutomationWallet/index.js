@@ -2,13 +2,15 @@ import { Button, Select, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import { serviceOptions } from '../../../helpers/filterOptionMapping';
-import useListRevenueDeskWallet from '../../../hooks/useListRevenueDeskWallet';
+import useListRevenueDeskWallet from '../hooks/useListRevenueDeskWallet';
 
 import CreateWallet from './CreateWallet';
 import AutomationWalletDetails from './Details';
 import styles from './styles.module.css';
 
 function AutomationWallet() {
+	const [createWallet, setCreateWallet] = useState(false);
+
 	const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 	const ZERO_VALUE = 0;
 	const ONE_VALUE = 1;
@@ -17,8 +19,6 @@ function AutomationWallet() {
 		data, filters = {}, setFilter = () => {},
 		refetch = () => {}, loading, page, setPage,
 	} = useListRevenueDeskWallet();
-
-	const [createWallet, setCreateWallet] = useState(false);
 
 	const onChange = (item, key) => {
 		setFilter((prev) => ({ ...prev, [key]: item }));

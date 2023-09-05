@@ -2,7 +2,7 @@ import { Button, Input, Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useUpdateRevenueDeskWallet from '../../../../hooks/useUpdateRevenueDeskWallet';
+import useUpdateRevenueDeskWallet from '../../hooks/useUpdateRevenueDeskWallet';
 
 import styles from './styles.module.css';
 

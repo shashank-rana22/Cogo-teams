@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
@@ -10,27 +9,37 @@ const useCreateRDAutomationParameters = ({ setData = () => {} }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const apiTrigger = async ({ filter = {}, refetched = false }) => {
+	const apiTrigger = async (data) => {
 		try {
-			const {
-				trade_type, service_type,
-				container_size, commodity_type, commodity_item, inco_term,
-			} = filter;
-			const res = await trigger({
+			// const {
+			// 	service_type, inco_terms,
+			// 	container_size, commodity_type, commodity_item, inco_term,
+			// } = filter;
+
+			const { container_size = '', container_type = '', ...rest } = data;
+			console.log({
 				data: {
-					service_type,
-					trade_type,
+					...rest,
 					is_weightage_required : true,
 					shipment_parameters   : {
 						container_size,
-						container_type : commodity_type,
-						commodity      : commodity_item,
-						inco_term,
+						container_type,
+					} || undefined,
+				},
+			});
+
+			const res = await trigger({
+				data: {
+					...rest,
+					is_weightage_required : true,
+					shipment_parameters   : {
+						container_size,
+						container_type,
 					} || undefined,
 				},
 			});
 			if (!res.hasError) {
-				if (!refetched) { Toast.success('Saved Successfully'); }
+				Toast.success('Saved Successfully');
 			}
 		} catch (err) {
 			toastApiError(err);
@@ -39,7 +48,7 @@ const useCreateRDAutomationParameters = ({ setData = () => {} }) => {
 
 	useEffect(() => {
 		setData(list);
-	}, [list]);
+	}, [list, setData]);
 
 	return {
 		apiTrigger,

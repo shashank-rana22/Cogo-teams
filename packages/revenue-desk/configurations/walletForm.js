@@ -2,7 +2,7 @@ const controls = {
 	service: {
 		name        : 'service_type',
 		type        : 'select',
-		placeholder : 'Enter Remark',
+		placeholder : 'Select Service Type ',
 		options     : [
 			{
 				id    : 1,

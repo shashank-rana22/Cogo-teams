@@ -3,11 +3,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useCreateRDWeightages from '../../hooks/useCreateRDWeightages';
+import useCreateRDWeightages from '../../../hooks/useCreateRDWeightages';
 
 import styles from './styles.module.css';
 
-function RowElement({ data = {}, list = [], column_width = '', filter = {}, refetch = () => {} }) {
+function RowElement({
+	data = {}, list = [],
+	column_width = '', filter = {}, refetch = () => {}, disabledInput = false,
+}) {
 	const { parameter, weightage } = data;
 	const { fulfillment_ratio = {}, ...rest } = weightage || {};
 	const {
@@ -41,10 +44,12 @@ function RowElement({ data = {}, list = [], column_width = '', filter = {}, refe
 	const handelWeightages = () => {
 		createRDWeightages({ weightageList, filter, refetch });
 	};
+
 	const isFulfillType = (item) => {
 		const key = item?.key;
 		return ['overall_weightage_2_day', 'overall_weightage_7_day', 'overall_weightage_30_day'].includes(key);
 	};
+
 	return (
 		<div className={styles.table}>
 			{list.map((item) => (
@@ -69,9 +74,9 @@ function RowElement({ data = {}, list = [], column_width = '', filter = {}, refe
 							placeholder="0.00%"
 							max={100}
 							step={0.1}
+							disabled={!disabledInput}
 							onChange={(val) => setValue({ val, keyValue: item?.key })}
 						/>
-
 					</div>
 				</div>
 			))}
