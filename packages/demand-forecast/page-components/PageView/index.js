@@ -1,7 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCalendar } from '@cogoport/icons-react';
-import ScopeSelect from '@cogoport/scope-select';
 import { useState } from 'react';
 
 import useGetForecastFclFreightClusters from '../../hooks/useGetForecastResults';
@@ -43,7 +42,6 @@ function PageView() {
 		<div>
 			<Header />
 
-
 			<div className={styles.secondary_header}>
 				<Tab activeTab={activeTab} setActiveTab={setActiveTab} />
 				<div className={styles.dates}>
@@ -61,7 +59,6 @@ function PageView() {
 							{end_date}
 						</div>
 					)}
-
 					<Filters setFilters={setFilters} setPage={setPage} filters={filters} />
 				</div>
 

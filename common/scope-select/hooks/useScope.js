@@ -58,5 +58,5 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 
 	useEffect(() => Router.events.on('routeChangeStart', resetProfile), [resetProfile]);
 
-	return { handleApply, scopeData, scope, viewType, selectedAgentId,userId };
+	return { handleApply, scopeData, scope, viewType, selectedAgentId, userId };
 }

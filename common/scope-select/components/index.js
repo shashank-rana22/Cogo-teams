@@ -23,7 +23,7 @@ export default function ScopeSelect({
 	const closePopover = () => setShowPopover(false);
 
 	const {
-		handleApply, scopeData, scope, viewType, selectedAgentId,userId
+		handleApply, scopeData, scope, viewType, selectedAgentId, userId,
 	} = useScope({ defaultValues, closePopover, apisToConsider });
 
 	return (
