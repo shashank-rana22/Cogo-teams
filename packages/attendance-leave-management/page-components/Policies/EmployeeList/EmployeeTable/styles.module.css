@@ -8,15 +8,28 @@
 }
 
 .footer {
+	position: fixed;
+	bottom: 0;
+	left: 110px;
 	display: flex;
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 24px;
+	width: 90%;
+	padding: 20px 24px;
 	margin-top: 16px;
 	background: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		left: 20px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 90%;
+		padding: 12px;
+	}
 }
 
 .footer_text {
@@ -41,4 +54,27 @@
 	text-decoration-line: underline;
 	text-transform: capitalize;
 	cursor: pointer;
+
+	@media (max-width: 768px) {
+		display: block;
+		margin: 12px 0 16px;
+	}
+}
+
+.container {
+	width: 100%;
+
+	:global {
+		.ui_table_body_cell {
+			overflow: visible;
+		}
+	}
+}
+
+.mb_100 {
+	margin-bottom: 20px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 90px;
+	}
 }

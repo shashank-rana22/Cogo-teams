@@ -30,11 +30,11 @@ const useCreateLeaveApplication = ({ onClose, refetch, refetchList, setSelectedD
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							formatType : 'date',
 						}),
-						half_day_date: formatDate({
+						half_day_date: half_day ? formatDate({
 							date       : half_day_date,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							formatType : 'date',
-						}),
+						}) : undefined,
 						is_halfday: half_day || false,
 					},
 				});

@@ -9,9 +9,10 @@ import { EMPLOYEE_LIST_CONTROLS } from '../../../../utils/constants';
 import styles from './styles.module.css';
 
 function UpdateModal({
-	show, onClose, selectedData, selectedIds,
-	filtersData, searchQuery, selectedLocation,
-	isBulkUpdate, refetch, setSelectedData, setSelectedIds,
+	show = false, onClose = () => {}, selectedData = {}, selectedIds = [],
+	filtersData = {}, searchQuery = '', selectedLocation = '',
+	isBulkUpdate = false, refetch = () => {}, setSelectedData = () => {}, setSelectedIds = () => {},
+	setSelectBulk = () => {},
 }) {
 	const [filters, setFilters] = useState({});
 	const { loading, createGeoLocationMapping } = useCreateGeoLocationMapping({ refetch, onClose });
@@ -50,11 +51,12 @@ function UpdateModal({
 			await createGeoLocationMapping(objValues);
 			setSelectedData({});
 			setSelectedIds([]);
+			setSelectBulk(false);
 		}
 	};
 
 	return (
-		<Modal size="sm" show={show} onClose={onClose} placement="top">
+		<Modal size="sm" show={show} onClose={onClose} placement="top" className={styles.modal}>
 			<Modal.Header title={`${isBulkUpdate ? 'Bulk' : ''} Update Data`} />
 			<Modal.Body>
 				<div>

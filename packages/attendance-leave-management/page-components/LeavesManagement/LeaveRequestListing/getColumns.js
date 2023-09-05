@@ -91,11 +91,12 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 			<div className={styles.action}>
 				{item.leave_status === 'pending' ? (
 					<IcMEdit
-						className={styles.cursor}
+						className={cl`${styles.mr_16} ${styles.cursor}`}
 						onClick={() => handleOpenModal(item)}
 					/>
-				) : <div style={{ marginRight: '14px' }} />}
-				<IcMDelete className={styles.cursor} onClick={() => handleDeleteModal(item)} />
+				) : <div style={{ marginRight: 26 }} />}
+				{item.leave_status === 'approved' ? '-'
+					: <IcMDelete className={styles.cursor} onClick={() => handleDeleteModal(item)} />}
 			</div>
 		),
 		id: 'action',

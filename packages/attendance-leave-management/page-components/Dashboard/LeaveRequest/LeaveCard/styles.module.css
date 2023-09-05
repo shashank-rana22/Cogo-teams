@@ -182,6 +182,7 @@
 	padding: 16px;
 	cursor: pointer;
 	background: #fff;
+	border-radius: 16px;
 }
 
 .approve {

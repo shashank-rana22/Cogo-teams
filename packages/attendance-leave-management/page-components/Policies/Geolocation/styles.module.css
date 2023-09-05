@@ -74,13 +74,16 @@
 .above_text {
 	font-size: 14px;
 	font-weight: 500;
-	color: #4f4f4f;
+	color: #221f20;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 .below_text {
 	display: flex;
 	align-items: center;
+	font-size: 12px;
+	color: #828282;
 }
 
 .below_text > :not(:last-child) {

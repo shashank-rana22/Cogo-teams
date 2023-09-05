@@ -9,7 +9,7 @@ import { EMPLOYEE_LIST_CONTROLS } from '../../../utils/constants';
 import EmployeeTable from './EmployeeTable';
 import styles from './styles.module.css';
 
-function EmployeeList({ selectedLocation }) {
+function EmployeeList({ selectedLocation = '' }) {
 	const [searchQuery, setSearchQuery] = useState('');
 	const { designation } = EMPLOYEE_LIST_CONTROLS;
 
@@ -46,17 +46,15 @@ function EmployeeList({ selectedLocation }) {
 					/>
 				</div>
 			</div>
-			<div className={styles.container}>
-				<EmployeeTable
-					data={data}
-					setFilters={setFilters}
-					loading={loading}
-					filters={filters}
-					searchQuery={searchQuery}
-					selectedLocation={selectedLocation}
-					refetch={refetch}
-				/>
-			</div>
+			<EmployeeTable
+				data={data}
+				setFilters={setFilters}
+				loading={loading}
+				filters={filters}
+				searchQuery={searchQuery}
+				selectedLocation={selectedLocation}
+				refetch={refetch}
+			/>
 		</div>
 	);
 }

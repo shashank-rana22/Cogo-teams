@@ -83,3 +83,12 @@
 .cursor {
 	cursor: pointer;
 }
+
+.mr_16 {
+	margin-right: 16px;
+}
+
+.action {
+	display: flex;
+	align-items: center;
+}

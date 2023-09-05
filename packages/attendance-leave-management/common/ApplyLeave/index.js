@@ -36,7 +36,7 @@ function ApplyLeave({
 		if (!isEmpty(selectedData)) {
 			const {
 				leave_end_date, leave_reason, leave_start_date,
-				leave_type, is_halfday, attachment_url,
+				leave_type, is_halfday, attachment_url, half_day_date,
 			} = selectedData || {};
 
 			setValues({
@@ -48,6 +48,8 @@ function ApplyLeave({
 				leave_type,
 				is_halfday,
 				attachment_url,
+				half_day      : is_halfday,
+				half_day_date : new Date(half_day_date),
 			});
 		}
 	}, [selectedData, setValues]);

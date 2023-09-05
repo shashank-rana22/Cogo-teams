@@ -1,4 +1,4 @@
-import { Pagination, Button } from '@cogoport/components';
+import { Pagination, Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
@@ -69,13 +69,10 @@ function EmployeeTable({
 
 	const handleCloseModal = () => {
 		setOpenUpdateModal(false);
-		setSelectedIds([]);
-		setSelectedData({});
-		setSelectBulk(false);
 	};
 
 	return (
-		<>
+		<div className={cl`${styles.container} ${selectedIds.length > GLOBAL_CONSTANTS.zeroth_index && styles.mb_100}`}>
 			<StyledTable columns={columns} data={list} className="table_height" loading={loading} />
 			<div className={styles.pagination}>
 				<Pagination
@@ -99,6 +96,7 @@ function EmployeeTable({
 					selectedIds={selectedIds}
 					setSelectedIds={setSelectedIds}
 					isBulkUpdate={selectBulk}
+					setSelectBulk={setSelectBulk}
 				/>
 			)}
 			{selectedIds.length > GLOBAL_CONSTANTS.zeroth_index && (
@@ -121,7 +119,7 @@ function EmployeeTable({
 					<Button size="md" themeType="primary" onClick={() => handleModal('')}>Make Changes</Button>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }
 

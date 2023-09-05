@@ -32,16 +32,22 @@
 	border-bottom: 1px solid #e0e0e0;
 
 	:global {
-		.ui_progressbar_container {
-			padding: 4px 0;
-		}
-
 		.ui_progressbar_progress {
 			background-color: #abb0de;
 		}
+	}
+}
 
+.leave_ctn_privilege,
+.leave_ctn,
+.last_leave_ctn {
+	:global {
 		.ui_progressbar_bar {
 			box-shadow: none;
+		}
+
+		.ui_progressbar_container {
+			padding: 4px 0;
 		}
 	}
 }

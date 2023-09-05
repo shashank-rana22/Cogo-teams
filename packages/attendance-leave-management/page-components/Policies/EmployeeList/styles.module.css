@@ -93,17 +93,3 @@
 		}
 	}
 }
-
-.container {
-	width: 100%;
-
-	:global {
-		.ui_table_body_cell {
-			overflow: visible;
-		}
-
-		.ui_select_container {
-			width: 150px;
-		}
-	}
-}
