@@ -52,7 +52,7 @@ const getCommonColumns = () => [
 		),
 	},
 	{
-		Header   : <div className={styles.location_header}>Origin-Destination</div>,
+		Header   : <div className={styles.location_header}>Port Pair</div>,
 		key      : 'origin',
 		id       : 'origin',
 		accessor : (item) => (
@@ -105,7 +105,7 @@ const getPaymentRequestColumns = ({ setViewRequestModal = () => {} }) => [
 		),
 	},
 	{
-		Header   : <div className={styles.header}>Status</div>,
+		Header   : <div className={styles.header}>Deposit Status</div>,
 		key      : 'status',
 		id       : 'status',
 		accessor : (item) => (

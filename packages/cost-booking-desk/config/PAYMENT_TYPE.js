@@ -1,7 +1,7 @@
 const PAYMENT_TYPE = [
 	{
 		name  : 'payment_request',
-		title : 'Payment Request',
+		title : 'Deposit Request',
 	},
 	{
 		name  : 'refunds_and_settlements',
