@@ -24,25 +24,22 @@ const useGetExchangeRate = ({
 	const { currency = '' } = formValues || {};
 	const { ledger_currency = '' } = billingParty || {};
 
-	const apiTrigger = useCallback(() => {
+	const apiTrigger = useCallback(async () => {
 		try {
 			if (ledger_currency) {
-				trigger({
+				const res = await trigger({
 					params: getParams({ ledger_currency, currency }),
 				});
+				if (res?.data) setValue('exchange_rate', data);
 			}
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [currency, trigger, ledger_currency]);
+	}, [ledger_currency, trigger, currency, setValue, data]);
 
 	useEffect(() => {
 		if (ledger_currency) {
 			apiTrigger();
-		}
-
-		if (data) {
-			setValue('exchange_rate', data);
 		}
 	}, [setValue, apiTrigger, data, ledger_currency]);
 
