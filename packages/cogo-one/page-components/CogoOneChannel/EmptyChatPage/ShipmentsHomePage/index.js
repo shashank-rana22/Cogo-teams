@@ -36,7 +36,6 @@ function ListShipmentCards({
 	showAddPrimaryUserButton = false,
 	mailProps = {},
 	params = {},
-	dateFilters = {},
 	range = '',
 }) {
 	if (isEmpty(list)) {
@@ -69,7 +68,6 @@ function ListShipmentCards({
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
 				mailProps={mailProps}
 				params={params}
-				dateFilters={dateFilters}
 				range={range}
 			/>
 		),
@@ -78,7 +76,6 @@ function ListShipmentCards({
 
 function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
 	const { queryParams = {} } = useGetFormatedPath();
-
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState(queryParams?.range || 'today');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
@@ -161,7 +158,6 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								showAddPrimaryUserButton={showAddPrimaryUserButton}
 								mailProps={mailProps}
 								params={params}
-								dateFilters={dateFilters}
 								range={range}
 							/>
 						)}

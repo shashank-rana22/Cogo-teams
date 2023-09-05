@@ -11,15 +11,12 @@ const handleShipmentClick = ({
 	setActiveTab = () => {},
 	primaryPocDetails = {},
 	params = {},
-	dateFilters = {},
 	range = '',
 }) => {
 	const { query = '', shipmentType = '' } = params || {};
-	const { start_date = '', end_date = '' } = dateFilters || {};
 
 	const NEW_HASH_URL = `sid=${query}${shipmentType ? `&shipmentType=${shipmentType}` : ''}`
-  + `${range ? `&range=${range}` : ''}${start_date ? `&start_date=${start_date}` : ''}`
-  + `${end_date ? `&end_date=${end_date}` : ''}`;
+  + `${range && range !== 'custom' ? `&range=${range}` : ''}`;
 
 	window.location.hash = NEW_HASH_URL;
 
@@ -64,7 +61,6 @@ function ShipmentCard({
 	showAddPrimaryUserButton = false,
 	mailProps = {},
 	params = {},
-	dateFilters = {},
 	range = '',
 }) {
 	const {
@@ -101,7 +97,6 @@ function ShipmentCard({
 				primaryPocDetails,
 				setActiveTab,
 				params,
-				dateFilters,
 				range,
 			})}
 		>
