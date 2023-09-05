@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -27,7 +28,7 @@ function SalesComponent({
 		{
 			date: format(
 				item?.duration,
-				'dd MMM ',
+				GLOBAL_CONSTANTS.formats?.date?.['dd MMM'],
 				{},
 				false,
 			),
@@ -35,7 +36,7 @@ function SalesComponent({
 			Count  : item?.count,
 			year   : format(
 				item?.duration,
-				'YYYY',
+				GLOBAL_CONSTANTS.formats?.date?.yyyy,
 				{},
 				false,
 			),
