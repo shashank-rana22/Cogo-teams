@@ -89,6 +89,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	:global {
+		.ui_buttonicon_container {
+			padding: 2px;
+		}
+	}
 }
 
 .inputcontainer {
@@ -123,4 +129,15 @@
 
 .btn {
 	margin-left: 4px;
+}
+
+.header_msg {
+	margin-top: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.msg {
+	font-size: 12px;
+	text-align: center;
 }
