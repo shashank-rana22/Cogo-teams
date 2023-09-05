@@ -111,6 +111,8 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 						mode={service_type}
 						formValues={locationValues}
 						setFormValues={setLocationValues}
+						intent="rate_search"
+						organization={organization}
 					/>
 				</div>
 

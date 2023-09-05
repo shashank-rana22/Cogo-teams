@@ -15,9 +15,13 @@ function KycMessage({
 		general: { query = {} },
 	} = useSelector((reduxState) => reduxState);
 
-	const { importer_exporter_id } = detail;
-
 	const { partner_id = '' } = query;
+
+	const { importer_exporter_id, importer_exporter = {} } = detail;
+
+	const { tags = [] } = importer_exporter;
+
+	const isOrgCP = tags.includes('partner');
 
 	return (
 		<div className={styles.container}>
@@ -64,7 +68,9 @@ function KycMessage({
 				style={{ width: '30%' }}
 				onClick={() => {
 					window.open(
-						`${window.location.origin}/${partner_id}/details/demand/${importer_exporter_id}`,
+						`${window.location.origin}/${partner_id}/${
+							isOrgCP ? 'prm' : 'details/demand'
+						}/${importer_exporter_id}`,
 						'_blank',
 					);
 				}}

@@ -63,7 +63,7 @@ function DetentionDemurrage({
 		}
 
 		if (additional_days) {
-			return `${free_limit || DEFAULT_DAYS_VALUE} Free + ${additional_days} Additional `;
+			return `${free_limit || DEFAULT_DAYS_VALUE} Free + ${additional_days} Add'l `;
 		}
 
 		return `${free_limit || DEFAULT_DAYS_VALUE} Free`;
@@ -104,14 +104,14 @@ function DetentionDemurrage({
 			<div className={styles.tag}>Origin</div>
 
 			<div className={styles.days_count}>
-				<div>{`Detention. ${additionalDays('origin_detention')} Days,`}</div>
+				<div>{`DET. ${additionalDays('origin_detention')} Days,`}</div>
 				<div style={{ marginLeft: '4px' }}>{`Demurrage. ${additionalDays('origin_demurrage')} Days`}</div>
 			</div>
 
 			<div className={styles.tag} style={{ marginLeft: '24px' }}>Destination</div>
 
 			<div className={styles.days_count}>
-				<div>{`Detention. ${additionalDays('destination_detention')} Days,`}</div>
+				<div>{`DET. ${additionalDays('destination_detention')} Days,`}</div>
 				<div style={{ marginLeft: '4px' }}>{`Demurrage. ${additionalDays('destination_demurrage')} Days`}</div>
 			</div>
 

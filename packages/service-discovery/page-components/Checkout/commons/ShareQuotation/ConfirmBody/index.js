@@ -26,11 +26,12 @@ function ConfirmBody({ setShow = () => {}, handleUpdateSearch = () => {}, rate =
 	});
 
 	return (
-		<div>
+		<>
 			<div>
 				The margins on this quote will be locked before you can send this link.
 				Proceed?
 			</div>
+
 			<div className={styles.btn_container}>
 				<Button
 					style={{ marginRight: 16 }}
@@ -47,7 +48,7 @@ function ConfirmBody({ setShow = () => {}, handleUpdateSearch = () => {}, rate =
 					Yes, lock margin and copy link to quote
 				</Button>
 			</div>
-		</div>
+		</>
 	);
 }
 

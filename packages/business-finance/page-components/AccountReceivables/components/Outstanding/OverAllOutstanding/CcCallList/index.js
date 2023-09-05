@@ -89,7 +89,7 @@ function CcCallList({
 					}
 				</div>
 			) : (
-				<Loader />
+				<div className={styles.loader}><Loader themeType="primary" style={{ height: 60, width: 60 }} /></div>
 			)}
 		</>
 	);

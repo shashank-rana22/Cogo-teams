@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useCreateKamPromotion from './hooks/useCreateKamPromotions';
 import useGetKamPromotionStats from './hooks/useGetKamPromotionStats';
@@ -39,6 +39,16 @@ function Wallet({ data = {}, service_key = 'search_type' }) {
 	const handleGenerateCode = (values) => {
 		generatePromotion(values);
 	};
+
+	useEffect(() => {
+		const handleUrlChange = () => setShowModal(false);
+
+		window.addEventListener('popstate', handleUrlChange);
+
+		return () => {
+			window.removeEventListener('popstate', handleUrlChange);
+		};
+	}, []);
 
 	return (
 		<>

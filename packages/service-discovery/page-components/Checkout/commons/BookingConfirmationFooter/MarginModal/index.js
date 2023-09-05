@@ -10,32 +10,30 @@ function MarginModal({
 	loading = false,
 }) {
 	return (
-		<Modal show={showMarginModal} onClose closable={false}>
-			<div className={styles.container}>
-				<div className={styles.info_text}>
-					{bookingConfirmationMode === 'whatsapp'
-						? 'You are sending booking confirmation to whatsapp with 0 margin. Do you want to proceed?'
-						: 'You are booking shipment with 0 margin do you want to proceed ?'}
-				</div>
+		<Modal size="sm" show={showMarginModal} onClose closable={false}>
+			<Modal.Body className={styles.info_text}>
+				{bookingConfirmationMode === 'whatsapp'
+					? 'You are sending booking confirmation to whatsapp with 0 margin. Do you want to proceed?'
+					: 'You are booking shipment with 0 margin do you want to proceed ?'}
+			</Modal.Body>
 
-				<div className={styles.btn_container}>
-					<Button
-						onClick={() => setShowMarginModal(false)}
-						themeType="tertiary"
-						disabled={loading}
-					>
-						Cancel
-					</Button>
+			<Modal.Footer className={styles.footer}>
+				<Button
+					onClick={() => setShowMarginModal(false)}
+					themeType="tertiary"
+					disabled={loading}
+				>
+					Cancel
+				</Button>
 
-					<Button
-						onClick={() => handleSubmit({ source: 'margin_modal' })}
-						themeType="accent"
-						loading={loading}
-					>
-						Submit
-					</Button>
-				</div>
-			</div>
+				<Button
+					onClick={() => handleSubmit({ source: 'margin_modal' })}
+					themeType="accent"
+					loading={loading}
+				>
+					Submit
+				</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }

@@ -93,14 +93,19 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab, updateLoadingState, workPrefernceLoading,
+	activeSubTab, updateLoadingState, workPrefernceLoading, listOnlyMails,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
 	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats || workPrefernceLoading) {
+	if (!listOnlyMails
+		&& (activeSubTab !== 'all'
+			|| viewType === 'shipment_specialist'
+			|| !canShowPinnedChats
+			|| workPrefernceLoading)
+	) {
 		return;
 	}
 

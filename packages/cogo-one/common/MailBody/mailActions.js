@@ -19,7 +19,7 @@ function MailActions({
 						themeType="secondary"
 						size="sm"
 						className={styles.styled_button}
-						onClick={() => handleClick({ buttonType: key })}
+						onClick={() => handleClick(key)}
 					>
 						<div className={styles.icon}>{icon}</div>
 						<div className={styles.button_text}>

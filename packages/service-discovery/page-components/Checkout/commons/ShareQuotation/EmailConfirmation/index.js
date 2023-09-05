@@ -12,6 +12,7 @@ function EmailConfirmation({
 	confirmation = false,
 	handleSendEmail = () => {},
 	setConfirmation = () => {},
+	loading = false,
 }) {
 	const {
 		rate,
@@ -23,8 +24,8 @@ function EmailConfirmation({
 
 	const { services = {}, trade_type = '' } = detail;
 
-	const handleSubmit = () => {
-		handleSendEmail();
+	const handleSubmit = async () => {
+		await handleSendEmail();
 		setConfirmation(false);
 	};
 
@@ -63,7 +64,13 @@ function EmailConfirmation({
 					<div className={styles.checkbox}>{confirmInfo.confirmation}</div>
 				</div>
 
-				<Button type="button" onClick={handleSubmit} disabled={!isChecked} className={styles.btn}>
+				<Button
+					type="button"
+					loading={loading}
+					onClick={handleSubmit}
+					disabled={!isChecked}
+					className={styles.btn}
+				>
 					Confirm
 				</Button>
 			</div>

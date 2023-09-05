@@ -91,8 +91,7 @@ const billingAddressControls = [
 		type      : 'text',
 		span      : 6,
 		maxLength : 15,
-
-		rules: {
+		rules     : {
 			required : true,
 			pattern  : {
 				value   : GLOBAL_CONSTANTS.regex_patterns.gst_number,

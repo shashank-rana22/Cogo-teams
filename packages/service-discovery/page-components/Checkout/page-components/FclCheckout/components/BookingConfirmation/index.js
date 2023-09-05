@@ -85,7 +85,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				source="booking_confirmation"
 			/>
 
-			<ShareQuotation noRatesPresent={noRatesPresent} />
+			<ShareQuotation noRatesPresent={noRatesPresent} bookingConfirmationMode={bookingConfirmationMode} />
 
 			<BookingTypeOptions
 				radioOption={radioOption}

@@ -8,6 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
+import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -46,6 +47,7 @@ function CogoOne() {
 		tab               : 'message',
 		subTab            : 'all',
 		hasNoFireBaseRoom : false,
+		expandSideBar     : false,
 		data              : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
@@ -75,7 +77,7 @@ function CogoOne() {
 	const {
 		viewType: initialViewType = '',
 		loading: workPrefernceLoading = false,
-		userMails = [],
+		userSharedMails = [],
 	} = useAgentWorkPrefernce();
 
 	const {
@@ -102,7 +104,7 @@ function CogoOne() {
 		activeMailAddress,
 		setActiveMailAddress,
 		viewType,
-		userMails,
+		userSharedMails,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
@@ -126,6 +128,10 @@ function CogoOne() {
 	const orgId = activeTab?.tab === 'message'
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
+
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.tab)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab) && activeTab?.expandSideBar));
+	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab) && !activeTab?.expandSideBar;
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -204,8 +210,9 @@ function CogoOne() {
 					) : (
 						<>
 							<div
-								className={activeTab?.tab === 'mail'
-									? styles.mail_layout : styles.chats_layout}
+								className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
+								${collapsedSideBar ? styles.mail_layout : ''} 
+								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}`}
 							>
 								<Conversations
 									activeTab={activeTab}
@@ -221,9 +228,13 @@ function CogoOne() {
 								/>
 							</div>
 
-							{activeTab?.tab !== 'mail' && (
+							{(
+								ENABLE_SIDE_BAR.includes(activeTab?.tab)
+								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab)
+							) ? (
 								<div className={cl`${styles.user_profile_layout} 
-								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}`}
+								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
+								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -241,11 +252,12 @@ function CogoOne() {
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
 										mailProps={mailProps}
+										chatsConfig={activeTab}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}
 								</div>
-							)}
+								) : null}
 						</>
 					)}
 				<AndroidApp />

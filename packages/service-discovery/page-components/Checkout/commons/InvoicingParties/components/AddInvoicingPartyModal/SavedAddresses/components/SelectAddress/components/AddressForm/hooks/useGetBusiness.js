@@ -7,11 +7,9 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const PAN_LENGTH = 10;
+const { GST_LENGTH, PAN_LENGTH, country_ids } = GLOBAL_CONSTANTS;
 
-const GST_LENGTH = 15;
-
-const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
+const { IN: INDIA_COUNTRY_ID } = country_ids;
 
 const INDIA_COUNTRY_DETAILS = getCountryDetails({
 	country_id: INDIA_COUNTRY_ID,
