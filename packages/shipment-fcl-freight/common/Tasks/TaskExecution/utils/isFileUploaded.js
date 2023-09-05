@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 function isValidDocumentUrl(url) {
 	return (
 		(typeof url === 'string' && url !== '')
-    || (typeof url === 'object' && url?.fileName && url?.finalUrl)
+    || (typeof url === 'object' && url?.finalUrl)
 	);
 }
 
