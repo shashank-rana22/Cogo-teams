@@ -46,6 +46,7 @@ function Customers({
 	selectedAutoAssign = {},
 	autoAssignChats = {},
 	setAutoAssignChats = () => {},
+	preferenceLoading = false,
 }) {
 	const {
 		userEmailAddress = '',
@@ -166,6 +167,7 @@ function Customers({
 					isBotSession={isBotSession}
 					userId={userId}
 					firestore={firestore}
+					preferenceLoading={preferenceLoading}
 				/>
 			</div>
 
