@@ -2,7 +2,12 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-const getTabMappings = ({ unReadChatsCount = 0, unReadMissedCallCount = 0, viewType = '' }) => {
+const getTabMappings = ({
+	unReadChatsCount = 0,
+	unReadMailsCount = 0,
+	unReadMissedCallCount = 0,
+	viewType = '',
+}) => {
 	const geo = getGeoConstants();
 	const tabsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.chat_tabs_to_be_shown || [];
 
@@ -27,6 +32,7 @@ const getTabMappings = ({ unReadChatsCount = 0, unReadMissedCallCount = 0, viewT
 		{
 			label : 'Mails',
 			value : 'firebase_emails',
+			badge : unReadMailsCount,
 			show  : true,
 		},
 	];
