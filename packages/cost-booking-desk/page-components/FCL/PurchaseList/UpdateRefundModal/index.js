@@ -8,7 +8,7 @@ import { useState } from 'react';
 import getPaymentAccountsPayload from '../../../../helpers/getPaymentAccountsPayload';
 import useGetEntities from '../../../../hooks/useGetEntities';
 import useGetExchangeRate from '../../../../hooks/useGetExchangeRate';
-import useListPaymentAccounts from '../../../../hooks/useListPaymentAccounts';
+import useRefundRequest from '../../../../hooks/useRefundRequest';
 
 import formControls from './controls';
 import FormElement from './FormElement';
@@ -45,7 +45,7 @@ function UpdateRefundModal({
 	const {
 		loading = false,
 		apiTrigger = () => {},
-	} = useListPaymentAccounts({ setUpdateRefundModal });
+	} = useRefundRequest({ setUpdateRefundModal });
 
 	const onSubmit = () => {
 		const payload = getPaymentAccountsPayload({
