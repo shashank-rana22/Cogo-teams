@@ -5,7 +5,14 @@ import OverviewContent from './OverviewContent';
 import styles from './styles.module.css';
 import WeeklyOverviewContent from './WeeklyOverviewContent';
 
-function TasksOverview({ data = {}, statsLoading = false, showWeekData = false, setShowWeekData = () => {} }) {
+function TasksOverview({
+	data = {},
+	statsLoading = false,
+	showWeekData = false,
+	setShowWeekData = () => {},
+	filter = {},
+	setFilter = () => {},
+}) {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.swipe_button}>
@@ -14,7 +21,7 @@ function TasksOverview({ data = {}, statsLoading = false, showWeekData = false, 
 			<div className={styles.stats_container}>
 				{showWeekData
 					? <WeeklyOverviewContent data={data} statsLoading={statsLoading} />
-					: <OverviewContent data={data} statsLoading={statsLoading} />}
+					: <OverviewContent data={data} statsLoading={statsLoading} filter={filter} setFilter={setFilter} />}
 			</div>
 			<div className={styles.swipe_button}>
 				<IcMArrowRight onClick={() => { setShowWeekData((prev) => !prev); }} />

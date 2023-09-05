@@ -47,7 +47,7 @@ function RateCoverageContent() {
 		<div>
 			<div className={styles.header_container}>
 				<span className={styles.greeting_text}>
-					Hi
+					Hi,
 					{' '}
 					{user_name}
 				</span>
@@ -87,6 +87,8 @@ function RateCoverageContent() {
 				statsLoading={statsLoading}
 				showWeekData={showWeekData}
 				setShowWeekData={setShowWeekData}
+				filter={filter}
+				setFilter={setFilter}
 			/>
 			<ListData
 				data={statsList}

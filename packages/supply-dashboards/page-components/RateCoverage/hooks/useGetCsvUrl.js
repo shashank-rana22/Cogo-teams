@@ -10,7 +10,7 @@ const useGetCsvFile = (filter, activeCard) => {
 	}, { manual: true });
 
 	const getCsvFile = async () => {
-		const { page, releventToMeValue, ...restFilters } = filter;
+		const { releventToMeValue, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 
@@ -20,11 +20,18 @@ const useGetCsvFile = (filter, activeCard) => {
 			}
 		});
 
+		const params = ['pending', 'completed', 'backlogs'].includes(activeCard) ? {
+			start_date : new Date(),
+			end_date   : new Date(),
+			status     : activeCard,
+		} : {
+			start_date, end_date, source: activeCard,
+		};
+
 		try {
 			const resp = await trigger({
 				params: {
-					filters: { ...FINAL_FILTERS, source: activeCard },
-					page,
+					filters: { ...FINAL_FILTERS, ...params },
 				},
 			});
 			if (resp?.data) {

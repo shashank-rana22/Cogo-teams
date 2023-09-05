@@ -5,7 +5,7 @@ import { IcMAir, IcMFcl } from '@cogoport/icons-react';
 export const STAT_CARDS_MAPPING = {
 	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
 	completed : { title: 'Today\'s Completed', color: '#728F3C', status: 'completed' },
-	backlog   : { title: 'Previous Backlogs', color: '#F69E50', status: 'backlog' },
+	backlogs  : { title: 'Previous Backlogs', color: '#F69E50', status: 'backlogs' },
 };
 
 export const WEEKLY_BACKLOG = {

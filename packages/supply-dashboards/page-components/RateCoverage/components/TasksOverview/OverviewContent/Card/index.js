@@ -24,7 +24,8 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 		<>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
-				{activeCard === detail?.status && ((loading) ? <Loader /> : <IcMDownload onClick={handleDownload} />) }
+				{activeCard === detail?.status
+				&& ((loading) ? <Loader /> : <IcMDownload onClick={handleDownload} />)}
 			</div>
 			<div className={styles.hr_line} />
 			<div className={styles.row}>
@@ -33,12 +34,16 @@ function Card({ detail = {}, data = {}, activeCard = '', statsLoading = false, f
 						? <Placeholder style={{ width: '60px', height: '28px' }} />
 						: (data[detail?.status] || DEFAULT_VALUE)}
 				</div>
-				{detail?.showViewMore && (
-					<div className={styles.link}>
-						View all
-						<IcMArrowDown />
-					</div>
-				)}
+				<span className={styles.link}>
+					{activeCard !== detail?.status && (
+						<span>
+							View all
+							{' '}
+							<IcMArrowDown />
+						</span>
+					)}
+
+				</span>
 			</div>
 		</>
 	);
