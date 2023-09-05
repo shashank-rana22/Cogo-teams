@@ -14,9 +14,9 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 	const {
 		requested_group_members = [],
 		group_members = [],
-		support_agent_id,
-		channel_type,
-		id,
+		channel_type = '',
+		id = '',
+		has_requested_by = {},
 	} = activeMessageCard || {};
 
 	const { user: { id: logginInAgentId } } = profile || {};
@@ -53,6 +53,8 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 	};
 
 	const dissmissTransferRequest = async () => {
+		const agentId = has_requested_by?.agent_id;
+
 		await updateDoc(roomRef, {
 			has_requested_by: {},
 		});
@@ -62,8 +64,8 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 			payload: {
 				channel           : channel_type,
 				channel_chat_id   : id,
-				agent_id          : support_agent_id,
-				conversation_type : 'request_dissmissed',
+				agent_id          : agentId,
+				conversation_type : 'request_dismissed',
 			},
 		});
 	};

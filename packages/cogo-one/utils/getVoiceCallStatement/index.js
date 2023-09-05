@@ -71,6 +71,7 @@ const getStatementMapping = ({
 	request_dissmissed    : `${previous} rejected ${present}'s request to tranfer chat`,
 	organization_switch   : `${previous} changed organization from ${reason}`,
 	tag_changed           : `${previous} has ${reason}`,
+	request_dismissed     : `${previous} dismissed ${present}'s request for transfer chat`,
 });
 
 const getVoiceCallStatement = ({
