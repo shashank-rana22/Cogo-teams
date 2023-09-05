@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -10,7 +11,6 @@ import useGetExchangeRate from '../../../../hooks/useGetExchangeRate';
 import useRefundRequest from '../../../../hooks/useRefundRequest';
 
 import getFormControls from './controls';
-import FormElement from './FormElement';
 import styles from './styles.module.css';
 
 const ONLINE_PAYMENT_OPTIONS = ['NEFT', 'RTGS'];
@@ -73,15 +73,12 @@ function UpdateRefundModal({
 		>
 			<Modal.Header title="Update Refund Details" />
 			<Modal.Body>
-				{(controls || []).map((item) => (
-					<FormElement
-						key={item?.name}
-						control={control}
-						errors={errors}
-						showElements={showElements}
-						{...item}
-					/>
-				))}
+				<Layout
+					control={control}
+					fields={controls}
+					errors={errors}
+					showElements={showElements}
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button

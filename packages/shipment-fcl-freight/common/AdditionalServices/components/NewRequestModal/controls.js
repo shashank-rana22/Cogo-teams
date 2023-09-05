@@ -3,7 +3,7 @@ import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
 
 import RenderLabel from '../RenderLabel';
 
-const billingAddresses = (billingParty = {}) => (
+const getBillingAddressOptions = (billingParty = {}) => (
 	billingParty?.addresses?.map((address) => ({
 		...address,
 		label : address?.address,
@@ -55,7 +55,7 @@ const getFormControls = ({
 			options     : currencyCodeOptions,
 			rules       : { required: 'Currency is required' },
 			size        : 'sm',
-			style       : { width: '110px' },
+			span        : 2,
 		},
 		{
 			name        : 'amount',
@@ -64,7 +64,7 @@ const getFormControls = ({
 			placeholder : 'Enter Amount per Container',
 			rules       : { required: 'Amount per Container is required', min: 0 },
 			size        : 'sm',
-			style       : { width: '200px' },
+			span        : 5,
 		},
 		{
 			name        : 'quantity',
@@ -73,7 +73,7 @@ const getFormControls = ({
 			placeholder : 'Enter number of containers',
 			rules       : { required: 'Amount of Containers are required', min: 0 },
 			size        : 'sm',
-			style       : { width: '200px' },
+			span        : 5,
 		},
 		{
 			name        : 'payment_mode',
@@ -82,8 +82,8 @@ const getFormControls = ({
 			placeholder : 'Enter Payment Mode',
 			rules       : { required: 'Payment Mode is required' },
 			size        : 'sm',
-			style       : { width: '270px' },
 			options     : PAYMENT_MODE_OPTIONS,
+			span        : 6,
 		},
 		{
 			name        : 'remarks',
@@ -92,16 +92,16 @@ const getFormControls = ({
 			placeholder : 'Enter remarks',
 			rules       : { required: 'Remarks are required' },
 			size        : 'sm',
-			style       : { width: '570px' },
+			span        : 12,
 		},
 		{
 			name     : 'upload',
 			label    : 'Upload Acknowledgement',
-			type     : 'upload',
+			type     : 'file',
 			multiple : true,
 			rules    : { required: 'Acknowledgement is required' },
 			size     : 'sm',
-			style    : { width: '570px' },
+			span     : 12,
 		},
 		{
 			name     : 'billing_party',
@@ -110,11 +110,11 @@ const getFormControls = ({
 			rules    : { required: 'Billing Party is required' },
 			options  : billingPartyOpts,
 			size     : 'sm',
-			style    : { width: '265px' },
 			onChange : (_, item) => {
 				setBillingParty(item);
 				setValue('billing_address', '');
 			},
+			span: 6,
 		},
 		{
 			name     : 'billing_address',
@@ -122,22 +122,22 @@ const getFormControls = ({
 			type     : 'select',
 			rules    : { required: 'Billing Address is required' },
 			size     : 'sm',
-			style    : { width: '265px' },
-			options  : billingAddresses(billingParty),
+			options  : getBillingAddressOptions(billingParty),
 			onChange : (_, item) => {
 				setBillingPartyAddress(item);
 				setValue('billing_address', _);
 			},
+			span: 6,
 		},
 		{
 			name               : 'collection_party',
 			label              : 'Collection Party Details',
-			type               : 'asyncSelect',
+			type               : 'async-select',
 			asyncKey           : 'list_organization_trade_parties',
 			rules              : { required: 'Collection Party is required' },
 			size               : 'sm',
-			style              : { width: '265px' },
 			params             : cpParams,
+			span               : 6,
 			getModifiedOptions : ({ options }) => handleModifiedOptions({ options }),
 			initialCall        : true,
 			onChange           : (_, item) => {
@@ -158,12 +158,12 @@ const getFormControls = ({
 			type     : 'select',
 			rules    : { required: 'Address is required' },
 			size     : 'sm',
-			style    : { width: '265px' },
 			options  : collectionPartyAddresses,
 			onChange : (_, item) => {
 				setCollectionPartyAddress(item);
 				setValue('cp_address', _);
 			},
+			span: 6,
 		},
 		{
 			name        : 'cp_bank_details',
@@ -171,13 +171,13 @@ const getFormControls = ({
 			type        : 'select',
 			rules       : { required: 'Bank Details are required' },
 			size        : 'sm',
-			style       : { width: '265px' },
 			options     : COLLECTION_PARTY_BANK_OPTIONS,
 			renderLabel : (bank) => <RenderLabel bank={bank} />,
 			onChange    : (_, item) => {
 				setCollectionPartyBankDetails(item);
 				setValue('cp_bank_details', _);
 			},
+			span: 6,
 		},
 		{
 			name        : 'cp_address_city',
@@ -186,7 +186,7 @@ const getFormControls = ({
 			type        : 'text',
 			rules       : { required: 'City Name is required' },
 			size        : 'sm',
-			style       : { width: '265px' },
+			span        : 6,
 		},
 		{
 			name                  : 'due_date',
@@ -194,8 +194,10 @@ const getFormControls = ({
 			type                  : 'datepicker',
 			rules                 : { required: 'Due Date is required' },
 			size                  : 'sm',
-			style                 : { width: '265px', marginRight: '100px' },
+			style                 : { marginRight: '100px' },
 			isPreviousDaysAllowed : true,
+			span                  : 6,
+
 		},
 		{
 			name  : 'place_of_supply',
@@ -203,7 +205,7 @@ const getFormControls = ({
 			type  : 'text',
 			rules : { required: 'Place of Supply is required' },
 			size  : 'sm',
-			style : { width: '265px' },
+			span  : 6,
 		},
 		{
 			name  : 'place_of_destination',
@@ -211,7 +213,7 @@ const getFormControls = ({
 			type  : 'text',
 			rules : { required: 'Place of Destination is required' },
 			size  : 'sm',
-			style : { width: '265px' },
+			span  : 6,
 		},
 	];
 };

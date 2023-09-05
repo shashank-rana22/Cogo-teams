@@ -35,7 +35,7 @@ const getFormControls = ({
 			value       : 'INR',
 			rules       : { required: 'Currency is required' },
 			size        : 'sm',
-			style       : { width: '110px' },
+			span        : 2,
 		},
 		{
 			name        : 'amount',
@@ -44,7 +44,7 @@ const getFormControls = ({
 			placeholder : 'Enter Amount',
 			rules       : { required: 'Amount is required', min: 0 },
 			size        : 'sm',
-			style       : { width: '230px' },
+			span        : 4,
 		},
 		{
 			name                  : 'date',
@@ -53,9 +53,9 @@ const getFormControls = ({
 			placeholder           : 'Enter date',
 			rules                 : { required: 'Date is required' },
 			size                  : 'sm',
-			style                 : { width: '200px' },
 			maxDate               : Date.now(),
 			isPreviousDaysAllowed : true,
+			span                  : 6,
 		},
 		{
 			name        : 'payment_mode',
@@ -64,8 +64,8 @@ const getFormControls = ({
 			placeholder : 'Choose Payment Mode',
 			rules       : { required: 'Payment Mode is required' },
 			size        : 'sm',
-			style       : { width: '270px' },
 			options     : PAYMENT_MODE_OPTIONS,
+			span        : 6,
 		},
 		{
 			name        : 'utr_number',
@@ -74,7 +74,7 @@ const getFormControls = ({
 			placeholder : 'Enter UTR Number',
 			rules       : { required: 'UTR Number is required' },
 			size        : 'sm',
-			style       : { width: '270px' },
+			span        : 6,
 		},
 		{
 			name        : 'bank_details',
@@ -83,11 +83,11 @@ const getFormControls = ({
 			placeholder : 'Enter Billing Party',
 			rules       : { required: 'Billing Party is required' },
 			size        : 'sm',
-			style       : { width: '270px' },
 			options     : billingPartyOpts,
 			onChange    : (_, item) => {
 				setBillingParty(item);
 			},
+			span: 6,
 		},
 		{
 			name     : 'exchange_rate',
@@ -95,7 +95,7 @@ const getFormControls = ({
 			type     : 'number',
 			disabled : true,
 			size     : 'sm',
-			style    : { width: '270px' },
+			span     : 6,
 		},
 		{
 			name        : 'remarks',
@@ -104,15 +104,15 @@ const getFormControls = ({
 			placeholder : 'Enter Remarks',
 			rules       : { required: 'Remarks are required' },
 			size        : 'sm',
-			style       : { width: '550px' },
+			span        : 12,
 		},
 		{
 			name  : 'upload',
 			label : 'Upload Proof',
-			type  : 'upload',
+			type  : 'file',
 			rules : { required: 'Proof is required' },
 			size  : 'sm',
-			style : { width: '550px' },
+			span  : 12,
 		},
 	];
 };

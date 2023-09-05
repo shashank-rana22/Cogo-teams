@@ -2,6 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useContext } from 'react';
 
@@ -10,7 +11,6 @@ import useAdvanceDocument from '../../../../hooks/useAdvanceDocument';
 import useGetEntities from '../../../../hooks/useGetEntities';
 
 import getFormControls from './controls';
-import FormElement from './FormElement';
 import { getCollectionPartyDetails } from './getCollectionPartyDetails';
 import styles from './styles.module.css';
 
@@ -149,15 +149,12 @@ function NewRequestModal({
 		>
 			<Modal.Header title="Request Advance Payment" />
 			<Modal.Body>
-				{(controls || []).map((item) => (
-					<FormElement
-						key={item?.name}
-						control={control}
-						errors={errors}
-						{...item}
-						showElements={showElements}
-					/>
-				))}
+				<Layout
+					control={control}
+					fields={controls}
+					errors={errors}
+					showElements={showElements}
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
