@@ -4,7 +4,6 @@ import useUpdateSageOrganizationIdMapping from '../../../../hooks/useUpdateSageO
 
 import styles from './styles.module.css';
 
-const BOOL = true;
 function DeactivateSageMapping({
 	showDeactivate = null,
 	setShowDeactivate = (() => { }),
@@ -22,7 +21,12 @@ function DeactivateSageMapping({
 	}
 
 	return (
-		<Modal size="md" show={showDeactivate} placement="top" className={styles.container} closeOnOuterClick={BOOL}>
+		<Modal
+			show={showDeactivate}
+			placement="top"
+			className={styles.container}
+			onClose={() => setShowDeactivate(null)}
+		>
 			<div className={styles.heading}>Deactivate BPR Mapping</div>
 			<div>
 				Are you sure, you want to delete this Sage Mapping?
