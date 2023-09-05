@@ -1,4 +1,4 @@
-const PAN_LENGTH = 10;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const FOURTH_ELEMENT = 3;
 
@@ -21,7 +21,7 @@ const PAN_HOLDER_STATUS = {
 };
 
 export const getPanHolderStatus = (pan = '') => {
-	if ((pan || '').length !== PAN_LENGTH) {
+	if ((pan || '').length !== GLOBAL_CONSTANTS.PAN_LENGTH) {
 		return null;
 	}
 

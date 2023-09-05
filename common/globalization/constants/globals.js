@@ -645,7 +645,9 @@ const GLOBAL_CONSTANTS = {
 		{ label: 'ETA', value: 'eta' },
 		{ label: 'ETD', value: 'etd' },
 	],
-	shipment_types: [
+	PAN_LENGTH     : 10,
+	GST_LENGTH     : 15,
+	shipment_types : [
 		{ value: 'fcl_freight', label: 'FCL' },
 		{ value: 'lcl_freight', label: 'LCL' },
 		{ value: 'air_freight', label: 'AIR' },

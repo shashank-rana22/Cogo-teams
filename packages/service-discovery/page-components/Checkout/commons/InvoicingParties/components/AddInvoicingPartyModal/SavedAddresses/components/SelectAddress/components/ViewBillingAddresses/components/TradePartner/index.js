@@ -70,14 +70,14 @@ function TradePartner({
 			</div>
 
 			{((is_tax_applicable ? billing_addresses : other_addresses) || []).map(
-				(billingAddress) => {
+				(addresses) => {
 					const {
 						id,
 						address = '',
 						tax_number = '',
 						is_sez = false,
 						verification_status: is_sez_verification_status = 'pending',
-					} = billingAddress;
+					} = addresses || {};
 
 					return (
 						<div
@@ -85,7 +85,7 @@ function TradePartner({
 							role="presentation"
 							onClick={() => {
 								setSelectedAddress({
-									...billingAddress,
+									...addresses,
 									address_object_type: is_tax_applicable
 										? 'billing_address'
 										: 'address',
