@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 function isValidDocumentUrl(url) {
 	return (
@@ -8,11 +9,11 @@ function isValidDocumentUrl(url) {
 }
 
 function isFileUploaded(data) {
-	if (!data || !data?.documents || data?.documents.length === GLOBAL_CONSTANTS.zeroth_index) {
+	if (isEmpty(data) || isEmpty(data?.documents) || data?.documents?.length === GLOBAL_CONSTANTS.zeroth_index) {
 		return false;
 	}
 
-	return (data?.documents || []).some((document) => isValidDocumentUrl(document?.url));
+	return (data?.documents || []).every((document) => isValidDocumentUrl(document?.url));
 }
 
 export default isFileUploaded;
