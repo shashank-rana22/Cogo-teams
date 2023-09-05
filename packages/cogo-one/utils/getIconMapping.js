@@ -139,12 +139,12 @@ const iconMapping = ({ expandSideBar = false }) => [
 const getIconMapping = ({
 	viewType = '',
 	expandSideBar = false,
-	activeTab = '',
+	channelType = '',
 }) => iconMapping({ expandSideBar }).filter(
 	(eachIcon) => [
 		...COMMON_ACCESIBLE_NAVIGATIONS,
 		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
-		...(ENABLE_EXPAND_SIDE_BAR.includes(activeTab) ? SIDEBAR_CONTROLS : []),
+		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
 	].includes(eachIcon.name),
 );
 

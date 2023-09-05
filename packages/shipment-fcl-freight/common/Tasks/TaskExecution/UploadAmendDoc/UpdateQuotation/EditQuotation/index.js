@@ -47,9 +47,9 @@ function EditQuotation({
 	});
 
 	const handleFinalSubmit = async (values) => {
-		const res = await onSubmit(values);
+		const apiResponseCode = await onSubmit(values);
 
-		if (res === HTTP_STATUS_CODE) {
+		if (apiResponseCode === HTTP_STATUS_CODE) {
 			await updateDocument(documentPayload);
 		}
 	};
