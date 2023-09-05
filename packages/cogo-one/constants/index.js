@@ -371,10 +371,41 @@ export const RATING_ELEMENTS = {
 
 	},
 	sad: {
-		image : <IcCVerySad width={30} height={30} style={{ marginTop: '18px' }} />,
+		image : <IcCVerySad width={30} height={30} style={{ marginTop: '8px' }} />,
 		arrow : <IcMDown fill="#ee3425" />,
 	},
 };
+
+export const FLASH_MESSAGES_ROLES_LIST = [
+	{
+		label : 'Cogoone admin',
+		key   : 'cogoone_admin',
+	},
+	{
+		label : 'Supply',
+		key   : 'supply',
+	},
+	{
+		label : 'Sales',
+		key   : 'sales',
+	},
+	{
+		label : 'Cp support',
+		key   : 'cp_support',
+	},
+	{
+		label : 'Support',
+		key   : 'support',
+	},
+	{
+		label : 'Shipment specialist',
+		key   : 'shipment_specialist',
+	},
+	{
+		label : 'Marketing',
+		key   : 'marketing',
+	},
+];
 
 export const OFFLINE_REASONS_OPTIONS = [
 	{

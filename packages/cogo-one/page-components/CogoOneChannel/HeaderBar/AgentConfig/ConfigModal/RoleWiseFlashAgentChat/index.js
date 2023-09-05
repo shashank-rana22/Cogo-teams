@@ -1,88 +1,70 @@
-import {
-	InputNumber, Button,
-	//  Toast
-} from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
-// import { isEmpty } from '@cogoport/utils';
-// import { useState, useEffect } from 'react';
+import { InputNumber, Button, Toast } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
-// import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
+import { FLASH_MESSAGES_ROLES_LIST } from '../../../../../../constants';
+import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
 
 import styles from './styles.module.css';
 
-const ROLES_LIST = [
-	{
-		label : 'Supply',
-		key   : 'supply',
-	},
-	{
-		label : 'Sales',
-		key   : 'sales',
-	},
-	{
-		label : 'Cp support',
-		key   : 'cp_support',
-	},
-	{
-		label : 'Support',
-		key   : 'support',
-	},
-	{
-		label : 'Shipment specialist',
-		key   : 'shipment_specialist',
-	},
-	{
-		label : 'Marketing',
-		key   : 'marketing',
-	},
-];
+const ONE_MILLI_SECOND = 60000;
+const DECIMAL_VALUE = 0;
 
 function RoleWiseFlashAgentChat({
-	setActiveCard = () => {},
-	// firestore = {},
+	firestore = {},
+	source = 'claim_chat_configuration',
 }) {
-	const handleBack = () => {
-		setActiveCard('');
+	const [timeoutValues, setTimeoutValues] = useState({});
+
+	const timeInMilliSecond = Object.keys(timeoutValues).reduce((result, key) => ({
+		...result,
+		[key]: Number((timeoutValues[key] * ONE_MILLI_SECOND).toFixed(DECIMAL_VALUE)),
+	}), {});
+
+	const disableSubmitButton = Object.values(timeoutValues).some((value) => value === undefined
+	|| value === null || Number.isNaN(value)) || isEmpty(timeoutValues);
+
+	const handleSubmit = () => {
+		updateCogooneConstants({ firestore, timeout: timeInMilliSecond, source });
+		Toast.success('Successfully Save !');
 	};
 
+	useEffect(() => {
+		getIsActive({ firestore, setTimeoutValues });
+	}, [firestore]);
+
 	return (
-		<div className={styles.padding_inner}>
-			<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
-			<div className={styles.container}>
-				<div className={styles.label}>
-					Select Roles and their repective timeout for Flash Agent Chats
-				</div>
-
-				<div className={styles.roles_timeout_section}>
-					{(ROLES_LIST || []).map((item) => (
-						<div className={styles.roles_timeout_section_parts} key={item.key}>
-							<div className={styles.roles_label}>{item.label}</div>
-							<InputNumber
-								size="sm"
-								placeholder="Timeout (min)"
-								min={0}
-						// value={time}
-								arrow={false}
-							// onChange={(value) => setRoleValue((prev) => ({ ...prev, time: value }))}
-								className={styles.styled_select}
-							/>
-						</div>
-					))}
-				</div>
-
-				<div className={styles.button_section}>
-					<Button
-						size="md"
-						themeType="primary"
-						// onClick={handleSubmit}
-						// disabled={!time || isEmpty(roles)}
-					>
-						Submit
-					</Button>
-				</div>
-
+		<>
+			<div className={styles.roles_timeout_section}>
+				{(FLASH_MESSAGES_ROLES_LIST || []).map((item) => (
+					<div className={styles.roles_timeout_section_parts} key={item.key}>
+						<div className={styles.roles_label}>{item.label}</div>
+						<InputNumber
+							size="sm"
+							placeholder="Timeout (min)"
+							min={0}
+							value={timeoutValues?.[item.key]}
+							arrow={false}
+							onChange={(val) => setTimeoutValues((prev) => ({
+								...prev,
+								[item?.key]: val,
+							}))}
+							className={styles.styled_select}
+						/>
+					</div>
+				))}
 			</div>
-		</div>
+			<div className={styles.button_section}>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={handleSubmit}
+					disabled={disableSubmitButton}
+				>
+					Submit
+				</Button>
+			</div>
+		</>
 	);
 }
 

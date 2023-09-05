@@ -1,44 +1,17 @@
-.container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-}
-
-.wrapper {
+.label_section {
 	display: flex;
 	align-items: center;
-}
-
-.back_icon {
-	width: 30px;
-	height: 20px;
-	margin-top: 5px;
-	cursor: pointer;
-}
-
-.label {
+	justify-content: space-evenly;
+	width: 70%;
+	margin: 2% 35% 0 0;
 	font-size: 16px;
-}
-
-.timeout_label {
-	margin-top: 10px;
-	margin-left: 12%;
-	font-size: 16px;
-
-	span {
-		margin-left: 6px;
-		font-size: 12px;
-	}
 }
 
 .roles_timeout_section {
 	display: flex;
 	flex-wrap: wrap;
-
-	/* justify-content: spa; */
-	margin-top: 15px;
+	padding: 0 12px;
+	margin-top: 20px;
 }
 
 .roles_timeout_section_parts {
@@ -46,11 +19,11 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 50%;
-	padding: 12px 16px 12px 32px;
+	padding: 8px 10px 8px 20px;
 	white-space: nowrap;
 
 	&:nth-of-type(odd) {
-		padding: 12px 32px 12px 16px;
+		padding: 8px 20px 8px 10px;
 		border-right: 1px solid #d3d3d3;
 	}
 }
@@ -69,10 +42,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 95%;
-	margin: 10px 0 0;
-}
-
-.padding_inner {
-	padding: 0 12px;
+	width: 100%;
+	min-height: 44px;
+	padding: 8px;
+	margin-top: 8%;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 }

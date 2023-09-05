@@ -1,4 +1,5 @@
 import { Modal, Pagination, cl } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
@@ -20,7 +21,7 @@ const TAB_CONFIG_MAPPING = {
 		hook       : useListChatAgents,
 		headerText : 'Agents List',
 	},
-	lock_configuration: {
+	fire_base_configuration: {
 		Component  : FireBaseConfiguration,
 		headerText : 'Fire Base Configuration',
 	},
@@ -77,6 +78,10 @@ function ConfigModal({
 		setShowAgentDetails(false);
 	};
 
+	const handleBack = () => {
+		setActiveCard('');
+	};
+
 	const COMPONENT_PROPS = {
 		list_agents: {
 			firestore,
@@ -88,7 +93,7 @@ function ConfigModal({
 			setAgentType,
 			setActiveCard,
 		},
-		lock_configuration: {
+		fire_base_configuration: {
 			firestore,
 			setActiveCard,
 		},
@@ -120,7 +125,14 @@ function ConfigModal({
 		>
 			<Modal.Header
 				className={styles.modal_header}
-				title={headerText || 'Configuration'}
+				title={activeCard === 'fire_base_configuration' ? (
+					<>
+						<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
+						<span className={styles.header_label}>{headerText || 'Configuration'}</span>
+					</>
+				) : (
+					headerText || 'Configuration'
+				)}
 			/>
 
 			<Modal.Body className={styles.modal_body}>

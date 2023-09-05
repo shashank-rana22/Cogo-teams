@@ -23,8 +23,8 @@ function FireBaseConfiguration({
 			},
 		},
 		{
-			name      : 'flash_agent_chats',
-			title     : 'Flash Agent Chats',
+			name      : 'claim_chat_configuration',
+			title     : 'Claim Chat Configuration',
 			component : RoleWiseFlashAgentChat,
 			props     : {
 				setActiveCard,
@@ -40,7 +40,7 @@ function FireBaseConfiguration({
 				onChange={setActiveConfigurationTab}
 				fullWidth
 				className={styles.tab_hide}
-				themeType="main_tabs"
+				themeType="secondary"
 			>
 				{TABS_MAPPING.map((tabItem) => {
 					const { name, title, component: Component, props } = tabItem;
