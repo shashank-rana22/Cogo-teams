@@ -7,6 +7,24 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+function Content({ isError, errorMessege, t }) {
+	return (
+		<div>
+			{!isError && (
+				<div className={styles.text_styles}>
+					{t('incidentManagement:actual_allocation_value')}
+				</div>
+			)}
+			<div
+				className={styles.input_container}
+				style={{ color: isError ? 'red' : 'black' }}
+			>
+				{errorMessege}
+
+			</div>
+		</div>
+	);
+}
 function EditInputAllocation({
 	itemData,
 	handleCrossClick,
@@ -61,25 +79,6 @@ function EditInputAllocation({
 		errorMessege = getFormattedAmount(allocationAmountValue, currency);
 	}
 
-	function Content() {
-		return (
-			<div>
-				{!isError && (
-					<div className={styles.text_styles}>
-						{t('incidentManagement:actual_allocation_value')}
-					</div>
-				)}
-				<div
-					className={styles.input_container}
-					style={{ color: isError ? 'red' : 'black' }}
-				>
-					{errorMessege}
-
-				</div>
-			</div>
-		);
-	}
-
 	useEffect(() => {
 		if (itemData) {
 			setChangedValue(allocationAmountValue);
@@ -111,7 +110,7 @@ function EditInputAllocation({
 						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
 					>
 						<Tooltip
-							content={<Content />}
+							content={<Content isError={isError} errorMessege={errorMessege} t={t} />}
 						>
 							<Button
 								className={styles.edit_icon}
