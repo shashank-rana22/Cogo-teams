@@ -26,12 +26,14 @@ function FieldArray({
 	controls.forEach((controlItem) => {
 		childEmptyValues[controlItem.name] = controlItem.value || '';
 	});
+	console.log('fields', newField);
 	return (
 		<div className={styles.container}>
 			{fields.map((field, index) => (
 				<Child
 					{...rest}
 					key={field.id}
+					append={append}
 					field={field}
 					childIndex={index}
 					control={control}

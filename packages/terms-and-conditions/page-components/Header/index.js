@@ -1,4 +1,4 @@
-import { Text, Button, Toggle, Popover } from '@cogoport/components';
+import { Button, Toggle, Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -11,7 +11,6 @@ function Header(props) {
 		setTncLevel,
 		viewFromDemand,
 		filterProps,
-		setShowModal,
 		setEditTncModalId,
 		currentStatus,
 		setCurrentStatus,
@@ -32,25 +31,28 @@ function Header(props) {
 		<div className={styles.container}>
 			<Button
 				className={`primary ${viewFromDemand ? 'sm' : 'md'}`}
-
 				onClick={() => {
 					setTncLevel('basicInfo');
 					setEditTncModalId(true);
 				}}
-
 				style={{ textTransform: 'capitalize' }}
 			>
 				Create
 				{' '}
 				{isMobile ? 'T & C' : 'New'}
 			</Button>
-
+			<Toggle
+				offLabel={{ label: 'Inactive', value: 'inactive' }}
+				onLabel={{ label: 'Active', value: 'active' }}
+				// onChange={onChangeToggleStatus}
+			/>
 			<div className={styles.filters_container}>
 				<Popover
 					placement="left"
 					caret={false}
-					render={<Filters filterProps={filterProps} />}
+					render={<Filters filterProps={filterProps} setVisible={setVisible} />}
 					visible={visible}
+					onClickOutside={() => setVisible(false)}
 				>
 					<Button onClick={() => setVisible(!visible)}>
 						Filter

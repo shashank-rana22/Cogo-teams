@@ -1,5 +1,5 @@
 // import Layout from '@cogo/business-modules/form/Layout';
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 
 import useCreateUpdateTnc from '../../../hooks/useCreateUpdateTnc';
 import { getFieldController } from '../../../utlis/getFieldController';
@@ -11,7 +11,6 @@ import styles from './style.module.css';
 function TermsAndCondition(props) {
 	const {
 		action,
-		label,
 		organizationId,
 		setEditTncModalId,
 		setTncLevel,
@@ -36,7 +35,7 @@ function TermsAndCondition(props) {
 		action,
 		organizationId,
 	});
-	console.log(editFormValue, 'editFormValue');
+
 	return (
 		<div className={styles.container}>
 
@@ -86,7 +85,7 @@ function TermsAndCondition(props) {
 
 			<div className={styles.btn_align}>
 				<Button
-					className={`${styles.secondary} ${styles.md}`}
+					className={cl(`${styles.secondary} ${styles.md}`)}
 					disabled={loading}
 					onClick={() => setTncLevel('basicInfo')}
 					style={{ textTransform: 'capitalize' }}
@@ -95,7 +94,7 @@ function TermsAndCondition(props) {
 				</Button>
 
 				<Button
-					className={`${styles.primary} ${styles.md}`}
+					className={cl(`${styles.primary} ${styles.md}`)}
 					loading={loading}
 					onClick={handleSubmit(onSubmit)}
 					style={{ marginLeft: '8px', textTransform: 'capitalize' }}

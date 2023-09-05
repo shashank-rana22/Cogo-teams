@@ -14,7 +14,7 @@ function Filters(props) {
 	const {
 		general: { isMobile = false },
 	} = useSelector((state) => state);
-	const { filterProps, viewFromDemand } = props;
+	const { filterProps, viewFromDemand, setVisible } = props;
 	const {
 		fields, applyFilters, reset, controls, watch, control, newField, filters, handleSubmit, getListTermsAndConditionsApi,
 	} = filterProps;
@@ -24,7 +24,7 @@ function Filters(props) {
 		<div>
 			<div className={styles.btn_align}>
 				<Button onClick={handleSubmit}>Reset</Button>
-				<Button onClick={getListTermsAndConditionsApi}>Show</Button>
+				<Button onClick={() => { setVisible(false); getListTermsAndConditionsApi(); }}>Show</Button>
 			</div>
 
 			{newField.map((controlItem) => {

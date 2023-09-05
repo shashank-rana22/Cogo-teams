@@ -12,6 +12,7 @@ function Child({
 	childIndex,
 	name,
 	remove,
+	append,
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	disabled = false,
@@ -30,6 +31,7 @@ function Child({
 							width="100%"
 							control={control}
 							id={`create_form_${controlItem.name}_field`}
+							vaule={controlItem.vaule || null}
 							// {...controlItem}
 						/>
 					</div>

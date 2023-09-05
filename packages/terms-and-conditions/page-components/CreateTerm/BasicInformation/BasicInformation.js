@@ -8,7 +8,6 @@ import styles from './style.module.css';
 function BasicInformation(props) {
 	const {
 		action,
-		label,
 		organizationId,
 		setEditTncModalId,
 		setTncLevel,
@@ -39,8 +38,6 @@ function BasicInformation(props) {
 					const show =						!(controlItem.name in showElements)
 						|| showElements[controlItem.name];
 					if (!Element) { return null; }
-
-					// if (name === 'user_id' && isEmpty(watchOrgId)) { return null; }
 
 					return (
 						show ? (

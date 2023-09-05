@@ -1,6 +1,6 @@
 .container {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-around;
 	margin-bottom: 16px;
 	background-color: #fff;
 	border: 1px solid transparent;
@@ -16,6 +16,7 @@
 
 .freight_item_header {
 	position: relative;
+	width: 90%;
 	padding: 16px 16px 16px 24px;
 	cursor: pointer;
 }

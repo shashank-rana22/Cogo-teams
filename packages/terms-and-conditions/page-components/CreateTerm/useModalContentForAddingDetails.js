@@ -14,10 +14,10 @@ const useModalContentForAddingDetails = (props) => {
 
 	const controls = getTncControls({ values: editFormValue });
 	const {
-		handleSubmit, getValues, control, formProps, formState: { errors },
+		handleSubmit, control, formProps, formState: { errors },
 		watch,
 	} = useForm();
-	console.log('controls', controls);
+
 	const shippingLineOptions = useGetAsyncOptions({
 		...asyncFieldsOperators(),
 		initialCall : true,

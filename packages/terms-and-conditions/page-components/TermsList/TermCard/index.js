@@ -1,4 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
+import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import FREIGHT_DETAILS_MAPPING from '../../../utlis/freight-details-mapping';
@@ -61,24 +62,28 @@ function TermCard({
 
 				</div>
 				<div className={styles.freight_item_header_right}>
-					<Popover placement="left" caret={false} render={<PopOverContent onClickUpdateTerms={onClickUpdateTerms} />} visible={visible}>
-						<Button onClick={() => setVisible(!visible)}>Click to open popover</Button>
-					</Popover>
-					;
-				</div>
+					<ViewMoreActionIcon
+						style={{ cursor: 'pointer' }}
+						onClick={() => setVisible(!visible)}
+					/>
+					<Popover placement="left" onClickOutside={() => setVisible(false)} caret={false} render={<PopOverContent setVisible={setVisible} onClickUpdateTerms={onClickUpdateTerms} />} visible={visible} />
 
+				</div>
 			</div>
-			{showMoreTnC && description.map((descrip, index) => (
-				<div key={index + 1} className={styles.applied_terms}>
-					<div className={styles.index}>
-						{index + 1}
-						.
+			<div className={styles.freight_item_main}>
+
+				{showMoreTnC && description.map((descrip, index) => (
+					<div key={index + 1} className={styles.applied_terms}>
+						<div className={styles.index}>
+							{index + 1}
+							.
+						</div>
+
+						{descrip}
+
 					</div>
-
-					{descrip}
-
-				</div>
-			))}
+				))}
+			</div>
 		</div>
 	);
 }

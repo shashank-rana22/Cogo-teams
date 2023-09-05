@@ -1,5 +1,3 @@
-import { asyncFieldsOperators, asyncFieldsLocations } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { isEmpty } from '@cogoport/utils';
 
 const getTncControls = ({ values = {} }) => {
@@ -12,7 +10,7 @@ const getTncControls = ({ values = {} }) => {
 		paying_party_country_ids,
 		description,
 	} = values;
-	console.log(values);
+
 	let newDesc = [
 		{
 			terms_and_condition: '',
@@ -23,7 +21,6 @@ const getTncControls = ({ values = {} }) => {
 			terms_and_condition: item,
 		}));
 	}
-	console.log(newDesc, 'newDesc');
 	return [
 		{
 			name           : 'service',
@@ -101,16 +98,16 @@ const getTncControls = ({ values = {} }) => {
 			span           : 6,
 			params         : { filters: { type: ['country'] } },
 		},
+
 		{
 			name           : 'paying_party_country_ids',
 			label          : 'Paying Party Country',
-			controllerType : 'select',
+			controllerType : 'async-select',
 			optionsListKey : 'locations',
 			placeholder    : 'Select Country Name',
-			className      : 'primary lg',
 			value          : paying_party_country_ids,
 			params         : { filters: { type: ['country'] } },
-			span           : 6,
+			span           : 4,
 			multiple       : true,
 		},
 		{

@@ -30,7 +30,7 @@ const controls = [
 	{
 		name           : 'shipping_line_id',
 		label          : 'Shipping Line',
-		type           : 'select',
+		type           : 'async-select',
 		placeholder    : 'Select Shipping Line',
 		optionsListKey : 'shipping-lines',
 		caret          : true,
@@ -41,7 +41,7 @@ const controls = [
 	{
 		name           : 'airline_id',
 		label          : 'Airline',
-		type           : 'select',
+		type           : 'async-select',
 		placeholder    : 'Select Airline',
 		optionsListKey : 'air-lines',
 		caret          : true,
@@ -79,7 +79,7 @@ const controls = [
 	{
 		name           : 'country_id',
 		label          : 'Country',
-		type           : 'select',
+		type           : 'async-select',
 		placeholder    : 'Select Country Name',
 		optionsListKey : 'locations',
 		span           : 4,
@@ -88,7 +88,7 @@ const controls = [
 	{
 		name           : 'paying_party_country_ids',
 		label          : 'Paying Party Country',
-		type           : 'select',
+		type           : 'async-select',
 		optionsListKey : 'locations',
 		placeholder    : 'Select Country Name',
 		params         : { filters: { type: ['country'] } },

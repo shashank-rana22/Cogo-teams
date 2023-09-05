@@ -1,4 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
+
+import EmptyState from '../EmptyState/index';
 
 import styles from './style.module.css';
 // import FREIGHT_DETAILS_MAPPING from '../../utlis/freight-details-mapping';
@@ -16,7 +19,9 @@ function TermList({
 		air_freight : 'Airline',
 	};
 	const [showHiddenContentId, setShowHiddenContentId] = useState(null);
-
+	if (isEmpty(list)) {
+		return <EmptyState />;
+	}
 	return (
 		<div className={styles.container}>
 			{!loading

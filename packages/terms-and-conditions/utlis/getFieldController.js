@@ -4,6 +4,7 @@ import {
 	CreatableMultiSelectController, TextAreaController,
 	SelectController,
 	CheckboxController,
+	AsyncSelectController,
 
 } from '@cogoport/forms';
 
@@ -13,6 +14,7 @@ const CONTROLLER_MAPPING = {
 	'creatable-select' : CreatableMultiSelectController,
 	uploader           : UploadController,
 	text               : InputController,
+	'async-select'     : AsyncSelectController,
 	checkbox           : CheckboxController,
 };
 

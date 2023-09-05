@@ -1,6 +1,6 @@
-import { Button, FunnelStepper, Modal } from '@cogoport/components';
+import { FunnelStepper, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import BasicInformation from './BasicInformation/BasicInformation';
 import TermsAndCondition from './TermsAndCondition/TermsAndCondition';
@@ -27,7 +27,7 @@ function CreateTerm(props) {
 		setEditTncModalId,
 	} = props;
 
-	const action = 'create';
+	const action = isEmpty(editTncModalId) ? 'create' : 'update';
 	const {
 		formProps,
 		// filteredControls,
@@ -63,7 +63,7 @@ function CreateTerm(props) {
 				size="md"
 				show={!!editTncModalId}
 				onClose={() => setEditTncModalId(null)}
-				placement="right"
+				placement="center"
 			>
 				<Modal.Header title="Create Terms and Condition" />
 				<Modal.Body>
