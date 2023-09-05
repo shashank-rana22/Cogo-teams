@@ -1,21 +1,20 @@
-/* eslint-disable max-lines-per-function */
 import { Tooltip, Pill, ButtonIcon } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
+const DOV_VAL_LENGTH = 10;
+const AMT_LENGTH = 8;
 const useGetMatchingColumns = (
 	selectedData,
 	setSelectedData,
 ) => {
-	const DOV_VAL_LENGTH = 10;
-	const AMT_LENGTH = 8;
-	const ZEROTH_INDEX = 0;
 	const handleDeleteClick = (idToDelete) => {
 		const updatedSelectedData = selectedData.filter((item) => item.id !== idToDelete);
 		setSelectedData(updatedSelectedData);
 	};
-	useEffect(() => {
-	}, [selectedData]);
+	// useEffect(() => {
+	// }, [selectedData]);
 
 	const columns = [
 		{
@@ -40,7 +39,7 @@ const useGetMatchingColumns = (
 					>
 						<div>
 							{(row?.documentValue && row?.documentValue.length > DOV_VAL_LENGTH
-								? `${row?.documentValue.substr(ZEROTH_INDEX, DOV_VAL_LENGTH)}...`
+								? `${row?.documentValue.substr(GLOBAL_CONSTANTS.zeroth_index, DOV_VAL_LENGTH)}...`
 								: row?.documentValue) || '-'}
 						</div>
 						<Pill
@@ -72,7 +71,7 @@ const useGetMatchingColumns = (
 						{item?.currency}
 						{' '}
 						{item?.documentAmount.toString().length > AMT_LENGTH
-							? `${item?.documentAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.documentAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.documentAmount}
 					</Tooltip>
 				</div>
@@ -96,7 +95,7 @@ const useGetMatchingColumns = (
 						{item?.currency}
 						{' '}
 						{item?.tds.toString().length > AMT_LENGTH
-							? `${item?.tds.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.tds.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.tds}
 						<IcMEdit
 							style={{ cursor: 'pointer' }}
@@ -118,7 +117,7 @@ const useGetMatchingColumns = (
 					{item?.currency}
 					{' '}
 					{item?.nostroAmount.toString().length > AMT_LENGTH
-						? `${item?.nostroAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+						? `${item?.nostroAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 						: item?.nostroAmount}
 				</div>
 			),
@@ -140,7 +139,7 @@ const useGetMatchingColumns = (
 						{item?.currency}
 						{' '}
 						{item?.balanceAmount.toString().length > AMT_LENGTH
-							? `${item?.balanceAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.balanceAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.balanceAmount}
 						<IcMEdit
 							height={14}
@@ -162,7 +161,7 @@ const useGetMatchingColumns = (
 						{item?.currency}
 						{' '}
 						{item?.allocationAmount.toString().length > AMT_LENGTH
-							? `${item?.allocationAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.allocationAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.allocationAmount}
 					</Tooltip>
 				</div>
@@ -182,7 +181,8 @@ const useGetMatchingColumns = (
 					{item?.currency}
 					{' '}
 					{item?.balanceAfterAllocation.toString().length > AMT_LENGTH
-						? `${item?.balanceAfterAllocation.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+						? `${item?.balanceAfterAllocation.toString()
+							.substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 						: item?.balanceAfterAllocation}
 				</div>
 			),

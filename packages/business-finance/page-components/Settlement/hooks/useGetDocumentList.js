@@ -103,7 +103,6 @@ const useGetDocumentList = ({
 				});
 			}
 		} catch (error) {
-			// Toast.error(error?.error?.message);s
 			toastApiError(error);
 		}
 	};

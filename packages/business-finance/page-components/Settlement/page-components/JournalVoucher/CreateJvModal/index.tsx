@@ -27,9 +27,6 @@ function CreateJvModal({
 	show, onClose = () => {},
 	setShow, refetch, selectedData = [], Entity = '', line_items = [],
 }:Props) {
-	console.log(selectedData, 'selectedDataselectedData');
-	console.log(Entity, 'ent');
-
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
 		{

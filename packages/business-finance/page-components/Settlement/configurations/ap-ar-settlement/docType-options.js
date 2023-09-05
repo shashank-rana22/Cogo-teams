@@ -1,4 +1,4 @@
-export const docTypeOptions = [
+export const DOC_TYPE_OPTIONS = [
 	{ label: 'PAYMENT', value: 'PAYMENT' },
 	{ label: 'INVOICE', value: 'INVOICE' },
 	{ label: 'CREDIT NOTE', value: 'CREDIT NOTE' },

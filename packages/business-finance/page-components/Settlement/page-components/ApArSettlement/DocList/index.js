@@ -17,7 +17,7 @@ function DocList({
 	setPageCheckedRows = () => {},
 }) {
 	const { list = [] } = data || {};
-	const colo = useGetColumns({
+	const table_columns = useGetColumns({
 		data,
 		loading,
 		selectedData,
@@ -30,7 +30,7 @@ function DocList({
 	return (
 		<div>
 			<div className={styles.container}>
-				<Table columns={colo} data={list} className={styles.tablestyle} loading={loading} />
+				<Table columns={table_columns} data={list} className={styles.tablestyle} loading={loading} />
 				<Pagination
 					className={styles.pagination}
 					currentPage={data?.pageNo}

@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const useGetJVList = ({ filters }) => {
+const useGetJVList = ({ filters = {} }) => {
 	const [{ data:JvListData, loading: JvListLoading }, JvListTrigger] = useRequestBf(
 		{
 			url     : '/payments/parent-jv/list',

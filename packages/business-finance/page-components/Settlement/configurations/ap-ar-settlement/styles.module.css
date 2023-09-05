@@ -7,5 +7,5 @@
 }
 
 .active {
-	fill: red;
+	fill: var(--color-primary-error-red-1);
 }

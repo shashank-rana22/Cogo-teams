@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Tooltip, Checkbox, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
@@ -8,7 +7,53 @@ import styles from './styles.module.css';
 
 const DOC_LENGTH = 10;
 const AMT_LENGTH = 8;
-const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+
+const onChangeTableHeadCheckbox = ({
+	setPageCheckedRows, selectedData, currentPageListIds, list,
+	selectAll, setSelectedData, pageNumber,
+}) => {
+	setPageCheckedRows((previousPageCheckedRows) => {
+		let newSelectedData = [...selectedData];
+		let newPageCheckedIds = [];
+
+		if (selectAll) {
+			newPageCheckedIds = [];
+			newSelectedData = selectedData.filter((item) => !currentPageListIds.includes(item.id));
+		} else {
+			const newIdsToAdd = currentPageListIds.filter((id) => !selectedData.some((item) => item.id === id));
+			newPageCheckedIds = currentPageListIds;
+			const newDataToAdd = list.filter((item) => newIdsToAdd.includes(item.id));
+			newSelectedData = [...selectedData, ...newDataToAdd];
+		}
+		setSelectedData(newSelectedData);
+		return {
+			...previousPageCheckedRows,
+			[pageNumber]: newPageCheckedIds,
+		};
+	});
+};
+
+const onChangeBodyCheckbox = ({ event, id, data, setPageCheckedRows, pageNumber, setSelectedData }) => {
+	const rowData = data?.list.find((row) => row.id === id);
+	if (!rowData) {
+		return;
+	}
+	setPageCheckedRows((previousPageCheckedRows) => {
+		const currentPageCheckedIds = previousPageCheckedRows[pageNumber] || [];
+		let newPageCheckedIds = [];
+		if (event.target.checked) {
+			newPageCheckedIds = [...currentPageCheckedIds, id];
+			setSelectedData((previousData) => [...previousData, rowData]);
+		} else {
+			newPageCheckedIds = currentPageCheckedIds.filter((selectedId) => selectedId !== id);
+			setSelectedData((previousData) => previousData.filter((row) => row.id !== rowData.id));
+		}
+		return {
+			...previousPageCheckedRows,
+			[pageNumber]: newPageCheckedIds,
+		};
+	});
+};
 
 const useGetColumns = ({
 	data,
@@ -32,57 +77,6 @@ const useGetColumns = ({
 		const isRowsChecked = currentPageListIds.every((id) => currentPageCheckedIds.includes(id));
 		setSelectAll(isRowsChecked);
 	}, [pageCheckedRows, currentPageListIds, pageNumber]);
-
-	const onChangeBodyCheckbox = (event, id) => {
-		const rowData = data?.list.find((row) => row.id === id);
-
-		// const dataPrev = { ...(data?.list.find((row) => row.id === id) || []) };
-
-		if (!rowData) {
-			return;
-		}
-		setPageCheckedRows((previousPageCheckedRows) => {
-			const currentPageCheckedIds = previousPageCheckedRows[pageNumber] || [];
-
-			let newPageCheckedIds = [];
-
-			if (event.target.checked) {
-				newPageCheckedIds = [...currentPageCheckedIds, id];
-				setSelectedData((previousData) => [...previousData, rowData]);
-			} else {
-				newPageCheckedIds = currentPageCheckedIds.filter((selectedId) => selectedId !== id);
-				setSelectedData((previousData) => previousData.filter((row) => row.id !== rowData.id));
-			}
-
-			return {
-				...previousPageCheckedRows,
-				[pageNumber]: newPageCheckedIds,
-			};
-		});
-	};
-
-	const onChangeTableHeadCheckbox = () => {
-		setPageCheckedRows((previousPageCheckedRows) => {
-			let newSelectedData = [...selectedData];
-			let newPageCheckedIds = [];
-
-			if (selectAll) {
-				newPageCheckedIds = [];
-				newSelectedData = selectedData.filter((item) => !currentPageListIds.includes(item.id));
-			} else {
-				const newIdsToAdd = currentPageListIds.filter((id) => !selectedData.some((item) => item.id === id));
-				newPageCheckedIds = currentPageListIds;
-				const newDataToAdd = list.filter((item) => newIdsToAdd.includes(item.id));
-				newSelectedData = [...selectedData, ...newDataToAdd];
-			}
-			setSelectedData(newSelectedData);
-			// setPrevData([...newSelectedData]);
-			return {
-				...previousPageCheckedRows,
-				[pageNumber]: newPageCheckedIds,
-			};
-		});
-	};
 
 	const renderSortingArrows = (key) => {
 		(
@@ -115,14 +109,30 @@ const useGetColumns = ({
 			Header : (
 				<Checkbox
 					checked={selectAll}
-					onChange={(event) => onChangeTableHeadCheckbox(event)}
+					onChange={(event) => onChangeTableHeadCheckbox({
+						event,
+						setPageCheckedRows,
+						selectedData,
+						currentPageListIds,
+						list,
+						selectAll,
+						setSelectedData,
+						pageNumber,
+					})}
 					disabled={loading}
 				/>
 			),
 			accessor: ({ id = '' }) => (
 				<Checkbox
 					checked={checkedRowsId.includes(id)}
-					onChange={(event) => onChangeBodyCheckbox(event, id)}
+					onChange={(event) => onChangeBodyCheckbox({
+						event,
+						id,
+						data,
+						setPageCheckedRows,
+						pageNumber,
+						setSelectedData,
+					})}
 				/>
 
 			),
@@ -149,7 +159,7 @@ const useGetColumns = ({
 					>
 						<div>
 							{(row?.documentValue && row?.documentValue.length > DOC_LENGTH
-								? `${row?.documentValue.substr(ZEROTH_INDEX, DOC_LENGTH)}...`
+								? `${row?.documentValue.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
 								: row?.documentValue) || '-'}
 						</div>
 						<Pill
@@ -176,7 +186,8 @@ const useGetColumns = ({
 				</span>
 			),
 			id       : 'transactionDate',
-			accessor : (item) => (item?.transactionDate ? item.transactionDate.substr(ZEROTH_INDEX, DOC_LENGTH) : '--'),
+			accessor : (item) => (item?.transactionDate
+				? item.transactionDate.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH) : '--'),
 		},
 		{
 			Header: (
@@ -192,7 +203,7 @@ const useGetColumns = ({
 						{item?.currency}
 						{' '}
 						{item?.documentAmount.toString().length > AMT_LENGTH
-							? `${item?.documentAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.documentAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.documentAmount}
 					</Tooltip>
 				</div>
@@ -222,7 +233,7 @@ const useGetColumns = ({
 						{item?.currency}
 						{' '}
 						{item?.tds.toString().length > AMT_LENGTH
-							? `${item?.tds.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.tds.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.tds}
 					</Tooltip>
 				</div>
@@ -255,7 +266,7 @@ const useGetColumns = ({
 						{item?.currency}
 						{' '}
 						{item?.balanceAmount.toString().length > AMT_LENGTH
-							? `${item?.balanceAmount.toString().substr(ZEROTH_INDEX, AMT_LENGTH)}..`
+							? `${item?.balanceAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.balanceAmount}
 					</Tooltip>
 				</div>
@@ -269,7 +280,7 @@ const useGetColumns = ({
 					size="lg"
 					color={
 					item?.status === 'Unpaid' || item?.status === 'Unutilized'
-						? '#FEF199'
+						? '#fef199'
 						: '#acdadf'
 					}
 				>

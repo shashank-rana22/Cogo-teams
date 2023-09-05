@@ -28,7 +28,7 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 			await checkTrigger({
 				data: {
 					stackDetails   : selectedData,
-					createdBy      : profile.user?.id,
+					createdBy      : profile?.user?.id,
 					settlementDate : (date
 						&& formatDate({
 							date,

@@ -1,8 +1,8 @@
 import { Input, Select } from '@cogoport/components';
 import React from 'react';
 
-import { docTypeOptions } from '../../../configurations/ap-ar-settlement/docType-options';
-import { statusOptions } from '../../../configurations/ap-ar-settlement/status-options';
+import { DOC_TYPE_OPTIONS } from '../../../configurations/ap-ar-settlement/docType-options';
+import { STATUS_OPTIONS } from '../../../configurations/ap-ar-settlement/status-options';
 
 import styles from './styles.module.css';
 
@@ -22,7 +22,7 @@ export function SearchFilters({
 					value={filters?.docType}
 					onChange={(e) => handleFilterChange('docType', e)}
 					placeholder="Document Type"
-					options={docTypeOptions}
+					options={DOC_TYPE_OPTIONS}
 					size="sm"
 					style={{ width: '250px', marginTop: '16px', marginBottom: '16px' }}
 					isClearable
@@ -36,7 +36,7 @@ export function SearchFilters({
 							value={filters?.status}
 							onChange={(e) => handleFilterChange('status', e)}
 							placeholder="Status"
-							options={statusOptions}
+							options={STATUS_OPTIONS}
 							size="sm"
 							style={{ width: '250px', marginTop: '16px', marginBottom: '16px' }}
 							isClearable

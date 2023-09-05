@@ -39,7 +39,8 @@ function ApArSettlement() {
 
 	const [selectedData, setSelectedData] = useState([]);
 	const [matchBal, setMatchBal] = useState(INITIAL_MAT_BAL);
-	const totalMatchingBalance = selectedData.reduce((sum, item) => sum + item.balanceAmount, INITIAL_MAT_BAL);
+	const totalMatchingBalance = selectedData.reduce((sum, item) => +sum
+	+ +item.balanceAmount * +item.exchangeRate * +item.signFlag, INITIAL_MAT_BAL);
 	const [reRender, setReRender] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
 	const [pageCheckedRows, setPageCheckedRows] = useState({});
@@ -111,8 +112,8 @@ function ApArSettlement() {
 
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
 
-		const total = selectedData.reduce((sum, item) => +sum + +item.balanceAmount
-		* +item.exchangeRate * item.signFlag, INITIAL_MAT_BAL);
+		const total = selectedData.reduce((sum, item) => +sum + (+item.balanceAmount
+		* +item.exchangeRate * +item.signFlag), INITIAL_MAT_BAL);
 		setMatchBal(total);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedData]);

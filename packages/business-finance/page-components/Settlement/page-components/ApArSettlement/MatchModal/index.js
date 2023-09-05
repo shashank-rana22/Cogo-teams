@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 import useGetJVList from '../../../hooks/useGetJvsList';
 import usePaymentsSettlementCheck from '../../../hooks/usePaymentsSettlementCheck';
+import { getFormatAmount } from '../../../utils/getFormatAmount';
 import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
 
 import lineItems from './LineItems';
@@ -60,10 +61,10 @@ function UploadModal({ showDocument, setShowDocument, onOuterClick, fileValue, s
 
 export default function MatchModal({
 	matchModalShow = false, setMatchModalShow = () => {},
-	selectedData = [], filters = [], setSelectedData = () => {},
+	selectedData = [], filters = {}, setSelectedData = () => {},
 	isDelete = false, setIsDelete = () => {},
 	reRender = false, setReRender = () => {},
-	matchBal, submitSettleMatch, settleLoading,
+	matchBal = 0, submitSettleMatch, settleLoading,
 }) {
 	const [updateBal, setUpdateBal] = useState(matchBal);
 	const [date, setDate] = useState('');
@@ -147,7 +148,8 @@ export default function MatchModal({
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				Matching Balance
 				<p className={styles.paragraph}>
-					{`${selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency}     ${updateBal}    `}
+					{/* {`${selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency}     ${updateBal}    `} */}
+					{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
 				</p>
 			</div>
 
