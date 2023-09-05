@@ -126,7 +126,7 @@ const createContracts = () => [
 		showOptional   : true,
 		defaultOptions : false,
 		params         : getParams({
-			status        : 'inactive',
+			status        : 'active',
 			operator_type : 'shipping_line',
 		}),
 		isClearable : true,
