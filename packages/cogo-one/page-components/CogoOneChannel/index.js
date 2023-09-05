@@ -109,10 +109,7 @@ function CogoOne() {
 	};
 
 	const commonProps = {
-		setSendBulkTemplates,
-		setActiveTab,
-		selectedAutoAssign,
-		setAutoAssignChats,
+		setSendBulkTemplates, preferenceLoading, setActiveTab, selectedAutoAssign, setAutoAssignChats,
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
