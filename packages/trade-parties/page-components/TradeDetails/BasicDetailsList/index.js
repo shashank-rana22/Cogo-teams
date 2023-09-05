@@ -27,7 +27,8 @@ function BasicDetailsList({ trade_party_id = '', trade_partner_id = '' }) {
 			window.open(`/${trade_partner_id}/details/supply/${organization.id}`, '_blank');
 		} else if (organization.tags.includes('partner')) {
 			setOrganizationId(organization.id);
-			const partner_id = val?.data?.data?.twin_partner.id;
+			const partner_id = val?.data?.data?.twin_partner?.id;
+			// console.log('vall', val, partner_id);
 			window.open(`/${trade_partner_id}/prm/${partner_id}`, '_blank');
 		} else {
 			window.open(`/${trade_partner_id}/details/demand/${organization.id}`, '_blank');

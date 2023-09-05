@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController, useForm } from '@cogoport/forms';
+import { SelectController, InputController, useForm, CountrySelectController } from '@cogoport/forms';
 
+import companyOptions from './companyOptions';
 import styles from './styles.module.css';
 
 const ONE = 1;
@@ -10,39 +11,6 @@ function FilterContent({
 	setIsFilterVisible,
 	setPage,
 }) {
-	const countryOptions = [
-		{
-			label : 'country name',
-			value : 'country_name',
-		},
-	];
-	const companyOptions = [
-		{
-			label : 'Private Limited',
-			value : 'private_limited',
-		},
-		{
-			label : 'Public Limited',
-			value : 'public_limited',
-		},
-		{
-			label : 'Limited Liability Partnership',
-			value : 'limited_liability_partnership',
-		},
-		{
-			label : 'Partnership',
-			value : 'partnership',
-		},
-		{
-			label : 'Proprietorship',
-			value : 'proprietorship',
-		},
-		{
-			label : 'Other',
-			value : 'other',
-		},
-	];
-
 	const DEFAULT_VALUES = filterParams;
 	const {
 		control,
@@ -74,15 +42,16 @@ function FilterContent({
 						<h3>Search</h3>
 					</div>
 					<div className={styles.right}>
-						<Button size="xs" themeType="secondary" onClick={onReset}>
+
+						<Button size="md" themeType="secondary" onClick={onReset}>
 							RESET FORM
 						</Button>
 						<Button
-							size="xs"
-							themeType="accent"
 							className={styles.results_button}
+							size="md"
 							onClick={handleSubmit(onSubmit)}
 						>
+
 							SHOW RESULTS
 						</Button>
 					</div>
@@ -110,16 +79,17 @@ function FilterContent({
 				<br />
 
 				<h4>Country</h4>
-				<SelectController
-					size="md"
+				<CountrySelectController
 					name="country_id"
 					control={control}
-					options={countryOptions}
-					value={filterParams.country_id}
+					size="md"
+					placeholder="Enter or Select Country"
+					optionValueKey="id"
+
 				/>
 				<br />
 
-				<h4>Company Type</h4>
+				<div>Company Type</div>
 				<SelectController
 					size="md"
 					name="company_type"

@@ -51,9 +51,11 @@ function ListView({
 				onPageChange={setPage}
 				totalItems={data?.total_count}
 				pageSize={data?.page_limit}
+				className={styles.page}
 			/>
 			<Table columns={tableColumns} data={tableData} className={styles.table} />
 			<Pagination
+				className={styles.page}
 				type="table"
 				currentPage={page}
 				onPageChange={(value) => setPage(value)}

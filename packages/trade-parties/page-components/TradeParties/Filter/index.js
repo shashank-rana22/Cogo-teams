@@ -56,6 +56,7 @@ function Filter(props) {
 								setPage={setPage}
 							/>
 						)}
+						onClickOutside={() => setIsFilterVisible(false)}
 						visible={isFilterVisible}
 					>
 						<Button
