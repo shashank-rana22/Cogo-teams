@@ -56,28 +56,20 @@ function ListData({
 					</div>
 				))}
 			</div>
-			<div className={styles.pagination_container}>
-				{data[source] || DEFAULT_VALUE}
-				{' '}
-				{HEADINGS[source] || 'Critical Port Pairs'}
+			<div className={styles.container}>
+				<span>
+					{data[source] || DEFAULT_VALUE}
+					{' '}
+					{HEADINGS[source] || 'Critical Port Pairs'}
+				</span>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Input
-						style={{ width: 'fit-content', marginLeft: '20px' }}
+						size="sm"
 						value={serialId}
 						onChange={(val) => setSerialId(val)}
-						placeholder="Search by SID"
+						placeholder="Search by TID"
 					/>
 				</div>
-				{!isEmpty(list)
-					&& (
-						<Pagination
-							type="table"
-							currentPage={page}
-							totalItems={data[source]}
-							pageSize={10}
-							onPageChange={(pageNumber) => { setPage(pageNumber); }}
-						/>
-					)}
 			</div>
 			<div>
 				{listLoading && ['1', '2', '3', '4', '5'].map((ind) => (
@@ -97,6 +89,15 @@ function ListData({
 								filter={filter}
 							/>
 						))}
+						<div className={styles.pagination}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={data[source]}
+								pageSize={10}
+								onPageChange={(pageNumber) => { setPage(pageNumber); }}
+							/>
+						</div>
 					</>
 				) : (
 					<EmptyState

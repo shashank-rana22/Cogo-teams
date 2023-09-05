@@ -11,16 +11,6 @@
 	width: 100%;
 }
 
-.pagination_container {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	margin: 20px 0;
-	font-size: 16px;
-	font-weight: 600;
-	color: #828282;
-}
-
 .card_container {
 	display: flex;
 	flex-direction: column;
@@ -46,4 +36,19 @@
 .scroll_bar {
 	max-height: 400px;
 	overflow: scroll;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #828282;
 }

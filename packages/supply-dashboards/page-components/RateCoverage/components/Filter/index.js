@@ -70,7 +70,7 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Origin</p>
 					<Select
-						placeholder="Select"
+						placeholder="Country / Port Pair"
 						{...originLocationOptions}
 						value={filter?.origin_port_id}
 						onChange={(value) => {
@@ -81,7 +81,7 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Destination</p>
 					<Select
-						placeholder="Select"
+						placeholder="Country / Port Pair"
 						{...destinationLocationOptions}
 						value={filter?.destination_port_id}
 						onChange={(value) => {
@@ -92,7 +92,7 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
 					<Select
-						placeholder="search here"
+						placeholder="Search here"
 						{...shippingLineOptions}
 						value={filter?.shipping_line_id}
 						onChange={(value) => {
@@ -103,7 +103,7 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Commodity Type</p>
 					<Select
-						placeholder="search here"
+						placeholder="Search here"
 						value={filter?.commodity_type}
 						options={commodityOptions}
 						onChange={(value) => {
@@ -115,7 +115,7 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Task Status</p>
 					<Select
-						placeholder="search here"
+						placeholder="Search here"
 						value={filter?.status}
 						options={taskStatusOptions}
 						onChange={(value) => {

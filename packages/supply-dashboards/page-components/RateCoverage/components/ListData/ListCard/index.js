@@ -52,7 +52,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 						<div className={styles.pill}>
 							<Pill size="md" color="#ffe7d5">
 								<span>
-									SID :
+									TID :
 									{' '}
 									{data?.serial_id}
 								</span>
