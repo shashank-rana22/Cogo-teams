@@ -15,13 +15,7 @@ const REFUND_PILLS = {
 	false : '#FEF099',
 };
 
-const handleClick = ({
-	item = {},
-	setViewRefundModal = () => {},
-	setUpdateRefundModal = () => {},
-}) => (item?.reconciled ? setViewRefundModal(item) : setUpdateRefundModal(item));
-
-const getCommonColumns = () => [
+const commonColumns = [
 	{
 		Header   : <div className={styles.header}>Shipment ID</div>,
 		key      : 'shipment_id',
@@ -91,7 +85,7 @@ const getCommonColumns = () => [
 	},
 ];
 
-const getPaymentRequestColumns = ({ setViewRequestModal = () => {} }) => [
+const getPaymentRequestColumns = ({ setModalData = () => {} }) => [
 	{
 		Header   : <div className={styles.header}>Shipment Type</div>,
 		key      : 'shipment_type',
@@ -120,11 +114,15 @@ const getPaymentRequestColumns = ({ setViewRequestModal = () => {} }) => [
 		Header   : '',
 		key      : 'action',
 		id       : 'action',
-		accessor : (item) => <Button onClick={() => setViewRequestModal(item)}>View</Button>,
+		accessor : (item) => (
+			<Button onClick={() => setModalData((prev) => ({ ...prev, data: item, type: 'viewDeposit' }))}>
+				View
+			</Button>
+		),
 	},
 ];
 
-const getRefundColumns = ({ setViewRefundModal = () => {}, setUpdateRefundModal = () => {} }) => [
+const getRefundColumns = ({ setModalData = () => {} }) => [
 	{
 		Header   : <div className={styles.header}>Refund Status</div>,
 		key      : 'refund_status',
@@ -143,7 +141,11 @@ const getRefundColumns = ({ setViewRefundModal = () => {}, setUpdateRefundModal 
 		id       : 'action',
 		accessor : (item) => (
 			<Button
-				onClick={() => handleClick({ item, setViewRefundModal, setUpdateRefundModal })}
+				onClick={() => setModalData((prev) => ({
+					...prev,
+					data : item,
+					type : item?.reconciled ? 'viewRefund' : 'requestRefund',
+				}))}
 			>
 				{item?.reconciled ? 'View' : 'Request'}
 			</Button>
@@ -153,13 +155,11 @@ const getRefundColumns = ({ setViewRefundModal = () => {}, setUpdateRefundModal 
 
 const getColumns = ({
 	paymentActiveTab = 'payment_request',
-	setViewRequestModal = () => {},
-	setViewRefundModal = () => {},
-	setUpdateRefundModal = () => {},
+	setModalData = () => {},
+
 }) => {
-	const commonColumns = getCommonColumns();
-	const paymentRequestColumns = getPaymentRequestColumns({ setViewRequestModal });
-	const refundColumns = getRefundColumns({ setViewRefundModal, setUpdateRefundModal });
+	const paymentRequestColumns = getPaymentRequestColumns({ setModalData });
+	const refundColumns = getRefundColumns({ setModalData });
 
 	return paymentActiveTab === 'payment_request'
 		? [...commonColumns, ...paymentRequestColumns] : [...commonColumns, ...refundColumns];
