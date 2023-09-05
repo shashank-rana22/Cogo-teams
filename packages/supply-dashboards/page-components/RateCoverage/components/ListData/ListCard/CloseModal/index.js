@@ -38,10 +38,10 @@ function CloseModal({
 					{CLOSE_REASON_OPTIONS.map((reason) => (
 						<div style={{ display: 'flex', alignItems: 'center' }} key={reason}>
 							<Checkbox
-								checked={checkboxValue === reason?.value}
-								onChange={() => { setCheckboxValue(reason?.value); }}
+								checked={checkboxValue === reason.value}
+								onChange={() => { setCheckboxValue(reason.value); }}
 							/>
-							{reason?.label}
+							{reason.label}
 						</div>
 					))}
 				</div>

@@ -1,4 +1,4 @@
-/* eslint-disable custom-eslint/check-element-role-button */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import { Placeholder, Pagination, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -36,16 +36,15 @@ function ListData({
 			<div className={styles.details_container}>
 				{Object.keys(CARDS_MAPPING).map((card) => (
 					<div
+						key={card}
 						className={(card === source)
 							? styles.blue_color_container : styles.card_container}
-						key={card}
-						tabIndex="0"
-						role="button"
 						onClick={() => {
 							setSource(card);
 							setPage(DEFAULT_PAGE_VALUE);
 							setSerialId('');
 						}}
+						role="button"
 					>
 						<Card
 							detail={CARDS_MAPPING[card]}
@@ -57,28 +56,20 @@ function ListData({
 					</div>
 				))}
 			</div>
-			<div className={styles.pagination_container}>
-				{data[source] || DEFAULT_VALUE}
-				{' '}
-				{HEADINGS[source] || 'Critical Port Pairs'}
+			<div className={styles.container}>
+				<span>
+					{data[source] || DEFAULT_VALUE}
+					{' '}
+					{HEADINGS[source] || 'Critical Port Pairs'}
+				</span>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Input
-						style={{ width: 'fit-content', marginLeft: '20px' }}
+						size="sm"
 						value={serialId}
 						onChange={(val) => setSerialId(val)}
-						placeholder="Search by SID"
+						placeholder="Search by TID"
 					/>
 				</div>
-				{!isEmpty(list)
-					&& (
-						<Pagination
-							type="table"
-							currentPage={page}
-							totalItems={data[source]}
-							pageSize={10}
-							onPageChange={(pageNumber) => { setPage(pageNumber); }}
-						/>
-					)}
 			</div>
 			<div>
 				{listLoading && ['1', '2', '3', '4', '5'].map((ind) => (
@@ -98,16 +89,24 @@ function ListData({
 								filter={filter}
 							/>
 						))}
+						<div className={styles.pagination}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={data[source]}
+								pageSize={10}
+								onPageChange={(pageNumber) => { setPage(pageNumber); }}
+							/>
+						</div>
 					</>
-				)
-					: (
-						<EmptyState
-							height={220}
-							width={380}
-							flexDirection="column"
-							textSize="20px"
-						/>
-					)}
+				) : (
+					<EmptyState
+						height={220}
+						width={380}
+						flexDirection="column"
+						textSize="20px"
+					/>
+				)}
 			</div>
 		</div>
 	);

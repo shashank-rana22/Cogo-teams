@@ -1,7 +1,5 @@
 .main_container {
 	display: flex;
-
-	/* padding: 16px 4px; */
 	align-items: center;
 	width: 100%;
 	background: #fff;

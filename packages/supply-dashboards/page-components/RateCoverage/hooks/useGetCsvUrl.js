@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useGetCsvFile = (filter, activeCard) => {
@@ -30,7 +31,7 @@ const useGetCsvFile = (filter, activeCard) => {
 				return resp?.data?.url;
 			}
 		} catch (err) {
-			// console.log(err);
+			Toast.error('Download failed');
 		}
 		return null;
 	};

@@ -1,17 +1,14 @@
 import { Button, DateRangepicker, Select } from '@cogoport/components';
 import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
 import { merge } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import { serviceOptions, taskStatusOptions, commodityOptions } from '../../helpers/constants';
 
 import styles from './styles.module.css';
 
 function Filter({
-	getCoverageDetails = () => {},
 	filter = {},
 	setFilter = () => {},
-	getListCoverage = () => {},
 	setSerialId = () => {},
 	setShowWeekData = () => {},
 }) {
@@ -34,14 +31,6 @@ function Filter({
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type } } },
 	));
-
-	useEffect(() => {
-		getCoverageDetails();
-	}, [filter, getCoverageDetails]);
-
-	useEffect(() => {
-		getListCoverage();
-	}, [getListCoverage, filter]);
 
 	return (
 		<div className={styles.parent}>
@@ -81,9 +70,10 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Origin</p>
 					<Select
-						placeholder="Select"
+						placeholder="Country / Port Pair"
 						{...originLocationOptions}
 						value={filter?.origin_port_id}
+						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, origin_port_id: value, page: 1 }));
 						}}
@@ -92,9 +82,10 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Destination</p>
 					<Select
-						placeholder="Select"
+						placeholder="Country / Port Pair"
 						{...destinationLocationOptions}
 						value={filter?.destination_port_id}
+						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, destination_port_id: value, page: 1 }));
 						}}
@@ -103,9 +94,10 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
 					<Select
-						placeholder="search here"
+						placeholder="Search here"
 						{...shippingLineOptions}
 						value={filter?.shipping_line_id}
+						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, shipping_line_id: value, page: 1 }));
 						}}
@@ -114,11 +106,12 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Commodity Type</p>
 					<Select
-						placeholder="search here"
-						value={filter?.commodity_type}
+						placeholder="Search here"
+						value={filter?.commodity}
 						options={commodityOptions}
+						isClearable
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, commodity_type: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, commodity: value, page: 1 }));
 						}}
 					/>
 				</div>
@@ -126,7 +119,7 @@ function Filter({
 				<div className={styles.filter_option_width}>
 					<p>Task Status</p>
 					<Select
-						placeholder="search here"
+						placeholder="Search here"
 						value={filter?.status}
 						options={taskStatusOptions}
 						onChange={(value) => {
@@ -134,12 +127,14 @@ function Filter({
 						}}
 					/>
 				</div>
-				<div className={styles.filter_option_width} style={{ width: '220px' }}>
+				<div className={styles.date_range_filter_width}>
 					<p>Date Range</p>
 					<DateRangepicker
-						value={filter?.date_range}
+						value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
 						onChange={(value) => {
-							setFilter((prev) => ({ ...prev, date_range: value, page: 1 }));
+							setFilter((prev) => ({
+								...prev, start_date: value?.startDate, end_date: value?.endDate, page: 1,
+							}));
 						}}
 						isPreviousDaysAllowed
 						maxDate={new Date()}

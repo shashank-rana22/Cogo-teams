@@ -7,7 +7,7 @@ import WeekCard from './WeekCard';
 function WeeklyOverviewContent({ data = {}, statsLoading = false }) {
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.text}>
 				Here is this week&rsquo;s overview
 			</div>
 			<div className={styles.row}>

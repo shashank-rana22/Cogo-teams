@@ -11,12 +11,12 @@ import AddRateModal from './AddRateModal';
 import CloseModal from './CloseModal';
 import styles from './styles.module.css';
 
+const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
+
 function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
 
-	const itemList = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
-
-	const items = (itemList || []).map((item) => ({
+	const items = (ITEM_LIST || []).map((item) => ({
 		children : startCase(data[item]),
 		disabled : false,
 		color    : '#F7F7F7',
@@ -34,11 +34,6 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 						<div style={{ margin: '5px 5px 0 0' }}>{SERVICE_ICON_MAPPING[service]}</div>
 						<div style={{ marginRight: '5px' }}>{service}</div>
 					</div>
-					<div>
-						<Pill size="md" color="#EEF0F0">
-							{data?.trip_type || 'Import'}
-						</Pill>
-					</div>
 					<div className={styles.vertical_line} />
 					<div>
 						<Pill size="md" color="green">
@@ -54,28 +49,37 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 				<div className={styles.pill_container}>
 					{data?.serial_id
 					&& (
-						<div className={styles.margin_right_20}>
+						<div className={styles.pill}>
 							<Pill size="md" color="#ffe7d5">
-								SID:
-								{data?.serial_id}
+								<span>
+									TID :
+									{' '}
+									{data?.serial_id}
+								</span>
 							</Pill>
 						</div>
 					)}
 					{data?.assigned_to?.name
 					&& (
-						<div className={styles.margin_right_20}>
+						<div className={styles.pill}>
 							<Pill size="md" color="#EEF0F0">
-								Assigned to:
-								{data?.assigned_to?.name}
+								<span>
+									Assigned to :
+									{' '}
+									{data?.assigned_to?.name}
+								</span>
 							</Pill>
 						</div>
 					)}
 					{data?.closed_by?.name
 					&& (
-						<div className={styles.margin_right_20}>
+						<div className={styles.pill}>
 							<Pill size="md" color="#EEF0F0">
-								Closed by:
-								{data?.closed_by?.name}
+								<span>
+									Closed by :
+									{' '}
+									{data?.closed_by?.name}
+								</span>
 							</Pill>
 						</div>
 					)}
