@@ -1,4 +1,5 @@
 import { Select, Input, Popover, Button } from '@cogoport/components';
+import { IcMDoubleFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import FilterContent from './FilterContent/index';
@@ -62,6 +63,7 @@ function Filter(props) {
 							size="md"
 							onClick={() => setIsFilterVisible(!isFilterVisible)}
 						>
+							<IcMDoubleFilter style={{ marginRight: '5px' }} />
 							Filter
 						</Button>
 					</Popover>

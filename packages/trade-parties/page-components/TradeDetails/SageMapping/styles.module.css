@@ -1,27 +1,12 @@
 .container {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
 	padding: 12px;
-	margin: 24px 0;
 	background-color: #fff;
-}
-
-.sub_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 33%;
-	border-right: 1px solid #303b67;
-}
-
-.sub_container.no_border {
-	border-right: none;
 }
 
 .heading {
 	display: flex;
-	margin-right: 16px;
 	font-size: 18px;
 	font-weight: bold;
 	color: #393f70;
@@ -39,7 +24,10 @@
 	border-radius: 4px;
 }
 
-.registration_number {
-	font-weight: bold;
-	color: "#393f70";
+.label_text {
+	margin-top: 4px;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 10px;
+	color: #828282;
 }

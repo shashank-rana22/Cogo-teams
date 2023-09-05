@@ -17,3 +17,7 @@
 	align-self: center;
 	justify-content: center;
 }
+
+.filter {
+	margin-left: 10px;
+}

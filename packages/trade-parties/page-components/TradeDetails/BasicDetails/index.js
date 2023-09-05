@@ -4,7 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import styles from './styles.module.css';
 
 function BasicDetails({ tradePartyDetails = {} }) {
-	const { legal_business_name, registration_number, serial_id, updated_at } =		tradePartyDetails;
+	const { legal_business_name, registration_number, serial_id, updated_at } =		tradePartyDetails.tradePartyDetails;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
