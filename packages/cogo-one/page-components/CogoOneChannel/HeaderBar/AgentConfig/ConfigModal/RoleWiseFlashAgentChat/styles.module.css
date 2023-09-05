@@ -35,7 +35,6 @@
 }
 
 .styled_select {
-	/* width: 40%; */
 	width: 75px;
 
 	:global {
