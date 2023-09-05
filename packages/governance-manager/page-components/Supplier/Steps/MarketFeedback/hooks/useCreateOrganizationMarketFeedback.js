@@ -18,8 +18,11 @@ const useCreateOrganizationMarketFeedback = ({
 				params: {
 					service_id,
 					service_type,
-					users  : values?.emails,
-					status : 'active',
+					users: values?.emails?.map((emailItem) => ({
+						...emailItem,
+						user_email : emailItem?.user_email?.toLowerCase(),
+						status     : 'active',
+					})),
 					organization_id,
 				},
 			});
@@ -35,8 +38,11 @@ const useCreateOrganizationMarketFeedback = ({
 				params: {
 					service_id,
 					service_type,
-					users  : values?.emails,
-					status : 'draft',
+					users: values?.emails?.map((emailItem) => ({
+						...emailItem,
+						user_email : emailItem?.user_email?.toLowerCase(),
+						status     : 'draft',
+					})),
 					organization_id,
 				},
 			});
