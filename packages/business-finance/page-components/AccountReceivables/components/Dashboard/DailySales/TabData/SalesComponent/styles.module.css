@@ -46,6 +46,7 @@
 }
 
 .credit_note_text {
+	margin-left: 2px;
 	color: #ee3425;
 }
 
@@ -76,4 +77,12 @@
 	width: 1200px;
 	height: 200px;
 	margin-top: 20px;
+}
+
+.span {
+	margin-right: 2px;
+}
+
+.sales_text {
+	margin-left: 2px;
 }

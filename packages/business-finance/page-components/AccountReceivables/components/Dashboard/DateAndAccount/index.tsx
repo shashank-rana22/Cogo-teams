@@ -84,16 +84,12 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 									<div className={styles.styled_text}>
 										{t('account_receivables')}
 									</div>
-									<div
-										className={styles.invoice_text}
-									>
-										{t('open_invoices')}
-										{' '}
+									<div className={styles.invoice_text}>
+										<span className={styles.span}>{t('open_invoices')}</span>
 										-
 										{overallStats?.openInvoicesCount || 0}
 										{' | '}
-										{t('customers')}
-										{' '}
+										<span className={styles.span}>{t('customers')}</span>
 										-
 										{overallStats?.customersCount || 0}
 									</div>

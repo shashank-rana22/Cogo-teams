@@ -174,3 +174,7 @@
 	word-break: break-word;
 	word-wrap: break-word;
 }
+
+.span {
+	margin-right: 2px;
+}

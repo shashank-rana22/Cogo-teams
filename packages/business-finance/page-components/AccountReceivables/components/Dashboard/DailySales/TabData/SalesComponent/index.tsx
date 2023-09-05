@@ -10,6 +10,8 @@ import ResponsiveChart from '../CardComponent/ResponsiveChart';
 
 import styles from './styles.module.css';
 
+const DURATION_LAST_INDEX = 3;
+
 function SalesComponent({
 	subActiveTab,
 	dailyStatsData,
@@ -89,22 +91,23 @@ function SalesComponent({
 				<table className={styles.table_style}>
 					<tr>
 						<td>{' '}</td>
+
 						{[1, 2, 3].map((val) => (
 							<td className={styles.styled_date} key={val}>
 								{
-										format(
-											DURATIONS[val - 1],
-											yearFormat(),
-											{},
-											false,
-										)
-                    }
+									format(
+										DURATIONS[val - 1],
+										yearFormat(),
+										{},
+										false,
+									)
+								}
 							</td>
 						))}
 
 						<td className={styles.styled_date_last}>
 							{	format(
-								DURATIONS[3],
+								DURATIONS[DURATION_LAST_INDEX],
 								yearFormat(),
 								{},
 								false,
@@ -114,54 +117,47 @@ function SalesComponent({
 					</tr>
 					<tr className={styles.credit_note}>
 						<td>
-
-							<div>
+							<div className={styles.sales_text}>
 								{t('sales')}
 							</div>
 							<div className={styles.credit_note_text}>
-								{t('credit_notes')}
-								{' '}
+								<span className={styles.span}>{t('credit_notes')}</span>
 								(-)
 							</div>
 						</td>
 						{[1, 2, 3, 4].map((val) => (
 
 							<td key={val}>
-								{' '}
 								<div className={styles.styled_credit}>
-									{
-								formatAmount({
-									amount   : getDataFromDuration(INVOICE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
-									currency : getDataFromDuration(
-										INVOICE_ARRAY,
-										DURATIONS[val - 1],
-									)?.[0]?.dashboardCurrency || currency,
-									options: {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								})
-}
-								</div>
-								<div className={styles.styled_credit}>
-
-									{' '}
-
 									{formatAmount({
-										amount:
-									getDataFromDuration(CREDIT_NOTE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
+										amount: getDataFromDuration(INVOICE_ARRAY, DURATIONS[val - 1])
+											?.[GLOBAL_CONSTANTS.zeroth_index]?.amount || 0,
 										currency: getDataFromDuration(
-											CREDIT_NOTE_ARRAY,
+											INVOICE_ARRAY,
 											DURATIONS[val - 1],
-										)?.[0]?.dashboardCurrency || currency,
+										)?.[GLOBAL_CONSTANTS.zeroth_index]?.dashboardCurrency || currency,
 										options: {
 											style                 : 'currency',
 											currencyDisplay       : 'code',
 											maximumFractionDigits : 0,
 										},
 									})}
-									{' '}
+								</div>
+								<div className={styles.styled_credit}>
+									{formatAmount({
+										amount:	getDataFromDuration(CREDIT_NOTE_ARRAY, DURATIONS[val - 1])
+											?.[GLOBAL_CONSTANTS.zeroth_index]?.amount || 0,
+										currency: getDataFromDuration(
+											CREDIT_NOTE_ARRAY,
+											DURATIONS[val - 1],
+										)?.[GLOBAL_CONSTANTS.zeroth_index]?.dashboardCurrency || currency,
+										options: {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 0,
+										},
+									})}
+
 									<span className={styles.credit_note_text}>(-)</span>
 								</div>
 
@@ -182,11 +178,12 @@ function SalesComponent({
 
 									{formatAmount({
 										amount:
-										getDataFromDuration(REVENUE_ARRAY, DURATIONS[val - 1])?.[0]?.amount || 0,
+										getDataFromDuration(REVENUE_ARRAY, DURATIONS[val - 1])
+											?.[GLOBAL_CONSTANTS.zeroth_index]?.amount || 0,
 										currency: getDataFromDuration(
 											REVENUE_ARRAY,
 											DURATIONS[val - 1],
-										)?.[0]?.dashboardCurrency || currency,
+										)?.[GLOBAL_CONSTANTS.zeroth_index]?.dashboardCurrency || currency,
 										options: {
 											style                 : 'currency',
 											currencyDisplay       : 'code',

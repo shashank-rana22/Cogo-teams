@@ -164,8 +164,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 									<div className={styles.tat_flex}>
 										<div className={styles.border_tat} />
 										<div className={styles.tat_value}>
-											{t('TAT')}
-											{' '}
+											<span className={styles.span}>{t('TAT')}</span>
 											:
 											<span className={styles.color_tat}>{item?.TAT}</span>
 											<span className={styles.color_count}>
