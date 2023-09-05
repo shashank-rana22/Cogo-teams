@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HRMeeting from './HRMeeting';
+import FormComponent from './FormComponent';
 import PersonalDetails from './PersonalDetails';
 import styles from './styles.module.css';
 import TaskList from './TaskList';
@@ -17,7 +17,7 @@ function HRSeparation() {
 				</div>
 
 				<div className={styles.hr_meeting}>
-					<HRMeeting />
+					<FormComponent />
 				</div>
 			</div>
 		</div>
