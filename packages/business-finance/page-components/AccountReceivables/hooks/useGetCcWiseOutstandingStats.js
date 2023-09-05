@@ -2,9 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetCcWiseOutstandingStats = ({
-	globalFilters,
-}) => {
+const useGetCcWiseOutstandingStats = () => {
 	const {
 		profile: { authorizationparameters, selected_agent_id },
 	} = useSelector((state) => state);
@@ -25,7 +23,6 @@ const useGetCcWiseOutstandingStats = ({
 	}, [
 		authorizationparameters,
 		selected_agent_id,
-		globalFilters,
 		trigger,
 	]);
 	return {

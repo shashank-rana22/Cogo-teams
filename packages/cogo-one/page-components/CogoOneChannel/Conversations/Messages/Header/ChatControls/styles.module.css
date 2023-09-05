@@ -27,3 +27,12 @@
 .escalate_button {
 	margin-right: 5px;
 }
+
+.email_header {
+	width: 80%;
+	padding: 6px 0;
+	overflow: hidden;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

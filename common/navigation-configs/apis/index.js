@@ -56,6 +56,7 @@ import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
+import ssr from './ssr';
 import supply_allocation from './supply-allocation';
 import tech_ops from './tech-ops-apis';
 import tools from './tools';
@@ -169,6 +170,7 @@ const apis = {
 	supply_allocation,
 	centralised_customer_service,
 	...authApis,
+	ssr,
 };
 
 export default apis;
