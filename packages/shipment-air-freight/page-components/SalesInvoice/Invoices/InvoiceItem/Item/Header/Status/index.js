@@ -71,7 +71,8 @@ function Status({
 	&& !invoice.is_revoked
 	&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note
+	&& !invoice?.processing;
 
 	return (
 		<div className={styles.invoice_container}>
@@ -122,7 +123,7 @@ function Status({
 					</Button>
 				) : null}
 
-			{showRequestCN && !invoice?.processing ? (
+			{showRequestCN ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"

@@ -15,15 +15,13 @@ const useSendInvoiceToFinance = ({
 		try {
 			const res = await trigger({ data: payload });
 
-			Toast.success(successMessage);
+			if (!res.hasError) {
+				Toast.success(successMessage);
+			}
 
 			refetch();
-
-			return res;
 		} catch (err) {
 			toastApiError(err);
-
-			return err;
 		}
 	};
 
