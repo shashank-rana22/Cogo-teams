@@ -50,18 +50,22 @@ const getAdvanceDocumentPayload = ({
 	);
 
 	return {
-		jobNumber                              : serial_id,
-		type                                   : 'CONTAINER_SECURITY_DEPOSIT',
-		jobSource                              : 'LOGISTICS',
-		jobType                                : 'SHIPMENT',
+		jobNumber                           : serial_id,
+		type                                : 'CONTAINER_SECURITY_DEPOSIT',
+		jobSource                           : 'LOGISTICS',
+		jobType                             : 'SHIPMENT',
 		currency,
-		serviceType                            : 'testing',
-		tdsAmount                              : collectionParty?.tds_deduction_rate,
-		amount                                 : amount * quantity,
-		refundable                             : true,
-		advanceDocumentBuyerAddressRequest     : getAdBuyerAddress({ billingParty, cogoEntityId, billingPartyAddress }),
-		advanceDocumentSellerAddressRequest    : getAdSellerAddress({ collectionParty, collectionPartyAddress }),
-		advanceDocumentSellerBankDetailRequest : getAdSellerBankDetails({
+		serviceType                         : 'testing',
+		tdsAmount                           : collectionParty?.tds_deduction_rate,
+		amount                              : amount * quantity,
+		refundable                          : true,
+		advanceDocumentBuyerAddressRequest  : getAdBuyerAddress({ billingParty, cogoEntityId, billingPartyAddress }),
+		advanceDocumentSellerAddressRequest : getAdSellerAddress({
+			collectionParty,
+			collectionPartyAddress,
+			formValues,
+		}),
+		advanceDocumentSellerBankDetailRequest: getAdSellerBankDetails({
 			collectionPartyBankDetails,
 			collectionParty,
 		}),

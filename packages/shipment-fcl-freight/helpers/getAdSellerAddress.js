@@ -1,6 +1,7 @@
 const getAdSellerAddress = ({
 	collectionParty = {},
 	collectionPartyAddress = {},
+	formValues = {},
 }) => {
 	const {
 		entity_code = '',
@@ -18,6 +19,8 @@ const getAdSellerAddress = ({
 		pincode = '',
 	} = collectionPartyAddress || {};
 
+	const { cp_address_city = '' } = formValues || {};
+
 	return {
 		companyType          : 'SELLER',
 		organizationSerialId : 24918,
@@ -32,6 +35,7 @@ const getAdSellerAddress = ({
 		countryId            : country_id,
 		registrationNumber   : registration_number,
 		taxNumber            : tax_number,
+		cityName             : cp_address_city,
 	};
 };
 

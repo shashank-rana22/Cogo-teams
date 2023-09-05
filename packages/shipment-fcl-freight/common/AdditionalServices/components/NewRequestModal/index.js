@@ -65,7 +65,7 @@ function NewRequestModal({
 	const { profile } = useSelector((state) => state);
 	const { partner, user } = profile || {};
 
-	const { loading, apiTrigger } = useAdvanceDocument(setShowRequestModal);
+	const { loading, apiTrigger } = useAdvanceDocument({ setShowRequestModal });
 	const { listEntities } = useGetEntities();
 
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);

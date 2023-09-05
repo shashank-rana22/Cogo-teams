@@ -180,6 +180,15 @@ const formControls = ({
 			},
 		},
 		{
+			name        : 'cp_address_city',
+			label       : 'Collection Party City Name',
+			placeholder : 'Enter Collection Party City Name...',
+			type        : 'text',
+			rules       : { required: 'City Name is required' },
+			size        : 'sm',
+			style       : { width: '265px' },
+		},
+		{
 			name                  : 'due_date',
 			label                 : 'Due Date',
 			type                  : 'datepicker',

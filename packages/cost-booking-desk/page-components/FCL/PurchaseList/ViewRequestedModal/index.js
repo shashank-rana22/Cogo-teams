@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import getRequestAdvanceDocumentData from '../../../../helpers/getRequestAdvanceDocumentData';
@@ -12,10 +12,6 @@ function ViewRequestModal({
 	const { status = '' } = viewRequestModal || {};
 	const requestAdvanceDocumentData = getRequestAdvanceDocumentData({ viewRequestModal });
 
-	const handleClick = () => {
-		setViewRequestModal({});
-	};
-
 	return (
 		<Modal
 			show={!isEmpty(viewRequestModal)}
@@ -23,12 +19,16 @@ function ViewRequestModal({
 		>
 			<Modal.Header title="Request Advance Payment" />
 			<Modal.Body>
-				{status.toLowerCase() === 'approved'
-					? <div className={styles.approved_request}>Approved: </div> : null}
-				{status.toLowerCase() === 'rejected'
-					? <div className={styles.rejected_request}>Reason For Rejection: </div> : null}
+				{status?.toLowerCase() === 'approved'
+					? <div className={cl`${styles.approved_request} ${styles.request}`}>Approved </div> : null}
+				{status?.toLowerCase() === 'rejected'
+					? (
+						<div className={cl`${styles.rejected_request} ${styles.request}`}>
+							Rejected
+						</div>
+					) : null}
 
-				{requestAdvanceDocumentData.map((itm) => {
+				{(requestAdvanceDocumentData || []).map((itm) => {
 					const { title, value } = itm || {};
 					return (
 						<div key={title} className={styles.flex}>
@@ -39,13 +39,6 @@ function ViewRequestModal({
 					);
 				})}
 			</Modal.Body>
-			{status.toLowerCase() === 'rejected'
-				? (
-					<Modal.Footer>
-						<Button onClick={handleClick}>Send Request Again</Button>
-					</Modal.Footer>
-				)
-				: null}
 		</Modal>
 	);
 }

@@ -18,13 +18,20 @@ const PAGE_LIMIT = 10;
 
 function PurchaseList() {
 	const { paymentActiveTab } = useContext(CostBookingDeskContext);
-	const [searchValue, setSearchValue] = useState('');
-	const { loading, data, pagination, setPagination } = useListPurchaseAdvanceDocument({ searchValue });
-	const { list = [], totalRecords } = data || {};
 
+	const [searchValue, setSearchValue] = useState('');
 	const [viewRequestModal, setViewRequestModal] = useState({});
 	const [viewRefundModal, setViewRefundModal] = useState({});
 	const [updateRefundModal, setUpdateRefundModal] = useState({});
+
+	const {
+		loading = false,
+		data = {},
+		pagination = 1,
+		setPagination = () => {},
+	} = useListPurchaseAdvanceDocument({ searchValue });
+
+	const { list = [], totalRecords } = data || {};
 
 	const columns = getColumns({ paymentActiveTab, setViewRequestModal, setViewRefundModal, setUpdateRefundModal });
 

@@ -1,6 +1,5 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const getParams = ({ ledger_currency = '', currency = 'INR' }) => ({
@@ -31,8 +30,11 @@ const useGetExchangeRate = ({ billingParty = {}, formValues = {}, setValue = () 
 	}, [currency, trigger, ledger_currency]);
 
 	useEffect(() => {
-		if (!isEmpty(ledger_currency)) {
+		if (ledger_currency) {
 			apiTrigger();
+		}
+
+		if (data) {
 			setValue('exchange_rate', data);
 		}
 	}, [setValue, apiTrigger, data, ledger_currency]);

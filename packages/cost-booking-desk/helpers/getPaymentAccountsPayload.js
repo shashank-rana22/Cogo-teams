@@ -1,5 +1,5 @@
 const getPaymentAccountsPayload = ({
-	exchangeRateApiData = '',
+	exchangeRateApiData = 0,
 	billingParty = {},
 	updateRefundModal = {},
 	formValues = {},
@@ -17,7 +17,7 @@ const getPaymentAccountsPayload = ({
 	const { ledger_currency = '', id = '' } = billingParty || {};
 
 	const {
-		amount = '',
+		amount = 0,
 		currency = '',
 		payment_mode = '',
 		utr_number = '',
@@ -43,7 +43,7 @@ const getPaymentAccountsPayload = ({
 		tradePartyMappingId,
 		advanceDocumentId,
 		paymentDocUrl     : upload?.finalUrl || upload,
-		serviceType       : shipmentType.toUpperCase(),
+		serviceType       : shipmentType?.toUpperCase(),
 		createdBy         : user_id,
 		updatedBy         : user_id,
 	};
