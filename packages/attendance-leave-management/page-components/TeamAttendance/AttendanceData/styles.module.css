@@ -1,5 +1,4 @@
 .container {
-	/* display: flex; */
 	width: 100%;
 	border-radius: 6px 6px 6px 0;
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
@@ -49,7 +48,8 @@
 	background: #f7faef;
 }
 
-.absent_color {
+.absent_color,
+.hda {
 	background: #fdebe9;
 }
 
@@ -59,8 +59,4 @@
 
 .invalid_color {
 	background: #e0e0e0;
-}
-
-.hda {
-	background: #fdebe9;
 }

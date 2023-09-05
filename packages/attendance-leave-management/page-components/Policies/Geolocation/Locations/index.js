@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Locations({ data, setSelectedLocation, loading }) {
+function Locations({ data = {}, setSelectedLocation = () => {}, loading = false }) {
 	const { list } = data || {};
 	return (
 		<div className={styles.container}>

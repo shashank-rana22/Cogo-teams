@@ -20,8 +20,8 @@ function TeamAttendance() {
 	const [month, setMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
 	const {
-		data:downloadData, createDownload,
-		loading:downloadLoading,
+		createDownload,
+		loading: downloadLoading,
 	} = useGetDownloadTeamAttendance({ cycleId: month });
 
 	const { data, setFilters, debounceQuery, loading : statsLoading } = useGetTeamAttendance(month);
@@ -65,10 +65,8 @@ function TeamAttendance() {
 		}
 	}, [formattedData]);
 
-	const handleDownload = async () => {
-		const res = await createDownload();
-		console.log(res);
-		window.open(downloadData, '_self');
+	const handleDownload = () => {
+		createDownload();
 	};
 
 	return (

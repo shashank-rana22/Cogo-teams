@@ -60,22 +60,18 @@
 }
 
 .present {
-	color: #abcd62;
 	background-color: #abcd62;
 }
 
 .absent {
-	color: #ee3425;
 	background-color: #ee3425;
 }
 
 .weekly_off {
-	color: #f68b21;
 	background-color: #f68b21;
 }
 
 .invalid {
-	color: #e0e0e0;
 	background-color: #e0e0e0;
 }
 

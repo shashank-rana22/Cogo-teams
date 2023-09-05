@@ -7,7 +7,7 @@ import { ATTENDANCE_LOGS_STATUS_MAPPING } from '../../../utils/constants';
 
 import styles from './styles.module.css';
 
-function AttendanceData({ data }) {
+function AttendanceData({ data = {} }) {
 	const { attendanceDates, dataArr } = data || {};
 
 	const filteredArray = [...(dataArr || [])]?.filter((item) => item !== null);
