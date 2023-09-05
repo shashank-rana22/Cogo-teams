@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const commonProps = {	initialCall: true };
-
 export default function PopoverContent({
 	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent, userId,
 }) {
@@ -109,16 +107,17 @@ export default function PopoverContent({
 						control={control}
 						size={size}
 						asyncKey="partner_users"
+						initialCall
 						params={{
-							filters: {
-								reporting_manager_id: userId,
-							},
+							...(selectedScope !== 'across_all' ? {
+								filters: {
+									reporting_manager_id: userId,
+								},
+							} : {}),
 							status: 'active',
 						}}
-						filters={{ reporting_manager_id: userId }}
 						isClearable
 						valueKey="user_id"
-						{...commonProps}
 					/>
 				</>
 			) : null }
