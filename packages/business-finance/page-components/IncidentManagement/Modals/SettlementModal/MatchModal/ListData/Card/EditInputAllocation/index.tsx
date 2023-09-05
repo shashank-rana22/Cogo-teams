@@ -2,10 +2,29 @@ import { Button, Tooltip, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
-import { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+function Content({ isError, errorMessege, t }) {
+	return (
+		<div>
+			{!isError && (
+				<div className={styles.text_styles}>
+					{t('incidentManagement:actual_allocation_value')}
+				</div>
+			)}
+			<div
+				className={styles.input_container}
+				style={{ color: isError ? 'red' : 'black' }}
+			>
+				{errorMessege}
+
+			</div>
+		</div>
+	);
+}
 function EditInputAllocation({
 	itemData,
 	handleCrossClick,
@@ -22,6 +41,8 @@ function EditInputAllocation({
 		allocationEditable = false,
 	} = itemData;
 
+	const { t } = useTranslation(['incidentManagement']);
+
 	const [changedValue, setChangedValue] = useState(allocationAmountValue || 0);
 
 	const amountCheck = types === 'history' ? balanceAmount + settledAmount : +balanceAmount;
@@ -34,7 +55,7 @@ function EditInputAllocation({
 
 	let errorMessege = '';
 
-	const formatted = (field, curr) => formatAmount({
+	const getFormattedAmount = (field, curr) => formatAmount({
 		amount   :	field,
 		currency : curr,
 		options  : {
@@ -49,21 +70,14 @@ function EditInputAllocation({
 	};
 
 	if (lessValue) {
-		errorMessege = 'Allocation cannot be less than 0';
+		errorMessege = t('incidentManagement:allocation_error_message_1');
 	} else if (maxValue) {
 		errorMessege =			types === 'history'
-			? 'Allocation cannot be greater than Balance Amount + Settled Amount'
-			: 'Allocation cannot be greater than Balance Amount';
+			? t('incidentManagement:allocation_error_message_2')
+			: t('incidentManagement:allocation_error_message_3');
 	} else {
-		errorMessege = formatted(allocationAmountValue, currency);
+		errorMessege = getFormattedAmount(allocationAmountValue, currency);
 	}
-
-	const content = () => (
-		<div>
-			{!isError && <div className={styles.text_styles}>Actual Allocation Value</div>}
-			<div className={styles.input_container} style={{ color: isError ? 'red' : 'black' }}>{errorMessege}</div>
-		</div>
-	);
 
 	useEffect(() => {
 		if (itemData) {
@@ -75,7 +89,7 @@ function EditInputAllocation({
 		setChangedValue(value);
 	};
 
-	const Submit = () => {
+	const onSubmit = () => {
 		setAllocationValue(
 			itemData,
 			+changedValue,
@@ -96,7 +110,7 @@ function EditInputAllocation({
 						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
 					>
 						<Tooltip
-							content={content()}
+							content={<Content isError={isError} errorMessege={errorMessege} t={t} />}
 						>
 							<Button
 								className={styles.edit_icon}
@@ -125,7 +139,7 @@ function EditInputAllocation({
 							<Button
 								className={styles.edit_icon}
 								onClick={() => {
-									Submit();
+									onSubmit();
 									setRestEdit(!restEdit);
 								}}
 							>

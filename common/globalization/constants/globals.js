@@ -413,6 +413,7 @@ const GLOBAL_CONSTANTS = {
 		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
 		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
 		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
+		no_incident_data    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
 	},
 
 	video_call_ring_tone_url:
