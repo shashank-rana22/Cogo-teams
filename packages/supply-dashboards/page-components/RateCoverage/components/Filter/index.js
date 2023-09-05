@@ -73,6 +73,7 @@ function Filter({
 						placeholder="Country / Port Pair"
 						{...originLocationOptions}
 						value={filter?.origin_port_id}
+						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, origin_port_id: value, page: 1 }));
 						}}
@@ -84,6 +85,7 @@ function Filter({
 						placeholder="Country / Port Pair"
 						{...destinationLocationOptions}
 						value={filter?.destination_port_id}
+						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, destination_port_id: value, page: 1 }));
 						}}
@@ -95,6 +97,7 @@ function Filter({
 						placeholder="Search here"
 						{...shippingLineOptions}
 						value={filter?.shipping_line_id}
+						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, shipping_line_id: value, page: 1 }));
 						}}
@@ -104,10 +107,11 @@ function Filter({
 					<p>Commodity Type</p>
 					<Select
 						placeholder="Search here"
-						value={filter?.commodity_type}
+						value={filter?.commodity}
 						options={commodityOptions}
+						isClearable
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, commodity_type: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, commodity: value, page: 1 }));
 						}}
 					/>
 				</div>
