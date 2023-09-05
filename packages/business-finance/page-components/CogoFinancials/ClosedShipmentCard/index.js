@@ -130,7 +130,7 @@ function ClosedShipmentCard({
 							endAngle="360"
 							innerRadius={0.6}
 							tooltip={({ bar = {} }) => {
-								const { category, color, formattedValue } = bar;
+								const { category, color, formattedValue, data:barData } = bar;
 								if (!category?.includes('Estimated')) {
 									return (
 										<div className={styles.tooltip}>
@@ -139,7 +139,7 @@ function ClosedShipmentCard({
 												{toTitleCase(category || '')}
 											</div>
 											<div>
-												{formattedValue}
+												{barData?.labelValue || formattedValue}
 												%
 											</div>
 										</div>
@@ -149,8 +149,17 @@ function ClosedShipmentCard({
 							}}
 							enableRadialGrid={false}
 							enableCircularGrid={false}
-							layers={['tracks', 'bars']}
+							layers={['tracks', 'bars', 'labels']}
 							colors={['#ee3425', '#f8aea8', '#6fa5ab', '#cfeaed']}
+							enableLabels
+							label={({ data:labelData }) => {
+								const showValue = labelData?.labelValue;
+								if (showValue) {
+									return `${Math.trunc(showValue)} %`;
+								}
+								return null;
+							}}
+							labelsTextColor="#fff"
 						/>
 
 					</div>

@@ -3,6 +3,7 @@ import { startCase } from '@cogoport/utils';
 import { LABEL_MAPPING } from '../constants';
 
 const HUNDRED = 100;
+const NO_VALUE = 0;
 
 export const getData = ({ taxType, type, cardData, totalCost, totalRevenue }) => {
 	const operationalOrActualCostPercent = (Number(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`])
@@ -11,17 +12,21 @@ export const getData = ({ taxType, type, cardData, totalCost, totalRevenue }) =>
 	const operationalOrActualRevenuePercent = (cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`] / totalRevenue)
 	* HUNDRED;
 
+	const isCostOverflowing = operationalOrActualCostPercent > HUNDRED;
+	const isRevenueOverflowing = operationalOrActualRevenuePercent > HUNDRED;
+
 	return [
 		{
 			id   : 'Cost',
 			data : [
 				{
-					x : `${startCase(LABEL_MAPPING[type])} Cost`,
-					y : operationalOrActualCostPercent,
+					x          : `${startCase(LABEL_MAPPING[type])} Cost`,
+					y          : !isCostOverflowing ? operationalOrActualCostPercent : HUNDRED,
+					labelValue : isCostOverflowing ? operationalOrActualCostPercent : null,
 				},
 				{
 					x : 'Estimated Cost',
-					y : HUNDRED - Number(operationalOrActualCostPercent),
+					y : isCostOverflowing ? NO_VALUE : HUNDRED - Number(operationalOrActualCostPercent),
 				},
 			],
 		},
@@ -29,12 +34,13 @@ export const getData = ({ taxType, type, cardData, totalCost, totalRevenue }) =>
 			id   : 'Revenue',
 			data : [
 				{
-					x : `${startCase(LABEL_MAPPING[type])} Revenue`,
-					y : (cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`] / totalRevenue) * HUNDRED,
+					x          : `${startCase(LABEL_MAPPING[type])} Revenue`,
+					y          : !isRevenueOverflowing ? operationalOrActualRevenuePercent : HUNDRED,
+					labelValue : isRevenueOverflowing ? operationalOrActualRevenuePercent : null,
 				},
 				{
 					x : 'Estimated Revenue',
-					y : HUNDRED - operationalOrActualRevenuePercent,
+					y : isRevenueOverflowing ? NO_VALUE : HUNDRED - operationalOrActualRevenuePercent,
 				},
 			],
 		},
