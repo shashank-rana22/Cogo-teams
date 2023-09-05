@@ -48,7 +48,7 @@ function StepTwo({
 						<Checkbox
 							style={{ paddingLeft: '0px' }}
 							onChange={(e) => {
-								toggleCheckbox(e.target.value);
+								toggleCheckbox(e.target.checked);
 							}}
 						/>
 					)
@@ -96,13 +96,12 @@ function StepTwo({
 							disabled
 							value={item?.variable_details?.[ZERO]?.updated_value}
 						/>
-
 						<Button
 							size="sm"
 							themeType="secondary"
 							className={styles.update_button}
 							style={{ height: '28px' }}
-							disabled={item?.state === 'approved'}
+							disabled={!item?.state || item?.state === 'approved'}
 							onClick={() => updateOrganizationContract('approved')}
 						>
 							{t('supplier_page_contract_sla_step2_confirm_button_label')}
