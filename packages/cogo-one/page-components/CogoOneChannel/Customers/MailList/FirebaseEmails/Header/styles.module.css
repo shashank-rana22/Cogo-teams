@@ -111,7 +111,7 @@
 	:global {
 		.tippy-content {
 			width: 260px;
-			height: 200px;
+			height: 450px;
 			padding: 0;
 
 			>div {

@@ -29,12 +29,7 @@ import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
-	const {
-		query: {
-			assigned_chat = '',
-			channel_type = '',
-		},
-	} = useRouter();
+	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
 
 	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
@@ -114,10 +109,7 @@ function CogoOne() {
 	};
 
 	const commonProps = {
-		setSendBulkTemplates,
-		setActiveTab,
-		selectedAutoAssign,
-		setAutoAssignChats,
+		setSendBulkTemplates, preferenceLoading, setActiveTab, selectedAutoAssign, setAutoAssignChats,
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
@@ -129,9 +121,10 @@ function CogoOne() {
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 
-	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.tab)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab) && activeTab?.expandSideBar));
-	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab) && !activeTab?.expandSideBar;
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
+	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								&& !activeTab?.expandSideBar;
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -229,8 +222,8 @@ function CogoOne() {
 							</div>
 
 							{(
-								ENABLE_SIDE_BAR.includes(activeTab?.tab)
-								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab)
+								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
 							) ? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
