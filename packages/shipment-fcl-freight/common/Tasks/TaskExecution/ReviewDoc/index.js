@@ -1,4 +1,4 @@
-import { Button, Toast, Textarea } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
@@ -8,6 +8,7 @@ import { useState } from 'react';
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
+import AmendDoc from './AmendDoc';
 import styles from './styles.module.css';
 
 const GET_FINAL_URL = 1;
@@ -17,8 +18,8 @@ function ReviewDoc({
 	refetch = () => {},
 	onClose = () => {},
 }) {
-	const [approvalState, setApprovalState] = useState(null);
-	const [remarkValue, setRemarkValue] = useState('');
+	const [isAmend, setIsAmend] = useState(false);
+
 	const newRefetch = () => {
 		onClose();
 		refetch();
@@ -58,30 +59,6 @@ function ReviewDoc({
 		await updateDocument(params);
 	};
 
-	const handleAmmend = () => {
-		setApprovalState({ ammend: true });
-	};
-
-	const handleSubmit = async () => {
-		if (approvalState?.ammend) {
-			if (!remarkValue) {
-				Toast.error('Please provide amendment reason');
-			}
-			params = {
-				...params,
-				state   : 'document_amendment_requested',
-				remarks : [remarkValue],
-			};
-			await updateDocument(params);
-		} else {
-			params = {
-				...params,
-				state: 'document_accepted',
-			};
-			await updateDocument(params);
-		}
-	};
-
 	if (loading) {
 		return (
 			<div>
@@ -90,7 +67,7 @@ function ReviewDoc({
 		);
 	}
 
-	const getfileUrl = (url) => {
+	const getFileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
 			const match = url.match(GLOBAL_CONSTANTS.regex_patterns.file_upload_url);
 			return match[GET_FINAL_URL];
@@ -133,58 +110,37 @@ function ReviewDoc({
 				</div>
 			</div>
 
-			{!approvalState ? (
-				<div className={styles.file_view}>
-					<object
-						title="review_file"
-						data={getfileUrl(docData?.document_url)}
-						width="100%"
-						type="application/pdf"
-					/>
-				</div>
-			) : null}
-
-			{approvalState?.ammend ? (
-				<div className={styles.remark}>
-					<div className={styles.sub_heading}>Please specify the reason for this </div>
-					<Textarea
-						className="remark_text"
-						value={remarkValue}
-						onChange={(e) => setRemarkValue(e)}
-						placeholder="Type Remarks"
-					/>
-				</div>
-			) : null}
-
-			{!approvalState ? (
-				<div className={styles.action_buttons}>
-					<Button
-						onClick={handleAmmend}
-						themeType="secondary"
-						disabled={loading}
-					>
-						Amend
-					</Button>
-
-					<Button onClick={handleApprove} disabled={loading}>
-						Approve
-					</Button>
-				</div>
+			{isAmend ? (
+				<AmendDoc
+					params={params}
+					onClose={onClose}
+					newRefetch={newRefetch}
+				/>
 			) : (
-				<div className={styles.action_buttons}>
-					<Button
-						onClick={() => {
-							onClose();
-						}}
-						themeType="secondary"
-						disabled={loading}
-					>
-						Cancel
-					</Button>
-					<Button onClick={handleSubmit} disabled={loading}>
-						Submit
-					</Button>
-				</div>
+				<>
+					<div className={styles.file_view}>
+						<object
+							title="review_file"
+							data={getFileUrl(docData?.document_url)}
+							width="100%"
+							type="application/pdf"
+						/>
+					</div>
+
+					<div className={styles.action_buttons}>
+						<Button
+							onClick={() => setIsAmend(true)}
+							themeType="secondary"
+							disabled={loading}
+						>
+							Amend
+						</Button>
+
+						<Button onClick={handleApprove} disabled={loading}>
+							Approve
+						</Button>
+					</div>
+				</>
 			)}
 		</div>
 	);
