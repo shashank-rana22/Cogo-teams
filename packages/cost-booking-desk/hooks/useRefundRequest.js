@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 
-const useListPaymentAccounts = ({ setUpdateRefundModal = () => {} }) => {
+const useRefundRequest = ({ setUpdateRefundModal = () => {} }) => {
 	const [{ loading }, trigger] = useRequestBf({
 		url     : '/payments/accounts',
 		method  : 'POST',
@@ -11,7 +11,7 @@ const useListPaymentAccounts = ({ setUpdateRefundModal = () => {} }) => {
 
 	const apiTrigger = async ({ payload = {} }) => {
 		try {
-			await trigger({ data: { ...payload } });
+			await trigger({ data: payload });
 			Toast.success('Success');
 			setUpdateRefundModal({});
 		} catch (err) {
@@ -25,4 +25,4 @@ const useListPaymentAccounts = ({ setUpdateRefundModal = () => {} }) => {
 	};
 };
 
-export default useListPaymentAccounts;
+export default useRefundRequest;

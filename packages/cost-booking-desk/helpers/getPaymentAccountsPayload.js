@@ -8,6 +8,7 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentSellerAddress = {},
 		advanceDocumentSellerBankDetail = {},
 		advanceDocumentId = '',
+		shipmentType,
 	} = updateRefundModal || {};
 
 	const { accountNumber = '', bankName = '' } = advanceDocumentSellerBankDetail || {};
@@ -41,6 +42,7 @@ const getPaymentAccountsPayload = ({
 		tradePartyMappingId,
 		advanceDocumentId,
 		paymentDocUrl     : upload?.finalUrl || upload,
+		serviceType       : shipmentType.toUpperCase(),
 	};
 };
 
