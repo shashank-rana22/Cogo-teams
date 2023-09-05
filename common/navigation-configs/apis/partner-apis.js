@@ -12522,6 +12522,7 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+
 	],
 	cogo_fx: [
 		{
@@ -12726,6 +12727,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'bulk_update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	ground_ops: [
 		{
@@ -12884,6 +12890,11 @@ const partner = {
 		},
 		{
 			api          : 'list_user_call_details',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_voice_call_record',
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
@@ -13321,6 +13332,11 @@ const partner = {
 			api          : 'update_shipment_primary_poc',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'onboard_lead_organization',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 	],
 	analytics_dashboard: [
