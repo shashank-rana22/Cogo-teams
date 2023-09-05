@@ -2,7 +2,7 @@ import { Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
@@ -21,8 +21,9 @@ function ReviewDoc({
 }) {
 	const [approvalState, setApprovalState] = useState(null);
 	const [remarkValue, setRemarkValue] = useState('');
-	const [showModal, setShowModal] = useState(false);
+	const [showApprovalModal, setShowApprovalModal] = useState(false);
 	const [showAmendModal, setShowAmendModal] = useState(false);
+
 	const newRefetch = () => {
 		onClose();
 		refetch();
@@ -67,7 +68,7 @@ function ReviewDoc({
 	};
 
 	const handleSubmit = () => {
-		if (!remarkValue) {
+		if (isEmpty(remarkValue)) {
 			Toast.error('Please provide amendment reason');
 		} else {
 			setShowAmendModal(true);
@@ -75,12 +76,17 @@ function ReviewDoc({
 	};
 
 	const handleFinalSubmit = async () => {
-		params = {
-			...params,
-			state   : 'document_amendment_requested',
-			remarks : [remarkValue],
-		};
-		await updateDocument(params);
+		if (!isEmpty(remarkValue)) {
+			const amendParams = {
+				...params,
+				state   : 'document_amendment_requested',
+				remarks : [remarkValue],
+			};
+
+			await updateDocument(amendParams);
+		} else {
+			Toast.error('Please provide amendment reason');
+		}
 	};
 
 	if (loading) {
@@ -91,7 +97,7 @@ function ReviewDoc({
 		);
 	}
 
-	const getfileUrl = (url) => {
+	const getFileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
 			const match = url.match(GLOBAL_CONSTANTS.regex_patterns.file_upload_url);
 			return match[GET_FINAL_URL];
@@ -101,6 +107,7 @@ function ReviewDoc({
 	};
 
 	return (
+
 		<div className={styles.container}>
 			<div className={styles.display_details}>
 				<div className={styles.sub_half_detail}>
@@ -138,7 +145,7 @@ function ReviewDoc({
 				<div className={styles.file_view}>
 					<object
 						title="review_file"
-						data={getfileUrl(docData?.document_url)}
+						data={getFileUrl(docData?.document_url)}
 						width="100%"
 						type="application/pdf"
 					/>
@@ -167,7 +174,7 @@ function ReviewDoc({
 						Amend
 					</Button>
 
-					<Button onClick={() => setShowModal(true)} disabled={loading}>
+					<Button onClick={() => setShowApprovalModal(true)} disabled={loading}>
 						Approve
 					</Button>
 				</div>
@@ -188,23 +195,27 @@ function ReviewDoc({
 				</div>
 			)}
 
-			<ApprovalModal
-				showModal={showModal}
-				setShowModal={setShowModal}
-				task={task}
-				handleFinalApprove={handleFinalApprove}
-			/>
+			{showApprovalModal ? (
+				<ApprovalModal
+					showModal={showApprovalModal}
+					setShowModal={setShowApprovalModal}
+					task={task}
+					handleFinalApprove={handleFinalApprove}
+				/>
+			) : null}
 
-			<AmendModal
-				showModal={showAmendModal}
-				setShowModal={setShowAmendModal}
-				task={task}
-				handleFinalSubmit={handleFinalSubmit}
-				remarkValue={remarkValue}
-				document_type={docData.document_type}
-			/>
-
+			{showAmendModal ? (
+				<AmendModal
+					showModal={showAmendModal}
+					setShowModal={setShowAmendModal}
+					handleFinalSubmit={handleFinalSubmit}
+					remarkValue={remarkValue}
+					document_type={docData.document_type}
+				/>
+			) : null}
 		</div>
+
 	);
 }
+
 export default ReviewDoc;
