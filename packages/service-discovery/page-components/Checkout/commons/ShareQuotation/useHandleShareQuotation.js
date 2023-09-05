@@ -41,6 +41,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			handleCopy({ detail, shipment_id, checkout_id });
 			return;
 		}
+
 		updateCheckout({
 			values: {
 				id                      : checkout_id,
@@ -83,7 +84,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			label           : 'Copy Link',
 			themeType       : 'link',
 			style           : {},
-			onClickFunction : () => handleClick(),
+			onClickFunction : handleClick,
 			loading         : false,
 			disabled        : noRatesPresent,
 		},
