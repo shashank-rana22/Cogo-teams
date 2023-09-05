@@ -8,8 +8,6 @@ import ResponsiveChart from '../CardComponent/ResponsiveChart';
 import GetData from './GetData';
 import styles from './styles.module.css';
 
-const SECOND_ARRAY_SIZE = 4;
-
 function SalesComponent({
 	subActiveTab,
 	dailyStatsData,
@@ -47,7 +45,7 @@ function SalesComponent({
 		return (
 			<div className={styles.place}>
 				{
-					[...Array(SECOND_ARRAY_SIZE).keys()].map((val) => (
+					[1, 2, 3, 4].map((val) => (
 						<Placeholder key={val} className={styles.placeholder_container} />
 					))
 				}
