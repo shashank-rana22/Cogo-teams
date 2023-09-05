@@ -17,7 +17,7 @@ function useUpdateOrganizationContract({ item, id, updatedValue, getOrganization
 						state === 'approved'
 							? item?.variable_details
 							: item?.variable_details?.map(
-								(variable) => ({ ...variable, updated_value: updatedValue }),
+								(variable) => ({ ...variable, updated_value: updatedValue || undefined }),
 							)),
 					state,
 				},

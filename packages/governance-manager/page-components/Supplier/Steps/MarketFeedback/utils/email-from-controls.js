@@ -20,11 +20,11 @@ export	const controls = ({ t }) => [
 						value : 'cogoport_employee',
 					},
 					{
-						label : t('supplier_page_market_feedback_email_controls_role_option_others'),
+						label : t('supplier_page_market_feedback_email_controls_role_option_customer'),
 						value : 'customer',
 					},
 					{
-						label : t('supplier_page_market_feedback_email_controls_role_option_industry_expert'),
+						label : t('supplier_page_market_feedback_email_controls_role_option_others'),
 						value : 'others',
 					},
 				],

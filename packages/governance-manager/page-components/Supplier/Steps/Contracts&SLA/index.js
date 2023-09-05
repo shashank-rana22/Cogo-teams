@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 
 function ContractSla({ organization_id, service_type, id:organization_service_id, role, t }) {
 	const { push } = useRouter();
-	const [step, setStep] = useState(
+	const [step] = useState(
 		{
 			governance_manager : GLOBAL_CONSTANTS.one,
 			governance_lead    : GLOBAL_CONSTANTS.two,
@@ -47,6 +47,12 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 		},
 	);
 
+	const goToMainPage = () => {
+		push(
+			'/governance-manager/',
+			'/governance-manager/',
+		);
+	};
 	const submitApproval = async (status) => {
 		if (status === 'active') {
 			await finalApproval('active');
@@ -58,11 +64,9 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 			await updateOrganizationService();
 			Toast.success('Updated');
 		}
-		push(
-			'/governance-manager/',
-			'/governance-manager/',
-		);
+		goToMainPage();
 	};
+	const checkForApproval = () => data?.filter((item) => item?.state === 'approved') === data?.length;
 
 	return (
 		<div className={styles.parent}>
@@ -131,7 +135,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 					<Button
 						themeType="secondary"
 						style={{ fontWeight: 600 }}
-						onClick={() => { setStep(1); }}
+						onClick={() => { goToMainPage(); }}
 					>
 						{t('supplier_page_contract_sla_save_and_do_it_later_button_label')}
 					</Button>
@@ -142,6 +146,7 @@ function ContractSla({ organization_id, service_type, id:organization_service_id
 						<Button
 							style={{ fontWeight: 600 }}
 							onClick={() => { submitApproval('active'); }}
+							disabled={!checkForApproval()}
 						>
 							{t('supplier_page_contract_sla_approve_button_label')}
 

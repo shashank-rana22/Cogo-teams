@@ -52,7 +52,7 @@ function SupplierApprovalModal({
 			market_feedback_report       : updateOrganizationMarketFeedbackVerificationStatus,
 			evaluation_paramenter_report : createOrganizationEvaluation,
 		};
-		func({ verification_status: status });
+		func?.[open]({ verification_status: status });
 	};
 
 	return (
