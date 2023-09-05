@@ -37,43 +37,50 @@ function CustomButton({
 		return router.push(relativeUrl);
 	};
 
-	const onCreateNewSearch = async () => {
+	const onCreateNewSearch = async ({ defaultSearch = false }) => {
 		const {
-			origin_location,
-			destination_location,
-			spot_search = {},
-			primary_service,
+			origin_location = {},
+			destination_location = {},
+			primary_service = '',
 			destination_port = {},
 			origin_port = {},
 			service_type = '',
-			service_details: serviceDetails,
+			service_details = {},
 		} = item;
-
-		const { service_details } = spot_search;
 
 		const { user_id = '', organization_branch_id = '', organization_id = '' } = organization;
 
 		const formValues = getPrefillForm(
 			{
 				...item,
-				service_details : serviceDetails || service_details,
-				primary_service : primary_service || service_type,
-				services        : undefined,
+				service_details,
+				service_type,
+				services: undefined,
 			},
-			'primary_service',
+			'service_type',
 		);
 
 		const values = {
 			organization_branch_id,
 			organization_id,
-			service_type : primary_service || service_type,
+			service_type,
 			user_id,
-			origin       : origin_location || origin_port,
-			destination  : destination_location || destination_port,
+			origin      : origin_port,
+			destination : destination_port,
 			formValues,
 		};
 
-		const spot_search_id = await createSearch({ action: 'edit', values });
+		const spot_search_id = await createSearch({
+			action : defaultSearch ? 'default' : 'edit',
+			values : defaultSearch
+				? {
+					...organization,
+					service_type : primary_service,
+					destination  : destination_location,
+					origin       : origin_location,
+				}
+				: values,
+		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
 			router.push(
@@ -84,9 +91,9 @@ function CustomButton({
 	};
 
 	const funcMapping = {
-		most_searched   : onCreateNewSearch,
-		most_booked     : onCreateNewSearch,
-		spot_search     : onCreateNewSearch,
+		most_searched   : () => onCreateNewSearch({ defaultSearch: true }),
+		most_booked     : () => onCreateNewSearch({ defaultSearch: true }),
+		spot_search     : () => onCreateNewSearch({ defaultSearch: false }),
 		quotations      : () => onClick(item?.shipment_id ? shipmentsUrl : checkoutUrl),
 		saved_for_later : () => onClick(item?.shipment_id ? shipmentsUrl : checkoutUrl),
 	};
