@@ -5,8 +5,6 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-import styles from './styles.module.css';
-
 const ELEMENT_NOT_FOUND = -1;
 
 const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, apiData = {}, type = '' }) => {
@@ -105,24 +103,8 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, ap
 			return prevData;
 		});
 	};
-	function GetTableBodyCheckbox(itemData = {}) {
-		const { organizationId = '' } = itemData || {};
-		const { list = [] } = apiData || {};
-		const isChecked = list.find(
-			(item) => item?.organizationId === organizationId,
-		)?.checked;
 
-		return (
-			<div className={styles.checkbox_style}>
-				<Checkbox
-					checked={isChecked}
-					onChange={() => onChangeTableBodyCheckbox(itemData)}
-				/>
-			</div>
-		);
-	}
 	return ({
-		GetTableBodyCheckbox,
 		onChangeTableBodyCheckbox,
 		GetTableHeaderCheckbox,
 		onChangeTableHeaderCheckbox,

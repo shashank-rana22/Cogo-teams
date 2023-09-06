@@ -16,16 +16,13 @@ import FilterModal from '../../MoreFilters';
 import BankDetails from './EditableBankDetails/BankDetails';
 import EditableTdsInput from './EditableInput';
 import EditablePayableAmount from './EditableInput/EditablePayableAmount';
+import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
-
 const MIN_AMOUNT = 0;
-
 const ELEMENT_NOT_FOUND = -1;
-
 const HUNDERED_PERCENT = 100;
-
 const TEN_PERCENT = 10;
 const updateApiData = (prevApiData, itemData, key, value, checked, index, errorStatus) => {
 	const newValue = { ...prevApiData };
@@ -88,9 +85,15 @@ const calculateErrorStatus = (
 	};
 };
 
-const getFunctions = ({ GetTableBodyCheckbox = () => {}, setEditedValue = () => {} }) => ({
-	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
-	renderToolTip  : (itemData, field) => (
+const getFunctions = ({ onChangeTableBodyCheckbox = () => {}, setEditedValue = () => {}, apiData = {} }) => ({
+	renderCheckbox: (itemData) => (
+		<GetTableBodyCheckbox
+			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
+			itemData={itemData}
+			apiData={apiData}
+		/>
+	),
+	renderToolTip: (itemData, field) => (
 		<RenderToolTip itemData={itemData} field={field} />
 	),
 	renderInvoiceDates: (itemData, field) => (
@@ -135,7 +138,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 		orderBy = {},
 		setOrderBy = () => {},
 		getPayrunInvoices = () => {},
-		GetTableBodyCheckbox = () => {},
+		onChangeTableBodyCheckbox = () => {},
 		GetTableHeaderCheckbox = () => {},
 		config = [],
 	} = useGetPayrunInvoices({ apiData, setApiData });
@@ -176,7 +179,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 		getPayrunInvoices,
 	}));
 
-	const LIST_FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue });
+	const LIST_FUNCTIONS = getFunctions({ onChangeTableBodyCheckbox, setEditedValue, apiData });
 
 	return (
 		<div>

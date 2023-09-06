@@ -16,8 +16,6 @@ import onClearingFilters from '../utils/onClearingFilters';
 import onGoingBack from '../utils/onGoingBack';
 import settingApiData from '../utils/settingApiData';
 
-import styles from './styles.module.css';
-
 const API_ARRAY_VARIABLE_ONE = 1;
 const ELEMENT_NOT_FOUND = -1;
 
@@ -215,19 +213,6 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		});
 	};
 
-	function GetTableBodyCheckbox(itemData = {}) {
-		const { id = '' } = itemData || {};
-		const { list = [] } = apiData || {};
-		const isChecked = list.find((item) => item?.id === id)?.checked;
-		return (
-			<div className={styles.checkbox_style}>
-				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
-					<Checkbox checked={isChecked} onChange={() => onChangeTableBodyCheckbox(itemData)} />
-				)}
-			</div>
-		);
-	}
-
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
 		settingApiData({ itemData, value, key, checked, setApiData });
 	};
@@ -249,7 +234,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		submitSelectedInvoices,
 		goBack,
 		GetTableHeaderCheckbox,
-		GetTableBodyCheckbox,
+		onChangeTableBodyCheckbox,
 		setEditedValue,
 		delete_payrun_invoice,
 		deleteInvoices,

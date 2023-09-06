@@ -7,6 +7,7 @@ import useDeleteExcludePayrun from '../../../hooks/useDeleteExcludePayrun';
 import SUPPLIER_CONFIG from '../../Configurations/supplierConfig.json';
 import CN_CONFIG from '../../Configurations/viewCnConfig.json';
 
+import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 import styles from './styles.module.css';
 
 function RenderAccordianData(item = {}) {
@@ -19,7 +20,7 @@ function RenderAccordianData(item = {}) {
 	);
 }
 
-const getFunctions = ({ setShowId = () => { }, showId = '', GetTableBodyCheckbox = () => { } }) => ({
+const getFunctions = ({ setShowId = () => { }, showId = '', onChangeTableBodyCheckbox = () => {}, apiData = {} }) => ({
 	renderCn: (itemData) => (
 		<Button
 			onClick={() => setShowId(itemData?.organizationId === showId ? null : itemData?.organizationId)}
@@ -28,7 +29,13 @@ const getFunctions = ({ setShowId = () => { }, showId = '', GetTableBodyCheckbox
 			{itemData?.organizationId === showId ? 'View Less' : 'View CN'}
 		</Button>
 	),
-	renderCheckbox: (itemData) => GetTableBodyCheckbox(itemData),
+	renderCheckbox: (itemData) => (
+		<GetTableBodyCheckbox
+			itemData={itemData}
+			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
+			apiData={apiData}
+		/>
+	),
 });
 
 function ViewSupplierModal({
@@ -45,10 +52,10 @@ function ViewSupplierModal({
 		onExclude = () => {},
 		loading = false,
 		GetTableHeaderCheckbox = () => {},
-		GetTableBodyCheckbox = () => {},
+		onChangeTableBodyCheckbox = () => {},
 	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers, type });
 
-	const LIST_FUNCTIONS = getFunctions({ setShowId, showId, GetTableBodyCheckbox });
+	const LIST_FUNCTIONS = getFunctions({ setShowId, showId, onChangeTableBodyCheckbox, apiData: suppliers });
 
 	const { list: dataList = [] } = suppliers || {};
 

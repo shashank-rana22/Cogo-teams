@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const MIN_AMOUNT = 0;
 
-const getFormattedAmount = ({ amount, currency }) => (
+const getFormattedAmount = ({ amount = '', currency = '' }) => (
 	formatAmount({
 		amount,
 		currency,
@@ -21,12 +21,8 @@ const getFormattedAmount = ({ amount, currency }) => (
 	})
 );
 
-function EditablePayableAmount({
-	itemData = {},
-	field = {},
-	setEditedValue = () => {},
-}) {
-	const { key, fallBackKey } = field;
+function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () => {} }) {
+	const { key = '', fallBackKey = '' } = field;
 	const [edit, setEdit] = useState(false);
 	const [value, setValue] = useState(getByKey(itemData, key));
 
@@ -42,7 +38,6 @@ function EditablePayableAmount({
 
 	const maxValueCrossed = +value > +payableAmount;
 	const lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
-
 	const isError = lessValueCrossed || maxValueCrossed;
 
 	const getErrorMessage = () => {

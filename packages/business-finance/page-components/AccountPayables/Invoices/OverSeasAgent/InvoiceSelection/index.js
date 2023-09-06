@@ -14,14 +14,24 @@ import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency'
 
 import FilterContainers from './FilterContainers';
 import Footer from './Footer';
+import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 import styles from './styles.module.css';
 
 const MORE_THAN_ZERO = 0;
 const FIRST_PAGE = 1;
 
-const getFunctions = ({ GetTableBodyCheckbox = () => {}, setEditedValue = () => {}, refetch = () => {} }) => ({
-	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
-	renderToolTip  : (itemData, field) => (
+const getFunctions = ({
+	onChangeTableBodyCheckbox = () => {},
+	setEditedValue = () => {}, refetch = () => {}, invoiceData = {},
+}) => ({
+	renderCheckbox: (itemData) => (
+		<GetTableBodyCheckbox
+			itemData={itemData}
+			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
+			apiData={invoiceData}
+		/>
+	),
+	renderToolTip: (itemData, field) => (
 		<RenderToolTip
 			itemData={itemData}
 			field={field}
@@ -89,7 +99,7 @@ function InvoiceSelection({
 		submitSelectedInvoices,
 		createloading,
 		GetTableHeaderCheckbox,
-		GetTableBodyCheckbox,
+		onChangeTableBodyCheckbox,
 		setEditedValue,
 		loading,
 		goBack,
@@ -126,7 +136,7 @@ function InvoiceSelection({
 		}
 	}, [invoiceData, setShowSaveAsDraft]);
 
-	const LIST_FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue, refetch });
+	const LIST_FUNCTIONS = getFunctions({ onChangeTableBodyCheckbox, setEditedValue, refetch, invoiceData });
 
 	return (
 		<div className={styles.container}>

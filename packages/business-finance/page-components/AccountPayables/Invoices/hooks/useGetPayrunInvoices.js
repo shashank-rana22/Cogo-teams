@@ -11,8 +11,6 @@ import CREATE_PAYRUN_CONFIG_VN from '../CreatePayrun/Configurations/createPayrun
 import changeFormat from '../utils/changeFormat';
 import getKeyByValue from '../utils/getKeyByValue';
 
-import styles from './styles.module.css';
-
 const ELEMENT_NOT_FOUND = -1;
 const MIN_AMOUNT = 0;
 const HUNDERED_PERCENT = 100;
@@ -185,26 +183,13 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 			return prevData;
 		});
 	};
-	function GetTableBodyCheckbox(itemData = {}) {
-		const { id = '' } = itemData || {};
-		const { list = [] } = apiData || {};
-		const isChecked = list.find((item) => item?.id === id)?.checked;
-
-		return (
-			<div className={styles.checkbox_style}>
-				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
-					<Checkbox checked={isChecked} onChange={() => onChangeTableBodyCheckbox(itemData)} />
-				)}
-			</div>
-		);
-	}
 
 	return {
 		billsLoading : loading,
 		filters,
 		setFilters,
 		entity,
-		GetTableBodyCheckbox,
+		onChangeTableBodyCheckbox,
 		apiData,
 		GetTableHeaderCheckbox,
 		currency,
