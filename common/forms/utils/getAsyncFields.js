@@ -914,6 +914,16 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncListCompanyLocations() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_company_location',
+		initialCall : true,
+		params      : {},
+	};
+}
+
 function asyncListOverSeasParties() {
 	return {
 		valueKey     : 'organizationId',
@@ -997,6 +1007,7 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,

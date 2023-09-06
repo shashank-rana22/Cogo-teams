@@ -14,4 +14,5 @@ export interface ColumnInterface {
 	setFilters: React.Dispatch<React.SetStateAction<FilterProps>>
 	setIsAscendingActive:React.Dispatch<React.SetStateAction<boolean>>
 	getIncidentData?:()=>{}
+	t?:Function;
 }

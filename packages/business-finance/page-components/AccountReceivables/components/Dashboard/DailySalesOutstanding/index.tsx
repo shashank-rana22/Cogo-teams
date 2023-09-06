@@ -2,6 +2,7 @@ import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import BarChart from '../../../commons/BarChart';
@@ -32,6 +33,8 @@ function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }: DailySalesProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const [params, onChangeParams] = useState({
 		quarterView : 'normalView',
 		graphView   : 'normalView',
@@ -90,18 +93,13 @@ function DailySalesOutstanding({
 							<div
 								className={styles.styled_daily_text}
 							>
-								Days Sales Outstanding
+								{t('days_sales_outstanding')}
 							</div>
 
 							<Tooltip
 								content={(
-									<div>
-										Calculation(Monthly):
-										(open invoices - onAccount
-										{' '}
-										<br />
-										Payments)/Total Sales X No. of Days
-
+									<div className={styles.tooltip}>
+										{t('days_sales_outstanding_tooltip')}
 									</div>
 								)}
 								placement="top"
@@ -113,7 +111,7 @@ function DailySalesOutstanding({
 					</div>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<div className={styles.styled_text}>
-							Quarter View
+							{t('quarter_view')}
 						</div>
 						<div style={{ marginRight: '16px' }}>
 							<Toggle
@@ -128,7 +126,7 @@ function DailySalesOutstanding({
 							/>
 						</div>
 						<div className={styles.styled_text}>
-							Graph View
+							{t('graph_view')}
 						</div>
 						<div>
 							<Toggle
