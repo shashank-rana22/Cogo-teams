@@ -64,7 +64,7 @@ function Status({
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !shipment_data?.is_job_closed;
 
 	return (
 		<div className={styles.invoice_container}>
