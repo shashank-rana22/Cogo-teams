@@ -2,12 +2,14 @@ import { Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
+import AmendModal from './AmendModal';
+import ApprovalModal from './ApprovalModal';
 import styles from './styles.module.css';
 
 const GET_FINAL_URL = 1;
@@ -17,8 +19,10 @@ function ReviewDoc({
 	refetch = () => {},
 	onClose = () => {},
 }) {
-	const [approvalState, setApprovalState] = useState(null);
+	const [isAmend, setIsAmend] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
+	const [showModal, setShowModal] = useState({ display: false, type: '' });
+
 	const newRefetch = () => {
 		onClose();
 		refetch();
@@ -45,11 +49,11 @@ function ReviewDoc({
 			performed_by_org_id : task.organization_id,
 		};
 	}
-	const { updateDocument } = useUpdateShipmentDocuments(
+	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
 	);
 
-	const handleApprove = async () => {
+	const handleFinalApprove = async () => {
 		params = {
 			...params,
 			state: 'document_accepted',
@@ -58,39 +62,35 @@ function ReviewDoc({
 		await updateDocument(params);
 	};
 
-	const handleAmmend = () => {
-		setApprovalState({ ammend: true });
+	const handleSubmit = () => {
+		if (isEmpty(remarkValue)) {
+			Toast.error('Please provide amendment reason');
+		} else {
+			setShowModal({ display: true, type: 'amend' });
+		}
 	};
 
-	const handleSubmit = async () => {
-		if (approvalState?.ammend) {
-			if (!remarkValue) {
-				Toast.error('Please provide amendment reason');
-			}
-			params = {
+	const handleFinalSubmit = async () => {
+		if (!isEmpty(remarkValue)) {
+			const amendParams = {
 				...params,
 				state   : 'document_amendment_requested',
 				remarks : [remarkValue],
 			};
-			await updateDocument(params);
+
+			await updateDocument(amendParams);
 		} else {
-			params = {
-				...params,
-				state: 'document_accepted',
-			};
-			await updateDocument(params);
+			Toast.error('Please provide amendment reason');
 		}
 	};
 
 	if (loading) {
 		return (
-			<div>
-				<ThreeDotLoader message="Loading Document" />
-			</div>
+			<ThreeDotLoader message="Loading Document" />
 		);
 	}
 
-	const getfileUrl = (url) => {
+	const getFileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
 			const match = url.match(GLOBAL_CONSTANTS.regex_patterns.file_upload_url);
 			return match[GET_FINAL_URL];
@@ -100,6 +100,7 @@ function ReviewDoc({
 	};
 
 	return (
+
 		<div className={styles.container}>
 			<div className={styles.display_details}>
 				<div className={styles.sub_half_detail}>
@@ -133,60 +134,79 @@ function ReviewDoc({
 				</div>
 			</div>
 
-			{!approvalState ? (
-				<div className={styles.file_view}>
-					<object
-						title="review_file"
-						data={getfileUrl(docData?.document_url)}
-						width="100%"
-						type="application/pdf"
-					/>
-				</div>
-			) : null}
-
-			{approvalState?.ammend ? (
-				<div className={styles.remark}>
-					<div className={styles.sub_heading}>Please specify the reason for this </div>
-					<Textarea
-						className="remark_text"
-						value={remarkValue}
-						onChange={(e) => setRemarkValue(e)}
-						placeholder="Type Remarks"
-					/>
-				</div>
-			) : null}
-
-			{!approvalState ? (
-				<div className={styles.action_buttons}>
-					<Button
-						onClick={handleAmmend}
-						themeType="secondary"
-						disabled={loading}
-					>
-						Amend
-					</Button>
-
-					<Button onClick={handleApprove} disabled={loading}>
-						Approve
-					</Button>
-				</div>
+			{isAmend ? (
+				<>
+					<div className={styles.remark}>
+						<div className={styles.sub_heading}>Please specify the reason for this </div>
+						<Textarea
+							className="remark_text"
+							value={remarkValue}
+							onChange={(e) => setRemarkValue(e)}
+							placeholder="Type Remarks"
+						/>
+					</div>
+					<div className={styles.action_buttons}>
+						<Button
+							onClick={onClose}
+							themeType="secondary"
+							disabled={loading}
+						>
+							Cancel
+						</Button>
+						<Button onClick={handleSubmit}>
+							Submit
+						</Button>
+					</div>
+				</>
 			) : (
-				<div className={styles.action_buttons}>
-					<Button
-						onClick={() => {
-							onClose();
-						}}
-						themeType="secondary"
-						disabled={loading}
-					>
-						Cancel
-					</Button>
-					<Button onClick={handleSubmit} disabled={loading}>
-						Submit
-					</Button>
-				</div>
+				<>
+					<div className={styles.file_view}>
+						<object
+							title="review_file"
+							data={getFileUrl(docData?.document_url)}
+							width="100%"
+							type="application/pdf"
+						/>
+					</div>
+
+					<div className={styles.action_buttons}>
+						<Button
+							onClick={() => setIsAmend(true)}
+							themeType="secondary"
+							disabled={loading}
+						>
+							Amend
+						</Button>
+
+						<Button onClick={() => setShowModal({ display: true, type: 'approve' })}>
+							Approve
+						</Button>
+					</div>
+				</>
+
 			)}
+
+			{(showModal.display && showModal.type === 'approve') ? (
+				<ApprovalModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					task={task}
+					handleFinalApprove={handleFinalApprove}
+					taskUpdateLoading={taskUpdateLoading}
+				/>
+			) : (
+				<AmendModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					handleFinalSubmit={handleFinalSubmit}
+					remarkValue={remarkValue}
+					document_type={docData?.document_type}
+					taskUpdateLoading={taskUpdateLoading}
+				/>
+			) }
 		</div>
+
 	);
 }
+
 export default ReviewDoc;
