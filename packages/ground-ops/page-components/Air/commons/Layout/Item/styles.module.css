@@ -80,3 +80,10 @@
 	color: var(--color-primary-error-red-2);
 	content: "*";
 }
+
+.label {
+	height: 16px;
+	margin-bottom: 6px;
+	font-size: 12px,;
+	font-weight: 400;
+}

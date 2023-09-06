@@ -1,6 +1,6 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import React from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { useMemo } from 'react';
 
 import { NestedObj } from '../../List/Interfaces';
 import getElementController from '../getController';
@@ -43,10 +43,15 @@ function Child({
 		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
+	const keysForPreference = useMemo(
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
+	);
+
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{TOTAL_FIELDS.map((fields) => (
-				<div key={uuid()} className={styles.row}>
+			{TOTAL_FIELDS.map((fields, i) => (
+				<div key={keysForPreference[i]} className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
@@ -63,11 +68,8 @@ function Child({
 						if (!Element) return null;
 						return (
 							<div key={controlItem.name} className={styles.element} style={{ width: `${flex}%` }}>
-								<h4
-									className={controlItem?.rules?.required ? styles.required_field : ''}
-									style={{
-										height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-									}}
+								<h4 className={cl`${styles.label} 
+								${controlItem?.rules?.required ? styles.required_field : ''}`}
 								>
 									{controlItem?.label}
 								</h4>

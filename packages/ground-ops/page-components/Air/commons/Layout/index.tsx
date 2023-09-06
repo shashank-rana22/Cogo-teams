@@ -1,5 +1,5 @@
-import React from 'react';
-import { v4 as uuid } from 'uuid';
+import { cl } from '@cogoport/components';
+import React, { useMemo } from 'react';
 
 import FieldArray from './ChildFormat';
 import Item from './Item';
@@ -33,12 +33,17 @@ function Layout({
 		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
+	const keysForPreference = useMemo(
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
+	);
+
 	return (
 		<div className={styles.layout}>
-			{TOTAL_FIELDS.map((field) => (
-				<div key={uuid()} className={styles.row}>
+			{TOTAL_FIELDS.map((field, index) => (
+				<div key={keysForPreference[index]} className={styles.row}>
 					{field.map((fieldsItem) => {
-						const { type, heading = '', label = '', span: fieldArraySpan } = fieldsItem;
+						const { type, heading = '', label = '', rules = {}, span: fieldArraySpan } = fieldsItem;
 						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
 						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
@@ -47,10 +52,7 @@ function Layout({
 									<div className={styles.heading}>
 										{heading}
 									</div>
-									<h4 style={{
-										height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-									}}
-									>
+									<h4 className={cl`${styles.label} ${rules?.required ? styles.required_field : ''}`}>
 										{label}
 									</h4>
 
