@@ -2,7 +2,7 @@ import toastApiError from '../../../commons/toastApiError.ts';
 
 const INCREEMENT_BY = 1;
 
-const getSelectedInvoice = (list = []) => {
+const getSelectedInvoice = ({ list = [] }) => {
 	const SELECTED_INVOICE = [];
 
 	for (let i = 0; i < list.length; i += INCREEMENT_BY) {

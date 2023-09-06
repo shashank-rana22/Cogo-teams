@@ -140,7 +140,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 		config = [],
 	} = useGetPayrunInvoices({ apiData, setApiData });
 
-	const setEditedValue = (itemData = {}, value = '', key = '', checked = false) => {
+	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
 		setApiData((prevApiData) => {
 			const index = prevApiData?.list?.findIndex((item) => item?.id === itemData?.id);
 			const {

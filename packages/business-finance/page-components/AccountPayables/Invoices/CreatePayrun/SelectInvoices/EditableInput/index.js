@@ -99,7 +99,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 	const isError = lessValueCrossed || maxValueCrossed;
 
 	const handleUndo = () => {
-		setEditedValue(itemData, itemData[fallBackKey], key, false);
+		setEditedValue({ itemData, value: itemData[fallBackKey], key, checked: false });
 		setValue(itemData[fallBackKey]);
 		setEdit(false);
 	};
@@ -108,7 +108,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 		<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 			<Input
 				onChange={(val) => {
-					setEditedValue(itemData, val, key, true);
+					setEditedValue({ itemData, value: val, key, checked: true });
 					setValue(val);
 				}}
 				defaultValue={value}
@@ -150,7 +150,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 						width={12}
 						className={styles.pointer}
 						onClick={() => {
-							setEditedValue(itemData, true, 'checked', true);
+							setEditedValue({ itemData, value: true, key: 'checked', checked: true });
 							setEdit(true);
 						}}
 					/>

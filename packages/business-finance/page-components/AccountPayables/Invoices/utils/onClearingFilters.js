@@ -1,4 +1,4 @@
-const onClearingFilters = (setGlobalFilters, entity, queryCurr) => {
+const onClearingFilters = ({ setGlobalFilters = () => {}, entity = '', queryCurr = '' }) => {
 	setGlobalFilters({
 		pageIndex   : 1,
 		pageSize    : 20,

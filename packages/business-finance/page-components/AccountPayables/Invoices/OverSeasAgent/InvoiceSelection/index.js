@@ -126,7 +126,7 @@ function InvoiceSelection({
 		}
 	}, [invoiceData, setShowSaveAsDraft]);
 
-	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue, refetch });
+	const LIST_FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue, refetch });
 
 	return (
 		<div className={styles.container}>
@@ -146,7 +146,7 @@ function InvoiceSelection({
 					itemData={invoiceData}
 					loading={loading}
 					config={config}
-					functions={FUNCTIONS}
+					functions={LIST_FUNCTIONS}
 					setSort={setSort}
 					page={globalFilters?.pageIndex || FIRST_PAGE}
 					pageSize={20}

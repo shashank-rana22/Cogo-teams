@@ -85,7 +85,12 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 									height={14}
 									width={14}
 									onClick={() => {
-										setEditedValue(itemData, itemData.bankValue, 'bankDetail', true);
+										setEditedValue({
+											itemData,
+											value   : itemData.bankValue,
+											key     : 'bankDetail',
+											checked : true,
+										});
 										setBankEdit(false);
 										showRollback(false);
 									}}

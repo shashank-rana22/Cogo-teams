@@ -1,4 +1,4 @@
-const onGoingBack = (viewSelectedInvoice, setViewSelectedInvoice, push) => {
+const onGoingBack = ({ viewSelectedInvoice = false, setViewSelectedInvoice = () => {}, push = () => {} }) => {
 	if (!viewSelectedInvoice) {
 		push(
 			'/business-finance/account-payables/[active_tab]',

@@ -77,7 +77,7 @@ function EditablePayableAmount({
 	}
 
 	const handleUndo = () => {
-		setEditedValue(itemData, itemData[fallBackKey], key, false);
+		setEditedValue({ itemData, value: itemData[fallBackKey], key, checked: false });
 		setValue(itemData[fallBackKey]);
 		setEdit(false);
 	};

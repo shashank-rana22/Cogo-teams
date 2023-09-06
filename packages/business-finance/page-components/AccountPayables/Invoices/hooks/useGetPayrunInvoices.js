@@ -102,13 +102,14 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 						urgencyTag         : urgencyTag || undefined,
 						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
-						startDate          : startDate ? changeFormat(startDate) : undefined,
-						endDate            : endDate ? changeFormat(endDate) : undefined,
-						fromBillDate       : fromBillDate ? changeFormat(fromBillDate) : undefined,
-						toBillDate         : toBillDate ? changeFormat(toBillDate) : undefined,
-						fromUploadBillDate : fromUploadBillDate ? changeFormat(fromUploadBillDate) : undefined,
-						toUploadBillDate   : toUploadBillDate ? changeFormat(toUploadBillDate) : undefined,
-						payrunId           : payrun,
+						startDate          : startDate ? changeFormat({ time: startDate }) : undefined,
+						endDate            : endDate ? changeFormat({ time: endDate }) : undefined,
+						fromBillDate       : fromBillDate ? changeFormat({ time: fromBillDate }) : undefined,
+						toBillDate         : toBillDate ? changeFormat({ time: toBillDate }) : undefined,
+						fromUploadBillDate : fromUploadBillDate
+							? changeFormat({ time: fromUploadBillDate }) : undefined,
+						toUploadBillDate : toUploadBillDate ? changeFormat({ time: toUploadBillDate }) : undefined,
+						payrunId         : payrun,
 					},
 				});
 			} catch (e) {

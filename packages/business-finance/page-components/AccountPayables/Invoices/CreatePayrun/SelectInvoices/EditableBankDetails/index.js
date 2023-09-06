@@ -47,7 +47,7 @@ function BankSelect({
 					className={styles.pointer}
 					onClick={() => {
 						if (!isEmpty(bankObject)) {
-							setEditedValue(itemData, bankObject, 'bankDetail', true);
+							setEditedValue({ itemData, value: bankObject, key: 'bankDetail', checked: true });
 							showRollback(true);
 						}
 						setBankEdit(false);

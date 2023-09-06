@@ -42,7 +42,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		services = '', payrun_type = '', partner_id = '',
 	} = urlQuery || {};
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
-	const config = getConfig(country, viewSelectedInvoice);
+	const config = getConfig({ country, viewSelectedInvoice });
 
 	const listInvoices = useRequestBf(
 		{
@@ -79,7 +79,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
 	});
-	const { search = '', dueDate = {}, invoiceDate = {}, updatedDate = {}, category = '', ...rest } = globalFilters;
+	const { search = '', dueDate = '', invoiceDate = '', updatedDate = '', category = '', ...rest } = globalFilters;
 	const restParse = JSON.stringify(rest);
 	const sortParse = JSON.stringify(sort);
 
@@ -114,18 +114,34 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 				services,
 				category           : category || undefined,
 				...(JSON.parse(restParse) || {}),
-				startDate          : changeFormat(dueDate?.startDate) || undefined,
-				endDate            : changeFormat(dueDate?.endDate) || undefined,
-				fromBillDate       : changeFormat(invoiceDate?.startDate) || undefined,
-				toBillDate         : changeFormat(invoiceDate?.endDate) || undefined,
-				fromUploadBillDate : changeFormat(updatedDate?.startDate) || undefined,
-				toUploadBillDate   : changeFormat(updatedDate?.endDate) || undefined,
+				startDate          : changeFormat({ time: dueDate?.startDate }) || undefined,
+				endDate            : changeFormat({ time: dueDate?.endDate }) || undefined,
+				fromBillDate       : changeFormat({ time: invoiceDate?.startDate }) || undefined,
+				toBillDate         : changeFormat({ time: invoiceDate?.endDate }) || undefined,
+				fromUploadBillDate : changeFormat({ time: updatedDate?.startDate }) || undefined,
+				toUploadBillDate   : changeFormat({ time: updatedDate?.endDate }) || undefined,
 				q,
 				...(JSON.parse(sortParse) || {}),
 			},
 		});
-	}, [restParse, dueDate, invoiceDate, updatedDate, query, category, sortParse, trigger,
-		entity, organizationId, payrun, performedBy, performedByName, performedByType, queryCurr, services]);
+	}, [
+		restParse,
+		dueDate,
+		invoiceDate,
+		updatedDate,
+		query,
+		category,
+		sortParse,
+		trigger,
+		entity,
+		organizationId,
+		payrun,
+		performedBy,
+		performedByName,
+		performedByType,
+		queryCurr,
+		services,
+	]);
 
 	const deleteInvoices = async (id = '', handleModal = () => {}) => {
 		try {
@@ -138,7 +154,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData ?? {};
-		const SELECTED_INVOICE = getSelectedInvoice(list);
+		const SELECTED_INVOICE = getSelectedInvoice({ list });
 		try {
 			const res = await addInvoiceToSelectedAPI[API_ARRAY_VARIABLE_ONE]({
 				data: {
@@ -163,7 +179,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		setApiData((prevData) => {
 			const { list = [] } = prevData || {};
 			const newList = list.map((item) => {
-				const isError = checkboxSelectionChecks(item);
+				const isError = checkboxSelectionChecks({ item });
 				return ({
 					...item,
 					checked  : item?.invoiceType === 'CREDIT NOTE' ? false : event.target.checked,
@@ -191,7 +207,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 			const index = (prevData.list || []).findIndex((item) => item.id === id);
 			if (index !== ELEMENT_NOT_FOUND) {
 				const newList = [...prevData.list];
-				const isError = checkboxSelectionChecks(newList[index]);
+				const isError = checkboxSelectionChecks({ list: newList[index] });
 				newList[index] = { ...newList[index], checked: !newList[index].checked, hasError: isError };
 				return { ...prevData, list: newList };
 			}
@@ -212,11 +228,11 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		);
 	}
 
-	const setEditedValue = (itemData, value, key, checked = false) => {
-		settingApiData(itemData, value, key, checked, setApiData);
+	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
+		settingApiData({ itemData, value, key, checked, setApiData });
 	};
-	const onClear = () => { onClearingFilters(setGlobalFilters, entity, queryCurr); };
-	const goBack = () => { onGoingBack(viewSelectedInvoice, setViewSelectedInvoice, push); };
+	const onClear = () => { onClearingFilters({ setGlobalFilters, entity, queryCurr }); };
+	const goBack = () => { onGoingBack({ viewSelectedInvoice, setViewSelectedInvoice, push }); };
 
 	return {
 		config,

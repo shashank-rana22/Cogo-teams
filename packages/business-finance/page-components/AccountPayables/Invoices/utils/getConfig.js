@@ -13,7 +13,7 @@ const VIEW_SELECTED_CONFIG_MAPPING = {
 	VN : VIEW_SELECTED_CONFIG_VN,
 };
 
-function getConfig(country, viewSelectedInvoice) {
+function getConfig({ country = '', viewSelectedInvoice = '' }) {
 	const createOverSeasConfig = CREATE_OVERSEAS_CONFIG_MAPPING[country];
 	const viewSelectedConfig = VIEW_SELECTED_CONFIG_MAPPING[country];
 	return (viewSelectedInvoice ? viewSelectedConfig : createOverSeasConfig);
