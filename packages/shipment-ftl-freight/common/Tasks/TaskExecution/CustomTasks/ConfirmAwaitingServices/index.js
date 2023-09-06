@@ -25,8 +25,8 @@ function ConfirmAwaitingServices(
 	const { updateConfirmAwaitingServices } = useUpdateConfirmAwaitingServices({
 		task,
 		callback: () => {
-			onCancel();
 			refetch();
+			onCancel();
 		},
 	});
 

@@ -1,18 +1,19 @@
 import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './style.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function Comparison({
-	ftl_freight_rates_count = GLOBAL_CONSTANTS?.zeroth_index,
-	shipment_flash_booking_rates_count = GLOBAL_CONSTANTS?.zeroth_index,
+	ftl_freight_rates_count = DEFAULT_VALUE,
+	shipment_flash_booking_rates_count = DEFAULT_VALUE,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
 				<div className={styles.heading}>RMS Rate Count</div>
-				<div className={cl`${styles.info} ${(ftl_freight_rates_count) ? (null) : (styles.red_text)}`}>
+				<div className={cl`${styles.info} ${ftl_freight_rates_count ? '' : styles.red_text}`}>
 					{ftl_freight_rates_count}
 				</div>
 			</div>
@@ -22,7 +23,7 @@ function Comparison({
 			<div className={styles.card}>
 				<div className={styles.heading}>Flashed Rate Count</div>
 				<div
-					className={cl`${styles.info} ${(shipment_flash_booking_rates_count) ? (null) : (styles.red_text)}`}
+					className={cl`${styles.info} ${shipment_flash_booking_rates_count ? '' : styles.red_text}`}
 				>
 					{shipment_flash_booking_rates_count}
 				</div>

@@ -6,9 +6,7 @@ const useGetRateComparison = (params = {}) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_ftl_freight_rate_min_max_validity_dates',
 		method : 'GET',
-		params : {
-			...params,
-		},
+		params,
 	}, { manual: true });
 
 	const getRateComparison = useCallback(async () => {
