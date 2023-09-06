@@ -95,7 +95,9 @@ export const middleware = async (request) => {
 
 		response.cookies.set(LOCALE_COOKIE_KEY, locale);
 
-		response.cookies.set(LANG_PREFERENCE_COOKIE_KEY, langPreference);
+		if (!cookieLangPreference) {
+			response.cookies.set(LANG_PREFERENCE_COOKIE_KEY, langPreference);
+		}
 
 		// eslint-disable-next-line consistent-return
 		return response;

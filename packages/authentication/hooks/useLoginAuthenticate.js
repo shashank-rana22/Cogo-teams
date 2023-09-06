@@ -91,19 +91,20 @@ const useLoginAuthenticate = () => {
 		}
 
 		if (redirectPath) {
-			await router.push(`${redirectPath}`);
+			await router.push(`${redirectPath}`, `${redirectPath}`, { locale });
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');
 
-			setCookie('locale', locale);
 			await router.push(replaceHref, replaceAs, { locale });
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
 		} else {
-			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
+			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH, { locale });
 		}
+
+		setCookie('locale', locale);
 	};
 
 	useEffect(() => {
