@@ -1,32 +1,53 @@
-// import useGetLastVoiceCallDetails from '../../hooks/useGetLastVoiceCallDetails';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
+
+import useGetUserCallDetails from '../../hooks/useGetUserCallDetails';
 
 import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
 
-function IncomingCallUserDetails() {
-	// const userData = {
-	// 	lead_organization_id : undefined,
-	// 	lead_user_id         : '',
-	// 	mobile_number        : '7506434666',
-	// 	organization_id      : 'd27b7345-96d0-46fe-a34b-b0e6f6e6110a',
-	// 	userName             : 'Param Shah',
-	// 	user_id              : 'a5144bdd-88f3-4b7c-8e77-0077f3ebbe97',
-	// };
-	// const { userLastCallLoading = false, userLastCallDetails } = useGetLastVoiceCallDetails({ userData });
+function IncomingCallUserDetails({ receiverUserDetails = {} }) {
+	const { mobile_number = '', mobile_country_code = '', organization_id = '' } = receiverUserDetails || {};
+
+	const {
+		loading = false,
+		data = {},
+	} = useGetUserCallDetails({
+		mobileNumber      : mobile_number,
+		mobileCountryCode : mobile_country_code,
+	});
+
+	const { agent_type = '', data: shipmentsData = {}, latest_call_details = {}, organizations = [] } = data || {};
+	const { end_time_of_call = '', agent_data = {} } = latest_call_details || {};
+
+	const orgDetails = (organizations || []).filter((item) => item?.organization_id === organization_id);
+
+	if (loading || !agent_type) {
+		return null;
+	}
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
-				Cogoport Pvt Limited
+				{organization_id
+					? startCase(orgDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.organization?.business_name) : null}
 				<div className={styles.last_call_info}>
 					Last Call At :-
-					<span className={styles.user_info}>April 23, 2005</span>
+					{' '}
+					<span className={styles.user_info}>
+						{end_time_of_call ? formatDate({
+							date       : end_time_of_call || new Date(),
+							formatType : 'date',
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+						}) : ' — '}
+					</span>
 				</div>
 				<div className={styles.last_call_info}>
 					Last Call With :-
-					<span className={styles.user_info}>Chandrakanth Venugula</span>
+					<span className={styles.user_info}>{startCase(agent_data?.name) || ' — '}</span>
 				</div>
-				<QuotationDetails />
+				<QuotationDetails shipmentsData={shipmentsData} agentType={agent_type} />
 			</div>
 		</div>
 

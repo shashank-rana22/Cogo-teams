@@ -914,6 +914,27 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncListUserShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'serial_id',
+		endpoint    : '/list_shipments_on_feedback',
+		initialCall : true,
+	};
+}
+
+function asyncFieldsOrganizationOnCall() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : '/list_organizations_on_call',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -988,4 +1009,6 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncListUserShipments,
+	asyncFieldsOrganizationOnCall,
 };

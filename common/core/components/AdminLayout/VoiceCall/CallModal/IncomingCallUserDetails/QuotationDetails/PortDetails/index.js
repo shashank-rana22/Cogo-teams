@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
-// import { startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import { formatRouteData } from '../../../../utils/routeDataHelpers';
 
@@ -22,10 +22,10 @@ const SINGLE_LOCATIONS = [
 	'lcl_freight_local',
 ];
 
-// const TRADE_TYPE_MAPPING = {
-// 	import : 'Origin',
-// 	export : 'Destination',
-// };
+const TRADE_TYPE_MAPPING = {
+	import : 'Origin',
+	export : 'Destination',
+};
 
 function PortDetails({ serviceData = {}, service = '' }) {
 	const { trade_type: tradeType = '' } = serviceData || {};
@@ -48,11 +48,8 @@ function PortDetails({ serviceData = {}, service = '' }) {
 			<div className={styles.container}>
 				<div className={styles.flex_row_origin}>
 					<div className={styles.label}>
-						{/* {TRADE_TYPE_MAPPING[tradeType]} */}
-						Import
-						{' '}
+						{TRADE_TYPE_MAPPING[tradeType]}
 						:-
-						{' '}
 					</div>
 				</div>
 
@@ -61,22 +58,19 @@ function PortDetails({ serviceData = {}, service = '' }) {
 
 						<Tooltip content={DISPLAY_DATA_MAPPING[tradeType]?.name} placement="bottom">
 							<div className={styles.single_port}>
-								{/* {DISPLAY_DATA_MAPPING[tradeType]?.name} */}
-								Nhava shiva port
+								{DISPLAY_DATA_MAPPING[tradeType]?.name}
 							</div>
 						</Tooltip>
 
 						<div className={styles.port_codes}>
 							(
-							{/* {DISPLAY_DATA_MAPPING[tradeType]?.code} */}
-							INDIA
+							{DISPLAY_DATA_MAPPING[tradeType]?.code}
 							)
 						</div>
 					</div>
 
 					<div className={styles.country}>
-						{/* {DISPLAY_DATA_MAPPING[tradeType]?.country} */}
-						PaKISTAN
+						{DISPLAY_DATA_MAPPING[tradeType]?.country}
 					</div>
 
 				</div>
@@ -91,23 +85,19 @@ function PortDetails({ serviceData = {}, service = '' }) {
 
 					<Tooltip content={originDetails?.name} placement="bottom">
 						<div className={styles.port_name}>
-							{/* {originDetails?.name} */}
-							{' '}
-							Nhava svhvat to chamaa
+							{originDetails?.name}
 						</div>
 					</Tooltip>
 
 					<div className={styles.port_codes}>
 						(
-						{/* {originDetails?.code} */}
-						INDIA
+						{originDetails?.code}
 						)
 					</div>
 				</div>
 
 				<div className={styles.country}>
-					{/* {startCase(originDetails?.country)} */}
-					Rajastan
+					{startCase(originDetails?.country)}
 				</div>
 
 			</div>
@@ -116,21 +106,18 @@ function PortDetails({ serviceData = {}, service = '' }) {
 				<div className={styles.port_details}>
 					<Tooltip content={destinationDetails?.name} placement="bottom">
 						<div className={styles.port_name}>
-							{/* {destinationDetails?.name} */}
-							Jebil ALI TO INDIA
+							{destinationDetails?.name}
 						</div>
 					</Tooltip>
 
 					<div className={styles.port_codes}>
 						(
-						{/* {destinationDetails?.code} */}
-						Japan
+						{destinationDetails?.code}
 						)
 					</div>
 				</div>
 				<div className={styles.country}>
-					{/* {destinationDetails?.country} */}
-					Pakisthan
+					{destinationDetails?.country}
 				</div>
 			</div>
 		</div>

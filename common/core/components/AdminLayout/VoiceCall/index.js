@@ -40,8 +40,7 @@ function VoiceCall({ firestore = {} }) {
 	} = useFetchFirebaseRoom({ firestore, agentId: loggedInAgentId });
 
 	const {
-		// showCallModalType = 'fullCallModal',
-		showCallModalType = 'fullCallModal',
+		showCallModalType = '',
 		receiverUserDetails = {},
 		status = '',
 		callStartAt = '',

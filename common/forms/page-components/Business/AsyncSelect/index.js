@@ -68,6 +68,8 @@ import {
 	asyncListTruckTypes,
 	asyncFieldsOrganizationUsers,
 	asyncListLeadOrganizationUsers,
+	asyncListUserShipments,
+	asyncFieldsOrganizationOnCall,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -154,6 +156,8 @@ const keyAsyncFieldsParamsMapping = {
 	list_pricing_zones                   : asyncListPricingZones,
 	list_organization_users              : asyncFieldsOrganizationUsers,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
+	list_user_shipments                  : asyncListUserShipments,
+	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 };
 
 const SINGLE_ENTITY = 1;

@@ -74,6 +74,8 @@ function CallModal({
 							</div>
 							<div className={styles.number}>
 								{mobile_country_code}
+								{' '}
+								{' '}
 								<span>{hideNumber(mobile_number)}</span>
 							</div>
 							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
@@ -111,7 +113,7 @@ function CallModal({
 						)}
 					</div>
 				</div>
-				<IncomingCallUserDetails />
+				<IncomingCallUserDetails receiverUserDetails={receiverUserDetails} />
 			</Modal.Body>
 		</Modal>
 	);

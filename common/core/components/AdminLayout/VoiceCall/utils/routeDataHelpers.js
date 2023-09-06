@@ -1,11 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
-const splitByBrackets = (name) => name?.split('(')[GLOBAL_CONSTANTS.zeroth_index] || '';
-
 const popLastName = (name) => name?.split(' ').pop() || '';
-
-const getAppendedString = ({ code, name, country }) => `${code ? `${code},` : ''} 
-${name} ${country ? `(${country})` : ''}`;
 
 export function formatRouteData({ item = {} }) {
 	const originlocationData = (
@@ -21,7 +14,6 @@ export function formatRouteData({ item = {} }) {
 
 	const {
 		port_code: originCode,
-		name: originName,
 		display_name: originDisplayName,
 	} = originlocationData;
 
@@ -38,7 +30,6 @@ export function formatRouteData({ item = {} }) {
 
 	const {
 		port_code: destinationCode,
-		name: destinationName,
 		display_name: destinationDisplayName,
 	} = destinationLocationData;
 
@@ -46,37 +37,15 @@ export function formatRouteData({ item = {} }) {
 
 	const {
 		port_code: originMainPortCode = '',
-		name: originMainPortName = '',
 		display_name: originMainPortDisplayName,
 	} = origin_main_port || {};
 
 	const {
 		port_code: destinationMainPortCode = '',
-		name: destinationMainPortName = '',
 		display_name: destinationMainPortDisplayName,
 	} = destination_main_port || {};
 
 	return {
-		originDisplay: getAppendedString({
-			code    : originCode,
-			country : popLastName(originDisplayName),
-			name    : splitByBrackets(originName),
-		}),
-		destinationDisplay: getAppendedString({
-			code    : destinationCode,
-			country : popLastName(destinationDisplayName),
-			name    : splitByBrackets(destinationName),
-		}),
-		originMainDisplay: getAppendedString({
-			code    : originMainPortCode,
-			country : popLastName(originMainPortDisplayName),
-			name    : splitByBrackets(originMainPortName),
-		}),
-		destinationMainDisplay: getAppendedString({
-			code    : destinationMainPortCode,
-			country : popLastName(destinationMainPortDisplayName),
-			name    : splitByBrackets(destinationMainPortName),
-		}),
 		originDetails: {
 			code    : originCode,
 			country : popLastName(originDisplayName),
