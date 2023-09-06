@@ -1,24 +1,18 @@
-import { Button } from '@cogoport/components';
+import Header from './Header';
+import List from './List';
+import ListFilters from './ListFilters';
 
-import ACTIVE_MODE_KEYS_MAPPING from '../../../constants/active-mode-key-mapping';
+function ListScoringPlans(props) {
+	const { setActiveMode } = props;
 
-import styles from './styles.module.css';
-
-const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
-
-function ListScoringPlans({ setActiveMode = {} }) {
 	return (
-		<div className={styles.container}>
-			<h2>Scoring Plans</h2>
+		<>
+			<Header setActiveMode={setActiveMode} />
 
-			<Button
-				size="md"
-				themeType="primary"
-				onClick={() => setActiveMode(CREATE)}
-			>
-				Create Scoring
-			</Button>
-		</div>
+			<ListFilters />
+
+			<List />
+		</>
 	);
 }
 
