@@ -33,12 +33,22 @@ export default function MatchModal({
 	matchBal = 0, submitSettleMatch, settleLoading,
 }) {
 	const [updateBal, setUpdateBal] = useState(matchBal);
-	const [date, setDate] = useState('');
 	const [dryRun, setDryRun] = useState(false);
 	const [showJV, setShowJV] = useState(false);
 	const [updatedData, setUpdatedData] = useState(JSON.parse(JSON.stringify(selectedData)));
+	const [date, setDate] = useState('');
 	const [showDocument, setShowDocument] = useState(false);
 	const [fileValue, setFileValue] = useState({});
+
+	useEffect(() => {
+		const sorted_ms = updatedData
+			.map((item) => new Date(item.transactionDate).getTime())
+			.sort();
+
+		const latest_ms = sorted_ms[GLOBAL_CONSTANTS.zeroth_index];
+		setDate(new Date(latest_ms));
+	}, [updatedData]);
+
 	const {
 		checkData, postPaymentsSettlementCheck, checkLoading,
 		success, setSuccess,
