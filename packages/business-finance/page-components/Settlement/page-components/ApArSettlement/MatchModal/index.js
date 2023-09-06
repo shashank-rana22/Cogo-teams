@@ -30,7 +30,7 @@ export default function MatchModal({
 	selectedData = [], filters = {}, setSelectedData = () => {},
 	isDelete = false, setIsDelete = () => {},
 	reRender = false, setReRender = () => {},
-	matchBal = 0, submitSettleMatch, settleLoading,
+	matchBal = 0, submitSettleMatch = () => {}, settleLoading = false,
 }) {
 	const [updateBal, setUpdateBal] = useState(matchBal);
 	const [dryRun, setDryRun] = useState(false);
@@ -78,20 +78,20 @@ export default function MatchModal({
 		if (selectedData.length === ZERO_VALUE) {
 			setMatchModalShow(false);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedData]);
+	}, [selectedData, setMatchModalShow]);
+
 	useEffect(() => {
 		setCheckedData(checkData?.stackDetails || []);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [checkData]);
+
 	useEffect(() => {
 		if (success && checkedData?.length !== ZERO_VALUE) {
 			setUpdatedData(checkedData || updatedData);
 		} else {
 			setSuccess(true);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [checkedData]);
+	}, [checkedData, success, setSuccess, setUpdatedData, updatedData]);
+
 	const handleRefreshClick = async () => {
 		setDryRun(false);
 		setCheckedData([]);
