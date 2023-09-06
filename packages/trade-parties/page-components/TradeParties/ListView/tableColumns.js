@@ -14,25 +14,25 @@ const tableColumns = [
 	{
 		Header   : 'ID',
 		accessor : (item) => (
-			<Pill className={styles.serial_id}>{`# ${item.serial_id}`}</Pill>
+			<Pill className={styles.serial_id}>{`# ${item?.serial_id}`}</Pill>
 		),
 	},
 	{
 		Header   : 'BUSINESS NAME',
-		accessor : (item) => item.legal_business_name,
+		accessor : (item) => item?.legal_business_name,
 	},
 	{
 		Header   : 'REGISTRATION NUMBER',
-		accessor : (item) => item.registration_number,
+		accessor : (item) => item?.registration_number,
 	},
 	{
 		Header   : 'COMPANY TYPE',
-		accessor : (item) => item.company_type,
+		accessor : (item) => item?.company_type,
 	},
 	{
 		Header   : 'CREATED AT',
 		accessor : (item) => formatDate({
-			date       : item.created_at,
+			date       : item?.created_at,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		}),
@@ -41,11 +41,11 @@ const tableColumns = [
 		Header   : 'LINKED COUNT',
 		accessor : (item) => (
 			<div>
-				{item.organization_trade_parties_count}
-				{item.all_trade_party_types?.length ? (
+				{item?.organization_trade_parties_count}
+				{item?.all_trade_party_types?.length ? (
 					<span style={{ marginLeft: 4 }}>
 						(
-						{formatArrayValues(item.all_trade_party_types)}
+						{formatArrayValues(item?.all_trade_party_types)}
 						)
 					</span>
 				) : null}
