@@ -3,13 +3,22 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
+const DEFAULT_PAGINATION = 1;
+const MIN_HEIGHT = 0;
+
+const getPayload = ({ pagination, filters }) => ({
+	page                        : pagination,
+	filters                     : { ...filters },
+	communication_logs_required : true,
+});
+
 const useListUserVoiceCalls = (filters = {}) => {
 	const [listData, setListData] = useState({
 		list  : [],
 		total : 0,
 	});
 
-	const [pagination, setPagination] = useState(1);
+	const [pagination, setPagination] = useState(DEFAULT_PAGINATION);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_user_call_details',
@@ -19,25 +28,22 @@ const useListUserVoiceCalls = (filters = {}) => {
 	const voiceCallList = async () => {
 		try {
 			const res = await trigger({
-				params: {
-					page    : pagination,
-					filters : { ...filters },
-				},
+				params: getPayload({ pagination, filters }),
 			});
 			if (res.data) {
 				const { list = [], ...paginationData } = res?.data || {};
 				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 			}
 		} catch (error) {
-			// console.log(error);
+			console.error(error);
 		}
 	};
 
 	const handleScroll = (scrollTop) => {
-		const reachBottom = scrollTop === 0;
+		const reachBottom = scrollTop === MIN_HEIGHT;
 		const hasMoreData = pagination < listData?.total;
 		if (reachBottom && hasMoreData && !loading) {
-			setPagination((p) => p + 1);
+			setPagination((p) => p + DEFAULT_PAGINATION);
 		}
 	};
 	useEffect(() => {
@@ -48,7 +54,7 @@ const useListUserVoiceCalls = (filters = {}) => {
 			list  : [],
 			total : 0,
 		});
-		setPagination(1);
+		setPagination(DEFAULT_PAGINATION);
 		voiceCallList();
 	}, [JSON.stringify(filters)]);
 
