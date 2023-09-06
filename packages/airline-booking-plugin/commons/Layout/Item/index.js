@@ -44,16 +44,16 @@ function Item({
 						rules={rules}
 						control={control}
 					/>
-					<h4 className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
+					<div className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 						{label}
-					</h4>
+					</div>
 
 				</div>
 			) : (
 				<>
-					<h4 className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
+					<div className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 						{label}
-					</h4>
+					</div>
 					<Element
 						{...props}
 						rules={rules}

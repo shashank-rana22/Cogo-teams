@@ -117,11 +117,11 @@ function Child({
 						if ((!Element || !show) && (!newControl.showOnlyLabel)) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
-								<h4 className={cl`${styles.label} 
+								<div className={cl`${styles.label} 
 								${controlItem?.rules?.required ? styles.required_field : ''}`}
 								>
 									{controlItem?.label}
-								</h4>
+								</div>
 
 								{Element
 									? 								 (

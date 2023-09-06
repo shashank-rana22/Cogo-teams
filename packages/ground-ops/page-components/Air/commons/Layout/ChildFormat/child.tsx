@@ -63,11 +63,11 @@ function Child({
 						if (!Element) return null;
 						return (
 							<div key={controlItem.name} className={styles.element} style={{ width: `${flex}%` }}>
-								<h4 className={cl`${styles.label} 
+								<div className={cl`${styles.label} 
 								${controlItem?.rules?.required ? styles.required_field : ''}`}
 								>
 									{controlItem?.label}
-								</h4>
+								</div>
 								<Element
 									{...controlItem}
 									{...EXTRA_PROPS}

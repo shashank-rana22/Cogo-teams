@@ -50,9 +50,11 @@ function Layout({
 										{heading}
 									</div>
 
-									<h4 className={cl`${styles.label} ${rules?.required ? styles.required_field : ''}`}>
+									<div className={cl`${styles.label}
+									${rules?.required ? styles.required_field : ''}`}
+									>
 										{label}
-									</h4>
+									</div>
 
 									<FieldArray
 										{...fieldsItem}
