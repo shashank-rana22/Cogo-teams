@@ -22,6 +22,34 @@ const CONVERSATION_TYPE_MAPPING = {
 	default  : TimeLine,
 };
 
+function LoadPrevMessages({
+	loadingPrevMessages = false,
+	lastPage = false,
+	getNextData = () => {},
+}) {
+	if (loadingPrevMessages) {
+		return (
+			<div className={styles.loader}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.spinner_loader}
+					alt="load"
+					width={20}
+					height={20}
+				/>
+			</div>
+		);
+	}
+	return (
+		<div className={styles.load_prev_messages}>
+			{!lastPage && (
+				<IcMRefresh
+					className={styles.refresh_icon}
+					onClick={getNextData}
+				/>
+			)}
+		</div>
+	);
+}
 function MessagesThread(
 	{
 		loadingPrevMessages = false,
@@ -37,10 +65,9 @@ function MessagesThread(
 		scrollToBottom = () => {},
 		firestore = {},
 		viewType = '',
-		setMailActions = () => {},
-		mailActions = {},
 		hasPermissionToEdit = false,
 		mailProps = {},
+		latestMessagesAtTop = false,
 	},
 	messageRef,
 ) {
@@ -61,10 +88,15 @@ function MessagesThread(
 		clientHeight = '',
 	} = messageRef?.current || {};
 
+	const messagesArray = latestMessagesAtTop
+		? [...(messagesData || [])].reverse()
+		: messagesData;
+
 	useEffect(() => {
 		if (
 			!isEmpty(messagesData)
 			&& (scrollHeight - scrollTop < SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
+			&& !latestMessagesAtTop
 		) {
 			scrollToBottom();
 			if (new_message_count) {
@@ -75,8 +107,8 @@ function MessagesThread(
 				});
 			}
 		}
-	}, [channel_type, clientHeight, firestore, messagesData, id,
-		scrollHeight, scrollToBottom, scrollTop, new_message_count]);
+	}, [channel_type, clientHeight, firestore, messagesData, id, scrollHeight,
+		scrollToBottom, scrollTop, new_message_count, latestMessagesAtTop]);
 
 	if (hasNoFireBaseRoom) {
 		return (
@@ -86,29 +118,15 @@ function MessagesThread(
 
 	return (
 		<>
-			{loadingPrevMessages
-				? (
-					<div className={styles.loader}>
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.spinner_loader}
-							alt="load"
-							width={20}
-							height={20}
-						/>
-					</div>
-				)
-				: (
-					<div className={styles.load_prev_messages}>
-						{!lastPage && (
-							<IcMRefresh
-								className={styles.refresh_icon}
-								onClick={getNextData}
-							/>
-						)}
-					</div>
-				)}
+			{!latestMessagesAtTop ? (
+				<LoadPrevMessages
+					loadingPrevMessages={loadingPrevMessages}
+					lastPage={lastPage}
+					getNextData={getNextData}
+				/>
+			) : null}
 
-			{(messagesData || []).map((eachMessage, index) => {
+			{(messagesArray || []).map((eachMessage, index) => {
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
 
@@ -120,6 +138,7 @@ function MessagesThread(
 						}
 						: {}),
 				};
+
 				return (
 					<Component
 						key={eachMessage?.created_at}
@@ -129,8 +148,6 @@ function MessagesThread(
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
-						setMailActions={setMailActions}
-						mailActions={mailActions}
 						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
@@ -138,25 +155,33 @@ function MessagesThread(
 				);
 			})}
 
-			{new_message_count && (scrollHeight - scrollTop >= SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
-				? (
-					<div
-						className={styles.arrow_down_icon}
-						role="presentation"
-						onClick={() => {
-							updateUnreadMessagesCount({ channelType: channel_type, id, firestore });
-							scrollToBottom();
-						}}
-					>
-						<div className={styles.new_messages_count}>
-							{new_message_count > MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT
-								? `${MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT}+`
-								: new_message_count}
-						</div>
-						<IcMArrowDoubleDown className={styles.arrowicon} />
+			{(new_message_count && !latestMessagesAtTop
+				&& (scrollHeight - scrollTop >= SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
+			) ? (
+				<div
+					className={styles.arrow_down_icon}
+					role="presentation"
+					onClick={() => {
+						updateUnreadMessagesCount({ channelType: channel_type, id, firestore });
+						scrollToBottom();
+					}}
+				>
+					<div className={styles.new_messages_count}>
+						{new_message_count > MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT
+							? `${MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT}+`
+							: new_message_count}
 					</div>
-				)
-				: null}
+					<IcMArrowDoubleDown className={styles.arrowicon} />
+				</div>
+				) : null}
+
+			{latestMessagesAtTop ? (
+				<LoadPrevMessages
+					loadingPrevMessages={loadingPrevMessages}
+					lastPage={lastPage}
+					getNextData={getNextData}
+				/>
+			) : null}
 		</>
 	);
 }

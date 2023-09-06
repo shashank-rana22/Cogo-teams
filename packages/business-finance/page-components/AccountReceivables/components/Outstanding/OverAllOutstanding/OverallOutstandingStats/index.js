@@ -3,38 +3,30 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import OVERALL_OUTSTANDING_STATS_LABEL from '../../../../constants/overall-outstanding-stats-label';
-import OVERALL_STATS_KEY_MAPPING from '../../../../constants/overall-stats-key-mapping';
+import {
+	OVERALL_STATS_KEY_MAPPING,
+	ONACCOUNT_STATS_KEY_MAPPING,
+} from '../../../../constants/overall-stats-key-mapping';
 
 import OutStandingStatsCommonCard from './OutStandingStatsCommonCard';
 import styles from './styles.module.css';
 
-const DEFAULT_AMOUNT = 0;
 function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 	const { openInvoiceBucket, onAccountBucket, totalOutstandingBucket, creditNoteBucket } = item || {};
-	const { totalLedAmount, ledCurrency, totalCount } = totalOutstandingBucket || {};
+	const { totalLedAmount, ledCurrency } = totalOutstandingBucket || {};
 
 	return (
 		<div className={styles.container}>
 			<div style={{ width: '87%' }}>
-				<div className={styles.stats_lebal}>
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-around',
-						fontWeight     : 600,
-						fontSize       : '12px',
-					}}
-					>
-						{(OVERALL_OUTSTANDING_STATS_LABEL || []).map((val) => (
-							<div
-								key={val?.label}
-								style={{
-									width: '16%',
-								}}
-							>
-								{val.label}
-							</div>
-						))}
-					</div>
+				<div className={styles.stats_label}>
+					{(OVERALL_OUTSTANDING_STATS_LABEL || []).map((val) => (
+						<div
+							key={val?.label}
+							style={{ width: '13.7%' }}
+						>
+							{val.label}
+						</div>
+					))}
 				</div>
 				<div style={{ margin: '12px 0px 20px 11px' }}>
 					<OutStandingStatsCommonCard
@@ -42,18 +34,21 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 						item={openInvoiceBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
+						amountColor="#FC5555"
 					/>
 					<OutStandingStatsCommonCard
 						label="On Account Payments"
 						item={onAccountBucket}
-						amountValue={OVERALL_STATS_KEY_MAPPING}
+						amountValue={ONACCOUNT_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
+						amountColor="#29CC6A"
 					/>
 					<OutStandingStatsCommonCard
 						label="Credit Notes"
 						item={creditNoteBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
+						amountColor="#FC5555"
 					/>
 				</div>
 			</div>
@@ -70,10 +65,6 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 							minimumFractionDigits : 0,
 						},
 					})}
-				</div>
-				<div style={{ fontSize: '12px', color: '#0099FF' }}>
-					{statsLoading ? <Placeholder width="60px" style={{ marginTop: 8 }} />
-						: `(${totalCount || DEFAULT_AMOUNT})`}
 				</div>
 			</div>
 		</div>
