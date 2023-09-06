@@ -13,20 +13,13 @@ const useCreateShipmentCancellation = ({
 		method : 'POST',
 	}, { manual: true });
 
-	// val wil have formValues as values
 	const apiTrigger = async (val) => {
 		try {
-			// const payload = getCreateUpdateCommodityPayload(val);
-			const res = await trigger({ data: val });
-
+			await trigger({ data: val });
 			Toast.success(successMessage);
-
 			refetch();
-
-			return res;
 		} catch (err) {
 			toastApiError(err);
-			return err;
 		}
 	};
 

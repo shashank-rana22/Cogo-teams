@@ -15,7 +15,8 @@ function CancellationPolicies() {
 		filters = {},
 		refetch = () => {},
 	} = useListShipmentCancellation({
-		defaultFilters: { organization_trade_parties_data_required: true },
+		defaultParams  : { organization_trade_parties_data_required: true },
+		defaultFilters : { status: 'active' },
 	});
 
 	if (loading) {

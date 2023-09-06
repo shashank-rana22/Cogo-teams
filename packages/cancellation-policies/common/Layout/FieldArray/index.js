@@ -13,6 +13,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 		<div className={styles.field_array}>
 			{fields.map((field, index) => (
 				<Child
+					{...ctrl}
 					key={field.id}
 					remove={remove}
 					field={field}

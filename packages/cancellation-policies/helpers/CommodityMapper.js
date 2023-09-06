@@ -1,61 +1,9 @@
+import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
+
 const commoditiesMapper = (service, container_type) => {
 	const data = {
-		fcl_freight: {
-			open_top  : ['in_gauge_cargo'],
-			flat_rack : ['in_gauge_cargo'],
-			refer     : [
-				'chilled',
-				'frozen',
-				'pharma',
-				'meat',
-				'sea_food',
-				'fruits_and_veg',
-			],
-			standard: [
-				'general',
-				'white_goods',
-				'pta',
-				'agro',
-				'cotton_and_yarn',
-				'fabric_and_textiles',
-				'raw_cotton',
-				'rice_bran',
-				'sugar_rice',
-				'gases-2.1',
-				'gases-2.2',
-				'gases-2.3',
-				'flammable_liquids-3',
-				'flammable_solids-4.1',
-				'flammable_solids_self_heat-4.2',
-				'emit_flammable_gases_with_water-4.3',
-				'imo_classes-5.1',
-				'toxic_substances-6.1',
-				'infectious_substances-6.2',
-				'radioactive_material-7',
-				'corrosives-8',
-				'miscellaneous_dangerous_goods-9',
-			],
-			open_side : ['general'],
-			iso_tank  : [
-				'non_haz_solids',
-				'non_haz_liquids',
-				'non_haz_gases',
-				'gases-2.1',
-				'gases-2.2',
-				'gases-2.3',
-				'flammable_liquids-3',
-				'flammable_solids-4.1',
-				'flammable_solids_self_heat-4.2',
-				'emit_flammable_gases_with_water-4.3',
-				'imo_classes-5.1',
-				'toxic_substances-6.1',
-				'infectious_substances-6.2',
-				'radioactive_material-7',
-				'corrosives-8',
-				'miscellaneous_dangerous_goods-9',
-			],
-		},
-		lcl_freight: [
+		fcl_freight : FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
+		lcl_freight : [
 			'general',
 			'gases-2.1',
 			'gases-2.2',
@@ -80,9 +28,11 @@ const commoditiesMapper = (service, container_type) => {
 			'express',
 		],
 	};
+
 	if (service === 'fcl_freight') {
 		return data[service][container_type];
 	}
+
 	return data[service];
 };
 

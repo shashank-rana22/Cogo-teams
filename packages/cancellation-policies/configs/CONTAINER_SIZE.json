@@ -1,18 +1,18 @@
 [
-    {
-      "label": "20ft",
-      "value": "20"
-    },
-    {
-      "label": "40ft",
-      "value": "40"
-    },
-    {
-      "label": "40HC",
-      "value": "40HC"
-    },
-    {
-      "label": "45HC",
-      "value": "45HC"
-    }
-  ]
+  {
+    "label": "20ft",
+    "value": "20"
+  },
+  {
+    "label": "40ft",
+    "value": "40"
+  },
+  {
+    "label": "40HC",
+    "value": "40HC"
+  },
+  {
+    "label": "45HC",
+    "value": "45HC"
+  }
+]

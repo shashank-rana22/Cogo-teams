@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useListShipmentCancellation = ({ defaultFilters = {} }) => {
+const useListShipmentCancellation = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
 
@@ -11,10 +11,10 @@ const useListShipmentCancellation = ({ defaultFilters = {} }) => {
 		url    : '/list_shipment_cancellation_charges',
 		params : {
 			filters: {
-				status: 'active',
+				...(defaultFilters || {}),
 				...restFilters,
 			},
-			...(defaultFilters || {}),
+			...(defaultParams || {}),
 			page,
 		},
 	}, { manual: true });

@@ -12,7 +12,7 @@ import RATE_TYPE from '../../../configs/RATE_TYPE.json';
 import SHIPMENT_TYPES from '../../../configs/SHIPMENT_TYPES.json';
 import commoditiesMapper from '../../../helpers/CommodityMapper';
 
-const ALLOWED_CURRENCY =	GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.common
+const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.common
 	.services.feedback_services.allowed_currency;
 
 const GET_DAYS_OPTIONS_VALUES1 = 31;
@@ -20,6 +20,7 @@ const GET_DAYS_OPTIONS_VALUES2 = 0;
 const GET_DAYS_OPTIONS_VALUES3 = 1;
 const getDaysOptions = Array(GET_DAYS_OPTIONS_VALUES1).fill(GET_DAYS_OPTIONS_VALUES2)
 	.map((_, idx) => ({ label: idx + GET_DAYS_OPTIONS_VALUES3, value: idx + GET_DAYS_OPTIONS_VALUES3 }));
+
 const getControls = ({ service, container_type, item, isEdit }) => [
 	{
 		name        : 'service',
@@ -39,8 +40,8 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		value          : item?.airline_id,
 		optionsListKey : 'air-lines',
 		placeholder    : 'Select Airline',
-		isClearable    : !isEdit,
-		disabled       : isEdit,
+		isClearable    : !item?.airline_id,
+		disabled       : !!item?.airline_id,
 	},
 	{
 		name           : 'origin_location_id',
