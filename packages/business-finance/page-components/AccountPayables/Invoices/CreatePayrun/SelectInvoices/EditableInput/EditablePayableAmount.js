@@ -21,15 +21,19 @@ const getFormattedAmount = ({ amount, currency }) => (
 	})
 );
 
-function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () => {} }) {
+function EditablePayableAmount({
+	itemData = {},
+	field = {},
+	setEditedValue = () => {},
+}) {
 	const { key, fallBackKey } = field;
 	const [edit, setEdit] = useState(false);
-
 	const [value, setValue] = useState(getByKey(itemData, key));
 
 	const {
 		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		payableAmount = 0,
+		invoiceType,
 	} = itemData;
 
 	useEffect(() => {
@@ -41,28 +45,32 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 
 	const isError = lessValueCrossed || maxValueCrossed;
 
-	let errorMessege = '';
-
-	if (lessValueCrossed) {
-		errorMessege = 'Payables cannot be less than 1';
-	} else if (maxValueCrossed) {
-		errorMessege = `${getFormattedAmount({
-			amount: value,
-			currency,
-		})} (To Be Paid) cannot be greater than payable: ${getFormattedAmount({
-			amount: payableAmount,
-			currency,
-		})}`;
-	} else {
-		errorMessege = getFormattedAmount({ amount: value, currency });
-	}
+	const getErrorMessage = () => {
+		if (lessValueCrossed) {
+			return 'Payables cannot be less than 1';
+		} if (maxValueCrossed) {
+			return `${getFormattedAmount({
+				amount: value,
+				currency,
+			})} (To Be Paid) cannot be greater than payable: ${getFormattedAmount({
+				amount: payableAmount,
+				currency,
+			})}`;
+		}
+		return getFormattedAmount({ amount: value, currency });
+	};
 
 	function ToolTipContent() {
 		return (
 			<div className={styles.flex}>
 				<div>
 					{!isError && <div className={styles.text}>Actual payable value</div>}
-					<div className={cl`${styles.message} ${isError ? styles.errormessage : ''}`}>{errorMessege}</div>
+					<div className={cl`${styles.message} ${isError
+						? styles.errormessage : ''}`}
+					>
+						{getErrorMessage()}
+
+					</div>
 				</div>
 			</div>
 		);
@@ -74,30 +82,11 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 		setEdit(false);
 	};
 
-	if (edit) {
-		return (
-			<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
-				<Input
-					onChange={(val) => {
-						setEditedValue(itemData, val, key, true);
-						setValue(val);
-					}}
-					defaultValue={value}
-					value={value}
-					placeholder="Amount"
-					type="number"
-				/>
-				<Tooltip content={<ToolTipContent />}>
-					<IcMInformation
-						height={14}
-						width={14}
-						className={cl`${styles.icon} ${isError ? styles.error : ''}`}
-					/>
-				</Tooltip>
-				<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />
-			</div>
-		);
-	}
+	const handleEditClick = () => {
+		setEditedValue(itemData, true, 'checked', true);
+		setEdit(true);
+	};
+
 	return (
 		<div>
 			{getFormattedAmount({
@@ -105,18 +94,38 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 				currency : getByKey(itemData, field?.currencyKey),
 			})}
 			<span className={styles.edit}>
-				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
+				{invoiceType !== 'CREDIT NOTE' && (
 					<IcMEdit
 						height={12}
 						width={12}
 						className={styles.pointer}
-						onClick={() => {
-							setEditedValue(itemData, true, 'checked', true);
-							setEdit(true);
-						}}
+						onClick={handleEditClick}
 					/>
 				)}
 			</span>
+
+			{edit && (
+				<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
+					<Input
+						onChange={(val) => {
+							setEditedValue(itemData, val, key, true);
+							setValue(val);
+						}}
+						defaultValue={value}
+						value={value}
+						placeholder="Amount"
+						type="number"
+					/>
+					<Tooltip content={<ToolTipContent />}>
+						<IcMInformation
+							height={14}
+							width={14}
+							className={cl`${styles.icon} ${isError ? styles.error : ''}`}
+						/>
+					</Tooltip>
+					<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />
+				</div>
+			)}
 		</div>
 	);
 }

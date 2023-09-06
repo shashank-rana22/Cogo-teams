@@ -27,6 +27,66 @@ const ELEMENT_NOT_FOUND = -1;
 const HUNDERED_PERCENT = 100;
 
 const TEN_PERCENT = 10;
+const updateApiData = (prevApiData, itemData, key, value, checked, index, errorStatus) => {
+	const newValue = { ...prevApiData };
+
+	if (index !== ELEMENT_NOT_FOUND) {
+		newValue.list[index] = {
+			...itemData,
+			hasError: errorStatus.maxValueCrossed || errorStatus.lessValueCrossed
+			|| errorStatus.maxTdsValueCrossed || errorStatus.lessTdsValueCrossed,
+			checked,
+		};
+
+		newValue.list[index][key] = value;
+
+		if (key === 'tdsAmount' && index >= MIN_AMOUNT) {
+			newValue.list[index].payableAmount = newValue.list[index].payableValue - value;
+			newValue.list[index].inputAmount = newValue.list[index].payableValue - value;
+		}
+	}
+
+	return newValue;
+};
+const calculateErrorStatus = (
+	key,
+	value,
+	payableValue,
+	invoiceAmount,
+	tdsDeducted,
+	payableAmount,
+	tdsAmount,
+) => {
+	const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
+	let maxValueCrossed = false;
+	let lessValueCrossed = false;
+	let lessTdsValueCrossed = false;
+	let maxTdsValueCrossed = false;
+
+	if (key === 'payableAmount') {
+		maxValueCrossed = +value > +payableValue;
+		lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
+		maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+		lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+	} else if (key === 'tdsAmount') {
+		maxValueCrossed = +payableAmount > +payableValue;
+		lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+		maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
+		lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
+	} else {
+		maxValueCrossed = +payableAmount > +payableValue;
+		lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+		maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+		lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
+	}
+
+	return {
+		maxValueCrossed,
+		lessValueCrossed,
+		lessTdsValueCrossed,
+		maxTdsValueCrossed,
+	};
+};
 
 const getFunctions = ({ GetTableBodyCheckbox = () => {}, setEditedValue = () => {} }) => ({
 	renderCheckbox : (itemData) => GetTableBodyCheckbox(itemData),
@@ -82,57 +142,33 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 
 	const setEditedValue = (itemData = {}, value = '', key = '', checked = false) => {
 		setApiData((prevApiData) => {
-			const newValue = { ...prevApiData };
-			const index = newValue?.list?.findIndex(
-				(item) => item?.id === itemData?.id,
-			);
+			const index = prevApiData?.list?.findIndex((item) => item?.id === itemData?.id);
 			const {
 				payableValue = 0,
 				invoiceAmount = 0,
 				tdsDeducted = 0,
 				payableAmount = 0,
 				tdsAmount = 0,
-			} = newValue.list[index] || {};
-			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
-
-			let maxValueCrossed = false;
-			let lessValueCrossed = false;
-			let lessTdsValueCrossed = false;
-			let maxTdsValueCrossed = false;
-
-			if (key === 'payableAmount') {
-				maxValueCrossed = +value > +payableValue;
-				lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
-				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
-			} else if (key === 'tdsAmount') {
-				maxValueCrossed = +payableAmount > +payableValue;
-				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
-				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
-
-				if (index >= MIN_AMOUNT) {
-					newValue.list[index].payableAmount = payableValue - value;
-					newValue.list[index].inputAmount = payableValue - value;
-				}
-			} else {
-				maxValueCrossed = +payableAmount > +payableValue;
-				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
-				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
-			}
-
-			const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
-
-			if (index !== ELEMENT_NOT_FOUND) {
-				newValue.list[index] = {
-					...itemData,
-					hasError: isError,
-					checked,
-				};
-				newValue.list[index][key] = value;
-			}
-			return newValue;
+			} = prevApiData.list[index] || {};
+			const errorStatus = calculateErrorStatus(
+				key,
+				value,
+				payableValue,
+				invoiceAmount,
+				tdsDeducted,
+				payableAmount,
+				tdsAmount,
+			);
+			const updatedData = updateApiData(
+				prevApiData,
+				itemData,
+				key,
+				value,
+				checked,
+				index,
+				errorStatus,
+			);
+			return updatedData;
 		});
 	};
 
