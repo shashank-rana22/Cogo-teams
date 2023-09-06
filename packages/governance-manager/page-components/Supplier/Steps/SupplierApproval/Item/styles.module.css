@@ -1,0 +1,22 @@
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 50px;
+	padding: 14px 24px;
+	border: 1px solid #bdbdbd;
+	border-top: 0;
+}
+
+.status_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.status_text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 16px;
+}
