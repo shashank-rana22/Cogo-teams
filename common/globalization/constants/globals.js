@@ -557,6 +557,9 @@ const GLOBAL_CONSTANTS = {
 		html_class_regex           : /class="([^"]+)"/g,
 	},
 	zeroth_index                 : 0,
+	one                          : 1,
+	two                          : 2,
+	fifty                        : 50,
 	milliseconds_in_one_day      : 86400000,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
@@ -722,7 +725,16 @@ const GLOBAL_CONSTANTS = {
 		fortigo  : 'www.4tigo.com',
 	},
 	days                       : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-	default_preferred_language : 'english',
+	governance_manager_role_id : 'ebafce31-75ef-4865-9060-775574e9606f',
+	governance_lead_role_id    : 'ae80297f-e30d-45fb-845c-61c302523476',
+	governance_manager_pending_image_url:
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/93e7e3ef7b8aaea36010c16608eb8bef/openmoji_timer.svg',
+	governance_manager_approved_image_url:
+    'https://cogoport-testing.sgp1.digitaloceanspaces.com/75a2231b9871b1f91a26663aa25d2da0/Group%201000010749.svg',
+	governance_manager_rejected_image_url:
+    'https://cogoport-testing.sgp1.digitaloceanspaces.com/2466c7e2faa34ad8f4beb2b110b1ce1e/Group.svg',
+
+	default_preferred_language: 'english',
 };
 
 export default GLOBAL_CONSTANTS;
