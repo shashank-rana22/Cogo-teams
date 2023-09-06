@@ -2086,8 +2086,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		manage_rfq: {
 			key           : 'manage_rfq',
 			title         : t('common:manage_rfq'),
-			href          : '/manage-rfq',
-			as            : '/manage-rfq',
+			href          : '/manage-rfq?activeTab=draft&page=1',
+			as            : '/manage-rfq?activeTab=draft&page=1',
 			type          : 'link',
 			main_apis     : ['list_rfqs'],
 			possible_apis : apis.manage_rfq,
@@ -2588,6 +2588,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 			],
+		},
+		attendance_leave_management: {
+			key           : 'attendance_leave_management',
+			title         : 'Attendance and Leave Management',
+			icon          : IcMDashboard,
+			href          : '/v2/attendance-leave-management',
+			as            : '/v2/attendance-leave-management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.attendance_leave_management,
 		},
 	};
 

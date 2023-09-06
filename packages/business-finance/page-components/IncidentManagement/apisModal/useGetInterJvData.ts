@@ -8,6 +8,7 @@ const useGetInterJvData = ({
 	interCompanyJournalVoucherRequest,
 	id,
 	remark,
+	t,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -38,7 +39,7 @@ const useGetInterJvData = ({
 				data: payload,
 			});
 
-			Toast.success('Request Updated Sucessfully');
+			Toast.success(t('incidentManagement:request_updated_successfully_message'));
 			setShowICJvModal(false);
 			refetch();
 		} catch (e) {

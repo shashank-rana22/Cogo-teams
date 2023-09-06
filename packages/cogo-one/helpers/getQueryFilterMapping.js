@@ -41,6 +41,12 @@ function getQueryFilterMapping({
 		activeFolder: appliedFilters?.activeFolder
 			? [where(appliedFilters?.activeFolder, '==', true)]
 			: [],
+		user_email: appliedFilters?.user_email
+			? [where('email', '==', appliedFilters?.user_email)]
+			: [],
+		shipment_serial_id: appliedFilters?.shipment_serial_id
+			? [where('shipment_serial_id', '==', appliedFilters?.shipment_serial_id)]
+			: [],
 	};
 }
 

@@ -1,18 +1,19 @@
 import { remainControls, requestControls } from './controls';
 
-interface Controls {
+interface FilterControlsInterface {
 	activeTab?:string
 	isSettlementExecutive:boolean
+	t?:Function;
 }
 
-export const getFilterControls = ({ activeTab, isSettlementExecutive }: Controls) => {
+export const getFilterControls = ({ activeTab, isSettlementExecutive, t = () => {} }: FilterControlsInterface) => {
 	switch (activeTab) {
 		case 'requested':
-			return requestControls(isSettlementExecutive);
+			return requestControls({ t, isSettlementExecutive });
 		case 'approved':
-			return remainControls(isSettlementExecutive);
+			return remainControls({ t, isSettlementExecutive });
 		case 'rejected':
-			return remainControls(isSettlementExecutive);
+			return remainControls({ t, isSettlementExecutive });
 		default:
 			return [{}];
 	}

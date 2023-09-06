@@ -135,10 +135,12 @@ export function mountPinnedSnapShot({
 }
 
 export function mountUnreadCountSnapShot({
-	unreadCountSnapshotListener,
-	omniChannelCollection, baseQuery,
-	setUnReadChatsCount,
-	sessionQuery,
+	unreadCountSnapshotListener = {},
+	omniChannelCollection = {},
+	baseQuery = [],
+	setUnReadChatsCount = () => {},
+	sessionQuery = [],
+	queryFilters = [],
 }) {
 	const snapshotRef = unreadCountSnapshotListener;
 
@@ -147,8 +149,9 @@ export function mountUnreadCountSnapShot({
 	const countUnreadChatQuery = query(
 		omniChannelCollection,
 		where('has_admin_unread_messages', '==', true),
-		...baseQuery,
-		...sessionQuery,
+		...(baseQuery || []),
+		...(sessionQuery || []),
+		...(queryFilters || []),
 		orderBy('new_message_sent_at', 'desc'),
 	);
 
