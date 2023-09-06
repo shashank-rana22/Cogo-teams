@@ -1,0 +1,51 @@
+.form_container {
+	margin-top: 16px;
+}
+
+.form_group {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	align-items: center;
+	justify-content: space-between;
+
+	:global(.ui_radiogroup_container) {
+		padding: 0;
+	}
+}
+
+.schedule {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	align-items: flex-start;
+	justify-content: space-between;
+
+	:global(.ui_radiogroup_container) {
+		padding: 0;
+	}
+}
+
+.form_group:not(:first-child) { margin: 16px 0; }
+
+.input_group {
+	display: flex;
+	flex: 2;
+	flex-direction: column;
+	width: 50%;
+	margin-right: 24px;
+
+	:global(.ui_radiogroup_container) {
+		flex-wrap: wrap;
+	}
+}
+
+.label {
+	flex: 1;
+	margin-left: 24px;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}

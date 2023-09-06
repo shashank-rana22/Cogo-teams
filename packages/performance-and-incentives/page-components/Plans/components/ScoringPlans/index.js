@@ -20,9 +20,7 @@ function ScoringPlans() {
 				onClick={handleClick}
 			>
 				Create Scoring
-
 			</Button>
-
 		</div>
 	);
 }

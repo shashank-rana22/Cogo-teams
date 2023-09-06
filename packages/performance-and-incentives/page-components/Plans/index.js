@@ -27,28 +27,24 @@ function Plans() {
 
 	return (
 		<section className={styles.container}>
-			<h2>Incentive</h2>
+			<Tabs
+				activeTab={activeTab}
+				onChange={setActiveTab}
+				fullWidth
+				themeType="primary"
+			>
+				{Object.values(TAB_PANNEL_COMPONENT_MAPPING).map((item) => {
+					const { name, title, Component } = item;
 
-			<section className={styles.tabs}>
-				<Tabs
-					activeTab={activeTab}
-					onChange={setActiveTab}
-					fullWidth
-					themeType="primary"
-				>
-					{Object.values(TAB_PANNEL_COMPONENT_MAPPING).map((item) => {
-						const { name, title, Component } = item;
+					if (!Component) return null;
 
-						if (!Component) return null;
-
-						return (
-							<TabPanel key={name} name={name} title={title}>
-								<Component key={name} />
-							</TabPanel>
-						);
-					})}
-				</Tabs>
-			</section>
+					return (
+						<TabPanel key={name} name={name} title={title}>
+							<Component key={name} />
+						</TabPanel>
+					);
+				})}
+			</Tabs>
 		</section>
 	);
 }
