@@ -14,7 +14,7 @@ import {
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
-export const ENABLE_SIDE_BAR = ['whatsapp', 'platform_chat', 'zalo', 'telegram'];
+export const ENABLE_SIDE_BAR = ['whatsapp', 'platform_chat', 'zalo', 'telegram', 'voice_call', 'video_call'];
 export const ENABLE_EXPAND_SIDE_BAR = ['email'];
 
 export const SOURCE_ICON_MAPPING = {
