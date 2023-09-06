@@ -1,4 +1,4 @@
-import isEqual from '@cogoport/core/helpers/isEqual';
+import isEqual from '@cogoport/ocean-modules/utils/isEqual';
 import { isEmpty } from '@cogoport/utils';
 
 const prefillChanges = ({ config, formValues }) => {
