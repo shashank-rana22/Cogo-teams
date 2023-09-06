@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React from 'react';
 
-import { STAT_CARDS_MAPPING } from '../../../helpers/constants';
+import { STAT_CARDS_MAPPING } from '../../../configurations/helpers/constants';
 
 import Card from './Card';
 import MainCard from './MainCard';

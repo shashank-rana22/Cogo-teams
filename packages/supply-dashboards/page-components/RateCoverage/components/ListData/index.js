@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { CARDS_MAPPING, HEADINGS } from '../../helpers/constants';
+import { CARDS_MAPPING, HEADINGS } from '../../configurations/helpers/constants';
 import Card from '../TasksOverview/OverviewContent/Card';
 
 import ListCard from './ListCard';

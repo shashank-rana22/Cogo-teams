@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { SVG_PATH_D, DEFAULT_VALUE, FIFTY, SEVENTY_FIVE } from '../../../../helpers/constants';
+import { SVG_PATH_D, DEFAULT_VALUE, FIFTY, SEVENTY_FIVE } from '../../../../configurations/helpers/constants';
 
 import styles from './styles.module.css';
 

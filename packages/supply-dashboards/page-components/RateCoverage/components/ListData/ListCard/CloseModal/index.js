@@ -1,7 +1,7 @@
 import { Button, Checkbox, Modal, Toast } from '@cogoport/components';
 import React from 'react';
 
-import { CLOSE_REASON_OPTIONS } from '../../../../helpers/constants';
+import { CLOSE_REASON_OPTIONS } from '../../../../configurations/helpers/constants';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 
 import styles from './styles.module.css';

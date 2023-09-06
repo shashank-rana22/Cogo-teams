@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { WEEKLY_BACKLOG } from '../../../../helpers/constants';
+import { WEEKLY_BACKLOG } from '../../../../configurations/helpers/constants';
 import Card from '../../OverviewContent/Card';
 
 import styles from './styles.module.css';

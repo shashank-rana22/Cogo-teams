@@ -1,6 +1,6 @@
-import RfqEnquiries from '../Content';
+import RateCoverageContent from '../Content';
 
-const tabPanelMapping = [
+export const tabPanelMappings = [
 	{
 		name      : 'live_bookings',
 		title     : 'Live Bookings',
@@ -8,7 +8,7 @@ const tabPanelMapping = [
 	},
 	{
 		name      : 'trade_enquiry',
-		title     : 'Missing Rates',
+		title     : 'Trade Enquiry',
 		component : <>--</>,
 	},
 	{
@@ -18,8 +18,8 @@ const tabPanelMapping = [
 	},
 	{
 		name      : 'rate_density',
-		title     : 'Rate Density & Coverage',
-		component : <>--</>,
+		title     : 'Rate Density',
+		component : <RateCoverageContent />,
 	},
 	{
 		name      : 'manage_forecast',
@@ -29,13 +29,11 @@ const tabPanelMapping = [
 	{
 		name      : 'rfq_enquiries',
 		title     : 'RFQ Enquiries',
-		component : <RfqEnquiries />,
+		component : <>--</>,
 	},
 	{
-		name      : 'rates_sheets',
+		name      : 'rate_sheets',
 		title     : 'Rate Sheets',
 		component : <>--</>,
 	},
 ];
-
-export default tabPanelMapping;

@@ -13,7 +13,7 @@ import {
 	PackagingTypeOptions, handlingtype,
 	RateTypeOptions, currencyOptions, PriceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
 	fclCommodityOptions,
-} from '../../../../helpers/constants';
+} from '../../../../configurations/helpers/constants';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';

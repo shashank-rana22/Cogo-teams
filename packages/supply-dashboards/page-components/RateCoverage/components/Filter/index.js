@@ -2,7 +2,7 @@ import { Button, DateRangepicker, Select } from '@cogoport/components';
 import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
 import { merge } from '@cogoport/utils';
 
-import { serviceOptions, taskStatusOptions, commodityOptions } from '../../helpers/constants';
+import { serviceOptions, taskStatusOptions, commodityOptions } from '../../configurations/helpers/constants';
 
 import styles from './styles.module.css';
 

@@ -1,41 +1,34 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
 
-// eslint-disable-next-line import/no-cycle
-import LiveBookingsView from '../LiveBookings';
-import RfqEnquiries from '../RfqEnquiries/Content';
-
-import RateCoverageContent from './Content';
+import { tabPanelMappings } from './configurations/tab-panel-mappings';
 
 function RateCoverage() {
-	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const ACTIVETAB = 'rate_density';
-	const { push } = useRouter();
+	const partnerId = useSelector((state) => state?.profile?.partner?.id);
+	const ACTIVE_TAB = 'rate_density';
 
+	const geo = getGeoConstants();
+	const { navigations = {} } = geo;
+	const { supply_dashboard = {} } = navigations;
+	const { rfq_enquiries = {} } = supply_dashboard;
+	const { tabs = [] } = rfq_enquiries;
 	const handleTabChange = (tab) => {
 		if (tab !== 'rate_density') {
 			const route = tab.replace('_', '-');
-			if (route === 'rfq-enquiries') {
-				push(`/supply/dashboards/${route}`);
-			} else {
-				window.location.href = `/${partnerId}/supply/dashboards/${route}`;
-			}
+			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
 
 	return (
 		<div>
-			<Tabs fullWidth activeTab={ACTIVETAB} themeType="primary" onChange={(tab) => { handleTabChange(tab); }}>
-				<TabPanel name="live_bookings" title="Live Bookings"><LiveBookingsView /></TabPanel>
-				<TabPanel name="trade_enquiry" title="Missing Rates">--</TabPanel>
-				<TabPanel name="disliked_rates" title="Disliked Rates">--</TabPanel>
-				<TabPanel name="rate_density" title="Rate Coverage"><RateCoverageContent /></TabPanel>
-				<TabPanel name="manage_forecast" title="Manage Forcast">--</TabPanel>
-				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
-					<RfqEnquiries />
-				</TabPanel>
-				<TabPanel name="rates_sheets" title="Rate Sheets">--</TabPanel>
+			<Tabs fullWidth activeTab={ACTIVE_TAB} themeType="primary" onChange={(tab) => { handleTabChange(tab); }}>
+				{(tabPanelMappings || []).map(({ name, title, component }) => {
+					if (tabs.includes(name)) {
+						return <TabPanel key={name} name={name} title={title}>{component}</TabPanel>;
+					}
+					return null;
+				})}
 			</Tabs>
 		</div>
 	);
