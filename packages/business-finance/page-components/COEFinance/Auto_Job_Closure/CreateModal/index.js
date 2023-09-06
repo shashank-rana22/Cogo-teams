@@ -9,12 +9,13 @@ import styles from '../styles.module.css';
 import DetailForm from './DetailForm';
 
 function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () => {} }) {
-	const { control, watch, handleSubmit, formState: { errors = {} } } = useForm();
-
-	const { apiTrigger } = useCreateJobClosure({ refetch, setOpenModal });
 	const { user_data: UserData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+	const { control, watch, handleSubmit, formState: { errors = {} } } = useForm();
+
+	const { apiTrigger, loading } = useCreateJobClosure({ refetch, setOpenModal });
+
 	const { user } = UserData;
 	const { id:userId } = user;
 
@@ -58,6 +59,7 @@ function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () 
 					themeType="primary"
 					className={styles.formButton}
 					onClick={handleSubmit(onSubmit)}
+					disabled={loading}
 
 				>
 					Create

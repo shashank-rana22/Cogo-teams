@@ -10,6 +10,7 @@
 }
 
 .edit {
+	margin-left: 50px;
 	color: #f68b21;
 	cursor: pointer;
 }
@@ -56,9 +57,13 @@
 }
 
 .selectController {
-	width: 175px;
+	width: 160px;
 }
 
 .inputBox {
-	width: 160px;
+	width: 100px;
+}
+
+.selectionCriteriaController {
+	width: 240px;
 }

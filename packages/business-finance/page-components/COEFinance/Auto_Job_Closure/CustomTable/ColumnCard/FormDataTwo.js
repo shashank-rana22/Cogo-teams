@@ -53,7 +53,7 @@ function FormDataTwo({
 		}));
 	}, [stringifiedData, item.id, setSaveObj]);
 
-	const { apiTrigger } = useUpdateJobClosure({ refetch, setOpenConfig, listOfId: [item.id] });
+	const { apiTrigger, loading: updateLoading } = useUpdateJobClosure({ refetch, setOpenConfig, listOfId: [item.id] });
 
 	const onSubmit = (value) => {
 		const params = {
@@ -118,7 +118,7 @@ function FormDataTwo({
 		selectionCriteriaOp: (
 
 			<SelectController
-				className={styles.selectController}
+				className={styles.selectionCriteriaController}
 				control={control}
 				name="selectionCriteriaOp"
 				options={selectionCriteriaOptions(watch('serviceType'))}
@@ -139,7 +139,7 @@ function FormDataTwo({
 
 		selectionCriteriaFin: (
 			<SelectController
-				className={styles.selectController}
+				className={styles.selectionCriteriaController}
 				control={control}
 				name="selectionCriteriaFin"
 				options={selectionCriteriaOptions(watch('serviceType'))}
@@ -170,6 +170,7 @@ function FormDataTwo({
 					themeType="primary"
 					className={styles.button}
 					onClick={handleSubmit(onSubmit)}
+					disabled={updateLoading}
 				>
 					Confirm
 				</Button>

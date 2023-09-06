@@ -31,7 +31,7 @@ const useUpdateJobClosure = (
 					performedBy : userId,
 				},
 			});
-			Toast.success('mayank success');
+			Toast.success('success');
 			setOpenConfig((prev) => (prev.filter((columnId) => (!listOfId.includes(columnId)))));
 			setSaveObj({});
 			refetch();

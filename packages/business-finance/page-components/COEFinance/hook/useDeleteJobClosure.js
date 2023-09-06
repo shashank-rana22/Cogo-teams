@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const useDeleteJobClosure = ({ refetch = () => {}, setDeleteModal = () => {} }) => {
-	const [trigger] = useRequestBf({
+	const [{ loading }, trigger] = useRequestBf({
 		url    : '/common/job/delete-job-closure-rule',
 		method : 'PUT',
 	}, { manual: true });
@@ -22,6 +22,7 @@ const useDeleteJobClosure = ({ refetch = () => {}, setDeleteModal = () => {} }) 
 
 	return {
 		apiTrigger,
+		loading,
 	};
 };
 

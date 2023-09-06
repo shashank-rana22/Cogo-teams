@@ -6,7 +6,7 @@ const Auto_Job_Closure_Config = {
 		{
 			label : 'Entity',
 			key   : 'entity',
-			span  : 1.5,
+			span  : 1.3,
 		},
 		{
 			label : 'Service',
@@ -21,27 +21,27 @@ const Auto_Job_Closure_Config = {
 		{
 			label : 'Selection Criteria',
 			key   : 'selectionCriteriaOp',
-			span  : 2,
+			span  : 2.1,
 		},
 		{
 			label : 'Level1',
 			key   : 'oprClosureDays',
-			span  : 1.5,
+			span  : 1.1,
 		},
 		{
 			label : 'Selection Criteria',
 			key   : 'selectionCriteriaFin',
-			span  : 2,
+			span  : 2.1,
 		},
 		{
 			label : 'Level2',
 			key   : 'finClosureDays',
-			span  : 1.5,
+			span  : 1.1,
 		},
 		{
 			label : '',
 			key   : 'editDelete',
-			span  : 1.5,
+			span  : 1.3,
 		},
 	],
 };

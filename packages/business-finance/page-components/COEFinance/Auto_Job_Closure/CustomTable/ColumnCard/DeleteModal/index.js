@@ -6,7 +6,7 @@ import useDeleteJobClosure from '../../../../hook/useDeleteJobClosure';
 import styles from '../styles.module.css';
 
 function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch = () => {}, id = '' }) {
-	const { apiTrigger } = useDeleteJobClosure({ refetch, setDeleteModal });
+	const { apiTrigger, loading } = useDeleteJobClosure({ refetch, setDeleteModal });
 
 	const { user_data: UserData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
@@ -42,6 +42,7 @@ function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch =
 					themeType="primary"
 					className={styles.form_button}
 					onClick={() => confirmDeleteClicked()}
+					disabled={loading}
 				>
 					Confirm
 
