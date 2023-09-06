@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function EmployeeDetail() {
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState(true);
 
 	const KEYS_TO_DISPLAY = {
 		employee_name   : 'Shivam Singh',
