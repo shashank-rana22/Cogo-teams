@@ -58,7 +58,7 @@ function CoeFinance() {
 						<Rejected statsData={statsData} />
 					</TabPanel>
 					<TabPanel name="auto_job_closure" title="Auto-Job Closure">
-						<AutoJobClosure statsData={statsData} />
+						<AutoJobClosure />
 					</TabPanel>
 				</Tabs>
 			</div>
