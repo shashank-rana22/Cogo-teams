@@ -6,7 +6,7 @@ const getTotalFields = ({ controls = [] }) => {
 
 	const TOTAL_FIELDS = [];
 
-	controls.forEach((ctrl = {}) => {
+	controls?.forEach((ctrl = {}) => {
 		const { span = 0 } = ctrl || {};
 		if ((current_span + span) > TOTAL_SPAN) {
 			TOTAL_FIELDS.push(row_wise_fields);

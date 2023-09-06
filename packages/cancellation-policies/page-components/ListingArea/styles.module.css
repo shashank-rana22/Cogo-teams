@@ -1,0 +1,10 @@
+.table_container {
+	font-size: large;
+	background-color: white;
+}
+
+.edit_delete_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}

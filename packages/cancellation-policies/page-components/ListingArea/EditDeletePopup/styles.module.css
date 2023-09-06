@@ -1,0 +1,9 @@
+.edit_modal_footer {
+	gap: 1rem;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

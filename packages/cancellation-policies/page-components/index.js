@@ -1,5 +1,50 @@
+import { Loader } from '@cogoport/components';
+
+import useListShipmentCancellation from '../hooks/useListShipmentCancellation';
+
+import Header from './Header';
+import ListingArea from './ListingArea';
+import ListPagination from './ListPagination';
+import styles from './styles.module.css';
+
 function CancellationPolicies() {
-	return <div>cancellation_policies</div>;
+	const {
+		data = {},
+		loading = false,
+		setFilters = () => {},
+		filters = {},
+		refetch = () => {},
+	} = useListShipmentCancellation({
+		defaultFilters: { organization_trade_parties_data_required: true },
+	});
+
+	if (loading) {
+		return (
+			<div>
+				Loading...
+				<Loader themeType="secondary" />
+			</div>
+		);
+	}
+
+	const paginationProps = { setFilters, filters, data };
+
+	return (
+		<div className={styles.container}>
+			<Header
+				filterValues={filters}
+				setFilterValues={setFilters}
+				refetch={refetch}
+			/>
+
+			<ListPagination {...paginationProps} />
+
+			<ListingArea data={data} />
+
+			<ListPagination {...paginationProps} />
+
+		</div>
+	);
 }
 
 export default CancellationPolicies;
