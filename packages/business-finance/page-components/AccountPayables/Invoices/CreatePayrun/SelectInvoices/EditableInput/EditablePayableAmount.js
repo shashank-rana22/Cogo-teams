@@ -84,26 +84,11 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 
 	return (
 		<div>
-			{getFormattedAmount({
-				amount   : getByKey(itemData, key),
-				currency : getByKey(itemData, field?.currencyKey),
-			})}
-			<span className={styles.edit}>
-				{invoiceType !== 'CREDIT NOTE' && (
-					<IcMEdit
-						height={12}
-						width={12}
-						className={styles.pointer}
-						onClick={handleEditClick}
-					/>
-				)}
-			</span>
-
-			{edit && (
+			{edit ? (
 				<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 					<Input
 						onChange={(val) => {
-							setEditedValue(itemData, val, key, true);
+							setEditedValue({ itemData, value: val, key, checked: true });
 							setValue(val);
 						}}
 						defaultValue={value}
@@ -120,7 +105,24 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 					</Tooltip>
 					<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />
 				</div>
-			)}
+			) : (
+				<>
+					{getFormattedAmount({
+						amount   : getByKey(itemData, key),
+						currency : getByKey(itemData, field?.currencyKey),
+					})}
+					<span className={styles.edit}>
+						{invoiceType !== 'CREDIT NOTE' && (
+							<IcMEdit
+								height={12}
+								width={12}
+								className={styles.pointer}
+								onClick={handleEditClick}
+							/>
+						)}
+					</span>
+				</>
+			) }
 		</div>
 	);
 }
