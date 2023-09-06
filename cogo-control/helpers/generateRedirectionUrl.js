@@ -26,7 +26,6 @@ const generateRedirectionUrl = ({ request, locale, isOldLocalePresent }) => {
 	let { pathname } = url;
 
 	pathname = removeLocales({ pathname, locales: languages });
-
 	if (isOldLocalePresent) {
 		pathname = removeLocales({ pathname, locales: oldLocale.languages });
 	}
