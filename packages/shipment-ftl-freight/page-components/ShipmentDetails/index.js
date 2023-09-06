@@ -72,8 +72,7 @@ function ShipmentDetails() {
 
 	useEffect(() => {
 		setActiveTab(default_tab);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [authParams]);
+	}, [authParams, setActiveTab, default_tab]);
 
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => visible_tabs.includes(t));
 

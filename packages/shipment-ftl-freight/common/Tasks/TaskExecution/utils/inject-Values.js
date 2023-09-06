@@ -171,9 +171,10 @@ const injectValues = ({
 	if (
 		task?.task === 'upload_high_advance_payment_proof'
 	) {
-		(controls || []).forEach((control, index) => {
+		(controls || []).forEach((control) => {
+			const tempControl = control;
 			if (control.type === 'fieldArray') {
-				controls[index].value = [{ invoice_number: task?.remarks?.[GLOBAL_CONSTANTS.zeroth_index] }];
+				tempControl.value = [{ invoice_number: task?.remarks?.[GLOBAL_CONSTANTS.zeroth_index] }];
 			}
 		});
 	}
