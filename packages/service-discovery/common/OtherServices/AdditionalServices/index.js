@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Select, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -204,7 +204,14 @@ function AdditionalServices({ // used in search results and checkout
 						IncoTerm:
 						<Select
 							value={inco_term}
-							onChange={(val) => setIncoTermModalData({ selectedValue: val })}
+							onChange={(val) => {
+								if (val === inco_term) {
+									Toast.error('You selected the same Incoterm');
+									return;
+								}
+
+								setIncoTermModalData({ selectedValue: val });
+							}}
 							size="sm"
 							options={incoTermOptions}
 							className={styles.select}

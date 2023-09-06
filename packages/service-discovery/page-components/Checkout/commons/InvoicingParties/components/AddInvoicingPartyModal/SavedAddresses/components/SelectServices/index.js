@@ -40,6 +40,7 @@ function SelectServices({
 		checkout_id = '',
 		conversions = {},
 		activated_on_paylater = {},
+		getCheckout = () => {},
 	} = useContext(CheckoutContext);
 
 	const { primary_service = '', services: allServices = {} } = detail;
@@ -68,6 +69,7 @@ function SelectServices({
 		selectedAddress,
 		activated_on_paylater,
 		isFclInvoice,
+		getCheckout,
 	});
 
 	return (

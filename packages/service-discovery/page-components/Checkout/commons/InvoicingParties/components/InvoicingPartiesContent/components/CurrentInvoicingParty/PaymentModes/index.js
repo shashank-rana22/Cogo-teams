@@ -1,7 +1,9 @@
 import { Select } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import DotLoader from '../../../../../../../../../common/LoadingState/DotLoader';
+import { CheckoutContext } from '../../../../../../../context';
 
 import styles from './styles.module.css';
 
@@ -36,16 +38,20 @@ function PaymentModes({
 	paymentModesLoading = false,
 	isFclInvoice = false,
 }) {
+	const { activated_on_paylater = {} } = useContext(CheckoutContext);
+
+	const { paylater_eligibility = false } = activated_on_paylater || {};
+
 	return paymentModes.map((item) => {
 		const { label, style, name, ...restProps } = item;
 
-		const { options = [], value = '' } = restProps;
-
-		if ((!isFclInvoice || isEmpty(options)) && DOCUMENT_HANDLING_FIELDS.includes(label)) {
-			return null;
-		}
+		const { value = '' } = restProps;
 
 		const valueToShow = paymentModeValues[name] || '';
+
+		if ((!isFclInvoice || !paylater_eligibility) && DOCUMENT_HANDLING_FIELDS.includes(label)) {
+			return null;
+		}
 
 		if (!editMode && DOCUMENT_HANDLING_FIELDS.includes(label) && !valueToShow) {
 			return null;

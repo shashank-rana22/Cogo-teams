@@ -2,7 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
+
+import { CheckoutContext } from '../../../context';
 
 import useGetPaymentModes from './useGetPaymentModes';
 
@@ -56,12 +58,20 @@ const useInvoicingParties = ({
 	invoicingParties = [],
 	activated_on_paylater = {},
 }) => {
-	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =		useState(false);
+	const { primaryService = {} } = useContext(CheckoutContext);
+
+	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
 
 	const [editInvoice, setEditInvoice] = useState({});
 	const [editInvoiceDetails, setEditInvoiceDetails] = useState({});
 
 	const [paymentModes, setPaymentModes] = useState({});
+
+	const {
+		bl_category,
+		bl_delivery_mode,
+		bl_type,
+	} = primaryService;
 
 	const [{ data = {}, loading: listLoading }, trigger] = useRequest(
 		{
@@ -105,6 +115,14 @@ const useInvoicingParties = ({
 					savedServicesInvoiceTo,
 					invoicingPartyServices: savedInvoicingParty?.services || [],
 				}),
+				payment_mode_details: {
+					...(savedInvoicingParty.payment_mode_details || {}),
+					...(savedInvoicingParty?.services.map(({ service }) => service).includes('fcl_freight') ? {
+						documentCategory     : bl_category,
+						documentType         : bl_type,
+						documentDeliveryMode : bl_delivery_mode,
+					} : {}),
+				},
 			})),
 		);
 
@@ -125,9 +143,6 @@ const useInvoicingParties = ({
 					payment_mode = '',
 					payment_term = '',
 					payment_method = '',
-					documentCategory = '',
-					documentType = '',
-					documentDeliveryMode = '',
 				} = payment_mode_details;
 
 				const { selected_credit_days = 0, interest_percent = 0 } = credit_option;
@@ -140,15 +155,17 @@ const useInvoicingParties = ({
 						paymentMode    : payment_mode || 'cash',
 						paymentTerms   : payment_term,
 						paymentMethods : payment_method,
-						documentCategory,
-						documentType,
-						documentDeliveryMode,
+						...(savedInvoicingParty?.services.map(({ service }) => service).includes('fcl_freight') ? {
+							documentCategory     : bl_category,
+							documentType         : bl_type,
+							documentDeliveryMode : bl_delivery_mode,
+						} : {}),
 						organization_trade_party_id,
 					},
 				};
 			}, {}),
 		);
-	}, [list, savedServicesInvoiceTo, setInvoicingParties]);
+	}, [bl_category, bl_delivery_mode, bl_type, list, savedServicesInvoiceTo, setInvoicingParties]);
 
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({
 		invoicingParties,
