@@ -92,7 +92,7 @@ const useModalContentForAddingDetails = (props) => {
 	return {
 		// filteredControls,
 		control,
-		formProps: { ...formProps, handleSubmit, newField },
+		formProps: { ...formProps, handleSubmit, fields: newField },
 		showElements,
 		newField,
 	};

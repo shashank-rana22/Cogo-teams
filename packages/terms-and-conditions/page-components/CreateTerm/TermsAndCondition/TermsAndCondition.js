@@ -1,5 +1,5 @@
 // import Layout from '@cogo/business-modules/form/Layout';
-import { Button, cl } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 
 import useCreateUpdateTnc from '../../../hooks/useCreateUpdateTnc';
 import { getFieldController } from '../../../utlis/getFieldController';
@@ -24,6 +24,7 @@ function TermsAndCondition(props) {
 	} = props;
 	const {
 		handleSubmit = () => {},
+		fields,
 		// formState: { errors = {} },
 	} = formProps;
 
@@ -40,7 +41,7 @@ function TermsAndCondition(props) {
 		<div className={styles.container}>
 
 			<div className={styles.container}>
-				{newField.map((controlItem) => {
+				{fields.map((controlItem) => {
 					const elementItem = { ...controlItem };
 					const { name, label, controllerType } = elementItem || {};
 					const Element = getFieldController(controllerType);
@@ -85,7 +86,7 @@ function TermsAndCondition(props) {
 
 			<div className={styles.btn_align}>
 				<Button
-					className={cl(`${styles.secondary} ${styles.md}`)}
+					className={`${styles.secondary} ${styles.md}`}
 					disabled={loading}
 					onClick={() => setTncLevel('basicInfo')}
 					style={{ textTransform: 'capitalize' }}
@@ -94,7 +95,7 @@ function TermsAndCondition(props) {
 				</Button>
 
 				<Button
-					className={cl(`${styles.primary} ${styles.md}`)}
+					className={`${styles.primary}, ${styles.md}`}
 					loading={loading}
 					onClick={handleSubmit(onSubmit)}
 					style={{ marginLeft: '8px', textTransform: 'capitalize' }}

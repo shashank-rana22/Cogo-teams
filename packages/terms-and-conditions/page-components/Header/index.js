@@ -42,8 +42,8 @@ function Header(props) {
 				{isMobile ? 'T & C' : 'New'}
 			</Button>
 			<Toggle
-				offLabel={{ label: 'Inactive', value: 'inactive' }}
-				onLabel={{ label: 'Active', value: 'active' }}
+				offLabel="Inactive"
+				onLabel="Active"
 				// onChange={onChangeToggleStatus}
 			/>
 			<div className={styles.filters_container}>

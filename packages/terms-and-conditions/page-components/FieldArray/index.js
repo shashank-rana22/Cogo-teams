@@ -15,6 +15,7 @@ function FieldArray({
 	showButtons = true,
 	disabled = false,
 	newField,
+
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -26,7 +27,8 @@ function FieldArray({
 	controls.forEach((controlItem) => {
 		childEmptyValues[controlItem.name] = controlItem.value || '';
 	});
-	console.log('fields', newField);
+
+	console.log('fields', fields, control, name);
 	return (
 		<div className={styles.container}>
 			{fields.map((field, index) => (

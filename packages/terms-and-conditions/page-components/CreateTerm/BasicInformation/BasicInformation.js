@@ -18,6 +18,7 @@ function BasicInformation(props) {
 	} = props;
 	const {
 		handleSubmit = () => {},
+		fields,
 		// formState: { errors = {} },
 	} = formProps;
 
@@ -31,7 +32,7 @@ function BasicInformation(props) {
 
 			<div className={styles.layout_container}>
 
-				{newField.map((controlItem) => {
+				{fields.map((controlItem) => {
 					const elementItem = { ...controlItem };
 					const { name, label, controllerType } = elementItem || {};
 					const Element = getFieldController(controllerType);
