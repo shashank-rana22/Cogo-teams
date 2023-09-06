@@ -1,34 +1,35 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const DEFAULT_PAGINATION = 1;
 const MIN_HEIGHT = 0;
+const DEFAULT_VALUE = 0;
 
-const getPayload = ({ pagination, filters }) => ({
-	page                        : pagination,
-	filters                     : { ...filters },
-	communication_logs_required : true,
+const getPayload = ({ pagination, userId, userNumber }) => ({
+	page    : pagination,
+	filters : {
+		user_id     : userId || undefined,
+		user_number : !userId ? userNumber : undefined,
+	},
+	communication_logs_required: true,
 });
 
-const useListUserVoiceCalls = (filters = {}) => {
+const useListUserVoiceCalls = ({ userId = '', userNumber = '' }) => {
 	const [listData, setListData] = useState({
 		list  : [],
 		total : 0,
+		page  : 1,
 	});
-
-	const [pagination, setPagination] = useState(DEFAULT_PAGINATION);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_user_call_details',
 		method : 'get',
 	}, { manual: true });
 
-	const voiceCallList = async () => {
+	const voiceCallList = useCallback(async ({ page = 1 }) => {
 		try {
 			const res = await trigger({
-				params: getPayload({ pagination, filters }),
+				params: getPayload({ pagination: page, userId, userNumber }),
 			});
 			if (res.data) {
 				const { list = [], ...paginationData } = res?.data || {};
@@ -37,26 +38,26 @@ const useListUserVoiceCalls = (filters = {}) => {
 		} catch (error) {
 			console.error(error);
 		}
-	};
+	}, [trigger, userId, userNumber]);
 
 	const handleScroll = (scrollTop) => {
 		const reachBottom = scrollTop === MIN_HEIGHT;
-		const hasMoreData = pagination < listData?.total;
+		const hasMoreData = listData?.page < listData?.total;
+
 		if (reachBottom && hasMoreData && !loading) {
-			setPagination((p) => p + DEFAULT_PAGINATION);
+			voiceCallList({ page: (listData?.page || DEFAULT_VALUE) + DEFAULT_PAGINATION });
 		}
 	};
-	useEffect(() => {
-		voiceCallList();
-	}, [pagination]);
+
 	useEffect(() => {
 		setListData({
 			list  : [],
 			total : 0,
+			page  : 1,
 		});
-		setPagination(DEFAULT_PAGINATION);
-		voiceCallList();
-	}, [JSON.stringify(filters)]);
+
+		voiceCallList({ page: 1 });
+	}, [voiceCallList]);
 
 	return {
 		loading,
