@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
 import FilePreview from '../../../../commons/FilePreview';
-import { OPTIONS, OptionAIR } from '../../../Constants';
+import { OPTIONS, OPTION_AIR } from '../../../Constants';
 
 import styles from './styles.module.css';
 
@@ -108,7 +108,7 @@ function Documents({
 								<>
 									<div className={styles.radiobtn}>
 										<RadioGroup
-											options={OptionAIR || [{}]}
+											options={OPTION_AIR || [{}]}
 											value={radioAir || ''}
 											onChange={(item) => setRadioAir(item)}
 										/>

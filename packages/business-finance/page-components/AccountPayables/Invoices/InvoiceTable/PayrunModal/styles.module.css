@@ -13,31 +13,26 @@
 	justify-content: space-between;
 }
 
-.unselected_currency_values {
+.common_currency_values {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: fit-content;
 	padding: 16px 20px;
 	margin-right: 8px;
-	color: #221f20;
 	cursor: pointer;
-	background-color: var(--color-secondary-5);
-	border: 1px solid #221f20;
 	border-radius: 8px;
 }
 
+.unselected_currency_values {
+	color: #221f20;
+	background-color: var(--color-secondary-5);
+	border: 1px solid #221f20;
+}
+
 .selected_currency_values {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: fit-content;
-	padding: 16px 20px;
-	margin-right: 8px;
 	color: var(--color-secondary-5);
-	cursor: pointer;
 	background-color: #ee3425;
-	border-radius: 8px;
 }
 
 .icon_show {

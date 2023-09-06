@@ -1,4 +1,5 @@
 import { Input, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMInformation, IcMLineundo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
@@ -26,7 +27,7 @@ const getErrorMessage = ({
 	lessValueCrossed = false,
 	maxValueCrossed = false,
 	value = '',
-	currency = 'INR',
+	currency = GLOBAL_CONSTANTS.currency_code.INR,
 	invoiceAmount = '',
 	totalTds = '',
 }) => {
@@ -57,7 +58,7 @@ function Content({
 	return (
 		<div>
 			<div className={styles.flex}>
-				{!isError && <div className={styles.text}>Actual TDS:</div>}
+				{!isError ? <div className={styles.text}>Actual TDS:</div> : null}
 				<div className={cl`${styles.message} ${isError ? styles.errormessage : ''}`}>
 					{getErrorMessage({
 						lessValueCrossed,
@@ -69,20 +70,20 @@ function Content({
 					})}
 				</div>
 			</div>
-			{!isError && (
+			{!isError ? (
 				<div className={styles.flex}>
 					<div className={styles.text}>Deducted TDS:</div>
 					<div className={cl`${styles.message} ${isError ? styles.errormessage : ''}`}>
 						{getFormattedAmount({ amount: tdsDeducted, currency })}
 					</div>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }
 
 function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {} }) {
-	const { key, fallBackKey } = field || {};
+	const { key = '', fallBackKey = '' } = field || {};
 	const [edit, setEdit] = useState(false);
 	const [value, setValue] = useState(getByKey(itemData, key));
 	const {
@@ -90,7 +91,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 		currency,
 		totalTds = 0,
 		tdsDeducted = 0,
-	} = itemData;
+	} = itemData || {};
 
 	const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 	const maxValueCrossed = +value + +tdsDeducted > +checkAmount;

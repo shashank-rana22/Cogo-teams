@@ -13,7 +13,12 @@ function UploadDocuments({ setActive = () => {} }) {
 		multiFileUpload  : null,
 	});
 
-	const { upload, listData, listLoading, deleteTaggedDocuments } = useUploadDocuments({ fileUploader });
+	const {
+		upload = () => {},
+		listData = {},
+		listLoading = false,
+		deleteTaggedDocuments = () => {},
+	} = useUploadDocuments({ fileUploader });
 
 	const { documents = '' } = listData || {};
 
@@ -25,7 +30,7 @@ function UploadDocuments({ setActive = () => {} }) {
 
 	const otherDocumentsUrlList = otherDocumentsUrl?.split(',');
 
-	const handlefileUpload = async (value, key) => {
+	const handlefileUpload = async (value = '', key = '') => {
 		if (key === 'singleFileUpload') {
 			if (value == null && taxDeclarationFormUrl !== '') {
 				deleteTaggedDocuments('taxDeclarationFormUrl');

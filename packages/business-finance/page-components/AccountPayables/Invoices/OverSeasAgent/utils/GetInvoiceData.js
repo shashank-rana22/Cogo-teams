@@ -17,7 +17,7 @@ function GetInvoiceData({ selectBankShow = false, setShowConfirmationModal = () 
 			:						(
 				<Button
 					onClick={() => setShowConfirmationModal(true)}
-					disabled={!list.length}
+					disabled={!list?.length}
 				>
 					Merge Invoices
 				</Button>

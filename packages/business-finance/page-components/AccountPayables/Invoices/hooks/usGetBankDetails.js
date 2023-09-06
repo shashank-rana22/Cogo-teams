@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetBankDetails = ({ tradePartyMappingId, serviceProviderId }) => {
+const useGetBankDetails = ({ tradePartyMappingId = '', serviceProviderId = '' }) => {
 	const [bankDetails, setBankDetails] = useState([]);
 
 	const [{ data, loading }] = useRequest(

@@ -924,7 +924,7 @@ function asyncListCompanyLocations() {
 	};
 }
 
-function asyncListOverSeasParties() {
+function asyncListOverSeasTradeParties() {
 	return {
 		valueKey     : 'organizationId',
 		labelKey     : 'organizationName',
@@ -1011,5 +1011,5 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
-	asyncListOverSeasParties,
+	asyncListOverSeasTradeParties,
 };

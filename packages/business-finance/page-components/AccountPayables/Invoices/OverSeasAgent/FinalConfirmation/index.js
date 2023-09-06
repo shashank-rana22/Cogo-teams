@@ -1,33 +1,22 @@
 import { Button, Placeholder, Select } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMPdf } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { saveAs } from 'file-saver';
 import React, { useState } from 'react';
 
 import useGetBankList from '../../hooks/useGetBankList';
 import useListTaggedInvoices from '../../hooks/useListTaggedInvoice';
+import GetDataFinalConfirmation from '../utils/GetDataFinalConfirmation';
 
 import styles from './styles.module.css';
-
-const MAX_LENGTH_MINUS = 1;
 
 function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {} }) {
 	const { push } = useRouter();
 
-	const PAYMENT_INITIATED = 'PAYMENT_INITIATED';
 	const { data, loadingList, selectBank, loadingSaveBank } = useListTaggedInvoices();
 	const [selectBankShow, setSelectBankShow] = useState(false);
 	const [bankObject, setBankObject] = useState({});
-	const { bankDetails } = useGetBankList();
-	const { documents = '' } = data || {};
+	const { bankDetails = [] } = useGetBankList();
+	const { documents = {} } = data || {};
 
-	const getDate = (date) => formatDate({
-		date,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-		formatType : 'date',
-	});
 	const saveBankButtonValue = loadingSaveBank ? 'SAVING...' : 'SAVE BANK';
 
 	const handleClick = () => {
@@ -37,8 +26,8 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 
 	const handleSavePayrun = () => {
 		push(
-			`/business-finance/account-payables/[active_tab]?initiated=${PAYMENT_INITIATED}`,
-			`/business-finance/account-payables/payruns?initiated=${PAYMENT_INITIATED}`,
+			'/business-finance/account-payables/[active_tab]?initiated=PAYMENT_INITIATED',
+			'/business-finance/account-payables/payruns?initiated=PAYMENT_INITIATED',
 		);
 	};
 
@@ -72,97 +61,6 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 		},
 	];
 
-	const GetData = () => {
-		if (documents === '') {
-			<div>DOCUMENT NOT FOUND</div>;
-		}
-		return documentsList.map((item) => {
-			if (item.documentUrl !== '') {
-				if (item.docName === 'Other Document') {
-					return item.documentUrl.map((doc) => {
-						const parts = doc.split('/');
-						const lastPart = parts[parts.length - MAX_LENGTH_MINUS];
-						return (
-							<div className={styles.document_sub_card} key={item.docName}>
-								<div className={styles.pdf_container}>
-									<div>
-										<IcMPdf width={30} height={30} />
-									</div>
-
-									<div className={styles.display_name}>
-										<div className={styles.doc_name_text}>
-											<div>{item.docName}</div>
-											<div className={styles.file_name}>
-												(
-												<span>{lastPart}</span>
-												)
-											</div>
-										</div>
-										<div className={styles.uploaded_by}>
-											uploaded at:
-											{' '}
-											{getDate(item.uploadedAt)}
-										</div>
-									</div>
-								</div>
-
-								<div className={styles.download_doc}>
-									<Button
-										style={{ marginRight: '20px' }}
-										onClick={() => window.open(doc, '_blank')}
-										themeType="linkUi"
-									>
-										View
-									</Button>
-
-									<Button onClick={() => saveAs(doc)} themeType="linkUi">Download</Button>
-								</div>
-							</div>
-						);
-					});
-				}
-				return (
-					<div className={styles.document_sub_card} key={item.docName}>
-						<div className={styles.pdf_container}>
-							<div>
-								<IcMPdf width={30} height={30} />
-							</div>
-							<div>
-								<div>
-									<div className={styles.doc_name_text}>{item.docName}</div>
-									<div className={styles.uploaded_by}>
-										uploaded at:
-										{' '}
-										{getDate(item.uploadedAt)}
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className={styles.download_doc}>
-							<Button
-								style={{ marginRight: '20px' }}
-								onClick={() => window.open(item.documentUrl, '_blank')}
-								themeType="linkUi"
-							>
-								View
-							</Button>
-
-							<Button
-								onClick={() => saveAs(item.documentUrl)}
-								themeType="linkUi"
-							>
-								Download
-							</Button>
-						</div>
-					</div>
-				);
-			}
-
-			return null;
-		});
-	};
-
 	return (
 		<div>
 			<div className={styles.header}>
@@ -183,7 +81,7 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 				))
 					: (
 						<div className={styles.document_card}>
-							{GetData()}
+							<GetDataFinalConfirmation documentsList={documentsList} documents={documents} />
 						</div>
 					)}
 			</div>

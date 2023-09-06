@@ -23,7 +23,10 @@ const ELEMENT_NOT_FOUND = -1;
 
 const useGetInvoiceSelection = ({ sort = {} }) => {
 	const { push } = useRouter();
-	const { query: urlQuery, performedBy, performedByType, performedByName } = useSelector(({ general, profile }) => ({
+	const {
+		query: urlQuery = {},
+		performedBy = '', performedByType = '', performedByName = '',
+	} = useSelector(({ general, profile }) => ({
 		query           : general.query,
 		performedBy     : profile.user.id,
 		performedByType : profile.session_type,
@@ -76,7 +79,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
 	});
-	const { search, dueDate, invoiceDate, updatedDate, category, ...rest } = globalFilters;
+	const { search = '', dueDate = {}, invoiceDate = {}, updatedDate = {}, category = '', ...rest } = globalFilters;
 	const restParse = JSON.stringify(rest);
 	const sortParse = JSON.stringify(sort);
 
@@ -124,7 +127,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	}, [restParse, dueDate, invoiceDate, updatedDate, query, category, sortParse, trigger,
 		entity, organizationId, payrun, performedBy, performedByName, performedByType, queryCurr, services]);
 
-	const deleteInvoices = async (id, handleModal) => {
+	const deleteInvoices = async (id = '', handleModal = () => {}) => {
 		try {
 			await delete_payrun_invoice.trigger({ data: { id, performedBy, performedByType, performedByName } });
 			handleModal();
@@ -182,7 +185,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		);
 	}
 
-	const onChangeTableBodyCheckbox = (itemData) => {
+	const onChangeTableBodyCheckbox = (itemData = {}) => {
 		const { id = '' } = itemData || {};
 		setApiData((prevData) => {
 			const index = (prevData.list || []).findIndex((item) => item.id === id);
@@ -196,7 +199,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		});
 	};
 
-	function GetTableBodyCheckbox(itemData) {
+	function GetTableBodyCheckbox(itemData = {}) {
 		const { id = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find((item) => item?.id === id)?.checked;

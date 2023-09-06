@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-function formatToTimeStamp(dateString) {
+function formatToTimeStamp(dateString = '') {
 	const date = new Date(dateString);
 	const formatedDate = formatDate({
 		date,
@@ -16,7 +16,7 @@ function formatToTimeStamp(dateString) {
 	});
 	return formatedDate;
 }
-function useGetBillsList({ activeTab, activeEntity, organizationId = '' }) {
+function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '' }) {
 	const [billsFilters, setBillsFilters] = useState({
 		invoiceView : 'coe_accepted',
 		entity      : activeEntity,
@@ -26,15 +26,15 @@ function useGetBillsList({ activeTab, activeEntity, organizationId = '' }) {
 	const [orderBy, setOrderBy] = useState({});
 
 	const {
-		search = '', pageSize, pageIndex, invoiceView, category, currency, invoiceType, urgencyTag,
-		serviceType, invoiceDate, dueDate, updatedDate,
+		search = '', pageSize = 10, pageIndex = 1, invoiceView = '', category = '', currency = '',
+		invoiceType = '', urgencyTag = '', serviceType = '', invoiceDate = {}, dueDate = {}, updatedDate = {},
 	} = billsFilters || {};
 
-	const { dueDateSortType } = orderBy || {};
+	const { dueDateSortType = '' } = orderBy || {};
 
-	const { startDate, endDate } = invoiceDate || {};
-	const { startDate: fromBillDate, endDate: toBillDate } = dueDate || {};
-	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
+	const { startDate = '', endDate = '' } = invoiceDate || {};
+	const { startDate: fromBillDate = '', endDate: toBillDate = '' } = dueDate || {};
+	const { startDate: fromUploadBillDate = '', endDate: toUploadBillDate = '' } = updatedDate || {};
 
 	const { debounceQuery, query = '' } = useDebounceQuery();
 

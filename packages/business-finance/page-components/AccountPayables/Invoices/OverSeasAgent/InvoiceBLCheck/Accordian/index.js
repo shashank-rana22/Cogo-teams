@@ -25,9 +25,12 @@ function Accordian({
 	} = itemData || {};
 
 	const {
-		onGetDocument,
-		DocumentData, onApproveReject, ApproveRejectLoading, billsLoading,
-	} =		useGetDocument({ setShowCheckInvoices, setIsOpen });
+		onGetDocument = () => {},
+		DocumentData = [],
+		onApproveReject = () => {},
+		ApproveRejectLoading = false,
+		billsLoading = false,
+	} =	useGetDocument({ setShowCheckInvoices, setIsOpen });
 
 	const handleDropdown = (key = invoiceNumber) => {
 		setIsOpen(key);
@@ -50,37 +53,33 @@ function Accordian({
 
 				<div className={styles.status}>
 					<div className={styles.checkinvoice}>
-						{(showCheckInvoices[id] === 'Tagged' || payrunBillStatus === 'APPROVED') && (
+						{(showCheckInvoices[id] === 'Tagged' || payrunBillStatus === 'APPROVED') ? (
 							<div className={styles.verified}>
 								<IcCFtick />
 								{' '}
 								Tagged
 							</div>
-						)}
-						{(showCheckInvoices[id] === 'Reject' || payrunBillStatus === 'REJECTED') && (
+						) : null}
+						{(showCheckInvoices[id] === 'Reject' || payrunBillStatus === 'REJECTED') ? (
 							<div className={styles.rejected}>
 								<IcCFcrossInCircle />
 								{' '}
 								Reject
 							</div>
-						)}
+						) : null}
 
 					</div>
 
 					<div className={styles.iconwrapper}>
 						{isOpen === invoiceNumber ? (
 							<Button
-								onClick={() => {
-									setIsOpen(null);
-								}}
+								onClick={() => setIsOpen(null)}
 							>
 								<IcMArrowRotateUp width={20} height={20} />
 							</Button>
 						) : (
 							<Button
-								onClick={() => {
-									handleDropdown();
-								}}
+								onClick={() => handleDropdown()}
 							>
 								<IcMArrowRotateDown width={20} height={20} />
 							</Button>
@@ -89,7 +88,7 @@ function Accordian({
 				</div>
 			</div>
 
-			{isOpen === invoiceNumber && (
+			{isOpen === invoiceNumber ? (
 				<Documents
 					id={id}
 					setIsOpen={setIsOpen}
@@ -104,7 +103,7 @@ function Accordian({
 					payrunBillStatus={payrunBillStatus}
 					showCheckInvoices={showCheckInvoices}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

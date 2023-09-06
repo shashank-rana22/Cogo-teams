@@ -38,7 +38,7 @@ export const EXPENSE_OPTIONS = [
 	},
 ];
 
-export const OptionAIR = [
+export const OPTION_AIR = [
 	{
 		label : 'DO',
 		value : 'do',

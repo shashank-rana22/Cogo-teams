@@ -76,6 +76,5 @@ export const VIEW_SELECTED_CONFIG = {
 			span : 0.2,
 			func : 'renderIcDelete',
 		},
-
 	],
 };

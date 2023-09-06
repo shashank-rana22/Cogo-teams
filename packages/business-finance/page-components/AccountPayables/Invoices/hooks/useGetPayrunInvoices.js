@@ -6,8 +6,8 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
-import { CREATE_PAYRUN_CONFIG } from '../CreatePayrun/Configurations/createPayrunConfig';
-import { CREATE_PAYRUN_CONFIG_VN } from '../CreatePayrun/Configurations/createPayrunConfigVN';
+import CREATE_PAYRUN_CONFIG from '../CreatePayrun/Configurations/createPayrunConfig.json';
+import CREATE_PAYRUN_CONFIG_VN from '../CreatePayrun/Configurations/createPayrunConfigVN.json';
 import changeFormat from '../utils/changeFormat';
 import getKeyByValue from '../utils/getKeyByValue';
 
@@ -19,11 +19,14 @@ const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
 const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
-	const { query: urlQuery } = useSelector(({ general }) => ({
+	const { query: urlQuery = {} } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
 
-	const { entity = '', currency, payrun, payrun_type = '', partner_id = '' } = urlQuery || {};
+	const {
+		entity = '', currency = GLOBAL_CONSTANTS.currency_code.INR,
+		payrun = '', payrun_type = '', partner_id = '',
+	} = urlQuery || {};
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
 	const [orderBy, setOrderBy] = useState({});
 	const [filters, setFilters] = useState(
@@ -37,10 +40,7 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 		},
 	);
 
-	const CREATE_PAYRUN_CONFIG_MAPPING = {
-		IN : CREATE_PAYRUN_CONFIG,
-		VN : CREATE_PAYRUN_CONFIG_VN,
-	};
+	const CREATE_PAYRUN_CONFIG_MAPPING = { IN: CREATE_PAYRUN_CONFIG, VN: CREATE_PAYRUN_CONFIG_VN };
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -52,14 +52,14 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	);
 
 	const {
-		search = '', pageSize, pageIndex, invoiceView, category, invoiceType,
-		urgencyTag, currency: filterCurrency, entity: filterEntity,
-		services, invoiceDate, dueDate, updatedDate,
+		search = '', pageSize = 10, pageIndex = 1, invoiceView = '', category = '', invoiceType = '',
+		urgencyTag = '', currency: filterCurrency = '', entity: filterEntity = '',
+		services = '', invoiceDate = '', dueDate = '', updatedDate = '',
 	} = filters || {};
-	const { dueDateSortType } = orderBy || {};
-	const { startDate, endDate } = invoiceDate || {};
-	const { startDate: fromBillDate, endDate: toBillDate } = dueDate || {};
-	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
+	const { dueDateSortType = '' } = orderBy || {};
+	const { startDate = '', endDate = '' } = invoiceDate || {};
+	const { startDate: fromBillDate = '', endDate: toBillDate = '' } = dueDate || {};
+	const { startDate: fromUploadBillDate = '', endDate: toUploadBillDate = '' } = updatedDate || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => { debounceQuery(search); }, [debounceQuery, search]);
@@ -68,7 +68,7 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 		const newData = { ...data };
 		const { list = [] } = newData || {};
 		if (newData.list) {
-			newData.list = list.map((item) => {
+			newData.list = (list || []).map((item) => {
 				const {
 					payableAmount = '',
 					tdsAmount = '',
@@ -184,7 +184,7 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 			return prevData;
 		});
 	};
-	function GetTableBodyCheckbox(itemData) {
+	function GetTableBodyCheckbox(itemData = {}) {
 		const { id = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find((item) => item?.id === id)?.checked;

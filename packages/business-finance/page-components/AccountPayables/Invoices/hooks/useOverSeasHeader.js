@@ -3,9 +3,8 @@ import { useCallback, useEffect } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useOverSeasHeader = ({ organizationId }) => {
-	const [{ data, loading },
-		trigger] = useRequestBf(
+const useOverSeasHeader = ({ organizationId = '' }) => {
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payable-bill/overseas-details',
 			method  : 'get',

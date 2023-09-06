@@ -10,10 +10,10 @@ const API_ARRAY_VARIABLE_ONE = 1;
 
 const useListTaggedInvoices = () => {
 	const {
-		query,
-		performedBy,
-		performedByType,
-		performedByName,
+		query = {},
+		performedBy = '',
+		performedByType = '',
+		performedByName = '',
 	} = useSelector(({ general, profile }) => ({
 		query           : general.query,
 		performedBy     : profile.user.id,
@@ -26,7 +26,7 @@ const useListTaggedInvoices = () => {
 		pageSize  : 10,
 	});
 
-	const { payrun, entity } = query;
+	const { payrun = '', entity = '' } = query || {};
 
 	const [{ data, loading }, Trigger] = useRequestBf(
 		{
@@ -73,7 +73,7 @@ const useListTaggedInvoices = () => {
 		{ manual: false },
 	);
 
-	const selectBank = async (id, callback = () => {}) => {
+	const selectBank = async (id = '', callback = () => {}) => {
 		try {
 			await saveBank[API_ARRAY_VARIABLE_ONE]({
 				data: {
@@ -106,7 +106,7 @@ const useListTaggedInvoices = () => {
 			Toast.error(e?.error?.message || 'Failed to Fetch Data');
 		}
 	}, [payrun, Trigger]);
-	const deleteInvoices = async (id) => {
+	const deleteInvoices = async (id = '') => {
 		try {
 			await delete_payrun_invoice[API_ARRAY_VARIABLE_ONE]({
 				data: {
@@ -123,7 +123,7 @@ const useListTaggedInvoices = () => {
 			toastApiError(e);
 		}
 	};
-	const deleteTaggedDocuments = async (itemData) => {
+	const deleteTaggedDocuments = async (itemData = {}) => {
 		let key;
 
 		if (itemData.docName === 'Purchase Invoices') {

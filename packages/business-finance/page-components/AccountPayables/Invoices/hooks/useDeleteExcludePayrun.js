@@ -12,19 +12,16 @@ const ELEMENT_NOT_FOUND = -1;
 const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, apiData = {}, type = '' }) => {
 	const { push } = useRouter();
 
-	const { user_data: userData, query: urlQuery } = useSelector(({ profile, general }) => ({
+	const { user_data: userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
 		user_data: profile || {}, query: general.query,
 	}));
 
 	const {
-		payrun,
+		payrun = '',
 	} = urlQuery || {};
-	const { user, session_type: sessionType } = userData;
-	const { id: userId = '', name } = user || {};
-	const [
-		{ loading },
-		trigger,
-	] = useRequestBf(
+	const { user = '', session_type: sessionType = '' } = userData || {};
+	const { id: userId = '', name = '' } = user || {};
+	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun/suppliers',
 			method  : 'delete',
@@ -88,7 +85,7 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, ap
 		);
 	}
 
-	const onChangeTableBodyCheckbox = (itemData) => {
+	const onChangeTableBodyCheckbox = (itemData = {}) => {
 		const { organizationId = '' } = itemData || {};
 		setApiData((prevData) => {
 			const index = (prevData.list || []).findIndex(
@@ -108,7 +105,7 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, ap
 			return prevData;
 		});
 	};
-	function GetTableBodyCheckbox(itemData) {
+	function GetTableBodyCheckbox(itemData = {}) {
 		const { organizationId = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(

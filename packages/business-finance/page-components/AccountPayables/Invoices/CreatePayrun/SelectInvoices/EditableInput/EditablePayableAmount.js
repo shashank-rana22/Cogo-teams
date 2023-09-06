@@ -1,4 +1,5 @@
 import { Input, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMInformation, IcMLineundo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
@@ -21,16 +22,15 @@ const getFormattedAmount = ({ amount, currency }) => (
 );
 
 function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () => {} }) {
-	const newItem = itemData;
 	const { key, fallBackKey } = field;
 	const [edit, setEdit] = useState(false);
 
-	const [value, setValue] = useState(getByKey(newItem, key));
+	const [value, setValue] = useState(getByKey(itemData, key));
 
 	const {
-		currency,
-		payableAmount,
-	} = newItem;
+		currency = GLOBAL_CONSTANTS.currency_code.INR,
+		payableAmount = 0,
+	} = itemData;
 
 	useEffect(() => {
 		setValue(itemData.inputAmount);
@@ -69,8 +69,8 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	}
 
 	const handleUndo = () => {
-		setEditedValue(newItem, newItem[fallBackKey], key, false);
-		setValue(newItem[fallBackKey]);
+		setEditedValue(itemData, itemData[fallBackKey], key, false);
+		setValue(itemData[fallBackKey]);
 		setEdit(false);
 	};
 
@@ -79,7 +79,7 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 			<div className={cl`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 				<Input
 					onChange={(val) => {
-						setEditedValue(newItem, val, key, true);
+						setEditedValue(itemData, val, key, true);
 						setValue(val);
 					}}
 					defaultValue={value}
@@ -101,17 +101,17 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	return (
 		<div>
 			{getFormattedAmount({
-				amount   : getByKey(newItem, key),
-				currency : getByKey(newItem, field?.currencyKey),
+				amount   : getByKey(itemData, key),
+				currency : getByKey(itemData, field?.currencyKey),
 			})}
 			<span className={styles.edit}>
-				{newItem?.invoiceType === 'CREDIT NOTE' ? null : (
+				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
 					<IcMEdit
 						height={12}
 						width={12}
 						className={styles.pointer}
 						onClick={() => {
-							setEditedValue(newItem, true, 'checked', true);
+							setEditedValue(itemData, true, 'checked', true);
 							setEdit(true);
 						}}
 					/>

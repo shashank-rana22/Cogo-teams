@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 import List from '../../../../../commons/List/index.tsx';
 import useDeleteExcludePayrun from '../../../hooks/useDeleteExcludePayrun';
-import { SUPPLIER_CONFIG } from '../../Configurations/supplierConfig';
-import { CN_CONFIG } from '../../Configurations/viewCnConfig';
+import SUPPLIER_CONFIG from '../../Configurations/supplierConfig.json';
+import CN_CONFIG from '../../Configurations/viewCnConfig.json';
 
 import styles from './styles.module.css';
 
@@ -42,13 +42,13 @@ function ViewSupplierModal({
 }) {
 	const [showId, setShowId] = useState(null);
 	const {
-		onExclude,
-		loading,
-		GetTableHeaderCheckbox,
-		GetTableBodyCheckbox,
+		onExclude = () => {},
+		loading = false,
+		GetTableHeaderCheckbox = () => {},
+		GetTableBodyCheckbox = () => {},
 	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers, type });
 
-	const FUNCTIONS = getFunctions({ setShowId, showId, GetTableBodyCheckbox });
+	const LIST_FUNCTIONS = getFunctions({ setShowId, showId, GetTableBodyCheckbox });
 
 	const { list: dataList = [] } = suppliers || {};
 
@@ -63,7 +63,6 @@ function ViewSupplierModal({
 				scroll
 				size="lg"
 			>
-				<Modal.Header />
 				<Modal.Body>
 					<div className={styles.input}>
 						<Input
@@ -75,7 +74,7 @@ function ViewSupplierModal({
 						<List
 							itemData={suppliers}
 							config={SUPPLIER_CONFIG}
-							functions={FUNCTIONS}
+							functions={LIST_FUNCTIONS}
 							renderHeaderCheckbox={GetTableHeaderCheckbox}
 							RenderAccordianData={RenderAccordianData}
 							showId={showId}
@@ -86,6 +85,7 @@ function ViewSupplierModal({
 						/>
 					</div>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button
 						className={styles.button}

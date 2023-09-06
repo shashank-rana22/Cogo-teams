@@ -4,19 +4,20 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceType, serviceAgent, categoryValue }) => {
+const useGetPayrunId = ({
+	activeEntity = '', currency = '', setShowPayrunModal = () => {},
+	serviceType = '', serviceAgent = '', categoryValue = '',
+}) => {
 	const { push } = useRouter();
 	const {
-		user_data: userData,
+		user_data: userData = {},
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user, session_type: sessionType } = userData;
-	const { id: userId = '', name } = user || {};
+	const { user = '', session_type: sessionType = '' } = userData || {};
+	const { id: userId = '', name = '' } = user || {};
 	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+		{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun',
 			method  : 'post',
@@ -26,9 +27,9 @@ const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceTyp
 	);
 
 	const getPayrunId = async () => {
-		let type;
-		let organizationId;
-		let service_type;
+		let type = '';
+		let organizationId = '';
+		let service_type = '';
 
 		switch (categoryValue) {
 			case 'normal_payrun':

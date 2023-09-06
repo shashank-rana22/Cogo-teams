@@ -15,7 +15,6 @@ const viewDocument = (url) => {
 };
 
 function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
-	const newItem = itemData;
 	const [bankEdit, setBankEdit] = useState(false);
 	const [rollback, showRollback] = useState(true);
 	const {
@@ -23,6 +22,11 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 		bankDetail,
 		tradePartyMappingId,
 	} = itemData || {};
+
+	if (invoiceType === 'CREDIT NOTE') {
+		return null;
+	}
+
 	const {
 		bankName = '',
 		ifscCode = '',
@@ -67,7 +71,7 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 					</div>
 				</div>
 				{
-					tradePartyMappingId && (
+					tradePartyMappingId ? (
 						<div className={styles.edit}>
 							<IcMEdit
 								className={styles.pointer}
@@ -75,27 +79,23 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 								width={12}
 								onClick={setBankEdit}
 							/>
-							{newItem?.bankDetail && rollback && (
+							{itemData?.bankDetail && rollback && (
 								<IcMUndo
 									className={styles.pointer}
 									height={14}
 									width={14}
 									onClick={() => {
-										setEditedValue(newItem, newItem.bankValue, 'bankDetail', true);
+										setEditedValue(itemData, itemData.bankValue, 'bankDetail', true);
 										setBankEdit(false);
 										showRollback(false);
 									}}
 								/>
 							)}
 						</div>
-					)
+					) : null
 				}
 			</div>
 		);
-	}
-
-	if (invoiceType === 'CREDIT NOTE') {
-		return null;
 	}
 	return <div>{renderComponent}</div>;
 }

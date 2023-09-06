@@ -5,8 +5,9 @@ import styles from './styles.module.css';
 
 function BankDetails({ itemData = {} }) {
 	const {
-		bankDetail,
+		bankDetail = [],
 	} = itemData || {};
+
 	const {
 		bankName = '',
 		ifsc_code = '',
@@ -17,6 +18,7 @@ function BankDetails({ itemData = {} }) {
 		account_number = '',
 		ifscCode = '',
 	} = bankDetail?.[GLOBAL_CONSTANTS.zeroth_index] || bankDetail || {};
+
 	return (
 		<div className={styles.font}>
 			<div className={styles.bold}>{bankName || bank_name || beneficiary_name}</div>

@@ -9,10 +9,10 @@ import toastApiError from '../../../commons/toastApiError.ts';
 const API_ARRAY_VARIABLE_ONE = 1;
 
 const useUploadDocuments = ({ fileUploader = {} }) => {
-	const { query } = useRouter();
-	const { singleFileUpload, fileBank, multiFileUpload } = fileUploader || {};
+	const { query = {} } = useRouter();
+	const { singleFileUpload = '', fileBank = '', multiFileUpload = '' } = fileUploader || {};
 
-	const { payrun } = query;
+	const { payrun = '' } = query;
 
 	const uploadDocuments = useRequestBf(
 
@@ -75,7 +75,7 @@ const useUploadDocuments = ({ fileUploader = {} }) => {
 		}
 	}, [payrun, trigger]);
 
-	const deleteTaggedDocuments = async (key, myArray = null) => {
+	const deleteTaggedDocuments = async (key = '', myArray = null) => {
 		let payload;
 		if (key === 'otherDocumentsUrl') {
 			payload = {

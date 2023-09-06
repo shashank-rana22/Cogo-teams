@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Placeholder, Select } from '@cogoport/components';
 import { IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -16,13 +16,17 @@ function BankSelect({
 	const [bankObject, setBankObject] = useState({});
 	const { tradePartyMappingId = '', serviceProviderId = '' } = itemData || {};
 
-	const { bankDetails, bankDetailsLoading } = useGetBankDetails({
+	const { bankDetails = [], bankDetailsLoading = false } = useGetBankDetails({
 		tradePartyMappingId,
 		serviceProviderId,
 	});
 
 	if (bankDetailsLoading) {
-		return <div>Loading...</div>;
+		return (
+			<div>
+				<Placeholder width="100px" height="60px" />
+			</div>
+		);
 	}
 	return (
 		<div className={styles.flex}>

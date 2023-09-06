@@ -69,15 +69,15 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 	};
 
 	const {
-		billsLoading,
-		filters,
-		setFilters,
-		orderBy,
-		setOrderBy,
-		getPayrunInvoices,
-		GetTableBodyCheckbox,
-		GetTableHeaderCheckbox,
-		config,
+		billsLoading = false,
+		filters = {},
+		setFilters = () => {},
+		orderBy = {},
+		setOrderBy = () => {},
+		getPayrunInvoices = () => {},
+		GetTableBodyCheckbox = () => {},
+		GetTableHeaderCheckbox = () => {},
+		config = [],
 	} = useGetPayrunInvoices({ apiData, setApiData });
 
 	const setEditedValue = (itemData = {}, value = '', key = '', checked = false) => {
@@ -87,12 +87,12 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 				(item) => item?.id === itemData?.id,
 			);
 			const {
-				payableValue,
-				invoiceAmount,
-				tdsDeducted,
-				payableAmount,
-				tdsAmount,
-			} = newValue.list[index];
+				payableValue = 0,
+				invoiceAmount = 0,
+				tdsDeducted = 0,
+				payableAmount = 0,
+				tdsAmount = 0,
+			} = newValue.list[index] || {};
 			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 
 			let maxValueCrossed = false;
@@ -111,8 +111,10 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
 				lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
 
-				newValue.list[index].payableAmount = payableValue - value;
-				newValue.list[index].inputAmount = payableValue - value;
+				if (index >= MIN_AMOUNT) {
+					newValue.list[index].payableAmount = payableValue - value;
+					newValue.list[index].inputAmount = payableValue - value;
+				}
 			} else {
 				maxValueCrossed = +payableAmount > +payableValue;
 				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
@@ -138,7 +140,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 		getPayrunInvoices,
 	}));
 
-	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue });
+	const LIST_FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue });
 
 	return (
 		<div>
@@ -170,24 +172,22 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 				</div>
 
 				<div className={styles.search_filter}>
-					<div className={styles.search}>
-						<Input
-							name="search"
-							size="sm"
-							value={filters?.search || ''}
-							onChange={(val) => setFilters((prevFilters) => ({
-								...prevFilters,
-								search    : val,
-								pageIndex : 1,
-							}))}
-							placeholder="Search By Name/Invoice Number/Sid"
-							suffix={(
-								<div style={{ margin: '4px', display: 'flex' }}>
-									<IcMSearchdark height={15} width={15} />
-								</div>
-							)}
-						/>
-					</div>
+					<Input
+						name="search"
+						size="sm"
+						value={filters?.search || ''}
+						onChange={(val) => setFilters((prevFilters) => ({
+							...prevFilters,
+							search    : val,
+							pageIndex : 1,
+						}))}
+						placeholder="Search By Name/Invoice Number/Sid"
+						suffix={(
+							<div style={{ margin: '4px', display: 'flex' }}>
+								<IcMSearchdark height={15} width={15} />
+							</div>
+						)}
+					/>
 				</div>
 			</div>
 
@@ -196,7 +196,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 					itemData={apiData}
 					loading={billsLoading}
 					config={config}
-					functions={FUNCTIONS}
+					functions={LIST_FUNCTIONS}
 					sort={orderBy}
 					setSort={setOrderBy}
 					page={filters?.pageIndex || FIRST_PAGE}

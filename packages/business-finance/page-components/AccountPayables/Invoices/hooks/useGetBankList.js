@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
 const useGetBankList = () => {
-	const { query } = useRouter();
+	const { query = '' } = useRouter();
 	const [bankDetails, setBankDetails] = useState([]);
 
 	const [{ loading }, Trigger] = useRequestBf(
@@ -16,7 +16,7 @@ const useGetBankList = () => {
 		{ manual: false },
 	);
 
-	const { entity } = query;
+	const { entity = '' } = query;
 
 	const getBankDetails = useCallback(async () => {
 		const resp = await Trigger({

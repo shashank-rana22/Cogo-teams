@@ -10,16 +10,16 @@ import toastApiError from '../../../commons/toastApiError.ts';
 function useGetListSupplier({ setViewSelectedInvoice = () => {}, setSavePayrunModal = () => {}, type = '' }) {
 	const { push } = useRouter();
 
-	const { query: urlQuery } = useSelector(({ general }) => ({
+	const { query: urlQuery = {} } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
 	const {
-		payrun,
+		payrun = '',
 	} = urlQuery || {};
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 
-	const { search } = filters || {};
+	const { search = '' } = filters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{

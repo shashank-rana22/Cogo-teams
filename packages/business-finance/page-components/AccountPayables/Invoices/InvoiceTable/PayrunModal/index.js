@@ -1,4 +1,4 @@
-import { Modal, Button, Radio, Toggle, RadioGroup, Select } from '@cogoport/components';
+import { Modal, Button, Radio, Toggle, RadioGroup, Select, cl } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
@@ -34,8 +34,8 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 	};
 
 	const {
-		getPayrunId,
-		loading,
+		getPayrunId = '',
+		loading = false,
 	} = useGetPayrunId({
 		activeEntity,
 		currency: text,
@@ -59,7 +59,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 						offLabel="bill"
 						size="sm"
 						value={toggleValue}
-						onChange={(val) => onToggleChange(val)}
+						onChange={onToggleChange}
 					/>
 				</div>
 
@@ -69,7 +69,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 							toggleValue ? CATEGORY_OPTIONS : EXPENSE_OPTIONS
 						}
 						value={categoryValue}
-						onChange={(item) => onOptionChange(item)}
+						onChange={onOptionChange}
 					/>
 
 					{categoryValue === 'overseas_agent' && (
@@ -84,7 +84,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 									labelKey="organizationName"
 									asyncKey="list_overseas_trade_parties"
 									value={serviceAgent}
-									onChange={(val) => setServiceAgent(val)}
+									onChange={setServiceAgent}
 									initialCall
 								/>
 							</div>
@@ -97,7 +97,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 									placeholder="Select Service"
 									options={SERVICE_TYPE}
 									value={serviceType}
-									onChange={(val) => setServiceType(val)}
+									onChange={setServiceType}
 								/>
 							</div>
 
@@ -110,19 +110,20 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 				</div>
 				<div className={styles.currency}>
 					{(CURRENCY_DATA).map((item) => {
-						const { id: itemId, icon: Icon, text: itemText } = item || {};
+						const { id: itemId = '', icon: Icon = null, text: itemText = '' } = item || {};
 						return (
 							<div
 								key={itemId}
-								className={id === itemId ? styles.selected_currency_values
-									: styles.unselected_currency_values}
+								className={cl`${styles.common_currency_values} 
+								${id === itemId ? styles.selected_currency_values
+									: styles.unselected_currency_values}`}
 								onClick={() => {
 									setCurrencyValue(item);
 								}}
 								role="presentation"
 							>
 								<div className={styles.icon_show}>
-									<Icon height={35} width={35} />
+									{Icon ? <Icon height={35} width={35} /> : null}
 								</div>
 								<div className={styles.text_show}>{itemText}</div>
 							</div>

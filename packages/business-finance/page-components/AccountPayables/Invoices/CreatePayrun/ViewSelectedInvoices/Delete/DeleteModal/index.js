@@ -6,7 +6,7 @@ import useDeleteSelectedInvoice from '../../../../hooks/useDeleteSelectedInvoice
 import styles from '../styles.module.css';
 
 function DeleteModal({ show = false, setShow = () => {}, refetch = () => {}, itemData = {} }) {
-	const { onDelete, loading } = useDeleteSelectedInvoice({ refetch, itemData });
+	const { onDelete = () => {}, loading = false } = useDeleteSelectedInvoice({ refetch, itemData });
 
 	return (
 		<Modal

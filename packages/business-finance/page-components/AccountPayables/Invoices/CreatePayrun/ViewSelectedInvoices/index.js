@@ -34,14 +34,14 @@ const getFunctions = ({ getInvoices = () => {} }) => ({
 
 function ViewSelectedInvoices({ apiData = {}, setApiData = () => {}, setViewSelectedInvoices = () => {} }) {
 	const {
-		selectedInvoiceLoading,
-		filters,
-		setFilters,
-		getInvoices,
-		config,
+		selectedInvoiceLoading = false,
+		filters = {},
+		setFilters = () => {},
+		getInvoices = () => {},
+		config = [],
 	} = useGetSelectedInvoices({ apiData, setApiData });
 
-	const FUNCTIONS = getFunctions({ getInvoices });
+	const LIST_FUNCTIONS = getFunctions({ getInvoices });
 
 	return (
 		<div>
@@ -71,7 +71,7 @@ function ViewSelectedInvoices({ apiData = {}, setApiData = () => {}, setViewSele
 					itemData={apiData}
 					loading={selectedInvoiceLoading}
 					config={config}
-					functions={FUNCTIONS}
+					functions={LIST_FUNCTIONS}
 					page={filters?.pageIndex || FIRST_PAGE}
 					pageSize={10}
 					handlePageChange={(val) => setFilters({

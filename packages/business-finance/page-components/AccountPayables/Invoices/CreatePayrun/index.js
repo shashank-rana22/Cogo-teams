@@ -16,7 +16,7 @@ function CreatePayrun() {
 		refetch();
 	};
 
-	const { submitSelectedInvoices, loading } = usePostAddToSelected({
+	const { submitSelectedInvoices = () => {}, loading = false } = usePostAddToSelected({
 		getPayrunInvoices: handleRefetch,
 		apiData,
 	});

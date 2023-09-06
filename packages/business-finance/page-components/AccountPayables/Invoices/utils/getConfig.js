@@ -1,7 +1,7 @@
-import { VIEW_SELECTED_CONFIG } from '../CreatePayrun/Configurations/viewSelectedConfig';
-import { VIEW_SELECTED_CONFIG_VN } from '../CreatePayrun/Configurations/viewSelectedConfigVN';
-import { CREATE_OVER_SEAS_CONFIG } from '../OverSeasAgent/Configurations/createOverSeasConfig';
-import { CREATE_OVER_SEAS_CONFIG_VN } from '../OverSeasAgent/Configurations/createOverSeasConfigVN';
+import VIEW_SELECTED_CONFIG from '../CreatePayrun/Configurations/viewSelectedConfig.json';
+import VIEW_SELECTED_CONFIG_VN from '../CreatePayrun/Configurations/viewSelectedConfigVN.json';
+import CREATE_OVER_SEAS_CONFIG from '../OverSeasAgent/Configurations/createOverSeasConfig.json';
+import CREATE_OVER_SEAS_CONFIG_VN from '../OverSeasAgent/Configurations/createOverSeasConfigVN.json';
 
 const CREATE_OVERSEAS_CONFIG_MAPPING = {
 	IN : CREATE_OVER_SEAS_CONFIG,

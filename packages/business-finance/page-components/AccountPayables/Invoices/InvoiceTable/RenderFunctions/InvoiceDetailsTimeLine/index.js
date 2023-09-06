@@ -1,17 +1,12 @@
 import { Placeholder } from '@cogoport/components';
-import geoConstants from '@cogoport/globalization/constants/geo';
-import {
-	IcMArrowRotateLeft,
-	IcMArrowRotateDown,
-	IcMOverview,
-	IcMArrowRotateUp,
-} from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMOverview, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice.ts';
-import { DETAILS, INVOICE_DATA_MAPPING } from '../../../Constants';
+import { INVOICE_DATA_MAPPING } from '../../../Constants';
 import useInvoiceDetails from '../../../hooks/useGetInvoiceTimeline';
 
+import InvoiceDetailsComp from './components/InvoiceDetailsComp';
+import SupplierComp from './components/SupplierComp';
 import CustomerInformation from './CustomerInformation';
 import InvoiceTimeLine from './InvoiceTimeLine';
 import Profitability from './Profitability';
@@ -20,77 +15,6 @@ import SupplierInformation from './SupplierInformation';
 
 const PLACEHOLDERS = 3;
 const TIMELINEKEY = '4';
-const geo = geoConstants();
-
-function InvoiceDetailsComp({
-	setShowDetailsCard = () => {},
-	objectNumber = '',
-	invoiceNumber = '',
-	billNumber = '',
-	jobNumber = '',
-	sid = '',
-}) {
-	return (
-		<div className={styles.content_caret}>
-			<div
-				className={styles.icon_container}
-				onClick={() => {
-					setShowDetailsCard(false);
-				}}
-				role="presentation"
-			>
-				<IcMArrowRotateLeft />
-			</div>
-
-			<div className={styles.header_details}>
-				INVOICE DETAILS -
-				<span style={{ textDecorationLine: 'underline' }}>
-					{objectNumber || invoiceNumber || billNumber}
-				</span>
-				{' '}
-				- SID :-
-				<span>
-					{jobNumber || sid}
-				</span>
-			</div>
-		</div>
-	);
-}
-
-function SupplierComp({ item = {}, invoiceDetails = [] }) {
-	return (
-		<div className={styles.body_details_card}>
-			<div className={styles.invoice_card_data}>
-				<div className={styles.supplier_data_header}>
-					<span style={{ fontWeight: '600' }}>
-						Supplier Name :
-					</span>
-					<span style={{ fontWeight: '600' }}>
-						{item?.organizationName}
-					</span>
-				</div>
-				<div className={styles.flex}>
-					{DETAILS?.map((detail) => (
-						<div className={styles.supplier_data_body} key={detail.key}>
-							<div>{detail?.label}</div>
-							<div>
-								{getFormattedPrice(
-									invoiceDetails?.[detail?.key],
-									geo.country.currency.code,
-									{
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								)}
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
-	);
-}
 
 function InvoiceDetailsTimeLine({ item = {} }) {
 	const {

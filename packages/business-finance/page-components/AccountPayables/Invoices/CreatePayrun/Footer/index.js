@@ -1,4 +1,5 @@
 import { Button, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -15,7 +16,7 @@ function Footer({
 	setViewSelectedInvoices = () => {},
 	submitSelectedInvoices = () => {},
 	loading = false,
-	selectedCurrency = 'INR',
+	selectedCurrency = GLOBAL_CONSTANTS.currency_code.INR,
 	isAuditAllowed = true,
 }) {
 	const {
@@ -24,15 +25,11 @@ function Footer({
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
 	const [type, setType] = useState('');
-	const { totalValue = '', invoiceCount = '' } = apiData || {};
-	const { list: viewSelectedList = [] } = apiData || {};
+	const { totalValue = '', invoiceCount = '', list: viewSelectedList = [] } = apiData || {};
 	const checkedList = (list || []).filter((item) => item.checked);
 	const hasError = !isEmpty((checkedList || []).filter((item) => item.hasError));
-	const totalInvoiceAmount = checkedList.reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
-	const buttonDisabled = isEmpty(checkedList) || loading || hasError;
-	const handleView = () => {
-		setViewSelectedInvoices(true);
-	};
+	const totalInvoiceAmount = (checkedList || []).reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
+	const buttonDisabled = isEmpty(checkedList || []) || loading || hasError;
 
 	function RenderContent() {
 		return (
@@ -51,17 +48,15 @@ function Footer({
 						Total Payments
 					</div>
 
-					<div className={styles.amount_container}>
-						<div className={styles.amount}>
-							{formatAmount({
-								amount   : viewSelectedInvoices ? totalValue : totalInvoiceAmount,
-								currency : selectedCurrency,
-								options  : {
-									currencyDisplay : 'code',
-									style           : 'currency',
-								},
-							})}
-						</div>
+					<div className={styles.amount}>
+						{formatAmount({
+							amount   : viewSelectedInvoices ? totalValue : totalInvoiceAmount,
+							currency : selectedCurrency,
+							options  : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+							},
+						})}
 					</div>
 
 					<div className={styles.sid_count}>
@@ -94,7 +89,7 @@ function Footer({
 											setSavePayrunModal(true);
 											setType('audit');
 										}}
-										disabled={!list.length}
+										disabled={!list?.length}
 									>
 										Audit
 									</Button>
@@ -118,36 +113,33 @@ function Footer({
 									</div>
 								)}
 
-								<div>
-									<Button
-										themeType="secondary"
-										onClick={submitSelectedInvoices}
-										disabled={buttonDisabled}
-									>
-										+ Add to selected
-									</Button>
+								<Button
+									themeType="secondary"
+									onClick={submitSelectedInvoices}
+									disabled={buttonDisabled}
+								>
+									+ Add to selected
+								</Button>
 
-								</div>
-								<div className={styles.view_button}>
-									<Button
-										disabled={loading}
-										onClick={handleView}
-									>
-										View Selected SID
-									</Button>
-								</div>
+								<Button
+									className={styles.view_button}
+									disabled={loading}
+									onClick={() => setViewSelectedInvoices(true)}
+								>
+									View Selected SID
+								</Button>
 							</div>
 						)}
 				</div>
 			</div>
-			{savePayrunModal && (
+			{savePayrunModal ? (
 				<SavePayRunModal
 					savePayrunModal={savePayrunModal}
 					setSavePayrunModal={setSavePayrunModal}
 					setViewSelectedInvoice={setViewSelectedInvoices}
 					type={type}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

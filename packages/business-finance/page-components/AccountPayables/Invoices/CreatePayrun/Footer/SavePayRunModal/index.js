@@ -16,36 +16,36 @@ function SavePayRunModal({
 	type = '',
 }) {
 	const [viewSupplier, showViewSupplier] = useState(null);
-	const handleCloseModal = () => {
-		setSavePayrunModal(false);
-	};
 
 	const {
-		loading,
-		suppliers,
-		trigger,
-		setApiData,
-		setFilters,
-		handleClick,
+		loading = false,
+		suppliers = {},
+		trigger = () => {},
+		setApiData = () => {},
+		setFilters = () => {},
+		handleClick = () => {},
 	} = useGetListSupplier({ setViewSelectedInvoice, setSavePayrunModal, type });
 
 	return (
 		<div>
-			<Modal show={savePayrunModal} onClose={handleCloseModal} size="lg">
-				<div className={styles.container}>
-					<div className={styles.icon}>
-						<IcCError width={28} height={28} />
-					</div>
-					<div className={styles.icon}>
+			<Modal show={savePayrunModal} onClose={() => setSavePayrunModal(false)} size="lg">
+				<Modal.Body>
+					<div className={styles.container}>
+						<div className={styles.icon}>
+							<IcCError width={28} height={28} />
+						</div>
+						<div className={styles.icon}>
 
-						<span
-							className={styles.count}
-						>
-							{loading ? <Placeholder width="50px" /> : (suppliers?.creditNotes || DEFAULT_CN)}
-						</span>
-						Credit notes available against the suppliers you have selected!
+							<span
+								className={styles.count}
+							>
+								{loading ? <Placeholder width="50px" /> : (suppliers?.creditNotes || DEFAULT_CN)}
+							</span>
+							Credit notes available against the suppliers you have selected!
+						</div>
 					</div>
-				</div>
+				</Modal.Body>
+
 				<Modal.Footer>
 					<Button
 						className={styles.button}
@@ -54,7 +54,7 @@ function SavePayRunModal({
 					>
 						View Suppliers
 					</Button>
-					<Button onClick={() => handleClick()}>
+					<Button onClick={handleClick}>
 						Next
 					</Button>
 				</Modal.Footer>

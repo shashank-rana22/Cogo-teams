@@ -22,7 +22,7 @@ function GetData({
 		);
 	}
 
-	return documentsList.map((item) => {
+	return (documentsList || []).map((item) => {
 		if (item.documentUrl !== '') {
 			return (
 				<div className={styles.document_card} key={item.docName}>

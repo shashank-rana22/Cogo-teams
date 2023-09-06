@@ -1,21 +1,3 @@
-.filters {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.filtercontainer {
-	display: flex;
-	align-items: center;
-	margin-top: 12px;
-}
-
-.search_filter {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-}
-
 .back {
 	display: flex;
 	align-items: center;

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -63,20 +64,18 @@ const getSelectedInvoices = ({ list = [] }) => {
 };
 
 const usePostAddToSelected = ({ getPayrunInvoices = () => {}, apiData = {} }) => {
-	const { user_data: userData, query: urlQuery } = useSelector(({ profile, general }) => ({
+	const { user_data: userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
 		user_data: profile || {}, query: general.query,
 	}));
-	const { user, session_type: sessionType } = userData;
-	const { id: userId = '', name } = user || {};
+	const { user = '', session_type: sessionType = '' } = userData || {};
+	const { id: userId = '', name = '' } = user || {};
 
 	const {
 		entity = '',
-		currency,
+		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		payrun = '',
 	} = urlQuery || {};
-	const [{ loading },
-		addToSelectedTrigger,
-	] = useRequestBf(
+	const [{ loading }, addToSelectedTrigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun',
 			method  : 'post',

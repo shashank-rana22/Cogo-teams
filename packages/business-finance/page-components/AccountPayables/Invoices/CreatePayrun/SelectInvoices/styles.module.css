@@ -27,9 +27,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	margin-top: 12px;
-}
 
-.search {
 	:global {
 		width: 336px;
 
