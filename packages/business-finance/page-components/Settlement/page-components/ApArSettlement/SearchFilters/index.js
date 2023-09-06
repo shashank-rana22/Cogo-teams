@@ -17,21 +17,23 @@ export function SearchFilters({
 
 	return (
 		<div className={styles.docFilter}>
-			<div>
-				<Select
-					value={filters?.docType}
-					onChange={(e) => handleFilterChange('docType', e)}
-					placeholder="Document Type"
-					options={DOC_TYPE_OPTIONS}
-					size="sm"
-					style={{ width: '250px', marginTop: '16px', marginBottom: '16px' }}
-					isClearable
-					disabled={loading}
-				/>
-			</div>
-			{filters?.docType
+			<div className={styles.flex}>
+				<div>
+					<Select
+						value={filters?.docType}
+						onChange={(e) => handleFilterChange('docType', e)}
+						placeholder="Document Type"
+						options={DOC_TYPE_OPTIONS}
+						size="sm"
+						style={{ width: '250px', marginTop: '16px', marginBottom: '16px' }}
+						isClearable
+						disabled={loading}
+					/>
+				</div>
+
+				{filters?.docType
 				&& (
-					<div style={{ marginRight: '500px' }}>
+					<div style={{ marginLeft: '20px' }}>
 						<Select
 							value={filters?.status}
 							onChange={(e) => handleFilterChange('status', e)}
@@ -44,6 +46,8 @@ export function SearchFilters({
 						/>
 					</div>
 				)}
+			</div>
+
 			<div className={styles.inputwidth}>
 				<Input
 					name="search"

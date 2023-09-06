@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	width: 100%;
 	padding: 16px;
 	margin: 16px 0;
@@ -9,7 +10,7 @@
 	background-color: #cfeaed;
 	border-radius: 8px;
 
-	:first-child {
+	/* :first-child {
 		width: 15% !important;
 		padding: 0 0 0 47px;
 	}
@@ -41,9 +42,12 @@
 	:nth-child(3) {
 		width: 7% !important;
 		padding: 0 0 0 16px !important;
-	}
+	} */
 }
 
 .item {
-	width: 14%;
+	display: flex;
+
+	/* justify-content: flex-start; */
+	justify-content: center;
 }

@@ -1,4 +1,4 @@
-import { ButtonIcon } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -88,22 +88,24 @@ export default function CardItem({
 		<div className={styles.Row}>
 			<div className={styles.Card} style={{ '--colortype': STATUS[new_itm.status] }}>
 				<div className={styles.ribbon}>{new_itm.status}</div>
-				<div>
+
+				<div className={cl`${styles.icon_div} ${styles.flex}`}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dragons.svg"
 						alt="dragon icon"
 					/>
 				</div>
-				<div>
-					<div className={styles.ContainerDiv}>
-						{documentValue}
-					</div>
+
+				<div className={cl`${styles.ContainerDiv} ${styles.flex}`}>
+					{documentValue}
 				</div>
-				<div>
+
+				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
 					{getFormatAmount(documentAmount, currency)}
 				</div>
-				<div className={styles.rate}>{exchangeRate?.toFixed(EXC_RATE_FIXED)}</div>
-				<div>
+
+				<div className={cl`${styles.rate} ${styles.flex}`}>{exchangeRate?.toFixed(EXC_RATE_FIXED)}</div>
+				<div className={cl`${styles.edited_fields} ${styles.flex}`}>
 					{
 					isTdsEdnew_itmode
 						? (
@@ -134,16 +136,16 @@ export default function CardItem({
 						)
                     }
 				</div>
-				<div>
+				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
 					{getFormatAmount(nostroAmount, currency)}
 				</div>
-				<div>
+				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
 					{getFormatAmount(settledTds, currency)}
 				</div>
-				<div>
+				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
 					{getFormatAmount(balanceAmount, currency)}
 				</div>
-				<div>
+				<div className={cl`${styles.edited_fields} ${styles.flex}`}>
 					{
 					isEdnew_itmode
 						? (
@@ -172,17 +174,15 @@ export default function CardItem({
 						)
                     }
 				</div>
-				<div>
+				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
 					{getFormatAmount(new_itm?.balanceAfterAllocation, currency)}
 				</div>
-				<div>
-					<ButtonIcon
-						size="lg"
-						icon={<IcMDelete />}
-						themeType="primary"
-						onClick={() => handleDeleteClick(new_itm?.id)}
-					/>
-				</div>
+
+				<IcMDelete
+					height={16}
+					width={16}
+					onClick={() => handleDeleteClick(new_itm?.id)}
+				/>
 			</div>
 		</div>
 	);
