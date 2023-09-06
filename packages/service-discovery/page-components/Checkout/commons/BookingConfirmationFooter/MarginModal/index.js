@@ -31,7 +31,7 @@ function MarginModal({
 					themeType="accent"
 					loading={loading}
 				>
-					Submit
+					Place Booking
 				</Button>
 			</Modal.Footer>
 		</Modal>

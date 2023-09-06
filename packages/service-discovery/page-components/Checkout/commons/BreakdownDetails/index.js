@@ -30,7 +30,7 @@ function BreakdownDetails({
 	getCheckoutInvoices = () => {},
 }) {
 	const {
-		rate,
+		rate = {},
 		detail,
 		conversions,
 		getCheckout,
