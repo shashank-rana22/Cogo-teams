@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 function DeactivateSageMapping({
 	showDeactivate = null,
 	setShowDeactivate = (() => { }),
+	refetch = (() => {}),
 }) {
 	const { loading, onSubmit } = useUpdateSageOrganizationIdMapping();
 
@@ -14,6 +15,7 @@ function DeactivateSageMapping({
 		const data = { id: showDeactivate, status: 'inactive' };
 		onSubmit(data);
 		setShowDeactivate(null);
+		refetch();
 	};
 
 	if (loading) {

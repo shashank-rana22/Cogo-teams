@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useGetPermission } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useListSageOrganizationIdMappings from '../../../hooks/useListSageOrganizationIdMappings';
 import conditions from '../../../utils/sage-conditions';
@@ -12,10 +12,21 @@ import styles from './styles.module.css';
 
 const useSageMapping = ({ tradePartyDetails }) => {
 	const [showDeactivate, setShowDeactivate] = useState(null);
-	// const [showDeactivateButton, setShowDeactivateButton] = useState(false);
-	const { data, loading } = useListSageOrganizationIdMappings({ id: tradePartyDetails.serial_id });
+	const { data, loading, trigger } = useListSageOrganizationIdMappings({ id: tradePartyDetails.serial_id });
 	const { isConditionMatches } = useGetPermission();
 
+	const [tableData, setTableData] = useState([]);
+	useEffect(() => {
+		setTableData(data);
+	}, [data]);
+	const refetch = async () => {
+		try {
+			const res = await trigger();
+			setTableData(res?.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	const isAllowedToDeleteMapping = isConditionMatches(
 		conditions.CAN_DEACTIVATE_SAGE_ORG_MAPPING,
 	);
@@ -68,11 +79,12 @@ const useSageMapping = ({ tradePartyDetails }) => {
 	];
 
 	return {
-		data,
+		data: tableData,
 		loading,
 		tableColumns,
 		showDeactivate,
 		setShowDeactivate,
+		refetch,
 	};
 };
 

@@ -41,7 +41,6 @@ function ListView({
 
 	useEffect(() => {
 		setTableData(data?.list);
-		console.log(data);
 	}, [data]);
 
 	if (loading) return <div>Loading....</div>;

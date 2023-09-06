@@ -11,6 +11,7 @@ function SageMapping({ tradePartyDetails = {} }) {
 		showDeactivate,
 		tableColumns,
 		setShowDeactivate,
+		refetch,
 	} = useSageMapping({ tradePartyDetails: tradePartyDetails.tradePartyDetails });
 	if (!data.length) {
 		return null;
@@ -25,6 +26,7 @@ function SageMapping({ tradePartyDetails = {} }) {
 			<DeactivateSageMapping
 				showDeactivate={showDeactivate}
 				setShowDeactivate={setShowDeactivate}
+				refetch={refetch}
 			/>
 		</div>
 	);
