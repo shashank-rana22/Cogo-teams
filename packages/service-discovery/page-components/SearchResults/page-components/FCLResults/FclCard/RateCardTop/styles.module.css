@@ -64,6 +64,10 @@
 	margin-right: 4px;
 }
 
+.default_icon {
+	margin-right: 12px;
+}
+
 .shipping_line_name {
 	font-size: 16px;
 }

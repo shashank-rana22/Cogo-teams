@@ -14,6 +14,7 @@ function QuotationDetails({
 	isMultiContainer = false,
 	detail = {},
 	setScreen = () => {},
+	setRouterLoading = () => {},
 }) {
 	const router = useRouter();
 
@@ -37,6 +38,7 @@ function QuotationDetails({
 
 			setScreen('selectedCardScreen');
 		} else {
+			setRouterLoading(true);
 			router.push(`/book/${router.query.spot_search_id}`);
 		}
 	};

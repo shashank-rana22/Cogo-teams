@@ -16,7 +16,7 @@ function removeItemFromLocalStorage() {
 	localStorage.removeItem('additionalFormInfo');
 }
 
-function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
+function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = () => {}, ...rest }) {
 	const { createSearch, loading } = useCreateSearch();
 
 	const router = useRouter();
@@ -86,6 +86,8 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 			setShow({});
 
 			removeItemFromLocalStorage();
+
+			setRouterLoading(true);
 
 			router.push(
 				'/book/[spot_search_id]',

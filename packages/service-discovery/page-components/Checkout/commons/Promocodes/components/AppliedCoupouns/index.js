@@ -1,9 +1,36 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDiscount } from '@cogoport/icons-react';
+import { IcMDiscount, IcMDelete } from '@cogoport/icons-react';
+
+import useUpdateCheckoutPromotion from '../../hooks/useUpdateCheckoutPromotion';
 
 import styles from './styles.module.css';
 
-function AppliedCoupouns({ isCouponApplied = false, promotion = {}, setShowCoupons = () => {} }) {
+function AppliedCoupouns({
+	isCouponApplied = false,
+	promotion = {},
+	setShowCoupons = () => {},
+	refetch = () => {},
+	setCouponApplied = () => {},
+	checkout_id = '',
+	setDisableCursor = () => {},
+}) {
+	const { updateCheckoutPromotion = () => {} } = useUpdateCheckoutPromotion({
+		checkout_id,
+	});
+
+	const removeCoupon = async () => {
+		const applyRes = await updateCheckoutPromotion(
+			promotion?.id,
+			'inactive',
+		);
+		if (applyRes) {
+			await refetch();
+			setCouponApplied(false);
+			setDisableCursor('');
+			setShowCoupons(false);
+		}
+	};
+
 	if (!isCouponApplied || promotion.codes === undefined) {
 		return null;
 	}
@@ -24,6 +51,8 @@ function AppliedCoupouns({ isCouponApplied = false, promotion = {}, setShowCoupo
 						>
 							Change
 						</div>
+
+						<IcMDelete onClick={removeCoupon} className={styles.delete_icon} />
 					</div>
 				</div>
 				<div className={styles.promocode_caption}>
@@ -35,6 +64,7 @@ function AppliedCoupouns({ isCouponApplied = false, promotion = {}, setShowCoupo
 					applied with this promocode successfully
 				</div>
 			</div>
+
 		</div>
 	);
 }

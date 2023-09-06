@@ -16,6 +16,7 @@ function SearchDetails({
 	activePage = '',
 	currentScreen = '',
 	setCurrentScreen = () => {},
+	setRouterLoading = () => {},
 	...rest
 }) {
 	const { importer_exporter = {}, user = {} } = data || {};
@@ -24,7 +25,7 @@ function SearchDetails({
 
 	const handleEdit = (event) => {
 		event.stopPropagation();
-		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps });
+		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps, setRouterLoading });
 	};
 
 	return (

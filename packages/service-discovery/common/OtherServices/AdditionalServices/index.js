@@ -7,7 +7,7 @@ import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerm
 
 import ChangeIncoTermModal from './ChangeIncoTermModal';
 import getAddedServices from './getAddedServices';
-// import useGetMinPrice from './hooks/useGetMinPrice';
+import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
@@ -30,7 +30,7 @@ function AdditionalServices({ // used in search results and checkout
 	searchLoading = false,
 	refetchLoading = false,
 }) {
-	const { service_rates = [] } = rateCardData;
+	const { service_rates = [], total_price_currency = 'USD' } = rateCardData;
 
 	const {
 		service_details = {},
@@ -38,8 +38,6 @@ function AdditionalServices({ // used in search results and checkout
 		trade_type = '',
 		inco_term = '',
 	} = detail;
-
-	console.log('service_details', service_details);
 
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
@@ -146,12 +144,12 @@ function AdditionalServices({ // used in search results and checkout
 		});
 	});
 
-	// const { startingPrices = [], loading: startingPriceLoading } = useGetMinPrice({
-	// 	allServices: ALL_SERVICES,
-	// 	total_price_currency,
-	// 	detail,
-	// 	rateCardData,
-	// });
+	const { startingPrices = [], loading: startingPriceLoading } = useGetMinPrice({
+		allServices: ALL_SERVICES,
+		total_price_currency,
+		detail,
+		rateCardData,
+	});
 
 	const filteredAllServices = ALL_SERVICES.filter((service_item) => service_item.inco_terms.includes(inco_term));
 
@@ -236,8 +234,8 @@ function AdditionalServices({ // used in search results and checkout
 							setHeaderProps={setHeaderProps}
 							refetch={refetchSearch}
 							SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
-							// startingPrices={startingPrices}
-							// startingPriceLoading={startingPriceLoading}
+							startingPrices={startingPrices}
+							startingPriceLoading={startingPriceLoading}
 							refetchLoading={refetchLoading}
 						/>
 					);
