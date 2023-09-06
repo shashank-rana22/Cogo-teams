@@ -11,7 +11,7 @@ import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
 import lineItems from './LineItems';
 import ListData from './ListData';
 import styles from './styles.module.css';
-import UploadFile from './UploadDocument';
+import UploadDocument from './UploadDocument';
 
 const ZERO_VALUE = 0;
 
@@ -24,40 +24,6 @@ const handleSetTdsZero = (updatedData = [], setUpdatedData = () => {}) => {
 	}));
 	setUpdatedData(updatedDataWithZeroTds);
 };
-
-function UploadModal({ showDocument, setShowDocument, onOuterClick, fileValue, setFileValue }) {
-	return (
-		<Modal
-			show={showDocument}
-			onClose={() => { setShowDocument(false); }}
-			onOuterClick={onOuterClick}
-			size="md"
-		>
-			<Modal.Body>
-				<UploadFile
-					fileValue={fileValue}
-					setFileValue={setFileValue}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-
-				<Button
-					style={{ marginRight: '6px' }}
-					onClick={() => { setShowDocument(false); }}
-					themeType="secondary"
-				>
-					Upload
-				</Button>
-				<Button
-					themeType="secondary"
-					onClick={() => { setShowDocument(false); setFileValue(''); }}
-				>
-					Cancel
-				</Button>
-			</Modal.Footer>
-		</Modal>
-	);
-}
 
 export default function MatchModal({
 	matchModalShow = false, setMatchModalShow = () => {},
@@ -72,7 +38,7 @@ export default function MatchModal({
 	const [showJV, setShowJV] = useState(false);
 	const [updatedData, setUpdatedData] = useState(JSON.parse(JSON.stringify(selectedData)));
 	const [showDocument, setShowDocument] = useState(false);
-	const [fileValue, setFileValue] = useState('Upload Your File');
+	const [fileValue, setFileValue] = useState({});
 	const {
 		checkData, postPaymentsSettlementCheck, checkLoading,
 		success, setSuccess,
@@ -184,8 +150,9 @@ export default function MatchModal({
 					>
 						Upload File
 					</Button>
+					<p className={styles.optional}>(Optional)</p>
 					{showDocument && (
-						<UploadModal
+						<UploadDocument
 							showDocument={showDocument}
 							setShowDocument={setShowDocument}
 							onOuterClick={onOuterClick}
@@ -201,7 +168,6 @@ export default function MatchModal({
 					onClick={() => setShowJV(true)}
 				>
 					CREATE JV
-
 				</Button>
 
 				<div className={styles.dryrun}>

@@ -94,6 +94,12 @@
 .error {
 	font-size: 10px;
 	color: var(--color-primary-error-red-2);
+	text-align: center;
+}
+
+.optional {
+	font-size: 10px;
+	text-align: center;
 }
 
 .refreshStyle {
