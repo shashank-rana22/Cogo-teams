@@ -98,6 +98,26 @@ const repositoryControls = (t = () => {}) => ({
 				required: true,
 			},
 		},
+		{
+			name        : 'ams_mode',
+			type        : 'select',
+			placeholder : 'AMS Mode for this Airline Airport Pair',
+			options     : [
+				{
+					label : 'Electronic',
+					value : 'electronic',
+				},
+				{
+					label : 'Manual',
+					value : 'manual',
+				},
+			],
+			label : 'AMS Mode for this Airline Airport Pair',
+			span  : 6,
+			rules : {
+				required: true,
+			},
+		},
 	],
 	email: [
 		{
