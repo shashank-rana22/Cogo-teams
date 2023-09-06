@@ -1,0 +1,17 @@
+.primary_button {
+	width: 94%;
+	margin-left: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-radius: 6px;
+}
+
+.secondary_button {
+	width: 94%;
+	margin: 8px 0 10px 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-radius: 6px;
+}

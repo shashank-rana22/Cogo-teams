@@ -1,0 +1,8 @@
+.container {
+	display: flex;
+}
+
+.email_component {
+	padding: 20px 28px;
+	background: #fbfbff;
+}

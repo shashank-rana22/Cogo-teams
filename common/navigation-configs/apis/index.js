@@ -54,6 +54,7 @@ import saas_tools from './saas-tools';
 import sales_invoice from './sales-invoice-apis';
 import schedules from './schedules-apis';
 import search from './search-apis';
+import service_discovery from './service-discovery';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
@@ -173,6 +174,7 @@ const apis = {
 	centralised_customer_service,
 	...authApis,
 	ssr,
+	service_discovery,
 };
 
 export default apis;
