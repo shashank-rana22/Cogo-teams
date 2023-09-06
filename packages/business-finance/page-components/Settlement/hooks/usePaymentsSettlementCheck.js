@@ -4,9 +4,9 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
-// import React from 'react';
 
-const usePaymentsSettlementCheck = ({ selectedData, date }) => {
+const usePaymentsSettlementCheck = ({ selectedData = [], date = '' }) => {
+	const { profile } = useSelector((state) => state || {});
 	const [success, setSuccess] = useState(true);
 	const [
 		{
@@ -22,7 +22,7 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 		},
 		{ manual: true },
 	);
-	const { profile } = useSelector((state) => state || {});
+
 	const postPaymentsSettlementCheck = async () => {
 		try {
 			await checkTrigger({
@@ -39,7 +39,7 @@ const usePaymentsSettlementCheck = ({ selectedData, date }) => {
 						})) || undefined,
 				},
 			});
-			// setCheckedData(checkData?.stackDetails || [])
+			Toast.success('Dry Run Successful');
 		} catch (error) {
 			setSuccess(false);
 			Toast.error(error?.response?.data?.message || 'Something went wrong');

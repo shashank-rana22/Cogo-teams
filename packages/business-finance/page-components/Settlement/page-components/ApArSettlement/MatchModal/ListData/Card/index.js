@@ -1,14 +1,15 @@
 import { cl } from '@cogoport/components';
-import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { IcMDelete, IcMEdit, IcMDrag } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
+import showOverflowingNumber from '../../../../../../commons/showOverflowingNumber.tsx';
 import { getFormatAmount } from '../../../../../utils/getFormatAmount';
 
 import EditFields from './EditFields';
 import styles from './styles.module.css';
 
 const STATUS = {
-	Unpaid               : '#FEF1DF',
+	Unpaid               : '#edd7a9',
 	Unutilized           : '#FEF1DF',
 	Utilized             : '#CDF7D4',
 	'Partially Paid'     : '#D9EAFD',
@@ -19,6 +20,9 @@ const STATUS = {
 const INITIAL_BAL = 0;
 const KEY_TDS = 'tds';
 const KEY_ALLOCATION = 'allocation';
+const TRUNCATION_LENGTH = 10;
+const ZERO_BALANCE = 0;
+const EXC_RATE_FIXED_LENGTH = 2;
 
 export default function CardItem({
 	itm = {},
@@ -27,11 +31,11 @@ export default function CardItem({
 	originalAllocation = 0,
 	originalTDS = 0,
 	setIsDelete = () => {},
-	updatedData,
-	setUpdateBal,
+	updatedData = [],
+	setUpdateBal = () => {},
 	isError = false,
 }) {
-	const new_itm = itm;
+	const cardData = itm;
 	const {
 		documentValue = '',
 		documentAmount = 0,
@@ -40,74 +44,68 @@ export default function CardItem({
 		settledTds = 0,
 		exchangeRate = 0,
 		nostroAmount = 0,
-	} = new_itm || {};
-	const [prevTDS, setPrevTDS] = useState(new_itm.tds);
-	const [newTDS, setNewTDS] = useState(new_itm.tds);
-	const [editedAllocation, setEditedAllocation] = useState(new_itm.allocationAmount);
-	useEffect(() => {
-		setNewTDS(new_itm.tds);
-		setPrevTDS(new_itm.tds);
-		setEditedAllocation(new_itm.allocationAmount);
-		const total = updatedData.reduce((sum, item) => +sum + +item.balanceAmount
-		* +item.exchangeRate * item.signFlag, INITIAL_BAL);
-		setUpdateBal(total);
-	}, [new_itm.tds, new_itm.allocationAmount, setUpdateBal, updatedData]);
+	} = cardData || {};
+	const [prevTDS, setPrevTDS] = useState(cardData.tds);
+	const [newTDS, setNewTDS] = useState(cardData.tds);
+	const [editedAllocation, setEditedAllocation] = useState(cardData.allocationAmount);
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
-
-	const EXC_RATE_FIXED = 2;
 	const handleDeleteClick = (idToDelete) => {
-		const updatedSelectedData = selectedData.filter((item) => item.id !== idToDelete);
+		const UPDATED_SELECTED_DATA = selectedData.filter((item) => item.id !== idToDelete);
 		setIsDelete(true);
-		setSelectedData(updatedSelectedData);
+		setSelectedData(UPDATED_SELECTED_DATA);
 	};
-	const ZERO_BALANCE = 0;
 	const handleEditAllocation = () => {
-		const newAllocation = parseFloat(new_itm.allocationAmount);
-		const newBalanceAfterAllocation = parseFloat(
-			+balanceAmount - parseFloat(new_itm.allocationAmount),
+		const NEW_ALLOCATION = parseFloat(cardData.allocationAmount);
+		const NEW_BALANCE_AFTER_ALLOCATION = parseFloat(
+			+balanceAmount - parseFloat(cardData.allocationAmount),
 		);
-		if (newAllocation >= ZERO_BALANCE && newAllocation <= balanceAmount) {
-			setEditedAllocation(new_itm.allocationAmount);
-			new_itm.balanceAfterAllocation = newBalanceAfterAllocation;
-		} else {
-			// j
+		if (NEW_ALLOCATION >= ZERO_BALANCE && NEW_ALLOCATION <= balanceAmount) {
+			setEditedAllocation(cardData.allocationAmount);
+			cardData.balanceAfterAllocation = NEW_BALANCE_AFTER_ALLOCATION;
 		}
 	};
 	const handleEditTDS = () => {
-		const tdsDifference = parseFloat(+new_itm.tds - +prevTDS);
-		new_itm.balanceAmount -= +tdsDifference;
-		new_itm.allocationAmount -= +tdsDifference;
-		setEditedAllocation(new_itm.allocationAmount);
-		setNewTDS(new_itm.tds);
-		setPrevTDS(new_itm.tds);
+		const TDS_DIFFERENCE = parseFloat(+cardData.tds - +prevTDS);
+		cardData.balanceAmount -= +TDS_DIFFERENCE;
+		cardData.allocationAmount -= +TDS_DIFFERENCE;
+		setEditedAllocation(cardData.allocationAmount);
+		setNewTDS(cardData.tds);
+		setPrevTDS(cardData.tds);
 	};
+	useEffect(() => {
+		setNewTDS(cardData.tds);
+		setPrevTDS(cardData.tds);
+		setEditedAllocation(cardData.allocationAmount);
+		const TOTAL = updatedData.reduce((sum, item) => +sum + +item.balanceAmount
+		* +item.exchangeRate * item.signFlag, INITIAL_BAL);
+		setUpdateBal(TOTAL);
+	}, [cardData.tds, cardData.allocationAmount, setUpdateBal, updatedData]);
 	useEffect(() => {
 	}, [selectedData]);
 	return (
 		<div className={styles.Row}>
-			<div className={styles.Card} style={{ '--colortype': STATUS[new_itm.status] }}>
-				<div className={styles.ribbon}>{new_itm.status}</div>
+			<div className={styles.Card} style={{ '--colortype': STATUS[cardData.status] }}>
+				<div className={styles.ribbon}>{cardData.status}</div>
 
 				<div className={cl`${styles.icon_div} ${styles.flex}`}>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dragons.svg"
-						alt="dragon icon"
+					<IcMDrag
+						className={styles.icon}
 					/>
 				</div>
 
 				<div className={cl`${styles.ContainerDiv} ${styles.flex}`}>
-					{documentValue}
+					{showOverflowingNumber(documentValue || '-', TRUNCATION_LENGTH)}
 				</div>
 
 				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
 					{getFormatAmount(documentAmount, currency)}
 				</div>
 
-				<div className={cl`${styles.rate} ${styles.flex}`}>{exchangeRate?.toFixed(EXC_RATE_FIXED)}</div>
+				<div className={cl`${styles.rate} ${styles.flex}`}>{exchangeRate?.toFixed(EXC_RATE_FIXED_LENGTH)}</div>
 				<div className={cl`${styles.edited_fields} ${styles.flex}`}>
 					{
-					isTdsEdnew_itmode
+					(isTdsEdnew_itmode)
 						? (
 							<EditFields
 								isError={isError}
@@ -116,7 +114,7 @@ export default function CardItem({
 								originalTDS={originalTDS}
 								doneSet={setIsTdsEdnew_itmode}
 								handleFunc={handleEditTDS}
-								newItem={new_itm}
+								newItem={cardData}
 								setNewTDS={setNewTDS}
 								setPrevTDS={setPrevTDS}
 								fieldType={KEY_TDS}
@@ -124,7 +122,7 @@ export default function CardItem({
 						)
 						:					(
 							<div className={styles.flex}>
-								{getFormatAmount(new_itm?.tds, currency)}
+								{getFormatAmount(cardData?.tds, currency)}
 								<IcMEdit
 									height={14}
 									width={14}
@@ -155,14 +153,14 @@ export default function CardItem({
 								inputSet={setEditedAllocation}
 								doneSet={setIsEdnew_itmode}
 								handleFunc={handleEditAllocation}
-								newItem={new_itm}
+								newItem={cardData}
 								originalAllocation={originalAllocation}
 								fieldType={KEY_ALLOCATION}
 							/>
 						)
 						:					(
 							<>
-								{getFormatAmount(new_itm?.allocationAmount, currency)}
+								{getFormatAmount(cardData?.allocationAmount, currency)}
 								<IcMEdit
 									height={14}
 									width={14}
@@ -175,13 +173,15 @@ export default function CardItem({
                     }
 				</div>
 				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
-					{getFormatAmount(new_itm?.balanceAfterAllocation, currency)}
+					{getFormatAmount(cardData?.balanceAfterAllocation, currency)}
 				</div>
 
 				<IcMDelete
 					height={16}
 					width={16}
-					onClick={() => handleDeleteClick(new_itm?.id)}
+					onClick={() => handleDeleteClick(cardData?.id)}
+					fill="#ED3726"
+					className={styles.icon}
 				/>
 			</div>
 		</div>

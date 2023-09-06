@@ -1,43 +1,24 @@
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import CardItem from './Card';
 import CardHeader from './CardHeader';
 
 const ZERO_VALUE = 0;
+const LENGTH = 4;
+const TIMES_TO_RENDER = [...new Array(LENGTH).keys()];
+const TRUNCATE_LENGTH = 10;
 export default function ListData({
 	selectedData = [],
 	setSelectedData = () => {},
-	// checkedData,
-	// setCheckedData,
 	dryRun = false,
-	// setDryRun,
 	reRender = false,
-	// setReRender = () => {},
-	// isDelete = false,
 	setIsDelete = () => {},
 	updatedData = [],
-	setUpdatedData,
-	// dryRunData,
-	checkLoading,
-	setUpdateBal,
+	setUpdatedData = () => {},
+	checkLoading = false,
+	setUpdateBal = () => {},
 }) {
-	// const [cardsData, setCardsData] = useState(updatedData);
-	// const [stackedData, setStackedData] = useState(stackData);
-	// useEffect(() => {
-	// 	setCardsData(updatedData);
-	// 	setIsDelete(false);
-	// 	setReRender(false);
-
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// 	// stackedData = [];
-	// 	// setStackedData([]);
-	// }, [reRender]);
-	// useEffect(() => {
-	// 	setCardsData(updatedData);
-	// 	setIsDelete(false);
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [isDelete]);
-
 	const handleDragStart = (e, index) => {
 		e.dataTransfer.setData('text/plain', index.toString());
 	};
@@ -48,13 +29,13 @@ export default function ListData({
 
 	const handleDrop = (e, targetIndex) => {
 		e.preventDefault();
-		const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+		const SOURCE_INDEX = parseInt(e.dataTransfer.getData('text/plain'), TRUNCATE_LENGTH);
 		const ZERO_INDEX = 0;
 		const SOURCE_LENGTH = 1;
-		const newCardsData = [...updatedData];
-		const [draggedItem] = newCardsData.splice(sourceIndex, SOURCE_LENGTH);
-		newCardsData.splice(targetIndex, ZERO_INDEX, draggedItem);
-		setUpdatedData(newCardsData);
+		const NEW_CARDS_DATA = [...updatedData];
+		const [draggedItem] = NEW_CARDS_DATA.splice(SOURCE_INDEX, SOURCE_LENGTH);
+		NEW_CARDS_DATA.splice(targetIndex, ZERO_INDEX, draggedItem);
+		setUpdatedData(NEW_CARDS_DATA);
 	};
 
 	return (
@@ -62,7 +43,17 @@ export default function ListData({
 			<CardHeader />
 			{
 				checkLoading
-					? (<div>Please wait...</div>)
+					? (
+						<div>
+							{TIMES_TO_RENDER?.map((item) => (
+								<Placeholder
+									key={item}
+									height="50px"
+									margin="0px 0px 20px 0px"
+								/>
+							))}
+						</div>
+					)
 
 					: updatedData?.map((tile, index) => (
 						<div

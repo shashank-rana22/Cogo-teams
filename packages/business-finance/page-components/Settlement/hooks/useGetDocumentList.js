@@ -74,11 +74,10 @@ const useGetDocumentList = ({
 						entityCode,
 					},
 				});
-				setBalanceData(rep.data);
+				setBalanceData(rep?.data);
 			}
 		} catch (error) {
 			setBalanceData(INITIAL_BAL);
-			// Toast.error(error?.error?.message);
 			toastApiError(error);
 		}
 	};

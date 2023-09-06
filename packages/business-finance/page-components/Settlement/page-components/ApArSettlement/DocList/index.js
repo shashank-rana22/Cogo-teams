@@ -5,6 +5,7 @@ import useGetColumns from '../../../configurations/ap-ar-settlement/docList-colu
 
 import styles from './styles.module.css';
 
+const PAGE_SIZE = 10;
 function DocList({
 	data = [],
 	loading = false,
@@ -17,7 +18,7 @@ function DocList({
 	setPageCheckedRows = () => {},
 }) {
 	const { list = [] } = data || {};
-	const table_columns = useGetColumns({
+	const TABLE_COLUMNS = useGetColumns({
 		data,
 		loading,
 		selectedData,
@@ -30,12 +31,12 @@ function DocList({
 	return (
 		<div>
 			<div className={styles.container}>
-				<Table columns={table_columns} data={list} className={styles.tablestyle} loading={loading} />
+				<Table columns={TABLE_COLUMNS} data={list} className={styles.tablestyle} loading={loading} />
 				<Pagination
 					className={styles.pagination}
 					currentPage={data?.pageNo}
 					totalItems={data?.totalRecords}
-					pageSize={10}
+					pageSize={PAGE_SIZE}
 					onPageChange={onPageChange}
 				/>
 			</div>

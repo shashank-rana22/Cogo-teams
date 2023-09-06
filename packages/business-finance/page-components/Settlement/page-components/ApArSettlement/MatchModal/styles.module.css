@@ -3,7 +3,7 @@
 	flex-flow: column wrap;
 
 	:global {
-		.ui_df2J4 {
+		.ui_modal_header_container {
 			align-items: start;
 		}
 	}
@@ -12,6 +12,7 @@
 .header {
 	display: flex;
 	align-items: flex-end;
+	font-size: 16px;
 }
 
 .supheader {
@@ -29,6 +30,7 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 0;
+	font-weight: 500;
 	color: #f68b21;
 }
 
@@ -42,10 +44,12 @@
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
+	font-weight: 500;
 
 	:global {
 		.ui_button_container {
 			height: 36px;
+			font-weight: 500;
 		}
 	}
 }
@@ -67,6 +71,7 @@
 	flex-direction: row;
 	align-items: center;
 	margin-right: 10px;
+	font-weight: 500;
 
 	:global {
 		.react-datepicker__aria-live {
@@ -88,7 +93,6 @@
 .dryrun {
 	display: flex;
 	flex-flow: column wrap;
-	width: 90px;
 }
 
 .error {
@@ -110,13 +114,17 @@
 	cursor: pointer;
 	border: 1px solid var(--color-secondary-greyscale-5);
 	border-radius: 4px;
+
+	:global {
+		.ui_ps_themeType_primary svg {
+			fill: var(--color-accent-orange-2);
+		}
+	}
 }
 
 .dry_button {
 	display: flex;
 	flex-direction: column;
-
-	/* flex-wrap: wrap; */
 	width: 90px;
 	margin-right: 6px;
 }

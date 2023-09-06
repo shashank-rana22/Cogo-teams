@@ -27,7 +27,7 @@
 	flex-shrink: 0;
 	width: 60px;
 	height: 2px;
-	background: var(-80, #ee3425);
+	background: var(--color-primary-error-red-2);
 	border-radius: 40px;
 }
 

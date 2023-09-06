@@ -11,7 +11,7 @@ const LEAST_VALUE = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
-function errorMsg({ new_item, types, inputvalue, originalAllocation, fieldType }) {
+function errorMsg({ new_item = {}, types, inputvalue = 0, originalAllocation = 0, fieldType = '' }) {
 	if (fieldType === 'allocation') {
 		const {
 			currency = GLOBAL_CONSTANTS.currency_code.INR,
@@ -53,14 +53,8 @@ function errorMsg({ new_item, types, inputvalue, originalAllocation, fieldType }
 
 	const {
 		tds = 0,
-		// afterTdsAmount = 0,
-		// tdsValue = tds,
 		currency = GLOBAL_CONSTANTS.currency_code.INR,
-		// tdsEditable = false,
 		documentAmount = 0,
-		// currentBalance = 0,
-		// constBalanceAmount = 0,
-		// nostroChangeAmount = 0,
 		settledTds = 0,
 	} = new_item || {};
 
@@ -99,7 +93,6 @@ function RenderContent({ isError = false, errorMessege = '' }) {
 }
 
 function EditFields({
-	// isError = false,
 	inputvalue = 0,
 	inputSet = () => {},
 	originalTDS = 0,
@@ -150,23 +143,27 @@ function EditFields({
 					<IcMTick
 						height={14}
 						width={14}
-						onClick={() => {
-							doneSet(false);
-							if (fieldType === 'tds') {
-								new_item.tds = parseFloat(inputvalue);
-							} else {
-								new_item.allocationAmount = parseFloat(inputvalue);
-							}
-							handleFunc();
-						}}
 					/>
 				)}
 				disabled={isError}
+				onClick={() => {
+					doneSet(false);
+					if (fieldType === 'tds') {
+						new_item.tds = parseFloat(inputvalue);
+					} else {
+						new_item.allocationAmount = parseFloat(inputvalue);
+					}
+					handleFunc();
+				}}
 			/>
 
-			<IcMLineundo
-				height={14}
-				width={14}
+			<ButtonIcon
+				icon={(
+					<IcMLineundo
+						height={14}
+						width={14}
+					/>
+				)}
 				onClick={() => {
 					doneSet(false);
 					if (fieldType === 'tds') {

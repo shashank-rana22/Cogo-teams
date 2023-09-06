@@ -7,11 +7,11 @@ import { STATUS_OPTIONS } from '../../../configurations/ap-ar-settlement/status-
 import styles from './styles.module.css';
 
 export function SearchFilters({
-	filters = [],
+	filters = {},
 	onFiltersChange = () => {},
 	loading = false,
 }) {
-	const handleFilterChange = (filterName, value) => {
+	const handleFilterChange = (filterName = '', value = '') => {
 		onFiltersChange(filterName, value);
 	};
 

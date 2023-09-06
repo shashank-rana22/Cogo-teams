@@ -33,13 +33,13 @@ function ApArSettlement() {
 		sortType: 'Asc',
 	});
 
-	const Text = 	(filters?.entityCode && filters?.tradeParty)
+	const TEXT = 	(filters?.entityCode && filters?.tradeParty)
 		? 'Looks like you do not have any data in this category'
 		: 'Select filters to find what you\'re looking for';
 
 	const [selectedData, setSelectedData] = useState([]);
 	const [matchBal, setMatchBal] = useState(INITIAL_MAT_BAL);
-	const totalMatchingBalance = selectedData.reduce((sum, item) => +sum
+	const TOTAL_MATCHING_BALANCE = selectedData.reduce((sum, item) => +sum
 	+ +item.balanceAmount * +item.exchangeRate * +item.signFlag, INITIAL_MAT_BAL);
 	const [reRender, setReRender] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -71,7 +71,7 @@ function ApArSettlement() {
 	};
 
 	function DataRender() {
-		if (data && data?.list.length > EMPTY_DATA_LENGTH) {
+		if (data && data?.list?.length > EMPTY_DATA_LENGTH) {
 			return (
 				<DocList
 					data={data}
@@ -88,7 +88,7 @@ function ApArSettlement() {
 		}
 		return (
 			<div className={styles.emptycontainer}>
-				<EmptyState height={315} width={482} Text={Text} />
+				<EmptyState height={315} width={482} Text={TEXT} />
 			</div>
 		);
 	}
@@ -103,18 +103,18 @@ function ApArSettlement() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sorting, query]);
 	useEffect(() => {
-		const selectedIds = new Set(selectedData.map((row) => row.id));
+		const SELECTED_IDS = new Set(selectedData?.map((row) => row.id));
 
 		const UPDATEDPAGECHECKEDROWS = {};
 		Object.keys(pageCheckedRows).forEach((pageNo) => {
-			UPDATEDPAGECHECKEDROWS[pageNo] = pageCheckedRows[pageNo].filter((id) => selectedIds.has(id));
+			UPDATEDPAGECHECKEDROWS[pageNo] = pageCheckedRows[pageNo]?.filter((id) => SELECTED_IDS?.has(id));
 		});
 
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
 
-		const total = selectedData.reduce((sum, item) => +sum + (+item.balanceAmount
+		const TOTAL = selectedData?.reduce((sum, item) => +sum + (+item.balanceAmount
 		* +item.exchangeRate * +item.signFlag), INITIAL_MAT_BAL);
-		setMatchBal(total);
+		setMatchBal(TOTAL);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedData]);
 
@@ -158,7 +158,7 @@ function ApArSettlement() {
 				selectedData={selectedData}
 				matchModalShow={matchModalShow}
 				setMatchModalShow={setMatchModalShow}
-				totalMatchingBalance={totalMatchingBalance}
+				totalMatchingBalance={TOTAL_MATCHING_BALANCE}
 				matchBal={matchBal}
 				setMatchBal={setMatchBal}
 				filters={filters}
@@ -167,7 +167,7 @@ function ApArSettlement() {
 				<MatchModal
 					matchModalShow={matchModalShow}
 					setMatchModalShow={setMatchModalShow}
-					totalMatchingBalance={totalMatchingBalance}
+					totalMatchingBalance={TOTAL_MATCHING_BALANCE}
 					selectedData={selectedData}
 					setSelectedData={setSelectedData}
 					loading={loading}

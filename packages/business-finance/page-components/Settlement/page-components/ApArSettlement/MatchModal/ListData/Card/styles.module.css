@@ -16,23 +16,6 @@
 
 .Card {
 	position: relative;
-
-	/* box-sizing: border-box; */
-
-	/* justify-content: space-between; */
-
-	/* display: grid;
-	grid-template-columns: repeat(11, auto);
-	grid-gap: 10px; */
-
-	/* display: flex; */
-
-	/* align-items: center;
-	height: 60px;
-	padding: 0 10px;
-	margin-top: 10px;
-	font-size: 12px; */
-
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -40,15 +23,16 @@
 	height: 60px;
 	padding: 8px;
 	margin: 16px 0;
+	font-size: 12px;
 	background: #fff;
 	border: 1px solid #dfe1ef;
 	border-radius: 8px;
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 
 	.ribbon {
-		--f: 10px; /* control the folded part */
-		--r: 15px; /* control the ribbon shape */
-		--t: -3px; /* the top offset */
+		--f: 10px;
+		--r: 15px;
+		--t: -3px;
 
 		position: absolute;
 		inset: var(--t) calc(-1 * var(--f)) auto auto;
@@ -100,7 +84,7 @@
 
 	:global {
 		.ui_buttonicon_container {
-			padding: 2px;
+			width: 22px;
 		}
 	}
 }
@@ -137,6 +121,7 @@
 
 .btn {
 	margin-left: 4px;
+	cursor: pointer;
 }
 
 .header_msg {
@@ -173,4 +158,9 @@
 .edited_fields {
 	width: 12.5%;
 	padding-left: 4px;
+}
+
+.icon {
+	color: var(--color-accent-orange-2);
+	cursor: pointer;
 }

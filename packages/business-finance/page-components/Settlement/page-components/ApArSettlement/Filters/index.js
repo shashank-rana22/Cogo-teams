@@ -8,8 +8,8 @@ import { ACC_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter
 import styles from './styles.module.css';
 
 function Filters({
-	filters = [],
-	onFiltersChange = {},
+	filters = {},
+	onFiltersChange = () => {},
 	loading = false,
 }) {
 	const handleFilterChange = (filterName, value) => {

@@ -14,24 +14,19 @@ function Amount({
 	data = [],
 	loading = false,
 	selectedData = [],
-	filters = [],
+	filters = {},
 	matchModalShow = false,
 	setMatchModalShow = () => {},
-	// totalMatchingBalance = 0,
 	matchBal = 0,
-	// setMatchBal,
 }) {
 	const { currency, ledCurrency } = selectedData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const {
 		jvListRefetch,
 	} = useGetJVList({ filters });
-	const from_cur = currency;
-	const to_cur = ledCurrency;
 	const {
 		getExchangeRate,
-	} = useGetExcRate({ from_cur, to_cur });
+	} = useGetExcRate({ from_cur: currency, to_cur: ledCurrency });
 	useEffect(() => {
-
 	}, [matchModalShow]);
 	return (
 		<div className={styles.Container}>
@@ -42,24 +37,15 @@ function Amount({
 				<div className={styles.VerticalRule} />
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{/* {data?.ledgerCurrency}
-						{' '} */}
 						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
 							(data && data?.outstandingAmount) || INITIAL_BAL,
 							data?.ledgerCurrency,
 						)}
-						{/* {getFormatAmount(
-							loading ? 'Loading...' : (data && data?.outstandingAmount) || INITIAL_BAL,
-							data?.ledgerCurrency,
-						)} */}
 					</div>
 					<div>Outstanding</div>
 				</div>
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{/* {data?.ledgerCurrency}
-						{' '} */}
-						{/* {loading ? 'Loading...' : (data && data?.openInvoiceAmount) || INITIAL_BAL} */}
 						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
 							(data && data?.openInvoiceAmount) || INITIAL_BAL,
 							data?.ledgerCurrency,
@@ -69,9 +55,6 @@ function Amount({
 				</div>
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{/* {data?.ledgerCurrency}
-						{' '}
-						{loading ? 'Loading...' : (data && data?.onAccountAmount) || INITIAL_BAL} */}
 						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
 							(data && data?.onAccountAmount) || INITIAL_BAL,
 							data?.ledgerCurrency,
@@ -81,9 +64,6 @@ function Amount({
 				</div>
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{/* {data?.ledgerCurrency}
-						{' '}
-						{loading ? 'Loading...' : (matchBal) || INITIAL_BAL} */}
 						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
 							(matchBal) || INITIAL_BAL,
 							data?.ledgerCurrency,
@@ -94,7 +74,7 @@ function Amount({
 				<div>
 					<Button
 						size="md"
-						themeType="accent"
+						themeType="primary"
 						disabled={isEmpty(selectedData)}
 						loading={loading}
 						onClick={() => { setMatchModalShow(true); jvListRefetch(); getExchangeRate(); }}

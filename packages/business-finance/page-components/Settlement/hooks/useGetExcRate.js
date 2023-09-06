@@ -15,7 +15,7 @@ export function toastApiError(err) {
 	if (message !== 'canceled') { Toast.error(message || 'Something went wrong !!'); }
 }
 
-const useGetExcRate = ({ from_cur, to_cur }) => {
+const useGetExcRate = ({ from_cur = '', to_cur = '' }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : 'get_exchange_rate',

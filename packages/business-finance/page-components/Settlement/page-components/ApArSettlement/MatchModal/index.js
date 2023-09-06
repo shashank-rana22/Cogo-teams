@@ -8,7 +8,7 @@ import usePaymentsSettlementCheck from '../../../hooks/usePaymentsSettlementChec
 import { getFormatAmount } from '../../../utils/getFormatAmount';
 import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
 
-import lineItems from './LineItems';
+import getLineItems from './LineItems';
 import ListData from './ListData';
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
@@ -16,13 +16,13 @@ import UploadDocument from './UploadDocument';
 const ZERO_VALUE = 0;
 
 const handleSetTdsZero = (updatedData = [], setUpdatedData = () => {}) => {
-	const updatedDataWithZeroTds = updatedData.map((item) => ({
+	const UPDATED_DATA_WITH_ZERO_TDS = updatedData?.map((item) => ({
 		...item,
 		allocationAmount : parseFloat(+item.allocationAmount) + parseFloat(+item.tds),
 		balanceAmount    : +item.balanceAmount + +item.tds,
 		tds              : 0,
 	}));
-	setUpdatedData(updatedDataWithZeroTds);
+	setUpdatedData(UPDATED_DATA_WITH_ZERO_TDS);
 };
 
 export default function MatchModal({
@@ -39,15 +39,6 @@ export default function MatchModal({
 	const [date, setDate] = useState('');
 	const [showDocument, setShowDocument] = useState(false);
 	const [fileValue, setFileValue] = useState({});
-
-	useEffect(() => {
-		const sorted_ms = updatedData
-			.map((item) => new Date(item.transactionDate).getTime())
-			.sort();
-
-		const latest_ms = sorted_ms[GLOBAL_CONSTANTS.zeroth_index];
-		setDate(new Date(latest_ms));
-	}, [updatedData]);
 
 	const {
 		checkData, postPaymentsSettlementCheck, checkLoading,
@@ -74,6 +65,14 @@ export default function MatchModal({
 		await postPaymentsSettlementCheck();
 	};
 	useEffect(() => {
+		const SORTED_MS = updatedData
+			.map((item) => new Date(item.transactionDate).getTime())
+			.sort();
+
+		const LATEST_MS = SORTED_MS[GLOBAL_CONSTANTS.zeroth_index];
+		setDate(new Date(LATEST_MS));
+	}, [updatedData]);
+	useEffect(() => {
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
 		if (selectedData.length === ZERO_VALUE) {
 			setMatchModalShow(false);
@@ -97,7 +96,7 @@ export default function MatchModal({
 		setCheckedData([]);
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
 	};
-	const line_items = lineItems(filters, updateBal);
+	const LINE_ITEMS = getLineItems(filters, updateBal);
 
 	return (
 		<div>
@@ -121,17 +120,16 @@ export default function MatchModal({
 		<br />
 
 		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+			<div style={{ display: 'flex', flexDirection: 'column', fontSize: '16px' }}>
 				Matching Balance
 				<p className={styles.paragraph}>
-					{/* {`${selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency}     ${updateBal}    `} */}
 					{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
 				</p>
 			</div>
 
 			<div className={styles.btn_container}>
 				<div className={styles.Datepicker}>
-					<div style={{ margin: '0px 6px' }}>
+					<div style={{ margin: '0px 6px', fontSize: '12px', fontWeight: '500' }}>
 						Settlement Date
 					</div>
 
@@ -199,11 +197,16 @@ export default function MatchModal({
 
 				<div className={styles.refreshStyle}>
 					<ButtonIcon
-						icon={<IcMRefresh />}
+						icon={(
+							<IcMRefresh
+								className={styles.icon}
+							/>
+						)}
 						themeType="primary"
 						onClick={() => {
 							handleRefreshClick();
 						}}
+
 					/>
 				</div>
 			</div>
@@ -248,7 +251,7 @@ export default function MatchModal({
 					refetch={jvListRefetch}
 					Entity={filters?.entityCode}
 					selectedData={updatedData}
-					line_items={line_items}
+					line_items={LINE_ITEMS}
 				/>
 			)}
 		</div>

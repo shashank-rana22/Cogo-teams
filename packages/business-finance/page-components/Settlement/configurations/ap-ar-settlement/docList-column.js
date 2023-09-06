@@ -15,7 +15,6 @@ const onChangeTableHeadCheckbox = ({
 	setPageCheckedRows((previousPageCheckedRows) => {
 		let newSelectedData = [...selectedData];
 		let newPageCheckedIds = [];
-
 		if (selectAll) {
 			newPageCheckedIds = [];
 			newSelectedData = selectedData.filter((item) => !currentPageListIds.includes(item.id));
@@ -56,8 +55,8 @@ const onChangeBodyCheckbox = ({ event, id, data, setPageCheckedRows, pageNumber,
 };
 
 const useGetColumns = ({
-	data,
-	loading,
+	data = [],
+	loading = false,
 	selectedData = [],
 	setSelectedData = () => {},
 	sortData = [],
@@ -78,8 +77,8 @@ const useGetColumns = ({
 		setSelectAll(isRowsChecked);
 	}, [pageCheckedRows, currentPageListIds, pageNumber]);
 
-	const renderSortingArrows = (key) => {
-		(
+	function RenderSortingArrows({ field:key = '' }) {
+		return (
 			<div className={styles.icon_flex}>
 				<IcMArrowRotateUp
 					className={sortBy === key && sortType === 'Asc' && styles.active}
@@ -101,7 +100,7 @@ const useGetColumns = ({
 				/>
 			</div>
 		);
-	};
+	}
 	const columns = [
 		{
 			id     : 'checkbox',
@@ -182,7 +181,7 @@ const useGetColumns = ({
 			Header: (
 				<span style={{ fontSize: '12px', display: 'flex' }}>
 					DOC. DATE
-					{renderSortingArrows('transactionDate')}
+					<RenderSortingArrows field="transactionDate" />
 				</span>
 			),
 			id       : 'transactionDate',
@@ -193,7 +192,7 @@ const useGetColumns = ({
 			Header: (
 				<div style={{ fontSize: '12px', display: 'flex' }}>
 					DOC AMOUNT
-					{renderSortingArrows('documentAmount')}
+					<RenderSortingArrows field="documentAmount" />
 				</div>
 			),
 			id       : 'documentAmount',
@@ -224,7 +223,7 @@ const useGetColumns = ({
 			Header: (
 				<div style={{ fontSize: '12px', display: 'flex' }}>
 					TDS
-					{renderSortingArrows('tdsAmount')}
+					<RenderSortingArrows field="tdsAmount" />
 				</div>),
 			id       : 'tds',
 			accessor : (item) => (
@@ -248,7 +247,7 @@ const useGetColumns = ({
 			Header: (
 				<div style={{ fontSize: '12px', display: 'flex' }}>
 					PAID/RECIEVED
-					{renderSortingArrows('paidAmount')}
+					<RenderSortingArrows field="paidAmount" />
 				</div>),
 			accessor : (item) => `${item?.currency} ${item?.settledAmount}` || '--',
 			id       : 'settledAmount',
@@ -257,7 +256,7 @@ const useGetColumns = ({
 			Header: (
 				<div style={{ fontSize: '12px', display: 'flex' }}>
 					BALANCE
-					{renderSortingArrows('balanceAmount')}
+					<RenderSortingArrows field="balanceAmount" />
 				</div>),
 			id       : 'balanceAmount',
 			accessor : (item) => (
