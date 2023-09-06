@@ -555,6 +555,7 @@ const GLOBAL_CONSTANTS = {
 		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
 		iframe_html_tag_text       : /<iframe([\s\S]*?)<\/iframe>/gm,
 		html_class_regex           : /class="([^"]+)"/g,
+		static_url                 : /([^:]\/)\/+/g,
 	},
 	zeroth_index                 : 0,
 	one                          : 1,
