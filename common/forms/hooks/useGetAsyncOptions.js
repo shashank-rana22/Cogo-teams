@@ -3,6 +3,8 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState, useCallback, useRef } from 'react';
 
+import handleModifiedOptions from '../utils/handleModifiedOptions';
+
 import useDebounceQuery from './useDebounceQuery';
 
 function useGetAsyncOptions({
@@ -13,6 +15,7 @@ function useGetAsyncOptions({
 	params = {},
 	onOptionsChange = () => {},
 	getModifiedOptions,
+	asyncKey = '',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -23,6 +26,10 @@ function useGetAsyncOptions({
 		params : merge(params, { filters: { q: query || undefined } }),
 	}, { manual: !(initialCall || query) });
 	let options = data?.list || [];
+
+	if (asyncKey === 'organizations_modified_options') {
+		options = handleModifiedOptions({ options });
+	}
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });

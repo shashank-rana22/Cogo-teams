@@ -68,6 +68,7 @@ import {
 	asyncListTruckTypes,
 	asyncFieldsOrganizationUsers,
 	asyncListLeadOrganizationUsers,
+	asyncFieldsOrganizationsModifiedLabel,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -154,6 +155,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_pricing_zones                   : asyncListPricingZones,
 	list_organization_users              : asyncFieldsOrganizationUsers,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
+	organizations_modified_options       : asyncFieldsOrganizationsModifiedLabel,
 };
 
 const SINGLE_ENTITY = 1;
@@ -187,6 +189,7 @@ function AsyncSelect(props) {
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
+		asyncKey,
 	});
 
 	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
