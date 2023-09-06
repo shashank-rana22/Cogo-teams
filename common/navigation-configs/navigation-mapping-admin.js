@@ -315,6 +315,21 @@ const navigationMapping = ({ t = () => {} }) => {
 			],
 			module_type: 'dashboards',
 		},
+		service_discovery: {
+			key           : 'service_discovery',
+			title         : t('common:service_discovery'),
+			href          : '/v2/service-discovery',
+			as            : '/v2/service-discovery',
+			type          : 'link',
+			icon          : IcMFinanceDashboard,
+			possible_apis : apis.service_discovery,
+			main_apis     : [
+				'list_spot_searches',
+				'list_checkouts',
+				'list_organizations',
+			],
+			module_type: 'dashboards',
+		},
 		supply_dashboard: {
 			key           : 'supply_dashboard',
 			title         : t('common:supply_dashboard'),

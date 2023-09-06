@@ -13,6 +13,7 @@
     "@cogoport/access-management": "workspace:0.1.0",
     "@cogoport/air-modules": "workspace:1.0.0",
     "@cogoport/air-repository": "workspace:0.1.0",
+    "@cogoport/service-discovery": "workspace:0.1.0",
     "@cogoport/allocation": "workspace:0.1.0",
     "@cogoport/athena-dashboard": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",

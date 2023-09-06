@@ -1,0 +1,45 @@
+.content {
+	display: flex;
+	margin-top: 8px;
+
+	:global {
+		.ui_select_input_placeholder {
+			font-size: 14px;
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+
+		.ui_input_control::placeholder {
+			font-size: 14px;
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+	}
+}
+
+.list {
+	width: 100%;
+	padding: 8px 12px;
+	margin-right: 8px;
+}
+
+.label {
+	display: flex;
+	flex: 1;
+	align-self: flex-start;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}
+
+.icon {
+	width: 60px;
+	height: 60px;
+	margin-top: 16px;
+	cursor: pointer;
+}
