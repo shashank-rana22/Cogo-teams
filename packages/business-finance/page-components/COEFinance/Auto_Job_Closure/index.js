@@ -1,5 +1,6 @@
 import { Input, Button, cl, Pagination } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Auto_Job_Closure_Config from '../configurations/Job_Closure';
@@ -124,7 +125,7 @@ function AutoJobClosure() {
 
 			<div className={styles.table}>
 				{' '}
-				{loading ? null : (
+				{ loading ? null : (
 					<CustomTable
 						itemData={data}
 						config={Auto_Job_Closure_Config}
@@ -137,13 +138,15 @@ function AutoJobClosure() {
 					/>
 				)}
 				<div className={styles.pagination}>
-					<Pagination
-						type="number"
-						currentPage={page}
-						totalItems={Number(totalRecords)}
-						pageSize={pageSize}
-						onPageChange={(val) => getNextPage({ page: val })}
-					/>
+					{ (!loading && !isEmpty(list)) ? (
+						<Pagination
+							type="number"
+							currentPage={page}
+							totalItems={Number(totalRecords)}
+							pageSize={pageSize}
+							onPageChange={(val) => getNextPage({ page: val })}
+						/>
+					) : null }
 				</div>
 			</div>
 

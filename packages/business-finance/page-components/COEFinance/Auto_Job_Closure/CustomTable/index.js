@@ -1,5 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyStateDocs from '../../../commons/EmptyStateDocs/index.tsx';
 import styles from '../styles.module.css';
 
 import ColumnCard from './ColumnCard';
@@ -13,7 +15,6 @@ function CustomTable({
 	refetch = () => {},
 	setSaveObj = () => {},
 	loading = false,
-
 }) {
 	const { list = [] } = itemData || {};
 
@@ -23,17 +24,21 @@ function CustomTable({
 			<div>
 				{list.map((item) => (
 					<div className={styles.columnCard} key={item.id}>
-						<ColumnCard
-							className={styles.columnCard}
-							key={item.id}
-							config={config}
-							item={item}
-							openConfig={openConfig}
-							setOpenConfig={setOpenConfig}
-							refetch={refetch}
-							loading={loading}
-							setSaveObj={setSaveObj}
-						/>
+						{ isEmpty(list) ? (
+							<EmptyStateDocs />
+						) : (
+							<ColumnCard
+								className={styles.columnCard}
+								key={item.id}
+								config={config}
+								item={item}
+								openConfig={openConfig}
+								setOpenConfig={setOpenConfig}
+								refetch={refetch}
+								loading={loading}
+								setSaveObj={setSaveObj}
+							/>
+						)}
 					</div>
 				))}
 			</div>
