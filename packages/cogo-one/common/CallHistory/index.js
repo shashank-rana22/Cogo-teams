@@ -39,8 +39,8 @@ function CallHistory({
 	const callStartedMessage = isVideoCall ? 'Video call started' : 'Audio call started';
 	const callEndedMessage = isVideoCall ? 'Video call ended' : 'Audio call ended';
 
-	const shipmentFeedback = feedback.find((feedbackItem) => feedbackItem.feedback_type === 'shipment');
-	const serialId = feedback[GLOBAL_CONSTANTS.zeroth_index]?.feedback_data[GLOBAL_CONSTANTS.zeroth_index]?.serial_id;
+	const shipmentFeedback = feedback?.find((feedbackItem) => feedbackItem.feedback_type === 'shipment');
+	const serialId = feedback?.[GLOBAL_CONSTANTS.zeroth_index]?.feedback_data[GLOBAL_CONSTANTS.zeroth_index]?.serial_id;
 
 	return (
 		<div>

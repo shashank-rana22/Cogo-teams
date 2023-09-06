@@ -39,25 +39,24 @@ function ShowFeedbackDetails({
 				setShowFeedback((prev) => !prev);
 			}}
 		>
-			<div>
-				{showFeedback ? (
-					<div className={cl`${styles.hide_card_details} ${setShowFeedback ? showCardDetailsStyles : ''}`}>
-						{noFeedback ? <div className={styles.no_feedback_label}>No Feedback</div> : (
-							<>
-								{(FEEDBACK_CARD_MAPPING).map((item) => (
-									<div className={styles.card_section} key={item.key}>
-										<div className={styles.label}>{item.label}</div>
-										<span>
-											{item?.value}
-										</span>
-
-									</div>
-								))}
-							</>
-						)}
-
-					</div>
-				) : null}
+			<div className={cl`${styles.hide_card_details} ${showFeedback ? showCardDetailsStyles : ''}`}>
+				{noFeedback ? <div className={styles.no_feedback_label}>No Feedback</div> : (
+					<>
+						{(FEEDBACK_CARD_MAPPING).map(({ key, value, label }) => (
+							<div key={key}>
+								{value
+									? (
+										<div className={styles.card_section}>
+											<div className={styles.label}>{label}</div>
+											<span>
+												{value}
+											</span>
+										</div>
+									) : null}
+							</div>
+						))}
+					</>
+				)}
 			</div>
 			<div className={cl`${styles.icon_area}
 			 ${type === 'user' ? styles.icon_area_grey : styles.icon_area_yellow}`}
