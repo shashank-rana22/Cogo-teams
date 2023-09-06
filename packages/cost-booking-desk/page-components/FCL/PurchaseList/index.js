@@ -51,15 +51,17 @@ function PurchaseList() {
 						data={list}
 					/>
 					{isEmpty(list) ? <EmptyState /> : null}
-					<div className={styles.footer}>
-						<Pagination
-							type="table"
-							currentPage={pagination}
-							totalItems={totalRecords}
-							pageSize={PAGE_LIMIT}
-							onPageChange={setPagination}
-						/>
-					</div>
+					{totalRecords > PAGE_LIMIT ? (
+						<div className={styles.footer}>
+							<Pagination
+								type="table"
+								currentPage={pagination}
+								totalItems={totalRecords}
+								pageSize={PAGE_LIMIT}
+								onPageChange={setPagination}
+							/>
+						</div>
+					) : null}
 				</div>
 			)}
 
