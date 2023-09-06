@@ -37,7 +37,7 @@ function FilterModal({
 
 		const finalValues = {
 			...values,
-			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || undefined,
+			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || DEFAULT_VALUES.source,
 		};
 
 		setFilters({ ...filters, ...finalValues });
