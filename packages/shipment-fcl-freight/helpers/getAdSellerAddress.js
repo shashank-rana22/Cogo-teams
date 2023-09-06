@@ -10,6 +10,7 @@ const getAdSellerAddress = ({
 		business_name = '',
 		country_id = '',
 		registration_number = '',
+		id = '',
 	} = collectionParty || {};
 
 	const {
@@ -17,7 +18,6 @@ const getAdSellerAddress = ({
 		organization_id = '',
 		tax_number = '',
 		pincode = '',
-		id,
 	} = collectionPartyAddress || {};
 
 	const { cp_address_city = '' } = formValues || {};
