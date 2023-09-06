@@ -1,32 +1,32 @@
 module.exports = {
-	'en-IN': {
-		key      : 'en-IN',
+	en: {
+		key      : 'en',
 		label    : 'EN',
 		language : 'English',
+		value    : 'english',
 	},
-	'en-SG': {
-		key      : 'en-SG',
-		label    : 'EN',
-		language : 'English',
-	},
-	'vi-VN': {
-		key      : 'vi-VN',
+	vi: {
+		key      : 'vi',
 		label    : 'VI',
 		language : 'Vietnamese',
+		value    : 'vietnamese',
 	},
-	'th-TH': {
-		key      : 'th-TH',
+	th: {
+		key      : 'th',
 		label    : 'TH',
 		language : 'Thai',
+		value    : 'thai',
 	},
-	'id-ID': {
-		key      : 'id-ID',
+	id: {
+		key      : 'id',
 		label    : 'ID',
 		language : 'Indonesian',
+		value    : 'indonesian',
 	},
-	'zh-CN': {
-		key      : 'zh-CN',
+	zh: {
+		key      : 'zh',
 		label    : 'ZH',
 		language : 'Chinese',
+		value    : 'chinese',
 	},
 };
