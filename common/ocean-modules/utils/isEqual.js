@@ -6,16 +6,11 @@ function isEqual(a, b) {
 	if (Array.isArray(a) && Array.isArray(b)) {
 		if (a.length !== b.length) return false;
 
-		a.forEach((item1, index) => {
-			if (!isEqual(item1, b[index])) {
-				return false;
-			}
-			return true;
-		});
+		return a.every((item1, index) => isEqual(item1, b[index]));
 	}
 
 	// handle object
-	if (typeof a === 'object' && typeof b === 'object') {
+	if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
 		const keysA = Object.keys(a);
 		const keysB = Object.keys(b);
 
