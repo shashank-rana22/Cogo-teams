@@ -35,7 +35,7 @@ const getFormControls = ({
 			value       : 'INR',
 			rules       : { required: 'Currency is required' },
 			size        : 'sm',
-			span        : 2,
+			span        : 3,
 		},
 		{
 			name        : 'amount',
@@ -55,7 +55,7 @@ const getFormControls = ({
 			size                  : 'sm',
 			maxDate               : Date.now(),
 			isPreviousDaysAllowed : true,
-			span                  : 6,
+			span                  : 5,
 		},
 		{
 			name        : 'payment_mode',
