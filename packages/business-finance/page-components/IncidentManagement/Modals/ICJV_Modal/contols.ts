@@ -1,48 +1,51 @@
-const controls = [
+interface Props {
+	t?: Function;
+}
+const getControls = ({ t = () => {} }:Props) => [
 	{
-		Header   : 'JV Number',
+		Header   : t('incidentManagement:jv_number_header'),
 		accessor : 'jvNum',
 		id       : 'jv_number',
 	},
 	{
-		Header   : 'Entity',
+		Header   : t('incidentManagement:entity_label'),
 		accessor : 'entityCode',
 		id       : 'entity',
 	},
 	{
-		Header   : 'Business Partner',
+		Header   : t('incidentManagement:business_partner_label'),
 		accessor : 'tradePartyName',
 		id       : 'business_partner',
 	},
 	{
-		Header   : 'Category',
+		Header   : t('incidentManagement:select_category_placeholder'),
 		accessor : 'category',
 		id       : 'category',
 	},
 	{
-		Header   : 'Type',
+		Header   : t('incidentManagement:type_header'),
 		accessor : 'type',
 		id       : 'type',
 	},
 	{
-		Header   : 'Currency',
+		Header   : t('incidentManagement:currency_label'),
 		accessor : 'currency',
 		id       : 'currency',
 	},
 	{
-		Header   : 'Exc. Rate',
+		Header   : t('incidentManagement:exc_rate_label'),
 		accessor : 'exchangeRate',
 		id       : 'exc_rate',
 	},
 	{
-		Header   : 'Amount',
+		Header   : t('incidentManagement:amount_label'),
 		accessor : 'amount',
 		id       : 'amount',
 	},
 	{
-		Header   : 'Description',
+		Header   : t('incidentManagement:description_header'),
 		accessor : 'description',
 		id       : 'description',
 	},
 ];
-export default controls;
+export default getControls;
