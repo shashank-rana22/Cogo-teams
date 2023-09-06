@@ -64,16 +64,14 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.url = `/${serviceName}/${originalApiPath}`;
 		if (
 			PEEWEE_SERVICES.includes(serviceName)
-			|| (serviceName === 'location')) {
+			|| (serviceName === 'location'
+			&& !isDevMode)) {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
-	if (serviceName === 'location') {
-		newConfig.baseURL = 'https://api.cogoport.com';
-	}
 
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
-		newConfig.baseURL = 'https://api.stage.cogoport.io';
+		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
 
 	return {
