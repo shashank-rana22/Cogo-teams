@@ -3,13 +3,13 @@ import List from './List';
 import ListFilters from './ListFilters';
 
 function ListScoringPlans(props) {
-	const { setActiveMode } = props;
+	const { setActiveMode, setParams } = props;
 
 	return (
 		<>
 			<Header setActiveMode={setActiveMode} />
 
-			<ListFilters />
+			<ListFilters setParams={setParams} />
 
 			<List />
 		</>

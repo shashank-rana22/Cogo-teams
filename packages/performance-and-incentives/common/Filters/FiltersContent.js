@@ -1,13 +1,10 @@
 import { Button } from '@cogoport/components';
-import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../Form/getFieldController';
 
 import styles from './styles.module.css';
 
 function FilterContent(props) {
-	const { t } = useTranslation(['allocation']);
-
 	const {
 		heading,
 		controls = [],
@@ -29,7 +26,7 @@ function FilterContent(props) {
 						size="sm"
 						onClick={onResettingFilters}
 					>
-						{t('allocation:reset_button')}
+						Reset
 					</Button>
 
 					<Button
@@ -40,7 +37,7 @@ function FilterContent(props) {
 							marginLeft: '10px',
 						}}
 					>
-						{t('allocation:apply_button')}
+						Apply
 					</Button>
 				</div>
 			</div>

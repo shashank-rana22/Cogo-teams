@@ -1,21 +1,59 @@
-import { Button } from '@cogoport/components';
+import { Button, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
-import styles from './styles.module.css';
+import Filters from '../../../../../../common/Filters';
 
-function ListFilters() {
+import styles from './styles.module.css';
+import useFilterContent from './useFilterContent';
+
+function conditionalWrapper({ condition, wrapper, children }) {
+	return condition ? wrapper(children) : children;
+}
+
+function ListFilters(props) {
+	const {
+		setParams,
+	} = props;
+
+	const {
+		controls,
+		formProps,
+		showFilters,
+		setShowFilters,
+		handleReset,
+		applyFilters,
+		filtersApplied,
+	} = useFilterContent({ setParams });
+
 	return (
 		<div className={styles.container}>
 			<p className={styles.heading}>12 Scoring Plans</p>
 
-			<Button
-				type="button"
-				size="md"
-				themeType="secondary"
+			<Filters
+				controls={controls}
+				open={showFilters}
+				setOpen={setShowFilters}
+				formProps={formProps}
+				onClickOutside={() => setShowFilters(false)}
+				applyFilters={applyFilters}
+				reset={handleReset}
 			>
-				<IcMFilter style={{ marginRight: '4px' }} />
-				Filter
-			</Button>
+				<Button
+					type="button"
+					size="md"
+					themeType="secondary"
+					onClick={() => setShowFilters(!showFilters)}
+				>
+					Filter
+					{conditionalWrapper({
+						condition : filtersApplied,
+						wrapper   : (children) => (
+							<Badge color="red" size="md" text="">{children}</Badge>
+						),
+						children: <IcMFilter style={{ marginLeft: '4px' }} />,
+					})}
+				</Button>
+			</Filters>
 		</div>
 	);
 }
