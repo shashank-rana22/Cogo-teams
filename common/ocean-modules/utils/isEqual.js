@@ -1,7 +1,4 @@
 function isEqual(a, b) {
-	// handle string, number, bool
-	if (a === b) return true;
-
 	// handle type
 	if (typeof a !== typeof b) return false;
 
@@ -9,14 +6,12 @@ function isEqual(a, b) {
 	if (Array.isArray(a) && Array.isArray(b)) {
 		if (a.length !== b.length) return false;
 
-		let isArrayEqual = true;
 		a.forEach((item1, index) => {
 			if (!isEqual(item1, b[index])) {
-				isArrayEqual = false;
+				return false;
 			}
+			return true;
 		});
-
-		return isArrayEqual;
 	}
 
 	// handle object
@@ -28,6 +23,9 @@ function isEqual(a, b) {
 
 		return keysA.every((key) => isEqual(a[key], b[key]));
 	}
+
+	// handle string, number, bool
+	if (a === b) return true;
 
 	return false;
 }
