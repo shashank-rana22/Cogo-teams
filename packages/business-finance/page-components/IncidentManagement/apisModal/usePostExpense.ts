@@ -2,12 +2,20 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+interface Props {
+	remark?: string;
+	setShowModal?: (p: any) => void;
+	refetch?: Function;
+	t?: Function;
+	id?: string;
+}
 const usePostExpense = ({
 	refetch = () => {},
-	setShowModal,
-	id = null,
+	setShowModal = () => {},
+	id = '',
 	remark = '',
-}) => {
+	t = () => {},
+}:Props) => {
 	const { user_id: userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
@@ -34,7 +42,7 @@ const usePostExpense = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
+				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 				setShowModal(false);
 				refetch();
 			} else {

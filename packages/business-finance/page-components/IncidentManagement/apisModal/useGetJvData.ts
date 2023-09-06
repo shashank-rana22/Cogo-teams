@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useGetJvData = ({ refetch, setShowJVModal, journalVoucherRequest, id, remark }) => {
+const useGetJvData = ({ refetch, setShowJVModal, journalVoucherRequest, id, remark, t }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
@@ -52,7 +52,7 @@ const useGetJvData = ({ refetch, setShowJVModal, journalVoucherRequest, id, rema
 			await api({
 				data: payload,
 			});
-			Toast.success('Request Updated Sucessfully');
+			Toast.success(t('incidentManagement:request_updated_successfully_message'));
 			setShowJVModal(false);
 			refetch();
 		} catch (e) {

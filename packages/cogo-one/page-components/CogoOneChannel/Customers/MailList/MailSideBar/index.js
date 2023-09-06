@@ -9,52 +9,62 @@ function MailSideBar({
 	activeFolder = '',
 	setActiveFolder = () => {},
 	setAppliedFilters = () => {},
+	activeTab = '',
 }) {
 	const [hover, setHover] = useState('');
 
 	return (
 		<div className={styles.sidebar_container}>
 			{GMAIL_OPTIONS_CONFIG.map(
-				({
-					label = '',
-					icon = null,
-					value = '',
-					image = '',
-					hoverImage = '',
-				}) => (
-					<div
-						role="presentation"
-						key={value}
-						className={cl`${styles.content} 
+				(item) => {
+					const {
+						label = '',
+						icon = null,
+						value = '',
+						image = '',
+						hoverImage = '',
+						allowedTabs = [],
+					} = item || {};
+
+					if (!allowedTabs.includes(activeTab)) {
+						return null;
+					}
+
+					return (
+						<div
+							role="presentation"
+							key={value}
+							className={cl`${styles.content} 
 							${activeFolder === value
-							? styles.active_content : ''}`}
-						onMouseEnter={() => setHover(value)}
-						onMouseLeave={() => setHover('')}
-						onClick={() => {
-							setActiveFolder(value);
-							setAppliedFilters(null);
-						}}
-					>
-						{image
-							? (
-								<div
-									className={styles.icon_styles}
-									style={{
-										backgroundImage: `url(${[activeFolder, hover].includes(value)
-											? hoverImage : image})`,
-									}}
-								/>
-							)
-							: icon}
-						<span
-							className={cl`${styles.folder_name} 
-								${activeFolder === value
 								? styles.active_content : ''}`}
+							onMouseEnter={() => setHover(value)}
+							onMouseLeave={() => setHover('')}
+							onClick={() => {
+								setActiveFolder(value);
+								setAppliedFilters(null);
+							}}
 						>
-							{label}
-						</span>
-					</div>
-				),
+							{image
+								? (
+									<div
+										className={styles.icon_styles}
+										style={{
+											backgroundImage: `url(${[activeFolder, hover].includes(value)
+												? hoverImage : image})`,
+										}}
+									/>
+								)
+								: icon}
+							<span
+								className={cl`${styles.folder_name} 
+								${activeFolder === value
+									? styles.active_content : ''}`}
+							>
+								{label}
+							</span>
+						</div>
+					);
+				},
 			)}
 		</div>
 	);

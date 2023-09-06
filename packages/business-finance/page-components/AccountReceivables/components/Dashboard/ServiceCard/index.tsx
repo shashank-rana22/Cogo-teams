@@ -1,10 +1,12 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import CardData from './CardData';
+import { getCardData, getServiceData } from './getCardServiceData';
 import styles from './styles.module.css';
 
 interface OverallStats {
@@ -41,9 +43,9 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({ outstandingData, outstandingLoading, entityCode }: ServiceCardProps) {
-	const {
-		outstandingServiceWise = {},
-	} = outstandingData || {};
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
+	const { outstandingServiceWise = {} } = outstandingData || {};
 
 	const {
 		ocean = {},
@@ -55,7 +57,6 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 	const handleClick = () => {
 		setIsAccordionActive(!isAccordionActive);
 	};
-
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const {
@@ -80,57 +81,6 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		});
 	}, [outstandingServiceWise?.ocean?.tradeType]);
 
-	const getCardData = [
-		{
-			label        : 'Ocean',
-			amount       : oceanOpen,
-			currency     : oceanCurrency || currency,
-			openInvoices : oceanOpen || 0,
-			tradeType    : oceanTradeType,
-			onAccount    : 'onAccountAmount',
-			icon         : <IcMShip style={{ width: '24px', height: '24px' }} />,
-		},
-		{
-			label        : 'Air',
-			currency     : airCurrency || currency,
-			amount       : airOpen,
-			openInvoices : airOpen || 0,
-			tradeType    : airTradeType,
-			onAccount    : 'onAccountAmount',
-			icon         : <IcMAirport style={{ width: '24px', height: '24px' }} />,
-		},
-		{
-			label        : 'Surface',
-			currency     : surfaceCurrency || currency,
-			amount       : surfaceOpen,
-			tradeType    : surfaceTradeType,
-			openInvoices : surfaceOpen || 0,
-			onAccount    : 'onAccountAmount',
-			icon         : <IcMTransport style={{ width: '24px', height: '24px' }} />,
-		},
-	];
-
-	const serviceCard = [
-		{
-			label    : 'Ocean',
-			amount   : oceanOpen || 0,
-			currency : oceanCurrency || currency,
-			icon     : <IcMShip className={styles.icon_container} />,
-		},
-		{
-			label    : 'Air',
-			currency : airCurrency || currency,
-			amount   : airOpen || 0,
-			icon     : <IcMAirport className={styles.icon_container} />,
-		},
-		{
-			label    : 'Surface',
-			currency : surfaceCurrency || currency,
-			amount   : surfaceOpen || 0,
-			icon     : <IcMTransport className={styles.icon_container} />,
-		},
-	];
-
 	return (
 		<div
 			style={{
@@ -138,50 +88,43 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 			}}
 			className={styles.container}
 		>
-
 			<div
 				className={styles.service_container}
 				onClick={() => handleClick()}
 				role="presentation"
 			>
-
-				<div
-					className={styles.sub_service_container}
-				>
-
+				<div className={styles.sub_service_container}>
 					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
-
 						: (
 							<div className={styles.styled_text}>
-								Account Receivables By Service
+								{t('account_receivables_by_service')}
 							</div>
 						)}
-
 				</div>
-
 				{	!isAccordionActive
-
 				&& (
-					<div
-						className={styles.ocean_container}
-					>
-
+					<div className={styles.ocean_container}>
 						{outstandingLoading
-
 							? [1, 2, 3].map((val) => (
 
 								<div key={val} className={styles.card}>
 									<div className={styles.row}>
 										<Placeholder />
-
 									</div>
 								</div>
-
 							))
-
 							: (
 								<>
-									{serviceCard.map((item) => (
+									{getServiceData({
+										t,
+										oceanOpen,
+										oceanCurrency,
+										currency,
+										airCurrency,
+										airOpen,
+										surfaceCurrency,
+										surfaceOpen,
+									}).map((item) => (
 										<div
 											className={styles.sub_ocean_container}
 											key={item.label}
@@ -232,7 +175,6 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 									))}
 								</>
 							)}
-
 					</div>
 				)}
 
@@ -245,14 +187,24 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 			{isAccordionActive
 			&& (
 				<div>
-
 					<div
 						className={styles.accordian_card}
 					/>
-
 					<div className={styles.accordian_sub_card}>
 
-						{getCardData.map((item) => (
+						{getCardData({
+							t,
+							oceanOpen,
+							oceanCurrency,
+							currency,
+							oceanTradeType,
+							airCurrency,
+							airOpen,
+							airTradeType,
+							surfaceCurrency,
+							surfaceOpen,
+							surfaceTradeType,
+						}).map((item) => (
 							<div
 								key={item.label}
 								className={item.label === tab.key ? styles.on_click_ocean_card : styles.ocean_card}
@@ -275,7 +227,6 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 													? styles.text_label : styles.styled_ocean_text}
 											>
 												{item?.label}
-
 											</div>
 										</div>
 									</div>
@@ -293,29 +244,25 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 												currencyDisplay       : 'code',
 											},
 										})}
-
 									</div>
 								</div>
 							</div>
 						))}
 					</div>
 					<div><CardData tab={tab} /></div>
-
 					<div
 						className={styles.view_less}
 						onClick={() => handleClick()}
 						role="presentation"
-
 					>
 						<div
 							className={styles.sub_view_less}
 						>
-							view Less
+							{t('view_less')}
 						</div>
 					</div>
 				</div>
 			)}
-
 		</div>
 	);
 }

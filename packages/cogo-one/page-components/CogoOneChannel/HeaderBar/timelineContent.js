@@ -13,6 +13,7 @@ function TimelineContent({
 	countdown = 0,
 	handlePunchOut = () => {},
 	loading = false,
+	showStats = false,
 }) {
 	if (showTimer) {
 		return (
@@ -26,7 +27,7 @@ function TimelineContent({
 		);
 	}
 
-	if (showEndButton) {
+	if (showEndButton && showStats) {
 		return (
 			<Button size="xs" themeType="accent" disabled={loading} onClick={handlePunchOut}>
 				End Shift
@@ -45,6 +46,17 @@ function TimelineContent({
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				})}
 			</div>
+			{!showStats ? (
+				<Button
+					size="xs"
+					themeType="accent"
+					disabled={loading}
+					onClick={handlePunchOut}
+					className={styles.end_shift}
+				>
+					End Shift
+				</Button>
+			) : null}
 		</>
 
 	);

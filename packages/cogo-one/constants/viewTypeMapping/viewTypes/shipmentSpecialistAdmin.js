@@ -4,6 +4,7 @@ import { getShipmentSpecialistButtons } from '../../../helpers/viewTypeFunctions
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST_ADMIN = {
+	chat_tabs_to_be_shown         : ['message', 'voice', 'firebase_emails'],
 	all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query            : () => [where('session_type', '==', 'admin')],
@@ -36,7 +37,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		send_promotional_rate       : false,
 		agent_type_filter           : false,
 		flash_revert_logs           : false,
-		punch_in_out                : false,
+		punch_in_out                : true,
 		show_shipments_home_page    : true,
 		customer_org_users          : true,
 		convert_account_to_cp       : false,
