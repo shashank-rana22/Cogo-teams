@@ -2,22 +2,36 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+interface DepositInterface {
+	advanceDocumentId?: string,
+	amountPerContainer?:number,
+	numberOfContainers?:number,
+	totalAmountToBePaid?:number,
+	paymentMode?: string,
+	remark?: string,
+	supplierName?: string,
+}
+
 interface Props {
 	status?:string,
 }
 
 interface PropsData {
+	advanceSecurityDeposit?:DepositInterface,
 	refetch?:()=>void,
 	setShowDepositModal?:(p:boolean)=>void,
 	id?: string | number,
 	remarkValue?:string,
+	t?: Function,
 }
 
-const GetSecurityDepositData = ({
+const useGetSecurityDepositData = ({
+	advanceSecurityDeposit,
 	refetch,
 	setShowDepositModal,
 	id,
 	remarkValue,
+	t,
 }:PropsData) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -37,18 +51,22 @@ const GetSecurityDepositData = ({
 
 	const getData = async ({ status }:Props) => {
 		try {
-			const apiResponse = await trigger({
+			const payload = {
 				data: {
-					status,
-					remark    : remarkValue,
-					updatedBy : userId,
+					advanceSecurityDeposit,
 				},
+				status,
+				remark    : remarkValue,
+				updatedBy : userId,
+			};
+			const apiResponse = await trigger({
+				data: payload,
 			});
 			const {
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
+				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 				setShowDepositModal(false);
 				refetch();
 			} else {
@@ -65,4 +83,4 @@ const GetSecurityDepositData = ({
 	};
 };
 
-export default GetSecurityDepositData;
+export default useGetSecurityDepositData;

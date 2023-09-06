@@ -3,11 +3,13 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
 import { useAuthRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 const FIRST_INDEX = 1;
 
 const useImportRoles = ({ onSubmit = () => {} }) => {
+	const { t } = useTranslation(['accessManagement']);
 	const [formValues, setFormvalues] = useState({});
 	const [view, setView] = useState('import'); // import/priority
 	const [options, setOptions] = useState([]);
@@ -82,9 +84,9 @@ const useImportRoles = ({ onSubmit = () => {} }) => {
 		}
 	};
 
-	let submitText = 'Import';
+	let submitText = t('accessManagement:roles_and_permission_permission_list_import_roles_select_import_button');
 	if ((options || []).length > FIRST_INDEX && view === 'import') {
-		submitText = 'Assign Priority';
+		submitText = t('accessManagement:roles_and_permission_permission_list_import_roles_select_assign_priority');
 	}
 
 	const partnerOptions = useGetAsyncOptions({

@@ -4,6 +4,7 @@ import { getSalesSessionQuery } from '../../../helpers/viewTypeFunctions';
 import { COMMON_AGENT_TYPES, COMMON_ADMIN_ACCESIBLE_BUTTONS } from '../defaultViewOptions';
 
 const SALES_ADMIN = {
+	chat_tabs_to_be_shown   : ['message', 'voice', 'outlook'],
 	all_chats_base_query    : () => [where('agent_type', 'in', ['sales'])],
 	group_chats_query       : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	teams_chats_base_query  : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -46,7 +47,7 @@ const SALES_ADMIN = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
-		show_lead_voice_calls       : false,
+		show_lead_voice_calls       : true,
 	},
 };
 

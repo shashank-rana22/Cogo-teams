@@ -3,29 +3,31 @@ import { useState } from 'react';
 import Service from './Service';
 import styles from './styles.module.css';
 
-function NegotiateRate({ selectedCard, setRevertCounts }) {
-	const service = [];
+function NegotiateRate({ selectedCard = {}, setRevertCounts = () => {} }) {
+	const SERVICE = [];
+	const ZERO_VALUE = 0;
 	selectedCard?.detail?.spot_negotiations.forEach((card) => {
 		if (card?.service === selectedCard?.detail?.service_type) {
-			service.push(card);
+			SERVICE.push(card);
 		}
 	});
 	selectedCard?.detail?.spot_negotiations.forEach((card) => {
 		if (card?.service !== selectedCard?.detail?.service_type) {
-			service.push(card);
+			SERVICE.push(card);
 		}
 	});
 	const [activeService, setActiveService] = useState(
-		service[0],
+		SERVICE[ZERO_VALUE],
 	);
 	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
 
 	return (
-		<div className={styles.form}>
+		<div>
 			<div className={styles.heading}>Negotiate Rates</div>
 			<div className={styles.service}>
-				{(service || []).map((item) => (
+				{(SERVICE || []).map((item) => (
 					<Service
+						key={item?.id}
 						selectedCard={selectedCard}
 						service={item}
 						activeService={activeService}

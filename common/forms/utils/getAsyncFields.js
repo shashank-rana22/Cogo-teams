@@ -886,6 +886,44 @@ function asyncListLeadOrganizationUsers() {
 	};
 }
 
+function asyncListPricingZones() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_pricing_zones',
+		initialCall : true,
+		params      : {
+			page_limit : 100,
+			page       : 1,
+		},
+	};
+}
+
+function asyncListTruckTypes() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'truck_name',
+		endpoint    : 'list_trucks',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListCompanyLocations() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_company_location',
+		initialCall : true,
+		params      : {},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -957,5 +995,8 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
+	asyncListPricingZones,
+	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
 };

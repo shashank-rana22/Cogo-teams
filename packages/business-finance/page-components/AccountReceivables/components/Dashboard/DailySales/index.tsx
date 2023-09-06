@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Tooltip, Toggle } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../../commons/Filters';
@@ -21,6 +22,8 @@ interface DailySalesProps {
 }
 
 function DailySales({ filterValue, entityCode }: DailySalesProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const [filters, setFilters] = useState<ObjectProps>({});
 	const [subActiveTab, setSubActiveTab] = useState<string>('SALES_INVOICE');
 	const [toggleData, setToggleData] = useState(false);
@@ -73,8 +76,8 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 			<div className={styles.flex}>
 				<div>
 					<div className={styles.journey}>
-						Sales Statistics
-						<Tooltip content="Daily Sales Statistics." placement="top">
+						{t('sales_statistics')}
+						<Tooltip content={t('daily_sales_stats')} placement="top">
 							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 						</Tooltip>
 
@@ -88,13 +91,13 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 						size="md"
 						onChange={(event) => { setToggleData(event?.target?.checked); }}
 						showOnOff
-						offLabel="Line Graph View"
+						offLabel={t('line_graph_view')}
 						disabled={false}
 					/>
 					<Filter
 						filters={filters}
 						setFilters={setFilters}
-						controls={filterControls(toggleData, disabledConfig, filters)}
+						controls={filterControls(toggleData, disabledConfig, filters, t)}
 					/>
 				</div>
 			</div>

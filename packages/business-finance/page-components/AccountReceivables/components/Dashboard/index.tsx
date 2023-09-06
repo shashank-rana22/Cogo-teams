@@ -1,4 +1,5 @@
 import { Select } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
 import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
@@ -14,7 +15,9 @@ import SalesFunnel from './SalesFunnel';
 import ServiceCard from './ServiceCard';
 import styles from './styles.module.css';
 
-function Dashboard({ entityCode }) {
+function Dashboard({ entityCode = '' }) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const {
 		dashboard,
 		loading,
@@ -65,7 +68,7 @@ function Dashboard({ entityCode }) {
 						<Select
 							value={filterValue.serviceType}
 							onChange={(val:string) => onChange(val, 'serviceType')}
-							placeholder="Service Type"
+							placeholder={t('service_type_placeholder')}
 							options={SHIPMENT_TYPE_OPTIONS}
 							isClearable
 						/>

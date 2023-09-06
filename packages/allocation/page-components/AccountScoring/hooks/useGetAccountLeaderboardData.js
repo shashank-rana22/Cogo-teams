@@ -1,15 +1,18 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 
-import controls from '../configurations/get-leaderboard-filters-controls';
+import getControls from '../configurations/get-leaderboard-filters-controls';
 import getMutatedControls from '../utils/get-leaderboard-mutated-controls';
 
 import useGetAccountDistributionGraph from './useGetAccountDistributionGraph';
 import useGetEngagementScoringLeaderboard from './useGetEngagementScoringLeaderboard';
 
 const useGetAccountLeaderboardData = () => {
+	const { t } = useTranslation(['allocation']);
+
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [isAllChecked, setIsAllChecked] = useState(false);
 	const [bulkDeallocateFilter, setBulkDeallocateFilter] = useState(false);
@@ -35,11 +38,13 @@ const useGetAccountLeaderboardData = () => {
 		},
 	});
 
+	const controls = getControls({ t });
+
 	const {
 		organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration, role_id,
 	} = watch();
 
-	const mutatedControls = getMutatedControls({ controls, service, bulkDeallocateFilter, duration });
+	const mutatedControls = getMutatedControls({ controls, service, bulkDeallocateFilter, duration, t });
 
 	useEffect(() => {
 		if (duration !== 'custom') {

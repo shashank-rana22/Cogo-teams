@@ -21,7 +21,7 @@ function FooterCard({ checkedRows, refetch, setCheckedRows } : FooterCardProps) 
 
 	const NO_POSTED_IDS = [];
 
-	const settleIds = Object.entries(checkedRows);
+	const settleIds = Object.entries(checkedRows || {});
 
 	const totalRef = settleIds?.length || 0;
 
