@@ -1,12 +1,13 @@
 import { Pill } from '@cogoport/components';
 
 import getDetails from './getDetails';
+import styles from './styles.module.css';
 
 function ContainerDetails({ details = {}, primary_service = '' }) {
 	const containerDetails = getDetails({ item: details, primary_service });
 
 	return (
-		<div>
+		<div className={styles.container}>
 			{containerDetails.map((item) => (
 				<Pill
 					key={item}

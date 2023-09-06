@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom: 60px;
+	margin-bottom: 32px;
 
 	:global {
 		.ui_select_input_control,

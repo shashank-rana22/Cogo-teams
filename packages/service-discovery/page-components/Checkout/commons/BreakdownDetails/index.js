@@ -174,6 +174,7 @@ function BreakdownDetails({
 											index,
 											service_type : item?.service_type,
 											service_id   : item?.id,
+											details      : detail.services[id] || {},
 										});
 									}}
 								>
@@ -189,6 +190,7 @@ function BreakdownDetails({
 											index,
 											service_type : item?.service_type,
 											service_id   : item?.id,
+											details      : detail.services[id] || {},
 										});
 									}}
 								>
