@@ -1,4 +1,6 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import languageMapping from '@cogoport/globalization/constants/languageLocaleMapping';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import useRequest from '@cogoport/request/hooks/useRequest';
@@ -13,6 +15,11 @@ import redirections from '../utils/redirections';
 const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
+
+const LANGUAGE_LOCALE_MAPPING = Object.keys(languageMapping).reduce((acc, key) => {
+	acc[languageMapping[key].value] = key;
+	return acc;
+}, {});
 
 const useLoginAuthenticate = () => {
 	const router = useRouter();
@@ -70,21 +77,34 @@ const useLoginAuthenticate = () => {
 	}, []);
 
 	const redirectFunction = async () => {
+		let locale = 'en';
 		const configs = redirections(profile);
 		const redirectPath = decodeURIComponent(redirect_path);
+		const { user } = profile || {};
+		const { preferred_languages } = user || {};
+
+		const userLanguagePreferenece = preferred_languages?.[GLOBAL_CONSTANTS.zeroth_index]
+		|| GLOBAL_CONSTANTS.default_preferred_language;
+
+		if (userLanguagePreferenece in LANGUAGE_LOCALE_MAPPING) {
+			locale = LANGUAGE_LOCALE_MAPPING[userLanguagePreferenece];
+		}
 
 		if (redirectPath) {
-			await router.push(`${redirectPath}`);
+			await router.push(`${redirectPath}`, `${redirectPath}`, { locale });
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');
-			await router.push(replaceHref, replaceAs);
+
+			await router.push(replaceHref, replaceAs, { locale });
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
 		} else {
-			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
+			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH, { locale });
 		}
+
+		setCookie('locale', locale);
 	};
 
 	useEffect(() => {
@@ -154,10 +174,16 @@ const useLoginAuthenticate = () => {
 
 			const res = await triggerSession();
 
-			const { partner = {} } = res.data || {};
+			const { partner = {}, user = {} } = res.data || {};
+
+			const { preferred_languages } = user || {};
+
+			const userLanguagePreferenece = preferred_languages?.[GLOBAL_CONSTANTS.zeroth_index]
+			|| GLOBAL_CONSTANTS.default_preferred_language;
 
 			dispatch(setProfileState(res.data));
 			setCookie('parent_entity_id', partner.id);
+			setCookie('lang_preference', userLanguagePreferenece);
 
 			if (source === 'add_account') {
 				// eslint-disable-next-line no-undef
