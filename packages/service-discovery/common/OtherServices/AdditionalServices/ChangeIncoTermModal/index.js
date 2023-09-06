@@ -45,8 +45,6 @@ function ChangeIncoTermModal({
 		return !inco_terms.includes(selectedValue);
 	}).map((item) => fclIncoTerms.find((incoTerm) => incoTerm.name === item));
 
-	console.log('fclIncoTerms', fclIncoTerms);
-
 	return (
 		<Modal
 			show={!isEmpty(incoTermModalData)}
