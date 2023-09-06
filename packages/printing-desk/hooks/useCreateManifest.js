@@ -1,10 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 
 const AGENT_CONDITION = ['partner', 'micro_service'];
 
 const useCreateManifest = () => {
+	const { t } = useTranslation(['printingDesk']);
 	const { user_data:userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -28,7 +30,7 @@ const useCreateManifest = () => {
 			});
 			setTriggerManifest('');
 		} catch (err) {
-			Toast.error(err?.message || 'Failed to Create');
+			Toast.error(err?.message || t('printingDesk:common_error_failed_to_create_message'));
 		}
 	};
 

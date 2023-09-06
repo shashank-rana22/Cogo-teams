@@ -1,0 +1,66 @@
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		position: absolute;
+	}
+}
+
+.empty_state {
+	margin-top: 12px;
+}
+
+.overlay_container {
+	position: relative;
+	overflow-x: auto;
+}
+
+.scroll_container {
+	position: relative;
+	padding: 16px 0 0 !important;
+	margin-bottom: 20px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+}
+
+.outstanding_card {
+	display: flex;
+	flex-flow: wrap;
+	flex-wrap: nowrap !important;
+	align-items: normal;
+	justify-content: flex-start;
+	width: 100%;
+	min-height: 317px !important;
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+	overflow: hidden;
+	scroll-behavior: smooth;
+	border-right: 1px solid var(--color-primary-error-red-2);
+}
+
+.graph_div {
+	display: flex;
+	width: 100%;
+	min-width: 100%;
+}
+
+.cc_graph_card_div {
+	display: flex;
+	width: 50%;
+	min-width: 50%;
+	border-right: 1px solid var(--color-primary-error-red-2);
+}
+
+.cc_call_table {
+	width: 50%;
+	min-width: 50%;
+	max-height: 300px;
+	overflow: auto;
+}
+
+.card {
+	width: 50%;
+	border-right: 1px solid red;
+}

@@ -79,9 +79,13 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
+			'EEE, dd'          	: 'EEE, dd',
 			dd                  : 'dd',
 			MMM                 : 'MMM',
 			yyyy                : 'yyyy',
+			'MMM, dd'           : 'MMM, dd',
+			EEEE                : 'EEEE',
+			'MMM dd yyyy'       : 'MMM dd yyyy',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
@@ -209,6 +213,7 @@ const GLOBAL_CONSTANTS = {
 		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
+			'f896df94-f77d-4e6d-b5dd-3a4b936f8401',
 		],
 		cogo_course_notification_user_ids: [
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
@@ -384,8 +389,13 @@ const GLOBAL_CONSTANTS = {
 		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 		clock_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
-		sad_icon                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		green_arrow             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/green_arrow.png',
+		red_arrow               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/red_arrow.png',
 		sign_up_failed          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
+		previlege_leave_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/privilegeLeaveImage.svg',
+		sick_leave_icon         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sickLeaveImage.svg',
+		casual_leave_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/casualLeaveImage.svg',
+		sad_icon                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		kyc_event               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
@@ -398,10 +408,12 @@ const GLOBAL_CONSTANTS = {
 		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
 		custom_plan:
 		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
-		truck_image : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
-		forward     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
-		replay_all  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
-		replay      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		truck_image         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/crane.png',
+		forward             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/forward.png',
+		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
+		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
+		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
+		no_incident_data    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
 	},
 
 	video_call_ring_tone_url:
