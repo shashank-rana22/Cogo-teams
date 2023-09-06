@@ -1,12 +1,14 @@
 import React from 'react';
 
 import HRMeeting from './hrbp-view/HRMeeting';
+import ManagerClearance from './hrbp-view/ManagerClearance';
 import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
 	hrbp: {
-		hr_meeting: HRMeeting,
+		hr_meeting        : HRMeeting,
+		manager_clearance : ManagerClearance,
 	},
 	manager: {
 		review_request: ReviewRequest,

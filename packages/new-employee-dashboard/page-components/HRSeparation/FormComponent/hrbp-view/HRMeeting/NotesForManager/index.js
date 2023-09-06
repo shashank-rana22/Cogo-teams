@@ -19,7 +19,7 @@ function NotesForManager({ control }) {
 				<div className={styles.body}>
 					<InputController
 						control={control}
-						name="your_notes"
+						name="your_notes_manager"
 						size="md"
 						style={{ marginRight: '8px', width: '100%' }}
 						placeholder="Type your notes here"

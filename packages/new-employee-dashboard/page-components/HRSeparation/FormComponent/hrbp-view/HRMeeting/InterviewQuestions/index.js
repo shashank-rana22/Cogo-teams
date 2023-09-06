@@ -38,7 +38,6 @@ function InterviewQuestions({ control, errors }) {
 									control={control}
 									name="your_notes_cb"
 									size="md"
-									rules={{ required: 'this is required' }}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -124,7 +123,6 @@ function InterviewQuestions({ control, errors }) {
 									control={control}
 									name="your_notes_cb_4"
 									size="md"
-									rules={{ required: 'this is required' }}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>

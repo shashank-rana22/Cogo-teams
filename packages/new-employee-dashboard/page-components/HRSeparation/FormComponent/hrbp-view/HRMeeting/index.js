@@ -20,8 +20,12 @@ function HRMeeting() {
 		formState:{ errors = {} },
 	} = useForm();
 
+	const v1 = watch();
+	console.log('v1:', v1);
+
 	const onSubmit = (values) => {
 		console.log(values, 'formValues');
+		reset();
 	};
 	return (
 		<>
