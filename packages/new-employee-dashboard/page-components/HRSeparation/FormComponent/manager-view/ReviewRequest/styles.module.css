@@ -5,3 +5,8 @@
 .sub_heading {
 	font-weight: 300;
 }
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HRMeeting from './HRMeeting';
+import HRMeeting from './hrbp-view/HRMeeting';
 import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 
