@@ -127,6 +127,7 @@ function RateCardTop({
 	const popoverComponentData = buttonProps.comparision_button || {};
 
 	const imageUrl = isCogoAssured ? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line?.logo_url;
+	const defaultShippingLineIcon = GLOBAL_CONSTANTS.image_url.shipping_line_default_icon;
 
 	return (
 		<div className={styles.container}>
@@ -154,14 +155,12 @@ function RateCardTop({
 					className={styles.shipping_line_info}
 					style={{ marginLeft: isSelectedCard ? '12px' : '0px' }}
 				>
-					{imageUrl ? (
-						<img
-							src={imageUrl}
-							alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
-							className={styles.shipping_line_logo}
-							height={28}
-						/>
-					) : null}
+					<img
+						src={imageUrl || defaultShippingLineIcon}
+						alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
+						className={styles.shipping_line_logo}
+						height={28}
+					/>
 
 					{source !== 'cogo_assured_rate' ? (
 						<strong className={styles.shipping_line_name}>

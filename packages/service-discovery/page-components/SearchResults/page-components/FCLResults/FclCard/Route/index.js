@@ -25,6 +25,7 @@ function DottedLineWithTag({ scheduleData = {} }) {
 					{`${transit_time} Days`}
 				</span>
 			) : null}
+
 			{startCase(schedule_type)}
 			-shipment
 		</div>
@@ -67,7 +68,13 @@ function Route({ detail = {}, scheduleData = {}, isCogoAssured = false }) {
 
 					<div className={styles.circle} />
 					<div className={styles.dotted_line} />
-					<DottedLineWithTag tag="tag" scheduleData={scheduleData} />
+
+					{isCogoAssured ? (
+						<div className={styles.dotted_line} />
+					) : (
+						<DottedLineWithTag tag="tag" scheduleData={scheduleData} />
+					)}
+
 					<div className={styles.dotted_line} />
 					<div className={styles.active_circle} />
 

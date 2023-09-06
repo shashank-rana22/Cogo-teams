@@ -85,7 +85,7 @@ export const getExtraFilters = ({ item, id }) => {
 		},
 		source: {
 			name     : 'source',
-			label    : 'Source',
+			label    : 'Rate Type',
 			controls : [
 				{
 					name    : 'source',

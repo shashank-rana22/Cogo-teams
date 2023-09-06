@@ -429,6 +429,8 @@ const GLOBAL_CONSTANTS = {
 		filter_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg',
 		no_rates_found_emoji    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
+		shipping_line_default_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
 	},
 
 	video_call_ring_tone_url:

@@ -184,7 +184,7 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 			),
 			validity_end: () => createValueObject(
 				source === 'cogo_assured_rate'
-					? `${formatDateValue(validity_start)} to ${formatDateValue(validity_end)}`
+					? `${formatDateValue(validity_start)} - ${formatDateValue(validity_end)}`
 					: formatDateValue(item.schedules?.departure || item.schedules?.validity_end),
 
 			),
