@@ -8,6 +8,7 @@ import useGetShipments from '../../../hooks/useGetShipments';
 
 import CargoDetails from './CargoDetails';
 import PortDetails from './PortDetails';
+import RevertedPriceMapping from './RevertedPriceMapping';
 import styles from './styles.module.css';
 
 const USER_ACTIVITIES = ['sales', 'support', 'cp_support', 'supply'];
@@ -59,22 +60,24 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 		return (
 			<div className={styles.container}>
 				{(userActivityFormatedData || []).map((singleShipmentData) => {
-					const { name = '', data = {} } = singleShipmentData || {};
+					const { name = '' } = singleShipmentData || {};
 
 					const updatedData = getFormatedData({ singleShipmentData });
 
-					if (isEmpty(data)) {
+					if (isEmpty(updatedData)) {
 						return null;
 					}
 
 					return (
-						<div key={data?.id}>
+						<div key={updatedData?.id}>
 							<div className={styles.title}>
 								{startCase(name)}
 							</div>
 							<div className={styles.details}>
 								<PortDetails serviceData={updatedData} service={SERVICE_MAPPING[name]} />
 								<CargoDetails detail={updatedData} service={SERVICE_MAPPING[name]} />
+								{name === 'latest_revert_rate'
+									? <RevertedPriceMapping updatedData={updatedData} /> : null }
 							</div>
 						</div>
 					);
