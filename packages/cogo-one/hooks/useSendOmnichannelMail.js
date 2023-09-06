@@ -45,7 +45,7 @@ const useSendOmnichannelMail = ({
 			});
 			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 
-			setEmailState(DEFAULT_EMAIL_STATE);
+			setEmailState({ ...DEFAULT_EMAIL_STATE, scrollToTop: true });
 			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

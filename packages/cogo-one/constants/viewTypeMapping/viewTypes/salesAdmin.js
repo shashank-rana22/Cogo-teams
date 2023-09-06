@@ -27,7 +27,7 @@ const SALES_ADMIN = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
 	group_agents_api_filter       : ['sales'],
-	accessible_new_communications : ['new_mail', 'global_contacts'],
+	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
