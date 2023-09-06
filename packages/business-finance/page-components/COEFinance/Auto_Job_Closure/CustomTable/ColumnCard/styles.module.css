@@ -1,0 +1,73 @@
+.flex {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+
+	/* padding-left: 15px; */
+}
+
+.edit {
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.background {
+	background-color: #f3fafa;
+}
+
+.marginbottom {
+	padding-top: 12px;
+	margin-bottom: 6px;
+}
+
+.cancel {
+	margin-right: 8px;
+}
+
+.button {
+	margin-left: 10px;
+}
+
+.delete {
+	margin-left: 25px;
+	color: red;
+	cursor: pointer;
+}
+
+.columnData {
+	/* padding-left: 20px; */
+}
+
+.bottomLine {
+	border-bottom: 1px solid #f3a95e;
+}
+
+.form_button {
+	margin-left: 20px;
+}
+
+.deleteBody {
+	height: 100%;
+
+	/* background-color: aqua; */
+}
+
+.deleteText {
+	/* background-color: #f68b21; */
+	margin-top: 60px;
+	font-size: 22px;
+	text-align: center;
+}
+
+.selectController {
+	width: 175px;
+}
+
+.inputBox {
+	width: 160px;
+}

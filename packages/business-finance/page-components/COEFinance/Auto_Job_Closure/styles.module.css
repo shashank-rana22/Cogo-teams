@@ -1,0 +1,48 @@
+.topContainer {
+	display: flex;
+	margin-top: 30px;
+}
+
+.searchBox {
+	width: 400px;
+	margin-left: 1000px;
+}
+
+.topContainerComponents {
+	margin-left: 30px;
+}
+
+.form_input {
+	width: 45%;
+	margin: 10px;
+}
+
+.formBody {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.formButton {
+	margin-left: 20px;
+}
+
+.table {
+	position: relative;
+	min-height: 60vh;
+	padding: 16px 26px;
+	margin-top: 16px;
+	background: var(--color-secondary-5);
+}
+
+.columnCard {
+	margin-top: 40px;
+}
+
+.pagination {
+	position: relative;
+	right: 30px;
+	bottom: 0;
+	width: 300px;
+	margin-top: 80px;
+	margin-left: 1300px;
+}

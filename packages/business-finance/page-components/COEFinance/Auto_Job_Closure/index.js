@@ -1,0 +1,157 @@
+import { Input, Button, cl, Pagination } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
+import { useState } from 'react';
+
+import Auto_Job_Closure_Config from '../configurations/Job_Closure';
+import useAutoJobs from '../hook/useAutoJob';
+import useUpdateJobClosure from '../hook/useUpdateJobClosure';
+
+import CreateModal from './CreateModal/index';
+import CustomTable from './CustomTable';
+import styles from './styles.module.css';
+
+function AutoJobClosure() {
+	const [openModalCreate, setOpenModalCreate] = useState(false);
+	const [openConfig, setOpenConfig] = useState([]);
+	const [configButton, setConfigButton] = useState(true);
+	const [saveObj, setSaveObj] = useState({});
+
+	const {
+		data, loading, searchValue, onQueryChange, refetch, getNextPage,
+		paginationData,
+	} = useAutoJobs({ setConfigButton, setOpenConfig });
+	const { page, pageSize, totalRecords } = paginationData;
+	const { list = [] } = data || {};
+
+	function addId() {
+		setConfigButton(false);
+		const arr = list.map((obj) => obj.id);
+		setOpenConfig([...arr]);
+
+		let temparr = {};
+		list.forEach((obj) => {
+			const tempobj = {
+				...obj,
+				level1 : obj.oprClosureDays,
+				level2 : obj.finClosureDays,
+			};
+			delete tempobj.oprClosureDays;
+			delete tempobj.finClosureDays;
+			const objid = tempobj.id;
+			delete tempobj.id;
+
+			temparr = { ...temparr, [objid]: tempobj };
+		});
+		setSaveObj(temparr);
+	}
+	function cancelledClick() {
+		setConfigButton(true);
+		setOpenConfig([]);
+	}
+	const { apiTrigger } = useUpdateJobClosure({ refetch, setSaveObj, listOfId: Object.keys(saveObj) });
+	function saveAllClicked() {
+		const TEMP_ARR = [];
+		const keysarr = Object.keys(saveObj);
+		keysarr.forEach((key) => {
+			TEMP_ARR.push({ id: key, data: saveObj[key] });
+		});
+
+		apiTrigger(TEMP_ARR);
+		setOpenConfig([]);
+		setConfigButton(true);
+	}
+
+	return (
+		<div>
+			<div
+				className={cl` ${styles.topContainer}  ${styles.topContainerComponents}  `}
+			>
+				<Input
+					name="searchValue"
+					size="sm"
+					placeholder="Search by Service"
+					className={styles.searchBox}
+					value={searchValue}
+					onChange={(value) => onQueryChange(value)}
+					suffix={(
+						<div style={{ margin: '4px', display: 'flex' }}>
+							<IcMSearchlight height={15} width={15} />
+						</div>
+					)}
+				/>
+
+				{ !configButton ? (
+					<>
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.topContainerComponents}
+							onClick={() => cancelledClick()}
+						>
+							Cancel Changes
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							className={styles.topContainerComponents}
+							onClick={() => saveAllClicked()}
+						>
+							Save All
+						</Button>
+					</>
+				) : (
+					<>
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.topContainerComponents}
+							onClick={() => addId()}
+						>
+							Configure
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							className={styles.topContainerComponents}
+							onClick={() => setOpenModalCreate(true)}
+						>
+							Create New
+						</Button>
+					</>
+				) }
+
+			</div>
+
+			<div className={styles.table}>
+				{' '}
+				{loading ? null : (
+					<CustomTable
+						itemData={data}
+						config={Auto_Job_Closure_Config}
+						openConfig={openConfig}
+						setOpenConfig={setOpenConfig}
+						refetch={refetch}
+						loading={loading}
+						saveObj={saveObj}
+						setSaveObj={setSaveObj}
+					/>
+				)}
+				<div className={styles.pagination}>
+					<Pagination
+						type="number"
+						currentPage={page}
+						totalItems={Number(totalRecords)}
+						pageSize={pageSize}
+						onPageChange={(val) => getNextPage({ page: val })}
+					/>
+				</div>
+			</div>
+
+			{openModalCreate
+				&& <CreateModal openModal={openModalCreate} setOpenModal={setOpenModalCreate} refetch={refetch} /> }
+
+		</div>
+	);
+}
+
+export default AutoJobClosure;
