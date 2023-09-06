@@ -74,7 +74,6 @@ export function mountFlashChats({
 			orderBy('updated_at', 'desc'),
 			limit(LIMIT),
 		);
-		console.log('newChatsQuery', newChatsQuery);
 
 		snapshotRef.current = onSnapshot(
 			newChatsQuery,
