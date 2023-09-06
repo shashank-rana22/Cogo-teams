@@ -1,18 +1,25 @@
 import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useGetPermission } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-// import CC from '../../utils/condition-constants';
 import useListSageOrganizationIdMappings from '../../../hooks/useListSageOrganizationIdMappings';
+import conditions from '../../../utils/sage-conditions';
 
 import styles from './styles.module.css';
 
 const useSageMapping = ({ tradePartyDetails }) => {
 	const [showDeactivate, setShowDeactivate] = useState(null);
-
+	// const [showDeactivateButton, setShowDeactivateButton] = useState(false);
 	const { data, loading } = useListSageOrganizationIdMappings({ id: tradePartyDetails.serial_id });
+	const { isConditionMatches } = useGetPermission();
+
+	const isAllowedToDeleteMapping = isConditionMatches(
+		conditions.CAN_DEACTIVATE_SAGE_ORG_MAPPING,
+	);
+
 	const tableColumns = [
 		{
 			Header   : 'SAGE ID',
@@ -48,7 +55,7 @@ const useSageMapping = ({ tradePartyDetails }) => {
 		},
 		{
 			Header   : ' ',
-			accessor : (item) => (item.status === 'active' ? (
+			accessor : (item) => (item.status === 'active' && isAllowedToDeleteMapping ? (
 				<Button
 					themeType="secondary"
 					onClick={() => setShowDeactivate(item.id)}
@@ -59,16 +66,6 @@ const useSageMapping = ({ tradePartyDetails }) => {
 		},
 
 	];
-
-	// const { isConditionMatches } = useGetPermission();
-
-	// const isAllowedToDeleteMapping = isConditionMatches(
-	// 	CC.CAN_DEACTIVATE_SAGE_ORG_MAPPING,
-	// );
-
-	// if (isAllowedToDeleteMapping) {
-	// 	tableColumns.push(getHeader('DEACTIVATE', 'deactivate', 1));
-	// }
 
 	return {
 		data,
