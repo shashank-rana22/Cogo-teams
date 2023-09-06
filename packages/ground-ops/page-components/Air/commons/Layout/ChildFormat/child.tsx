@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { NestedObj } from '../../List/Interfaces';
 import getElementController from '../getController';
@@ -43,15 +43,10 @@ function Child({
 		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
-	const keysForPreference = useMemo(
-		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
-		[TOTAL_FIELDS.length],
-	);
-
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{TOTAL_FIELDS.map((fields, i) => (
-				<div key={keysForPreference[i]} className={styles.row}>
+			{TOTAL_FIELDS.map((fields) => (
+				<div key={fields} className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
