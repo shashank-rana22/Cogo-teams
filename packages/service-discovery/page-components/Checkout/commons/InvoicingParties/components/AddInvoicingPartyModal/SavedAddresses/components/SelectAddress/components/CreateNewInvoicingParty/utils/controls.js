@@ -264,13 +264,14 @@ const orgControls = [
 				</Tooltip>
 			</div>
 		),
-		type       : 'file-uploader',
-		drag       : true,
-		uploadIcon : () => <IcMFileUploader height={30} width={30} />,
-		span       : 6,
-		uploadType : 'aws',
-		height     : 45,
-		rules      : { required: true },
+		type          : 'file-uploader',
+		drag          : true,
+		uploadIcon    : () => <IcMFileUploader height={30} width={30} />,
+		span          : 6,
+		uploadType    : 'aws',
+		dropareaProps : { heading: 'Upload Document', subHeading: 'All files are supported' },
+		height        : 45,
+		rules         : { required: true },
 	},
 ];
 
@@ -432,13 +433,14 @@ const documentsControls = [
 				</Tooltip>
 			</div>
 		),
-		type       : 'file-uploader',
-		drag       : true,
-		uploadIcon : () => <IcMFileUploader height={30} width={30} />,
-		span       : 6,
-		uploadType : 'aws',
-		height     : 45,
-		rules      : { required: true },
+		type          : 'file-uploader',
+		drag          : true,
+		uploadIcon    : () => <IcMFileUploader height={30} width={30} />,
+		span          : 6,
+		uploadType    : 'aws',
+		dropareaProps : { heading: 'Upload Document', subHeading: 'All files are supported' },
+		height        : 45,
+		rules         : { required: true },
 	},
 ];
 
