@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -30,13 +30,16 @@ function ApprovalModal({
 				{(Object.entries(approvalChanges) || []).map(([key, value]) => (
 					<ul key={key}>
 						<li>{value?.label || startCase(key)}</li>
+
 						{SHOW_VALUE.includes(value?.type) ? (
 							<div className={styles.values}>
+
 								<span className={styles.old}>{value?.old}</span>
-								<IcMArrowNext />
+
+								{!isEmpty(value?.old) && <IcMArrowNext />}
+
 								<span className={styles.new}>{value?.new}</span>
 							</div>
-
 						) : null}
 					</ul>
 				))}

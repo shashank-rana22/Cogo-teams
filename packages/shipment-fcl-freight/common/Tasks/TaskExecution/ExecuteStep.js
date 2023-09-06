@@ -100,7 +100,7 @@ function ExecuteStep({
 			formValues : watch(),
 		});
 
-		if (!isEmpty(stepConfig?.approval_modal)) {
+		if (!isEmpty(changes) && isEmpty(errors)) {
 			setApprovalChanges(changes);
 			setShowApprovalModal(true);
 		} else {

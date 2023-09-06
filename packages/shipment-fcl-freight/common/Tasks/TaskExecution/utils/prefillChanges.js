@@ -1,7 +1,9 @@
 import isEqual from '@cogoport/ocean-modules/utils/isEqual';
 import { isEmpty } from '@cogoport/utils';
 
-const prefillChanges = ({ config, formValues }) => {
+const prefillChanges = ({ config = {}, formValues = {} }) => {
+	if (isEmpty(config?.approval_modal)) return null;
+
 	const DIFFERENCES = {};
 
 	(config?.approval_modal || []).forEach((key) => {
