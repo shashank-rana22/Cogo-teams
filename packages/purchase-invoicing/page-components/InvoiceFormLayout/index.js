@@ -249,6 +249,7 @@ function InvoiceFormLayout({
 					errors={errors}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					isEdit={isEdit}
+					shipment_data={shipment_data}
 				/>
 				<BillingPartyDetails
 					control={control}
