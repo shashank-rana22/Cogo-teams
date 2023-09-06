@@ -93,14 +93,19 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab, updateLoadingState, workPrefernceLoading,
+	activeSubTab, updateLoadingState, workPrefernceLoading, listOnlyMails,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
 	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats || workPrefernceLoading) {
+	if (!listOnlyMails
+		&& (activeSubTab !== 'all'
+			|| viewType === 'shipment_specialist'
+			|| !canShowPinnedChats
+			|| workPrefernceLoading)
+	) {
 		return;
 	}
 
@@ -130,10 +135,12 @@ export function mountPinnedSnapShot({
 }
 
 export function mountUnreadCountSnapShot({
-	unreadCountSnapshotListener,
-	omniChannelCollection, baseQuery,
-	setUnReadChatsCount,
-	sessionQuery,
+	unreadCountSnapshotListener = {},
+	omniChannelCollection = {},
+	baseQuery = [],
+	setUnReadChatsCount = () => {},
+	sessionQuery = [],
+	queryFilters = [],
 }) {
 	const snapshotRef = unreadCountSnapshotListener;
 
@@ -142,8 +149,9 @@ export function mountUnreadCountSnapShot({
 	const countUnreadChatQuery = query(
 		omniChannelCollection,
 		where('has_admin_unread_messages', '==', true),
-		...baseQuery,
-		...sessionQuery,
+		...(baseQuery || []),
+		...(sessionQuery || []),
+		...(queryFilters || []),
 		orderBy('new_message_sent_at', 'desc'),
 	);
 
