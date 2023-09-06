@@ -2,6 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
+import { FIREBASE_TABS } from '../constants';
+
 function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
 	const { profile } = useSelector((state) => state);
 	const [{ loading, data }, trigger] = useRequest({
@@ -17,7 +19,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 			await trigger({
 				params: {
 					filters: {
-						channel_chat_id : activeTab === 'message' ? id : user_number,
+						channel_chat_id : FIREBASE_TABS.includes(activeTab) ? id : user_number,
 						agent_id        : active ? profile?.user?.id : undefined,
 					},
 				},
