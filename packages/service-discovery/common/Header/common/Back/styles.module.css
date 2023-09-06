@@ -1,10 +1,5 @@
-.container {
-	display: flex;
-	align-items: center;
-	padding: 4px 0;
-}
-
 .back_icon {
-	margin-right: 20px;
+	margin-right: 12px;
+	margin-left: -8px;
 	cursor: pointer;
 }

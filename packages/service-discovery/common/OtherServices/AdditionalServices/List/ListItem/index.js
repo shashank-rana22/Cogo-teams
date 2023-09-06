@@ -175,7 +175,9 @@ function ListItem({
 	}
 
 	function RenderIcon() {
-		const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
+		const isServiceRemovable = !SERVICES_CANNOT_BE_REMOVED.includes(serviceItem.name);
+
+		const SelectedIcon = isHovered && isServiceRemovable ? IcMMinusInCircle : IcCFtick;
 
 		if (loading) {
 			return <Loader style={{ marginRight: 24 }} themeType="primary" />;
@@ -189,7 +191,7 @@ function ListItem({
 					height={25}
 					width={25}
 					className={styles.tick_icon}
-					onClick={handleDelete}
+					onClick={(event) => isServiceRemovable && handleDelete(event)}
 				/>
 			);
 		}

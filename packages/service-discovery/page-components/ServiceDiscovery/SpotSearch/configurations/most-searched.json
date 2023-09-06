@@ -7,7 +7,8 @@
 			"label": "Port pair",
 			"key": "primary_service",
 			"pair_type": "primary_service",
-			"func": "renderPortPair"
+			"func": "renderPortPair",
+			"showPortsName": true
 		},
 		{
 			"label": "Search Volume",

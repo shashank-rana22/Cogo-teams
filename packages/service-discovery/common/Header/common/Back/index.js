@@ -8,7 +8,6 @@ const BACK_SCREENS_MAPPING = {
 };
 
 function Back({
-	heading = 'Back',
 	currentScreen = '',
 	setCurrentScreen = () => {},
 }) {
@@ -30,16 +29,12 @@ function Back({
 	};
 
 	return (
-		<div className={styles.container}>
-			<IcMArrowBack
-				height={20}
-				width={20}
-				className={styles.back_icon}
-				onClick={onBack}
-			/>
-
-			<span>{heading || 'Back'}</span>
-		</div>
+		<IcMArrowBack
+			height={20}
+			width={20}
+			className={styles.back_icon}
+			onClick={onBack}
+		/>
 	);
 }
 
