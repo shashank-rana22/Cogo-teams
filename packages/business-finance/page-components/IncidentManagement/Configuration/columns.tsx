@@ -2,7 +2,9 @@ import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import React from 'react';
 
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
@@ -10,9 +12,9 @@ import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab }) => [
+export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t }) => [
 	{
-		Header   : 'INCIDENT ID',
+		Header   : t('incidentManagement:incident_id_header'),
 		accessor : 'incident_id',
 		id       : 'incident_id',
 		Cell     : ({ row: { original } }) => {
@@ -21,7 +23,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'COMPANY NAME',
+		Header   : t('incidentManagement:company_name_header'),
 		accessor : 'company_name',
 		id       : 'company_name',
 		Cell     : ({ row: { original } }) => {
@@ -79,17 +81,17 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'REQUESTED BY',
+		Header   : t('incidentManagement:requested_by_header'),
 		accessor : 'requested_by',
 		id       : 'requested_by',
 		Cell     : ({ row: { original } }) => {
 			const { createdBy = {} } = original || {};
 			const { name = '' } = createdBy || {};
-			return <span>{name}</span>;
+			return <span>{showOverflowingNumber(name || '-', 10)}</span>;
 		},
 	},
 	{
-		Header   : 'REQUEST TYPE',
+		Header   : t('incidentManagement:request_type_header'),
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
@@ -101,7 +103,11 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.credit}>
 					<span>
-						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
+							<span>
+								{t('incidentManagement:icjv_approval')}
+							</span>
+						)
 							: toTitleCase(requestType ? startCase(requestType) : '-')}
 
 					</span>
@@ -109,8 +115,8 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 						{typeof (revoked) === 'boolean' && (
 							<div>
 								{revoked
-									? <Pill size="md" color="#C4DC91">Fully</Pill>
-									: <Pill size="md" color="#FEF199">Partial</Pill>}
+									? <Pill size="md" color="#C4DC91">{t('incidentManagement:fully_revoked')}</Pill>
+									: <Pill size="md" color="#FEF199">{t('incidentManagement:partial_revoked')}</Pill>}
 							</div>
 						)}
 					</span>
@@ -120,12 +126,12 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		},
 	},
 	{
-		Header   : 'REQUEST SUB TYPE',
+		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
 	},
 	{
-		Header   : 'SOURCE',
+		Header   : t('incidentManagement:source_header'),
 		accessor : 'source',
 		id       : 'source',
 		Cell     : ({ row: { original } }) => {
@@ -136,7 +142,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 	{
 		Header: () => (
 			<div className={styles.flex}>
-				REQUEST DATE
+				{t('incidentManagement:request_date')}
 				<SortIcon
 					setIsAscendingActive={setIsAscendingActive}
 					setFilters={setFilters}
@@ -148,27 +154,22 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			const { createdAt } = row;
 			return (
 				<div>
-					{formatDate({
+					{createdAt ? formatDate({
 						date: createdAt,
 						dateFormat:
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType: 'date',
-					})}
-					<div>
-						{formatDate({
-							date: createdAt,
-							timeFormat:
-								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType: 'time',
-						})}
-					</div>
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : ' ',
+					}) : '_'}
 				</div>
 			);
 		},
 		id: 'request_date',
 	},
 	{
-		Header   : activeTab === 'approved' ? 'APPROVED BY & ON' : 'REJECTED BY & ON',
+		Header: activeTab === 'approved' ? t('incidentManagement:approved_by_n_on')
+			: t('incidentManagement:rejected_by_n_on'),
 		accessor : 'updatedBy',
 		id       : 'username',
 		Cell     : ({ row: { original } }) => {
@@ -177,20 +178,20 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.flex_reverse}>
 					<div>{name}</div>
-					{formatDate({
+					{updatedAt ? formatDate({
 						date: updatedAt,
 						dateFormat:
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						seperator  : ' ',
-					})}
+					}) : '_'}
 				</div>
 			);
 		},
 	},
 	{
-		Header   : 'REMARK',
+		Header   : t('incidentManagement:remark_header'),
 		accessor : 'remark',
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {

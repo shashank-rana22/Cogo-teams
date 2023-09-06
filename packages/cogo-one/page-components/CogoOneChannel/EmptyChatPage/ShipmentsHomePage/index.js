@@ -1,4 +1,4 @@
-import { Pagination, Input, Select } from '@cogoport/components';
+import { Pagination, Input, Select, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
@@ -10,6 +10,7 @@ import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
 import ShipmentChatModal from '../../../../common/ShipmentChatModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
+import getFormatedPath from '../../../../utils/getFormatedPath';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
 
 import BookingNoteModal from './BookingNoteModal';
@@ -36,6 +37,8 @@ function ListShipmentCards({
 	showAddPrimaryUserButton = false,
 	mailProps = {},
 	showModalType = () => {},
+	params = {},
+	range = '',
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -67,22 +70,27 @@ function ListShipmentCards({
 				showAddPrimaryUserButton={showAddPrimaryUserButton}
 				mailProps={mailProps}
 				showModalType={showModalType}
+				params={params}
+				range={range}
 			/>
 		),
 	);
 }
 
 function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
-	const [showPocDetails, setShowPocDetails] = useState({});
-	const [range, setRange] = useState('current_month');
-	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
-	const [showShipmentChat, setShowShipmentChat] = useState({});
+	const { queryParams = {} } = getFormatedPath();
 
+	const [showPocDetails, setShowPocDetails] = useState({});
+	const [range, setRange] = useState(queryParams?.range || 'today');
+	const [showShipmentChat, setShowShipmentChat] = useState({});
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
 	const [showPopover, setShowPopover] = useState('');
 	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
 
 	const [modalState, setModalState] = useState({ show: '', shipmentData: {} });
+	const defaultFilters = getDefaultFilters({ range });
+
+	const [dateFilters, setDateFilters] = useState({ ...defaultFilters });
 
 	const {
 		listLoading,
@@ -117,7 +125,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 					<div className={styles.filter_container}>
 						<Input
 							size="sm"
-							value={params?.value}
+							value={params?.query}
 							onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
 							prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
 							placeholder="Search SID..."
@@ -132,12 +140,15 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 							options={SHIPMENT_TYPE_OPTIONS}
 							isClearable
 						/>
-						<div className={styles.custom_date_filter}>
+						<div className={cl`${styles.custom_date_filter}
+						${params?.query ? styles.not_applicable : ''}`}
+						>
 							<Filter
 								setDateFilters={setDateFilters}
 								range={range}
 								setRange={setRange}
 							/>
+							{params?.query ? <div className={styles.overlay} /> : null }
 						</div>
 
 					</div>
@@ -159,6 +170,8 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								showAddPrimaryUserButton={showAddPrimaryUserButton}
 								mailProps={mailProps}
 								showModalType={showModalType}
+								params={params}
+								range={range}
 							/>
 						)}
 				</div>
