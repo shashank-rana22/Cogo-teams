@@ -35,6 +35,7 @@ function RoleWiseFlashAgentChat({
 
 	return (
 		<>
+			<div className={styles.timeout_label}>Timeout</div>
 			<div className={styles.roles_timeout_section}>
 				{(FLASH_MESSAGES_ROLES_LIST || []).map((item) => (
 					<div className={styles.roles_timeout_section_parts} key={item.key}>
