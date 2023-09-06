@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useState, useRef } from 'react';
 
-import useCreateShipmentCancellation from '../../hooks/useCreateShipmentCancellation';
+import useCreateShipmentCancellationCharges from '../../hooks/useCreateShipmentCancellationCharges';
 
 import AddNewCancellationPolicyForm from './AddNewCancellationPolicyForm';
 import Filters from './Filters';
@@ -12,7 +12,7 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 
 	const formRef = useRef(null);
 
-	const { apiTrigger = () => {} } = useCreateShipmentCancellation({
+	const { apiTrigger = () => {} } = useCreateShipmentCancellationCharges({
 		refetch: () => {
 			refetch();
 			// setShow(false);

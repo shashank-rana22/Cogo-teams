@@ -3,7 +3,7 @@ import React, { useImperativeHandle, forwardRef } from 'react';
 
 import Layout from '../../../common/Layout';
 
-import getControls from './controls';
+import getControls from './getControls';
 
 function AddNewCancellationPolicyForm({ item = {}, handleSubmitForm = () => {} }, ref) {
 	const DEFAULT_VALUES = {};

@@ -12,8 +12,8 @@ import RATE_TYPE from '../../../configs/RATE_TYPE.json';
 import SHIPMENT_TYPES from '../../../configs/SHIPMENT_TYPES.json';
 import commoditiesMapper from '../../../helpers/CommodityShipmentMapper';
 
-const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.common
-	.services.feedback_services.allowed_currency;
+const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries
+	.feature_supported_service.feedback_services.currencies;
 
 const GET_DAYS_OPTIONS_VALUES1 = 31;
 const GET_DAYS_OPTIONS_VALUES2 = 0;

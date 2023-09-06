@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useListShipmentCancellation = ({ defaultFilters = {}, defaultParams = {} }) => {
+const useListShipmentCancellationCharges = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
 
@@ -44,4 +44,4 @@ const useListShipmentCancellation = ({ defaultFilters = {}, defaultParams = {} }
 	};
 };
 
-export default useListShipmentCancellation;
+export default useListShipmentCancellationCharges;

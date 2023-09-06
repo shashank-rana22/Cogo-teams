@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 
-import useListShipmentCancellation from '../hooks/useListShipmentCancellation';
+import useListShipmentCancellationCharges from '../hooks/useListShipmentCancellationCharges';
 
 import Header from './Header';
 import ListingArea from './ListingArea';
@@ -14,7 +14,7 @@ function CancellationPolicies() {
 		setFilters = () => {},
 		filters = {},
 		refetch = () => {},
-	} = useListShipmentCancellation({
+	} = useListShipmentCancellationCharges({
 		defaultParams  : { organization_trade_parties_data_required: true },
 		defaultFilters : { status: 'active' },
 	});

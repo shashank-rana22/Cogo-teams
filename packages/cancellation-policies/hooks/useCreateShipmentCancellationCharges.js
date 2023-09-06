@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 // import getCreateUpdateCommodityPayload from '../helpers/getCreateUpdateCommodityPayload';
 import toastApiError from '../utils/toastApiError';
 
-const useCreateShipmentCancellation = ({
+const useCreateShipmentCancellationCharges = ({
 	successMessage = 'Created Successfully!',
 	refetch = () => {},
 }) => {
@@ -29,4 +29,4 @@ const useCreateShipmentCancellation = ({
 	};
 };
 
-export default useCreateShipmentCancellation;
+export default useCreateShipmentCancellationCharges;
