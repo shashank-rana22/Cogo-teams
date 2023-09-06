@@ -1,4 +1,4 @@
-import { ToolTip, Button } from '@cogoport/components';
+import { Tooltip, Button } from '@cogoport/components';
 import { IcCCogoassured } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -11,13 +11,14 @@ const fclColumns = ({ handleAction, handleDeleteRecord }) => {
 			span   : 0.5,
 			render : (item) => (
 				<div className={styles.title_back}>
-					<ToolTip
+					<Tooltip
 						content={item?.is_cogo_assured && 'Cogo Assured'}
+						placement="top"
 					>
 						<div>
-							{item?.is_cogo_assured && <IcCCogoassured />}
+							{item?.is_cogo_assured ? <IcCCogoassured width={24} height={24} /> : null}
 						</div>
-					</ToolTip>
+					</Tooltip>
 				</div>
 			),
 			id: 'cogo_assured',
@@ -29,7 +30,7 @@ const fclColumns = ({ handleAction, handleDeleteRecord }) => {
 			span   : 2,
 			render : (item) => (
 				<div className={styles.title_back}>
-					<ToolTip
+					<Tooltip
 						content={
 							item?.origin_location_name
 								? item?.origin_location_name
@@ -41,7 +42,7 @@ const fclColumns = ({ handleAction, handleDeleteRecord }) => {
 								? item?.origin_location_name
 								: 'ALL PORTS'}
 						</div>
-					</ToolTip>
+					</Tooltip>
 				</div>
 			),
 			id: 'origin',
@@ -53,7 +54,7 @@ const fclColumns = ({ handleAction, handleDeleteRecord }) => {
 			span   : 2,
 			render : (item) => (
 				<div className={styles.title_back}>
-					<ToolTip
+					<Tooltip
 						content={
 							item?.destination_location_name
 								? item?.destination_location_name
@@ -65,7 +66,7 @@ const fclColumns = ({ handleAction, handleDeleteRecord }) => {
 								? item?.destination_location_name
 								: 'ALL PORTS'}
 						</div>
-					</ToolTip>
+					</Tooltip>
 				</div>
 			),
 			id: 'destination',

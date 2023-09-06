@@ -1,30 +1,30 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState, useRef } from 'react';
 
-// import ListView from '../../common/ListView';
+import ListView from '../../common/ListView';
 import useCreateUpdateFclWeightSlabs from '../../hooks/useCreateUpdateFclWeightSlabs';
 import useListFclWeightSlabsConfiguration from '../../hooks/useListFclWeightSlabsConfiguration';
 
 import Form from './AddWeightSlabs/Form';
-// import columnsFunc from './Fields';
+import columnsFunc from './Fields';
 import styles from './styles.module.css';
 
 function WeightSlabs() {
 	const {
 		listWeightSlabs: refetchList,
-		// data,
-		// loading,
-		// filters,
-		// setFilters,
+		data,
+		loading,
+		filters,
+		setFilters,
 	} = useListFclWeightSlabsConfiguration();
 	const [showModal, setShowModal] = useState(false);
 	const handleClick = () => {
 		setShowModal({ ...showModal, isEdit: false });
 	};
-	// const columns = columnsFunc({
-	// 	setShowModal,
-	// 	refetch: refetchList,
-	// });
+	const columns = columnsFunc({
+		setShowModal,
+		refetch: refetchList,
+	});
 
 	const formRef = useRef(null);
 
@@ -66,13 +66,13 @@ function WeightSlabs() {
 				</Button>
 			</div>
 			<div className={styles.list_container}>
-				{/* <ListView
+				<ListView
 					data={data}
 					columns={columns}
 					filters={filters}
 					setFilters={setFilters}
 					loading={loading}
-				/> */}
+				/>
 			</div>
 
 			{showModal ? (

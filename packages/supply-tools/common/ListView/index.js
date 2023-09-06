@@ -1,5 +1,4 @@
-import { Button, ButtonIcon, cl, Loader, Modal } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
+import { Button, cl, Loader, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState } from 'react';
 
@@ -68,7 +67,10 @@ function ListView({
 								{columns.map((col) => (
 									<div
 										key={col.key}
-										style={{ width: `${getWidthPercent(col?.span)}%` }}
+										style={{
+											width   : `${getWidthPercent(col?.span)}%`,
+											padding : '0 8px',
+										}}
 									>
 										{typeof col?.render === 'function' ? col.render(item) : null}
 									</div>
@@ -76,9 +78,6 @@ function ListView({
 
 							</div>
 
-							<div>
-								<ButtonIcon icon={<IcMEdit />} themeType="tertiary" onClick={() => setShowEdit(item)} />
-							</div>
 						</div>
 
 						<Footer item={item} />
