@@ -39,8 +39,6 @@ function AdditionalServices({ // used in search results and checkout
 		inco_term = '',
 	} = detail;
 
-	console.log('service_details', service_details);
-
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
 	const [incoTermModalData, setIncoTermModalData] = useState({});

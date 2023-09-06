@@ -16,6 +16,7 @@ function ContainerDetails({
 	isAllowedToEdit = true,
 	infoBanner = {},
 	setInfoBanner = () => {},
+	setRouterLoading = () => {},
 	isGuideViewed = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
@@ -89,6 +90,7 @@ function ContainerDetails({
 					show={showModal}
 					data={data}
 					setShow={setShowModal}
+					setRouterLoading={setRouterLoading}
 				/>
 			) : null}
 		</div>

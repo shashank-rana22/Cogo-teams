@@ -4,6 +4,10 @@ const getRequiredFilters = ({ detail = {}, service, trade_type }) => {
 	const { origin, destination } = getLocationInfo(detail, 'service_type');
 
 	const FILTERS_MAPPING = {
+		export_haulage_freight: {
+			origin_location_id      : '',
+			destination_location_id : origin?.id,
+		},
 		export_ftl_freight: {
 			origin_location_id      : '',
 			destination_location_id : origin?.id,
@@ -52,6 +56,9 @@ const getRequiredFilters = ({ detail = {}, service, trade_type }) => {
 			origin_location_id: destination?.id,
 		},
 		import_trailer_freight: {
+			origin_location_id: destination?.id,
+		},
+		import_haulage_freight: {
 			origin_location_id: destination?.id,
 		},
 	};

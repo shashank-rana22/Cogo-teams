@@ -15,6 +15,7 @@ function FCLHeader({
 	activePage = '',
 	infoBanner = {},
 	setInfoBanner = () => {},
+	setRouterLoading = () => {},
 	isGuideViewed = false,
 	...rest
 }) {
@@ -37,6 +38,7 @@ function FCLHeader({
 					activePage={activePage}
 					currentScreen={rest.currentScreen}
 					setCurrentScreen={rest.setCurrentScreen}
+					setRouterLoading={setRouterLoading}
 				/>
 			</div>
 
@@ -49,6 +51,7 @@ function FCLHeader({
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
+					setRouterLoading={setRouterLoading}
 				/>
 
 				<Wallet

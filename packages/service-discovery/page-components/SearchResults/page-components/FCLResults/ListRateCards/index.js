@@ -1,8 +1,9 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
 import EmptyState from '../../../common/EmptyState';
@@ -70,6 +71,8 @@ function ListRateCards({
 	isGuideViewed = false,
 	cogoAssuredRates = [],
 	marketplaceRates = [],
+	routerLoading = false,
+	setRouterLoading = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -82,9 +85,19 @@ function ListRateCards({
 
 	const showComparison = !isEmpty(comparisonRates);
 
-	if (!primary_service) { return null; }
-
 	const { total_count, page_limit, page } = paginationProps;
+
+	useEffect(() => {
+		Router.events.on('routeChangeComplete', () => {
+			setRouterLoading(false);
+		});
+	}, [setRouterLoading]);
+
+	const loadingByRouter = loading || routerLoading;
+
+	if (!primary_service) {
+		return null;
+	}
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -98,6 +111,15 @@ function ListRateCards({
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
 			/>
+		);
+	}
+
+	if (loadingByRouter) {
+		return (
+			<div className={styles.loading}>
+				<span className={styles.loading_text}>Loading Rates</span>
+				<DotLoader />
+			</div>
 		);
 	}
 
@@ -116,6 +138,7 @@ function ListRateCards({
 						setShowFilterModal={setShowFilterModal}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
+						setRouterLoading={setRouterLoading}
 					/>
 
 					{showComparison ? (
@@ -185,6 +208,7 @@ function ListRateCards({
 						setInfoBanner={setInfoBanner}
 						showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
 						cogoAssuredRates={cogoAssuredRates}
+						routerLoading={routerLoading}
 					/>
 					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
 						<ContractAd

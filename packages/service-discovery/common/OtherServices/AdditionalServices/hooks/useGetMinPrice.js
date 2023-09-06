@@ -51,12 +51,11 @@ const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail
 	];
 
 	const booking_details = {
-		commodity                : finalCommodity,
+		commodity : finalCommodity,
 		container_size,
 		container_type,
 		shipping_line_id,
-		currency                 : total_price_currency,
-		rate_not_available_entry : false,
+		currency  : total_price_currency,
 	};
 
 	const service_attributes_data = newServices.reduce((accumulator, serviceItem) => {

@@ -22,6 +22,7 @@ function SearchResults() {
 
 	const { redirect_required = 'true' } = query;
 
+	const [routerLoading, setRouterLoading] = useState(false);
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [selectedWeek, setSelectedWeek] = useState({});
@@ -159,6 +160,7 @@ function SearchResults() {
 				setInfoBanner={setInfoBanner}
 				isGuideViewed={isGuideViewed}
 				service_key="service_type"
+				setRouterLoading={setRouterLoading}
 			/>
 
 			<div
@@ -193,6 +195,8 @@ function SearchResults() {
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
+					routerLoading={routerLoading}
+					setRouterLoading={setRouterLoading}
 				/>
 			</div>
 		</div>

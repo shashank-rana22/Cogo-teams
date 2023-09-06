@@ -74,6 +74,7 @@ function MiddleSection({
 	isCogoAssured = false,
 	isMultiContainer = false,
 	setScreen = () => {},
+	setRouterLoading = () => {},
 }) {
 	const firstTwoRates = primaryServiceRates.slice(ZERO, TWO);
 
@@ -163,6 +164,7 @@ function MiddleSection({
 					isCogoAssured={isCogoAssured}
 					isMultiContainer={isMultiContainer}
 					setScreen={setScreen}
+					setRouterLoading={setRouterLoading}
 				/>
 			</div>
 		</div>
@@ -207,6 +209,7 @@ function FclCard({
 	selectedCogoAssuredCard = {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	setRouterLoading = () => {},
 }) {
 	const {
 		service_rates = {},
@@ -297,6 +300,7 @@ function FclCard({
 				isMultiContainer={isMultiContainer}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
+				setRouterLoading={setRouterLoading}
 			/>
 
 			<HaulageText
