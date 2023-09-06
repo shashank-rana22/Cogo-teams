@@ -20,28 +20,20 @@ const START_COUNT = 0;
 
 function Invoices({
 	invoiceData = {},
+	invoiceDataCE = {},
 	groupedInvoices = {},
+	groupedInvoicesCE = {},
 	loading = false,
+	loadingCE = false,
 	salesInvoicesRefetch = () => {},
 	isCustomer = false,
 	isIRNGenerated = false,
 }) {
-	const filteredGroupedInvoices = Object.entries(groupedInvoices)?.reduce(
-		(acc, [key, value]) => {
-			const present = value?.invoices?.every((val) => isEmpty(val?.parent_invoice_id));
-			if (present) {
-				acc[key] = value;
-			}
-
-			return acc;
-		},
-		{},
-	);
-
-	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(filteredGroupedInvoices || {}) });
+	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
+	const totalsCE = invoiceDataCE?.invoicing_party_wise_total;
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
 		(item) => item?.status,
@@ -70,6 +62,7 @@ function Invoices({
 
 	return (
 		<main className={styles.container}>
+
 			<Header
 				invoiceData={invoiceData}
 				bfInvoiceRefetch={bfInvoiceRefetch}
@@ -94,6 +87,20 @@ function Invoices({
 						org_outstanding={OUTSTANDING_BY_REG_NUM?.[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
+					/>
+				))}
+			</section>
+
+			<section>
+				{Object.keys(groupedInvoicesCE || {}).map((item) => (
+					<InvoiceItem
+						key={item}
+						item={groupedInvoicesCE[item]}
+						total={totalsCE?.[item]}
+						loading={loadingCE}
+						invoiceData={invoiceDataCE}
+						invoicesList={invoicesList}
+						isCrossEntity
 					/>
 				))}
 			</section>

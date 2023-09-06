@@ -118,6 +118,7 @@ function Actions({
 					) : null}
 				</div>
 
+				{/* changes not reuired */}
 				{!(invoice?.parent_invoice_id) ? (
 					<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 						{!isEmpty(invoice?.remarks) ? (

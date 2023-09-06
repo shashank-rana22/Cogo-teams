@@ -29,6 +29,7 @@ function Status({
 	updateInvoiceStatus = () => {},
 	isIRNGenerated = false,
 	setAskNullify = () => {},
+	isCrossEntity = false,
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
@@ -71,7 +72,7 @@ function Status({
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
 	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
 
-	if (invoice?.parent_invoice_id) {
+	if (isCrossEntity) {
 		return (
 			<div className={styles.invoice_container}>
 				<div className={styles.invoice_status}>

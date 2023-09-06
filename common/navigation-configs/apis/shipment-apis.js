@@ -124,6 +124,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_cross_entity_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'generate_freight_certificate',
 		access_type  : 'private',
 		service_name : 'shipment',

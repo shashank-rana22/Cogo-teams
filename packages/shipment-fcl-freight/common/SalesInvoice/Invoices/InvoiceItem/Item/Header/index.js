@@ -23,6 +23,7 @@ function Header({
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
+	isCrossEntity = false,
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
@@ -36,6 +37,7 @@ function Header({
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
+	// where is it being used
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
@@ -81,6 +83,7 @@ function Header({
 					updateInvoiceStatus={updateInvoiceStatus}
 					isIRNGenerated={isIRNGenerated}
 					setAskNullify={setAskNullify}
+					isCrossEntity={isCrossEntity}
 				/>
 
 				<div
