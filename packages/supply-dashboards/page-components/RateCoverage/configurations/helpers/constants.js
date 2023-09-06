@@ -32,7 +32,7 @@ export const CARDS_MAPPING = {
 	},
 	// monitoring_dashboard: {
 	// 	title        : 'Monitoring Dashboard',
-	// 	status       : 'monitoring_dashboard',
+	// 	status       : 'monitoring_dashboard',		//may introduced in future
 	// 	showViewMore : true,
 	// },
 	cancelled_shipments: {
@@ -50,7 +50,6 @@ export const CLOSE_REASON_OPTIONS = [
 	{ label: 'Shipping/Airline not serviceable', value: 'not_serviceable' },
 	{ label: 'Rate not available', value: 'rate_not_available' },
 	{ label: 'No change in rate', value: 'no_change_in_rate' },
-	// { label: 'Other reason', value: 'other' },
 ];
 export const serviceOptions = [
 	{
@@ -123,7 +122,7 @@ export const handlingtype = [
 		value : 'non_stackable',
 	},
 ];
-export const PriceTypeOptions = [
+export const priceTypeOptions = [
 	{
 		label : 'All In',
 		value : 'all_in',
@@ -133,7 +132,7 @@ export const PriceTypeOptions = [
 		value : 'net_net',
 	},
 ];
-export const PackagingTypeOptions = [
+export const packagingTypeOptions = [
 	{
 		label : 'Pallet',
 		value : 'pallet',
@@ -151,7 +150,7 @@ export const PackagingTypeOptions = [
 		value : 'loose',
 	},
 ];
-export const RateTypeOptions = [
+export const rateTypeOptions = [
 	{
 		label : 'Market place',
 		value : 'market_pace',

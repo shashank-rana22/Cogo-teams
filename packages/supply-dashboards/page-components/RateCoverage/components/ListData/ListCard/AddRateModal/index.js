@@ -10,9 +10,10 @@ import React from 'react';
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import {
 	flighOperationTypeOptions,
-	PackagingTypeOptions, handlingtype,
-	RateTypeOptions, currencyOptions, PriceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
+	handlingtype,
+	rateTypeOptions, currencyOptions, priceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
 	fclCommodityOptions,
+	packagingTypeOptions,
 } from '../../../../configurations/helpers/constants';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
@@ -87,11 +88,11 @@ function AddRateModal({
 	const AIR_CONTROLS = airControls({
 		data,
 		flighOperationTypeOptions,
-		PackagingTypeOptions,
+		packagingTypeOptions,
 		handlingtype,
-		RateTypeOptions,
+		rateTypeOptions,
 		currencyOptions,
-		PriceTypeOptions,
+		priceTypeOptions,
 		densityCargoOptions,
 		densityRatioOptions,
 		commodityOptions,
