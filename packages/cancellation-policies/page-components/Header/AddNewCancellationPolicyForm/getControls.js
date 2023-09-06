@@ -10,7 +10,7 @@ import MILESTONE from '../../../configs/MILESTONE.json';
 import ORGANIZATION_TYPE from '../../../configs/ORGANIZATION_TYPE.json';
 import RATE_TYPE from '../../../configs/RATE_TYPE.json';
 import SHIPMENT_TYPES from '../../../configs/SHIPMENT_TYPES.json';
-import commoditiesMapper from '../../../helpers/CommodityMapper';
+import commoditiesMapper from '../../../helpers/CommodityShipmentMapper';
 
 const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.common
 	.services.feedback_services.allowed_currency;
@@ -21,7 +21,7 @@ const GET_DAYS_OPTIONS_VALUES3 = 1;
 const getDaysOptions = Array(GET_DAYS_OPTIONS_VALUES1).fill(GET_DAYS_OPTIONS_VALUES2)
 	.map((_, idx) => ({ label: idx + GET_DAYS_OPTIONS_VALUES3, value: idx + GET_DAYS_OPTIONS_VALUES3 }));
 
-const getControls = ({ service, container_type, item, isEdit }) => [
+const getControls = ({ service, container_type, item }) => [
 	{
 		name        : 'service',
 		type        : 'select',
@@ -30,7 +30,7 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		value       : item?.service,
 		rules       : { required: 'Service is required' },
 		options     : SHIPMENT_TYPES,
-		disabled    : isEdit,
+		disabled    : !!item?.service,
 		span        : 4,
 	},
 	{
@@ -51,7 +51,7 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		value          : item?.origin_location_id,
 		isClearable    : !item?.origin_location_id,
 		optionsListKey : 'locations',
-		disabled       : isEdit,
+		disabled       : !!item?.origin_location_id,
 		params         : { filters: { type: ['seaport', 'country', 'airport'] } },
 		span           : 4,
 	},
@@ -63,7 +63,7 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		value          : item?.destination_location_id,
 		isClearable    : !item?.destination_location_id,
 		optionsListKey : 'locations',
-		disabled       : item?.destination_location_id,
+		disabled       : !!item?.destination_location_id,
 		params         : {
 			filters: {
 				type: ['seaport', 'country', 'airport'],
@@ -75,11 +75,11 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		name           : 'shipping_line_id',
 		label          : 'Shipping Line',
 		type           : 'select',
-		value          : isEdit ? item?.shipping_line_id : '',
+		value          : item?.shipping_line_id,
 		placeholder    : 'Select Shipping Line',
 		optionsListKey : 'shipping-lines',
-		isClearable    : !isEdit,
-		disabled       : isEdit,
+		isClearable    : !item?.shipping_line_id,
+		disabled       : !item?.shipping_line_id,
 	},
 	{
 		name        : 'commodity',
@@ -87,7 +87,7 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		placeholder : 'Select Commodity',
 		label       : 'Commodity',
 		value       : item?.commodity,
-		disabled    : isEdit,
+		disabled    : !!item?.commodity,
 		options     : (commoditiesMapper(service, container_type) || [])
 			.map((option) => ({ label: option, value: option })),
 	},
@@ -128,7 +128,7 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		name        : 'charge_type',
 		type        : 'select',
 		label       : 'Charge Type',
-		disabled    : isEdit,
+		disabled    : !!item?.charge_type,
 		value       : item?.charge_type,
 		placeholder : 'Select Charge Type',
 		rules       : { required: 'This is required' },
@@ -178,26 +178,26 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		value       : item?.container_size,
 		// isClearable : !isEdit,
 		placeholder : 'Eg. 20ft',
-		disabled    : isEdit,
+		disabled    : !!item?.container_size,
 		options     : CONTAINER_SIZE,
 	},
 	{
 		name           : 'container_type',
 		label          : 'Container Type',
-		isClearable    : !isEdit,
+		isClearable    : !item?.container_type,
 		value          : item?.container_type,
 		type           : 'select',
 		optionsListKey : 'container-types',
 		placeholder    : 'Select',
-		disabled       : isEdit,
+		disabled       : !!item?.container_type,
 	},
 	{
 		name        : 'booking_type',
 		label       : 'Booking Type',
 		type        : 'select',
 		placeholder : 'Select Booking Type',
-		value       : isEdit ? item?.booking_type : 'normal_booking',
-		disabled    : isEdit,
+		value       : item?.booking_type,
+		disabled    : !!item?.booking_type,
 		options     : BOOKING_TYPE,
 		rules       : { required: 'Booking Type is required' },
 		span        : 6,
@@ -207,9 +207,9 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		name        : 'organization_type',
 		type        : 'select',
 		value       : item?.organization_type,
-		isClearable : !isEdit,
+		isClearable : !item?.organization_type,
 		placeholder : 'Select Organization Type',
-		disabled    : isEdit,
+		disabled    : !!item?.organization_type,
 		options     : ORGANIZATION_TYPE,
 	},
 	{
@@ -218,7 +218,7 @@ const getControls = ({ service, container_type, item, isEdit }) => [
 		type        : 'select',
 		placeholder : 'Select Rate Type',
 		value       : item?.rate_type,
-		disabled    : isEdit,
+		disabled    : !!item?.rate_type,
 		options     : RATE_TYPE,
 		rules       : { required: 'Rate Type is required' },
 	},
