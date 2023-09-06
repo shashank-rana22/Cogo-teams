@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import languageMapping from '@cogoport/globalization/constants/languageLocaleMapping';
 import acceptLanguage from 'accept-language';
 
-import languageMapping from './constants/languageMapping';
 import generateRedirectionUrl from './helpers/generateRedirectionUrl';
 import { i18n } from './next-i18next.config';
 
