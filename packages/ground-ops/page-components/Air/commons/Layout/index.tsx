@@ -35,12 +35,12 @@ function Layout({
 
 	return (
 		<div className={styles.layout}>
-			{TOTAL_FIELDS.map((field) => (
-				<div key={fields} className={styles.row}>
-					{field.map((fieldsItem) => {
+			{Object.keys(TOTAL_FIELDS).map((field) => (
+				<div key={field} className={styles.row}>
+					{TOTAL_FIELDS[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', rules = {}, span: fieldArraySpan } = fieldsItem;
 						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
-						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
+						const show = (!(TOTAL_FIELDS[field].name in showElements) || showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
 								<div key={fieldsItem.name} style={{ width: `${flex}%`, padding: '4px' }}>

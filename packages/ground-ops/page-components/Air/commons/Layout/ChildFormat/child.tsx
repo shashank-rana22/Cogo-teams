@@ -45,9 +45,9 @@ function Child({
 
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{TOTAL_FIELDS.map((fields) => (
-				<div key={fields} className={styles.row}>
-					{fields.map((controlItem) => {
+			{Object.keys(TOTAL_FIELDS).map((rowfield) => (
+				<div key={rowfield} className={styles.row}>
+					{TOTAL_FIELDS[rowfield].map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
 						const errorOriginal = getErrorMessage({
