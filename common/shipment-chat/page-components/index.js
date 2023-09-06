@@ -19,7 +19,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 
 	let audio = null;
 	if (typeof window !== 'undefined') {
-		audio = new Audio(getStaticPath('../mp3/chat-notification.mp3'));
+		audio = new Audio(getStaticPath('/mp3/chat-notification.mp3'));
 	}
 
 	const { msgSeen } = useSeen();
