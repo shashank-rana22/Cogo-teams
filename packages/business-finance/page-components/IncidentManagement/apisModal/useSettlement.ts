@@ -11,6 +11,7 @@ const useSettlement = ({
 	refetch,
 	checkResetButton,
 	supportingDocUrl,
+	t,
 }) => {
 	const [
 
@@ -243,7 +244,7 @@ const useSettlement = ({
 			setShow(false);
 			refetch();
 
-			Toast.success('Settle successfully');
+			Toast.success(t('incidentManagement:settle_successfully_message'));
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
@@ -300,7 +301,7 @@ const useSettlement = ({
 					nostroChangeAmount          : item.nostroAmount,
 				})),
 			);
-			Toast.success('Dry Run Successful');
+			Toast.success(t('incidentManagement:dry_run_successfull_message'));
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}

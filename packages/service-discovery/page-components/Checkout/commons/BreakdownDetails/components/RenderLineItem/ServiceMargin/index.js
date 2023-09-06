@@ -1,4 +1,4 @@
-import { Select, Tooltip, InputNumber } from '@cogoport/components';
+import { Select, Tooltip, Input } from '@cogoport/components';
 import { IcMInformation } from '@cogoport/icons-react';
 
 import CodeMargin from './CodeMargin';
@@ -49,7 +49,7 @@ function ServiceMargin({
 			</div>
 
 			<div className={styles.currency}>
-				<InputNumber
+				<Input
 					size="sm"
 					disabled={!shouldEditMargin}
 					value={value}

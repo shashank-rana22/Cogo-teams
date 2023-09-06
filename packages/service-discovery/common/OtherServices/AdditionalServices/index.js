@@ -39,6 +39,8 @@ function AdditionalServices({ // used in search results and checkout
 		inco_term = '',
 	} = detail;
 
+	console.log('service_details', service_details);
+
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
 	const [incoTermModalData, setIncoTermModalData] = useState({});
@@ -199,7 +201,7 @@ function AdditionalServices({ // used in search results and checkout
 				You may need these services
 				{source === 'checkout' ? (
 					<div style={{ fontWeight: 500, display: 'flex', alignItems: 'center' }}>
-						IncoTerms
+						IncoTerm:
 						<Select
 							value={inco_term}
 							onChange={(val) => setIncoTermModalData({ selectedValue: val })}
@@ -243,6 +245,7 @@ function AdditionalServices({ // used in search results and checkout
 					getCheckout={refetchSearch}
 					incoterm={inco_term}
 					checkout_id={detail?.checkout_id}
+					service_details={service_details}
 				/>
 			) : null}
 		</div>
