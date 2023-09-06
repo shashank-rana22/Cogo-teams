@@ -7,29 +7,17 @@
 }
 
 .contact_details {
-	display: flex;
-	align-items: center;
-
 	:global {
 		.ui_checkbox_group_container {
 			padding: 10px 0;
+			padding-bottom: unset;
 		}
 
 		.ui_checkbox_container {
+			padding-bottom: unset;
 			margin-left: unset;
 		}
 	}
-}
-
-.yellow_bg {
-	width: 30px;
-	height: 30px;
-	background: #fcdc00;
-	border-radius: 50%;
-}
-
-.main_container {
-	margin-left: 44px;
 }
 
 .flex {
@@ -48,4 +36,8 @@
 			padding: 8px 8px 8px 18px;
 		}
 	}
+}
+
+.poc_details {
+	margin-left: 12px;
 }

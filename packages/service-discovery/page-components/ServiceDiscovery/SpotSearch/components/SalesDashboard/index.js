@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import StyledTabs from '../../common/StyledTabs';
@@ -17,9 +18,10 @@ function SalesDashboard({
 	createSearch = () => {},
 	createSearchLoading = false,
 }) {
-	const allLists = configurations;
+	const { query = {} } = useRouter();
+	const { activeTab: selectedActiveTab = '' } = query;
 
-	const [activeTab, setActiveTab] = useState(allLists[GLOBAL_CONSTANTS.zeroth_index].type);
+	const [activeTab, setActiveTab] = useState(selectedActiveTab || configurations[GLOBAL_CONSTANTS.zeroth_index].type);
 
 	const PROPS_MAPPING_WITH_FUNCTION_NAME = {
 		renderPortPair: {
@@ -35,7 +37,7 @@ function SalesDashboard({
 			activeTab={activeTab}
 			onChange={setActiveTab}
 		>
-			{allLists.map((listItem) => {
+			{configurations.map((listItem) => {
 				const newListItem = { ...listItem };
 
 				const { type = '', heading = '', fields = [] } = newListItem;

@@ -1,11 +1,14 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useMemo, useCallback } from 'react';
 
 import { CheckoutContext } from '../../context';
 import useUpdateCheckoutService from '../../hooks/useUpdateCheckoutService';
 
 const DEFAULT_VALUE = 0;
+
+const POSITIVE_VALUE = 1;
+const NEGATIVE_VALUE = -1;
 
 const useHandleBreakdownDetails = ({
 	rate,
@@ -14,15 +17,69 @@ const useHandleBreakdownDetails = ({
 	getCheckoutInvoices = () => {},
 }) => {
 	const {
-		detail,
-		getCheckout,
-		checkout_id,
+		detail = {},
+		getCheckout = () => {},
+		checkout_id = '',
 	} = useContext(CheckoutContext);
 
 	const [addLineItemData, setAddLineItemData] = useState({});
 	const [editLineItemData, setEditLineItemData] = useState({});
 
-	const { booking_charges = {} } = rate;
+	const { booking_charges = {}, services = {} } = rate;
+
+	const { primary_service = '' } = detail;
+
+	const updatedServiceRates = useMemo(
+		() => Object.entries(services || {})
+			.map(([key, value]) => ({ ...value, key }))
+			.sort(
+				(
+					{
+						trade_type: firstElementTradeType = '',
+						service_type: firstElementServiceType,
+					},
+					{
+						trade_type: secondElementTradeType = '',
+						service_type: secondElementServiceType,
+					},
+				) => {
+					const tradeTypeOrder = ['export', 'main', 'import'];
+
+					const firstElementFinalTradeType = firstElementServiceType === primary_service
+						? 'main'
+						: firstElementTradeType;
+
+					const secondElementFinalTradeType = secondElementServiceType === primary_service
+						? 'main'
+						: secondElementTradeType;
+
+					if (
+						tradeTypeOrder.findIndex(
+							(item) => firstElementFinalTradeType === item,
+						)
+							> tradeTypeOrder.findIndex(
+								(item) => secondElementFinalTradeType === item,
+							)
+					) {
+						return POSITIVE_VALUE;
+					}
+
+					if (
+						tradeTypeOrder.findIndex(
+							(item) => firstElementFinalTradeType === item,
+						)
+							< tradeTypeOrder.findIndex(
+								(item) => secondElementFinalTradeType === item,
+							)
+					) {
+						return NEGATIVE_VALUE;
+					}
+
+					return DEFAULT_VALUE;
+				},
+			),
+		[primary_service, services],
+	);
 
 	const { handleDeleteRate, deleteRateLoading } = useUpdateCheckoutService({
 		refetch: getCheckout,
@@ -37,8 +94,14 @@ const useHandleBreakdownDetails = ({
 			...item.line_items[GLOBAL_CONSTANTS.zeroth_index],
 		}));
 
-	const getUpdatedLineItems = ({ line_items, presentLineItems, reset = false }) => line_items.map((lineItem) => {
-		const presentPrefillValues = presentLineItems.find((item) => item.code === lineItem.code);
+	const getUpdatedLineItems = ({
+		line_items,
+		presentLineItems,
+		reset = false,
+	}) => line_items.map((lineItem) => {
+		const presentPrefillValues = presentLineItems.find(
+			(item) => item.code === lineItem.code,
+		);
 
 		const { filteredMargins: presentFilteredMargins } = presentPrefillValues || {};
 
@@ -88,39 +151,47 @@ const useHandleBreakdownDetails = ({
 		};
 	});
 
-	const resetMargins = () => {
-		setRateDetails((prev) => Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
-			const { line_items = [] } = serviceData;
+	const resetMargins = useCallback(() => {
+		setRateDetails((prev) => updatedServiceRates.map((serviceData) => {
+			const { line_items = [], key = '' } = serviceData;
 
 			const { line_items: presentLineItems = [] } = prev.find((item) => key === item.id) || {};
 
-			const updateLineItems = getUpdatedLineItems({ line_items, presentLineItems, reset: true });
+			const updateLineItems = getUpdatedLineItems({
+				line_items,
+				presentLineItems,
+				reset: true,
+			});
 
 			return {
-				...rate?.services[key],
+				...serviceData,
 				id         : key,
 				line_items : updateLineItems,
 			};
 		}));
-	};
+	}, [setRateDetails, updatedServiceRates]);
 
 	useEffect(() => {
 		setNoRatesPresent(false);
 
-		setRateDetails((prev) => Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
-			const { line_items = [] } = serviceData;
+		setRateDetails((prev) => updatedServiceRates.map((serviceData) => {
+			const { line_items = [], key = '' } = serviceData;
 
 			const { line_items: presentLineItems = [] } = prev.find((item) => key === item.id) || {};
 
-			const updateLineItems = getUpdatedLineItems({ line_items, presentLineItems, reset: false });
+			const updateLineItems = getUpdatedLineItems({
+				line_items,
+				presentLineItems,
+				reset: false,
+			});
 
 			return {
-				...rate?.services[key],
+				...serviceData,
 				id         : key,
 				line_items : updateLineItems,
 			};
 		}));
-	}, [rate?.services, setNoRatesPresent, setRateDetails]);
+	}, [setNoRatesPresent, setRateDetails, updatedServiceRates]);
 
 	return {
 		addLineItemData,

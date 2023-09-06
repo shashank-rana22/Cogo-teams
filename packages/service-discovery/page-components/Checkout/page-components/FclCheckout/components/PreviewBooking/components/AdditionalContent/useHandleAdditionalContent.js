@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +11,8 @@ const useHandleAdditionalContent = ({
 	detail = {},
 	rate = {},
 }) => {
+	const { push } = useRouter();
+
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
 	const { handleSubmit = () => {}, getValues = () => {} } = formProps;
@@ -22,6 +25,17 @@ const useHandleAdditionalContent = ({
 		services = {},
 	} = detail;
 
+	const {
+		cargo_readiness_date = '',
+		cargo_value = 0,
+		cargo_value_currency = '',
+		commodity_category = '',
+	} = cargoDetails || {};
+
+	const primaryServicesArray = Object.values(services).filter(
+		(item) => item.service_type === primary_service,
+	);
+
 	const [{ loading :updateCheckoutServiceLoading }, triggerUpdateCheckoutService] = useRequest(
 		{
 			method : 'post',
@@ -31,17 +45,6 @@ const useHandleAdditionalContent = ({
 	);
 
 	const handleNextButton = async () => {
-		const primaryServicesArray = Object.values(services).filter(
-			(item) => item.service_type === primary_service,
-		);
-
-		const {
-			cargo_readiness_date = '',
-			cargo_value = '',
-			cargo_value_currency = '',
-			commodity_category = '',
-		} = cargoDetails || {};
-
 		const {
 			sailing_range = {},
 			max_price,
@@ -61,7 +64,7 @@ const useHandleAdditionalContent = ({
 			return;
 		}
 
-		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency) {
+		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
 			Toast.error('Please enter cargo details');
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
@@ -108,6 +111,46 @@ const useHandleAdditionalContent = ({
 		}
 	};
 
+	const onClickSaveForLater = async () => {
+		const {
+			sailing_range = {},
+			max_price,
+			min_price,
+			...restValues
+		} = getValues();
+
+		const { startDate = '', endDate = '' } = sailing_range;
+
+		await triggerUpdateCheckoutService({
+			data: {
+				id,
+				update_rates                    : false,
+				service                         : primary_service,
+				fcl_freight_services_attributes : primaryServicesArray.map(
+					({ id: service_id }) => ({
+						id                   : service_id,
+						cargo_readiness_date : cargo_readiness_date || undefined,
+						cargo_value          : Number(cargo_value) || undefined,
+						cargo_value_currency : cargo_value_currency || undefined,
+						commodity_category,
+						shipping_preferences : {
+							sailing_start_date          : startDate || undefined,
+							sailing_end_date            : endDate || undefined,
+							min_price                   : Number(min_price) || undefined,
+							max_price                   : Number(max_price) || undefined,
+							...restValues,
+							agreed_for_partial_shipment : undefined,
+						},
+					}),
+				),
+			},
+		});
+
+		await updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
+
+		push('/service-discovery?activeTab=saved_for_later');
+	};
+
 	const onError = () => {
 		Toast.error('Please select shipping preferences');
 
@@ -143,6 +186,7 @@ const useHandleAdditionalContent = ({
 		updateCheckoutServiceLoading,
 		onClickNextButton,
 		noRatesPresent,
+		onClickSaveForLater,
 	};
 };
 

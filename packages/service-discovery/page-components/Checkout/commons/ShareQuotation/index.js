@@ -42,9 +42,7 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 	return (
 		<div className={styles.container}>
 			<div className={styles.contact_details}>
-				<div className={styles.yellow_bg} />
-
-				<div className={styles.main_container}>
+				<div className={styles.poc_details}>
 					<PocDetails
 						detail={detail}
 						bookingConfirmationMode={selectedModes}
@@ -53,14 +51,14 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 						updateCheckout={updateCheckout}
 						updateLoading={updateLoading}
 					/>
-
-					<CheckboxGroup
-						className="primary md"
-						options={quotationOptions}
-						value={selectedModes || ''}
-						onChange={setSelectedModes}
-					/>
 				</div>
+
+				<CheckboxGroup
+					className="primary md"
+					options={quotationOptions}
+					value={selectedModes || ''}
+					onChange={setSelectedModes}
+				/>
 			</div>
 
 			{showShareQuotationModal ? (

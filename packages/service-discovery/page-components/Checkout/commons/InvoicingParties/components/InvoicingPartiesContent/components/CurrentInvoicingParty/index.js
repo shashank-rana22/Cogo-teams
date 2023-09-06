@@ -94,6 +94,7 @@ function CurrentInvoicingParty({
 						allServices={allServices}
 						editInvoiceDetails={editInvoiceDetails}
 						setEditInvoiceDetails={setEditInvoiceDetails}
+						length={length}
 					/>
 
 					<TotalCost
