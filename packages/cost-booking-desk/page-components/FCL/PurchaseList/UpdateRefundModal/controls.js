@@ -1,4 +1,5 @@
 import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
+import { isEmpty } from '@cogoport/utils';
 
 const PAYMENT_MODE_OPTIONS = [
 	{
@@ -18,6 +19,7 @@ const PAYMENT_MODE_OPTIONS = [
 const getFormControls = ({
 	listEntities = {},
 	setBillingParty = () => {},
+	currency = '',
 }) => {
 	const billingPartyOpts = listEntities?.list?.map((item) => ({
 		...item,
@@ -36,6 +38,7 @@ const getFormControls = ({
 			rules       : { required: 'Currency is required' },
 			size        : 'sm',
 			span        : 3,
+			disabled    : !isEmpty(currency),
 		},
 		{
 			name        : 'amount',
