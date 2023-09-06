@@ -6,6 +6,8 @@ import getRequiredFilters from '../utils/getRequiredFilters';
 
 const DEFAULT_PRICE_VALUE = Infinity;
 
+const NULL_COMMODITIES = ['general', 'all', 'all_commodities'];
+
 const transportationServices = [
 	{
 		service_type : 'ftl_freight',
@@ -30,9 +32,16 @@ const transportationServices = [
 ];
 
 const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail = {}, rateCardData = {} }) => {
+	const { shipping_line_id = '' } = rateCardData;
+
+	const { commodity, container_size, container_type } = detail;
+
+	const finalCommodity = NULL_COMMODITIES.includes(commodity) ? null : commodity;
+
 	const newServices = [
 		...allServices.filter(
-			(service) => service.service_type !== 'transportation',
+			(service) => service.service_type !== 'transportation'
+			&& service.name !== (detail.service_type || detail.primary_service),
 		).map((item) => ({
 			service_type : item.service_type,
 			trade_type   : item.trade_type,
@@ -41,24 +50,37 @@ const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail
 		...transportationServices,
 	];
 
-	const service_attributes = newServices.map((serviceItem) => {
-		const { name = '', service_type, trade_type } = serviceItem;
+	const booking_details = {
+		commodity                : finalCommodity,
+		container_size,
+		container_type,
+		shipping_line_id,
+		currency                 : total_price_currency,
+		rate_not_available_entry : false,
+	};
+
+	const service_attributes_data = newServices.reduce((accumulator, serviceItem) => {
+		const { name = '', service_type = '', trade_type = '' } = serviceItem;
 
 		const filters = getRequiredFilters({ detail, service: name, trade_type, rateCardData });
 
 		return {
-			filters,
-			id: name,
-			service_type,
+			...accumulator,
+			[name]: {
+				filters,
+				service_type,
+			},
 		};
-	});
+	}, {});
 
 	const [{ loading, data }] = useRequest({
 		method : 'GET',
 		url    : 'get_freight_rate_min_price',
 		params : {
-			currency: total_price_currency,
-			service_attributes,
+			service_attributes: {
+				booking_details,
+				...service_attributes_data,
+			},
 		},
 	}, { manual: !allServices || isEmpty(allServices) });
 

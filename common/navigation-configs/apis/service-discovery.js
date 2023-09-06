@@ -353,9 +353,9 @@ const apis = [
 		feature      : 'checkout',
 	},
 	{
-		api          : 'send_rate_comparison_emails',
+		api          : 'send_spot_search_rate_comparison_emails',
 		access_type  : 'private',
-		service_name : 'checkout',
+		service_name : 'spot_search',
 		feature      : 'search',
 	},
 	{

@@ -56,7 +56,7 @@ const useShareModal = ({
 	let apiEndPoint = 'share_rate_card';
 
 	if (shareType === 'compareRates') {
-		apiEndPoint = 'send_rate_comparison_emails';
+		apiEndPoint = 'send_spot_search_rate_comparison_emails';
 	}
 
 	const [{ loading }, trigger] = useRequest({

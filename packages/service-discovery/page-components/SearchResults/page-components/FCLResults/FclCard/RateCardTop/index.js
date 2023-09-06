@@ -157,7 +157,7 @@ function RateCardTop({
 					<img
 						src={imageUrl || defaultShippingLineIcon}
 						alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
-						className={styles.shipping_line_logo}
+						className={cl`${styles.shipping_line_logo} ${!imageUrl && styles.default_icon}`}
 						height={28}
 					/>
 
