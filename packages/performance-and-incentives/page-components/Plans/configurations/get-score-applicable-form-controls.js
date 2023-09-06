@@ -1,12 +1,11 @@
 import { isEmpty } from '@cogoport/utils';
 
-const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
+const getScoreApplicableFormControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Select Cogo Entity',
 		type        : 'async-select',
 		placeholder : 'Select Cogo Entity',
-		showAstrick : true,
 		initialCall : true,
 		asyncKey    : 'partners',
 		params      : {
@@ -19,11 +18,10 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 		rules: { required: 'This is required' },
 	},
 	{
-		name        : 'organization_type',
-		label       : 'Organization Type',
-		type        : 'select',
-		showAstrick : true,
-		options     : [
+		name    : 'organization_type',
+		label   : 'Organization Type',
+		type    : 'select',
+		options : [
 			{
 				value : 'importer_exporter',
 				label : 'Importer Exporter',
@@ -37,11 +35,11 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 
 	},
 	{
-		name        : 'segment',
-		showAstrick : true,
-		label       : 'Organization Sub-Type',
-		type        : 'select',
-		rules       : { required: 'This is required' },
+		name: 'segment',
+
+		label : 'Organization Sub-Type',
+		type  : 'select',
+		rules : { required: 'This is required' },
 	},
 	{
 		name        : 'agent_id',
@@ -124,4 +122,4 @@ const preferredRoleControls = {
 	},
 };
 
-export { getControls, preferredRoleControls };
+export { getScoreApplicableFormControls, preferredRoleControls };

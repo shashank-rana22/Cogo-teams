@@ -1,27 +1,33 @@
-import { Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { useState, useRef } from 'react';
 
-import styles from './styles.module.css';
+import ACTIVE_MODE_KEYS_MAPPING from '../../constants/active-mode-key-mapping';
+
+import CreateScoringPlan from './CreateScoringPlan';
+import ListScoringPlans from './ListScoringPlans';
+
+const { LIST, CREATE } = ACTIVE_MODE_KEYS_MAPPING;
+
+const COMPONENT_MAPPING = {
+	[LIST]   : ListScoringPlans,
+	[CREATE] : CreateScoringPlan,
+};
 
 function ScoringPlans() {
-	const router = useRouter();
+	const [activeMode, setActiveMode] = useState(LIST);
 
-	const handleClick = () => {
-		router.push('/performance-and-incentives/plans/create-scoring-plan');
-	};
+	const objectiveRef = useRef({});
+
+	const Component = COMPONENT_MAPPING[activeMode];
+
+	if (!Component) return null;
 
 	return (
-		<div className={styles.container}>
-			<h2>Scoring Plans</h2>
-
-			<Button
-				size="md"
-				themeType="primary"
-				onClick={handleClick}
-			>
-				Create Scoring
-			</Button>
-		</div>
+		<Component
+			key={activeMode}
+			ref={objectiveRef}
+			activeMode={activeMode}
+			setActiveMode={setActiveMode}
+		/>
 	);
 }
 

@@ -23,7 +23,7 @@ const TAB_PANNEL_COMPONENT_MAPPING = {
 };
 
 function Plans() {
-	const [activeTab, setActiveTab] = useState(INCENTIVE_PLANS);
+	const [activeTab, setActiveTab] = useState(SCORING_PLANS);
 
 	return (
 		<section className={styles.container}>
