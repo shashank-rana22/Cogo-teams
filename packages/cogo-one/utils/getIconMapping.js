@@ -1,13 +1,17 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSearchdark,
-	IcMDocument, IcMShip,
+	IcMDocument,
+	IcMShip,
 	IcMTicket,
 	IcMProfile,
 	IcMServices,
+	IcMCrossInCircle,
+	IcMArrowDoubleLeft,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
+import { ENABLE_EXPAND_SIDE_BAR } from '../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const COMMON_ACCESIBLE_NAVIGATIONS = [
@@ -19,8 +23,16 @@ const COMMON_ACCESIBLE_NAVIGATIONS = [
 	'help_desk',
 	'customer_insights',
 ];
+const SIDEBAR_CONTROLS = ['sidebar_control'];
 
-const ICON_MAPPING = [
+const iconMapping = ({ expandSideBar = false }) => [
+	{
+		name    : 'sidebar_control',
+		content : expandSideBar ? 'Close' : 'Expand',
+		icon    : expandSideBar
+			? <IcMCrossInCircle width={20} height={20} />
+			: <IcMArrowDoubleLeft width={20} height={20} />,
+	},
 	{
 		name    : 'profile',
 		content : 'Profile',
@@ -124,10 +136,15 @@ const ICON_MAPPING = [
 	},
 ];
 
-const getIconMapping = (viewType) => ICON_MAPPING.filter(
+const getIconMapping = ({
+	viewType = '',
+	expandSideBar = false,
+	channelType = '',
+}) => iconMapping({ expandSideBar }).filter(
 	(eachIcon) => [
 		...COMMON_ACCESIBLE_NAVIGATIONS,
 		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
+		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
 	].includes(eachIcon.name),
 );
 

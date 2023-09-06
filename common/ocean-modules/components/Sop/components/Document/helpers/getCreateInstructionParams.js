@@ -15,7 +15,7 @@ const getCreateInstructionParams = ({
 
 	const { organization_pocs = {}, id : billingAddressId = '' } = (billingAddressData || []).find(
 		(item) => item?.address === formValues?.address,
-	);
+	) || {};
 
 	const orgPocForCourier = organization_pocs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 

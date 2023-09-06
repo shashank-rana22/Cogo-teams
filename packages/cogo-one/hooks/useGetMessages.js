@@ -27,7 +27,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 
 	const {
 		getCogooneTimeline,
-		loading, firstTimeLineLoading, setFirstTimeLineLoading = () => {},
+		timeLineLoading, firstTimeLineLoading, setFirstTimeLineLoading = () => {},
 	} = useListCogooneTimeline({ id, setMessagesState, type: 'messages' });
 
 	const snapshotCleaner = () => {
@@ -136,7 +136,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 		lastPage             : messagesState?.[id]?.islastPage,
 		messagesData         : sortedMessageData,
 		firstLoadingMessages : firstLoadingMessages || firstTimeLineLoading,
-		loadingPrevMessages  : loadingPrevMessages || loading,
+		loadingPrevMessages  : loadingPrevMessages || timeLineLoading,
 		messagesState,
 	};
 };

@@ -80,10 +80,15 @@
 
 .toggle_chat {
 	display: flex;
+	align-items: center;
 
 	:global {
 		.ui_toggle_container {
 			margin-right: 62px;
 		}
+	}
+
+	.scope {
+		margin-right: 10px;
 	}
 }

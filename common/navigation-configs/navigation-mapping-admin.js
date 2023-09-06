@@ -202,6 +202,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.app_saas_cogo_subscription,
 				...apis.sales_dashboard,
 				...apis.cogopoints,
+				...apis.ssr,
 			],
 			main_apis: [
 				'list_organization_users',
@@ -2097,8 +2098,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		manage_rfq: {
 			key           : 'manage_rfq',
 			title         : t('common:manage_rfq'),
-			href          : '/manage-rfq',
-			as            : '/manage-rfq',
+			href          : '/manage-rfq?activeTab=draft&page=1',
+			as            : '/manage-rfq?activeTab=draft&page=1',
 			type          : 'link',
 			main_apis     : ['list_rfqs'],
 			possible_apis : apis.manage_rfq,
@@ -2572,14 +2573,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		forecast: {
 			key         : 'forecast',
-			title       : 'Forecast',
+			title       : t('common:forecast'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcMUpwardGraph,
 			options     : [
 				{
-					key           : 'forecast-supply_allocation',
-					title         : 'Supply Allocation',
+					key         	 : 'forecast-supply_allocation',
+					title         : t('common:supply_allocation'),
 					href          : '/v2/supply-allocation',
 					as            : '/v2/supply-allocation',
 					type          : 'link',
@@ -2588,8 +2589,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 				{
-					key           : 'forecast-demand_forecast',
-					title         : 'Demand Forecast',
+					key   : 'forecast-demand_forecast',
+					title : t('common:demand_forecast'),
+
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',
@@ -2598,6 +2600,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 			],
+		},
+		attendance_leave_management: {
+			key           : 'attendance_leave_management',
+			title         : 'Attendance and Leave Management',
+			icon          : IcMDashboard,
+			href          : '/v2/attendance-leave-management',
+			as            : '/v2/attendance-leave-management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.attendance_leave_management,
 		},
 	};
 

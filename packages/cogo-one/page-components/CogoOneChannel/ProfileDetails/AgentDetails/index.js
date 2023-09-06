@@ -23,6 +23,8 @@ import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
+const ENABLE_SHARE_BUTTON_FOR = ['message', 'firebase_emails'];
+
 const handleClick = ({ id, channel_type }) => {
 	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
 	navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
@@ -106,9 +108,17 @@ function AgentDetails({
 			orgId         : organization_id,
 			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
 		},
+		firebase_emails: {
+			userId        : user_id,
+			name          : messageName || lead_user_details?.name,
+			userEmail     : email || lead_user_details?.email,
+			mobile_number : userMessageMobileNumber,
+			orgId         : organization_id,
+			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
+		},
 	};
 
-	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
+	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab] || {};
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
 		sender,
@@ -167,7 +177,7 @@ function AgentDetails({
 
 				<div className={styles.title}>Profile</div>
 				<div className={styles.quick_actions}>
-					{activeTab === 'message' && (
+					{ENABLE_SHARE_BUTTON_FOR.includes(activeTab) && (
 						<div
 							role="presentation"
 							className={styles.copy_link}

@@ -19,6 +19,7 @@
 
 .shipping_line {
 	display: flex;
+	gap: 6px;
 	align-items: center;
 	font-size: 14px;
 	font-weight: 400;

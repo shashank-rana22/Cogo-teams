@@ -1,6 +1,7 @@
 import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -24,6 +25,7 @@ function Column({
 	item = {},
 	level = '',
 }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const { approvalLevelConditions } = errors;
 	const { fields = [] } = config;
 
@@ -41,7 +43,7 @@ function Column({
 	const DATA = {
 		levels: (
 			<div className={styles.center}>
-				Level -
+				{t('incidentManagement:level')}
 				{index + DEFAULT_VAL}
 			</div>
 		),
@@ -60,7 +62,7 @@ function Column({
 							userEmail : obj?.email,
 						});
 					}}
-					rules={{ required: { value: true, message: 'User is required' } }}
+					rules={{ required: { value: true, message: t('incidentManagement:user_required_message') } }}
 				/>
 				{approvalLevelConditions?.[index]?.user?.message
 					? <div className={styles.message}>{approvalLevelConditions?.[index]?.user?.message}</div> : null}
@@ -71,8 +73,8 @@ function Column({
 				<InputController
 					control={control}
 					name={`approvalLevelConditions.${index}.condition`}
-					placeholder="Criteria"
-					rules={{ required: { value: true, message: 'Criteria is required' } }}
+					placeholder={t('incidentManagement:criteria_placeholder')}
+					rules={{ required: { value: true, message: t('incidentManagement:criteria_required_message') } }}
 				/>
 				{approvalLevelConditions?.[index]?.condition?.message
 					? (
