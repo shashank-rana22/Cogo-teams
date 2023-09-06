@@ -8,7 +8,11 @@ import TabController from '../ControlledTab';
 
 import styles from './styles.module.css';
 
-function RenderButtons({ lineitemvalue, insert, index }) {
+function RenderButtons({
+	lineitemvalue = {},
+	insert = () => {},
+	index = 0,
+}: any) {
 	return (
 		<div className={styles.flexcol}>
 			<Button
@@ -37,7 +41,13 @@ const ACCOUNT_TYPE_MAPPINGS = {
 	AR : 'importer_exporter',
 };
 
-function RenderTradeParty({ option }) {
+function RenderTradeParty({
+	option = {
+		legal_business_name  : '',
+		registration_number  : '',
+		sage_organization_id : '',
+	},
+}) {
 	return (
 		<div className={styles.tradeparty}>
 			<div>{option?.legal_business_name || ''}</div>
@@ -54,12 +64,12 @@ function RenderTradeParty({ option }) {
 }
 
 const handleModeChange = ({
-	index,
-	entityCode,
-	accMode,
-	setValue,
-	getGlCode,
-}) => {
+	index = 0,
+	entityCode = '',
+	accMode = '',
+	setValue = () => {},
+	getGlCode = () => {},
+}: any) => {
 	getGlCode({ index, entityCode, accMode, setValue });
 };
 
