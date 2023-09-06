@@ -1,7 +1,7 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
-import { isEmpty } from '@cogoport/utils';
-import { useRef } from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useRef, useState } from 'react';
 
 import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
 
@@ -24,6 +24,7 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const [confirmationModal, setConfirmationModal] = useState(false);
 	const { options, allCommodity } = useGetCommodityOptions({ task });
 
 	const {
@@ -75,7 +76,9 @@ function ExecuteStep({
 	});
 
 	const handleTaskSubmit = async () => {
-		if (isShipmentRolloverable && editBookingParams) {
+		if ('confirmation_key' in stepConfig && !confirmationModal) {
+			setConfirmationModal(true);
+		} else if (isShipmentRolloverable && editBookingParams) {
 			setIsLoading(true);
 
 			try {
@@ -140,6 +143,33 @@ function ExecuteStep({
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>
+
+			{confirmationModal && (
+				<Modal
+					size="md"
+					placement="top"
+					show={confirmationModal}
+					onClose={() => setConfirmationModal(false)}
+				>
+					<Modal.Header title={`Are you sure, You want to proceed with this 
+					${startCase(stepConfig?.confirmation_key)}`}
+					/>
+					<Modal.Footer>
+						<div className={styles.actions}>
+							<Button
+								themeType="secondary"
+								onClick={() => setConfirmationModal(false)}
+							>
+								No, Cancel
+							</Button>
+
+							<Button disabled={isLoading} onClick={handleTaskSubmit}>
+								Yes, Submit
+							</Button>
+						</div>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</div>
 	);
 }

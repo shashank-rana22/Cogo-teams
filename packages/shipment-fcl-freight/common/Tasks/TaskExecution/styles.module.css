@@ -29,3 +29,12 @@
 		}
 	}
 }
+
+.actions {
+	display: flex;
+	align-items: center;
+	
+	& > button:first-child {
+		margin-right: 12px;
+	}
+}
