@@ -24,7 +24,6 @@ const handleSetTdsZero = (updatedData = [], setUpdatedData = () => {}) => {
 	}));
 	setUpdatedData(UPDATED_DATA_WITH_ZERO_TDS);
 };
-
 export default function MatchModal({
 	matchModalShow = false, setMatchModalShow = () => {},
 	selectedData = [], filters = {}, setSelectedData = () => {},
@@ -44,7 +43,8 @@ export default function MatchModal({
 		checkData, postPaymentsSettlementCheck, checkLoading,
 		success, setSuccess,
 	} = usePaymentsSettlementCheck({ selectedData: updatedData, date });
-	const [checkedData, setCheckedData] = useState(checkData?.stackDetails);
+	const [canSettle, setCanSettle] = useState(checkData?.canSettle || false);
+	const [checkedData, setCheckedData] = useState(checkData?.stackDetails || []);
 	const dryRunData = (dryRun ? (checkData?.stackDetails) : []);
 	const {
 		jvListRefetch,
@@ -59,6 +59,7 @@ export default function MatchModal({
 	};
 	const onOuterClick = () => {
 		setShowDocument(false);
+		setFileValue({});
 	};
 	const handleDryRunClick = async () => {
 		setDryRun(true);
@@ -77,10 +78,12 @@ export default function MatchModal({
 		if (selectedData.length === ZERO_VALUE) {
 			setMatchModalShow(false);
 		}
-	}, [selectedData, setMatchModalShow]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedData]);
 
 	useEffect(() => {
 		setCheckedData(checkData?.stackDetails || []);
+		setCanSettle(checkData?.canSettle || false);
 	}, [checkData]);
 
 	useEffect(() => {
@@ -89,15 +92,16 @@ export default function MatchModal({
 		} else {
 			setSuccess(true);
 		}
-	}, [checkedData, success, setSuccess, setUpdatedData, updatedData]);
+		//  eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [checkedData]);
 
 	const handleRefreshClick = async () => {
 		setDryRun(false);
 		setCheckedData([]);
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
+		setCanSettle(false);
 	};
 	const LINE_ITEMS = getLineItems(filters, updateBal);
-
 	return (
 		<div>
 			<Modal
@@ -146,6 +150,7 @@ export default function MatchModal({
 					className={styles.btn}
 					onClick={() => { handleSetTdsZero(updatedData, setUpdatedData); }}
 					themeType="secondary"
+					disabled={dryRun}
 				>
 					Set TDS Zero
 				</Button>
@@ -174,6 +179,7 @@ export default function MatchModal({
 					className={styles.btn}
 					themeType="secondary"
 					onClick={() => setShowJV(true)}
+					disabled={dryRun}
 				>
 					CREATE JV
 				</Button>
@@ -236,7 +242,7 @@ export default function MatchModal({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						disabled={!(checkData?.canSettle) || !dryRun || settleLoading}
+						disabled={!canSettle || !dryRun || settleLoading}
 						onClick={() => submitSettleMatch({ updatedData, date, fileValue })}
 					>
 						Settle

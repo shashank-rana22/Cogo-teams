@@ -105,14 +105,14 @@ const useGetDocumentList = ({
 			toastApiError(error);
 		}
 	};
-	const submitSettleMatch = async ({ updatedData, date:settleDate, fileValue }) => {
+	const submitSettleMatch = async ({ updatedData = [], date:settleDate = '', fileValue = {} }) => {
 		try {
 			const response = await settleTrigger({
 				data: {
 					stackDetails     : updatedData,
 					settlementDate   : getFormatDates(settleDate) || undefined,
 					createdBy        : profile?.user?.id,
-					supportingDocUrl : fileValue,
+					supportingDocUrl : fileValue?.finalUrl,
 				},
 			});
 			if (response?.hasError) return;

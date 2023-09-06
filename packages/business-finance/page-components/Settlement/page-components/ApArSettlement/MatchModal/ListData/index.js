@@ -37,7 +37,6 @@ export default function ListData({
 		NEW_CARDS_DATA.splice(targetIndex, ZERO_INDEX, draggedItem);
 		setUpdatedData(NEW_CARDS_DATA);
 	};
-
 	return (
 		<div>
 			<CardHeader />
@@ -54,7 +53,6 @@ export default function ListData({
 							))}
 						</div>
 					)
-
 					: updatedData?.map((tile, index) => (
 						<div
 							key={tile.id}
