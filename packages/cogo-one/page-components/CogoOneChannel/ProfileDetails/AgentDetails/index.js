@@ -118,7 +118,7 @@ function AgentDetails({
 		},
 	};
 
-	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
+	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab] || {};
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
 		sender,

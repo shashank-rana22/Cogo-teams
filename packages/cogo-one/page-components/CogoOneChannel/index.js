@@ -39,7 +39,7 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab               : 'message',
+		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
 		subTab            : 'all',
 		hasNoFireBaseRoom : false,
 		expandSideBar     : false,
@@ -109,7 +109,12 @@ function CogoOne() {
 	};
 
 	const commonProps = {
-		setSendBulkTemplates, preferenceLoading, setActiveTab, selectedAutoAssign, setAutoAssignChats,
+		setSendBulkTemplates,
+		preferenceLoading,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
+		queryAssignedChat: assigned_chat,
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
