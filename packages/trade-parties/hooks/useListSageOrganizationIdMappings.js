@@ -34,7 +34,7 @@ const useListSageOrganizationIdMappings = ({ id }) => {
 	);
 	const apiTrigger = useCallback(async () => {
 		try {
-			const res = await trigger({});
+			const res = await trigger();
 
 			if (res.data?.total === ZERO) {
 				setData(DUMMY_LIST_DATA);
@@ -51,6 +51,6 @@ const useListSageOrganizationIdMappings = ({ id }) => {
 		apiTrigger();
 	}, [apiTrigger]);
 
-	return { data, loading };
+	return { data, loading, trigger };
 };
 export default useListSageOrganizationIdMappings;
