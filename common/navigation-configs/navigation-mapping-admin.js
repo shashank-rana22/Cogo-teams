@@ -227,6 +227,19 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis   : ['list_organizations'],
 			module_type : 'crm',
 		},
+		governance_manager: {
+			key           : 'governance_manager',
+			title         : 'Governance Manager',
+			href          : '/v2/governance-manager',
+			as            : '/v2/governance-manager',
+			type          : 'link',
+			icon          : IcMCrm,
+			possible_apis : [
+				...apis.governance_manager,
+			],
+			main_apis   : [],
+			module_type : 'crm',
+		},
 		support_crm: {
 			key           : 'support_crm',
 			title         : t('common:support_crm'),

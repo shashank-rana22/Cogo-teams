@@ -25,6 +25,7 @@ import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
 import ftl_field_service_ops_apis from './ftl_field_service_ops_app_apis';
+import governance_manager from './governance-manager-apis';
 import HRMS from './hrms-apis';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
@@ -164,6 +165,7 @@ const apis = {
 	sales_invoice,
 	...saas_subscription,
 	...chakravyuh,
+	governance_manager,
 	risk_management,
 	ftl_field_service_ops_apis,
 	...schedules,

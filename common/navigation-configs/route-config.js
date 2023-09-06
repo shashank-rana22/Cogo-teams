@@ -28,6 +28,7 @@ import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
+import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
@@ -139,6 +140,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...governanceManager,
 	...byodDashboard,
 	...employeeDashboard,
 	...managerDashboard,
