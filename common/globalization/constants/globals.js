@@ -709,7 +709,8 @@ const GLOBAL_CONSTANTS = {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',
 	},
-	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+	days                       : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+	default_preferred_language : 'english',
 };
 
 export default GLOBAL_CONSTANTS;
