@@ -78,8 +78,9 @@ const useLoginAuthenticate = () => {
 			await router.push(`${redirectPath}`);
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
+			const replaceAs = configs?.as?.replace('/v2', '');
 
-			window.location.href = `/${profile?.partner?.id}${replaceHref || EMPTY_PATH}`;
+			await router.push(replaceHref, replaceAs);
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
