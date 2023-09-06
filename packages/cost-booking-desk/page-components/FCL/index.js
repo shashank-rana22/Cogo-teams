@@ -1,17 +1,21 @@
+import { useContext } from 'react';
+
 import AppliedFilters from '../../common/AppliedFilters';
 import CriticalAndSearch from '../../common/CriticalAndSearch';
 import DeskTabs from '../../common/DeskTabs';
 import Filters from '../../common/Filters';
-import Loader from '../../common/Loader';
 import Stepper from '../../common/Stepper';
 import StepperTabs from '../../common/StepperTabs';
-import useListCostBookingDeskShipments from '../../hooks/useListCostBookingDeskShipments';
+import CostBookingDeskContext from '../../context/CostBookingDeskContext';
 
+import PurchaseList from './PurchaseList';
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
+const SECURITY_DEPOSIT_TAB = 'security_deposit';
+
 function FclFreight() {
-	const { loading, data } = useListCostBookingDeskShipments();
+	const { activeTab } = useContext(CostBookingDeskContext);
 
 	return (
 		<div>
@@ -28,23 +32,14 @@ function FclFreight() {
 			<div className={styles.search_and_tab}>
 				<StepperTabs />
 
-				<CriticalAndSearch />
+				{activeTab !== SECURITY_DEPOSIT_TAB ? <CriticalAndSearch /> : null}
 			</div>
 
 			<div className={styles.desk_tabs}>
 				<DeskTabs />
 			</div>
 
-			<div>
-				{loading ? (
-					<Loader />
-				) : (
-					<ShipmentList
-						data={data}
-						loading={loading}
-					/>
-				)}
-			</div>
+			{activeTab === SECURITY_DEPOSIT_TAB ? <PurchaseList /> : <ShipmentList />}
 		</div>
 	);
 }

@@ -23,7 +23,12 @@ interface Props {
 	row?:object,
 }
 
-function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetch, isEditable = true, row }:Props) {
+function AdvanceSecurityDepositRefund({
+	advanceSecurityDepositRefund = {},
+	id = '',
+	refetch = () => {},
+	isEditable = true, row = {},
+}:Props) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
@@ -35,6 +40,7 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 		remarkValue,
 		t,
 	});
+
 	return (
 		<div>
 			<div>

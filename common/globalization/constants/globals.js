@@ -88,16 +88,17 @@ const GLOBAL_CONSTANTS = {
 			'MMM dd yyyy'       : 'MMM dd yyyy',
 		},
 		time: {
-			'hh:mm aaa' : 'hh:mm aaa',
-			'HH:mm'     : 'HH:mm',
-			'hh:mm:ss'  : 'hh:mm:ss',
-			'hh aaa'    : 'hh aaa',
-			'HH:mm:ss'  : 'HH:mm:ss',
-			'HH:mm a'   : 'HH:mm a',
-			hh          : 'hh',
-			HH          : 'HH',
-			mm          : 'mm',
-			a           : 'a',
+			'hh:mm aaa'    : 'hh:mm aaa',
+			'HH:mm'        : 'HH:mm',
+			'hh:mm:ss'     : 'hh:mm:ss',
+			'hh aaa'       : 'hh aaa',
+			'HH:mm:ss'     : 'HH:mm:ss',
+			'HH:mm:ss aaa' : 'HH:mm:ss aaa',
+			'HH:mm a'      : 'HH:mm a',
+			hh             : 'hh',
+			HH             : 'HH',
+			mm             : 'mm',
+			a              : 'a',
 		},
 	},
 	payment_url: {
@@ -604,6 +605,7 @@ const GLOBAL_CONSTANTS = {
 			orissa_metaliks  : 'AAACO8663L',
 			varun_beverages  : 'AAACV2678L',
 		},
+		ftl_disable_backdate_date: '2023-06-13T00:00:00',
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
@@ -719,7 +721,8 @@ const GLOBAL_CONSTANTS = {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',
 	},
-	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+	days                       : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+	default_preferred_language : 'english',
 };
 
 export default GLOBAL_CONSTANTS;

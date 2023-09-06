@@ -1775,6 +1775,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'send_invoice_combination_to_finance',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'list_trucks',
 		access_type  : 'public',
 		service_name : 'fcl_freight_rate',
@@ -1783,6 +1788,10 @@ const apis = [
 		api          : 'incident',
 		access_type  : 'private',
 		service_name : 'incident-management',
+	},
+	{
+		api         : 'post_purchase_advance_document',
+		access_type : 'private',
 	},
 ];
 
