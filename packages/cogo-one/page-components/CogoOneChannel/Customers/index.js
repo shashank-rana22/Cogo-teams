@@ -47,7 +47,6 @@ function Customers({
 	autoAssignChats = {},
 	setAutoAssignChats = () => {},
 	preferenceLoading = false,
-	queryAssignedChat = '',
 }) {
 	const {
 		userEmailAddress = '',
@@ -131,11 +130,10 @@ function Customers({
 		if (!chatTabsActive?.includes(activeTab?.tab) && viewType) {
 			setActiveTab((prev) => ({
 				...prev,
-				tab: chatTabsActive?.includes(prev?.tab)
-					? prev?.tab : chatTabsActive[GLOBAL_CONSTANTS.zeroth_index] || 'message',
+				tab: chatTabsActive?.[GLOBAL_CONSTANTS.zeroth_index] || 'message',
 			}));
 		}
-	}, [activeTab?.tab, setActiveTab, viewType, queryAssignedChat]);
+	}, [activeTab?.tab, setActiveTab, viewType]);
 
 	return (
 		<div
