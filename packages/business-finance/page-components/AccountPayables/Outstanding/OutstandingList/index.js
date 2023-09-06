@@ -81,7 +81,10 @@ function OutstandingList({
 		},
 	};
 
-	const { generateInvoice = () => {}, loading: generating = false } = useGetDownloadReport({ organizationId });
+	const { generateInvoice = () => {}, loading: generating = false } = useGetDownloadReport({
+		globalFilters:
+			{ organizationId },
+	});
 
 	return (
 		<div
