@@ -13,7 +13,7 @@ function UploadDocument({ singleItem = {}, setInvoiceData = () => {} }) {
 					file_name     : 'Checklist Document',
 					document_url  : uploadDocument,
 					document_type : 'checklist',
-					data          : [{ ...itemData, checklist_document_url: uploadDocument }],
+					data          : { ...itemData, checklist_document_url: uploadDocument },
 				}]);
 		}
 	}, [setInvoiceData, singleItem?.data, singleItem?.document_url, uploadDocument]);

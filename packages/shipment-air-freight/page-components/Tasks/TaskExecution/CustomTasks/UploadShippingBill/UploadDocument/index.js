@@ -17,7 +17,7 @@ function UploadDocument({ singleItem = {}, invoiceData = [], setInvoiceData = ()
 					const updatedItems = [...prev];
 					updatedItems[index] = {
 						id,
-						data          : [{ ...itemData, shipping_bill_number: shippingBillValue }],
+						data          : { ...itemData, shipping_bill_number: shippingBillValue },
 						document_type : 'shipping_bill',
 					};
 					return [...updatedItems];
@@ -26,7 +26,7 @@ function UploadDocument({ singleItem = {}, invoiceData = [], setInvoiceData = ()
 				setInvoiceData((prev) => [...prev,
 					{
 						id,
-						data          : [{ ...itemData, shipping_bill_number: shippingBillValue }],
+						data          : { ...itemData, shipping_bill_number: shippingBillValue },
 						document_type : 'shipping_bill',
 					}]);
 			}

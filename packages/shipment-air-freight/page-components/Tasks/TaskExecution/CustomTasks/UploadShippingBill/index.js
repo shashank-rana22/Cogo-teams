@@ -6,7 +6,7 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useListShipmentDocuments from '../../../../../hooks/useListShipmentDocuments';
-import useUpdateTask from '../../../../../hooks/useUpdateTask';
+import useUpdateShipmentSbNumbers from '../../../../../hooks/useUpdateShipmentSbNumbers';
 
 import { uploadChecklistFields } from './configs/upload-checklist-fields';
 import styles from './styles.module.css';
@@ -27,7 +27,7 @@ function UploadShippingBill({ shipment_data = {}, refetch = () => {}, onCancel =
 		defaultParams  : { page_limit: 100 },
 	});
 
-	const { loading:updateLoading, apiTrigger } = useUpdateTask({ refetch });
+	const { loading:updateLoading, apiTrigger } = useUpdateShipmentSbNumbers({ refetch });
 
 	const handleClickOnDownload = (documentUrl) => {
 		if (typeof window !== 'undefined') {
@@ -89,7 +89,7 @@ function UploadShippingBill({ shipment_data = {}, refetch = () => {}, onCancel =
 		if (payload?.document_data?.length !== data?.total_count) {
 			Toast.error('Please fill all the details');
 		} else {
-			apiTrigger(payload).then(() => {
+			apiTrigger({ payload }).then(() => {
 				onCancel();
 			});
 		}
