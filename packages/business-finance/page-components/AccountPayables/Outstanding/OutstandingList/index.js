@@ -81,7 +81,7 @@ function OutstandingList({
 		},
 	};
 
-	const { generateInvoice = () => { }, loading: generating = false } = useGetDownloadReport({});
+	const { generateInvoice = () => {}, loading: generating = false } = useGetDownloadReport({ organizationId });
 
 	return (
 		<div
