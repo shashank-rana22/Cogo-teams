@@ -16,6 +16,10 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 	toWhomToSendForApproval      : ['LEVEL_1', 'LEVEL_2'],
 	incidentApprovalManagementId : 'Yg',
 	createdBy                    : user_id,
+	source                       : 'SHIPMENT',
+	organization                 : {
+		businessName: shipmentData?.importer_exporter?.business_name,
+	},
 });
 
 const useIncidentReOpenJob = ({
@@ -29,7 +33,7 @@ const useIncidentReOpenJob = ({
 	const [{ loading = false }, trigger] = useRequestBf({
 		url     : '/incident-management/incident',
 		method  : 'POST',
-		authKey : '',
+		authKey : 'post_incident_management_incident',
 	}, { manual: true });
 
 	const onReOpenJob = async (values) => {

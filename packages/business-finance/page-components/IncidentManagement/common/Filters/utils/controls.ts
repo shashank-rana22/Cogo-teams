@@ -54,6 +54,10 @@ export const requestControls = ({ t = () => {}, isSettlementExecutive = false }:
 				value : 'OVERHEAD_APPROVAL',
 				label : t('incidentManagement:expense_approval'),
 			},
+			{
+				value : 'JOB_OPEN',
+				label : t('incidentManagement:job_open_label'),
+			},
 		];
 	}
 

@@ -36,7 +36,6 @@ function HandleRaiseContainer({
 	alarmId = '',
 	setAlarmId = () => { },
 	isGettingShipment = false,
-	setReOpenJobModal = () => { },
 }) {
 	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
 
@@ -48,23 +47,6 @@ function HandleRaiseContainer({
 					setAlarmId={setAlarmId}
 					loading={isGettingShipment}
 				/>
-			</div>
-		);
-	}
-
-	// TODO (anmol): Job Closed Div
-	if (shipment_data?.is_job_closed) {
-		return (
-			<div className={styles.job_closed_container}>
-				<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
-				<Button
-					className={styles.job_undo_button}
-					themeType="link"
-					size="md"
-					onClick={() => setReOpenJobModal(true)}
-				>
-					Undo
-				</Button>
 			</div>
 		);
 	}
@@ -150,19 +132,34 @@ function DefaultView() {
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
+					{shipment_data?.is_job_closed ? (
+						<div className={styles.job_closed_container}>
+							<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
+							<Button
+								className={styles.job_undo_button}
+								themeType="link"
+								size="md"
+								onClick={() => setReOpenJobModal(true)}
+							>
+								Undo
+							</Button>
+						</div>
+					) : null}
+
 					<Toggle
 						size="md"
 						onLabel="Old"
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
+
 					<HandleRaiseContainer
 						shipment_data={shipment_data}
 						alarmId={alarmId}
 						setAlarmId={setAlarmId}
 						isGettingShipment={isGettingShipment}
-						setReOpenJobModal={setReOpenJobModal}
 					/>
+
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
