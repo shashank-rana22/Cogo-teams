@@ -1,7 +1,7 @@
 const getControls = ({
-	orgId = '', title = '',
-	userId = '',
+	title = '',
 	mobileNumber = '',
+	mobileCountryCode = '',
 }) => ({
 	feedbackType: {
 		name    : 'title',
@@ -44,11 +44,8 @@ const getControls = ({
 		asyncKey    : 'list_user_shipments',
 		placeholder : 'Select SID',
 		params      : {
-			filters: {
-				importer_exporter_id : orgId || undefined,
-				user_id              : (!orgId && userId) ? userId : undefined,
-				mobileNumber         : (!orgId && !userId && mobileNumber) ? mobileNumber : undefined,
-			},
+			mobile_country_code : mobileCountryCode,
+			mobile_number       : mobileNumber,
 		},
 	},
 	feedbackDesc: {

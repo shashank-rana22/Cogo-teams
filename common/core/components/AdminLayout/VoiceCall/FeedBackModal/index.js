@@ -12,9 +12,11 @@ function FeedbackModal({
 	loggedInAgentId = '',
 	callStartAt = '',
 	callEndAt = '',
+	callRecordId = '',
 }) {
-	const { organization_id = '', user_id = '', mobile_number = '' } = receiverUserDetails || {};
+	const { mobile_number = '', mobile_country_code = '' } = receiverUserDetails || {};
 	const { handleSubmit, control, formState: { errors }, watch } = useForm();
+
 	const {
 		createCommunicationLog,
 		loading,
@@ -24,6 +26,7 @@ function FeedbackModal({
 		loggedInAgentId,
 		callStartAt,
 		callEndAt,
+		callRecordId,
 	});
 
 	const formValues = watch();
@@ -31,9 +34,8 @@ function FeedbackModal({
 	const { title = '' } = formValues || {};
 
 	const { feedbackType, feedbackDesc, sid } = getControls({
-		orgId        : organization_id,
-		userId       : user_id,
-		mobileNumber : mobile_number,
+		mobileCountryCode : mobile_country_code,
+		mobileNumber      : mobile_number,
 		title,
 	});
 

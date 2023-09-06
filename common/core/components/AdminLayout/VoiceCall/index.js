@@ -143,6 +143,7 @@ function VoiceCall({ firestore = {} }) {
 					loggedInAgentId={loggedInAgentId}
 					callStartAt={callStartAt}
 					callEndAt={callEndAt}
+					callRecordId={callRecordId}
 				/>
 			)}
 

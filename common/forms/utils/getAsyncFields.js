@@ -918,7 +918,7 @@ function asyncListUserShipments() {
 	return {
 		labelKey    : 'serial_id',
 		valueKey    : 'serial_id',
-		endpoint    : 'list-shipment-feedback',
+		endpoint    : '/list_shipments_on_feedback',
 		initialCall : true,
 		params      : {
 			filters: {
