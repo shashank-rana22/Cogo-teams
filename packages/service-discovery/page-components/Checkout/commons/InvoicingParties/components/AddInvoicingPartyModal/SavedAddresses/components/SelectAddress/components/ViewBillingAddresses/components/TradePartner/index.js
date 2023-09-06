@@ -109,7 +109,10 @@ function TradePartner({
 							}}
 							className={cl`${styles.main_container} ${
 								value.includes(id) && styles.active
-							} ${disabledIds.includes(id) && styles.disabled}`}
+							} ${
+								(disabledIds.includes(id)
+								|| ['rejected', 'pending'].includes(verification_status)) && styles.disabled
+							}`}
 						>
 							<div className={styles.address_container}>
 								<div className={styles.text}>{address}</div>

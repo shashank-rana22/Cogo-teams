@@ -46,6 +46,7 @@ function ViewBillingAddresses({
 
 		list.forEach((item, index) => {
 			const BILLING_ADDRESSES = [];
+
 			(item.billing_addresses || []).forEach((billingAddress) => {
 				const {
 					id = '',
