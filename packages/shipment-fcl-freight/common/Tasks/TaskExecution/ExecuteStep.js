@@ -26,6 +26,9 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const [showApprovalModal, setShowApprovalModal] = useState(false);
+	const [approvalChanges, setApprovalChanges] = useState({});
+
 	const { options, allCommodity } = useGetCommodityOptions({ task });
 
 	const {
@@ -49,8 +52,6 @@ function ExecuteStep({
 	const { editBookingParams } = showElements || {};
 
 	const editParams = useRef(null);
-	const [showApprovalModal, setShowApprovalModal] = useState(false);
-	const [approvalChanges, setApprovalChanges] = useState({});
 
 	const { state = '', service_type = '', task: taskName = '' } = task;
 
