@@ -10,8 +10,6 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentSellerBankDetail = {},
 		advanceDocumentId = '',
 		shipmentType = '',
-		serviceProvider = '',
-		jobNumber = '',
 	} = data || {};
 
 	const { accountNumber = '', bankName = '' } = advanceDocumentSellerBankDetail || {};
@@ -46,8 +44,6 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentId,
 		paymentDocUrl     : upload?.finalUrl || upload,
 		serviceType       : shipmentType?.toUpperCase(),
-		serviceProvider,
-		jobNumber,
 		createdBy         : user_id,
 		updatedBy         : user_id,
 	};
