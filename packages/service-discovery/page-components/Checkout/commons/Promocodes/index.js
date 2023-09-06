@@ -11,6 +11,7 @@ function Promocodes({ checkout_id = '', refetch = () => {}, promotions = [] }) {
 	);
 
 	const [showCoupons, setShowCoupons] = useState(false);
+	const [disableCursor, setDisableCursor] = useState('');
 
 	const [isCouponApplied, setCouponApplied] = useState(
 		appliedPromotion?.id !== undefined,
@@ -22,6 +23,10 @@ function Promocodes({ checkout_id = '', refetch = () => {}, promotions = [] }) {
 				isCouponApplied={isCouponApplied}
 				setShowCoupons={setShowCoupons}
 				promotion={appliedPromotion}
+				setCouponApplied={setCouponApplied}
+				checkout_id={checkout_id}
+				refetch={refetch}
+				setDisableCursor={setDisableCursor}
 			/>
 
 			<ApplyCoupoun
@@ -37,6 +42,8 @@ function Promocodes({ checkout_id = '', refetch = () => {}, promotions = [] }) {
 				appliedPromotion={appliedPromotion}
 				isCouponApplied={isCouponApplied}
 				showCoupons={showCoupons}
+				disableCursor={disableCursor}
+				setDisableCursor={setDisableCursor}
 			/>
 		</div>
 	);

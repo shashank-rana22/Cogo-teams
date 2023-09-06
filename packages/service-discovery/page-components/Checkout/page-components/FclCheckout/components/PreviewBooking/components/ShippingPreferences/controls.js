@@ -17,7 +17,7 @@ const getControls = ({ search_id = '' }) => [
 		styles: { flexBasis: '24%', paddingRight: '40px' },
 	},
 	{
-		label                 : 'Select Date Range',
+		label                 : 'Select Sailing Date Range',
 		name                  : 'sailing_range',
 		type                  : 'date-picker',
 		placeholder           : 'Sailing Week',
