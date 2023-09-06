@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useHandleAdditionalContent = ({
@@ -19,11 +20,7 @@ const useHandleAdditionalContent = ({
 
 	const { services: rateServices = {}, source: rateSource = '' } = rate || {};
 
-	const {
-		id = '',
-		primary_service = '',
-		services = {},
-	} = detail;
+	const { id = '', primary_service = '', services = {} } = detail;
 
 	const {
 		cargo_readiness_date = '',
@@ -49,6 +46,9 @@ const useHandleAdditionalContent = ({
 			sailing_range = {},
 			max_price,
 			min_price,
+			preferred_shipping_line_ids = [],
+			unpreferred_shipping_lines = [],
+			price_currency = '',
 			...restValues
 		} = getValues();
 
@@ -88,8 +88,16 @@ const useHandleAdditionalContent = ({
 								sailing_end_date            : endDate || undefined,
 								min_price                   : Number(min_price) || undefined,
 								max_price                   : Number(max_price) || undefined,
+								preferred_shipping_line_ids : !isEmpty(preferred_shipping_line_ids)
+									? preferred_shipping_line_ids
+									: undefined,
+								unpreferred_shipping_lines: !isEmpty(unpreferred_shipping_lines)
+									? unpreferred_shipping_lines
+									: undefined,
+								price_currency              : price_currency || undefined,
 								...restValues,
 								agreed_for_partial_shipment : undefined,
+								preferred_shipping_lines    : undefined,
 							},
 						}),
 					),
@@ -146,7 +154,10 @@ const useHandleAdditionalContent = ({
 			},
 		});
 
-		await updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
+		await updateCheckout({
+			values          : { id, state: 'save_for_later' },
+			refetchRequired : false,
+		});
 
 		push('/service-discovery?activeTab=saved_for_later');
 	};

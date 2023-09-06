@@ -16,18 +16,30 @@ import UnpreferredShippingLines from '../UnpreferredShippingLines';
 import styles from './styles.module.css';
 import useHandleAdditionalContent from './useHandleAdditionalContent';
 
+const INITIAL_VALUE = 0;
+
 function ActiveComponent({
 	formProps = {},
 	primaryService = {},
 	search_id = '',
 	updateLoading = false,
 	source = '',
+	services = {},
+	primary_service = '',
 }) {
+	const primaryServicesArray = Object.values(services).filter((item) => item.service_type === primary_service);
+
+	const totalContainerCount = primaryServicesArray.reduce(
+		(acc, { containers_count }) => acc + containers_count,
+		INITIAL_VALUE,
+	);
+
 	if (source === 'cogo_assured_rate') {
 		return (
 			<UnpreferredShippingLines
 				formProps={formProps}
 				primaryService={primaryService}
+				totalContainerCount={totalContainerCount}
 			/>
 		);
 	}
@@ -38,6 +50,7 @@ function ActiveComponent({
 			primaryService={primaryService}
 			search_id={search_id}
 			updateLoading={updateLoading}
+			totalContainerCount={totalContainerCount}
 		/>
 	);
 }
@@ -96,6 +109,8 @@ function AdditionalContent({
 				search_id={search_id}
 				updateLoading={updateLoading}
 				source={source}
+				services={services}
+				primary_service={primary_service}
 			/>
 
 			<AdditionalServices

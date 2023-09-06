@@ -7,6 +7,9 @@ import getElementController from '../../../../../../commons/forms/getElementCont
 import getControls from './controls';
 import styles from './styles.module.css';
 
+const MIN_CONTAINER_COUNT_FOR_PARTIAL_SHIPMENT = 2;
+const ONE = 1;
+
 function ShippingLineLabel({
 	label = '',
 	name = '',
@@ -39,6 +42,7 @@ function ShippingPreferences({
 	primaryService = {},
 	search_id = '',
 	updateLoading = false,
+	totalContainerCount = 1,
 }) {
 	const {
 		control,
@@ -145,25 +149,28 @@ function ShippingPreferences({
 
 			</div>
 
-			<div className={styles.partial_load}>
-				In some rare occasion, we may break the shipment and
-				send via different ships, is that okay with you?
+			{totalContainerCount >= MIN_CONTAINER_COUNT_FOR_PARTIAL_SHIPMENT ? (
+				<div className={styles.partial_load}>
+					In some rare occasion, we may break the shipment and
+					send via different ships, is that okay with you?
 
-				<ChipsController
-					style={{ marginLeft: '12px' }}
-					control={control}
-					name="agreed_for_partial_shipment"
-					type="chips"
-					options={[
-						{ value: 'no', label: 'No' },
-						{ value: 'yes', label: 'Yes' },
-					]}
-					size="lg"
-					enableMultiSelect={false}
-				/>
-			</div>
+					<ChipsController
+						style={{ marginLeft: '12px' }}
+						control={control}
+						name="agreed_for_partial_shipment"
+						type="chips"
+						options={[
+							{ value: 'no', label: 'No' },
+							{ value: 'yes', label: 'Yes' },
+						]}
+						size="lg"
+						enableMultiSelect={false}
+					/>
+				</div>
+			) : null}
 
-			{agreedForPartialShipmentWatch === 'yes' && (
+			{agreedForPartialShipmentWatch === 'yes'
+			&& totalContainerCount >= MIN_CONTAINER_COUNT_FOR_PARTIAL_SHIPMENT && (
 				<div className={styles.partial_load} style={{ marginTop: '16px' }}>
 					How many minimum containers would you like to ship in one go?
 
@@ -172,6 +179,8 @@ function ShippingPreferences({
 						control={control}
 						name="partial_shipment_min_limit"
 						size="sm"
+						max={totalContainerCount - ONE}
+						min={1}
 					/>
 				</div>
 			)}

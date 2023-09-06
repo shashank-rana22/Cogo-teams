@@ -1,7 +1,11 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Pill, cl } from '@cogoport/components';
 import { isEmpty, upperCase } from '@cogoport/utils';
 
+import { fclIncoTerms } from '../configs';
 import useUpdateCheckoutIncoTerm from '../hooks/useUpdateCheckoutIncoTerm';
+
+import iconsMapping from './icons-mapping';
+import styles from './styles.module.css';
 
 function ChangeIncoTermModal({
 	incoTermModalData = {},
@@ -10,12 +14,38 @@ function ChangeIncoTermModal({
 	getCheckout = () => {},
 	incoterm = '',
 	checkout_id = '',
+	service_details = {},
 }) {
+	const { selectedValue } = incoTermModalData;
 	const { updateCheckoutIncoTerm, loading } = useUpdateCheckoutIncoTerm({
 		getCheckout,
 		setIncoTermModalData,
 		checkout_id,
 	});
+
+	const addedServices = Object.values(service_details).map(({ trade_type = '', service_type = '' }) => {
+		if (!trade_type) {
+			return service_type;
+		}
+
+		return `${trade_type}_${service_type}`;
+	});
+
+	const madatoryServicesForNextIncoTrem = fclIncoTerms.filter(
+		({ inco_terms = [], mandatory = false }) => inco_terms.includes(selectedValue) && mandatory,
+	);
+
+	const servicesToAdd = madatoryServicesForNextIncoTrem.filter((item) => !addedServices.includes(item.name));
+
+	const servicesToDelete = addedServices.filter((item) => {
+		const incoTermObject = fclIncoTerms.find(({ name }) => name === item);
+
+		const { inco_terms = [] } = incoTermObject;
+
+		return !inco_terms.includes(selectedValue);
+	}).map((item) => fclIncoTerms.find((incoTerm) => incoTerm.name === item));
+
+	console.log('fclIncoTerms', fclIncoTerms);
 
 	return (
 		<Modal
@@ -32,10 +62,42 @@ function ChangeIncoTermModal({
 					{' '}
 					to
 					{' '}
-					<b>{upperCase(incoTermModalData?.selectedValue)}</b>
-					. As a result, we will remove services( if any) that are not applicable for this incoterm.
-					If you want to keep the same services, please leave the Incoterm unchanged
+					<b>{upperCase(selectedValue)}</b>
+					. As a result, we will add or remove services( if any).
+					If you want to continue with the same services, please leave the Incoterm unchanged.
 				</div>
+
+				{!isEmpty(servicesToAdd) ? (
+					<div className={cl`${styles.service_type} ${styles.add}`}>
+						<div className={styles.title}>The following services will be added: </div>
+
+						{servicesToAdd.map(({ title, name, service_type = '' }) => (
+							<Pill
+								key={name}
+								size="md"
+								prefix={iconsMapping[service_type]}
+							>
+								<div style={{ color: '#849e4c' }}>{title}</div>
+							</Pill>
+						))}
+					</div>
+				) : null}
+
+				{!isEmpty(servicesToDelete) ? (
+					<div className={styles.service_type}>
+						<div className={styles.title}>The following services will be deleted: </div>
+
+						{servicesToDelete.map(({ title, name, service_type = '' }) => (
+							<Pill
+								key={name}
+								size="md"
+								prefix={iconsMapping[service_type]}
+							>
+								<div style={{ color: '#ee3425' }}>{title}</div>
+							</Pill>
+						))}
+					</div>
+				) : null}
 			</Modal.Body>
 
 			<Modal.Footer>
@@ -46,14 +108,14 @@ function ChangeIncoTermModal({
 					style={{ marginRight: '12px' }}
 					themeType="secondary"
 				>
-					Cancel
+					Don&apos;t Change
 				</Button>
 
 				<Button
 					type="button"
 					loading={loading || searchLoading}
 					onClick={() => updateCheckoutIncoTerm({
-						inco_term: incoTermModalData?.selectedValue,
+						inco_term: selectedValue,
 					})}
 					themeType="accent"
 				>
