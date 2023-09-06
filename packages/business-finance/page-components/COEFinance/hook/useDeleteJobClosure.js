@@ -12,7 +12,7 @@ const useDeleteJobClosure = ({ refetch = () => {}, setDeleteModal = () => {} }) 
 	const apiTrigger = async (params) => {
 		try {
 			await trigger({ params, data: {} });
-			Toast.success('mayank success');
+			Toast.success('success');
 			setDeleteModal(false);
 			refetch();
 		} catch (err) {
