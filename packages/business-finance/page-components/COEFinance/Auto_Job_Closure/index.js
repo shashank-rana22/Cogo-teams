@@ -30,17 +30,17 @@ function AutoJobClosure() {
 
 		let temparr = {};
 		list.forEach((obj) => {
-			const tempobj = {
+			const requiredObj = {
 				...obj,
 				level1 : obj.oprClosureDays,
 				level2 : obj.finClosureDays,
 			};
-			delete tempobj.oprClosureDays;
-			delete tempobj.finClosureDays;
-			const objid = tempobj.id;
-			delete tempobj.id;
+			delete requiredObj.oprClosureDays;
+			delete requiredObj.finClosureDays;
+			const objid = requiredObj.id;
+			delete requiredObj.id;
 
-			temparr = { ...temparr, [objid]: tempobj };
+			temparr = { ...temparr, [objid]: requiredObj };
 		});
 		setSaveObj(temparr);
 	}
