@@ -28,7 +28,7 @@ function AutoJobClosure() {
 		const arr = list.map((obj) => obj.id);
 		setOpenConfig([...arr]);
 
-		let temparr = {};
+		let listOfObj = {};
 		list.forEach((obj) => {
 			const requiredObj = {
 				...obj,
@@ -40,9 +40,9 @@ function AutoJobClosure() {
 			const objid = requiredObj.id;
 			delete requiredObj.id;
 
-			temparr = { ...temparr, [objid]: requiredObj };
+			listOfObj = { ...listOfObj, [objid]: requiredObj };
 		});
-		setSaveObj(temparr);
+		setSaveObj(listOfObj);
 	}
 	function cancelledClick() {
 		setConfigButton(true);

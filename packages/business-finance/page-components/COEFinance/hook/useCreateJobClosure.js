@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const useCreateJobClosure = ({ refetch = () => {}, setOpenModal = () => {} }) => {
-	const [trigger] = useRequestBf({
+	const [{ loading }, trigger] = useRequestBf({
 		url    : '/common/job/create-job-closure-rule',
 		method : 'POST',
 	}, { manual: true });
@@ -12,7 +12,7 @@ const useCreateJobClosure = ({ refetch = () => {}, setOpenModal = () => {} }) =>
 	const apiTrigger = async (params) => {
 		try {
 			await trigger({ data: params });
-			Toast.success('mayank success');
+			Toast.success('success');
 			setOpenModal(false);
 			refetch();
 		} catch (err) {
@@ -22,6 +22,7 @@ const useCreateJobClosure = ({ refetch = () => {}, setOpenModal = () => {} }) =>
 
 	return {
 		apiTrigger,
+		loading,
 	};
 };
 

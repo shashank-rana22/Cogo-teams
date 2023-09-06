@@ -1,8 +1,6 @@
 .col {
 	display: flex;
 	flex: var(--span);
-
-	/* padding: 10px; */
 }
 
 .header {

@@ -7,8 +7,6 @@
 .col {
 	display: flex;
 	flex: var(--span);
-
-	/* padding-left: 15px; */
 }
 
 .edit {
@@ -39,10 +37,6 @@
 	cursor: pointer;
 }
 
-.columnData {
-	/* padding-left: 20px; */
-}
-
 .bottomLine {
 	border-bottom: 1px solid #f3a95e;
 }
@@ -53,12 +47,9 @@
 
 .deleteBody {
 	height: 100%;
-
-	/* background-color: aqua; */
 }
 
 .deleteText {
-	/* background-color: #f68b21; */
 	margin-top: 60px;
 	font-size: 22px;
 	text-align: center;
