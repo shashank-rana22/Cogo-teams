@@ -147,18 +147,27 @@ function ShippingLineModal({
 				</div>
 
 				<div className={styles.footer}>
-					<Button type="button" onClick={onClose} themeType="secondary">Cancel</Button>
+					<img
+						src={GLOBAL_CONSTANTS.image_url.cogo_assured_banner}
+						alt="cogo assured logo"
+						className={styles.shipping_line_logo}
+						height={26}
+					/>
 
-					<Button
-						type="button"
-						onClick={() => router.push(
-							`/book/[spot_search_id]?rate_card_id=${selectedCard}`,
-							`/book/${router.query.spot_search_id}?rate_card_id=${selectedCard}`,
-						)}
-						style={{ marginLeft: '12px' }}
-					>
-						Proceed
-					</Button>
+					<div className={styles.button_container}>
+						<Button type="button" onClick={onClose} themeType="secondary">Cancel</Button>
+
+						<Button
+							type="button"
+							onClick={() => router.push(
+								`/book/[spot_search_id]?rate_card_id=${selectedCard}`,
+								`/book/${router.query.spot_search_id}?rate_card_id=${selectedCard}`,
+							)}
+							style={{ marginLeft: '12px' }}
+						>
+							Proceed
+						</Button>
+					</div>
 				</div>
 			</Modal.Body>
 		</Modal>

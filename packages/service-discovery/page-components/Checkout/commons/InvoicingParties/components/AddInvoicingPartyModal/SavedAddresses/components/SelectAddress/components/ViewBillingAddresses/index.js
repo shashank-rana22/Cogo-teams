@@ -105,18 +105,6 @@ function ViewBillingAddresses({
 		return <EmptyState />;
 	}
 
-	if (bookingType === 'self' && newList.some((item) => {
-		const { other_addresses, billing_addresses } = item;
-
-		return ((is_tax_applicable ? billing_addresses : other_addresses) || []).every((address) => {
-			const { tax_number = '' } = address;
-
-			return disabledInvoicingParties.includes(tax_number);
-		});
-	})) {
-		return <EmptyState />;
-	}
-
 	const ActiveComponent = MAPPING[bookingType];
 
 	return (
@@ -132,7 +120,6 @@ function ViewBillingAddresses({
 					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
 					setCurrentView={setCurrentView}
 					setActiveState={setActiveState}
-					disabledInvoicingParties={disabledInvoicingParties}
 				/>
 			))}
 		</>

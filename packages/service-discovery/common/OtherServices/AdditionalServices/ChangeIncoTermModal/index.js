@@ -22,7 +22,7 @@ function ChangeIncoTermModal({
 			show={!isEmpty(incoTermModalData)}
 			onClose={() => setIncoTermModalData({})}
 		>
-			<Modal.Header title="Add Line Item" />
+			<Modal.Header title="Change Inco Term" />
 
 			<Modal.Body>
 				<div>

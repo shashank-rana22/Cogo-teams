@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { useRef, useEffect, useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
@@ -24,32 +23,21 @@ function SubmitButton({ rate = {}, disabled = false }) {
 }
 
 function PreviewBookingFooter({
-	updateCheckout = () => {},
 	updateLoading = false,
 	isVeryRisky = false,
 	agreeTandC = false,
 	noRatesPresent = false,
 	updateCheckoutServiceLoading = false,
 	onClickNextButton = () => {},
+	onClickSaveForLater = () => {},
 }) {
-	const { push } = useRouter();
-
 	const { detail = {}, rate } = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
 
-	const { validity_end, id = '' } = detail;
+	const { validity_end } = detail;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
-
-	const onClickSaveForLater = () => {
-		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
-
-		push(
-			'/service-discovery',
-			'/service-discovery',
-		);
-	};
 
 	const disableButton = isVeryRisky || !agreeTandC || noRatesPresent
 		|| (detail?.importer_exporter?.kyc_status !== 'verified'

@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const MAX_INDEX_TO_SHOW = 3;
+const MIN_IPS_TO_DELETE_SERVICE = 2;
 
 function SelectedServicesInvoiceTo({
 	services = [],
@@ -11,11 +12,13 @@ function SelectedServicesInvoiceTo({
 	setEditInvoiceDetails = () => {},
 	editInvoiceDetails = {},
 	allServices = [],
+	length = 0,
 }) {
 	if (isEditMode) {
 		return (
-			<div>
+			<>
 				<div className={styles.label}>Select Services</div>
+
 				<MultiSelect
 					value={editInvoiceDetails.services.map((item) => item.service_id)}
 					onChange={(val) => {
@@ -27,9 +30,10 @@ function SelectedServicesInvoiceTo({
 					placeholder="Select Services"
 					options={allServices.map(({ label, service_id }) => ({ label, value: service_id }))}
 					isClearable
+					disabled={length < MIN_IPS_TO_DELETE_SERVICE}
 					style={{ width: '250px' }}
 				/>
-			</div>
+			</>
 		);
 	}
 

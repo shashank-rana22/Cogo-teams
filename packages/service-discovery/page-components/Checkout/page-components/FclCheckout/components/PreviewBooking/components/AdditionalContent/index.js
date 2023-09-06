@@ -72,6 +72,7 @@ function AdditionalContent({
 		updateCheckoutServiceLoading,
 		onClickNextButton,
 		noRatesPresent,
+		onClickSaveForLater,
 	} = useHandleAdditionalContent({
 		formProps,
 		updateCheckout,
@@ -155,7 +156,6 @@ function AdditionalContent({
 
 			<PreviewBookingFooter
 				detail={detail}
-				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				agreeTandC={agreeTandC}
 				cargoDetails={cargoDetails}
@@ -163,6 +163,7 @@ function AdditionalContent({
 				noRatesPresent={noRatesPresent}
 				updateCheckoutServiceLoading={updateCheckoutServiceLoading}
 				onClickNextButton={onClickNextButton}
+				onClickSaveForLater={onClickSaveForLater}
 			/>
 		</div>
 	);

@@ -10,7 +10,7 @@ function ServiceChargesTitle({
 }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.service_name}>{showTaxes ? 'Service Charges and Taxes' : 'Service Charges'}</div>
+			<div className={styles.service_name}>Bill Summary</div>
 
 			<div className={styles.flex}>
 				<div className={styles.price_display} style={{ marginRight: '8px' }}>
