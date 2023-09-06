@@ -1,6 +1,6 @@
 const performanceAndIncentives = {
-	'/[partner_id]/performance-and-incentives/incentive-plans': {
-		navigation : 'performance_and_incentives-incentive_plans',
+	'/[partner_id]/performance-and-incentives/plans': {
+		navigation : 'performance_and_incentives-plans',
 		isMainNav  : true,
 	},
 };

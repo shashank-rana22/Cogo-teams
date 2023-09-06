@@ -2,27 +2,27 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Agents from './components/Agents';
-import Plans from './components/Plans';
+import IncentivePlans from './components/IncentivePlans';
+import ScoringPlans from './components/ScoringPlans';
 import TAB_PANNEL_KEYS from './constants/tab-pannel-keys-mapping';
 import styles from './styles.module.css';
 
-const { INCENTIVE_PLANS, AGENTS } = TAB_PANNEL_KEYS;
+const { SCORING_PLANS, INCENTIVE_PLANS } = TAB_PANNEL_KEYS;
 
 const TAB_PANNEL_COMPONENT_MAPPING = {
+	[SCORING_PLANS]: {
+		name      : SCORING_PLANS,
+		title     : startCase(SCORING_PLANS),
+		Component : ScoringPlans,
+	},
 	[INCENTIVE_PLANS]: {
 		name      : INCENTIVE_PLANS,
 		title     : startCase(INCENTIVE_PLANS),
-		Component : Plans,
-	},
-	[AGENTS]: {
-		name      : AGENTS,
-		title     : startCase(AGENTS),
-		Component : Agents,
+		Component : IncentivePlans,
 	},
 };
 
-function IncentivePlans() {
+function Plans() {
 	const [activeTab, setActiveTab] = useState(INCENTIVE_PLANS);
 
 	return (
@@ -53,4 +53,4 @@ function IncentivePlans() {
 	);
 }
 
-export default IncentivePlans;
+export default Plans;

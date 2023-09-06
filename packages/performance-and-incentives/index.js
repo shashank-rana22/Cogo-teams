@@ -1,1 +1,1 @@
-export { default as Incentive } from './page-components/IncentivePlans';
+export { default as Plans } from './page-components/Plans';
