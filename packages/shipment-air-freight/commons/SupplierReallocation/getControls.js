@@ -1,30 +1,6 @@
-import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
-import { IcMFtick } from '@cogoport/icons-react';
-
-import styles from './styles.module.css';
-
 const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
 const displayServiceType = ['ftl_freight', 'haulage_freight'];
 const SPLIT_SERVICE_TEXT = 2;
-
-const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => {
-	const code = option?.cogo_entity?.entity_code;
-	const { country_code = '' } = ENTITY_MAPPING[code];
-	const verified = option?.kyc_status === 'verified';
-
-	return ({
-		...option,
-		business_name: (
-			<div className={styles.async_label_container}>
-				<div>
-					<div>{option?.business_name}</div>
-					<div className={styles.under_text}>{country_code ? `Country Code : ${country_code}` : null}</div>
-				</div>
-				{verified && <IcMFtick fill="#67C676" height={24} width={24} />}
-			</div>
-		),
-	});
-});
 
 export default function getControls({
 	primary_service_type = '',
@@ -45,7 +21,7 @@ export default function getControls({
 			label      	: 'Service Provider',
 			type        : 'asyncSelect',
 			placeholder : 'Select Service Provider',
-			asyncKey    : 'organizations',
+			asyncKey    : 'organizations_modified_options',
 			params      : {
 				filters: {
 					account_type : 'service_provider',
@@ -54,9 +30,8 @@ export default function getControls({
 					service      : services,
 				},
 			},
-			size               : 'sm',
-			rules              : { required: 'Service Provider is required' },
-			getModifiedOptions : handleModifiedOptions,
+			size  : 'sm',
+			rules : { required: 'Service Provider is required' },
 		},
 	];
 

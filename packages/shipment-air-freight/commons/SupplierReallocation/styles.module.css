@@ -44,14 +44,3 @@
 	line-height: 14px;
 	letter-spacing: 0.02em;
 }
-
-.async_label_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.under_text {
-	font-size: 12px;
-	color: #4f4f4f;
-}

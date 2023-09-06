@@ -56,7 +56,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			label      	: 'Service Provider',
 			type        : 'asyncSelect',
 			placeholder : 'Select Service Provider',
-			asyncKey    : 'organizations',
+			asyncKey    : 'organizations_modified_options',
 			params      : {
 				filters: {
 					account_type : 'service_provider',
