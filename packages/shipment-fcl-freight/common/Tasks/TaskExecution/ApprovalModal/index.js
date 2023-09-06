@@ -57,7 +57,7 @@ function ApprovalModal({
 					loading={loading}
 					disabled={loading}
 				>
-					Yes
+					Yes, Submit
 				</Button>
 			</Modal.Footer>
 		</Modal>
