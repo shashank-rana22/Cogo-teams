@@ -1,9 +1,14 @@
-const controls = {
+const getControls = ({
+	title = '',
+	mobileNumber = '',
+	mobileCountryCode = '',
+}) => ({
 	feedbackType: {
 		name    : 'title',
 		type    : 'chips',
 		label   : 'Reason for contact ?',
 		rules   : { required: 'Required' },
+		value   : '',
 		options : [
 			{
 				label : 'Introductory',
@@ -18,15 +23,30 @@ const controls = {
 				value : 'rate_enquiry',
 			},
 			{
-				label : 'Other',
-				value : 'other',
+				label : 'Shipment Enquiry',
+				value : 'shipment_enquiry',
 			},
 			{
 				label : 'Payment recovery',
 				value : 'payment_recovery',
 			},
+			{
+				label : 'Other',
+				value : 'other',
+			},
 		],
 		multiple: false,
+	},
+	sid: {
+		name        : 'sid',
+		type        : 'select',
+		rules       : title === 'shipment_enquiry' ? { required: 'Required' } : undefined,
+		asyncKey    : 'list_user_shipments',
+		placeholder : 'Select SID',
+		params      : {
+			mobile_country_code : mobileCountryCode,
+			mobile_number       : mobileNumber,
+		},
 	},
 	feedbackDesc: {
 		name        : 'communication_summary',
@@ -35,5 +55,6 @@ const controls = {
 		placeholder : 'Enter Remark',
 		rules       : { required: 'Required' },
 	},
-};
-export default controls;
+});
+
+export default getControls;

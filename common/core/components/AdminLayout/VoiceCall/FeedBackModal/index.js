@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
-import { ChipsController, TextAreaController, useForm } from '@cogoport/forms';
+import { ChipsController, TextAreaController, AsyncSelectController, useForm } from '@cogoport/forms';
 
-import controls from '../configurations/feedback-form-controls';
+import getControls from '../configurations/feedback-form-controls';
 import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
 
 import styles from './styles.module.css';
@@ -12,8 +12,11 @@ function FeedbackModal({
 	loggedInAgentId = '',
 	callStartAt = '',
 	callEndAt = '',
+	callRecordId = '',
 }) {
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { mobile_number = '', mobile_country_code = '' } = receiverUserDetails || {};
+	const { handleSubmit, control, formState: { errors }, watch } = useForm();
+
 	const {
 		createCommunicationLog,
 		loading,
@@ -23,9 +26,18 @@ function FeedbackModal({
 		loggedInAgentId,
 		callStartAt,
 		callEndAt,
+		callRecordId,
 	});
 
-	const { feedbackType, feedbackDesc } = controls;
+	const formValues = watch();
+
+	const { title = '' } = formValues || {};
+
+	const { feedbackType, feedbackDesc, sid } = getControls({
+		mobileCountryCode : mobile_country_code,
+		mobileNumber      : mobile_number,
+		title,
+	});
 
 	return (
 		<Modal
@@ -46,6 +58,18 @@ function FeedbackModal({
 						{...feedbackType}
 					/>
 					<div className={styles.error_message}>{errors?.title && 'This is Required'}</div>
+					{title === 'shipment_enquiry' ? (
+						<>
+							<div className={styles.shipment_details}>
+								<div className={styles.label}>Select SID</div>
+								<AsyncSelectController
+									control={control}
+									{...sid}
+								/>
+							</div>
+							<div className={styles.error_message}>{errors?.sid && 'This is Required'}</div>
+						</>
+					) : null}
 					<TextAreaController
 						control={control}
 						{...feedbackDesc}

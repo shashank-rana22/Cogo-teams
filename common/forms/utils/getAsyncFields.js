@@ -920,6 +920,11 @@ function asyncListUserShipments() {
 		valueKey    : 'serial_id',
 		endpoint    : '/list_shipments_on_feedback',
 		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
 	};
 }
 

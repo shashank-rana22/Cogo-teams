@@ -7,7 +7,7 @@ const getPayload = ({
 	mobileCountryCode = '',
 	userId = '',
 }) => ({
-	user_number         : mobileNumber,
+	mobile_number       : mobileNumber,
 	mobile_country_code : mobileCountryCode,
 	performed_by_id     : userId,
 });

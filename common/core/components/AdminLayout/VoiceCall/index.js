@@ -29,7 +29,7 @@ function VoiceCall({ firestore = {} }) {
 		voiceCallData   : profile?.voice_call_recipient_data,
 		loggedInAgentId : profile?.user?.id,
 	}));
-
+	console.log('voiceCallData:', voiceCallData);
 	const countdownRef = useRef(null);
 
 	const [callState, setCallState] = useState({ showCallModalType: '' });
@@ -52,7 +52,7 @@ function VoiceCall({ firestore = {} }) {
 		selfOrganizationId = '',
 		source = '',
 	} = callState || {};
-
+	console.log('receiverUserDetails:', receiverUserDetails);
 	const {
 		unmountVoiceCall,
 		openFeedbackform,
@@ -143,6 +143,7 @@ function VoiceCall({ firestore = {} }) {
 					loggedInAgentId={loggedInAgentId}
 					callStartAt={callStartAt}
 					callEndAt={callEndAt}
+					callRecordId={callRecordId}
 				/>
 			)}
 

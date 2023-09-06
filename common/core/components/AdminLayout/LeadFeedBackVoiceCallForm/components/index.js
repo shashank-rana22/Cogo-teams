@@ -26,6 +26,7 @@ function LeadFeedBackVoiceCallForm() {
 		leadFeedbackFormData = {},
 		partnerId = '',
 		loggedInAgentId = '',
+		callRecordId = '',
 	} = useSelector(({ profile }) => ({
 		leadFeedBackFormType : profile?.lead_feedback_form_type,
 		leadFeedbackFormData : profile?.lead_feedback_form_data,
@@ -96,6 +97,7 @@ function LeadFeedBackVoiceCallForm() {
 									leadUserId={lead_user_id}
 									restData={restData}
 									source={source}
+									callRecordId={callRecordId}
 								/>
 							</TabPanel>
 						);
