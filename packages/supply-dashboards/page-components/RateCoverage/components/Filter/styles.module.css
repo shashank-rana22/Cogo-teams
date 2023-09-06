@@ -41,6 +41,7 @@
 	width: 170px;
 }
 
-.date_range_filter_width {
+.date_range_filter_width input {
 	width: 220px;
+	height: 40px !important;
 }

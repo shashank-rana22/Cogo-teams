@@ -127,9 +127,10 @@ function Filter({
 						}}
 					/>
 				</div>
-				<div className={styles.date_range_filter_width}>
+				<div>
 					<p>Date Range</p>
 					<DateRangepicker
+						className={styles.date_range_filter_width}
 						value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
 						onChange={(value) => {
 							setFilter((prev) => ({
