@@ -1,11 +1,13 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useSendInvoiceToFinance from '../../../../../../../hooks/useSendInvoiceToFinance';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -32,6 +34,8 @@ function Status({
 	const isAuthorized = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
@@ -75,19 +79,37 @@ function Status({
 						</div>
 				) : null}
 
-			{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
-				<Actions
-					invoice={invoice}
-					refetch={refetchAferApiCall}
-					shipment_data={shipment_data}
-					invoiceData={invoiceData}
-					isIRNGenerated={isIRNGenerated}
-					bfInvoice={bfInvoice}
-				/>
-			) : null}
+			{invoice?.processing
+				? (
+					<div className={styles.reload}>
+						<div className={cl`${styles.payment_method} ${styles.processing}`}>Processing</div>
+						<Button
+							size="sm"
+							themeType="tertiary"
+							onClick={() => sendInvoiceToFinance({
+								payload: {
+									id: invoice?.id,
+								},
+							})}
+						>
+							<IcMRefresh width={15} height={15} fill="#ee3425" />
+						</Button>
+					</div>
+				)
+				: !invoice?.is_revoked && invoice?.status !== 'finance_rejected' && (
+					<Actions
+						invoice={invoice}
+						refetch={refetchAferApiCall}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						isIRNGenerated={isIRNGenerated}
+						bfInvoice={bfInvoice}
+					/>
+				)}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+					&& !invoice?.processing ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
@@ -97,7 +119,7 @@ function Status({
 						</Button>
 				) : null}
 
-			{showRequestCN ? (
+			{showRequestCN && !invoice?.processing ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
