@@ -1,0 +1,55 @@
+.container {
+	font-size: 10px;
+}
+
+.label {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+}
+
+.control_container {
+	margin-bottom: 16px;
+
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+}
+
+.cancel_btn {
+	margin-right: 12px;
+}
+
+.error_msg {
+	margin-top: 4px;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
+.leave_type_stats {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+}
+
+.pending {
+	padding: 2px 8px;
+	margin-right: 8px;
+	background-color: #fea58e;
+	border-radius: 6px;
+}
+
+.available {
+	padding: 2px 8px;
+	background-color: #c4dc91;
+	border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+	.modal {
+		width: 100% !important;
+	}
+}

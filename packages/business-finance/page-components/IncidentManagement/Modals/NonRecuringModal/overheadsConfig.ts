@@ -1,44 +1,46 @@
 const DEFAULT_UNIT = 1;
-
-export const OVER_HEAD_CONFIGS = [
+interface Props {
+	t?: Function;
+}
+export const getOverHeadConfigs = ({ t = () => {} }:Props) => [
 	{
-		Header   : 'Name',
+		Header   : t('incidentManagement:name_header'),
 		accessor : 'name',
 		id       : 'name',
 	},
 	{
-		Header   : 'Unit',
+		Header   : t('incidentManagement:unit_header'),
 		accessor : 'unit',
 		id       : 'unit',
 		Cell     : () => DEFAULT_UNIT,
 	},
 	{
-		Header   : 'Currency',
+		Header   : t('incidentManagement:currency_label'),
 		accessor : 'currency',
 		id       : 'currency',
 	},
 	{
-		Header   : 'Ex. Rate',
+		Header   : t('incidentManagement:exc_rate_label'),
 		accessor : 'exchangeRate',
 		id       : 'exchangeRate',
 	},
 	{
-		Header   : 'Price',
+		Header   : t('incidentManagement:price_header'),
 		accessor : 'price',
 		id       : 'price',
 	},
 	{
-		Header   : 'Quantity',
+		Header   : t('incidentManagement:quantity_header'),
 		accessor : 'quantity',
 		id       : 'quantity',
 	},
 	{
-		Header   : 'Sub Total',
+		Header   : t('incidentManagement:sub_total_header'),
 		accessor : 'subTotal',
 		id       : 'subTotal',
 	},
 	{
-		Header   : 'Grand Total',
+		Header   : t('incidentManagement:grand_total'),
 		accessor : 'total',
 		id       : 'grandTotal',
 	},

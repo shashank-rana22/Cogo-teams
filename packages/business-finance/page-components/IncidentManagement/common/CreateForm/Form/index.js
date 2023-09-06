@@ -6,6 +6,7 @@ import {
 	AsyncSelectController,
 	useForm,
 } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import React, { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -22,9 +23,10 @@ const CONTROLLER_MAPPINGS = {
 };
 
 function Form({ controls = () => { }, setLevel = () => { } }, ref) {
+	const { t } = useTranslation(['incidentManagement']);
 	const { formState: { errors }, control, handleSubmit, watch, setValue } = useForm();
 
-	const finalControls = controls({ incidentType: watch('incidentType'), setValue });
+	const finalControls = controls({ t, incidentType: watch('incidentType'), setValue });
 
 	useImperativeHandle(ref, () => ({ formSubmit: handleSubmit, watch }));
 
