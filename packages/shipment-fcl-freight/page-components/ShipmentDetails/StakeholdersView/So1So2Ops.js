@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -10,8 +10,10 @@ import React, { useMemo, useState } from 'react';
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import ReOpenJob from '../../../common/ReOpenJob';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -29,6 +31,7 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function SoOneSoTwoOps({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -64,14 +67,7 @@ function SoOneSoTwoOps({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed && (
-						<div className={styles.job_closed_container}>
-							<Pill className={styles.job_closed_pill} size="lg">
-								{shipment_data?.is_job_closed_financially
-									? 'Financially Closed' : 'Operationally Closed'}
-							</Pill>
-						</div>
-					)}
+					<JobStatus activeStakeholder={activeStakeholder} setReOpenJobModal={setReOpenJobModal} />
 
 					<ShipmentChat />
 				</div>
@@ -124,6 +120,15 @@ function SoOneSoTwoOps({ get = {}, activeStakeholder = '' }) {
 				{!isEmpty(rollover_containers) ? (
 					<RolloverRequestedModal rollover_containers={rollover_containers} />
 				) : null}
+
+				{reOpenJobModal ? (
+					<ReOpenJob
+						showModal={reOpenJobModal}
+						setShowModal={setReOpenJobModal}
+						shipmentData={shipment_data}
+					/>
+				) : null}
+
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);

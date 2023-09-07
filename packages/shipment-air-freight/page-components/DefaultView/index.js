@@ -30,6 +30,17 @@ const TAB_MAPPING = {
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
+const JOB_OPEN_ALLOWED_ROLES = [
+	'superadmin',
+	'admin',
+	// kam managers
+	'booking_agent_manager',
+	// so2 managers
+	'document_desk_manager',
+	'costbooking_manager',
+	'lastmile_ops_manager',
+	'so1_so2_ops',
+];
 
 function HandleRaiseContainer({
 	shipment_data = {},
@@ -69,6 +80,8 @@ function DefaultView() {
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
 	const [reOpenJobModal, setReOpenJobModal] = useState(false);
+
+	const isJobOpenAllowed = shipment_data?.stakeholder_types?.some((role) => JOB_OPEN_ALLOWED_ROLES?.includes(role));
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
@@ -139,14 +152,16 @@ function DefaultView() {
 							) : (
 								<>
 									<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
-									<Button
-										className={styles.job_undo_button}
-										themeType="link"
-										size="md"
-										onClick={() => setReOpenJobModal(true)}
-									>
-										Undo
-									</Button>
+									{isJobOpenAllowed && (
+										<Button
+											className={styles.job_undo_button}
+											themeType="link"
+											size="md"
+											onClick={() => setReOpenJobModal(true)}
+										>
+											Undo
+										</Button>
+									)}
 								</>
 							)}
 						</div>

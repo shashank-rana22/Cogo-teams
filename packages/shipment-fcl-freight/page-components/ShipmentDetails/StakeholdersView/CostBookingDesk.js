@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill, Button } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -8,6 +8,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useMemo, useState } from 'react';
 
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import PurchaseInvoice from '../../../common/PurchaseInvoice';
@@ -63,25 +64,7 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
-					{shipment_data?.is_job_closed && (
-						<div className={styles.job_closed_container}>
-							{shipment_data?.is_job_closed_financially ? (
-								<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
-							) : (
-								<>
-									<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
-									<Button
-										className={styles.job_undo_button}
-										themeType="link"
-										size="md"
-										onClick={() => setReOpenJobModal(true)}
-									>
-										Undo
-									</Button>
-								</>
-							)}
-						</div>
-					)}
+					<JobStatus activeStakeholder={activeStakeholder} setReOpenJobModal={setReOpenJobModal} />
 
 					<RolloverDetails />
 
