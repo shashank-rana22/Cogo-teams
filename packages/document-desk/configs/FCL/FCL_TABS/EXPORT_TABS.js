@@ -3,7 +3,7 @@ import { addDays, subtractDays } from '@cogoport/utils';
 const TODAY = new Date();
 const TWO = 2;
 const ONE = 1;
-const TABWISE_FILTERS = ({ activeTab = '', isCriticalOn }) => {
+const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 	const mapping = {
 		awaiting_service_provider_confirmation: {
 			task_attributes: [
@@ -21,17 +21,18 @@ const TABWISE_FILTERS = ({ activeTab = '', isCriticalOn }) => {
 			task_attributes: [
 				{
 					task   : 'upload_si',
+					status : 'completed',
+				},
+				{
+					task   : 'update_si_filled_at',
 					status : 'pending',
 				},
-			],
-			state: [
-				'confirmed_by_importer_exporter',
 			],
 		},
 		upload_draft_bil_of_lading: {
 			task_attributes: [
 				{
-					task   : 'upload_si',
+					task   : 'update_si_filled_at',
 					status : 'completed',
 				}, {
 					task   : 'upload_draft_bill_of_lading',
@@ -53,12 +54,12 @@ const TABWISE_FILTERS = ({ activeTab = '', isCriticalOn }) => {
 					...(isCriticalOn ? { status: 'pending' } : {}),
 					assigned_stakeholder: 'service_ops2',
 				},
+				{
+					task   : 'upload_draft_bill_of_lading',
+					status : 'completed',
+				},
 			],
-			service_state: [
-				'init',
-				'awaiting_service_provider_confirmation',
-				'confirmed_by_service_provider',
-			],
+
 			state: [
 				'in_progress',
 				'shipment_received',
@@ -87,14 +88,14 @@ const TABWISE_FILTERS = ({ activeTab = '', isCriticalOn }) => {
 };
 
 const CRITICAL_TABS = {
-	upload_shipping_instruction   : { si_cutoff_less_than: addDays(TODAY, TWO) },
-	upload_draft_bil_of_lading    : { si_filed_at_less_than: subtractDays(TODAY, ONE) },
+	upload_shipping_instruction   : { si_cutoff_less_than: subtractDays(TODAY, TWO) },
+	upload_draft_bil_of_lading    : { si_filed_at_less_than: addDays(TODAY, ONE) },
 	confirmed_by_service_provider : { si_cutoff_less_than: addDays(TODAY, ONE) },
 	bl_approval_pending           : { schedule_departure_less_than: TODAY },
 };
 
 const exportMapping = {
-	TABWISE_FILTERS,
+	tabwiseFilters,
 	CRITICAL_TABS,
 };
 

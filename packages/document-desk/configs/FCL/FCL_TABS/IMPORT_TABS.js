@@ -1,8 +1,9 @@
 import { addDays, subtractDays } from '@cogoport/utils';
 
 const TODAY = new Date();
+const ONE = 1;
 
-const TABWISE_FILTERS = ({ activeTab = '', isCriticalOn }) => {
+const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 	const mapping = {
 		awaiting_service_provider_confirmation: {
 			task_attributes: [
@@ -66,13 +67,13 @@ const TABWISE_FILTERS = ({ activeTab = '', isCriticalOn }) => {
 };
 
 const CRITICAL_TABS = {
-	confirmed_by_service_provider : { si_cutoff_less_than: addDays(TODAY, 1) },
+	confirmed_by_service_provider : { si_cutoff_less_than: addDays(TODAY, ONE) },
 	do_approval_pending           : { schedule_departure_less_than: TODAY },
-	vessel_departed               : { schedule_arrival_less_than: subtractDays(TODAY, 1) },
+	vessel_departed               : { schedule_arrival_less_than: subtractDays(TODAY, ONE) },
 };
 
 const importMapping = {
-	TABWISE_FILTERS,
+	tabwiseFilters,
 	CRITICAL_TABS,
 };
 

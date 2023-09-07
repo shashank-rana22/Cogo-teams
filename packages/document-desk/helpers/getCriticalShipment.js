@@ -21,8 +21,8 @@ const getCriticalShipment = ({ tab, shipment }) => {
 	const estimated_dep = new Date(new Date(estimated_departure).getTime() + timezoneOffset);
 
 	const criticalMapping = {
-		upload_shipping_instruction   : si_cutoff ? addDays(TODAY, TWO) >= si_cutoff_date : false,
-		upload_draft_bil_of_lading    : si_filed_at ? subtractDays(TODAY, ONE) >= si_filed_date : false,
+		upload_shipping_instruction   : si_cutoff ? subtractDays(TODAY, TWO) >= si_cutoff_date : false,
+		upload_draft_bil_of_lading    : si_filed_at ? addDays(TODAY, ONE) >= si_filed_date : false,
 		confirmed_by_service_provider : si_cutoff ? addDays(TODAY, ONE) > si_cutoff_date : false,
 		do_approval_pending           : estimated_dep <= TODAY,
 		bl_approval_pending           : estimated_dep <= TODAY,

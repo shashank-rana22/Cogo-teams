@@ -15,7 +15,7 @@
             "isCriticalVisible": true
         },
         {
-            "label":"Upload Documents",
+            "label":"Additional Documents",
             "value":"confirmed_by_service_provider",
             "isCriticalVisible": true
         },
