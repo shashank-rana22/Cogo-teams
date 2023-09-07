@@ -266,3 +266,29 @@ export const FREIGHT_CONTAINER_COMMODITY_MAPPINGS = {
 	flat_rack : FLAT_RACK_COMMODITIES,
 	iso_tank  : [...ISO_TANK_COMMODITIES, ...HAZ_CLASSES],
 };
+
+export const LCL_FRIEGHT_COMMODITIES = [
+	'general',
+	'gases-2.1',
+	'gases-2.2',
+	'gases-2.3',
+	'flammable_liquids-3',
+	'flammable_solids-4.1',
+	'flammable_solids_self_heat-4.2',
+	'imo_classes-5.1',
+	'emit_flammable_gases_with_water-4.3',
+	'toxic_substances-6.1',
+	'infectious_substances-6.2',
+	'radioactive_material-7',
+	'corrosives-8',
+	'miscellaneous_dangerous_goods-9',
+];
+
+export const LOCAL_CONTAINER_COMMODITY_MAPPINGS = {
+	standard  : [null, ...HAZ_CLASSES],
+	refer     : [null],
+	open_top  : [null],
+	flat_rack : [null],
+	open_side : [null],
+	iso_tank  : [null, ...HAZ_CLASSES],
+};
