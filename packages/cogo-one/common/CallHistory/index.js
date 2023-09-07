@@ -75,12 +75,6 @@ function CallHistory({
 						</div>
 					</div>
 				</div>
-				<ShowFeedbackDetails
-					showFeedback={showFeedback}
-					setShowFeedback={setShowFeedback}
-					type={type}
-					communication_log={communication_log}
-				/>
 				{conditionCheck && (
 					<div className={styles.connected_ivr}>
 						<div className={styles.purpose}>
@@ -115,7 +109,12 @@ function CallHistory({
 						</div>
 					</div>
 				)}
-
+				<ShowFeedbackDetails
+					showFeedback={showFeedback}
+					setShowFeedback={setShowFeedback}
+					type={type}
+					communication_log={communication_log}
+				/>
 			</div>
 
 		</div>
