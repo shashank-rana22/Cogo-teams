@@ -69,7 +69,13 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					<JobStatus activeStakeholder={activeStakeholder} setReOpenJobModal={setReOpenJobModal} />
+					{shipment_data?.is_job_closed && (
+						<JobStatus
+							shipment_data={shipment_data}
+							activeStakeholder={activeStakeholder}
+							setReOpenJobModal={setReOpenJobModal}
+						/>
+					)}
 
 					<ShipmentChat />
 				</div>
