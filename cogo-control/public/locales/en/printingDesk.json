@@ -2,6 +2,7 @@
     "header_tabs_approved_awb": "Approved AWB",
     "header_tabs_handed_over": "Handed Over",
     "header_tabs_final_awb": "Final AWB",
+    "header_tabs_completed_awb": "Completed AWB",
     "header_printing_desk": "Printing Desk",
     "header_search_placeholder": "Search by SID or AWB Number",
     "header_toggle_onlabel": "Relevant to me",

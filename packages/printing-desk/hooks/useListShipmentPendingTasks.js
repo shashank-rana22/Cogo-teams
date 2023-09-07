@@ -52,6 +52,10 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 				...PAYLOAD_ITEM,
 				handedOverForTd: true,
 			},
+			completed_awb: {
+				assignedStakeholder : 'service_ops2_docs',
+				status              : 'completed',
+			},
 		};
 
 		try {

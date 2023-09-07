@@ -24,7 +24,7 @@ function CardList({
 
 	const { shipmentPendingTasks = [], totalRecords } = data;
 
-	const handleRender = () => {
+	function HandleRender() {
 		if (loading || !isEmpty(shipmentPendingTasks)) {
 			return (shipmentPendingTasks || []).map((singleitem) => {
 				const { id, blCategory } = singleitem || {};
@@ -63,13 +63,13 @@ function CardList({
 			});
 		}
 		return <EmptyState />;
-	};
+	}
 
 	return (
 		<section>
 			<Header fields={fields} />
 			<div className={styles.scroll}>
-				{handleRender()}
+				{HandleRender()}
 				{!loading && !isEmpty(shipmentPendingTasks) ? (
 					<div className={styles.pagination}>
 						<Pagination
