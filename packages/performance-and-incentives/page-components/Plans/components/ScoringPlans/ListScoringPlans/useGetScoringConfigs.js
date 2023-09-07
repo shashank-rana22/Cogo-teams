@@ -26,7 +26,7 @@ const useGetScoringConfigs = () => {
 		},
 		{
 			id             : 2,
-			status         : 'active',
+			status         : 'inactive',
 			display_name   : 'Test Scoring',
 			cogo_entity_id : 21,
 			cogo_entity    : {
