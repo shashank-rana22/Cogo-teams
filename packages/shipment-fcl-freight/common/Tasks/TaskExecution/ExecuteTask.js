@@ -20,6 +20,7 @@ import {
 	UploadSI,
 	MarkIgmShipmentConfirm,
 	UploadComplianceDocs,
+	VerifyShipperDetails,
 } from './CustomTasks';
 import CargoInsurance from './CustomTasks/CargoInsurance';
 import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
@@ -266,6 +267,12 @@ function ExecuteTask({
 				taskListRefetch={taskListRefetch}
 				tasksList={tasksList}
 			/>
+		);
+	}
+
+	if (task?.task === 'verify_shipper_details') {
+		return (
+			<VerifyShipperDetails />
 		);
 	}
 
