@@ -10,7 +10,7 @@ const useUpdateJobClosure = (
 		setSaveObj = () => {},
 		setOpenConfig = () => {},
 		listOfId = [],
-		setConfigButton = false,
+		setConfigButton = () => {},
 	},
 ) => {
 	const { user_data: userData } = useSelector(({ profile }) => ({

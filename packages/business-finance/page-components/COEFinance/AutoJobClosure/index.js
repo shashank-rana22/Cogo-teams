@@ -32,15 +32,17 @@ function AutoJobClosure() {
 
 		let listOfObj = {};
 		list.forEach((obj) => {
+			const objid = obj.id;
+
 			const requiredObj = {
 				...obj,
-				level1 : obj.oprClosureDays,
-				level2 : obj.finClosureDays,
+				level1         : obj.oprClosureDays,
+				level2         : obj.finClosureDays,
+				oprClosureDays : undefined,
+				finClosureDays : undefined,
+				id             : undefined,
+
 			};
-			delete requiredObj.oprClosureDays;
-			delete requiredObj.finClosureDays;
-			const objid = requiredObj.id;
-			delete requiredObj.id;
 
 			listOfObj = { ...listOfObj, [objid]: requiredObj };
 		});
@@ -97,6 +99,7 @@ function AutoJobClosure() {
 								themeType="secondary"
 								className={styles.topContainerComponents}
 								onClick={() => cancelledClick()}
+								disabled={loadingUpdate}
 							>
 								Cancel Changes
 							</Button>

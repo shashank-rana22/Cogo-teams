@@ -6,7 +6,7 @@ import selectionCriteriaOptions from '../formOptions/selectionCriteriaOptions';
 import serviceTypeOptions from '../formOptions/serviceTypeOptions';
 import styles from '../styles.module.css';
 
-function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
+function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = () => {} }) {
 	const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
 		value : String(item),
 		label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
@@ -38,6 +38,9 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					options={serviceTypeOptions}
 					placeholder="Enter Service"
 					rules={{ required: { value: true, message: '*Service type is required' } }}
+					onChange={() => {
+						setValue('selectionCriteriaOp', ''); setValue('selectionCriteriaFin', '');
+					}}
 				/>
 				<Error keys="serviceType" />
 

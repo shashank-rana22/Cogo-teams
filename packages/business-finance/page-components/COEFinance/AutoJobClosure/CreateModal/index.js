@@ -12,7 +12,7 @@ function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () 
 	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { control, watch, handleSubmit, formState: { errors = {} } } = useForm();
+	const { control, watch, handleSubmit, formState: { errors = {} }, setValue } = useForm();
 
 	const { apiTrigger, loading } = useCreateJobClosure({ refetch, setOpenModal });
 
@@ -42,6 +42,7 @@ function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () 
 					errors={errors}
 					control={control}
 					watch={watch}
+					setValue={setValue}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
@@ -50,6 +51,7 @@ function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () 
 					themeType="secondary"
 					className={styles.formButton}
 					onClick={() => setOpenModal(false)}
+					disabled={loading}
 				>
 					Cancel
 

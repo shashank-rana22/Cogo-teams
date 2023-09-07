@@ -33,6 +33,7 @@ function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch =
 					themeType="secondary"
 					className={styles.formButton}
 					onClick={() => setDeleteModal(false)}
+					disabled={loading}
 				>
 					Cancel
 
