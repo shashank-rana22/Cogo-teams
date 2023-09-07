@@ -1,0 +1,21 @@
+.heading {
+	padding: 8px;
+	margin-top: 10px;
+	font-size: 22px;
+	font-weight: 700;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin: 6px;
+}
+
+.styled_section {
+	display: flex;
+	flex: auto;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
