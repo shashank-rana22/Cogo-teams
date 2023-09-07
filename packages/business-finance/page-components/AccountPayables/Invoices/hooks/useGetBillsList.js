@@ -27,7 +27,7 @@ function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '
 
 	const {
 		search = '', pageSize = 10, pageIndex = 1, invoiceView = '', category = '', currency = '',
-		invoiceType = '', urgencyTag = '', serviceType = '', invoiceDate = {}, dueDate = {}, updatedDate = {},
+		invoiceType = '', urgencyTag = '', services = '', invoiceDate = {}, dueDate = {}, updatedDate = {},
 	} = billsFilters || {};
 
 	const { dueDateSortType = '' } = orderBy || {};
@@ -66,7 +66,7 @@ function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '
 						entity             : activeEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
 						type               : activeTab || undefined,
-						serviceType        : serviceType || undefined,
+						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
 						startDate          : startDate ? formatToTimeStamp(startDate) : undefined,
 						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
@@ -83,7 +83,7 @@ function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '
 		},
 		[pageIndex, pageSize,
 			query, currency, urgencyTag, invoiceType,
-			invoiceView, category, dueDateSortType, serviceType, startDate,
+			invoiceView, category, dueDateSortType, services, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
 			toUploadBillDate, billsTrigger, activeTab, organizationId, activeEntity],
