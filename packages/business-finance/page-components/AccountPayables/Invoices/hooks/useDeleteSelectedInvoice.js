@@ -8,7 +8,7 @@ const useDeleteSelectedInvoice = ({ refetch = () => {}, itemData = {} }) => {
 	const { user_data: userData = {} } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user = '', session_type: sessionType = '' } = userData;
+	const { user = '', session_type: sessionType = '' } = userData || {};
 	const { id: userId = '', name = '' } = user || {};
 	const [{ loading }, trigger] = useRequestBf(
 		{

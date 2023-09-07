@@ -17,6 +17,7 @@ const MIN_AMOUNT = 0;
 const ELEMENT_NOT_FOUND = -1;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
+
 const updateApiData = ({
 	prevApiData = {}, itemData = {}, key = '', value = '',
 	checked = false, index = 0, errorStatus = '',

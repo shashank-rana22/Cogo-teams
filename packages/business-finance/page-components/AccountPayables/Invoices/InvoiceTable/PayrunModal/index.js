@@ -14,6 +14,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 	const [serviceType, setServiceType] = useState('');
 	const [serviceAgent, setServiceAgent] = useState('');
 	const [currencyValue, setCurrencyValue] = useState(CURRENCY_DATA[GLOBAL_CONSTANTS.zeroth_index]);
+
 	const { text = '', id = '' } = currencyValue || {};
 
 	const onToggleChange = () => {

@@ -7,18 +7,19 @@ import toastApiError from '../../../commons/toastApiError.ts';
 
 const ELEMENT_NOT_FOUND = -1;
 
-const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, apiData = {}, type = '' }) => {
+const useDeleteExcludePayrun = ({ refetch = () => {}, setApiData = () => {}, apiData = {}, type = '' }) => {
 	const { push } = useRouter();
 
 	const { user_data: userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
 		user_data: profile || {}, query: general.query,
 	}));
 
-	const {
-		payrun = '',
-	} = urlQuery || {};
+	const { payrun = '' } = urlQuery || {};
+
 	const { user = '', session_type: sessionType = '' } = userData || {};
+
 	const { id: userId = '', name = '' } = user || {};
+
 	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun/suppliers',

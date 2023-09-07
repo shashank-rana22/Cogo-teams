@@ -22,7 +22,7 @@ const getFormattedAmount = ({ amount = '', currency = '' }) => (
 );
 
 function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () => {} }) {
-	const { key = '', fallBackKey = '' } = field;
+	const { key = '', fallBackKey = '' } = field || {};
 	const [edit, setEdit] = useState(false);
 	const [value, setValue] = useState(getByKey(itemData, key));
 
@@ -33,8 +33,8 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	} = itemData || {};
 
 	useEffect(() => {
-		setValue(itemData.inputAmount);
-	}, [itemData.inputAmount]);
+		setValue(itemData?.inputAmount);
+	}, [itemData?.inputAmount]);
 
 	const maxValueCrossed = +value > +payableAmount;
 	const lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;

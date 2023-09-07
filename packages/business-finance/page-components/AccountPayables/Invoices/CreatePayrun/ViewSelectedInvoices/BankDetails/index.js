@@ -4,9 +4,13 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function BankDetails({ itemData = {} }) {
-	const {
-		bankDetail = [],
-	} = itemData || {};
+	let bankDetail = {};
+
+	if (Array.isArray(itemData?.bankDetail)) {
+		bankDetail = itemData?.bankDetail?.[GLOBAL_CONSTANTS.zeroth_index];
+	} else if (typeof itemData?.bankDetail === 'object') {
+		bankDetail = itemData?.bankDetail;
+	}
 
 	const {
 		bankName = '',
@@ -17,7 +21,7 @@ function BankDetails({ itemData = {} }) {
 		ifsc_number = '',
 		account_number = '',
 		ifscCode = '',
-	} = bankDetail?.[GLOBAL_CONSTANTS.zeroth_index] || bankDetail || {};
+	} = bankDetail;
 
 	return (
 		<div className={styles.font}>

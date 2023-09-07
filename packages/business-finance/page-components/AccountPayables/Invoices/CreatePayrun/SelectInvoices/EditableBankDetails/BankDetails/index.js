@@ -17,11 +17,7 @@ const viewDocument = (url) => {
 function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 	const [bankEdit, setBankEdit] = useState(false);
 	const [rollback, showRollback] = useState(true);
-	const {
-		invoiceType = '',
-		bankDetail,
-		tradePartyMappingId,
-	} = itemData || {};
+	const { invoiceType = '', bankDetail = {}, tradePartyMappingId = '' } = itemData || {};
 
 	if (invoiceType === 'CREDIT NOTE') {
 		return null;

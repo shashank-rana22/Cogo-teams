@@ -19,9 +19,7 @@ function Footer({
 	selectedCurrency = GLOBAL_CONSTANTS.currency_code.INR,
 	isAuditAllowed = true,
 }) {
-	const {
-		list = [],
-	} = apiData || {};
+	const { list = [] } = apiData || {};
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
 	const [type, setType] = useState('');
@@ -29,7 +27,7 @@ function Footer({
 	const checkedList = (list || []).filter((item) => item.checked);
 	const hasError = !isEmpty((checkedList || []).filter((item) => item.hasError));
 	const totalInvoiceAmount = (checkedList || []).reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
-	const buttonDisabled = isEmpty(checkedList || []) || loading || hasError;
+	const buttonDisabled = isEmpty(checkedList) || loading || hasError;
 
 	function RenderContent() {
 		return (
