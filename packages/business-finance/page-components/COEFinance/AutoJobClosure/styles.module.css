@@ -5,14 +5,14 @@
 }
 
 .searchBox {
-	width: 400px;
+	width: 340px;
 }
 
 .topContainerComponents {
 	margin-left: 30px;
 }
 
-.form_input {
+.formInput {
 	width: 45%;
 	margin: 10px;
 }
@@ -39,15 +39,14 @@
 }
 
 .pagination {
-	position: relative;
 	right: 30px;
 	bottom: 0;
-	width: 300px;
+	display: flex;
+	justify-content: flex-end;
 	margin-top: 80px;
-	margin-left: 1300px;
 }
 
 .errors {
 	font-size: 12px;
-	color: red;
+	color: var(--color-primary-error-red-2);
 }

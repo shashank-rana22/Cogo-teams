@@ -1,4 +1,4 @@
-const selectionCriteriaOptions = (serviceType) => {
+const selectionCriteriaOptions = (serviceType = '') => {
 	switch (serviceType) {
 		case 'FCL_FREIGHT':
 		case 'FCL_FREIGHT_LOCAL':

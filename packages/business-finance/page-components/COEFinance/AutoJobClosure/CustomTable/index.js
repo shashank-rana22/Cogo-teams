@@ -22,7 +22,7 @@ function CustomTable({
 		<div className={styles.table}>
 			<Header config={config} />
 			<div>
-				{list.map((item) => (
+				{(list || []).map((item) => (
 					<div className={styles.columnCard} key={item.id}>
 						{isEmpty(list) ? (
 							<EmptyStateDocs />

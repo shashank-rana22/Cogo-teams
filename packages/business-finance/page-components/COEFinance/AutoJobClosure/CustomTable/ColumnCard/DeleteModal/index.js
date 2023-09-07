@@ -14,13 +14,13 @@ function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch =
 	const { user } = userData || {};
 	const { id:userId } = user || {};
 
-	function confirmDeleteClicked() {
+	const confirmDeleteClicked = () => {
 		const params = {
 			id,
 			deletedBy: userId,
 		};
 		apiTrigger(params);
-	}
+	};
 	return (
 		<Modal show={deleteModal} onClose={() => setDeleteModal(false)} placement="center" size="md">
 			<Modal.Header />
@@ -31,7 +31,7 @@ function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch =
 				<Button
 					size="md"
 					themeType="secondary"
-					className={styles.form_button}
+					className={styles.formButton}
 					onClick={() => setDeleteModal(false)}
 				>
 					Cancel
@@ -40,7 +40,7 @@ function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch =
 				<Button
 					size="md"
 					themeType="primary"
-					className={styles.form_button}
+					className={styles.formButton}
 					onClick={() => confirmDeleteClicked()}
 					disabled={loading}
 				>

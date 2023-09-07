@@ -15,7 +15,7 @@ const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
 function FormDataTwo({
-	fields = {},
+	fields = [],
 	item = {},
 	ENTITY_OPTIONS = [],
 	setOpenConfig = () => {},
@@ -37,12 +37,6 @@ function FormDataTwo({
 	const afterEditData = watch();
 
 	const stringifiedData = JSON.stringify(afterEditData);
-	useEffect(() => {
-		setSaveObj((prev) => ({
-			...prev,
-			[item.id]: JSON.parse(stringifiedData),
-		}));
-	}, [stringifiedData, item.id, setSaveObj]);
 
 	const { apiTrigger, loading: updateLoading } = useUpdateJobClosure({
 		refetch,
@@ -52,7 +46,7 @@ function FormDataTwo({
 
 	const onSubmit = (value) => {
 		const params = {
-			id   : item.id,
+			id   : item?.id,
 			data : {
 				entity               : value.entity,
 				selectionCriteriaOp  : value.selectionCriteriaOp,
@@ -73,7 +67,7 @@ function FormDataTwo({
 				control={control}
 				name="entity"
 				options={ENTITY_OPTIONS}
-				placeholder={item.entity}
+				placeholder={item?.entity}
 				rules={{ required: true }}
 			/>
 		),
@@ -84,7 +78,7 @@ function FormDataTwo({
 				control={control}
 				name="serviceType"
 				options={serviceTypeOptions}
-				placeholder={item.serviceType}
+				placeholder={item?.serviceType}
 				onChange={() => {
 					setValue('selectionCriteriaOp', ''); setValue('selectionCriteriaFin', '');
 				}}
@@ -103,7 +97,7 @@ function FormDataTwo({
 					{ label: 'LOCAL', value: 'LOCAL' },
 					{ label: 'DOMESTIC', value: 'DOMESTIC' },
 				]}
-				placeholder={item.tradeType}
+				placeholder={item?.tradeType}
 				rules={{ required: true }}
 			/>
 		),
@@ -123,7 +117,7 @@ function FormDataTwo({
 			<InputController
 				name="level1"
 				size="md"
-				placeholder={item.oprClosureDays}
+				placeholder={item?.oprClosureDays}
 				className={cl`${styles.inputBox} ${styles.font12}`}
 				control={control}
 			/>
@@ -145,7 +139,7 @@ function FormDataTwo({
 				className={cl`${styles.inputBox} ${styles.font12}`}
 				name="level2"
 				size="md"
-				placeholder={item.finClosureDays}
+				placeholder={item?.finClosureDays}
 				control={control}
 			/>
 		),
@@ -169,6 +163,12 @@ function FormDataTwo({
 			</>
 		),
 	};
+	useEffect(() => {
+		setSaveObj((prev) => ({
+			...prev,
+			[item.id]: JSON.parse(stringifiedData),
+		}));
+	}, [stringifiedData, item.id, setSaveObj]);
 
 	return (
 		<div className={styles.flex}>

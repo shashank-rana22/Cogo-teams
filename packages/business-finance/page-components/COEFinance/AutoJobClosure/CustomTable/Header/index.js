@@ -11,16 +11,16 @@ const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
 function Header({ config = {} }) {
-	const { fields, headerClass } = config;
-	function islevel(heading) {
-		if (heading === 'Level1' || heading === 'Level2') return true;
+	const { fields, headerClass } = config || {};
+	const islevel = (heading = '') => {
+		if (heading === 'Level 1' || heading === 'Level 2') return true;
 		return false;
-	}
+	};
 	return (
 		<section className={cl`${styles.header} ${headerClass === 'border' ? styles.border : ''}`}>
-			{fields.map((field) => (
+			{(fields || []).map((field) => (
 				<div
-					className={cl`${styles.col} ${field.className || ''}`}
+					className={cl`${styles.col} ${field.className}`}
 					key={field.key}
 					style={{
 						'--span' : field.span || DEFAULT_SPAN,

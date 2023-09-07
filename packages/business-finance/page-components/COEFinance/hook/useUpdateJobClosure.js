@@ -10,6 +10,7 @@ const useUpdateJobClosure = (
 		setSaveObj = () => {},
 		setOpenConfig = () => {},
 		listOfId = [],
+		setConfigButton = false,
 	},
 ) => {
 	const { user_data: userData } = useSelector(({ profile }) => ({
@@ -33,6 +34,7 @@ const useUpdateJobClosure = (
 			});
 			Toast.success('success');
 			setOpenConfig((prev) => (prev.filter((columnId) => (!listOfId.includes(columnId)))));
+			setConfigButton(true);
 			setSaveObj({});
 			refetch();
 		} catch (err) {

@@ -15,7 +15,7 @@ function ColumnCard({
 	loading = false,
 	setSaveObj = () => {},
 }) {
-	const { fields } = config;
+	const { fields } = config || {};
 	const [deleteModal, setDeleteModal] = useState(false);
 
 	const openDeleteModal = () => {
@@ -28,7 +28,7 @@ function ColumnCard({
 	const isEdit = (openConfig || []).includes(item?.id);
 
 	return (
-		<div className={styles.marginbottom}>
+		<div className={styles.columnCardComponent}>
 			<div className={styles.flex}>
 				{ !isEdit ? (
 					<FormDataOne
@@ -61,7 +61,7 @@ function ColumnCard({
 						deleteModal={deleteModal}
 						setDeleteModal={setDeleteModal}
 						refetch={refetch}
-						id={item.id}
+						id={item?.id}
 					/>
 				) }
 		</div>

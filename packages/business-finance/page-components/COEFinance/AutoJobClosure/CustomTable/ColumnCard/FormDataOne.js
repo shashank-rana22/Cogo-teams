@@ -12,7 +12,7 @@ const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
 function FormDataOne({
-	fields = {},
+	fields = [],
 	item = {},
 	setOpenConfig = () => {},
 	openDeleteModal = () => {},
@@ -22,43 +22,43 @@ function FormDataOne({
 	const rowData = {
 		entity: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.entity, MAX_LENGTH)}
+				{showOverflowingNumber(item?.entity, MAX_LENGTH)}
 			</div>
 		),
 
 		serviceType: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.serviceType, MAX_LENGTH)}
+				{showOverflowingNumber(item?.serviceType, MAX_LENGTH)}
 			</div>
 		),
 
 		tradeType: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.tradeType, MAX_LENGTH)}
+				{showOverflowingNumber(item?.tradeType, MAX_LENGTH)}
 			</div>
 		),
 
 		selectionCriteriaOp: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.selectionCriteriaOp, MAX_LENGTH)}
+				{showOverflowingNumber(item?.selectionCriteriaOp, MAX_LENGTH)}
 			</div>
 		),
 
 		oprClosureDays: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.oprClosureDays, MAX_LENGTH)}
+				{showOverflowingNumber(item?.oprClosureDays, MAX_LENGTH)}
 			</div>
 		),
 
 		selectionCriteriaFin: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.selectionCriteriaFin, MAX_LENGTH)}
+				{showOverflowingNumber(item?.selectionCriteriaFin, MAX_LENGTH)}
 			</div>
 		),
 
 		finClosureDays: (
 			<div className={styles.columnData}>
-				{showOverflowingNumber(item.finClosureDays, MAX_LENGTH)}
+				{showOverflowingNumber(item?.finClosureDays, MAX_LENGTH)}
 			</div>
 		),
 

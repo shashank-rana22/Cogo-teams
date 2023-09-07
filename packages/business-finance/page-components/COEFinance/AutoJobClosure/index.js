@@ -18,13 +18,14 @@ function AutoJobClosure() {
 	const [saveObj, setSaveObj] = useState({});
 
 	const {
-		data, loading, searchValue, onQueryChange, refetch, getNextPage,
-		paginationData,
-	} = useAutoJobs({ setConfigButton, setOpenConfig });
+		data, loading, searchValue, onQueryChange,
+		refetch, getNextPage, paginationData,
+	}	= useAutoJobs({ setConfigButton, setOpenConfig });
+
 	const { page, pageSize, totalRecords } = paginationData;
 	const { list = [] } = data || {};
 
-	function addId() {
+	const addId = () => {
 		setConfigButton(false);
 		const arr = list.map((obj) => obj.id);
 		setOpenConfig([...arr]);
@@ -44,13 +45,22 @@ function AutoJobClosure() {
 			listOfObj = { ...listOfObj, [objid]: requiredObj };
 		});
 		setSaveObj(listOfObj);
-	}
-	function cancelledClick() {
+	};
+
+	const cancelledClick = () => {
 		setConfigButton(true);
 		setOpenConfig([]);
-	}
-	const { apiTrigger } = useUpdateJobClosure({ refetch, setSaveObj, listOfId: Object.keys(saveObj) });
-	function saveAllClicked() {
+	};
+
+	const { apiTrigger, loading:loadingUpdate } = useUpdateJobClosure({
+		refetch,
+		setSaveObj,
+		setOpenConfig,
+		setConfigButton,
+		listOfId: Object.keys(saveObj),
+	});
+
+	const saveAllClicked = () => {
 		const TEMP_ARR = [];
 		const keysarr = Object.keys(saveObj);
 		keysarr.forEach((key) => {
@@ -58,9 +68,7 @@ function AutoJobClosure() {
 		});
 
 		apiTrigger(TEMP_ARR);
-		setOpenConfig([]);
-		setConfigButton(true);
-	}
+	};
 
 	return (
 		<div>
@@ -98,6 +106,7 @@ function AutoJobClosure() {
 							themeType="primary"
 							className={styles.topContainerComponents}
 							onClick={() => saveAllClicked()}
+							disabled={loadingUpdate}
 						>
 							Save All
 						</Button>
@@ -127,19 +136,19 @@ function AutoJobClosure() {
 			</div>
 
 			<div className={styles.table}>
-				{' '}
-				{ loading ? null : (
-					<CustomTable
-						itemData={data}
-						config={AUTO_JOB_CLOSURE_CONFIG}
-						openConfig={openConfig}
-						setOpenConfig={setOpenConfig}
-						refetch={refetch}
-						loading={loading}
-						saveObj={saveObj}
-						setSaveObj={setSaveObj}
-					/>
-				)}
+				{ !loading
+					&& (
+						<CustomTable
+							itemData={data}
+							config={AUTO_JOB_CLOSURE_CONFIG}
+							openConfig={openConfig}
+							setOpenConfig={setOpenConfig}
+							refetch={refetch}
+							loading={loading}
+							saveObj={saveObj}
+							setSaveObj={setSaveObj}
+						/>
+					)}
 				<div className={styles.pagination}>
 					{ (!loading && !isEmpty(list)) ? (
 						<Pagination

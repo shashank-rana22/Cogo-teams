@@ -24,7 +24,7 @@ const AUTO_JOB_CLOSURE_CONFIG = {
 			span  : 2.1,
 		},
 		{
-			label : 'Level1',
+			label : 'Level 1',
 			key   : 'oprClosureDays',
 			span  : 1.1,
 		},
@@ -34,7 +34,7 @@ const AUTO_JOB_CLOSURE_CONFIG = {
 			span  : 2.1,
 		},
 		{
-			label : 'Level2',
+			label : 'Level 2',
 			key   : 'finClosureDays',
 			span  : 1.1,
 		},
