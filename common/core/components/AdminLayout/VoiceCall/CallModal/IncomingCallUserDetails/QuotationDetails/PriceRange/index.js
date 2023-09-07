@@ -21,9 +21,9 @@ function PriceRange({ item = {} }) {
 					maximumFractionDigits : 0,
 				},
 			})}
-			&nbsp;
+
 			-
-			&nbsp;
+
 			{formatAmount({
 				amount   : Number(item?.indicative_price_range?.upper_limit) || FALLBACK_AMOUNT,
 				currency : item?.freight_currency || geo.country.currency.code,
@@ -33,7 +33,7 @@ function PriceRange({ item = {} }) {
 					maximumFractionDigits : 0,
 				},
 			})}
-			&nbsp;
+
 			{SERVICES_UNIT_MAPPING[item?.service_type] || ''}
 		</span>
 	);

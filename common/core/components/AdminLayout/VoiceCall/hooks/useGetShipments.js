@@ -4,18 +4,22 @@ import { useCallback } from 'react';
 const getPayload = ({
 	serial_id = '', organization_id = '',
 }) => ({
-	serial_id            : serial_id || undefined,
-	importer_exporter_id : organization_id || undefined,
+	filters: {
+		serial_id            : serial_id || undefined,
+		importer_exporter_id : organization_id || undefined,
+	},
+	user_shipments_required : false,
+	page_limit              : 100,
 });
 
-const useGetShipments = (values) => {
-	const { serial_id = '', organization_id = '' } = values || {};
+const useGetShipments = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_shipments_on_feedback',
 		method : 'get',
 	}, { manual: true });
 
-	const getShipments = useCallback(async () => {
+	const getShipments = useCallback(async (values) => {
+		const { serial_id = '', organization_id = '' } = values || {};
 		try {
 			await trigger({
 				params: getPayload({ serial_id, organization_id }),
@@ -23,7 +27,7 @@ const useGetShipments = (values) => {
 		} catch (error) {
 			console.error(error);
 		}
-	}, [organization_id, serial_id, trigger]);
+	}, [trigger]);
 
 	return {
 		shipmentLoading : loading,

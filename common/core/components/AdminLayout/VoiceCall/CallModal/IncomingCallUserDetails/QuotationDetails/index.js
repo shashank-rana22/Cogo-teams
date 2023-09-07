@@ -7,6 +7,7 @@ import controls from '../../../configurations/shipment-search-controls';
 import useGetShipments from '../../../hooks/useGetShipments';
 
 import CargoDetails from './CargoDetails';
+import OrganizationShipment from './OrganizationShipment';
 import PortDetails from './PortDetails';
 import RevertedPriceMapping from './RevertedPriceMapping';
 import styles from './styles.module.css';
@@ -43,8 +44,10 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 		shipmentData = {},
 		getShipments = () => {},
 	} = useGetShipments();
+	const { list: shipmentList = [] } = shipmentData || {};
+
 	const formValues = watch();
-	console.log('shipmentData:', shipmentData);
+
 	const { serial_id = '', organization_id = '' } = formValues || {};
 
 	const userActivityFormatedData = Object.entries(shipmentsData || {}).map(([key, value]) => ({
@@ -75,7 +78,11 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 							</div>
 							<div className={styles.details}>
 								<PortDetails serviceData={updatedData} service={SERVICE_MAPPING[name]} />
-								<CargoDetails detail={updatedData} service={SERVICE_MAPPING[name]} />
+								<CargoDetails
+									detail={name === 'latest_revert_rate'
+										? updatedData?.data : updatedData}
+									service={SERVICE_MAPPING[name]}
+								/>
 								{name === 'latest_revert_rate'
 									? <RevertedPriceMapping updatedData={updatedData} /> : null }
 							</div>
@@ -116,7 +123,7 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 				<Button
 					size="md"
 					themeType="primary"
-					disabled={!serial_id || !organization_id}
+					disabled={!serial_id && !organization_id}
 					className={styles.search_button}
 					onClick={handleSubmit(getShipments)}
 				>
@@ -128,20 +135,8 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 			</div>
 
 			<div className={styles.shipment_container}>
-
-				{shipmentLoading ? <div className={styles.empty_state}>Loading...</div> : null}
-
-				{!shipmentLoading ? (
-					<>
-						{([]).map((singleItem) => (
-							<div className={styles.details} key={singleItem?.id}>
-								<PortDetails serviceData={singleItem} service={SERVICE_MAPPING[agentType]} />
-								<CargoDetails detail={singleItem} service={SERVICE_MAPPING[agentType]} />
-							</div>
-						))}
-					</>
-				) : null}
-
+				{shipmentLoading ? <div className={styles.empty_state}>Loading...</div>
+					: <OrganizationShipment shipmentList={shipmentList} />}
 			</div>
 		</>
 	);

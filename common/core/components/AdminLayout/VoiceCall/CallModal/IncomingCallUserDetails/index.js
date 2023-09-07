@@ -1,11 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import useGetUserCallDetails from '../../hooks/useGetUserCallDetails';
 
 import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
+
+const USER_QUOTE_DETAILS = ['sales', 'support', 'cp_support', 'supply', 'shipment_specialist'];
 
 function IncomingCallUserDetails({ receiverUserDetails = {} }) {
 	const { mobile_number = '', mobile_country_code = '', organization_id = '' } = receiverUserDetails || {};
@@ -23,7 +25,17 @@ function IncomingCallUserDetails({ receiverUserDetails = {} }) {
 
 	const orgDetails = (organizations || []).filter((item) => item?.organization_id === organization_id);
 
-	if (loading || !agent_type) {
+	const showUserQuoteDetails = (USER_QUOTE_DETAILS || []).includes(agent_type);
+
+	const isNoUserActivity = isEmpty(latest_call_details);
+
+	const isNoUserData = Object.values(data || {}).every((obj) => isEmpty(Object.keys(obj)));
+
+	if (loading || !showUserQuoteDetails) {
+		return null;
+	}
+
+	if (isEmpty(orgDetails) && isNoUserActivity && isNoUserData) {
 		return null;
 	}
 
