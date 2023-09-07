@@ -73,8 +73,8 @@ const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData = () => {}, ap
 
 	function GetTableHeaderCheckbox() {
 		const { list: dataList = [] } = apiData || {};
-		const isCheckedLength = dataList.filter((value) => value?.checked).length;
-		const isAllRowsChecked = isCheckedLength === dataList.length;
+		const isCheckedLength = dataList.filter((value) => value?.checked)?.length;
+		const isAllRowsChecked = isCheckedLength === dataList?.length;
 		return (
 			<Checkbox
 				checked={isAllRowsChecked && !loading}
