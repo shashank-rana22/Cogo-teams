@@ -1,0 +1,88 @@
+.service_name {
+	margin-right: 16px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.container {
+	align-items: center;
+	margin: 20px;
+
+	&.first {
+		margin-top: 10px;
+	}
+
+	&:hover {
+		box-shadow: 0 0 8px #b7dbff;
+	}
+
+	:global {
+		.ui_accordion_content {
+			width: 100%;
+			padding: 8px 0 !important;
+			overflow: unset !important;
+			background-color: #f3f3f3 !important;
+		}
+
+		.ui_accordion_header {
+			background-color: #f3f3f3 !important;
+		}
+
+		.ui_accordion_title {
+			width: 100%;
+			padding: 10px 16px;
+		}
+	}
+
+	&.preview_booking {
+		margin: unset;
+		margin-bottom: 20px;
+	}
+}
+
+.service_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 20px;
+}
+
+.total_display {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.add_line_item {
+	padding: unset 16px !important;
+	margin-left: 16px;
+	font-weight: 600;
+	color: #ff7f00 !important;
+}
+
+.button_container {
+	display: flex;
+	padding-bottom: 4px;
+	background-color: #f3f3f3;
+}
+
+.service_details {
+	display: flex;
+	align-items: center;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_pill_container {
+			height: 24px;
+			margin-right: 12px;
+		}
+
+		.ui_pill_text {
+			font-size: 12px;
+			font-weight: 600;
+		}
+	}
+}

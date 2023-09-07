@@ -2,6 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import { FIREBASE_TABS } from '../constants';
 import getFormatData from '../utils/getFormatData';
 
 const useGetOmnichannelCustomerInsights = ({
@@ -30,7 +31,8 @@ const useGetOmnichannelCustomerInsights = ({
 					user_id       : !isEmpty(userId) ? userId : undefined,
 					mobile_number : isEmpty(userId) ? userMobile : undefined,
 					service       : serviceType,
-					channel       : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
+					channel       : (FIREBASE_TABS.includes(activeTab)
+						? activeMessageCard : activeVoiceCard)?.channel_type || 'message',
 					sender,
 				},
 			});

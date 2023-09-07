@@ -15,11 +15,11 @@ function DateRangePickerController(props) {
 			rules={rules}
 			render={({ field: { onChange, value } }) => (
 				<DateRangepicker
+					isPreviousDaysAllowed
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
 					value={value}
-					isPreviousDaysAllowed
 				/>
 			)}
 		/>
