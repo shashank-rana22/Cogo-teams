@@ -24,14 +24,17 @@ function Child({
 	error = {},
 	remove = () => {},
 	formValues = {},
+	showHeading = true,
 }) {
 	const total_fields = getTotalFields({ controls });
 
 	return (
 		<div key={field.id} className={styles.child}>
-			<div className={styles.heading}>
-				{`${startCase(name || 'document')} ${index + INCREMENT_BY_ONE}`}
-			</div>
+			{showHeading ? (
+				<div className={styles.heading}>
+					{`${startCase(name || 'document')} ${index + INCREMENT_BY_ONE}`}
+				</div>
+			) : null}
 
 			<div className={styles.row_flex}>
 				{Object.keys(total_fields).map((rowFields) => (

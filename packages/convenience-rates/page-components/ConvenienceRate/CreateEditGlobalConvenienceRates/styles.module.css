@@ -1,0 +1,20 @@
+.container {
+	margin-left: 16px;
+}
+
+.arrowBack {
+	align-self: center;
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+	fill: #393f70;
+}
+
+.backText {
+	font-size: 16px;
+}
+
+.backDiv {
+	display: flex;
+	margin-top: 16px;
+}

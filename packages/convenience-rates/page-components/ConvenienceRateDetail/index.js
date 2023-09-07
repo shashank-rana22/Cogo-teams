@@ -1,5 +1,9 @@
+import ViewEditConvenienceFees from './ViewEditConvenienceFees';
+
 function ConvenienceRateDetail() {
-	return <div>Detail page</div>;
+	return (
+		<ViewEditConvenienceFees />
+	);
 }
 
 export default ConvenienceRateDetail;
