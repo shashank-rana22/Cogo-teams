@@ -53,6 +53,7 @@
 .agent_status {
 	display: flex;
 	align-items: center;
+	width: 50%;
 }
 
 .toggle {
@@ -81,6 +82,8 @@
 .header_bar {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 	color: #4f4f4f;
 }
 
@@ -90,4 +93,9 @@
 	margin-right: 4px;
 	cursor: pointer;
 	fill: #4f4f4f;
+}
+
+.back_section {
+	display: flex;
+	align-items: center;
 }
