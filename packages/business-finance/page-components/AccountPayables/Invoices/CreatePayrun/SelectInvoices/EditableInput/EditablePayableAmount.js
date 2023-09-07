@@ -29,8 +29,8 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	const {
 		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		payableAmount = 0,
-		invoiceType,
-	} = itemData;
+		invoiceType = '',
+	} = itemData || {};
 
 	useEffect(() => {
 		setValue(itemData.inputAmount);

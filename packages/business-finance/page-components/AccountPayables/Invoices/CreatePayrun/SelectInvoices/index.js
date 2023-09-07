@@ -24,7 +24,10 @@ const MIN_AMOUNT = 0;
 const ELEMENT_NOT_FOUND = -1;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
-const updateApiData = (prevApiData, itemData, key, value, checked, index, errorStatus) => {
+const updateApiData = ({
+	prevApiData = {}, itemData = {}, key = '', value = '',
+	checked = false, index = 0, errorStatus = '',
+}) => {
 	const newValue = { ...prevApiData };
 
 	if (index !== ELEMENT_NOT_FOUND) {
@@ -34,7 +37,6 @@ const updateApiData = (prevApiData, itemData, key, value, checked, index, errorS
 			|| errorStatus.maxTdsValueCrossed || errorStatus.lessTdsValueCrossed,
 			checked,
 		};
-
 		newValue.list[index][key] = value;
 
 		if (key === 'tdsAmount' && index >= MIN_AMOUNT) {
@@ -42,18 +44,12 @@ const updateApiData = (prevApiData, itemData, key, value, checked, index, errorS
 			newValue.list[index].inputAmount = newValue.list[index].payableValue - value;
 		}
 	}
-
 	return newValue;
 };
-const calculateErrorStatus = (
-	key,
-	value,
-	payableValue,
-	invoiceAmount,
-	tdsDeducted,
-	payableAmount,
-	tdsAmount,
-) => {
+const calculateErrorStatus = ({
+	key = '', value = 0, payableValue = 0, invoiceAmount = 0,
+	tdsDeducted = 0, payableAmount = 0, tdsAmount = 0,
+}) => {
 	const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 	let maxValueCrossed = false;
 	let lessValueCrossed = false;
@@ -77,12 +73,7 @@ const calculateErrorStatus = (
 		lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 	}
 
-	return {
-		maxValueCrossed,
-		lessValueCrossed,
-		lessTdsValueCrossed,
-		maxTdsValueCrossed,
-	};
+	return { maxValueCrossed, lessValueCrossed, lessTdsValueCrossed, maxTdsValueCrossed };
 };
 
 const getFunctions = ({ onChangeTableBodyCheckbox = () => {}, setEditedValue = () => {}, apiData = {} }) => ({
@@ -153,7 +144,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 				payableAmount = 0,
 				tdsAmount = 0,
 			} = prevApiData.list[index] || {};
-			const errorStatus = calculateErrorStatus(
+			const errorStatus = calculateErrorStatus({
 				key,
 				value,
 				payableValue,
@@ -161,16 +152,8 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 				tdsDeducted,
 				payableAmount,
 				tdsAmount,
-			);
-			const updatedData = updateApiData(
-				prevApiData,
-				itemData,
-				key,
-				value,
-				checked,
-				index,
-				errorStatus,
-			);
+			});
+			const updatedData = updateApiData({ prevApiData, itemData, key, value, checked, index, errorStatus });
 			return updatedData;
 		});
 	};

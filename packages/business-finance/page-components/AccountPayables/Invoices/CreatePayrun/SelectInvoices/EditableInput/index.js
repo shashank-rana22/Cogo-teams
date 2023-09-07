@@ -50,7 +50,7 @@ function Content({
 	lessValueCrossed = false,
 	maxValueCrossed = false,
 	value = '',
-	currency = 'INR',
+	currency = GLOBAL_CONSTANTS.currency_code.INR,
 	invoiceAmount = '',
 	totalTds = '',
 	tdsDeducted = '',
@@ -88,7 +88,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 	const [value, setValue] = useState(getByKey(itemData, key));
 	const {
 		invoiceAmount = 0,
-		currency,
+		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		totalTds = 0,
 		tdsDeducted = 0,
 	} = itemData || {};
