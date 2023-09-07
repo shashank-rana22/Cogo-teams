@@ -21,7 +21,7 @@ function SageMapping({ tradePartyDetails = {} }) {
 		<div className={styles.container}>
 			<div className={styles.heading}>Sage Mappings</div>
 
-			<Table columns={tableColumns} data={data} loading={loading} />
+			<Table columns={tableColumns} data={data} loading={loading} className={styles.table} />
 
 			<DeactivateSageMapping
 				showDeactivate={showDeactivate}

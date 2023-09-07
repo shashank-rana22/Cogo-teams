@@ -9,7 +9,7 @@ function DeactivateSageMapping({
 	setShowDeactivate = (() => { }),
 	refetch = (() => {}),
 }) {
-	const { loading, onSubmit } = useUpdateSageOrganizationIdMapping();
+	const { onSubmit } = useUpdateSageOrganizationIdMapping();
 
 	const updateMapping = () => {
 		const data = { id: showDeactivate, status: 'inactive' };
@@ -17,10 +17,6 @@ function DeactivateSageMapping({
 		setShowDeactivate(null);
 		refetch();
 	};
-
-	if (loading) {
-		return <div>Loading...</div>;
-	}
 
 	return (
 		<Modal

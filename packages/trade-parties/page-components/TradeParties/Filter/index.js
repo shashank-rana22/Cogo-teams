@@ -1,8 +1,8 @@
 import { Select, Input, Popover, Button } from '@cogoport/components';
-import { IcMDoubleFilter } from '@cogoport/icons-react';
+import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import FilterContent from './FilterContent/index';
+import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
 const ONE = 1;
@@ -45,45 +45,45 @@ function Filter(props) {
 				<h1>TradeParties</h1>
 			</div>
 			<div className={styles.right}>
-				<div className={styles.filter}>
-					<Popover
-						render="bottom"
-						content={(
-							<FilterContent
-								filterParams={filterParams}
-								setFilterParams={setFilterParams}
-								setIsFilterVisible={(value) => setIsFilterVisible(value)}
-								setPage={setPage}
-							/>
-						)}
-						onClickOutside={() => setIsFilterVisible(false)}
-						visible={isFilterVisible}
+				<Popover
+					render="bottom"
+					content={(
+						<FilterContent
+							filterParams={filterParams}
+							setFilterParams={setFilterParams}
+							setIsFilterVisible={(value) => setIsFilterVisible(value)}
+							setPage={setPage}
+						/>
+					)}
+					onClickOutside={() => setIsFilterVisible(false)}
+					visible={isFilterVisible}
+				>
+					<Button
+						themeType="secondary"
+						size="md"
+						onClick={() => setIsFilterVisible(!isFilterVisible)}
 					>
-						<Button
-							themeType="secondary"
-							size="md"
-							onClick={() => setIsFilterVisible(!isFilterVisible)}
-						>
-							<IcMDoubleFilter style={{ marginRight: '5px' }} />
-							Filter
-						</Button>
-					</Popover>
-				</div>
+						<IcMDoubleFilter style={{ marginRight: '5px' }} />
+						<b>	FILTER </b>
+					</Button>
+				</Popover>
 				<div>Search by :</div>
-				<div style={{ padding: 16, width: '200px' }}>
+				<div className={styles.type_of_search}>
 					<Select
+						size="sm"
 						value={typeOfSearch}
-						onChange={(value) => setTypeOfSearch(value)}
+						onChange={setTypeOfSearch}
 						options={options}
 					/>
 				</div>
 
 				<Input
-					size="md"
+					size="sm"
 					style={{ width: 300 }}
 					value={globalSearch}
 					onChange={setInput}
 					placeholder={PLACEHOLDER_MAPPING[typeOfSearch]}
+					prefix={<IcMSearchlight height={16} width={16} />}
 				/>
 			</div>
 		</div>

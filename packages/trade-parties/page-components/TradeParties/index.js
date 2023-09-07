@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import Filter from './Filter/index';
-import ListView from './ListView/index';
+import Filter from './Filter';
+import ListView from './ListView';
 
 const DEFAULT_PAGE = 1;
 

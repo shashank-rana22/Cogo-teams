@@ -35,19 +35,16 @@ function FilterContent({
 		setIsFilterVisible(false);
 	};
 	return (
-		<form>
+		<form className={styles.form}>
 			<div className={styles.filter}>
 				<div className={styles.header}>
-					<div>
-						<h3>Search</h3>
-					</div>
 					<div className={styles.right}>
 
-						<Button size="md" themeType="secondary" onClick={onReset}>
+						<Button size="md" themeType="secondary" onClick={onReset} className={styles.button}>
 							RESET FORM
 						</Button>
 						<Button
-							className={styles.results_button}
+							className={styles.button}
 							size="md"
 							onClick={handleSubmit(onSubmit)}
 						>
@@ -56,11 +53,11 @@ function FilterContent({
 						</Button>
 					</div>
 				</div>
-				<hr />
+
 				<br />
 				<h4>Serial ID</h4>
 				<InputController
-					size="md"
+					size="sm"
 					placeholder="Enter serial ID"
 					name="serial_id"
 					value={filterParams.serial_id}
@@ -70,7 +67,7 @@ function FilterContent({
 
 				<h4>PAN Number</h4>
 				<InputController
-					size="md"
+					size="sm"
 					placeholder="Enter number"
 					name="registration_number"
 					control={control}
@@ -82,16 +79,16 @@ function FilterContent({
 				<CountrySelectController
 					name="country_id"
 					control={control}
-					size="md"
+					size="sm"
 					placeholder="Enter or Select Country"
 					optionValueKey="id"
 
 				/>
 				<br />
 
-				<div>Company Type</div>
+				<h4>Company Type</h4>
 				<SelectController
-					size="md"
+					size="sm"
 					name="company_type"
 					control={control}
 					options={companyOptions}

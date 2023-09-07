@@ -18,7 +18,6 @@ const useListSageOrganizationIdMappings = ({ id }) => {
 	const apiTrigger = useCallback(async () => {
 		try {
 			const res = await trigger();
-
 			setData(res?.data?.list);
 		} catch (err) {
 			setData([]);
