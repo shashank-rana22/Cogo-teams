@@ -1,7 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { Tooltip, Checkbox, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useMemo, useEffect } from 'react';
+
+import { getFormatAmount } from '../../utils/getFormatAmount';
 
 import styles from './styles.module.css';
 
@@ -216,7 +219,7 @@ const useGetColumns = ({
 		},
 		{
 			Header   : (<div style={{ fontSize: '12px' }}>TDS APPLICABLE AMOUNT</div>),
-			accessor : (item) => `${item?.currency} ${item?.taxableAmount}` || '--',
+			accessor : (item) => getFormatAmount(item?.taxableAmount, item?.currency) || '--',
 			id       : 'taxableAmount',
 		},
 		{
@@ -240,7 +243,7 @@ const useGetColumns = ({
 		},
 		{
 			Header   : (<div style={{ fontSize: '12px' }}>SETTLED TDS</div>),
-			accessor : (item) => `${item?.currency} ${item?.settledTds}` || '--',
+			accessor : (item) => getFormatAmount(item?.settledTds, item?.currency) || '--',
 			id       : 'settledTds',
 		},
 		{
@@ -249,7 +252,7 @@ const useGetColumns = ({
 					PAID/RECIEVED
 					<RenderSortingArrows field="paidAmount" />
 				</div>),
-			accessor : (item) => `${item?.currency} ${item?.settledAmount}` || '--',
+			accessor : (item) => getFormatAmount(item?.settledAmount, item?.currency) || '--',
 			id       : 'settledAmount',
 		},
 		{

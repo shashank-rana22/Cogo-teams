@@ -1,6 +1,8 @@
+/* eslint-disable max-lines-per-function */
 import { Modal, Button, Datepicker, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useGetJVList from '../../../hooks/useGetJvsList';
@@ -10,6 +12,7 @@ import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
 
 import getLineItems from './LineItems';
 import ListData from './ListData';
+import ConfirmSettle from './SettleConfirmationModal';
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
@@ -29,7 +32,7 @@ export default function MatchModal({
 	selectedData = [], filters = {}, setSelectedData = () => {},
 	isDelete = false, setIsDelete = () => {},
 	reRender = false, setReRender = () => {},
-	matchBal = 0, submitSettleMatch = () => {}, settleLoading = false,
+	matchBal = 0, submitSettleMatch = () => {}, settleLoading = true,
 }) {
 	const [updateBal, setUpdateBal] = useState(matchBal);
 	const [dryRun, setDryRun] = useState(false);
@@ -38,6 +41,7 @@ export default function MatchModal({
 	const [date, setDate] = useState('');
 	const [showDocument, setShowDocument] = useState(false);
 	const [fileValue, setFileValue] = useState({});
+	const [settleConfirmation, setSettleConfirmation] = useState(false);
 
 	const {
 		checkData, postPaymentsSettlementCheck, checkLoading,
@@ -57,13 +61,13 @@ export default function MatchModal({
 	const onClick = () => {
 		setShowDocument(true);
 	};
-	const onOuterClick = () => {
+	const onOuterClickUploader = () => {
 		setShowDocument(false);
 		setFileValue({});
 	};
-	const handleDryRunClick = async () => {
+	const handleDryRunClick = () => {
 		setDryRun(true);
-		await postPaymentsSettlementCheck();
+		postPaymentsSettlementCheck();
 	};
 	useEffect(() => {
 		const SORTED_MS = updatedData
@@ -78,8 +82,7 @@ export default function MatchModal({
 		if (selectedData.length === ZERO_VALUE) {
 			setMatchModalShow(false);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedData]);
+	}, [selectedData, setMatchModalShow]);
 
 	useEffect(() => {
 		setCheckedData(checkData?.stackDetails || []);
@@ -87,13 +90,12 @@ export default function MatchModal({
 	}, [checkData]);
 
 	useEffect(() => {
-		if (success && checkedData?.length !== ZERO_VALUE) {
-			setUpdatedData(checkedData || updatedData);
+		if (success && !isEmpty(checkedData)) {
+			setUpdatedData((prev) => checkedData || prev);
 		} else {
 			setSuccess(true);
 		}
-		//  eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [checkedData]);
+	}, [checkedData, setSuccess, success]);
 
 	const handleRefreshClick = async () => {
 		setDryRun(false);
@@ -118,7 +120,6 @@ export default function MatchModal({
 	<>
 		<div className={styles.header}>
 			<span className={styles.supheader}>MATCHING</span>
-			{' '}
 			<span className={styles.subheader}>( Drag and drop to set the matching hierarchy )</span>
 		</div>
 		<br />
@@ -168,7 +169,7 @@ export default function MatchModal({
 						<UploadDocument
 							showDocument={showDocument}
 							setShowDocument={setShowDocument}
-							onOuterClick={onOuterClick}
+							onOuterClick={onOuterClickUploader}
 							fileValue={fileValue}
 							setFileValue={setFileValue}
 						/>
@@ -243,10 +244,25 @@ export default function MatchModal({
 				<Modal.Footer>
 					<Button
 						disabled={!canSettle || !dryRun || settleLoading}
-						onClick={() => submitSettleMatch({ updatedData, date, fileValue })}
+						onClick={() => setSettleConfirmation(true)}
 					>
 						Settle
 					</Button>
+					{
+						settleConfirmation
+						&& (
+							<ConfirmSettle
+								submitSettleMatch={submitSettleMatch}
+								setSettleConfirmation={setSettleConfirmation}
+								settleConfirmation={settleConfirmation}
+								updatedData={updatedData}
+								date={date}
+								fileValue={fileValue}
+								settleLoading={settleLoading}
+								setMatchModalShow={setMatchModalShow}
+							/>
+						)
+					}
 				</Modal.Footer>
 			</Modal>
 			{showJV && (

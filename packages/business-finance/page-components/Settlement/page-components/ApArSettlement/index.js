@@ -15,19 +15,16 @@ const EMPTY_DATA_LENGTH = 0;
 
 function ApArSettlement() {
 	const [filters, setFilters] = useState({
-		entityCode : '',
+		entityCode : '301',
 		date       : { startDate: null, endDate: null },
 		tradeParty : '',
 		accMode    : '',
-		sort       : {},
 		search     : '',
 		page       : 1,
 		pageLimit  : 10,
 		docType    : '',
 		status     : '',
 	});
-
-	const { search, ...restfilters } = filters || {};
 
 	const [sorting, setSorting] = useState({
 		sortType: 'Asc',
@@ -48,7 +45,7 @@ function ApArSettlement() {
 
 	const {
 		data, loading, refetch,
-		balanceRefetch, accountData, accountLoading, query,
+		balanceRefetch, accountData, accountLoading,
 		submitSettleMatch,
 		settleLoading,
 	} = useGetDocumentList({
@@ -96,27 +93,30 @@ function ApArSettlement() {
 	useEffect(() => {
 		refetch();
 		balanceRefetch();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(restfilters), query]);
+	}, [balanceRefetch, refetch]);
 	useEffect(() => {
 		refetch();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [sorting, query]);
+	}, [refetch]);
+	useEffect(() => {
+		setSelectedData([]);
+	}, [filters?.tradeParty, filters.entityCode]);
+
+	const pageCheckedRowsStringfy = JSON.stringify(pageCheckedRows);
 	useEffect(() => {
 		const SELECTED_IDS = new Set(selectedData?.map((row) => row.id));
 
 		const UPDATEDPAGECHECKEDROWS = {};
-		Object.keys(pageCheckedRows).forEach((pageNo) => {
-			UPDATEDPAGECHECKEDROWS[pageNo] = pageCheckedRows[pageNo]?.filter((id) => SELECTED_IDS?.has(id));
+		Object.keys(JSON.parse(pageCheckedRowsStringfy)).forEach((pageNo) => {
+			UPDATEDPAGECHECKEDROWS[pageNo] = JSON.parse(
+				pageCheckedRowsStringfy,
+			)[pageNo]?.filter((id) => SELECTED_IDS?.has(id));
 		});
-
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
 
 		const TOTAL = selectedData?.reduce((sum, item) => +sum + (+item.balanceAmount
 		* +item.exchangeRate * +item.signFlag), INITIAL_MAT_BAL);
 		setMatchBal(TOTAL);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedData]);
+	}, [selectedData, pageCheckedRowsStringfy]);
 
 	return (
 		<div>

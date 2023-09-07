@@ -149,9 +149,9 @@ function EditFields({
 				onClick={() => {
 					doneSet(false);
 					if (fieldType === 'tds') {
-						new_item.tds = parseFloat(inputvalue);
+						new_item.tds = parseFloat(inputvalue || originalTDS);
 					} else {
-						new_item.allocationAmount = parseFloat(inputvalue);
+						new_item.allocationAmount = parseFloat(inputvalue || originalAllocation);
 					}
 					handleFunc();
 				}}

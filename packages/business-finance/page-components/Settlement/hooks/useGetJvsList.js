@@ -20,7 +20,7 @@ const useGetJVList = ({ filters = {} }) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.error?.message);
+			Toast.error(error?.error?.message || 'Something went wrong');
 		}
 	};
 

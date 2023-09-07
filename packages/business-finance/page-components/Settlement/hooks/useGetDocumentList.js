@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { getFormatDates } from '../utils/getFormatDate';
 
@@ -55,57 +55,69 @@ const useGetDocumentList = ({
 	const { query, debounceQuery } = useDebounceQuery();
 	const INITIAL_BAL = 0;
 	const {
-		search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '', entityCode, sort, ...rest
+		search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '',
+		entityCode, page = '1', pageLimit = 10,
 	} = filters || {};
+	const { startDate = '', endDate = '' } = date || {};
+	const { sortBy = '', sortType = '' } = sorting || {};
 	const [balanceData, setBalanceData] = useState(INITIAL_BAL);
-	const balanceRefetch = async () => {
-		try {
-			if (tradeParty && entityCode) {
-				const rep = await balanceTrigger({
-					params: {
-						...rest,
-						startDate             : (date?.startDate && getFormatDates(date?.startDate)) || undefined,
-						endDate               : (date?.endDate && getFormatDates(date?.endDate)) || undefined,
-						orgId                 : tradeParty,
-						accModes              : accMode || undefined,
-						query                 : query || undefined,
-						docType               : undefined,
-						documentPaymentStatus : undefined,
-						entityCode,
-					},
-				});
-				setBalanceData(rep?.data);
+	const balanceRefetch = useCallback(() => {
+		(async () => {
+			try {
+				if (tradeParty && entityCode) {
+					const rep = await balanceTrigger({
+						params: {
+							page,
+							pageLimit,
+							startDate             : (startDate && getFormatDates(startDate)) || undefined,
+							endDate               : (endDate && getFormatDates(endDate)) || undefined,
+							orgId                 : tradeParty,
+							accModes              : accMode || undefined,
+							query                 : query || undefined,
+							docType               : undefined,
+							documentPaymentStatus : undefined,
+							entityCode,
+						},
+					});
+					setBalanceData(rep?.data);
+				}
+			} catch (error) {
+				setBalanceData(INITIAL_BAL);
+				toastApiError(error);
 			}
-		} catch (error) {
-			setBalanceData(INITIAL_BAL);
-			toastApiError(error);
-		}
-	};
-	const refetch = async () => {
-		try {
-			if (tradeParty && entityCode) {
-				await trigger({
-					params: {
-						...rest,
-						orgId                 : tradeParty,
-						accModes              : accMode || undefined,
-						documentPaymentStatus : status || undefined,
-						startDate             : (date?.startDate && getFormatDates(date?.startDate)) || undefined,
-						endDate               : (date?.endDate && getFormatDates(date?.endDate)) || undefined,
-						docType               : docType || undefined,
-						query                 : query || undefined,
-						sortBy                : sorting?.sortBy || undefined,
-						sortType              : sorting?.sortType || undefined,
-						entityCode,
-						...sort,
-					},
-				});
+		})();
+	}, [accMode, balanceTrigger, endDate, entityCode, page, pageLimit, query, startDate, tradeParty]);
+	const refetch = useCallback(() => {
+		(async () => {
+			try {
+				if (tradeParty && entityCode) {
+					await trigger({
+						params: {
+							page,
+							pageLimit,
+							orgId                 : tradeParty,
+							accModes              : accMode || undefined,
+							documentPaymentStatus : status || undefined,
+							startDate             : (startDate && getFormatDates(startDate)) || undefined,
+							endDate               : (endDate && getFormatDates(endDate)) || undefined,
+							docType               : docType || undefined,
+							query                 : query || undefined,
+							sortBy                : sortBy || undefined,
+							sortType              : sortType || undefined,
+							entityCode,
+						},
+					});
+				}
+			} catch (error) {
+				toastApiError(error);
 			}
-		} catch (error) {
-			toastApiError(error);
-		}
-	};
-	const submitSettleMatch = async ({ updatedData = [], date:settleDate = '', fileValue = {} }) => {
+		})();
+	}, [accMode, docType, endDate, entityCode, page, pageLimit,
+		query, sortBy, sortType, startDate, status, tradeParty, trigger]);
+	const submitSettleMatch = async ({
+		updatedData = [], date:settleDate = '',
+		fileValue = {}, setSettleConfirmation = () => {},
+	}) => {
 		try {
 			const response = await settleTrigger({
 				data: {
@@ -119,9 +131,10 @@ const useGetDocumentList = ({
 			setMatchModalShow(false);
 			refetch();
 			setSelectedData([]);
+			setSettleConfirmation(false);
 			Toast.success('Settle successfully');
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.data?.message || error?.message || 'Something went wrong');
 		}
 	};
 
