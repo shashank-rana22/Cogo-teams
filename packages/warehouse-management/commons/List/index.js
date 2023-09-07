@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 const INITIAL_PAGE = 1;
 const SIZE_FOR_SHIPMENT_PAGE = 10;
+const ZERO_ITEMS = 0;
 
 function List({
 	fields = [],
@@ -16,7 +17,7 @@ function List({
 	listAPI = () => {},
 	functions = {},
 	Child = <div />,
-	total_count = 0,
+	totalCount = 0,
 	activeTab = '',
 	page = 1,
 	setPage = () => {},
@@ -24,11 +25,11 @@ function List({
 	const { list = [] } = data;
 	if (activeTab === 'inventory') {
 		Object.keys(data).forEach((key) => {
-			const MP = {};
-			MP.shipmentId = key;
-			MP.details = data[key];
-			MP.noOfBoxes = data[key].length;
-			list.push(MP);
+			list.push({
+				shipmentId : key,
+				details    : data[key],
+				noOfBoxes  : data[key].length,
+			});
 		});
 	}
 
@@ -53,10 +54,10 @@ function List({
 					<div className={styles.pagination_container}>
 						<Pagination
 							type="table"
-							totalItems={total_count || data?.totalRecords}
+							totalItems={totalCount || data?.totalRecords || ZERO_ITEMS}
 							currentPage={page || INITIAL_PAGE}
 							pageSize={SIZE_FOR_SHIPMENT_PAGE}
-							onPageChange={(pageVal) => setPage(pageVal)}
+							onPageChange={setPage}
 						/>
 					</div>
 				)}

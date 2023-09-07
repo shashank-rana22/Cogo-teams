@@ -24,7 +24,7 @@ const configureFields = [
 	},
 	{
 		key    : 'aislesCount',
-		label  : 'No. of Aisle Type',
+		label  : 'No. of Aisle',
 		span   : 1,
 		render : (item) => (
 			<div>

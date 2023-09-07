@@ -15,10 +15,10 @@ function CargoAcknowledgmentModal({
 }) {
 	const DATA = [];
 	cargoData?.forEach((item) => {
-		const MP = {};
-		MP.cargoId = item?.cargoNumber;
-		MP.services = item?.services;
-		DATA.push(MP);
+		DATA.push({
+			cargoId  : item?.cargoNumber,
+			services : item?.services,
+		});
 	});
 
 	return (

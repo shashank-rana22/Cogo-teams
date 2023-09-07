@@ -3,14 +3,9 @@ import { startCase, isEmpty } from '@cogoport/utils';
 const inventoryFields = {
 	fields: [
 		{
-			key    : 'sid',
-			label  : 'SID No.',
-			span   : 1.5,
-			render : (item) => (
-				<div>
-					{item?.shipmentId}
-				</div>
-			),
+			key   : 'shipmentId',
+			label : 'SID No.',
+			span  : 1.5,
 		},
 		{
 			key   : 'warehouseLocation',
@@ -19,14 +14,9 @@ const inventoryFields = {
 			func  : 'handleWarehouseLocation',
 		},
 		{
-			key    : 'noOfBoxes',
-			label  : 'No. of Boxes',
-			span   : 1.5,
-			render : (item) => (
-				<div>
-					{item?.noOfBoxes}
-				</div>
-			),
+			key   : 'noOfBoxes',
+			label : 'No. of Boxes',
+			span  : 1.5,
 		},
 		{
 			key   : 'services',
@@ -43,25 +33,24 @@ const inventoryFields = {
 	],
 	showMoreFields: [
 		{
-			key    : 'cargoNumber',
-			label  : 'Cargo Number',
-			span   : 2.2,
-			render : (item) => (
-				<div>
-					{item?.cargoNumber}
-				</div>
-			),
+			key   : 'cargoNumber',
+			label : 'Cargo Number',
+			span  : 2.2,
 		},
 		{
 			key    : 'warehouseLocation',
 			label  : 'Warehouse Location',
 			span   : 2.2,
 			render : (item) => {
-				const { warehouseLocation = {} } = item;
 				const {
-					zoneNumber = '',
-					aisleNumber = '', rackNumber = '', shelfNumber = '', binNumber = '',
-				} = warehouseLocation;
+					warehouseLocation: {
+						zoneNumber = '',
+						aisleNumber = '',
+						rackNumber = '',
+						shelfNumber = '',
+						binNumber = '',
+					} = {},
+				} = item;
 				return (
 					<div>
 						{`${zoneNumber}-${aisleNumber}-${rackNumber}-${shelfNumber}-${binNumber}`}
@@ -90,7 +79,7 @@ const inventoryFields = {
 					{
 					isEmpty(item)
 						? '-'
-						: item?.services.map((service) => (
+						: item?.services?.map((service) => (
 							<span key={service.serviceName}>
 								{ `${startCase(service.serviceName)}, ` }
 							</span>
@@ -100,14 +89,10 @@ const inventoryFields = {
 			),
 		},
 		{
-			key    : 'status',
-			label  : 'Status',
-			span   : 2.2,
-			render : (item) => (
-				<div>
-					{startCase(item?.serviceStatus) || '-'}
-				</div>
-			),
+			key   : 'serviceStatus',
+			label : 'Status',
+			span  : 2.2,
+			func  : 'startCase',
 		},
 		{
 			key   : 'update',

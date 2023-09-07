@@ -6,7 +6,7 @@
 	margin-bottom: var(--open-margin);
 	word-wrap: wrap;
 	background: var(--color-secondary-5);
-	filter: drop-shadow(0 0 5.9029px rgb(0 0 0 / 15%));
+	filter: drop-shadow(0 0 5.9px rgb(0 0 0 / 15%));
 	border-radius: 4px;
 	transition: 0.3s;
 }

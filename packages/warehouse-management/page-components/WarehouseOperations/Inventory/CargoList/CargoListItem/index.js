@@ -11,7 +11,7 @@ function CargoListItem({
 	functions = {},
 }) {
 	return (
-		<section className={styles.cargo_list_container}>
+		<div className={styles.cargo_list_container}>
 			<div
 				className={styles.row}
 			>
@@ -38,7 +38,7 @@ function CargoListItem({
 					);
 				})}
 			</div>
-		</section>
+		</div>
 	);
 }
 

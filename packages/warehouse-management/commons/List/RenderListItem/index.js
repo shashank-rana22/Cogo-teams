@@ -1,6 +1,6 @@
 import { EmptyState } from '@cogoport/air-modules';
 import { Button } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 
 import ListItem from './ListItem';
 import styles from './styles.module.css';
@@ -45,12 +45,12 @@ function RenderListItem({
 							<Button
 								themeType="linkUi"
 								onClick={() => {
-									setIsOpen(null);
+									setIsOpen('');
 								}}
 							>
 								Show Less
-								<IcMArrowDown
-									style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+								<IcMArrowUp
+									style={{ cursor: 'pointer' }}
 								/>
 							</Button>
 						) : (!loading && (

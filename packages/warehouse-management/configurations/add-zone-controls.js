@@ -1,20 +1,22 @@
 const controls = [
 	{
-		name  : 'zoneName',
-		label : 'Enter Zone name',
-		type  : 'text',
-		span  : 6,
-		rules : {
-			required: 'This is required',
+		name        : 'zoneName',
+		label       : 'Zone name',
+		placeholder : 'Enter Zone name',
+		type        : 'text',
+		span        : 6,
+		rules       : {
+			required: true,
 		},
 	},
 	{
-		name    : 'commodity',
-		label   : 'Select Commodity type',
-		type    : 'select',
-		span    : 6,
-		value   : 'general',
-		options : [
+		name        : 'commodity',
+		label       : 'Commodity type',
+		placeholder : 'Select Commodity type',
+		type        : 'select',
+		span        : 6,
+		value       : 'general',
+		options     : [
 			{
 				label : 'General',
 				value : 'general',
@@ -32,7 +34,7 @@ const controls = [
 				value : 'temperature_controlled_pharma',
 			},
 		],
-		rules: { required: 'This is required' },
+		rules: { required: true },
 	},
 	{
 		name               : 'aisles',
@@ -44,44 +46,49 @@ const controls = [
 
 		controls: [
 			{
-				label : 'Enter number of aisle of this type',
-				name  : 'aislesCount',
-				span  : 6,
-				type  : 'number',
+				label       : 'Aisle',
+				placeholder : 'Enter number of aisle of this type',
+				name        : 'aislesCount',
+				span        : 6,
+				type        : 'number',
 
-				rules: { required: 'Required' },
+				rules: { required: true },
 			},
 			{
-				label : 'Enter number of Racks',
-				name  : 'racksCount',
-				span  : 6,
-				type  : 'number',
+				label       : 'Racks',
+				placeholder : 'Enter number of Racks',
+				name        : 'racksCount',
+				span        : 6,
+				type        : 'number',
 
-				rules: { required: 'Required' },
+				rules: { required: true },
 			},
 			{
-				label : 'Enter number of Shelves/racks',
-				name  : 'shelvesCount',
-				span  : 6,
-				type  : 'number',
+				label       : 'Shelves/Racks',
+				placeholder : 'Enter number of Shelves/Racks',
+				name        : 'shelvesCount',
+				span        : 6,
+				type        : 'number',
 
-				rules: { required: 'Required' },
+				rules: { required: true },
 			},
 			{
-				label : 'Enter number of bins in shelf',
-				name  : 'totalBinsInShelf',
-				span  : 6,
-				type  : 'number',
+				label       : 'Bins in Shelf',
+				placeholder : 'Enter number of bins in shelf',
+				name        : 'totalBinsInShelf',
+				span        : 6,
+				type        : 'number',
 
-				rules: { required: 'Required' },
+				rules: { required: true },
 			},
 			{
-				label : 'Enter number of Bins',
-				name  : 'binsCount',
-				span  : 6,
-				type  : 'number',
+				label       : 'Bins',
+				placeholder : 'Enter number of Bins',
+				name        : 'binsCount',
+				span        : 6,
+				type        : 'number',
 
-				rules: { required: 'Required' },
+				rules: { required: true },
 			},
 			{
 				label       : 'Length',
@@ -89,7 +96,7 @@ const controls = [
 				span        : 2,
 				type        : 'number',
 				placeholder : 'Length',
-				rules       : { required: 'Required' },
+				rules       : { required: true },
 			},
 			{
 				label       : 'Width',
@@ -97,7 +104,7 @@ const controls = [
 				span        : 2,
 				type        : 'number',
 				placeholder : 'Width',
-				rules       : { required: 'Required' },
+				rules       : { required: true },
 			},
 			{
 				label       : 'Height',
@@ -105,7 +112,7 @@ const controls = [
 				span        : 2,
 				type        : 'number',
 				placeholder : 'Height',
-				rules       : { required: 'Required' },
+				rules       : { required: true },
 			},
 		],
 	},

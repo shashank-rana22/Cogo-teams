@@ -70,9 +70,7 @@ const getComponentMapping = ({
 				prefix={<IcMAppSearch />}
 				placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
 				className={styles.search_text}
-				onChange={(val) => {
-					setSearchValue(val);
-				}}
+				onChange={setSearchValue}
 				value={searchValue}
 				suffix={(
 					<ButtonIcon
@@ -97,9 +95,7 @@ const getComponentMapping = ({
 					prefix={<IcMAppSearch />}
 					placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
 					className={styles.search_text}
-					onChange={(val) => {
-						setSearchValue(val);
-					}}
+					onChange={setSearchValue}
 					value={searchValue}
 					suffix={(
 						<ButtonIcon
