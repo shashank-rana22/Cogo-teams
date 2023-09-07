@@ -134,7 +134,7 @@ export default function CardItem({
 						)
                     }
 				</div>
-				<div className={cl`${styles.formattedamount} ${styles.flex}`}>
+				<div className={cl`${styles.formattedamount} ${styles.flex} ${styles.nostro}`} style={{ width: '10%' }}>
 					{getFormatAmount(nostroAmount, currency)}
 				</div>
 				<div className={cl`${styles.formattedamount} ${styles.flex}`}>

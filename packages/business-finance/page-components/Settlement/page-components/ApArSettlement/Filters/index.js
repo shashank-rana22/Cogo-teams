@@ -1,7 +1,8 @@
-import { SingleDateRange, cl, MultiSelect } from '@cogoport/components';
+import { SingleDateRange, cl, MultiSelect, Toggle } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import { ACC_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter';
 
@@ -16,16 +17,31 @@ function Filters({
 		onFiltersChange(filterName, value);
 	};
 
+	const { query } = useRouter();
+
 	const { control } = useForm();
+
+	const handleVersionChange = () => {
+		window.location.href = `/${query.partner_id}/business-finance/settlement/ap-ar-settlement`;
+	};
 
 	return (
 		<div className={styles.container}>
 
-			<div>
+			<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
 				<span className={styles.criteria}>
 					Selection Criteria
 					<IcMInfo style={{ marginLeft: '4px' }} />
 				</span>
+				<div>
+					<Toggle
+						name="toggle"
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
+				</div>
 			</div>
 
 			<div className={styles.horizontal} />

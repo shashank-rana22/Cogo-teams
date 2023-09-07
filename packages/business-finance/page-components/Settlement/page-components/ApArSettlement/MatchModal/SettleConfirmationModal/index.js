@@ -8,6 +8,7 @@ export default function ConfirmSettle({
 	updatedData = [],
 	date = '',
 	fileValue = {},
+	settleLoading = false,
 }) {
 	return (
 		<div>
@@ -27,7 +28,9 @@ export default function ConfirmSettle({
 						fontWeight     : '500',
 					}}
 					>
+
 						<p>Are you sure you want to settle?</p>
+
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
@@ -36,6 +39,7 @@ export default function ConfirmSettle({
 						style={{ marginRight: '6px' }}
 						onClick={() => { setSettleConfirmation(false); }}
 						themeType="secondary"
+						loading={settleLoading}
 					>
 						NO
 					</Button>
@@ -44,6 +48,7 @@ export default function ConfirmSettle({
 						onClick={() => {
 							submitSettleMatch({ updatedData, date, fileValue, setSettleConfirmation });
 						}}
+						loading={settleLoading}
 					>
 						YES
 					</Button>
