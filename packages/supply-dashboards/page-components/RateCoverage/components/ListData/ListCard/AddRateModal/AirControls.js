@@ -171,7 +171,7 @@ const airControls = ({
 		heading  : 'Density Cargo',
 		name     : 'density_cargo',
 		type     : 'select',
-		value    : 'high_density',
+		value    : data?.density_cargo || 'high_density',
 		options  : densityCargoOptions,
 		disabled : true,
 		span     : 4,
@@ -180,7 +180,7 @@ const airControls = ({
 	{
 		heading     : 'Density Ratio',
 		name        : 'density_ratio',
-		value       : '1:500',
+		value       : data?.density_ratio || '1_500',
 		disabled    : true,
 		span        : 4,
 		options     : densityRatioOptions,

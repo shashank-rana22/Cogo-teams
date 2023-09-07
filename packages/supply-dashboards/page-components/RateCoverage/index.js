@@ -9,17 +9,15 @@ function RateCoverage() {
 	const ACTIVE_TAB = 'rate_density';
 
 	const geo = getGeoConstants();
-	const { navigations = {} } = geo;
-	const { supply_dashboard = {} } = navigations;
-	const { rfq_enquiries = {} } = supply_dashboard;
-	const { tabs = [] } = rfq_enquiries;
+
+	const tabs = geo?.navigations?.supply_dashboard?.rfq_enquiries?.tabs || [];
+
 	const handleTabChange = (tab) => {
 		if (tab !== 'rate_density') {
 			const route = tab.replace('_', '-');
 			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
-
 	return (
 		<div>
 			<Tabs fullWidth activeTab={ACTIVE_TAB} themeType="primary" onChange={(tab) => { handleTabChange(tab); }}>
