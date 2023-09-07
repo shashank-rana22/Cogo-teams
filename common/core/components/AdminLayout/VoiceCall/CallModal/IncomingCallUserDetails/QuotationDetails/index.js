@@ -1,4 +1,6 @@
 import { AsyncSelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -16,16 +18,16 @@ const USER_ACTIVITIES = ['sales', 'support', 'cp_support', 'supply'];
 const SERVICE_MAPPING = {
 	supply              : 'service_type',
 	shipment_specialist : 'shipment_type',
-	latest_revert_rate  : 'service_type',
-	latest_quotation    : 'service_type',
-	latest_shipment     : 'shipment_type',
-	latest_spot_search  : 'search_type',
+	last_revert_rate    : 'service_type',
+	last_quotation      : 'service_type',
+	last_shipment       : 'shipment_type',
+	last_spot_search    : 'search_type',
 };
 
 const getFormatedData = ({ singleShipmentData = {} }) => {
 	const { name = '', data = {} } = singleShipmentData || {};
 	let updatedData = {};
-	if (name === 'latest_quotation' && !isEmpty(data)) {
+	if (name === 'last_quotation' && !isEmpty(data)) {
 		const { primary_service = '', services = {} } = data;
 		updatedData = Object.values(services || {}).find(
 			(service) => service?.service_type === primary_service || !service?.trade_type,
@@ -84,12 +86,23 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 							<div className={styles.details}>
 								<PortDetails serviceData={updatedData} service={SERVICE_MAPPING[name]} />
 								<CargoDetails
-									detail={name === 'latest_revert_rate'
+									detail={name === 'last_revert_rate'
 										? updatedData?.data : updatedData}
 									service={SERVICE_MAPPING[name]}
 								/>
-								{name === 'latest_revert_rate'
+								{name === 'last_revert_rate'
 									? <RevertedPriceMapping updatedData={updatedData} /> : null }
+
+								<div className={styles.activity_on}>
+									{`${startCase(name)} At:`}
+									<div className={styles.user_info}>
+										{formatDate({
+											date       : updatedData?.created_at || '-',
+											formatType : 'date',
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+										})}
+									</div>
+								</div>
 							</div>
 						</div>
 					);

@@ -13,6 +13,7 @@ function FeedbackModal({
 	callStartAt = '',
 	callEndAt = '',
 	callRecordId = '',
+	agentType = '',
 }) {
 	const { mobile_number = '', mobile_country_code = '' } = receiverUserDetails || {};
 	const { handleSubmit, control, formState: { errors }, watch } = useForm();
@@ -37,6 +38,7 @@ function FeedbackModal({
 		mobileCountryCode : mobile_country_code,
 		mobileNumber      : mobile_number,
 		title,
+		agentType,
 	});
 
 	return (

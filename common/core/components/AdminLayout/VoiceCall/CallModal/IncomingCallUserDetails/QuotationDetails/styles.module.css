@@ -18,6 +18,7 @@
 	max-height: 332px;
 	margin-top: 4px;
 	overflow-y: auto;
+	transition: 0.5s ease-in-out;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -65,5 +66,27 @@
 	display: flex;
 	align-items: center;
 	margin-top: 6px;
+	font-size: 12px;
+}
+
+.activity_on {
+	display: flex;
+	align-items: center;
+	margin-top: 6px;
+	font-size: 12px;
+}
+
+.user_info {
+	margin-left: 6px;
+	font-weight: 600;
+}
+
+.sid {
+	font-weight: 500;
+}
+
+.service_type {
+	display: flex;
+	align-items: center;
 	font-size: 12px;
 }

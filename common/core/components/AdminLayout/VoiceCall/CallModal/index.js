@@ -26,6 +26,8 @@ function CallModal({
 	attendees = [],
 	conferenceType = '',
 	callState = {},
+	callUserDetails = {},
+	callUserLoading = false,
 }) {
 	const { handleSubmit, control, formState: { errors }, watch, reset } = useForm();
 
@@ -113,7 +115,11 @@ function CallModal({
 						)}
 					</div>
 				</div>
-				<IncomingCallUserDetails receiverUserDetails={receiverUserDetails} />
+				<IncomingCallUserDetails
+					receiverUserDetails={receiverUserDetails}
+					callUserDetails={callUserDetails}
+					callUserLoading={callUserLoading}
+				/>
 			</Modal.Body>
 		</Modal>
 	);

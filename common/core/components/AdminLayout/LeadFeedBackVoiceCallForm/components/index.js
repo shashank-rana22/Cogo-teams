@@ -26,13 +26,11 @@ function LeadFeedBackVoiceCallForm() {
 		leadFeedbackFormData = {},
 		partnerId = '',
 		loggedInAgentId = '',
-		callRecordId = '',
 	} = useSelector(({ profile }) => ({
 		leadFeedBackFormType : profile?.lead_feedback_form_type,
 		leadFeedbackFormData : profile?.lead_feedback_form_data,
 		loggedInAgentId      : profile?.user?.id,
 		partnerId            : profile?.partner?.id,
-		callRecordId         : profile?.lead_feedback_form_data?.callRecordId,
 	}));
 
 	const dispatch = useDispatch();
@@ -54,6 +52,7 @@ function LeadFeedBackVoiceCallForm() {
 		lead_organization_id = '',
 		lead_user_id = '',
 		source = '',
+		callRecordId = '',
 		...restData
 	} = leadFeedbackFormData || {};
 

@@ -55,13 +55,11 @@ function PortDetails({ serviceData = {}, service = '' }) {
 
 				<div className={styles.flex_row_origin}>
 					<div className={styles.port_details}>
-
 						<Tooltip content={DISPLAY_DATA_MAPPING[tradeType]?.name} placement="bottom">
 							<div className={styles.single_port}>
 								{DISPLAY_DATA_MAPPING[tradeType]?.name}
 							</div>
 						</Tooltip>
-
 						<div className={styles.port_codes}>
 							(
 							{DISPLAY_DATA_MAPPING[tradeType]?.code}
@@ -72,7 +70,6 @@ function PortDetails({ serviceData = {}, service = '' }) {
 					<div className={styles.country}>
 						{DISPLAY_DATA_MAPPING[tradeType]?.country}
 					</div>
-
 				</div>
 			</div>
 		);
@@ -82,24 +79,20 @@ function PortDetails({ serviceData = {}, service = '' }) {
 		<div className={styles.port_pair}>
 			<div className={styles.port}>
 				<div className={styles.port_details}>
-
 					<Tooltip content={originDetails?.name} placement="bottom">
 						<div className={styles.port_name}>
 							{originDetails?.name}
 						</div>
 					</Tooltip>
-
 					<div className={styles.port_codes}>
 						(
 						{originDetails?.code}
 						)
 					</div>
 				</div>
-
 				<div className={styles.country}>
 					{startCase(originDetails?.country)}
 				</div>
-
 			</div>
 			<IcMPortArrow width={16} height={16} />
 			<div className={styles.port}>
@@ -109,7 +102,6 @@ function PortDetails({ serviceData = {}, service = '' }) {
 							{destinationDetails?.name}
 						</div>
 					</Tooltip>
-
 					<div className={styles.port_codes}>
 						(
 						{destinationDetails?.code}

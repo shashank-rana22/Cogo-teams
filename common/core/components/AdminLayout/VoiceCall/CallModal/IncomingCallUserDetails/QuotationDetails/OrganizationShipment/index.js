@@ -17,15 +17,29 @@ function OrganizationShipment({ shipmentList = [], shipmentLoading = false }) {
 		<div className={styles.shipment_container}>
 			{(shipmentList || []).map((item) => (
 				<div className={styles.details} key={item?.id}>
-					<PortDetails serviceData={item} service="shipment_type" />
-					<CargoDetails detail={item} service="shipment_type" />
-					<div className={styles.agent_details}>
-						Agent :-
+					<div className={styles.sid_details}>
+						SID :
 						{' '}
 						<span className={styles.title}>
-							{startCase(item?.agent?.name)}
+							{item?.serial_id}
 						</span>
+						<div className={styles.agent_details}>
+							Agent :
+							{' '}
+							<div className={styles.sid}>
+								{startCase(item?.booking_agent?.name)}
+							</div>
+						</div>
 					</div>
+					<div className={styles.service_type}>
+						Shipment Type:
+						<div className={styles.sid}>
+							{startCase(item?.shipment_type)}
+						</div>
+					</div>
+					<PortDetails serviceData={item} service="shipment_type" />
+					<CargoDetails detail={item} service="shipment_type" />
+
 				</div>
 			))}
 		</div>

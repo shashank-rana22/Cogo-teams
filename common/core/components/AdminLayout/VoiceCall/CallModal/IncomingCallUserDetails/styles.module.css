@@ -43,3 +43,17 @@
 	font-size: 12px;
 	font-weight: 600;
 }
+
+.title {
+	width: calc(100% - 100px);
+	overflow: hidden;
+	font-weight: 500;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+}
