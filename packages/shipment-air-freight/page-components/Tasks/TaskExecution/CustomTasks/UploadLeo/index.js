@@ -1,8 +1,9 @@
 import { List } from '@cogoport/air-modules';
-import { Tooltip, Button, Toast } from '@cogoport/components';
+import { Tooltip, Button, ButtonIcon, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMUpload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListShipmentDocuments from '../../../../../hooks/useListShipmentDocuments';
@@ -10,12 +11,13 @@ import useUpdateTask from '../../../../../hooks/useUpdateTask';
 
 import { uploadChecklistFields } from './configs/upload-checklist-fields';
 import styles from './styles.module.css';
-import UploadDocument from './UploadDocument';
+import UploadLeoDocument from './UploadLeoDocument';
 
 function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { fields = [] } = uploadChecklistFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
+	const [uploadLeoModal, setUploadLeoModal] = useState({});
 
 	const DEFAULT_FILTERS = {
 		document_type : 'checklist',
@@ -69,10 +71,17 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 			</Button>
 		),
 		handleUploadDoc: (singleItem) => (
-			<UploadDocument
-				singleItem={singleItem}
-				setInvoiceData={setInvoiceData}
+			<ButtonIcon
+				icon={(
+					<div className={styles.button_icon}>
+						<IcMUpload />
+						Upload Leo
+					</div>
+				)}
+				onClick={() => setUploadLeoModal(singleItem)}
+				themeType="primary"
 			/>
+
 		),
 	};
 
@@ -82,6 +91,8 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 			documents: invoiceData,
 		},
 	};
+
+	console.log('payload', payload);
 
 	const handleFormSubmit = () => {
 		if (payload?.data?.documents?.length !== data?.total_count) {
@@ -109,6 +120,13 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 					</Button>
 				</div>
 			</div>
+			{!isEmpty(uploadLeoModal) && (
+				<UploadLeoDocument
+					uploadLeoModal={uploadLeoModal}
+					setUploadLeoModal={setUploadLeoModal}
+					setInvoiceData={setInvoiceData}
+				/>
+			)}
 		</div>
 	);
 }

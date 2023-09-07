@@ -14,7 +14,7 @@ export const uploadChecklistFields = () => ({
 		},
 		{
 			key   : 'view_doc',
-			label : 'View Doc',
+			label : 'View Checklist',
 			span  : 3,
 			func  : 'handleViewDoc',
 		},
