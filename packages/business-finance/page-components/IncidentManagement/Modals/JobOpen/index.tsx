@@ -70,14 +70,13 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 						}
 					/>
 					<Modal.Body>
-						<div style={{ marginTop: '-28px' }}>
-							{(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-								<StakeHolderTimeline
-									timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
-									isStatusPill={isStatus}
-								/>
-							)}
-						</div>
+
+						{(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
+							<StakeHolderTimeline
+								timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
+								isStatusPill={isStatus}
+							/>
+						)}
 
 						<div className={styles.details_container}>
 							<div className={styles.details}>

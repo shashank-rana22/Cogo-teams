@@ -20,7 +20,7 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
 	const { t } = useTranslation(['incidentManagement']);
 	return (
-		<div style={{ marginTop: '28px' }}>
+		<div>
 			<div className={styles.heading}>
 				<h3>{t('incidentManagement:approval')}</h3>
 				{isStatusPill?.display ? (
