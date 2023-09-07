@@ -6,7 +6,7 @@ export { default } from '@cogoport/shipment-air-freight/page-components';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common', 'airBookingDesk'])),
+			...(await serverSideTranslations(locale, ['common'])),
 		},
 	};
 }
