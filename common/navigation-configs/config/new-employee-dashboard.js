@@ -12,6 +12,9 @@ const newEmployeeDashboard = {
 	'/[partner_id]/new-employee-dashboard/separation': {
 		navigation: 'new_employee_dashboard',
 	},
+	'/[partner_id]/new-employee-dashboard/resignation-form': {
+		navigation: 'new_employee_dashboard',
+	},
 };
 
 module.exports = newEmployeeDashboard;
