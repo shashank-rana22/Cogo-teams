@@ -26,7 +26,7 @@ function FilterContent({
 	};
 	const onReset = () => {
 		const RESET_VALUE = {};
-		Object.keys(filterParams).forEach((key) => { RESET_VALUE[key] = ''; });
+		Object.keys(filterParams).forEach((key) => { RESET_VALUE[key] = null; });
 		// console.log(resetValue);
 		RESET_VALUE.page = 1;
 		setFilterParams(RESET_VALUE);
