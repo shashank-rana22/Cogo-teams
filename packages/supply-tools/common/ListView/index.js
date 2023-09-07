@@ -94,7 +94,7 @@ function ListView({
 					size="lg"
 					placement="top"
 				>
-					<Modal.Header title="Edit Detention / Demurrage" />
+					<Modal.Header title="Update Weight Slabs" />
 					<Modal.Body>
 						<EditForm item={showEdit} ref={editRef} />
 					</Modal.Body>
