@@ -8,7 +8,7 @@ const getPayload = ({
 	userId = '',
 }) => ({
 	mobile_number       : mobileNumber,
-	mobile_country_code : mobileCountryCode,
+	mobile_country_code : mobileCountryCode || '+91',
 	performed_by_id     : userId,
 });
 
@@ -19,7 +19,7 @@ const useGetUserCallDetails = ({
 	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_info_during_calls',
+		url    : '/get_agent_wise_user_details',
 		method : 'get',
 	}, { manual: true });
 

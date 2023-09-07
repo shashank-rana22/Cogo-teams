@@ -15,10 +15,12 @@ function RevertedBooking({ updatedData = '' }) {
 		<div className={styles.container}>
 			<div className={styles.price_label}>
 				Expected Price-
+				{' '}
 				<PriceRange item={updatedData} />
 			</div>
 			<div className={styles.price_label}>
 				Quoted Price-
+				{' '}
 				<span>
 					{formatAmount({
 						amount   : updatedData?.reverted_buy_price,

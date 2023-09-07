@@ -1,7 +1,6 @@
-import { Button } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
-import { IcMAppSearch } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import controls from '../../../configurations/shipment-search-controls';
 import useGetShipments from '../../../hooks/useGetShipments';
@@ -37,7 +36,7 @@ const getFormatedData = ({ singleShipmentData = {} }) => {
 };
 
 function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
-	const { handleSubmit, control, watch } = useForm();
+	const { control, watch } = useForm();
 
 	const {
 		shipmentLoading = false,
@@ -50,10 +49,16 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 
 	const { serial_id = '', organization_id = '' } = formValues || {};
 
+	const isNoFiltersApplicable = !serial_id && !organization_id;
+
 	const userActivityFormatedData = Object.entries(shipmentsData || {}).map(([key, value]) => ({
 		name : key,
 		data : value,
 	}));
+
+	useEffect(() => {
+		getShipments({ serial_id, organization_id });
+	}, [serial_id, organization_id, getShipments]);
 
 	if (isEmpty(shipmentsData)) {
 		return null;
@@ -95,49 +100,33 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 
 	return (
 		<>
-			<div className={styles.shipment_container}>
-				{Object.entries(shipmentsData || {}).map(([key, value]) => (
-					<div className={styles.container} key={key}>
-						{!isEmpty(value) ?	<div className={styles.title}>{startCase(key)}</div> : null}
-						{(value || []).map((singleItem) => (
-							<div className={styles.details} key={singleItem?.id}>
-								<PortDetails serviceData={singleItem} service={SERVICE_MAPPING[agentType]} />
-								<CargoDetails detail={singleItem} service={SERVICE_MAPPING[agentType]} />
-							</div>
-						))}
-					</div>
+
+			<div className={styles.select_container}>
+				{(controls || []).map((item) => (
+					<AsyncSelectController
+						key={item?.name}
+						{...item}
+						control={control}
+					/>
 				))}
 			</div>
 
-			<div className={styles.select_container}>
-				<div>
-					{(controls || []).map((item) => (
-						<AsyncSelectController
-							key={item?.name}
-							{...item}
-							control={control}
-						/>
-
+			{isNoFiltersApplicable ? (
+				<div className={styles.shipment_container}>
+					{Object.entries(shipmentsData || {}).map(([key, value]) => (
+						<div className={styles.container} key={key}>
+							{!isEmpty(value) ?	<div className={styles.title}>{startCase(key)}</div> : null}
+							{(value || []).map((singleItem) => (
+								<div className={styles.details} key={singleItem?.id}>
+									<PortDetails serviceData={singleItem} service={SERVICE_MAPPING[agentType]} />
+									<CargoDetails detail={singleItem} service={SERVICE_MAPPING[agentType]} />
+								</div>
+							))}
+						</div>
 					))}
 				</div>
-				<Button
-					size="md"
-					themeType="primary"
-					disabled={!serial_id && !organization_id}
-					className={styles.search_button}
-					onClick={handleSubmit(getShipments)}
-				>
-					<IcMAppSearch
-						width={25}
-						height={25}
-					/>
-				</Button>
-			</div>
+			) : <OrganizationShipment shipmentList={shipmentList} shipmentLoading={shipmentLoading} /> }
 
-			<div className={styles.shipment_container}>
-				{shipmentLoading ? <div className={styles.empty_state}>Loading...</div>
-					: <OrganizationShipment shipmentList={shipmentList} />}
-			</div>
 		</>
 	);
 }

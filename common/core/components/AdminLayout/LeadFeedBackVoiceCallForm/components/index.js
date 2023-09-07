@@ -32,6 +32,7 @@ function LeadFeedBackVoiceCallForm() {
 		leadFeedbackFormData : profile?.lead_feedback_form_data,
 		loggedInAgentId      : profile?.user?.id,
 		partnerId            : profile?.partner?.id,
+		callRecordId         : profile?.lead_feedback_form_data?.callRecordId,
 	}));
 
 	const dispatch = useDispatch();

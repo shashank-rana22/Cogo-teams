@@ -9,8 +9,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	max-height: 200px;
+	justify-content: flex-start;
+	max-height: 332px;
 	margin-top: 4px;
 	overflow-y: auto;
 

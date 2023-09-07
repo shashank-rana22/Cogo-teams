@@ -5,14 +5,16 @@ import PortDetails from '../PortDetails';
 
 import styles from './styles.module.css';
 
-function OrganizationShipment({ shipmentList = [] }) {
+function OrganizationShipment({ shipmentList = [], shipmentLoading = false }) {
+	if (shipmentLoading) {
+		return <div className={styles.empty_state}>Loading...</div>;
+	}
 	if (isEmpty(shipmentList)) {
 		return <div className={styles.empty_state}>No shipment found</div>;
 	}
 
 	return (
 		<div className={styles.shipment_container}>
-
 			{(shipmentList || []).map((item) => (
 				<div className={styles.details} key={item?.id}>
 					<PortDetails serviceData={item} service="shipment_type" />

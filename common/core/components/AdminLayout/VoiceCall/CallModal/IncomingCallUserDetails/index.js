@@ -35,7 +35,7 @@ function IncomingCallUserDetails({ receiverUserDetails = {} }) {
 		return null;
 	}
 
-	if (isEmpty(orgDetails) && isNoUserActivity && isNoUserData) {
+	if (isEmpty(orgDetails) && isNoUserActivity && isNoUserData && agent_type !== 'shipment_specialist') {
 		return null;
 	}
 

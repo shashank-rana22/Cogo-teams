@@ -18,8 +18,7 @@ const useGetShipments = () => {
 		method : 'get',
 	}, { manual: true });
 
-	const getShipments = useCallback(async (values) => {
-		const { serial_id = '', organization_id = '' } = values || {};
+	const getShipments = useCallback(async ({ serial_id = '', organization_id = '' }) => {
 		try {
 			await trigger({
 				params: getPayload({ serial_id, organization_id }),
