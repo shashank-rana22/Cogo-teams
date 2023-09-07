@@ -42,21 +42,27 @@ function KebabContent({
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
 		&& !invoice?.is_igst
-		&& invoice?.invoice_total_discounted === GLOBAL_CONSTANTS.zeroth_index)
+		&& (!invoice?.processing || invoice?.invoice_total_discounted === GLOBAL_CONSTANTS.zeroth_index))
 		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
+
+	const handleClick = (modalName) => {
+		setShowModal(modalName);
+		setShow(false);
+	};
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked'
+					&& (!invoice?.processing || invoice?.invoice_total_discounted === GLOBAL_CONSTANTS.zeroth_index)
 					&& notInsuranceService ? (
 						<Popover
 							interactive
 							placement="bottom"
 							visible={show}
 							className={styles.popover_content}
-							content={(
+							content={!(invoice?.processing) ? (
 								<PopoverContent
 									setShow={setShow}
 									setShowModal={setShowModal}
@@ -65,6 +71,14 @@ function KebabContent({
 									editInvoicesVisiblity={editInvoicesVisiblity}
 									showCancelOptions={showCancelOptions}
 								/>
+							) : editInvoicesVisiblity && (
+								<Button
+									themeType="tertiary"
+									className={styles.text}
+									onClick={() => handleClick('edit_invoice')}
+								>
+									Edit Invoice
+								</Button>
 							)}
 							onClickOutside={() => setShow(false)}
 						>
