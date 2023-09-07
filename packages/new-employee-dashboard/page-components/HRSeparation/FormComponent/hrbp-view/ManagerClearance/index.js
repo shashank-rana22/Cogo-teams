@@ -1,22 +1,13 @@
-import { Button, Tags } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { InputController, useForm, AsyncSelectController, DatepickerController } from '@cogoport/forms';
-import { IcMTaskCompleted, IcCFtick, IcMCalendar, IcMArrowDown } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { IcMCalendar, IcMArrowDown } from '@cogoport/icons-react';
+import React from 'react';
+
+import Heading from '../HRMeeting/Heading';
 
 import styles from './styles.module.css';
 
-const options = [
-	{
-		key      : '1',
-		disabled : false,
-		children : 'Completed',
-		color    : 'green',
-		tooltip  : false,
-	},
-];
-
 function ManagerClearance() {
-	const [items, setItems] = useState(options);
 	const {
 		control,
 		watch,
@@ -33,25 +24,7 @@ function ManagerClearance() {
 
 	return (
 		<>
-			<div className={styles.header}>
-				<div className={styles.left_header}>
-					<span className={styles.upper_text}>HR MEETING</span>
-					<span className={styles.lower_text}>Summary from manager interaction</span>
-				</div>
-				<div className={styles.logs_button}>
-					<Tags items={items} onItemsChange={setItems} size="xl" />
-					<Button size="md" themeType="accent">
-						<IcMTaskCompleted />
-						<span style={{ marginLeft: '4px' }}>Notes & Logs</span>
-					</Button>
-				</div>
-			</div>
-
-			<div className={styles.sub_heading}>
-				<IcCFtick width={20} height={20} />
-				<span style={{ marginLeft: '10px' }}>Cleared by Person/Team Name</span>
-			</div>
-
+			<Heading />
 			<div className={styles.container}>
 				<div className={styles.heading}>
 					Feedback Rating
