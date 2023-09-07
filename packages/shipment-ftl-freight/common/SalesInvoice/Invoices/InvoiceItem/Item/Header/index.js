@@ -110,7 +110,7 @@ function Header({
 
 	const isTaxMechanismGoodsTransportAgency = tax_mechanism === 'goods_transport_agency';
 
-	disableMarkAsReviewed = !isEmptyInvoicesList && !isShipmentCompleted
+	disableMarkAsReviewed = isEmptyInvoicesList && isShipmentCompleted
 		&& !(isTaxMechanismGoodsTransportAgency);
 
 	return (
