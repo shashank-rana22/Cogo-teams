@@ -13,7 +13,7 @@ function AgentStatusConfig({
 		<div className={styles.container}>
 			<Button
 				size="sm"
-				themeType="primary"
+				themeType="secondary"
 				onClick={() => handleToggle({ status, agentId })}
 				disabled={statusLoading}
 			>
