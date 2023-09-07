@@ -15,17 +15,9 @@ function Body({
 
 	if (isEmpty(list)) return <Empty />;
 
-	const NEW_LIST = [];
-
-	list.forEach((i) => {
-		NEW_LIST.push(i);
-		NEW_LIST.push(i);
-		NEW_LIST.push(i);
-	});
-
 	return (
 		<div className={styles.body_container}>
-			{NEW_LIST?.map((item) => (
+			{list?.map((item) => (
 				<Card
 					key={item}
 					item={item}

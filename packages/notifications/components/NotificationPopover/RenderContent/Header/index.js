@@ -1,19 +1,19 @@
-import { Pill, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function Header({
-	setNotificationType = () => {},
+	// setNotificationType = () => {},
 	formattedData = {},
 	onMarkAllAsRead = () => {},
 	onSeeAll = () => {},
 	setShow = () => {},
-	PILLS_MAPPING = [],
+	// PILLS_MAPPING = [],
 }) {
 	return (
 		<div className={styles.header_container}>
-			<div className={styles.row}>
+			{/* <div className={styles.row}>
 				{PILLS_MAPPING.map((item) => (
 					<div
 						key={item.value}
@@ -26,7 +26,7 @@ function Header({
 						</Pill>
 					</div>
 				))}
-			</div>
+			</div> */}
 
 			{!isEmpty(formattedData.list || []) ? (
 				<div className={styles.row}>

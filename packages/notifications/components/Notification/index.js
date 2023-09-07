@@ -4,6 +4,16 @@ import formatDistanceToNow from '../../utils/formatDistanceToNow';
 
 import styles from './styles.module.css';
 
+const getStatus = (is_clicked = false, is_seen = false) => {
+	if (is_clicked) {
+		return 'Read';
+	}
+	if (is_seen) {
+		return 'Seen';
+	}
+	return 'Unread';
+};
+
 function Notification({
 	item = {},
 	handleNotificationClick = () => {},
@@ -11,42 +21,42 @@ function Notification({
 	disabled = false,
 	setDisabled = () => {},
 }) {
-	const getStatus = () => {
-		if (item?.is_clicked) {
-			return 'Read';
-		}
-		if (item?.is_seen) {
-			return 'Seen';
-		}
-		return 'Unread';
+	const handleClick = () => {
+		handleNotificationClick(item);
+		setDisabled(true);
+		setShow(false);
 	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			handleNotificationClick(item);
+		}
+	};
+
+	const { is_seen = false, is_clicked = false, content = '', created_at = '', is_rpa = false } = item;
+
 	return (
 		<div
 			role="presentation"
 			className={styles.container}
-			onClick={() => {
-				handleNotificationClick(item);
-				setDisabled(true);
-				setShow(false);
-			}}
-			onKeyDown={(e) => {
-				if (e.key === 'Enter') {
-					handleNotificationClick(item);
-				}
-			}}
+			onClick={handleClick}
+			onKeyDown={handleKeyDown}
 			style={{ pointerEvents: disabled ? 'none' : 'auto' }}
 		>
 			<div className={styles.space_between}>
+
 				<div style={{ width: '95%' }}>
 					<div className={styles.row}>
-						{!item?.is_seen ? <div className={styles.new_notification} /> : null}
-						<div dangerouslySetInnerHTML={{ __html: item?.content?.body }} />
+						{!is_seen ? <div className={styles.new_notification} /> : null}
+						<div dangerouslySetInnerHTML={{ __html: content?.body }} />
 					</div>
+
 					<div className={styles.row} style={{ marginTop: 8 }}>
 						<p className={styles.time_status} style={{ marginRight: 12 }}>
-							{formatDistanceToNow(item?.created_at, { addSuffix: true })}
+							{formatDistanceToNow(created_at, { addSuffix: true })}
 						</p>
-						{!item.is_rpa ? <p className={styles.time_status}>{getStatus()}</p> : null}
+
+						{!is_rpa ? <p className={styles.time_status}>{getStatus(is_clicked, is_seen)}</p> : null}
 					</div>
 				</div>
 			</div>

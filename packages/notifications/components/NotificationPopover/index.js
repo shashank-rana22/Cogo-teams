@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMNotifications } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
@@ -9,7 +9,6 @@ import getStaticPath from '../../utils/getStaticPath';
 import RenderContent from './RenderContent';
 import styles from './styles.module.css';
 
-const INCREMENT_BY_ONE = 1;
 const MAX_UNREAD_NOTIFICATIONS = 100;
 
 function NotificationsPopover(props) {
@@ -18,7 +17,6 @@ function NotificationsPopover(props) {
 		formattedData = {},
 		placement = 'bottom',
 		saas = true,
-		rpaNotifications = [],
 	} = props || {};
 
 	const { not_seen_count = 0 } = formattedData;
@@ -27,31 +25,12 @@ function NotificationsPopover(props) {
 	const { t } = useTranslation(['notifications']);
 	const [show, setShow] = useState(false);
 	const [notificationType, setNotificationType] = useState('general');
-
 	const [currentNotSeen, setCurrentNotSeen] = useState(not_seen_count);
 
 	let audio = null;
 	if (typeof window !== 'undefined') {
 		audio = new Audio(getStaticPath('/mp3/notification.mp3'));
 	}
-
-	let rpaNotificationCount = 0;
-	(rpaNotifications || []).forEach((item) => {
-		if (!item.is_seen) {
-			rpaNotificationCount += INCREMENT_BY_ONE;
-		}
-	});
-
-	const notifyMe = () => {
-		if (!('Notification' in window)) {
-			console.log('This browser does not support desktop notification');
-		} else if (Notification.permission === 'granted') {
-			// eslint-disable-next-line no-unused-vars
-			const notification = new Notification(
-				`${not_seen_count} ${t('notifications:new_notifications')}`,
-			);
-		}
-	};
 
 	useEffect(() => {
 		onShowToggle(show);
@@ -64,27 +43,35 @@ function NotificationsPopover(props) {
 	useEffect(() => {
 		try {
 			if (Notification && Notification.permission !== 'granted') {
-				Notification.requestPermission().then(() => {
-					console.log('permission granted');
-				});
+				Notification.requestPermission();
 			}
 		} catch (err) {
-			console.log(err);
+			Toast.default(err, { hideAfter: 3 });
 		}
 	}, []);
 
 	useEffect(() => {
 		try {
+			const notifyMe = () => {
+				if (!('Notification' in window)) {
+					Toast.default('This browser does not support desktop notification', { icon: false });
+				} else if (Notification.permission === 'granted') {
+					// eslint-disable-next-line no-unused-vars
+					const notification = new Notification(
+						`${not_seen_count} ${t('notifications:new_notifications')}`,
+					);
+				}
+			};
+
 			if (audio && currentNotSeen < not_seen_count) {
 				audio.play();
 				notifyMe();
 				setCurrentNotSeen(not_seen_count);
 			}
 		} catch (err) {
-			console.log(err);
+			Toast.error(err, { hideAfter: 3 });
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [not_seen_count]);
+	}, [audio, currentNotSeen, not_seen_count, t]);
 
 	const closePopover = () => setShow(false);
 
@@ -109,8 +96,7 @@ function NotificationsPopover(props) {
 					className={styles.wrapper}
 					onClick={() => setShow(!show)}
 					aria-label="button"
-					role="button"
-					tabIndex={0}
+					role="presentation"
 				>
 					<IcMNotifications width={28} height={28} fill={saas ? '#000' : '#fff'} />
 
@@ -121,12 +107,6 @@ function NotificationsPopover(props) {
 						</p>
 					) : null}
 
-					{rpaNotificationCount ? (
-						<div className={styles.new_notifications}>
-							{rpaNotificationCount >= MAX_UNREAD_NOTIFICATIONS ? `${MAX_UNREAD_NOTIFICATIONS}`
-								: rpaNotificationCount}
-						</div>
-					) : null}
 				</div>
 			</Popover>
 		</div>

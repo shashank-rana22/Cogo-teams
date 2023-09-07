@@ -1,14 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import NotificationsPopover from '../../components/NotificationPopover';
-import useRpa from '../../hooks/useRPA';
+import extractNavLinks from '../../helpers/extractNavLinks';
+import notificationsRedirectLink from '../../helpers/notificationsRedirectLink';
 import showErrorsInToast from '../../utils/showErrorsInToast';
 
 function NewNotifications() {
@@ -18,14 +19,11 @@ function NewNotifications() {
 	const { general } = useSelector((state) => state);
 	const { unPrefixedPath } = general;
 	const geo = getGeoConstants();
+	const intervalRef = useRef(null);
 
-	const {
-		notifications: rpaNotifications,
-		loading: rpaLoading,
-		handleRpaNotificationClick,
-	} = useRpa();
+	const { query: { partner_id } = {} } = general;
 
-	const [dataRequired, setDataRequired] = useState(false); // ??
+	const [dataRequired, setDataRequired] = useState(false);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_communications',
@@ -48,6 +46,10 @@ function NewNotifications() {
 		loading,
 		trigger,
 	};
+
+	const navigationMappingAdmin = navigationMapping({ t });
+
+	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 
 	const updateAction = async (action) => {
 		try {
@@ -99,7 +101,7 @@ function NewNotifications() {
 	const handleNotificationClick = async (item) => {
 		try {
 			if (item?.content?.link) {
-				push(item?.content?.link);
+				notificationsRedirectLink({ link: item.content.redirect_url, push, partner_id, NAVIGATION_LINKS });
 			}
 			if (!item?.is_clicked) {
 				const updateRes = await triggerCommunication({
@@ -123,11 +125,9 @@ function NewNotifications() {
 		}
 	};
 
-	let interval = null;
-
 	useEffect(() => {
 		if (!loading && (unPrefixedPath !== '/notifications' || dataRequired)) {
-			interval = setInterval(() => {
+			intervalRef.current = setInterval(() => {
 				try {
 					trigger({
 						params: {
@@ -142,10 +142,11 @@ function NewNotifications() {
 				}
 			}, geo.notification_polling_interval);
 		}
+
 		return () => {
-			clearInterval(interval);
+			clearInterval(intervalRef.current);
 		};
-	}, [loading, dataRequired]);
+	}, [loading, dataRequired, unPrefixedPath, geo.notification_polling_interval, trigger]);
 
 	return (
 		<NotificationsPopover
@@ -154,9 +155,6 @@ function NewNotifications() {
 			handleNotificationClick={handleNotificationClick}
 			onMarkAllAsRead={onMarkAllAsRead}
 			onSeeAll={onSeeAll}
-			rpaNotifications={rpaNotifications}
-			rpaLoading={rpaLoading}
-			handleRpaNotificationClick={handleRpaNotificationClick}
 		/>
 	);
 }

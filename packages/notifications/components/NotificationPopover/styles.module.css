@@ -1,3 +1,9 @@
+.container {
+	z-index: 100;
+	display: flex;
+	transition: 150ms ease-in-out;
+}
+
 .wrapper {
 	position: relative;
 	display: flex;
@@ -5,9 +11,7 @@
 	padding: 8px;
 	cursor: pointer;
 
-	/* align-items: center; */
-
-	background-color: yellowgreen;
+	/* background-color: yellowgreen; */
 }
 
 .new_notifications {
