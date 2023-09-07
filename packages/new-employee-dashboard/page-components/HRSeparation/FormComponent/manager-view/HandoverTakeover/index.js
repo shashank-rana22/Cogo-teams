@@ -7,15 +7,19 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
+import ModalComponent from './ModalComponent';
 import styles from './styles.module.css';
 
 function HandoverTakeover() {
+	const [showModal, setShowModal] = useState(false);
+
 	const { control, handleSubmit, formState: { errors } } = useForm();
 
 	const onSubmit = (values) => {
 		console.log('values :: ', values);
+		setShowModal(true);
 	};
 
 	return (
@@ -63,9 +67,7 @@ function HandoverTakeover() {
 					<InputController
 						control={control}
 						name="Additional_remark"
-						rules={{ required: '*required' }}
 					/>
-					<div className={styles.error}>{errors?.Additional_remark ? '*required' : null}</div>
 				</div>
 			</div>
 
@@ -86,9 +88,7 @@ function HandoverTakeover() {
 					placeholder="Type your notes here..."
 					name="notes_for_hrbp"
 					control={control}
-					rules={{ required: true }}
 				/>
-				<div className={styles.error}>{errors?.suggested_last_working_day ? '*required' : null}</div>
 			</div>
 
 			<div className={styles.styled_component}>
@@ -129,6 +129,8 @@ function HandoverTakeover() {
 					<IcMArrowRight height="18px" width="18px" />
 				</Button>
 			</div>
+
+			<ModalComponent showModal={showModal} setShowModal={setShowModal} />
 		</div>
 	);
 }
