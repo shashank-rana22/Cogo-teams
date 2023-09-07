@@ -16,6 +16,11 @@
 	white-space: nowrap;
 }
 
+.mandatory_task::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .cargo_details {
 	display: flex;
 }
