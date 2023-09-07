@@ -11,6 +11,7 @@ function Filter({
 	setFilter = () => {},
 	setSerialId = () => {},
 	setShowWeekData = () => {},
+	setSource = () => {},
 }) {
 	const isAirService = filter?.service === 'air_freight';
 
@@ -32,6 +33,19 @@ function Filter({
 		{ params: { filters: { operator_type } } },
 	));
 
+	const handleClick = () => {
+		setFilter({
+			service           : 'fcl_freight',
+			status            : 'pending',
+			releventToMeValue : true,
+			page              : 1,
+			daily_stats       : true,
+		});
+		setSerialId('');
+		setShowWeekData(false);
+		setSource(null);
+	};
+
 	return (
 		<div className={styles.parent}>
 			<div className={styles.heading}>
@@ -42,17 +56,7 @@ function Filter({
 					<Button
 						size="md"
 						themeType="tertiary"
-						onClick={() => {
-							setFilter({
-								service           : 'fcl_freight',
-								status            : 'pending',
-								releventToMeValue : true,
-								page              : 1,
-								daily_stats       : true,
-							});
-							setSerialId('');
-							setShowWeekData(false);
-						}}
+						onClick={handleClick}
 					>
 						Clear All Filters
 					</Button>

@@ -715,21 +715,6 @@ const OPTIONS = {
 			page       : 1,
 		},
 	},
-	'shipping-lines': {
-		valueKey       : 'id',
-		labelKey       : 'short_name',
-		asyncKey       : 'list_operators',
-		defaultOptions : true,
-		defaultParams  : {
-			filters: {
-				operator_type : 'shipping_line',
-				status        : 'active',
-			},
-			page_limit : 100,
-			sort_by    : 'short_name',
-			sort_type  : 'asc',
-		},
-	},
 };
 
 const getAsyncFields = (key) => OPTIONS[key];

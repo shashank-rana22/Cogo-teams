@@ -12,6 +12,7 @@ function TasksOverview({
 	setShowWeekData = () => {},
 	filter = {},
 	setFilter = () => {},
+	setSource = () => {},
 }) {
 	const handleClick = () => {
 		setFilter((prevFilters) => ({ ...prevFilters, daily_stats: !prevFilters.daily_stats }));
@@ -26,7 +27,15 @@ function TasksOverview({
 			<div className={styles.stats_container}>
 				{showWeekData
 					? <WeeklyOverviewContent data={data} statsLoading={statsLoading} />
-					: <OverviewContent data={data} statsLoading={statsLoading} filter={filter} setFilter={setFilter} />}
+					: (
+						<OverviewContent
+							data={data}
+							statsLoading={statsLoading}
+							filter={filter}
+							setFilter={setFilter}
+							setSource={setSource}
+						/>
+					)}
 			</div>
 			<div className={styles.swipe_button}>
 				<IcMArrowRight onClick={handleClick} />

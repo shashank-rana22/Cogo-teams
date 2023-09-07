@@ -2,7 +2,7 @@ import { Button, Pill, Tags, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING } from '../../../configurations/helpers/constants';
@@ -14,6 +14,8 @@ import styles from './styles.module.css';
 const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
 
 function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
+	const { sources = [] } = data;
+
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
 
 	const items = (ITEM_LIST || []).map((item) => ({
@@ -142,11 +144,22 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 				</div>
 				<div className={styles.vertical_line} />
 				<div className={styles.shipment_details}>
-					<div className={styles.tags_container}>
-						<Tags
-							size="sm"
-							items={items.filter((item) => !!item.children)}
-						/>
+					<div className={styles.col} style={{ width: '60%' }}>
+						<div className={styles.tags_container}>
+							<Tags
+								size="sm"
+								items={items.filter((item) => !!item.children)}
+							/>
+						</div>
+						{!isEmpty(sources) && (
+							<span>
+								{(sources || []).map((source) => (
+									<Pill size="md" color="#EEF0F0" key={source}>
+										{startCase(source)}
+									</Pill>
+								))}
+							</span>
+						)}
 					</div>
 					<div className={styles.vertical_line} />
 					<div className={styles.button_grp}>

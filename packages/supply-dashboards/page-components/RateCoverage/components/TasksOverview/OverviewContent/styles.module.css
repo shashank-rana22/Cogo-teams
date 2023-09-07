@@ -19,25 +19,3 @@
 	justify-content: space-between;
 	width: 80%;
 }
-
-.card {
-	display: flex;
-	flex-direction: column;
-	width: 32%;
-	padding: 12px;
-	cursor: pointer;
-	background: #fff;
-	border: 1px solid transparent;
-	border-radius: 8px;
-}
-
-.blue_card {
-	display: flex;
-	flex-direction: column;
-	width: 32%;
-	padding: 12px;
-	cursor: pointer;
-	background: #f2f3fa;
-	border: 1px solid transparent;
-	border-radius: 8px;
-}

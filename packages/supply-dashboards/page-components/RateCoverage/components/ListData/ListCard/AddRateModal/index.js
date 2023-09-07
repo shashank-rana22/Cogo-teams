@@ -1,19 +1,27 @@
-import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, Modal, Toast } from '@cogoport/components';
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
-import { asyncFieldsListOperators, asyncFieldsPartnerUsersIds, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsListOperators,
+	asyncFieldsLocations,
+	asyncFieldsOrganization,
+	asyncFieldsOrganizationUsers,
+	asyncFieldsPartnerUsersIds,
+	useForm,
+	useGetAsyncOptions,
+} from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import React from 'react';
 
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
+import Layout from '../../../../../RfqEnquiries/Layout';
 import {
 	flighOperationTypeOptions,
-	handlingtype,
 	rateTypeOptions, currencyOptions, priceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
 	fclCommodityOptions,
 	packagingTypeOptions,
+	handlingtypeOptions,
 } from '../../../../configurations/helpers/constants';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
@@ -28,17 +36,30 @@ function AddRateModal({
 	filter = {},
 	data = {},
 }) {
-	const mainPortOptions1 = useGetMainPortsOptions({ location_id: data?.origin_port?.id });
-	const mainPortOptions2 = useGetMainPortsOptions({ location_id: data?.destination_port?.id });
+	const isAirService = filter?.service === 'air_freight';
+
+	const { options:mainPortOptions1 } = useGetMainPortsOptions({ location_id: data?.origin_port?.id });
+	const { options:mainPortOptions2 } = useGetMainPortsOptions({ location_id: data?.destination_port?.id });
+
+	const type = (isAirService) ? 'airport' : 'seaport';
+	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+	const destinationLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
 
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
 	const { user: { id: user_id = '' } = {} } = user_data;
 
-	const SERVICE_NAME = 'fcl_freight_charges';
-	const { list } = useGetChargeCodes({ service_name: SERVICE_NAME });
-	const options = list.map((item) => (
+	const { list } = useGetChargeCodes({ service_name: 'fcl_freight_charges' });
+	const chargeCodeOptions = list.map((item) => (
 		{
 			label : item?.label,
 			value : item?.value,
@@ -68,28 +89,65 @@ function AddRateModal({
 		),
 	);
 
-	const listPartnerUserOptions = useGetAsyncOptions(
+	const listAirLineOptions = useGetAsyncOptions(
 		merge(
-			asyncFieldsPartnerUsersIds(),
-			{ params: { filters: { organization_id: values?.service_provider } } },
+			asyncFieldsListOperators(),
+			{
+				params: {
+					filters: {
+						operator_type : 'airline',
+						status        : 'active',
+					},
+				},
+			},
 		),
 	);
 
-	const FCL_CONTROLS = fclControls({
+	const listPartnerUserOptions = useGetAsyncOptions(
+		merge(
+			asyncFieldsPartnerUsersIds(),
+			{
+				params: {
+					filters: {
+						status: 'active',
+					},
+				},
+			},
+		),
+	);
+	const serviceProviders = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganization(),
+			{ params: { filters: { status: 'active', service: filter?.service, kyc_status: 'active' } } },
+		),
+	);
+	const organizationUsers = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganizationUsers(),
+			{ params: { filters: { organization_id: values?.service_provider_id } } },
+		),
+	);
+
+	const finalControls = !isAirService ? fclControls({
 		data,
 		containerSizes,
 		containerTypes,
-		options,
+		chargeCodeOptions,
 		listShippingLineOptions,
 		fclCommodityOptions,
 		mainPortOptions1,
 		mainPortOptions2,
-	});
-	const AIR_CONTROLS = airControls({
+		originLocationOptions,
+		destinationLocationOptions,
+		serviceProviders,
+		organizationUsers,
+		rateTypeOptions,
+		currencyOptions,
+	}) : airControls({
 		data,
 		flighOperationTypeOptions,
 		packagingTypeOptions,
-		handlingtype,
+		handlingtypeOptions,
 		rateTypeOptions,
 		currencyOptions,
 		priceTypeOptions,
@@ -98,32 +156,32 @@ function AddRateModal({
 		commodityOptions,
 		listPartnerUserOptions,
 		user_id,
-	});
-	const finalControls = filter?.service === 'fcl_freight' ? FCL_CONTROLS : AIR_CONTROLS;
-	const newControls = [...finalControls];
-	if (values?.service_provider_id) {
-		newControls.forEach((ctr) => {
-			const newCtr = { ...ctr };
-			if (newCtr.name === 'sourced_by_id') {
-				newCtr.params.filters = {
-					organization_id: values.service_provider_id,
-				};
-			}
-		});
-	}
-	const CONTROLS = [];
-	(newControls || []).forEach((cntrl) => {
-		if (cntrl.name === 'origin_main_port_id' && !data?.origin_port?.is_icd) {
-			return;
-		}
-		if (cntrl.name === 'destination_main_port_id' && !data?.destination_port?.is_icd) {
-			return;
-		}
-		CONTROLS.push(cntrl);
+		originLocationOptions,
+		destinationLocationOptions,
+		listAirLineOptions,
+		serviceProviders,
+		organizationUsers,
 	});
 
+	// return null;
+	// if (values?.service_provider_id) {
+	// 	finalControls.forEach((ctr) => {
+	// 		const newCtr = { ...ctr };
+	// 		if (newCtr?.name === 'sourced_by_id') {
+	// 			newCtr.params.filters = {
+	// 				organization_id: values.service_provider_id,
+	// 			};
+	// 		}
+	// 	});
+	// }
+
+	const showElements = {
+		origin_main_port_id      : data?.origin_port?.is_icd,
+		destination_main_port_id : data?.destination_port?.is_icd,
+	};
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
+
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
 		if (!rate_id) {
@@ -134,14 +192,16 @@ function AddRateModal({
 		Toast.success('Rate added successfully');
 		setShowModal(false);
 	};
+
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please Add Rate" />
 			<Modal.Body style={{ maxHeight: '600px', minHeight: '300px' }}>
 				<Layout
-					fields={CONTROLS}
+					fields={finalControls}
 					control={control}
 					errors={errors}
+					showElements={showElements}
 				/>
 			</Modal.Body>
 			<Modal.Footer>

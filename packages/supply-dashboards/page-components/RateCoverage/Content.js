@@ -1,4 +1,4 @@
-import { Button, Toggle } from '@cogoport/components';
+import { Button, Input, Toggle } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ function RateCoverageContent() {
 		data = {},
 		loading = false,
 		getListCoverage = () => {},
-		source = 'critical_ports',
+		source = null,
 		setSource = () => {},
 		page = 1,
 		setPage = () => {},
@@ -31,8 +31,6 @@ function RateCoverageContent() {
 		setFilter = () => {},
 	} = useGetListCoverage();
 
-	const { dynamic_statistics = {} } = data;
-	const { list = [] } = data;
 	const { statistics = {} } = data;
 
 	const handleToggle = () => {
@@ -47,10 +45,21 @@ function RateCoverageContent() {
 					{' '}
 					{user_name}
 				</span>
+				{!filter?.releventToMeValue
+					&& (
+						<Input
+							className={styles.assigned_input}
+							size="sm"
+							placeholder="Serach by assigned to"
+							value={filter?.assigned_to}
+							onChange={(val) => setFilter((prev) => ({ ...prev, assigned_to: val }))}
+						/>
+					)}
 				<div className={styles.filter_container}>
 					<Toggle
 						name="a4"
 						size="md"
+						className={styles.relevent_toggle}
 						disabled={false}
 						checked={!filter?.releventToMeValue}
 						onLabel="Relevant to all"
@@ -74,6 +83,7 @@ function RateCoverageContent() {
 					setFilter={setFilter}
 					setSerialId={setSerialId}
 					setShowWeekData={setShowWeekData}
+					setSource={setSource}
 				/>
 			)}
 			<TasksOverview
@@ -83,10 +93,10 @@ function RateCoverageContent() {
 				setShowWeekData={setShowWeekData}
 				filter={filter}
 				setFilter={setFilter}
+				setSource={setSource}
 			/>
 			<ListData
-				data={dynamic_statistics}
-				list={list}
+				data={data}
 				getListCoverage={getListCoverage}
 				filter={filter}
 				listLoading={loading}

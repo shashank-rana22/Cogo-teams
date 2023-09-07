@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
 import { Placeholder, Pagination, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -16,10 +15,10 @@ const DEFAULT_PAGE_VALUE = 1;
 
 function ListData({
 	data = {},
-	list = [],
+
 	getListCoverage = () => {},
 	filter = {},
-	source = 'critical_ports',
+	source = null,
 	setSource = () => {},
 	listLoading = false,
 	page = 1,
@@ -27,38 +26,40 @@ function ListData({
 	serialId = '',
 	setSerialId = () => {},
 }) {
+	const { statistics = {} } = data;
+	const { list = [] } = data;
+	const { dynamic_statistics = {} } = data;
+
 	useEffect(() => {
 		getListCoverage(serialId);
 	}, [getListCoverage, serialId]);
+
+	const handleClick = (card) => {
+		setSource(card);
+		setPage(DEFAULT_PAGE_VALUE);
+		setSerialId('');
+	};
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.details_container}>
 				{Object.keys(CARDS_MAPPING).map((card) => (
-					<div
+					<Card
 						key={card}
+						detail={CARDS_MAPPING[card]}
+						data={dynamic_statistics}
+						activeCard={source}
+						statsLoading={listLoading}
+						filter={filter}
+						handleClick={() => { handleClick(card); }}
 						className={(card === source)
-							? styles.blue_color_container : styles.card_container}
-						onClick={() => {
-							setSource(card);
-							setPage(DEFAULT_PAGE_VALUE);
-							setSerialId('');
-						}}
-						role="button"
-					>
-						<Card
-							detail={CARDS_MAPPING[card]}
-							data={data}
-							activeCard={source}
-							statsLoading={listLoading}
-							filter={filter}
-						/>
-					</div>
+							? 'blue_color_container' : 'card_container'}
+					/>
 				))}
 			</div>
 			<div className={styles.container}>
 				<span>
-					{data[source] || DEFAULT_VALUE}
+					{dynamic_statistics[source] || DEFAULT_VALUE}
 					{' '}
 					{HEADINGS[source] || 'Critical Port Pairs'}
 				</span>
@@ -93,7 +94,7 @@ function ListData({
 							<Pagination
 								type="table"
 								currentPage={page}
-								totalItems={data[source]}
+								totalItems={dynamic_statistics[source] || statistics[filter?.status]}
 								pageSize={10}
 								onPageChange={(pageNumber) => { setPage(pageNumber); }}
 							/>

@@ -20,7 +20,8 @@
 .shipment_details {
 	display: flex;
 	align-items: center;
-	width: 45%;
+	justify-content: center;
+	width: 40%;
 }
 
 .row {
@@ -70,12 +71,12 @@
 .button_grp {
 	display: flex;
 	justify-content: flex-end;
-	width: 100%;
 }
 
 .tags_container {
 	display: flex;
 	width: 100%;
+	margin-bottom: 8px;
 }
 
 .service_icon {

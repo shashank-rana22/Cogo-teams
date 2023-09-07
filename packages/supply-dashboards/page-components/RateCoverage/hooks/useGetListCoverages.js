@@ -22,7 +22,7 @@ const useGetListCoverage = () => {
 		daily_stats       : true,
 	});
 
-	const [source, setSource] = useState('critical_ports');
+	const [source, setSource] = useState(null);
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
@@ -54,7 +54,7 @@ const useGetListCoverage = () => {
 					filters: {
 						...FINAL_FILTERS,
 						serial_id    : sid ? parseInt(sid, 10) : undefined,
-						source,
+						source       : source || undefined,
 						user_id      : releventToMeValue ? user_id : undefined,
 						daily_stats,
 						weekly_stats : !daily_stats,
@@ -65,7 +65,7 @@ const useGetListCoverage = () => {
 				},
 			});
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	}, [trigger, user_id, filter, source, page]);
 
