@@ -22,8 +22,6 @@ const getAdvanceDocumentPayload = ({
 		amount = '',
 		quantity = '',
 		remarks = '',
-		place_of_supply = '',
-		place_of_destination = '',
 		due_date = null,
 		payment_mode = '',
 	} = formValues || {};
@@ -74,8 +72,6 @@ const getAdvanceDocumentPayload = ({
 			numberOfContainers : quantity,
 			quotation          : [],
 			description        : remarks,
-			placeOfSupply      : place_of_supply,
-			placeOfDestination : place_of_destination,
 			paymentMode        : payment_mode,
 			paymentDocUrls     : documentUrls,
 		},
