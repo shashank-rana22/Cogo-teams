@@ -93,59 +93,6 @@ const injectValues = ({
 		});
 	}
 
-	if (task.task === 'confirmation_of_booking_with_service_provider') {
-		const ftlService = (servicesList || []).find((item) => item.service_type === 'ftl_freight_service') || {};
-		controls.forEach((control, index) => {
-			if (control.name === 'display_origin_location') {
-				controls[index].value = ftlService.pickup_address;
-			}
-			if (control.name === 'display_destination_location') {
-				controls[index].value = ftlService.delivery_address;
-			}
-			if (control.name === 'display_booking_weight') {
-				controls[index].value = ftlService.weight;
-			}
-			if (control.name === 'display_booked_trucks') {
-				controls[index].value = ftlService.length;
-			}
-			if (control.name === 'truck_details') {
-				controls[index].value = (servicesList || []).map((item) => ({
-					id                  : item.id,
-					truck_type          : item.truck_type,
-					estimated_arrival   : '',
-					estimated_departure : '',
-					truck_number        : '',
-					payment_terms       : '',
-					name                : '',
-					contact             : '',
-				}));
-			}
-		});
-	}
-
-	if (task.task === 'cargo_picked_up_at') {
-		controls.forEach((control, index) => {
-			if (control.name === 'truck_details') {
-				controls[index].value = (ftlServices || []).map((item) => ({
-					id           : item.id,
-					truck_number : item.truck_number,
-					pickup_date  : '',
-				}));
-			}
-		});
-	}
-
-	if (task.task === 'mark_completed' && task.state === 'cargo_dropped') {
-		controls.forEach((control, index) => {
-			if (control.name === 'documents') {
-				controls[index].value = (ftlServices || []).map((item) => ({
-					service_id    : item.id,
-					truck_number  : item.truck_number,
-					delivery_date : '',
-				}));
-			}
-		});
-	}
 	if (task.task === 'upload_proof_of_delivery') {
 		controls.forEach((control, index) => {
 			if (control.name === 'documents') {
@@ -221,23 +168,13 @@ const injectValues = ({
 			}
 		});
 	}
-
-	if (task.task === 'upload_ftl_eway_bill_copy') {
+	if (
+		task?.task === 'upload_high_advance_payment_proof'
+	) {
 		(controls || []).forEach((control) => {
-			if (control?.type === 'fieldArray') {
-				control?.controls?.forEach((singleItem) => {
-					const newFieldItem = singleItem;
-					if (singleItem?.name === 'truck_number') {
-						const truckNumberOptions = (servicesList || []).reduce((acc, item) => {
-							if (item?.truck_number) {
-								acc.push({ label: item?.truck_number, value: item?.id });
-							}
-							return acc;
-						}, []);
-
-						newFieldItem.options = truckNumberOptions;
-					}
-				});
+			const tempControl = control;
+			if (control.type === 'fieldArray') {
+				tempControl.value = [{ invoice_number: task?.remarks?.[GLOBAL_CONSTANTS.zeroth_index] }];
 			}
 		});
 	}

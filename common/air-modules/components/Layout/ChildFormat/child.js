@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -116,9 +117,11 @@ function Child({
 						if ((!Element || !show) && (!newControl.showOnlyLabel)) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
-								<h4 className={styles.label}>
+								<div className={cl`${styles.label} 
+								${controlItem?.rules?.required ? styles.required_field : ''}`}
+								>
 									{controlItem?.label}
-								</h4>
+								</div>
 
 								{Element
 									? 								 (

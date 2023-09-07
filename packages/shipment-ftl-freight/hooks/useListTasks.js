@@ -17,6 +17,8 @@ const STAKEHOLDER_ARRAY = [
 	'service_ops3',
 ];
 
+const OTHER_STAKEHOLDERS = ['kam_so1'];
+
 function useListTasks({
 	filters = {},
 	defaultFilters = {},
@@ -27,8 +29,13 @@ function useListTasks({
 	const { profile } = useSelector((state) => state);
 
 	const user_id = profile?.user?.id;
+	let stakeholder = activeStakeholder;
 
-	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] ?? activeStakeholder;
+	if (OTHER_STAKEHOLDERS.includes(stakeholder)) {
+		stakeholder = (profile?.authParams?.split(':') || []).pop();
+	}
+
+	stakeholder = STAKEHOLDER_MAPPINGS[stakeholder] ?? stakeholder;
 
 	const showTaskFilters = stakeholder ? {
 		[`${stakeholder}_id`]      : user_id,
