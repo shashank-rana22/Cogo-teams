@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import AllInvoices from './All_Invoices/index';
-import AutoJobClosure from './Auto_Job_Closure/index';
+import AutoJobClosure from './AutoJobClosure/index';
 import Dashboard from './Dashboard';
 import usePurchaseViewStats from './hook/getPurchaseViewStats';
 import Rejected from './Rejected';

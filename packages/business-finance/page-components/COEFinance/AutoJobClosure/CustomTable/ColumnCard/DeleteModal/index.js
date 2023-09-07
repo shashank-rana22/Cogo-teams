@@ -8,11 +8,11 @@ import styles from '../styles.module.css';
 function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch = () => {}, id = '' }) {
 	const { apiTrigger, loading } = useDeleteJobClosure({ refetch, setDeleteModal });
 
-	const { user_data: UserData } = useSelector(({ profile }) => ({
+	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user } = UserData;
-	const { id:userId } = user;
+	const { user } = userData || {};
+	const { id:userId } = user || {};
 
 	function confirmDeleteClicked() {
 		const params = {

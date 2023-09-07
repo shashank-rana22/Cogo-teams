@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Auto_Job_Closure_Config from '../configurations/Job_Closure';
+import AUTO_JOB_CLOSURE_CONFIG from '../configurations/Job-Closure';
 import useAutoJobs from '../hook/useAutoJob';
 import useUpdateJobClosure from '../hook/useUpdateJobClosure';
 
@@ -128,7 +128,7 @@ function AutoJobClosure() {
 				{ loading ? null : (
 					<CustomTable
 						itemData={data}
-						config={Auto_Job_Closure_Config}
+						config={AUTO_JOB_CLOSURE_CONFIG}
 						openConfig={openConfig}
 						setOpenConfig={setOpenConfig}
 						refetch={refetch}

@@ -17,50 +17,48 @@ function FormDataOne({
 	setOpenConfig = () => {},
 	openDeleteModal = () => {},
 	loading = false,
-
 }) {
 	const MAX_LENGTH = 30;
 	const rowData = {
 		entity: (
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.entity, MAX_LENGTH) }
+				{showOverflowingNumber(item.entity, MAX_LENGTH)}
 			</div>
 		),
 
 		serviceType: (
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.serviceType, MAX_LENGTH) }
+				{showOverflowingNumber(item.serviceType, MAX_LENGTH)}
 			</div>
 		),
 
 		tradeType: (
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.tradeType, MAX_LENGTH) }
+				{showOverflowingNumber(item.tradeType, MAX_LENGTH)}
 			</div>
 		),
 
 		selectionCriteriaOp: (
-
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.selectionCriteriaOp, MAX_LENGTH)}
+				{showOverflowingNumber(item.selectionCriteriaOp, MAX_LENGTH)}
 			</div>
 		),
 
 		oprClosureDays: (
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.oprClosureDays, MAX_LENGTH) }
+				{showOverflowingNumber(item.oprClosureDays, MAX_LENGTH)}
 			</div>
 		),
 
 		selectionCriteriaFin: (
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.selectionCriteriaFin, MAX_LENGTH) }
+				{showOverflowingNumber(item.selectionCriteriaFin, MAX_LENGTH)}
 			</div>
 		),
 
 		finClosureDays: (
 			<div className={styles.columnData}>
-				{ showOverflowingNumber(item.finClosureDays, MAX_LENGTH) }
+				{showOverflowingNumber(item.finClosureDays, MAX_LENGTH)}
 			</div>
 		),
 
@@ -80,25 +78,24 @@ function FormDataOne({
 				/>
 			</>
 		),
-
 	};
 
 	return (
 		<div className={styles.flex}>
-			{ (fields).map((field) => (
+			{fields.map((field) => (
 				<div
 					className={styles.col}
 					key={field.key}
 					style={{
 						'--span' : field.span || DEFAULT_SPAN,
-						width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
+						width    : `${
+							(field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN)
+						}px`,
 					}}
 				>
 					{loading ? <Placeholder /> : rowData[field.key]}
 				</div>
-
-			)) }
-
+			))}
 		</div>
 	);
 }

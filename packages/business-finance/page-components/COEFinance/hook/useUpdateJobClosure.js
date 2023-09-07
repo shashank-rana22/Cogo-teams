@@ -12,11 +12,11 @@ const useUpdateJobClosure = (
 		listOfId = [],
 	},
 ) => {
-	const { user_data: UserData } = useSelector(({ profile }) => ({
+	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user } = UserData;
-	const { id:userId } = user;
+	const { user } = userData || {};
+	const { id:userId } = user || {};
 
 	const [{ loading }, trigger] = useRequestBf({
 		url    : '/common/job/edit-job-closure-rule',

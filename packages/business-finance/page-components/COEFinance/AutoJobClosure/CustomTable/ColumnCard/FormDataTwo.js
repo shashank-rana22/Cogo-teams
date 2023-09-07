@@ -22,7 +22,7 @@ function FormDataTwo({
 	setOpenConfig = () => {},
 	setSaveObj = () => {},
 	loading = false,
-	refetch,
+	refetch = {},
 
 }) {
 	const {

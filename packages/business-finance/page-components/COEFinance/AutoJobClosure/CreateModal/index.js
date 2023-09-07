@@ -9,15 +9,15 @@ import styles from '../styles.module.css';
 import DetailForm from './DetailForm';
 
 function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () => {} }) {
-	const { user_data: UserData } = useSelector(({ profile }) => ({
+	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
 	const { control, watch, handleSubmit, formState: { errors = {} } } = useForm();
 
 	const { apiTrigger, loading } = useCreateJobClosure({ refetch, setOpenModal });
 
-	const { user } = UserData;
-	const { id:userId } = user;
+	const { user } = userData || {};
+	const { id:userId } = user || {};
 
 	const onSubmit = (value) => {
 		const params = {

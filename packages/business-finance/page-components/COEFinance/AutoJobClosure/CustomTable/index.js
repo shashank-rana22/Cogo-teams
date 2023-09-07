@@ -4,8 +4,8 @@ import React from 'react';
 import EmptyStateDocs from '../../../commons/EmptyStateDocs/index.tsx';
 import styles from '../styles.module.css';
 
-import ColumnCard from './ColumnCard';
-import Header from './Header';
+import ColumnCard from './ColumnCard/index';
+import Header from './Header/index';
 
 function CustomTable({
 	itemData = {},
@@ -24,7 +24,7 @@ function CustomTable({
 			<div>
 				{list.map((item) => (
 					<div className={styles.columnCard} key={item.id}>
-						{ isEmpty(list) ? (
+						{isEmpty(list) ? (
 							<EmptyStateDocs />
 						) : (
 							<ColumnCard

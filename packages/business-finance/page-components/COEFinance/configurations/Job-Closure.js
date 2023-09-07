@@ -1,4 +1,4 @@
-const Auto_Job_Closure_Config = {
+const AUTO_JOB_CLOSURE_CONFIG = {
 	showHeader  : true,
 	headerClass : 'border',
 
@@ -46,4 +46,4 @@ const Auto_Job_Closure_Config = {
 	],
 };
 
-export default Auto_Job_Closure_Config;
+export default AUTO_JOB_CLOSURE_CONFIG;
