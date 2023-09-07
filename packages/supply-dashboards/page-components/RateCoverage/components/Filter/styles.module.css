@@ -39,6 +39,7 @@
 
 .filter_option_width {
 	width: 170px;
+	font-family: Poppins, sans-serif;
 }
 
 .date_range_filter_width input {

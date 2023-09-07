@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Filter from './components/Filter';
 import ListData from './components/ListData';
 import TasksOverview from './components/TasksOverview';
-import useGetCoverageDetails from './hooks/useGetCoverageDetails';
 import useGetListCoverage from './hooks/useGetListCoverages';
 import styles from './styles.module.css';
 
@@ -21,23 +20,20 @@ function RateCoverageContent() {
 	const [showWeekData, setShowWeekData] = useState(false);
 
 	const {
-		data:statsData,
-		loading:statsLoading,
-		getCoverageDetails,
-		filter,
-		setFilter,
-	} = useGetCoverageDetails();
-	const {
-		data:listData,
-		loading:listLoading,
-		getListCoverage,
-		source,
-		setSource,
-		page,
-		setPage,
-	} = useGetListCoverage(filter);
-	const finalList = listData?.list;
-	const statsList = listData?.stats;
+		data = {},
+		loading = false,
+		getListCoverage = () => {},
+		source = 'critical_ports',
+		setSource = () => {},
+		page = 1,
+		setPage = () => {},
+		filter = {},
+		setFilter = () => {},
+	} = useGetListCoverage();
+
+	const { dynamic_statistics = {} } = data;
+	const { list = [] } = data;
+	const { statistics = {} } = data;
 
 	const handleToggle = () => {
 		setFilter((prevFilters) => ({ ...prevFilters, releventToMeValue: !prevFilters?.releventToMeValue }));
@@ -74,8 +70,6 @@ function RateCoverageContent() {
 			{showFilters
 			&& (
 				<Filter
-					getCoverageDetails={getCoverageDetails}
-					getListCoverage={getListCoverage}
 					filter={filter}
 					setFilter={setFilter}
 					setSerialId={setSerialId}
@@ -83,19 +77,19 @@ function RateCoverageContent() {
 				/>
 			)}
 			<TasksOverview
-				data={statsData}
-				statsLoading={statsLoading}
+				data={statistics}
+				statsLoading={loading}
 				showWeekData={showWeekData}
 				setShowWeekData={setShowWeekData}
 				filter={filter}
 				setFilter={setFilter}
 			/>
 			<ListData
-				data={statsList}
-				list={finalList}
+				data={dynamic_statistics}
+				list={list}
 				getListCoverage={getListCoverage}
 				filter={filter}
-				listLoading={listLoading}
+				listLoading={loading}
 				source={source}
 				setSource={setSource}
 				page={page}

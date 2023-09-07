@@ -43,8 +43,15 @@ function Filter({
 						size="md"
 						themeType="tertiary"
 						onClick={() => {
-							setFilter({ service: 'fcl_freight', status: 'pending', releventToMeValue: true, page: 1 });
+							setFilter({
+								service           : 'fcl_freight',
+								status            : 'pending',
+								releventToMeValue : true,
+								page              : 1,
+								daily_stats       : true,
+							});
 							setSerialId('');
+							setShowWeekData(false);
 						}}
 					>
 						Clear All Filters
@@ -62,7 +69,12 @@ function Filter({
 						options={serviceOptions}
 						value={filter?.service}
 						onChange={(value) => {
-							setFilter({ service: value, status: 'pending', releventToMeValue: true });
+							setFilter({
+								service           : value,
+								status            : 'pending',
+								releventToMeValue : true,
+								daily_stats       : true,
+							});
 							setShowWeekData(false);
 						}}
 					/>
