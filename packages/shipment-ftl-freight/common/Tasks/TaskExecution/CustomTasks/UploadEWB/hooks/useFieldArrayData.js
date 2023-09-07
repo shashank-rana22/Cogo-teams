@@ -10,21 +10,23 @@ import getControl from '../controls';
 
 import useValidateEwayBillNumber from './useValidateEwayBillNumber';
 
-const FTL_DISABLE_DATE = GLOBAL_CONSTANTS.ftl_disable_backdate_date;
-const DISABLE_DATE_TIME = new Date(FTL_DISABLE_DATE).getTime();
-const ENTITY_CODE = [];
 const FIRST_INDEX = 1;
 const SECOND_INDEX = 2;
 const EWAY_BILL_LENGTH = 12;
 
-Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => (
-	ENTITY_FEATURE_MAPPING[key].feature_supported.includes('ftl_task_date_validation')
-		&& ENTITY_CODE.push(value.id)
-));
-
 export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 	const [ewayBillData, setewayBillData] = useState({});
 	const [finalDoc, setFinalDoc] = useState([]);
+
+	const supportedEntities = Object.entries(ENTITY_FEATURE_MAPPING).reduce((acc, [key, value]) => {
+		if (value?.feature_supported?.includes('ftl_task_date_validation')) {
+			const entityId = GLOBAL_CONSTANTS.cogoport_entities?.[key]?.id;
+			acc.push(entityId);
+		}
+		return acc;
+	}, []);
+
+	const disableDateTime = new Date(GLOBAL_CONSTANTS.others.ftl_disable_backdate_date).getTime();
 
 	const fields = getControl({ services });
 	const defaultValues = getDefaultValues(fields);
@@ -35,7 +37,7 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		const shipmentCreatedAtDateTime = new Date(
 			shipment_data_obj?.created_at,
 		).getTime();
-		if (shipmentCreatedAtDateTime >= DISABLE_DATE_TIME) {
+		if (shipmentCreatedAtDateTime >= disableDateTime) {
 			return limitDateTime;
 		}
 		return null;
@@ -84,7 +86,7 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 	}, [watch, ewayBillData, setValue, updateEwayBillNumber]);
 
 	if (
-		ENTITY_CODE.includes(services?.[GLOBAL_CONSTANTS.zeroth_index]?.entity_id)
+		supportedEntities.includes(services?.[GLOBAL_CONSTANTS.zeroth_index]?.entity_id)
 		&& services?.[GLOBAL_CONSTANTS.zeroth_index]?.is_backdate_applicable
 	) {
 		fields?.documents?.controls.forEach((obj) => {
