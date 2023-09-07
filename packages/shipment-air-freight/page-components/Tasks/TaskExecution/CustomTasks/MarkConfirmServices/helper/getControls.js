@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import CustomOptions from '../../../../../../commons/CustomOptions';
+
 const air_lines = {
 	type     : 'async-select',
 	asyncKey : 'list_operators',
@@ -32,6 +34,7 @@ const service_provider = {
 	rules: {
 		required: true,
 	},
+	renderLabel: CustomOptions,
 };
 
 const getControls = ({
