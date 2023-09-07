@@ -55,29 +55,31 @@ const useDeleteRateJob = (service) => {
 			weight_slabs,
 		};
 
+		const formData = {
+			...params,
+			commodity                : data?.commodity,
+			airline_id               : data?.airline_id,
+			shipping_line_id         : data?.shipping_line_id,
+			operation_type           : data?.flight_operation_type,
+			container_size           : data?.container_size,
+			container_type           : data?.container_type,
+			currency                 : data?.currency,
+			price_type               : data?.price_type,
+			service_provider_id      : data?.service_provider_id,
+			procured_by_id           : data?.procured_by_id || user_id,
+			sourced_by_id            : data?.sourced_by_id,
+			validity_start           : data?.validity_start,
+			validity_end             : data?.validity_end,
+			origin_main_port_id      : data?.origin_main_port_id,
+			destination_main_port_id : data?.destination_main_port_id,
+		};
+
 		try {
 			const resp = await trigger({
 				data: {
 					rate_id,
 					id,
-					data: {
-						...params,
-						commodity                : data?.commodity,
-						airline_id               : data?.airline_id,
-						shipping_line_id         : data?.shipping_line_id,
-						operation_type           : data?.flight_operation_type,
-						container_size           : data?.container_size,
-						container_type           : data?.container_type,
-						currency                 : data?.currency,
-						price_type               : data?.price_type,
-						service_provider_id      : data?.service_provider_id,
-						procured_by_id           : data?.procured_by_id || user_id,
-						sourced_by_id            : data?.sourced_by_id,
-						validity_start           : data?.validity_start,
-						validity_end             : data?.validity_end,
-						origin_main_port_id      : data?.origin_main_port_id,
-						destination_main_port_id : data?.destination_main_port_id,
-					},
+					data: rate_id ? { ...formData } : undefined,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }
