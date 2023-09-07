@@ -21,7 +21,7 @@ const RESIGNATION_COMPONENT_MAPPING = {
 	},
 };
 
-function ApplyResignationModal({ showModal = false, setShowModal = () => {} }) {
+function ApplyResignationModal({ showModal = false, setShowModal = () => { } }) {
 	const [currentState, setCurrentState] = useState('resignation_form');
 
 	const modalSize = RESIGNATION_COMPONENT_MAPPING[currentState].modal_size;

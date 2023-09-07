@@ -1,4 +1,6 @@
+/* eslint-disable max-len */
 import { dynamic } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -23,7 +25,10 @@ const useReleaseDocuments = ({
 	profileData,
 	getEmployeeDetails,
 }) => {
-	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
+	const profile = useSelector((state) => state.profile);
+	const defaultEditorValue = RichTextEditor?.createValueFromString((profile?.additional_clause[profileData.detail.id] || ''), 'html');
+
+	const [editorValue, setEditorValue] = useState(defaultEditorValue || RichTextEditor.createEmptyValue());
 	const [selectedItems, setSelectedItems] = useState([]);
 	const [additionalClause, setAdditionalClause] = useState('');
 

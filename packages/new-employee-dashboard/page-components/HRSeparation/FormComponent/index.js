@@ -7,6 +7,9 @@ import HandoverTakeoverClearance from './hrbp-view/HandoverTakeoverClearance';
 import HRMeeting from './hrbp-view/HRMeeting';
 import ManagerClearance from './hrbp-view/ManagerClearance';
 import TechClearanceHrbp from './hrbp-view/TechClearanceHrbp';
+import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
+import HOTOClearance from './employee-view/HOTOClearance';
+import HRMeeting from './HRMeeting';
 import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
@@ -24,6 +27,7 @@ const COMPONENT_MAPPING = {
 	manager: {
 		review_request: ReviewRequest,
 	},
+<<<<<<< Updated upstream
 	tech: {
 		tech_clearance         : TechClearance,
 		tech_clearance_confirm : TechClearanceConfirm,
@@ -32,6 +36,13 @@ const COMPONENT_MAPPING = {
 		admin_clearance    : AdminClearance,
 		admin_confirmation : AdminConfirmed,
 	},
+=======
+	employee: {
+		HOTOClearance,
+		HOTOClearance_confirmation: HOTOClearanceConfirmation,
+	},
+
+>>>>>>> Stashed changes
 };
 
 function FormComponent() {
