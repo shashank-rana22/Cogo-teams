@@ -7,6 +7,20 @@ const API_NAME = {
 	air_freight : 'list_air_freight_rate_jobs',
 };
 
+const FCL_PARAMS_MAPPING = {
+	origin_location      : 'origin_port_id',
+	destination_location : 'destination_port_id',
+	operater_type        : 'shipping_line_id',
+
+};
+
+const AIR_PARAMS_MAPPING = {
+	origin_location      : 'origin_airport_id',
+	destination_location : 'destination_airport_id',
+	operater_type        : 'airline_id',
+
+};
+
 const DEFAULT_PAGE = 1;
 
 const useGetListCoverage = () => {
@@ -36,15 +50,15 @@ const useGetListCoverage = () => {
 
 		const FINAL_FILTERS = {};
 
+		const paramsMapping = filter?.service === 'air_freight' ? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {
-				if (ele === 'origin_port_id' && (filter?.service === 'air_freight')) {
-					FINAL_FILTERS.origin_airport_id = restFilters[ele];
-				} else if (ele === 'destination_port_id' && (filter?.service === 'air_freight')) {
-					FINAL_FILTERS.destination_airport_id = restFilters[ele];
-				} else if (ele === 'shipping_line_id' && (filter?.service === 'air_freight')) {
-					FINAL_FILTERS.airline_id = restFilters[ele];
-				} else FINAL_FILTERS[ele] = restFilters[ele];
+				if (ele in paramsMapping) {
+					FINAL_FILTERS[paramsMapping[ele]] = restFilters[ele];
+				} else {
+					FINAL_FILTERS[ele] = restFilters[ele];
+				}
 			}
 		});
 

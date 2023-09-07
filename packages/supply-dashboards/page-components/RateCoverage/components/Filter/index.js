@@ -88,10 +88,10 @@ function Filter({
 					<Select
 						placeholder="Country / Port Pair"
 						{...originLocationOptions}
-						value={filter?.origin_port_id}
+						value={filter?.origin_location}
 						isClearable
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, origin_port_id: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, origin_location: value, page: 1 }));
 						}}
 					/>
 				</div>
@@ -100,10 +100,10 @@ function Filter({
 					<Select
 						placeholder="Country / Port Pair"
 						{...destinationLocationOptions}
-						value={filter?.destination_port_id}
+						value={filter?.destination_location}
 						isClearable
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, destination_port_id: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, destination_location: value, page: 1 }));
 						}}
 					/>
 				</div>
@@ -112,10 +112,10 @@ function Filter({
 					<Select
 						placeholder="Search here"
 						{...shippingLineOptions}
-						value={filter?.shipping_line_id}
+						value={filter?.operater_type}
 						isClearable
 						onChange={(value) => {
-							setFilter((prevFilters) => ({ ...prevFilters, shipping_line_id: value, page: 1 }));
+							setFilter((prevFilters) => ({ ...prevFilters, operater_type: value, page: 1 }));
 						}}
 					/>
 				</div>
