@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import List from '../../../../commons/List/index.tsx';
 import useListTaggedInvoice from '../../hooks/useListTaggedInvoice';
-import { OVERSEAS_FINAL_CONFIRMATION_LIST } from '../Configurations/overseasFinalConfirmationListConfig';
+import OVERSEAS_FINAL_CONFIRMATION_LIST from '../Configurations/overseasFinalConfirmationListConfig.json';
 import GetData from '../utils/GetData';
 import GetInvoiceData from '../utils/GetInvoiceData';
 
@@ -34,10 +34,10 @@ function MergeDocuments({ setActive = () => {} }) {
 		params,
 	} = useListTaggedInvoice();
 
-	const { documents = ' ', list = [] } = data || {};
+	const { documents = {}, list = [] } = data || {};
 
-	const checkShipmentPdfUrl = !!documents.shipmentPdfUrl;
-	const billPdfUrl = !!documents.billPdfUrl;
+	const checkShipmentPdfUrl = !!documents?.shipmentPdfUrl;
+	const billPdfUrl = !!documents?.billPdfUrl;
 
 	const getDate = (date) => formatDate({
 		date,
@@ -101,14 +101,14 @@ function MergeDocuments({ setActive = () => {} }) {
 	const documentsList = [
 		{
 			docName        : 'Purchase Invoices',
-			documentUrl    : documents.billPdfUrl || '',
-			uploadedAt     : documents.createdAt,
+			documentUrl    : documents?.billPdfUrl || '',
+			uploadedAt     : documents?.createdAt,
 			showDeleteIcon : true,
 		},
 		{
 			docName        : 'Shipment Documents',
-			documentUrl    : documents.shipmentPdfUrl || '',
-			uploadedAt     : documents.createdAt,
+			documentUrl    : documents?.shipmentPdfUrl || '',
+			uploadedAt     : documents?.createdAt,
 			showDeleteIcon : true,
 		},
 	];
