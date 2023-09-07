@@ -55,7 +55,7 @@ function PurchaseInvoiceDates({
 						placeholder="Select Invoice Due Date"
 						rules={{ required: true }}
 						isPreviousDaysAllowed
-						minDate={shipment_type === 'air_freight' ? invoice_date : new Date()}
+						minDate={shipment_type === 'air_freight' ? invoice_date || new Date() : new Date()}
 						value={(purchaseInvoiceValues?.due_date || purchaseInvoiceValues?.invoice_due_date)
 							? new Date(purchaseInvoiceValues?.due_date
 								|| purchaseInvoiceValues?.invoice_due_date) : null}
