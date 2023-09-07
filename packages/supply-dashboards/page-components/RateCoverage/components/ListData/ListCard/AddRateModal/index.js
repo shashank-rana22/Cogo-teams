@@ -8,8 +8,9 @@ import {
 	useForm,
 	useGetAsyncOptions,
 } from '@cogoport/forms';
+import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { useSelector } from '@cogoport/store';
-import { merge } from '@cogoport/utils';
+import { merge, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
@@ -20,6 +21,14 @@ import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 
 import airControls from './AirControls';
 import fclControls from './FclControls';
+
+const getCommodityOptions = (container_type = 'standard') => {
+	const commodities = FREIGHT_CONTAINER_COMMODITY_MAPPINGS[container_type];
+	return (commodities || []).map((commodity) => ({
+		label : (commodity.split('-') || []).map((item) => parseFloat(item) || startCase(item)).join(' '),
+		value : commodity,
+	}));
+};
 
 function AddRateModal({
 	showModal = true,
@@ -127,6 +136,8 @@ function AddRateModal({
 		),
 	);
 
+	const fclCommodityOptions = getCommodityOptions(values?.container_type);
+
 	const finalControls = !isAirService ? fclControls({
 		data,
 		chargeCodeOptions,
@@ -137,6 +148,7 @@ function AddRateModal({
 		destinationLocationOptions,
 		serviceProviders,
 		organizationUsers,
+		fclCommodityOptions,
 	}) : airControls({
 		data,
 		listPartnerUserOptions,

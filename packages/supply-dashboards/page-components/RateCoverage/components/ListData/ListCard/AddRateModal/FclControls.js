@@ -3,11 +3,12 @@ import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { currencyOptions, fclCommodityOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
+import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
 
 const MIN_CARGO_WEIGHT = 18;
 const fclControls = ({
 	data, chargeCodeOptions,
+	fclCommodityOptions,
 	listShippingLineOptions,
 	mainPortOptions1, mainPortOptions2,
 	serviceProviders, organizationUsers,
