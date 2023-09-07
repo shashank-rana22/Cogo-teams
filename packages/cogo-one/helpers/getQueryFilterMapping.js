@@ -47,6 +47,9 @@ function getQueryFilterMapping({
 		shipment_serial_id: appliedFilters?.shipment_serial_id
 			? [where('shipment_serial_id', '==', Number(appliedFilters?.shipment_serial_id))]
 			: [],
+		source_email: appliedFilters?.source_email
+			? [where('source', '==', appliedFilters?.source_email)]
+			: [],
 	};
 }
 
