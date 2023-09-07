@@ -1,11 +1,11 @@
 .topContainer {
 	display: flex;
+	justify-content: flex-end;
 	margin-top: 30px;
 }
 
 .searchBox {
 	width: 400px;
-	margin-left: 1000px;
 }
 
 .topContainerComponents {
@@ -23,7 +23,7 @@
 }
 
 .formButton {
-	margin-left: 20px;
+	margin-left: 18px;
 }
 
 .table {

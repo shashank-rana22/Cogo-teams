@@ -65,7 +65,7 @@ function AutoJobClosure() {
 	return (
 		<div>
 			<div
-				className={cl` ${styles.topContainer}  ${styles.topContainerComponents}  `}
+				className={cl` ${styles.topContainer} ${styles.topContainerComponents}  `}
 			>
 				<Input
 					name="searchValue"
@@ -83,14 +83,16 @@ function AutoJobClosure() {
 
 				{ !configButton ? (
 					<>
-						<Button
-							size="md"
-							themeType="secondary"
-							className={styles.topContainerComponents}
-							onClick={() => cancelledClick()}
-						>
-							Cancel Changes
-						</Button>
+						<div className={styles.buttons}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.topContainerComponents}
+								onClick={() => cancelledClick()}
+							>
+								Cancel Changes
+							</Button>
+						</div>
 						<Button
 							size="md"
 							themeType="primary"
@@ -100,6 +102,7 @@ function AutoJobClosure() {
 							Save All
 						</Button>
 					</>
+
 				) : (
 					<>
 						<Button

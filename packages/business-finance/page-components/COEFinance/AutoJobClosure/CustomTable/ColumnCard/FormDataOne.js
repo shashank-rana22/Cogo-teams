@@ -66,14 +66,14 @@ function FormDataOne({
 			<>
 				<IcMEdit
 					className={styles.edit}
-					height={22}
-					width={22}
+					height={18}
+					width={18}
 					onClick={() => setOpenConfig((prev) => [...prev, item?.id])}
 				/>
 				<IcMDelete
 					className={cl`${styles.button} ${styles.delete} }`}
-					height={22}
-					width={22}
+					height={18}
+					width={18}
 					onClick={openDeleteModal}
 				/>
 			</>

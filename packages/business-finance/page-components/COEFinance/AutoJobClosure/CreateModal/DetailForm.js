@@ -7,13 +7,14 @@ import serviceTypeOptions from '../formOptions/serviceTypeOptions';
 import styles from '../styles.module.css';
 
 function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
+	console.log(errors, 'error');
 	const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
 		value : String(item),
 		label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
 	}));
 
-	function Error({ key }) {
-		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
+	function Error({ keys }) {
+		return errors?.[keys] ? <div className={styles.errors}>{errors?.[keys]?.message}</div> : null;
 	}
 	return (
 		<div className={styles.formBody}>
@@ -27,7 +28,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					rules={{ required: { value: true, message: '*Entity is required' } }}
 
 				/>
-				<Error key="entity" />
+				<Error keys="entity" />
 
 			</div>
 			<div className={styles.form_input}>
@@ -39,7 +40,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					placeholder="Enter Service"
 					rules={{ required: { value: true, message: '*Service type is required' } }}
 				/>
-				<Error key="serviceType" />
+				<Error keys="serviceType" />
 
 			</div>
 			<div className={styles.form_input}>
@@ -55,7 +56,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					placeholder="Enter Trade Type"
 					rules={{ required: { value: true, message: '*Trade type is required' } }}
 				/>
-				<Error key="tradeType" />
+				<Error keys="tradeType" />
 
 			</div>
 			<div className={styles.form_input}>
@@ -67,7 +68,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					placeholder="Enter Selection Criteria"
 					rules={{ required: { value: true, message: '*Selection criteria 1 is required' } }}
 				/>
-				<Error key="selectionCriteriaOp" />
+				<Error keys="selectionCriteriaOp" />
 
 			</div>
 			<div className={styles.form_input}>
@@ -79,7 +80,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					placeholder="Enter Selection Criteria"
 					rules={{ required: { value: true, message: '*Selection criteria 2 is required' } }}
 				/>
-				<Error key="selectionCriteriaFin" />
+				<Error keys="selectionCriteriaFin" />
 
 			</div>
 			<div className={styles.form_input}>
@@ -91,7 +92,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					rules={{ required: { value: true, message: '*No. of days is required' } }}
 					control={control}
 				/>
-				<Error key="level1" />
+				<Error keys="level1" />
 
 			</div>
 			<div className={styles.form_input}>
@@ -103,7 +104,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {} }) {
 					rules={{ required: { value: true, message: '*No. of days is required' } }}
 					control={control}
 				/>
-				<Error key="level2" />
+				<Error keys="level2" />
 
 			</div>
 		</div>

@@ -7,6 +7,17 @@
 .col {
 	display: flex;
 	flex: var(--span);
+	font-size: 12px;
+
+	:global {
+		& .ui_select_input_control {
+			font-size: 12px !important;
+		}
+
+		& .ui_input_control {
+			font-size: 12px !important;
+		}
+	}
 }
 
 .edit {
@@ -57,13 +68,23 @@
 }
 
 .selectController {
-	width: 160px;
+	width: 95%;
+
+	:global {
+		.ui_select_options_container {
+			width: 240px;
+		}
+	}
 }
 
 .inputBox {
-	width: 100px;
+	width: 90%;
 }
 
 .selectionCriteriaController {
-	width: 240px;
+	width: 90%;
+}
+
+.columnData {
+	font-size: 12px;
 }

@@ -1,4 +1,4 @@
-import Placeholder, { Button } from '@cogoport/components';
+import Placeholder, { Button, cl } from '@cogoport/components';
 import { SelectController, InputController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
@@ -17,32 +17,23 @@ const TOTAL_SPAN = 12;
 function FormDataTwo({
 	fields = {},
 	item = {},
-	isEdit = false,
 	ENTITY_OPTIONS = [],
 	setOpenConfig = () => {},
 	setSaveObj = () => {},
 	loading = false,
 	refetch = {},
-
 }) {
-	const {
-		control,
-		watch,
-		handleSubmit,
-		setValue,
-	} = useForm(
-		{
-			defaultValues: {
-				entity               : item.entity?.toString(),
-				serviceType          : item.serviceType,
-				tradeType            : item.tradeType,
-				selectionCriteriaOp  : item.selectionCriteriaOp,
-				selectionCriteriaFin : item.selectionCriteriaFin,
-				level1               : item.oprClosureDays,
-				level2               : item.finClosureDays,
-			},
+	const { control, watch, handleSubmit, setValue } = useForm({
+		defaultValues: {
+			entity               : item.entity?.toString(),
+			serviceType          : item.serviceType,
+			tradeType            : item.tradeType,
+			selectionCriteriaOp  : item.selectionCriteriaOp,
+			selectionCriteriaFin : item.selectionCriteriaFin,
+			level1               : item.oprClosureDays,
+			level2               : item.finClosureDays,
 		},
-	);
+	});
 	const afterEditData = watch();
 
 	const stringifiedData = JSON.stringify(afterEditData);
@@ -53,7 +44,11 @@ function FormDataTwo({
 		}));
 	}, [stringifiedData, item.id, setSaveObj]);
 
-	const { apiTrigger, loading: updateLoading } = useUpdateJobClosure({ refetch, setOpenConfig, listOfId: [item.id] });
+	const { apiTrigger, loading: updateLoading } = useUpdateJobClosure({
+		refetch,
+		setOpenConfig,
+		listOfId: [item.id],
+	});
 
 	const onSubmit = (value) => {
 		const params = {
@@ -67,41 +62,39 @@ function FormDataTwo({
 				level1               : value.level1,
 				level2               : value.level2,
 			},
-
 		};
 		apiTrigger([params]);
 	};
 
 	const rowData = {
 		entity: (
-			<div key={isEdit}>
-				<SelectController
-					className={styles.selectController}
-					control={control}
-					name="entity"
-					options={ENTITY_OPTIONS}
-					placeholder={item.entity}
-					rules={{ required: true }}
-				/>
-			</div>
+			<SelectController
+				className={cl`${styles.selectController} ${styles.font12}`}
+				control={control}
+				name="entity"
+				options={ENTITY_OPTIONS}
+				placeholder={item.entity}
+				rules={{ required: true }}
+			/>
 		),
 
 		serviceType: (
 			<SelectController
-				className={styles.selectController}
+				className={cl`${styles.selectController} ${styles.font12}`}
 				control={control}
 				name="serviceType"
 				options={serviceTypeOptions}
 				placeholder={item.serviceType}
-				onChange={() => { setValue('selectionCriteriaOp', ''); setValue('selectionCriteriaFin', ''); }}
+				onChange={() => {
+					setValue('selectionCriteriaOp', ''); setValue('selectionCriteriaFin', '');
+				}}
 				rules={{ required: true }}
 			/>
-
 		),
 
 		tradeType: (
 			<SelectController
-				className={styles.selectController}
+				className={cl`${styles.selectController} ${styles.font12}`}
 				control={control}
 				name="tradeType"
 				options={[
@@ -116,9 +109,8 @@ function FormDataTwo({
 		),
 
 		selectionCriteriaOp: (
-
 			<SelectController
-				className={styles.selectionCriteriaController}
+				className={cl`${styles.selectionCriteriaController} ${styles.font12}`}
 				control={control}
 				name="selectionCriteriaOp"
 				options={selectionCriteriaOptions(watch('serviceType'))}
@@ -132,14 +124,14 @@ function FormDataTwo({
 				name="level1"
 				size="md"
 				placeholder={item.oprClosureDays}
-				className={styles.inputBox}
+				className={cl`${styles.inputBox} ${styles.font12}`}
 				control={control}
 			/>
 		),
 
 		selectionCriteriaFin: (
 			<SelectController
-				className={styles.selectionCriteriaController}
+				className={cl`${styles.selectionCriteriaController} ${styles.font12}`}
 				control={control}
 				name="selectionCriteriaFin"
 				options={selectionCriteriaOptions(watch('serviceType'))}
@@ -150,10 +142,10 @@ function FormDataTwo({
 
 		finClosureDays: (
 			<InputController
+				className={cl`${styles.inputBox} ${styles.font12}`}
 				name="level2"
 				size="md"
 				placeholder={item.finClosureDays}
-				className={styles.inputBox}
 				control={control}
 			/>
 		),
@@ -174,28 +166,26 @@ function FormDataTwo({
 				>
 					Confirm
 				</Button>
-
 			</>
 		),
-
 	};
 
 	return (
 		<div className={styles.flex}>
-			{ (fields).map((field) => (
+			{fields.map((field) => (
 				<div
 					className={styles.col}
 					key={field.key}
 					style={{
 						'--span' : field.span || DEFAULT_SPAN,
-						width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
+						width    : `${
+							(field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN)
+						}px`,
 					}}
 				>
 					{loading ? <Placeholder /> : rowData[field.key]}
 				</div>
-
-			)) }
-
+			))}
 		</div>
 	);
 }
