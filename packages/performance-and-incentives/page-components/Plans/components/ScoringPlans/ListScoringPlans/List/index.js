@@ -13,11 +13,13 @@ function List(props) {
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ activeActionId });
 
 	return (
-		<Table
-			className={styles.scoring_plans_table}
-			columns={LIST_COLUMN_MAPPING}
-			data={list}
-		/>
+		<div className={styles.table_container}>
+			<Table
+				className={styles.scoring_plans_table}
+				columns={LIST_COLUMN_MAPPING}
+				data={list}
+			/>
+		</div>
 	);
 }
 
