@@ -20,9 +20,9 @@ function Filter({
 	setFilterPopover = () => {},
 }) {
 	const { t } = useTranslation(['airBookingDesk']);
-	const getControls = getFilterControls({ serviceActiveTab, t });
+	const controls = getFilterControls({ serviceActiveTab, t });
 
-	const { formState: { errors }, control, reset, getValues, setValue } = useForm({ getControls });
+	const { formState: { errors }, control, reset, getValues, setValue } = useForm();
 
 	const handleReset = () => {
 		reset({
@@ -114,7 +114,7 @@ function Filter({
 				<IcMCross onClick={() => setFilterPopover(false)} className={styles.cross_icon} />
 			</div>
 			<Layout
-				fields={getControls}
+				fields={controls}
 				control={control}
 				errors={errors}
 			/>

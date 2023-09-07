@@ -1,4 +1,4 @@
-const shipmentStateMappings = (t = () => {}) => [
+const getShipmentStateMappings = (t = () => {}) => [
 	{
 		name  : 'ongoing',
 		title : t('airBookingDesk:shipment_state_ongoing'),
@@ -12,4 +12,4 @@ const shipmentStateMappings = (t = () => {}) => [
 		title : t('airBookingDesk:shipment_state_cancelled'),
 	},
 ];
-export default shipmentStateMappings;
+export default getShipmentStateMappings;

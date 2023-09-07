@@ -1,4 +1,4 @@
-const serviceWiseMappings = (t = () => {}) => [
+const getServiceWiseMappings = (t = () => {}) => [
 	{
 		name  : 'air_freight',
 		title : t('airBookingDesk:service_title_air_international'),
@@ -16,4 +16,4 @@ const serviceWiseMappings = (t = () => {}) => [
 		title : t('airBookingDesk:service_title_air_domestic'),
 	},
 ];
-export default serviceWiseMappings;
+export default getServiceWiseMappings;

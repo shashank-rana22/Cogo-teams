@@ -5,8 +5,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
-import serviceWiseMappings from '../../constants/service-tabs-mappings';
-import shipmentStateMappings from '../../constants/shipment-state-mappings';
+import getServiceWiseMappings from '../../constants/service-tabs-mappings';
+import getShipmentStateMappings from '../../constants/shipment-state-mappings';
 
 import Filter from './Filter';
 import styles from './styles.module.css';
@@ -24,8 +24,8 @@ function Header({
 	const [filterPopover, setFilterPopover] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
 
-	const SERVICE_WISE_MAPPINGS = serviceWiseMappings(t);
-	const SHIPMENT_STATE_MAPPINGS = shipmentStateMappings(t);
+	const serviceWiseMappings = getServiceWiseMappings(t);
+	const shipmentStateMappings = getShipmentStateMappings(t);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -41,7 +41,7 @@ function Header({
 				className={styles.header_service_tab}
 
 			>
-				{SERVICE_WISE_MAPPINGS.map((item) => {
+				{serviceWiseMappings.map((item) => {
 					const { name = '', title = '' } = item;
 					return (
 						<TabPanel
@@ -59,7 +59,7 @@ function Header({
 					activeTab={shipmentStateTab}
 					onChange={setShipmentStateTab}
 				>
-					{SHIPMENT_STATE_MAPPINGS.map((item) => {
+					{shipmentStateMappings.map((item) => {
 						const { name = '', title = '' } = item;
 						return (
 							<TabPanel
