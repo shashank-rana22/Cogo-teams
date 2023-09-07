@@ -1,0 +1,36 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.container {
+	height: 132px;
+
+	:global {
+		.ui_accordion_container {
+			height: 132px;
+		}
+
+		.ui_accordion_content {
+			max-height: 72px;
+			padding-top: unset;
+			padding-bottom: unset;
+			overflow: auto;
+		}
+
+		.ui_accordion_title {
+			width: 100%;
+		}
+
+		.ui_pill_text {
+			color: unset;
+		}
+	}
+}

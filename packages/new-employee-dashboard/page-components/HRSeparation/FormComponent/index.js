@@ -22,7 +22,7 @@ const COMPONENT_MAPPING = {
 };
 
 function FormComponent() {
-	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
+	const Render = COMPONENT_MAPPING.tech.tech_clearance_confirm;
 
 	return (
 		<div className={styles.container}>

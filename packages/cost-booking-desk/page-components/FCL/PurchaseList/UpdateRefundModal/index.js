@@ -24,9 +24,11 @@ function UpdateRefundModal({
 		user_id: profile?.user?.id,
 	}));
 
+	const { currency = '' } = updateRefundModal?.data || {};
+
 	const [billingParty, setBillingParty] = useState({});
 
-	const controls = getFormControls({ listEntities, setBillingParty });
+	const controls = getFormControls({ listEntities, setBillingParty, currency });
 
 	const {
 		handleSubmit,
@@ -34,7 +36,7 @@ function UpdateRefundModal({
 		watch,
 		setValue,
 		formState: { errors },
-	} = useForm();
+	} = useForm({ defaultValues: { currency } });
 
 	const formValues = watch();
 	const { payment_mode: paymentMode = '' } = formValues || {};
