@@ -72,7 +72,7 @@
 
 	:global {
 		.ui_select_options_container {
-			width: 240px;
+			width: 200px;
 		}
 	}
 }
