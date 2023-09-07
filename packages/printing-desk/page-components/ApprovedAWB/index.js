@@ -55,7 +55,7 @@ function ApprovedAWB({
 					{(handoverModal === documentId) && (
 						<Modal
 							show={handoverModal === documentId}
-							onClose={() => { handleModal(''); }}
+							onClose={() => handleModal('')}
 						>
 							<Modal.Header title="Confirm Handover?" />
 							<Modal.Body className={styles.modal_body}>

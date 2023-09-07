@@ -5,7 +5,7 @@ export const completedAwbFields = ({ t = () => {} }) => {
 	const fields = [
 		{
 			key    : 'serialId',
-			label  : t('printingDesk:final_awb_fields_sid_label'),
+			label  : t('printingDesk:completed_awb_fields_sid_label'),
 			span   : 1,
 			render : (item) => (
 				<div>
@@ -16,12 +16,12 @@ export const completedAwbFields = ({ t = () => {} }) => {
 		},
 		{
 			key   : 'awbNumber',
-			label : t('printingDesk:final_awb_fields_awb_label'),
+			label : t('printingDesk:completed_awb_fields_awb_label'),
 			span  : 1,
 		},
 		{
 			key    : 'blCategory',
-			label  : t('printingDesk:final_awb_fields_awb_category_label'),
+			label  : t('printingDesk:completed_awb_fields_awb_category_label'),
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
@@ -31,7 +31,7 @@ export const completedAwbFields = ({ t = () => {} }) => {
 		},
 		{
 			key    : 'deadline',
-			label  : t('printingDesk:final_awb_fields_due_on_label'),
+			label  : t('printingDesk:completed_awb_fields_due_on_label'),
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>

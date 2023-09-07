@@ -4,7 +4,7 @@ import React from 'react';
 import List from '../../common/CardList';
 import { completedAwbFields } from '../../configurations/completed-awb-fields';
 
-function FinalAwb({
+function CompletedAwb({
 	data = {},
 	loading = false,
 	page = 1,
@@ -24,4 +24,4 @@ function FinalAwb({
 	);
 }
 
-export default FinalAwb;
+export default CompletedAwb;
