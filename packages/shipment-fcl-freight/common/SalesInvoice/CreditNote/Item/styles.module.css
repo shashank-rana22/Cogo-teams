@@ -50,6 +50,39 @@
 	}
 }
 
+/*
+.in_number {
+	display: flex;
+	flex: 0 0 23%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.in_text {
+			font-size: var(--font-size-md);
+	}
+
+	.text {
+		width: fit-content;
+		padding: 3px 12px;
+		margin-top: 3px;
+		font-size: var(--font-size-sm);
+		border-radius: 4px;
+	}
+
+	.approved {
+		background-color: var(--color-tertiary-success-green-4);
+	}
+
+	.rejected {
+		background-color: var(--color-primary-error-red-4);
+	}
+
+	.requested{
+		background-color: var(--color-primary-yellow-4);
+	}
+} */
+
 .billing_party {
 	flex: 0 0 22%;
 	border-right: 1px solid var(--color-accent-orange-2);

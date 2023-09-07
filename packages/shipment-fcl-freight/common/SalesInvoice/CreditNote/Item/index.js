@@ -24,6 +24,12 @@ const CN_STATUS_MAPPING = {
 	finance_rejected : 'finance_rejected',
 };
 
+// const IN_STATUS_MAPPING = {
+// 	requested : 'requested',
+// 	approved  : 'approved',
+// 	rejected  : 'rejected',
+// };
+
 function Item({
 	item = {},
 	cnRefetch = () => {},
@@ -95,6 +101,26 @@ function Item({
 
 							<span>{item?.live_invoice_number}</span>
 						</div>
+
+						{/* {item?.incident_id && (
+							<div className={styles.in_number}>
+								<span className={styles.in_text}>
+									Incident ID:
+									{' '}
+									{item?.incident_id}
+								</span>
+
+								{item?.incident_status && (
+									<span className={cl`${styles[IN_STATUS_MAPPING[item?.incident_status]]}
+									 ${styles.text}`}
+									>
+										Status:
+										{' '}
+										{startCase(IN_STATUS_MAPPING[item?.incident_status])}
+									</span>
+								) }
+							</div>
+						)} */}
 
 						<div className={styles.invoice_value}>
 							Invoice Value -
