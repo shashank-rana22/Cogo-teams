@@ -1,17 +1,12 @@
 .option_container {
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
 }
 
 .option_name_container {
 	display: flex;
 	flex-direction: column;
 	width: 90%;
-}
-
-.business_name {
-	font-size: 14px;
 }
 
 .trade_name {

@@ -34,7 +34,7 @@ function CustomOptions(option = {}) {
 	return (
 		<div className={styles.option_container}>
 			<div className={styles.option_name_container}>
-				<div className={styles.business_name}>{business_name}</div>
+				<div>{business_name}</div>
 
 				<div className={styles.trade_name}>
 					{country_code ? `${trade_name} (${country_code})` : null}
