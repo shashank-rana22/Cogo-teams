@@ -9,3 +9,8 @@
 .active {
 	fill: var(--color-primary-error-red-1);
 }
+
+.commonStylingHeader {
+	display: flex;
+	font-size: 12px;
+}

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Tooltip, Checkbox, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
@@ -150,10 +149,10 @@ const useGetColumns = ({
 						content={(
 							<>
 								<div>
-									{row?.documentValue}
+									{row?.documentValue || ''}
 								</div>
 								<div>
-									{row?.documentType}
+									{row?.documentType || ''}
 								</div>
 							</>
 						)}
@@ -174,7 +173,7 @@ const useGetColumns = ({
 								textAlign       : 'center',
 							}}
 						>
-							{row?.documentType}
+							{row?.documentType || ''}
 						</Pill>
 					</Tooltip>
 				</div>
@@ -182,7 +181,7 @@ const useGetColumns = ({
 		},
 		{
 			Header: (
-				<span style={{ fontSize: '12px', display: 'flex' }}>
+				<span className={styles.commonStylingHeader}>
 					DOC. DATE
 					<RenderSortingArrows field="transactionDate" />
 				</span>
@@ -193,7 +192,7 @@ const useGetColumns = ({
 		},
 		{
 			Header: (
-				<div style={{ fontSize: '12px', display: 'flex' }}>
+				<div className={styles.commonStylingHeader}>
 					DOC AMOUNT
 					<RenderSortingArrows field="documentAmount" />
 				</div>
@@ -202,10 +201,10 @@ const useGetColumns = ({
 			accessor : (item) => (
 				<div>
 					<Tooltip content={item?.documentAmount}>
-						{item?.currency}
+						{item?.currency || ''}
 						{' '}
-						{item?.documentAmount.toString().length > AMT_LENGTH
-							? `${item?.documentAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
+						{item?.documentAmount?.toString().length > AMT_LENGTH
+							? `${item?.documentAmount?.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.documentAmount}
 					</Tooltip>
 				</div>
@@ -224,7 +223,7 @@ const useGetColumns = ({
 		},
 		{
 			Header: (
-				<div style={{ fontSize: '12px', display: 'flex' }}>
+				<div className={styles.commonStylingHeader}>
 					TDS
 					<RenderSortingArrows field="tdsAmount" />
 				</div>),
@@ -232,10 +231,10 @@ const useGetColumns = ({
 			accessor : (item) => (
 				<div>
 					<Tooltip content={item?.tds}>
-						{item?.currency}
+						{item?.currency || ''}
 						{' '}
-						{item?.tds.toString().length > AMT_LENGTH
-							? `${item?.tds.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
+						{item?.tds?.toString().length > AMT_LENGTH
+							? `${item?.tds?.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.tds}
 					</Tooltip>
 				</div>
@@ -248,7 +247,7 @@ const useGetColumns = ({
 		},
 		{
 			Header: (
-				<div style={{ fontSize: '12px', display: 'flex' }}>
+				<div className={styles.commonStylingHeader}>
 					PAID/RECIEVED
 					<RenderSortingArrows field="paidAmount" />
 				</div>),
@@ -257,7 +256,7 @@ const useGetColumns = ({
 		},
 		{
 			Header: (
-				<div style={{ fontSize: '12px', display: 'flex' }}>
+				<div className={styles.commonStylingHeader}>
 					BALANCE
 					<RenderSortingArrows field="balanceAmount" />
 				</div>),
@@ -265,10 +264,10 @@ const useGetColumns = ({
 			accessor : (item) => (
 				<div>
 					<Tooltip content={item?.balanceAmount}>
-						{item?.currency}
+						{item?.currency || ''}
 						{' '}
-						{item?.balanceAmount.toString().length > AMT_LENGTH
-							? `${item?.balanceAmount.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
+						{item?.balanceAmount?.toString().length > AMT_LENGTH
+							? `${item?.balanceAmount?.toString().substr(GLOBAL_CONSTANTS.zeroth_index, AMT_LENGTH)}..`
 							: item?.balanceAmount}
 					</Tooltip>
 				</div>

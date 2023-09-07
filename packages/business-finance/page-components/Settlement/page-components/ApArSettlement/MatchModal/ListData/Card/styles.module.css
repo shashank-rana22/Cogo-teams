@@ -1,4 +1,4 @@
-.Row {
+.row {
 	align-items: center !important;
 	background: #fff;
 	outline: none;
@@ -14,7 +14,7 @@
 	}
 }
 
-.Card {
+.card {
 	position: relative;
 	display: flex;
 	align-items: center;

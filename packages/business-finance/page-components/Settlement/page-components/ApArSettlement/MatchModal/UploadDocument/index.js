@@ -15,7 +15,7 @@ function UploadDocument({
 		<Modal
 			show={showDocument}
 			onClose={() => { setShowDocument(false); }}
-			onOuterClick={() => { onOuterClick(); }}
+			onOuterClick={() => onOuterClick()}
 			size="md"
 		>
 			<Modal.Header title={TITLE} />

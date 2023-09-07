@@ -47,8 +47,7 @@ export default function MatchModal({
 		setCheckedData([]);
 	}
 	useEffect(() => {
-		const SORTED_MS = updatedData
-			.map((item) => new Date(item.transactionDate).getTime())
+		const SORTED_MS = updatedData?.map((item) => new Date(item?.transactionDate).getTime())
 			.sort();
 
 		const LATEST_MS = SORTED_MS[GLOBAL_CONSTANTS.zeroth_index];
@@ -136,22 +135,22 @@ export default function MatchModal({
 					</Button>
 					{
 						settleConfirmation
-						&& (
-							<ConfirmSettle
-								submitSettleMatch={submitSettleMatch}
-								setSettleConfirmation={setSettleConfirmation}
-								settleConfirmation={settleConfirmation}
-								updatedData={updatedData}
-								date={date}
-								fileValue={fileValue}
-								settleLoading={settleLoading}
-								setMatchModalShow={setMatchModalShow}
-							/>
-						)
+							? (
+								<ConfirmSettle
+									submitSettleMatch={submitSettleMatch}
+									setSettleConfirmation={setSettleConfirmation}
+									settleConfirmation={settleConfirmation}
+									updatedData={updatedData}
+									date={date}
+									fileValue={fileValue}
+									settleLoading={settleLoading}
+									setMatchModalShow={setMatchModalShow}
+								/>
+							) : null
 					}
 				</Modal.Footer>
 			</Modal>
-			{showJV && (
+			{showJV ? (
 				<CreateJvModal
 					show={showJV}
 					setShow={setShowJV}
@@ -161,7 +160,7 @@ export default function MatchModal({
 					selectedData={updatedData}
 					line_items={LINE_ITEMS}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

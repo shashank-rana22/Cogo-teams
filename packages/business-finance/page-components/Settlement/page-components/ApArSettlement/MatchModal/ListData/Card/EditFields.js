@@ -11,7 +11,7 @@ const LEAST_VALUE = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
-function errorMsg({ new_item = {}, types, inputvalue = 0, originalAllocation = 0, fieldType = '' }) {
+function errorMsg({ new_item = {}, types = '', inputvalue = 0, originalAllocation = 0, fieldType = '' }) {
 	if (fieldType === 'allocation') {
 		const {
 			currency = GLOBAL_CONSTANTS.currency_code.INR,

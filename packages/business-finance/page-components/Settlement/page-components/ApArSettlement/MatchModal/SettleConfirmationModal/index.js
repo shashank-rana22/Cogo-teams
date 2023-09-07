@@ -1,6 +1,8 @@
 import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
+import styles from './styles.module.css';
+
 export default function ConfirmSettle({
 	submitSettleMatch = () => {},
 	setSettleConfirmation = () => {},
@@ -20,13 +22,8 @@ export default function ConfirmSettle({
 			>
 				<Modal.Header title="SETTLEMENT CONFIRMATION" />
 				<Modal.Body>
-					<div style={{
-						display        : 'flex',
-						alignItems     : 'center',
-						justifyContent : 'center',
-						fontSize       : '16px',
-						fontWeight     : '500',
-					}}
+					<div
+						className={styles.settleModalBody}
 					>
 
 						<p>Are you sure you want to settle?</p>
@@ -37,7 +34,7 @@ export default function ConfirmSettle({
 
 					<Button
 						style={{ marginRight: '6px' }}
-						onClick={() => { setSettleConfirmation(false); }}
+						onClick={() => setSettleConfirmation(false)}
 						themeType="secondary"
 						loading={settleLoading}
 					>

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 const useGetJVList = ({ filters = {} }) => {
-	const [{ data:JvListData, loading: JvListLoading }, JvListTrigger] = useRequestBf(
+	const [{ data:jvListData, loading: jvListLoading }, JvListTrigger] = useRequestBf(
 		{
 			url     : '/payments/parent-jv/list',
 			authKey : 'get_payments_parent_jv_list',
@@ -25,8 +25,8 @@ const useGetJVList = ({ filters = {} }) => {
 	};
 
 	return {
-		JvListData,
-		JvListLoading,
+		jvListData,
+		jvListLoading,
 		jvListRefetch,
 	};
 };

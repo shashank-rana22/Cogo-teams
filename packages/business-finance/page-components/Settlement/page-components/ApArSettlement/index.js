@@ -149,7 +149,7 @@ function ApArSettlement() {
 					/>
 				</div>
 			)
-				: DataRender()
+				: <DataRender />
 
 }
 			<Amount

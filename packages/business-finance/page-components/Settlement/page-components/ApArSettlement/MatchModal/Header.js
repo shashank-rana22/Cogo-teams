@@ -81,7 +81,7 @@ function Header(
 
 						<Datepicker
 							placeholder="Enter Date"
-							dateFormat="MM/dd/yyyy"
+							dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 							name="date"
 							onChange={(e) => { setDate(e); }}
 							value={date}

@@ -84,13 +84,15 @@ export default function CardItem({
 	useEffect(() => {
 	}, [selectedData]);
 	return (
-		<div className={styles.Row}>
-			<div className={styles.Card} style={{ '--colortype': STATUS[cardData.status] }}>
+		<div className={styles.row}>
+			<div className={styles.card} style={{ '--colortype': STATUS[cardData.status] }}>
 				<div className={styles.ribbon}>{cardData.status}</div>
 
 				<div className={cl`${styles.icon_div} ${styles.flex}`}>
 					<IcMDrag
 						className={styles.icon}
+						height={30}
+						width={30}
 					/>
 				</div>
 

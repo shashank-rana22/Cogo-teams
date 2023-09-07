@@ -7,7 +7,7 @@ function EmptyState({
 	height = 125,
 	width = 225,
 	flexDirection = 'row',
-	Text = '',
+	text = '',
 }) {
 	return (
 		<div className={cl`${styles.container} ${styles[flexDirection]}`}>
@@ -26,7 +26,7 @@ function EmptyState({
 				</span>
 				<div className={styles.horizontal} />
 				<div>
-					{Text}
+					{text}
 				</div>
 			</div>
 

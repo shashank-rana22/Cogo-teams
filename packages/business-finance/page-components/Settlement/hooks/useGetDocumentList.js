@@ -4,22 +4,10 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
+import toastApiError from '../../commons/toastApiError.ts';
 import { getFormatDates } from '../utils/getFormatDate';
 
-export function toastApiError(err) {
-	let message = '';
-	if (err?.response?.data) {
-		if (err.response.data?.base) {
-			message = err.response.data.base;
-		} else if (err.response.data.message) {
-			message = err.response.data.message;
-		}
-	} else if (err?.message) {
-		message = err.message;
-	}
-	if (message !== 'canceled') { Toast.error(message || 'Something went wrong !!'); }
-}
-
+const INITIAL_BAL = 0;
 const useGetDocumentList = ({
 	filters = {}, sorting = {},
 	setMatchModalShow = () => {},
@@ -53,7 +41,6 @@ const useGetDocumentList = ({
 	);
 
 	const { query, debounceQuery } = useDebounceQuery();
-	const INITIAL_BAL = 0;
 	const {
 		search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '',
 		entityCode, page = '1', pageLimit = 10,

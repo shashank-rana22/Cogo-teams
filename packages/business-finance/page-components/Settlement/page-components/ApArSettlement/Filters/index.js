@@ -46,7 +46,7 @@ function Filters({
 
 			<div className={styles.horizontal} />
 			<br />
-			<div className={cl`${styles.select}  `}>
+			<div className={styles.select}>
 				<div className={cl`${styles.entity} ${styles.reqMargin}`}>
 					Site/Entity
 					<AsyncSelectController
