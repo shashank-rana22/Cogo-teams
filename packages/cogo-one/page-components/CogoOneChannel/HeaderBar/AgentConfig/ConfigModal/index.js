@@ -96,6 +96,7 @@ function ConfigModal({
 		fire_base_configuration: {
 			firestore,
 			setActiveCard,
+			handleClose,
 		},
 		agents_status: {
 			firestore,

@@ -2,7 +2,7 @@ import { InputNumber, Button, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { FLASH_MESSAGES_ROLES_LIST } from '../../../../../../constants';
+import { FLASH_MESSAGES_ROLES_LIST } from '../../../../../../constants/FLASH_MESSAGES_ROLES_LIST';
 import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
 
 import styles from './styles.module.css';
@@ -13,6 +13,7 @@ const DECIMAL_VALUE = 0;
 function RoleWiseFlashAgentChat({
 	firestore = {},
 	source = 'claim_chat_configuration',
+	handleClose = () => {},
 }) {
 	const [timeoutValues, setTimeoutValues] = useState({});
 
@@ -21,11 +22,12 @@ function RoleWiseFlashAgentChat({
 		[key]: Number((timeoutValues[key] * ONE_MILLI_SECOND).toFixed(DECIMAL_VALUE)),
 	}), {});
 
-	const disableSubmitButton = Object.values(timeoutValues).some((value) => value === undefined
-	|| value === null || Number.isNaN(value)) || isEmpty(timeoutValues);
+	const disableSubmitButton = Object.values(timeoutValues).some((value) => Number.isNaN(value))
+	|| isEmpty(timeoutValues);
 
 	const handleSubmit = () => {
 		updateCogooneConstants({ firestore, timeout: timeInMilliSecond, source });
+		handleClose();
 		Toast.success('Successfully Save !');
 	};
 

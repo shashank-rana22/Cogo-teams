@@ -31,7 +31,7 @@ export const getIsActive = async ({ firestore = {}, setRoleValue = () => {}, set
 
 	const timeInMinute = screen_lock_timeout / ONE_MINUTE;
 
-	const FORMATTED_TIMEOUT = Object.keys(flash_messages_timeout_mapping).reduce((result, key) => ({
+	const formattedTimeout = Object.keys(flash_messages_timeout_mapping).reduce((result, key) => ({
 		...result,
 		[key]: (flash_messages_timeout_mapping[key] / ONE_MINUTE).toFixed(DECIMAL_VALUE),
 	}), {});
@@ -42,7 +42,7 @@ export const getIsActive = async ({ firestore = {}, setRoleValue = () => {}, set
 		toggleState : is_locked_screen,
 	});
 
-	setTimeoutValues(FORMATTED_TIMEOUT);
+	setTimeoutValues(formattedTimeout);
 };
 
 export const updateCogooneConstants = async ({
