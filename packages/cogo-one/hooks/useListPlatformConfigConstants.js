@@ -3,6 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
+const getParams = ({ keyName = '' }) => ({
+	filters: {
+		key_name: keyName || undefined,
+	},
+});
+
 const useListPlatformConfigConstants = ({ keyName = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_platform_config_constants',
@@ -12,11 +18,7 @@ const useListPlatformConfigConstants = ({ keyName = '' }) => {
 	const listPlatformConfigConstants = useCallback(() => {
 		try {
 			trigger({
-				params: {
-					filters: {
-						key_name: keyName || undefined,
-					},
-				},
+				params: getParams({ keyName }),
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something Went Wrong');
