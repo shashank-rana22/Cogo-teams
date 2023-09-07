@@ -4,11 +4,12 @@ import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
+	id?: string;
 	remarks?: string;
 	setShowModal?: (p: any) => void;
 	refetch?: Function;
-	id?: string;
 }
+
 const usePostJobOpenRemark = ({
 	id = '',
 	remarks = '',
@@ -49,8 +50,8 @@ const usePostJobOpenRemark = ({
 			setShowModal(false);
 
 			refetch();
-		} catch (e) {
-			Toast.error(e?.response?.data?.message);
+		} catch (err) {
+			Toast.error(err?.response?.data?.message || err?.response?.message);
 		}
 	};
 

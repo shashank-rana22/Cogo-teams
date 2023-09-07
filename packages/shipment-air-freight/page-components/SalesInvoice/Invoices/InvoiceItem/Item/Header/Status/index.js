@@ -123,7 +123,7 @@ function Status({
 					</Button>
 				) : null}
 
-			{showRequestCN && (
+			{showRequestCN ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
@@ -132,7 +132,7 @@ function Status({
 				>
 					Request CN
 				</Button>
-			)}
+			) : null}
 
 			{invoice?.is_revoked && invoice?.status !== 'revoked' && (
 				<div className={styles.info_container}>Requested for Revoke</div>

@@ -12,14 +12,15 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 			remark       : values?.remark,
 			documentUrls : [values?.proof_url?.finalUrl],
 		},
+		organization: {
+			businessName: shipmentData?.importer_exporter?.business_name,
+		},
 	},
 	toWhomToSendForApproval      : ['LEVEL_1', 'LEVEL_2'],
 	incidentApprovalManagementId : 'Yg',
 	createdBy                    : user_id,
 	source                       : 'SHIPMENT',
-	organization                 : {
-		businessName: shipmentData?.importer_exporter?.business_name,
-	},
+
 });
 
 const useIncidentReOpenJob = ({
@@ -46,7 +47,7 @@ const useIncidentReOpenJob = ({
 
 			setIsSuccess(true);
 		} catch (error) {
-			Toast.error(error?.response?.data?.message || error?.message || 'Something went wrong.');
+			Toast.error(error?.response?.data?.message || error?.data?.message || 'Something went wrong.');
 		}
 	};
 

@@ -153,6 +153,10 @@ export const remainControls = ({ t = () => {}, isSettlementExecutive = false }:P
 				value : 'OVERHEAD_APPROVAL',
 				label : t('non_recurr_expense_approval'),
 			},
+			{
+				value : 'JOB_OPEN',
+				label : t('incidentManagement:job_open_label'),
+			},
 		];
 	}
 

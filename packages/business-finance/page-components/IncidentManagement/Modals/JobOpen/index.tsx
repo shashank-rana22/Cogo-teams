@@ -108,7 +108,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 											style           : 'currency',
 											currencyDisplay : 'code',
 										},
-									}) || '--'}
+									})}
 								</span>
 							</div>
 
@@ -123,7 +123,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 											style           : 'currency',
 											currencyDisplay : 'code',
 										},
-									}) || '--'}
+									})}
 								</span>
 							</div>
 
@@ -138,7 +138,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 											style           : 'currency',
 											currencyDisplay : 'code',
 										},
-									}) || '--'}
+									})}
 								</span>
 							</div>
 						</div>
