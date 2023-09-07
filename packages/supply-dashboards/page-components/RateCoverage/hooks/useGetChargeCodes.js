@@ -1,23 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const SERVICE_NAMES = [
-	'fcl_customs_charges',
-	'air_customs_charges',
-	'lcl_customs_charges',
-	'lcl_freight_charges',
-	'fcl_freight_charges',
-	'haulage_freight_charges',
-	'air_freight_surcharges',
-	'air_freight_local_charges',
-	'fcl_freight_local_charges',
-	'air_freight_charges',
-];
-
 const useGetChargeCodes = ({
 	service_name = 'fcl_customs_charges',
 	trade_type = null,
-	cfsChargeRequired = false,
 }) => {
 	const [{ data }, trigger] = useRequest(
 		{
@@ -52,11 +38,9 @@ const useGetChargeCodes = ({
 		);
 
 	useEffect(() => {
-		if (SERVICE_NAMES.includes(service_name) || cfsChargeRequired) {
-			listApi();
-		}
+		listApi();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [service_name, cfsChargeRequired]);
+	}, [service_name]);
 
 	return { list };
 };

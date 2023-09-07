@@ -171,18 +171,6 @@ function AddRateModal({
 		organizationUsers,
 	});
 
-	// return null;
-	// if (values?.service_provider_id) {
-	// 	finalControls.forEach((ctr) => {
-	// 		const newCtr = { ...ctr };
-	// 		if (newCtr?.name === 'sourced_by_id') {
-	// 			newCtr.params.filters = {
-	// 				organization_id: values.service_provider_id,
-	// 			};
-	// 		}
-	// 	});
-	// }
-
 	const showElements = {
 		origin_main_port_id      : data?.origin_port?.is_icd,
 		destination_main_port_id : data?.destination_port?.is_icd,

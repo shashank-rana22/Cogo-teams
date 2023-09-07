@@ -106,10 +106,9 @@ const fclControls = ({
 		rules       : { required: 'destination main port is required' },
 	},
 	{
-		heading       : 'Container Details',
-		name          : 'container_details',
-		span          : 12,
-		showOnlyLabel : true,
+		heading : 'Container Details',
+		name    : 'container_details',
+		span    : 12,
 	},
 	{
 		name        : 'container_type',

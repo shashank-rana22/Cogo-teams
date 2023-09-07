@@ -4846,18 +4846,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
-		{
-			api          : 'get_air_freight_rate_dashboard_stats ',
-			access_type  : 'private',
-			service_name : 'air_freight_rate',
-		},
-
-		{
-			api          : 'get_ltl_freight_rate_stats ',
-			access_type  : 'private',
-			service_name : 'ltl_freight_rate',
-		},
-
 	],
 	operations_dashboard: [
 		{
