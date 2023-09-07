@@ -1,9 +1,10 @@
 import { Input, Popover } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import FILTER_CONTROLS from '../../../../../../configurations/email-filter-controls';
+import getFilterControls from '../../../../../../configurations/email-filter-controls';
+import useListPlatformConfigConstants from '../../../../../../hooks/useListPlatformConfigConstants';
 import FilterComponents from '../../../FilterComponents';
 
 import styles from './styles.module.css';
@@ -19,6 +20,16 @@ function Header({
 	isBotSession = false,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
+
+	const {
+		listPlatformConfigConstants = () => {},
+		configLoading = false,
+		configData = [],
+	} = useListPlatformConfigConstants({ keyName: 'COGOVERSE_TEAM_MAPPING' });
+
+	useEffect(() => {
+		listPlatformConfigConstants();
+	}, [listPlatformConfigConstants]);
 
 	return (
 		<div className={styles.filters_container}>
@@ -46,7 +57,7 @@ function Header({
 									showBotMessages={isBotSession}
 									tagOptions={tagOptions}
 									viewType={viewType}
-									filterControls={FILTER_CONTROLS}
+									filterControls={getFilterControls({ configLoading, configData, viewType })}
 								/>
 							)
 					)}
