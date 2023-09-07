@@ -18,7 +18,7 @@ const air_lines = {
 const service_provider = {
 	name        : 'service_provider_id',
 	type        : 'async-select',
-	asyncKey    : 'organizations_modified_options',
+	asyncKey    : 'organizations',
 	label       : 'Service Provider',
 	span        : 5,
 	placeholder : 'Service Provider',

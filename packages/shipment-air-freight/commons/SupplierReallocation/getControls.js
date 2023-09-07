@@ -21,7 +21,7 @@ export default function getControls({
 			label      	: 'Service Provider',
 			type        : 'asyncSelect',
 			placeholder : 'Select Service Provider',
-			asyncKey    : 'organizations_modified_options',
+			asyncKey    : 'organizations',
 			params      : {
 				filters: {
 					account_type : 'service_provider',

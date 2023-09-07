@@ -71,7 +71,6 @@ import {
 	asyncListLeadOrganizationUsers,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
-	asyncFieldsOrganizationsModifiedLabel,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -161,7 +160,6 @@ const keyAsyncFieldsParamsMapping = {
 	lead_org_users                       : asyncListLeadOrganizationUsers,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
-	organizations_modified_options       : asyncFieldsOrganizationsModifiedLabel,
 };
 
 const SINGLE_ENTITY = 1;
@@ -195,7 +193,6 @@ function AsyncSelect(props) {
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
-		asyncKey,
 	});
 
 	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'

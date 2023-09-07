@@ -152,19 +152,6 @@ function asyncFieldsOrganizations() {
 	};
 }
 
-function asyncFieldsOrganizationsModifiedLabel() {
-	return {
-		labelKey    : 'business_name',
-		valueKey    : 'id',
-		endpoint    : 'list_organizations',
-		initialCall : true,
-		params      : {
-			filters    : { status: 'active' },
-			page_limit : 100,
-		},
-	};
-}
-
 function asyncFieldsOrganizationUser() {
 	return {
 		labelKey    : 'name',
@@ -1037,5 +1024,4 @@ export {
 	asyncListLeadOrganizationUsers,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
-	asyncFieldsOrganizationsModifiedLabel,
 };
