@@ -1,8 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
-import RateCoverage from '../RateCoverage';
-
 import LiveBookings from './Content';
 
 function LiveBookingsView() {
@@ -23,7 +21,7 @@ function LiveBookingsView() {
 					--
 				</TabPanel>
 				<TabPanel name="rate_density" title="Rate Density">
-					<RateCoverage />
+					--
 				</TabPanel>
 			</Tabs>
 		</div>
