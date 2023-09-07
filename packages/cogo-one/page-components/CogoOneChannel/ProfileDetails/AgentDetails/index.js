@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { FIREBASE_TABS } from '../../../../constants';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -22,8 +23,6 @@ import GroupMembersRequests from './GroupMembersRequests';
 import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
-
-const ENABLE_SHARE_BUTTON_FOR = ['message', 'firebase_emails'];
 
 const handleClick = ({ id, channel_type }) => {
 	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -118,7 +117,7 @@ function AgentDetails({
 		},
 	};
 
-	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
+	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab] || {};
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
 		sender,
@@ -177,7 +176,7 @@ function AgentDetails({
 
 				<div className={styles.title}>Profile</div>
 				<div className={styles.quick_actions}>
-					{ENABLE_SHARE_BUTTON_FOR.includes(activeTab) && (
+					{FIREBASE_TABS.includes(activeTab) && (
 						<div
 							role="presentation"
 							className={styles.copy_link}
@@ -194,7 +193,7 @@ function AgentDetails({
 
 			<ContactVerification leadUserId={leadUserId} userId={userId} loading={getUserLoading} userData={userData} />
 
-			{(activeTab === 'message' && !getUserLoading && !orgLoading)
+			{(FIREBASE_TABS.includes(activeTab) && !getUserLoading && !orgLoading)
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}

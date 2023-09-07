@@ -7,10 +7,10 @@ import styles from './styles.module.css';
 
 function SelectMobileNumber({
 	value = {},
-	onChange,
+	onChange = () => {},
 	codeKey = 'country_code',
 	numberKey = 'number',
-	width,
+	width = '',
 	id = 'select_phone',
 	inputType = 'text',
 	type = 'text',
@@ -32,7 +32,10 @@ function SelectMobileNumber({
 			className={styles.row_container}
 			style={width ? { width: '104%' } : {}}
 		>
-			<div className={styles.country_code} style={{ paddingRight: 0, ...(rest?.countryCodeStyles || {}) }}>
+			<div
+				className={`${styles.country_code} country_code`}
+				style={{ paddingRight: 0, ...(rest?.countryCodeStyles || {}) }}
+			>
 				<SelectCountryCode
 					{...rest}
 					value={country_code || (value || {})[codeKey]}
@@ -44,7 +47,7 @@ function SelectMobileNumber({
 				/>
 			</div>
 
-			<div className={styles.mobile_number} style={rest?.mobileInputStyles || {}}>
+			<div className={`${styles.mobile_number} mobile_number`} style={rest?.mobileInputStyles || {}}>
 				<Input
 					{...rest}
 					width="100%"

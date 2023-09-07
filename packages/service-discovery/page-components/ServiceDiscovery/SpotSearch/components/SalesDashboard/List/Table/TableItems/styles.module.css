@@ -1,0 +1,11 @@
+.port_pair {
+	display: flex;
+	align-items: center;
+	width: 80px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 500;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
