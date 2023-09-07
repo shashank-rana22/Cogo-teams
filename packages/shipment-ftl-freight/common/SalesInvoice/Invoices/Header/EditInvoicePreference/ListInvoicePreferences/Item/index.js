@@ -107,7 +107,6 @@ function Item({
 					<div className={styles.billing_info}>
 						GST Number:
 						{' '}
-						{' '}
 						{billing_address?.tax_number}
 					</div>
 
