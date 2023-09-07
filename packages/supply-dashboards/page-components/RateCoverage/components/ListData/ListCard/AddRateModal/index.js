@@ -65,7 +65,6 @@ function AddRateModal({
 			value : item?.value,
 		}
 	));
-
 	const {
 		control,
 		formState: { errors },
@@ -118,7 +117,16 @@ function AddRateModal({
 	const serviceProviders = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganization(),
-			{ params: { filters: { status: 'active', service: filter?.service, kyc_status: 'active' } } },
+			{
+				params: {
+					filters: {
+						status       : 'active',
+						service      : filter?.service,
+						kyc_status   : 'verified',
+						account_type : 'service_provider',
+					},
+				},
+			},
 		),
 	);
 	const organizationUsers = useGetAsyncOptions(

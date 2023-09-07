@@ -40,6 +40,7 @@ const fclControls = ({
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		className   : 'primary lg',
+		value       : data?.sourced_by_id,
 		...organizationUsers,
 		span        : 4,
 		rules       : { required: 'rate provided by user is required' },
@@ -51,6 +52,7 @@ const fclControls = ({
 		placeholder : 'Shipping Line',
 		span        : 4,
 		className   : 'primary lg',
+		value       : data?.shipping_line_id,
 		...listShippingLineOptions,
 		rules       : { required: 'shipping line is required' },
 	},
@@ -236,12 +238,10 @@ const fclControls = ({
 		rules: { required: 'shipment type is required' },
 	},
 	{
-		name               : 'weight_slabs',
-		heading            : 'Weight Slabs',
-		type               : 'fieldArray',
-		showButtons        : false,
-		buttonText         : 'Add Weight Slabs',
-		noDeleteButtonTill : 0,
+		name       : 'weight_slabs',
+		heading    : 'Weight Slabs',
+		type       : 'fieldArray',
+		buttonText : 'Add Weight Slabs',
 		value:
 			data?.cargo_weight_per_container > MIN_CARGO_WEIGHT
 				? [
@@ -257,7 +257,6 @@ const fclControls = ({
 			{
 				name        : 'lower_limit',
 				type        : 'number',
-				disabled    : true,
 				span        : 4,
 				placeholder : 'Lower Limit (in MT)',
 				className   : 'primary lg',
@@ -291,31 +290,30 @@ const fclControls = ({
 		],
 	},
 	{
-		heading       : 'Line Items',
-		name          : 'line_item',
-		span          : 12,
-		showOnlyLabel : true,
-
+		heading            : 'Line Items',
+		name               : 'line_item',
+		span               : 12,
+		noDeleteButtonTill : 1,
 	},
 	{
-		type               : 'fieldArray',
-		showButtons        : true,
-		name               : 'line_items',
-		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
-		controls           : [
+		type        : 'fieldArray',
+		showButtons : true,
+		name        : 'line_items',
+		buttonText  : 'Add Line Items',
+		controls    : [
 			{
 				name        : 'code',
 				type        : 'select',
-				span        : 3,
+				span        : 1.5,
 				placeholder : 'Charge Name',
+				value       : 'BAS',
 				className   : 'primary lg',
 				options     : chargeCodeOptions,
 				rules       : { required: 'code is required' },
 			},
 			{
 				name      : 'unit',
-				span      : 3,
+				span      : 2,
 				type      : 'select',
 				className : 'primary lg',
 				value     : 'per_container',
@@ -327,7 +325,7 @@ const fclControls = ({
 			},
 			{
 				name        : 'currency',
-				span        : 2,
+				span        : 1.5,
 				type        : 'select',
 				placeholder : 'Curr...',
 				className   : 'primary lg',
@@ -336,21 +334,21 @@ const fclControls = ({
 			},
 			{
 				name        : 'price',
-				span        : 3,
+				span        : 2,
 				type        : 'number',
 				className   : 'primary lg',
 				placeholder : 'Amount',
 			},
 			{
 				name        : 'market_price',
-				span        : 3,
+				span        : 2,
 				type        : 'number',
 				className   : 'primary lg',
 				placeholder : 'Market Price',
 			},
 			{
 				name        : 'remarks',
-				span        : 3,
+				span        : 2,
 				type        : 'text',
 				className   : 'primary lg',
 				placeholder : 'Add remarks here',

@@ -26,12 +26,16 @@ const useCreateFreightRate = (service) => {
 			tariff_price : item?.price_per_unit,
 			currency     : data?.currency,
 		}));
+		const UPDATED_LINE_ITEMS = [];
 
-		const updatedLineItems = (data?.line_items || []).map((item) => {
+		(data?.line_items || []).forEach((item) => {
 			if (typeof item.remarks === 'string') {
-				return { ...item, remarks: [item.remarks] };
+				const lineItem = { ...item, remarks: [item.remarks], slabs: data?.container_slabs };
+				UPDATED_LINE_ITEMS.push(lineItem);
+			} else {
+				const lineItem = { ...item, slabs: data?.container_slabs };
+				UPDATED_LINE_ITEMS.push(lineItem);
 			}
-			return item;
 		});
 
 		const params = (service === 'air_freight') ? {
@@ -42,7 +46,8 @@ const useCreateFreightRate = (service) => {
 		} : {
 			origin_port_id      : data?.origin_location_id,
 			destination_port_id : data?.destination_location_id,
-			line_items          : updatedLineItems,
+			line_items          : [...UPDATED_LINE_ITEMS],
+			weight_slabs,
 		};
 
 		try {
