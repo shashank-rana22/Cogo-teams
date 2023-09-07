@@ -201,6 +201,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.app_saas_cogo_subscription,
 				...apis.sales_dashboard,
 				...apis.cogopoints,
+				...apis.ssr,
 			],
 			main_apis: [
 				'list_organization_users',
@@ -224,6 +225,19 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.sales,
 			],
 			main_apis   : ['list_organizations'],
+			module_type : 'crm',
+		},
+		governance_manager: {
+			key           : 'governance_manager',
+			title         : 'Governance Manager',
+			href          : '/v2/governance-manager',
+			as            : '/v2/governance-manager',
+			type          : 'link',
+			icon          : IcMCrm,
+			possible_apis : [
+				...apis.governance_manager,
+			],
+			main_apis   : [],
 			module_type : 'crm',
 		},
 		support_crm: {
@@ -298,6 +312,21 @@ const navigationMapping = ({ t = () => {} }) => {
 				'list_margins',
 				'list_checkouts',
 				'list_partners',
+			],
+			module_type: 'dashboards',
+		},
+		service_discovery: {
+			key           : 'service_discovery',
+			title         : t('common:service_discovery'),
+			href          : '/v2/service-discovery',
+			as            : '/v2/service-discovery',
+			type          : 'link',
+			icon          : IcMFinanceDashboard,
+			possible_apis : apis.service_discovery,
+			main_apis     : [
+				'list_spot_searches',
+				'list_checkouts',
+				'list_organizations',
 			],
 			module_type: 'dashboards',
 		},
@@ -2085,8 +2114,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		manage_rfq: {
 			key           : 'manage_rfq',
 			title         : t('common:manage_rfq'),
-			href          : '/manage-rfq',
-			as            : '/manage-rfq',
+			href          : '/manage-rfq?activeTab=draft&page=1',
+			as            : '/manage-rfq?activeTab=draft&page=1',
 			type          : 'link',
 			main_apis     : ['list_rfqs'],
 			possible_apis : apis.manage_rfq,
@@ -2587,6 +2616,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 			],
+		},
+		attendance_leave_management: {
+			key           : 'attendance_leave_management',
+			title         : 'Attendance and Leave Management',
+			icon          : IcMDashboard,
+			href          : '/v2/attendance-leave-management',
+			as            : '/v2/attendance-leave-management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.attendance_leave_management,
 		},
 	};
 

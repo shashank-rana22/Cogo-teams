@@ -18,7 +18,7 @@ function ComposeEmailBody(props) {
 		getDecodedData = () => {},
 		userEmailAddress,
 		setEmailState = () => {},
-		userMails = [],
+		userSharedMails = [],
 		viewType = '',
 		errorValue = '',
 		attachments = [],
@@ -32,7 +32,7 @@ function ComposeEmailBody(props) {
 	const userActiveMails = (
 		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
-			...(userMails || []),
+			...(userSharedMails || []),
 		])]
 	).map(
 		(curr) => ({ label: curr, value: curr }),

@@ -2,6 +2,7 @@ import advanceBookingManager from './config/advance-booking-manager';
 import airRepository from './config/air-repository';
 import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
+import attendanceLeaveManagement from './config/attendance-leave-management';
 import authorityDesk from './config/authority-desk';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
@@ -27,6 +28,7 @@ import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
+import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
@@ -53,6 +55,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
+import serviceDiscovery from './config/service-discovery';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -137,6 +140,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...governanceManager,
 	...byodDashboard,
 	...employeeDashboard,
 	...managerDashboard,
@@ -150,8 +154,10 @@ const routeConfig = {
 	...employeeDirectory,
 	...ftlFieldSreviceOps,
 	...notifications,
+	...attendanceLeaveManagement,
 	...centralisedCustomerService,
 	...resource,
+	...serviceDiscovery,
 	...supplyTools,
 };
 

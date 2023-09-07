@@ -7,6 +7,7 @@ const useApproveConcor = ({
 	setShowModal,
 	id,
 	concorData,
+	t,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -76,14 +77,14 @@ const useApproveConcor = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
+				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 				setShowModal(false);
 				refetch();
 			} else {
 				Toast.error(message);
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.message || 'Something went wrong');
+			Toast.error(e?.response?.data?.message || t('incidentManagement:something_went_wrong_message'));
 		}
 	};
 

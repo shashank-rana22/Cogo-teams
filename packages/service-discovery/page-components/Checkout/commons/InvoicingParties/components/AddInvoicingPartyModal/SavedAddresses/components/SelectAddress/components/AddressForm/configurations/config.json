@@ -1,0 +1,14 @@
+{
+	"billingAddress": {
+		"apiEndpoints": {
+			"create": "create_organization_billing_address",
+			"edit": "update_organization_billing_address"
+		}
+	},
+	"otherAddress": {
+		"apiEndpoints": {
+			"create": "create_organization_address",
+			"edit": "update_organization_address"
+		}
+	}
+}

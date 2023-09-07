@@ -28,7 +28,13 @@ function ExecuteTask({
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 
-	const { servicesList, shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
+	const {
+		servicesList,
+		shipment_data,
+		primary_service,
+		getShipmentTimeline,
+		refetchServices,
+	} = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],
@@ -87,6 +93,7 @@ function ExecuteTask({
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
 				refetch={taskListRefetch}
+				refetchServices={refetchServices}
 			/>
 		);
 	}
@@ -129,6 +136,7 @@ function ExecuteTask({
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
 				refetch={taskListRefetch}
+				refetchServices={refetchServices}
 			/>
 		);
 	}
@@ -146,6 +154,7 @@ function ExecuteTask({
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
 				refetch={taskListRefetch}
+				refetchServices={refetchServices}
 			/>
 		);
 	}
