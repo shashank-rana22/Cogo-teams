@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 const DEFAULT_VALUE = 0;
 
 const DEFAULT_PAGE_VALUE = 1;
+const LIST_CARD_LOADER_COUNT = 5;
 
 function ListData({
 	data = {},
@@ -73,7 +74,7 @@ function ListData({
 				</div>
 			</div>
 			<div>
-				{listLoading && ['1', '2', '3', '4', '5'].map((ind) => (
+				{listLoading && [...new Array(LIST_CARD_LOADER_COUNT).keys()].map((ind) => (
 					<Placeholder
 						height="15vh"
 						key={ind}
