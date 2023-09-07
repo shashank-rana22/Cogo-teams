@@ -2,6 +2,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import { EntityContext } from './commons/Contexts';
@@ -9,11 +10,19 @@ import Expenses from './Expenses/index';
 import styles from './styles.module.css';
 import Vendors from './Vendors/index';
 
+interface ProfileProps {
+	profile?: { partner?: { id?: string } };
+}
 function Overheads() {
 	const { query } = useRouter();
 	const { push } = useRouter();
+
+	const profile = useSelector((state) => state);
+	const { profile: { partner } }:ProfileProps = profile || {};
+	const { id: partnerId } = partner || {};
+
 	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
-	const [entityCode, setEntityCode] = useState('');
+	const [entityCode, setEntityCode] = useState(partnerId);
 
 	const handleChange = (tab:any) => {
 		setActiveTab(tab);
@@ -29,12 +38,14 @@ function Overheads() {
 				<div className={styles.main_heading}>Overheads</div>
 				<div className={styles.header}>
 					<AsyncSelect
+						name="entityCode"
 						placeholder="Select Entity Code"
 						value={entityCode}
 						onChange={(val) => setEntityCode(val)}
 						isClearable
+						defaultOptions
 						initialCall
-						labelKey="business_name"
+						labelKey="entity_code"
 						valueKey="entity_code"
 						renderLabel={(item) => (`${item?.entity_code} - ${item?.business_name}`)}
 						asyncKey="list_cogo_entity"
