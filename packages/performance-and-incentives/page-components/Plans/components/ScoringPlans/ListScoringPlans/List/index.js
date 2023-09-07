@@ -1,16 +1,17 @@
 import { Table } from '@cogoport/components';
+import { useState } from 'react';
 
 import useGetScoringConfigs from '../useGetScoringConfigs';
 
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
-function List(props) {
-	const { activeActionId } = props;
+function List() {
+	const [activeActionId, setActiveActionId] = useState(null);
 
 	const { list } = useGetScoringConfigs();
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ activeActionId });
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ activeActionId, setActiveActionId });
 
 	return (
 		<div className={styles.table_container}>

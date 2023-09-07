@@ -6,12 +6,13 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import SCORING_PLAN_STATUS_COLOUR_MAPPING from '../../../../constants/scoring-plan-status-colour-mapping';
 
+import Actions from './Actions';
 import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const getListColumnMapping = (props) => {
-	const { activeActionId } = props;
+	const { activeActionId, setActiveActionId } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -127,8 +128,18 @@ const getListColumnMapping = (props) => {
 							visible={activeActionId === id}
 							placement="left"
 							interactive
+							render={(
+								<Actions />
+							)}
+							onClickOutside={() => setActiveActionId(null)}
 						>
-							<IcMOverflowDot />
+							<div className={styles.action_icon_container}>
+								<IcMOverflowDot
+									width={16}
+									height={16}
+									onClick={() => setActiveActionId((pvId) => (pvId === id ? null : id))}
+								/>
+							</div>
 						</Popover>
 					</div>
 				</div>
