@@ -3,6 +3,7 @@ import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 
+import { FIREBASE_TABS } from '../../../../../constants';
 import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
@@ -12,18 +13,18 @@ const COUNTRY_CODE_END = 2;
 
 function VoiceCallComponent({
 	userMobile = '',
-	orgId,
-	userId,
-	userName,
-	activeTab,
+	orgId = '',
+	userId = '',
+	userName = '',
+	activeTab = '',
 	setModalType = () => {},
-	hasVoiceCallAccess,
+	hasVoiceCallAccess = false,
 }) {
 	const dispatch = useDispatch();
 
 	let code;
 	let number;
-	if (activeTab === 'message') {
+	if (FIREBASE_TABS.includes(activeTab)) {
 		code = userMobile?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
 		number = userMobile?.slice(COUNTRY_CODE_END);
 	} else {

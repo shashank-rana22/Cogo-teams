@@ -71,6 +71,8 @@ import {
 	asyncListLeadOrganizationUsers,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
+	asyncListSaasHsCodes,
+	asyncListSpotSearchRateCardOperators,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -160,6 +162,8 @@ const keyAsyncFieldsParamsMapping = {
 	lead_org_users                       : asyncListLeadOrganizationUsers,
 	list_user_shipments                  : asyncListUserShipments,
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
+	list_saas_hs_codes                   : asyncListSaasHsCodes,
+	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 };
 
 const SINGLE_ENTITY = 1;

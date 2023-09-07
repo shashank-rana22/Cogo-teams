@@ -946,6 +946,29 @@ function asyncListCompanyLocations() {
 	};
 }
 
+function asyncListSaasHsCodes() {
+	return {
+		valueKey       : 'id',
+		labelKey       : 'description',
+		authkey        : 'get_saas_hs_code_list',
+		endpoint       : 'saas/hs-code/list',
+		defaultOptions : true,
+		searchByq      : true,
+		qFilterKey     : 'query',
+		microService   : 'business_finance',
+		defaultParams  : {},
+	};
+}
+
+function asyncListSpotSearchRateCardOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_spot_search_rate_card_operators',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1023,4 +1046,6 @@ export {
 	asyncListLeadOrganizationUsers,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
+	asyncListSaasHsCodes,
+	asyncListSpotSearchRateCardOperators,
 };
