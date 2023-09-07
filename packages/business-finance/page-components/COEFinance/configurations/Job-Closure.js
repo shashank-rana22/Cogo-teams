@@ -1,8 +1,6 @@
 const AUTO_JOB_CLOSURE_CONFIG = {
-	showHeader  : true,
-	headerClass : 'border',
-
-	fields: [
+	showHeader : true,
+	fields     : [
 		{
 			label : 'Entity',
 			key   : 'entity',

@@ -14,7 +14,7 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function FormDataTwo({
+function EditableComponent({
 	fields = [],
 	item = {},
 	ENTITY_OPTIONS = [],
@@ -23,38 +23,48 @@ function FormDataTwo({
 	loading = false,
 	refetch = {},
 }) {
+	const {
+		id = '', entity = '', selectionCriteriaOp = '', selectionCriteriaFin = '',
+		serviceType = '', tradeType = '', oprClosureDays: level1 = '', finClosureDays: level2 = '',
+	} = item || {};
 	const { control, watch, handleSubmit, setValue } = useForm({
 		defaultValues: {
-			entity               : item.entity?.toString(),
-			serviceType          : item.serviceType,
-			tradeType            : item.tradeType,
-			selectionCriteriaOp  : item.selectionCriteriaOp,
-			selectionCriteriaFin : item.selectionCriteriaFin,
-			level1               : item.oprClosureDays,
-			level2               : item.finClosureDays,
+			entity: entity.toString(),
+			serviceType,
+			tradeType,
+			selectionCriteriaOp,
+			selectionCriteriaFin,
+			level1,
+			level2,
 		},
 	});
 	const afterEditData = watch();
 
 	const stringifiedData = JSON.stringify(afterEditData);
 
-	const { apiTrigger, loading: updateLoading } = useUpdateJobClosure({
+	const { apiTrigger = () => {}, loading: updateLoading = false } = useUpdateJobClosure({
 		refetch,
 		setOpenConfig,
-		listOfId: [item.id],
+		listOfId: [id],
 	});
 
 	const onSubmit = (value) => {
+		const {
+			entity: entityValue = '', selectionCriteriaOp :selectionCriteriaOpValue = '',
+			selectionCriteriaFin: selectionCriteriaFinValue = '',
+			serviceType:serviceTypeValue = '', tradeType:tradeTypeValue = '',
+			level1:level1Value = '', level2:level2Value = '',
+		} = value || {};
 		const params = {
-			id   : item?.id,
-			data : {
-				entity               : value.entity,
-				selectionCriteriaOp  : value.selectionCriteriaOp,
-				selectionCriteriaFin : value.selectionCriteriaFin,
-				serviceType          : value.serviceType,
-				tradeType            : value.tradeType,
-				level1               : value.level1,
-				level2               : value.level2,
+			id,
+			data: {
+				entityValue,
+				selectionCriteriaOpValue,
+				selectionCriteriaFinValue,
+				serviceTypeValue,
+				tradeTypeValue,
+				level1Value,
+				level2Value,
 			},
 		};
 		apiTrigger([params]);
@@ -67,7 +77,6 @@ function FormDataTwo({
 				control={control}
 				name="entity"
 				options={ENTITY_OPTIONS}
-				placeholder={item?.entity}
 				rules={{ required: true }}
 			/>
 		),
@@ -78,7 +87,6 @@ function FormDataTwo({
 				control={control}
 				name="serviceType"
 				options={serviceTypeOptions}
-				placeholder={item?.serviceType}
 				onChange={() => {
 					setValue('selectionCriteriaOp', ''); setValue('selectionCriteriaFin', '');
 				}}
@@ -97,7 +105,6 @@ function FormDataTwo({
 					{ label: 'LOCAL', value: 'LOCAL' },
 					{ label: 'DOMESTIC', value: 'DOMESTIC' },
 				]}
-				placeholder={item?.tradeType}
 				rules={{ required: true }}
 			/>
 		),
@@ -108,7 +115,6 @@ function FormDataTwo({
 				control={control}
 				name="selectionCriteriaOp"
 				options={selectionCriteriaOptions(watch('serviceType'))}
-				placeholder="Select selection criteria"
 				rules={{ required: true }}
 			/>
 		),
@@ -117,7 +123,6 @@ function FormDataTwo({
 			<InputController
 				name="level1"
 				size="md"
-				placeholder={item?.oprClosureDays}
 				className={cl`${styles.inputBox} ${styles.font12}`}
 				control={control}
 			/>
@@ -129,7 +134,6 @@ function FormDataTwo({
 				control={control}
 				name="selectionCriteriaFin"
 				options={selectionCriteriaOptions(watch('serviceType'))}
-				placeholder="Select selection criteria"
 				rules={{ required: true }}
 			/>
 		),
@@ -139,7 +143,6 @@ function FormDataTwo({
 				className={cl`${styles.inputBox} ${styles.font12}`}
 				name="level2"
 				size="md"
-				placeholder={item?.finClosureDays}
 				control={control}
 			/>
 		),
@@ -147,7 +150,7 @@ function FormDataTwo({
 		editDelete: (
 			<>
 				<Button
-					onClick={() => setOpenConfig((prev) => prev.filter((columnId) => columnId !== item?.id))}
+					onClick={() => setOpenConfig((prev) => prev.filter((columnId) => columnId !== id))}
 					themeType="secondary"
 				>
 					Cancel
@@ -166,13 +169,13 @@ function FormDataTwo({
 	useEffect(() => {
 		setSaveObj((prev) => ({
 			...prev,
-			[item.id]: JSON.parse(stringifiedData),
+			[id]: JSON.parse(stringifiedData),
 		}));
-	}, [stringifiedData, item.id, setSaveObj]);
+	}, [stringifiedData, id, setSaveObj]);
 
 	return (
 		<div className={styles.flex}>
-			{fields.map((field) => (
+			{(fields || []).map((field) => (
 				<div
 					className={styles.col}
 					key={field.key}
@@ -189,4 +192,4 @@ function FormDataTwo({
 		</div>
 	);
 }
-export default FormDataTwo;
+export default EditableComponent;

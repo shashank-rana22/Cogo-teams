@@ -11,7 +11,7 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function FormDataOne({
+function FormComponent({
 	fields = [],
 	item = {},
 	setOpenConfig = () => {},
@@ -99,4 +99,4 @@ function FormDataOne({
 		</div>
 	);
 }
-export default FormDataOne;
+export default FormComponent;

@@ -11,13 +11,13 @@ const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
 function Header({ config = {} }) {
-	const { fields, headerClass } = config || {};
+	const { fields } = config || {};
 	const islevel = (heading = '') => {
 		if (heading === 'Level 1' || heading === 'Level 2') return true;
 		return false;
 	};
 	return (
-		<section className={cl`${styles.header} ${headerClass === 'border' ? styles.border : ''}`}>
+		<section className={cl`${styles.header} ${styles.border}`}>
 			{(fields || []).map((field) => (
 				<div
 					className={cl`${styles.col} ${field.className}`}

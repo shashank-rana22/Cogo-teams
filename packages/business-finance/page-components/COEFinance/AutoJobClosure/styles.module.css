@@ -38,6 +38,10 @@
 	margin-top: 40px;
 }
 
+.emptyStateImage {
+	margin-top: 100px;
+}
+
 .pagination {
 	right: 30px;
 	bottom: 0;

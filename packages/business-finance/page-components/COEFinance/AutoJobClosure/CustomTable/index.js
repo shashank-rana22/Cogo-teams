@@ -17,30 +17,30 @@ function CustomTable({
 	loading = false,
 }) {
 	const { list = [] } = itemData || {};
-
 	return (
 		<div className={styles.table}>
 			<Header config={config} />
 			<div>
-				{(list || []).map((item) => (
-					<div className={styles.columnCard} key={item.id}>
-						{isEmpty(list) ? (
-							<EmptyStateDocs />
-						) : (
-							<ColumnCard
-								className={styles.columnCard}
-								key={item.id}
-								config={config}
-								item={item}
-								openConfig={openConfig}
-								setOpenConfig={setOpenConfig}
-								refetch={refetch}
-								loading={loading}
-								setSaveObj={setSaveObj}
-							/>
-						)}
+				{ isEmpty(list) ? (
+					<div className={styles.emptyStateImage}>
+						<EmptyStateDocs />
 					</div>
-				))}
+				) : (list || []).map((item) => (
+					<div className={styles.columnCard} key={item.id}>
+
+						<ColumnCard
+							className={styles.columnCard}
+							key={item.id}
+							config={config}
+							item={item}
+							openConfig={openConfig}
+							setOpenConfig={setOpenConfig}
+							refetch={refetch}
+							loading={loading}
+							setSaveObj={setSaveObj}
+						/>
+					</div>
+				)) }
 			</div>
 		</div>
 	);

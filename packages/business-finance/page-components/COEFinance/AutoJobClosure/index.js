@@ -91,8 +91,29 @@ function AutoJobClosure() {
 					)}
 				/>
 
-				{ !configButton ? (
+				{ configButton ? (
 					<>
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.topContainerComponents}
+							onClick={() => addId()}
+						>
+							Configure
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							className={styles.topContainerComponents}
+							onClick={() => setOpenModalCreate(true)}
+						>
+							Create New
+						</Button>
+					</>
+
+				) : (
+					<>
+
 						<div className={styles.buttons}>
 							<Button
 								size="md"
@@ -114,26 +135,6 @@ function AutoJobClosure() {
 							Save All
 						</Button>
 					</>
-
-				) : (
-					<>
-						<Button
-							size="md"
-							themeType="secondary"
-							className={styles.topContainerComponents}
-							onClick={() => addId()}
-						>
-							Configure
-						</Button>
-						<Button
-							size="md"
-							themeType="primary"
-							className={styles.topContainerComponents}
-							onClick={() => setOpenModalCreate(true)}
-						>
-							Create New
-						</Button>
-					</>
 				) }
 
 			</div>
@@ -153,7 +154,7 @@ function AutoJobClosure() {
 						/>
 					)}
 				<div className={styles.pagination}>
-					{ (!loading && !isEmpty(list)) ? (
+					{ !(loading || isEmpty(list)) && (
 						<Pagination
 							type="number"
 							currentPage={page}
@@ -161,7 +162,7 @@ function AutoJobClosure() {
 							pageSize={pageSize}
 							onPageChange={(val) => getNextPage({ page: val })}
 						/>
-					) : null }
+					) }
 				</div>
 			</div>
 

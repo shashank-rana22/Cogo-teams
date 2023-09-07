@@ -14,21 +14,25 @@ function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () 
 	}));
 	const { control, watch, handleSubmit, formState: { errors = {} }, setValue } = useForm();
 
-	const { apiTrigger, loading } = useCreateJobClosure({ refetch, setOpenModal });
+	const { apiTrigger = () => {}, loading = false } = useCreateJobClosure({ refetch, setOpenModal });
 
 	const { user } = userData || {};
 	const { id:userId } = user || {};
 
 	const onSubmit = (value) => {
+		const {
+			entity = '', selectionCriteriaOp = '', selectionCriteriaFin = '',
+			serviceType = '', tradeType = '', level1 = '', level2 = '',
+		} = value || {};
 		const params = {
-			entity               : value.entity,
-			selectionCriteriaOp  : value.selectionCriteriaOp,
-			selectionCriteriaFin : value.selectionCriteriaFin,
-			serviceType          : value.serviceType,
-			tradeType            : value.tradeType,
-			level1               : value.level1,
-			level2               : value.level2,
-			performedBy          : userId,
+			entity,
+			selectionCriteriaOp,
+			selectionCriteriaFin,
+			serviceType,
+			tradeType,
+			level1,
+			level2,
+			performedBy: userId,
 
 		};
 		apiTrigger(params);
