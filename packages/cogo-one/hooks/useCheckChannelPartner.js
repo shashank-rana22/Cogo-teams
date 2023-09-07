@@ -4,6 +4,8 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
+import { FIREBASE_TABS } from '../constants';
+
 import useGetOrgUsers from './useGetOrgUsers';
 
 const getParams = ({ orgId = '' }) => ({
@@ -43,7 +45,7 @@ const formatData = ({
 
 		const { crm = '', prm = '' } = activeTab || {};
 
-		const linkSuffix = activeConversationTab === 'message'
+		const linkSuffix = FIREBASE_TABS.includes(activeConversationTab)
 			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
 
 		if (isChannelPartner) {

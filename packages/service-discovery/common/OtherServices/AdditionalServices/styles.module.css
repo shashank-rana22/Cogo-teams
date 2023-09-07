@@ -1,0 +1,21 @@
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+}
+
+.select {
+	min-width: 130px;
+	max-width: 130px;
+	margin-left: 8px;
+}
+
+.additional_services {
+	display: flex;
+	flex-direction: column;
+	margin-top: 12px;
+	margin-bottom: 30px;
+}
