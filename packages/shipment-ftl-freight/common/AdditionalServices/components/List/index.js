@@ -115,7 +115,6 @@ function List({ isSeller = false }) {
 					<Info />
 				</div>
 			) : null}
-
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setShowModal('charge_code')}
