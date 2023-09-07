@@ -1,15 +1,17 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController, useForm, CountrySelectController } from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 
-import companyOptions from './companyOptions';
+import controls from '../controls';
+
+import Layout from './Layout';
 import styles from './styles.module.css';
 
 const ONE = 1;
 function FilterContent({
-	filterParams,
-	setFilterParams,
-	setIsFilterVisible,
-	setPage,
+	filterParams = '',
+	setFilterParams = (() => {}),
+	setIsFilterVisible = (() => {}),
+	setPage = (() => {}),
 }) {
 	const DEFAULT_VALUES = filterParams;
 	const {
@@ -55,45 +57,7 @@ function FilterContent({
 				</div>
 
 				<br />
-				<h4>Serial ID</h4>
-				<InputController
-					size="sm"
-					placeholder="Enter serial ID"
-					name="serial_id"
-					value={filterParams.serial_id}
-					control={control}
-				/>
-				<br />
-
-				<h4>PAN Number</h4>
-				<InputController
-					size="sm"
-					placeholder="Enter number"
-					name="registration_number"
-					control={control}
-					value={filterParams.registration_number}
-				/>
-				<br />
-
-				<h4>Country</h4>
-				<CountrySelectController
-					name="country_id"
-					control={control}
-					size="sm"
-					placeholder="Enter or Select Country"
-					optionValueKey="id"
-
-				/>
-				<br />
-
-				<h4>Company Type</h4>
-				<SelectController
-					size="sm"
-					name="company_type"
-					control={control}
-					options={companyOptions}
-					value={filterParams.company_type}
-				/>
+				<Layout controls={controls} control={control} />
 			</div>
 		</form>
 	);

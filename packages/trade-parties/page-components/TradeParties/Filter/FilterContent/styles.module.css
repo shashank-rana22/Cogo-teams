@@ -1,4 +1,5 @@
 .filter {
+	width: 300px;
 	border-radius: 10px;
 }
 
@@ -10,7 +11,8 @@
 
 .right {
 	display: flex;
-	align-items: center;
+	justify-content: space-around;
+	width: 100%;
 }
 
 .button {
