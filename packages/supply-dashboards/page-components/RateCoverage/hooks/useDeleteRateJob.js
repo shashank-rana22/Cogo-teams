@@ -79,7 +79,8 @@ const useDeleteRateJob = (service) => {
 				data: {
 					rate_id,
 					id,
-					data: rate_id ? { ...formData } : undefined,
+					closing_remarks : !rate_id ? checkboxValue : undefined,
+					data            : rate_id ? { ...formData } : undefined,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }
