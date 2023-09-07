@@ -3,8 +3,6 @@ import { useState } from 'react';
 import Filter from './Filter';
 import ListView from './ListView';
 
-const DEFAULT_PAGE = 1;
-
 function TradeParties() {
 	const [globalSearch, setGlobalSearch] = useState('');
 	const [typeOfSearch, setTypeOfSearch] = useState('trade_party');
@@ -13,27 +11,25 @@ function TradeParties() {
 		registration_number : '',
 		country_id          : '',
 		company_type        : '',
+		page                : 1,
 	});
-	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	return (
 		<div>
 			<Filter
 				typeOfSearch={typeOfSearch}
-				setTypeOfSearch={(value) => setTypeOfSearch(value)}
+				setTypeOfSearch={setTypeOfSearch}
 				globalSearch={globalSearch}
-				setGlobalSearch={(value) => setGlobalSearch(value)}
+				setGlobalSearch={setGlobalSearch}
 				filterParams={filterParams}
-				setFilterParams={(value) => setFilterParams(value)}
-				setPage={(p) => setPage(p)}
+				setFilterParams={setFilterParams}
 			/>
 
 			<ListView
-				page={page}
 				typeOfSearch={typeOfSearch}
 				globalSearch={globalSearch}
 				filterParams={filterParams}
-				setPage={(val) => setPage(val)}
+				setFilterParams={setFilterParams}
 			/>
 
 		</div>

@@ -1,7 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useState, useEffect } from 'react';
 
-const useListOrganizationTradePartyDetails = ({ page, filterParams, searchParams }) => {
+const useListOrganizationTradePartyDetails = ({ filterParams, searchParams }) => {
+	const { page, ...restFilters } = filterParams;
 	const [data, setData] = useState({});
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -12,7 +13,7 @@ const useListOrganizationTradePartyDetails = ({ page, filterParams, searchParams
 				filters                                  : {
 					trade_party_type: ['self', 'paying_party', 'collection_party'],
 					...searchParams,
-					...filterParams,
+					...restFilters,
 					// ...filters,
 				},
 			},

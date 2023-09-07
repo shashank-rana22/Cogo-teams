@@ -6,12 +6,10 @@ import controls from '../controls';
 import Layout from './Layout';
 import styles from './styles.module.css';
 
-const ONE = 1;
 function FilterContent({
 	filterParams = '',
 	setFilterParams = (() => {}),
 	setIsFilterVisible = (() => {}),
-	setPage = (() => {}),
 }) {
 	const DEFAULT_VALUES = filterParams;
 	const {
@@ -21,8 +19,7 @@ function FilterContent({
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const onSubmit = (values) => {
-		setPage(ONE);
-		setFilterParams(values);
+		setFilterParams({ ...values, page: 1 });
 		setIsFilterVisible(false);
 
 		// console.log(values);
@@ -31,7 +28,7 @@ function FilterContent({
 		const RESET_VALUE = {};
 		Object.keys(filterParams).forEach((key) => { RESET_VALUE[key] = ''; });
 		// console.log(resetValue);
-		setPage(ONE);
+		RESET_VALUE.page = 1;
 		setFilterParams(RESET_VALUE);
 		reset(RESET_VALUE);
 		setIsFilterVisible(false);

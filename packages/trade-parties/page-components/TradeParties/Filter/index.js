@@ -5,7 +5,6 @@ import { useState } from 'react';
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-const ONE = 1;
 const PLACEHOLDER_MAPPING = {
 	sage_organization_id : 'Search by Sage BPR',
 	trade_party          : 'Search by Business Name / PAN / Serial ID / Trade Name',
@@ -20,20 +19,17 @@ const options = [
 		value : 'sage_organization_id',
 	},
 ];
-function Filter(props) {
-	const {
-		typeOfSearch,
-		setTypeOfSearch,
-		globalSearch,
-		setGlobalSearch,
-		filterParams,
-		setFilterParams,
-		setPage,
-	} = props;
-
+function Filter({
+	typeOfSearch,
+	setTypeOfSearch,
+	globalSearch,
+	setGlobalSearch,
+	filterParams,
+	setFilterParams,
+}) {
 	const setInput = (value) => {
 		setGlobalSearch(value);
-		setPage(ONE);
+		setFilterParams({ ...filterParams, page: 1 });
 	};
 
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -51,8 +47,7 @@ function Filter(props) {
 						<FilterContent
 							filterParams={filterParams}
 							setFilterParams={setFilterParams}
-							setIsFilterVisible={(value) => setIsFilterVisible(value)}
-							setPage={setPage}
+							setIsFilterVisible={setIsFilterVisible}
 						/>
 					)}
 					onClickOutside={() => setIsFilterVisible(false)}

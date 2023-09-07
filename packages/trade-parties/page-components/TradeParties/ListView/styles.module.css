@@ -24,11 +24,6 @@
 	}
 }
 
-.page {
-	display: flex;
-	justify-content: end;
-}
-
 .center {
 	display: flex;
 	align-items: center;
