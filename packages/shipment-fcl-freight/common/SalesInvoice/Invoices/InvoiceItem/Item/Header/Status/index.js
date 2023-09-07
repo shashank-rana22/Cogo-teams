@@ -87,6 +87,7 @@ function Status({
 						<Button
 							size="sm"
 							themeType="tertiary"
+							disabled={shipment_data?.is_job_closed}
 							onClick={() => sendInvoiceToFinance({
 								payload: {
 									id: invoice?.id,
@@ -114,6 +115,7 @@ function Status({
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
+							disabled={shipment_data?.is_job_closed}
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
