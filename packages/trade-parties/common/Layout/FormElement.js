@@ -27,6 +27,12 @@ const MultiSelectController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.MultiselectController),
 	{ ssr: false },
 );
+const CountrySelectController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.CountrySelectController),
+	{ ssr: false },
+);
+
+// coutury controll
 
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
@@ -38,6 +44,8 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'chips') return <ChipsController {...rest} />;
 
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
+
+	if (type === 'country_select') return <CountrySelectController {...rest} />;
 
 	return <InputController {...rest} type={type} />;
 }

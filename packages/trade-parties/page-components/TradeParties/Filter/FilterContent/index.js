@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
+import Layout from '../../../../common/Layout';
 import controls from '../controls';
 
-import Layout from './Layout';
 import styles from './styles.module.css';
 
 function FilterContent({

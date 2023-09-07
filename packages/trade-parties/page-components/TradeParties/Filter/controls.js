@@ -22,12 +22,12 @@ const controls = [
 		span: 12,
 	},
 	{
-		size        : 'sm',
-		placeholder : 'Enter or Select Country',
-		name        : 'country_id',
-
-		label : 'COUNTRY',
-		type  : 'select',
+		size           : 'sm',
+		placeholder    : 'Enter or Select Country',
+		name           : 'country_id',
+		optionValueKey : 'id',
+		label          : 'COUNTRY',
+		type           : 'country_select',
 
 		span: 12,
 	},
