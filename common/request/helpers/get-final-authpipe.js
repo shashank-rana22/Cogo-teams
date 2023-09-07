@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 
 import getAuthParam from './get-auth-params';
@@ -13,10 +14,21 @@ const getAuthorizationParams = (store, url) => {
 
 		const { authParams: authParamFromStore } = profile;
 
-		const authorizationparameters = authParamFromStore || getAuthParam(
+		const defaultAuthParameters = getAuthParam(
 			profile?.permissions_navigations,
 			pathname,
 		);
+
+		let authorizationparameters = defaultAuthParameters;
+
+		if (
+			authParamFromStore
+			&& authorizationparameters
+			&& authorizationparameters.split(':')[GLOBAL_CONSTANTS.zeroth_index]
+				=== authParamFromStore.split(':')[GLOBAL_CONSTANTS.zeroth_index]
+		) {
+			authorizationparameters = authParamFromStore;
+		}
 
 		if (authorizationparameters || fallback_navigation) {
 			const { pipe, isMain } = getOtherApiPipe(
