@@ -45,13 +45,14 @@ const getControl = ({ services }) => {
 					},
 				},
 				{
-					name           : 'eway_bill_generation_date',
-					span           : 2.2,
-					type           : 'datepicker',
-					label          : 'EWB Generation Date',
-					showTimeSelect : true,
-					width          : 3,
-					conditions     : [
+					name                  : 'eway_bill_generation_date',
+					span                  : 2.2,
+					type                  : 'datepicker',
+					label                 : 'EWB Generation Date',
+					showTimeSelect        : true,
+					width                 : 3,
+					isPreviousDaysAllowed : true,
+					conditions            : [
 						{
 							value      : 'data.pickup_date',
 							elseValue  : null,
@@ -61,13 +62,14 @@ const getControl = ({ services }) => {
 					placeholder: 'Select',
 				},
 				{
-					name           : 'ewb_validity',
-					span           : 2.2,
-					type           : 'datepicker',
-					label          : 'Eway bill validity',
-					showTimeSelect : true,
-					width          : 3,
-					conditions     : [
+					name                  : 'ewb_validity',
+					span                  : 2.2,
+					type                  : 'datepicker',
+					label                 : 'Eway bill validity',
+					showTimeSelect        : true,
+					isPreviousDaysAllowed : true,
+					width                 : 3,
+					conditions            : [
 						{
 							value      : 'data.pickup_date',
 							elseValue  : null,

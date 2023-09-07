@@ -22,6 +22,11 @@
 	letter-spacing: 0.02em;
 }
 
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .button_wrapper {
 	display: flex;
 	align-items: center;

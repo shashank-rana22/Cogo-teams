@@ -191,11 +191,12 @@ function useListChats({
 			setCarouselState,
 			updateLoadingState,
 			workPrefernceLoading,
+			listOnlyMails,
 		});
 		return () => {
 			snapshotCleaner({ ref: flashMessagesSnapShotListener });
 		};
-	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState, workPrefernceLoading]);
+	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState, workPrefernceLoading, listOnlyMails]);
 
 	return {
 		chatsData: {
