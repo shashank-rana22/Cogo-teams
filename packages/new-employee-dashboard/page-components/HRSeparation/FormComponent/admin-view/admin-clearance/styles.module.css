@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.adminbutton {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	margin-top: 24px;
+	background: #ee3425;
+	border-radius: 6px;
+}
+
+.buttondiv {
+	display: flex;
+	flex-direction: row-reverse;
+}

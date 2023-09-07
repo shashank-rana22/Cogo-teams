@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AdminClearance from './admin-view/admin-clearance';
+import AdminConfirmed from './admin-view/admin-confirmation';
 import HRMeeting from './hrbp-view/HRMeeting';
 import ManagerClearance from './hrbp-view/ManagerClearance';
 import ReviewRequest from './manager-view/ReviewRequest';
@@ -19,10 +21,14 @@ const COMPONENT_MAPPING = {
 		tech_clearance         : TechClearance,
 		tech_clearance_confirm : TechClearanceConfirm,
 	},
+	admin: {
+		admin_clearance    : AdminClearance,
+		admin_confirmation : AdminConfirmed,
+	},
 };
 
 function FormComponent() {
-	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
+	const Render = COMPONENT_MAPPING.admin.admin_clearance;
 
 	return (
 		<div className={styles.container}>

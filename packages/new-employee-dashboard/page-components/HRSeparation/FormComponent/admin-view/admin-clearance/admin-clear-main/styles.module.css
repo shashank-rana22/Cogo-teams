@@ -1,0 +1,21 @@
+.containermain {
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.subtitle {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.servicesbtn {
+	margin-right: 8px;
+}
