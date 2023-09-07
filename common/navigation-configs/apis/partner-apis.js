@@ -1765,6 +1765,12 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_executive_summary',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_organization_communication_logs_by_view',
 			access_type  : 'private',
 			feature      : 'demand_crm',
