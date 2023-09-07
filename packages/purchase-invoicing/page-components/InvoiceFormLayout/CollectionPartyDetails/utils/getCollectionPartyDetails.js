@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 import styles from '../styles.module.css';
 
 export const getCollectionPartyDetails = () => {
-	const handleModifiedOptions = ({ options }) => options.map((option) => ({
+	const handleModifiedOptions = ({ options = [] }) => options?.map((option) => ({
 		...option,
 		display_name:
 	<div className={styles.label_container}>

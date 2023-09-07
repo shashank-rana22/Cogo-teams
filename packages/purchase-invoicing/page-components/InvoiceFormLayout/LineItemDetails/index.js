@@ -36,6 +36,8 @@ function LineItemDetails({
 		name: 'line_items',
 	});
 
+	console.log('serviceProvider', serviceProvider);
+
 	const SERVICE_NAMES = [];
 	(serviceProvider?.services || []).map((service) => {
 		if (service?.service_type !== 'subsidiary_service') {
@@ -90,7 +92,6 @@ function LineItemDetails({
 									className={styles.value}
 									key={field.key || field.label}
 								>
-									{console.log('hello', renderLineItemFunctions[field?.key])}
 									{renderLineItemFunctions[field?.key]
 										? renderLineItemFunctions[field?.key]({
 											control,
@@ -104,8 +105,8 @@ function LineItemDetails({
 												entity_id               : billingParty?.id,
 												organization_trade_party_detail_id:
 													collectionParty?.organization_trade_party_detail_id,
-												SERVICE_NAMES,
-												shipment_type: shipment_data?.shipment_type,
+												serviceNames  : SERVICE_NAMES,
+												shipment_type : shipment_data?.shipment_type,
 											},
 											errors,
 											setCodes,

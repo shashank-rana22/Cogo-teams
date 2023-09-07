@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm } from '@cogoport/forms';
+import { useForm, AsyncSelectController, SelectController } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -14,15 +14,17 @@ import AccordianView from '../../common/Accordianview';
 import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
+import useGetEntities from '../../hooks/useGetEntities';
 import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
 import AdditionalDetails from '../InvoiceFormLayout/AdditionalDetails';
 import BillingPartyDetails from '../InvoiceFormLayout/BillingPartyDetails';
-import InvoiceCollectionPartyDetails from '../InvoiceFormLayout/CollectionPartyDetails';
+import { getCollectionPartyDetails } from '../InvoiceFormLayout/CollectionPartyDetails/utils/getCollectionPartyDetails';
 import LineItemDetails from '../InvoiceFormLayout/LineItemDetails';
 import PurchaseInvoiceDates from '../InvoiceFormLayout/PurchaseInvoiceDates';
 import InvoicesUploaded from '../InvoicesUploaded';
 
+import getFormControls from './CollectionPartyCard/controls';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
@@ -48,12 +50,23 @@ const STAKE_HOLDER_TYPES = [
 	'collection_desk',
 ];
 
+const getCollectionPartyParams = (organization_id = '') => ({
+	documents_data_required         : true,
+	other_addresses_data_required   : true,
+	poc_data_required               : true,
+	billing_addresses_data_required : true,
+	filters                         : {
+		organization_id,
+		trade_party_type: ['collection_party', 'self'],
+	},
+});
+
 function CollectionPartyDetails({
 	collectionParty = {}, refetch = () => {}, servicesData = {},
 	fullwidth = false, AddService = () => {},
 }) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service } = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
@@ -61,6 +74,28 @@ function CollectionPartyDetails({
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
 	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
+	const [showTemplate, setShowTemplate] = useState(false);
+
+	const cpParams = getCollectionPartyParams(collectionParty?.service_provider_id);
+	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
+
+	const [billingParty, setBillingParty] = useState({});
+	const [collectionPartyState, setCollectionPartyState] = useState({});
+	const [collectionPartyAddress, setCollectionPartyAddress] = useState({});
+	const [errors, setErrors] = useState({});
+	const [errMszs, setErrMszs] = useState({});
+
+	const {
+		billing_addresses: billingAddresses = [],
+		other_addresses: otherAddresses = [],
+	} = collectionPartyState || {};
+	const allAddresses = [...billingAddresses, ...otherAddresses];
+	const collectionPartyAddresses = (allAddresses || []).map((address) => ({
+		...address,
+		label : `${address?.address} / ${address?.tax_number}`,
+		value : address?.id,
+	}));
+	console.log('collectionPartyAddresses:', collectionPartyAddresses);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -71,6 +106,8 @@ function CollectionPartyDetails({
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
 		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
+
+	const { listEntities, entitiesLoading } = useGetEntities();
 
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
@@ -113,6 +150,9 @@ function CollectionPartyDetails({
 	&& filteredServices.length === ONE;
 
 	const { control, watch, setValue } = useForm();
+
+	const formValues = watch();
+	console.log('formValues:', formValues);
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -307,20 +347,79 @@ function CollectionPartyDetails({
 						<Modal.Header title="Generate Invoice" />
 						<Modal.Body style={{ maxHeight: '780px' }}>
 							<>
-								<AdditionalDetails control={control} />
-								<PurchaseInvoiceDates control={control} />
-								<BillingPartyDetails control={control} />
-								<InvoiceCollectionPartyDetails
+								<AdditionalDetails
 									control={control}
-									watch={watch}
-									setValue={setValue}
-									open={open}
+									open
+									primary_service={primary_service}
+									serviceProvider={collectionParty}
+									errors={errors}
+									setErrors={setErrors}
+									errMszs={errMszs}
+									setErrMszs={setErrMszs}
 								/>
-								<LineItemDetails control={control} collectionParty={collectionParty} watch={watch} />
+								<PurchaseInvoiceDates control={control} />
+								<BillingPartyDetails
+									control={control}
+									open
+									listEntities={listEntities}
+									entitiesLoading={entitiesLoading}
+									billingParty={billingParty}
+									setBillingParty={setBillingParty}
+									setValue={setValue}
+									watch={watch}
+								/>
+								<h3 style={{ margin: '10px' }}>Collection Party Details</h3>
+								<div className={styles.collection_party}>
+									{(getFormControls({
+										setValue,
+										cpParams,
+										handleModifiedOptions,
+										collectionParty    : collectionPartyState,
+										setCollectionParty : setCollectionPartyState,
+										collectionPartyAddress,
+										collectionPartyAddresses,
+										setCollectionPartyAddress,
+									}) || []).map((item) => {
+										const ele = { ...item };
+										if (ele.name === 'collection_party') {
+											return (
+												<div key={ele.name} className={styles.controller}>
+													<div style={{ marginLeft: '20px' }}>{ele.label}</div>
+													<AsyncSelectController
+														{...ele}
+														key={ele.name}
+														control={control}
+													/>
+												</div>
+											);
+										}
+										return (
+											<div key={ele.name} className={styles.controller}>
+												<div style={{ marginLeft: '20px' }}>{ele.label}</div>
+												<SelectController
+													{...ele}
+													label={ele.label}
+													key={ele.name}
+													control={control}
+												/>
+											</div>
+										);
+									})}
+								</div>
+
+								<LineItemDetails
+									control={control}
+									open
+									watch={watch}
+									serviceProvider={collectionParty}
+								/>
 								<Button
 									size="md"
 									className={styles.generate_button}
-									// onClick={handleSubmit(handleClick)}
+									onClick={() => {
+										setGenerateInvoiceModal(false);
+										setShowTemplate(true);
+									}}
 								>
 									Generate
 								</Button>
@@ -328,6 +427,11 @@ function CollectionPartyDetails({
 						</Modal.Body>
 					</Modal>
 				) : null}
+				{
+					showTemplate ? (
+						<div>hello</div>
+					) : null
+				}
 			</AccordianView>
 		</div>
 	);

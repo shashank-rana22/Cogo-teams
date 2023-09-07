@@ -131,3 +131,20 @@
 	margin-top: 40px;
 	margin-left: 50%;
 }
+
+.collection_party {
+	display: flex;
+	border: 1px solid black;
+
+	:global {
+		.ui_select_container {
+			min-width: 280px;
+			margin: 0 20px 20px;
+		}
+	}
+}
+
+.controller {
+	display: block;
+	margin-top: 20px;
+}
