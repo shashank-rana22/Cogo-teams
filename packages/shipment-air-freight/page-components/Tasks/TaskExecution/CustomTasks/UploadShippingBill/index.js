@@ -12,7 +12,7 @@ import { uploadChecklistFields } from './configs/upload-checklist-fields';
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
-function UploadShippingBill({ shipment_data = {}, refetch = () => {}, onCancel = () => {} }) {
+function UploadShippingBill({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { fields = [] } = uploadChecklistFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
@@ -81,8 +81,9 @@ function UploadShippingBill({ shipment_data = {}, refetch = () => {}, onCancel =
 	};
 
 	const payload = {
-		shipment_id   : shipment_data?.id,
-		document_data : [...invoiceData],
+		shipment_id     : shipment_data?.id,
+		pending_task_id : task?.id,
+		document_data   : [...invoiceData],
 	};
 
 	const handleFormSubmit = () => {
