@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel, Pill, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -11,6 +11,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import ReOpenJob from '../../../common/ReOpenJob';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import SalesInvoice from '../../../common/SalesInvoice';
@@ -29,6 +30,7 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('overview');
+	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -64,10 +66,25 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{/* TODO (anmol): Job Closed Div */}
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<div className={styles.job_closed_container}>
+							{shipment_data?.is_job_closed_financially ? (
+								<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
+							) : (
+								<>
+									<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
+									<Button
+										className={styles.job_undo_button}
+										themeType="link"
+										size="md"
+										onClick={() => setReOpenJobModal(true)}
+									>
+										Undo
+									</Button>
+								</>
+							)}
+						</div>
+					)}
 
 					<ShipmentChat />
 				</div>
@@ -116,6 +133,15 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 				{!isEmpty(rollover_containers) ? (
 					<RolloverActionModal rollover_containers={rollover_containers} />
 				) : null}
+
+				{reOpenJobModal ? (
+					<ReOpenJob
+						showModal={reOpenJobModal}
+						setShowModal={setReOpenJobModal}
+						shipmentData={shipment_data}
+					/>
+				) : null}
+
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);

@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel, Pill, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -13,6 +13,7 @@ import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import PurchaseInvoice from '../../../common/PurchaseInvoice';
+import ReOpenJob from '../../../common/ReOpenJob';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -30,6 +31,7 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -65,10 +67,25 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{/* TODO (anmol): Job Closed Div */}
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<div className={styles.job_closed_container}>
+							{shipment_data?.is_job_closed_financially ? (
+								<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
+							) : (
+								<>
+									<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
+									<Button
+										className={styles.job_undo_button}
+										themeType="link"
+										size="md"
+										onClick={() => setReOpenJobModal(true)}
+									>
+										Undo
+									</Button>
+								</>
+							)}
+						</div>
+					)}
 
 					<ShipmentChat />
 				</div>
@@ -125,6 +142,15 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 				{!isEmpty(rollover_containers) ? (
 					<RolloverRequestedModal rollover_containers={rollover_containers} />
 				) : null}
+
+				{reOpenJobModal ? (
+					<ReOpenJob
+						showModal={reOpenJobModal}
+						setShowModal={setReOpenJobModal}
+						shipmentData={shipment_data}
+					/>
+				) : null}
+
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);
