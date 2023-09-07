@@ -14,10 +14,8 @@ function PurchaseInvoiceDates({
 	invoiceCurrency = '',
 	errors = {},
 	purchaseInvoiceValues = {},
-	shipment_data = {},
 	formValues = {},
 }) {
-	const { shipment_type = '' } = shipment_data || {};
 	const { invoice_date = '' } = formValues || {};
 	const geo = getGeoConstants();
 	const { fields, append, remove } = useFieldArray({
@@ -55,7 +53,7 @@ function PurchaseInvoiceDates({
 						placeholder="Select Invoice Due Date"
 						rules={{ required: true }}
 						isPreviousDaysAllowed
-						minDate={shipment_type === 'air_freight' ? invoice_date || new Date() : new Date()}
+						minDate={invoice_date || new Date()}
 						value={(purchaseInvoiceValues?.due_date || purchaseInvoiceValues?.invoice_due_date)
 							? new Date(purchaseInvoiceValues?.due_date
 								|| purchaseInvoiceValues?.invoice_due_date) : null}

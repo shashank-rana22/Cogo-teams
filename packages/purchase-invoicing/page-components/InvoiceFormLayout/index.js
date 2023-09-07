@@ -201,7 +201,7 @@ function InvoiceFormLayout({
 				</div>
 
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
-					<div className={cl`${styles.flex} ${styles.justifiy}`}>
+					<div className={cl`${styles.flex} ${styles.justify}`}>
 						<div className={styles.flex}>
 							{!isJobClosed ? (
 								<Segmented
@@ -249,7 +249,6 @@ function InvoiceFormLayout({
 					errors={errors}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					isEdit={isEdit}
-					shipment_data={shipment_data}
 					formValues={formValues}
 				/>
 				<BillingPartyDetails
