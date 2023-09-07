@@ -183,7 +183,6 @@ function InvoiceInfo({
 						</Button>
 					) : null}
 
-				{/* TODO (anmol): disable on OC */}
 				{showRequestCN ? (
 					<Button
 						style={{ marginTop: '4px' }}
@@ -195,7 +194,6 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{/* TODO (anmol): disable on FC */}
 				{invoice?.status === 'reviewed' ? (
 					<Button
 						size="sm"
@@ -205,7 +203,6 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{/* TODO (anmol): disable on FC */}
 				{!INVOICE_STATUS.includes(invoice.status) ? (
 					<Button
 						size="sm"

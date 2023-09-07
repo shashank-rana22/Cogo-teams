@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 const useGetShipmentStakeholder = ({ shipment_id = '', stakeholder_type = '' }) => {
 	const [{ data, loading }] = useRequest({
-		url    : 'fcl_freight/list_stakeholders',
+		url    : 'list_shipment_stakeholders',
 		method : 'GET',
 		params : {
 			filters: {
@@ -13,7 +13,7 @@ const useGetShipmentStakeholder = ({ shipment_id = '', stakeholder_type = '' }) 
 	}, { manual: false });
 
 	return {
-		data: data?.list,
+		data,
 		loading,
 	};
 };

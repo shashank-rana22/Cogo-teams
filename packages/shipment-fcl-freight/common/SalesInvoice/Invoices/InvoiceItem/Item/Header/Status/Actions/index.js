@@ -35,8 +35,6 @@ function Actions({
 	isIRNGenerated = false,
 	bfInvoice = {},
 }) {
-	console.log('shipment_data:: ', shipment_data);
-
 	const { role_id } = useSelector(({ profile }) => ({
 		role_id: profile?.auth_role_data?.id,
 	}));
@@ -89,21 +87,24 @@ function Actions({
 							</div>
 						) : null}
 
-						{/* TODO (anmol): disable on FC */}
 						{!INVOICE_STATUS.includes(invoice.status) ? (
 							<Button
 								size="sm"
 								onClick={() => setShowModal('show_review')}
 								themeType="accent"
-								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+								disabled={disableMarkAsReviewed || invoice?.is_eta_etd
+									|| shipment_data?.is_job_closed_financially}
 							>
 								Mark as Reviewed
 							</Button>
 						) : null}
 
-						{/* TODO (anmol): disable on FC */}
 						{invoice?.status === 'reviewed' ? (
-							<Button size="sm" onClick={() => setShowModal('otp_verification')}>
+							<Button
+								size="sm"
+								onClick={() => setShowModal('otp_verification')}
+								disabled={shipment_data?.is_job_closed_financially}
+							>
 								Send OTP for Approval
 							</Button>
 						) : null}

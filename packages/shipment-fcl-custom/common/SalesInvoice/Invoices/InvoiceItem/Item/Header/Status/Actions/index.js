@@ -74,21 +74,25 @@ function Actions({
 							</div>
 						) : null}
 
-						{/* TODO (anmol): disable on FC */}
 						{!INVOICE_STATUS.includes(invoice.status) ? (
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
 								themeType="accent"
-								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+								disabled={disableMarkAsReviewed
+									|| invoice?.is_eta_etd
+									|| shipment_data?.is_job_closed_financially}
 							>
 								Mark as Reviewed
 							</Button>
 						) : null}
 
-						{/* TODO (anmol): disable on FC */}
 						{invoice?.status === 'reviewed' ? (
-							<Button size="sm" onClick={() => setShowOTPModal(true)}>
+							<Button
+								size="sm"
+								onClick={() => setShowOTPModal(true)}
+								disabled={shipment_data?.is_job_closed_financially}
+							>
 								Send OTP for Approval
 							</Button>
 						) : null}

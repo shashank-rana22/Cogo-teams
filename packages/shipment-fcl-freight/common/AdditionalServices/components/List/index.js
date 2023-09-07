@@ -134,7 +134,6 @@ function List({ isSeller = false, source = '' }) {
 
 			<div className={styles.not_added}>
 
-				{/* TODO (anmol): disable on OC */}
 				{security_dd_type === 'cogoport' && trade_type === 'import' && showRequestCSD ? (
 					<Button
 						onClick={() => setShowRequestModal(true)}
@@ -157,7 +156,6 @@ function List({ isSeller = false, source = '' }) {
 					)
 					: null }
 
-				{/* TODO (anmol): disable on OC */}
 				{canEditCancelService ? (
 					<Button
 						onClick={() => setShowModal('cargo_insurance_service')}

@@ -121,7 +121,6 @@ function List({ isSeller = false }) {
 			) : null}
 
 			<div className={styles.not_added}>
-				{/* TODO (anmol): disable on OC */}
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
@@ -130,7 +129,6 @@ function List({ isSeller = false }) {
 					Add Additional Services
 				</Button>
 
-				{/* TODO (anmol): disable on OC */}
 				<Button
 					onClick={() => setShowModal('cargo_insurance_service')}
 					className={styles.btn_div}

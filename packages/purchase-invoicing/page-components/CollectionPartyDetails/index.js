@@ -152,7 +152,6 @@ function CollectionPartyDetails({
 					&& !airServiceProviderConfirmation ? (
 						<div className={styles.uploadbuttonwrapper}>
 
-							{/* TODO(anmol): Disable on OC */}
 							<Button
 								size="md"
 								themeType="secondary"

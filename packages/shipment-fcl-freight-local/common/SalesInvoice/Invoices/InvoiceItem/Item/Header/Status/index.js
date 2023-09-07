@@ -28,9 +28,10 @@ function Status({
 	isIRNGenerated = false,
 	setAskNullify = () => {},
 }) {
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const bfInvoice = invoicesList?.filter(
@@ -97,7 +98,6 @@ function Status({
 						</Button>
 				) : null}
 
-			{/* TODO (anmol): disable on OC */}
 			{showRequestCN ? (
 				<Button
 					style={{ marginTop: '4px' }}
