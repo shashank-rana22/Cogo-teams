@@ -42,7 +42,6 @@
 .contentTitle {
 	font-size: 12px;
 	font-weight: 400;
-	color: #b07777;
 }
 
 .contentTitle::after {
@@ -76,6 +75,15 @@
 		background: #ee6b6e;
 		border-radius: 4px;
 	}
+}
+
+.contentValue .Active {
+	width: fit-content;
+	padding: 2px 6px;
+	font-size: 12px;
+	color: #fff;
+	background: #32b845;
+	border-radius: 4px;
 }
 
 .tagsRow {

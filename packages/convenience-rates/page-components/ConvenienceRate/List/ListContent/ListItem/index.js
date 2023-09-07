@@ -20,7 +20,7 @@ function Content({ columnDetails = {}, data = {} }) {
 
 			{label ? <div className={styles.contentTitle}>{label}</div> : null}
 			<div className={cl`${styles.flexContent} ${value}`}>
-				<div className={cl`${styles.contentValue} ${value}`}>{value}</div>
+				<div className={cl`${styles.contentValue}`}>{value}</div>
 			</div>
 		</div>
 	);
