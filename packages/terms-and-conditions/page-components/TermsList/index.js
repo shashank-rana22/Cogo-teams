@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import EmptyState from '../EmptyState/index';
+import EmptyState from '../../common/EmptyState/index';
 
 import styles from './style.module.css';
 // import FREIGHT_DETAILS_MAPPING from '../../utlis/freight-details-mapping';
@@ -11,8 +11,10 @@ function TermList({
 	list = [],
 	loading = false,
 	refetch = () => {},
-	setEditTncModalId,
-	setTncLevel,
+	setEditTncModalId = null,
+	setTncLevel = 'basicInfo',
+	EditForm,
+	handleSubmitForm = () => {},
 }) {
 	const LABEL_MAPPING = {
 		fcl_freight : 'Shipping Line',
@@ -28,8 +30,10 @@ function TermList({
         && list.map((listItem) => (
 	<div key={listItem.id}>
 		<TermCard
+			EditForm={EditForm}
 			listItem={listItem}
 			refetch={refetch}
+			handleSubmitForm={handleSubmitForm}
 			description={listItem.description}
 			showMoreTnC={showHiddenContentId === listItem.id}
 			onClickShowMoreTnC={() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))}

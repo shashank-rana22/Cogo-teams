@@ -23,12 +23,12 @@ const getTncControls = ({ values = {} }) => {
 	}
 	return [
 		{
-			name           : 'service',
-			label          : 'Service Type',
-			controllerType : 'select',
-			value          : service || 'fcl_freight',
-			className      : 'primary lg',
-			options        : [
+			name      : 'service',
+			label     : 'Service Type',
+			type      : 'select',
+			value     : service || 'fcl_freight',
+			className : 'primary lg',
+			options   : [
 				{ label: 'FCL', value: 'fcl_freight' },
 				{ label: 'LCL', value: 'lcl_freight' },
 				{ label: 'AIR', value: 'air_freight' },
@@ -51,7 +51,7 @@ const getTncControls = ({ values = {} }) => {
 
 			name           : 'shipping_line_id',
 			label          : 'Shipping Line',
-			controllerType : 'select',
+			type           : 'select',
 			className      : 'primary lg',
 			value          : shipping_line_id,
 			placeholder    : 'Select Shipping Line',
@@ -65,7 +65,7 @@ const getTncControls = ({ values = {} }) => {
 
 			name           : 'airline_id',
 			label          : 'Airline',
-			controllerType : 'select',
+			type           : 'select',
 			className      : 'primary lg',
 			value          : airline_id,
 			placeholder    : 'Select Airline',
@@ -76,21 +76,21 @@ const getTncControls = ({ values = {} }) => {
 			cacheOptions   : false,
 		},
 		{
-			name           : 'trade_type',
-			label          : 'Trade Type',
-			controllerType : 'select',
-			value          : trade_type,
-			placeholder    : 'Select Trade Type',
-			className      : 'primary lg',
-			options        : [],
-			span           : 6,
-			isClearable    : true,
+			name        : 'trade_type',
+			label       : 'Trade Type',
+			type        : 'select',
+			value       : trade_type,
+			placeholder : 'Select Trade Type',
+			className   : 'primary lg',
+			options     : [],
+			span        : 6,
+			isClearable : true,
 		},
 		{
 
 			name           : 'country_id',
 			label          : 'Country',
-			controllerType : 'select',
+			type           : 'select',
 			placeholder    : 'Select Country Name',
 			optionsListKey : 'locations',
 			className      : 'primary lg',
@@ -102,8 +102,9 @@ const getTncControls = ({ values = {} }) => {
 		{
 			name           : 'paying_party_country_ids',
 			label          : 'Paying Party Country',
-			controllerType : 'async-select',
+			type           : 'async_select',
 			optionsListKey : 'locations',
+			asyncKey       : 'list_operators',
 			placeholder    : 'Select Country Name',
 			value          : paying_party_country_ids,
 			params         : { filters: { type: ['country'] } },
@@ -111,14 +112,14 @@ const getTncControls = ({ values = {} }) => {
 			multiple       : true,
 		},
 		{
-			name           : 'description',
-			controllerType : 'fieldArray',
-			className      : 'primary lg',
-			showAddIcon    : false,
-			showLabelOnce  : true,
-			buttonText     : 'Add more',
-			buttonTheme    : 'admin',
-			buttonStyles   : {
+			name          : 'description',
+			type          : 'fieldArray',
+			className     : 'primary lg',
+			showAddIcon   : false,
+			showLabelOnce : true,
+			buttonText    : 'Add more',
+			buttonTheme   : 'admin',
+			buttonStyles  : {
 				textTransform : 'capitalize',
 				padding       : '4px 8px',
 			},

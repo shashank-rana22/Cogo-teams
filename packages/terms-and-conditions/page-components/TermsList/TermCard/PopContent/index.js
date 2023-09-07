@@ -3,10 +3,10 @@ import { useState } from 'react';
 
 function PopOverContent({
 	onClickUpdateTerms,
-	setVisible,
+	setShowEdit,
 }) {
 	return (
-		<Button onClick={() => { onClickUpdateTerms(); setVisible(false); }}>Edit</Button>
+		<Button onClick={() => { onClickUpdateTerms(); setShowEdit(true); }}>Edit</Button>
 	);
 }
 export default PopOverContent;

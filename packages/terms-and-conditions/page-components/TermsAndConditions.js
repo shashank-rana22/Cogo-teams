@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 import useGetTermsAndCondition from '../hooks/useGetTermsAndCondition';
 
-import CreateTerm from './CreateTerm';
+// import CreateTerm from './CreateUpdateTnC';
+import AddEdit from './CreateUpdateTnC/AddEdit';
+import Form from './CreateUpdateTnC/AddEdit/Form';
 import Header from './Header/index';
 import TermList from './TermsList';
 
@@ -28,6 +30,7 @@ function TermsAndConditions(props) {
 	const onPageChange = (pageNumber) => {
 		setPagination(pageNumber);
 	};
+
 	const viewFromDemand = ['demand-crm', 'prm'].includes(viewThrough);
 
 	const editFormValue = list.find((item) => item.id === editTncModalId);
@@ -43,8 +46,9 @@ function TermsAndConditions(props) {
 				setPagination={setPagination}
 				setEditTncModalId={setEditTncModalId}
 			/>
+			<AddEdit />
 			{editTncModalId && (
-				<CreateTerm
+				<AddEdit
 					show={showModal}
 					setShow={setShowModal}
 					tncLevel={tncLevel}
@@ -57,6 +61,7 @@ function TermsAndConditions(props) {
 				/>
 			)}
 			<TermList
+				EditForm={Form}
 				list={list}
 				loading={loading}
 				setTncLevel={setTncLevel}

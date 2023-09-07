@@ -1,6 +1,5 @@
 import { asyncFieldsOperators, asyncFieldsLocations, useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { merge } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import getShowElements from '../../utlis/getShowElements';
@@ -50,24 +49,25 @@ const useModalContentForAddingDetails = (props) => {
 	const watchService = watch('service');
 	const watchPayingPartyCountry = watch('paying_party_country_ids');
 	const watchDescription = watch('description');
+
 	const filteredControls = useMemo(() => {
 		const controlNames = CONTROLS_FORM_TYPE_MAPPING[tncLevel] || [];
 
 		return controls.filter((controlss) => controlNames.includes(controlss.name));
 	}, [tncLevel]);
 
-	const newField = filteredControls.map((field) => {
+	const newControl = filteredControls.map((field) => {
 		const { name } = field;
-		let newControl = { ...field };
+		let newField = { ...field };
 		if (name === 'shipping_line_id') {
-			newControl = { ...newControl, ...shippingLineOptions };
+			newField = { ...newField, ...shippingLineOptions };
 		}
 		if (name === 'airline_id') {
-			newControl = { ...newControl, ...airLineOptions };
+			newField = { ...newField, ...airLineOptions };
 		}
 		if (name === 'country_id') {
-			newControl = {
-				...newControl,
+			newField = {
+				...newField,
 				...locationOptions,
 				label:
 				(watchTradeType === 'import' && 'Import To')
@@ -76,15 +76,15 @@ const useModalContentForAddingDetails = (props) => {
 			};
 		}
 		if (name === 'paying_party_country_ids') {
-			newControl = { ...newControl, ...locationOptions };
+			newField = { ...newField, ...locationOptions };
 		}
 		if (name === 'trade_type') {
-			newControl = {
-				...newControl,
+			newField = {
+				...newField,
 				options: getOptions[watchService],
 			};
 		}
-		return { ...newControl };
+		return { ...newField };
 	});
 
 	const showElements = getShowElements({ service: watchService, trade_type: watchTradeType, controls });
@@ -92,9 +92,9 @@ const useModalContentForAddingDetails = (props) => {
 	return {
 		// filteredControls,
 		control,
-		formProps: { ...formProps, handleSubmit, fields: newField },
+		formProps: { ...formProps, handleSubmit, fields: newControl, formState: { errors } },
 		showElements,
-		newField,
+		newControl,
 	};
 };
 

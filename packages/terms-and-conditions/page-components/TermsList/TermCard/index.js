@@ -1,6 +1,6 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button, Popover, Modal } from '@cogoport/components';
 import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import FREIGHT_DETAILS_MAPPING from '../../../utlis/freight-details-mapping';
 import SERVICE_TYPES_MAPPING from '../../../utlis/service-types-mapping';
@@ -15,14 +15,23 @@ function TermCard({
 	onClickShowMoreTnC,
 	refetch,
 	description,
+	EditForm,
 }) {
+	const [showEdit, setShowEdit] = useState(false);
+
+	const editRef = useRef(null);
+
+	const onEditSubmit = () => {
+		editRef.current.formSubmit();
+	};
+
 	const LABEL_MAPPING = {
 		fcl_freight : 'Shipping Line',
 		air_freight : 'Airline',
 	};
 	const { id = '', service = '', status = '' } = listItem;
 	const [visible, setVisible] = useState(false);
-
+	const callBack = () => setShowEdit(null);
 	return (
 		<div>
 			<div className={styles.container}>
@@ -66,7 +75,20 @@ function TermCard({
 						style={{ cursor: 'pointer' }}
 						onClick={() => setVisible(!visible)}
 					/>
-					<Popover placement="left" onClickOutside={() => setVisible(false)} caret={false} render={<PopOverContent setVisible={setVisible} onClickUpdateTerms={onClickUpdateTerms} />} visible={visible} />
+					<Popover
+						placement="left"
+						onClickOutside={() => setVisible(false)}
+						caret={false}
+						render={(
+							<PopOverContent
+								setShowEdit={setShowEdit}
+								EditForm={EditForm}
+								item={listItem}
+								onClickUpdateTerms={onClickUpdateTerms}
+							/>
+						)}
+						visible={visible}
+					/>
 
 				</div>
 			</div>
@@ -84,6 +106,41 @@ function TermCard({
 					</div>
 				))}
 			</div>
+			{showEdit ? (
+				<Modal
+					show={showEdit}
+					onClose={() => { setShowEdit(null); }}
+					size="lg"
+					placement="top"
+				>
+					<Modal.Header title="Edit Detention / Demurrage" />
+					<Modal.Body>
+						<EditForm
+							item={showEdit}
+							ref={editRef}
+							// handleSubmitForm={handleSubmitForm}
+							callBack={callBack}
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: 8 }}
+							// disabled={createLoading}
+							onClick={() => setShowEdit(null)}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							onClick={onEditSubmit}
+							// disabled={createLoading}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

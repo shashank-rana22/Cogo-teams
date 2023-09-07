@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import BasicInformation from './BasicInformation/BasicInformation';
-import TermsAndCondition from './TermsAndCondition/TermsAndCondition';
+import TermsAndCondition from './TermsAndCondition';
 import useModalContentForAddingDetails from './useModalContentForAddingDetails';
 
 const CREATION_STEPS_MAPPING = {
@@ -30,10 +30,9 @@ function CreateTerm(props) {
 	const action = isEmpty(editTncModalId) ? 'create' : 'update';
 	const {
 		formProps,
-		// filteredControls,
 		showElements,
 		control,
-		newField,
+		newControl,
 	} = useModalContentForAddingDetails({
 		action,
 		tncLevel,
@@ -44,11 +43,10 @@ function CreateTerm(props) {
 		action,
 		...props,
 		setTncLevel,
-		// controls: filteredControls,
 		formProps,
 		showElements,
 		control,
-		newField,
+		newControl,
 	};
 	const Component = CREATION_STEPS_MAPPING[tncLevel]?.ComponentLevel;
 
