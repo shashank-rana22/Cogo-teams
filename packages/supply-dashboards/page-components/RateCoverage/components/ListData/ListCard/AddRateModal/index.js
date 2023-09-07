@@ -1,6 +1,4 @@
 import { Button, Modal, Toast } from '@cogoport/components';
-import containerSizes from '@cogoport/constants/container-sizes.json';
-import containerTypes from '@cogoport/constants/container-types.json';
 import {
 	asyncFieldsListOperators,
 	asyncFieldsLocations,
@@ -16,13 +14,6 @@ import React from 'react';
 
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import Layout from '../../../../../RfqEnquiries/Layout';
-import {
-	flighOperationTypeOptions,
-	rateTypeOptions, currencyOptions, priceTypeOptions, densityRatioOptions, densityCargoOptions, commodityOptions,
-	fclCommodityOptions,
-	packagingTypeOptions,
-	handlingtypeOptions,
-} from '../../../../configurations/helpers/constants';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
@@ -138,30 +129,16 @@ function AddRateModal({
 
 	const finalControls = !isAirService ? fclControls({
 		data,
-		containerSizes,
-		containerTypes,
 		chargeCodeOptions,
 		listShippingLineOptions,
-		fclCommodityOptions,
 		mainPortOptions1,
 		mainPortOptions2,
 		originLocationOptions,
 		destinationLocationOptions,
 		serviceProviders,
 		organizationUsers,
-		rateTypeOptions,
-		currencyOptions,
 	}) : airControls({
 		data,
-		flighOperationTypeOptions,
-		packagingTypeOptions,
-		handlingtypeOptions,
-		rateTypeOptions,
-		currencyOptions,
-		priceTypeOptions,
-		densityCargoOptions,
-		densityRatioOptions,
-		commodityOptions,
 		listPartnerUserOptions,
 		user_id,
 		originLocationOptions,

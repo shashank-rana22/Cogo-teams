@@ -86,7 +86,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 						</div>
 					)}
 					<div>
-						Created At:
+						Last Updated At:
 						{' '}
 						{data?.created_at ? formatDate({
 							date       : data?.created_at,

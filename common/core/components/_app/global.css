@@ -8,7 +8,7 @@
 }
 
 :root {
-	--font-family: 'Roboto', 'sans-serif', 'Poppins';
+	--font-family: 'Roboto', 'sans-serif';
 }
 
 #nprogress .spinner-icon {

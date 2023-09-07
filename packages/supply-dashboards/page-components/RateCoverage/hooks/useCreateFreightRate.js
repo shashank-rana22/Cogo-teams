@@ -21,10 +21,10 @@ const useCreateFreightRate = (service) => {
 
 	const createRate = async (data) => {
 		const weight_slabs = (data?.weight_slabs || []).map((item) => ({
-			lower_limit  : item?.lower_limit,
-			upper_limit  : item?.upper_limit,
-			tariff_price : item?.price_per_unit,
-			currency     : data?.currency,
+			lower_limit : item?.lower_limit,
+			upper_limit : item?.upper_limit,
+			price       : item?.price_per_unit || item?.price,
+			currency    : item?.currency || data?.currency,
 		}));
 		const UPDATED_LINE_ITEMS = [];
 

@@ -1,7 +1,14 @@
+import {
+	commodityOptions,
+	currencyOptions,
+	densityCargoOptions,
+	densityRatioOptions,
+	flighOperationTypeOptions,
+	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, rateTypeOptions,
+} from '../../../../configurations/helpers/constants';
+
 const airControls = ({
-	data, flighOperationTypeOptions, packagingTypeOptions, handlingtypeOptions, listPartnerUserOptions,
-	rateTypeOptions, currencyOptions, priceTypeOptions, densityCargoOptions, densityRatioOptions,
-	commodityOptions, user_id, originLocationOptions, destinationLocationOptions,
+	data, listPartnerUserOptions, user_id, originLocationOptions, destinationLocationOptions,
 	serviceProviders, organizationUsers, listAirLineOptions,
 }) => [
 	{

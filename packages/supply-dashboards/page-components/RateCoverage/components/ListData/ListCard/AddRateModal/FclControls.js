@@ -1,22 +1,17 @@
 /* eslint-disable max-lines-per-function */
+import containerSizes from '@cogoport/constants/container-sizes.json';
+import containerTypes from '@cogoport/constants/container-types.json';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import { currencyOptions, fclCommodityOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
 
 const MIN_CARGO_WEIGHT = 18;
 const fclControls = ({
-	data,
-	containerSizes,
-	containerTypes,
-	chargeCodeOptions,
+	data, chargeCodeOptions,
 	listShippingLineOptions,
-	fclCommodityOptions,
-	mainPortOptions1,
-	mainPortOptions2,
-	originLocationOptions,
-	destinationLocationOptions,
-	serviceProviders,
-	organizationUsers,
-	rateTypeOptions,
-	currencyOptions,
+	mainPortOptions1, mainPortOptions2,
+	serviceProviders, organizationUsers,
+	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
 		name    : 'service_provicer_details',
