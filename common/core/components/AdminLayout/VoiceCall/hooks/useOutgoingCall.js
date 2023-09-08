@@ -40,6 +40,7 @@ const setCallStateData = ({
 	source = '',
 	lead_user_id = '',
 	lead_organization_id = '',
+	mobile_country_code = '',
 }) => {
 	const receiverUserDetails = {
 		mobile_number,
@@ -48,6 +49,7 @@ const setCallStateData = ({
 		organization_id : orgId,
 		lead_user_id,
 		lead_organization_id,
+		mobile_country_code,
 	};
 
 	setCallState((p) => ({
@@ -102,6 +104,7 @@ function useOutgoingCall({
 				source,
 				lead_user_id,
 				lead_organization_id,
+				mobile_country_code,
 			});
 
 			await trigger({
