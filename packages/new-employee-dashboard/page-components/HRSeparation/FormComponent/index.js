@@ -15,6 +15,7 @@ import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
 import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
+import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 const COMPONENT_MAPPING = {
 	hrbp: {
@@ -46,7 +47,10 @@ const COMPONENT_MAPPING = {
 };
 
 function FormComponent() {
-	const Render = COMPONENT_MAPPING.hrbp.exit_interview;
+	const { data } = useGetApplicationProcessDetails();
+	console.log('🚀 ~ file: index.js:51 ~ FormComponent ~ data:', data);
+
+	const Render = COMPONENT_MAPPING.manager.handover_takeover;
 
 	return (
 		<div className={styles.container}>

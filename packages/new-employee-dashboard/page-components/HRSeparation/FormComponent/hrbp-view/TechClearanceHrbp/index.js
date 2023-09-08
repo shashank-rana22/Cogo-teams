@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import Heading from '../HRMeeting/Heading';
 
+// import LeavingReason from './LeavingReason';
 import styles from './styles.module.css';
 
 function TechClearanceHrbp() {
@@ -77,6 +78,7 @@ function TechClearanceHrbp() {
 
 				</Button>
 			</div>
+			{/* <LeavingReason /> */}
 		</>
 	);
 }
