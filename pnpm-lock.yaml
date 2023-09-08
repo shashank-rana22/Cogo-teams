@@ -2943,7 +2943,7 @@ importers:
     dependencies:
       '@cogoport/air-modules': link:../../common/air-modules
       '@cogoport/charts': 1.0.4_v2m5e27vhdewzwhryxwfaorcca
-      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/components': 1.0.442_5bdawjllnwjv2agos5ehd6s4nu
       '@cogoport/core': link:../../common/core
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
