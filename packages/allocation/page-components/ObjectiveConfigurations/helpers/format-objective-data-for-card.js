@@ -16,7 +16,7 @@ const formatObjectiveDataForCard = ({ objectiveData }) => {
 		...objectiveData,
 		service_requirement_operator,
 		stats_details: {
-			date_range: {
+			date_range: (isEmpty(start_date) && isEmpty(end_date)) ? undefined : {
 				startDate : start_date,
 				endDate   : end_date,
 			},

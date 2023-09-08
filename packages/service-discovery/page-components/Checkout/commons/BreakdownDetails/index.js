@@ -28,8 +28,6 @@ function BreakdownDetails({
 	source = '',
 	setNoRatesPresent = () => {},
 	getCheckoutInvoices = () => {},
-	infoBanner = {},
-	setInfoBanner = () => {},
 }) {
 	const {
 		rate,
@@ -56,19 +54,15 @@ function BreakdownDetails({
 
 	const disableForm = ['preview_booking', 'booking_confirmation'].includes(source);
 
+	const showTaxes = ['preview_booking', 'booking_confirmation'].includes(source);
+
 	const { primary_service = '' } = detail || {};
 
 	const { source: rateSource = '' } = rate;
 
 	return (
 		<div>
-			<BreakdownDetailsHeader
-				disableForm={disableForm}
-				resetMargins={resetMargins}
-				rateDetails={rateDetails}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
-			/>
+			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
 
 			{rateDetails.map((item, index) => {
 				const { id = '' } = item || {};
@@ -250,6 +244,7 @@ function BreakdownDetails({
 					detail?.convenience_rate_configurations
 						?.convenience_rate_options
 				}
+				showTaxes={showTaxes}
 			/>
 
 			<LandingCost
@@ -258,6 +253,7 @@ function BreakdownDetails({
 				conversions={conversions}
 				rate={rate}
 				otherCharges={otherCharges}
+				showTaxes={showTaxes}
 			/>
 		</div>
 	);

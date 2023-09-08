@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 const DEFAULT_VALUE = 0;
 
 function LineItem({ lineItem = {} }) {
-	const { isConditionMatches, isChannelPartner } = useGetPermission();
+	const { isConditionMatches, isChannelPartner } = useGetPermission({ navigation: 'service_discovery' });
 
 	const {
 		currency,

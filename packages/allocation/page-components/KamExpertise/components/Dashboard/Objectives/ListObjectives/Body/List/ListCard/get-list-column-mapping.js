@@ -21,6 +21,7 @@ const getListColumnMapping = (props) => {
 		activeObjectiveId,
 		setActiveObjectiveId = () => { },
 		setListObjectivesParams = () => { },
+		t = () => {},
 	} = props;
 
 	const actionsMapping = getActionMapping({
@@ -58,8 +59,8 @@ const getListColumnMapping = (props) => {
 			flex   : 1,
 			Header : (
 				<>
-					<div className={styles.top_heading}>OBJECTIVE</div>
-					<div className={styles.sub_heading}>Type</div>
+					<div className={styles.top_heading}>{t('allocation:objective_name_label')}</div>
+					<div className={styles.sub_heading}>{t('allocation:type_short_label')}</div>
 				</>
 			),
 			accessor: ({ name, objective_type }) => (
@@ -74,8 +75,8 @@ const getListColumnMapping = (props) => {
 			flex   : 1.5,
 			Header : (
 				<>
-					<div className={styles.top_heading}>ENTITY</div>
-					<div className={styles.sub_heading}>Channel</div>
+					<div className={styles.top_heading}>{t('allocation:entity_uppercase')}</div>
+					<div className={styles.sub_heading}>{t('allocation:channels_short_label')}</div>
 				</>
 			),
 			accessor: ({ partner, channels }) => (
@@ -99,8 +100,8 @@ const getListColumnMapping = (props) => {
 			flex   : 2,
 			Header : (
 				<>
-					<div className={styles.top_heading}>AGENT ROLES</div>
-					<div className={styles.sub_heading}>No. Of Users</div>
+					<div className={styles.top_heading}>{t('allocation:agent_roles_uppercase')}</div>
+					<div className={styles.sub_heading}>{t('allocation:no_of_users')}</div>
 				</>
 			),
 			accessor: ({ roles }) => (
@@ -135,7 +136,10 @@ const getListColumnMapping = (props) => {
 			flex   : 1,
 			Header : (
 				<div className={styles.created_at}>
-					<div className={styles.top_heading}> CREATION</div>
+					<div className={styles.top_heading}>
+						{' '}
+						{t('allocation:creation_uppercase')}
+					</div>
 					<div className={styles.icon_container}>
 						<IcMArrowRotateUp fill="#CECECE" onClick={() => actionsMapping?.handleSortAsc()} />
 						<IcMArrowRotateDown fill="#CECECE" onClick={() => actionsMapping?.handleSortDesc()} />
@@ -151,7 +155,7 @@ const getListColumnMapping = (props) => {
 		{
 			key      : 'action',
 			flex     : 2,
-			Header   : <div className={styles.top_heading}>ACTIONS</div>,
+			Header   : <div className={styles.top_heading}>{t('allocation:actions_uppercase')}</div>,
 			accessor : ({ id, name, kam_expertise_status }) => (
 				<div className={styles.action_buttons}>
 					<Button
@@ -163,7 +167,7 @@ const getListColumnMapping = (props) => {
 						themeType="secondary"
 						disabled={['verified', 'verification_inprogress'].includes(kam_expertise_status)}
 					>
-						<strong>Generate List</strong>
+						<strong>{t('allocation:generate_list')}</strong>
 					</Button>
 
 					{kam_expertise_status === 'verified' ? (
@@ -176,7 +180,7 @@ const getListColumnMapping = (props) => {
 								type="button"
 								themeType="secondary"
 							>
-								<strong>View List</strong>
+								<strong>{t('allocation:view_list')}</strong>
 							</Button>
 							<Button
 								onClick={(e) => {
@@ -188,7 +192,7 @@ const getListColumnMapping = (props) => {
 							>
 								<strong style={{ display: 'flex', alignItems: 'flex-end' }}>
 									<IcMDelete height={16} width={16} fill="#221f20" />
-									Delete List
+									{t('allocation:delete_list')}
 								</strong>
 							</Button>
 						</>

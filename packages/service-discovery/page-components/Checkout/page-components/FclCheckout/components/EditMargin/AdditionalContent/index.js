@@ -15,8 +15,6 @@ function AdditionalContent({
 	convenience_line_item = {},
 	noRatesPresent = false,
 	state = '',
-	infoBanner = {},
-	setInfoBanner = () => {},
 }) {
 	const {
 		rate,
@@ -43,8 +41,6 @@ function AdditionalContent({
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
 				servicesLength={rateDetails.length}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
 			/>
 
 			<div className={styles.sub_heading}>Cancellation Policy</div>
@@ -73,8 +69,6 @@ function AdditionalContent({
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
 				state={state}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
 			/>
 		</div>
 	);

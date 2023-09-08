@@ -12,12 +12,20 @@
 
 .amount {
 	display: flex;
-	align-items: center;
-	margin-right: 8px;
+	align-items: baseline;
 	font-size: 22px;
 	font-weight: 600;
 	line-height: 150%;
 	color: #000;
+}
+
+.per_package_label {
+	margin-left: 2px;
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #000;
+	opacity: 0.4;
 }
 
 .tooltip_content {
@@ -27,4 +35,5 @@
 .info_icon {
 	width: 12px;
 	height: 12px;
+	margin-left: 8px;
 }

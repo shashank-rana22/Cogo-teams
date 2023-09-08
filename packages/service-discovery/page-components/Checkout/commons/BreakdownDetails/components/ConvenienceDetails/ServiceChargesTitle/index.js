@@ -6,10 +6,11 @@ function ServiceChargesTitle({
 	subTotalDisplay = '',
 	discount = 0,
 	localedDiscount = '',
+	showTaxes = true,
 }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.service_name}>Service Charges and Taxes</div>
+			<div className={styles.service_name}>{showTaxes ? 'Service Charges and Taxes' : 'Service Charges'}</div>
 
 			<div className={styles.flex}>
 				<div className={styles.price_display} style={{ marginRight: '8px' }}>
@@ -29,12 +30,16 @@ function ServiceChargesTitle({
 					{subTotalDisplay}
 				</div>
 				|
-				<div className={styles.price_display} style={{ marginRight: '12px' }}>
-					<div className={styles.label}>Taxes:</div>
-					{' '}
-					{taxesDisplay}
-				</div>
-				|
+				{showTaxes ? (
+					<div className={styles.price_display} style={{ marginRight: '12px' }}>
+						<div className={styles.label}>Taxes:</div>
+						{' '}
+						{taxesDisplay}
+					</div>
+				)
+					: null}
+
+				{showTaxes ? '|' : null}
 				<div className={styles.price_display}>
 					<div className={styles.label}>Convenience Fee:</div>
 					{' '}

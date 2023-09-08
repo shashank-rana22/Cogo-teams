@@ -32,15 +32,11 @@ const useCreateSearch = () => {
 					destination,
 				});
 
-				payload = {
-					...defaultPayload,
-				};
+				payload = { ...defaultPayload };
 			} else if (['edit', 'quick-search'].includes(action)) {
 				const editPayload = getEditPayload(service_type, { origin, destination, formValues });
 
-				payload = {
-					...editPayload,
-				};
+				payload = { ...editPayload };
 			}
 
 			payload = {
@@ -50,15 +46,15 @@ const useCreateSearch = () => {
 				source                      : 'platform',
 				search_type                 : service_type,
 				user_id,
-				// tags                        : ['new_admin'],
+				tags                        : ['new_admin'],
 			};
 
 			const res = await trigger({ data: payload });
 
 			return res?.data?.id;
 		} catch (err) {
-			if (err.response?.data) {
-				Toast.error(getApiErrorString(err.response?.data));
+			if (err?.response?.data) {
+				Toast.error(getApiErrorString(err?.response?.data));
 			}
 
 			return err;

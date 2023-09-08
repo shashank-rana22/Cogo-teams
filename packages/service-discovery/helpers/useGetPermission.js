@@ -1,17 +1,17 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 
+import getCustomAuthParams from './getCustomAuthParams';
+
 const ONE = 1;
 const TWO = 2;
 
-const useGetPermission = () => {
+const useGetPermission = ({ navigation: currNav = '' }) => {
 	const {
-		authorizationparameters,
 		scope,
 		permissions_navigations,
 		entity_types,
 	} = useSelector(({ general, profile }) => ({
-		authorizationparameters : profile?.authorizationparameters,
 		scope                   : general?.scope,
 		permissions_navigations : profile?.permissions_navigations,
 		entity_types            : profile?.partner?.entity_types,
@@ -25,18 +25,22 @@ const useGetPermission = () => {
 			value = '',
 			with_permissions_navigations_as: pNavs = null,
 			in_navigation = null,
+			in_api = '',
 		} = condition;
+
+		const authorizationparameters = getCustomAuthParams({ permissions_navigations, in_api, currNav });
 		const navigation = (authorizationparameters || '').split(':')[GLOBAL_CONSTANTS.zeroth_index];
 		const new_permissions_navigations = pNavs || permissions_navigations;
 		const new_navigation = in_navigation || navigation;
 		if (new_permissions_navigations && new_navigation) {
+			// The condition will get true if any of the navigation matches
 			let isApi = false;
-
+			// finding corresponding api
 			const apiPermissions = new_permissions_navigations?.[new_navigation]?.[value];
 			if (apiPermissions) {
 				// getting viewscope other than none
 				const allowApiScopeThere = !!apiPermissions.find(
-					(perm) => perm.type !== 'none',
+					(perm) => perm.view_type !== 'none',
 				);
 				if (allowApiScopeThere) {
 					isApi = true;
@@ -48,13 +52,16 @@ const useGetPermission = () => {
 	};
 
 	const isInViewScope = (condition) => {
-		const authParams = (authorizationparameters || '').split(':');
 		const {
 			value = '',
 			with_permissions_navigations_as: pNavs = null,
 			in_navigation: in_nav,
 			in_api = null,
 		} = condition || {};
+
+		const authorizationparameters = getCustomAuthParams({ currNav, in_api, permissions_navigations });
+		const authParams = (authorizationparameters || '').split(':');
+
 		const newPnavs = pNavs || permissions_navigations;
 		const in_navigation = in_nav || authParams[GLOBAL_CONSTANTS.zeroth_index];
 		if (in_api && in_navigation && newPnavs) {
@@ -64,7 +71,7 @@ const useGetPermission = () => {
 			if (apiPermissions) {
 				// getting viewscope other than none
 				const allowApiScopeThere = !!apiPermissions.find(
-					(perm) => perm.type === value,
+					(perm) => perm.view_type === value,
 				);
 				if (allowApiScopeThere) {
 					isViewScope = true;
@@ -76,7 +83,6 @@ const useGetPermission = () => {
 		return !!(viewscope && viewscope === value);
 	};
 	const isInViewType = (condition) => {
-		const authParams = (authorizationparameters || '').split(':');
 		const {
 			value = '',
 			with_permissions_navigations_as: pNavs = null,
@@ -84,6 +90,10 @@ const useGetPermission = () => {
 			in_api = null,
 			using_viewscope = null,
 		} = condition || {};
+
+		const authorizationparameters = getCustomAuthParams({ currNav, in_api, permissions_navigations });
+		const authParams = (authorizationparameters || '').split(':');
+
 		const newPnavs = pNavs || permissions_navigations;
 		const in_navigation = in_nav || authParams[GLOBAL_CONSTANTS.zeroth_index];
 		if (in_api && in_navigation && newPnavs && using_viewscope) {
@@ -93,7 +103,7 @@ const useGetPermission = () => {
 			if (apiPermissions) {
 				// getting viewscope other than none
 				const allowViewTypeThere = !!apiPermissions.find(
-					(perm) => perm.type === using_viewscope
+					(perm) => perm.view_type === using_viewscope
 						&& (perm.through_criteria || []).includes(value),
 				);
 				if (allowViewTypeThere) {
@@ -143,7 +153,6 @@ const useGetPermission = () => {
 	}) => (isConditionMatches(conditions, type) ? children : null);
 
 	return {
-		authorizationparameters,
 		scope,
 		permissions_navigations,
 		entity_types,

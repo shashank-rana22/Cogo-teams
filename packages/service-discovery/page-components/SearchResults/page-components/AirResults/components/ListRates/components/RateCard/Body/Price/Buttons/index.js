@@ -10,9 +10,7 @@ import styles from './styles.module.css';
 function Buttons({
 	rate = {},
 	detail = {},
-	isCogoAssured = false,
 	isSelectedCard = false,
-	isMultiContainer = false,
 	setScreen = () => {},
 }) {
 	const router = useRouter();
@@ -33,26 +31,25 @@ function Buttons({
 
 	const handleSelectButtonClick = () => {
 		if (!isSelectedCard) {
-			router.push(`/book/${router.query.spot_search_id}?rate_card_id=${rate?.id}`);
+			router.push(`/book/${router.query.spot_search_id}?rate_card_id=${rate?.id || rate?.card}`);
 
 			setScreen('selectedCardScreen');
 		} else {
 			router.push(`/book/${router.query.spot_search_id}`);
 		}
 	};
+
 	return (
 		<div className={styles.container}>
-			{(isCogoAssured || isMultiContainer) && !isSelectedCard ? null : (
-				<Button
-					size="md"
-					themeType={isSelectedCard ? 'tertiary' : 'secondary'}
-					className={styles.secondary_button}
-					disabled={isSelectedCard}
-					onClick={() => setShowContract(!showContract)}
-				>
-					{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
-				</Button>
-			)}
+			<Button
+				size="md"
+				themeType={isSelectedCard ? 'tertiary' : 'secondary'}
+				className={styles.secondary_button}
+				disabled={isSelectedCard}
+				onClick={() => setShowContract(!showContract)}
+			>
+				{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
+			</Button>
 
 			<Button
 				onClick={handleSelectButtonClick}
@@ -60,7 +57,7 @@ function Buttons({
 				themeType="accent"
 				className={styles.primary_button}
 			>
-				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Remove'}
+				{isSelectedCard ? 'Remove' : `Select For ${formattedAmount}` }
 			</Button>
 
 			{showContract ? (

@@ -32,6 +32,10 @@ function PricePerPackage({
 							maximumFractionDigits : 0,
 						},
 					})}
+
+					{isTotalPrice ? null : (
+						<span className={styles.per_package_label}>Per Pkg.</span>
+					)}
 				</span>
 
 				{isTotalPrice ? (
@@ -41,7 +45,7 @@ function PricePerPackage({
 						interactive
 						content={(
 							<strong className={styles.tooltip_content}>
-								Basic freight + all other services including AIR Freight Local
+								Basic freight + all other services including AIR Freight Local.
 							</strong>
 						)}
 					>

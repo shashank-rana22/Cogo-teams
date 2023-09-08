@@ -1,8 +1,9 @@
+import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
-function TotalCost({ rate = {} }) {
+function TotalCost({ rate = {}, disabled = false }) {
 	const { tax_total_price_discounted, tax_total_price_currency = '' } = rate;
 
 	const totalDisplayString = formatAmount({
@@ -16,7 +17,7 @@ function TotalCost({ rate = {} }) {
 	});
 
 	return (
-		<div className={styles.amount}>{totalDisplayString}</div>
+		<div className={cl`${styles.amount} ${disabled && styles.disabled}`}>{totalDisplayString}</div>
 	);
 }
 

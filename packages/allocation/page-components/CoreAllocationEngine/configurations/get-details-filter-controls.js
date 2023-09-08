@@ -1,8 +1,8 @@
-const controls = [
+const getControls = ({ t = () => {} }) => [
 	{
 		name        : 'stakeholder_id',
-		label       : 'New Stakeholder Name',
-		placeholder : 'Select New StakeHolder',
+		label       : t('allocation:new_stakeholder_name_label'),
+		placeholder : t('allocation:new_stakeholder_name_placeholder'),
 		type        : 'asyncSelect',
 		multiple    : true,
 		initialCall : false,
@@ -19,8 +19,8 @@ const controls = [
 	},
 	{
 		name        : 'old_stakeholder_id',
-		label       : 'Old Stakeholder Name',
-		placeholder : 'Select Old StakeHolder',
+		label       : t('allocation:old_stakeholder_name_label'),
+		placeholder : t('allocation:old_stakeholder_name_placeholder'),
 		type        : 'asyncSelect',
 		multiple    : true,
 		initialCall : false,
@@ -37,4 +37,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;

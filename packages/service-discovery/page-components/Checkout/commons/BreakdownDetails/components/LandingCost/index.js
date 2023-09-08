@@ -12,6 +12,7 @@ function LandingCost({
 	rate = {},
 	total = 0,
 	otherCharges = [],
+	showTaxes = false,
 }) {
 	const {
 		tax_price_discounted,
@@ -49,16 +50,18 @@ function LandingCost({
 		return acc;
 	}, DEFAULT_VALUE);
 
-	const totalCost = total + finalConvenienceFee + finalTaxValue + otherChargesPrice;
+	const totalCostExcludingTax = total + finalConvenienceFee + otherChargesPrice;
+
+	const totalCost = totalCostExcludingTax + finalTaxValue;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.convenience_container}>
-				<div className={styles.text}>Total Landed Cost :</div>
+				<div className={styles.text}>Total Cost :</div>
 
 				<div className={styles.amount}>
 					{formatAmount({
-						amount   : totalCost,
+						amount   : showTaxes ? totalCost : totalCostExcludingTax,
 						currency : rate?.total_price_currency,
 						options  : {
 							style                 : 'currency',

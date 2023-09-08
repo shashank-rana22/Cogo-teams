@@ -9,6 +9,10 @@ import styles from './styles.module.css';
 
 const SUBSIDIARY_SERVICES = ['EDE', 'EDT', 'DET', 'DEA'];
 
+const POSITIVE_VALUE = 1;
+const NEGATIVE_VALUE = -1;
+const ZERO = 0;
+
 const getPriceBreakUpColumn = [
 	{
 		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Service name</div>,
@@ -149,9 +153,42 @@ function PriceBreakup({ rateCardData = {}, detail = {} }) {
 	const { service_rates, total_price_discounted = 0, total_price_currency = '' } = rateCardData;
 	const { service_details, service_type } = detail;
 
+	const updatedServiceRates = Object.entries(service_rates)
+		.map(([key, value]) => ({ ...value, key }))
+		.sort(
+			(
+				{ trade_type: firstElementTradeType = '', service_type:firstElementServiceType },
+				{ trade_type: secondElementTradeType = '', service_type:secondElementServiceType },
+			) => {
+				const tradeTypeOrder = ['export', 'main', 'import'];
+
+				const firstElementFinalTradeType = firstElementServiceType === service_type
+					? 'main' : firstElementTradeType;
+
+				const secondElementFinalTradeType =	secondElementServiceType === service_type
+					? 'main' : secondElementTradeType;
+
+				if (
+					tradeTypeOrder.findIndex((item) => firstElementFinalTradeType === item)
+				> tradeTypeOrder.findIndex((item) => secondElementFinalTradeType === item)
+				) {
+					return POSITIVE_VALUE;
+				}
+
+				if (
+					tradeTypeOrder.findIndex((item) => firstElementFinalTradeType === item)
+				< tradeTypeOrder.findIndex((item) => secondElementFinalTradeType === item)
+				) {
+					return NEGATIVE_VALUE;
+				}
+
+				return ZERO;
+			},
+		);
+
 	return (
 		<div className={styles.container}>
-			{Object.entries(service_rates).map(([key, value]) => (
+			{updatedServiceRates.map(({ key, ...value }) => (
 				<IndividualPriceBreakup
 					key={key}
 					service={value}

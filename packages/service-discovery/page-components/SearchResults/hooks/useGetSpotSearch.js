@@ -5,6 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 const DEFAULT_PAGE = 1;
+const ONE = 1;
 
 const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
@@ -17,18 +18,15 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 		departure_before : undefined,
 		departure_after  : undefined,
 	});
+	const [rates, setRates] = useState([]);
 
-	// const [{ loading, data }, trigger] = useRequest({
-	// 	method : 'GET',
-	// 	url    : '/list_spot_search_rate_cards',
-	// }, { manual: true });
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
-		url    : '/get_spot_search',
+		url    : '/list_spot_search_rate_cards',
 	}, { manual: true });
 
-	const getSearch = useCallback(async () => {
-		if (!spot_search_id) return;
+	const getSearch = useCallback(async ({ show_more = false } = {}) => {
+		if (!spot_search_id || (page > ONE && !show_more)) return;
 
 		let finalFilters = {};
 
@@ -40,17 +38,27 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 		});
 
 		try {
-			await trigger({
+			const { data:rateData } = await trigger({
 				params: {
-					// spot_search_id,
-					id                   : spot_search_id,
-					intent               : 'discovery',
-					importer_exporter_id : 'e0c1ce39-299a-44c4-b5e8-03c25bde387e',
-					page,
-					page_limit           : 10,
-					filters              : { ...finalFilters, status: 'active' },
+					spot_search_id,
+					page       : show_more ? page + ONE : page,
+					page_limit : 10,
+					filters    : { ...finalFilters, status: 'active' },
 				},
 			});
+
+			if (show_more) {
+				setPage((prev) => prev + ONE);
+			}
+
+			const { list = [] } = rateData;
+
+			if (show_more) {
+				setRates((prevRates) => ([...prevRates, ...list]));
+			} else {
+				setRates(list);
+			}
+
 			setComparisonRates({});
 		} catch (error) {
 			if (error?.response?.data) {
@@ -62,7 +70,7 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	useEffect(() => {
 		if (screen === 'comparison') return;
 		getSearch();
-	}, [getSearch, filters, screen, page]);
+	}, [getSearch, filters, screen]);
 
 	useEffect(() => {
 		if (checkout_id) return;
@@ -85,7 +93,7 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 		filters,
 		setFilters,
 		page,
-		setPage,
+		rates,
 	};
 };
 export default useGetSpotSearch;

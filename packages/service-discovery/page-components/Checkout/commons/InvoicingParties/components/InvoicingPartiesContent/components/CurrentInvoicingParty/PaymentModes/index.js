@@ -1,7 +1,7 @@
 import { Select } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import DotLoader from '../../../../../../LoadingState/DotLoader';
+import DotLoader from '../../../../../../../../../common/LoadingState/DotLoader';
 
 import styles from './styles.module.css';
 

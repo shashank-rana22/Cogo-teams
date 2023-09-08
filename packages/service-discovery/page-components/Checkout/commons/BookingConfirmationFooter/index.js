@@ -205,6 +205,22 @@ function BookingConfirmationFooter({
 		manager_approval_proof = '',
 	} = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
 
+	const disableButton = isAssistedBookingNotAllowed
+	|| !quotation_email_sent_at
+	|| disableConditionForFcl
+	|| disableCondition
+	|| isVeryRisky
+	|| noRatesPresent
+	|| isEmpty(invoicingParties)
+	|| getDisabledCondition({
+		checkoutMethod,
+		booking_status,
+		manager_approval_proof,
+		isControlBookingDetailsFilled,
+		bookingConfirmationMode,
+		detail,
+	});
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.validity_time}>
@@ -245,21 +261,7 @@ function BookingConfirmationFooter({
 						themeType="accent"
 						onClick={handleSubmit}
 						loading={submitButtonLoading}
-						disabled={isAssistedBookingNotAllowed
-							|| !quotation_email_sent_at
-							|| disableConditionForFcl
-							|| disableCondition
-							|| isVeryRisky
-							|| noRatesPresent
-							|| isEmpty(invoicingParties)
-							|| getDisabledCondition({
-								checkoutMethod,
-								booking_status,
-								manager_approval_proof,
-								isControlBookingDetailsFilled,
-								bookingConfirmationMode,
-								detail,
-							})}
+						disabled={disableButton}
 					>
 						<div className={styles.flex_column}>
 							<div className={styles.button}>
@@ -269,7 +271,7 @@ function BookingConfirmationFooter({
 									bookingConfirmationMode,
 								})}
 
-								<TotalCost rate={rate} />
+								<TotalCost rate={rate} disableButton={disableButton} />
 
 								<IcMArrowDoubleRight width={14} height={14} />
 							</div>

@@ -24,6 +24,7 @@ function ConvenienceDetails({
 	convenienceRateOptions = [],
 	checkout_id = '',
 	otherCharges = [],
+	showTaxes = true,
 }) {
 	const { convenience_rate = {} } = convenienceDetails || {};
 
@@ -61,6 +62,7 @@ function ConvenienceDetails({
 					subTotalDisplay={subTotalDisplay}
 					discount={discount}
 					localedDiscount={localedDiscount}
+					showTaxes={showTaxes}
 				/>
 			)}
 		>
@@ -176,12 +178,14 @@ function ConvenienceDetails({
 						</div>
 					) : null}
 
-					<div className={styles.item_container}>
-						<div className={styles.convenience_container}>
-							<div className={styles.text}>Taxes</div>
-							<div className={styles.amount}>{taxesDisplay}</div>
+					{showTaxes ? (
+						<div className={styles.item_container}>
+							<div className={styles.convenience_container}>
+								<div className={styles.text}>Taxes</div>
+								<div className={styles.amount}>{taxesDisplay}</div>
+							</div>
 						</div>
-					</div>
+					) : null}
 				</div>
 			</div>
 		</Accordion>

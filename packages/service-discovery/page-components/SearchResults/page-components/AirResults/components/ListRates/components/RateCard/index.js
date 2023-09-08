@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import Body from './Body';
 import Footer from './Footer';
 import Header from './Header';
@@ -7,36 +9,30 @@ function RateCard({
 	rate = {},
 	detail = {},
 	comparisonRates = {},
-	cogoAssuredRates = [],
 	setComparisonRates = () => {},
 	// infoBanner = {},
 	// showGuide = false,
-	isCogoAssured = false,
 	isSelectedCard = false,
 }) {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}>
 			<Header
 				detail={detail}
 				rate={rate}
-				cogoAssuredRates={cogoAssuredRates}
 				comparisonRates={comparisonRates}
 				setComparisonRates={setComparisonRates}
-				isCogoAssured={isCogoAssured}
 				isSelectedCard={isSelectedCard}
 			/>
 
 			<Body
 				detail={detail}
 				rate={rate}
-				isCogoAssured={isCogoAssured}
 				isSelectedCard={isSelectedCard}
 			/>
 
 			<Footer
 				detail={detail}
 				rate={rate}
-				isCogoAssured={isCogoAssured}
 				isSelectedCard={isSelectedCard}
 			/>
 		</div>

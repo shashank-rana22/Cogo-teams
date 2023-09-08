@@ -1,7 +1,4 @@
 import { Checkbox, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import LikeDislike from '../../../../../../../common/LikeDislike';
 
@@ -21,18 +18,15 @@ function Header({
 	rate = {},
 	detail = {},
 	comparisonRates = {},
-	cogoAssuredRates = [],
 	setComparisonRates = () => {},
 	// infoBanner = {},
 	// showGuide = false,
-	isCogoAssured = false,
 	isSelectedCard = false,
 }) {
-	// const { airline = {}, id: card_id, source = '' } = rate;
-	const { airline = {}, card:card_id = '', source = '' } = rate;
+	const { airline = {}, id: card_id, source = '' } = rate;
 
 	const selectedCardIDs = Object.keys(comparisonRates);
-	const selectedCardValues = Object.values(comparisonRates);
+
 	const handleCheckbox = () => {
 		if (!selectedCardIDs.includes(card_id)) {
 			setComparisonRates((pv) => ({
@@ -54,43 +48,25 @@ function Header({
 
 	// const popoverComponentData = buttonProps.comparision_button || {};
 
-	const imageUrl = isCogoAssured ? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : airline?.logo_url;
-
-	useEffect(() => {
-		const selectedCogoAssuredRate = selectedCardValues.find(
-			(cardValue) => cardValue.source === 'cogo_assured_rate',
-		);
-		if (selectedCogoAssuredRate || isEmpty(cogoAssuredRates) || isEmpty(selectedCardValues)) return;
-		const cogoAssuredRate = cogoAssuredRates?.[GLOBAL_CONSTANTS.zeroth_index];
-
-		setComparisonRates((pv) => ({
-			...pv,
-			[cogoAssuredRate?.id]: cogoAssuredRate,
-		}));
-	}, [cogoAssuredRates, selectedCardValues, setComparisonRates]);
+	const imageUrl = airline?.logo_url;
 
 	return (
 		<div className={styles.container}>
-			{isCogoAssured ? null : (
-				<div className={cl`${styles.source_tag} ${styles[source]}`}>
-					{RATE_SOURCE_MAPPING[source] || 'System Rates'}
-				</div>
-			)}
+			<div className={cl`${styles.source_tag} ${styles[source]}`}>
+				{RATE_SOURCE_MAPPING[source] || 'System Rates'}
+			</div>
 
 			<div className={styles.left_section}>
-				<Checkbox
-					checked={selectedCardIDs.includes(card_id)}
-					onChange={handleCheckbox}
-					disabled={
-					selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
-					&& !selectedCardIDs.includes(card_id)
-				}
-				/>
+				{!isSelectedCard ? (
+					<Checkbox
+						checked={selectedCardIDs.includes(card_id)}
+						onChange={handleCheckbox}
+						disabled={selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
+						&& !selectedCardIDs.includes(card_id)}
+					/>
+				) : null}
 
-				<div
-					className={styles.airline_info}
-					style={{ marginLeft: isSelectedCard ? '12px' : '0px' }}
-				>
+				<div className={styles.airline_info}>
 					{imageUrl ? (
 						<img
 							src={imageUrl}
@@ -100,11 +76,9 @@ function Header({
 						/>
 					) : null}
 
-					{source !== 'cogo_assured_rate' ? (
-						<div className={styles.airline_name}>
-							{rate?.airline?.short_name}
-						</div>
-					) : null}
+					<div className={styles.airline_name}>
+						{rate?.airline?.short_name}
+					</div>
 				</div>
 			</div>
 

@@ -51,6 +51,7 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 			key       : 'possible_schedules',
 			label     : 'Possible Schedules',
 			component : PossibleSchedules,
+			visible   : !isCogoAssured,
 			props     : {
 				rateCardData,
 				service_type: detail.service_type,
@@ -72,44 +73,52 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 
 				<div className={styles.other_details}>
 					<div className={styles.wrapper}>
-						{Object.keys(TABS_MAPPING).map((item) => (
-							<span
-								role="presentation"
-								key={item}
-								className={cl`${styles.other_details_tag} 
-								${activeTab === item ? styles.selected : {}}`}
-								onClick={() => {
-									if (activeTab === item) {
-										setActiveTab('');
-									} else setActiveTab(item);
-								}}
-							>
-								<div className={styles.tab_label_container}>
-									{TABS_MAPPING[item].label}
+						{Object.keys(TABS_MAPPING).map((item) => {
+							const { visible = true } = TABS_MAPPING[item];
 
-									{countOfNoRates && item === 'price_break_up' ? (
-										<Tooltip
-											placement="top"
-											trigger="mouseenter"
-											interactive
-											content={(
-												<span className={styles.tooltip_content}>
-													Rates for
-													{' '}
-													{countOfNoRates}
-													{' '}
-													services
-													{' '}
-													are not available
-												</span>
-											)}
-										>
-											<IcMInfo className={styles.info_icon} />
-										</Tooltip>
-									) : null}
-								</div>
-							</span>
-						))}
+							if (!visible) {
+								return null;
+							}
+
+							return (
+								<span
+									role="presentation"
+									key={item}
+									className={cl`${styles.other_details_tag} 
+								${activeTab === item ? styles.selected : {}}`}
+									onClick={() => {
+										if (activeTab === item) {
+											setActiveTab('');
+										} else setActiveTab(item);
+									}}
+								>
+									<div className={styles.tab_label_container}>
+										{TABS_MAPPING[item].label}
+
+										{countOfNoRates && item === 'price_break_up' ? (
+											<Tooltip
+												placement="top"
+												trigger="mouseenter"
+												interactive
+												content={(
+													<span className={styles.tooltip_content}>
+														Rates for
+														{' '}
+														{countOfNoRates}
+														{' '}
+														services
+														{' '}
+														are not available
+													</span>
+												)}
+											>
+												<IcMInfo className={styles.info_icon} />
+											</Tooltip>
+										) : null}
+									</div>
+								</span>
+							);
+						})}
 					</div>
 
 					{rateCardData?.earnable_cogopoints ? (

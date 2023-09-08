@@ -33,18 +33,21 @@ function PromocodeThumbnail({
 		}
 	};
 
-	const backgroundStyle = !is_applicable ? { background: '#f2f2f2' } : {};
+	let backgroundStyle = {};
+	let textStyle = {};
+	let borderColor = {};
 
-	const textStyle = !is_applicable
-		? { color: '#888' } : {};
-
-	const borderColor = !is_applicable ? { border: '6px solid #bdbdbd' } : {};
+	if (!is_applicable) {
+		backgroundStyle = { background: '#f2f2f2' };
+		textStyle = { color: '#888' };
+		borderColor = { border: '6px solid #bdbdbd' };
+	}
 
 	return (
 		<div
 			role="presentation"
 			className={styles.container}
-			style={{ cursor: (is_applicable && disableCursor), background: bgColor, ...backgroundStyle }}
+			style={{ cursor: disableCursor, background: bgColor, ...backgroundStyle }}
 			onClick={() => {
 				if (is_applicable) applyPromocode();
 			}}
@@ -63,7 +66,7 @@ function PromocodeThumbnail({
 								maximumFractionDigits : 0,
 							},
 						})}
-						<div className={cl`${styles.amount} ${styles.space_left}`} style={textStyle}>Off</div>
+						<span className={cl`${styles.amount} ${styles.space_left}`} style={textStyle}>Off</span>
 					</span>
 				</div>
 			)}
@@ -125,7 +128,7 @@ function PromocodeThumbnail({
 				))}
 			</div>
 
-			<div className={styles.toot_tip_div}>
+			<div className={styles.tool_tip_div}>
 				<Tooltip
 					content={(
 						<TermsAndConditions

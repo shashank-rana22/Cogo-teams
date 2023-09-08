@@ -1,6 +1,7 @@
 import Comparison from '../../common/Comparison';
 
 import ListRates from './components/ListRates';
+import SelectedRate from './components/SelectedRate';
 
 function AIRResults({
 	rates = [],
@@ -14,8 +15,8 @@ function AIRResults({
 	filters = {},
 	setFilters = () => {},
 	setPage = () => {},
-	// headerProps = {},
-	// setHeaderProps = () => {},
+	headerProps = {},
+	setHeaderProps = () => {},
 	selectedWeek = {},
 	setSelectedWeek = () => {},
 	refetchSearch:refetch = () => {},
@@ -50,14 +51,25 @@ function AIRResults({
 				setInfoBanner,
 				isGuideViewed,
 			},
-			comparison: {
-				component : Comparison,
-				props     : {
-					detail,
-					setScreen,
-					comparisonRates,
-					setComparisonRates,
-				},
+		},
+		comparison: {
+			component : Comparison,
+			props     : {
+				detail,
+				setScreen,
+				comparisonRates,
+				setComparisonRates,
+				mode: 'air_freight',
+			},
+		},
+		selectedCardScreen: {
+			component : SelectedRate,
+			props     : {
+				headerProps,
+				setHeaderProps,
+				detail,
+				rates,
+				refetch,
 			},
 		},
 	};

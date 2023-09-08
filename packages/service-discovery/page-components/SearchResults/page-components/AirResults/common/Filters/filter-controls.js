@@ -79,10 +79,6 @@ export const FILTER_CONTROLS = {
 						value : null,
 					},
 					{
-						label : 'Cogo Assured',
-						value : 'cogo_assured_rate',
-					},
-					{
 						label : 'Spot Booking',
 						value : 'spot_rates',
 					},

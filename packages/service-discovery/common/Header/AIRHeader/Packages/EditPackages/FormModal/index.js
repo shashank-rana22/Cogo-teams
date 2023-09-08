@@ -1,6 +1,8 @@
 import { Checkbox } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
+// eslint-disable-next-line max-len
+import COMMODITY_SUBTYPE_MAPPING from '../../../../../../page-components/SearchResults/configurations/air/commodity-subtype-mapping';
 import airControls from '../../../../../../page-components/SearchResults/configurations/air/form-controls';
 import Layout from '../../../../../Layout';
 
@@ -22,7 +24,12 @@ function FormModal({
 	activeTab = '',
 	setActiveTab = () => {},
 }) {
-	const [commoditySubtypeOptions, setCommoditySubTypeOptions] = useState([]);
+	const { commodity_type = '' } = watch();
+
+	const [
+		commoditySubtypeOptions,
+		setCommoditySubTypeOptions,
+	] = useState(COMMODITY_SUBTYPE_MAPPING[commodity_type] || []);
 	const [selectedWeightType, setSelectedWeightType] = useState('weight_by_unit');
 
 	const controls = airControls({

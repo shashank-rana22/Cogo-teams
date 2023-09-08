@@ -1,4 +1,5 @@
 import PossibleSchedules from './BottomTabs/PossibleSchedules';
+import PriceBreakup from './BottomTabs/PriceBreakUp';
 import TermsConditions from './BottomTabs/TermsConditions';
 
 const getTabs = ({
@@ -18,7 +19,7 @@ const getTabs = ({
 		price_break_up: {
 			key       : 'price_break_up',
 			label     : 'Price break up',
-			component : TermsConditions,
+			component : PriceBreakup,
 			props     : {
 				rate,
 				detail,

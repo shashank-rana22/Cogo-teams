@@ -1,4 +1,7 @@
 import { Select } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -6,11 +9,14 @@ import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerms';
 
 import ChangeIncoTermModal from './ChangeIncoTermModal';
+import getAddedServices from './getAddedServices';
 import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
 import getServiceName from './utils/getServiceName';
+
+const OTHER_SERVICES_ARRAY = ['cargo_insurance', 'warehouse'];
 
 const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
 const singleLocationServices = ['fcl_freight_local'];
@@ -20,6 +26,7 @@ const SERVICES_CANNOT_BE_REMOVED_MAPPING = {
 	import : 'import_fcl_freight_local',
 };
 
+// eslint-disable-next-line max-lines-per-function
 function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
 	detail = {},
@@ -29,6 +36,14 @@ function AdditionalServices({ // used in search results and checkout
 	searchLoading = false,
 	refetchLoading = false,
 }) {
+	const { country: { id: countryId = '' } } = getGeoConstants();
+
+	const COUNTRY_CODE = getCountryDetails({
+		country_id: countryId,
+	})?.country_code;
+
+	const cargoInsuranceSupportedServices = GLOBAL_CONSTANTS.cargo_insurance[COUNTRY_CODE] || [];
+
 	const { service_rates = [], total_price_currency = 'USD' } = rateCardData;
 
 	const {
@@ -65,6 +80,14 @@ function AdditionalServices({ // used in search results and checkout
 
 		SERVICE_DATA[serviceName].push(serviceItem);
 	});
+
+	if (cargoInsuranceSupportedServices.includes(primaryService)) {
+		servicesArray.unshift({
+			name         : 'cargo_insurance',
+			service_type : 'cargo_insurance',
+			title        : 'Cargo Insurance',
+		});
+	}
 
 	const ALL_SERVICES = [];
 
@@ -150,23 +173,31 @@ function AdditionalServices({ // used in search results and checkout
 		rateCardData,
 	});
 
-	const filteredAllServices = ALL_SERVICES.filter((service_item) => service_item.inco_terms.includes(inco_term));
+	const filteredAllServices = ALL_SERVICES.filter((service_item) => service_item?.inco_terms?.includes(inco_term));
 
 	const SHIPPER_SIDE_SERVICES = [];
 	const CONSIGNEE_SIDE_SERVICES = [];
 	const MAIN_SERVICES = [];
+	const OTHER_SERVICES = [];
+	const SUBSIDIARY_SERVICES = getAddedServices(finalServiceDetails);
 
 	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
 			CONSIGNEE_SIDE_SERVICES.push(item);
 		} else if (item.name.includes('export')) {
 			SHIPPER_SIDE_SERVICES.push(item);
+		} else if (OTHER_SERVICES_ARRAY.includes(item.name)) {
+			OTHER_SERVICES.push(item);
 		} else MAIN_SERVICES.push(item);
 	});
 
 	const incoTermOptions = getTradeTypeWiseIncoTerms(trade_type);
 
-	const SERVICES_CANNOT_BE_REMOVED = ['fcl_freight', SERVICES_CANNOT_BE_REMOVED_MAPPING[trade_type]];
+	const SERVICES_CANNOT_BE_REMOVED = [
+		'fcl_freight',
+		SERVICES_CANNOT_BE_REMOVED_MAPPING[trade_type],
+		'air_freight',
+	];
 
 	const SERVICES_LIST_MAPPING = {
 		shipper_side_services: {
@@ -183,6 +214,16 @@ function AdditionalServices({ // used in search results and checkout
 			key  : 'buyer_side_services',
 			type : 'buyer',
 			list : CONSIGNEE_SIDE_SERVICES,
+		},
+		other_services: {
+			key  : 'other_services',
+			type : 'other_services',
+			list : OTHER_SERVICES,
+		},
+		subsidiary_services: {
+			key  : 'subsidiary_services',
+			type : 'subsidiary_services',
+			list : SUBSIDIARY_SERVICES,
 		},
 	};
 

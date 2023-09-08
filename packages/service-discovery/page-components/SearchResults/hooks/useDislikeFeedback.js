@@ -45,7 +45,7 @@ const useDislikeFeedback = ({
 
 	const { spot_search_id = '' } = query;
 
-	const freight = rate.service_type;
+	const freight = rate.service_type || details.service_type;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : URL,
@@ -66,39 +66,42 @@ const useDislikeFeedback = ({
 		try {
 			if (preferred_freight_rate && !preferred_freight_rate_currency) {
 				Toast.error('Please add currency');
-			} else {
-				const body = {
-					id                    : spot_search_id,
-					is_disliked           : true,
-					...rest,
-					preferred_airline_ids : values.preferred_airline_ids || undefined,
-					preferred_shipping_line_ids:
-						values.preferred_shipping_line_ids || undefined,
-					remarks       : values.remarks ? [values.remarks] : undefined,
-					[keyToSend]   : values.preferred_freight_rate || undefined,
-					[keyCurrency] : values.preferred_freight_rate_currency || undefined,
-					preferred_detention_free_days:
-						values.preferred_detention_free_days || undefined,
-					selected_card         : rate.card,
-					performed_by_org_id   : details.importer_exporter.id,
-					attachment_file_urls,
-					commodity_description : values.commodity_description || undefined,
-				};
-				await trigger({ data: body });
-
-				setLikeState({
-					is_liked       : false,
-					likes_count    : likeState.is_liked ? likeState.likes_count - ONE_VALUE : likeState.likes_count,
-					is_disliked    : true,
-					dislikes_count : (likeState.dislikes_count || DEFAULT_COUNT_VALUE) + ONE_VALUE,
-				});
-
-				onClose();
+				return false;
 			}
+			const body = {
+				id                    : spot_search_id,
+				is_disliked           : true,
+				...rest,
+				preferred_airline_ids : values.preferred_airline_ids || undefined,
+				preferred_shipping_line_ids:
+						values.preferred_shipping_line_ids || undefined,
+				remarks       : values.remarks ? [values.remarks] : undefined,
+				[keyToSend]   : values.preferred_freight_rate || undefined,
+				[keyCurrency] : values.preferred_freight_rate_currency || undefined,
+				preferred_detention_free_days:
+						values.preferred_detention_free_days || undefined,
+				selected_card         : rate.id,
+				performed_by_org_id   : details.importer_exporter.id,
+				attachment_file_urls,
+				commodity_description : values.commodity_description || undefined,
+			};
+			await trigger({ data: body });
+
+			setLikeState({
+				is_liked       : false,
+				likes_count    : likeState.is_liked ? likeState.likes_count - ONE_VALUE : likeState.likes_count,
+				is_disliked    : true,
+				dislikes_count : (likeState.dislikes_count || DEFAULT_COUNT_VALUE) + ONE_VALUE,
+			});
+
+			onClose();
+
+			return true;
 		} catch (error) {
 			if (error.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
+			return false;
 		}
 	};
 

@@ -1,3 +1,5 @@
+import airIncotermsMapping from './AIR/airIncotermsMapping.json';
+import airAdditionalServiceControls from './AIR/serviceControls';
 import fclIncotermsMapping from './FCL/fclIncotermsMapping.json';
 import fclAdditionalServiceControls from './FCL/serviceControls';
 
@@ -31,10 +33,14 @@ export const serviceMappings = ({ service:primaryService, origin_country_id = ''
 			services : fclIncotermsMapping,
 			controls : fclAdditionalServiceControls({ origin_country_id, destination_country_id }),
 		},
+		air_freight: {
+			services : airIncotermsMapping,
+			controls : airAdditionalServiceControls({ origin_country_id, destination_country_id }),
+		},
 	};
 
 	const configureService = (type) => {
-		const { services, controls } = serviceMap[type];
+		const { services = [], controls = [] } = serviceMap[type] || {};
 
 		return services.map((service) => {
 			const serviceUpdated = { ...service };

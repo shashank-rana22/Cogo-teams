@@ -1,19 +1,19 @@
-import { Loader, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
+import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
+import Schedules from '../../../../common/Schedules';
 
-// import CogoAssuredCard from './components/CogoAssuredCard';
 import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
 import RateCard from './components/RateCard';
-// import Schedules from './components/Schedules';
 import styles from './styles.module.css';
-
-const MINIMUM_RATE_CARDS_FOR_PAGINATION = 5;
 
 function ListRates({
 	rates = [],
@@ -26,22 +26,20 @@ function ListRates({
 	setScreen = () => {},
 	setComparisonRates = () => {},
 	setPage = () => {},
-	// selectedWeek = {},
-	// setSelectedWeek = () => {},
+	selectedWeek = {},
+	setSelectedWeek = () => {},
 	paginationProps = {},
+	contract_detail = {},
+	// infoBanner = {},
+	// setInfoBanner = () => {},
+	// isGuideViewed = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
 
-	const { cogoAssuredRates, marketplaceRates } = (rates || []).reduce((acc, rate) => {
-		if (rate.source === 'cogo_assured_rate') {
-			return { ...acc, cogoAssuredRates: [...acc.cogoAssuredRates, rate] };
-		}
-
-		return { ...acc, marketplaceRates: [...acc.marketplaceRates, rate] };
-	}, { cogoAssuredRates: [], marketplaceRates: [] });
-
 	const showComparison = !isEmpty(comparisonRates);
+
+	const { total_count, page_limit, page } = paginationProps;
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -85,7 +83,7 @@ function ListRates({
 				</div>
 			</div>
 
-			{/* <Schedules
+			<Schedules
 				paginationProps={paginationProps}
 				filters={filters}
 				setFilters={setFilters}
@@ -94,7 +92,7 @@ function ListRates({
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
 				loading={loading}
-			/> */}
+			/>
 
 			<AppliedFilters
 				setShowFilterModal={setShowFilterModal}
@@ -103,54 +101,49 @@ function ListRates({
 				setFilters={setFilters}
 			/>
 
-			{/* {loading ? null : (
-				<CogoAssuredCard
-					cogoAssuredRates={marketplaceRates}
-					detail={detail}
-					setScreen={setScreen}
-					setComparisonRates={setComparisonRates}
-					comparisonRates={comparisonRates}
-					refetch={refetch}
-					// infoBanner={infoBanner}
-					// setInfoBanner={setInfoBanner}
-					// isGuideViewed={isGuideViewed}
-				/>
-			)} */}
+			{(rates || []).map((rateItem, index) => (
+				<div key={rateItem.id}>
+					<RateCard
+						key={rateItem.id}
+						loading={loading}
+						rate={rateItem}
+						detail={detail}
+						setComparisonRates={setComparisonRates}
+						comparisonRates={comparisonRates}
+					/>
 
-			{loading ? (
-				<div className={styles.loading}>
-					<span className={styles.loading_text}>Looking for Rates</span>
-					<Loader themeType="primary" className={styles.loader} background="#000" />
+					{index === GLOBAL_CONSTANTS.zeroth_index ? (
+						<ContractAd
+							loading={loading}
+							importerExporterId={detail.importer_exporter_id}
+							contractDetail={contract_detail}
+						/>
+					) : null}
+				</div>
+			))}
+
+			{!loading && page < Math.ceil(total_count / page_limit) ? (
+				<div className={styles.show_more_button}>
+					<div
+						role="presentation"
+						onClick={() => refetch({ show_more: true })}
+						className={styles.button}
+					>
+						Show more results
+						{' '}
+						<IcMArrowRotateDown style={{ marginLeft: '8px' }} />
+					</div>
 				</div>
 			) : null}
 
-			{(marketplaceRates || []).map((rateItem) => (
-				<RateCard
-					key={rateItem.id}
-					loading={loading}
-					rate={rateItem}
-					detail={detail}
-					cogoAssuredRates={cogoAssuredRates}
-					setComparisonRates={setComparisonRates}
-					comparisonRates={comparisonRates}
-						// infoBanner={infoBanner}
-						// setInfoBanner={setInfoBanner}
-						// showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
-				/>
-			))}
+			{loading && (
+				<div className={styles.spinner_container}>
+					<DotLoader size="lg" />
+					<div className={styles.text}>Fetching rates, please wait</div>
+				</div>
+			)}
 
 			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
-
-			{(rates || []).length > MINIMUM_RATE_CARDS_FOR_PAGINATION && !loading ? (
-				<Pagination
-					type="table"
-					currentPage={paginationProps?.page}
-					totalItems={paginationProps?.total_count}
-					pageSize={paginationProps?.page_limit}
-					onPageChange={(val) => setPage(val)}
-					className={styles.pagination}
-				/>
-			) : null}
 		</div>
 	);
 }

@@ -79,7 +79,7 @@
 			}
 		},
 		{
-			"text": "BY CUSTOMER",
+			"text": "By Customer",
 			"key": "performed_by_user",
 			"filter": {
 				"performed_by_type": "user",

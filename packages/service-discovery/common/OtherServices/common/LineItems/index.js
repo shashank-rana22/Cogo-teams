@@ -14,15 +14,6 @@ const getPriceBreakUpColumn = [
 		),
 	},
 	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Currency</div>,
-		id       : 'currency',
-		accessor : ({ currency = '' }) => (
-			<span>
-				{currency}
-			</span>
-		),
-	},
-	{
 		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Original Price</div>,
 		id       : 'price',
 		accessor : ({ price = '', currency }) => (

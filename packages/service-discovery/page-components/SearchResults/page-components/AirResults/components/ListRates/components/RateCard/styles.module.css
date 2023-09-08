@@ -6,4 +6,9 @@
 	border: 1px solid #f9f7f7;
 	border-radius: 8px;
 	box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+
+	&.selected_card {
+		background-color: #f5ffff;
+		border: 1px solid #e6f3f3;
+	}
 }

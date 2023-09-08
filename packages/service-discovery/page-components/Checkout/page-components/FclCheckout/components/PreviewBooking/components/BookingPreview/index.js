@@ -7,13 +7,7 @@ import BreakdownDetails from '../../../../../../commons/BreakdownDetails';
 import BookingDetails from './BookingDetails';
 import styles from './styles.module.css';
 
-function BookingPreview({
-	rate = {},
-	setShowBreakup = () => {},
-	showBreakup = false,
-	setInfoBanner = () => {},
-	infoBanner = {},
-}) {
+function BookingPreview({ rate = {}, setShowBreakup = () => {}, showBreakup = false }) {
 	const [rateDetails, setRateDetails] = useState([]);
 	const [noRatesPresent, setNoRatesPresent] = useState([]);
 
@@ -31,12 +25,7 @@ function BookingPreview({
 		<div className={styles.container}>
 			<div className={styles.heading}>Booking Preview</div>
 
-			<BookingDetails
-				setShowBreakup={setShowBreakup}
-				showBreakup={showBreakup}
-				infoBanner={infoBanner}
-				setInfoBanner={setInfoBanner}
-			/>
+			<BookingDetails setShowBreakup={setShowBreakup} showBreakup={showBreakup} />
 
 			{showBreakup ? (
 				<div className={styles.breakdown_details}>

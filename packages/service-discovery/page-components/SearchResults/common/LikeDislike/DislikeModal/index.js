@@ -17,13 +17,22 @@ function DislikeModal({
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
-	const { onSubmitFeedback, loading } = useDislikeFeedback({ details, rate, onClose, setLikeState, likeState });
+	const { onSubmitFeedback, loading } = useDislikeFeedback({
+		details,
+		rate,
+		onClose,
+		setLikeState,
+		likeState,
+	});
 
 	const formValues = watch();
 
 	const onSubmit = async (values) => {
-		await onSubmitFeedback(values);
-		setShowSuccessModal(true);
+		const isDone = await onSubmitFeedback(values);
+
+		if (isDone) {
+			setShowSuccessModal(true);
+		}
 	};
 
 	const BUTTONS_MAPPING = [
@@ -48,7 +57,6 @@ function DislikeModal({
 			<Modal.Body>
 				<DislikeFeedbackForm
 					details={details}
-					rate={rate}
 					control={control}
 					errors={errors}
 					formValues={formValues}

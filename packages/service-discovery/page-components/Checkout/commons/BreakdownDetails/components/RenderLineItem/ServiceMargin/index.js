@@ -21,7 +21,7 @@ function ServiceMargin({
 }) {
 	const { type, value } = filteredMargins;
 
-	const { discountValue = 0 } = promotion_discounts || {};
+	const { value:discountValue = 0 } = promotion_discounts || {};
 
 	const onChange = (selectedValue) => {
 		onChangeLineItem({ selectedValue, lineItemKey: 'type' });
@@ -79,6 +79,8 @@ function ServiceMargin({
 					item={item}
 					editedDemandMargin={filteredMargins}
 					id_prefix={`${serviceIndex}_${lineItemIndex}`}
+					isautoDiscountApplicable={isautoDiscountApplicable}
+					promotion_discounts={promotion_discounts}
 				/>
 			</div>
 		</>

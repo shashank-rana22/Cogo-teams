@@ -17,22 +17,48 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	width: 90%;
 }
 
 .control_style {
 	margin: 16px 16px 16px 0;
+
+	:global {
+		.ui_radiogroup_container {
+			@media (max-width: 768px) {
+				flex-direction: column;
+			}
+		}
+
+		.ui_radio_label {
+			align-items: flex-start;
+
+			.ui_radio_style {
+				margin-top: 4px;
+				margin-right: 12px;
+			}
+		}
+	}
 }
 
 .primary_buttton {
 	margin-top: 20px;
-	margin-left: 20px;
 }
 
 .label {
+	display: flex;
 	margin-bottom: 4px;
 	font-size: 12px;
 	color: #373737;
+}
+
+.required_mark {
+	margin-left: 4px;
+	color: #e74c3c;
+}
+
+.optional_text {
+	margin-left: 4px;
+	text-transform: uppercase;
 }
 
 .error_message {

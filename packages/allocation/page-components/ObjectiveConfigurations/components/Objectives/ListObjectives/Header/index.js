@@ -1,4 +1,5 @@
 import { Button, Toggle } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import ACTIVE_MODE_KEYS_MAPPING from '../../../../constants/active-mode-keys-mapping';
 
@@ -8,6 +9,8 @@ import styles from './styles.module.css';
 const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		setToggleValue,
 		setActiveMode,
@@ -24,8 +27,8 @@ function Header(props) {
 					className={styles.toggle}
 					size="md"
 					name="active_status"
-					offLabel="Active"
-					onLabel="Inactive"
+					offLabel={t('allocation:header_off_label')}
+					onLabel={t('allocation:header_on_label')}
 					onChange={(event) => (event.target.checked ? setToggleValue('inactive') : setToggleValue('active'))}
 				/>
 
@@ -34,7 +37,7 @@ function Header(props) {
 					themeType="primary"
 					onClick={() => setActiveMode(CREATE)}
 				>
-					+ Create New Objective
+					{t('allocation:create_new_objective_button')}
 				</Button>
 			</div>
 

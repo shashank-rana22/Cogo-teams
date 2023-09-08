@@ -1,13 +1,18 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../common/Form/getFieldController';
-import getAddBadgesControls from '../configurations/get-add-badges-control';
+import getControls from '../configurations/get-add-badges-control';
+
+const FIRST_INDEX = 1;
+
+const SECOND_INDEX = 2;
 
 function useCreateBadgeConfiguration(props) {
-	const { setToggleScreen, listRefetch, badgeItemData = {} } = props;
+	const { setToggleScreen, listRefetch, badgeItemData = {}, t = () => {} } = props;
 
 	const {
 		badge_name,
@@ -17,6 +22,8 @@ function useCreateBadgeConfiguration(props) {
 		gold_details,
 		expertise_configuration_detail_ids:event_ids,
 	} = badgeItemData;
+
+	const getAddBadgesControls = getControls({ t });
 
 	const formProps = useForm({
 		defaultValues: {
@@ -51,7 +58,7 @@ function useCreateBadgeConfiguration(props) {
 		} = formValues || {};
 
 		if ((Number(Bronze_value) < Number(Silver_value) && Number(Silver_value) < Number(Gold_value))
-		&& (Number(Bronze_value) > 0)) {
+		&& (Number(Bronze_value) > GLOBAL_CONSTANTS.zeroth_index)) {
 			try {
 				const payload = {
 					badge_name                         : badge,
@@ -80,25 +87,27 @@ function useCreateBadgeConfiguration(props) {
 
 				if (!isEmpty(badgeItemData)) {
 					payload.id = badgeItemData.id;
-					payload.badge_details[0].badge_detail_id = bronze_details?.id;
-					payload.badge_details[1].badge_detail_id = silver_details?.id;
-					payload.badge_details[2].badge_detail_id = gold_details?.id;
+					payload.badge_details[GLOBAL_CONSTANTS.zeroth_index].badge_detail_id = bronze_details?.id;
+					payload.badge_details[FIRST_INDEX].badge_detail_id = silver_details?.id;
+					payload.badge_details[SECOND_INDEX].badge_detail_id = gold_details?.id;
 				}
 
 				await trigger({ data: payload });
 
 				setToggleScreen('badge_details');
 
-				Toast.success(`Badge ${isEmpty(badgeItemData) ? 'Created !' : 'Updated !'}`);
+				Toast.success(`${t('allocation:badge_label')}${' '}
+				${isEmpty(badgeItemData) ? t('allocation:created_successfully_label')
+		: t('allocation:updated_successfully_label')}`);
 
 				listRefetch();
 			} catch (error) {
-				Toast.error(error?.response?.data?.error || 'Something went wrong');
+				Toast.error(error?.response?.data?.error || t('allocation:something_went_wrong'));
 			}
-		} else if (Number(Bronze_value) <= 0) {
-			Toast.default('Score schould be a positive value');
+		} else if (Number(Bronze_value) <= GLOBAL_CONSTANTS.zeroth_index) {
+			Toast.default(t('allocation:score_should_be_a_positive'));
 		} else {
-			Toast.default('Provide Scores in proper order: Bronze < Silver < Gold');
+			Toast.default(t('allocation:provide_scores_in_proper_order_toast'));
 		}
 	};
 

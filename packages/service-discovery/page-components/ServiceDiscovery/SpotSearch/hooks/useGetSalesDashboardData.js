@@ -49,7 +49,7 @@ const useGetSalesDashboardData = ({
 		method : 'GET',
 	}, { manual: true });
 
-	const { user = {} } = user_profile;
+	const { user = {}, authParams = '', selected_agent_id = '' } = user_profile;
 
 	const { id: user_id = '' } = user;
 
@@ -90,6 +90,10 @@ const useGetSalesDashboardData = ({
 			await trigger({
 				params: {
 					...salesDashboardParams,
+					filters: {
+						...(salesDashboardParams.filters || {}),
+						...(selected_agent_id && { performed_by_id: selected_agent_id }),
+					},
 				},
 			});
 		} catch (err) {
@@ -102,13 +106,14 @@ const useGetSalesDashboardData = ({
 	useEffect(() => {
 		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user_profile?.authorizationparameters,
+	}, [authParams,
 		extraParams,
 		serviceType,
 		importer_exporter_id,
 		origin_location_id,
 		destination_location_id,
 		filters,
+		selected_agent_id,
 	]);
 
 	useEffect(() => {

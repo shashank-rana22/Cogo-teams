@@ -4,6 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useState, useEffect, useMemo } from 'react';
 
+import CLASS_MAPPING from '../../../../../page-components/SearchResults/configurations/air/classMapping';
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
 import useCreateSearch from '../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
@@ -126,9 +127,59 @@ function EditPackages({
 			setValue(key, value);
 		});
 
-		const { cargo_clearance_date = '', commodity = '' } = defaultValues;
+		const { cargo_clearance_date = '', commodity = '', commodity_details = [] } = defaultValues;
+
+		const {
+			commodity_class = {},
+			commodity_type = '',
+			commodity_subtype = '',
+			temp_controlled_range = '',
+			temp_controlled_type = '',
+		} = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+		const commodityPrefill = () => {
+			if (commodity === 'general') {
+				return commodity;
+			}
+			return commodity_type;
+		};
+
+		const commoditySubTypePrefill = () => {
+			if (commodity === 'general') {
+				return commodity_subtype || commodity_type;
+			}
+			if (commodity === 'special_consideration' && commodity_type === 'other_special') {
+				return commodity_subtype;
+			}
+			if (commodity === 'special_consideration' && commodity_type === 'dangerous') {
+				let classDescription = '';
+
+				Object.keys(CLASS_MAPPING).forEach((element) => {
+					const newElement = CLASS_MAPPING[element];
+					if (
+						newElement?.class_id === commodity_class?.class_id
+						&& newElement?.subclass_id === commodity_class?.subclass_id
+						&& newElement?.subclass_codes?.toString()
+							=== commodity_class?.subclass_codes?.toString()
+					) { classDescription = element; }
+				});
+
+				return classDescription;
+			}
+			if (commodity === 'special_consideration' && commodity_type === 'temp_controlled') {
+				const tempControlled = `${temp_controlled_type}-${temp_controlled_range}`;
+				return tempControlled;
+			}
+
+			return null;
+		};
+
+		const commodityData = commodityPrefill();
+		const subCommodityData = commoditySubTypePrefill();
+
 		setValue('cargo_clearance_date', new Date(cargo_clearance_date));
-		setValue('commodity', commodity);
+		setValue('commodity_type', commodityData);
+		setValue('commodity_subtype', subCommodityData);
 	}, [activeTab, defaultValues, reset, setValue]);
 
 	return (

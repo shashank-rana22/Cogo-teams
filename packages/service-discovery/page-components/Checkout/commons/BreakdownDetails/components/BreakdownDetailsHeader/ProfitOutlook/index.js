@@ -72,7 +72,7 @@ function ProfitOutlook({
 
 	return (
 		<div className={styles.container}>
-			<div>Total Profit Earned: </div>
+			<div>Total margin for this shipment: </div>
 
 			<div className={styles.amount}>{toalProfitDisplay}</div>
 

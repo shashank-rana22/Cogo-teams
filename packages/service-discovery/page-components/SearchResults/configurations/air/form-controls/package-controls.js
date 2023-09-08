@@ -53,24 +53,12 @@ function WeightLabel({
 
 const WEIGHT_OPTIONS = {
 	weight_by_total: [
-		{
-			label : 'KG/TOTAL',
-			value : 'kg_total',
-		},
-		{
-			label : 'LB/TOTAL',
-			value : 'lb_total',
-		},
+		{ label: 'KG/TOTAL', value: 'kg_total' },
+		{ label: 'LB/TOTAL', value: 'lb_total' },
 	],
 	weight_by_unit: [
-		{
-			label : 'KG/UNIT',
-			value : 'kg_unit',
-		},
-		{
-			label : 'LB/UNIT',
-			value : 'lb_unit',
-		},
+		{ label: 'KG/UNIT', value: 'kg_unit' },
+		{ label: 'LB/UNIT', value: 'lb_unit' },
 	],
 };
 
@@ -175,7 +163,7 @@ export const getPackageControls = ({
 				},
 				{
 					name        : 'package_weight',
-					label       : 'Weight Per Unit',
+					label       : 'Weight',
 					type        : 'input',
 					placeholder : 'Enter weight',
 					span        : 4,

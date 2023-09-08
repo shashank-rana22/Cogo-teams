@@ -13,14 +13,14 @@ const FLEX_HUNDRED = 100;
 const FLEX_ONE = 1;
 
 function DislikeFeedbackForm({
-	rate = {},
+	details = {},
 	control = () => {},
 	errors = {},
 	formValues = {},
 	setValue = () => {},
 	watch = () => {},
 }) {
-	const controls = getFeedbackConfig(rate?.service_type);
+	const controls = getFeedbackConfig(details?.service_type);
 
 	const showElements = getShowElements(controls, formValues);
 
@@ -93,7 +93,6 @@ function DislikeFeedbackForm({
 								{errorOriginal}
 							</div>
 						)}
-
 					</div>
 				);
 			})}

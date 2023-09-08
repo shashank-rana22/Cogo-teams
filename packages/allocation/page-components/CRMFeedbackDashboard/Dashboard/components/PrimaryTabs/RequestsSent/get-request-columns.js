@@ -1,38 +1,42 @@
 import { Button, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function computeStatus({ statuses = '' }) {
+function computeStatus({ statuses = '', t = () => {} }) {
 	const statusesObj = JSON.parse(statuses).reduce((prev, curr) => {
-		const key = Object.keys(curr)[0];
+		const key = Object.keys(curr)[GLOBAL_CONSTANTS.zeroth_index];
 		const value = curr[key];
 		return { ...prev, [key]: value };
 	}, {});
 
 	const { requested = 0, responded = 0 } = statusesObj;
 
-	if (responded !== 0) {
+	if (responded !== GLOBAL_CONSTANTS.zeroth_index) {
 		const responsesReceived = responded;
 		const totalRequested = requested + responded;
 
 		return {
-			status : `${responsesReceived}/${totalRequested} Responses Received`,
-			color  : 'green',
+			translatedStatus : `${responsesReceived}/${totalRequested} ${t('allocation:responses_received')}`,
+			status           : `${responsesReceived}/${totalRequested} Responses Received`,
+			color            : 'green',
 		};
 	}
 
 	return {
-		status : 'Request Created',
-		color  : 'blue',
+		translatedStatus : t('allocation:request_created'),
+		status           : 'Request Created',
+		color            : 'blue',
 	};
 }
 
 export const getRequestColumns = ({
 	router,
+	t = () => {},
 }) => [
 	{
-		Header   : 'Serial ID',
+		Header   : t('allocation:serial_id'),
 		key      : 'serial_id',
 		id       : 'serial_id',
 		accessor : ({ organization, lead_organization, lead_organization_id }) => (
@@ -47,7 +51,7 @@ export const getRequestColumns = ({
 		),
 	},
 	{
-		Header   : 'ORGANIZATION',
+		Header   : t('allocation:organization_feedback_label'),
 		key      : 'organization',
 		id       : 'organization',
 		accessor : ({ organization, lead_organization, lead_organization_id }) => (
@@ -61,23 +65,23 @@ export const getRequestColumns = ({
 		),
 	},
 	{
-		Header   : 'NO. OF FEEDBACKS RECEIVED',
+		Header   : t('allocation:feedback_count'),
 		key      : 'feedback_count',
 		id       : 'feedback_count',
 		accessor : ({ feedback_count }) => (
 			<section className={styles.table_cell}>
-				{feedback_count || 'No feedback received'}
+				{feedback_count || t('allocation:no_feedback_received')}
 			</section>
 		),
 	},
 	{
-		Header   : 'STATUS',
+		Header   : t('allocation:status'),
 		key      : 'status',
 		id       : 'status',
 		accessor : ({
 			statuses = [], organization = {}, lead_organization = {}, lead_organization_id,
 		}) => {
-			const { status, color } = computeStatus({ statuses });
+			const { status, color, translatedStatus } = computeStatus({ statuses, t });
 
 			const orgObject = lead_organization_id ? lead_organization : organization;
 
@@ -90,11 +94,11 @@ export const getRequestColumns = ({
 			return (
 				<section className={styles.view}>
 					<Pill size="md" color={color}>
-						{status || 'Nil'}
+						{translatedStatus || t('allocation:nill_value')}
 					</Pill>
 
 					<Button size="sm" themeType="secondary" onClick={() => router.push(url)}>
-						View Request
+						{t('allocation:view_request')}
 					</Button>
 				</section>
 			);

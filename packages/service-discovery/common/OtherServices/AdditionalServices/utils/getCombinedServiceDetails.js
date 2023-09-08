@@ -1,4 +1,4 @@
-const getCombinedServiceDetails = (details, rates) => {
+const getCombinedServiceDetails = (details = {}, rates = {}) => {
 	let finalDetails = {};
 
 	Object.entries(details).forEach(([serviceId, serviceObj]) => {

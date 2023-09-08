@@ -60,7 +60,7 @@ const airControls = ({
 			rules : { required: 'This is required' },
 		},
 		{
-			name     : 'commodity',
+			name     : 'commodity_type',
 			label    : 'Commodity',
 			type     : 'select',
 			options  : COMMODITY_OPTIONS,
