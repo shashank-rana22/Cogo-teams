@@ -8,10 +8,10 @@ function SageMapping({ tradePartyDetails = {} }) {
 	const {
 		data = [],
 		loading = false,
-		showDeactivate,
-		tableColumns,
-		setShowDeactivate,
-		refetch,
+		showDeactivate = '',
+		tableColumns = [],
+		setShowDeactivate = () => {},
+		refetch = () => {},
 	} = useSageMapping({ tradePartyDetails: tradePartyDetails.tradePartyDetails });
 	if (!data.length) {
 		return null;

@@ -18,11 +18,10 @@ const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
 
 			if (res?.data) {
 				setData(res?.data);
-				refetch(res?.data);
+				refetch({ data: res?.data });
 			}
 		} catch (err) {
-			// console.log("error occured");
-			/// /console.log(err);
+			setData([]);
 		}
 	}, [trigger, refetch]);
 

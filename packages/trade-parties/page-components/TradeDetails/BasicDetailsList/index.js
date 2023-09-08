@@ -7,19 +7,19 @@ import getTableColumns from './getTableColumns';
 import styles from './styles.module.css';
 
 function BasicDetailsList({ trade_party_id = '', trade_partner_id = '' }) {
-	const handlePrmRedirect = (data) => {
+	const handlePrmRedirect = ({ data = {} }) => {
 		const partner_id = data?.data?.twin_partner?.id;
 		window.open(`/${trade_partner_id}/prm/${partner_id}`, '_blank');
 	};
 
 	const {
-		loading:orgLoading, apiTrigger:orgTrigger = () => {
+		loading:orgLoading, apiTrigger:getOrgData = () => {
 		},
 	} = useGetOrganization({ refetch: handlePrmRedirect, initialCall: false });
 
 	const tableColumns = getTableColumns({
 		trade_partner_id,
-		orgTrigger,
+		getOrgData,
 		orgLoading,
 	});
 

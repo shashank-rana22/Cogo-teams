@@ -12,7 +12,10 @@ import styles from './styles.module.css';
 
 const useSageMapping = ({ tradePartyDetails }) => {
 	const [showDeactivate, setShowDeactivate] = useState(null);
-	const { data, loading, trigger } = useListSageOrganizationIdMappings({ id: tradePartyDetails.serial_id });
+	const {
+		data = [], loading = false,
+		trigger = () => {},
+	} = useListSageOrganizationIdMappings({ id: tradePartyDetails.serial_id });
 	const { isConditionMatches } = useGetPermission();
 
 	const [tableData, setTableData] = useState([]);
@@ -66,10 +69,10 @@ const useSageMapping = ({ tradePartyDetails }) => {
 		},
 		{
 			Header   : ' ',
-			accessor : (item) => (item.status === 'active' && isAllowedToDeleteMapping ? (
+			accessor : (item) => (item?.status === 'active' && isAllowedToDeleteMapping ? (
 				<Button
 					themeType="secondary"
-					onClick={() => setShowDeactivate(item.id)}
+					onClick={() => setShowDeactivate(item?.id)}
 				>
 					Deactivate
 				</Button>

@@ -10,27 +10,25 @@ const CRM_MAPPING = {
 	'Service Provider'  : 'Supply CRM',
 };
 
-const getAccountType = (organization) => {
+const getAccountType = ({ organization = {} }) => {
 	if (organization?.account_type === 'service_provider') { return 'Service Provider'; }
 	if (organization?.tags?.includes('partner')) return 'Channel Partner';
 
 	return 'Importer/Exporter';
 };
-
+const handleRedirectToCRM = ({ organization = {}, trade_partner_id = '', getOrgData = () => { } }) => {
+	if (organization.account_type === 'service_provider') {
+		window.open(`/${trade_partner_id}/details/supply/${organization.id}`, '_blank');
+	} else if (organization.tags.includes('partner')) {
+		getOrgData({ id: organization?.id });
+	} else {
+		window.open(`/${trade_partner_id}/details/demand/${organization.id}`, '_blank');
+	}
+};
 const getTableColumns = ({
 	trade_partner_id = '',
-	orgTrigger = () => {}, orgLoading = false,
+	getOrgData = () => { }, orgLoading = false,
 }) => {
-	const handleRedirectToCRM = (organization) => {
-		if (organization.account_type === 'service_provider') {
-			window.open(`/${trade_partner_id}/details/supply/${organization.id}`, '_blank');
-		} else if (organization.tags.includes('partner')) {
-			orgTrigger({ id: organization?.id });
-		} else {
-			window.open(`/${trade_partner_id}/details/demand/${organization.id}`, '_blank');
-		}
-	};
-
 	const tableColumns = [
 		{
 			Header   : 'ID',
@@ -56,9 +54,7 @@ const getTableColumns = ({
 		},
 		{
 			Header   : 'REGISTRATION NUMBER',
-			accessor : (item) => (item?.organization?.registration_number
-				? item.organization.registration_number
-				: '-'),
+			accessor : (item) => item?.organization?.registration_number,
 		},
 		{
 			Header   : 'KYC STATUS',
@@ -68,7 +64,7 @@ const getTableColumns = ({
 		},
 		{
 			Header   : 'ACCOUNT TYPE',
-			accessor : (item) => (getAccountType(item?.organization)),
+			accessor : (item) => (getAccountType({ organization: item?.organization })),
 		},
 		{
 			Header   : 'TRADE PARTY TYPE',
@@ -80,14 +76,18 @@ const getTableColumns = ({
 			Header   : ' ',
 			accessor : (item) => (
 				<Button
-					onClick={() => handleRedirectToCRM(item.organization)}
+					onClick={() => handleRedirectToCRM({
+						organization: item?.organization,
+						getOrgData,
+						trade_partner_id,
+					})}
 					themeType="secondary"
 					disabled={orgLoading}
 				>
 					<IcMLink style={{ marginRight: 4 }} />
 					Redirect to
 					{' '}
-					{CRM_MAPPING[getAccountType(item?.organization)]}
+					{CRM_MAPPING[getAccountType({ organization: item?.organization })]}
 				</Button>
 			),
 		},
