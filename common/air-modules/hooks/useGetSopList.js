@@ -126,7 +126,8 @@ const useGetSopList = ({
 
 	return {
 		loading,
-		sopData: apiData,
+		sopData : apiData,
+		refetch : apiTrigger,
 	};
 };
 

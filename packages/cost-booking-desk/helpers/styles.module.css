@@ -1,0 +1,11 @@
+.remark_overflow {
+	text-overflow: ellipsis;
+}
+
+.tooltip_text {
+	font-size: 12px;
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}

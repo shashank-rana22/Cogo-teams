@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 
 import useGetOutstandingInvoices from '../../../../hooks/useGetOutstandingInvoices';
+import EmptyStateOutStanding from '../../EmptyStateOutStanding';
 
 import BarChart from './BarChart';
 import Headers from './Header';
@@ -68,7 +69,11 @@ function VisualizationData({
 		}
 
 		if (!loading && isEmpty(data || [])) {
-			return <Loader themeType="secondary" style={{ height: 64, width: 64 }} />;
+			return (
+				<div className={styles.container}>
+					<EmptyStateOutStanding width={400} height={200} />
+				</div>
+			);
 		}
 
 		return !toggleValue ? (

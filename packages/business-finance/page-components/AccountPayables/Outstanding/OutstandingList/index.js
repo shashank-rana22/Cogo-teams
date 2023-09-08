@@ -1,14 +1,17 @@
 import { Button, cl, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
+import { IcMDownload, IcMRadioLoader } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useGetDownloadReport from '../../Invoices/hooks/useGetDownloadReport';
 import { getDetails } from '../constants/details';
 
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TAB_OPTIONS from './TabOptions';
+import UserDetails from './UserDetails';
 
 const DEFAULT_TYPE_LEN = 1;
 
@@ -39,6 +42,8 @@ function OutstandingList({
 }) {
 	const [activeTab, setActiveTab] = useState('invoice_details');
 
+	const [stats, setStats] = useState({});
+
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 
 	const handleActiveTabs = (val) => {
@@ -53,12 +58,13 @@ function OutstandingList({
 
 	const {
 		tradeType: collectionPartyType = [],
-		countryCode,
-		createdAt,
-		organizationName,
-		creditDays,
+		createdAt = '',
+		organizationName = '',
+		creditDays = '',
 		organizationId = '',
 		entityCode = '',
+		agent = [],
+		selfOrganizationId = '',
 	} = item || {};
 
 	const propsData = {
@@ -66,16 +72,24 @@ function OutstandingList({
 			organizationId,
 			entityCode,
 			showName: false,
+			setStats,
 		},
 		settlement: {
 			organizationId,
 			entityCode,
+			setStats,
 		},
 		organization_users: {
-			organizationId,
-			orgData: item,
+			organizationId : selfOrganizationId,
+			orgData        : item,
+			setStats,
 		},
 	};
+
+	const { generateInvoice = () => { }, loading: generating = false } = useGetDownloadReport({
+		globalFilters:
+			{ organizationId },
+	});
 
 	return (
 		<div
@@ -100,20 +114,14 @@ function OutstandingList({
 				</div>
 
 				<div className={styles.serial_id_card}>
-					{countryCode ? (
-						<div className={cl`${styles.custom_tag_end} ${styles.custom_tag}`}>
-							<div className={styles.country}>
-								Country Code:
-							</div>
-							<div className={styles.Value}>{countryCode}</div>
+
+					<div className={cl`${styles.credit_days} ${styles.custom_tag}`}>
+						<div>Credit Days:</div>
+						<div className={styles.value}>
+							{' '}
+							{creditDays || DEFAULT_LEN}
 						</div>
-					) : null}
-					{creditDays ? (
-						<div className={cl`${styles.credit_days} ${styles.custom_tag}`}>
-							<div>Credit Days:</div>
-							<div className={styles.Value}>{creditDays || DEFAULT_LEN}</div>
-						</div>
-					) : null}
+					</div>
 					<div className={cl`${styles.updated_at} ${styles.custom_tag}`}>
 						<div>Last Updated At : </div>
 						<div className={styles.value}>
@@ -166,10 +174,18 @@ function OutstandingList({
 						</div>
 					</div>
 					<div className={styles.ledger_style}>
+						{isEmpty(agent) ? null : (
+							<div className={styles.download_icon}>
+								<UserDetails agent={agent} />
+							</div>
+						)}
+						<div className={styles.download_icon}>
+							{generating ? <IcMRadioLoader /> : <IcMDownload onClick={generateInvoice} />}
+						</div>
 						{!showElement && (
 							<Button
 								size="md"
-								style={{ marginLeft: '20px' }}
+								style={{ marginLeft: '10px' }}
 								onClick={() => setSelectedOrg(item)}
 							>
 								View Details
@@ -177,7 +193,6 @@ function OutstandingList({
 						)}
 					</div>
 				</div>
-
 				<div className={styles.org_list}>
 					<StatsOutstanding item={item} />
 				</div>
@@ -191,7 +206,12 @@ function OutstandingList({
 						>
 							{(TAB_OPTIONS || []).map(
 								({ key, name, component: Component }) => (
-									<TabPanel key={key} name={key} title={name}>
+									<TabPanel
+										key={key}
+										name={key}
+										title={name}
+										badge={stats?.[key] || DEFAULT_LEN}
+									>
 										{activeTab ? (
 											<Component {...propsData[activeTab]} />
 										) : null}

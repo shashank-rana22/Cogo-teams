@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,6 +8,8 @@ interface ItemProps {
 	entityCode:string;
 }
 function Entity({ entityCode }:ItemProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const { icon : Icon } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	return (
@@ -15,7 +18,7 @@ function Entity({ entityCode }:ItemProps) {
 				{entityCode === 'all' ? 'ALL'
 					: (
 						<>
-							Entity
+							{t('entity')}
 							{entityCode}
 						</>
 					)}

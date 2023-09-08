@@ -201,6 +201,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.app_saas_cogo_subscription,
 				...apis.sales_dashboard,
 				...apis.cogopoints,
+				...apis.ssr,
 			],
 			main_apis: [
 				'list_organization_users',
@@ -224,6 +225,19 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.sales,
 			],
 			main_apis   : ['list_organizations'],
+			module_type : 'crm',
+		},
+		governance_manager: {
+			key           : 'governance_manager',
+			title         : 'Governance Manager',
+			href          : '/v2/governance-manager',
+			as            : '/v2/governance-manager',
+			type          : 'link',
+			icon          : IcMCrm,
+			possible_apis : [
+				...apis.governance_manager,
+			],
+			main_apis   : [],
 			module_type : 'crm',
 		},
 		support_crm: {
@@ -298,6 +312,21 @@ const navigationMapping = ({ t = () => {} }) => {
 				'list_margins',
 				'list_checkouts',
 				'list_partners',
+			],
+			module_type: 'dashboards',
+		},
+		service_discovery: {
+			key           : 'service_discovery',
+			title         : t('common:service_discovery'),
+			href          : '/v2/service-discovery',
+			as            : '/v2/service-discovery',
+			type          : 'link',
+			icon          : IcMFinanceDashboard,
+			possible_apis : apis.service_discovery,
+			main_apis     : [
+				'list_spot_searches',
+				'list_checkouts',
+				'list_organizations',
 			],
 			module_type: 'dashboards',
 		},
@@ -1600,25 +1629,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon        : IcCCogoassured,
 			options     : [
 				{
-					key           : 'cogo_assured-fcl_freight',
-					title         : t('common:fcl_freight'),
-					href          : '/cogo-assured/fcl_freight',
-					as            : '/cogo-assured/fcl_freight',
-					type          : 'link',
-					possible_apis : apis.cogo_assured,
-					main_apis     : [],
-				},
-				{
-					key           : 'cogo_assured-fcl_freight_local',
-					title         : t('common:fcl_freight_local'),
-					href          : '/cogo-assured/fcl_freight_local',
-					as            : '/cogo-assured/fcl_freight_local',
-					type          : 'link',
-					possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-					main_apis: [],
-				},
-				{
 					key           : 'cogo_assured-haulage_freight',
 					title         : t('common:haulage_freight'),
 					href          : '/cogo-assured/haulage_freight',
@@ -1771,8 +1781,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
 					possible_apis : apis.convenience_rate,
-
-					module_type: 'crm',
+					module_type   : 'crm',
 				},
 				{
 					key           : 'transaction_setting-payment_modes_and_methods',
@@ -1816,8 +1825,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:commodity_cluster'),
-					href  : '/supply-tools/commodity-clusters',
-					as    : '/supply-tools/commodity-clusters',
+					href  : '/v2/supply-tools/commodity-clusters',
+					as    : '/v2/supply-tools/commodity-clusters',
 				},
 				{
 					title : t('common:fcl_freight_rate_extension'),
@@ -1826,8 +1835,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:detention_demurrage'),
-					href  : '/supply-tools/detention-demurrage',
-					as    : '/supply-tools/detention-demurrage',
+					href  : '/v2/supply-tools/detention-demurrage',
+					as    : '/v2/supply-tools/detention-demurrage',
 				},
 			],
 			module_type: 'dashboards',
@@ -2105,8 +2114,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		manage_rfq: {
 			key           : 'manage_rfq',
 			title         : t('common:manage_rfq'),
-			href          : '/manage-rfq',
-			as            : '/manage-rfq',
+			href          : '/manage-rfq?activeTab=draft&page=1',
+			as            : '/manage-rfq?activeTab=draft&page=1',
 			type          : 'link',
 			main_apis     : ['list_rfqs'],
 			possible_apis : apis.manage_rfq,
@@ -2483,13 +2492,6 @@ const navigationMapping = ({ t = () => {} }) => {
 					possible_apis : apis.pricing_trends,
 				},
 				{
-					key           : 'chakravyuh-feedback',
-					title         : t('common:feedback_dashboard'),
-					href          : '/v2/chakravyuh/feedback-dashboard',
-					as            : '/v2/chakravyuh/feedback-dashboard',
-					possible_apis : apis.pricing_trends,
-				},
-				{
 					key           : 'chakravyuh-accuracy',
 					title         : t('common:feedback_accuracy'),
 					href          : '/v2/chakravyuh/accuracy-dashboard',
@@ -2587,14 +2589,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		forecast: {
 			key         : 'forecast',
-			title       : 'Forecast',
+			title       : t('common:forecast'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcMUpwardGraph,
 			options     : [
 				{
-					key           : 'forecast-supply_allocation',
-					title         : 'Supply Allocation',
+					key         	 : 'forecast-supply_allocation',
+					title         : t('common:supply_allocation'),
 					href          : '/v2/supply-allocation',
 					as            : '/v2/supply-allocation',
 					type          : 'link',
@@ -2603,8 +2605,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 				{
-					key           : 'forecast-demand_forecast',
-					title         : 'Demand Forecast',
+					key   : 'forecast-demand_forecast',
+					title : t('common:demand_forecast'),
+
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',
@@ -2613,6 +2616,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 			],
+		},
+		attendance_leave_management: {
+			key           : 'attendance_leave_management',
+			title         : 'Attendance and Leave Management',
+			icon          : IcMDashboard,
+			href          : '/v2/attendance-leave-management',
+			as            : '/v2/attendance-leave-management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.attendance_leave_management,
 		},
 	};
 

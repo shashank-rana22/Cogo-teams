@@ -1,0 +1,31 @@
+.title {
+	margin-top: 12px;
+	font-weight: 500;
+}
+
+.service_type {
+	svg {
+		fill: #ee3425;
+	}
+
+	:global {
+		.ui_pill_container {
+			padding: 6px;
+			background-color: #fff;
+			border: 1px solid #ee3425;
+			border-radius: 36px;
+		}
+	}
+
+	&.add {
+		:global {
+			.ui_pill_container {
+				border: 1px solid #849e4c;
+			}
+		}
+
+		svg {
+			fill: #849e4c;
+		}
+	}
+}

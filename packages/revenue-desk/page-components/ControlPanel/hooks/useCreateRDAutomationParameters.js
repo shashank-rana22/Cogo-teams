@@ -21,8 +21,6 @@ const useCreateRDAutomationParameters = ({ refetch }) => {
 				...rest
 			} = weightages;
 
-			console.log(deskValue, 'deskValue');
-
 			const res = await trigger({
 				data: {
 					service_type : deskValue?.service_type || shipmentParameters?.service_type || undefined,

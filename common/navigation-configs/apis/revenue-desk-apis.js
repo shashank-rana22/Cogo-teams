@@ -316,6 +316,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},
+	{
+		api          : 'get_rd_wallet',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
 ];
 
 export default apis;

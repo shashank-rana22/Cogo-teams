@@ -1,8 +1,12 @@
 import { format, startCase } from '@cogoport/utils';
 
+import useGetRDWallet from '../../../../../hooks/useGetRDWallet';
+
 import styles from './styles.module.css';
 
-function Footer({ data }) {
+function Footer({ data = {} }) {
+	const { data: walletAmount } = useGetRDWallet({ data });
+	const { wallet_amount = '' } = walletAmount || {};
 	const infoArray = [
 		{
 			key   : 'Cargo Readiness Date',
@@ -45,7 +49,18 @@ function Footer({ data }) {
 					{item.value}
 				</div>
 			) : null))}
+
+			<div className={styles.wallet_container}>
+				<div className={styles.wallet_text}>
+					Wallet Balance -
+					{' '}
+					<span className={styles.price_text} />
+					{wallet_amount}
+				</div>
+			</div>
+
 		</div>
+
 	);
 }
 export default Footer;

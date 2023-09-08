@@ -11,13 +11,17 @@ const useCreateRevenueDeskWallet = ({ setCreateWallet = () => {}, refetch = () =
 	}, { manual: true });
 
 	const createRevenueDeskWallet = async (data) => {
+		const {
+			trade_type, origin_location_id,
+			destination_location_id, ...rest
+		} = data || undefined;
+
 		try {
-			const { trade_type = '', origin_location_id = '', destination_location_id = '', ...rest } = data;
 			const res =	await trigger({
 				data: {
 					shipment_parameters: { trade_type, origin_location_id, destination_location_id },
 					...rest,
-				},
+				} || undefined,
 			});
 			if (!res.hasError) {
 				Toast.success(SUCCESS_MESSAGE);
