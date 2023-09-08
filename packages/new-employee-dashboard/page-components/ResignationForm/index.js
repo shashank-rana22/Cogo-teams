@@ -1,9 +1,10 @@
 import React from 'react';
 
+import ResignationFormLanding from './ResignationFormLanding';
 import ResignationProgress from './ResignationProgress';
 
 const FORM_COMPONENT_MAPPING = {
-	resignation_form     : null,
+	resignation_form     : ResignationFormLanding,
 	resignation_progress : ResignationProgress,
 };
 
