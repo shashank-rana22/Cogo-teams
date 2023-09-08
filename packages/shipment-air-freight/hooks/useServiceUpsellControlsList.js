@@ -2,7 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const geo = getGeoConstants();
 
-const useGetControls = ({ truckTypeToggle, warehouseLocationFilter = '' }) => {
+const useGetControls = ({ truckTypeToggle = false, warehouseLocationFilter = '' }) => {
 	const serviceWiseControls = {
 		ftl_freight: [
 			{
