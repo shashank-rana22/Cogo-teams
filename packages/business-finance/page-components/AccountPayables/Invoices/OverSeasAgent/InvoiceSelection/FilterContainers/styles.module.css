@@ -15,11 +15,6 @@
 	align-items: center;
 	justify-content: flex-end;
 	margin-top: 12px;
-}
-
-.search {
-	display: flex;
-	align-items: center;
 
 	:global {
 		width: 336px;
@@ -33,6 +28,11 @@
 		font-size: 11px;
 		color: #cacaca;
 	}
+}
+
+.search {
+	display: flex;
+	align-items: center;
 }
 
 .icon {

@@ -5,6 +5,11 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
+const DOC_MAPPING = {
+	'Purchase Invoices'  : 'billPdfUrl',
+	'Shipment Documents' : 'shipmentPdfUrl',
+};
+
 const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
 
@@ -20,13 +25,7 @@ const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 	);
 
 	const deleteTaggedDocuments = async (itemData = {}) => {
-		let key;
-
-		if (itemData.docName === 'Purchase Invoices') {
-			key = 'billPdfUrl';
-		} else if (itemData.docName === 'Shipment Documents') {
-			key = 'shipmentPdfUrl';
-		}
+		const key = DOC_MAPPING[itemData?.docName];
 
 		try {
 			await trigger({

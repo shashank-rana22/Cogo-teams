@@ -18,9 +18,11 @@ const useAddInvoiceToSelectedApi = ({ refetch = () => {}, apiData = {} }) => {
 
 	const [{ loading }, trigger] = useRequestBf(
 		{
-			url: '/purchase/payrun', method: 'post', authKey: 'post_purchase_payrun',
+			url     : '/purchase/payrun',
+			method  : 'post',
+			authKey : 'post_purchase_payrun',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const submitSelectedInvoices = async () => {

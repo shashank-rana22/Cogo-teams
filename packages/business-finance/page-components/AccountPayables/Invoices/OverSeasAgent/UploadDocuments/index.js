@@ -41,7 +41,7 @@ function UploadDocuments({ setActive = () => {} }) {
 
 	const otherDocumentsUrlList = otherDocumentsUrl?.split(',');
 
-	const handlefileUpload = async (value = '', key = '') => {
+	const handlefileUpload = async ({ value = '', key = '' }) => {
 		if (key === 'singleFileUpload') {
 			if (value == null && taxDeclarationFormUrl !== '') {
 				deleteUploadTaggedDocuments('taxDeclarationFormUrl');
@@ -95,7 +95,7 @@ function UploadDocuments({ setActive = () => {} }) {
 
 						<FileUploader
 							value={fileUploader.singleFileUpload}
-							onChange={(value) => handlefileUpload(value, 'singleFileUpload')}
+							onChange={(value) => handlefileUpload({ value, key: 'singleFileUpload' })}
 							showProgress
 							draggable
 						/>
@@ -109,7 +109,7 @@ function UploadDocuments({ setActive = () => {} }) {
 
 						<FileUploader
 							value={fileUploader.fileBank}
-							onChange={(value) => handlefileUpload(value, 'fileBank')}
+							onChange={(value) => handlefileUpload({ value, key: 'fileBank' })}
 							showProgress
 							draggable
 						/>
@@ -125,7 +125,7 @@ function UploadDocuments({ setActive = () => {} }) {
 						<FileUploader
 							multiple
 							value={fileUploader.multiFileUpload}
-							onChange={(value) => handlefileUpload(value, 'multiFileUpload')}
+							onChange={(value) => handlefileUpload({ value, key: 'multiFileUpload' })}
 							showProgress
 							draggable
 						/>

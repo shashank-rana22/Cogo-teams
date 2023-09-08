@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { IcMUndo, IcMEdit, IcMEyeopen } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import BankSelect from '..';
@@ -44,7 +45,7 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 				setEditedValue={setEditedValue}
 			/>
 		);
-	} else if (bankDetail) {
+	} else if (!isEmpty(bankDetail)) {
 		const getBankName = bankName || bank_name;
 		const getAccountNumber = accountNo || bank_account_number;
 		const getIFSCCode = ifscCode || ifsc_number;

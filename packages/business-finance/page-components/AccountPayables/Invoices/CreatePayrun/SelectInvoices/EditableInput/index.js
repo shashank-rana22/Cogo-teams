@@ -101,7 +101,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 
 	const handleUndo = () => {
 		setEditedValue({ itemData, value: itemData[fallBackKey], key, checked: false });
-		setValue(itemData[fallBackKey]);
+		setValue(itemData?.[fallBackKey]);
 		setEdit(false);
 	};
 

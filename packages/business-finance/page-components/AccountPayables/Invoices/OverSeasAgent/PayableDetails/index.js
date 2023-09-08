@@ -1,4 +1,4 @@
-import { Button, Pill, Popover } from '@cogoport/components';
+import { Button, Pill, Popover, Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import Contents from './Contents';
 import styles from './styles.module.css';
 
 function PayabledDetails({ organizationId = '', showPayableAmount = '', currency = 'INR' }) {
-	const { data } = useOverSeasHeader({ organizationId });
+	const { data = {}, loading = false } = useOverSeasHeader({ organizationId });
 
 	const {
 		kycStatus = '',
@@ -22,6 +22,12 @@ function PayabledDetails({ organizationId = '', showPayableAmount = '', currency
 		cogoportAgreementWithSupplier = '',
 	} = data || {};
 	const [isOpen, setIsOpen] = useState(false);
+
+	if (loading) {
+		return (
+			<Placeholder height="100px" />
+		);
+	}
 
 	return (
 		<div className={styles.container}>

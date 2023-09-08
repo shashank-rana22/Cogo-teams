@@ -11,10 +11,7 @@ function GetData({
 	deleteTaggedDocuments = () => {},
 	setSelectBankShow = () => {},
 }) {
-	if (
-		documents?.billPdfUrl === undefined
-		&& documents?.shipmentPdfUrl === undefined
-	) {
+	if ((['billPdfUrl', 'shipmentPdfUrl'].includes(documents))) {
 		return (
 			<div className={styles.merge_doc_msg}>
 				PLEASE MERGE INVOICES

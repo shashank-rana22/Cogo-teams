@@ -12,7 +12,7 @@ const useGetDocument = () => {
 		{ manual: true },
 	);
 
-	const onGetDocument = async (id = '', services = '') => {
+	const onGetDocument = async ({ id = '', services = '' }) => {
 		try {
 			const payload = {
 				id,

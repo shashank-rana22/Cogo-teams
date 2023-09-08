@@ -14,39 +14,29 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 	const { list = [] } = bLData || {};
 
 	const memoizedFunction = useMemo(() => {
-		const TAGGEG_DATA = [];
+		const TAGGED_DATA = [];
 		const REJECTED_DATA = [];
 		const PENDING_DATA = [];
 		const ID_DATA = [];
 
-		Object.values(showCheckInvoices).forEach((item) => {
-			if (item === 'Tagged') {
-				TAGGEG_DATA.push(item);
-			} else if (item === 'Reject') {
-				REJECTED_DATA.push(item);
-			}
-		});
-
 		(list || []).forEach((item) => {
-			if (showCheckInvoices && item?.payrunBillStatus === 'INITIATED') {
-				ID_DATA.push(item?.id);
-				const Data = Object.keys(showCheckInvoices);
-				const difference = ID_DATA.filter((x) => !Data.includes(x));
-				PENDING_DATA.push(difference);
-			} else if (item?.payrunBillStatus === 'APPROVED') {
-				TAGGEG_DATA.push('Tagged');
-			} else if (item?.payrunBillStatus === 'REJECTED') {
+			const status = showCheckInvoices?.[item?.id];
+
+			if (status === 'Tagged') {
+				TAGGED_DATA.push('Tagged');
+			} else if (status === 'Reject') {
 				REJECTED_DATA.push('Reject');
-			} else if (
-				item?.payrunBillStatus !== 'APPROVED'
-        || item?.payrunBillStatus !== 'REJECTED'
-			) {
+			} else {
 				PENDING_DATA.push('Pending');
+			}
+
+			if (item?.payrunBillStatus === 'INITIATED') {
+				ID_DATA.push(item?.id);
 			}
 		});
 
 		return {
-			TAGGEG_DATA,
+			TAGGED_DATA,
 			REJECTED_DATA,
 			PENDING_DATA,
 			ID_DATA,
@@ -54,7 +44,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 	}, [list, showCheckInvoices]);
 
 	const {
-		TAGGEG_DATA = [],
+		TAGGED_DATA = [],
 		REJECTED_DATA = [],
 		PENDING_DATA = [],
 	} = memoizedFunction;
@@ -79,7 +69,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 					Tagged
 					{' '}
 					<span className={styles.tagged}>
-						{TAGGEG_DATA.length || DEFAULT_MIN_VALUE}
+						{TAGGED_DATA.length || DEFAULT_MIN_VALUE}
 					</span>
 				</div>
 
@@ -114,7 +104,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 						setActive('merge_documents');
 					}}
 					disabled={
-							!(list.length === TAGGEG_DATA.length + REJECTED_DATA.length)
+							!(list?.length === TAGGED_DATA.length + REJECTED_DATA.length)
 						}
 				>
 					Save & Proceed

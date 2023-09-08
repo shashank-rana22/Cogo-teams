@@ -29,7 +29,7 @@ const useDeleteExcludePayrun = ({ refetch = () => {}, apiData = {}, type = '' })
 
 	const onExclude = async () => {
 		const { list: dataList = [] } = apiData || {};
-		const orgids = (dataList || [])?.filter((item) => (item?.checked)).map((item) => (item?.organizationId));
+		const orgids = (dataList || [])?.filter((item) => (item?.checked))?.map((item) => (item?.organizationId));
 		try {
 			const payload = {
 				payrunId        : payrun,

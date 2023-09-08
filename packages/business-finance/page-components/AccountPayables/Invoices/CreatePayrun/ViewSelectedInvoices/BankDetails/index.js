@@ -21,7 +21,7 @@ function BankDetails({ itemData = {} }) {
 		ifsc_number = '',
 		account_number = '',
 		ifscCode = '',
-	} = bankDetail;
+	} = bankDetail || {};
 
 	return (
 		<div className={styles.font}>

@@ -39,7 +39,10 @@ function Footer({
 
 	const checkedList = (list || []).filter((item) => item.checked);
 	const hasError = !isEmpty((checkedList || []).filter((item) => item.hasError));
-	const totalInvoiceAmount = checkedList.reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
+	const totalInvoiceAmount = checkedList.reduce(
+		(acc, obj) => +acc + +obj.payableAmount || INITIAL_VALUE,
+		INITIAL_VALUE,
+	);
 	const buttonDisabled = isEmpty(checkedList) || loading || hasError;
 
 	const handleView = () => {

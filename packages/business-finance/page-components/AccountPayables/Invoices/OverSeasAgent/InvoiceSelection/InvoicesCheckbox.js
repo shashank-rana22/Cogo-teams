@@ -7,7 +7,7 @@ const ELEMENT_NOT_FOUND = -1;
 export const onChangeTableBodyCheckbox = ({ itemData = {}, setApiData = () => {} }) => {
 	const { id = '' } = itemData || {};
 	setApiData((prevData) => {
-		const index = (prevData.list || []).findIndex((item) => item.id === id);
+		const index = (prevData.list || [])?.findIndex((item) => item.id === id);
 		if (index !== ELEMENT_NOT_FOUND) {
 			const newList = [...prevData.list];
 			const isError = checkboxSelectionChecks({ list: newList[index] });
@@ -21,7 +21,7 @@ export const onChangeTableBodyCheckbox = ({ itemData = {}, setApiData = () => {}
 const onChangeTableHeaderCheckbox = ({ event, setApiData }) => {
 	setApiData((prevData) => {
 		const { list = [] } = prevData || {};
-		const newList = list.map((item) => {
+		const newList = (list || [])?.map((item) => {
 			const isError = checkboxSelectionChecks({ item });
 			return ({
 				...item,
@@ -41,8 +41,8 @@ export function GetTableHeaderCheckbox({
 }) {
 	const { list = [] } = apiData || {};
 	const { list: dataList = [] } = data || {};
-	const isCheckedLength = list.filter((value) => value?.checked).length;
-	const invoicesLength = dataList?.filter((val) => (val.invoiceType !== 'CREDIT NOTE'))?.length;
+	const isCheckedLength = (list || [])?.filter((value) => value?.checked).length;
+	const invoicesLength = (dataList || [])?.filter((val) => (val?.invoiceType !== 'CREDIT NOTE'))?.length;
 	const isAllRowsChecked = isCheckedLength === invoicesLength;
 	return (
 		<Checkbox

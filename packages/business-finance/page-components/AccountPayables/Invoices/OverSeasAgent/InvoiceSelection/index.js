@@ -12,6 +12,7 @@ import { GetTableHeaderCheckbox, onChangeTableBodyCheckbox } from './InvoicesChe
 import styles from './styles.module.css';
 
 const MORE_THAN_ZERO = 0;
+const ZERO_AMOUNT = 0;
 const FIRST_PAGE = 1;
 
 function InvoiceSelection({
@@ -55,15 +56,18 @@ function InvoiceSelection({
 	const isChecked = (list || [])?.filter(
 		(item) => item?.checked && item?.invoiceType === 'PURCHASE',
 	);
-	const isCreditChecked = list.filter(
+	const isCreditChecked = (list || [])?.filter(
 		(item) => item?.checked && item?.invoiceType === 'CREDIT NOTE',
 	);
-	const tdsError = isChecked.filter((item) => item?.tdsError);
-	const paidError = isChecked.filter((item) => item?.paidError);
+	const tdsError = (isChecked || [])?.filter((item) => item?.tdsError);
+	const paidError = (isChecked || [])?.filter((item) => item?.paidError);
 
-	const totalCreditInvoiceAmount = isCreditChecked.reduce((acc, obj) => +acc + +obj.invoiceAmount, MORE_THAN_ZERO);
+	const totalCreditInvoiceAmount = isCreditChecked.reduce(
+		(acc, obj) => +acc + +obj.invoiceAmount || ZERO_AMOUNT,
+		MORE_THAN_ZERO,
+	);
 
-	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.invoiceAmount, MORE_THAN_ZERO);
+	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.invoiceAmount || ZERO_AMOUNT, MORE_THAN_ZERO);
 
 	const calc = overAllValue - +totalInvoiceAmount;
 	const totalCalc = calc + +totalCreditInvoiceAmount;

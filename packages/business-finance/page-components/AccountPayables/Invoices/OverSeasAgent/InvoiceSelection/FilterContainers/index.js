@@ -35,37 +35,36 @@ function FilterContainers({
 			) : null}
 
 			<div className={styles.search_filter}>
-				<div className={styles.search}>
-					<Input
-						name="search"
-						size="sm"
-						value={filters?.search || ''}
-						onChange={(val) => setFilters((prevFilters) => ({
-							...prevFilters,
-							search    : val,
-							pageIndex : 1,
-						}))}
-						placeholder="Search By Name/Invoice Number/Sid"
-						suffix={(
-							<div className={styles.icon}>
-								<IcMSearchdark height={15} width={15} />
-							</div>
-						)}
-					/>
+				<Input
+					name="search"
+					size="sm"
+					className={styles.search}
+					value={filters?.search || ''}
+					onChange={(val) => setFilters((prevFilters) => ({
+						...prevFilters,
+						search    : val,
+						pageIndex : 1,
+					}))}
+					placeholder="Search By Name/Invoice Number/Sid"
+					suffix={(
+						<div className={styles.icon}>
+							<IcMSearchdark height={15} width={15} />
+						</div>
+					)}
+				/>
 
-					<Button
-						themeType="accent"
-						onClick={() => {
-							goBack();
-							onClear();
-							setShowHeader(true);
-						}}
-						style={{ width: '100px', margin: '0px 10px', height: '40px' }}
-						disabled={active !== 'invoice_selection' || showHeader}
-					>
-						Go Back
-					</Button>
-				</div>
+				<Button
+					themeType="accent"
+					onClick={() => {
+						goBack();
+						onClear();
+						setShowHeader(true);
+					}}
+					style={{ width: '100px', margin: '0px 10px', height: '40px' }}
+					disabled={active !== 'invoice_selection' || showHeader}
+				>
+					Go Back
+				</Button>
 			</div>
 		</div>
 	);

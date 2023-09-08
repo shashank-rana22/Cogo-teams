@@ -5,11 +5,14 @@ const MIN_AMOUNT = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
-export const onChangeTableHeaderCheckbox = ({ event, setApiData }) => {
+export const onChangeTableHeaderCheckbox = ({ event = {}, setApiData = () => {} }) => {
 	setApiData((prevData) => {
 		const { list = [] } = prevData || {};
-		const newList = list.map((item) => {
-			const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = item;
+		const newList = (list || [])?.map((item) => {
+			const {
+				payableValue = 0,
+				invoiceAmount = 0, tdsDeducted = 0, payableAmount = 0, tdsAmount = 0,
+			} = item || {};
 			const maxValueCrossed = +payableAmount > +payableValue;
 			const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
@@ -35,8 +38,8 @@ export function GetTableHeaderCheckbox({
 }) {
 	const { list = [] } = apiData || {};
 	const { list: dataList = [] } = data || {};
-	const isCheckedLength = list.filter((value) => value?.checked).length;
-	const invoicesLength = dataList?.filter((val) => (val.invoiceType !== 'CREDIT NOTE'))?.length;
+	const isCheckedLength = (list || [])?.filter((value) => value?.checked)?.length;
+	const invoicesLength = (dataList || [])?.filter((val) => (val?.invoiceType !== 'CREDIT NOTE'))?.length;
 	const isAllRowsChecked = isCheckedLength === invoicesLength;
 	return (
 		<Checkbox
@@ -49,11 +52,11 @@ export function GetTableHeaderCheckbox({
 export const onChangeTableBodyCheckbox = ({ itemData = {}, setApiData = () => {} }) => {
 	const { id = '' } = itemData || {};
 	setApiData((prevData) => {
-		const index = (prevData.list || []).findIndex((item) => item.id === id);
+		const index = ((prevData || [])?.list || []).findIndex((item) => item?.id === id);
 
 		if (index !== ELEMENT_NOT_FOUND) {
 			const newList = [...prevData.list];
-			const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = newList[index];
+			const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = newList[index] || [];
 			const maxValueCrossed = +payableAmount > +payableValue;
 			const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;

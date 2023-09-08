@@ -33,13 +33,13 @@ export const onChangeTableBodyCheckbox = ({ itemData = {}, setApiData = () => {}
 	const { organizationId = '' } = itemData || {};
 	setApiData((prevData) => {
 		const index = ((prevData || [])?.list || []).findIndex(
-			(item) => item.organizationId === organizationId,
+			(item) => item?.organizationId === organizationId,
 		);
 		if (index !== ELEMENT_NOT_FOUND) {
 			const newList = [...prevData.list];
 			newList[index] = {
 				...newList[index],
-				checked: !newList[index].checked,
+				checked: !newList[index]?.checked,
 			};
 			return {
 				...prevData,

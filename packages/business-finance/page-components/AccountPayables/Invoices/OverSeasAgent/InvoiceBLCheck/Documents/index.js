@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import FilePreview from '../../../../commons/FilePreview';
 import { OPTIONS, OPTION_AIR } from '../../../Constants';
 
+import { ShowDocument } from './ShowDocument';
 import styles from './styles.module.css';
 
 function Documents({
@@ -24,63 +25,8 @@ function Documents({
 	const taggedDocument = DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
 
 	const checkedCondition = loadingList
-	|| payrunBillStatus === 'APPROVED'
-	|| payrunBillStatus === 'REJECTED'
-	|| showCheckInvoices[id] === 'Reject'
-	|| showCheckInvoices[id] === 'Tagged';
-
-	function ShowDocument(radioValue, DocData) {
-		let docLink = '';
-
-		DocData?.forEach((itemData) => {
-			switch (radioValue) {
-				case 'mawb':
-					if (itemData?.document_type === 'airway_bill') {
-						docLink = itemData?.document_url;
-					}
-					break;
-				case 'hawb':
-					if (itemData?.document_type === 'house_airway_bill') {
-						docLink = itemData?.document_url;
-					}
-					break;
-				case 'do':
-					if (itemData?.document_type === 'delivery_order') {
-						docLink = itemData?.document_url;
-					}
-					break;
-				case 'mbl':
-					if (itemData?.document_type === 'bill_of_lading') {
-						docLink = itemData?.document_url;
-					}
-					break;
-				case 'hbl':
-					if (itemData?.document_type === 'house_bill_of_lading') {
-						docLink = itemData?.document_url;
-					}
-					break;
-				default:
-					break;
-			}
-		});
-
-		if (docLink) {
-			return (
-				<div className={styles.upload_invoice}>
-					<object
-						data={docLink}
-						type="application/pdf"
-						height="100%"
-						width="100%"
-						aria-label="Doc Preview"
-						style={{ padding: '12px 16px 16px 16px' }}
-					/>
-				</div>
-			);
-		}
-
-		return <div className={styles.empty_data}>BILL NOT FOUND</div>;
-	}
+	|| ['APPROVED', 'REJECTED'].includes(payrunBillStatus)
+	|| ['Reject', 'Tagged'].includes(showCheckInvoices[id]);
 
 	return (
 		<div className={styles.container}>
@@ -108,7 +54,7 @@ function Documents({
 										onChange={(item) => setRadioSet(item)}
 									/>
 								</div>
-								{ShowDocument(radioSet, DocumentData)}
+								<ShowDocument radioValue={radioSet} DocData={DocumentData} />
 							</>
 							) : (
 								<>
@@ -119,7 +65,7 @@ function Documents({
 											onChange={(item) => setRadioAir(item)}
 										/>
 									</div>
-									{ShowDocument(radioAir, DocumentData)}
+									<ShowDocument radioValue={radioAir} DocData={DocumentData} />
 								</>
 							)}
 					</div>

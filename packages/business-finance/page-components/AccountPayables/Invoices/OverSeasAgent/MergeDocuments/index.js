@@ -80,7 +80,7 @@ function MergeDocuments({ setActive = () => {} }) {
 
 		renderTaggedDocument: (itemData) => {
 			const { taggedDocuments = '' } = itemData || {};
-			const value = taggedDocuments?.split('/')[TAGGED_DOC_CONDITION].replaceAll('%20', '');
+			const value = taggedDocuments?.split('/')[TAGGED_DOC_CONDITION]?.replaceAll('%20', '');
 			return (
 				<Button
 					themeType="linkUi"

@@ -4,6 +4,11 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
+const STATUS_LABEL = {
+	APPROVED : 'Tagged',
+	REJECTED : 'Reject',
+};
+
 const useApprovalRejectionDoc = ({ setShowCheckInvoices = () => {}, setIsOpen = () => {} }) => {
 	const {
 		user_profile = '',
@@ -37,6 +42,7 @@ const useApprovalRejectionDoc = ({ setShowCheckInvoices = () => {}, setIsOpen = 
 			const response = await trigger({
 				data: payload,
 			});
+
 			if (checkStatus === 'APPROVED' && response?.data?.id) {
 				setShowCheckInvoices((p) => ({
 					...p,
@@ -48,7 +54,20 @@ const useApprovalRejectionDoc = ({ setShowCheckInvoices = () => {}, setIsOpen = 
 					[response?.data?.id]: 'Reject',
 				}));
 			}
-			if (response?.hasError) return;
+
+			if (['APPROVED', 'REJECTED'].includes(checkStatus) && response?.data?.id) {
+				const label = STATUS_LABEL[checkStatus];
+
+				setShowCheckInvoices((prevState) => ({
+					...prevState,
+					[response.data.id]: label,
+				}));
+			}
+
+			if (response?.hasError) {
+				Toast.error(response?.message || 'Something went wrong');
+				return;
+			}
 			Toast.success(`${checkStatus} successfully`);
 			handleDropdown(id);
 			setIsOpen(null);

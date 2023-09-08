@@ -39,7 +39,7 @@ function Accordian({
 	const handleDropdown = (key = invoiceNumber) => {
 		setIsOpen(key);
 		if (billId) {
-			onGetDocument(billId, serviceType);
+			onGetDocument({ id: billId, services: serviceType });
 		}
 	};
 

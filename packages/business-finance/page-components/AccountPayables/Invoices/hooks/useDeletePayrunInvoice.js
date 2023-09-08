@@ -12,10 +12,10 @@ const useDeletePayrunInvoice = ({ generateInvoice = () => {} }) => {
 		performedByType = '',
 		performedByName = '',
 	} = useSelector(({ general, profile }) => ({
-		query           : general.query,
-		performedBy     : profile.user.id,
-		performedByType : profile.session_type,
-		performedByName : profile.user.name,
+		query           : general?.query,
+		performedBy     : profile?.user?.id,
+		performedByType : profile?.session_type,
+		performedByName : profile?.user.name,
 	}));
 
 	const delete_payrun_invoice = useRequestBf(

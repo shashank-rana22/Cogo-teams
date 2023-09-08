@@ -41,6 +41,7 @@ const updateApiData = ({
 	}
 	return newValue;
 };
+
 const calculateErrorStatus = ({
 	key = '', value = 0, payableValue = 0, invoiceAmount = 0,
 	tdsDeducted = 0, payableAmount = 0, tdsAmount = 0,
@@ -101,7 +102,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 				tdsDeducted = 0,
 				payableAmount = 0,
 				tdsAmount = 0,
-			} = prevApiData.list[index] || {};
+			} = prevApiData?.list[index] || {};
 			const errorStatus = calculateErrorStatus({
 				key,
 				value,

@@ -65,56 +65,53 @@ function ViewSupplierModal({
 
 	const { list: dataList = [] } = suppliers || {};
 
-	const disableExclude = dataList.filter((item) => (item.checked));
+	const disableExclude = dataList?.filter((item) => (item.checked));
 
 	return (
-		<div>
-			<Modal
-				show={viewSupplier}
-				onClose={() => showViewSupplier(false)}
-				className={styles.modal_container}
-				scroll
-				size="lg"
-			>
-				<Modal.Body>
-					<div className={styles.input}>
-						<Input
-							placeholder="Search By Supplier"
-							onChange={(val) => { setFilters((p) => ({ ...p, search: val })); }}
-						/>
-					</div>
-					<div className={styles.list}>
-						<List
-							itemData={suppliers}
-							config={SUPPLIER_CONFIG}
-							functions={LIST_FUNCTIONS}
-							renderHeaderCheckbox={renderHeaderCheckbox}
-							RenderAccordianData={RenderAccordianData}
-							showId={showId}
-							idKey="organizationId"
-							rowStyle="border"
-							showPagination
-							paginationType="number"
-						/>
-					</div>
-				</Modal.Body>
+		<Modal
+			show={viewSupplier}
+			onClose={() => showViewSupplier(false)}
+			className={styles.modal_container}
+			scroll
+			size="lg"
+		>
+			<Modal.Body>
+				<div className={styles.input}>
+					<Input
+						placeholder="Search By Supplier"
+						onChange={(val) => { setFilters((p) => ({ ...p, search: val })); }}
+					/>
+				</div>
+				<div className={styles.list}>
+					<List
+						itemData={suppliers}
+						config={SUPPLIER_CONFIG}
+						functions={LIST_FUNCTIONS}
+						renderHeaderCheckbox={renderHeaderCheckbox}
+						RenderAccordianData={RenderAccordianData}
+						showId={showId}
+						idKey="organizationId"
+						rowStyle="border"
+						showPagination
+						paginationType="number"
+					/>
+				</div>
+			</Modal.Body>
 
-				<Modal.Footer>
-					<Button
-						className={styles.button}
-						themeType="secondary"
-						disabled={loading}
-						onClick={() => showViewSupplier(false)}
-					>
-						Back
-					</Button>
-					<Button onClick={onExclude} disabled={loading || isEmpty(disableExclude)}>
-						Exclude From Payrun
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		</div>
-
+			<Modal.Footer>
+				<Button
+					className={styles.button}
+					themeType="secondary"
+					disabled={loading}
+					onClick={() => showViewSupplier(false)}
+				>
+					Back
+				</Button>
+				<Button onClick={onExclude} disabled={loading || isEmpty(disableExclude)}>
+					Exclude From Payrun
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 
