@@ -1,5 +1,3 @@
-import { Loader } from '@cogoport/components';
-
 import useListShipmentCancellationCharges from '../hooks/useListShipmentCancellationCharges';
 
 import Header from './Header';
@@ -19,15 +17,6 @@ function CancellationPolicies() {
 		defaultFilters : { status: 'active' },
 	});
 
-	if (loading) {
-		return (
-			<div>
-				Loading...
-				<Loader themeType="secondary" />
-			</div>
-		);
-	}
-
 	const paginationProps = { setFilters, filters, data };
 
 	return (
@@ -36,11 +25,12 @@ function CancellationPolicies() {
 				filterValues={filters}
 				setFilterValues={setFilters}
 				refetch={refetch}
+				loading={loading}
 			/>
 
 			<ListPagination {...paginationProps} />
 
-			<ListingArea data={data} />
+			<ListingArea data={data} refetch={refetch} loading={loading} />
 
 			<ListPagination {...paginationProps} />
 

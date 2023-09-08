@@ -2,14 +2,22 @@ import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import styles from './styles.module.css';
 
-function EditDeletePopup({ id = '' }) {
+function EditDeletePopup({ item = {}, refetch = () => {}, setVisible = () => {} }) {
 	return (
 		<div className={styles.container}>
 
 			<EditModal
-				id={id}
+				item={item}
+				refetch={refetch}
+				setVisible={setVisible}
+
 			/>
-			<DeleteModal />
+			<DeleteModal
+				item={item}
+				refetch={refetch}
+				setVisible={setVisible}
+
+			/>
 
 		</div>
 	);

@@ -6,21 +6,51 @@ import Layout from '../../../../common/Layout';
 
 import styles from './styles.module.css';
 
-function FilterContent({ filterValues = () => {}, setFilterValues = () => {}, controls = [] }) {
+const ZERO = 0;
+function FilterContent({
+	filterValues = {}, setFilterValues = () => {},
+	controls = [], visible = false, setVisible = () => {},
+}) {
 	const DEFAULT_VALUES = filterValues;
 
-	const { control, handleSubmit } = useForm({ defaultValues: DEFAULT_VALUES });
+	const { control, handleSubmit, reset } = useForm({ defaultValues: DEFAULT_VALUES });
+
 	const handleFilterSubmit = (value) => {
-		// console.log(value);
-		setFilterValues(value);
+		const arr = Object.keys(value || {}).filter((item) => (value[item] !== ''));
+
+		if (arr.length !== ZERO) {
+			const NEW_VALUE = {};
+			arr.forEach((obj) => {
+				(NEW_VALUE[obj] = value[obj]);
+				return true;
+			});
+
+			setFilterValues(NEW_VALUE);
+		}
+		setVisible(!visible);
+	};
+	const onReset = () => {
+		setFilterValues({});
+		reset();
+		setVisible(!visible);
 	};
 	return (
 		<div>
 			<div className={styles.container}>
 				<div className={styles.form_header}>
-					<Button themeType="tertiary">Clear Filters</Button>
+					<Button themeType="tertiary" onClick={onReset}>
+						Clear Filters
 
-					<Button themeType="primary" onClick={handleSubmit(handleFilterSubmit)}>Apply</Button>
+					</Button>
+
+					<Button
+						themeType="primary"
+						onClick={handleSubmit(handleFilterSubmit)}
+
+					>
+						Apply
+
+					</Button>
 
 				</div>
 				<Layout controls={controls} control={control} />

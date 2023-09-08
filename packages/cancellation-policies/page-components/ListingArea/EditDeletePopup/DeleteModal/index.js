@@ -1,27 +1,18 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-function DeleteModal() {
-	const [showDeleteModal, setShowDeleteModal] = useState(false);
+import { Delete } from '../../../ListAction';
 
-	const onCloseDeleteModal = () => {
-		setShowDeleteModal(false);
+function DeleteModal({ item = {}, refetch = () => {}, setVisible = () => {} }) {
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const onSubmit = () => {
+		setShowDeleteModal(true); setVisible(false);
 	};
 	return (
 		<div>
 			<hr />
-			<Button themeType="tertiary" onClick={() => setShowDeleteModal(true)}>Delete</Button>
-			<Modal size="md" show={showDeleteModal} onClose={onCloseDeleteModal} placement="middle">
-				<Modal.Header title="Are you sure?" />
-				<Modal.Body>
-					Are you sure
-				</Modal.Body>
-				<Modal.Footer>
-					<Button themeType="primary" onClick={onCloseDeleteModal}>No1</Button>
-					<Button themeType="secondary" onClick={onCloseDeleteModal}>Yes</Button>
-
-				</Modal.Footer>
-			</Modal>
+			<Button themeType="tertiary" onClick={onSubmit}>Delete</Button>
+			<Delete show={showDeleteModal} setShow={setShowDeleteModal} item={item} refetch={refetch} />
 		</div>
 	);
 }

@@ -1,7 +1,10 @@
 import { Modal, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
+import checkSatisfyingConditions from '../../helpers/checkSatisfyingConditions';
 import useCreateShipmentCancellationCharges from '../../hooks/useCreateShipmentCancellationCharges';
+import CANCELREASONMAPPING from '../../utils/cancellationReasonMapper';
 
 import AddNewCancellationPolicyForm from './AddNewCancellationPolicyForm';
 import Filters from './Filters';
@@ -15,14 +18,28 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 	const { apiTrigger = () => {} } = useCreateShipmentCancellationCharges({
 		refetch: () => {
 			refetch();
-			// setShow(false);
-			// console.log(loading, 'loading');
 			setShowAddNewModal(false);
 		},
 	});
 
-	const handleSubmitForm = ({ data }) => {
-		apiTrigger(data);
+	const handleSubmitForm = ({ data, reset }) => {
+		const isSatifyingDaysLimit = checkSatisfyingConditions({ data });
+
+		if (isSatifyingDaysLimit) {
+			const { conditions, ...rest } = data;
+
+			if (!isEmpty(conditions)) {
+				rest.conditions = conditions.map((obj) => ({
+					[obj.attribute]: `${CANCELREASONMAPPING[obj.condition]} ${
+						obj.days
+					}`,
+				}));
+				apiTrigger(rest);
+			} else {
+				apiTrigger(data);
+			}
+			reset();
+		}
 	};
 
 	const onSubmit = () => {

@@ -1,25 +1,25 @@
 import { Modal, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-// import useUpdateFclFreightCommodityCluster from '../../../hooks/useUpdateFclFreightCommodityCluster';
+import useUpdateShipmentCancellationCharges from '../../hooks/useUpdateShipmentCancellationCharges';
 
 function Delete({
 	show = null, setShow = () => {}, item = {},
-	// refetch = () => {},
+	refetch = () => {},
 }) {
-	// const { apiTrigger, loading } = useUpdateFclFreightCommodityCluster({
-	// 	successMessage : 'Deleted Successfully',
-	// 	refetch        : () => {
-	// 		refetch();
-	// 		setShow(null);
-	// 	},
-	// });
+	const { apiTrigger, loading } = useUpdateShipmentCancellationCharges({
+		successMessage : 'Deleted Successfully',
+		refetch        : () => {
+			refetch();
+			setShow(false);
+		},
+	});
 
 	const onDelete = () => {
-		// apiTrigger({ item, status: 'inactive' });
+		apiTrigger({ ...item, status: 'inactive' });
 	};
 
-	return !isEmpty(show) ? (
+	return show ? (
 		<Modal show={!isEmpty(show)} onClose={() => setShow(null)} placement="top">
 			<Modal.Header title="DELETE COMMOODITY CLUSTER" />
 
@@ -34,14 +34,14 @@ function Delete({
 				<Button
 					themeType="secondary"
 					style={{ marginRight: 8 }}
-					//   disabled={loading}
+					disabled={loading}
 					onClick={() => setShow(false)}
 				>
 					Cancel
 				</Button>
 
 				<Button
-					// disabled={loading}
+					disabled={loading}
 					onClick={onDelete}
 				>
 					Delete

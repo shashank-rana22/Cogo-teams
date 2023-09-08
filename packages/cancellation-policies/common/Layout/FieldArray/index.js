@@ -4,10 +4,19 @@ import { useFieldArray } from '@cogoport/forms';
 import Child from './Child';
 import styles from './styles.module.css';
 
-function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {} }) {
+function FieldArray({
+	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
+	handleFieldArrayAddCheck = () => true,
+}) {
 	const { controls = [], name } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
+
+	const handleAppend = () => {
+		if (handleFieldArrayAddCheck({ currentIndex: fields.length })) {
+			append();
+		}
+	};
 
 	return (
 		<div className={styles.field_array}>
@@ -31,7 +40,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 					<Button
 						size="sm"
 						// themeType="tertiary"
-						onClick={append}
+						onClick={handleAppend}
 					>
 						Add
 					</Button>

@@ -1,5 +1,5 @@
+import CONTAINER_TYPES from '@cogoport/constants/container-types.json';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 
 import BOOKING_TYPE from '../../../configs/BOOKING_TYPE.json';
 import CHARGE_TYPE from '../../../configs/CHARGE_TYPE.json';
@@ -10,19 +10,26 @@ import MILESTONE from '../../../configs/MILESTONE.json';
 import ORGANIZATION_TYPE from '../../../configs/ORGANIZATION_TYPE.json';
 import RATE_TYPE from '../../../configs/RATE_TYPE.json';
 import SHIPMENT_TYPES from '../../../configs/SHIPMENT_TYPES.json';
-import commoditiesMapper from '../../../helpers/CommodityShipmentMapper';
+import { CANCELREVERSEMAPPING } from '../../../utils/cancellationReasonMapper';
 
-const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries
-	.feature_supported_service.feedback_services.currencies;
+const currencyOptions = GLOBAL_CONSTANTS.service_supported_countries
+	.feature_supported_service.feedback_services.currencies.map((c) => ({ label: c, value: c }));
 
 const GET_DAYS_OPTIONS_VALUES1 = 31;
 const GET_DAYS_OPTIONS_VALUES2 = 0;
 const GET_DAYS_OPTIONS_VALUES3 = 1;
+const ONE = 1;
 const getDaysOptions = Array(GET_DAYS_OPTIONS_VALUES1).fill(GET_DAYS_OPTIONS_VALUES2)
 	.map((_, idx) => ({ label: idx + GET_DAYS_OPTIONS_VALUES3, value: idx + GET_DAYS_OPTIONS_VALUES3 }));
 
-const getControls = ({ service, container_type, item }) => [
-	{
+const getControls = ({ item, isEdit }) => {
+	const CONDITIONS_VALUE = (item?.conditions || []).map((condition) => ({
+		attribute : Object.keys(condition)[GLOBAL_CONSTANTS.zeroth_index],
+		condition : CANCELREVERSEMAPPING[Object.values(condition)[GLOBAL_CONSTANTS.zeroth_index]
+			.split(' ')[GLOBAL_CONSTANTS.zeroth_index]],
+		days: +Object.values(condition)[GLOBAL_CONSTANTS.zeroth_index].split(' ')[ONE],
+	}));
+	return [{
 		name        : 'service',
 		type        : 'select',
 		placeholder : 'Select Service',
@@ -30,74 +37,74 @@ const getControls = ({ service, container_type, item }) => [
 		value       : item?.service,
 		rules       : { required: 'Service is required' },
 		options     : SHIPMENT_TYPES,
-		disabled    : !!item?.service,
+		disabled    : isEdit,
 		span        : 4,
-	},
-	{
+	}, {
 		name           : 'airline_id',
 		label          : 'Airline',
-		type           : 'select',
+		type           : 'async_select',
+		asyncKey       : 'list_operators',
 		value          : item?.airline_id,
 		optionsListKey : 'air-lines',
 		placeholder    : 'Select Airline',
 		isClearable    : !item?.airline_id,
-		disabled       : !!item?.airline_id,
-	},
-	{
+		disabled       : isEdit,
+	}, {
 		name           : 'origin_location_id',
-		type           : 'select',
+		type           : 'async_select',
+		asyncKey       : 'list_locations',
 		placeholder    : 'Enter Origin',
 		label          : 'Origin',
 		value          : item?.origin_location_id,
 		isClearable    : !item?.origin_location_id,
 		optionsListKey : 'locations',
-		disabled       : !!item?.origin_location_id,
+		disabled       : isEdit,
 		params         : { filters: { type: ['seaport', 'country', 'airport'] } },
 		span           : 4,
-	},
-	{
+	}, {
 		name           : 'destination_location_id',
-		type           : 'select',
+		type           : 'async_select',
+		asyncKey       : 'list_locations',
 		placeholder    : 'Enter Destination',
 		label          : 'Destination',
 		value          : item?.destination_location_id,
 		isClearable    : !item?.destination_location_id,
 		optionsListKey : 'locations',
-		disabled       : !!item?.destination_location_id,
+		disabled       : isEdit,
 		params         : {
 			filters: {
 				type: ['seaport', 'country', 'airport'],
 			},
 		},
 		span: 4,
-	},
-	{
+	}, {
 		name           : 'shipping_line_id',
 		label          : 'Shipping Line',
-		type           : 'select',
+		type           : 'async_select',
+		asyncKey       : 'list_operators',
 		value          : item?.shipping_line_id,
 		placeholder    : 'Select Shipping Line',
 		optionsListKey : 'shipping-lines',
-		isClearable    : !item?.shipping_line_id,
-		disabled       : !item?.shipping_line_id,
-	},
-	{
+		isClearable    : !isEdit,
+		params         : {
+			filters: { operator_type: 'shipping_line', status: 'active' },
+		},
+		disabled: isEdit,
+	}, {
 		name        : 'commodity',
 		type        : 'select',
 		placeholder : 'Select Commodity',
 		label       : 'Commodity',
 		value       : item?.commodity,
-		disabled    : !!item?.commodity,
-		options     : (commoditiesMapper(service, container_type) || [])
-			.map((option) => ({ label: option, value: option })),
-	},
-	{
+		disabled    : isEdit,
+		options     : [],
+	}, {
 		name               : 'conditions',
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Conditions',
 		noDeleteButtonTill : 0,
-		// value              : isEdit ? conditions : undefined,
+		value              : isEdit ? CONDITIONS_VALUE : undefined,
 		controls           : [
 			{
 				name    : 'attribute',
@@ -105,37 +112,32 @@ const getControls = ({ service, container_type, item }) => [
 				type    : 'select',
 				options : CONDITION_ATTRIBUTE,
 				span    : 2,
-			},
-			{
+			}, {
 				name    : 'condition',
 				label   : 'Condition',
 				type    : 'select',
 				options : CONDITION_CONDITION,
 				rules   : { required: true },
 				span    : 2,
-			},
-			{
+			}, {
 				name    : 'days',
 				label   : 'Days',
 				type    : 'select',
 				options : getDaysOptions,
 				rules   : { required: true },
 				span    : 2,
-			},
-		],
-	},
-	{
+			}],
+	}, {
 		name        : 'charge_type',
 		type        : 'select',
 		label       : 'Charge Type',
-		disabled    : !!item?.charge_type,
+		disabled    : isEdit,
 		value       : item?.charge_type,
 		placeholder : 'Select Charge Type',
 		rules       : { required: 'This is required' },
 		options     : CHARGE_TYPE,
 		span        : 2,
-	},
-	{
+	}, {
 		name        : 'value',
 		type        : 'number',
 		label       : 'Value',
@@ -166,7 +168,7 @@ const getControls = ({ service, container_type, item }) => [
 		type        : 'select',
 		label       : 'Currency',
 		value       : item?.currency,
-		options     : getCurrencyOptions({ ALLOWED_CURRENCY }), // required implementation
+		options     : currencyOptions, // required implementation
 		placeholder : 'Select currency',
 		rules       : { required: 'Currency is required' },
 		span        : 4,
@@ -176,20 +178,21 @@ const getControls = ({ service, container_type, item }) => [
 		label       : 'Container Size',
 		type        : 'select',
 		value       : item?.container_size,
-		// isClearable : !isEdit,
+		isClearable : !isEdit,
 		placeholder : 'Eg. 20ft',
-		disabled    : !!item?.container_size,
+		disabled    : isEdit,
 		options     : CONTAINER_SIZE,
 	},
 	{
-		name           : 'container_type',
-		label          : 'Container Type',
-		isClearable    : !item?.container_type,
-		value          : item?.container_type,
-		type           : 'select',
-		optionsListKey : 'container-types',
-		placeholder    : 'Select',
-		disabled       : !!item?.container_type,
+		name        : 'container_type',
+		label       : 'Container Type',
+		isClearable : !item?.container_type,
+		value       : item?.container_type,
+		type        : 'select',
+
+		options     : CONTAINER_TYPES,
+		placeholder : 'Select',
+		disabled    : isEdit,
 	},
 	{
 		name        : 'booking_type',
@@ -197,7 +200,7 @@ const getControls = ({ service, container_type, item }) => [
 		type        : 'select',
 		placeholder : 'Select Booking Type',
 		value       : item?.booking_type,
-		disabled    : !!item?.booking_type,
+		disabled    : isEdit,
 		options     : BOOKING_TYPE,
 		rules       : { required: 'Booking Type is required' },
 		span        : 6,
@@ -209,7 +212,7 @@ const getControls = ({ service, container_type, item }) => [
 		value       : item?.organization_type,
 		isClearable : !item?.organization_type,
 		placeholder : 'Select Organization Type',
-		disabled    : !!item?.organization_type,
+		disabled    : isEdit,
 		options     : ORGANIZATION_TYPE,
 	},
 	{
@@ -218,7 +221,7 @@ const getControls = ({ service, container_type, item }) => [
 		type        : 'select',
 		placeholder : 'Select Rate Type',
 		value       : item?.rate_type,
-		disabled    : !!item?.rate_type,
+		disabled    : isEdit,
 		options     : RATE_TYPE,
 		rules       : { required: 'Rate Type is required' },
 	},
@@ -232,43 +235,39 @@ const getControls = ({ service, container_type, item }) => [
 		name    : 'milestone',
 		type    : 'select',
 		options : MILESTONE,
-	},
-	{
+	}, {
 		name               : 'slabs',
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
-		controls           : [
-			{
-				name        : 'lower_limit',
-				type        : 'number',
-				placeholder : 'Lower Limit (in Days)',
-				span        : 3,
-				disabled    : true,
-				rules       : { required: 'This is required', min: 1 },
-			},
-			{
-				name        : 'upper_limit',
-				type        : 'number',
-				span        : 3,
-				placeholder : 'Upper Limit (in Days)',
-				rules       : { required: 'This is required', min: 1 },
-			},
-			{
-				name           : 'currency',
-				placeholder    : 'Currency',
-				type           : 'select',
-				optionsListKey : 'currencies',
-				span           : 3,
-				rules          : { required: 'This is required' },
-			},
-			{
-				name        : 'price',
-				placeholder : 'Enter Price',
-				type        : 'number',
-				span        : 2,
-				rules       : { required: 'This is required' },
-			}],
+		controls           : [{
+			name        : 'lower_limit',
+			type        : 'number',
+			placeholder : 'Lower Limit (in Days)',
+			span        : 3,
+			rules       : { required: 'This is required', min: 1 },
+		}, {
+			name        : 'upper_limit',
+			type        : 'number',
+			span        : 3,
+			placeholder : 'Upper Limit (in Days)',
+			rules       : { required: 'This is required', min: 1 },
+		}, {
+			name           : 'currency',
+			placeholder    : 'Currency',
+			type           : 'select',
+			optionsListKey : 'currencies',
+			span           : 3,
+			options        : currencyOptions,
+			rules          : { required: 'This is required' },
+		}, {
+			name        : 'price',
+			placeholder : 'Enter Price',
+			type        : 'number',
+			span        : 2,
+			rules       : { required: 'This is required' },
+		}],
 	}];
+};
 export default getControls;

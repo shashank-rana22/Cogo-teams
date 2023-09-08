@@ -2,27 +2,45 @@ import { Modal, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRef } from 'react';
 
+import checkSatisfyingConditions from '../../helpers/checkSatisfyingConditions';
+import useUpdateShipmentCancellation from '../../hooks/useUpdateShipmentCancellationCharges';
+import CANCELREASONMAPPING from '../../utils/cancellationReasonMapper';
 import AddNewCancellationPolicyForm from '../Header/AddNewCancellationPolicyForm';
-
 // import useUpdateFclFreightCommodityCluster from '../../../hooks/useUpdateFclFreightCommodityCluster';
-
+const TRUE = true;
 function Update({
 	show = null, setShow = () => {},
-// item = {},
-// refetch = () => {}
+	item = {},
+	refetch = () => {},
 }) {
-	// const { apiTrigger, loading } = useUpdateFclFreightCommodityCluster({
-	// 	refetch: () => {
-	// 		refetch();
-	// 		setShow(null);
-	// 	},
-	// });
+	const { apiTrigger, loading } = useUpdateShipmentCancellation({
+		refetch: () => {
+			refetch();
+			setShow(false);
+		},
+	});
 
 	const formRef = useRef(null);
-	// console.log(item, refetch, 'hi');
-	// const handleSubmitForm = ({ data }) => {
-	// 	apiTrigger({ values: data, item });
-	// };
+
+	const handleSubmitForm = ({ data, reset }) => {
+		const isSatifyingDaysLimit = checkSatisfyingConditions({ data });
+
+		if (isSatifyingDaysLimit) {
+			const { conditions, ...rest } = data;
+
+			if (!isEmpty(conditions)) {
+				rest.conditions = conditions.map((obj) => ({
+					[obj.attribute]: `${CANCELREASONMAPPING[obj.condition]} ${
+						obj.days
+					}`,
+				}));
+				apiTrigger({ ...rest, id: item?.id });
+			} else {
+				apiTrigger({ ...data, id: item?.id });
+			}
+			reset();
+		}
+	};
 
 	const onSubmit = () => {
 		formRef.current.formSubmit();
@@ -34,9 +52,10 @@ function Update({
 
 			<Modal.Body>
 				<AddNewCancellationPolicyForm
-				// handleSubmitForm={handleSubmitForm}
-					item={show}
+					handleSubmitForm={handleSubmitForm}
+					item={item}
 					ref={formRef}
+					isEdit={TRUE}
 				/>
 			</Modal.Body>
 
@@ -44,14 +63,14 @@ function Update({
 				<Button
 					themeType="secondary"
 					style={{ marginRight: 8 }}
-					// disabled={loading}
-					onClick={() => setShow(false)}
+					disabled={loading}
+					onClick={() => setShow(null)}
 				>
 					Cancel
 				</Button>
 
 				<Button
-					// disabled={loading}
+					disabled={loading}
 					onClick={onSubmit}
 				>
 					Submit

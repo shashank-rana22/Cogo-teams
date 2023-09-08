@@ -1,6 +1,6 @@
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 
-const commoditiesMapper = (service, container_type) => {
+const commoditiesMapper = ({ service, container_type }) => {
 	const data = {
 		fcl_freight : FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
 		lcl_freight : [

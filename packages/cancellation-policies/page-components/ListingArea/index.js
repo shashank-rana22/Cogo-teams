@@ -1,14 +1,46 @@
-import { Popover, Table, Tooltip, Tags } from '@cogoport/components';
+import { Popover, Table, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EditDeletePopup from './EditDeletePopup';
 import styles from './styles.module.css';
 
 const ZERO = 0;
 const ONE = 1;
-function ListingArea({ data = {} }) {
+function SlabContent(item) {
+	return (
+		<div style={{ display: 'flex', gap: 16 }}>
+			{item?.slabs?.map((slab) => (
+				<div key={item?.id}>
+					<div style={{ fontSize: '12px' }}>
+						{slab?.lower_limit}
+						{' '}
+						-
+						{slab?.upper_limit}
+						{' '}
+						Days
+					</div>
+					<div
+						style={{
+							color      : '#5936F0',
+							fontSize   : '12px',
+							fontWeight : '500',
+						}}
+					>
+						{slab?.currency}
+						{' '}
+						{slab?.price}
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
+function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
+	const [visible, setVisible] = useState(null);
+
 	const columns = [
 		{ Header: ' Service Name', accessor: (item) => startCase(item?.service) || '-' },
 		{ Header: 'Origin', accessor: (item) => item?.origin_location?.name || '-' }, // key not present
@@ -17,25 +49,24 @@ function ListingArea({ data = {} }) {
 			Header   : 'Shipping Line',
 			accessor : (item) => (item?.shipping_line?.business_name?.toLowerCase()) || '-',
 		},
-		{ Header: 'Charge Type', accessor: (item) => startCase(item?.charge_type) || '-' },
-		{ Header: 'Milestone', accessor: (item) => startCase(item?.milestone) || '-' },
+		{ Header: 'Charge Type', accessor: (item) => (startCase(item?.charge_type) || '-') },
+
+		{ Header: 'Milestone', accessor: (item) => (startCase(item?.milestone) || '-') },
 		{
 			Header   : 'Charge',
 			accessor : (item) => (!item?.free_days
-				? `${item?.currency} ${item?.value}${item.charge_type === 'percentage' ? '%' : ''}` : '-'),
+				?	 ` ${item?.currency} ${item?.value}${item?.charge_type === 'percentage' ? '%' : ''}` : '-'),
+
 		},
 		{ Header: 'Booking Type', accessor: (item) => startCase(item?.booking_type) || '-' },
 		{
 			Header   : 'Rate Type',
 			accessor : (item) => (item?.rate_type ? (
-
 				startCase(item?.rate_type)
-
 			) : (
 				'-'
 			)),
 		},
-
 		{
 			Header   : 'Free Days',
 			accessor : (item) => (
@@ -46,7 +77,7 @@ function ListingArea({ data = {} }) {
 			Header   : 'Slabs',
 			accessor : (item) => (
 
-				item?.slabs ? (
+				item?.slabs?.length > ZERO ? (
 					<>
 						<div style={{ marginRight: '4px' }}>
 							<div>
@@ -68,16 +99,16 @@ function ListingArea({ data = {} }) {
 						{item?.slabs?.length > ONE ? (
 							<Tooltip
 								theme="light"
-								content={item}
+								content={SlabContent(item)}
 								maxWidth="none"
 							>
 
-								<Tags className="primary sm">
+								<div className={styles.slabs}>
 									+
-									{(item?.slabs.length || ZERO) - ONE}
+									{(item?.slabs?.length || ZERO) - ONE}
 									{' '}
 									more
-								</Tags>
+								</div>
 							</Tooltip>
 						) : null}
 					</>
@@ -91,17 +122,24 @@ function ListingArea({ data = {} }) {
 			Header   : '  ',
 			accessor : (item) => (
 				<Popover
-					render={<EditDeletePopup id={item.id} />}
+					trigger="click"
+					render={<EditDeletePopup item={item} refetch={refetch} setVisible={setVisible} visible={visible} />}
+					visible={visible === item?.id}
 
 				>
-					<IcMOverflowDot />
+
+					<Button themeType="tertiary" onClick={() => { setVisible(item?.id); }}>
+
+						<IcMOverflowDot />
+
+					</Button>
 				</Popover>
 			),
 		},
 	];
 	return (
-		<div>
-			<Table columns={columns} data={data?.list || []} className={styles.table_container} />
+		<div className={styles.table_container}>
+			<Table columns={columns} data={data?.list || []} loading={loading} />
 		</div>
 	);
 }

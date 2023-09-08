@@ -1,12 +1,13 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import controls from './controls';
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
 function Filters({ filterValues = () => {}, setFilterValues = () => {} }) {
+	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	return (
 		<div className={styles.container}>
 			<Popover
@@ -16,10 +17,19 @@ function Filters({ filterValues = () => {}, setFilterValues = () => {} }) {
 						filterValues={filterValues}
 						setFilterValues={setFilterValues}
 						controls={controls}
+						visible={isFilterVisible}
+						setVisible={setIsFilterVisible}
 					/>
 				)}
+				onClickOutside={() => { setIsFilterVisible(!isFilterVisible); }}
+				visible={isFilterVisible}
 			>
-				<div className={styles.filter_btn}>
+				<Button
+					className={styles.filter_btn}
+					themeType="secondary"
+					onClick={() => { setIsFilterVisible(!isFilterVisible); }}
+
+				>
 
 					<IcMFilter
 						width={14}
@@ -29,7 +39,7 @@ function Filters({ filterValues = () => {}, setFilterValues = () => {} }) {
 					{' '}
 					Filter By
 
-				</div>
+				</Button>
 			</Popover>
 
 		</div>

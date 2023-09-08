@@ -3,16 +3,14 @@ import React, { useState } from 'react';
 
 import { Update } from '../../../ListAction';
 
-function EditModal() {
+function EditModal({ item = {}, refetch = () => {}, setVisible = () => {} }) {
 	const [showEditModal, setShowEditModal] = useState(null);
-	// const onCloseEditModal = () => {
-	// 	setShowEditModal(false);
-	// };
+
 	return (
 		<div>
-			<Button themeType="tertiary" onClick={() => setShowEditModal(true)}>Edit</Button>
+			<Button themeType="tertiary" onClick={() => { setShowEditModal(true); setVisible(false); }}>Edit</Button>
 
-			<Update show={showEditModal} setShow={setShowEditModal} />
+			<Update show={showEditModal} setShow={setShowEditModal} item={item} refetch={refetch} />
 		</div>
 	);
 }
