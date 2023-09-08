@@ -162,6 +162,7 @@ function ApArSettlement() {
 				matchBal={matchBal}
 				setMatchBal={setMatchBal}
 				filters={filters}
+				dataLoading={loading}
 			/>
 			{matchModalShow ? (
 				<MatchModal

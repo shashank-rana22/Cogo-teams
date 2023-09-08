@@ -121,7 +121,7 @@ const useGetDocumentList = ({
 			setSettleConfirmation(false);
 			Toast.success('Settle successfully');
 		} catch (error) {
-			Toast.error(error?.data?.message || error?.message || 'Something went wrong');
+			Toast.error(error?.response?.data?.message || error?.message || 'Something went wrong');
 		}
 	};
 

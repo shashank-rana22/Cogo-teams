@@ -18,6 +18,7 @@ function Amount({
 	matchModalShow = false,
 	setMatchModalShow = () => {},
 	matchBal = 0,
+	dataLoading = false,
 }) {
 	const { currency, ledCurrency } = selectedData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const {
@@ -76,7 +77,7 @@ function Amount({
 						size="md"
 						themeType="primary"
 						disabled={isEmpty(selectedData)}
-						loading={loading}
+						loading={loading || dataLoading}
 						onClick={() => { setMatchModalShow(true); jvListRefetch(); getExchangeRate(); }}
 					>
 						Match

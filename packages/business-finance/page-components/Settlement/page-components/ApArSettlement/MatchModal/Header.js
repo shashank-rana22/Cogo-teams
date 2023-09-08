@@ -36,6 +36,7 @@ function Header(
 		date = '',
 		dryRun = false,
 		fileValue = '',
+		checkLoading = false,
 	},
 ) {
 	const onClick = () => {
@@ -45,11 +46,11 @@ function Header(
 		setShowDocument(false);
 		setFileValue({});
 	};
-	const handleDryRunClick = async () => {
+	const handleDryRunClick = () => {
 		setDryRun(true);
-		await postPaymentsSettlementCheck();
+		postPaymentsSettlementCheck();
 	};
-	const handleRefreshClick = async () => {
+	const handleRefreshClick = () => {
 		setDryRun(false);
 		setCheckedData([]);
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
@@ -154,6 +155,7 @@ function Header(
 							onClick={() => {
 								handleRefreshClick();
 							}}
+							disabled={checkLoading}
 						/>
 					</div>
 				</div>

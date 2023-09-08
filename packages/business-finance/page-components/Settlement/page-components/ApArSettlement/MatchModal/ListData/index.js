@@ -18,6 +18,7 @@ export default function ListData({
 	setUpdatedData = () => {},
 	checkLoading = false,
 	setUpdateBal = () => {},
+	setCanSettle = () => {},
 }) {
 	const handleDragStart = (e, index) => {
 		e.dataTransfer.setData('text/plain', index.toString());
@@ -72,6 +73,7 @@ export default function ListData({
 								dryRun={dryRun}
 								updatedData={updatedData}
 								setUpdateBal={setUpdateBal}
+								setCanSettle={setCanSettle}
 							/>
 						</div>
 					))

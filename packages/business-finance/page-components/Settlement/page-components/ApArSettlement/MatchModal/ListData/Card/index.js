@@ -1,12 +1,15 @@
-import { cl } from '@cogoport/components';
-import { IcMDelete, IcMEdit, IcMDrag } from '@cogoport/icons-react';
+import { cl, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMDelete, IcMEdit, IcMDrag, IcMCopy } from '@cogoport/icons-react';
+import { copyToClipboard } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import showOverflowingNumber from '../../../../../../commons/showOverflowingNumber.tsx';
 import { getFormatAmount } from '../../../../../utils/getFormatAmount';
 
 import EditFields from './EditFields';
 import styles from './styles.module.css';
+
+const DOC_LENGTH = 10;
 
 const STATUS = {
 	Unpaid               : '#edd7a9',
@@ -20,9 +23,12 @@ const STATUS = {
 const INITIAL_BAL = 0;
 const KEY_TDS = 'tds';
 const KEY_ALLOCATION = 'allocation';
-const TRUNCATION_LENGTH = 10;
 const ZERO_BALANCE = 0;
 const EXC_RATE_FIXED_LENGTH = 2;
+
+const onClickCopy = (documentValue) => {
+	copyToClipboard(documentValue, 'Document Value');
+};
 
 export default function CardItem({
 	itm = {},
@@ -34,10 +40,10 @@ export default function CardItem({
 	updatedData = [],
 	setUpdateBal = () => {},
 	isError = false,
+	setCanSettle = () => {},
 }) {
 	const cardData = itm;
 	const {
-		documentValue = '',
 		documentAmount = 0,
 		balanceAmount = 0,
 		currency,
@@ -51,9 +57,10 @@ export default function CardItem({
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
 	const handleDeleteClick = (idToDelete) => {
-		const UPDATED_SELECTED_DATA = selectedData.filter((item) => item.id !== idToDelete);
+		const UPDATED_SELECTED_DATA = selectedData?.filter((item) => item.id !== idToDelete);
 		setIsDelete(true);
 		setSelectedData(UPDATED_SELECTED_DATA);
+		setCanSettle(false);
 	};
 	const handleEditAllocation = () => {
 		const NEW_ALLOCATION = parseFloat(cardData.allocationAmount);
@@ -97,7 +104,26 @@ export default function CardItem({
 				</div>
 
 				<div className={cl`${styles.ContainerDiv} ${styles.flex}`}>
-					{showOverflowingNumber(documentValue || '-', TRUNCATION_LENGTH)}
+					<Tooltip
+						content={(
+							<div>
+								{cardData?.documentValue || ''}
+								<IcMCopy
+									width={18}
+									height={18}
+									onClick={() => onClickCopy(cardData?.documentValue)}
+									className={styles.copy_icon}
+								/>
+							</div>
+						)}
+						interactive
+					>
+						<div>
+							{(cardData?.documentValue && cardData?.documentValue.length > DOC_LENGTH
+								? `${cardData?.documentValue.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
+								: cardData?.documentValue) || '-'}
+						</div>
+					</Tooltip>
 				</div>
 
 				<div className={cl`${styles.formattedamount} ${styles.flex}`}>

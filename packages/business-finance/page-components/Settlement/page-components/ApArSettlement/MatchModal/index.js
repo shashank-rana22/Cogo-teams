@@ -103,6 +103,7 @@ export default function MatchModal({
 						date={date}
 						dryRun={dryRun}
 						fileValue={fileValue}
+						checkLoading={checkLoading}
 					/>
 				)}
 				/>
@@ -124,6 +125,7 @@ export default function MatchModal({
 						dryRunData={dryRunData}
 						checkLoading={checkLoading}
 						setUpdateBal={setUpdateBal}
+						setCanSettle={setCanSettle}
 					/>
 				</Modal.Body>
 				<Modal.Footer>
