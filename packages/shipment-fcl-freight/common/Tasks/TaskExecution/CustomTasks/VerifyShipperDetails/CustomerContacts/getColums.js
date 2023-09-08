@@ -4,14 +4,29 @@ import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function getColumns({ isEditMode = false, setIsEditMode = () => {}, control = {} }) {
+function getColumns({
+	isEditMode = false,
+	setIsEditMode = () => {},
+	control = {},
+	setCheckList = () => {},
+}) {
 	const columns = [
 		{
 			id       : 'select_contacts',
 			Header   : 'Select',
 			accessor : (item) => (
 				<div>
-					<Checkbox disabled={isEditMode === item?.index} />
+					<Checkbox
+						disabled={isEditMode === item?.index}
+						onChange={(event) => {
+							setCheckList((prev) => {
+								if (event?.target?.checked) {
+									return [...prev, item];
+								}
+								return prev?.filter((object) => object.index === item?.index);
+							});
+						}}
+					/>
 				</div>
 
 			),

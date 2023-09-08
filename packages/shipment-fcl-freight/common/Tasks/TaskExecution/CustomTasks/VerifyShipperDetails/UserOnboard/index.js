@@ -19,18 +19,16 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function UserOnboard() {
+function UserOnboard({ setIsLeadUpdated = () => {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const { control, formState:{ errors = {} }, handleSubmit, formState: { isValid = false }, formValues } = useForm();
-	// const formValues = watch();
 
 	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
 
 	const updateDetails = (values) => {
 		console.log({ values });
+		setIsLeadUpdated(true);
 	};
-
-	// console.log(Error('company_name', errors));
 
 	return (
 		<div>

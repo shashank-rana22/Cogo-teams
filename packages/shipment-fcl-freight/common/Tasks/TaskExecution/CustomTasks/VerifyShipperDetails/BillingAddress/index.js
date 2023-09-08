@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import {
+	AsyncSelectController,
 	// CheckboxController,
 	// CountrySelectController,
 	CreatableSelectController,
@@ -22,8 +23,12 @@ const COUNTRY = 'IND';
 
 function BillingAddress() {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
-	const { control, watch, formState:{ errors = {} } } = useForm();
+	const { control, watch, formState:{ errors = {} }, handleSubmit } = useForm();
 	const formValues = watch();
+
+	const onSubmit = (values) => {
+		console.log({ values });
+	};
 
 	return (
 		<div className={styles.main_container}>
@@ -45,10 +50,11 @@ function BillingAddress() {
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Pincode / Zip Code</label>
 
-						<InputController
+						<AsyncSelectController
 							size="sm"
 							control={control}
 							name="pincode"
+							asyncKey="list_locations"
 							rules={{ required: 'Pincode is required' }}
 						/>
 						{Error('pincode', errors)}
@@ -73,7 +79,6 @@ function BillingAddress() {
 						<TextAreaController
 							control={control}
 							name="address"
-							cols={6}
 							rows={3}
 							placeholder="Enter Address"
 							rules={{ required: 'Address is required' }}
@@ -148,8 +153,9 @@ function BillingAddress() {
 					</div>
 				</div>
 			</div>
+
 			<div className={styles.button_container}>
-				<Button>
+				<Button onClick={handleSubmit(onSubmit)}>
 					Save
 				</Button>
 			</div>

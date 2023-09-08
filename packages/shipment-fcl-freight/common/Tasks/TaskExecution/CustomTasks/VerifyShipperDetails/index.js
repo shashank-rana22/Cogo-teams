@@ -1,13 +1,24 @@
+import { useState } from 'react';
+
 import BillingAddress from './BillingAddress';
-// import CustomerContacts from './CustomerContacts';
-// import UserOnboard from './UserOnboard';
+import CustomerContacts from './CustomerContacts';
+
+const FIRST_STEP = 1;
+const SECOND_STEP = 2;
 
 function VerifyShipperDetails() {
+	const [step, setStep] = useState(FIRST_STEP);
 	return (
 		<div>
-			{/* <UserOnboard /> */}
-			<BillingAddress />
-			{/* <CustomerContacts /> */}
+			{step === FIRST_STEP ? (
+				<CustomerContacts setStep={setStep} />
+
+			) : null}
+
+			{step === SECOND_STEP ? (
+				<BillingAddress />
+
+			) : null}
 		</div>
 
 	);
