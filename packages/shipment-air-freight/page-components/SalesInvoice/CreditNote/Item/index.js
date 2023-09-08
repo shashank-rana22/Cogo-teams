@@ -23,12 +23,6 @@ const CN_STATUS_MAPPING = {
 	finance_rejected : 'finance_rejected',
 };
 
-const IN_STATUS_MAPPING = {
-	requested : 'requested',
-	approved  : 'approved',
-	rejected  : 'rejected',
-};
-
 function Item({
 	item = {},
 	cnRefetch = () => {},
@@ -110,12 +104,12 @@ function Item({
 								</span>
 
 								{item?.incident_status && (
-									<span className={cl`${styles[IN_STATUS_MAPPING[item?.incident_status]]}
+									<span className={cl`${styles[item?.incident_status.toLowerCase()]}
 									 ${styles.text}`}
 									>
 										Status:
 										{' '}
-										{startCase(IN_STATUS_MAPPING[item?.incident_status])}
+										{startCase(item?.incident_status.toLowerCase())}
 									</span>
 								) }
 							</div>
