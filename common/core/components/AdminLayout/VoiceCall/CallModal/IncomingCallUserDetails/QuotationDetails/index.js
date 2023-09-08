@@ -131,6 +131,20 @@ function QuotationDetails({ shipmentsData = {}, agentType = '' }) {
 							{!isEmpty(value) ?	<div className={styles.title}>{startCase(key)}</div> : null}
 							{(value || []).map((singleItem) => (
 								<div className={styles.details} key={singleItem?.id}>
+									<div className={styles.sid_details}>
+										SID :
+										{' '}
+										<span className={styles.sid}>
+											{singleItem?.serial_id}
+										</span>
+										<div className={styles.agent_details}>
+											Agent :
+											{' '}
+											<div className={styles.booking_agent}>
+												{startCase(singleItem?.booking_agent?.name)}
+											</div>
+										</div>
+									</div>
 									<PortDetails serviceData={singleItem} service={SERVICE_MAPPING[agentType]} />
 									<CargoDetails detail={singleItem} service={SERVICE_MAPPING[agentType]} />
 								</div>
