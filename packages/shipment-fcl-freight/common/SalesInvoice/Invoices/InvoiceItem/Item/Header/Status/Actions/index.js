@@ -43,11 +43,11 @@ function Actions({
 
 	const [showModal, setShowModal] = useState('');
 
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	const showForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice?.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice?.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
+	|| isEmpty(invoiceData?.invoice_trigger_date);
 
 	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch });
 
