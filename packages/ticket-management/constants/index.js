@@ -66,7 +66,7 @@ export const TICKET_OPEN_STATUS = [
 	'resolve_requested',
 ];
 
-export const getStatusLabelMapping = (t) => ({
+export const getStatusLabelMapping = ({ t }) => ({
 	open: {
 		label : t('myTickets:open_status'),
 		color : '#D6B300',
@@ -97,7 +97,7 @@ export const PRIORITY_MAPPING = {
 
 export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
 
-export const getSpectatorTypeOptions = (t) => [
+export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },
 	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
 	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },

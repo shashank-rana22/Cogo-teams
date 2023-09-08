@@ -14,7 +14,7 @@ function StatsSection({ spectatorType = '' }) {
 
 	return (
 		<div className={styles.stats_section_container}>
-			{getStatsIconsAndData(t).map((item) => {
+			{getStatsIconsAndData({ t }).map((item) => {
 				const { label, key } = item;
 
 				const formattedKey = pascalCase(key);

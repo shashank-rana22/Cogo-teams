@@ -1,6 +1,6 @@
 import { IcMTicket, IcMFtick, IcMClock } from '@cogoport/icons-react';
 
-export const statsMapping = (t) => [
+export const statsMapping = ({ t }) => [
 	{
 		key   : 'AverageResponseTime',
 		label : t('myTickets:average_response_time_label'),

@@ -81,7 +81,7 @@ function OverallStats({ data = {}, ticketCount = {} }) {
 				</div>
 			</div>
 
-			{(statsMapping(t) || []).map((item) => {
+			{(statsMapping({ t }) || []).map((item) => {
 				const { key, icon, label, type } = item || {};
 
 				return (
