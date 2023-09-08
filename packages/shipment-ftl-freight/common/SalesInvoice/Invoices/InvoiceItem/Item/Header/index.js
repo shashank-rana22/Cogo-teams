@@ -111,8 +111,9 @@ function Header({
 
 	const isTaxMechanismGoodsTransportAgency = tax_mechanism === 'goods_transport_agency';
 
-	disableMarkAsReviewed = isEmptyInvoicesList && isShipmentCompleted
-		&& !(isTaxMechanismGoodsTransportAgency);
+	disableMarkAsReviewed = isTaxMechanismGoodsTransportAgency ? false : (isEmptyInvoicesList
+		|| isShipmentCompleted
+		|| disableMarkAsReviewed);
 
 	return (
 		<div className={styles.container}>
@@ -191,8 +192,8 @@ function Header({
 
 			{showOtpModal ? (
 				<OTPVerification
-					showOtpModal={showOtpModal}
-					setShowOTPModal={setShowOTPModal}
+					show={showOtpModal}
+					setShow={setShowOTPModal}
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
@@ -201,8 +202,8 @@ function Header({
 
 			{showReview ? (
 				<ReviewServices
-					showReview={showReview}
-					setShowReview={setShowReview}
+					show={showReview}
+					setShow={setShowReview}
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 				/>
