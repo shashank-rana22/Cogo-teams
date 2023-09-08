@@ -13,7 +13,7 @@ function useServiceUpsellControls({
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
 
-	const mainService = services.find((item) => item?.service_type === 'air_freight_service');
+	const mainService = (services || []).find((item) => item?.service_type === 'air_freight_service');
 
 	const warehouseLocationFilter = upsellableService?.trade_type === 'export'
 		? mainService?.origin_airport_id : mainService?.destination_airport_id;

@@ -31,7 +31,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		packages,
 	} = primary_service || {};
 
-	const { commodity_subtype, commodity_type } = commodity_details[GLOBAL_CONSTANTS.zeroth_index];
+	const { commodity_subtype, commodity_type } = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const common = {
 		commodity : commodity !== 'all_commodity' ? commodity : 'general',
