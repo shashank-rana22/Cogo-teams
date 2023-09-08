@@ -38,7 +38,7 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 		handleShippingBillNo: (singleItem) => {
 			const itemData = JSON.parse(singleItem?.data) || {};
 			return (
-				<div>{itemData.shipping_bill_number}</div>
+				<div>{itemData?.data?.shipping_bill_number}</div>
 			);
 		},
 		handleUploadDate: (singleItem) => {
@@ -91,8 +91,6 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 			documents: invoiceData,
 		},
 	};
-
-	console.log('payload', payload);
 
 	const handleFormSubmit = () => {
 		if (payload?.data?.documents?.length !== data?.total_count) {
