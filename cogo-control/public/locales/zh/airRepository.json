@@ -76,5 +76,6 @@
     "created":"创建",
     "failed_to_upload":"无法上传",
     "before":"前",
-    "after":"后"
+    "after":"后",
+    "ams_mode_field_label": "艾姆斯模式"
 }

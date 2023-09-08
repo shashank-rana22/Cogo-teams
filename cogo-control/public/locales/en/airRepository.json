@@ -76,5 +76,6 @@
     "created":"Created",
     "failed_to_upload":"Failed to Upload",
     "before":"Before",
-    "after":"After"
+    "after":"After",
+    "ams_mode_field_label": "Ams Mode"
 }

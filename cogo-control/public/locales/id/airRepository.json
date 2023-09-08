@@ -76,5 +76,6 @@
     "created":"Dibuat",
     "failed_to_upload":"Gagal mengunggah",
     "before":"Sebelum",
-    "after":"Setelah"
+    "after":"Setelah",
+    "ams_mode_field_label": "Modus Ams"
 }

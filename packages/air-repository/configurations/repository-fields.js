@@ -40,7 +40,7 @@ export const repositoryFields = (t = () => {}) => ({
 		},
 		{
 			key   : 'ams_mode',
-			label : 'AMS Mode',
+			label : t('airRepository:ams_mode_field_label'),
 			span  : 1,
 		},
 		{
