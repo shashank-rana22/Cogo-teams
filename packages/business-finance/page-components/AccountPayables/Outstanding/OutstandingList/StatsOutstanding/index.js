@@ -127,7 +127,8 @@ function StatsOutstanding({ item = {}, source = '' }) {
 					</div>
 					<div className={styles.padding_total}>
 						<div className={styles.financial}>
-							Closing Balance FY22-23
+							Closing Balance
+							<span className={styles.year}>(FY22-23)</span>
 						</div>
 						<div className={cl`${styles.amount} ${styles.marginleft}`}>
 							{getAmount({

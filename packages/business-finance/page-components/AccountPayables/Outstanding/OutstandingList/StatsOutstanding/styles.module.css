@@ -26,7 +26,7 @@
 .styled_heading {
 	display: flex;
 	align-items: center;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 600;
 }
 
@@ -99,7 +99,12 @@
 
 .financial {
 	margin-left: 12px;
-	font-size: 12px;
+	font-weight: 600;
+}
+
+.year {
+	margin-left: 4px;
+	font-size: 8px;
 	font-weight: 600;
 }
 
