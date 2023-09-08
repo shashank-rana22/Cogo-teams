@@ -29,7 +29,6 @@ const useRaiseTicketcontrols = ({
 		},
 		valueKey: 'user_id',
 	});
-	console.log('console', organizationOptions, categoryOptions, ticketTypeOptions);
 	return [
 		{
 			label          : 'Select Service',

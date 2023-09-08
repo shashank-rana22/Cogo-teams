@@ -4,10 +4,12 @@ import Axios from 'axios';
 import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
+// eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
+		// eslint-disable-next-line custom-eslint/date-time-format-check
 		arrayFormat: 'brackets', serializeDate: (date) => format(date, 'isoUtcDateTime'),
 	});
 	return paramsStringify;
@@ -16,7 +18,7 @@ const ticketsRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_TICKET_RE
 
 ticketsRequest.interceptors.request.use((oldConfig) => {
 	const { authkey = '', ...axiosConfig } = oldConfig;
-	console.log(oldConfig);
+
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
 	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;

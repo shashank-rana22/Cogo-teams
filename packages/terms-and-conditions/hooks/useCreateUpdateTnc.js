@@ -5,8 +5,7 @@ import { useSelector } from '@cogoport/store';
 import toastApiError from '../utlis/toastApiError';
 
 const useCreateUpdateTnc = (props) => {
-	const { action, refetch, editFormValue, setEditTncModalId, organizationId } = props;
-
+	const { action, refetch, editFormValue, setEditTncModalId, organizationId, setShowModal } = props;
 	const {
 		general: { scope },
 	} = useSelector((state) => state);
@@ -54,6 +53,7 @@ const useCreateUpdateTnc = (props) => {
 
 			Toast.success(`Terms And Conditions ${editFormValue.id ? 'Updated' : 'Created'} Successfully`);
 			setEditTncModalId(null);
+			setShowModal(false);
 			refetch();
 		} catch (error) {
 			toastApiError(error);

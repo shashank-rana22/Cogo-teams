@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 function Form({
 	item = {}, tncLevel = 'basicInfo', setTncLevel = () => {}, organizationId = null, refetch = () => {},
-	setEditTncModalId = () => {},
+	setEditTncModalId = () => {}, setShowModal = () => {},
 }, ref) {
 	const controls = getControls({ item });
 	const DEFAULT_VALUES = {};
@@ -73,6 +73,7 @@ function Form({
 	const { onSubmit, loading } = useCreateUpdateTnc({
 		editTncModalId : item.id,
 		setEditTncModalId,
+		setShowModal,
 		refetch,
 		setTncLevel,
 		editFormValue  : item,

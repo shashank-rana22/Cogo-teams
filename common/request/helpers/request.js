@@ -13,6 +13,7 @@ const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate',
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
+		// eslint-disable-next-line custom-eslint/date-time-format-check
 		arrayFormat: 'brackets', serializeDate: (date) => format(date, 'isoUtcDateTime'),
 	});
 	return paramsStringify;
@@ -31,6 +32,7 @@ const customPeeweeSerializer = (params) => {
 
 	const paramsStringify = qs.stringify(newParams, {
 		arrayFormat   : 'repeat',
+		// eslint-disable-next-line custom-eslint/date-time-format-check
 		serializeDate : (date) => format(date, 'isoUtcDateTime'),
 	});
 
@@ -44,11 +46,9 @@ const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_UR
 request.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
-	console.log(store, newConfig.url);
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
-	console.log('Auth', authorizationparameters);
 	const apiPath = newConfig.url.split('/').pop();
 
 	const originalApiPath = newConfig.url

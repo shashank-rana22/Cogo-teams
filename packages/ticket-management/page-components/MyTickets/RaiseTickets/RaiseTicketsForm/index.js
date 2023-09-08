@@ -14,7 +14,6 @@ function RaiseTicketsForm({
 }) {
 	const { errors = {} } = formState || {};
 	const [subCategories, setSubCategories] = useState([]);
-	console.log('control', control);
 	const formRef = useRef(null);
 
 	const watchOrgId = watch('organization_id');
@@ -49,7 +48,6 @@ function RaiseTicketsForm({
 		resetField,
 	});
 	const controls = defaultControls?.concat(additionalControls);
-	console.log('controls', controls);
 	const DISABLE_MAPPING = {
 		sub_category : [watchCategory],
 		issue_type   : [watchCategory, watchSubCategory, watchTradeType, watchService],

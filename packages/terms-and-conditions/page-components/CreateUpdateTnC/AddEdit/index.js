@@ -49,6 +49,7 @@ function AddEdit({
 					<Modal.Header title={CREATION_STEPS_MAPPING[tncLevel]?.label} />
 					<Modal.Body>
 						<Form
+							setShowModal={setShowModal}
 							ref={formRef}
 							refetch={refetch}
 							tncLevel={tncLevel}
