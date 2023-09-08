@@ -30,6 +30,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_lead_organizations',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
 		api          : 'list_shipment_notes',
 		access_type  : 'private',
 		service_name : 'shipment',
