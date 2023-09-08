@@ -1,5 +1,3 @@
-import { startCase } from '@cogoport/utils';
-
 import List from '../../../commons/List';
 import inventoryFields from '../../../configurations/inventory-fields';
 import useListInventory from '../../../hooks/useListInventory';
@@ -31,31 +29,36 @@ function Inventory({
 				locations.push(item?.warehouseLocation?.zoneNumber);
 			});
 			locations = [...new Set(locations)];
+			locations = locations.join(', ');
 			return (
-				<>
-					{locations.join(', ')}
-				</>
+				<div>
+					{locations}
+				</div>
 			);
 		},
 		handleServices: (singleItem) => {
-			let services = [];
+			let uniqueServices = [];
 			singleItem?.details?.forEach((item) => {
-				services.push(item?.serviceName);
+				item?.services?.forEach((service) => {
+					uniqueServices.push(service?.serviceName);
+				});
 			});
-			services = [...new Set(services)];
-			services.join(', ');
+			uniqueServices = [...new Set(uniqueServices)];
+			uniqueServices = uniqueServices.join(', ');
 			return (
-				<>
-					{startCase(services)}
-				</>
+				<div>
+					{uniqueServices}
+				</div>
 			);
 		},
 		handleStatus: (singleItem) => {
 			let isReceived = true;
 			singleItem?.details?.forEach((item) => {
-				if (item?.serviceStatus === 'not_received') {
-					isReceived = false;
-				}
+				item?.services?.forEach((service) => {
+					if (service?.serviceStatus === 'not_received') {
+						isReceived = false;
+					}
+				});
 			});
 			return (
 				<div>
