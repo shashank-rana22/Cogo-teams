@@ -1639,7 +1639,7 @@ const apis = [
 	{
 		api          : 'get_ftl_freight_rate_min_max_validity_dates',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'ftl_freight_rate',
 	},
 	{
 		api          : 'list_shipment_consolidated_purchase_invoices',

@@ -1,0 +1,18 @@
+[
+	{
+		"value": "pallet",
+		"label": "Pallet"
+	},
+	{
+		"value": "box",
+		"label": "Box"
+	},
+	{
+		"value": "crate",
+		"label": "Crate"
+	},
+	{
+		"value": "loose",
+		"label": "Loose"
+	}
+]
