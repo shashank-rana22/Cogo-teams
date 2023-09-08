@@ -1,3 +1,4 @@
+import BillingAddress from './BillingAddress';
 import UserOnboard from './UserOnboard';
 
 function VerifyShipperDetails() {
@@ -5,6 +6,7 @@ function VerifyShipperDetails() {
 		<div>
 			<div>ygeruy</div>
 			<UserOnboard />
+			<BillingAddress />
 		</div>
 
 	);
