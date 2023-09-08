@@ -65,18 +65,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	}
 
 	if (search_type === 'warehouse') {
-		if (trade_type === 'export') {
-			return [{
-				location_id              : formValues?.location_id,
-				expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
-				expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
-				packages_count           : Number(packages_count || SINGLE_PACKAGE),
-				commodity_sub_type       : commodity_subtype,
-				packages,
-				commodity_type,
-				...common,
-			}];
-		} return [{
+		return [{
 			location_id              : formValues?.location_id,
 			expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
 			expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
