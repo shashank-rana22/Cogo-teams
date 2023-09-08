@@ -38,8 +38,8 @@ const useGetCoverageStats = (filter) => {
 						user_id      : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
 						daily_stats,
 						weekly_stats : !daily_stats,
-						start_date   : filter?.start_date || new Date(),
-						end_date     : filter?.end_date || new Date(),
+						start_date   : filter?.start_date || (daily_stats ? new Date() : undefined),
+						end_date     : filter?.end_date || (daily_stats ? new Date() : undefined),
 					},
 				},
 			});
