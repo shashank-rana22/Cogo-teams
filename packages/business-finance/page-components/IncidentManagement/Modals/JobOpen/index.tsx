@@ -20,6 +20,17 @@ const STATUS = {
 	rejected : 'REJECTED',
 };
 
+const customFormatAmount = (value) => (
+	formatAmount({
+		amount   :	value,
+		currency : geo.country.currency.code,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	})
+);
+
 function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = true }) {
 	const { t } = useTranslation(['incidentManagement']);
 
@@ -34,8 +45,6 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 	});
 
 	const { referenceId = '', data = {}, status = '', level1 = {}, level2 = {}, level3 = {} } = row || {};
-
-	const currency = geo.country.currency.code;
 
 	const {
 		documentUrls = [],
@@ -100,14 +109,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 								{t('incidentManagement:total_buy_label')}
 
 								<span className={styles.details_value}>
-									{formatAmount({
-										amount  :	totalBuy,
-										currency,
-										options : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
+									{customFormatAmount(totalBuy)}
 								</span>
 							</div>
 
@@ -115,14 +117,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 								{t('incidentManagement:total_sell_label')}
 
 								<span className={styles.details_value}>
-									{formatAmount({
-										amount  :	totalSell,
-										currency,
-										options : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
+									{customFormatAmount(totalSell)}
 								</span>
 							</div>
 
@@ -130,14 +125,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 								{t('incidentManagement:profit_margin_label')}
 
 								<span className={styles.details_value}>
-									{formatAmount({
-										amount  :	profitMargin,
-										currency,
-										options : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
+									{customFormatAmount(profitMargin)}
 								</span>
 							</div>
 						</div>
@@ -156,7 +144,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 								? (documentUrls || []).map((url: string) => (
 									<a key={url} href={url} target="_blank" rel="noreferrer">
 										{t('incidentManagement:view_doc_link')}
-										<IcMEyeopen style={{ marginLeft: '4px' }} />
+										<IcMEyeopen className={styles.icon} />
 									</a>
 								)) : (
 									t('incidentManagement:no_doc_available')

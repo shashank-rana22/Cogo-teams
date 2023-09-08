@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-// todo anmol: update these if required
 const geo = getGeoConstants();
 
 export const useStakeholderCheck = () => {

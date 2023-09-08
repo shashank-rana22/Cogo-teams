@@ -77,7 +77,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 									<span className={styles.required}>{item?.rules?.required ? ' *' : null}</span>
 									<Component {...item} control={control} />
 									<div className={styles.errors}>
-										{errors[item.name]?.message || ''}
+										{errors?.[item.name]?.message || ''}
 									</div>
 								</div>
 							);

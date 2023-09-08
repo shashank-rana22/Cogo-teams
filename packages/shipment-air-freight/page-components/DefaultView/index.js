@@ -34,7 +34,7 @@ const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
 function HandleRaiseContainer({
 	shipment_data = {},
 	alarmId = '',
-	setAlarmId = () => { },
+	setAlarmId = () => {},
 	isGettingShipment = false,
 }) {
 	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));

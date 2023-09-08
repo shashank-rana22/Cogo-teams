@@ -13,7 +13,7 @@ const useGetShipmentStakeholder = ({ shipment_id = '', stakeholder_type = '' }) 
 	}, { manual: false });
 
 	return {
-		data: data?.list,
+		data: data?.list || [],
 		loading,
 	};
 };

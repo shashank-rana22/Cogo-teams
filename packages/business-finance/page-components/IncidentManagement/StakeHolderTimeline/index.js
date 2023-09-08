@@ -1,4 +1,4 @@
-import { Popover, Pill } from '@cogoport/components';
+import { Popover, Pill, cl } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
@@ -27,9 +27,9 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 					<Pill
 						size="md"
 						style={{
-							background : STATUS_COLOR_MAPPING[isStatusPill?.value || 'PENDING'],
-							marginLeft : '12px',
+							background: STATUS_COLOR_MAPPING[isStatusPill?.value || 'PENDING'],
 						}}
+						className={styles.status_pill}
 					>
 						{isStatusPill?.value || t('incidentManagement:pending_status')}
 					</Pill>
@@ -41,28 +41,20 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 					const isStakeholderActive = !index || stakeHolders[index - FIRST]?.status === 'APPROVED';
 					return (
 						<div
-							className={styles.section}
+							className={cl`${styles.section} ${!isStakeholderActive ? styles.faded_text : ''}`}
 							key={item.key}
-							style={!isStakeholderActive ? {
-								color: '#bdbdbd',
-							} : {}}
 						>
 							<div className={styles.inner_div}>
 								{item.status === 'APPROVED' ? (
 									<div
-										className={styles.circle}
-										style={{ background: '#F68B21' }}
+										className={cl`${styles.circle} ${styles.approved_bg}`}
 									>
 										<IcMTick />
 									</div>
 								) : (
 									<div
-										className={styles.circle}
-										style={!isStakeholderActive ? {
-											background: '#bdbdbd',
-										} : {
-											background: '#000',
-										}}
+										className={cl`${styles.circle} 
+										${!isStakeholderActive ? styles.faded_bg : styles.active_bg}`}
 									>
 										{index + FIRST}
 									</div>
@@ -70,29 +62,24 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 
 								{index < stakeHolders.length - FIRST ? (
 									<div
-										className={styles.line}
-										style={item.status === 'APPROVED' ? {
-											background: '#F68B21',
-										} : {
-											background: '#bdbdbd',
-										}}
+										className={cl`${styles.line} 
+										${item?.status === 'APPROVED' ? styles.approved_bg : styles.faded_bg}`}
 									/>
 								) : null}
 							</div>
 
 							{item?.name || '-'}
 
-							<div style={{ display: 'flex' }}>
+							<div className={styles.flex}>
 
 								{item?.email || '-'}
 
 								<Pill
 									size="sm"
 									style={{
-										background : STATUS_COLOR_MAPPING[item?.status || 'PENDING'],
-										margin     : '0',
-										marginLeft : '4px',
+										background: STATUS_COLOR_MAPPING[item?.status || 'PENDING'],
 									}}
+									className={styles.level_status_pill}
 								>
 									{item?.status || t('incidentManagement:pending_status')}
 								</Pill>

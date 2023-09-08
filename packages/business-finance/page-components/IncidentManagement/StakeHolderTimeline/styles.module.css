@@ -50,3 +50,32 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.status_pill {
+	margin-left: 12px;
+}
+
+.faded_text {
+	color: var(--color-secondary-greyscale-4);
+}
+
+.faded_bg {
+	background: var(--color-secondary-greyscale-4);
+}
+
+.active_bg {
+	background: #000;
+}
+
+.approved_bg {
+	background: var(--color-accent-orange-2);
+}
+
+.flex {
+	display: flex;
+}
+
+.level_status_pill {
+	margin: 0;
+	margin-left: 4px;
+}

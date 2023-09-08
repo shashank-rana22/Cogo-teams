@@ -71,6 +71,8 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 						{controls.map((item) => {
 							const Component = INPUT_MAPPING[item.input_type];
 
+							if (!Component) return null;
+
 							return (
 								<div key={item.name} className={styles.input_container}>
 									<label>{item.label}</label>
