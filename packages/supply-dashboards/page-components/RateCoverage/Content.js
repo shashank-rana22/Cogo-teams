@@ -1,11 +1,14 @@
-import { Button, Input, Toggle } from '@cogoport/components';
+import { Button, Select, Toggle } from '@cogoport/components';
+import { asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Filter from './components/Filter';
 import ListData from './components/ListData';
 import TasksOverview from './components/TasksOverview';
+import useGetCoverageStats from './hooks/useGetCoverageStats';
 import useGetListCoverage from './hooks/useGetListCoverages';
 import styles from './styles.module.css';
 
@@ -31,11 +34,25 @@ function RateCoverageContent() {
 		setFilter = () => {},
 	} = useGetListCoverage();
 
-	const { statistics = {} } = data;
+	const { loading:statsLoading, data:statsData, getStats } = useGetCoverageStats(filter);
 
 	const handleToggle = () => {
-		setFilter((prevFilters) => ({ ...prevFilters, releventToMeValue: !prevFilters?.releventToMeValue }));
+		setFilter((prevFilters) => (
+			{
+				...prevFilters,
+				releventToMeValue: !prevFilters?.releventToMeValue,
+			}
+		));
+		setShowWeekData(false);
 	};
+
+	const assignToUsers = useGetAsyncOptions(merge(asyncFieldsPartnerUsers(), {
+		params: {
+			filters: {
+				status: 'active',
+			},
+		},
+	}));
 
 	return (
 		<div>
@@ -47,12 +64,13 @@ function RateCoverageContent() {
 				</span>
 				{!filter?.releventToMeValue
 					&& (
-						<Input
+						<Select
 							className={styles.assigned_input}
 							size="sm"
-							placeholder="Serach by assigned to"
-							value={filter?.assigned_to}
-							onChange={(val) => setFilter((prev) => ({ ...prev, assigned_to: val }))}
+							placeholder="Select"
+							value={filter?.assigned_to_id}
+							{...assignToUsers}
+							onChange={(val) => setFilter((prev) => ({ ...prev, assigned_to_id: val }))}
 						/>
 					)}
 				<div className={styles.filter_container}>
@@ -87,8 +105,8 @@ function RateCoverageContent() {
 				/>
 			)}
 			<TasksOverview
-				data={statistics}
-				statsLoading={loading}
+				data={statsData}
+				statsLoading={statsLoading}
 				showWeekData={showWeekData}
 				setShowWeekData={setShowWeekData}
 				filter={filter}
@@ -97,6 +115,7 @@ function RateCoverageContent() {
 			/>
 			<ListData
 				data={data}
+				statsData={statsData}
 				getListCoverage={getListCoverage}
 				filter={filter}
 				listLoading={loading}
@@ -107,6 +126,7 @@ function RateCoverageContent() {
 				setFilter={setFilter}
 				serialId={serialId}
 				setSerialId={setSerialId}
+				getStats={getStats}
 			/>
 		</div>
 	);

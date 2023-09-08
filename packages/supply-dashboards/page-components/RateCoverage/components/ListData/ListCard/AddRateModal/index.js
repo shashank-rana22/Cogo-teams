@@ -35,6 +35,8 @@ function AddRateModal({
 	setShowModal = () => {},
 	filter = {},
 	data = {},
+	getStats = () => {},
+	getListCoverage = () => {},
 }) {
 	const isAirService = filter?.service === 'air_freight';
 
@@ -176,6 +178,8 @@ function AddRateModal({
 		if (!id) { return; }
 		Toast.success('Rate added successfully');
 		setShowModal(false);
+		getStats();
+		getListCoverage();
 	};
 
 	return (

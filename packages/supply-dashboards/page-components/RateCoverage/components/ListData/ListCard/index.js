@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
 
-function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
+function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {} }) {
 	const { sources = [] } = data;
 
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
@@ -184,6 +184,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 					data={data}
 					getListCoverage={getListCoverage}
 					filter={filter}
+					getStats={getStats}
 				/>
 			)}
 			{showAddRateModal && (
@@ -192,6 +193,8 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {} }) {
 					setShowModal={setShowAddRateModal}
 					filter={filter}
 					data={data}
+					getStats={getStats}
+					getListCoverage={getListCoverage}
 				/>
 			)}
 		</div>

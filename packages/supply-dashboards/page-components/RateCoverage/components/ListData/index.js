@@ -16,7 +16,7 @@ const LIST_CARD_LOADER_COUNT = 5;
 
 function ListData({
 	data = {},
-
+	statsData = {},
 	getListCoverage = () => {},
 	filter = {},
 	source = null,
@@ -26,10 +26,11 @@ function ListData({
 	setPage = () => {},
 	serialId = '',
 	setSerialId = () => {},
+	getStats = () => {},
 }) {
-	const { statistics = {} } = data;
+	const { statistics = {} } = statsData;
 	const { list = [] } = data;
-	const { dynamic_statistics = {} } = data;
+	const { dynamic_statistics = {} } = statsData;
 
 	useEffect(() => {
 		getListCoverage(serialId);
@@ -59,11 +60,14 @@ function ListData({
 				))}
 			</div>
 			<div className={styles.container}>
-				<span>
-					{dynamic_statistics[source] || DEFAULT_VALUE}
-					{' '}
-					{HEADINGS[source] || 'Critical Port Pairs'}
-				</span>
+				{source
+				&& (
+					<span>
+						{dynamic_statistics[source] || DEFAULT_VALUE}
+						{' '}
+						{HEADINGS[source] || 'Critical Port Pairs'}
+					</span>
+				)}
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Input
 						size="sm"
@@ -81,7 +85,7 @@ function ListData({
 						style={{ marginTop: '10px' }}
 					/>
 				))}
-				{ (!isEmpty(list)) ? (
+				{(!isEmpty(list) && !listLoading) && (
 					<>
 						{(list || []).map((list_data) => (
 							<ListCard
@@ -89,6 +93,7 @@ function ListData({
 								key={list_data?.id}
 								getListCoverage={getListCoverage}
 								filter={filter}
+								getStats={getStats}
 							/>
 						))}
 						<div className={styles.pagination}>
@@ -101,7 +106,9 @@ function ListData({
 							/>
 						</div>
 					</>
-				) : (
+				)}
+				{(isEmpty(list) && !listLoading)
+				&& (
 					<EmptyState
 						height={220}
 						width={380}

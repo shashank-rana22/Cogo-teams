@@ -12,6 +12,7 @@ function CloseModal({
 	data = {},
 	getListCoverage = () => {},
 	filter = {},
+	getStats = () => {},
 }) {
 	const {
 		loading,
@@ -26,6 +27,7 @@ function CloseModal({
 		if (id) {
 			Toast.success('closed successfully');
 			setShowModal(false);
+			getStats();
 			getListCoverage();
 		}
 	};
