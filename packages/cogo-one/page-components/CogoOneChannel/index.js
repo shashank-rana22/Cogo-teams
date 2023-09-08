@@ -8,7 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../constants';
+import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -122,7 +122,7 @@ function CogoOne() {
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab?.tab === 'message'
+	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 

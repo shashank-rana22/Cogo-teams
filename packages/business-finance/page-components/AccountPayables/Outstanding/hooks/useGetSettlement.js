@@ -5,7 +5,7 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-const useHistorySettlement = ({ organizationId }) => {
+const useHistorySettlement = ({ organizationId, setStats = () => { } }) => {
 	const [filters, setFilters] = useState({
 		query       : '',
 		date        : {},
@@ -68,6 +68,10 @@ const useHistorySettlement = ({ organizationId }) => {
 			refetch();
 		}
 	}, [organizationId, refetch]);
+
+	useEffect(() => {
+		setStats((prevStats) => ({ ...prevStats, settlement: data?.totalRecords }));
+	}, [setStats, data]);
 
 	return {
 		filters,

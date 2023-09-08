@@ -8,6 +8,8 @@ export const amountCollectionFilters = ({ accMode }) => [
 		options     : [
 			{ label: 'AR', value: 'AR' },
 			{ label: 'AP', value: 'AP' },
+			{ label: 'CSD', value: 'CSD' },
+			{ label: 'PDA', value: 'PDA' },
 		],
 		selectWidth: '150px',
 	},

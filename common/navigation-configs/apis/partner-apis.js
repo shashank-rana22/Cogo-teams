@@ -3718,6 +3718,11 @@ const partner = {
 			feature      : 'rate_feedbacks',
 		},
 		{
+			api          : 'list_spot_search_stats',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
+		{
 			api          : 'update_checkout_risk_category',
 			access_type  : 'private',
 			service_name : 'checkout',
@@ -13305,6 +13310,11 @@ const partner = {
 			api          : 'onboard_lead_organization',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
 		},
 	],
 	analytics_dashboard: [
