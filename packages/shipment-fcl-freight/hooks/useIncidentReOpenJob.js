@@ -16,10 +16,9 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 			businessName: shipmentData?.importer_exporter?.business_name,
 		},
 	},
-	toWhomToSendForApproval      : ['LEVEL_1', 'LEVEL_2'],
-	incidentApprovalManagementId : 'Yg',
-	createdBy                    : user_id,
-	source                       : 'SHIPMENT',
+	toWhomToSendForApproval : ['LEVEL_1', 'LEVEL_2'],
+	createdBy               : user_id,
+	source                  : 'SHIPMENT',
 
 });
 
