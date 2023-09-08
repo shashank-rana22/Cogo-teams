@@ -2,17 +2,12 @@ import { Button, Pill } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-// todo anmol: update these according to roles
 const JOB_OPEN_ALLOWED_ROLES = [
 	'superadmin',
 	'admin',
-	// kam managers
 	'booking_agent_manager',
-	// so2 managers
-	'document_desk_manager',
 	'costbooking_manager',
-	'lastmile_ops_manager',
-	'so1_so2_ops',
+	'operation_manager',
 ];
 
 function JobStatus({ shipment_data = {}, activeStakeholder = '', setReOpenJobModal = () => {} }) {
