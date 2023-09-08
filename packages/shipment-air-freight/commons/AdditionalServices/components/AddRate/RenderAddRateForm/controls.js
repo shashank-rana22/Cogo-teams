@@ -1,4 +1,4 @@
-import CustomOptions from '@cogoport/air-modules/common/CustomOptions';
+import { CustomOptions } from '@cogoport/air-modules';
 import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
 

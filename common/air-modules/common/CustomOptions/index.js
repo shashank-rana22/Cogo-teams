@@ -29,7 +29,7 @@ function CustomOptions(option = {}) {
 	} = option;
 
 	const code = cogo_entity?.entity_code;
-	const { country_code = '' } = ENTITY_MAPPING[code];
+	const country_code = ENTITY_MAPPING[code]?.country_code;
 
 	return (
 		<div className={styles.option_container}>
