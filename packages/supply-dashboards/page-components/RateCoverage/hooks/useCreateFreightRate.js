@@ -41,7 +41,8 @@ const useCreateFreightRate = (service) => {
 		const params = (service === 'air_freight') ? {
 			origin_airport_id      : data?.origin_airport_id,
 			destination_airport_id : data?.destination_airport_id,
-			commodity_type         : 'all',
+			commodity_type         : data?.commodity_type || 'all',
+			commodity_sub_type     : data?.commodity_sub_type || 'all',
 			weight_slabs,
 		} : {
 			origin_port_id      : data?.origin_location_id,
