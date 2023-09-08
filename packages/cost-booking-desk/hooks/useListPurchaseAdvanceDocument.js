@@ -12,20 +12,25 @@ const getParams = ({
 	query = '',
 	pagination = INIT_PAGE,
 	extraFilters = {},
+	statusFilter = '',
+	paymentActiveTab = '',
 }) => {
 	const searchQuery = query ? { q: query } : {};
 
+	const keyToSend = paymentActiveTab === 'payment_request' ? 'status' : 'reconciled';
+
 	return {
-		tradeType : 'import',
-		type      : 'CONTAINER_SECURITY_DEPOSIT',
-		pageIndex : pagination,
-		pageSize  : 10,
+		tradeType   : 'import',
+		type        : 'CONTAINER_SECURITY_DEPOSIT',
+		[keyToSend] : !isEmpty(statusFilter) ? statusFilter : undefined,
+		pageIndex   : pagination,
+		pageSize    : 10,
 		...searchQuery,
 		...extraFilters,
 	};
 };
 
-function useListPurchaseAdvanceDocument({ searchValue = '' }) {
+function useListPurchaseAdvanceDocument({ searchValue = '', modalData = {} }) {
 	const {
 		activeTab = '',
 		paymentActiveTab = '',
@@ -34,6 +39,8 @@ function useListPurchaseAdvanceDocument({ searchValue = '' }) {
 		filters = {},
 		newScopeFilters = {},
 	} = useContext(CostBookingDeskContext);
+
+	const { statusFilter } = modalData;
 
 	const [pagination, setPagination] = useState(INIT_PAGE);
 
@@ -45,7 +52,7 @@ function useListPurchaseAdvanceDocument({ searchValue = '' }) {
 		url     : '/purchase/advance-document/list-csd-advance-documents',
 		method  : 'GET',
 		authKey : 'get_purchase_advance_document_list_csd_advance_documents',
-		params  : getParams({ query, pagination, extraFilters }),
+		params  : getParams({ query, pagination, extraFilters, statusFilter, paymentActiveTab }),
 	}, { manual: false });
 
 	const documentListIds = useMemo(() => (data?.list || []).map((item) => item?.advanceDocumentId), [data?.list]);
