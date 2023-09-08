@@ -19,7 +19,7 @@
 .email_input {
 	flex-flow: row wrap;
 	padding: 2px;
-	background: white;
+	background: #fff;
 	border-radius: 10px;
 }
 
