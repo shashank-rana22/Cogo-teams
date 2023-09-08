@@ -9,7 +9,7 @@
 
 .label {
 	width: 100%;
-	padding: 24px 16px 0 32px;
+	padding: 24px 16px 24px 32px;
 	font-weight: 700;
 }
 
@@ -49,7 +49,7 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
-	padding: 24px 16px 0 32px;
+	padding-right: 12px;
 }
 
 .billing_party_container {
@@ -62,4 +62,9 @@
 
 .margin_bottom {
 	margin-bottom: 8px;
+}
+
+.caret {
+	margin: 0 16px;
+	cursor: pointer;
 }

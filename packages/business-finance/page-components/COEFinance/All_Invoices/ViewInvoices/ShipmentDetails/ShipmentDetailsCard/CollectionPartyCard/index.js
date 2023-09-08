@@ -48,7 +48,7 @@ function CollectionPartyCard({
 				>
 					{label}
 					<div
-						style={{ justifyContent: 'center', display: 'flex' }}
+						className={styles.arrow_icon}
 					>
 						{iconElement}
 					</div>

@@ -253,9 +253,9 @@ function LineItemCard({
 				</div>
 			</div>
 
-			<div className={styles.container}>
+			<div>
 				{showDetails ? (
-					<div>
+					<div className={styles.container}>
 						<List
 							config={LINE_ITEMS}
 							itemData={{ list: lineItems }}
