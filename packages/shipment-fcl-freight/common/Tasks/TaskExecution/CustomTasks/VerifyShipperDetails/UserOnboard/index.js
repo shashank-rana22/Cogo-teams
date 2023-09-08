@@ -8,6 +8,7 @@ import {
 	// UploadController,
 	useForm,
 } from '@cogoport/forms';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 // import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
 // import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 // import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
@@ -20,8 +21,10 @@ function Error(key, errors) {
 
 function UserOnboard() {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
-	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
+	const { control, formState:{ errors = {} }, handleSubmit, formState: { isValid = false }, formValues } = useForm();
 	// const formValues = watch();
+
+	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
 
 	const updateDetails = (values) => {
 		console.log({ values });
@@ -70,12 +73,12 @@ function UserOnboard() {
 							control={control}
 							placeholder="Enter GST"
 							rules={{
-								// required : ['collection_party', 'paying_party'].includes(tradePartyType),
-								// pattern  : {
-								// 	value   : countryValidation?.regex?.PAN,
-								// 	message : `
-								// 	${countryValidation?.others?.identification_number?.label}Number is invalid`,
-								// },
+								required : { value: !formValues?.gst_number, message: 'GST number is required' },
+								pattern  : {
+									value   : countryValidation?.regex?.GST,
+									message : `
+									${countryValidation?.others?.identification_number?.label}Number is invalid`,
+								},
 							}}
 						/>
 						{Error('registration_number', errors)}
@@ -83,7 +86,11 @@ function UserOnboard() {
 				</div>
 
 				<div className={styles.button_container}>
-					<Button themeType="accent" onClick={handleSubmit(updateDetails)}>
+					<Button
+						themeType="accent"
+						onClick={handleSubmit(updateDetails)}
+						disabled={!isValid}
+					>
 						Update
 					</Button>
 				</div>
