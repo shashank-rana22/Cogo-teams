@@ -25,8 +25,7 @@ const getParams = ({
 	};
 };
 
-function useListPurchaseAdvanceDocument({ show = {} }) {
-	const { searchValue = '' } = show;
+function useListPurchaseAdvanceDocument({ searchValue = '' }) {
 	const {
 		activeTab = '',
 		paymentActiveTab = '',
