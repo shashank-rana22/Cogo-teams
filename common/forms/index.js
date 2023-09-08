@@ -16,6 +16,7 @@ export { default as TimepickerController } from './page-components/Controlled/Ti
 export { default as CheckboxGroupController } from './page-components/Controlled/CheckboxGroupController';
 export { default as DayFrequencyController } from './page-components/Controlled/DayFrequencyController';
 export { default as AsyncSelectController } from './page-components/Controlled/AsyncSelectController';
+export { default as MultiEmailController } from './page-components/Controlled/MultiEmailController';
 export {
 	default as
 	CountrywiseTaxNumberSelectController,
@@ -30,6 +31,7 @@ export { default as RangeSliderController } from './page-components/Controlled/R
 export { default as SingleDateRangeController } from './page-components/Controlled/SingleDateRangeController';
 export { default as PriceSelectController } from './page-components/Controlled/PriceSelectController';
 export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
+export { default as MultiEmailInput } from './page-components/Business/MultiEmailInput';
 export { default as RatingController } from './page-components/Controlled/RatingController';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
