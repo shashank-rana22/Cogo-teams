@@ -26,7 +26,6 @@
 .styled_heading {
 	display: flex;
 	align-items: center;
-	font-size: 14px;
 	font-weight: 600;
 }
 
@@ -115,7 +114,6 @@
 }
 
 .stats_lable {
-	font-size: 14px;
 	font-weight: 600;
 }
 
