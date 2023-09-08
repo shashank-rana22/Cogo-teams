@@ -1,8 +1,7 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
-
-const SOP_EMPTY_STATE_URL = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 
 function EmptyState({
 	height = 125,
@@ -14,7 +13,7 @@ function EmptyState({
 	return (
 		<div className={cl`${styles.container} ${styles[flexDirection]}`}>
 			<img
-				src={SOP_EMPTY_STATE_URL}
+				src={GLOBAL_CONSTANTS?.image_url?.empty_state}
 				width={width}
 				height={height}
 				alt="Empty-state"
