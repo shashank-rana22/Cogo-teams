@@ -2,9 +2,9 @@ import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
 import AdminConfirmed from './admin-view/admin-confirmation';
-import ExitInterview from './hrbp-view/ExitInterview';
 import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
+import ExitInterview from './hrbp-view/ExitInterview';
 import FinanceClearance from './hrbp-view/FinanceClearance';
 import HandoverTakeoverClearance from './hrbp-view/HandoverTakeoverClearance';
 import HRMeeting from './hrbp-view/HRMeeting';
@@ -15,6 +15,7 @@ import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
 import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
+import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 const COMPONENT_MAPPING = {
 	hrbp: {
@@ -46,6 +47,9 @@ const COMPONENT_MAPPING = {
 };
 
 function FormComponent() {
+	const { data } = useGetApplicationProcessDetails();
+	console.log('🚀 ~ file: index.js:51 ~ FormComponent ~ data:', data);
+
 	const Render = COMPONENT_MAPPING.manager.handover_takeover;
 
 	return (
