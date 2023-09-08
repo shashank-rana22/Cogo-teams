@@ -36,7 +36,7 @@ function MergeDocuments({ setActive = () => {} }) {
 
 	const { deleteInvoices = () => {} } = useDeletePayrunInvoice({ generateInvoice });
 	const { deleteTaggedDocuments = () => {} } = useDeleteTaggedDocuments({ generateInvoice });
-	const { loadingMerged = false, mergeInvoices = () => {} } = useMergedPdf();
+	const { loadingMerged = false, mergeInvoices = () => {} } = useMergedPdf({ generateInvoice });
 
 	const { documents = {}, list = [] } = data || {};
 
