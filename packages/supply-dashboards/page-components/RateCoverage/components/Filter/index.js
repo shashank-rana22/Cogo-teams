@@ -1,6 +1,7 @@
 import { Button, DateRangepicker, Select } from '@cogoport/components';
 import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
-import { merge } from '@cogoport/utils';
+import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
+import { merge, startCase } from '@cogoport/utils';
 
 import { serviceOptions, taskStatusOptions, commodityOptions } from '../../configurations/helpers/constants';
 
@@ -32,6 +33,18 @@ function Filter({
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type } } },
 	));
+
+	const FCL_COMMODITY_OPTIONS = [];
+	(Object.keys(FREIGHT_CONTAINER_COMMODITY_MAPPINGS) || []).forEach((containerType) => {
+		FREIGHT_CONTAINER_COMMODITY_MAPPINGS[containerType].forEach((commodity) => {
+			FCL_COMMODITY_OPTIONS.push(
+				{
+					label : (commodity.split('-') || []).map((item) => parseFloat(item) || startCase(item)).join(' '),
+					value : commodity,
+				},
+			);
+		});
+	});
 
 	const handleClick = () => {
 		setFilter({
@@ -124,7 +137,7 @@ function Filter({
 					<Select
 						placeholder="Search here"
 						value={filter?.commodity}
-						options={commodityOptions}
+						options={(isAirService) ? commodityOptions : FCL_COMMODITY_OPTIONS}
 						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, commodity: value, page: 1 }));

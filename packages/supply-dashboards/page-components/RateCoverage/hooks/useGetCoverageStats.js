@@ -30,6 +30,7 @@ const useGetCoverageStats = (filter) => {
 				FINAL_FILTERS[item] = restFilters[item];
 			}
 		});
+
 		try {
 			await trigger({
 				params: {
@@ -38,8 +39,8 @@ const useGetCoverageStats = (filter) => {
 						user_id      : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
 						daily_stats,
 						weekly_stats : !daily_stats,
-						start_date   : filter?.start_date || (daily_stats ? new Date() : undefined),
-						end_date     : filter?.end_date || (daily_stats ? new Date() : undefined),
+						start_date   : filter?.start_date,
+						end_date     : filter?.end_date,
 					},
 				},
 			});
