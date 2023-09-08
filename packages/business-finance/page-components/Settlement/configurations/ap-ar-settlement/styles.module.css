@@ -1,0 +1,16 @@
+.icon_flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-left: 8px;
+}
+
+.active {
+	fill: var(--color-primary-error-red-1);
+}
+
+.commonStylingHeader {
+	display: flex;
+	font-size: 12px;
+}
