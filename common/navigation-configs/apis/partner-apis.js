@@ -4826,6 +4826,41 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
+		{
+			api          : 'generate_csv_file_url',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_fcl_freight_rate_job',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_air_freight_rate_job',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'list_fcl_freight_rate_jobs',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_jobs',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'get_fcl_freight_rate_job_stats',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_job_stats',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 	],
 	operations_dashboard: [
 		{

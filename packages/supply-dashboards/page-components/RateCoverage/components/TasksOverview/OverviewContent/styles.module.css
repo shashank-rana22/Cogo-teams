@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.cards_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.header_container {
+	margin-bottom: 20px;
+}
+
+.details_card {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+}
