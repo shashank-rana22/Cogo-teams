@@ -53,6 +53,7 @@ function Filter({
 			releventToMeValue : true,
 			page              : 1,
 			daily_stats       : true,
+			assign_to_id      : '',
 		});
 		setSerialId('');
 		setShowWeekData(false);
@@ -91,6 +92,7 @@ function Filter({
 								status            : 'pending',
 								releventToMeValue : true,
 								daily_stats       : true,
+								assign_to_id      : '',
 							});
 							setShowWeekData(false);
 						}}

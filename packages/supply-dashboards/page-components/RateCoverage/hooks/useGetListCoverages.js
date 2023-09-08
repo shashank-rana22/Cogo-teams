@@ -34,6 +34,7 @@ const useGetListCoverage = () => {
 		status            : 'pending',
 		releventToMeValue : true,
 		daily_stats       : true,
+		assign_to_id      : '',
 	});
 
 	const [source, setSource] = useState(null);
@@ -46,7 +47,7 @@ const useGetListCoverage = () => {
 	}, { manual: true });
 
 	const getListCoverage = useCallback(async (sid) => {
-		const { releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
+		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 
@@ -69,7 +70,7 @@ const useGetListCoverage = () => {
 						...FINAL_FILTERS,
 						serial_id  : sid ? parseInt(sid, 10) : undefined,
 						source     : source || undefined,
-						user_id    : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
+						user_id    : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
 						start_date : filter?.start_date,
 						end_date   : filter?.end_date,
 					},

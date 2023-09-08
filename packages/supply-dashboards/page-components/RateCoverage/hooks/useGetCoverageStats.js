@@ -22,7 +22,7 @@ const useGetCoverageStats = (filter) => {
 		method : 'GET',
 	}, { manual: true });
 	const getStats = useCallback(async () => {
-		const { releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
+		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 		(Object.keys(restFilters) || []).forEach((item) => {

@@ -40,7 +40,8 @@ function RateCoverageContent() {
 		setFilter((prevFilters) => (
 			{
 				...prevFilters,
-				releventToMeValue: !prevFilters?.releventToMeValue,
+				releventToMeValue : !prevFilters?.releventToMeValue,
+				assign_to_id      : '',
 			}
 		));
 		setShowWeekData(false);
@@ -53,6 +54,13 @@ function RateCoverageContent() {
 			},
 		},
 	}));
+
+	const getUserId = (id) => {
+		const { options = [] } = assignToUsers;
+		const user = options.find((item) => item?.id === id);
+		if (user) { return user?.user_id; }
+		return undefined;
+	};
 
 	return (
 		<div>
@@ -68,9 +76,11 @@ function RateCoverageContent() {
 							className={styles.assigned_input}
 							size="sm"
 							placeholder="Select"
-							value={filter?.user_id}
+							value={filter?.assign_to_id}
 							{...assignToUsers}
-							onChange={(val) => setFilter((prev) => ({ ...prev, user_id: val }))}
+							onChange={(val) => setFilter((prev) => ({
+								...prev, assign_to_id: val, user_id: getUserId(val),
+							}))}
 						/>
 					)}
 				<div className={styles.filter_container}>
