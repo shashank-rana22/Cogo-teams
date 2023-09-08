@@ -26,7 +26,7 @@ function InvoiceDetailsCard({
 	billAdditionalObject = {},
 	advancedPaymentObj = {},
 	setShowHighAdvancedModal = () => {},
-
+	docContent = '',
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -69,6 +69,8 @@ function InvoiceDetailsCard({
 	} else if (rejected.includes(CARD_ID)) {
 		iconComponent = <IcMCrossInCircle height="17px" width="17px" />;
 	}
+
+	const remarksValue = remarks?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
 		<div className={styles.container}>
@@ -145,27 +147,51 @@ function InvoiceDetailsCard({
 						<div className={styles.margin_bottom}>
 							Invoice Number -
 							{' '}
-							<span>{billNumber}</span>
+							<span
+								style={{ color: docContent?.includes(billNumber) ? 'green' : 'auto' }}
+							>
+								{billNumber}
+							</span>
 						</div>
 						<div className={styles.margin_bottom}>
 							Invoice Type -
 							{' '}
-							<span>{invoiceType}</span>
+							<span
+								style={{ color: docContent?.includes(invoiceType) ? 'green' : 'auto' }}
+							>
+								{invoiceType}
+
+							</span>
 						</div>
 						<div className={styles.margin_bottom}>
 							Supplier name -
 							{' '}
-							<span>{organizationName}</span>
+							<span
+								style={{ color: docContent?.includes(organizationName) ? 'green' : 'auto' }}
+							>
+								{organizationName}
+
+							</span>
 						</div>
 						<div className={styles.margin_bottom}>
 							Urgency Tag -
 							{' '}
-							<span>{tag}</span>
+							<span
+								style={{ color: docContent?.includes(tag) ? 'green' : 'auto' }}
+							>
+								{tag}
+
+							</span>
 						</div>
 						<div className={styles.margin_bottom}>
 							Remarks -
 							{' '}
-							<span>{remarks?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'No Remarks'}</span>
+							<span
+								style={{ color: docContent?.includes(remarksValue) ? 'green' : 'auto' }}
+							>
+								{remarksValue || 'No Remarks'}
+
+							</span>
 						</div>
 						<div className={styles.margin_bottom}>
 							Invoice Date -

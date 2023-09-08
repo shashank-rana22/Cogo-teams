@@ -21,6 +21,7 @@ function BillingPartyCard({
 	handleClick = () => {},
 	isDisabled = false,
 	status = '',
+	docContent = '',
 }) {
 	let labelClassName;
 	const [showDetails, setShowDetails] = useState(false);
@@ -112,11 +113,29 @@ function BillingPartyCard({
 					<div className={styles.hr} />
 
 					<div className={styles.billing_party_container}>
-						{billingPartyRejectionList?.map((item) => (
-							<div key={item.label} className={styles.margin_bottom}>
-								{item.label}
-							</div>
-						))}
+						{billingPartyRejectionList?.map((item) => {
+							const [labelText, valueText] = (item?.label || '').split(' - ');
+							return (
+								<div
+									key={item?.label}
+									className={styles.margin_bottom}
+								>
+									{labelText}
+									{' '}
+									-
+									{' '}
+									<span
+										style={{
+											color: docContent?.includes(valueText)
+												? 'green' : 'auto',
+										}}
+									>
+										{valueText}
+									</span>
+								</div>
+							);
+						})}
+
 					</div>
 
 				</div>

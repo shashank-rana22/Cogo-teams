@@ -18,6 +18,7 @@ function CollectionPartyCard({
 	handleClick = () => {},
 	isDisabled = false,
 	status = '',
+	docContent = '',
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -112,11 +113,29 @@ function CollectionPartyCard({
 					<div className={styles.hr} />
 
 					<div className={styles.billing_party_container}>
-						{collectionPartyRejectionList?.map((item) => (
-							<div key={item.label} className={styles.margin_bottom}>
-								{item.label}
-							</div>
-						))}
+						{collectionPartyRejectionList?.map((item) => {
+							const [labelText, valueText] = (item?.label || '').split(' - ');
+							return (
+								<div
+									key={item?.label}
+									className={styles.margin_bottom}
+								>
+									{labelText}
+									{' '}
+									-
+									{' '}
+									<span
+										style={{
+											color: docContent?.includes(valueText)
+												? 'green' : 'auto',
+										}}
+									>
+										{valueText}
+
+									</span>
+								</div>
+							);
+						})}
 					</div>
 
 				</div>

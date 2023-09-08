@@ -10,6 +10,7 @@ import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 import billingPartyRejectCheckboxList from '../../../../constants/billing-party-remark-checkbox-list';
 import collectionPartyRejectCheckboxList from '../../../../constants/collection-party-remark-checkbox-list';
+import useGetDocumentContent from '../../../../hook/useGetDocumentContent';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import isDisabled from '../../../../utils/isDisabled';
@@ -148,6 +149,8 @@ function ShipmentDetailsCard({
 	const [advancedPaymentObj = {}] = (shipmentDocData?.list
 		?.filter((item) => JSON.parse(JSON.stringify(item?.data || ''))?.invoice_number === billNumber
 		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
+
+	const { docContent } = useGetDocumentContent({ data });
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -326,6 +329,7 @@ function ShipmentDetailsCard({
 									handleClick={handleClick}
 									isDisabled={isDisabled}
 									status={status}
+									docContent={docContent}
 								/>
 							)}
 
@@ -342,6 +346,7 @@ function ShipmentDetailsCard({
 									handleClick={handleClick}
 									isDisabled={isDisabled}
 									status={status}
+									docContent={docContent}
 								/>
 							)}
 
@@ -363,6 +368,7 @@ function ShipmentDetailsCard({
 									bill={bill}
 									advancedPaymentObj={advancedPaymentObj}
 									setShowHighAdvancedModal={setShowHighAdvancedModal}
+									docContent={docContent}
 								/>
 							)}
 
