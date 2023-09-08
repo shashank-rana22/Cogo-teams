@@ -64,7 +64,6 @@ import {
 	IcMFsoppoc,
 	IcMBookingDesk,
 	IcASecureCloudStorage,
-	IcAWarehouse,
 	IcMUpwardGraph,
 } from '@cogoport/icons-react';
 
