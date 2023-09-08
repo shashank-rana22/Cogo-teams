@@ -14,7 +14,7 @@ function PriceSelect({
 	id = 'select_price',
 	inputType = 'text',
 	type = 'text',
-	disable_country_code = false,
+	disable_currency = false,
 	...rest
 }) {
 	const { [codeKey]: currency = '', [priceKey]: price = '' } = value || {};
@@ -40,7 +40,7 @@ function PriceSelect({
 					onChange={handleCodeChange}
 					placeholder="Select"
 					showMessage={false}
-					disabled={disable_country_code}
+					disabled={disable_currency}
 					inputId={`${id || ''}_${codeKey || 'country_code'}`}
 					options={currencyOptions || []}
 				/>

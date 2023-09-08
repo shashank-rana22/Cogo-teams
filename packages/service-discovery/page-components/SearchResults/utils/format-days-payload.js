@@ -35,7 +35,7 @@ const getFclServices = (services) => {
 	return FILTERED_SERVICES;
 };
 
-const specificRatePayload = (services, values) => {
+const specificRatePayload = (services = {}, values = {}) => {
 	const SPECIFIC_RATE_PAYLOAD = [];
 
 	const fcl_freight_services = getFclServices(services);

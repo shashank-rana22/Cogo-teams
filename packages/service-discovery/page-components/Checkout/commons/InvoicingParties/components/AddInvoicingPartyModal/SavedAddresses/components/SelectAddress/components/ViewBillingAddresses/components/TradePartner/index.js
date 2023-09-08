@@ -50,27 +50,19 @@ function TradePartner({
 						<Pill className={verification_status}>{verification_status}</Pill>
 
 						<Tooltip
-							content={(
-								<div>
-									Please provide a proof of agreement that verifies the trade
-									party&apos;s authorization to make payment on behalf of the
-									Booking party.
-									{' '}
-								</div>
-							)}
+							content={`Please provide a proof of agreement that verifies the tradeparty&apos;s 
+							authorization to make payment on behalf of the Booking party.`}
 							placement="top"
 							caret={false}
 							interactive
 						>
 							{verification_status === 'pending' && (
-								<div>
-									<IcMInfo
-										className="image"
-										fill="red"
-										height={16}
-										width={16}
-									/>
-								</div>
+								<IcMInfo
+									className="image"
+									fill="red"
+									height={16}
+									width={16}
+								/>
 							)}
 						</Tooltip>
 					</div>
@@ -78,14 +70,14 @@ function TradePartner({
 			</div>
 
 			{((is_tax_applicable ? billing_addresses : other_addresses) || []).map(
-				(billingAddress) => {
+				(addresses) => {
 					const {
 						id,
 						address = '',
 						tax_number = '',
 						is_sez = false,
 						verification_status: is_sez_verification_status = 'pending',
-					} = billingAddress;
+					} = addresses || {};
 
 					return (
 						<div
@@ -93,7 +85,7 @@ function TradePartner({
 							role="presentation"
 							onClick={() => {
 								setSelectedAddress({
-									...billingAddress,
+									...addresses,
 									address_object_type: is_tax_applicable
 										? 'billing_address'
 										: 'address',
@@ -117,7 +109,10 @@ function TradePartner({
 							}}
 							className={cl`${styles.main_container} ${
 								value.includes(id) && styles.active
-							} ${disabledIds.includes(id) && styles.disabled}`}
+							} ${
+								(disabledIds.includes(id)
+								|| ['rejected', 'pending'].includes(verification_status)) && styles.disabled
+							}`}
 						>
 							<div className={styles.address_container}>
 								<div className={styles.text}>{address}</div>

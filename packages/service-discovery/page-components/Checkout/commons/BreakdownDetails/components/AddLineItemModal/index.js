@@ -1,10 +1,12 @@
 import { Button, Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useRef } from 'react';
 
 import useUpdateCustomizeQuotation from '../../../../hooks/useUpdateCustomizeQuotation';
+import ContainerDetails from '../ContainerDetails';
 
 import AddLineItem from './AddLineItem';
+import styles from './styles.module.css';
 import useListRateChargeCodes from './useListRateChargeCodes';
 
 function AddLineItemModal({
@@ -16,7 +18,7 @@ function AddLineItemModal({
 }) {
 	const ref = useRef({});
 
-	const { service_type, service_id = '' } = addLineItemData || {};
+	const { service_type, service_id = '', details = {} } = addLineItemData || {};
 
 	const { CHARGE_CODE_DATA } = useListRateChargeCodes({ service_type });
 
@@ -42,7 +44,18 @@ function AddLineItemModal({
 		>
 			<Modal.Header title="Add Line Item" />
 
-			<Modal.Body>
+			<Modal.Body className={styles.body}>
+				<div className={styles.flex}>
+					<div className={styles.label}>{startCase(service_type)}</div>
+
+					<div className={styles.container_details}>
+						<ContainerDetails
+							primary_service={service_type}
+							details={details}
+						/>
+					</div>
+				</div>
+
 				<AddLineItem
 					CHARGE_CODE_DATA={CHARGE_CODE_DATA}
 					service_id={service_id}

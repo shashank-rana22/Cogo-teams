@@ -8,7 +8,6 @@ const useHandleChangeExecutive = ({
 	onUpdate,
 	user_id,
 	branch_id,
-	isChannelPartner,
 	data,
 	setShowEditContact,
 }) => {
@@ -20,7 +19,7 @@ const useHandleChangeExecutive = ({
 		debounceQuery,
 		users = {},
 		usersLoading,
-	} = useListOrganizationUsers({ user_id, isChannelPartner, branch_id });
+	} = useListOrganizationUsers({ user_id, branch_id });
 
 	const { list = [] } = users;
 

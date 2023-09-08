@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import BarChart from '../../../commons/BarChart';
@@ -21,6 +22,8 @@ const MARGIN = {
 };
 
 function OutstandingAge({ data, loading }: OutsatndingProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const outstandingData = Object.keys(data).map((key) => data[key]);
 
 	const { dashboardCurrency = '' } = outstandingData[0] || {};
@@ -77,19 +80,13 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 					<div
 						className={styles.styled_text}
 					>
-						Outstanding By Age
+						{t('outstanding_by_age')}
 					</div>
 					<div className={styles.styled_flex_age}>
 						<Tooltip
 							content={(
-								<div>
-									Accounts receivables
-									<br />
-									according to the length
-									<br />
-									of an invoice has been
-									<br />
-									outstanding.
+								<div className={styles.tooltip}>
+									{t('outstanding_by_age_tooltip')}
 								</div>
 							)}
 							placement="top"

@@ -6,7 +6,7 @@ import handleCopy from '../../helpers/handleCopyUrl';
 
 const ONE = 1;
 
-const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRatesPresent = () => {} }) => {
+const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRatesPresent = false }) => {
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
@@ -16,6 +16,8 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
 	const [selectedModes, setSelectedModes] = useState(['email']);
+	const [show, setShow] = useState(false);
+	const [confirmation, setConfirmation] = useState(false);
 
 	const quotationOptions = [
 		{
@@ -49,6 +51,19 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		});
 	};
 
+	const handleClick = () => {
+		if (detail?.primary_service === 'fcl_freight') {
+			setConfirmation(true);
+			return;
+		}
+
+		if (detail?.is_locked) {
+			handleCopyQuoteLink();
+		} else {
+			setShow(true);
+		}
+	};
+
 	const getModalSize = () => {
 		if (selectedModes.includes('email') && selectedModes.length > ONE) {
 			return { size: 'xl', widths: { email: '65%', message: '35%' } };
@@ -69,7 +84,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			label           : 'Copy Link',
 			themeType       : 'link',
 			style           : {},
-			onClickFunction : () => handleCopyQuoteLink(),
+			onClickFunction : handleClick,
 			loading         : false,
 			disabled        : noRatesPresent,
 		},
@@ -88,6 +103,8 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		BUTTON_MAPPING,
 		size,
 		widths,
+		show,
+		setShow,
 		quotationOptions,
 		showWhatsappVerificationModal,
 		setShowWhatsappVerificationModal,
@@ -95,6 +112,9 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		setSelectedModes,
 		selectedModes,
 		setShowShareQuotationModal,
+		confirmation,
+		setConfirmation,
+		handleCopyQuoteLink,
 	};
 };
 

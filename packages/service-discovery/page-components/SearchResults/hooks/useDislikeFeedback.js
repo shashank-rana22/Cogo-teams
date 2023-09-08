@@ -59,9 +59,14 @@ const useDislikeFeedback = ({
 			preferred_freight_rate,
 			preferred_freight_rate_currency,
 			file_upload,
+			commodity_description,
 			...rest
 		} = values;
 		const attachment_file_urls = (file_upload || []).map((item) => item.finalUrl);
+
+		const reefer_commodity_description = values?.temperature
+			? `temperature: ${values.temperature}C | humidity: ${values.humidity}% | 
+		ventilation: ${values.ventilation}%` : '';
 
 		try {
 			if (preferred_freight_rate && !preferred_freight_rate_currency) {
@@ -80,10 +85,12 @@ const useDislikeFeedback = ({
 				[keyCurrency] : values.preferred_freight_rate_currency || undefined,
 				preferred_detention_free_days:
 						values.preferred_detention_free_days || undefined,
-				selected_card         : rate.id,
-				performed_by_org_id   : details.importer_exporter.id,
+				selected_card       : rate.id,
+				performed_by_org_id : details.importer_exporter.id,
 				attachment_file_urls,
-				commodity_description : values.commodity_description || undefined,
+				commodity_description:
+						`${reefer_commodity_description} ${commodity_description}`
+						|| undefined,
 			};
 			await trigger({ data: body });
 
@@ -95,7 +102,6 @@ const useDislikeFeedback = ({
 			});
 
 			onClose();
-
 			return true;
 		} catch (error) {
 			if (error.response?.data) {

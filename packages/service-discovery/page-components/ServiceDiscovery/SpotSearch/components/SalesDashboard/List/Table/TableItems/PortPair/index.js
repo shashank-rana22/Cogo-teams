@@ -1,7 +1,10 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
 import SearchType from '../SearchType';
+
+import styles from './styles.module.css';
 
 const LOCATION_KEY_MAPPING = {
 	origin      : 'pickup',
@@ -83,7 +86,7 @@ const getLocationName = (data, pair_type, type, key) => {
 };
 
 function PortPair({ item = {}, field = {} }) {
-	const { pair_type = 'fcl_freight', key = '-', props = {} } = field || {};
+	const { pair_type = 'fcl_freight', key = '-', props = {}, showPortsName = false } = field || {};
 	const { setLocation = () => {}, service_type:selected_service = '' } = props;
 	const service_type = item[pair_type];
 	const [origin, origin_display_name] = getLocationName(
@@ -113,20 +116,24 @@ function PortPair({ item = {}, field = {} }) {
 		});
 	};
 
+	const originPortName = origin_display_name.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
+	const destinationPortName = destination_display_name.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
+
 	return (
-		<div style={{ display: 'flex', alignItems: 'center' }}>
-			<span style={{ marginRight: 20 }}>
+		<div className={styles.container}>
+
+			<span className={styles.service_type}>
 				<SearchType item={item} field={field} />
 			</span>
 
 			{ isSingleLocation ? (
-				<Tooltip content={<span style={{ wordBreak: 'keep-all' }}>{origin_display_name}</span>}>
-					<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>{origin}</span>
+				<Tooltip content={<span className={styles.tooltip_content}>{origin_display_name}</span>}>
+					<span className={styles.location_name}>{origin}</span>
 				</Tooltip>
 			) : (
 				<Tooltip
 					content={(
-						<div style={{ textAlign: 'center', wordBreak: 'keep-all' }}>
+						<div className={styles.tooltip_content}>
 							{origin_display_name?.length && (
 								<>
 									{origin_display_name}
@@ -142,20 +149,20 @@ function PortPair({ item = {}, field = {} }) {
 				>
 					<div
 						role="presentation"
-						style={{ display: 'flex', alignItems: 'center', width: 'fit-content', cursor: 'pointer' }}
+						className={styles.locations_container}
 						onClick={handleClickLocation}
 					>
 						{(origin || origin_display_name)?.length && (
 							<>
-								<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>
-									{origin || origin_display_name}
+								<span className={styles.location_name}>
+									{showPortsName ? originPortName : origin || origin_display_name}
 								</span>
 								{' '}
 								<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
 							</>
 						)}
-						<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>
-							{destination || destination_display_name}
+						<span className={styles.location_name}>
+							{showPortsName ? destinationPortName : destination || destination_display_name}
 						</span>
 					</div>
 				</Tooltip>

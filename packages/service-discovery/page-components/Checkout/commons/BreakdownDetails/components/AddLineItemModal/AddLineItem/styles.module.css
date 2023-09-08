@@ -1,12 +1,16 @@
 .container {
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom: 60px;
+	margin-bottom: 32px;
 
 	:global {
 		.ui_select_input_control,
 		.ui_input_control {
 			font-size: 14px !important;
+		}
+
+		.ui_select_options_container {
+			z-index: 99 !important;
 		}
 	}
 }

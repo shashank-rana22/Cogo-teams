@@ -1,24 +1,22 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-function CustomButton({ item = {}, field = {}, router = {} }) {
+import getPrefillForm from '../../../../../../../../SearchResults/utils/getPrefillForm';
+
+function CustomButton({
+	item = {},
+	field = {},
+	router = {},
+	organization = {},
+	createSearch = () => {},
+	createSearchLoading = false,
+}) {
 	const { query = {} } = router;
 
-	const isNewS2C = item?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('new_admin');
+	const isNewS2C = item?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('version2');
 
-	const searchUrl = `/book/${item?.latest_spot_search_id || item?.id}${isNewS2C
-		? '' : `/${item?.importer_exporter_id}`}`;
 	const shipmentsUrl = `/shipments/${item?.shipment_id}`;
 	const checkoutUrl = `/checkout/${item?.checkout_id}`;
-
-	const URL_MAPPING = {
-		most_searched   : searchUrl,
-		most_booked     : searchUrl,
-		spot_search     : searchUrl,
-		quotations      : item?.shipment_id ? shipmentsUrl : checkoutUrl,
-		saved_for_later : item?.shipment_id ? shipmentsUrl : checkoutUrl,
-	};
 
 	const BUTTON_LABEL_MAPPING = {
 		most_searched   : field?.btnLabel,
@@ -39,32 +37,79 @@ function CustomButton({ item = {}, field = {}, router = {} }) {
 		return router.push(relativeUrl);
 	};
 
+	const onCreateNewSearch = async ({ defaultSearch = false }) => {
+		const {
+			origin_location = {},
+			destination_location = {},
+			primary_service = '',
+			destination_port = {},
+			origin_port = {},
+			service_type = '',
+			service_details = {},
+		} = item;
+
+		const { user_id = '', organization_branch_id = '', organization_id = '' } = organization;
+
+		const formValues = getPrefillForm(
+			{
+				...item,
+				service_details,
+				service_type,
+				services: undefined,
+			},
+			'service_type',
+		);
+
+		const values = {
+			organization_branch_id,
+			organization_id,
+			service_type,
+			user_id,
+			origin      : origin_port,
+			destination : destination_port,
+			formValues,
+		};
+
+		const spot_search_id = await createSearch({
+			action : defaultSearch ? 'default' : 'edit',
+			values : defaultSearch
+				? {
+					...organization,
+					service_type : primary_service,
+					destination  : destination_location,
+					origin       : origin_location,
+				}
+				: values,
+		});
+
+		if (spot_search_id && typeof spot_search_id === 'string') {
+			router.push(
+				'/book/[spot_search_id]',
+				`/book/${spot_search_id}`,
+			);
+		}
+	};
+
+	const funcMapping = {
+		most_searched   : () => onCreateNewSearch({ defaultSearch: true }),
+		most_booked     : () => onCreateNewSearch({ defaultSearch: true }),
+		spot_search     : () => onCreateNewSearch({ defaultSearch: false }),
+		quotations      : () => onClick(item?.shipment_id ? shipmentsUrl : checkoutUrl),
+		saved_for_later : () => onClick(item?.shipment_id ? shipmentsUrl : checkoutUrl),
+	};
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', width: 'max-content', alignItems: 'center' }}>
 			<Button
 				size="md"
 				themeType="primary"
-				onClick={() => onClick(URL_MAPPING[field.key])}
-				disabled={field.disabled}
+				onClick={funcMapping[field.key]}
+				disabled={field.disabled || createSearchLoading}
 			>
 				<span>
 					{BUTTON_LABEL_MAPPING[field.key] || 'Show Rates'}
 				</span>
 			</Button>
-
-			{field.showPrice ? (
-				<span style={{ fontSize: 12, fontWeight: 500 }}>
-					{formatAmount({
-						amount   : item?.total_price || GLOBAL_CONSTANTS.zeroth_index,
-						currency : item?.total_price_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
-						},
-					})}
-				</span>
-			) : null}
 		</div>
 	);
 }

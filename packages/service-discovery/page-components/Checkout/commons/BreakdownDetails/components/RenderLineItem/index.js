@@ -29,7 +29,7 @@ function RenderLineItem({
 		getCheckout,
 		shouldEditMargin,
 		checkout_id,
-		loading:checkoutLoading,
+		loading: checkoutLoading,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -45,7 +45,7 @@ function RenderLineItem({
 		code = '',
 	} = lineItem;
 
-	const { id:itemId = '', service_type = '' } = item;
+	const { id: itemId = '', service_type = '' } = item;
 
 	const { auto_promocode = {} } = rate || {};
 

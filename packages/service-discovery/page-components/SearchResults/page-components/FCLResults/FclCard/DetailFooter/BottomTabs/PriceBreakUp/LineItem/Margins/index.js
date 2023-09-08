@@ -36,11 +36,10 @@ function Margins({ margins = [] }) {
 		if (!isEmpty(item)) {
 			const value = item[GLOBAL_CONSTANTS.zeroth_index];
 
-			const { min_value = 0, max_value = 0, value:marginValue = 0 } = value || {};
+			const { value: marginValue = 0, margin_value = 0 } = value || {};
+
 			if (value?.type === 'percentage') {
-				margin = `${(marginValue).toFixed(ROUND_OFF_VALUE)}% (${min_value.toFixed(
-					ROUND_OFF_VALUE,
-				)} - ${max_value.toFixed(ROUND_OFF_VALUE)})${label}`;
+				margin = `${margin_value} ${label}`;
 			} else {
 				margin = `${(marginValue).toFixed(ROUND_OFF_VALUE)}${label}`;
 			}

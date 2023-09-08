@@ -1,4 +1,4 @@
-import { Toast, Loader, cl, Tooltip, Placeholder, Button } from '@cogoport/components';
+import { Loader, cl, Tooltip, Placeholder, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
@@ -60,11 +60,6 @@ function ListItem({
 	const handleDelete = (event) => {
 		event.stopPropagation();
 		event.preventDefault();
-
-		if (SERVICES_CANNOT_BE_REMOVED.includes(serviceItem.name)) {
-			Toast.error('This service cannot be removed');
-			return;
-		}
 		setShowDeleteModal(true);
 	};
 
@@ -175,7 +170,9 @@ function ListItem({
 	}
 
 	function RenderIcon() {
-		const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
+		const isServiceRemovable = !SERVICES_CANNOT_BE_REMOVED.includes(serviceItem.name);
+
+		const SelectedIcon = isHovered && isServiceRemovable ? IcMMinusInCircle : IcCFtick;
 
 		if (loading) {
 			return <Loader style={{ marginRight: 24 }} themeType="primary" />;
@@ -189,7 +186,7 @@ function ListItem({
 					height={25}
 					width={25}
 					className={styles.tick_icon}
-					onClick={handleDelete}
+					onClick={(event) => isServiceRemovable && handleDelete(event)}
 				/>
 			);
 		}
@@ -238,7 +235,7 @@ function ListItem({
 						show={showDeleteModal}
 						setShow={setShowDeleteModal}
 						service_name={serviceItem.title}
-						onClick={handleRemoveService}
+						onClickDelete={handleRemoveService}
 						loading={deleteLoading}
 					/>
 				</div>

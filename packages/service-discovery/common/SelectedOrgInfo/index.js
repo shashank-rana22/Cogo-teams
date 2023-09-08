@@ -1,18 +1,21 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
 import React from 'react';
 
+import Back from '../Header/common/Back';
+
 import styles from './styles.module.css';
 
-function SelectedOrgInfo({ orgName = '', userName = '', platformTheme = 'light', loading = false }) {
-	const styledTheme = {
-		container : `${styles.container} ${styles[platformTheme]}`,
-		org_name  : `${styles.org_name} ${styles[platformTheme]} `,
-		user_name : `${styles.user_name} ${styles[platformTheme]} `,
-	};
-
+function SelectedOrgInfo({
+	orgName = '',
+	userName = '',
+	loading = false,
+	activePage = '',
+	currentScreen = '',
+	setCurrentScreen = () => {},
+}) {
 	if (loading) {
 		return (
-			<div className={styledTheme.container}>
+			<div className={styles.container}>
 				<Placeholder height="25px" width="150px" margin="0px 0px 6px 0px" />
 				<Placeholder height="25px" width="100px" />
 			</div>
@@ -20,23 +23,31 @@ function SelectedOrgInfo({ orgName = '', userName = '', platformTheme = 'light',
 	}
 
 	return (
-		<div className={styledTheme.container}>
-			<Tooltip
-				placement="top"
-				className={styles.tooltip}
-				content={<span className={styles.tooltip_content}>{orgName || ''}</span>}
-			>
-				<div className={styledTheme.org_name}>{orgName || ''}</div>
-			</Tooltip>
+		<div className={styles.container}>
+			{activePage !== 'checkout' ? (
+				<Back
+					currentScreen={currentScreen}
+					setCurrentScreen={setCurrentScreen}
+				/>
+			) : null}
 
-			<Tooltip
-				placement="top"
-				className={styles.tooltip}
-				content={<span className={styles.tooltip_content}>{userName || ''}</span>}
-			>
-				<div className={styledTheme.user_name}>{userName || ''}</div>
-			</Tooltip>
+			<div style={{ width: activePage !== 'checkout' ? '86%' : '100%' }}>
+				<Tooltip
+					placement="top"
+					className={styles.tooltip}
+					content={<span className={styles.tooltip_content}>{orgName || ''}</span>}
+				>
+					<div className={styles.org_name}>{orgName || ''}</div>
+				</Tooltip>
 
+				<Tooltip
+					placement="top"
+					className={styles.tooltip}
+					content={<span className={styles.tooltip_content}>{userName || ''}</span>}
+				>
+					<div className={styles.user_name}>{userName || ''}</div>
+				</Tooltip>
+			</div>
 		</div>
 	);
 }

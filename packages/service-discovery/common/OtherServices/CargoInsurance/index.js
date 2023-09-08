@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import getCountryCode from '../../../helpers/getCountryCode';
 import getCombinedServiceDetails from '../AdditionalServices/utils/getCombinedServiceDetails';
-import AccordianView from '../common/AccordianView';
+import AccordionView from '../common/AccordionView';
 import DeleteServiceModal from '../common/DeleteServiceModal';
 
 import AccordianContent from './AccordianContent';
@@ -73,7 +73,9 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<AccordianView
+			<div className={styles.heading}>Other Services</div>
+
+			<AccordionView
 				itemKey="cargo_insurance"
 				active={active}
 				setActive={setActive}
@@ -87,7 +89,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 				)}
 			>
 				<AccordianContent data={cargoInsuranceAlreadyTaken} />
-			</AccordianView>
+			</AccordionView>
 
 			{showModal && (
 				<CargoInsuranceModal
@@ -111,7 +113,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 				<DeleteServiceModal
 					service_name="cargo_insurance"
 					show={showDeleteModal}
-					onClick={onClickDelete}
+					onClickDelete={onClickDelete}
 					loading={loading}
 					setShow={setShowDeleteModal}
 					title={DELETE_TITLE}

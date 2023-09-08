@@ -46,6 +46,7 @@ function ViewBillingAddresses({
 
 		list.forEach((item, index) => {
 			const BILLING_ADDRESSES = [];
+
 			(item.billing_addresses || []).forEach((billingAddress) => {
 				const {
 					id = '',
@@ -108,7 +109,7 @@ function ViewBillingAddresses({
 	const ActiveComponent = MAPPING[bookingType];
 
 	return (
-		<div>
+		<>
 			{newList.map((item) => (
 				<ActiveComponent
 					key={item.id}
@@ -120,10 +121,9 @@ function ViewBillingAddresses({
 					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
 					setCurrentView={setCurrentView}
 					setActiveState={setActiveState}
-					disabledInvoicingParties={disabledInvoicingParties}
 				/>
 			))}
-		</div>
+		</>
 	);
 }
 

@@ -6,14 +6,13 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
-import FILTER_SERVICE_MAPPING from '../configurations/filter-service-mapping.json';
 import getSalesDashboardListParams from '../utils/getSalesDashboardListParams';
 import getSalesDashboardListStats from '../utils/getSalesDashboardListStats';
 
 const getKeyName = ({ type, serviceType }) => {
 	const mapping = {
-		most_searched   : { service_group: FILTER_SERVICE_MAPPING[serviceType] },
-		most_booked     : { service_group: FILTER_SERVICE_MAPPING[serviceType] },
+		most_searched   : { primary_service: serviceType || undefined },
+		most_booked     : { primary_service: serviceType || undefined },
 		spot_searches   : { search_type: serviceType || undefined },
 		quotations      : { primary_service: serviceType || undefined },
 		saved_for_later : { primary_service: serviceType || undefined },

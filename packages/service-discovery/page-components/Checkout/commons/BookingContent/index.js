@@ -2,7 +2,7 @@ import BookingVerification from './components/BookingVerification';
 import PointOfContact from './components/PointOfContact';
 import styles from './styles.module.css';
 
-function BookingContent({ detail = {}, getCheckout = () => {}, isChannelPartner = false }) {
+function BookingContent({ detail = {}, getCheckout = () => {} }) {
 	const MAPPING = [
 		{
 			key       : 'booking_verification',
@@ -20,7 +20,6 @@ function BookingContent({ detail = {}, getCheckout = () => {}, isChannelPartner 
 				detail,
 				bookingConfirmationMode: [],
 				getCheckout,
-				isChannelPartner,
 			},
 		},
 	];

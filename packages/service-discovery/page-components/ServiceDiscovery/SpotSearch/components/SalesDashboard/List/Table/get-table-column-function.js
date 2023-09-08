@@ -16,8 +16,15 @@ const PERCENTAGE_FACTOR = 100;
 
 const getTableColumnFunction = (key) => {
 	const newFunction = {
-		renderButton: (data, field, router) => (
-			<CustomButton item={data} field={field} router={router} />
+		renderButton: (data, field, router, organization, createSearch, createSearchLoading) => (
+			<CustomButton
+				item={data}
+				field={field}
+				router={router}
+				organization={organization}
+				createSearch={createSearch}
+				createSearchLoading={createSearchLoading}
+			/>
 		),
 		renderSerialId: (itemData) => {
 			const { serial_id = '-', performed_by_type } = itemData || {};
@@ -148,10 +155,10 @@ const getTableColumnFunction = (key) => {
 				) : '-'}
 			</strong>
 		),
-		renderConversionRate: ({ booking_count = 0, quotation_count = 1 }) => (
+		renderConversionRate: ({ booking_count = 0, search_count = 1 }) => (
 			<strong>
-				{quotation_count ? (
-					`${((booking_count / quotation_count) * PERCENTAGE_FACTOR).toFixed(TO_FIXED_DECIMAL_COUNT)}%`
+				{search_count ? (
+					`${((booking_count / search_count) * PERCENTAGE_FACTOR).toFixed(TO_FIXED_DECIMAL_COUNT)}%`
 				) : '-'}
 			</strong>
 		),

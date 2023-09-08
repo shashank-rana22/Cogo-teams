@@ -1,16 +1,20 @@
 import { useForm } from '@cogoport/forms';
-import { useImperativeHandle, forwardRef } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import getElementController from '../../../../forms/getElementController';
 
 import { getlineItemControls } from './getlineItemControls';
 import styles from './styles.module.css';
 
+const LENGTH_TO_PRESELECT = 1;
+
 function EditLineItem({ lineItemOptions = [], service_type = '', lineItems = [], detail = {} }, ref) {
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
+		setValue,
 	} = useForm();
 
 	const controls = getlineItemControls({ lineItems: lineItemOptions });
@@ -48,6 +52,12 @@ function EditLineItem({ lineItemOptions = [], service_type = '', lineItems = [],
 			});
 		},
 	}));
+
+	useEffect(() => {
+		if (lineItemOptions.length === LENGTH_TO_PRESELECT) {
+			setValue('line_item', lineItemOptions[GLOBAL_CONSTANTS.zeroth_index].value);
+		}
+	}, [lineItemOptions, setValue]);
 
 	return (
 		<div className={styles.container}>

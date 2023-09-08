@@ -61,7 +61,7 @@ function InvoicingPartiesContent({
 	}
 
 	return (
-		<div>
+		<>
 			{invoicingParties.map((invoiceParty, index) => {
 				const [, currPaymentModes = []] = Object.entries(PAYMENT_MODES).find(
 					([key]) => key === invoiceParty.id,
@@ -112,7 +112,7 @@ function InvoicingPartiesContent({
 				services={services}
 				getCheckoutInvoices={getCheckoutInvoices}
 			/>
-		</div>
+		</>
 	);
 }
 

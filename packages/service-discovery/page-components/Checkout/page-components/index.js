@@ -14,10 +14,9 @@ import styles from './styles.module.css';
 import useCheckout from './useCheckout';
 
 function Checkout({ checkout_type = '' }) {
-	const { query, entity_types, partner_id } = useSelector(({ general, profile }) => ({
-		query        : general?.query,
-		entity_types : profile?.partner?.entity_types,
-		partner_id   : profile?.partner?.id,
+	const { query, partner_id } = useSelector(({ general, profile }) => ({
+		query      : general?.query,
+		partner_id : profile?.partner?.id,
 	}));
 
 	const {
@@ -37,7 +36,7 @@ function Checkout({ checkout_type = '' }) {
 		redirect_required,
 		isLoadingStateRequired = false,
 		setIsLoadingStateRequired = () => {},
-	} = useCheckout({ query, entity_types, partner_id, checkout_type });
+	} = useCheckout({ query, partner_id, checkout_type });
 
 	if ((loading && isEmpty(data)) || isLoadingStateRequired) {
 		return <LoadingState />;
@@ -46,13 +45,13 @@ function Checkout({ checkout_type = '' }) {
 	const { shipment_id = '', tags = [] } = detail;
 
 	const isCheckoutApiSuccess = !isEmpty(data);
-	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(primary_service);
+	const isServiceSupported = GLOBAL_CONSTANTS.new_search_supported_services.includes(primary_service);
 
 	if (
 		!isCheckoutApiSuccess
 		|| !isServiceSupported
 		|| (shipment_id && redirect_required === 'true')
-		|| (!tags.includes('new_admin') && redirect_required === 'true')
+		|| (!tags.includes('version2') && redirect_required === 'true')
 	) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
@@ -61,6 +60,7 @@ function Checkout({ checkout_type = '' }) {
 			checkout_id: detail.id,
 			shipment_id,
 			redirect_required,
+			primary_service,
 		});
 
 		window.location.replace(url);

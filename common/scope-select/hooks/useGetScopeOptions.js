@@ -23,7 +23,7 @@ export default function useGetScopeOptions({
 	} = savedAuthDetails || {};
 
 	const scopeValues = useMemo(() => {
-		const navData = getNavData(navigation) || {};
+		const navData = getNavData({ navigation }) || {};
 		let { main_apis } = navData;
 		const allNavApis = (permissions_navigations || {})[navigation] || {};
 

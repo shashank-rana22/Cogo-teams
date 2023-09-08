@@ -13,7 +13,7 @@ function useAgentWorkPrefernce() {
 	}));
 
 	const [viewType, setViewType] = useState('');
-	const [userMails, setUserMails] = useState([]);
+	const [userSharedMails, setUserSharedMails] = useState([]);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_agent_work_preference',
@@ -32,7 +32,7 @@ function useAgentWorkPrefernce() {
 			const viewTypeValue = getViewTypeFromWorkPreferences(
 				{ viewTypeFromRoleIds, agentType: res?.data?.agent_type },
 			);
-			setUserMails(res?.data?.emails || []);
+			setUserSharedMails(res?.data?.emails || []);
 			setViewType(viewTypeValue);
 		}
 	}, [trigger, viewTypeFromRoleIds]);
@@ -44,7 +44,7 @@ function useAgentWorkPrefernce() {
 	return {
 		viewType,
 		loading,
-		userMails,
+		userSharedMails,
 		fetchworkPrefernce,
 		agentStatus: data,
 	};

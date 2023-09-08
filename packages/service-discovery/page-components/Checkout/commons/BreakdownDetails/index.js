@@ -30,7 +30,7 @@ function BreakdownDetails({
 	getCheckoutInvoices = () => {},
 }) {
 	const {
-		rate,
+		rate = {},
 		detail,
 		conversions,
 		getCheckout,
@@ -61,7 +61,7 @@ function BreakdownDetails({
 	const { source: rateSource = '' } = rate;
 
 	return (
-		<div>
+		<>
 			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
 
 			{rateDetails.map((item, index) => {
@@ -174,6 +174,7 @@ function BreakdownDetails({
 											index,
 											service_type : item?.service_type,
 											service_id   : item?.id,
+											details      : detail.services[id] || {},
 										});
 									}}
 								>
@@ -189,6 +190,7 @@ function BreakdownDetails({
 											index,
 											service_type : item?.service_type,
 											service_id   : item?.id,
+											details      : detail.services[id] || {},
 										});
 									}}
 								>
@@ -253,9 +255,9 @@ function BreakdownDetails({
 				conversions={conversions}
 				rate={rate}
 				otherCharges={otherCharges}
-				showTaxes={showTaxes}
+				disableForm={disableForm}
 			/>
-		</div>
+		</>
 	);
 }
 

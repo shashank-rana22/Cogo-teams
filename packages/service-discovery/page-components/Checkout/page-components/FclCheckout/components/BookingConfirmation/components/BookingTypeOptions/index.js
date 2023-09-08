@@ -1,9 +1,8 @@
-import { RadioGroup, Button } from '@cogoport/components';
+import { RadioGroup } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
 import PocDetails from '../../../../../../commons/ShareQuotation/PocDetails';
-import QuotationModal from '../../../../../../commons/ShareQuotation/QuotationModal';
 import { CheckoutContext } from '../../../../../../context';
 
 import BookingProof from './BookingProof';
@@ -18,15 +17,10 @@ function BookingTypeOptions({
 }) {
 	const {
 		detail = {},
-		rate = {},
 		updateCheckout = () => {},
 		updateLoading = false,
-		invoice = {},
-		orgData = {},
-		isChannelPartner = false,
 	} = useContext(CheckoutContext);
 
-	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 
 	return (
@@ -60,43 +54,15 @@ function BookingTypeOptions({
 				) : null}
 			</div>
 
-			{showShareQuotationModal ? (
-				<QuotationModal
-					modalSize="xl"
-					selectedModes={['email']}
-					setShowShareQuotationModal={setShowShareQuotationModal}
-					showShareQuotationModal={showShareQuotationModal}
-					invoice={invoice}
-					rate={rate}
-					detail={detail}
-					organization={orgData}
-					widths={{ email: '100%', message: '0%' }}
-					updateCheckout={updateCheckout}
-					updateLoading={updateLoading}
-				/>
-			) : null}
-
 			{bookingConfirmationMode === 'whatsapp' ? (
 				<PocDetails
 					showWhatsappVerificationModal={showWhatsappVerificationModal}
 					setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
 					bookingConfirmationMode={bookingConfirmationMode}
 					detail={detail}
-					isChannelPartner={isChannelPartner}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
 				/>
-			) : null}
-
-			{bookingConfirmationMode === 'email' ? (
-				<Button
-					type="button"
-					size="lg"
-					themeType="accent"
-					onClick={() => setShowShareQuotationModal(true)}
-				>
-					Share Quotation
-				</Button>
 			) : null}
 		</div>
 	);

@@ -13,7 +13,7 @@ import Views from './Views';
 
 function DashboardView(props) {
 	const [isHighlighted, setIsHighlighted] = useState(false);
-	const { setView = () => {}, globalFilters = {} } = props;
+	const { setView = () => {}, globalFilters = {}, setGlobalFilters = () => {} } = props;
 	const { parent_mode } = globalFilters;
 
 	const {
@@ -31,6 +31,8 @@ function DashboardView(props) {
 						parent_mode={parent_mode}
 						isHighlighted={isHighlighted}
 						setIsHighlighted={setIsHighlighted}
+						globalFilters={globalFilters}
+						setGlobalFilters={setGlobalFilters}
 					/>
 					<Deviation data={deviation} loading={loading} />
 				</div>

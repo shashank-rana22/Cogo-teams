@@ -13,7 +13,7 @@ const useListOrganizationInvoicingParties = ({ organizationId, bookingType }) =>
 		other_addresses_data_required   : true,
 	};
 
-	const [{ data = {}, loading }] = useRequest(
+	const [{ data = {}, loading }, trigger] = useRequest(
 		{
 			url    : '/list_organization_invoicing_parties',
 			method : 'GET',
@@ -25,6 +25,7 @@ const useListOrganizationInvoicingParties = ({ organizationId, bookingType }) =>
 	return {
 		data,
 		loading,
+		trigger,
 	};
 };
 

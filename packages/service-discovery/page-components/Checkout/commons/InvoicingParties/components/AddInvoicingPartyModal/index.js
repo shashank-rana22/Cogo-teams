@@ -31,10 +31,7 @@ function AddInvoicingPartyModal({
 	rate = {},
 	getCheckoutInvoices = () => {},
 }) {
-	const {
-		orgData = {},
-		primary_service,
-	} = useContext(CheckoutContext);
+	const { primary_service } = useContext(CheckoutContext);
 
 	const [activeComponentKey, setActiveComponentKey] = useState(
 		() => CHIPS_OPTIONS[GLOBAL_CONSTANTS.zeroth_index].key,
@@ -45,10 +42,9 @@ function AddInvoicingPartyModal({
 
 	const componentProps = {
 		invoice_to_self: {
-			organization : orgData?.data,
 			primary_service,
 			disabledInvoicingParties,
-			bookingType  : 'self',
+			bookingType: 'self',
 			currentView,
 			activeState,
 			setActiveState,
@@ -58,10 +54,9 @@ function AddInvoicingPartyModal({
 			source,
 		},
 		invoice_to_trade_partner: {
-			organization : orgData?.data,
 			primary_service,
 			disabledInvoicingParties,
-			bookingType  : 'paying_party',
+			bookingType: 'paying_party',
 			currentView,
 			activeState,
 			setActiveState,

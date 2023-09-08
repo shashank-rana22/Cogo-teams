@@ -16,7 +16,7 @@ const format = (date) => formatDate({
 function PossibleSchedulesItem({ item = {}, isFirst = false }) {
 	const LABEL_VALUE_MAPPING = {
 		etd: {
-			label     : 'ETA',
+			label     : 'ETD',
 			value     : format(item.departure),
 			className : {},
 		},

@@ -3,9 +3,9 @@ import { useContext, useImperativeHandle, forwardRef } from 'react';
 import { CheckoutContext } from '../../context';
 
 import InvoicingPartiesContent from './components/InvoicingPartiesContent';
+import useInvoicingParties from './hooks/useInvoicingParties';
 import useUpdateCheckoutInvoice from './hooks/useUpdateCheckoutInvoice';
 import styles from './styles.module.css';
-import useInvoicingParties from './useInvoicingParties';
 
 function InvoicingParties({
 	invoicingParties = [],

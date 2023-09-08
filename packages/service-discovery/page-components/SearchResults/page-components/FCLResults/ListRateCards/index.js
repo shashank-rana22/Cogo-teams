@@ -1,8 +1,9 @@
-import { Loader, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../common/AppliedFilters';
@@ -18,15 +19,6 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 const ONE = 1;
-
-function LoaderComponent() {
-	return (
-		<div className={styles.loading}>
-			<span className={styles.loading_text}>Looking for Rates</span>
-			<Loader themeType="primary" className={styles.loader} background="#000" />
-		</div>
-	);
-}
 
 function RateCard({
 	rateCardData = {},
@@ -60,7 +52,8 @@ function RateCard({
 }
 
 function ListRateCards({
-	rates = [], detail = {},
+	rates = [],
+	detail = {},
 	contract_detail = {},
 	setSelectedCard = () => {},
 	setScreen = () => {},
@@ -78,6 +71,8 @@ function ListRateCards({
 	isGuideViewed = false,
 	cogoAssuredRates = [],
 	marketplaceRates = [],
+	routerLoading = false,
+	setRouterLoading = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -90,9 +85,17 @@ function ListRateCards({
 
 	const showComparison = !isEmpty(comparisonRates);
 
-	if (!primary_service) { return null; }
-
 	const { total_count, page_limit, page } = paginationProps;
+
+	useEffect(() => {
+		Router.events.on('routeChangeComplete', () => {
+			setRouterLoading(false);
+		});
+	}, [setRouterLoading]);
+
+	if (!primary_service) {
+		return null;
+	}
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -106,6 +109,15 @@ function ListRateCards({
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
 			/>
+		);
+	}
+
+	if (routerLoading) {
+		return (
+			<div className={styles.loading}>
+				<span className={styles.loading_text}>Loading Rates</span>
+				<DotLoader />
+			</div>
 		);
 	}
 
@@ -124,6 +136,7 @@ function ListRateCards({
 						setShowFilterModal={setShowFilterModal}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
+						setRouterLoading={setRouterLoading}
 					/>
 
 					{showComparison ? (
@@ -177,8 +190,6 @@ function ListRateCards({
 				/>
 			)}
 
-			{loading ? <LoaderComponent /> : null}
-
 			{(marketplaceRates || []).map((rateCardData, index) => (
 				<>
 					<RateCard
@@ -195,6 +206,7 @@ function ListRateCards({
 						setInfoBanner={setInfoBanner}
 						showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
 						cogoAssuredRates={cogoAssuredRates}
+						routerLoading={routerLoading}
 					/>
 					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
 						<ContractAd
@@ -228,11 +240,12 @@ function ListRateCards({
 			)}
 
 			{loading ? null : (
-				<RequestRate
-					details={detail}
-					className={styles.request_rate}
-					rates={rates}
-				/>
+				<div className={styles.request_rate}>
+					<RequestRate
+						details={detail}
+						rates={rates}
+					/>
+				</div>
 			)}
 		</div>
 	);

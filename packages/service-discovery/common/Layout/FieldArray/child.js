@@ -12,7 +12,7 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 const FIRST_INDEX = 1;
-const TWO_VALUE = 2;
+const MIN_ELEMENTS_TO_SHOW_DELETE = 2;
 
 function Child({
 	controls = [],
@@ -151,7 +151,7 @@ function Child({
 				})}
 			</div>
 
-			{length >= TWO_VALUE && !disabled && !isSubControl ? (
+			{length >= MIN_ELEMENTS_TO_SHOW_DELETE && !disabled && !isSubControl ? (
 				<div className={styles.remove_button}>
 					<Button
 						size="md"

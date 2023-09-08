@@ -10,10 +10,10 @@ import SailingWeek from '../../page-components/SearchResults/page-components/FCL
 
 import styles from './styles.module.css';
 
-const ZERO = 0;
+const START_INDEX = 0;
 const MIN_PERCENTAGE = 25;
 const RANGE = 25;
-const TWO = 2;
+const END_INDEX_FOR_FIRST_TWIO_RATES = 2;
 
 function ShippingLineModal({
 	shipping_line = {},
@@ -44,9 +44,9 @@ function ShippingLineModal({
 		(service) => service.service_type === service_type,
 	);
 
-	const firstTwoRates = primaryServiceRates.slice(ZERO, TWO);
+	const firstTwoRates = primaryServiceRates.slice(START_INDEX, END_INDEX_FOR_FIRST_TWIO_RATES);
 
-	const remainingRates = primaryServiceRates.slice(TWO);
+	const remainingRates = primaryServiceRates.slice(END_INDEX_FOR_FIRST_TWIO_RATES);
 
 	const randomValue = useMemo(() => MIN_PERCENTAGE + Math.ceil(Math.random() * RANGE), []);
 
@@ -147,17 +147,27 @@ function ShippingLineModal({
 				</div>
 
 				<div className={styles.footer}>
-					<Button type="button" onClick={onClose} themeType="secondary">Cancel</Button>
+					<img
+						src={GLOBAL_CONSTANTS.image_url.cogo_assured_banner}
+						alt="cogo assured logo"
+						className={styles.shipping_line_logo}
+						height={26}
+					/>
 
-					<Button
-						type="button"
-						onClick={() => router.push(
-							`/book/${router.query.spot_search_id}?rate_card_id=${selectedCard}`,
-						)}
-						style={{ marginLeft: '12px' }}
-					>
-						Proceed
-					</Button>
+					<div className={styles.button_container}>
+						<Button type="button" onClick={onClose} themeType="secondary">Cancel</Button>
+
+						<Button
+							type="button"
+							onClick={() => router.push(
+								`/book/[spot_search_id]?rate_card_id=${selectedCard}`,
+								`/book/${router.query.spot_search_id}?rate_card_id=${selectedCard}`,
+							)}
+							style={{ marginLeft: '12px' }}
+						>
+							Proceed
+						</Button>
+					</div>
 				</div>
 			</Modal.Body>
 		</Modal>

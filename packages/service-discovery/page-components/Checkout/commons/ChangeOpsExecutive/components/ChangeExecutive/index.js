@@ -10,7 +10,6 @@ function ChangeExecutive({
 	data = {},
 	user_id = '',
 	branch_id = '',
-	isChannelPartner = false,
 	setAddExecutive = () => {},
 	setShowEditContact = () => {},
 }) {
@@ -26,7 +25,6 @@ function ChangeExecutive({
 		onUpdate,
 		user_id,
 		branch_id,
-		isChannelPartner,
 		data,
 		setShowEditContact,
 	});

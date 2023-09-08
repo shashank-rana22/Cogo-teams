@@ -10,6 +10,7 @@ const useGetTdsData = ({
 	isConsolidated = false,
 	creditNoteApprovalType = '',
 	level2 = {},
+	t,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -68,7 +69,7 @@ const useGetTdsData = ({
 					data: { message },
 				} = apiResponse;
 				if (message === 'Updated Successfully') {
-					Toast.success('Request Updated Sucessfully');
+					Toast.success(t('incidentManagement:request_updated_successfully_message'));
 					setShowTdsModal(false);
 					refetch();
 				} else {
@@ -78,7 +79,7 @@ const useGetTdsData = ({
 				Toast.error(e?.response?.data?.message);
 			}
 		} else {
-			Toast.error('Please select the Credit Note category');
+			Toast.error(t('incidentManagement:select_credit_note_category_message'));
 		}
 	};
 

@@ -12,6 +12,7 @@ const SelectedRateCard = dynamic(() => import('./SelectedRateCard'), {
 
 function SelectedCardScreen({
 	setHeaderProps = () => {},
+	setRouterLoading = () => {},
 	headerProps = {},
 	cogoAssuredRates = [],
 }) {
@@ -43,6 +44,7 @@ function SelectedCardScreen({
 				cogoAssuredRates,
 				showShippingLineModal,
 				setShowShippingLineModal,
+				setRouterLoading,
 			},
 		},
 		bookCheckout: {

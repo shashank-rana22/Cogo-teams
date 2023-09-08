@@ -1,29 +1,37 @@
-import { AsyncSelectController, ChipsController } from '@cogoport/forms';
+import { AsyncSelectController, ChipsController, InputNumberController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const MIN_CONTAINER_COUNT_FOR_PARTIAL_SHIPMENT = 2;
+const ONE = 1;
+
 function UnpreferredShippingLines({
 	formProps = {},
 	primaryService = {},
+	totalContainerCount = 1,
 }) {
 	const {
 		control,
 		formState: { errors = {} },
 		setValue = () => {},
+		watch,
 	} = formProps;
 
 	const { shipping_preferences = {} } = primaryService;
 
 	useEffect(() => {
 		const {
-			agreed_for_partial_shipment = false,
 			unpreferred_shipping_line_ids = [],
+			partial_shipment_min_limit = 0,
 		} = shipping_preferences || {};
 
-		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
+		setValue('agreed_for_partial_shipment', partial_shipment_min_limit ? 'yes' : 'no');
 		setValue('unpreferred_shipping_line_ids', unpreferred_shipping_line_ids);
+		setValue('partial_shipment_min_limit', partial_shipment_min_limit);
 	}, [setValue, shipping_preferences]);
+
+	const agreedForPartialShipmentWatch = watch('agreed_for_partial_shipment');
 
 	return (
 		<div className={styles.container}>
@@ -55,23 +63,41 @@ function UnpreferredShippingLines({
 				</div>
 			) : null}
 
-			<div className={styles.partial_load}>
-				In some rare occasion, we may break the shipment and
-				send via different ships, is that okay with you?
+			{totalContainerCount >= MIN_CONTAINER_COUNT_FOR_PARTIAL_SHIPMENT ? (
+				<div className={styles.partial_load}>
+					In some rare occasion, we may break the shipment and
+					send via different ships, is that okay with you?
 
-				<ChipsController
-					style={{ marginLeft: '12px' }}
-					control={control}
-					name="agreed_for_partial_shipment"
-					type="chips"
-					options={[
-						{ value: 'no', label: 'No' },
-						{ value: 'yes', label: 'Yes' },
-					]}
-					size="lg"
-					enableMultiSelect={false}
-				/>
-			</div>
+					<ChipsController
+						style={{ marginLeft: '12px' }}
+						control={control}
+						name="agreed_for_partial_shipment"
+						type="chips"
+						options={[
+							{ value: 'no', label: 'No' },
+							{ value: 'yes', label: 'Yes' },
+						]}
+						size="lg"
+						enableMultiSelect={false}
+					/>
+				</div>
+			) : null}
+
+			{agreedForPartialShipmentWatch === 'yes'
+			&& totalContainerCount >= MIN_CONTAINER_COUNT_FOR_PARTIAL_SHIPMENT && (
+				<div className={styles.partial_load} style={{ marginTop: '16px' }}>
+					How many minimum containers would you like to ship in one go?
+
+					<InputNumberController
+						style={{ marginLeft: '12px' }}
+						control={control}
+						name="partial_shipment_min_limit"
+						size="md"
+						max={totalContainerCount - ONE}
+						min={1}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

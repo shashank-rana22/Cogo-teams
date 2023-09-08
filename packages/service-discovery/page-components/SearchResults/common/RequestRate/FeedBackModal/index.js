@@ -12,6 +12,8 @@ import useRequestForRate from './useRequestForRate';
 const MARGIN_FIRST_BUTTON = 12;
 const ZERO_MARGIN = 0;
 
+const SERVICES_WITH_PRIORITY_AIRLINE_OPTIONS = ['air_freight'];
+
 function FeedBackModal({
 	data = {},
 	details = {},
@@ -21,6 +23,8 @@ function FeedBackModal({
 	proceeedWithFeedback = true,
 	rates = [],
 }) {
+	const service = requestService?.service_type || details?.service_type;
+
 	const rates_id = rates.map(
 		(item) => item?.shipping_line_id || item?.airline_id,
 	);
@@ -34,7 +38,7 @@ function FeedBackModal({
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
 	const controls = getControls({
-		service: requestService?.service_type || details?.service_type,
+		service,
 		rates_excludes_ids,
 		airlineOptions,
 	});
@@ -73,13 +77,17 @@ function FeedBackModal({
 	];
 
 	useEffect(() => {
+		if (!SERVICES_WITH_PRIORITY_AIRLINE_OPTIONS.includes(service)) {
+			return;
+		}
+
 		const { origin_airport_id = '', destination_airport_id = '' } = details;
 
 		priorityAirlineOptions({
 			origin_airport_id,
 			destination_airport_id,
 		});
-	}, [details, priorityAirlineOptions]);
+	}, [details, priorityAirlineOptions, service]);
 
 	return (
 		<Modal

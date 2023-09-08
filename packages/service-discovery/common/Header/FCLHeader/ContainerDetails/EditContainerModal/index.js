@@ -16,6 +16,7 @@ const SERVICE = 'fcl_freight';
 function EditContainerModal({
 	show = false,
 	setShow = () => {},
+	setRouterLoading = () => {},
 	data = {},
 }) {
 	const { createSearch, loading } = useCreateSearch();
@@ -58,6 +59,8 @@ function EditContainerModal({
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
+			setRouterLoading(true);
+
 			router.push(
 				'/book/[spot_search_id]',
 				`/book/${spot_search_id}`,

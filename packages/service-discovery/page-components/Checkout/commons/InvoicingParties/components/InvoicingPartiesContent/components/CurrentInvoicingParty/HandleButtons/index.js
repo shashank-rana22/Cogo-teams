@@ -1,7 +1,9 @@
 import { Button, Loader, Toast } from '@cogoport/components';
 import { IcMDelete, IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useContext } from 'react';
 
+import { CheckoutContext } from '../../../../../../../context';
 import getErrors from '../../../../../utils/getErrors';
 
 import styles from './styles.module.css';
@@ -25,6 +27,14 @@ function HandleButtons({
 	updateLoading = false,
 	isFclInvoice = false,
 }) {
+	const { primaryService = {} } = useContext(CheckoutContext);
+
+	const {
+		bl_category,
+		bl_delivery_mode,
+		bl_type,
+	} = primaryService;
+
 	const IconToShow = ICON_MAPPING[isEditMode];
 
 	const { services, id } = invoiceParty;
@@ -135,6 +145,11 @@ function HandleButtons({
 								services,
 								invoice_currency : invoiceParty.invoice_currency,
 								paymentModes     : paymentModeValues,
+								...(isFclInvoice ? {
+									documentCategory     : bl_category,
+									documentType         : bl_type,
+									documentDeliveryMode : bl_delivery_mode,
+								} : {}),
 							});
 						} else {
 							setEditInvoiceDetails({});

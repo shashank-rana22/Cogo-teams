@@ -23,8 +23,9 @@ function PromocodesModal({
 	appliedPromotion = {},
 	isCouponApplied = false,
 	showCoupons = false,
+	disableCursor = '',
+	setDisableCursor = () => {},
 }) {
-	const [disableCursor, setDisableCursor] = useState('');
 	const [eligiblePromotions, setEligiblePromotions] = useState([]);
 
 	const promoCodesBgColors = [

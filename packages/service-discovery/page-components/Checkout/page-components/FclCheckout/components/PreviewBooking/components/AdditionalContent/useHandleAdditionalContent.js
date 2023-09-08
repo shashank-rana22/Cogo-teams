@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useHandleAdditionalContent = ({
@@ -10,17 +12,26 @@ const useHandleAdditionalContent = ({
 	detail = {},
 	rate = {},
 }) => {
+	const { push } = useRouter();
+
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
 	const { handleSubmit = () => {}, getValues = () => {} } = formProps;
 
 	const { services: rateServices = {}, source: rateSource = '' } = rate || {};
 
+	const { id = '', primary_service = '', services = {} } = detail;
+
 	const {
-		id = '',
-		primary_service = '',
-		services = {},
-	} = detail;
+		cargo_readiness_date = '',
+		cargo_value = 0,
+		cargo_value_currency = '',
+		commodity_category = '',
+	} = cargoDetails || {};
+
+	const primaryServicesArray = Object.values(services).filter(
+		(item) => item.service_type === primary_service,
+	);
 
 	const [{ loading :updateCheckoutServiceLoading }, triggerUpdateCheckoutService] = useRequest(
 		{
@@ -31,22 +42,13 @@ const useHandleAdditionalContent = ({
 	);
 
 	const handleNextButton = async () => {
-		const primaryServicesArray = Object.values(services).filter(
-			(item) => item.service_type === primary_service,
-		);
-
-		const {
-			cargo_readiness_date = '',
-			cargo_value = '',
-			cargo_value_currency = '',
-			commodity_category = '',
-		} = cargoDetails || {};
-
 		const {
 			sailing_range = {},
 			max_price,
 			min_price,
-			agreed_for_partial_shipment = false,
+			preferred_shipping_line_ids = [],
+			unpreferred_shipping_lines = [],
+			price_currency = '',
 			...restValues
 		} = getValues();
 
@@ -63,7 +65,7 @@ const useHandleAdditionalContent = ({
 		}
 
 		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
-			Toast.error('Please select cargo details');
+			Toast.error('Please enter cargo details');
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
 		}
@@ -80,14 +82,22 @@ const useHandleAdditionalContent = ({
 							cargo_readiness_date : cargo_readiness_date || undefined,
 							cargo_value          : Number(cargo_value) || undefined,
 							cargo_value_currency : cargo_value_currency || undefined,
-							commodity_category   : commodity_category || commodity_category,
+							commodity_category,
 							shipping_preferences : {
 								sailing_start_date          : startDate || undefined,
 								sailing_end_date            : endDate || undefined,
 								min_price                   : Number(min_price) || undefined,
 								max_price                   : Number(max_price) || undefined,
-								agreed_for_partial_shipment : agreed_for_partial_shipment === 'yes',
+								preferred_shipping_line_ids : !isEmpty(preferred_shipping_line_ids)
+									? preferred_shipping_line_ids
+									: undefined,
+								unpreferred_shipping_lines: !isEmpty(unpreferred_shipping_lines)
+									? unpreferred_shipping_lines
+									: undefined,
+								price_currency              : price_currency || undefined,
 								...restValues,
+								agreed_for_partial_shipment : undefined,
+								preferred_shipping_lines    : undefined,
 							},
 						}),
 					),
@@ -107,6 +117,49 @@ const useHandleAdditionalContent = ({
 			const { url = '' } = config;
 			Toast.error(`${getApiErrorString(error.response?.data)} in ${url}`);
 		}
+	};
+
+	const onClickSaveForLater = async () => {
+		const {
+			sailing_range = {},
+			max_price,
+			min_price,
+			...restValues
+		} = getValues();
+
+		const { startDate = '', endDate = '' } = sailing_range;
+
+		await triggerUpdateCheckoutService({
+			data: {
+				id,
+				update_rates                    : false,
+				service                         : primary_service,
+				fcl_freight_services_attributes : primaryServicesArray.map(
+					({ id: service_id }) => ({
+						id                   : service_id,
+						cargo_readiness_date : cargo_readiness_date || undefined,
+						cargo_value          : Number(cargo_value) || undefined,
+						cargo_value_currency : cargo_value_currency || undefined,
+						commodity_category,
+						shipping_preferences : {
+							sailing_start_date          : startDate || undefined,
+							sailing_end_date            : endDate || undefined,
+							min_price                   : Number(min_price) || undefined,
+							max_price                   : Number(max_price) || undefined,
+							...restValues,
+							agreed_for_partial_shipment : undefined,
+						},
+					}),
+				),
+			},
+		});
+
+		await updateCheckout({
+			values          : { id, state: 'save_for_later' },
+			refetchRequired : false,
+		});
+
+		push('/service-discovery?activeTab=saved_for_later');
 	};
 
 	const onError = () => {
@@ -144,6 +197,7 @@ const useHandleAdditionalContent = ({
 		updateCheckoutServiceLoading,
 		onClickNextButton,
 		noRatesPresent,
+		onClickSaveForLater,
 	};
 };
 

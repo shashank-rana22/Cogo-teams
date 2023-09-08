@@ -3,15 +3,15 @@ import { IcMAirport, IcMLocation, IcMPort } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function Location(props) {
-	const { data = {}, returnOnlyIcon } = props;
+	const { data = {}, returnOnlyIcon } = props || {};
 
-	const countryName = (data.country || {}).name;
+	const { display_name = '', country = {} } = data || {};
 
-	const { display_name = '' } = data || {};
+	const { name: countryName = '' } = country || {};
 
-	const [firstElelment = '', secondElelment = ''] = display_name.split(',').reverse() || [];
+	const [firstElement = '', secondElement = ''] = display_name.split(',').reverse() || [];
 
-	const cityAndCountryName = `${secondElelment},${firstElelment}`;
+	const cityAndCountryName = `${secondElement},${firstElement}`;
 
 	let portCode = null;
 	let iconToShow = IcMLocation;

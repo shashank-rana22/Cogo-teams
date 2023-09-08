@@ -1,4 +1,4 @@
-import { Input, Select, Tooltip } from '@cogoport/components';
+import { Select, Tooltip, Input } from '@cogoport/components';
 import { IcMInformation } from '@cogoport/icons-react';
 
 import CodeMargin from './CodeMargin';

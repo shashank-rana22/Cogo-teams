@@ -16,7 +16,7 @@ const useCreateCheckoutInvoice = ({ setShowAddInvoicingPartyModal = () => {}, ge
 
 			getCheckoutInvoices();
 
-			Toast.success('Invoice create successfully');
+			Toast.success('Invoice created successfully');
 
 			setShowAddInvoicingPartyModal(false);
 		} catch (err) {

@@ -65,6 +65,7 @@ function ConvenienceDetails({
 					showTaxes={showTaxes}
 				/>
 			)}
+			isOpen
 		>
 			<div className={styles.flex}>
 				<div className={styles.left_container}>

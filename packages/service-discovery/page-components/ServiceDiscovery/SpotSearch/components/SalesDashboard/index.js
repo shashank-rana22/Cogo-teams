@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import StyledTabs from '../../common/StyledTabs';
@@ -13,10 +14,14 @@ function SalesDashboard({
 	destination_location_id = '',
 	origin_location_id = '',
 	setLocation = () => {},
+	organization = {},
+	createSearch = () => {},
+	createSearchLoading = false,
 }) {
-	const allLists = configurations;
+	const { query = {} } = useRouter();
+	const { activeTab: selectedActiveTab = '' } = query;
 
-	const [activeTab, setActiveTab] = useState(allLists[GLOBAL_CONSTANTS.zeroth_index].type);
+	const [activeTab, setActiveTab] = useState(selectedActiveTab || configurations[GLOBAL_CONSTANTS.zeroth_index].type);
 
 	const PROPS_MAPPING_WITH_FUNCTION_NAME = {
 		renderPortPair: {
@@ -32,14 +37,14 @@ function SalesDashboard({
 			activeTab={activeTab}
 			onChange={setActiveTab}
 		>
-			{allLists.map((listItem) => {
+			{configurations.map((listItem) => {
 				const newListItem = { ...listItem };
 
 				const { type = '', heading = '', fields = [] } = newListItem;
 
 				let finalFields = [...fields];
 
-				if (['most_searched', 'most_booked'].includes(type)) {
+				if (['most_searched', 'most_booked', 'spot_searches'].includes(type)) {
 					let btnObj = fields.filter((fieldItem) => fieldItem.func === 'renderButton');
 					const remainingBtnFields = fields.filter((fieldItem) => fieldItem.func !== 'renderButton');
 
@@ -74,6 +79,9 @@ function SalesDashboard({
 							origin_location_id={origin_location_id || undefined}
 							destination_location_id={destination_location_id || undefined}
 							dashboard="sales"
+							organization={organization}
+							createSearch={createSearch}
+							createSearchLoading={createSearchLoading}
 						/>
 					</StyledTabPanel>
 				);

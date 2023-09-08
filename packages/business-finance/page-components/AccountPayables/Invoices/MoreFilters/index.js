@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => { } }) {
+function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_LENGTH }) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalFilters, setModalFilters] = useState({});
 	const { currency = '' } = modalFilters || {};
@@ -37,10 +37,10 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<div className={styles.currencys}>Currency</div>
 					<div className={styles.currencycontainer}>
 						{CURRENCY_DATA.map((item) => {
-							const { icon: Icon, text } = item;
+							const { icon: Icon, text } = item || {};
 							return (
 								<div
-									className={`${styles.currency_values} 
+									className={cl`${styles.currency_values} 
 									${currency === text ? styles.selected : styles.unselected}`}
 									key={text}
 									onClick={() => {
@@ -111,8 +111,8 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<IcMFilter />
 				</span>
 				{Object.keys(filters)?.filter((key) => ((key !== 'category')
-					&& (!isEmpty(filters?.[key])))).length > FILTER_LENGTH
-					&& <IcCRedCircle height={8} width={8} />}
+					&& (!isEmpty(filters?.[key])))).length > filterlen
+					? <IcCRedCircle height={8} width={8} /> : null}
 			</div>
 		</div>
 	);

@@ -16,7 +16,7 @@ function removeItemFromLocalStorage() {
 	localStorage.removeItem('additionalFormInfo');
 }
 
-function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
+function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = () => {}, ...rest }) {
 	const { createSearch, loading } = useCreateSearch();
 
 	const router = useRouter();
@@ -48,6 +48,11 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 	const onClickApply = async () => {
 		const { origin:originValues = {}, destination:destinationValues = {} } = locationValues;
 
+		const {
+			organization_id: orgId = '',
+			user_id: userId = '',
+		} = organization || {};
+
 		const { id: origin_id = '' } = originValues;
 		const { id: destination_id = '' } = destinationValues;
 
@@ -57,6 +62,11 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 
 		if (origin_id === destination_id) {
 			Toast.error('Origin and Destination cannot be same');
+			return;
+		}
+
+		if (!orgId || !userId) {
+			Toast.error('Please provide organization details');
 			return;
 		}
 
@@ -77,6 +87,8 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 
 			removeItemFromLocalStorage();
 
+			setRouterLoading(true);
+
 			router.push(
 				'/book/[spot_search_id]',
 				`/book/${spot_search_id}`,
@@ -92,7 +104,6 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 					<OrganisationForm
 						organization={organization}
 						setOrganization={setOrganization}
-						errors={{}}
 						action="edit"
 					/>
 				</div>
@@ -102,6 +113,8 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 						mode={service_type}
 						formValues={locationValues}
 						setFormValues={setLocationValues}
+						intent="rate_search"
+						organization={organization}
 					/>
 				</div>
 

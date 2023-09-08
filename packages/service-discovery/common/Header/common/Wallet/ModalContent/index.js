@@ -5,7 +5,7 @@ import getControls from './controls';
 import Form from './Form';
 import styles from './styles.module.css';
 
-const ZERO_VALUE = 0;
+const DEFAULT_PROMOTION_VALUE = 0;
 
 function ModalContent({
 	data = {},
@@ -48,7 +48,7 @@ function ModalContent({
 
 						<span className={styles.amount_value}>
 							{formatAmount({
-								amount   : data?.promocodes_worth || ZERO_VALUE,
+								amount   : data?.promocodes_worth || DEFAULT_PROMOTION_VALUE,
 								currency : data?.alloted_budget_currency,
 								options  : {
 									style                 : 'currency',
@@ -71,7 +71,7 @@ function ModalContent({
 
 						<span className={styles.amount_value}>
 							{formatAmount({
-								amount   : data?.promocode_usage_worth || ZERO_VALUE,
+								amount   : data?.promocode_usage_worth || DEFAULT_PROMOTION_VALUE,
 								currency : data?.alloted_budget_currency,
 								options  : {
 									style                 : 'currency',

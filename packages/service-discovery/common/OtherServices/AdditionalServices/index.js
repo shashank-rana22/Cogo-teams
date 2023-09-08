@@ -1,7 +1,4 @@
-import { Select } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+import { Select, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -10,10 +7,10 @@ import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerm
 
 import ChangeIncoTermModal from './ChangeIncoTermModal';
 import getAddedServices from './getAddedServices';
-import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
+import getNonRemoveableServices from './utils/getNonRemoveableServices';
 import getServiceName from './utils/getServiceName';
 
 const OTHER_SERVICES_ARRAY = ['cargo_insurance', 'warehouse'];
@@ -21,12 +18,6 @@ const OTHER_SERVICES_ARRAY = ['cargo_insurance', 'warehouse'];
 const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
 const singleLocationServices = ['fcl_freight_local'];
 
-const SERVICES_CANNOT_BE_REMOVED_MAPPING = {
-	export : 'export_fcl_freight_local',
-	import : 'import_fcl_freight_local',
-};
-
-// eslint-disable-next-line max-lines-per-function
 function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
 	detail = {},
@@ -36,15 +27,7 @@ function AdditionalServices({ // used in search results and checkout
 	searchLoading = false,
 	refetchLoading = false,
 }) {
-	const { country: { id: countryId = '' } } = getGeoConstants();
-
-	const COUNTRY_CODE = getCountryDetails({
-		country_id: countryId,
-	})?.country_code;
-
-	const cargoInsuranceSupportedServices = GLOBAL_CONSTANTS.cargo_insurance[COUNTRY_CODE] || [];
-
-	const { service_rates = [], total_price_currency = 'USD' } = rateCardData;
+	const { service_rates = [] } = rateCardData;
 
 	const {
 		service_details = {},
@@ -80,14 +63,6 @@ function AdditionalServices({ // used in search results and checkout
 
 		SERVICE_DATA[serviceName].push(serviceItem);
 	});
-
-	if (cargoInsuranceSupportedServices.includes(primaryService)) {
-		servicesArray.unshift({
-			name         : 'cargo_insurance',
-			service_type : 'cargo_insurance',
-			title        : 'Cargo Insurance',
-		});
-	}
 
 	const ALL_SERVICES = [];
 
@@ -166,12 +141,12 @@ function AdditionalServices({ // used in search results and checkout
 		});
 	});
 
-	const { startingPrices = [], loading: startingPriceLoading } = useGetMinPrice({
-		allServices: ALL_SERVICES,
-		total_price_currency,
-		detail,
-		rateCardData,
-	});
+	// const { startingPrices = [], loading: startingPriceLoading } = useGetMinPrice({
+	// 	allServices: ALL_SERVICES,
+	// 	total_price_currency,
+	// 	detail,
+	// 	rateCardData,
+	// });
 
 	const filteredAllServices = ALL_SERVICES.filter((service_item) => service_item?.inco_terms?.includes(inco_term));
 
@@ -193,11 +168,7 @@ function AdditionalServices({ // used in search results and checkout
 
 	const incoTermOptions = getTradeTypeWiseIncoTerms(trade_type);
 
-	const SERVICES_CANNOT_BE_REMOVED = [
-		'fcl_freight',
-		SERVICES_CANNOT_BE_REMOVED_MAPPING[trade_type],
-		'air_freight',
-	];
+	const SERVICES_CANNOT_BE_REMOVED = getNonRemoveableServices({ trade_type, source, main_service: primaryService });
 
 	const SERVICES_LIST_MAPPING = {
 		shipper_side_services: {
@@ -233,10 +204,17 @@ function AdditionalServices({ // used in search results and checkout
 				You may need these services
 				{source === 'checkout' ? (
 					<div style={{ fontWeight: 500, display: 'flex', alignItems: 'center' }}>
-						IncoTerms
+						IncoTerm:
 						<Select
 							value={inco_term}
-							onChange={(val) => setIncoTermModalData({ selectedValue: val })}
+							onChange={(val) => {
+								if (val === inco_term) {
+									Toast.error('You selected the same Incoterm');
+									return;
+								}
+
+								setIncoTermModalData({ selectedValue: val });
+							}}
 							size="sm"
 							options={incoTermOptions}
 							className={styles.select}
@@ -261,8 +239,8 @@ function AdditionalServices({ // used in search results and checkout
 							setHeaderProps={setHeaderProps}
 							refetch={refetchSearch}
 							SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
-							startingPrices={startingPrices}
-							startingPriceLoading={startingPriceLoading}
+							// startingPrices={startingPrices}
+							// startingPriceLoading={startingPriceLoading}
 							refetchLoading={refetchLoading}
 						/>
 					);
@@ -277,6 +255,7 @@ function AdditionalServices({ // used in search results and checkout
 					getCheckout={refetchSearch}
 					incoterm={inco_term}
 					checkout_id={detail?.checkout_id}
+					service_details={service_details}
 				/>
 			) : null}
 		</div>

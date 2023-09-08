@@ -1,15 +1,23 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import getShipmentTypeFromUrl from '../../../../helpers/getShipmentTypeFromUrl';
 import useBookShipment from '../../hooks/useBookShipment';
 import useControlBookingApproval from '../../hooks/useControlBookingApproval';
 import useSendWhatsappBooking from '../../hooks/useSendWhatsappBooking';
 
+const URL_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
+
 const useHandleBookingConfirmationFooter = ({
+	rate = {},
 	detail = {},
 	checkoutMethod = '',
 	bookingConfirmationMode = '',
@@ -21,6 +29,8 @@ const useHandleBookingConfirmationFooter = ({
 	disableConditionForFcl = false,
 	noRatesPresent = false,
 }) => {
+	const { push } = useRouter();
+
 	const {
 		partner_id,
 		query: { shipment_id, rfq_id },
@@ -29,18 +39,20 @@ const useHandleBookingConfirmationFooter = ({
 		query      : general?.query,
 	}));
 
+	const shipmentType = getShipmentTypeFromUrl() || detail?.primary_service;
+
 	const {
 		validity_end,
 		checkout_approvals = [],
 		importer_exporter_id,
 		importer_exporter,
-		id,
 		id: checkout_id = '',
 		quotation_email_sent_at = '',
 		booking_proof = '',
 	} = detail;
 
 	const [showOtpModal, setShowOtpModal] = useState(false);
+	const [showMarginModal, setShowMarginModal] = useState(false);
 	const [otpValue, setOtpValue] = useState('');
 
 	const [{ loading: sendOtpLoading }, trigger] = useRequest(
@@ -68,10 +80,12 @@ const useHandleBookingConfirmationFooter = ({
 	const { sendWhatsappBooking, whatsappLoading } = useSendWhatsappBooking();
 
 	const { bookShipment, loading: bookCheckoutLoading } = useBookShipment({
-		checkout_id: id,
+		checkout_id,
 		rfq_id,
 		checkout_type,
 		setIsShipmentCreated,
+		detail,
+		urlMapping: URL_MAPPING,
 	});
 
 	const submitForOtpVerification = async () => {
@@ -99,18 +113,28 @@ const useHandleBookingConfirmationFooter = ({
 			} else {
 				setIsShipmentCreated(true);
 
-				const newHref = `${window.location.origin}/${partner_id}/shipments/${
-					shipment_id || res.data.shipment_id
-				}`;
+				if (URL_MAPPING[shipmentType]) {
+					push(`/booking/${URL_MAPPING[shipmentType]}/${
+						shipment_id || res?.data?.shipment_id
+					}`);
+				} else {
+					const newHref = `${window.location.origin}/
+					${partner_id}/shipments/${shipment_id || res?.data?.shipment_id}`;
 
-				window.location.href = newHref;
+					window.location.href = newHref;
+				}
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async ({ source = '' } = {}) => {
+		if (!rate?.total_margins?.demand && !source) {
+			setShowMarginModal(true);
+			return;
+		}
+
 		if (bookingConfirmationMode === 'mobile_otp') {
 			submitForOtpVerification();
 			return;
@@ -122,12 +146,13 @@ const useHandleBookingConfirmationFooter = ({
 		}
 		const whatsappNumberEformat = detail?.importer_exporter_poc?.whatsapp_number_eformat;
 
-		if (checkoutMethod === 'whatsapp') {
+		if (checkoutMethod === 'whatsapp' && whatsappNumberEformat) {
 			sendWhatsappBooking(whatsappNumberEformat);
 			return;
 		}
 
-		bookShipment();
+		await bookShipment();
+		setShowMarginModal(false);
 	};
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
@@ -140,27 +165,27 @@ const useHandleBookingConfirmationFooter = ({
 		}
 
 		if (noRatesPresent) {
-			setError('please remove services with no rates');
+			setError('Please remove services with no rates');
 			return;
 		}
 
 		if (!quotation_email_sent_at) {
-			setError('please send quotation Email to continue');
+			setError('Please send quotation Email to continue');
 			return;
 		}
 
 		if (isEmpty(invoicingParties)) {
-			setError('Ther should be atleast 1 invoicing party');
+			setError('There should be atleast 1 invoicing party');
 			return;
 		}
 
 		if (disableConditionForFcl) {
-			setError('please select document preferences in Invoicing party that contains FCL freight');
+			setError('Please select document preferences in Invoicing party that contains FCL freight');
 			return;
 		}
 
 		if (bookingConfirmationMode === 'booking_proof' && isEmpty(booking_proof)) {
-			setError('please select Booking Proof');
+			setError('Please upload Booking Proof');
 			return;
 		}
 
@@ -190,6 +215,8 @@ const useHandleBookingConfirmationFooter = ({
 		submitForOtpVerification,
 		validity_end,
 		whatsappLoading,
+		showMarginModal,
+		setShowMarginModal,
 	};
 };
 

@@ -9,7 +9,7 @@
 	}
 }
 
-.locationCode {
+.location_code {
 	min-width: max-content;
 	padding: 4px 0 0;
 	font-size: 20px;
@@ -17,7 +17,7 @@
 	color: #000;
 }
 
-.locationName {
+.location_name {
 	max-width: 20%;
 	margin-bottom: -4px;
 	overflow: hidden;
@@ -29,12 +29,10 @@
 	white-space: nowrap;
 }
 
-.locationNameGroup {
+.location_name_group {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-
-	/* max-width: 70%; */
 }
 
 .circle {
@@ -46,7 +44,7 @@
 	border-radius: 50%;
 }
 
-.dottedLine {
+.dotted_line {
 	width: 40%;
 	height: 1px;
 	margin-right: 1px;
@@ -54,7 +52,7 @@
 	border-top: 1.5px dotted #7278ad;
 }
 
-.activeCircle {
+.active_circle {
 	flex-shrink: 0;
 	width: 6px;
 	height: 6px;

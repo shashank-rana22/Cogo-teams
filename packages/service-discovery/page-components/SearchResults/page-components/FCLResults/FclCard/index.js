@@ -1,12 +1,15 @@
+/* eslint-disable max-lines-per-function */
 import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import FreightPriceDetail from '../../../common/BasicFreightDetail';
 
 import DetailFooter from './DetailFooter';
+import HaulageText from './HaulageText';
+import IcdRoute from './IcdRoute';
+import PromoCode from './Promocode';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
 import Route from './Route';
@@ -16,6 +19,15 @@ import styles from './styles.module.css';
 const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
+
+const getPromotion = ({ promocodes = [] }) => {
+	const promotion = promocodes.find((promocode) => {
+		const { is_applicable, is_eligible } = promocode.eligibility_checks || {};
+		return is_applicable && is_eligible;
+	}) || {};
+
+	return promotion;
+};
 
 function RateCardTopSection({
 	rateCardData = {},
@@ -62,18 +74,41 @@ function MiddleSection({
 	isCogoAssured = false,
 	isMultiContainer = false,
 	setScreen = () => {},
+	setRouterLoading = () => {},
 }) {
 	const firstTwoRates = primaryServiceRates.slice(ZERO, TWO);
 
 	const remainingRates = primaryServiceRates.slice(TWO);
 
+	const { origin_port = {}, destination_port = {} } = detail || {};
+
+	const isIcdPortPresent = origin_port?.is_icd || destination_port?.is_icd;
+
+	const MAPPING = {
+		false: {
+			component : Route,
+			props     : {
+				detail,
+				scheduleData,
+				isCogoAssured,
+			},
+		},
+		true: {
+			component : IcdRoute,
+			props     : {
+				detail,
+				scheduleData,
+				isCogoAssured,
+				rateCardData,
+			},
+		},
+	};
+
+	const { component:RouteComponent, props } = MAPPING[isIcdPortPresent];
+
 	return (
 		<div className={styles.middle}>
-			<Route
-				detail={detail}
-				scheduleData={scheduleData}
-				isCogoAssured={isCogoAssured}
-			/>
+			<RouteComponent {...props} />
 
 			<div className={styles.rate_details}>
 				<div style={{ marginRight: 24 }}>
@@ -129,6 +164,7 @@ function MiddleSection({
 					isCogoAssured={isCogoAssured}
 					isMultiContainer={isMultiContainer}
 					setScreen={setScreen}
+					setRouterLoading={setRouterLoading}
 				/>
 			</div>
 		</div>
@@ -173,8 +209,16 @@ function FclCard({
 	selectedCogoAssuredCard = {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	setRouterLoading = () => {},
 }) {
-	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time, source } = rateCardData;
+	const {
+		service_rates = {},
+		schedules = {},
+		transit_time_unit,
+		transit_time, source,
+		promocode = [],
+	} = rateCardData;
+
 	const primaryService = detail?.search_type;
 
 	const {
@@ -213,6 +257,17 @@ function FclCard({
 
 	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
 
+	const isOriginHaulageRates = Object.values(service_rates).some(
+		(service) => service?.is_rate_available
+			&& service?.service_type === 'haulage_freight'
+			&& service?.trade_type === 'export',
+	);
+	const isDestinationHaulageRates = Object.values(service_rates).some(
+		(service) => service?.is_rate_available
+			&& service?.service_type === 'haulage_freight'
+			&& service?.trade_type === 'import',
+	);
+
 	const isMultiContainer = primaryServiceRates.length > ONE;
 
 	return (
@@ -245,7 +300,16 @@ function FclCard({
 				isMultiContainer={isMultiContainer}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
+				setRouterLoading={setRouterLoading}
 			/>
+
+			<HaulageText
+				isOriginHaulageRates={isOriginHaulageRates}
+				isDestinationHaulageRates={isDestinationHaulageRates}
+				details={detail}
+			/>
+
+			<PromoCode promotion={getPromotion({ promocodes: promocode })} />
 
 			{isCogoAssured && !isSelectedCard ? (
 				<SailingWeek

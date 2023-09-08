@@ -28,11 +28,11 @@ const STATIC_COMPARISON_KEY = {
 		schedule_type         : 'Schedule Type',
 		free_origin_days      : 'Free Origin days',
 		free_destination_days : 'Free Destination days',
-		validity_end          : 'Estimated Time Departure ',
+		validity_end          : 'Estimated Departure ',
 		book_and_lock         : '',
 	},
 	air_freight: {
-		validity_end       : 'Estimated Time Departure ',
+		validity_end       : 'Estimated Departure ',
 		total_landed_price : 'Total Landed Cost',
 		book_and_lock      : '',
 	},
@@ -63,6 +63,14 @@ const formatAmountValue = (amount, currency) => (
 			currency,
 			currencyDisplay : 'symbol',
 		},
+	}) || '-'
+);
+
+const formatDateValue = (date) => (
+	formatDate({
+		date,
+		formattype : 'date',
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
 	}) || '-'
 );
 
@@ -137,6 +145,10 @@ function HandleBookValue({
 }
 
 const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContract) => {
+	const { source = '', schedules = {} } = item || {};
+
+	const { validity_start = '', validity_end = '' } = schedules || {};
+
 	const keys = Object.keys(STATIC_COMPARISON_KEY[mode || 'default']);
 
 	const otherComparisonKeys = keys.map((key) => {
@@ -152,9 +164,11 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 			|| DEFAULT_FREE_DAYS_VALUE}`;
 
 		const keyHandlers = {
-			bls_count          : () => createValueObject(summary.bls_count),
-			schedule_type      : () => createValueObject(SCHEDULE_TYPE_MAPPING[item.schedule_type]),
-			total_landed_price : () => createValueObject(
+			bls_count     : () => createValueObject(summary.bls_count),
+			schedule_type : () => createValueObject(
+				source === 'cogo_assured_rate' ? '-' : SCHEDULE_TYPE_MAPPING[item.schedule_type],
+			),
+			total_landed_price: () => createValueObject(
 				formatAmountValue(
 					item?.total_price_discounted,
 					item?.total_price_currency,
@@ -170,11 +184,10 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 				getFreeDaysValue(item?.origin_detention, item?.origin_demmurage),
 			),
 			validity_end: () => createValueObject(
-				formatDate({
-					date       : item.departure || item.schedules?.departure || item.schedules?.validity_end,
-					formattype : 'date',
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
-				}),
+				source === 'cogo_assured_rate'
+					? `${formatDateValue(validity_start)} - ${formatDateValue(validity_end)}`
+					: formatDateValue(item.schedules?.departure || item.schedules?.validity_end),
+
 			),
 			book_and_lock: () => ({
 				...comparisonKey,

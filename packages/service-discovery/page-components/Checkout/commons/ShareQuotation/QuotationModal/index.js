@@ -1,5 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 
+import EmailConfirmation from '../EmailConfirmation';
+
 import CreateUser from './components/Customize/components/CreateUser';
 import styles from './styles.module.css';
 import useHandleQuotationModal from './useHandleQuotationModal';
@@ -20,6 +22,9 @@ function QuotationModal({
 		handleEmailSend,
 		setActiveState,
 		buttonDisabled,
+		confirmation = false,
+		setConfirmation = () => {},
+		handleSendEmail = () => {},
 	} = useHandleQuotationModal({
 		...restProps,
 		setShowShareQuotationModal,
@@ -32,6 +37,17 @@ function QuotationModal({
 		buttons: activeButtons,
 		compoenntProps: activeComponentProps,
 	} = MAPPING[activeState];
+
+	if (confirmation) {
+		return (
+			<EmailConfirmation
+				setConfirmation={setConfirmation}
+				confirmation={confirmation}
+				handleSendEmail={handleSendEmail}
+				loading={buttonDisabled}
+			/>
+		);
+	}
 
 	return (
 		<Modal

@@ -15,6 +15,7 @@ const useHandleSelectServices = ({
 	selectedAddress = {},
 	activated_on_paylater = {},
 	isFclInvoice,
+	getCheckout = () => {},
 }) => {
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({
 		invoicingParties      : [selectedAddress],
@@ -29,7 +30,7 @@ const useHandleSelectServices = ({
 		getCheckoutInvoices,
 	});
 
-	const saveInvoicingParty = () => {
+	const saveInvoicingParty = async () => {
 		const {
 			address_object_type = '',
 			id = '',
@@ -96,7 +97,9 @@ const useHandleSelectServices = ({
 			checkout_id,
 		};
 
-		createCheckoutInvoice({ values: payload });
+		await createCheckoutInvoice({ values: payload });
+
+		getCheckout();
 	};
 
 	const BUTTONS_MAPPING = [
@@ -104,7 +107,7 @@ const useHandleSelectServices = ({
 			label     : 'Back',
 			themeType : 'link',
 			key       : 'back',
-			diasbled  : createLoading || loading,
+			disabled  : createLoading || loading,
 			onClick   : () => {
 				setSelectedAddress({});
 				setCurrentView('select_address');
@@ -115,11 +118,11 @@ const useHandleSelectServices = ({
 			style     : { marginLeft: '16px' },
 			themeType : 'secondary',
 			key       : 'cancel',
-			diasbled  : createLoading || loading,
+			disabled  : createLoading || loading,
 			onClick   : () => setShowAddInvoicingPartyModal(false),
 		},
 		{
-			label     : 'Next',
+			label     : 'Create',
 			style     : { marginLeft: '16px' },
 			themeType : 'accent',
 			key       : 'Done',

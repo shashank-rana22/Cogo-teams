@@ -32,7 +32,13 @@ function FilterModal({
 		if (!isEmpty(errors)) {
 			return;
 		}
-		const finalValues = { ...values };
+
+		const { source = '' } = values || {};
+
+		const finalValues = {
+			...values,
+			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || DEFAULT_VALUES.source,
+		};
 
 		setFilters({ ...filters, ...finalValues });
 		setShow(false);

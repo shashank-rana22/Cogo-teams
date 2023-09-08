@@ -3,7 +3,7 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 
 import getLocationInfo from '../../page-components/SearchResults/utils/locations-search';
 
-import LoadingState from './LoadingState';
+import LoadingState from './loading-state';
 import styles from './styles.module.css';
 
 function LocationItem({ location = {} }) {

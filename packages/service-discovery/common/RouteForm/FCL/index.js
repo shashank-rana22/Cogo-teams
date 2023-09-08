@@ -7,7 +7,7 @@ import getControls from '../getControls';
 import controls from './fcl-route-controls';
 import styles from './styles.module.css';
 
-function FCLRouteForm({ mode = '', setFormValues = () => {}, formValues = {} }) {
+function FCLRouteForm({ mode = '', setFormValues = () => {}, formValues = {}, organization = {}, ...restProps }) {
 	const [originControls, destinationControls] = getControls(controls, mode);
 
 	return (
@@ -17,6 +17,9 @@ function FCLRouteForm({ mode = '', setFormValues = () => {}, formValues = {} }) 
 				setFormValues={setFormValues}
 				controlItem={originControls}
 				prefix={<IcAShipAmber width={26} height={26} />}
+				service_type="fcl_freight"
+				organization={organization}
+				{...restProps}
 			/>
 
 			<ToggleLocation
@@ -29,6 +32,9 @@ function FCLRouteForm({ mode = '', setFormValues = () => {}, formValues = {} }) 
 				setFormValues={setFormValues}
 				controlItem={destinationControls}
 				prefix={<IcAShipAmber width={26} height={26} />}
+				service_type="fcl_freight"
+				organization={organization}
+				{...restProps}
 			/>
 		</div>
 	);

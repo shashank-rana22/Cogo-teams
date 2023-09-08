@@ -79,7 +79,7 @@
 
 	:global {
 		.ui_select_options_container {
-			z-index: 10;
+			z-index: 10 !important;
 		}
 	}
 }

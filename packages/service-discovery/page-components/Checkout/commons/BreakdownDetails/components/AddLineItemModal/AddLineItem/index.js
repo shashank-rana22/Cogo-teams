@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
@@ -6,6 +7,8 @@ import getElementController from '../../../../forms/getElementController';
 
 import { getlineItemControls } from './getlineItemControls';
 import styles from './styles.module.css';
+
+const LENGTH_TO_PRESELECT = 1;
 
 function AddLineItem({ CHARGE_CODE_DATA = {}, service_id = '', checkout_id = '' }, ref) {
 	const [unitOptions, setUnitOptions] = useState([]);
@@ -25,6 +28,10 @@ function AddLineItem({ CHARGE_CODE_DATA = {}, service_id = '', checkout_id = '' 
 
 			setValue('unit', '');
 			setUnitOptions(units.map((val) => ({ label: startCase(val), value: `${val}` })));
+
+			if (units.length === LENGTH_TO_PRESELECT) {
+				setValue('unit', units[GLOBAL_CONSTANTS.zeroth_index]);
+			}
 		}
 	}, [CHARGE_CODE_DATA, code, setValue]);
 

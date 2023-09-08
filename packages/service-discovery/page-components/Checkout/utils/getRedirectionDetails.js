@@ -1,3 +1,8 @@
+const URL_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
+
 const getRedirectionDetails = ({
 	isCheckoutApiSuccess = false,
 	partner_id = '',
@@ -5,6 +10,7 @@ const getRedirectionDetails = ({
 	checkout_id = '',
 	shipment_id = '',
 	redirect_required = 'true',
+	primary_service = '',
 }) => {
 	if (!isCheckoutApiSuccess) {
 		return {
@@ -15,14 +21,20 @@ const getRedirectionDetails = ({
 	}
 
 	if (shipment_id && redirect_required === 'true') {
+		let url = `/${partner_id}/shipments/${shipment_id}`;
+
+		if (URL_MAPPING[primary_service]) {
+			url = `/v2/${partner_id}/booking/${URL_MAPPING[primary_service]}/${shipment_id}`;
+		}
+
 		return {
-			url: `/${partner_id}/shipments/${shipment_id}`,
+			url,
 			message:
 				'The checkout is already booked',
 		};
 	}
 
-	if (!tags.includes('new_admin') && redirect_required === 'true') {
+	if (!tags.includes('version2') && redirect_required === 'true') {
 		return {
 			url: `/${partner_id}/checkout/${checkout_id}`,
 			message:

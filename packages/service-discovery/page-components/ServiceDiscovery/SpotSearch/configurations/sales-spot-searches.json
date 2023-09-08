@@ -47,7 +47,7 @@
 		}
 	],
 	"filterProps": {
-		"searchKey": "serial_id",
+		"searchKey": "q",
 		"searchPlaceholder": "Search by Id",
 		"controls": [
 			{

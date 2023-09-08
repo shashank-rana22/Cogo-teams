@@ -20,10 +20,13 @@ const useHandleQuotationModal = ({
 	selectedModes,
 	setShowShareQuotationModal,
 	updateLoading,
+	updateCheckout = () => {},
+	bookingConfirmationMode = '',
 }) => {
-	const { query, agent_id } = useSelector(({ general, profile }) => ({
-		query    : general.query,
-		agent_id : profile?.id,
+	const { query, agent_id, partnerId } = useSelector(({ general, profile }) => ({
+		query     : general.query,
+		agent_id  : profile?.id,
+		partnerId : profile?.partner?.id,
 	}));
 
 	const { billing_addresses = [] } = invoice || {};
@@ -32,6 +35,7 @@ const useHandleQuotationModal = ({
 	const [emailContent, setEmailContent] = useState({});
 	const [emailPreviews, setEmailPreviews] = useState({});
 	const [selected, setSelected] = useState('main');
+	const [confirmation, setConfirmation] = useState(false);
 
 	const { quotation_type, checkout_ids } = detail || {};
 
@@ -151,6 +155,12 @@ const useHandleQuotationModal = ({
 				setShowShareQuotationModal(false);
 
 				Toast.success('Email sent');
+
+				await updateCheckout({ values: { id: checkout_id, is_locked: true } });
+
+				if (bookingConfirmationMode === 'email') {
+					window.location.href = `/${partnerId}/sales/dashboards`;
+				}
 			} catch (err) {
 				if (err?.response) {
 					getApiErrorString(err.response?.data);
@@ -214,8 +224,21 @@ const useHandleQuotationModal = ({
 		return handleEmailSend();
 	};
 
+	const handleFclFreight = () => {
+		const quotation_params = Object.keys(emailContent).map(
+			(key) => emailContent[key],
+		);
+
+		if (!quotation_params.length) {
+			Toast.error('Please select at least one party and save');
+			return;
+		}
+
+		setConfirmation(true);
+	};
+
 	const handleClick = () => (detail?.primary_service === 'fcl_freight'
-		? handleSendEmail()
+		? handleFclFreight()
 		: handleSendEmail());
 
 	const MAPPING = {
@@ -223,7 +246,7 @@ const useHandleQuotationModal = ({
 			component      : Customize,
 			compoenntProps : {
 				detail,
-				organization: organization?.data,
+				organization,
 				selectedModes,
 				widths,
 				billing_addresses,
@@ -259,7 +282,7 @@ const useHandleQuotationModal = ({
 				recipientsControl,
 				setValue,
 				emailPreviews,
-				organization: organization?.data,
+				organization,
 				selected,
 				recipientWatch,
 				orgUsersData,
@@ -300,6 +323,9 @@ const useHandleQuotationModal = ({
 		handleEmailSend,
 		setActiveState,
 		buttonDisabled: loading || updateLoading,
+		confirmation,
+		setConfirmation,
+		handleSendEmail,
 	};
 };
 

@@ -25,6 +25,7 @@ function SpotSearch() {
 
 		return {};
 	});
+
 	const [selectedMode, setSelectedMode] = useState({
 		mode_label : 'FCL',
 		mode_value : 'fcl_freight',
@@ -94,6 +95,9 @@ function SpotSearch() {
 							origin_location_id={location?.origin?.id}
 							destination_location_id={location?.destination?.id}
 							setLocation={setLocation}
+							organization={organization}
+							createSearch={createSearch}
+							createSearchLoading={loading}
 						/>
 					</div>
 				</>

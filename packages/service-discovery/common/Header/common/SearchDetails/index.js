@@ -10,10 +10,13 @@ function SearchDetails({
 	data = {},
 	setHeaderProps = () => {},
 	service_key = 'search_type',
-	platformTheme = 'light',
 	showAdditionalHeader = false,
 	loading = false,
 	isAllowedToEdit = true,
+	activePage = '',
+	currentScreen = '',
+	setCurrentScreen = () => {},
+	setRouterLoading = () => {},
 	...rest
 }) {
 	const { importer_exporter = {}, user = {} } = data || {};
@@ -22,7 +25,7 @@ function SearchDetails({
 
 	const handleEdit = (event) => {
 		event.stopPropagation();
-		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps });
+		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps, setRouterLoading });
 	};
 
 	return (
@@ -31,16 +34,17 @@ function SearchDetails({
 				{...rest}
 				orgName={business_name}
 				userName={user_name}
-				platformTheme={platformTheme}
 				loading={loading}
+				activePage={activePage}
+				currentScreen={currentScreen}
+				setCurrentScreen={setCurrentScreen}
 			/>
 
 			<LocationDetails
-				{...rest}
 				service_key={service_key}
 				data={data}
-				platformTheme={platformTheme}
 				loading={loading}
+				activePage={activePage}
 			/>
 
 			{isAllowedToEdit ? (

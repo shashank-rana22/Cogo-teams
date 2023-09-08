@@ -1,8 +1,8 @@
 import { Button, cl } from '@cogoport/components';
+import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 
 import getElementController from '../../forms/getElementController';
 
-import OTPLayout from './OTPLayout';
 import styles from './styles.module.css';
 import useWhatsappNoVerification from './useWhatsappNoVerification';
 
@@ -67,7 +67,7 @@ function WhatsappVerification({
 
 			{showEnterOtpComponent && (
 				<div className={styles.otp_container}>
-					<OTPLayout
+					<OTPInput
 						otpLength={OTP_LENGTH}
 						setOtpValue={setOtpNumber}
 						loading={false}

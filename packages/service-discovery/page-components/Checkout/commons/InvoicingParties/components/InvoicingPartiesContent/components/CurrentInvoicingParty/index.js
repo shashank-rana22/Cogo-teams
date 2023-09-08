@@ -84,7 +84,7 @@ function CurrentInvoicingParty({
 						{address}
 					</div>
 
-					<div className={styles.gst}>{`GST: ${tax_number}`}</div>
+					<div className={styles.gst}>{`GST: ${tax_number || 'GST NOT APPLICABLE'}`}</div>
 				</div>
 
 				<div className={styles.right_content}>
@@ -94,6 +94,7 @@ function CurrentInvoicingParty({
 						allServices={allServices}
 						editInvoiceDetails={editInvoiceDetails}
 						setEditInvoiceDetails={setEditInvoiceDetails}
+						length={length}
 					/>
 
 					<TotalCost

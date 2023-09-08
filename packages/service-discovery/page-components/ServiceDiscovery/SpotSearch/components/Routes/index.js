@@ -83,6 +83,8 @@ function Routes({
 					mode={mode.mode_value}
 					formValues={formValues}
 					setFormValues={setFormValues}
+					organization={organization}
+					intent="rate_search"
 				/>
 			</div>
 

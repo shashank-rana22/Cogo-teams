@@ -1,10 +1,12 @@
 import { Button, Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useRef } from 'react';
 
 import useCreateOrganizationLineItemAlias from '../../../../hooks/useCreateOrganizationLineItemAlias';
+import ContainerDetails from '../ContainerDetails';
 
 import EditLineItem from './EditLineItem';
+import styles from './styles.module.css';
 
 function EditLineItemModal({
 	editLineItemData = {},
@@ -16,7 +18,7 @@ function EditLineItemModal({
 }) {
 	const ref = useRef({});
 
-	const { service_id = '', service_type = '' } = editLineItemData || {};
+	const { service_id = '', service_type = '', details = {} } = editLineItemData || {};
 
 	const { createOrganizationLineItemAlias, loading } = useCreateOrganizationLineItemAlias({
 		setEditLineItemData,
@@ -44,13 +46,22 @@ function EditLineItemModal({
 	return (
 		<Modal
 			show={!isEmpty(editLineItemData)}
-			onClose={() => {
-				setEditLineItemData({});
-			}}
+			onClose={() => setEditLineItemData({})}
 		>
 			<Modal.Header title="Edit Line Item (Alias Creation)" />
 
-			<Modal.Body>
+			<Modal.Body className={styles.body}>
+				<div className={styles.flex}>
+					<div className={styles.label}>{startCase(service_type)}</div>
+
+					<div className={styles.container_details}>
+						<ContainerDetails
+							primary_service={service_type}
+							details={details}
+						/>
+					</div>
+				</div>
+
 				<EditLineItem
 					ref={ref}
 					lineItemOptions={lineItems}

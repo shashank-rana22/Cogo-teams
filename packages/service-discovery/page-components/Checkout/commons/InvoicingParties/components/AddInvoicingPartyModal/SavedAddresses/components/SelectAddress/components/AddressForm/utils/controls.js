@@ -32,10 +32,6 @@ const getAddressNewControls = ({ organizationCountryId }) => {
 				...newControl,
 				rules: {
 					...getValue(newControl, 'rules', {}),
-					// pattern: {
-					// 	value: GLOBAL_CONSTANTS.regex_patterns.gst_number,
-					// 	message: 'GST is invalid',
-					// },
 				},
 			};
 		}

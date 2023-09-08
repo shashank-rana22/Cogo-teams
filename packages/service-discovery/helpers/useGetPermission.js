@@ -3,22 +3,17 @@ import { useSelector } from '@cogoport/store';
 
 import getCustomAuthParams from './getCustomAuthParams';
 
-const ONE = 1;
-const TWO = 2;
+const SCOPE_INDEX = 1;
+const VIEW_TYPE_INDEX = 2;
 
 const useGetPermission = ({ navigation: currNav = '' }) => {
 	const {
 		scope,
 		permissions_navigations,
-		entity_types,
 	} = useSelector(({ general, profile }) => ({
 		scope                   : general?.scope,
 		permissions_navigations : profile?.permissions_navigations,
-		entity_types            : profile?.partner?.entity_types,
 	}));
-
-	const isChannelPartner = entity_types?.includes('channel_partner')
-		&& !entity_types?.includes('cogoport');
 
 	const isApiAllowed = (condition) => {
 		const {
@@ -79,7 +74,7 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 			}
 			return isViewScope;
 		}
-		const viewscope = authParams[ONE];
+		const viewscope = authParams[SCOPE_INDEX];
 		return !!(viewscope && viewscope === value);
 	};
 	const isInViewType = (condition) => {
@@ -112,7 +107,7 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 			}
 			return isViewType;
 		}
-		const viewtype = authParams[TWO];
+		const viewtype = authParams[VIEW_TYPE_INDEX];
 		return !!(viewtype && viewtype === value);
 	};
 	// type can be -> api / viewscope / viewtype / scope
@@ -155,10 +150,8 @@ const useGetPermission = ({ navigation: currNav = '' }) => {
 	return {
 		scope,
 		permissions_navigations,
-		entity_types,
 		isConditionMatches,
 		authorizedToSee,
-		isChannelPartner,
 	};
 };
 

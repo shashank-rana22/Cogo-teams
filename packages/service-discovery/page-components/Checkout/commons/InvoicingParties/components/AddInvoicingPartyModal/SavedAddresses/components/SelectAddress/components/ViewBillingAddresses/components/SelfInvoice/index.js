@@ -13,7 +13,6 @@ function SelfInvoice({
 	optionsDisabled = {},
 	setSelectedAddress = () => {},
 	setCurrentView = () => {},
-	disabledInvoicingParties = [],
 }) {
 	const {
 		billing_addresses,
@@ -49,10 +48,6 @@ function SelfInvoice({
 						is_sez = false,
 						verification_status: is_sez_verification_status = 'pending',
 					} = billingAddress;
-
-					if (disabledInvoicingParties.includes(tax_number)) {
-						return null;
-					}
 
 					return (
 						<div
