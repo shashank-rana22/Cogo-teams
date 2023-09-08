@@ -7,7 +7,7 @@ const useListOrganizationTradeParties = ({
 	defaultParams = {},
 	defaultFilters = {},
 }) => {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState({});
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_organization_trade_parties',
@@ -23,9 +23,9 @@ const useListOrganizationTradeParties = ({
 	const apiTrigger = useCallback(async () => {
 		try {
 			const res = await trigger();
-
-			setData(res?.data?.list);
+			setData(res?.data);
 		} catch (err) {
+			setData({});
 			toastApiError(err);
 		}
 	}, [trigger]);

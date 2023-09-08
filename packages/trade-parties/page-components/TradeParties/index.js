@@ -1,16 +1,15 @@
-import { useState } from 'react';
+import useListOrganizationTradePartyDetails from '../../hooks/useListOrganizationTradePartyDetails';
 
 import Filter from './Filter';
 import ListView from './ListView';
 
 function TradeParties() {
-	const [globalSearch, setGlobalSearch] = useState('');
-	const [typeOfSearch, setTypeOfSearch] = useState('trade_party');
-	const [filterParams, setFilterParams] = useState({
-		registration_number : '',
-		country_id          : '',
-		company_type        : '',
-		page                : 1,
+	const {
+		typeOfSearch = '', setTypeOfSearch = () => {}, globalSearch = '', setGlobalSearch = () => {},
+		filterParams = {}, setFilterParams = () => {}, data = {}, loading = false,
+	} = useListOrganizationTradePartyDetails({
+		defaultParams  : { organization_trade_parties_data_required: true },
+		defaultFilters : { trade_party_type: ['self', 'paying_party', 'collection_party'] },
 	});
 
 	return (
@@ -25,8 +24,8 @@ function TradeParties() {
 			/>
 
 			<ListView
-				typeOfSearch={typeOfSearch}
-				globalSearch={globalSearch}
+				data={data}
+				loading={loading}
 				filterParams={filterParams}
 				setFilterParams={setFilterParams}
 			/>

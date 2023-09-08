@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateSageOrganizationIdMapping = () => {
+import toastApiError from '../utils/toastApiError';
+
+const useUpdateSageOrganizationIdMapping = ({ refetchList = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			method : 'POST',
@@ -10,12 +12,13 @@ const useUpdateSageOrganizationIdMapping = () => {
 		{ manual: true },
 	);
 
-	const onSubmit = async (obj) => {
+	const onSubmit = async ({ data = {} }) => {
 		try {
-			await trigger({ data: obj });
+			await trigger({ data });
+			refetchList();
 			Toast.success('Mapping deleted successfully!');
 		} catch (err) {
-			Toast.error('Error occured');
+			toastApiError(err);
 		}
 	};
 

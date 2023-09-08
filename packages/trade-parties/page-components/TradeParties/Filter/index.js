@@ -39,9 +39,7 @@ function Filter({
 	return (
 
 		<div className={styles.search}>
-			<div className={styles.left}>
-				<h1>TradeParties</h1>
-			</div>
+			<h1 className={styles.left}>TradeParties</h1>
 			<div className={styles.right}>
 				<Popover
 					render="bottom"

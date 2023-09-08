@@ -1,4 +1,4 @@
-import companyOptions from './FilterContent/companyOptions';
+import companyOptions from '../../../config/companyOptions.json';
 
 const controls = [
 	{

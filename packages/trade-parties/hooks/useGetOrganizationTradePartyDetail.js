@@ -1,31 +1,31 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-const useGetOrganizationTradePartyDetail = ({ id }) => {
-	const [data, setData] = useState([]);
-	console.log('get organiszation', id);
+import toastApiError from '../utils/toastApiError';
+
+const useGetOrganizationTradePartyDetail = ({ defaultParams = {} }) => {
+	const [data, setData] = useState({});
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/get_organization_trade_party_detail',
 			params : {
-				id,
+				...(defaultParams || {}),
 			},
 		},
 		{ manual: true },
 	);
 	const apiTrigger = useCallback(async () => {
 		try {
-			const res = await trigger({});
+			const res = await trigger();
 			setData(res?.data?.data);
-			// console.log(res.data);
 		} catch (err) {
-			console.log('error occured');
-			console.log(err);
+			setData([]);
+			toastApiError(err);
 		}
 	}, [trigger]);
 	useEffect(() => {
 		apiTrigger();
 	}, [apiTrigger]);
-	return { data, loading };
+	return { data, loading, apiTrigger };
 };
 export default useGetOrganizationTradePartyDetail;

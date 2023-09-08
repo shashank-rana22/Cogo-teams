@@ -6,11 +6,11 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const formatArrayValues = (items = {}, is_startcase = true) => {
+const formatArrayValues = ({ items = {}, is_startcase = true }) => {
 	const formattedItem = items?.map((item) => (is_startcase ? startCase(item) : item));
 	return formattedItem.join(', ') || '';
 };
-const getCompanyType = (company) => startCase(company);
+const getCompanyType = ({ company }) => startCase(company);
 const tableColumns = [
 	{
 		Header   : 'ID',
@@ -32,7 +32,7 @@ const tableColumns = [
 	},
 	{
 		Header   : 'COMPANY TYPE',
-		accessor : (item) => getCompanyType(item?.company_type),
+		accessor : (item) => getCompanyType({ company: item?.company_type }),
 	},
 	{
 		Header   : 'CREATED AT',
@@ -50,7 +50,7 @@ const tableColumns = [
 				{item?.all_trade_party_types?.length ? (
 					<span style={{ marginLeft: 4 }}>
 						(
-						{formatArrayValues(item?.all_trade_party_types)}
+						{formatArrayValues({ items: item?.all_trade_party_types })}
 						)
 					</span>
 				) : null}

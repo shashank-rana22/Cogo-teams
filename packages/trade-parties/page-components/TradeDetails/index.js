@@ -1,7 +1,8 @@
 import { Loader } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 
 import useGetOrganizationTradePartyDetail from '../../hooks/useGetOrganizationTradePartyDetail';
 
@@ -9,15 +10,18 @@ import BasicDetails from './BasicDetails';
 import BasicDetailsList from './BasicDetailsList';
 import SageMapping from './SageMapping';
 
-const TWO = 2;
-
+const ONE = 1;
 function TradeDetails() {
 	const router = useRouter();
 
-	const id = router.asPath?.split('/')?.pop();
-	const trade_partner_id = router.asPath.split('/').reverse()[TWO];
+	const getTradeId = (routerParams = []) => {
+		const id = routerParams.pop();
+		const trade_partner_id = routerParams.reverse()[ONE];
+		return { id, trade_partner_id };
+	};
+	const { id = '', trade_partner_id = '' } = useMemo(() => getTradeId(router.asPath?.split('/')), [router?.asPath]);
 
-	const { loading, data } = useGetOrganizationTradePartyDetail({ id });
+	const { loading = false, data = {} } = useGetOrganizationTradePartyDetail({ defaultParams: { id } });
 
 	if (loading) return <Loader themeType="primary" />;
 	return (

@@ -6,7 +6,7 @@ import useSageMapping from './useSageMapping';
 
 function SageMapping({ tradePartyDetails = {} }) {
 	const {
-		data = [],
+		data = {},
 		loading = false,
 		showDeactivate = '',
 		tableColumns = [],
@@ -14,7 +14,7 @@ function SageMapping({ tradePartyDetails = {} }) {
 		refetch = () => {},
 	} = useSageMapping({ tradePartyDetails: tradePartyDetails.tradePartyDetails });
 
-	if (!data?.length) {
+	if (!data?.list?.length) {
 		return null;
 	}
 
@@ -22,7 +22,7 @@ function SageMapping({ tradePartyDetails = {} }) {
 		<div className={styles.container}>
 			<div className={styles.heading}>Sage Mappings</div>
 
-			<Table columns={tableColumns} data={data} loading={loading} className={styles.table} />
+			<Table columns={tableColumns} data={(data?.list || [])} loading={loading} className={styles.table} />
 
 			<DeactivateSageMapping
 				showDeactivate={showDeactivate}

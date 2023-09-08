@@ -2,36 +2,33 @@ import { Button, Modal } from '@cogoport/components';
 
 import useUpdateSageOrganizationIdMapping from '../../../../hooks/useUpdateSageOrganizationIdMapping';
 
-import styles from './styles.module.css';
-
 function DeactivateSageMapping({
 	showDeactivate = null,
 	setShowDeactivate = (() => { }),
-	refetch = (() => {}),
+	refetch = () => {},
 }) {
-	const { onSubmit } = useUpdateSageOrganizationIdMapping();
+	const refetchList = () => {
+		setShowDeactivate(null);
+		refetch();
+	};
+	const { onSubmit = () => {} } = useUpdateSageOrganizationIdMapping({ refetchList });
 
 	const updateMapping = () => {
 		const data = { id: showDeactivate, status: 'inactive' };
-
-		onSubmit(data);
-
-		setShowDeactivate(null);
-		refetch();
+		onSubmit({ data });
 	};
 
 	return (
 		<Modal
 			show={showDeactivate}
 			placement="top"
-			className={styles.container}
 			onClose={() => setShowDeactivate(null)}
 		>
-			<div className={styles.heading}>Deactivate BPR Mapping</div>
-			<div>
+			<Modal.Header title="Deactivate BPR Mapping " />
+			<Modal.Body>
 				Are you sure, you want to delete this Sage Mapping?
-			</div>
-			<div className={styles.button_container}>
+			</Modal.Body>
+			<Modal.Footer>
 				<Button
 					onClick={() => setShowDeactivate(null)}
 					themeType="secondary"
@@ -46,7 +43,7 @@ function DeactivateSageMapping({
 				>
 					De-activate
 				</Button>
-			</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }

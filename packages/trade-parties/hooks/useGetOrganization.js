@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import toastApiError from '../utils/toastApiError';
 
 const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState({});
 	const [{ loading }, trigger] = useRequest(
 		{ url: '/get_organization' },
 		{ manual: true },
@@ -15,11 +15,11 @@ const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
 			const res = await trigger({ params: val });
 
 			if (res?.data) {
-				setData(res?.data);
-				refetch({ data: res?.data });
+				setData(res);
+				refetch({ data: res });
 			}
 		} catch (err) {
-			setData([]);
+			setData({});
 			toastApiError(err);
 		}
 	}, [trigger, refetch]);

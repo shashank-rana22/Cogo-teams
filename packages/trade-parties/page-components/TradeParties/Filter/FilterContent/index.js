@@ -21,36 +21,30 @@ function FilterContent({
 	const onSubmit = (values) => {
 		setFilterParams({ ...values, page: 1 });
 		setIsFilterVisible(false);
-
-		// console.log(values);
 	};
 	const onReset = () => {
 		const RESET_VALUE = {};
 		Object.keys(filterParams).forEach((key) => { RESET_VALUE[key] = null; });
-		// console.log(resetValue);
 		RESET_VALUE.page = 1;
 		setFilterParams(RESET_VALUE);
-		reset(RESET_VALUE);
+		reset();
 		setIsFilterVisible(false);
 	};
 	return (
 		<form className={styles.form}>
 			<div className={styles.filter}>
 				<div className={styles.header}>
-					<div className={styles.right}>
+					<Button size="sm" themeType="secondary" onClick={onReset} className={styles.button}>
+						RESET FORM
+					</Button>
+					<Button
+						className={styles.button}
+						size="sm"
+						onClick={handleSubmit(onSubmit)}
+					>
 
-						<Button size="sm" themeType="secondary" onClick={onReset} className={styles.button}>
-							RESET FORM
-						</Button>
-						<Button
-							className={styles.button}
-							size="sm"
-							onClick={handleSubmit(onSubmit)}
-						>
-
-							SHOW RESULTS
-						</Button>
-					</div>
+						SHOW RESULTS
+					</Button>
 				</div>
 
 				<br />

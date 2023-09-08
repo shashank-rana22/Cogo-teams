@@ -19,11 +19,13 @@ const getAccountType = ({ organization = {} }) => {
 };
 const handleRedirectToCRM = ({ organization = {}, trade_partner_id = '', getOrgData = () => { } }) => {
 	if (organization.account_type === 'service_provider') {
-		window.open(`/${trade_partner_id}/details/supply/${organization.id}`, '_blank');
+		const newHref = `${window.location.origin}/${trade_partner_id}/details/supply/${organization?.id}`;
+		window.open(newHref);
 	} else if (organization.tags.includes('partner')) {
 		getOrgData({ id: organization?.id });
 	} else {
-		window.open(`/${trade_partner_id}/details/demand/${organization.id}`, '_blank');
+		const newHref = `${window.location.origin}/${trade_partner_id}/details/demand/${organization?.id}`;
+		window.open(newHref);
 	}
 };
 const getTableColumns = ({
@@ -59,9 +61,7 @@ const getTableColumns = ({
 		},
 		{
 			Header   : 'KYC STATUS',
-			accessor : (item) => (item?.organization?.kyc_status
-				? startCase(item.organization.kyc_status)
-				: null),
+			accessor : (item) => startCase(item?.organization?.kyc_status),
 		},
 		{
 			Header   : 'ACCOUNT TYPE',

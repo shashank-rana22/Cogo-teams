@@ -1,4 +1,4 @@
-import { Pill, cl } from '@cogoport/components';
+import { Pill, cl, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
@@ -10,9 +10,9 @@ function BasicDetails({ tradePartyDetails = {}, loading = false }) {
 		registration_number = '',
 		serial_id = '',
 		updated_at = '',
-	} =	tradePartyDetails?.tradePartyDetails || {};
+	} =	(tradePartyDetails?.tradePartyDetails || {});
 
-	if (loading) return null;
+	if (loading) return <Loader themeType="primary" />;
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
