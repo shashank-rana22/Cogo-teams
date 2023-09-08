@@ -1,0 +1,47 @@
+.currency {
+	align-items: center;
+	width: 9%;
+
+	:global {
+		.ui_select_container {
+			width: 80%;
+		}
+
+		.ui_input_container {
+			width: 80%;
+		}
+
+		.ui_popover_container {
+			padding: unset;
+		}
+	}
+}
+
+.styled_text {
+	font-size: 13px;
+	color: #000;
+	cursor: pointer;
+
+	&.disabled {
+		cursor: not-allowed;
+	}
+
+	&.lg {
+		font-size: 22px;
+	}
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.popover {
+	flex-direction: column;
+
+	:global {
+		.tippy-content {
+			padding: unset;
+		}
+	}
+}
