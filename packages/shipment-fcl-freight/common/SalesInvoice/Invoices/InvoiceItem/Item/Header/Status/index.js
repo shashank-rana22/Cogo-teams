@@ -2,12 +2,10 @@ import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { IcMRefresh, IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-// import useSendInvoiceToFinance from '../../../../../../../hooks/useSendInvoiceToFinance';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -34,8 +32,6 @@ function Status({
 	const isAuthorized = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
-
-	// const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
