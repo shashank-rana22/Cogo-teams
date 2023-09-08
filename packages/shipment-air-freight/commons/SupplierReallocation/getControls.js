@@ -1,4 +1,4 @@
-import CustomOptions from '../CustomOptions';
+import CustomOptions from '@cogoport/air-modules/common/CustomOptions';
 
 const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
 const displayServiceType = ['ftl_freight', 'haulage_freight'];

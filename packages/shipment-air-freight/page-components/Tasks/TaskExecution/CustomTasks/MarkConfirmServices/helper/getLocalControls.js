@@ -1,4 +1,4 @@
-import CustomOptions from '../../../../../../commons/CustomOptions';
+import CustomOptions from '@cogoport/air-modules/common/CustomOptions';
 
 const getLocalControls = (service_type, formattedRate, shipment_data) => {
 	const formattedValue = formattedRate?.[formattedRate?.primary_service?.id];

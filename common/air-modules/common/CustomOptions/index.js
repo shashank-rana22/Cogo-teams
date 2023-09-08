@@ -1,4 +1,4 @@
-import ENTITY_MAPPING from '@cogoport/air-modules/constants/ENTITY_MAPPING';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { IcCError, IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';

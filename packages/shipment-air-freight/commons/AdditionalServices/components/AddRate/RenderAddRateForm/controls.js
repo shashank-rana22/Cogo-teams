@@ -1,7 +1,6 @@
+import CustomOptions from '@cogoport/air-modules/common/CustomOptions';
 import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
-
-import CustomOptions from '../../../../CustomOptions';
 
 const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase', 'add_sell_price', 'charge_code'];
 
