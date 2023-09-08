@@ -18,8 +18,8 @@
 	:global {
 		.ui_table_body_cell,
 		.ui_table_head_cell {
-			padding-top: 8px;
-			padding-bottom: 8px;
+			padding-top: 14px;
+			padding-bottom: 14px;
 		}
 	}
 }

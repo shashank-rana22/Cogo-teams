@@ -22,12 +22,12 @@ const options = [
 
 ];
 function Filter({
-	typeOfSearch,
-	setTypeOfSearch,
-	globalSearch,
-	setGlobalSearch,
-	filterParams,
-	setFilterParams,
+	typeOfSearch = '',
+	setTypeOfSearch = () => {},
+	globalSearch = '',
+	setGlobalSearch = () => {},
+	filterParams = {},
+	setFilterParams = () => {},
 }) {
 	const setInput = (value) => {
 		setGlobalSearch(value);
