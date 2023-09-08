@@ -13,11 +13,6 @@ function SIDList({
 }) {
 	const { showMoreFields } = scheduleFields(truckStatus);
 	const functions = {
-		handleSID: (singleItem) => (
-			<div>
-				{singleItem?.serialId}
-			</div>
-		),
 		handleBoxCount: () => (
 			<div>
 				{boxCount}
@@ -28,15 +23,6 @@ function SIDList({
 		),
 		handleServices: () => (
 			<div>-</div>
-		),
-		handleStatus: (singleItem) => (
-			<div>{singleItem?.status}</div>
-		),
-		handleFlightSchedule: (singleItem) => (
-			<div>{singleItem?.flightSchedule}</div>
-		),
-		handleExpectedDeparture: (singleItem) => (
-			<div>{singleItem?.expectedDepartureTime}</div>
 		),
 	};
 	return (

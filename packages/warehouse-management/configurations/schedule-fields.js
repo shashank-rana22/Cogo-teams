@@ -1,4 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+
+import getFormattedDate from '../utils/getFormattedDate';
 
 const scheduleFields = (truckStatus = 'truck_in') => ({
 	fields: [
@@ -28,7 +31,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			span   : 2,
 			render : (item) => (
 				<div>
-					{truckStatus === 'truck_in' ? item?.truckInEta : item?.truckOutEta}
+					{getFormattedDate((truckStatus === 'truck_in') ? item?.truckInEta : item?.truckOutEta)}
 				</div>
 			),
 		},
@@ -38,7 +41,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			span   : 1,
 			render : (item) => (
 				<div>
-					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.transporter_name}
+					{startCase(item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.transporter_name)}
 				</div>
 			),
 		},
@@ -81,10 +84,9 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 	],
 	showMoreFields: [
 		{
-			key   : 'serialID',
+			key   : 'serialId',
 			label : 'SID No.',
 			span  : 2,
-			func  : 'handleSID',
 		},
 		{
 			key   : 'boxCount',
@@ -108,19 +110,21 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			key   : 'status',
 			label : 'Status',
 			span  : 1,
-			func  : 'handleStatus',
 		},
 		{
-			key   : 'flightSchedule',
-			label : 'Flight Schedule',
-			span  : 2,
-			func  : 'handleFlightSchedule',
+			key    : 'flightSchedule',
+			label  : 'Flight Schedule',
+			span   : 2,
+			render : (item) => (
+				<div>
+					{getFormattedDate(item?.flightSchedule)}
+				</div>
+			),
 		},
 		{
 			key   : 'expectedDepartureTime',
-			label : 'Expected dept. Time',
+			label : 'Expected Dept. Time',
 			span  : 2,
-			func  : 'handleExpectedDeparture',
 		},
 	],
 });
