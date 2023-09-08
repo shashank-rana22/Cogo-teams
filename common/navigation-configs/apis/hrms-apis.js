@@ -128,7 +128,11 @@ const HRMS = {
 			api          : 'get_application_process_details',
 			access_type  : 'private',
 			service_name : 'hrms',
-
+		},
+		{
+			api          : 'update_appliation_process_details',
+			access_type  : 'private',
+			service_name : 'hrms',
 		},
 	],
 	employee_portal: [

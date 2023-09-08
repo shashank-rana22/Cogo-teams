@@ -6,6 +6,7 @@ import {
 	InputController,
 	useForm,
 } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -26,6 +27,17 @@ function HandoverTakeover() {
 		<div>
 			<div className={styles.title}>ASSIGN HANDOVER/TAKEOVER</div>
 			<div className={styles.sub_heading}>Select people for HOTO</div>
+
+			<div className={styles.completed}>
+				<img
+					src={GLOBAL_CONSTANTS.image_url.tick_icon_green}
+					width="20px"
+					height="20px"
+					alt="Empty-state"
+					style={{ marginRight: 10 }}
+				/>
+				You have successfully completed your tasks. No further changes are allowed.
+			</div>
 
 			<div className={styles.styled_component}>
 				<div className={styles.header}>Status</div>
