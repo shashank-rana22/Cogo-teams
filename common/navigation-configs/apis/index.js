@@ -25,6 +25,7 @@ import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
 import ftl_field_service_ops_apis from './ftl_field_service_ops_app_apis';
+import governance_manager from './governance-manager-apis';
 import HRMS from './hrms-apis';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
@@ -53,6 +54,7 @@ import saas_tools from './saas-tools';
 import sales_invoice from './sales-invoice-apis';
 import schedules from './schedules-apis';
 import search from './search-apis';
+import service_discovery from './service-discovery';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
@@ -163,6 +165,7 @@ const apis = {
 	sales_invoice,
 	...saas_subscription,
 	...chakravyuh,
+	governance_manager,
 	risk_management,
 	ftl_field_service_ops_apis,
 	...schedules,
@@ -171,6 +174,7 @@ const apis = {
 	centralised_customer_service,
 	...authApis,
 	ssr,
+	service_discovery,
 };
 
 export default apis;

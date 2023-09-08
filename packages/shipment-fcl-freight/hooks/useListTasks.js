@@ -31,11 +31,20 @@ function useListTasks({
 
 	let updatedActiveStakeholder = activeStakeholder;
 
+	let isBookingAgent = false;
+	let isSalesAgent = false;
+
 	stakeholders.forEach((item) => {
 		if (item?.stakeholder_type === 'sales_agent') {
-			updatedActiveStakeholder = 'sales_agent';
+			isSalesAgent = true;
+		}
+
+		if (item?.stakeholder_type === 'booking_agent') {
+			isBookingAgent = true;
 		}
 	});
+
+	if (isSalesAgent && !isBookingAgent) { updatedActiveStakeholder = 'sales_agent'; }
 
 	const user_id = profile?.user?.id;
 

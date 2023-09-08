@@ -4,6 +4,7 @@
 	justify-content: space-between;
 	width: 100%;
 	margin-bottom: 8px;
+	cursor: pointer;
 }
 
 .avatar {
@@ -69,4 +70,8 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 4px;
+}
+
+.tool_tip {
+	max-width: 500px !important;
 }

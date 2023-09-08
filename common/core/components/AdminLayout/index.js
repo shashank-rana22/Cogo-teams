@@ -24,6 +24,9 @@ const WHITE_BACKGROUND_MAPPING = [
 	'/[partner_id]/learning/course/[course_id]',
 	'/[partner_id]/learning/course/introduction',
 	'/[partner_id]/learning/course/preview',
+	'/[partner_id]/checkout/[checkout_id]',
+	'/[partner_id]/book/[spot_search_id]',
+	'/[partner_id]/service-discovery',
 ];
 
 function AdminLayout({
@@ -77,7 +80,7 @@ function AdminLayout({
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
-			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
 			<main className={styles.children_container}>{children}</main>
