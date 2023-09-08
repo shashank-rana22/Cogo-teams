@@ -1,6 +1,12 @@
+import UserOnboard from './UserOnboard';
+
 function VerifyShipperDetails() {
 	return (
-		<div>ygeruy</div>
+		<div>
+			<div>ygeruy</div>
+			<UserOnboard />
+		</div>
+
 	);
 }
 

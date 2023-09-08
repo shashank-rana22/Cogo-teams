@@ -81,200 +81,203 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.service_type
-		&& task.task === 'mark_confirmed'
-		&& (!EXCLUDED_SERVICES.includes(task.service_type))
-	) {
-		return (
-			<MarkConfirmServices
-				task={task}
-				onCancel={onCancel}
-				refetch={taskListRefetch}
-				primaryService={primary_service}
-				shipment_data={shipment_data}
-				servicesList={servicesList}
-			/>
-		);
-	}
+	// if (
+	// 	task.service_type
+	// 	&& task.task === 'mark_confirmed'
+	// 	&& (!EXCLUDED_SERVICES.includes(task.service_type))
+	// ) {
+	// 	return (
+	// 		<MarkConfirmServices
+	// 			task={task}
+	// 			onCancel={onCancel}
+	// 			refetch={taskListRefetch}
+	// 			primaryService={primary_service}
+	// 			shipment_data={shipment_data}
+	// 			servicesList={servicesList}
+	// 		/>
+	// 	);
+	// }
 
-	if (
-		task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
-	) {
-		return (
-			<UploadDraftBL
-				task={task}
-				shipmentData={shipment_data}
-				primaryService={primary_service}
-				selectedMail={selectedMail}
-			/>
-		);
-	}
+	// if (
+	// 	task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
+	// ) {
+	// 	return (
+	// 		<UploadDraftBL
+	// 			task={task}
+	// 			shipmentData={shipment_data}
+	// 			primaryService={primary_service}
+	// 			selectedMail={selectedMail}
+	// 		/>
+	// 	);
+	// }
 
-	if (task.task === 'upload_booking_note') {
-		if (mailLoading) {
-			return <div>Loading...</div>;
-		}
+	// if (task.task === 'upload_booking_note') {
+	// 	if (mailLoading) {
+	// 		return <div>Loading...</div>;
+	// 	}
 
-		return (
-			<UploadBookingNote
-				task={task}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
+	// 	return (
+	// 		<UploadBookingNote
+	// 			task={task}
+	// 			onCancel={onCancel}
+	// 			taskListRefetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
 
-	if (task.task === 'update_container_details') {
-		return (
-			<UploadContainerDetails
-				pendingTask={task}
-				onCancel={onCancel}
-				services={servicesList}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
+	// if (task.task === 'update_container_details') {
+	// 	return (
+	// 		<UploadContainerDetails
+	// 			pendingTask={task}
+	// 			onCancel={onCancel}
+	// 			services={servicesList}
+	// 			taskListRefetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
 
-	if (task.task === 'upload_container_arrival_notice') {
-		return (
-			<UploadCargoArrival
-				pendingTask={task}
-				summary={{
-					...(primary_service || {}),
-					importer_exporter_id: shipment_data?.importer_exporter?.id,
-				}}
-				refetch={taskListRefetch}
-				clearTask={onCancel}
-			/>
-		);
-	}
+	// if (task.task === 'upload_container_arrival_notice') {
+	// 	return (
+	// 		<UploadCargoArrival
+	// 			pendingTask={task}
+	// 			summary={{
+	// 				...(primary_service || {}),
+	// 				importer_exporter_id: shipment_data?.importer_exporter?.id,
+	// 			}}
+	// 			refetch={taskListRefetch}
+	// 			clearTask={onCancel}
+	// 		/>
+	// 	);
+	// }
 
-	if (task?.task === 'amend_draft_house_bill_of_lading') {
-		return (
-			<AmendDraftBl
-				task={task}
-				shipmentData={shipment_data}
-				primaryService={primary_service}
-				selectedMail={selectedMail}
-				clearTask={onCancel}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
+	// if (task?.task === 'amend_draft_house_bill_of_lading') {
+	// 	return (
+	// 		<AmendDraftBl
+	// 			task={task}
+	// 			shipmentData={shipment_data}
+	// 			primaryService={primary_service}
+	// 			selectedMail={selectedMail}
+	// 			clearTask={onCancel}
+	// 			taskListRefetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
 
 	if (task.task === 'choose_service_provider') {
-		return (
-			<ChooseServiceProvider
-				task={task}
-				onCancel={onCancel}
-				refetch={taskListRefetch}
-				services={servicesList}
-			/>
+		// return (
+		// 	<ChooseServiceProvider
+		// 		task={task}
+		// 		onCancel={onCancel}
+		// 		refetch={taskListRefetch}
+		// 		services={servicesList}
+		// 	/>
 
-		);
-	}
-
-	if (task.task === 'update_nomination_details') {
-		return (
-			<NominationTask
-				primaryService={primary_service}
-				shipmentData={shipment_data}
-				task={task}
-				onCancel={onCancel}
-				refetch={taskListRefetch}
-			/>
-		);
-	}
-
-	if (task.task === 'generate_freight_certificate') {
-		return (
-			<GenerateFreightCertificate
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-
-	if (task.task === 'upload_si' && primary_service?.trade_type === 'export') {
-		return (
-			<UploadSI
-				pendingTask={task}
-				onCancel={onCancel}
-				services={servicesList}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
-	if (['add_consignee_details', 'add_shipper_details'].includes(task.task)) {
-		return (
-			<AddCompanyModal
-				tradePartnersData={data}
-				addCompany={TRADE_PARTY_TYPE[task.task]}
-				tradePartnerTrigger={taskListRefetch}
-				shipment_id={shipment_data?.id}
-				importer_exporter_id={shipment_data?.importer_exporter_id}
-				withModal={false}
-				setAddCompany={onCancel}
-			/>
-		);
-	}
-
-	if (
-		task?.task === 'generate_cargo_insurance') {
-		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
-	}
-
-	if (task.task === 'upload_compliance_documents') {
-		return (
-			<UploadComplianceDocs
-				task={task}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
-				tasksList={tasksList}
-			/>
-		);
-	}
-
-	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
-		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
-	}
-
-	if (task.task === 'mark_confirmed' && task.service_type === 'fcl_freight_service'
-	&& !orgData?.data?.category_types?.includes('shipping_line')
-	&& orgData?.data?.category_types?.some((value) => INCLUDED_ORG.includes(value))
-        && primary_service?.trade_type === 'export'
-	) {
-		return (
-			<ConfirmFreightBooking
-				task={task}
-				getApisData={taskConfigData?.apis_data}
-				onCancel={onCancel}
-				services={servicesList}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
-	if (showIgmTasks && task?.task === 'mark_igm_shipment_confirmed') {
-		return (
-			<MarkIgmShipmentConfirm
-				task={task}
-				taskConfigData={taskConfigData}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
-				tasksList={tasksList}
-			/>
-		);
-	}
-
-	if (task?.task === 'verify_shipper_details') {
+		// );
 		return (
 			<VerifyShipperDetails />
 		);
 	}
+
+	// if (task.task === 'update_nomination_details') {
+	// 	return (
+	// 		<NominationTask
+	// 			primaryService={primary_service}
+	// 			shipmentData={shipment_data}
+	// 			task={task}
+	// 			onCancel={onCancel}
+	// 			refetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
+
+	// if (task.task === 'generate_freight_certificate') {
+	// 	return (
+	// 		<GenerateFreightCertificate
+	// 			task={task}
+	// 			refetch={taskListRefetch}
+	// 			onCancel={onCancel}
+	// 		/>
+	// 	);
+	// }
+
+	// if (task.task === 'upload_si' && primary_service?.trade_type === 'export') {
+	// 	return (
+	// 		<UploadSI
+	// 			pendingTask={task}
+	// 			onCancel={onCancel}
+	// 			services={servicesList}
+	// 			taskListRefetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
+
+	// if (['add_consignee_details', 'add_shipper_details'].includes(task.task)) {
+	// 	return (
+	// 		<AddCompanyModal
+	// 			tradePartnersData={data}
+	// 			addCompany={TRADE_PARTY_TYPE[task.task]}
+	// 			tradePartnerTrigger={taskListRefetch}
+	// 			shipment_id={shipment_data?.id}
+	// 			importer_exporter_id={shipment_data?.importer_exporter_id}
+	// 			withModal={false}
+	// 			setAddCompany={onCancel}
+	// 		/>
+	// 	);
+	// }
+
+	// if (
+	// 	task?.task === 'generate_cargo_insurance') {
+	// 	return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	// }
+
+	// if (task.task === 'upload_compliance_documents') {
+	// 	return (
+	// 		<UploadComplianceDocs
+	// 			task={task}
+	// 			onCancel={onCancel}
+	// 			taskListRefetch={taskListRefetch}
+	// 			tasksList={tasksList}
+	// 		/>
+	// 	);
+	// }
+
+	// if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
+	// 	return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	// }
+
+	// if (task.task === 'mark_confirmed' && task.service_type === 'fcl_freight_service'
+	// && !orgData?.data?.category_types?.includes('shipping_line')
+	// && orgData?.data?.category_types?.some((value) => INCLUDED_ORG.includes(value))
+	//     && primary_service?.trade_type === 'export'
+	// ) {
+	// 	return (
+	// 		<ConfirmFreightBooking
+	// 			task={task}
+	// 			getApisData={taskConfigData?.apis_data}
+	// 			onCancel={onCancel}
+	// 			services={servicesList}
+	// 			taskListRefetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
+
+	// if (showIgmTasks && task?.task === 'mark_igm_shipment_confirmed') {
+	// 	return (
+	// 		<MarkIgmShipmentConfirm
+	// 			task={task}
+	// 			taskConfigData={taskConfigData}
+	// 			onCancel={onCancel}
+	// 			taskListRefetch={taskListRefetch}
+	// 			tasksList={tasksList}
+	// 		/>
+	// 	);
+	// }
+
+	// if (task?.task === 'verify_shipper_details') {
+	// 	return (
+	// 		<VerifyShipperDetails />
+	// 	);
+	// }
 
 	return (
 		<ExecuteStep
