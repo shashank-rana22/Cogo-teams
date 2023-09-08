@@ -16,7 +16,7 @@ const INPUT_MAPPING = {
 	file     : UploadController,
 };
 
-function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData = {} }) {
+function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = {} }) {
 	const { user_name = '' } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
 	}));
@@ -36,78 +36,76 @@ function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData =
 	const { formState: { errors }, handleSubmit, control } = useForm();
 
 	return (
-		<form onSubmit={handleSubmit(onReOpenJob)}>
-			<Modal
-				size="md"
-				show={showModal}
-				onClose={() => setShowModal(!!loading)}
-				placement="top"
-				closeOnOuterClick={false}
-			>
-				<Modal.Header title="Request Incident" />
+		<Modal
+			size="md"
+			show={showModal}
+			onClose={() => setShowModal(!!loading)}
+			placement="top"
+			closeOnOuterClick={false}
+		>
+			<Modal.Header title="Request Incident" />
 
-				{isSuccess ? (
-					<Modal.Body className={styles.modal_success_body}>
-						<IcCFtick width={40} height={40} />
-						<h2>Request Submitted!</h2>
-					</Modal.Body>
-				) : (
-					<>
-						<Modal.Body className={styles.modal_body}>
-							<div className={styles.details}>
-								<div>
-									<div className={styles.label}>Shipment ID</div>
-									<span>{shipmentData?.serial_id || '--'}</span>
-								</div>
-								<div>
-									<div className={styles.label}>Request By</div>
-									<span>{user_name || '--'}</span>
-								</div>
-								<div>
-									<div className={styles.label}>KAM</div>
-									<span>{data?.[GLOBAL_CONSTANTS.zeroth_index]?.user?.name || '--'}</span>
-								</div>
+			{isSuccess ? (
+				<Modal.Body className={styles.modal_success_body}>
+					<IcCFtick width={40} height={40} />
+					<h2>Request Submitted!</h2>
+				</Modal.Body>
+			) : (
+				<>
+					<Modal.Body className={styles.modal_body}>
+						<div className={styles.details}>
+							<div>
+								<div className={styles.label}>Shipment ID</div>
+								<span>{shipmentData?.serial_id || '--'}</span>
 							</div>
+							<div>
+								<div className={styles.label}>Request By</div>
+								<span>{user_name || '--'}</span>
+							</div>
+							<div>
+								<div className={styles.label}>KAM</div>
+								<span>{data?.[GLOBAL_CONSTANTS.zeroth_index]?.user?.name || '--'}</span>
+							</div>
+						</div>
 
-							{controls.map((item) => {
-								const Component = INPUT_MAPPING[item.input_type];
+						{controls.map((item) => {
+							const Component = INPUT_MAPPING[item.input_type];
 
-								return (
-									<div key={item.name} className={styles.input_container}>
-										<label>{item.label}</label>
-										<span className={styles.required}>{item?.rules?.required ? ' *' : null}</span>
-										<Component {...item} control={control} />
-										<div className={styles.errors}>
-											{errors[item.name]?.message || ''}
-										</div>
+							return (
+								<div key={item.name} className={styles.input_container}>
+									<label>{item.label}</label>
+									<span className={styles.required}>{item?.rules?.required ? ' *' : null}</span>
+									<Component {...item} control={control} />
+									<div className={styles.errors}>
+										{errors[item.name]?.message || ''}
 									</div>
-								);
-							})}
-						</Modal.Body>
+								</div>
+							);
+						})}
+					</Modal.Body>
 
-						<Modal.Footer className={styles.modal_footer}>
-							<Button
-								themeType="secondary"
-								size="md"
-								onClick={() => setShowModal(false)}
-								disabled={loading}
-							>
-								Cancel
-							</Button>
-							<Button
-								themeType="primary"
-								size="md"
-								onClick={handleSubmit(onReOpenJob)}
-								disabled={loading}
-								loading={loading}
-							>
-								Submit
-							</Button>
-						</Modal.Footer>
-					</>
-				)}
-			</Modal>
-		</form>
+					<Modal.Footer className={styles.modal_footer}>
+						<Button
+							themeType="secondary"
+							size="md"
+							onClick={() => setShowModal(false)}
+							disabled={loading}
+						>
+							Cancel
+						</Button>
+						<Button
+							themeType="primary"
+							size="md"
+							onClick={handleSubmit(onReOpenJob)}
+							disabled={loading}
+							loading={loading}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
+				</>
+			)}
+		</Modal>
 	);
 }
 

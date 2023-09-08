@@ -51,7 +51,7 @@ function AddNewService({
 					tabIndex={0}
 					disabled={shipment_data?.is_job_closed}
 				>
-					<div className={styles.text}>{upsellableService.display_label}</div>
+					<div className={styles.text}>{upsellableService?.display_label}</div>
 					<IcMPlus />
 				</button>
 			) : null}
