@@ -7,9 +7,9 @@ const useGetInsuranceRate = (props) => {
 	const { setRateData } = props || {};
 
 	const [{ loading }, trigger] = useRequestBf({
-		auth   : 'get_saas_insurance_rate',
-		url    : 'saas/insurance/rate',
-		method : 'GET',
+		authkey : 'get_saas_insurance_rate',
+		url     : 'saas/insurance/rate',
+		method  : 'GET',
 	}, { manual: true });
 
 	const getCargoInsruanceRate = useCallback(async (values) => {

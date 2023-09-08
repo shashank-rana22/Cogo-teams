@@ -1,3 +1,4 @@
+import { FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING, HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', tradeType = '' }) => {
@@ -49,9 +50,10 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 		trailer_freight: primaryServicesObj.map((item) => ({
 			origin_location_id,
 			destination_location_id,
-			container_size             : item.container_size,
-			container_type             : item.container_type,
-			commodity                  : item.commodity,
+			container_size : item.container_size,
+			container_type : item.container_type,
+			commodity      : item?.commodity && HAZ_CLASSES.includes(item.commodity)
+				? item.commodity : null,
 			containers_count           : item.containers_count,
 			cargo_weight_per_container : item.cargo_weight_per_container,
 			status                     : 'active',
@@ -61,7 +63,7 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 		ftl_freight: [{
 			origin_location_id,
 			destination_location_id,
-			commodity,
+			commodity : commodity && HAZ_CLASSES.includes(commodity) ? commodity : null,
 			status    : 'active',
 			trade_type,
 			trucks_count,
@@ -72,9 +74,10 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 		}],
 		fcl_freight_local: primaryServicesObj.map((item) => ({
 			port_id,
-			container_size             : item.container_size,
-			container_type             : item.container_type,
-			commodity                  : item.commodity,
+			container_size : item.container_size,
+			container_type : item.container_type,
+			commodity      : item?.commodity && item?.commodity !== 'all_commodity'
+				? item?.commodity : 'general',
 			containers_count           : item.containers_count,
 			bls_count,
 			cargo_weight_per_container : item.cargo_weight_per_container,
@@ -86,9 +89,10 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			...trade_type === 'export'
 				? { origin_location_id: detail?.origin_port_id }
 				: { destination_location_id: detail?.destination_port_id },
-			container_size             : item.container_size,
-			container_type             : item.container_type,
-			commodity                  : item.commodity,
+			container_size : item.container_size,
+			container_type : item.container_type,
+			commodity      : item?.commodity && HAZ_CLASSES.includes(item.commodity)
+				? item.commodity : null,
 			containers_count           : item.containers_count,
 			cargo_weight_per_container : item.cargo_weight_per_container,
 			haulage_type               : haulage_type || 'carrier',
@@ -97,30 +101,40 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			service_type               : 'trailer_freight',
 			transport_mode             : 'rail',
 		})),
-		fcl_cfs: primaryServicesObj.map((item) => ({
-			port_id,
-			container_size   : item.container_size,
-			container_type   : item.container_type,
-			commodity        : item.commodity,
-			containers_count : item.containers_count,
-			bls_count,
-			status           : 'active',
-			trade_type,
-			cargo_handling_type,
-			cargo_value,
-			cargo_value_currency,
-		})),
-		fcl_customs: primaryServicesObj.map((item) => ({
-			port_id,
-			container_size   : item.container_size,
-			container_type   : item.container_type,
-			commodity        : item.commodity,
-			containers_count : item.containers_count,
-			bls_count,
-			status           : 'active',
-			trade_type,
-			cargo_handling_type,
-		})),
+		fcl_cfs: primaryServicesObj.map((item) => {
+			const commodities = FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING[item.container_type] || [];
+
+			return {
+				port_id,
+				container_size : item.container_size,
+				container_type : item.container_type,
+				commodity      : item?.commodity !== 'all_commodity'
+				&& commodities.includes(item.commodity) ? item.commodity : null,
+				containers_count : item.containers_count,
+				bls_count,
+				status           : 'active',
+				trade_type,
+				cargo_handling_type,
+				cargo_value,
+				cargo_value_currency,
+			};
+		}),
+		fcl_customs: primaryServicesObj.map((item) => {
+			const commodities = FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING[item.container_type] || [];
+
+			return {
+				port_id,
+				container_size : item.container_size,
+				container_type : item.container_type,
+				commodity      : item?.commodity !== 'all_commodity'
+				&& commodities.includes(item.commodity) ? item.commodity : null,
+				containers_count : item.containers_count,
+				bls_count,
+				status           : 'active',
+				trade_type,
+				cargo_handling_type,
+			};
+		}),
 	};
 
 	return MAPPING[service_name];

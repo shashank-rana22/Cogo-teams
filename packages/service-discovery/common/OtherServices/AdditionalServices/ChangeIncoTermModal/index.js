@@ -83,7 +83,7 @@ function ChangeIncoTermModal({
 
 				{!isEmpty(servicesToDelete) ? (
 					<div className={styles.service_type}>
-						<div className={styles.title}>The following services will be deleted: </div>
+						<div className={styles.title}>The following services will be removed: </div>
 
 						{servicesToDelete.map(({ title, name, service_type = '' }) => (
 							<Pill
