@@ -947,6 +947,35 @@ function asyncListSpotSearchRateCardOperators() {
 	};
 }
 
+function asyncListLocationClusters() {
+	return {
+		labelKey    : 'cluster_name',
+		valueKey    : 'id',
+		endpoint    : 'list_location_clusters',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+
+			page_limit: 50,
+		},
+	};
+}
+
+function asyncListFclFreightCommodityClusters() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_freight_commodity_clusters',
+		initialCall : true,
+		params      : {
+			filters        : { status: 'active' },
+			page_limit     : 50,
+			defaultOptions : true,
+			isSearchable   : true,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1023,5 +1052,7 @@ export {
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
 	asyncListSaasHsCodes,
+	asyncListLocationClusters,
+	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 };

@@ -1,29 +1,25 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetChargeCodes = ({
 	service_name = 'fcl_freight_charges',
 	trade_type = null,
 }) => {
 	const { scope = '' } = useSelector((state) => state.general);
-	// const listRateChargeCodes = useRequest(
-	// 	'get',
-	// 	false,
-	// 	scope,
-	// )('/list_rate_charge_codes');
 
-	const [{ data: listRateChargeCodes }] = useRequest({
+	const [{ data: listRateChargeCodes }, trigger] = useRequest({
 		url    : '/list_rate_charge_codes',
 		method : 'GET',
 		scope,
 	}, { manual: false });
 
-	const listApi = async () => listRateChargeCodes.trigger({
+	const listApi = useCallback(async () => trigger({
 		params: {
 			service_name,
 		},
-	});
+	}), [service_name, trigger]);
+
 	const list = (listRateChargeCodes?.list || [])
 		.map((item) => ({
 			...item,
@@ -37,8 +33,7 @@ const useGetChargeCodes = ({
 
 	useEffect(() => {
 		listApi();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(service_name)]);
+	}, [listApi]);
 
 	return { list };
 };

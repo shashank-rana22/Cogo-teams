@@ -7,12 +7,6 @@ const useDeleteFclFreightExtension = (refetch) => {
 		general: { scope },
 	} = useSelector((state) => state);
 
-	// const { trigger, loading } = useRequest(
-	// 	'post',
-	// 	false,
-	// 	scope,
-	// )('/update_fcl_freight_rate_extension_rule_set');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_fcl_freight_rate_extension_rule_set',
 		method : 'POST',

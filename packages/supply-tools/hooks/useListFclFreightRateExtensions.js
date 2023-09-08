@@ -1,49 +1,63 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-const FIRST_PAGE = 1;
+import toastApiError from '../utils/toastApiError';
 
-const useListFclFreightRateExtensions = (searchQuery) => {
-	const [page, setPage] = useState(FIRST_PAGE);
-	// const { data, trigger, loading } = useRequest(
-	// 	'get',
-	// 	false,
-	// 	'partner',
-	// )('/list_fcl_freight_rate_extension_rule_sets');
+const useListFclFreightRateExtensions = ({ defaultFilters = {} }) => {
+	const [apiData, setApiData] = useState({});
+	const [filters, setFilters] = useState({});
+	const [q, setQ] = useState('');
 
-	const [{ data, loading }, trigger] = useRequest({
+	const { query = '', debounceQuery } = useDebounceQuery();
+
+	const { page = 1, ...restFilters } = filters;
+
+	const [{ loading }, trigger] = useRequest({
 		url    : '/list_fcl_freight_rate_extension_rule_sets',
-		method : 'GET',
-		scope  : 'partner',
-	}, { manual: false });
+		params : {
+			filters: {
+				...restFilters,
+				...defaultFilters,
+				q: query,
+			},
+			page,
+			page_limit: 10,
+		},
+	}, { manual: true });
 
-	const listFclFreight = async () => {
+	const apiTrigger = useCallback(async () => {
 		try {
-			await trigger({
-				params: {
-					filters: {
-						status : 'active',
-						q      : searchQuery || undefined,
-					},
-					page,
-				},
-			});
+			const res = await trigger();
+
+			setApiData(res?.data || {});
 		} catch (err) {
-			console.error(err);
+			setApiData({});
+
+			toastApiError(err);
 		}
-	};
+	}, [trigger]);
 
 	useEffect(() => {
-		listFclFreight();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, searchQuery]);
+		debounceQuery(q);
+	}, [q, debounceQuery]);
+
+	useEffect(() => {
+		setFilters((prev) => ({ ...prev, page: 1 }));
+	}, [query]);
+
+	useEffect(() => {
+		apiTrigger();
+	}, [apiTrigger, filters, query]);
 
 	return {
-		listFclFreight,
-		data,
 		loading,
-		page,
-		setPage,
+		data    : apiData,
+		refetch : apiTrigger,
+		setFilters,
+		filters,
+		setQ,
+		q,
 	};
 };
 

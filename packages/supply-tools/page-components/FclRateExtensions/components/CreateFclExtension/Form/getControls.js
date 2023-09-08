@@ -1,4 +1,4 @@
-const fclFreightControls = ({ item }) => [
+const getControls = ({ item }) => [
 	{
 		name         : 'extension_name',
 		label        : 'Extension Name',
@@ -45,6 +45,7 @@ const fclFreightControls = ({ item }) => [
 		defaultOptions : true,
 		className      : 'primary lg',
 		placeholder    : 'Cluster Type',
+		rules          : { required: 'This is required' },
 	},
 	{
 		name           : 'cluster_reference_name',
@@ -143,4 +144,4 @@ const fclFreightControls = ({ item }) => [
 		className    : 'primary lg',
 	},
 ];
-export default fclFreightControls;
+export default getControls;
