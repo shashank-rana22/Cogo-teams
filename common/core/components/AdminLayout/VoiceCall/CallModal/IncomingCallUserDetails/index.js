@@ -23,7 +23,7 @@ function IncomingCallUserDetails({ receiverUserDetails = {}, callUserDetails = {
 
 	const isNoUserActivity = isEmpty(last_call_details);
 
-	const isNoUserData = Object.values(callUserDetails || {}).every((obj) => isEmpty(Object.keys(obj)));
+	const isNoUserData = Object.values(shipmentsData || {}).every((obj) => isEmpty(obj));
 
 	const { organization = {}, serial_id = '' } = orgDetails || {};
 
@@ -38,13 +38,11 @@ function IncomingCallUserDetails({ receiverUserDetails = {}, callUserDetails = {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
-
 				{organization_id
 					? (
 						<div className={styles.header_container}>
 							<div className={styles.title}>
 								{startCase(organization?.business_name)}
-								Cogoport Pvt Limitted Limitted
 							</div>
 							{serial_id ? (
 								<div className={styles.title}>

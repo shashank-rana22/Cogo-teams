@@ -1,15 +1,13 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import getServicesUnitMapping from '../../../../utils/getServicesUnitMapping';
-
-const geo = getGeoConstants();
+import SERVICES_UNIT_MAPPING from '../../../../utils/getServicesUnitMapping';
 
 const FALLBACK_AMOUNT = 0;
 
-const SERVICES_UNIT_MAPPING = getServicesUnitMapping();
-
 function PriceRange({ item = {} }) {
+	const geo = getGeoConstants();
+
 	return (
 		<span>
 			{formatAmount({
@@ -33,7 +31,6 @@ function PriceRange({ item = {} }) {
 					maximumFractionDigits : 0,
 				},
 			})}
-
 			{SERVICES_UNIT_MAPPING[item?.service_type] || ''}
 		</span>
 	);

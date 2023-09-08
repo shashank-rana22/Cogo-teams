@@ -1,14 +1,12 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import getServicesUnitMapping from '../../../../utils/getServicesUnitMapping';
+import SERVICES_UNIT_MAPPING from '../../../../utils/getServicesUnitMapping';
 import PriceRange from '../PriceRange';
 
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
-
-const SERVICES_UNIT_MAPPING = getServicesUnitMapping();
 
 function RevertedBooking({ updatedData = '' }) {
 	return (

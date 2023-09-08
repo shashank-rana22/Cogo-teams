@@ -9,6 +9,7 @@ function OrganizationShipment({ shipmentList = [], shipmentLoading = false }) {
 	if (shipmentLoading) {
 		return <div className={styles.empty_state}>Loading...</div>;
 	}
+
 	if (isEmpty(shipmentList)) {
 		return <div className={styles.empty_state}>No shipment found</div>;
 	}
@@ -39,7 +40,6 @@ function OrganizationShipment({ shipmentList = [], shipmentLoading = false }) {
 					</div>
 					<PortDetails serviceData={item} service="shipment_type" />
 					<CargoDetails detail={item} service="shipment_type" />
-
 				</div>
 			))}
 		</div>

@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 
 import { formatRouteData } from '../../../../utils/routeDataHelpers';
 
+import SingleLocations from './SingleLocations';
 import styles from './styles.module.css';
 
 const SINGLE_LOCATIONS = [
@@ -22,13 +23,7 @@ const SINGLE_LOCATIONS = [
 	'lcl_freight_local',
 ];
 
-const TRADE_TYPE_MAPPING = {
-	import : 'Origin',
-	export : 'Destination',
-};
-
 function PortDetails({ serviceData = {}, service = '' }) {
-	const { trade_type: tradeType = '' } = serviceData || {};
 	const {
 		originDetails = {},
 		destinationDetails = {},
@@ -38,40 +33,13 @@ function PortDetails({ serviceData = {}, service = '' }) {
 
 	const isSingleLocation = SINGLE_LOCATIONS.includes(serviceData[service]);
 
-	const DISPLAY_DATA_MAPPING = {
-		import : singleOriginDisplay,
-		export : singleDestinationDisplay,
-	};
-
 	if (isSingleLocation) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.flex_row_origin}>
-					<div className={styles.label}>
-						{TRADE_TYPE_MAPPING[tradeType]}
-						:-
-					</div>
-				</div>
-
-				<div className={styles.flex_row_origin}>
-					<div className={styles.port_details}>
-						<Tooltip content={DISPLAY_DATA_MAPPING[tradeType]?.name} placement="bottom">
-							<div className={styles.single_port}>
-								{DISPLAY_DATA_MAPPING[tradeType]?.name}
-							</div>
-						</Tooltip>
-						<div className={styles.port_codes}>
-							(
-							{DISPLAY_DATA_MAPPING[tradeType]?.code}
-							)
-						</div>
-					</div>
-
-					<div className={styles.country}>
-						{DISPLAY_DATA_MAPPING[tradeType]?.country}
-					</div>
-				</div>
-			</div>
+			<SingleLocations
+				singleOriginDisplay={singleOriginDisplay}
+				singleDestinationDisplay={singleDestinationDisplay}
+				serviceData={serviceData}
+			/>
 		);
 	}
 

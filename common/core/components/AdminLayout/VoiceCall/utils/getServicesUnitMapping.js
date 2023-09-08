@@ -12,4 +12,7 @@ const getServicesUnitMapping = () => {
 
 	return servicesMapping;
 };
-export default getServicesUnitMapping;
+
+const SERVICE_MAPPINGS = getServicesUnitMapping();
+
+export default SERVICE_MAPPINGS;
