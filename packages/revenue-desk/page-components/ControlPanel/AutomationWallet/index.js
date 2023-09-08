@@ -1,7 +1,7 @@
 import { Button, Select, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { serviceOptions } from '../../../helpers/filterOptionMapping';
+import { serviceOptions } from '../../constants';
 import useListRevenueDeskWallet from '../hooks/useListRevenueDeskWallet';
 
 import CreateWallet from './CreateWallet';

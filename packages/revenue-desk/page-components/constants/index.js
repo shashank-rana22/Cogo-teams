@@ -15,3 +15,15 @@ export const VALUE_THREE = 3;
 export const VALUE_FOUR = 4;
 export const CBM_TO_KILOS = 166.67;
 export const NEGATIVE_ONE = -1;
+
+export const serviceOptions = [
+	{ label: 'FCL Freight', value: 'fcl_freight_service' },
+	{ label: 'Air Freight', value: 'air_freight_service' },
+	{ label: 'Lcl Freight', value: 'lcl_freight_service' },
+	{ label: 'Air Custom', value: 'air_customs_service' },
+	{ label: 'FTL Freight', value: 'ftl_freight_service' },
+	{ label: 'LTL Freight', value: 'ltl_freight_service' },
+	{ label: 'FCL Customs', value: 'fcl_customs_service' },
+	{ label: 'LCL Customs', value: 'lcl_customs_service' },
+	{ label: 'Haulage Freight', value: 'haulage_freight_service' },
+];

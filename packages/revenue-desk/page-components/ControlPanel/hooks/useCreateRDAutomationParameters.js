@@ -1,54 +1,55 @@
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
 
-const useCreateRDAutomationParameters = ({ setData = () => {} }) => {
+const useCreateRDAutomationParameters = ({ refetch }) => {
 	const [{ loading, data: list }, trigger] = useRequest({
-		url    : '/create_revenue_desk_automation_parameters',
+		url    : '/create_revenue_desk_automation_parameter',
 		method : 'POST',
 	}, { manual: true });
 
-	const apiTrigger = async (data) => {
+	const apiTrigger = async ({
+		deskValue, weightageList:weightages, setOpenForm,
+		openForm, shipmentParameters,
+	}) => {
 		try {
-			// const {
-			// 	service_type, inco_terms,
-			// 	container_size, commodity_type, commodity_item, inco_term,
-			// } = filter;
+			const {
+				overall_weightage,
+				overall_weightage_2_day,
+				overall_weightage_7_day,
+				overall_weightage_30_day,
+				...rest
+			} = weightages;
 
-			const { container_size = '', container_type = '', ...rest } = data;
-			console.log({
-				data: {
-					...rest,
-					is_weightage_required : true,
-					shipment_parameters   : {
-						container_size,
-						container_type,
-					} || undefined,
-				},
-			});
+			console.log(deskValue, 'deskValue');
 
 			const res = await trigger({
 				data: {
-					...rest,
-					is_weightage_required : true,
-					shipment_parameters   : {
-						container_size,
-						container_type,
-					} || undefined,
+					service_type : deskValue?.service_type || shipmentParameters?.service_type || undefined,
+					weightages   : {
+						fulfillment_ratio: {
+							overall_weightage,
+							overall_weightage_2_day,
+							overall_weightage_7_day,
+							overall_weightage_30_day,
+						},
+						...rest,
+					},
+					shipment_parameters: {
+						inco_term      : deskValue?.inco_term || shipmentParameters?.inco_term || undefined,
+						container_type : deskValue?.container_type || shipmentParameters?.container_type || undefined,
+					},
 				},
 			});
 			if (!res.hasError) {
 				Toast.success('Saved Successfully');
+				setOpenForm(!openForm);
+				refetch();
 			}
 		} catch (err) {
 			toastApiError(err);
 		}
 	};
-
-	useEffect(() => {
-		setData(list);
-	}, [list, setData]);
 
 	return {
 		apiTrigger,

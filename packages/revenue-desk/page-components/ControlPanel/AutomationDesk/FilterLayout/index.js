@@ -8,7 +8,7 @@ const serviceOptions = [
 	{ label: 'FCL Freight', value: 'fcl_freight' },
 ];
 
-function FilterLayout({ filter = {}, setFilter = () => {}, apiTrigger = () => {} }) {
+function FilterLayout({ filter = {}, setFilter = () => {}, refetch = () => {} }) {
 	const [openForm, setOpenForm] = useState(false);
 
 	const onChange = (item, key) => {
@@ -39,7 +39,7 @@ function FilterLayout({ filter = {}, setFilter = () => {}, apiTrigger = () => {}
 					Create New Parameters
 				</Button>
 			</div>
-			{openForm && <ParametersForm openForm={openForm} setOpenForm={setOpenForm} apiTrigger={apiTrigger} />}
+			{openForm && <ParametersForm openForm={openForm} setOpenForm={setOpenForm} refetch={refetch} />}
 		</div>
 	);
 }

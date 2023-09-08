@@ -51,7 +51,8 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 							/>
 							<div className={styles.errors}>{errors?.service_type?.message}</div>
 						</div>
-						{(isService === 'fcl_freight' || isService === 'lcl_freight' || isService === 'air_freight')
+						{(isService === 'fcl_freight_service'
+						|| isService === 'lcl_freight_service' || isService === 'air_freight_service')
 					&& (
 						<div>
 							<div className={styles.label}>Select Trade Type</div>

@@ -7,7 +7,7 @@ export const parametersForm = 	{
 			{
 				id    : 1,
 				label : 'FCL freight',
-				value : 'fcl_freight',
+				value : 'fcl_freight_service',
 			},
 		],
 		rules: { required: 'Service Type is Required' },
@@ -21,10 +21,11 @@ export const parametersForm = 	{
 			{ label: 'Import', value: 'import' },
 			{ label: 'Export', value: 'export' },
 		],
+		rules: { required: 'Trade Type is Required' },
 	},
 
 	importIncoTerms: {
-		name        : 'import_inco_terms',
+		name        : 'inco_term',
 		type        : 'select',
 		placeholder : 'Select IncoTerms',
 		options     : [
@@ -37,7 +38,7 @@ export const parametersForm = 	{
 	},
 
 	exportIncoterms: {
-		name        : 'export_inco_terms',
+		name        : 'inco_term',
 		type        : 'select',
 		placeholder : 'Select Incoterms',
 		isClearable : true,
