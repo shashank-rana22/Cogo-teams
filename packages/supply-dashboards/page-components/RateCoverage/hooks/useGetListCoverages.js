@@ -69,7 +69,7 @@ const useGetListCoverage = () => {
 						...FINAL_FILTERS,
 						serial_id  : sid ? parseInt(sid, 10) : undefined,
 						source     : source || undefined,
-						user_id    : releventToMeValue ? user_id : undefined,
+						user_id    : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
 						start_date : filter?.start_date || new Date(),
 						end_date   : filter?.end_date || new Date(),
 					},

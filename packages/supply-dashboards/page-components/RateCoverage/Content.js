@@ -68,9 +68,9 @@ function RateCoverageContent() {
 							className={styles.assigned_input}
 							size="sm"
 							placeholder="Select"
-							value={filter?.assigned_to_id}
+							value={filter?.user_id}
 							{...assignToUsers}
-							onChange={(val) => setFilter((prev) => ({ ...prev, assigned_to_id: val }))}
+							onChange={(val) => setFilter((prev) => ({ ...prev, user_id: val }))}
 						/>
 					)}
 				<div className={styles.filter_container}>

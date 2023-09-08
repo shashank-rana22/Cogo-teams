@@ -21,9 +21,8 @@ const useGetCoverageStats = (filter) => {
 		url    : endPoint,
 		method : 'GET',
 	}, { manual: true });
-
 	const getStats = useCallback(async () => {
-		const { releventToMeValue, daily_stats, ...restFilters } = filter;
+		const { releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 		(Object.keys(restFilters) || []).forEach((item) => {
@@ -31,19 +30,19 @@ const useGetCoverageStats = (filter) => {
 				FINAL_FILTERS[item] = restFilters[item];
 			}
 		});
-
 		try {
-			const resp = await trigger({
+			await trigger({
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						user_id      : releventToMeValue ? user_id : undefined,
+						user_id      : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
 						daily_stats,
 						weekly_stats : !daily_stats,
+						start_date   : filter?.start_date || new Date(),
+						end_date     : filter?.end_date || new Date(),
 					},
 				},
 			});
-			console.log(resp, ';resp');
 		} catch (err) {
 			console.log(err);
 		}
