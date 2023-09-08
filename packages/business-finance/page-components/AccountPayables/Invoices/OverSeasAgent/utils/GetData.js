@@ -12,8 +12,8 @@ function GetData({
 	setSelectBankShow = () => {},
 }) {
 	if (
-		documents.billPdfUrl === undefined
-		&& documents.shipmentPdfUrl === undefined
+		documents?.billPdfUrl === undefined
+		&& documents?.shipmentPdfUrl === undefined
 	) {
 		return (
 			<div className={styles.merge_doc_msg}>
@@ -23,22 +23,20 @@ function GetData({
 	}
 
 	return (documentsList || []).map((item) => {
-		if (item.documentUrl !== '') {
+		if (item?.documentUrl !== '') {
 			return (
 				<div className={styles.document_card} key={item.docName}>
 					<div className={styles.document_sub_card}>
 						<div className={styles.pdf_container}>
+							<IcMPdf width={30} height={30} />
+
 							<div>
-								<IcMPdf width={30} height={30} />
-							</div>
-							<div>
-								<div>
-									<div className={styles.doc_name_text}>{item.docName}</div>
-									<div className={styles.uploaded_by}>
-										uploaded at:
-										{' '}
-										{getDate(item.uploadedAt)}
-									</div>
+								<div className={styles.doc_name_text}>{item.docName}</div>
+
+								<div className={styles.uploaded_by}>
+									uploaded at:
+									{' '}
+									{getDate(item.uploadedAt)}
 								</div>
 							</div>
 						</div>
@@ -59,7 +57,7 @@ function GetData({
 								Download
 							</Button>
 
-							{item.showDeleteIcon && (
+							{item.showDeleteIcon ? (
 								<IcMDelete
 									width={24}
 									height={24}
@@ -69,7 +67,7 @@ function GetData({
 										setSelectBankShow(false);
 									}}
 								/>
-							)}
+							) : null}
 						</div>
 					</div>
 				</div>

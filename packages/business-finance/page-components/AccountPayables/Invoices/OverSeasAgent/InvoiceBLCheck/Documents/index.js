@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 function Documents({
 	id = '',
 	documentUrl = '',
-	onApproveReject = () => {},
-	ApproveRejectLoading = false,
+	onAprrovalOrRejection = () => {},
+	loadingList = false,
 	DocumentData = [],
 	payrunBillStatus = '',
-	showCheckInvoices = false,
+	showCheckInvoices = {},
 	handleDropdown = () => {},
 	setShowCheckInvoices = () => {},
 	billsLoading = false,
@@ -22,6 +22,12 @@ function Documents({
 	const [radioSet, setRadioSet] = useState('mbl');
 	const [radioAir, setRadioAir] = useState('mawb');
 	const taggedDocument = DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
+
+	const checkedCondition = loadingList
+	|| payrunBillStatus === 'APPROVED'
+	|| payrunBillStatus === 'REJECTED'
+	|| showCheckInvoices[id] === 'Reject'
+	|| showCheckInvoices[id] === 'Tagged';
 
 	function ShowDocument(radioValue, DocData) {
 		let docLink = '';
@@ -91,19 +97,19 @@ function Documents({
 					</div>
 				) : (
 					<div className={styles.right}>
-						{DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type === 'bill_of_lading'
-							|| DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type
-								=== 'house_bill_of_lading' ? (
-									<>
-										<div className={styles.radiobtn}>
-											<RadioGroup
-												options={OPTIONS || [{}]}
-												value={radioSet || ''}
-												onChange={(item) => setRadioSet(item)}
-											/>
-										</div>
-										{radioSet && ShowDocument(radioSet, DocumentData)}
-									</>
+						{['house_bill_of_lading', 'bill_of_lading'].includes(
+							DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type,
+						) ? (
+							<>
+								<div className={styles.radiobtn}>
+									<RadioGroup
+										options={OPTIONS || [{}]}
+										value={radioSet || ''}
+										onChange={(item) => setRadioSet(item)}
+									/>
+								</div>
+								{ShowDocument(radioSet, DocumentData)}
+							</>
 							) : (
 								<>
 									<div className={styles.radiobtn}>
@@ -113,7 +119,7 @@ function Documents({
 											onChange={(item) => setRadioAir(item)}
 										/>
 									</div>
-									{radioAir && ShowDocument(radioAir, DocumentData)}
+									{ShowDocument(radioAir, DocumentData)}
 								</>
 							)}
 					</div>
@@ -126,7 +132,7 @@ function Documents({
 					themeType="secondary"
 					className={styles.btn}
 					onClick={() => {
-						onApproveReject(
+						onAprrovalOrRejection(
 							id,
 							'REJECTED',
 							taggedDocument,
@@ -134,13 +140,7 @@ function Documents({
 							setShowCheckInvoices,
 						);
 					}}
-					disabled={
-						ApproveRejectLoading
-						|| payrunBillStatus === 'APPROVED'
-						|| payrunBillStatus === 'REJECTED'
-						|| showCheckInvoices[id] === 'Reject'
-						|| showCheckInvoices[id] === 'Tagged'
-					}
+					disabled={checkedCondition}
 				>
 					Reject
 				</Button>
@@ -150,7 +150,7 @@ function Documents({
 					themeType="primary"
 					className={styles.btn}
 					onClick={() => {
-						onApproveReject(
+						onAprrovalOrRejection(
 							id,
 							'APPROVED',
 							taggedDocument,
@@ -158,13 +158,7 @@ function Documents({
 							setShowCheckInvoices,
 						);
 					}}
-					disabled={
-						ApproveRejectLoading
-						|| payrunBillStatus === 'APPROVED'
-						|| payrunBillStatus === 'REJECTED'
-						|| showCheckInvoices[id] === 'Tagged'
-						|| showCheckInvoices[id] === 'Reject'
-					}
+					disabled={checkedCondition}
 				>
 					Approve & Tag
 				</Button>

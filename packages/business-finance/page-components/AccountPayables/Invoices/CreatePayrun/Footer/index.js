@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -9,6 +9,7 @@ import SavePayRunModal from './SavePayRunModal';
 import styles from './styles.module.css';
 
 const INITIAL_VALUE = 0;
+const geo = getGeoConstants();
 
 function Footer({
 	apiData = () => {},
@@ -16,7 +17,7 @@ function Footer({
 	setViewSelectedInvoices = () => {},
 	submitSelectedInvoices = () => {},
 	loading = false,
-	selectedCurrency = GLOBAL_CONSTANTS.currency_code.INR,
+	selectedCurrency = geo.country.currency.code,
 	isAuditAllowed = true,
 }) {
 	const { list = [] } = apiData || {};

@@ -94,3 +94,28 @@
 	align-items: center;
 	width: 30%;
 }
+
+.document_card_final {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+
+	@media (max-width: 1000px) {
+		flex-direction: column;
+	}
+}
+
+.display_name_final {
+	display: flex;
+	flex-direction: column;
+	max-width: 140px;
+}
+
+.file_name_final {
+	display: inline;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

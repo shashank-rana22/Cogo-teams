@@ -34,3 +34,8 @@
 		color: #cacaca;
 	}
 }
+
+.icon {
+	display: flex;
+	margin: 4px;
+}

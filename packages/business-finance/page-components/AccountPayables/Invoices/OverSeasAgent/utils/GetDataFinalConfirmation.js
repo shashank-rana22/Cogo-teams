@@ -14,32 +14,35 @@ const getDate = (date) => formatDate({
 	formatType : 'date',
 });
 
-const GetDataFinalConfirmation = ({ documents = {}, documentsList = [] }) => {
+function GetDataFinalConfirmation({ documents = {}, documentsList = [] }) {
 	if (documents === '') {
 		<div>DOCUMENT NOT FOUND</div>;
 	}
-	return documentsList.map((item) => {
-		if (item.documentUrl !== '') {
-			if (item.docName === 'Other Document') {
-				return item.documentUrl.map((doc) => {
-					const parts = doc.split('/');
+	return (
+		<div className={styles.document_card_final}>
+			{
+	(documentsList || [])?.map((item) => {
+		if (item?.documentUrl !== '') {
+			if (item?.docName === 'Other Document') {
+				return (item?.documentUrl || [])?.map((doc) => {
+					const parts = doc?.split('/');
 					const lastPart = parts[parts.length - MAX_LENGTH_MINUS];
 					return (
 						<div className={styles.document_sub_card_final} key={item.docName}>
 							<div className={styles.pdf_container_final}>
-								<div>
-									<IcMPdf width={30} height={30} />
-								</div>
+								<IcMPdf width={30} height={30} />
 
 								<div className={styles.display_name_final}>
 									<div className={styles.doc_name_text_final}>
 										<div>{item.docName}</div>
+
 										<div className={styles.file_name_final}>
 											(
 											<span>{lastPart}</span>
 											)
 										</div>
 									</div>
+
 									<div className={styles.uploaded_by_final}>
 										uploaded at:
 										{' '}
@@ -66,17 +69,15 @@ const GetDataFinalConfirmation = ({ documents = {}, documentsList = [] }) => {
 			return (
 				<div className={styles.document_sub_card_final} key={item.docName}>
 					<div className={styles.pdf_container_final}>
+						<IcMPdf width={30} height={30} />
+
 						<div>
-							<IcMPdf width={30} height={30} />
-						</div>
-						<div>
-							<div>
-								<div className={styles.doc_name_text_final}>{item.docName}</div>
-								<div className={styles.uploaded_by_final}>
-									uploaded at:
-									{' '}
-									{getDate(item.uploadedAt)}
-								</div>
+							<div className={styles.doc_name_text_final}>{item.docName}</div>
+
+							<div className={styles.uploaded_by_final}>
+								uploaded at:
+								{' '}
+								{getDate(item.uploadedAt)}
 							</div>
 						</div>
 					</div>
@@ -102,7 +103,10 @@ const GetDataFinalConfirmation = ({ documents = {}, documentsList = [] }) => {
 		}
 
 		return null;
-	});
-};
+	})
+}
+		</div>
+	);
+}
 
 export default GetDataFinalConfirmation;

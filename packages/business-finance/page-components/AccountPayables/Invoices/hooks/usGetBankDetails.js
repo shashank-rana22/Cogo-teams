@@ -18,7 +18,7 @@ const useGetBankDetails = ({ tradePartyMappingId = '', serviceProviderId = '' })
 				document_type               : 'bank_account_details',
 			},
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	useEffect(() => {

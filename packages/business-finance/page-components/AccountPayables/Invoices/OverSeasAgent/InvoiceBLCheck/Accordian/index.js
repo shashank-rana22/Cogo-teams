@@ -3,6 +3,7 @@ import { IcMArrowRotateUp, IcMArrowRotateDown, IcCFtick, IcCFcrossInCircle } fro
 import React from 'react';
 
 import useGetDocument from '../../../hooks/useGetDocuments';
+import useListTaggedInvoices from '../../../hooks/useListTaggedInvoice';
 import Documents from '../Documents';
 
 import styles from './styles.module.css';
@@ -11,7 +12,7 @@ function Accordian({
 	setIsOpen = () => {},
 	isOpen = false,
 	itemData = {},
-	showCheckInvoices = false,
+	showCheckInvoices = {},
 	setShowCheckInvoices = () => {},
 }) {
 	const {
@@ -27,10 +28,13 @@ function Accordian({
 	const {
 		onGetDocument = () => {},
 		DocumentData = [],
-		onApproveReject = () => {},
-		ApproveRejectLoading = false,
 		billsLoading = false,
-	} =	useGetDocument({ setShowCheckInvoices, setIsOpen });
+	} =	useGetDocument();
+
+	const {
+		onAprrovalOrRejection = () => {},
+		loadingList = false,
+	} = useListTaggedInvoices({ setShowCheckInvoices, setIsOpen });
 
 	const handleDropdown = (key = invoiceNumber) => {
 		setIsOpen(key);
@@ -98,8 +102,8 @@ function Accordian({
 					setShowCheckInvoices={setShowCheckInvoices}
 					DocumentData={DocumentData}
 					billsLoading={billsLoading}
-					onApproveReject={onApproveReject}
-					ApproveRejectLoading={ApproveRejectLoading}
+					onAprrovalOrRejection={onAprrovalOrRejection}
+					loadingList={loadingList}
 					payrunBillStatus={payrunBillStatus}
 					showCheckInvoices={showCheckInvoices}
 				/>

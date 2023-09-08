@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import useGetBankList from '../../hooks/useGetBankList';
 import useListTaggedInvoices from '../../hooks/useListTaggedInvoice';
+import useSaveBank from '../../hooks/useSaveBank';
 import GetDataFinalConfirmation from '../utils/GetDataFinalConfirmation';
 
 import styles from './styles.module.css';
@@ -11,7 +12,8 @@ import styles from './styles.module.css';
 function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {} }) {
 	const { push } = useRouter();
 
-	const { data, loadingList, selectBank, loadingSaveBank } = useListTaggedInvoices();
+	const { data = {}, loadingList = false } = useListTaggedInvoices();
+	const { selectBank = () => {}, loadingSaveBank = false } = useSaveBank();
 	const [selectBankShow, setSelectBankShow] = useState(false);
 	const [bankObject, setBankObject] = useState({});
 	const { bankDetails = [] } = useGetBankList();
@@ -34,30 +36,30 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 	const documentsList = [
 		{
 			docName        : 'Purchase Invoices',
-			documentUrl    : documents.billPdfUrl || '',
-			uploadedAt     : documents.createdAt,
+			documentUrl    : documents?.billPdfUrl || '',
+			uploadedAt     : documents?.createdAt,
 			showDeleteIcon : true,
 		},
 		{
 			docName        : 'Shipment Documents',
-			documentUrl    : documents.shipmentPdfUrl || '',
-			uploadedAt     : documents.createdAt,
+			documentUrl    : documents?.shipmentPdfUrl || '',
+			uploadedAt     : documents?.createdAt,
 			showDeleteIcon : true,
 		},
 		{
 			docName     : 'Tax Declaration',
-			documentUrl : documents.taxDeclarationFormUrl || '',
-			uploadedAt  : documents.createdAt,
+			documentUrl : documents?.taxDeclarationFormUrl || '',
+			uploadedAt  : documents?.createdAt,
 		},
 		{
 			docName     : 'Bank Form',
-			documentUrl : documents.bankFormUrl || '',
-			uploadedAt  : documents.createdAt,
+			documentUrl : documents?.bankFormUrl || '',
+			uploadedAt  : documents?.createdAt,
 		},
 		{
 			docName     : 'Other Document',
 			documentUrl : documents?.otherDocumentsUrl?.split(',') || '',
-			uploadedAt  : documents.createdAt,
+			uploadedAt  : documents?.createdAt,
 		},
 	];
 
@@ -75,14 +77,12 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 				</div>
 
 				{loadingList ? documentsList.map((item) => (
-					<div className={styles.forms} key={item.docName}>
+					<div className={styles.forms} key={item?.docName}>
 						<Placeholder width="90%" height="135px" margin="10px 0px" />
 					</div>
 				))
 					: (
-						<div className={styles.document_card}>
-							<GetDataFinalConfirmation documentsList={documentsList} documents={documents} />
-						</div>
+						<GetDataFinalConfirmation documentsList={documentsList} documents={documents} />
 					)}
 			</div>
 
@@ -115,7 +115,7 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 						<Button
 							size="lg"
 							themeType="accent"
-							onClick={() => { handleClick(); }}
+							onClick={handleClick}
 							disabled={loadingSaveBank || selectBankShow}
 						>
 							{saveBankButtonValue}
@@ -125,15 +125,14 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 			</div>
 
 			<div className={styles.btn_container}>
-				<div className={styles.btn}>
-					<Button
-						size="md"
-						onClick={() => { setActive('invoice_selection'); handleSavePayrun(); }}
-						disabled={!selectBankShow || loadingSaveBank}
-					>
-						Save Pay Run
-					</Button>
-				</div>
+				<Button
+					className={styles.btn}
+					size="md"
+					onClick={() => { setActive('invoice_selection'); handleSavePayrun(); }}
+					disabled={!selectBankShow || loadingSaveBank}
+				>
+					Save Pay Run
+				</Button>
 			</div>
 		</div>
 	);

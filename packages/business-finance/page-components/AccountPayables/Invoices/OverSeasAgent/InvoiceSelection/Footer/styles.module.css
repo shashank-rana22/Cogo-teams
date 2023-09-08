@@ -14,7 +14,7 @@
 .amount {
 	display: flex;
 	align-items: center;
-	margin-left: 4px;
+	margin-left: 20px;
 	font-size: 18px;
 	font-weight: 600;
 	color: #f68b21;
@@ -39,11 +39,6 @@
 	font-weight: 500;
 	color: #333;
 	text-align: center;
-}
-
-.amount_container {
-	display: flex;
-	margin-left: 16px;
 }
 
 .currency {

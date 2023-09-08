@@ -2,80 +2,17 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../../../commons/List/index.tsx';
-import EditableTdsInput from '../../CreatePayrun/SelectInvoices/EditableInput';
-import EditablePayableAmount from '../../CreatePayrun/SelectInvoices/EditableInput/EditablePayableAmount';
-import BankDetails from '../../CreatePayrun/ViewSelectedInvoices/BankDetails/index';
-import Delete from '../../CreatePayrun/ViewSelectedInvoices/Delete/index';
+import useAddInvoiceToSelectedApi from '../../hooks/useAddInvoiceToSelectedApi';
 import useGetInvoiceSelection from '../../hooks/useInvoiceSelection';
-import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
-import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
-import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip';
-import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency';
 
 import FilterContainers from './FilterContainers';
 import Footer from './Footer';
-import GetTableBodyCheckbox from './GetTableBodyCheckbox';
+import getFunctions from './getFunctions';
 import styles from './styles.module.css';
 
 const MORE_THAN_ZERO = 0;
 const FIRST_PAGE = 1;
 
-const getFunctions = ({
-	onChangeTableBodyCheckbox = () => {},
-	setEditedValue = () => {}, refetch = () => {}, invoiceData = {},
-}) => ({
-	renderCheckbox: (itemData) => (
-		<GetTableBodyCheckbox
-			itemData={itemData}
-			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
-			apiData={invoiceData}
-		/>
-	),
-	renderToolTip: (itemData, field) => (
-		<RenderToolTip
-			itemData={itemData}
-			field={field}
-		/>
-	),
-	renderInvoiceDates: (itemData, field) => (
-		<RenderInvoiceDates
-			itemData={itemData}
-			field={field}
-		/>
-	),
-	renderUrgencyTag: (itemData, field) => (
-		<RenderUrgency
-			itemData={itemData}
-			field={field}
-		/>
-	),
-	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
-	),
-	renderEditableTds: (itemData, field) => (
-		<EditableTdsInput
-			itemData={itemData}
-			field={field}
-			setEditedValue={setEditedValue}
-		/>
-	),
-	renderEditablePayable: (itemData, field) => (
-		<EditablePayableAmount
-			itemData={itemData}
-			field={field}
-			setEditedValue={setEditedValue}
-		/>
-	),
-	renderBankDetails: (itemData, field) => (
-		<BankDetails
-			itemData={itemData}
-			field={field}
-			setEditedValue={setEditedValue}
-		/>
-	),
-	renderDelete: (itemData) => (<Delete itemData={itemData} refetch={refetch} />),
-
-});
 function InvoiceSelection({
 	setActive = () => {},
 	setShowHeader = () => {},
@@ -88,34 +25,37 @@ function InvoiceSelection({
 	const [sort, setSort] = useState({});
 
 	const {
-		config,
-		globalFilters,
-		invoiceData,
-		setGlobalFilters,
-		setViewSelectedInvoice,
-		viewSelectedInvoice,
-		onClear,
-		listSelectedInvoice,
-		submitSelectedInvoices,
-		createloading,
-		GetTableHeaderCheckbox,
-		onChangeTableBodyCheckbox,
-		setEditedValue,
-		loading,
-		goBack,
-		refetch,
+		config = [],
+		globalFilters = {},
+		invoiceData = {},
+		setGlobalFilters = () => {},
+		setViewSelectedInvoice = () => {},
+		viewSelectedInvoice = false,
+		onClear = () => {},
+		listSelectedInvoice = [],
+		GetTableHeaderCheckbox = () => {},
+		onChangeTableBodyCheckbox = () => {},
+		setEditedValue = () => {},
+		loading = false,
+		goBack = () => {},
+		refetch = () => {},
 	} = useGetInvoiceSelection({ sort });
+
+	const {
+		submitSelectedInvoices = () => {},
+		createloading = false,
+	} = useAddInvoiceToSelectedApi({ apiData: invoiceData, refetch });
 
 	const { overAllValue = 0, list = [] } = invoiceData || {};
 
-	const isChecked = list.filter(
-		(item) => item.checked && item.invoiceType === 'PURCHASE',
+	const isChecked = (list || [])?.filter(
+		(item) => item?.checked && item?.invoiceType === 'PURCHASE',
 	);
 	const isCreditChecked = list.filter(
-		(item) => item.checked && item.invoiceType === 'CREDIT NOTE',
+		(item) => item?.checked && item?.invoiceType === 'CREDIT NOTE',
 	);
-	const tdsError = isChecked.filter((item) => item.tdsError);
-	const paidError = isChecked.filter((item) => item.paidError);
+	const tdsError = isChecked.filter((item) => item?.tdsError);
+	const paidError = isChecked.filter((item) => item?.paidError);
 
 	const totalCreditInvoiceAmount = isCreditChecked.reduce((acc, obj) => +acc + +obj.invoiceAmount, MORE_THAN_ZERO);
 

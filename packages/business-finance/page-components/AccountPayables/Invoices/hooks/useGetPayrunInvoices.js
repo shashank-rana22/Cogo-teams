@@ -1,5 +1,6 @@
 import { Checkbox } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -20,9 +21,10 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	const { query: urlQuery = {} } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
+	const geo = getGeoConstants();
 
 	const {
-		entity = '', currency = GLOBAL_CONSTANTS.currency_code.INR,
+		entity = '', currency = geo.country.currency.code,
 		payrun = '', payrun_type = '', partner_id = '',
 	} = urlQuery || {};
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);

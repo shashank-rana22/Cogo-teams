@@ -1,5 +1,5 @@
 import { Input, Tooltip, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMInformation, IcMLineundo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 const MIN_AMOUNT = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
+const geo = getGeoConstants();
 
 const getFormattedAmount = ({ amount, currency }) => (
 	formatAmount({
@@ -27,7 +28,7 @@ const getErrorMessage = ({
 	lessValueCrossed = false,
 	maxValueCrossed = false,
 	value = '',
-	currency = GLOBAL_CONSTANTS.currency_code.INR,
+	currency = geo.country.currency.code,
 	invoiceAmount = '',
 	totalTds = '',
 }) => {
@@ -50,7 +51,7 @@ function Content({
 	lessValueCrossed = false,
 	maxValueCrossed = false,
 	value = '',
-	currency = GLOBAL_CONSTANTS.currency_code.INR,
+	currency = geo.country.currency.code,
 	invoiceAmount = '',
 	totalTds = '',
 	tdsDeducted = '',
@@ -88,7 +89,7 @@ function EditableTdsInput({ itemData = {}, field = {}, setEditedValue = () => {}
 	const [value, setValue] = useState(getByKey(itemData, key));
 	const {
 		invoiceAmount = 0,
-		currency = GLOBAL_CONSTANTS.currency_code.INR,
+		currency = geo.country.currency.code,
 		totalTds = 0,
 		tdsDeducted = 0,
 	} = itemData || {};

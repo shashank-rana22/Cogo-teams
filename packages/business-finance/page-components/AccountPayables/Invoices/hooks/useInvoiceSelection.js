@@ -1,4 +1,4 @@
-import { Toast, Checkbox } from '@cogoport/components';
+import { Checkbox } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
@@ -6,17 +6,14 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
 import changeFormat from '../utils/changeFormat';
 import checkboxSelectionChecks from '../utils/checkboxSelectionChecks';
 import getConfig from '../utils/getConfig';
 import getKeyByValue from '../utils/getKeyByValue';
-import getSelectedInvoice from '../utils/getSelectedInvoice';
 import onClearingFilters from '../utils/onClearingFilters';
 import onGoingBack from '../utils/onGoingBack';
 import settingApiData from '../utils/settingApiData';
 
-const API_ARRAY_VARIABLE_ONE = 1;
 const ELEMENT_NOT_FOUND = -1;
 
 const useGetInvoiceSelection = ({ sort = {} }) => {
@@ -39,6 +36,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		entity = '', currency: queryCurr = '', payrun = '', organizationId = '',
 		services = '', payrun_type = '', partner_id = '',
 	} = urlQuery || {};
+
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
 	const config = getConfig({ country, viewSelectedInvoice });
 
@@ -54,21 +52,11 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		},
 		{ manual: false },
 	);
-	const addInvoiceToSelectedAPI = useRequestBf(
-		{
-			url: '/purchase/payrun', method: 'post', authKey: 'post_purchase_payrun',
-		},
-		{ manual: false },
-	);
-	const delete_payrun_invoice = 	useRequestBf(
-		{
-			url: '/purchase/payrun-bill', method: 'delete', authKey: 'delete_purchase_payrun_bill',
-		},
-		{ manual: false },
-	);
 
 	const api = viewSelectedInvoice ? listSelectedInvoice : listInvoices;
+
 	const [{ data, loading }, trigger] = api || [];
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [globalFilters, setGlobalFilters] = useState({
 		pageIndex   : 1,
@@ -77,6 +65,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
 	});
+
 	const { search = '', dueDate = '', invoiceDate = '', updatedDate = '', category = '', ...rest } = globalFilters;
 	const restParse = JSON.stringify(rest);
 	const sortParse = JSON.stringify(sort);
@@ -141,36 +130,6 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		services,
 	]);
 
-	const deleteInvoices = async (id = '', handleModal = () => {}) => {
-		try {
-			await delete_payrun_invoice.trigger({ data: { id, performedBy, performedByType, performedByName } });
-			handleModal();
-			Toast.success('Invoice deleted successfully');
-			refetch();
-		} catch (e) { toastApiError(e); }
-	};
-
-	const submitSelectedInvoices = async () => {
-		const { list = [] } = apiData ?? {};
-		const SELECTED_INVOICE = getSelectedInvoice({ list });
-		try {
-			const res = await addInvoiceToSelectedAPI[API_ARRAY_VARIABLE_ONE]({
-				data: {
-					list       : [...SELECTED_INVOICE],
-					id         : urlQuery?.payrun,
-					entityCode : urlQuery?.entity,
-					currency   : urlQuery?.currency,
-					performedBy,
-					performedByType,
-					performedByName,
-				},
-			});
-			if (res?.data?.message) {
-				toastApiError(res.data.message);
-			} else { Toast.success('Invoice added to Payrun Successfully'); refetch(); }
-		} catch (e) { toastApiError(e); }
-		return null;
-	};
 	useEffect(() => { refetch(); }, [refetch]);
 
 	const onChangeTableHeaderCheckbox = (event) => {
@@ -222,25 +181,21 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	return {
 		config,
 		refetch,
-		invoiceData   : apiData,
-		tdsData       : apiTdsData,
-		createloading : addInvoiceToSelectedAPI?.loading,
+		invoiceData : apiData,
+		tdsData     : apiTdsData,
 		onClear,
 		listSelectedInvoice,
 		globalFilters,
 		setGlobalFilters,
 		viewSelectedInvoice,
 		setViewSelectedInvoice,
-		submitSelectedInvoices,
 		goBack,
 		GetTableHeaderCheckbox,
 		onChangeTableBodyCheckbox,
 		setEditedValue,
-		delete_payrun_invoice,
-		deleteInvoices,
 		loading,
 		payrun_type,
-		currency      : urlQuery?.currency,
+		currency    : urlQuery?.currency,
 	};
 };
 

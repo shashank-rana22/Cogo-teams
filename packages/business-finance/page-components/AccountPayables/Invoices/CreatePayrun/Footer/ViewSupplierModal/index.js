@@ -10,9 +10,7 @@ import CN_CONFIG from '../../Configurations/viewCnConfig.json';
 import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 import styles from './styles.module.css';
 
-function RenderAccordianData(item = {}) {
-	const { singleitem = {} } = item || {};
-
+function RenderAccordianData({ singleitem = {} }) {
 	return (
 		<div className={styles.listdata}>
 			<List itemData={{ list: singleitem?.creditNotes }} config={CN_CONFIG} showPagination={false} />

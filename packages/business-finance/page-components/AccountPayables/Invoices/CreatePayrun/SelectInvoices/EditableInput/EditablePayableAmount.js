@@ -1,5 +1,5 @@
 import { Input, Tooltip, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMInformation, IcMLineundo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
@@ -25,9 +25,10 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	const { key = '', fallBackKey = '' } = field || {};
 	const [edit, setEdit] = useState(false);
 	const [value, setValue] = useState(getByKey(itemData, key));
+	const geo = getGeoConstants();
 
 	const {
-		currency = GLOBAL_CONSTANTS.currency_code.INR,
+		currency = geo.country.currency.code,
 		payableAmount = 0,
 		invoiceType = '',
 	} = itemData || {};
@@ -58,14 +59,12 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	function ToolTipContent() {
 		return (
 			<div className={styles.flex}>
-				<div>
-					{!isError && <div className={styles.text}>Actual payable value</div>}
-					<div className={cl`${styles.message} ${isError
-						? styles.errormessage : ''}`}
-					>
-						{getErrorMessage()}
+				{!isError && <div className={styles.text}>Actual payable value</div>}
+				<div className={cl`${styles.message} ${isError
+					? styles.errormessage : ''}`}
+				>
+					{getErrorMessage()}
 
-					</div>
 				</div>
 			</div>
 		);
@@ -78,7 +77,7 @@ function EditablePayableAmount({ itemData = {}, field = {}, setEditedValue = () 
 	};
 
 	const handleEditClick = () => {
-		setEditedValue(itemData, true, 'checked', true);
+		setEditedValue({ itemData, value: true, key: 'checked', checked: true });
 		setEdit(true);
 	};
 

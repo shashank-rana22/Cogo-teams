@@ -23,11 +23,11 @@ function Footer({
 	setViewSelectedInvoices = () => {},
 	submitSelectedInvoices = () => {},
 	loading = false,
-	selectedCurrency = 'INR',
+	selectedCurrency = '',
 	setShowHeader = () => {},
 	setActive = () => {},
 	setBLData = () => {},
-	listSelectedInvoice = {},
+	listSelectedInvoice = [],
 	selectButton = false,
 	createloading = false,
 }) {
@@ -55,17 +55,15 @@ function Footer({
 						Total Payments
 					</div>
 
-					<div className={styles.amount_container}>
-						<div className={styles.amount}>
-							{formatAmount({
-								amount   : viewSelectedInvoices ? totalValue : totalInvoiceAmount,
-								currency : selectedCurrency,
-								options  : {
-									currencyDisplay : 'code',
-									style           : 'currency',
-								},
-							})}
-						</div>
+					<div className={styles.amount}>
+						{formatAmount({
+							amount   : viewSelectedInvoices ? totalValue : totalInvoiceAmount,
+							currency : selectedCurrency,
+							options  : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+							},
+						})}
 					</div>
 
 					<div className={styles.sid_count}>
@@ -104,9 +102,7 @@ function Footer({
 											content={<RenderContent />}
 											maxWidth="none"
 										>
-											<div>
-												<IcCError className={styles.alert_icon} height={24} width={24} />
-											</div>
+											<IcCError className={styles.alert_icon} height={24} width={24} />
 										</Tooltip>
 									</div>
 								)}

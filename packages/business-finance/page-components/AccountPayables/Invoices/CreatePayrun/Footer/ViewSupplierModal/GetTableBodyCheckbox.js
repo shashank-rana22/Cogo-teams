@@ -6,7 +6,7 @@ function GetTableBodyCheckbox({ itemData = {}, onChangeTableBodyCheckbox = () =>
 	const { organizationId = '' } = itemData || {};
 	const { list = [] } = apiData || {};
 
-	const isChecked = list.find(
+	const isChecked = (list || [])?.find(
 		(item) => item?.organizationId === organizationId,
 	)?.checked;
 

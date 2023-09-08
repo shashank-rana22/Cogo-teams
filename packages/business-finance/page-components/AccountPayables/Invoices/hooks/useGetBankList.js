@@ -7,7 +7,7 @@ const useGetBankList = () => {
 	const { query = '' } = useRouter();
 	const [bankDetails, setBankDetails] = useState([]);
 
-	const [{ loading }, Trigger] = useRequestBf(
+	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payable/bank/list',
 			method  : 'get',
@@ -19,18 +19,18 @@ const useGetBankList = () => {
 	const { entity = '' } = query;
 
 	const getBankDetails = useCallback(async () => {
-		const resp = await Trigger({
+		const resp = await trigger({
 			params: {
 				entityCode: entity,
 			},
 		});
 
-		setBankDetails(() => (resp.data[GLOBAL_CONSTANTS.zeroth_index].bank_details || []).map((item) => ({
+		setBankDetails(() => (resp.data[GLOBAL_CONSTANTS.zeroth_index].bank_details || [])?.map((item) => ({
 			label : `${item?.beneficiary_name}, ${item?.branch_code}`,
 			value : item?.account_number,
 			id    : item?.id,
 		})));
-	}, [entity, Trigger]);
+	}, [entity, trigger]);
 
 	useEffect(() => {
 		getBankDetails();

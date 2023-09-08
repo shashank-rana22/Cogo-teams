@@ -1,3 +1,4 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -9,12 +10,13 @@ import VIEW_SELECTED_CONFIG_VN from '../CreatePayrun/Configurations/viewSelected
 import getKeyByValue from '../utils/getKeyByValue';
 
 const useGetSelectedInvoices = ({ apiData = {}, setApiData = () => {} }) => {
+	const geo = getGeoConstants();
 	const { query: urlQuery = {} } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
 	const {
 		entity = '',
-		currency = GLOBAL_CONSTANTS.currency_code.INR,
+		currency = geo.country.currency.code,
 		payrun = '',
 		partner_id = '',
 	} = urlQuery || {};

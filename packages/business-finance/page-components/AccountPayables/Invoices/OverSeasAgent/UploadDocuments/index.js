@@ -2,9 +2,15 @@ import { Button, Placeholder } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import React, { useState, useEffect } from 'react';
 
+import useDeleteTaggedDocuments from '../../hooks/useDeleteTaggedDocuments';
+import useListTaggedInvoices from '../../hooks/useListTaggedInvoice';
 import useUploadDocuments from '../../hooks/useUploadDocument';
 
 import styles from './styles.module.css';
+
+const ONE = 1;
+const TWO = 2;
+const THREE = 3;
 
 function UploadDocuments({ setActive = () => {} }) {
 	const [fileUploader, setFileUploader] = useState({
@@ -15,12 +21,17 @@ function UploadDocuments({ setActive = () => {} }) {
 
 	const {
 		upload = () => {},
-		listData = {},
-		listLoading = false,
-		deleteTaggedDocuments = () => {},
+		loading = false,
 	} = useUploadDocuments({ fileUploader });
 
-	const { documents = '' } = listData || {};
+	const {
+		generateInvoice = () => {}, data:listData = {},
+		loadingList:listLoading = false,
+	} = useListTaggedInvoices();
+
+	const { deleteUploadTaggedDocuments = () => {} } = useDeleteTaggedDocuments({ generateInvoice });
+
+	const { documents = {} } = listData || {};
 
 	const {
 		otherDocumentsUrl = '',
@@ -33,13 +44,13 @@ function UploadDocuments({ setActive = () => {} }) {
 	const handlefileUpload = async (value = '', key = '') => {
 		if (key === 'singleFileUpload') {
 			if (value == null && taxDeclarationFormUrl !== '') {
-				deleteTaggedDocuments('taxDeclarationFormUrl');
+				deleteUploadTaggedDocuments('taxDeclarationFormUrl');
 			}
 		}
 
 		if (key === 'fileBank') {
 			if (value == null && bankFormUrl !== '') {
-				deleteTaggedDocuments('bankFormUrl');
+				deleteUploadTaggedDocuments('bankFormUrl');
 			}
 		}
 
@@ -52,7 +63,7 @@ function UploadDocuments({ setActive = () => {} }) {
 					(item) => !value.includes(item),
 				);
 				const DOC_KEY = 'otherDocumentsUrl';
-				deleteTaggedDocuments(DOC_KEY, myArray);
+				deleteUploadTaggedDocuments(DOC_KEY, myArray);
 			}
 		}
 		setFileUploader((prev) => ({ ...prev, [key]: value }));
@@ -70,9 +81,9 @@ function UploadDocuments({ setActive = () => {} }) {
 		<div className={styles.container}>
 			{listLoading ? (
 				<div className={styles.forms}>
-					<Placeholder width="49.5%" height="135px" margin="10px 0px" />
-					<Placeholder width="49.5%" height="135px" margin="10px 0px" />
-					<Placeholder width="49.5%" height="135px" margin="10px 0px" />
+					{[ONE, TWO, THREE].map((item) => (
+						<Placeholder key={item} width="49.5%" height="135px" margin="10px 0px" />
+					))}
 				</div>
 			) : (
 				<div className={styles.forms}>
@@ -123,17 +134,17 @@ function UploadDocuments({ setActive = () => {} }) {
 			)}
 
 			<div className={styles.btn_container}>
-				<div className={styles.btn}>
-					<Button
-						size="md"
-						onClick={() => {
-							upload(setActive);
-						}}
-						disabled={!fileUploader.singleFileUpload || !fileUploader.fileBank}
-					>
-						Save & Proceed
-					</Button>
-				</div>
+				<Button
+					size="md"
+					onClick={() => {
+						upload(setActive);
+					}}
+					className={styles.btn}
+					disabled={!fileUploader.singleFileUpload || !fileUploader.fileBank}
+					loading={loading}
+				>
+					Save & Proceed
+				</Button>
 			</div>
 		</div>
 	);

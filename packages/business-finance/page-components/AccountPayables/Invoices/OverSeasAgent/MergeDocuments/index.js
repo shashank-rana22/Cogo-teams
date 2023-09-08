@@ -5,7 +5,10 @@ import { IcMDelete } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../../../commons/List/index.tsx';
+import useDeletePayrunInvoice from '../../hooks/useDeletePayrunInvoice';
+import useDeleteTaggedDocuments from '../../hooks/useDeleteTaggedDocuments';
 import useListTaggedInvoice from '../../hooks/useListTaggedInvoice';
+import useMergedPdf from '../../hooks/useMergedPdf';
 import OVERSEAS_FINAL_CONFIRMATION_LIST from '../Configurations/overseasFinalConfirmationListConfig.json';
 import GetData from '../utils/GetData';
 import GetInvoiceData from '../utils/GetInvoiceData';
@@ -24,15 +27,16 @@ function MergeDocuments({ setActive = () => {} }) {
 	const [selectBankShow, setSelectBankShow] = useState(false);
 
 	const {
-		data,
-		loadingList,
-		loadingMerged,
-		mergeInvoices,
-		deleteInvoices,
-		setParams,
-		deleteTaggedDocuments,
-		params,
+		data = {},
+		loadingList = false,
+		setParams = () => {},
+		params = {},
+		generateInvoice = () => {},
 	} = useListTaggedInvoice();
+
+	const { deleteInvoices = () => {} } = useDeletePayrunInvoice({ generateInvoice });
+	const { deleteTaggedDocuments = () => {} } = useDeleteTaggedDocuments({ generateInvoice });
+	const { loadingMerged = false, mergeInvoices = () => {} } = useMergedPdf();
 
 	const { documents = {}, list = [] } = data || {};
 
@@ -46,7 +50,7 @@ function MergeDocuments({ setActive = () => {} }) {
 	});
 
 	const handleDelete = (itemData) => {
-		deleteInvoices(itemData.id);
+		deleteInvoices(itemData?.id);
 	};
 
 	const handelMergeInvoices = () => {
@@ -75,12 +79,12 @@ function MergeDocuments({ setActive = () => {} }) {
 		},
 
 		renderTaggedDocument: (itemData) => {
-			const { taggedDocuments } = itemData || {};
+			const { taggedDocuments = '' } = itemData || {};
 			const value = taggedDocuments?.split('/')[TAGGED_DOC_CONDITION].replaceAll('%20', '');
 			return (
 				<Button
 					themeType="linkUi"
-					onClick={() => window.open(itemData.taggedDocuments, '_blank')}
+					onClick={() => window.open(itemData?.taggedDocuments, '_blank')}
 				>
 					{value?.length > TOOLTIP_SHOW_CONDITION ? (
 						<Tooltip interactive theme="light" placement="top" content={value}>
@@ -164,7 +168,7 @@ function MergeDocuments({ setActive = () => {} }) {
 					</div>
 
 					<div className={styles.merged_doc}>
-						{loadingList || loadingMerged ? documentsList.map((item) => (
+						{loadingList || loadingMerged ? (documentsList || [])?.map((item) => (
 							<div className={styles.skeleton} key={item.docName}>
 								<Placeholder width="80%" height="35px" />
 							</div>
@@ -182,27 +186,26 @@ function MergeDocuments({ setActive = () => {} }) {
 				</div>
 			</div>
 
-			{showConfirmationModal && (
+			{showConfirmationModal ? (
 				<ConfirmationModal
 					showConfirmationModal={showConfirmationModal}
 					setShowConfirmationModal={setShowConfirmationModal}
 					handelMergeInvoices={handelMergeInvoices}
 					data={data}
 				/>
-			)}
+			) : null}
 
 			<div className={styles.btn_container}>
-				<div className={styles.btn}>
-					<Button
-						size="md"
-						onClick={() => {
-							setActive('upload_documents');
-						}}
-						disabled={!selectBankShow}
-					>
-						Save & Proceed
-					</Button>
-				</div>
+				<Button
+					size="md"
+					className={styles.btn}
+					onClick={() => {
+						setActive('upload_documents');
+					}}
+					disabled={!selectBankShow}
+				>
+					Save & Proceed
+				</Button>
 			</div>
 		</>
 	);

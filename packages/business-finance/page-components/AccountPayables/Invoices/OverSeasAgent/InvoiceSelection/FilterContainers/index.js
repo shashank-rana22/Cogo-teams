@@ -21,7 +21,7 @@ function FilterContainers({
 }) {
 	return (
 		<div className={styles.filters}>
-			{!viewSelectedInvoice && (
+			{!viewSelectedInvoice ? (
 				<div className={styles.filtercontainer}>
 					<Filter controls={invoiceFilters} filters={filters} setFilters={setFilters} />
 					<FilterModal
@@ -32,7 +32,7 @@ function FilterContainers({
 						onClear={onClear}
 					/>
 				</div>
-			)}
+			) : null}
 
 			<div className={styles.search_filter}>
 				<div className={styles.search}>
@@ -47,7 +47,7 @@ function FilterContainers({
 						}))}
 						placeholder="Search By Name/Invoice Number/Sid"
 						suffix={(
-							<div style={{ margin: '4px', display: 'flex' }}>
+							<div className={styles.icon}>
 								<IcMSearchdark height={15} width={15} />
 							</div>
 						)}

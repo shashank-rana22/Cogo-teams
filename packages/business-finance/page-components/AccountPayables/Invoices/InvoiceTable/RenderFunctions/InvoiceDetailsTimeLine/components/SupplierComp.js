@@ -10,10 +10,10 @@ function SupplierComp({ item = {}, invoiceDetails = [] }) {
 		<div className={styles.body_details_card}>
 			<div className={styles.invoice_card_data}>
 				<div className={styles.supplier_data_header}>
-					<span style={{ fontWeight: '600' }}>
+					<span className={styles.supplier}>
 						Supplier Name :
 					</span>
-					<span style={{ fontWeight: '600' }}>
+					<span className={styles.supplier}>
 						{item?.organizationName}
 					</span>
 				</div>

@@ -5,13 +5,9 @@ import React, { useState, useEffect } from 'react';
 
 import useGetInvoiceSelection from '../hooks/useInvoiceSelection';
 
-import FinalConfirmation from './FinalConfirmation';
-import InvoiceBLCheck from './InvoiceBLCheck';
-import InvoiceSelection from './InvoiceSelection';
-import MergeDocuments from './MergeDocuments';
 import PayabledDetails from './PayableDetails';
 import styles from './styles.module.css';
-import UploadDocuments from './UploadDocuments';
+import RenderData from './utils/RenderData';
 
 const STEPS_MAPPING = [
 	{ title: 'Invoice selection', key: 'invoice_selection' },
@@ -20,47 +16,6 @@ const STEPS_MAPPING = [
 	{ title: 'Upload Documents', key: 'upload_documents' },
 	{ title: 'Final Confirmation', key: 'final_confirmation' },
 ];
-
-function RenderData({
-	active = '',
-	setActive = () => {},
-	bLData = {},
-	setShowSaveAsDraft = () => {},
-	setBLData = () => {},
-	setShowHeader = () => {},
-	showHeader = '',
-	setShowPayableAmount = () => {},
-
-}) {
-	if (active === 'merge_documents') {
-		return <MergeDocuments setActive={setActive} />;
-	}
-	if (active === 'invoice_bl_check') {
-		return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
-	}
-	if (active === 'final_confirmation') {
-		return (
-			<FinalConfirmation
-				setActive={setActive}
-				setShowSaveAsDraft={setShowSaveAsDraft}
-			/>
-		);
-	}
-	if (active === 'upload_documents') {
-		return <UploadDocuments setActive={setActive} />;
-	}
-	return (
-		<InvoiceSelection
-			setActive={setActive}
-			active={active}
-			setBLData={setBLData}
-			setShowHeader={setShowHeader}
-			showHeader={showHeader}
-			setShowPayableAmount={setShowPayableAmount}
-			setShowSaveAsDraft={setShowSaveAsDraft}
-		/>
-	);
-}
 
 const MIN_AMOUNT = 0;
 
@@ -138,7 +93,7 @@ function OverSeasAgent() {
 				</div>
 			</div>
 
-			{showHeader && (
+			{showHeader ? (
 				<>
 					<PayabledDetails
 						organizationId={organizationId}
@@ -148,7 +103,7 @@ function OverSeasAgent() {
 
 					<Stepper active={active} setActive={setActive} items={STEPS_MAPPING} arrowed />
 				</>
-			)}
+			) : null}
 
 			<RenderData
 				active={active}
