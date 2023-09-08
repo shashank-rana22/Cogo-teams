@@ -13808,6 +13808,52 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	warehouse_management: [
+		{
+			api         : 'get_air_coe_warehouse_management_list_configurations',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_list_schedules',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_schedule',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_schedule',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_app_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_list_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
+	],
 	printing_desk: [
 		{
 			api         : 'post_air_coe_documents',
