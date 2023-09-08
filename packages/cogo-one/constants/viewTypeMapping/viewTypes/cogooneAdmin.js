@@ -16,7 +16,7 @@ const COGOONE_ADMIN = {
 	},
 	stats_feedback_count          : [],
 	to_show_agent_activity_graph  : false,
-	extra_side_bar_navs_access    : ['spot_search', 'flash_shipment_bookings'],
+	extra_side_bar_navs_access    : ['spot_search', 'flash_shipment_bookings', 'user_mails'],
 	accesible_agent_types_query   : [],
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 	default_side_nav              : 'profile',

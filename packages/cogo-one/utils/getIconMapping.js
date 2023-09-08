@@ -8,6 +8,7 @@ import {
 	IcMServices,
 	IcMCrossInCircle,
 	IcMArrowDoubleLeft,
+	IcMEmail,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -123,6 +124,11 @@ const iconMapping = ({ expandSideBar = false }) => [
 		name    : 'add_on_services',
 		content : 'Additional Services',
 		icon    : <IcMServices width={20} height={20} />,
+	},
+	{
+		name    : 'user_mails',
+		content : 'Users Mails',
+		icon    : <IcMEmail width={20} height={20} />,
 	},
 	{
 		name    : 'help_desk',
