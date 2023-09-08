@@ -17,12 +17,14 @@ interface ListData {
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
 	shipmentIdView: boolean;
+	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
 }
 function AccordianCards({
 	itemData,
 	currentOpenSID,
 	setCurrentOpenSID,
 	shipmentIdView = true,
+	setCheckItem = () => {},
 }: ListData) {
 	const {
 		jobId,
@@ -271,6 +273,20 @@ function AccordianCards({
 							setAmountTab={setAmountTab}
 						/>
 					) : null}
+					{showInvoices ? (
+						<Button
+							size="md"
+							themeType="secondary"
+							style={{ marginRight: '8px' }}
+							onClick={() => setCheckItem(
+								(prev: any) => ({ ...prev, sidDataCheck: true }),
+							)}
+							className={styles.approve_button}
+						>
+							Accept
+						</Button>
+					) : undefined }
+
 				</div>
 			</div>
 		</div>

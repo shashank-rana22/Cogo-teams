@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useApproveReject from '../../../hook/useApproveReject';
+import TimeLineItemCheck from '../ShipmentDetails/TimelineItemCheck';
 
 import styles from './styles.module.css';
 
@@ -21,7 +22,8 @@ interface HeaderInterface {
 	lineItem?: boolean;
 	lineItemsRemarks: object;
 	status: string;
-	jobNumber?:string
+	jobNumber?:string;
+	checkItem?: object;
 }
 
 function Header({
@@ -33,6 +35,7 @@ function Header({
 	lineItemsRemarks,
 	status,
 	jobNumber,
+	checkItem = {},
 }: HeaderInterface) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
@@ -118,6 +121,12 @@ function Header({
 					</Button>
 				</div>
 			</div>
+
+			<TimeLineItemCheck
+				checkItem={checkItem}
+				status={status}
+			/>
+
 			<div className={styles.hr} />
 			{approve && (
 				<Modal

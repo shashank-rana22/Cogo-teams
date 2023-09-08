@@ -1,11 +1,11 @@
-import { Accordion } from '@cogoport/components';
+import { Accordion, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ShowIcon from './ShowIcon';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId = '', setRemarksVal = () => {}, status = '' }:
+function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckItem = () => {} }:
 {
 	billId: string, status: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
@@ -38,6 +38,17 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '' }:
 					setRemarksVal={setRemarksVal}
 					status={status}
 				/>
+				<Button
+					size="md"
+					themeType="secondary"
+					style={{ marginRight: '8px' }}
+					onClick={() => setCheckItem(
+						(prev: any) => ({ ...prev, taggingCheck: true }),
+					)}
+					className={styles.approve_button}
+				>
+					Accept
+				</Button>
 			</Accordion>
 		</div>
 	);

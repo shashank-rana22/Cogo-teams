@@ -1,4 +1,4 @@
-import { Loader, Accordion } from '@cogoport/components';
+import { Loader, Accordion, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
@@ -26,7 +26,6 @@ import POC from './POC/index';
 import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import SIDView from './SIDView';
 import styles from './styles.module.css';
-import TimeLineItemCheck from './TimelineItemCheck/index';
 import VarianceView from './VarianceView/index';
 
 interface BuyerDetailInterface {
@@ -107,10 +106,10 @@ interface ShipmentDetailsInterface {
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
-	lineItem?: boolean;
 	status: string;
 	jobType?:string;
 	billId?:string;
+	setCheckItem: React.Dispatch<React.SetStateAction<{}>>,
 }
 function ShipmentDetails({
 	data = {},
@@ -119,15 +118,14 @@ function ShipmentDetails({
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
 	setLineItem = () => {},
-	lineItem = false,
 	status = '',
 	jobType = '',
 	billId = '',
+	setCheckItem = () => {},
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showDocuments, setShowDocuments] = useState(true);
 	const [showVariance, setShowVariance] = useState(false);
-	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber } = job || {};
@@ -144,6 +142,11 @@ function ShipmentDetails({
 		amount,
 		amount_currency: amountCurrency,
 	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	// const handleClick = (itemToCheck) => {
+	// 	setCheckItem((prev: any) => ({ ...prev, itemToCheck: true }))};
+	// 	setShowDetails(!showDetails);
+	// }
 
 	const jobTypeValue = jobType?.toLowerCase();
 	return (
@@ -219,15 +222,29 @@ function ShipmentDetails({
 								)}
 							</div>
 						</div>
-						{showDetails && <div className={styles.hr} />}
-						<div className={styles.details}>
-							{showDetails && (
-								<Details
-									dataList={dataList}
-									shipmentId={shipmentId}
-								/>
-							)}
-						</div>
+
+						{showDetails ? (
+							<div>
+								<div className={styles.hr} />
+								<div className={styles.details}>
+									<Details
+										dataList={dataList}
+										shipmentId={shipmentId}
+									/>
+								</div>
+								<Button
+									size="md"
+									themeType="secondary"
+									style={{ marginRight: '8px' }}
+									onClick={() => setCheckItem(
+										(prev: any) => ({ ...prev, shipmentDetailsCheck: true }),
+									)}
+									className={styles.approve_button}
+								>
+									Accept
+								</Button>
+							</div>
+						) : undefined}
 					</div>
 
 					<div
@@ -265,13 +282,31 @@ function ShipmentDetails({
 							{showDocuments && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
+						{showDocuments ? (
+							<Button
+								size="md"
+								themeType="secondary"
+								style={{ marginRight: '8px' }}
+								onClick={() => setCheckItem(
+									(prev: any) => ({ ...prev, documentsCheck: true }),
+								)}
+								className={styles.approve_button}
+							>
+								Accept
+							</Button>
+						) : undefined}
 					</div>
 
 					<div className={styles.tagging}>
-						<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
+						<Tagging
+							billId={billId}
+							setRemarksVal={setRemarksVal}
+							status={status}
+							setCheckItem={setCheckItem}
+						/>
 					</div>
 
-					<SIDView shipmentId={jobNumber} />
+					<SIDView shipmentId={jobNumber} setCheckItem={setCheckItem} />
 				</>
 			)}
 			<div>
@@ -321,12 +356,6 @@ function ShipmentDetails({
 				/>
 			) : null}
 
-			<TimeLineItemCheck
-				itemCheck={itemCheck}
-				lineItem={lineItem}
-				status={status}
-			/>
-
 			<div className={styles.shipment_details_footer}>
 				<div className={styles.pdf_display}>
 					<PdfDisplay data={data} />
@@ -338,7 +367,7 @@ function ShipmentDetails({
 						setRemarksVal={setRemarksVal}
 						lineItemsRemarks={lineItemsRemarks}
 						setLineItemsRemarks={setLineItemsRemarks}
-						setItemCheck={setItemCheck}
+						// setItemCheck={setItemCheck}
 						setLineItem={setLineItem}
 						invoiceStatus={status}
 					/>

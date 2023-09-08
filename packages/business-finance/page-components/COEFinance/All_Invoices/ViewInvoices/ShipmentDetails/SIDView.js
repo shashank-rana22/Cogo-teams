@@ -1,28 +1,27 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useShipmentIdView from '../../../hook/useShipmentIdView.ts';
 import AccordianCards from '../../ShipmentIdView/AccordianCards/index.tsx';
 
-function SIDView({ shipmentId = '' }) {
+function SIDView({ shipmentId = '', setCheckItem = () => {} }) {
 	const {
 		list: { data },
 	} = useShipmentIdView({ invoicesRequired: true, shipmentId });
 
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
+	if (isEmpty(data)) return <h>No Data Found</h>;
 
-	return (
-		<div>
-			{data ? (
-				<AccordianCards
-					itemData={data?.[GLOBAL_CONSTANTS.zeroth_index]}
-					currentOpenSID={currentOpenSID}
-					setCurrentOpenSID={setCurrentOpenSID}
-					shipmentIdView={false}
-				/>
-			) : <h>No Data Found</h>}
-		</div>
-	);
+	return data?.map((item) => (
+		<AccordianCards
+			itemData={item}
+			currentOpenSID={currentOpenSID}
+			setCurrentOpenSID={setCurrentOpenSID}
+			key={item?.jobId}
+			shipmentIdView={false}
+			setCheckItem={setCheckItem}
+		/>
+	));
 }
 
 export default SIDView;

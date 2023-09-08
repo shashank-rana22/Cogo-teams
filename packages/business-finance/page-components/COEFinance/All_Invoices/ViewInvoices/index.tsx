@@ -22,6 +22,17 @@ function ViewInvoices() {
 		data:  fullResponse,
 	} = useGetBill({ billId, orgId });
 
+	const [checkItem, setCheckItem] = useState({
+		shipmentDetailsCheck : false,
+		documentsCheck       : false,
+		taggingCheck         : false,
+		sidDataCheck         : false,
+		collectionPartyCheck : false,
+		billingPartyCheck    : false,
+		invoiceDetailsCheck  : false,
+		lineItemsCheck       : false,
+	});
+
 	return (
 		<div>
 			<Header
@@ -33,6 +44,7 @@ function ViewInvoices() {
 				lineItem={lineItem}
 				jobNumber={jobNumber}
 				status={status}
+				checkItem={checkItem}
 			/>
 
 			<ShipmentDetails
@@ -46,6 +58,8 @@ function ViewInvoices() {
 				status={status}
 				jobType={jobType}
 				billId={billId}
+				checkItem={checkItem}
+				setCheckItem={setCheckItem}
 			/>
 		</div>
 	);
