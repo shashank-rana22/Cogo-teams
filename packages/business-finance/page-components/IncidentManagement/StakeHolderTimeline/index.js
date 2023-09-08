@@ -42,10 +42,10 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 					return (
 						<div
 							className={cl`${styles.section} ${!isStakeholderActive ? styles.faded_text : ''}`}
-							key={item.key}
+							key={item?.key}
 						>
 							<div className={styles.inner_div}>
-								{item.status === 'APPROVED' ? (
+								{item?.status === 'APPROVED' ? (
 									<div
 										className={cl`${styles.circle} ${styles.approved_bg}`}
 									>
