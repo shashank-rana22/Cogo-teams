@@ -5,8 +5,7 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-const SHOW_LIST_SIZE = 6;
-const DEFAULT_LIST_SIZE_ONE = 1;
+const LOADING_PLACEHOLDER_COUNT = 10;
 const CLOSED_LENGTH = 0;
 
 const WAREHOUSE_OPERATIONS_TABS = ['schedules', 'inventory'];
@@ -22,7 +21,7 @@ function RenderListItem({
 	fields = [],
 	functions = {},
 }) {
-	const showList = list.length ? list : Array(SHOW_LIST_SIZE).fill(DEFAULT_LIST_SIZE_ONE);
+	const showList = list.length ? list : [...Array(LOADING_PLACEHOLDER_COUNT).keys()];
 	if (loading || list.length) {
 		return (showList).map((item) => (
 			<div key={item.warehouseTransferId}>
