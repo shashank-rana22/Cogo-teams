@@ -38,7 +38,6 @@ function Overheads() {
 				<div className={styles.main_heading}>Overheads</div>
 				<div className={styles.header}>
 					<AsyncSelect
-						name="entityCode"
 						placeholder="Select Entity Code"
 						value={entityCode}
 						onChange={(val) => setEntityCode(val)}
@@ -46,7 +45,7 @@ function Overheads() {
 						defaultOptions
 						initialCall
 						labelKey="entity_code"
-						valueKey="entity_code"
+						valueKey="id"
 						renderLabel={(item) => (`${item?.entity_code} - ${item?.business_name}`)}
 						asyncKey="list_cogo_entity"
 						style={{ width: '260px' }}
