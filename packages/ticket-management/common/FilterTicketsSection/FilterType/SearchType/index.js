@@ -34,7 +34,7 @@ function SearchType({
 					size="sm"
 					placeholder={t('myTickets:spectator_placeholder_text')}
 					value={spectatorType}
-					options={getSpectatorTypeOptions(t)}
+					options={getSpectatorTypeOptions({ t })}
 					onChange={(val) => setSpectatorType(val)}
 					isClearable
 				/>

@@ -45,28 +45,27 @@ function EscalateTicket({
 
 				<Modal.Body>
 					<div>
-						{escalateTicketsControls(t).map((controlItem) => {
-							const elementItem = { ...controlItem };
-							const { name, label, controllerType } = elementItem || {};
+						{escalateTicketsControls({ t }).map((controlItem) => {
+							const { name, label, controllerType } = controlItem || {};
 							const Element = getFieldController(controllerType);
 
 							if (!Element) { return null; }
 
 							return (
 								<div
-									key={controlItem.name}
+									key={name}
 									className={styles.field}
 								>
 									<div className={styles.label}>{label}</div>
 									<Element
-										{...elementItem}
+										{...controlItem}
 										key={name}
 										id={`${name}_input`}
 										size="sm"
 										control={control}
 									/>
 									<div className={styles.error}>
-										{errors?.[controlItem.name] && t('myTickets:required')}
+										{errors?.[name] && t('myTickets:required')}
 									</div>
 								</div>
 							);
