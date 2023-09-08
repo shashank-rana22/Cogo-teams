@@ -97,6 +97,12 @@
 	min-width: 16%;
 }
 
+.financial {
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
 .month {
 	margin-left: 4px;
 	font-size: 10px;
