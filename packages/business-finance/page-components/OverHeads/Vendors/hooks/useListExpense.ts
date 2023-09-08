@@ -4,7 +4,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useContext, useCallback } from 'react';
 
 import { EntityContext } from '../../commons/Contexts';
-import { globalEntityFilter } from '../../commons/GlobalEntityFilter';
 
 interface Props {
 	vendorId?:string | number,
@@ -23,7 +22,6 @@ const formatedDate = (date) => formatDate({
 
 const useListExpense = ({ filters }) => {
 	const entity = useContext(EntityContext);
-	const entityId = globalEntityFilter({ entity });
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/list',
@@ -52,13 +50,13 @@ const useListExpense = ({ filters }) => {
 					toUploadBillDate   : toUploadBillDate ? formatedDate(toUploadBillDate) : undefined,
 					fromBillDate       : fromBillDate ? formatedDate(fromBillDate) : undefined,
 					toBillDate         : toBillDate ? formatedDate(toBillDate) : undefined,
-					cogoEntityId       : entityId,
+					cogoEntityId       : entity,
 				},
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger, startDate, endDate, fromUploadBillDate, toUploadBillDate, fromBillDate, entityId, toBillDate]);
+	}, [trigger, startDate, endDate, fromUploadBillDate, toUploadBillDate, fromBillDate, entity, toBillDate]);
 
 	return {
 		getList,

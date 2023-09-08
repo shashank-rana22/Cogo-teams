@@ -4,7 +4,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useContext, useCallback } from 'react';
 
 import { EntityContext } from '../../commons/Contexts';
-import { globalEntityFilter } from '../../commons/GlobalEntityFilter';
 
 interface DateFormat {
 	startDate?: Date;
@@ -67,7 +66,6 @@ const useListExpense = ({
 	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } =		uploadDate || {};
 	const { startDate: fromBillDate, endDate: toBillDate } = billDate || {};
 	const entity = useContext(EntityContext);
-	const entityId = globalEntityFilter({ entity });
 	const {
 		invoiceAmountSortType,
 		tdsSortType,
@@ -112,7 +110,7 @@ const useListExpense = ({
 					toBillDate: toBillDate
 						? formatedDate(toBillDate)
 						: undefined,
-					cogoEntityId: entityId,
+					cogoEntityId: entity,
 				},
 			});
 		} catch (err) {
@@ -139,7 +137,7 @@ const useListExpense = ({
 		toUploadBillDate,
 		fromBillDate,
 		toBillDate,
-		entityId,
+		entity,
 	]);
 
 	return {

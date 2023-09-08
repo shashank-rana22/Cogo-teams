@@ -46,7 +46,10 @@ function Overheads() {
 						initialCall
 						labelKey="entity_code"
 						valueKey="id"
-						renderLabel={(item) => (`${item?.entity_code} - ${item?.business_name}`)}
+						getModifiedOptions={({ options }) => (options?.map((option) => ({
+							...option,
+							entity_code: `${option?.entity_code} - ${option?.business_name}`,
+						})))}
 						asyncKey="list_cogo_entity"
 						style={{ width: '260px' }}
 					/>

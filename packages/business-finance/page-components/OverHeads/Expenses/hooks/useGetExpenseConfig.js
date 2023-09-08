@@ -3,11 +3,9 @@ import { useContext, useEffect } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 import { EntityContext } from '../../commons/Contexts';
-import { globalEntityFilter } from '../../commons/GlobalEntityFilter';
 
 const useGetExpenseConfig = ({ id }) => {
 	const entity = useContext(EntityContext);
-	const entityId = globalEntityFilter({ entity });
 	const [{ data, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/expense-configuration',
@@ -24,7 +22,7 @@ const useGetExpenseConfig = ({ id }) => {
 					{
 						params: {
 							id,
-							cogoEntityId: entityId,
+							cogoEntityId: entity,
 						},
 					},
 				);
@@ -33,7 +31,7 @@ const useGetExpenseConfig = ({ id }) => {
 			}
 		};
 		api();
-	}, [trigger, id, entityId]);
+	}, [trigger, id, entity]);
 
 	return {
 		loading,

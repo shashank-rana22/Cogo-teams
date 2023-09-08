@@ -2,7 +2,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect, useContext } from 'react';
 
 import { EntityContext } from '../../commons/Contexts';
-import { globalEntityFilter } from '../../commons/GlobalEntityFilter';
 
 const useListVendors = ({ filters, sort }) => {
 	const {
@@ -11,7 +10,6 @@ const useListVendors = ({ filters, sort }) => {
 	const entityCode = useContext(EntityContext);
 
 	const { paymentSortType, openInvoiceSortType, createdAtSortType } = sort;
-	const entityId = globalEntityFilter({ entity: entityCode });
 	const [
 		{ data, loading },
 		trigger,
@@ -37,7 +35,7 @@ const useListVendors = ({ filters, sort }) => {
 					paymentStatus              : paymentStatus || undefined,
 					category                   : CATEGORY || undefined,
 					q                          : searchValue || undefined,
-					cogoEntityId               : entityId,
+					cogoEntityId               : entityCode,
 				},
 			});
 		} catch (err) {
@@ -51,7 +49,7 @@ const useListVendors = ({ filters, sort }) => {
 		openInvoiceSortType,
 		createdAtSortType,
 		paymentStatus, CATEGORY, searchValue,
-		entityId,
+		entityCode,
 	]);
 
 	return {
