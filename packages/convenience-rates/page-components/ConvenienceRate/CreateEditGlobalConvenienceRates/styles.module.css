@@ -2,7 +2,7 @@
 	margin-left: 16px;
 }
 
-.arrowBack {
+.arrow_back {
 	align-self: center;
 	width: 16px;
 	height: 16px;
@@ -10,11 +10,11 @@
 	fill: #393f70;
 }
 
-.backText {
+.back_text {
 	font-size: 16px;
 }
 
-.backDiv {
+.back_div {
 	display: flex;
 	margin-top: 16px;
 }

@@ -15,26 +15,23 @@ function Content({ columnDetails = {}, data = {} }) {
 	const value = getValue(data);
 
 	return (
-	// isLastItem is not taken care of
-		<div className={`${styles.contentContainer}`}>
+		<div className={`${styles.content_container}`}>
 
-			{label ? <div className={styles.contentTitle}>{label}</div> : null}
-			<div className={cl`${styles.flexContent} ${value}`}>
-				<div className={cl`${styles.contentValue}`}>{value}</div>
-			</div>
+			{label ? <div className={styles.content_title}>{label}</div> : null}
+			<div className={cl`${styles.content_value} ${styles[value]}`}>{value}</div>
 		</div>
 	);
 }
 
-const columnsWithValue = ({ data, list }) => {
+const columnsWithValue = ({ data = {}, list = [] }) => {
 	const NEW_MAPPING_LIST = [];
 	list.forEach((columnDetails) => {
-		const { getValue } = columnDetails;
+		const { getValue = () => {} } = columnDetails || {};
 
 		const value = getValue(data);
 
 		NEW_MAPPING_LIST.push({
-			...columnDetails,
+			...(columnDetails || {}),
 			value,
 		});
 	});
@@ -51,24 +48,24 @@ function ListItem({ data = {}, onEdit = () => {} }) {
 		<div className={styles.container}>
 			<div className={styles.upper}>
 				{
-                    data?.config_type === 'default' ? (<div className={styles.defaultTag}>Default</div>
+                    data?.config_type === 'default' ? (<div className={styles.default_tag}>Default</div>
                     ) : null
                 }
 				{/* Take care of additional class value */}
-				<div className={styles.tagsList}>
+				<div className={styles.tags_list}>
 					{tagsList.map((tabsDetails) => {
 						const { key, value } = tabsDetails || {};
 						return (
 							<div
 								key={key}
-								className={styles.tagsRow}
+								className={styles.tags_row}
 							>
 								{value ? <Pill size="md" color="green">{value}</Pill> : null }
 							</div>
 						);
 					})}
 				</div>
-				<div className={styles.gridRow}>
+				<div className={styles.grid_row}>
 					{columnsList.map((columnDetails, index) => {
 						const { key } = columnDetails;
 						return (
@@ -82,7 +79,7 @@ function ListItem({ data = {}, onEdit = () => {} }) {
 							</div>
 						);
 					})}
-					<div className={styles.flexContent}>
+					<div className={styles.flex_content}>
 						<Button
 							themeType="secondary"
 							size="md"
@@ -100,7 +97,7 @@ function ListItem({ data = {}, onEdit = () => {} }) {
 			<div className={styles.lower}>
 				{open ? (
 					<div
-						className={styles.layoutContainer}
+						className={styles.layout_container}
 						key={data.cogo_entity_id}
 					>
 						<div className={styles.heading}>
@@ -112,7 +109,7 @@ function ListItem({ data = {}, onEdit = () => {} }) {
 					</div>
 				) : null }
 				<button
-					className={styles.accordionContainer}
+					className={styles.accordion_container}
 					onClick={() => setOpen(!open)}
 				>
 					{open ? (

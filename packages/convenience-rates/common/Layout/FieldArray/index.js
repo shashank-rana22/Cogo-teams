@@ -5,11 +5,20 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import Child from './Child';
 import styles from './styles.module.css';
 
-function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {} }) {
+function FieldArray({
+	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
+	handleFieldArrayAddCheck = () => true, customFieldArrayControls = {},
+}) {
 	const { controls = [], name, showHeading = true } = ctrl || {};
-
 	const { fields, append, remove } = useFieldArray({ control, name });
 
+	const currentFieldArrayCustomField = customFieldArrayControls?.[name] || {};
+
+	const handleAppend = () => {
+		if (handleFieldArrayAddCheck({ currentIndex: fields.length, formValues, name })) {
+			append();
+		}
+	};
 	return (
 		<div className={styles.field_array}>
 			{fields.map((field, index) => (
@@ -25,6 +34,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 					name={name}
 					formValues={formValues}
 					showHeading={showHeading}
+					customField={currentFieldArrayCustomField?.[index] || {}}
 				/>
 			))}
 
@@ -33,7 +43,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={append}
+						onClick={handleAppend}
 						style={{ marginLeft: '4px' }}
 					>
 						<IcMPlusInCircle

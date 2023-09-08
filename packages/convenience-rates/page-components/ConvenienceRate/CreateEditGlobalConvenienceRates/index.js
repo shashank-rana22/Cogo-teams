@@ -12,14 +12,14 @@ function CreateEditGlobalConvenienceRates({ onClosingForm = () => {}, activeServ
 		>
 			<Button
 				themeType="link"
-				className={styles.backDiv}
+				className={styles.back_div}
 				onClick={onClosingForm}
 				style={{ cursor: 'pointer' }}
 			>
-				<div className={styles.arrowBack}>
+				<div className={styles.arrow_back}>
 					<IcMArrowBack />
 				</div>
-				<div className={styles.backText}>
+				<div className={styles.back_text}>
 					Back to All Convenience Fees
 				</div>
 			</Button>

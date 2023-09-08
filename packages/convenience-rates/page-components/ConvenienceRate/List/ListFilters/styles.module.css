@@ -5,7 +5,7 @@
 	overflow: auto;
 }
 
-.btnContainer {
+.btn_container {
 	display: flex;
 	margin-top: 8px;
 }

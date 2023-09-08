@@ -1,25 +1,19 @@
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetConvenienceRateConfig = ({ activeList }) => {
+const useGetConvenienceRateConfig = ({ defaultParams = {}, initialCall = false }) => {
 	const [data, setData] = useState({});
-	const router = useRouter();
-	const { convenience_rate_id = '' } = router?.query || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_convenience_rate_configuration',
 		method : 'GET',
-		params : {
-			id     : convenience_rate_id,
-			status : activeList,
-		},
+		params : defaultParams,
 	}, { manual: true });
-	const listConvenienceRateConfig = useCallback(async () => {
+	const convenienceRateConfig = useCallback(async () => {
 		try {
-			const res = await trigger({});
+			const res = await trigger();
 			if (res?.data) {
 				setData(res.data.data);
 			}
@@ -30,8 +24,9 @@ const useGetConvenienceRateConfig = ({ activeList }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		listConvenienceRateConfig();
-	}, [listConvenienceRateConfig]);
+		if (initialCall) convenienceRateConfig();
+	}, [convenienceRateConfig, initialCall]);
+
 	return {
 		data,
 		loading,

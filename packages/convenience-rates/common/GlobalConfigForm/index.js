@@ -1,41 +1,101 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import getMandatoryControls from '../../configs/controls/getMandatoryControls';
-import getOptionalControls from '../../configs/controls/getOptionalControls';
 import Layout from '../Layout';
 
+import getMandatoryControls from './controls/getMandatoryControls';
+import getOptionalControls from './controls/getOptionalControls';
+import handleFieldArrayAddCheck from './helpers/checkFeeConfiguration';
 import styles from './styles.module.css';
 
-function GlobalConfigForm(props) {
-	const { activeService, data, service } = props;
-	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(false);
+const ZERO = 0;
+const ONE = 1;
+const services_add_alt_configs = ['fcl_freight', 'fcl_freight_local', 'fcl_customs'];
 
-	const isEmptyAlternateSlabDetails = isEmpty(
-		data?.slab_details?.filter((item) => !item.is_default),
+function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
+	const isDefaultShowAlternateCFConfig = !!(data?.slab_details?.length > ONE);
+	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(isDefaultShowAlternateCFConfig);
+	const [addAltConfig, setAddAltConfig] = useState(false);
+
+	const DEFAULT_VALUES = {};
+	const mandatoryControls = getMandatoryControls(
+		{ activeService, service, data, control_name: 'slab_details', isAddFieldArrayCheck: true },
 	);
-	useEffect(() => {
-		if (!isEmptyAlternateSlabDetails) {
-			setShowAlternateCFConfig(true);
-		}
-	}, [isEmptyAlternateSlabDetails]);
+	const alternateMandatoryControls = getMandatoryControls(
+		{ activeService, service, data, control_name: 'alternate_slab_details', isAddFieldArrayCheck: true },
+	);
+	const optionalControls = getOptionalControls(
+		{ activeService, service, data },
+	);
 
-	const handleCrossClick = () => {
-		setShowAlternateCFConfig(false);
-	};
-	const DEFAULT_VALUES_ONE = {};
-	const mandatoryControls = getMandatoryControls({ activeService });
-	const optionalControls = getOptionalControls({ activeService, service });
-	const alternateMandatoryControls = getMandatoryControls({});
+	mandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
+	alternateMandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
+	optionalControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 
-	mandatoryControls.forEach((ctrl) => { DEFAULT_VALUES_ONE[ctrl.name] = ctrl?.value || ''; });
-
-	const { control, formState:{ errors = {} } = {} } = useForm({
-		defaultValues: DEFAULT_VALUES_ONE,
+	const { control, formState:{ errors = {} } = {}, watch, handleSubmit, reset, setValue } = useForm({
+		defaultValues: DEFAULT_VALUES,
 	});
+
+	useEffect(() => {
+		reset();
+		if (services_add_alt_configs.includes(activeService)) {
+			setAddAltConfig(true);
+		} else {
+			setAddAltConfig(false);
+		}
+	}, [activeService, reset, service]);
+
+	const formValues = watch();
+
+	const { slab_details = [], alternate_slab_details = [] } = formValues;
+
+	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };//
+	// customFieldArrayControls={
+	// 	fieldArrayName:{
+	// 		indexAsKey:{
+	// 			ctrlName :{customFields}
+	// 		}
+	// 	}
+	// }
+
+	alternate_slab_details?.forEach((_o, index) => {
+		if (index > ZERO) {
+			customFieldArrayControls.alternate_slab_details[index - ONE] = {
+				fee_unit: { disabled: true },
+			};
+			customFieldArrayControls.alternate_slab_details[index] = {
+				slab_unit        : { disabled: true },
+				slab_lower_limit : { disabled: true },
+				fee_unit         : { disabled: true },
+			};
+		}
+	});
+
+	useEffect(() => {
+		slab_details?.forEach((_o, index) => {
+			if (index > ZERO) {
+				setValue(`slab_details.${index}.slab_lower_limit`, slab_details[index - ONE].slab_upper_limit);
+				setValue(`slab_details.${index}.slab_unit`, slab_details[index - ONE].slab_unit);
+				setValue(`slab_details.${index}.fee_unit`, slab_details[index - ONE].fee_unit);
+			}
+		});
+	}, [slab_details, setValue]);
+	slab_details?.forEach((_o, index) => {
+		if (index > ZERO) {
+			customFieldArrayControls.alternate_slab_details[index - ONE] = {
+				fee_unit: { disabled: true },
+			};
+			customFieldArrayControls.slab_details[index] = {
+				slab_unit        : { disabled: true },
+				slab_lower_limit : { disabled: true },
+				fee_unit         : { disabled: true },
+			};
+		}
+	});
+
+	const onSubmit = () => {};
 
 	return (
 		<div className={styles.container}>
@@ -54,10 +114,14 @@ function GlobalConfigForm(props) {
 					control={control}
 					controls={mandatoryControls}
 					errors={errors}
+					handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+					customFieldArrayControls={customFieldArrayControls}
+					formValues={watch()}
 				/>
 			</div>
-
-			{
+			{addAltConfig && (
+				<div>
+					{
 				showAlternateCFConfig ? (
 					<>
 						<div className={styles.altConfig}>
@@ -68,7 +132,7 @@ function GlobalConfigForm(props) {
 								<IcMCrossInCircle
 									width={28}
 									height={28}
-									onClick={handleCrossClick}
+									onClick={() => setShowAlternateCFConfig(false)}
 								/>
 							</span>
 						</div>
@@ -77,6 +141,8 @@ function GlobalConfigForm(props) {
 								control={control}
 								controls={alternateMandatoryControls}
 								errors={errors}
+								handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+								formValues={watch()}
 							/>
 						</div>
 					</>
@@ -92,6 +158,8 @@ function GlobalConfigForm(props) {
 					</Button>
 				)
 			}
+				</div>
+			)}
 			<div
 				className={styles.fees}
 				style={{ fontStyle: 'italic' }}
@@ -114,7 +182,7 @@ function GlobalConfigForm(props) {
 					className={styles.btn}
 					themeType="primary"
 					size="md"
-					style={{ textTransform: 'capitalize' }}
+					onClick={handleSubmit(onSubmit)}
 				>
 					SAVE
 				</Button>

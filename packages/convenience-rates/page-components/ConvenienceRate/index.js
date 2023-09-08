@@ -72,6 +72,7 @@ function ConvenienceRate() {
 					activeTab={activeService}
 					onChange={(val) => {
 						setActiveService(val);
+						setActiveList('active');
 					}}
 				>
 					{TABS_MAPPING.map((item) => {

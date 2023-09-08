@@ -2,7 +2,7 @@ import { cl, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
-import { get, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -13,7 +13,7 @@ const columnsMapping = [
 		key      : 'updated_at',
 		label    : 'Last updated on',
 		getValue : (data) => formatDate({
-			date       : get(data, 'updated_at'),
+			date       : data?.updated_at,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		}),
@@ -22,13 +22,13 @@ const columnsMapping = [
 	{
 		key      : 'last_updated_by',
 		label    : 'Last updated by',
-		getValue : (data) => get(data, 'last_updated_by') || '___',
+		getValue : (data) => data?.last_updated_by || '___',
 		span     : 3.5,
 	},
 	{
 		key      : 'status',
 		label    : 'Status',
-		getValue : (data) => startCase(get(data, 'status')),
+		getValue : (data) => startCase(data?.status),
 		span     : 3.5,
 	},
 ];
@@ -39,9 +39,9 @@ function Content({ columnDetails = {}, data = {} }) {
 
 	return (
 	// isLastItem is not taken care of
-		<div className={`${styles.contentContainer}`}>
-			{label ? <div className={styles.contentTitle}>{label}</div> : null}
-			<div className={cl`${styles.contentValue} ${value}`}>{value}</div>
+		<div className={`${styles.content_container}`}>
+			{label ? <div className={styles.content_title}>{label}</div> : null}
+			<div className={cl`${styles.content_value} ${value}`}>{value}</div>
 		</div>
 	);
 }
@@ -67,14 +67,14 @@ function CustomConvenienceListItem({ data = {} }) {
 	return (
 	// <div>CustomConvenienceListItem</div>
 		<div className={styles.container}>
-			<div className={styles.tagsList}>
+			<div className={styles.tags_list}>
 				{(data?.organization_data || []).map((item) => (
 					<div key={item.updated_by} style={{ display: 'flex', marginRight: '8px' }}>
 						<Pill>{item.organization_name}</Pill>
 					</div>
 				))}
 			</div>
-			<div className={styles.gridRow}>
+			<div className={styles.grid_row}>
 				{columnsList.map((columnDetails, index) => {
 					const { key } = columnDetails;
 					return (

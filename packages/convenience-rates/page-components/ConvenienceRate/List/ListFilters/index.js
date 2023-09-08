@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect, useCallback } from 'react';
 
 import Layout from '../../../../common/Layout';
 
@@ -13,11 +14,11 @@ function ListFilters({ setFilters = () => {}, activeService = '', setShowPopover
 	const { control, formState:{ errors = {} } = {}, handleSubmit, reset } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
-	const onClickReset = () => {
+	const onClickReset = useCallback(() => {
 		setShowPopover(false);
 		setFilters({});
 		reset();
-	};
+	}, [setFilters, setShowPopover, reset]);
 	const onSave = (values) => {
 		const filter = Object.fromEntries(
 			Object.entries(values).filter(([, value]) => value),
@@ -26,6 +27,9 @@ function ListFilters({ setFilters = () => {}, activeService = '', setShowPopover
 		setFilters({ ...filter });
 		setShowPopover(false);
 	};
+	useEffect(() => {
+		onClickReset();
+	}, [activeService, onClickReset]);
 	return (
 		<div className={styles.container}>
 			<Layout
@@ -33,7 +37,7 @@ function ListFilters({ setFilters = () => {}, activeService = '', setShowPopover
 				control={control}
 				errors={errors}
 			/>
-			<div className={styles.btnContainer}>
+			<div className={styles.btn_container}>
 				<Button
 					themeType="secondary"
 					style={{ marginRight: 8 }}

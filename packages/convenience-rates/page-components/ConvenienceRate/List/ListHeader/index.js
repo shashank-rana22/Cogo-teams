@@ -37,7 +37,7 @@ function ListHeader({
 					})}
 				</Tabs>
 			</div>
-			<div className={styles.filterCreate}>
+			<div className={styles.filter_create}>
 				<div className={styles.filter}>
 					<Popover
 						theme="light"
@@ -60,7 +60,7 @@ function ListHeader({
 								size="lg"
 								onClick={() => setShowPopover(!showPopover)}
 							>
-								{!isEmpty(filters) ? <span className={styles.filterApplied} /> : null}
+								{!isEmpty(filters) ? <span className={styles.filter_applied} /> : null}
 								<IcMFilter style={{ marginRight: 4 }} />
 								Filters
 							</Button>

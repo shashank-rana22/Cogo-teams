@@ -10,13 +10,13 @@
 	box-shadow: rgb(218 169 169 / 65%) 0 1px 6px;
 }
 
-.layoutContainer {
+.layout_container {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 32px;
 }
 
-.btnContainer {
+.btn_container {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 24px;

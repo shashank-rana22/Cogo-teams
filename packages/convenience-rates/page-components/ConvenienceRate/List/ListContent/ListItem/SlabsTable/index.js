@@ -26,9 +26,9 @@ function SlabsTable({ slabsDetailData = {} }) {
 
 	return (
 		<Table
-            // layoutType="flex"
 			columns={columns}
 			data={slabsDetailData}
+			style={{ marginTop: '12px' }}
 		/>
 	);
 }

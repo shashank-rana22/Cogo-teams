@@ -1,5 +1,6 @@
 .error {
-	color: #cb6464;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
 }
 
 .row {
