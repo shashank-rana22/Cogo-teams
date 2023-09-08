@@ -55,6 +55,9 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
+			{/* todo anmol: check is key is present then show this */}
+			<Pill size="sm" color="green" className={styles.pill}>Operational Closure in: 3 Days</Pill>
+
 		</div>
 	);
 }

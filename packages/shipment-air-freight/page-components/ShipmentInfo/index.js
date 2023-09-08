@@ -1,5 +1,6 @@
 import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -11,8 +12,6 @@ const SHIPMENT_TYPE_MAPPING = {
 	consol : 'Consol',
 	coload : 'Coload',
 };
-
-const COGO_ASSURED_IMAGE_URL = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg';
 
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
@@ -42,12 +41,14 @@ function ShipmentInfo() {
 
 			{is_cogo_assured ? (
 				<img
-					src={COGO_ASSURED_IMAGE_URL}
+					src={GLOBAL_CONSTANTS.image_url.cogo_assured_svg}
 					alt="cogo-assured"
 					height={16}
 				/>
 			) : null}
 
+			{/* todo anmol: check is key is present then show this */}
+			<Pill size="sm" color="green" className={styles.pill}>Operational Closure in: 3 Days</Pill>
 		</div>
 	);
 }
