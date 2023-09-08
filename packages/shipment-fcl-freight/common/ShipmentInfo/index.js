@@ -55,8 +55,15 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
-			{/* todo anmol: check is key is present then show this */}
-			<Pill size="sm" color="green" className={styles.pill}>Operational Closure in: 3 Days</Pill>
+			{shipment_data?.remaining_days_to_closure ? (
+				<Pill size="sm" color="green" className={styles.pill}>
+					Operational Closure in:
+					{' '}
+					{shipment_data?.remaining_days_to_closure}
+					{' '}
+					Day(s)
+				</Pill>
+			) : null}
 
 		</div>
 	);
