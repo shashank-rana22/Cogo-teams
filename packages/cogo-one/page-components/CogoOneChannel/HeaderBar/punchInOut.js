@@ -35,6 +35,7 @@ function PunchInOut({
 	loading = false,
 	isShaking = false,
 	lastBreakTime = '',
+	showStats = false,
 }) {
 	const [punchConfig, setPunchConfig] = useState({
 		showTimer     : false,
@@ -97,11 +98,20 @@ function PunchInOut({
 		startShift();
 	}, [startShift]);
 
+	if (status === 'on_leave') {
+		return null;
+	}
+
 	return (
 		<div
 			role="presentation"
 			className={styles.minimize_container}
-			onClick={() => setShowDetails((prev) => !prev)}
+			onClick={() => {
+				if (!showStats) {
+					return;
+				}
+				setShowDetails((prev) => !prev);
+			}}
 		>
 			{status === 'punched_out' ? (
 				<Button
@@ -125,11 +135,12 @@ function PunchInOut({
 								formatTime={formatTime}
 								countdown={countdown}
 								loading={loading}
+								showStats={showStats}
 							/>
 						)}
 				</div>
 			)}
-			<IcMArrowDown className={cl`${showDetails ? styles.up_arrow : styles.arrow_down}`} />
+			{showStats ? <IcMArrowDown className={showDetails ? styles.up_arrow : styles.arrow_down} /> : null}
 		</div>
 	);
 }

@@ -1,26 +1,22 @@
-import { Button, Pill, Placeholder, Loader, cl } from '@cogoport/components';
+import { Button, Pill, Placeholder, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcCCogoCoin } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { ACCOUNT_TYPE } from '../../../../constants';
+import { FIREBASE_TABS, ACCOUNT_TYPE } from '../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
 
-import ConvertToCpModal from './ConvertToCpModal';
-import ListPromos from './listPromos';
-import OrgAgentDetails from './OrgAgentDetails';
-import OrganizationUsers from './OrganizationUsers';
-import QuotationDetails from './QuotationDetails';
+import OrgFooter from './OrgFooter';
 import styles from './styles.module.css';
+import SwitchOrg from './SwitchOrg';
 
-const LOADER_COUNT_FOR_CARD = 3;
+const SWITCH_ORG_USERS_ENABLE = ['whatsapp', 'platform_chat'];
 
 function OrganizationDetails({
 	activeTab = '',
@@ -31,6 +27,7 @@ function OrganizationDetails({
 	getOrgDetails = () => {},
 	viewType = '',
 	setActiveTab = () => {},
+	firestore = {},
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -42,13 +39,14 @@ function OrganizationDetails({
 		organization_id: messageOrgId = '', user_id: messageUserId = '',
 		account_type = '',
 		lead_user_details = {},
+		channel_type = '',
 	} = formattedMessageData || {};
 
 	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
 	const leadOrganizationId = lead_user_details?.lead_organization_id;
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
-	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
-	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
+	const organizationId = FIREBASE_TABS.includes(activeTab) ? messageOrgId : voiceOrgId;
+	const userId = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceUserId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({
 		organizationId,
@@ -107,6 +105,14 @@ function OrganizationDetails({
 		<div className={styles.container}>
 			<div className={styles.title}>
 				{organizationId ? 'Organization Details' : 'Lead Organization Details'}
+				{(organizationId && SWITCH_ORG_USERS_ENABLE.includes(channel_type)) ? (
+					<SwitchOrg
+						formattedData={formattedMessageData}
+						firestore={firestore}
+						key={organizationId}
+						viewType={viewType}
+					/>
+				) : null}
 			</div>
 			{orgLoading ? (
 				<>
@@ -134,7 +140,7 @@ function OrganizationDetails({
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
 							<div className={styles.name}>
-								{short_name || business_name}
+								{business_name || short_name }
 							</div>
 							<div className={styles.location}>{display_name}</div>
 						</div>
@@ -185,87 +191,24 @@ function OrganizationDetails({
 					</div>
 				</>
 			)}
-			{showConvertModal && (
-				<ConvertToCpModal
-					showConvertModal={showConvertModal}
-					setShowConvertModal={setShowConvertModal}
-					organizationId={organizationId}
-					refetchOrgDetails={refetchOrgDetails}
-				/>
-			) }
-
-			{!orgLoading && !isEmpty(agent) && (
-				<>
-					<div className={styles.agent_title}>Agent Details</div>
-					<div>
-						<OrgAgentDetails agent={agent} />
-					</div>
-				</>
-
-			)}
-
-			{showOrgUsers && (
-				<>
-					<div className={styles.agent_title}>Organization Users</div>
-					<div
-						className={styles.organization_users}
-						onScroll={handleScroll}
-					>
-						{organizationUsersLoading ? (
-							<div className={styles.agent_loading_state}>
-								{[...Array(LOADER_COUNT_FOR_CARD).keys()].map((key) => (
-									<Placeholder width="80%" height="15px" margin="10px 0 0 0 " key={key} />
-								))}
-							</div>
-						) : (
-							<>
-								{(organizationUserList || []).map((item) => (
-									<OrganizationUsers
-										user={item}
-										key={item.id}
-										hasVoiceCallAccess={hasVoiceCallAccess}
-										setActiveTab={setActiveTab}
-									/>
-								))}
-							</>
-						)}
-					</div>
-				</>
-			)}
-
-			{organizationId ? (
-				<>
-					<div className={styles.agent_title}>User Reedemable Cogopoints</div>
-					<div className={styles.points}>
-						<div className={styles.cogo_icon}>
-							<IcCCogoCoin className={styles.cogocoins_icon} />
-						</div>
-
-						<div className={styles.cogopoints}>Cogopoints : </div>
-						{pointLoading ? (
-							<Placeholder
-								height="18px"
-								width="35px"
-								margin="0px 0px 0px 8px"
-							/>
-						) : (
-							<div className={styles.value}>{total_redeemable || '0'}</div>
-						)}
-					</div>
-
-					<div className={styles.agent_title}>Available Promocodes</div>
-
-					{promoLoading ? (
-						<div className={styles.loader_div}>
-							<Loader themeType="primary" />
-						</div>
-					) : (
-						<ListPromos list={list} />
-					)}
-
-					<QuotationDetails organizationId={organizationId} />
-				</>
-			) : null}
+			<OrgFooter
+				showConvertModal={showConvertModal}
+				setShowConvertModal={setShowConvertModal}
+				organizationId={organizationId}
+				refetchOrgDetails={refetchOrgDetails}
+				orgLoading={orgLoading}
+				agent={agent}
+				showOrgUsers={showOrgUsers}
+				handleScroll={handleScroll}
+				organizationUsersLoading={organizationUsersLoading}
+				organizationUserList={organizationUserList}
+				hasVoiceCallAccess={hasVoiceCallAccess}
+				setActiveTab={setActiveTab}
+				pointLoading={pointLoading}
+				total_redeemable={total_redeemable}
+				promoLoading={promoLoading}
+				list={list}
+			/>
 		</div>
 	);
 }

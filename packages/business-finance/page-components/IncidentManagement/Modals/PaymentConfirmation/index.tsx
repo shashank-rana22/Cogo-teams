@@ -1,4 +1,5 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
 import usePaymentConfirm from '../../apisModal/usePaymentConfirm';
@@ -39,6 +40,7 @@ function PaymentConfirmation({
 	paymentConfirmationRequest = {}, organization = {},
 	id, refetch = () => {}, isEditable = true, remark, row,
 }:Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
@@ -48,9 +50,10 @@ function PaymentConfirmation({
 		refetch,
 		setShowModal,
 		id,
+		t,
 	});
 
-	const details = getDetails(paymentConfirmationRequest, organization);
+	const details = getDetails(paymentConfirmationRequest, organization, t);
 	const isDisabled = loading || !inputValues.remarks;
 
 	useEffect(() => {
@@ -74,7 +77,7 @@ function PaymentConfirmation({
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title="Payment Confirmation Approval" />
+					<Modal.Header title={t('incidentManagement:payment_confirmation_approval')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 
@@ -94,12 +97,12 @@ function PaymentConfirmation({
 
 						<div>
 							<div style={{ display: 'flex' }}>
-								<div className={styles.input_titles}>Remarks*</div>
+								<div className={styles.input_titles}>{`${t('incidentManagement:remarks')}*`}</div>
 								<span className={styles.divider}>:</span>
 								<Textarea
 									name="remark"
 									size="sm"
-									placeholder="Enter Remarks Here..."
+									placeholder={t('incidentManagement:remarks_placeholder') || ''}
 									disabled={!isEditable}
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
 									value={remark}
@@ -121,7 +124,7 @@ function PaymentConfirmation({
 										onAction({ inputValues, status: 'REJECTED' });
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 								<Button
 									size="md"
@@ -131,7 +134,7 @@ function PaymentConfirmation({
 										onAction({ inputValues, status: 'APPROVED' });
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

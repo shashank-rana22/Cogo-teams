@@ -106,6 +106,18 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
 	],
 	employee_portal: [
 		{
@@ -163,6 +175,12 @@ const HRMS = {
 			api          : 'list_company_documents',
 			access_type  : 'private',
 			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+
 		},
 	],
 	performance_management_configuration: [
@@ -616,6 +634,123 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 
+		},
+	],
+	attendance_leave_management: [
+		{
+			api          : 'get_day_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_timesheet',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_attendance_logs',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_attendance_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_monthly_summary',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_company_location',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_cycle_ids',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_geo_location_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_leave_applications',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_leave_calendar',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_leave_balances',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_timesheet',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_employee_leave_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_leave_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_geo_location_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_team_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_groupings',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_request_collection',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_leave_request',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'download_team_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
 		},
 	],
 };

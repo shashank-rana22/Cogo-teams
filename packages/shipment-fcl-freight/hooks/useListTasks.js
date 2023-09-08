@@ -13,6 +13,7 @@ const STAKEHOLDER_MAPPINGS = {
 	so1_so2_ops           : 'service_ops',
 	booking_agent         : 'booking_agent',
 	booking_agent_manager : 'booking_agent',
+	sales_agent           : 'sales_agent',
 };
 
 function useListTasks({
@@ -24,19 +25,38 @@ function useListTasks({
 }) {
 	let showOnlyMyTasks = showMyTasks;
 	const { profile } = useSelector((state) => state);
-	const { refetchServices = () => {} } = useContext(ShipmentDetailContext);
+	const { refetchServices = () => {}, shipment_data = {} } = useContext(ShipmentDetailContext);
+
+	const { stakeholders = [] } = shipment_data || {};
+
+	let updatedActiveStakeholder = activeStakeholder;
+
+	let isBookingAgent = false;
+	let isSalesAgent = false;
+
+	stakeholders.forEach((item) => {
+		if (item?.stakeholder_type === 'sales_agent') {
+			isSalesAgent = true;
+		}
+
+		if (item?.stakeholder_type === 'booking_agent') {
+			isBookingAgent = true;
+		}
+	});
+
+	if (isSalesAgent && !isBookingAgent) { updatedActiveStakeholder = 'sales_agent'; }
 
 	const user_id = profile?.user?.id;
 
-	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
+	const stakeholder = STAKEHOLDER_MAPPINGS[updatedActiveStakeholder] || '';
 
 	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
-	if (activeStakeholder === 'lastmile_ops' && !showOnlyMyTasks) {
+	if (updatedActiveStakeholder === 'lastmile_ops' && !showOnlyMyTasks) {
 		showTaskFilters = {};
 	}
 	SHOW_ALL_TASKS.forEach((item) => {
-		if (activeStakeholder?.includes(item)) {
+		if (updatedActiveStakeholder?.includes(item)) {
 			showOnlyMyTasks = false;
 		}
 	});

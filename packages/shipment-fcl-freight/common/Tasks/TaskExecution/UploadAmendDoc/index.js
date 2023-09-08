@@ -3,14 +3,17 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
-import React, { useContext, useMemo } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useContext, useMemo } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 import getDefaultValues from '../utils/get-default-values';
+import isFileUploaded from '../utils/isFileUploaded';
 
 import controls from './controls';
 import styles from './styles.module.css';
+import UpdateQuotation from './UpdateQuotation';
 
 const REQUIRED_OBJ = {};
 
@@ -19,6 +22,13 @@ function UploadAmendDoc({
 	onClose = () => {},
 	refetch = () => {},
 }) {
+	const { primary_service = {} } = useContext(ShipmentDetailContext);
+
+	const isAmendBookingNote = task?.task === 'amend_booking_note';
+
+	const [isQuotation, setIsQuotation] = useState(false);
+	const [documentPayload, setDocumentPayload] = useState({});
+
 	const { list = {}, loading = true } = useListDocuments({
 		defaultFilters: {
 			shipment_id: task.shipment_id, id: task.task_field_id,
@@ -28,18 +38,18 @@ function UploadAmendDoc({
 		},
 	});
 
-	const { primary_service } = useContext(ShipmentDetailContext);
-	const movementDetails = primary_service?.movement_details || [];
-
-	const keysForMovementDetails = useMemo(() => Array(movementDetails.length)
-		.fill(null).map(() => Math.random()), [movementDetails.length]);
-
 	const newRefetch = () => {
 		onClose();
 		refetch();
 	};
 
-	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
+	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments({
+		refetch: newRefetch,
+	});
+
+	const movementDetails = primary_service?.movement_details || [];
+	const keysForMovementDetails = useMemo(() => Array(movementDetails.length)
+		.fill(null).map(() => Math.random()), [movementDetails.length]);
 
 	const allControls = controls(task) || [];
 	const details = list.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
@@ -51,20 +61,20 @@ function UploadAmendDoc({
 	allControls[GLOBAL_CONSTANTS.zeroth_index].value = [REQUIRED_OBJ];
 	const defaultValues = getDefaultValues(allControls);
 
-	const formProps = useForm({ defaultValues });
-	const { control, formState: { errors }, handleSubmit } = formProps;
+	const { control, formState: { errors }, handleSubmit } = useForm({ defaultValues });
 
 	const handleSubmitFinal = async (values) => {
-		const documentPayloadData = payloadData;
-		const finalPayload = {
-			shipment_id         : task.shipment_id,
-			service_id          : task.service_id,
-			service_type        : task.service_type,
-			document_type       : task.document_type,
-			performed_by_org_id : task.organization_id,
+		if (!isFileUploaded(values)) return null;
+
+		const payload = {
+			shipment_id         : task?.shipment_id,
+			service_id          : task?.service_id,
+			service_type        : task?.service_type,
+			document_type       : task?.document_type,
+			performed_by_org_id : task?.organization_id,
 			id                  : details?.id,
-			pending_task_id     : task.id,
-			data                : { ...documentPayloadData, status: 'uploaded' },
+			pending_task_id     : task?.id,
+			data                : { ...payloadData, status: 'uploaded' },
 			document_url:
 				values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.url?.finalUrl
 				|| values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.finalUrl
@@ -82,7 +92,14 @@ function UploadAmendDoc({
 			})),
 		};
 
-		updateDocument(finalPayload);
+		if (isAmendBookingNote) {
+			setDocumentPayload(payload);
+			setIsQuotation(true);
+		} else {
+			updateDocument(payload);
+		}
+
+		return null;
 	};
 
 	return (
@@ -106,16 +123,31 @@ function UploadAmendDoc({
 				))}
 			</div>
 
-			<Layout control={control} fields={allControls} errors={errors} />
+			{isQuotation && !isEmpty(documentPayload) ? (
+				<UpdateQuotation
+					task={task}
+					setIsQuotation={setIsQuotation}
+					updateDocument={updateDocument}
+					documentPayload={documentPayload}
+					documentUpdateLoading={taskUpdateLoading}
+					onClose={onClose}
+					refetch={refetch}
+				/>
+			) : (
+				<>
+					<Layout control={control} fields={allControls} errors={errors} />
+					<div className={styles.button_wrap}>
+						<Button themeType="secondary" onClick={() => onClose()}>Close</Button>
+						<Button
+							onClick={handleSubmit(handleSubmitFinal)}
+							disabled={loading}
+						>
+							{isAmendBookingNote ? 'Next' : 'Submit'}
+						</Button>
+					</div>
+				</>
+			)}
 
-			<div className={styles.button_wrap}>
-				<Button
-					onClick={handleSubmit(handleSubmitFinal)}
-					disabled={loading}
-				>
-					Submit
-				</Button>
-			</div>
 		</div>
 	);
 }

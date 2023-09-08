@@ -1,10 +1,10 @@
-const controls = [
+const controls = ({ t = () => {} }) => [
 	{
 		name  : 'active_date_range',
-		label : 'Set Interval',
+		label : t('allocation:active_date_range_label'),
 		type  : 'dateRangePicker',
 		rules : {
-			required: 'Interval is Required',
+			required: t('allocation:active_date_range_rules_required'),
 		},
 		isPreviousDaysAllowed: false,
 	},

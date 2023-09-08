@@ -23,3 +23,13 @@
 	flex-direction: column;
 	width: 100%;
 }
+
+.label {
+	height: 16px;
+	margin-bottom: 6px;
+}
+
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}

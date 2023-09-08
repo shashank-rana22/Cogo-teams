@@ -10,6 +10,8 @@ const STAKEHOLDER_MAPPING = {
 	destination_booking_agent : 'DKAM',
 	credit_controller         : 'Credit Controller',
 	ground_ops                : 'Ground Ops',
+	service_ops2_docs         : 'Service Ops 2 Docs',
+	printing_desk             : 'Printing Desk',
 };
 
 export const STAKEHOLDER_CAN_BE_ADDED = {
@@ -24,10 +26,12 @@ export const STAKEHOLDER_CAN_BE_ADDED = {
 	destination_booking_agent : 'DKAM',
 	credit_controller         : 'Credit Controller',
 	ground_ops                : 'Ground Ops',
+	service_ops2_docs         : 'Service Ops 2 Docs',
+	printing_desk             : 'Printing Desk',
 };
 
 export const SERVICE_LEVEL_STATKEHOLDERS = [
-	'supply_agent', 'service_ops1', 'service_ops2', 'service_ops3',
+	'supply_agent', 'service_ops1', 'service_ops2', 'service_ops3', 'service_ops2_docs', 'printing_desk',
 ];
 
 export default STAKEHOLDER_MAPPING;

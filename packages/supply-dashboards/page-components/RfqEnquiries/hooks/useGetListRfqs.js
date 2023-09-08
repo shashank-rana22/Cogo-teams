@@ -1,10 +1,9 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
 
-const useGetListRfqs = () => {
+const useGetListRfqs = ({ revelantToUser }) => {
 	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 
 	const [{ loading: apiLoading }, trigger] = useRequest({
@@ -17,25 +16,24 @@ const useGetListRfqs = () => {
 		user_profile: profile,
 	}));
 
-	const isFullAccess = user_profile.partner.user_role_ids
-		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
-
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;
 		if (rates_status) {
 			filters[rates_status] = true;
 		}
+
 		return trigger({
 			params: {
 				filters: {
 					...(filters || {}),
-					relevant_supply_agent_id : !isFullAccess ? user_profile?.user?.id : undefined,
-					supply_agent_preference  : true,
-					service_type             : filters.service_type,
-					origin_port_id           : filters.origin_port_id ? filters.origin_port_id : undefined,
-					destination_port_id      : filters.destination_port_id ? filters.destination_port_id : undefined,
-					origin_airport_id        : filters.origin_airport_id ? filters.origin_airport_id : undefined,
-					destination_airport_id   : filters.destination_airport_id
+					relevant_supply_agent_id: revelantToUser
+						? user_profile?.user?.id : undefined,
+					supply_agent_preference : true,
+					service_type            : filters.service_type,
+					origin_port_id          : filters.origin_port_id ? filters.origin_port_id : undefined,
+					destination_port_id     : filters.destination_port_id ? filters.destination_port_id : undefined,
+					origin_airport_id       : filters.origin_airport_id ? filters.origin_airport_id : undefined,
+					destination_airport_id  : filters.destination_airport_id
 						? filters.destination_airport_id : undefined,
 					origin_location_id      : filters.origin_location_id ? filters.origin_location_id : undefined,
 					destination_location_id : filters.destination_location_id
@@ -58,7 +56,7 @@ const useGetListRfqs = () => {
 		list: { data, total, total_page },
 		hookSetters,
 		refetch,
-	} = useGetFiniteList(listAPi);
+	} = useGetFiniteList(listAPi, revelantToUser);
 
 	return {
 		loading : loading || apiLoading,

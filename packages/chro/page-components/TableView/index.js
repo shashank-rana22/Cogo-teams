@@ -31,7 +31,7 @@ const getVariablePay = ({
 	|| VARIABLE_PAY_THRESHOLD;
 
 function TableView({ search = '', activeTab = '' }) {
-	const [ctcBreakup, setCtcBreakup] = useState({});
+	const [ctcBreakup, setCtcBreakup] = useState('');
 	const [error, setError] = useState(false);
 
 	const { data = {}, onPageChange, loading, refetch } = useGetTableView({ search, activeTab });
@@ -108,6 +108,7 @@ function TableView({ search = '', activeTab = '' }) {
 							? ` + Rs. ${variable_pay / DIVISION_NUMBER} LPA (variable)`
 							: null}
 					</span>
+
 					<CtcBreakup metadata={metadata} />
 				</Modal.Body>
 
