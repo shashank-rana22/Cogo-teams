@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -47,7 +47,7 @@ const useIncidentReOpenJob = ({
 
 			setIsSuccess(true);
 		} catch (error) {
-			Toast.error(error?.response?.data?.message || error?.data?.message || 'Something went wrong.');
+			toastApiError(error);
 		}
 	};
 
