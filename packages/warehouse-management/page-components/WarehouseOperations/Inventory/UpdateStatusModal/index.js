@@ -22,7 +22,7 @@ function UpdateStatusModal({
 	} = useUpdateInventory({ id: item?.id, setShowUpdateStatusModal, listAPI });
 
 	useEffect(() => {
-		const selectedServices = item?.services.reduce((acc, service) => {
+		const selectedServices = item?.services?.reduce((acc, service) => {
 			if (service.serviceStatus === 'received') {
 				acc.push(service.serviceName);
 			}

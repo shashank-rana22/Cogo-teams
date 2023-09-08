@@ -24,7 +24,7 @@ function useDeleteConfiguration({
 			});
 			Toast.success('Zone deleted');
 			listAPI();
-			setDeleteZone(false);
+			setDeleteZone({});
 		} catch (err) {
 			toastApiError(err);
 		}

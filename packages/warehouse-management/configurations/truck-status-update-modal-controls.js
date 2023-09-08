@@ -4,7 +4,7 @@ const controls = [
 		label      : 'Upload Image',
 		type       : 'file',
 		uploadType : 'aws',
-		accept     : '.png, .jpeg',
+		accept     : '.png, .pdf, .jpg, .jpeg',
 		rules      : { required: 'File is Required' },
 	},
 ];

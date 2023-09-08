@@ -1,31 +1,21 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
 
 const configureFields = [
 	{
-		key    : 'zoneName',
-		label  : 'Zone name',
-		span   : 0.8,
-		render : (item) => (
-			<div>
-				{item?.zoneName}
-			</div>
-		),
+		key   : 'zoneName',
+		label : 'Zone name',
+		span  : 2,
 	},
 	{
-		key    : 'commodity',
-		label  : 'Commodity',
-		span   : 1.2,
-		render : (item) => (
-			<div>
-				{startCase(item?.commodity)}
-			</div>
-		),
+		key   : 'commodity',
+		label : 'Commodity',
+		span  : 2,
+		func  : 'startCase',
 	},
 	{
 		key    : 'aislesCount',
 		label  : 'No. of Aisle',
-		span   : 1,
+		span   : 1.5,
 		render : (item) => (
 			<div>
 				{item?.aisles?.[GLOBAL_CONSTANTS.zeroth_index]?.aislesCount || '-'}
@@ -55,7 +45,7 @@ const configureFields = [
 	{
 		key    : 'binDimensions',
 		label  : 'Number / size of bin',
-		span   : 1,
+		span   : 2.5,
 		render : (item) => (
 			<div>
 				{item.aisles?.[GLOBAL_CONSTANTS.zeroth_index]?.binsCount
@@ -69,13 +59,13 @@ const configureFields = [
 	{
 		key   : 'edit',
 		label : 'Actions',
-		span  : 0.4,
+		span  : 0.5,
 		func  : 'handleEdit',
 	},
 	{
 		key   : 'delete',
 		label : '',
-		span  : 0.4,
+		span  : 0.5,
 		func  : 'handleDelete',
 	},
 ];

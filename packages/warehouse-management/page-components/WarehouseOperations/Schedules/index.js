@@ -9,6 +9,7 @@ import useListSchedules from '../../../hooks/useListSchedules';
 import SIDList from './SIDList';
 import styles from './styles.module.css';
 import TruckStatusUpdateModal from './TruckStatusUpdateModal';
+import CargoAcknowledgmentModal from './TruckStatusUpdateModal/CargoAcknowledgmentModal';
 
 function Schedules({
 	activeTab = 'configure',
@@ -18,6 +19,8 @@ function Schedules({
 }) {
 	const { fields } = scheduleFields(truckStatus);
 	const [showTruckStatusModal, setShowTruckStatusModal] = useState({});
+	const [showCargoAcknowledgmentModal, setShowCargoAcknowledgmentModal] = useState(false);
+	const [acknowlegmentData, setAcknowlegmentData] = useState([]);
 
 	const {
 		data,
@@ -33,6 +36,8 @@ function Schedules({
 			<TruckStatusUpdateModal
 				item={singleItem}
 				showTruckStatusModal={showTruckStatusModal}
+				setAcknowlegmentData={setAcknowlegmentData}
+				setShowCargoAcknowledgmentModal={setShowCargoAcknowledgmentModal}
 				setShowTruckStatusModal={setShowTruckStatusModal}
 				truckStatus={truckStatus}
 				listAPI={listAPI}
@@ -84,6 +89,13 @@ function Schedules({
 					handlePageChange={handlePageChange}
 					Child={SIDList}
 				/>
+				{ showCargoAcknowledgmentModal
+					&& (
+						<CargoAcknowledgmentModal
+							setShowCargoAcknowledgmentModal={setShowCargoAcknowledgmentModal}
+							cargoData={acknowlegmentData}
+						/>
+					)}
 			</div>
 		</div>
 	);

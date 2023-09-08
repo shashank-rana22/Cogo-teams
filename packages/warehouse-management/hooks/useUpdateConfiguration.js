@@ -35,7 +35,7 @@ function useUpdateConfiguration({
 			});
 			Toast.success('Updated Successfully');
 			listAPI();
-			setEditZone(false);
+			setEditZone({});
 		} catch (err) {
 			toastApiError(err);
 		}

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function DeleteZoneModal({
 	id = '',
-	deleteZone = false,
+	deleteZone = {},
 	setDeleteZone = () => {},
 	listAPI = () => {},
 }) {
@@ -17,20 +17,20 @@ function DeleteZoneModal({
 		<Modal
 			placement="center"
 			show={deleteZone}
-			onClose={() => setDeleteZone(false)}
+			onClose={() => setDeleteZone({})}
 			closeOnOuterClick
 		>
 			<Modal.Footer className={styles.modal_footer}>
-				<h4 className={styles.warning_icon}>
+				<div className={styles.warning_icon}>
 					<IcCError />
-				</h4>
+				</div>
 				<div className={styles.sure_delete}>
 					Are you sure you want to delete this Zone ?
 				</div>
 				<div className={styles.footer_buttons}>
 					<Button
 						className={styles.cancel_button}
-						onClick={() => setDeleteZone(false)}
+						onClick={() => setDeleteZone({})}
 						themeType="secondary"
 					>
 						Cancel

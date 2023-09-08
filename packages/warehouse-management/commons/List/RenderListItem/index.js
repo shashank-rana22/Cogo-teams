@@ -50,7 +50,7 @@ function RenderListItem({
 							>
 								Show Less
 								<IcMArrowUp
-									style={{ cursor: 'pointer' }}
+									style={{ cursor: 'pointer', marginLeft: '3px', marginTop: '1px' }}
 								/>
 							</Button>
 						) : (!loading && (
@@ -63,7 +63,7 @@ function RenderListItem({
 							>
 								<span>Show More</span>
 								<IcMArrowDown
-									style={{ cursor: 'pointer' }}
+									style={{ cursor: 'pointer', marginLeft: '3px', marginTop: '1px' }}
 								/>
 							</Button>
 						)

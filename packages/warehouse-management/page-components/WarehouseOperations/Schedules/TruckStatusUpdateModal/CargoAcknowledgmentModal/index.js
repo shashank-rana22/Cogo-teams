@@ -9,13 +9,12 @@ const COLUMNS = [
 ];
 
 function CargoAcknowledgmentModal({
-	showCargoAcknowledgmentModal = [],
 	setShowCargoAcknowledgmentModal = () => {},
 	cargoData = [],
 }) {
-	const DATA = [];
-	cargoData?.forEach((item) => {
-		DATA.push({
+	const TABLE_DATA = [];
+	cargoData?.warehouseInventories?.forEach((item) => {
+		TABLE_DATA.push({
 			cargoId  : item?.cargoNumber,
 			services : item?.services,
 		});
@@ -23,21 +22,21 @@ function CargoAcknowledgmentModal({
 
 	return (
 		<Modal
-			show={!isEmpty(showCargoAcknowledgmentModal)}
-			onClose={() => setShowCargoAcknowledgmentModal({})}
+			show={!isEmpty(cargoData)}
+			onClose={() => setShowCargoAcknowledgmentModal(false)}
 			className={styles.modal_styled}
 			placement="center"
 			closeOnOuterClick
 		>
 			<Modal.Header title="Cargo Details" />
 			<Modal.Body>
-				<Table columns={COLUMNS} data={DATA} />
+				<Table columns={COLUMNS} data={TABLE_DATA} />
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.modal_footer}>
 					<div className={styles.footer_note}>Note: Please print the labels of above cargo&apos;s</div>
 					<Button
-						onClick={() => setShowCargoAcknowledgmentModal({})}
+						onClick={() => setShowCargoAcknowledgmentModal(false)}
 					>
 						OK
 					</Button>

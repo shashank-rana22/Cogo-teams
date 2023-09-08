@@ -39,7 +39,7 @@ function EditZoneModal({
 			show={editZone}
 			className={styles.modal_styled}
 			placement="center"
-			onClose={() => setEditZone(false)}
+			onClose={() => setEditZone({})}
 			closeOnOuterClick
 		>
 			<Modal.Header title="Edit Zone" />
@@ -53,7 +53,7 @@ function EditZoneModal({
 			<Modal.Footer>
 				<Button
 					className={styles.cancel_button}
-					onClick={() => setEditZone(false)}
+					onClick={() => setEditZone({})}
 					themeType="secondary"
 				>
 					Cancel

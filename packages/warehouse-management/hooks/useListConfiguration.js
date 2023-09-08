@@ -32,12 +32,13 @@ const useListConfiguration = ({
 				params: {
 					q: (query || '').trim() || undefined,
 					...PAYLOAD,
+					page,
 				},
 			});
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [query, trigger, warehouseLocationId]);
+	}, [query, page, trigger, warehouseLocationId]);
 
 	useEffect(() => {
 		if (searchValue) {

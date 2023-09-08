@@ -5,7 +5,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key    : 'wh_transfer_id',
 			label  : 'WH Transfer ID',
-			span   : 1.5,
+			span   : 2,
 			render : (item) => (
 				<div>
 					{item?.warehouseTransferSerialId}
@@ -15,7 +15,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key    : 'sid_count',
 			label  : 'No. of SIDs',
-			span   : 2.5,
+			span   : 1,
 			render : (item) => (
 				<div>
 					{item?.shipmentDetails?.length}
@@ -25,7 +25,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key    : truckStatus === 'truck_in' ? 'truck_in_eta' : 'truck_out_eta',
 			label  : truckStatus === 'truck_in' ? 'Truck-in ETA' : 'Truck-out ETA',
-			span   : 1.5,
+			span   : 2,
 			render : (item) => (
 				<div>
 					{truckStatus === 'truck_in' ? item?.truckInEta : item?.truckOutEta}
@@ -35,7 +35,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key    : 'transporter_name',
 			label  : 'Transporter Name',
-			span   : 2.5,
+			span   : 1,
 			render : (item) => (
 				<div>
 					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.transporter_name}
@@ -45,7 +45,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key    : 'truck_number',
 			label  : 'Truck Number',
-			span   : 1,
+			span   : 2,
 			render : (item) => (
 				<div>
 					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.truck_number}
@@ -65,7 +65,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key    : 'driver_contact_number',
 			label  : 'Driver Contact Number',
-			span   : 2.2,
+			span   : 2,
 			render : (item) => (
 				<div>
 					{item?.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.driver_contact_number}
@@ -75,7 +75,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key   : 'action',
 			label : 'Actions',
-			span  : 2.2,
+			span  : 1,
 			func  : 'handleTruckStatus',
 		},
 	],
@@ -83,43 +83,43 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 		{
 			key   : 'serialID',
 			label : 'SID No.',
-			span  : 2.2,
+			span  : 2,
 			func  : 'handleSID',
 		},
 		{
 			key   : 'boxCount',
 			label : 'Boxes',
-			span  : 2.2,
+			span  : 1,
 			func  : 'handleBoxCount',
 		},
 		{
 			key   : 'boxDimensions',
 			label : 'Box Dimensions',
-			span  : 2.2,
+			span  : 2,
 			func  : 'handleBoxDimensions',
 		},
 		{
 			key   : 'services',
 			label : 'Services',
-			span  : 2.2,
+			span  : 2,
 			func  : 'handleServices',
 		},
 		{
 			key   : 'status',
 			label : 'Status',
-			span  : 2.2,
+			span  : 1,
 			func  : 'handleStatus',
 		},
 		{
 			key   : 'flightSchedule',
 			label : 'Flight Schedule',
-			span  : 2.2,
+			span  : 2,
 			func  : 'handleFlightSchedule',
 		},
 		{
 			key   : 'expectedDepartureTime',
 			label : 'Expected dept. Time',
-			span  : 2.1,
+			span  : 2,
 			func  : 'handleExpectedDeparture',
 		},
 	],

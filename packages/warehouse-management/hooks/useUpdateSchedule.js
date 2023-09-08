@@ -39,17 +39,19 @@ const useUpdateSchedule = ({
 	fileValue = '',
 	truckStatus = 'truck_in',
 	listAPI = () => {},
+	setAcknowlegmentData = () => {},
 	setShowTruckStatusModal = () => {},
 	setShowCargoAcknowledgmentModal = () => {},
 	warehouseLocationId = '',
 
 }) => {
-	const [{ loading = true, data }, trigger] = useRequestAir(
+	const [{ loading = true }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/schedule',
 			method  : 'PUT',
 			authKey : 'put_air_coe_warehouse_management_schedule',
 		},
+		{ manual: true },
 	);
 
 	const handleOnClose = () => {
@@ -59,7 +61,7 @@ const useUpdateSchedule = ({
 
 	const handleUpdate = async () => {
 		try {
-			await trigger({
+			const response = await trigger({
 				data: {
 					...getParams({
 						shipmentId          : item?.shipmentDetails[GLOBAL_CONSTANTS.zeroth_index]?.shipmentId,
@@ -70,6 +72,7 @@ const useUpdateSchedule = ({
 					}),
 				},
 			});
+			setAcknowlegmentData(response?.data?.data);
 			Toast.success(`Trucked ${(truckStatus === 'truck_in') ? 'in' : 'out'} successfully`);
 			handleOnClose();
 			listAPI();
@@ -81,7 +84,6 @@ const useUpdateSchedule = ({
 	return ({
 		loading,
 		handleUpdate,
-		data,
 	});
 };
 
