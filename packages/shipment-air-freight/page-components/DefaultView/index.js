@@ -30,16 +30,41 @@ const TAB_MAPPING = {
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
+
+// todo anmol: update these according to roles
 const JOB_OPEN_ALLOWED_ROLES = [
+	// admins
 	'superadmin',
 	'admin',
-	// kam managers
-	'booking_agent_manager',
-	// so2 managers
-	'document_desk_manager',
-	'costbooking_manager',
-	'lastmile_ops_manager',
-	'so1_so2_ops',
+
+	// all possible values:
+	// 'booking_agent',
+	'service_ops1',
+	'service_ops2',
+	'service_ops3',
+	'lastmile_ops',
+	'costbooking_ops',
+	'supply_agent',
+	'sales_agent',
+	'system',
+	'ckam',
+	'user',
+	'portfolio_manager',
+	'entity_manager',
+	'service_ops2_docs',
+	'collection_desk',
+	'release_desk',
+	'origin_booking_agent',
+	'destination_booking_agent',
+	'ground_ops',
+	'ftl_ground_ops',
+	'service_ops',
+	'field_service_ops',
+	'bl_release_desk',
+	'do_release_desk',
+	'bl_collection_desk',
+	'do_collection_desk',
+	'printing_desk',
 ];
 
 function HandleRaiseContainer({
@@ -71,7 +96,7 @@ function DefaultView() {
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		getShipmentStatusCode = 0, isGettingShipment = false,
-		refetchServices = () => {},
+		refetchServices = () => {}, activeStakeholder = ' ',
 	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
@@ -81,7 +106,7 @@ function DefaultView() {
 	const [reload, setReload] = useState(false);
 	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
-	const isJobOpenAllowed = shipment_data?.stakeholder_types?.some((role) => JOB_OPEN_ALLOWED_ROLES?.includes(role));
+	const isJobOpenAllowed = JOB_OPEN_ALLOWED_ROLES.includes(activeStakeholder);
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {

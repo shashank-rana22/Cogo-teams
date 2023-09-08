@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const geo = getGeoConstants();
 
+// todo anmol: update these if required
 const useGetActiveStakeholder = () => {
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 

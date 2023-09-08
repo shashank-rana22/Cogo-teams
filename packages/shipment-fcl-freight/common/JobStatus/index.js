@@ -2,6 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+// todo anmol: update these according to roles
 const JOB_OPEN_ALLOWED_ROLES = [
 	'superadmin',
 	'admin',
