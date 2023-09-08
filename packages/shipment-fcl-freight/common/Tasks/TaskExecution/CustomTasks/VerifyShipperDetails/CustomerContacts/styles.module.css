@@ -1,0 +1,12 @@
+.main_container {
+	margin: 16px 0;
+
+	& h4 {
+		padding-left: 4px;
+	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}

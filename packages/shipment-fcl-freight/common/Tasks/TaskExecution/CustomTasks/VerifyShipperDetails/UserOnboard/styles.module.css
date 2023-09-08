@@ -1,19 +1,21 @@
+.details_form {
+	padding: 8px 0 8px 8px;
+	background-color: var(--color-secondary-4);
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+}
+
 .form_item_container {
-	margin: 6px 0;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	margin: 0 8px 8px 0;
 }
 
 .row {
 	display: flex;
 	justify-content: space-between;
-}
-
-.row > div {
-	width: 49%;
-}
-
-.pan_number {
-	width: 49%;
-	margin: 6px 0;
+	width: 100%;
 }
 
 .checkbox {
@@ -38,35 +40,8 @@
 	font-weight: 600;
 }
 
-.upload_container {
-	:global {
-		.ui_upload_filesuccess_container {
-			margin-top: 4px;
-			font-size: 12px;
-		}
-
-		.ui_upload_droparea_heading {
-			font-size: 12px;
-		}
-
-		.ui_upload_droparea_subheading {
-			font-size: 10px;
-		}
-
-		.ui_upload_droparea_icon {
-			margin-right: 12px;
-		}
-
-		.ui_upload_droparea_container {
-			flex-direction: row;
-			min-height: 0;
-			padding: 0 12px;
-			margin-bottom: 0;
-
-			svg {
-				width: 30px;
-				height: 30px;
-			}
-		}
-	}
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 8px;
 }
