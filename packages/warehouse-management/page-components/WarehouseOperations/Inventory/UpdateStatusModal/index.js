@@ -17,8 +17,8 @@ function UpdateStatusModal({
 }) {
 	const { control, formState:{ errors = {} }, setValue, handleSubmit } = useForm();
 	const {
-		loading,
-		handleUpdate,
+		loading = false,
+		handleUpdate = () => {},
 	} = useUpdateInventory({ id: item?.id, setShowUpdateStatusModal, listAPI });
 
 	useEffect(() => {

@@ -22,7 +22,11 @@ function Configure({
 	const [editZone, setEditZone] = useState({});
 	const [deleteZone, setDeleteZone] = useState({});
 
-	const { loading, data, listAPI } = useListConfiguration({ searchValue, warehouseLocationId });
+	const {
+		loading = false,
+		data = {},
+		listAPI = () => {},
+	} = useListConfiguration({ searchValue, warehouseLocationId });
 
 	const { page, setPage } = data;
 	const handlePageChange = (pageVal) => {

@@ -12,11 +12,11 @@ function Inventory({
 }) {
 	const { fields } = inventoryFields;
 	const {
-		data,
-		loading,
-		page,
-		setPage,
-		listAPI,
+		data = {},
+		loading = false,
+		page = 1,
+		setPage = () => {},
+		listAPI = () => {},
 	} = useListInventory({ searchValue, warehouseLocationId });
 	const handlePageChange = (pageVal) => {
 		setPage(pageVal);

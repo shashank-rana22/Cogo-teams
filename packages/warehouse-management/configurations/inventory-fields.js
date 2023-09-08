@@ -83,7 +83,7 @@ const inventoryFields = {
 						? '-'
 						: item?.services?.map((service, index) => (
 							<span key={service.serviceName}>
-								{startCase(service.serviceName)}
+								{startCase(service.serviceName) || '-'}
 								{index < item.services.length - DECREMENT_LENGTH_BY_ONE ? ', ' : ''}
 							</span>
 						))

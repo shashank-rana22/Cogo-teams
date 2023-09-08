@@ -11,7 +11,7 @@ const useListInventory = ({
 }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
-	const [{ data = {}, loading }, trigger] = useRequestAir(
+	const [{ data = {}, loading = true }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/warehouse-management/list-inventory',
 			method  : 'get',

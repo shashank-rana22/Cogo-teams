@@ -23,11 +23,11 @@ function Schedules({
 	const [acknowlegmentData, setAcknowlegmentData] = useState([]);
 
 	const {
-		data,
-		loading,
-		page,
-		setPage,
-		listAPI,
+		data = {},
+		loading = false,
+		page = 1,
+		setPage = () => {},
+		listAPI = () => {},
 	} = useListSchedules({ activeTab, truckStatus, searchValue, warehouseLocationId });
 
 	const handleStatusChange = ({ singleItem }) => (
