@@ -56,8 +56,9 @@ const useListOrganizationTradePartyDetails = ({ defaultParams = {}, defaultFilte
 	const apiTrigger = useCallback(async () => {
 		try {
 			const res = await trigger({});
-			setData(res.data);
+			setData(res?.data);
 		} catch (err) {
+			setData({});
 			toastApiError(err);
 		}
 	}, [trigger]);
