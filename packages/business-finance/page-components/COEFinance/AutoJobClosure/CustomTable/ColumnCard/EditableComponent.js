@@ -58,13 +58,13 @@ function EditableComponent({
 		const params = {
 			id,
 			data: {
-				entityValue,
-				selectionCriteriaOpValue,
-				selectionCriteriaFinValue,
-				serviceTypeValue,
-				tradeTypeValue,
-				level1Value,
-				level2Value,
+				entity               : entityValue,
+				selectionCriteriaOp  : selectionCriteriaOpValue,
+				selectionCriteriaFin : selectionCriteriaFinValue,
+				serviceType          : serviceTypeValue,
+				tradeType            : tradeTypeValue,
+				level1               : level1Value,
+				level2               : level2Value,
 			},
 		};
 		apiTrigger([params]);
