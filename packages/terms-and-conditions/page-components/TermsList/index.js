@@ -4,7 +4,6 @@ import { useState } from 'react';
 import EmptyState from '../../common/EmptyState/index';
 
 import styles from './style.module.css';
-// import FREIGHT_DETAILS_MAPPING from '../../utlis/freight-details-mapping';
 import TermCard from './TermCard/index';
 
 function TermList({
@@ -24,26 +23,27 @@ function TermList({
 	}
 	return (
 		<div className={styles.container}>
-			{!loading
-        && list.map((listItem) => (
-	<div key={listItem.id}>
-		<TermCard
-			EditForm={EditForm}
-			tncLevel={tncLevel}
-			setTncLevel={setTncLevel}
-			editTncModalId={editTncModalId}
-			listItem={listItem}
-			refetch={refetch}
-			handleSubmitForm={handleSubmitForm}
-			description={listItem.description}
-			showMoreTnC={showHiddenContentId === listItem.id}
-			onClickShowMoreTnC={() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))}
-			onClickUpdateTerms={() => {
-				setTncLevel('termsAndCondition'); setEditTncModalId(listItem.id);
-			}}
-		/>
-	</div>
-        ))}
+			{!loading && list.map((listItem) => (
+				<div key={listItem.id}>
+					<TermCard
+						EditForm={EditForm}
+						tncLevel={tncLevel}
+						setTncLevel={setTncLevel}
+						editTncModalId={editTncModalId}
+						listItem={listItem}
+						refetch={refetch}
+						handleSubmitForm={handleSubmitForm}
+						description={listItem.description}
+						showMoreTnC={showHiddenContentId === listItem.id}
+						onClickShowMoreTnC={
+							() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))
+}
+						onClickUpdateTerms={() => {
+							setTncLevel('termsAndCondition'); setEditTncModalId(listItem.id);
+						}}
+					/>
+				</div>
+			))}
 		</div>
 	);
 }

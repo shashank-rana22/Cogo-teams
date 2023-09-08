@@ -27,10 +27,6 @@ function AddEdit({
 	const [showModal, setShowModal] = useState(false);
 	const formRef = useRef(null);
 
-	// const onSubmitChange = () => {
-	// 	formRef.current.formSubmit();
-	// };
-
 	return (
 		<div>
 			<Button onClick={() => setShowModal(true)}>

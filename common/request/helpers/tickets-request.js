@@ -9,7 +9,6 @@ import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
-		// eslint-disable-next-line custom-eslint/date-time-format-check
 		arrayFormat: 'brackets', serializeDate: (date) => format(date, 'isoUtcDateTime'),
 	});
 	return paramsStringify;

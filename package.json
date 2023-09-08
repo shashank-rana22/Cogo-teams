@@ -35,7 +35,6 @@
     "@sentry/nextjs": "^7.54.0",
     "accept-language": "^3.0.18",
     "axios-hooks": "^4.0.0",
-    "countries.json": "link:@/data-store/constants/countries.json",
     "i18next": "^22.4.10",
     "next": "13.1.6",
     "next-i18next": "^13.2.1",

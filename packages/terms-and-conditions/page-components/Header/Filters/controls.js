@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 const getTncControls = () => [
 	{
 		name      : 'service',
