@@ -6,13 +6,10 @@ const useUpdateSageOrganizationIdMapping = () => {
 		{
 			method : 'POST',
 			url    : '/update_sage_organization_id_mapping',
-
 		},
-		{
-			manual: true,
-		},
-
+		{ manual: true },
 	);
+
 	const onSubmit = async (obj) => {
 		try {
 			await trigger({ data: obj });
@@ -21,6 +18,7 @@ const useUpdateSageOrganizationIdMapping = () => {
 			Toast.error('Error occured');
 		}
 	};
+
 	return { loading, onSubmit };
 };
 export default useUpdateSageOrganizationIdMapping;

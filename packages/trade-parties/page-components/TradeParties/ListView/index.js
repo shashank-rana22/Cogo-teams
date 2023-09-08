@@ -12,14 +12,14 @@ function ListView({
 	typeOfSearch = '',
 	globalSearch = '',
 	filterParams = {},
-	setFilterParams = (() => {}),
-
+	setFilterParams = () => {},
 }) {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(globalSearch);
 	}, [globalSearch, debounceQuery]);
+
 	const setSearchFilters = () => {
 		if (!globalSearch) return null;
 
@@ -37,13 +37,14 @@ function ListView({
 			sage_organization_id: query,
 		};
 	};
+
 	const searchParams = setSearchFilters();
 	const { data, loading } = useListOrganizationTradePartyDetails({ filterParams, searchParams });
 
 	return (
 		<div>
-
 			<ListPagination data={data} filterParams={filterParams} setFilterParams={setFilterParams} />
+
 			<Table columns={tableColumns} data={data?.list || []} className={styles.table} loading={loading} />
 
 			<ListPagination data={data} filterParams={filterParams} setFilterParams={setFilterParams} />

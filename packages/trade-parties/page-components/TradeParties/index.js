@@ -30,7 +30,6 @@ function TradeParties() {
 				filterParams={filterParams}
 				setFilterParams={setFilterParams}
 			/>
-
 		</div>
 	);
 }

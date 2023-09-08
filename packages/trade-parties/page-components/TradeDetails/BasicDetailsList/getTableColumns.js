@@ -92,7 +92,6 @@ const getTableColumns = ({
 				</Button>
 			),
 		},
-
 	];
 
 	return tableColumns;

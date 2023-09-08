@@ -21,7 +21,6 @@ const tableColumns = [
 	{
 		Header   : 'BUSINESS NAME',
 		accessor : (item) => (
-
 			<Popover placement="bottom" trigger="mouseenter" caret={false} render={item?.legal_business_name}>
 				<div className={styles.heading}>{item?.legal_business_name}</div>
 			</Popover>

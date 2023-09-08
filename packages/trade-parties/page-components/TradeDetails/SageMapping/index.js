@@ -13,7 +13,8 @@ function SageMapping({ tradePartyDetails = {} }) {
 		setShowDeactivate = () => {},
 		refetch = () => {},
 	} = useSageMapping({ tradePartyDetails: tradePartyDetails.tradePartyDetails });
-	if (!data.length) {
+
+	if (!data?.length) {
 		return null;
 	}
 

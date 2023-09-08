@@ -10,11 +10,13 @@ import BasicDetailsList from './BasicDetailsList';
 import SageMapping from './SageMapping';
 
 const TWO = 2;
+
 function TradeDetails() {
 	const router = useRouter();
 
-	const id = router.asPath.split('/').pop();
+	const id = router.asPath?.split('/')?.pop();
 	const trade_partner_id = router.asPath.split('/').reverse()[TWO];
+
 	const { loading, data } = useGetOrganizationTradePartyDetail({ id });
 
 	if (loading) return <Loader themeType="primary" />;

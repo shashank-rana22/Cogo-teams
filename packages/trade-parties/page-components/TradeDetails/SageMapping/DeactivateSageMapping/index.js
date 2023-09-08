@@ -13,7 +13,9 @@ function DeactivateSageMapping({
 
 	const updateMapping = () => {
 		const data = { id: showDeactivate, status: 'inactive' };
+
 		onSubmit(data);
+
 		setShowDeactivate(null);
 		refetch();
 	};
