@@ -22,7 +22,7 @@ function AutoJobClosure() {
 		refetch = () => {}, getNextPage = () => {},
 	}	= useAutoJobs({ setConfigButton, setOpenConfig });
 
-	const { page = 1, pageSize = 10, totalRecords = 0 } = data || {};
+	const { pageNo = 1, pageSize = 10, totalRecords = 0 } = data || {};
 	const { list = [] } = data || {};
 
 	const addId = () => {
@@ -157,7 +157,7 @@ function AutoJobClosure() {
 					{ (loading || isEmpty(list)) ? null : (
 						<Pagination
 							type="number"
-							currentPage={page}
+							currentPage={pageNo}
 							totalItems={Number(totalRecords)}
 							pageSize={pageSize}
 							onPageChange={(val) => getNextPage({ page: val })}

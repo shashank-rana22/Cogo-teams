@@ -9,7 +9,6 @@ const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 		pageSize : 10,
 		page     : 1,
 	});
-
 	const { page:newPage } = params || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -51,7 +50,6 @@ const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 		setConfigButton(true);
 		setOpenConfig([]);
 	};
-
 	return {
 		data,
 		loading,
