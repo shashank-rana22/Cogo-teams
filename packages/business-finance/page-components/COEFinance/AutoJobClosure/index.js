@@ -18,11 +18,11 @@ function AutoJobClosure() {
 	const [saveObj, setSaveObj] = useState({});
 
 	const {
-		data, loading, searchValue, onQueryChange,
-		refetch, getNextPage, paginationData,
+		data, loading = false, searchValue = '', onQueryChange = () => {},
+		refetch = () => {}, getNextPage = () => {},
 	}	= useAutoJobs({ setConfigButton, setOpenConfig });
 
-	const { page, pageSize, totalRecords } = paginationData;
+	const { page = 1, pageSize = 10, totalRecords = 0 } = data || {};
 	const { list = [] } = data || {};
 
 	const addId = () => {
@@ -54,20 +54,20 @@ function AutoJobClosure() {
 		setOpenConfig([]);
 	};
 
-	const { apiTrigger, loading:loadingUpdate } = useUpdateJobClosure({
-		refetch,
-		setSaveObj,
-		setOpenConfig,
-		setConfigButton,
-		listOfId: Object.keys(saveObj),
+	const { apiTrigger = () => {}, loading:loadingUpdate = false } = useUpdateJobClosure({
+		refetch: () => {
+			setConfigButton(true);
+			setSaveObj({});
+			setOpenConfig((prev) => (prev.filter((columnId) => (!Object.keys(saveObj).includes(columnId)))));
+			// console.log()
+			refetch();
+		},
+
 	});
 
 	const saveAllClicked = () => {
-		const TEMP_ARR = [];
 		const keysarr = Object.keys(saveObj);
-		keysarr.forEach((key) => {
-			TEMP_ARR.push({ id: key, data: saveObj[key] });
-		});
+		const TEMP_ARR = keysarr.map((key) => ({ id: key, data: saveObj[key] }));
 
 		apiTrigger(TEMP_ARR);
 	};
@@ -85,7 +85,7 @@ function AutoJobClosure() {
 					value={searchValue}
 					onChange={(value) => onQueryChange(value)}
 					suffix={(
-						<div style={{ margin: '4px', display: 'flex' }}>
+						<div className={styles.searchIcon}>
 							<IcMSearchlight height={15} width={15} />
 						</div>
 					)}
@@ -97,7 +97,7 @@ function AutoJobClosure() {
 							size="md"
 							themeType="secondary"
 							className={styles.topContainerComponents}
-							onClick={() => addId()}
+							onClick={addId}
 						>
 							Configure
 						</Button>
@@ -119,7 +119,7 @@ function AutoJobClosure() {
 								size="md"
 								themeType="secondary"
 								className={styles.topContainerComponents}
-								onClick={() => cancelledClick()}
+								onClick={cancelledClick}
 								disabled={loadingUpdate}
 							>
 								Cancel Changes
@@ -129,7 +129,7 @@ function AutoJobClosure() {
 							size="md"
 							themeType="primary"
 							className={styles.topContainerComponents}
-							onClick={() => saveAllClicked()}
+							onClick={saveAllClicked}
 							disabled={loadingUpdate}
 						>
 							Save All
@@ -140,8 +140,8 @@ function AutoJobClosure() {
 			</div>
 
 			<div className={styles.table}>
-				{ !loading
-					&& (
+				{ loading ? null
+					: (
 						<CustomTable
 							itemData={data}
 							config={AUTO_JOB_CLOSURE_CONFIG}
@@ -154,7 +154,7 @@ function AutoJobClosure() {
 						/>
 					)}
 				<div className={styles.pagination}>
-					{ !(loading || isEmpty(list)) && (
+					{ (loading || isEmpty(list)) ? null : (
 						<Pagination
 							type="number"
 							currentPage={page}
@@ -167,7 +167,8 @@ function AutoJobClosure() {
 			</div>
 
 			{openModalCreate
-				&& <CreateModal openModal={openModalCreate} setOpenModal={setOpenModalCreate} refetch={refetch} /> }
+				? (<CreateModal openModal={openModalCreate} setOpenModal={setOpenModalCreate} refetch={refetch} />)
+				: null}
 
 		</div>
 	);

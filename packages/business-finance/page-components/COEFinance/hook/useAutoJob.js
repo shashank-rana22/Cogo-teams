@@ -52,9 +52,6 @@ const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 		setOpenConfig([]);
 	};
 
-	const { pageSize, totalRecords } = data || {};
-	const paginationData = { page: newPage, pageSize, totalRecords };
-
 	return {
 		data,
 		loading,
@@ -62,7 +59,6 @@ const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 		onQueryChange,
 		searchValue,
 		refetch,
-		paginationData,
 		getNextPage,
 	};
 };

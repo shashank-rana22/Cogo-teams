@@ -3,8 +3,9 @@ import { SelectController, InputController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import useUpdateJobClosure from '../../../hook/useUpdateJobClosure';
-import selectionCriteriaOptions from '../../formOptions/selectionCriteriaOptions';
-import serviceTypeOptions from '../../formOptions/serviceTypeOptions';
+import selectionCriteriaOptions from '../../formOptions/selectionCriteriaOptions.json';
+import serviceTypeOptions from '../../formOptions/serviceTypeOptions.json';
+import TRADE_TYPE_OPTIONS from '../../formOptions/tradeTypeOptions.json';
 
 import styles from './styles.module.css';
 
@@ -24,8 +25,14 @@ function EditableComponent({
 	refetch = {},
 }) {
 	const {
-		id = '', entity = '', selectionCriteriaOp = '', selectionCriteriaFin = '',
-		serviceType = '', tradeType = '', oprClosureDays: level1 = '', finClosureDays: level2 = '',
+		id = '',
+		entity = '',
+		selectionCriteriaOp = '',
+		selectionCriteriaFin = '',
+		serviceType = '',
+		tradeType = '',
+		oprClosureDays: level1 = '',
+		finClosureDays: level2 = '',
 	} = item || {};
 	const { control, watch, handleSubmit, setValue } = useForm({
 		defaultValues: {
@@ -43,17 +50,22 @@ function EditableComponent({
 	const stringifiedData = JSON.stringify(afterEditData);
 
 	const { apiTrigger = () => {}, loading: updateLoading = false } = useUpdateJobClosure({
-		refetch,
-		setOpenConfig,
-		listOfId: [id],
+		refetch: () => {
+			refetch();
+			setOpenConfig((prev) => (prev.filter((columnId) => (![id].includes(columnId)))));
+		},
+
 	});
 
 	const onSubmit = (value) => {
 		const {
-			entity: entityValue = '', selectionCriteriaOp :selectionCriteriaOpValue = '',
+			entity: entityValue = '',
+			selectionCriteriaOp: selectionCriteriaOpValue = '',
 			selectionCriteriaFin: selectionCriteriaFinValue = '',
-			serviceType:serviceTypeValue = '', tradeType:tradeTypeValue = '',
-			level1:level1Value = '', level2:level2Value = '',
+			serviceType: serviceTypeValue = '',
+			tradeType: tradeTypeValue = '',
+			level1: level1Value = '',
+			level2: level2Value = '',
 		} = value || {};
 		const params = {
 			id,
@@ -88,7 +100,8 @@ function EditableComponent({
 				name="serviceType"
 				options={serviceTypeOptions}
 				onChange={() => {
-					setValue('selectionCriteriaOp', ''); setValue('selectionCriteriaFin', '');
+					setValue('selectionCriteriaOp', '');
+					setValue('selectionCriteriaFin', '');
 				}}
 				rules={{ required: true }}
 			/>
@@ -99,12 +112,8 @@ function EditableComponent({
 				className={cl`${styles.selectController} ${styles.font12}`}
 				control={control}
 				name="tradeType"
-				options={[
-					{ label: 'IMPORT', value: 'IMPORT' },
-					{ label: 'EXPORT', value: 'EXPORT' },
-					{ label: 'LOCAL', value: 'LOCAL' },
-					{ label: 'DOMESTIC', value: 'DOMESTIC' },
-				]}
+				Placeholder={tradeType}
+				options={TRADE_TYPE_OPTIONS}
 				rules={{ required: true }}
 			/>
 		),
@@ -114,7 +123,7 @@ function EditableComponent({
 				className={cl`${styles.selectionCriteriaController} ${styles.font12}`}
 				control={control}
 				name="selectionCriteriaOp"
-				options={selectionCriteriaOptions(watch('serviceType'))}
+				options={selectionCriteriaOptions[watch('serviceType')]}
 				rules={{ required: true }}
 			/>
 		),
@@ -133,7 +142,7 @@ function EditableComponent({
 				className={cl`${styles.selectionCriteriaController} ${styles.font12}`}
 				control={control}
 				name="selectionCriteriaFin"
-				options={selectionCriteriaOptions(watch('serviceType'))}
+				options={selectionCriteriaOptions[watch('serviceType')]}
 				rules={{ required: true }}
 			/>
 		),

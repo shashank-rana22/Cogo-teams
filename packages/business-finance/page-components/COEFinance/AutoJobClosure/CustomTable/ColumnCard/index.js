@@ -15,7 +15,7 @@ function ColumnCard({
 	loading = false,
 	setSaveObj = () => {},
 }) {
-	const { fields } = config || {};
+	const { fields = {} } = config || {};
 	const [deleteModal, setDeleteModal] = useState(false);
 
 	const openDeleteModal = () => {
@@ -55,14 +55,14 @@ function ColumnCard({
 					/>
 				)}
 			</div>
-			{deleteModal && (
+			{deleteModal ? (
 				<DeleteModal
 					deleteModal={deleteModal}
 					setDeleteModal={setDeleteModal}
 					refetch={refetch}
 					id={item?.id}
 				/>
-			)}
+			) : null }
 		</div>
 	);
 }

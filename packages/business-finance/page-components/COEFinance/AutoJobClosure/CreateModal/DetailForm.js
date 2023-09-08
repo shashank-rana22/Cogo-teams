@@ -2,8 +2,9 @@ import { SelectController, InputController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import selectionCriteriaOptions from '../formOptions/selectionCriteriaOptions';
-import serviceTypeOptions from '../formOptions/serviceTypeOptions';
+import selectionCriteriaOptions from '../formOptions/selectionCriteriaOptions.json';
+import serviceTypeOptions from '../formOptions/serviceTypeOptions.json';
+import TRADE_TYPE_OPTIONS from '../formOptions/tradeTypeOptions.json';
 import styles from '../styles.module.css';
 
 function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = () => {} }) {
@@ -50,11 +51,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = ()
 				<SelectController
 					control={control}
 					name="tradeType"
-					options={[
-						{ label: 'IMPORT', value: 'import' },
-						{ label: 'EXPORT', value: 'export' },
-						{ label: 'LOCAL', value: 'local' },
-						{ label: 'DOMESTIC', value: 'domestic' }]}
+					options={TRADE_TYPE_OPTIONS}
 					placeholder="Enter Trade Type"
 					rules={{ required: { value: true, message: '*Trade type is required' } }}
 				/>
@@ -66,7 +63,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = ()
 				<SelectController
 					control={control}
 					name="selectionCriteriaOp"
-					options={selectionCriteriaOptions(watch('serviceType'))}
+					options={selectionCriteriaOptions[watch('serviceType')]}
 					placeholder="Enter Selection Criteria"
 					rules={{ required: { value: true, message: '*Selection criteria 1 is required' } }}
 				/>
@@ -78,7 +75,7 @@ function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = ()
 				<SelectController
 					control={control}
 					name="selectionCriteriaFin"
-					options={selectionCriteriaOptions(watch('serviceType'))}
+					options={selectionCriteriaOptions[watch('serviceType')]}
 					placeholder="Enter Selection Criteria"
 					rules={{ required: { value: true, message: '*Selection criteria 2 is required' } }}
 				/>

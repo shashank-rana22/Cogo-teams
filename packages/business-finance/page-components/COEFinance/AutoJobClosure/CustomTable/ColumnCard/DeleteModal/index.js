@@ -6,13 +6,18 @@ import useDeleteJobClosure from '../../../../hook/useDeleteJobClosure';
 import styles from '../styles.module.css';
 
 function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch = () => {}, id = '' }) {
-	const { apiTrigger, loading } = useDeleteJobClosure({ refetch, setDeleteModal });
+	const { apiTrigger, loading } = useDeleteJobClosure({
+		refetch: () => {
+			refetch();
+			setDeleteModal(false);
+		},
+	});
 
 	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user } = userData || {};
-	const { id:userId } = user || {};
+
+	const { user: { id: userId } = {} } = userData || {};
 
 	const confirmDeleteClicked = () => {
 		const params = {
@@ -23,8 +28,8 @@ function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch =
 	};
 	return (
 		<Modal show={deleteModal} onClose={() => setDeleteModal(false)} placement="center" size="md">
-			<Modal.Header />
-			<Modal.Body style={{ maxHeight: '200px', minHeight: '200px' }} className={styles.deleteBody}>
+			<Modal.Header title="Delete" />
+			<Modal.Body style={{ height: '200px' }} className={styles.deleteBody}>
 				<div className={styles.deleteText}>Are you sure you want to delete.</div>
 			</Modal.Body>
 			<Modal.Footer>

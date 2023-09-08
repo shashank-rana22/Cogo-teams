@@ -24,9 +24,9 @@ function Header({ config = {} }) {
 						width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
 					}}
 				>
-					{field.label}
+					{field?.label}
 					{'  '}
-					{ (islevel(field.label)
+					{ (islevel(field?.label)
 						? <IcMInfo className={styles.infoIcon} height={16} width={16} /> : null)}
 				</div>
 			))}

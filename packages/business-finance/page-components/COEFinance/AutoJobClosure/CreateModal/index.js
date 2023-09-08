@@ -14,10 +14,14 @@ function CreateModal({ openModal = false, setOpenModal = () => {}, refetch = () 
 	}));
 	const { control, watch, handleSubmit, formState: { errors = {} }, setValue } = useForm();
 
-	const { apiTrigger = () => {}, loading = false } = useCreateJobClosure({ refetch, setOpenModal });
+	const { apiTrigger = () => {}, loading = false } = useCreateJobClosure({
+		refetch: () => {
+			refetch();
+			setOpenModal(false);
+		},
+	});
 
-	const { user } = userData || {};
-	const { id:userId } = user || {};
+	const { user: { id: userId } = {} } = userData || {};
 
 	const onSubmit = (value) => {
 		const {

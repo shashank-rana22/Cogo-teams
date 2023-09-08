@@ -10,10 +10,7 @@
 	font-size: 12px;
 
 	:global {
-		& .ui_select_input_control {
-			font-size: 12px !important;
-		}
-
+		& .ui_select_input_control,
 		& .ui_input_control {
 			font-size: 12px !important;
 		}
@@ -77,10 +74,7 @@
 	}
 }
 
-.inputBox {
-	width: 90%;
-}
-
+.inputBox,
 .selectionCriteriaController {
 	width: 90%;
 }

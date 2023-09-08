@@ -7,17 +7,13 @@ import toastApiError from '../../commons/toastApiError.ts';
 const useUpdateJobClosure = (
 	{
 		refetch = () => {},
-		setSaveObj = () => {},
-		setOpenConfig = () => {},
-		listOfId = [],
-		setConfigButton = () => {},
 	},
 ) => {
 	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user } = userData || {};
-	const { id:userId } = user || {};
+
+	const { user: { id: userId } = {} } = userData || {};
 
 	const [{ loading }, trigger] = useRequestBf({
 		url    : '/common/job/edit-job-closure-rule',
@@ -32,10 +28,7 @@ const useUpdateJobClosure = (
 					performedBy : userId,
 				},
 			});
-			Toast.success('success');
-			setOpenConfig((prev) => (prev.filter((columnId) => (!listOfId.includes(columnId)))));
-			setConfigButton(true);
-			setSaveObj({});
+			Toast.success('Success');
 			refetch();
 		} catch (err) {
 			toastApiError(err);

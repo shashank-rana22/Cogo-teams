@@ -82,7 +82,7 @@ function FormComponent({
 
 	return (
 		<div className={styles.flex}>
-			{fields.map((field) => (
+			{fields?.map((field) => (
 				<div
 					className={styles.col}
 					key={field.key}
