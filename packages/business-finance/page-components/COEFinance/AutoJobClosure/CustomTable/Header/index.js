@@ -12,10 +12,7 @@ const TOTAL_SPAN = 12;
 
 function Header({ config = {} }) {
 	const { fields } = config || {};
-	const islevel = (heading = '') => {
-		if (heading === 'Level 1' || heading === 'Level 2') return true;
-		return false;
-	};
+	const islevel = (heading = '') => (heading === 'Level 1' || heading === 'Level 2');
 	return (
 		<section className={cl`${styles.header} ${styles.border}`}>
 			{(fields || []).map((field) => (
