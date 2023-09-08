@@ -1,8 +1,9 @@
 import { cl, Input, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMTick, IcMLineundo, IcMInformation } from '@cogoport/icons-react';
 import React from 'react';
+
+import { getFormatAmount } from '../../../../../utils/getFormatAmount';
 
 import styles from './styles.module.css';
 
@@ -11,7 +12,10 @@ const LEAST_VALUE = 0;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
-function errorMsg({ new_item = {}, types = '', inputvalue = 0, originalAllocation = 0, fieldType = '' }) {
+function errorMsg({
+	new_item = {}, types = '', inputvalue = 0,
+	originalAllocation = 0, fieldType = '', originalTDS = 0,
+}) {
 	if (fieldType === 'allocation') {
 		const {
 			currency = GLOBAL_CONSTANTS.currency_code.INR,
@@ -35,15 +39,7 @@ function errorMsg({ new_item = {}, types = '', inputvalue = 0, originalAllocatio
 				? 'Allocation cannot be greater than Balance Amount + Settled Amount'
 				: 'Allocation cannot be greater than Balance Amount';
 		} else {
-			errorMessege =			formatAmount({
-				amount  : originalAllocation,
-				currency,
-				options : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
-					maximumFractionDigits : 2,
-				},
-			}) || '';
+			errorMessege =	getFormatAmount(originalAllocation, currency) || '';
 		}
 
 		const error = { isError, errorMessege };
@@ -52,7 +48,6 @@ function errorMsg({ new_item = {}, types = '', inputvalue = 0, originalAllocatio
 	}
 
 	const {
-		tds = 0,
 		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		documentAmount = 0,
 		settledTds = 0,
@@ -69,24 +64,20 @@ function errorMsg({ new_item = {}, types = '', inputvalue = 0, originalAllocatio
 	} else if (maxValue) {
 		errorMessege = 'TDS plus Settled TDS cannot be greater than 10 % of  Doc. Amount';
 	} else {
-		errorMessege =				formatAmount({
-			amount  : tds,
-			currency,
-			options : {
-				style                 : 'currency',
-				currencyDisplay       : 'code',
-				maximumFractionDigits : 0,
-			},
-		}) || '';
+		errorMessege =	getFormatAmount(originalTDS, currency) || '';
 	}
 	const error = { isError, errorMessege };
 	return error;
 }
 
-function RenderContent({ isError = false, errorMessege = '' }) {
+function RenderContent({ isError = false, errorMessege = '', fieldType = '' }) {
 	return (
 		<div>
-			{!isError && <div className={styles.header_msg}>Actual Allocation Value</div>}
+			{
+			(!isError && fieldType === 'allocation')
+				? <div className={styles.header_msg}>Actual Allocation Value</div>
+				: <div className={styles.header_msg}>Actual Tds Value</div>
+		}
 			<div className={cl`${styles.msg} ${isError ? styles.error : ''}`}>{errorMessege}</div>
 		</div>
 	);
@@ -107,7 +98,7 @@ function EditFields({
 }) {
 	const new_item = newItem || {};
 
-	const error = errorMsg({ new_item, types, inputvalue, originalAllocation, fieldType });
+	const error = errorMsg({ new_item, types, inputvalue, originalAllocation, fieldType, originalTDS });
 
 	const { isError = false, errorMessege = '' } = error || {};
 
@@ -124,7 +115,7 @@ function EditFields({
 			<Tooltip
 				animation="scale"
 				placement="top"
-				content={<RenderContent isError={isError} errorMessege={errorMessege} />}
+				content={<RenderContent isError={isError} errorMessege={errorMessege} fieldType={fieldType} />}
 				maxWidth="none"
 			>
 				<ButtonIcon

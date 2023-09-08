@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
+
+import { getFormatDates } from '../utils/getFormatDate';
 
 const usePaymentsSettlementCheck = ({ selectedData = [], date = '' }) => {
 	const { profile } = useSelector((state) => state || {});
@@ -30,13 +30,7 @@ const usePaymentsSettlementCheck = ({ selectedData = [], date = '' }) => {
 					stackDetails   : selectedData,
 					createdBy      : profile?.user?.id,
 					settlementDate : (date
-						&& formatDate({
-							date,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						})) || undefined,
+						&& getFormatDates(date)) || undefined,
 				},
 			});
 			Toast.success('Dry Run Successful');

@@ -2,7 +2,7 @@ import { Input, Select } from '@cogoport/components';
 import React from 'react';
 
 import { DOC_TYPE_OPTIONS } from '../../../configurations/ap-ar-settlement/docType-options';
-import { STATUS_OPTIONS } from '../../../configurations/ap-ar-settlement/status-options';
+import { STATUS_OPTIONS1, STATUS_OPTIONS2 } from '../../../configurations/ap-ar-settlement/status-options';
 
 import styles from './styles.module.css';
 
@@ -25,27 +25,45 @@ export function SearchFilters({
 						placeholder="Document Type"
 						options={DOC_TYPE_OPTIONS}
 						size="sm"
-						style={{ width: '250px', marginTop: '16px', marginBottom: '16px' }}
+						className={styles.common}
 						isClearable
 						disabled={loading}
 					/>
 				</div>
 
-				{filters?.docType
-				&& (
-					<div style={{ marginLeft: '20px' }}>
-						<Select
-							value={filters?.status}
-							onChange={(e) => handleFilterChange('status', e)}
-							placeholder="Status"
-							options={STATUS_OPTIONS}
-							size="sm"
-							style={{ width: '250px', marginTop: '16px', marginBottom: '16px' }}
-							isClearable
-							disabled={loading}
-						/>
-					</div>
-				)}
+				{
+				(filters?.docType && filters?.docType !== 'TDS')
+
+				&& ((filters?.docType === 'PAYMENT' || filters?.docType === 'CREDIT_NOTE')
+					? (
+						<div style={{ marginLeft: '20px' }}>
+							<Select
+								value={filters?.status}
+								onChange={(e) => handleFilterChange('status', e)}
+								placeholder="Status"
+								options={STATUS_OPTIONS1}
+								size="sm"
+								className={styles.common}
+								isClearable
+								disabled={loading}
+							/>
+						</div>
+					) : (
+						<div style={{ marginLeft: '20px' }}>
+							<Select
+								value={filters?.status}
+								onChange={(e) => handleFilterChange('status', e)}
+								placeholder="Status"
+								options={STATUS_OPTIONS2}
+								size="sm"
+								className={styles.common}
+								isClearable
+								disabled={loading}
+							/>
+						</div>
+					))
+
+			}
 			</div>
 
 			<div className={styles.inputwidth}>

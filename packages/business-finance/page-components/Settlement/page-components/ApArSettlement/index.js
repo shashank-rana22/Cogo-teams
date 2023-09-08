@@ -44,10 +44,9 @@ function ApArSettlement() {
 	const [matchModalShow, setMatchModalShow] = useState(false);
 
 	const {
-		data, loading, refetch,
-		balanceRefetch, accountData, accountLoading,
-		submitSettleMatch,
-		settleLoading,
+		data = [], loading = false, accountData = [], accountLoading = false,
+		submitSettleMatch = () => {},
+		settleLoading = false,
 	} = useGetDocumentList({
 		filters,
 		sorting,
@@ -91,15 +90,8 @@ function ApArSettlement() {
 	}
 
 	useEffect(() => {
-		refetch();
-		balanceRefetch();
-	}, [balanceRefetch, refetch]);
-	useEffect(() => {
-		refetch();
-	}, [refetch]);
-	useEffect(() => {
 		setSelectedData([]);
-	}, [filters?.tradeParty, filters.entityCode]);
+	}, [filters?.tradeParty, filters?.entityCode]);
 
 	const pageCheckedRowsStringfy = JSON.stringify(pageCheckedRows);
 	useEffect(() => {

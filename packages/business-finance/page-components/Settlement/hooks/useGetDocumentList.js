@@ -40,7 +40,7 @@ const useGetDocumentList = ({
 		{ manual: true },
 	);
 
-	const { query, debounceQuery } = useDebounceQuery();
+	const { query = '', debounceQuery = () => {} } = useDebounceQuery();
 	const {
 		search = '', status = '', docType = '', accMode = '', date = {}, tradeParty = '',
 		entityCode, page = '1', pageLimit = 10,
@@ -60,7 +60,7 @@ const useGetDocumentList = ({
 							endDate               : (endDate && getFormatDates(endDate)) || undefined,
 							orgId                 : tradeParty,
 							accModes              : accMode || undefined,
-							query                 : query || undefined,
+							// query                 : query || undefined,
 							docType               : undefined,
 							documentPaymentStatus : undefined,
 							entityCode,
@@ -73,7 +73,7 @@ const useGetDocumentList = ({
 				toastApiError(error);
 			}
 		})();
-	}, [accMode, balanceTrigger, endDate, entityCode, page, pageLimit, query, startDate, tradeParty]);
+	}, [accMode, balanceTrigger, endDate, entityCode, page, pageLimit, startDate, tradeParty]);
 	const refetch = useCallback(() => {
 		(async () => {
 			try {
@@ -129,6 +129,12 @@ const useGetDocumentList = ({
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
+	useEffect(() => {
+		balanceRefetch();
+	}, [balanceRefetch]);
+	useEffect(() => {
+		refetch();
+	}, [refetch, query]);
 	return {
 		data,
 		loading,

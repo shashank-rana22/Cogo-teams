@@ -26,7 +26,7 @@ const KEY_ALLOCATION = 'allocation';
 const ZERO_BALANCE = 0;
 const EXC_RATE_FIXED_LENGTH = 2;
 
-const onClickCopy = (documentValue) => {
+const onClickCopy = (documentValue = '') => {
 	copyToClipboard(documentValue, 'Document Value');
 };
 
@@ -56,19 +56,19 @@ export default function CardItem({
 	const [editedAllocation, setEditedAllocation] = useState(cardData.allocationAmount);
 	const [isEdnew_itmode, setIsEdnew_itmode] = useState(false);
 	const [isTdsEdnew_itmode, setIsTdsEdnew_itmode] = useState(false);
-	const handleDeleteClick = (idToDelete) => {
-		const UPDATED_SELECTED_DATA = selectedData?.filter((item) => item.id !== idToDelete);
+	const handleDeleteClick = (idToDelete = '') => {
+		const UPDATED_SELECTED_DATA = selectedData?.filter((item) => item?.id !== idToDelete);
 		setIsDelete(true);
 		setSelectedData(UPDATED_SELECTED_DATA);
 		setCanSettle(false);
 	};
 	const handleEditAllocation = () => {
-		const NEW_ALLOCATION = parseFloat(cardData.allocationAmount);
+		const NEW_ALLOCATION = parseFloat(cardData?.allocationAmount);
 		const NEW_BALANCE_AFTER_ALLOCATION = parseFloat(
-			+balanceAmount - parseFloat(cardData.allocationAmount),
+			+balanceAmount - parseFloat(cardData?.allocationAmount),
 		);
 		if (NEW_ALLOCATION >= ZERO_BALANCE && NEW_ALLOCATION <= balanceAmount) {
-			setEditedAllocation(cardData.allocationAmount);
+			setEditedAllocation(cardData?.allocationAmount);
 			cardData.balanceAfterAllocation = NEW_BALANCE_AFTER_ALLOCATION;
 		}
 	};
@@ -76,24 +76,22 @@ export default function CardItem({
 		const TDS_DIFFERENCE = parseFloat(+cardData.tds - +prevTDS);
 		cardData.balanceAmount -= +TDS_DIFFERENCE;
 		cardData.allocationAmount -= +TDS_DIFFERENCE;
-		setEditedAllocation(cardData.allocationAmount);
-		setNewTDS(cardData.tds);
-		setPrevTDS(cardData.tds);
+		setEditedAllocation(cardData?.allocationAmount);
+		setNewTDS(cardData?.tds);
+		setPrevTDS(cardData?.tds);
 	};
 	useEffect(() => {
-		setNewTDS(cardData.tds);
-		setPrevTDS(cardData.tds);
-		setEditedAllocation(cardData.allocationAmount);
-		const TOTAL = updatedData.reduce((sum, item) => +sum + +item.balanceAmount
+		setNewTDS(cardData?.tds);
+		setPrevTDS(cardData?.tds);
+		setEditedAllocation(cardData?.allocationAmount);
+		const TOTAL = updatedData?.reduce((sum, item) => +sum + +item.balanceAmount
 		* +item.exchangeRate * item.signFlag, INITIAL_BAL);
 		setUpdateBal(TOTAL);
-	}, [cardData.tds, cardData.allocationAmount, setUpdateBal, updatedData]);
-	useEffect(() => {
-	}, [selectedData]);
+	}, [cardData?.tds, cardData?.allocationAmount, setUpdateBal, updatedData]);
 	return (
 		<div className={styles.row}>
-			<div className={styles.card} style={{ '--colortype': STATUS[cardData.status] }}>
-				<div className={styles.ribbon}>{cardData.status}</div>
+			<div className={styles.card} style={{ '--colortype': STATUS[cardData?.status || ''] }}>
+				<div className={styles.ribbon}>{cardData?.status}</div>
 
 				<div className={cl`${styles.icon_div} ${styles.flex}`}>
 					<IcMDrag
@@ -111,7 +109,7 @@ export default function CardItem({
 								<IcMCopy
 									width={18}
 									height={18}
-									onClick={() => onClickCopy(cardData?.documentValue)}
+									onClick={() => onClickCopy(cardData?.documentValue || '')}
 									className={styles.copy_icon}
 								/>
 							</div>
@@ -150,7 +148,7 @@ export default function CardItem({
 						)
 						:					(
 							<div className={styles.flex}>
-								{getFormatAmount(cardData?.tds, currency)}
+								{getFormatAmount(cardData?.tds || '', currency)}
 								<IcMEdit
 									height={14}
 									width={14}
@@ -207,7 +205,7 @@ export default function CardItem({
 				<IcMDelete
 					height={16}
 					width={16}
-					onClick={() => handleDeleteClick(cardData?.id)}
+					onClick={() => handleDeleteClick(cardData?.id || '')}
 					fill="#ED3726"
 					className={styles.icon}
 				/>

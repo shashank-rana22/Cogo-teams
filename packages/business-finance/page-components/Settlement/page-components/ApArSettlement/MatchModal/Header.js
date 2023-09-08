@@ -1,4 +1,4 @@
-import { Button, Datepicker, ButtonIcon } from '@cogoport/components';
+import { Button, Datepicker, ButtonIcon, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
 import React from 'react';
@@ -59,14 +59,17 @@ function Header(
 
 	return (
 		<>
-			<div className={styles.header}>
+			<div className={cl`${styles.header} ${styles.supheader}`}>
 				<span className={styles.supheader}>MATCHING</span>
 				{' '}
-				<span className={styles.subheader}>( Drag and drop to set the matching hierarchy )</span>
+				<span className={cl`${styles.subheader} ${styles.supheader}`}>
+					( Drag and drop to set the matching hierarchy )
+
+				</span>
 			</div>
 			<br />
 
-			<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+			<div className={styles.balanceStyle}>
 				<div style={{ display: 'flex', flexDirection: 'column', fontSize: '16px' }}>
 					Matching Balance
 					<p className={styles.paragraph}>
@@ -93,7 +96,6 @@ function Header(
 						className={styles.btn}
 						onClick={() => { handleSetTdsZero(updatedData, setUpdatedData); }}
 						themeType="secondary"
-						disabled={dryRun}
 					>
 						Set TDS Zero
 					</Button>
@@ -122,7 +124,6 @@ function Header(
 						className={styles.btn}
 						themeType="secondary"
 						onClick={() => setShowJV(true)}
-						disabled={dryRun}
 					>
 						CREATE JV
 					</Button>
