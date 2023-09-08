@@ -10,6 +10,7 @@ function getModeWiseButtons(props) {
 		onCreate = () => {},
 		createLoading = false,
 		createDisabled = true,
+		t = () => {},
 	} = props;
 
 	const MODE_BASIS_BUTTON_MAPPING = {
@@ -23,7 +24,7 @@ function getModeWiseButtons(props) {
 					onClick={() => onCreate({ distribute_equally: true })}
 					loading={createLoading}
 				>
-					Equally Distribute & Send For Verification
+					{t('allocation:distribute_send_verification')}
 				</Button>
 
 				<Button
@@ -34,7 +35,7 @@ function getModeWiseButtons(props) {
 					loading={createLoading}
 					disabled={createDisabled}
 				>
-					Create Objective & Send For Verification
+					{t('allocation:objective_send_verification')}
 				</Button>
 			</>
 		),
@@ -48,7 +49,7 @@ function getModeWiseButtons(props) {
 					onClick={() => onCreate({ distribute_equally: true })}
 					loading={createLoading}
 				>
-					Duplicate, Equally Distribute & Send For Verification
+					{t('allocation:duplicate_equally_send_verification')}
 				</Button>
 
 				<Button
@@ -59,7 +60,7 @@ function getModeWiseButtons(props) {
 					disabled={createDisabled}
 					onClick={() => onCreate({ distribute_equally: false })}
 				>
-					Duplicate & Send For Verification
+					{t('allocation:duplicate_send_verification')}
 				</Button>
 			</>
 

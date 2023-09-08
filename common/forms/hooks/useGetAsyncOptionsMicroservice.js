@@ -16,6 +16,28 @@ const REQUEST_HOOK_MAPPING = {
 	cx_automation    : useCxAutomationRequest,
 };
 
+function getOptions({ data = [] }) {
+	if (Array.isArray(data)) {
+		return data;
+	}
+
+	let options = [];
+
+	if (typeof data === 'object' && data) {
+		Object.keys(data).some((key) => {
+			if (Array.isArray(data[key])) {
+				options = data[key];
+				return true;
+			}
+			if (typeof data[key] === 'object') {
+				options = getOptions({ data: data[key] });
+			}
+			return !isEmpty(options);
+		});
+	}
+	return options;
+}
+
 function useGetAsyncOptionsMicroservice({
 	endpoint = '',
 	initialCall = false,
@@ -42,12 +64,7 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	let options = data?.list || data?.items || data?.data || data?.data?.list || data || [];
-
-	if (!Array.isArray(options)) {
-		options = [];
-	}
-
+	let options = getOptions({ data });
 	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
 		options = getModifiedOptions({ options });
 	}
@@ -106,7 +123,7 @@ function useGetAsyncOptionsMicroservice({
 			const res = await triggerSingle({
 				params: merge(params, (searchByq ? { q: value } : { filters: { [valueKey]: value } })),
 			});
-			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || res?.data?.items[GLOBAL_CONSTANTS.zeroth_index]
+			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || res?.data?.items?.[GLOBAL_CONSTANTS.zeroth_index]
 			|| res?.data?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			// console.log(err);

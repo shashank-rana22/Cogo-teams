@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/surface-modules';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
 
 import useListFieldServiceOpsDetails from '../../../../../../hooks/useListFieldServiceOpsDetails';
 import getControls from '../configs/deliveryControls';
@@ -24,9 +24,7 @@ function SingleDeliveryDate(props, ref) {
 		index = 0,
 	} = props || {};
 
-	const [dateObj, setDateObj] = useState({});
-
-	const fields = getControls(item, dateObj);
+	const fields = getControls(item);
 	const {
 		control,
 		formState: { errors },
@@ -41,40 +39,41 @@ function SingleDeliveryDate(props, ref) {
 
 	const formValues = watch();
 
-	const { entity_id = '', is_backdate_applicable = false } = item;
+	const { entity_id = '', is_backdate_applicable = false, pickup_date = '' } = item || {};
 
 	const isDateAllowed = dateCheckerShipment(
 		shipment_data?.created_at,
-		GLOBAL_CONSTANTS.ftl_disable_backdate_date,
+		GLOBAL_CONSTANTS.others.ftl_disable_backdate_date,
 	);
 
-	useEffect(() => {
-		let deliveryMaxDate;
-		let	deliveryMinDate;
-		const DELAYED_DELIVERY_REMARK_RULES = {};
+	fields.forEach((singleControl) => {
+		const tempControl = singleControl;
 		if (
 			ENTITY_CODES.includes(entity_id)
 			&& is_backdate_applicable
 			&& isDateAllowed
 		) {
-			deliveryMaxDate = new Date();
-
-			deliveryMinDate = new Date(shipment_data?.created_at);
+			if (tempControl.name === 'delivery_date') {
+				tempControl.maxDate = new Date();
+				tempControl.minDate = new Date(shipment_data?.created_at);
+			}
 		}
-
-		if (formValues?.delayed_delivery_reason === 'others') {
-			DELAYED_DELIVERY_REMARK_RULES.required = true;
-			DELAYED_DELIVERY_REMARK_RULES.message = 'This is required';
-		} else {
-			DELAYED_DELIVERY_REMARK_RULES.required = false;
+		if (tempControl.name === 'delayed_delivery_remark') {
+			if (formValues?.delayed_delivery_reason === 'others') {
+				tempControl.rules = {
+					required : true,
+					message  : 'This is required',
+				};
+			} else {
+				tempControl.rules = {
+					required: false,
+				};
+			}
 		}
-
-		setDateObj({
-			deliveryMinDate,
-			deliveryMaxDate,
-			DELAYED_DELIVERY_REMARK_RULES,
-		});
-	}, [entity_id, formValues?.delayed_delivery_reason, isDateAllowed, is_backdate_applicable, shipment_data]);
+		if (tempControl.name === 'unloading_date') {
+			tempControl.minDate = new Date(pickup_date);
+		}
+	});
 
 	const showElements = {
 		delayed_delivery_reason: datesChecker(

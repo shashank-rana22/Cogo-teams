@@ -1,6 +1,7 @@
 import { Modal } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
@@ -18,9 +19,10 @@ function HandedOver({
 	setViewDoc = () => {},
 	setEdit = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	const { profile } = useSelector((state) => state);
 	const [triggerManifest, setTriggerManifest] = useState('');
-	const { fields } = handedOverFields;
+	const fields = handedOverFields({ t });
 
 	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit, profile }) };
 

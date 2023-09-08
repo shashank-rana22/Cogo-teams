@@ -1,5 +1,6 @@
 import { Pagination, Toggle } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EmptyState from '../../../../../../../../../../common/EmptyState';
@@ -14,6 +15,8 @@ import styles from './styles.module.css';
 function ViewList({
 	showModal = {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data = {},
 		loading = false,
@@ -31,22 +34,21 @@ function ViewList({
 	} = data || {};
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({
-		loading,
-		kamsList,
+		t,
 	});
 
 	return (
 		<section>
 			<div className={styles.header}>
 				<div className={styles.header_text}>
-					{`"${startCase(showModal?.objective_title)}" Leaderboard Generated`}
+					{`"${startCase(showModal?.objective_title)}" ${t('allocation:leaderboard_generated')}`}
 				</div>
 				<div>
 					<Toggle
 						name="toggle"
 						size="md"
-						onLabel="OR"
-						offLabel="AND"
+						onLabel={t('allocation:or_label')}
+						offLabel={t('allocation:and_label')}
 						value={params?.for_individual_rule}
 						onChange={() => {
 							setParams((pv) => ({
@@ -59,14 +61,15 @@ function ViewList({
 			</div>
 
 			<div className={styles.description_text}>
-				If you want to be able to Regenerate Updated list,
-				delete this list by clicking on
+				{t('allocation:view_list_phrase')}
 				{' '}
 				<strong>
-					‘Delete List’
+					‘
+					{t('allocation:delete_list')}
+					’
 				</strong>
 				{' '}
-				from the table.
+				{t('allocation:from_the_table')}
 			</div>
 
 			<Filters

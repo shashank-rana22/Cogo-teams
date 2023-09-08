@@ -1,6 +1,8 @@
 .service {
 	display: flex;
 	flex-direction: column;
+	max-height: 400px;
+	overflow: scroll;
 }
 
 .heading {
@@ -9,9 +11,4 @@
 	font-weight: 500;
 	line-height: 150%;
 	color: #221f20;
-}
-
-.form {
-	height: 76vh;
-	overflow: scroll;
 }

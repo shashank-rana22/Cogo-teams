@@ -1,27 +1,13 @@
-import { Button, Checkbox, CheckboxGroup } from '@cogoport/components';
+import { Button, CheckboxGroup } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
-import { OPTIONS } from '../../../constants/awb-copies-options';
+import { options } from '../../../constants/awb-copies-options';
 import useGetMultipleCopiesList from '../../../hooks/useGetMultipleCopiesList';
+import { GetSelectAllCheckbox } from '../../../utils/getSelectAllCheckbox';
 
 import styles from './styles.module.css';
-
-const TOTAL_AWB_COPIES = 12;
-
-const DOCUMENT_COPIES = ['original_3',
-	'original_2',
-	'original_1',
-	'copy_9',
-	'copy_4',
-	'copy_5',
-	'copy_6',
-	'copy_7',
-	'copy_8',
-	'copy_10',
-	'copy_11',
-	'copy_12',
-];
 
 function SelectDocumentCopies({
 	copiesValue = [],
@@ -33,11 +19,9 @@ function SelectDocumentCopies({
 	taskItem = {},
 	loading = false,
 }) {
+	const { t } = useTranslation(['printingDesk']);
+	const OPTIONS = options({ t });
 	const { data } = useGetMultipleCopiesList(taskItem);
-
-	const onChangeTableHeaderCheckbox = (event) => {
-		copiesOnChange(event.currentTarget.checked ? DOCUMENT_COPIES : []);
-	};
 
 	useEffect(() => {
 		(copiesValue || []).forEach((copy) => {
@@ -52,24 +36,10 @@ function SelectDocumentCopies({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [copiesValue]);
 
-	const getSelectAllCheckbox = () => {
-		const isAllRowsChecked = (copiesValue || []).length === TOTAL_AWB_COPIES;
-
-		return (
-			<Checkbox
-				label="Select All"
-				value="select_all"
-				className={styles.select_checkbox}
-				checked={isAllRowsChecked}
-				onChange={onChangeTableHeaderCheckbox}
-			/>
-		);
-	};
-
 	return (
 		<div className={styles.select_copies_container}>
 			<div className={styles.column_flex}>
-				{getSelectAllCheckbox()}
+				{GetSelectAllCheckbox({ copiesOnChange, copiesValue })}
 				<CheckboxGroup
 					options={OPTIONS}
 					onChange={copiesOnChange}
@@ -87,7 +57,7 @@ function SelectDocumentCopies({
 					style={{ marginLeft: 'auto' }}
 					disabled={loading || isEmpty(copiesValue)}
 				>
-					Download
+					{t('printingDesk:awb_document_download_document_container_download_other__button')}
 				</Button>
 			</div>
 		</div>

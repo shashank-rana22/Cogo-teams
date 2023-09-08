@@ -1,11 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import navigationMappingSeller from '@cogoport/navigation-configs/navigation-mapping-seller';
 import navigationMappingShipper from '@cogoport/navigation-configs/navigation-mapping-shipper';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import getNavData from '@cogoport/request/helpers/get-nav-data';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState, useCallback } from 'react';
 
 import getNavigationOptions from '../utils/get-navigation-options';
@@ -16,14 +17,17 @@ import getNavigationOptions from '../utils/get-navigation-options';
  */
 
 const useOnBoardRole = () => {
-	const [initialLoading, setInitialLoad] = useState(true);
-	const [showImportRole, setShowImportRole] = useState(false);
-	const [importedPermissions, setImportedPermissions] = useState(null);
+	const router = useRouter();
+
+	const { t } = useTranslation(['accessManagement', 'common']);
+
 	const { role_id } = useSelector(({ general }) => ({
 		role_id: general?.query?.role_id,
 	}));
-	const router = useRouter();
 
+	const [initialLoading, setInitialLoad] = useState(true);
+	const [showImportRole, setShowImportRole] = useState(false);
+	const [importedPermissions, setImportedPermissions] = useState(null);
 	const [{ loading, data }, trigger] = useAuthRequest({
 		url    : '/list_roles',
 		method : 'get',
@@ -44,6 +48,8 @@ const useOnBoardRole = () => {
 	const { navigations: activeNavs = [] } = activeNavsData || {};
 
 	const { permissions } = possiblePermissionsData || {};
+
+	const navigationMappingAdmin = navigationMapping({ t });
 
 	let navigationMappings = navigationMappingAdmin;
 
@@ -76,7 +82,7 @@ const useOnBoardRole = () => {
 	 * @param {string} [navigation='']
 	 */
 	const getNavOptions = (navigation = '') => {
-		const navObj = getNavData(navigation, navigationMappings);
+		const navObj = getNavData({ navigation, projectNavigationMappings: navigationMappings, t });
 		return getNavigationOptions(permissions, navObj || {});
 	};
 	// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,17 +1,19 @@
-import navigationMappingAdmin from './navigation-mapping-admin';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import navigationMapping from './navigation-mapping-admin';
 
 const getCondition = (urlItem) => {
-	const condition = {};
+	const CONDITION = {};
 	if (urlItem?.user_email) {
-		condition.user_email = urlItem.user_email;
+		CONDITION.user_email = urlItem.user_email;
 	}
 	if (urlItem?.user_role_ids) {
-		condition.user_role_ids = urlItem.user_role_ids;
+		CONDITION.user_role_ids = urlItem.user_role_ids;
 	}
 	if (urlItem?.user_id) {
-		condition.user_id = urlItem.user_id;
+		CONDITION.user_id = urlItem.user_id;
 	}
-	return condition;
+	return CONDITION;
 };
 
 const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
@@ -20,8 +22,11 @@ const getSideBarConfigs = ({
 	userData,
 	dashboardUrls = [],
 	pinnedNavKeys = [],
+	t = () => {},
 }) => {
 	const pNavs = userData?.permissions_navigations || {};
+
+	const navigationMappingAdmin = navigationMapping({ t });
 
 	const modifiedPinnedNavKeys = pinnedNavKeys.filter((key) => Object.keys(navigationMappingAdmin).includes(key));
 
@@ -30,18 +35,17 @@ const getSideBarConfigs = ({
 	);
 
 	const getNavMappings = (navMappingKeys) => {
-		const nav_items = [];
+		const NAV_ITEMS = [];
 
 		(navMappingKeys || []).forEach((key) => {
 			const { showInNav = true } = navigationMappingAdmin?.[key] || {};
-
 			if (
 				key
 				&& showInNav
 				&& (pNavs?.[key] || navigationMappingAdmin[key]?.options)
 			) {
 				if (key === 'dashboards') {
-					nav_items.push({
+					NAV_ITEMS.push({
 						...navigationMappingAdmin[key],
 						options: dashboardUrls.map((urlItem) => ({
 							title     : urlItem.title,
@@ -57,7 +61,7 @@ const getSideBarConfigs = ({
 				) {
 					const allOpts = navigationMappingAdmin[key]?.options || [];
 					const selectedSubNavs = Object.keys(pNavs).filter(
-						(nav) => nav.split('-')[0] === key,
+						(nav) => nav.split('-')[GLOBAL_CONSTANTS.zeroth_index] === key,
 					);
 					const filteredOpts = allOpts.filter(
 						(opt) => selectedSubNavs.includes(opt.key)
@@ -65,17 +69,17 @@ const getSideBarConfigs = ({
 								|| userData.email === AJEET_EMAIL_ID),
 					);
 					if (filteredOpts.length) {
-						nav_items.push({
+						NAV_ITEMS.push({
 							...navigationMappingAdmin[key],
 							options: filteredOpts,
 						});
 					}
 				} else if (pNavs?.[key]) {
-					nav_items.push(navigationMappingAdmin[key]);
+					NAV_ITEMS.push(navigationMappingAdmin[key]);
 				}
 			}
 		});
-		return nav_items;
+		return NAV_ITEMS;
 	};
 
 	return {

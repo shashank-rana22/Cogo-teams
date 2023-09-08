@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import ObjectiveDetailsCard from '../../../../common/ObjectiveDetailsCard';
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../constants/create-form-stepper-keys-mapping';
@@ -9,6 +10,8 @@ import styles from './styles.module.css';
 const { SET_OBJECTIVE_WEIGHTAGE, SET_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function ReviewObjective(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { formValues, setActiveStep } = props;
 
 	const { generalConfiguration, objectiveRequirements } = formValues;
@@ -16,11 +19,10 @@ function ReviewObjective(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
-				<h3>Review Objective</h3>
+				<h3>{t('allocation:review_objective_title')}</h3>
 
 				<p className={styles.subheading}>
-					Check specifications of the Objective
-					before setting weightage per User and sending Objective for Verification
+					{t('allocation:check_specifications')}
 				</p>
 			</div>
 
@@ -35,7 +37,7 @@ function ReviewObjective(props) {
 					themeType="link"
 					onClick={() => setActiveStep(SET_OBJECTIVE)}
 				>
-					Back
+					{t('allocation:back_button')}
 				</Button>
 
 				<Button
@@ -44,7 +46,7 @@ function ReviewObjective(props) {
 					themeType="primary"
 					onClick={() => setActiveStep(SET_OBJECTIVE_WEIGHTAGE)}
 				>
-					Proceed & Set Weightage
+					{t('allocation:proceed_set_weightage_button')}
 				</Button>
 			</div>
 		</div>

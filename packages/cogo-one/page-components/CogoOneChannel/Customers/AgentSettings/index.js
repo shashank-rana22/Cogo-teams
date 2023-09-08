@@ -16,6 +16,7 @@ function AgentSettings({
 	isBotSession = false,
 	userId = '',
 	firestore = {},
+	preferenceLoading = false,
 }) {
 	return (
 		<>
@@ -26,6 +27,7 @@ function AgentSettings({
 					agentTimeline={agentTimeline}
 					userId={userId}
 					firestore={firestore}
+					preferenceLoading={preferenceLoading}
 				/>
 			)}
 

@@ -1,11 +1,15 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { useStakeholderCheck } from '../../../hooks/useStakeholderCheck';
+
 import styles from './styles.module.css';
 import TaskDetails from './TaskDetails';
 import UpdateAction from './UpdateAction';
 import UpdateButton from './UpdateButton';
 import ViewEmailContent from './ViewEmailContent';
+
+const CAN_CHANGE_OWNER = ['admin', 'superadmin'];
 
 function Card({
 	task = {},
@@ -15,6 +19,10 @@ function Card({
 	tasksList = [],
 }) {
 	const [showEmailModal, setShowEmailModal] = useState(false);
+
+	const { activeStakeholder } = useStakeholderCheck();
+
+	const hideThreeDots = (task?.status === 'completed' || !CAN_CHANGE_OWNER.includes(activeStakeholder));
 
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
@@ -42,7 +50,7 @@ function Card({
 
 				<UpdateAction
 					task={task}
-					hideThreeDots={task.status === 'completed'}
+					hideThreeDots={hideThreeDots}
 				/>
 			</div>
 
