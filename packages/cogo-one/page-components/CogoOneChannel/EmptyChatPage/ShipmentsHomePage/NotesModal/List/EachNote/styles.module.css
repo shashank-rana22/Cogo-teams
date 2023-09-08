@@ -66,4 +66,8 @@
 	font-size: 10px;
 	color: #868585;
 	text-align: right;
+
+	>span {
+		margin-right: 8px;
+	}
 }

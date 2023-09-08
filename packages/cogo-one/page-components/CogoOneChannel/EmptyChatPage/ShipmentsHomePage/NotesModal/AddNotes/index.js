@@ -17,12 +17,7 @@ const MODE_WISE_DEFAULTS = {
 			},
 		],
 	},
-	list_api: {
-		instruction_items: [{
-			file        : '',
-			instruction : '',
-		}],
-	},
+	list_api: {},
 };
 function AddNotes({
 	controlType = '',
@@ -41,7 +36,7 @@ function AddNotes({
 	const {
 		createModewiseSop = () => {},
 		loading = false,
-	} = useCreateModewiseSop({ shipmentData, procedureId, getModeSopData, setShowForm });
+	} = useCreateModewiseSop({ shipmentData, controlType, procedureId, getModeSopData, setShowForm });
 
 	const modeControls = MODE_CONTROLS_MAPPING[controlType];
 

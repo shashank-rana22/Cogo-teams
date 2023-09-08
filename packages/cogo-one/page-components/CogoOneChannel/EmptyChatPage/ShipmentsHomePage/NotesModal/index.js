@@ -84,6 +84,7 @@ function NotesModal({ modalState = {}, setModalState = () => {} }) {
 						<List
 							loading={loading}
 							notesData={notesData}
+							controlType={controlType}
 						/>
 					)}
 			</Modal.Body>

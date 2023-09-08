@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const getOceanParams = ({
@@ -37,8 +38,20 @@ const oceanFormatter = ({ data = {} }) => {
 };
 
 const listDataFormatter = ({ data = {} }) => {
-	console.log('data', data);
-	return {};
+	const { list = [] } = data || {};
+	const ccsNotesInstructions = list?.find((item) => item?.heading === 'CCS Team Notes') || {};
+
+	if (isEmpty(ccsNotesInstructions)) {
+		return {
+			data        : [],
+			procedureId : '',
+		};
+	}
+
+	return {
+		data        : ccsNotesInstructions.instructions || [],
+		procedureId : ccsNotesInstructions.id || '',
+	};
 };
 
 const MODE_WISE_PAYLOAD_MAPPING = {
@@ -89,6 +102,7 @@ const useGetModeSopData = ({
 	}, [getModeSopData]);
 
 	const { data:notesData, procedureId } = dataFormatter({ data }) || {};
+	console.log('notesData', notesData);
 
 	return {
 		loading,

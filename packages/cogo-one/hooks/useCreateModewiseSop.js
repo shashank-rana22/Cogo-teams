@@ -2,25 +2,51 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getOceanParams = ({ formValues = {}, procedure_id = '', shipment_id = '', organization_id = '' }) => (
+const sopFormatter = ({ sopInstructions = [] }) => sopInstructions?.map(
+	(eachInstruction) => (
+		{
+			category : eachInstruction?.category,
+			remarks  : eachInstruction?.remarks,
+			document : typeof eachInstruction?.document === 'string' ? eachInstruction?.document : undefined,
+		}) || [],
+);
+const getOceanPayload = ({ formValues = {}, procedure_id = '', shipment_id = '', organization_id = '' }) => (
 	{
-		instruction      : 'additional_preference',
-		sop_instructions : formValues?.additional || [],
-		procedure_id,
+		instruction            : 'additional_preference',
+		sop_instructions       : sopFormatter({ sopInstructions: formValues?.additional }) || [],
+		operating_procedure_id : procedure_id,
 		shipment_id,
 		organization_id,
 	});
 
+const urlFormatter = (
+	{ urls },
+) => urls?.map((eachUrl) => (typeof eachUrl === 'object' ? eachUrl?.finalUrl : eachUrl || undefined));
+
+const getAirPayload = ({ formValues = {}, procedure_id = '', shipment_id = '', organization_id = '' }) => (
+	{
+		instruction            : formValues?.instruction,
+		url_links              : urlFormatter({ urls: [formValues?.url_links].flat() }),
+		operating_procedure_id : procedure_id,
+		shipment_id,
+		organization_id,
+	}
+);
+
 const MODE_WISE_PAYLOAD_MAPPING = {
-	ocean: {
+	get_api: {
 		endpoint   : '/create_shipment_operating_instruction',
-		getPayload : getOceanParams,
+		getPayload : getOceanPayload,
+	},
+	list_api: {
+		endpoint   : '/create_shipment_operating_instruction',
+		getPayload : getAirPayload,
 	},
 };
 
 const useCreateModewiseSop = ({
 	procedureId = '',
-	mode = '',
+	controlType = '',
 	shipmentData = {},
 	getModeSopData = () => {},
 	setShowForm = () => {},
@@ -28,7 +54,7 @@ const useCreateModewiseSop = ({
 	const {
 		endpoint = '',
 		getPayload = () => {},
-	} = MODE_WISE_PAYLOAD_MAPPING[mode] || MODE_WISE_PAYLOAD_MAPPING.ocean;
+	} = MODE_WISE_PAYLOAD_MAPPING[controlType] || MODE_WISE_PAYLOAD_MAPPING.get_api;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : endpoint,

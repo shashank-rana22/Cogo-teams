@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function List({
 	loading = false,
 	notesData = [],
+	controlType = '',
 }) {
 	if (loading) {
 		return (
@@ -38,7 +39,13 @@ function List({
 
 	return (
 		<div className={styles.container}>
-			{[...(notesData || [])].reverse()?.map((note) => <EachNote note={note} key={note?.id} />)}
+			{[...(notesData || [])].reverse()?.map((note) => (
+				<EachNote
+					note={note}
+					key={note?.id}
+					controlType={controlType}
+				/>
+			))}
 		</div>
 	);
 }

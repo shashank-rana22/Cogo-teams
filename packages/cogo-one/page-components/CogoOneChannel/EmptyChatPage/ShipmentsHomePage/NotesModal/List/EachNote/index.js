@@ -22,17 +22,34 @@ function Document({ eachFile = {} }) {
 
 function EachNote({
 	note = [],
+	controlType = '',
 }) {
-	const { sop_detail = {}, created_at = '' } = note || {};
+	const { sop_detail = {}, created_at = '', instruction = '', url_links = [], last_updated_by = {} } = note || {};
 
-	const { document = '', category = '', remarks = '' } = sop_detail || {};
+	const { name = '' } = last_updated_by || {};
+	const { document = '', category = '', remarks: sopRemarks = '' } = sop_detail || {};
 
-	const formattedDocs = formatFileAttributes({ uploadedFiles: formatDocuments({ documents: document }) });
+	const DATA_MAPPING = {
+		get_api: {
+			remarks   : sopRemarks,
+			documents : document,
+			heading   : category,
+		},
+		list_api: {
+			remarks   : instruction,
+			documents : url_links,
+			heading   : 'CCS Team Notes',
+		},
+	};
+
+	const { remarks = '', documents = '', heading = '' } = DATA_MAPPING[controlType] || {};
+
+	const formattedDocs = formatFileAttributes({ uploadedFiles: formatDocuments({ documents }) });
 
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.container}>
-				<div className={styles.category}>{category}</div>
+				<div className={styles.category}>{heading}</div>
 				<div className={styles.remarks}>
 					{remarks}
 				</div>
@@ -40,6 +57,13 @@ function EachNote({
 					{formattedDocs?.map((eachFile) => <Document eachFile={eachFile} key={eachFile?.finalUrl} />)}
 				</div>
 				<div className={styles.footer_time}>
+					{name ? (
+						<span>
+							By
+							{' '}
+							{name}
+						</span>
+					) : null}
 					{formatDate({
 						date       : created_at,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
