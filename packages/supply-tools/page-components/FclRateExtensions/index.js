@@ -1,66 +1,80 @@
-import { Input, Button } from '@cogoport/components';
+import { Input, Table, Pagination } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-// import List from '../../common/List';
 import useListFclFreightRateExtensions from '../../hooks/useListFclFreightRateExtensions';
 
-import Create from './components/Create';
-// import fclColumnFunc from './components/Fields/fcl-freight';
+import CreateFclExtension from './components/CreateFclExtension';
+import getTableColumns from './getTableColumns';
 import styles from './styles.module.css';
+
+function RenderPagination({ data = {}, filters = {}, setFilters = () => {} }) {
+	const { page, ...restFilters } = filters || {};
+
+	const { page_limit = 10, total_count = 1 } = data || {};
+
+	const onClick = (currentPage) => {
+		setFilters({ ...restFilters, page: currentPage });
+	};
+
+	return (
+		<div className={styles.pagination}>
+			<Pagination
+				type="table"
+				pageSize={page_limit}
+				totalItems={total_count}
+				currentPage={page}
+				onPageChange={onClick}
+			/>
+		</div>
+	);
+}
 
 function FclRateExtensions() {
 	const [show, setShow] = useState(null);
 	const [searchQuery, setSearchQuery] = useState('');
-	const {
-		listFclFreight: refetch,
-		// data,
-		// loading,
-		// page,
-		// setPage,
-	} = useListFclFreightRateExtensions(searchQuery);
 
-	// const columns = fclColumnFunc({
-	// 	setShow,
-	// 	refetch,
-	// });
+	const [showUpdate, setShowUpdate] = useState(null);
+	const [showDelete, setShowDelete] = useState(null);
+
+	const {
+		data = {},
+		loading = false,
+		q = '',
+		setQ = () => {},
+		refetch = () => {},
+		filters = {},
+		setFilters = () => {},
+	} = useListFclFreightRateExtensions({ defaultFilters: { status: 'active' } });
+
+	const tableColumns = getTableColumns({ onUpdate: setShowUpdate, onDelete: setShowDelete });
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.heading}>FCL FREIGHT RATE EXTENSION RULE SETS</div>
-			</div>
-			<div className={styles.styled_section}>
+
+			<header className={styles.header}>
+				<h1 className={styles.heading}>FCL FREIGHT RATE EXTENSION RULE SETS</h1>
+			</header>
+
+			<div className={styles.search_section}>
 				<Input
-					suffix={<IcMSearchlight size={3} />}
-					value={searchQuery}
-					onChange={(e) => setSearchQuery(e?.target?.value)}
-					style={{ width: 280, height: 38, marginRight: 10 }}
+					className={styles.search}
+					prefix={<IcMSearchlight />}
+					value={q}
+					onChange={setQ}
 					placeholder="Search by Extension Name"
-					type="text"
-					theme="admin"
 				/>
 
-				<Button
-					onClick={() => {
-						setShow({
-							...show,
-							isEdit: false,
-						});
-					}}
-				>
-					Create New Extensions
-				</Button>
+				<CreateFclExtension refetch={refetch} />
 			</div>
-			{/* <List
-				data={data}
-				loading={loading}
-				page={page}
-				setPage={setPage}
-				columns={columns}
-			/> */}
-			{show && (
-				<Create item={show} setItem={setShow} fetchFclFreight={refetch} />
-			)}
+
+			<div className={styles.table_container}>
+				<RenderPagination data={data} filters={filters} setFilters={setFilters} />
+
+				<Table columns={tableColumns} data={data?.list || []} loading={loading} />
+
+				<RenderPagination data={data} filters={filters} setFilters={setFilters} />
+			</div>
 		</div>
 	);
 }
