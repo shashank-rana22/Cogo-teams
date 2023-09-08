@@ -1,4 +1,4 @@
-import { asyncFieldsLocations, asyncFieldsOperators, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import getShowElements from '../utlis/getShowElements';
 import getOptions from '../utlis/service-to-trade-type-mappings';
 
 let initialFilters = {
-	status: 'active',
+
 };
 
 const useGetTermsAndCondition = ({ organizationId }) => {
@@ -20,13 +20,16 @@ const useGetTermsAndCondition = ({ organizationId }) => {
 	const [currentStatus, setCurrentStatus] = useState('active');
 	const [editTncModalId, setEditTncModalId] = useState(null);
 	const [tncLevel, setTncLevel] = useState('basicInfo');
-	console.log('tncLevel', tncLevel, editTncModalId);
+	const [filters, setFilters] = useState({});
+
+	const { page = 1, status = 'active' } = filters;
 	// const { filters } = filterProps;
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_terms_and_conditions',
 		method : 'get',
 		scope,
 	});
+	console.log('filtersfilters', filters);
 	const controls = getFilterControls();
 	const {
 		handleSubmit, getValues, control, formProps, formState: { errors },
@@ -40,62 +43,21 @@ const useGetTermsAndCondition = ({ organizationId }) => {
 	const watchService = watch('service');
 	const watchPayingPartyCountry = watch('paying_party_country_ids');
 
-	initialFilters = {
-		...initialFilters,
-		service: watchService,
-		// country  : watchCountry,
-		// airline  : watchAirlineId,
-		// paying   : watchPayingPartyCountry,
-		// shipping : watchShippingLineId,
-
-	};
-	console.log(initialFilters, 'filter_hey');
-	const shippingLineOptions = useGetAsyncOptions({
-		...asyncFieldsOperators(),
-		initialCall : true,
-		params      : {
-			filters: {
-				operator_type: 'shipping_line',
-
-			},
-		},
-	});
-	const airLineOptions = useGetAsyncOptions({
-		...asyncFieldsOperators(),
-		initialCall : true,
-		params      : {
-			filters: {
-				operator_type: 'airline',
-
-			},
-		},
-	});
-	const locationOptions = useGetAsyncOptions({
-		...asyncFieldsLocations(),
-
-	});
 	const newField = controls.map((field) => {
 		const { name } = field;
 		let newControl = { ...field };
-		if (name === 'shipping_line_id') {
-			newControl = { ...newControl, ...shippingLineOptions };
-		}
-		if (name === 'airline_id') {
-			newControl = { ...newControl, ...airLineOptions };
-		}
+
 		if (name === 'country_id') {
 			newControl = {
 				...newControl,
-				...locationOptions,
+
 				label:
 				(watchTradeType === 'import' && 'Import To')
 				|| (watchTradeType === 'export' && 'Export From')
 				|| 'Country',
 			};
 		}
-		if (name === 'paying_party_country_ids') {
-			newControl = { ...newControl, ...locationOptions };
-		}
+
 		if (name === 'trade_type') {
 			newControl = {
 				...newControl,
@@ -113,10 +75,10 @@ const useGetTermsAndCondition = ({ organizationId }) => {
 			filters : {
 				page    : 1,
 				sort_by : 'updated_at',
-
+				...filters,
 				...initialFilters,
-
-				type: 'logistics_services',
+				status  : currentStatus,
+				type    : 'logistics_services',
 			},
 		};
 		// console.log('params', params);
@@ -124,9 +86,9 @@ const useGetTermsAndCondition = ({ organizationId }) => {
 	};
 	useEffect(() => {
 		getListTermsAndConditionsApi();
-
+		// setFilters({});
 		initialFilters = {};
-	}, [pagination, currentStatus]);
+	}, [pagination, currentStatus, filters]);
 
 	const { list = [], total_count: totalCount = 0 } = data || {};
 
@@ -151,6 +113,8 @@ const useGetTermsAndCondition = ({ organizationId }) => {
 		tncLevel,
 		setTncLevel,
 		loading,
+		filters,
+		setFilters,
 		refetchListApi: getListTermsAndConditionsApi,
 	};
 };

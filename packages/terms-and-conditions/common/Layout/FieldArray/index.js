@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 
 function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true }) {
 	const { controls = [], name } = ctrl || {};
-	console.log(ctrl, 'ctrl', control, name);
+
 	const { fields, append, remove } = useFieldArray({ control, name });
-	console.log('why', fields);
+
 	return (
 		<div className={styles.field_array}>
 			{fields.map((field, index) => (

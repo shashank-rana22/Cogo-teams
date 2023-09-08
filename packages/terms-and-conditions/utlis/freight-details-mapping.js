@@ -5,22 +5,24 @@ import { format, startCase } from '@cogoport/utils';
 
 import SERVICE_TYPES_MAPPING from './service-types-mapping';
 
-const getToolTipContent = ({ list = [] }) => (
-	<div>
-		{list.map((countryObj, i) => (
-			<div
-				key={countryObj.id}
-				color="#393f70"
-				size={12}
-				paddingBottom={i === list.length - 1 ? 0 : 4}
-			>
-				{i + 1}
-				.
-				{countryObj.name}
-			</div>
-		))}
-	</div>
-);
+function GetToolTipContent({ list = [] }) {
+	return (
+		<div>
+			{list.map((countryObj, i) => (
+				<div
+					key={countryObj.id}
+					color="#393f70"
+					size={12}
+					paddingBottom={i === list.length - 1 ? 0 : 4}
+				>
+					{i + 1}
+					.
+					{countryObj.name}
+				</div>
+			))}
+		</div>
+	);
+}
 
 const FREIGHT_DETAILS_MAPPING = {
 	service: {
@@ -75,7 +77,7 @@ const FREIGHT_DETAILS_MAPPING = {
 					maxWidth="none"
 					theme="light-border"
 					interactive
-					content={getToolTipContent({ list: item.paying_party_countries })}
+					content={GetToolTipContent({ list: item.paying_party_countries })}
 				>
 					<div size={12} color="#5936f0" marginTop={4}>
 						{item.paying_party_countries?.[0]?.name}

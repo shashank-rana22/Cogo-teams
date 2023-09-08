@@ -12,14 +12,12 @@ function TermList({
 	loading = false,
 	refetch = () => {},
 	setEditTncModalId = null,
-	setTncLevel = 'basicInfo',
-	EditForm,
+	setTncLevel = () => {},
+	tncLevel = 'basicInfo',
+	editTncModalId = () => {},
+	EditForm = () => {},
 	handleSubmitForm = () => {},
 }) {
-	const LABEL_MAPPING = {
-		fcl_freight : 'Shipping Line',
-		air_freight : 'Airline',
-	};
 	const [showHiddenContentId, setShowHiddenContentId] = useState(null);
 	if (isEmpty(list)) {
 		return <EmptyState />;
@@ -31,6 +29,9 @@ function TermList({
 	<div key={listItem.id}>
 		<TermCard
 			EditForm={EditForm}
+			tncLevel={tncLevel}
+			setTncLevel={setTncLevel}
+			editTncModalId={editTncModalId}
 			listItem={listItem}
 			refetch={refetch}
 			handleSubmitForm={handleSubmitForm}

@@ -1,65 +1,56 @@
-import { Button, Toggle, Popover } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { Toggle } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
-import Filters from './Filters';
+import AddEdit from '../CreateUpdateTnC/AddEdit';
+
+import Filter from './Filters';
 import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		setTncLevel,
-		viewFromDemand,
-		filterProps,
-		setEditTncModalId,
 		currentStatus,
+		action,
 		setCurrentStatus,
 		setPagination,
+		filters,
+		setFilters,
+		tncLevel,
+		setTncLevel,
+		setEditTncModalId,
+		editTncModalId,
+		refetch,
 	} = props;
 
 	const {
 		general: { isMobile = false },
 	} = useSelector((state) => state);
-	// const { fields, applyFilters, reset, controls, watch, filters, control } = filterProps;
-
 	const onChangeToggleStatus = () => {
 		setCurrentStatus((pv) => (pv === 'active' ? 'inactive' : 'active'));
-		setPagination(1);
+		const FIRST_PAGE = 1;
+		setPagination(FIRST_PAGE);
 	};
-	const [visible, setVisible] = useState(false);
 	return (
 		<div className={styles.container}>
-			<Button
-				className={`primary ${viewFromDemand ? 'sm' : 'md'}`}
-				onClick={() => {
-					setTncLevel('basicInfo');
-					setEditTncModalId(true);
-				}}
-				style={{ textTransform: 'capitalize' }}
-			>
-				Create
-				{' '}
-				{isMobile ? 'T & C' : 'New'}
-			</Button>
-			<Toggle
-				offLabel="Inactive"
-				onLabel="Active"
-				// onChange={onChangeToggleStatus}
-			/>
-			<div className={styles.filters_container}>
-				<Popover
-					placement="left"
-					caret={false}
-					render={<Filters filterProps={filterProps} setVisible={setVisible} />}
-					visible={visible}
-					onClickOutside={() => setVisible(false)}
-				>
-					<Button onClick={() => setVisible(!visible)}>
-						Filter
-						<IcMFilter />
-					</Button>
-				</Popover>
+			<p className={styles.header}>Terms And Condition</p>
+			<div className={styles.container}>
+				<AddEdit
+					refetch={refetch}
+					tncLevel={tncLevel}
+					setTncLevel={setTncLevel}
+					editTncModalId={editTncModalId}
+					setEditTncModalId={setEditTncModalId}
+					action={action}
+					isMobile={isMobile}
+				/>
+				<Toggle
+					offLabel="Inactive"
+					onLabel="Active"
+					value={currentStatus}
+					onChange={onChangeToggleStatus}
+				/>
+				<Filter filters={filters} setFilters={setFilters} />
 			</div>
+
 		</div>
 	);
 }

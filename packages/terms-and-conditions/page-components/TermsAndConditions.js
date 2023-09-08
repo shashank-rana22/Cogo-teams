@@ -3,8 +3,6 @@ import { useState } from 'react';
 
 import useGetTermsAndCondition from '../hooks/useGetTermsAndCondition';
 
-// import CreateTerm from './CreateUpdateTnC';
-import AddEdit from './CreateUpdateTnC/AddEdit';
 import Form from './CreateUpdateTnC/AddEdit/Form';
 import Header from './Header/index';
 import TermList from './TermsList';
@@ -23,6 +21,8 @@ function TermsAndConditions(props) {
 		editTncModalId,
 		setEditTncModalId,
 		tncLevel,
+		filters,
+		setFilters,
 		setTncLevel,
 		...restProps
 	} = useGetTermsAndCondition({ organizationId });
@@ -33,51 +33,40 @@ function TermsAndConditions(props) {
 
 	const viewFromDemand = ['demand-crm', 'prm'].includes(viewThrough);
 
-	const editFormValue = list.find((item) => item.id === editTncModalId);
-
 	return (
 		<div>
 			<Header
 				{...restProps}
+				filters={filters}
+				setFilters={setFilters}
 				showModal={showModal}
+				tncLevel={tncLevel}
 				setShowModal={setShowModal}
 				setTncLevel={setTncLevel}
 				viewFromDemand={viewFromDemand}
 				setPagination={setPagination}
+				editTncModalId={editTncModalId}
 				setEditTncModalId={setEditTncModalId}
+				refetch={refetchListApi}
 			/>
-			<AddEdit />
-			{editTncModalId && (
-				<AddEdit
-					show={showModal}
-					setShow={setShowModal}
-					tncLevel={tncLevel}
-					setTncLevel={setTncLevel}
-					editTncModalId={editTncModalId}
-					setEditTncModalId={setEditTncModalId}
-					editFormValue={editFormValue}
-					refetch={refetchListApi}
-					organizationId={organizationId}
-				/>
-			)}
 			<TermList
 				EditForm={Form}
 				list={list}
 				loading={loading}
 				setTncLevel={setTncLevel}
+				tncLevel={tncLevel}
 				setEditTncModalId={setEditTncModalId}
 				refetch={refetchListApi}
 			/>
-			{totalCount > 10 ? (
-				<Pagination
-					type="number"
-					pageRange={5}
-					pageSize={10}
-					totalItems={totalCount || 0}
-					currentPage={pagination}
-					setPagination={onPageChange}
-				/>
-			) : null}
+
+			<Pagination
+				type="table"
+				pageSize={10}
+				totalItems={totalCount}
+				currentPage={pagination}
+				onPageChange={onPageChange}
+			/>
+
 		</div>
 	);
 }

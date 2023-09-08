@@ -1,9 +1,11 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import toastApiError from '../utlis/toastApiError';
+
 const useCreateUpdateTnc = (props) => {
-	const { action, refetch, editFormValue, setEditTncModalId, organizationId } =		props;
+	const { action, refetch, editFormValue, setEditTncModalId, organizationId } = props;
 
 	const {
 		general: { scope },
@@ -14,11 +16,10 @@ const useCreateUpdateTnc = (props) => {
 	const apiName = isUpdatable
 		? 'update_terms_and_condition'
 		: 'create_terms_and_condition';
-	const [{ data, loading }, trigger] = useRequest({ method: 'post', scope, url: `/${apiName}` });
+	const [{ loading }, trigger] = useRequest({ method: 'post', scope, url: `/${apiName}` });
 
 	const onSubmit = async (values = {}) => {
 		try {
-			console.log('values', values);
 			const {
 				service,
 				shipping_line_id,
@@ -51,12 +52,11 @@ const useCreateUpdateTnc = (props) => {
 				data: payload,
 			});
 
-			toast.success('Terms And Conditions Updated Successfully');
-
+			Toast.success(`Terms And Conditions ${editFormValue.id ? 'Updated' : 'Created'} Successfully`);
 			setEditTncModalId(null);
 			refetch();
 		} catch (error) {
-			console.log(error);
+			toastApiError(error);
 		}
 	};
 

@@ -1,7 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 
-const getTncControls = ({ values = {} }) => {
+const getTncControls = ({ item = {} }) => {
 	const {
+		id,
 		service,
 		trade_type,
 		country_id,
@@ -9,16 +10,15 @@ const getTncControls = ({ values = {} }) => {
 		airline_id,
 		paying_party_country_ids,
 		description,
-	} = values;
-
+	} = item;
 	let newDesc = [
 		{
 			terms_and_condition: '',
 		},
 	];
 	if (!isEmpty(description)) {
-		newDesc = description.map((item) => ({
-			terms_and_condition: item,
+		newDesc = description.map((des) => ({
+			terms_and_condition: des,
 		}));
 	}
 	return [
@@ -27,6 +27,7 @@ const getTncControls = ({ values = {} }) => {
 			label     : 'Service Type',
 			type      : 'select',
 			value     : service || 'fcl_freight',
+			disabled  : !!id,
 			className : 'primary lg',
 			options   : [
 				{ label: 'FCL', value: 'fcl_freight' },
@@ -51,23 +52,34 @@ const getTncControls = ({ values = {} }) => {
 
 			name           : 'shipping_line_id',
 			label          : 'Shipping Line',
-			type           : 'select',
+			type           : 'async_select',
 			className      : 'primary lg',
+			asyncKey       : 'list_operators',
 			value          : shipping_line_id,
+			disabled       : !!id,
 			placeholder    : 'Select Shipping Line',
 			optionsListKey : 'shipping-lines',
 			defaultOptions : true,
 			cacheOptions   : false,
 			span           : 6,
 			isClearable    : true,
+			params         : {
+				page_limit : 10,
+				sort_by    : 'short_name',
+				sort_type  : 'asc',
+				filters    : { operator_type: 'shipping_line', status: 'active' },
+
+			},
 		},
 		{
 
 			name           : 'airline_id',
 			label          : 'Airline',
-			type           : 'select',
+			type           : 'async_select',
 			className      : 'primary lg',
+			asyncKey       : 'list_operators',
 			value          : airline_id,
+			disabled       : !!id,
 			placeholder    : 'Select Airline',
 			optionsListKey : 'air-lines',
 			defaultOptions : true,
@@ -80,6 +92,7 @@ const getTncControls = ({ values = {} }) => {
 			label       : 'Trade Type',
 			type        : 'select',
 			value       : trade_type,
+			disabled    : !!id,
 			placeholder : 'Select Trade Type',
 			className   : 'primary lg',
 			options     : [],
@@ -90,9 +103,11 @@ const getTncControls = ({ values = {} }) => {
 
 			name           : 'country_id',
 			label          : 'Country',
-			type           : 'select',
+			type           : 'async_select',
 			placeholder    : 'Select Country Name',
 			optionsListKey : 'locations',
+			disabled       : !!id,
+			asyncKey       : 'list_locations',
 			className      : 'primary lg',
 			value          : country_id,
 			span           : 6,
@@ -104,8 +119,9 @@ const getTncControls = ({ values = {} }) => {
 			label          : 'Paying Party Country',
 			type           : 'async_select',
 			optionsListKey : 'locations',
-			asyncKey       : 'list_operators',
+			asyncKey       : 'list_locations',
 			placeholder    : 'Select Country Name',
+			disabled       : !!id,
 			value          : paying_party_country_ids,
 			params         : { filters: { type: ['country'] } },
 			span           : 4,

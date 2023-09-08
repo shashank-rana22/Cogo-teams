@@ -1,12 +1,42 @@
-import { Button, Popover } from '@cogoport/components';
-import { useState } from 'react';
+import { Button } from '@cogoport/components';
+
+import useUpdateTermsAndConditions from '../../../../hooks/useUpdateTermsAndConditionsStatus';
 
 function PopOverContent({
-	onClickUpdateTerms,
-	setShowEdit,
+	onClickUpdateTerms = () => {},
+	setShowEdit = () => {},
+	setVisible = false,
+	status = 'active',
+	propsForUpdation = {},
+	setEditModalId = () => {},
+	item = {},
 }) {
+	const { onSubmit, loading } = useUpdateTermsAndConditions({
+		...propsForUpdation,
+	});
+
 	return (
-		<Button onClick={() => { onClickUpdateTerms(); setShowEdit(true); }}>Edit</Button>
+		<div>
+			<Button onClick={() => {
+				onClickUpdateTerms();
+				setShowEdit(true);
+				setVisible(false);
+				setEditModalId(item.id);
+			}}
+			>
+				Edit
+
+			</Button>
+			<Button
+				loading={loading}
+				onClick={onSubmit}
+			>
+				{' '}
+				{status === 'active' ? 'Deactivate' : 'Activate'}
+			</Button>
+
+		</div>
+
 	);
 }
 export default PopOverContent;

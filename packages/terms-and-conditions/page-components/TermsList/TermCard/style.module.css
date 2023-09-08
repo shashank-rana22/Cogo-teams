@@ -1,16 +1,18 @@
 .container {
 	display: flex;
-	justify-content: space-around;
 	margin-bottom: 16px;
 	background-color: #fff;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
 	transition: 0.5s;
 
 	&:hover {
-		border: 1px solid #9b86f6;
-		box-shadow: 0 0 6px rgb(155 134 246 / 60%);
+		border:
+			1px solid 0 1px 6px
+			rgb(251 209 166 /100%);
+		box-shadow:
+			0 0 6px
+			rgb(246 139 33);
 	}
 }
 
@@ -65,7 +67,10 @@
 
 .freight_item_main {
 	padding: 16px 16px 16px 24px;
+	margin-bottom: 15px;
 	overflow-y: visible;
+	background-color: #fff;
+	border-radius: 5px;
 }
 
 .applied_terms {

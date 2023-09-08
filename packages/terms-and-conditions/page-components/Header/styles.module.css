@@ -1,17 +1,26 @@
 .container {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	align-items: center;
+
+	/* justify-content: flex-end; */
+
+	justify-content: space-between;
 	margin-bottom: 16px;
 
 	@media (min-width: 768px) {
 		flex-direction: row;
-		justify-content: space-between;
 		margin-bottom: 16px;
 	}
 }
 
 .filters_container {
 	margin-left: 16px;
+}
+
+.header {
+	font-size: 1.72em;
+	font-weight: 600;
 }
 
 .pagination_container {

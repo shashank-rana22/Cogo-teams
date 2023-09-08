@@ -1,29 +1,34 @@
-import { Button, Popover, Modal } from '@cogoport/components';
+import { Popover, Modal } from '@cogoport/components';
 import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
 import FREIGHT_DETAILS_MAPPING from '../../../utlis/freight-details-mapping';
 import SERVICE_TYPES_MAPPING from '../../../utlis/service-types-mapping';
+import ShowMoreTNC from '../ShowMoreTnC';
 
 import PopOverContent from './PopContent';
 import styles from './style.module.css';
 
 function TermCard({
-	listItem,
-	showMoreTnC,
-	onClickUpdateTerms,
-	onClickShowMoreTnC,
-	refetch,
-	description,
-	EditForm,
+	listItem = {},
+	showMoreTnC = false,
+	onClickUpdateTerms = () => {},
+	onClickShowMoreTnC = () => {},
+	refetch = () => {},
+	description = [],
+	tncLevel = 'basicInfo',
+	setTncLevel = () => {},
+	organizationId = null,
+	setEditTncModalId = () => {},
+	EditForm = () => {},
 }) {
 	const [showEdit, setShowEdit] = useState(false);
 
 	const editRef = useRef(null);
 
-	const onEditSubmit = () => {
-		editRef.current.formSubmit();
-	};
+	// const onEditSubmit = () => {
+	// 	editRef.current.formSubmit();
+	// };
 
 	const LABEL_MAPPING = {
 		fcl_freight : 'Shipping Line',
@@ -34,8 +39,19 @@ function TermCard({
 	const callBack = () => setShowEdit(null);
 	return (
 		<div>
-			<div className={styles.container}>
-				<div className={styles.freight_item_header} onClick={onClickShowMoreTnC}>
+			<div
+				className={styles.container}
+				style={showMoreTnC ? {
+					'background-color'        : '#f6f5fe',
+					'border-top-left-radius'  : '8px',
+					'border-top-right-radius' : '8px',
+				} : null}
+			>
+				<div
+					className={styles.freight_item_header}
+					onClick={onClickShowMoreTnC}
+					role="presentation"
+				>
 					<div
 						className={styles.freight_stroke}
 						style={{ backgroundColor: SERVICE_TYPES_MAPPING?.[service]?.color }}
@@ -43,7 +59,7 @@ function TermCard({
 
 					<div className={styles.row} style={{ width: '100%' }}>
 						{Object.values(FREIGHT_DETAILS_MAPPING).map((freightItem) => {
-							const { key, label, value, span } = freightItem;
+							const { key, label, value } = freightItem;
 							const valueItem = value(listItem);
 							let labelName = label;
 							if (
@@ -82,30 +98,31 @@ function TermCard({
 						render={(
 							<PopOverContent
 								setShowEdit={setShowEdit}
-								EditForm={EditForm}
+								setEditTncModalId={setEditTncModalId}
 								item={listItem}
+								setVisible={setVisible}
 								onClickUpdateTerms={onClickUpdateTerms}
+								status={status}
+								propsForUpdation={{
+									id,
+									status,
+									refetch,
+								}}
 							/>
 						)}
 						visible={visible}
 					/>
 
 				</div>
+
 			</div>
-			<div className={styles.freight_item_main}>
 
-				{showMoreTnC && description.map((descrip, index) => (
-					<div key={index + 1} className={styles.applied_terms}>
-						<div className={styles.index}>
-							{index + 1}
-							.
-						</div>
+			{showMoreTnC && (
+				<div className={styles.freight_item_main}>
+					<ShowMoreTNC description={description} />
+				</div>
+			)}
 
-						{descrip}
-
-					</div>
-				))}
-			</div>
 			{showEdit ? (
 				<Modal
 					show={showEdit}
@@ -113,32 +130,21 @@ function TermCard({
 					size="lg"
 					placement="top"
 				>
-					<Modal.Header title="Edit Detention / Demurrage" />
+					<Modal.Header title="Update Terms And Condition" />
 					<Modal.Body>
 						<EditForm
-							item={showEdit}
+							item={listItem}
 							ref={editRef}
+							tncLevel={tncLevel}
+							setTncLevel={setTncLevel}
+							organizationId={organizationId}
+							setEditTncModalId={setEditTncModalId}
 							// handleSubmitForm={handleSubmitForm}
+							setShowEdit={setShowEdit}
 							callBack={callBack}
+							refetch={refetch}
 						/>
 					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							themeType="secondary"
-							style={{ marginRight: 8 }}
-							// disabled={createLoading}
-							onClick={() => setShowEdit(null)}
-						>
-							Cancel
-						</Button>
-
-						<Button
-							onClick={onEditSubmit}
-							// disabled={createLoading}
-						>
-							Submit
-						</Button>
-					</Modal.Footer>
 				</Modal>
 			) : null}
 		</div>
