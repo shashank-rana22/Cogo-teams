@@ -2,7 +2,7 @@
     "header_tabs_approved_awb": "Được chấp thuận AWB",
     "header_tabs_handed_over": "Đã bàn giao",
     "header_tabs_final_awb": "AWB cuối cùng",
-    "header_tabs_completed_awb": "Hoàn thành AWB",
+    "header_tabs_completed_awb": "Hoàn thành cuối cùng AWB",
     "header_printing_desk": "Bàn in",
     "header_search_placeholder": "Tìm kiếm theo số SID hoặc AWB",
     "header_toggle_onlabel": "Phù hợp với tôi",
@@ -122,5 +122,6 @@
     "completed_awb_fields_sid_label": "SID",
     "completed_awb_fields_awb_label": "AWB",
     "completed_awb_fields_awb_category_label": "AWB Loại",
-    "completed_awb_fields_due_on_label": "Do trên"
+    "completed_awb_fields_uploaded_by_label": "Được tải lên bởi",
+    "completed_awb_fields_uploaded_at_label": "Tải lên tại"
 }

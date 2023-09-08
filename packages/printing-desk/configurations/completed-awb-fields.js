@@ -30,19 +30,24 @@ export const completedAwbFields = ({ t = () => {} }) => {
 			),
 		},
 		{
-			key    : 'deadline',
-			label  : t('printingDesk:completed_awb_fields_due_on_label'),
+			key    : 'uploadedAt',
+			label  : t('printingDesk:completed_awb_fields_uploaded_at_label'),
 			span   : 1,
 			render : (item) => (
-				<div style={{ textTransform: 'uppercase' }}>
-					{formatDate({
-						date       : item?.deadline,
+				<div>
+					{item?.uploadedAt ? formatDate({
+						date       : item.uploadedAt,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'date',
-
-					})}
+					})
+						: '-'}
 				</div>
 			),
+		},
+		{
+			key   : 'uploadedByUserName',
+			label : t('printingDesk:completed_awb_fields_uploaded_by_label'),
+			span  : 1,
 		},
 	];
 	return fields;

@@ -1,7 +1,7 @@
 {
     "header_tabs_approved_awb": "批准的AWB",
     "header_tabs_handed_over": "移交了",
-    "header_tabs_final_awb": "最终AWB",
+    "header_tabs_final_awb": "最终最终的AWB",
     "header_tabs_completed_awb": "完全的 AWB",
     "header_printing_desk": "打印桌",
     "header_search_placeholder": "通过SID或AWB编号搜索",
@@ -122,5 +122,6 @@
     "completed_awb_fields_sid_label": "SID",
     "completed_awb_fields_awb_label": "AWB",
     "completed_awb_fields_awb_category_label": "AWB 类别",
-    "completed_awb_fields_due_on_label": "由于上"
+    "completed_awb_fields_uploaded_by_label": "上传",
+    "completed_awb_fields_uploaded_at_label": "上传"
 }
