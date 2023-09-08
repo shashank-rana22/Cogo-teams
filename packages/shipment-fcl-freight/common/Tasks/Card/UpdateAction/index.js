@@ -11,7 +11,7 @@ import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 const CAN_REASSIGN_TASK_STAKEHOLDER = ['superadmin', 'admin', 'tech_super_admin'];
 
 function UpdateAction({ task = {}, hideThreeDots = false }) {
-	const { servicesList: services, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { servicesList: services = [], activeStakeholder = '' } = useContext(ShipmentDetailContext);
 
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
