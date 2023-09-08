@@ -30,7 +30,7 @@
 
 .number {
 	display: flex;
-	flex: 0 0 23%;
+	flex: 0 0 18%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -54,7 +54,7 @@
 
 .in_number {
 	display: flex;
-	flex: 0 0 23%;
+	flex: 0 0 18%;
 	flex-direction: column;
 	align-items: center;
 
@@ -120,14 +120,13 @@
 
 .invoice_status_and_action {
 	display: flex;
-	flex: 0 0 25%;
+	flex: 0 0 24%;
 	align-items: center;
-	justify-content: space-between;
 
 	& .status {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		margin-right: 18px;
 
 		& > svg {
 			margin-left: 8px;
@@ -135,7 +134,7 @@
 	}
 
 	& .status_text {
-		width: 110px;
+		width: 70px;
 		padding: 2px;
 		font-size: var(--font-size-sm);
 		text-align: center;
