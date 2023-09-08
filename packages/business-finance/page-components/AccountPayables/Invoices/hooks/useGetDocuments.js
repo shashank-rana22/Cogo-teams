@@ -11,15 +11,6 @@ const useGetDocument = () => {
 		},
 		{ manual: true },
 	);
-	// const [{ data: ApproveReject, loading: ApproveRejectLoading }, ApproveRejectTrigger,
-	// ] = useRequestBf(
-	// 	{
-	// 		url     : '/purchase/payrun-bill',
-	// 		method  : 'put',
-	// 		authKey : 'get_purchase_payrun_bill',
-	// 	},
-	// 	{ manual: true },
-	// );
 
 	const onGetDocument = async (id = '', services = '') => {
 		try {
@@ -37,11 +28,8 @@ const useGetDocument = () => {
 
 	return {
 		onGetDocument,
-		// onApproveReject,
 		DocumentData,
-		// ApproveReject,
 		billsLoading,
-		// ApproveRejectLoading,
 	};
 };
 export default useGetDocument;
