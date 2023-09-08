@@ -1,34 +1,43 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useListOrganizationTradeParties = ({ trade_party_id }) => {
+import toastApiError from '../utils/toastApiError';
+
+const useListOrganizationTradeParties = ({
+	defaultParams = {},
+	defaultFilters = {},
+}) => {
 	const [data, setData] = useState([]);
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_organization_trade_parties',
 			params : {
-				organization_data_required : true,
-				filters                    : {
-					organization_trade_party_detail_id : trade_party_id,
-					status                             : 'active',
+				filters: {
+					...(defaultFilters || {}),
 				},
+				...(defaultParams || {}),
 			},
 		},
 		{ manual: true },
 	);
 	const apiTrigger = useCallback(async () => {
 		try {
-			const res = await trigger({});
-			// console.log("res", res.data);
+			const res = await trigger();
+
 			setData(res?.data?.list);
 		} catch (err) {
-			console.log('error occured');
-			console.log(err);
+			toastApiError(err);
 		}
 	}, [trigger]);
+
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger, trade_party_id]);
-	return { data, loading };
+	}, [apiTrigger]);
+
+	return {
+		data,
+		loading,
+		apiTrigger,
+	};
 };
 export default useListOrganizationTradeParties;

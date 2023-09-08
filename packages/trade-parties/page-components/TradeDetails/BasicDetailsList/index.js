@@ -23,7 +23,13 @@ function BasicDetailsList({ trade_party_id = '', trade_partner_id = '' }) {
 		orgLoading,
 	});
 
-	const { data, loading } = useListOrganizationTradeParties({ trade_party_id });
+	const { data, loading } = useListOrganizationTradeParties({
+		defaultParams  : {	organization_data_required: true },
+		defaultFilters : {
+			organization_trade_party_detail_id : trade_party_id,
+			status                             : 'active',
+		},
+	});
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Trade Networks</div>

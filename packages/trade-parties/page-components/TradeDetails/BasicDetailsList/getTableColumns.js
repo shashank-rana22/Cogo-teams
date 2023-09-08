@@ -11,7 +11,8 @@ const CRM_MAPPING = {
 };
 
 const getAccountType = ({ organization = {} }) => {
-	if (organization?.account_type === 'service_provider') { return 'Service Provider'; }
+	if (organization?.account_type === 'service_provider') return 'Service Provider';
+
 	if (organization?.tags?.includes('partner')) return 'Channel Partner';
 
 	return 'Importer/Exporter';

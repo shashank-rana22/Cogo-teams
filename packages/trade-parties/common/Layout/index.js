@@ -5,7 +5,7 @@ import FormElement from './FormElement';
 import getWidthPercent from './getWidthPercent';
 import styles from './styles.module.css';
 
-function Layout({ controls = [], control = {}, errors = {}, showElements = {}, formValues = {} }) {
+function Layout({ controls = [], control = {}, errors = {}, showElements = {} }) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
 			return showElements[c.name];
@@ -25,7 +25,6 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 							key={ctrl.name}
 							control={control}
 							error={errors?.[ctrl.name]}
-							formValues={formValues}
 						/>
 					);
 				}

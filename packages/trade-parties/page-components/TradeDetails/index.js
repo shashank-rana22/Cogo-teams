@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 
 import useGetOrganizationTradePartyDetail from '../../hooks/useGetOrganizationTradePartyDetail';
 
-import BasicDetails from './BasicDetails/index';
-import BasicDetailsList from './BasicDetailsList/index';
-import SageMapping from './SageMapping/index';
+import BasicDetails from './BasicDetails';
+import BasicDetailsList from './BasicDetailsList';
+import SageMapping from './SageMapping';
 
 const TWO = 2;
 function TradeDetails() {

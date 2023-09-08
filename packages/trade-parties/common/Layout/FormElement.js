@@ -32,8 +32,6 @@ const CountrySelectController = dynamic(
 	{ ssr: false },
 );
 
-// coutury controll
-
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
 

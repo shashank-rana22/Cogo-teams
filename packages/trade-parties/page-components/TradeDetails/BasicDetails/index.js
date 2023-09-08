@@ -6,9 +6,11 @@ import styles from './styles.module.css';
 
 function BasicDetails({ tradePartyDetails = {}, loading = false }) {
 	const {
-		legal_business_name = '', registration_number = '', serial_id = '',
+		legal_business_name = '',
+		registration_number = '',
+		serial_id = '',
 		updated_at = '',
-	} = (tradePartyDetails.tradePartyDetails || {});
+	} =	tradePartyDetails?.tradePartyDetails || {};
 
 	if (loading) return null;
 	return (

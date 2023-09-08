@@ -1,15 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
 const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
 	const [data, setData] = useState([]);
 	const [{ loading }, trigger] = useRequest(
-		{
-			url: '/get_organization',
-		},
-		{
-			manual: true,
-		},
+		{ url: '/get_organization' },
+		{ manual: true },
 
 	);
 	const apiTrigger = useCallback(async (val) => {
@@ -22,6 +20,7 @@ const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
 			}
 		} catch (err) {
 			setData([]);
+			toastApiError(err);
 		}
 	}, [trigger, refetch]);
 
