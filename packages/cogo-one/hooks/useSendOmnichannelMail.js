@@ -4,17 +4,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
+import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 import { getCommunicationPayload } from '../helpers/communicationPayloadHelpers';
 
 const useSendOmnichannelMail = ({
-	scrollToBottom = () => {},
-	formattedData = {},
-	emailState = {},
-	draftMessage = '',
-	uploadedFiles = [],
-	mailActions = {},
-	resetEmailStates = () => {},
-	source = '',
+	setEmailState = () => {},
+	setButtonType = () => {},
 }) => {
 	const {
 		user: { id: userId, name = '' },
@@ -28,15 +23,19 @@ const useSendOmnichannelMail = ({
 		{ manual: true, autoCancel: false },
 	);
 
-	const { actionType = '' } = mailActions || {};
-
-	const sendMail = async () => {
+	const sendMail = async ({
+		source = '',
+		uploadedFiles = [],
+		formattedData = {},
+		mailActions = {},
+		emailState = {},
+	}) => {
 		try {
 			await trigger({
 				data: getCommunicationPayload({
 					userId,
 					formattedData,
-					draftMessage,
+					draftMessage: emailState?.body,
 					uploadedFiles,
 					emailState,
 					mailActions,
@@ -44,10 +43,10 @@ const useSendOmnichannelMail = ({
 					source,
 				}),
 			});
-			Toast.success(`${startCase(actionType)} mail sent successfully`);
+			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 
-			scrollToBottom();
-			resetEmailStates();
+			setEmailState({ ...DEFAULT_EMAIL_STATE, scrollToTop: true });
+			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

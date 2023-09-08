@@ -3718,6 +3718,11 @@ const partner = {
 			feature      : 'rate_feedbacks',
 		},
 		{
+			api          : 'list_spot_search_stats',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
+		{
 			api          : 'update_checkout_risk_category',
 			access_type  : 'private',
 			service_name : 'checkout',
@@ -12475,6 +12480,7 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+
 	],
 	cogo_fx: [
 		{
@@ -12679,6 +12685,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'bulk_update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	ground_ops: [
 		{
@@ -12837,6 +12848,11 @@ const partner = {
 		},
 		{
 			api          : 'list_user_call_details',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_voice_call_record',
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
@@ -13274,6 +13290,16 @@ const partner = {
 			api          : 'update_shipment_primary_poc',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'onboard_lead_organization',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
 		},
 	],
 	analytics_dashboard: [
@@ -13780,6 +13806,52 @@ const partner = {
 			api          : 'bulk_reallocate_shipment_stakeholders',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+	],
+	warehouse_management: [
+		{
+			api         : 'get_air_coe_warehouse_management_list_configurations',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_list_schedules',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_schedule',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_schedule',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_app_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_list_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_inventory',
+			access_type : 'private',
 		},
 	],
 	printing_desk: [

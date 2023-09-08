@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 const MIN_COUNT = 0;
 const MIN_AVERAGE_RATING = 3;
 const MIN_ROUND_UP_DIGIT = 2;
+const DECIMAL_VALUE = 0;
 
 function Stats({
 	totalQuotationSend = 0,
@@ -34,7 +35,7 @@ function Stats({
 
 	const escalateCount = data?.total_count || MIN_COUNT;
 
-	const { avg_rating: averageRating = '' } = rating || [];
+	const averageRating = (rating || []).find((item) => item?.avg_rating)?.avg_rating;
 
 	const emailObj = Array.isArray(agentMsgStats)
 		? (agentMsgStats || []).filter((item) => item.type === 'email') : [];
@@ -54,13 +55,15 @@ function Stats({
 	const totalCallReceived = incoming_answered + incoming_missed;
 	const totalChatAssigned = active + escalated + warning;
 
+	const customerSatisfactionScore = averageRating ? (averageRating).toFixed(DECIMAL_VALUE) : null;
+
 	const STATS_FEEDBACK_COUNT = {
 		no_of_bookings              : getFormattedNumber(booked || MIN_COUNT),
 		no_of_quotation_send        : getFormattedNumber(totalQuotationSend || MIN_COUNT),
 		chats_assigned              : getFormattedNumber(totalChatAssigned || MIN_COUNT),
 		calls_made                  : getFormattedNumber(totalCallMade || MIN_COUNT),
 		calls_received              : getFormattedNumber(totalCallReceived || MIN_COUNT),
-		customer_satisfaction_score : averageRating,
+		customer_satisfaction_score : customerSatisfactionScore,
 		no_of_rates_reverted        : getFormattedNumber(rateRevert || MIN_COUNT),
 		no_of_rate_sheets_received  : '0',
 		avg_response_time           : `${(avgResponseTime || MIN_COUNT)?.toFixed(MIN_ROUND_UP_DIGIT)} min`,
@@ -70,6 +73,9 @@ function Stats({
 	};
 
 	const STATS_FEEDBACK_MAPPING = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.stats_feedback_count;
+
+	const renderIcon = averageRating ? RATING_ELEMENTS[averageRating >= MIN_AVERAGE_RATING ? 'happy' : 'sad'].image
+		: RATING_ELEMENTS.sad.image;
 
 	return (
 		<div className={styles.stats_container}>
@@ -81,8 +87,8 @@ function Stats({
 				>
 					<div className={styles.title}>{startCase(item)}</div>
 					<div className={styles.count_with_icon}>
-						{item === 'customer_satisfaction_score' && !averageRating ? (
-							RATING_ELEMENTS[averageRating >= MIN_AVERAGE_RATING ? 'happy' : 'sad'].image
+						{item === 'customer_satisfaction_score' ? (
+							renderIcon
 						) : null}
 
 						<div className={styles.count}>

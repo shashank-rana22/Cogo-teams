@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { FIREBASE_TABS } from '../../../../constants';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -106,9 +107,17 @@ function AgentDetails({
 			orgId         : organization_id,
 			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
 		},
+		firebase_emails: {
+			userId        : user_id,
+			name          : messageName || lead_user_details?.name,
+			userEmail     : email || lead_user_details?.email,
+			mobile_number : userMessageMobileNumber,
+			orgId         : organization_id,
+			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
+		},
 	};
 
-	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
+	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab] || {};
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
 		sender,
@@ -167,7 +176,7 @@ function AgentDetails({
 
 				<div className={styles.title}>Profile</div>
 				<div className={styles.quick_actions}>
-					{activeTab === 'message' && (
+					{FIREBASE_TABS.includes(activeTab) && (
 						<div
 							role="presentation"
 							className={styles.copy_link}
@@ -184,7 +193,7 @@ function AgentDetails({
 
 			<ContactVerification leadUserId={leadUserId} userId={userId} loading={getUserLoading} userData={userData} />
 
-			{(activeTab === 'message' && !getUserLoading && !orgLoading)
+			{(FIREBASE_TABS.includes(activeTab) && !getUserLoading && !orgLoading)
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}

@@ -1,4 +1,5 @@
 import { Button, Modal, Loader } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
@@ -15,6 +16,8 @@ import styles from './styles.module.css';
 import useMyDetails from './useMyDetails';
 
 function MyProfile() {
+	const router = useRouter();
+
 	const { t } = useTranslation(['profile']);
 
 	const {
@@ -77,12 +80,21 @@ function MyProfile() {
 				</div>
 
 				<div className={styles.change_password_container}>
+					<div className={styles.notification_redirect}>
+						<Button
+							onClick={() => router.push('/notifications')}
+						>
+							{t('profile:notification_button')}
+						</Button>
+					</div>
+
 					<Button
 						className="primary sm"
 						onClick={() => setChangepasswordModal(true)}
 					>
 						{t('profile:chanage_password_button')}
 					</Button>
+
 					<GrantOutlookAccess />
 				</div>
 			</div>

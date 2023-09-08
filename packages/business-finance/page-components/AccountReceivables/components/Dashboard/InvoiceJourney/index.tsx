@@ -1,9 +1,10 @@
 import { Placeholder, Tooltip, Select } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { SALES_FUNNEL_OPTIONS } from '../../../constants';
+import { getSalesFunnelOptions } from '../../../constants';
 import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
@@ -14,6 +15,8 @@ interface InvoiceJourneyProps {
 }
 
 function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const {
 		journeyData, journeyLoading, dateFilter,
 		setDateFilter, optionsVal,
@@ -29,29 +32,29 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	} = journeyData || {};
 
 	const getCircleData = [
-		{ id: 1, number: draftInvoicesCount || 0, label: 'Draft' },
-		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: 'Finance Accepted' },
-		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: `${irnLabel} Generated` },
-		{ id: 4, number: settledInvoicesCount || 0, label: 'Settled' },
+		{ id: 1, number: draftInvoicesCount || 0, label: t('draft') },
+		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: t('finance_accepted') },
+		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: `${irnLabel} ${t('generated')}` },
+		{ id: 4, number: settledInvoicesCount || 0, label: t('settled') },
 	];
 
 	const getTatData = [
 		{
 			id    : 1,
-			label : 'Draft - Finance Accepted',
-			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} Hours `,
+			label : `${t('draft')} - ${t('finance_accepted')} `,
+			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} ${t('hours')} `,
 			Count : financeAcceptedInvoiceEventCount || 0,
 		},
 		{
 			id    : 2,
-			label : `Finance Accepted - ${irnLabel} Generated`,
-			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} Hours `,
+			label : `${t('finance_accepted')} - ${irnLabel} ${t('generated')}`,
+			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} ${t('hours')} `,
 			Count : irnGeneratedInvoiceEventCount || 0,
 		},
 		{
 			id    : 3,
-			label : `${irnLabel} Generated - Settled `,
-			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} Hours `,
+			label : `${irnLabel} ${t('generated')} - ${t('settled')} `,
+			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} ${t('hours')} `,
 			Count : settledInvoiceEventCount || 0,
 		},
 	];
@@ -65,14 +68,11 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 				<div className={styles.flex}>
 					<div>
 						<div className={styles.journey}>
-							Invoice Statistics and TAT
+							{t('invoice_statistics_and_TAT')}
 							<Tooltip
 								content={(
-									<div>
-										Current month Invoice
-										{' '}
-										<br />
-										Statistics and TAT.
+									<div className={styles.tooltip}>
+										{t('invoice_tooltip')}
 									</div>
 								)}
 								placement="top"
@@ -125,8 +125,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 						<Select
 							value={dateFilter.month}
 							onChange={(val:string) => onChange(val, 'month')}
-							placeholder="By Month"
-							options={SALES_FUNNEL_OPTIONS}
+							placeholder={t('by_month_placeholder')}
+							options={getSalesFunnelOptions(t)}
 							isClearable
 						/>
 					</div>
@@ -134,7 +134,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					<Select
 						value={dateFilter.year}
 						onChange={(val:string) => onChange(val, 'year')}
-						placeholder="By Year"
+						placeholder={t('by_year_placeholder')}
 						options={optionsVal()}
 						isClearable
 					/>
@@ -164,7 +164,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 									<div className={styles.tat_flex}>
 										<div className={styles.border_tat} />
 										<div className={styles.tat_value}>
-											TAT :
+											<span className={styles.span}>{t('TAT')}</span>
+											:
 											<span className={styles.color_tat}>{item?.TAT}</span>
 											<span className={styles.color_count}>
 												(

@@ -104,3 +104,8 @@
 	width: 74%;
 	padding: 20px;
 }
+
+.tooltip {
+	word-break: break-word;
+	word-wrap: break-word;
+}

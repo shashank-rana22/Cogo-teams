@@ -9,7 +9,7 @@ function objectToInlineStyles(obj = {}) {
 }
 
 function getRenderEmailBody({ html = '' }) {
-	return html.replace(
+	let updatedHtml = html.replace(
 		GLOBAL_CONSTANTS.regex_patterns.html_class_regex,
 		(match, classNames) => {
 			const classNamesArray = classNames?.split(' ') || [];
@@ -25,6 +25,10 @@ function getRenderEmailBody({ html = '' }) {
 			return `style="${inlineStyles}"`;
 		},
 	);
+
+	updatedHtml = updatedHtml.replaceAll('<p>', "<p style='margin: 0'>");
+
+	return updatedHtml;
 }
 
 export default getRenderEmailBody;
