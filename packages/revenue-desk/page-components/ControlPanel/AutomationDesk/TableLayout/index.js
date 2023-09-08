@@ -1,40 +1,21 @@
-import { Button, Placeholder } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateRight, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { columnTitle, list, NUMBERS } from '../../../common/columns';
+import RowElement from '../../../common/RowElement';
 import useCreateRDAutomationParameters from '../../hooks/useCreateRDAutomationParameters';
 import useUpdateRDAutomationParameter from '../../hooks/useUpdateRDAutomationParameter';
 
-import RowElement from './RowElement';
 import styles from './styles.module.css';
 
-const NUMBERS = {
-	ONE     : 1,
-	HUNDRED : 100,
-};
-const columnTitle = ['variables', 'current weightage', 'Add weightage'];
-const list = [
-	{ key: 'preferred_shipping_line', label: 'Preferred Shipping Line' },
-	{ key: 'same_port_same_customer', label: 'Same Customer in Last 5 Shipments' },
-	{ key: 'same_customer', label: 'Different port, same SP' },
-	{ key: 'preferred_supplier', label: 'Preferred Supplier' },
-	{ key: 'monthly_active_booking', label: 'Active Shipment' },
-	{ key: 'allocation_ratio', label: 'Allocation Ratio' },
-	{ key: 'overall_weightage', label: 'Fulfillment Ratio' },
-	{ key: 'overall_weightage_2_day', label: 'Ratio 2 Day' },
-	{ key: 'overall_weightage_7_day', label: 'Ratio 7 Day' },
-	{ key: 'overall_weightage_30_day', label: 'Ratio 30 Day' },
-	{ key: 'threshold', label: 'Profitability Cutoff' },
-	{ key: 'weightage_override_cuttoff', label: 'Weightage Override Cutoff' },
-];
 function TableLayout({
 	filter = {},
-	addWeightage, maxHeight, margin,
-	openForm, setOpenForm = () => {},
+	addWeightage = false, maxHeight = '', margin = '',
+	openForm = false, setOpenForm = () => {},
 	val = [],
 	refetch = () => {},
-	loading = false,
 }) {
 	const [showWeight, setShowWeight] = useState(false);
 	const [disabledInput, setDisabledInput] = useState(false);
@@ -55,40 +36,34 @@ function TableLayout({
 	return (
 		<div>
 			<div className={styles.container} style={{ margin }}>
-				{loading && <Placeholder height="50px" width="1250px" />}
-				{!loading && (
-					<>
-						<div>{startCase(service_type)}</div>
-						<div className={styles.content_details}>
-							<div className={styles.content}>
-								Trade Type :
-								{startCase(trade_type)}
-							</div>
+				<div>{startCase(service_type)}</div>
+				<div className={styles.content_details}>
+					<div className={styles.content}>
+						Trade Type :
+						{startCase(trade_type)}
+					</div>
 
-							<div className={styles.content}>
-								Container Type:
-								{startCase(container_type)}
-							</div>
+					<div className={styles.content}>
+						Container Type:
+						{startCase(container_type)}
+					</div>
 
-							<div className={styles.content}>
-								{startCase(inco_term)}
-							</div>
+					<div className={styles.content}>
+						{startCase(inco_term)}
+					</div>
 
-							<Button onClick={() => setShowWeight(!showWeight)} size="md" themeType="secondary">
-								{showWeight ? (
-									<IcMArrowRotateDown
-										style={{ marginRight: '10px' }}
-									/>
-								) : <IcMArrowRotateRight style={{ marginRight: '10px' }} />}
-								VIEW WEIGHTAGE
-							</Button>
-							<Button onClick={() => handelInActive(val?.id)} size="md" themeType="secondary">
-								InActive
-							</Button>
-
-						</div>
-					</>
-				)}
+					<Button onClick={() => setShowWeight(!showWeight)} size="md" themeType="secondary">
+						{showWeight ? (
+							<IcMArrowRotateDown
+								style={{ marginRight: '10px' }}
+							/>
+						) : <IcMArrowRotateRight style={{ marginRight: '10px' }} />}
+						VIEW WEIGHTAGE
+					</Button>
+					<Button onClick={() => handelInActive(val?.id)} size="md" themeType="secondary">
+						InActive
+					</Button>
+				</div>
 			</div>
 			{showWeight && (
 				<div className={styles.list}>

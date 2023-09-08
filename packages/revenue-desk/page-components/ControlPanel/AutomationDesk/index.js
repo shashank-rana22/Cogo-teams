@@ -1,36 +1,64 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Placeholder } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import {
+	VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR, VALUE_FIVE, VALUE_ZERO, VALUE_TEN, SRC,
+} from '../../constants';
 import useListAutomationParameter from '../hooks/useListAutomationParameter';
 
 import FilterLayout from './FilterLayout';
 import TableLayout from './TableLayout';
 
 function AutomationDesk() {
-	const ZERO_VALUE = 0;
-	const ONE_VALUE = 1;
-	const TEN_VALUE = 10;
 	const [filter, setFilter] = useState({ service_type: 'fcl_freight_service' });
-	const { data, refetch = () => {}, loading, page, setPage } = useListAutomationParameter();
+	const { data, refetch = () => {}, loading = false, page, setPage } = useListAutomationParameter();
 
 	return (
 		<div>
 			<FilterLayout filter={filter} setFilter={setFilter} refetch={refetch} />
-			{data?.list?.map((val) => (
-				<TableLayout
-					filter={filter}
-					val={val}
-					key={val?.id}
-					refetch={refetch}
-					loading={loading}
-				/>
-			))}
-			{(data?.total_count || ZERO_VALUE) > TEN_VALUE ? (
+			{loading
+				&& (
+					[VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR, VALUE_FIVE]?.map((key) => (
+						<Placeholder
+							height="50px"
+							width="1250px"
+							key={key}
+							style={{ margin: '10px' }}
+						/>
+					))
+				)}
+			{data?.list?.length === VALUE_ZERO ? (
+				<div
+					style={{
+						marginTop : '40px',
+						textAlign : 'center',
+					}}
+				>
+					<img
+						src={SRC}
+						alt="empty_page"
+						height="50%"
+						width="50%"
+					/>
+				</div>
+			) : (
+				<div>
+					{data?.list?.map((val) => (
+						<TableLayout
+							filter={filter}
+							val={val}
+							key={val?.id}
+							refetch={refetch}
+						/>
+					))}
+				</div>
+			)}
+			{(data?.total_count || VALUE_ZERO) > VALUE_TEN ? (
 				<div style={{ float: 'right', marginTop: '15px' }}>
 					<Pagination
 						type="table"
-						totalItems={data?.total_count || ZERO_VALUE}
-						currentPage={page || ONE_VALUE}
+						totalItems={data?.total_count || VALUE_ZERO}
+						currentPage={page || VALUE_ONE}
 						pageSize={data?.page_limit}
 						onPageChange={setPage}
 					/>

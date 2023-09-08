@@ -1,7 +1,9 @@
-import { Button, Select, Pagination } from '@cogoport/components';
+import { Button, Select, Pagination, Placeholder } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { serviceOptions } from '../../constants';
+import {
+	serviceOptions, VALUE_FIVE, VALUE_FOUR, VALUE_ONE, VALUE_THREE, VALUE_TWO, VALUE_ZERO, VALUE_TEN, SRC,
+} from '../../constants';
 import useListRevenueDeskWallet from '../hooks/useListRevenueDeskWallet';
 
 import CreateWallet from './CreateWallet';
@@ -10,11 +12,6 @@ import styles from './styles.module.css';
 
 function AutomationWallet() {
 	const [createWallet, setCreateWallet] = useState(false);
-
-	const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
-	const ZERO_VALUE = 0;
-	const ONE_VALUE = 1;
-	const TEN_VALUE = 10;
 	const {
 		data, filters = {}, setFilter = () => {},
 		refetch = () => {}, loading, page, setPage,
@@ -44,7 +41,19 @@ function AutomationWallet() {
 				</Button>
 			</div>
 
-			{data?.list?.length === ZERO_VALUE ? (
+			{loading
+				&& (
+					[VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR, VALUE_FIVE]?.map((key) => (
+						<Placeholder
+							height="50px"
+							width="1250px"
+							key={key}
+							style={{ margin: '10px' }}
+						/>
+					))
+				)}
+
+			{data?.list?.length === VALUE_ZERO ? (
 				<div className={styles.empty_icon}>
 					<img
 						src={SRC}
@@ -57,15 +66,15 @@ function AutomationWallet() {
 				<div>
 					{data?.list?.map((val) => (
 						<div key={val?.id}>
-							<AutomationWalletDetails data={val} refetch={refetch} loading={loading} />
+							<AutomationWalletDetails data={val} refetch={refetch} />
 						</div>
 					))}
-					{(data?.total_count || ZERO_VALUE) > TEN_VALUE ? (
+					{(data?.total_count || VALUE_ZERO) > VALUE_TEN ? (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
-								totalItems={data?.total_count || ZERO_VALUE}
-								currentPage={page || ONE_VALUE}
+								totalItems={data?.total_count || VALUE_ZERO}
+								currentPage={page || VALUE_ONE}
 								pageSize={data?.page_limit}
 								onPageChange={setPage}
 							/>

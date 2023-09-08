@@ -3,31 +3,21 @@ import { IcMArrowRotateDown, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { columnTitle, list } from '../../../common/columns';
+import RowElement from '../../../common/RowElement';
 import useCreateRDAutomationParameters from '../../hooks/useCreateRDAutomationParameters';
 
-import RowElement from './RowElement';
 import styles from './styles.module.css';
 
-function Details({ deskValue, addWeightage, margin, openForm, setOpenForm = () => {}, maxHeight, refetch = () => {} }) {
+function Details({
+	deskValue = {},
+	addWeightage = false, margin = '', openForm = false, setOpenForm = () => {}, maxHeight = '', refetch = () => {},
+}) {
 	const NUMBERS = {
 		ONE     : 1,
 		HUNDRED : 100,
 	};
-	const columnTitle = ['variables', 'Add weightage'];
-	const list = [
-		{ key: 'preferred_shipping_line', label: 'Preferred Shipping Line' },
-		{ key: 'same_port_same_customer', label: 'Same Customer in Last 5 Shipments' },
-		{ key: 'same_customer', label: 'Different port, same SP' },
-		{ key: 'preferred_supplier', label: 'Preferred Supplier' },
-		{ key: 'monthly_active_booking', label: 'Active Shipment' },
-		{ key: 'allocation_ratio', label: 'Allocation Ratio' },
-		{ key: 'overall_weightage', label: 'Fulfillment Ratio' },
-		{ key: 'overall_weightage_2_day', label: 'Ratio 2 Day' },
-		{ key: 'overall_weightage_7_day', label: 'Ratio 7 Day' },
-		{ key: 'overall_weightage_30_day', label: 'Ratio 30 Day' },
-		{ key: 'threshold', label: 'Profitability Cutoff' },
-		{ key: 'weightage_override_cuttoff', label: 'Weightage Override Cutoff' },
-	];
+	// const columnTitle = ['variables', 'Add weightage'];
 
 	const [showWeight, setShowWeight] = useState(false);
 	const { apiTrigger = () => {} } = useCreateRDAutomationParameters({ refetch });

@@ -11,7 +11,8 @@ function RowElement({
 	apiTrigger = () => {},
 	deskValue = {},
 	setOpenForm = () => {},
-	openForm,
+	openForm = false,
+	addWeightage = false,
 }) {
 	const shipmentParameters = deskValue?.shipment_parameters;
 	const serviceType = deskValue?.service_type;
@@ -45,7 +46,7 @@ function RowElement({
 	};
 
 	const handelWeightages = () => {
-		apiTrigger({ shipmentParameters, serviceType, weightageList, setOpenForm, openForm });
+		apiTrigger({ shipmentParameters, serviceType, weightageList, setOpenForm, openForm, deskValue });
 	};
 
 	const isFulfillType = (item) => {
@@ -62,22 +63,23 @@ function RowElement({
 							style={{ width: column_width }}
 						>
 							<div className={!isFulfillType(item) ? null : styles.row_subitem}>
-
 								{isFulfillType(item) ? <IcMArrowRotateRight /> : null}
 								<div className={isFulfillType(item) ? styles.text : null}>{item.label}</div>
 							</div>
 						</div>
-						<div style={{ width: column_width }} className={styles.row_item}>
-							{current_weightage?.[item?.key] || GLOBAL_CONSTANTS.zeroth_index}
-							%
-						</div>
+						{!addWeightage && (
+							<div style={{ width: column_width }} className={styles.row_item}>
+								{current_weightage?.[item?.key] || GLOBAL_CONSTANTS.zeroth_index}
+								%
+							</div>
+						)}
 						<div style={{ width: column_width }} className={styles.row_item}>
 							<InputNumber
 								size="sm"
 								placeholder="0.00%"
 								max={100}
 								step={0.1}
-								disabled={!disabledInput}
+								disabled={!disabledInput && !addWeightage}
 								onChange={(val) => setValue({ val, keyValue: item?.key })}
 							/>
 						</div>

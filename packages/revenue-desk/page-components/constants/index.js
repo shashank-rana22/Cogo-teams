@@ -1,3 +1,5 @@
+export const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
+
 export const SELL_RATE_INCREASE_BY = 1.03;
 export const INCREMENT_VALUE = 1;
 export const INCREMENT_BY_ONE = 1;
@@ -15,6 +17,8 @@ export const VALUE_THREE = 3;
 export const VALUE_FOUR = 4;
 export const CBM_TO_KILOS = 166.67;
 export const NEGATIVE_ONE = -1;
+export const VALUE_TEN = 10;
+export const VALUE_FIVE = 5;
 
 export const serviceOptions = [
 	{ label: 'FCL Freight', value: 'fcl_freight_service' },
