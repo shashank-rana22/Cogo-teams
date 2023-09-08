@@ -27,11 +27,11 @@ function AutoJobClosure() {
 
 	const addId = () => {
 		setConfigButton(false);
-		const arr = list.map((obj) => obj.id);
+		const arr = (list || []).map((obj) => obj.id);
 		setOpenConfig([...arr]);
 
 		let listOfObj = {};
-		list.forEach((obj) => {
+		(list || []).forEach((obj) => {
 			const objid = obj.id;
 
 			const requiredObj = {
