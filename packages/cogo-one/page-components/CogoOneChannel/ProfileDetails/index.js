@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../../constants';
+import { FIREBASE_TABS, ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../../constants';
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
@@ -30,9 +30,10 @@ function ProfileDetails({
 	mailProps = {},
 	chatsConfig = {},
 }) {
-	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
+	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
-	const customerUserId = activeTab === 'message' ? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
+	const customerUserId = FIREBASE_TABS.includes(activeTab)
+		? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
 
 	const [activeSelect, setActiveSelect] = useState(
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
@@ -67,8 +68,8 @@ function ProfileDetails({
 		{ orgId },
 	);
 	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
-	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.tab)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.tab) && chatsConfig?.expandSideBar));
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.data?.channel_type) && chatsConfig?.expandSideBar));
 
 	useEffect(() => {
 		setShowMore(false);

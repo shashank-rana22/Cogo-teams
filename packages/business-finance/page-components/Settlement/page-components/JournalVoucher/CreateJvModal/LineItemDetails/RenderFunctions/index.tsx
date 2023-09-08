@@ -1,4 +1,4 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button, Popover, cl } from '@cogoport/components';
 import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMOverflowDot } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -8,93 +8,136 @@ import TabController from '../ControlledTab';
 
 import styles from './styles.module.css';
 
-const renderButtons = ({ lineitemvalue, insert, index }) => (
-	<div className={styles.flexcol}>
-		<Button
-			className={styles.link}
-			onClick={() => {
-				insert(index + 1, lineitemvalue);
-			}}
-			style={{ marginBottom: '4px' }}
-		>
-			Duplicate
-		</Button>
-		<Button
-			className={styles.link}
-			onClick={() => {
-				insert(index + 1, EMPTY_LINE_ITEMS);
-			}}
-		>
-			Insert
-		</Button>
-	</div>
-);
-
-const ACCOUNT_TYPE_MAPPINGS = { AP: 'service_provider', AR: 'importer_exporter' };
-
-const renderTradeParty = (option) => (
-	<div className={styles.tradeparty}>
-		<div>{option?.legal_business_name || ''}</div>
-		<div>
-			<span className={styles.label}>Reg.Number :</span>
-			{option?.registration_number || ''}
+function RenderButtons({
+	lineitemvalue = {},
+	insert = () => {},
+	index = 0,
+}: any) {
+	return (
+		<div className={styles.flexcol}>
+			<Button
+				className={styles.link}
+				onClick={() => {
+					insert(index + 1, lineitemvalue);
+				}}
+				style={{ marginBottom: '4px' }}
+			>
+				Duplicate
+			</Button>
+			<Button
+				className={styles.link}
+				onClick={() => {
+					insert(index + 1, EMPTY_LINE_ITEMS);
+				}}
+			>
+				Insert
+			</Button>
 		</div>
-		<div>
-			<span className={styles.label}>Sage Id :</span>
-			{option?.sage_organization_id || ''}
-		</div>
-	</div>
-);
+	);
+}
 
-const handleModeChange = ({ index, entityCode, accMode, setValue, getGlCode }) => {
+const ACCOUNT_TYPE_MAPPINGS = {
+	AP : 'service_provider',
+	AR : 'importer_exporter',
+};
+
+function RenderTradeParty({
+	option = {
+		legal_business_name  : '',
+		registration_number  : '',
+		sage_organization_id : '',
+	},
+}) {
+	return (
+		<div className={styles.tradeparty}>
+			<div>{option?.legal_business_name || ''}</div>
+			<div>
+				<span className={styles.label}>Reg.Number :</span>
+				{option?.registration_number || ''}
+			</div>
+			<div>
+				<span className={styles.label}>Sage Id :</span>
+				{option?.sage_organization_id || ''}
+			</div>
+		</div>
+	);
+}
+
+const handleModeChange = ({
+	index = 0,
+	entityCode = '',
+	accMode = '',
+	setValue = () => {},
+	getGlCode = () => {},
+}: any) => {
 	getGlCode({ index, entityCode, accMode, setValue });
 };
 
-const renderGlcode = (item) => (`${item?.accountCode} - ${item?.description} - ${item?.ledAccount}`);
+const renderGlcode = (item) => `${item?.accountCode} - ${item?.description} - ${item?.ledAccount}`;
 
 export const renderLineItemFunctions = {
-
 	duplicate: ({ index, watch, insert }) => {
 		const lineitemvalue = watch(`line_items.${index}`);
 		return (
 			<div className={styles.container}>
-				<Popover placement="bottom" render={renderButtons({ lineitemvalue, insert, index })}>
+				<Popover
+					placement="bottom"
+					render={(
+						<RenderButtons
+							lineitemvalue={lineitemvalue}
+							insert={insert}
+							index={index}
+						/>
+					)}
+				>
 					<div className={styles.duplicate}>
 						<IcMOverflowDot height={20} width={20} />
 					</div>
 				</Popover>
 			</div>
-
 		);
 	},
 	entity: ({ control, index, errors, entity }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+		<div
+			className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+		>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.entityCode`}
-				finalvalue={entity}
+				finalValue={entity}
 				disabled
 				asyncKey="list_cogo_entity"
 				placeholder="Select Entity"
 				labelKey="entity_code"
-				initialCall
 			/>
 			{errors?.line_items?.[index]?.entityCode ? (
-				<div className={styles.errors}>
-					EntityCode is Required
-				</div>
+				<div className={styles.errors}>EntityCode is Required</div>
 			) : null}
 		</div>
 	),
-	controller: ({ control, index, setValue, entity, getGlCode, watch, errors }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+	controller: ({
+		control,
+		index,
+		setValue,
+		entity,
+		getGlCode,
+		watch,
+		errors,
+	}) => (
+		<div
+			className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+		>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.accMode`}
 				placeholder="Select Mode"
 				initialCall
 				asyncKey="jv_account_mode"
-				rules={{ required: !isEmpty(watch(`line_items.${index}.tradePartyId`)) }}
+				rules={{
+					required: !isEmpty(
+						watch(`line_items.${index}.tradePartyId`),
+					),
+				}}
 				disabled={isEmpty(entity)}
 				isClearable
 				onChange={(val) => {
@@ -108,16 +151,16 @@ export const renderLineItemFunctions = {
 				}}
 			/>
 			{errors?.line_items?.[index]?.accMode ? (
-				<div className={styles.errors}>
-					* Required
-				</div>
+				<div className={styles.errors}>* Required</div>
 			) : null}
 		</div>
 	),
 	gl_code: ({ control, index, errors, watch, entity }) => {
 		const accMode = watch(`line_items.${index}.accMode`);
 		return (
-			<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+			<div
+				className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+			>
 				<AsyncSelectController
 					control={control}
 					name={`line_items.${index}.glCode`}
@@ -132,53 +175,60 @@ export const renderLineItemFunctions = {
 					rules={{ required: true }}
 				/>
 				{errors?.line_items?.[index]?.glCode ? (
-					<div className={styles.errors}>
-						* Required
-					</div>
+					<div className={styles.errors}>* Required</div>
 				) : null}
 			</div>
 		);
 	},
 	business_partner: ({ control, index, errors, setValue, watch }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+		<div
+			className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+		>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.tradePartyId`}
 				placeholder="Select Partner"
 				asyncKey="list_trade_parties"
-				renderLabel={(option) => renderTradeParty(option)}
+				renderLabel={(option) => <RenderTradeParty option={option} />}
 				isClearable
 				initialCall
 				params={{
 					sage_organization_id_required : true,
 					filters                       : {
-						status       : 'active',
-						account_type : ACCOUNT_TYPE_MAPPINGS[watch(`line_items.${index}.accMode`)] || undefined,
+						status: 'active',
+						account_type:
+							ACCOUNT_TYPE_MAPPINGS[
+								watch(`line_items.${index}.accMode`)
+							] || undefined,
 					},
 				}}
 				onChange={(val, obj) => {
-					setValue(`line_items.${index}.sageOrgId`, obj?.sage_organization_id);
+					setValue(
+						`line_items.${index}.sageOrgId`,
+						obj?.sage_organization_id,
+					);
 				}}
-				rules={{ required: !isEmpty(watch(`line_items.${index}.accMode`)) }}
+				rules={{
+					required: !isEmpty(watch(`line_items.${index}.accMode`)),
+				}}
 			/>
 			<div className={styles.sageid}>
 				{watch(`line_items.${index}.sageOrgId`) || ''}
 			</div>
 			{errors?.line_items?.[index]?.tradePartyId ? (
-				<div className={styles.errors}>
-					* Required
-				</div>
+				<div className={styles.errors}>* Required</div>
 			) : null}
 		</div>
 	),
 
 	type: ({ control, index, errors }) => (
-		<div className={`${styles.inputcontainer} ${styles.paddingleft}`}>
-			<TabController name={`line_items.${index}.type`} control={control} />
+		<div className={cl`${styles.inputcontainer} ${styles.paddingleft}`}>
+			<TabController
+				name={`line_items.${index}.type`}
+				control={control}
+			/>
 			{errors?.line_items?.[index]?.type ? (
-				<div className={styles.errors}>
-					* Required
-				</div>
+				<div className={styles.errors}>* Required</div>
 			) : null}
 		</div>
 	),
@@ -187,7 +237,9 @@ export const renderLineItemFunctions = {
 		const type = watch(`line_items.${index}.type`);
 		const classname = type === 'DEBIT' ? styles.debit : styles.credit;
 		return (
-			<div className={`${styles.inputcontainer} ${styles.paddingleft} ${classname}`}>
+			<div
+				className={cl`${styles.inputcontainer} ${styles.paddingleft} ${classname}`}
+			>
 				<InputController
 					name={`line_items.${index}.amount`}
 					control={control}

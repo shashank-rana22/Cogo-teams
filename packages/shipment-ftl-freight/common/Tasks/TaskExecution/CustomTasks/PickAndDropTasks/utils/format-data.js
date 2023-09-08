@@ -1,5 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
+import { getFileName } from '../../../utils/get-file-name';
+
 export const formatPendingTaskData = ({
 	val = {},
 	task = {},
@@ -10,23 +12,26 @@ export const formatPendingTaskData = ({
 	};
 	const documents = (val?.service_data || []).reduce(
 		(acc, documentItem = {}) => {
-			const { image = '' } = documentItem.data;
-			const data = {
-				...documentItem.data,
-				image: {
-					name    : documentItem.data?.image?.fileName,
-					url     : documentItem.data?.image?.finalUrl,
-					success : true,
-				},
-			};
-			if (image) {
-				const obj = {
-					document_type : doc_type,
-					document_url  : image?.finalUrl || undefined,
-					file_name     : image?.fileName || undefined,
-					data          : data || {},
-				};
-				acc.push(obj);
+			const { image = [] } = documentItem.data || {};
+			if (Array.isArray(image)) {
+				image.forEach((img) => {
+					if (!isEmpty(img)) {
+						const fileUrl = img?.finalUrl || img;
+
+						const dataObj = {
+							...(documentItem?.data || {}),
+							url       : fileUrl,
+							file_name : getFileName(fileUrl),
+						};
+						const obj = {
+							document_type : doc_type,
+							document_url  : fileUrl,
+							file_name     : getFileName(fileUrl),
+							data          : dataObj,
+						};
+						acc.push(obj);
+					}
+				});
 			}
 			return acc;
 		},

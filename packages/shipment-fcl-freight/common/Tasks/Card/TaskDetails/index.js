@@ -2,13 +2,13 @@ import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
+import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CargoDetails from '../../../CargoDetails';
 
-import formatDeadlineDate from './formatDeadlineDate';
+// import formatDeadlineDate from './formatDeadlineDate';
 import getTaskDisplayName from './helpers/getTaskDisplayName';
 import styles from './styles.module.css';
 
@@ -76,15 +76,15 @@ function TaskDetails({
 										separator  : ' - ',
 									})}`}
 								</div>
-							) : (
-								<div className={styles.deadline}>
-									<IcMTimer />
+							) : (null
+							// <div className={styles.deadline}>
+							// 	<IcMTimer />
 
-									{' '}
-									Deadline:
-									{' '}
-									{formatDeadlineDate(new Date(task?.deadline))}
-								</div>
+							// 	{' '}
+							// 	Deadline:
+							// 	{' '}
+							// 	{formatDeadlineDate(new Date(task?.deadline))}
+							// </div>
 							)}
 
 						</Tooltip>

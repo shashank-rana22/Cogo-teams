@@ -9,7 +9,7 @@ import { startDateOfMonth } from '../../../../../../utils/startDateOfMonth';
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-function DateFilter({ setDateFilters = () => {}, range = 'current_month', setRange = () => {} }) {
+function DateFilter({ setDateFilters = () => {}, range = '', setRange = () => {} }) {
 	const [openCalendar, setOpenCalendar] = useState(false);
 	const [date, setDate] = useState({});
 

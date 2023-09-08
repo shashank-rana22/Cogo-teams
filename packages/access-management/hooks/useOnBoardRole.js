@@ -82,7 +82,7 @@ const useOnBoardRole = () => {
 	 * @param {string} [navigation='']
 	 */
 	const getNavOptions = (navigation = '') => {
-		const navObj = getNavData({ navigation, navigationMappings, t });
+		const navObj = getNavData({ navigation, projectNavigationMappings: navigationMappings, t });
 		return getNavigationOptions(permissions, navObj || {});
 	};
 	// eslint-disable-next-line react-hooks/exhaustive-deps
