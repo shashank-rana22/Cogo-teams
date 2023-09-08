@@ -16,11 +16,11 @@ import styles from './styles.module.css';
 function SpotSearch() {
 	const { query = {} } = useRouter();
 
-	const { user_id = '', organization_id = '' } = query;
+	const { user_id = '', organization_id = '', organization_branch_id = '' } = query;
 
 	const [organization, setOrganization] = useState(() => {
 		if (!isEmpty(query)) {
-			return { organization_id, user_id };
+			return { organization_id, user_id, organization_branch_id };
 		}
 
 		return {};
