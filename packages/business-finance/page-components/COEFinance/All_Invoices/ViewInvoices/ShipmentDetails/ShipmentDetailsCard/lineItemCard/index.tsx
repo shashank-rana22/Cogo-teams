@@ -9,10 +9,10 @@ import {
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
-	IcCFtick,
 	IcMOverflowDot,
-	IcCFcrossInCircle,
 	IcMInfo,
+	IcMArrowRotateDown,
+	IcMArrowRotateUp,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import converter from 'number-to-words';
@@ -24,6 +24,7 @@ import {
 	LINE_ITEMS_CHECK,
 } from '../../../../../configurations/LINE_ITEMS';
 
+import RenderAction from './RenderAction';
 import styles from './styles.module.css';
 
 interface LineItemCardInterface {
@@ -35,7 +36,7 @@ interface LineItemCardInterface {
 		subTotal: string | number;
 		tdsAmount: string | number;
 	};
-	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
+	// setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	invoiceType?: string;
@@ -60,7 +61,7 @@ function LineItemCard({
 		subTotal     : '' || 0,
 		tdsAmount    : 0,
 	},
-	setShowLineItem = () => {},
+	// setShowLineItem = () => {},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
 	invoiceType = '',
@@ -71,6 +72,7 @@ function LineItemCard({
 	paidTds = 0,
 	subTotal = 0,
 }: LineItemCardInterface) {
+	const [showDetails, setShowDetails] = useState(false);
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
 	const [rejectedItems, setRejectedItems] = useState({});
@@ -79,16 +81,6 @@ function LineItemCard({
 		id   : '',
 		name : '',
 	});
-
-	const renderAction = (id: string) => {
-		if (approvedItems[id as keyof typeof approvedItems] || isInvoiceApproved) {
-			return <IcCFtick width="17px" height="17px" />;
-		}
-		if (rejectedItems[id as keyof typeof rejectedItems]) {
-			return <IcCFcrossInCircle width="17px" height="17px" />;
-		}
-		return <div className={styles.circle} />;
-	};
 
 	const ApproveCheck = Object.values(approvedItems).filter(
 		(item) => item === true,
@@ -156,7 +148,12 @@ function LineItemCard({
 				}}
 				role="presentation"
 			>
-				{renderAction(item?.id)}
+				<RenderAction
+					id={item?.id}
+					isInvoiceApproved={isInvoiceApproved}
+					rejectedItems={rejectedItems}
+					approvedItems={approvedItems}
+				/>
 			</div>
 		),
 		renderReject: (item: any) => (
@@ -201,76 +198,104 @@ function LineItemCard({
 		.toFixed(MAX_DECIMAL_PLACES);
 
 	return (
-		<div>
-			<div className={styles.main_header}>
-				<div className={styles.instructions}>
-					Check off Line Items and Tax Rate
-					<Tooltip
-						content={(
-							<div className={styles.form_style}>
-								As filled by SO2 In The COGO Invoice
+		<div className={styles.line_item_container}>
+			<div className={styles.header_dropdown}>
+				<div className={styles.main_header}>
+					<div className={styles.instructions}>
+						Line Items and Tax Rates
+						{showDetails ? (
+							<div>
+								<Tooltip
+									content={(
+										<div className={styles.form_style}>
+											As filled by SO2 In The COGO Invoice
+										</div>
+									)}
+								>
+									<div className={styles.tooltip}>
+										<IcMInfo width={15} height={15} />
+									</div>
+								</Tooltip>
+								<Pill color="blue">{invoiceType}</Pill>
 							</div>
-						)}
-					>
-						<div className={styles.tooltip}>
-							<IcMInfo width={15} height={15} />
-						</div>
-					</Tooltip>
-					<Pill color="blue">{invoiceType}</Pill>
-				</div>
-				<div className={styles.small_hr} />
-				{!isInvoiceApproved && (
-					<div className={styles.header_detail}>
-						Click
-						{' '}
-						<IcMOverflowDot />
-						{' '}
-						To reject line item
+						) : undefined}
 					</div>
-				)}
+
+					{showDetails ? (
+						<div>
+							{!isInvoiceApproved && (
+								<div className={styles.header_detail}>
+									Click
+									{' '}
+									<IcMOverflowDot />
+									{' '}
+									To reject line item
+								</div>
+							)}
+							<div className={styles.small_hr} />
+						</div>
+					) : undefined}
+
+				</div>
+
+				<div
+					className={styles.caret}
+					onClick={() => {
+						setShowDetails(!showDetails);
+					}}
+					role="presentation"
+				>
+					{showDetails ? (
+						<IcMArrowRotateUp height="17px" width="17px" />
+					) : (
+						<IcMArrowRotateDown height="17px" width="17px" />
+					)}
+				</div>
 			</div>
 
 			<div className={styles.container}>
-				<List
-					config={LINE_ITEMS}
-					itemData={{ list: lineItems }}
-					functions={functions}
-				/>
+				{showDetails ? (
+					<div>
+						<List
+							config={LINE_ITEMS}
+							itemData={{ list: lineItems }}
+							functions={functions}
+						/>
 
-				<div className={styles.outer}>
-					<div className={styles.flex}>
-						<div className={styles.flex_div}>
-							<div className={styles.info}>T: Taxable</div>
-							<div className={styles.info}>P: Pure Agent</div>
-							<div className={styles.info}>E: Exempted</div>
-							<div className={styles.info}>N: Nil Rated</div>
-							<div className={styles.info}>NG: Non GST</div>
-							<div className={styles.info}>R: Reverse Charge</div>
-						</div>
+						<div className={styles.outer}>
+							<div className={styles.flex}>
+								<div className={styles.flex_div}>
+									<div className={styles.info}>T: Taxable</div>
+									<div className={styles.info}>P: Pure Agent</div>
+									<div className={styles.info}>E: Exempted</div>
+									<div className={styles.info}>N: Nil Rated</div>
+									<div className={styles.info}>NG: Non GST</div>
+									<div className={styles.info}>R: Reverse Charge</div>
+								</div>
 
-						<div className={styles.amount}>
-							<div className={styles.border}>
-								{formatAmount({
-									amount   :	bill?.taxTotal || '0',
-									currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
-									options  : {
-										style           : 'currency',
-										currencyDisplay : 'code',
-									},
-								})}
-							</div>
-						</div>
-						<div className={styles.amount_right}>
-							<div className={styles.border_right}>
-								{formatAmount({
-									amount   :	bill?.grandTotal || '0',
-									currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
-									options  : {
-										style           : 'currency',
-										currencyDisplay : 'code',
-									},
-								})}
-								{shipmentType === 'ftl_freight'
+								<div className={styles.amount}>
+									<div className={styles.border}>
+										{formatAmount({
+											amount   :	bill?.taxTotal || '0',
+											currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
+								</div>
+								<div className={styles.amount_right}>
+									<div className={styles.border_right}>
+										{formatAmount({
+											amount   :	bill?.grandTotal || '0',
+											currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+										{shipmentType === 'ftl_freight'
 								&& (
 									<div>
 										<div className={styles.tds_amount}>
@@ -297,40 +322,30 @@ function LineItemCard({
 										</div>
 									</div>
 								)}
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<div className={styles.flex}>
-						<div className={styles.bottom_div}>
-							<div>Total payable in words : </div>
-							<div className={styles.words_currency}>
-								{bill?.billCurrency}
-								{' '}
-								{bill?.subTotal ? (
-									<>
-										{startCase(converter.toWords(bill?.grandTotal))}
+							<div className={styles.flex}>
+								<div className={styles.bottom_div}>
+									<div>Total payable in words : </div>
+									<div className={styles.words_currency}>
+										{bill?.billCurrency}
 										{' '}
-										only
-									</>
-								) : null}
+										{bill?.subTotal ? (
+											<>
+												{startCase(converter.toWords(bill?.grandTotal))}
+												{' '}
+												only
+											</>
+										) : null}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				) : undefined }
 
-				<div className={styles.footer}>
-					<Button
-						size="md"
-						onClick={() => {
-							setShowLineItem(false);
-						}}
-					>
-						{' '}
-						Go Back
-						{' '}
-					</Button>
-				</div>
 				{popover[id as keyof typeof popover] && (
 					<Modal
 						size="lg"

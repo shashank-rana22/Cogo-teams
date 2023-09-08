@@ -1,4 +1,4 @@
-import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
+import { Loader, Accordion } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
@@ -12,16 +12,19 @@ import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetVariance from '../../../hook/useGetVariance';
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
+import Tagging from '../Taggings';
 
 import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 import Details from './Details/index';
 import Documents from './Documents/index';
 // eslint-disable-next-line import/no-cycle
+import GetPills from './GetPills';
 import PdfDisplay from './PdfDisplay/index';
 // eslint-disable-next-line import/no-cycle
 import POC from './POC/index';
 // eslint-disable-next-line import/no-cycle, import/no-named-as-default
 import ShipmentDetailsCard from './ShipmentDetailsCard/index';
+import SIDView from './SIDView';
 import styles from './styles.module.css';
 import TimeLineItemCheck from './TimelineItemCheck/index';
 import VarianceView from './VarianceView/index';
@@ -81,6 +84,7 @@ interface BillAdditionalObjectInterface {
 	advancedAmountCurrency? : string;
 	serialId?: string,
 	advancedAmount?: string,
+	urgencyTag?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -92,7 +96,8 @@ export interface DataInterface {
 	bill?: BillInterface;
 	consolidatedShipmentIds?:Array<string>;
 	organizationId?: string;
-	serviceProviderDetail?: any
+	serviceProviderDetail?: any;
+	remarks?: string;
 }
 
 interface ShipmentDetailsInterface {
@@ -105,6 +110,7 @@ interface ShipmentDetailsInterface {
 	lineItem?: boolean;
 	status: string;
 	jobType?:string;
+	billId?:string;
 }
 function ShipmentDetails({
 	data = {},
@@ -116,6 +122,7 @@ function ShipmentDetails({
 	lineItem = false,
 	status = '',
 	jobType = '',
+	billId = '',
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showDocuments, setShowDocuments] = useState(true);
@@ -137,19 +144,6 @@ function ShipmentDetails({
 		amount,
 		amount_currency: amountCurrency,
 	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	const getPills = () => {
-		if (loadingShipment) {
-			return <Placeholder height="20px" width="80px" />;
-		}
-		if (sourceText) {
-			return <Pill color="blue">{sourceText}</Pill>;
-		}
-		if (tradeType) {
-			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
-		}
-		return <div>NO DATA FOUND</div>;
-	};
 
 	const jobTypeValue = jobType?.toLowerCase();
 	return (
@@ -186,7 +180,11 @@ function ShipmentDetails({
 							<div className={styles.sub_container}>
 								Details
 								<div className={styles.tags_container}>
-									{getPills()}
+									<GetPills
+										loadingShipment={loadingShipment}
+										sourceText={sourceText}
+										tradeType={tradeType}
+									/>
 								</div>
 								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
 									<div className={styles.data}>
@@ -268,6 +266,12 @@ function ShipmentDetails({
 							{' '}
 						</div>
 					</div>
+
+					<div className={styles.tagging}>
+						<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
+					</div>
+
+					<SIDView shipmentId={jobNumber} />
 				</>
 			)}
 			<div>

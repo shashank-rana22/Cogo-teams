@@ -1,5 +1,14 @@
 .container {
-	margin: 24px;
+	margin: 10px;
+}
+
+.header_dropdown {
+	display: flex;
+	justify-content: space-between;
+}
+
+.caret {
+	cursor: pointer;
 }
 
 .footer {
@@ -41,7 +50,7 @@
 }
 
 .small_hr {
-	width: 57%;
+	width: 100%;
 	margin: 8px 0;
 	border: 1px solid #ed3726;
 	border-radius: 30px;
@@ -140,4 +149,13 @@
 	margin-top: 3px;
 	font-size: 9px;
 	color: #828282;
+}
+
+.line_item_container {
+	display: flex;
+	flex-direction: column;
+	margin: 24px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
 }

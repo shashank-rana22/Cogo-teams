@@ -294,3 +294,8 @@
 	background: #67c676;
 	border-radius: 4px;
 }
+
+.ic_arrow {
+	margin-top: 6px;
+	cursor: pointer;
+}

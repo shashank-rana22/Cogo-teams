@@ -1,7 +1,7 @@
 import { Accordion } from '@cogoport/components';
-import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import ShowIcon from './ShowIcon';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
@@ -15,21 +15,9 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '' }:
 
 	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
-	const showIcon = () => {
-		if (value?.approve === 'approve') {
-			return <IcCFtick height="17px" width="17px" />;
-		} if (value?.reject === 'reject') {
-			return (
-				<div className={styles.color_reject}>
-					<IcMCrossInCircle height="17px" width="17px" />
-				</div>
-			);
-		}
-		return null;
-	};
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Accordion
 				type="text"
 				title={(
@@ -37,7 +25,7 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '' }:
 						<div className={styles.business_name}>
 							Invoice Tagging
 							{' '}
-							{showIcon()}
+							<ShowIcon value={value} />
 						</div>
 					</div>
 				)}

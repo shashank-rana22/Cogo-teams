@@ -4,11 +4,7 @@ import React, { useState } from 'react';
 import useGetBill from '../../hook/useGetBill';
 
 import Header from './Header/index';
-import InvoiceDetails from './InvoiceDetails/index';
 import ShipmentDetails from './ShipmentDetails/index';
-import SupplierDetails from './SupplierDetails/index';
-import Tagging from './Taggings';
-import VendorDetail from './VendorDetails';
 
 function ViewInvoices() {
 	const { query } = useRouter();
@@ -24,9 +20,6 @@ function ViewInvoices() {
 	const [lineItem, setLineItem] = useState(false);
 	const {
 		data:  fullResponse,
-		refetch: getBillRefetch,
-		accPaymentLoading,
-		paymentsData,
 	} = useGetBill({ billId, orgId });
 
 	return (
@@ -41,21 +34,7 @@ function ViewInvoices() {
 				jobNumber={jobNumber}
 				status={status}
 			/>
-			<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
 
-			{fullResponse?.billAdditionalObject?.shipmentType === 'ftl_freight'
-			&& (
-				<VendorDetail
-					data={fullResponse}
-				/>
-			)}
-
-			<SupplierDetails
-				data={fullResponse}
-				paymentsData={paymentsData}
-				accPaymentLoading={accPaymentLoading}
-			/>
-			<InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch} />
 			<ShipmentDetails
 				data={fullResponse}
 				remarksVal={remarksVal}
@@ -66,6 +45,7 @@ function ViewInvoices() {
 				lineItem={lineItem}
 				status={status}
 				jobType={jobType}
+				billId={billId}
 			/>
 		</div>
 	);

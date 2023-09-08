@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMArrowRotateDown,	IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -15,11 +16,13 @@ interface ListData {
 	itemData: ItemDataProps;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
+	shipmentIdView: boolean;
 }
 function AccordianCards({
 	itemData,
 	currentOpenSID,
 	setCurrentOpenSID,
+	shipmentIdView = true,
 }: ListData) {
 	const {
 		jobId,
@@ -48,6 +51,7 @@ function AccordianCards({
 		shipmentId     : '',
 	});
 	const router = useRouter();
+	const [showInvoices, setShowInvoices] = useState(false);
 
 	return (
 		<div>
@@ -207,7 +211,7 @@ function AccordianCards({
 							</div>
 						</div>
 						<div className={styles.button_style}>
-							{currentOpenSID !== jobId ? (
+							{currentOpenSID !== jobId && shipmentIdView ? (
 								<Button
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
@@ -236,6 +240,19 @@ function AccordianCards({
 								</Button>
 							)}
 						</div>
+						{shipmentIdView ? undefined : (
+							<div
+								className={styles.ic_arrow}
+								onClick={() => { setShowInvoices(!showInvoices); }}
+								role="presentation"
+							>
+								{showInvoices ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						) }
 					</div>
 					{jobStatus === 'OPEN' ? (
 						<div className={styles.ribbon}>{jobStatus}</div>
@@ -244,7 +261,7 @@ function AccordianCards({
 					)}
 				</div>
 				<div>
-					{currentOpenSID === jobId ? (
+					{showInvoices || currentOpenSID === jobId ? (
 						<CardItem
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}
