@@ -19,7 +19,7 @@ const useGetOrganizationTradePartyDetail = ({ defaultParams = {} }) => {
 			const res = await trigger();
 			setData(res?.data?.data);
 		} catch (err) {
-			setData([]);
+			setData({});
 			toastApiError(err);
 		}
 	}, [trigger]);
