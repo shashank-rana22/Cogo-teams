@@ -17,6 +17,7 @@ function KebabContent({
 	setShowModal = () => {},
 	showCancelOptions = {},
 }) {
+	const ZERO = 0;
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
 
@@ -42,7 +43,7 @@ function KebabContent({
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
 		&& !invoice?.is_igst
-		&& (!invoice?.processing || invoice?.invoice_total_discounted === GLOBAL_CONSTANTS.zeroth_index))
+		&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO))
 		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
@@ -55,7 +56,7 @@ function KebabContent({
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked'
-					&& (!invoice?.processing || invoice?.invoice_total_discounted === GLOBAL_CONSTANTS.zeroth_index)
+					&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO)
 					&& notInsuranceService ? (
 						<Popover
 							interactive

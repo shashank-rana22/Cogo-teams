@@ -44,9 +44,9 @@ function Actions({
 	const [showModal, setShowModal] = useState('');
 
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
-	&& invoice.status === 'pending';
+	&& invoice?.status === 'pending';
 
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice?.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
 
 	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch });
@@ -55,7 +55,7 @@ function Actions({
 		? isIRNGenerated
 		: disableActionCondition;
 
-	if (invoice.status === 'amendment_requested') {
+	if (invoice?.status === 'amendment_requested') {
 		disableAction = false;
 	}
 
@@ -86,13 +86,13 @@ function Actions({
 				{!(invoice?.processing) ? (
 					<div className={styles.actions_wrap}>
 						<div className={styles.statuses}>
-							{invoice.status ? (
+							{invoice?.status ? (
 								<div className={styles.info_container}>
-									{startCase(invoice.status)}
+									{startCase(invoice?.status)}
 								</div>
 							) : null}
 
-							{!INVOICE_STATUS.includes(invoice.status) ? (
+							{!INVOICE_STATUS.includes(invoice?.status) ? (
 								<Button
 									size="sm"
 									onClick={() => setShowModal('show_review')}
@@ -143,13 +143,13 @@ function Actions({
 
 					{!(invoice?.processing) ? (
 						<>
-							{!isEmpty(invoice.remarks) ? (
+							{!isEmpty(invoice?.remarks) ? (
 								<Tooltip
 									placement="bottom"
 									content={(
 										<>
 											<h6 className={styles.title}>Invoice Remarks</h6>
-											<p className={styles.value}>{invoice.remarks}</p>
+											<p className={styles.value}>{invoice?.remarks}</p>
 										</>
 									)}
 									className={styles.remark_container}
@@ -176,7 +176,7 @@ function Actions({
 				</div>
 			</div>
 
-			{(invoice.services || []).length && showModal === 'edit_invoice' ? (
+			{(invoice?.services || []).length && showModal === 'edit_invoice' ? (
 				<EditInvoice
 					show={showModal === 'edit_invoice'}
 					onClose={onModalClose}
