@@ -13854,6 +13854,21 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	warehouse_app: [
+		{
+			api         : 'get_air_coe_warehouse_app_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_app_cargo_scan',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_partner_user_expertises',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
 	printing_desk: [
 		{
 			api         : 'post_air_coe_documents',
