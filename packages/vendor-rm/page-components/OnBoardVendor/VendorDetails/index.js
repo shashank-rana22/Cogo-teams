@@ -15,7 +15,7 @@ function VendorDetails({
 		handleSubmit,
 		loading,
 		createVendor,
-	} =	useOnBoardVendor({
+	} = useOnBoardVendor({
 		setActiveStepper,
 		vendorInformation,
 		setVendorInformation,

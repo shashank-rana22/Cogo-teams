@@ -7,6 +7,16 @@
 	color: #221f20;
 }
 
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.toggle_text {
+	margin: 12px 20px;
+}
+
 .line {
 	max-width: 100px;
 	background-color: #ed3726;

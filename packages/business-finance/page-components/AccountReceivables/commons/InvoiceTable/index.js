@@ -123,6 +123,7 @@ function InvoiceTable({
 		totalRows : listData?.list || [],
 		isHeaderChecked,
 		setIsHeaderChecked,
+		showFilters,
 	});
 
 	const columnsFiltered = showFilters

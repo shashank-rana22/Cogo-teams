@@ -1,35 +1,38 @@
 import { startCase } from '@cogoport/utils';
 
-export const CATEGORY_OPTIONS = [
-	{ label: 'Revenue Impacting', value: 'REVENUE_IMPACTING' },
-	{ label: 'Non-Revenue Impacting', value: 'NON_REVENUE_IMPACTING' },
+interface OptionsInterface {
+	t?: Function;
+}
+export const categoryOptions = ({ t = () => {} }:OptionsInterface) => [
+	{ label: t('incidentManagement:revenue_impacting'), value: 'REVENUE_IMPACTING' },
+	{ label: t('incidentManagement:non_revenue_impacting'), value: 'NON_REVENUE_IMPACTING' },
 ];
-export const REVENUE_OPTIONS = [
-	{ label: 'Invoicing Currency Change', value: 'Invoicing Currency Change' },
-	{ label: 'Line Item Currency Change', value: 'Line Item Currency Change' },
+export const revenueOptions = ({ t = () => {} }:OptionsInterface) => [
+	{ label: t('incidentManagement:invoicing_currency_change_label'), value: 'Invoicing Currency Change' },
+	{ label: t('incidentManagement:line_item_currency_change_label'), value: 'Line Item Currency Change' },
 	{
-		label : 'Invoicing Preference Change',
+		label : t('incidentManagement:invoice_preference_change_label'),
 		value : 'Invoicing Preference Change',
 	},
-	{ label: 'Line Item Amount Change', value: 'Line Item Amount Change' },
-	{ label: 'Line Item Quantity Change', value: 'Line Item Quantity Change' },
-	{ label: 'Extra Payment Received', value: 'Extra Payment Received' },
+	{ label: t('incidentManagement:line_item_amount_change_label'), value: 'Line Item Amount Change' },
+	{ label: t('incidentManagement:line_item_quantity_change_label'), value: 'Line Item Quantity Change' },
+	{ label: t('incidentManagement:extra_payment_received_label'), value: 'Extra Payment Received' },
 	{
-		label : 'Line Item Exchange Rate Change',
+		label : t('incidentManagement:line_item_exc_rate_label'),
 		value : 'Line Item Exchange Rate Change',
 	},
 	{
-		label : 'Quotation - Invoice Amount Mismatch',
+		label : t('incidentManagement:invoice_amt_mismatch_quotation'),
 		value : 'Quotation - Invoice Amount Mismatch',
 	},
-	{ label: 'Others (Capture Remarks)', value: 'revenueOthers' },
+	{ label: t('incidentManagement:others'), value: 'revenueOthers' },
 ];
-export const NON_REVENUE_OPTIONS = [
-	{ label: 'Customer Address Change', value: 'Customer Address Change' },
-	{ label: 'Invoice Date Change', value: 'Invoice Date Change' },
-	{ label: 'GST Change', value: 'GST Change' },
-	{ label: 'Billing Party Name Change', value: 'Billing Party Name Change' },
-	{ label: 'Others (Capture Remarks)', value: 'nonRevenueOthers' },
+export const nonRevenueOptions = ({ t = () => {} }:OptionsInterface) => [
+	{ label: t('incidentManagement:customer_address_change'), value: 'Customer Address Change' },
+	{ label: t('incidentManagement:invoice_data_change'), value: 'Invoice Date Change' },
+	{ label: t('incidentManagement:gst_change'), value: 'GST Change' },
+	{ label: t('incidentManagement:billing_party_name_change'), value: 'Billing Party Name Change' },
+	{ label: t('incidentManagement:others'), value: 'nonRevenueOthers' },
 ];
 export const NON_REVENUE_DATA = [
 	'Customer Address Change',
@@ -38,21 +41,21 @@ export const NON_REVENUE_DATA = [
 	'Billing Party Name Change',
 ];
 
-export const CREDIT_NOTE_APPROVAL_TYPE_OPTIONS = [
-	{ label: 'Non Revenue Impacting', value: 'NON_REVENUE_IMPACTING' },
-	{ label: 'Cancellation Invoice', value: 'CANCELLATION_INVOICE' },
-	{ label: 'Revenue Impacting', value: 'REVENUE_IMPACTING' },
-	{ label: 'Profit Impacting Cases', value: 'PROFIT_IMPACTING_CASES' },
+export const creditNoteApprovalTypeOptions = ({ t = () => {} }:OptionsInterface) => [
+	{ label: t('incidentManagement:non_revenue_impacting'), value: 'NON_REVENUE_IMPACTING' },
+	{ label: t('incidentManagement:cancellation_invoice'), value: 'CANCELLATION_INVOICE' },
+	{ label: t('incidentManagement:revenue_impacting'), value: 'REVENUE_IMPACTING' },
+	{ label: t('incidentManagement:profit_impact_cases'), value: 'PROFIT_IMPACTING_CASES' },
 ];
 
-export const requestCreditNoteColumns = () => [
+export const requestCreditNoteColumns = ({ t = () => {} }:OptionsInterface) => [
 	{
-		Header   : 'Name',
+		Header   : t('incidentManagement:name_header'),
 		accessor : 'name',
 		id       : 'name',
 	},
 	{
-		Header   : 'Unit',
+		Header   : t('incidentManagement:unit_header'),
 		accessor : 'unit',
 		id       : 'unit',
 		Cell     : ({ row: { original } }) => {
@@ -61,32 +64,32 @@ export const requestCreditNoteColumns = () => [
 		},
 	},
 	{
-		Header   : 'Currency',
+		Header   : t('incidentManagement:currency_label'),
 		accessor : 'currency',
 		id       : 'currency',
 	},
 	{
-		Header   : 'Ex. Rate',
+		Header   : t('incidentManagement:exc_rate_label'),
 		accessor : 'exchangeRate',
 		id       : 'exchangeRate',
 	},
 	{
-		Header   : 'Price',
+		Header   : t('incidentManagement:price_header'),
 		accessor : 'rate',
 		id       : 'rate',
 	},
 	{
-		Header   : 'Quantity',
+		Header   : t('incidentManagement:quantity_header'),
 		accessor : 'quantity',
 		id       : 'quantity',
 	},
 	{
-		Header   : 'Sub Total',
+		Header   : t('incidentManagement:sub_total_header'),
 		accessor : 'subTotal',
 		id       : 'subTotal',
 	},
 	{
-		Header   : 'Grand Total',
+		Header   : t('incidentManagement:grand_total'),
 		accessor : 'grandTotal',
 		id       : 'grandTotal',
 	},
