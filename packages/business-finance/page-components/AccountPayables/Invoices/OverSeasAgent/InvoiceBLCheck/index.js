@@ -57,7 +57,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 		TAGGEG_DATA = [],
 		REJECTED_DATA = [],
 		PENDING_DATA = [],
-	} = memoizedFunction();
+	} = memoizedFunction;
 
 	return (
 		<div>

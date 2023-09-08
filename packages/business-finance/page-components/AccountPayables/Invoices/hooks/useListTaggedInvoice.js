@@ -3,13 +3,8 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
-
-const useListTaggedInvoices = ({ setShowCheckInvoices = () => {}, setIsOpen = () => {} }) => {
-	const {
-		query = {},
-		user_profile = '',
-	} = useSelector(({ general, profile }) => ({ query: general.query, user_profile: profile }));
+const useListTaggedInvoices = () => {
+	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
 
 	const [params, setParams] = useState({
 		pageIndex : 1,
@@ -41,46 +36,6 @@ const useListTaggedInvoices = ({ setShowCheckInvoices = () => {}, setIsOpen = ()
 		}
 	}, [payrun, trigger]);
 
-	const onAprrovalOrRejection = async (
-		id = '',
-		checkStatus = '',
-		taggedDocument = [],
-		handleDropdown = () => {},
-	) => {
-		try {
-			const payload = {
-				id,
-				status          : checkStatus,
-				remarks         : checkStatus.toLowerCase(),
-				performedBy     : user_profile?.user?.id,
-				performedByType : user_profile.session_type,
-				taggedDocuments : taggedDocument,
-				payRunType      : 'OVERSEAS',
-			};
-			const response = await trigger({
-				data: payload,
-			});
-
-			if (checkStatus === 'APPROVED' && response?.data?.id) {
-				setShowCheckInvoices((p) => ({
-					...p,
-					[response?.data?.id]: 'Tagged',
-				}));
-			} else if (checkStatus === 'REJECTED' && response?.data?.id) {
-				setShowCheckInvoices((p) => ({
-					...p,
-					[response?.data?.id]: 'Reject',
-				}));
-			}
-			if (response?.hasError) return;
-			Toast.success(`${checkStatus} successfully`);
-			handleDropdown(id);
-			setIsOpen(null);
-		} catch (error) {
-			toastApiError(error);
-		}
-	};
-
 	useEffect(() => {
 		generateInvoice();
 	}, [generateInvoice]);
@@ -89,7 +44,6 @@ const useListTaggedInvoices = ({ setShowCheckInvoices = () => {}, setIsOpen = ()
 		data,
 		loadingList: loading,
 		generateInvoice,
-		onAprrovalOrRejection,
 		setParams,
 		params,
 	};

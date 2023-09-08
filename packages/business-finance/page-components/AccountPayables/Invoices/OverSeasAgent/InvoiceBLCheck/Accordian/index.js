@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 import React from 'react';
 
+import useApprovalRejectionDoc from '../../../hooks/useApprovalRejectionDoc';
 import useGetDocument from '../../../hooks/useGetDocuments';
-import useListTaggedInvoices from '../../../hooks/useListTaggedInvoice';
 import Documents from '../Documents';
 
 import styles from './styles.module.css';
@@ -34,7 +34,7 @@ function Accordian({
 	const {
 		onAprrovalOrRejection = () => {},
 		loadingList = false,
-	} = useListTaggedInvoices({ setShowCheckInvoices, setIsOpen });
+	} = useApprovalRejectionDoc({ setShowCheckInvoices, setIsOpen });
 
 	const handleDropdown = (key = invoiceNumber) => {
 		setIsOpen(key);
