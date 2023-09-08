@@ -61,7 +61,7 @@ const scheduleFields = (truckStatus = 'truck_in') => ({
 			span   : 1,
 			render : (item) => (
 				<div>
-					{item.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.driver_name}
+					{startCase(item.truckDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.driver_name)}
 				</div>
 			),
 		},

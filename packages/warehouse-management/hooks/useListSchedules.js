@@ -36,12 +36,13 @@ const useListSchedules = ({
 					q                   : (query || '').trim() || undefined,
 					state               : STATUS_MAP[truckStatus] || undefined,
 					warehouseLocationId : warehouseLocationId || undefined,
+					page,
 				},
 			});
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [query, trigger, truckStatus, warehouseLocationId]);
+	}, [query, trigger, page, truckStatus, warehouseLocationId]);
 
 	useEffect(() => {
 		if (searchValue) {

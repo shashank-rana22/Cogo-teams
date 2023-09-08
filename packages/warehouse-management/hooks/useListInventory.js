@@ -31,12 +31,13 @@ const useListInventory = ({
 				params: {
 					q: (query || '').trim() || undefined,
 					...PAYLOAD,
+					page,
 				},
 			});
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [query, trigger, warehouseLocationId]);
+	}, [query, trigger, page, warehouseLocationId]);
 
 	useEffect(() => {
 		if (searchValue) {
