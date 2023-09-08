@@ -64,7 +64,13 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
+	asyncListPricingZones,
+	asyncListTruckTypes,
+	asyncFieldsOrganizationUsers,
 	asyncListLeadOrganizationUsers,
+	asyncListSaasHsCodes,
+	asyncListSpotSearchRateCardOperators,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -146,8 +152,14 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
+	list_truck_types                     : asyncListTruckTypes,
 	resources                            : asyncListResources,
+	list_company_locations               : asyncListCompanyLocations,
+	list_pricing_zones                   : asyncListPricingZones,
+	list_organization_users              : asyncFieldsOrganizationUsers,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
+	list_saas_hs_codes                   : asyncListSaasHsCodes,
+	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 };
 
 const SINGLE_ENTITY = 1;

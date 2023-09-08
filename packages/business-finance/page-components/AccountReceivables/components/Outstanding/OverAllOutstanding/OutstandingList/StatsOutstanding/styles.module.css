@@ -1,0 +1,157 @@
+.invoices_wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.invoices_card {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 12px 0 10px;
+	margin-top: 8px;
+	background-color: #f9fbfe;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.left_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-width: 20%;
+	padding: 0 8px 10px 12px;
+}
+
+.styled_heading {
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.info_content {
+	padding: 15px;
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 600;
+	color: #2c3e50;
+}
+
+.count {
+	font-size: var(--font-size-md);
+	color: #356efd;
+}
+
+.icon {
+	padding: 4px 0 0 4px;
+	color: var(--color-primary-error-red-2);
+}
+
+.cn {
+	margin-top: 5px;
+}
+
+.flex {
+	display: flex;
+	width: 100%;
+}
+
+.label {
+	width: 30%;
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.amount_open {
+	display: flex;
+	margin-top: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+	word-break: break-all;
+}
+
+.amount {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+	word-break: break-all;
+}
+
+.amountout {
+	display: flex;
+	margin-top: 2px;
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+	word-break: break-all;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+}
+
+.flex_column {
+	display: flex;
+	flex-direction: column;
+}
+
+.outstanding_card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 14%;
+	margin: 26px 4px 2px 12px;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.empty_container {
+	min-width: 20%;
+}
+
+.stats_lable {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.count_open {
+	margin-left: 4px;
+	font-size: var(--font-size-lg);
+	color: #356efd;
+}
+
+.statsfull {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.headings {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.outstanding {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 24px;
+	background-color: #fdebe9;
+}
+
+.totaloutstanding {
+	font-size: 14px;
+	font-weight: 600;
+	color: #fc5555;
+}

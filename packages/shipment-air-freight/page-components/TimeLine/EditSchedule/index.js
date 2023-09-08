@@ -1,9 +1,12 @@
 import { Modal, Button, cl } from '@cogoport/components';
 import { DatepickerController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
 
 import styles from './styles.module.css';
+
+const DATE_FORMAT = `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`;
 
 function FormItem({ finalControl = {}, control = {}, errors = {} }) {
 	const { name, label, lowerlabel, ...rest } = finalControl;
@@ -20,7 +23,14 @@ function FormItem({ finalControl = {}, control = {}, errors = {} }) {
 
 			{lowerlabel ? <div className={styles.lower_label}>{lowerlabel}</div> : null}
 
-			<DatepickerController name={name} control={control} {...rest} />
+			<DatepickerController
+				name={name}
+				control={control}
+				showTimeSelect
+				{...rest}
+				formatType="dateTime"
+				dateFormat={DATE_FORMAT}
+			/>
 
 			{errorMessage ? (
 				<span className={styles.error_message}>

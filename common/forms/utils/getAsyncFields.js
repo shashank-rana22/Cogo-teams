@@ -886,6 +886,67 @@ function asyncListLeadOrganizationUsers() {
 	};
 }
 
+function asyncListPricingZones() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_pricing_zones',
+		initialCall : true,
+		params      : {
+			page_limit : 100,
+			page       : 1,
+		},
+	};
+}
+
+function asyncListTruckTypes() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'truck_name',
+		endpoint    : 'list_trucks',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListCompanyLocations() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_company_location',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncListSaasHsCodes() {
+	return {
+		valueKey       : 'id',
+		labelKey       : 'description',
+		authkey        : 'get_saas_hs_code_list',
+		endpoint       : 'saas/hs-code/list',
+		defaultOptions : true,
+		searchByq      : true,
+		qFilterKey     : 'query',
+		microService   : 'business_finance',
+		defaultParams  : {},
+	};
+}
+
+function asyncListSpotSearchRateCardOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_spot_search_rate_card_operators',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -957,6 +1018,10 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
+	asyncListPricingZones,
+	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
-
+	asyncListSaasHsCodes,
+	asyncListSpotSearchRateCardOperators,
 };

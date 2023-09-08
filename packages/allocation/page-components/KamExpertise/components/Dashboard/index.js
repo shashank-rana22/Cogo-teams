@@ -1,17 +1,21 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import DASHBOARD_COMPONENTS_MAPPING from '../../constants/dashboard-components-mapping';
+import getDashboardComponentsMapping from '../../constants/dashboard-components-mapping';
 
 import styles from './styles.module.css';
 
 function KamExpertise() {
+	const { t } = useTranslation(['allocation']);
 	const [activeMainTab, setActiveMainTab] = useState('global');
+
+	const dashboardComponentsMapping = getDashboardComponentsMapping({ t });
 
 	return (
 		<section className={styles.container} id="kam_expertise_container">
 			<section className={styles.heading_container}>
-				KAM Expertise
+				{t('allocation:kam_expertise_heading')}
 			</section>
 
 			<div className={styles.tab_list}>
@@ -20,7 +24,7 @@ function KamExpertise() {
 					themeType="secondary"
 					onChange={setActiveMainTab}
 				>
-					{Object.values(DASHBOARD_COMPONENTS_MAPPING).map((item) => {
+					{Object.values(dashboardComponentsMapping).map((item) => {
 						const {
 							name = '',
 							title = '',

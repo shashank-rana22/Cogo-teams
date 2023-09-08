@@ -7,6 +7,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SALES = {
+	chat_tabs_to_be_shown     : ['message', 'voice', 'outlook'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -50,7 +51,7 @@ const SALES = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
-		show_lead_voice_calls       : false,
+		show_lead_voice_calls       : true,
 	},
 };
 

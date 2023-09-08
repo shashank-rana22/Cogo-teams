@@ -13,6 +13,7 @@ function useList(props) {
 		listObjectiveParams = {},
 		setListObjectivesParams = () => { },
 		refetchListObjectives = () => { },
+		t = () => {},
 	} = props;
 
 	const {
@@ -33,6 +34,7 @@ function useList(props) {
 		activeObjectiveId,
 		setActiveObjectiveId,
 		setListObjectivesParams,
+		t,
 	});
 
 	const objectiveList = useMemo(() => (list || []).map((item) => ({

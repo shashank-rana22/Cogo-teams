@@ -1,7 +1,11 @@
 import { Pill, Button, Placeholder, Tooltip } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle, IcMDocument } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
+
+import useListPlatformConfigConstants from '../../../../../ControlCenter/Approvals/Hooks/useListPlatformConfig';
 
 import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
@@ -10,6 +14,17 @@ import styles from './styles.module.css';
 import useHandleReviewAndCriteria from './useHandleReviewAndCriteria';
 
 function ReviewAndCriteria(props) {
+	const profile = useSelector((state) => state.profile || {});
+
+	const { user } = profile || {};
+	const { email } = user || {};
+
+	const { data:emailsData } = useListPlatformConfigConstants();
+
+	const { list = [] } = emailsData || {};
+	const { platform_config_constant_mappings = [] } = list[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { value = [] } = platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index] || {};
+
 	const { loading, data, test_id } = props;
 
 	const {
@@ -66,7 +81,7 @@ function ReviewAndCriteria(props) {
 						<div className={styles.subtopic}>Topics </div>
 						<div className={styles.topic_pill_container}>
 							{set_data.map((question_set) => (
-								<Pill size="md" color="#F3FAFA" className={styles.names}>
+								<Pill size="md" color="#F3FAFA" className={styles.names} key={question_set?.topic}>
 									<span className={styles.names}>{question_set?.topic}</span>
 								</Pill>
 							))}
@@ -169,6 +184,18 @@ function ReviewAndCriteria(props) {
 					<IcMPlusInCircle height={30} width={30} />
 				</div>
 			</div>
+
+			{!(value.includes(email)) ? (
+
+				<div className={styles.publish_note}>
+					<span style={{ color: '#FF0000', fontWeight: 'bold' }}>Important Note : </span>
+					Once you publish the test, request will be sent to the
+					{' '}
+					<strong>COGO ACADEMY</strong>
+					{' '}
+					admin. The test will be published after the approval process is completed.
+				</div>
+			) : null}
 
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button

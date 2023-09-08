@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { ctcModalControls } from '../../utils/ctc-modal-controls';
 import { ctcModalLessControls } from '../../utils/ctc-modal-less-controls';
@@ -13,8 +13,10 @@ const FIXED_ZERO = 0;
 
 const useProfileDetails = () => {
 	const { query } = useSelector((state) => state.general);
-	const { profile_id } = query || {};
+	const { profile_id = '' } = query || {};
+
 	const [error, setError] = useState(false);
+
 	const [ctcStructure, setCtcStructure] = useState({
 		basic                : { heading: 'Basic', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO },
 		hra                  : { heading: 'HRA', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO },
@@ -168,31 +170,30 @@ const useProfileDetails = () => {
 		yearlyJoiningBonus,
 		yearlySignInBonus, monthlySignInBonus, twiceYearlyRetentionBonus, thriceYearlyRetentionBonus]);
 
-	const params = {
-		id                      : profile_id,
-		document_data_required  : true,
-		progress_stats_required : true,
-		offer_letter_required   : true,
-	};
+	const [{ loading, data }, trigger] = useHarbourRequest({
+		method : 'GET',
+		url    : '/get_employee_details',
+	}, { manual: true });
 
-	const [{ loading, data }, trigger] = useHarbourRequest(
-		{
-			method : 'GET',
-			url    : '/get_employee_details',
-			params,
+	const getEmployeeDetails = useCallback(
+		async () => {
+			try {
+				const params = {
+					id                      : profile_id,
+					document_data_required  : true,
+					progress_stats_required : true,
+					offer_letter_required   : true,
+				};
+
+				await trigger({ params });
+			} catch (err) {
+				if (err.response?.data) Toast.error(getApiErrorString(err.response?.data));
+			}
 		},
-		{ manual: false },
+		[profile_id, trigger],
 	);
 
-	const getEmployeeDetails = async () => {
-		try {
-			await trigger({
-				params,
-			});
-		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data));
-		}
-	};
+	useEffect(() => { if (profile_id) getEmployeeDetails(); }, [getEmployeeDetails, profile_id]);
 
 	return {
 		data,

@@ -3,7 +3,7 @@ import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogopo
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { USER_ACTIVITY_MAPPING } from '../../../../constants';
+import { FIREBASE_TABS, USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
@@ -45,8 +45,8 @@ function UserActivities(props) {
 	} = formattedMessageData || {};
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
-	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
-	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
+	const user_id = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceCallUserId;
+	const lead_user_id = FIREBASE_TABS.includes(activeTab) ? messageLeadUserId : null;
 
 	const {
 		loading = false,
@@ -192,7 +192,7 @@ function UserActivities(props) {
 				</Tabs>
 			</div>
 
-			{(activeTab === 'message' && activityTab === 'communication') && (
+			{(FIREBASE_TABS.includes(activeTab) && activityTab === 'communication') && (
 				<div className={styles.communication_options}>
 					<Tabs
 						activeTab={activeSubTab}

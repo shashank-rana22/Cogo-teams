@@ -1,18 +1,18 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getObjectiveFilterControls = () => {
+const getObjectiveFilterControls = ({ t = () => {} }) => {
 	const controls = [
 		{
 			name    : 'objective_type',
 			type    : 'chips',
-			label   : 'Type',
+			label   : t('allocation:type_short_label'),
 			options : [
 				{
-					label : 'Company',
+					label : t('allocation:company_options'),
 					value : 'company',
 				},
 				{
-					label : 'Team',
+					label : t('allocation:team_options'),
 					value : 'team',
 				},
 			],
@@ -20,19 +20,19 @@ const getObjectiveFilterControls = () => {
 		{
 			name     : 'lead_objective_status',
 			type     : 'chips',
-			label    : 'Lead Objective Status',
+			label    : t('allocation:lead_objective_status'),
 			multiple : true,
 			options  : [
 				{
-					label : 'Verified',
+					label : t('allocation:verified_option'),
 					value : 'verified',
 				},
 				{
-					label : 'Pending',
+					label : t('allocation:pending_option'),
 					value : 'verification_pending',
 				},
 				{
-					label : 'Rejected',
+					label : t('allocation:rejected_option'),
 					value : 'rejected',
 				},
 			],
@@ -40,19 +40,19 @@ const getObjectiveFilterControls = () => {
 		{
 			name     : 'channels',
 			type     : 'chips',
-			label    : 'Channel',
+			label    : t('allocation:channels_short_label'),
 			multiple : true,
 			options  : [
 				{
-					label : 'SME',
+					label : t('allocation:sme_options'),
 					value : 'sme',
 				},
 				{
-					label : 'Enterprise',
+					label : t('allocation:enterprise'),
 					value : 'enterprise',
 				},
 				{
-					label : 'CP',
+					label : t('allocation:cp_options'),
 					value : 'cp',
 				},
 			],
@@ -61,7 +61,7 @@ const getObjectiveFilterControls = () => {
 			name    : 'partner_id',
 			type    : 'select',
 			size    : 'sm',
-			label   : 'Entity',
+			label   : t('allocation:entity_label'),
 			options : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map(
 				(entity) => ({ label: entity.name, value: entity.id }),
 			),
@@ -69,8 +69,8 @@ const getObjectiveFilterControls = () => {
 		},
 		{
 			name        : 'role_ids',
-			label       : 'Agent Roles',
-			placeholder : 'Agent Roles',
+			label       : t('allocation:agent_roles_placeholder'),
+			placeholder : t('allocation:agent_roles_placeholder'),
 			type        : 'asyncSelect',
 			size        : 'sm',
 			multiple    : true,

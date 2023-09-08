@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import ScopeSelect from '@cogoport/scope-select/components';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useSelector } from '@cogoport/store';
 import { useRouter } from 'next/router';
@@ -26,7 +27,7 @@ const TAB_MAPPING = {
 	tasks           : dynamic(() => import('../../common/Tasks'), { ssr: false }),
 	field_executive : dynamic(() => import('../../common/FieldExecutive'), { ssr: false }),
 	sales           : dynamic(() => import('../../common/SalesInvoice'), { ssr: false }),
-	purchase        : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
+	purchase        : dynamic(() => import('../../common/Purchase'), { ssr: false }),
 	documents       : dynamic(() => import('../../common/Documents'), { ssr: false }),
 	emails          : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 	tracking        : dynamic(() => import('@cogoport/surface-modules/components/Tracking'), { ssr: false }),
@@ -69,6 +70,10 @@ function ShipmentDetails() {
 		router.prefetch(router.asPath);
 	}, [router]);
 
+	useEffect(() => {
+		setActiveTab(default_tab);
+	}, [authParams, setActiveTab, default_tab]);
+
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => visible_tabs.includes(t));
 
 	const conditionMapping = {
@@ -79,6 +84,7 @@ function ShipmentDetails() {
 		cancelDetails       : (features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
 		documentHoldDetails : features.includes('document_hold_details'),
 		timeline            : features.includes('timeline'),
+		scope               : activeStakeholder === 'kam_so1',
 	};
 
 	const tabProps = {
@@ -151,6 +157,13 @@ function ShipmentDetails() {
 					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
+						{conditionMapping?.scope ? (
+							<ScopeSelect
+								size="md"
+								apisToConsider={['list_shipments']}
+								className={styles.scope}
+							/>
+						) : null}
 						<Toggle
 							size="md"
 							onLabel="Old"
