@@ -1,6 +1,5 @@
 .col {
 	display: flex;
-	flex: var(--span);
 }
 
 .header {

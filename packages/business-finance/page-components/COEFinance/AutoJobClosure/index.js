@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import AUTO_JOB_CLOSURE_CONFIG from '../configurations/Job-Closure';
+import AUTO_JOB_CLOSURE_CONFIG from '../configurations/Job-Closure.json';
 import useAutoJobs from '../hook/useAutoJob';
 import useUpdateJobClosure from '../hook/useUpdateJobClosure';
 

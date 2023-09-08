@@ -20,8 +20,8 @@ function Header({ config = {} }) {
 					className={cl`${styles.col} ${field.className}`}
 					key={field.key}
 					style={{
-						'--span' : field.span || DEFAULT_SPAN,
-						width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
+						span  : field.span || DEFAULT_SPAN,
+						width : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
 					}}
 				>
 					{field?.label}

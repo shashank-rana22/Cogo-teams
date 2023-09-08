@@ -7,12 +7,12 @@ import serviceTypeOptions from '../formOptions/serviceTypeOptions.json';
 import TRADE_TYPE_OPTIONS from '../formOptions/tradeTypeOptions.json';
 import styles from '../styles.module.css';
 
-function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = () => {} }) {
-	const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
-		value : String(item),
-		label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
-	}));
+const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
+	value : String(item),
+	label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
+}));
 
+function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = () => {} }) {
 	function Error({ keys }) {
 		return errors?.[keys] ? <div className={styles.errors}>{errors?.[keys]?.message}</div> : null;
 	}
