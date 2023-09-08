@@ -51,6 +51,7 @@ import {
 	IcMEnquiriesReceived,
 	IcMDunning,
 	IcMDashboard,
+	IcAWarehouse,
 	IcMCreditRequest,
 	IcCCogoassured,
 	IcMOverview,
@@ -1945,6 +1946,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon          : IcMInvoiceApprovals,
 			possible_apis : apis.airline_booking_plugin,
 			module_type   : 'dashboards',
+		},
+
+		warehouse_management: {
+			key           : 'warehouse_management',
+			title         : 'Warehouse Management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			href          : '/v2/warehouse-management',
+			as            : '/v2/warehouse-management',
+			possible_apis : apis.warehouse_management,
+			icon          : IcAWarehouse,
 		},
 
 		enrichment: {
