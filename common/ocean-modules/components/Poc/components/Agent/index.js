@@ -1,6 +1,5 @@
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
 
 import useGetEntities from '../../../../hooks/useGetEntities';
 import Card from '../Card';
@@ -12,7 +11,7 @@ function Agent({ primary_service = {} }) {
 		(value) => value?.country_code === primary_service?.origin_port?.country_code,
 	)[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
-	const { listEntities = [] } = useGetEntities({ entity_id });
+	const { listEntities = {} } = useGetEntities({ entity_id });
 
 	return (
 		<Card title="Origin Agent">
