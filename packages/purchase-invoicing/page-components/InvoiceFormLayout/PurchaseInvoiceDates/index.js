@@ -16,7 +16,7 @@ function PurchaseInvoiceDates({
 	purchaseInvoiceValues = {},
 	formValues = {},
 }) {
-	const { invoice_date = '' } = formValues || {};
+	const { invoice_date = new Date() } = formValues || {};
 	const geo = getGeoConstants();
 	const { fields, append, remove } = useFieldArray({
 		control,
