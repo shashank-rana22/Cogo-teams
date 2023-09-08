@@ -42,7 +42,6 @@ function Overheads() {
 						value={entityCode}
 						onChange={(val) => setEntityCode(val)}
 						isClearable
-						defaultOptions
 						initialCall
 						labelKey="entity_code"
 						valueKey="id"
