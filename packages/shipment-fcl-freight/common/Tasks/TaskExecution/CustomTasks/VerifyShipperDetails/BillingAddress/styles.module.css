@@ -1,3 +1,64 @@
-.container {
-	padding: 4px;
+.main_container {
+	padding: 8px;
+}
+
+.form_container {
+	margin-bottom: 16px;
+}
+
+.first_container {
+	display: flex;
+	flex: 1 1 33%;
+}
+
+.upload_container {
+	display: flex;
+	flex: 1 1 50%;
+}
+
+.form_item_container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	margin: 0 16px 8px 0;
+
+	:global {
+		.country_code {
+			margin-right: 4px;
+		}
+	}
+}
+
+.address_container {
+	display: flex;
+	margin: 0 16px 8px 0;
+}
+
+.sub_container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	margin-top: 8px;
+
+	> div {
+		display: flex;
+	}
+
+	:global {
+		.ui_button_container {
+			margin: 4px 8px 0;
+		}
+	}
+}
+
+.form_label {
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }

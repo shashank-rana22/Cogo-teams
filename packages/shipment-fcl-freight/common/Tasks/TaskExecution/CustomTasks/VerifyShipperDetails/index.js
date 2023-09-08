@@ -1,13 +1,13 @@
 import BillingAddress from './BillingAddress';
-import CustomerContacts from './CustomerContacts';
-import UserOnboard from './UserOnboard';
+// import CustomerContacts from './CustomerContacts';
+// import UserOnboard from './UserOnboard';
 
 function VerifyShipperDetails() {
 	return (
 		<div>
-			<UserOnboard />
+			{/* <UserOnboard /> */}
 			<BillingAddress />
-			<CustomerContacts />
+			{/* <CustomerContacts /> */}
 		</div>
 
 	);
