@@ -75,8 +75,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				haulage_type            : 'carrier',
 			};
 		} return {
-			destination_location_id : primary_service?.destination_main_port?.id,
-			origin_location_id      : primary_service?.destination_port?.id,
+			origin_location_id      : primary_service?.destination_main_port?.id,
+			destination_location_id : primary_service?.destination_port?.id,
 			trade_type,
 		};
 	}
