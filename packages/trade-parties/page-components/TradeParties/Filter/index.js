@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 const PLACEHOLDER_MAPPING = {
 	sage_organization_id : 'Search by Sage BPR',
 	trade_party          : 'Search by Business Name / PAN / Serial ID / Trade Name',
+
 };
 const options = [
 	{
@@ -18,6 +19,7 @@ const options = [
 		label : 'Sage ID',
 		value : 'sage_organization_id',
 	},
+
 ];
 function Filter({
 	typeOfSearch,

@@ -28,7 +28,11 @@ function ListView({
 				q: query,
 			};
 		}
-
+		if (typeOfSearch === 'serial_id') {
+			return {
+				serial_id: query,
+			};
+		}
 		return {
 			sage_organization_id: query,
 		};

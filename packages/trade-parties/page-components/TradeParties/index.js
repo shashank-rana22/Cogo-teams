@@ -7,7 +7,6 @@ function TradeParties() {
 	const [globalSearch, setGlobalSearch] = useState('');
 	const [typeOfSearch, setTypeOfSearch] = useState('trade_party');
 	const [filterParams, setFilterParams] = useState({
-		serial_id           : '',
 		registration_number : '',
 		country_id          : '',
 		company_type        : '',

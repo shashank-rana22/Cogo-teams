@@ -39,12 +39,12 @@ function FilterContent({
 				<div className={styles.header}>
 					<div className={styles.right}>
 
-						<Button size="md" themeType="secondary" onClick={onReset} className={styles.button}>
+						<Button size="sm" themeType="secondary" onClick={onReset} className={styles.button}>
 							RESET FORM
 						</Button>
 						<Button
 							className={styles.button}
-							size="md"
+							size="sm"
 							onClick={handleSubmit(onSubmit)}
 						>
 

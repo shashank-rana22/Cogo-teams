@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button, Pill, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Link } from '@cogoport/next';
@@ -10,6 +10,10 @@ const formatArrayValues = (items, is_startcase = true) => {
 	const formattedItem = items?.map((item) => (is_startcase ? startCase(item) : item));
 	return formattedItem.join(', ') || '';
 };
+const getCompanyType = (company) => {
+	if (company === 'other') return startCase(company);
+	return company;
+};
 const tableColumns = [
 	{
 		Header   : 'ID',
@@ -19,7 +23,12 @@ const tableColumns = [
 	},
 	{
 		Header   : 'BUSINESS NAME',
-		accessor : (item) => item?.legal_business_name,
+		accessor : (item) => (
+
+			<Popover placement="bottom" trigger="mouseenter" caret={false} render={item?.legal_business_name}>
+				<div className={styles.heading}>{item?.legal_business_name}</div>
+			</Popover>
+		),
 	},
 	{
 		Header   : 'REGISTRATION NUMBER',
@@ -27,7 +36,7 @@ const tableColumns = [
 	},
 	{
 		Header   : 'COMPANY TYPE',
-		accessor : (item) => item?.company_type,
+		accessor : (item) => getCompanyType(item?.company_type),
 	},
 	{
 		Header   : 'CREATED AT',

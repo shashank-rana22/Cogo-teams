@@ -30,3 +30,9 @@
 	justify-content: center;
 	margin-top: 20px;
 }
+
+.heading {
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

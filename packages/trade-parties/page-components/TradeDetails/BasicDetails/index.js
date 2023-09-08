@@ -1,3 +1,4 @@
+import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
@@ -12,10 +13,10 @@ function BasicDetails({ tradePartyDetails = {}, loading = false }) {
 			<div className={styles.sub_container}>
 				<div className={styles.heading}>{legal_business_name}</div>
 
-				<div className={styles.serial_id}>
+				<Pill className={styles.serial_id}>
 					ID #
 					{serial_id}
-				</div>
+				</Pill>
 			</div>
 
 			<div className={styles.sub_container}>
