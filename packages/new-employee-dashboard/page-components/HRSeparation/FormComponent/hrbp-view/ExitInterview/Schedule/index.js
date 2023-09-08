@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function ScheduleInterview({ visible, control, errors }) {
+function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 	const [show, setShow] = useState(true);
 	return (
 		<div className={styles.container}>
@@ -81,7 +81,6 @@ function ScheduleInterview({ visible, control, errors }) {
 				<div className={styles.detail}>
 					<div className={styles.label}>Location</div>
 					<div className={styles.dates}>
-
 						<InputController
 							placeholder="location"
 							control={control}
