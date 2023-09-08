@@ -96,6 +96,26 @@ function Item({
 							<span>{item?.live_invoice_number}</span>
 						</div>
 
+						{item?.incident_id && (
+							<div className={styles.in_number}>
+								<span className={styles.in_text}>
+									Incident ID:
+									{' '}
+									{item?.incident_id}
+								</span>
+
+								{item?.incident_status && (
+									<span className={cl`${styles[item?.incident_status.toLowerCase()]}
+									 ${styles.text}`}
+									>
+										Status:
+										{' '}
+										{startCase(item?.incident_status.toLowerCase())}
+									</span>
+								) }
+							</div>
+						)}
+
 						<div className={styles.invoice_value}>
 							Invoice Value -
 							{' '}

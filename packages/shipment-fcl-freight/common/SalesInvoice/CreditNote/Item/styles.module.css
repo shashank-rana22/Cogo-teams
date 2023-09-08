@@ -17,6 +17,7 @@
 .invoice_value {
 	flex: 0 0 40%;
 	font-size: var(--font-size-lg);
+	text-align: center;
 
 	span {
 		color: var(--color-accent-orange-2);
@@ -29,8 +30,9 @@
 
 .number {
 	display: flex;
-	flex: 0 0 23%;
+	flex: 0 0 18%;
 	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 
 	.approved {
@@ -47,6 +49,37 @@
 			font-size: var(--font-size-sm);
 			color: var(--color-secondary-greyscale-3);
 		}
+	}
+}
+
+.in_number {
+	display: flex;
+	flex: 0 0 18%;
+	flex-direction: column;
+	align-items: center;
+
+	.in_text {
+		font-size: var(--font-size-md);
+	}
+
+	.text {
+		width: fit-content;
+		padding: 3px 12px;
+		margin-top: 3px;
+		font-size: var(--font-size-sm);
+		border-radius: 4px;
+	}
+
+	.approved {
+		background-color: var(--color-tertiary-success-green-4);
+	}
+
+	.rejected {
+		background-color: var(--color-primary-error-red-4);
+	}
+
+	.requested {
+		background-color: var(--color-primary-yellow-4);
 	}
 }
 
@@ -71,7 +104,7 @@
 	display: flex;
 	flex: 1;
 	align-items: center;
-	padding-left: 22px;
+	padding-left: 10px;
 }
 
 .rotate_icon {
@@ -86,7 +119,7 @@
 
 .invoice_status_and_action {
 	display: flex;
-	flex: 0 0 25%;
+	flex: 0 0 14%;
 	align-items: center;
 	justify-content: space-between;
 
@@ -94,6 +127,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		margin-right: 18px;
 
 		& > svg {
 			margin-left: 8px;
@@ -101,7 +135,7 @@
 	}
 
 	& .status_text {
-		width: 110px;
+		width: 70px;
 		padding: 2px;
 		font-size: var(--font-size-sm);
 		text-align: center;
