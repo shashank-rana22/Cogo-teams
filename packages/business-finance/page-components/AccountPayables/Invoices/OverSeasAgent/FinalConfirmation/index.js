@@ -14,9 +14,10 @@ function FinalConfirmation({ setActive = () => {}, setShowSaveAsDraft = () => {}
 
 	const { data = {}, loadingList = false } = useListTaggedInvoices();
 	const { selectBank = () => {}, loadingSaveBank = false } = useSaveBank();
+	const { bankDetails = [] } = useGetBankList();
+
 	const [selectBankShow, setSelectBankShow] = useState(false);
 	const [bankObject, setBankObject] = useState({});
-	const { bankDetails = [] } = useGetBankList();
 	const { documents = {} } = data || {};
 
 	const saveBankButtonValue = loadingSaveBank ? 'SAVING...' : 'SAVE BANK';

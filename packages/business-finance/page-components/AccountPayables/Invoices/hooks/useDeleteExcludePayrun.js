@@ -1,13 +1,11 @@
-import { Checkbox, Toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const ELEMENT_NOT_FOUND = -1;
-
-const useDeleteExcludePayrun = ({ refetch = () => {}, setApiData = () => {}, apiData = {}, type = '' }) => {
+const useDeleteExcludePayrun = ({ refetch = () => {}, apiData = {}, type = '' }) => {
 	const { push } = useRouter();
 
 	const { user_data: userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
@@ -54,61 +52,15 @@ const useDeleteExcludePayrun = ({ refetch = () => {}, setApiData = () => {}, api
 				);
 			}
 
-			Toast.error('Deleted Sucessfully');
+			Toast.success('Deleted Sucessfully');
+			Toast.success('Please wait while Payrun Saves...');
 			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}
 	};
 
-	const onChangeTableHeaderCheckbox = (event) => {
-		setApiData((prevData) => {
-			const { list = [] } = prevData || {};
-			const newList = list.map((item) => ({
-				...item,
-				checked: event.target.checked,
-			}));
-			return { ...prevData, list: newList };
-		});
-	};
-
-	function GetTableHeaderCheckbox() {
-		const { list: dataList = [] } = apiData || {};
-		const isCheckedLength = dataList.filter((value) => value?.checked)?.length;
-		const isAllRowsChecked = isCheckedLength === dataList?.length;
-		return (
-			<Checkbox
-				checked={isAllRowsChecked && !loading}
-				onChange={onChangeTableHeaderCheckbox}
-			/>
-		);
-	}
-
-	const onChangeTableBodyCheckbox = (itemData = {}) => {
-		const { organizationId = '' } = itemData || {};
-		setApiData((prevData) => {
-			const index = (prevData.list || []).findIndex(
-				(item) => item.organizationId === organizationId,
-			);
-			if (index !== ELEMENT_NOT_FOUND) {
-				const newList = [...prevData.list];
-				newList[index] = {
-					...newList[index],
-					checked: !newList[index].checked,
-				};
-				return {
-					...prevData,
-					list: newList,
-				};
-			}
-			return prevData;
-		});
-	};
-
 	return ({
-		onChangeTableBodyCheckbox,
-		GetTableHeaderCheckbox,
-		onChangeTableHeaderCheckbox,
 		loading,
 		onExclude,
 	});

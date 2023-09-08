@@ -10,7 +10,7 @@ import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency'
 import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 
 const getFunctions = ({
-	onChangeTableBodyCheckbox = () => {},
+	onChangeTableBodyCheckbox = () => {}, setApiData = () => {},
 	setEditedValue = () => {}, refetch = () => {}, invoiceData = {},
 }) => ({
 	renderCheckbox: (itemData) => (
@@ -18,6 +18,7 @@ const getFunctions = ({
 			itemData={itemData}
 			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
 			apiData={invoiceData}
+			setApiData={setApiData}
 		/>
 	),
 	renderToolTip: (itemData, field) => (

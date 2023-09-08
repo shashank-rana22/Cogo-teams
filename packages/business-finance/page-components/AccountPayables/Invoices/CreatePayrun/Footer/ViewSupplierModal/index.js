@@ -9,6 +9,7 @@ import CN_CONFIG from '../../Configurations/viewCnConfig.json';
 
 import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 import styles from './styles.module.css';
+import { GetTableHeaderCheckbox, onChangeTableBodyCheckbox } from './SupplierCheckbox';
 
 function RenderAccordianData({ singleitem = {} }) {
 	return (
@@ -18,7 +19,7 @@ function RenderAccordianData({ singleitem = {} }) {
 	);
 }
 
-const getFunctions = ({ setShowId = () => { }, showId = '', onChangeTableBodyCheckbox = () => {}, apiData = {} }) => ({
+const getFunctions = ({ setShowId = () => {}, showId = '', apiData = {}, setApiData = () => {} }) => ({
 	renderCn: (itemData) => (
 		<Button
 			onClick={() => setShowId(itemData?.organizationId === showId ? null : itemData?.organizationId)}
@@ -32,6 +33,7 @@ const getFunctions = ({ setShowId = () => { }, showId = '', onChangeTableBodyChe
 			itemData={itemData}
 			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
 			apiData={apiData}
+			setApiData={setApiData}
 		/>
 	),
 });
@@ -49,11 +51,17 @@ function ViewSupplierModal({
 	const {
 		onExclude = () => {},
 		loading = false,
-		GetTableHeaderCheckbox = () => {},
-		onChangeTableBodyCheckbox = () => {},
 	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers, type });
 
-	const LIST_FUNCTIONS = getFunctions({ setShowId, showId, onChangeTableBodyCheckbox, apiData: suppliers });
+	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData: suppliers, loading, setApiData });
+
+	const LIST_FUNCTIONS = getFunctions({
+		setShowId,
+		showId,
+		onChangeTableBodyCheckbox,
+		apiData: suppliers,
+		setApiData,
+	});
 
 	const { list: dataList = [] } = suppliers || {};
 
@@ -80,7 +88,7 @@ function ViewSupplierModal({
 							itemData={suppliers}
 							config={SUPPLIER_CONFIG}
 							functions={LIST_FUNCTIONS}
-							renderHeaderCheckbox={GetTableHeaderCheckbox}
+							renderHeaderCheckbox={renderHeaderCheckbox}
 							RenderAccordianData={RenderAccordianData}
 							showId={showId}
 							idKey="organizationId"

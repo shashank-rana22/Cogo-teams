@@ -1,4 +1,3 @@
-import { Checkbox } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
@@ -7,14 +6,11 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 import changeFormat from '../utils/changeFormat';
-import checkboxSelectionChecks from '../utils/checkboxSelectionChecks';
 import getConfig from '../utils/getConfig';
 import getKeyByValue from '../utils/getKeyByValue';
 import onClearingFilters from '../utils/onClearingFilters';
 import onGoingBack from '../utils/onGoingBack';
 import settingApiData from '../utils/settingApiData';
-
-const ELEMENT_NOT_FOUND = -1;
 
 const useGetInvoiceSelection = ({ sort = {} }) => {
 	const { push } = useRouter();
@@ -132,46 +128,6 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 
 	useEffect(() => { refetch(); }, [refetch]);
 
-	const onChangeTableHeaderCheckbox = (event) => {
-		setApiData((prevData) => {
-			const { list = [] } = prevData || {};
-			const newList = list.map((item) => {
-				const isError = checkboxSelectionChecks({ item });
-				return ({
-					...item,
-					checked  : item?.invoiceType === 'CREDIT NOTE' ? false : event.target.checked,
-					hasError : isError,
-				});
-			});
-			return { ...prevData, list: newList };
-		});
-	};
-
-	function GetTableHeaderCheckbox() {
-		const { list = [] } = apiData || {};
-		const { list: dataList = [] } = data || {};
-		const isCheckedLength = list.filter((value) => value?.checked).length;
-		const invoicesLength = dataList?.filter((val) => (val.invoiceType !== 'CREDIT NOTE'))?.length;
-		const isAllRowsChecked = isCheckedLength === invoicesLength;
-		return (
-			<Checkbox checked={isAllRowsChecked && !loading} onChange={onChangeTableHeaderCheckbox} />
-		);
-	}
-
-	const onChangeTableBodyCheckbox = (itemData = {}) => {
-		const { id = '' } = itemData || {};
-		setApiData((prevData) => {
-			const index = (prevData.list || []).findIndex((item) => item.id === id);
-			if (index !== ELEMENT_NOT_FOUND) {
-				const newList = [...prevData.list];
-				const isError = checkboxSelectionChecks({ list: newList[index] });
-				newList[index] = { ...newList[index], checked: !newList[index].checked, hasError: isError };
-				return { ...prevData, list: newList };
-			}
-			return prevData;
-		});
-	};
-
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
 		settingApiData({ itemData, value, key, checked, setApiData });
 	};
@@ -190,12 +146,13 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		viewSelectedInvoice,
 		setViewSelectedInvoice,
 		goBack,
-		GetTableHeaderCheckbox,
-		onChangeTableBodyCheckbox,
 		setEditedValue,
 		loading,
 		payrun_type,
 		currency    : urlQuery?.currency,
+		apiData,
+		data,
+		setApiData,
 	};
 };
 

@@ -2,7 +2,10 @@ import { Checkbox } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function GetTableBodyCheckbox({ itemData = {}, onChangeTableBodyCheckbox = () => {}, apiData = {} }) {
+function GetTableBodyCheckbox({
+	itemData = {},
+	onChangeTableBodyCheckbox = () => {}, apiData = {}, setApiData = () => {},
+}) {
 	const { organizationId = '' } = itemData || {};
 	const { list = [] } = apiData || {};
 
@@ -14,7 +17,7 @@ function GetTableBodyCheckbox({ itemData = {}, onChangeTableBodyCheckbox = () =>
 		<div className={styles.checkbox_style}>
 			<Checkbox
 				checked={isChecked}
-				onChange={() => onChangeTableBodyCheckbox(itemData)}
+				onChange={() => onChangeTableBodyCheckbox({ itemData, setApiData })}
 			/>
 		</div>
 	);

@@ -10,6 +10,7 @@ import useGetPayrunInvoices from '../../hooks/useGetPayrunInvoices';
 import FilterModal from '../../MoreFilters';
 
 import getFunctions from './getFunctions';
+import { GetTableHeaderCheckbox, onChangeTableBodyCheckbox } from './InvoicesCheckbox';
 import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
@@ -84,10 +85,12 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 		orderBy = {},
 		setOrderBy = () => {},
 		getPayrunInvoices = () => {},
-		onChangeTableBodyCheckbox = () => {},
-		GetTableHeaderCheckbox = () => {},
 		config = [],
+		data = {},
+		loading = false,
 	} = useGetPayrunInvoices({ apiData, setApiData });
+
+	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
 		setApiData((prevApiData) => {
@@ -117,7 +120,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 		getPayrunInvoices,
 	}));
 
-	const LIST_FUNCTIONS = getFunctions({ onChangeTableBodyCheckbox, setEditedValue, apiData });
+	const LIST_FUNCTIONS = getFunctions({ onChangeTableBodyCheckbox, setEditedValue, apiData, setApiData });
 
 	return (
 		<div>
@@ -182,7 +185,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 						...filters,
 						pageIndex: val,
 					})}
-					renderHeaderCheckbox={GetTableHeaderCheckbox}
+					renderHeaderCheckbox={renderHeaderCheckbox}
 					rowStyle="border"
 					showPagination
 					paginationType="number"

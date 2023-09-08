@@ -8,6 +8,7 @@ import useGetInvoiceSelection from '../../hooks/useInvoiceSelection';
 import FilterContainers from './FilterContainers';
 import Footer from './Footer';
 import getFunctions from './getFunctions';
+import { GetTableHeaderCheckbox, onChangeTableBodyCheckbox } from './InvoicesCheckbox';
 import styles from './styles.module.css';
 
 const MORE_THAN_ZERO = 0;
@@ -33,13 +34,16 @@ function InvoiceSelection({
 		viewSelectedInvoice = false,
 		onClear = () => {},
 		listSelectedInvoice = [],
-		GetTableHeaderCheckbox = () => {},
-		onChangeTableBodyCheckbox = () => {},
 		setEditedValue = () => {},
 		loading = false,
 		goBack = () => {},
 		refetch = () => {},
+		apiData = {},
+		data = {},
+		setApiData = () => {},
 	} = useGetInvoiceSelection({ sort });
+
+	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 
 	const {
 		submitSelectedInvoices = () => {},
@@ -76,7 +80,13 @@ function InvoiceSelection({
 		}
 	}, [invoiceData, setShowSaveAsDraft]);
 
-	const LIST_FUNCTIONS = getFunctions({ onChangeTableBodyCheckbox, setEditedValue, refetch, invoiceData });
+	const LIST_FUNCTIONS = getFunctions({
+		onChangeTableBodyCheckbox,
+		setEditedValue,
+		refetch,
+		invoiceData,
+		setApiData,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -104,7 +114,7 @@ function InvoiceSelection({
 						...globalFilters,
 						pageIndex: val,
 					})}
-					renderHeaderCheckbox={GetTableHeaderCheckbox}
+					renderHeaderCheckbox={renderHeaderCheckbox}
 					rowStyle="border"
 					showPagination
 					paginationType="number"

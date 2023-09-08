@@ -8,12 +8,17 @@ import EditableTdsInput from './EditableInput';
 import EditablePayableAmount from './EditableInput/EditablePayableAmount';
 import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 
-const getFunctions = ({ onChangeTableBodyCheckbox = () => {}, setEditedValue = () => {}, apiData = {} }) => ({
+const getFunctions = ({
+	onChangeTableBodyCheckbox = () => {},
+	setEditedValue = () => {},
+	apiData = {}, setApiData = () => {},
+}) => ({
 	renderCheckbox: (itemData) => (
 		<GetTableBodyCheckbox
 			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
 			itemData={itemData}
 			apiData={apiData}
+			setApiData={setApiData}
 		/>
 	),
 	renderToolTip: (itemData, field) => (
