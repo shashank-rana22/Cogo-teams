@@ -4,6 +4,7 @@ import { IcMTaskCompleted } from '@cogoport/icons-react';
 import React from 'react';
 
 import EmployeeDetail from '../../commons/EmployeeDetail';
+import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 
 import DatePicker from './DatePicker';
 import InterviewQuestions from './InterviewQuestions';
@@ -23,8 +24,19 @@ function HRMeeting() {
 	const v1 = watch();
 	console.log('v1:', v1);
 
+	const { updateApplication } = useUpdateAppliationProcessDetails();
+
 	const onSubmit = (values) => {
 		console.log(values, 'formValues');
+
+		const payload = {			// TODOs
+			note: {
+				last_working_day: values?.last_working_day,
+			},
+			clearance: '',
+		};
+
+		updateApplication(payload);
 		reset();
 	};
 	return (
@@ -35,7 +47,7 @@ function HRMeeting() {
 					<span className={styles.lower_text}>Summary of application</span>
 				</div>
 				<div className={styles.logs_button}>
-					<Button size="md" themeType="accent" onClick={() => handleSubmit(onSubmit)()}>
+					<Button size="md" themeType="accent" onClick={handleSubmit(onSubmit)}>
 						<IcMTaskCompleted />
 						<span style={{ marginLeft: '4px' }}>Notes & Logs</span>
 					</Button>

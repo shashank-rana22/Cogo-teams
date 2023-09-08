@@ -43,12 +43,12 @@ const COMPONENT_MAPPING = {
 		HOTOClearance,
 		HOTOClearance_confirmation: HOTOClearanceConfirmation,
 	},
-
 };
 
 function FormComponent() {
 	const { data } = useGetApplicationProcessDetails();
-	console.log('🚀 ~ file: index.js:51 ~ FormComponent ~ data:', data);
+
+	console.log('data :: ', data);
 
 	const Render = COMPONENT_MAPPING.manager.handover_takeover;
 
