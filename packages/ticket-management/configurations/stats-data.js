@@ -1,6 +1,6 @@
 import { IcMTicket, IcMAverage, IcMVerySad, IcMFtick, IcMClock, IcMVeryHappy } from '@cogoport/icons-react';
 
-export const getStatsIconsAndData = (t) => [
+export const getStatsIconsAndData = ({ t }) => [
 	{
 		icon  : <IcMTicket fill="#ABB0DE" width="22px" height="22px" />,
 		label : t('myTickets:total_tickets_label'),

@@ -126,7 +126,7 @@ const useRaiseTicketcontrols = ({
 				},
 				{
 					label : t('myTickets:low'),
-					value : 'Low',
+					value : 'low',
 				},
 				{
 					label : t('myTickets:high'),

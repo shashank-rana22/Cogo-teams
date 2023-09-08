@@ -27,7 +27,7 @@ function TicketStructureBody({
 
 	const { t } = useTranslation(['myTickets']);
 
-	const { color: textColor, label } =	getStatusLabelMapping(t)?.[STATUS_MAPPING[ticketStatus]] || {};
+	const { color: textColor, label } =	getStatusLabelMapping({ t })?.[STATUS_MAPPING[ticketStatus]] || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
