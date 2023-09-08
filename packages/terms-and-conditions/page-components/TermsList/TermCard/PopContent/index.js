@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 
 import useUpdateTermsAndConditions from '../../../../hooks/useUpdateTermsAndConditionsStatus';
 
+import styles from './styles.module.css';
+
 function PopOverContent({
 	onClickUpdateTerms = () => {},
 	setShowEdit = () => {},
@@ -16,7 +18,7 @@ function PopOverContent({
 	});
 
 	return (
-		<div>
+		<div className={styles.pop_content}>
 			<Button onClick={() => {
 				onClickUpdateTerms();
 				setShowEdit(true);

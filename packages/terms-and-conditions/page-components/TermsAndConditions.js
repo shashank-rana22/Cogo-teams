@@ -1,6 +1,6 @@
-import { Pagination } from '@cogoport/components';
 import { useState } from 'react';
 
+import ListPagination from '../common/ListPagination';
 import useGetTermsAndCondition from '../hooks/useGetTermsAndCondition';
 
 import Form from './CreateUpdateTnC/AddEdit/Form';
@@ -13,10 +13,10 @@ function TermsAndConditions(props) {
 	const [showModal, setShowModal] = useState(false);
 	const {
 		list,
+		data,
 		totalCount,
 		loading,
 		refetchListApi = () => {},
-		pagination = 1,
 		setPagination = () => {},
 		editTncModalId,
 		setEditTncModalId,
@@ -26,10 +26,6 @@ function TermsAndConditions(props) {
 		setTncLevel,
 		...restProps
 	} = useGetTermsAndCondition({ organizationId });
-
-	const onPageChange = (pageNumber) => {
-		setPagination(pageNumber);
-	};
 
 	const viewFromDemand = ['demand-crm', 'prm'].includes(viewThrough);
 
@@ -59,13 +55,7 @@ function TermsAndConditions(props) {
 				refetch={refetchListApi}
 			/>
 
-			<Pagination
-				type="table"
-				pageSize={10}
-				totalItems={totalCount}
-				currentPage={pagination}
-				onPageChange={onPageChange}
-			/>
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
 
 		</div>
 	);

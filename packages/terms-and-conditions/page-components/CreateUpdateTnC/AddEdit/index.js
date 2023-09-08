@@ -34,13 +34,18 @@ function AddEdit({
 	return (
 		<div>
 			<Button onClick={() => setShowModal(true)}>
-				+ Create
+				Create
 				{' '}
 				{isMobile ? 'T & C' : 'New'}
 			</Button>
 
 			{showModal ? (
-				<Modal show={showModal} onClose={() => setShowModal(false)} size="lg" placement="top">
+				<Modal
+					show={showModal}
+					onClose={() => { setShowModal(false); setTncLevel('basicInfo'); }}
+					size="lg"
+					placement="top"
+				>
 					<Modal.Header title={CREATION_STEPS_MAPPING[tncLevel]?.label} />
 					<Modal.Body>
 						<Form

@@ -2,14 +2,16 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import toastApiError from '../utlis/toastApiError';
+
 const useTermsAndConditions = (props) => {
 	const { status, id, refetch } = props;
 
 	const {
 		general: { scope },
 	} = useSelector((state) => state);
-	console.log('hey');
-	const [{ data, loading }, trigger] = useRequest({ method: 'post', scope, url: '/update_terms_and_condition' });
+
+	const [{ loading }, trigger] = useRequest({ method: 'post', scope, url: '/update_terms_and_condition' });
 
 	const onSubmit = async () => {
 		try {
@@ -25,7 +27,7 @@ const useTermsAndConditions = (props) => {
 			Toast.success('Status updated successfully');
 			refetch();
 		} catch (error) {
-			console.log(error);
+			toastApiError(error);
 		}
 	};
 

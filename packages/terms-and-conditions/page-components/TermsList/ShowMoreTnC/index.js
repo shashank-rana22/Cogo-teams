@@ -12,13 +12,13 @@ function ShowMoreTNC(props) {
 			</div>
 		);
 	}
-
+	const ONE = 1;
 	return (
 		<div>
 			{description.map((item, index) => (
 				<div key={item.id} className={styles.applied_terms}>
 					<div className={styles.index}>
-						{index + 1}
+						{index + ONE}
 						.
 					</div>
 					{item}

@@ -31,7 +31,7 @@ function Header(props) {
 	};
 	return (
 		<div className={styles.container}>
-			<p className={styles.header}>Terms And Condition</p>
+			<p className={styles.header}>Terms And Conditions</p>
 			<div className={styles.container}>
 				<AddEdit
 					refetch={refetch}
@@ -43,8 +43,8 @@ function Header(props) {
 					isMobile={isMobile}
 				/>
 				<Toggle
-					offLabel="Inactive"
-					onLabel="Active"
+					onLabel="Inactive"
+					offLabel="Active"
 					value={currentStatus}
 					onChange={onChangeToggleStatus}
 				/>

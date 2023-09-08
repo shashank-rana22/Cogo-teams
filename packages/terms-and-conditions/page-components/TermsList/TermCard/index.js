@@ -126,7 +126,7 @@ function TermCard({
 			{showEdit ? (
 				<Modal
 					show={showEdit}
-					onClose={() => { setShowEdit(null); }}
+					onClose={() => { setShowEdit(null); setTncLevel('basicInfo'); }}
 					size="lg"
 					placement="top"
 				>
