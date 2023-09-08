@@ -3,9 +3,10 @@ import { collection, query, limit, getDocs, updateDoc, setDoc, doc } from 'fireb
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
+import getFormattedTimeInMinute from './getFormattedTimeInMinute';
+
 const FIREBASE_QUERY_LIMIT = 1;
 const ONE_MINUTE = 60000;
-const DECIMAL_VALUE = 0;
 
 async function getConstantsDoc({ firestore }) {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
@@ -31,10 +32,7 @@ export const getIsActive = async ({ firestore = {}, setRoleValue = () => {}, set
 
 	const timeInMinute = screen_lock_timeout / ONE_MINUTE;
 
-	const formattedTimeout = Object.keys(flash_messages_timeout_mapping).reduce((result, key) => ({
-		...result,
-		[key]: (flash_messages_timeout_mapping[key] / ONE_MINUTE).toFixed(DECIMAL_VALUE),
-	}), {});
+	const formattedTimeout = getFormattedTimeInMinute(flash_messages_timeout_mapping);
 
 	setRoleValue({
 		roles       : enable_for_roles,

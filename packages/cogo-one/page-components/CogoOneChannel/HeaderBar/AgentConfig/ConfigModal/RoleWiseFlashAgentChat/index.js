@@ -4,11 +4,9 @@ import { useState, useEffect } from 'react';
 
 import { FLASH_MESSAGES_ROLES_LIST } from '../../../../../../constants/FLASH_MESSAGES_ROLES_LIST';
 import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
+import getFormattedTimeInMilliSecond from '../../../../../../helpers/getFormattedTimeInMilliSeconds';
 
 import styles from './styles.module.css';
-
-const ONE_MILLI_SECOND = 60000;
-const DECIMAL_VALUE = 0;
 
 function RoleWiseFlashAgentChat({
 	firestore = {},
@@ -17,10 +15,7 @@ function RoleWiseFlashAgentChat({
 }) {
 	const [timeoutValues, setTimeoutValues] = useState({});
 
-	const timeInMilliSecond = Object.keys(timeoutValues).reduce((result, key) => ({
-		...result,
-		[key]: Number((timeoutValues[key] * ONE_MILLI_SECOND).toFixed(DECIMAL_VALUE)),
-	}), {});
+	const timeInMilliSecond = getFormattedTimeInMilliSecond(timeoutValues);
 
 	const disableSubmitButton = Object.values(timeoutValues).some((value) => Number.isNaN(value))
 	|| isEmpty(timeoutValues);
