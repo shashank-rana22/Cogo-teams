@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
 import Layout from '../../../../common/Layout';
 
 import styles from './styles.module.css';
 
-const ZERO = 0;
 function FilterContent({
 	filterValues = {}, setFilterValues = () => {},
 	controls = [], visible = false, setVisible = () => {},
@@ -15,7 +15,7 @@ function FilterContent({
 	const handleFilterSubmit = (value) => {
 		const arr = Object.keys(value || {}).filter((item) => (value[item] !== ''));
 
-		if (arr.length > ZERO) {
+		if (!isEmpty(arr)) {
 			const NEW_VALUE = {};
 			arr.forEach((obj) => {
 				(NEW_VALUE[obj] = value[obj]);

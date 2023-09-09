@@ -1,7 +1,7 @@
 import { Popover, Table, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EditDeletePopup from './EditDeletePopup';
@@ -50,7 +50,8 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 			Header   : 'Slabs',
 			accessor : (item) => (
 
-				item?.slabs?.length > ZERO ? (
+				!isEmpty(item?.slabs) ? (
+
 					<>
 						<div style={{ marginRight: '4px' }}>
 							<div>
