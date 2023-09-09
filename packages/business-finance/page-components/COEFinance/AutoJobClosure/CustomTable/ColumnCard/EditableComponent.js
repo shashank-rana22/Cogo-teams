@@ -19,8 +19,8 @@ function EditableComponent({
 	fields = [],
 	item = {},
 	ENTITY_OPTIONS = [],
-	setOpenConfig = () => {},
-	setSaveObj = () => {},
+	setOpenConfig = () => { },
+	setSaveObj = () => { },
 	loading = false,
 	refetch = {},
 }) {
@@ -36,7 +36,7 @@ function EditableComponent({
 	} = item || {};
 	const { control, watch, handleSubmit, setValue } = useForm({
 		defaultValues: {
-			entity: entity.toString(),
+			entity: entity?.toString(),
 			serviceType,
 			tradeType,
 			selectionCriteriaOp,
@@ -49,7 +49,7 @@ function EditableComponent({
 
 	const stringifiedData = JSON.stringify(afterEditData);
 
-	const { apiTrigger = () => {}, loading: updateLoading = false } = useUpdateJobClosure({
+	const { apiTrigger = () => { }, loading: updateLoading = false } = useUpdateJobClosure({
 		refetch: () => {
 			refetch();
 			setOpenConfig((prev) => (prev.filter((columnId) => (![id].includes(columnId)))));
@@ -58,26 +58,9 @@ function EditableComponent({
 	});
 
 	const onSubmit = (value) => {
-		const {
-			entity: entityValue = '',
-			selectionCriteriaOp: selectionCriteriaOpValue = '',
-			selectionCriteriaFin: selectionCriteriaFinValue = '',
-			serviceType: serviceTypeValue = '',
-			tradeType: tradeTypeValue = '',
-			level1: level1Value = '',
-			level2: level2Value = '',
-		} = value || {};
 		const params = {
 			id,
-			data: {
-				entity               : entityValue,
-				selectionCriteriaOp  : selectionCriteriaOpValue,
-				selectionCriteriaFin : selectionCriteriaFinValue,
-				serviceType          : serviceTypeValue,
-				tradeType            : tradeTypeValue,
-				level1               : level1Value,
-				level2               : level2Value,
-			},
+			data: value,
 		};
 		apiTrigger([params]);
 	};
@@ -190,8 +173,7 @@ function EditableComponent({
 					key={field.key}
 					style={{
 						'--span' : field.span || DEFAULT_SPAN,
-						width    : `${
-							(field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN)
+						width    : `${(field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN)
 						}px`,
 					}}
 				>

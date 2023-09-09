@@ -6,7 +6,7 @@ import useDeleteJobClosure from '../../../../hook/useDeleteJobClosure';
 import styles from '../styles.module.css';
 
 function DeleteModal({ deleteModal = false, setDeleteModal = () => {}, refetch = () => {}, id = '' }) {
-	const { apiTrigger, loading } = useDeleteJobClosure({
+	const { apiTrigger = () => {}, loading = false } = useDeleteJobClosure({
 		refetch: () => {
 			refetch();
 			setDeleteModal(false);

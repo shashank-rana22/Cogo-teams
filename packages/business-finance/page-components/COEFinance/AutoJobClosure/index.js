@@ -59,7 +59,6 @@ function AutoJobClosure() {
 			setConfigButton(true);
 			setSaveObj({});
 			setOpenConfig((prev) => (prev.filter((columnId) => (!Object.keys(saveObj).includes(columnId)))));
-			// console.log()
 			refetch();
 		},
 

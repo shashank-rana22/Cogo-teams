@@ -11,8 +11,8 @@ const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
 function Header({ config = {} }) {
-	const { fields } = config || {};
-	const islevel = (heading = '') => (heading === 'Level 1' || heading === 'Level 2');
+	const { fields = [] } = config || {};
+	const islevel = (heading = '') => (['Level 1', 'Level 2'].includes(heading));
 	return (
 		<section className={cl`${styles.header} ${styles.border}`}>
 			{(fields || []).map((field) => (

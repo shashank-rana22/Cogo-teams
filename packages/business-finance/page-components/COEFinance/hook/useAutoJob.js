@@ -2,6 +2,8 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
+const DEFAULT_PAGE = 1;
+
 const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { query, debounceQuery } = useDebounceQuery();
@@ -9,7 +11,7 @@ const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 		pageSize : 10,
 		page     : 1,
 	});
-	const { page:newPage } = params || {};
+	const { page:newPage = DEFAULT_PAGE } = params || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{

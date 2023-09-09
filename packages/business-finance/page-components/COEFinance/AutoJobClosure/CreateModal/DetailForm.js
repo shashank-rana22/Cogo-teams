@@ -13,8 +13,8 @@ const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((ite
 }));
 
 function DetailForm({ control = {}, watch = () => {}, errors = {}, setValue = () => {} }) {
-	function Error({ keys }) {
-		return errors?.[keys] ? <div className={styles.errors}>{errors?.[keys]?.message}</div> : null;
+	function Error({ keys = '' }) {
+		return errors?.[keys]?.message ? <div className={styles.errors}>{errors?.[keys]?.message || ''}</div> : null;
 	}
 	return (
 		<div className={styles.formBody}>
