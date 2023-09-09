@@ -23,22 +23,26 @@ function ChangeIncoTermModal({
 		checkout_id,
 	});
 
-	const addedServices = Object.values(service_details).map(({ trade_type = '', service_type = '' }) => {
-		if (!trade_type) {
-			return service_type;
-		}
+	const possibleServices = fclIncoTerms.map(({ service_type }) => service_type);
 
-		return `${trade_type}_${service_type}`;
-	});
+	const addedServices = Object.values(service_details)
+		.filter(({ service_type = '' }) => possibleServices.includes(service_type))
+		.map(({ trade_type = '', service_type = '' }) => {
+			if (!trade_type) {
+				return service_type;
+			}
 
-	const madatoryServicesForNextIncoTrem = fclIncoTerms.filter(
-		({ inco_terms = [], mandatory = false }) => inco_terms.includes(selectedValue) && mandatory,
+			return `${trade_type}_${service_type}`;
+		});
+
+	const servicesToAdd = fclIncoTerms.filter(
+		({ inco_terms = [], mandatory = false, name = '' }) => inco_terms.includes(selectedValue)
+				&& mandatory
+				&& !addedServices.includes(name),
 	);
 
-	const servicesToAdd = madatoryServicesForNextIncoTrem.filter((item) => !addedServices.includes(item.name));
-
 	const servicesToDelete = addedServices.filter((item) => {
-		const incoTermObject = fclIncoTerms.find(({ name }) => name === item);
+		const incoTermObject = fclIncoTerms.find(({ name }) => name === item) || {};
 
 		const { inco_terms = [] } = incoTermObject;
 
