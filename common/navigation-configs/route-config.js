@@ -55,6 +55,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
+import serviceDiscovery from './config/service-discovery';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -75,6 +76,7 @@ import supplyTools from './config/supply-tools';
 import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
+import warehouseManagement from './config/warehouse-management';
 import welcome from './config/welcome';
 
 const routeConfig = {
@@ -144,6 +146,7 @@ const routeConfig = {
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
+	...warehouseManagement,
 	...ftlAdmin,
 	...schedules,
 	...igmDesk,
@@ -156,6 +159,7 @@ const routeConfig = {
 	...attendanceLeaveManagement,
 	...centralisedCustomerService,
 	...resource,
+	...serviceDiscovery,
 	...supplyTools,
 };
 

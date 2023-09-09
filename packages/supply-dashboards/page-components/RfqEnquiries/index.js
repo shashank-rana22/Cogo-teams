@@ -6,7 +6,7 @@ import tabPanelMapping from './configurations/tab-panel-mapping';
 
 function RfqEnquiriesView() {
 	const partnerId = useSelector((state) => state?.profile?.partner?.id);
-	const activeTab = 'rfq_enquiries';
+	const ACTIVE_TAB = 'rfq_enquiries';
 
 	const geo = getGeoConstants();
 
@@ -19,14 +19,12 @@ function RfqEnquiriesView() {
 	const handleTabChange = (tab) => {
 		if (tab !== 'rfq_enquiries') {
 			const route = tab.replace('_', '-');
-			// eslint-disable-next-line no-undef
 			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
-
 	return (
 		<div>
-			<Tabs fullWidth activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
+			<Tabs fullWidth activeTab={ACTIVE_TAB} onChange={(tab) => { handleTabChange(tab); }}>
 				{(tabPanelMapping || []).map(({
 					name, title,
 					component,

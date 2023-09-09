@@ -13,6 +13,7 @@ function useGetAsyncOptions({
 	params = {},
 	onOptionsChange = () => {},
 	getModifiedOptions,
+	searchByKey = 'q',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -20,7 +21,7 @@ function useGetAsyncOptions({
 	const [{ data, loading }] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-		params : merge(params, { filters: { q: query || undefined } }),
+		params : merge(params, { filters: { [searchByKey]: query || undefined } }),
 	}, { manual: !(initialCall || query) });
 	let options = data?.list || [];
 

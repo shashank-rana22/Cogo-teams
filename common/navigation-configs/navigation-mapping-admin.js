@@ -51,6 +51,7 @@ import {
 	IcMEnquiriesReceived,
 	IcMDunning,
 	IcMDashboard,
+	IcAWarehouse,
 	IcMCreditRequest,
 	IcCCogoassured,
 	IcMOverview,
@@ -312,6 +313,21 @@ const navigationMapping = ({ t = () => {} }) => {
 				'list_margins',
 				'list_checkouts',
 				'list_partners',
+			],
+			module_type: 'dashboards',
+		},
+		service_discovery: {
+			key           : 'service_discovery',
+			title         : t('common:service_discovery'),
+			href          : '/v2/service-discovery',
+			as            : '/v2/service-discovery',
+			type          : 'link',
+			icon          : IcMFinanceDashboard,
+			possible_apis : apis.service_discovery,
+			main_apis     : [
+				'list_spot_searches',
+				'list_checkouts',
+				'list_organizations',
 			],
 			module_type: 'dashboards',
 		},
@@ -1932,6 +1948,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			module_type   : 'dashboards',
 		},
 
+		warehouse_management: {
+			key           : 'warehouse_management',
+			title         : 'Warehouse Management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			href          : '/v2/warehouse-management',
+			as            : '/v2/warehouse-management',
+			possible_apis : apis.warehouse_management,
+			icon          : IcAWarehouse,
+		},
+
 		enrichment: {
 			key           : 'enrichment',
 			title         : t('common:enrichment'),
@@ -2560,6 +2587,15 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			possible_apis : apis.centralised_customer_service,
 			icon          : IcMDashboard,
+		},
+		warehouse_app: {
+			key           : 'warehouse_app',
+			title         : 'Warehouse App',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			possible_apis : apis.warehouse_app,
+			icon          : IcAWarehouse,
 		},
 		resources: {
 			key           : 'resources',
