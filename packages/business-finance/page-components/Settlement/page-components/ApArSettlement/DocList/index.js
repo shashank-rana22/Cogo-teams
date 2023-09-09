@@ -29,19 +29,17 @@ function DocList({
 		setPageCheckedRows,
 	});
 	return (
-		<div>
-			<div className={styles.container}>
-				<Table columns={TABLE_COLUMNS} data={list} className={styles.tablestyle} loading={loading} />
-				<Pagination
-					className={styles.pagination}
-					currentPage={data?.pageNo}
-					totalItems={data?.totalRecords}
-					pageSize={PAGE_SIZE}
-					onPageChange={onPageChange}
-				/>
-			</div>
-
+		<div className={styles.container}>
+			<Table columns={TABLE_COLUMNS} data={list} className={styles.tablestyle} loading={loading} />
+			<Pagination
+				className={styles.pagination}
+				currentPage={data?.pageNo}
+				totalItems={data?.totalRecords}
+				pageSize={PAGE_SIZE}
+				onPageChange={onPageChange}
+			/>
 		</div>
+
 	);
 }
 export default DocList;

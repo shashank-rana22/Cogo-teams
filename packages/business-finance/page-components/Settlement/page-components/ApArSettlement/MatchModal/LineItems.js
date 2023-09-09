@@ -1,8 +1,8 @@
-export default function getLineItems(filters, updateBal) {
+export default function getLineItems({ filters, updateBal }) {
 	return (
 		[{
 			entityCode   : filters?.entityCode || '',
-			accMode      : filters?.accMode || '',
+			accMode      : '',
 			glCode       : '',
 			tradePartyId : filters?.tradeParty || '',
 			type         : 'CREDIT',
@@ -10,7 +10,7 @@ export default function getLineItems(filters, updateBal) {
 		},
 		{
 			entityCode   : filters?.entityCode || '',
-			accMode      : filters?.accMode || '',
+			accMode      : '',
 			glCode       : '',
 			tradePartyId : '',
 			type         : 'DEBIT',

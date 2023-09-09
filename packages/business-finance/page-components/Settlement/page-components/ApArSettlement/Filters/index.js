@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
-import { ACC_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter';
+import { ACCOUNT_MODE_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter';
 
 import styles from './styles.module.css';
 
@@ -28,7 +28,7 @@ function Filters({
 	return (
 		<div className={styles.container}>
 
-			<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+			<div className={styles.header}>
 				<span className={styles.criteria}>
 					Selection Criteria
 					<IcMInfo style={{ marginLeft: '4px' }} />
@@ -105,7 +105,7 @@ function Filters({
 						className={styles.reqMargin}
 						onChange={(e) => handleFilterChange('accMode', e)}
 						placeholder="Acc Mode"
-						options={ACC_OPTIONS}
+						options={ACCOUNT_MODE_OPTIONS}
 						isClearable
 						style={{ width: '250px' }}
 					/>

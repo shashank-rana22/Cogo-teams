@@ -31,9 +31,9 @@ function CreateJvModal({
 		defaultValues:
 		{
 			entityCode     : Entity || '',
-			ledCurrency    : selectedData?.[0].ledCurrency || '',
+			ledCurrency    : selectedData?.[0]?.ledCurrency || '',
 			category       : '',
-			currency       : selectedData?.[0].currency || '',
+			currency       : selectedData?.[0]?.currency || '',
 			accountingDate : new Date(),
 			journal        : '',
 			exchangeRate   : '',

@@ -8,7 +8,7 @@ const TOTAL_SPAN_LENGTH = 12;
 function CardHeader() {
 	return (
 		<div className={styles.container}>
-			{HEADER_DATA.map((item) => (
+			{(HEADER_DATA || []).map((item) => (
 				<div
 					className={styles.item}
 					style={{

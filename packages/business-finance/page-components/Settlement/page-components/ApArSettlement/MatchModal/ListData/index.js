@@ -21,15 +21,15 @@ export default function ListData({
 	setCanSettle = () => {},
 }) {
 	const handleDragStart = (e, index) => {
-		e.dataTransfer.setData('text/plain', index.toString());
+		e?.dataTransfer?.setData('text/plain', index.toString());
 	};
 
 	const handleDragOver = (e) => {
-		e.preventDefault();
+		e?.preventDefault();
 	};
 
 	const handleDrop = (e, targetIndex) => {
-		e.preventDefault();
+		e?.preventDefault();
 		const SOURCE_INDEX = parseInt(e.dataTransfer.getData('text/plain'), TRUNCATE_LENGTH);
 		const ZERO_INDEX = 0;
 		const SOURCE_LENGTH = 1;

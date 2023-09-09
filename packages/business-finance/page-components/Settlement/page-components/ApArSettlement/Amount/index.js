@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import useGetExcRate from '../../../hooks/useGetExcRate';
 import useGetJVList from '../../../hooks/useGetJvsList';
@@ -11,63 +11,62 @@ import styles from './styles.module.css';
 
 const INITIAL_BAL = 0;
 function Amount({
-	data = [],
+	data = {},
 	loading = false,
 	selectedData = [],
 	filters = {},
-	matchModalShow = false,
 	setMatchModalShow = () => {},
 	matchBal = 0,
 	dataLoading = false,
 }) {
-	const { currency, ledCurrency } = selectedData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { currency = '', ledCurrency = '' } = selectedData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { jvListRefetch = () => {} } = useGetJVList({ filters });
+	const { getExchangeRate = () => {} } = useGetExcRate({ from_cur: currency, to_cur: ledCurrency });
 	const {
-		jvListRefetch,
-	} = useGetJVList({ filters });
-	const {
-		getExchangeRate,
-	} = useGetExcRate({ from_cur: currency, to_cur: ledCurrency });
-	useEffect(() => {
-	}, [matchModalShow]);
+		ledgerCurrency = '',
+		outstandingAmount = 0,
+		openInvoiceAmount = 0,
+		onAccountAmount = 0,
+	} = data || {};
 	return (
 		<div className={styles.Container}>
-			<div className={styles.BalanceCard}>
-				<div className={styles.Balance}>
+			<div className={styles.balanceCard}>
+				<div className={styles.balance}>
 					Balance
 				</div>
-				<div className={styles.VerticalRule} />
+				<div className={styles.verticalRule} />
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
-							(data && data?.outstandingAmount) || INITIAL_BAL,
-							data?.ledgerCurrency,
+						{loading ? `${ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
+							(data && outstandingAmount) || INITIAL_BAL,
+							ledgerCurrency,
 						)}
 					</div>
 					<div>Outstanding</div>
 				</div>
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
-							(data && data?.openInvoiceAmount) || INITIAL_BAL,
-							data?.ledgerCurrency,
+						{loading ? `${ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
+							(data && openInvoiceAmount) || INITIAL_BAL,
+							ledgerCurrency,
 						)}
 					</div>
 					<div>Open Invoice Amount</div>
 				</div>
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
-							(data && data?.onAccountAmount) || INITIAL_BAL,
-							data?.ledgerCurrency,
+						{loading ? `${ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
+							(data && onAccountAmount) || INITIAL_BAL,
+							ledgerCurrency,
 						)}
 					</div>
 					<div>On Account Balance</div>
 				</div>
 				<div className={styles.diffbalances}>
 					<div className={styles.amount}>
-						{loading ? `${data?.ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
+						{loading ? `${ledgerCurrency || 'INR'} Loading...` : getFormatAmount(
 							(matchBal) || INITIAL_BAL,
-							data?.ledgerCurrency,
+							ledgerCurrency,
 						)}
 					</div>
 					<div>Matching Balance</div>

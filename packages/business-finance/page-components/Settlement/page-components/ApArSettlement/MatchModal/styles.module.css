@@ -10,8 +10,6 @@
 }
 
 .header {
-	display: flex;
-	align-items: flex-end;
 	font-size: 16px;
 }
 
@@ -21,8 +19,6 @@
 }
 
 .subheader {
-	display: flex;
-	align-items: flex-end;
 	font-size: 12px;
 }
 
@@ -127,4 +123,10 @@
 	flex-direction: column;
 	width: 90px;
 	margin-right: 6px;
+}
+
+.balanceStyle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

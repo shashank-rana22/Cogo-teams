@@ -47,9 +47,7 @@ export default function MatchModal({
 		setCheckedData([]);
 	}
 	useEffect(() => {
-		const SORTED_MS = updatedData?.map((item) => new Date(item?.transactionDate).getTime())
-			.sort();
-
+		const SORTED_MS = updatedData?.map((item) => new Date(item?.transactionDate)?.getTime())?.sort();
 		const LATEST_MS = SORTED_MS[GLOBAL_CONSTANTS.zeroth_index];
 		setDate(new Date(LATEST_MS));
 	}, [updatedData]);
@@ -73,7 +71,7 @@ export default function MatchModal({
 		}
 	}, [checkedData, setSuccess, success]);
 
-	const LINE_ITEMS = getLineItems(filters, updateBal);
+	const LINE_ITEMS = getLineItems({ filters, updateBal });
 	return (
 		<div>
 			<Modal

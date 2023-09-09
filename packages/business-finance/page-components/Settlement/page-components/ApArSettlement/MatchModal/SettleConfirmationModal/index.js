@@ -36,7 +36,7 @@ export default function ConfirmSettle({
 						style={{ marginRight: '6px' }}
 						onClick={() => setSettleConfirmation(false)}
 						themeType="secondary"
-						loading={settleLoading}
+						disabled={settleLoading}
 					>
 						NO
 					</Button>
@@ -45,7 +45,7 @@ export default function ConfirmSettle({
 						onClick={() => {
 							submitSettleMatch({ updatedData, date, fileValue, setSettleConfirmation });
 						}}
-						loading={settleLoading}
+						disabled={settleLoading}
 					>
 						YES
 					</Button>

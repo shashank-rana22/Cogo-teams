@@ -23,7 +23,6 @@ function ExecuteTask({
 	services = [],
 	shipment_data = {},
 	primary_service = {},
-	getShipment = () => {},
 	getShipmentTimeline = () => {},
 	servicesLoading = false,
 
@@ -211,7 +210,6 @@ function ExecuteTask({
 			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
-			getShipment={getShipment}
 			getShipmentTimeline={getShipmentTimeline}
 			services={services}
 			shipment_data={shipment_data}

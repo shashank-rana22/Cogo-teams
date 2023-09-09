@@ -29,3 +29,9 @@
 .flex {
 	display: flex;
 }
+
+.common {
+	width: 250px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
