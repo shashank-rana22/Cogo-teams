@@ -1,4 +1,7 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../../common/EmptyState';
 
 import DeactivateSageMapping from './DeactivateSageMapping/index';
 import styles from './styles.module.css';
@@ -14,21 +17,27 @@ function SageMapping({ tradePartyDetails = {} }) {
 		refetch = () => {},
 	} = useSageMapping({ tradePartyDetails: tradePartyDetails.tradePartyDetails });
 
-	if (!data?.list?.length) {
-		return null;
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Sage Mappings</div>
 
-			<Table columns={tableColumns} data={(data?.list || [])} loading={loading} className={styles.table} />
+			{isEmpty(data?.list) ? <EmptyState /> : (
+				<div>
+					<Table
+						columns={tableColumns}
+						data={(data?.list || [])}
+						loading={loading}
+						className={styles.table}
+					/>
 
-			<DeactivateSageMapping
-				showDeactivate={showDeactivate}
-				setShowDeactivate={setShowDeactivate}
-				refetch={refetch}
-			/>
+					<DeactivateSageMapping
+						showDeactivate={showDeactivate}
+						setShowDeactivate={setShowDeactivate}
+						refetch={refetch}
+					/>
+				</div>
+			)}
+
 		</div>
 	);
 }
