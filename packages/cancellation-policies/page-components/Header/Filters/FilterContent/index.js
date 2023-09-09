@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
 
 import Layout from '../../../../common/Layout';
 
@@ -16,7 +15,7 @@ function FilterContent({
 	const handleFilterSubmit = (value) => {
 		const arr = Object.keys(value || {}).filter((item) => (value[item] !== ''));
 
-		if (arr.length !== ZERO) {
+		if (arr.length > ZERO) {
 			const NEW_VALUE = {};
 			arr.forEach((obj) => {
 				(NEW_VALUE[obj] = value[obj]);
@@ -35,7 +34,7 @@ function FilterContent({
 	return (
 		<div className={styles.container}>
 			<div className={styles.form_header}>
-				<Button themeType="tertiary" onClick={onReset}>
+				<Button themeType="tertiary" onClick={onReset} className={styles.form_btn}>
 					Clear Filters
 
 				</Button>

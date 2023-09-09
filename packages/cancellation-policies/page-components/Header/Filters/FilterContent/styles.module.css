@@ -1,7 +1,6 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
 	width: 360px;
 	height: 400px;
 	overflow: auto;
@@ -10,14 +9,13 @@
 .form_header {
 	display: flex;
 	flex-direction: row;
-	gap: 1rem;
 	justify-content: end;
 }
 
 .form_label {
 	position: relative;
-	top: 0.1rem;
-	left: 0.3rem;
+	top: 100px;
+	left: 2px;
 	font-size: 15px;
 	font-weight: 500;
 }
@@ -25,5 +23,8 @@
 .form_div {
 	display: flex;
 	flex-direction: column;
-	gap: 0.3rem;
+}
+
+.form_btn {
+	margin-right: 5px;
 }

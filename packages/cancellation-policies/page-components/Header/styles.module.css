@@ -16,4 +16,5 @@
 .filter_container {
 	margin-left: 8px;
 	background-color: #fff;
+	border-radius: 6px;
 }

@@ -4,7 +4,7 @@ import { useRef } from 'react';
 
 import checkSatisfyingConditions from '../../helpers/checkSatisfyingConditions';
 import useUpdateShipmentCancellation from '../../hooks/useUpdateShipmentCancellationCharges';
-import CANCELREASONMAPPING from '../../utils/cancellationReasonMapper';
+import CANCEL_REASON_MAPPING from '../../utils/cancellationReasonMapper';
 import AddNewCancellationPolicyForm from '../Header/AddNewCancellationPolicyForm';
 
 function Update({
@@ -29,7 +29,7 @@ function Update({
 
 			if (!isEmpty(conditions)) {
 				rest.conditions = conditions.map((obj) => ({
-					[obj.attribute]: `${CANCELREASONMAPPING[obj.condition]} ${
+					[obj.attribute]: `${CANCEL_REASON_MAPPING[obj.condition]} ${
 						obj.days
 					}`,
 				}));
@@ -47,7 +47,7 @@ function Update({
 
 	return !isEmpty(show) ? (
 		<Modal show={!isEmpty(show)} onClose={() => setShow(null)} placement="top" size="lg">
-			<Modal.Header title="UPDATE COMMOODITY CLUSTER" />
+			<Modal.Header title="Edit Cancellation Charges" />
 
 			<Modal.Body>
 				<AddNewCancellationPolicyForm

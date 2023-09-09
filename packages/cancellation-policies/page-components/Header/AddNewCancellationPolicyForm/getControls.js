@@ -10,7 +10,7 @@ import MILESTONE from '../../../configs/MILESTONE.json';
 import ORGANIZATION_TYPE from '../../../configs/ORGANIZATION_TYPE.json';
 import RATE_TYPE from '../../../configs/RATE_TYPE.json';
 import SHIPMENT_TYPES from '../../../configs/SHIPMENT_TYPES.json';
-import { CANCELREVERSEMAPPING } from '../../../utils/cancellationReasonMapper';
+import { CANCEL_REVERSE_MAPPING } from '../../../utils/cancellationReasonMapper';
 
 const currencyOptions = GLOBAL_CONSTANTS.service_supported_countries
 	.feature_supported_service.feedback_services.currencies.map((c) => ({ label: c, value: c }));
@@ -24,7 +24,7 @@ const getDaysOptions = Array(THIRTY_ONE).fill(ZERO)
 const getControls = ({ item, isEdit }) => {
 	const CONDITIONS_VALUE = (item?.conditions || []).map((condition) => ({
 		attribute : Object.keys(condition || {})[GLOBAL_CONSTANTS.zeroth_index],
-		condition : CANCELREVERSEMAPPING[Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index]
+		condition : CANCEL_REVERSE_MAPPING[Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index]
 			.split(' ')[GLOBAL_CONSTANTS.zeroth_index]],
 		days: +Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index].split(' ')[ONE],
 	}));

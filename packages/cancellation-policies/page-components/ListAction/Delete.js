@@ -21,13 +21,13 @@ function Delete({
 
 	return show ? (
 		<Modal show={!isEmpty(show)} onClose={() => setShow(null)} placement="top">
-			<Modal.Header title="DELETE COMMOODITY CLUSTER" />
+			<Modal.Header title="DELETE CANCELLATION CHARGES" />
 
 			<Modal.Body>
 				<div>
-					Do you want to delete Commodity Cluster :
+					Are you sure you want to delete?
 					{' '}
-					<b>{item?.name}</b>
+
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

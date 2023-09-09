@@ -25,7 +25,6 @@ function Filters({ filterValues = () => {}, setFilterValues = () => {} }) {
 				visible={isFilterVisible}
 			>
 				<Button
-					className={styles.filter_btn}
 					themeType="secondary"
 					onClick={() => { setIsFilterVisible(!isFilterVisible); }}
 
