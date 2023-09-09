@@ -27,7 +27,7 @@ function FilterContent({
 		Object.keys(filterParams).forEach((key) => { RESET_VALUE[key] = null; });
 		RESET_VALUE.page = 1;
 		setFilterParams(RESET_VALUE);
-		reset();
+		reset(RESET_VALUE);
 		setIsFilterVisible(false);
 	};
 	return (
