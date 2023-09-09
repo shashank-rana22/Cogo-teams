@@ -37,17 +37,16 @@ function ChangeIncoTermModal({
 				&& !addedServices.includes(name),
 	);
 
-	const servicesToDelete = addedServices
-		.map((item) => item.replace(
-			/trailer_freight|haulage_freight|ftl_freight/g,
-			'transportation',
-		)).filter((item) => {
-			const incoTermObject = fclIncoTerms.find(({ name }) => name === item) || {};
+	const servicesToDelete = addedServices.map((item) => item.replace(
+		/trailer_freight|haulage_freight|ftl_freight/g,
+		'transportation',
+	)).filter((item) => {
+		const incoTermObject = fclIncoTerms.find(({ name }) => name === item) || {};
 
-			const { inco_terms = [] } = incoTermObject;
+		const { inco_terms = [] } = incoTermObject;
 
-			return !isEmpty(incoTermObject) && !inco_terms.includes(selectedValue);
-		}).map((item) => fclIncoTerms.find((incoTerm) => incoTerm.name === item));
+		return !isEmpty(incoTermObject) && !inco_terms.includes(selectedValue);
+	}).map((item) => fclIncoTerms.find((incoTerm) => incoTerm.name === item));
 
 	return (
 		<Modal
