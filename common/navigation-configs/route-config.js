@@ -76,6 +76,7 @@ import supplyTools from './config/supply-tools';
 import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
+import warehouseManagement from './config/warehouse-management';
 import welcome from './config/welcome';
 
 const routeConfig = {
@@ -145,6 +146,7 @@ const routeConfig = {
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
+	...warehouseManagement,
 	...ftlAdmin,
 	...schedules,
 	...igmDesk,

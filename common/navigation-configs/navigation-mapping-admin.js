@@ -51,6 +51,7 @@ import {
 	IcMEnquiriesReceived,
 	IcMDunning,
 	IcMDashboard,
+	IcAWarehouse,
 	IcMCreditRequest,
 	IcCCogoassured,
 	IcMOverview,
@@ -1947,6 +1948,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			module_type   : 'dashboards',
 		},
 
+		warehouse_management: {
+			key           : 'warehouse_management',
+			title         : 'Warehouse Management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			href          : '/v2/warehouse-management',
+			as            : '/v2/warehouse-management',
+			possible_apis : apis.warehouse_management,
+			icon          : IcAWarehouse,
+		},
+
 		enrichment: {
 			key           : 'enrichment',
 			title         : t('common:enrichment'),
@@ -2575,6 +2587,15 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			possible_apis : apis.centralised_customer_service,
 			icon          : IcMDashboard,
+		},
+		warehouse_app: {
+			key           : 'warehouse_app',
+			title         : 'Warehouse App',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			possible_apis : apis.warehouse_app,
+			icon          : IcAWarehouse,
 		},
 		resources: {
 			key           : 'resources',
