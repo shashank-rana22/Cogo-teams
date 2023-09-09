@@ -1,3 +1,4 @@
+import useListStakeholders from '@cogoport/air-modules/hooks/useListShipmentStakeholders';
 import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -5,7 +6,6 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import useGetShipmentStakeholder from '../../hooks/useGetShipmentStakeholder';
 import useIncidentReOpenJob from '../../hooks/useIncidentReOpenJob';
 
 import controls from './controls';
@@ -23,7 +23,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 
 	const [isSuccess, setIsSuccess] = useState(false);
 
-	const { data = [] } = useGetShipmentStakeholder({
+	const { data = [] } = useListStakeholders({
 		shipment_id      : shipmentData?.id,
 		stakeholder_type : 'booking_agent',
 	});
@@ -39,7 +39,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 		<Modal
 			size="md"
 			show={showModal}
-			onClose={() => setShowModal(!!loading)}
+			onClose={() => setShowModal(loading)}
 			placement="top"
 			closeOnOuterClick={false}
 		>
@@ -48,7 +48,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 			{isSuccess ? (
 				<Modal.Body className={styles.modal_success_body}>
 					<IcCFtick width={40} height={40} />
-					<h2>Request Submitted!</h2>
+					Request Submitted!
 				</Modal.Body>
 			) : (
 				<>

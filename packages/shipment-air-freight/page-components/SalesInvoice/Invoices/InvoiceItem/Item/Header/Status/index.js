@@ -36,6 +36,8 @@ function Status({
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
+	const IS_JOB_CLOSED = shipment_data?.is_job_closed;
+
 	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	const bfInvoice = invoicesList?.filter(
@@ -71,7 +73,7 @@ function Status({
 	&& !invoice.is_revoked
 	&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !shipment_data?.is_job_closed
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !IS_JOB_CLOSED
 	&& !invoice?.processing;
 
 	return (
@@ -89,7 +91,7 @@ function Status({
 					<Button
 						size="sm"
 						themeType="tertiary"
-						disabled={shipment_data?.is_job_closed}
+						disabled={IS_JOB_CLOSED}
 						onClick={() => sendInvoiceToFinance({
 							payload: {
 								id: invoice?.id,
@@ -118,7 +120,7 @@ function Status({
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
-						disabled={shipment_data?.is_job_closed}
+						disabled={IS_JOB_CLOSED}
 						onClick={() => handleClick('amendment_requested')}
 					>
 						Request Amendment
@@ -129,7 +131,7 @@ function Status({
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
-					disabled={shipment_data?.is_job_closed}
+					disabled={IS_JOB_CLOSED}
 					onClick={() => setAskNullify(true)}
 				>
 					Request CN

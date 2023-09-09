@@ -2,6 +2,8 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+const LEVELS_FOR_APPROVAL = ['LEVEL_1', 'LEVEL_2'];
+
 const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) => ({
 	type : 'JOB_OPEN',
 	data : {
@@ -16,7 +18,7 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 			businessName: shipmentData?.importer_exporter?.business_name,
 		},
 	},
-	toWhomToSendForApproval : ['LEVEL_1', 'LEVEL_2'],
+	toWhomToSendForApproval : LEVELS_FOR_APPROVAL,
 	createdBy               : user_id,
 	source                  : 'SHIPMENT',
 
