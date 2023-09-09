@@ -8,6 +8,7 @@ import { DETAILS_MAPPING, HEADER_MAPPING } from '../../../../constant/editModalC
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
 
 import FuturePlanDetails from './FuturePlanDetails';
+import PlanApproval from './PlanApproval';
 import QuotaDetails from './QuotaDetails';
 import styles from './styles.module.css';
 
@@ -25,7 +26,7 @@ function EditModal({ editModal, setEditModal }) {
 		closeModalHandler,
 	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
-	const { active = {}, quotas = [], future = {} } = subInfo || {};
+	const { active = {}, quotas = [], future = {}, pending_orders = {} } = subInfo || {};
 	const { id = '', plan = {}, pricing = {}, product_family = {} } = active || {};
 
 	return (
@@ -101,6 +102,7 @@ function EditModal({ editModal, setEditModal }) {
 
 					<div className={styles.validity_container}>
 						<FuturePlanDetails future={future} />
+						<PlanApproval pending_orders={pending_orders} />
 					</div>
 				</div>
 			</div>
