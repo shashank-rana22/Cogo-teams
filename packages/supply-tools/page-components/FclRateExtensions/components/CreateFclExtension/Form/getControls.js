@@ -1,3 +1,9 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+import currencyOptions from '../../../../../constants/currencies';
+
+const geo = getGeoConstants();
+
 const getControls = ({ item }) => [
 	{
 		name         : 'extension_name',
@@ -6,7 +12,7 @@ const getControls = ({ item }) => [
 		span         : 4,
 		value        : item?.extension_name,
 		showOptional : false,
-		className    : 'primary lg',
+		rules        : { required: 'This is required' },
 		placeholder  : 'Type Extension Name',
 	},
 	{
@@ -25,7 +31,6 @@ const getControls = ({ item }) => [
 			},
 		],
 		value        : item?.trade_type,
-		className    : 'primary lg',
 		showOptional : false,
 		isClearable  : true,
 		placeholder  : 'Select Trade Type',
@@ -43,9 +48,7 @@ const getControls = ({ item }) => [
 			{ label: 'Container', value: 'container' },
 		],
 		defaultOptions : true,
-		className      : 'primary lg',
 		placeholder    : 'Cluster Type',
-		rules          : { required: 'This is required' },
 	},
 	{
 		name           : 'cluster_reference_name',
@@ -55,7 +58,6 @@ const getControls = ({ item }) => [
 		span           : 4,
 		defaultOptions : true,
 		showOptional   : false,
-		className      : 'primary lg',
 		placeholder    : 'Cluster Reference Name',
 	},
 	{
@@ -66,7 +68,6 @@ const getControls = ({ item }) => [
 		span           : 4,
 		showOptional   : false,
 		defaultOptions : true,
-		className      : 'primary lg',
 		placeholder    : 'Cluster',
 	},
 
@@ -74,10 +75,10 @@ const getControls = ({ item }) => [
 		name           : 'service_provider_id',
 		placeholder    : 'Service Provider',
 		label          : 'Service Provider',
-		type           : 'select',
+		type           : 'async_select',
 		value          : item?.service_provider_id,
-		className      : 'primary lg',
 		optionsListKey : 'verified-service-providers',
+		asyncKey       : 'organizations',
 		defaultOptions : true,
 		isClearable    : true,
 		span           : 4,
@@ -86,9 +87,11 @@ const getControls = ({ item }) => [
 		showOptional   : false,
 		params         : {
 			filters: {
-				exclude_ids: [
-					'6cc6b696-60f6-480b-bcbe-92cc8e642531',
-					'5dc403b3-c1bd-4871-b8bd-35543aaadb36',
+				account_type : 'service_provider',
+				kyc_status   : 'verified',
+				exclude_ids  : [
+					geo.uuid.cogo_freight_pvt_ltd_pr_supplier,
+					geo.uuid.cogo_freight_supplier,
 				],
 			},
 		},
@@ -96,15 +99,21 @@ const getControls = ({ item }) => [
 	{
 		name           : 'shipping_line_id',
 		label          : 'Shipping Line',
-		type           : 'select',
+		type           : 'async_select',
 		span           : 4,
 		showOptional   : false,
 		value          : item?.shipping_line_id,
-		className      : 'primary lg',
 		isClearable    : true,
 		optionsListKey : 'shipping-lines',
+		asyncKey       : 'list_operators',
 		placeholder    : 'Shipping Line',
 		defaultOptions : true,
+		params         : {
+			filters    : { operator_type: 'shipping_line', status: 'active' },
+			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
+		},
 	},
 
 	{
@@ -117,7 +126,6 @@ const getControls = ({ item }) => [
 		value          : item?.line_item_charge_code,
 		showOptional   : false,
 		defaultOptions : true,
-		className      : 'primary lg',
 		placeholder    : 'Line Item Charge code',
 	},
 	{
@@ -129,8 +137,8 @@ const getControls = ({ item }) => [
 		optionsListKey : 'currencies',
 		defaultOptions : true,
 		showOptional   : false,
-		className      : 'primary lg',
 		placeholder    : 'Markup Currency',
+		options        : currencyOptions,
 	},
 	{
 		name         : 'gri_rate',
@@ -141,7 +149,6 @@ const getControls = ({ item }) => [
 		priceKey     : 'price',
 		showOptional : false,
 		placeholder  : 'Markup Rate',
-		className    : 'primary lg',
 	},
 ];
 export default getControls;

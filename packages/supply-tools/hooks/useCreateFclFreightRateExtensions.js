@@ -3,9 +3,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import getFclFreightRateExtensionsPayload from '../helpers/getFclFreightRateExtensionsPayload';
-import toastApiError from '../utils/toastApiError';
 
-const useCreateUpdateFclFreightRateExtensions = ({
+const useCreateFclFreightRateExtensions = ({
 	successMessage = 'Created Successfully!',
 	refetch = () => {},
 }) => {
@@ -28,7 +27,7 @@ const useCreateUpdateFclFreightRateExtensions = ({
 
 			return res;
 		} catch (err) {
-			toastApiError(err);
+			Toast.error(err?.message);
 			return err;
 		}
 	};
@@ -39,4 +38,4 @@ const useCreateUpdateFclFreightRateExtensions = ({
 	};
 };
 
-export default useCreateUpdateFclFreightRateExtensions;
+export default useCreateFclFreightRateExtensions;

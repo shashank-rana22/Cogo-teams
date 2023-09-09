@@ -1,13 +1,13 @@
 import { Modal, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import useUpdateFclFreightCommodityCluster from '../../../hooks/useUpdateFclFreightCommodityCluster';
+import useUpdateFclFreightRateExtensions from '../../../../hooks/useUpdateFclFreightRateExtensions';
 
 function Delete({
 	show = null, setShow = () => {}, item = {},
 	refetch = () => {},
 }) {
-	const { apiTrigger, loading } = useUpdateFclFreightCommodityCluster({
+	const { apiTrigger, loading } = useUpdateFclFreightRateExtensions({
 		successMessage : 'Deleted Successfully',
 		refetch        : () => {
 			refetch();
@@ -21,13 +21,13 @@ function Delete({
 
 	return !isEmpty(show) ? (
 		<Modal show={!isEmpty(show)} onClose={() => setShow(null)} placement="top">
-			<Modal.Header title="DELETE COMMODITY CLUSTER" />
+			<Modal.Header title="DELETE FCL FREIGHT RATE EXTENSION" />
 
 			<Modal.Body>
 				<div>
-					Do you want to delete Commodity Cluster :
+					Do you want to delete this Extension :
 					{' '}
-					<b>{item?.name}</b>
+					<span style={{ fontWeight: 'bold' }}>{item?.name}</span>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

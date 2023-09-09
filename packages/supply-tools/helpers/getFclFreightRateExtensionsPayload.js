@@ -1,4 +1,4 @@
-const getFclFreightRateExtensionsPayload = ({ values = {}, item = {} }) => {
+const getFclFreightRateExtensionsPayload = ({ values = {}, item = {}, status = 'active' }) => {
 	const {
 		cluster_id,
 		cluster_type,
@@ -9,13 +9,12 @@ const getFclFreightRateExtensionsPayload = ({ values = {}, item = {} }) => {
 		performed_by_id,
 		service_provider_id,
 		shipping_line_id,
-		status,
 		trade_type,
 		extension_name,
 	} = values;
 
 	const payload = {
-		id       : item.id,
+		id       : item?.id,
 		extension_name,
 		line_item_charge_code,
 		performed_by_id,

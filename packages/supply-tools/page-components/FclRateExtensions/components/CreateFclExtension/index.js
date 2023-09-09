@@ -1,16 +1,17 @@
 import { Modal, Button } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
-import useCreateUpdateFclFreightRateExtensions from '../../../../hooks/useCreateUpdateFclFreightRateExtensions';
+import useCreateFclFreightRateExtensions from '../../../../hooks/useCreateFclFreightRateExtensions';
 
 import Form from './Form';
+import styles from './styles.module.css';
 
 function CreateFclExtension({ refetch = () => {} }) {
 	const [show, setShow] = useState(false);
 
 	const formRef = useRef(null);
 
-	const { apiTrigger = () => {}, loading } = useCreateUpdateFclFreightRateExtensions({
+	const { apiTrigger = () => {}, loading } = useCreateFclFreightRateExtensions({
 		refetch: () => {
 			refetch();
 			setShow(false);
@@ -27,10 +28,10 @@ function CreateFclExtension({ refetch = () => {} }) {
 
 	return (
 		<div>
-			<Button size="lg" onClick={() => setShow(true)}>Create New Extensions</Button>
+			<Button onClick={() => setShow(true)}>Create New Extensions</Button>
 
 			{show ? (
-				<Modal onClose={() => setShow(false)} show={show} placement="top" size="lg">
+				<Modal className={styles.modal} onClose={() => setShow(false)} show={show} placement="top" size="lg">
 					<Modal.Header title="ADD FCL FREIGHT RATE EXTENSION" />
 					<Modal.Body>
 						<Form handleSubmitForm={handleSubmitForm} ref={formRef} />
