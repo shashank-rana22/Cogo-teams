@@ -102,16 +102,6 @@ function Item({
 									{' '}
 									{item?.incident_id}
 								</span>
-
-								{item?.incident_status && (
-									<span className={cl`${styles[item?.incident_status.toLowerCase()]}
-									 ${styles.text}`}
-									>
-										Status:
-										{' '}
-										{startCase(item?.incident_status.toLowerCase())}
-									</span>
-								) }
 							</div>
 						)}
 

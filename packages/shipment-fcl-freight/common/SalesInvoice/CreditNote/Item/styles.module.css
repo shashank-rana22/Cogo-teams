@@ -15,7 +15,7 @@
 }
 
 .invoice_value {
-	flex: 0 0 40%;
+	flex: 0 0 36%;
 	font-size: var(--font-size-lg);
 	text-align: center;
 
@@ -30,7 +30,7 @@
 
 .number {
 	display: flex;
-	flex: 0 0 18%;
+	flex: 0 0 20%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -53,33 +53,11 @@
 }
 
 .in_number {
-	display: flex;
-	flex: 0 0 18%;
-	flex-direction: column;
-	align-items: center;
+	flex: 0 0 20%;
+	text-align: center;
 
 	.in_text {
 		font-size: var(--font-size-md);
-	}
-
-	.text {
-		width: fit-content;
-		padding: 3px 12px;
-		margin-top: 3px;
-		font-size: var(--font-size-sm);
-		border-radius: 4px;
-	}
-
-	.approved {
-		background-color: var(--color-tertiary-success-green-4);
-	}
-
-	.rejected {
-		background-color: var(--color-primary-error-red-4);
-	}
-
-	.requested {
-		background-color: var(--color-primary-yellow-4);
 	}
 }
 
@@ -119,7 +97,7 @@
 
 .invoice_status_and_action {
 	display: flex;
-	flex: 0 0 14%;
+	flex: 0 0 20%;
 	align-items: center;
 	justify-content: space-between;
 
@@ -127,7 +105,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-right: 18px;
 
 		& > svg {
 			margin-left: 8px;
