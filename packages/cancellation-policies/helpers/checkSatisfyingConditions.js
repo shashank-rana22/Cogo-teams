@@ -4,29 +4,12 @@ import { isEmpty } from '@cogoport/utils';
 const ZERO = 0;
 
 const HUNDRED = 100;
-const checkSatisfyingConditions = ({ data }) => {
-	// const slabs = [...detention, ...demurrage].filter((i) => !!i.upper_limit);
-
-	// if (isEmpty(slabs)) {
-	// 	Toast.error(`Add ${startCase(free_days_type)}`);
-	// 	return false;
-	// }
-
-	// const satisfyingDaysLimit = slabs.every((itm) => (
-	// 	Number(itm?.lower_limit) < Number(itm?.upper_limit) && Number(itm?.upper_limit) > Number(data?.free_limit)
-	// ));
-
-	// if (!satisfyingDaysLimit) {
-	// 	Toast.error('Upper limit and lower limit of days should always be greater than free limit days');
-	// 	return false;
-	// }
-
-	// return true;
+const checkSatisfyingConditions = ({ data = {} }) => {
 	const { slabs = [] } = data || {};
 
 	const satisfyingDaysLimit = slabs?.every((itm) => (
-		Number(itm.lower_limit) < Number(itm.upper_limit)
-            && Number(itm.upper_limit) > Number(data?.free_days)
+		Number(itm?.lower_limit) < Number(itm?.upper_limit)
+            && Number(itm?.upper_limit) > Number(data?.free_days)
 	));
 
 	if (!satisfyingDaysLimit) {
@@ -49,15 +32,15 @@ const checkSatisfyingConditions = ({ data }) => {
 		return false;
 	}
 
-	if (parseFloat(data.min_value) > parseFloat(data?.max_value)) {
+	if (parseFloat(data?.min_value) > parseFloat(data?.max_value)) {
 		Toast.error('Min Value cannot be greater than Max Value');
 		return false;
 	}
 
 	if (
 		!(
-			!isEmpty(data.origin_location_id)
-            === !isEmpty(data.destination_location_id)
+			!isEmpty(data?.origin_location_id)
+            === !isEmpty(data?.destination_location_id)
 		)
 	) {
 		Toast.error('Origin and Destination both should be selected');
@@ -65,15 +48,6 @@ const checkSatisfyingConditions = ({ data }) => {
 	}
 
 	return true;
-	// const { conditions, ...rest } = submit_data;
-
-	// if (!isEmpty(conditions)) {
-	//     rest.conditions = conditions.map((item) => ({
-	//         [item.attribute]: `${cancellationReasonMapping[item.condition]} ${
-	//             item.days
-	//         }`,
-	//     }));
-	// }
 };
 
 export default checkSatisfyingConditions;

@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-// import getCreateUpdateCommodityPayload from '../helpers/getCreateUpdateCommodityPayload';
 import toastApiError from '../utils/toastApiError';
 
 const useCreateShipmentCancellationCharges = ({

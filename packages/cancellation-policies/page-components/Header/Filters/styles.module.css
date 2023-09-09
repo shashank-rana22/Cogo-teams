@@ -16,6 +16,4 @@
 .container {
 	max-height: 400px;
 	overflow: auto;
-
-	/* padding-right: 12px; */
 }

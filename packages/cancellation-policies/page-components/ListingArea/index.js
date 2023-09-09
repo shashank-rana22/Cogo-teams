@@ -5,39 +5,12 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EditDeletePopup from './EditDeletePopup';
+import SlabContent from './SlabContent';
 import styles from './styles.module.css';
 
 const ZERO = 0;
 const ONE = 1;
-function SlabContent(item) {
-	return (
-		<div style={{ display: 'flex', gap: 16 }}>
-			{item?.slabs?.map((slab) => (
-				<div key={item?.id}>
-					<div style={{ fontSize: '12px' }}>
-						{slab?.lower_limit}
-						{' '}
-						-
-						{slab?.upper_limit}
-						{' '}
-						Days
-					</div>
-					<div
-						style={{
-							color      : '#5936F0',
-							fontSize   : '12px',
-							fontWeight : '500',
-						}}
-					>
-						{slab?.currency}
-						{' '}
-						{slab?.price}
-					</div>
-				</div>
-			))}
-		</div>
-	);
-}
+
 function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 	const [visible, setVisible] = useState(null);
 
@@ -99,7 +72,7 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 						{item?.slabs?.length > ONE ? (
 							<Tooltip
 								theme="light"
-								content={SlabContent(item)}
+								content={<SlabContent item={item} />}
 								maxWidth="none"
 							>
 
@@ -125,7 +98,7 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 					trigger="click"
 					render={<EditDeletePopup item={item} refetch={refetch} setVisible={setVisible} visible={visible} />}
 					visible={visible === item?.id}
-
+					onClickOutside={() => { setVisible(false); }}
 				>
 
 					<Button themeType="tertiary" onClick={() => { setVisible(item?.id); }}>

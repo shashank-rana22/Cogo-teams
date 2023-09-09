@@ -29,7 +29,7 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 			const { conditions, ...rest } = data;
 
 			if (!isEmpty(conditions)) {
-				rest.conditions = conditions.map((obj) => ({
+				rest.conditions = conditions?.map((obj) => ({
 					[obj.attribute]: `${CANCELREASONMAPPING[obj.condition]} ${
 						obj.days
 					}`,

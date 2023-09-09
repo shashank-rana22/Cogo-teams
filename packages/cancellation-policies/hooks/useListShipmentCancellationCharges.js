@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
 const useListShipmentCancellationCharges = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
@@ -25,6 +27,7 @@ const useListShipmentCancellationCharges = ({ defaultFilters = {}, defaultParams
 			if (res?.data) { setData(res?.data); }
 		} catch (err) {
 			// console.error(err);
+			toastApiError(err);
 			setData({});
 		}
 	}, [trigger]);
@@ -32,8 +35,6 @@ const useListShipmentCancellationCharges = ({ defaultFilters = {}, defaultParams
 	useEffect(() => {
 		getShipmentCancellationCharges();
 	}, [getShipmentCancellationCharges, filters]);
-
-	// console.log({ data });
 
 	return {
 		data,

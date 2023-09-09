@@ -1,3 +1,4 @@
+import CONTAINER_SIZE from '@cogoport/constants/container-sizes.json';
 import CONTAINER_TYPES from '@cogoport/constants/container-types.json';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
@@ -5,7 +6,6 @@ import BOOKING_TYPE from '../../../configs/BOOKING_TYPE.json';
 import CHARGE_TYPE from '../../../configs/CHARGE_TYPE.json';
 import CONDITION_ATTRIBUTE from '../../../configs/CONDITION_ATTRIBUTE.json';
 import CONDITION_CONDITION from '../../../configs/CONDITION_CONDITION.json';
-import CONTAINER_SIZE from '../../../configs/CONTAINER_SIZE.json';
 import MILESTONE from '../../../configs/MILESTONE.json';
 import ORGANIZATION_TYPE from '../../../configs/ORGANIZATION_TYPE.json';
 import RATE_TYPE from '../../../configs/RATE_TYPE.json';
@@ -15,19 +15,18 @@ import { CANCELREVERSEMAPPING } from '../../../utils/cancellationReasonMapper';
 const currencyOptions = GLOBAL_CONSTANTS.service_supported_countries
 	.feature_supported_service.feedback_services.currencies.map((c) => ({ label: c, value: c }));
 
-const GET_DAYS_OPTIONS_VALUES1 = 31;
-const GET_DAYS_OPTIONS_VALUES2 = 0;
-const GET_DAYS_OPTIONS_VALUES3 = 1;
+const THIRTY_ONE = 31;
+const ZERO = 0;
 const ONE = 1;
-const getDaysOptions = Array(GET_DAYS_OPTIONS_VALUES1).fill(GET_DAYS_OPTIONS_VALUES2)
-	.map((_, idx) => ({ label: idx + GET_DAYS_OPTIONS_VALUES3, value: idx + GET_DAYS_OPTIONS_VALUES3 }));
+const getDaysOptions = Array(THIRTY_ONE).fill(ZERO)
+	.map((_, idx) => ({ label: idx + ONE, value: idx + ONE }));
 
 const getControls = ({ item, isEdit }) => {
 	const CONDITIONS_VALUE = (item?.conditions || []).map((condition) => ({
-		attribute : Object.keys(condition)[GLOBAL_CONSTANTS.zeroth_index],
-		condition : CANCELREVERSEMAPPING[Object.values(condition)[GLOBAL_CONSTANTS.zeroth_index]
+		attribute : Object.keys(condition || {})[GLOBAL_CONSTANTS.zeroth_index],
+		condition : CANCELREVERSEMAPPING[Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index]
 			.split(' ')[GLOBAL_CONSTANTS.zeroth_index]],
-		days: +Object.values(condition)[GLOBAL_CONSTANTS.zeroth_index].split(' ')[ONE],
+		days: +Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index].split(' ')[ONE],
 	}));
 	return [{
 		name        : 'service',
@@ -104,7 +103,7 @@ const getControls = ({ item, isEdit }) => {
 		showButtons        : true,
 		buttonText         : 'Conditions',
 		noDeleteButtonTill : 0,
-		value              : isEdit ? CONDITIONS_VALUE : undefined,
+		value              : isEdit ? CONDITIONS_VALUE : [],
 		controls           : [
 			{
 				name    : 'attribute',
@@ -168,7 +167,7 @@ const getControls = ({ item, isEdit }) => {
 		type        : 'select',
 		label       : 'Currency',
 		value       : item?.currency,
-		options     : currencyOptions, // required implementation
+		options     : currencyOptions,
 		placeholder : 'Select currency',
 		rules       : { required: 'Currency is required' },
 		span        : 4,

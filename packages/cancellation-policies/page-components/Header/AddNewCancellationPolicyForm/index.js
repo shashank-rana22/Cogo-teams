@@ -4,14 +4,14 @@ import { startCase } from '@cogoport/utils';
 import React, { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import Layout from '../../../common/Layout';
-import commoditiesMapper from '../../../helpers/getCommodityShipmentMapper';
+import getCommoditiesMapper from '../../../helpers/getCommodityShipmentMapper';
 
 import getControls from './getControls';
 
 const ZERO = 0;
 const ONE = 1;
 
-const getCommodityOptions = ({ service, container_type }) => (commoditiesMapper({ service, container_type }) || [])
+const getCommodityOptions = ({ service, container_type }) => (getCommoditiesMapper({ service, container_type }) || [])
 	.map((option) => ({ label: startCase(option), value: option }));
 
 function AddNewCancellationPolicyForm({ item = {}, handleSubmitForm = () => {}, isEdit = false }, ref) {

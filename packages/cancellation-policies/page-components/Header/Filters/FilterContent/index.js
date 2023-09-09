@@ -11,9 +11,7 @@ function FilterContent({
 	filterValues = {}, setFilterValues = () => {},
 	controls = [], visible = false, setVisible = () => {},
 }) {
-	const DEFAULT_VALUES = filterValues;
-
-	const { control, handleSubmit, reset } = useForm({ defaultValues: DEFAULT_VALUES });
+	const { control, handleSubmit, reset } = useForm({ defaultValues: filterValues });
 
 	const handleFilterSubmit = (value) => {
 		const arr = Object.keys(value || {}).filter((item) => (value[item] !== ''));
@@ -35,26 +33,23 @@ function FilterContent({
 		setVisible(!visible);
 	};
 	return (
-		<div>
-			<div className={styles.container}>
-				<div className={styles.form_header}>
-					<Button themeType="tertiary" onClick={onReset}>
-						Clear Filters
+		<div className={styles.container}>
+			<div className={styles.form_header}>
+				<Button themeType="tertiary" onClick={onReset}>
+					Clear Filters
 
-					</Button>
+				</Button>
 
-					<Button
-						themeType="primary"
-						onClick={handleSubmit(handleFilterSubmit)}
+				<Button
+					themeType="primary"
+					onClick={handleSubmit(handleFilterSubmit)}
+				>
+					Apply
 
-					>
-						Apply
+				</Button>
 
-					</Button>
-
-				</div>
-				<Layout controls={controls} control={control} />
 			</div>
+			<Layout controls={controls} control={control} />
 		</div>
 	);
 }

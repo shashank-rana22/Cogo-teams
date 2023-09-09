@@ -6,8 +6,7 @@ import checkSatisfyingConditions from '../../helpers/checkSatisfyingConditions';
 import useUpdateShipmentCancellation from '../../hooks/useUpdateShipmentCancellationCharges';
 import CANCELREASONMAPPING from '../../utils/cancellationReasonMapper';
 import AddNewCancellationPolicyForm from '../Header/AddNewCancellationPolicyForm';
-// import useUpdateFclFreightCommodityCluster from '../../../hooks/useUpdateFclFreightCommodityCluster';
-const TRUE = true;
+
 function Update({
 	show = null, setShow = () => {},
 	item = {},
@@ -26,7 +25,7 @@ function Update({
 		const isSatifyingDaysLimit = checkSatisfyingConditions({ data });
 
 		if (isSatifyingDaysLimit) {
-			const { conditions, ...rest } = data;
+			const { conditions, ...rest } = data || {};
 
 			if (!isEmpty(conditions)) {
 				rest.conditions = conditions.map((obj) => ({
@@ -55,7 +54,7 @@ function Update({
 					handleSubmitForm={handleSubmitForm}
 					item={item}
 					ref={formRef}
-					isEdit={TRUE}
+					isEdit
 				/>
 			</Modal.Body>
 
