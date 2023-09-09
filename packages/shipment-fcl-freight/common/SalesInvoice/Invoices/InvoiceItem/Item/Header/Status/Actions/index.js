@@ -133,6 +133,7 @@ function Actions({
 						<Button
 							size="sm"
 							themeType="tertiary"
+							disabled={shipment_data?.is_job_closed}
 							onClick={() => sendInvoiceToFinance({
 								payload: {
 									id: invoice?.id,
