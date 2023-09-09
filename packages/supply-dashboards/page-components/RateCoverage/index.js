@@ -15,7 +15,7 @@ function RateCoverage() {
 	const handleTabChange = (tab) => {
 		if (tab !== 'rate_density') {
 			const route = tab.replace('_', '-');
-			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
+			window.location.href = `v2/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
 	return (
