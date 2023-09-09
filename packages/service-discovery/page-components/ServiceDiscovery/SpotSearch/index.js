@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -13,13 +14,12 @@ import useCreateSearch from './hooks/useCreateSearch';
 import styles from './styles.module.css';
 
 function SpotSearch() {
-	const [organization, setOrganization] = useState(() => {
-		if (typeof window !== 'undefined') {
-			const organization_id = new URLSearchParams(window?.location?.search)?.get('organization_id') || undefined;
-			const user_id = new URLSearchParams(window?.location?.search)?.get('user_id') || undefined;
-			const organization_branch_id = new URLSearchParams(window?.location?.search)?.get('organization_branch_id')
-			|| undefined;
+	const { query = {} } = useRouter();
 
+	const { user_id = '', organization_id = '', organization_branch_id = '' } = query;
+
+	const [organization, setOrganization] = useState(() => {
+		if (!isEmpty(query)) {
 			return { organization_id, user_id, organization_branch_id };
 		}
 
@@ -31,16 +31,7 @@ function SpotSearch() {
 		mode_value : 'fcl_freight',
 	});
 	const [selectedService, setSelectedService] = useState({});
-	const [location, setLocation] = useState(() => {
-		if (typeof window !== 'undefined') {
-			const origin = new URLSearchParams(window?.location?.search)?.get('origin') || undefined;
-			const destination = new URLSearchParams(window?.location?.search)?.get('destination') || undefined;
-
-			return { origin: { id: origin }, destination: { id: destination } };
-		}
-
-		return {};
-	});
+	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
 	const [isBannerVisible, setIsBannerVisible] = useState(true);
 

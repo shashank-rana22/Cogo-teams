@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import useGetDownloadReport from '../../Invoices/hooks/useGetDownloadReport';
 import { getDetails } from '../constants/details';
 
-import StatsOutstanding from './StatsOutstanding/index';
+import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
 import TAB_OPTIONS from './TabOptions';
 import UserDetails from './UserDetails';
