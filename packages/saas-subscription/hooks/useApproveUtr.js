@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ data }) => ({
 	checkout_id : data?.checkoutId,
-	action      : data?.action,
+	action_name      : data?.action,
 });
 
 const useApproveUtr = () => {
