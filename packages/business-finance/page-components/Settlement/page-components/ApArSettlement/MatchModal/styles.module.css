@@ -130,3 +130,8 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.overflowStyle {
+	display: flex;
+	align-items: center;
+}

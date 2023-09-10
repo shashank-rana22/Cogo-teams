@@ -23,10 +23,10 @@ function errorMsg({
 			balanceAmount = 0,
 		} = new_item || {};
 
-		const amountCheck =	types === 'history' ? balanceAmount + settledAmount : +balanceAmount;
-
-		const maxValue = +inputvalue > +amountCheck;
-		const lessValue = +inputvalue <= LEAST_VALUE_POSSIBLE;
+		const amountCheck = types === 'history'
+			? (balanceAmount || LEAST_VALUE) + (settledAmount || LEAST_VALUE) : +balanceAmount || LEAST_VALUE;
+		const maxValue = (+inputvalue || LEAST_VALUE) > amountCheck;
+		const lessValue = (+inputvalue || LEAST_VALUE) <= LEAST_VALUE_POSSIBLE;
 
 		const isError = lessValue || maxValue;
 
@@ -53,9 +53,9 @@ function errorMsg({
 		settledTds = 0,
 	} = new_item || {};
 
-	const checkAmound = (+documentAmount * TEN_PERCENT) / HUNDERED_PERCENT;
-	const maxValue = +inputvalue + settledTds > +checkAmound;
-	const lessValue = Number.parseInt(inputvalue, 10) < LEAST_VALUE;
+	const checkAmound = ((+documentAmount || LEAST_VALUE) * TEN_PERCENT) / HUNDERED_PERCENT;
+	const maxValue = (+inputvalue || LEAST_VALUE) + (settledTds || LEAST_VALUE) > checkAmound;
+	const lessValue = Number.parseInt(inputvalue || LEAST_VALUE, 10) < LEAST_VALUE;
 	const isError = lessValue || maxValue;
 	let errorMessege = '';
 

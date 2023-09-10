@@ -13,13 +13,13 @@ const DOC_LENGTH = 10;
 const AMT_LENGTH = 8;
 
 const useGetColumns = ({
-	data = [],
+	data = {},
 	loading = false,
 	selectedData = [],
 	setSelectedData = () => {},
 	sortData = [],
 	setSortData = () => {},
-	pageCheckedRows = [],
+	pageCheckedRows = {},
 	setPageCheckedRows = () => {},
 }) => {
 	const { list = [] } = data || {};
@@ -92,12 +92,12 @@ const useGetColumns = ({
 							interactive
 						>
 							<div>
-								{(documentValue && documentValue.length > DOC_LENGTH
-									? `${documentValue.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
+								{(documentValue && documentValue?.length > DOC_LENGTH
+									? `${documentValue?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
 									: documentValue) || '-'}
 							</div>
 							<Pill
-								size="md"
+								size="sm"
 								color="#CFEAED"
 								className={styles.docTypePill}
 							>
@@ -216,7 +216,7 @@ const useGetColumns = ({
 			Header   : (<div className={styles.commonStylingHeader}>STATUS</div>),
 			accessor : (item) => (
 				<Pill
-					size="lg"
+					size="md"
 					color={
 					item?.status === 'Unpaid' || item?.status === 'Unutilized'
 						? '#fef199'
