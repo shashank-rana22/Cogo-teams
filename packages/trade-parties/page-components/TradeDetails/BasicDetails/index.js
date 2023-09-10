@@ -1,6 +1,7 @@
 import { Pill, cl, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -16,7 +17,7 @@ function BasicDetails({ tradePartyDetails = {}, loading = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_serial_id}>
-				<div className={styles.heading}>{legal_business_name}</div>
+				<div className={styles.heading}>{startCase(legal_business_name)}</div>
 
 				<Pill className={styles.serial_id}>
 					ID #
