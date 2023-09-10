@@ -33,9 +33,9 @@ const useCreateUpdateFclWeightSlabs = ({
 		scope,
 	}, { manual: true });
 
-	const apiTrigger = async (val) => {
+	const apiTrigger = async (values) => {
 		try {
-			const payload = getCreateUpdateWeightSlabPayload({ data: val });
+			const payload = getCreateUpdateWeightSlabPayload({ values, item, isCogoAssured });
 
 			const res = await trigger({ data: payload });
 
