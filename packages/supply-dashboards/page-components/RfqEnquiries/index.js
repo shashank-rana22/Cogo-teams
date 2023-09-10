@@ -1,7 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { useRouter } from 'next/router';
 
 import tabPanelMapping from './configurations/tab-panel-mapping';
 
