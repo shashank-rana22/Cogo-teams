@@ -146,7 +146,7 @@ const getControls = ({ item }) => [
 	{
 		name           : 'destination_location_id',
 		label          : 'Destination Location',
-		type           : 'location-select',
+		type           : 'async_select',
 		span           : 3,
 		showOptional   : false,
 		value          : item?.destination_location_id,
