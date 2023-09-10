@@ -1,11 +1,19 @@
 /* eslint-disable max-lines-per-function */
+import {
+	COMMODITY_NAME_MAPPING,
+	FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
+} from '@cogoport/globalization/constants/commodities';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { isEmpty } from '@cogoport/utils';
 
-import getOptions from '../../../../configs/COMMODITY_MAPPING';
 import currencyOptions from '../../../../constants/currencies';
 
 const geo = getGeoConstants();
+
+const getOptions = ({ containerType }) => FREIGHT_CONTAINER_COMMODITY_MAPPINGS[containerType].map((item) => ({
+	label : COMMODITY_NAME_MAPPING[item].name,
+	value : item,
+}));
 
 const MAX_WEIGHT = 18;
 
@@ -16,7 +24,6 @@ const getControls = ({ item }) => [
 		placeholder    : 'Search via name',
 		type           : 'async_select',
 		value          : item?.service_provider_id,
-		className      : 'primary lg',
 		optionsListKey : 'verified-service-providers',
 		asyncKey       : 'organizations',
 		initialCall    : true,
@@ -47,7 +54,6 @@ const getControls = ({ item }) => [
 		span           : 4,
 		rules          : { required: 'This is required' },
 		value          : item?.trade_type,
-		className      : 'primary lg',
 		caret          : true,
 		options      		: [
 			{
@@ -66,7 +72,6 @@ const getControls = ({ item }) => [
 		name           : 'importer_exporter_id',
 		type           : 'async_select',
 		value          : item?.importer_exporter_id,
-		className      : 'primary lg',
 		span           : 4,
 		showOptional   : false,
 		optionsListKey : 'verified-importer-exporters',
@@ -89,7 +94,6 @@ const getControls = ({ item }) => [
 		showOptional : false,
 		placeholder  : 'Select here...',
 		label        : 'Origin Location Type',
-		className    : 'primary lg',
 		theme        : 'admin',
 		isClearable  : true,
 		options      : [
@@ -111,7 +115,6 @@ const getControls = ({ item }) => [
 		showOptional   : false,
 		value          : item?.origin_location_id,
 		asyncKey       : 'list_locations',
-		className      : 'primary lg',
 		optionsListKey : 'locations',
 		placeholder    : 'Search via name',
 		params         : {
@@ -130,7 +133,6 @@ const getControls = ({ item }) => [
 		placeholder  : 'Select here...',
 		showOptional : false,
 		label        : 'Destination Location Type',
-		className    : 'primary lg',
 		theme        : 'admin',
 		isClearable  : true,
 		options      : [
@@ -151,7 +153,6 @@ const getControls = ({ item }) => [
 		span           : 3,
 		showOptional   : false,
 		value          : item?.destination_location_id,
-		className      : 'primary lg',
 		optionsListKey : 'locations',
 		asyncKey       : 'list_locations',
 		placeholder    : 'Search via name',
@@ -170,7 +171,6 @@ const getControls = ({ item }) => [
 		span           : 3,
 		showOptional   : false,
 		value          : item?.shipping_line_id,
-		className      : 'primary lg',
 		optionsListKey : 'shipping-lines',
 		asyncKey       : 'list_operators',
 		placeholder    : 'Search via name',
@@ -188,7 +188,6 @@ const getControls = ({ item }) => [
 		span           : 3,
 		showOptional   : false,
 		value          : item?.container_size,
-		className      : 'primary lg',
 		placeholder    : 'Size',
 		optionsListKey : 'container-sizes',
 		options        : [
@@ -296,8 +295,7 @@ const getControls = ({ item }) => [
 				value : 'other',
 			},
 		],
-		className   : 'primary lg',
-		placeholder : 'Type here...',
+		placeholder: 'Type here...',
 	},
 	{
 		label         : 'Commodity',
@@ -307,7 +305,6 @@ const getControls = ({ item }) => [
 		showOptional  : false,
 		value         : item?.commodity,
 		placeholder   : 'Search via name',
-		className     : 'primary lg',
 		commodityType : 'freight',
 		options       : getOptions({ containerType: 'standard' }),
 	},
@@ -318,7 +315,6 @@ const getControls = ({ item }) => [
 		lowerlabel  : 'In Metricton (MT)',
 		span        : 4,
 		value       : item?.max_weight || MAX_WEIGHT,
-		className   : 'primary lg',
 		placeholder : 'Enter',
 		rules       : { required: 'This is required' },
 	},
@@ -335,7 +331,6 @@ const getControls = ({ item }) => [
 				type        : 'number',
 				placeholder : 'Enter Lower Limit',
 				span        : 2,
-				className   : 'primary lg',
 				rules       : {
 					required: 'Lower Limit is required',
 				},
@@ -347,7 +342,6 @@ const getControls = ({ item }) => [
 				type        : 'number',
 				placeholder : 'Enter Upper Limit',
 				span        : 2,
-				className   : 'primary lg',
 				rules       : {
 					required: 'Upper Limit is required',
 				},
@@ -359,7 +353,6 @@ const getControls = ({ item }) => [
 				type           : 'select',
 				optionsListKey : 'currencies',
 				span           : 3.5,
-				className      : 'primary lg',
 				placeholder    : 'Select',
 				options        : currencyOptions,
 				rules          : { required: 'This is required' },
@@ -371,7 +364,6 @@ const getControls = ({ item }) => [
 				type         : 'number',
 				span         : 3.5,
 				showOptional : false,
-				className    : 'primary lg',
 				placeholder  : 'Enter',
 				rules        : { required: 'This is required' },
 			},
