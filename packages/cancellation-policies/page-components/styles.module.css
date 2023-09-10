@@ -1,7 +1,3 @@
-.container {
-	padding: 12px 10px;
-}
-
 .pagination {
 	display: flex;
 	flex-direction: row;

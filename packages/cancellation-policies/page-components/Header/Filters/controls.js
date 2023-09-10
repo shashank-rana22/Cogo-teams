@@ -41,7 +41,8 @@ const controls = [
 			{ label: 'Absolute, Per Unit', value: 'absolute_unit' },
 
 		],
-		span: 12,
+		span : 12,
+		size : 'sm',
 	},
 	{
 		label          : 'Shipping Line',
@@ -50,6 +51,7 @@ const controls = [
 		type           : 'select',
 		placeholder    : 'Select Shipping Line',
 		span           : 12,
+		size           : 'sm',
 	},
 	{
 		name        : 'booking_type',
@@ -61,7 +63,8 @@ const controls = [
 			{ label: 'Normal Booking', value: 'normal_booking' },
 
 		],
-		span: 12,
+		span : 12,
+		size : 'sm',
 	},
 	{
 		label       : 'Rate Type',
@@ -72,7 +75,8 @@ const controls = [
 			{ label: 'Marketplace Rate', value: 'marketplace_rate' },
 			{ label: 'Cogo Assured Rate', value: 'cogo_assured_rate' },
 		],
-		span: 12,
+		span : 12,
+		size : 'sm',
 	},
 ];
 export default controls;

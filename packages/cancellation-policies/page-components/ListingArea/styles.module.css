@@ -3,10 +3,18 @@
 	background-color: #fff;
 
 	:global {
-		.ui_table_body_cell,
+		.ui_table_body_cell {
+			width: 100px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			font-weight: 500;
+			white-space: normal;
+		}
+
 		.ui_table_head_cell {
 			padding-top: 20px;
 			padding-bottom: 20px;
+			font-weight: 900;
 		}
 	}
 }
@@ -20,6 +28,15 @@
 .slabs {
 	display: flex;
 	justify-content: center;
-	background-color: rgb(249 221 170);
-	border-radius: 10%;
+	padding: 1px 3px;
+	background-color: rgb(250 232 226);
+	border-radius: 6px;
+}
+
+.slabs:hover {
+	cursor: pointer;
+}
+
+.rate_type {
+	background-color: rgb(254 241 223);
 }

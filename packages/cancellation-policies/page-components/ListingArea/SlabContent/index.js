@@ -3,7 +3,7 @@ function SlabContent({ item = {} }) {
 		<div style={{ display: 'flex' }}>
 			{item?.slabs?.map((slab) => (
 				<div key={item?.id}>
-					<div style={{ fontSize: '12px', marginRight: '10px' }}>
+					<div style={{ fontSize: '12px', marginRight: '5px' }}>
 						{slab?.lower_limit}
 						{' '}
 						-
