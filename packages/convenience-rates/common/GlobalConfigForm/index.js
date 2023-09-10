@@ -1,8 +1,11 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import useCreateConvenienceRateConfigs from '../../hooks/useCreateConvenienceRateConfigs';
+import useUpdateConvenienceRateConfigs from '../../hooks/useUpdateConvenienceRateConfigs';
 import Layout from '../Layout';
 
 import getMandatoryControls from './controls/getMandatoryControls';
@@ -14,10 +17,15 @@ const ZERO = 0;
 const ONE = 1;
 const services_add_alt_configs = ['fcl_freight', 'fcl_freight_local', 'fcl_customs'];
 
-function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
-	const isDefaultShowAlternateCFConfig = !!(data?.slab_details?.length > ONE);
-	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(isDefaultShowAlternateCFConfig);
+function GlobalConfigForm({ activeService = '', data = {}, service = '', loading = '', onClosingForm = '' }) {
+	const isEmptyAlternateSlabDetails = isEmpty(
+		data?.slab_details?.filter((item) => !item.is_default),
+	);
+	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(!isEmptyAlternateSlabDetails);
 	const [addAltConfig, setAddAltConfig] = useState(false);
+
+	const isUpdatable = !isEmpty(data);
+	const { config_type = '', status = '' } = data || {};
 
 	const DEFAULT_VALUES = {};
 	const mandatoryControls = getMandatoryControls(
@@ -34,7 +42,7 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 	alternateMandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 	optionalControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 
-	const { control, formState:{ errors = {} } = {}, watch, handleSubmit, reset, setValue } = useForm({
+	const { control, formState:{ errors = {} } = {}, watch, reset, setValue, handleSubmit } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
 
@@ -52,13 +60,6 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 	const { slab_details = [], alternate_slab_details = [] } = formValues;
 
 	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };//
-	// customFieldArrayControls={
-	// 	fieldArrayName:{
-	// 		indexAsKey:{
-	// 			ctrlName :{customFields}
-	// 		}
-	// 	}
-	// }
 
 	alternate_slab_details?.forEach((_o, index) => {
 		if (index > ZERO) {
@@ -95,13 +96,28 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 		}
 	});
 
-	const onSubmit = () => {};
+	const { onCreate = () => {} } = useCreateConvenienceRateConfigs(
+		{ values: formValues, isUpdatable, onClosingForm, activeService, showAlternateCFConfig },
+	);
+	const { onClickDeactivate = () => {}, onUpdate = () => {} } = useUpdateConvenienceRateConfigs(
+		{ data, onClosingForm, isUpdatable, showAlternateCFConfig, values: formValues },
+	);
+	const onSubmit = (isUpdatable ? onUpdate : onCreate);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.head}>
 				<div className={styles.heading}>Global Configuration</div>
-				{/* CODE REMAINING HERE */}
+				{isUpdatable && config_type !== 'default' ? (
+					<Button
+						className="secondary md"
+						onClick={onClickDeactivate}
+						style={{ fontWeight: '600', marginRight: '8px' }}
+						disabled={loading}
+					>
+						{status === 'active' ? 'Deactivate' : 'Activate'}
+					</Button>
+				) : null}
 			</div>
 			<div
 				className={styles.fees}
@@ -109,7 +125,7 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 			>
 				Fees Configuration
 			</div>
-			<div className={styles.layoutContainer}>
+			<div className={styles.layout_container}>
 				<Layout
 					control={control}
 					controls={mandatoryControls}
@@ -124,8 +140,8 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 					{
 				showAlternateCFConfig ? (
 					<>
-						<div className={styles.altConfig}>
-							<span className={styles.altConfigText}>
+						<div className={styles.alt_config}>
+							<span className={styles.alt_config_text}>
 								Alternate Configuration
 							</span>
 							<span style={{ cursor: 'pointer' }}>
@@ -136,7 +152,7 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 								/>
 							</span>
 						</div>
-						<div className={styles.layoutContainer}>
+						<div className={styles.layout_container}>
 							<Layout
 								control={control}
 								controls={alternateMandatoryControls}
@@ -166,18 +182,14 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '' }) {
 			>
 				Fees Applicability (Input Fields in Priority!)
 			</div>
-
-			<div
-				className={styles.layoutContainer2}
-			>
+			<div>
 				<Layout
 					control={control}
 					controls={optionalControls}
 					errors={errors}
 				/>
 			</div>
-
-			<div className={styles.btnContainer}>
+			<div className={styles.btn_container}>
 				<Button
 					className={styles.btn}
 					themeType="primary"

@@ -83,7 +83,7 @@ const getMandatoryControls = (
 					label       : 'Fee Unit',
 					type        : 'select',
 					placeholder : 'Select Type',
-					options     : FEE_UNIT_MAPPING[activeService],
+					options     : FEE_UNIT_MAPPING[activeService || service],
 					rules       : { required: 'Fees Type is Required.' },
 					span        : 1.5,
 					size        : 'sm',

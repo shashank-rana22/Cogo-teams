@@ -16,7 +16,7 @@ const getOrganizationControl = ({ itemValues = {}, organizationDetails }) => {
 			name           : 'organization_ids',
 			type           : 'async_select',
 			placeholder    : 'Select Organizations',
-			asyncKey       : 'list_organizations',
+			asyncKey       : 'organizations',
 			span           : 4,
 			initialCall    : true,
 			labelKey       : 'business_name',

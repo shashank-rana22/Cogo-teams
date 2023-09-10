@@ -31,7 +31,6 @@ function ConvenienceRateDetail() {
 		);
 	}
 	return (
-		// <ViewEditConvenienceFees />
 		<div className={styles.container}>
 			<Button
 				className={styles.back_div}
@@ -55,11 +54,13 @@ function ConvenienceRateDetail() {
 			</div>
 			<GlobalConfigForm
 				data={data}
+				loading={loading}
 				activeService={service}
 				setDefaultConfigFeeUnit={setDefaultConfigFeeUnit}
 			/>
 			<CustomConfig
 				data={data}
+				loading={loading}
 				activeList={activeList}
 				setActiveList={setActiveList}
 				service={service}

@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Loader } from '@cogoport/components';
 import { useState } from 'react';
 
 import CustomConfigForm from './CustomConfigForm';
@@ -12,15 +12,28 @@ const OPTIONS = [
 
 function CustomConfig(
 	{
-		activeList = '', setActiveList = () => {}, data = {}, defaultConfigFeeUnit = '',
+		activeList = '', setActiveList = () => {}, data = {}, defaultConfigFeeUnit = '', loading = '',
 	},
 ) {
 	const [showCustomConfigForm, setShowCustomConfigForm] = useState(false);
 	const [organizationDetails, setOrganizationDetails] = useState({});
 
+	if (loading) {
+		return (
+			<div className={styles.spinner}>
+				<Loader
+					themeType="primary"
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div>
-			<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+			<div style={
+				{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }
+}
+			>
 				<div>
 					<div className={styles.custom_heading}>Custom Configuration</div>
 					{!showCustomConfigForm ? (
@@ -54,7 +67,10 @@ function CustomConfig(
 			</div>
 			{showCustomConfigForm ? (
 				<CustomConfigForm
+					data={data}
+					loading={loading}
 					activeList={activeList}
+					setActiveList={setActiveList}
 					organizationDetails={organizationDetails}
 					itemValue={showCustomConfigForm}
 					onClosingForm={() => setShowCustomConfigForm(false)}
@@ -62,6 +78,8 @@ function CustomConfig(
 				/>
 			) : (
 				<CustomConvenienceList
+					data={data}
+					loading={loading}
 					activeList={activeList}
 					setShowCustomConfigForm={setShowCustomConfigForm}
 					setOrganizationDetails={setOrganizationDetails}

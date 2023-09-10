@@ -1,4 +1,4 @@
-import { cl, Pill } from '@cogoport/components';
+import { cl, Pill, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
@@ -61,16 +61,17 @@ const columnsWithValue = ({ data, list }) => {
 	return NEW_MAPPING_LIST;
 };
 
-function CustomConvenienceListItem({ data = {} }) {
+function CustomConvenienceListItem(
+	{ data = {}, setShowCustomConfigForm = () => {}, setOrganizationDetails = () => {} },
+) {
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
-
+	// console.log(data);
 	return (
-	// <div>CustomConvenienceListItem</div>
 		<div className={styles.container}>
 			<div className={styles.tags_list}>
 				{(data?.organization_data || []).map((item) => (
-					<div key={item.updated_by} style={{ display: 'flex', marginRight: '8px' }}>
-						<Pill>{item.organization_name}</Pill>
+					<div key={item.updated_by} className={styles.tags_row}>
+						<Pill size="md" color="green">{item.organization_name}</Pill>
 					</div>
 				))}
 			</div>
@@ -88,8 +89,17 @@ function CustomConvenienceListItem({ data = {} }) {
 						</div>
 					);
 				})}
+				<Button
+					style={{ marginRight: '200px' }}
+					themeType="teritiary"
+					onClick={() => {
+						setShowCustomConfigForm(data);
+						setOrganizationDetails(data?.organization_data);
+					}}
+				>
+					<IcMEdit />
+				</Button>
 			</div>
-			<IcMEdit />
 
 		</div>
 	);
