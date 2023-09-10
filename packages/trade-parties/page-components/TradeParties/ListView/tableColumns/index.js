@@ -36,6 +36,10 @@ const tableColumns = [
 		accessor : (item) => (item?.registration_number || '-'),
 	},
 	{
+		Header   : 'COUNTRY',
+		accessor : (item) => (item?.country?.display_name || '-'),
+	},
+	{
 		Header   : 'COMPANY TYPE',
 		accessor : (item) => getCompanyType({ company: item?.company_type }),
 	},
