@@ -32,7 +32,7 @@ export const tabPanelMappings = [
 		component : <>--</>,
 	},
 	{
-		name      : 'rate_sheets',
+		name      : 'rates_sheets',
 		title     : 'Rate Sheets',
 		component : <>--</>,
 	},
