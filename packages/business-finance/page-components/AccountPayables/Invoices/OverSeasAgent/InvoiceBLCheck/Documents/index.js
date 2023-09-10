@@ -13,7 +13,7 @@ function Documents({
 	documentUrl = '',
 	onAprrovalOrRejection = () => {},
 	loadingList = false,
-	DocumentData = [],
+	documentData = [],
 	payrunBillStatus = '',
 	showCheckInvoices = {},
 	handleDropdown = () => {},
@@ -22,7 +22,7 @@ function Documents({
 }) {
 	const [radioSet, setRadioSet] = useState('mbl');
 	const [radioAir, setRadioAir] = useState('mawb');
-	const taggedDocument = DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
+	const taggedDocument = documentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
 
 	const checkedCondition = loadingList
 	|| ['APPROVED', 'REJECTED'].includes(payrunBillStatus)
@@ -44,7 +44,7 @@ function Documents({
 				) : (
 					<div className={styles.right}>
 						{['house_bill_of_lading', 'bill_of_lading'].includes(
-							DocumentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type,
+							documentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type,
 						) ? (
 							<>
 								<div className={styles.radiobtn}>
@@ -54,7 +54,7 @@ function Documents({
 										onChange={(item) => setRadioSet(item)}
 									/>
 								</div>
-								<ShowDocument radioValue={radioSet} DocData={DocumentData} />
+								<ShowDocument radioValue={radioSet} documentData={documentData} />
 							</>
 							) : (
 								<>
@@ -65,7 +65,7 @@ function Documents({
 											onChange={(item) => setRadioAir(item)}
 										/>
 									</div>
-									<ShowDocument radioValue={radioAir} DocData={DocumentData} />
+									<ShowDocument radioValue={radioAir} documentData={documentData} />
 								</>
 							)}
 					</div>

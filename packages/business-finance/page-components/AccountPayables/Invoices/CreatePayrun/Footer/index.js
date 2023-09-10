@@ -11,6 +11,15 @@ import styles from './styles.module.css';
 const INITIAL_VALUE = 0;
 const geo = getGeoConstants();
 
+function RenderContent() {
+	return (
+		<div className={styles.popover_modal}>
+			Please ensure to move the checked invoices
+			to the selected bucket or else you’ll lose the edited fields.
+		</div>
+	);
+}
+
 function Footer({
 	apiData = () => {},
 	viewSelectedInvoices = false,
@@ -26,21 +35,12 @@ function Footer({
 	const [type, setType] = useState('');
 	const { totalValue = '', invoiceCount = '', list: viewSelectedList = [] } = apiData || {};
 	const checkedList = (list || [])?.filter((item) => item.checked);
-	const hasError = !isEmpty((checkedList || [])?.filter((item) => item.hasError));
+	const hasError = !isEmpty((checkedList || [])?.filter((item) => item?.hasError));
 	const totalInvoiceAmount = (checkedList || [])?.reduce(
 		(acc, obj) => +acc + +obj.payableAmount || INITIAL_VALUE,
 		INITIAL_VALUE,
 	);
 	const buttonDisabled = isEmpty(checkedList) || loading || hasError;
-
-	function RenderContent() {
-		return (
-			<div className={styles.popover_modal}>
-				Please ensure to move the checked invoices
-				to the selected bucket or else you’ll lose the edited fields.
-			</div>
-		);
-	}
 
 	return (
 		<div>

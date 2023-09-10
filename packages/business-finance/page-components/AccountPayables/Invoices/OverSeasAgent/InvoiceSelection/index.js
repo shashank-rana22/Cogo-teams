@@ -73,7 +73,7 @@ function InvoiceSelection({
 	const totalCalc = calc + +totalCreditInvoiceAmount;
 
 	useEffect(() => {
-		if (active === 'invoice_selection' && totalCalc > MORE_THAN_ZERO) {
+		if (active === 'invoice_selection') {
 			setShowPayableAmount(totalCalc);
 		}
 	}, [totalCalc, setShowPayableAmount, active]);

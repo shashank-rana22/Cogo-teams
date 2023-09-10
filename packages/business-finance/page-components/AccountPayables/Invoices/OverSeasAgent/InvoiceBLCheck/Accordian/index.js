@@ -27,7 +27,7 @@ function Accordian({
 
 	const {
 		onGetDocument = () => {},
-		DocumentData = [],
+		documentData = [],
 		billsLoading = false,
 	} =	useGetDocument();
 
@@ -100,7 +100,7 @@ function Accordian({
 					documentUrl={documentUrl}
 					handleDropdown={handleDropdown}
 					setShowCheckInvoices={setShowCheckInvoices}
-					DocumentData={DocumentData}
+					documentData={documentData}
 					billsLoading={billsLoading}
 					onAprrovalOrRejection={onAprrovalOrRejection}
 					loadingList={loadingList}

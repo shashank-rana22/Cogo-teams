@@ -5,33 +5,27 @@ import Accordian from './Accordian';
 import styles from './styles.module.css';
 
 const DEFAULT_MIN_VALUE = 0;
-const MAX_ARRAY_LENGTH_MINUS = 1;
 
 function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 	const [isOpen, setIsOpen] = useState(null);
 	const [showCheckInvoices, setShowCheckInvoices] = useState({});
 
 	const { list = [] } = bLData || {};
-
 	const memoizedFunction = useMemo(() => {
 		const TAGGED_DATA = [];
 		const REJECTED_DATA = [];
 		const PENDING_DATA = [];
-		const ID_DATA = [];
 
 		(list || []).forEach((item) => {
-			const status = showCheckInvoices?.[item?.id];
+			const { payrunBillStatus, id } = item || {};
+			const value = showCheckInvoices[id];
 
-			if (status === 'Tagged') {
+			if (payrunBillStatus === 'APPROVED' || value === 'Tagged') {
 				TAGGED_DATA.push('Tagged');
-			} else if (status === 'Reject') {
+			} else if (payrunBillStatus === 'REJECTED' || value === 'Reject') {
 				REJECTED_DATA.push('Reject');
 			} else {
 				PENDING_DATA.push('Pending');
-			}
-
-			if (item?.payrunBillStatus === 'INITIATED') {
-				ID_DATA.push(item?.id);
 			}
 		});
 
@@ -39,7 +33,6 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 			TAGGED_DATA,
 			REJECTED_DATA,
 			PENDING_DATA,
-			ID_DATA,
 		};
 	}, [list, showCheckInvoices]);
 
@@ -61,7 +54,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 					Pending
 					{' '}
 					<span className={styles.pending}>
-						{PENDING_DATA[PENDING_DATA.length - MAX_ARRAY_LENGTH_MINUS]?.length || DEFAULT_MIN_VALUE}
+						{PENDING_DATA?.length || DEFAULT_MIN_VALUE}
 					</span>
 				</div>
 

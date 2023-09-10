@@ -1,9 +1,9 @@
 import styles from './styles.module.css';
 
-export function ShowDocument({ radioValue = '', DocData = {} }) {
+export function ShowDocument({ radioValue = '', documentData = {} }) {
 	let docLink = '';
 
-	DocData?.forEach((itemData) => {
+	documentData?.forEach((itemData) => {
 		switch (radioValue) {
 			case 'mawb':
 				if (itemData?.document_type === 'airway_bill') {

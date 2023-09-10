@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import toastApiError from '../../../commons/toastApiError.ts';
 
 const useGetDocument = () => {
-	const [{ data: DocumentData, loading: billsLoading }, trigger] = useRequestBf(
+	const [{ data: documentData, loading: billsLoading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payable-bill/shipment-documents',
 			method  : 'get',
@@ -28,7 +28,7 @@ const useGetDocument = () => {
 
 	return {
 		onGetDocument,
-		DocumentData,
+		documentData,
 		billsLoading,
 	};
 };

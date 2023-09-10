@@ -36,7 +36,7 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 
 	let renderComponent = null;
 
-	if (bankEdit) {
+	if (isEmpty(bankEdit)) {
 		renderComponent = (
 			<BankSelect
 				itemData={itemData}
@@ -45,7 +45,7 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 				setEditedValue={setEditedValue}
 			/>
 		);
-	} else if (!isEmpty(bankDetail)) {
+	} else {
 		const getBankName = bankName || bank_name;
 		const getAccountNumber = accountNo || bank_account_number;
 		const getIFSCCode = ifscCode || ifsc_number;
