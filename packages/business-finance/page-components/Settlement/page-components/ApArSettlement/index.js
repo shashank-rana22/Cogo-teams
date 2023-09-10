@@ -36,8 +36,6 @@ function ApArSettlement() {
 
 	const [selectedData, setSelectedData] = useState([]);
 	const [matchBal, setMatchBal] = useState(INITIAL_MAT_BAL);
-	const TOTAL_MATCHING_BALANCE = selectedData.reduce((sum, item) => +sum
-	+ +item.balanceAmount * +item.exchangeRate * +item.signFlag, INITIAL_MAT_BAL);
 	const [reRender, setReRender] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
 	const [pageCheckedRows, setPageCheckedRows] = useState({});
@@ -69,23 +67,29 @@ function ApArSettlement() {
 	function DataRender() {
 		if (data && data?.list?.length > EMPTY_DATA_LENGTH) {
 			return (
-				<DocList
-					data={data}
-					loading={loading}
-					onPageChange={onPageChange}
-					selectedData={selectedData}
-					setSelectedData={setSelectedData}
-					setSortData={setSorting}
-					sortData={sorting}
-					pageCheckedRows={pageCheckedRows}
-					setPageCheckedRows={setPageCheckedRows}
-				/>
+				<>
+					<DocList
+						data={data}
+						loading={loading}
+						onPageChange={onPageChange}
+						selectedData={selectedData}
+						setSelectedData={setSelectedData}
+						setSortData={setSorting}
+						sortData={sorting}
+						pageCheckedRows={pageCheckedRows}
+						setPageCheckedRows={setPageCheckedRows}
+					/>
+					<div style={{ height: '80px' }} />
+				</>
 			);
 		}
 		return (
-			<div className={styles.emptycontainer}>
-				<EmptyState height={315} width={482} Text={TEXT} />
-			</div>
+			<>
+				<div className={styles.emptycontainer}>
+					<EmptyState height={315} width={482} text={TEXT} />
+				</div>
+				<div style={{ height: '80px' }} />
+			</>
 		);
 	}
 
@@ -105,8 +109,14 @@ function ApArSettlement() {
 		});
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
 
-		const TOTAL = selectedData?.reduce((sum, item) => +sum + (+item.balanceAmount
-		* +item.exchangeRate * +item.signFlag), INITIAL_MAT_BAL);
+		const TOTAL = selectedData.reduce((sum, item) => {
+			const balanceAmount = +item.balanceAmount || INITIAL_MAT_BAL;
+			const exchangeRate = +item.exchangeRate || INITIAL_MAT_BAL;
+			const signFlag = +item.signFlag || INITIAL_MAT_BAL;
+			const itemTotal = balanceAmount * exchangeRate * signFlag;
+
+			return sum + itemTotal;
+		}, INITIAL_MAT_BAL);
 		setMatchBal(TOTAL);
 	}, [selectedData, pageCheckedRowsStringfy]);
 
@@ -126,20 +136,23 @@ function ApArSettlement() {
 			{
 
 			loading ? (
-				<div>
+				<>
+					<div>
 
-					<DocList
-						data={data}
-						loading={loading}
-						onPageChange={onPageChange}
-						selectedData={selectedData}
-						setSelectedData={setSelectedData}
-						setSortData={setSorting}
-						sortData={sorting}
-						pageCheckedRows={pageCheckedRows}
-						setPageCheckedRows={setPageCheckedRows}
-					/>
-				</div>
+						<DocList
+							data={data}
+							loading={loading}
+							onPageChange={onPageChange}
+							selectedData={selectedData}
+							setSelectedData={setSelectedData}
+							setSortData={setSorting}
+							sortData={sorting}
+							pageCheckedRows={pageCheckedRows}
+							setPageCheckedRows={setPageCheckedRows}
+						/>
+					</div>
+					<div style={{ height: '80px' }} />
+				</>
 			)
 				: <DataRender />
 
@@ -150,7 +163,6 @@ function ApArSettlement() {
 				selectedData={selectedData}
 				matchModalShow={matchModalShow}
 				setMatchModalShow={setMatchModalShow}
-				totalMatchingBalance={TOTAL_MATCHING_BALANCE}
 				matchBal={matchBal}
 				setMatchBal={setMatchBal}
 				filters={filters}
@@ -160,7 +172,6 @@ function ApArSettlement() {
 				<MatchModal
 					matchModalShow={matchModalShow}
 					setMatchModalShow={setMatchModalShow}
-					totalMatchingBalance={TOTAL_MATCHING_BALANCE}
 					selectedData={selectedData}
 					setSelectedData={setSelectedData}
 					loading={loading}
