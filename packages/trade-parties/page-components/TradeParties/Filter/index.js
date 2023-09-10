@@ -1,5 +1,6 @@
-import { Select, Input, Popover, Button } from '@cogoport/components';
+import { Select, Input, Popover, Button, Toggle } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import { useState } from 'react';
 
 import FilterContent from './FilterContent';
@@ -29,6 +30,8 @@ function Filter({
 	filterParams = {},
 	setFilterParams = () => {},
 }) {
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
+
 	const setInput = (value) => {
 		setGlobalSearch(value);
 		setFilterParams({ ...filterParams, page: 1 });
@@ -80,6 +83,14 @@ function Filter({
 					placeholder={PLACEHOLDER_MAPPING[typeOfSearch]}
 					prefix={<IcMSearchlight height={16} width={16} />}
 				/>
+
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleRouteChange}
+				/>
+
 			</div>
 		</div>
 	);

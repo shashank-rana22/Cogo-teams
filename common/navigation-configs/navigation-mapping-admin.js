@@ -828,8 +828,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		trade_parties: {
 			key           : 'trade_parties',
 			title         : t('common:trade_parties'),
-			href          : '/trade-parties',
-			as            : '/trade-parties',
+			href          : '/v2/trade-parties',
+			as            : '/v2/trade-parties',
 			icon          : IcMTradeparties,
 			type          : 'link',
 			possible_apis : apis.trade_parties,
