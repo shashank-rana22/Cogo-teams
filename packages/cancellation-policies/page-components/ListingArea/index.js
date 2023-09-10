@@ -16,8 +16,8 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 
 	const columns = [
 		{ Header: ' Service Name', accessor: (item) => startCase(item?.service) || '-' },
-		{ Header: 'Origin', accessor: (item) => item?.origin_location?.name || '-' }, // key not present
-		{ Header: 'Destination', accessor: (item) => item?.destination_location?.name || '-' }, // key not present
+		{ Header: 'Origin', accessor: (item) => item?.origin_location?.name || '-' },
+		{ Header: 'Destination', accessor: (item) => item?.destination_location?.name || '-' },
 		{
 			Header   : 'Shipping Line',
 			accessor : (item) => (item?.shipping_line?.business_name?.toLowerCase()) || '-',

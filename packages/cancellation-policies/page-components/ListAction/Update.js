@@ -12,7 +12,7 @@ function Update({
 	item = {},
 	refetch = () => {},
 }) {
-	const { apiTrigger, loading } = useUpdateShipmentCancellation({
+	const { apiTrigger = () => {}, loading = false } = useUpdateShipmentCancellation({
 		refetch: () => {
 			refetch();
 			setShow(false);
@@ -21,22 +21,21 @@ function Update({
 
 	const formRef = useRef(null);
 
-	const handleSubmitForm = ({ data, reset }) => {
+	const handleSubmitForm = ({ data = {}, reset = () => {} }) => {
 		const isSatifyingDaysLimit = checkSatisfyingConditions({ data });
 
 		if (isSatifyingDaysLimit) {
 			const { conditions, ...rest } = data || {};
 
 			if (!isEmpty(conditions)) {
-				rest.conditions = conditions.map((obj) => ({
+				rest.conditions = conditions?.map((obj) => ({
 					[obj.attribute]: `${CANCEL_REASON_MAPPING[obj.condition]} ${
 						obj.days
 					}`,
 				}));
-				apiTrigger({ ...rest, id: item?.id });
-			} else {
-				apiTrigger({ ...data, id: item?.id });
 			}
+			apiTrigger({ ...rest, id: item?.id });
+
 			reset();
 		}
 	};

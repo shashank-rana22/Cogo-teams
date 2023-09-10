@@ -34,10 +34,9 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 						obj.days
 					}`,
 				}));
-				apiTrigger(rest);
-			} else {
-				apiTrigger(data);
 			}
+			apiTrigger(rest);
+
 			reset();
 		}
 	};

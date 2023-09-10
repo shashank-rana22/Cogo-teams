@@ -7,7 +7,7 @@ function Delete({
 	show = null, setShow = () => {}, item = {},
 	refetch = () => {},
 }) {
-	const { apiTrigger, loading } = useUpdateShipmentCancellationCharges({
+	const { apiTrigger = () => {}, loading = false } = useUpdateShipmentCancellationCharges({
 		successMessage : 'Deleted Successfully',
 		refetch        : () => {
 			refetch();

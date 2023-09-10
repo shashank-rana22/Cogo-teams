@@ -26,7 +26,6 @@ const useListShipmentCancellationCharges = ({ defaultFilters = {}, defaultParams
 			const res = await trigger();
 			if (res?.data) { setData(res?.data); }
 		} catch (err) {
-			// console.error(err);
 			toastApiError(err);
 			setData({});
 		}
