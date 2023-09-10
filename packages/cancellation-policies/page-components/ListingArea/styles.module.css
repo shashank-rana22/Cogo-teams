@@ -4,9 +4,9 @@
 
 	:global {
 		.ui_table_body_cell {
-			min-width: calc(90vw/12);
-			padding-top: 10px;
-			padding-bottom: 10px;
+			max-width: calc(95vw/11);
+			padding-top: 12px;
+			padding-bottom: 12px;
 			font-weight: 500;
 			white-space: normal;
 		}

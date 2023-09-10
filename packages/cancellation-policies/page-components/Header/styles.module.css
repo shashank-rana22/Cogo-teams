@@ -10,3 +10,13 @@
 	background-color: #fff;
 	border-radius: 6px;
 }
+
+.toggle {
+	margin-left: 4px;
+
+	:global {
+		.ui_toggle_container {
+			padding: 2px;
+		}
+	}
+}

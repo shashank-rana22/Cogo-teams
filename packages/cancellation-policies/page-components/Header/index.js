@@ -1,4 +1,5 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Toggle } from '@cogoport/components';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
@@ -11,6 +12,7 @@ import Filters from './Filters';
 import styles from './styles.module.css';
 
 function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch = () => {} }) {
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
 	const [showAddNewModal, setShowAddNewModal] = useState(false);
 
 	const formRef = useRef(null);
@@ -58,6 +60,15 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 					<Filters
 						filterValues={filterValues}
 						setFilterValues={setFilterValues}
+					/>
+				</div>
+
+				<div className={styles.toggle}>
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleRouteChange}
 					/>
 				</div>
 			</div>
