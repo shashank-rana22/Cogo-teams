@@ -50,11 +50,11 @@ const tableColumns = [
 	},
 	{
 		Header   : 'CREATED AT',
-		accessor : (item) => formatDate({
+		accessor : (item) => (formatDate({
 			date       : item?.created_at,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
-		}),
+		}) || '-'),
 	},
 	{
 		Header   : 'LINKED COUNT',
