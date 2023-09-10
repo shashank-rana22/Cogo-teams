@@ -25,7 +25,12 @@ const tableColumns = [
 		Header   : 'BUSINESS NAME',
 		accessor : (item) => (
 			<Link href="/trade-parties/[trade_party_id]" as={`/trade-parties/${item.id}`}>
-				<Popover placement="bottom" trigger="mouseenter" caret={false} render={item?.legal_business_name}>
+				<Popover
+					placement="bottom"
+					trigger="mouseenter"
+					caret={false}
+					render={startCase(item?.legal_business_name)}
+				>
 					<div className={styles.heading}>{startCase(item?.legal_business_name)}</div>
 				</Popover>
 			</Link>
