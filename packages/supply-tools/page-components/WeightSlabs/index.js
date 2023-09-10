@@ -45,7 +45,7 @@ function WeightSlabs() {
 		},
 	});
 
-	const handleSubmitForm = ({ formData }) => {
+	const handleSubmitForm = ({ data:formData = {} }) => {
 		apiTrigger(formData);
 	};
 

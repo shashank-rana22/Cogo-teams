@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { isEmpty } from '@cogoport/utils';
 
 import getOptions from '../../../../configs/COMMODITY_MAPPING';
 import currencyOptions from '../../../../constants/currencies';
@@ -325,9 +326,7 @@ const getControls = ({ item }) => [
 		name               : 'slabs',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 0,
-		buttonText         : '',
-		initialCount       : 0,
-		value              : item.slabs,
+		value              : !isEmpty(item?.slabs) ? item?.slabs : [{ lower_limit: '' }],
 		controls           : [
 			{
 				name        : 'lower_limit',
@@ -360,7 +359,6 @@ const getControls = ({ item }) => [
 				type           : 'select',
 				optionsListKey : 'currencies',
 				span           : 3.5,
-				value          : item?.currency,
 				className      : 'primary lg',
 				placeholder    : 'Select',
 				options        : currencyOptions,
@@ -372,7 +370,6 @@ const getControls = ({ item }) => [
 				key          : 'price',
 				type         : 'number',
 				span         : 3.5,
-				value        : item?.price,
 				showOptional : false,
 				className    : 'primary lg',
 				placeholder  : 'Enter',
