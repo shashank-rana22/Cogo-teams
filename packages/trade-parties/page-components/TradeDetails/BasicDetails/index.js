@@ -1,6 +1,7 @@
 import { Pill, cl, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -15,8 +16,8 @@ function BasicDetails({ tradePartyDetails = {}, loading = false }) {
 	if (loading) return <Loader themeType="primary" />;
 	return (
 		<div className={styles.container}>
-			<div className={styles.sub_container}>
-				<div className={styles.heading}>{legal_business_name}</div>
+			<div className={styles.heading_serial_id}>
+				<div className={styles.heading}>{startCase(legal_business_name)}</div>
 
 				<Pill className={styles.serial_id}>
 					ID #
@@ -29,6 +30,7 @@ function BasicDetails({ tradePartyDetails = {}, loading = false }) {
 			</div>
 			<div className={cl`${styles.no_border} ${styles.no_border} ${styles.registration_number}`}>
 				Last Updated On:
+				{' '}
 				{formatDate({
 					date       : updated_at,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

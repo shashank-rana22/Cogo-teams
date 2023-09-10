@@ -1,6 +1,7 @@
 .heading {
 	max-width: 300px;
 	overflow: hidden;
+	text-decoration: underline;
 	text-overflow: ellipsis;
 }
 
