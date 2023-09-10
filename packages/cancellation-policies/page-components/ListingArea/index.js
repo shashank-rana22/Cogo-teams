@@ -1,4 +1,4 @@
-import { Popover, Table, Tooltip, Button } from '@cogoport/components';
+import { Popover, Table, Tooltip, Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -16,7 +16,15 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 
 	const columns = [
 		{ Header: ' Service Name', accessor: (item) => startCase(item?.service) || '-' },
-		{ Header: 'Origin', accessor: (item) => item?.origin_location?.name || '-' },
+		{
+			Header   : 'Origin',
+			accessor : (item) => (
+				<div className={styles.origin}>
+					{item?.origin_location?.name || '-'}
+					{' '}
+				</div>
+			),
+		},
 		{ Header: 'Destination', accessor: (item) => item?.destination_location?.name || '-' },
 		{
 			Header   : 'Shipping Line',
@@ -35,7 +43,11 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 		{
 			Header   : 'Rate Type',
 			accessor : (item) => (item?.rate_type ? (
-				startCase(item?.rate_type)
+				<Pill className={styles.rate_type}>
+					{' '}
+					{startCase(item?.rate_type)}
+					{' '}
+				</Pill>
 			) : (
 				'-'
 			)),
@@ -52,7 +64,7 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 
 				!isEmpty(item?.slabs) ? (
 
-					<>
+					<div style={{ display: 'flex', alignItems: 'center', width: '140px' }}>
 						<div style={{ marginRight: '4px' }}>
 							<div>
 								{item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.lower_limit}
@@ -82,10 +94,12 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 									{(item?.slabs?.length || ZERO) - ONE}
 									{' '}
 									more
+
 								</div>
+
 							</Tooltip>
 						) : null}
-					</>
+					</div>
 				) : (
 					'-'
 				)
