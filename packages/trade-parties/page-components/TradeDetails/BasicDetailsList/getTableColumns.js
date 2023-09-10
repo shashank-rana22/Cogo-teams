@@ -41,7 +41,7 @@ const getTableColumns = ({
 					{' '}
 					{item?.organization?.serial_id}
 				</Pill>
-			) : null),
+			) : '-'),
 		},
 		{
 			Header   : 'BUSINESS NAME (TRADE NAME)',
@@ -53,25 +53,25 @@ const getTableColumns = ({
 						{startCase(item?.organization?.trade_name?.toLowerCase())}
 					</div>
 				</div>
-			) : null),
+			) : '-'),
 		},
 		{
 			Header   : 'REGISTRATION NUMBER',
-			accessor : (item) => item?.organization?.registration_number,
+			accessor : (item) => (item?.organization?.registration_number || '-'),
 		},
 		{
 			Header   : 'KYC STATUS',
-			accessor : (item) => startCase(item?.organization?.kyc_status),
+			accessor : (item) => (startCase(item?.organization?.kyc_status) || '-'),
 		},
 		{
 			Header   : 'ACCOUNT TYPE',
-			accessor : (item) => (getAccountType({ organization: item?.organization })),
+			accessor : (item) => (getAccountType({ organization: item?.organization }) || '-'),
 		},
 		{
 			Header   : 'TRADE PARTY TYPE',
 			accessor : (item) => (item?.trade_party_type
 				? startCase(item?.trade_party_type)
-				: null),
+				: '-'),
 		},
 		{
 			Header   : ' ',

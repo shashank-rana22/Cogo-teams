@@ -6,11 +6,16 @@
 	background-color: #fff;
 }
 
-.sub_container {
+.sub_container,
+.heading_serial_id {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-right: 1px solid #303b67;
+}
+
+.heading_serial_id {
+	width: 40vw;
 }
 
 .sub_container.no_border {
@@ -19,7 +24,7 @@
 
 .heading {
 	display: flex;
-	width: 40vw;
+	justify-content: center;
 	margin-right: 16px;
 	font-size: 18px;
 	font-weight: bold;
@@ -29,7 +34,7 @@
 .serial_id {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	max-width: 10vw;
 	margin-right: 10px;
 	font-size: 10px;
@@ -42,7 +47,7 @@
 	display: flex;
 	align-self: center;
 	justify-content: center;
-	width: 20vw;
+	width: 25vw;
 	font-weight: bold;
 	color: "#393f70";
 }

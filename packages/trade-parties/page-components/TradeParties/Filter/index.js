@@ -59,10 +59,10 @@ function Filter({
 						onClick={() => setIsFilterVisible(!isFilterVisible)}
 					>
 						<IcMDoubleFilter style={{ marginRight: '5px' }} />
-						<b>	FILTER </b>
+						<div className={styles.title}>	FILTER </div>
 					</Button>
 				</Popover>
-				<div>Search by :</div>
+				<div className={styles.search_by}>Search by :</div>
 				<div className={styles.type_of_search}>
 					<Select
 						size="sm"

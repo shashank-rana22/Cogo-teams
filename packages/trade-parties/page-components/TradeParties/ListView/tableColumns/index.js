@@ -10,7 +10,10 @@ const formatArrayValues = ({ items = {}, is_startcase = true }) => {
 	const formattedItem = items?.map((item) => (is_startcase ? startCase(item) : item));
 	return formattedItem.join(', ') || '';
 };
-const getCompanyType = ({ company }) => startCase(company);
+const getCompanyType = ({ company }) => {
+	if (!company) return '-';
+	return startCase(company);
+};
 const tableColumns = [
 	{
 		Header   : 'ID',
@@ -21,14 +24,16 @@ const tableColumns = [
 	{
 		Header   : 'BUSINESS NAME',
 		accessor : (item) => (
-			<Popover placement="bottom" trigger="mouseenter" caret={false} render={item?.legal_business_name}>
-				<div className={styles.heading}>{item?.legal_business_name}</div>
-			</Popover>
+			<Link href="/trade-parties/[trade_party_id]" as={`/trade-parties/${item.id}`}>
+				<Popover placement="bottom" trigger="mouseenter" caret={false} render={item?.legal_business_name}>
+					<div className={styles.heading}>{startCase(item?.legal_business_name)}</div>
+				</Popover>
+			</Link>
 		),
 	},
 	{
 		Header   : 'REGISTRATION NUMBER',
-		accessor : (item) => item?.registration_number,
+		accessor : (item) => (item?.registration_number || '-'),
 	},
 	{
 		Header   : 'COMPANY TYPE',

@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Loader, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import Link from 'next/link';
@@ -27,8 +27,11 @@ function TradeDetails() {
 	return (
 		<div>
 			<Link href="[trade-partner-id]/trade-parties" as={`/${trade_partner_id}/trade-parties`}>
-				<IcMArrowBack style={{ marginRight: 8 }} />
-				Go Back
+				<Button themeType="link" size="lg" style={{ fontWeight: 'bold' }}>
+					<IcMArrowBack style={{ marginRight: 8 }} />
+					Go Back
+
+				</Button>
 			</Link>
 
 			<BasicDetails tradePartyDetails={{ tradePartyDetails: data }} loading={loading} />
