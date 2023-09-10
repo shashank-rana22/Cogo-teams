@@ -2240,7 +2240,7 @@ importers:
 
   packages/service-discovery:
     specifiers:
-      '@cogoport/components': ^1.0.359
+      '@cogoport/components': ^1.0.442
       '@cogoport/constants': workspace:*
       '@cogoport/core': workspace:*
       '@cogoport/forms': workspace:*
