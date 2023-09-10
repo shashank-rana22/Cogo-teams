@@ -7,50 +7,46 @@ import controls from '../controls';
 import styles from './styles.module.css';
 
 function FilterContent({
-	filterParams = '',
+	filterParams = {},
 	setFilterParams = (() => {}),
 	setIsFilterVisible = (() => {}),
 }) {
-	const DEFAULT_VALUES = filterParams;
 	const {
 		control,
 		handleSubmit,
 		reset,
-	} = useForm({ defaultValues: DEFAULT_VALUES });
+	} = useForm({ defaultValues: filterParams });
 
 	const onSubmit = (values) => {
 		setFilterParams({ ...values, page: 1 });
 		setIsFilterVisible(false);
 	};
+
 	const onReset = () => {
-		const RESET_VALUE = {};
-		Object.keys(filterParams).forEach((key) => { RESET_VALUE[key] = null; });
-		RESET_VALUE.page = 1;
-		setFilterParams(RESET_VALUE);
-		reset(RESET_VALUE);
+		setFilterParams({ page: 1 });
+		reset();
 		setIsFilterVisible(false);
 	};
 	return (
-		<form className={styles.form}>
-			<div className={styles.filter}>
-				<div className={styles.header}>
-					<Button size="sm" themeType="secondary" onClick={onReset} className={styles.button}>
-						RESET FORM
-					</Button>
-					<Button
-						className={styles.button}
-						size="sm"
-						onClick={handleSubmit(onSubmit)}
-					>
+		<div className={styles.filter}>
+			<div className={styles.header}>
+				<Button size="sm" themeType="secondary" onClick={onReset} className={styles.button}>
+					RESET FORM
+				</Button>
+				<Button
+					className={styles.button}
+					size="sm"
+					onClick={handleSubmit(onSubmit)}
+				>
 
-						SHOW RESULTS
-					</Button>
-				</div>
-
-				<br />
-				<Layout controls={controls} control={control} />
+					SHOW RESULTS
+				</Button>
 			</div>
-		</form>
+
+			<br />
+			<Layout controls={controls} control={control} />
+		</div>
+
 	);
 }
 export default FilterContent;

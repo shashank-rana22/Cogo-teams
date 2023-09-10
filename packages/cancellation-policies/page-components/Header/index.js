@@ -46,9 +46,9 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 	};
 	return (
 		<div className={styles.container}>
-			<div className={styles.header_container}>
+			<h1>
 				Cancellation Charge Management
-			</div>
+			</h1>
 
 			<div className={styles.container}>
 				<Button onClick={() => { setShowAddNewModal(true); }}>
@@ -62,7 +62,13 @@ function Header({ filterValues = () => {}, setFilterValues = () => {}, refetch =
 				</div>
 			</div>
 
-			<Modal size="xl" show={showAddNewModal} onClose={() => { setShowAddNewModal(false); }} placement="top">
+			<Modal
+				size="lg"
+				show={showAddNewModal}
+				onClose={() => { setShowAddNewModal(false); }}
+				placement="top"
+				closeOnOuterClick={false}
+			>
 				<Modal.Header title="ADD SHIPMENT CANCELLATION CHARGE" />
 				<Modal.Body>
 					<AddNewCancellationPolicyForm

@@ -51,14 +51,15 @@ function AddNewCancellationPolicyForm({ item = {}, handleSubmitForm = () => {}, 
 	}, [slabs, free_days, setValue]);
 
 	const showElements = {
-		min_value      : charge_type === 'percentage',
-		max_value      : charge_type === 'percentage',
-		container_size : service === 'fcl_freight',
-		container_type : service === 'fcl_freight',
-		airline_id     : service === 'air_freight',
-		conditions     : service === 'fcl_freight',
-
+		min_value        : charge_type === 'percentage',
+		max_value        : charge_type === 'percentage',
+		container_size   : service === 'fcl_freight',
+		container_type   : service === 'fcl_freight',
+		airline_id       : service === 'air_freight',
+		conditions       : service === 'fcl_freight',
+		conditions_label : service === 'fcl_freight',
 	};
+
 	const onSubmit = (values) => {
 		handleSubmitForm({ data: values, item, reset });
 	};
@@ -81,17 +82,27 @@ function AddNewCancellationPolicyForm({ item = {}, handleSubmitForm = () => {}, 
 		if (ctrl.name === 'commodity' && service) {
 			controls[index].options = getCommodityOptions({ service, container_type });
 		}
+
+		if (ctrl.name === 'service') {
+			controls[index].onChange = (val) => {
+				reset();
+				setValue('service', val);
+			};
+		}
+
+		if (ctrl.name === 'slabs') {
+			controls[index].handleFieldArrayAddCheck = handleFieldArrayAddCheck;
+		}
 	});
 
 	return (
-
 		<Layout
 			controls={controls}
 			control={control}
 			errors={errors}
 			formValues={watch()}
 			showElements={showElements}
-			handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+			// handleFieldArrayAddCheck={handleFieldArrayAddCheck}
 		/>
 
 	);

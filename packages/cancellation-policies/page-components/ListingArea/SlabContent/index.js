@@ -1,6 +1,8 @@
+import styles from '../styles.module.css';
+
 function SlabContent({ item = {} }) {
 	return (
-		<div style={{ display: 'flex' }}>
+		<div className={styles.slabs_container}>
 			{item?.slabs?.map((slab) => (
 				<div key={item?.id}>
 					<div style={{ fontSize: '12px', marginRight: '5px' }}>
@@ -11,16 +13,8 @@ function SlabContent({ item = {} }) {
 						{' '}
 						Days
 					</div>
-					<div
-						style={{
-							color      : '#5936F0',
-							fontSize   : '12px',
-							fontWeight : '500',
-						}}
-					>
-						{slab?.currency}
-						{' '}
-						{slab?.price}
+					<div className={styles.price_currency}>
+						{`${slab?.currency} ${slab?.price}`}
 					</div>
 				</div>
 			))}

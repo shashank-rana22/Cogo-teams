@@ -16,17 +16,63 @@ const currencyOptions = GLOBAL_CONSTANTS.service_supported_countries
 	.feature_supported_service.feedback_services.currencies.map((c) => ({ label: c, value: c }));
 
 const THIRTY_ONE = 31;
+
 const ZERO = 0;
+
 const ONE = 1;
+
 const getDaysOptions = Array(THIRTY_ONE).fill(ZERO)
 	.map((_, idx) => ({ label: idx + ONE, value: idx + ONE }));
+
 const getConditions = ({ item = {} }) => (item?.conditions || []).map((condition) => ({
 	attribute : Object.keys(condition || {})[GLOBAL_CONSTANTS.zeroth_index],
 	condition : CANCEL_REVERSE_MAPPING[Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index]
 		.split(' ')[GLOBAL_CONSTANTS.zeroth_index]],
 	days: +Object.values(condition || {})[GLOBAL_CONSTANTS.zeroth_index].split(' ')[ONE],
 }));
-const getControls = ({ item, isEdit }) => [{
+
+const getSlabsControls = () => ({
+	name               : 'slabs',
+	type               : 'fieldArray',
+	showButtons        : true,
+	buttonText         : 'Add Slabs',
+	noDeleteButtonTill : 0,
+	controls           : [{
+		name        : 'lower_limit',
+		type        : 'number',
+		placeholder : 'Lower Limit (in Days)',
+		span        : 3,
+		size        : 'sm',
+		rules       : { required: 'This is required', min: 1 },
+	},
+	{
+		name        : 'upper_limit',
+		type        : 'number',
+		span        : 3,
+		size        : 'sm',
+		placeholder : 'Upper Limit (in Days)',
+		rules       : { required: 'This is required', min: 1 },
+	},
+	{
+		name        : 'currency',
+		placeholder : 'Select Currency',
+		type        : 'select',
+		size        : 'sm',
+		span        : 3,
+		options     : currencyOptions,
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'price',
+		placeholder : 'Enter Price',
+		type        : 'number',
+		size        : 'sm',
+		span        : 3,
+		rules       : { required: 'This is required' },
+	}],
+});
+
+const getControls = ({ item = {}, isEdit = false }) => [{
 	name        : 'service',
 	type        : 'select',
 	placeholder : 'Select Service',
@@ -70,7 +116,7 @@ const getControls = ({ item, isEdit }) => [{
 	isClearable : !item?.destination_location_id,
 	disabled    : isEdit,
 	size        : 'sm',
-	params      : { filters: {	type: ['seaport', 'country', 'airport'] } },
+	params      : { filters: { type: ['seaport', 'country', 'airport'] } },
 	span        : 4,
 }, {
 	name        : 'shipping_line_id',
@@ -92,29 +138,38 @@ const getControls = ({ item, isEdit }) => [{
 	disabled    : isEdit,
 	size        : 'sm',
 	options     : [],
-}, {
+},
+{
+	label : 'Conditions',
+	span  : 12,
+	name  : 'conditions_label',
+},
+{
 	name               : 'conditions',
 	type               : 'fieldArray',
+	label              : 'Conditions',
 	showButtons        : true,
-	buttonText         : 'Conditions',
+	buttonText         : 'Add Conditions',
 	noDeleteButtonTill : 0,
 	value              : isEdit ? getConditions({ item }) : [],
 	controls           : [
 		{
-			name    : 'attribute',
-			label   : 'Attribute',
-			type    : 'select',
-			options : CONDITION_ATTRIBUTE,
-			size    : 'sm',
-			span    : 2,
+			name        : 'attribute',
+			label       : 'Attribute',
+			type        : 'select',
+			placeholder : 'Select Attribute',
+			options     : CONDITION_ATTRIBUTE,
+			size        : 'sm',
+			span        : 4,
 		}, {
-			name    : 'condition',
-			label   : 'Condition',
-			type    : 'select',
-			options : CONDITION_CONDITION,
-			rules   : { required: true },
-			size    : 'sm',
-			span    : 2,
+			name        : 'condition',
+			label       : 'Condition',
+			type        : 'select',
+			placeholder : 'Select Condition',
+			options     : CONDITION_CONDITION,
+			rules       : { required: true },
+			size        : 'sm',
+			span        : 4,
 		}, {
 			name    : 'days',
 			label   : 'Days',
@@ -122,7 +177,7 @@ const getControls = ({ item, isEdit }) => [{
 			options : getDaysOptions,
 			rules   : { required: true },
 			size    : 'sm',
-			span    : 2,
+			span    : 4,
 		}],
 }, {
 	name        : 'charge_type',
@@ -134,7 +189,7 @@ const getControls = ({ item, isEdit }) => [{
 	rules       : { required: 'This is required' },
 	options     : CHARGE_TYPE,
 	size        : 'sm',
-	span        : 2,
+	span        : 4,
 }, {
 	name        : 'value',
 	type        : 'number',
@@ -222,52 +277,27 @@ const getControls = ({ item, isEdit }) => [{
 	options     : RATE_TYPE,
 	size        : 'sm',
 	rules       : { required: 'Rate Type is required' },
-}, {
-	label : 'Free Days',
-	name  : 'free_days',
-	type  : 'number',
-	size  : 'sm',
-}, {
-	label   : 'Milestone',
-	name    : 'milestone',
-	type    : 'select',
-	options : MILESTONE,
-	size    : 'sm',
-}, {
-	name               : 'slabs',
-	type               : 'fieldArray',
-	showButtons        : true,
-	buttonText         : 'Add Slab',
-	noDeleteButtonTill : 0,
-	controls           : [{
-		name        : 'lower_limit',
-		type        : 'number',
-		placeholder : 'Lower Limit (in Days)',
-		span        : 3,
-		size        : 'sm',
-		rules       : { required: 'This is required', min: 1 },
-	}, {
-		name        : 'upper_limit',
-		type        : 'number',
-		span        : 3,
-		size        : 'sm',
-		placeholder : 'Upper Limit (in Days)',
-		rules       : { required: 'This is required', min: 1 },
-	}, {
-		name        : 'currency',
-		placeholder : 'Currency',
-		type        : 'select',
-		size        : 'sm',
-		span        : 3,
-		options     : currencyOptions,
-		rules       : { required: 'This is required' },
-	}, {
-		name        : 'price',
-		placeholder : 'Enter Price',
-		type        : 'number',
-		size        : 'sm',
-		span        : 2,
-		rules       : { required: 'This is required' },
-	}],
-}];
+},
+{
+	label       : 'Free Days',
+	name        : 'free_days',
+	type        : 'number',
+	size        : 'sm',
+	placeholder : 'Enter Free Days',
+},
+{
+	label       : 'Milestone',
+	name        : 'milestone',
+	type        : 'select',
+	options     : MILESTONE,
+	size        : 'sm',
+	placeholder : 'Select Milestone',
+},
+{
+	label : 'Slabs',
+	span  : 12,
+	name  : 'slabs_label',
+},
+getSlabsControls(),
+];
 export default getControls;

@@ -1,20 +1,25 @@
 .table_container {
-	padding: 10px;
+	width: 100%;
 	background-color: #fff;
 
 	:global {
 		.ui_table_body_cell {
-			width: 100px;
-			padding-top: 20px;
-			padding-bottom: 20px;
+			min-width: calc(90vw/12);
+			padding-top: 10px;
+			padding-bottom: 10px;
 			font-weight: 500;
 			white-space: normal;
 		}
 
 		.ui_table_head_cell {
-			padding-top: 20px;
-			padding-bottom: 20px;
+			min-width: 100px;
+			padding-top: 16px;
+			padding-bottom: 16px;
 			font-weight: 900;
+		}
+
+		.ui_table_head_cell:last-of-type {
+			min-width: 40px;
 		}
 	}
 }
@@ -25,18 +30,32 @@
 	justify-content: center;
 }
 
-.slabs {
-	display: flex;
-	justify-content: center;
-	padding: 1px 3px;
-	background-color: rgb(250 232 226);
-	border-radius: 6px;
-}
-
 .slabs:hover {
 	cursor: pointer;
 }
 
 .rate_type {
-	background-color: rgb(254 241 223);
+	font-weight: 500;
+}
+
+.slabs_container {
+	display: flex;
+}
+
+.slab_detail {
+	margin-right: 6px;
+}
+
+.max_content {
+	width: max-content;
+}
+
+.price_currency {
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--color-accent-orange-2);
+}
+
+.charge {
+	color: var(--color-accent-orange-2);
 }

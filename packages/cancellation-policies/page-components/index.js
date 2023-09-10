@@ -3,7 +3,6 @@ import useListShipmentCancellationCharges from '../hooks/useListShipmentCancella
 import Header from './Header';
 import ListingArea from './ListingArea';
 import ListPagination from './ListPagination';
-import styles from './styles.module.css';
 
 function CancellationPolicies() {
 	const {
@@ -20,7 +19,7 @@ function CancellationPolicies() {
 	const paginationProps = { setFilters, filters, data };
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Header
 				filterValues={filters}
 				setFilterValues={setFilters}
@@ -33,7 +32,6 @@ function CancellationPolicies() {
 			<ListingArea data={data} refetch={refetch} loading={loading} />
 
 			<ListPagination {...paginationProps} />
-
 		</div>
 	);
 }

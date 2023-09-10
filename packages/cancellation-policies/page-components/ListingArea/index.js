@@ -15,7 +15,7 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 	const [visible, setVisible] = useState(null);
 
 	const columns = [
-		{ Header: ' Service Name', accessor: (item) => startCase(item?.service) || '-' },
+		{ Header: 'Service Name', accessor: (item) => startCase(item?.service) || '-' },
 		{
 			Header   : 'Origin',
 			accessor : (item) => (
@@ -28,7 +28,7 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 		{ Header: 'Destination', accessor: (item) => item?.destination_location?.name || '-' },
 		{
 			Header   : 'Shipping Line',
-			accessor : (item) => (item?.shipping_line?.business_name?.toLowerCase()) || '-',
+			accessor : (item) => startCase(item?.shipping_line?.business_name) || '-',
 		},
 		{ Header: 'Charge Type', accessor: (item) => (startCase(item?.charge_type) || '-') },
 
@@ -36,17 +36,19 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 		{
 			Header   : 'Charge',
 			accessor : (item) => (!item?.free_days
-				?	 ` ${item?.currency} ${item?.value}${item?.charge_type === 'percentage' ? '%' : ''}` : '-'),
+				?	(
+					<div className={styles.charge}>
+						{`${item?.currency} ${item?.value} ${item?.charge_type === 'percentage' ? '%' : ''}`}
+					</div>
+				) : '-'),
 
 		},
 		{ Header: 'Booking Type', accessor: (item) => startCase(item?.booking_type) || '-' },
 		{
 			Header   : 'Rate Type',
 			accessor : (item) => (item?.rate_type ? (
-				<Pill className={styles.rate_type}>
-					{' '}
+				<Pill className={styles.rate_type} color="rgb(254 241 223)">
 					{startCase(item?.rate_type)}
-					{' '}
 				</Pill>
 			) : (
 				'-'
@@ -61,42 +63,31 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 		{
 			Header   : 'Slabs',
 			accessor : (item) => (
-
 				!isEmpty(item?.slabs) ? (
-
-					<div style={{ display: 'flex', alignItems: 'center', width: '140px' }}>
-						<div style={{ marginRight: '4px' }}>
-							<div>
-								{item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.lower_limit}
-								{' '}
-								-
-								{' '}
-								{item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.upper_limit}
-								{' '}
-								Days
+					<div className={styles.slabs_container}>
+						<div className={styles.slab_detail}>
+							<div className={styles.max_content}>
+								{`${item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.lower_limit} - 
+								${item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.upper_limit} Days`}
 							</div>
-							<div style={{ color: '#5936F0' }}>
+							<div className={styles.price_currency}>
 								{item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.currency}
 								{' '}
 								{item?.slabs[GLOBAL_CONSTANTS.zeroth_index]?.price}
 							</div>
+
 						</div>
 
 						{item?.slabs?.length > ONE ? (
 							<Tooltip
 								theme="light"
 								content={<SlabContent item={item} />}
-								maxWidth="none"
 							>
-
-								<div className={styles.slabs}>
-									+
-									{(item?.slabs?.length || ZERO) - ONE}
-									{' '}
-									more
-
-								</div>
-
+								<Pill>
+									<div className={styles.max_content}>
+										{`+${(item?.slabs?.length || ZERO) - ONE} more`}
+									</div>
+								</Pill>
 							</Tooltip>
 						) : null}
 					</div>
@@ -115,11 +106,8 @@ function ListingArea({ data = {}, refetch = () => {}, loading = false }) {
 					visible={visible === item?.id}
 					onClickOutside={() => { setVisible(false); }}
 				>
-
 					<Button themeType="tertiary" onClick={() => { setVisible(item?.id); }}>
-
 						<IcMOverflowDot />
-
 					</Button>
 				</Popover>
 			),

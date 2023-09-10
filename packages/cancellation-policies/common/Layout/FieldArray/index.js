@@ -8,7 +8,7 @@ function FieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
 	handleFieldArrayAddCheck = () => true,
 }) {
-	const { controls = [], name } = ctrl || {};
+	const { controls = [], name, buttonText = '' } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
 
@@ -39,10 +39,11 @@ function FieldArray({
 				<div>
 					<Button
 						size="sm"
-						// themeType="tertiary"
 						onClick={handleAppend}
 					>
-						Add
+						+
+						{' '}
+						{buttonText || 'Add'}
 					</Button>
 				</div>
 			) : null}

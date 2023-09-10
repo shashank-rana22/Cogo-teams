@@ -1,15 +1,7 @@
 .container {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
-	margin: 10px 0;
-}
-
-/* HeaderContainer */
-.header_container {
-	font-size: 22px;
-	font-weight: 600;
-	color: #333;
 }
 
 /* FilterContainer */

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function Layout({
 	controls = [], control = {}, errors = {}, showElements = {}, formValues = {},
-	handleFieldArrayAddCheck = () => {},
+	// handleFieldArrayAddCheck = () => {},
 }) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
@@ -19,7 +19,10 @@ function Layout({
 	return (
 		<div className={styles.container}>
 			{finalControls.map((ctrl) => {
-				const { type = '', label = '', span = 6, removeLabelMargin = false, ...restCtrl } = ctrl || {};
+				const {
+					type = '', label = '', span = 6, removeLabelMargin = false,
+					handleFieldArrayAddCheck = () => true, ...restCtrl
+				} = ctrl || {};
 
 				if (type === 'fieldArray') {
 					return (
