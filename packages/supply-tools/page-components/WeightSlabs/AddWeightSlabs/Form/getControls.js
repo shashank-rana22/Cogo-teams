@@ -2,6 +2,7 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 import getOptions from '../../../../configs/COMMODITY_MAPPING';
+import currencyOptions from '../../../../constants/currencies';
 
 const geo = getGeoConstants();
 
@@ -362,6 +363,7 @@ const getControls = ({ item }) => [
 				value          : item?.currency,
 				className      : 'primary lg',
 				placeholder    : 'Select',
+				options        : currencyOptions,
 				rules          : { required: 'This is required' },
 			},
 			{
