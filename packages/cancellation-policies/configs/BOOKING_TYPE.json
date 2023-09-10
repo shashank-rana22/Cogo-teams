@@ -1,0 +1,10 @@
+[
+  {
+    "label": "Spot Line Booking",
+    "value": "spot_line_booking"
+  },
+  {
+    "label": "Normal Booking",
+    "value": "normal_booking"
+  }
+]
