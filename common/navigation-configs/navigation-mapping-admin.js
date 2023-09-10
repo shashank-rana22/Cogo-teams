@@ -64,6 +64,7 @@ import {
 	IcMBookingDesk,
 	IcASecureCloudStorage,
 	IcMUpwardGraph,
+	IcMAppProfile,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2588,6 +2589,18 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 			],
+		},
+
+		profile: {
+			key           : 'profile',
+			title         : 'Employee Profile',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/profile',
+			as            : '/v2/profile',
+			possible_apis : apis.profile,
+			icon          : IcMAppProfile,
 		},
 	};
 

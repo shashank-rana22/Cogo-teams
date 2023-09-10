@@ -1,0 +1,71 @@
+.table_item {
+	display: flex;
+	flex-direction: row;
+}
+
+.table_item > :first-child {
+	margin-right: 8px;
+}
+
+.tab_content {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.tab_content > :first-child {
+	margin-right: 13px;
+}
+
+.main_container {
+	width: 72%;
+	padding: 16px 12px;
+	margin-top: 16px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.main_container > :not(:last-child) {
+	margin-bottom: 16px;
+}
+
+.heading {
+	display: flex;
+	flex-direction: column;
+}
+
+.personal {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.detail {
+	font-size: 12px;
+	color: #828282;
+}
+
+.info_subcontainer {
+	padding: 16px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.info_subcontainer > :not(:last-child) {
+	margin-bottom: 16px;
+}
+
+.info_heading {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+	text-align: center;
+}
+
+.view_button {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+	text-align: center;
+}
