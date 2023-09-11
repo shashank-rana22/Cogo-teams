@@ -1,18 +1,18 @@
 const blockOptions = [{
 	label : 'Engagement',
-	value : 'engagement',
+	value : 'Engagement',
 },
 {
 	label : 'Transaction',
-	value : 'transaction',
+	value : 'Transaction',
 },
 {
 	label : 'Accounts',
-	value : 'accounts',
+	value : 'Accounts',
 },
 {
 	label : 'Enrichment',
-	value : 'enrichment',
+	value : 'Enrichment',
 },
 ];
 

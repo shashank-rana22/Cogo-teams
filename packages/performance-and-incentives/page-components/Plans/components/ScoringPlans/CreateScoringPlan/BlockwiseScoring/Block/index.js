@@ -7,12 +7,13 @@ import blockOptions from '../../../../../constants/select-block-options';
 import SubBlock from '../SubBlock';
 
 import styles from './styles.module.css';
+import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
 const OFFSET = 1;
 
 function Block({
 	key = '', name = '', control = {}, errors = {},
-	index = 0, removeBlock = () => {}, watch = () => {}, data = {},
+	index = 0, removeBlock = () => {}, watch = () => {},
 }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -36,6 +37,8 @@ function Block({
 	});
 
 	const blockValue = watch(`blocks.${index}.block`);
+
+	const { data = {} } = useGetAgentScoringBlocks({ blockValue });
 
 	const IS_DEFAULT = false;
 
