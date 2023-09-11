@@ -33,7 +33,7 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							<div className={styles.content}>
 								Trade Type :
 								{' '}
-								{trade_type}
+								{startCase(trade_type)}
 							</div>
 						)}
 						{origin_location &&	(
