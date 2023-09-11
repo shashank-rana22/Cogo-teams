@@ -109,7 +109,7 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 						themeType="primary"
 						onClick={() => setShowPopover((prev) => !prev)}
 					>
-						{showPopover ? 'Click here to close the popover' : 'Share Quotation and Add to Cart'}
+						{showPopover ? 'Click Here to close the Popover' : 'Share Quotation and Add to Cart'}
 					</Button>
 				</Popover>
 			</div>

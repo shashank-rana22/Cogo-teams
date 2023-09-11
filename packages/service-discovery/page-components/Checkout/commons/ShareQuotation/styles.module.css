@@ -35,6 +35,11 @@
 			height: fit-content;
 			min-height: 40px;
 		}
+
+		.ui_popover_container {
+			background-color: #f3fafa;
+			border: 1px solid #6fa5ab;
+		}
 	}
 }
 
