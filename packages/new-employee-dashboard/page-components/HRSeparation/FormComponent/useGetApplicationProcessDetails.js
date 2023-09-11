@@ -15,7 +15,7 @@ const useGetApplicationProcessDetails = () => {
 			try {
 				trigger({
 					params: {
-						off_boarding_application_id : '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda',
+						off_boarding_application_id : 'f191ea65-dc5b-4d9d-ab8a-4c4833a87058',
 						process_name                : 'hrbp_clearance',
 					},
 				});
@@ -30,7 +30,11 @@ const useGetApplicationProcessDetails = () => {
 		getApplicationProcessDetails();
 	}, [getApplicationProcessDetails]);
 
-	return { loading, data };
+	return {
+		loading,
+		data,
+		refetchApplicationDetails: getApplicationProcessDetails,
+	};
 };
 
 export default useGetApplicationProcessDetails;

@@ -1,6 +1,5 @@
-import { Button } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
-import { IcMArrowDown, IcMArrowUp, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -25,10 +24,6 @@ function NotesForManager({ control }) {
 						placeholder="Type your notes here"
 						rules={{ required: 'this is required' }}
 					/>
-					<Button size="md" className={styles.button}>
-						<span style={{ fontSize: '16px' }}>Submit Notes</span>
-						<IcMArrowRight width={16} height={16} />
-					</Button>
 				</div>
 			) }
 		</div>
