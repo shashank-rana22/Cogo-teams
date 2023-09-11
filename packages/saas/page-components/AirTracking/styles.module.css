@@ -1,0 +1,9 @@
+.container {
+	display: block;
+}
+
+.heading_container {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+}
