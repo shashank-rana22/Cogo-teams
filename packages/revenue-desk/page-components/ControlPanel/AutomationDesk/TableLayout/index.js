@@ -21,7 +21,7 @@ function TableLayout({
 	const [disabledInput, setDisabledInput] = useState(false);
 	const { apiTrigger = () => {} } = useCreateRDAutomationParameters({ refetch });
 	const { updateRDAutomationParameter } = useUpdateRDAutomationParameter({ refetch });
-	const { trade_type = '', service_type = '', shipment_parameters = {} } = val || {};
+	const { service_type = '', shipment_parameters = {} } = val || {};
 	const { container_type = '', inco_term = '' } = shipment_parameters || {};
 	const column_width = `${NUMBERS.HUNDRED / (columnTitle.length || NUMBERS.ONE)}%`;
 
@@ -40,7 +40,8 @@ function TableLayout({
 				<div className={styles.content_details}>
 					<div className={styles.content}>
 						Trade Type :
-						{startCase(trade_type)}
+						{' '}
+						{['fob', 'exw', 'fca', 'fas']?.includes(inco_term) ? 'Import' : 'Export'}
 					</div>
 
 					<div className={styles.content}>

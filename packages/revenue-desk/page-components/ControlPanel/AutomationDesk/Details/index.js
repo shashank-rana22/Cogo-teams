@@ -3,7 +3,7 @@ import { IcMArrowRotateDown, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { columnTitle, list } from '../../../common/columns';
+import { list } from '../../../common/columns';
 import RowElement from '../../../common/RowElement';
 import useCreateRDAutomationParameters from '../../hooks/useCreateRDAutomationParameters';
 
@@ -17,7 +17,7 @@ function Details({
 		ONE     : 1,
 		HUNDRED : 100,
 	};
-	// const columnTitle = ['variables', 'Add weightage'];
+	const columnTitle = ['variables', 'Add weightage'];
 
 	const [showWeight, setShowWeight] = useState(false);
 	const { apiTrigger = () => {} } = useCreateRDAutomationParameters({ refetch });

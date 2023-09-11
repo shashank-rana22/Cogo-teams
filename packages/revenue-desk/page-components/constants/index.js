@@ -20,6 +20,10 @@ export const NEGATIVE_ONE = -1;
 export const VALUE_TEN = 10;
 export const VALUE_FIVE = 5;
 
+export const automationDeskServiceOptions = [
+	{ label: 'FCL Freight', value: 'fcl_freight_service' },
+];
+
 export const serviceOptions = [
 	{ label: 'FCL Freight', value: 'fcl_freight_service' },
 	{ label: 'Air Freight', value: 'air_freight_service' },

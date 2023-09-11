@@ -27,30 +27,34 @@ function AutomationDesk() {
 						/>
 					))
 				)}
-			{data?.list?.length === VALUE_ZERO ? (
-				<div
-					style={{
-						marginTop : '40px',
-						textAlign : 'center',
-					}}
-				>
-					<img
-						src={SRC}
-						alt="empty_page"
-						height="50%"
-						width="50%"
-					/>
-				</div>
-			) : (
+			{!loading && (
 				<div>
-					{data?.list?.map((val) => (
-						<TableLayout
-							filter={filter}
-							val={val}
-							key={val?.id}
-							refetch={refetch}
-						/>
-					))}
+					{data?.list?.length === VALUE_ZERO ? (
+						<div
+							style={{
+								marginTop : '40px',
+								textAlign : 'center',
+							}}
+						>
+							<img
+								src={SRC}
+								alt="empty_page"
+								height="50%"
+								width="50%"
+							/>
+						</div>
+					) : (
+						<div>
+							{data?.list?.map((val) => (
+								<TableLayout
+									filter={filter}
+									val={val}
+									key={val?.id}
+									refetch={refetch}
+								/>
+							))}
+						</div>
+					)}
 				</div>
 			)}
 			{(data?.total_count || VALUE_ZERO) > VALUE_TEN ? (

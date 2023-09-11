@@ -53,36 +53,39 @@ function AutomationWallet() {
 					))
 				)}
 
-			{data?.list?.length === VALUE_ZERO ? (
-				<div className={styles.empty_icon}>
-					<img
-						src={SRC}
-						alt="empty_page"
-						height="50%"
-						width="50%"
-					/>
-				</div>
-			) : (
+			{!loading && (
 				<div>
-					{data?.list?.map((val) => (
-						<div key={val?.id}>
-							<AutomationWalletDetails data={val} refetch={refetch} />
-						</div>
-					))}
-					{(data?.total_count || VALUE_ZERO) > VALUE_TEN ? (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								totalItems={data?.total_count || VALUE_ZERO}
-								currentPage={page || VALUE_ONE}
-								pageSize={data?.page_limit}
-								onPageChange={setPage}
+					{data?.list?.length === VALUE_ZERO ? (
+						<div className={styles.empty_icon}>
+							<img
+								src={SRC}
+								alt="empty_page"
+								height="50%"
+								width="50%"
 							/>
 						</div>
-					) : null}
+					) : (
+						<div>
+							{data?.list?.map((val) => (
+								<div key={val?.id}>
+									<AutomationWalletDetails data={val} refetch={refetch} />
+								</div>
+							))}
+							{(data?.total_count || VALUE_ZERO) > VALUE_TEN ? (
+								<div className={styles.pagination_container}>
+									<Pagination
+										type="table"
+										totalItems={data?.total_count || VALUE_ZERO}
+										currentPage={page || VALUE_ONE}
+										pageSize={data?.page_limit}
+										onPageChange={setPage}
+									/>
+								</div>
+							) : null}
+						</div>
+					)}
 				</div>
 			)}
-
 			{createWallet && (
 				<CreateWallet
 					createWallet={createWallet}

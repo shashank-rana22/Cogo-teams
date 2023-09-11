@@ -57,6 +57,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 						<div>
 							<div className={styles.label}>Select Trade Type</div>
 							<RadioGroupController control={control} {...trade} style={{ width: '250px' }} />
+							<div className={styles.errors}>{errors?.trade_type?.message}</div>
 						</div>
 					)}
 					</div>

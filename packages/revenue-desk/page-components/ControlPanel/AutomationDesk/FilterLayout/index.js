@@ -1,12 +1,10 @@
 import { Select, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import { automationDeskServiceOptions } from '../../../constants';
+
 import ParametersForm from './paramtersForm';
 import styles from './styles.module.css';
-
-const serviceOptions = [
-	{ label: 'FCL Freight', value: 'fcl_freight' },
-];
 
 function FilterLayout({ filter = {}, setFilter = () => {}, refetch = () => {} }) {
 	const [openForm, setOpenForm] = useState(false);
@@ -21,7 +19,7 @@ function FilterLayout({ filter = {}, setFilter = () => {}, refetch = () => {} })
 				<div>
 					<Select
 						placeholder="Service Type"
-						options={serviceOptions}
+						options={automationDeskServiceOptions}
 						value={filter?.service_type}
 						onChange={(val) => onChange(val, 'service_type')}
 						size="sm"

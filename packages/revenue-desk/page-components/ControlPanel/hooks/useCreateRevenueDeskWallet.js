@@ -11,15 +11,15 @@ const useCreateRevenueDeskWallet = ({ setCreateWallet = () => {}, refetch = () =
 	}, { manual: true });
 
 	const createRevenueDeskWallet = async (data) => {
-		const {
-			trade_type, origin_location_id,
-			destination_location_id, ...rest
-		} = data || undefined;
-
+		const { trade_type, origin_location_id, destination_location_id, ...rest } = data || undefined;
 		try {
 			const res =	await trigger({
 				data: {
-					shipment_parameters: { trade_type, origin_location_id, destination_location_id },
+					shipment_parameters: {
+						trade_type              : trade_type || undefined,
+						origin_location_id      : origin_location_id || undefined,
+						destination_location_id : destination_location_id || undefined,
+					},
 					...rest,
 				} || undefined,
 			});

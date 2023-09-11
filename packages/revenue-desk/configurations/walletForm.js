@@ -74,6 +74,7 @@ const controls = {
 			{ label: 'Import', value: 'import' },
 			{ label: 'Export', value: 'export' },
 		],
+		rules: { required: 'Trade Type is Required' },
 	},
 
 	wallet: {

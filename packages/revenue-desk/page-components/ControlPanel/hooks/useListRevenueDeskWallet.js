@@ -15,7 +15,7 @@ const useListRevenueDeskWallet = () => {
 		try {
 			await trigger({ params: { filters }, page, pagination_data_required: true });
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	}, [filters, trigger, page]);
 

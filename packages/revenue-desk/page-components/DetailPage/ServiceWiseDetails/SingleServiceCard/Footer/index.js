@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 function Footer({ data = {} }) {
 	const { data: walletAmount } = useGetRDWallet({ data });
 	const { wallet_amount = '' } = walletAmount || {};
+
 	const infoArray = [
 		{
 			key   : 'Cargo Readiness Date',
@@ -54,8 +55,9 @@ function Footer({ data = {} }) {
 				<div className={styles.wallet_text}>
 					Wallet Balance -
 					{' '}
-					<span className={styles.price_text} />
-					{wallet_amount}
+					<span className={styles.price_text}>
+						{wallet_amount}
+					</span>
 				</div>
 			</div>
 
