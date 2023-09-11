@@ -1,7 +1,0 @@
-.modal_container {
-	:global {
-		.ui_ps_size_md {
-			display: none;
-		}
-	}
-}
