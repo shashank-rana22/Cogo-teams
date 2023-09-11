@@ -86,7 +86,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			isClearable    : true,
-			onChange       : () => resetField('issue_type'),
 		},
 		{
 			label          : 'Select Trade Type',
@@ -96,7 +95,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
-			onChange       : () => resetField('issue_type'),
 		},
 		{
 			...(categoryOptions || {}),
@@ -109,7 +107,6 @@ const useRaiseTicketcontrols = ({
 			onChange       : (_, val) => {
 				setSubCategories(val?.subcategories);
 				resetField('sub_category');
-				resetField('issue_type');
 			},
 		},
 		{
@@ -120,7 +117,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			isClearable    : true,
 			options        : formattedSubCategories,
-			onChange       : () => resetField('issue_type'),
 		},
 		{
 			label          : 'Describe Issue',
