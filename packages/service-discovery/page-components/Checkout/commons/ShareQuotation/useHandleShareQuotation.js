@@ -89,6 +89,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			style           : {},
 			onClickFunction : handleClick,
 			loading         : false,
+			size            : 'md',
 			disabled        : noRatesPresent,
 		},
 		{
@@ -100,6 +101,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 				setShowPopover(false);
 			},
 			style    : { marginLeft: '20px' },
+			size     : 'md',
 			disabled : isEmpty(selectedModes) || noRatesPresent,
 			loading  : false,
 		},

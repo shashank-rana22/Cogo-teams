@@ -40,6 +40,14 @@
 			background-color: #f3fafa;
 			border: 1px solid #6fa5ab;
 		}
+
+		.tippy-arrow::before {
+			border-top-color: #f3fafa !important;
+		}
+
+		.tippy-content {
+			padding: 4px;
+		}
 	}
 }
 
