@@ -6,7 +6,7 @@ import ExitInterview from '../ExitInterview';
 
 import styles from './styles.module.css';
 
-function TrackApplication() {
+function TrackApplication({ handleSubmit, control, errors }) {
 	const [show, setShow] = useState(true);
 	const [warningShow, warningSetShow] = useState(true);
 	const PERSON_NAME = 'Shivam Singh';
@@ -74,7 +74,7 @@ function TrackApplication() {
 					/>
 
 				</div>
-				<ExitInterview />
+				<ExitInterview handleSubmit={handleSubmit} control={control} errors={errors} />
 				<div className={styles.stages_container_main}>
 
 					<div className={styles.name_and_mail_container_main}>

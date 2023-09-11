@@ -6,7 +6,7 @@ import OTPInputExitInterview from './OTPInputExitInterview';
 import styles from './styles.module.css';
 
 const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
-function ExitInterview() {
+function ExitInterview({ handleSubmit }) {
 	const INTERVIEW_DETAILS = {
 		date     : '23/03/2023',
 		time     : '2:15pm',
@@ -14,7 +14,8 @@ function ExitInterview() {
 		name     : 'Shivam Singh',
 		email    : EMAIL_FOR_INTERVIEW_DETAILS,
 	};
-
+	// const [otpValue,setOtpValue]=useState(' ');
+	// const [otpstate,setOtpState]=useState(false);
 	return (
 		<div className={styles.main_container}>
 
@@ -80,10 +81,10 @@ function ExitInterview() {
 					<Button
 						size="md"
 						themeType="primary"
+						onClick={handleSubmit(onsubmit)}
 					>
 						Complete Separation
 					</Button>
-
 				</div>
 
 			</div>

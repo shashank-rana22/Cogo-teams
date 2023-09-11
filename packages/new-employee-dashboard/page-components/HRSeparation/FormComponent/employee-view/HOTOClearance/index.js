@@ -37,14 +37,15 @@ function HOTOClearance() {
 			<div className={styles.content_container}>
 				<div className={styles.content_sub_container}>
 					<div className={styles.content_text_container}>
-						<CheckboxController
-							className={styles.Checkbox}
-							control={control}
-							name="checkbox_agreement"
-							rules={{ required: { value: true, message: '*This Field is required' } }}
-
-						/>
-
+						<div className={styles.checkbox_error_container}>
+							<CheckboxController
+								className={styles.Checkbox}
+								control={control}
+								name="checkbox_agreement"
+								rules={{ required: { value: true, message: '*required' } }}
+							/>
+							{Error('checkbox_agreement')}
+						</div>
 						<div className={styles.content}>
 							<p>
 								I wish to formally confirm the successful completion of the task takeover from

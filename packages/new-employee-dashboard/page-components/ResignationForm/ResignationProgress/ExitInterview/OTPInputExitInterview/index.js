@@ -5,13 +5,15 @@ import styles from './styles.module.css';
 
 function OTPInputExitInterview({
 	otpLength = 6,
-	setOtpValue = () => { },
+	setOtpValue,
 	placeholder = ' ',
+
 }) {
 	const useImperativeHandleRef = useRef({});
 
 	const handleChange = (value) => {
 		setOtpValue(value.length === otpLength ? `${value}` : '');
+
 		console.log('Exit Interview OTP : ', value);
 	};
 
