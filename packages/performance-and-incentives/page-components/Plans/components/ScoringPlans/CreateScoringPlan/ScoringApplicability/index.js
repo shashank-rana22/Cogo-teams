@@ -1,36 +1,26 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
-import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
-import CHANNEL_OPTIONS from '../../../../constants/select-channel-options';
 
 import styles from './styles.module.css';
 import useCreateScoringConfig from './useCreateScoringConfig';
 
 function ScoringApplicability() {
-	const { control, formState: { errors }, handleSubmit, watch } = useForm();
-
-	const { createScoringConfig, loading } = useCreateScoringConfig();
-
-	const [cogoEntityId, roleFunction, channel] = watch(['cogo_entity_id', 'role_function', 'channel']);
-
-	const channelOptions = CHANNEL_OPTIONS[roleFunction] || [];
-
-	const controls = getScoreApplicableFormControls({ cogoEntityId, roleFunction, channel, channelOptions });
-
-	const onSubmit = (values) => {
-		createScoringConfig({ values });
-	};
+	const {
+		controls,
+		control,
+		errors,
+		handleSubmit,
+		onCreateScoringConfig,
+		loading,
+	} = useCreateScoringConfig();
 
 	return (
 		<>
-
 			<h3>Scoring Applicable On</h3>
 
-			<div className={styles.container}>
-
+			<form onSubmit={handleSubmit(onCreateScoringConfig)}>
 				<div className={styles.form_container}>
 					{controls.map((controlItem) => {
 						const { type, label, name, style = {} } = controlItem || {};
@@ -39,10 +29,10 @@ function ScoringApplicability() {
 
 						return (
 							<div className={styles.control_item} key={name} style={style}>
-								<div className={styles.label}>
+								<p className={styles.label}>
 									{label}
 									<sup className={styles.sup}>*</sup>
-								</div>
+								</p>
 
 								<div>
 									<Element
@@ -50,26 +40,24 @@ function ScoringApplicability() {
 										{...controlItem}
 									/>
 
-									{errors[name] && <div className={styles.error_msg}>This is required</div>}
+									{errors[name] && <div className={styles.error_msg}>{errors[name]?.message}</div>}
 								</div>
 							</div>
 						);
 					})}
-
 				</div>
 
-			</div>
-
-			<Button
-				type="button"
-				size="md"
-				themeType="secondary"
-				loading={loading}
-				className={styles.btn}
-				onClick={handleSubmit(onSubmit)}
-			>
-				Save
-			</Button>
+				<div className={styles.btn_container}>
+					<Button
+						type="submit"
+						size="lg"
+						themeType="secondary"
+						loading={loading}
+					>
+						Save
+					</Button>
+				</div>
+			</form>
 		</>
 
 	);
