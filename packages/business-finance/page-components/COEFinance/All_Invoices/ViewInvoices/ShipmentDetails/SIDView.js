@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -12,16 +13,15 @@ function SIDView({ shipmentId = '', setCheckItem = () => {} }) {
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
 	if (isEmpty(data)) return <h2>No Data Found</h2>;
 
-	return data?.map((item) => (
+	return (
 		<AccordianCards
-			itemData={item}
+			itemData={data[GLOBAL_CONSTANTS.zeroth_index]}
 			currentOpenSID={currentOpenSID}
 			setCurrentOpenSID={setCurrentOpenSID}
-			key={item?.jobId}
 			shipmentIdView={false}
 			setCheckItem={setCheckItem}
 		/>
-	));
+	);
 }
 
 export default SIDView;
