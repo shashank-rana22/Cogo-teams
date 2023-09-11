@@ -36,9 +36,11 @@ function CustomOptions(option = {}) {
 			<div className={styles.option_name_container}>
 				<div>{business_name}</div>
 
-				<div className={styles.trade_name}>
-					{country_code ? `${trade_name} (${country_code})` : null}
-				</div>
+				{country_code ? (
+					<div className={styles.trade_name}>
+						{`${trade_name} (${country_code})`}
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.icn_container}>
