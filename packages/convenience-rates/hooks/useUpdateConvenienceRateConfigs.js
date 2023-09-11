@@ -12,20 +12,12 @@ const useUpdateConvenienceRateConfigs = (
 ) => {
 	const router = useRouter();
 	const { convenience_rate_id } = router?.query || {};
-	// console.log(router?.query);
+
 	const [, trigger] = useRequest({
 		url    : './update_convenience_rate_configuration',
 		method : 'POST',
 	}, { manual: true });
 
-	// const onUpdate = () => {
-	// 	try {
-	// 		Toast.success('Updated successfully');
-	// 	} catch (error) {
-	// 		toastApiError(error);
-	// 	}
-	// };
-	// console.log(values);
 	const onUpdate = async () => {
 		const IS_VALID = true;
 		// const IS_VALID =	validateSlabs({

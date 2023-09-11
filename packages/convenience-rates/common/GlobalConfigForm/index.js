@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -17,10 +18,12 @@ const ZERO = 0;
 const ONE = 1;
 const services_add_alt_configs = ['fcl_freight', 'fcl_freight_local', 'fcl_customs'];
 
-function GlobalConfigForm({ activeService = '', data = {}, service = '', loading = '', onClosingForm = '' }) {
+function GlobalConfigForm({ activeService = '', data = {}, loading = '', onClosingForm = '' }) {
 	const isEmptyAlternateSlabDetails = isEmpty(
-		data?.slab_details?.filter((item) => !item.is_default),
+		data?.slab_details?.filter((item) => !item?.is_default),
 	);
+	const { service = '' } = useRouter()?.query || {};
+
 	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(!isEmptyAlternateSlabDetails);
 	const [addAltConfig, setAddAltConfig] = useState(false);
 
@@ -59,7 +62,7 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '', loading
 
 	const { slab_details = [], alternate_slab_details = [] } = formValues;
 
-	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };//
+	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };
 
 	alternate_slab_details?.forEach((_o, index) => {
 		if (index > ZERO) {
@@ -138,42 +141,42 @@ function GlobalConfigForm({ activeService = '', data = {}, service = '', loading
 			{addAltConfig && (
 				<div>
 					{
-				showAlternateCFConfig ? (
-					<>
-						<div className={styles.alt_config}>
-							<span className={styles.alt_config_text}>
-								Alternate Configuration
-							</span>
-							<span style={{ cursor: 'pointer' }}>
-								<IcMCrossInCircle
-									width={28}
-									height={28}
-									onClick={() => setShowAlternateCFConfig(false)}
-								/>
-							</span>
-						</div>
-						<div className={styles.layout_container}>
-							<Layout
-								control={control}
-								controls={alternateMandatoryControls}
-								errors={errors}
-								handleFieldArrayAddCheck={handleFieldArrayAddCheck}
-								formValues={watch()}
+			showAlternateCFConfig ? (
+				<>
+					<div className={styles.alt_config}>
+						<span className={styles.alt_config_text}>
+							Alternate Configuration
+						</span>
+						<span style={{ cursor: 'pointer' }}>
+							<IcMCrossInCircle
+								width={28}
+								height={28}
+								onClick={() => setShowAlternateCFConfig(false)}
 							/>
-						</div>
-					</>
-				) : (
-					<Button
-						themeType="primary"
-						style={{ fontSize: '14px', marginBottom: '20px', fontWeight: '700' }}
-						onClick={() => {
-							setShowAlternateCFConfig(true);
-						}}
-					>
-						+ Add Alternate Config
-					</Button>
-				)
-			}
+						</span>
+					</div>
+					<div className={styles.layout_container}>
+						<Layout
+							control={control}
+							controls={alternateMandatoryControls}
+							errors={errors}
+							handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+							formValues={watch()}
+						/>
+					</div>
+				</>
+			) : (
+				<Button
+					themeType="primary"
+					style={{ fontSize: '14px', marginBottom: '20px', fontWeight: '700' }}
+					onClick={() => {
+						setShowAlternateCFConfig(true);
+					}}
+				>
+					+ Add Alternate Config
+				</Button>
+			)
+		}
 				</div>
 			)}
 			<div

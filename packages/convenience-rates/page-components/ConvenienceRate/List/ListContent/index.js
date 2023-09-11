@@ -14,7 +14,7 @@ function ListContent(
 	const { list, page_limit = 10, total_count = 1 } = data || {};
 	if (loading) {
 		return (
-			<div>
+			<div style={{ marginLeft: '16px' }}>
 				<Loader themeType="primary" />
 			</div>
 		);

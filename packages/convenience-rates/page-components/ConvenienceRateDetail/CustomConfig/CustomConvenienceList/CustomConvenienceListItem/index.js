@@ -65,7 +65,6 @@ function CustomConvenienceListItem(
 	{ data = {}, setShowCustomConfigForm = () => {}, setOrganizationDetails = () => {} },
 ) {
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
-	// console.log(data);
 	return (
 		<div className={styles.container}>
 			<div className={styles.tags_list}>

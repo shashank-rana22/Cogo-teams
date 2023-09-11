@@ -11,10 +11,12 @@ const useUpdateConvenienceRateCustomConfigs = (
 ) => {
 	const router = useRouter();
 	const { convenience_rate_id } = router?.query || {};
+
 	const [, trigger] = useRequest({
 		url    : './update_convenience_rate_custom_configuration',
 		method : 'POST',
 	}, { manual: true });
+
 	const onUpdate = async () => {
 		try {
 			const { organization_ids = [], custom_config_slab = [] } = watch();
@@ -59,7 +61,7 @@ const useUpdateConvenienceRateCustomConfigs = (
 			toastApiError(error);
 		}
 	};
-	// saveHelper({ trigger, watch, convenience_rate_id, itemValue, defaultConfigFeeUnit });
+	// const onUpdate = saveHelper({ trigger, watch, convenience_rate_id, itemValue, defaultConfigFeeUnit });
 	// { trigger, convenience_rate_id, watch, itemValue, defaultConfigFeeUnit });
 
 	const onClickDeactivate = async () => {

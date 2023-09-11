@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const LAST_INDEX = 1;
 
 function CustomConvenienceList(
-	{ setShowCustomConfigForm, setOrganizationDetails, data = {}, loading = '' },
+	{ setShowCustomConfigForm = () => {}, setOrganizationDetails = () => {}, data = {}, loading = '' },
 ) {
 	const list = data?.custom_configuration_data || [];
 	if (loading) {

@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 function CustomConfigForm(
 	{
-		onClosingForm = () => {}, organizationDetails = {}, data = {}, itemValue = {}, loading = '',
+		onClosingForm = () => {}, organizationDetails = {}, itemValue = {},
 		defaultConfigFeeUnit = '',
 	},
 ) {
@@ -28,15 +28,17 @@ function CustomConfigForm(
 	const mandatoryControls = getMandatoryControls({ control_name: 'custom_config_slab', service, data: itemValue });
 	mandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 
-	const { control, formState:{ errors = {} } = {}, watch, handleSubmit } = useForm({
+	const { control, formState:{ errors = {} } = {}, watch } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
-	const { onClickDeactivate = () => {}, onUpdate = () => {} } = useUpdateConvenienceRateCustomConfigs(
-		{ itemValue, onClosingForm, data, defaultConfigFeeUnit, watch },
+
+	const { onUpdate = () => {}, onClickDeactivate = () => {} } = useUpdateConvenienceRateCustomConfigs(
+		{ itemValue, onClosingForm, defaultConfigFeeUnit, watch },
 	);
 	const { onCreate = () => {} } = useCreateConvenienceRateCustomConfigs(
-		{ itemValue, onClosingForm, data, defaultConfigFeeUnit, watch },
+		{ itemValue, onClosingForm, defaultConfigFeeUnit, watch },
 	);
+	const onSubmit = (isUpdatable ? (onUpdate) : (onCreate));
 	return (
 		<div className={styles.container}>
 			<div className={styles.layout_container}>
@@ -47,7 +49,6 @@ function CustomConfigForm(
 							height        : 32,
 							fontWeight    : '700',
 						}}
-						disabled={loading}
 						size="md"
 						onClick={onClickDeactivate}
 					>
@@ -73,21 +74,12 @@ function CustomConfigForm(
 				>
 					Cancel
 				</Button>
-				{isUpdatable ? (
-					<Button
-						style={{ fontWeight: '600' }}
-						onClick={onUpdate}
-					>
-						SAVE
-					</Button>
-				) : (
-					<Button
-						style={{ fontWeight: '600' }}
-						onClick={handleSubmit(onCreate)}
-					>
-						SAVE
-					</Button>
-				)}
+				<Button
+					style={{ fontWeight: '600' }}
+					onClick={onSubmit}
+				>
+					SAVE
+				</Button>
 			</div>
 		</div>
 	);

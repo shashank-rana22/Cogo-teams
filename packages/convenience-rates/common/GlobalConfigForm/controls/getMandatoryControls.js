@@ -26,7 +26,6 @@ const getMandatoryControls = (
 		slab_details,
 		control_name,
 	});
-	// console.log(EMPTY_FIELD_ARRAY);
 	return [
 		{
 			name               : control_name,

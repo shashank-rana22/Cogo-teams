@@ -1,5 +1,8 @@
-import { Tabs, TabPanel, Button, Loader } from '@cogoport/components';
+import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
+
+import useGetConvenienceRateConfig from '../../../hooks/useGetConvenienceRateConfig';
 
 import CustomConfigForm from './CustomConfigForm';
 import CustomConvenienceList from './CustomConvenienceList';
@@ -10,24 +13,21 @@ const OPTIONS = [
 	{ label: 'Inactive', value: 'inactive' },
 ];
 
-function CustomConfig(
-	{
-		activeList = '', setActiveList = () => {}, data = {}, defaultConfigFeeUnit = '', loading = '',
-	},
-) {
+function CustomConfig({
+	defaultConfigFeeUnit = '',
+}) {
+	const router = useRouter();
+	const { convenience_rate_id = '' } = router?.query || {};
+
 	const [showCustomConfigForm, setShowCustomConfigForm] = useState(false);
 	const [organizationDetails, setOrganizationDetails] = useState({});
+	const [activeList, setActiveList] = useState('active');
 
-	if (loading) {
-		return (
-			<div className={styles.spinner}>
-				<Loader
-					themeType="primary"
-				/>
-			</div>
-		);
-	}
-
+	const defaultParams = { id: convenience_rate_id, status: activeList };
+	const { data, loading } = useGetConvenienceRateConfig({
+		defaultParams,
+		initialCall: convenience_rate_id && activeList,
+	});
 	return (
 		<div>
 			<div style={
@@ -67,10 +67,6 @@ function CustomConfig(
 			</div>
 			{showCustomConfigForm ? (
 				<CustomConfigForm
-					data={data}
-					loading={loading}
-					activeList={activeList}
-					setActiveList={setActiveList}
 					organizationDetails={organizationDetails}
 					itemValue={showCustomConfigForm}
 					onClosingForm={() => setShowCustomConfigForm(false)}
@@ -80,7 +76,6 @@ function CustomConfig(
 				<CustomConvenienceList
 					data={data}
 					loading={loading}
-					activeList={activeList}
 					setShowCustomConfigForm={setShowCustomConfigForm}
 					setOrganizationDetails={setOrganizationDetails}
 				/>

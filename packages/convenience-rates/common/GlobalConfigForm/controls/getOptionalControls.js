@@ -15,6 +15,7 @@ const getOptionalControls = ({
 }) => {
 	const isUpdatable = !isEmpty(data);
 	const {
+		cogo_entity_id,
 		organization_sub_type,
 		commodity,
 		performed_by,
@@ -33,9 +34,9 @@ const getOptionalControls = ({
 			labelKey       : 'business_name',
 			renderLabel    : (item) => `${item?.business_name}`,
 			isClearable    : true,
-			valueKey       : 'entity_code',
+			value          : cogo_entity_id,
 			defaultOptions : true,
-			// disabled       : isUpdatable,
+			disabled       : isUpdatable,
 			span           : 2.5,
 			size           : 'sm',
 			rules          : { required: 'Cogo Entity is Required.' },

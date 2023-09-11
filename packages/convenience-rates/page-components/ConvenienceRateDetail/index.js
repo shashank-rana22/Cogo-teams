@@ -11,15 +11,14 @@ import styles from './styles.module.css';
 
 function ConvenienceRateDetail() {
 	const router = useRouter();
-	const { service = '', convenience_rate_id = '' } = router?.query || {};
+	const { convenience_rate_id = '' } = router?.query || {};
 
-	const [activeList, setActiveList] = useState('active');
 	const [defaultConfigFeeUnit, setDefaultConfigFeeUnit] = useState('');
 
-	const defaultParams = { id: convenience_rate_id, status: activeList };
+	const defaultParams = { id: convenience_rate_id };
 	const { data, loading } = useGetConvenienceRateConfig({
 		defaultParams,
-		initialCall: convenience_rate_id && activeList,
+		initialCall: convenience_rate_id,
 	});
 	if (loading) {
 		return (
@@ -55,15 +54,9 @@ function ConvenienceRateDetail() {
 			<GlobalConfigForm
 				data={data}
 				loading={loading}
-				activeService={service}
 				setDefaultConfigFeeUnit={setDefaultConfigFeeUnit}
 			/>
 			<CustomConfig
-				data={data}
-				loading={loading}
-				activeList={activeList}
-				setActiveList={setActiveList}
-				service={service}
 				defaultConfigFeeUnit={defaultConfigFeeUnit}
 			/>
 		</div>
