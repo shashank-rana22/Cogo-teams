@@ -20,7 +20,7 @@ const useGetCsvFile = (filter, activeCard) => {
 			}
 		});
 
-		const params = ['pending', 'completed', 'backlogs'].includes(activeCard) ? {
+		const params = ['pending', 'completed', 'backlog'].includes(activeCard) ? {
 			start_date : new Date(),
 			end_date   : new Date(),
 			status     : activeCard,

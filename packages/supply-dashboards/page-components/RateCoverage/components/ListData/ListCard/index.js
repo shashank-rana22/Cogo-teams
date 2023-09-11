@@ -6,6 +6,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING } from '../../../configurations/helpers/constants';
+import useGetFreightRate from '../../../hooks/useGetFreightRate';
 
 import AddRateModal from './AddRateModal';
 import CloseModal from './CloseModal';
@@ -15,7 +16,6 @@ const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slab
 
 function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {} }) {
 	const { sources = [] } = data;
-
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
 
 	const items = (ITEM_LIST || []).map((item) => ({
@@ -27,6 +27,12 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
+
+	const { getFreightRate } = useGetFreightRate({ filter, cardData: data });
+	const handleAddRate = () => {
+		setShowAddRateModal((prev) => !prev);
+		getFreightRate();
+	};
 
 	return (
 		<div className={styles.container}>
@@ -170,7 +176,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 						)}
 						<Button
 							style={{ marginLeft: '16px' }}
-							onClick={() => { setShowAddRateModal((prev) => !prev); }}
+							onClick={handleAddRate}
 						>
 							{filter?.status !== 'completed' ? 'Add Rate' : 'Edit Rate'}
 						</Button>
