@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/margins/page-components';
+export { default } from '@cogoport/margin-management/page-components';
 
 export async function getServerSideProps({ locale }) {
 	return {
