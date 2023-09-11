@@ -23,6 +23,7 @@ import { getCollectionPartyDetails } from '../InvoiceFormLayout/CollectionPartyD
 import LineItemDetails from '../InvoiceFormLayout/LineItemDetails';
 import PurchaseInvoiceDates from '../InvoiceFormLayout/PurchaseInvoiceDates';
 import InvoicesUploaded from '../InvoicesUploaded';
+import InvoiceTemplate from '../InvoiceTemplate';
 
 import getFormControls from './CollectionPartyCard/controls';
 import styles from './styles.module.css';
@@ -95,7 +96,6 @@ function CollectionPartyDetails({
 		label : `${address?.address} / ${address?.tax_number}`,
 		value : address?.id,
 	}));
-	console.log('collectionPartyAddresses:', collectionPartyAddresses);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -152,7 +152,6 @@ function CollectionPartyDetails({
 	const { control, watch, setValue } = useForm();
 
 	const formValues = watch();
-	console.log('formValues:', formValues);
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -187,6 +186,25 @@ function CollectionPartyDetails({
 			toastApiError('Invoice is Required');
 		}
 	};
+
+	const COLLECTION_PARTY_BANK_OPTIONS = [];
+
+	const bank_details = (collectionPartyState?.documents || []).filter(
+		(item) => item?.document_type === 'bank_account_details',
+	);
+	(bank_details || []).forEach((bank) => {
+		if (
+			['pending', 'verified'].includes(bank?.verification_status)
+			&& bank?.status === 'active'
+		) {
+			COLLECTION_PARTY_BANK_OPTIONS.push({
+				...bank,
+				label : bank?.data?.bank_name,
+				value : bank?.data?.bank_account_number,
+			});
+		}
+	});
+	console.log('bank_details', collectionPartyState);
 
 	return (
 		<div className={styles.container}>
@@ -379,6 +397,7 @@ function CollectionPartyDetails({
 										collectionPartyAddress,
 										collectionPartyAddresses,
 										setCollectionPartyAddress,
+										COLLECTION_PARTY_BANK_OPTIONS,
 									}) || []).map((item) => {
 										const ele = { ...item };
 										if (ele.name === 'collection_party') {
@@ -429,7 +448,17 @@ function CollectionPartyDetails({
 				) : null}
 				{
 					showTemplate ? (
-						<div>hello</div>
+						<InvoiceTemplate
+							showTemplate={showTemplate}
+							setShowTemplate={setShowTemplate}
+							serviceProvider={collectionParty}
+							formValues={formValues}
+							billingParty={billingParty}
+							collectionPartyAddress={collectionPartyAddress}
+							collectionPartyState={collectionPartyState}
+							bank_details={bank_details}
+							shipment_data={shipment_data}
+						/>
 					) : null
 				}
 			</AccordianView>

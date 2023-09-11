@@ -1,5 +1,7 @@
 import { Toast } from '@cogoport/components';
 
+import RenderLabel from '../../InvoiceFormLayout/CollectionPartyDetails/RenderLabel';
+
 const getFormControls = ({
 	setValue = () => {},
 	cpParams = {},
@@ -7,6 +9,7 @@ const getFormControls = ({
 	setCollectionParty = () => {},
 	collectionPartyAddresses,
 	setCollectionPartyAddress = () => {},
+	COLLECTION_PARTY_BANK_OPTIONS = [],
 }) => [
 	{
 		name               : 'collection_party',
@@ -17,7 +20,7 @@ const getFormControls = ({
 		size               : 'sm',
 		params             : cpParams,
 		isClearable        : true,
-		span               : 6,
+		span               : 4,
 		getModifiedOptions : ({ options }) => handleModifiedOptions({ options }),
 		initialCall        : true,
 		onChange           : (_, item) => {
@@ -43,7 +46,19 @@ const getFormControls = ({
 			setCollectionPartyAddress(item);
 			setValue('cp_address', _);
 		},
-		span: 6,
+		span: 4,
+	},
+	{
+		name        : 'collection_party_bank_details',
+		label       : 'Select Collection Party Bank Details',
+		renderLabel : (bank) => <RenderLabel bank={bank} />,
+		type        : 'select',
+		rules       : { required: 'Collection Party Bank Details is Required' },
+		size        : 'sm',
+		isClearable : true,
+		options     : COLLECTION_PARTY_BANK_OPTIONS,
+		placeholder : 'Select Bank Details...',
+		span        : 4,
 	},
 ];
 
