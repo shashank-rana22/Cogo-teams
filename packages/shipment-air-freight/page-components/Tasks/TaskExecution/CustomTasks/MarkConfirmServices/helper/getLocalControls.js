@@ -1,3 +1,5 @@
+import { CustomOptions } from '@cogoport/air-modules';
+
 const getLocalControls = (service_type, formattedRate, shipment_data) => {
 	const formattedValue = formattedRate?.[formattedRate?.primary_service?.id];
 	const exportValue	= (shipment_data?.all_services || [])
@@ -29,7 +31,7 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 			{
 				name        : 'origin_service_provider_id',
 				type        : 'async-select',
-				asyncKey	   : 'organizations',
+				asyncKey   	: 'organizations',
 				span        : 5,
 				label       : 'Service Provider (Air Local Origin)',
 				value       : formattedValue?.service_provider_id || exportValue?.service_provider_id,
@@ -41,7 +43,8 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 						kyc_status   : 'verified',
 					},
 				},
-				rules: { required: 'Service Provider is Required' },
+				rules       : { required: 'Service Provider is Required' },
+				renderLabel : CustomOptions,
 			},
 			{
 				type     : 'async-select',
@@ -74,7 +77,8 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 						kyc_status   : 'verified',
 					},
 				},
-				rules: { required: 'Service Provider is Required' },
+				rules       : { required: 'Service Provider is Required' },
+				renderLabel : CustomOptions,
 			},
 		],
 	};

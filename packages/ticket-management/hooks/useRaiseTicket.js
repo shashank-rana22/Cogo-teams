@@ -5,19 +5,21 @@ import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	notify_customer, additionalData,
+	notify_customer, additionalData, request_type, category, serial_id, sub_category,
 }) => ({
-	UserID         : id,
-	PerformedByID  : id,
+	UserID         : id || undefined,
+	PerformedByID  : id || undefined,
 	Source         : 'admin',
-	Category       : '',
-	Subcategory    : '',
-	Priority       : priority,
+	Category       : category || undefined,
+	Priority       : priority || undefined,
 	UserType       : 'ticket_user',
 	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
-	Type           : issue_type,
-	Description    : additional_information,
-	NotifyCustomer : notify_customer,
+	Type           : issue_type || undefined,
+	RequestType    : request_type || undefined,
+	Description    : additional_information || undefined,
+	NotifyCustomer : notify_customer || undefined,
+	SerialID       : serial_id,
+	Subcategory    : sub_category || undefined,
 	...additionalData,
 });
 
@@ -32,13 +34,17 @@ const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefres
 
 	const raiseTickets = async (val) => {
 		const {
+			request_type,
 			issue_type,
 			additional_information,
 			organization_id,
 			user_id,
 			priority,
 			file_url,
+			serial_id,
 			notify_customer,
+			category,
+			sub_category,
 			...rest
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
@@ -60,13 +66,17 @@ const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefres
 			await trigger({
 				data: getPayload({
 					id: profile?.user?.id,
-					priority,
-					finalUrl,
-					selectedServices,
-					issue_type,
 					additional_information,
+					selectedServices,
 					notify_customer,
 					additionalData,
+					request_type,
+					issue_type,
+					serial_id,
+					finalUrl,
+					category,
+					priority,
+					sub_category,
 				}),
 			});
 			Toast.success('Successfully Created');

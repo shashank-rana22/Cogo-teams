@@ -39,9 +39,7 @@ function PreviewBookingFooter({
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
-	const disableButton = isVeryRisky || !agreeTandC || noRatesPresent
-		|| (detail?.importer_exporter?.kyc_status !== 'verified'
-			&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
+	const disableButton = isVeryRisky || !agreeTandC || noRatesPresent;
 
 	const MAPPING = [
 		{
