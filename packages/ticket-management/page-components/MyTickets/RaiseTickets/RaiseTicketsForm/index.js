@@ -1,5 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
 import { FINANCE_PLATFORM_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
@@ -22,6 +22,8 @@ function RaiseTicketsForm({
 	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
 	setAdditionalInfo = () => {}, setValue = () => {},
 }) {
+	const [subCategories, setSubCategories] = useState([]);
+
 	const { errors = {} } = formState || {};
 
 	const formRef = useRef(null);
@@ -41,6 +43,11 @@ function RaiseTicketsForm({
 		showOptional   : false,
 	}));
 
+	const formattedSubCategories = (subCategories || []).map((item) => ({
+		label : item?.name,
+		value : item?.name,
+	}));
+
 	const defaultControls = useRaiseTicketcontrols({
 		setAdditionalInfo,
 		watchRequestType,
@@ -51,6 +58,8 @@ function RaiseTicketsForm({
 		watchOrgId,
 		resetField,
 		setValue,
+		formattedSubCategories,
+		setSubCategories,
 	});
 
 	const filteredControls = defaultControls
