@@ -29,7 +29,6 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 				<div>
 					<Button
 						size="sm"
-						// themeType="tertiary"
 						onClick={append}
 					>
 						Add

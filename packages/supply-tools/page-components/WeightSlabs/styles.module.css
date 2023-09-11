@@ -1,0 +1,14 @@
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 12px 0;
+}
+
+.modal {
+	:global {
+		.ui_input_container:hover {
+			z-index: auto;
+		}
+	}
+}
