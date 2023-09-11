@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	notify_customer, additionalData, request_type, category, serial_id,
+	notify_customer, additionalData, request_type, category, serial_id, sub_category,
 }) => ({
 	UserID         : id || undefined,
 	PerformedByID  : id || undefined,
@@ -19,6 +19,7 @@ const getPayload = ({
 	Description    : additional_information || undefined,
 	NotifyCustomer : notify_customer || undefined,
 	SerialID       : serial_id,
+	Subcategory    : sub_category || undefined,
 	...additionalData,
 });
 
@@ -43,6 +44,7 @@ const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefres
 			serial_id,
 			notify_customer,
 			category,
+			sub_category,
 			...rest
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
@@ -74,6 +76,7 @@ const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefres
 					finalUrl,
 					category,
 					priority,
+					sub_category,
 				}),
 			});
 			Toast.success('Successfully Created');

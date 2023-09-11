@@ -1,5 +1,5 @@
 import {
-	asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser,
+	asyncFieldsOrganizations, asyncFieldsOrganizationUser,
 	asyncTicketsCategory,
 	asyncListShipments,
 } from '@cogoport/forms';
@@ -10,8 +10,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { REQUEST_TYPE_OPTIONS } from '../constants';
 
 const useRaiseTicketcontrols = ({
-	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '', watchCategory = '',
-	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
+	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '',
+	watchRequestType = '', resetField = () => {}, setValue = () => {},
+	formattedSubCategories = [], setSubCategories = () => {},
 }) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryOptions = useGetAsyncTicketOptions({
@@ -22,14 +23,7 @@ const useRaiseTicketcontrols = ({
 			RequestType : watchRequestType || undefined,
 		},
 	});
-	const ticketTypeOptions = useGetAsyncTicketOptions({
-		...asyncFieldsTicketTypes(),
-		params: {
-			Audience    : 'cogoport_user',
-			RequestType : watchRequestType || undefined,
-			Category    : watchCategory || undefined,
-		},
-	});
+
 	const organizationUserOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizationUser(),
 		params   : { filters: { organization_id: watchOrgId } },
@@ -62,7 +56,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			isClearable    : true,
 		},
-
 		{
 			...(organizationUserOptions || {}),
 			label          : 'Select User',
@@ -93,7 +86,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			isClearable    : true,
-			onChange       : () => resetField('issue_type'),
 		},
 		{
 			label          : 'Select Trade Type',
@@ -103,7 +95,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
-			onChange       : () => resetField('issue_type'),
 		},
 		{
 			...(categoryOptions || {}),
@@ -113,18 +104,19 @@ const useRaiseTicketcontrols = ({
 			placeholder    : 'Select Type',
 			isClearable    : true,
 			defaultOptions : true,
-			onChange       : () => resetField('issue_type'),
+			onChange       : (_, val) => {
+				setSubCategories(val?.subcategories);
+				resetField('sub_category');
+			},
 		},
 		{
-			...(ticketTypeOptions || {}),
-			label          : 'Select issue type',
-			name           : 'issue_type',
+			label          : 'Select Sub-category',
+			name           : 'sub_category',
 			controllerType : 'select',
-			placeholder    : 'Select Type',
-			isClearable    : true,
+			placeholder    : 'Select sub category',
 			rules          : { required: true },
-			defaultOptions : true,
-			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
+			isClearable    : true,
+			options        : formattedSubCategories,
 		},
 		{
 			label          : 'Describe Issue',
