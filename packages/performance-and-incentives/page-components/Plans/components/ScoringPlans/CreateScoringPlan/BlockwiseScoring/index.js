@@ -27,22 +27,24 @@ function BlockwiseScoring() {
 				the base for Incentive Calculation
 			</p>
 
-			{fields.map((field, index) => (
-				<Block
-					key={field.id}
-					name={`blocks.${index}`}
-					control={control}
-					errors={errors}
-					index={index}
-					removeBlock={remove}
-					watch={watch}
-				/>
-			))}
+			<div className={styles.blocks_container}>
+				{fields.map((field, index) => (
+					<Block
+						key={field.id}
+						name={`blocks.${index}`}
+						control={control}
+						errors={errors}
+						index={index}
+						removeBlock={remove}
+						watch={watch}
+					/>
+				))}
 
-			<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} style={{ cursor: 'pointer' }}>
-				+
-				{' '}
-				<span style={{ textDecoration: 'underline' }}>Add Block</span>
+				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} style={{ cursor: 'pointer' }}>
+					+
+					{' '}
+					<span style={{ textDecoration: 'underline' }}>Add Block</span>
+				</div>
 			</div>
 
 			<div className={styles.btn_container}>
