@@ -69,6 +69,8 @@ import {
 	asyncListTruckTypes,
 	asyncFieldsOrganizationUsers,
 	asyncListLeadOrganizationUsers,
+	asyncListUserShipments,
+	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
@@ -162,6 +164,8 @@ const keyAsyncFieldsParamsMapping = {
 	list_pricing_zones                   : asyncListPricingZones,
 	list_organization_users              : asyncFieldsOrganizationUsers,
 	lead_org_users                       : asyncListLeadOrganizationUsers,
+	list_user_shipments                  : asyncListUserShipments,
+	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 };

@@ -51,6 +51,7 @@ import {
 	IcMEnquiriesReceived,
 	IcMDunning,
 	IcMDashboard,
+	IcAWarehouse,
 	IcMCreditRequest,
 	IcCCogoassured,
 	IcMOverview,
@@ -613,7 +614,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis   : ['list_checkouts'],
 			module_type : 'crm',
 		},
-
 		saas_tracking: {
 			key           : 'saas_tracking',
 			title         : t('common:container_tracking'),
@@ -828,8 +828,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		trade_parties: {
 			key           : 'trade_parties',
 			title         : t('common:trade_parties'),
-			href          : '/trade-parties',
-			as            : '/trade-parties',
+			href          : '/v2/trade-parties',
+			as            : '/v2/trade-parties',
 			icon          : IcMTradeparties,
 			type          : 'link',
 			possible_apis : apis.trade_parties,
@@ -1342,8 +1342,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'coe-cancellation_policies',
 					title         : t('common:cancellation_policies'),
-					href          : '/cancellation-policies',
-					as            : '/cancellation-policies',
+					href          : '/v2/cancellation-policies',
+					as            : '/v2/cancellation-policies',
 					type          : 'link',
 					main_apis     : ['list_shipment_cancellation_charges'],
 					possible_apis : apis.shipment_cancellation_policies,
@@ -1945,6 +1945,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon          : IcMInvoiceApprovals,
 			possible_apis : apis.airline_booking_plugin,
 			module_type   : 'dashboards',
+		},
+
+		warehouse_management: {
+			key           : 'warehouse_management',
+			title         : 'Warehouse Management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			href          : '/v2/warehouse-management',
+			as            : '/v2/warehouse-management',
+			possible_apis : apis.warehouse_management,
+			icon          : IcAWarehouse,
 		},
 
 		enrichment: {
@@ -2575,6 +2586,15 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			possible_apis : apis.centralised_customer_service,
 			icon          : IcMDashboard,
+		},
+		warehouse_app: {
+			key           : 'warehouse_app',
+			title         : 'Warehouse App',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			possible_apis : apis.warehouse_app,
+			icon          : IcAWarehouse,
 		},
 		resources: {
 			key           : 'resources',

@@ -62,7 +62,7 @@ function QuotationModal({
 					title={(
 						<div className={styles.flex}>
 							<div style={{ display: 'flex', alignItems: 'center' }}>
-								<div className={styles.heading}>Add Recipeints</div>
+								<div className={styles.heading}>Add Recipients</div>
 
 								<CreateUser
 									organization_id={org_id}
