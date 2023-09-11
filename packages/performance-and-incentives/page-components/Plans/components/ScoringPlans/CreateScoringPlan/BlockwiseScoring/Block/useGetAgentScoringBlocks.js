@@ -13,8 +13,11 @@ const useGetAgentScoringBlocks = ({ blockValue = '' }) => {
 	const getAgentScoringBlocks = useCallback(async () => {
 		try {
 			await trigger({
-				data: {
-					display_name: blockValue,
+				params: {
+					agent_scoring_parameters_data_required : true,
+					filters                                : {
+						display_name: blockValue,
+					},
 				},
 			});
 		} catch (error) {
@@ -23,8 +26,10 @@ const useGetAgentScoringBlocks = ({ blockValue = '' }) => {
 	}, [blockValue, trigger]);
 
 	useEffect(() => {
-		getAgentScoringBlocks();
-	}, [getAgentScoringBlocks]);
+		if (blockValue) {
+			getAgentScoringBlocks();
+		}
+	}, [getAgentScoringBlocks, blockValue]);
 
 	return {
 		data,

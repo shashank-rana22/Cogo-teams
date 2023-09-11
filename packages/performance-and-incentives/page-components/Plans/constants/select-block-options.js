@@ -1,19 +1,20 @@
-const blockOptions = [{
-	label : 'Engagement',
-	value : 'Engagement',
-},
-{
-	label : 'Transaction',
-	value : 'Transaction',
-},
-{
-	label : 'Accounts',
-	value : 'Accounts',
-},
-{
-	label : 'Enrichment',
-	value : 'Enrichment',
-},
+const blockOptions = [
+	{
+		label : 'Transaction',
+		value : 'Transaction',
+	},
+	{
+		label : 'Accounts',
+		value : 'Accounts',
+	},
+	{
+		label : 'Enrichment',
+		value : 'Enrichment',
+	},
+	{
+		label : 'Engagement',
+		value : 'Engagement',
+	},
 ];
 
 export default blockOptions;

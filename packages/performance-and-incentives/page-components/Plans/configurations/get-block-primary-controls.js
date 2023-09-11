@@ -1,17 +1,48 @@
-const getPrimaryControls = () => ([
+const getPrimaryControls = ({ parameterOptions = [] }) => ([
 	{
 		name        : 'parameter',
 		type        : 'select',
 		label       : 'Parameter',
 		className   : 'primary sm',
 		placeholder : 'select',
+		options     : parameterOptions,
 		rules       : { required: 'Required' },
 	},
 	{
 		name        : 'scoring_type',
-		type        : 'number',
+		type        : 'select',
 		label       : 'Scoring Type',
 		placeholder : 'Value',
+		options     : [{
+			label : 'Absolute',
+			value : 'absolute',
+		},
+		{
+			label : '%',
+			value : 'percentage',
+		}],
+		value : 'absolute',
+		rules : { required: 'Required' },
+	},
+	{
+		name        : 'scoring_unit',
+		type        : 'select',
+		label       : '',
+		placeholder : 'Unit',
+		rules       : { required: 'Required' },
+	},
+	{
+		name        : 'fixed_percentage_value',
+		type        : 'number',
+		label       : 'Fixed % of SID',
+		placeholder : 'Score',
+		rules       : { required: 'Required' },
+	},
+	{
+		name        : 'variable_percentage_value',
+		type        : 'number',
+		label       : 'Variable % post 1st SID',
+		placeholder : 'Score',
 		rules       : { required: 'Required' },
 	},
 	{

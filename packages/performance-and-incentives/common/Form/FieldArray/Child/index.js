@@ -17,14 +17,19 @@ function Child(props) {
 		noDeleteButtonTill = 0,
 		disabled = false,
 		error = {},
+		watch = () => {},
 	} = props;
+
+	const scoringType = watch(`${name}.${index}.scoring_type`);
 
 	return (
 		<div className={styles.content}>
 			{controls.map((controlItem) => {
 				const Element = getFieldController(controlItem.type);
 
-				if (!Element) return null;
+				if (!Element || (scoringType === 'absolute'
+					&& ['fixed_percent', 'variable_percent'].includes(controlItem.name))
+					|| (scoringType === 'percentage' && controlItem.name === 'base_score')) return null;
 
 				return (
 					<div key={`${name}.${index}.${controlItem.name}`} className={styles.list}>

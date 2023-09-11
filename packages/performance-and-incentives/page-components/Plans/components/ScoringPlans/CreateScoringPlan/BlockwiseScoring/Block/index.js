@@ -1,13 +1,12 @@
-import { useFieldArray, SelectController } from '@cogoport/forms';
+import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
 import blockOptions from '../../../../../constants/select-block-options';
 import SubBlock from '../SubBlock';
 
 import styles from './styles.module.css';
-import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
+import useBlockCreation from './useBlockCreation';
 
 const OFFSET = 1;
 
@@ -15,34 +14,17 @@ function Block({
 	key = '', name = '', control = {}, errors = {},
 	index = 0, removeBlock = () => {}, watch = () => {},
 }) {
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name,
-	});
-
-	const CHILD_EMPTY_VALUES = {};
-
-	getPrimaryControls().forEach((controlItem) => {
-		if (controlItem.type === 'fieldArray') {
-			const NESTED_CHILD_EMPTY_VALUES = {};
-
-			controlItem.controls.forEach((childControlItem) => {
-				NESTED_CHILD_EMPTY_VALUES[childControlItem.name] = '';
-			});
-
-			CHILD_EMPTY_VALUES[controlItem.name] = NESTED_CHILD_EMPTY_VALUES;
-		} else {
-			CHILD_EMPTY_VALUES[controlItem.name] = '';
-		}
-	});
-
-	const blockValue = watch(`blocks.${index}.block`);
-
-	const { data = {} } = useGetAgentScoringBlocks({ blockValue });
-
-	const IS_DEFAULT = false;
-
-	const subBlockType = data.sub_block_type;
+	const {
+		subBlockType,
+		CHILD_EMPTY_VALUES,
+		blockValue,
+		IS_DEFAULT,
+		fields,
+		append,
+		remove,
+		subBlockOptions,
+		parameterOptions = {},
+	} = useBlockCreation({ control, name, watch });
 
 	return (
 		<div className={styles.container} key={key}>
@@ -77,14 +59,17 @@ function Block({
 					name={`${name}.${subBlockIndex}`}
 					index={subBlockIndex}
 					control={control}
+					watch={watch}
 					blockValue={blockValue}
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
 					isDefault={IS_DEFAULT}
+					subBlockOptions={subBlockOptions}
+					parameterOptions={parameterOptions}
 				/>
 			))}
 
-			{!IS_DEFAULT && (
+			{!(subBlockType === 'default') && (
 				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} className={styles.add_btn}>
 					+
 					{' '}

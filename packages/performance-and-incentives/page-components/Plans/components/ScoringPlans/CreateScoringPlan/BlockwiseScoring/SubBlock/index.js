@@ -1,20 +1,22 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import FieldArray from '../../../../../../../common/Form/FieldArray';
-import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
 
 import styles from './styles.module.css';
+import useSubBlockCreation from './useSubBlockCreation';
 
 function SubBlock({
-	key = '', name = '', index = 0, control = {}, errors = {},
-	subBlockType = '', removeSubBlock = () => {}, isDefault = false,
+	key = '', name = '', index = 0, control = {}, errors = {}, watch = () => {},
+	subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
 }) {
-	const controls = getPrimaryControls();
-
-	const Element = subBlockType === 'group' ? InputController : SelectController;
+	const { Element, controls = [], handleClick = () => {} } = useSubBlockCreation({
+		parameterOptions,
+		subBlockType,
+		name,
+		watch,
+	});
 
 	return (
 		<div key={key} className={styles.container}>
@@ -23,13 +25,15 @@ function SubBlock({
 
 				<div className={styles.control_item}>
 					<div className={styles.label}>
-						Service or Default
+						{startCase(subBlockType)}
 						<sup className={styles.sup}>*</sup>
 					</div>
 
 					<Element
 						name={`${name}.service`}
 						control={control}
+						options={subBlockOptions}
+						value="default"
 					/>
 
 					{errors[`${name}.block`] && (
@@ -43,7 +47,7 @@ function SubBlock({
 					<div className={styles.underline_text}>
 						Delete
 						{' '}
-						{isDefault ? 'Sub Block' : startCase(subBlockType)}
+						{subBlockType === 'group' ? 'Sub Block' : startCase(subBlockType)}
 					</div>
 				</div>
 
@@ -55,9 +59,19 @@ function SubBlock({
 				controls={controls}
 				isText
 				buttonText="Add Parameter"
+				watch={watch}
 			/>
 
-			<Button size="md" themeType="accent" type="button" className={styles.btn}>Save</Button>
+			<Button
+				size="md"
+				themeType="accent"
+				type="button"
+				className={styles.btn}
+				onClick={handleClick}
+			>
+				Save
+
+			</Button>
 
 		</div>
 	);
