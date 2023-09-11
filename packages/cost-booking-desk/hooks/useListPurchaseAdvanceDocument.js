@@ -18,7 +18,8 @@ const getParams = ({
 	const searchQuery = query ? { q: query } : {};
 
 	const keyToSend = paymentActiveTab === 'payment_request' ? 'status' : 'reconciled';
-	const statusToSend = paymentActiveTab === 'payment_request' ? [statusFilter] : statusFilter;
+	const statusToSend = paymentActiveTab === 'payment_request'
+	&& !isEmpty(statusFilter) ? [statusFilter] : statusFilter;
 
 	return {
 		tradeType   : 'import',
