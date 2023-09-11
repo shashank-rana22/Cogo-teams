@@ -18,7 +18,7 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 
 		(list || []).forEach((item) => {
 			const { payrunBillStatus, id } = item || {};
-			const value = showCheckInvoices[id];
+			const value = showCheckInvoices[id] || '';
 
 			if (payrunBillStatus === 'APPROVED' || value === 'Tagged') {
 				TAGGED_DATA.push('Tagged');
