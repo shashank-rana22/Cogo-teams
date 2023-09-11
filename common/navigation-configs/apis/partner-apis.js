@@ -1765,6 +1765,12 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_executive_summary',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_organization_communication_logs_by_view',
 			access_type  : 'private',
 			feature      : 'demand_crm',
@@ -13414,6 +13420,11 @@ const partner = {
 			api          : 'post_tickets_category',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'delete_tickets_category',
