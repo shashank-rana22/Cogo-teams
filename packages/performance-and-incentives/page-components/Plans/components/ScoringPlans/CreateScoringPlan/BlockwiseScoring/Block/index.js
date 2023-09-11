@@ -14,7 +14,7 @@ function Block({
 	key = '', name = '', control = {}, errors = {},
 	index = 0, removeBlock = () => {}, watch = () => {}, data = {},
 }) {
-	const { fields, append } = useFieldArray({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name,
 	});
@@ -72,9 +72,12 @@ function Block({
 				<SubBlock
 					key={field.id}
 					name={`${name}.${subBlockIndex}`}
+					index={subBlockIndex}
 					control={control}
 					blockValue={blockValue}
 					subBlockType={subBlockType}
+					removeSubBlock={remove}
+					isDefault={IS_DEFAULT}
 				/>
 			))}
 
