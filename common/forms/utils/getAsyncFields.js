@@ -954,9 +954,8 @@ function asyncListLocationClusters() {
 		endpoint    : 'list_location_clusters',
 		initialCall : true,
 		params      : {
-			filters: { status: 'active' },
-
-			page_limit: 50,
+			filters    : { status: 'active' },
+			page_limit : 50,
 		},
 	};
 }
