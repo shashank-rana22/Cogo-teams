@@ -13416,6 +13416,11 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'delete_tickets_category',
 			access_type  : 'private',
 			service_name : 'tickets',
