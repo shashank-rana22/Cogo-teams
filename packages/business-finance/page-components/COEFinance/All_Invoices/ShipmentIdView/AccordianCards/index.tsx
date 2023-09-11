@@ -271,6 +271,7 @@ function AccordianCards({
 							setDataCard={setDataCard}
 							amountTab={amountTab}
 							setAmountTab={setAmountTab}
+							showInvoices={showInvoices}
 						/>
 					) : null}
 					{showInvoices ? (

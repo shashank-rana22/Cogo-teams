@@ -112,6 +112,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api         : 'get_common_job-profitability_get-quotations',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'get_purchase_bills_daily_invoices_trend',
 			access_type : 'private',
 			feature     : 'coeFinance',

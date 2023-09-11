@@ -1,9 +1,11 @@
 import React from 'react';
 
 import List from '../../../../../commons/List/index';
+import useGetQuotation from '../../../../hook/useGetQuotationBill';
 import useListBills from '../../../../hook/useListBills';
 import CardHeader from '../CardHeader/index';
 
+import { quoteData } from './quoteData';
 import AmountWithCurrency from './RenderData/AmountWithCurrency/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import InvoiceNumber from './RenderData/InvoiceNumber/index';
@@ -19,6 +21,7 @@ interface ItemTypes {
 	discountAppliedKam?:number;
 	discountAppliedRevenueDesk?:number;
 	jobStatus?: string,
+	quotationType?: string,
 }
 interface PropsType {
 	cardData: ItemTypes;
@@ -27,6 +30,7 @@ interface PropsType {
 	amountTab: string;
 	setAmountTab: Function;
 	setDataCard: Function;
+	showInvoices: boolean;
 }
 
 interface FullResponseProps {
@@ -35,6 +39,12 @@ interface FullResponseProps {
 	list?: object[];
 }
 
+// interface DataProps {
+// 	totalRecords?: number;
+// 	quotePageIndex?: number;
+// 	quoteList?: object[];
+// }
+
 function CardItem({
 	cardData,
 	currentOpenSID,
@@ -42,8 +52,9 @@ function CardItem({
 	amountTab,
 	setDataCard,
 	setAmountTab,
+	showInvoices = false,
 }: PropsType) {
-	const { jobNumber, jobType } = cardData || {};
+	const { jobNumber, jobType, quotationType } = cardData || {};
 	const {
 		loading,
 		list: { fullResponse },
@@ -58,11 +69,20 @@ function CardItem({
 		setDataCard,
 	});
 
+	const {
+		quotationLoading,
+		// list: { quoteData },
+		quoteConfig,
+	} = useGetQuotation({
+		jobNumber,
+		quotationType,
+	});
+
 	const handleClick = () => {
 		setCurrentOpenSID('');
 	};
 
-	const { pageIndex, list }: FullResponseProps = fullResponse || {};
+	const { pageIndex = 1, list }: FullResponseProps = fullResponse || {};
 
 	const functions = {
 		renderInvoiceNumber: (item: {}, field: {}) => (
@@ -82,6 +102,18 @@ function CardItem({
 		renderRemarks  : (item: {}) => <Remarks itemData={item} />,
 	};
 
+	let finalConfig = config;
+	let itemData = fullResponse;
+	let finalLoading = loading;
+	let finalFunctions = functions;
+
+	if (amountTab === 'sellQuote' || amountTab === 'buyQuote') {
+		finalConfig = quoteConfig;
+		itemData = quoteData;
+		finalLoading = quotationLoading;
+		finalFunctions = {};
+	}
+
 	return (
 		<div>
 			<div className={styles.hr} />
@@ -90,6 +122,7 @@ function CardItem({
 					itemData={cardData}
 					amountTab={amountTab}
 					setAmountTab={setAmountTab}
+					showInvoices={showInvoices}
 				/>
 			</div>
 
@@ -98,10 +131,10 @@ function CardItem({
 					<div className={styles.no_data}>No Data Available</div>
 				) : (
 					<List
-						config={config}
-						itemData={fullResponse}
-						functions={functions}
-						loading={loading}
+						config={finalConfig}
+						itemData={itemData}
+						functions={finalFunctions}
+						loading={finalLoading}
 						page={pageIndex}
 						pageSize={10}
 						showPagination
