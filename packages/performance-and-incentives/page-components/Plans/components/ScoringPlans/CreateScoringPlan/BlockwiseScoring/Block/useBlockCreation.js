@@ -37,18 +37,22 @@ const useBlockCreation = ({ control, name, watch }) => {
 		name,
 	});
 
-	const subBlockOptions = useMemo(() => list.map(({ sub_block_name }) => ({
+	const subBlockOptions = useMemo(() => list.map(({ id, sub_block_name }) => ({
 		label : startCase(sub_block_name),
-		value : sub_block_name,
+		value : id,
 	})), [list]);
 
 	const parameterOptions = useMemo(() => list.reduce((acc, item) => {
-		acc[item.sub_block_name] = item.agent_scoring_parameters.map((parameter) => ({
+		acc[item.id] = item.agent_scoring_parameters.map((parameter) => ({
 			label : parameter.display_name,
-			value : parameter.name,
+			value : parameter.id,
+			id    : parameter.id,
+			unit  : parameter.parameter_unit,
 		}));
 		return acc;
 	}, {}), [list]);
+
+	console.log(parameterOptions, 'pOptions');
 
 	useEffect(() => {
 

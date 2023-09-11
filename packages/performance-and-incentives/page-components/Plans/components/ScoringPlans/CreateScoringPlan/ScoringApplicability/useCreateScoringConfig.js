@@ -1,14 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
 import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
 
 const useCreateScoringConfig = () => {
-	// const { id } = router.query;
-
-	// const { url = '', authkey = '' } = apiMapping({ id, agentExpSlabs });
+	const { push } = useRouter();
 
 	const { control, formState: { errors }, handleSubmit, watch } = useForm();
 
@@ -34,7 +33,7 @@ const useCreateScoringConfig = () => {
 				},
 			});
 
-			console.log(res.data.id, 'hello');
+			push(`/performance-and-incentives/plans?id=${res.data.id}`);
 
 			Toast.success('Saved successfully!');
 		} catch (error) {

@@ -11,7 +11,7 @@ function SubBlock({
 	key = '', name = '', index = 0, control = {}, errors = {}, watch = () => {},
 	subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
 }) {
-	const { Element, controls = [], handleClick = () => {} } = useSubBlockCreation({
+	const { Element, controls = [], handleClick = () => {}, parameterUnitOptions = {} } = useSubBlockCreation({
 		parameterOptions,
 		subBlockType,
 		name,
@@ -60,6 +60,7 @@ function SubBlock({
 				isText
 				buttonText="Add Parameter"
 				watch={watch}
+				parameterUnitOptions={parameterUnitOptions}
 			/>
 
 			<Button
