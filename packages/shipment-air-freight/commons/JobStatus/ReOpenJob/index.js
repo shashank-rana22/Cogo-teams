@@ -6,7 +6,7 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import useIncidentReOpenJob from '../../hooks/useIncidentReOpenJob';
+import useIncidentReOpenJob from '../../../hooks/useIncidentReOpenJob';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -23,7 +23,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 
 	const [isSuccess, setIsSuccess] = useState(false);
 
-	const { data = [] } = useListStakeholders({
+	const { data: stakeholderData = [] } = useListStakeholders({
 		shipment_id      : shipmentData?.id,
 		stakeholder_type : 'booking_agent',
 	});
@@ -64,7 +64,7 @@ function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = 
 							</div>
 							<div>
 								<div className={styles.label}>KAM</div>
-								<span>{data?.[GLOBAL_CONSTANTS.zeroth_index]?.user?.name || '--'}</span>
+								<span>{stakeholderData?.[GLOBAL_CONSTANTS.zeroth_index]?.user?.name || '--'}</span>
 							</div>
 						</div>
 

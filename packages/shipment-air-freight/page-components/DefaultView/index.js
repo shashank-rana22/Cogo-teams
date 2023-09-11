@@ -1,6 +1,6 @@
 import { RaiseAlarm, RaiseAlarmCard } from '@cogoport/air-modules/components/RaiseAlarm';
 import useGetShipmentFaultAlarmDescription from '@cogoport/air-modules/hooks/useGetShipmentFaultAlarmDescription';
-import { Tabs, TabPanel, Toggle, Button, Pill } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
@@ -9,7 +9,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
-import ReOpenJob from '../../commons/ReOpenJob';
+import JobStatus from '../../commons/JobStatus';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -68,7 +68,6 @@ function DefaultView() {
 
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
-	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
@@ -133,25 +132,10 @@ function DefaultView() {
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
 					{shipment_data?.is_job_closed && (
-						<div className={styles.job_closed_container}>
-							{shipment_data?.is_job_closed_financially ? (
-								<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
-							) : (
-								<>
-									<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
-									{job_open_request && (
-										<Button
-											className={styles.job_undo_button}
-											themeType="link"
-											size="md"
-											onClick={() => setReOpenJobModal(true)}
-										>
-											Undo
-										</Button>
-									)}
-								</>
-							)}
-						</div>
+						<JobStatus
+							shipment_data={shipment_data}
+							isJobOpenAllowed={job_open_request}
+						/>
 					)}
 
 					<Toggle
@@ -203,14 +187,6 @@ function DefaultView() {
 					))}
 				</Tabs>
 			</div>
-
-			{reOpenJobModal ? (
-				<ReOpenJob
-					showModal={reOpenJobModal}
-					setShowModal={setReOpenJobModal}
-					shipmentData={shipment_data}
-				/>
-			) : null}
 		</div>
 	);
 }
