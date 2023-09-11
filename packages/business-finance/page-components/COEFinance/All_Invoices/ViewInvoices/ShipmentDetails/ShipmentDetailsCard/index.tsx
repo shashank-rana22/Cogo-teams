@@ -29,12 +29,14 @@ interface ShipmentDetailsCardInterface {
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	invoiceStatus: string;
+	lineItemsCheck: boolean;
+	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 const CHECK_REMARK_LENGTH = 1;
+const TOTAL_TASKS = 4;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -42,8 +44,9 @@ function ShipmentDetailsCard({
 	setRemarksVal = () => {},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
-	setLineItem = () => {},
 	invoiceStatus = '',
+	lineItemsCheck = false,
+	setCheckItem = () => {},
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -57,7 +60,7 @@ function ShipmentDetailsCard({
 
 	const {
 		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail,
-		remarks,
+		remarks = [],
 	} = data || {};
 	const {
 		entityCode = '',
@@ -236,6 +239,8 @@ function ShipmentDetailsCard({
 		}));
 	}, [checkedValue, setRemarksVal]);
 
+	const lineItemCheckedCount = lineItemsCheck ? 1 : 0;
+
 	return (
 		<div>
 			{!!showHighAdvanceModal && (
@@ -275,9 +280,12 @@ function ShipmentDetailsCard({
 
 					{!isInvoiceApproved && (
 						<div className={styles.completed}>
-							Completed
-							{!isDisabled(status) ? 3 : showValue.length + rejected.length || 0}
-							/3
+							<span className={styles.status_completed_text}>Completed</span>
+
+							{!isDisabled(status)
+								? TOTAL_TASKS : showValue.length + rejected.length + lineItemCheckedCount || 0}
+							/
+							{TOTAL_TASKS}
 						</div>
 					)}
 				</div>
@@ -324,6 +332,7 @@ function ShipmentDetailsCard({
 									isDisabled={isDisabled}
 									status={status}
 									docContent={docContent}
+									setCheckItem={setCheckItem}
 								/>
 							)}
 
@@ -341,6 +350,7 @@ function ShipmentDetailsCard({
 									isDisabled={isDisabled}
 									status={status}
 									docContent={docContent}
+									setCheckItem={setCheckItem}
 								/>
 							)}
 
@@ -363,6 +373,7 @@ function ShipmentDetailsCard({
 									advancedPaymentObj={advancedPaymentObj}
 									setShowHighAdvancedModal={setShowHighAdvancedModal}
 									docContent={docContent}
+									setCheckItem={setCheckItem}
 								/>
 							)}
 
@@ -372,13 +383,13 @@ function ShipmentDetailsCard({
 									bill={bill}
 									lineItemsRemarks={lineItemsRemarks}
 									setLineItemsRemarks={setLineItemsRemarks}
-									setLineItem={setLineItem}
 									invoiceType={invoiceType}
 									isInvoiceApproved={isInvoiceApproved}
 									shipmentType={shipmentType}
 									subTotal={subTotal}
 									tdsRate={tdsRate}
 									paidTds={paidTds}
+									setCheckItem={setCheckItem}
 								/>
 							)}
 						</>

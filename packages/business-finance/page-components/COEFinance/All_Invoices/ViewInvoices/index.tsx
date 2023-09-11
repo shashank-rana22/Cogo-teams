@@ -17,7 +17,6 @@ function ViewInvoices() {
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
-	const [lineItem, setLineItem] = useState(false);
 	const {
 		data:  fullResponse,
 	} = useGetBill({ billId, orgId });
@@ -41,7 +40,6 @@ function ViewInvoices() {
 				overAllRemark={overAllRemark}
 				setOverAllRemark={setOverAllRemark}
 				lineItemsRemarks={lineItemsRemarks}
-				lineItem={lineItem}
 				jobNumber={jobNumber}
 				status={status}
 				checkItem={checkItem}
@@ -53,12 +51,10 @@ function ViewInvoices() {
 				setRemarksVal={setRemarksVal}
 				lineItemsRemarks={lineItemsRemarks}
 				setLineItemsRemarks={setLineItemsRemarks}
-				setLineItem={setLineItem}
-				lineItem={lineItem}
 				status={status}
 				jobType={jobType}
 				billId={billId}
-				checkItem={checkItem}
+				lineItemsCheck={checkItem?.lineItemsCheck}
 				setCheckItem={setCheckItem}
 			/>
 		</div>

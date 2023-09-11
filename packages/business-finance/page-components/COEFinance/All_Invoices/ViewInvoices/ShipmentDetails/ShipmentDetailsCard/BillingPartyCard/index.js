@@ -22,9 +22,11 @@ function BillingPartyCard({
 	isDisabled = false,
 	status = '',
 	docContent = '',
+	setCheckItem = () => {},
 }) {
-	let labelClassName;
 	const [showDetails, setShowDetails] = useState(false);
+
+	let labelClassName;
 	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
 		labelClassName = styles.label_approved;
 	} else if (rejected.includes(CARD_ID)) {
@@ -40,6 +42,17 @@ function BillingPartyCard({
 	} else if (rejected.includes(CARD_ID)) {
 		iconElement = <IcMCrossInCircle height="17px" width="17px" />;
 	}
+
+	const onClickResponse = (response = true) => {
+		if (response) {
+			handleClick(id);
+		} else {
+			handleClickReject(id);
+		}
+		setCheckItem(
+			(prev) => ({ ...prev, billingPartyCheck: true }),
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -65,7 +78,15 @@ function BillingPartyCard({
 								}}
 								role="presentation"
 							>
-								<Button size="md" themeType="secondary">
+								<Button
+									onClick={() => {
+										setCheckItem(
+											(prev) => ({ ...prev, billingPartyCheck: false }),
+										);
+									}}
+									size="md"
+									themeType="secondary"
+								>
 									Undo
 								</Button>
 							</div>
@@ -75,9 +96,7 @@ function BillingPartyCard({
 									disabled={!isDisabled(status)}
 									size="md"
 									themeType="secondary"
-									onClick={() => {
-										handleClick(id);
-									}}
+									onClick={() => { onClickResponse(true); }}
 								>
 									Approve
 								</Button>
@@ -86,9 +105,7 @@ function BillingPartyCard({
 									size="md"
 									themeType="secondary"
 									style={{ border: '1px solid #ed3726' }}
-									onClick={() => {
-										handleClickReject(id);
-									}}
+									onClick={() => { onClickResponse(false); }}
 								>
 									Reject
 								</Button>

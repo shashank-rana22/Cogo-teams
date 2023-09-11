@@ -39,12 +39,12 @@ interface LineItemCardInterface {
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	invoiceType?: string;
-	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
 	shipmentType: string;
 	tdsRate: string | number;
 	paidTds: string | number;
 	subTotal: string | number;
+	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const PERCENTAGE_FACTOR = 100;
@@ -63,12 +63,12 @@ function LineItemCard({
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
 	invoiceType = '',
-	setLineItem = () => {},
 	isInvoiceApproved = false,
 	shipmentType = '',
 	tdsRate = 0,
 	paidTds = 0,
 	subTotal = 0,
+	setCheckItem = () => {},
 }: LineItemCardInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [approvedItems, setApprovedItems] = useState({});
@@ -88,11 +88,15 @@ function LineItemCard({
 
 	useEffect(() => {
 		if (lineItems?.length === ApproveCheck + RejectCheck) {
-			setLineItem(true);
+			setCheckItem(
+				(prev) => ({ ...prev, lineItemsCheck: true }),
+			);
 		} else if (lineItems?.length !== ApproveCheck + RejectCheck) {
-			setLineItem(false);
+			setCheckItem(
+				(prev) => ({ ...prev, lineItemsCheck: false }),
+			);
 		}
-	}, [ApproveCheck, RejectCheck, lineItems?.length, setLineItem]);
+	}, [ApproveCheck, RejectCheck, lineItems?.length, setCheckItem]);
 
 	const handleApproveClick = (key = '') => {
 		setApprovedItems((previousActions: any) => ({

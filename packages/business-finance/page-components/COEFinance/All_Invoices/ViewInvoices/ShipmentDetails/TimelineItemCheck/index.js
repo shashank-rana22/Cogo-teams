@@ -16,6 +16,7 @@ const ITEMS = {
 
 function TimeLineItemCheck({ checkItem = {}, status = '' }) {
 	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
+
 	return (
 		<div className={styles.timeline}>
 			{Object.keys(ITEMS).map((itemKey) => (

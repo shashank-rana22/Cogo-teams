@@ -27,6 +27,7 @@ function InvoiceDetailsCard({
 	advancedPaymentObj = {},
 	setShowHighAdvancedModal = () => {},
 	docContent = '',
+	setCheckItem = () => {},
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -74,6 +75,17 @@ function InvoiceDetailsCard({
 
 	const getColor = (value) => (docContent?.includes(value) ? 'green' : 'auto');
 
+	const onClickResponse = (response = true) => {
+		if (response) {
+			handleClick(id);
+		} else {
+			handleClickReject(id);
+		}
+		setCheckItem(
+			(prev) => ({ ...prev, invoiceDetailsCheck: true }),
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
@@ -99,7 +111,15 @@ function InvoiceDetailsCard({
 								}}
 								role="presentation"
 							>
-								<Button size="md" themeType="secondary">
+								<Button
+									onClick={() => {
+										setCheckItem(
+											(prev) => ({ ...prev, invoiceDetailsCheck: false }),
+										);
+									}}
+									size="md"
+									themeType="secondary"
+								>
 									Undo
 								</Button>
 							</div>
@@ -109,9 +129,7 @@ function InvoiceDetailsCard({
 									disabled={!isDisabled(status)}
 									size="md"
 									themeType="secondary"
-									onClick={() => {
-										handleClick(id);
-									}}
+									onClick={() => { onClickResponse(true); }}
 								>
 									Approve
 								</Button>
@@ -120,9 +138,7 @@ function InvoiceDetailsCard({
 									size="md"
 									themeType="secondary"
 									style={{ border: '1px solid #ed3726' }}
-									onClick={() => {
-										handleClickReject(id);
-									}}
+									onClick={() => { onClickResponse(false); }}
 								>
 									Reject
 								</Button>
@@ -228,10 +244,8 @@ function InvoiceDetailsCard({
 								/>
 							)}
 					</div>
-
 				</div>
 			) : undefined}
-
 		</div>
 	);
 }

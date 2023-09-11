@@ -58,7 +58,7 @@ function RejectModal({
 							size="md"
 							placeholder="Remarks Here ..."
 							style={{ width: '700', height: '100px' }}
-							value={remarksVal?.collectionPartyRemark[remarksVal
+							value={remarksVal?.collectionPartyRemark?.[remarksVal
 								.collectionPartyRemark.length - CHECK_REMARK_LENGTH]}
 							onChange={(value) => setRemarksVal({
 								...remarksVal,
@@ -87,7 +87,7 @@ function RejectModal({
 							name="remark"
 							size="md"
 							placeholder="Remarks Here ..."
-							value={remarksVal.billingPartyRemark[remarksVal
+							value={remarksVal?.billingPartyRemark?.[remarksVal
 								.billingPartyRemark.length - CHECK_REMARK_LENGTH]}
 							onChange={(value) => setRemarksVal({
 								...remarksVal,
@@ -128,7 +128,7 @@ function RejectModal({
 							name="remark"
 							size="md"
 							placeholder="Remarks Here ..."
-							value={remarksVal.invoiceDetailsRemark[remarksVal
+							value={remarksVal?.invoiceDetailsRemark?.[remarksVal
 								.invoiceDetailsRemark.length - CHECK_REMARK_LENGTH]}
 							onChange={(value) => setRemarksVal({
 								...remarksVal,

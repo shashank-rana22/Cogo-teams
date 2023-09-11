@@ -105,22 +105,23 @@ interface ShipmentDetailsInterface {
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	status: string;
 	jobType?:string;
 	billId?:string;
+	lineItemsCheck?: boolean;
 	setCheckItem: React.Dispatch<React.SetStateAction<{}>>,
 }
+
 function ShipmentDetails({
 	data = {},
 	remarksVal = {},
 	setRemarksVal = () => {},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
-	setLineItem = () => {},
 	status = '',
 	jobType = '',
 	billId = '',
+	lineItemsCheck = false,
 	setCheckItem = () => {},
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
@@ -374,8 +375,9 @@ function ShipmentDetails({
 						setRemarksVal={setRemarksVal}
 						lineItemsRemarks={lineItemsRemarks}
 						setLineItemsRemarks={setLineItemsRemarks}
-						setLineItem={setLineItem}
 						invoiceStatus={status}
+						lineItemsCheck={lineItemsCheck}
+						setCheckItem={setCheckItem}
 					/>
 				</div>
 			</div>

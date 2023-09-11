@@ -11,6 +11,10 @@ import styles from './styles.module.css';
 interface BillAdditionalInterface {
 	collectionPartyId?: string;
 }
+
+interface CheckItemInterface {
+	lineItemsCheck?: boolean;
+}
 interface DataInterface {
 	billAdditionalObject?: BillAdditionalInterface;
 }
@@ -19,11 +23,10 @@ interface HeaderInterface {
 	remarksVal?: RemarksValInterface;
 	overAllRemark?:string;
 	setOverAllRemark?:Function;
-	lineItem?: boolean;
 	lineItemsRemarks: object;
 	status: string;
 	jobNumber?:string;
-	checkItem?: object;
+	checkItem?: CheckItemInterface;
 }
 
 function Header({
@@ -31,7 +34,6 @@ function Header({
 	remarksVal,
 	overAllRemark,
 	setOverAllRemark,
-	lineItem,
 	lineItemsRemarks,
 	status,
 	jobNumber,
@@ -97,7 +99,7 @@ function Header({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '8px' }}
-						disabled={!lineItem || isApproveDisabled}
+						disabled={!checkItem?.lineItemsCheck || isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Approve
@@ -114,7 +116,7 @@ function Header({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={!lineItem || !isApproveDisabled}
+						disabled={!checkItem?.lineItemsCheck || !isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject

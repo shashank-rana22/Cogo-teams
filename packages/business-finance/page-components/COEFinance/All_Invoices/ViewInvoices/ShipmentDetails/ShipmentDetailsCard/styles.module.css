@@ -42,3 +42,7 @@
 	font-weight: 600;
 	color: red;
 }
+
+.status_completed_text {
+	margin-right: 2px;
+}
