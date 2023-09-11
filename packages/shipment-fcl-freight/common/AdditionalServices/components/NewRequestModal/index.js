@@ -31,10 +31,11 @@ const getCollectionPartyParams = (organization_id = '') => ({
 function NewRequestModal({
 	showRequestModal = false,
 	setShowRequestModal = () => {},
+	getShipmentRefetch = () => {},
 }) {
 	const { partner, user } = useSelector(({ profile }) => profile);
 
-	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal });
+	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal, getShipmentRefetch });
 	const { listEntities = {} } = useGetEntities();
 
 	const { primary_service = {}, shipment_data: { serial_id } } = useContext(ShipmentDetailContext);

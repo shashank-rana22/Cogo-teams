@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 
-const useAdvanceDocument = ({ setShowRequestModal = () => {} }) => {
+const useAdvanceDocument = ({ setShowRequestModal = () => {}, getShipmentRefetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequestBf({
 		url     : '/purchase/advance-document',
 		method  : 'POST',
@@ -14,6 +14,7 @@ const useAdvanceDocument = ({ setShowRequestModal = () => {} }) => {
 			await trigger({ data: { ...val } });
 			Toast.success('Success');
 			setShowRequestModal(false);
+			getShipmentRefetch();
 		} catch (err) {
 			toastApiError(err);
 		}
