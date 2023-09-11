@@ -1,9 +1,12 @@
-import { Input, Checkbox } from '@cogoport/components';
+import { Checkbox } from '@cogoport/components';
+import {
+	InputController,
+} from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsConditions() {
+function TermsConditions({ control = {}, errors = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>
@@ -32,7 +35,17 @@ function TermsConditions() {
 						Full Name
 					</div>
 					<div className={styles.name_input_container}>
-						<Input size="md" placeholder="Type your notes here" className={styles.name_input} />
+						<InputController
+							size="sm"
+							placeholder="Enter your full name"
+							control={control}
+							name="name"
+							rules={{ required: 'this is required' }}
+						/>
+
+						{errors.name && (
+							<span className={styles.error}>*required</span>
+						)}
 					</div>
 				</div>
 			</div>

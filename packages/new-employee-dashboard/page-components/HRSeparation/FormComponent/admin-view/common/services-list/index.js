@@ -1,4 +1,5 @@
-import { Select, Input, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
+import { InputController, SelectController } from '@cogoport/forms';
 import { IcMArrowDown, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -13,11 +14,11 @@ const company_assets = [
 	{ label: 'Not Collected', value: 'notcollected' },
 	{ label: 'Not Allocated', value: 'notallocated' }];
 
-function Servicelist({ source = 'admin-clearance' }) {
-	const [show, setShow] = useState(false);
-	const [idCardStatus, setIdCardStatus] = useState(null);
-	const [accesscard, setaccesscard] = useState(null);
-	const [companyAssetsStatus, setcompanyAssetsStatus] = useState(null);
+function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) {
+	const [show, setShow] = useState(true);
+	// const [idCardStatus, setIdCardStatus] = useState(null);
+	// const [accesscard, setaccesscard] = useState(null);
+	// const [companyAssetsStatus, setcompanyAssetsStatus] = useState(null);
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
@@ -54,48 +55,91 @@ function Servicelist({ source = 'admin-clearance' }) {
 			<div className={show ? styles.item_container : styles.item_container_closed}>
 				<div className={styles.detail}>
 					<div className={styles.label}>ID Card Collection</div>
-					<Select
-						size="md"
-						value={idCardStatus}
-						onChange={(value) => setIdCardStatus(value)}
-						placeholder="Select Status"
+					<SelectController
+						size="sm"
+						control={control}
+						name="idcardstatus"
 						options={id_card_options}
+						rules={{ required: 'this is required' }}
 					/>
+					{errors.idcardstatus && (
+						<span className={styles.error}>*required</span>
+					)}
 				</div>
 
 				<div className={styles.detail}>
 					<div className={styles.label}>Access Card Collection</div>
-					<Select
-						size="md"
-						value={accesscard}
-						onChange={(value) => setaccesscard(value)}
-						placeholder="Select Status"
+					<SelectController
+						size="sm"
+						control={control}
+						name="accesscardstatus"
 						options={access_card_options}
+						rules={{ required: 'this is required' }}
 					/>
+					{errors.accesscardstatus && (
+						<span className={styles.error}>*required</span>
+					)}
+				</div>
+
+				<div className={styles.detail}>
+					<div className={styles.label}>Company Assets</div>
+					<SelectController
+						size="sm"
+						control={control}
+						name="companyassets"
+						options={company_assets}
+						rules={{ required: 'this is required' }}
+					/>
+					{errors.companyassets && (
+						<span className={styles.error}>*required</span>
+					)}
 				</div>
 
 				<div className={styles.detail}>
 					<div className={styles.label}>Parking Charges</div>
-					<Input size="md" placeholder="Select Status" />
+					<InputController
+						size="sm"
+						placeholder="Enter a number"
+						control={control}
+						name="parkingcharges"
+						rules={{ required: 'this is required' }}
+					/>
+
+					{errors.parkingcharges && (
+						<span className={styles.error}>*required</span>
+					)}
 				</div>
+
 				<div className={styles.detail}>
 					<div className={styles.label}>Other Charges</div>
-					<Input size="md" placeholder="Select Status" />
+					<InputController
+						size="sm"
+						placeholder="Enter a number"
+						control={control}
+						name="othercharges"
+						rules={{ required: 'this is required' }}
+					/>
+					{errors.othercharges && (
+						<span className={styles.error}>*required</span>
+					)}
+
 				</div>
+
 				<div className={styles.detail}>
 					<div className={styles.label}>Specify Other Charges</div>
-					<Input size="md" placeholder="Select Status" />
-				</div>
-				<div className={styles.detail}>
-					<div className={styles.label}>Company Assets</div>
-					<Select
-						size="md"
-						value={companyAssetsStatus}
-						onChange={(value) => setcompanyAssetsStatus(value)}
-						placeholder="Select Status"
-						options={company_assets}
+					<InputController
+						size="sm"
+						placeholder="Specify"
+						control={control}
+						name="specify"
+						rules={{ required: 'this is required' }}
 					/>
+					{errors.specify && (
+						<span className={styles.error}>*required</span>
+					)}
+
 				</div>
+
 			</div>
 
 		</div>

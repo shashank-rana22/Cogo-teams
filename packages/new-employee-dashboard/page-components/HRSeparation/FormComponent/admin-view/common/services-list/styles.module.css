@@ -23,6 +23,13 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.error {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #cb6464;
+}
+
 .item_container_closed {
 	display: flex;
 	flex-wrap: wrap;

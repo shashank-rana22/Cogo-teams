@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OpenModal({ show, onClose }) {
+function OpenModal({ show, onClose, onSubmit }) {
 	return (
 		<Modal size="sm" show={show} onClose={onClose} placement="center" className={styles.modalcontainer}>
 
@@ -36,7 +36,7 @@ function OpenModal({ show, onClose }) {
 					size="md"
 					themeType="Accent"
 					className={styles.proceed_modal_btn}
-					onClick={() => onClose()}
+					onClick={() => onSubmit()}
 				>
 					Yes, Proceed
 				</Button>
