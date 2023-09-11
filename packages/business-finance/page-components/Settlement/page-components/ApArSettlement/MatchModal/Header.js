@@ -79,14 +79,14 @@ function Header(
 			<br />
 
 			<div className={styles.balanceStyle}>
-				<div className={styles.overflowStyle}>
-					<div className={styles.matchBalStyle}>
+				<div className={styles.overflow_style}>
+					<div className={styles.match_bal_style}>
 						Matching Balance
 						<p className={styles.paragraph}>
 							{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
 						</p>
 					</div>
-					<div className={styles.overFlowDot}>
+					<div className={styles.overflow_dot}>
 						<IcMOverflowDot
 							height={20}
 							width={20}
