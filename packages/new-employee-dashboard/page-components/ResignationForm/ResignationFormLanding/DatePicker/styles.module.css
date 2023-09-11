@@ -61,3 +61,10 @@
 	font-weight: 400;
 	color: #4f4f4f;
 }
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}

@@ -1,18 +1,21 @@
 import { Button } from '@cogoport/components';
 import {
-	CheckboxController,
-	useForm,
+	CheckboxGroupController,
 } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function ServiceList() {
+function ServiceList({ control, errors }) {
 	const [show, setShow] = useState(false);
-	const { control, formState:{ errors = {} } } = useForm();
 
-	const SERVICE_CHECKBOX_LIST = ['Cloud Services', 'Atlassian', 'Figma', 'Github'];
+	const SERVICE_CHECKBOX_LIST = [
+		{ label: 'Atlassian', value: 'atlassian' },
+		{ label: 'GitHub', value: 'github' },
+		{ label: 'CloudServices', value: 'cloudservices' },
+		{ label: 'asdfgh', value: 'werty' },
+	];
 
 	return (
 		<div className={styles.container}>
@@ -32,15 +35,13 @@ function ServiceList() {
 			</div>
 			<div className={show ? styles.item_container : styles.item_container_closed}>
 
-				{SERVICE_CHECKBOX_LIST.map((val) => (
-					<CheckboxController
-						key={val}
-						name={val}
-						label={val}
-						control={control}
-						errors={errors}
-					/>
-				))}
+				<CheckboxGroupController
+					control={control}
+					errors={errors}
+					options={SERVICE_CHECKBOX_LIST}
+					className={styles.check_box_controller}
+					name="service_list"
+				/>
 			</div>
 		</div>
 	);

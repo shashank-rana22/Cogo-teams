@@ -20,7 +20,7 @@
 .item_container {
 	display: flex;
 	flex-wrap: wrap;
-	height: 320px;
+	height: 360px;
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }

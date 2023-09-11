@@ -1,17 +1,14 @@
-import { useForm } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import getElementController from '../../configs/getElementController';
-import controls from '../../constants/controls';
+import getElementController from '../configs/getElementController';
+import controls from '../constants/controls';
 
 import styles from './styles.module.css';
 
-function ResignEmployeeDetails() {
+function ResignEmployeeDetails({ control, errors }) {
 	const [show, setShow] = useState(true);
-
-	const { control, formState:{ errors } } = useForm();
 
 	return (
 		<div className={styles.container}>
@@ -49,7 +46,7 @@ function ResignEmployeeDetails() {
 								/>
 								{errors[controlItem.name] && (
 									<div className={styles.error_msg}>
-										This is Required
+										*This is Required
 									</div>
 								)}
 							</div>

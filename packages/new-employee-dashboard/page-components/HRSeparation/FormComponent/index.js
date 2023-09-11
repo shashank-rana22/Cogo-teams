@@ -50,7 +50,7 @@ function FormComponent() {
 
 	console.log('data :: ', data);
 
-	const Render = COMPONENT_MAPPING.employee.HOTOClearance;
+	const Render = COMPONENT_MAPPING.tech.tech_clearance;
 
 	return (
 		<div className={styles.container}>
