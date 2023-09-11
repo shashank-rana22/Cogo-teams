@@ -101,8 +101,8 @@ function CogoOne() {
 		viewType,
 		userSharedMails,
 		activeMail    : activeTab?.data,
-		setActiveMail : (val) => {
-			setActiveTab((prev) => ({ ...prev, data: val }));
+		setActiveMail : ({ val = {}, tab = '' }) => {
+			setActiveTab((prev) => ({ ...prev, data: val, tab, expandSideBar: false }));
 		},
 		userId,
 		userName,

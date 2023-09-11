@@ -1,6 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { isEmpty } from '@cogoport/utils';
-import { debounce } from '@cogoport/utils';
 import { collection, query, where, limit, getDocs, orderBy } from 'firebase/firestore';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -9,7 +7,6 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 const PAGE_LIMIT = 10;
 const MAX_DISTANCE_FROM_BOTTOM = 10;
 const FIRST = 1;
-const DEBOUNCE_TIME = 600;
 
 function useGetAllMailsForUser({ firestore = {}, userId }) {
 	const [mailData, setMailData] = useState({
@@ -19,9 +16,15 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 		loading              : false,
 	});
 
-	const { loading, mailsListData, isLastPage, lastMessageTimeStamp } = mailData;
+	const { loading, mailsListData, isLastPage } = mailData;
 
-	const getFilteredMails = debounce(useCallback(async () => {
+	const getFilteredMails = useCallback(async ({ lastMessageTimeStamp }) => {
+		if (!userId) {
+			return;
+		}
+		setMailData(
+			(prev) => ({ ...prev, loading: true }),
+		);
 		const filteredMailsQuery = query(
 			collection(firestore, FIRESTORE_PATH.email),
 			where('user_id', '==', userId),
@@ -45,36 +48,45 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 			const isLast = filteredMails?.length < PAGE_LIMIT;
 			setMailData((prev) => ({
 				...prev,
-				mailsListData        : [...prev?.mailsListData || [], ...filteredMails],
+				mailsListData        : [...(prev?.mailsListData || []), ...filteredMails],
 				isLastPage           : isLast,
 				lastMessageTimeStamp : newTimeStamp,
 				loading              : false,
 			}));
 		} catch (error) {
 			console.error('Error fetching filtered mails:', error);
+			setMailData(
+				(prev) => ({ ...prev, loading: false }),
+			);
 		}
-	}, [firestore, lastMessageTimeStamp, userId]), DEBOUNCE_TIME);
+	}, [firestore, userId]);
 
 	const handleScroll = useCallback((e) => {
 		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop)
           <= MAX_DISTANCE_FROM_BOTTOM;
 		if (reachBottom && !isLastPage && !loading) {
-			setMailData((prev) => ({ ...prev, loading: true }));
-			getFilteredMails();
+			getFilteredMails({ lastMessageTimeStamp: mailData?.lastMessageTimeStamp });
 		}
-	}, [getFilteredMails, isLastPage, loading]);
+	}, [getFilteredMails, isLastPage, loading, mailData?.lastMessageTimeStamp]);
 
 	useEffect(() => {
-		if (mailsListData <= PAGE_LIMIT && !loading && !isLastPage) {
-			setMailData((prev) => ({ ...prev, loading: true }));
-			getFilteredMails();
-		}
-	}, [getFilteredMails, userId, isLastPage, loading, mailsListData]);
+		setMailData(
+			{
+				mailsListData        : [],
+				lastMessageTimeStamp : Date.now(),
+				isLastPage           : false,
+				loading              : false,
+			},
+		);
+		getFilteredMails({ lastMessageTimeStamp: Date.now() });
+	}, [getFilteredMails, userId]);
 
 	return {
 		mailsListData,
 		handleScroll,
 		mailListLoading: loading,
+		getFilteredMails,
+		setMailData,
 	};
 }
 

@@ -62,6 +62,7 @@ function MailsList({
 					activeMailAddress={activeMailAddress}
 					appliedFilters={appliedFilters}
 					setAppliedFilters={setAppliedFilters}
+					activeTab={activeTab}
 				/>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { cl, Avatar } from '@cogoport/components';
+import { Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
@@ -8,18 +8,15 @@ import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
-function MailsCardData({ item = {} }) {
+function MailsCardData({ item = {}, setActiveMail = () => {} }) {
 	const formattedData = getActiveCardDetails(item) || {};
 
 	const {
 		search_user_name = '',
 		chat_tags = [],
-		// id = '',
 		new_message_sent_at = '',
-		// pinnedTime = {},
 		last_message = '',
 		last_message_document: lastMessageDocument = null,
-		new_message_count = 0,
 	} = formattedData || {};
 
 	const { response = {} } = lastMessageDocument || {};
@@ -34,10 +31,9 @@ function MailsCardData({ item = {} }) {
 
 	return (
 		<div
-			className={cl`
-						${styles.mail_card} 
-						${new_message_count ? styles.border_left : styles.no_border_left}
-					`}
+			className={styles.mail_card}
+			onClick={() => setActiveMail({ val: item, tab: 'firebase_emails' })}
+			role="presentation"
 		>
 			<div className={styles.header_card}>
 				<Avatar

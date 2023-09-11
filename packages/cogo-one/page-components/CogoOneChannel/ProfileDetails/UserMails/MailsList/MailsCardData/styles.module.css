@@ -1,20 +1,18 @@
 .mail_card {
-	padding: 8px 8px 8px 10px;
-	margin: 2px 0 12px;
+	position: relative;
+	padding: 8px 8px 8px 20px;
 	cursor: pointer;
 	background: #fff;
-	border-radius: 12px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
-	animation-name: styles_zoomin__rhnxM;
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
+	border-bottom: 1px solid #e0e0e0;
+	transition: 0.3s ease-in-out;
 
 	&:hover {
 		background: #fdfbf6;
+		transform: scale(1.02);
 	}
 
 	&:last-child {
-		margin-bottom: 5px;
+		margin-top: none;
 	}
 }
 
@@ -25,15 +23,6 @@
 .border_left {
 	border-left: 3px solid var(--color-primary-error-red-2);
 }
-
-/* .active_card {
-	background: #fbf7ec;
-} */
-
-/* .card {
-	padding: 8px;
-	cursor: pointer;
-} */
 
 .header_card {
 	display: flex;

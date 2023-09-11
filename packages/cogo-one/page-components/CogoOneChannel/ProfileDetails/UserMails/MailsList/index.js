@@ -1,17 +1,20 @@
 import { isEmpty } from '@cogoport/utils';
 
+import LoadingState from '../../../Customers/LoadingState';
+
 import MailsCardData from './MailsCardData';
 import styles from './styles.module.css';
 
 function MailsList({
 	mailsListData = [], handleScroll = () => {},
 	mailListLoading = false,
+	setActiveMail = () => {},
 }) {
 	return (
-		<div>
+		<div className={styles.container}>
 			{(isEmpty(mailsListData) && !mailListLoading)
 				? (
-					<div>No Emails Yet..</div>
+					<div className={styles.empty_div}>No Emails Yet..</div>
 				) :	(
 					<div
 						onScroll={handleScroll}
@@ -21,9 +24,10 @@ function MailsList({
 							<MailsCardData
 								key={item?.id}
 								item={item}
+								setActiveMail={setActiveMail}
 							/>
 						))}
-						{mailListLoading ? <div>Loading</div> : null}
+						{mailListLoading ? <LoadingState /> : null}
 					</div>
 				)}
 		</div>

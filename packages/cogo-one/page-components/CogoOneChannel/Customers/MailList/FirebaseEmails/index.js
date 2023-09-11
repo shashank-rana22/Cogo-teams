@@ -16,7 +16,7 @@ function FirebaseEmails(messageProps) {
 	const {
 		activeFolder = '',
 		setActiveTab = () => {},
-		activeTab = '',
+		activeTab = {},
 		tagOptions = [],
 		userId = '',
 		firestore = {},

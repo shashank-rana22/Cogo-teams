@@ -1,5 +1,13 @@
 .header {
-	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	font-weight: 600;
 	color: #4f4f4f;
+}
+
+.refresh_icon {
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
 }
