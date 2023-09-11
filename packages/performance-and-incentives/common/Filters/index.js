@@ -1,18 +1,15 @@
 import { Button, Popover } from '@cogoport/components';
-import { useTranslation } from 'next-i18next';
 
 import FilterContent from './FiltersContent';
 import styles from './styles.module.css';
 
 function Filters(props) {
-	const { t } = useTranslation(['allocation']);
-
 	const {
 		children = null,
 		open = false,
 		setOpen = () => {},
-		name = '',
-		heading = '',
+		name = 'Apply',
+		heading = 'Search',
 		placement = 'bottom',
 		reset = () => {},
 		applyFilters = () => {},
@@ -31,10 +28,6 @@ function Filters(props) {
 		setOpen(false);
 	};
 
-	const defaultName = name || t('allocation:apply_button');
-
-	const defaultHeading = heading || t('allocation:search_label');
-
 	return (
 		<div className={styles.popover_container}>
 			<Popover
@@ -44,7 +37,7 @@ function Filters(props) {
 				onClickOutside={onClickOutside}
 				render={open ? (
 					<FilterContent
-						heading={defaultHeading}
+						heading={heading}
 						controls={controls}
 						formProps={formProps}
 						onApplyingFilters={onApplyingFilters}
@@ -52,7 +45,7 @@ function Filters(props) {
 					/>
 				) : null}
 			>
-				{children || <Button onClick={() => setOpen(!open)}>{defaultName}</Button>}
+				{children || <Button onClick={() => setOpen(!open)}>{name}</Button>}
 			</Popover>
 		</div>
 	);
