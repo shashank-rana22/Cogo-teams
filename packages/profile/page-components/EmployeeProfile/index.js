@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import {
 	IcMArrowBack,
-	IcMArrowRight,
 	IcMEdit,
 	IcMBusiness,
 	IcMLocation,
@@ -21,7 +20,9 @@ function EmployeeProfile() {
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
+
 	const { loading, data } = useGetEmployeeDetails(user.id);
+
 	if (loading) {
 		return 'loading';
 	}
@@ -36,18 +37,6 @@ function EmployeeProfile() {
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.top_text}>
-				<span className={styles.top_employee_directory}>
-					Employee Directory
-				</span>
-				<IcMArrowRight width={16} height={16} />
-				<span className={styles.user_name}>User Name</span>
-			</div>
-			<div className={styles.head_line}>
-				<IcMArrowBack width={19} height={19} />
-				<span className={styles.employee_directory}>Employee Directory</span>
-			</div>
-
 			<div className={styles.profile_container}>
 				<div className={styles.profile_flex}>
 					<div className={styles.left_image} />
@@ -106,7 +95,7 @@ function EmployeeProfile() {
 						</div>
 					</div>
 				</div>
-				<TabsPanel loading={loading} data={data} />
+				<TabsPanel data={data} />
 			</div>
 		</div>
 	);

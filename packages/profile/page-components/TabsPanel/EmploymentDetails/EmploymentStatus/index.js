@@ -13,13 +13,11 @@ function EmploymentStatus({ data: { job_history } = {} }) {
 			Header   : 'EFFECTIVE FROM',
 			accessor : (item) => (
 				<div className={styles.table_item}>
-
-					{item.effectiveFrom}
-					{formatDate({
-						date       : item?.effectiveFrom || '-',
+					{(item?.effectiveFrom) ? formatDate({
+						date       : item.effectiveFrom,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})}
+					}) : ' — '}
 				</div>
 			),
 			id: 'effectiveFrom',
@@ -28,12 +26,11 @@ function EmploymentStatus({ data: { job_history } = {} }) {
 			Header   : 'EFFECTIVE TO',
 			accessor : (item) => (
 				<div className={styles.table_item}>
-					{item.effectiveTo}
-					{formatDate({
-						date       : item?.effectiveTo || '-',
+					{(item?.effectiveTo) ? formatDate({
+						date       : item.effectiveTo,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})}
+					}) : ' — '}
 				</div>
 			),
 			id: 'effectiveTo',
@@ -42,12 +39,11 @@ function EmploymentStatus({ data: { job_history } = {} }) {
 			Header   : 'CONFIRMATION DUE DATE',
 			accessor : (item) => (
 				<div className={styles.table_item}>
-					{item.confirmationDueDate}
-					{formatDate({
-						date       : item?.confirmationDueDate || '-',
+					{(item?.confirmationDueDate) ? formatDate({
+						date       : item.confirmationDueDate,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})}
+					}) : ' — ' }
 				</div>
 			),
 			id: 'confirmationDueDate',
@@ -56,19 +52,18 @@ function EmploymentStatus({ data: { job_history } = {} }) {
 			Header   : 'CONFIRMATION DATE',
 			accessor : (item) => (
 				<div className={styles.table_item}>
-					{item.confirmationDate}
-					{formatDate({
-						date       : item?.confirmationDate || '-',
+					{(item?.confirmationDate) ? formatDate({
+						date       : item.confirmationDate,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})}
+					}) : ' — '}
 				</div>
 			),
 			id: 'confirmationDate',
 		},
 		{
 			Header   : 'STATUS',
-			accessor : (item) => (<div className={styles.table_item}>{item?.status || '-'}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{item?.status || ' — '}</div>),
 			id       : 'status',
 		},
 		{
@@ -84,7 +79,7 @@ function EmploymentStatus({ data: { job_history } = {} }) {
 
 	const data = job_history.map((job) => ({
 		effectiveFrom       : job.effective_from,
-		effectiveTo         : job.effective_from,
+		effectiveTo         : job.effective_to,
 		confirmationDueDate : job.confirmation_due_date,
 		confirmationDate    : job.confirmation_date,
 		status              : job.employee_status,

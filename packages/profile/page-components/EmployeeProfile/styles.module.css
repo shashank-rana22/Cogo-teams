@@ -4,45 +4,6 @@
 	background: #f9f5ec;
 }
 
-.top_text {
-	display: inline-flex;
-	flex-direction: row;
-	margin-bottom: 16px;
-	font-size: 12px;
-	line-height: 133.333%;
-	color: #4f4f4f;
-}
-
-.top_text > :not(:last-child) {
-	margin-right: 8px;
-}
-
-.top_employee_directory {
-	font-weight: 400;
-	text-decoration-line: underline;
-}
-
-.user_name {
-	font-weight: 500;
-}
-
-.head_line {
-	display: inline-flex;
-	align-items: center;
-	margin-bottom: 16px;
-	color: #221f20;
-}
-
-.head_line > :not(:last-child) {
-	margin-right: 8px;
-}
-
-.employee_directory {
-	font-size: 24px;
-	font-weight: 500;
-	line-height: 150%;
-}
-
 .profile_container {
 	display: flex;
 	flex-direction: column;

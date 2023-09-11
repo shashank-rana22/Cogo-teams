@@ -14,7 +14,7 @@ function EmploymentDetails({ data = {} }) {
 			details : [
 				{ label: 'Employee Code', key: 'details', value: 'employee_code' },
 				{ label: 'Employment Type', key: 'details', value: 'employee_type' },
-				{ label: 'Joining Date', key: 'details', value: 'date_of_joining' },
+				{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
 				{ label: 'Age in Organization', key: 'processed', value: 'age_in_organization' },
 			],
 		},

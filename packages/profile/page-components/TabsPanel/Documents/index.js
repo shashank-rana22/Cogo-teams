@@ -5,6 +5,7 @@ import { IcMDownload } from '@cogoport/icons-react';
 import React from 'react';
 
 import StyledTable from '../../../common/StyledTable';
+import { DOCUMENT_MAPPING } from '../../../utils/constants';
 import RightGlance from '../RightGlance';
 
 import styles from './styles.module.css';
@@ -19,8 +20,8 @@ function Documents({ data: employeeData = {} }) {
 		},
 		{
 			Header   : 'UPDATED AT',
-			accessor : (item) => (<div className={styles.table_item}>{item.updateAt}</div>),
-			id       : 'updateAt',
+			accessor : (item) => (<div className={styles.table_item}>{item.updatedAt}</div>),
+			id       : 'updatedAt',
 		},
 		{
 			Header   : 'ACTION',
@@ -51,9 +52,9 @@ function Documents({ data: employeeData = {} }) {
 		{
 			heading : 'Employee Letters',
 			data    : signed_documents.map((document) => ({
-				name     : document.name,
-				updateAt : formatDate({
-					date       : document.update_at || '-',
+				name      : document.name,
+				updatedAt : (document?.updated_at === undefined) ? ' — ' : formatDate({
+					date       : document.updated_at,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				}),
@@ -63,9 +64,9 @@ function Documents({ data: employeeData = {} }) {
 		{
 			heading : 'Other Documents',
 			data    : other_documents.map((document) => ({
-				name     : document.name,
-				updateAt : formatDate({
-					date       : document.update_at || '-',
+				name      : DOCUMENT_MAPPING[document.document_type],
+				updatedAt : (document?.updated_at === undefined) ? ' — ' : formatDate({
+					date       : document.updated_at,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				}),

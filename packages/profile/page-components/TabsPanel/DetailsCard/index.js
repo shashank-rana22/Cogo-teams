@@ -5,9 +5,10 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
-	const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data;
-	const { present_address } = employee_detail;
-	const { family_details } = personal_details;
+	const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
+	const { present_address } = employee_detail || {};
+
+	const { family_details } = personal_details || {};
 
 	function labelValue(value, key) {
 		if (key === null) {
@@ -22,7 +23,7 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 			personal  : getByKey(personal_details, value),
 			family    : getByKey(family_details, value),
 		};
-		return mapping[key];
+		return (mapping[key]) ? mapping[key] : ' — ';
 	}
 
 	return (

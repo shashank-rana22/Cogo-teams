@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Documents from './Documents';
+import EducationDetails from './EducationDetails';
 import EmploymentDetails from './EmploymentDetails/index';
 import OtherDetails from './OtherDetails';
 import PersonalDetails from './PersonalDetails/index';
@@ -9,7 +10,7 @@ import SalaryDetails from './SalaryDetails';
 import StatutoryDetails from './StatutoryDetails';
 import styles from './styles.module.css';
 
-function TabsPanel({ data }) {
+function TabsPanel({ data = {} }) {
 	const [activeTab, setActiveTab] = useState('personal_details');
 
 	return (
@@ -25,7 +26,7 @@ function TabsPanel({ data }) {
 						<PersonalDetails data={data} />
 					</TabPanel>
 					<TabPanel name="education_and_skills" title="Education & Skills">
-						<div>This is suggested</div>
+						<EducationDetails data={data} />
 					</TabPanel>
 					<TabPanel name="employment_details" title="Employment Details">
 						<EmploymentDetails data={data} />
