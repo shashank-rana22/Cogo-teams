@@ -135,14 +135,16 @@
 	display: flex;
 	align-items: center;
 }
+
 .matchBalStyle {
 	display: flex;
 	flex-direction: column;
 	font-size: 16px;
 }
+
 .overFlowDot {
 	display: flex;
 	align-items: center;
-	margin-left: 5px; 
+	margin-left: 5px;
 	cursor: pointer;
 }
