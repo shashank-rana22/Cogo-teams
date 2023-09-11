@@ -5,7 +5,8 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-import changeFormat from '../utils/changeFormat';
+// import changeFormat from '../utils/changeFormat';
+import createPayload from '../utils/createPayload';
 import getConfig from '../utils/getConfig';
 import getKeyByValue from '../utils/getKeyByValue';
 import onClearingFilters from '../utils/onClearingFilters';
@@ -29,8 +30,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
 	const {
-		entity = '', currency: queryCurr = '', payrun = '', organizationId = '',
-		services = '', payrun_type = '', partner_id = '',
+		entity = '', currency: queryCurr = '', payrun_type = '', partner_id = '',
 	} = urlQuery || {};
 
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
@@ -62,9 +62,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		invoiceView : 'coe_accepted',
 	});
 
-	const { search = '', dueDate = '', invoiceDate = '', updatedDate = '', category = '', ...rest } = globalFilters;
-	const restParse = JSON.stringify(rest);
-	const sortParse = JSON.stringify(sort);
+	const { search = '' } = globalFilters;
 
 	useEffect(() => {
 		const newData = { ...data };
@@ -83,48 +81,25 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 
 	useEffect(() => { debounceQuery(search); }, [search, debounceQuery]);
 
-	const refetch = useCallback(() => {
-		const q = query || undefined;
-		trigger({
-			params: {
-				payrunId           : payrun,
-				entityCode         : entity,
-				currency           : queryCurr,
-				performedBy,
-				performedByType,
-				performedByName,
-				organizationId,
-				services,
-				category           : category || undefined,
-				...(JSON.parse(restParse) || {}),
-				startDate          : changeFormat({ time: dueDate?.startDate }) || undefined,
-				endDate            : changeFormat({ time: dueDate?.endDate }) || undefined,
-				fromBillDate       : changeFormat({ time: invoiceDate?.startDate }) || undefined,
-				toBillDate         : changeFormat({ time: invoiceDate?.endDate }) || undefined,
-				fromUploadBillDate : changeFormat({ time: updatedDate?.startDate }) || undefined,
-				toUploadBillDate   : changeFormat({ time: updatedDate?.endDate }) || undefined,
-				q,
-				...(JSON.parse(sortParse) || {}),
-			},
-		});
-	}, [
-		restParse,
-		dueDate,
-		invoiceDate,
-		updatedDate,
+	const payload = createPayload({
 		query,
-		category,
-		sortParse,
-		trigger,
-		entity,
-		organizationId,
-		payrun,
+		globalFilters,
+		sort,
 		performedBy,
 		performedByName,
 		performedByType,
-		queryCurr,
-		services,
-	]);
+		urlQuery,
+	});
+
+	const parserdData = JSON.stringify(payload);
+
+	const refetch = useCallback(() => {
+		trigger({
+			params: {
+				...(JSON.parse(parserdData) || {}),
+			},
+		});
+	}, [parserdData, trigger]);
 
 	useEffect(() => { refetch(); }, [refetch]);
 
