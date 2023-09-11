@@ -614,7 +614,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis   : ['list_checkouts'],
 			module_type : 'crm',
 		},
-
 		saas_tracking: {
 			key           : 'saas_tracking',
 			title         : t('common:container_tracking'),
@@ -829,8 +828,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		trade_parties: {
 			key           : 'trade_parties',
 			title         : t('common:trade_parties'),
-			href          : '/trade-parties',
-			as            : '/trade-parties',
+			href          : '/v2/trade-parties',
+			as            : '/v2/trade-parties',
 			icon          : IcMTradeparties,
 			type          : 'link',
 			possible_apis : apis.trade_parties,
@@ -1343,8 +1342,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'coe-cancellation_policies',
 					title         : t('common:cancellation_policies'),
-					href          : '/cancellation-policies',
-					as            : '/cancellation-policies',
+					href          : '/v2/cancellation-policies',
+					as            : '/v2/cancellation-policies',
 					type          : 'link',
 					main_apis     : ['list_shipment_cancellation_charges'],
 					possible_apis : apis.shipment_cancellation_policies,
