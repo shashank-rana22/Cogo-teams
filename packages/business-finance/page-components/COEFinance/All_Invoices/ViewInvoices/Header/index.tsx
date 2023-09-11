@@ -127,7 +127,6 @@ function Header({
 				status={status}
 			/>
 
-			<div className={styles.hr} />
 			{approve && (
 				<Modal
 					size="md"
