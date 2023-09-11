@@ -1,6 +1,5 @@
 .table_item {
 	display: flex;
-	flex-direction: row;
 }
 
 .table_item > :first-child {
@@ -9,8 +8,11 @@
 
 .tab_content {
 	display: flex;
-	flex-direction: row;
 	width: 100%;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .tab_content > :first-child {
@@ -23,6 +25,11 @@
 	margin-top: 16px;
 	background: #f9f9f9;
 	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		order: 2;
+		width: 100%;
+	}
 }
 
 .main_container > :not(:last-child) {
@@ -63,9 +70,21 @@
 	text-align: center;
 }
 
-.view_button {
+.view_text {
 	font-size: 12px;
 	font-weight: 500;
 	color: #221f20;
 	text-align: center;
+}
+
+.view_button {
+	display: flex;
+	align-items: center;
+}
+
+.download_button {
+	min-width: 32px;
+	height: fit-content;
+	padding: 8px;
+	border: none;
 }

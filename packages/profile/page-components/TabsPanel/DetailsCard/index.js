@@ -10,21 +10,29 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 
 	const { family_details } = personal_details || {};
 
-	function labelValue(value, key) {
-		if (key === null) {
-			return value;
-		}
-
-		const mapping = {
-			details   : getByKey(employee_detail, value),
-			address   : getByKey(present_address, value),
-			processed : getByKey(processed_employee_detail, value),
-			modified  : getByKey(modified_employee_detail, value),
-			personal  : getByKey(personal_details, value),
-			family    : getByKey(family_details, value),
+	const mapping = (key, value) => {
+		const getMapping = {
+			details   : employee_detail,
+			address   : present_address,
+			processed : processed_employee_detail,
+			modified  : modified_employee_detail,
+			personal  : personal_details,
+			family    : family_details,
 		};
-		return (mapping[key]) ? mapping[key] : ' — ';
-	}
+
+		return getByKey(getMapping[key], value);
+	};
+
+	const labelValue = (value, key) => {
+		if (Array.isArray(value)) {
+			let str = '';
+			value.forEach((Value) => {
+				str += `${mapping(key, Value)} `;
+			});
+			return (str === '  ') ? ' — ' : str;
+		}
+		return (mapping(key, value)) ? mapping(key, value) : ' — ';
+	};
 
 	return (
 		<div className={styles.info_subcontainer}>

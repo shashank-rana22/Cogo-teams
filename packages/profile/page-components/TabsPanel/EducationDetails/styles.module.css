@@ -1,7 +1,10 @@
 .tab_content {
 	display: flex;
-	flex-direction: row;
 	width: 100%;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .tab_content > :first-child {
@@ -14,6 +17,11 @@
 	margin-top: 16px;
 	background: #f9f9f9;
 	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		order: 2;
+		width: 100%;
+	}
 }
 
 .main_container > :not(:last-child) {
@@ -22,7 +30,6 @@
 
 .flex {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 }
 

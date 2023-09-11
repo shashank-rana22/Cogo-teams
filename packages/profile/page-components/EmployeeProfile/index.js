@@ -75,6 +75,13 @@ function EmployeeProfile() {
 											<span className={styles.inactive}>Inactive</span>
 										</div>
 									)}
+								<div style={{ display: 'flex', flexGrow: 1 }} />
+								<Button size="md" themeType="accent">
+									<div className={styles.actions_container}>
+										<span>Actions</span>
+										<IcMArrowDown width={12} height={12} />
+									</div>
+								</Button>
 							</div>
 							<div className={styles.desig_location}>
 								{designationLocation.map(({ Icon, value }) => (
@@ -85,14 +92,9 @@ function EmployeeProfile() {
 								))}
 							</div>
 						</div>
-						<div className="action_button_container">
-							<Button size="md" themeType="accent">
-								<div className={styles.actions_container}>
-									<span>Actions</span>
-									<IcMArrowDown width={12} height={12} />
-								</div>
-							</Button>
-						</div>
+						{/* <div className="action_button_container">
+
+						</div> */}
 					</div>
 				</div>
 				<TabsPanel data={data} />

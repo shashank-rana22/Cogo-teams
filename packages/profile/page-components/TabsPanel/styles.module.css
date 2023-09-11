@@ -5,7 +5,6 @@
 
 .tabs_container {
 	display: flex;
-	flex-direction: row;
 
 	:global {
 		.ui_tabs_container {
@@ -15,8 +14,9 @@
 		.ui_tab_list_container {
 			border-radius: 0 !important;
 
-			@media (max-width: 1024px) {
-				overflow: scroll;
+			@media (max-width: 1110px) {
+				overflow: auto;
+				scrollbar-width: thin;
 			}
 		}
 

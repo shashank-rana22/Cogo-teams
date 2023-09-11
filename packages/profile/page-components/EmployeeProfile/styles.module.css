@@ -2,6 +2,10 @@
 	display: flex;
 	flex-direction: column;
 	background: #f9f5ec;
+
+	@media (max-width: 390px) {
+		margin-top: 50px;
+	}
 }
 
 .profile_container {
@@ -30,6 +34,13 @@
 	padding: 16px 12px;
 	background-color: rgb(91 29 44);
 	border-radius: 8px;
+
+	@media (max-width: 768px) {
+		height: 125px;
+	}
+	@media (max-width: 390px) {
+		height: 100px;
+	}
 }
 
 .left_image {
@@ -39,7 +50,18 @@
 	width: 155px;
 	height: 155px;
 	background-color: #f9f5ec;
-	border-radius: 77.5px;
+	border-radius: 50%;
+
+	@media (max-width: 768px) {
+		top: 62.5px;
+		width: 115px;
+		height: 115px;
+	}
+	@media (max-width: 390px) {
+		top: 62.5px;
+		width: 75px;
+		height: 75px;
+	}
 }
 
 .top_container {
@@ -56,16 +78,22 @@
 
 .flex {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		justify-content: flex-end;
+	}
 }
 
 .left_text {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	color: #fff;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .left_text > :not(:last-child) {
@@ -99,7 +127,6 @@
 
 .actions_container {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 }
 
@@ -117,16 +144,29 @@
 
 .right_content {
 	display: flex;
-	flex-direction: row;
 	flex-grow: 1;
 	justify-content: space-between;
-	padding: 16px 16px 20px 171px;
+	padding: 16px 0 20px 171px;
+
+	@media (max-width: 768px) {
+		padding-top: 70px;
+		padding-left: 16px;
+	}
+	@media (max-width: 390px) {
+		padding-top: 50px;
+		padding-left: 0;
+	}
 }
 
 .name_email {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 	padding-inline: 15px;
+
+	@media (max-width: 390px) {
+		padding: 0;
+	}
 }
 
 .name_email > :not(:last-child) {
@@ -135,7 +175,7 @@
 
 .name_active {
 	display: flex;
-	flex-direction: row;
+	flex-wrap: wrap;
 	align-items: center;
 }
 
@@ -184,16 +224,22 @@
 
 .desig_location {
 	display: flex;
-	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .desig_location > :not(:last-child) {
 	margin-right: 32px;
+
+	@media (max-width: 768px) {
+		margin-right: 16px;
+	}
+	@media (max-width: 390px) {
+		margin-right: 10px;
+	}
 }
 
 .desig_location_element {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	color: #4f4f4f;
 }
@@ -205,7 +251,6 @@
 
 .other_info {
 	display: flex;
-	flex-direction: row;
 }
 
 .other_info > :not(:last-child) {

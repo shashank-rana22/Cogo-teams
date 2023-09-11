@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetEmployeeDetails = (user_id) => {
+const useGetEmployeeDetails = (user_id = '') => {
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_employee_directory',

@@ -5,6 +5,10 @@
 	margin-top: 16px;
 	background: #f9f9f9;
 	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		order: 1;
+	}
 }
 
 .main_container > :not(:last-child) {

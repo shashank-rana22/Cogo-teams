@@ -30,16 +30,16 @@ function Documents({ data: employeeData = {} }) {
 					<Button
 						size="md"
 						themeType="secondary"
-						style={{ border: 'none', minWidth: '32px', height: 'fit-content', padding: '8px' }}
+						className={styles.download_button}
 					>
 						<IcMDownload width={14} height={14} />
 					</Button>
 					<Button
 						size="md"
 						themeType="secondary"
-						style={{ display: 'flex', alignItems: 'center' }}
+						className={styles.view_button}
 					>
-						<span className={styles.view_button}>View</span>
+						<span className={styles.view_text}>View</span>
 
 					</Button>
 				</div>
