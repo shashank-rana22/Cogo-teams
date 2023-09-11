@@ -153,7 +153,7 @@ function Header({
 					isIRNGenerated={isIRNGenerated}
 					setAskNullify={setAskNullify}
 					bfInvoice={bfInvoice}
-					RESTRICT_REVOKED_STATUS={RESTRICT_REVOKED_STATUS}
+					restrictedRevokedStatus={RESTRICT_REVOKED_STATUS}
 				/>
 
 				<Button

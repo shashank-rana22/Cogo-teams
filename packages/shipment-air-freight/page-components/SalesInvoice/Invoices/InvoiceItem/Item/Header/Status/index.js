@@ -17,7 +17,7 @@ function Status({
 	refetchAferApiCall = () => {},
 	isIRNGenerated = false,
 	bfInvoice = {},
-	RESTRICT_REVOKED_STATUS = [],
+	restrictedRevokedStatus = [],
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -35,7 +35,7 @@ function Status({
 	return (
 		<div className={styles.invoice_container}>
 			{invoice?.status
-					&& RESTRICT_REVOKED_STATUS.includes(invoice?.status) && (
+					&& restrictedRevokedStatus.includes(invoice?.status) && (
 						<div className={styles.invoice_status}>
 							{startCase(invoice?.status)}
 						</div>
