@@ -103,8 +103,8 @@ export default function CardItem({
 				<div className={cl`${styles.icon_div} ${styles.flex}`}>
 					<IcMDrag
 						className={styles.icon}
-						height={30}
-						width={30}
+						height={40}
+						width={40}
 					/>
 				</div>
 

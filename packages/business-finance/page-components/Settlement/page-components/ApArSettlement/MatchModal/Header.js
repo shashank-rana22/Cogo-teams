@@ -12,7 +12,7 @@ const ZERO_BAL = 0;
 
 const handleSetTdsZero = (updatedData = [], setUpdatedData = () => {}) => {
 	const UPDATED_DATA_WITH_ZERO_TDS = updatedData?.map((item) => {
-		const allocationAmount = parseFloat(item.allocationAmount) || ZERO_BAL;
+		const allocationAmount = parseFloat(item.allocationAmount || ZERO_BAL);
 		const balanceAmount = +item.balanceAmount || ZERO_BAL;
 		const tds = +item.tds || ZERO_BAL;
 		return {
@@ -80,13 +80,13 @@ function Header(
 
 			<div className={styles.balanceStyle}>
 				<div className={styles.overflowStyle}>
-					<div style={{ display: 'flex', flexDirection: 'column', fontSize: '16px' }}>
+					<div className={styles.matchBalStyle}>
 						Matching Balance
 						<p className={styles.paragraph}>
 							{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
 						</p>
 					</div>
-					<div style={{ display: 'flex', alignItems: 'center', marginLeft: '5px', cursor: 'pointer' }}>
+					<div className={styles.overFlowDot}>
 						<IcMOverflowDot
 							height={20}
 							width={20}
