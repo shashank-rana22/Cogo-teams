@@ -5,8 +5,9 @@ import { useSelector } from '@cogoport/store';
 const LEVELS_FOR_APPROVAL = ['LEVEL_1', 'LEVEL_2'];
 
 const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) => ({
-	type : 'JOB_OPEN',
-	data : {
+	type            : 'JOB_OPEN',
+	incidentSubType : shipmentData?.shipment_type?.toUpperCase(),
+	data            : {
 		jobOpenRequest: {
 			id        : shipmentData?.id,
 			jobNumber : shipmentData?.serial_id,
