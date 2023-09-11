@@ -15,7 +15,6 @@ import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
 import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
-import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 const COMPONENT_MAPPING = {
 	hrbp: {
@@ -45,12 +44,8 @@ const COMPONENT_MAPPING = {
 	},
 };
 
-function FormComponent() {
-	const { data, loading, refetchApplicationDetails } = useGetApplicationProcessDetails();
-
-	console.log('data :: ', data);
-
-	const Render = COMPONENT_MAPPING.employee.HOTOClearance;
+function FormComponent({ data = {}, loading = false, refetchApplicationDetails = () => {} }) {
+	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
 
 	return (
 		<div className={styles.container}>
