@@ -36,7 +36,6 @@ interface LineItemCardInterface {
 		subTotal: string | number;
 		tdsAmount: string | number;
 	};
-	// setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	invoiceType?: string;
@@ -61,7 +60,6 @@ function LineItemCard({
 		subTotal     : '' || 0,
 		tdsAmount    : 0,
 	},
-	// setShowLineItem = () => {},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
 	invoiceType = '',
@@ -221,7 +219,7 @@ function LineItemCard({
 						) : undefined}
 					</div>
 
-					{showDetails ? (
+					{showDetails && (
 						<div>
 							{!isInvoiceApproved && (
 								<div className={styles.header_detail}>
@@ -234,7 +232,7 @@ function LineItemCard({
 							)}
 							<div className={styles.small_hr} />
 						</div>
-					) : undefined}
+					)}
 
 				</div>
 

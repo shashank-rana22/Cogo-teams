@@ -242,7 +242,7 @@ function AccordianCards({
 								</Button>
 							)}
 						</div>
-						{shipmentIdView ? undefined : (
+						{!shipmentIdView && (
 							<div
 								className={styles.ic_arrow}
 								onClick={() => { setShowInvoices(!showInvoices); }}

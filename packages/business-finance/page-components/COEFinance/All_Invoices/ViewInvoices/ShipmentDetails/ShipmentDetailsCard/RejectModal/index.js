@@ -58,7 +58,7 @@ function RejectModal({
 							size="md"
 							placeholder="Remarks Here ..."
 							style={{ width: '700', height: '100px' }}
-							value={remarksVal.collectionPartyRemark[remarksVal
+							value={remarksVal?.collectionPartyRemark[remarksVal
 								.collectionPartyRemark.length - CHECK_REMARK_LENGTH]}
 							onChange={(value) => setRemarksVal({
 								...remarksVal,

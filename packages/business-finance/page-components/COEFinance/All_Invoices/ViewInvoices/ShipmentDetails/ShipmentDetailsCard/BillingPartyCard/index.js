@@ -16,7 +16,7 @@ function BillingPartyCard({
 	isInvoiceApproved = false,
 	rejected = true,
 	handleClickUndo = () => {},
-	billingPartyRejectionList = () => {},
+	billingPartyRejectionList = [],
 	handleClickReject = () => {},
 	handleClick = () => {},
 	isDisabled = false,
@@ -49,7 +49,7 @@ function BillingPartyCard({
 				>
 					{label}
 					<div
-						style={{ justifyContent: 'center', display: 'flex' }}
+						className={styles.icon_section}
 					>
 						{iconElement}
 					</div>
@@ -108,7 +108,7 @@ function BillingPartyCard({
 					</div>
 				)}
 			</div>
-			{showDetails ? (
+			{showDetails && (
 				<div>
 					<div className={styles.hr} />
 
@@ -139,7 +139,7 @@ function BillingPartyCard({
 					</div>
 
 				</div>
-			) : undefined}
+			)}
 		</div>
 	);
 }

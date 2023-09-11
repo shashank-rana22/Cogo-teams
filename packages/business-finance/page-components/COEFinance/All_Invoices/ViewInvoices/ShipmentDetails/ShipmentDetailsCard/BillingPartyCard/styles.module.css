@@ -68,3 +68,8 @@
 	margin: 0 16px;
 	cursor: pointer;
 }
+
+.icon_section {
+	display: flex;
+	justify-content: center;
+}
