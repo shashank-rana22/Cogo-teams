@@ -10,6 +10,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
+import JobStatus from '../../common/JobStatus';
 import PocSop from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import ShipmentInfo from '../../common/ShipmentInfo';
@@ -157,6 +158,14 @@ function ShipmentDetails() {
 					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
+
+						{shipment_data?.is_job_closed && (
+							<JobStatus
+								shipment_data={shipment_data}
+								activeStakeholder={activeStakeholder}
+							/>
+						)}
+
 						{conditionMapping?.scope ? (
 							<ScopeSelect
 								size="md"
