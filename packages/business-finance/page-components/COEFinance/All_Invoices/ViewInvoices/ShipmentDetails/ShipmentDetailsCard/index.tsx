@@ -29,7 +29,6 @@ interface ShipmentDetailsCardInterface {
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	// setItemCheck: React.Dispatch<React.SetStateAction<boolean>>;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	invoiceStatus: string;
 }
@@ -43,13 +42,11 @@ function ShipmentDetailsCard({
 	setRemarksVal = () => {},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
-	// setItemCheck = () => {},
 	setLineItem = () => {},
 	invoiceStatus = '',
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
-	// const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
 	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
 	const [checkedValue, setCheckedValue] = useState({
@@ -202,10 +199,7 @@ function ShipmentDetailsCard({
 		handleRejected(+current);
 		setShowRejected(false);
 	};
-	// const handleSave = () => {
-	// 	// setShowLineItem(true);
-	// 	setItemCheck(true);
-	// };
+
 	const collectionPartyRejectionList = collectionPartyRejectCheckboxList(
 		{
 			organizationName,

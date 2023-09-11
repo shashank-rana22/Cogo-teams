@@ -226,7 +226,7 @@ function ShipmentDetails({
 							</div>
 						</div>
 
-						{showDetails ? (
+						{showDetails && (
 							<div className={styles.shipment_container_section}>
 								<div className={styles.details}>
 									<Details
@@ -247,7 +247,7 @@ function ShipmentDetails({
 									Accept
 								</Button>
 							</div>
-						) : undefined}
+						)}
 					</div>
 
 					<div
@@ -353,7 +353,7 @@ function ShipmentDetails({
 				<POC itemData={data} />
 			</div>
 
-			{showVariance ? (
+			{showVariance && (
 				<VarianceView
 					show={showVariance}
 					loading={loading}
@@ -361,7 +361,7 @@ function ShipmentDetails({
 					data={varianceFullData?.data}
 					currency={varianceFullData?.currency}
 				/>
-			) : null}
+			)}
 
 			<div className={styles.shipment_details_footer}>
 				<div className={styles.pdf_display}>
@@ -374,7 +374,6 @@ function ShipmentDetails({
 						setRemarksVal={setRemarksVal}
 						lineItemsRemarks={lineItemsRemarks}
 						setLineItemsRemarks={setLineItemsRemarks}
-						// setItemCheck={setItemCheck}
 						setLineItem={setLineItem}
 						invoiceStatus={status}
 					/>

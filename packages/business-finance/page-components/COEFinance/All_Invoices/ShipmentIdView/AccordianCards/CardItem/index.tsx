@@ -43,12 +43,6 @@ interface FullResponseProps {
 	list?: object[];
 }
 
-// interface DataProps {
-// 	totalRecords?: number;
-// 	quotePageIndex?: number;
-// 	quoteList?: object[];
-// }
-
 function CardItem({
 	cardData,
 	currentOpenSID,
