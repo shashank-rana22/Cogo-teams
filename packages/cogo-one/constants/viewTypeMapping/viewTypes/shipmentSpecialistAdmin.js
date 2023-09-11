@@ -1,9 +1,11 @@
 import { where } from 'firebase/firestore';
 
 import { getShipmentSpecialistButtons } from '../../../helpers/viewTypeFunctions';
+import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPreferences';
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST_ADMIN = {
+	chat_tabs_to_be_shown         : ['message', 'voice', 'firebase_emails'],
 	all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query            : () => [where('session_type', '==', 'admin')],
@@ -20,8 +22,9 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	accessible_new_communications : ['new_mail'],
 	stats_feedback_count          : [],
 	to_show_agent_activity_graph  : false,
-	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
-	permissions                   : {
+	group_agents_api_filter       : ['shipment_specialist',
+		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
+	permissions: {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
 		organization_users_contacts : false,

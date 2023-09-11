@@ -1,25 +1,28 @@
 import { where } from 'firebase/firestore';
 
 import { getShipmentSpecialistButtons } from '../../../helpers/viewTypeFunctions';
+import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPreferences';
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST = {
-	all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
-	group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-	session_type_query            : () => [where('session_type', '==', 'admin')],
-	chat_sub_tabs_access          : ['all', 'teams', 'groups'],
-	teams_chats_base_query        : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-	extra_side_bar_navs_access    : [],
-	default_side_nav              : 'user_activity',
-	get_accesible_assign_buttons  : getShipmentSpecialistButtons,
-	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
-	show_relevant_templates       : ['quick_reply'],
-	mails_to_be_shown             : [],
-	bulk_assign_features          : [],
-	stats_feedback_count          : [],
-	to_show_agent_activity_graph  : false,
-	configurations_to_be_shown    : [],
-	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
+	chat_tabs_to_be_shown        : ['message', 'voice', 'firebase_emails'],
+	all_chats_base_query         : ({ agentId }) => [where('support_agent_id', '==', agentId)],
+	group_chats_query            : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
+	session_type_query           : () => [where('session_type', '==', 'admin')],
+	chat_sub_tabs_access         : ['all', 'teams', 'groups'],
+	teams_chats_base_query       : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
+	extra_side_bar_navs_access   : [],
+	default_side_nav             : 'user_activity',
+	get_accesible_assign_buttons : getShipmentSpecialistButtons,
+	accesible_agent_types_query  : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
+	show_relevant_templates      : ['quick_reply'],
+	mails_to_be_shown            : [],
+	bulk_assign_features         : [],
+	stats_feedback_count         : [],
+	to_show_agent_activity_graph : false,
+	configurations_to_be_shown   : [],
+	group_agents_api_filter      : ['shipment_specialist',
+		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
 	accessible_new_communications : ['new_mail'],
 	permissions                   : {
 		auto_assign                 : false,

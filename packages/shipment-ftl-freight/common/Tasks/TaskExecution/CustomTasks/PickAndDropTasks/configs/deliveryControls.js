@@ -6,34 +6,39 @@ const DELAYED_DELIVERY_REASONS = [
 	{ label: 'Others', value: 'others' },
 ];
 
-const getControls = (item, dateObj) => {
+const getControls = (item) => {
 	const controls = [
 		{
-			name     : 'truck_number',
-			span     : 2,
-			type     : 'text',
-			label    : 'Truck Number',
-			value    : item?.truck_number,
-			disabled : true,
+			name  : 'truck_number',
+			span  : 2,
+			type  : 'text',
+			label : 'Truck Number',
+			value : item?.truck_number,
+			rules : {
+				required: {
+					value   : true,
+					message : 'Truck Number is required',
+				},
+			},
+			disabled: true,
 		},
 		{
-			name           : 'unloading_date',
-			span           : 3,
-			type           : 'datepicker',
-			label          : 'Unloading Date',
-			showTimeSelect : true,
-			usePortal      : true,
-			placeholder    : 'Select',
+			name                  : 'unloading_date',
+			span                  : 3,
+			type                  : 'datepicker',
+			label                 : 'Unloading Date',
+			showTimeSelect        : true,
+			usePortal             : true,
+			placeholder           : 'Select',
+			isPreviousDaysAllowed : true,
 		},
 
 		{
-			name    : 'delivery_date',
-			span    : 3,
-			type    : 'datepicker',
-			label   : 'Cargo Delivery Date',
-			minDate : dateObj?.deliveryMinDate,
-			maxDate : dateObj?.deliveryMaxDate,
-			rules   : {
+			name  : 'delivery_date',
+			span  : 3,
+			type  : 'datepicker',
+			label : 'Cargo Delivery Date',
+			rules : {
 				required: {
 					value   : true,
 					message : 'Cargo Delivery Date is required',
@@ -70,7 +75,6 @@ const getControls = (item, dateObj) => {
 			span  : 2,
 			type  : 'textarea',
 			label : 'Remark',
-			rules : dateObj?.DELAYED_DELIVERY_REMARK_RULES,
 		},
 		{
 			name          : 'image',

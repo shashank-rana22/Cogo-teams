@@ -4,7 +4,7 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
 import { startCase } from '@cogoport/utils';
 
-const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
+const getStepThreeControls = ({ service_charge, shipment_data, handleChange }) => {
 	const { service_type, service_detail, trade_type, service_id } = service_charge || {};
 	return {
 		type         : 'edit_service_charges',
@@ -40,6 +40,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				type    : 'select',
 				options : currencyCodeOptions,
 				size    : 'sm',
+				rules   : { required: true },
 				span    : 2,
 			},
 			{
@@ -47,6 +48,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				name  : 'price',
 				type  : 'number',
 				size  : 'sm',
+				rules : { required: true },
 				span  : 2,
 			},
 			{
@@ -54,6 +56,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				name  : 'quantity',
 				type  : 'number',
 				size  : 'sm',
+				rules : { required: true },
 				span  : 2,
 			},
 			{
@@ -62,6 +65,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				name    : 'unit',
 				options : convertObjectMappingToArray(FCL_UNITS),
 				size    : 'sm',
+				rules   : { required: true },
 				span    : 2,
 			},
 			{
@@ -69,6 +73,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				type   : 'static',
 				name   : 'total',
 				size   : 'sm',
+				rules  : { required: true },
 				span   : 1,
 				render : (item) => <p>{item?.total}</p>,
 			},
@@ -77,4 +82,4 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 	};
 };
 
-export default getStep3Controls;
+export default getStepThreeControls;

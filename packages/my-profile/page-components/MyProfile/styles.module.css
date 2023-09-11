@@ -64,6 +64,10 @@
 	}
 }
 
+.notification_redirect {
+	margin: 0 8px;
+}
+
 .change_password_container {
 	display: flex;
 	justify-content: flex-end;

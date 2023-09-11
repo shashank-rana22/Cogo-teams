@@ -19,7 +19,7 @@ const EDIT_HAWB = {
 
 function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdit = () => {} }) {
 	const { t } = useTranslation(['printingDesk']);
-	const { fields = {} } = hawbFields({ t });
+	const fields = hawbFields({ t });
 	const { shipmentId, documentData = {} } = data || {};
 
 	const { data:hawbData = {}, loading, getHawbList:listAPI } = useGetHawbList(shipmentId);

@@ -1,9 +1,7 @@
-import { Toast, Modal, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Modal, Pagination } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
-import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
-import getRenderEmailBody from '../../../../../helpers/getRenderEmailBody';
+import useMailEditorFunctions from '../../../../../helpers/mailEditorFunctions';
 import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
 
@@ -12,17 +10,14 @@ import EmailTemplateList from './EmailTemplateList';
 import RenderHeader from './Header';
 import styles from './styles.module.css';
 
-function MailModal({
+function MailEditorModal({
 	mailProps = {},
 	userId = '',
 	activeMail = {},
-	replyMailApi = () => {},
-	replyLoading = false,
+	viewType = '',
 }) {
 	const {
 		buttonType,
-		activeMailAddress,
-		emailState,
 		setEmailState,
 		setButtonType,
 	} = mailProps;
@@ -46,7 +41,7 @@ function MailModal({
 		fetchEmailTemplate = () => {},
 		search = '',
 		setSearch = () => {},
-	} = useListEmailTemplates({ isTemplateView });
+	} = useListEmailTemplates({ isTemplateView, viewType });
 
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 
@@ -69,43 +64,16 @@ function MailModal({
 		uploaderRef,
 	});
 
-	const handleSend = () => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
-		if (replyLoading) {
-			return;
-		}
-
-		if (uploading) {
-			Toast.error('Files are uploading...');
-			return;
-		}
-
-		if (isEmpty(emailState?.toUserEmail)) {
-			Toast.error('To Mail is Required');
-			return;
-		}
-
-		if (isEmptyMail || !emailState?.subject) {
-			Toast.error('Both Subject and Body are Requied');
-			return;
-		}
-
-		const emailBody = getRenderEmailBody({ html: emailState?.body });
-
-		const payload = {
-			sender        : emailState?.from_mail || activeMailAddress,
-			toUserEmail   : emailState?.toUserEmail,
-			ccrecipients  : emailState?.ccrecipients,
-			bccrecipients : emailState?.bccrecipients,
-			subject       : emailState?.subject,
-			content       : emailBody,
-			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
-			attachments,
-			userId,
-
-		};
-		replyMailApi(payload);
-	};
+	const {
+		handleSend = () => {},
+		replyLoading = false,
+	} = useMailEditorFunctions({
+		uploading,
+		activeMail,
+		attachments,
+		userId,
+		mailProps,
+	});
 
 	return (
 		<Modal
@@ -180,4 +148,4 @@ function MailModal({
 	);
 }
 
-export default MailModal;
+export default MailEditorModal;

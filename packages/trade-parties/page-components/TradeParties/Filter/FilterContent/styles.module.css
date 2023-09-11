@@ -1,0 +1,16 @@
+.filter {
+	width: 300px;
+	border-radius: 10px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.button {
+	margin-right: 5px;
+	margin-left: 5px;
+}

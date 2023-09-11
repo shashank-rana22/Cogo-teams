@@ -51,6 +51,7 @@ export default {
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		cogo_auditor_id                  : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
@@ -97,6 +98,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		cogo_auditor               : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -122,6 +124,7 @@ export default {
 			'5f79d531-50e0-4843-995f-71057e659e0f',
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
 			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'3aeb912f-fc98-471a-ad90-6ac1388e32cf', // CP-Head Vietnam
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
@@ -483,6 +486,7 @@ export default {
 					'manage_forecast',
 					'rfq_enquiries',
 					'rates_sheets',
+					'rate_density',
 				],
 			},
 		},

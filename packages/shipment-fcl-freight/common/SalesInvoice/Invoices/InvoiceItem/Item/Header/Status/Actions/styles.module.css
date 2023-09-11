@@ -175,3 +175,28 @@
 	margin: 4px 0 0 10px;
 	cursor: pointer;
 }
+
+.reload {
+	display: flex;
+	align-items: center;
+}
+
+.payment_method {
+	width: fit-content;
+	padding: 4px 12px;
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-greyscale-2);
+	text-align: center;
+	text-transform: capitalize;
+	white-space: nowrap;
+	background-color: #ddebc0;
+	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.processing {
+	background-color: var(--color-primary-error-red-5);
+}
