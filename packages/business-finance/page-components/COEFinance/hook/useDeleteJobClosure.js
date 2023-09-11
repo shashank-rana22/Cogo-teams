@@ -7,13 +7,12 @@ const useDeleteJobClosure = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequestBf({
 		url     : '/common/job/delete-job-closure-rule',
 		method  : 'PUT',
-		data    : {},
 		authKey : 'put_common_job_delete_job_closure_rule',
 	}, { manual: true });
 
 	const apiTrigger = async (params) => {
 		try {
-			await trigger({ params });
+			await trigger({ data: params });
 			Toast.success('Success');
 			refetch();
 		} catch (err) {
