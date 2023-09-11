@@ -50,6 +50,7 @@ export default {
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		cogo_auditor_id                  : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',

@@ -12,6 +12,10 @@
 	& > div:not(:last-of-type) {
 		margin-bottom: 24px;
 	}
+
+	:global(.ui_select_option_item) {
+		display: block;
+	}
 }
 
 .custom_modal {

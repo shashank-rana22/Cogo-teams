@@ -2,6 +2,7 @@
     "header_tabs_approved_awb": "Approved AWB",
     "header_tabs_handed_over": "Handed Over",
     "header_tabs_final_awb": "Final AWB",
+    "header_tabs_completed_awb": "Completed Final AWB",
     "header_printing_desk": "Printing Desk",
     "header_search_placeholder": "Search by SID or AWB Number",
     "header_toggle_onlabel": "Relevant to me",
@@ -117,5 +118,10 @@
     "awb_controls_package_count_required": "Package Count is Required",
     "awb_controls_cannot_be_negative_validation": "Cannot be Negative",
     "awb_controls_should_be_greater_than_0_validation": "Should be greater than 0",
-    "utils_get_select_all_checkbox_label": "Select All"
+    "utils_get_select_all_checkbox_label": "Select All",
+    "completed_awb_fields_sid_label": "SID",
+    "completed_awb_fields_awb_label": "AWB",
+    "completed_awb_fields_awb_category_label": "AWB Category",
+    "completed_awb_fields_uploaded_by_label": "Uploaded By",
+    "completed_awb_fields_uploaded_at_label": "Uploaded At"
 }

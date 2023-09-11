@@ -37,6 +37,7 @@ const useGetActiveStakeholder = () => {
 			stakeholder : 'ff_cost_booking',
 		},
 		{ role_ids: geo.uuid.so1_revenue_desk, stakeholder: 'so1_revenue_desk' },
+		{ role_ids: geo.uuid.cogo_auditor_id, stakeholder: 'cogo_auditor_id' },
 	];
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || [])
