@@ -1,28 +1,41 @@
 import { cl, Button } from '@cogoport/components';
 import { IcMCross, IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useApproveUtr from '../../../../../hooks/useApproveUtr';
 
+import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const LAST_INDEX = 1;
 
-function PlanApproval({ pending_orders = {} }) {
-	const { transactions = [], id: checkoutId = '' } = pending_orders || {};
+const TITLE = {
+	true  : 'Approve Plan',
+	false : 'Current Plan',
+};
+
+function PlanApproval({ orders_info = {}, setEditModal, showCta }) {
+	const { transactions = [], id: checkoutId = '', plan_name = '' } = orders_info || {};
+
+	const [confirm, setConfirm] = useState({ open: false });
 
 	const { loading, approveUtrHandler } = useApproveUtr();
 
-	const clickHandler = (status) => {
-		approveUtrHandler({
+	const clickHandler = async (status) => {
+		await approveUtrHandler({
 			checkoutId,
 			action: status,
 		});
+		setConfirm({ open: false });
+		setEditModal((prev) => ({ ...prev, apiCall: true }));
 	};
 
 	return (
 		<div className={styles.container}>
-			<h3 className={styles.title}>Approve Plans</h3>
+			<h3 className={styles.title}>
+				{`${TITLE[showCta]} : ${plan_name || ''}`}
+			</h3>
 
 			{!isEmpty(transactions) ? (
 				<>
@@ -53,30 +66,34 @@ function PlanApproval({ pending_orders = {} }) {
 						})}
 					</div>
 
-					<div className={styles.cta_container}>
-						<Button
-							size="sm"
-							themeType="secondary"
-							loading={loading}
-							onClick={() => clickHandler('reject')}
-						>
-							<IcMCross />
-							Reject
-						</Button>
+					{showCta ? (
+						<div className={styles.cta_container}>
+							<Button
+								size="sm"
+								themeType="secondary"
+								loading={loading}
+								onClick={() => setConfirm({ open: true, action: 'reject' })}
+							>
+								<IcMCross />
+								Reject
+							</Button>
 
-						<Button
-							size="sm"
-							themeType="accent"
-							loading={loading}
-							onClick={() => clickHandler('approve')}
-						>
-							<IcMTick />
-							Approve
-						</Button>
-					</div>
+							<Button
+								size="sm"
+								themeType="accent"
+								loading={loading}
+								onClick={() => setConfirm({ open: true, action: 'approve' })}
+							>
+								<IcMTick />
+								Approve
+							</Button>
+						</div>
+					) : null}
 				</>
 			)
 				: <div>No UTR avaliable</div>}
+
+			<ConfirmModal confirm={confirm} setConfirm={setConfirm} clickHandler={clickHandler} loading={loading} />
 		</div>
 	);
 }

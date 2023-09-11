@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ data }) => ({
 	checkout_id : data?.checkoutId,
-	action_name      : data?.action,
+	action_name : data?.action,
 });
 
 const useApproveUtr = () => {
@@ -19,7 +19,7 @@ const useApproveUtr = () => {
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Plan Approved!');
+			Toast.success(`Plan ${data.action}!`);
 		} catch (err) {
 			Toast.error(getApiErrorString(err));
 		}
