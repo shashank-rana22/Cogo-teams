@@ -1,17 +1,15 @@
 import { Button } from '@cogoport/components';
 import {
-	// CheckboxController,
 	CountrySelectController,
 	CreatableSelectController,
 	InputController,
-	// MobileNumberController,
-	// UploadController,
 	useForm,
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-// import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-// import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-// import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
+import isEqual from '@cogoport/ocean-modules/utils/isEqual';
+import { useEffect } from 'react';
+
+import useUpdateLeadOrganization from '../../../../../../hooks/useUpdateLeadOrganization';
 
 import styles from './styles.module.css';
 
@@ -19,15 +17,50 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function UserOnboard({ setIsLeadUpdated = () => {} }) {
+function UserOnboard({ listLeadsData = {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
-	const { control, formState:{ errors = {} }, handleSubmit, formState: { isValid = false }, formValues } = useForm();
+
+	const defaultValues = {
+		company_name : listLeadsData?.business_name,
+		country_id   : listLeadsData?.country_id,
+		gst_number   : listLeadsData?.registration_number,
+	};
+
+	const {
+		control,
+		formState:{ errors = {}, isValid = false },
+		handleSubmit,
+		formValues,
+		reset,
+	} = useForm({ defaultValues });
+
+	useEffect(() => {
+		const NEW_DEFAULT_VALUES = {
+			company_name : listLeadsData?.business_name,
+			country_id   : listLeadsData?.country_id,
+			gst_number   : listLeadsData?.registration_number,
+		};
+
+		reset(NEW_DEFAULT_VALUES);
+	}, [reset, listLeadsData]);
 
 	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
 
+	const { updateLoading = false, updateLeadOrganization } = useUpdateLeadOrganization();
+
 	const updateDetails = (values) => {
-		console.log({ values });
-		setIsLeadUpdated(true);
+		// console.log({ values });
+
+		const PAYLOAD = {
+			account_type        : 'importer_exporter',
+			business_name       : values?.company_name,
+			id                  : listLeadsData?.id,
+			country_id          : values?.country_id,
+			registration_number : values?.gst_number,
+
+		};
+
+		updateLeadOrganization({ payload: PAYLOAD });
 	};
 
 	return (
@@ -42,6 +75,7 @@ function UserOnboard({ setIsLeadUpdated = () => {} }) {
 							control={control}
 							name="company_name"
 							placeholder="Enter Company Name"
+							value={listLeadsData?.business_name}
 							rules={{ required: 'Company Name is required' }}
 						/>
 
@@ -57,6 +91,7 @@ function UserOnboard({ setIsLeadUpdated = () => {} }) {
 							size="sm"
 							placeholder="Enter or Select Country"
 							optionValueKey="id"
+							value={listLeadsData?.country_id}
 							rules={{ required: 'Country of Registration is required' }}
 						/>
 						{Error('country', errors)}
@@ -70,12 +105,13 @@ function UserOnboard({ setIsLeadUpdated = () => {} }) {
 							name="gst_number"
 							control={control}
 							placeholder="Enter GST"
+							value={listLeadsData?.registration_number}
 							rules={{
 								required : { value: !formValues?.gst_number, message: 'GST number is required' },
 								pattern  : {
 									value   : countryValidation?.regex?.GST,
 									message : `
-									${countryValidation?.others?.identification_number?.label}Number is invalid`,
+									${countryValidation?.others?.identification_number?.label} Number is invalid`,
 								},
 							}}
 						/>
@@ -87,7 +123,7 @@ function UserOnboard({ setIsLeadUpdated = () => {} }) {
 					<Button
 						themeType="accent"
 						onClick={handleSubmit(updateDetails)}
-						disabled={!isValid}
+						disabled={!isValid || isEqual(formValues, defaultValues) || updateLoading}
 					>
 						Update
 					</Button>

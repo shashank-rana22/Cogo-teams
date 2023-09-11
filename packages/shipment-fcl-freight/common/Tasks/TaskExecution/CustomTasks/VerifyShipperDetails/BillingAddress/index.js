@@ -1,17 +1,16 @@
 import { Button } from '@cogoport/components';
 import {
 	AsyncSelectController,
-	// CheckboxController,
-	// CountrySelectController,
 	CreatableSelectController,
 	InputController, MobileNumberController,
 	TextAreaController,
 	UploadController,
 	useForm,
 } from '@cogoport/forms';
-// import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-// import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-// import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+
+import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
+import useListOrganizations from '../../../../../../hooks/useListOrganizations';
 
 import styles from './styles.module.css';
 
@@ -21,14 +20,24 @@ function Error(key, errors) {
 
 const COUNTRY = 'IND';
 
-function BillingAddress() {
+function BillingAddress({ task = {}, shipment_data = {}, refetch = () => {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const { control, watch, formState:{ errors = {} }, handleSubmit } = useForm();
 	const formValues = watch();
 
-	const onSubmit = (values) => {
-		console.log({ values });
-	};
+	const { loading = false, listData = {} } = useListOrganizations({ shipment_data });
+
+	console.log({ listData });
+
+	const {
+		onSubmit = () => {},
+		loading: upsellLoading = false,
+	} = useCreateAutoUpsellService({ task, refetch });
+
+	const countryValidation = getCountryConstants({
+		country_id    : formValues?.country_id,
+		isDefaultData : false,
+	});
 
 	return (
 		<div className={styles.main_container}>
@@ -67,6 +76,12 @@ function BillingAddress() {
 							size="sm"
 							name="tax_number"
 							control={control}
+							rules={{
+								pattern: {
+									value   : countryValidation?.regex?.TAX,
+									message : 'Tax Number is Invalid',
+								},
+							}}
 						/>
 						{Error('tax_number', errors)}
 					</div>
@@ -138,6 +153,12 @@ function BillingAddress() {
 							control={control}
 							name="mobile_number"
 							styles={{ flex: '1 1 10%' }}
+							rules={{
+								pattern: {
+									value   : countryValidation?.regex?.MOBILE_NUMBER,
+									message : 'Mobile Number is Invalid',
+								},
+							}}
 						/>
 						{Error('mobile_number', errors)}
 					</div>
@@ -148,14 +169,20 @@ function BillingAddress() {
 							size="sm"
 							control={control}
 							name="email"
-							rules={{ required: 'Email is required' }}
+							rules={{
+								required : 'Email is required',
+								pattern  : {
+									value   : countryValidation?.regex?.EMAIL,
+									message : 'Enter Valid Email Address',
+								},
+							}}
 						/>
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.button_container}>
-				<Button onClick={handleSubmit(onSubmit)}>
+				<Button disabled={upsellLoading || loading} onClick={handleSubmit(onSubmit)}>
 					Save
 				</Button>
 			</div>

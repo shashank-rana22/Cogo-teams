@@ -2,14 +2,19 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useListLeadOrganizations({ params }) {
-	const [{ loading, data: listLeads }, trigger] = useRequest({
+function useListLeadOrganizations({ task = {} }) {
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_lead_organizations',
 		method : 'GET',
-		params,
+		params : {
+			filters: {
+				source_id: task?.task_field_id,
+			},
+			lead_user_data_required: true,
+		},
 	}, { manual: false });
 
-	const getListOrganizations = useCallback(async () => {
+	const getListLeadOrganizations = useCallback(async () => {
 		try {
 			await trigger();
 		} catch (err) {
@@ -18,13 +23,13 @@ function useListLeadOrganizations({ params }) {
 	}, [trigger]);
 
 	useEffect(() => {
-		getListOrganizations();
-	}, [getListOrganizations]);
+		getListLeadOrganizations();
+	}, [getListLeadOrganizations]);
 
 	return {
-		listLeads,
+		listLeads: data?.list,
 		loading,
-		getListOrganizations,
+		getListLeadOrganizations,
 	};
 }
 

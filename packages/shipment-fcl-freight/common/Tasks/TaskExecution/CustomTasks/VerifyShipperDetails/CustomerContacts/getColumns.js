@@ -1,5 +1,5 @@
 import { Button, Checkbox } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
+import { InputController, MobileNumberController } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -9,6 +9,8 @@ function getColumns({
 	setIsEditMode = () => {},
 	control = {},
 	setCheckList = () => {},
+	handleSubmit = () => {},
+	onUpdateLeadUser = () => {},
 }) {
 	const columns = [
 		{
@@ -17,13 +19,13 @@ function getColumns({
 			accessor : (item) => (
 				<div>
 					<Checkbox
-						disabled={isEditMode === item?.index}
+						disabled={isEditMode === item?.id}
 						onChange={(event) => {
 							setCheckList((prev) => {
 								if (event?.target?.checked) {
 									return [...prev, item];
 								}
-								return prev?.filter((object) => object.index === item?.index);
+								return prev?.filter((object) => object.id === item?.id);
 							});
 						}}
 					/>
@@ -35,7 +37,7 @@ function getColumns({
 			id       : 'contact_name',
 			Header   : 'Name',
 			accessor : (item) => (
-				isEditMode === item?.index
+				isEditMode === item?.id
 					? (
 						<InputController
 							size="sm"
@@ -54,7 +56,7 @@ function getColumns({
 			id       : 'contact_email',
 			Header   : 'Email',
 			accessor : (item) => (
-				isEditMode === item?.index
+				isEditMode === item?.id
 					? (
 						<InputController
 							size="sm"
@@ -74,9 +76,9 @@ function getColumns({
 			id       : 'contact_number',
 			Header   : 'Mobile Number',
 			accessor : (item) => (
-				isEditMode === item?.index
+				isEditMode === item?.id
 					? (
-						<InputController
+						<MobileNumberController
 							size="sm"
 							name="mobile_number"
 							control={control}
@@ -93,17 +95,29 @@ function getColumns({
 			Header   : '',
 			accessor : (item) => (
 				<div className={styles.button_container}>
-					{isEditMode === item?.index
+					{isEditMode === item?.id
 						? (
 							<>
-								<Button themeType="secondary">Save</Button>
+								<Button
+									themeType="secondary"
+									onClick={() => { handleSubmit(onUpdateLeadUser); }}
+								>
+									Save
 
-								<Button themeType="tertiary" onClick={() => setIsEditMode(null)}>Cancel</Button>
+								</Button>
+
+								<Button
+									themeType="tertiary"
+									onClick={() => setIsEditMode(null)}
+								>
+									Cancel
+
+								</Button>
 							</>
 						) : (
 							<Button
 								themeType="tertiary"
-								onClick={() => { setIsEditMode(item?.index); }}
+								onClick={() => { setIsEditMode(item?.id); }}
 							>
 								<IcMEdit />
 
