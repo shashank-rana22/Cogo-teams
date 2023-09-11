@@ -134,6 +134,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'generate_exit_code',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{

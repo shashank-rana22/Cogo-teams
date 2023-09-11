@@ -1,20 +1,17 @@
-import { Button } from '@cogoport/components';
 import {
 	CheckboxController,
 	InputController,
-	useForm,
 } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
-
-function ReasonsToLeave() {
+// { onSubmit, control, handleSubmit }
+function ReasonsToLeave({ control }) {
 	const [show, setShow] = useState(true);
-	const { control, reset, handleSubmit } = useForm();
-	const onSubmit = () => {
-		reset();
-	};
+	// const onSubmit = () => {
+	// 	reset();
+	// };
 	const REASONS_LIST = [
 		' Lack of Career Growth and Development Opportunities',
 		' Inadequate Compensation and Benefits',
@@ -74,12 +71,6 @@ function ReasonsToLeave() {
 				</div>
 			</div>
 
-			<div className={styles.footer}>
-				<Button themeType="secondary" style={{ marginRight: '12px' }}>Back</Button>
-				<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
-					Generate Code
-				</Button>
-			</div>
 		</>
 	);
 }

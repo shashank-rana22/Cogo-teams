@@ -5,6 +5,8 @@ import AdminConfirmed from './admin-view/admin-confirmation';
 import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
 import ExitInterview from './hrbp-view/ExitInterview';
+import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
+import ExitReasons from './hrbp-view/ExitReasons';
 import FinanceClearance from './hrbp-view/FinanceClearance';
 import HandoverTakeoverClearance from './hrbp-view/HandoverTakeoverClearance';
 import HRMeeting from './hrbp-view/HRMeeting';
@@ -26,6 +28,8 @@ const COMPONENT_MAPPING = {
 		admin_clearance             : AdminClearance,
 		tech_clearance              : TechClearanceHrbp,
 		exit_interview              : ExitInterview,
+		exit_reasons                : ExitReasons,
+		exit_complete               : ExitInterviewComplete,
 	},
 	manager: {
 		review_request    : ReviewRequest,
@@ -50,7 +54,7 @@ function FormComponent() {
 
 	console.log('data :: ', data);
 
-	const Render = COMPONENT_MAPPING.admin.admin_clearance;
+	const Render = COMPONENT_MAPPING.hrbp.exit_reasons;
 
 	return (
 		<div className={styles.container}>

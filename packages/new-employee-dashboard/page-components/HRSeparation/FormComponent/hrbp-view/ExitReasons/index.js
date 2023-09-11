@@ -1,44 +1,42 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import {
-	IcCFtick, IcMArrowRight,
-} from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
+import useGetGenerateExitCode from '../../hooks/useGetGenerateExitCode';
 // import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
-// import InterviewComplete from '../ExitInterviewComplete/InterviewCompletion';
-// import ReasonsToLeave from '../ExitReasons/Reasons';
+import ExitHeading from '../ExitInterview/ExitHeading';
 
-import ExitHeading from './ExitHeading';
-import ScheduleInterview from './Schedule';
+import ReasonsToLeave from './Reasons';
 import styles from './styles.module.css';
 
-function ExitInterview() {
-	const [visible, setvisible] = useState(false);
+function ExitReasons() {
 	const {
 		control,
 		watch,
 		reset,
 		handleSubmit,
-		formState:{ errors = {} },
+
 	} = useForm();
 
 	// const { exit_interview } = data || {};
 	// const { exit_interview :exit_interview_scheduled } = exit_interview || {};
 	// const { sub_process_detail_id, sub_process_data } = exit_interview_scheduled || {};
+	const OFF_BOARDING_APPLICATION_ID = '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda';
 
 	const v1 = watch();
 	console.log('v1:', v1);
 	//	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const { getExitCode } = useGetGenerateExitCode();
 
 	const onSubmit = (values) => {
 		console.log(values, 'formValues');
-		setvisible(true);
 		// const payload = {
 		// 	sub_process_data: values,
 		// 	// sub_process_detail_id : '50adeb65-d63c-4c99-9a16-cd724ee4ca35',
 		// 	// process_name          : 'admin_clearance',
 		// };
+		//	console.log(off_boarding_application_id);
+		getExitCode({ OFF_BOARDING_APPLICATION_ID });
 		// updateApplication({
 		// 	payload,
 		// });
@@ -47,27 +45,12 @@ function ExitInterview() {
 	return (
 		<>
 			<ExitHeading title="EXIT INTERVIEW" subTitle="Schedule interview the the employee" />
-			{
-			visible
-				? (
-					<div className={styles.tickdiv}>
-						<IcCFtick
-							className={styles.tickicon}
-						/>
-						<span>Interview details are shared with the employee</span>
-					</div>
-				)
-				: 			null
-		}
-			{/* <InterviewComplete /> */}
-
-			<ScheduleInterview visible={visible} control={control} watch={watch} reset={reset} errors={errors} />
+			<ReasonsToLeave onSubmit={onSubmit} control={control} handleSubmit={handleSubmit} />
 
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '12px' }}>Back</Button>
 				<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
-					Notify Employee
-					<IcMArrowRight width={16} height={16} style={{ marginLeft: '12px' }} />
+					Generate Code
 				</Button>
 			</div>
 		</>
@@ -75,4 +58,4 @@ function ExitInterview() {
 	);
 }
 
-export default ExitInterview;
+export default ExitReasons;
