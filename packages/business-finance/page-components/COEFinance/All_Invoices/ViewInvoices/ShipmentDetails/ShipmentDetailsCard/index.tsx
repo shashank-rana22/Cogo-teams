@@ -23,6 +23,8 @@ import LineItemCard from './lineItemCard/index';
 import RejectModal from './RejectModal';
 import styles from './styles.module.css';
 
+const MAX_CARDS = 4;
+
 interface ShipmentDetailsCardInterface {
 	data: DataInterface;
 	remarksVal: RemarksValInterface;
@@ -276,8 +278,9 @@ function ShipmentDetailsCard({
 					{!isInvoiceApproved && (
 						<div className={styles.completed}>
 							Completed
-							{!isDisabled(status) ? 3 : showValue.length + rejected.length || 0}
-							/3
+							{!isDisabled(status) ? MAX_CARDS : showValue.length + rejected.length || 0}
+							/
+							{MAX_CARDS}
 						</div>
 					)}
 				</div>
