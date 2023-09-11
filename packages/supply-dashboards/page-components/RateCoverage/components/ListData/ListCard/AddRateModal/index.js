@@ -11,16 +11,18 @@ import {
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { useSelector } from '@cogoport/store';
 import { merge, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import Layout from '../../../../../RfqEnquiries/Layout';
+import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 
 import airControls from './AirControls';
 import fclControls from './FclControls';
+import styles from './styles.module.css';
 
 const getCommodityOptions = (container_type = 'standard') => {
 	const commodities = FREIGHT_CONTAINER_COMMODITY_MAPPINGS[container_type];
@@ -72,6 +74,7 @@ function AddRateModal({
 		formState: { errors },
 		handleSubmit,
 		watch,
+		setValue,
 	} = useForm();
 
 	const values = watch();
@@ -182,24 +185,58 @@ function AddRateModal({
 		getListCoverage();
 	};
 
+	const freeWeight = values?.free_weight;
+	const weightSlabs = values?.weight_slabs;
+
+	const tmp = JSON.stringify(weightSlabs);
+
+	useEffect(() => {
+		if (!isAirService) {
+			(weightSlabs || []).forEach((slab, index) => {
+				if (index === DEFAULT_VALUE) {
+					setValue('weight_slabs.0.lower_limit', Number(freeWeight) + DELTA_VALUE || DELTA_VALUE);
+				} else {
+					setValue(
+						`weight_slabs.${index}.lower_limit`,
+						Number(weightSlabs[index - VALUE_ONE].upper_limit) + DELTA_VALUE || DELTA_VALUE,
+					);
+				}
+			});
+		} else {
+			(weightSlabs || []).forEach((slab, index) => {
+				if (index === DEFAULT_VALUE) {
+					setValue('weight_slabs.0.lower_limit', DELTA_VALUE);
+					setValue('weight_slabs.0.upper_limit', FIVE_HUNDRED);
+				} else {
+					setValue(
+						`weight_slabs.${index}.lower_limit`,
+						Number(weightSlabs[index - VALUE_ONE].upper_limit) + DELTA_VALUE || DELTA_VALUE,
+					);
+				}
+			});
+		}
+	}, [tmp, weightSlabs, isAirService, freeWeight, setValue]);
+
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please Add Rate" />
-			<Modal.Body style={{ maxHeight: '600px', minHeight: '300px' }}>
+			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<Layout
 					fields={finalControls}
 					control={control}
 					errors={errors}
 					showElements={showElements}
 				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<div>
-					<Button onClick={handleSubmit(handleSubmitData)}>
+				<div className={styles.submit_button}>
+					<Button
+						onClick={handleSubmit(handleSubmitData)}
+					>
 						Submit
 					</Button>
 				</div>
-			</Modal.Footer>
+
+			</Modal.Body>
+
 		</Modal>
 	);
 }

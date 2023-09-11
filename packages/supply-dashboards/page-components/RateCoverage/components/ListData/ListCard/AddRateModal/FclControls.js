@@ -238,6 +238,7 @@ const fclControls = ({
 				name        : 'lower_limit',
 				type        : 'number',
 				span        : 4,
+				disabled    : true,
 				placeholder : 'Lower Limit (in MT)',
 				rules       : { required: 'lower limit is required' },
 			},
@@ -266,23 +267,26 @@ const fclControls = ({
 		],
 	},
 	{
+		type               : 'fieldArray',
 		heading            : 'Line Items',
-		name               : 'line_item',
-		span               : 12,
+		// showButtons        : true,
+		name               : 'line_items',
+		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 1,
-	},
-	{
-		type        : 'fieldArray',
-		showButtons : true,
-		name        : 'line_items',
-		buttonText  : 'Add Line Items',
-		controls    : [
+		value              : [
+			{
+				code     : 'BAS',
+				unit     : 'per_container',
+				currency : GLOBAL_CONSTANTS.currency_code.USD,
+				price    : null,
+			},
+		],
+		controls: [
 			{
 				name        : 'code',
 				type        : 'select',
 				span        : 1.5,
 				placeholder : 'Charge Name',
-				value       : 'BAS',
 				options     : chargeCodeOptions,
 				rules       : { required: 'code is required' },
 			},
@@ -291,7 +295,6 @@ const fclControls = ({
 				span      : 2,
 				type      : 'select',
 				className : 'primary lg',
-				value     : 'per_container',
 				options   : [{
 					label : 'Per Container',
 					value : 'per_container',
@@ -303,7 +306,6 @@ const fclControls = ({
 				span        : 1.5,
 				type        : 'select',
 				placeholder : 'Curr...',
-				value       : 'USD',
 				options     : currencyOptions,
 			},
 			{
@@ -327,13 +329,8 @@ const fclControls = ({
 		],
 	},
 	{
-		name          : 'container_slabs',
-		heading       : 'Container Slabs',
-		span          : 12,
-		showOnlyLabel : true,
-	},
-	{
 		name               : 'container_slabs',
+		heading            : 'Container Slabs',
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Add Container Count Wise BAS Slabs',
