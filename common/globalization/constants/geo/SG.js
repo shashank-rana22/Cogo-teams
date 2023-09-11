@@ -458,6 +458,7 @@ export default {
 					'trade_enquiry',
 					'disliked_rates',
 					'manage_forecast',
+					'rate_density',
 					'rfq_enquiries',
 					'rates_sheets',
 				],
