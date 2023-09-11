@@ -2,6 +2,7 @@ import { Button, cl, Loader, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState } from 'react';
 
+import EmptyState from '../EmptyState';
 import ListPagination from '../ListPagination';
 
 import Footer from './Footer';
@@ -37,7 +38,7 @@ function ListView({
 	}
 
 	if (isEmpty(data?.list)) {
-		return <div>No Result Found</div>; // do better
+		return <EmptyState />;
 	}
 
 	return (
