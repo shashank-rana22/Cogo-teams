@@ -5,7 +5,7 @@ import { useState } from 'react';
 import useShipmentIdView from '../../../hook/useShipmentIdView.ts';
 import AccordianCards from '../../ShipmentIdView/AccordianCards/index.tsx';
 
-function SIDView({ shipmentId = '', setCheckItem = () => {} }) {
+function SIDView({ shipmentId = '', setCheckItem = (prop) => prop }) {
 	const {
 		list: { data },
 	} = useShipmentIdView({ invoicesRequired: true, shipmentId });

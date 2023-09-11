@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 function invoiceDetailsRejectCheckboxList(
 	{
 		billNumber = '',
-		billDate = '',
+		billDate = new Date(),
 		invoiceType = '',
 		organizationName = '',
 		remarks = 'No Remarks',

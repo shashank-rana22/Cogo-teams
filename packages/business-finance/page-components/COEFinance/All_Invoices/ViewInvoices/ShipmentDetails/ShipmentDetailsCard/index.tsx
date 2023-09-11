@@ -36,7 +36,7 @@ interface ShipmentDetailsCardInterface {
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 const CHECK_REMARK_LENGTH = 1;
-const TOTAL_TASKS = 4;
+const MAX_CARDS = 4;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -116,7 +116,7 @@ function ShipmentDetailsCard({
 
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
 
-	const handleClick = (id: number) => {
+	const handleClick = (id?: number) => {
 		const approveData = [...showValue, id];
 		setShowValue(approveData);
 		DetailsCard.push(DetailsCard.shift());
@@ -152,7 +152,7 @@ function ShipmentDetailsCard({
 
 	const { docContent } = useGetDocumentContent({ data });
 
-	const handleClickUndo = (id: number) => {
+	const handleClickUndo = (id?: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
 		setShowValue(undoApprovedData);
 		const undoRejectedData = rejected.filter((item: any) => item !== id);
@@ -167,7 +167,7 @@ function ShipmentDetailsCard({
 		}
 	};
 
-	const handleClickReject = (id: number) => {
+	const handleClickReject = (id?: number) => {
 		setShowRejected((previousActions: any) => ({
 			...previousActions,
 			[id]: !previousActions[id],
@@ -283,9 +283,9 @@ function ShipmentDetailsCard({
 							<span className={styles.status_completed_text}>Completed</span>
 
 							{!isDisabled(status)
-								? TOTAL_TASKS : showValue.length + rejected.length + lineItemCheckedCount || 0}
+								? MAX_CARDS : showValue.length + rejected.length + lineItemCheckedCount || 0}
 							/
-							{TOTAL_TASKS}
+							{MAX_CARDS}
 						</div>
 					)}
 				</div>

@@ -96,7 +96,7 @@ export interface DataInterface {
 	consolidatedShipmentIds?:Array<string>;
 	organizationId?: string;
 	serviceProviderDetail?: any;
-	remarks?: string;
+	remarks?: Array<object>;
 }
 
 interface ShipmentDetailsInterface {
@@ -108,8 +108,8 @@ interface ShipmentDetailsInterface {
 	status: string;
 	jobType?:string;
 	billId?:string;
+	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
 	lineItemsCheck?: boolean;
-	setCheckItem: React.Dispatch<React.SetStateAction<{}>>,
 }
 
 function ShipmentDetails({
@@ -146,7 +146,7 @@ function ShipmentDetails({
 
 	const jobTypeValue = jobType?.toLowerCase();
 
-	const onAccept = ({ valueName = '', setCloseDetails = (prop:boolean) => prop }) => {
+	const onAccept = ({ valueName = '', setCloseDetails = (prop) => prop }) => {
 		setCloseDetails(false);
 		setCheckItem(
 			(prev: any) => ({ ...prev, [valueName]: true }),

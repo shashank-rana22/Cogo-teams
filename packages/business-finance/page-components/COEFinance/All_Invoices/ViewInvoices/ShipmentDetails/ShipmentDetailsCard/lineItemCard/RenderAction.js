@@ -5,8 +5,8 @@ import styles from './styles.module.css';
 function RenderAction({
 	id = 1,
 	isInvoiceApproved = false,
-	rejectedItems = [],
-	approvedItems = [],
+	rejectedItems = {},
+	approvedItems = {},
 }) {
 	if (approvedItems[id] || isInvoiceApproved) {
 		return <IcCFtick width="17px" height="17px" />;
