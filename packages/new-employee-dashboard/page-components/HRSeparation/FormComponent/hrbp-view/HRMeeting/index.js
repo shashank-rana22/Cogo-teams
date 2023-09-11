@@ -39,6 +39,7 @@ function HRMeeting() {
 		updateApplication(payload);
 		reset();
 	};
+	
 	return (
 		<>
 			<div className={styles.header}>
