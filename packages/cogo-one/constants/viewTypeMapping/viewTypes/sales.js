@@ -15,7 +15,7 @@ const SALES = {
 	group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query        : getSalesSessionQuery,
 	kam_contacts_base_query   : ({ agentId }) => [where('user_details.agent_ids', 'array-contains', agentId)],
-	chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts'],
+	chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts', 'groups'],
 	default_side_nav          : 'profile',
 	accesible_filters         : {
 		observer : ['closed_session'],

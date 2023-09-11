@@ -11,7 +11,7 @@ const SALES_ADMIN = {
 	teams_chats_base_query  : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	session_type_query      : getSalesSessionQuery,
 	kam_contacts_base_query : ({ agentId }) => [where('user_details.agent_ids', 'array-contains', agentId)],
-	chat_sub_tabs_access    : ['all', 'teams', 'kamContacts'],
+	chat_sub_tabs_access    : ['all', 'teams', 'kamContacts', 'groups'],
 	default_side_nav        : 'profile',
 	accesible_filters       : {
 		observer : ['closed_session'],
