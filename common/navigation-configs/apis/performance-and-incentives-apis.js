@@ -1,5 +1,21 @@
 const performance_and_incentives = {
-	scoring_and_incentive_plans: [],
+	scoring_and_incentive_plans: [
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_agent_scoring_eligible_roles',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'post_agent_scoring_config',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+	],
 };
 
 export default performance_and_incentives;

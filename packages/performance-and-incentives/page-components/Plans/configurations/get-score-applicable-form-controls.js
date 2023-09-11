@@ -1,10 +1,15 @@
-import { isEmpty } from '@cogoport/utils';
-
-const getScoreApplicableFormControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
+const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel, channelOptions }) => ([
+	{
+		name        : 'display_name',
+		label       : 'Display Name',
+		type        : 'text',
+		placeholder : 'Enter Name',
+		rules       : { required: 'This is required' },
+	},
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Select Cogo Entity',
-		type        : 'async-select',
+		type        : 'asyncSelect',
 		placeholder : 'Select Cogo Entity',
 		initialCall : true,
 		asyncKey    : 'partners',
@@ -18,108 +23,65 @@ const getScoreApplicableFormControls = ({ cogoEntityId = '', reportingManagerIds
 		rules: { required: 'This is required' },
 	},
 	{
-		name    : 'organization_type',
-		label   : 'Organization Type',
+		name    : 'role_function',
+		label   : 'Function',
 		type    : 'select',
 		options : [
 			{
-				value : 'importer_exporter',
-				label : 'Importer Exporter',
+				label : 'Sales',
+				value : 'sales',
 			},
 			{
-				value : 'channel_partner',
-				label : 'Channel Partner',
+				label : 'Supply',
+				value : 'supply',
+			},
+			{
+				label : 'Operations',
+				value : 'operations',
+			},
+			{
+				label : 'Finance',
+				value : 'finance',
+			},
+			{
+				label : 'training',
+				value : 'Training',
+			},
+			{
+				label : 'HR',
+				value : 'hr',
+			},
+			{
+				label : 'External',
+				value : 'external',
 			},
 		],
 		rules: { required: 'This is required' },
-
 	},
 	{
-		name: 'segment',
-
-		label : 'Organization Sub-Type',
-		type  : 'select',
-		rules : { required: 'This is required' },
+		name    : 'channel',
+		label   : 'Channel',
+		type    : 'select',
+		options : channelOptions,
+		rules   : { required: 'This is required' },
 	},
 	{
-		name        : 'agent_id',
-		label       : 'Select Reporting Manager',
-		type        : 'async-select',
-		isClearable : true,
-		initialCall : true,
-		asyncKey    : 'partner_users',
-		valueKey    : 'user_id',
-		params      : {
-			filters: {
-				partner_id   : cogoEntityId,
-				status       : 'active',
-				block_access : [null, false],
-			},
-		},
-	},
-	{
-		name        : 'organization_ids',
-		label       : 'Select Organization',
-		type        : 'async-select',
-		placeholder : 'Select Organization',
+		name        : 'role_ids',
+		label       : 'Select Roles',
+		type        : 'asyncSelect',
 		multiple    : true,
-		asyncKey    : 'organizations',
-		isClearable : true,
+		placeholder : 'Select Roles',
+		initialCall : true,
+		asyncKey    : 'agent_scoring_eligible_roles',
 		params      : {
-			filters: {
-				...(!isEmpty(reportingManagerIds) ? {
-					sales_agent_rm_id: reportingManagerIds,
-				} : {}),
-				status       : 'active',
-				account_type : 'importer_exporter',
-				kyc_status   : 'verified',
-			},
-			pagination_data_required     : false,
-			agent_data_required          : false,
-			add_service_objects_required : false,
-			page_limit                   : 99999999,
+			cogo_entity_ids : cogoEntityId ? [cogoEntityId] : undefined,
+			functions       : roleFunction ? [roleFunction] : undefined,
+			channels        : channel ? [channel] : undefined,
+			status          : true,
 		},
-	},
-	{
-		name        : 'booking_source',
-		label       : 'Booking Platform',
-		type        : 'select',
-		isClearable : true,
-		options     : [
-			{
-				value : 'admin_platform',
-				label : 'Admin',
-			},
-			{
-				value : 'cogoverse',
-				label : 'Cogoverse',
-			},
-			{
-				value : 'app_platform',
-				label : 'APP/CP',
-			},
-		],
+		style : { flexBasis: '27%' },
+		rules : { required: 'This is required' },
 	},
 ]);
 
-const preferredRoleControls = {
-	name        : 'preferred_role_id',
-	label       : 'Select Role for CCS Config Pool',
-	placeholder : 'Select Role',
-	initialCall : true,
-	asyncKey    : 'partner_roles',
-	isClearable : true,
-	params      : {
-		filters: {
-			role_functions     : ['operations'],
-			role_sub_functions : [
-				'common_customer_operations',
-				'enterprise_customer_operations',
-				'mid_size_customer_operations',
-				'cp_customer_operations'],
-			status: 'active',
-		},
-	},
-};
-
-export { getScoreApplicableFormControls, preferredRoleControls };
+export default getScoreApplicableFormControls;

@@ -9,22 +9,17 @@
 	font-weight: 500;
 }
 
-.header {
-	display: flex;
-	align-items: center;
-	margin: 30px 0;
-}
-
 .form_container {
 	display: flex;
+	justify-content: space-between;
 }
 
 .control_item {
-	flex-grow: 1;
+	width: 18%;
 }
 
 .control_item:not(:last-child) {
-	margin-right: 20px;
+	margin-right: 14px;
 }
 
 .sup {
@@ -42,13 +37,4 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 4px;
-}
-
-.title {
-	font-size: 18px;
-}
-
-.back_icon {
-	margin-right: 8px;
-	cursor: pointer;
 }

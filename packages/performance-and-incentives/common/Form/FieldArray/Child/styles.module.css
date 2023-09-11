@@ -5,11 +5,12 @@
 
 .content {
 	display: flex;
+	align-items: center;
 	margin-top: 8px;
 }
 
 .list {
-	width: 150px;
+	flex: 1;
 	margin-right: 8px;
 }
 

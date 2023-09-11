@@ -914,6 +914,17 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncAllocationEligibleRoles() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/eligible_roles',
+		authkey      : 'get_agent_scoring_eligible_roles',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -988,4 +999,5 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncAllocationEligibleRoles,
 };

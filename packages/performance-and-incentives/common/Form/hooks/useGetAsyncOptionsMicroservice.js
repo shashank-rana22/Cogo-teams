@@ -9,6 +9,7 @@ const REQUEST_HOOK_MAPPING = {
 	allocation       : useAllocationRequest,
 	tickets          : useTicketsRequest,
 	auth             : useAuthRequest,
+	agent_scoring    : useAllocationRequest,
 };
 
 function useGetAsyncOptionsMicroservice({

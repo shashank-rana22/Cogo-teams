@@ -28,6 +28,7 @@ function Child(props) {
 
 				return (
 					<div key={`${name}.${index}.${controlItem.name}`} className={styles.list}>
+
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element
@@ -50,10 +51,9 @@ function Child(props) {
 					className={`form-fieldArray-${name}-remove`}
 					onClick={() => remove(index, FIRST_INDEX)}
 					style={{
-						height    : '20px',
-						width     : '20px',
-						marginTop : '24px',
-						cursor    : 'pointer',
+						height : '16px',
+						width  : '16px',
+						cursor : 'pointer',
 					}}
 				/>
 			) : null}
