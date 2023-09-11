@@ -33,8 +33,6 @@ const useIncidentReOpenJob = ({
 		user_id: profile?.user?.id,
 	}));
 
-	console.log('shipmentData:: ', shipmentData);
-
 	const [{ loading = false }, trigger] = useRequestBf({
 		url     : '/incident-management/incident',
 		method  : 'POST',
