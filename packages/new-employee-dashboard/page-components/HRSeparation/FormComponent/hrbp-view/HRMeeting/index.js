@@ -32,9 +32,6 @@ function HRMeeting({ data = {}, refetch = () => {} }) {
 	const { hr_meet:hrMeet } = hr_meet || {};
 	const { sub_process_detail_id, sub_process_data } = hrMeet || {};
 
-	const v1 = watch();
-	console.log('v1:', v1);
-
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
 
 	const onSubmit = (values) => {
@@ -75,7 +72,6 @@ function HRMeeting({ data = {}, refetch = () => {} }) {
 			},
 
 		};
-		console.log('🚀 ~ file: index.js:65 ~ onSubmit ~ payload:', payload);
 
 		updateApplication({ payload });
 		reset();

@@ -22,13 +22,13 @@ function TechClearance() {
 	// const { data } = useGetApplicationProcessDetails();
 	// const { postTechData } = useSubmitTechClearance();
 
-	const onSubmit = (Values) => {
+	const onSubmit = (values) => {
 		// 	postTechData({
-		// 		sub_process_data      : Values,
+		// 		sub_process_data      : values,
 		// 		sub_process_detail_id : 'bce47a4f-5a4d-44e3-8f7c-dae20abba0a6',
 		// 		process_name          : 'tech_clearance',
 		// 	});
-		console.log(Values);
+		console.log(values);
 		setShowModal(true);
 	};
 
