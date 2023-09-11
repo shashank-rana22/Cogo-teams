@@ -1789,6 +1789,11 @@ const apis = [
 		service_name : 'fcl_freight_rate',
 	},
 	{
+		api          : 'update_shipment_sb_numbers',
+		access_type  : 'public',
+		service_name : 'shipment',
+	},
+	{
 		api         : 'post_purchase_advance_document',
 		access_type : 'private',
 	},
