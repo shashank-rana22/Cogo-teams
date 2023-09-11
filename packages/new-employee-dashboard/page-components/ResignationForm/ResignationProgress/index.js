@@ -6,16 +6,15 @@ import styles from './styles.module.css';
 import TrackApplication from './TrackApplication';
 import useSubmitResignationProgress from './useSubmitResignationProgress';
 
-function ResignationProgress() {
+function ResignationProgress({ data = {} }) {
 	const { handleSubmit, control, errors } = useSubmitResignationProgress({
 		onSuccess: () => {
-			//		setShowModal(true);
+			// setShowModal(true);
 		},
 	});
-
 	return (
 		<div className={styles.main_container}>
-			<TrackApplication handleSubmit={handleSubmit} control={control} errors={errors} />
+			<TrackApplication handleSubmit={handleSubmit} control={control} errors={errors} data={data} />
 			<SeparationForm />
 		</div>
 	);

@@ -58,6 +58,7 @@
 	display: flex;
 	justify-content: start;
 	width: 250px;
+	flex-direction: column;
 }
 
 .code {
@@ -76,4 +77,8 @@
 
 .interview_completion_btn {
 	margin: 16px 0 0;
+}
+.error{
+	font-size: 12px;
+	color: red;
 }

@@ -7,20 +7,20 @@ import { useHarbourRequest } from '@cogoport/request';
 const useSubmitHOTOClearance = ({ onSuccess = () => {} }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
-		url    : '/get_application_process_details',
+		url    : '/update_application_process_details',
 	}, { manual: true });
 
 	const { handleSubmit, control, formState:{ errors } } = useForm();
 
-	const onSubmit = async () => {
+	const onSubmit = async (values = {}) => {
+		console.log('values', values);
 		try {
 			await trigger({
-				params: {
-					off_boarding_application_id : '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda',
-					process_name                : 'hrbp_clearance',
+				data: {
+					sub_process_detail_id : 'ef32b4d5-746d-45de-86b2-c01d06333632',
+					process_name          : 'hoto_clearance',
 				},
 			});
-
 			onSuccess();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');

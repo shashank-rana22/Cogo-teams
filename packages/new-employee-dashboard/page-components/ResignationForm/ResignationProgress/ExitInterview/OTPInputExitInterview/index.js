@@ -1,19 +1,19 @@
 import React, { useRef } from 'react';
 
-import OtpInput from './components/OtpInput';
+import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
 function OTPInputExitInterview({
 	otpLength = 6,
 	setOtpValue = () => {},
-	placeholder = '',
+	placeholder = ' ',
+	setOtpError = () => {},
 }) {
 	const useImperativeHandleRef = useRef({});
 
 	const handleChange = (value) => {
 		setOtpValue(value.length === otpLength ? `${value}` : '');
-
-		console.log('Exit Interview OTP : ', value);
+		setOtpError(false);
 	};
 
 	return (
@@ -21,7 +21,7 @@ function OTPInputExitInterview({
 			<OtpInput
 				otpLength={otpLength}
 				inputSize="sm"
-				onChange={handleChange}
+				onChange={(v) => handleChange(v)}
 				ref={useImperativeHandleRef}
 				placeholder={placeholder}
 			/>

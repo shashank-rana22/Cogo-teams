@@ -1,12 +1,15 @@
 import { Button } from '@cogoport/components';
 import { IcMProfile, IcMEmail, IcMCalendar, IcMClock, IcMLocation } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
+
+import useSubmitResignationProgress from '../useSubmitResignationProgress';
 
 import OTPInputExitInterview from './OTPInputExitInterview';
 import styles from './styles.module.css';
 
 const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
-function ExitInterview({ handleSubmit }) {
+const OTP_LENGTH = 6;
+function ExitInterview({ data = {} }) {
 	const INTERVIEW_DETAILS = {
 		date     : '23/03/2023',
 		time     : '2:15pm',
@@ -14,8 +17,24 @@ function ExitInterview({ handleSubmit }) {
 		name     : 'Shivam Singh',
 		email    : EMAIL_FOR_INTERVIEW_DETAILS,
 	};
-	// const [otpValue,setOtpValue]=useState(' ');
-	// const [otpstate,setOtpState]=useState(false);
+	const [otpValue, setOtpValue] = useState('');
+	const [otpError, setOtpError] = useState(false);
+	const { handleSubmit, onSubmit } = useSubmitResignationProgress({
+		onSuccess: () => {
+			console.log('api hit success...');
+			// setShowModal(true);
+		},
+	});
+	const onClickSubmit = () => {
+		if (otpValue.length !== OTP_LENGTH) {
+			setOtpError(true);
+			return;
+		}
+
+		handleSubmit(onSubmit)();
+
+		console.log('resign progress data ::', data);
+	};
 
 	return (
 		<div className={styles.main_container}>
@@ -74,7 +93,10 @@ function ExitInterview({ handleSubmit }) {
 						Enter the code shared with you by the HR to complete the separation process
 					</div>
 					<div className={styles.code_container}>
-						<OTPInputExitInterview />
+						<OTPInputExitInterview setOtpValue={setOtpValue} setOtpError={setOtpError} />
+						{otpError
+							? <div className={styles.error}>*required</div>
+							: null}
 					</div>
 				</div>
 
@@ -82,7 +104,7 @@ function ExitInterview({ handleSubmit }) {
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={handleSubmit(onsubmit)}
+						onClick={onClickSubmit}
 					>
 						Complete Separation
 					</Button>

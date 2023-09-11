@@ -8,20 +8,25 @@ import useSubmitHOTOClearance from '../useSubmitHOTOClearance';
 
 import styles from './styles.module.css';
 
-function HOTOClearance() {
+function HOTOClearance(
+	{ data = {} },
+) {
 	const [showModal, setShowModal] = useState(false);
 
 	const { handleSubmit, control, errors, onSubmit } = useSubmitHOTOClearance({
 		onSuccess: () => {
+			console.log('api hit success...');
 			setShowModal(true);
 		},
 	});
 
-	const EMPLOYEE_CONTACT = '<Aanchal Kapoor> (Employee Code: COGO-0900, Email: aanchal.kapoor@cogoport.com).';
-	// const onSubmit = () => {
-	// 	console.log('provide clearance log');
-	// 	setShowModal(true);
-	// };
+	const EMPLOYEE_CONTACT = {
+		EMPLOYEE_NAME  : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.employee_name : '',
+		EMPLOYEE_ID    : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.cogo_id : '',
+		EMPLOYEE_EMAIL : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.emai : '',
+		MY_NAME        : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.my_name : '',
+	};
+
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
@@ -50,13 +55,29 @@ function HOTOClearance() {
 							<p>
 								I wish to formally confirm the successful completion of the task takeover from
 								{' '}
-								<span className={styles.employee_contact}>{EMPLOYEE_CONTACT}</span>
+								<span className={styles.employee_contact}>
+									{EMPLOYEE_CONTACT.EMPLOYEE_NAME}
+									(Employee Code:
+									{' '}
+									{EMPLOYEE_CONTACT.EMPLOYEE_ID}
+									, Email:
+									{' '}
+									{EMPLOYEE_CONTACT.EMPLOYEE_EMAIL}
+									).
+
+								</span>
+
 								{' '}
 								I hereby assume full responsibility for the tasks previously managed by them.
 							</p>
 							<br />
 							<p>
-								I have thoroughly reviewed and undertaken all necessary measures to seamlessly transition these responsibilities. I am committed to executing them meticulously, and any challenges that may arise will be addressed with utmost diligence.This correspondence is an official declaration of my assumption of Aanchal Kapoor&apos;s responsibilities.
+								I have thoroughly reviewed and undertaken all necessary measures to seamlessly transition these responsibilities.
+								I am committed to executing them meticulously, and any challenges that may arise will be addressed with utmost diligence.
+								This correspondence is an official declaration of my assumption of
+								{' '}
+								{EMPLOYEE_CONTACT.MY_NAME}
+								&apos;s responsibilities.
 							</p>
 							<br />
 							<p>
@@ -88,7 +109,7 @@ function HOTOClearance() {
 					size="md"
 					themeType="primary"
 					className={styles.provide_clearance_btn}
-					onClick={handleSubmit(onSubmit)}
+					onClick={() => setShowModal(true)}
 				>
 					Provide Clearance
 					<IcMTick width="18px" height="18px" color="white" />
@@ -127,7 +148,7 @@ function HOTOClearance() {
 						size="md"
 						themeType="primary"
 						className={styles.proceed_modal_btn}
-						onClick={() => setShowModal(false)}
+						onClick={handleSubmit(onSubmit)}
 					>
 						Yes, Proceed
 					</Button>
