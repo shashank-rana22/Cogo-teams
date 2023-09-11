@@ -22,12 +22,10 @@ const getAccountType = ({ account_type = '', tags = [] }) => {
 	return 'IE';
 };
 
-function CustomOptions(option = {}) {
-	const {
-		business_name = '', trade_name = '', kyc_status = '', cogo_entity = {},
-		account_type = '', tags = [],
-	} = option;
-
+function CustomOptions({
+	business_name = '', trade_name = '', kyc_status = '', cogo_entity = {},
+	account_type = '', tags = [],
+}) {
 	const code = cogo_entity?.entity_code;
 	const country_code = ENTITY_MAPPING[code]?.country_code;
 

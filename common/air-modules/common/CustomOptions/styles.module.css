@@ -10,7 +10,7 @@
 }
 
 .trade_name {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: var(--color-secondary-greyscale-3);
 }
 
