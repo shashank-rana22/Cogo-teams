@@ -1,0 +1,105 @@
+.notification_container {
+	position: fixed;
+	top: 0;
+	right: 2%;
+	z-index: 9000;
+	display: flex;
+	width: 400px;
+	height: 80px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow:
+		0 0 20px 4px rgb(154 161 177 / 15%),
+		0 4px 80px -8px rgb(36 40 47 / 25%),
+		0 4px 4px -2px rgb(91 94 105 / 15%);
+	transform: translateY(50px);
+	animation-name: left-animation;
+	animation-duration: 0.5s;
+}
+
+@keyframes left-animation {
+	0% {
+		opacity: 0;
+		transform: translate(70px, 70px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(70px);
+	}
+}
+
+.vertical_line {
+	width: 2%;
+	height: 100%;
+	background: var(--color-primary-error-red-2);
+	border-radius: 4px 0 0 4px;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	width: 98%;
+	height: 100%;
+	padding: 6px;
+}
+
+.avatar_section {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 12%;
+	height: calc(100% - 8px);
+}
+
+.name {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background: #e0e0e0;
+	border-radius: 50%;
+}
+
+.sender_details {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	height: 100%;
+	margin-left: 6px;
+}
+
+.sender_name {
+	max-width: 290px;
+	overflow: hidden;
+	font-weight: 500;
+	color: #6c6b6b;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.subject {
+	max-width: 290px;
+	overflow: hidden;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.message {
+	max-width: 290px;
+	overflow: hidden;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cancel_section {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 6%;
+	height: calc(100% - 8px);
+	margin-right: 4px;
+}
