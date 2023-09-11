@@ -47,6 +47,22 @@ function useMailEditorFunctions({
 		setButtonType,
 	});
 
+	const handlePayload = () => {
+		const emailBody = getRenderEmailBody({ html: body });
+
+		return {
+			sender  : from_mail || activeMailAddress,
+			toUserEmail,
+			ccrecipients,
+			bccrecipients,
+			subject,
+			content : emailBody,
+			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
+			attachments,
+			userId,
+		};
+	};
+
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (replyLoading) {
@@ -68,20 +84,8 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const emailBody = getRenderEmailBody({ html: body });
+		const payload = handlePayload();
 
-		const payload = {
-			sender  : from_mail || activeMailAddress,
-			toUserEmail,
-			ccrecipients,
-			bccrecipients,
-			subject,
-			content : emailBody,
-			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
-			attachments,
-			userId,
-
-		};
 		if (emailVia === 'firebase_emails') {
 			sendMail({
 				source        : from_mail || activeMailAddress,

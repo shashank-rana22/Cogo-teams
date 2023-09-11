@@ -7,7 +7,7 @@ import mailFunction from '../../../../../utils/mailFunctions';
 
 import ComposeEmailBody from './ComposeEmailBody';
 import EmailTemplateList from './EmailTemplateList';
-import RenderHeader from './Header';
+import RenderHeader from './RenderHeader';
 import styles from './styles.module.css';
 
 function MailEditorModal({

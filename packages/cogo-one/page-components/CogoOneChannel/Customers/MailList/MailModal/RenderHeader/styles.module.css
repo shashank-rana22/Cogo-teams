@@ -76,7 +76,8 @@
 .right_top_header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
+	width: 30%;
 }
 
 .upload_icon_container {
@@ -88,6 +89,7 @@
 }
 
 .template_button {
+	display: flex;
 	margin-right: 6px;
 }
 
@@ -98,4 +100,11 @@
 .top_left_section {
 	display: flex;
 	align-items: center;
+	width: 30%;
+
+	:global {
+		.ui_button_container {
+			margin: 0 4px;
+		}
+	}
 }

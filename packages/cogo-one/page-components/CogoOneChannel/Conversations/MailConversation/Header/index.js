@@ -49,7 +49,7 @@ function Header({
 							<div
 								role="presentation"
 								className={styles.header_actions_reply}
-								onClick={() => handleClick(value)}
+								onClick={() => handleClick({ buttonType: value })}
 							>
 								{icon}
 							</div>

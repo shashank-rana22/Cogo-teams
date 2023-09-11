@@ -57,13 +57,27 @@ function RenderHeader({
 						/>
 					</div>
 				) : (
-					<Button
-						size="md"
-						themeType="link"
-						onClick={handleClose}
-					>
-						Cancel
-					</Button>
+					<>
+						<Button
+							size="md"
+							themeType="link"
+							disabled={replyLoading}
+							onClick={handleClose}
+						>
+							Cancel
+						</Button>
+
+						{!['reply', 'reply_all', 'forward'].includes(buttonType) && (
+							<Button
+								size="sm"
+								themeType="secondary"
+								disabled={replyLoading}
+								// onClick={handleSave}
+							>
+								Save as draft
+							</Button>
+						)}
+					</>
 				)}
 			</div>
 
@@ -77,6 +91,7 @@ function RenderHeader({
 						<Button
 							size="sm"
 							themeType="accent"
+							disabled={replyLoading}
 							onClick={() => {
 								setButtonType('email');
 								setEmailTemplate((prev) => ({ ...prev, isTemplateView: true }));
@@ -87,7 +102,7 @@ function RenderHeader({
 					</div>
 					<div className={styles.file_uploader_div}>
 						<CustomFileUploader
-							disabled={uploading}
+							disabled={uploading || replyLoading}
 							handleProgress={setUploading}
 							className="file_uploader"
 							accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"

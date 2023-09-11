@@ -5,7 +5,7 @@ export const SEARCH_QUERY_LIMIT = 50;
 
 export const MAIL_FOLDER_OPTIONS = {
 	inbox      : 'Inbox',
-	draft      : 'Drafts',
+	drafts     : 'Drafts',
 	sent_items : 'Sent Items',
 	spam       : 'Junk Email',
 };
