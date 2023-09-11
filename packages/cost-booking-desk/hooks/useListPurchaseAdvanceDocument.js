@@ -18,11 +18,12 @@ const getParams = ({
 	const searchQuery = query ? { q: query } : {};
 
 	const keyToSend = paymentActiveTab === 'payment_request' ? 'status' : 'reconciled';
+	const statusToSend = paymentActiveTab === 'payment_request' ? [statusFilter] : statusFilter;
 
 	return {
 		tradeType   : 'import',
 		type        : 'CONTAINER_SECURITY_DEPOSIT',
-		[keyToSend] : !isEmpty(statusFilter) ? statusFilter : undefined,
+		[keyToSend] : !isEmpty(statusToSend) ? statusToSend : undefined,
 		pageIndex   : pagination,
 		pageSize    : 10,
 		...searchQuery,
