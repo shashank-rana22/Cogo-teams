@@ -7,6 +7,20 @@ const API_END_POINT_MAPPING = {
 	air_freight : 'get_air_freight_rate_job_stats',
 };
 
+const FCL_PARAMS_MAPPING = {
+	origin_location      : 'origin_port_id',
+	destination_location : 'destination_port_id',
+	operater_type        : 'shipping_line_id',
+
+};
+
+const AIR_PARAMS_MAPPING = {
+	origin_location      : 'origin_airport_id',
+	destination_location : 'destination_airport_id',
+	operater_type        : 'airline_id',
+
+};
+
 const useGetCoverageStats = (filter) => {
 	const service = filter?.service;
 	const endPoint = API_END_POINT_MAPPING[service] || 'get_fcl_freight_rate_job_stats';
@@ -25,9 +39,16 @@ const useGetCoverageStats = (filter) => {
 		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
-		(Object.keys(restFilters) || []).forEach((item) => {
-			if (restFilters[item]) {
-				FINAL_FILTERS[item] = restFilters[item];
+
+		const paramsMapping = filter?.service === 'air_freight' ? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+
+		Object.keys(restFilters).forEach((ele) => {
+			if (restFilters[ele]) {
+				if (ele in paramsMapping) {
+					FINAL_FILTERS[paramsMapping[ele]] = restFilters[ele];
+				} else {
+					FINAL_FILTERS[ele] = restFilters[ele];
+				}
 			}
 		});
 

@@ -63,6 +63,8 @@ const useGetListCoverage = () => {
 			}
 		});
 
+		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
+
 		try {
 			await trigger({
 				params: {
@@ -71,8 +73,8 @@ const useGetListCoverage = () => {
 						serial_id  : sid ? parseInt(sid, 10) : undefined,
 						source     : source || undefined,
 						user_id    : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
-						start_date : filter?.start_date,
-						end_date   : filter?.end_date,
+						start_date : (isTodayDateRequired) ? new Date() : filter?.start_date,
+						end_date   : (isTodayDateRequired) ? new Date() : filter?.end_date,
 					},
 					page,
 				},
