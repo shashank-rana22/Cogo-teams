@@ -31,18 +31,21 @@ function ChangeIncoTermModal({
 		return `${trade_type}_${service_type}`;
 	});
 
-	const madatoryServicesForNextIncoTrem = fclIncoTerms.filter(
-		({ inco_terms = [], mandatory = false }) => inco_terms.includes(selectedValue) && mandatory,
+	const servicesToAdd = fclIncoTerms.filter(
+		({ inco_terms = [], mandatory = false, name = '' }) => inco_terms.includes(selectedValue)
+				&& mandatory
+				&& !addedServices.includes(name),
 	);
 
-	const servicesToAdd = madatoryServicesForNextIncoTrem.filter((item) => !addedServices.includes(item.name));
-
-	const servicesToDelete = addedServices.filter((item) => {
-		const incoTermObject = fclIncoTerms.find(({ name }) => name === item);
+	const servicesToDelete = addedServices.map((item) => item.replace(
+		/trailer_freight|haulage_freight|ftl_freight/g,
+		'transportation',
+	)).filter((item) => {
+		const incoTermObject = fclIncoTerms.find(({ name }) => name === item) || {};
 
 		const { inco_terms = [] } = incoTermObject;
 
-		return !inco_terms.includes(selectedValue);
+		return !isEmpty(incoTermObject) && !inco_terms.includes(selectedValue);
 	}).map((item) => fclIncoTerms.find((incoTerm) => incoTerm.name === item));
 
 	return (
