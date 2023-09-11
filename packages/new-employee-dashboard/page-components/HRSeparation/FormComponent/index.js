@@ -46,15 +46,15 @@ const COMPONENT_MAPPING = {
 };
 
 function FormComponent() {
-	const { data } = useGetApplicationProcessDetails();
+	const { data, loading, refetchApplicationDetails } = useGetApplicationProcessDetails();
 
 	console.log('data :: ', data);
 
-	const Render = COMPONENT_MAPPING.employee.HOTOClearance;
+	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
 
 	return (
 		<div className={styles.container}>
-			<Render />
+			<Render data={data} loading={loading} refetch={refetchApplicationDetails} />
 		</div>
 	);
 }
