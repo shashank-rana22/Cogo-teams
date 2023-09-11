@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 16px 24px;
+	text-align: center;
+	background-image: url("https://cogoport-testing.sgp1.digitaloceanspaces.com/110855972d22e06d8d399992ee44ecf8/confetti.png");
+	background-repeat: no-repeat;
+	background-position-x: center;
+	background-size: 280px;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 24px;
+	text-align: center;
+}
+
+.title {
+	margin: 40px 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: rgb(57 63 112);
+	text-transform: capitalize;
+}
+
+.text {
+	font-size: 14px;
+	font-weight: 500;
+	color: rgb(57 63 112);
+}
+
+.balance_container {
+	display: flex;
+	align-items: center;
+}
+
+.copy_container {
+	display: flex;
+	align-items: center;
+	padding: 4px;
+	margin-top: 24px;
+	font-size: 16px;
+	font-weight: 500;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.copy_icon {
+	cursor: pointer;
+}

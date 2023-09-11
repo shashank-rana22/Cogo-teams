@@ -15,6 +15,7 @@ function ReceiveDiv({ eachList = {} }) {
 		end_time_of_call,
 		dtmf_inputs = [],
 		channel_type = '',
+		communication_log = {},
 	} = eachList || {};
 
 	const date = 	created_at ? formatDate({
@@ -42,6 +43,7 @@ function ReceiveDiv({ eachList = {} }) {
 					startTimeOfCall={start_time_of_call}
 					dtmfInputs={dtmf_inputs}
 					channelType={channel_type}
+					communication_log={communication_log}
 				/>
 			</div>
 		</div>

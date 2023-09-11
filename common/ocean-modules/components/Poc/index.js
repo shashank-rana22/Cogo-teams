@@ -8,6 +8,7 @@ import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartne
 
 import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
+import Agent from './components/Agent';
 import InvoicingParty from './components/InvoicingParty';
 import NotifyingParty from './components/NotifyingParty';
 import Pocs from './components/Pocs';
@@ -110,6 +111,10 @@ function Poc({
 								rolesPermission={rolesPermission}
 							/>
 						) : null}
+
+						{shipment_data?.end_to_end_shipment?.is_possible
+						&& primary_service?.trade_type === 'import'
+						&& <Agent primary_service={primary_service} />}
 
 						{!isEmpty(addCompany) && (
 							<AddCompanyModal

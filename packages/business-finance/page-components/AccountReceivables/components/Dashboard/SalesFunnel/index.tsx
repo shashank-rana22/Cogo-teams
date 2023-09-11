@@ -1,9 +1,10 @@
 import { Tooltip, Placeholder, Select } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { SALES_FUNNEL_OPTIONS } from '../../../constants';
+import { getSalesFunnelOptions } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -29,6 +30,8 @@ function SalesFunnel({
 	salesFunnelData, salesFunnelMonth, setSalesFunnelMonth,
 	salesFunnelLoading, entityCode,
 }: SalesFunnelProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',
@@ -44,25 +47,25 @@ function SalesFunnel({
 	const salesFunnel = [
 		{
 			id         : 1,
-			name       : 'Draft',
+			name       : t('draft'),
 			count      : draftInvoicesCount || 0,
 			percentage : draftToFinanceAcceptedPercentage || 0,
 		},
 		{
 			id         : 2,
-			name       : 'Finance Accepted',
+			name       : t('finance_accepted'),
 			count      : financeAcceptedInvoiceCount || 0,
 			percentage : financeToIrnPercentage || 0,
 		},
 		{
 			id         : 3,
-			name       : `${irnLabel} Generated`,
+			name       : `${irnLabel} ${t('generated')}`,
 			count      : irnGeneratedInvoicesCount || 0,
 			percentage : settledPercentage || 0,
 		},
 		{
 			id    : 4,
-			name  : 'Settled',
+			name  : t('settled'),
 			count : settledInvoicesCount || 0,
 		},
 	];
@@ -82,15 +85,13 @@ function SalesFunnel({
 						<div
 							className={styles.styled_text}
 						>
-							Sales Funnel
+							{t('sales_funnel')}
 						</div>
 
 						<Tooltip
 							content={(
-								<div>
-									Current month Invoice
-									<br />
-									journey.
+								<div className={styles.tooltip}>
+									{t('sales_funnel_tooltip')}
 								</div>
 							)}
 							placement="top"
@@ -105,8 +106,8 @@ function SalesFunnel({
 					<Select
 						value={salesFunnelMonth}
 						onChange={(val:string) => onChange(val)}
-						placeholder="By Month"
-						options={SALES_FUNNEL_OPTIONS}
+						placeholder={t('by_month_placeholder')}
+						options={getSalesFunnelOptions(t)}
 						isClearable
 					/>
 				</div>

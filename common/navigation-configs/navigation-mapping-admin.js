@@ -51,6 +51,7 @@ import {
 	IcMEnquiriesReceived,
 	IcMDunning,
 	IcMDashboard,
+	IcAWarehouse,
 	IcMCreditRequest,
 	IcCCogoassured,
 	IcMOverview,
@@ -201,6 +202,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.app_saas_cogo_subscription,
 				...apis.sales_dashboard,
 				...apis.cogopoints,
+				...apis.ssr,
 			],
 			main_apis: [
 				'list_organization_users',
@@ -224,6 +226,19 @@ const navigationMapping = ({ t = () => {} }) => {
 				...apis.sales,
 			],
 			main_apis   : ['list_organizations'],
+			module_type : 'crm',
+		},
+		governance_manager: {
+			key           : 'governance_manager',
+			title         : 'Governance Manager',
+			href          : '/v2/governance-manager',
+			as            : '/v2/governance-manager',
+			type          : 'link',
+			icon          : IcMCrm,
+			possible_apis : [
+				...apis.governance_manager,
+			],
+			main_apis   : [],
 			module_type : 'crm',
 		},
 		support_crm: {
@@ -298,6 +313,21 @@ const navigationMapping = ({ t = () => {} }) => {
 				'list_margins',
 				'list_checkouts',
 				'list_partners',
+			],
+			module_type: 'dashboards',
+		},
+		service_discovery: {
+			key           : 'service_discovery',
+			title         : t('common:service_discovery'),
+			href          : '/v2/service-discovery',
+			as            : '/v2/service-discovery',
+			type          : 'link',
+			icon          : IcMFinanceDashboard,
+			possible_apis : apis.service_discovery,
+			main_apis     : [
+				'list_spot_searches',
+				'list_checkouts',
+				'list_organizations',
 			],
 			module_type: 'dashboards',
 		},
@@ -584,7 +614,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis   : ['list_checkouts'],
 			module_type : 'crm',
 		},
-
 		saas_tracking: {
 			key           : 'saas_tracking',
 			title         : t('common:container_tracking'),
@@ -799,8 +828,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		trade_parties: {
 			key           : 'trade_parties',
 			title         : t('common:trade_parties'),
-			href          : '/trade-parties',
-			as            : '/trade-parties',
+			href          : '/v2/trade-parties',
+			as            : '/v2/trade-parties',
 			icon          : IcMTradeparties,
 			type          : 'link',
 			possible_apis : apis.trade_parties,
@@ -1313,8 +1342,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'coe-cancellation_policies',
 					title         : t('common:cancellation_policies'),
-					href          : '/cancellation-policies',
-					as            : '/cancellation-policies',
+					href          : '/v2/cancellation-policies',
+					as            : '/v2/cancellation-policies',
 					type          : 'link',
 					main_apis     : ['list_shipment_cancellation_charges'],
 					possible_apis : apis.shipment_cancellation_policies,
@@ -1918,6 +1947,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			module_type   : 'dashboards',
 		},
 
+		warehouse_management: {
+			key           : 'warehouse_management',
+			title         : 'Warehouse Management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			href          : '/v2/warehouse-management',
+			as            : '/v2/warehouse-management',
+			possible_apis : apis.warehouse_management,
+			icon          : IcAWarehouse,
+		},
+
 		enrichment: {
 			key           : 'enrichment',
 			title         : t('common:enrichment'),
@@ -2085,8 +2125,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		manage_rfq: {
 			key           : 'manage_rfq',
 			title         : t('common:manage_rfq'),
-			href          : '/manage-rfq',
-			as            : '/manage-rfq',
+			href          : '/manage-rfq?activeTab=draft&page=1',
+			as            : '/manage-rfq?activeTab=draft&page=1',
 			type          : 'link',
 			main_apis     : ['list_rfqs'],
 			possible_apis : apis.manage_rfq,
@@ -2547,6 +2587,15 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.centralised_customer_service,
 			icon          : IcMDashboard,
 		},
+		warehouse_app: {
+			key           : 'warehouse_app',
+			title         : 'Warehouse App',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			possible_apis : apis.warehouse_app,
+			icon          : IcAWarehouse,
+		},
 		resources: {
 			key           : 'resources',
 			title         : t('common:api_resource'),
@@ -2587,6 +2636,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis: [],
 				},
 			],
+		},
+		attendance_leave_management: {
+			key           : 'attendance_leave_management',
+			title         : 'Attendance and Leave Management',
+			icon          : IcMDashboard,
+			href          : '/v2/attendance-leave-management',
+			as            : '/v2/attendance-leave-management',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.attendance_leave_management,
 		},
 	};
 

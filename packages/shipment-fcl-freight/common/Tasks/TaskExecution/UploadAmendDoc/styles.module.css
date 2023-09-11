@@ -7,6 +7,13 @@
 .button_wrap {
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 12px;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
 }
 
 .custom_div {
