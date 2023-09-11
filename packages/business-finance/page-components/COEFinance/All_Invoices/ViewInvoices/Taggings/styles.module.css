@@ -124,7 +124,10 @@
 }
 
 .heading_data {
-	font-weight: 400;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 0;
+	cursor: pointer;
 }
 
 .border {
