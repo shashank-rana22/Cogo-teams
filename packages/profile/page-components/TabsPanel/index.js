@@ -13,6 +13,44 @@ import styles from './styles.module.css';
 function TabsPanel({ data = {} }) {
 	const [activeTab, setActiveTab] = useState('personal_details');
 
+	const tabsMapping = [
+		{
+			name      : 'personal_details',
+			title     : 'Personal Details',
+			Component : () => (<PersonalDetails data={data} />),
+		},
+		{
+			name      : 'education_and_skills',
+			title     : 'Education & Skills',
+			Component : () => (<EducationDetails data={data} />),
+		},
+		{
+			name      : 'employment_details',
+			title     : 'Employment Details',
+			Component : () => (<EmploymentDetails data={data} />),
+		},
+		{
+			name      : 'statutory_details',
+			title     : 'Statutory Details',
+			Component : () => (<StatutoryDetails data={data} />),
+		},
+		{
+			name      : 'salary_details',
+			title     : 'Salary Details',
+			Component : () => (<SalaryDetails data={data} />),
+		},
+		{
+			name      : 'documents',
+			title     : 'Documents',
+			Component : () => (<Documents data={data} />),
+		},
+		{
+			name      : 'other_details',
+			title     : 'Other Details',
+			Component : () => (<OtherDetails data={data} />),
+		},
+	];
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.tabs_container}>
@@ -22,27 +60,13 @@ function TabsPanel({ data = {} }) {
 					fullWidth
 					onChange={setActiveTab}
 				>
-					<TabPanel name="personal_details" title="Personal Details">
-						<PersonalDetails data={data} />
-					</TabPanel>
-					<TabPanel name="education_and_skills" title="Education & Skills">
-						<EducationDetails data={data} />
-					</TabPanel>
-					<TabPanel name="employment_details" title="Employment Details">
-						<EmploymentDetails data={data} />
-					</TabPanel>
-					<TabPanel name="statutory_details" title="Statutory Details">
-						<StatutoryDetails data={data} />
-					</TabPanel>
-					<TabPanel name="salary_details" title="Salary Details">
-						<SalaryDetails data={data} />
-					</TabPanel>
-					<TabPanel name="documents" title="Documents">
-						<Documents data={data} />
-					</TabPanel>
-					<TabPanel name="other_details" title="Other Details">
-						<OtherDetails data={data} />
-					</TabPanel>
+					{
+						tabsMapping.map(({ name, title, Component }) => (
+							<TabPanel name={name} title={title} key={name}>
+								<Component />
+							</TabPanel>
+						))
+					}
 				</Tabs>
 			</div>
 		</div>

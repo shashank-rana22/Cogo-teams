@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
+import { employmentInfo } from '../../../utils/info';
+import { otherEmploymentInfo } from '../../../utils/otherInfo';
 import DetailsCard from '../DetailsCard';
 import RightGlance from '../RightGlance';
 
@@ -8,37 +10,8 @@ import EmploymentStatus from './EmploymentStatus';
 import styles from './styles.module.css';
 
 function EmploymentDetails({ data = {} }) {
-	const info = [
-		{
-			heading : 'BASIC DETAILS',
-			details : [
-				{ label: 'Employee Code', key: 'details', value: 'employee_code' },
-				{ label: 'Employment Type', key: 'details', value: 'employee_type' },
-				{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
-				{ label: 'Age in Organization', key: 'processed', value: 'age_in_organization' },
-			],
-		},
-		{
-			heading : 'JOB  INFORMATION',
-			details : [
-				{ label: 'Branch Location', key: 'details', value: 'office_location' },
-				{ label: 'Department', key: 'details', value: 'department' },
-				{ label: 'Role', key: 'details', value: 'role_name' },
-				{ label: 'Designation', key: 'details', value: 'designation' },
-				{ label: 'Reporting Supervisor', key: 'details', value: 'reporting_manager_name' },
-				{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
-				{ label: 'Job Segment', key: 'details', value: 'job_segment' },
-				{ label: 'PMS', key: 'details', value: 'Set C' },
-			],
-		},
-	];
-
-	const otherInfo = [
-		{ label: 'Employment Type', key: 'details', value: 'employee_type' },
-		{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
-		{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
-		{ label: 'Employee Code', key: 'details', value: 'employee_code' },
-	];
+	const info = employmentInfo;
+	const otherInfo = otherEmploymentInfo;
 
 	return (
 		<div className={styles.tab_content}>

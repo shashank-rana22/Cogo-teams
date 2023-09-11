@@ -1,0 +1,43 @@
+export const otherPersonalInfo = [
+	{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
+	{ label: 'Age in Organsization', key: 'processed', value: 'age_in_organization' },
+	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
+	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
+	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
+];
+
+export const otherEmploymentInfo = [
+	{ label: 'Employment Type', key: 'details', value: 'employee_type' },
+	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
+	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
+	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
+];
+
+export const otherStatuoryInfo = [
+	{ label: 'PF Number', value: '00125510' },
+	{ label: 'UAN Number', value: '54893120051' },
+	{ label: 'Tax Regime', value: 'Old Regime' },
+];
+
+export const otherSalaryInfo = [
+	{ label: 'Monthly Gross', value: '79654' },
+	{ label: 'Monthly CTC', value: '82999' },
+	{ label: 'Annual CTC', value: '1000000' },
+	{ label: 'Tax Regime', value: 'Old Regime' },
+];
+
+export const otherDocumentsInfo = [
+	{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
+	{ label: 'Age in Organsization', key: 'processed', value: 'age_in_organization' },
+	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
+	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
+	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
+];
+
+export const otherOtherInfo = [
+	{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
+	{ label: 'Age in Organsization', key: 'processed', value: 'age_in_organization' },
+	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
+	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
+	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
+];

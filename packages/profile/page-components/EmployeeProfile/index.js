@@ -2,16 +2,13 @@ import { Button } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMEdit,
-	IcMBusiness,
-	IcMLocation,
 	IcMArrowDown,
-	IcMEmail,
-	IcMCall,
 } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeData';
+import { getEmployeeData } from '../../utils/constants';
 import TabsPanel from '../TabsPanel';
 
 import styles from './styles.module.css';
@@ -20,7 +17,6 @@ function EmployeeProfile() {
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
-
 	const { loading, data } = useGetEmployeeDetails(user.id);
 
 	if (loading) {
@@ -28,12 +24,7 @@ function EmployeeProfile() {
 	}
 
 	const { employee_detail } = data || {};
-	const designationLocation = [
-		{ Icon: () => (<IcMBusiness width={14} height={14} />), value: employee_detail?.role_name },
-		{ Icon: () => (<IcMLocation width={14} height={14} />), value: employee_detail?.office_location },
-		{ Icon: () => (<IcMEmail width={14} height={14} />), value: employee_detail?.cogoport_email },
-		{ Icon: () => (<IcMCall width={14} height={14} />), value: employee_detail?.mobile_number },
-	];
+	const employeeData = getEmployeeData(employee_detail);
 
 	return (
 		<div className={styles.main_container}>
@@ -84,17 +75,14 @@ function EmployeeProfile() {
 								</Button>
 							</div>
 							<div className={styles.desig_location}>
-								{designationLocation.map(({ Icon, value }) => (
+								{employeeData.map(({ Icon, value }) => (
 									<div className={styles.desig_location_element} key={value}>
-										<Icon />
+										{Icon}
 										<span className={styles.desig_location_value}>{value}</span>
 									</div>
 								))}
 							</div>
 						</div>
-						{/* <div className="action_button_container">
-
-						</div> */}
 					</div>
 				</div>
 				<TabsPanel data={data} />
