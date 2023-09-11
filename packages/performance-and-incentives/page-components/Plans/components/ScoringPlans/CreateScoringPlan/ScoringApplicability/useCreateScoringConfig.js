@@ -1,11 +1,20 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+
+import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
 
 const useCreateScoringConfig = () => {
 	// const { id } = router.query;
 
 	// const { url = '', authkey = '' } = apiMapping({ id, agentExpSlabs });
+
+	const { control, formState: { errors }, handleSubmit, watch } = useForm();
+
+	const [cogoEntityId, roleFunction, channel] = watch(['cogo_entity_id', 'role_function', 'channel']);
+
+	const controls = getScoreApplicableFormControls({ cogoEntityId, roleFunction, channel });
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'config',
@@ -13,7 +22,7 @@ const useCreateScoringConfig = () => {
 		authkey : 'post_agent_scoring_config',
 	}, { manual: true });
 
-	const createScoringConfig = async ({ values = {} }) => {
+	const onCreateScoringConfig = async ({ values = {} }) => {
 		try {
 			const res = await trigger({
 				data: {
@@ -34,7 +43,11 @@ const useCreateScoringConfig = () => {
 	};
 
 	return {
-		createScoringConfig,
+		controls,
+		control,
+		errors,
+		handleSubmit,
+		onCreateScoringConfig,
 		loading,
 	};
 };

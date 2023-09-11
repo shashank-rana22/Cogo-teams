@@ -1,10 +1,12 @@
-const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel, channelOptions }) => ([
+import CHANNEL_OPTIONS from '../constants/select-channel-options';
+
+const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel }) => ([
 	{
 		name        : 'display_name',
 		label       : 'Display Name',
 		type        : 'text',
 		placeholder : 'Enter Name',
-		rules       : { required: 'This is required' },
+		rules       : { required: 'Name is required' },
 	},
 	{
 		name        : 'cogo_entity_id',
@@ -20,7 +22,7 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel, c
 			},
 			page_limit: 10,
 		},
-		rules: { required: 'This is required' },
+		rules: { required: 'Cogo Entity is required' },
 	},
 	{
 		name    : 'role_function',
@@ -56,14 +58,14 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel, c
 				value : 'external',
 			},
 		],
-		rules: { required: 'This is required' },
+		rules: { required: 'Role function is required' },
 	},
 	{
 		name    : 'channel',
 		label   : 'Channel',
 		type    : 'select',
-		options : channelOptions,
-		rules   : { required: 'This is required' },
+		options : CHANNEL_OPTIONS[roleFunction] || [],
+		rules   : { required: 'Channel is required' },
 	},
 	{
 		name        : 'role_ids',
@@ -79,8 +81,7 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel, c
 			channels        : channel ? [channel] : undefined,
 			status          : true,
 		},
-		style : { flexBasis: '27%' },
-		rules : { required: 'This is required' },
+		rules: { required: 'Roles are required' },
 	},
 ]);
 

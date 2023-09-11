@@ -47,19 +47,18 @@ function BlockwiseScoring() {
 
 			<div className={styles.btn_container}>
 				<Button
-					size="md"
+					size="lg"
 					type="button"
 					themeType="secondary"
-					className={styles.btn}
+					style={{ marginRight: '8px' }}
 				>
-					<b>Cancel</b>
+					Cancel
 				</Button>
 
 				<Button
-					size="md"
+					size="lg"
 					type="button"
 					themeType="primary"
-					className={styles.btn}
 				>
 					Create Scoring
 				</Button>
