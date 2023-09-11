@@ -113,7 +113,7 @@ function ShipmentDetailsCard({
 
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
 
-	const handleClick = (id: number) => {
+	const handleClick = (id?: number) => {
 		const approveData = [...showValue, id];
 		setShowValue(approveData);
 		DetailsCard.push(DetailsCard.shift());
@@ -149,7 +149,7 @@ function ShipmentDetailsCard({
 
 	const { docContent } = useGetDocumentContent({ data });
 
-	const handleClickUndo = (id: number) => {
+	const handleClickUndo = (id?: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
 		setShowValue(undoApprovedData);
 		const undoRejectedData = rejected.filter((item: any) => item !== id);
@@ -164,7 +164,7 @@ function ShipmentDetailsCard({
 		}
 	};
 
-	const handleClickReject = (id: number) => {
+	const handleClickReject = (id?: number) => {
 		setShowRejected((previousActions: any) => ({
 			...previousActions,
 			[id]: !previousActions[id],

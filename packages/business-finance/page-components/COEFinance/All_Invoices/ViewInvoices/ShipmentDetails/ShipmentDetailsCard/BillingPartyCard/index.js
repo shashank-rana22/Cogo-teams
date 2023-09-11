@@ -12,14 +12,14 @@ const CARD_ID = 2;
 function BillingPartyCard({
 	id = '',
 	label = '',
-	showValue = false,
+	showValue = [],
 	isInvoiceApproved = false,
-	rejected = true,
+	rejected = [],
 	handleClickUndo = () => {},
 	billingPartyRejectionList = [],
 	handleClickReject = () => {},
 	handleClick = () => {},
-	isDisabled = false,
+	isDisabled = () => {},
 	status = '',
 	docContent = '',
 }) {
