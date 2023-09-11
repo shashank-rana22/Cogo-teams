@@ -6,7 +6,7 @@ import useListStakeholders from '@cogoport/ocean-modules/hooks/useListShipmentSt
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import useIncidentReOpenJob from '../../hooks/useIncidentReOpenJob';
+import useIncidentReOpenJob from '../../../hooks/useIncidentReOpenJob';
 
 import controls from './controls';
 import styles from './styles.module.css';

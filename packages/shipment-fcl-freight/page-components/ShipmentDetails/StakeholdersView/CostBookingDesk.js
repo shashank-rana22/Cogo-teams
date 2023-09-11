@@ -12,7 +12,6 @@ import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import PurchaseInvoice from '../../../common/PurchaseInvoice';
-import ReOpenJob from '../../../common/ReOpenJob';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -30,7 +29,6 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
-	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -68,7 +66,6 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 						<JobStatus
 							shipment_data={shipment_data}
 							activeStakeholder={activeStakeholder}
-							setReOpenJobModal={setReOpenJobModal}
 						/>
 					)}
 
@@ -125,14 +122,6 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 
 				{!isEmpty(rollover_containers) ? (
 					<RolloverRequestedModal rollover_containers={rollover_containers} />
-				) : null}
-
-				{reOpenJobModal ? (
-					<ReOpenJob
-						showModal={reOpenJobModal}
-						setShowModal={setReOpenJobModal}
-						shipmentData={shipment_data}
-					/>
 				) : null}
 
 			</ShipmentDetailContext.Provider>

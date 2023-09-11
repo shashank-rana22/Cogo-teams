@@ -1,5 +1,7 @@
 import { Button, Pill } from '@cogoport/components';
+import { useState } from 'react';
 
+import ReOpenJob from './ReOpenJob';
 import styles from './styles.module.css';
 
 const JOB_OPEN_ALLOWED_ROLES = [
@@ -10,7 +12,9 @@ const JOB_OPEN_ALLOWED_ROLES = [
 	'operation_manager',
 ];
 
-function JobStatus({ shipment_data = {}, activeStakeholder = '', setReOpenJobModal = () => {} }) {
+function JobStatus({ shipment_data = {}, activeStakeholder = '' }) {
+	const [showModal, setShowModal] = useState(false);
+
 	if (shipment_data?.is_job_closed_financially) {
 		return (
 			<div className={styles.job_closed_container}>
@@ -28,11 +32,14 @@ function JobStatus({ shipment_data = {}, activeStakeholder = '', setReOpenJobMod
 					className={styles.job_undo_button}
 					themeType="link"
 					size="md"
-					onClick={() => setReOpenJobModal(true)}
+					onClick={() => setShowModal(true)}
 				>
 					Undo
 				</Button>
 			)}
+			{setShowModal ? (
+				<ReOpenJob shipmentData={shipment_data} showModal={showModal} setShowModal={setShowModal} />
+			) : null}
 		</div>
 	);
 }

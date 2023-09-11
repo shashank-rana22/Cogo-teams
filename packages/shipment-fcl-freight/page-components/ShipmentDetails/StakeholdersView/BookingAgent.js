@@ -12,7 +12,6 @@ import Documents from '../../../common/Documents';
 import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import ReOpenJob from '../../../common/ReOpenJob';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import SalesInvoice from '../../../common/SalesInvoice';
@@ -31,7 +30,6 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('overview');
-	const [reOpenJobModal, setReOpenJobModal] = useState(false);
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -71,7 +69,6 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 						<JobStatus
 							shipment_data={shipment_data}
 							activeStakeholder={activeStakeholder}
-							setReOpenJobModal={setReOpenJobModal}
 						/>
 					)}
 
@@ -121,14 +118,6 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 
 				{!isEmpty(rollover_containers) ? (
 					<RolloverActionModal rollover_containers={rollover_containers} />
-				) : null}
-
-				{reOpenJobModal ? (
-					<ReOpenJob
-						showModal={reOpenJobModal}
-						setShowModal={setReOpenJobModal}
-						shipmentData={shipment_data}
-					/>
 				) : null}
 
 			</ShipmentDetailContext.Provider>
