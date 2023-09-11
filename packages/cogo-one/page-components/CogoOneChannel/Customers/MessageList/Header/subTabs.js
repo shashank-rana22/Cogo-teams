@@ -8,13 +8,14 @@ import styles from './styles.module.css';
 const MORE_THAN_SINGLE_TAB = 2;
 
 function SubTabs({
-	activeSubTab,
-	setActiveSubTab,
-	viewType,
-	setAppliedFilters,
-	setIsBotSession,
+	activeSubTab = () => {},
+	setActiveSubTab = () => {},
+	viewType = '',
+	setAppliedFilters = () => {},
+	setIsBotSession = () => {},
+	activeTab = '',
 }) {
-	const subTabMapping = getSubTabsMapping({ viewType });
+	const subTabMapping = getSubTabsMapping({ viewType, activeTab });
 
 	const handleTabClick = ({ name }) => {
 		setActiveSubTab(name);
