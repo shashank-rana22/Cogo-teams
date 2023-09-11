@@ -46,7 +46,7 @@ export default {
 	uuid             : {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '9e6d7963-ac80-440c-904a-71ebd0cf8e8d',
-		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
+		admin_id                         : '1abddbc5-cbb7-4fb0-a9e7-600b9e36bb0f',
 		parent_entity_id                 : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
@@ -460,6 +460,7 @@ export default {
 					'manage_forecast',
 					'rfq_enquiries',
 					'rates_sheets',
+					'rate_density',
 				],
 			},
 		},

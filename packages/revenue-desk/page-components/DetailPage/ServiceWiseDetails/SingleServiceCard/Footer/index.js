@@ -1,3 +1,4 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase } from '@cogoport/utils';
 
 import useGetRDWallet from '../../../../../hooks/useGetRDWallet';
@@ -6,7 +7,7 @@ import styles from './styles.module.css';
 
 function Footer({ data = {} }) {
 	const { data: walletAmount } = useGetRDWallet({ data });
-	const { wallet_amount = '' } = walletAmount || {};
+	const { wallet_amount = '', currency = '' } = walletAmount || {};
 
 	const infoArray = [
 		{
@@ -56,7 +57,16 @@ function Footer({ data = {} }) {
 					Wallet Balance -
 					{' '}
 					<span className={styles.price_text}>
-						{wallet_amount}
+						{formatAmount({
+							amount  : wallet_amount,
+							currency,
+							options : {
+								style                 : 'currency',
+								notation              : 'compact',
+								compactDisplay        : 'short',
+								minimumFractionDigits : 2,
+							},
+						})}
 					</span>
 				</div>
 			</div>
