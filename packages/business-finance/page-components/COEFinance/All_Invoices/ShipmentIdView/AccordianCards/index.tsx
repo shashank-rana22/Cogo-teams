@@ -263,7 +263,7 @@ function AccordianCards({
 					)}
 				</div>
 				<div>
-					{showInvoices || currentOpenSID === jobId ? (
+					{(showInvoices || currentOpenSID === jobId) && (
 						<CardItem
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}
@@ -272,21 +272,10 @@ function AccordianCards({
 							amountTab={amountTab}
 							setAmountTab={setAmountTab}
 							showInvoices={showInvoices}
+							setShowInvoices={setShowInvoices}
+							setCheckItem={setCheckItem}
 						/>
-					) : null}
-					{showInvoices ? (
-						<Button
-							size="md"
-							themeType="secondary"
-							style={{ marginRight: '8px' }}
-							onClick={() => setCheckItem(
-								(prev: any) => ({ ...prev, sidDataCheck: true }),
-							)}
-							className={styles.approve_button}
-						>
-							Accept
-						</Button>
-					) : undefined }
+					)}
 
 				</div>
 			</div>

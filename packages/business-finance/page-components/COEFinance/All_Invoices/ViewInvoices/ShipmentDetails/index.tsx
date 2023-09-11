@@ -124,7 +124,7 @@ function ShipmentDetails({
 	setCheckItem = () => {},
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
-	const [showDocuments, setShowDocuments] = useState(true);
+	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
@@ -143,12 +143,15 @@ function ShipmentDetails({
 		amount_currency: amountCurrency,
 	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	// const handleClick = (itemToCheck) => {
-	// 	setCheckItem((prev: any) => ({ ...prev, itemToCheck: true }))};
-	// 	setShowDetails(!showDetails);
-	// }
-
 	const jobTypeValue = jobType?.toLowerCase();
+
+	const onAccept = ({ valueName = '', setCloseDetails = (prop:boolean) => prop }) => {
+		setCloseDetails(false);
+		setCheckItem(
+			(prev: any) => ({ ...prev, [valueName]: true }),
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<h3>
@@ -224,8 +227,7 @@ function ShipmentDetails({
 						</div>
 
 						{showDetails ? (
-							<div>
-								<div className={styles.hr} />
+							<div className={styles.shipment_container_section}>
 								<div className={styles.details}>
 									<Details
 										dataList={dataList}
@@ -236,9 +238,10 @@ function ShipmentDetails({
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
-									onClick={() => setCheckItem(
-										(prev: any) => ({ ...prev, shipmentDetailsCheck: true }),
-									)}
+									onClick={() => onAccept({
+										valueName       : 'shipmentDetailsCheck',
+										setCloseDetails : setShowDetails,
+									})}
 									className={styles.approve_button}
 								>
 									Accept
@@ -282,19 +285,22 @@ function ShipmentDetails({
 							{showDocuments && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
-						{showDocuments ? (
-							<Button
-								size="md"
-								themeType="secondary"
-								style={{ marginRight: '8px' }}
-								onClick={() => setCheckItem(
-									(prev: any) => ({ ...prev, documentsCheck: true }),
-								)}
-								className={styles.approve_button}
-							>
-								Accept
-							</Button>
-						) : undefined}
+						{showDocuments && (
+							<div className={styles.apply_section}>
+								<Button
+									size="md"
+									themeType="secondary"
+									style={{ marginRight: '8px' }}
+									onClick={() => onAccept({
+										valueName       : 'documentsCheck',
+										setCloseDetails : setShowDocuments,
+									})}
+									className={styles.approve_button}
+								>
+									Accept
+								</Button>
+							</div>
+						)}
 					</div>
 
 					<div className={styles.tagging}>
@@ -315,6 +321,7 @@ function ShipmentDetails({
 						<Accordion
 							type="text"
 							title="Shipment Details"
+							animate
 						>
 							<div className={styles.line} />
 							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds} />

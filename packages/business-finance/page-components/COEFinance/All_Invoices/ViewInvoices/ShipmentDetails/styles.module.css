@@ -154,4 +154,16 @@
 	margin: 10px;
 	font-size: var(--font-size-md);
 	font-weight: 500;
+	border: 1px solid !important;
+}
+
+.shipment_container_section {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.apply_section {
+	display: flex;
+	justify-content: end;
+	width: 100%;
 }
