@@ -1,16 +1,18 @@
 import { isEmpty } from '@cogoport/utils';
 
+import SERVICE_TYPE from '../../../../config/service-type.json';
+
 const getTncControls = ({ item = {} }) => {
 	const {
-		id,
-		service,
-		trade_type,
-		country_id,
-		shipping_line_id,
-		airline_id,
-		paying_party_country_ids,
-		description,
-	} = item;
+		id = null,
+		service = undefined,
+		trade_type = undefined,
+		country_id = undefined,
+		shipping_line_id = undefined,
+		airline_id = undefined,
+		paying_party_country_ids = [],
+		description = undefined,
+	} = item || {};
 	let newDesc = [
 		{
 			terms_and_condition: '',
@@ -23,30 +25,14 @@ const getTncControls = ({ item = {} }) => {
 	}
 	return [
 		{
-			name      : 'service',
-			label     : 'Service Type',
-			type      : 'select',
-			value     : service || 'fcl_freight',
-			disabled  : !!id,
-			className : 'primary lg',
-			options   : [
-				{ label: 'FCL', value: 'fcl_freight' },
-				{ label: 'LCL', value: 'lcl_freight' },
-				{ label: 'AIR', value: 'air_freight' },
-				{ label: 'FTL', value: 'ftl_freight' },
-				{ label: 'LTL', value: 'ltl_freight' },
-				{ label: 'Trailer', value: 'trailer_freight' },
-				{ label: 'Haulage', value: 'haulage_freight' },
-				// { label: 'Rails Domestic', value: 'rail_domestic_freight' },
-				{ label: 'FCL Customs', value: 'fcl_customs' },
-				{ label: 'LCL Customs', value: 'lcl_customs' },
-				{ label: 'Air Customs', value: 'air_customs' },
-				{ label: 'FCL Locals', value: 'fcl_freight_local' },
-				{ label: 'LCL Locals', value: 'lcl_freight_local' },
-				{ label: 'Air Locals', value: 'air_freight_local' },
-			],
-			span  : 6,
-			rules : { required: true },
+			name     : 'service',
+			label    : 'Service Type',
+			type     : 'select',
+			value    : service || 'fcl_freight',
+			disabled : !!id,
+			options  : SERVICE_TYPE,
+			span     : 6,
+			rules    : { required: true },
 		},
 		{
 
@@ -59,7 +45,6 @@ const getTncControls = ({ item = {} }) => {
 			placeholder    : 'Select Shipping Line',
 			optionsListKey : 'shipping-lines',
 			defaultOptions : true,
-			cacheOptions   : false,
 			span           : 6,
 			isClearable    : true,
 			params         : {
@@ -92,7 +77,6 @@ const getTncControls = ({ item = {} }) => {
 			value       : trade_type,
 			disabled    : !!id,
 			placeholder : 'Select Trade Type',
-			className   : 'primary lg',
 			options     : [],
 			span        : 6,
 			isClearable : true,

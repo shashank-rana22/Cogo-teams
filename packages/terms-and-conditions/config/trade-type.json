@@ -1,0 +1,18 @@
+[
+    {
+        "label" : "Import",
+        "value" : "import"
+    },
+    {
+        "label" : "Export",
+        "value" : "export"
+    },
+    {
+        "label" : "Domestic",
+        "value" : "domestic"
+    },
+    {
+        "label" : "Overseas",
+        "value" : "overseas"
+    }
+]

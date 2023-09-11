@@ -1,29 +1,22 @@
 import { Toggle } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 
 import AddEdit from '../CreateUpdateTnC/AddEdit';
 
 import Filter from './Filters';
 import styles from './styles.module.css';
 
-function Header(props) {
-	const {
-		currentStatus,
-		action,
-		setCurrentStatus,
-		setPagination,
-		filters,
-		setFilters,
-		tncLevel,
-		setTncLevel,
-		setEditTncModalId,
-		editTncModalId,
-		refetch,
-	} = props;
-
-	const {
-		general: { isMobile = false },
-	} = useSelector((state) => state);
+function Header({
+	currentStatus = 'active',
+	setCurrentStatus = () => {},
+	setPagination = () => {},
+	filters = {},
+	setFilters = () => {},
+	tncLevel = 'basicInfo',
+	setTncLevel = () => {},
+	setEditTncModalId = () => {},
+	editTncModalId = null,
+	refetch = () => {},
+}) {
 	const onChangeToggleStatus = () => {
 		setCurrentStatus((pv) => (pv === 'active' ? 'inactive' : 'active'));
 		const FIRST_PAGE = 1;
@@ -39,8 +32,6 @@ function Header(props) {
 					setTncLevel={setTncLevel}
 					editTncModalId={editTncModalId}
 					setEditTncModalId={setEditTncModalId}
-					action={action}
-					isMobile={isMobile}
 				/>
 				<Toggle
 					onLabel="Inactive"

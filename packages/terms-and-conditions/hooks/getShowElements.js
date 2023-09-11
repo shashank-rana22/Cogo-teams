@@ -4,9 +4,7 @@ const tradeTypeAbsentForServices = [
 	'air_freight_local',
 ];
 
-const getShowElements = (props) => {
-	const { service, trade_type, controls } = props;
-
+const getShowElements = ({ service = '', trade_type = '', controls = [] }) => {
 	const showElements = controls.reduce((pv, cv) => {
 		const { name = '' } = cv;
 
@@ -28,7 +26,6 @@ const getShowElements = (props) => {
 
 		return { ...pv, [name]: showElement };
 	}, {});
-
 	return showElements;
 };
 

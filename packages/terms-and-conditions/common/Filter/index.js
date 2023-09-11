@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import getShowElements from '../../utlis/getShowElements';
-import getOptions from '../../utlis/service-to-trade-type-mappings';
+import getOptions from '../../config/service-to-trade-type-mappings';
+import getShowElements from '../../hooks/getShowElements';
 import Layout from '../Layout';
 
 import styles from './styles.module.css';

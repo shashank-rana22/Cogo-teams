@@ -1,29 +1,17 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState, useRef } from 'react';
 
+import CREATION_STEPS_MAPPING from '../../../config/creation-step-mapping.json';
+
 import Form from './Form';
 
 function AddEdit({
 	tncLevel = 'basicInfo',
 	setTncLevel = () => {},
-	isMobile = false,
 	organizationId = null,
 	setEditTncModalId = () => {},
 	refetch = () => {},
 }) {
-	const CREATION_STEPS_MAPPING = {
-		basicInfo: {
-			key   : 'basicInfo',
-			label : 'Basic Info',
-
-		},
-		termsAndCondition: {
-			key   : 'termsAndCondition',
-			label : 'Terms & Conditions',
-
-		},
-	};
-
 	const [showModal, setShowModal] = useState(false);
 	const formRef = useRef(null);
 
@@ -31,8 +19,6 @@ function AddEdit({
 		<div>
 			<Button onClick={() => setShowModal(true)}>
 				Create
-				{' '}
-				{isMobile ? 'T & C' : 'New'}
 			</Button>
 
 			{showModal ? (
@@ -49,7 +35,6 @@ function AddEdit({
 							ref={formRef}
 							refetch={refetch}
 							tncLevel={tncLevel}
-							isMobile={isMobile}
 							setTncLevel={setTncLevel}
 							organizationId={organizationId}
 							setEditTncModalId={setEditTncModalId}

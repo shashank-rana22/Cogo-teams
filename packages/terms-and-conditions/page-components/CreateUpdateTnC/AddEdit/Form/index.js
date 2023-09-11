@@ -3,10 +3,10 @@ import { useForm } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef, useMemo } from 'react';
 
 import Layout from '../../../../common/Layout';
+import getOptions from '../../../../config/service-to-trade-type-mappings';
+import getShowElements from '../../../../hooks/getShowElements';
 import useCreateUpdateTnc from '../../../../hooks/useCreateUpdateTnc';
 import useValidateTermsAndCondition from '../../../../hooks/useValidateTermsAndCondition';
-import getShowElements from '../../../../utlis/getShowElements';
-import getOptions from '../../../../utlis/service-to-trade-type-mappings';
 
 import getControls from './controls';
 import CONTROLS_FORM_TYPE_MAPPING from './formTypesControls.json';

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -7,18 +8,17 @@ function ShowMoreTNC(props) {
 
 	if (isEmpty(description)) {
 		return (
-			<div color="#393f70" size={12}>
+			<div className={styles.not_found}>
 				Data not Found
 			</div>
 		);
 	}
-	const ONE = 1;
 	return (
 		<div>
 			{description.map((item, index) => (
-				<div key={item.id} className={styles.applied_terms}>
+				<div key={item?.id} className={styles.applied_terms}>
 					<div className={styles.index}>
-						{index + ONE}
+						{index + GLOBAL_CONSTANTS.one}
 						.
 					</div>
 					{item}

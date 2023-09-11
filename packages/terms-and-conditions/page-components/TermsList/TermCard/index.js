@@ -2,8 +2,8 @@ import { Popover, Modal } from '@cogoport/components';
 import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import FREIGHT_DETAILS_MAPPING from '../../../utlis/freight-details-mapping';
-import SERVICE_TYPES_MAPPING from '../../../utlis/service-types-mapping';
+import FREIGHT_DETAILS_MAPPING from '../../../config/freight-details-mapping';
+import SERVICE_TYPES_MAPPING from '../../../config/service-types-mapping';
 import ShowMoreTNC from '../ShowMoreTnC';
 
 import PopOverContent from './PopContent';
@@ -26,10 +26,6 @@ function TermCard({
 
 	const editRef = useRef(null);
 
-	// const onEditSubmit = () => {
-	// 	editRef.current.formSubmit();
-	// };
-
 	const LABEL_MAPPING = {
 		fcl_freight : 'Shipping Line',
 		air_freight : 'Airline',
@@ -41,11 +37,6 @@ function TermCard({
 		<div>
 			<div
 				className={styles.container}
-				style={showMoreTnC ? {
-					'background-color'        : '#f6f5fe',
-					'border-top-left-radius'  : '8px',
-					'border-top-right-radius' : '8px',
-				} : null}
 			>
 				<div
 					className={styles.freight_item_header}

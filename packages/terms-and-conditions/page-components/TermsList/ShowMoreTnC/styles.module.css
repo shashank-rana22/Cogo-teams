@@ -10,3 +10,8 @@
 	font-size: 12px;
 	font-weight: 500;
 }
+
+.not_found {
+	font-size: 12;
+	color: "#393f70";
+}

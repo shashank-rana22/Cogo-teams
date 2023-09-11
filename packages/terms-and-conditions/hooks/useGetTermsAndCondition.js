@@ -1,10 +1,10 @@
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
+import getOptions from '../config/service-to-trade-type-mappings';
 import getFilterControls from '../utlis/get-filter-controls';
-import getOptions from '../utlis/service-to-trade-type-mappings';
 
 const useGetTermsAndCondition = () => {
 	const {
@@ -54,7 +54,7 @@ const useGetTermsAndCondition = () => {
 		return { ...newControl };
 	});
 
-	const getListTermsAndConditionsApi = () => {
+	const getListTermsAndConditionsApi = useCallback(() => {
 		const params = {
 			sort_by : 'updated_at',
 			filters : {
@@ -66,11 +66,11 @@ const useGetTermsAndCondition = () => {
 		};
 
 		trigger({ params });
-	};
+	}, [filters, currentStatus, trigger]);
+
 	useEffect(() => {
 		getListTermsAndConditionsApi();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentStatus, filters]);
+	}, [currentStatus, filters, getListTermsAndConditionsApi]);
 
 	const { list = [], total_count: totalCount = 0 } = data || {};
 

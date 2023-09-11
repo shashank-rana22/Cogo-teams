@@ -1,5 +1,5 @@
-// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals';
-import { Flex, Text, ToolTip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -9,13 +9,8 @@ function GetToolTipContent({ list = [] }) {
 	return (
 		<div>
 			{list.map((countryObj, i) => (
-				<div
-					key={countryObj.id}
-					color="#393f70"
-					size={12}
-					paddingBottom={i === list.length - 1 ? 0 : 4}
-				>
-					{i + 1}
+				<div key={countryObj.id}>
+					{i + GLOBAL_CONSTANTS.one}
 					.
 					{countryObj.name}
 				</div>
@@ -32,7 +27,7 @@ const FREIGHT_DETAILS_MAPPING = {
 			const service = item?.service;
 
 			return (
-				<div alignItems="center">
+				<div>
 					<div style={{ margin: '4px 4px 0px 0px' }}>
 						{SERVICE_TYPES_MAPPING?.[service]?.svgComponent || <IcMDocument />}
 					</div>
@@ -67,22 +62,18 @@ const FREIGHT_DETAILS_MAPPING = {
 		value : (item) => {
 			const payingPartyLength = item?.paying_party_countries?.length;
 
-			if (payingPartyLength === 0) {
+			if (payingPartyLength === GLOBAL_CONSTANTS.zeroth_index) {
 				return null;
 			}
 
 			return (
-				<div
-					placement="left"
-					maxWidth="none"
-					theme="light-border"
-					interactive
-					content={GetToolTipContent({ list: item.paying_party_countries })}
-				>
-					<div size={12} color="#5936f0" marginTop={4}>
-						{item.paying_party_countries?.[0]?.name}
+				<div>
+					<Tooltip content={GetToolTipContent({ list: item.paying_party_countries })} />
+					<div>
+						{item.paying_party_countries?.[GLOBAL_CONSTANTS.zeroth_index]?.name}
 						{' '}
-						{payingPartyLength - 1 > 0 ? `(+${payingPartyLength - 1})` : null}
+						{payingPartyLength - GLOBAL_CONSTANTS.one > GLOBAL_CONSTANTS.zeroth_index
+							? `(+${payingPartyLength - GLOBAL_CONSTANTS.one})` : null}
 					</div>
 				</div>
 			);
@@ -94,8 +85,7 @@ const FREIGHT_DETAILS_MAPPING = {
 		label : 'Last updated on',
 		value : (item) => format(
 			item?.updated_at,
-			// dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			 'yyyy-MM-dd',
+			GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		),
 
 		span: 1.8,

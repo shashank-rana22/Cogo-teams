@@ -7,8 +7,7 @@ import Form from './CreateUpdateTnC/AddEdit/Form';
 import Header from './Header/index';
 import TermList from './TermsList';
 
-function TermsAndConditions(props) {
-	const { organizationDetails, viewThrough } = props;
+function TermsAndConditions({ organizationDetails = {} }) {
 	const { id: organizationId } = organizationDetails || {};
 	const [showModal, setShowModal] = useState(false);
 	const {
@@ -27,8 +26,6 @@ function TermsAndConditions(props) {
 		...restProps
 	} = useGetTermsAndCondition({ organizationId });
 
-	const viewFromDemand = ['demand-crm', 'prm'].includes(viewThrough);
-
 	return (
 		<div>
 			<Header
@@ -39,7 +36,6 @@ function TermsAndConditions(props) {
 				tncLevel={tncLevel}
 				setShowModal={setShowModal}
 				setTncLevel={setTncLevel}
-				viewFromDemand={viewFromDemand}
 				setPagination={setPagination}
 				editTncModalId={editTncModalId}
 				setEditTncModalId={setEditTncModalId}

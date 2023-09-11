@@ -1,3 +1,6 @@
+import SERVICE_TYPES_MAPPING from '../config/service-types-mapping';
+import TRADE_TYPE from '../config/trade-type.json';
+
 const controls = [
 	{
 		name           : 'service',
@@ -9,22 +12,8 @@ const controls = [
 		multiple       : false,
 		span           : 12,
 		placeholder    : ' Select Service Type',
-		options        : [
-			{ label: 'FCL', value: 'fcl_freight' },
-			{ label: 'LCL', value: 'lcl_freight' },
-			{ label: 'AIR', value: 'air_freight' },
-			{ label: 'FTL', value: 'ftl_freight' },
-			{ label: 'LTL', value: 'ltl_freight' },
-			{ label: 'Trailer', value: 'trailer_freight' },
-			{ label: 'Haulage', value: 'haulage_freight' },
-			{ label: 'FCL Customs', value: 'fcl_customs' },
-			{ label: 'LCL Customs', value: 'lcl_customs' },
-			{ label: 'Air Customs', value: 'air_customs' },
-			{ label: 'FCL Locals', value: 'fcl_freight_local' },
-			{ label: 'LCL Locals', value: 'lcl_freight_local' },
-			{ label: 'Air Locals', value: 'air_freight_local' },
-		],
-		rules: { required: true },
+		options        : SERVICE_TYPES_MAPPING,
+		rules          : { required: true },
 	},
 	{
 		name           : 'shipping_line_id',
@@ -53,24 +42,7 @@ const controls = [
 		label       : 'Trade Type',
 		type        : 'select',
 		placeholder : ' Select Trade Type',
-		options     : [
-			{
-				label : 'Import',
-				value : 'import',
-			},
-			{
-				label : 'Export',
-				value : 'export',
-			},
-			{
-				label : 'Domestic',
-				value : 'domestic',
-			},
-			{
-				label : 'Overseas',
-				value : 'overseas',
-			},
-		],
+		options     : TRADE_TYPE,
 		span        : 6,
 		isClearable : true,
 		rules       : { required: true },

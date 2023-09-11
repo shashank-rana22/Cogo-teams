@@ -73,7 +73,7 @@ import so2Surface from './config/so2-surface';
 import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
 import supplyTools from './config/supply-tools';
-import TermsAndConditions from './config/terms-and-conditions';
+import termsAndConditions from './config/terms-and-conditions';
 import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
@@ -158,7 +158,7 @@ const routeConfig = {
 	...attendanceLeaveManagement,
 	...centralisedCustomerService,
 	...resource,
-	...TermsAndConditions,
+	...termsAndConditions,
 	...serviceDiscovery,
 	...supplyTools,
 };

@@ -1,21 +1,30 @@
-import {
-	InputController,
-	UploadController,
-	CreatableMultiSelectController, TextAreaController,
-	SelectController,
-	CheckboxController,
-	AsyncSelectController,
+import dynamic from 'next/dynamic';
+import React from 'react';
 
-} from '@cogoport/forms';
+const SelectController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.SelectController),
+	{ ssr: false },
+);
+const AsyncSelectController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.AsyncSelectController),
+	{ ssr: false },
+);
+const InputController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.InputController),
+	{ ssr: false },
+);
+const TextAreaController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.TextAreaController),
+	{ ssr: false },
+);
+function FormElement({ type = '', ...rest }) {
+	if (type === 'select') return <SelectController {...rest} />;
 
-const CONTROLLER_MAPPING = {
-	select             : SelectController,
-	textarea           : TextAreaController,
-	'creatable-select' : CreatableMultiSelectController,
-	uploader           : UploadController,
-	text               : InputController,
-	'async-select'     : AsyncSelectController,
-	checkbox           : CheckboxController,
-};
+	if (type === 'async_select') return <AsyncSelectController {...rest} />;
 
-export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;
+	if (type === 'textarea') return <TextAreaController {...rest} />;
+
+	return <InputController {...rest} type={type} />;
+}
+
+export default React.memo(FormElement);

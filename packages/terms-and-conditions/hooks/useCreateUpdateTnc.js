@@ -2,10 +2,17 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import getCreateUpdateTncPayload from '../helpers/getCreateUpdateTncPayload';
 import toastApiError from '../utlis/toastApiError';
 
-const useCreateUpdateTnc = (props) => {
-	const { action, refetch, editFormValue, setEditTncModalId, organizationId, setShowModal } = props;
+const useCreateUpdateTnc = (
+	action = 'create',
+	refetch = () => {},
+	editFormValue = null,
+	setEditTncModalId = () => {},
+	organizationId = null,
+	setShowModal = () => {},
+) => {
 	const {
 		general: { scope },
 	} = useSelector((state) => state);
@@ -19,39 +26,12 @@ const useCreateUpdateTnc = (props) => {
 
 	const onSubmit = async (values = {}) => {
 		try {
-			const {
-				service,
-				shipping_line_id,
-				airline_id,
-				trade_type,
-				country_id,
-				paying_party_country_ids,
-			} = values;
-
-			const formValues = {
-				service                  : service || undefined,
-				trade_type               : trade_type || undefined,
-				airline_id               : airline_id || undefined,
-				shipping_line_id         : shipping_line_id || undefined,
-				organization_id          : organizationId,
-				country_id               : country_id || undefined,
-				paying_party_country_ids : paying_party_country_ids || undefined,
-			};
-
-			const { description = [] } = values;
-
-			const descriptionNew = description.map((item) => item.terms_and_condition);
-
-			const payload = {
-				...(isUpdatable ? { id: editFormValue?.id } : { ...formValues }),
-				description: descriptionNew,
-			};
-
+			const payload = getCreateUpdateTncPayload({ values, editFormValue, organizationId });
 			await trigger({
 				data: payload,
 			});
 
-			Toast.success(`Terms And Conditions ${editFormValue.id ? 'Updated' : 'Created'} Successfully`);
+			Toast.success(`Terms And Conditions ${editFormValue?.id ? 'Updated' : 'Created'} Successfully`);
 			setEditTncModalId(null);
 			setShowModal(false);
 			refetch();

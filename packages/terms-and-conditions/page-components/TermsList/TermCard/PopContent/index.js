@@ -23,7 +23,7 @@ function PopOverContent({
 				onClickUpdateTerms();
 				setShowEdit(true);
 				setVisible(false);
-				setEditModalId(item.id);
+				setEditModalId(item?.id);
 			}}
 			>
 				Edit
@@ -31,6 +31,7 @@ function PopOverContent({
 			</Button>
 			<Button
 				loading={loading}
+				disabled={loading}
 				onClick={onSubmit}
 			>
 				{' '}

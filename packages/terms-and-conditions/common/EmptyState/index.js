@@ -7,7 +7,7 @@ function EmptyState() {
 		<div className={styles.container}>
 			<IcMTaskNotCompleted />
 
-			<p style={{ color: '#393f70', fontSize: 16, fontWeight: 500, marginBottom: 8 }}>
+			<p className={styles.empty}>
 				Terms And Condition(s) are not present.
 			</p>
 		</div>
