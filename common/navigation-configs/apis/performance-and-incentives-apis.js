@@ -21,6 +21,7 @@ const performance_and_incentives = {
 			service_name : 'agent_scoring',
 		},
 	],
+	performance_and_incentives_leaderboard: [],
 };
 
 export default performance_and_incentives;

@@ -2602,6 +2602,14 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : 'link',
 					possible_apis : apis.scoring_and_incentive_plans,
 				},
+				{
+					key           : 'performance_and_incentives-leaderboard',
+					title         : 'Leaderboard',
+					href          : '/v2/performance-and-incentives/leaderboard',
+					as            : '/v2/performance-and-incentives/leaderboard',
+					type          : 'link',
+					possible_apis : apis.performance_and_incentives_leaderboard,
+				},
 			],
 		},
 	};
