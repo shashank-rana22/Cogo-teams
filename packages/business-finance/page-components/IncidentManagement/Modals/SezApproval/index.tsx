@@ -1,5 +1,6 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
 import useSezApproveReject from '../../apisModal/useSezApproveReject';
@@ -30,6 +31,7 @@ interface Props {
 }
 
 function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEditable = true, remark }:Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
@@ -43,17 +45,21 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 		setShowModal,
 		id,
 		sezRequest,
+		t,
 	});
 
 	const details = [
-		{ title: 'Organization Name', value: <div>{organizationName || ''}</div> },
-		{ title: 'Trade Party Type', value: <div>{tradePartyType?.replaceAll('_', ' ') || ''}</div> },
-		{ title: 'Business Name', value: <div>{name || ''}</div> },
-		{ title: 'Bill Address', value: <div>{address || ''}</div> },
-		{ title: 'Pincode', value: <div>{pincode || ''}</div> },
-		{ title: 'Tax Number', value: <div>{taxNumber || ''}</div> },
+		{ title: t('incidentManagement:org_name'), value: <div>{organizationName || ''}</div> },
 		{
-			title : 'Documents',
+			title : t('incidentManagement:trade_party_type'),
+			value : <div>{tradePartyType?.replaceAll('_', ' ') || ''}</div>,
+		},
+		{ title: t('incidentManagement:org_business_name_title'), value: <div>{name || ''}</div> },
+		{ title: t('incidentManagement:org_bill_address_title'), value: <div>{address || ''}</div> },
+		{ title: t('incidentManagement:org_pincode_title'), value: <div>{pincode || ''}</div> },
+		{ title: t('incidentManagement:org_tax_no_title'), value: <div>{taxNumber || ''}</div> },
+		{
+			title : t('incidentManagement:docs'),
 			value : (
 				<div>
 					{(documentUrls || []).map((item) => (
@@ -64,7 +70,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 								className={styles.file_link}
 								rel="noreferrer"
 							>
-								View Document
+								{t('incidentManagement:view_doc_link')}
 							</a>
 							<div className={styles.eye}><IcMEyeopen /></div>
 						</div>
@@ -96,7 +102,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title="Sez Approval" />
+					<Modal.Header title={t('incidentManagement:sez_approval_title')} />
 					<Modal.Body>
 						{details?.map((detail) => (
 							<div key={detail.title} className={styles.flex}>
@@ -114,12 +120,12 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 
 						<div>
 							<div style={{ display: 'flex' }}>
-								<div className={styles.input_titles}>Remarks*</div>
+								<div className={styles.input_titles}>{`${t('incidentManagement:remarks')}*`}</div>
 								<span className={styles.divider}>:</span>
 								<Textarea
 									name="remark"
 									size="sm"
-									placeholder="Enter Remarks Here..."
+									placeholder={t('incidentManagement:remarks_placeholder')}
 									disabled={!isEditable}
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
 									value={remark}
@@ -141,7 +147,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 										OnAction({ inputValues, status: 'REJECTED' });
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 								<Button
 									size="md"
@@ -151,7 +157,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 										OnAction({ inputValues, status: 'APPROVED' });
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

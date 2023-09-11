@@ -64,7 +64,7 @@ function Status({
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !shipment_data?.is_job_closed;
 
 	return (
 		<div className={styles.invoice_container}>
@@ -75,7 +75,7 @@ function Status({
 						</div>
 				) : null}
 
-			{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
+			{!invoice?.is_revoked && invoice?.status !== 'finance_rejected' && (
 				<Actions
 					invoice={invoice}
 					refetch={refetchAferApiCall}
@@ -84,10 +84,11 @@ function Status({
 					isIRNGenerated={isIRNGenerated}
 					bfInvoice={bfInvoice}
 				/>
-			) : null}
+			)}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+					&& !invoice?.processing ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
@@ -97,7 +98,7 @@ function Status({
 						</Button>
 				) : null}
 
-			{showRequestCN ? (
+			{showRequestCN && !invoice?.processing ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"

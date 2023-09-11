@@ -7,6 +7,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SALES = {
+	chat_tabs_to_be_shown     : ['message', 'voice', 'outlook'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -30,7 +31,7 @@ const SALES = {
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
 	group_agents_api_filter       : ['sales'],
-	accessible_new_communications : ['new_mail', 'global_contacts'],
+	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,

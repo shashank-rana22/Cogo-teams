@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 interface FormDataInterface {
 	registrationNumber?: string;
-	entityObject?: { id?: string };
+	entityObject?: { id?: string; entity_code?: string };
 	periodOfTransaction?: string;
 	vendorName?: string;
 	transactionDate?: string;
@@ -46,7 +46,7 @@ export const nonRecurringExpenseDetails = ({
 	handleCategoryChange = () => {},
 }: Props) => {
 	const geo = getGeoConstants();
-	const handleEntityChange = (e:number | string) => {
+	const handleEntityChange = (e: number | string) => {
 		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
@@ -143,6 +143,7 @@ export const nonRecurringExpenseDetails = ({
 					valueKey    : 'id',
 					span        : 2.2,
 					className   : styles.select,
+					params      : { entityCode: formData?.entityObject?.entity_code },
 					renderLabel : (item) => startCase(item.categoryName),
 					onChange    : (e, obj) => handleCategoryChange(e, obj),
 				},

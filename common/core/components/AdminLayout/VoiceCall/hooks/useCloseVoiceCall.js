@@ -7,7 +7,10 @@ const useCloseVoiceCall = ({
 }) => {
 	const dispatch = useDispatch();
 
-	const unmountVoiceCall = useCallback(({ lead_user_id = '', lead_organization_id = '', callStartAt = '' } = {}) => {
+	const unmountVoiceCall = useCallback(({
+		lead_user_id = '',
+		lead_organization_id = '', callStartAt = '', callRecordId = '',
+	} = {}) => {
 		setCallState({});
 
 		dispatch(
@@ -23,6 +26,7 @@ const useCloseVoiceCall = ({
 						communication_start_time : callStartAt,
 						communication_end_time   : Date.now(),
 						source                   : 'voice_call',
+						callRecordId,
 					},
 				} : {}),
 
