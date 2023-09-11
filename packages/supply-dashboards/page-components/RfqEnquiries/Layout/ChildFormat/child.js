@@ -6,6 +6,12 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
+const TOTAL_SPANS = 12;
+const SECOND_LAST_SPAN = 11;
+const FIRST_INDEX = 0;
+const SECOND_INDEX = 1;
+const TOTAL_PERCENT = 100;
+
 function Child({
 	controls,
 	control,
@@ -19,32 +25,32 @@ function Child({
 	error,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 11;
-		if (span === 11) {
+		span += fields.span || SECOND_LAST_SPAN;
+		if (span === SECOND_LAST_SPAN) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = 0;
-		} else if (span < 11) {
+			span = FIRST_INDEX;
+		} else if (span < SECOND_LAST_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{totalFields.map((fields) => (
-				<div className={styles.row}>
+			{TOTAL_FIELDS.map((fields) => (
+				<div key={fields[FIRST_INDEX]?.name} className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
@@ -53,15 +59,20 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
-						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || 12) / 12) * 100;
+						if (controlItem.customProps?.rules) {
+							EXTRA_PROPS.rules = controlItem.customProps.rules[index];
+						}
+
+						const disable = (index < noDeleteButtonTill
+							&& controlItem.name === 'code') || controlItem.disabled;
+						const flex = ((controlItem?.span || TOTAL_SPANS) / TOTAL_SPANS) * TOTAL_PERCENT;
 						if (!Element) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
+							<div key={controlItem.name} className={styles.element} style={{ width: `${flex}%` }}>
 								<h4 style={{
 									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
 								}}
@@ -70,7 +81,7 @@ function Child({
 								</h4>
 								<Element
 									{...controlItem}
-									{...extraProps}
+									{...EXTRA_PROPS}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}
@@ -99,7 +110,7 @@ function Child({
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
 								className={`form-fieldArray-${name}-remove`}
-								onClick={() => remove(index, 1)}
+								onClick={() => remove(index, SECOND_INDEX)}
 								style={{
 									width: '2em', height: '2em', marginTop: '8px', cursor: 'pointer',
 								}}

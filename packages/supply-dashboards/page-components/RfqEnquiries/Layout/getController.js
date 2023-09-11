@@ -1,7 +1,10 @@
 import {
-	InputController, PillsController, SelectController, DatepickerController,
+	InputController,
+	PillsController,
+	SelectController,
+	DatepickerController,
+	UploadController,
 } from '@cogoport/forms';
-import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
 

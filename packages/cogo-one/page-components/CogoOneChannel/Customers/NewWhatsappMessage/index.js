@@ -61,9 +61,14 @@ function NewWhatsappMessage({
 		sendCommunicationTemplate : sendWhatsappCommunication,
 		communicationLoading      : loading,
 	};
+
+	if (!type) {
+		return null;
+	}
+
 	return (
 		<Modal
-			show={type}
+			show
 			size="xs"
 			onClose={closeModal}
 			onClickOutside={closeModal}

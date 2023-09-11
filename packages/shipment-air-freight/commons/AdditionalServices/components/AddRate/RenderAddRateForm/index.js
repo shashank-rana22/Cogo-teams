@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
 
 import controls from './controls';
@@ -10,13 +11,14 @@ const controlTypeMapping = {
 	asyncSelect : AsyncSelectController,
 };
 
-function FormElement({ name, label, type, show, errors, ...rest }) {
+function FormElement({ name, label, type, show, rules, errors, ...rest }) {
 	const Element = controlTypeMapping[type];
 
 	return Element && show ? (
 		<div>
-			<div className={styles.label}>{label}</div>
-
+			<div className={cl`${styles.label} ${rules?.required ? styles.required_field : ''}`}>
+				{label}
+			</div>
 			<Element name={name} type={type} {...rest} />
 
 			{errors[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
