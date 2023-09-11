@@ -11,11 +11,11 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 	const [showCheckInvoices, setShowCheckInvoices] = useState({});
 
 	const { list = [] } = bLData || {};
-	const memoizedFunction = useMemo(() => {
-		const TAGGED_DATA = [];
-		const REJECTED_DATA = [];
-		const PENDING_DATA = [];
-
+	const {
+		TAGGED_DATA = [],
+		REJECTED_DATA = [],
+		PENDING_DATA = [],
+	} = useMemo(() => {
 		(list || []).forEach((item) => {
 			const { payrunBillStatus, id } = item || {};
 			const value = showCheckInvoices[id] || '';
@@ -35,12 +35,6 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 			PENDING_DATA,
 		};
 	}, [list, showCheckInvoices]);
-
-	const {
-		TAGGED_DATA = [],
-		REJECTED_DATA = [],
-		PENDING_DATA = [],
-	} = memoizedFunction;
 
 	return (
 		<div>
