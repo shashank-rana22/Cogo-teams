@@ -10,7 +10,7 @@ function SIDView({ shipmentId = '', setCheckItem = () => {} }) {
 	} = useShipmentIdView({ invoicesRequired: true, shipmentId });
 
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
-	if (isEmpty(data)) return <h>No Data Found</h>;
+	if (isEmpty(data)) return <h2>No Data Found</h2>;
 
 	return data?.map((item) => (
 		<AccordianCards

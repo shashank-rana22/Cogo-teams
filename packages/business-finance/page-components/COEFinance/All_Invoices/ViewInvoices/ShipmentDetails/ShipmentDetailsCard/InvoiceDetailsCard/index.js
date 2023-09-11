@@ -72,6 +72,8 @@ function InvoiceDetailsCard({
 
 	const remarksValue = remarks?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
+	const getColor = (value) => (docContent?.includes(value) ? 'green' : 'auto');
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
@@ -148,7 +150,7 @@ function InvoiceDetailsCard({
 							Invoice Number -
 							{' '}
 							<span
-								style={{ color: docContent?.includes(billNumber) ? 'green' : 'auto' }}
+								style={{ color: getColor(billNumber) }}
 							>
 								{billNumber}
 							</span>
@@ -157,7 +159,7 @@ function InvoiceDetailsCard({
 							Invoice Type -
 							{' '}
 							<span
-								style={{ color: docContent?.includes(invoiceType) ? 'green' : 'auto' }}
+								style={{ color: getColor(invoiceType) }}
 							>
 								{invoiceType}
 
@@ -167,7 +169,7 @@ function InvoiceDetailsCard({
 							Supplier name -
 							{' '}
 							<span
-								style={{ color: docContent?.includes(organizationName) ? 'green' : 'auto' }}
+								style={{ color: getColor(organizationName) }}
 							>
 								{organizationName}
 
@@ -177,17 +179,16 @@ function InvoiceDetailsCard({
 							Urgency Tag -
 							{' '}
 							<span
-								style={{ color: docContent?.includes(tag) ? 'green' : 'auto' }}
+								style={{ color: getColor(tag) }}
 							>
 								{tag}
-
 							</span>
 						</div>
 						<div className={styles.margin_bottom}>
 							Remarks -
 							{' '}
 							<span
-								style={{ color: docContent?.includes(remarksValue) ? 'green' : 'auto' }}
+								style={{ color: getColor(remarksValue) }}
 							>
 								{remarksValue || 'No Remarks'}
 
@@ -211,7 +212,7 @@ function InvoiceDetailsCard({
 						</div>
 
 						{shipmentType === 'ftl_freight'
-							? (
+							&& (
 								<FTLFreightInvoiceDetails
 									billType={billType}
 									advancedPaymentObj={advancedPaymentObj}
@@ -225,7 +226,7 @@ function InvoiceDetailsCard({
 									viewDocument={viewDocument}
 									reasonForCN={reasonForCN}
 								/>
-							) : undefined}
+							)}
 					</div>
 
 				</div>
