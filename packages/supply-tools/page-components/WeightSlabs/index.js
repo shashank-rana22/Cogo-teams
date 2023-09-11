@@ -54,6 +54,18 @@ function WeightSlabs() {
 		heading = 'UPDATE WEIGHT SLABS';
 	}
 
+	const formProps = {
+		ref: formRef,
+		handleSubmitForm,
+	};
+
+	const updateFormProps = {
+		ref      : formRef,
+		handleSubmitForm,
+		item     : showModal,
+		callBack : () => setShowModal(false),
+	};
+
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.heading}>WeightSlabs</h1>
@@ -85,7 +97,11 @@ function WeightSlabs() {
 				>
 					<Modal.Header title={heading} />
 					<Modal.Body>
-						<Form ref={formRef} handleSubmitForm={handleSubmitForm} />
+						{showModal?.isEdit ? (
+							<Form {...updateFormProps} />
+						) : (
+							<Form {...formProps} />
+						)}
 					</Modal.Body>
 
 					<Modal.Footer>
