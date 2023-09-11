@@ -22,7 +22,8 @@ const controls = [
 		isClearable : true,
 		params      : {
 			filters: {
-				status: 'active',
+				status       : 'active',
+				account_type : 'importer_exporter',
 			},
 		},
 	},
