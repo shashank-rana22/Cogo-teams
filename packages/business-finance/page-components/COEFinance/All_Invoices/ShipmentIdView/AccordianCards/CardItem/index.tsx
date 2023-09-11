@@ -1,3 +1,5 @@
+import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import List from '../../../../../commons/List/index';
@@ -27,6 +29,9 @@ interface PropsType {
 	amountTab: string;
 	setAmountTab: Function;
 	setDataCard: Function;
+	showInvoices?: boolean;
+	setShowInvoices?: Function;
+	setCheckItem?: Function;
 }
 
 interface FullResponseProps {
@@ -42,6 +47,9 @@ function CardItem({
 	amountTab,
 	setDataCard,
 	setAmountTab,
+	showInvoices = false,
+	setShowInvoices = () => {},
+	setCheckItem = () => {},
 }: PropsType) {
 	const { jobNumber, jobType } = cardData || {};
 	const {
@@ -94,7 +102,7 @@ function CardItem({
 			</div>
 
 			<div className={styles.card_list}>
-				{list?.length === 0 ? (
+				{isEmpty(list) ? (
 					<div className={styles.no_data}>No Data Available</div>
 				) : (
 					<List
@@ -113,15 +121,32 @@ function CardItem({
 				)}
 			</div>
 
-			<div className={styles.footer}>
-				<div
-					className={styles.footer_text}
-					onClick={() => handleClick()}
-					role="presentation"
-				>
-					View Less
+			{!showInvoices ? (
+				<div className={styles.footer}>
+					<div
+						className={styles.footer_text}
+						onClick={() => handleClick()}
+						role="presentation"
+					>
+						View Less
+					</div>
 				</div>
-			</div>
+			) : (
+				<div className={styles.approve_button}>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => {
+							setShowInvoices(false);
+							setCheckItem(
+								(prev: any) => ({ ...prev, sidDataCheck: true }),
+							);
+						}}
+					>
+						Accept
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 }

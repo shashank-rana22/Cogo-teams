@@ -7,12 +7,11 @@ import TagMap from './TagMap';
 
 function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckItem = () => {} }:
 {
-	billId: string, status: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
+	billId: string, status: string, setCheckItem: Function, setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];
 		invoiceDetailsRemark: string[];
 		taggingRemark: string[];
-
 	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
 
@@ -20,6 +19,7 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckI
 		<div>
 			<Accordion
 				type="text"
+				animate
 				title={(
 					<div className={styles.heading_data}>
 						<div className={styles.business_name}>
@@ -29,8 +29,8 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckI
 						</div>
 					</div>
 				)}
+				style={{ padding: '6px 0' }}
 			>
-				<div className={styles.line} />
 				<TagMap
 					billId={billId}
 					value={value}
