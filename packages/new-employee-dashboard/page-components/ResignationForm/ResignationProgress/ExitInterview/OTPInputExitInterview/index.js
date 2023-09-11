@@ -12,6 +12,7 @@ function OTPInputExitInterview({
 
 	const handleChange = (value) => {
 		setOtpValue(value.length === otpLength ? `${value}` : '');
+		console.log('Exit Interview OTP : ', value);
 	};
 
 	return (

@@ -50,7 +50,7 @@ function FormComponent() {
 
 	console.log('data :: ', data);
 
-	const Render = COMPONENT_MAPPING.manager.handover_takeover;
+	const Render = COMPONENT_MAPPING.employee.HOTOClearance;
 
 	return (
 		<div className={styles.container}>
