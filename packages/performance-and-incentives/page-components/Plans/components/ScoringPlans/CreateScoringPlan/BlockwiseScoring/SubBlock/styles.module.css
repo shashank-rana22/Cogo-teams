@@ -5,6 +5,12 @@
 }
 
 .inner_container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.control_item {
 	width: 20%;
 	margin-bottom: 20px;
 
@@ -32,4 +38,19 @@
 
 .btn {
 	margin-left: auto;
+}
+
+.delete_block {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.icon {
+	margin-right: 2px;
+}
+
+.underline_text {
+	text-decoration: underline;
 }

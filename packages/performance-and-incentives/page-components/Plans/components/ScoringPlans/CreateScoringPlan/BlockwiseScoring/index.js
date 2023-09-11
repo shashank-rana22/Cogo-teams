@@ -48,6 +48,7 @@ function BlockwiseScoring() {
 			<div className={styles.btn_container}>
 				<Button
 					size="md"
+					type="button"
 					themeType="secondary"
 					className={styles.btn}
 				>
@@ -56,6 +57,7 @@ function BlockwiseScoring() {
 
 				<Button
 					size="md"
+					type="button"
 					themeType="primary"
 					className={styles.btn}
 				>
