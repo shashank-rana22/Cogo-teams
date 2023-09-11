@@ -3,6 +3,9 @@ export const quotationConfig = {
 	headerStyles : {
 		background: '#333',
 	},
+	bodyStyles: {
+		fontSize: '12px',
+	},
 	fields: [
 		{
 			label : 'Name',
@@ -32,7 +35,7 @@ export const quotationConfig = {
 		{
 			label : 'Unit',
 			key   : 'unit',
-			func  : 'renderName',
+			func  : 'renderLineItemUnit',
 			span  : 2,
 		},
 		{

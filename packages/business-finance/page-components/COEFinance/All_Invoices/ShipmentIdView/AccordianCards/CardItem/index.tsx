@@ -3,11 +3,9 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import List from '../../../../../commons/List/index';
-import useGetQuotation from '../../../../hook/useGetQuotationBill';
 import useListBills from '../../../../hook/useListBills';
 import CardHeader from '../CardHeader/index';
 
-import { quoteData } from './quoteData';
 import AmountWithCurrency from './RenderData/AmountWithCurrency/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import InvoiceNumber from './RenderData/InvoiceNumber/index';
@@ -43,12 +41,6 @@ interface FullResponseProps {
 	list?: object[];
 }
 
-// interface DataProps {
-// 	totalRecords?: number;
-// 	quotePageIndex?: number;
-// 	quoteList?: object[];
-// }
-
 function CardItem({
 	cardData,
 	currentOpenSID,
@@ -60,7 +52,7 @@ function CardItem({
 	setShowInvoices = () => {},
 	setCheckItem = () => {},
 }: PropsType) {
-	const { jobNumber, jobType, quotationType } = cardData || {};
+	const { jobNumber, jobType } = cardData || {};
 	const {
 		loading,
 		list: { fullResponse },
@@ -73,15 +65,6 @@ function CardItem({
 		amountTab,
 		currentOpenSID,
 		setDataCard,
-	});
-
-	const {
-		quotationLoading,
-		// list: { quoteData },
-		quoteConfig,
-	} = useGetQuotation({
-		jobNumber,
-		quotationType,
 	});
 
 	const handleClick = () => {
@@ -108,18 +91,6 @@ function CardItem({
 		renderRemarks  : (item: {}) => <Remarks itemData={item} />,
 	};
 
-	let finalConfig = config;
-	let itemData = fullResponse;
-	let finalLoading = loading;
-	let finalFunctions = functions;
-
-	if (amountTab === 'sellQuote' || amountTab === 'buyQuote') {
-		finalConfig = quoteConfig;
-		itemData = quoteData;
-		finalLoading = quotationLoading;
-		finalFunctions = {};
-	}
-
 	return (
 		<div>
 			<div className={styles.hr} />
@@ -133,14 +104,14 @@ function CardItem({
 			</div>
 
 			<div className={styles.card_list}>
-				{isEmpty(list) ? (
+				{isEmpty(list) || amountTab === 'sellQuote' || amountTab === 'buyQuote' ? (
 					<div className={styles.no_data}>No Data Available</div>
 				) : (
 					<List
-						config={finalConfig}
-						itemData={itemData}
-						functions={finalFunctions}
-						loading={finalLoading}
+						config={config}
+						itemData={fullResponse}
+						functions={functions}
+						loading={loading}
 						page={pageIndex}
 						pageSize={10}
 						showPagination
