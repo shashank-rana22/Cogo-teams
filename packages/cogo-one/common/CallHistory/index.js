@@ -4,15 +4,18 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import { CALL_HISTORY_AUDIO_ICONS } from '../../constants';
+import ShowFeedbackDetails from '../ShowFeedbackDetails';
 
 import styles from './styles.module.css';
 
 function CallHistory({
 	type = 'user', endTimeOfCall = '', startTimeOfCall = '', dtmfInputs = {},
-	channelType = '',
+	channelType = '', communication_log = {},
 }) {
+	const [showFeedback, setShowFeedback] = useState(false);
 	const startTime = startTimeOfCall ? formatDate({
 		date       : new Date(startTimeOfCall),
 		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
@@ -26,6 +29,7 @@ function CallHistory({
 	}) : '';
 
 	const { start = '', end = '', compStyles = {} } = CALL_HISTORY_AUDIO_ICONS[type] || {};
+	const { feedback = [] } = communication_log || {};
 
 	const conditionCheck = !isEmpty(dtmfInputs) && type === 'user';
 
@@ -34,6 +38,9 @@ function CallHistory({
 	const isVideoCall = channelType === 'video_call';
 	const callStartedMessage = isVideoCall ? 'Video call started' : 'Audio call started';
 	const callEndedMessage = isVideoCall ? 'Video call ended' : 'Audio call ended';
+
+	const shipmentFeedback = feedback?.find((feedbackItem) => feedbackItem.feedback_type === 'shipment');
+	const serialId = feedback?.[GLOBAL_CONSTANTS.zeroth_index]?.feedback_data[GLOBAL_CONSTANTS.zeroth_index]?.serial_id;
 
 	return (
 		<div>
@@ -54,6 +61,12 @@ function CallHistory({
 				<div className={styles.ended_call} style={compStyles}>
 					<Image src={end} alt="logo" width={40} height={40} />
 					<div className={styles.padding}>
+						{shipmentFeedback ? (
+							<div className={styles.feedback_sid}>
+								SID :
+								<span>{serialId}</span>
+							</div>
+						) : null}
 						<div>
 							{callEndedMessage}
 						</div>
@@ -96,7 +109,12 @@ function CallHistory({
 						</div>
 					</div>
 				)}
-
+				<ShowFeedbackDetails
+					showFeedback={showFeedback}
+					setShowFeedback={setShowFeedback}
+					type={type}
+					communication_log={communication_log}
+				/>
 			</div>
 
 		</div>

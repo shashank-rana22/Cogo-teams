@@ -6,27 +6,29 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function EmployeeDetail() {
+function EmployeeDetail({ data }) {
+	const { applicant_details } = data || {};
+	console.log('🚀 ~ file: index.js:11 ~ EmployeeDetail ~ applicant_details:', data);
 	const [show, setShow] = useState(true);
 
 	const KEYS_TO_DISPLAY = {
-		employee_name   : 'Shivam Singh',
-		cogo_id         : 'COGO0833',
-		department      : 'Technology',
-		designation     : 'Senior Software Engineer',
+		employee_name   : applicant_details?.employee_name,
+		cogo_id         : applicant_details?.cogo_id,
+		department      : applicant_details?.department,
+		designation     : applicant_details?.designation,
 		date_of_joining : formatDate({
 			date       : new Date(),
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		}),
-		age_in_organization : '1 year 8 months',
-		reporting_location  : 'Mumbai',
-		chapter             : 'HRMS',
-		reporting_manager   : 'Khushal Paliwal',
-		hrbp                : 'Mukti Shetty',
-		feedback_rating     : '3',
-		personal_mail       : 'shivam26051998@gmail.com',
-		reason_for_leaving  : 'Not feeling well',
+		age_in_organization : applicant_details?.age_in_organization,
+		reporting_location  : applicant_details?.reporting_location,
+		chapter             : applicant_details?.chapter,
+		reporting_manager   : applicant_details?.reporting_manager,
+		hrbp                : applicant_details?.hrbp,
+		feedback_rating     : applicant_details?.feedback_rating,
+		personal_mail       : applicant_details?.personal_mail,
+		reason_for_leaving  : applicant_details?.reason_for_leaving,
 	};
 
 	return (

@@ -130,7 +130,7 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'update_appliation_process_details',
+			api          : 'update_application_process_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

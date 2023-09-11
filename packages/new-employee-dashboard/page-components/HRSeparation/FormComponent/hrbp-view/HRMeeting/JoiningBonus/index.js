@@ -25,6 +25,7 @@ function JoiningBonus({ control, errors }) {
 				<div className={styles.heading}>Joining Bonus Amount</div>
 				<InputController
 					control={control}
+					type="number"
 					name="joining_bonus_amount"
 					size="md"
 					style={{ marginRight: '8px', width: 200 }}

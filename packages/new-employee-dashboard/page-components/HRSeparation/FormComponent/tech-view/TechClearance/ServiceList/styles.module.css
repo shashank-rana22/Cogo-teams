@@ -35,6 +35,10 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.check_box_controller {
+	flex-direction: column;
+}
+
 .item_container_closed {
 	display: flex;
 	flex-wrap: wrap;

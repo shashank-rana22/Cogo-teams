@@ -1,14 +1,30 @@
 /* eslint-disable max-len */
-import { Checkbox, Input, Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { CheckboxController, InputController } from '@cogoport/forms';
 import { IcMTick, IcMError } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import useSubmitHOTOClearance from '../useSubmitHOTOClearance';
 
 import styles from './styles.module.css';
 
 function HOTOClearance() {
 	const [showModal, setShowModal] = useState(false);
 
+	const { handleSubmit, control, errors, onSubmit } = useSubmitHOTOClearance({
+		onSuccess: () => {
+			setShowModal(true);
+		},
+	});
+
 	const EMPLOYEE_CONTACT = '<Aanchal Kapoor> (Employee Code: COGO-0900, Email: aanchal.kapoor@cogoport.com).';
+	// const onSubmit = () => {
+	// 	console.log('provide clearance log');
+	// 	setShowModal(true);
+	// };
+	function Error(key) {
+		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
+	}
 	return (
 		<div>
 			<div>
@@ -21,7 +37,15 @@ function HOTOClearance() {
 			<div className={styles.content_container}>
 				<div className={styles.content_sub_container}>
 					<div className={styles.content_text_container}>
-						<Checkbox className={styles.Checkbox} />
+						<div className={styles.checkbox_error_container}>
+							<CheckboxController
+								className={styles.Checkbox}
+								control={control}
+								name="checkbox_agreement"
+								rules={{ required: { value: true, message: '*required' } }}
+							/>
+							{Error('checkbox_agreement')}
+						</div>
 						<div className={styles.content}>
 							<p>
 								I wish to formally confirm the successful completion of the task takeover from
@@ -45,7 +69,15 @@ function HOTOClearance() {
 							Full Name
 						</div>
 						<div className={styles.name_input_container}>
-							<Input size="md" placeholder="Type your notes here" className={styles.name_input} />
+							<InputController
+								control={control}
+								placeholder="Type your name here"
+								className={styles.name_input}
+								name="name"
+								size="md"
+								rules={{ required: { value: true, message: '*This Field is required' } }}
+							/>
+							{Error('name')}
 						</div>
 					</div>
 				</div>
@@ -56,7 +88,7 @@ function HOTOClearance() {
 					size="md"
 					themeType="primary"
 					className={styles.provide_clearance_btn}
-					onClick={() => setShowModal(true)}
+					onClick={handleSubmit(onSubmit)}
 				>
 					Provide Clearance
 					<IcMTick width="18px" height="18px" color="white" />

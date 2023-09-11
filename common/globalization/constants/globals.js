@@ -696,6 +696,9 @@ const GLOBAL_CONSTANTS = {
 			treasury: {
 				currencies: ['INR', 'USD', 'VND'],
 			},
+			feedback_services: {
+				currencies: ['INR', 'USD', 'EUR', 'GBP', 'VND', 'IDR', 'SGD', 'THB', 'CNY', 'AED'],
+			},
 		},
 	},
 	services: {

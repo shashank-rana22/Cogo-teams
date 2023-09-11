@@ -3,6 +3,7 @@ import { AsyncSelect } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import React, { useMemo, useEffect, useCallback } from 'react';
 
@@ -27,6 +28,10 @@ function OrganisationForm({
 	errors = {},
 	...rest
 }) {
+	const { query = {} } = useRouter();
+
+	const { user_id = '' } = query;
+
 	const USER_PARAMS = useMemo(() => (
 		{
 			pagination_data_required : false,
@@ -97,11 +102,13 @@ function OrganisationForm({
 	}, [fetchUsers, organization?.organization_id]);
 
 	useEffect(() => {
-		setOrganization((prev) => ({
-			...prev,
-			user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-		}));
-	}, [setOrganization, userOptions]);
+		if (!user_id) {
+			setOrganization((prev) => ({
+				...prev,
+				user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+			}));
+		}
+	}, [setOrganization, userOptions, user_id]);
 
 	return (
 		<div className={styles.container} style={rest.style}>

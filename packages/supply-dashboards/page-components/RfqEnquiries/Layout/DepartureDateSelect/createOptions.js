@@ -1,27 +1,32 @@
 import { addDays, format } from '@cogoport/utils';
 
+const INCREMENT_BY = 1;
+const TOTAL_WEEK_DAYS = 7;
+const SIX = 6;
+const TWO_MONTH_DAYS = 60;
+
 const createOptions = (datePair) => {
 	const newStartDate = datePair.startDate ? new Date(datePair.startDate) : new Date();
-	const newEndDate = datePair.endDate ? new Date(datePair.endDate) : addDays(new Date(), 60);
-	let weekDate = addDays(newStartDate, 6);
-	const weeks = [];
+	const newEndDate = datePair.endDate ? new Date(datePair.endDate) : addDays(new Date(), TWO_MONTH_DAYS);
+	let weekDate = addDays(newStartDate, SIX);
+	const WEEKS = [];
 	let firstStartDate = newStartDate;
 	if (weekDate > newEndDate) {
-		const datesForThisWeek = [];
+		const DATES_FOR_THIS_WEEK = [];
 		let i = 0;
 		while (firstStartDate <= newEndDate) {
-			datesForThisWeek.push({
+			DATES_FOR_THIS_WEEK.push({
 				children: `${format((firstStartDate), 'PP')} ${format(
 					(firstStartDate),
 					'EEE',
 				)}`,
 				key: (firstStartDate),
 			});
-			i += 1;
+			i += INCREMENT_BY;
 			firstStartDate = addDays(firstStartDate, i);
 		}
-		weeks.push(datesForThisWeek);
-		return weeks;
+		WEEKS.push(DATES_FOR_THIS_WEEK);
+		return WEEKS;
 	}
 
 	while (weekDate <= newEndDate) {
@@ -31,16 +36,16 @@ const createOptions = (datePair) => {
 			children : `${format((date), 'PP')} ${format((date), 'EEE')}`,
 			key      : (date),
 		});
-		for (let i = 1; i < 7 && date <= newEndDate; i += 1) {
+		for (let i = 1; i < TOTAL_WEEK_DAYS && date <= newEndDate; i += INCREMENT_BY) {
 			date = addDays(firstStartDate, i);
 			datesForThisWeek.push({
 				children : `${format((date), 'PP')} ${format((date), 'EEE')}`,
 				key      : (date),
 			});
 		}
-		firstStartDate = addDays(weekDate, 1);
-		weeks.push(datesForThisWeek);
-		weekDate = addDays(firstStartDate, 6);
+		firstStartDate = addDays(weekDate, INCREMENT_BY);
+		WEEKS.push(datesForThisWeek);
+		weekDate = addDays(firstStartDate, SIX);
 		if (weekDate > newEndDate) {
 			datesForThisWeek = [];
 			date = firstStartDate;
@@ -48,18 +53,18 @@ const createOptions = (datePair) => {
 				children : `${format((date), 'PP')} ${format((date), 'EEE')}`,
 				key      : (date),
 			});
-			for (let i = 1; i < 7 && date < newEndDate; i += 1) {
+			for (let i = 1; i < TOTAL_WEEK_DAYS && date < newEndDate; i += INCREMENT_BY) {
 				date = addDays(firstStartDate, i);
 				datesForThisWeek.push({
 					children : `${format((date), 'PP')} ${format((date), 'EEE')}`,
 					key      : (date),
 				});
 			}
-			weeks.push(datesForThisWeek);
+			WEEKS.push(datesForThisWeek);
 		}
 	}
 
-	return weeks;
+	return WEEKS;
 };
 
 export default createOptions;

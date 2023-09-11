@@ -21,12 +21,11 @@ const DISABLE_TASK = [
 
 function TaskView() {
 	const {
-		shipment_data,
-		primary_service,
-		servicesList,
-		refetch: getShipment = () => {},
+		shipment_data = {},
+		primary_service = {},
+		servicesList = [],
 		getShipmentTimeline = () => {},
-		isGettingShipment,
+		isGettingShipment = false,
 	} = useContext(ShipmentDetailContext);
 
 	const incoTerm = shipment_data?.inco_term;
@@ -153,7 +152,6 @@ function TaskView() {
 								setSelectedMail={setSelectedMail}
 								shipment_data={shipment_data}
 								primary_service={primary_service}
-								getShipment={getShipment}
 								getShipmentTimeline={getShipmentTimeline}
 							/>
 						</>

@@ -9,7 +9,7 @@ const FORM_COMPONENT_MAPPING = {
 };
 
 function ResignationForm() {
-	const Render = FORM_COMPONENT_MAPPING.resignation_progress;
+	const Render = FORM_COMPONENT_MAPPING.resignation_form;
 
 	return (
 		<div>
