@@ -8,5 +8,6 @@ export { default as Router } from 'next/router';
 export { default as Image } from 'next/image';
 export { default as useRouter } from './hooks/useRouter';
 export { default as Document } from './components/Document';
+export { default as useHandleVersionChangeToOld } from './hooks/useHandleVersionChangeToOld';
 
 export default App;
