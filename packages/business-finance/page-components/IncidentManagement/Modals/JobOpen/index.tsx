@@ -8,17 +8,13 @@ import { useState } from 'react';
 
 import usePostJobOpenRemark from '../../apisModal/usePostJobOpenRemark';
 import ViewButton from '../../common/ViewButton';
+import STATUS_MAPPING from '../../Constants/status_mapping';
 import StakeHolderTimeline from '../../StakeHolderTimeline';
 import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 
 import styles from './style.module.css';
 
 const geo = getGeoConstants();
-
-const STATUS = {
-	approved : 'APPROVED',
-	rejected : 'REJECTED',
-};
 
 const customFormatAmount = (value) => (
 	formatAmount({
@@ -176,7 +172,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 								themeType="secondary"
 								disabled={isEmpty(remarks) || loading}
 								loading={loading}
-								onClick={() => onSubmit(STATUS.rejected)}
+								onClick={() => onSubmit(STATUS_MAPPING.rejected)}
 							>
 								{t('incidentManagement:reject_btn')}
 							</Button>
@@ -186,7 +182,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 								themeType="primary"
 								disabled={isEmpty(remarks) || loading}
 								loading={loading}
-								onClick={() => onSubmit(STATUS.approved)}
+								onClick={() => onSubmit(STATUS_MAPPING.approved)}
 							>
 								{t('incidentManagement:approve_btn')}
 							</Button>
