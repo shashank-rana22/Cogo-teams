@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 const CHECK_REMARK_LENGTH = 1;
 
 function RejectModal({
-	showRejected = false,
+	showRejected = {},
 	onClose = () => {},
 	collectionPartyRejectionList = [],
 	billingPartyRejectionList = [],
