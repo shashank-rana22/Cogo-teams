@@ -54,11 +54,9 @@ function ViewInvoices() {
 				lineItemsRemarks={lineItemsRemarks}
 				setLineItemsRemarks={setLineItemsRemarks}
 				setLineItem={setLineItem}
-				lineItem={lineItem}
 				status={status}
 				jobType={jobType}
 				billId={billId}
-				checkItem={checkItem}
 				setCheckItem={setCheckItem}
 			/>
 		</div>
