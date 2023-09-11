@@ -4,35 +4,47 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function PersonalDetails() {
+function PersonalDetails({ data = {} }) {
+	const { applicant_details = {} } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>PERSONAL DETAILS</div>
-			<div className={styles.sub_title}>Ticket ID: SEP_23123</div>
+			<div className={styles.sub_title}>
+				Ticket ID:
+				{' '}
+				{applicant_details?.ticket_id || '-'}
+			</div>
 
 			<div className={styles.details}>
 				<div className={styles.profile}>
-					<Avatar personName="shivam singh" size="44px" />
+					<Avatar personName={applicant_details?.employee_name} size="44px" />
 					<div className={styles.name}>
-						<div>Shivam Singh</div>
-						<div className={styles.cogo_id}>COGO-ID: COGO0833</div>
+						<div>{applicant_details?.employee_name || '-'}</div>
+						<div className={styles.cogo_id}>
+							COGO-ID:
+							{' '}
+							{applicant_details?.cogo_id || '-'}
+						</div>
 					</div>
 				</div>
 				<div className={styles.single_detail}>
 					<IcMBusiness height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
-					Senior Software Engineer
+					{applicant_details?.designation || '-'}
 				</div>
 				<div className={styles.single_detail}>
 					<IcMEmail height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
-					samplemail.address@cogoport.com
+					{applicant_details?.cogoport_email || '-'}
 				</div>
 				<div className={styles.single_detail}>
 					<IcMCall height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
-					+91 9876567654
+					{applicant_details?.mobile_country_code || '-'}
+					{' '}
+					{applicant_details?.mobile_number || '-'}
 				</div>
 				<div className={styles.single_detail}>
 					<IcMLocation height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
-					Mumbai, India
+					{applicant_details?.reporting_location || '-'}
 				</div>
 			</div>
 		</div>

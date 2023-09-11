@@ -10,13 +10,9 @@ import styles from './styles.module.css';
 function ManagerClearance() {
 	const {
 		control,
-		watch,
+		// watch,
 		formState:{ errors = {} },
 	} = useForm();
-
-	const formValues = watch();
-
-	console.log('formValues', formValues);
 
 	// useEffect(() => {
 	// 	setValue('handover_by', '588864fa-40dc-510f-4817-ef4540c2d11e');

@@ -6,9 +6,8 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function EmployeeDetail({ data }) {
+function EmployeeDetail({ data = {} }) {
 	const { applicant_details } = data || {};
-	console.log('🚀 ~ file: index.js:11 ~ EmployeeDetail ~ applicant_details:', data);
 	const [show, setShow] = useState(true);
 
 	const KEYS_TO_DISPLAY = {
