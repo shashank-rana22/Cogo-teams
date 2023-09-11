@@ -1,4 +1,4 @@
-export const uploadChecklistFields = () => ({
+export const uploadShippingBillFields = () => ({
 	fields: [
 		{
 			key   : 'invoice_no',

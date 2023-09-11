@@ -9,12 +9,12 @@ import React, { useState } from 'react';
 import useListShipmentDocuments from '../../../../../hooks/useListShipmentDocuments';
 import useUpdateTask from '../../../../../hooks/useUpdateTask';
 
-import { uploadChecklistFields } from './configs/upload-checklist-fields';
+import { uploadLeoFields } from './configs/upload-leo-fields';
 import styles from './styles.module.css';
 import UploadLeoDocument from './UploadLeoDocument';
 
 function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
-	const { fields = [] } = uploadChecklistFields();
+	const { fields = [] } = uploadLeoFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
 	const [uploadLeoModal, setUploadLeoModal] = useState({});
@@ -81,8 +81,15 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 				onClick={() => setUploadLeoModal(singleItem)}
 				themeType="primary"
 			/>
-
 		),
+		handleUploadStatus: (singleItem) => {
+			const uploadStatus = (invoiceData || []).find(
+				(item) => item?.data?.id === singleItem?.id,
+			);
+			return (
+				<div className={styles.done_status}>{!isEmpty(uploadStatus) ? 'Done' : null}</div>
+			);
+		},
 	};
 
 	const payload = {

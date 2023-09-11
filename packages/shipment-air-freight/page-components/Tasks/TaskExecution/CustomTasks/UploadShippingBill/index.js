@@ -8,12 +8,12 @@ import React, { useState } from 'react';
 import useListShipmentDocuments from '../../../../../hooks/useListShipmentDocuments';
 import useUpdateShipmentSbNumbers from '../../../../../hooks/useUpdateShipmentSbNumbers';
 
-import { uploadChecklistFields } from './configs/upload-checklist-fields';
+import { uploadShippingBillFields } from './configs/upload-shipping-bill-fields';
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
 function UploadShippingBill({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
-	const { fields = [] } = uploadChecklistFields();
+	const { fields = [] } = uploadShippingBillFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
 

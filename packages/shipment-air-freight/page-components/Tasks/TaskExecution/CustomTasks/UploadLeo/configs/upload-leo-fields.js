@@ -1,4 +1,4 @@
-export const uploadChecklistFields = () => ({
+export const uploadLeoFields = () => ({
 	fields: [
 		{
 			key   : 'shipping_bill_number',
@@ -23,6 +23,12 @@ export const uploadChecklistFields = () => ({
 			label : '',
 			span  : 3,
 			func  : 'handleUploadDoc',
+		},
+		{
+			key   : 'check_status',
+			label : '',
+			span  : 3,
+			func  : 'handleUploadStatus',
 		},
 	],
 });

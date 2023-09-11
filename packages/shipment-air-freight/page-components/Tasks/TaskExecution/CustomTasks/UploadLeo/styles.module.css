@@ -31,3 +31,7 @@
 		margin-right: 8px;
 	}
 }
+
+.done_status {
+	color: var(--color-primary-error-red-2);
+}
