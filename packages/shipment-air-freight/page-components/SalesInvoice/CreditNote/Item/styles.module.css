@@ -54,11 +54,8 @@
 
 .in_number {
 	flex: 0 0 20%;
+	font-size: var(--font-size-md);
 	text-align: center;
-
-	.in_text {
-		font-size: var(--font-size-md);
-	}
 }
 
 .billing_party {

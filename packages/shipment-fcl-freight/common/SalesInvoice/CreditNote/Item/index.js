@@ -98,11 +98,9 @@ function Item({
 
 						{item?.incident_id && (
 							<div className={styles.in_number}>
-								<span className={styles.in_text}>
-									Incident ID:
-									{' '}
-									{item?.incident_id}
-								</span>
+								Incident ID:
+								{' '}
+								{item?.incident_id}
 							</div>
 						)}
 
