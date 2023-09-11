@@ -27,6 +27,7 @@ import employeeDashboard from './config/employee-dashboard';
 import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import fileProcessingDashboard from './config/file-processing-dashboard';
 import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
@@ -165,6 +166,7 @@ const routeConfig = {
 	...serviceDiscovery,
 	...supplyTools,
 	...tradeParties,
+	...fileProcessingDashboard,
 };
 
 export default routeConfig;
