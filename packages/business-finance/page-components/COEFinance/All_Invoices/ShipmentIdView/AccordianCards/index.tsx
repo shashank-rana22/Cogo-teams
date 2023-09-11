@@ -16,8 +16,8 @@ interface ListData {
 	itemData: ItemDataProps;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
-	shipmentIdView: boolean;
-	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
+	shipmentIdView?: boolean;
+	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>;
 }
 function AccordianCards({
 	itemData,
