@@ -18,9 +18,11 @@ function Child(props) {
 		disabled = false,
 		error = {},
 		watch = () => {},
+		parameterUnitOptions = {},
 	} = props;
 
-	const scoringType = watch(`${name}.${index}.scoring_type`);
+	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
+	const paramUnitOptions = parameterUnitOptions[paramType];
 
 	return (
 		<div className={styles.content}>
@@ -42,6 +44,7 @@ function Child(props) {
 							id={`create_form_${controlItem.name}_field`}
 							{...controlItem}
 							name={`${name}.${index}.${controlItem.name}`}
+							{...(controlItem.name === 'scoring_unit') ? { options: paramUnitOptions } : {}}
 						/>
 
 						<div className={styles.error_message}>

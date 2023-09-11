@@ -5,7 +5,7 @@ const blockOptions = [
 	},
 	{
 		label : 'Accounts',
-		value : 'Accounts',
+		value : 'Account',
 	},
 	{
 		label : 'Enrichment',
