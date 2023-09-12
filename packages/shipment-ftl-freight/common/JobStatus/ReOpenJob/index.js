@@ -16,7 +16,7 @@ const INPUT_MAPPING = {
 	file     : UploadController,
 };
 
-function ReOpenJob({ showModal = false, setShowModal = () => { }, shipmentData = {} }) {
+function ReOpenJob({ showModal = false, setShowModal = () => {}, shipmentData = {} }) {
 	const { user_name = '' } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
 	}));
