@@ -4,7 +4,9 @@ import { VALUE_TWO, VALUE_ZERO, VALUE_ONE } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason, othertext, setOthertext }) {
+function ReasonModal({
+	modalStep, setModalStep, updateTrigger, reason, setReason, othertext, setOthertext,
+}) {
 	const handleOnChange = (val) => {
 		if (reason === val) {
 			setReason(null);
@@ -71,7 +73,6 @@ function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason
 						onClick={() => updateTrigger()}
 					>
 						Submit
-
 					</Button>
 				</div>
 			</Modal.Footer>

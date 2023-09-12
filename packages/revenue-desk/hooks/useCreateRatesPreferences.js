@@ -13,6 +13,7 @@ const useUpdateRatesPreferences = ({
 	setShowDetailPage,
 	shipmentData,
 }) => {
+	const ZERO_VALUE = 0;
 	const API_TO_CALL = '/bulk_create_shipment_booking_confirmation_preferences';
 
 	const [{ loading }, trigger] = useRequest({
@@ -33,7 +34,13 @@ const useUpdateRatesPreferences = ({
 		}
 		const selectedRates = supplierPayload?.[service_id] || [];
 		const SERVICE_PROVIDERS = [];
+		const AMOUNT = [];
+		const CURRENCY = [];
 		(selectedRates).forEach((provider, index) => {
+			const totalSellValue = provider?.data?.rowData?.total_sell_price_in_preferred_currency;
+			const totalPriceValue = provider?.data?.rowData?.total_price_in_preferred_currency;
+			const Amount_Value = totalSellValue - totalPriceValue;
+			const preferred_currency = provider?.data?.rowData?.preferred_currency;
 			SERVICE_PROVIDERS.push({
 				priority                    : index + INCREMENT_BY_ONE,
 				rate_id                     : provider?.rate_id,
@@ -41,10 +48,15 @@ const useUpdateRatesPreferences = ({
 				validity_id                 : provider?.validity_id,
 				booking_confirmation_status : service?.service_type === 'air_freight_service' ? 'pending' : undefined,
 			});
+			AMOUNT.push(Amount_Value);
+			CURRENCY.push(preferred_currency);
 		});
+
 		const { service_type } = service;
 		const final_payload = {
 			service_providers               : SERVICE_PROVIDERS,
+			amount                          : Math.min(...AMOUNT),
+			currency                        : CURRENCY[ZERO_VALUE],
 			booking_confirmation_docs       : [],
 			service_id                      : service_id || undefined,
 			service_type                    : service.service_type || undefined,

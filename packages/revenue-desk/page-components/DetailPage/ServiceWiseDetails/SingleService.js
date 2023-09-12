@@ -81,6 +81,8 @@ function SingleService({
 		shipmentData,
 		isPreferenceRequired: !isPreferenceSet && singleServiceData?.service_type === 'fcl_freight_service',
 	});
+
+	console.log(allPreferenceCardsData, recommendationLoading);
 	// const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 	// 	shipmentData,
 	// 	singleServiceData,

@@ -37,6 +37,7 @@ function PreviewModal({
 	const previewTabsKey = Object.keys(NEW_FILTERED_GROUPED_SHOW_SERVICES_DATA).filter(
 		(serviceType) => NEW_FILTERED_GROUPED_SHOW_SERVICES_DATA[serviceType].length > VALUE_ZERO,
 	);
+
 	const [previewActiveTab, setPreviewActiveTab] = useState(previewTabsKey[DEFAULT_INDEX]);
 	let hasNegativeProfitability = false;
 	Object.values(supplierPayload).forEach((rates) => {
