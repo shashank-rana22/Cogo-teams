@@ -42,13 +42,13 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 	const handleBackHierarchy = (e) => {
 		e.stopPropagation();
 		const lowestHierarchy = getLowestHierarchy(hierarchy);
-		const parent = getParentHierarchy(lowestHierarchy, hierarchy);
+		const parent = getParentHierarchy(lowestHierarchy);
 		setLocationFilters((prev) => ({
 			...prev,
-			destination: {
-				id   : hierarchy?.[parent],
-				type : parent.split('_')[GLOBAL_CONSTANTS.zeroth_index],
-			},
+			destination: parent !== 'continent_id' ? {
+				id   : hierarchy[parent],
+				type : parent.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			} : null,
 		}));
 		const newHierarchy = Object.keys(hierarchy).reduce((acc, key) => {
 			if (key !== lowestHierarchy && hierarchy[key]) {
