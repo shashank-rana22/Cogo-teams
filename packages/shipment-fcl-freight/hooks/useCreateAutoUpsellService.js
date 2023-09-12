@@ -3,8 +3,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 function useCreateAutoUpsellService({ task = {}, refetch = () => {} }) {
-	const [trigger, { loading = false }] = useRequest({
-		url    : '',
+	const [{ loading = false }, trigger] = useRequest({
+		url    : '/auto_upsell_service',
 		method : 'POST',
 	}, { manual: true });
 
@@ -51,7 +51,7 @@ function useCreateAutoUpsellService({ task = {}, refetch = () => {} }) {
 			country_id       : values?.country_id,
 		};
 
-		createAutoUpsellService(payload);
+		createAutoUpsellService({ payload });
 	};
 
 	return {

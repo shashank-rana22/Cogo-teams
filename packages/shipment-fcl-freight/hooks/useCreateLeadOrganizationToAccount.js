@@ -20,7 +20,7 @@ function useCreateLeadOrganizationToAccount({
 			const res = await trigger({ data: payload });
 
 			if (res.data) {
-				setOrgId(res?.data?.id);
+				setOrgId(res?.data?.organization_id);
 			}
 
 			Toast.success('Successful');

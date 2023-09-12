@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import {
 	AsyncSelectController,
+	ChipsController,
 	CreatableSelectController,
 	InputController, MobileNumberController,
 	TextAreaController,
@@ -8,6 +9,8 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useEffect } from 'react';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
 import useListOrganizations from '../../../../../../hooks/useListOrganizations';
@@ -18,15 +21,11 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-const COUNTRY = 'IND';
-
 function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 	const { loading = false, listData = {} } = useListOrganizations({ orgId });
 
-	// const { control, formValues, reset, formState:{ errors = {} }, handleSubmit } = useForm();
-	const { control, formValues, formState:{ errors = {} }, handleSubmit } = useForm();
-
-	console.log({ listData });
+	const { control, formValues, reset, formState:{ errors = {} }, handleSubmit, watch } = useForm();
+	const { country_id = '' } = watch();
 
 	const {
 		onSubmit = () => {},
@@ -34,24 +33,30 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 	} = useCreateAutoUpsellService({ task, refetch });
 
 	const countryValidation = getCountryConstants({
-		country_id    : formValues?.country_id,
-		isDefaultData : false,
+		country_id,
+		isDefaultData: false,
 	});
 
-	// useEffect(() => {
-	// 	const NEW_DEFAULT_VALUES = {
-	//		business_name: listData?.business_name,
-	//		pincode: listData?.pincode_id,
-	//		tax_number:listData?. ,
-	//		address:listData?.address ,
-	//		tax_number_document_url:listData?. ,
-	//		name:listData?. ,
-	//		email:listData?. ,
-	//		mobile_number:listData?. ,
-	// 	};
+	useEffect(() => {
+		const POC_DATA = listData?.organization_pocs?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	// 	reset(NEW_DEFAULT_VALUES);
-	// }, [reset]);
+		const NEW_DEFAULT_VALUES = {
+			business_name           : listData?.name,
+			pincode                 : listData?.pincode,
+			tax_number              : listData?.tax_number,
+			address                 : listData?.address,
+			tax_number_document_url : listData?.tax_number_document_url,
+			name                    : POC_DATA?.name,
+			email                   : POC_DATA?.email,
+			is_sez                  : listData?.is_sez ? 'yes' : 'no',
+			mobile_number           : {
+				number       : POC_DATA?.mobile_number,
+				country_code : POC_DATA?.mobile_country_code,
+			},
+		};
+
+		reset(NEW_DEFAULT_VALUES);
+	}, [reset, listData]);
 
 	return (
 		<div className={styles.main_container}>
@@ -78,6 +83,8 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 							control={control}
 							name="pincode"
 							asyncKey="list_locations"
+							valueKey="postal_code"
+							initialCall
 							rules={{ required: 'Pincode is required' }}
 						/>
 						{Error('pincode', errors)}
@@ -116,10 +123,23 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 					</div>
 
 					<div className={styles.sub_container}>
-						<label className={styles.form_label}>{`Is your Address ${COUNTRY} ?`}</label>
+						<label className={styles.form_label}>Is your Address SEZ ?</label>
 						<div>
-							<Button themeType="secondary">Yes</Button>
-							<Button themeType="secondary">No</Button>
+							<ChipsController
+								name="is_sez"
+								label="Reason for contact ?"
+								control={control}
+								rules={{ required: 'Required' }}
+								options={[
+									{
+										label : 'Yes',
+										value : 'yes',
+									},
+									{
+										label : 'No',
+										value : 'no',
+									}]}
+							/>
 						</div>
 					</div>
 

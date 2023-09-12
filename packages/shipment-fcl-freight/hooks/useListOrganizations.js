@@ -1,16 +1,18 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 function useListOrganizations({ orgId = '' }) {
-	const [listData, setListData] = useState({});
+	const [data, setData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_organizations',
+		url    : '/list_organization_billing_addresses',
 		method : 'GET',
 		params : {
 			filters: {
-				organization_id: orgId,
+				organization_id  : orgId,
+				trade_party_type : 'self',
 			},
 		},
 	}, { manual: false });
@@ -20,7 +22,7 @@ function useListOrganizations({ orgId = '' }) {
 			try {
 				const res = await trigger();
 
-				setListData(res?.data || {});
+				setData(res?.data || {});
 			} catch (error) {
 				toastApiError(error);
 			}
@@ -34,7 +36,7 @@ function useListOrganizations({ orgId = '' }) {
 
 	return {
 		loading,
-		listData,
+		listData: data?.list?.[GLOBAL_CONSTANTS.zeroth_index],
 		getListOrganizations,
 	};
 }
