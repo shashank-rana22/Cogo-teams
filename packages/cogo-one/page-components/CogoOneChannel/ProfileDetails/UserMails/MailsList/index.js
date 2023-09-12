@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function MailsList({
 	mailsListData = [], handleScroll = () => {},
 	mailListLoading = false,
-	setActiveMail = () => {},
+	setSelectedMail = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -24,7 +24,7 @@ function MailsList({
 							<MailsCardData
 								key={item?.id}
 								item={item}
-								setActiveMail={setActiveMail}
+								setSelectedMail={setSelectedMail}
 							/>
 						))}
 						{mailListLoading ? <LoadingState /> : null}

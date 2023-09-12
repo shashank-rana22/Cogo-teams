@@ -8,8 +8,7 @@ import styles from './styles.module.css';
 function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }) {
 	const { setActiveMail = () => {} } = mailProps || {};
 
-	const { user_id : userId = '' } = formattedMessageData;
-	console.log('userId:', userId);
+	const { user_id : userId = '', id :channelChatId = '' } = formattedMessageData;
 
 	const {
 		mailsListData = [],
@@ -17,7 +16,7 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 		mailListLoading = false,
 		getFilteredMails = () => {},
 		setMailData = () => {},
-	} = useGetAllMailsForUser({ firestore, userId });
+	} = useGetAllMailsForUser({ firestore, userId, channelChatId });
 
 	const handleReset = () => {
 		setMailData(
@@ -29,6 +28,10 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 			},
 		);
 		getFilteredMails({ lastMessageTimeStamp: Date.now() });
+	};
+
+	const setSelectedMail = (item) => {
+		setActiveMail({ val: item, tab: 'firebase_emails', expandSideBar: false });
 	};
 
 	return (
@@ -44,7 +47,7 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 				mailsListData={mailsListData}
 				handleScroll={handleScroll}
 				mailListLoading={mailListLoading}
-				setActiveMail={setActiveMail}
+				setSelectedMail={setSelectedMail}
 			/>
 		</div>
 	);

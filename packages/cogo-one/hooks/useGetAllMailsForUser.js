@@ -18,22 +18,23 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 
 	const { loading, mailsListData, isLastPage } = mailData;
 
-	const getFilteredMails = useCallback(async ({ lastMessageTimeStamp }) => {
+	const getFilteredMails = useCallback(async ({ lastMessageTimeStamp, initialCall = false }) => {
 		if (!userId) {
 			return;
 		}
 		setMailData(
 			(prev) => ({ ...prev, loading: true }),
 		);
-		const filteredMailsQuery = query(
-			collection(firestore, FIRESTORE_PATH.email),
-			where('user_id', '==', userId),
-			where('new_message_sent_at', '<=', lastMessageTimeStamp),
-			orderBy('new_message_sent_at', 'desc'),
-			limit(PAGE_LIMIT),
-		);
 
 		try {
+			const filteredMailsQuery = query(
+				collection(firestore, FIRESTORE_PATH.email),
+				where('user_id', '==', userId),
+				where('new_message_sent_at', '<=', lastMessageTimeStamp),
+				orderBy('new_message_sent_at', 'desc'),
+				limit(PAGE_LIMIT),
+			);
+
 			const querySnapshot = await getDocs(filteredMailsQuery);
 
 			const filteredMails = querySnapshot.docs.map((doc) => ({
@@ -46,9 +47,11 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 			]?.new_message_sent_at;
 
 			const isLast = filteredMails?.length < PAGE_LIMIT;
+
 			setMailData((prev) => ({
 				...prev,
-				mailsListData        : [...(prev?.mailsListData || []), ...filteredMails],
+				mailsListData: initialCall ? [...filteredMails]
+					: [...(prev?.mailsListData || []), ...filteredMails],
 				isLastPage           : isLast,
 				lastMessageTimeStamp : newTimeStamp,
 				loading              : false,
@@ -78,8 +81,8 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 				loading              : false,
 			},
 		);
-		getFilteredMails({ lastMessageTimeStamp: Date.now() });
-	}, [getFilteredMails, userId]);
+		getFilteredMails({ lastMessageTimeStamp: Date.now(), initialCall: true });
+	}, [getFilteredMails]);
 
 	return {
 		mailsListData,

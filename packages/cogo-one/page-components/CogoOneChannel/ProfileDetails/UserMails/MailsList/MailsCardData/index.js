@@ -8,7 +8,7 @@ import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
-function MailsCardData({ item = {}, setActiveMail = () => {} }) {
+function MailsCardData({ item = {}, setSelectedMail = () => {} }) {
 	const formattedData = getActiveCardDetails(item) || {};
 
 	const {
@@ -32,7 +32,7 @@ function MailsCardData({ item = {}, setActiveMail = () => {} }) {
 	return (
 		<div
 			className={styles.mail_card}
-			onClick={() => setActiveMail({ val: item, tab: 'firebase_emails' })}
+			onClick={() => setSelectedMail(item)}
 			role="presentation"
 		>
 			<div className={styles.header_card}>
