@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import toastApiError from '../../../commons/toastApiError.ts';
 import CREATE_PAYRUN_CONFIG from '../CreatePayrun/Configurations/createPayrunConfig.json';
 import CREATE_PAYRUN_CONFIG_VN from '../CreatePayrun/Configurations/createPayrunConfigVN.json';
-import changeFormat from '../utils/changeFormat';
+import changeTimeDateFormat from '../utils/changeTimeDateFormat';
 import getKeyByValue from '../utils/getKeyByValue';
 
 const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
@@ -45,11 +45,8 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 		{ manual: true },
 	);
 
-	const {
-		search = '', pageSize = 10, pageIndex = 1, invoiceView = '', category = '', invoiceType = '',
-		urgencyTag = '', currency: filterCurrency = '', entity: filterEntity = '',
-		services = '', invoiceDate = '', dueDate = '', updatedDate = '',
-	} = filters || {};
+	const { search = '', invoiceDate = '', dueDate = '', updatedDate = '', ...rest } = filters || {};
+	const restParse = JSON.stringify(rest);
 
 	const { dueDateSortType = '' } = orderBy || {};
 	const { startDate = '', endDate = '' } = invoiceDate || {};
@@ -87,24 +84,17 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 				await trigger({
 					params: {
 						q                  : query || undefined,
-						pageIndex          : pageIndex || undefined,
-						pageSize           : pageSize || undefined,
-						category           : category || undefined,
-						invoiceView        : invoiceView || undefined,
-						currency           : filterCurrency || undefined,
-						invoiceType        : invoiceType || undefined,
-						entity             : filterEntity || undefined,
-						urgencyTag         : urgencyTag || undefined,
-						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
-						startDate          : startDate ? changeFormat({ time: startDate }) : undefined,
-						endDate            : endDate ? changeFormat({ time: endDate }) : undefined,
-						fromBillDate       : fromBillDate ? changeFormat({ time: fromBillDate }) : undefined,
-						toBillDate         : toBillDate ? changeFormat({ time: toBillDate }) : undefined,
+						...(JSON.parse(restParse) || {}),
+						startDate          : startDate ? changeTimeDateFormat({ time: startDate }) : undefined,
+						endDate            : endDate ? changeTimeDateFormat({ time: endDate }) : undefined,
+						fromBillDate       : fromBillDate ? changeTimeDateFormat({ time: fromBillDate }) : undefined,
+						toBillDate         : toBillDate ? changeTimeDateFormat({ time: toBillDate }) : undefined,
 						fromUploadBillDate : fromUploadBillDate
-							? changeFormat({ time: fromUploadBillDate }) : undefined,
-						toUploadBillDate : toUploadBillDate ? changeFormat({ time: toUploadBillDate }) : undefined,
-						payrunId         : payrun,
+							? changeTimeDateFormat({ time: fromUploadBillDate }) : undefined,
+						toUploadBillDate: toUploadBillDate
+							? changeTimeDateFormat({ time: toUploadBillDate }) : undefined,
+						payrunId: payrun,
 					},
 				});
 			} catch (e) {
@@ -112,12 +102,11 @@ const useGetPayrunInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 				toastApiError(e);
 			}
 		},
-		[pageIndex, pageSize,
-			query, filterCurrency, urgencyTag, filterEntity, invoiceType,
-			invoiceView, category, dueDateSortType, services, startDate,
+		[
+			query, dueDateSortType, startDate,
 			endDate, fromBillDate, setApiData,
 			toBillDate, fromUploadBillDate,
-			toUploadBillDate, trigger, payrun],
+			toUploadBillDate, trigger, payrun, restParse],
 	);
 
 	useEffect(() => { if (payrun) { getPayrunInvoices(); } }, [getPayrunInvoices, payrun]);

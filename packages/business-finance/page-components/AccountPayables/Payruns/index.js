@@ -14,7 +14,7 @@ function Payruns({ activeEntity = '' }) {
 	const {
 		query,
 	} = useSelector(({ general }) => ({
-		query: general.query,
+		query: general?.query,
 	}));
 	const [activePayrunTab, setActivePayrunTab] = useState(query?.initiated || 'INITIATED');
 	const [isInvoiceView, setIsInvoiceView] = useState(false);

@@ -35,25 +35,13 @@ const useApprovalRejectionDoc = ({ setShowCheckInvoices = () => {}, setIsOpen = 
 				status          : checkStatus,
 				remarks         : checkStatus.toLowerCase(),
 				performedBy     : user_profile?.user?.id,
-				performedByType : user_profile.session_type,
+				performedByType : user_profile?.session_type,
 				taggedDocuments : taggedDocument,
 				payRunType      : 'OVERSEAS',
 			};
 			const response = await trigger({
 				data: payload,
 			});
-
-			if (checkStatus === 'APPROVED' && response?.data?.id) {
-				setShowCheckInvoices((p) => ({
-					...p,
-					[response?.data?.id]: 'Tagged',
-				}));
-			} else if (checkStatus === 'REJECTED' && response?.data?.id) {
-				setShowCheckInvoices((p) => ({
-					...p,
-					[response?.data?.id]: 'Reject',
-				}));
-			}
 
 			if (['APPROVED', 'REJECTED'].includes(checkStatus) && response?.data?.id) {
 				const label = STATUS_LABEL[checkStatus];

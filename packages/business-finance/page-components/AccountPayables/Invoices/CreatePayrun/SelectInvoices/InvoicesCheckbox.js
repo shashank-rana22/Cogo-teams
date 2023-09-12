@@ -10,8 +10,11 @@ export const onChangeTableHeaderCheckbox = ({ event = {}, setApiData = () => {} 
 		const { list = [] } = prevData || {};
 		const newList = (list || [])?.map((item) => {
 			const {
-				payableValue = 0,
-				invoiceAmount = 0, tdsDeducted = 0, payableAmount = 0, tdsAmount = 0,
+				payableValue = '',
+				invoiceAmount = '',
+				tdsDeducted = '',
+				payableAmount = '',
+				tdsAmount = '',
 			} = item || {};
 			const maxValueCrossed = +payableAmount > +payableValue;
 			const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;

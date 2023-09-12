@@ -3,10 +3,8 @@ import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 
 const useUploadDocuments = ({ fileUploader = {} }) => {
-	const { query = {} } = useRouter();
+	const { query:{ payrun = '' } } = useRouter();
 	const { singleFileUpload = '', fileBank = '', multiFileUpload = '' } = fileUploader || {};
-
-	const { payrun = '' } = query;
 
 	const [{ loading }, trigger] = useRequestBf(
 
@@ -18,7 +16,7 @@ const useUploadDocuments = ({ fileUploader = {} }) => {
 		{ manual: false },
 	);
 
-	const upload = async (setActive = () => {}) => {
+	const onUpload = async (setActive = () => {}) => {
 		const formattedUrls = multiFileUpload?.map((item) => item);
 
 		try {
@@ -38,7 +36,7 @@ const useUploadDocuments = ({ fileUploader = {} }) => {
 	};
 
 	return {
-		upload,
+		onUpload,
 		loading,
 	};
 };

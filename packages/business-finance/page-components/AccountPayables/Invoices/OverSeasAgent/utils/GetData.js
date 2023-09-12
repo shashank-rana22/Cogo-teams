@@ -60,7 +60,7 @@ function GetData({
 									height={24}
 									className={styles.delete}
 									onClick={() => {
-										deleteTaggedDocuments(item);
+										deleteTaggedDocuments({ itemData: item });
 										setSelectBankShow(false);
 									}}
 								/>

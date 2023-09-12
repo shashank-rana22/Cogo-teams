@@ -3,7 +3,7 @@ import { IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetBankDetails from '../../../hooks/usGetBankDetails';
+import useListOrganizationDocuments from '../../../hooks/useListOrganizationDocuments';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,7 @@ function BankSelect({
 	const [bankObject, setBankObject] = useState({});
 	const { tradePartyMappingId = '', serviceProviderId = '' } = itemData || {};
 
-	const { bankDetails = [], bankDetailsLoading = false } = useGetBankDetails({
+	const { bankDetails = [], bankDetailsLoading = false } = useListOrganizationDocuments({
 		tradePartyMappingId,
 		serviceProviderId,
 	});

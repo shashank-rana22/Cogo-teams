@@ -5,15 +5,15 @@ import { useSelector } from '@cogoport/store';
 import toastApiError from '../../../commons/toastApiError.ts';
 import getSelectedInvoice from '../utils/getSelectedInvoice';
 
-const useAddInvoiceToSelectedApi = ({ refetch = () => {}, apiData = {} }) => {
+const usePostInvoicePurchasePayrun = ({ refetch = () => {}, apiData = {} }) => {
 	const {
 		query: urlQuery = {},
 		performedBy = '', performedByType = '', performedByName = '',
 	} = useSelector(({ general, profile }) => ({
-		query           : general.query,
-		performedBy     : profile.user.id,
-		performedByType : profile.session_type,
-		performedByName : profile.user.name,
+		query           : general?.query,
+		performedBy     : profile?.user.id,
+		performedByType : profile?.session_type,
+		performedByName : profile?.user?.name,
 	}));
 
 	const [{ loading }, trigger] = useRequestBf(
@@ -54,4 +54,4 @@ const useAddInvoiceToSelectedApi = ({ refetch = () => {}, apiData = {} }) => {
 	};
 };
 
-export default useAddInvoiceToSelectedApi;
+export default usePostInvoicePurchasePayrun;

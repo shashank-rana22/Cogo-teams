@@ -8,8 +8,8 @@ import toastApiError from '../../../commons/toastApiError.ts';
 const useDeleteExcludePayrun = ({ refetch = () => {}, apiData = {}, type = '' }) => {
 	const { push } = useRouter();
 
-	const { user_data: userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
-		user_data: profile || {}, query: general.query,
+	const { userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
+		userData: profile || {}, query: general.query,
 	}));
 
 	const { payrun = '' } = urlQuery || {};

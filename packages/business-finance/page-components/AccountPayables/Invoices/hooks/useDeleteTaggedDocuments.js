@@ -11,7 +11,7 @@ const DOC_MAPPING = {
 };
 
 const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
-	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
+	const { query = {} } = useSelector(({ general }) => ({ query: general?.query }));
 
 	const { payrun = '' } = query || {};
 
@@ -24,7 +24,7 @@ const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 		{ manual: false },
 	);
 
-	const deleteTaggedDocuments = async (itemData = {}) => {
+	const deleteTaggedDocuments = async ({ itemData = {} }) => {
 		const key = DOC_MAPPING[itemData?.docName];
 
 		try {
@@ -42,20 +42,13 @@ const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 		}
 	};
 
-	const deleteUploadTaggedDocuments = async (key = '', myArray = null) => {
-		let payload;
-		if (key === 'otherDocumentsUrl') {
-			payload = {
-				payrunId : payrun,
-				key,
-				url      : myArray[GLOBAL_CONSTANTS.zeroth_index],
-			};
-		} else {
-			payload = {
-				payrunId: payrun,
-				key,
-			};
-		}
+	const deleteUploadTaggedDocuments = async ({ key = '', myArray = null }) => {
+		const payload = {
+			payrunId : payrun,
+			key,
+			url      : (key === 'otherDocumentsUrl') ? myArray[GLOBAL_CONSTANTS?.zeroth_index] : undefined,
+		};
+
 		try {
 			await trigger({
 				data: payload,

@@ -8,8 +8,6 @@ import useUploadDocuments from '../../hooks/useUploadDocument';
 
 import styles from './styles.module.css';
 
-const ONE = 1;
-const TWO = 2;
 const THREE = 3;
 
 function UploadDocuments({ setActive = () => {} }) {
@@ -20,7 +18,7 @@ function UploadDocuments({ setActive = () => {} }) {
 	});
 
 	const {
-		upload = () => {},
+		onUpload = () => {},
 		loading = false,
 	} = useUploadDocuments({ fileUploader });
 
@@ -44,13 +42,13 @@ function UploadDocuments({ setActive = () => {} }) {
 	const handlefileUpload = async ({ value = '', key = '' }) => {
 		if (key === 'singleFileUpload') {
 			if (value == null && taxDeclarationFormUrl !== '') {
-				deleteUploadTaggedDocuments('taxDeclarationFormUrl');
+				deleteUploadTaggedDocuments({ key: 'taxDeclarationFormUrl' });
 			}
 		}
 
 		if (key === 'fileBank') {
 			if (value == null && bankFormUrl !== '') {
-				deleteUploadTaggedDocuments('bankFormUrl');
+				deleteUploadTaggedDocuments({ key: 'bankFormUrl' });
 			}
 		}
 
@@ -63,7 +61,7 @@ function UploadDocuments({ setActive = () => {} }) {
 					(item) => !value.includes(item),
 				);
 				const DOC_KEY = 'otherDocumentsUrl';
-				deleteUploadTaggedDocuments(DOC_KEY, myArray);
+				deleteUploadTaggedDocuments({ key: DOC_KEY, myArray });
 			}
 		}
 		setFileUploader((prev) => ({ ...prev, [key]: value }));
@@ -81,7 +79,7 @@ function UploadDocuments({ setActive = () => {} }) {
 		<div className={styles.container}>
 			{listLoading ? (
 				<div className={styles.forms}>
-					{[ONE, TWO, THREE].map((item) => (
+					{[...Array(THREE)].keys((item) => (
 						<Placeholder key={item} width="49.5%" height="135px" margin="10px 0px" />
 					))}
 				</div>
@@ -137,7 +135,7 @@ function UploadDocuments({ setActive = () => {} }) {
 				<Button
 					size="md"
 					onClick={() => {
-						upload(setActive);
+						onUpload(setActive);
 					}}
 					className={styles.btn}
 					disabled={!fileUploader.singleFileUpload || !fileUploader.fileBank}

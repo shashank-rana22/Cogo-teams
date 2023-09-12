@@ -7,7 +7,7 @@ const ELEMENT_NOT_FOUND = -1;
 export const onChangeTableBodyCheckbox = ({ itemData = {}, setApiData = () => {} }) => {
 	const { id = '' } = itemData || {};
 	setApiData((prevData) => {
-		const index = (prevData.list || [])?.findIndex((item) => item.id === id);
+		const index = (prevData?.list || [])?.findIndex((item) => item?.id === id);
 		if (index !== ELEMENT_NOT_FOUND) {
 			const newList = [...prevData.list];
 			const isError = checkboxSelectionChecks({ list: newList[index] });

@@ -1,4 +1,4 @@
-import changeFormat from './changeFormat';
+import changeFormat from './changeTimeDateFormat';
 
 const createPayload = ({
 	query = '',

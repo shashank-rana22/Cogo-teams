@@ -5,11 +5,11 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import toastApiError from '../../../commons/toastApiError.ts';
-import { getSelectedInvoices } from '../utils/getselectedInvoices';
+import getSelectedInvoice from '../utils/getSelectedInvoice';
 
 const usePostAddToSelected = ({ getPayrunInvoices = () => {}, apiData = {} }) => {
-	const { user_data: userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
-		user_data: profile || {}, query: general.query,
+	const { userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
+		userData: profile || {}, query: general?.query,
 	}));
 	const geo = getGeoConstants();
 
@@ -32,13 +32,13 @@ const usePostAddToSelected = ({ getPayrunInvoices = () => {}, apiData = {} }) =>
 
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData || {};
-		const invoices = getSelectedInvoices({ list });
+		const invoices = getSelectedInvoice({ list });
 
 		try {
 			if (!isEmpty(invoices)) {
 				await addToSelectedTrigger({
 					data: {
-						list            : [...invoices],
+						list            : invoices || [],
 						id              : payrun,
 						entityCode      : entity,
 						currencyCode    : currency,

@@ -10,7 +10,7 @@ import getConfig from '../utils/getConfig';
 import getKeyByValue from '../utils/getKeyByValue';
 import onClearingFilters from '../utils/onClearingFilters';
 import onGoingBack from '../utils/onGoingBack';
-import settingApiData from '../utils/settingApiData';
+import setApiListData from '../utils/setApiListData';
 
 const useGetInvoiceSelection = ({ sort = {} }) => {
 	const { push } = useRouter();
@@ -18,10 +18,10 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		query: urlQuery = {},
 		performedBy = '', performedByType = '', performedByName = '',
 	} = useSelector(({ general, profile }) => ({
-		query           : general.query,
-		performedBy     : profile.user.id,
-		performedByType : profile.session_type,
-		performedByName : profile.user.name,
+		query           : general?.query,
+		performedBy     : profile?.user?.id,
+		performedByType : profile?.session_type,
+		performedByName : profile?.user?.name,
 	}));
 
 	const [apiData, setApiData] = useState({});
@@ -35,13 +35,6 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
 	const config = getConfig({ country, viewSelectedInvoice });
 
-	const [{ data, loading }, trigger] = useRequestBf(
-		{
-			url: '/purchase/payable-bill/list', method: 'get', authKey: 'get_purchase_payable_bill_list',
-		},
-		{ manual: true },
-	);
-
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [globalFilters, setGlobalFilters] = useState({
 		pageIndex   : 1,
@@ -50,6 +43,13 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
 	});
+
+	const [{ data, loading }, trigger] = useRequestBf(
+		{
+			url: '/purchase/payable-bill/list', method: 'get', authKey: 'get_purchase_payable_bill_list',
+		},
+		{ manual: true },
+	);
 
 	const { search = '' } = globalFilters;
 
@@ -95,7 +95,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	}, [refetch, viewSelectedInvoice]);
 
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
-		settingApiData({ itemData, value, key, checked, setApiData });
+		setApiListData({ itemData, value, key, checked, setApiData });
 	};
 	const onClear = () => { onClearingFilters({ setGlobalFilters, entity, queryCurr }); };
 	const goBack = () => { onGoingBack({ viewSelectedInvoice, setViewSelectedInvoice, push }); };

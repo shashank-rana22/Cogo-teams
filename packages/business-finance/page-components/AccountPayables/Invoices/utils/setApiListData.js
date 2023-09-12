@@ -3,7 +3,7 @@ const ELEMENT_NOT_FOUND = -1;
 const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
-const settingApiData = ({ itemData = {}, value = '', key = '', checked = false, setApiData = () => {} }) => {
+const setApiListData = ({ itemData = {}, value = '', key = '', checked = false, setApiData = () => {} }) => {
 	setApiData((prevApiData) => {
 		const newValue = { ...prevApiData };
 		const index = newValue?.list?.findIndex(
@@ -57,4 +57,4 @@ const settingApiData = ({ itemData = {}, value = '', key = '', checked = false, 
 	});
 };
 
-export default settingApiData;
+export default setApiListData;

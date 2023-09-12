@@ -1,7 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
+
+import toastApiError from '../../../commons/toastApiError.ts';
 
 const useListTaggedInvoices = () => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
@@ -32,7 +33,7 @@ const useListTaggedInvoices = () => {
 				},
 			});
 		} catch (e) {
-			Toast.error(e?.error?.message || 'Failed to Fetch Data');
+			toastApiError(e || 'Failed to Fetch Data');
 		}
 	}, [payrun, trigger]);
 

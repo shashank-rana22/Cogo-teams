@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useGetBankDetails = ({ tradePartyMappingId = '', serviceProviderId = '' }) => {
+const useListOrganizationDocuments = ({ tradePartyMappingId = '', serviceProviderId = '' }) => {
 	const [bankDetails, setBankDetails] = useState([]);
 
 	const [{ data, loading }, trigger] = useRequest({
@@ -49,4 +49,4 @@ const useGetBankDetails = ({ tradePartyMappingId = '', serviceProviderId = '' })
 	};
 };
 
-export default useGetBankDetails;
+export default useListOrganizationDocuments;

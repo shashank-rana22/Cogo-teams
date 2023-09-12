@@ -2,9 +2,9 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../../../commons/List/index.tsx';
-import useAddInvoiceToSelectedApi from '../../hooks/useAddInvoiceToSelectedApi';
 import useGetInvoiceSelection from '../../hooks/useInvoiceSelection';
 import useListGetSelectedPayrun from '../../hooks/useListGetSelectedPayrun';
+import usePostInvoicePurchasePayrun from '../../hooks/usePostInvoicePurchasePayrun';
 
 import FilterContainers from './FilterContainers';
 import Footer from './Footer';
@@ -54,9 +54,9 @@ function InvoiceSelection({
 	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 
 	const {
-		submitSelectedInvoices = () => {},
+		onSubmitSelectedInvoices = () => {},
 		createloading = false,
-	} = useAddInvoiceToSelectedApi({ apiData: invoiceData, refetch });
+	} = usePostInvoicePurchasePayrun({ apiData: invoiceData, refetch });
 
 	const { overAllValue = 0, list = [] } = invoiceData || {};
 
@@ -137,7 +137,7 @@ function InvoiceSelection({
 				setViewSelectedInvoices={setViewSelectedInvoice}
 				apiData={invoiceData}
 				loading={loading}
-				submitSelectedInvoices={submitSelectedInvoices}
+				onSubmitSelectedInvoices={onSubmitSelectedInvoices}
 				setShowHeader={setShowHeader}
 				selectedListLoading={selectedListLoading}
 				selectButton={tdsError.length || paidError.length}

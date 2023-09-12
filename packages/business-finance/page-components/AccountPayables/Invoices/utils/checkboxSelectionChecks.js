@@ -3,7 +3,13 @@ const HUNDERED_PERCENT = 100;
 const TEN_PERCENT = 10;
 
 const checkboxSelectionChecks = ({ item = {} }) => {
-	const { payableValue, invoiceAmount, tdsDeducted, payableAmount, tdsAmount } = item || {};
+	const {
+		payableValue = '',
+		invoiceAmount = '',
+		tdsDeducted = '',
+		payableAmount = '',
+		tdsAmount = '',
+	} = item || {};
 	const maxValueCrossed = +payableAmount > +payableValue;
 	const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 	const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;

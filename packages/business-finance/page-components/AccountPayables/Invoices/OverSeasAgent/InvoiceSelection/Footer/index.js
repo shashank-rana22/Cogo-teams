@@ -21,7 +21,7 @@ function Footer({
 	apiData = {},
 	viewSelectedInvoices = false,
 	setViewSelectedInvoices = () => {},
-	submitSelectedInvoices = () => {},
+	onSubmitSelectedInvoices = () => {},
 	loading = false,
 	selectedCurrency = '',
 	setShowHeader = () => {},
@@ -113,7 +113,7 @@ function Footer({
 								<div>
 									<Button
 										themeType="secondary"
-										onClick={submitSelectedInvoices}
+										onClick={onSubmitSelectedInvoices}
 										disabled={buttonDisabled || selectButton || createloading}
 									>
 										+ Add to selected

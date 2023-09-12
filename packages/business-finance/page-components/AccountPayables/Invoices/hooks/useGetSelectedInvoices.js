@@ -12,11 +12,11 @@ import getKeyByValue from '../utils/getKeyByValue';
 const useGetSelectedInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 	const geo = getGeoConstants();
 	const { query: urlQuery = {} } = useSelector(({ general }) => ({
-		query: general.query,
+		query: general?.query,
 	}));
 	const {
 		entity = '',
-		currency = geo.country.currency.code,
+		currency = geo?.country?.currency?.code,
 		payrun = '',
 		partner_id = '',
 	} = urlQuery || {};
@@ -25,8 +25,8 @@ const useGetSelectedInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 
 	const VIEW_SELECTED_CONFIG_MAPPING = { IN: VIEW_SELECTED_CONFIG, VN: VIEW_SELECTED_CONFIG_VN };
 
-	const [filters, setFIlters] = useState({ pageIndex: 1, pageSize: 10 });
-	const { pageIndex, pageSize } = filters;
+	const [filters, setFilters] = useState({ pageIndex: 1, pageSize: 10 });
+	const { pageIndex = 1, pageSize = 10 } = filters;
 	const [
 		{
 			data: selectedInvoices,
@@ -73,7 +73,7 @@ const useGetSelectedInvoices = ({ apiData = {}, setApiData = () => {} }) => {
 
 	return ({
 		apiData,
-		setFIlters,
+		setFilters,
 		filters,
 		selectedInvoiceLoading,
 		getInvoices,
