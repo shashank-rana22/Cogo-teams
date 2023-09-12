@@ -3,28 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
-import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
-
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
 const useBlockCreation = ({ control, name, watch }) => {
 	const CHILD_EMPTY_VALUES = {
 		sub_block_id: '',
 	};
-
-	getPrimaryControls({}).forEach((controlItem) => {
-		if (controlItem.type === 'fieldArray') {
-			const NESTED_CHILD_EMPTY_VALUES = {};
-
-			controlItem.controls.forEach((childControlItem) => {
-				NESTED_CHILD_EMPTY_VALUES[childControlItem.name] = '';
-			});
-
-			CHILD_EMPTY_VALUES[controlItem.name] = NESTED_CHILD_EMPTY_VALUES;
-		} else {
-			CHILD_EMPTY_VALUES[controlItem.name] = '';
-		}
-	});
 
 	const watchBlock = watch(`${name}.block`);
 
@@ -58,7 +42,6 @@ const useBlockCreation = ({ control, name, watch }) => {
 		fields,
 		append,
 		remove,
-		list,
 		subBlockOptions,
 		parameterOptions,
 	};

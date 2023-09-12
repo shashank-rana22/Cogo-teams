@@ -24,10 +24,9 @@ function Block(props) {
 	} = props;
 
 	const {
-		subBlockType,
 		CHILD_EMPTY_VALUES,
 		watchBlock,
-		IS_DEFAULT,
+		subBlockType,
 		fields,
 		append,
 		remove,
@@ -55,7 +54,7 @@ function Block(props) {
 				<SelectController name={`${name}.block`} control={control} options={blockOptions} />
 
 				{errors[`${name}.block`] && (
-					<div className={styles.error_msg}>This is required</div>
+					<div className={styles.error_msg}>{errors[`${name}.block`]?.message}</div>
 				)}
 			</div>
 
@@ -70,7 +69,6 @@ function Block(props) {
 					watchBlock={watchBlock}
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
-					isDefault={IS_DEFAULT}
 					subBlockOptions={subBlockOptions}
 					parameterOptions={parameterOptions}
 					refetch={refetch}
