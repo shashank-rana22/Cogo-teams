@@ -36,8 +36,6 @@ const useGetFreightRate = ({ filter, cardData }) => {
 			await trigger({
 				params: {
 					id             : cardData?.id,
-					// origin_port_id      : cardData?.origin_port_id,
-					// destination_port_id : cardData?.destination_port_id,
 					commodity      : cardData?.commodity,
 					container_size : cardData?.container_size,
 					container_type : cardData?.container_type,

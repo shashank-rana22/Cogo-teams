@@ -7,7 +7,6 @@ import { currencyOptions, rateTypeOptions } from '../../../../configurations/hel
 
 const fclControls = ({
 	data,
-	// chargeCodeOptions,
 	listShippingLineOptions,
 	fclCommodityOptions,
 	mainPortOptions1, mainPortOptions2,
@@ -217,17 +216,6 @@ const fclControls = ({
 		heading    : 'Weight Slabs',
 		type       : 'fieldArray',
 		buttonText : 'Add Weight Slabs',
-		// value:
-		// 	data?.cargo_weight_per_container > MIN_CARGO_WEIGHT
-		// 		? [
-		// 			{
-		// 				lower_limit : 18.1,
-		// 				upper_limit : data?.cargo_weight_per_container,
-		// 				currency    : GLOBAL_CONSTANTS.currency_code.USD,
-		// 				price       : 0,
-		// 			},
-		// 		]
-		// 		: undefined,
 		controls   : [
 			{
 				name        : 'lower_limit',
@@ -262,13 +250,12 @@ const fclControls = ({
 		],
 	},
 	{
-		type       : 'fieldArray',
-		heading    : 'Line Items',
-		// showButtons        : true,
-		name       : 'line_items',
-		buttonText : 'Add Line Items',
-		// noDeleteButtonTill : 1,
-		value      : [
+		type               : 'fieldArray',
+		heading            : 'Line Items',
+		name               : 'line_items',
+		buttonText         : 'Add Line Items',
+		noDeleteButtonTill : 1,
+		value              : [
 			{
 				code     : 'BAS',
 				unit     : 'per_container',
@@ -282,7 +269,6 @@ const fclControls = ({
 				type        : 'select',
 				span        : 1.5,
 				placeholder : 'Charge Name',
-				// options     : chargeCodeOptions,
 				rules       : { required: 'code is required' },
 			},
 			{
