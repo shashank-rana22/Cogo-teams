@@ -13,6 +13,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Scoring Type',
 		placeholder : 'Value',
+		value       : 'absolute',
 		options     : [{
 			label : 'Absolute',
 			value : 'absolute',
@@ -21,8 +22,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 			label : '%',
 			value : 'percentage',
 		}],
-		value : 'absolute',
-		rules : { required: 'Required' },
+		rules: { required: 'Required' },
 	},
 	{
 		name        : 'scoring_unit',
