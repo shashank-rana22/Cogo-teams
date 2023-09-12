@@ -1,11 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState, useRef } from 'react';
 
-import ListView from '../../common/ListView';
 import useCreateUpdateFclWeightSlabs from '../../hooks/useCreateUpdateFclWeightSlabs';
 import useListFclWeightSlabsConfiguration from '../../hooks/useListFclWeightSlabsConfiguration';
 
 import Form from './AddWeightSlabs/Form';
+import ListView from './common/ListView';
 import columnsFunc from './Fields';
 import styles from './styles.module.css';
 
@@ -68,15 +68,17 @@ function WeightSlabs() {
 
 	return (
 		<div className={styles.container}>
-			<h1 className={styles.heading}>WeightSlabs</h1>
-			<div className={styles.button_container}>
-				<Button
-					className={styles.button}
-					onClick={handleClick}
-				>
-					Create New Weight Slab
-				</Button>
-			</div>
+			<header className={styles.heading_container}>
+				<h1 className={styles.heading}>WeightSlabs</h1>
+				<div className={styles.button_container}>
+					<Button
+						className={styles.button}
+						onClick={handleClick}
+					>
+						Create New Weight Slab
+					</Button>
+				</div>
+			</header>
 			<div className={styles.list_container}>
 				<ListView
 					data={data}

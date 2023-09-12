@@ -5,6 +5,12 @@
 	margin: 12px 0;
 }
 
+.heading_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .modal {
 	:global {
 		.ui_input_container:hover {
