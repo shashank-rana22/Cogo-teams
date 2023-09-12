@@ -19,7 +19,7 @@ function CollectionPartyCard({
 	isDisabled = () => {},
 	status = '',
 	docContent = '',
-	setCheckItem = () => {},
+	setCheckItem = (prop) => (prop),
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 	let labelClassName;

@@ -122,7 +122,7 @@ function ShipmentDetails({
 	jobType = '',
 	billId = '',
 	lineItemsCheck = false,
-	setCheckItem = () => {},
+	setCheckItem = (prop) => (prop),
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showDocuments, setShowDocuments] = useState(false);

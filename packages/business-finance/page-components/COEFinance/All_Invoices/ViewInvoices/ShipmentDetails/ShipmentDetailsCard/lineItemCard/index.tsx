@@ -1,6 +1,5 @@
 import {
 	Button,
-	Pill,
 	Tooltip,
 	Popover,
 	Modal,
@@ -38,7 +37,6 @@ interface LineItemCardInterface {
 	};
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	invoiceType?: string;
 	isInvoiceApproved: boolean;
 	shipmentType: string;
 	tdsRate: string | number;
@@ -62,13 +60,12 @@ function LineItemCard({
 	},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
-	invoiceType = '',
 	isInvoiceApproved = false,
 	shipmentType = '',
 	tdsRate = 0,
 	paidTds = 0,
 	subTotal = 0,
-	setCheckItem = () => {},
+	setCheckItem = (prop) => (prop),
 }: LineItemCardInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [approvedItems, setApprovedItems] = useState({});
@@ -216,9 +213,6 @@ function LineItemCard({
 								>
 									<IcMInfo width={15} height={15} />
 								</Tooltip>
-								<Pill color="blue">
-									<span className={styles.invoice_pill}>{invoiceType}</span>
-								</Pill>
 							</div>
 						) : undefined}
 					</div>

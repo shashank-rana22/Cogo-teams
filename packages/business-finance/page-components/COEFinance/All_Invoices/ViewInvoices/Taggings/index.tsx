@@ -6,7 +6,7 @@ import ShowIcon from './ShowIcon';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckItem = () => {} }:
+function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckItem = (prop) => (prop) }:
 {
 	billId: string, status: string, setCheckItem: Function, setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];

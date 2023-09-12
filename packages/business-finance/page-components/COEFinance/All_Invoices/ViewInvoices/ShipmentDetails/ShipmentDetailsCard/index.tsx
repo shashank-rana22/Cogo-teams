@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -46,7 +46,7 @@ function ShipmentDetailsCard({
 	setLineItemsRemarks = () => {},
 	invoiceStatus = '',
 	lineItemsCheck = false,
-	setCheckItem = () => {},
+	setCheckItem = (prop) => (prop),
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -276,6 +276,7 @@ function ShipmentDetailsCard({
 								<IcMInfo width={15} height={15} />
 							</div>
 						</Tooltip>
+						<Pill color="blue">{invoiceType}</Pill>
 					</div>
 
 					{!isInvoiceApproved && (
@@ -383,7 +384,6 @@ function ShipmentDetailsCard({
 									bill={bill}
 									lineItemsRemarks={lineItemsRemarks}
 									setLineItemsRemarks={setLineItemsRemarks}
-									invoiceType={invoiceType}
 									isInvoiceApproved={isInvoiceApproved}
 									shipmentType={shipmentType}
 									subTotal={subTotal}

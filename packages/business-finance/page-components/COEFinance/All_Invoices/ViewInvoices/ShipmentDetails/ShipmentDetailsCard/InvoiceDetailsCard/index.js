@@ -27,7 +27,7 @@ function InvoiceDetailsCard({
 	advancedPaymentObj = {},
 	setShowHighAdvancedModal = (prop) => prop,
 	docContent = '',
-	setCheckItem = () => {},
+	setCheckItem = (prop) => (prop),
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 
