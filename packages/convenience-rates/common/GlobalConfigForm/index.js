@@ -15,6 +15,14 @@ import styles from './styles.module.css';
 const ZERO = 0;
 const ONE = 1;
 
+const BOOKING_SOURCES_WITH_RATE_TYPES = [
+	'spot_search',
+	'spot_booking',
+	'shipment_rollover',
+	'quotation',
+	'quick_checkout',
+];
+
 function GlobalConfigForm({
 	activeService = '', onSubmit = () => {}, isEmptyAlternateSlabDetails = true,
 	onClickDeactivate = () => {}, isUpdatable = false, data = {}, loading = '',
@@ -53,7 +61,7 @@ function GlobalConfigForm({
 
 	const formValues = watch();
 
-	const { slab_details = [], alternate_slab_details = [] } = formValues;
+	const { slab_details = [], alternate_slab_details = [], booking_source = '' } = formValues;
 
 	const defaultFeeUnit = formValues?.slab_details[GLOBAL_CONSTANTS.zeroth_index]?.fee_unit;
 
@@ -87,9 +95,9 @@ function GlobalConfigForm({
 
 		if (index > ZERO) {
 			customFieldArrayControls.slab_details[index] = {
-				slab_unit        : { disabled: true },
-				slab_lower_limit : { disabled: true },
-				fee_unit         : { disabled: true },
+				// slab_unit        : { disabled: true }, // need to checks
+				slab_lower_limit: { disabled: true },
+				// fee_unit         : { disabled: true },
 			};
 		}
 	});
@@ -103,6 +111,10 @@ function GlobalConfigForm({
 			}
 		});
 	}, [slab_details, setValue]);
+
+	const showElements = {
+		rate_source: BOOKING_SOURCES_WITH_RATE_TYPES.includes(booking_source),
+	};
 
 	return (
 		<div className={styles.container}>
@@ -176,6 +188,7 @@ function GlobalConfigForm({
 				control={control}
 				controls={optionalControls}
 				errors={errors}
+				showElements={showElements}
 			/>
 
 			<div className={styles.btn_container}>

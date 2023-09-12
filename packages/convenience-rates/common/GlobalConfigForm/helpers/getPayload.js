@@ -4,20 +4,21 @@ import { isEmpty } from '@cogoport/utils';
 import removeObjEmptyValue from '../../../page-components/helpers/removeObjEmptyValue';
 
 const getPayload = ({ values = {}, isUpdatable = false, activeService, convenience_rate_id }) => {
-	let containerSlabs = (values?.slab_details.map(
+	let containerSlabs = (values?.slab_details?.filter((s) => !!s?.slab_unit)?.map(
 		(container_slab) => {
 			const newSlab = removeObjEmptyValue(container_slab);
-			newSlab.isDefault = 'true';
+			newSlab.is_default = true;
 			return (newSlab);
 		},
-	));
-	const alternateContainerSlabs = (values?.alternate_slab_details.map(
+	)) || [];
+	const alternateContainerSlabs = (values?.alternate_slab_details?.filter((s) => !!s?.slab_unit)?.map(
 		(container_slab) => {
 			const newSlab = removeObjEmptyValue(container_slab);
-			newSlab.isDefault = 'false';
+			newSlab.is_default = false;
 			return (newSlab);
 		},
-	));
+	)) || [];
+
 	if (!isEmpty(alternateContainerSlabs[GLOBAL_CONSTANTS.zeroth_index])) {
 		containerSlabs = [...containerSlabs, ...alternateContainerSlabs];
 	}
@@ -39,6 +40,7 @@ const getPayload = ({ values = {}, isUpdatable = false, activeService, convenien
 				rate_source  : values?.rate_source || undefined,
 			}),
 	};
+
 	return payload;
 };
 export default getPayload;

@@ -2,6 +2,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import BOOKING_SOURCE_MAPPING from '../../../configs/BOOKING_SOURCE_MAPPING.json';
 import COMMODITY_MAPPING from '../../../configs/COMMODITY_MAPPING.json';
+import RATE_TYPE from '../../../configs/RATE_TYPE.json';
 
 const OPTIONS = [
 	{ label: 'User', value: 'user' },
@@ -10,7 +11,7 @@ const OPTIONS = [
 
 const getOptionalControls = ({
 	activeService,
-	service,
+
 	data,
 }) => {
 	const isUpdatable = !isEmpty(data);
@@ -21,6 +22,7 @@ const getOptionalControls = ({
 		performed_by,
 		booking_source,
 		organization_type,
+		rate_source,
 	} = data || {};
 
 	return [
@@ -65,6 +67,18 @@ const getOptionalControls = ({
 			span        : 2.5,
 			isClearable : true,
 			size        : 'sm',
+		},
+		{
+			label       : 'Rate Type',
+			name        : 'rate_source',
+			type        : 'select',
+			placeholder : 'Select Rate Type',
+			value       : rate_source,
+			size        : 'sm',
+			disabled    : isUpdatable,
+			options     : RATE_TYPE[activeService] || [],
+			span        : 2.5,
+			isClearable : true,
 		},
 		{
 			name        : 'organization_type',
@@ -113,7 +127,7 @@ const getOptionalControls = ({
 			placeholder : 'Select Rate Type',
 			value       : commodity,
 			disabled    : isUpdatable,
-			options     : COMMODITY_MAPPING[activeService || service],
+			options     : COMMODITY_MAPPING[activeService],
 			span        : 2.5,
 			isClearable : true,
 			size        : 'sm',
