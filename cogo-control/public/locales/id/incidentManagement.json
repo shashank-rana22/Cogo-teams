@@ -228,5 +228,10 @@
     "approval_type_required_message": "Jenis Persetujuan dibutuhkan",
     "entity_code_required_message": "Kode Entitas dibutuhkan",
     "user_required_message": "Pengguna dibutuhkan",
-    "criteria_required_message": "Kriteria dibutuhkan"
+    "criteria_required_message": "Kriteria dibutuhkan",
+    "shipment_re_open_request": "Permintaan Pembukaan Kembali Pengiriman",
+    "job_open_label": "Pekerjaan Terbuka",
+    "total_buy_label": "Jumlah Pembelian",
+    "total_sell_label": "Jual Total",
+    "profit_margin_label" : "Margin Keuntungan"
 }

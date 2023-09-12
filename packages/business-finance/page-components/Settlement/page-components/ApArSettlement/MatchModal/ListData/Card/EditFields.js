@@ -109,6 +109,7 @@ function EditFields({
 					type="number"
 					value={inputvalue}
 					onChange={(val) => inputSet(val)}
+					placeholder={`${fieldType}`}
 				/>
 			</div>
 

@@ -131,7 +131,7 @@ const useGetColumns = ({
 				const { currency = '', documentAmount = '' } = item || {};
 				return (
 					<div>
-						<Tooltip content={documentAmount}>
+						<Tooltip content={<div>{documentAmount}</div>}>
 							{currency || ''}
 							{' '}
 							{documentAmount?.toString().length > AMT_LENGTH
@@ -164,7 +164,7 @@ const useGetColumns = ({
 				const { tds = '', currency = '' } = item || {};
 				return (
 					<div>
-						<Tooltip content={tds}>
+						<Tooltip content={<div>{tds}</div>}>
 							{currency || ''}
 							{' '}
 							{tds?.toString().length > AMT_LENGTH
