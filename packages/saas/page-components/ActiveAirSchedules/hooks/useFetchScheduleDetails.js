@@ -43,9 +43,10 @@
 
 // 		});
 // 	}, [id]);
-// 	console.log(data);
+
 // 	return {
 // 		loading,
+// 		data,
 // 		carrierList,
 // 		filterScheduleData,
 // 		filters,
