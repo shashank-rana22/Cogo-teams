@@ -49,7 +49,7 @@ function InvoiceSelection({
 		selectedListRefetch = () => {},
 		selectedListLoading = false,
 		selectedListData = {},
-	} = useListGetSelectedPayrun({ payload, viewSelectedInvoice });
+	} = useListGetSelectedPayrun({ payload, viewSelectedInvoice, setApiData });
 
 	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 

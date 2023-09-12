@@ -11,28 +11,33 @@ function InvoiceBLCheck({ setActive = () => {}, bLData = {} }) {
 	const [showCheckInvoices, setShowCheckInvoices] = useState({});
 
 	const { list = [] } = bLData || {};
+
 	const {
 		TAGGED_DATA = [],
 		REJECTED_DATA = [],
 		PENDING_DATA = [],
 	} = useMemo(() => {
-		(list || []).forEach((item) => {
+		const TAGGED = [];
+		const REJECTED = [];
+		const PENDING = [];
+
+		(list || [])?.forEach((item) => {
 			const { payrunBillStatus, id } = item || {};
 			const value = showCheckInvoices[id] || '';
 
 			if (payrunBillStatus === 'APPROVED' || value === 'Tagged') {
-				TAGGED_DATA.push('Tagged');
+				TAGGED.push('Tagged');
 			} else if (payrunBillStatus === 'REJECTED' || value === 'Reject') {
-				REJECTED_DATA.push('Reject');
+				REJECTED.push('Reject');
 			} else {
-				PENDING_DATA.push('Pending');
+				PENDING.push('Pending');
 			}
 		});
 
 		return {
-			TAGGED_DATA,
-			REJECTED_DATA,
-			PENDING_DATA,
+			TAGGED_DATA   : TAGGED,
+			REJECTED_DATA : REJECTED,
+			PENDING_DATA  : PENDING,
 		};
 	}, [list, showCheckInvoices]);
 
