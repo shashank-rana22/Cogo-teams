@@ -29,7 +29,7 @@ function JobStatus({ shipment_data = {}, isJobOpenAllowed = false }) {
 					Undo
 				</Button>
 			)}
-			{setShowModal ? (
+			{showModal ? (
 				<ReOpenJob shipmentData={shipment_data} showModal={showModal} setShowModal={setShowModal} />
 			) : null}
 		</div>
