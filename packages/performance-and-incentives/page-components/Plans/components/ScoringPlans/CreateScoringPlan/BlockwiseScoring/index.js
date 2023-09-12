@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
-import { useFieldArray, useForm } from '@cogoport/forms';
 
 import Block from './Block';
 import styles from './styles.module.css';
+import useBlockWiseScoring from './useBlockWiseScoring';
 
 const CHILD_EMPTY_VALUES = {
 	block              : '',
@@ -13,9 +13,16 @@ const CHILD_EMPTY_VALUES = {
 function BlockwiseScoring(props) {
 	const { data, refetch } = props;
 
-	const { control, formState: { errors }, watch } = useForm();
+	console.log('data::', data);
 
-	const { fields, append, remove } = useFieldArray({ control, name: 'blocks' });
+	const {
+		control,
+		fields,
+		append,
+		remove,
+		errors,
+		watch,
+	} = useBlockWiseScoring({ data });
 
 	return (
 		<>

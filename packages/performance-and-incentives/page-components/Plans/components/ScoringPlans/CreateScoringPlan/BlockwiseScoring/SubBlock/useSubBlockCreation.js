@@ -19,9 +19,9 @@ const useSubBlockCreation = (props) => {
 	const watchSubBlock = watch(`${name}.sub_block_id`);
 
 	const parameterUnitOptions = useMemo(() => subBlockWiseParameterOptions?.[watchSubBlock]
-		?.reduce((acc, { id, unit }) => ({
+		?.reduce((acc, { value, unit }) => ({
 			...acc,
-			[id]: [{ label: startCase(unit), value: unit }],
+			[value]: [{ label: startCase(unit), value: unit }],
 		}), {}), [subBlockWiseParameterOptions, watchSubBlock]);
 
 	const parameterOptions = useMemo(() => subBlockWiseParameterOptions[watchSubBlock]?.map(
@@ -30,8 +30,8 @@ const useSubBlockCreation = (props) => {
 
 	const controls = getPrimaryControls({ parameterOptions });
 
-	const handleClick = () => {
-		const subBlockValues = watch(`blocks[${blockIndex}][${subBlockIndex}]`);
+	const handleClick = async () => {
+		const subBlockValues = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}]`) || {};
 
 		const agentScoringBlockId = subBlockValues.sub_block_id;
 
@@ -46,7 +46,7 @@ const useSubBlockCreation = (props) => {
 
 		}));
 
-		updateScoringAttributes({ agentScoringBlockId, agentScoringParameters });
+		await updateScoringAttributes({ agentScoringBlockId, agentScoringParameters });
 
 		refetch();
 	};

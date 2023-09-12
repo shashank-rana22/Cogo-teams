@@ -10,6 +10,7 @@ import useSubBlockCreation from './useSubBlockCreation';
 
 function SubBlock(props) {
 	const {
+		key,
 		name,
 		blockIndex,
 		subBlockIndex,
@@ -38,7 +39,7 @@ function SubBlock(props) {
 	});
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} key={key}>
 			<div className={styles.inner_container}>
 				<div className={styles.control_item}>
 					<div className={styles.label}>

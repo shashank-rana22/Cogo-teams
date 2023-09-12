@@ -26,6 +26,11 @@ const performance_and_incentives = {
 			service_name : 'agent_scoring',
 		},
 		{
+			api          : 'get_agent_scoring_configs',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
 			api          : 'get_agent_scoring_config',
 			access_type  : 'private',
 			service_name : 'agent_scoring',

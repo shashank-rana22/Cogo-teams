@@ -62,7 +62,7 @@ function Block(props) {
 			{fields.map((field, subBlockIndex) => (
 				<SubBlock
 					key={field.id}
-					name={`${name}.${subBlockIndex}`}
+					name={`${name}.sub_blocks.${subBlockIndex}`}
 					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					control={control}

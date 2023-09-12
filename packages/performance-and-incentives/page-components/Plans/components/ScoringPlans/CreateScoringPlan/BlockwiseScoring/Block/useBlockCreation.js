@@ -14,7 +14,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 
 	const { list, blackParameterLading } = useGetAgentScoringBlocks({ watchBlock });
 
-	const { fields, append, remove } = useFieldArray({ control, name });
+	const { fields, append, remove } = useFieldArray({ control, name: `${name}.sub_blocks` });
 
 	const subBlockOptions = useMemo(() => list.map(({ id, sub_block_name }) => ({
 		label : startCase(sub_block_name),
