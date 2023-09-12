@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -23,7 +24,6 @@ function SubBlock(props) {
 	} = props;
 
 	const {
-		Element,
 		controls = [],
 		handleClick = () => {},
 		parameterUnitOptions = {},
@@ -46,11 +46,10 @@ function SubBlock(props) {
 						<sup className={styles.sup}>*</sup>
 					</div>
 
-					<Element
+					<SelectController
 						name={`${name}.sub_block_id`}
 						control={control}
 						options={subBlockOptions}
-						value="default"
 					/>
 
 					{errors?.[`${name}.block`] && (

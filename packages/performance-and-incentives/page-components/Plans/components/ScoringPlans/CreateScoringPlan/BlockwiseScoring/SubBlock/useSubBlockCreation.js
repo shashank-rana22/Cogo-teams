@@ -1,4 +1,3 @@
-import { SelectController, InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
@@ -8,7 +7,6 @@ import usePostAgentScoringAttributes from '../../../../../hooks/usePostAgentScor
 const useSubBlockCreation = (props) => {
 	const {
 		subBlockWiseParameterOptions,
-		subBlockType,
 		watch,
 		name,
 		blockIndex,
@@ -31,8 +29,6 @@ const useSubBlockCreation = (props) => {
 	), [subBlockWiseParameterOptions, watchSubBlock]);
 
 	const controls = getPrimaryControls({ parameterOptions });
-
-	const Element = subBlockType === 'group' ? InputController : SelectController;
 
 	const handleClick = () => {
 		const subBlockValues = watch(`blocks[${blockIndex}][${subBlockIndex}]`);
