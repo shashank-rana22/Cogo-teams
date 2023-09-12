@@ -3,13 +3,14 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
 import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
 
 const useCreateScoringConfig = () => {
 	const { push } = useRouter();
 
-	const { control, formState: { errors }, handleSubmit, watch } = useForm();
+	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm();
 
 	const [cogoEntityId, roleFunction, channel] = watch(['cogo_entity_id', 'role_function', 'channel']);
 
@@ -21,7 +22,7 @@ const useCreateScoringConfig = () => {
 		authkey : 'post_agent_scoring_config',
 	}, { manual: true });
 
-	const onCreateScoringConfig = async ({ values = {} }) => {
+	const onCreateScoringConfig = async (values = {}) => {
 		try {
 			const res = await trigger({
 				data: {
@@ -30,6 +31,7 @@ const useCreateScoringConfig = () => {
 					channel        : values.channel,
 					role_ids       : values.role_ids,
 					display_name   : values.display_name,
+					status         : 'active',
 				},
 			});
 
@@ -40,6 +42,10 @@ const useCreateScoringConfig = () => {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
+
+	useEffect(() => {
+		setValue('role_ids', undefined);
+	}, [cogoEntityId, roleFunction, channel, setValue]);
 
 	return {
 		controls,
