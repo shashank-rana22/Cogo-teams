@@ -104,23 +104,26 @@ function CardItem({
 			</div>
 
 			<div className={styles.card_list}>
-				{isEmpty(list) || amountTab === 'sellQuote' || amountTab === 'buyQuote' ? (
-					<div className={styles.no_data}>No Data Available</div>
-				) : (
-					<List
-						config={config}
-						itemData={fullResponse}
-						functions={functions}
-						loading={loading}
-						page={pageIndex}
-						pageSize={10}
-						showPagination
-						handlePageChange={(val: number) => hookSetters.setFilters({
-							...filters,
-							page: val,
-						})}
-					/>
-				)}
+				{
+				isEmpty(list)
+					? (
+						<div className={styles.no_data}>No Data Available</div>
+					) : (
+						<List
+							config={config}
+							itemData={fullResponse}
+							functions={functions}
+							loading={loading}
+							page={pageIndex}
+							pageSize={10}
+							showPagination
+							handlePageChange={(val: number) => hookSetters.setFilters({
+								...filters,
+								page: val,
+							})}
+						/>
+					)
+}
 			</div>
 
 			{!showInvoices ? (

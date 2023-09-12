@@ -43,7 +43,7 @@ function AccordianCards({
 		creditNoteCount,
 		creditNoteTotalAmount,
 	} = itemData || {};
-	const [amountTab, setAmountTab] = useState('expense');
+	const [amountTab, setAmountTab] = useState('sellQuote');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
 		jobSource      : '',

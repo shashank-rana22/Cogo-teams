@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { expenseConfig } from '../configurations/ShipmentIdView/expenseConfig';
 import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
+import { quotationConfig } from '../configurations/ShipmentIdView/quotationConfig';
 
 import useGetFiniteList from './useGetFiniteList';
+import useGetQuotation from './useGetQuotationBill';
 
 interface DataType {
 	currentPage: number;
@@ -39,6 +41,11 @@ const useListBills = (allParams) => {
 			authorizationparameters: profile?.authorizationparameters,
 		}),
 	);
+
+	const { getQuotationData, quotationLoading, quoteData } = useGetQuotation({
+		jobNumber : params?.jobNumber,
+		amountTab : params?.amountTab,
+	});
 
 	if (authorizationparameters?.split(':')?.[1] === 'across_all') {
 		let check = true;
@@ -104,9 +111,15 @@ const useListBills = (allParams) => {
 		},
 	});
 
-	const currentApi = params?.amountTab === 'expense'
-		? listExpenseInvoicesApi
-		: listSalesInvoicesApi;
+	const API_MAPPING = {
+		expense   : listExpenseInvoicesApi,
+		income    : listSalesInvoicesApi,
+		sellQuote : getQuotationData,
+		buyQuote  : getQuotationData,
+	};
+
+	const currentApi = API_MAPPING[params?.amountTab];
+
 	const {
 		loading,
 		page,
@@ -124,9 +137,17 @@ const useListBills = (allParams) => {
 		params.setDataCard(fullResponse?.list?.[0]?.job || fullResponse?.list?.[0]);
 	}, [fullResponse, params]);
 
-	const config = params?.amountTab === 'expense' ? expenseConfig : incomeConfig;
+	const CONFIG_MAPPING = {
+		expense   : expenseConfig,
+		income    : incomeConfig,
+		sellQuote : quotationConfig,
+		buyQuote  : quotationConfig,
+	};
 
-	const apiLoading = loading || billsApiLoading || invoicesApiLoading;
+	const config = CONFIG_MAPPING[params?.amountTab];
+
+	const apiLoading = loading || billsApiLoading || invoicesApiLoading || quotationLoading;
+
 	return {
 		loading : apiLoading,
 		page,
@@ -137,6 +158,7 @@ const useListBills = (allParams) => {
 		setQ,
 		q,
 		config,
+		quoteData,
 	};
 };
 
