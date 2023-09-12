@@ -3,19 +3,26 @@ export default {
 		'shipment_info',
 		'shipment_header',
 		'timeline',
+		'poc',
+		'sop',
 		'chat',
 		'cancel_details',
 	],
 	visible_tabs: [
 		'overview',
-		'field_executive',
+		'tasks',
+		'documents',
+		'emails',
+		'sales',
+		'tracking',
 	],
 	shipment_info: {
-		job_open_request: false,
+		job_open_request: true,
 	},
-	default_tab : 'field_executive',
+	default_tab : 'overview',
 	overview    : {
-		tab_title: 'Overview',
+		tab_title            : 'Overview',
+		enable_consolidation : true,
 	},
 	tasks: {
 		tab_title: 'Timeline and Tasks',
@@ -23,21 +30,14 @@ export default {
 	documents: {
 		tab_title: 'Documents',
 	},
-	field_executive: {
-		tab_title                : 'Field Executive',
-		document_history_visible : true,
-		edit_details_visible     : true,
-		start_tracking_visible   : true,
-		move_document_visible    : false,
-	},
 	emails: {
 		tab_title: 'Emails',
 	},
 	cancel_shipment: {
-		can_cancel   : false,
+		can_cancel   : true,
 		list_reasons : {
 			stakeholder_type: [
-				'field_executive',
+				'booking_agent',
 			],
 		},
 		role: 'sales',

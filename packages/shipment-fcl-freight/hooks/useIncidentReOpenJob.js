@@ -40,9 +40,9 @@ const useIncidentReOpenJob = ({
 	}, { manual: true });
 
 	const onReOpenJob = async (values) => {
-		const payload = getFormattedPayload({ values, shipmentData, user_id });
-
 		try {
+			const payload = getFormattedPayload({ values, shipmentData, user_id });
+
 			await trigger({
 				data: payload,
 			});

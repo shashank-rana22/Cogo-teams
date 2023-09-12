@@ -3,17 +3,24 @@ export default {
 		'shipment_info',
 		'shipment_header',
 		'timeline',
+		'poc',
+		'sop',
 		'chat',
 		'cancel_details',
 	],
 	visible_tabs: [
 		'overview',
+		'tasks',
+		'documents',
+		'emails',
 		'field_executive',
+		'tracking',
+		'purchase',
 	],
 	shipment_info: {
-		job_open_request: false,
+		job_open_request: true,
 	},
-	default_tab : 'field_executive',
+	default_tab : 'overview',
 	overview    : {
 		tab_title: 'Overview',
 	},
@@ -27,8 +34,8 @@ export default {
 		tab_title                : 'Field Executive',
 		document_history_visible : true,
 		edit_details_visible     : true,
-		start_tracking_visible   : true,
-		move_document_visible    : false,
+		start_tracking_visible   : false,
+		move_document_visible    : true,
 	},
 	emails: {
 		tab_title: 'Emails',
@@ -37,7 +44,7 @@ export default {
 		can_cancel   : false,
 		list_reasons : {
 			stakeholder_type: [
-				'field_executive',
+				'document_desk',
 			],
 		},
 		role: 'sales',
@@ -45,7 +52,7 @@ export default {
 	tracking: {
 		tab_title: 'Tracking',
 	},
-	sales: {
-		tab_title: 'Sales Live Invoice',
+	purchase: {
+		tab_title: 'Purchase Live Invoice',
 	},
 };
