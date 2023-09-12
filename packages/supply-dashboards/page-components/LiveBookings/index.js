@@ -6,7 +6,7 @@ import LiveBookings from './Content';
 function LiveBookingsView() {
 	const { push } = useRouter();
 
-	const activeTab = 'live_bookings';
+	const ACTIVE_TAB = 'live_bookings';
 	const handleTabChange = (tab) => {
 		if (tab !== 'live_bookings') {
 			const route = tab.replace('_', '-');
@@ -15,9 +15,12 @@ function LiveBookingsView() {
 	};
 	return (
 		<div>
-			<Tabs activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
+			<Tabs activeTab={ACTIVE_TAB} onChange={(tab) => { handleTabChange(tab); }}>
 				<TabPanel name="live_bookings" title="Live Bookings"><LiveBookings /></TabPanel>
 				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
+					--
+				</TabPanel>
+				<TabPanel name="rate_density" title="Rate Density">
 					--
 				</TabPanel>
 			</Tabs>

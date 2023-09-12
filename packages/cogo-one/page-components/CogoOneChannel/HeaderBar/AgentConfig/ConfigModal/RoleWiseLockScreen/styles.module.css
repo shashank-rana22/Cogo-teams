@@ -4,6 +4,12 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+
+	:global {
+		.ui_multiselectt_options_container {
+			max-height: 120px;
+		}
+	}
 }
 
 .wrapper {
@@ -11,14 +17,8 @@
 	align-items: center;
 }
 
-.back_icon {
-	width: 30px;
-	height: 20px;
-	cursor: pointer;
-}
-
 .label {
-	margin-top: 14px;
+	margin-top: 16px;
 	font-size: 18px;
 
 	span {
@@ -36,10 +36,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 60%;
-	margin: 18px 0 0;
-}
-
-.padding_inner {
-	padding: 0 12px;
+	width: 100%;
+	min-height: 44px;
+	padding: 8px;
+	margin-top: 6%;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 }
