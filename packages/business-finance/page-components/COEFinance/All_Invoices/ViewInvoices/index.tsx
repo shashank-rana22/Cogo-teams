@@ -55,7 +55,12 @@ function ViewInvoices() {
 		<div>
 			<div
 				className={styles.sticky}
-				style={{ background: isSticky ? '#d8ecee' : 'none' }}
+				style={{
+					boxShadow: isSticky
+						? '0px 4px 8px #bbbbc1'
+						: 'none',
+					background: isSticky ? '#ecfdff' : 'none',
+				}}
 			>
 				<Header
 					data={fullResponse}
