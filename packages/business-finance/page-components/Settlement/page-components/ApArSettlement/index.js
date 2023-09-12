@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
@@ -14,6 +15,7 @@ import styles from './styles.module.css';
 const INITIAL_MAT_BAL = 0;
 
 function ApArSettlement() {
+	const { t = () => {} } = useTranslation(['settlement']);
 	const [filters, setFilters] = useState({
 		entityCode : '301',
 		date       : { startDate: null, endDate: null },
@@ -31,8 +33,8 @@ function ApArSettlement() {
 	});
 
 	const TEXT = 	(filters?.entityCode && filters?.tradeParty)
-		? 'Looks like you do not have any data in this category'
-		: 'Select filters to find what you\'re looking for';
+		? t('settlement:empty_data_in_filters_message')
+		: t('settlement:select_filters_message');
 
 	const [selectedData, setSelectedData] = useState([]);
 	const [matchBal, setMatchBal] = useState(INITIAL_MAT_BAL);
@@ -50,6 +52,7 @@ function ApArSettlement() {
 		sorting,
 		setMatchModalShow,
 		setSelectedData,
+		t,
 	});
 
 	const handleFilterChange = (filterName, value) => {
