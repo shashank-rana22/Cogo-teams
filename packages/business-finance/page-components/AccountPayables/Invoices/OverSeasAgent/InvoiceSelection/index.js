@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import List from '../../../../commons/List/index.tsx';
 import useAddInvoiceToSelectedApi from '../../hooks/useAddInvoiceToSelectedApi';
 import useGetInvoiceSelection from '../../hooks/useInvoiceSelection';
+import useListGetSelectedPayrun from '../../hooks/useListGetSelectedPayrun';
 
 import FilterContainers from './FilterContainers';
 import Footer from './Footer';
@@ -34,7 +35,6 @@ function InvoiceSelection({
 		setViewSelectedInvoice = () => {},
 		viewSelectedInvoice = false,
 		onClear = () => {},
-		listSelectedInvoice = [],
 		setEditedValue = () => {},
 		loading = false,
 		goBack = () => {},
@@ -42,7 +42,14 @@ function InvoiceSelection({
 		apiData = {},
 		data = {},
 		setApiData = () => {},
+		payload = {},
 	} = useGetInvoiceSelection({ sort });
+
+	const {
+		selectedListRefetch = () => {},
+		selectedListLoading = false,
+		selectedListData = {},
+	} = useListGetSelectedPayrun({ payload, viewSelectedInvoice });
 
 	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 
@@ -87,8 +94,8 @@ function InvoiceSelection({
 	const LIST_FUNCTIONS = getFunctions({
 		onChangeTableBodyCheckbox,
 		setEditedValue,
-		refetch,
-		invoiceData,
+		refetch     : viewSelectedInvoice ? selectedListRefetch : refetch,
+		invoiceData : viewSelectedInvoice ? selectedListData : invoiceData,
 		setApiData,
 	});
 
@@ -107,8 +114,8 @@ function InvoiceSelection({
 
 			<div className={styles.list_container}>
 				<List
-					itemData={invoiceData}
-					loading={loading}
+					itemData={viewSelectedInvoice ? selectedListData : invoiceData}
+					loading={viewSelectedInvoice ? selectedListLoading : loading}
 					config={config}
 					functions={LIST_FUNCTIONS}
 					setSort={setSort}
@@ -132,7 +139,7 @@ function InvoiceSelection({
 				loading={loading}
 				submitSelectedInvoices={submitSelectedInvoices}
 				setShowHeader={setShowHeader}
-				listSelectedInvoice={listSelectedInvoice}
+				selectedListLoading={selectedListLoading}
 				selectButton={tdsError.length || paidError.length}
 				setActive={setActive}
 				setBLData={setBLData}

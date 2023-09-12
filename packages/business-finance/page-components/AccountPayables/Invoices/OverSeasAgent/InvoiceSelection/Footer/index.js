@@ -27,7 +27,7 @@ function Footer({
 	setShowHeader = () => {},
 	setActive = () => {},
 	setBLData = () => {},
-	listSelectedInvoice = [],
+	selectedListLoading = false,
 	selectButton = false,
 	createloading = false,
 }) {
@@ -89,7 +89,7 @@ function Footer({
 										setBLData(apiData);
 										setShowHeader(true);
 									}}
-									disabled={listSelectedInvoice?.loading || !list.length}
+									disabled={selectedListLoading || !list.length}
 								>
 									Proceed
 								</Button>

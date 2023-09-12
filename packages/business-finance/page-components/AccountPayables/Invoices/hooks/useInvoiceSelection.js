@@ -5,7 +5,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-// import changeFormat from '../utils/changeFormat';
 import createPayload from '../utils/createPayload';
 import getConfig from '../utils/getConfig';
 import getKeyByValue from '../utils/getKeyByValue';
@@ -36,22 +35,12 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	const country = getKeyByValue(GLOBAL_CONSTANTS.country_entity_ids, partner_id);
 	const config = getConfig({ country, viewSelectedInvoice });
 
-	const listInvoices = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url: '/purchase/payable-bill/list', method: 'get', authKey: 'get_purchase_payable_bill_list',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
-	const listSelectedInvoice =	useRequestBf(
-		{
-			url: '/purchase/payrun-bill', method: 'get', authKey: 'get_purchase_payrun_bill',
-		},
-		{ manual: false },
-	);
-
-	const api = viewSelectedInvoice ? listSelectedInvoice : listInvoices;
-
-	const [{ data, loading }, trigger] = api || [];
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [globalFilters, setGlobalFilters] = useState({
@@ -101,7 +90,9 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		});
 	}, [parserdData, trigger]);
 
-	useEffect(() => { refetch(); }, [refetch]);
+	useEffect(() => {
+		if (!viewSelectedInvoice) { refetch(); }
+	}, [refetch, viewSelectedInvoice]);
 
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
 		settingApiData({ itemData, value, key, checked, setApiData });
@@ -115,7 +106,6 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		invoiceData : apiData,
 		tdsData     : apiTdsData,
 		onClear,
-		listSelectedInvoice,
 		globalFilters,
 		setGlobalFilters,
 		viewSelectedInvoice,
@@ -128,6 +118,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 		apiData,
 		data,
 		setApiData,
+		payload,
 	};
 };
 
