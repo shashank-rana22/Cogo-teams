@@ -13,7 +13,7 @@ function AddNewService({
 }) {
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
-	const { shipment_data = {}, primary_service } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
 
 	const [upsellModal, setUpsellModal] = useState(false);
 

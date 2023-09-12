@@ -25,6 +25,7 @@ const CONFIG_MAPPING = {
 	coe_head                     : adminConfig,
 	credit_control               : adminConfig,
 	operation_manager            : adminConfig,
+	cogo_auditor_id              : adminConfig,
 	cost_booking_manager         : costBookingManagerConfig,
 	so1_so2_ops                  : so1So2Ops,
 	ff_cost_booking              : ffCostBooking,
