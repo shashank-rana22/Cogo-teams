@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const ATLEAST_ONE = 0;
+const ZERO = 0;
 
 function CardItem({ data = {}, testsCount = 0, coursesCount = 0 }) {
 	const { push } = useRouter();
@@ -18,16 +18,16 @@ function CardItem({ data = {}, testsCount = 0, coursesCount = 0 }) {
 	let redirection_url = href.url;
 
 	if (title === 'CogoAcademy') {
-		if (coursesCount > ATLEAST_ONE && testsCount > ATLEAST_ONE) {
+		if (coursesCount > ZERO && testsCount > ZERO) {
 			tag_text = `${coursesCount} ${courses_tag_text} + ${testsCount} ${assignments_tag_text}`;
 			redirection_url = '/learning/course';
-		} else if (coursesCount > ATLEAST_ONE && !testsCount > ATLEAST_ONE) {
+		} else if (coursesCount > ZERO && !testsCount > ZERO) {
 			tag_text = `${coursesCount} ${courses_tag_text}`;
 			redirection_url = '/learning/course';
-		} else if (testsCount > ATLEAST_ONE && !coursesCount > ATLEAST_ONE) {
+		} else if (testsCount > ZERO && !coursesCount > ZERO) {
 			tag_text = `${testsCount} ${assignments_tag_text}`;
 			redirection_url = '/learning/tests/dashboard';
-		} else if (!testsCount > ATLEAST_ONE && !coursesCount > ATLEAST_ONE) {
+		} else if (!testsCount > ZERO && !coursesCount > ZERO) {
 			tag_text = '';
 		}
 	}
@@ -74,7 +74,7 @@ function CardItem({ data = {}, testsCount = 0, coursesCount = 0 }) {
 							{label}
 						</Button>
 					</div>
-				) : ''}
+				) : null}
 			</div>
 		</div>
 	);
