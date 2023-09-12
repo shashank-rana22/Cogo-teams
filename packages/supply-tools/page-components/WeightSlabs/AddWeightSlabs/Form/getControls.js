@@ -6,8 +6,6 @@ import {
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { isEmpty } from '@cogoport/utils';
 
-import currencyOptions from '../../../../constants/currencies';
-
 const geo = getGeoConstants();
 
 const getOptions = ({ containerType }) => FREIGHT_CONTAINER_COMMODITY_MAPPINGS[containerType].map((item) => ({
@@ -350,11 +348,12 @@ const getControls = ({ item }) => [
 				name           : 'currency',
 				label          : 'Currency',
 				key            : 'currency',
-				type           : 'select',
+				type           : 'async_select',
 				optionsListKey : 'currencies',
+				asyncKey       : 'list_exchange_rate_currencies',
+				initialCall   	: true,
 				span           : 3.5,
 				placeholder    : 'Select',
-				options        : currencyOptions,
 				rules          : { required: 'This is required' },
 			},
 			{
