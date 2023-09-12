@@ -12,26 +12,26 @@ function AddEdit({
 	setEditTncModalId = () => {},
 	refetch = () => {},
 }) {
-	const [showModal, setShowModal] = useState(false);
+	const [showAddModal, setAddShowModal] = useState(false);
 	const formRef = useRef(null);
 
 	return (
 		<div>
-			<Button onClick={() => setShowModal(true)}>
+			<Button onClick={() => setAddShowModal(true)}>
 				Create
 			</Button>
 
-			{showModal ? (
+			{showAddModal ? (
 				<Modal
-					show={showModal}
-					onClose={() => { setShowModal(false); setTncLevel('basicInfo'); }}
+					show={showAddModal}
+					onClose={() => { setAddShowModal(false); setTncLevel('basicInfo'); }}
 					size="lg"
 					placement="top"
 				>
 					<Modal.Header title={CREATION_STEPS_MAPPING[tncLevel]?.label} />
 					<Modal.Body>
 						<Form
-							setShowModal={setShowModal}
+							setAddShowModal={setAddShowModal}
 							ref={formRef}
 							refetch={refetch}
 							tncLevel={tncLevel}

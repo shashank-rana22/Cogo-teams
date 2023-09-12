@@ -4,6 +4,7 @@ import { IcMDocument } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
 import SERVICE_TYPES_MAPPING from './service-types-mapping';
+import ShipmentIcon from './ShipmentIcon';
 
 function GetToolTipContent({ list = [] }) {
 	return (
@@ -29,7 +30,7 @@ const FREIGHT_DETAILS_MAPPING = {
 			return (
 				<div>
 					<div style={{ margin: '4px 4px 0px 0px' }}>
-						{SERVICE_TYPES_MAPPING?.[service]?.svgComponent || <IcMDocument />}
+						{ <ShipmentIcon shipment_type={service} /> || <IcMDocument />}
 					</div>
 
 					{SERVICE_TYPES_MAPPING?.[service]?.label || '-'}

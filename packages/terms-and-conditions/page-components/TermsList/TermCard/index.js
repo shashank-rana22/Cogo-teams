@@ -3,7 +3,6 @@ import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
 import FREIGHT_DETAILS_MAPPING from '../../../config/freight-details-mapping';
-import SERVICE_TYPES_MAPPING from '../../../config/service-types-mapping';
 import ShowMoreTNC from '../ShowMoreTnC';
 
 import PopOverContent from './PopContent';
@@ -43,10 +42,6 @@ function TermCard({
 					onClick={onClickShowMoreTnC}
 					role="presentation"
 				>
-					<div
-						className={styles.freight_stroke}
-						style={{ backgroundColor: SERVICE_TYPES_MAPPING?.[service]?.color }}
-					/>
 
 					<div className={styles.row} style={{ width: '100%' }}>
 						{Object.values(FREIGHT_DETAILS_MAPPING).map((freightItem) => {
@@ -103,7 +98,7 @@ function TermCard({
 						)}
 						visible={visible}
 					/>
-
+					<div className={styles.see_more} role="presentation" onClick={onClickShowMoreTnC}>see more</div>
 				</div>
 
 			</div>
@@ -130,7 +125,6 @@ function TermCard({
 							setTncLevel={setTncLevel}
 							organizationId={organizationId}
 							setEditTncModalId={setEditTncModalId}
-							// handleSubmitForm={handleSubmitForm}
 							setShowEdit={setShowEdit}
 							callBack={callBack}
 							refetch={refetch}

@@ -5,18 +5,18 @@ import { useSelector } from '@cogoport/store';
 import getCreateUpdateTncPayload from '../helpers/getCreateUpdateTncPayload';
 import toastApiError from '../utlis/toastApiError';
 
-const useCreateUpdateTnc = (
+const useCreateUpdateTnc = ({
 	action = 'create',
 	refetch = () => {},
 	editFormValue = null,
 	setEditTncModalId = () => {},
 	organizationId = null,
-	setShowModal = () => {},
-) => {
+	setAddShowModal = () => {},
+	setTncLevel = () => {},
+}) => {
 	const {
 		general: { scope },
 	} = useSelector((state) => state);
-
 	const isUpdatable = action === 'update';
 
 	const apiName = isUpdatable
@@ -33,7 +33,8 @@ const useCreateUpdateTnc = (
 
 			Toast.success(`Terms And Conditions ${editFormValue?.id ? 'Updated' : 'Created'} Successfully`);
 			setEditTncModalId(null);
-			setShowModal(false);
+			setAddShowModal(false);
+			setTncLevel('basicInfo');
 			refetch();
 		} catch (error) {
 			toastApiError(error);

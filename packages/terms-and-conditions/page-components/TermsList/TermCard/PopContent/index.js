@@ -26,7 +26,7 @@ function PopOverContent({
 				setEditModalId(item?.id);
 			}}
 			>
-				Edit
+				Update Terms
 
 			</Button>
 			<Button

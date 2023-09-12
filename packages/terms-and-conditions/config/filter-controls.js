@@ -7,7 +7,7 @@ const getTncControls = [
 		label   : 'Service Type',
 		type    : 'select',
 		options : SERVICE_TYPE,
-		span    : 6,
+		span    : 12,
 		rules   : { required: true },
 	},
 	{
@@ -19,7 +19,7 @@ const getTncControls = [
 		placeholder    : 'Select Shipping Line',
 		optionsListKey : 'shipping-lines',
 		defaultOptions : true,
-		span           : 6,
+		span           : 12,
 		params         : {
 			page_limit : 10,
 			sort_by    : 'short_name',
@@ -35,9 +35,8 @@ const getTncControls = [
 		type           : 'async_select',
 		asyncKey       : 'list_operators',
 		placeholder    : 'Select Airline',
-		optionsListKey : 'air-lines',
 		defaultOptions : true,
-		span           : 6,
+		span           : 12,
 	},
 	{
 		name        : 'trade_type',
@@ -45,7 +44,7 @@ const getTncControls = [
 		type        : 'select',
 		placeholder : 'Select Trade Type',
 		options     : TRADE_TYPE,
-		span        : 6,
+		span        : 12,
 		isClearable : true,
 	},
 	{
@@ -56,7 +55,7 @@ const getTncControls = [
 		placeholder    : 'Select Country Name',
 		optionsListKey : 'locations',
 		asyncKey       : 'list_locations',
-		span           : 6,
+		span           : 12,
 		params         : { filters: { type: ['country'] } },
 	},
 
@@ -68,7 +67,7 @@ const getTncControls = [
 		asyncKey       : 'list_locations',
 		placeholder    : 'Select Country Name',
 		params         : { filters: { type: ['country'] } },
-		span           : 4,
+		span           : 12,
 		multiple       : true,
 	},
 ];

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import ListPagination from '../common/ListPagination';
 import useGetTermsAndCondition from '../hooks/useGetTermsAndCondition';
 
@@ -9,7 +7,6 @@ import TermList from './TermsList';
 
 function TermsAndConditions({ organizationDetails = {} }) {
 	const { id: organizationId } = organizationDetails || {};
-	const [showModal, setShowModal] = useState(false);
 	const {
 		list,
 		data,
@@ -32,15 +29,15 @@ function TermsAndConditions({ organizationDetails = {} }) {
 				{...restProps}
 				filters={filters}
 				setFilters={setFilters}
-				showModal={showModal}
 				tncLevel={tncLevel}
-				setShowModal={setShowModal}
 				setTncLevel={setTncLevel}
 				setPagination={setPagination}
 				editTncModalId={editTncModalId}
 				setEditTncModalId={setEditTncModalId}
 				refetch={refetchListApi}
 			/>
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+
 			<TermList
 				EditForm={Form}
 				list={list}

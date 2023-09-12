@@ -24,7 +24,7 @@ function Header({
 	};
 	return (
 		<div className={styles.container}>
-			<p className={styles.header}>Terms And Conditions</p>
+			<h1 className={styles.header}>Terms And Conditions</h1>
 			<div className={styles.container}>
 				<AddEdit
 					refetch={refetch}
