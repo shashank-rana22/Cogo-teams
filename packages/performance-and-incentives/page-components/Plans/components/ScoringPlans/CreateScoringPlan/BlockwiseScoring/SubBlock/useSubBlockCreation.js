@@ -1,30 +1,41 @@
 import { SelectController, InputController } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
 import usePostAgentScoringAttributes from '../../../../../hooks/usePostAgentScoringConfigAttributes';
 
-const useSubBlockCreation = ({
-	parameterOptions = {}, subBlockType = '',
-	watch = () => {}, name = '', index = 0, subBlockIndex = 0, refetch = () => {},
-}) => {
-	const { postAgentScoringAttributes, loading } = usePostAgentScoringAttributes();
+const useSubBlockCreation = (props) => {
+	const {
+		subBlockWiseParameterOptions,
+		subBlockType,
+		watch,
+		name,
+		blockIndex,
+		subBlockIndex,
+		refetch,
+	} = props;
+
+	const { updateScoringAttributes, loading } = usePostAgentScoringAttributes();
 
 	const watchSubBlock = watch(`${name}.sub_block_id`);
 
-	const parameterUnitOptions = useMemo(() => parameterOptions[watchSubBlock]?.reduce((acc, item) => {
-		acc[item.id] = [{ label: item.unit, value: item.unit }];
-		return acc;
-	}, {}), [parameterOptions, watchSubBlock]);
+	const parameterUnitOptions = useMemo(() => subBlockWiseParameterOptions?.[watchSubBlock]
+		?.reduce((acc, { id, unit }) => ({
+			...acc,
+			[id]: [{ label: startCase(unit), value: unit }],
+		}), {}), [subBlockWiseParameterOptions, watchSubBlock]);
 
-	const paramOptions = parameterOptions[watchSubBlock]?.map(({ label, value }) => ({ label, value }));
+	const parameterOptions = useMemo(() => subBlockWiseParameterOptions[watchSubBlock]?.map(
+		({ label, value }) => ({ label, value }),
+	), [subBlockWiseParameterOptions, watchSubBlock]);
 
-	const controls = getPrimaryControls({ parameterOptions: paramOptions });
+	const controls = getPrimaryControls({ parameterOptions });
 
 	const Element = subBlockType === 'group' ? InputController : SelectController;
 
 	const handleClick = () => {
-		const subBlockValues = watch(`blocks[${index}][${subBlockIndex}]`);
+		const subBlockValues = watch(`blocks[${blockIndex}][${subBlockIndex}]`);
 
 		const agentScoringBlockId = subBlockValues.sub_block_id;
 
@@ -39,7 +50,7 @@ const useSubBlockCreation = ({
 
 		}));
 
-		postAgentScoringAttributes({ agentScoringBlockId, agentScoringParameters });
+		updateScoringAttributes({ agentScoringBlockId, agentScoringParameters });
 
 		refetch();
 	};

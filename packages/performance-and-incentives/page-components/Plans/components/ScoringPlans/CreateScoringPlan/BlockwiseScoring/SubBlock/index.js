@@ -9,16 +9,30 @@ import useSubBlockCreation from './useSubBlockCreation';
 
 function SubBlock(props) {
 	const {
-		name = '', index = 0, subBlockIndex = 0, control = {}, errors = {}, watch = () => {},
-		subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {}, refetch = () => {},
+		name,
+		blockIndex,
+		subBlockIndex,
+		control,
+		errors,
+		watch,
+		subBlockType,
+		removeSubBlock,
+		subBlockOptions,
+		subBlockWiseParameterOptions,
+		refetch,
 	} = props;
 
-	const { Element, controls = [], handleClick = () => {}, parameterUnitOptions = {} } = useSubBlockCreation({
-		parameterOptions,
+	const {
+		Element,
+		controls = [],
+		handleClick = () => {},
+		parameterUnitOptions = {},
+	} = useSubBlockCreation({
+		subBlockWiseParameterOptions,
 		subBlockType,
 		name,
 		watch,
-		index,
+		blockIndex,
 		subBlockIndex,
 		refetch,
 	});
@@ -39,7 +53,7 @@ function SubBlock(props) {
 						value="default"
 					/>
 
-					{errors[`${name}.block`] && (
+					{errors?.[`${name}.block`] && (
 						<div className={styles.error_msg}>This is required</div>
 					)}
 				</div>

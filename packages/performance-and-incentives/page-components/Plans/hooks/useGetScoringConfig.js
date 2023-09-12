@@ -5,7 +5,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetScoringConfig = () => {
-	const { query : { id } = {} } = useRouter();
+	const { query : { id : scoring_confing_id } = {} } = useRouter();
 
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : 'config',
@@ -17,25 +17,25 @@ const useGetScoringConfig = () => {
 		try {
 			await trigger({
 				params: {
-					id,
+					id: scoring_confing_id,
 				},
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data) || 'Something went wrong');
 		}
-	}, [trigger, id]);
+	}, [trigger, scoring_confing_id]);
 
 	useEffect(() => {
-		if (id) {
+		if (scoring_confing_id) {
 			getAgentScoringConfig();
 		}
-	}, [getAgentScoringConfig, id]);
+	}, [getAgentScoringConfig, scoring_confing_id]);
 
 	return {
 		data,
 		loading,
-		refetch            : getAgentScoringConfig,
-		scoring_confing_id : id,
+		refetch: getAgentScoringConfig,
+		scoring_confing_id,
 	};
 };
 

@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -17,7 +17,7 @@ function Block(props) {
 		name,
 		control,
 		errors,
-		index,
+		blockIndex,
 		removeBlock,
 		watch,
 		refetch,
@@ -31,15 +31,16 @@ function Block(props) {
 		append,
 		remove,
 		subBlockOptions,
-		parameterOptions = {},
+		subBlockWiseParameterOptions,
+		blackParameterLading,
 	} = useBlockCreation({ control, name, watch });
 
 	return (
 		<div className={styles.container} key={key}>
 			<div className={styles.header}>
-				<div className={styles.block_number}><p>{index + OFFSET}</p></div>
+				<div className={styles.block_number}><p>{blockIndex + OFFSET}</p></div>
 
-				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(index)}>
+				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(blockIndex)}>
 					<IcMDelete className={styles.icon} />
 					<div className={styles.underline_text}>Delete Block</div>
 				</div>
@@ -62,7 +63,7 @@ function Block(props) {
 				<SubBlock
 					key={field.id}
 					name={`${name}.${subBlockIndex}`}
-					index={index}
+					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					control={control}
 					watch={watch}
@@ -70,12 +71,12 @@ function Block(props) {
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
 					subBlockOptions={subBlockOptions}
-					parameterOptions={parameterOptions}
+					subBlockWiseParameterOptions={subBlockWiseParameterOptions}
 					refetch={refetch}
 				/>
 			))}
 
-			{!!subBlockType && (
+			{blackParameterLading ? <Loader themeType="primary" /> : (!!subBlockType && (
 				<Button
 					type="button"
 					size="md"
@@ -86,7 +87,7 @@ function Block(props) {
 					{' '}
 					{startCase(subBlockType)}
 				</Button>
-			)}
+			))}
 		</div>
 	);
 }

@@ -34,10 +34,11 @@ const useGetAgentScoringBlocks = (props) => {
 		}
 	}, [getAgentScoringBlocks, watchBlock]);
 
+	const { list = [] } = data || {};
+
 	return {
-		data,
-		getAgentScoringBlocks,
-		loading,
+		list,
+		blackParameterLading: loading,
 	};
 };
 
