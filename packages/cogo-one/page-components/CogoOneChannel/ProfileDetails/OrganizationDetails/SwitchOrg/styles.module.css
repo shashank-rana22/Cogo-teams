@@ -31,3 +31,47 @@
 	font-size: 12px;
 	color: #4f4f4f;
 }
+
+.label_wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	margin-bottom: 6px;
+}
+
+.sub_label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.serial_id {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40%;
+	height: 18px;
+	padding: 4px;
+	font-size: 10px;
+	font-weight: 400;
+	border-radius: 6px;
+}
+
+.verified {
+	background: #c4dc91;
+}
+
+.not_verified {
+	background: #f8aea8;
+}

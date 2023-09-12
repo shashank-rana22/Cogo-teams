@@ -16,7 +16,7 @@ function formatToTimeStamp(dateString = '') {
 	});
 	return formatedDate;
 }
-function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '' }) {
+function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '', setStats = () => { } }) {
 	const [billsFilters, setBillsFilters] = useState({
 		invoiceView : 'coe_accepted',
 		entity      : activeEntity,
@@ -92,6 +92,10 @@ function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
+
+	useEffect(() => {
+		setStats((prevStats) => ({ ...prevStats, invoice_details: billsData?.totalRecords }));
+	}, [billsData, setStats]);
 
 	return {
 		billsData,
