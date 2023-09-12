@@ -13718,6 +13718,13 @@ const partner = {
 		},
 
 	],
+	ams_submission: [
+		{
+			api          : 'get_referrer_network_node',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	business_finance_dunnings: [
 		{
 			api         : 'get_payments_dunning_organization_stakeholders',

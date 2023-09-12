@@ -2,6 +2,7 @@ import advanceBookingManager from './config/advance-booking-manager';
 import airRepository from './config/air-repository';
 import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
+import amsSubmission from './config/ams-submission';
 import attendanceLeaveManagement from './config/attendance-leave-management';
 import authorityDesk from './config/authority-desk';
 import blDoCollectionRelease from './config/bl_do-collection-release';
@@ -164,6 +165,7 @@ const routeConfig = {
 	...resource,
 	...serviceDiscovery,
 	...supplyTools,
+	...amsSubmission,
 	...tradeParties,
 };
 
