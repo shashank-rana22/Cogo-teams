@@ -13,7 +13,6 @@ function Header() {
 			<div className={styles.scope_select}>
 				<ScopeSelect
 					size="md"
-					apisToConsider={['get_rolling_forecast_fcl_freight_clusters', 'get_rolling_forecast_port_pairs']}
 				/>
 			</div>
 

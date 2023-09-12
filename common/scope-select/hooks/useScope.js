@@ -10,8 +10,8 @@ export default function useScope({ defaultValues = {}, closePopover = () => {}, 
 	const dispatch = useDispatch();
 
 	const { selected_agent_id: selectedAgentId, savedAuthDetails, ...restProfile } = profile || {};
-	const { user } = restProfile;
-	const { id: userId } = user;
+	const { user } = restProfile || {};
+	const { id: userId = '' } = user || {};
 
 	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider, savedAuthDetails });
 

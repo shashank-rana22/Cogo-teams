@@ -112,7 +112,7 @@ export default function PopoverContent({
 						asyncKey="partner_users"
 						initialCall
 						params={{
-							...(selectedScope !== 'across_all' ? {
+							...(['across_all'].includes(selectedScope) ? {
 								filters: {
 									reporting_manager_id: userId,
 								},
