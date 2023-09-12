@@ -43,7 +43,6 @@ function ListView({
 
 	return (
 		<div>
-
 			<div className={cl`${styles.row_container} ${styles.width_95} ${styles.header_container}`}>
 				{columns.map((col) => (
 					<div

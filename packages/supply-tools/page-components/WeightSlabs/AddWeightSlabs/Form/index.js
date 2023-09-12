@@ -38,7 +38,7 @@ function Form({ item = {}, handleSubmitForm = () => {}, callBack = () => {} }, r
 		}
 
 		if (controls[index]?.name === 'destination_location_id' && destination_location_type) {
-			controls[index].params.filters.type = { filters: { type: destination_location_type || undefined } };
+			controls[index].params = { filters: { type: destination_location_type || undefined } };
 		}
 	});
 
