@@ -6,7 +6,6 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import isEqual from '@cogoport/ocean-modules/utils/isEqual';
 import { useEffect } from 'react';
 
 import useUpdateLeadOrganization from '../../../../../../hooks/useUpdateLeadOrganization';
@@ -20,28 +19,22 @@ function Error(key, errors) {
 function UserOnboard({ listLeadsData = {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 
-	const defaultValues = {
-		company_name : listLeadsData?.business_name,
-		country_id   : listLeadsData?.country_id,
-		gst_number   : listLeadsData?.registration_number,
-	};
-
 	const {
 		control,
 		formState:{ errors = {}, isValid = false },
 		handleSubmit,
 		formValues,
 		reset,
-	} = useForm({ defaultValues });
+	} = useForm();
 
 	useEffect(() => {
-		const NEW_DEFAULT_VALUES = {
+		const defaultValues = {
 			company_name : listLeadsData?.business_name,
 			country_id   : listLeadsData?.country_id,
 			gst_number   : listLeadsData?.registration_number,
 		};
 
-		reset(NEW_DEFAULT_VALUES);
+		reset(defaultValues);
 	}, [reset, listLeadsData]);
 
 	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
@@ -123,7 +116,8 @@ function UserOnboard({ listLeadsData = {} }) {
 					<Button
 						themeType="accent"
 						onClick={handleSubmit(updateDetails)}
-						disabled={!isValid || isEqual(formValues, defaultValues) || updateLoading}
+						// disabled={!isValid || isEqual(formValues, defaultValues) || updateLoading}
+						disabled={!isValid || updateLoading}
 					>
 						Update
 					</Button>

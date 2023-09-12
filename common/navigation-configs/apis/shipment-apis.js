@@ -40,6 +40,11 @@ const apis = [
 		service_name : 'lead',
 	},
 	{
+		api          : 'create_lead_organization_to_account',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
 		api          : 'update_lead_user',
 		access_type  : 'private',
 		service_name : 'lead',

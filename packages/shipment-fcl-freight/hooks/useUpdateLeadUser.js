@@ -18,9 +18,22 @@ function useUpdateLeadUser() {
 		}
 	};
 
+	const onUpdateLeadUser = (values) => {
+		const { name, email, mobile_number } = values;
+
+		const PAYLOAD = {
+			name,
+			email,
+			mobile_number       : mobile_number?.number,
+			mobile_country_code : mobile_number?.country_code,
+		};
+
+		updateLeadUser({ payload: PAYLOAD });
+	};
+
 	return {
 		updateLoading: loading,
-		updateLeadUser,
+		onUpdateLeadUser,
 	};
 }
 

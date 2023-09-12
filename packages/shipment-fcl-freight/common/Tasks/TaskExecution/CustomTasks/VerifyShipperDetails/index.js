@@ -9,16 +9,19 @@ function VerifyShipperDetails({
 	shipment_data = {},
 	refetch = () => {},
 }) {
-	const [step, setStep] = useState(null);
+	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
+	// const [step, setStep] = useState('1');
+	const [orgId, setOrgId] = useState(null);
+
 	return (
 		<div>
-			{task?.tags?.[GLOBAL_CONSTANTS.zeroth_index] === '0' ? (
-				<CustomerContacts setStep={setStep} task={task} />
+			{ step === '0' ? (
+				<CustomerContacts setStep={setStep} task={task} setOrgId={setOrgId} />
 
 			) : null}
 
-			{(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index] === '1' || step === '1') ? (
-				<BillingAddress task={task} shipment_data={shipment_data} refetch={refetch} />
+			{step === '1' ? (
+				<BillingAddress task={task} shipment_data={shipment_data} refetch={refetch} orgId={orgId} />
 
 			) : null}
 		</div>

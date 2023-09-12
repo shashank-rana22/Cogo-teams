@@ -20,12 +20,11 @@ function Error(key, errors) {
 
 const COUNTRY = 'IND';
 
-function BillingAddress({ task = {}, shipment_data = {}, refetch = () => {} }) {
-	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
-	const { control, watch, formState:{ errors = {} }, handleSubmit } = useForm();
-	const formValues = watch();
+function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
+	const { loading = false, listData = {} } = useListOrganizations({ orgId });
 
-	const { loading = false, listData = {} } = useListOrganizations({ shipment_data });
+	// const { control, formValues, reset, formState:{ errors = {} }, handleSubmit } = useForm();
+	const { control, formValues, formState:{ errors = {} }, handleSubmit } = useForm();
 
 	console.log({ listData });
 
@@ -38,6 +37,21 @@ function BillingAddress({ task = {}, shipment_data = {}, refetch = () => {} }) {
 		country_id    : formValues?.country_id,
 		isDefaultData : false,
 	});
+
+	// useEffect(() => {
+	// 	const NEW_DEFAULT_VALUES = {
+	//		business_name: listData?.business_name,
+	//		pincode: listData?.pincode_id,
+	//		tax_number:listData?. ,
+	//		address:listData?.address ,
+	//		tax_number_document_url:listData?. ,
+	//		name:listData?. ,
+	//		email:listData?. ,
+	//		mobile_number:listData?. ,
+	// 	};
+
+	// 	reset(NEW_DEFAULT_VALUES);
+	// }, [reset]);
 
 	return (
 		<div className={styles.main_container}>
@@ -122,11 +136,11 @@ function BillingAddress({ task = {}, shipment_data = {}, refetch = () => {} }) {
 						<UploadController
 							className="tax_document"
 							name="tax_number_document_url"
-							disabled={formValues.not_reg_under_gst}
+							disabled={formValues?.not_reg_under_gst}
 							control={control}
 							rules={{
 								required: {
-									value: !formValues.not_reg_under_gst,
+									value: !formValues?.not_reg_under_gst,
 								// message : `${taxLabel} Proof is required`,
 								},
 							}}

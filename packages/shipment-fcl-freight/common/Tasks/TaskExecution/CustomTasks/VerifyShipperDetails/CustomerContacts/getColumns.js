@@ -21,11 +21,11 @@ function getColumns({
 					<Checkbox
 						disabled={isEditMode === item?.id}
 						onChange={(event) => {
-							setCheckList((prev) => {
+							setCheckList(() => {
 								if (event?.target?.checked) {
-									return [...prev, item];
+									return item?.id;
 								}
-								return prev?.filter((object) => object.id === item?.id);
+								return null;
 							});
 						}}
 					/>

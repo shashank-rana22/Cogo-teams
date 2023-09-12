@@ -6,6 +6,18 @@
 	}
 }
 
+.table {
+	:global {
+		.ui_table_body_row {
+			height: 75px;
+		}
+
+		.ui_table_body_cell {
+			overflow-y: scroll;
+		}
+	}
+}
+
 .button_container {
 	display: flex;
 	justify-content: flex-end;
