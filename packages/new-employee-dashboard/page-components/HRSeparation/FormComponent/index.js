@@ -1,11 +1,10 @@
 import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
-import AdminConfirmed from './admin-view/admin-confirmation';
 import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
 import ExitInterview from './hrbp-view/ExitInterview';
-import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
+// import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
 import ExitReasons from './hrbp-view/ExitReasons';
 import FinanceClearance from './hrbp-view/FinanceClearance';
 import HandoverTakeoverClearance from './hrbp-view/HandoverTakeoverClearance';
@@ -28,7 +27,6 @@ const COMPONENT_MAPPING = {
 		tech_clearance              : TechClearanceHrbp,
 		exit_interview              : ExitInterview,
 		exit_reasons                : ExitReasons,
-		exit_complete               : ExitInterviewComplete,
 	},
 	manager: {
 		review_request    : ReviewRequest,
@@ -39,8 +37,7 @@ const COMPONENT_MAPPING = {
 		tech_clearance_confirm : TechClearanceConfirm,
 	},
 	admin: {
-		admin_clearance    : AdminClearance,
-		admin_confirmation : AdminConfirmed,
+		admin_clearance: AdminClearance,
 	},
 	employee: {
 		HOTOClearance,
@@ -49,7 +46,7 @@ const COMPONENT_MAPPING = {
 };
 
 function FormComponent({ data = {}, loading = false, refetchApplicationDetails = () => {} }) {
-	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
+	const Render = COMPONENT_MAPPING.admin.admin_clearance;
 
 	return (
 		<div className={styles.container}>

@@ -1,7 +1,8 @@
-import { Checkbox } from '@cogoport/components';
+// import { Button } from '@cogoport/components';
 import {
-	InputController,
+	InputController, CheckboxController,
 } from '@cogoport/forms';
+// import { IcMTick } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -13,7 +14,7 @@ function TermsConditions({ control = {}, errors = {} }) {
 			<div className={styles.subtitle}>Please read carefully</div>
 			<div className={styles.content_sub_container}>
 				<div className={styles.content_text_container}>
-					<Checkbox className={styles.Checkbox} />
+					<CheckboxController className={styles.Checkbox} name="termsacceptance" control={control} />
 					<div className={styles.content}>
 						<p>
 							The details you provide guide critical decisions,
@@ -49,6 +50,7 @@ function TermsConditions({ control = {}, errors = {} }) {
 					</div>
 				</div>
 			</div>
+
 		</div>
 	);
 }
