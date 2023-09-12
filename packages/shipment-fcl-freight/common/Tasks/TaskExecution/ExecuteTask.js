@@ -1,5 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { ThreeDotLoader, AddCompanyModal } from '@cogoport/ocean-modules';
+import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -85,7 +86,7 @@ function ExecuteTask({
 		taskListRefetch,
 	});
 
-	if (Component !== null) {
+	if (!isEmpty(Component) && !isEmpty(props)) {
 		return (<Component {...props} />);
 	}
 

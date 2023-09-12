@@ -31,7 +31,6 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 
 	const columns = getColumns({ setIsEditMode, isEditMode, control, setCheckList, handleSubmit, onUpdateLeadUser });
 
-	// !Todo just take the first obj of list for POC data
 	return (
 		<>
 			<UserOnboard listLeadsData={listLeadsData} defaultValues={defaultValues} />
@@ -39,7 +38,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 			<div className={styles.main_container}>
 				<h4>Customer contacts</h4>
 				<Table
-					data={listLeadsData?.users || []}
+					data={[listLeadsData?.users?.[GLOBAL_CONSTANTS.zeroth_index]] || []}
 					className={styles.table}
 					columns={columns}
 					loading={loading || updateLoading}

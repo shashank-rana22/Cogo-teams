@@ -126,8 +126,8 @@ const getTaskComponent = ({
 	};
 
 	return {
-		props     : propsMapping[task?.task],
-		Component : COMPONENT_MAPPING[task?.task],
+		props     : propsMapping?.[task?.task],
+		Component : COMPONENT_MAPPING?.[task?.task],
 	};
 };
 
