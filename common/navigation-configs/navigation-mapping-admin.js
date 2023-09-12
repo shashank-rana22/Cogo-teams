@@ -2623,19 +2623,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/supply-allocation',
 					type          : 'link',
 					possible_apis : apis.supply_allocation,
-
-					main_apis: [],
+					main_apis     : [],
 				},
 				{
-					key   : 'forecast-demand_forecast',
-					title : t('common:demand_forecast'),
-
+					key           : 'forecast-demand_forecast',
+					title         : t('common:demand_forecast'),
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',
 					possible_apis : apis.demand_forecast,
-
-					main_apis: [],
+					main_apis     : ['get_rolling_forecast_fcl_freight_clusters', 'get_rolling_forecast_port_pairs'],
 				},
 			],
 		},
