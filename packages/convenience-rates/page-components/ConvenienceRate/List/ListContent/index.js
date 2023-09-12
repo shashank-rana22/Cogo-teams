@@ -16,7 +16,7 @@ function ListContent(
 	const { list, page_limit = 10, total_count = 1 } = data || {};
 	if (loading) {
 		return (
-			<div style={{ marginLeft: '16px' }}>
+			<div className={styles.loader}>
 				<Loader themeType="primary" />
 			</div>
 		);
@@ -31,8 +31,18 @@ function ListContent(
 	};
 	return (
 		<div className={styles.container}>
+			<div className={styles.pagination}>
+				<Pagination
+					type="table"
+					pageSize={page_limit}
+					totalItems={total_count || ZERO_PAGES}
+					currentPage={page}
+					onPageChange={onPageClick}
+				/>
+			</div>
+
 			{
-				list.map((item, i) => (
+				list?.map((item, i) => (
 					<ListItem
 						key={item.id}
 						data={item}

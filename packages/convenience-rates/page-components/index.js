@@ -1,12 +1,12 @@
 import ConvenienceRate from './ConvenienceRate';
-import styles from './styles.module.css';
 
 function ConvenienceRates() {
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>
+		<div>
+			<h1>
 				Convenience Fee Configuration
-			</div>
+			</h1>
+
 			<ConvenienceRate />
 		</div>
 	);

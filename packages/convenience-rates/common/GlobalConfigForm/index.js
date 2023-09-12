@@ -21,23 +21,29 @@ function GlobalConfigForm({
 	setDefaultConfigFeeUnit = () => {},
 }) {
 	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(!isEmptyAlternateSlabDetails);
+
 	const { config_type = '', status = '' } = data || {};
+
 	const DEFAULT_VALUES = {};
-	const mandatoryControls = getMandatoryControls(
-		{ activeService, data, control_name: 'slab_details', isAddFieldArrayCheck: true },
-	);
+
+	const mandatoryControls = getMandatoryControls({
+		activeService,
+		data,
+		control_name         : 'slab_details',
+		isAddFieldArrayCheck : true,
+	});
 	const alternateMandatoryControls = getMandatoryControls(
 		{ activeService, data, control_name: 'alternate_slab_details', isAddFieldArrayCheck: true },
 	);
-	const optionalControls = getOptionalControls(
-		{ activeService, data },
-	);
+	const optionalControls = getOptionalControls({ activeService, data });
 
 	mandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
+
 	alternateMandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
+
 	optionalControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 
-	const { control, formState:{ errors = {} } = {}, watch, reset, setValue } = useForm({
+	const { control, formState:{ errors = {} } = {}, watch, reset, setValue, handleSubmit } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
 
@@ -46,6 +52,7 @@ function GlobalConfigForm({
 	}, [activeService, reset]);
 
 	const formValues = watch();
+
 	const { slab_details = [], alternate_slab_details = [] } = formValues;
 
 	const defaultFeeUnit = formValues?.slab_details[GLOBAL_CONSTANTS.zeroth_index]?.fee_unit;
@@ -57,11 +64,29 @@ function GlobalConfigForm({
 	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };
 
 	alternate_slab_details?.forEach((_o, index) => {
-		if (index > ZERO) {
-			customFieldArrayControls.alternate_slab_details[index - ONE] = {
+		if (index === ZERO && alternate_slab_details?.length > ONE) {
+			customFieldArrayControls.alternate_slab_details[ONE] = {
 				fee_unit: { disabled: true },
 			};
+		}
+		if (index > ZERO) {
 			customFieldArrayControls.alternate_slab_details[index] = {
+				slab_unit        : { disabled: true },
+				slab_lower_limit : { disabled: true },
+				fee_unit         : { disabled: true },
+			};
+		}
+	});
+
+	slab_details?.forEach((_o, index) => {
+		if (index === ZERO && slab_details?.length > ONE) {
+			customFieldArrayControls.slab_details[index] = {
+				fee_unit: { disabled: true },
+			};
+		}
+
+		if (index > ZERO) {
+			customFieldArrayControls.slab_details[index] = {
 				slab_unit        : { disabled: true },
 				slab_lower_limit : { disabled: true },
 				fee_unit         : { disabled: true },
@@ -72,24 +97,12 @@ function GlobalConfigForm({
 	useEffect(() => {
 		slab_details?.forEach((_o, index) => {
 			if (index > ZERO) {
-				setValue(`slab_details.${index}.slab_lower_limit`, slab_details[index - ONE].slab_upper_limit);
 				setValue(`slab_details.${index}.slab_unit`, slab_details[index - ONE].slab_unit);
+				setValue(`slab_details.${index}.slab_lower_limit`, +slab_details[index - ONE].slab_upper_limit + ONE);
 				setValue(`slab_details.${index}.fee_unit`, slab_details[index - ONE].fee_unit);
 			}
 		});
 	}, [slab_details, setValue]);
-	slab_details?.forEach((_o, index) => {
-		if (index > ZERO) {
-			customFieldArrayControls.alternate_slab_details[index - ONE] = {
-				fee_unit: { disabled: true },
-			};
-			customFieldArrayControls.slab_details[index] = {
-				slab_unit        : { disabled: true },
-				slab_lower_limit : { disabled: true },
-				fee_unit         : { disabled: true },
-			};
-		}
-	});
 
 	return (
 		<div className={styles.container}>
@@ -106,12 +119,9 @@ function GlobalConfigForm({
 					</Button>
 				) : null}
 			</div>
-			<div
-				className={styles.fees}
-				style={{ fontStyle: 'italic' }}
-			>
-				Fees Configuration
-			</div>
+
+			<div className={styles.fees}>Fees Configuration</div>
+
 			<div className={styles.layout_container}>
 				<Layout
 					control={control}
@@ -122,6 +132,7 @@ function GlobalConfigForm({
 					formValues={formValues}
 				/>
 			</div>
+
 			{(FEE_UNIT_MAPPING[activeService] || []).length > ONE
 				&& (showAlternateCFConfig ? (
 					<>
@@ -150,33 +161,29 @@ function GlobalConfigForm({
 				) : (
 					<Button
 						themeType="primary"
-						style={{ fontSize: '14px', marginBottom: '20px', fontWeight: '700' }}
+						// style={{ fontSize: '14px', marginBottom: '20px', fontWeight: '700' }}
 						onClick={() => {
 							setShowAlternateCFConfig(true);
 						}}
 					>
-						+ Add Alternate Config
+						<b>+ Add Alternate Config</b>
 					</Button>
 				))}
-			<div
-				className={styles.fees}
-				style={{ fontStyle: 'italic' }}
-			>
-				Fees Applicability (Input Fields in Priority!)
-			</div>
-			<div>
-				<Layout
-					control={control}
-					controls={optionalControls}
-					errors={errors}
-				/>
-			</div>
+
+			<div className={styles.fees}>Fees Applicability (Input Fields in Priority!)</div>
+
+			<Layout
+				control={control}
+				controls={optionalControls}
+				errors={errors}
+			/>
+
 			<div className={styles.btn_container}>
 				<Button
 					className={styles.btn}
 					themeType="primary"
 					size="md"
-					onClick={() => { onSubmit(formValues); }}
+					onClick={handleSubmit(onSubmit)}
 				>
 					SAVE
 				</Button>

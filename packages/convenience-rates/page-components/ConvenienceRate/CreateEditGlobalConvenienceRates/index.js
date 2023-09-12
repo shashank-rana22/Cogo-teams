@@ -7,16 +7,14 @@ import useCreateConvenienceRateConfigs from '../../../hooks/useCreateConvenience
 import styles from './styles.module.css';
 
 function CreateEditGlobalConvenienceRates({ onClosingForm = () => {}, activeService = '' }) {
-	const { onSave } = useCreateConvenienceRateConfigs({ onClosingForm, activeService });
+	const { onCreate = () => {} } = useCreateConvenienceRateConfigs({ onClosingForm, activeService });
 	return (
-		<div
-			className={styles.container}
-		>
+		<div>
 			<Button
 				themeType="link"
 				className={styles.back_div}
 				onClick={onClosingForm}
-				style={{ cursor: 'pointer' }}
+				style={{ paddingLeft: 0 }}
 			>
 				<div className={styles.arrow_back}>
 					<IcMArrowBack />
@@ -25,9 +23,10 @@ function CreateEditGlobalConvenienceRates({ onClosingForm = () => {}, activeServ
 					Back to All Convenience Fees
 				</div>
 			</Button>
+
 			<GlobalConfigForm
 				activeService={activeService}
-				onSubmit={onSave}
+				onSubmit={onCreate}
 				// onClosingForm={onClosingForm}
 				// showGlobalConfigForm={showGlobalConfigForm}
 			/>

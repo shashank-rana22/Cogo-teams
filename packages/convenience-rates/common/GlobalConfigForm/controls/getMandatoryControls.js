@@ -9,23 +9,24 @@ const MIN_NUMBER = 0;
 
 const EMPTY_FIELD_ARRAY = [
 	{
-		slab_unit         : '',
-		fee_unit          : '',
-		fee_value         : '',
-		minimum_fee_value : '',
-		maximum_fee_value : '',
-		fee_currency      : '',
+		slab_unit    : '',
+		fee_unit     : '',
+		fee_value    : '',
+		fee_currency : '',
 	},
 ];
 
-const getMandatoryControls = (
-	{ activeService, service, data = {}, control_name = '', isAddFieldArrayCheck = false },
-) => {
+const getMandatoryControls = ({
+	activeService, service, data = {}, control_name = '',
+	isAddFieldArrayCheck = false,
+}) => {
 	const { slab_details = [] } = data || {};
+
 	const newSlabDetails = getFilteredSlabDetails({
 		slab_details,
 		control_name,
 	});
+
 	return [
 		{
 			name               : control_name,
@@ -45,12 +46,10 @@ const getMandatoryControls = (
 					type        : 'select',
 					placeholder : 'Select Type',
 					options     : SLAB_UNIT_MAPPING[activeService || service],
-					rules       : {
-						required: 'Slab Unit is Required.',
-					},
-					span     : 1.5,
-					disabled : false,
-					size     : 'sm',
+					rules       : { required: 'Slab Unit is Required.' },
+					span        : 1.5,
+					disabled    : false,
+					size        : 'sm',
 				},
 				{
 					name        : 'slab_lower_limit',
