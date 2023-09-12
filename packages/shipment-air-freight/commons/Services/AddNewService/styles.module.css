@@ -2,11 +2,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
+	width: 24%;
 	padding: 12px 4px;
+	margin: 0 8px 4px 0;
 	white-space: nowrap;
-	cursor: pointer;
-	background: #fff;
+	background-color: var(--color-secondary-5);
 	border: 1px dashed #bdbdbd;
 	border-radius: 4px;
 

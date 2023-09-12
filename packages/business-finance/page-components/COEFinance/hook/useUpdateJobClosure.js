@@ -16,8 +16,9 @@ const useUpdateJobClosure = (
 	const { user: { id: userId } = {} } = userData || {};
 
 	const [{ loading }, trigger] = useRequestBf({
-		url    : '/common/job/edit-job-closure-rule',
-		method : 'PUT',
+		url     : '/common/job/edit-job-closure-rule',
+		method  : 'PUT',
+		authKey : 'put_common_job_edit_job_closure_rule',
 	}, { manual: true });
 
 	const apiTrigger = async (params) => {
