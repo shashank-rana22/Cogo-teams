@@ -19,7 +19,7 @@ import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../..
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
-import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
+// import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 
 import airControls from './AirControls';
 import fclControls from './FclControls';
@@ -76,8 +76,7 @@ function AddRateModal({
 		labelKey : 'display_name',
 	}));
 
-	const { list } = useGetChargeCodes({ service_name: 'fcl_freight_charges' });
-	console.log(list);
+	// const { list } = useGetChargeCodes({ service_name: 'fcl_freight_charges' });
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsListOperators(),
