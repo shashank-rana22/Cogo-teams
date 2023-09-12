@@ -32,9 +32,10 @@ export default function MatchModal({
 	const [settleConfirmation, setSettleConfirmation] = useState(false);
 
 	const {
-		checkData, postPaymentsSettlementCheck, checkLoading,
-		success, setSuccess,
+		checkData = {}, postPaymentsSettlementCheck = () => {}, checkLoading = false,
+		success = false, setSuccess = () => {},
 	} = usePaymentsSettlementCheck({ selectedData: updatedData, date });
+
 	const [canSettle, setCanSettle] = useState(checkData?.canSettle || false);
 	const [checkedData, setCheckedData] = useState(checkData?.stackDetails || []);
 	const dryRunData = (dryRun ? (checkData?.stackDetails) : []);
@@ -61,7 +62,7 @@ export default function MatchModal({
 	useEffect(() => {
 		setCheckedData(checkData?.stackDetails || []);
 		setCanSettle(checkData?.canSettle || false);
-	}, [checkData]);
+	}, [checkData?.stackDetails, checkData?.canSettle]);
 
 	useEffect(() => {
 		if (success && !isEmpty(checkedData)) {
