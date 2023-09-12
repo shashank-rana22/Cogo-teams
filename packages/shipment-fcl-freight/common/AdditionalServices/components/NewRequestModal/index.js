@@ -113,6 +113,7 @@ function NewRequestModal({
 			cogoEntityId  : partner?.id,
 			collectionPartyAddress,
 			collectionPartyBankDetails,
+			primary_service,
 		});
 		apiTrigger(payload);
 	};
