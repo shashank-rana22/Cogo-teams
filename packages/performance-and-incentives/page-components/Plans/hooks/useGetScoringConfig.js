@@ -18,6 +18,7 @@ const useGetScoringConfig = () => {
 			await trigger({
 				params: {
 					id,
+					status: 'draft',
 				},
 			});
 		} catch (error) {
