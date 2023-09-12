@@ -16,16 +16,11 @@ export default {
 		'field_executive',
 		'tracking',
 		'purchase',
-		'sales',
 	],
 	shipment_info : {},
 	default_tab   : 'overview',
 	overview      : {
-		tab_title            : 'Overview',
-		edit_supplier        : true,
-		cancel_service       : true,
-		edit_service_details : true,
-		enable_consolidation : true,
+		tab_title: 'Overview',
 	},
 	tasks: {
 		tab_title: 'Timeline and Tasks',
@@ -34,10 +29,11 @@ export default {
 		tab_title: 'Documents',
 	},
 	field_executive: {
-		tab_title: 'Field Executive',
-	},
-	sales: {
-		tab_title: 'Sales Live Invoice',
+		tab_title                : 'Field Executive',
+		document_history_visible : true,
+		edit_details_visible     : true,
+		start_tracking_visible   : false,
+		move_document_visible    : true,
 	},
 	emails: {
 		tab_title: 'Emails',
@@ -46,7 +42,7 @@ export default {
 		can_cancel   : false,
 		list_reasons : {
 			stakeholder_type: [
-				'admin',
+				'document_desk',
 			],
 		},
 		role: 'sales',
@@ -57,5 +53,5 @@ export default {
 	purchase: {
 		tab_title: 'Purchase Live Invoice',
 	},
-	job_open_request: false,
+	job_open_request: true,
 };

@@ -13,18 +13,13 @@ export default {
 		'tasks',
 		'documents',
 		'emails',
-		'field_executive',
-		'tracking',
-		'purchase',
 		'sales',
+		'tracking',
 	],
 	shipment_info : {},
 	default_tab   : 'overview',
 	overview      : {
 		tab_title            : 'Overview',
-		edit_supplier        : true,
-		cancel_service       : true,
-		edit_service_details : true,
 		enable_consolidation : true,
 	},
 	tasks: {
@@ -33,20 +28,14 @@ export default {
 	documents: {
 		tab_title: 'Documents',
 	},
-	field_executive: {
-		tab_title: 'Field Executive',
-	},
-	sales: {
-		tab_title: 'Sales Live Invoice',
-	},
 	emails: {
 		tab_title: 'Emails',
 	},
 	cancel_shipment: {
-		can_cancel   : false,
+		can_cancel   : true,
 		list_reasons : {
 			stakeholder_type: [
-				'admin',
+				'booking_agent',
 			],
 		},
 		role: 'sales',
@@ -54,8 +43,8 @@ export default {
 	tracking: {
 		tab_title: 'Tracking',
 	},
-	purchase: {
-		tab_title: 'Purchase Live Invoice',
+	sales: {
+		tab_title: 'Sales Live Invoice',
 	},
-	job_open_request: false,
+	job_open_request: true,
 };

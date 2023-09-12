@@ -49,4 +49,5 @@ export default {
 	sales: {
 		tab_title: 'Sales Live Invoice',
 	},
+	job_open_request: false,
 };

@@ -53,4 +53,5 @@ export default {
 	purchase: {
 		tab_title: 'Purchase Live Invoice',
 	},
+	job_open_request: false,
 };

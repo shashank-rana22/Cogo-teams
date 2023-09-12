@@ -45,7 +45,12 @@ function ShipmentDetails() {
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
-	const { features = [], default_tab = 'tasks', visible_tabs = [] } = stakeholderConfig || {};
+	const {
+		features = [],
+		default_tab = 'tasks',
+		visible_tabs = [],
+		job_open_request = false,
+	} = stakeholderConfig || {};
 
 	const [activeTab, setActiveTab] = useState(default_tab);
 
@@ -162,7 +167,7 @@ function ShipmentDetails() {
 						{shipment_data?.is_job_closed && (
 							<JobStatus
 								shipment_data={shipment_data}
-								activeStakeholder={activeStakeholder}
+								job_open_request={job_open_request}
 							/>
 						)}
 

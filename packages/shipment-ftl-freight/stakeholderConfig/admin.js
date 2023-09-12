@@ -79,4 +79,5 @@ export default {
 			'status::cancelled_by_supplier'                    : false,
 		},
 	},
+	job_open_request: true,
 };

@@ -66,4 +66,5 @@ export default {
 	edit_supplier       : true,
 	cancel_service      : true,
 	additional_services : {},
+	job_open_request    : false,
 };

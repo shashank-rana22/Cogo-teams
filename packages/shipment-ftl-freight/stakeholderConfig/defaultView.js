@@ -28,4 +28,5 @@ export default {
 		},
 		role: 'sales',
 	},
+	job_open_request: false,
 };
