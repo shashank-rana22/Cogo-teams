@@ -91,6 +91,7 @@ function Header({
 						getRoute()[0],
 						getRoute()[1],
 					)}
+					style={{ border: '1px solid' }}
 				>
 					Go Back
 				</Button>

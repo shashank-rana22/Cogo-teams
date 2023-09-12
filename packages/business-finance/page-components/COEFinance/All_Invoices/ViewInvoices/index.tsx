@@ -1,10 +1,11 @@
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetBill from '../../hook/useGetBill';
 
 import Header from './Header/index';
 import ShipmentDetails from './ShipmentDetails/index';
+import styles from './styles.module.css';
 
 function ViewInvoices() {
 	const { query } = useRouter();
@@ -32,18 +33,41 @@ function ViewInvoices() {
 		lineItemsCheck       : false,
 	});
 
+	const [isSticky, setIsSticky] = useState(false);
+
+	useEffect(() => {
+		const listenScrollEvent = () => {
+			const { scrollY } = window || {};
+			if (scrollY > 50) {
+				setIsSticky(true);
+			} else {
+				setIsSticky(false);
+			}
+		};
+
+		window.addEventListener('scroll', listenScrollEvent);
+		return () => {
+			window.removeEventListener('scroll', listenScrollEvent);
+		};
+	}, []);
+
 	return (
 		<div>
-			<Header
-				data={fullResponse}
-				remarksVal={remarksVal}
-				overAllRemark={overAllRemark}
-				setOverAllRemark={setOverAllRemark}
-				lineItemsRemarks={lineItemsRemarks}
-				jobNumber={jobNumber}
-				status={status}
-				checkItem={checkItem}
-			/>
+			<div
+				className={styles.sticky}
+				style={{ background: isSticky ? '#d8ecee' : 'none' }}
+			>
+				<Header
+					data={fullResponse}
+					remarksVal={remarksVal}
+					overAllRemark={overAllRemark}
+					setOverAllRemark={setOverAllRemark}
+					lineItemsRemarks={lineItemsRemarks}
+					jobNumber={jobNumber}
+					status={status}
+					checkItem={checkItem}
+				/>
+			</div>
 
 			<ShipmentDetails
 				data={fullResponse}
