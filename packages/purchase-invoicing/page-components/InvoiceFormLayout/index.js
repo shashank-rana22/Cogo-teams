@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm, RadioGroupController, SelectController, CheckboxController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -201,7 +201,7 @@ function InvoiceFormLayout({
 				</div>
 
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
-					<div className={`${styles.flex} ${styles.justifiy}`}>
+					<div className={cl`${styles.flex} ${styles.justify}`}>
 						<div className={styles.flex}>
 							{!isJobClosed ? (
 								<Segmented
@@ -217,7 +217,7 @@ function InvoiceFormLayout({
 								value={purchaseInvoiceValues?.invoice_type || isCreditNoteOnly || 'purchase_invoice'}
 							/>
 							{errors?.invoice_type ? (
-								<div className={`${styles.errors} ${styles.marginleft}`}>
+								<div className={cl`${styles.errors} ${styles.marginleft}`}>
 									Invoice type is Required
 								</div>
 							) : null}
@@ -249,6 +249,7 @@ function InvoiceFormLayout({
 					errors={errors}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					isEdit={isEdit}
+					formValues={formValues}
 				/>
 				<BillingPartyDetails
 					control={control}

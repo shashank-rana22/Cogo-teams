@@ -43,11 +43,11 @@ function SelectRecipients({
 		agent_id,
 		user_profile,
 		agent_email,
-	} = useSelector(({ general, profile }) => ({
+	} = useSelector(({ general, profile: { user = {} } = {} }) => ({
 		query        : general.query || {},
-		agent_id     : profile?.id,
-		user_profile : profile,
-		agent_email  : profile.email || GLOBAL_CONSTANTS.cogoport_agent_email_id,
+		agent_id     : user?.id,
+		user_profile : user,
+		agent_email  : user?.email || GLOBAL_CONSTANTS.cogoport_agent_email_id,
 	}));
 
 	const user_ids = [organization?.agent_id, agent_id];
