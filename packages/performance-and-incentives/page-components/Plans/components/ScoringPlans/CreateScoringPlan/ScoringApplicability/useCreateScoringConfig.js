@@ -22,7 +22,7 @@ const useCreateScoringConfig = () => {
 		authkey : 'post_agent_scoring_config',
 	}, { manual: true });
 
-	const onCreateScoringConfig = async ({ values = {} }) => {
+	const onCreateScoringConfig = async (values = {}) => {
 		try {
 			const res = await trigger({
 				data: {
@@ -31,6 +31,7 @@ const useCreateScoringConfig = () => {
 					channel        : values.channel,
 					role_ids       : values.role_ids,
 					display_name   : values.display_name,
+					status         : 'active',
 				},
 			});
 
