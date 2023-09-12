@@ -7,9 +7,8 @@ const FILTER_MAPPING = {
 		is_channel_partner: true,
 	},
 };
-const getOrganizationControl = ({ itemValues = {}, organizationDetails }) => {
-	const { organization_ids } = itemValues;
-
+const getOrganizationControl = ({ itemValue = {}, organizationDetails = {} }) => {
+	const { organization_ids } = itemValue;
 	return [
 		{
 			label          : 'Organization(s)',
@@ -32,7 +31,7 @@ const getOrganizationControl = ({ itemValues = {}, organizationDetails }) => {
 			multiple : true,
 			value    : organization_ids,
 			rules    : {
-				required: true,
+				required: 'Organization details is Required.',
 			},
 		},
 	];

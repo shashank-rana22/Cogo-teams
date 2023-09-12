@@ -1,12 +1,10 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useCreateConvenienceRateConfigs from '../../hooks/useCreateConvenienceRateConfigs';
-import useUpdateConvenienceRateConfigs from '../../hooks/useUpdateConvenienceRateConfigs';
+import FEE_UNIT_MAPPING from '../../configs/FEE_UNIT_MAPPING.json';
 import Layout from '../Layout';
 
 import getMandatoryControls from './controls/getMandatoryControls';
@@ -16,51 +14,45 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 const ONE = 1;
-const services_add_alt_configs = ['fcl_freight', 'fcl_freight_local', 'fcl_customs'];
 
-function GlobalConfigForm({ activeService = '', data = {}, loading = '', onClosingForm = '' }) {
-	const isEmptyAlternateSlabDetails = isEmpty(
-		data?.slab_details?.filter((item) => !item?.is_default),
-	);
-	const { service = '' } = useRouter()?.query || {};
-
+function GlobalConfigForm({
+	activeService = '', onSubmit = () => {}, isEmptyAlternateSlabDetails = true,
+	onClickDeactivate = () => {}, isUpdatable = false, data = {}, loading = '',
+	setDefaultConfigFeeUnit = () => {},
+}) {
 	const [showAlternateCFConfig, setShowAlternateCFConfig] = useState(!isEmptyAlternateSlabDetails);
-	const [addAltConfig, setAddAltConfig] = useState(false);
-
-	const isUpdatable = !isEmpty(data);
 	const { config_type = '', status = '' } = data || {};
-
 	const DEFAULT_VALUES = {};
 	const mandatoryControls = getMandatoryControls(
-		{ activeService, service, data, control_name: 'slab_details', isAddFieldArrayCheck: true },
+		{ activeService, data, control_name: 'slab_details', isAddFieldArrayCheck: true },
 	);
 	const alternateMandatoryControls = getMandatoryControls(
-		{ activeService, service, data, control_name: 'alternate_slab_details', isAddFieldArrayCheck: true },
+		{ activeService, data, control_name: 'alternate_slab_details', isAddFieldArrayCheck: true },
 	);
 	const optionalControls = getOptionalControls(
-		{ activeService, service, data },
+		{ activeService, data },
 	);
 
 	mandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 	alternateMandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 	optionalControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 
-	const { control, formState:{ errors = {} } = {}, watch, reset, setValue, handleSubmit } = useForm({
+	const { control, formState:{ errors = {} } = {}, watch, reset, setValue } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
 
 	useEffect(() => {
 		reset();
-		if (services_add_alt_configs.includes(activeService)) {
-			setAddAltConfig(true);
-		} else {
-			setAddAltConfig(false);
-		}
-	}, [activeService, reset, service]);
+	}, [activeService, reset]);
 
 	const formValues = watch();
-
 	const { slab_details = [], alternate_slab_details = [] } = formValues;
+
+	const defaultFeeUnit = formValues?.slab_details[GLOBAL_CONSTANTS.zeroth_index]?.fee_unit;
+
+	useEffect(() => {
+		setDefaultConfigFeeUnit(defaultFeeUnit);
+	}, [defaultFeeUnit, setDefaultConfigFeeUnit]);
 
 	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };
 
@@ -99,21 +91,13 @@ function GlobalConfigForm({ activeService = '', data = {}, loading = '', onClosi
 		}
 	});
 
-	const { onCreate = () => {} } = useCreateConvenienceRateConfigs(
-		{ values: formValues, isUpdatable, onClosingForm, activeService, showAlternateCFConfig },
-	);
-	const { onClickDeactivate = () => {}, onUpdate = () => {} } = useUpdateConvenienceRateConfigs(
-		{ data, onClosingForm, isUpdatable, showAlternateCFConfig, values: formValues },
-	);
-	const onSubmit = (isUpdatable ? onUpdate : onCreate);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.head}>
 				<div className={styles.heading}>Global Configuration</div>
 				{isUpdatable && config_type !== 'default' ? (
 					<Button
-						className="secondary md"
+						themeType="secondary"
 						onClick={onClickDeactivate}
 						style={{ fontWeight: '600', marginRight: '8px' }}
 						disabled={loading}
@@ -135,50 +119,45 @@ function GlobalConfigForm({ activeService = '', data = {}, loading = '', onClosi
 					errors={errors}
 					handleFieldArrayAddCheck={handleFieldArrayAddCheck}
 					customFieldArrayControls={customFieldArrayControls}
-					formValues={watch()}
+					formValues={formValues}
 				/>
 			</div>
-			{addAltConfig && (
-				<div>
-					{
-			showAlternateCFConfig ? (
-				<>
-					<div className={styles.alt_config}>
-						<span className={styles.alt_config_text}>
-							Alternate Configuration
-						</span>
-						<span style={{ cursor: 'pointer' }}>
-							<IcMCrossInCircle
-								width={28}
-								height={28}
-								onClick={() => setShowAlternateCFConfig(false)}
+			{(FEE_UNIT_MAPPING[activeService] || []).length > ONE
+				&& (showAlternateCFConfig ? (
+					<>
+						<div className={styles.alt_config}>
+							<span className={styles.alt_config_text}>
+								Alternate Configuration
+							</span>
+							<span style={{ cursor: 'pointer' }}>
+								<IcMCrossInCircle
+									width={28}
+									height={28}
+									onClick={() => setShowAlternateCFConfig(false)}
+								/>
+							</span>
+						</div>
+						<div className={styles.layout_container}>
+							<Layout
+								control={control}
+								controls={alternateMandatoryControls}
+								errors={errors}
+								handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+								formValues={formValues}
 							/>
-						</span>
-					</div>
-					<div className={styles.layout_container}>
-						<Layout
-							control={control}
-							controls={alternateMandatoryControls}
-							errors={errors}
-							handleFieldArrayAddCheck={handleFieldArrayAddCheck}
-							formValues={watch()}
-						/>
-					</div>
-				</>
-			) : (
-				<Button
-					themeType="primary"
-					style={{ fontSize: '14px', marginBottom: '20px', fontWeight: '700' }}
-					onClick={() => {
-						setShowAlternateCFConfig(true);
-					}}
-				>
-					+ Add Alternate Config
-				</Button>
-			)
-		}
-				</div>
-			)}
+						</div>
+					</>
+				) : (
+					<Button
+						themeType="primary"
+						style={{ fontSize: '14px', marginBottom: '20px', fontWeight: '700' }}
+						onClick={() => {
+							setShowAlternateCFConfig(true);
+						}}
+					>
+						+ Add Alternate Config
+					</Button>
+				))}
 			<div
 				className={styles.fees}
 				style={{ fontStyle: 'italic' }}
@@ -197,7 +176,7 @@ function GlobalConfigForm({ activeService = '', data = {}, loading = '', onClosi
 					className={styles.btn}
 					themeType="primary"
 					size="md"
-					onClick={handleSubmit(onSubmit)}
+					onClick={() => { onSubmit(formValues); }}
 				>
 					SAVE
 				</Button>
@@ -205,5 +184,4 @@ function GlobalConfigForm({ activeService = '', data = {}, loading = '', onClosi
 		</div>
 	);
 }
-
 export default GlobalConfigForm;

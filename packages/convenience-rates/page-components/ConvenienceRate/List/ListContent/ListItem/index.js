@@ -10,7 +10,7 @@ import tagsMapping from './tagsMapping';
 const LAST_INDEX = 1;
 
 function Content({ columnDetails = {}, data = {} }) {
-	const { label, getValue } = columnDetails;
+	const { label, getValue } = columnDetails || {};
 
 	const value = getValue(data);
 
@@ -39,7 +39,7 @@ const columnsWithValue = ({ data = {}, list = [] }) => {
 	return NEW_MAPPING_LIST;
 };
 
-function ListItem({ data = {}, onEdit = () => {} }) {
+function ListItem({ data = {}, loading = '', onEdit = () => {} }) {
 	const [open, setOpen] = useState(false);
 	const tagsList = columnsWithValue({ data, list: tagsMapping });
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
@@ -51,7 +51,6 @@ function ListItem({ data = {}, onEdit = () => {} }) {
                     data?.config_type === 'default' ? (<div className={styles.default_tag}>Default</div>
                     ) : null
                 }
-				{/* Take care of additional class value */}
 				<div className={styles.tags_list}>
 					{tagsList.map((tabsDetails) => {
 						const { key, value } = tabsDetails || {};
@@ -104,7 +103,7 @@ function ListItem({ data = {}, onEdit = () => {} }) {
 							Slabs Details
 						</div>
 						<div className={styles.block}>
-							<SlabsTable slabsDetailData={data?.slab_details} />
+							<SlabsTable slabsDetailData={data?.slab_details} loading={loading} />
 						</div>
 					</div>
 				) : null }
@@ -115,13 +114,11 @@ function ListItem({ data = {}, onEdit = () => {} }) {
 					{open ? (
 						<>
 							Hide Details
-							{' '}
 							<IcMArrowRotateUp />
 						</>
 					) : (
 						<>
 							View Details
-							{' '}
 							<IcMArrowRotateDown />
 						</>
 					)}

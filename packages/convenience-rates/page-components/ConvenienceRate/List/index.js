@@ -10,7 +10,7 @@ function List({
 	setShowGlobalConfigForm = () => {},
 }) {
 	const defaultFilters = { activeList, activeService };
-	const { data, loading, filters, setFilters, router } = useListConvenienceRateConfigurations({
+	const { data, loading, filters, setFilters } = useListConvenienceRateConfigurations({
 		defaultFilters,
 	});
 
@@ -30,7 +30,6 @@ function List({
 				filters={filters}
 				activeList={activeList}
 				activeService={activeService}
-				router={router}
 			/>
 		</div>
 	);

@@ -85,7 +85,7 @@ function ConvenienceRate() {
 			{showGlobalConfigForm ? (
 				<CreateEditGlobalConvenienceRates
 					activeService={activeService}
-					showGlobalConfigForm={showGlobalConfigForm}
+					// showGlobalConfigForm={showGlobalConfigForm}
 					onClosingForm={() => setShowGlobalConfigForm(false)}
 				/>
 			) : (

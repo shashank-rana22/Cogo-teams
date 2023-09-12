@@ -5,8 +5,8 @@ import { Image } from '@cogoport/next';
 import styles from './styles.module.css';
 
 function EmptyState({
-	height = 500,
-	width = 700,
+	height = 400,
+	width = 600,
 	emptyText = 'Data not found',
 	flexDirection = 'row',
 	textSize = '16px',

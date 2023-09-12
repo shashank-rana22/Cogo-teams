@@ -65,6 +65,7 @@ function CustomConvenienceListItem(
 	{ data = {}, setShowCustomConfigForm = () => {}, setOrganizationDetails = () => {} },
 ) {
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
+	// console.log(data);
 	return (
 		<div className={styles.container}>
 			<div className={styles.tags_list}>
@@ -93,7 +94,11 @@ function CustomConvenienceListItem(
 					themeType="teritiary"
 					onClick={() => {
 						setShowCustomConfigForm(data);
-						setOrganizationDetails(data?.organization_data);
+						setOrganizationDetails({
+							organization_type : data?.organization_type || '',
+							cogo_entity_id    : data?.cogo_entity_id || '',
+							organization_name : data?.organization_data || {},
+						});
 					}}
 				>
 					<IcMEdit />

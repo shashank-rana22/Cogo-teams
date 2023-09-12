@@ -24,6 +24,7 @@ function CustomConvenienceList(
 	if (isEmpty(list)) {
 		return <EmptyState />;
 	}
+	// console.log(list);
 	return list.map((item, i) => (
 		<CustomConvenienceListItem
 			key={item.id}

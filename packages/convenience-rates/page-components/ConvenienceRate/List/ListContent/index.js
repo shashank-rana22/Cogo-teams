@@ -1,4 +1,5 @@
 import { Loader, Pagination } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 
 import EmptyState from '../../../../common/EmptyState';
 
@@ -9,8 +10,9 @@ const ZERO_PAGES = 0;
 const LAST_INDEX = 1;
 
 function ListContent(
-	{ data = {}, loading = {}, filters = {}, setFilters = () => {}, router = () => {}, activeService = '' },
+	{ data = {}, loading = {}, filters = {}, setFilters = () => {}, activeService = '' },
 ) {
+	const router = useRouter();
 	const { list, page_limit = 10, total_count = 1 } = data || {};
 	if (loading) {
 		return (
@@ -34,6 +36,7 @@ function ListContent(
 					<ListItem
 						key={item.id}
 						data={item}
+						loading={loading}
 						isLastItem={i === list.length - LAST_INDEX}
 						total={total_count || ZERO_PAGES}
 						onEdit={() => {

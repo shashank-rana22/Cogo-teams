@@ -35,7 +35,7 @@ const getControls = ({ values = {}, organizationDetails, service }) => {
 				filters: {
 					status     : 'active',
 					partner_id : organizationDetails?.cogo_entity_id,
-					...FILTER_MAPPING[organizationDetails?.organization_type],
+					...FILTER_MAPPING[(organizationDetails?.organization_type || {})],
 				},
 			},
 			defaultOptions : true,
@@ -60,7 +60,7 @@ const getControls = ({ values = {}, organizationDetails, service }) => {
 					label       : 'Fees Slab Unit',
 					type        : 'select',
 					placeholder : 'Select Type',
-					options     : SLAB_UNIT_MAPPING[service],
+					options     : SLAB_UNIT_MAPPING[service || []],
 					rules       : {
 						required: 'Slab Unit is Required.',
 					},
@@ -98,7 +98,7 @@ const getControls = ({ values = {}, organizationDetails, service }) => {
 					label       : 'Fee Unit',
 					type        : 'select',
 					placeholder : 'Select Type',
-					options     : FEE_UNIT_MAPPING[service],
+					options     : FEE_UNIT_MAPPING[service || []],
 					rules       : { required: 'Fees Type is Required.' },
 					span        : 1.5,
 					size        : 'sm',
@@ -123,7 +123,7 @@ const getControls = ({ values = {}, organizationDetails, service }) => {
 					rules       : {
 						required : 'Convenience Fees is Required.',
 						min      : 0,
-						validate : (value) => (value >= MIN_NUMBER ? undefined : 'Invalid Price Value'),
+						validate : (value) => (value && value >= MIN_NUMBER ? undefined : 'Invalid Price Value'),
 					},
 					span : 1.5,
 					size : 'sm',

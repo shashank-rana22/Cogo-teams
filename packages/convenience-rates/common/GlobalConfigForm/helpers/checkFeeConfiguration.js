@@ -14,9 +14,7 @@ const handleFieldArrayAddCheck = ({ currentIndex, formValues, name }) => {
 		.filter((k) => !excludeKeys.includes(k))
 		.every((k) => prevSlab[k]);
 
-	const { slab_lower_limit, slab_upper_limit } = prevSlab;
-
-	const { minimum_fee_value, maximum_fee_value, fee_value } = prevSlab;
+	const { minimum_fee_value, maximum_fee_value, fee_value, slab_lower_limit, slab_upper_limit } = prevSlab;
 
 	if (!isPrevSlabFilled) Toast.error('Please enter all required Inputs');
 	if (isPrevSlabFilled && currentIndex === ONE) {

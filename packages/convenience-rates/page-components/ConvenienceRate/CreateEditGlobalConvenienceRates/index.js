@@ -2,10 +2,12 @@ import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
 import GlobalConfigForm from '../../../common/GlobalConfigForm';
+import useCreateConvenienceRateConfigs from '../../../hooks/useCreateConvenienceRateConfigs';
 
 import styles from './styles.module.css';
 
-function CreateEditGlobalConvenienceRates({ onClosingForm = () => {}, activeService = '', showGlobalConfigForm = '' }) {
+function CreateEditGlobalConvenienceRates({ onClosingForm = () => {}, activeService = '' }) {
+	const { onSave } = useCreateConvenienceRateConfigs({ onClosingForm, activeService });
 	return (
 		<div
 			className={styles.container}
@@ -24,9 +26,10 @@ function CreateEditGlobalConvenienceRates({ onClosingForm = () => {}, activeServ
 				</div>
 			</Button>
 			<GlobalConfigForm
-				onClosingForm={onClosingForm}
 				activeService={activeService}
-				showGlobalConfigForm={showGlobalConfigForm}
+				onSubmit={onSave}
+				// onClosingForm={onClosingForm}
+				// showGlobalConfigForm={showGlobalConfigForm}
 			/>
 		</div>
 	);

@@ -1,7 +1,7 @@
 import { Table } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-function SlabsTable({ slabsDetailData = {} }) {
+function SlabsTable({ slabsDetailData = {}, loading = '' }) {
 	const columns = [
 		{ Header: 'Fees Slab Unit', accessor: (item) => startCase(item?.slab_unit) || '--' },
 		{ Header: 'Slab From', accessor: (item) => item?.slab_lower_limit || '--' },
@@ -29,6 +29,7 @@ function SlabsTable({ slabsDetailData = {} }) {
 			columns={columns}
 			data={slabsDetailData}
 			style={{ marginTop: '12px' }}
+			disabled={loading}
 		/>
 	);
 }

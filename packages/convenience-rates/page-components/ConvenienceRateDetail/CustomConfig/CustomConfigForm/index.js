@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function CustomConfigForm(
 	{
 		onClosingForm = () => {}, organizationDetails = {}, itemValue = {},
-		defaultConfigFeeUnit = '',
+		defaultConfigFeeUnit = '', activeList = '',
 	},
 ) {
 	const router = useRouter();
@@ -23,22 +23,23 @@ function CustomConfigForm(
 	const isUpdatable = !isEmpty(status);
 
 	const DEFAULT_VALUES = {};
-	const organizationControls = getOrganizationControl(itemValue, organizationDetails);
+
+	const organizationControls = getOrganizationControl({ itemValue, organizationDetails });
 	organizationControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 	const mandatoryControls = getMandatoryControls({ control_name: 'custom_config_slab', service, data: itemValue });
 	mandatoryControls.forEach((ctrl) => { DEFAULT_VALUES[ctrl.name] = ctrl?.value || ''; });
 
-	const { control, formState:{ errors = {} } = {}, watch } = useForm({
+	const { control, formState:{ errors = {} } = {}, watch, handleSubmit } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
+	const formValues = watch();
 
+	const { onCreate = () => {} } = useCreateConvenienceRateCustomConfigs({ defaultConfigFeeUnit });
 	const { onUpdate = () => {}, onClickDeactivate = () => {} } = useUpdateConvenienceRateCustomConfigs(
-		{ itemValue, onClosingForm, defaultConfigFeeUnit, watch },
-	);
-	const { onCreate = () => {} } = useCreateConvenienceRateCustomConfigs(
-		{ itemValue, onClosingForm, defaultConfigFeeUnit, watch },
+		{ itemValue, onClosingForm, defaultConfigFeeUnit, activeList },
 	);
 	const onSubmit = (isUpdatable ? (onUpdate) : (onCreate));
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.layout_container}>
@@ -76,7 +77,7 @@ function CustomConfigForm(
 				</Button>
 				<Button
 					style={{ fontWeight: '600' }}
-					onClick={onSubmit}
+					onClick={handleSubmit(onSubmit({ values: formValues }))}
 				>
 					SAVE
 				</Button>

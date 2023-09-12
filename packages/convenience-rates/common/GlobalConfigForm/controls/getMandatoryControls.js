@@ -21,7 +21,7 @@ const EMPTY_FIELD_ARRAY = [
 const getMandatoryControls = (
 	{ activeService, service, data = {}, control_name = '', isAddFieldArrayCheck = false },
 ) => {
-	const { slab_details = [] } = data;
+	const { slab_details = [] } = data || {};
 	const newSlabDetails = getFilteredSlabDetails({
 		slab_details,
 		control_name,
@@ -92,6 +92,7 @@ const getMandatoryControls = (
 					label       : 'Fees Currency',
 					type        : 'async_select',
 					asyncKey    : 'list_exchange_rate_currencies',
+					initialCall : true,
 					placeholder : 'Value',
 					rules       : {
 						required: 'Fee Currency is Required.',

@@ -36,7 +36,7 @@ const columnsMapping = [
 	{
 		key      : 'status',
 		label    : 'Status',
-		getValue : (data) => startCase(data?.status),
+		getValue : (data) => startCase(data?.status) || '___',
 		span     : 1.5,
 	},
 ];

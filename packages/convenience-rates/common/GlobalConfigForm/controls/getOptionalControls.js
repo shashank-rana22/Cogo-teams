@@ -22,11 +22,12 @@ const getOptionalControls = ({
 		booking_source,
 		organization_type,
 	} = data || {};
-	// console.log(data)
+
 	return [
 		{
 			label          : 'Cogo Entity',
 			name           : 'cogo_entity_id',
+			valueKey       : 'id',
 			type           : 'async_select',
 			placeholder    : 'Select Cogo Entity',
 			asyncKey       : 'list_cogo_entity',
@@ -39,7 +40,7 @@ const getOptionalControls = ({
 			disabled       : isUpdatable,
 			span           : 2.5,
 			size           : 'sm',
-			rules          : { required: 'Cogo Entity is Required.' },
+			rules          : !isUpdatable && { required: 'Cogo Entity is Required.' },
 		},
 		{
 			name        : 'performed_by',

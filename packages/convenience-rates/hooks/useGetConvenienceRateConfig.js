@@ -11,7 +11,7 @@ const useGetConvenienceRateConfig = ({ defaultParams = {}, initialCall = false }
 		method : 'GET',
 		params : defaultParams,
 	}, { manual: true });
-	const convenienceRateConfig = useCallback(async () => {
+	const getConvenienceRateConfig = useCallback(async () => {
 		try {
 			const res = await trigger();
 			if (res?.data) {
@@ -24,12 +24,13 @@ const useGetConvenienceRateConfig = ({ defaultParams = {}, initialCall = false }
 	}, [trigger]);
 
 	useEffect(() => {
-		if (initialCall) convenienceRateConfig();
-	}, [convenienceRateConfig, initialCall]);
+		if (initialCall) getConvenienceRateConfig();
+	}, [getConvenienceRateConfig, initialCall]);
 
 	return {
 		data,
 		loading,
+		getConvenienceRateConfig,
 	};
 };
 

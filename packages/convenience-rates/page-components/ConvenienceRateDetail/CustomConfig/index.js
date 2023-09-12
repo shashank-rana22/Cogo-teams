@@ -30,12 +30,9 @@ function CustomConfig({
 	});
 	return (
 		<div>
-			<div style={
-				{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }
-}
-			>
+			<div className={styles.custom_heading}>Custom Configuration</div>
+			<div className={styles.orgs_container}>
 				<div>
-					<div className={styles.custom_heading}>Custom Configuration</div>
 					{!showCustomConfigForm ? (
 						<Tabs
 							themeType="primary"
@@ -69,6 +66,7 @@ function CustomConfig({
 				<CustomConfigForm
 					organizationDetails={organizationDetails}
 					itemValue={showCustomConfigForm}
+					activeList={activeList}
 					onClosingForm={() => setShowCustomConfigForm(false)}
 					defaultConfigFeeUnit={defaultConfigFeeUnit}
 				/>

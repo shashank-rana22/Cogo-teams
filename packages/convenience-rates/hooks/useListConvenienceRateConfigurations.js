@@ -1,4 +1,3 @@
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -6,14 +5,13 @@ import toastApiError from '../utils/toastApiError';
 
 const SORT_BY = 'created_at';
 const SORT_TYPE = 'asc';
-// const PAGEINATION_DATA_REQD = true;
 const PAGE_LIMIT = 10;
 
 const useListConvenienceRateConfigurations = ({ defaultFilters = {}, defaultParams = {} }) => {
-	const router = useRouter();
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
-	const { activeList, activeService } = defaultFilters || {};
+
+	const { activeList:status = '', activeService:service_type = '' } = defaultFilters || {};
 
 	const { page = 1, ...restFilters } = filters || {};
 	const [{ loading }, trigger] = useRequest({
@@ -21,8 +19,8 @@ const useListConvenienceRateConfigurations = ({ defaultFilters = {}, defaultPara
 		method : 'GET',
 		params : {
 			filters: {
-				service_type : activeService,
-				status       : activeList,
+				service_type,
+				status,
 				...(defaultFilters || {}),
 				...restFilters,
 			},
@@ -56,7 +54,6 @@ const useListConvenienceRateConfigurations = ({ defaultFilters = {}, defaultPara
 		loading,
 		filters,
 		setFilters,
-		router,
 	};
 };
 
