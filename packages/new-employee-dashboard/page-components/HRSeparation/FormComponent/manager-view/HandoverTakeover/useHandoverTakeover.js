@@ -15,12 +15,12 @@ const useHandoverTakeover = ({ data, refetch }) => {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 
 	const { manager_clearance } = data || {};
-	const { review_request } = manager_clearance || {};
+	const { assign_hoto } = manager_clearance || {};
 	const {
 		sub_process_detail_id,
 		// sub_process_data,
 		is_complete,
-	} = review_request || {};
+	} = assign_hoto || {};
 
 	const { updateApplication, loading } = useUpdateAppliationProcessDetails({ refetch, setShowModal });
 

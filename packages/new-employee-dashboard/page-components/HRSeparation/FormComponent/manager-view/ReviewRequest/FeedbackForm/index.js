@@ -11,7 +11,12 @@ const OPTIONS = [
 	{ label: 5, value: 5 },
 ];
 
-function FeedbackForm({ control, errors = {}, notes_shared_with_you = [], is_complete = false }) {
+function FeedbackForm({
+	control,
+	errors = {},
+	notes_shared_with_you = [],
+	is_complete = false,
+}) {
 	return (
 		<div>
 			<div className={styles.styled_component}>

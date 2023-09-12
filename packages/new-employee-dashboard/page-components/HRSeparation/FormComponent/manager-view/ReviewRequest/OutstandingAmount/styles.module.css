@@ -69,15 +69,6 @@
 .table_view {
 	display: flex;
 	flex-wrap: wrap;
-	height: 360px;
-	overflow: hidden;
-	transition: all 0.3s ease-in-out;
-}
-
-.table_view_closed {
-	display: flex;
-	flex-wrap: wrap;
-	height: 0;
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }

@@ -1,9 +1,10 @@
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 
 const useReviewRequest = ({ data, refetch }) => {
-	const { control, handleSubmit, formState: { errors } } = useForm();
+	const { control, handleSubmit, formState: { errors }, setValue } = useForm();
 
 	const { manager_clearance } = data || {};
 	const { review_request } = manager_clearance || {};
@@ -13,10 +14,18 @@ const useReviewRequest = ({ data, refetch }) => {
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
 
 	const onSubmit = (values) => {
-		const payload = { sub_process_detail_id, sub_process_data: values };
+		const payload = {
+			process_name     : 'manager_clearance',
+			sub_process_detail_id,
+			sub_process_data : values,
+		};
 
 		updateApplication({ payload });
 	};
+
+	useEffect(() => {
+		setValue('feedback_rating', sub_process_data?.feedback_rating);
+	}, [setValue, sub_process_data?.feedback_rating]);
 
 	return {
 		handleSubmit,
