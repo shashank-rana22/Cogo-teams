@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { IcMUndo, IcMEdit, IcMEyeopen } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import BankSelect from '..';
@@ -36,7 +35,7 @@ function BankDetails({ itemData = {}, setEditedValue = () => {} }) {
 
 	let renderComponent = null;
 
-	if (isEmpty(bankEdit)) {
+	if (bankEdit) {
 		renderComponent = (
 			<BankSelect
 				itemData={itemData}
