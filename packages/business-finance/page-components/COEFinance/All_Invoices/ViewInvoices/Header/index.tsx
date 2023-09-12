@@ -123,11 +123,12 @@ function Header({
 					</Button>
 				</div>
 			</div>
-
-			<TimeLineItemCheck
-				checkItem={checkItem}
-				status={status}
-			/>
+			<div className={styles.timeline}>
+				<TimeLineItemCheck
+					checkItem={checkItem}
+					status={status}
+				/>
+			</div>
 
 			{approve && (
 				<Modal

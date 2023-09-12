@@ -206,7 +206,7 @@ function LineItemCard({
 					<div className={styles.instructions}>
 						Line Items and Tax Rates
 						{showDetails ? (
-							<div>
+							<div className={styles.pill_tooltip}>
 								<Tooltip
 									content={(
 										<div className={styles.form_style}>
@@ -214,11 +214,11 @@ function LineItemCard({
 										</div>
 									)}
 								>
-									<div className={styles.tooltip}>
-										<IcMInfo width={15} height={15} />
-									</div>
+									<IcMInfo width={15} height={15} />
 								</Tooltip>
-								<Pill color="blue">{invoiceType}</Pill>
+								<Pill color="blue">
+									<span className={styles.invoice_pill}>{invoiceType}</span>
+								</Pill>
 							</div>
 						) : undefined}
 					</div>
@@ -234,12 +234,9 @@ function LineItemCard({
 									To reject line item
 								</div>
 							)}
-							<div className={styles.small_hr} />
 						</div>
 					)}
-
 				</div>
-
 				<div
 					className={styles.caret}
 					onClick={() => {
@@ -254,6 +251,7 @@ function LineItemCard({
 					)}
 				</div>
 			</div>
+			{showDetails ? <div className={styles.hr} /> : undefined}
 
 			<div>
 				{showDetails ? (
