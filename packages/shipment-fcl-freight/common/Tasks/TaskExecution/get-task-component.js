@@ -1,5 +1,3 @@
-import { AddCompanyModal } from '@cogoport/ocean-modules';
-
 import {
 	AmendDraftBl,
 	ChooseServiceProvider,
@@ -21,8 +19,6 @@ const TASKS = {
 	UPDATE_NOMINATION_DETAILS       : 'update_nomination_details',
 	GENERATE_FREIGHT_CERTIFICATE    : 'generate_freight_certificate',
 	GENERATE_CARGO_INSURANCE        : 'generate_cargo_insurance',
-	ADD_CONSIGNEE_DETAILS           : 'add_consignee_details',
-	ADD_SHIPPER_DETAILS             : 'add_shipper_details',
 	UPLOAD_COMPLIANCE_DOCUMENTS     : 'upload_compliance_documents',
 };
 
@@ -35,8 +31,6 @@ const {
 	UPDATE_NOMINATION_DETAILS,
 	GENERATE_FREIGHT_CERTIFICATE,
 	GENERATE_CARGO_INSURANCE,
-	ADD_CONSIGNEE_DETAILS,
-	ADD_SHIPPER_DETAILS,
 	UPLOAD_COMPLIANCE_DOCUMENTS,
 } = TASKS;
 
@@ -49,8 +43,6 @@ const COMPONENT_MAPPING = {
 	[UPDATE_NOMINATION_DETAILS]       : NominationTask,
 	[GENERATE_FREIGHT_CERTIFICATE]    : GenerateFreightCertificate,
 	[GENERATE_CARGO_INSURANCE]        : CargoInsurance,
-	[ADD_CONSIGNEE_DETAILS]           : AddCompanyModal,
-	[ADD_SHIPPER_DETAILS]             : AddCompanyModal,
 	[UPLOAD_COMPLIANCE_DOCUMENTS]     : UploadComplianceDocs,
 };
 
@@ -96,7 +88,7 @@ const getTaskComponent = ({
 		},
 		[VERIFY_SHIPPER_DETAILS]: {
 			task,
-			onCancel,
+			// onCancel,
 			refetch      : taskListRefetch,
 			shipmentData : shipment_data,
 		},
@@ -126,8 +118,8 @@ const getTaskComponent = ({
 	};
 
 	return {
-		props     : propsMapping?.[task?.task],
-		Component : COMPONENT_MAPPING?.[task?.task],
+		propsMapping,
+		COMPONENT_MAPPING,
 	};
 };
 

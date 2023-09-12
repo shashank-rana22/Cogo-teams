@@ -26,6 +26,18 @@ const EXCLUDED_SERVICES = [
 	'haulage_freight_service',
 ];
 
+const MAPPED_TASKS = [
+	'update_container_details',
+	'upload_container_arrival_notice',
+	'amend_draft_house_bill_of_lading',
+	'choose_service_provider',
+	'verify_shipper_details',
+	'update_nomination_details',
+	'generate_freight_certificate',
+	'generate_cargo_insurance',
+	'upload_compliance_documents',
+];
+
 const TRADE_PARTY_TYPE = {
 	add_consignee_details : { trade_party_type: 'consignee' },
 	add_shipper_details   : { trade_party_type: 'shipper' },
@@ -75,19 +87,24 @@ function ExecuteTask({
 		);
 	}
 
-	const { Component, props } = getTaskComponent({
-		task,
-		shipment_data,
-		servicesList,
-		primary_service,
-		onCancel,
-		tasksList,
-		selectedMail,
-		taskListRefetch,
-	});
+	if (MAPPED_TASKS.includes(task?.task)) {
+		const { propsMapping = {}, COMPONENT_MAPPING = {} } = getTaskComponent({
+			task,
+			shipment_data,
+			servicesList,
+			primary_service,
+			onCancel,
+			tasksList,
+			selectedMail,
+			taskListRefetch,
+		});
 
-	if (!isEmpty(Component) && !isEmpty(props)) {
-		return (<Component {...props} />);
+		const RenderComponent = COMPONENT_MAPPING?.[task?.task];
+		const renderProps = propsMapping?.[task?.task];
+
+		if (!isEmpty(renderProps)) {
+			return (<RenderComponent {...renderProps} />);
+		}
 	}
 
 	if (
