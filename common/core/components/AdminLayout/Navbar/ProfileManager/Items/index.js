@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
@@ -17,7 +18,8 @@ const TOTAL_TIME = 1000;
 const THIRTY_SECONDS = 30;
 const ONE = 1;
 const TWO = 2;
-const ZERO_COUNT = 0;
+// const ZERO_COUNT = 0;
+const MAX_COUNT = 100;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -68,12 +70,14 @@ function Items({
 	openNotificationPopover,
 	setOpenNotificationPopover,
 	notificationData,
+	showCount,
 	// notificationLoading,
 	// trigger,
 }) {
 	const { t } = useTranslation(['common']);
 
 	const notificationCount = notificationData?.is_not_seen_count;
+	// const notificationCount = 2;
 
 	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
@@ -225,20 +229,19 @@ function Items({
 					);
 				})}
 			</div>
-			{/*
-			{openNotificationPopover && (
-				<AdminNotification
-					notificationLoading={notificationLoading}
-					notificationData={notificationData}
-					trigger={trigger}
-				/>
-			)} */}
 
-			{(notificationCount > ZERO_COUNT) && (
+			{
+			// (notificationCount > ZERO_COUNT) && (
 				<div className={styles.notifications_container}>
 					{!showSubNav ? (
 						<div className={styles.notifiction_icon}>
 							<IcMNotifications width={16} height={16} fill="red" />
+							{notificationCount && showCount && !openNotificationPopover ? (
+								<div className={styles.new_notifications}>
+									{notificationCount >= MAX_COUNT
+										? `${MAX_COUNT}+` : notificationCount}
+								</div>
+							) : null}
 						</div>
 					) : null}
 
@@ -251,17 +254,20 @@ function Items({
 							className={styles.button_styles}
 							style={showSubNav ? { width: '100%' } : {}}
 						>
-							{t('common:you_have')}
-							{' '}
-							{notificationCount}
-							{' '}
-							{t('common:new')}
-							{' '}
-							{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
+							{notificationCount ? `
+							${t('common:you_have')}
+							${' '}
+							${notificationCount}
+							${' '}
+							${t('common:new')}
+							${' '}
+							${notificationCount > ONE ? t('common:notifications') : t('common:notification')}` : 'You have no new Notifications'}
 						</Button>
 					</div>
+
 				</div>
-			)}
+			// )
+			}
 
 			{/*
 			{(notificationCount > ZERO_COUNT && showSubNav) && (

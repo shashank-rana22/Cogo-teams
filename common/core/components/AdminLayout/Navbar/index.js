@@ -3,7 +3,7 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 // import NewNotifications from '@cogoport/notifications/page-components/NewNotifications/index';
 import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -27,6 +27,8 @@ function Navbar({
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
 	inCall = false,
+	showCount,
+	setShowCount,
 }) {
 	const ref = useRef(null);
 	const { t } = useTranslation(['common']);
@@ -72,17 +74,31 @@ function Navbar({
 	const [{ data:notificationData, loading : notificationLoading }, trigger] = useRequest({
 		url    : '/list_communications',
 		method : 'get',
-		params : {
-			data_required                  : true,
-			not_seen_count_required        : true,
-			pagination_data_required       : true,
-			page                           : 1,
-			communication_content_required : true,
-			filters                        : { type: 'platform_notification' },
-		},
-	}, { manual: false });
+		// params : {
+		// 	data_required                  : true,
+		// 	not_seen_count_required        : true,
+		// 	pagination_data_required       : true,
+		// 	page                           : 1,
+		// 	communication_content_required : true,
+		// 	filters                        : { type: 'platform_notification' },
+		// },
+	}, { manual: true });
+
+	useEffect(() => {
+		trigger({
+			params: {
+				data_required                  : true,
+				not_seen_count_required        : true,
+				pagination_data_required       : true,
+				page                           : 1,
+				communication_content_required : true,
+				filters                        : { type: 'platform_notification' },
+			},
+		});
+	}, [trigger]);
 
 	const handleLeave = () => {
+		setShowCount(true);
 		if (openPopover || openNotificationPopover) {
 			setResetSubnavs(true);
 		} else {
@@ -96,7 +112,10 @@ function Navbar({
 			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
 		>
 			<nav
-				onMouseEnter={() => setResetSubnavs(true)}
+				onMouseEnter={() => {
+					setResetSubnavs(true);
+					setShowCount(false);
+				}}
 				onMouseLeave={handleLeave}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
@@ -122,6 +141,7 @@ function Navbar({
 						notificationLoading={notificationLoading}
 						trigger={trigger}
 						data={notificationData}
+						showCount={showCount}
 					/>
 
 					<div className={styles.search_container}>
@@ -197,17 +217,14 @@ function Navbar({
 						)
 				}
 
-				{
-					openNotificationPopover
-						&& (
-							<AdminNotification
-								notificationData={notificationData}
-								notificationLoading={notificationLoading}
-								trigger={trigger}
-								setOpenNotificationPopover={setOpenNotificationPopover}
-							/>
-						)
-				}
+				<AdminNotification
+					notificationData={notificationData}
+					notificationLoading={notificationLoading}
+					trigger={trigger}
+					openNotificationPopover={openNotificationPopover}
+					setOpenNotificationPopover={setOpenNotificationPopover}
+				/>
+
 			</div>
 
 		</div>

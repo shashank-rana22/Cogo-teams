@@ -5,7 +5,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import NotificationsPopover from '../../components/NotificationPopover';
 import extractNavLinks from '../../helpers/extractNavLinks';
@@ -17,6 +17,9 @@ function NewNotifications({
 	notificationLoading :loading = false,
 	trigger = () => {},
 	setOpenNotificationPopover = () => {},
+	// openNotificationPopover,
+	dataRequired,
+	setDataRequired,
 }) {
 	const { zeroth_index } = GLOBAL_CONSTANTS;
 
@@ -36,17 +39,17 @@ function NewNotifications({
 
 	const { query: { partner_id } = {} } = general;
 
-	const [dataRequired, setDataRequired] = useState(false);
+	// const [dataRequired, setDataRequired] = useState(false);
 
 	// const [{ loading, data }, trigger] = useRequest({
 	// 	url    : '/list_communications',
 	// 	method : 'get',
 	// }, { manual: true });
 
-	const [, triggerBulkCommunication] = useRequest({
-		url    : '/bulk_update_communications',
-		method : 'POST',
-	}, { manual: true });
+	// const [, triggerBulkCommunication] = useRequest({
+	// 	url    : '/bulk_update_communications',
+	// 	method : 'POST',
+	// }, { manual: true });
 
 	const [, triggerCommunication] = useRequest({
 		url    : '/update_communication',
@@ -64,37 +67,41 @@ function NewNotifications({
 
 	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 
-	const updateAction = async (action) => {
-		try {
-			const payload = {
-				filters     : { type: 'platform_notification' },
-				action_name : action,
-			};
+	// const updateAction = async (action) => {
+	// 	try {
+	// 		const payload = {
+	// 			filters     : { type: 'platform_notification' },
+	// 			action_name : action,
+	// 		};
 
-			await triggerBulkCommunication({
-				data: payload,
-			});
-
-			// if (updateRes.hasError) {
-			// 	showErrorsInToast(updateRes.messages, t);
-			// }
-		} catch (err) {
-			console.log('err updateAction', err);
-			showErrorsInToast(err.data, t);
-		}
-	};
-
-	// const onShowToggle = (show) => {
-	// 	if (show) {
-	// 		setDataRequired(true);
-	// 		trigger({
-	// 			params: {
-	// 				data_required                  : true,
-	// 				communication_content_required : true,
-	// 				not_seen_count_required        : true,
-	// 				filters                        : { type: 'platform_notification' },
-	// 			},
+	// 		await triggerBulkCommunication({
+	// 			data: payload,
 	// 		});
+	// 	} catch (err) {
+	// 		console.log('err updateAction', err);
+	// 		showErrorsInToast(err.data, t);
+	// 	}
+	// };
+
+	// const onShowToggle = async (show) => {
+	// 	console.log('show ', show, is_not_seen_count);
+	// 	if (show) {
+	// 		try {
+	// 			setDataRequired(true);
+	// 			await trigger({
+	// 				params: {
+	// 					data_required                  : true,
+	// 					communication_content_required : true,
+	// 					not_seen_count_required        : true,
+	// 					filters                        : { type: 'platform_notification' },
+	// 				},
+	// 			});
+	// 			if (is_not_seen_count >= zeroth_index) {
+	// 				await updateAction('seen');
+	// 			}
+	// 		} catch (err) {
+	// 			Promise.reject();
+	// 		}
 	// 	} else {
 	// 		setDataRequired(false);
 	// 		if (is_not_seen_count >= zeroth_index) {
@@ -103,9 +110,9 @@ function NewNotifications({
 	// 	}
 	// };
 
-	const onMarkAllAsRead = () => {
-		updateAction('clicked');
-	};
+	// const onMarkAllAsRead = () => {
+	// 	updateAction('clicked');
+	// };
 
 	const onSeeAll = () => {
 		push('/notifications');
@@ -123,19 +130,19 @@ function NewNotifications({
 
 			if (!item?.is_clicked) {
 				const updateRes = await triggerCommunication({
-					data: { id: item?.id, is_clicked: true, is_seen: true },
+					data: { id: item?.id, is_clicked: true },
 				});
 				if (updateRes.hasError) {
 					showErrorsInToast(updateRes.messages);
 				} else {
 					trigger({
 						params: {
-							// data_required                  : dataRequired,
-							data_required                  : true,
+							data_required                  : dataRequired,
+							// data_required                  : true,
 							not_seen_count_required        : true,
 							filters                        : { type: 'platform_notification' },
-							// communication_content_required : dataRequired,
-							communication_content_required : true,
+							communication_content_required : dataRequired,
+							// communication_content_required : true,
 						},
 					});
 				}
@@ -169,12 +176,20 @@ function NewNotifications({
 		};
 	}, [loading, dataRequired, unPrefixedPath, geo.notification_polling_interval, trigger]);
 
+	// useEffect(() => {
+	// 	onShowToggle(openNotificationPopover);
+	// 	// if (!openNotificationPopover && currentNotSeen > zeroth_index) {
+	// 	// 	setCurrentNotSeen(zeroth_index);
+	// 	// }
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [openNotificationPopover, setOpenNotificationPopover]);
+
 	return (
 		<NotificationsPopover
 			// onShowToggle={onShowToggle}
 			formattedData={formattedData}
 			handleNotificationClick={handleNotificationClick}
-			onMarkAllAsRead={onMarkAllAsRead}
+			// onMarkAllAsRead={onMarkAllAsRead}
 			onSeeAll={onSeeAll}
 		/>
 	);

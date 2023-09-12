@@ -30,6 +30,7 @@ function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
 	const { t } = useTranslation(['common']);
+	const [showCount, setShowCount] = useState(true);
 
 	const {
 		user_data,
@@ -74,7 +75,8 @@ function AdminLayout({
 									&& is_joining_tnc_accepted === false;
 
 	return (
-		<div className={cl`
+		<div
+			className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
@@ -102,6 +104,8 @@ function AdminLayout({
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
 					inCall={inCall}
+					showCount={showCount}
+					setShowCount={setShowCount}
 				/>
 			) : null}
 			<VoiceCall

@@ -188,9 +188,10 @@
 	/* margin: 0; */
 	/* margin-bottom: 10px; */
 	align-items: center;
-	
 
-	
+	/* &:hover {
+		background-color: #fef199;
+	} */
 }
 
 .notifiction_icon {
@@ -210,4 +211,26 @@
 	white-space: nowrap;
 	user-select: none;
 	/* margin-left: 16px; */
+}
+
+.new_notifications {
+	position: absolute;
+	//top: 12px;
+	right: 8px;
+	//bottom: 40px;
+	margin: 0 0 8px 0;
+	display: flex;
+	align-items: center;
+	align-self: flex-end;
+	height: 16px;
+	padding: 4px;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 12px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	background: #000;
+	border-radius: 16px;
 }

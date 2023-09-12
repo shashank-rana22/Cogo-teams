@@ -25,6 +25,7 @@ function ProfileManager({
 	data,
 	notificationLoading,
 	trigger,
+	showCount,
 }) {
 	const router = useRouter();
 	const { t } = useTranslation(['common']);
@@ -116,6 +117,7 @@ function ProfileManager({
 				openNotificationPopover={openNotificationPopover}
 				setOpenNotificationPopover={setOpenNotificationPopover}
 				notificationData={data}
+				showCount={showCount}
 			//	notificationCount={data?.is_not_seen_count} // not being used
 			/>
 		</ul>
