@@ -1,0 +1,33 @@
+.container {
+	margin: 12px 10px;
+}
+
+.container .card-list-header-root {
+	align-items: center;
+	height: 40px;
+	padding: 10px;
+	margin: 0 8px 16px !important;
+	background: #5e6688;
+	border-radius: 8px;
+}
+
+.container .card-body-col {
+	display: flex;
+	align-items: center;
+}
+
+.container .card-list-root {
+	border: none;
+}
+
+.container .card-list-header-title {
+	color: #fff !important;
+}
+
+.container .card-body-row {
+	padding: 10px 12px !important;
+	margin: 0 8px !important;
+	margin-top: 8px !important;
+	border: 1px solid #cbd1f8;
+	border-radius: 8px;
+}
