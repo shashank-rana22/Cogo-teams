@@ -189,6 +189,7 @@ export function mountSnapShot({
 		...omniChannelQuery,
 		limit(PAGE_LIMIT),
 	);
+	console.log('newChatsQuery', newChatsQuery);
 
 	snapshotRef.current = onSnapshot(
 		newChatsQuery,

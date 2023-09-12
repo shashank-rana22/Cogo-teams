@@ -47,6 +47,7 @@ function FirebaseEmails(messageProps) {
 		workPrefernceLoading,
 		listOnlyMails : true,
 		activeFolder,
+		sidFilters    : activeTab?.hiddenFilters?.sid || '',
 	});
 
 	const setActiveSubTab = (val) => {

@@ -72,7 +72,12 @@ function Header({
 									showBotMessages={isBotSession}
 									tagOptions={tagOptions}
 									viewType={viewType}
-									filterControls={getFilterControls({ configLoading, configData, viewType })}
+									filterControls={getFilterControls({
+										configLoading,
+										configData,
+										viewType,
+										activeSubTab,
+									})}
 								/>
 							)
 						)}

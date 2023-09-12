@@ -9,7 +9,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query            : () => [where('session_type', '==', 'admin')],
-	chat_sub_tabs_access          : ['all', 'teams', 'groups'],
+	chat_sub_tabs_access          : ['all', 'teams', 'groups', 'hidden_filter'],
 	teams_chats_base_query        : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	extra_side_bar_navs_access    : [],
 	default_side_nav              : 'user_activity',
