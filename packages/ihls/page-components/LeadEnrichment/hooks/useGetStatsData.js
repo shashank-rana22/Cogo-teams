@@ -134,13 +134,16 @@ const useGetStatsData = ({ stats_type = null, params = {} }) => {
 		},
 	}, { manual: false });
 
-	const modifiedData = (data?.data || [])?.map((item) => ({
-		...item,
-		id         : item.id ? item.id : 'none',
-		label      : MAPPING[item.id]?.label,
-		color      : MAPPING[item.id]?.color,
-		percentage : Math.round((item.value * PERCENTAGE) / (data?.count || UNITY)),
-	}));
+	const modifiedData = (data?.data || [])?.map((item) => {
+		const id = item.id ? item.id : 'none';
+		return ({
+			...item,
+			id,
+			label      : MAPPING[id]?.label,
+			color      : MAPPING[id]?.color,
+			percentage : Math.round((item.value * PERCENTAGE) / (data?.count || UNITY)),
+		});
+	});
 
 	return {
 		title               : COLOR_MAPPINGS[stats_type]?.title || '__',
