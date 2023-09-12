@@ -1,6 +1,6 @@
 import adminConfig from './admin';
 import bookingAgent from './bookingAgent';
-import BookingAgentManager from './BookingAgentManager';
+import bookingAgentManager from './bookingAgentManager';
 import bookingDesk from './bookingDesk';
 import bookingDeskManager from './bookingDeskManager';
 import coeFinanceOwners from './coeFinanceOwners';
@@ -23,7 +23,7 @@ const VIEW_MAPPING = {
 const CONFIG_MAPPING = {
 	superadmin            : superadminConfig,
 	booking_agent         : bookingAgent,
-	booking_agent_manager : BookingAgentManager,
+	booking_agent_manager : bookingAgentManager,
 	admin                 : adminConfig,
 	booking_desk          : bookingDesk,
 	booking_desk_manager  : bookingDeskManager,
