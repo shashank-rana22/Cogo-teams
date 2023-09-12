@@ -17,7 +17,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 
 	const { control, handleSubmit } = useForm();
 
-	const { loading = false, listLeads = [] } = useListLeadOrganizations({ task });
+	const { loading = false, listLeads = [], defaultValues = {} } = useListLeadOrganizations({ task });
 	const listLeadsData = listLeads?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const { onUpdateLeadUser = () => {}, updateLoading = false } = useUpdateLeadUser();
@@ -25,7 +25,6 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 	const {
 		onVerify = () => {},
 		setCheckList = () => {},
-		defaultValues = {},
 		checkList = [],
 		createLoading = false,
 	} = useCreateLeadOrganizationToAccount({ listLeadsData, setStep, setOrgId, task });

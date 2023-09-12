@@ -10,6 +10,7 @@ function VerifyShipperDetails({
 	refetch = () => {},
 }) {
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
+	// const [step, setStep] = useState('1');
 	const [orgId, setOrgId] = useState(shipment_data?.consignee_shipper_id);
 
 	return (

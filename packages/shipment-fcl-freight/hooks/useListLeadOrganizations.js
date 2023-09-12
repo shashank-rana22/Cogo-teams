@@ -1,8 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 function useListLeadOrganizations({ task = {} }) {
+	const [defaultValues, setDefaultValues] = useState({});
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_lead_organizations',
 		method : 'GET',
@@ -16,7 +19,19 @@ function useListLeadOrganizations({ task = {} }) {
 
 	const getListLeadOrganizations = useCallback(async () => {
 		try {
-			await trigger();
+			const res = await trigger();
+
+			const {
+				business_name = '',
+				country_id = '',
+				registration_number = '',
+			} = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+			setDefaultValues({
+				company_name : business_name,
+				country_id,
+				gst_number   : registration_number,
+			});
 		} catch (err) {
 			toastApiError(err);
 		}
@@ -28,6 +43,7 @@ function useListLeadOrganizations({ task = {} }) {
 
 	return {
 		listLeads: data?.list,
+		defaultValues,
 		loading,
 		getListLeadOrganizations,
 	};

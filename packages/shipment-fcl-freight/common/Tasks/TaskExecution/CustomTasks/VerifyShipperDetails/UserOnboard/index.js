@@ -7,6 +7,7 @@ import {
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import isEqual from '@cogoport/ocean-modules/utils/isEqual';
+import { useEffect } from 'react';
 
 import useUpdateLeadOrganization from '../../../../../../hooks/useUpdateLeadOrganization';
 
@@ -17,33 +18,25 @@ function Error(key, errors) {
 }
 
 function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
-	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
-
 	const {
 		control,
 		formState:{ errors = {}, isValid = false },
 		handleSubmit,
-		formValues,
-		// reset,
-	} = useForm({ defaultValues });
+		reset,
+		watch,
+	} = useForm();
 
-	// useEffect(() => {
-	// 	const defaultValues = {
-	// 		company_name : listLeadsData?.business_name,
-	// 		country_id   : listLeadsData?.country_id,
-	// 		gst_number   : listLeadsData?.registration_number,
-	// 	};
+	const { ...formValues } = watch();
 
-	// 	reset(defaultValues);
-	// }, []);
+	useEffect(() => {
+		reset(defaultValues);
+	}, [defaultValues, reset]);
 
-	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
+	const countryValidation = getCountryConstants({ country_id: listLeadsData?.country_id, isDefaultData: false });
 
 	const { updateLoading = false, updateLeadOrganization } = useUpdateLeadOrganization();
 
 	const updateDetails = (values) => {
-		// console.log({ values });
-
 		const PAYLOAD = {
 			account_type        : 'importer_exporter',
 			business_name       : values?.company_name,
@@ -57,72 +50,70 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 	};
 
 	return (
-		<div>
-			<div className={styles.details_form}>
-				<div className={styles.row}>
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Company Name</label>
+		<div className={styles.details_form}>
+			<div className={styles.row}>
+				<div className={styles.form_item_container}>
+					<label className={styles.form_label}>Company Name</label>
 
-						<CreatableSelectController
-							size="sm"
-							control={control}
-							name="company_name"
-							placeholder="Enter Company Name"
-							value={listLeadsData?.business_name}
-							rules={{ required: 'Company Name is required' }}
-						/>
+					<CreatableSelectController
+						size="sm"
+						control={control}
+						name="company_name"
+						placeholder="Enter Company Name"
+						value={listLeadsData?.business_name}
+						rules={{ required: 'Company Name is required' }}
+					/>
 
-						{Error('company_name', errors)}
-					</div>
+					{Error('company_name', errors)}
+				</div>
 
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Country of Registration</label>
+				<div className={styles.form_item_container}>
+					<label className={styles.form_label}>Country of Registration</label>
 
-						<CountrySelectController
-							name="country_id"
-							control={control}
-							size="sm"
-							placeholder="Enter or Select Country"
-							optionValueKey="id"
-							value={listLeadsData?.country_id}
-							rules={{ required: 'Country of Registration is required' }}
-						/>
-						{Error('country', errors)}
-					</div>
+					<CountrySelectController
+						name="country_id"
+						control={control}
+						size="sm"
+						placeholder="Enter or Select Country"
+						optionValueKey="id"
+						value={listLeadsData?.country_id}
+						rules={{ required: 'Country of Registration is required' }}
+					/>
+					{Error('country_id', errors)}
+				</div>
 
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>GST</label>
+				<div className={styles.form_item_container}>
+					<label className={styles.form_label}>GST</label>
 
-						<InputController
-							size="sm"
-							name="gst_number"
-							control={control}
-							placeholder="Enter GST"
-							value={listLeadsData?.registration_number}
-							rules={{
-								required : { value: !formValues?.gst_number, message: 'GST number is required' },
-								pattern  : {
-									value   : countryValidation?.regex?.GST,
-									message : `
+					<InputController
+						size="sm"
+						name="gst_number"
+						control={control}
+						placeholder="Enter GST"
+						value={listLeadsData?.registration_number}
+						rules={{
+							required : { value: !formValues?.gst_number, message: 'GST number is required' },
+							pattern  : {
+								value   : countryValidation?.regex?.GST,
+								message : `
 									${countryValidation?.others?.identification_number?.label} Number is invalid`,
-								},
-							}}
-						/>
-						{Error('registration_number', errors)}
-					</div>
+							},
+						}}
+					/>
+					{Error('gst_number', errors)}
 				</div>
-
-				<div className={styles.button_container}>
-					<Button
-						themeType="accent"
-						onClick={handleSubmit(updateDetails)}
-						disabled={!isValid || isEqual(formValues, defaultValues) || updateLoading}
-					>
-						Update
-					</Button>
-				</div>
-
 			</div>
+
+			<div className={styles.button_container}>
+				<Button
+					themeType="accent"
+					onClick={handleSubmit(updateDetails)}
+					disabled={isValid || isEqual(formValues, defaultValues) || updateLoading}
+				>
+					Update
+				</Button>
+			</div>
+
 		</div>
 	);
 }

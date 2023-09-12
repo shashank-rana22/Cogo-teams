@@ -11,7 +11,6 @@ function useCreateLeadOrganizationToAccount({
 	task = {},
 }) {
 	const [checkList, setCheckList] = useState(null);
-	const [defaultValues, setDefaultValues] = useState({});
 
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ successMessage: 'Updated Successfully' });
 
@@ -23,12 +22,6 @@ function useCreateLeadOrganizationToAccount({
 	const createLeadOrgAccount = async ({ payload }) => {
 		try {
 			const res = await trigger({ data: payload });
-
-			setDefaultValues({
-				company_name : listLeadsData?.business_name,
-				country_id   : listLeadsData?.country_id,
-				gst_number   : listLeadsData?.registration_number,
-			});
 
 			if (res.data) {
 				setOrgId(res?.data?.organization_id);
@@ -55,7 +48,6 @@ function useCreateLeadOrganizationToAccount({
 		createLoading: loading,
 		checkList,
 		setCheckList,
-		defaultValues,
 		onVerify,
 		createLeadOrgAccount,
 	};
