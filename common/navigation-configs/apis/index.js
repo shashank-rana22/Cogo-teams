@@ -153,7 +153,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	...welcome,
+	welcome,
 	cargo_insurance,
 	...saas_tools,
 	...performance_management,
