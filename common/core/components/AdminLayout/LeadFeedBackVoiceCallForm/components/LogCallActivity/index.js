@@ -17,6 +17,7 @@ function LogCallActivity({
 	leadUserId = '',
 	restData = {},
 	source = '',
+	callRecordId = '',
 }) {
 	const { communication_start_time, communication_end_time } = restData || {};
 
@@ -37,7 +38,7 @@ function LogCallActivity({
 	const {
 		createLeadOrgUserLog = () => {},
 		loading = false,
-	} = useCreateLeadOrgUserLog({ leadOrgId, partnerId, onCloseForm });
+	} = useCreateLeadOrgUserLog({ leadOrgId, partnerId, onCloseForm, callRecordId });
 
 	const controls = getControls({
 		communicationType    : 'call',
