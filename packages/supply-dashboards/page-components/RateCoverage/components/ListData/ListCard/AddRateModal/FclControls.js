@@ -5,7 +5,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
 
-const MIN_CARGO_WEIGHT = 18;
 const fclControls = ({
 	data,
 	// chargeCodeOptions,
@@ -196,11 +195,7 @@ const fclControls = ({
 		type        : 'number',
 		span        : 3,
 		placeholder : 'Free Weight Limit',
-		value:
-			data?.cargo_weight_per_container <= MIN_CARGO_WEIGHT
-				? data?.cargo_weight_per_container
-				: MIN_CARGO_WEIGHT,
-		rules: { required: 'free weight is required' },
+		rules       : { required: 'free weight is required' },
 	},
 	{
 		name        : 'schedule_type',
@@ -222,18 +217,18 @@ const fclControls = ({
 		heading    : 'Weight Slabs',
 		type       : 'fieldArray',
 		buttonText : 'Add Weight Slabs',
-		value:
-			data?.cargo_weight_per_container > MIN_CARGO_WEIGHT
-				? [
-					{
-						lower_limit : 18.1,
-						upper_limit : data?.cargo_weight_per_container,
-						currency    : GLOBAL_CONSTANTS.currency_code.USD,
-						price       : 0,
-					},
-				]
-				: undefined,
-		controls: [
+		// value:
+		// 	data?.cargo_weight_per_container > MIN_CARGO_WEIGHT
+		// 		? [
+		// 			{
+		// 				lower_limit : 18.1,
+		// 				upper_limit : data?.cargo_weight_per_container,
+		// 				currency    : GLOBAL_CONSTANTS.currency_code.USD,
+		// 				price       : 0,
+		// 			},
+		// 		]
+		// 		: undefined,
+		controls   : [
 			{
 				name        : 'lower_limit',
 				type        : 'number',
