@@ -11,4 +11,8 @@ export const tabs = ({ t = () => {} }) => [
 		key   : 'final_awb',
 		label : t('printingDesk:header_tabs_final_awb'),
 	},
+	{
+		key   : 'completed_awb',
+		label : t('printingDesk:header_tabs_completed_awb'),
+	},
 ];

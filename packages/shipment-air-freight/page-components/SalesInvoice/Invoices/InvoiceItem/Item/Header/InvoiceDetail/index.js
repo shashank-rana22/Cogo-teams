@@ -105,21 +105,23 @@ function InvoiceDetail({
 					<div>{ invoiceNo }</div>
 				)}
 
-				<div className={styles.status_container}>
-					{invoiceStatus === 'FINANCE_REJECTED' ? (
-						<Tooltip
-							theme="light"
-							placement="bottom"
-							content={
-								<div>{invoiceRejectionReason || '-'}</div>
+				{invoiceStatus ? (
+					<div className={styles.status_container}>
+						{invoiceStatus === 'FINANCE_REJECTED' ? (
+							<Tooltip
+								theme="light"
+								placement="bottom"
+								content={
+									<div>{invoiceRejectionReason || '-'}</div>
 									}
-						>
-							<div className={styles.status_style}>{startCase(invoiceStatus)}</div>
-						</Tooltip>
-					) : (
-						<div>{startCase(invoiceStatus)}</div>
-					)}
-				</div>
+							>
+								<div className={styles.status_style}>{startCase(invoiceStatus)}</div>
+							</Tooltip>
+						) : (
+							<div>{startCase(invoiceStatus)}</div>
+						)}
+					</div>
+				) : null}
 
 				{showIrnTriggerForOldShipments && (
 					<Button
