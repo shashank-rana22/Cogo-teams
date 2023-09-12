@@ -21,19 +21,12 @@ function EmploymentDetails({ data = {} }) {
 					<span className={styles.detail}>View and manage employee details</span>
 				</div>
 				<div className={styles.info_container}>
-					{info.map(({ heading, details }, index) => {
-						if (index === GLOBAL_CONSTANTS.zeroth_index) {
-							return (
-								<>
-									<DetailsCard heading={heading} details={details} key={heading} data={data} />
-									<EmploymentStatus data={data} />
-								</>
-							);
-						}
-						return (
+					{info.map(({ heading, details }, index) => (
+						<>
 							<DetailsCard heading={heading} details={details} key={heading} data={data} />
-						);
-					})}
+							{(index === GLOBAL_CONSTANTS.zeroth_index) ? <EmploymentStatus data={data} /> : null}
+						</>
+					))}
 				</div>
 			</div>
 			<RightGlance otherInfo={otherInfo} data={data} />

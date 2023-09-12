@@ -1,30 +1,18 @@
 import React from 'react';
 
+import { otherEducationInfo } from '../../../utils/otherInfo';
 import DetailsCard from '../DetailsCard';
 import RightGlance from '../RightGlance';
 
 import styles from './styles.module.css';
+import useGetEducationInfo from './useGetEducationInfo';
 
 function EducationDetails({ data = {} }) {
-	const info = [
-		{
-			heading : 'GRADUATION DETAILS',
-			details : [
-				{ label: 'College', value: 'Indian Institute of Technology, Bombay' },
-				{ label: 'Degree', value: 'B. Tech.' },
-				{ label: 'Field of study', value: 'Civil Engineering' },
-				{ label: 'Graduation date', value: '10/05/23' },
-				{ label: 'Grade', value: '8.24' },
-			],
-		},
-	];
+	const { employee_detail } = data || {};
+	const { employee_education_details } = employee_detail || {};
 
-	const otherInfo = [
-		{ label: 'College', value: 'Indian Institute of Technology, Bombay' },
-		{ label: 'Degree', value: 'B. Tech.' },
-		{ label: 'Field of study', value: 'Civil Engineering' },
-		{ label: 'Graduated on', value: '10/05/23' },
-	];
+	const info = useGetEducationInfo(employee_education_details);
+	const otherInfo = otherEducationInfo;
 
 	return (
 		<div className={styles.tab_content}>
@@ -43,7 +31,6 @@ function EducationDetails({ data = {} }) {
 			</div>
 			<RightGlance otherInfo={otherInfo} data={data} />
 		</div>
-
 	);
 }
 

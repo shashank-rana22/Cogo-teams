@@ -36,7 +36,6 @@ function PersonalDetails({ data = {} }) {
 			</div>
 			<RightGlance otherInfo={otherInfo} data={data} />
 		</div>
-
 	);
 }
 

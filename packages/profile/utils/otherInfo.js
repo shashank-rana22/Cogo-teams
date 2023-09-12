@@ -6,6 +6,13 @@ export const otherPersonalInfo = [
 	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
 ];
 
+export const otherEducationInfo = [
+	{ label: 'College', key: 'graduate_degree', value: 'school_name' },
+	{ label: 'Degree', key: 'graduate_degree', value: 'degree' },
+	{ label: 'Field of study', key: 'graduate_degree', value: 'specialization' },
+	{ label: 'Graduated on', key: 'graduate_degree', value: 'ended_at' },
+];
+
 export const otherEmploymentInfo = [
 	{ label: 'Employment Type', key: 'details', value: 'employee_type' },
 	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },

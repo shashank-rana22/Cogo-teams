@@ -6,8 +6,8 @@ import styles from './styles.module.css';
 
 function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 	const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
-	const { present_address } = employee_detail || {};
 
+	const { present_address, employee_education_details } = employee_detail || {};
 	const { family_details } = personal_details || {};
 
 	const mapping = (key, value) => {
@@ -19,6 +19,12 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 			personal  : personal_details,
 			family    : family_details,
 		};
+
+		if (employee_education_details) {
+			employee_education_details.forEach((detail) => {
+				getMapping[detail.education_level] = detail;
+			});
+		}
 
 		return getByKey(getMapping[key], value);
 	};
