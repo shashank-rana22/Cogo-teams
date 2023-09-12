@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { FLASH_MESSAGES_ROLES_LIST } from '../../../../../../constants/FLASH_MESSAGES_ROLES_LIST';
 import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
-import getFormattedTimeInMilliSecond from '../../../../../../helpers/getFormattedTimeInMilliSeconds';
+import getFormattedTime from '../../../../../../helpers/getFormattedTime';
 
 import styles from './styles.module.css';
 
@@ -15,7 +15,7 @@ function RoleWiseFlashAgentChat({
 }) {
 	const [timeoutValues, setTimeoutValues] = useState({});
 
-	const timeInMilliSecond = getFormattedTimeInMilliSecond(timeoutValues);
+	const timeInMilliSecond = getFormattedTime({ time: timeoutValues, unit: 'millisecond' });
 
 	const disableSubmitButton = Object.values(timeoutValues).some((value) => Number.isNaN(value))
 	|| isEmpty(timeoutValues);

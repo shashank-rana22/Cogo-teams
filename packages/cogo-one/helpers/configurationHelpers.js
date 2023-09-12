@@ -3,7 +3,7 @@ import { collection, query, limit, getDocs, updateDoc, setDoc, doc } from 'fireb
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-import getFormattedTimeInMinute from './getFormattedTimeInMinute';
+import getFormattedTime from './getFormattedTime';
 
 const FIREBASE_QUERY_LIMIT = 1;
 const ONE_MINUTE = 60000;
@@ -32,7 +32,7 @@ export const getIsActive = async ({ firestore = {}, setRoleValue = () => {}, set
 
 	const timeInMinute = screen_lock_timeout / ONE_MINUTE;
 
-	const formattedTimeout = getFormattedTimeInMinute(flash_messages_timeout_mapping);
+	const formattedTimeout = getFormattedTime({ time: flash_messages_timeout_mapping, unit: 'minute' });
 
 	setRoleValue({
 		roles       : enable_for_roles,
@@ -60,13 +60,15 @@ export const updateCogooneConstants = async ({
 		`${FIRESTORE_PATH.cogoone_constants}/${roomId}`,
 	);
 
-	updateDoc(docRef, source === 'claim_chat_configuration'
+	const isClaimChatConfiguration = source === 'claim_chat_configuration'
 		? { flash_messages_timeout_mapping: timeout }
 		: {
 			is_locked_screen    : value,
 			enable_for_roles    : roleIds,
 			screen_lock_timeout : time,
-		});
+		};
+
+	updateDoc(docRef, isClaimChatConfiguration);
 };
 
 export const updateUserLastActivity = async ({ firestore = {}, agent_id = '', updated_status = '' }) => {
