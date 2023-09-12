@@ -187,6 +187,7 @@ function InvoiceInfo({
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
+						disabled={shipment_data?.is_job_closed}
 						onClick={() => setAskNullify(true)}
 					>
 						Request CN

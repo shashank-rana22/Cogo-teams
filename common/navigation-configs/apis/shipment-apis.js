@@ -1789,6 +1789,11 @@ const apis = [
 		service_name : 'fcl_freight_rate',
 	},
 	{
+		api          : 'incident',
+		access_type  : 'private',
+		service_name : 'incident-management',
+	},
+	{
 		api         : 'post_purchase_advance_document',
 		access_type : 'private',
 	},

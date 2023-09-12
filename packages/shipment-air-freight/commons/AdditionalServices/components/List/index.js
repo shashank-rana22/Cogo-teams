@@ -129,6 +129,7 @@ function List({ isSeller = false, source = '' }) {
 						Add Terminal Charge
 					</Button>
 				) : null}
+
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}

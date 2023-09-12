@@ -21,6 +21,8 @@ function Status({
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
+	const IS_JOB_CLOSED = shipment_data?.is_job_closed;
+
 	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	let invoiceStatus = invoicesList?.filter(
@@ -47,6 +49,7 @@ function Status({
 					<Button
 						size="sm"
 						themeType="tertiary"
+						disabled={IS_JOB_CLOSED}
 						onClick={() => sendInvoiceToFinance({
 							payload: {
 								id: invoice?.id,
