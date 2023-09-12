@@ -14,11 +14,16 @@ const usePostAgentScoringAttributes = () => {
 		authkey : 'post_agent_scoring_config_attributes',
 	}, { manual: true });
 
-	const postAgentScoringAttributes = async () => {
+	const postAgentScoringAttributes = async ({ agentScoringBlockId = '', agentScoringParameters = [] }) => {
 		try {
 			await trigger({
 				data: {
 					id,
+					agent_scoring_blocks: [{
+						agent_scoring_block_id          : agentScoringBlockId,
+						status                          : 'active',
+						agent_scoring_parameter_details : agentScoringParameters,
+					}],
 				},
 			});
 

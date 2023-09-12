@@ -20,7 +20,6 @@ const useGetScoringConfig = () => {
 			await trigger({
 				params: {
 					id,
-					basic_config_data_required: true,
 				},
 			});
 		} catch (error) {

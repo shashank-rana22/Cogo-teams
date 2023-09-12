@@ -24,9 +24,9 @@ const useBlockCreation = ({ control, name, watch }) => {
 		}
 	});
 
-	const blockValue = watch(`${name}.block`);
+	const watchBlock = watch(`${name}.block`);
 
-	const { data = {} } = useGetAgentScoringBlocks({ blockValue });
+	const { data = {} } = useGetAgentScoringBlocks({ watchBlock });
 
 	const { list = [] } = data;
 
@@ -60,7 +60,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 
 	return {
 		CHILD_EMPTY_VALUES,
-		blockValue,
+		watchBlock,
 		subBlockType,
 		fields,
 		append,

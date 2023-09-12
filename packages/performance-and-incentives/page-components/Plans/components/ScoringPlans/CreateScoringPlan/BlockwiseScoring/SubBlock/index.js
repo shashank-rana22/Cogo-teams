@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import useSubBlockCreation from './useSubBlockCreation';
 
 function SubBlock({
-	key = '', name = '', index = 0, control = {}, errors = {}, watch = () => {},
+	key = '', name = '', index = 0, subBlockIndex = 0, control = {}, errors = {}, watch = () => {},
 	subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
 }) {
 	const { Element, controls = [], handleClick = () => {}, parameterUnitOptions = {} } = useSubBlockCreation({
@@ -16,6 +16,8 @@ function SubBlock({
 		subBlockType,
 		name,
 		watch,
+		index,
+		subBlockIndex,
 	});
 
 	return (
@@ -30,7 +32,7 @@ function SubBlock({
 					</div>
 
 					<Element
-						name={`${name}.service`}
+						name={`${name}.sub_block_id`}
 						control={control}
 						options={subBlockOptions}
 						value="default"
@@ -41,7 +43,7 @@ function SubBlock({
 					)}
 				</div>
 
-				<div role="presentation" className={styles.delete_block} onClick={() => removeSubBlock(index)}>
+				<div role="presentation" className={styles.delete_block} onClick={() => removeSubBlock(subBlockIndex)}>
 					<IcMDelete className={styles.icon} />
 
 					<div className={styles.underline_text}>
@@ -55,7 +57,7 @@ function SubBlock({
 
 			<FieldArray
 				control={control}
-				name={`${name}.sublock_fieldArray`}
+				name={`${name}.parameters`}
 				controls={controls}
 				isText
 				buttonText="Add Parameter"
@@ -71,7 +73,6 @@ function SubBlock({
 				onClick={handleClick}
 			>
 				Save
-
 			</Button>
 
 		</div>

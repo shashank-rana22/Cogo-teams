@@ -24,7 +24,7 @@ function Block(props) {
 	const {
 		subBlockType,
 		CHILD_EMPTY_VALUES,
-		blockValue,
+		watchBlock,
 		IS_DEFAULT,
 		fields,
 		append,
@@ -32,8 +32,6 @@ function Block(props) {
 		subBlockOptions,
 		parameterOptions = {},
 	} = useBlockCreation({ control, name, watch });
-
-	const watchBlock = watch(`${name}.block`);
 
 	return (
 		<div className={styles.container} key={key}>
@@ -65,10 +63,11 @@ function Block(props) {
 				<SubBlock
 					key={field.id}
 					name={`${name}.${subBlockIndex}`}
-					index={subBlockIndex}
+					index={index}
+					subBlockIndex={subBlockIndex}
 					control={control}
 					watch={watch}
-					blockValue={blockValue}
+					watchBlock={watchBlock}
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
 					isDefault={IS_DEFAULT}
