@@ -26,7 +26,6 @@ export const getLocationParams = (service_type = 'fcl') => ({
 		type: [
 			`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
 			'country',
-			'region',
 		],
 	},
 	includes: {
