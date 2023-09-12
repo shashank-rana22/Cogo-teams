@@ -100,7 +100,7 @@ function Item({
 							<div className={styles.in_number}>
 								Incident ID:
 								{' '}
-								{item.incident_id}
+								{item?.incident_id}
 							</div>
 						)}
 
