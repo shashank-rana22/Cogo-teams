@@ -23,6 +23,7 @@ const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
 	'end_to_end_shipment',
 	'containers',
 	'rollover_shipments',
+	'advance_documents',
 ];
 
 function ShipmentDetails() {
@@ -36,6 +37,7 @@ function ShipmentDetails() {
 
 	const stakeholdersComponents = {
 		booking_agent            : kamLoggedIn === 'booking_agent' ? Kam : DKam,
+		booking_agent_manager    : kamLoggedIn === 'booking_agent' ? Kam : DKam,
 		sales_agent              : Kam,
 		booking_desk             : BookingDesk,
 		booking_desk_manager     : BookingDeskManager,

@@ -1,11 +1,15 @@
-import { Tabs, TabPanel, Input, Pagination, Toggle, Button, Select } from '@cogoport/components';
+import {
+	Tabs, TabPanel, Input, Pagination, Toggle, Button, Select, Popover,
+} from '@cogoport/components';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../common/EmptyState';
-import useBulkEmployeeDetails from '../hooks/useBulkEmployeeDetails';
 import StyledTable from '../StyledTable';
 
+import BulkActionPopOverContent from './BulkActionPopOverContent';
 import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
 import useRejectAction from './useRejectAction';
@@ -20,19 +24,53 @@ const PAGE_LIMIT_OPTIONS = [
 	{ label: 100, value: 100 },
 	{ label: 200, value: 200 },
 ];
-const INITIAL_PAGE_LIMIT = 10;
 
-function TableView({ search, setSearch }) {
+function TableView() {
+	const profileData = useSelector(({ profile }) => profile);
+	const dispatch = useDispatch();
+
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
-	const [bulkAction, setBulkAction] = useState(false);
-	const [pageLimit, setPageLimit] = useState(INITIAL_PAGE_LIMIT);
 	const [selectedIds, setSelectedIds] = useState([]);
+	const [showModal, setShowModal] = useState(false);
+	const [showPopOver, setShowPopOver] = useState(false);
 
 	const {
-		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
-	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction, pageLimit, selectedIds, setSelectedIds });
+		columns, loading, list, setActiveTab, setSearch, search, setBulkAction, bulkAction,
+		activeTab, data, setPage, page, filters, setFilters, pageLimit, setPageLimit,
+	} = useTableView({ btnloading, updateEmployeeStatus, selectedIds, setSelectedIds });
 
-	const { btnloading:bulkloading, sendBulkActionMail } = useBulkEmployeeDetails({ selectedIds });
+	useEffect(() => { if (!bulkAction) setSelectedIds([]); }, [bulkAction]);
+
+	const updateProfileField = (fieldName, val) => {
+		const modifiedProfileData = {
+			...profileData,
+			user: {
+				...profileData?.user,
+				new_hire_dashboard: {
+					...profileData?.user?.new_hire_dashboard,
+					[fieldName]: val,
+				},
+			},
+		};
+
+		switch (fieldName) {
+			case 'page_limit':
+				setPageLimit(val);
+				break;
+			case 'page':
+				setPage(val);
+				break;
+			case 'activeTab':
+				setActiveTab(val);
+				setPage(INITIAL_PAGE);
+				modifiedProfileData.user.new_hire_dashboard.page = 1;
+				break;
+			default:
+				break;
+		}
+
+		dispatch(setProfileState(modifiedProfileData));
+	};
 
 	return (
 		<div className={styles.container}>
@@ -41,34 +79,53 @@ function TableView({ search, setSearch }) {
 					<Tabs
 						activeTab={activeTab}
 						themeType="tertiary"
-						onChange={setActiveTab}
+						onChange={(val) => {
+							setBulkAction(false);
+							updateProfileField('activeTab', val);
+						}}
 						style={{ marginBottom: 6 }}
 					>
-						<TabPanel name="active" title="Active" />
-						<TabPanel name="inactive" title="Inactive" />
+						<TabPanel name="offered" title="Offered" />
+						<TabPanel name="rejected" title="Rejected by HR" />
 						<TabPanel name="rejected_by_user" title="Rejected By User" />
+						<TabPanel name="no_show" title="No Show" />
 					</Tabs>
 
-					<div className={styles.bulkupload_container}>
-						BulkAction
+					{activeTab === 'offered' && (
+						<div
+							className={styles.bulkupload_container}
+						>
+							BulkAction
+							<Toggle
+								onChange={(val) => setBulkAction(val?.target?.checked)}
+								value={bulkAction}
+								styles={{ marginBottom: 30 }}
+							/>
+						</div>
+					) }
 
-						<Toggle
-							onChange={(val) => setBulkAction(val?.target?.checked)}
-							value={bulkAction}
-							styles={{ marginBottom: '30px' }}
-						/>
-					</div>
-
-					{bulkAction && (
+					{(bulkAction && activeTab === 'offered') && (
 						<div className={styles.styled_button}>
-							<Button
-								themeType="secondary"
-								disabled={isEmpty(selectedIds)}
-								onClick={sendBulkActionMail}
-								loading={bulkloading}
+							<Popover
+								placement="right"
+								render={(
+									<BulkActionPopOverContent
+										setShowPopOver={setShowPopOver}
+										setShowModal={setShowModal}
+										showModal={showModal}
+										selectedIds={selectedIds}
+									/>
+								)}
+								visible={showPopOver}
+								onClickOutside={() => setShowPopOver(false)}
 							>
-								Send email
-							</Button>
+								<Button
+									disabled={isEmpty(selectedIds)}
+									onClick={() => setShowPopOver(true)}
+								>
+									Bulk Actions
+								</Button>
+							</Popover>
 						</div>
 					)}
 				</div>
@@ -98,7 +155,7 @@ function TableView({ search, setSearch }) {
 						<div className={styles.pagination_container}>
 							<div className={styles.text}> Page Limit : </div>
 							<Select
-								onChange={(val) => setPageLimit(val)}
+								onChange={(val) => updateProfileField('page_limit', val)}
 								value={pageLimit}
 								options={PAGE_LIMIT_OPTIONS}
 								size="sm"
@@ -110,7 +167,7 @@ function TableView({ search, setSearch }) {
 								totalItems={data?.total_count || INITIAL_TOTAL_COUNT}
 								currentPage={page || INITIAL_PAGE}
 								pageSize={data?.page_limit}
-								onPageChange={setPage}
+								onPageChange={(val) => updateProfileField('page', val)}
 								type="table"
 								style={{ paddingTop: '5px' }}
 							/>

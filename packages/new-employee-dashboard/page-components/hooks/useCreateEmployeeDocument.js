@@ -16,7 +16,6 @@ function useCreateEmployeeDocument({ documents, getEmployeeDetails = () => {} })
 			documents          : [...newDoc],
 			employee_detail_id : id,
 		};
-		console.log(payload, 'payload');
 
 		try {
 			await trigger({

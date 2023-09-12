@@ -55,6 +55,17 @@ const controls = [
 		rules       : { required: 'Required' },
 	},
 	{
+		name    : 'schedule_type',
+		label   : 'Schedule Type',
+		type    : 'select',
+		options : [{ label: 'Direct', value: 'direct' },
+			{ label: 'Transshipment', value: 'transshipment' }],
+		placeholder : 'Select Schedule Type',
+		span        : 4,
+		size        : 'md',
+		rules       : { required: 'Required' },
+	},
+	{
 		name        : 'transit_time',
 		label       : 'Transit Time',
 		type        : 'text',
@@ -148,7 +159,7 @@ const controls = [
 		type        : 'select',
 		valueKey    : 'display_name',
 		placeholder : 'Select Destination Port',
-		span        : 4,
+		span        : 6,
 		size        : 'md',
 	},
 	{
@@ -157,7 +168,7 @@ const controls = [
 		valueKey    : 'display_name',
 		type        : 'select',
 		placeholder : 'Select Destination Port',
-		span        : 4,
+		span        : 6,
 		size        : 'md',
 	},
 ];

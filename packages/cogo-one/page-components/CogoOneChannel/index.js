@@ -8,6 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
+import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -28,12 +29,7 @@ import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
-	const {
-		query: {
-			assigned_chat = '',
-			channel_type = '',
-		},
-	} = useRouter();
+	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
 
 	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
@@ -43,15 +39,17 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab               : 'message',
+		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
 		subTab            : 'all',
 		hasNoFireBaseRoom : false,
+		expandSideBar     : false,
 		data              : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
 		} : {},
 	});
 
+	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
@@ -72,9 +70,9 @@ function CogoOne() {
 	});
 
 	const {
-		viewType,
+		viewType: initialViewType = '',
 		loading: workPrefernceLoading = false,
-		userMails = [],
+		userSharedMails = [],
 	} = useAgentWorkPrefernce();
 
 	const {
@@ -101,7 +99,7 @@ function CogoOne() {
 		activeMailAddress,
 		setActiveMailAddress,
 		viewType,
-		userMails,
+		userSharedMails,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
@@ -112,9 +110,11 @@ function CogoOne() {
 
 	const commonProps = {
 		setSendBulkTemplates,
+		preferenceLoading,
 		setActiveTab,
 		selectedAutoAssign,
 		setAutoAssignChats,
+		queryAssignedChat: assigned_chat,
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
@@ -122,9 +122,14 @@ function CogoOne() {
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab?.tab === 'message'
+	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
+
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
+	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								&& !activeTab?.expandSideBar;
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -135,6 +140,13 @@ function CogoOne() {
 			});
 		}
 	}, [token]);
+
+	useEffect(
+		() => {
+			setViewType(initialViewType);
+		},
+		[initialViewType],
+	);
 
 	return (
 		<>
@@ -148,6 +160,8 @@ function CogoOne() {
 				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
 				userId={userId}
+				initialViewType={initialViewType}
+				setViewType={setViewType}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -176,6 +190,7 @@ function CogoOne() {
 					<PortPairOrgFilters
 						setSelectedAutoAssign={setSelectedAutoAssign}
 						sendBulkTemplates={sendBulkTemplates}
+						viewType={viewType}
 						{...commonProps}
 					/>
 				) : null}
@@ -187,13 +202,15 @@ function CogoOne() {
 								activeTab={activeTab}
 								viewType={viewType}
 								setActiveTab={setActiveTab}
+								mailProps={mailProps}
 							/>
 						</div>
 					) : (
 						<>
 							<div
-								className={activeTab?.tab === 'mail'
-									? styles.mail_layout : styles.chats_layout}
+								className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
+								${collapsedSideBar ? styles.mail_layout : ''} 
+								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}`}
 							>
 								<Conversations
 									activeTab={activeTab}
@@ -209,9 +226,13 @@ function CogoOne() {
 								/>
 							</div>
 
-							{activeTab?.tab !== 'mail' && (
+							{(
+								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+							) ? (
 								<div className={cl`${styles.user_profile_layout} 
-								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}`}
+								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
+								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -229,11 +250,12 @@ function CogoOne() {
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
 										mailProps={mailProps}
+										chatsConfig={activeTab}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}
 								</div>
-							)}
+								) : null}
 						</>
 					)}
 				<AndroidApp />

@@ -41,9 +41,9 @@ function Templates({
 		communicationLoading = false,
 	} = data || {};
 
-	const { name, html_template, variables = [], tags = [] } = activeCard?.data || {};
+	const { name, html_template, variables = null, tags = [] } = activeCard?.data || {};
 
-	const isAllKeysAndValuesPresent = variables.every(
+	const isAllKeysAndValuesPresent = (variables || [])?.every(
 		(key) => (key in customizableData) && customizableData[key],
 	);
 

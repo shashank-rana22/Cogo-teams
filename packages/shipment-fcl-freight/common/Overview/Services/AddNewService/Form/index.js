@@ -12,7 +12,7 @@ import Footer from '../Footer';
 import DestinationPortStep from './DestinationPortStep';
 import styles from './styles.module.css';
 
-const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
+const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager'];
 const FIRST_STEP = 1;
 const SECOND_STEP = 2;
 
@@ -156,7 +156,7 @@ function Form({
 						asyncKey="organization_users"
 						isClearable
 						valueKey="custom_key"
-						initialCall={false}
+						initialCall
 						placeholder="Select Organization User"
 						params={{
 							filters: {

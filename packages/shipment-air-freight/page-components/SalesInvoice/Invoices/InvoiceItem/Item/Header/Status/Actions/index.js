@@ -1,10 +1,13 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import CancelReplaceEInvoice from './CancelReplaceEInvoice';
 import EmailInfo from './Components/EmailInfo';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
@@ -20,6 +23,7 @@ const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: fals
 const ExchangeRateModal = dynamic(() => import('./ExchangeRateModal'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
+const CANCEL_OPTION_ALLOWED_STATUSES = ['IRN_GENERATED'];
 
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
 
@@ -29,7 +33,14 @@ function Actions({
 	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
+	bfInvoice = {},
 }) {
+	const { role_id } = useSelector(({ profile }) => ({
+		role_id: profile?.auth_role_data?.id,
+	}));
+
+	const geo = getGeoConstants();
+
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
@@ -38,6 +49,7 @@ function Actions({
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
+	const [showCancelModal, setShowCancelModal] = useState({ showCancel: false, showReplace: false });
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
@@ -51,6 +63,13 @@ function Actions({
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
 	}
+
+	const showCancelOptions = CANCEL_OPTION_ALLOWED_STATUSES.includes(bfInvoice.status) ? {
+		showCancel: (role_id === GLOBAL_CONSTANTS.uuid.vietnam_admin_id
+			? true : new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth())
+			&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice,
+		showReplace: geo.others.navigations.partner.bookings.invoicing.request_replace_invoice,
+	} : {};
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
@@ -80,14 +99,19 @@ function Actions({
 								size="sm"
 								onClick={() => setShowReview(true)}
 								themeType="accent"
-								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+								disabled={disableMarkAsReviewed || invoice?.is_eta_etd
+									|| shipment_data?.is_job_closed_financially}
 							>
 								Mark as Reviewed
 							</Button>
 						)}
 
 						{invoice?.status === 'reviewed' && (
-							<Button size="sm" onClick={() => setShowOTPModal(true)}>
+							<Button
+								size="sm"
+								onClick={() => setShowOTPModal(true)}
+								disabled={shipment_data?.is_job_closed_financially}
+							>
 								Send OTP for Approval
 							</Button>
 						)}
@@ -117,6 +141,8 @@ function Actions({
 						setShowChangePaymentMode={setShowChangePaymentMode}
 						setIsEditInvoice={setIsEditInvoice}
 						setExchangeRate={setExchangeRate}
+						showCancelOptions={showCancelOptions}
+						setShowCancelModal={setShowCancelModal}
 					/>
 				</div>
 			</div>
@@ -176,6 +202,17 @@ function Actions({
 					refetch={refetch}
 				/>
 			) : null}
+
+			{(showCancelModal?.showCancel || showCancelModal?.showReplace)
+			&& (
+				<CancelReplaceEInvoice
+					bfInvoice={bfInvoice}
+					invoice={invoice}
+					refetch={refetch}
+					showCancelModal={showCancelModal}
+					setShowCancelModal={setShowCancelModal}
+				/>
+			)}
 
 			{showExchangeRate ? (
 				<ExchangeRateModal

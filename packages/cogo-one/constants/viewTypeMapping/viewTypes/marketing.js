@@ -7,6 +7,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const MARKETING = {
+	chat_tabs_to_be_shown     : ['message', 'voice', 'outlook'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -18,6 +19,8 @@ const MARKETING = {
 		observer : ['closed_session'],
 		all      : ['chat_tags'],
 	},
+	stats_feedback_count          : [],
+	to_show_agent_activity_graph  : false,
 	extra_side_bar_navs_access    : ['spot_search'],
 	get_accesible_assign_buttons  : getSalesAgentButtons,
 	accesible_agent_types_query   : [where('agent_type', 'in', [...COMMON_AGENT_TYPES, 'marketing_event'])],
@@ -25,6 +28,7 @@ const MARKETING = {
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
+	group_agents_api_filter       : ['marketing'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                 : false,
@@ -45,6 +49,7 @@ const MARKETING = {
 		customer_org_users          : false,
 		convert_account_to_cp       : false,
 		show_shipment_reminder      : false,
+		show_lead_voice_calls       : false,
 	},
 };
 

@@ -1,14 +1,18 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useApproveAllocationDetails from '../../../../hooks/useApproveAllocationDetails';
 
 import styles from './styles.module.css';
 
 function ApproveDetails({ showApprove, setShowApprove, listRefetch }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		onApproveDetails,
 		loadingApproveDetails,
-	} = useApproveAllocationDetails({ setShowApprove, listRefetch });
+	} = useApproveAllocationDetails({ setShowApprove, listRefetch, t });
+
 	return (
 		<Modal
 			size="sm"
@@ -18,15 +22,15 @@ function ApproveDetails({ showApprove, setShowApprove, listRefetch }) {
 			showCloseIcon
 			onClose={() => setShowApprove(false)}
 		>
-			<Modal.Header title="Approve Details" />
+			<Modal.Header title={t('allocation:approve_details')} />
 
 			<Modal.Body>
 				<p className={styles.main_warning}>
-					Are you sure you want to approve all the details ?
+					{t('allocation:approve_details_phrase')}
 				</p>
 
 				<p className={styles.secondary_warning}>
-					Once the details are approved, stakeholders cannot be changed.
+					{t('allocation:approve_details_description')}
 				</p>
 			</Modal.Body>
 
@@ -37,7 +41,7 @@ function ApproveDetails({ showApprove, setShowApprove, listRefetch }) {
 					onClick={onApproveDetails}
 					disabled={loadingApproveDetails}
 				>
-					Yes, Approve
+					{t('allocation:yes_approve_button')}
 				</Button>
 			</Modal.Footer>
 		</Modal>

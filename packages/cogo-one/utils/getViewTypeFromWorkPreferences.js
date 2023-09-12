@@ -1,4 +1,4 @@
-const COGOVERSE_AGENT_MAPPINGS = {
+export const COGOVERSE_AGENT_MAPPINGS = {
 	supply: [
 		'supply',
 		'supply_nvocc',
@@ -27,9 +27,11 @@ const COGOVERSE_AGENT_MAPPINGS = {
 	supply_admin              : ['supply_admin'],
 	sales_admin               : ['sales_admin'],
 	shipment_specialist_admin : ['shipment_specialist_admin'],
+	cogoone_admin             : ['tech_support'],
+	credit_controller         : ['credit_controller'],
 };
 
-const DEFAULT_VIEW_TYPE = 'sales';
+const DEFAULT_VIEW_TYPE = 'default';
 
 const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds = '', agentType = '' }) => {
 	if (viewTypeFromRoleIds === 'cogoone_admin') {

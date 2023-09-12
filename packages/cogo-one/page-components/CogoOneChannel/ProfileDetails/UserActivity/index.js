@@ -3,7 +3,7 @@ import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogopo
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { USER_ACTIVITY_MAPPING } from '../../../../constants';
+import { FIREBASE_TABS, USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
@@ -14,7 +14,7 @@ import LoadingState from './LoadingState';
 import ShipmentLoadingState from './ShipmentActivities/LoadingState';
 import styles from './styles.module.css';
 
-const EmptyFunction = () => {};
+const emptyFunction = () => {};
 const DEFAULT_PAGE_COUNT = 1;
 
 function Loader({ activityTab = '' }) {
@@ -29,6 +29,8 @@ function UserActivities(props) {
 	const {
 		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
 		setRaiseTicketModal = () => {},
+		viewType = '',
+		setActiveTab = () => {},
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -41,18 +43,17 @@ function UserActivities(props) {
 		user_id:messageUserId,
 		lead_user_id:messageLeadUserId = null, id = '', sender = '',
 	} = formattedMessageData || {};
-
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
-	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
-	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
+	const user_id = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceCallUserId;
+	const lead_user_id = FIREBASE_TABS.includes(activeTab) ? messageLeadUserId : null;
 
 	const {
 		loading = false,
 		data = {},
 		filters,
-		setFilters = EmptyFunction,
-		fetchActivityLogs = EmptyFunction,
+		setFilters = emptyFunction,
+		fetchActivityLogs = emptyFunction,
 	} = useGetOmnichannelActivityLogs({
 		activeVoiceCard,
 		activeTab,
@@ -83,8 +84,8 @@ function UserActivities(props) {
 	const {
 		chatData = {},
 		dateFilters,
-		setDateFilters = EmptyFunction,
-		getUserChatSummary = EmptyFunction,
+		setDateFilters = emptyFunction,
+		getUserChatSummary = emptyFunction,
 	} = useListUserChatSummary({
 		mobile_no,
 		activeSubTab,
@@ -98,7 +99,6 @@ function UserActivities(props) {
 
 	const { list: timeLineList = [], total_count: agent_total_count } = timeLineData || {};
 	const { list: chatDataList = [], total_count: summary_total_count } = chatData || {};
-
 	let list = [];
 	let channel_total_count;
 
@@ -192,7 +192,7 @@ function UserActivities(props) {
 				</Tabs>
 			</div>
 
-			{(activeTab === 'message' && activityTab === 'communication') && (
+			{(FIREBASE_TABS.includes(activeTab) && activityTab === 'communication') && (
 				<div className={styles.communication_options}>
 					<Tabs
 						activeTab={activeSubTab}
@@ -243,7 +243,6 @@ function UserActivities(props) {
 							{!isEmpty(filters) && <div className={styles.filters_applied} />}
 						</div>
 					)}
-
 				</div>
 			)}
 			{(loading || timeLineLoading) ? (
@@ -257,6 +256,9 @@ function UserActivities(props) {
 					chatDataList={chatDataList}
 					timeLineList={timeLineList}
 					setRaiseTicketModal={setRaiseTicketModal}
+					viewType={viewType}
+					fetchActivityLogs={fetchActivityLogs}
+					setActiveTab={setActiveTab}
 				/>
 			)}
 

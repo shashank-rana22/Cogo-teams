@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import CONSTANTS from '../../../constants/constants';
@@ -17,10 +19,12 @@ function Item({
 	rules = {},
 	...props
 }) {
+	const { t } = useTranslation(['airRepository']);
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,
 		label,
+		t,
 	});
 
 	if (!type) {
@@ -40,16 +44,16 @@ function Item({
 						rules={rules}
 						control={control}
 					/>
-					<h4 className={styles.item_label}>
+					<div className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 						{label}
-					</h4>
+					</div>
 
 				</div>
 			) : (
 				<>
-					<h4 className={styles.item_label}>
+					<div className={cl`${styles.item_label} ${rules?.required ? styles.required_field : ''}`}>
 						{label}
-					</h4>
+					</div>
 					<Element
 						{...props}
 						rules={rules}

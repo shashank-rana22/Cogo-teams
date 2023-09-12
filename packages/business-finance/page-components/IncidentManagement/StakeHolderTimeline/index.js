@@ -1,47 +1,104 @@
+import { Popover, Pill, cl } from '@cogoport/components';
+import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const FIRST = 1;
 
-function StakeHolderTimeline({ timeline = [] }) {
-	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
-	return (
-		<div className={styles.container}>
-			{(stakeHolders || []).map((item, index) => (
-				<div className={styles.section} key={item.key}>
-					<div className={styles.inner_div}>
-						<div className={styles.circle}>{index + FIRST}</div>
-						{index < stakeHolders.length - FIRST ? (
-							<div
-								className={styles.line}
-							/>
-						) : null}
-					</div>
+const STATUS_COLOR_MAPPING = {
+	PENDING        : '#fbd1a6',
+	REJECTED       : '#f37166',
+	APPROVED       : '#c4dc91',
+	NOT_APPLICABLE : '#fef199',
+	REQUESTED      : '#fbd1a6',
+};
 
-					<div
-						className={styles.faded_text}
+function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
+	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
+	const { t } = useTranslation(['incidentManagement']);
+	return (
+		<div>
+			<div className={styles.heading}>
+				<h3>{t('incidentManagement:approval')}</h3>
+				{isStatusPill?.display ? (
+					<Pill
+						size="md"
+						style={{
+							background: STATUS_COLOR_MAPPING[isStatusPill?.value || 'PENDING'],
+						}}
+						className={styles.status_pill}
 					>
-						{item?.name || '-'}
-					</div>
-					<div
-						className={styles.faded_text}
-					>
-						{item?.email || '-'}
-					</div>
-					<div
-						className={styles.faded_text}
-					>
-						{item?.remarks || ' '}
-					</div>
-					<div
-						className={styles.status}
-					>
-						{item?.status || 'PENDING'}
-					</div>
-				</div>
-			))}
+						{isStatusPill?.value || t('incidentManagement:pending_status')}
+					</Pill>
+				) : null}
+			</div>
+
+			<div className={styles.container}>
+				{(stakeHolders || []).map((item, index) => {
+					const isStakeholderActive = !index || stakeHolders[index - FIRST]?.status === 'APPROVED';
+					return (
+						<div
+							className={cl`${styles.section} ${!isStakeholderActive ? styles.faded_text : ''}`}
+							key={item?.key}
+						>
+							<div className={styles.inner_div}>
+								{item?.status === 'APPROVED' ? (
+									<div
+										className={cl`${styles.circle} ${styles.approved_bg}`}
+									>
+										<IcMTick />
+									</div>
+								) : (
+									<div
+										className={cl`${styles.circle} 
+										${!isStakeholderActive ? styles.faded_bg : styles.active_bg}`}
+									>
+										{index + FIRST}
+									</div>
+								)}
+
+								{index < stakeHolders.length - FIRST ? (
+									<div
+										className={cl`${styles.line} 
+										${item?.status === 'APPROVED' ? styles.approved_bg : styles.faded_bg}`}
+									/>
+								) : null}
+							</div>
+
+							{item?.name || '-'}
+
+							<div className={styles.flex}>
+
+								{item?.email || '-'}
+
+								<Pill
+									size="sm"
+									style={{
+										background: STATUS_COLOR_MAPPING[item?.status || 'PENDING'],
+									}}
+									className={styles.level_status_pill}
+								>
+									{item?.status || t('incidentManagement:pending_status')}
+								</Pill>
+							</div>
+
+							<div className={styles.popover_section}>
+								<Popover
+									trigger="mouseenter"
+									placement="bottom"
+									render={item?.remarks || t('incidentManagement:no_remarks')}
+								>
+									<span>{t('incidentManagement:remarks')}</span>
+								</Popover>
+							</div>
+
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

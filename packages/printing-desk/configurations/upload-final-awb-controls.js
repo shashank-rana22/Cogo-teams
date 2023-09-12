@@ -1,10 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 
-const controls = [
+const controls = (t = () => {}) => [
 	{
 		name        : 'remark',
-		label       : 'Document Description (optional)',
+		label       : t('printingDesk:upload_final_awb_controls_doc_description_label'),
 		type        : 'textarea',
 		span        : 12,
 		maxLength   : 150,
@@ -15,7 +15,7 @@ const controls = [
 	},
 	{
 		name        : 'hawbCount',
-		label       : 'Numbers of HAWBs Included in Shipment',
+		label       : t('printingDesk:upload_final_awb_controls_hawb_inc_shipment_label'),
 		type        : 'number',
 		span        : 12,
 		maxLength   : 150,
@@ -27,10 +27,10 @@ const controls = [
 	},
 	{
 		name       : 'document',
-		label      : 'Document',
+		label      : t('printingDesk:upload_final_awb_controls_document_label'),
 		type       : 'file',
 		drag       : true,
-		span       : 8,
+		span       : 2,
 		maxSize    : GLOBAL_CONSTANTS.options.upload_file_size['1MB'],
 		uploadType : 'aws',
 		height     : '88',

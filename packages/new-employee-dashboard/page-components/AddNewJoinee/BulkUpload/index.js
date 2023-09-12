@@ -41,13 +41,12 @@ function BulkUpload({ setBulkUploadComponent = () => {} }) {
 								{...props}
 								setBulkUploadComponent={setBulkUploadComponent}
 								source={element}
+								activeTab={activeTab}
 							/>
 						</TabPanel>
 					))}
-
 				</Tabs>
 			</div>
-
 		</div>
 	);
 }

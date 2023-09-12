@@ -36,6 +36,7 @@ function InvoiceInfo({
 	setShowOTPModal = () => {},
 	setAskNullify = () => {},
 	salesInvoicesRefetch = () => {},
+	invoiceData = {},
 
 }) {
 	const {
@@ -167,6 +168,7 @@ function InvoiceInfo({
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						isAuthorized={isAuthorized}
 						disableAction={disableAction}
+						invoiceData={invoiceData}
 					/>
 				) : null}
 
@@ -185,6 +187,7 @@ function InvoiceInfo({
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
+						disabled={shipment_data?.is_job_closed}
 						onClick={() => setAskNullify(true)}
 					>
 						Request CN

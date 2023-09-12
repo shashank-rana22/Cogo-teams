@@ -1,4 +1,4 @@
-function asyncFieldsLocations2() {
+function asyncFieldsLocationsTwo() {
 	return {
 		valueKey    : 'id',
 		labelKey    : 'name',
@@ -100,6 +100,11 @@ function asyncFieldsOperators() {
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
 		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
 	};
 }
 
@@ -871,10 +876,102 @@ function asyncListResources() {
 		params       : {},
 	};
 }
+function asyncListLeadOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'lead_user_id',
+		endpoint    : 'list_lead_organization_users',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncListPricingZones() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_pricing_zones',
+		initialCall : true,
+		params      : {
+			page_limit : 100,
+			page       : 1,
+		},
+	};
+}
+
+function asyncListTruckTypes() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'truck_name',
+		endpoint    : 'list_trucks',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListUserShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'serial_id',
+		endpoint    : '/list_shipments_on_feedback',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncFieldsOrganizationOnCall() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : '/list_organizations_on_call',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+
+function asyncListCompanyLocations() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_company_location',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncListSaasHsCodes() {
+	return {
+		valueKey       : 'id',
+		labelKey       : 'description',
+		authkey        : 'get_saas_hs_code_list',
+		endpoint       : 'saas/hs-code/list',
+		defaultOptions : true,
+		searchByq      : true,
+		qFilterKey     : 'query',
+		microService   : 'business_finance',
+		defaultParams  : {},
+	};
+}
+
+function asyncListSpotSearchRateCardOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_spot_search_rate_card_operators',
+		initialCall : true,
+	};
+}
 
 export {
 	asyncFieldsLocations,
-	asyncFieldsLocations2,
+	asyncFieldsLocationsTwo as asyncFieldsLocations2,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
@@ -943,4 +1040,12 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
+	asyncListPricingZones,
+	asyncListTruckTypes,
+	asyncListLeadOrganizationUsers,
+	asyncListUserShipments,
+	asyncFieldsOrganizationOnCall,
+	asyncListSaasHsCodes,
+	asyncListSpotSearchRateCardOperators,
 };

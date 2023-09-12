@@ -2,7 +2,6 @@ import { Tabs, TabPanel, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
 import React, { useMemo, useState } from 'react';
 
@@ -61,9 +60,14 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<div className={styles.job_closed_container}>
+							<Pill className={styles.job_closed_pill} size="lg">
+								{shipment_data?.is_job_closed_financially
+									? 'Financially Closed' : 'Operationally Closed'}
+							</Pill>
+						</div>
+					)}
 
 					<ShipmentChat />
 				</div>
@@ -103,13 +107,6 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 							<Documents />
 						</TabPanel>
 
-						<TabPanel name="emails" title="Emails">
-							<ShipmentMails
-								source="cogo_rpa"
-								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={shipment_data?.serial_id?.toString() || ''}
-							/>
-						</TabPanel>
 					</Tabs>
 				</div>
 

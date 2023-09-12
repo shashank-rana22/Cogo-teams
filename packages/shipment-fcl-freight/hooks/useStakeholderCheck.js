@@ -11,7 +11,14 @@ export const useStakeholderCheck = () => {
 	}));
 
 	const stakeholderMap = [
-		{ role_ids: geo.uuid.kam_ids, stakeholder: 'booking_agent' },
+		{ role_ids: geo.uuid.kam_manager_ids, stakeholder: 'booking_agent_manager' },
+		{
+			role_ids: [...geo.uuid.kam_ids,
+				...geo.uuid.centralised_customer_support,
+				geo.uuid.finops,
+				geo.uuid.cogo_one_kyc, geo.uuid.finance_branch_accounts],
+			stakeholder: 'booking_agent',
+		},
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: [...geo.uuid.service_ops2_role_id, geo.uuid.supply_fulfillment], stakeholder: 'document_desk' },
@@ -26,10 +33,9 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.so1_so2_role_id, stakeholder: 'so1_so2_ops' },
 		{ role_ids: geo.uuid.igm_desk, stakeholder: 'igm_desk' },
 		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
-		{ role_ids: geo.uuid.finops_manager, stakeholder: 'finops_manager' },
+		{ role_ids: [geo.uuid.finops_manager, geo.uuid.cogo_auditor], stakeholder: 'finops_manager' },
 		{ role_ids: geo.uuid.document_control_manager, stakeholder: 'document_control_manager' },
 		{ role_ids: geo.uuid.document_control_lead, stakeholder: 'document_control_lead' },
-		{ role_ids: geo.uuid.centralised_customer_support, stakeholder: 'booking_agent' },
 		{ role_ids: geo.uuid.corporate_owner_id, stakeholder: 'corporate_owner' },
 		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 		{ role_ids: [...geo.uuid.finance_head, geo.uuid.finops_credit_controller], stakeholder: 'finance_superadmin' },

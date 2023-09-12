@@ -1,5 +1,6 @@
 import { asyncFieldsTicketTypes } from '@cogoport/forms';
 
+import { FIREBASE_TABS } from '../constants';
 import useGetAsyncTicketOptions from '../helpers/useGetAsyncTicketOptions';
 
 const TICKET_DATA_KEYWORDS_MAPPING = [
@@ -10,7 +11,10 @@ const TICKET_DATA_KEYWORDS_MAPPING = [
 const MINIMUM_VALUE = 0;
 
 const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
-	const loadOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
+	const loadOptions = useGetAsyncTicketOptions({
+		...asyncFieldsTicketTypes(),
+		params: { Audience: 'cogoone_demand' },
+	});
 
 	const { keyword = '', datakey = '', validation = '' } = TICKET_DATA_KEYWORDS_MAPPING
 		.find(({ keyword:matchKeyword }) => watchTicketType?.toLowerCase()?.includes(matchKeyword)) || {};
@@ -44,7 +48,7 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			placeholder : 'Type here...',
 			rows        : 5,
 			rules       : {
-				required: source !== 'message' && 'This is Required',
+				required: !FIREBASE_TABS.includes(source) ? 'This is Required' : '',
 			},
 		},
 		{

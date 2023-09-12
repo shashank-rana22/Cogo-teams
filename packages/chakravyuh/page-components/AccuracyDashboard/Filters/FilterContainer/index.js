@@ -32,6 +32,7 @@ function FilterContainer({
 		controls,
 		containerType: values?.container_type,
 		setGlobalFilters,
+		globalFilters,
 	});
 
 	useEffect(() => {
@@ -51,7 +52,7 @@ function FilterContainer({
 	};
 
 	const onSumbit = () => {
-		setGlobalFilters((prev) => ({ ...prev, ...values, parent_mode: values?.mode }));
+		setGlobalFilters((prev) => ({ ...prev, ...values, parent_mode: values?.parent_mode }));
 		setVisible(false);
 	};
 

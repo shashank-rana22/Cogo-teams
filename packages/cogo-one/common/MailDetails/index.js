@@ -13,7 +13,7 @@ import FilterComponent from './FilterComponent';
 import ListMails from './ListMails';
 import styles from './styles.module.css';
 
-function MailDetails({
+function OutlookMails({
 	activeFolder = '',
 	setActiveMail = () => {},
 	activeMail = {},
@@ -106,10 +106,11 @@ function MailDetails({
 					activeMail={activeMail}
 					handleScroll={handleScroll}
 					setActiveMail={setActiveMail}
+					searchQuery={searchQuery}
 				/>
 			)}
 		</div>
 	);
 }
 
-export default MailDetails;
+export default OutlookMails;

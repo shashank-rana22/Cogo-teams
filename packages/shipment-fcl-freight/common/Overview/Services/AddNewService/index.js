@@ -50,7 +50,8 @@ function AddNewService({
 	let canUpsellForTradeType = true;
 
 	if (is_end_to_end) {
-		if (activeStakeholder === 'booking_agent' && ((primary_service?.trade_type !== upsellableService?.trade_type
+		if (['booking_agent', 'booking_agent_manager'].includes(activeStakeholder)
+		&& ((primary_service?.trade_type !== upsellableService?.trade_type
 			&& INCO_TERM_CANNOT_UPSELL.includes(primary_service?.inco_term))
 		)) {
 			canUpsellForTradeType = false;
@@ -83,15 +84,15 @@ function AddNewService({
 		<>
 			{ showAddServiceBox
 				? (
-					<div
+					<button
 						className={styles.container}
 						onClick={closeModal}
-						role="button"
 						tabIndex={0}
+						disabled={shipmentData?.is_job_closed}
 					>
 						<div className={styles.text}>{upsellableService.display_label}</div>
 						<IcMPlus />
-					</div>
+					</button>
 				) : null}
 
 			{upsellModal ? (

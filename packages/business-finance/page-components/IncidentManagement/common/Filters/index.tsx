@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { FilterProps } from '../interface';
@@ -6,6 +7,8 @@ import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 import { getElements } from './utils/getElements';
 import { getFilterControls } from './utils/getFilterControls';
+
+const DEFAULT_PAGE = 1;
 
 interface Props {
 	isSettlementExecutive:boolean
@@ -21,8 +24,8 @@ function Filters({
 	onChangeFilters = (v) => v,
 }: Props) {
 	const { search } = filters || {};
-
-	const filterControls = getFilterControls({ activeTab, isSettlementExecutive });
+	const { t } = useTranslation(['incidentManagement']);
+	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t });
 
 	return (
 		<section className={styles.container} id="filters">
@@ -30,16 +33,23 @@ function Filters({
 				{filterControls.map((control) => {
 					const Element = getElements(control.type);
 					return (
-						<div className={styles.element}>
+						<div className={styles.element} key={control.name}>
 							<Element
 								key={control.name}
 								className={styles.select}
 								value={filters[control.name]}
-								onChange={(value) => onChangeFilters({
-									...filters,
-									[control.name] : value || undefined,
-									page           : 1,
-								})}
+								onChange={(value) => {
+									let val = value;
+									if (control?.type === 'toggle') {
+										val = value?.target?.checked;
+									}
+
+									onChangeFilters({
+										...filters,
+										[control.name] : val || undefined,
+										page           : DEFAULT_PAGE,
+									});
+								}}
 								{...control}
 							/>
 						</div>
@@ -53,7 +63,7 @@ function Filters({
 					search: value || undefined,
 				})}
 				size="md"
-				placeholder="Search by Invoice/Proforma Number "
+				placeholder={t('incidentManagement:invoice_proforma_search')}
 			/>
 		</section>
 	);

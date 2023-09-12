@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -28,7 +29,8 @@ function Status({
 	setAskNullify = () => {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const isAuthorized = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const bfInvoice = invoicesList?.filter(
@@ -58,8 +60,12 @@ function Status({
 		});
 	};
 
+	const geo = getGeoConstants();
+
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
+		&& geo.others.navigations.partner.bookings.invoicing.request_credit_note
+		&& !shipment_data?.is_job_closed && !invoice?.processing;
 
 	return (
 		<div className={styles.invoice_container}>
@@ -70,7 +76,7 @@ function Status({
 						</div>
 				) : null}
 
-			{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
+			{!invoice?.is_revoked && invoice?.status !== 'finance_rejected' && (
 				<Actions
 					invoice={invoice}
 					refetch={refetchAferApiCall}
@@ -79,13 +85,15 @@ function Status({
 					isIRNGenerated={isIRNGenerated}
 					bfInvoice={bfInvoice}
 				/>
-			) : null}
+			)}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+					&& !invoice?.processing ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
+							disabled={shipment_data?.is_job_closed}
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
@@ -96,6 +104,7 @@ function Status({
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
+					disabled={shipment_data?.is_job_closed}
 					onClick={() => setAskNullify(true)}
 				>
 					Request CN

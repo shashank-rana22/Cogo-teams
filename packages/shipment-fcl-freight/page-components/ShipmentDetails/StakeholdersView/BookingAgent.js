@@ -1,15 +1,15 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
 import React, { useMemo, useState } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import RolloverDetails from '../../../common/RolloverDetails';
@@ -65,9 +65,12 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<JobStatus
+							shipment_data={shipment_data}
+							activeStakeholder={activeStakeholder}
+						/>
+					)}
 
 					<ShipmentChat />
 				</div>
@@ -107,14 +110,6 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 							<Documents />
 						</TabPanel>
 
-						<TabPanel name="emails" title="Emails">
-							<ShipmentMails
-								source="cogo_rpa"
-								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={shipment_data?.serial_id?.toString() || ''}
-							/>
-						</TabPanel>
-
 						<TabPanel name="tracking" title="Tracking">
 							<Tracking shipmentData={shipment_data} />
 						</TabPanel>
@@ -124,6 +119,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 				{!isEmpty(rollover_containers) ? (
 					<RolloverActionModal rollover_containers={rollover_containers} />
 				) : null}
+
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);

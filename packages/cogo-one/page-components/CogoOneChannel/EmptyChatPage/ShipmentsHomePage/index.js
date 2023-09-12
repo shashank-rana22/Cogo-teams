@@ -1,12 +1,16 @@
-import { Pagination, Input, Select } from '@cogoport/components';
+import { Pagination, Input, Select, cl } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
+import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
+import ShipmentChatModal from '../../../../common/ShipmentChatModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
+import getFormatedPath from '../../../../utils/getFormatedPath';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
 
 import BookingNoteModal from './BookingNoteModal';
@@ -25,6 +29,14 @@ function ListShipmentCards({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setShowBookingNote = () => {},
+	setShowShipmentChat = () => {},
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
+	showAddPrimaryUserButton = false,
+	mailProps = {},
+	params = {},
+	range = '',
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -44,22 +56,38 @@ function ListShipmentCards({
 		(shipmentItem) => (
 			<ShipmentCard
 				setActiveTab={setActiveTab}
-				key={shipmentItem?.sid}
+				key={shipmentItem?.id}
 				shipmentItem={shipmentItem}
 				showPocDetails={showPocDetails}
 				setShowPocDetails={setShowPocDetails}
 				setShowBookingNote={setShowBookingNote}
+				setShowShipmentChat={setShowShipmentChat}
+				setShowPopover={setShowPopover}
+				showPopover={showPopover}
+				setShowPocModal={setShowPocModal}
+				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				mailProps={mailProps}
+				params={params}
+				range={range}
 			/>
 		),
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {} }) {
-	const [showPocDetails, setShowPocDetails] = useState({});
-	const [range, setRange] = useState('current_month');
-	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
+function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
+	const { queryParams = {} } = getFormatedPath();
 
+	const [showPocDetails, setShowPocDetails] = useState({});
+	const [range, setRange] = useState(queryParams?.range || 'today');
+	const [showShipmentChat, setShowShipmentChat] = useState({});
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
+	const [showPopover, setShowPopover] = useState('');
+	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
+
+	const defaultFilters = getDefaultFilters({ range });
+
+	const [dateFilters, setDateFilters] = useState({ ...defaultFilters });
+
 	const {
 		listLoading,
 		shipmentsData,
@@ -75,6 +103,10 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 		total_count = DEFAULT_SHIPMENTS_COUNT,
 	} = shipmentsData || {};
 
+	const contextValues = useMemo(() => ({
+		shipment_data: showShipmentChat,
+	}), [showShipmentChat]);
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -85,7 +117,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 					<div className={styles.filter_container}>
 						<Input
 							size="sm"
-							value={params?.value}
+							value={params?.query}
 							onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
 							prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
 							placeholder="Search SID..."
@@ -100,12 +132,15 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 							options={SHIPMENT_TYPE_OPTIONS}
 							isClearable
 						/>
-						<div className={styles.custom_date_filter}>
+						<div className={cl`${styles.custom_date_filter}
+						${params?.query ? styles.not_applicable : ''}`}
+						>
 							<Filter
 								setDateFilters={setDateFilters}
 								range={range}
 								setRange={setRange}
 							/>
+							{params?.query ? <div className={styles.overlay} /> : null }
 						</div>
 
 					</div>
@@ -120,6 +155,14 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 								showPocDetails={showPocDetails}
 								setShowPocDetails={setShowPocDetails}
 								setShowBookingNote={setShowBookingNote}
+								setShowShipmentChat={setShowShipmentChat}
+								setShowPopover={setShowPopover}
+								showPopover={showPopover}
+								setShowPocModal={setShowPocModal}
+								showAddPrimaryUserButton={showAddPrimaryUserButton}
+								mailProps={mailProps}
+								params={params}
+								range={range}
 							/>
 						)}
 				</div>
@@ -139,6 +182,23 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 			</div>
 			{showBookingNote?.show
 				? <BookingNoteModal setShowBookingNote={setShowBookingNote} showBookingNote={showBookingNote} /> : null}
+
+			<ShipmentDetailContext.Provider value={contextValues}>
+				<ShipmentChatModal
+					showShipmentChat={showShipmentChat}
+					setShowShipmentChat={setShowShipmentChat}
+				/>
+			</ShipmentDetailContext.Provider>
+
+			{showPocModal?.show
+				? (
+					<AddPrimaryPocModal
+						showPocModal={showPocModal}
+						setShowPocModal={setShowPocModal}
+						getShipmentsList={handlePageChange}
+						setActiveTab={setActiveTab}
+					/>
+				) : null}
 		</>
 	);
 }

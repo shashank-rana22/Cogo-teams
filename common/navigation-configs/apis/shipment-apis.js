@@ -1578,6 +1578,10 @@ const apis = [
 		access_type : 'private',
 	},
 	{
+		api         : 'post_air_coe_warehouse_management_schedule',
+		access_type : 'private',
+	},
+	{
 		api          : 'list_contracts',
 		access_type  : 'private',
 		service_name : 'contract',
@@ -1635,7 +1639,7 @@ const apis = [
 	{
 		api          : 'get_ftl_freight_rate_min_max_validity_dates',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'ftl_freight_rate',
 	},
 	{
 		api          : 'list_shipment_consolidated_purchase_invoices',
@@ -1725,12 +1729,32 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_shipments_for_report',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_report_schedule',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
 		api          : 'create_shipment_terminal_service_task',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_report_url',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1753,6 +1777,25 @@ const apis = [
 		api          : 'list_trade_party_shipments',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'send_invoice_combination_to_finance',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_trucks',
+		access_type  : 'public',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'incident',
+		access_type  : 'private',
+		service_name : 'incident-management',
+	},
+	{
+		api         : 'post_purchase_advance_document',
+		access_type : 'private',
 	},
 ];
 

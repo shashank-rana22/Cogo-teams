@@ -1,9 +1,11 @@
 import { ButtonIcon } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
 import { finalAwbFields } from '../../configurations/final-awb-fields';
+import HawbList from '../HawbList';
 
 import UploadModal from './UploadModal';
 
@@ -16,7 +18,8 @@ function FinalAwb({
 	setEdit = () => {},
 	listAPI = () => {},
 }) {
-	const { fields } = finalAwbFields;
+	const { t } = useTranslation(['printingDesk']);
+	const fields = finalAwbFields({ t });
 	const [showUpload, setShowUpload] = useState({});
 
 	const functions = {
@@ -42,6 +45,7 @@ function FinalAwb({
 				loading={loading}
 				page={page}
 				setPage={setPage}
+				Child={HawbList}
 				functions={functions}
 			/>
 			{showUpload && (

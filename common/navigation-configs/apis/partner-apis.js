@@ -745,6 +745,22 @@ const partner = {
 			feature      : 'credit',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'demand_crm_new',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1749,6 +1765,12 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_executive_summary',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_organization_communication_logs_by_view',
 			access_type  : 'private',
 			feature      : 'demand_crm',
@@ -1980,6 +2002,22 @@ const partner = {
 			api          : 'send_checkout_for_approval',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'demand_crm',
+		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'get_transacting_organization_shipment_data',
@@ -3686,6 +3724,11 @@ const partner = {
 			feature      : 'rate_feedbacks',
 		},
 		{
+			api          : 'list_spot_search_stats',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
+		{
 			api          : 'update_checkout_risk_category',
 			access_type  : 'private',
 			service_name : 'checkout',
@@ -3936,6 +3979,26 @@ const partner = {
 			service_name : 'air_freight_rate',
 		},
 		{
+			api          : 'list_haulage_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_haulage_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -3959,6 +4022,16 @@ const partner = {
 			api          : 'update_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'update_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -3989,6 +4062,16 @@ const partner = {
 			api          : 'create_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'create_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -4749,6 +4832,41 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
+		{
+			api          : 'generate_csv_file_url',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_fcl_freight_rate_job',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_air_freight_rate_job',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'list_fcl_freight_rate_jobs',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_jobs',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'get_fcl_freight_rate_job_stats',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_job_stats',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 	],
 	operations_dashboard: [
 		{
@@ -4944,6 +5062,26 @@ const partner = {
 			service_name : 'fcl_customs_rate',
 		},
 		{
+			api          : 'list_haulage_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_haulage_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_trailer_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4967,6 +5105,16 @@ const partner = {
 			api          : 'update_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'update_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -5017,6 +5165,16 @@ const partner = {
 			api          : 'create_fcl_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'create_haulage_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_trailer_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -7669,6 +7827,18 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_outstanding_by_supplier_v2',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_outstanding_entity_level_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -7718,6 +7888,11 @@ const partner = {
 			access_type : 'private',
 			module      : 'Outstanding',
 			feature     : 'Outstanding',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_purchase_bills_by_id_bill_time_line',
@@ -8388,6 +8563,16 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_dunning_emails',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'list_organization_communication_logs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'get_organization_zone_via_org_id',
 			access_type : 'private',
 		},
@@ -8691,6 +8876,11 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api          : 'create_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'get_sales_report_download_outstanding_list',
 			access_type : 'private',
 			module      : 'outstanding',
@@ -8752,6 +8942,71 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api         : 'get_sage_ar_outstanding_stat',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api          : 'get_kam_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_service_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_data_bifurcation',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'list_outstanding_invoices',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+
+		},
+		{
+			api          : 'get_cc_wise_outstanding_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'unified_dashboard',
+
+		},
+		{
+			api          : 'get_cc_communication_stats',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
+			api         : 'get_payments_outstanding_overall_customer_outstanding',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
 	],
 	compliance: [
 		{
@@ -9640,7 +9895,11 @@ const partner = {
 		},
 	],
 	utm_parameters: [
-
+		{
+			api          : 'create_utm_link',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
 		{
 			api          : 'create_utm',
 			access_type  : 'private',
@@ -12262,6 +12521,7 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+
 	],
 	cogo_fx: [
 		{
@@ -12466,6 +12726,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'bulk_update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	ground_ops: [
 		{
@@ -12553,6 +12818,21 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'create_lead_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'create_lead_user',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'send_booking_note_on_whatsapp',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12609,6 +12889,11 @@ const partner = {
 		},
 		{
 			api          : 'list_user_call_details',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_voice_call_record',
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
@@ -12968,14 +13253,94 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'get_saas_subscription_profile',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'saas_get_active_plan_checkout_details',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_subscription_payment_link',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'create_subscription_generate_invoice',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
+			api         : 'list_chat_channels',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+		},
+		{
+			api         : 'create_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_chat_channel',
+			access_type : 'private',
+		},
+		{
 			api          : 'sync_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'list_shipment_trade_partners',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_primary_poc',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'onboard_lead_organization',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
 		},
 	],
 	analytics_dashboard: [
@@ -13055,6 +13420,11 @@ const partner = {
 			api          : 'post_tickets_category',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'delete_tickets_category',
@@ -13484,6 +13854,67 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	warehouse_management: [
+		{
+			api         : 'get_air_coe_warehouse_management_list_configurations',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_air_coe_warehouse_management_configuration',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_list_schedules',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_schedule',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_schedule',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_app_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_list_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
+	],
+	warehouse_app: [
+		{
+			api         : 'get_air_coe_warehouse_app_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_app_cargo_scan',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_partner_user_expertises',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
 	printing_desk: [
 		{
 			api         : 'post_air_coe_documents',
@@ -13558,6 +13989,48 @@ const partner = {
 			api          : 'list_rate_charge_codes',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+	],
+	demand_forecast: [
+		{
+			api          : 'list_rolling_forecast_fcl_freight_clusters',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_port_pairs',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_data',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_suppliers',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_email_preview',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'list_pricing_zones',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'send_rolling_forecast_requirement_email',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'get_rolling_forecast_fcl_freight_clusters',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
 		},
 	],
 };

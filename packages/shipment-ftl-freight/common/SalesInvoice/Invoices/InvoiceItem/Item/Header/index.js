@@ -2,6 +2,7 @@ import { cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -36,17 +37,18 @@ function Header({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 }) {
-	const [open, setOpen] = useState(false);
-	const [askNullify, setAskNullify] = useState(false);
-	const [showReview, setShowReview] = useState(false);
-	const [showOtpModal, setShowOTPModal] = useState(false);
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+	const isAuthorized = [GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id,
+		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id].includes(user_data?.user?.id);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 		&& invoice.status === 'pending';
 
-	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const [open, setOpen] = useState(false);
+	const [askNullify, setAskNullify] = useState(false);
+	const [showReview, setShowReview] = useState(false);
+	const [showOtpModal, setShowOTPModal] = useState(false);
 
 	const invoicePartyDetailsRef = useRef(null);
 
@@ -70,8 +72,11 @@ function Header({
 
 	if (invoiceStatus === 'POSTED') { invoiceStatus = 'IRN GENERATED';	}
 
+	const geo = getGeoConstants();
+
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized)
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
 
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
@@ -106,10 +111,8 @@ function Header({
 
 	const isTaxMechanismGoodsTransportAgency = tax_mechanism === 'goods_transport_agency';
 
-	const deliveryDatePresent = shipment_data.all_services?.[GLOBAL_CONSTANTS.zeroth_index]?.delivery_date;
-
-	disableMarkAsReviewed = !isEmptyInvoicesList && !isShipmentCompleted
-		&& !(deliveryDatePresent || isTaxMechanismGoodsTransportAgency);
+	disableMarkAsReviewed = isEmptyInvoicesList && isShipmentCompleted
+		&& !(isTaxMechanismGoodsTransportAgency);
 
 	return (
 		<div className={styles.container}>
@@ -117,14 +120,14 @@ function Header({
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
-						&nbsp;
+						{' '}
 						{startCase(invoice?.source)}
 					</div>
 				) : null}
 				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
 						Applicable State -
-						&nbsp;
+						{' '}
 						{startCase(invoice?.exchange_rate_state)}
 					</div>
 				) : null}
@@ -172,6 +175,7 @@ function Header({
 					setShowOTPModal={setShowOTPModal}
 					setAskNullify={setAskNullify}
 					salesInvoicesRefetch={salesInvoicesRefetch}
+					invoiceData={invoiceData}
 				/>
 
 				<ClickableDiv

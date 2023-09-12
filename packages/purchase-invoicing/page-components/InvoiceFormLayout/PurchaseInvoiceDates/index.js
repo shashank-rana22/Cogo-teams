@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { DatepickerController, InputController, useFieldArray, SelectController } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -10,11 +10,13 @@ import { EMPTY_EXCHANGE_RATES } from '../../../constants';
 import styles from './styles.module.css';
 
 function PurchaseInvoiceDates({
-	control,
+	control = {},
 	invoiceCurrency = '',
 	errors = {},
 	purchaseInvoiceValues = {},
+	formValues = {},
 }) {
+	const { invoice_date = new Date() } = formValues || {};
 	const geo = getGeoConstants();
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -50,7 +52,8 @@ function PurchaseInvoiceDates({
 						name="due_date"
 						placeholder="Select Invoice Due Date"
 						rules={{ required: true }}
-						minDate={new Date()}
+						isPreviousDaysAllowed
+						minDate={invoice_date || new Date()}
 						value={(purchaseInvoiceValues?.due_date || purchaseInvoiceValues?.invoice_due_date)
 							? new Date(purchaseInvoiceValues?.due_date
 								|| purchaseInvoiceValues?.invoice_due_date) : null}
@@ -61,7 +64,7 @@ function PurchaseInvoiceDates({
 						</div>
 					) : null}
 				</div>
-				<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
+				<div className={cl`${styles.selectcontainer} ${styles.marginleft}`}>
 					<div className={styles.label}>Enter Invoice Currency</div>
 					<SelectController
 						control={control}
@@ -96,7 +99,7 @@ function PurchaseInvoiceDates({
 									</div>
 								) : null}
 							</div>
-							<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
+							<div className={cl`${styles.selectcontainer} ${styles.marginleft}`}>
 								<div className={styles.label}>To</div>
 								<SelectController
 									control={control}
@@ -114,7 +117,7 @@ function PurchaseInvoiceDates({
 									</div>
 								) : null}
 							</div>
-							<div className={`${styles.inputcontainer} ${styles.marginleft}`}>
+							<div className={cl`${styles.inputcontainer} ${styles.marginleft}`}>
 								<div className={styles.label}>Rate</div>
 								<InputController
 									name={`exchange_rate.${index}.rate`}

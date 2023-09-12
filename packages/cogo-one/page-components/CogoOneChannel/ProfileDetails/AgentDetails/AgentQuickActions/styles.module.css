@@ -20,3 +20,7 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.feedback_button {
+	margin-top: 4px;
+}

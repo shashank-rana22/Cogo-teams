@@ -2,22 +2,23 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import FormatData from '../utils/formatData';
+import { FIREBASE_TABS } from '../constants';
+import getFormatData from '../utils/getFormatData';
 
 const useGetOmnichannelCustomerInsights = ({
 	activeMessageCard = {},
 	activeVoiceCard = {},
-	activeTab,
+	activeTab = '',
 	serviceType = '',
-	customerId,
-	sender,
+	customerId = '',
+	sender = '',
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_customer_insights',
 		method : 'get',
 	}, { manual: true });
 
-	const { userId = '', userMobile = '' } = FormatData({
+	const { userId = '', userMobile = '' } = getFormatData({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
@@ -30,7 +31,8 @@ const useGetOmnichannelCustomerInsights = ({
 					user_id       : !isEmpty(userId) ? userId : undefined,
 					mobile_number : isEmpty(userId) ? userMobile : undefined,
 					service       : serviceType,
-					channel       : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
+					channel       : (FIREBASE_TABS.includes(activeTab)
+						? activeMessageCard : activeVoiceCard)?.channel_type || 'message',
 					sender,
 				},
 			});

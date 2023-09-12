@@ -15,10 +15,17 @@ function KebabContent({
 	invoiceData = {},
 	isIRNGenerated = false,
 	setShowModal = () => {},
-	showCancel = false,
+	showCancelOptions = {},
 }) {
+	const ZERO = 0;
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
+
+	const notInsuranceService = isEmpty(
+		(invoice?.services || [])?.find(
+			(s) => s?.service_type === 'cargo_insurance_service',
+		),
+	);
 
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
@@ -34,27 +41,45 @@ function KebabContent({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
+		&& !invoice?.is_igst
+		&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO))
+		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
+
+	const handleClick = (modalName) => {
+		setShowModal(modalName);
+		setShow(false);
+	};
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
-					&& invoice.status !== 'revoked' ? (
+					&& invoice.status !== 'revoked'
+					&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO)
+					&& notInsuranceService ? (
 						<Popover
 							interactive
 							placement="bottom"
 							visible={show}
 							className={styles.popover_content}
-							content={(
+							content={!(invoice?.processing) ? (
 								<PopoverContent
 									setShow={setShow}
 									setShowModal={setShowModal}
 									invoice={invoice}
 									commonActions={commonActions}
 									editInvoicesVisiblity={editInvoicesVisiblity}
-									showCancel={showCancel}
+									showCancelOptions={showCancelOptions}
 								/>
+							) : editInvoicesVisiblity && (
+								<Button
+									themeType="tertiary"
+									className={styles.text}
+									onClick={() => handleClick('edit_invoice')}
+								>
+									Edit Invoice
+								</Button>
 							)}
 							onClickOutside={() => setShow(false)}
 						>

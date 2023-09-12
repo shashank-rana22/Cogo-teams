@@ -1,21 +1,30 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-const useGetRfqSearches = ({ rfqId } = {}) => {
+const CONSTANT_ONE = 1;
+const useGetRfqSearches = ({ rfqId, relevantToUser } = {}) => {
+	const { user_profile } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
+
 	const [list, setList] = useState({
 		data       : [],
 		total      : 0,
 		total_page : 0,
 	});
-	const [page, setPage] = useState(1);
-
+	const [page, setPage] = useState(CONSTANT_ONE);
 	const [{ loading }, refetch] = useRequest({
 		method : 'GET',
 		url    : '/list_rfq_searches',
 		params : {
-			filters               : { rfq_id: rfqId, is_under_negotiation: true },
+			filters: {
+				rfq_id                   : rfqId,
+				is_under_negotiation     : true,
+				relevant_supply_agent_id : relevantToUser ? user_profile?.user?.id : undefined,
+			},
 			page,
-			service_data_required : true,
+			service_data_required: true,
 		},
 	}, { manual: false });
 
@@ -40,7 +49,7 @@ const useGetRfqSearches = ({ rfqId } = {}) => {
 					}));
 			});
 		// eslint-disable-next-line
-	}, [page]);
+	}, [page,relevantToUser]);
 
 	return {
 		loading,

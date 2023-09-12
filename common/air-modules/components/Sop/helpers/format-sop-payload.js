@@ -1,11 +1,13 @@
-const EMPTY_LIST_LENGTH = 0;
+import { isEmpty } from '@cogoport/utils';
 
 const getSopPayload = (
-	formValues,
-	trade_partners_details,
-	shipment_data,
-	primary_service,
+	formValues = {},
+	trade_partners_details = {},
+	shipment_data = {},
+	primary_service = {},
 ) => {
+	const { shipment_id = '' } = primary_service || {};
+
 	const conditions = {
 		shipper: {
 			data : trade_partners_details?.shipper?.trade_party_id,
@@ -42,6 +44,7 @@ const getSopPayload = (
 			key: 'country_id',
 		},
 	};
+
 	const SOP_INSTRUCTIONS = [];
 	(formValues?.instruction_items || []).forEach((element) => {
 		const addable = element?.instruction || element?.file?.length;
@@ -61,10 +64,11 @@ const getSopPayload = (
 			SOP_INSTRUCTIONS.push(instruction);
 		}
 	});
+
 	const payload = {
-		organization_id : shipment_data?.importer_exporter_id,
-		heading         : formValues?.heading,
-		SOP_INSTRUCTIONS,
+		organization_id  : shipment_data?.importer_exporter_id,
+		heading          : formValues?.heading,
+		sop_instructions : SOP_INSTRUCTIONS,
 	};
 
 	const SOP_CONDITIONS = {};
@@ -74,13 +78,13 @@ const getSopPayload = (
 		}
 	});
 	const shipmentPayload = { ...payload };
-	shipmentPayload.shipment_id = shipment_data?.shipment_id;
+	shipmentPayload.shipment_id = shipment_id || shipment_data?.shipment_id;
 
 	const booking_party_payload = { ...payload, ...SOP_CONDITIONS };
 	return {
 		shipment_payload : shipmentPayload,
 		booking_party_payload,
-		status           : SOP_INSTRUCTIONS?.length > EMPTY_LIST_LENGTH,
+		status           : !isEmpty(SOP_INSTRUCTIONS),
 	};
 };
 export default getSopPayload;

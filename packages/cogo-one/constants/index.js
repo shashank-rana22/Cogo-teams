@@ -7,8 +7,18 @@ import {
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
 	IcMVideoCall, IcMVideoCallMute,
+	IcMUp,
+	IcMDown,
+	IcCVerySad,
+	IcCHappy,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+
+export const ENABLE_SIDE_BAR = ['whatsapp', 'platform_chat', 'zalo', 'telegram', 'voice_call', 'video_call'];
+
+export const ENABLE_EXPAND_SIDE_BAR = ['email'];
+
+export const FIREBASE_TABS = ['message', 'firebase_emails'];
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
@@ -356,6 +366,18 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const RATING_ELEMENTS = {
+	happy: {
+		image : <IcCHappy width={30} height={30} />,
+		arrow : <IcMUp fill="#ee3425" />,
+
+	},
+	sad: {
+		image : <IcCVerySad width={30} height={30} style={{ marginTop: '18px' }} />,
+		arrow : <IcMDown fill="#ee3425" />,
+	},
+};
 
 export const OFFLINE_REASONS_OPTIONS = [
 	{

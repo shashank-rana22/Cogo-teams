@@ -2,6 +2,7 @@ import { Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import Spinner from '../../common/Spinner';
@@ -11,6 +12,8 @@ import styles from './styles.module.css';
 import Title from './Title';
 
 function KraModal({ show = false, onHide = () => {}, employeeId = '', ratingCycle = '' }) {
+	const { t } = useTranslation(['managerDashboard']);
+
 	const {
 		data = [],
 		loading,
@@ -41,26 +44,26 @@ function KraModal({ show = false, onHide = () => {}, employeeId = '', ratingCycl
 								<div className={styles.modal_body_container}>
 									{isEmpty(list) ? (
 										<div className={styles.kra_empty_section}>
-											KRA Details Not Found
+											{t('managerDashboard:kra_details_not_found')}
 										</div>
 									) : (
 										<div className={styles.left_section}>
 											{(list || []).map((item) => (
 												<div className={styles.sub_section} key={item.kra_id}>
 													<div className={styles.label}>
-														KRA Name:
+														{t('managerDashboard:kra_name')}
 														{' '}
 														{item.kra_name}
 													</div>
 
 													<div className={styles.label}>
-														KRA Achieved:
+														{t('managerDashboard:kra_achieved')}
 														{' '}
 														{item.achieved_rating}
 													</div>
 
 													<div className={styles.label}>
-														Weightage:
+														{t('managerDashboard:weightage')}
 														{' '}
 														{item.weightage}
 													</div>
@@ -73,37 +76,43 @@ function KraModal({ show = false, onHide = () => {}, employeeId = '', ratingCycl
 										<div className={styles.overall_rating}>
 											<div className={styles.rating}>
 												<div className={styles.average_overall_rating}>
-													Average Overall Rating:
+													{t('managerDashboard:avg_overall_rating')}
 													{' '}
 													{data?.average_overall_rating}
 												</div>
 												<div className={styles.rating_obtained}>
-													Rating:
+													{t('managerDashboard:rating')}
 													{' '}
 													{data?.average_overall_rating}
 												</div>
 											</div>
 											<div className={styles.modification_history}>
-												<div className={styles.fw}>Modification History:</div>
+												<div className={styles.fw}>
+													{t('managerDashboard:modification_history')}
+												</div>
 												{ !isEmpty(modification_history)
 													? modification_history?.map((item) => (
 														<div className={styles.modification} key={item.id}>
 															<div>
-																Modified By:
+																{t('managerDashboard:modified_by')}
 																{' '}
 																{item.manager_name}
-																{' from '}
+																{' '}
+																{t('managerDashboard:from_label')}
+																{' '}
 																{item.old_rating}
-																{' to '}
+																{' '}
+																{t('managerDashboard:to_label')}
+																{' '}
 																{item.new_rating}
 															</div>
 															<div>
-																Comments:
+																{t('managerDashboard:comments')}
 																{' '}
 																{item.comments}
 															</div>
 															<div>
-																Modified On:
+																{t('managerDashboard:modified_on')}
 																{' '}
 																{item.modified_on}
 																{formatDate({
@@ -119,7 +128,7 @@ function KraModal({ show = false, onHide = () => {}, employeeId = '', ratingCycl
 													))
 													: (
 														<div className={styles.empty_history}>
-															Modification History Not Found
+															{t('managerDashboard:modification_history_not_found')}
 														</div>
 													)}
 											</div>

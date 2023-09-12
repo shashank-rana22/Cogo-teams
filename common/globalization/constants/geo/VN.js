@@ -51,6 +51,7 @@ export default {
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		cogo_auditor_id                  : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
@@ -97,6 +98,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		cogo_auditor               : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -115,12 +117,14 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'85bb3009-8cb5-453f-b87e-445d32c09635', // SME Manager - Vietnam
 			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
 			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
 			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
 			'5f79d531-50e0-4843-995f-71057e659e0f',
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
 			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'3aeb912f-fc98-471a-ad90-6ac1388e32cf', // CP-Head Vietnam
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
@@ -188,8 +192,13 @@ export default {
 			'7000ed27-f649-4e00-9c20-8c20c9eccf78', // Prod_COE_Finance_Head
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
+			'e48ae064-781a-43ee-af27-b7d4ed37329f', // Prod_Account Payable Executive
+			'6106378a-44e0-4f60-9f4b-4160843d9dc9', // Temp-  Corporate Owner Finance
+			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
+			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
 		],
-		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
+		costbooking_ops_role_ids         : 'd18eb944-a53d-4205-ada1-585e300c6675',
+		account_receivable_executive     : 'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
@@ -210,6 +219,16 @@ export default {
 			'961cc7d4-53f0-4319-96e9-2a90217bdc4e',
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 			'8c22817f-4246-43ef-a7f5-fdf77e37ca72',
+		],
+		kam_manager_ids: [
+			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand,
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand,
+			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
+			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
+			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
+			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
 		],
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
@@ -251,7 +270,7 @@ export default {
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 		],
-		fortigo_agencies_mapping: {
+		ftl_agencies_mapping: {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
@@ -265,6 +284,9 @@ export default {
 		finance_head              : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 		so1_revenue_desk          : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
 		supply_fulfillment        : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
+		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
+		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
+		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
 	},
 	options: {
 		registration_types: [
@@ -464,6 +486,7 @@ export default {
 					'manage_forecast',
 					'rfq_enquiries',
 					'rates_sheets',
+					'rate_density',
 				],
 			},
 		},
@@ -567,8 +590,9 @@ export default {
 			partner: {
 				bookings: {
 					invoicing: {
-						request_cancel_invoice : true,
-						request_credit_note    : false,
+						request_cancel_invoice  : true,
+						request_replace_invoice : true,
+						request_credit_note     : false,
 					},
 				},
 			},
