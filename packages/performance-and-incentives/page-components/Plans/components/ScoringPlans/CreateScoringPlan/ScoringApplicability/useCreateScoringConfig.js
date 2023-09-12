@@ -3,13 +3,14 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
 import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
 
 const useCreateScoringConfig = () => {
 	const { push } = useRouter();
 
-	const { control, formState: { errors }, handleSubmit, watch } = useForm();
+	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm();
 
 	const [cogoEntityId, roleFunction, channel] = watch(['cogo_entity_id', 'role_function', 'channel']);
 
@@ -40,6 +41,19 @@ const useCreateScoringConfig = () => {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
+
+	useEffect(() => {
+		const subscription = watch((_, { name: controlName }) => {
+			if (controlName === 'role_function') {
+				setValue('channel', '');
+			}
+			if (controlName === 'channel' || controlName === 'cogo_entity_id') {
+				setValue('role_ids', []);
+			}
+		});
+
+		return () => subscription.unsubscribe();
+	}, [watch, setValue]);
 
 	return {
 		controls,

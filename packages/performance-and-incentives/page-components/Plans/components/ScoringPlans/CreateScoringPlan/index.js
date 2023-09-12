@@ -20,8 +20,7 @@ function CreateScoringPlan({ setActiveMode = {} }) {
 					onClick={() => setActiveMode(LIST)}
 				/>
 
-				<div role="presentation" className={styles.title}>Create Scoring Plan</div>
-
+				<div className={styles.title}>Create Scoring Plan</div>
 			</div>
 
 			<ScoringApplicability />

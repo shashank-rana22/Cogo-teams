@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import CHANNEL_OPTIONS from '../constants/select-channel-options';
 
 const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel }) => ([
@@ -11,17 +13,11 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel })
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Select Cogo Entity',
-		type        : 'asyncSelect',
+		type        : 'select',
 		placeholder : 'Select Cogo Entity',
-		initialCall : true,
-		asyncKey    : 'partners',
-		params      : {
-			filters: {
-				entity_types : ['cogoport'],
-				status       : 'active',
-			},
-			page_limit: 10,
-		},
+		options     : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map(
+			(entity) => ({ label: entity.name, value: entity.id }),
+		),
 		rules: { required: 'Cogo Entity is required' },
 	},
 	{
