@@ -1,3 +1,4 @@
+import { CustomOptions } from '@cogoport/air-modules';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const air_lines = {
@@ -32,6 +33,7 @@ const service_provider = {
 	rules: {
 		required: true,
 	},
+	renderLabel: CustomOptions,
 };
 
 const getControls = ({

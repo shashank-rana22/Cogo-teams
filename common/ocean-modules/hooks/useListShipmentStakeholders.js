@@ -7,7 +7,7 @@ const DEFAULT_PAGE_LIMIT = 50;
 const DEFAULT_SORT_BY = 'created_at';
 const DEFAULT_SORT_TYPE = 'desc';
 
-const useListStakeholders = ({ shipment_id = '' }) => {
+const useListStakeholders = ({ shipment_id = '', stakeholder_type = '' }) => {
 	const [apiData, setApiData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
@@ -15,6 +15,7 @@ const useListStakeholders = ({ shipment_id = '' }) => {
 		params : {
 			filters: {
 				shipment_id,
+				stakeholder_type: stakeholder_type || undefined,
 			},
 			page_limit : DEFAULT_PAGE_LIMIT,
 			sort_by    : DEFAULT_SORT_BY,
