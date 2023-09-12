@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const API_NAME = {
 	fcl_freight : 'get_fcl_freight_rate',
@@ -7,6 +8,10 @@ const API_NAME = {
 
 const useGetFreightRate = ({ filter, cardData }) => {
 	const endPoint = API_NAME[filter?.service];
+
+	const { profile = {} } = useSelector((state) => state);
+	const { partner = {} } = profile;
+	const { id } = partner;
 	const [{ loading, data }, trigger] = useRequest({
 		url    : endPoint,
 		method : 'GET',
@@ -36,6 +41,7 @@ const useGetFreightRate = ({ filter, cardData }) => {
 					commodity      : cardData?.commodity,
 					container_size : cardData?.container_size,
 					container_type : cardData?.container_type,
+					cogo_entity_id : id || undefined,
 					...paramsMapping,
 				},
 			});
