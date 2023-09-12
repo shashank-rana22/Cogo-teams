@@ -5,9 +5,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetScoringConfig = () => {
-	const { query } = useRouter();
-
-	const { id } = query;
+	const { query : { id } = {} } = useRouter();
 
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : 'config',
@@ -23,7 +21,7 @@ const useGetScoringConfig = () => {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			Toast.error(getApiErrorString(error.response?.data) || 'Something went wrong');
 		}
 	}, [trigger, id]);
 
@@ -36,6 +34,7 @@ const useGetScoringConfig = () => {
 	return {
 		data,
 		loading,
+		id,
 	};
 };
 

@@ -1,6 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import CHANNEL_OPTIONS from '../constants/select-channel-options';
 
-const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel }) => ([
+const getScoreApplicableFormControls = ({ watchCogoEntityId, watchRoleFunction, watchChannel }) => ([
 	{
 		name        : 'display_name',
 		label       : 'Display Name',
@@ -11,17 +13,11 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel })
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Select Cogo Entity',
-		type        : 'asyncSelect',
+		type        : 'select',
 		placeholder : 'Select Cogo Entity',
-		initialCall : true,
-		asyncKey    : 'partners',
-		params      : {
-			filters: {
-				entity_types : ['cogoport'],
-				status       : 'active',
-			},
-			page_limit: 10,
-		},
+		options     : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map(
+			(entity) => ({ label: entity.name, value: entity.id }),
+		),
 		rules: { required: 'Cogo Entity is required' },
 	},
 	{
@@ -64,7 +60,7 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel })
 		name    : 'channel',
 		label   : 'Channel',
 		type    : 'select',
-		options : CHANNEL_OPTIONS[roleFunction] || [],
+		options : CHANNEL_OPTIONS[watchRoleFunction] || [],
 		rules   : { required: 'Channel is required' },
 	},
 	{
@@ -76,9 +72,9 @@ const getScoreApplicableFormControls = ({ cogoEntityId, roleFunction, channel })
 		initialCall : true,
 		asyncKey    : 'agent_scoring_eligible_roles',
 		params      : {
-			cogo_entity_ids : cogoEntityId ? [cogoEntityId] : undefined,
-			functions       : roleFunction ? [roleFunction] : undefined,
-			channels        : channel ? [channel] : undefined,
+			cogo_entity_ids : watchCogoEntityId ? [watchCogoEntityId] : undefined,
+			functions       : watchRoleFunction ? [watchRoleFunction] : undefined,
+			channels        : watchChannel ? [watchChannel] : undefined,
 			status          : true,
 		},
 		rules: { required: 'Roles are required' },

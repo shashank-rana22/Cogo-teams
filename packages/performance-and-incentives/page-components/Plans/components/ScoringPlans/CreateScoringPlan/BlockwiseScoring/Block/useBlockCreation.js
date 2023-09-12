@@ -1,7 +1,7 @@
 import { useFieldArray } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
 
@@ -32,10 +32,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 
 	const subBlockType = list[GLOBAL_CONSTANTS.zeroth_index]?.sub_block_type;
 
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name,
-	});
+	const { fields, append, remove } = useFieldArray({ control, name });
 
 	const subBlockOptions = useMemo(() => list.map(({ id, sub_block_name }) => ({
 		label : startCase(sub_block_name),
@@ -51,12 +48,6 @@ const useBlockCreation = ({ control, name, watch }) => {
 		}));
 		return acc;
 	}, {}), [list]);
-
-	console.log(parameterOptions, 'pOptions');
-
-	useEffect(() => {
-
-	}, [append]);
 
 	return {
 		CHILD_EMPTY_VALUES,

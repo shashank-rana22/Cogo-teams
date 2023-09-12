@@ -12,9 +12,9 @@ const useCreateScoringConfig = () => {
 
 	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm();
 
-	const [cogoEntityId, roleFunction, channel] = watch(['cogo_entity_id', 'role_function', 'channel']);
+	const [watchCogoEntityId, watchRoleFunction, watchChannel] = watch(['cogo_entity_id', 'role_function', 'channel']);
 
-	const controls = getScoreApplicableFormControls({ cogoEntityId, roleFunction, channel });
+	const controls = getScoreApplicableFormControls({ watchCogoEntityId, watchRoleFunction, watchChannel });
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'config',
@@ -24,14 +24,16 @@ const useCreateScoringConfig = () => {
 
 	const onCreateScoringConfig = async (values = {}) => {
 		try {
+			const { cogo_entity_id, role_function, channel, role_ids, display_name } = values;
+
 			const res = await trigger({
 				data: {
-					cogo_entity_id : values.cogo_entity_id,
-					role_function  : values.role_function,
-					channel        : values.channel,
-					role_ids       : values.role_ids,
-					display_name   : values.display_name,
-					status         : 'active',
+					cogo_entity_id,
+					role_function,
+					channel,
+					role_ids,
+					display_name,
+					status: 'draft',
 				},
 			});
 
@@ -44,8 +46,17 @@ const useCreateScoringConfig = () => {
 	};
 
 	useEffect(() => {
-		setValue('role_ids', undefined);
-	}, [cogoEntityId, roleFunction, channel, setValue]);
+		const subscription = watch((_, { name: controlName }) => {
+			if (controlName === 'role_function') {
+				setValue('channel', '');
+			}
+			if (controlName === 'channel' || controlName === 'cogo_entity_id') {
+				setValue('role_ids', []);
+			}
+		});
+
+		return () => subscription.unsubscribe();
+	}, [watch, setValue]);
 
 	return {
 		controls,

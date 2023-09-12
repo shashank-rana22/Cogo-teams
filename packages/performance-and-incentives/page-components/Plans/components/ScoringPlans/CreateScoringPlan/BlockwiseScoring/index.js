@@ -13,10 +13,7 @@ const CHILD_EMPTY_VALUES = {
 function BlockwiseScoring() {
 	const { control, formState: { errors }, watch } = useForm();
 
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'blocks',
-	});
+	const { fields, append, remove } = useFieldArray({ control, name: 'blocks' });
 
 	return (
 		<>
@@ -40,11 +37,14 @@ function BlockwiseScoring() {
 					/>
 				))}
 
-				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} style={{ cursor: 'pointer' }}>
-					+
-					{' '}
-					<span style={{ textDecoration: 'underline' }}>Add Block</span>
-				</div>
+				<Button
+					type="button"
+					size="md"
+					themeType="link"
+					onClick={() => append(CHILD_EMPTY_VALUES)}
+				>
+					+ Add Parameter
+				</Button>
 			</div>
 
 			<div className={styles.btn_container}>

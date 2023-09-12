@@ -3,7 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetAgentScoringBlocks = ({ watchBlock = '' }) => {
+const useGetAgentScoringBlocks = (props) => {
+	const { watchBlock = '' } = props;
+
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : 'blocks',
 		method  : 'GET',
@@ -18,6 +20,7 @@ const useGetAgentScoringBlocks = ({ watchBlock = '' }) => {
 					filters                                : {
 						display_name: watchBlock,
 					},
+					page_limit: 1000,
 				},
 			});
 		} catch (error) {
