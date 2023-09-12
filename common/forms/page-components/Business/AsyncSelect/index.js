@@ -64,6 +64,7 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListAllocationObjectives,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -146,6 +147,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 	resources                            : asyncListResources,
+	allocation_objectives                : asyncListAllocationObjectives,
 };
 
 const SINGLE_ENTITY = 1;

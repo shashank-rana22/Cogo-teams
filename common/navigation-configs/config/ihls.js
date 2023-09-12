@@ -13,6 +13,10 @@ const ihls = {
 		navigation : 'ihls-athena_dashboard',
 		isMainNav  : false,
 	},
+	'/[partner_id]/ihls/lead-data-pipeline': {
+		navigation : 'ihls-lead_data_pipeline',
+		isMainNav  : true,
+	},
 };
 
 module.exports = ihls;

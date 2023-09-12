@@ -2266,10 +2266,10 @@ const navigationMappingAdmin = {
 			{
 				key           : 'ihls-lead_data_pipeline',
 				title         : 'Lead Enrichment Dashboard',
-				href          : '/ihls/lead-data-pipeline',
-				as            : '/ihls/lead-data-pipeline',
+				href          : '/v2/ihls/lead-data-pipeline',
+				as            : '/v2/ihls/lead-data-pipeline',
 				type          : 'link',
-				possible_apis : [],
+				possible_apis : apis.lead_enrichment_dashboard,
 				icon          : IcMDataPipeline,
 			},
 

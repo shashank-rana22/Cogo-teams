@@ -1,0 +1,14 @@
+.searchbar {
+	width: 25%;
+}
+
+.search {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 16px;
+}
+
+.tableContainer {
+	/* width: 1000px; */
+	overflow-x: scroll;
+}

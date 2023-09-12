@@ -1,13 +1,12 @@
 import store from '@cogoport/store';
-import { format } from '@cogoport/utils';
+import { format, getCookie } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
-import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate', 'athena'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -71,11 +70,17 @@ request.interceptors.request.use((oldConfig) => {
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
+	if (serviceName === 'athena') {
+		newConfig.baseURL = 'http://0.0.0.0:3001';
+	}
 
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
+			authorizationscope : 'partner',
+			authorization      : `Bearer: ${token}`,
+			authorizationparameters,
+			'auth-token'       : '123',
 		},
 	};
 });

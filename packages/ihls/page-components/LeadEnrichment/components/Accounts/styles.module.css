@@ -1,0 +1,27 @@
+.container {
+	padding: 16px 0;
+}
+
+.header {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-1);
+}
+
+.statistics {
+	display: flex;
+	gap: 8px;
+	margin-top: 8px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.segments {
+	flex: 3;
+}
+
+.contacts {
+	flex: 6;
+}

@@ -1,0 +1,39 @@
+.searchbar {
+	width: 25%;
+}
+
+.search {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 16px;
+}
+
+.tableContainer {
+	/* width: 1000px; */
+	overflow-x: scroll;
+}
+
+.top_heading {
+	font-weight: 600;
+	line-height: 150%;
+}
+
+.sub_heading {
+	font-size: 12px;
+	color: #828282;
+}
+
+.roles {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.business_name {
+	text-align: center;
+}
+
+.list_header {
+	margin-left: 36px;
+}
