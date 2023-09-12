@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
 function useListLeadOrganizations({ task = {} }) {
@@ -21,17 +22,19 @@ function useListLeadOrganizations({ task = {} }) {
 		try {
 			const res = await trigger();
 
-			const {
-				business_name = '',
-				country_id = '',
-				registration_number = '',
-			} = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+			if (!isEmpty(res?.data)) {
+				const {
+					business_name = '',
+					country_id = '',
+					registration_number = '',
+				} = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-			setDefaultValues({
-				company_name : business_name,
-				country_id,
-				gst_number   : registration_number,
-			});
+				setDefaultValues({
+					company_name : business_name,
+					country_id,
+					gst_number   : registration_number,
+				});
+			}
 		} catch (err) {
 			toastApiError(err);
 		}

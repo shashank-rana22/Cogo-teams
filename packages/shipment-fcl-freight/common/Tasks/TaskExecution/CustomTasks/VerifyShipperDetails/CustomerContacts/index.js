@@ -38,7 +38,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 			<div className={styles.main_container}>
 				<h4>Customer contacts</h4>
 				<Table
-					data={[listLeadsData?.users?.[GLOBAL_CONSTANTS.zeroth_index]] || []}
+					data={listLeadsData?.users || []}
 					className={styles.table}
 					columns={columns}
 					loading={loading || updateLoading}
