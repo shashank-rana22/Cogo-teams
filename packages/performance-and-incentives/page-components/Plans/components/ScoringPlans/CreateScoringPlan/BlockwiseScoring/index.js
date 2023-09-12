@@ -43,7 +43,7 @@ function BlockwiseScoring() {
 					themeType="link"
 					onClick={() => append(CHILD_EMPTY_VALUES)}
 				>
-					+ Add Parameter
+					+ Add Block
 				</Button>
 			</div>
 

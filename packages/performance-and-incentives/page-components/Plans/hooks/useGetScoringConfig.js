@@ -35,7 +35,7 @@ const useGetScoringConfig = () => {
 	return {
 		data,
 		loading,
-		id,
+		scoring_confing_id: id,
 	};
 };
 

@@ -75,7 +75,7 @@ function Block(props) {
 				/>
 			))}
 
-			{!!subBlockType && !!watchBlock && (
+			{!!subBlockType && (
 				<Button
 					type="button"
 					size="md"

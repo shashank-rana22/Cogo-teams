@@ -8,7 +8,9 @@ import getPrimaryControls from '../../../../../configurations/get-block-primary-
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
 const useBlockCreation = ({ control, name, watch }) => {
-	const CHILD_EMPTY_VALUES = {};
+	const CHILD_EMPTY_VALUES = {
+		sub_block_id: '',
+	};
 
 	getPrimaryControls({}).forEach((controlItem) => {
 		if (controlItem.type === 'fieldArray') {
