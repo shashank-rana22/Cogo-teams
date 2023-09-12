@@ -80,8 +80,11 @@ const navigationMapping = ({ t = () => {} }) => {
 			type          : 'link',
 			icon          : IcMDashboard,
 			main_apis     : [],
-			possible_apis : apis.employee_portal,
-			module_type   : 'dashboards',
+			possible_apis : [
+				...apis.employee_portal,
+				...apis.faq,
+			],
+			module_type: 'dashboards',
 		},
 		employee_portal: {
 			key           : 'employee_portal',
