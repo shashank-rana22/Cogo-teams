@@ -77,17 +77,7 @@ function AddRateModal({
 	}));
 
 	const { list } = useGetChargeCodes({ service_name: 'fcl_freight_charges' });
-	const UNIT_CODE_MAPPING = {};
-	const CHARGE_CODE_OPTIONS = [];
-	(list || []).forEach((item) => {
-		CHARGE_CODE_OPTIONS.push({
-			label : item?.label,
-			value : item?.code,
-		});
-
-		UNIT_CODE_MAPPING[item.code] = item?.units;
-	});
-
+	console.log(list);
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsListOperators(),
