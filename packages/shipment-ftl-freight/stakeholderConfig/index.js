@@ -1,5 +1,6 @@
 import adminConfig from './admin';
 import bookingAgent from './bookingAgent';
+import bookingAgentManager from './bookingAgentManager';
 import bookingDesk from './bookingDesk';
 import bookingDeskManager from './bookingDeskManager';
 import coeFinanceOwners from './coeFinanceOwners';
@@ -9,7 +10,6 @@ import documentDesk from './documentDesk';
 import documentDeskManager from './documentDeskManager';
 import fieldExecutiveAgent from './fieldExecutiveAgent';
 import ftlGroundOps from './ftlGroundOps';
-import bookingAgentManager from './newBookingAgentManager';
 import processOwners from './processOwners';
 import superadminConfig from './superadmin';
 
