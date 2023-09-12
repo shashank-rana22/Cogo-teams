@@ -4,15 +4,7 @@ import { useState } from 'react';
 import ReOpenJob from './ReOpenJob';
 import styles from './styles.module.css';
 
-const JOB_OPEN_ALLOWED_ROLES = [
-	'superadmin',
-	'admin',
-	'booking_agent_manager',
-	'costbooking_manager',
-	'operation_manager',
-];
-
-function JobStatus({ shipment_data = {}, activeStakeholder = '' }) {
+function JobStatus({ shipment_data = {}, job_open_request = false }) {
 	const [showModal, setShowModal] = useState(false);
 
 	if (shipment_data?.is_job_closed_financially) {
@@ -27,7 +19,7 @@ function JobStatus({ shipment_data = {}, activeStakeholder = '' }) {
 		<div className={styles.job_closed_container}>
 			<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
 
-			{JOB_OPEN_ALLOWED_ROLES.includes(activeStakeholder) && (
+			{job_open_request ? (
 				<Button
 					className={styles.job_undo_button}
 					themeType="link"
@@ -36,7 +28,8 @@ function JobStatus({ shipment_data = {}, activeStakeholder = '' }) {
 				>
 					Undo
 				</Button>
-			)}
+			) : null}
+
 			{showModal ? (
 				<ReOpenJob shipmentData={shipment_data} showModal={showModal} setShowModal={setShowModal} />
 			) : null}
