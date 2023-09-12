@@ -1,7 +1,11 @@
 const margins = {
 	'/[partner_id]/margins': {
-		navigation : 'margins',
+		navigation : 'margin',
 		isMainNav  : true,
+	},
+	'/[partner_id]/margins/create': {
+		isMainNav  : false,
+		navigation : 'margin',
 	},
 };
 

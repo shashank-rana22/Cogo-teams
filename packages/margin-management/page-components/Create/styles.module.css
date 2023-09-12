@@ -1,0 +1,24 @@
+.container {
+	width: calc(90%);
+}
+
+.header_wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 26px;
+	color: #333;
+}
+
+.text {
+	margin-top: 30px;
+	margin-bottom: 24px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 16px;
+	letter-spacing: 0.02em;
+}
