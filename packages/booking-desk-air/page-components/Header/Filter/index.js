@@ -4,6 +4,7 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import { applyFilterValues } from '../../../helpers/applyFilterValues';
@@ -18,9 +19,10 @@ function Filter({
 	setFilters = () => {},
 	setFilterPopover = () => {},
 }) {
-	const getControls = getFilterControls({ serviceActiveTab });
+	const { t } = useTranslation(['airBookingDesk']);
+	const controls = getFilterControls({ serviceActiveTab, t });
 
-	const { formState:{ errors }, control, reset, getValues, setValue } = useForm({ getControls });
+	const { formState: { errors }, control, reset, getValues, setValue } = useForm();
 
 	const handleReset = () => {
 		reset({
@@ -43,10 +45,15 @@ function Filter({
 		const serviceName = serviceActiveTab.concat('_service');
 		const data = getValues();
 		const {
-			tags = '', importer_exporter_id = '',
-			fault_alarms_raised = '', origin_airport_id = '',
-			trade_type = '', destination_airport_id = '', airport_id = '',
-			triggered_pending_invoices = '', state = '',
+			tags = '',
+			importer_exporter_id = '',
+			fault_alarms_raised = '',
+			origin_airport_id = '',
+			trade_type = '',
+			destination_airport_id = '',
+			airport_id = '',
+			triggered_pending_invoices = '',
+			state = '',
 		} = data || {};
 
 		const empty_val = Object.values(data).some((item) => !isEmpty(item));
@@ -103,11 +110,11 @@ function Filter({
 	return (
 		<div className={styles.filter_container}>
 			<div className={styles.header}>
-				<div className={styles.filter_header}>Filters</div>
+				<div className={styles.filter_header}>{t('airBookingDesk:heading_filters')}</div>
 				<IcMCross onClick={() => setFilterPopover(false)} className={styles.cross_icon} />
 			</div>
 			<Layout
-				fields={getControls}
+				fields={controls}
 				control={control}
 				errors={errors}
 			/>
@@ -118,11 +125,15 @@ function Filter({
 					className={styles.reset_button}
 					onClick={() => handleReset()}
 				>
-					{' '}
-					Reset
+					{t('airBookingDesk:filter_reset_button')}
+				</Button>
+				<Button
+					size="md"
+					onClick={() => handleApplyFilters()}
+				>
+					{t('airBookingDesk:filter_apply_button')}
 
 				</Button>
-				<Button size="md" onClick={() => handleApplyFilters()}>Apply</Button>
 			</div>
 
 		</div>

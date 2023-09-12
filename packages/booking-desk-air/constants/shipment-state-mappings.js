@@ -1,15 +1,15 @@
-const SHIPMENT_STATE_MAPPINGS = [
+const getShipmentStateMappings = (t = () => {}) => [
 	{
 		name  : 'ongoing',
-		title : 'ONGOING',
+		title : t('airBookingDesk:shipment_state_ongoing'),
 	},
 	{
 		name  : 'completed',
-		title : 'COMPLETED',
+		title : t('airBookingDesk:shipment_state_completed'),
 	},
 	{
 		name  : 'cancelled',
-		title : 'CANCELLED',
+		title : t('airBookingDesk:shipment_state_cancelled'),
 	},
 ];
-export default SHIPMENT_STATE_MAPPINGS;
+export default getShipmentStateMappings;
