@@ -63,6 +63,7 @@ import supply_allocation from './supply-allocation';
 import tech_ops from './tech-ops-apis';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
+import welcome from './welcome-apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -152,6 +153,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	welcome,
 	cargo_insurance,
 	...saas_tools,
 	...performance_management,
