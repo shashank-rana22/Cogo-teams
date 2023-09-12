@@ -5,6 +5,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
 
+import styles from './styles.module.css';
+
 const fclControls = ({
 	data,
 	listShippingLineOptions,
@@ -152,6 +154,7 @@ const fclControls = ({
 		placeholder : 'Validity Start',
 		span        : 3,
 		minDate     : new Date(),
+		className   : styles.date_filter,
 		rules       : {
 			required: 'validity start date is required',
 		},
@@ -160,6 +163,7 @@ const fclControls = ({
 		name        : 'validity_end',
 		heading     : 'Validity End',
 		type        : 'date_picker',
+		className   : styles.date_filter,
 		placeholder : 'Validity End',
 		span        : 3,
 		minDate     : new Date(),

@@ -7,6 +7,8 @@ import {
 	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, rateTypeOptions,
 } from '../../../../configurations/helpers/constants';
 
+import styles from './styles.module.css';
+
 const airControls = ({
 	data, listPartnerUserOptions, user_id, originLocationOptions, destinationLocationOptions,
 	serviceProviders, listAirLineOptions,
@@ -101,18 +103,20 @@ const airControls = ({
 		rules   : { required: 'flight operation type is required' },
 	},
 	{
-		heading : 'Validity Start',
-		name    : 'validity_start',
-		type    : 'date_picker',
-		span    : 4,
-		rules   : { required: 'validity is required' },
+		heading   : 'Validity Start',
+		name      : 'validity_start',
+		type      : 'date_picker',
+		className : styles.air_date_filter,
+		span      : 4,
+		rules     : { required: 'validity is required' },
 	},
 	{
-		heading : 'Validity End',
-		name    : 'validity_end',
-		type    : 'date_picker',
-		span    : 4,
-		rules   : { required: 'validity end is required' },
+		heading   : 'Validity End',
+		name      : 'validity_end',
+		type      : 'date_picker',
+		className : styles.air_date_filter,
+		span      : 4,
+		rules     : { required: 'validity end is required' },
 	},
 	{
 		heading : 'Packaging Type',

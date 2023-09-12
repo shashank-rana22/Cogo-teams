@@ -53,6 +53,17 @@ const useGetCoverageStats = (filter) => {
 		});
 		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
 
+		const DATE_PARAMS = {};
+
+		if (isTodayDateRequired) {
+			DATE_PARAMS.start_date = new Date();
+		}
+		if (isTodayDateRequired) {
+			DATE_PARAMS.end_date = new Date();
+		}
+		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
+		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
+
 		try {
 			await trigger({
 				params: {
@@ -61,8 +72,7 @@ const useGetCoverageStats = (filter) => {
 						user_id      : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
 						daily_stats,
 						weekly_stats : !daily_stats,
-						start_date   : isTodayDateRequired ? new Date() : filter?.start_date,
-						end_date     : isTodayDateRequired ? new Date() : filter?.end_date,
+						...DATE_PARAMS,
 					},
 				},
 			});
