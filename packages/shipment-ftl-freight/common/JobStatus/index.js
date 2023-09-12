@@ -19,7 +19,7 @@ function JobStatus({ shipment_data = {}, job_open_request = false }) {
 		<div className={styles.job_closed_container}>
 			<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
 
-			{job_open_request && (
+			{job_open_request ? (
 				<Button
 					className={styles.job_undo_button}
 					themeType="link"
@@ -28,7 +28,8 @@ function JobStatus({ shipment_data = {}, job_open_request = false }) {
 				>
 					Undo
 				</Button>
-			)}
+			) : null}
+
 			{showModal ? (
 				<ReOpenJob shipmentData={shipment_data} showModal={showModal} setShowModal={setShowModal} />
 			) : null}

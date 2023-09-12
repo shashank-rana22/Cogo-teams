@@ -17,9 +17,11 @@ export default {
 		'tracking',
 		'purchase',
 	],
-	shipment_info : {},
-	default_tab   : 'overview',
-	overview      : {
+	shipment_info: {
+		job_open_request: true,
+	},
+	default_tab : 'overview',
+	overview    : {
 		tab_title: 'Overview',
 	},
 	tasks: {
@@ -53,5 +55,4 @@ export default {
 	purchase: {
 		tab_title: 'Purchase Live Invoice',
 	},
-	job_open_request: true,
 };

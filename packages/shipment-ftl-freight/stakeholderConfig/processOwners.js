@@ -18,8 +18,10 @@ export default {
 		'tracking',
 		'purchase',
 	],
-	shipment_info   : {},
-	shipment_header : {
+	shipment_info: {
+		job_open_request: false,
+	},
+	shipment_header: {
 		add_po_number: true,
 	},
 	default_tab : 'overview',
@@ -66,5 +68,4 @@ export default {
 	edit_supplier       : true,
 	cancel_service      : true,
 	additional_services : {},
-	job_open_request    : false,
 };

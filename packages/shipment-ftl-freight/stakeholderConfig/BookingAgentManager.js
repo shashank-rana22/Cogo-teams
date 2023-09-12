@@ -16,9 +16,11 @@ export default {
 		'sales',
 		'tracking',
 	],
-	shipment_info : {},
-	default_tab   : 'overview',
-	overview      : {
+	shipment_info: {
+		job_open_request: true,
+	},
+	default_tab : 'overview',
+	overview    : {
 		tab_title            : 'Overview',
 		enable_consolidation : true,
 	},
@@ -46,5 +48,4 @@ export default {
 	sales: {
 		tab_title: 'Sales Live Invoice',
 	},
-	job_open_request: true,
 };

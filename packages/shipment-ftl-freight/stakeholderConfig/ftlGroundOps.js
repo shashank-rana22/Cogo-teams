@@ -13,9 +13,11 @@ export default {
 		'field_executive',
 		'tracking',
 	],
-	shipment_info : {},
-	default_tab   : 'overview',
-	overview      : {
+	shipment_info: {
+		job_open_request: false,
+	},
+	default_tab : 'overview',
+	overview    : {
 		tab_title: 'Overview',
 	},
 	tasks: {
@@ -49,5 +51,4 @@ export default {
 	sales: {
 		tab_title: 'Sales Live Invoice',
 	},
-	job_open_request: false,
 };

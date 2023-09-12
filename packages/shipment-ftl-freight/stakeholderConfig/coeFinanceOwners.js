@@ -18,9 +18,11 @@ export default {
 		'purchase',
 		'sales',
 	],
-	shipment_info : {},
-	default_tab   : 'overview',
-	overview      : {
+	shipment_info: {
+		job_open_request: false,
+	},
+	default_tab : 'overview',
+	overview    : {
 		tab_title            : 'Overview',
 		edit_supplier        : true,
 		cancel_service       : true,
@@ -57,5 +59,4 @@ export default {
 	purchase: {
 		tab_title: 'Purchase Live Invoice',
 	},
-	job_open_request: false,
 };
