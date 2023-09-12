@@ -25,16 +25,17 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 	const {
 		onVerify = () => {},
 		setCheckList = () => {},
+		defaultValues = {},
 		checkList = [],
 		createLoading = false,
-	} = useCreateLeadOrganizationToAccount({ listLeadsData, setStep, setOrgId });
+	} = useCreateLeadOrganizationToAccount({ listLeadsData, setStep, setOrgId, task });
 
 	const columns = getColumns({ setIsEditMode, isEditMode, control, setCheckList, handleSubmit, onUpdateLeadUser });
 
 	// !Todo just take the first obj of list for POC data
 	return (
 		<>
-			<UserOnboard listLeadsData={listLeadsData} />
+			<UserOnboard listLeadsData={listLeadsData} defaultValues={defaultValues} />
 
 			<div className={styles.main_container}>
 				<h4>Customer contacts</h4>

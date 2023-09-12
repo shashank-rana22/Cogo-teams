@@ -1,14 +1,19 @@
-import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
+
+import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
 function useCreateLeadOrganizationToAccount({
 	setStep = () => {},
 	setOrgId = () => {},
 	listLeadsData = {},
+	task = {},
 }) {
 	const [checkList, setCheckList] = useState(null);
+	const [defaultValues, setDefaultValues] = useState({});
+
+	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ successMessage: 'Updated Successfully' });
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_organization_to_account',
@@ -19,11 +24,17 @@ function useCreateLeadOrganizationToAccount({
 		try {
 			const res = await trigger({ data: payload });
 
+			setDefaultValues({
+				company_name : listLeadsData?.business_name,
+				country_id   : listLeadsData?.country_id,
+				gst_number   : listLeadsData?.registration_number,
+			});
+
 			if (res.data) {
 				setOrgId(res?.data?.organization_id);
 			}
 
-			Toast.success('Successful');
+			await apiTrigger({ id: task?.id, tags: ['1'], status: 'pending' });
 
 			setStep('1');
 		} catch (error) {
@@ -44,6 +55,7 @@ function useCreateLeadOrganizationToAccount({
 		createLoading: loading,
 		checkList,
 		setCheckList,
+		defaultValues,
 		onVerify,
 		createLeadOrgAccount,
 	};

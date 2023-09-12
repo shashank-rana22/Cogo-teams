@@ -6,7 +6,7 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import { useEffect } from 'react';
+import isEqual from '@cogoport/ocean-modules/utils/isEqual';
 
 import useUpdateLeadOrganization from '../../../../../../hooks/useUpdateLeadOrganization';
 
@@ -16,7 +16,7 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function UserOnboard({ listLeadsData = {} }) {
+function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 	// const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 
 	const {
@@ -24,18 +24,18 @@ function UserOnboard({ listLeadsData = {} }) {
 		formState:{ errors = {}, isValid = false },
 		handleSubmit,
 		formValues,
-		reset,
-	} = useForm();
+		// reset,
+	} = useForm({ defaultValues });
 
-	useEffect(() => {
-		const defaultValues = {
-			company_name : listLeadsData?.business_name,
-			country_id   : listLeadsData?.country_id,
-			gst_number   : listLeadsData?.registration_number,
-		};
+	// useEffect(() => {
+	// 	const defaultValues = {
+	// 		company_name : listLeadsData?.business_name,
+	// 		country_id   : listLeadsData?.country_id,
+	// 		gst_number   : listLeadsData?.registration_number,
+	// 	};
 
-		reset(defaultValues);
-	}, [reset, listLeadsData]);
+	// 	reset(defaultValues);
+	// }, []);
 
 	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
 
@@ -116,8 +116,7 @@ function UserOnboard({ listLeadsData = {} }) {
 					<Button
 						themeType="accent"
 						onClick={handleSubmit(updateDetails)}
-						// disabled={!isValid || isEqual(formValues, defaultValues) || updateLoading}
-						disabled={!isValid || updateLoading}
+						disabled={!isValid || isEqual(formValues, defaultValues) || updateLoading}
 					>
 						Update
 					</Button>

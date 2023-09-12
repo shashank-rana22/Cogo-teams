@@ -42,7 +42,7 @@ const apis = [
 	{
 		api          : 'auto_upsell_service',
 		access_type  : 'private',
-		service_name : 'fcl_freight_local',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_lead_organization',

@@ -1,8 +1,11 @@
-import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
+import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
+
 function useCreateAutoUpsellService({ task = {}, refetch = () => {} }) {
+	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
+
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/auto_upsell_service',
 		method : 'POST',
@@ -10,13 +13,9 @@ function useCreateAutoUpsellService({ task = {}, refetch = () => {} }) {
 
 	const createAutoUpsellService = async ({ payload }) => {
 		try {
-			await trigger({
-				data: { payload },
-			});
+			await trigger({ data: payload });
 
-			Toast.success('Successful');
-
-			refetch();
+			await apiTrigger({ id: task?.id });
 		} catch (error) {
 			toastApiError(error);
 		}
@@ -30,25 +29,23 @@ function useCreateAutoUpsellService({ task = {}, refetch = () => {} }) {
 			tax_number,
 			address,
 			tax_number_document_url,
-			mobile_number,
 			email,
 		} = values;
 
-		const { shipment_id, service_type, task_field_id } = task;
+		const { shipment_id, task_field_id } = task;
 
 		const payload = {
 			shipment_id,
-			service_type,
 			name,
 			address,
 			pincode,
 			tax_number,
-			tax_number_document_url,
 			business_name,
 			email,
-			mobile_number,
-			trade_partner_id : task_field_id,
-			country_id       : values?.country_id,
+			tax_number_document_url : tax_number_document_url?.finalUrl,
+			service_type            : 'fcl_freight_local',
+			trade_partner_id        : task_field_id,
+			country_id              : values?.country_id,
 		};
 
 		createAutoUpsellService({ payload });
