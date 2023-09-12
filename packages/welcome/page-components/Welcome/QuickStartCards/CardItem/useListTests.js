@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
-const PAGE_LIMIT = 10;
+const PAGE_LIMIT = 1;
 
 const useTestsList = () => {
 	const {
@@ -20,7 +20,7 @@ const useTestsList = () => {
 
 	const { total_count } = data || {};
 
-	useEffect(() => {
+	const ListTests = useCallback(() => {
 		try {
 			trigger({
 				params: {
@@ -35,6 +35,8 @@ const useTestsList = () => {
 			Toast.error(getApiErrorString(err.message?.data));
 		}
 	}, [trigger, user_id]);
+
+	useEffect(() => { ListTests(); }, [ListTests]);
 
 	return {
 		total_count,
