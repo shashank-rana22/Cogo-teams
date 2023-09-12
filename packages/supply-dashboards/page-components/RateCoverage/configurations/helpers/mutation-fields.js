@@ -9,6 +9,7 @@ function FieldMutation({ fields, values }) {
 			{ params: { filters: { organization_id: values?.service_provider_id } } },
 		),
 	);
+
 	const finalFields = (fields || []).map((control) => {
 		const { name } = control;
 		let newControl = { ...control };

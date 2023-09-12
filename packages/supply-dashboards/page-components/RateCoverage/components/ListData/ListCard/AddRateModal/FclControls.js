@@ -7,11 +7,12 @@ import { currencyOptions, rateTypeOptions } from '../../../../configurations/hel
 
 const MIN_CARGO_WEIGHT = 18;
 const fclControls = ({
-	data, chargeCodeOptions,
-	fclCommodityOptions,
+	data,
+	// chargeCodeOptions,
 	listShippingLineOptions,
+	fclCommodityOptions,
 	mainPortOptions1, mainPortOptions2,
-	serviceProviders, organizationUsers,
+	serviceProviders,
 	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
@@ -35,7 +36,6 @@ const fclControls = ({
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
-		...organizationUsers,
 		span        : 4,
 		rules       : { required: 'rate provided by user is required' },
 	},
@@ -267,18 +267,18 @@ const fclControls = ({
 		],
 	},
 	{
-		type               : 'fieldArray',
-		heading            : 'Line Items',
+		type       : 'fieldArray',
+		heading    : 'Line Items',
 		// showButtons        : true,
-		name               : 'line_items',
-		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
-		value              : [
+		name       : 'line_items',
+		buttonText : 'Add Line Items',
+		// noDeleteButtonTill : 1,
+		value      : [
 			{
 				code     : 'BAS',
 				unit     : 'per_container',
 				currency : GLOBAL_CONSTANTS.currency_code.USD,
-				price    : null,
+				price    : 0,
 			},
 		],
 		controls: [
@@ -287,19 +287,19 @@ const fclControls = ({
 				type        : 'select',
 				span        : 1.5,
 				placeholder : 'Charge Name',
-				options     : chargeCodeOptions,
+				// options     : chargeCodeOptions,
 				rules       : { required: 'code is required' },
 			},
 			{
-				name      : 'unit',
-				span      : 2,
-				type      : 'select',
-				className : 'primary lg',
-				options   : [{
-					label : 'Per Container',
-					value : 'per_container',
-				}],
-				placeholder: 'Unit',
+				name        : 'unit',
+				span        : 2,
+				type        : 'select',
+				className   : 'primary lg',
+				// options   : [{
+				// 	label : 'Per Container',
+				// 	value : 'per_container',
+				// }],
+				placeholder : 'Unit',
 			},
 			{
 				name        : 'currency',

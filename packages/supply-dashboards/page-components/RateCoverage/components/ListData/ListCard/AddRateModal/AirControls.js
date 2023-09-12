@@ -9,7 +9,7 @@ import {
 
 const airControls = ({
 	data, listPartnerUserOptions, user_id, originLocationOptions, destinationLocationOptions,
-	serviceProviders, organizationUsers, listAirLineOptions,
+	serviceProviders, listAirLineOptions,
 }) => [
 	{
 		name        : 'rate_type',
@@ -58,7 +58,6 @@ const airControls = ({
 		heading     : 'Rate Provided By LSP User',
 		placeholder : 'Rate Provided By LSP User',
 		type        : 'select',
-		...organizationUsers,
 		span        : 4,
 		rules       : { required: 'sourced by is required' },
 	},

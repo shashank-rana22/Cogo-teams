@@ -1,9 +1,9 @@
+/* eslint-disable custom-eslint/variables-name-check */
 import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	asyncFieldsListOperators,
 	asyncFieldsLocations,
 	asyncFieldsOrganization,
-	asyncFieldsOrganizationUsers,
 	asyncFieldsPartnerUsersIds,
 	useForm,
 	useGetAsyncOptions,
@@ -16,6 +16,7 @@ import React, { useEffect } from 'react';
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import Layout from '../../../../../RfqEnquiries/Layout';
 import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../../configurations/helpers/constants';
+import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
@@ -32,6 +33,20 @@ const getCommodityOptions = (container_type = 'standard') => {
 	}));
 };
 
+const getDefaultValues = (oldfields) => {
+	const DEFAULT_VALUES = {};
+	const newfields = oldfields.map((field) => {
+		const { value, ...rest } = field;
+		if (field.type === 'fieldArray') {
+			DEFAULT_VALUES[field.name] = value || [];
+		} else {
+			DEFAULT_VALUES[field.name] = value || '';
+		}
+		return rest;
+	});
+	return { DEFAULT_VALUES, fields: newfields };
+};
+
 function AddRateModal({
 	showModal = true,
 	setShowModal = () => {},
@@ -41,6 +56,10 @@ function AddRateModal({
 	getListCoverage = () => {},
 }) {
 	const isAirService = filter?.service === 'air_freight';
+	const { user_data } = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const { options:mainPortOptions1 } = useGetMainPortsOptions({ location_id: data?.origin_port?.id });
 	const { options:mainPortOptions2 } = useGetMainPortsOptions({ location_id: data?.destination_port?.id });
@@ -57,27 +76,17 @@ function AddRateModal({
 		labelKey : 'display_name',
 	}));
 
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
-	const { user: { id: user_id = '' } = {} } = user_data;
-
 	const { list } = useGetChargeCodes({ service_name: 'fcl_freight_charges' });
-	const chargeCodeOptions = list.map((item) => (
-		{
+	const UNIT_CODE_MAPPING = {};
+	const CHARGE_CODE_OPTIONS = [];
+	(list || []).forEach((item) => {
+		CHARGE_CODE_OPTIONS.push({
 			label : item?.label,
-			value : item?.value,
-		}
-	));
-	const {
-		control,
-		formState: { errors },
-		handleSubmit,
-		watch,
-		setValue,
-	} = useForm();
+			value : item?.code,
+		});
 
-	const values = watch();
+		UNIT_CODE_MAPPING[item.code] = item?.units;
+	});
 
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
@@ -134,25 +143,18 @@ function AddRateModal({
 			},
 		),
 	);
-	const organizationUsers = useGetAsyncOptions(
-		merge(
-			asyncFieldsOrganizationUsers(),
-			{ params: { filters: { organization_id: values?.service_provider_id } } },
-		),
-	);
 
-	const fclCommodityOptions = getCommodityOptions(values?.container_type);
+	const fclCommodityOptions = getCommodityOptions(data?.container_type);
 
 	const finalControls = !isAirService ? fclControls({
 		data,
-		chargeCodeOptions,
+		// chargeCodeOptions: CHARGE_CODE_OPTIONS,
 		listShippingLineOptions,
 		mainPortOptions1,
 		mainPortOptions2,
 		originLocationOptions,
 		destinationLocationOptions,
 		serviceProviders,
-		organizationUsers,
 		fclCommodityOptions,
 	}) : airControls({
 		data,
@@ -162,13 +164,25 @@ function AddRateModal({
 		destinationLocationOptions,
 		listAirLineOptions,
 		serviceProviders,
-		organizationUsers,
 	});
+
+	const { DEFAULT_VALUES, fields } = getDefaultValues(finalControls);
 
 	const showElements = {
 		origin_main_port_id      : data?.origin_port?.is_icd,
 		destination_main_port_id : data?.destination_port?.is_icd,
 	};
+
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+		watch,
+		setValue,
+	} = useForm({ defaultValues: DEFAULT_VALUES });
+
+	const values = watch();
+	const { finalFields } = FieldMutation({ fields, values, data });
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 
@@ -188,7 +202,7 @@ function AddRateModal({
 	const freeWeight = values?.free_weight;
 	const weightSlabs = values?.weight_slabs;
 
-	const tmp = JSON.stringify(weightSlabs);
+	const weightSlabsJSON = JSON.stringify(weightSlabs);
 
 	useEffect(() => {
 		if (!isAirService) {
@@ -215,14 +229,14 @@ function AddRateModal({
 				}
 			});
 		}
-	}, [tmp, weightSlabs, isAirService, freeWeight, setValue]);
+	}, [weightSlabsJSON, weightSlabs, isAirService, freeWeight, setValue]);
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please Add Rate" />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<Layout
-					fields={finalControls}
+					fields={finalFields}
 					control={control}
 					errors={errors}
 					showElements={showElements}
