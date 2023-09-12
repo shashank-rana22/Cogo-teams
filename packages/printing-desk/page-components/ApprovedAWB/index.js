@@ -24,7 +24,7 @@ function ApprovedAWB({
 }) {
 	const { t } = useTranslation(['printingDesk']);
 	const [triggerManifest, setTriggerManifest] = useState('');
-	const [handoverModal, setHandoverModal] = useState(false);
+	const [handoverModal, setHandoverModal] = useState('');
 	const fields = approvedAWBFields({ t });
 
 	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
@@ -40,19 +40,22 @@ function ApprovedAWB({
 				serviceId,
 				documentUrl,
 			};
+			const handleModal = (docId) => {
+				setHandoverModal(docId);
+			};
 			return (
 				<>
 					<Button
 						themeType="secondary"
-						onClick={() => setHandoverModal(true)}
+						onClick={() => handleModal(documentId)}
 						disabled={updateLoading}
 					>
 						{t('printingDesk:approve_awb_handover_button')}
 					</Button>
-					{handoverModal && (
+					{(handoverModal === documentId) && (
 						<Modal
-							show={handoverModal}
-							onClose={() => { setHandoverModal(false); }}
+							show={handoverModal === documentId}
+							onClose={() => handleModal('')}
 						>
 							<Modal.Header title="Confirm Handover?" />
 							<Modal.Body className={styles.modal_body}>
@@ -62,7 +65,7 @@ function ApprovedAWB({
 								<Button
 									themeType="secondary"
 									disabled={updateLoading}
-									onClick={() => setHandoverModal(false)}
+									onClick={() => handleModal('')}
 								>
 									{t('printingDesk:approve_awb_cancel_button')}
 

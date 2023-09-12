@@ -16,6 +16,11 @@
 	white-space: nowrap;
 }
 
+.mandatory_task::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .cargo_details {
 	display: flex;
 }
@@ -66,7 +71,7 @@
 	padding: 2px 8px;
 	font-size: 12px;
 	font-weight: 600;
-	color: #5be570;
+	color: #008001;
 	background: #ecfdf3;
 	border-radius: 16px;
 

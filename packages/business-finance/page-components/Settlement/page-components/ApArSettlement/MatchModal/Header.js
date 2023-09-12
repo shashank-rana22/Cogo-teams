@@ -1,20 +1,28 @@
 import { Button, Datepicker, ButtonIcon, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMRefresh } from '@cogoport/icons-react';
-import React from 'react';
+import { IcMRefresh, IcMOverflowDot } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import { getFormatAmount } from '../../../utils/getFormatAmount';
 
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
+const ZERO_BAL = 0;
+
 const handleSetTdsZero = (updatedData = [], setUpdatedData = () => {}) => {
-	const UPDATED_DATA_WITH_ZERO_TDS = updatedData?.map((item) => ({
-		...item,
-		allocationAmount : parseFloat(+item.allocationAmount) + parseFloat(+item.tds),
-		balanceAmount    : +item.balanceAmount + +item.tds,
-		tds              : 0,
-	}));
+	const UPDATED_DATA_WITH_ZERO_TDS = updatedData?.map((item) => {
+		const allocationAmount = parseFloat(item.allocationAmount || ZERO_BAL);
+		const balanceAmount = +item.balanceAmount || ZERO_BAL;
+		const tds = +item.tds || ZERO_BAL;
+		return {
+			...item,
+			allocationAmount : allocationAmount + tds,
+			balanceAmount    : balanceAmount + tds,
+			tds              : 0,
+		};
+	});
+
 	setUpdatedData(UPDATED_DATA_WITH_ZERO_TDS);
 };
 
@@ -39,6 +47,7 @@ function Header(
 		checkLoading = false,
 	},
 ) {
+	const [showJvButton, setShowJvButton] = useState(false);
 	const onClick = () => {
 		setShowDocument(true);
 	};
@@ -70,11 +79,32 @@ function Header(
 			<br />
 
 			<div className={styles.balanceStyle}>
-				<div style={{ display: 'flex', flexDirection: 'column', fontSize: '16px' }}>
-					Matching Balance
-					<p className={styles.paragraph}>
-						{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
-					</p>
+				<div className={styles.overflow_style}>
+					<div className={styles.match_bal_style}>
+						Matching Balance
+						<p className={styles.paragraph}>
+							{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
+						</p>
+					</div>
+					<div className={styles.overflow_dot}>
+						<IcMOverflowDot
+							height={20}
+							width={20}
+							onClick={() => setShowJvButton(!showJvButton)}
+						/>
+						<div>
+							{showJvButton
+							&& (
+								<Button
+									className={styles.btn}
+									themeType="primary"
+									onClick={() => setShowJV(true)}
+								>
+									CREATE JV
+								</Button>
+							)}
+						</div>
+					</div>
 				</div>
 
 				<div className={styles.btn_container}>
@@ -119,14 +149,6 @@ function Header(
 							/>
 						)}
 					</div>
-
-					<Button
-						className={styles.btn}
-						themeType="secondary"
-						onClick={() => setShowJV(true)}
-					>
-						CREATE JV
-					</Button>
 
 					<div className={styles.dryrun}>
 						<Button
