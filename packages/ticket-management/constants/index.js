@@ -112,8 +112,9 @@ export const REQUEST_TYPE_OPTIONS = [
 ];
 
 export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
-	'serial_id', 'service', 'trade_type', 'category', 'sub_category',
+	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority', 'file_url', 'notify_customer'];
 
-export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'additional_information', 'priority',
+export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
+	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
