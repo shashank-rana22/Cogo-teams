@@ -30,7 +30,7 @@ function Child(props) {
 				const Element = getFieldController(controlItem.type);
 
 				if (!Element || (scoringType === 'absolute'
-					&& ['fixed_percent', 'variable_percent'].includes(controlItem.name))
+					&& ['fixed_percentage_value', 'variable_percentage_value'].includes(controlItem.name))
 					|| (scoringType === 'percentage' && controlItem.name === 'base_score')) return null;
 
 				return (

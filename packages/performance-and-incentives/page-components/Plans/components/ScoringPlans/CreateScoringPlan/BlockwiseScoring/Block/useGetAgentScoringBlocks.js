@@ -3,7 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetAgentScoringBlocks = ({ blockValue = '' }) => {
+const useGetAgentScoringBlocks = (props) => {
+	const { watchBlock = '' } = props;
+
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : 'blocks',
 		method  : 'GET',
@@ -16,25 +18,27 @@ const useGetAgentScoringBlocks = ({ blockValue = '' }) => {
 				params: {
 					agent_scoring_parameters_data_required : true,
 					filters                                : {
-						display_name: blockValue,
+						display_name: watchBlock,
 					},
+					page_limit: 1000,
 				},
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
-	}, [blockValue, trigger]);
+	}, [watchBlock, trigger]);
 
 	useEffect(() => {
-		if (blockValue) {
+		if (watchBlock) {
 			getAgentScoringBlocks();
 		}
-	}, [getAgentScoringBlocks, blockValue]);
+	}, [getAgentScoringBlocks, watchBlock]);
+
+	const { list = [] } = data || {};
 
 	return {
-		data,
-		getAgentScoringBlocks,
-		loading,
+		list,
+		blackParameterLading: loading,
 	};
 };
 

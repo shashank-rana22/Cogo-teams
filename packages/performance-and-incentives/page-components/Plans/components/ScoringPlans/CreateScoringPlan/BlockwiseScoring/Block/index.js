@@ -1,3 +1,4 @@
+import { Button, Loader } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -16,31 +17,30 @@ function Block(props) {
 		name,
 		control,
 		errors,
-		index,
+		blockIndex,
 		removeBlock,
 		watch,
+		refetch,
 	} = props;
 
 	const {
-		subBlockType,
 		CHILD_EMPTY_VALUES,
-		blockValue,
-		IS_DEFAULT,
+		watchBlock,
+		subBlockType,
 		fields,
 		append,
 		remove,
 		subBlockOptions,
-		parameterOptions = {},
+		subBlockWiseParameterOptions,
+		blackParameterLading,
 	} = useBlockCreation({ control, name, watch });
-
-	const watchBlock = watch(`${name}.block`);
 
 	return (
 		<div className={styles.container} key={key}>
 			<div className={styles.header}>
-				<div className={styles.block_number}><p>{index + OFFSET}</p></div>
+				<div className={styles.block_number}><p>{blockIndex + OFFSET}</p></div>
 
-				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(index)}>
+				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(blockIndex)}>
 					<IcMDelete className={styles.icon} />
 					<div className={styles.underline_text}>Delete Block</div>
 				</div>
@@ -52,42 +52,42 @@ function Block(props) {
 					<sup className={styles.sup}>*</sup>
 				</div>
 
-				<div>
-					<SelectController name={`${name}.block`} control={control} options={blockOptions} />
+				<SelectController name={`${name}.block`} control={control} options={blockOptions} />
 
-					{errors[`${name}.block`] && (
-						<div className={styles.error_msg}>This is required</div>
-					)}
-				</div>
+				{errors[`${name}.block`] && (
+					<div className={styles.error_msg}>{errors[`${name}.block`]?.message}</div>
+				)}
 			</div>
 
 			{fields.map((field, subBlockIndex) => (
 				<SubBlock
 					key={field.id}
 					name={`${name}.${subBlockIndex}`}
-					index={subBlockIndex}
+					blockIndex={blockIndex}
+					subBlockIndex={subBlockIndex}
 					control={control}
 					watch={watch}
-					blockValue={blockValue}
+					watchBlock={watchBlock}
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
-					isDefault={IS_DEFAULT}
 					subBlockOptions={subBlockOptions}
-					parameterOptions={parameterOptions}
+					subBlockWiseParameterOptions={subBlockWiseParameterOptions}
+					refetch={refetch}
 				/>
 			))}
 
-			{!(subBlockType === 'default') && (!!watchBlock) && (
-				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} className={styles.add_btn}>
-					+
+			{blackParameterLading ? <Loader themeType="primary" /> : (!!subBlockType && (
+				<Button
+					type="button"
+					size="md"
+					themeType="link"
+					onClick={() => append(CHILD_EMPTY_VALUES)}
+				>
+					+ Add
 					{' '}
-					<span className={styles.underline_text}>
-						Add
-						{' '}
-						{startCase(subBlockType)}
-					</span>
-				</div>
-			)}
+					{startCase(subBlockType)}
+				</Button>
+			))}
 		</div>
 	);
 }

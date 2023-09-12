@@ -10,13 +10,12 @@ const CHILD_EMPTY_VALUES = {
 	service_fieldarray : [],
 };
 
-function BlockwiseScoring() {
+function BlockwiseScoring(props) {
+	const { data, refetch } = props;
+
 	const { control, formState: { errors }, watch } = useForm();
 
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'blocks',
-	});
+	const { fields, append, remove } = useFieldArray({ control, name: 'blocks' });
 
 	return (
 		<>
@@ -34,17 +33,22 @@ function BlockwiseScoring() {
 						name={`blocks.${index}`}
 						control={control}
 						errors={errors}
-						index={index}
+						blockIndex={index}
 						removeBlock={remove}
 						watch={watch}
+						data={data}
+						refetch={refetch}
 					/>
 				))}
 
-				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} style={{ cursor: 'pointer' }}>
-					+
-					{' '}
-					<span style={{ textDecoration: 'underline' }}>Add Block</span>
-				</div>
+				<Button
+					type="button"
+					size="md"
+					themeType="link"
+					onClick={() => append(CHILD_EMPTY_VALUES)}
+				>
+					+ Add Block
+				</Button>
 			</div>
 
 			<div className={styles.btn_container}>

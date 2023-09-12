@@ -4,7 +4,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Parameter',
 		className   : 'primary sm',
-		placeholder : 'select',
+		placeholder : 'Select',
 		options     : parameterOptions,
 		rules       : { required: 'Required' },
 	},
@@ -13,6 +13,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Scoring Type',
 		placeholder : 'Value',
+		value       : 'absolute',
 		options     : [{
 			label : 'Absolute',
 			value : 'absolute',
@@ -21,8 +22,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 			label : '%',
 			value : 'percentage',
 		}],
-		value : 'absolute',
-		rules : { required: 'Required' },
+		rules: { required: 'Required' },
 	},
 	{
 		name        : 'scoring_unit',
@@ -57,20 +57,14 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Provisional Trigger',
 		placeholder : 'Select',
-		style       : {
-			width: '250px',
-		},
-		rules: { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 	{
 		name        : 'realised_dtrigger',
 		type        : 'select',
 		label       : 'Realised Trigger',
 		placeholder : 'Select',
-		style       : {
-			width: '250px',
-		},
-		rules: { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 
 ]);

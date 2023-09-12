@@ -1,73 +1,55 @@
 import { useFieldArray } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useMemo } from 'react';
-
-import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
+import { useMemo } from 'react';
 
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
 const useBlockCreation = ({ control, name, watch }) => {
-	const CHILD_EMPTY_VALUES = {};
+	const CHILD_EMPTY_VALUES = {
+		sub_block_id: '',
+	};
 
-	getPrimaryControls({}).forEach((controlItem) => {
-		if (controlItem.type === 'fieldArray') {
-			const NESTED_CHILD_EMPTY_VALUES = {};
+	const watchBlock = watch(`${name}.block`);
 
-			controlItem.controls.forEach((childControlItem) => {
-				NESTED_CHILD_EMPTY_VALUES[childControlItem.name] = '';
-			});
+	const { list, blackParameterLading } = useGetAgentScoringBlocks({ watchBlock });
 
-			CHILD_EMPTY_VALUES[controlItem.name] = NESTED_CHILD_EMPTY_VALUES;
-		} else {
-			CHILD_EMPTY_VALUES[controlItem.name] = '';
-		}
-	});
-
-	const blockValue = watch(`${name}.block`);
-
-	const { data = {} } = useGetAgentScoringBlocks({ blockValue });
-
-	const { list = [] } = data;
-
-	const subBlockType = list[GLOBAL_CONSTANTS.zeroth_index]?.sub_block_type;
-
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name,
-	});
+	const { fields, append, remove } = useFieldArray({ control, name });
 
 	const subBlockOptions = useMemo(() => list.map(({ id, sub_block_name }) => ({
 		label : startCase(sub_block_name),
 		value : id,
 	})), [list]);
 
-	const parameterOptions = useMemo(() => list.reduce((acc, item) => {
-		acc[item.id] = item.agent_scoring_parameters.map((parameter) => ({
-			label : parameter.display_name,
-			value : parameter.id,
-			id    : parameter.id,
-			unit  : parameter.parameter_unit,
-		}));
-		return acc;
+	const subBlockWiseParameterOptions = useMemo(() => list.reduce((acc, subBlockItem) => {
+		const { id: sub_block_id, agent_scoring_parameters } = subBlockItem || {};
+
+		return {
+			...acc,
+			[sub_block_id]: (agent_scoring_parameters || []).map((parameter) => {
+				const { id, display_name, parameter_unit } = parameter || {};
+
+				return {
+					label : display_name,
+					value : id,
+					unit  : parameter_unit,
+				};
+			}),
+		};
 	}, {}), [list]);
 
-	console.log(parameterOptions, 'pOptions');
-
-	useEffect(() => {
-
-	}, [append]);
+	const subBlockType = list[GLOBAL_CONSTANTS.zeroth_index]?.sub_block_type;
 
 	return {
 		CHILD_EMPTY_VALUES,
-		blockValue,
+		watchBlock,
 		subBlockType,
 		fields,
 		append,
 		remove,
-		list,
 		subBlockOptions,
-		parameterOptions,
+		subBlockWiseParameterOptions,
+		blackParameterLading,
 	};
 };
 
