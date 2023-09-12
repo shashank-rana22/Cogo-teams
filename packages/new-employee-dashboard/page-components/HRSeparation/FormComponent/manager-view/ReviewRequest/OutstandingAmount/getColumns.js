@@ -1,7 +1,7 @@
 const getColumns = () => [
 	{
 		Header   : 'LEGAL BUSINESS NAME',
-		accessor : (item) => <div>{item?.legal_business_name || '-'}</div>,
+		accessor : (item) => <div>{item?.selfOrganizationName || '-'}</div>,
 	},
 	{
 		Header   : 'DUES',
@@ -9,7 +9,7 @@ const getColumns = () => [
 	},
 	{
 		Header   : '1 - 30 (DAYS)',
-		accessor : (item) => <div>{item?.first_to_thirty || '-'}</div>,
+		accessor : (item) => <div>{item?.onAccountAgeingBucket?.thirty?.ledgerAmount || '-'}</div>,
 	},
 	{
 		Header   : '31 - 45 (DAYS)',

@@ -4,40 +4,44 @@ import {
 	CheckboxController,
 	DatepickerController,
 	InputController,
-	useForm,
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import ModalComponent from './ModalComponent';
 import styles from './styles.module.css';
+import useHandoverTakeover from './useHandoverTakeover';
 
-function HandoverTakeover() {
-	const [showModal, setShowModal] = useState(false);
-
-	const { control, handleSubmit, formState: { errors } } = useForm();
-
-	const onSubmit = (values) => {
-		console.log('values :: ', values);
-		setShowModal(true);
-	};
+function HandoverTakeover({ data = {}, refetch = () => {} }) {
+	const {
+		showModal,
+		setShowModal,
+		control,
+		handleSubmit,
+		errors,
+		onSubmit,
+		loading,
+		is_complete,
+	} = useHandoverTakeover({ data, refetch });
 
 	return (
 		<div>
 			<div className={styles.title}>ASSIGN HANDOVER/TAKEOVER</div>
 			<div className={styles.sub_heading}>Select people for HOTO</div>
 
-			<div className={styles.completed}>
-				<img
-					src={GLOBAL_CONSTANTS.image_url.tick_icon_green}
-					width="20px"
-					height="20px"
-					alt="Empty-state"
-					style={{ marginRight: 10 }}
-				/>
-				You have successfully completed your tasks. No further changes are allowed.
-			</div>
+			{is_complete ? (
+				<div className={styles.completed}>
+					<img
+						src={GLOBAL_CONSTANTS.image_url.tick_icon_green}
+						width="20px"
+						height="20px"
+						alt="Empty-state"
+						style={{ marginRight: 10 }}
+					/>
+					You have successfully completed your tasks. No further changes are allowed.
+				</div>
+			) : null}
 
 			<div className={styles.styled_component}>
 				<div className={styles.header}>Status</div>
@@ -78,7 +82,7 @@ function HandoverTakeover() {
 					<div className={styles.label}>Additional Remark (if any)</div>
 					<InputController
 						control={control}
-						name="Additional_remark"
+						name="additional_remark"
 					/>
 				</div>
 			</div>
@@ -136,13 +140,19 @@ function HandoverTakeover() {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button onClick={handleSubmit(onSubmit)}>
+				<Button onClick={() => setShowModal(true)}>
 					Accept & Proceed
 					<IcMArrowRight height="18px" width="18px" />
 				</Button>
 			</div>
 
-			<ModalComponent showModal={showModal} setShowModal={setShowModal} />
+			<ModalComponent
+				showModal={showModal}
+				setShowModal={setShowModal}
+				handleSubmit={handleSubmit}
+				onSubmit={onSubmit}
+				loading={loading}
+			/>
 		</div>
 	);
 }
