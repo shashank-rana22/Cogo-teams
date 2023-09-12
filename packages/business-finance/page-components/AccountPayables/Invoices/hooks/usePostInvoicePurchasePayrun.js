@@ -25,7 +25,7 @@ const usePostInvoicePurchasePayrun = ({ refetch = () => {}, apiData = {} }) => {
 		{ manual: true },
 	);
 
-	const submitSelectedInvoices = async () => {
+	const onSubmitSelectedInvoices = async () => {
 		const { list = [] } = apiData ?? {};
 		const SELECTED_INVOICE = getSelectedInvoice({ list });
 
@@ -50,7 +50,7 @@ const usePostInvoicePurchasePayrun = ({ refetch = () => {}, apiData = {} }) => {
 
 	return {
 		createloading: loading,
-		submitSelectedInvoices,
+		onSubmitSelectedInvoices,
 	};
 };
 
