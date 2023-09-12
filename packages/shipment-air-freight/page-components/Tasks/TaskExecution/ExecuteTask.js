@@ -190,7 +190,7 @@ function ExecuteTask({
 	) {
 		return (
 			<UploadChecklist
-				shipment_data={shipment_data}
+				shipmentData={shipment_data}
 				task={task}
 				refetch={taskListRefetch}
 				onCancel={onCancel}
@@ -202,7 +202,7 @@ function ExecuteTask({
 	) {
 		return (
 			<UploadLeo
-				shipment_data={shipment_data}
+				shipmentData={shipment_data}
 				task={task}
 				refetch={taskListRefetch}
 				onCancel={onCancel}
@@ -214,7 +214,7 @@ function ExecuteTask({
 	) {
 		return (
 			<UploadShippingBill
-				shipment_data={shipment_data}
+				shipmentData={shipment_data}
 				task={task}
 				refetch={taskListRefetch}
 				onCancel={onCancel}

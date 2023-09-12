@@ -12,14 +12,14 @@ import { uploadChecklistFields } from './configs/upload-checklist-fields';
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
-function UploadChecklist({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
+function UploadChecklist({ shipmentData = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { fields = [] } = uploadChecklistFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
 
 	const DEFAULT_FILTERS = {
 		document_type : 'invoice',
-		shipment_id   : shipment_data?.id,
+		shipment_id   : shipmentData?.id,
 	};
 
 	const { data = {}, loading = false } = useListShipmentDocuments({ defaultFilters: DEFAULT_FILTERS });

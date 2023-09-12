@@ -13,7 +13,7 @@ import { uploadLeoFields } from './configs/upload-leo-fields';
 import styles from './styles.module.css';
 import UploadLeoDocument from './UploadLeoDocument';
 
-function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
+function UploadLeo({ shipmentData = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { fields = [] } = uploadLeoFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
@@ -21,7 +21,7 @@ function UploadLeo({ shipment_data = {}, task = {}, refetch = () => {}, onCancel
 
 	const DEFAULT_FILTERS = {
 		document_type : 'checklist',
-		shipment_id   : shipment_data?.id,
+		shipment_id   : shipmentData?.id,
 	};
 
 	const { data = {}, loading = false } = useListShipmentDocuments({ defaultFilters: DEFAULT_FILTERS });

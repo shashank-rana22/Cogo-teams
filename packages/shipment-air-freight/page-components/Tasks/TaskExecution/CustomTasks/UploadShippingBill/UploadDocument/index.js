@@ -39,7 +39,7 @@ function UploadDocument({ singleItem = {}, invoiceData = [], setInvoiceData = ()
 			size="sm"
 			placeholder="Enter Shipping Bill"
 			value={shippingBillValue}
-			onChange={(value) => { setShippingBillValue(value); }}
+			onChange={setShippingBillValue}
 		/>
 	);
 }

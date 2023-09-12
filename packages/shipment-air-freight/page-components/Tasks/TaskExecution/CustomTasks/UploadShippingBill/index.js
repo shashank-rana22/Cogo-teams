@@ -12,14 +12,14 @@ import { uploadShippingBillFields } from './configs/upload-shipping-bill-fields'
 import styles from './styles.module.css';
 import UploadDocument from './UploadDocument';
 
-function UploadShippingBill({ shipment_data = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
+function UploadShippingBill({ shipmentData = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { fields = [] } = uploadShippingBillFields();
 
 	const [invoiceData, setInvoiceData] = useState([]);
 
 	const DEFAULT_FILTERS = {
 		document_type : 'checklist',
-		shipment_id   : shipment_data?.id,
+		shipment_id   : shipmentData?.id,
 	};
 
 	const { data = {}, loading = false } = useListShipmentDocuments({
@@ -81,7 +81,7 @@ function UploadShippingBill({ shipment_data = {}, task = {}, refetch = () => {},
 	};
 
 	const payload = {
-		shipment_id     : shipment_data?.id,
+		shipment_id     : shipmentData?.id,
 		pending_task_id : task?.id,
 		document_data   : [...invoiceData],
 	};

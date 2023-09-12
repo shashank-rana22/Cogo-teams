@@ -81,7 +81,7 @@ function List({
 							totalItems={Number(totalCount)}
 							pageSize={PAGE_SIZE}
 							type="table"
-							onPageChange={(val) => { setPage(val); }}
+							onPageChange={setPage}
 						/>
 					</div>
 				) : null}
