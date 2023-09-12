@@ -6,7 +6,7 @@ import usePostAgentScoringAttributes from '../../../../../hooks/usePostAgentScor
 
 const useSubBlockCreation = ({
 	parameterOptions = {}, subBlockType = '',
-	watch = () => {}, name = '', index = 0, subBlockIndex = 0,
+	watch = () => {}, name = '', index = 0, subBlockIndex = 0, refetch = () => {},
 }) => {
 	const { postAgentScoringAttributes, loading } = usePostAgentScoringAttributes();
 
@@ -40,6 +40,8 @@ const useSubBlockCreation = ({
 		}));
 
 		postAgentScoringAttributes({ agentScoringBlockId, agentScoringParameters });
+
+		refetch();
 	};
 
 	return {

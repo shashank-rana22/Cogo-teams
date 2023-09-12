@@ -10,7 +10,7 @@ import useSubBlockCreation from './useSubBlockCreation';
 function SubBlock(props) {
 	const {
 		key = '', name = '', index = 0, subBlockIndex = 0, control = {}, errors = {}, watch = () => {},
-		subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
+		subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {}, refetch = () => {},
 	} = props;
 
 	const { Element, controls = [], handleClick = () => {}, parameterUnitOptions = {} } = useSubBlockCreation({
@@ -20,6 +20,7 @@ function SubBlock(props) {
 		watch,
 		index,
 		subBlockIndex,
+		refetch,
 	});
 
 	return (

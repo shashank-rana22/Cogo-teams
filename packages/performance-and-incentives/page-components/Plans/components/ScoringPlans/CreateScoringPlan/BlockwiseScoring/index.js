@@ -10,7 +10,9 @@ const CHILD_EMPTY_VALUES = {
 	service_fieldarray : [],
 };
 
-function BlockwiseScoring() {
+function BlockwiseScoring(props) {
+	const { data, refetch } = props;
+
 	const { control, formState: { errors }, watch } = useForm();
 
 	const { fields, append, remove } = useFieldArray({ control, name: 'blocks' });
@@ -34,6 +36,8 @@ function BlockwiseScoring() {
 						index={index}
 						removeBlock={remove}
 						watch={watch}
+						data={data}
+						refetch={refetch}
 					/>
 				))}
 

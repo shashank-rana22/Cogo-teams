@@ -18,7 +18,6 @@ const useGetScoringConfig = () => {
 			await trigger({
 				params: {
 					id,
-					status: 'draft',
 				},
 			});
 		} catch (error) {
@@ -35,7 +34,8 @@ const useGetScoringConfig = () => {
 	return {
 		data,
 		loading,
-		scoring_confing_id: id,
+		refetch            : getAgentScoringConfig,
+		scoring_confing_id : id,
 	};
 };
 

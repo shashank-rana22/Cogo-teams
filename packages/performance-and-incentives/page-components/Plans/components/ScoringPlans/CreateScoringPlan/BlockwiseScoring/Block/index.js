@@ -20,6 +20,7 @@ function Block(props) {
 		index,
 		removeBlock,
 		watch,
+		refetch,
 	} = props;
 
 	const {
@@ -72,6 +73,7 @@ function Block(props) {
 					isDefault={IS_DEFAULT}
 					subBlockOptions={subBlockOptions}
 					parameterOptions={parameterOptions}
+					refetch={refetch}
 				/>
 			))}
 

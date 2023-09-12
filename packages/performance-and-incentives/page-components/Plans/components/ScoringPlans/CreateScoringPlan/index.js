@@ -13,7 +13,7 @@ const { LIST } = ACTIVE_MODE_KEYS_MAPPING;
 function CreateScoringPlan(props) {
 	const { setActiveMode } = props;
 
-	const { data, scoring_confing_id } = useGetScoringConfig();
+	const { data = {}, scoring_confing_id, refetch } = useGetScoringConfig();
 
 	return (
 		<>
@@ -30,7 +30,7 @@ function CreateScoringPlan(props) {
 
 			<ScoringApplicability data={data} />
 
-			{scoring_confing_id ? <BlockwiseScoring /> : null}
+			{scoring_confing_id ? <BlockwiseScoring data={data} refetch={refetch} /> : null}
 
 		</>
 
