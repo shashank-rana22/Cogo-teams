@@ -2630,7 +2630,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/demand-forecast',
 					type          : 'link',
 					possible_apis : apis.demand_forecast,
-					main_apis     : ['get_rolling_forecast_port_pairs'],
+					main_apis     : ['get_rolling_forecast_fcl_freight_clusters', 'get_rolling_forecast_port_pairs'],
 				},
 			],
 		},
