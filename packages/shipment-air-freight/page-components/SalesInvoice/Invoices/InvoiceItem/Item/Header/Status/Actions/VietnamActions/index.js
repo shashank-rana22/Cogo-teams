@@ -84,10 +84,12 @@ function Actions({
 		salesInvoicesRefetch();
 	};
 
-	const underTranslation = () => ((invoice?.status === 'reviewed' && (!bfInvoice?.systemGeneratedProforma
+	function UnderTranslation() {
+		return (invoice?.status === 'reviewed' && (!bfInvoice?.systemGeneratedProforma
 			|| !bfInvoice?.proformaPdfUrl)) || (invoice?.status === 'approved'
 			&& !bfInvoice?.systemGeneratedInvoice) ? (
-				<div className={styles.pill}>Under Translation</div>) : null);
+				<div className={styles.pill}>Under Translation</div>) : null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -103,14 +105,14 @@ function Actions({
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
-								disabled={disableMarkAsReviewed}
+								disabled={disableMarkAsReviewed || shipment_data?.is_job_closed_financially}
 							>
 								Mark as Reviewed
 							</Button>
 						)}
 					</div>
 
-					{underTranslation}
+					<UnderTranslation />
 
 					{invoice?.status === 'reviewed'
 					&& bfInvoice?.systemGeneratedProforma && bfInvoice?.proformaPdfUrl ? (

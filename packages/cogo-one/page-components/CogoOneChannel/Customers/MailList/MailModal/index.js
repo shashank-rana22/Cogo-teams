@@ -14,6 +14,7 @@ function MailEditorModal({
 	mailProps = {},
 	userId = '',
 	activeMail = {},
+	viewType = '',
 }) {
 	const {
 		buttonType,
@@ -40,7 +41,7 @@ function MailEditorModal({
 		fetchEmailTemplate = () => {},
 		search = '',
 		setSearch = () => {},
-	} = useListEmailTemplates({ isTemplateView });
+	} = useListEmailTemplates({ isTemplateView, viewType });
 
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 
