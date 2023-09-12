@@ -35,7 +35,12 @@ function NewRequestModal({
 }) {
 	const { partner, user } = useSelector(({ profile }) => profile);
 
-	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal, getShipmentRefetch });
+	const refetchAdvanceDocument = () => {
+		setShowRequestModal(false);
+		getShipmentRefetch();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ refetchAdvanceDocument });
 	const { listEntities = {} } = useGetEntities();
 
 	const { primary_service = {}, shipment_data: { serial_id } } = useContext(ShipmentDetailContext);

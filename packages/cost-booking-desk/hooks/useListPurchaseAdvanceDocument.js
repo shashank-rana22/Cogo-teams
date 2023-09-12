@@ -8,25 +8,20 @@ import CostBookingDeskContext from '../context/CostBookingDeskContext';
 
 const INIT_PAGE = 1;
 
+const APPROVED_STATUS = 'APPROVED';
+
 const getParams = ({
 	query = '',
 	pagination = INIT_PAGE,
 	extraFilters = {},
-	statusFilter = '',
-	paymentActiveTab = '',
 }) => {
 	const searchQuery = query ? { q: query } : {};
 
-	const keyToSend = paymentActiveTab === 'payment_request' ? 'status' : 'reconciled';
-	const statusToSend = paymentActiveTab === 'payment_request'
-	&& !isEmpty(statusFilter) ? [statusFilter] : statusFilter;
-
 	return {
-		tradeType   : 'import',
-		type        : 'CONTAINER_SECURITY_DEPOSIT',
-		[keyToSend] : !isEmpty(statusToSend) ? statusToSend : undefined,
-		pageIndex   : pagination,
-		pageSize    : 10,
+		tradeType : 'import',
+		type      : 'CONTAINER_SECURITY_DEPOSIT',
+		pageIndex : pagination,
+		pageSize  : 10,
 		...searchQuery,
 		...extraFilters,
 	};
@@ -48,7 +43,15 @@ function useListPurchaseAdvanceDocument({ searchValue = '', modalData = {} }) {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const extraFilters = paymentActiveTab === 'refunds_and_settlements' ? { status: 'APPROVED' } : {};
+	const extraFilters = paymentActiveTab === 'payment_request'
+		? {
+			status: !isEmpty(statusFilter)
+				? [statusFilter] : undefined,
+		} : {
+			status     : APPROVED_STATUS,
+			reconciled : !isEmpty(statusFilter)
+				? statusFilter : undefined,
+		};
 
 	const [{ loading, data }, trigger] = useRequestBf({
 		url     : '/purchase/advance-document/list-csd-advance-documents',

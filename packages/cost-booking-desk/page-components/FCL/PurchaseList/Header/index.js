@@ -1,5 +1,4 @@
-import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
+import { Tabs, TabPanel, Input, ButtonIcon, Select } from '@cogoport/components';
 import { IcMAppSearch, IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
@@ -32,8 +31,6 @@ function Header({
 	const statusOptions = paymentActiveTab === 'payment_request' ? ADVANCE_DOCUMENT_DEPOSIT_OPTIONS
 		: ADVANCE_DOCUMENT_REFUND_OPTIONS;
 
-	const { control } = useForm();
-
 	return (
 		<div className={styles.tab_search_container}>
 			<div className={styles.header_footer_part}>
@@ -53,17 +50,15 @@ function Header({
 			</div>
 			<div className={styles.filters}>
 				<div className={styles.status}>
-					<SelectController
+					<Select
+						value={modalData?.statusFilter}
+						options={statusOptions}
+						placeholder="Filter by Status"
+						onChange={(e) => setModalData((prev) => ({ ...prev, statusFilter: e }))}
+						isClearable
 						size="sm"
 						name="status"
-						options={statusOptions}
-						value={modalData?.status}
-						control={control}
-						placeholder="Filter by Status"
-						isClearable
-						onChange={(e) => setModalData((prev) => ({ ...prev, statusFilter: e }))}
 					/>
-
 				</div>
 
 				<Input
