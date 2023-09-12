@@ -85,20 +85,22 @@ function RenderHeader({
 							Add Template
 						</Button>
 					</div>
-					<div className={styles.file_uploader_div}>
-						<CustomFileUploader
-							disabled={uploading}
-							handleProgress={setUploading}
-							className="file_uploader"
-							accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
-							multiple
-							uploadIcon={<RenderUploadIcon uploading={uploading} />}
-							value={attachments}
-							onChange={setAttachments}
-							showProgress={false}
-							ref={uploaderRef}
-						/>
-					</div>
+					{buttonType === 'forward' ? null : (
+						<div className={styles.file_uploader_div}>
+							<CustomFileUploader
+								disabled={uploading}
+								handleProgress={setUploading}
+								className="file_uploader"
+								accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
+								multiple
+								uploadIcon={<RenderUploadIcon uploading={uploading} />}
+								value={attachments}
+								onChange={setAttachments}
+								showProgress={false}
+								ref={uploaderRef}
+							/>
+						</div>
+					)}
 
 					<div
 						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
