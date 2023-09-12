@@ -18,8 +18,10 @@ function LeaveAgentModal({
 	paramsState = {},
 	getListChatAgents = () => {},
 	setActiveCard = () => {},
+	shiftList = [],
 }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
+	const [shiftData, setShiftData] = useState({});
 
 	const { list = [] } = listAgentStatus || {};
 
@@ -79,7 +81,7 @@ function LeaveAgentModal({
 
 			<div className={styles.list_container}>
 				{(isLoading ? [...Array(DEFAULT_PAGE_LIMIT).keys()] : list).map((itm) => {
-					const { id = '', name = '', status = '', agent_id = '' } = itm;
+					const { id = '', name = '', status = '', agent_id = '' } = itm || {};
 
 					return (
 						<div
@@ -105,6 +107,12 @@ function LeaveAgentModal({
 										agentId={agent_id}
 										statusLoading={statusLoading}
 										handleToggle={handleToggle}
+										shiftList={shiftList}
+										setShiftData={setShiftData}
+										shiftData={shiftData}
+										rowId={id}
+										updateUserStatus={updateUserStatus}
+										list={list}
 									/>
 								)}
 							</div>
