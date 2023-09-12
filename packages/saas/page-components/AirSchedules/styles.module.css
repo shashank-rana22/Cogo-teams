@@ -1,0 +1,26 @@
+.heading {
+	h1 {
+		margin: 0;
+		margin-right: 24px;
+		font-size: 20px;
+		font-weight: 700;
+		color: #282b2e;
+	}
+}
+
+.tag {
+	padding: 7px 14px;
+	margin: 4px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+	background: #3b526b;
+	border-radius: 15px;
+}
+
+.flex_container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-gap: 12px;
+	margin-top: 24px;
+}

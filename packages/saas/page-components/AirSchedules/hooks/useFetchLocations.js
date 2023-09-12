@@ -1,8 +1,9 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useFetchLocations = (status) => {
-	const [{ loading }, trigger] = useRequest({
+	const [filter, setFilters] = useState({});
+	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_saas_air_schedule_subscription',
 	}, { manual: true });
@@ -10,16 +11,19 @@ const useFetchLocations = (status) => {
 	useEffect(() => {
 		trigger({
 			params: {
-				filters    : { status },
-				page       : 1,
-				page_limit : 10,
+				filter: { ...filter },
 			},
 		});
-	}, [status, trigger]);
+	}, [status, filter, trigger]);
+	const refetchSchedule = () => {
 
+	};
 	return {
-		list           : [],
-		resolveLoading : loading,
+		data,
+		filter,
+		setFilters,
+		loading,
+		refetchSchedule,
 
 	};
 };
