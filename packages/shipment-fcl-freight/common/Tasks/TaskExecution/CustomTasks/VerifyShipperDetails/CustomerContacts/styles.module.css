@@ -8,12 +8,13 @@
 
 .table {
 	:global {
-		.ui_table_body_row {
-			height: 75px;
+		.ui_table_body_cell {
+			padding: 12px 8px;
+			overflow: visible;
 		}
 
-		.ui_table_body_cell {
-			overflow-y: scroll;
+		.country_code {
+			margin-right: 12px;
 		}
 	}
 }

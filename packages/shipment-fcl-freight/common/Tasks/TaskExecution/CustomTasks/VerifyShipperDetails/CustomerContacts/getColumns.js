@@ -17,59 +17,47 @@ function getColumns({
 			id       : 'select_contacts',
 			Header   : 'Select',
 			accessor : (item) => (
-				<div>
-					<Checkbox
-						disabled={isEditMode === item?.id}
-						onChange={(event) => {
-							setCheckList(() => {
-								if (event?.target?.checked) {
-									return item?.id;
-								}
-								return null;
-							});
-						}}
-					/>
-				</div>
-
+				<Checkbox
+					disabled={isEditMode === item?.id}
+					onChange={(event) => {
+						setCheckList(() => {
+							if (event?.target?.checked) {
+								return item?.id;
+							}
+							return null;
+						});
+					}}
+				/>
 			),
 		},
 		{
 			id       : 'contact_name',
 			Header   : 'Name',
 			accessor : (item) => (
-				isEditMode === item?.id
-					? (
-						<InputController
-							size="sm"
-							name="name"
-							control={control}
-							value={item?.name}
-							placeholder="Enter Name"
-							// rules={{}}
-						/>
-					) : (
-						<div>{item?.name}</div>
-					)
+				isEditMode === item?.id ? (
+					<InputController
+						size="sm"
+						name="name"
+						control={control}
+						value={item?.name}
+						placeholder="Enter Name"
+					/>
+				) : item?.name
 			),
 		},
 		{
 			id       : 'contact_email',
 			Header   : 'Email',
 			accessor : (item) => (
-				isEditMode === item?.id
-					? (
-						<InputController
-							size="sm"
-							name="email"
-							control={control}
-							value={item?.email}
-							placeholder="Enter Email Address"
-							// rules={{}}
-						/>
-					)
-					: (
-						<div>{item?.email}</div>
-					)
+				isEditMode === item?.id ? (
+					<InputController
+						size="sm"
+						name="email"
+						control={control}
+						value={item?.email}
+						placeholder="Enter Email Address"
+					/>
+				) : item?.email
 			),
 		},
 		{
@@ -85,9 +73,7 @@ function getColumns({
 							value={item?.mobile_number}
 							placeholder="Enter Mobile Number"
 						/>
-					) : (
-						<div>{`${item?.mobile_country_code} ${item?.mobile_number}`}</div>
-					)
+					) : `${item?.mobile_country_code} ${item?.mobile_number}`
 			),
 		},
 		{
@@ -103,7 +89,6 @@ function getColumns({
 									onClick={() => { handleSubmit(onUpdateLeadUser); }}
 								>
 									Save
-
 								</Button>
 
 								<Button
@@ -111,7 +96,6 @@ function getColumns({
 									onClick={() => setIsEditMode(null)}
 								>
 									Cancel
-
 								</Button>
 							</>
 						) : (
@@ -120,7 +104,6 @@ function getColumns({
 								onClick={() => { setIsEditMode(item?.id); }}
 							>
 								<IcMEdit />
-
 							</Button>
 						)}
 				</div>
