@@ -2,7 +2,6 @@ import { SelectController, InputController } from '@cogoport/forms';
 import { useMemo } from 'react';
 
 import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
-// import usePostAgentScoringAttributes from '../../../../../hooks/usePostAgentScoringConfigAttributes';
 
 const useSubBlockCreation = ({ parameterOptions = {}, subBlockType = '', watch = () => {}, name = '' }) => {
 	const watchSubBlock = watch(`${name}.service`);

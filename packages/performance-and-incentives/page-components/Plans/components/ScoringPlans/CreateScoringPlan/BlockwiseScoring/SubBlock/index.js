@@ -9,8 +9,15 @@ import useSubBlockCreation from './useSubBlockCreation';
 
 function SubBlock(props) {
 	const {
-		key = '', name = '', index = 0, control = {}, errors = {}, watch = () => {},
-		subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
+		name,
+		subBlockIndex,
+		control,
+		errors,
+		watch,
+		subBlockType,
+		removeSubBlock,
+		subBlockOptions,
+		parameterOptions,
 	} = props;
 
 	const {
@@ -21,7 +28,7 @@ function SubBlock(props) {
 	} = useSubBlockCreation({ parameterOptions, subBlockType, name, watch });
 
 	return (
-		<div key={key} className={styles.container}>
+		<div className={styles.container}>
 			<div className={styles.inner_container}>
 				<div className={styles.control_item}>
 					<div className={styles.label}>
@@ -41,7 +48,7 @@ function SubBlock(props) {
 					)}
 				</div>
 
-				<div role="presentation" className={styles.delete_block} onClick={() => removeSubBlock(index)}>
+				<div role="presentation" className={styles.delete_block} onClick={() => removeSubBlock(subBlockIndex)}>
 					<IcMDelete className={styles.icon} />
 
 					<div className={styles.underline_text}>

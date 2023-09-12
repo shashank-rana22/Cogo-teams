@@ -56,7 +56,6 @@ const useBlockCreation = ({ control, name, watch }) => {
 		fields,
 		append,
 		remove,
-		list,
 		subBlockOptions,
 		parameterOptions,
 	};

@@ -31,7 +31,7 @@ function BlockwiseScoring() {
 						name={`blocks.${index}`}
 						control={control}
 						errors={errors}
-						index={index}
+						blockIndex={index}
 						removeBlock={remove}
 						watch={watch}
 					/>

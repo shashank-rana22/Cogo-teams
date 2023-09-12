@@ -55,8 +55,7 @@
 .error_msg {
 	margin: 0;
 	font-size: 12px;
-	font-weight: 500;
-	color: #cb6464;
+	color: #f00;
 }
 
 .label {

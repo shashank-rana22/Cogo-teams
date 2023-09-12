@@ -17,16 +17,15 @@ function Block(props) {
 		name,
 		control,
 		errors,
-		index,
+		blockIndex,
 		removeBlock,
 		watch,
 	} = props;
 
 	const {
-		subBlockType,
 		CHILD_EMPTY_VALUES,
 		blockValue,
-		IS_DEFAULT,
+		subBlockType,
 		fields,
 		append,
 		remove,
@@ -39,9 +38,9 @@ function Block(props) {
 	return (
 		<div className={styles.container} key={key}>
 			<div className={styles.header}>
-				<div className={styles.block_number}><p>{index + OFFSET}</p></div>
+				<div className={styles.block_number}><p>{blockIndex + OFFSET}</p></div>
 
-				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(index)}>
+				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(blockIndex)}>
 					<IcMDelete className={styles.icon} />
 					<div className={styles.underline_text}>Delete Block</div>
 				</div>
@@ -56,7 +55,7 @@ function Block(props) {
 				<SelectController name={`${name}.block`} control={control} options={blockOptions} />
 
 				{errors[`${name}.block`] && (
-					<div className={styles.error_msg}>This is required</div>
+					<div className={styles.error_msg}>{errors[`${name}.block`]?.message}</div>
 				)}
 			</div>
 
@@ -64,13 +63,12 @@ function Block(props) {
 				<SubBlock
 					key={field.id}
 					name={`${name}.${subBlockIndex}`}
-					index={subBlockIndex}
+					subBlockIndex={subBlockIndex}
 					control={control}
 					watch={watch}
 					blockValue={blockValue}
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
-					isDefault={IS_DEFAULT}
 					subBlockOptions={subBlockOptions}
 					parameterOptions={parameterOptions}
 				/>
