@@ -53,7 +53,7 @@ function CardItem({ data = {}, testsCount = 0, coursesCount = 0 }) {
 					<div className={styles.description}>{desc}</div>
 				</div>
 
-				{tag_text !== '' ? (
+				{(!testsCount > ATLEAST_ONE && !coursesCount > ATLEAST_ONE && title === 'CogoAcademy') ? (
 
 					<div className={styles.tag_and_link_container}>
 						<div className={styles.tag_container}>
