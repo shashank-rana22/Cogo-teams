@@ -228,5 +228,10 @@
   "approval_type_required_message": "Yêu cầu loại phê duyệt",
   "entity_code_required_message": "Yêu cầu mã đơn vị",
   "user_required_message": "Yêu cầu người dùng",
-  "criteria_required_message": "Yêu cầu tiêu chí"
+  "criteria_required_message": "Yêu cầu tiêu chí",
+  "shipment_re_open_request": "Yêu cầu mở lại lô hàng",
+  "job_open_label": "Việc làm đang mở",
+  "total_buy_label": "Tổng số tiền mua",
+  "total_sell_label": "Tổng số bán",
+  "profit_margin_label" : "Tỷ suất lợi nhuận"
 }

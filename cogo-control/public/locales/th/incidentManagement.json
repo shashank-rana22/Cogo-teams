@@ -228,5 +228,10 @@
   "approval_type_required_message": "ต้องระบุประเภทการอนุมัติ",
   "entity_code_required_message": "ต้องระบุรหัส EntityCode",
   "user_required_message": "ต้องระบุผู้ใช้งาน",
-  "criteria_required_message": "ต้องระบุเกณฑ์"
+  "criteria_required_message": "ต้องระบุเกณฑ์",
+  "shipment_re_open_request": "คำขอเปิดการจัดส่งอีกครั้ง",
+  "job_open_label": "เปิดรับสมัคร",
+  "total_buy_label": "ยอดซื้อทั้งหมด",
+  "total_sell_label": "ขายรวม",
+  "profit_margin_label" : "อัตรากำไรขั้นต้น"
 }

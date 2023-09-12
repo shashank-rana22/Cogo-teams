@@ -17,7 +17,7 @@ const useAutoJob = ({ setOpenConfig = () => {}, setConfigButton = false }) => {
 		{
 			url     : '/common/job/get-job-closure-rules',
 			method  : 'get',
-			authKey : 'get_purchase_bills_list',
+			authKey : 'get_common_job_get_job_closure_rules',
 		},
 		{ manual: false },
 	);

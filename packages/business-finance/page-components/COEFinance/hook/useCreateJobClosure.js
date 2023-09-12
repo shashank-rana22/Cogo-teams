@@ -5,8 +5,9 @@ import toastApiError from '../../commons/toastApiError.ts';
 
 const useCreateJobClosure = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequestBf({
-		url    : '/common/job/create-job-closure-rule',
-		method : 'POST',
+		url     : '/common/job/create-job-closure-rule',
+		method  : 'POST',
+		authKey : 'post_common_job_create_job_closure_rule',
 	}, { manual: true });
 
 	const apiTrigger = async (params) => {
