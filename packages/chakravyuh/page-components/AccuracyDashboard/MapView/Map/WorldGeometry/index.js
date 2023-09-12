@@ -1,16 +1,15 @@
-import { Loader } from '@cogoport/components';
-import { FeatureGroup, GeoJSON, L, useMapEvents } from '@cogoport/maps';
+import { FeatureGroup, GeoJSON, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../../common/MapTooltip';
-import useListNearestLocations from '../../../../../hooks/useListNearestLocations';
+// import useListNearestLocations from '../../../../../hooks/useListNearestLocations';
 import { getPolygonStyleProps } from '../../../../../utils/map-utils';
-import styles from '../styles.module.css';
+// import styles from '../styles.module.css';
 
 const ONE = 1;
-const TIME_LIMIT = 300;
+// const TIME_LIMIT = 300;
 
 const WorldGeometry = React.forwardRef(({
 	hierarchy = {},
@@ -22,19 +21,19 @@ const WorldGeometry = React.forwardRef(({
 	setLocationFilters = () => {},
 	setBounds = () => {},
 }, ref) => {
-	const timerRef = useRef(null);
+	// const timerRef = useRef(null);
 	const activeCountryRef = useRef(null);
 
 	const filteredData = isEmpty(hierarchy) ? data
 		: data.filter(({ id }) => Object.values(hierarchy).includes(id));
 	const activeId = hierarchy?.country_id;
 
-	const { getNearestLocations, loading } = useListNearestLocations({
-		setLocationFilters,
-		setHierarchy,
-		setActiveList,
-		activeId,
-	});
+	// const { getNearestLocations, loading } = useListNearestLocations({
+	// 	setLocationFilters,
+	// 	setHierarchy,
+	// 	setActiveList,
+	// 	activeId,
+	// });
 
 	const onEachFeature = (feature, layer, id, name) => {
 		const styleProps = getPolygonStyleProps(accuracyMapping[id]);
@@ -67,26 +66,26 @@ const WorldGeometry = React.forwardRef(({
 		);
 	};
 
-	const handleMapClick = (e) => {
-		L.DomEvent.stopPropagation(e);
-		const latitude = e.latlng.lat;
-		const longitude = e.latlng.lng;
+	// const handleMapClick = (e) => {
+	// 	L.DomEvent.stopPropagation(e);
+	// 	const latitude = e.latlng.lat;
+	// 	const longitude = e.latlng.lng;
 
-		getNearestLocations({ filters: { latitude, longitude, type: ['country'] } });
-	};
+	// 	getNearestLocations({ filters: { latitude, longitude, type: ['country'] } });
+	// };
 
-	useMapEvents({
-		click(e) {
-			clearTimeout(timerRef.current);
+	// useMapEvents({
+	// 	click(e) {
+	// 		clearTimeout(timerRef.current);
 
-			timerRef.current = setTimeout(() => {
-				handleMapClick(e);
-			}, TIME_LIMIT);
-		},
-		dblclick() {
-			clearTimeout(timerRef.current);
-		},
-	});
+	// 		timerRef.current = setTimeout(() => {
+	// 			handleMapClick(e);
+	// 		}, TIME_LIMIT);
+	// 	},
+	// 	dblclick() {
+	// 		clearTimeout(timerRef.current);
+	// 	},
+	// });
 
 	useEffect(() => {
 		const cachedRef = activeCountryRef.current;
@@ -129,11 +128,11 @@ const WorldGeometry = React.forwardRef(({
 				);
 			})}
 
-			{loading && (
+			{/* {loading && (
 				<div className={styles.loader_container}>
 					<Loader className={styles.loader} />
 				</div>
-			)}
+			)} */}
 		</FeatureGroup>
 	);
 });

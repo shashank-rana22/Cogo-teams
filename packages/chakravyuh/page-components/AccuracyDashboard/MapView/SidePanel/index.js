@@ -1,4 +1,4 @@
-import { Select, cl } from '@cogoport/components';
+import { Select, Loader, cl } from '@cogoport/components';
 import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -15,8 +15,7 @@ import styles from './styles.module.css';
 
 const SCOPE_MAPPING = {
 	continents : 'country',
-	country    : 'region',
-	region     : 'ports',
+	country    : 'ports',
 };
 
 const TIMEOUT_TIME = 400;
@@ -61,13 +60,13 @@ function SidePanel({
 	}, [accuracyLoading, hasMore, page, setPage]);
 
 	useEffect(() => {
-		if (!isEmpty(list)) {
-			setActiveList(page === START_PAGE ? [...list] : activeList.concat(list));
-		} else if (page === START_PAGE) {
-			setActiveList([]);
+		if (page !== START_PAGE) {
+			setActiveList(activeList.concat(list));
+		} else {
+			setActiveList([...list]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [list, page]);
+	}, [JSON.stringify(list)]);
 
 	return (
 		<>
@@ -119,9 +118,11 @@ function SidePanel({
 						loadMore={loadMore}
 						hasMore={hasMore}
 						useWindow={false}
-						key={`${sort_by} ${sort_type}`}
+						threshold={500}
+						loader={<div className={styles.mini_loader}><Loader /></div>}
 					>
 						<List
+							key={`${sort_by} ${sort_type} ${destination}`}
 							setActiveId={setActiveId}
 							loading={accuracyLoading}
 							finalList={activeList}
