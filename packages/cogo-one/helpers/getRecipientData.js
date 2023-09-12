@@ -117,6 +117,7 @@ export function getRecipientData({
 			});
 		}
 
+		console.log('mailData:', mailData);
 		const newSubject = getSubject({ subject, buttonType });
 
 		setEmailState(

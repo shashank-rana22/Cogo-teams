@@ -28,11 +28,13 @@ function ComposeEmailBody(props) {
 		showControl = null,
 		uploading = false,
 	} = props || {};
+	console.log('emailState:', emailState);
 
 	const userActiveMails = (
 		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
 			...(userSharedMails || []),
+			...([emailState?.from_mail || activeMailAddress]),
 		])]
 	).map(
 		(curr) => ({ label: curr, value: curr }),

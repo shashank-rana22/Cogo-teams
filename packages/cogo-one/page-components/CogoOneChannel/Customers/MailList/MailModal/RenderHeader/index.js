@@ -67,7 +67,7 @@ function RenderHeader({
 							Cancel
 						</Button>
 
-						{!['reply', 'reply_all', 'forward'].includes(buttonType) && (
+						{['reply', 'reply_all', 'forward'].includes(buttonType) && (
 							<Button
 								size="sm"
 								themeType="secondary"
