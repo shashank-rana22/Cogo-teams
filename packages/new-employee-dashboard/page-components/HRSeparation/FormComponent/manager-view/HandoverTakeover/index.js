@@ -57,6 +57,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 							control={control}
 							params={{ filters: { employee_status: ['confirmed', 'probation'] } }}
 							size="md"
+							disabled={is_complete}
 							rules={{ required: true }}
 						/>
 						<div className={styles.error}>{errors?.handover_by ? '*required' : null}</div>
@@ -72,6 +73,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 							control={control}
 							params={{ filters: { employee_status: ['confirmed', 'probation'] } }}
 							size="md"
+							disabled={is_complete}
 							rules={{ required: true }}
 						/>
 						<div className={styles.error}>{errors?.takeover_by ? '*required' : null}</div>
@@ -83,6 +85,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 					<InputController
 						control={control}
 						name="additional_remark"
+						disabled={is_complete}
 					/>
 				</div>
 			</div>
@@ -91,11 +94,12 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 				<div className={styles.header}>Suggest Last Working Day</div>
 				<DatepickerController
 					placeholder="Select Date"
-					name="suggested_last_working_day"
+					name="last_working_day"
 					control={control}
 					rules={{ required: true }}
+					disabled={is_complete}
 				/>
-				<div className={styles.error}>{errors?.suggested_last_working_day ? '*required' : null}</div>
+				<div className={styles.error}>{errors?.last_working_day ? '*required' : null}</div>
 			</div>
 
 			<div className={styles.styled_component}>
@@ -104,6 +108,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 					placeholder="Type your notes here..."
 					name="notes_for_hrbp"
 					control={control}
+					disabled={is_complete}
 				/>
 			</div>
 
@@ -116,6 +121,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 						control={control}
 						name="accept_tnc"
 						type="checkbox"
+						disabled={is_complete}
 					/>
 					<div>
 						The details you provide guide critical decisions, making accuracy paramount.
@@ -134,6 +140,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 						control={control}
 						name="full_name"
 						rules={{ required: '*required' }}
+						disabled={is_complete}
 					/>
 					<div className={styles.error}>{errors?.full_name ? '*required' : null}</div>
 				</div>
