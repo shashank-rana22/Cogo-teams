@@ -186,7 +186,7 @@ function ExecuteTask({
 		);
 	}
 	if (
-		task.task === 'upload_checklist'
+		task.task === 'upload_checklist' && tradeType === 'export'
 	) {
 		return (
 			<UploadChecklist
@@ -198,7 +198,7 @@ function ExecuteTask({
 		);
 	}
 	if (
-		task.task === 'upload_leo'
+		task.task === 'upload_leo' && tradeType === 'export'
 	) {
 		return (
 			<UploadLeo
@@ -210,7 +210,7 @@ function ExecuteTask({
 		);
 	}
 	if (
-		task.task === 'upload_shipping_bill'
+		task.task === 'upload_shipping_bill' && tradeType === 'export'
 	) {
 		return (
 			<UploadShippingBill
