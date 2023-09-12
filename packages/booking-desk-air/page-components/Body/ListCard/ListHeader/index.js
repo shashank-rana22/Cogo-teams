@@ -1,17 +1,22 @@
 import { IcCCogoassured } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import INCO_TERM_MAPING from '../../../../constants/inco-term-mapping';
 
 import styles from './styles.module.css';
 
 const TAGS = ['cogoverse', 'post_facto'];
+
 function ListHeader({ item = {} }) {
+	const { t } = useTranslation(['airBookingDesk']);
+
 	const {
 		source = '',
 		tags = [],
 		importer_exporter = {},
-		trade_type = '', inco_term = '',
+		trade_type = '',
+		inco_term = '',
 		is_cogo_assured = '',
 	} = item;
 
@@ -24,7 +29,7 @@ function ListHeader({ item = {} }) {
 			{is_cogo_assured && (
 				<span className={styles.cogoport_assured}>
 					<IcCCogoassured />
-					<span>Cogo Assured</span>
+					<span>{t('airBookingDesk:cogo_assured')}</span>
 				</span>
 			)}
 			{tradeType ? (
@@ -33,11 +38,11 @@ function ListHeader({ item = {} }) {
 				</span>
 			) : null}
 			{importer_exporter_tags.includes('partner') && (
-				<span className={styles.importer_exporter_tags}>Channel Partner</span>)}
+				<span className={styles.importer_exporter_tags}>{t('airBookingDesk:channel_partner')}</span>)}
 			{source && (
 				<span className={styles.source}>
 					{source === 'direct'
-						? 'Sell Without Buy'
+						? t('airBookingDesk:sell_without_buy')
 						: startCase(source)}
 				</span>
 			) }

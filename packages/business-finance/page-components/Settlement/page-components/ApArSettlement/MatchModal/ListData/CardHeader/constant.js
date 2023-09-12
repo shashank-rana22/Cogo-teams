@@ -1,5 +1,5 @@
 export 	const HEADER_DATA = [
-	{ id: '0', label: '', span: 0.35 },
+	{ id: '0', label: '', span: 0.38 },
 	{ id: '1', label: 'Document No.', span: 1.3 },
 	{ id: '2', label: 'Doc Amount.', span: 1.1 },
 	{ id: '3', label: 'Exc. Rate', span: 0.9 },

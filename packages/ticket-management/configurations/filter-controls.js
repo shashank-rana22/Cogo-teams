@@ -1,6 +1,8 @@
 import {
-	asyncFieldsOrganizations, asyncFieldsOrganizationUser,
+	asyncFieldsOrganizations,
+	asyncFieldsOrganizationUser,
 	asyncTicketsCategory,
+	asyncFieldsTicketTypes,
 	asyncListShipments,
 } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
@@ -10,9 +12,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { REQUEST_TYPE_OPTIONS } from '../constants';
 
 const useRaiseTicketcontrols = ({
-	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '',
-	watchRequestType = '', resetField = () => {}, setValue = () => {},
-	formattedSubCategories = [], setSubCategories = () => {},
+	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '', watchCategory = '',
+	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
+	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
 }) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryOptions = useGetAsyncTicketOptions({
@@ -30,6 +32,17 @@ const useRaiseTicketcontrols = ({
 		valueKey : 'user_id',
 
 	});
+
+	const ticketTypeOptions = useGetAsyncTicketOptions({
+		...asyncFieldsTicketTypes(),
+		params: {
+			Audience    : 'cogoport_user',
+			RequestType : watchRequestType || undefined,
+			Category    : watchCategory || undefined,
+			Subcategory : watchSubCategory || undefined,
+		},
+	});
+
 	const serialIdOptions = useGetAsyncOptions({
 		...asyncListShipments(),
 		params   : { filters: { importer_exporter_id: watchOrgId, user_id: watchUserId } },
@@ -117,6 +130,17 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			isClearable    : true,
 			options        : formattedSubCategories,
+		},
+		{
+			...(ticketTypeOptions || {}),
+			label          : 'Select issue type',
+			name           : 'issue_type',
+			controllerType : 'select',
+			placeholder    : 'Select Type',
+			isClearable    : true,
+			rules          : { required: true },
+			defaultOptions : true,
+			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 		},
 		{
 			label          : 'Describe Issue',
