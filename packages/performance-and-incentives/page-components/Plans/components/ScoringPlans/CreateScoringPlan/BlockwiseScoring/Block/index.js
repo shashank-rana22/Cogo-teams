@@ -10,10 +10,17 @@ import useBlockCreation from './useBlockCreation';
 
 const OFFSET = 1;
 
-function Block({
-	key = '', name = '', control = {}, errors = {},
-	index = 0, removeBlock = () => {}, watch = () => {},
-}) {
+function Block(props) {
+	const {
+		key,
+		name,
+		control,
+		errors,
+		index,
+		removeBlock,
+		watch,
+	} = props;
+
 	const {
 		subBlockType,
 		CHILD_EMPTY_VALUES,
@@ -26,9 +33,10 @@ function Block({
 		parameterOptions = {},
 	} = useBlockCreation({ control, name, watch });
 
+	const watchBlock = watch(`${name}.block`);
+
 	return (
 		<div className={styles.container} key={key}>
-
 			<div className={styles.header}>
 				<div className={styles.block_number}><p>{index + OFFSET}</p></div>
 
@@ -69,7 +77,7 @@ function Block({
 				/>
 			))}
 
-			{!(subBlockType === 'default') && (
+			{!(subBlockType === 'default') && (!!watchBlock) && (
 				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} className={styles.add_btn}>
 					+
 					{' '}
@@ -80,7 +88,6 @@ function Block({
 					</span>
 				</div>
 			)}
-
 		</div>
 	);
 }

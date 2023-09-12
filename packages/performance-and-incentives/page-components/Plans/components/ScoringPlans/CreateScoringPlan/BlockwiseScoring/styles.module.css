@@ -8,8 +8,15 @@
 	border-radius: 6px;
 }
 
+.blocks_container {
+	padding: 16px 12px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
 .btn_container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-top: 12px;
 }
