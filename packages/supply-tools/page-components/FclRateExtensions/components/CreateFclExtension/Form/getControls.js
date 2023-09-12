@@ -1,7 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-import currencyOptions from '../../../../../constants/currencies';
-
 const geo = getGeoConstants();
 
 const getControls = ({ item }) => [
@@ -131,14 +129,14 @@ const getControls = ({ item }) => [
 	{
 		name           : 'gri_currency',
 		label          : 'Markup Currency',
-		type           : 'select',
+		type           : 'async_select',
 		span           : 4,
 		value          : item?.gri_currency,
 		optionsListKey : 'currencies',
+		asyncKey   	   : 'list_exchange_rate_currencies',
 		initialCall    : true,
 		showOptional   : false,
 		placeholder    : 'Markup Currency',
-		options        : currencyOptions,
 	},
 	{
 		name         : 'gri_rate',
