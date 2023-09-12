@@ -40,7 +40,7 @@ function ListMails({
 						<div
 							key={id}
 							role="presentation"
-							onClick={() => setActiveMail(itm)}
+							onClick={() => setActiveMail({ val: itm, tab: 'outlook' })}
 							className={cl`${styles.content} ${activeMail?.id === id ? styles.active_content : ''}`}
 						>
 							<div className={styles.mail_view}>
