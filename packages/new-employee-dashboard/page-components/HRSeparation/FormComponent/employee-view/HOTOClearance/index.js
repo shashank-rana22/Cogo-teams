@@ -8,35 +8,28 @@ import useSubmitHOTOClearance from '../useSubmitHOTOClearance';
 
 import styles from './styles.module.css';
 
-function HOTOClearance(
-	{ data = {} },
-) {
+function HOTOClearance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 
-	const { handleSubmit, control, errors, onSubmit } = useSubmitHOTOClearance({
-		onSuccess: () => {
-			console.log('api hit success...');
-			setShowModal(true);
-		},
-	});
+	const {
+		handleSubmit,
+		control,
+		errors,
+		onSubmit,
+	} = useSubmitHOTOClearance({ setShowModal, refetch });
 
 	const EMPLOYEE_CONTACT = {
 		EMPLOYEE_NAME  : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.employee_name : '',
 		EMPLOYEE_ID    : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.cogo_id : '',
-		EMPLOYEE_EMAIL : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.emai : '',
+		EMPLOYEE_EMAIL : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.email : '',
 		MY_NAME        : data ? data?.hoto_clearance?.hoto_clearance?.sub_process_data?.my_name : '',
 	};
 
-	function Error(key) {
-		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
-	}
 	return (
 		<div>
-			<div>
-				<div className={styles.sub_container}>
-					<div className={styles.title}>Handover takeover Clearance</div>
-					<div className={styles.sub_heading}>Please read carefully</div>
-				</div>
+			<div className={styles.sub_container}>
+				<div className={styles.title}>Handover takeover Clearance</div>
+				<div className={styles.sub_heading}>Please read carefully</div>
 			</div>
 
 			<div className={styles.content_container}>
@@ -49,8 +42,8 @@ function HOTOClearance(
 								name="checkbox_agreement"
 								rules={{ required: { value: true, message: '*required' } }}
 							/>
-							{Error('checkbox_agreement')}
 						</div>
+
 						<div className={styles.content}>
 							<p>
 								I wish to formally confirm the successful completion of the task takeover from
@@ -83,8 +76,10 @@ function HOTOClearance(
 							<p>
 								By mentioning my Name in the column, I confirm my understanding of the above terms and conditions.
 							</p>
+							{errors?.checkbox_agreement ? <div className={styles.errors}>*required</div> : null}
 						</div>
 					</div>
+
 					<div className={styles.name_main_container}>
 						<div className={styles.full_name_text}>
 							Full Name
@@ -98,7 +93,7 @@ function HOTOClearance(
 								size="md"
 								rules={{ required: { value: true, message: '*This Field is required' } }}
 							/>
-							{Error('name')}
+							{errors?.name ? <div className={styles.errors}>*required</div> : null}
 						</div>
 					</div>
 				</div>

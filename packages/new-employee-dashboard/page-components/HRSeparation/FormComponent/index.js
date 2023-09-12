@@ -19,8 +19,8 @@ import TechClearance from './tech-view/TechClearance';
 import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
 
 const COMPONENT_MAPPING = {
-	hrbp: {
-		hr_meeting                  : HRMeeting,
+	hr_meet: {
+		hr_meet                     : HRMeeting,
 		manager_clearance           : ManagerClearance,
 		finance_clearance           : FinanceClearance,
 		handover_takeover_clearance : HandoverTakeoverClearance,
@@ -30,26 +30,41 @@ const COMPONENT_MAPPING = {
 		exit_reasons                : ExitReasons,
 		exit_complete               : ExitInterviewComplete,
 	},
-	manager: {
-		review_request    : ReviewRequest,
-		handover_takeover : HandoverTakeover,
+	manager_clearance: {
+		review_request : ReviewRequest,
+		assign_hoto    : HandoverTakeover,
 	},
-	tech: {
+	tech_clearance: {
 		tech_clearance         : TechClearance,
 		tech_clearance_confirm : TechClearanceConfirm,
 	},
-	admin: {
+	admin_clearance: {
 		admin_clearance    : AdminClearance,
 		admin_confirmation : AdminConfirmed,
 	},
-	employee: {
-		HOTOClearance,
-		HOTOClearance_confirmation: HOTOClearanceConfirmation,
+	hoto_clearance: {
+		hoto_clearance             : HOTOClearance,
+		HOTOClearance_confirmation : HOTOClearanceConfirmation,
 	},
 };
 
-function FormComponent({ data = {}, loading = false, refetchApplicationDetails = () => {} }) {
-	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
+function FormComponent({
+	data = {},
+	loading = false,
+	refetchApplicationDetails = () => {},
+	view_type = 'hoto_clearance',
+}) {
+	let Render = null;
+
+	Object.keys(COMPONENT_MAPPING[view_type]).every((key) => {
+		const { is_complete = false } = data?.[view_type]?.[key] || {};
+
+		Render = COMPONENT_MAPPING?.[view_type]?.[key];
+
+		return is_complete;
+	});
+
+	if (loading) return 'loading...';
 
 	return (
 		<div className={styles.container}>

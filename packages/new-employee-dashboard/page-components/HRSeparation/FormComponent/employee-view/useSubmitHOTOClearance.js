@@ -4,13 +4,13 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useSubmitHOTOClearance = ({ onSuccess = () => {} }) => {
+const useSubmitHOTOClearance = ({ setShowModal, refetch }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
 		url    : '/update_application_process_details',
 	}, { manual: true });
 
-	const { handleSubmit, control, formState:{ errors } } = useForm();
+	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	const onSubmit = async (values = {}) => {
 		console.log('values', values);
@@ -21,7 +21,9 @@ const useSubmitHOTOClearance = ({ onSuccess = () => {} }) => {
 					process_name          : 'hoto_clearance',
 				},
 			});
-			onSuccess();
+
+			refetch();
+			setShowModal(true);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}

@@ -52,7 +52,6 @@ function FeedbackForm({
 						</div>
 					</div>
 				))}
-
 			</div>
 		</div>
 	);
