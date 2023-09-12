@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
+
 import styles from './styles.module.css';
 
 const CARD_ID = 1;
@@ -141,8 +143,7 @@ function CollectionPartyCard({
 									{' '}
 									<span
 										style={{
-											color: docContent?.includes(valueText)
-												? 'green' : 'auto',
+											color: getDetailValueColor({ value: valueText, docContent }),
 										}}
 									>
 										{valueText}

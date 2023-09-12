@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
+
 import FTLFreightInvoiceDetails from './FTLFreightInvoiceDetails';
 import styles from './styles.module.css';
 
@@ -72,8 +74,6 @@ function InvoiceDetailsCard({
 	}
 
 	const remarksValue = remarks?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
-
-	const getColor = (value) => (docContent?.includes(value) ? 'green' : 'auto');
 
 	const onClickResponse = (response = true) => {
 		if (response) {
@@ -166,7 +166,7 @@ function InvoiceDetailsCard({
 							Invoice Number -
 							{' '}
 							<span
-								style={{ color: getColor(billNumber) }}
+								style={{ color: getDetailValueColor({ value: billNumber, docContent }) }}
 							>
 								{billNumber}
 							</span>
@@ -175,7 +175,7 @@ function InvoiceDetailsCard({
 							Invoice Type -
 							{' '}
 							<span
-								style={{ color: getColor(invoiceType) }}
+								style={{ color: getDetailValueColor({ value: invoiceType, docContent }) }}
 							>
 								{invoiceType}
 
@@ -185,7 +185,7 @@ function InvoiceDetailsCard({
 							Supplier name -
 							{' '}
 							<span
-								style={{ color: getColor(organizationName) }}
+								style={{ color: getDetailValueColor({ value: organizationName, docContent }) }}
 							>
 								{organizationName}
 
@@ -195,7 +195,7 @@ function InvoiceDetailsCard({
 							Urgency Tag -
 							{' '}
 							<span
-								style={{ color: getColor(tag) }}
+								style={{ color: getDetailValueColor({ value: tag, docContent }) }}
 							>
 								{tag}
 							</span>
@@ -204,7 +204,7 @@ function InvoiceDetailsCard({
 							Remarks -
 							{' '}
 							<span
-								style={{ color: getColor(remarksValue) }}
+								style={{ color: getDetailValueColor({ value: remarksValue, docContent }) }}
 							>
 								{remarksValue || 'No Remarks'}
 
