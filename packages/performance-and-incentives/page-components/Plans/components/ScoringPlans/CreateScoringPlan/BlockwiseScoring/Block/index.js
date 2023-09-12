@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -52,13 +53,11 @@ function Block(props) {
 					<sup className={styles.sup}>*</sup>
 				</div>
 
-				<div>
-					<SelectController name={`${name}.block`} control={control} options={blockOptions} />
+				<SelectController name={`${name}.block`} control={control} options={blockOptions} />
 
-					{errors[`${name}.block`] && (
-						<div className={styles.error_msg}>This is required</div>
-					)}
-				</div>
+				{errors[`${name}.block`] && (
+					<div className={styles.error_msg}>This is required</div>
+				)}
 			</div>
 
 			{fields.map((field, subBlockIndex) => (
@@ -77,16 +76,17 @@ function Block(props) {
 				/>
 			))}
 
-			{!(subBlockType === 'default') && (!!watchBlock) && (
-				<div role="presentation" onClick={() => append(CHILD_EMPTY_VALUES)} className={styles.add_btn}>
-					+
+			{!!subBlockType && !!watchBlock && (
+				<Button
+					type="button"
+					size="md"
+					themeType="link"
+					onClick={() => append(CHILD_EMPTY_VALUES)}
+				>
+					+ Add
 					{' '}
-					<span className={styles.underline_text}>
-						Add
-						{' '}
-						{startCase(subBlockType)}
-					</span>
-				</div>
+					{startCase(subBlockType)}
+				</Button>
 			)}
 		</div>
 	);

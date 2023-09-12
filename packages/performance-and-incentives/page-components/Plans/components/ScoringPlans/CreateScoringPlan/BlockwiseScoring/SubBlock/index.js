@@ -7,22 +7,22 @@ import FieldArray from '../../../../../../../common/Form/FieldArray';
 import styles from './styles.module.css';
 import useSubBlockCreation from './useSubBlockCreation';
 
-function SubBlock({
-	key = '', name = '', index = 0, control = {}, errors = {}, watch = () => {},
-	subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
-}) {
-	const { Element, controls = [], handleClick = () => {}, parameterUnitOptions = {} } = useSubBlockCreation({
-		parameterOptions,
-		subBlockType,
-		name,
-		watch,
-	});
+function SubBlock(props) {
+	const {
+		key = '', name = '', index = 0, control = {}, errors = {}, watch = () => {},
+		subBlockType = '', removeSubBlock = () => {}, subBlockOptions = [], parameterOptions = {},
+	} = props;
+
+	const {
+		Element,
+		controls = [],
+		handleClick = () => {},
+		parameterUnitOptions = {},
+	} = useSubBlockCreation({ parameterOptions, subBlockType, name, watch });
 
 	return (
 		<div key={key} className={styles.container}>
-
 			<div className={styles.inner_container}>
-
 				<div className={styles.control_item}>
 					<div className={styles.label}>
 						{startCase(subBlockType)}
@@ -50,14 +50,13 @@ function SubBlock({
 						{subBlockType === 'group' ? 'Sub Block' : startCase(subBlockType)}
 					</div>
 				</div>
-
 			</div>
 
 			<FieldArray
 				control={control}
 				name={`${name}.sublock_fieldArray`}
 				controls={controls}
-				isText
+				buttonThemeType="link"
 				buttonText="Add Parameter"
 				watch={watch}
 				parameterUnitOptions={parameterUnitOptions}
@@ -71,9 +70,7 @@ function SubBlock({
 				onClick={handleClick}
 			>
 				Save
-
 			</Button>
-
 		</div>
 	);
 }
