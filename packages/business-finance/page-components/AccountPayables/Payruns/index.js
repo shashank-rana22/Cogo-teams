@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function Payruns({ activeEntity = '' }) {
 	const {
-		query,
+		query = {},
 	} = useSelector(({ general }) => ({
 		query: general?.query,
 	}));
