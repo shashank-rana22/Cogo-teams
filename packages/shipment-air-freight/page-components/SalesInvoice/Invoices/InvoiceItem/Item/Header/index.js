@@ -37,7 +37,7 @@ function Header({
 	const isAuthorized = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
@@ -80,11 +80,13 @@ function Header({
 		});
 	};
 
+	const IS_JOB_CLOSED = shipment_data?.is_job_closed;
+
 	const showRequestCN = showCN
 	&& !invoice.is_revoked
 	&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !shipment_data?.is_job_closed
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !IS_JOB_CLOSED
 	&& !invoice?.processing;
 
 	return (
@@ -124,6 +126,7 @@ function Header({
 								size="sm"
 								className={styles.amend_cn_buttons}
 								onClick={() => handleClick('amendment_requested')}
+								disabled={IS_JOB_CLOSED}
 							>
 								Request Amendment
 							</Button>
@@ -134,6 +137,7 @@ function Header({
 							size="sm"
 							className={styles.amend_cn_buttons}
 							onClick={() => setAskNullify(true)}
+							disabled={IS_JOB_CLOSED}
 						>
 							Request CN
 						</Button>
