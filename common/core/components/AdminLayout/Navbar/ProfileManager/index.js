@@ -1,10 +1,10 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
-import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
+import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp, IcMNotifications } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+// import { useRequest } from '@cogoport/request';
+// import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
@@ -16,31 +16,36 @@ function ProfileManager({
 	resetSubnavs,
 	setOpenPopover = () => {},
 	openPopover,
+	openNotificationPopover,
+	setOpenNotificationPopover,
 	timeLeft,
 	refetch = () => {},
 	loading,
 	checkIfSessionExpiring,
+	data,
+	notificationLoading,
+	trigger,
 }) {
 	const router = useRouter();
 	const { t } = useTranslation(['common']);
-	const { general } = useSelector((state) => state);
-	const { scope } = general;
+	// const { general } = useSelector((state) => state);
+	// const { scope } = general;
 
-	const [notificationPopover, setNotificationPopover] = useState(false);
+	// const [notificationPopover, setNotificationPopover] = useState(false);
 
-	const [{ data }, trigger] = useRequest({
-		url    : '/list_communications',
-		method : 'get',
-		params : {
-			data_required                  : true,
-			not_seen_count_required        : true,
-			pagination_data_required       : true,
-			page                           : 1,
-			communication_content_required : true,
-			filters                        : { type: 'platform_notification' },
-		},
-		scope,
-	}, { manual: false });
+	// const [{ data, loading : notificationLoading }, trigger] = useRequest({
+	// 	url    : '/list_communications',
+	// 	method : 'get',
+	// 	params : {
+	// 		data_required                  : true,
+	// 		not_seen_count_required        : true,
+	// 		pagination_data_required       : true,
+	// 		page                           : 1,
+	// 		communication_content_required : true,
+	// 		filters                        : { type: 'platform_notification' },
+	// 	},
+	// 	scope,
+	// }, { manual: false });
 
 	const routerFunction = () => {
 		router.push('/my-profile');
@@ -57,6 +62,11 @@ function ProfileManager({
 			name  : 'my_profile',
 			fun   : routerFunction,
 			icon  : IcMProfile,
+		},
+		{
+			title : 'notification', // add in translation
+			name  : 'notifications',
+			icon  : IcMNotifications,
 		},
 		{
 			title : t('common:switch_account'),
@@ -84,9 +94,9 @@ function ProfileManager({
 
 	];
 
-	useEffect(() => {
-		trigger();
-	}, [trigger]);
+	// useEffect(() => {
+	// 	trigger();
+	// }, [trigger]);
 
 	return (
 		<ul className={styles.list_container}>
@@ -99,9 +109,14 @@ function ProfileManager({
 				setOpenPopover={setOpenPopover}
 				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}
-				notificationPopover={notificationPopover}
-				setNotificationPopover={setNotificationPopover}
-				notificationCount={data?.is_not_seen_count}
+				// notificationPopover={notificationPopover}
+				// setNotificationPopover={setNotificationPopover}
+				notificationLoading={notificationLoading}
+				trigger={trigger}
+				openNotificationPopover={openNotificationPopover}
+				setOpenNotificationPopover={setOpenNotificationPopover}
+				notificationData={data}
+			//	notificationCount={data?.is_not_seen_count} // not being used
 			/>
 		</ul>
 	);

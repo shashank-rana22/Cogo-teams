@@ -6,10 +6,10 @@ import LoaderComp from './Loader';
 import styles from './styles.module.css';
 
 function Body({
-	loading,
-	list,
-	handleNotificationClick,
-	setShowPopover,
+	loading = false,
+	list = [],
+	handleNotificationClick = () => {},
+	setShowPopover = () => {},
 }) {
 	if (loading) { return <LoaderComp />; }
 

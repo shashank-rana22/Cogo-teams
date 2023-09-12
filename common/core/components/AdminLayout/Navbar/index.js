@@ -1,5 +1,7 @@
 import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
+// import NewNotifications from '@cogoport/notifications/page-components/NewNotifications/index';
+import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback, useState, useRef } from 'react';
 
@@ -10,6 +12,7 @@ import { sortNavs } from '../../../helpers/sortItems';
 import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
+import AdminNotification from './AdminNotification';
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
@@ -28,6 +31,7 @@ function Navbar({
 	const ref = useRef(null);
 	const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
+
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
@@ -43,6 +47,7 @@ function Navbar({
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
+	const [openNotificationPopover, setOpenNotificationPopover] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -64,8 +69,21 @@ function Navbar({
 		[],
 	);
 
+	const [{ data:notificationData, loading : notificationLoading }, trigger] = useRequest({
+		url    : '/list_communications',
+		method : 'get',
+		params : {
+			data_required                  : true,
+			not_seen_count_required        : true,
+			pagination_data_required       : true,
+			page                           : 1,
+			communication_content_required : true,
+			filters                        : { type: 'platform_notification' },
+		},
+	}, { manual: false });
+
 	const handleLeave = () => {
-		if (openPopover) {
+		if (openPopover || openNotificationPopover) {
 			setResetSubnavs(true);
 		} else {
 			setResetSubnavs(false);
@@ -94,11 +112,16 @@ function Navbar({
 					<ProfileManager
 						resetSubnavs={resetSubnavs}
 						setOpenPopover={setOpenPopover}
+						setOpenNotificationPopover={setOpenNotificationPopover}
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						loading={loading}
 						openPopover={openPopover}
+						openNotificationPopover={openNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
+						notificationLoading={notificationLoading}
+						trigger={trigger}
+						data={notificationData}
 					/>
 
 					<div className={styles.search_container}>
@@ -156,6 +179,7 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
+
 			<div
 				onMouseLeave={() => setResetSubnavs(false)}
 			>
@@ -172,7 +196,20 @@ function Navbar({
 							/>
 						)
 				}
+
+				{
+					openNotificationPopover
+						&& (
+							<AdminNotification
+								notificationData={notificationData}
+								notificationLoading={notificationLoading}
+								trigger={trigger}
+								setOpenNotificationPopover={setOpenNotificationPopover}
+							/>
+						)
+				}
 			</div>
+
 		</div>
 
 	);

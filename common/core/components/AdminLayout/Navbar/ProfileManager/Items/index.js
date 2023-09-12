@@ -1,10 +1,12 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
+// import NewNotifications from '../../../../../../../packages/notifications/page-components/NewNotifications';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
+// import AdminNotification from '../../AdminNotification';
 import SwitchAccounts from '../../SwitchAccounts';
 
 import styles from './styles.module.css';
@@ -62,9 +64,16 @@ function Items({
 	openPopover,
 	refetch = () => {},
 	checkIfSessionExpiring,
-	notificationCount = ZERO_COUNT,
+	// notificationCount = ZERO_COUNT,
+	openNotificationPopover,
+	setOpenNotificationPopover,
+	notificationData,
+	// notificationLoading,
+	// trigger,
 }) {
 	const { t } = useTranslation(['common']);
+
+	const notificationCount = notificationData?.is_not_seen_count;
 
 	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
@@ -91,6 +100,10 @@ function Items({
 		setOpenPopover(!openPopover);
 	};
 
+	const handleNotificationPopover = () => {
+		setOpenNotificationPopover(!openNotificationPopover);
+	};
+
 	let activeUser = {};
 	(userSessionMappings || []).forEach((user) => {
 		if (user_data?.id === user?.user_id) {
@@ -105,9 +118,12 @@ function Items({
 
 	const loadingState = checkIfSessionExpiring || lessThan30Seconds || loading;
 
+	// console.log('notification data 1', notificationData);
+
 	useEffect(() => {
 		setShowSubNav(false);
 		setOpenPopover(false);
+		setOpenNotificationPopover(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [resetSubnavs]);
 
@@ -169,6 +185,9 @@ function Items({
 										) {
 											handlePopover();
 										}
+
+										if (singleOption?.name
+                                            === 'notifications') { notificationRedirect(); }
 									}}
 									aria-hidden
 								>
@@ -190,18 +209,68 @@ function Items({
 									/>
 								</div>
 							)}
+
+							{/* {
+								openNotificationPopover && singleOption?.name === 'notifications' && (
+									<div>
+										<AdminNotification
+											notificationLoading={notificationLoading}
+											notificationData={notificationData}
+											trigger={trigger}
+										/>
+									</div>
+								)
+							} */}
 						</div>
 					);
 				})}
 			</div>
+			{/*
+			{openNotificationPopover && (
+				<AdminNotification
+					notificationLoading={notificationLoading}
+					notificationData={notificationData}
+					trigger={trigger}
+				/>
+			)} */}
 
+			{(notificationCount > ZERO_COUNT) && (
+				<div className={styles.notifications_container}>
+					{!showSubNav ? (
+						<div className={styles.notifiction_icon}>
+							<IcMNotifications width={16} height={16} fill="red" />
+						</div>
+					) : null}
+
+					<div style={showSubNav ? { width: '100%' } : {}}>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={handleNotificationPopover}
+							disabled={loadingState}
+							className={styles.button_styles}
+							style={showSubNav ? { width: '100%' } : {}}
+						>
+							{t('common:you_have')}
+							{' '}
+							{notificationCount}
+							{' '}
+							{t('common:new')}
+							{' '}
+							{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
+						</Button>
+					</div>
+				</div>
+			)}
+
+			{/*
 			{(notificationCount > ZERO_COUNT && showSubNav) && (
 				<div className={styles.button_container}>
 					<Button
 						size="md"
 						style={{ width: '100%', marginTop: 10 }}
 						themeType="primary"
-						onClick={notificationRedirect}
+						onClick={handleNotificationPopover}
 						disabled={loadingState}
 					>
 						{t('common:you_have')}
@@ -213,7 +282,7 @@ function Items({
 						{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
 					</Button>
 				</div>
-			)}
+			)} */}
 
 			{showSubNav && (
 				<div className={styles.button_container}>

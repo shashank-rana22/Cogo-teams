@@ -1,22 +1,22 @@
-import { Popover, Toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMNotifications } from '@cogoport/icons-react';
+// import { IcMNotifications } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import getStaticPath from '../../utils/getStaticPath';
 
 import RenderContent from './RenderContent';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
-const MAX_UNREAD_NOTIFICATIONS = 100;
+// const MAX_UNREAD_NOTIFICATIONS = 100;
 
 function NotificationsPopover(props) {
 	const {
 		onShowToggle = () => {},
 		formattedData = {},
-		placement = 'bottom',
-		saas = true,
+		// placement = 'bottom',
+		// saas = true,
 	} = props || {};
 
 	const { not_seen_count = 0 } = formattedData;
@@ -73,11 +73,18 @@ function NotificationsPopover(props) {
 		}
 	}, [audio, currentNotSeen, not_seen_count, t]);
 
-	const closePopover = () => setShow(false);
+	// const closePopover = () => setShow(false);
 
 	return (
 		<div style={{ display: 'flex' }}>
-			<Popover
+
+			<RenderContent
+				{...props}
+				notificationType={notificationType}
+				setNotificationType={setNotificationType}
+				setShowPopover={setShow}
+			/>
+			{/* <Popover
 				visible={show}
 				onClickOutside={closePopover}
 				interactive
@@ -108,7 +115,8 @@ function NotificationsPopover(props) {
 					) : null}
 
 				</div>
-			</Popover>
+			</Popover> */}
+
 		</div>
 
 	);

@@ -165,3 +165,49 @@
 	background: #fff;
 	border-radius: 1px solid #333;
 }
+
+.notify_inner {
+	display: flex;
+	justify-content: center;
+}
+
+.notify_outer {
+	display: flex;
+	justify-content: center;
+	height: 32px;
+    align-items: center;
+}
+
+.notifications_container {
+	width: 100%;
+	margin: 8px 0;
+
+	overflow: auto;
+	display: flex;
+	padding: 0;
+	/* margin: 0; */
+	/* margin-bottom: 10px; */
+	align-items: center;
+	
+
+	
+}
+
+.notifiction_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+	border-radius: 11.0769px;
+}
+
+.button_styles {
+	flex: 1;
+	padding-top: 1px;
+	overflow: hidden;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	user-select: none;
+	/* margin-left: 16px; */
+}

@@ -12,23 +12,36 @@ import extractNavLinks from '../../helpers/extractNavLinks';
 import notificationsRedirectLink from '../../helpers/notificationsRedirectLink';
 import showErrorsInToast from '../../utils/showErrorsInToast';
 
-function NewNotifications() {
+function NewNotifications({
+	notificationData = {},
+	notificationLoading :loading = false,
+	trigger = () => {},
+	setOpenNotificationPopover = () => {},
+}) {
 	const { zeroth_index } = GLOBAL_CONSTANTS;
+
+	const { is_not_seen_count = zeroth_index, list = [] } = notificationData;
+
 	const { push } = useRouter();
+
 	const { t } = useTranslation(['notifications', 'common']); // ??
+
 	const { general } = useSelector((state) => state);
+
 	const { unPrefixedPath } = general;
+
 	const geo = getGeoConstants();
+
 	const intervalRef = useRef(null);
 
 	const { query: { partner_id } = {} } = general;
 
 	const [dataRequired, setDataRequired] = useState(false);
 
-	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_communications',
-		method : 'get',
-	}, { manual: true });
+	// const [{ loading, data }, trigger] = useRequest({
+	// 	url    : '/list_communications',
+	// 	method : 'get',
+	// }, { manual: true });
 
 	const [, triggerBulkCommunication] = useRequest({
 		url    : '/bulk_update_communications',
@@ -41,8 +54,8 @@ function NewNotifications() {
 	}, { manual: true });
 
 	const formattedData = {
-		not_seen_count : data?.is_not_seen_count || zeroth_index,
-		list           : data?.list || [],
+		not_seen_count: is_not_seen_count,
+		list,
 		loading,
 		trigger,
 	};
@@ -58,36 +71,37 @@ function NewNotifications() {
 				action_name : action,
 			};
 
-			const updateRes = await triggerBulkCommunication({
+			await triggerBulkCommunication({
 				data: payload,
 			});
 
-			if (updateRes.hasError) {
-				showErrorsInToast(updateRes.messages, t);
-			}
+			// if (updateRes.hasError) {
+			// 	showErrorsInToast(updateRes.messages, t);
+			// }
 		} catch (err) {
+			console.log('err updateAction', err);
 			showErrorsInToast(err.data, t);
 		}
 	};
 
-	const onShowToggle = (show) => {
-		if (show) {
-			setDataRequired(true);
-			trigger({
-				params: {
-					data_required                  : true,
-					communication_content_required : true,
-					not_seen_count_required        : true,
-					filters                        : { type: 'platform_notification' },
-				},
-			});
-		} else {
-			setDataRequired(false);
-			if (data?.is_not_seen_count >= zeroth_index) {
-				updateAction('seen');
-			}
-		}
-	};
+	// const onShowToggle = (show) => {
+	// 	if (show) {
+	// 		setDataRequired(true);
+	// 		trigger({
+	// 			params: {
+	// 				data_required                  : true,
+	// 				communication_content_required : true,
+	// 				not_seen_count_required        : true,
+	// 				filters                        : { type: 'platform_notification' },
+	// 			},
+	// 		});
+	// 	} else {
+	// 		setDataRequired(false);
+	// 		if (is_not_seen_count >= zeroth_index) {
+	// 			updateAction('seen');
+	// 		}
+	// 	}
+	// };
 
 	const onMarkAllAsRead = () => {
 		updateAction('clicked');
@@ -100,26 +114,33 @@ function NewNotifications() {
 
 	const handleNotificationClick = async (item) => {
 		try {
+			console.log('notification clicked');
 			if (item?.content?.link) {
-				notificationsRedirectLink({ link: item.content.redirect_url, push, partner_id, NAVIGATION_LINKS });
+				notificationsRedirectLink({ link: item?.content?.link, push, partner_id, NAVIGATION_LINKS });
 			}
+
+			console.log('notification clicked trigger');
+
 			if (!item?.is_clicked) {
 				const updateRes = await triggerCommunication({
-					data: { id: item?.id, is_clicked: true },
+					data: { id: item?.id, is_clicked: true, is_seen: true },
 				});
 				if (updateRes.hasError) {
 					showErrorsInToast(updateRes.messages);
 				} else {
 					trigger({
 						params: {
-							data_required                  : dataRequired,
+							// data_required                  : dataRequired,
+							data_required                  : true,
 							not_seen_count_required        : true,
 							filters                        : { type: 'platform_notification' },
-							communication_content_required : dataRequired,
+							// communication_content_required : dataRequired,
+							communication_content_required : true,
 						},
 					});
 				}
 			}
+			setOpenNotificationPopover(false);
 		} catch (err) {
 			showErrorsInToast(err.data);
 		}
@@ -150,7 +171,7 @@ function NewNotifications() {
 
 	return (
 		<NotificationsPopover
-			onShowToggle={onShowToggle}
+			// onShowToggle={onShowToggle}
 			formattedData={formattedData}
 			handleNotificationClick={handleNotificationClick}
 			onMarkAllAsRead={onMarkAllAsRead}
