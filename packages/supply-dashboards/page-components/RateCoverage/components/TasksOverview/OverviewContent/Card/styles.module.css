@@ -73,8 +73,8 @@
 	border-radius: 8px;
 }
 
-.url_container{
+.url_container {
 	display: flex;
-	max-width: 120px;
 	flex-wrap: wrap;
+	max-width: 120px;
 }
