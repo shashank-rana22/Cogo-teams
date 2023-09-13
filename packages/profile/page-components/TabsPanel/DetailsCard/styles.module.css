@@ -12,15 +12,25 @@
 }
 
 .info_grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+	display: flex;
+	flex-wrap: wrap;
 	row-gap: 24px;
+	column-gap: 20px;
 	margin-top: 24px;
+
+	@media screen and (max-width: 768px) {
+		row-gap: 16px;
+	}
 }
 
 .label_value {
 	display: flex;
-	flex-direction: column;
+	flex: 1 0 calc(50% - 20px);
+	flex-flow: column wrap;
+
+	@media (max-width: 390px) {
+		flex-basis: 100%;
+	}
 }
 
 .label_value > :first-child {

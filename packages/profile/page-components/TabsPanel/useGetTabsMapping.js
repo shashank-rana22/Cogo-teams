@@ -3,8 +3,6 @@ import EducationDetails from './EducationDetails';
 import EmploymentDetails from './EmploymentDetails/index';
 import OtherDetails from './OtherDetails';
 import PersonalDetails from './PersonalDetails/index';
-import SalaryDetails from './SalaryDetails';
-import StatutoryDetails from './StatutoryDetails';
 
 const useGetTabsMapping = (data = {}, loading = false) => (
 	[
@@ -22,16 +20,6 @@ const useGetTabsMapping = (data = {}, loading = false) => (
 			name      : 'employment_details',
 			title     : 'Employment Details',
 			Component : <EmploymentDetails data={data} loading={loading} />,
-		},
-		{
-			name      : 'statutory_details',
-			title     : 'Statutory Details',
-			Component : <StatutoryDetails data={data} loading={loading} />,
-		},
-		{
-			name      : 'salary_details',
-			title     : 'Salary Details',
-			Component : <SalaryDetails data={data} loading={loading} />,
 		},
 		{
 			name      : 'documents',

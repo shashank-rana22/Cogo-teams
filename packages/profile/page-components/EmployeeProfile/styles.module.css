@@ -3,7 +3,7 @@
 	flex-direction: column;
 	background: #f9f5ec;
 
-	@media (max-width: 390px) {
+	@media (max-width: 576px) {
 		margin-top: 50px;
 	}
 }
@@ -15,6 +15,10 @@
 	background: #fff;
 	border-radius: 25px 25px 0 0;
 
+	@media (max-width: 768px) {
+		padding: 16px;
+		border-radius: 20px 20px 0 0;
+	}
 	@media (max-width: 390px) {
 		padding: 16px;
 		border-radius: 16px 16px 0 0;
@@ -55,6 +59,9 @@
 	width: 155px;
 	height: 155px;
 	background-color: #f9f5ec;
+	background-image: url("https://img.freepik.com/premium-vector/account-icon-user-icon-vector-graphics_292645-552.jpg");
+	background-position: center;
+	background-size: 175%;
 	border-radius: 50%;
 
 	@media (max-width: 768px) {
@@ -169,6 +176,9 @@
 	width: 100%;
 	padding-inline: 15px;
 
+	@media (max-width: 768px) {
+		padding: 0;
+	}
 	@media (max-width: 390px) {
 		padding: 0;
 	}

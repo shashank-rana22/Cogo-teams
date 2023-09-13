@@ -55,7 +55,7 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {}, loa
 		<div className={styles.info_subcontainer}>
 			{isGrid ? <span className={styles.info_heading}>{heading}</span> : null}
 			{isGrid ? (
-				<grid className={styles.info_grid}>
+				<div className={styles.info_grid}>
 					{details.map(({ label, value, key }) => (
 						<div className={styles.label_value} key={value}>
 							<span className={styles.label}>
@@ -85,7 +85,7 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {}, loa
 							)}
 						</div>
 					))}
-				</grid>
+				</div>
 			) : (
 				<div className={styles.info_div}>
 					{details.map(({ label, value, key }) => (
