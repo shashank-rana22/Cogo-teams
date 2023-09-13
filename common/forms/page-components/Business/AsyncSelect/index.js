@@ -73,6 +73,7 @@ import {
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
+	asyncListCogoOneShiftTime,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -164,6 +165,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
+	cogoone_shift_time                   : asyncListCogoOneShiftTime,
 };
 
 const SINGLE_ENTITY = 1;

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
 import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
-import useListCogoOneShift from '../../../../../hooks/useListCogoOneShifts';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 
 import AgentWiseLockScreen from './AgentWiseLockScreen';
@@ -66,8 +65,6 @@ function ConfigModal({
 		agentType: getCommonAgentType({ viewType }),
 	}) || {};
 
-	const { shiftList = [] } = useListCogoOneShift({ activeCard });
-
 	const {
 		list = [],
 		page_limit = 10,
@@ -103,7 +100,6 @@ function ConfigModal({
 			paramsState,
 			getListChatAgents,
 			setActiveCard,
-			shiftList,
 		},
 		switch_views: {
 			viewType,

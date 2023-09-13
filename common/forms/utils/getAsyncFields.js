@@ -969,6 +969,15 @@ function asyncListSpotSearchRateCardOperators() {
 	};
 }
 
+function asyncListCogoOneShiftTime() {
+	return {
+		labelKey    : 'shift_name',
+		valueKey    : 'id',
+		endpoint    : 'list_cogoone_shifts',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1048,4 +1057,5 @@ export {
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
+	asyncListCogoOneShiftTime,
 };
