@@ -104,11 +104,11 @@ const repositoryControls = (t = () => {}) => ({
 			placeholder : t('airRepository:ams_mode_placeholder'),
 			options     : [
 				{
-					label : 'Electronic',
+					label : t('airRepository:electronic_label'),
 					value : 'electronic',
 				},
 				{
-					label : 'Manual',
+					label : t('airRepository:manual_label'),
 					value : 'manual',
 				},
 			],

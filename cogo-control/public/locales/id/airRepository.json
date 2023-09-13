@@ -79,5 +79,7 @@
     "after":"Setelah",
     "ams_mode_field_label": "Modus Ams",
     "ams_mode_placeholder": "Pilih Mode AMS",
-    "ams_mode_label": "Mode AMS untuk Pasangan Bandara Maskapai ini"
+    "ams_mode_label": "Mode AMS untuk Pasangan Bandara Maskapai ini",
+    "electronic_label": "Elektronik",
+    "manual_label": "Manual"
 }

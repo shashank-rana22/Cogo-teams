@@ -79,5 +79,7 @@
     "after":"后",
     "ams_mode_field_label": "艾姆斯模式",
     "ams_mode_placeholder": "选择 AMS 模式",
-    "ams_mode_label": "该航空公司机场对的 AMS 模式"
+    "ams_mode_label": "该航空公司机场对的 AMS 模式",
+    "electronic_label": "电子的",
+    "manual_label": "手动的"
 }

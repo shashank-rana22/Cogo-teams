@@ -79,5 +79,7 @@
     "after":"หลังจาก",
     "ams_mode_field_label": "โหมดแอม",
     "ams_mode_placeholder": "เลือกโหมด AMS",
-    "ams_mode_label": "โหมด AMS สำหรับคู่สนามบินของสายการบินนี้"
+    "ams_mode_label": "โหมด AMS สำหรับคู่สนามบินของสายการบินนี้",
+    "electronic_label": "เกี่ยวกับอิเล็กทรอนิกส์",
+    "manual_label": "คู่มือ"
 }
