@@ -39,7 +39,6 @@ function FieldArray(props) {
 				<Child
 					{...rest}
 					key={field.id}
-					append={append}
 					field={field}
 					index={index}
 					control={control}
