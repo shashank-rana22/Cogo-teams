@@ -8,6 +8,8 @@ import {
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
+const EXCLUDE_TABS_MAIL = ['contacts'];
+
 const SUB_TAB_MAPPING = [
 	{
 		name  : 'all',
@@ -41,8 +43,10 @@ const SUB_TAB_MAPPING = [
 	},
 ];
 
-export const getSubTabsMapping = ({ viewType }) => (
+export const getSubTabsMapping = ({ viewType, activeTab = '' }) => (
 	SUB_TAB_MAPPING.filter(
-		(eachSubTab) => VIEW_TYPE_GLOBAL_MAPPING[viewType]?.chat_sub_tabs_access?.includes(eachSubTab.name),
+		(eachSubTab) => VIEW_TYPE_GLOBAL_MAPPING[viewType]?.chat_sub_tabs_access?.includes(eachSubTab.name) && (
+			activeTab === 'firebase_emails' ? !EXCLUDE_TABS_MAIL.includes(eachSubTab.name) : true
+		),
 	)
 );

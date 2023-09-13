@@ -18,6 +18,7 @@ function ShipmentsCard({
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	handleShipmentChat = () => {},
+	setActiveTab = () => {},
 	showModalType = () => {},
 }) {
 	const {
@@ -46,6 +47,7 @@ function ShipmentsCard({
 					showPopover={showPopover}
 					setShowPocModal={setShowPocModal}
 					showAddPrimaryUserButton={showAddPrimaryUserButton}
+					setActiveTab={setActiveTab}
 					showModalType={showModalType}
 				/>
 
