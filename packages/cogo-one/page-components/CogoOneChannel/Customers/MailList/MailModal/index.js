@@ -41,9 +41,9 @@ function MailEditorModal({
 	const {
 		data = {},
 		loading = false,
-		fetchEmailTemplate = () => { },
+		fetchEmailTemplate = () => {},
 		search = '',
-		setSearch = () => { },
+		setSearch = () => {},
 	} = useListEmailTemplates({ isTemplateView, viewType });
 
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
