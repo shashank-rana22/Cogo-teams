@@ -18,6 +18,7 @@ function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false
 	const handleResignation = (id, process_name) => {
 		router.push(`/new-employee-dashboard/separation?process_name=${process_name}&id=${id}`);
 	};
+
 	return (
 		<div className={styles.details} key={val.off_boarding_application_id}>
 			<div className={styles.design}>
@@ -47,10 +48,7 @@ function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false
 							onClick={() => handleResignation(val.off_boarding_application_id, val.process_name)}
 							disabled={updateLoading}
 						>
-							<div className={styles.accept}>
-								<IcMTick width={25} height={22} fill="#849E4C" />
-								<span className={styles.acc_content}>Go To Clearance</span>
-							</div>
+							Go To Clearance
 						</Button>
 					</div>
 				</div>
