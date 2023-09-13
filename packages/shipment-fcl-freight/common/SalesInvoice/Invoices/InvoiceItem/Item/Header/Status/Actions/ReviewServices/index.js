@@ -27,10 +27,14 @@ function ReviewServices({
 	const { loading, apiTrigger } = useUpdateInvoiceStatus({ refetch: refetchAfterCall });
 
 	const handleUpdate = () => {
-		apiTrigger({
+		let payload = {
 			id     : invoice?.id,
 			status : value ? 'reviewed' : undefined,
-		});
+		};
+
+		if (invoice?.is_fx_locked) payload = { ...payload, is_fx_locked: invoice.is_fx_locked };
+
+		apiTrigger(payload);
 	};
 
 	return showExchangeRateConfirmation ? (
