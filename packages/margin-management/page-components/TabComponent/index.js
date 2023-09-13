@@ -1,21 +1,43 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useGetPermission } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+import { useMemo, useCallback } from 'react';
 import { v1 as uuid } from 'uuid';
 
 import conditions from '../../utils/condition-constants';
+import EmptyState from '../EmptyState';
 
 import CardComponent from './CardComponent';
 import Details from './Details';
 
 function TabComponent({
 	filterParams = {},
-	setFilterParams = () => { }, data = {}, setMarginBreakupData = () => {}, activeTab = '',
-	setActivetab = () => {},
+	setFilterParams = () => { }, data = {}, setMarginBreakupData = () => { }, activeTab = '',
+	setActivetab = () => { },
+	activeService = '', setActiveService = () => { },
 }) {
 	const { isConditionMatches } = useGetPermission();
+	const checkConditions = useCallback(() => ({
+		demand: isConditionMatches(
+			[
+				...conditions.SEE_ALL_MARGINS,
+				...conditions.SEE_SALES_MARGIN,
+				...conditions.ADD_CHANNEL_PARTNER_MARGIN,
+			],
+			'or',
+		),
+		supply: isConditionMatches(
+			[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
+			'or',
+		),
+		cogoport         : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
+		approval_pending : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
 
+	}), [isConditionMatches]);
+	const condition = useMemo(() => checkConditions(), [checkConditions]);
 	const setActive = (val) => {
 		setActivetab(val);
+		setMarginBreakupData({});
 		if (val === 'approval_pending') {
 			setFilterParams({ ...filterParams, status: val, margin_type: 'demand' });
 		} else setFilterParams({ ...filterParams, margin_type: val, status: 'active' });
@@ -24,50 +46,52 @@ function TabComponent({
 	return (
 		<div>
 			<Tabs activeTab={activeTab} onChange={setActive} themeType="primary">
-				{isConditionMatches(
-					[
-						...conditions.SEE_ALL_MARGINS,
-						...conditions.SEE_SALES_MARGIN,
-						...conditions.ADD_CHANNEL_PARTNER_MARGIN,
-					],
-					'or',
-				) ? (
+				{condition.demand ? (
 					<TabPanel name="demand" title="SALES">
-						{(data?.margin_stats || []).map((service, index) => (
-							<CardComponent
-								setMarginBreakupData={setMarginBreakupData}
-								key={`${`${index}${uuid()}`}`}
-								service={service}
-								filterparams={filterParams}
-								setFilterParams={setFilterParams}
-								margin_type={activeTab}
-							/>
-						))}
-					</TabPanel>
-					) : null}
+						{isEmpty(data?.margin_stats) ? <EmptyState /> : (
+							<div>
+								{(data?.margin_stats || []).map((service, index) => (
+									<CardComponent
+										activeService={activeService}
+										setActiveService={setActiveService}
+										setMarginBreakupData={setMarginBreakupData}
+										key={`${`${index}${uuid()}`}`}
+										service={service}
+										filterparams={filterParams}
+										setFilterParams={setFilterParams}
+										margin_type={activeTab}
+									/>
+								))}
+							</div>
+						)}
 
-				{isConditionMatches(
-					[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
-					'or',
-				) ? (
+					</TabPanel>
+				) : null}
+
+				{condition.supply ? (
 					<TabPanel name="supply" title="SUPPLY">
 						{(data?.margin_stats || []).map((service, index) => (
 							<CardComponent
+								activeService={activeService}
+								setActiveService={setActiveService}
 								setMarginBreakupData={setMarginBreakupData}
 								key={`${`${index}${uuid()}`}`}
 								service={service}
 								filterparams={filterParams}
 								setFilterParams={setFilterParams}
 								margin_type={activeTab}
+								showContainerDetails={false}
 							/>
 						))}
 					</TabPanel>
-					) : null}
+				) : null}
 
-				{isConditionMatches(conditions.SEE_ALL_MARGINS, 'or') ? (
+				{condition.cogoport ? (
 					<TabPanel name="cogoport" title="COGOPORT">
 						{(data?.margin_stats || []).map((service, index) => (
 							<CardComponent
+								activeService={activeService}
+								setActiveService={setActiveService}
 								setMarginBreakupData={setMarginBreakupData}
 								key={`${`${index}${uuid()}`}`}
 								service={service}
@@ -79,7 +103,7 @@ function TabComponent({
 					</TabPanel>
 				) : null}
 
-				{isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or') ? (
+				{condition.approval_pending ? (
 					<TabPanel name="approval_pending" title="Approval Pending">
 						{(data?.list || []).map((service, index) => (
 							<Details

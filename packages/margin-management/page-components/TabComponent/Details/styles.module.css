@@ -1,7 +1,7 @@
 .flex {
 	display: flex;
 	align-items: center;
-	margin-bottom: 10px;
+	margin-bottom: 3px;
 }
 
 .origin_destination {
@@ -18,7 +18,7 @@
 	width: 92%;
 	padding: 14px 20px 12px 24px;
 	margin: 8px 0 0 24px;
-	margin-top: 20px;
+	margin-top: 15px;
 	background: #fff;
 	border: 1px solid #bdbdbd;
 	border-radius: 10px;

@@ -7,12 +7,21 @@ import Footer from '../Footer';
 
 import styles from './styles.module.css';
 
-function CardComponent({ service = {}, margin_type = '', setMarginBreakupData = () => {} }) {
+function CardComponent({
+	service = {}, margin_type = '', setMarginBreakupData = () => {},
+	showContainerDetails = true,
+}) {
 	const [showDetails, setShowDetails] = useState(false);
+	// console.log({ showDetails });
 	if (isEmpty(service?.service)) return null;
 
 	const setDetails = () => {
 		setShowDetails(!showDetails);
+
+		// if (service?.service === activeService) {
+		// 	setActiveService('');
+		// } else setActiveService(service?.service);
+		// console.log(service?.service, 'HERE', activeService);
 	};
 	return (
 		<div>
@@ -22,7 +31,7 @@ function CardComponent({ service = {}, margin_type = '', setMarginBreakupData = 
 						: <IcMArrowRotateRight style={{ marginRight: 20 }} onClick={setDetails} />}
 					<div>{startCase(service?.service)}</div>
 				</div>
-				<Button themeType="secondary" onClick={setDetails}>VIEW DETAILS</Button>
+				<Button onClick={setDetails}>VIEW DETAILS</Button>
 			</div>
 			<div className={styles.button_container}>
 				<Pill color="green">{`${service?.active_count} ACTIVE`}</Pill>
@@ -33,6 +42,7 @@ function CardComponent({ service = {}, margin_type = '', setMarginBreakupData = 
 					service={service?.service}
 					margin_type={margin_type}
 					setMarginBreakupData={setMarginBreakupData}
+					showContainerDetails={showContainerDetails}
 				/>
 			)}
 		</div>

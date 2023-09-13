@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import useListMargins from '../hooks/useListMargins';
 
+import Filter from './Filter';
 import MarginValues from './MarginValues';
 import Search from './Search';
 import styles from './styles.module.css';
@@ -17,12 +18,16 @@ function MarginManagement() {
 		{ margin_stats_required: true, page_limit: 5 },
 	});
 	const [marginBreakupData, setMarginBreakupData] = useState({});
-	const [activeTab, setActivetab] = useState((filterParams?.status === 'approval_pending')
-		? 'approval_pending' : filterParams?.margin_type);
+	const [activeTab, setActivetab] = useState('demand');
+	const [activeService, setActiveService] = useState('');
 	if (loading) return (<Loader themeType="primary" />);
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Margin Management</div>
+			<div className={styles.flex}>
+				<div className={styles.heading}>Margin Management</div>
+				<Filter filterParams={filterParams} setFilterParams={setFilterParams} />
+
+			</div>
 			<div className={styles.flex}>
 				<div className={styles.tab}>
 					<TabComponent
@@ -33,6 +38,8 @@ function MarginManagement() {
 						refetch={apiTrigger}
 						activeTab={activeTab}
 						setActivetab={setActivetab}
+						activeService={activeService}
+						setActiveService={setActiveService}
 					/>
 				</div>
 				<div className={styles.search}>

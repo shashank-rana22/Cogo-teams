@@ -6,7 +6,10 @@ import useListMargins from '../../../hooks/useListMargins';
 import Details from '../Details';
 import ListPagination from '../ListPagination';
 
-function Footer({ service = '', margin_type = '', setMarginBreakupData = () => {} }) {
+function Footer({
+	service = '', margin_type = '', setMarginBreakupData = () => {},
+	showContainerDetails = true,
+}) {
 	const {
 		data = {}, loading = false, setFilterParams = () => { }, params = {}, setParams = () => {},
 	} = useListMargins({
@@ -23,6 +26,7 @@ function Footer({ service = '', margin_type = '', setMarginBreakupData = () => {
 			<ListPagination paginationProps={paginationProps} />
 			{(data?.list || []).map((item, index) => (
 				<Details
+					showContainerDetails={showContainerDetails}
 					setMarginBreakupData={setMarginBreakupData}
 					key={`${`${index}${uuid()}`}`}
 					data={item}
