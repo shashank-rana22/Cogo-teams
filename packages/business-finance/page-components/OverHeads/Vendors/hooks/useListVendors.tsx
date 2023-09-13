@@ -26,8 +26,8 @@ const useListVendors = ({ filters, sort }) => {
 		try {
 			trigger({
 				params: {
-					page_limit                 : pageLimit,
-					page,
+					pageSize                   : pageLimit,
+					pageIndex                  : page,
 					verification_data_required : true,
 					paymentSortType            : paymentSortType || undefined,
 					openInvoiceSortType        : openInvoiceSortType || undefined,
