@@ -17,7 +17,7 @@ function PostToSageModal({
 	const loadingText = permissionModal.isDelete ? 'Deleting' : 'Approving';
 	const btnText = permissionModal.isDelete ? 'Delete' : 'Approve';
 
-	const isPostToSage = paymentDocumentStatus === 'APPROVED' && !permissionModal.isDelete;
+	const isPostToSage = ['POSTING_FAILED', 'APPROVED'].includes(paymentDocumentStatus) && !permissionModal.isDelete;
 
 	return (
 		<div className={styles.modal_show}>
