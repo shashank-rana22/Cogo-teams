@@ -6,7 +6,7 @@ const HUNDRED = 100;
 const NO_VALUE = 0;
 const DEFAULT_TOTAL_VALUE = 1;
 
-export const getData = ({ taxType, type, cardData, totalCost, totalRevenue }) => {
+export const getData = ({ taxType = '', type = '', cardData = {}, totalCost = 1, totalRevenue = 1 }) => {
 	const operationalOrActualCostPercent = (Number(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`])
 	/ Number(totalCost || DEFAULT_TOTAL_VALUE)) * HUNDRED;
 
