@@ -52,6 +52,10 @@ const getGraphData = ({ graphInfo = {}, key }) => {
 			label = 'Reefer';
 		}
 
+		if (key === 'persona_forecasts') {
+			label = label.toUpperCase();
+		}
+
 		return {
 			id,
 			label,
