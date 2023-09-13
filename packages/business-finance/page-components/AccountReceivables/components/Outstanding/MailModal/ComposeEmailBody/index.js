@@ -1,8 +1,8 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 
-import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
-import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
+import { getUserActiveMails } from '../configurations/mail-configuration';
+import RTE_TOOL_BAR_CONFIG from '../mailConstants/rteToolBarConfig';
 
 import Recipients from './Recipients';
 import styles from './styles.module.css';

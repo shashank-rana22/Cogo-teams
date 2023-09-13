@@ -26,6 +26,8 @@ function CommunicationModals({
 
 	const { buttonType, setButtonType, activeMail } = mailProps;
 
+	console.log('mailProps', mailProps);
+
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
 
 	const CLICK_FUNCTIONS = {
