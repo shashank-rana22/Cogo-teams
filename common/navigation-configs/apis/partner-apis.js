@@ -12782,6 +12782,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'create_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'create_shipment_operating_instruction',
 			access_type  : 'private',
 			service_name : 'shipment',
