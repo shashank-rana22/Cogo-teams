@@ -1,6 +1,8 @@
 import { Modal, Pagination } from '@cogoport/components';
+import { IcMExpand } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
+import { HEADER_MAPPING } from '../../../../../constants/mailConstants';
 import useMailEditorFunctions from '../../../../../helpers/mailEditorFunctions';
 import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
@@ -26,6 +28,7 @@ function MailEditorModal({
 
 	const [showControl, setShowControl] = useState(null);
 	const [errorValue, setErrorValue] = useState('');
+	const [minimizeModal, setMinimizeModal] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [attachments, setAttachments] = useState([]);
 	const [emailTemplate, setEmailTemplate] = useState({
@@ -75,16 +78,44 @@ function MailEditorModal({
 		mailProps,
 	});
 
+	if (minimizeModal) {
+		return (
+			<div className={styles.minimized_modal_styles}>
+				<div className={styles.expand_icon}>
+					<IcMExpand onClick={() => setMinimizeModal(false)} />
+				</div>
+
+				<div
+					className={styles.title}
+					role="presentation"
+					onClick={() => setMinimizeModal(false)}
+				>
+					{HEADER_MAPPING[buttonType] || 'New Message'}
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<Modal
 			show={buttonType}
 			onClose={handleClose}
-			onOuterClick={handleClose}
 			size="lg"
 			className={styles.styled_ui_modal_dialog}
 			placement="top"
 			scroll
+			animate={false}
+			showCloseIcon={false}
+			closeOnOuterClick={false}
 		>
+			<div
+				className={styles.minimize_container}
+				role="presentation"
+				onClick={() => setMinimizeModal(true)}
+			>
+				minimize
+			</div>
+
 			<Modal.Header
 				title={(
 					<RenderHeader
@@ -100,6 +131,7 @@ function MailEditorModal({
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
 						setButtonType={setButtonType}
+						setMinimizeModal={setMinimizeModal}
 					/>
 				)}
 				className={isTemplateView ? styles.template_view : ''}

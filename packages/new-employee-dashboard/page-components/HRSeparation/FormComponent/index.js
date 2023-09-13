@@ -1,8 +1,9 @@
 import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
-import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
+// import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
+import FinanceClearanceEmployeeSide from './finance-view/FInanaceClearanceEmplyeeSide/FinanceClearanceEmployeeSide';
 import ExitInterview from './hrbp-view/ExitInterview';
 // import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
 import ExitReasons from './hrbp-view/ExitReasons';
@@ -18,8 +19,8 @@ import TechClearance from './tech-view/TechClearance';
 import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
 
 const COMPONENT_MAPPING = {
-	hrbp: {
-		hr_meeting                  : HRMeeting,
+	hr_meet: {
+		hr_meet                     : HRMeeting,
 		manager_clearance           : ManagerClearance,
 		finance_clearance           : FinanceClearance,
 		handover_takeover_clearance : HandoverTakeoverClearance,
@@ -28,25 +29,44 @@ const COMPONENT_MAPPING = {
 		exit_interview              : ExitInterview,
 		exit_reasons                : ExitReasons,
 	},
-	manager: {
-		review_request    : ReviewRequest,
-		handover_takeover : HandoverTakeover,
+	manager_clearance: {
+		review_request : ReviewRequest,
+		assign_hoto    : HandoverTakeover,
 	},
-	tech: {
+	tech_clearance: {
 		tech_clearance         : TechClearance,
 		tech_clearance_confirm : TechClearanceConfirm,
 	},
-	admin: {
+	admin_clearance: {
 		admin_clearance: AdminClearance,
 	},
-	employee: {
-		HOTOClearance,
-		HOTOClearance_confirmation: HOTOClearanceConfirmation,
+	hoto_clearance: {
+		hoto_clearance: HOTOClearance,
+	//	HOTOClearance_confirmation : HOTOClearanceConfirmation,
+	},
+	finance: {
+		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
 	},
 };
 
-function FormComponent({ data = {}, loading = false, refetchApplicationDetails = () => {} }) {
-	const Render = COMPONENT_MAPPING.admin.admin_clearance;
+function FormComponent({
+	data = {},
+	loading = false,
+	refetchApplicationDetails = () => {},
+	// view_type = 'hoto_clearance',
+	view_type = 'admin_clearance',
+}) {
+	let Render = null;
+
+	Object.keys(COMPONENT_MAPPING[view_type]).every((key) => {
+		const { is_complete = false } = data?.[view_type]?.[key] || {};
+
+		Render = COMPONENT_MAPPING?.[view_type]?.[key];
+
+		return is_complete;
+	});
+
+	if (loading) return 'loading...';
 
 	return (
 		<div className={styles.container}>

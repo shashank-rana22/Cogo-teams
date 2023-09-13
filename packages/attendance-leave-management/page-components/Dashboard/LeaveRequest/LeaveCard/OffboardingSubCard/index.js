@@ -6,6 +6,7 @@ import {
 	IcMTick,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 // import { startCase } from '@cogoport/utils';
 // import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
@@ -33,7 +34,7 @@ function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false
 					<div className={styles.text2}>
 						Process Clearance Name:
 						{' '}
-						{val.process_name}
+						{startCase(val.process_name)}
 					</div>
 				</div>
 			</div>

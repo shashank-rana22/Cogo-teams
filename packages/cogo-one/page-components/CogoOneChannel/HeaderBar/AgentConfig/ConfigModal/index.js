@@ -1,4 +1,5 @@
 import { Modal, Pagination, cl } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
@@ -7,8 +8,8 @@ import useListChatAgents from '../../../../../hooks/useListChatAgents';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 
 import AgentWiseLockScreen from './AgentWiseLockScreen';
+import FireBaseConfiguration from './FireBaseConfiguration';
 import LeaveStatusView from './LeaveStatusView';
-import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
 import SwitchView from './SwitchView';
 
@@ -20,9 +21,9 @@ const TAB_CONFIG_MAPPING = {
 		hook       : useListChatAgents,
 		headerText : 'Agents List',
 	},
-	lock_configuration: {
-		Component  : RoleWiseLockScreen,
-		headerText : 'Lock Screen Configuration',
+	fire_base_configuration: {
+		Component  : FireBaseConfiguration,
+		headerText : 'Fire Base Configuration',
 	},
 	agents_status: {
 		Component  : LeaveStatusView,
@@ -77,6 +78,10 @@ function ConfigModal({
 		setShowAgentDetails(false);
 	};
 
+	const handleBack = () => {
+		setActiveCard('');
+	};
+
 	const COMPONENT_PROPS = {
 		list_agents: {
 			firestore,
@@ -88,9 +93,10 @@ function ConfigModal({
 			setAgentType,
 			setActiveCard,
 		},
-		lock_configuration: {
+		fire_base_configuration: {
 			firestore,
 			setActiveCard,
+			handleClose,
 		},
 		agents_status: {
 			firestore,
@@ -120,7 +126,14 @@ function ConfigModal({
 		>
 			<Modal.Header
 				className={styles.modal_header}
-				title={headerText || 'Configuration'}
+				title={activeCard === 'fire_base_configuration' ? (
+					<>
+						<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
+						<span className={styles.header_label}>{headerText || 'Configuration'}</span>
+					</>
+				) : (
+					headerText || 'Configuration'
+				)}
 			/>
 
 			<Modal.Body className={styles.modal_body}>

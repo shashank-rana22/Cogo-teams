@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+// import { Button } from '@cogoport/components';
 import { InputController, SelectController } from '@cogoport/forms';
-import { IcMArrowDown, IcMPlus } from '@cogoport/icons-react';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -26,14 +26,14 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 				{
 					source === 'admin-clearance' ? (
 						<div className={styles.accordiontitle}>
-							<Button
+							{/* <Button
 								size="md"
 								themeType="secondary"
 								className={styles.servicesbtn}
 							>
 								<IcMPlus />
 								Add Services
-							</Button>
+							</Button> */}
 							<IcMArrowDown
 								width={16}
 								height={16}

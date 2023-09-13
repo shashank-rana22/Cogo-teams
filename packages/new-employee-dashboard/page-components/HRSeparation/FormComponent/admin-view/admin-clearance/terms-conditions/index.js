@@ -7,14 +7,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsConditions({ control = {}, errors = {} }) {
+function TermsConditions({ control = {}, errors = {}, termschecked = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>
 			<div className={styles.subtitle}>Please read carefully</div>
 			<div className={styles.content_sub_container}>
 				<div className={styles.content_text_container}>
-					<CheckboxController className={styles.Checkbox} name="termsacceptance" control={control} />
+					<CheckboxController
+						className={styles.Checkbox}
+						name="termsacceptance"
+						control={control}
+						checkeed={termschecked}
+					/>
 					<div className={styles.content}>
 						<p>
 							The details you provide guide critical decisions,
@@ -22,8 +27,6 @@ function TermsConditions({ control = {}, errors = {} }) {
 							affirm the accuracy of all information.
 							Any discrepancies could lead to losses for which youll bear full responsibility.
 							This self-attestation is legally binding.
-
-							Enter your Full Name, confirm your understanding and commitment to these terms.
 						</p>
 						<br />
 						<p>
@@ -31,6 +34,11 @@ function TermsConditions({ control = {}, errors = {} }) {
 						</p>
 					</div>
 				</div>
+
+				{!termschecked
+			&& (
+				<span className={styles.error}>*required</span>
+			)}
 				<div className={styles.name_main_container}>
 					<div className={styles.full_name_text}>
 						Full Name

@@ -4,7 +4,7 @@ import { IcMTick, IcCFtick } from '@cogoport/icons-react';
 // import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-// import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 
 import DatePicker from './date-picker';
 import OpenModal from './modal-div';
@@ -12,29 +12,26 @@ import NotesHrbp from './notes-hr';
 import Servicelist from './services-list';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
-import useUpdateAdminClearanceData from './useUpdateAdminClearanceDetails';
+// import useUpdateAdminClearanceData from './useUpdateAdminClearanceDetails';
 
 const ZEROTH_INDEX = 0;
 function AdminClearance({ data = {}, refetch = () => {} }) {
 	const [show, setShow] = useState(false);
 	const admin_clearance = data?.admin_clearance || {};
-	const { sub_process_detail_id } = admin_clearance || {};
-	const { sub_process_data } = admin_clearance || {};
-	const { is_complete } = admin_clearance || false;
+	const { sub_process_detail_id } = admin_clearance?.admin_clearance || {};
+	const { sub_process_data } = admin_clearance?.admin_clearance || {};
+	const { is_complete } = admin_clearance?.admin_clearance || false;
 	const {
 		control,
 		formState:{ errors = {} },
 		handleSubmit,
 		watch,
 		setValue,
-	} = useForm({
-		defaultValues: sub_process_data,
-	});
-	const l = watch();
-	console.log(l);
+	} = useForm();
+	const termschecked = watch('termsacceptance');
 
-	const { postAdminData } = useUpdateAdminClearanceData();
-	// const { updateApplication } = useUpdateAppliationProcessDetails();
+	// const { postAdminData } = useUpdateAdminClearanceData();
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShow });
 
 	const onSubmit = (values) => {
 		const notes = [{
@@ -60,11 +57,10 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 			sub_process_detail_id,
 			process_name: 'admin_clearance',
 		};
-		postAdminData({
+		updateApplication({
 			payload,
 		});
-		refetch();
-		setShow(false);
+	//	refetch();
 	};
 
 	const handleClose = () => {
@@ -118,6 +114,7 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 								errors={errors}
 								handleSubmit={handleSubmit}
 								onSubmit={onSubmit}
+								termschecked={termschecked}
 							/>
 							<div className={styles.buttondiv}>
 								<Button
