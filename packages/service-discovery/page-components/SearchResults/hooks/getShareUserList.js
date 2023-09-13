@@ -12,6 +12,7 @@ const useGetShareUserList = ({ org_id }) => {
 
 	const handleSearch = (val = '') => {
 		setSearch(val);
+		debounceQuery(val);
 	};
 
 	const [{ loading, data: orgData }, trigger] = useRequest({
@@ -36,11 +37,7 @@ const useGetShareUserList = ({ org_id }) => {
 
 	useEffect(() => {
 		getUserData();
-	}, [getUserData, search]);
-
-	useEffect(() => {
-		debounceQuery(search);
-	}, [search, debounceQuery]);
+	}, [getUserData, query]);
 
 	const { list = [] } = orgData || {};
 

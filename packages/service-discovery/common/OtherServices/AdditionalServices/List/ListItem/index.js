@@ -1,4 +1,4 @@
-import { Toast, Loader, cl, Tooltip, Placeholder, Button } from '@cogoport/components';
+import { Loader, cl, Tooltip, Placeholder, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
@@ -60,11 +60,6 @@ function ListItem({
 	const handleDelete = (event) => {
 		event.stopPropagation();
 		event.preventDefault();
-
-		if (SERVICES_CANNOT_BE_REMOVED.includes(serviceItem.name)) {
-			Toast.error('This service cannot be removed');
-			return;
-		}
 		setShowDeleteModal(true);
 	};
 

@@ -1,10 +1,12 @@
-import { Input, Popover } from '@cogoport/components';
+import { Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import FILTER_CONTROLS from '../../../../../../configurations/email-filter-controls';
+import getFilterControls from '../../../../../../configurations/email-filter-controls';
+import useListPlatformConfigConstants from '../../../../../../hooks/useListPlatformConfigConstants';
 import FilterComponents from '../../../FilterComponents';
+import SubTabs from '../../../MessageList/Header/subTabs';
 
 import styles from './styles.module.css';
 
@@ -17,25 +19,67 @@ function Header({
 	setIsBotSession = () => {},
 	appliedFilters = {},
 	isBotSession = false,
+	activeSubTab = '',
+	setActiveSubTab = () => {},
+	activeTab = '',
+	sidFilter = '',
+	resetSidFilter = () => {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 
-	return (
-		<div className={styles.filters_container}>
-			<div className={styles.source_types}>
-				<Input
-					size="sm"
-					prefix={<IcMSearchlight width={18} height={18} />}
-					placeholder="Search here..."
-					value={searchValue}
-					onChange={(val) => setSearchValue(val)}
-				/>
-			</div>
+	const {
+		listPlatformConfigConstants = () => {},
+		configLoading = false,
+		configData = [],
+	} = useListPlatformConfigConstants({ keyName: 'COGOVERSE_TEAM_MAPPING' });
 
-			<div className={styles.filter_icon}>
-				<Popover
-					placement="right"
-					render={(
+	useEffect(() => {
+		listPlatformConfigConstants();
+	}, [listPlatformConfigConstants]);
+
+	return (
+		<>
+			<div className={styles.sub_tabs_wrapper}>
+				<SubTabs
+					activeSubTab={activeSubTab}
+					setActiveSubTab={setActiveSubTab}
+					viewType={viewType}
+					setAppliedFilters={setAppliedFilters}
+					setIsBotSession={setIsBotSession}
+					activeTab={activeTab}
+					hasSidFilter={!!sidFilter}
+				/>
+				{sidFilter	? (
+					<div className={styles.flex_filter}>
+						<div className={styles.applied_filters}>
+							<span>{sidFilter}</span>
+							SID filter is applied
+						</div>
+						<Button
+							size="sm"
+							themeType="linkUi"
+							onClick={resetSidFilter}
+						>
+							clear
+						</Button>
+					</div>
+				) : undefined}
+			</div>
+			<div className={styles.filters_container}>
+				<div className={styles.source_types}>
+					<Input
+						size="sm"
+						prefix={<IcMSearchlight width={18} height={18} />}
+						placeholder="Search here..."
+						value={searchValue}
+						onChange={(val) => setSearchValue(val)}
+					/>
+				</div>
+
+				<div className={styles.filter_icon}>
+					<Popover
+						placement="right"
+						render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
@@ -46,22 +90,28 @@ function Header({
 									showBotMessages={isBotSession}
 									tagOptions={tagOptions}
 									viewType={viewType}
-									filterControls={FILTER_CONTROLS}
+									filterControls={getFilterControls({
+										configLoading,
+										configData,
+										viewType,
+										activeSubTab,
+									})}
 								/>
 							)
-					)}
-					className={styles.styled_popover}
-					visible={filterVisible}
-					onClickOutside={() => setFilterVisible(false)}
-				>
-					<IcMFilter
-						onClick={() => setFilterVisible((prev) => !prev)}
-						className={styles.filter_icon}
-					/>
-				</Popover>
-				{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
+						)}
+						className={styles.styled_popover}
+						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
+					>
+						<IcMFilter
+							onClick={() => setFilterVisible((prev) => !prev)}
+							className={styles.filter_icon}
+						/>
+					</Popover>
+					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

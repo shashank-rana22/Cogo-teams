@@ -36,11 +36,11 @@ const historyFilters = [
 	},
 ];
 
-function History({ organizationId = '' }) {
+function History({ organizationId = '', setStats = () => {} }) {
 	const {
 		data = {}, loading = false, filters = {},
 		setFilters = () => { }, apiData = {}, refetch = () => { },
-	} = useHistorySettlement({ organizationId });
+	} = useHistorySettlement({ organizationId, setStats });
 
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });

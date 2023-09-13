@@ -2,7 +2,7 @@ import { Avatar, Tooltip } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import getHidedUserDetails from '../../utils/getHidedUserDetails';
+import hideDetails from '../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
@@ -39,12 +39,12 @@ function UserCard({ userData = {}, showDirection = false, showWorkScope = false 
 					<div className={styles.user_contact_details}>
 						{email ? (
 							<div className={styles.email_info}>
-								{getHidedUserDetails({ data: email, type: 'mail' }) }
+								{hideDetails({ data: email, type: 'mail' }) }
 							</div>
 						) : null}
 
 						<div className={styles.contact_info}>
-							{user_number ? getHidedUserDetails({
+							{user_number ? hideDetails({
 								data        : user_number,
 								type        : 'number',
 								countryCode : country_code,

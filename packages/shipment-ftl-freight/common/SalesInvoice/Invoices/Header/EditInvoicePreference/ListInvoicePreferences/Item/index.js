@@ -48,16 +48,13 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (services || []).map((service) => {
-		const trade_type = service?.trade_type;
-
-		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
 
 		return service?.service_type ? (
 			<div className={styles.service_name}>
-				{`${tradeType} ${startCase(service?.service_type)} ${
+				{`${startCase(service?.service_type)} ${
 					service?.is_igst ? '(IGST INVOICE)' : ''
 				} ${isBas && !service?.is_igst ? '(BAS)' : ''}`}
 			</div>
@@ -108,20 +105,21 @@ function Item({
 					</div>
 
 					<div className={styles.billing_info}>
-						GST Number:&nbsp;
+						GST Number:
+						{' '}
 						{billing_address?.tax_number}
 					</div>
 
 					<div className={styles.billing_info}>
 						Invoice Currency:
-						&nbsp;
+						{' '}
 						{invoice_currency}
 					</div>
 
 					{invoicing_party_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
-							&nbsp;
+							{' '}
 							{formatAmount({
 								amount   : invoicing_party_total_discounted,
 								currency : invoice_total_currency,

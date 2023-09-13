@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import useGetDownloadReport from '../../Invoices/hooks/useGetDownloadReport';
 import { getDetails } from '../constants/details';
 
-import StatsOutstanding from './StatsOutstanding/index';
+import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
 import TAB_OPTIONS from './TabOptions';
 import UserDetails from './UserDetails';
@@ -42,6 +42,8 @@ function OutstandingList({
 }) {
 	const [activeTab, setActiveTab] = useState('invoice_details');
 
+	const [stats, setStats] = useState({});
+
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 
 	const handleActiveTabs = (val) => {
@@ -70,18 +72,21 @@ function OutstandingList({
 			organizationId,
 			entityCode,
 			showName: false,
+			setStats,
 		},
 		settlement: {
 			organizationId,
 			entityCode,
+			setStats,
 		},
 		organization_users: {
 			organizationId : selfOrganizationId,
 			orgData        : item,
+			setStats,
 		},
 	};
 
-	const { generateInvoice = () => {}, loading: generating = false } = useGetDownloadReport({
+	const { generateInvoice = () => { }, loading: generating = false } = useGetDownloadReport({
 		globalFilters:
 			{ organizationId },
 	});
@@ -201,7 +206,12 @@ function OutstandingList({
 						>
 							{(TAB_OPTIONS || []).map(
 								({ key, name, component: Component }) => (
-									<TabPanel key={key} name={key} title={name}>
+									<TabPanel
+										key={key}
+										name={key}
+										title={name}
+										badge={stats?.[key] || DEFAULT_LEN}
+									>
 										{activeTab ? (
 											<Component {...propsData[activeTab]} />
 										) : null}

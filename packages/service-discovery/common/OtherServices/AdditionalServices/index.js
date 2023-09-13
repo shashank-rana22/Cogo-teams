@@ -10,15 +10,11 @@ import getAddedServices from './getAddedServices';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
+import getNonRemoveableServices from './utils/getNonRemoveableServices';
 import getServiceName from './utils/getServiceName';
 
 const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
 const singleLocationServices = ['fcl_freight_local'];
-
-const SERVICES_CANNOT_BE_REMOVED_MAPPING = {
-	export : 'export_fcl_freight_local',
-	import : 'import_fcl_freight_local',
-};
 
 function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
@@ -167,7 +163,7 @@ function AdditionalServices({ // used in search results and checkout
 
 	const incoTermOptions = getTradeTypeWiseIncoTerms(trade_type);
 
-	const SERVICES_CANNOT_BE_REMOVED = ['fcl_freight', SERVICES_CANNOT_BE_REMOVED_MAPPING[trade_type]];
+	const SERVICES_CANNOT_BE_REMOVED = getNonRemoveableServices({ trade_type, source, main_service: primaryService });
 
 	const SERVICES_LIST_MAPPING = {
 		shipper_side_services: {

@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-function formatToTimeStamp(dateString) {
+function formatToTimeStamp(dateString = '') {
 	const date = new Date(dateString);
 	const formatedDate = formatDate({
 		date,
@@ -16,21 +16,25 @@ function formatToTimeStamp(dateString) {
 	});
 	return formatedDate;
 }
-
-function useGetBillsList({ organizationId = '' }) {
-	const [billsFilters, setBillsFilters] = useState({ invoiceView: 'coe_accepted', pageSize: 10, pageIndex: 1 });
+function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '', setStats = () => { } }) {
+	const [billsFilters, setBillsFilters] = useState({
+		invoiceView : 'coe_accepted',
+		entity      : activeEntity,
+		pageSize    : 10,
+		pageIndex   : 1,
+	});
 	const [orderBy, setOrderBy] = useState({});
 
 	const {
-		search = '', pageSize, pageIndex, invoiceView, category, currency, invoiceType, entity, urgencyTag,
-		serviceType, invoiceDate, dueDate, updatedDate,
+		search = '', pageSize = 10, pageIndex = 1, invoiceView = '', category = '', currency = '',
+		invoiceType = '', urgencyTag = '', services = '', invoiceDate = {}, dueDate = {}, updatedDate = {},
 	} = billsFilters || {};
 
-	const { dueDateSortType } = orderBy || {};
+	const { dueDateSortType = '' } = orderBy || {};
 
-	const { startDate, endDate } = invoiceDate || {};
-	const { startDate: fromBillDate, endDate: toBillDate } = dueDate || {};
-	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
+	const { startDate = '', endDate = '' } = invoiceDate || {};
+	const { startDate: fromBillDate = '', endDate: toBillDate = '' } = dueDate || {};
+	const { startDate: fromUploadBillDate = '', endDate: toUploadBillDate = '' } = updatedDate || {};
 
 	const { debounceQuery, query = '' } = useDebounceQuery();
 
@@ -59,9 +63,10 @@ function useGetBillsList({ organizationId = '' }) {
 						invoiceView        : invoiceView || undefined,
 						currency           : currency || undefined,
 						invoiceType        : invoiceType || undefined,
-						entity             : entity || undefined,
+						entity             : activeEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
-						serviceType        : serviceType || undefined,
+						type               : activeTab || undefined,
+						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
 						startDate          : startDate ? formatToTimeStamp(startDate) : undefined,
 						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
@@ -77,16 +82,20 @@ function useGetBillsList({ organizationId = '' }) {
 			}
 		},
 		[pageIndex, pageSize,
-			query, currency, urgencyTag, entity, invoiceType,
-			invoiceView, category, dueDateSortType, serviceType, startDate,
+			query, currency, urgencyTag, invoiceType,
+			invoiceView, category, dueDateSortType, services, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
-			toUploadBillDate, billsTrigger, organizationId],
+			toUploadBillDate, billsTrigger, activeTab, organizationId, activeEntity],
 	);
 
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
+
+	useEffect(() => {
+		setStats((prevStats) => ({ ...prevStats, invoice_details: billsData?.totalRecords }));
+	}, [billsData, setStats]);
 
 	return {
 		billsData,

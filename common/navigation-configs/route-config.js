@@ -11,6 +11,7 @@ import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
+import cancellationPolicies from './config/cancellation-policies';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -74,8 +75,10 @@ import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
 import supplyTools from './config/supply-tools';
 import ticketManagement from './config/ticket-management';
+import tradeParties from './config/trade-parties';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
+import warehouseManagement from './config/warehouse-management';
 import welcome from './config/welcome';
 
 const routeConfig = {
@@ -112,6 +115,7 @@ const routeConfig = {
 	...shipmentRailDomesticFreight,
 	...shipmentHaulageFreight,
 	...bookingDesk,
+	...cancellationPolicies,
 	...bnSalvage,
 	...costBookingDesk,
 	...authorityDesk,
@@ -145,6 +149,7 @@ const routeConfig = {
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
+	...warehouseManagement,
 	...ftlAdmin,
 	...schedules,
 	...igmDesk,
@@ -159,6 +164,7 @@ const routeConfig = {
 	...resource,
 	...serviceDiscovery,
 	...supplyTools,
+	...tradeParties,
 };
 
 export default routeConfig;

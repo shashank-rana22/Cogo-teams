@@ -67,11 +67,9 @@ function AdditionalContent({
 		detail = {},
 		primaryService,
 		getCheckout,
-		kycShowCondition,
 		tncPresent,
 		updateCheckout,
 		updateLoading,
-		orgData,
 		loading,
 		setHeaderProps,
 		possible_subsidiary_services = [],
@@ -134,8 +132,6 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				tncPresent={tncPresent}
-				kycShowCondition={kycShowCondition}
-				orgData={orgData}
 				getCheckout={getCheckout}
 				loading={loading}
 				source="locked"

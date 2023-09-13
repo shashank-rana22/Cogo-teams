@@ -201,22 +201,6 @@ const getFormControls = ({
 			span                  : 6,
 
 		},
-		{
-			name  : 'place_of_supply',
-			label : 'Place of Supply',
-			type  : 'text',
-			rules : { required: 'Place of Supply is required' },
-			size  : 'sm',
-			span  : 6,
-		},
-		{
-			name  : 'place_of_destination',
-			label : 'Place of Destination',
-			type  : 'text',
-			rules : { required: 'Place of Destination is required' },
-			size  : 'sm',
-			span  : 6,
-		},
 	];
 };
 

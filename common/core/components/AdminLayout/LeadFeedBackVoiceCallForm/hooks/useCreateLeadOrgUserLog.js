@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
+const getPayload = ({ leadOrgId = '', values = {}, partnerId = '', callRecordId = '' }) => {
 	const {
 		title = '',
 		communication_response = '',
@@ -15,7 +15,7 @@ const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
 	} = values || {};
 
 	return {
-		lead_organization_id : leadOrgId,
+		lead_organization_id     : leadOrgId,
 		title,
 		communication_response,
 		communication_start_time,
@@ -24,12 +24,14 @@ const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
 		communication_summary,
 		lead_user_id,
 		additional_lead_user_ids,
-		partner_id           : partnerId,
-		communication_type   : 'call',
+		partner_id               : partnerId,
+		communication_type       : 'call',
+		communication_service_id : callRecordId || undefined,
+		communication_service    : callRecordId ? 'servetel' : undefined,
 	};
 };
 
-function useCreateLeadOrgUserLog({ leadOrgId = '', partnerId = '', onCloseForm = () => {} }) {
+function useCreateLeadOrgUserLog({ leadOrgId = '', partnerId = '', onCloseForm = () => {}, callRecordId = '' }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_organization_communication_log',
 		method : 'post',
@@ -38,7 +40,7 @@ function useCreateLeadOrgUserLog({ leadOrgId = '', partnerId = '', onCloseForm =
 	const createLeadOrgUserLog = async (values = {}) => {
 		try {
 			await trigger({
-				data: getPayload({ leadOrgId, values, partnerId }),
+				data: getPayload({ leadOrgId, values, partnerId, callRecordId }),
 			});
 			Toast.success('Successfully Created');
 			onCloseForm({ isSubmitSucessFull: true });

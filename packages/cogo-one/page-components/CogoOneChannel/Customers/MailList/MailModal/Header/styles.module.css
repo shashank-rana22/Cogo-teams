@@ -93,6 +93,9 @@
 
 .back_icon {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
 }
 
 .top_left_section {

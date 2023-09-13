@@ -11,7 +11,7 @@
         "title": "ICD to Port Haulage",
         "service_type": "haulage_freight",
         "trade_type": "export",
-        "inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca"]
+        "inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca", "fob", "fas"]
     },
     {
         "name": "export_fcl_customs",
@@ -33,7 +33,7 @@
         "service_type": "fcl_freight_local",
         "trade_type": "export",
         "mandatory": true,
-        "inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw"]
+        "inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fas", "fca"]
     },
     {
         "name": "fcl_freight",
@@ -48,7 +48,7 @@
         "service_type": "fcl_freight_local",
         "trade_type": "import",
         "mandatory": true,
-        "inco_terms": ["ddp", "exw", "fca", "fob", "fas"]
+        "inco_terms": ["ddp", "exw", "fca", "fob", "fas", "cpt", "cip", "dat", "dap"]
     },
     {
         "name": "import_fcl_cfs",
@@ -69,7 +69,7 @@
         "title": "Port to ICD Haulage",
         "service_type": "haulage_freight",
         "trade_type": "import",
-        "inco_terms": ["dap", "ddp", "exw", "fca", "fob", "fas"]
+        "inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca", "fob", "fas"]
     },
     {
         "name": "import_transportation",

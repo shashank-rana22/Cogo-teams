@@ -1,4 +1,5 @@
 .modal_styles {
+	position: relative;
 	width: 320px !important;
 	height: 500px !important;
 

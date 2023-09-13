@@ -10,6 +10,7 @@ import secsToDurationConverter from '../utils/secsToDurationConverter';
 
 import Attendees from './Attendees';
 import ConferenceForm from './ConferenceForm';
+import IncomingCallUserDetails from './IncomingCallUserDetails';
 import styles from './styles.module.css';
 
 function CallModal({
@@ -25,6 +26,8 @@ function CallModal({
 	attendees = [],
 	conferenceType = '',
 	callState = {},
+	callUserDetails = {},
+	callUserLoading = false,
 }) {
 	const { handleSubmit, control, formState: { errors }, watch, reset } = useForm();
 
@@ -73,6 +76,8 @@ function CallModal({
 							</div>
 							<div className={styles.number}>
 								{mobile_country_code}
+								{' '}
+								{' '}
 								<span>{hideNumber(mobile_number)}</span>
 							</div>
 							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
@@ -110,6 +115,11 @@ function CallModal({
 						)}
 					</div>
 				</div>
+				<IncomingCallUserDetails
+					receiverUserDetails={receiverUserDetails}
+					callUserDetails={callUserDetails}
+					callUserLoading={callUserLoading}
+				/>
 			</Modal.Body>
 		</Modal>
 	);

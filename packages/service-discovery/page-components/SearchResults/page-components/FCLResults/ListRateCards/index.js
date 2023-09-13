@@ -93,8 +93,6 @@ function ListRateCards({
 		});
 	}, [setRouterLoading]);
 
-	const loadingByRouter = loading || routerLoading;
-
 	if (!primary_service) {
 		return null;
 	}
@@ -114,7 +112,7 @@ function ListRateCards({
 		);
 	}
 
-	if (loadingByRouter) {
+	if (routerLoading) {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Loading Rates</span>
@@ -242,11 +240,12 @@ function ListRateCards({
 			)}
 
 			{loading ? null : (
-				<RequestRate
-					details={detail}
-					className={styles.request_rate}
-					rates={rates}
-				/>
+				<div className={styles.request_rate}>
+					<RequestRate
+						details={detail}
+						rates={rates}
+					/>
+				</div>
 			)}
 		</div>
 	);

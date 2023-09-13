@@ -53,10 +53,10 @@ function CargoInsuranceModal({
 	const { control, watch, formState:{ errors }, setValue, handleSubmit } = useForm({ defaultValues });
 
 	const [{ data = {} }] = useRequestBf({
-		auth   : 'get_saas_insurance_list_commodities',
-		url    : 'saas/insurance/list-commodities',
-		method : 'GET',
-		params : {},
+		authkey : 'get_saas_insurance_list_commodities',
+		url     : 'saas/insurance/list-commodities',
+		method  : 'GET',
+		params  : {},
 	}, { manual: false });
 
 	const { list = [] } = data;

@@ -33,7 +33,7 @@ function Overheads() {
 	};
 
 	return (
-		<div>
+		<div className={styles.font}>
 			<EntityContext.Provider value={entityCode}>
 				<div className={styles.main_heading}>Overheads</div>
 				<div className={styles.header}>

@@ -19,6 +19,17 @@
 	padding: 0 10px 0 20px;
 }
 
+.feedback_sid {
+	font-size: 10px;
+	font-weight: 500;
+	color: #615f5f;
+	border-radius: 6px;
+
+	span {
+		padding-left: 4px;
+	}
+}
+
 .purpose {
 	font-size: 11px;
 	color: #27ae60;
