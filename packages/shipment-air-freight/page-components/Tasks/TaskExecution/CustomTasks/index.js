@@ -4,3 +4,6 @@ export { default as ConfirmBookingWithAirline } from './ConfirmBookingWithAirlin
 export { default as ConfirmSellPrice } from './ConfirmSellPrice';
 export { default as ConfirmCargoAir } from './ConfirmCargoAir';
 export { default as TerminalChargeReceipt } from './TerminalChargeReceipt';
+export { default as UploadChecklist } from './UploadChecklist';
+export { default as UploadShippingBill } from './UploadShippingBill';
+export { default as UploadLeo } from './UploadLeo';
