@@ -71,4 +71,11 @@ export const officeLocations = [
 			branchId : 'edaccd90-ee23-4238-b1c1-e15aa9532366',
 		}),
 	},
+	{
+		label : 'Siliguri',
+		value : JSON.stringify({
+			name     : 'Siliguri',
+			branchId : 'd0324967-35a7-4efe-b925-9e0a69ed6f0d',
+		}),
+	},
 ];
