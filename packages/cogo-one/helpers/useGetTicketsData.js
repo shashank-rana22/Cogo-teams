@@ -28,6 +28,10 @@ const useGetTicketsData = ({
 			userId     : user_id,
 			leadUserId : lead_user_id,
 		},
+		firebase_emails: {
+			userId     : user_id,
+			leadUserId : lead_user_id,
+		},
 	};
 	const { userId, leadUserId } = DATA_MAPPING[activeTab] || {};
 

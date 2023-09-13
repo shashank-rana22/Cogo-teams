@@ -1,5 +1,6 @@
 import { asyncFieldsTicketTypes } from '@cogoport/forms';
 
+import { FIREBASE_TABS } from '../constants';
 import useGetAsyncTicketOptions from '../helpers/useGetAsyncTicketOptions';
 
 const TICKET_DATA_KEYWORDS_MAPPING = [
@@ -47,7 +48,7 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			placeholder : 'Type here...',
 			rows        : 5,
 			rules       : {
-				required: source !== 'message' && 'This is Required',
+				required: !FIREBASE_TABS.includes(source) ? 'This is Required' : '',
 			},
 		},
 		{

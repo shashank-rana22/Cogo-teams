@@ -14,7 +14,6 @@ function TaskExecution({
 	shipment_data = {},
 	primary_service = {},
 	getShipmentTimeline = () => {},
-	getShipment = () => {},
 }) {
 	const services = useListShipmentServices({
 		defaultFilters: {
@@ -67,7 +66,6 @@ function TaskExecution({
 					shipment_data={shipment_data}
 					primary_service={primary_service}
 					getShipmentTimeline={getShipmentTimeline}
-					getShipment={getShipment}
 					servicesLoading={services?.servicesLoading}
 				/>
 			);

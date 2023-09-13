@@ -64,7 +64,11 @@ function Item(props) {
 
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
-			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
+			{label && source !== 'edit_line_items' ? (
+				<div className={cl`${styles.label} ${rules?.required ? styles.required_field : ''}`}>
+					{label}
+				</div>
+			) : null}
 
 			{Element
 				? (

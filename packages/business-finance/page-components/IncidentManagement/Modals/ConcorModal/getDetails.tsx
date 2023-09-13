@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
-export const getInvoiceDetails = ({ concorData, referenceId }) => {
+export const getInvoiceDetails = ({ concorData, referenceId, t }) => {
 	const {
 		placeOfDestination = '', documentDate = '', placeOfSupply = '',
 		dueDate = '', isTaxApplicable = false,
@@ -12,47 +12,47 @@ export const getInvoiceDetails = ({ concorData, referenceId }) => {
 
 	return [
 		{
-			title: 'Incident Number',
+			title: t('incidentManagement:incident_number'),
 			value:
 	<div style={{ color: '#F68B21' }}>
 		{' '}
 		{referenceId}
 	</div>,
 		},
-		{ title: 'Place of Destination', value: placeOfDestination },
+		{ title: t('incidentManagement:place_of_destination'), value: placeOfDestination },
 		{
-			title : 'Document Date',
+			title : t('incidentManagement:doc_date'),
 			value : documentDate ? formatDate({
 				date       : documentDate,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}) : '',
 		},
-		{ title: 'Place of Supply', value: placeOfSupply },
+		{ title: t('incidentManagement:place_of_supply'), value: placeOfSupply },
 		{
-			title : 'Due Date',
+			title : t('incidentManagement:due_date'),
 			value : dueDate ? formatDate({
 				date       : dueDate,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}) : '',
 		},
-		{ title: 'Tax applicable', value: isTaxApplicable ? 'Yes' : 'No' },
+		{ title: t('incidentManagement:tax_applicable'), value: isTaxApplicable ? 'Yes' : 'No' },
 	];
 };
-export const getOrganisationDetails = (concorData) => {
+export const getOrganisationDetails = (concorData, t) => {
 	const {
 		supplierName = '', entity = '', sid = '', totalBuyPrice = '',
 		currency = '', bookingProof = [], registrationNo = '',
 	} = concorData || {};
 
 	return [
-		{ title: 'Organization Name', value: supplierName },
-		{ title: 'Registration Number', value: registrationNo },
-		{ title: 'Entity Code', value: entity },
-		{ title: 'Shipment ID', value: sid },
+		{ title: t('incidentManagement:org_name_title'), value: supplierName },
+		{ title: t('incidentManagement:registration_number'), value: registrationNo },
+		{ title: t('incidentManagement:entity_code_title'), value: entity },
+		{ title: t('incidentManagement:shipment_id'), value: sid },
 		{
-			title: 'Total Buy Price',
+			title: t('incidentManagement:total_buy_price'),
 			value:
 				formatAmount({
 					amount  : totalBuyPrice,
@@ -65,11 +65,11 @@ export const getOrganisationDetails = (concorData) => {
 				}),
 		},
 		{
-			title : 'Booking Proof (Indent)',
+			title : t('incidentManagement:booking_proof_indent'),
 			value : bookingProof.map((url, index) => (
 				<div key={url}>
 					<a className={styles.link} href={url} target="_blank" rel="noreferrer">
-						Booking Proof PDF
+						{t('incidentManagement:booking_proof_pdf')}
 						{' '}
 						{' '}
 						{index + 1}
@@ -80,12 +80,12 @@ export const getOrganisationDetails = (concorData) => {
 		},
 	];
 };
-export const getBankDetails = (concorData) => {
+export const getBankDetails = (concorData, t) => {
 	const { bankName = '', accountNumber = '', ifscCode = '', beneficiaryName = '' } = concorData || {};
 	return [
-		{ title: 'Bank Name', value: bankName },
-		{ title: 'Account Number', value: accountNumber },
-		{ title: 'IFSC Code', value: ifscCode },
-		{ title: 'Beneficiary Name', value: beneficiaryName },
+		{ title: t('incidentManagement:bank_name'), value: bankName },
+		{ title: t('incidentManagement:account_number'), value: accountNumber },
+		{ title: t('incidentManagement:ifsc_code'), value: ifscCode },
+		{ title: t('incidentManagement:beneficiary_name'), value: beneficiaryName },
 	];
 };

@@ -8,7 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../constants';
+import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -29,12 +29,7 @@ import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
-	const {
-		query: {
-			assigned_chat = '',
-			channel_type = '',
-		},
-	} = useRouter();
+	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
 
 	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
@@ -44,7 +39,7 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab               : 'message',
+		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
 		subTab            : 'all',
 		hasNoFireBaseRoom : false,
 		expandSideBar     : false,
@@ -115,9 +110,11 @@ function CogoOne() {
 
 	const commonProps = {
 		setSendBulkTemplates,
+		preferenceLoading,
 		setActiveTab,
 		selectedAutoAssign,
 		setAutoAssignChats,
+		queryAssignedChat: assigned_chat,
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
@@ -125,13 +122,14 @@ function CogoOne() {
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab?.tab === 'message'
+	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 
-	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.tab)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab) && activeTab?.expandSideBar));
-	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab) && !activeTab?.expandSideBar;
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
+	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								&& !activeTab?.expandSideBar;
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -229,8 +227,8 @@ function CogoOne() {
 							</div>
 
 							{(
-								ENABLE_SIDE_BAR.includes(activeTab?.tab)
-								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab)
+								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
 							) ? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}

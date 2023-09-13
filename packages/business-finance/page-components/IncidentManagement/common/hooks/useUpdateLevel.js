@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 import { controls } from '../../Controller/Config/create-level-config';
@@ -12,6 +13,7 @@ const useUpdateLevel = ({
 	referenceId = '',
 	createdBy = {},
 }) => {
+	const { t } = useTranslation(['incidentManagement']);
 	const {
 		profile: profileData = {},
 	} = useSelector((state) => state);
@@ -44,7 +46,7 @@ const useUpdateLevel = ({
 				},
 			});
 			setShow(false);
-			Toast.success('Updated successfully');
+			Toast.success(t('incidentManagement:updated_successfully_message'));
 			refetch();
 		} catch (e) {
 			toastApiError(e);

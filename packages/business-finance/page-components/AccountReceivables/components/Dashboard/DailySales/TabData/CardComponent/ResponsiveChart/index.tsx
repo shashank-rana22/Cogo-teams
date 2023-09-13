@@ -3,6 +3,7 @@ import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
 
@@ -21,6 +22,8 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);
 		return dateA.getTime() - dateB.getTime();
 	});
+
+	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
@@ -85,7 +88,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						tickSize       : 5,
 						tickPadding    : 10,
 						tickRotation   : 36,
-						legend         : 'Date',
+						legend         : t('date'),
 						legendOffset   : 46,
 						legendPosition : 'middle',
 					}}
@@ -93,7 +96,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						tickSize       : 5,
 						tickPadding    : 5,
 						tickRotation   : 0,
-						legend         : 'Amount',
+						legend         : t('amount'),
 						legendOffset   : -84,
 						legendPosition : 'middle',
 						format         : (value) => formatAmount({

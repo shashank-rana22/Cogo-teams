@@ -26,11 +26,27 @@ function DatesContentFilter({
 		setDate({ ...minMax });
 	}, [range, setDate]);
 
+	const handleReset = () => {
+		setRange('today');
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>
-				Filters
+			<div className={styles.header}>
+				<div className={styles.title}>
+					Filters
+				</div>
+				{range !== 'today' ? (
+					<Button
+						themeType="tertiary"
+						onClick={handleReset}
+					>
+						Reset
+					</Button>
+				) : null}
+
 			</div>
+
 			<div className={styles.child_container}>
 				<div className={styles.radio_container}>
 					<RadioGroup

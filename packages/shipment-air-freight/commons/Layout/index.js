@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import CONSTANTS from '../../constants/CONSTANTS';
@@ -38,7 +39,7 @@ function Layout({
 			{Object.keys(totalFieldsObject).map((field) => (
 				<div className={styles.row} key={field}>
 					{totalFieldsObject[field].map((fieldsItem) => {
-						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
+						const { type, heading = '', label = '', rules = {}, span:fieldArraySpan } = fieldsItem;
 						const flex = ((fieldArraySpan || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 						const show = (!(totalFieldsObject[field].name in showElements)
 						|| showElements[fieldsItem.name]);
@@ -49,9 +50,11 @@ function Layout({
 										{heading}
 									</div>
 
-									<h4 className={styles.label}>
+									<div className={cl`${styles.label}
+									${rules?.required ? styles.required_field : ''}`}
+									>
 										{label}
-									</h4>
+									</div>
 
 									<FieldArray
 										{...fieldsItem}

@@ -5,14 +5,13 @@ import { ColumnInterface } from './interface';
 
 const getColumns = ({
 	activeTab, setIsAscendingActive, setFilters,
-	isAscendingActive, getIncidentData,
+	isAscendingActive, getIncidentData, t = () => {},
 }:ColumnInterface) => {
 	if (activeTab === 'requested') {
-		return requestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
+		return requestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, t });
 	}
 	return (
-
-		columns({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab })
+		columns({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t })
 	);
 };
 

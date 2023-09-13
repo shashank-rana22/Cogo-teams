@@ -1,6 +1,7 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -28,6 +29,8 @@ interface DateAndAccountProps {
 }
 
 function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: DateAndAccountProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	const {
 		overallStats = {},
 	} = outstandingData || {};
@@ -79,15 +82,15 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 
 								<div className={styles.account_receivables_invoices}>
 									<div className={styles.styled_text}>
-										Account Receivables
+										{t('account_receivables')}
 									</div>
-									<div
-										className={styles.invoice_text}
-									>
-										Open Invoices -
+									<div className={styles.invoice_text}>
+										<span className={styles.span}>{t('open_invoices')}</span>
+										-
 										{overallStats?.openInvoicesCount || 0}
 										{' | '}
-										Customers -
+										<span className={styles.span}>{t('customers')}</span>
+										-
 										{overallStats?.customersCount || 0}
 									</div>
 
@@ -140,7 +143,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 								</div>
 								<div className={styles.sub_invoices}>
 									<div className={styles.styled_text}>
-										On Account Payment
+										{t('on_account_payment')}
 									</div>
 								</div>
 							</>
@@ -192,7 +195,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 
 								<div className={styles.sub_invoices}>
 									<div className={styles.styled_text}>
-										Total Outstanding
+										{t('total_outstanding')}
 									</div>
 								</div>
 							</>

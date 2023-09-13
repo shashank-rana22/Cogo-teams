@@ -1,11 +1,11 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../common/EmptyState/index.tsx';
 
 import ColumnCard from './ColumnCard';
-import { CONTROLLER_CONFIG } from './Config/controller-config';
+import { getControllerConfig } from './Config/controller-config';
 import Header from './Header';
 import styles from './styles.module.css';
 
@@ -21,15 +21,17 @@ function CustomTable({
 }) {
 	const { list, paginationData } = incidentData || {};
 	const { total, pageSize, pageIndex } = paginationData || {};
+	const { t } = useTranslation(['incidentManagement']);
+	const getControllerConfigData = getControllerConfig(t);
 	return (
 		<div>
-			{!isEmpty(list) ? <Header config={CONTROLLER_CONFIG} /> : null}
+			{!isEmpty(list) ? <Header config={getControllerConfigData} /> : null}
 			{!isEmpty(list) || incidentLoading ? (
 				<>
 					{(!isEmpty(list) ? list : Array(DEFAULT_LOADER_LEN).fill(FILL)).map((item) => (
 						<ColumnCard
 							key={item?.id}
-							config={CONTROLLER_CONFIG}
+							config={getControllerConfigData}
 							item={item}
 							incidentLoading={incidentLoading}
 							refetch={getIncidentLevels}

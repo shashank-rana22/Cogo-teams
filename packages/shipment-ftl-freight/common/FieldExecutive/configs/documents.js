@@ -59,4 +59,10 @@ export const DOCUMENTS = [
 		dataAccessKey : 'end_kilometer_images',
 		customType    : 'document',
 	},
+	{
+		label         : 'Physical PoD Upload',
+		key           : 'physical_pod_upload',
+		dataAccessKey : 'physical_proof_of_delivery',
+		customType    : 'document',
+	},
 ];

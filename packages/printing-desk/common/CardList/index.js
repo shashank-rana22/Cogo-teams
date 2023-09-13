@@ -8,6 +8,58 @@ import CardItem from './CardItem';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
+function HandleRender({
+	fields = [],
+	shipmentPendingTasks = [],
+	loading = false,
+	functions = {},
+	Child = <div />,
+	open = '',
+	setViewDoc = () => {},
+	setItem = () => {},
+	setEdit = () => {},
+	setOpen = () => {},
+}) {
+	if (loading || !isEmpty(shipmentPendingTasks)) {
+		return (shipmentPendingTasks || []).map((singleitem) => {
+			const { id, blCategory } = singleitem || {};
+			return (
+				<Fragment key={id}>
+					<CardItem
+						singleitem={singleitem}
+						fields={fields}
+						functions={functions}
+						loading={loading}
+						Child={Child}
+						open={open}
+						setViewDoc={setViewDoc}
+						setItem={setItem}
+						setEdit={setEdit}
+					/>
+					{blCategory === 'hawb' && (
+						<div
+							className={styles.accordian_style}
+						>
+							{open === id ? (
+								<IcMArrowUp onClick={() => {
+									setOpen('');
+								}}
+								/>
+							) : (
+								<IcMArrowDown onClick={() => {
+									setOpen(id);
+								}}
+								/>
+							)}
+						</div>
+					)}
+				</Fragment>
+			);
+		});
+	}
+	return <EmptyState />;
+}
+
 function CardList({
 	fields = [],
 	data = {},
@@ -24,52 +76,22 @@ function CardList({
 
 	const { shipmentPendingTasks = [], totalRecords } = data;
 
-	const handleRender = () => {
-		if (loading || !isEmpty(shipmentPendingTasks)) {
-			return (shipmentPendingTasks || []).map((singleitem) => {
-				const { id, blCategory } = singleitem || {};
-				return (
-					<Fragment key={id}>
-						<CardItem
-							singleitem={singleitem}
-							fields={fields}
-							functions={functions}
-							loading={loading}
-							Child={Child}
-							open={open}
-							setViewDoc={setViewDoc}
-							setItem={setItem}
-							setEdit={setEdit}
-						/>
-						{blCategory === 'hawb' && (
-							<div
-								className={styles.accordian_style}
-							>
-								{open === id ? (
-									<IcMArrowUp onClick={() => {
-										setOpen('');
-									}}
-									/>
-								) : (
-									<IcMArrowDown onClick={() => {
-										setOpen(id);
-									}}
-									/>
-								)}
-							</div>
-						)}
-					</Fragment>
-				);
-			});
-		}
-		return <EmptyState />;
-	};
-
 	return (
 		<section>
 			<Header fields={fields} />
 			<div className={styles.scroll}>
-				{handleRender()}
+				<HandleRender
+					loading={loading}
+					shipmentPendingTasks={shipmentPendingTasks}
+					fields={fields}
+					functions={functions}
+					open={open}
+					setViewDoc={setViewDoc}
+					Child={Child}
+					setItem={setItem}
+					setEdit={setEdit}
+					setOpen={setOpen}
+				/>
 				{!loading && !isEmpty(shipmentPendingTasks) ? (
 					<div className={styles.pagination}>
 						<Pagination

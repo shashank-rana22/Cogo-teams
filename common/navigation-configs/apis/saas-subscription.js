@@ -55,6 +55,11 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'update_subscription_order',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 	saas_subscription_plan: [
 		{

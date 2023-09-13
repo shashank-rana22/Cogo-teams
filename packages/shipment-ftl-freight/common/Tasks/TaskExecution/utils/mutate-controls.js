@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 const TIME_BASED_TASKS = [
 	'upload_ftl_commercial_invoice',
 	'upload_invoice_submission_acknowledgement',
@@ -19,7 +21,10 @@ const mutateControls = (
 
 		let dateTimeControl = {};
 		if (newControl?.type === 'fieldArray') {
-			dateTimeControl = control?.controls?.find((item) => item?.type === 'datepicker');
+			dateTimeControl = control?.controls?.find((item) => item?.type === 'datepicker') || {};
+			if (!isEmpty(dateTimeControl) && isEmpty(dateTimeControl.conditions)) {
+				dateTimeControl.isPreviousDaysAllowed = true;
+			}
 		}
 
 		if (TIME_BASED_TASKS.includes(task?.task) && dateTimeControl?.withTimePicker) {

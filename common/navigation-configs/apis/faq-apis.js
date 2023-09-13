@@ -168,6 +168,18 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+
+		{
+			api          : 'list_tests',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
+		{
+			api          : 'list_user_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	announcements: [
 		{

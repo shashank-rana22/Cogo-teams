@@ -9,6 +9,10 @@
 		flex: 0 0 45%;
 		margin: 4px 0;
 	}
+
+	:global(.ui_select_option_item) {
+		display: block;
+	}
 }
 
 .label {
@@ -16,6 +20,11 @@
 	font-weight: 900;
 	line-height: 14px;
 	letter-spacing: 0.02em;
+}
+
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
 }
 
 .button_wrapper {
