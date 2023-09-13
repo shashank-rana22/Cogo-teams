@@ -58,14 +58,10 @@ function Child(props) {
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete
-					className={`form-fieldArray-${name}-remove`}
+					className={styles.delete_btn}
+					width={16}
+					height={16}
 					onClick={() => remove(index, FIRST_INDEX)}
-					style={{
-						height       : '16px',
-						width        : '16px',
-						cursor       : 'pointer',
-						marginBottom : '12px',
-					}}
 				/>
 			) : null}
 		</div>

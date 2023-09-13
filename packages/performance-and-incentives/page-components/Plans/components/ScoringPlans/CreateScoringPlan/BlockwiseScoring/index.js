@@ -27,6 +27,7 @@ function BlockwiseScoring(props) {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
 	} = useBlockWiseScoring({ data });
 
 	if (getConfigLoading) return <LoadingState />;
@@ -55,6 +56,7 @@ function BlockwiseScoring(props) {
 						handleSubmit={handleSubmit}
 						editSubBlock={editSubBlock}
 						setEditSubBlock={setEditSubBlock}
+						prefillValues={prefillValues}
 					/>
 				))}
 

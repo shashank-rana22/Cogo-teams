@@ -23,6 +23,7 @@ function Block(props) {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
 	} = props;
 
 	const {
@@ -54,7 +55,12 @@ function Block(props) {
 					<sup className={styles.sup}>*</sup>
 				</div>
 
-				<SelectController name={`${name}.block`} control={control} options={blockOptions} />
+				<SelectController
+					name={`${name}.block`}
+					control={control}
+					options={blockOptions}
+					rules={{ required: 'Required' }}
+				/>
 
 				{errors[`${name}.block`] && (
 					<div className={styles.error_msg}>{errors[`${name}.block`]?.message}</div>
@@ -68,6 +74,7 @@ function Block(props) {
 					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					control={control}
+					errors={errors}
 					watch={watch}
 					handleSubmit={handleSubmit}
 					watchBlock={watchBlock}
@@ -78,6 +85,7 @@ function Block(props) {
 					refetch={refetch}
 					editSubBlock={editSubBlock}
 					setEditSubBlock={setEditSubBlock}
+					prefillValues={prefillValues}
 				/>
 			))}
 

@@ -69,18 +69,26 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Provisional Trigger',
 		placeholder : 'Select',
-		style       : {
+		options     : [{
+			label : '1st SID booked',
+			value : '1st SID booked',
+		}],
+		style: {
 			minWidth : '15%',
 			maxWidth : '15%',
 		},
 		rules: { required: 'Required' },
 	},
 	{
-		name        : 'realised_dtrigger',
+		name        : 'realised_trigger',
 		type        : 'select',
 		label       : 'Realised Trigger',
 		placeholder : 'Select',
-		style       : {
+		options     : [{
+			label : 'IRN generation / Invoice Knockoff',
+			value : 'IRN generation / Invoice Knockoff',
+		}],
+		style: {
 			minWidth : '15%',
 			maxWidth : '15%',
 		},

@@ -8,7 +8,7 @@ function FieldArray(props) {
 		name,
 		control,
 		controls,
-		error,
+		error = {},
 		showElements,
 		buttonText,
 		showButtons = true,

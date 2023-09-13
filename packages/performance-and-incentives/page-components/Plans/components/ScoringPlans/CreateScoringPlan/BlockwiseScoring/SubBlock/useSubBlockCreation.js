@@ -12,8 +12,10 @@ const useSubBlockCreation = (props) => {
 		blockIndex,
 		subBlockIndex,
 		refetch,
+		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
 	} = props;
 
 	const { updateScoringAttributes, loading } = usePostAgentScoringAttributes();
@@ -44,46 +46,30 @@ const useSubBlockCreation = (props) => {
 			return;
 		}
 
-		// handleSubmit(async () => {
-		// 	const subBlockValues = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}]`) || {};
+		handleSubmit(async () => {
+			const subBlockValues = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}]`) || {};
 
-		// 	const agentScoringBlockId = subBlockValues.sub_block_id;
+			const agentScoringBlockId = subBlockValues.sub_block_id;
 
-		// 	const agentScoringParameters = subBlockValues.parameters?.map((item) => ({
-		// 		agent_scoring_parameter_id : item.parameter,
-		// 		scoring_type               : item.scoring_type,
-		// 		base_score                 : item.base_score || undefined,
-		// 		fixed_percentage_value     : item.fixed_percentage_value || undefined,
-		// 		variable_percentage_value  : item.variable_percentage_value || undefined,
-		// 		provisional_trigger        : '1st SID booked',
-		// 		realised_trigger           : 'IRN generation / Invoice Knockoff',
+			const agentScoringParameters = subBlockValues.parameters?.map((item) => ({
+				agent_scoring_parameter_id : item.parameter,
+				scoring_type               : item.scoring_type,
+				base_score                 : item.base_score || undefined,
+				fixed_percentage_value     : item.fixed_percentage_value || undefined,
+				variable_percentage_value  : item.variable_percentage_value || undefined,
+				provisional_trigger        : item.provisional_trigger,
+				realised_trigger           : item.realised_dtrigger,
 
-		// 	}));
+			}));
 
-		// 	await updateScoringAttributes({ agentScoringBlockId, agentScoringParameters, subBlockStatus });
+			await updateScoringAttributes({ agentScoringBlockId, agentScoringParameters, subBlockStatus });
 
-		// 	refetch();
-		// })();
-
-		const subBlockValues = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}]`) || {};
-
-		const agentScoringBlockId = subBlockValues.sub_block_id;
-
-		const agentScoringParameters = subBlockValues.parameters?.map((item) => ({
-			agent_scoring_parameter_id : item.parameter,
-			scoring_type               : item.scoring_type,
-			base_score                 : item.base_score || undefined,
-			fixed_percentage_value     : item.fixed_percentage_value || undefined,
-			variable_percentage_value  : item.variable_percentage_value || undefined,
-			provisional_trigger        : '1st SID booked',
-			realised_trigger           : 'IRN generation / Invoice Knockoff',
-
-		}));
-
-		await updateScoringAttributes({ agentScoringBlockId, agentScoringParameters, subBlockStatus });
-
-		refetch();
+			refetch();
+		})();
 	};
+
+	const checkForSubBlock = () => prefillValues[blockIndex]
+		?.sub_blocks?.find((item) => item.sub_block_id === watchSubBlock);
 
 	return {
 		controls,
@@ -91,6 +77,7 @@ const useSubBlockCreation = (props) => {
 		parameterUnitOptions,
 		loading,
 		handleClick,
+		checkForSubBlock,
 	};
 };
 

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 	const {
 		agent_scoring_parameter_id, scoring_type, base_score, fixed_percentage_value,
-		variable_percentage_value, provisional_trigger, realised_trigger,
+		variable_percentage_value, provisional_trigger, realised_trigger, parameter_unit,
 	} = parameter;
 	return {
 		base_score,
@@ -13,7 +13,8 @@ const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 		provisional_trigger,
 		fixed_percentage_value,
 		variable_percentage_value,
-		parameter: agent_scoring_parameter_id,
+		scoring_unit : parameter_unit,
+		parameter    : agent_scoring_parameter_id,
 	};
 });
 
@@ -56,6 +57,7 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
 	};
 };
 
