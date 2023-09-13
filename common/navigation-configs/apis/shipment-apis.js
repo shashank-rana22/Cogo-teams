@@ -1608,6 +1608,10 @@ const apis = [
 		access_type : 'private',
 	},
 	{
+		api         : 'post_air_coe_warehouse_management_schedule',
+		access_type : 'private',
+	},
+	{
 		api          : 'list_contracts',
 		access_type  : 'private',
 		service_name : 'contract',
@@ -1665,7 +1669,7 @@ const apis = [
 	{
 		api          : 'get_ftl_freight_rate_min_max_validity_dates',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'ftl_freight_rate',
 	},
 	{
 		api          : 'list_shipment_consolidated_purchase_invoices',
@@ -1813,6 +1817,16 @@ const apis = [
 		api          : 'list_trucks',
 		access_type  : 'public',
 		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'incident',
+		access_type  : 'private',
+		service_name : 'incident-management',
+	},
+	{
+		api          : 'update_shipment_sb_numbers',
+		access_type  : 'public',
+		service_name : 'shipment',
 	},
 	{
 		api         : 'post_purchase_advance_document',

@@ -1,4 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useListShipment from '../hooks/useListShipment';
@@ -7,6 +8,7 @@ import Body from './Body';
 import Header from './Header';
 
 function ShipmentAir() {
+	const { t } = useTranslation(['airBookingDesk']);
 	const [serviceActiveTab, setServiceActiveTab] = useState('air_freight');
 
 	const [shipmentStateTab, setShipmentStateTab] = useState('ongoing');
@@ -20,7 +22,7 @@ function ShipmentAir() {
 	return (
 		<div>
 			<h1>
-				Air Bookings Desk
+				{t('airBookingDesk:title_air_booking_desk')}
 			</h1>
 			<Header
 				serviceActiveTab={serviceActiveTab}

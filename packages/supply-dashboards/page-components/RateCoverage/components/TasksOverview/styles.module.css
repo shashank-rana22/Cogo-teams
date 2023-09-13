@@ -1,0 +1,21 @@
+.main_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.stats_container {
+	display: flex;
+	width: 100%;
+	padding: 24px 20px;
+	background-color: #f7f7f7;
+}
+
+.swipe_button {
+	display: flex;
+	justify-content: center;
+	width: 2%;
+	cursor: pointer;
+}
