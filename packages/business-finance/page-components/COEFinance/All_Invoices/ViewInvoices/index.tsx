@@ -33,6 +33,8 @@ function ViewInvoices() {
 		lineItemsCheck       : false,
 	});
 
+	const [isTagFound, setIsTagFound] = useState(false);
+
 	const [isSticky, setIsSticky] = useState(false);
 
 	useEffect(() => {
@@ -71,6 +73,7 @@ function ViewInvoices() {
 					jobNumber={jobNumber}
 					status={status}
 					checkItem={checkItem}
+					isTagFound={isTagFound}
 				/>
 			</div>
 
@@ -86,6 +89,8 @@ function ViewInvoices() {
 				lineItemsCheck={checkItem?.lineItemsCheck}
 				checkItem={checkItem}
 				setCheckItem={setCheckItem}
+				isTagFound={isTagFound}
+				setIsTagFound={setIsTagFound}
 			/>
 		</div>
 	);

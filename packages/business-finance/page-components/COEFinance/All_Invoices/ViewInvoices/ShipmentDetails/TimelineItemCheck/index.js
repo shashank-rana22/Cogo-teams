@@ -14,8 +14,11 @@ const ITEMS = {
 	lineItemsCheck       : 'Line Items',
 };
 
-function TimeLineItemCheck({ checkItem = {}, status = '' }) {
+function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false }) {
 	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
+	if (!isTagFound) {
+		delete ITEMS.taggingCheck;
+	}
 
 	return (
 		<div className={styles.timeline}>

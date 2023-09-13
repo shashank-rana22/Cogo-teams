@@ -113,7 +113,10 @@ interface ShipmentDetailsInterface {
 	checkItem?: { shipmentDetailsCheck?: boolean,
 		documentsCheck?: boolean,
 		taggingCheck?: boolean,
-		sidDataCheck?: boolean, };
+		sidDataCheck?: boolean,
+	};
+	isTagFound?: boolean;
+	setIsTagFound?: any;
 }
 
 function ShipmentDetails({
@@ -128,6 +131,8 @@ function ShipmentDetails({
 	lineItemsCheck = false,
 	checkItem = {},
 	setCheckItem = (prop) => (prop),
+	isTagFound = false,
+	setIsTagFound = () => {},
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -310,7 +315,7 @@ function ShipmentDetails({
 									disabled={checkItem.documentsCheck}
 									onClick={() => onAccept({
 										tabName      : 'documentsTab',
-										tabToOpen    : 'taggingTab',
+										tabToOpen    : isTagFound ? 'taggingTab' : 'sidDataTab',
 										timelineItem : 'documentsCheck',
 									})}
 									className={styles.approve_button}
@@ -320,18 +325,20 @@ function ShipmentDetails({
 							</div>
 						)}
 					</div>
-
-					<div className={styles.tagging}>
-						<Tagging
-							billId={billId}
-							setRemarksVal={setRemarksVal}
-							status={status}
-							onTabClick={onTabClick}
-							onAccept={onAccept}
-							showTab={tab.taggingTab}
-							taggingChecked={checkItem.taggingCheck}
-						/>
-					</div>
+					{isTagFound ? (
+						<div className={styles.tagging}>
+							<Tagging
+								billId={billId}
+								setRemarksVal={setRemarksVal}
+								status={status}
+								onTabClick={onTabClick}
+								onAccept={onAccept}
+								showTab={tab.taggingTab}
+								taggingChecked={checkItem.taggingCheck}
+								setIsTagFound={setIsTagFound}
+							/>
+						</div>
+					) : undefined}
 
 					<SIDView
 						shipmentId={jobNumber}

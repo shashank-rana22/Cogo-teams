@@ -17,10 +17,14 @@ function Tagging({
 	onAccept = (prop) => (prop),
 	showTab = false,
 	taggingChecked = false,
+	setIsTagFound = () => {},
 }:
 {
 	billId: string, status: string, onTabClick: Function,
-	showTab: boolean, taggingChecked: boolean, onAccept: Function, setRemarksVal: React.Dispatch<React.SetStateAction<{
+	setIsTagFound?: any,
+	showTab?: boolean, taggingChecked?: boolean,
+	onAccept?: Function,
+	setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];
 		invoiceDetailsRemark: string[];
@@ -57,6 +61,7 @@ function Tagging({
 						setValue={setValue}
 						setRemarksVal={setRemarksVal}
 						status={status}
+						setIsTagFound={setIsTagFound}
 					/>
 					<Button
 						size="md"

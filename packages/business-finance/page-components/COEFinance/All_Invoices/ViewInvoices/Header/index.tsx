@@ -27,6 +27,7 @@ interface HeaderInterface {
 	status: string;
 	jobNumber?:string;
 	checkItem?: CheckItemInterface;
+	isTagFound?: boolean;
 }
 
 function Header({
@@ -38,6 +39,7 @@ function Header({
 	status,
 	jobNumber,
 	checkItem = {},
+	isTagFound = false,
 }: HeaderInterface) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
@@ -129,6 +131,7 @@ function Header({
 				<TimeLineItemCheck
 					checkItem={checkItem}
 					status={status}
+					isTagFound={isTagFound}
 				/>
 			</div>
 
