@@ -25,7 +25,7 @@ interface Props {
 
 function CreateJvModal({
 	show, onClose = () => {},
-	setShow, refetch, selectedData = [], Entity = '', line_items = [],
+	setShow, refetch, selectedData = [], Entity = '', line_items = [EMPTY_LINE_ITEMS],
 }:Props) {
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
