@@ -109,6 +109,7 @@ function Customers({
 			mailsToBeShown: userSharedMails,
 			firestore,
 			userId,
+			isBotSession,
 		},
 	};
 
