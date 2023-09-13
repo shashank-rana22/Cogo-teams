@@ -132,7 +132,7 @@ function ActiveSchedules() {
 							/>
 						))}
 
-					{!loading && isEmpty(scheduleDetails?.schedules?.list) && <NoSchedulesCard />}
+					{!loading && isEmpty(scheduleDetails?.schedules?.list) && <NoSchedulesCard loading={loading} />}
 				</div>
 			</div>
 			<div className={styles.pagination_container}>

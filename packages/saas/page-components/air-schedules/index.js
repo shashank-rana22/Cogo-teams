@@ -86,7 +86,7 @@ function AirSchedules() {
 						/>
 					))
 				) : (
-					<NoSchedulesCard loading={loading} />
+					<NoSchedulesCard />
 				)}
 			</div>
 
