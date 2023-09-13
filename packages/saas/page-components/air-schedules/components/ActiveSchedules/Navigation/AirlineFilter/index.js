@@ -3,7 +3,7 @@ import { IcMArrowRotateRight } from '@cogoport/icons-react';
 import AirlineContent from './AirlineContent';
 import styles from './styles.module.css';
 
-function AirlineFilter({ handleCheckList, handleNav, isOpen, carrierList }) {
+function AirlineFilter({ handleCheckList = () => {}, handleNav = () => {}, isOpen = false, carrierList = [] }) {
 	return (
 		<>
 			<div className={styles.header} role="presentation" onClick={() => handleNav('airline')}>

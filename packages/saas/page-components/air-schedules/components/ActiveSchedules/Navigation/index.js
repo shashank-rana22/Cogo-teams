@@ -1,4 +1,4 @@
-import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import AirlineFilter from './AirlineFilter';
@@ -9,16 +9,16 @@ import styles from './styles.module.css';
 import TransitDurationFilter from './TransitDurationFilter';
 
 function Navigation({
-	departureDate,
-	setDepartureDate,
-	arrivalDate,
-	setArrivalDate,
-	carrierList,
-	handleCheckList,
-	durationValue,
-	onChange,
-	clearAllHandler,
-	setSortBy,
+	departureDate = {},
+	setDepartureDate = () => {},
+	arrivalDate = [],
+	setArrivalDate = () => {},
+	carrierList = [],
+	handleCheckList = () => {},
+	durationValue = 0,
+	onChange = () => {},
+	clearAllHandler = () => {},
+	setSortBy = () => {},
 }) {
 	const [isOpen, setIsOpen] = useState([]);
 
@@ -33,10 +33,9 @@ function Navigation({
 	return (
 		<div className={styles.container}>
 			<div className={styles.filter}>
-				<div className={styles.title} role="presentation" onClick={clearAllHandler}>
+				<Button className={styles.clear_all} role="presentation" onClick={clearAllHandler}>
 					Clear All
-				</div>
-				<IcMCrossInCircle onClick={clearAllHandler} />
+				</Button>
 			</div>
 
 			<AirlineFilter

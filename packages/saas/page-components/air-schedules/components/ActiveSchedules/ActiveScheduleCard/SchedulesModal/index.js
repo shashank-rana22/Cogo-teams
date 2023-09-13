@@ -22,7 +22,7 @@ export function SchedulesModal({
 	const destinationSchedule = scheduleDetails?.destination_airport?.port_code || 'Destination';
 
 	const legs = schedule?.legs || [];
-	console.log(legs);
+
 	return (
 		<Modal show={openSchedulesModal} closeOnOuterClick showCloseIcon onClose={handleClose}>
 			<Modal.Header title="Schedule Details" />

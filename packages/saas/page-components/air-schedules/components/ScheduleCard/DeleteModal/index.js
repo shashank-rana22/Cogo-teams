@@ -4,7 +4,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DeleteModal({ showDelete, setShowDelete = true, deleteSchedule, schedule, loading = false }) {
+function DeleteModal({
+	showDelete = false,
+	setShowDelete = true, deleteSchedule = () => {},
+	schedule = {}, loading = false,
+}) {
 	return (
 		<Modal size="md" show={showDelete} onClose={() => setShowDelete()} placement="top">
 			<div className={styles.heading}>

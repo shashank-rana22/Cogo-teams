@@ -1,12 +1,15 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import styles from './styles.module.css';
 
-function TransitDuration({ durationValue, onChange }) {
+function TransitDuration({ durationValue = 0, onChange = () => {} }) {
+	const SIXTY = 60;
 	return (
 		<div className={styles.transit}>
 			<div className={styles.filter}>
 				<text>0</text>
 				<text style={{ textAlign: 'center' }}>
-					{(durationValue / 60).toFixed(2)}
+					{(durationValue / SIXTY).toFixed(GLOBAL_CONSTANTS.two)}
 				</text>
 				<text>60</text>
 			</div>

@@ -3,7 +3,7 @@ import { IcMArrowRotateRight } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import TransitDuration from './TransitDuration';
 
-function TransitDurationFilter({ handleNav = () => {}, isOpen = false, durationValue, onChange = () => {} }) {
+function TransitDurationFilter({ handleNav = () => {}, isOpen = false, durationValue = 0, onChange = () => {} }) {
 	return (
 		<>
 			<div className={styles.header} role="presentation" onClick={() => handleNav('transit')}>

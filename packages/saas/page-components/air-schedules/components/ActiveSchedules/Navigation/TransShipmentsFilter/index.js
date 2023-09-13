@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const CheckBoxCom = withControl(CheckboxGroup);
 
-function TransShipmentsFilter({ isOpen, handleNav, fields, control }) {
+function TransShipmentsFilter({ isOpen = false, handleNav = () => {}, fields = [], control = {} }) {
 	return (
 		<>
 			<div className={styles.header} role="presentation" onClick={() => handleNav('transshipments')}>
