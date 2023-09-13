@@ -1,4 +1,5 @@
 import { HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const TYPE_NUMBER_FIELDS = ['length', 'width', 'height', 'packages_count', 'package_weight', 'trucks_count'];
 
@@ -30,6 +31,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		packages,
 	} = primary_service || {};
 
+	const { commodity_subtype = '', commodity_type = '' } = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
 	const common = {
 		commodity : commodity !== 'all_commodity' ? commodity : 'general',
 		volume    : Number(volume),
@@ -58,6 +61,19 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			...common,
 			commodity      : air_customs_commodity,
 			packages_count : Number(packages_count || SINGLE_PACKAGE),
+		}];
+	}
+
+	if (search_type === 'warehouse') {
+		return [{
+			location_id              : formValues?.location_id,
+			expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
+			expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
+			packages_count           : Number(packages_count || SINGLE_PACKAGE),
+			commodity_sub_type       : commodity_subtype,
+			packages,
+			commodity_type,
+			...common,
 		}];
 	}
 

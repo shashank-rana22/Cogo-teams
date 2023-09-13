@@ -1,11 +1,13 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCError, IcMInfo } from '@cogoport/icons-react';
+import { IcCError, IcMInfo, IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import useSendInvoiceToFinance from '../../../../../../../../hooks/useSendInvoiceToFinance';
 
 import CancelReplaceEInvoice from './CancelReplaceEInvoice';
 import EmailInfo from './Components/EmailInfo';
@@ -41,17 +43,19 @@ function Actions({
 
 	const [showModal, setShowModal] = useState('');
 
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
-	&& invoice.status === 'pending';
+	const showForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice?.status === 'pending';
 
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice?.status)
+	|| isEmpty(invoiceData?.invoice_trigger_date);
+
+	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch });
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
 		: disableActionCondition;
 
-	if (invoice.status === 'amendment_requested') {
+	if (invoice?.status === 'amendment_requested') {
 		disableAction = false;
 	}
 
@@ -79,66 +83,92 @@ function Actions({
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_container}>
-				<div className={styles.actions_wrap}>
-					<div className={styles.statuses}>
-						{invoice.status ? (
-							<div className={styles.info_container}>
-								{startCase(invoice.status)}
-							</div>
-						) : null}
+				{!(invoice?.processing) ? (
+					<div className={styles.actions_wrap}>
+						<div className={styles.statuses}>
+							{invoice?.status ? (
+								<div className={styles.info_container}>
+									{startCase(invoice?.status)}
+								</div>
+							) : null}
 
-						{!INVOICE_STATUS.includes(invoice.status) ? (
-							<Button
-								size="sm"
-								onClick={() => setShowModal('show_review')}
-								themeType="accent"
-								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
-							>
-								Mark as Reviewed
-							</Button>
-						) : null}
+							{!INVOICE_STATUS.includes(invoice?.status) ? (
+								<Button
+									size="sm"
+									onClick={() => setShowModal('show_review')}
+									themeType="accent"
+									disabled={disableMarkAsReviewed || invoice?.is_eta_etd
+										|| shipment_data?.is_job_closed_financially}
+								>
+									Mark as Reviewed
+								</Button>
+							) : null}
 
-						{invoice?.status === 'reviewed' ? (
-							<Button size="sm" onClick={() => setShowModal('otp_verification')}>
-								Send OTP for Approval
-							</Button>
-						) : null}
-					</div>
+							{invoice?.status === 'reviewed' ? (
+								<Button
+									size="sm"
+									onClick={() => setShowModal('otp_verification')}
+									disabled={shipment_data?.is_job_closed_financially}
+								>
+									Send OTP for Approval
+								</Button>
+							) : null}
+						</div>
 
-					{invoice?.status === 'amendment_requested' ? (
-						<Tooltip
-							placement="bottom"
-							theme="light"
-							content={<AmendmentReasons invoice={invoice} />}
-						>
-							<div className={styles.icon_info_wrapper}>
-								<IcCError width={17} height={17} />
-							</div>
-						</Tooltip>
-					) : null}
-				</div>
-
-				{/* changes not reuired */}
-				{!(invoice?.parent_invoice_id) ? (
-					<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-						{!isEmpty(invoice?.remarks) ? (
+						{invoice?.status === 'amendment_requested' ? (
 							<Tooltip
 								placement="bottom"
-								content={(
-									<>
-										<h6 className={styles.title}>Invoice Remarks</h6>
-										<p className={styles.value}>{invoice?.remarks}</p>
-									</>
-								)}
-								className={styles.remark_container}
+								theme="light"
+								content={<AmendmentReasons invoice={invoice} />}
 							>
-								<div className={styles.icon_more_wrapper}>
-									<IcMInfo fill="#DDEBC0" />
+								<div className={styles.icon_info_wrapper}>
+									<IcCError width={17} height={17} />
 								</div>
 							</Tooltip>
 						) : null}
+					</div>
+				) : (
+					<div className={styles.reload}>
+						<div className={cl`${styles.payment_method} ${styles.processing}`}>Processing</div>
+						<Button
+							size="sm"
+							themeType="tertiary"
+							disabled={shipment_data?.is_job_closed}
+							onClick={() => sendInvoiceToFinance({
+								payload: {
+									id: invoice?.id,
+								},
+							})}
+						>
+							<IcMRefresh width={15} height={15} fill="#ee3425" />
+						</Button>
+					</div>
+				)}
 
-						<EmailInfo invoice={invoice} setSendEmail={() => setShowModal('send_invoice_email')} />
+				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
+
+					{!(invoice?.processing) ? (
+						<>
+							{!isEmpty(invoice?.remarks) ? (
+								<Tooltip
+									placement="bottom"
+									content={(
+										<>
+											<h6 className={styles.title}>Invoice Remarks</h6>
+											<p className={styles.value}>{invoice?.remarks}</p>
+										</>
+									)}
+									className={styles.remark_container}
+								>
+									<div className={styles.icon_more_wrapper}>
+										<IcMInfo fill="#DDEBC0" />
+									</div>
+								</Tooltip>
+							) : null}
+
+							<EmailInfo invoice={invoice} setSendEmail={() => setShowModal('send_invoice_email')} />
+						</>
+					) : null}
 
 						<KebabContent
 							invoice={invoice}
@@ -150,11 +180,10 @@ function Actions({
 							bfInvoice={bfInvoice}
 						/>
 					</div>
-				) : null}
 
 			</div>
 
-			{(invoice.services || []).length && showModal === 'edit_invoice' ? (
+			{(invoice?.services || []).length && showModal === 'edit_invoice' ? (
 				<EditInvoice
 					show={showModal === 'edit_invoice'}
 					onClose={onModalClose}

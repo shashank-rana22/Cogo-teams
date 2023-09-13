@@ -77,3 +77,8 @@
 	line-height: 16px;
 	color: #cb6464;
 }
+
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}

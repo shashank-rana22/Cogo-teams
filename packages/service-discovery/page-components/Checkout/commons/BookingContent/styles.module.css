@@ -1,0 +1,14 @@
+.heading {
+	font-weight: 600;
+}
+
+.container {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.ind_container {
+	flex-basis: 49%;
+	padding-top: 28px;
+}
