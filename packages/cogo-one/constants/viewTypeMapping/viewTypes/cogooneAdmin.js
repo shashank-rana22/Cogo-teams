@@ -20,10 +20,10 @@ const COGOONE_ADMIN = {
 	accesible_agent_types_query   : [],
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 	default_side_nav              : 'profile',
-	show_relevant_templates       : ['quick_reply', 'supply'],
+	show_relevant_templates       : ['quick_reply', 'supply', 'shipment_specialist'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
-	configurations_to_be_shown    : ['lock_configuration', 'list_agents', 'switch_views'],
+	configurations_to_be_shown    : ['fire_base_configuration', 'list_agents', 'switch_views'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 	permissions                   : {
 		auto_assign                 : true,

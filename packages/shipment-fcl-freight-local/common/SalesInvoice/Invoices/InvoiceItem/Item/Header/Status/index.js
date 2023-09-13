@@ -28,9 +28,10 @@ function Status({
 	isIRNGenerated = false,
 	setAskNullify = () => {},
 }) {
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const bfInvoice = invoicesList?.filter(
@@ -64,7 +65,7 @@ function Status({
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note;
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !shipment_data?.is_job_closed;
 
 	return (
 		<div className={styles.invoice_container}>
@@ -101,6 +102,7 @@ function Status({
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
+					disabled={shipment_data?.is_job_closed}
 					onClick={() => setAskNullify(true)}
 				>
 					Request CN

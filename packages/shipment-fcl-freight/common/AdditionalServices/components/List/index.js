@@ -7,6 +7,7 @@ import { useState, useContext } from 'react';
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import Loader from '../Loader';
+import NewRequestModal from '../NewRequestModal';
 
 import Info from './Info';
 import ItemAdded from './ItemAdded';
@@ -28,7 +29,10 @@ function List({ isSeller = false, source = '' }) {
 	const {
 		servicesList = [], refetchServices = () => {},
 		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
+		showRequestCSD,
 	} = useContext(ShipmentDetailContext);
+
+	const { trade_type = '', security_dd_type = '' } = primary_service || {};
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
@@ -38,6 +42,7 @@ function List({ isSeller = false, source = '' }) {
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
+	const [showRequestModal, setShowRequestModal] = useState(false);
 
 	const {
 		list: additionalServiceList = [],
@@ -129,6 +134,16 @@ function List({ isSeller = false, source = '' }) {
 
 			<div className={styles.not_added}>
 
+				{security_dd_type === 'cogoport' && trade_type === 'import' && showRequestCSD ? (
+					<Button
+						onClick={() => setShowRequestModal(true)}
+						className={styles.request_button}
+					>
+						Request CSD
+
+					</Button>
+				) : null}
+
 				{isAdditionalServiceAllowed
 					? (
 						<Button
@@ -145,7 +160,7 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setShowModal('cargo_insurance_service')}
 						className={styles.btn_div}
-						disabled={!!isCargoInsured}
+						disabled={!!isCargoInsured || shipment_data?.is_job_closed}
 					>
 						<span className={styles.add_icon}>+</span>
 						Add Cargo Insurance
@@ -210,6 +225,13 @@ function List({ isSeller = false, source = '' }) {
 					refetch={refetch}
 					setShowModal={setShowModal}
 					primary_service={primary_service}
+				/>
+			) : null}
+
+			{showRequestModal ? (
+				<NewRequestModal
+					showRequestModal={showRequestModal}
+					setShowRequestModal={setShowRequestModal}
 				/>
 			) : null}
 		</section>

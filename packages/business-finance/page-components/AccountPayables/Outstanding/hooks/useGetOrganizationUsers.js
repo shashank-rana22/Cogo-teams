@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useGetOrganizationUsers = ({ organizationId }) => {
+const useGetOrganizationUsers = ({ organizationId, setStats = () => { } }) => {
 	const [param, setParam] = useState({ page: 1, page_limit: 10 });
 
 	const [
@@ -34,6 +34,10 @@ const useGetOrganizationUsers = ({ organizationId }) => {
 			toastApiError(e);
 		}
 	}, [param?.page, trigger, organizationId]);
+
+	useEffect(() => {
+		setStats(((prevStats) => ({ ...prevStats, organization_users: data?.total_count })));
+	}, [data, setStats]);
 
 	return {
 		organizationData: data,

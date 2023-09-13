@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
@@ -162,14 +161,7 @@ function useHandleSubmit({
 				Toast.error('Something went wrong');
 			}
 		} catch (err) {
-			const errorString =	err?.data?.message
-				|| err?.error?.message
-				|| err?.data?.base
-				|| 'Something Went wrong';
-
-			const error = errorString.replace('Base', '');
-
-			Toast.error(startCase(error));
+			toastApiError(err);
 		}
 
 		setIsLoading(false);

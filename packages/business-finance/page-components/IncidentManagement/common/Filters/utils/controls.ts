@@ -1,54 +1,62 @@
 import styles from './styles.module.css';
 
-export const requestControls = (isSettlementExecutive = false) => {
+interface Props {
+	t?: Function;
+	isSettlementExecutive?: boolean;
+}
+export const requestControls = ({ t = () => {}, isSettlementExecutive = false }:Props) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
 		optionsVal = [
-			{ value: 'PAYMENT_CONFIRMATION_APPROVAL', label: 'Payment Confirmation' },
+			{ value: 'PAYMENT_CONFIRMATION_APPROVAL', label: t('incidentManagement:payment_confirmation_label') },
 		];
 	} else {
 		optionsVal = [
-			{ value: 'TDS_APPROVAL', label: 'TDS Deviation' },
-			{ value: 'BANK_DETAIL_APPROVAL', label: 'Bank Account Add/Edit' },
-			{ value: 'SETTLEMENT_APPROVAL', label: 'Settlement' },
-			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
-			{ value: 'REVOKE_INVOICE', label: 'Revoke invoice' },
-			{ value: 'ISSUE_CREDIT_NOTE', label: 'Request credit note' },
+			{ value: 'TDS_APPROVAL', label: t('incidentManagement:tds_deviation') },
+			{ value: 'BANK_DETAIL_APPROVAL', label: t('incidentManagement:bank_acc_add_edit') },
+			{ value: 'SETTLEMENT_APPROVAL', label: t('incidentManagement:settlement_label') },
+			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: t('incidentManagement:journal_voucher_label') },
+			{ value: 'REVOKE_INVOICE', label: t('incidentManagement:invoice_revoke') },
+			{ value: 'ISSUE_CREDIT_NOTE', label: t('incidentManagement:credit_note_request') },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
-				label : 'Request Consolidated Credit Note',
+				label : t('incidentManagement:consolidated_credit_note_request'),
 			},
 			{
 				value : 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL',
-				label : 'Inter Company Journey Voucher Approval',
+				label : t('incidentManagement:inter_comp_jv_approval'),
 			},
 			{
 				value : 'CONCOR_PDA_APPROVAL',
-				label : 'Concor PDA Approval',
+				label : t('incidentManagement:concor_pda_approval'),
 			},
 			{
 				value : 'SEZ_APPROVAL',
-				label : 'Sez Approval',
+				label : t('incidentManagement:sez_approval_title'),
 			},
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT',
-				label : 'Advance Container Security Deposit',
+				label : t('incidentManagement:adv_cont_sec_deposit'),
 			},
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
-				label : 'Advance Container Security Deposit Refund',
+				label : t('incidentManagement:adv_cont_sec_deposit_refund'),
 			},
 			{
 				value : 'PAYMENT_CONFIRMATION_APPROVAL',
-				label : 'Payment Confirmation Approval',
+				label : t('incidentManagement:payment_confirmation_approval'),
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'Expense Configuration Approval',
+				label : t('incidentManagement:expense_configuration_approval'),
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'Expense Approval',
+				label : t('incidentManagement:expense_approval'),
+			},
+			{
+				value : 'JOB_OPEN',
+				label : t('incidentManagement:job_open_label'),
 			},
 		];
 	}
@@ -56,7 +64,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 	return [
 		{
 			name        : 'category',
-			placeholder : 'Category',
+			placeholder : t('incidentManagement:select_category_placeholder'),
 			type        : 'select',
 			caret       : true,
 			isClearable : true,
@@ -65,19 +73,19 @@ export const requestControls = (isSettlementExecutive = false) => {
 		},
 		{
 			name        : 'urgency',
-			placeholder : 'Urgency',
+			placeholder : t('incidentManagement:select_urgency_placeholder'),
 			type        : 'select',
 			caret       : true,
 			isClearable : true,
 			options     : [
-				{ value: 'all', label: 'All' },
-				{ value: 'urgent', label: 'Urgent' },
+				{ value: 'all', label: t('incidentManagement:urgency_label_all') },
+				{ value: 'urgent', label: t('incidentManagement:urgency_label_urgent') },
 			],
 			className: styles.urgency_section,
 		},
 		{
 			name                  : 'date',
-			placeholder           : 'Select Date',
+			placeholder           : t('incidentManagement:select_date_placeholder'),
 			type                  : 'singleDateRange',
 			isPreviousDaysAllowed : true,
 			caret                 : true,
@@ -88,14 +96,14 @@ export const requestControls = (isSettlementExecutive = false) => {
 			name      : 'isMyTaskOnly',
 			type      : 'toggle',
 			size      : 'sm',
-			onLabel   : 'Show only my Tasks',
+			onLabel   : t('incidentManagement:toggle_label'),
 			offLabel  : '',
 			className : styles.toggle,
 		},
 	];
 };
 
-export const remainControls = (isSettlementExecutive = false) => {
+export const remainControls = ({ t = () => {}, isSettlementExecutive = false }:Props) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
 		optionsVal = [
@@ -103,47 +111,51 @@ export const remainControls = (isSettlementExecutive = false) => {
 		];
 	} else {
 		optionsVal = [
-			{ value: 'TDS_APPROVAL', label: 'TDS Deviation' },
-			{ value: 'BANK_DETAIL_APPROVAL', label: 'Bank Account Add/Edit' },
-			{ value: 'SETTLEMENT_APPROVAL', label: 'Settlement' },
-			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
-			{ value: 'ISSUE_CREDIT_NOTE', label: 'Request credit note' },
-			{ value: 'REVOKE_INVOICE', label: 'Revoke invoice' },
+			{ value: 'TDS_APPROVAL', label: t('incidentManagement:tds_deviation') },
+			{ value: 'BANK_DETAIL_APPROVAL', label: t('incidentManagement:bank_acc_add_edit') },
+			{ value: 'SETTLEMENT_APPROVAL', label: t('incidentManagement:settlement_label') },
+			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: t('incidentManagement:journal_voucher_label') },
+			{ value: 'REVOKE_INVOICE', label: t('incidentManagement:invoice_revoke') },
+			{ value: 'ISSUE_CREDIT_NOTE', label: t('incidentManagement:credit_note_request') },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
-				label : 'Request Consolidated Credit Note',
+				label : t('incidentManagement:consolidated_credit_note_request'),
 			},
 			{
 				value : 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL',
-				label : 'Inter Company Journey Voucher Approval',
+				label : t('incidentManagement:inter_comp_jv_approval'),
 			},
 			{
 				value : 'CONCOR_PDA_APPROVAL',
-				label : 'Concor PDA Approval',
+				label : t('incidentManagement:concor_pda_approval'),
 			},
 			{
 				value : 'SEZ_APPROVAL',
-				label : 'Sez Approval',
+				label : t('incidentManagement:sez_approval_title'),
 			},
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT',
-				label : 'Advance Container Security Deposit',
+				label : t('incidentManagement:adv_cont_sec_deposit'),
 			},
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
-				label : 'Advance Container Security Deposit Refund',
+				label : t('incidentManagement:adv_cont_sec_deposit_refund'),
 			},
 			{
 				value : 'PAYMENT_CONFIRMATION_APPROVAL',
-				label : 'Payment Confirmation Approval',
+				label : t('incidentManagement:payment_confirmation_approval'),
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'Expense Approval',
+				label : t('incidentManagement:expense_approval'),
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'Non Recurring Expense Approval',
+				label : t('non_recurr_expense_approval'),
+			},
+			{
+				value : 'JOB_OPEN',
+				label : t('incidentManagement:job_open_label'),
 			},
 		];
 	}
@@ -151,7 +163,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 	return [
 		{
 			name        : 'category',
-			placeholder : 'Category',
+			placeholder : t('incidentManagement:select_category_placeholder'),
 			type        : 'select',
 			caret       : true,
 			isClearable : true,
@@ -159,7 +171,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 		},
 		{
 			name                  : 'date',
-			placeholder           : 'Select Date',
+			placeholder           : t('incidentManagement:select_date_placeholder'),
 			type                  : 'singleDateRange',
 			caret                 : true,
 			isPreviousDaysAllowed : true,

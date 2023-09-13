@@ -47,6 +47,7 @@ interface SellerBankDetailInterface {
 	accountNumber?: string;
 	ifscCode?: string;
 	beneficiaryName?: string;
+	swiftCode?: string;
 }
 
 interface BillInterface {

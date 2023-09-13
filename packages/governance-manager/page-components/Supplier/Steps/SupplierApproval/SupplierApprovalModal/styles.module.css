@@ -1,0 +1,21 @@
+.header {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.body {
+	height: 372px;
+
+	:global {
+		.ui_modal_body_container {
+			border-top: 0;
+			border-bottom: 0;
+		}
+	}
+}
+
+.text_middle {
+	margin-bottom: 16px;
+	font-size: 14px;
+	font-weight: 500;
+}

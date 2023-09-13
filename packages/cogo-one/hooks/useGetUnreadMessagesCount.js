@@ -1,5 +1,6 @@
 import {
 	collectionGroup,
+	where,
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
@@ -24,6 +25,11 @@ const useGetUnreadMessagesCount = ({ firestore, viewType, agentId, isBotSession 
 			sessionQuery          : getSessionQuery?.({
 				sessionType: isBotSession ? 'bot' : 'admin',
 			}) || [],
+			queryFilters: [where(
+				'channel_type',
+				'in',
+				['platform_chat', 'telegram', 'whatsapp', 'zalo'],
+			)],
 			setUnReadChatsCount,
 		});
 	}, [firestore, viewType, agentId, isBotSession]);
