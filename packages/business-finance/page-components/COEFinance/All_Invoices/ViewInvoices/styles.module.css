@@ -5,5 +5,5 @@
 	max-height: 128px;
 	padding: 8px 12px 4px;
 	border-radius: 4px;
-	transition: background 0.4s;
+	transition: box-shadow 0.8s;
 }

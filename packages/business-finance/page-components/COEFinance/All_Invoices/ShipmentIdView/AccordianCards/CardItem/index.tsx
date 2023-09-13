@@ -1,8 +1,9 @@
 import { Button } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import List from '../../../../../commons/List/index';
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import useListBills from '../../../../hook/useListBills';
 import CardHeader from '../CardHeader/index';
 
@@ -62,6 +63,7 @@ function CardItem({
 		config,
 		filters,
 		hookSetters,
+		quoteData,
 	} = useListBills({
 		jobNumber,
 		jobType,
@@ -74,7 +76,17 @@ function CardItem({
 		setCurrentOpenSID('');
 	};
 
-	const { pageIndex = 1, list }: FullResponseProps = fullResponse || {};
+	const getFormattedAmount = (amount = '', currency = '') => formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	});
+
+	const { pageIndex = 1 }: FullResponseProps = fullResponse || {};
 
 	const functions = {
 		renderInvoiceNumber: (item: {}, field: {}) => (
@@ -89,9 +101,34 @@ function CardItem({
 		renderAmount: (item: {}, field: {}) => (
 			<AmountWithCurrency item={item} field={field} />
 		),
-		renderStatus   : (item: {}) => <Status item={item} />,
-		renderInvoices : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
-		renderRemarks  : (item: {}) => <Remarks itemData={item} />,
+		renderStatus        : (item: {}) => <Status item={item} />,
+		renderInvoices      : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
+		renderRemarks       : (item: {}) => <Remarks itemData={item} />,
+		renderQuotationName : ({ name = '' }) => <div>{showOverflowingNumber(name, 30)}</div>,
+		showFormattedPrice  : ({ price = '', currency = '' }) => (
+			<div>
+				{getFormattedAmount(price, currency)}
+			</div>
+		),
+		showFormattedPreTax: ({ total_price = '', currency = '' }) => (
+			<div>
+				{getFormattedAmount(total_price, currency)}
+			</div>
+		),
+		showFormattedPostTax: ({ tax_total_price = '', currency = '' }) => (
+			<div>
+				{getFormattedAmount(tax_total_price, currency)}
+			</div>
+		),
+	};
+
+	const getResponseData = () => {
+		if (amountTab === 'expense' || amountTab === 'income') {
+			return fullResponse;
+		} if (amountTab === 'sellQuote' || amountTab === 'buyQuote') {
+			return { list: quoteData?.lineItems || [] };
+		}
+		return { list: [] };
 	};
 
 	return (
@@ -107,23 +144,19 @@ function CardItem({
 			</div>
 
 			<div className={styles.card_list}>
-				{isEmpty(list) || amountTab === 'sellQuote' || amountTab === 'buyQuote' ? (
-					<div className={styles.no_data}>No Data Available</div>
-				) : (
-					<List
-						config={config}
-						itemData={fullResponse}
-						functions={functions}
-						loading={loading}
-						page={pageIndex}
-						pageSize={10}
-						showPagination
-						handlePageChange={(val: number) => hookSetters.setFilters({
-							...filters,
-							page: val,
-						})}
-					/>
-				)}
+				<List
+					config={config}
+					itemData={getResponseData()}
+					functions={functions}
+					loading={loading}
+					page={pageIndex}
+					pageSize={10}
+					showPagination
+					handlePageChange={(val: number) => hookSetters.setFilters({
+						...filters,
+						page: val,
+					})}
+				/>
 			</div>
 
 			{!showTab ? (

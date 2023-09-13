@@ -4,6 +4,7 @@ import {
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
 
+import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
 import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import styles from './styles.module.css';
@@ -153,8 +154,7 @@ function BillingPartyCard({
 									{' '}
 									<span
 										style={{
-											color: docContent?.includes(valueText)
-												? 'green' : 'auto',
+											color: getDetailValueColor({ value: valueText, docContent }),
 										}}
 									>
 										{valueText}

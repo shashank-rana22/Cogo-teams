@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-react';
 
+import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
 import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import FTLFreightInvoiceDetails from './FTLFreightInvoiceDetails';
@@ -76,8 +77,6 @@ function InvoiceDetailsCard({
 	}
 
 	const remarksValue = remarks?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
-
-	const getColor = (value) => (docContent?.includes(value) ? 'green' : 'auto');
 
 	const onClickResponse = ({ response }) => {
 		if (response) {
@@ -175,7 +174,7 @@ function InvoiceDetailsCard({
 							Invoice Number -
 							{' '}
 							<span
-								style={{ color: getColor(billNumber) }}
+								style={{ color: getDetailValueColor({ value: billNumber, docContent }) }}
 							>
 								{billNumber}
 							</span>
@@ -184,7 +183,7 @@ function InvoiceDetailsCard({
 							Invoice Type -
 							{' '}
 							<span
-								style={{ color: getColor(invoiceType) }}
+								style={{ color: getDetailValueColor({ value: invoiceType, docContent }) }}
 							>
 								{invoiceType}
 
@@ -194,7 +193,7 @@ function InvoiceDetailsCard({
 							Supplier name -
 							{' '}
 							<span
-								style={{ color: getColor(organizationName) }}
+								style={{ color: getDetailValueColor({ value: organizationName, docContent }) }}
 							>
 								{organizationName}
 
@@ -204,7 +203,7 @@ function InvoiceDetailsCard({
 							Urgency Tag -
 							{' '}
 							<span
-								style={{ color: getColor(tag) }}
+								style={{ color: getDetailValueColor({ value: tag, docContent }) }}
 							>
 								{tag}
 							</span>
@@ -213,7 +212,7 @@ function InvoiceDetailsCard({
 							Remarks -
 							{' '}
 							<span
-								style={{ color: getColor(remarksValue) }}
+								style={{ color: getDetailValueColor({ value: remarksValue, docContent }) }}
 							>
 								{remarksValue || 'No Remarks'}
 

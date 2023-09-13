@@ -1,10 +1,9 @@
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 import { quotationConfig } from '../configurations/ShipmentIdView/quotationConfig';
 
-function useGetQuotation({ jobNumber = '', quotationType = '' }) {
+function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 	const [
 		{ data: apiData, loading: quotationApiLoading },
 		trigger,
@@ -17,26 +16,29 @@ function useGetQuotation({ jobNumber = '', quotationType = '' }) {
 		{ manual: true, autoCancel: false },
 	);
 
-	useEffect(() => {
-		const getContent = async () => {
-			try {
-				trigger({
-					params: {
-						jobNumber,
-						quotationType,
-					},
-				});
-			} catch (err) {
-				toastApiError(err);
-			}
-		};
-		if (jobNumber) { getContent(); }
-	}, [jobNumber, quotationType, trigger]);
+	const QUOTATION_TYPE_MAPPING = {
+		sellQuote : 'SELL',
+		buyQuote  : 'BUY',
+	};
+
+	const getQuotationData = async () => {
+		try {
+			trigger({
+				params: {
+					jobNumber,
+					quotationType: QUOTATION_TYPE_MAPPING[amountTab],
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
+	};
 
 	return {
 		quotationLoading : quotationApiLoading,
 		quoteData        : apiData,
 		quoteConfig      : quotationConfig,
+		getQuotationData,
 	};
 }
 export default useGetQuotation;

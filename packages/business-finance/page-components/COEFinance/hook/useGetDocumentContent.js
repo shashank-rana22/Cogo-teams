@@ -20,13 +20,24 @@ const useGetDocumentContent = ({ data }) => {
 	);
 
 	useEffect(() => {
+		const getSupplierMappedName = () => {
+			let supplierMappedName = 'default';
+			const formattedOrgName = orgName?.replaceAll(' ', '_')?.toLowerCase();
+			ENTITY_NAME_LIST.forEach((singleName) => {
+				if (formattedOrgName?.includes(singleName)) {
+					supplierMappedName = singleName;
+				}
+			});
+			return supplierMappedName;
+		};
+
 		const getContent = async () => {
 			try {
 				trigger({
 					params: {
 						file_url    : billDocumentUrl,
 						entity_type : billType,
-						entity_name : ENTITY_NAME_LIST.includes(orgName) || 'default',
+						entity_name : getSupplierMappedName(),
 					},
 				});
 			} catch (err) {
@@ -39,7 +50,7 @@ const useGetDocumentContent = ({ data }) => {
 
 	return {
 		contentLoading,
-		docContent: JSON.stringify(apiData?.data),
+		docContent: JSON.stringify(apiData?.data)?.toLowerCase(),
 	};
 };
 
