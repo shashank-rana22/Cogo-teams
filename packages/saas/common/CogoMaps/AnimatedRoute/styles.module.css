@@ -1,0 +1,23 @@
+.ocean_icon {
+	width: 25px;
+	height: 20px;
+	fill: #42b0d5 !important;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	background-color: white;
+	border-radius: 50px;
+}
+
+.air_icon {
+	width: 25px;
+	height: 20px;
+	padding: 2px;
+	fill: #f7aba3 !important;
+}
+
+.rotate_icon {
+	transform: scaleX(-1);
+}

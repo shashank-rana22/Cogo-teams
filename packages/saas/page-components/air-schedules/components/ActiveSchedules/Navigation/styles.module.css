@@ -1,0 +1,28 @@
+.container {
+	padding: 0 10px;
+}
+
+.filter {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	padding-left: 12px;
+}
+
+.title {
+	margin: 4px;
+	font-size: 12px;
+	color: #f00;
+	cursor: pointer;
+}
+
+.icon_cross_circle {
+	align-self: center;
+	width: 40px;
+	height: 40px;
+	padding: 1px;
+	margin-top: 2px;
+	cursor: "pointer";
+	fill: #f00;
+}
