@@ -1,23 +1,21 @@
-
 .modal_message_text {
 	font-size: 16px;
-    font-weight: 700;
-    text-align: center;
+	font-weight: 700;
+	text-align: center;
 }
 
 .modal_message_container {
-    margin: 10px 16px;
-    
+	margin: 10px 16px;
 }
 
 .particular_input_cont {
-    margin: 10px 0;
+	margin: 10px 0;
 }
 
 .modal_header {
-    font-size: 14px;
-    font-weight: 500;
-    margin: 4px 0;
+	margin: 4px 0;
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .cancel_modal_btn {
@@ -46,7 +44,7 @@
 }
 
 .errors {
+	margin-top: 4px;
 	font-size: 12px;
 	color: red;
-	margin-top: 4px;
 }
