@@ -17,10 +17,15 @@
 }
 
 .task_action {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
 	:global {
 		.ui_button_container {
 			font-size: var(--font-size-sm);
 			color: var(--color-secondary-greyscale-3);
+			text-decoration: none;
 		}
 	}
 }

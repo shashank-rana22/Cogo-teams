@@ -85,7 +85,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 				content={(
 					<div className={styles.task_action}>
 						<Button
-							themeType="tertiary"
+							themeType="linkUi"
 							onClick={() => {
 								setShowAction(false);
 								setShowUnableTo(true);
@@ -96,7 +96,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 
 						{canReassignTask ? (
 							<Button
-								themeType="tertiary"
+								themeType="linkUi"
 								onClick={() => {
 									setShowAction(false);
 									setShowAdmin(true);

@@ -139,7 +139,7 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 							size="sm"
 							name="registration_number"
 							control={control}
-							placeholder={`Enter ${countryValidation?.others?.identification_number?.label}`}
+							placeholder={`Enter ${countryValidation?.others?.identification_number?.label || 'PAN'}`}
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : {

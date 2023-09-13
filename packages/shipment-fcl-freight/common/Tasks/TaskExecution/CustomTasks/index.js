@@ -11,3 +11,4 @@ export { default as UploadSI } from './UploadSI';
 export { default as MarkIgmShipmentConfirm } from './MarkIgmShipmentConfirm';
 export { default as UploadComplianceDocs } from './UploadComplianceDocs';
 export { default as VerifyShipperDetails } from './VerifyShipperDetails';
+export { default as CargoInsurance } from './CargoInsurance';
