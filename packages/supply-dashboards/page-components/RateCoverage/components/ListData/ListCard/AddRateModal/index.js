@@ -6,15 +6,14 @@ import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	asyncFieldsListOperators,
 	asyncFieldsLocations,
-	// asyncFieldsOrganization,
 	asyncFieldsPartnerUsersIds,
 	useForm,
 	useGetAsyncOptions,
 } from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { useSelector } from '@cogoport/store';
-import { merge, startCase } from '@cogoport/utils';
-import React, { useEffect, useState, useRef } from 'react';
+import { isEmpty, merge, startCase } from '@cogoport/utils';
+import React, { useEffect, useState } from 'react';
 
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import Layout from '../../../../../RfqEnquiries/Layout';
@@ -24,7 +23,6 @@ import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
 
-// import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 import airControls from './AirControls';
 import fclControls from './FclControls';
 import styles from './styles.module.css';
@@ -82,7 +80,6 @@ function AddRateModal({
 		labelKey : 'display_name',
 	}));
 
-	// const { list } = useGetChargeCodes({ service_name: 'fcl_freight_charges' });
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsListOperators(),
@@ -162,24 +159,15 @@ function AddRateModal({
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
 
-	const prefillData = useRef();
-
 	useEffect(() => {
 		let prefillFreightCodes = [];
-		if (rateData) {
-			if (!prefillData.current) {
-				prefillData.current = rateData;
+		if (rateData?.freight) {
+			const { freight = {} } = rateData;
+			const { validities = [] } = freight;
+			if (!isEmpty(validities)) {
+				const { line_items = [] } = validities[DEFAULT_VALUE];
+				prefillFreightCodes = line_items;
 			}
-			// console.log(prefillData.current, 'test1');
-
-			// const { freight = {} } = prefillData.current;
-			// const { validities = [] } = freight;
-			// let val;
-			// (validities || []).forEach((validity) => {
-			// 	const { line_items = [] } = validity;
-			// 	val = [line_items];
-			// 	// prefillFreightCodes
-			// });
 
 			let mandatoryFreightCodes = [];
 			Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {

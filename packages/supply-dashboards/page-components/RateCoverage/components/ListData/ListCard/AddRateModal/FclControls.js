@@ -11,7 +11,6 @@ const fclControls = ({
 	listShippingLineOptions,
 	fclCommodityOptions,
 	mainPortOptions1, mainPortOptions2,
-	// serviceProviders,
 	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
@@ -24,7 +23,6 @@ const fclControls = ({
 		heading     : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
-		// ...serviceProviders,
 		span        : 4,
 		value       : data?.service_provider_id,
 		rules       : { required: 'service provider is required' },
