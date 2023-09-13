@@ -95,5 +95,15 @@
     "update_plan_seq_err":"应大于或等于 0",
     "create_plan_success":"计划创建成功",
     "update_addon_success":"成功完全更新附加组件",
-    "update_plan_success":"成功全面更新计划功能"
+    "update_plan_success":"成功全面更新计划功能",
+    "utr_no":"UTR编号",
+    "utr_file":"UTR文件",
+    "utr_reject":"拒绝",
+    "utr_approve":"批准",
+    "utr_empty":"不要使用可用的",
+    "utr_title_approve":"批准计划",
+    "utr_title_current":"当前计划",
+    "sure":"你确定你要",
+    "plan":"计划？"
+
 }

@@ -95,5 +95,15 @@
     "update_plan_seq_err":"Harus lebih besar dari atau sama dengan 0",
     "create_plan_success":"Rencana Berhasil Dibuat",
     "update_addon_success":"Add-on berhasil diperbarui",
-    "update_plan_success":"Fitur Paket Berhasil diperbarui"
+    "update_plan_success":"Fitur Paket Berhasil diperbarui",
+    "utr_no":"utrNo",
+    "utr_file":"File UTR",
+    "utr_reject":"Menolak",
+    "utr_approve":"Menyetujui",
+    "utr_empty":"Jangan gunakan yang tersedia",
+    "utr_title_approve":"Menyetujui rencana",
+    "utr_title_current":"Rencana saat ini",
+    "sure":"Apakah Anda yakin ingin",
+    "plan":"rencana?"
+
 }

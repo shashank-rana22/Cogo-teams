@@ -95,5 +95,15 @@
     "update_plan_seq_err":"Phải lớn hơn hoặc bằng 0",
     "create_plan_success":"Kế hoạch được tạo thành công",
     "update_addon_success":"Thành côngCác tiện ích bổ sung được cập nhật đầy đủ",
-    "update_plan_success":"Thành côngTính năng kế hoạch được cập nhật đầy đủ"
+    "update_plan_success":"Thành côngTính năng kế hoạch được cập nhật đầy đủ",
+    "utr_no":"UTR số",
+    "utr_file":"Tệp UTR",
+    "utr_reject":"Từ chối",
+    "utr_approve":"Chấp thuận",
+    "utr_empty":"Không sử dụng một",
+    "utr_title_approve":"Phê duyệt kế hoạch",
+    "utr_title_current":"Kế hoạch hiện tại",
+    "sure":"Bạn có chắc bạn muốn",
+    "plan":"kế hoạch?"
+
 }

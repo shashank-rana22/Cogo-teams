@@ -95,5 +95,15 @@
     "update_plan_seq_err":"ควรมากกว่าหรือเท่ากับ 0",
     "create_plan_success":"สร้างแผนสำเร็จแล้ว",
     "update_addon_success":"โปรแกรมเสริมที่อัปเดตสำเร็จเสร็จสมบูรณ์แล้ว",
-    "update_plan_success":"ฟีเจอร์แผนอัปเดตสำเร็จแล้วอย่างสมบูรณ์"
+    "update_plan_success":"ฟีเจอร์แผนอัปเดตสำเร็จแล้วอย่างสมบูรณ์",
+    "utr_no":"UTR ไม่",
+    "utr_file":"ไฟล์ UTR",
+    "utr_reject":"ปฏิเสธ",
+    "utr_approve":"อนุมัติ",
+    "utr_empty":"อย่าใช้งาน",
+    "utr_title_approve":"อนุมัติแผน",
+    "utr_title_current":"แผนปัจจุบัน",
+    "sure":"คุณแน่ใจหรือว่าคุณต้องการ",
+    "plan":"วางแผน?"
+
 }

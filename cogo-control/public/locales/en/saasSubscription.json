@@ -95,5 +95,14 @@
     "update_plan_seq_err":"Should be greater than or equal to 0",
     "create_plan_success":"Plan Successfully Created",
     "update_addon_success":"SuccessFully updated Add-ons",
-    "update_plan_success":"SuccessFully updated Plan Feature"
+    "update_plan_success":"SuccessFully updated Plan Feature",
+    "utr_no":"UTR No.",
+    "utr_file":"UTR File",
+    "utr_reject":"Reject",
+    "utr_approve":"Approve",
+    "utr_empty":"No UTR avaliable",
+    "utr_title_approve":"Approve Plan",
+    "utr_title_current":"Current Plan",
+    "sure":"Are you sure you want to",
+    "plan":"plan?"
 }

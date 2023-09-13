@@ -1,6 +1,7 @@
 import { cl, Button } from '@cogoport/components';
 import { IcMCross, IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useApproveUtr from '../../../../../hooks/useApproveUtr';
@@ -10,17 +11,21 @@ import styles from './styles.module.css';
 
 const LAST_INDEX = 1;
 
-const TITLE = {
-	true  : 'Approve Plan',
-	false : 'Current Plan',
-};
+const getTitle = ({ t }) => ({
+	true  : t('saasSubscription:utr_title_approve'),
+	false : t('saasSubscription:utr_title_current'),
+});
 
 function PlanApproval({ orders_info = {}, setEditModal, showCta }) {
 	const { transactions = [], id: checkoutId = '', plan_name = '' } = orders_info || {};
 
+	const { t } = useTranslation(['saasSubscription']);
+
 	const [confirm, setConfirm] = useState({ open: false });
 
 	const { loading, approveUtrHandler } = useApproveUtr();
+
+	const TITLE_MAPPING = getTitle({ t });
 
 	const clickHandler = async (status) => {
 		await approveUtrHandler({
@@ -34,14 +39,14 @@ function PlanApproval({ orders_info = {}, setEditModal, showCta }) {
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.title}>
-				{`${TITLE[showCta]} : ${plan_name || ''}`}
+				{`${TITLE_MAPPING[showCta]} : ${plan_name || ''}`}
 			</h3>
 
 			{!isEmpty(transactions) ? (
 				<>
 					<div className={cl`${styles.flex_box} ${styles.card_header}`}>
-						<div>UTR No.</div>
-						<div>UTR File</div>
+						<div>{t('saasSubscription:utr_no')}</div>
+						<div>{t('saasSubscription:utr_file')}</div>
 					</div>
 
 					<div className={styles.scroll_container}>
@@ -75,7 +80,7 @@ function PlanApproval({ orders_info = {}, setEditModal, showCta }) {
 								onClick={() => setConfirm({ open: true, action: 'reject' })}
 							>
 								<IcMCross />
-								Reject
+								{t('saasSubscription:utr_reject')}
 							</Button>
 
 							<Button
@@ -85,13 +90,13 @@ function PlanApproval({ orders_info = {}, setEditModal, showCta }) {
 								onClick={() => setConfirm({ open: true, action: 'approve' })}
 							>
 								<IcMTick />
-								Approve
+								{t('saasSubscription:utr_approve')}
 							</Button>
 						</div>
 					) : null}
 				</>
 			)
-				: <div>No UTR avaliable</div>}
+				: <div>{t('saasSubscription:utr_empty')}</div>}
 
 			<ConfirmModal confirm={confirm} setConfirm={setConfirm} clickHandler={clickHandler} loading={loading} />
 		</div>
