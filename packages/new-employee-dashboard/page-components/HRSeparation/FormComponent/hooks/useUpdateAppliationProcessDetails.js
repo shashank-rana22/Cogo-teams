@@ -13,7 +13,6 @@ const useUpdateAppliationProcessDetails = ({ refetch = () => {}, setShowModal = 
 			await trigger({
 				data: payload,
 			});
-
 			refetch();
 			setShowModal(false);
 			handleNext();

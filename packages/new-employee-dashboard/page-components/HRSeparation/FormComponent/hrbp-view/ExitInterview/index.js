@@ -5,7 +5,7 @@ import {
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-// import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 // import InterviewComplete from '../ExitInterviewComplete/InterviewCompletion';
 // import ReasonsToLeave from '../ExitReasons/Reasons';
 
@@ -13,7 +13,7 @@ import ExitHeading from './ExitHeading';
 import ScheduleInterview from './Schedule';
 import styles from './styles.module.css';
 
-function ExitInterview() {
+function ExitInterview({ refetch = () => {} }) {
 	const [visible, setvisible] = useState(false);
 	const {
 		control,
@@ -29,19 +29,19 @@ function ExitInterview() {
 
 	const v1 = watch();
 	console.log('v1:', v1);
-	//	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
 
 	const onSubmit = (values) => {
 		console.log(values, 'formValues');
 		setvisible(true);
-		// const payload = {
-		// 	sub_process_data: values,
-		// 	// sub_process_detail_id : '50adeb65-d63c-4c99-9a16-cd724ee4ca35',
-		// 	// process_name          : 'admin_clearance',
-		// };
-		// updateApplication({
-		// 	payload,
-		// });
+		const payload = {
+			sub_process_data: values,
+			// sub_process_detail_id : '50adeb65-d63c-4c99-9a16-cd724ee4ca35',
+			// process_name          : 'admin_clearance',
+		};
+		updateApplication({
+			payload,
+		});
 		reset();
 	};
 	return (

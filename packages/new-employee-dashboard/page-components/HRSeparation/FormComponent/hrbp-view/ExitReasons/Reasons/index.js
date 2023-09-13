@@ -1,14 +1,49 @@
+import { Button } from '@cogoport/components';
 import {
 	CheckboxController,
 	InputController,
+	useForm,
 } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useGetGenerateExitCode from '../../../hooks/useGetGenerateExitCode';
+
 import styles from './styles.module.css';
 // { onSubmit, control, handleSubmit }
-function ReasonsToLeave({ control }) {
+function ReasonsToLeave({ setComplete, setCode }) {
 	const [show, setShow] = useState(true);
+	const {
+		control,
+		watch,
+		reset,
+		handleSubmit,
+	} = useForm();
+
+	const OFF_BOARDING_APPLICATION_ID = '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda';
+
+	const v1 = watch();
+	console.log('v1:', v1);
+	//	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const { getExitCode } = useGetGenerateExitCode();
+
+	const onSubmit = async (values) => {
+		console.log(values, 'formValues');
+		// const payload = {
+		// 	sub_process_data: values,
+		// 	// sub_process_detail_id : '50adeb65-d63c-4c99-9a16-cd724ee4ca35',
+		// 	// process_name          : 'admin_clearance',
+		// };
+		//	console.log(off_boarding_application_id);
+		const data = await getExitCode({ OFF_BOARDING_APPLICATION_ID });
+		console.log(data.exit_code);
+		setCode(data.exit_code);
+		setComplete(true);
+		// updateApplication({
+		// 	payload,
+		// });
+		reset();
+	};
 	// const onSubmit = () => {
 	// 	reset();
 	// };
@@ -70,7 +105,12 @@ function ReasonsToLeave({ control }) {
 
 				</div>
 			</div>
-
+			<div className={styles.footer}>
+				<Button themeType="secondary" style={{ marginRight: '12px' }}>Back</Button>
+				<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
+					Generate Code
+				</Button>
+			</div>
 		</>
 	);
 }

@@ -6,18 +6,19 @@ import TechStatus from '../TechClearance/TechStatus';
 
 import styles from './styles.module.css';
 
+const options = [
+	{
+		key      : '1',
+		disabled : false,
+		children : 'Completed',
+		prefix   : null,
+		suffix   : null,
+		color    : '#849E4C',
+		tooltip  : false,
+	},
+];
+
 function TechClearanceConfirm() {
-	const options = [
-		{
-			key      : '1',
-			disabled : false,
-			children : 'Completed',
-			prefix   : null,
-			suffix   : null,
-			color    : '#849E4C',
-			tooltip  : false,
-		},
-	];
 	const [items, setItems] = useState(options);
 
 	return (

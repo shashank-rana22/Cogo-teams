@@ -12,6 +12,7 @@ import useGetEmployeeCollections from '../../../../hooks/useGetEmployeeCollectio
 import useUpdateLeaveStatus from '../../../../hooks/useGetUpdateLeaveStatus';
 
 import LeaveSubCard from './LeaveSubCard';
+import OffboardingSubCard from './OffboardingSubCard';
 import styles from './styles.module.css';
 
 const TOTAL_COUNT = 10;
@@ -80,13 +81,27 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 								<div className={styles.parent_div}>
 									{(list || []).map(
 										(val) => (
-											<LeaveSubCard
-												val={val}
-												updateLoading={updateLoading}
-												isManager={isManager}
-												handleLeaveUpdate={handleLeaveUpdate}
-												key={`${val.id}${val.employee_code}`}
-											/>
+											request_label === 'OFFBOARDING REQUESTS'
+												? (
+													<OffboardingSubCard
+														val={val}
+														updateLoading={updateLoading}
+														isManager={isManager}
+														handleLeaveUpdate={handleLeaveUpdate}
+														key={`${val.id}${val.employee_code}`}
+													/>
+												)
+
+												:												(
+													<LeaveSubCard
+														val={val}
+														updateLoading={updateLoading}
+														isManager={isManager}
+														handleLeaveUpdate={handleLeaveUpdate}
+														key={`${val.id}${val.employee_code}`}
+													/>
+												)
+
 										),
 									)}
 								</div>

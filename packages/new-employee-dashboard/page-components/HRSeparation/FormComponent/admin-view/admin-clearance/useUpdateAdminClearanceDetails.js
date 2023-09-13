@@ -14,7 +14,6 @@ const useUpdateAdminClearanceData = () => {
 			await trigger({
 				data: payload,
 			});
-			// getApplicationProcessDetails();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
