@@ -45,9 +45,12 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 		if (count > INITIAL_MSG_COUNT && !show) {
 			audio.play();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [count]);
 
+	useEffect(() => {
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
-	}, [count, setMessagesCount, show, audio]);
+	}, [count, setMessagesCount, audio]);
 
 	return (
 		<div className={styles.chat_container}>
