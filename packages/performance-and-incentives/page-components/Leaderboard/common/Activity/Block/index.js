@@ -116,7 +116,10 @@ function Block(props) {
 			<div className={styles.activity_container}>
 				{parameters.map(({ label, value }) => (
 					<div className={styles.param_container} key={label}>
-						<p className={styles.value_text}>{value}</p>
+						<div className={styles.value_text_container}>
+							<p className={styles.value_text}>{value}</p>
+						</div>
+
 						<p className={styles.label_text}>{label}</p>
 					</div>
 				))}

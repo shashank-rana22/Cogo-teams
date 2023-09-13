@@ -26,6 +26,11 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 70%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 20px;
+	}
 }
 
 .param_container {
@@ -36,6 +41,12 @@
 	@media (max-width: 768px) {
 		flex-basis: 100%;
 	}
+}
+
+.value_text_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 20%;
 }
 
 .value_text {
