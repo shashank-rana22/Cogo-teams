@@ -8,7 +8,6 @@ import getSearchControls from '../../configurations/search-control';
 import sub_controls from '../../configurations/sub-filter-controls';
 
 import styles from './styles.module.css';
-// import SubFilters from './SubFilters';
 import SubFiltersModal from './SubFiltersModal';
 
 function MainFilters({
@@ -69,27 +68,6 @@ function MainFilters({
 			</div>
 			<div className={styles.rightFilters}>
 				<div className={styles.popoverDiv}>
-					{/* <Popover
-						// interactive
-						placement="bottom"
-						visible={open}
-						caret={false}
-						onClickOutside={onClickOutside}
-						render={open ? (
-							<SubFilters
-								control={control}
-								onClickCancel={onClickOutside}
-								handleSubmit={handleSubmit}
-								handleClick={handleClick}
-								loading={loading}
-								sub_controls={sub_controls}
-								watch={watch}
-							/>
-							// <div>Sagar</div>
-						) : null}
-					>
-						<IcMFilter onClick={() => setOpen(!open)} className={styles.icmFilter} />
-					</Popover> */}
 					<Button themeType="tertiary" onClick={() => { setShow(true); }}>
 						<IcMFilter onClick={() => setOpen(!open)} className={styles.icmFilter} />
 					</Button>
@@ -116,6 +94,7 @@ function MainFilters({
 							<Element
 								{...item}
 								name={name}
+								isClearable
 								prefix={null}
 								style={{ width }}
 								control={control}
@@ -130,7 +109,6 @@ function MainFilters({
 					themeType="secondary"
 					onClick={handleSubmit(handleClick)}
 					disabled={loading}
-						// style={{ height: 'auto' }}
 					className={styles.icmUndo}
 				>
 					<IcMUndo onClick={onClickReset} style={{ width: '16px', height: 'auto' }} />

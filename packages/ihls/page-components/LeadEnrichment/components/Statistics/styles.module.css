@@ -2,11 +2,6 @@
 	padding: 16px;
 	background: var(--color-secondary-5);
 	border-radius: 8px;
-
-	@media (max-width: 768px) {
-		/* display: flex;
-		justify-content: column; */
-	}
 }
 
 .chart_title {
@@ -19,7 +14,6 @@
 .single_chart_container {
 	display: flex;
 	height: 200px;
-	overflow-y: scroll;
 }
 
 .single_chart_container g rect {
