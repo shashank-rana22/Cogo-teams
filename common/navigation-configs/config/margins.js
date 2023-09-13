@@ -7,6 +7,10 @@ const margins = {
 		isMainNav  : false,
 		navigation : 'margin',
 	},
+	'/[partner_id]/margins/edit/[id]': {
+		isMainNav  : false,
+		navigation : 'margin',
+	},
 };
 
 export default margins;

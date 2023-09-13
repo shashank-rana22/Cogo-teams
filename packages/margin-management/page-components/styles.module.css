@@ -6,3 +6,21 @@
 	line-height: 26px;
 	color: #333;
 }
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.margin {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.flex {
+	display: flex;
+}
+
+.tab {
+	width: 75vw;
+}

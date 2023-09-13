@@ -1,35 +1,41 @@
-import { Card, Button } from '@cogoport/components';
-import { IcMArrowRotateRight } from '@cogoport/icons-react';
+import { Button, Pill } from '@cogoport/components';
+import { IcMArrowRotateDown, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import Footer from '../Footer';
+
 import styles from './styles.module.css';
 
-function CardComponent({ service = {}, setFilterParams = () => {}, filterparams = {} }) {
+function CardComponent({ service = {}, margin_type = '', setMarginBreakupData = () => {} }) {
 	const [showDetails, setShowDetails] = useState(false);
 	if (isEmpty(service?.service)) return null;
 
 	const setDetails = () => {
-		setFilterParams({ ...filterparams, service: service?.service });
-		setShowDetails(true);
+		setShowDetails(!showDetails);
 	};
 	return (
-		<Card
-			themetype="primary"
-			style={{ margin: 10, padding: '10px' }}
-		>
-
-			<div className={styles.flex}>
+		<div>
+			<div className={styles.container}>
 				<div className={styles.title}>
-					<IcMArrowRotateRight style={{ marginRight: 20 }} />
-					<Card.Title title={startCase(service?.service)} />
+					{showDetails ? <IcMArrowRotateDown style={{ marginRight: 20 }} onClick={setDetails} />
+						: <IcMArrowRotateRight style={{ marginRight: 20 }} onClick={setDetails} />}
+					<div>{startCase(service?.service)}</div>
 				</div>
-				<Card.Description>
-					<Button themeType="secondary" onClick={setDetails}>VIEW DETAILS</Button>
-				</Card.Description>
-				{showDetails && <div>details</div>}
+				<Button themeType="secondary" onClick={setDetails}>VIEW DETAILS</Button>
 			</div>
-		</Card>
+			<div className={styles.button_container}>
+				<Pill color="green">{`${service?.active_count} ACTIVE`}</Pill>
+				<Pill>{`${service?.inactive_count} INACTIVE`}</Pill>
+			</div>
+			{showDetails && (
+				<Footer
+					service={service?.service}
+					margin_type={margin_type}
+					setMarginBreakupData={setMarginBreakupData}
+				/>
+			)}
+		</div>
 
 	);
 }

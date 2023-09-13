@@ -5,16 +5,25 @@ import { v1 as uuid } from 'uuid';
 import conditions from '../../utils/condition-constants';
 
 import CardComponent from './CardComponent';
+import Details from './Details';
 
-function TabComponent({ data = {}, filterParams = {}, setFilterParams = () => { } }) {
+function TabComponent({
+	filterParams = {},
+	setFilterParams = () => { }, data = {}, setMarginBreakupData = () => {}, activeTab = '',
+	setActivetab = () => {},
+}) {
 	const { isConditionMatches } = useGetPermission();
 
 	const setActive = (val) => {
-		setFilterParams({ ...filterParams, margin_type: val });
+		setActivetab(val);
+		if (val === 'approval_pending') {
+			setFilterParams({ ...filterParams, status: val, margin_type: 'demand' });
+		} else setFilterParams({ ...filterParams, margin_type: val, status: 'active' });
 	};
+
 	return (
 		<div>
-			<Tabs activeTab={filterParams?.margin_type} onChange={setActive} themeType="primary">
+			<Tabs activeTab={activeTab} onChange={setActive} themeType="primary">
 				{isConditionMatches(
 					[
 						...conditions.SEE_ALL_MARGINS,
@@ -26,10 +35,12 @@ function TabComponent({ data = {}, filterParams = {}, setFilterParams = () => { 
 					<TabPanel name="demand" title="SALES">
 						{(data?.margin_stats || []).map((service, index) => (
 							<CardComponent
+								setMarginBreakupData={setMarginBreakupData}
 								key={`${`${index}${uuid()}`}`}
 								service={service}
 								filterparams={filterParams}
 								setFilterParams={setFilterParams}
+								margin_type={activeTab}
 							/>
 						))}
 					</TabPanel>
@@ -42,10 +53,12 @@ function TabComponent({ data = {}, filterParams = {}, setFilterParams = () => { 
 					<TabPanel name="supply" title="SUPPLY">
 						{(data?.margin_stats || []).map((service, index) => (
 							<CardComponent
+								setMarginBreakupData={setMarginBreakupData}
 								key={`${`${index}${uuid()}`}`}
 								service={service}
 								filterparams={filterParams}
 								setFilterParams={setFilterParams}
+								margin_type={activeTab}
 							/>
 						))}
 					</TabPanel>
@@ -55,10 +68,12 @@ function TabComponent({ data = {}, filterParams = {}, setFilterParams = () => { 
 					<TabPanel name="cogoport" title="COGOPORT">
 						{(data?.margin_stats || []).map((service, index) => (
 							<CardComponent
+								setMarginBreakupData={setMarginBreakupData}
 								key={`${`${index}${uuid()}`}`}
 								service={service}
 								filterparams={filterParams}
 								setFilterParams={setFilterParams}
+								margin_type={activeTab}
 							/>
 						))}
 					</TabPanel>
@@ -66,7 +81,13 @@ function TabComponent({ data = {}, filterParams = {}, setFilterParams = () => { 
 
 				{isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or') ? (
 					<TabPanel name="approval_pending" title="Approval Pending">
-						approval pending
+						{(data?.list || []).map((service, index) => (
+							<Details
+								setMarginBreakupData={setMarginBreakupData}
+								key={`${`${index}${uuid()}`}`}
+								data={service}
+							/>
+						))}
 					</TabPanel>
 				) : null}
 			</Tabs>

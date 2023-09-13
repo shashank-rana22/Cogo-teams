@@ -3,18 +3,19 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
+const useListMargins = ({ defaultParams = {} }) => {
 	const [data, setData] = useState({});
-	const [filterParams, setFilterParams] = useState({ page: 1, margin_type: 'demand', service: '' });
+	const [filterParams, setFilterParams] = useState({ margin_type: 'demand', service: '', status: 'active' });
+	const [params, setParams] = useState({ page: 1 });
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_margins',
 			params : {
 				filters: {
-					...(defaultFilters),
-					...(filterParams),
+					...(filterParams || {}),
 				},
-				...(defaultParams),
+				...(defaultParams || {}),
+				...(params || {}),
 			},
 		},
 		{ manual: true },
@@ -39,6 +40,9 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 		apiTrigger,
 		filterParams,
 		setFilterParams,
+		params,
+		setParams,
+		trigger,
 	};
 };
 export default useListMargins;
