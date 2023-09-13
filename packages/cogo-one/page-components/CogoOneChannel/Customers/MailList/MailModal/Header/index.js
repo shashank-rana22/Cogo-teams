@@ -37,7 +37,6 @@ function RenderHeader({
 	buttonType = '',
 	setEmailTemplate = () => {},
 	isTemplateView = false,
-	setButtonType = () => {},
 	setMinimizeModal = () => {},
 }) {
 	return (
@@ -79,7 +78,6 @@ function RenderHeader({
 							size="sm"
 							themeType="accent"
 							onClick={() => {
-								setButtonType('email');
 								setEmailTemplate((prev) => ({ ...prev, isTemplateView: true }));
 							}}
 						>
