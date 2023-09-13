@@ -3,7 +3,7 @@ import { IcMArrowRotateRight } from '@cogoport/icons-react';
 import DateArrivalHandler from './DateHandler';
 import styles from './styles.module.css';
 
-function ArrivalFilter({ handleNav, isOpen, arrivalDate, setArrivalDate }) {
+function ArrivalFilter({ handleNav = () => {}, isOpen = false, arrivalDate = {}, setArrivalDate = () => {} }) {
 	return (
 		<>
 			<div className={styles.header} role="presentation" onClick={() => handleNav('arrival')}>

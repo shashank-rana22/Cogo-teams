@@ -2,7 +2,7 @@ import { DateRangepicker } from '@cogoport/components';
 
 import styles from '../styles.module.css';
 
-function DateDepartureHandler({ departureDate, setDepartureDate }) {
+function DateDepartureHandler({ departureDate = {}, setDepartureDate = () => {} }) {
 	return (
 		<div className={styles.flex}>
 			<DateRangepicker

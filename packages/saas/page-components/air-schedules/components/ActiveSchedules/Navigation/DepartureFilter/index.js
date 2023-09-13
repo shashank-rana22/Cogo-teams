@@ -6,8 +6,8 @@ import styles from './styles.module.css';
 function DepartureFilter({
 	handleNav = () => {},
 	isOpen = false,
-	departureDate,
-	setDepartureDate,
+	departureDate = {},
+	setDepartureDate = () => {},
 }) {
 	return (
 		<>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AirlineFilter from './AirlineFilter';
 import ArrivalFilter from './ArrivalFilter';
 import DepartureFilter from './DepartureFilter';
+import SortByFilter from './SortByFIlter';
 import styles from './styles.module.css';
 import TransitDurationFilter from './TransitDurationFilter';
 
@@ -17,6 +18,7 @@ function Navigation({
 	durationValue,
 	onChange,
 	clearAllHandler,
+	setSortBy,
 }) {
 	const [isOpen, setIsOpen] = useState([]);
 
@@ -61,6 +63,14 @@ function Navigation({
 				durationValue={durationValue}
 				onChange={onChange}
 			/>
+			<SortByFilter
+				setSortBy={setSortBy}
+				handleNav={handleNav}
+				isOpen={isOpen}
+				durationValue={durationValue}
+				onChange={onChange}
+			/>
+
 		</div>
 	);
 }

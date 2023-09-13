@@ -1,5 +1,5 @@
-import { Pagination, Button, Popover } from '@cogoport/components';
-import { IcMArrowBack, IcMPortArrow, IcMFilter } from '@cogoport/icons-react';
+import { Pagination } from '@cogoport/components';
+import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -14,7 +14,6 @@ import useGetData from '../../hooks/useGetData';
 import NoSchedulesCard from '../NoSchedulesCard';
 
 import ActiveScheduleCard from './ActiveScheduleCard';
-import Filter from './Filter';
 import Navigation from './Navigation';
 import styles from './styles.module.css';
 
@@ -38,7 +37,7 @@ function ActiveSchedules() {
 	const {
 		setFilters, scheduleDetails,
 		setCarrierList, carrierList,
-		loading, mapPoints,
+		loading, mapPoints, setSortBy,
 	} = useFetchScheduleDetails({
 		pageLimit: PAGE_LIMIT, id, currentPage,
 	});
@@ -53,8 +52,6 @@ function ActiveSchedules() {
 		arrivalDate,
 		setArrivalDate,
 		setDepartureDate,
-		setVisible,
-		visible,
 	} = useGetData({
 		setCurrentPage,
 		setCarrierList,
@@ -101,38 +98,6 @@ function ActiveSchedules() {
 					Active Schedules
 				</div>
 
-				<Popover
-					placement="bottom"
-					visible={visible}
-					render={(
-						<Filter
-							carrierList={carrierList}
-							setCarrierList={setCarrierList}
-							scheduleDetails={scheduleDetails}
-							clearAllHandler={clearAllHandler}
-							onChange={onChange}
-							durationValue={durationValue}
-							handleCheckList={handleCheckList}
-							departureDate={departureDate}
-							setDepartureDate={setDepartureDate}
-							arrivalDate={arrivalDate}
-							setArrivalDate={setArrivalDate}
-						/>
-					)}
-				>
-					<div>
-						<Button
-							themeType="accent"
-							type="button"
-							className={styles.button}
-							onClick={() => setVisible(!visible)}
-						>
-							Filter By
-							<IcMFilter />
-						</Button>
-					</div>
-				</Popover>
-
 			</div>
 			<div className={styles.container_box}>
 				<div className={styles.filter}>
@@ -148,9 +113,8 @@ function ActiveSchedules() {
 						fields={controls}
 						clearAllHandler={clearAllHandler}
 						control={control}
-
+						setSortBy={setSortBy}
 					/>
-
 				</div>
 				<div className={styles.active_schedules}>
 					{loading ? (

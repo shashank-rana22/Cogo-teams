@@ -9,7 +9,6 @@ const useGetData = ({ setCurrentPage, setCarrierList, setFilters, carrierList })
 	const [departureDate, setDepartureDate] = useState({});
 	const [arrivalDate, setArrivalDate] = useState({});
 	const [filterCarrier, setFilterCarrier] = useState([]);
-	const [visible, setVisible] = useState(false);
 
 	const { reset, control } = useForm();
 
@@ -82,7 +81,6 @@ const useGetData = ({ setCurrentPage, setCarrierList, setFilters, carrierList })
 		setFilterCarrier({});
 		onChange(GLOBAL_CONSTANTS.zeroth_index);
 		setFilters({});
-		setVisible(false);
 		reset();
 	};
 
@@ -96,8 +94,6 @@ const useGetData = ({ setCurrentPage, setCarrierList, setFilters, carrierList })
 		arrivalDate,
 		setArrivalDate,
 		setDepartureDate,
-		setVisible,
-		visible,
 	};
 };
 export default useGetData;
