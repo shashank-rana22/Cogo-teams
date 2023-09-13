@@ -6,42 +6,42 @@ import PersonalDetails from './PersonalDetails/index';
 import SalaryDetails from './SalaryDetails';
 import StatutoryDetails from './StatutoryDetails';
 
-const useGetTabsMapping = (data) => (
+const useGetTabsMapping = (data = {}, loading = false) => (
 	[
 		{
 			name      : 'personal_details',
 			title     : 'Personal Details',
-			Component : <PersonalDetails data={data} />,
+			Component : <PersonalDetails data={data} loading={loading} />,
 		},
 		{
 			name      : 'education_and_skills',
 			title     : 'Education & Skills',
-			Component : <EducationDetails data={data} />,
+			Component : <EducationDetails data={data} loading={loading} />,
 		},
 		{
 			name      : 'employment_details',
 			title     : 'Employment Details',
-			Component : <EmploymentDetails data={data} />,
+			Component : <EmploymentDetails data={data} loading={loading} />,
 		},
 		{
 			name      : 'statutory_details',
 			title     : 'Statutory Details',
-			Component : <StatutoryDetails data={data} />,
+			Component : <StatutoryDetails data={data} loading={loading} />,
 		},
 		{
 			name      : 'salary_details',
 			title     : 'Salary Details',
-			Component : <SalaryDetails data={data} />,
+			Component : <SalaryDetails data={data} loading={loading} />,
 		},
 		{
 			name      : 'documents',
 			title     : 'Documents',
-			Component : <Documents data={data} />,
+			Component : <Documents data={data} loading={loading} />,
 		},
 		{
 			name      : 'other_details',
 			title     : 'Other Details',
-			Component : <OtherDetails data={data} />,
+			Component : <OtherDetails data={data} loading={loading} />,
 		},
 	]
 );

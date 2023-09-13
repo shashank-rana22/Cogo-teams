@@ -14,19 +14,24 @@
 	padding: 24px;
 	background: #fff;
 	border-radius: 25px 25px 0 0;
-}
 
-.profile_container > :not(:last-child) {
-	margin-bottom: 16px;
+	@media (max-width: 390px) {
+		padding: 16px;
+		border-radius: 16px 16px 0 0;
+	}
 }
 
 .profile_flex {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 24px;
+	margin-bottom: 8px;
 	background: #fff;
 	border-radius: 8px;
+
+	@media (max-width: 390px) {
+		margin-bottom: 0;
+	}
 }
 
 .cover {
@@ -183,6 +188,14 @@
 	margin-right: 8px;
 }
 
+.name_active > * {
+	margin-bottom: 4px;
+
+	@media (max-width: 390px) {
+		margin-bottom: 2px;
+	}
+}
+
 .name_title {
 	font-size: 24px;
 	font-weight: 500;
@@ -192,6 +205,13 @@
 .cogoid_title {
 	font-size: 24px;
 	color: #4f4f4f;
+}
+
+.buttons_flex {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	justify-content: space-between;
 }
 
 .active_container {
@@ -225,6 +245,10 @@
 .desig_location {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.desig_location > * {
+	margin-bottom: 8px;
 }
 
 .desig_location > :not(:last-child) {

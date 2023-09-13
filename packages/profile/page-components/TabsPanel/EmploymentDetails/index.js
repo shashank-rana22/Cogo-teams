@@ -9,7 +9,7 @@ import RightGlance from '../RightGlance';
 import EmploymentStatus from './EmploymentStatus';
 import styles from './styles.module.css';
 
-function EmploymentDetails({ data = {} }) {
+function EmploymentDetails({ data = {}, loading = false }) {
 	const info = employmentInfo;
 	const otherInfo = otherEmploymentInfo;
 
@@ -23,13 +23,20 @@ function EmploymentDetails({ data = {} }) {
 				<div className={styles.info_container}>
 					{info.map(({ heading, details }, index) => (
 						<>
-							<DetailsCard heading={heading} details={details} key={heading} data={data} />
-							{(index === GLOBAL_CONSTANTS.zeroth_index) ? <EmploymentStatus data={data} /> : null}
+							<DetailsCard
+								heading={heading}
+								details={details}
+								key={heading}
+								data={data}
+								loading={loading}
+							/>
+							{(index === GLOBAL_CONSTANTS.zeroth_index)
+								? <EmploymentStatus data={data} loading={loading} /> : null}
 						</>
 					))}
 				</div>
 			</div>
-			<RightGlance otherInfo={otherInfo} data={data} />
+			<RightGlance otherInfo={otherInfo} data={data} loading={loading} />
 		</div>
 	);
 }

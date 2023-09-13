@@ -1,4 +1,4 @@
-const useGetEducationInfo = (employee_education_details) => (employee_education_details.map((detail) => ({
+const useGetEducationInfo = (employee_education_details = []) => ((employee_education_details || []).map((detail) => ({
 	heading : `${detail.education_level} DETAILS`,
 	details : [
 		{ label: 'College', key: `${detail.education_level}`, value: 'school_name' },

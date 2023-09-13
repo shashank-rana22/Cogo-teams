@@ -7,7 +7,7 @@ import RightGlance from '../RightGlance';
 
 import styles from './styles.module.css';
 
-function StatutoryDetails() {
+function StatutoryDetails({ loading = false }) {
 	const info = statutoryInfo;
 	const otherInfo = otherStatuoryInfo;
 
@@ -20,10 +20,10 @@ function StatutoryDetails() {
 					<span className={styles.detail}>View and manage employee details</span>
 				</div>
 				<div className={styles.info_container}>
-					<DetailsCard heading={info.heading} details={info.details} />
+					<DetailsCard heading={info.heading} details={info.details} loading={loading} />
 				</div>
 			</div>
-			<RightGlance otherInfo={otherInfo} />
+			<RightGlance otherInfo={otherInfo} loading={loading} />
 		</div>
 	);
 }

@@ -1,7 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import {
 	IcMArrowBack,
-	IcMEdit,
 	IcMArrowDown,
 } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -19,10 +18,6 @@ function EmployeeProfile() {
 	}));
 	const { loading, data } = useGetEmployeeDetails(user.id);
 
-	if (loading) {
-		return 'loading';
-	}
-
 	const { employee_detail } = data || {};
 	const employeeData = getEmployeeData(employee_detail);
 
@@ -36,56 +31,71 @@ function EmployeeProfile() {
 							<div className={styles.left_text}>
 								<IcMArrowBack width={16} height={16} />
 								<div className={styles.name_designation}>
-									<span className={styles.name}>{employee_detail?.name}</span>
-									<span className={styles.designation}>{employee_detail?.role_name}</span>
+									<span className={styles.name}>
+										{loading ? <Placeholder width="175px" height="21px" /> : employee_detail?.name}
+									</span>
+									<span className={styles.designation}>
+										{loading
+											? <Placeholder width="100px" height="18px" />
+											: employee_detail?.role_name}
+									</span>
 								</div>
-							</div>
-							<div className={styles.actions_button}>
-								<Button size="md" themeType="secondary">
-									<div className={styles.actions_container}>
-										<span className={styles.button_text}>Edit Cover Photo</span>
-										<IcMEdit width={12} height={12} />
-									</div>
-								</Button>
 							</div>
 						</div>
 					</div>
 					<div className={styles.right_content}>
 						<div className={styles.name_email}>
 							<div className={styles.name_active}>
-								<span className={styles.name_title}>{employee_detail?.name}</span>
-								<span className={styles.cogoid_title}>{`(${employee_detail?.employee_code})`}</span>
-								{(employee_detail?.status === 'active')
-									? (
-										<div className={styles.active_container}>
-											<span className={styles.active}>Active</span>
+								<span className={styles.name_title}>
+									{loading ? <Placeholder height="36px" width="200px " /> : employee_detail?.name}
+								</span>
+								<span className={styles.cogoid_title}>
+									{
+										loading
+											? <Placeholder height="36px" width="200px " />
+											: `(${employee_detail?.employee_code})`
+									}
+								</span>
+								<div className={styles.buttons_flex}>
+									{
+										loading ? <Placeholder width="50px" height="33px" />
+											: (
+												<div>
+													{(employee_detail?.status === 'active')
+														? (
+															<div className={styles.active_container}>
+																<span className={styles.active}>Active</span>
+															</div>
+														)
+														: (
+															<div className={styles.inactive_container}>
+																<span className={styles.inactive}>Inactive</span>
+															</div>
+														)}
+												</div>
+											)
+									}
+									<Button size="md" themeType="accent">
+										<div className={styles.actions_container}>
+											<span>Actions</span>
+											<IcMArrowDown width={12} height={12} />
 										</div>
-									)
-									: (
-										<div className={styles.inactive_container}>
-											<span className={styles.inactive}>Inactive</span>
-										</div>
-									)}
-								<div style={{ display: 'flex', flexGrow: 1 }} />
-								<Button size="md" themeType="accent">
-									<div className={styles.actions_container}>
-										<span>Actions</span>
-										<IcMArrowDown width={12} height={12} />
-									</div>
-								</Button>
+									</Button>
+								</div>
 							</div>
 							<div className={styles.desig_location}>
 								{employeeData.map(({ Icon, value }) => (
 									<div className={styles.desig_location_element} key={value}>
 										{Icon}
-										<span className={styles.desig_location_value}>{value}</span>
+										{loading ? <Placeholder width="100px" height="21px" />
+											: <span className={styles.desig_location_value}>{value}</span>}
 									</div>
 								))}
 							</div>
 						</div>
 					</div>
 				</div>
-				<TabsPanel data={data} />
+				<TabsPanel data={data} loading={loading} />
 			</div>
 		</div>
 	);

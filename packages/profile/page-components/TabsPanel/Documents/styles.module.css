@@ -20,6 +20,7 @@
 }
 
 .main_container {
+	flex-shrink: 0;
 	width: 72%;
 	padding: 16px 12px;
 	margin-top: 16px;

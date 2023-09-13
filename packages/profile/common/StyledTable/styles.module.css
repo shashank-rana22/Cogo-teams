@@ -24,6 +24,10 @@
 			color: #221f20;
 			background: #fff;
 			background-color: #fff;
+
+			@media (max-width: 768px) {
+				padding-block: 16px;
+			}
 		}
 
 		.ui_table_body_row {

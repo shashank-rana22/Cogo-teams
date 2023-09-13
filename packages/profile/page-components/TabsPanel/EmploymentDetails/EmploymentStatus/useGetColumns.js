@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
@@ -62,15 +61,6 @@ const useGetColumns = () => (
 			Header   : 'STATUS',
 			accessor : (item) => (<div className={styles.table_item}>{item?.employee_status || ' — '}</div>),
 			id       : 'status',
-		},
-		{
-			Header   : 'ACTION',
-			accessor : () => (
-				<div className={styles.table_item}>
-					<Button size="md" themeType="accent">View</Button>
-				</div>
-			),
-			id: 'action',
 		},
 	]
 );

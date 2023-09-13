@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import useGetTabsMapping from './useGetTabsMapping';
 
-function TabsPanel({ data = {} }) {
+function TabsPanel({ data = {}, loading = false }) {
 	const [activeTab, setActiveTab] = useState('personal_details');
-	const tabsMapping = useGetTabsMapping(data);
+	const tabsMapping = useGetTabsMapping(data, loading);
 
 	return (
 		<div className={styles.main_container}>

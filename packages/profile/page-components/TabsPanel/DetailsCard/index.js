@@ -1,10 +1,13 @@
+import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
+function DetailsCard({ heading = '', details = [], isGrid = true, data = {}, loading = false }) {
 	const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
@@ -23,6 +26,14 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 		if (employee_education_details) {
 			employee_education_details.forEach((detail) => {
 				getMapping[detail.education_level] = detail;
+			});
+		}
+
+		if (value === 'ended_at') {
+			return formatDate({
+				date       : getByKey(getMapping[key], value),
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
 			});
 		}
 
@@ -64,12 +75,12 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 										</>
 									)}
 									<span className={styles.value}>
-										{labelValue(value, key)}
+										{loading ? <Placeholder height="27px" width="90%" /> : labelValue(value, key)}
 									</span>
 								</div>
 							) : (
 								<span className={styles.value}>
-									{labelValue(value, key)}
+									{loading ? <Placeholder height="27px" width="90%" /> : labelValue(value, key)}
 								</span>
 							)}
 						</div>
@@ -83,7 +94,7 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {} }) {
 								{label}
 							</span>
 							<span className={styles.side_value}>
-								{labelValue(value, key)}
+								{loading ? <Placeholder height="27px" width="90%" /> : labelValue(value, key)}
 							</span>
 						</div>
 					))}

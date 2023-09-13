@@ -7,7 +7,7 @@ import RightGlance from '../RightGlance';
 import styles from './styles.module.css';
 import useGetEducationInfo from './useGetEducationInfo';
 
-function EducationDetails({ data = {} }) {
+function EducationDetails({ data = {}, loading = false }) {
 	const { employee_detail } = data || {};
 	const { employee_education_details } = employee_detail || {};
 
@@ -25,11 +25,11 @@ function EducationDetails({ data = {} }) {
 				</div>
 				<div className={styles.info_container}>
 					{info.map(({ heading, details }) => (
-						<DetailsCard heading={heading} details={details} data={data} key={heading} />
+						<DetailsCard heading={heading} details={details} data={data} key={heading} loading={loading} />
 					))}
 				</div>
 			</div>
-			<RightGlance otherInfo={otherInfo} data={data} />
+			<RightGlance otherInfo={otherInfo} data={data} loading={loading} />
 		</div>
 	);
 }

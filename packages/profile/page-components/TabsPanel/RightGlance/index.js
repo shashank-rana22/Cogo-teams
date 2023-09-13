@@ -4,7 +4,7 @@ import DetailsCard from '../DetailsCard';
 
 import styles from './styles.module.css';
 
-function RightGlance({ otherInfo = {}, data = {} }) {
+function RightGlance({ otherInfo = {}, data = {}, loading = false }) {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.heading}>
@@ -12,7 +12,7 @@ function RightGlance({ otherInfo = {}, data = {} }) {
 				<span className={styles.detail}>Some of the important details</span>
 			</div>
 			<div className={styles.info_container}>
-				<DetailsCard details={otherInfo} isGrid={false} data={data} />
+				<DetailsCard details={otherInfo} isGrid={false} data={data} loading={loading} />
 			</div>
 		</div>
 	);

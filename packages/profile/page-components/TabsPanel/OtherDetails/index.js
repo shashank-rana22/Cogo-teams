@@ -7,7 +7,7 @@ import RightGlance from '../RightGlance';
 
 import styles from './styles.module.css';
 
-function OtherDetails({ data = {} }) {
+function OtherDetails({ data = {}, loading = false }) {
 	const info = otherInfo;
 	const otherInformation = otherOtherInfo;
 
@@ -20,10 +20,10 @@ function OtherDetails({ data = {} }) {
 					<span className={styles.detail}>View and manage employee details</span>
 				</div>
 				<div className={styles.info_container}>
-					<DetailsCard heading={info.heading} details={info.details} data={data} />
+					<DetailsCard heading={info.heading} details={info.details} data={data} loading={loading} />
 				</div>
 			</div>
-			<RightGlance otherInfo={otherInformation} data={data} />
+			<RightGlance otherInfo={otherInformation} data={data} loading={loading} />
 		</div>
 	);
 }
