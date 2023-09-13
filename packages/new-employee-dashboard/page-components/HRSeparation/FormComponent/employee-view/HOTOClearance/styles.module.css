@@ -153,9 +153,9 @@
 }
 
 .errors {
+	margin-top: 4px;
 	font-size: 12px;
 	color: red;
-	margin-top: 4px;
 }
 
 .checkbox_error_container {

@@ -54,7 +54,7 @@ function FormComponent({
 	loading = false,
 	refetchApplicationDetails = () => {},
 	// view_type = 'hoto_clearance',
-	view_type = 'admin_clearance',
+	view_type = 'manager_clearance',
 }) {
 	let Render = null;
 

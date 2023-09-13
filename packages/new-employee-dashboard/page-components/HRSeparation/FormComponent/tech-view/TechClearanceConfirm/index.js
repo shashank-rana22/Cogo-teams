@@ -2,8 +2,9 @@ import { Tags } from '@cogoport/components';
 import { IcMFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import TechStatus from '../TechClearance/TechStatus';
+
 import styles from './styles.module.css';
-import TechStatus from './TechStatus';
 
 const options = [
 	{

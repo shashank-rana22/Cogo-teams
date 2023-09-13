@@ -8,6 +8,7 @@ import useHotoClearance from './useHotoClearance';
 
 function HOTOClearance({ data = {}, refetch = () => {} }) {
 	const {
+		is_complete,
 		handleSubmit,
 		control,
 		errors,
@@ -15,6 +16,7 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 		applicant_details,
 		showModal,
 		setShowModal,
+		loading,
 	} = useHotoClearance({ refetch, data });
 
 	return (
@@ -24,23 +26,27 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 				<div className={styles.sub_heading}>Please read carefully</div>
 			</div>
 
-			<div className={styles.completed_notification_container}>
-				<IcMFtick height="22px" width="22px" color="#849E4C" />
-				<div className={styles.completed_notification_text}>
-					You have successfully completed your tasks. No further changes are allowed.
+			{is_complete ? (
+				<div className={styles.completed_notification_container}>
+					<IcMFtick height="22px" width="22px" color="#849E4C" />
+					<div className={styles.completed_notification_text}>
+						You have successfully completed your tasks. No further changes are allowed.
+					</div>
 				</div>
-			</div>
+			) : null}
 
 			<div className={styles.content_container}>
 				<div className={styles.content_text_container}>
-					<div className={styles.checkbox_error_container}>
-						<CheckboxController
-							className={styles.Checkbox}
-							control={control}
-							name="checkbox_agreement"
-							rules={{ required: { value: true, message: '*required' } }}
-						/>
-					</div>
+					{!is_complete ? (
+						<div className={styles.checkbox_error_container}>
+							<CheckboxController
+								className={styles.Checkbox}
+								control={control}
+								name="checkbox_agreement"
+								rules={{ required: { value: true, message: '*required' } }}
+							/>
+						</div>
+					) : null}
 
 					<div className={styles.content}>
 						<p>
@@ -91,6 +97,7 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 							className={styles.name_input}
 							name="name"
 							size="md"
+							disabled={is_complete}
 							rules={{ required: { value: true, message: '*This Field is required' } }}
 						/>
 						{errors?.name ? <div className={styles.errors}>*required</div> : null}
@@ -98,17 +105,19 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 				</div>
 			</div>
 
-			<div className={styles.provide_clearance_btn_container}>
-				<Button
-					size="md"
-					themeType="primary"
-					className={styles.provide_clearance_btn}
-					onClick={handleSubmit(() => setShowModal(true))}
-				>
-					Provide Clearance
-					<IcMTick width="18px" height="18px" color="white" />
-				</Button>
-			</div>
+			{!is_complete ? (
+				<div className={styles.provide_clearance_btn_container}>
+					<Button
+						size="md"
+						themeType="primary"
+						className={styles.provide_clearance_btn}
+						onClick={handleSubmit(() => setShowModal(true))}
+					>
+						Provide Clearance
+						<IcMTick width="18px" height="18px" color="white" />
+					</Button>
+				</div>
+			) : null}
 
 			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 				<Modal.Body>
@@ -143,6 +152,7 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 						themeType="primary"
 						className={styles.proceed_modal_btn}
 						onClick={handleSubmit(onSubmit)}
+						disabled={loading}
 					>
 						Yes, Proceed
 					</Button>
