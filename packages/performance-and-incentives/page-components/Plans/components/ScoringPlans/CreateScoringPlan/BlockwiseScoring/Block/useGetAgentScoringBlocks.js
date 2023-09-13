@@ -24,7 +24,9 @@ const useGetAgentScoringBlocks = (props) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.message !== 'canceled') {
+				Toast.error(getApiErrorString(error.response?.data) || 'Something went wrong');
+			}
 		}
 	}, [watchBlock, trigger]);
 
@@ -38,7 +40,7 @@ const useGetAgentScoringBlocks = (props) => {
 
 	return {
 		list,
-		blackParameterLading: loading,
+		blockParameterLoading: loading,
 	};
 };
 

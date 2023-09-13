@@ -25,26 +25,28 @@ function Child(props) {
 	const paramUnitOptions = parameterUnitOptions[paramType];
 
 	return (
-		<div className={styles.content}>
+		<div key={scoringType} className={styles.content}>
 			{controls.map((controlItem) => {
-				const Element = getFieldController(controlItem.type);
+				const { name: controlName, type, style, ...rest } = controlItem;
+
+				const Element = getFieldController(type);
 
 				if (!Element || (scoringType === 'absolute'
-					&& ['fixed_percentage_value', 'variable_percentage_value'].includes(controlItem.name))
-					|| (scoringType === 'percentage' && controlItem.name === 'base_score')) return null;
+					&& ['fixed_percentage_value', 'variable_percentage_value'].includes(controlName))
+					|| (scoringType === 'percentage' && controlName === 'base_score')) return null;
 
 				return (
-					<div key={`${name}.${index}.${controlItem.name}`} className={styles.list}>
+					<div key={`${name}.${index}.${controlName}`} className={styles.list} style={style}>
 
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element
-							key={`${name}.${index}.${controlItem.name}`}
+							key={`${name}.${index}.${controlName}`}
 							control={control}
-							id={`create_form_${controlItem.name}_field`}
-							{...controlItem}
-							name={`${name}.${index}.${controlItem.name}`}
-							{...(controlItem.name === 'scoring_unit') ? { options: paramUnitOptions } : {}}
+							id={`create_form_${controlName}_field`}
+							{...rest}
+							name={`${name}.${index}.${controlName}`}
+							{...(controlName === 'scoring_unit') ? { options: paramUnitOptions } : {}}
 						/>
 
 						<div className={styles.error_message}>
@@ -59,9 +61,10 @@ function Child(props) {
 					className={`form-fieldArray-${name}-remove`}
 					onClick={() => remove(index, FIRST_INDEX)}
 					style={{
-						height : '16px',
-						width  : '16px',
-						cursor : 'pointer',
+						height       : '16px',
+						width        : '16px',
+						cursor       : 'pointer',
+						marginBottom : '12px',
 					}}
 				/>
 			) : null}

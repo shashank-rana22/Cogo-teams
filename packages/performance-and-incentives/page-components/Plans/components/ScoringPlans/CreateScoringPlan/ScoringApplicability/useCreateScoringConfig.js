@@ -7,14 +7,27 @@ import { useEffect } from 'react';
 
 import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
 
-const useCreateScoringConfig = () => {
-	const { push } = useRouter();
+const useCreateScoringConfig = ({ data, editApplicability, setEditApplicability }) => {
+	const { push, query: { mode } } = useRouter();
 
-	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm({
+		defaultValues: {
+			cogo_entity_id : data.cogo_entity_id,
+			role_function  : data.role_function,
+			channel        : data.channel,
+			role_ids       : data.role_ids,
+			display_name   : data.display_name,
+		},
+	});
 
 	const [watchCogoEntityId, watchRoleFunction, watchChannel] = watch(['cogo_entity_id', 'role_function', 'channel']);
 
-	const controls = getScoreApplicableFormControls({ watchCogoEntityId, watchRoleFunction, watchChannel });
+	const controls = getScoreApplicableFormControls({
+		watchCogoEntityId,
+		watchRoleFunction,
+		watchChannel,
+		editApplicability,
+	});
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'config',
@@ -37,9 +50,11 @@ const useCreateScoringConfig = () => {
 				},
 			});
 
-			push(`/performance-and-incentives/plans?id=${res.data.id}`);
-
 			Toast.success('Saved successfully!');
+
+			await push(`/performance-and-incentives/plans?mode=${mode}&id=${res.data.id}`);
+
+			setEditApplicability(false);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

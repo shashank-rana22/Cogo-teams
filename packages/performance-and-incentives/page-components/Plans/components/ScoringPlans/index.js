@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useRouter } from '@cogoport/next';
+import { useState, useRef, useEffect } from 'react';
 
 import ACTIVE_MODE_KEYS_MAPPING from '../../constants/active-mode-key-mapping';
 
@@ -13,11 +14,19 @@ const COMPONENT_MAPPING = {
 };
 
 function ScoringPlans() {
+	const { query: { mode } } = useRouter();
+
+	const currentActiveMode = mode ? CREATE : LIST;
+
 	const [activeMode, setActiveMode] = useState(LIST);
 
 	const objectiveRef = useRef({});
 
 	const Component = COMPONENT_MAPPING[activeMode];
+
+	useEffect(() => {
+		setActiveMode(currentActiveMode);
+	}, [currentActiveMode]);
 
 	if (!Component) return null;
 

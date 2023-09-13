@@ -1,26 +1,40 @@
-import { Table } from '@cogoport/components';
+import { Table, Pagination } from '@cogoport/components';
 import { useState } from 'react';
-
-import useGetScoringConfigs from '../useGetScoringConfigs';
 
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
-function List() {
+function List(props) {
+	const { list = [], paginationData, getNextPage, loading } = props;
+
 	const [activeActionId, setActiveActionId] = useState(null);
 
-	const { list } = useGetScoringConfigs();
+	const { page, total_count, page_limit } = paginationData || {};
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ activeActionId, setActiveActionId });
 
 	return (
-		<div className={styles.table_container}>
-			<Table
-				className={styles.scoring_plans_table}
-				columns={LIST_COLUMN_MAPPING}
-				data={list}
-			/>
-		</div>
+		<>
+			<div className={styles.table_container}>
+				<Table
+					className={styles.scoring_plans_table}
+					columns={LIST_COLUMN_MAPPING}
+					data={list}
+					loading={loading}
+				/>
+			</div>
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={getNextPage}
+				/>
+			</div>
+
+		</>
 	);
 }
 

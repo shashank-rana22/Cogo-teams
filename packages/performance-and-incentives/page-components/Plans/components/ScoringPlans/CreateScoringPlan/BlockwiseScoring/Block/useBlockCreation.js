@@ -12,7 +12,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 
 	const watchBlock = watch(`${name}.block`);
 
-	const { list, blackParameterLading } = useGetAgentScoringBlocks({ watchBlock });
+	const { list, blockParameterLoading } = useGetAgentScoringBlocks({ watchBlock });
 
 	const { fields, append, remove } = useFieldArray({ control, name: `${name}.sub_blocks` });
 
@@ -49,7 +49,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 		remove,
 		subBlockOptions,
 		subBlockWiseParameterOptions,
-		blackParameterLading,
+		blockParameterLoading,
 	};
 };
 

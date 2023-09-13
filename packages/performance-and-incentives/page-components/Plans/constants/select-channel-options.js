@@ -7,7 +7,7 @@ const CHANNEL_OPTIONS = {
 		label : 'Enterprise',
 		value : 'enterprise',
 	}, {
-		label : 'CP',
+		label : 'Channel Partner',
 		value : 'channel_partner',
 	},
 	],

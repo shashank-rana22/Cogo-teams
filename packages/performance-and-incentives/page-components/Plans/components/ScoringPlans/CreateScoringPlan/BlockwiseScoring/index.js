@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
+// import { useRouter } from '@cogoport/next';
 
 import Block from './Block';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import useBlockWiseScoring from './useBlockWiseScoring';
 
@@ -11,9 +13,9 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function BlockwiseScoring(props) {
-	const { data, refetch } = props;
+	const { data, refetch, getConfigLoading } = props;
 
-	console.log('data::', data);
+	// const { push } = useRouter();
 
 	const {
 		control,
@@ -22,7 +24,12 @@ function BlockwiseScoring(props) {
 		remove,
 		errors,
 		watch,
+		handleSubmit,
+		editSubBlock,
+		setEditSubBlock,
 	} = useBlockWiseScoring({ data });
+
+	if (getConfigLoading) return <LoadingState />;
 
 	return (
 		<>
@@ -45,6 +52,9 @@ function BlockwiseScoring(props) {
 						watch={watch}
 						data={data}
 						refetch={refetch}
+						handleSubmit={handleSubmit}
+						editSubBlock={editSubBlock}
+						setEditSubBlock={setEditSubBlock}
 					/>
 				))}
 

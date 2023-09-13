@@ -2,12 +2,13 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import CHANNEL_OPTIONS from '../constants/select-channel-options';
 
-const getScoreApplicableFormControls = ({ watchCogoEntityId, watchRoleFunction, watchChannel }) => ([
+const getScoreApplicableFormControls = ({ watchCogoEntityId, watchRoleFunction, watchChannel, editApplicability }) => ([
 	{
 		name        : 'display_name',
 		label       : 'Display Name',
 		type        : 'text',
 		placeholder : 'Enter Name',
+		disabled    : !editApplicability,
 		rules       : { required: 'Name is required' },
 	},
 	{
@@ -18,7 +19,8 @@ const getScoreApplicableFormControls = ({ watchCogoEntityId, watchRoleFunction, 
 		options     : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map(
 			(entity) => ({ label: entity.name, value: entity.id }),
 		),
-		rules: { required: 'Cogo Entity is required' },
+		disabled : !editApplicability,
+		rules    : { required: 'Cogo Entity is required' },
 	},
 	{
 		name    : 'role_function',
@@ -54,14 +56,16 @@ const getScoreApplicableFormControls = ({ watchCogoEntityId, watchRoleFunction, 
 				value : 'external',
 			},
 		],
-		rules: { required: 'Role function is required' },
+		disabled : !editApplicability,
+		rules    : { required: 'Role function is required' },
 	},
 	{
-		name    : 'channel',
-		label   : 'Channel',
-		type    : 'select',
-		options : CHANNEL_OPTIONS[watchRoleFunction] || [],
-		rules   : { required: 'Channel is required' },
+		name     : 'channel',
+		label    : 'Channel',
+		type     : 'select',
+		options  : CHANNEL_OPTIONS[watchRoleFunction] || [],
+		disabled : !editApplicability,
+		rules    : { required: 'Channel is required' },
 	},
 	{
 		name        : 'role_ids',
@@ -72,12 +76,13 @@ const getScoreApplicableFormControls = ({ watchCogoEntityId, watchRoleFunction, 
 		initialCall : true,
 		asyncKey    : 'agent_scoring_eligible_roles',
 		params      : {
-			cogo_entity_ids : watchCogoEntityId ? [watchCogoEntityId] : undefined,
-			functions       : watchRoleFunction ? [watchRoleFunction] : undefined,
-			channels        : watchChannel ? [watchChannel] : undefined,
-			status          : true,
+			stakeholder_id : watchCogoEntityId || undefined,
+			functions      : watchRoleFunction ? [watchRoleFunction] : undefined,
+			channels       : watchChannel ? [watchChannel] : undefined,
+			status         : true,
 		},
-		rules: { required: 'Roles are required' },
+		disabled : !editApplicability,
+		rules    : { required: 'Roles are required' },
 	},
 ]);
 

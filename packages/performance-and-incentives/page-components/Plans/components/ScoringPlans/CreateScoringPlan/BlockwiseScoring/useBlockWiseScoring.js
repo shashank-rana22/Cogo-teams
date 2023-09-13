@@ -1,5 +1,5 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 	const {
@@ -18,7 +18,9 @@ const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 });
 
 const useBlockWiseScoring = ({ data = {} }) => {
-	const { control, formState: { errors }, watch, setValue } = useForm();
+	const [editSubBlock, setEditSubBlock] = useState({});
+
+	const { control, formState: { errors }, watch, setValue, handleSubmit } = useForm();
 
 	const { fields, append, remove } = useFieldArray({ control, name: 'blocks' });
 
@@ -39,26 +41,9 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		return updatedAcc;
 	}, {}) || [])?.map(([key, value]) => ({ block: key, sub_blocks: value })), [data]);
 
-	console.log('obj :: ', prefillValues);
-	console.log('values:: ', data.config_blocks?.reduce((acc, item) => {
-		const updatedAcc = { ...acc };
-
-		const value = {
-			sub_block_id : item.agent_scoring_block_id,
-			parameters   : getParameters({ parameters: item.parameters }),
-		};
-
-		if (!updatedAcc[item.agent_scoring_block?.name]) {
-			updatedAcc[item.agent_scoring_block?.name] = [value];
-		} else {
-			updatedAcc[item.agent_scoring_block?.name].push(value);
-		}
-
-		return updatedAcc;
-	}, {}));
-
 	useEffect(() => {
 		setValue('blocks', prefillValues);
+		setEditSubBlock({});
 	}, [setValue, prefillValues]);
 
 	return {
@@ -68,6 +53,9 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		errors,
 		watch,
 		control,
+		handleSubmit,
+		editSubBlock,
+		setEditSubBlock,
 	};
 };
 

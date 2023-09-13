@@ -3,10 +3,13 @@ import React from 'react';
 
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
 
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import useCreateScoringConfig from './useCreateScoringConfig';
 
-function ScoringApplicability() {
+function ScoringApplicability(props) {
+	const { data, editApplicability, setEditApplicability, getConfigLoading } = props;
+
 	const {
 		controls,
 		control,
@@ -14,7 +17,9 @@ function ScoringApplicability() {
 		handleSubmit,
 		onCreateScoringConfig,
 		loading,
-	} = useCreateScoringConfig();
+	} = useCreateScoringConfig({ data, editApplicability, setEditApplicability });
+
+	if (getConfigLoading) return <LoadingState />;
 
 	return (
 		<>
@@ -48,14 +53,31 @@ function ScoringApplicability() {
 				</div>
 
 				<div className={styles.btn_container}>
-					<Button
-						type="submit"
-						size="lg"
-						themeType="secondary"
-						loading={loading}
-					>
-						Save
-					</Button>
+
+					{editApplicability ? (
+						<Button
+							type="submit"
+							size="lg"
+							themeType="secondary"
+							loading={loading}
+						>
+							Save
+						</Button>
+					) : (
+						<Button
+							type="button"
+							size="lg"
+							themeType="accent"
+							loading={loading}
+							onClick={(event) => {
+								event.preventDefault();
+								setEditApplicability(true);
+							}}
+						>
+							Edit
+						</Button>
+					)}
+
 				</div>
 			</form>
 		</>
