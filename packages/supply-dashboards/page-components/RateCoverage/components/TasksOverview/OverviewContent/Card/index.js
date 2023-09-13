@@ -44,7 +44,6 @@ function Card({
 			))
 		);
 	}
-	console.log(activeCard, '?activeCard');
 	return (
 		<div className={styles[className]}>
 			<div className={styles.row}>
