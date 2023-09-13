@@ -13,6 +13,8 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 
 	const { checkout_id, shipment_id } = query || {};
 
+	const { tags = [] } = detail;
+
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
 	const [selectedModes, setSelectedModes] = useState(['email']);
@@ -47,6 +49,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			values: {
 				id                      : checkout_id,
 				quotation_email_sent_at : new Date(),
+				tags                    : [...new Set([...tags, 'added_to_cart'])],
 			},
 			type: 'copy_link',
 		});

@@ -37,7 +37,7 @@ const useHandleQuotationModal = ({
 	const [selected, setSelected] = useState('main');
 	const [confirmation, setConfirmation] = useState(false);
 
-	const { quotation_type, checkout_ids } = detail || {};
+	const { quotation_type, checkout_ids, tags = [] } = detail || {};
 
 	const { checkout_id, shipment_id } = query || {};
 
@@ -46,7 +46,7 @@ const useHandleQuotationModal = ({
 		agent_id,
 	]);
 
-	const org_id =		selected === 'main'
+	const org_id = selected === 'main'
 		? detail?.importer_exporter_id
 		: selected?.organization_id;
 
@@ -156,7 +156,13 @@ const useHandleQuotationModal = ({
 
 				Toast.success('Email sent');
 
-				await updateCheckout({ values: { id: checkout_id, is_locked: true } });
+				await updateCheckout({
+					values: {
+						id        : checkout_id,
+						is_locked : true,
+						tags      : [...new Set([...tags, 'added_to_cart'])],
+					},
+				});
 
 				if (bookingConfirmationMode === 'email') {
 					window.location.href = `/${partnerId}/sales/dashboards`;

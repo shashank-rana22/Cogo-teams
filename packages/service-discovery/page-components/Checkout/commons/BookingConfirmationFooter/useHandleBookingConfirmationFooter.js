@@ -161,7 +161,7 @@ const useHandleBookingConfirmationFooter = ({
 	useEffect(() => {
 		if (isAssistedBookingNotAllowed) {
 			setError(`You are not allowed to book this shipment. 
-			Kindly ask the customer to book from Partners Platform`);
+			Kindly ask the customer to book from the Platform`);
 			return;
 		}
 
