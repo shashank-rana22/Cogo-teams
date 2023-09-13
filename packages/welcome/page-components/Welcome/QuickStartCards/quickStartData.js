@@ -9,8 +9,10 @@ const getQuickStartCardsData = (t) => [
 			url   : 'https://cogofreight.sharepoint.com/sites/TheCogoAcademy',
 		},
 		tag: {
-			icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/5ee4739e9bb4824e5c4dfbe28d653825.png',
-			text : t('welcome:courses_and_reading_text'),
+			icon:
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/5ee4739e9bb4824e5c4dfbe28d653825.png',
+			courses_text     : t('welcome:courses_and_reading_text'),
+			assignments_text : t('welcome:tests_and_reading_text'),
 		},
 	},
 	{
