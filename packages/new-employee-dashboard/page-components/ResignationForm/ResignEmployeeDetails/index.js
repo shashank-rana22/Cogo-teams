@@ -1,14 +1,21 @@
+import { Loader } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getElementController from '../configs/getElementController';
-import controls from '../constants/controls';
+import getControls from '../constants/controls';
 
 import styles from './styles.module.css';
 
-function ResignEmployeeDetails({ control, errors }) {
+function ResignEmployeeDetails({ control = {}, errors = {}, dataItems = {}, loading = false }) {
 	const [show, setShow] = useState(true);
+	const { application_exist } = dataItems || {};
+	const controls = getControls(dataItems);
+
+	if (loading) {
+		return <Loader themeType="secondary" />;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -29,7 +36,7 @@ function ResignEmployeeDetails({ control, errors }) {
 
 					return (
 						<div
-							className={(controlItem?.name !== 'Enter_Reason_of_Leaving')
+							className={(controlItem?.name !== 'reason_of_leaving')
 								? styles.detail : styles.reason_leaving}
 							key={controlItem.name}
 						>
@@ -40,9 +47,11 @@ function ResignEmployeeDetails({ control, errors }) {
 								<Element
 									className={styles.controller_ele}
 									key={controlItem.name}
+									name={controlItem.name}
 									control={control}
 									placeholder="Select Status..."
 									{...controlItem}
+									disabled={application_exist || !(controlItem?.name === 'reason_of_leaving')}
 								/>
 								{errors[controlItem.name] && (
 									<div className={styles.error_msg}>

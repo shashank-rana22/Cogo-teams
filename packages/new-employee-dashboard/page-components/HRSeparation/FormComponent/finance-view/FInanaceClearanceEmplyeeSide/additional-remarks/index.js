@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function NotesHrbp({ control = {}, errors = {} }) {
+function AdditionalRemarks({ control = {}, errors = {} }) {
 	const [showNotes, setShowNotes] = useState(true);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShowNotes(!showNotes)}>
-				<span>Notes for HRBP</span>
+				<span>Additional Remarks</span>
 
 				<IcMArrowDown
 					width={16}
@@ -40,4 +40,4 @@ function NotesHrbp({ control = {}, errors = {} }) {
 	);
 }
 
-export default NotesHrbp;
+export default AdditionalRemarks;

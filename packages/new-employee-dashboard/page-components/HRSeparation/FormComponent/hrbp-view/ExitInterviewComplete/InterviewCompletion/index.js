@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const OTP = '123456';
 const ZEROTOCOMPARE = 0;
 const options = [
 	{ label: 'Termination', value: 'Termination' },
@@ -14,7 +13,8 @@ const options = [
 	{ label: 'Harassment Case', value: 'Harassment Case' },
 	{ label: 'Others', value: 'Others' },
 ];
-function InterviewComplete() {
+function InterviewComplete({ code }) {
+	const OTP = code || '202234';
 	const otparray = OTP.split('');
 	const [value, setValue] = useState('');
 
@@ -38,6 +38,7 @@ function InterviewComplete() {
 								size="sm"
 								value={key}
 								style={{ width: '30px' }}
+								disabled
 							/>
 						</div>
 					))}

@@ -1,10 +1,11 @@
 import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
-import AdminConfirmed from './admin-view/admin-confirmation';
+// import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
+import FinanceClearanceEmployeeSide from './finance-view/FInanaceClearanceEmplyeeSide/FinanceClearanceEmployeeSide';
 import ExitInterview from './hrbp-view/ExitInterview';
-import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
+// import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
 import ExitReasons from './hrbp-view/ExitReasons';
 import FinanceClearance from './hrbp-view/FinanceClearance';
 import HandoverTakeoverClearance from './hrbp-view/HandoverTakeoverClearance';
@@ -27,7 +28,6 @@ const COMPONENT_MAPPING = {
 		tech_clearance              : TechClearanceHrbp,
 		exit_interview              : ExitInterview,
 		exit_reasons                : ExitReasons,
-		exit_complete               : ExitInterviewComplete,
 	},
 	manager_clearance: {
 		review_request : ReviewRequest,
@@ -38,11 +38,14 @@ const COMPONENT_MAPPING = {
 		tech_clearance_confirm : TechClearanceConfirm,
 	},
 	admin_clearance: {
-		admin_clearance    : AdminClearance,
-		admin_confirmation : AdminConfirmed,
+		admin_clearance: AdminClearance,
 	},
 	hoto_clearance: {
 		hoto_clearance: HOTOClearance,
+	//	HOTOClearance_confirmation : HOTOClearanceConfirmation,
+	},
+	finance: {
+		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
 	},
 };
 
@@ -50,7 +53,8 @@ function FormComponent({
 	data = {},
 	loading = false,
 	refetchApplicationDetails = () => {},
-	view_type = 'hoto_clearance',
+	// view_type = 'hoto_clearance',
+	view_type = 'manager_clearance',
 }) {
 	let Render = null;
 

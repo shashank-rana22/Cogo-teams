@@ -9,7 +9,7 @@ function PersonalDetails({ data = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>PERSONAL DETAILS</div>
+			<div className={styles.title}>APPLICANT DETAILS</div>
 			<div className={styles.sub_title}>
 				Ticket ID:
 				{' '}

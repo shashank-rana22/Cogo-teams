@@ -2,7 +2,7 @@ import React from 'react';
 
 import ResignationFormLanding from './ResignationFormLanding';
 import ResignationProgress from './ResignationProgress';
-import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
+import useGetEmployeeApplicationProcessDetails from './useGetEmployeeApplicationProcessDetails';
 
 const FORM_COMPONENT_MAPPING = {
 	resignation_form     : ResignationFormLanding,
@@ -10,7 +10,7 @@ const FORM_COMPONENT_MAPPING = {
 };
 
 function ResignationForm() {
-	const { data } = useGetApplicationProcessDetails();
+	const { data } = useGetEmployeeApplicationProcessDetails();
 	const Render = FORM_COMPONENT_MAPPING.resignation_progress;
 
 	return (

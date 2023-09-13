@@ -1,156 +1,80 @@
-const controls = [
+const getControls = (values = {}) => [
 
 	{
-		name        : 'Full_name',
+		name        : 'full_name',
 		label       : 'Full_name',
-		type        : 'select',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'Shivam Singh',
-				label : 'Shivam Singh',
-			},
-			{
-				value : 'Mukti Shetty',
-				label : 'Mukti Shetty',
-			},
-		],
-		rules: { required: 'This is required' },
+		value       : values.full_name,
+		// rules       : { required: values.full_name ? false : 'This is required' },
 
 	},
 	{
-		name        : 'COGO_ID',
+		name        : 'cogo_id',
 		label       : 'COGO_ID',
-		type        : 'select',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'COGO2000',
-				label : 'COGO2000',
-			},
-			{
-				value : 'COGO2001',
-				label : 'COGO2001',
-			},
-		],
-		rules: { required: 'This is required' },
+		value       : values.cogo_id,
+		// rules       : { required: values.cogo_id ? false : 'This is required' },
 
 	},
 	{
-		name         : 'Select_Department ',
-		label        : 'Select_Department ',
-		type         : 'select',
-		FshowAstrick : true,
-		options      : [
-			{
-				value : 'Product',
-				label : 'Product',
-			},
-			{
-				value : 'Developer',
-				label : 'Developer',
-			},
-		],
-		rules: { required: 'This is required' },
-
-	},
-	{
-		name        : 'Select_Designation ',
-		label       : 'Select_Designation ',
-		type        : 'select',
+		name        : 'department',
+		label       : 'Select_Department',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'HR',
-				label : 'HR',
-			},
-			{
-				value : 'Owner',
-				label : 'Owner',
-			},
-		],
-		rules: { required: 'This is required' },
+		value       : values.department,
+		// rules       : { required: values.department ? false : 'This is required' },
 
 	},
 	{
-		name        : 'Select_Reporting_Manager',
+		name        : 'designation',
+		label       : 'Select_Designation',
+		type        : 'input',
+		showAstrick : true,
+		// rules       : { required: values.designation ? false : 'This is required' },
+		value       : values.designation,
+	},
+	{
+		name        : 'reporting_manager',
 		label       : 'Select_Reporting_Manager',
-		type        : 'select',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'Shivam_Singh',
-				label : 'Shivam Singh',
-			},
-			{
-				value : 'Vikram_Singh',
-				label : 'Vikram Singh',
-			},
-		],
-		rules: { required: 'This is required' },
-
+		// rules       : { required: values.reporting_manager ? false : 'This is required' },
+		value       : values.reporting_manager,
 	},
 	{
-		name        : 'Select_Chapter',
+		name        : 'chapter',
 		label       : 'Select_Chapter',
-		type        : 'select',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'Chapter1',
-				label : 'Chapter1',
-			},
-			{
-				value : 'Chapter2',
-				label : 'Chapter2',
-			},
-		],
-		rules: { required: 'This is required' },
-
+		// rules       : { required: values.chapter ? false : 'This is required' },
+		value       : values.chapter,
 	},
 	{
-		name        : 'Select_HRBP',
+		name        : 'hrbp',
 		label       : 'Select_HRBP',
-		type        : 'select',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'Mukti Shetty',
-				label : 'Mukti Shetty',
-			},
-			{
-				value : 'Archana Singh',
-				label : 'Archana Singh',
-			},
-		],
-		rules: { required: 'This is required' },
-
+		// rules       : { required: values.hrbp ? false : 'This is required' },
+		value       : values.hrbp,
 	},
 	{
-		name        : 'Select_Reporting_Location',
+		name        : 'reporting_location',
 		label       : 'Select_Reporting_Location',
-		type        : 'select',
+		type        : 'input',
 		showAstrick : true,
-		options     : [
-			{
-				value : 'Mumbai',
-				label : 'Mumbai',
-			},
-			{
-				value : 'Delhi',
-				label : 'Delhi',
-			},
-		],
-		rules: { required: 'This is required' },
-
+		// rules       : { required: values.reporting_location ? false : 'This is required' },
+		value       : values.reporting_location,
 	},
 	{
-		name        : 'Enter_Reason_of_Leaving',
+		name        : 'reason_of_leaving',
 		label       : 'Enter_Reason_of_Leaving',
 		type        : 'textarea',
 		showAstrick : true,
-		rules       : { required: 'This is required' },
+		rules       : { required: values.reason_of_leaving ? false : 'This is required' },
+		value       : values.reason_of_leaving,
 	},
 ];
 
-export default controls;
+export default getControls;
