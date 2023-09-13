@@ -1,6 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { ThreeDotLoader, AddCompanyModal } from '@cogoport/ocean-modules';
-import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -99,10 +98,10 @@ function ExecuteTask({
 			taskListRefetch,
 		});
 
-		const RenderComponent = COMPONENT_MAPPING?.[task?.task];
-		const renderProps = propsMapping?.[task?.task];
+		const RenderComponent = COMPONENT_MAPPING?.[task?.task] || null;
+		const renderProps = propsMapping?.[task?.task] || {};
 
-		if (!isEmpty(renderProps)) {
+		if (RenderComponent) {
 			return (<RenderComponent {...renderProps} />);
 		}
 	}
@@ -227,91 +226,3 @@ function ExecuteTask({
 }
 
 export default ExecuteTask;
-
-// if (task.task === 'update_container_details') {
-// 	return (
-// 		<UploadContainerDetails
-// 			pendingTask={task}
-// 			onCancel={onCancel}
-// 			services={servicesList}
-// 			taskListRefetch={taskListRefetch}
-// 		/>
-// 	);
-// }
-
-// if (task.task === 'upload_container_arrival_notice') {
-// 	return (
-// 		<UploadCargoArrival
-// 			pendingTask={task}
-// 			summary={{
-// 				...(primary_service || {}),
-// 				importer_exporter_id: shipment_data?.importer_exporter?.id,
-// 			}}
-// 			refetch={taskListRefetch}
-// 			clearTask={onCancel}
-// 		/>
-// 	);
-// }
-
-// if (task?.task === 'amend_draft_house_bill_of_lading') {
-// 	return (
-// 		<AmendDraftBl
-// 			task={task}
-// 			shipmentData={shipment_data}
-// 			primaryService={primary_service}
-// 			selectedMail={selectedMail}
-// 			clearTask={onCancel}
-// 			taskListRefetch={taskListRefetch}
-// 		/>
-// 	);
-// }
-
-// if (task.task === 'choose_service_provider') {
-// 	return (
-// 		<ChooseServiceProvider
-// 			task={task}
-// 			onCancel={onCancel}
-// 			refetch={taskListRefetch}
-// 			services={servicesList}
-// 		/>
-
-// 	);
-// }
-
-// if (task.task === 'update_nomination_details') {
-// 	return (
-// 		<NominationTask
-// 			primaryService={primary_service}
-// 			shipmentData={shipment_data}
-// 			task={task}
-// 			onCancel={onCancel}
-// 			refetch={taskListRefetch}
-// 		/>
-// 	);
-// }
-
-// if (task.task === 'generate_freight_certificate') {
-// 	return (
-// 		<GenerateFreightCertificate
-// 			task={task}
-// 			refetch={taskListRefetch}
-// 			onCancel={onCancel}
-// 		/>
-// 	);
-// }
-
-// if (
-// 	task?.task === 'generate_cargo_insurance') {
-// 	return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
-// }
-
-// if (task.task === 'upload_compliance_documents') {
-// 	return (
-// 		<UploadComplianceDocs
-// 			task={task}
-// 			onCancel={onCancel}
-// 			taskListRefetch={taskListRefetch}
-// 			tasksList={tasksList}
-// 		/>
-// 	);
-// }

@@ -62,7 +62,7 @@ function CardItem({
 								)}
 								{loading ? <Placeholder /> : (
 									<div className={styles.flex}>
-										{getValue(
+										{typeof (field.render) === 'function' ? field.render(singleitem) : getValue(
 											singleitem,
 											field,
 											functions,

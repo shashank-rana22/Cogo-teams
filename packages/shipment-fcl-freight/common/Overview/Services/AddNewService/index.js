@@ -84,15 +84,15 @@ function AddNewService({
 		<>
 			{ showAddServiceBox
 				? (
-					<div
+					<button
 						className={styles.container}
 						onClick={closeModal}
-						role="button"
 						tabIndex={0}
+						disabled={shipmentData?.is_job_closed}
 					>
 						<div className={styles.text}>{upsellableService.display_label}</div>
 						<IcMPlus />
-					</div>
+					</button>
 				) : null}
 
 			{upsellModal ? (

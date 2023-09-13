@@ -1,5 +1,6 @@
 import {
 	AmendDraftBl,
+	CargoInsurance,
 	ChooseServiceProvider,
 	GenerateFreightCertificate,
 	NominationTask,
@@ -8,7 +9,6 @@ import {
 	UploadContainerDetails,
 	VerifyShipperDetails,
 } from './CustomTasks';
-import CargoInsurance from './CustomTasks/CargoInsurance';
 
 const TASKS = {
 	UPDATE_CONTAINER_DETAILS        : 'update_container_details',
@@ -88,7 +88,7 @@ const getTaskComponent = ({
 		},
 		[VERIFY_SHIPPER_DETAILS]: {
 			task,
-			// onCancel,
+			onCancel,
 			refetch      : taskListRefetch,
 			shipmentData : shipment_data,
 		},

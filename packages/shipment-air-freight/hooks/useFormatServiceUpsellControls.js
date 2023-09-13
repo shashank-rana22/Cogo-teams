@@ -13,11 +13,16 @@ function useServiceUpsellControls({
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
 
+	const mainService = (services || []).find((item) => item?.service_type === 'air_freight_service');
+
+	const warehouseLocationFilter = upsellableService?.trade_type === 'export'
+		? mainService?.origin_airport_id : mainService?.destination_airport_id;
+
 	const newServices = services.map((item) => ({
 		...item,
 		service_type: item?.service_type?.split('_service')?.[GLOBAL_CONSTANTS.zeroth_index],
 	}));
-	const { serviceWiseControls = {} } = useGetControls({ truckTypeToggle });
+	const { serviceWiseControls = {} } = useGetControls({ truckTypeToggle, warehouseLocationFilter });
 
 	const rawControls = serviceWiseControls[service];
 
