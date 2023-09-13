@@ -5,11 +5,8 @@ import React from 'react';
 import styles from './styles.module.css';
 
 export const fnfColumns = [
-	{ Header: 'COMPANY LOAN', accessor: 'companyLoan' },
-	{ Header: 'ADVANCE AMOUNT', accessor: 'advanceAmount' },
-	{ Header: 'PENDING BILL', accessor: 'pendingBill' },
-	{ Header: 'DUE SALARY', accessor: 'dueSalary' },
-	{ Header: 'TOTAL FNF', accessor: 'totalFnf' },
+	{ Header: 'PARTICULARS', accessor: 'companyLoan' },
+	{ Header: 'RECOVERABLE AMOUNT', accessor: 'advanceAmount' },
 	{
 		Header   : 'STATUS',
 		accessor : (item) => (

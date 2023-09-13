@@ -1,11 +1,16 @@
 import { InputController, CheckboxController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function InterviewQuestions({ control, errors }) {
+function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () => { } }) {
+	const ONE = 1; const TWO = 2; const THREE = 3;
+	const { notes } = data || {};
 	const [show, setShow] = useState(false);
+	const notes_to_watch = watch();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
@@ -38,6 +43,9 @@ function InterviewQuestions({ control, errors }) {
 									control={control}
 									name="your_notes_cb"
 									size="md"
+									disabled={notes[GLOBAL_CONSTANTS.zeroth_index]?.value === undefined
+										|| notes_to_watch?.your_notes === undefined
+										|| notes_to_watch?.your_notes === ''}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -65,6 +73,9 @@ function InterviewQuestions({ control, errors }) {
 									control={control}
 									name="your_notes_cb_2"
 									size="md"
+									disabled={notes[ONE]?.value === undefined
+										|| notes_to_watch?.your_notes_2 === undefined
+										|| notes_to_watch?.your_notes_2 === ''}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -93,6 +104,9 @@ function InterviewQuestions({ control, errors }) {
 									control={control}
 									name="your_notes_cb_3"
 									size="md"
+									disabled={notes[TWO]?.value === undefined
+										|| notes_to_watch?.your_notes_3 === undefined
+										|| notes_to_watch?.your_notes_3 === ''}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -123,6 +137,9 @@ function InterviewQuestions({ control, errors }) {
 									control={control}
 									name="your_notes_cb_4"
 									size="md"
+									disabled={notes[THREE]?.value === undefined
+										|| notes_to_watch?.your_notes_4 === undefined
+										|| notes_to_watch?.your_notes_4 === ''}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>

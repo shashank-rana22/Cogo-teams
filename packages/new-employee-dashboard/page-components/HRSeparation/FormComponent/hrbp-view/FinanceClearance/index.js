@@ -6,6 +6,7 @@ import StyledTable from '../../commons/StyledTable';
 import Heading from '../HRMeeting/Heading';
 
 import { fnfColumns, outstandingColumns } from './columns';
+import FinanceRecommendations from './FinanceRecommendations';
 import styles from './styles.module.css';
 
 const NUM = 1;
@@ -13,7 +14,7 @@ const data1 = [
 	{
 		companyLoan   : '500000',
 		advanceAmount : '100000',
-		status        : 'approved',
+		status        : 'RECOVERED',
 	},
 ];
 
@@ -40,10 +41,11 @@ const URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com/5b9d632d522
 const parts = URL.split('/');
 const lastPart = parts[parts.length - NUM];
 
-function FinanceClearance() {
+function FinanceClearance({ handleBack = () => {}, handleNext = () => {} }) {
 	return (
 		<>
 			<Heading title="FINANCE CLEARANCE" />
+			<FinanceRecommendations />
 			<div className={styles.container}>
 				<div className={styles.heading}>
 					A. Review FNF Status
@@ -89,8 +91,8 @@ function FinanceClearance() {
 			</div>
 
 			<div className={styles.footer}>
-				<Button themeType="secondary" style={{ marginRight: '4px' }}>Back</Button>
-				<Button themeType="primary">
+				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
+				<Button themeType="primary" onClick={handleNext}>
 					Proceed
 					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
 
