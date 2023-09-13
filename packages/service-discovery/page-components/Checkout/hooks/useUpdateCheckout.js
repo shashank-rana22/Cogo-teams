@@ -50,6 +50,8 @@ const useUpdateCheckout = ({ getCheckout, detail = {} }) => {
 			if (closeFunction) {
 				closeFunction(stateValue);
 			}
+
+			Toast.success('Updated successfully');
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

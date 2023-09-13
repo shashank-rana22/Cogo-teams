@@ -110,6 +110,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				error={error}
 				isAssistedBookingNotAllowed={isAssistedBookingNotAllowed}
 				noRatesPresent={noRatesPresent}
+				updateCheckout={updateCheckout}
 			/>
 		</div>
 	);

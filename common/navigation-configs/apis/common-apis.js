@@ -73,6 +73,11 @@ const common_apis = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'update_checkout',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
 			api          : 'create_spot_search',
 			access_type  : 'private',
 			service_name : 'spot_search',
