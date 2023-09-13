@@ -1,0 +1,52 @@
+
+.modal_message_text {
+	font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.modal_message_container {
+    margin: 10px 16px;
+    
+}
+
+.particular_input_cont {
+    margin: 10px 0;
+}
+
+.modal_header {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 4px 0;
+}
+
+.cancel_modal_btn {
+	display: flex;
+	align-items: center;
+	padding: 7px 12px;
+	font-size: 12px;
+	font-weight: 500;
+	color: black;
+	text-align: center;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.proceed_modal_btn {
+	display: flex;
+	align-items: center;
+	padding: 7px 12px;
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+	background: #221f20;
+	border-radius: 6px;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+	margin-top: 4px;
+}

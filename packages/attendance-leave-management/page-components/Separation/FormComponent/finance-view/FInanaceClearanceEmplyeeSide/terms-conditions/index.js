@@ -1,5 +1,5 @@
-import { Checkbox } from '@cogoport/components';
 import {
+	CheckboxController,
 	InputController,
 } from '@cogoport/forms';
 import React from 'react';
@@ -13,7 +13,12 @@ function TermsConditions({ control = {}, errors = {} }) {
 			<div className={styles.subtitle}>Please read carefully</div>
 			<div className={styles.content_sub_container}>
 				<div className={styles.content_text_container}>
-					<Checkbox className={styles.Checkbox} />
+					<CheckboxController
+						className={styles.Checkbox}
+						control={control}
+						name="checkbox_agreement"
+						rules={{ required: { value: true, message: '*required' } }}
+					/>
 					<div className={styles.content}>
 						<p>
 							The details you provide guide critical decisions,
@@ -28,6 +33,9 @@ function TermsConditions({ control = {}, errors = {} }) {
 						<p>
 							Enter your Full Name, confirm your understanding and commitment to these terms.
 						</p>
+						{errors?.checkbox_agreement && (
+							<div className={styles.error}>*required</div>
+						)}
 					</div>
 				</div>
 				<div className={styles.name_main_container}>
@@ -42,7 +50,6 @@ function TermsConditions({ control = {}, errors = {} }) {
 							name="name"
 							rules={{ required: 'this is required' }}
 						/>
-
 						{errors.name && (
 							<span className={styles.error}>*required</span>
 						)}
