@@ -1,4 +1,4 @@
-import { IcADiscover, IcMProvisional } from '@cogoport/icons-react';
+import { IcMPaymentmade, IcMProvisional, IcMRealisedPayment } from '@cogoport/icons-react';
 
 import INCENTIVE_SNAPSHOT_CONSTANTS from '../../../constants/incentive-snapshot-constants';
 
@@ -12,11 +12,11 @@ const COMPONENT_MAPPING = {
 		heading : 'Provisional',
 	},
 	[REALIZED]: {
-		Icon    : IcADiscover,
+		Icon    : IcMRealisedPayment,
 		heading : 'Realized',
 	},
 	[PAYOUT]: {
-		Icon    : IcADiscover,
+		Icon    : IcMPaymentmade,
 		heading : 'Payout',
 	},
 };
@@ -31,7 +31,9 @@ function Snapshot(props) {
 			<div className={styles.header}>
 				<p className={styles.heading}>{heading}</p>
 
-				<Icon height={20} width={20} />
+				<div className={styles.icon_background}>
+					<Icon className={styles.icon} background="yellow" height={20} width={20} />
+				</div>
 			</div>
 
 			<div className={styles.amount_container}>

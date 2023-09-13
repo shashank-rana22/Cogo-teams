@@ -1,4 +1,4 @@
-import { IcMPlatformchat } from '@cogoport/icons-react';
+import { IcMAccountEnrichment, IcMAccounts, IcMEngagement, IcMShipment } from '@cogoport/icons-react';
 
 import ACTIVITY_CONSTANTS from '../../../constants/activity-constants';
 
@@ -8,15 +8,15 @@ const { ENGAGEMENT, ACCOUNTS, ENRICHMENT, SHIPMENTS } = ACTIVITY_CONSTANTS;
 
 const COMPONENT_MAPPING = {
 	[ENGAGEMENT]: {
-		Icon       : IcMPlatformchat,
+		Icon       : IcMEngagement,
 		heading    : 'Engagement',
 		parameters : [
 			{
-				label : 'call received',
+				label : 'calls received',
 				value : 55,
 			},
 			{
-				label : 'chat attended',
+				label : 'chats attended',
 				value : 122,
 			},
 			{
@@ -38,7 +38,7 @@ const COMPONENT_MAPPING = {
 		],
 	},
 	[ACCOUNTS]: {
-		Icon       : IcMPlatformchat,
+		Icon       : IcMAccounts,
 		heading    : 'Accounts',
 		parameters : [
 			{
@@ -64,7 +64,7 @@ const COMPONENT_MAPPING = {
 		],
 	},
 	[ENRICHMENT]: {
-		Icon       : IcMPlatformchat,
+		Icon       : IcMAccountEnrichment,
 		heading    : 'Enrichment',
 		parameters : [
 			{
@@ -78,7 +78,7 @@ const COMPONENT_MAPPING = {
 		],
 	},
 	[SHIPMENTS]: {
-		Icon       : IcMPlatformchat,
+		Icon       : IcMShipment,
 		heading    : 'Shipments',
 		parameters : [
 			{
