@@ -13,7 +13,7 @@ const getFooterMappings = ({ noOfCallsMade = 0, feedBackCount = 0 }) => [
 	{
 		key     : 'lead_org_feedback',
 		subText : feedBackCount ? `${feedBackCount} feedback${feedBackCount > ONE_ENTRY ? '\'s' : ''} created`
-			: 'No feedback\'s created',
+			: 'No feedbacks created',
 		buttontext: 'create feedback',
 	},
 ];

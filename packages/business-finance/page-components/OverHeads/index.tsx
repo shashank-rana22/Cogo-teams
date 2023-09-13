@@ -23,7 +23,7 @@ function Overheads() {
 
 	return (
 
-		<div>
+		<div className={styles.font}>
 			<div className={styles.main_heading}>Overheads</div>
 
 			<Tabs

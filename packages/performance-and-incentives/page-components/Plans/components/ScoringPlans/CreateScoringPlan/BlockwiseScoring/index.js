@@ -1,8 +1,10 @@
 import { Button } from '@cogoport/components';
-import { useFieldArray, useForm } from '@cogoport/forms';
+// import { useRouter } from '@cogoport/next';
 
 import Block from './Block';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import useBlockWiseScoring from './useBlockWiseScoring';
 
 const CHILD_EMPTY_VALUES = {
 	block              : '',
@@ -11,11 +13,23 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function BlockwiseScoring(props) {
-	const { data, refetch } = props;
+	const { data, refetch, getConfigLoading } = props;
 
-	const { control, formState: { errors }, watch } = useForm();
+	// const { push } = useRouter();
 
-	const { fields, append, remove } = useFieldArray({ control, name: 'blocks' });
+	const {
+		control,
+		fields,
+		append,
+		remove,
+		errors,
+		watch,
+		handleSubmit,
+		editSubBlock,
+		setEditSubBlock,
+	} = useBlockWiseScoring({ data });
+
+	if (getConfigLoading) return <LoadingState />;
 
 	return (
 		<>
@@ -38,6 +52,9 @@ function BlockwiseScoring(props) {
 						watch={watch}
 						data={data}
 						refetch={refetch}
+						handleSubmit={handleSubmit}
+						editSubBlock={editSubBlock}
+						setEditSubBlock={setEditSubBlock}
 					/>
 				))}
 

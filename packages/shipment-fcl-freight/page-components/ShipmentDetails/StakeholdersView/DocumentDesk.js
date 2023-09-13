@@ -65,9 +65,14 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<div className={styles.job_closed_container}>
+							<Pill className={styles.job_closed_pill} size="lg">
+								{shipment_data?.is_job_closed_financially
+									? 'Financially Closed' : 'Operationally Closed'}
+							</Pill>
+						</div>
+					)}
 
 					<ShipmentChat />
 				</div>

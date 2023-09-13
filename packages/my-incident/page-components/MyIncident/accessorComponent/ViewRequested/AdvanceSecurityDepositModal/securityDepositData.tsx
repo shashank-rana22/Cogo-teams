@@ -3,20 +3,22 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function SecurityDepositData({ advanceSecurityDeposit }) {
+function securityDepositData({ advanceSecurityDeposit }) {
 	const {
-		advanceDocumentId = '',
+		shipmentId = '',
 		amountPerContainer = 0,
 		numberOfContainers = 0,
 		paymentMode = '',
 		remark = '',
 		supplierName = '',
 		totalAmountToBePaid = 0,
+		currency = '',
 	} = advanceSecurityDeposit || {};
 	return (
 		[
 			{ title: 'Supplier Name', value: supplierName },
-			{ title: 'Shipment ID', value: advanceDocumentId },
+			{ title: 'Shipment serial ID', value: shipmentId },
+			{ title: 'Currency', value: currency },
 			{ title: 'Amount Per container', value: amountPerContainer },
 			{ title: 'Number of containers', value: numberOfContainers },
 			{ title: 'Total Amount to be paid', value: totalAmountToBePaid },
@@ -45,4 +47,4 @@ function SecurityDepositData({ advanceSecurityDeposit }) {
 	);
 }
 
-export default SecurityDepositData;
+export default securityDepositData;

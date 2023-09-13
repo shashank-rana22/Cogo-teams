@@ -1,13 +1,10 @@
 import { Button } from '@cogoport/components';
-
-import ACTIVE_MODE_KEYS_MAPPING from '../../../../constants/active-mode-key-mapping';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
-
-function Header(props) {
-	const { setActiveMode } = props;
+function Header() {
+	const { push } = useRouter();
 
 	return (
 		<div className={styles.header}>
@@ -17,7 +14,7 @@ function Header(props) {
 				size="lg"
 				themeType="primary"
 				type="button"
-				onClick={() => setActiveMode(CREATE)}
+				onClick={() => push('/performance-and-incentives/plans?mode=create')}
 			>
 				Create Scoring
 			</Button>

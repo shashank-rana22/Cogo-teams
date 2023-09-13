@@ -2,6 +2,7 @@ import { Button, Input, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
@@ -14,6 +15,8 @@ function EditInput({
 	restEdit,
 	types,
 }) {
+	const { t } = useTranslation(['incidentManagement']);
+
 	const {
 		tds = 0,
 		afterTdsAmount = 0,
@@ -55,19 +58,27 @@ function EditInput({
 	};
 
 	if (lessValue) {
-		errorMessege = 'TDS cannot be less than 0';
+		errorMessege = t('incidentManagement:tds_error_message_1');
 	} else if (maxValue) {
-		errorMessege = 'TDS plus Settled TDS cannot be greater than 10 % of  Doc. Amount';
+		errorMessege = t('incidentManagement:tds_error_message_2');
 	} else {
 		errorMessege = formatted(tds, currency);
 	}
 
-	const content = () => (
-		<div>
-			{!isError && <div className={styles.text_styles}>Actual TDS Value</div>}
-			<div className={styles.input_container} style={{ color: isError ? 'red' : 'black' }}>{errorMessege}</div>
-		</div>
-	);
+	function Content() {
+		return (
+			<div>
+				{!isError && <div className={styles.text_styles}>{t('incidentManagement:tds_actual_value')}</div>}
+				<div
+					className={styles.input_container}
+					style={{ color: isError ? 'red' : 'black' }}
+				>
+					{errorMessege}
+
+				</div>
+			</div>
+		);
+	}
 
 	useEffect(() => {
 		if (itemData) {
@@ -79,7 +90,7 @@ function EditInput({
 		setChangedValue(value);
 	};
 
-	const Submit = () => {
+	const onSubmit = () => {
 		setEditedValue(
 			itemData,
 			+changedValue,
@@ -101,7 +112,7 @@ function EditInput({
 						className={styles.tooltip}
 					>
 						<Tooltip
-							content={content()}
+							content={Content()}
 						>
 							<Button
 								className={styles.edit_icon}
@@ -130,7 +141,7 @@ function EditInput({
 							<Button
 								className={styles.edit_icon}
 								onClick={() => {
-									Submit();
+									onSubmit();
 									setRestEdit(!restEdit);
 								}}
 							>

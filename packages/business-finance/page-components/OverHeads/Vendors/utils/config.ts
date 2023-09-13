@@ -9,8 +9,6 @@ const HEADER_STYLE = {
 	color        : 'black',
 	marginTop    : '20px',
 	fontSize     : '14px',
-	fontStyle    : 'normal',
-	fontFamily   : 'Poppins',
 };
 
 const BODY_STYLES = {
@@ -18,8 +16,6 @@ const BODY_STYLES = {
 	fontWeight : '400',
 	fontSize   : '14px',
 	lineHeight : '14px',
-	fontFamily : 'Poppins',
-	fontStyle  : 'normal',
 };
 
 const configs = () => {

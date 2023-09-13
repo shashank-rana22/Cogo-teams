@@ -1,6 +1,6 @@
 const path = require('path');
 
-const LANGUAGE_MAPPING = require('./constants/languageMapping');
+const LANGUAGE_MAPPING = require('../common/globalization/constants/languageLocaleMapping');
 
 module.exports = {
 	i18n: {

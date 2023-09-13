@@ -14,20 +14,23 @@ const usePostAgentScoringAttributes = () => {
 		authkey : 'post_agent_scoring_config_attributes',
 	}, { manual: true });
 
-	const updateScoringAttributes = async ({ agentScoringBlockId = '', agentScoringParameters = [] }) => {
+	const updateScoringAttributes = async ({
+		agentScoringBlockId = '',
+		agentScoringParameters = [], subBlockStatus = '',
+	}) => {
 		try {
 			await trigger({
 				data: {
 					id,
 					agent_scoring_blocks: [{
 						agent_scoring_block_id          : agentScoringBlockId,
-						status                          : 'active',
+						status                          : subBlockStatus || 'active',
 						agent_scoring_parameter_details : agentScoringParameters,
 					}],
 				},
 			});
 
-			Toast.success('Saved successfully!');
+			Toast.success(`${subBlockStatus ? 'Deleted' : 'Saved'} successfully!`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

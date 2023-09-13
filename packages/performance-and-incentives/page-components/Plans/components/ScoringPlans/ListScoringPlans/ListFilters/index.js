@@ -13,6 +13,7 @@ function conditionalWrapper({ condition, wrapper, children }) {
 function ListFilters(props) {
 	const {
 		setParams,
+		paginationData = {},
 	} = props;
 
 	const {
@@ -27,7 +28,11 @@ function ListFilters(props) {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.heading}>12 Scoring Plans</p>
+			<p className={styles.heading}>
+				{paginationData.total_count}
+				{' '}
+				Scoring Plans
+			</p>
 
 			<Filters
 				controls={controls}

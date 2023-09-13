@@ -42,6 +42,8 @@ function MessageConversations({
 	const conversationsDivRef = useRef(null);
 
 	const { id = '', channel_type = '' } = activeMessageCard || {};
+	const { emailState = {}, setEmailState = () => {} } = mailProps || {};
+	const { scrollToTop = false } = emailState || {};
 	const latestMessagesAtTop = LATEST_MESSAGES_AT_TOP_FOR.includes(channel_type);
 
 	const {
@@ -72,6 +74,22 @@ function MessageConversations({
 			});
 		}, TIMEOUT_FOR_SCROLL);
 	}, []);
+
+	const scrollToRecentMessage = useCallback(() => {
+		setTimeout(() => {
+			conversationsDivRef.current?.scrollTo({
+				top   	  : 0,
+				behavior : 'smooth',
+			});
+		}, TIMEOUT_FOR_SCROLL);
+	}, []);
+
+	useEffect(() => {
+		if (scrollToTop) {
+			scrollToRecentMessage();
+			setEmailState((prev) => ({ ...prev, scrollToTop: false }));
+		}
+	}, [scrollToRecentMessage, scrollToTop, setEmailState]);
 
 	useEffect(() => {
 		if (!latestMessagesAtTop) {
@@ -126,6 +144,7 @@ function MessageConversations({
 						viewType={viewType}
 						firestore={firestore}
 						scrollToBottom={scrollToLastMessage}
+						scrollToTop={scrollToTop}
 						hasPermissionToEdit={hasPermissionToEdit}
 						ref={conversationsDivRef}
 						mailProps={mailProps}

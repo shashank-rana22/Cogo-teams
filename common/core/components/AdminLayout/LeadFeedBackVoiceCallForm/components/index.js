@@ -52,6 +52,7 @@ function LeadFeedBackVoiceCallForm() {
 		lead_organization_id = '',
 		lead_user_id = '',
 		source = '',
+		callRecordId = '',
 		...restData
 	} = leadFeedbackFormData || {};
 
@@ -96,6 +97,7 @@ function LeadFeedBackVoiceCallForm() {
 									leadUserId={lead_user_id}
 									restData={restData}
 									source={source}
+									callRecordId={callRecordId}
 								/>
 							</TabPanel>
 						);

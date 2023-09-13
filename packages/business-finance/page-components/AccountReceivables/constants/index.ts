@@ -318,19 +318,19 @@ export const SHIPMENT_TYPE_OPTIONS = [
 	{ value: 'AIR_CUSTOMS', label: 'AIR Customs' },
 ];
 
-export const SALES_FUNNEL_OPTIONS = [
-	{ value: 'JAN', label: 'January' },
-	{ value: 'FEB', label: 'February' },
-	{ value: 'MAR', label: 'March' },
-	{ value: 'APR', label: 'April' },
-	{ value: 'MAY', label: 'May' },
-	{ value: 'JUN', label: 'June' },
-	{ value: 'JUL', label: 'July' },
-	{ value: 'AUG', label: 'August' },
-	{ value: 'SEP', label: 'September' },
-	{ value: 'OCT', label: 'October' },
-	{ value: 'NOV', label: 'November' },
-	{ value: 'DEC', label: 'December' },
+export const getSalesFunnelOptions = (t) => [
+	{ value: 'JAN', label: t('jan_month') },
+	{ value: 'FEB', label: t('feb_month') },
+	{ value: 'MAR', label: t('mar_month') },
+	{ value: 'APR', label: t('apr_month') },
+	{ value: 'MAY', label: t('may_month') },
+	{ value: 'JUN', label: t('jun_month') },
+	{ value: 'JUL', label: t('jul_month') },
+	{ value: 'AUG', label: t('aug_month') },
+	{ value: 'SEP', label: t('sep_month') },
+	{ value: 'OCT', label: t('oct_month') },
+	{ value: 'NOV', label: t('nov_month') },
+	{ value: 'DEC', label: t('dec_month') },
 
 ];
 

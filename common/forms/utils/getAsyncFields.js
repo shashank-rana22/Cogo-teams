@@ -925,6 +925,73 @@ function asyncAllocationEligibleRoles() {
 	};
 }
 
+function asyncListUserShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'serial_id',
+		endpoint    : '/list_shipments_on_feedback',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncFieldsOrganizationOnCall() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : '/list_organizations_on_call',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+
+function asyncListCompanyLocations() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_company_location',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncListSaasHsCodes() {
+	return {
+		valueKey       : 'id',
+		labelKey       : 'description',
+		authkey        : 'get_saas_hs_code_list',
+		endpoint       : 'saas/hs-code/list',
+		defaultOptions : true,
+		searchByq      : true,
+		qFilterKey     : 'query',
+		microService   : 'business_finance',
+		defaultParams  : {},
+	};
+}
+
+function asyncListSpotSearchRateCardOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_spot_search_rate_card_operators',
+		initialCall : true,
+	};
+}
+
+function asyncListOverSeasTradeParties() {
+	return {
+		valueKey     : 'organizationId',
+		labelKey     : 'organizationName',
+		endpoint     : '/purchase/bills/list-overseas-trade-parties',
+		authkey      : 'list-overseas-trade-parties',
+		initialCall  : false,
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -996,8 +1063,14 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListCompanyLocations,
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
 	asyncAllocationEligibleRoles,
+	asyncListUserShipments,
+	asyncFieldsOrganizationOnCall,
+	asyncListSaasHsCodes,
+	asyncListSpotSearchRateCardOperators,
+	asyncListOverSeasTradeParties,
 };

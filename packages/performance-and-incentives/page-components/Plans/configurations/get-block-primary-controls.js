@@ -7,6 +7,10 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		placeholder : 'Select',
 		options     : parameterOptions,
 		rules       : { required: 'Required' },
+		style       : {
+			minWidth : '20%',
+			maxWidth : '20%',
+		},
 	},
 	{
 		name        : 'scoring_type',
@@ -22,6 +26,10 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 			label : '%',
 			value : 'percentage',
 		}],
+		style: {
+			minWidth : '15%',
+			maxWidth : '15%',
+		},
 		rules: { required: 'Required' },
 	},
 	{
@@ -29,7 +37,11 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : '',
 		placeholder : 'Unit',
-		rules       : { required: 'Required' },
+		style       : {
+			minWidth : '10%',
+			maxWidth : '10%',
+		},
+		rules: { required: 'Required' },
 	},
 	{
 		name        : 'fixed_percentage_value',
@@ -57,14 +69,22 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Provisional Trigger',
 		placeholder : 'Select',
-		rules       : { required: 'Required' },
+		style       : {
+			minWidth : '15%',
+			maxWidth : '15%',
+		},
+		rules: { required: 'Required' },
 	},
 	{
 		name        : 'realised_dtrigger',
 		type        : 'select',
 		label       : 'Realised Trigger',
 		placeholder : 'Select',
-		rules       : { required: 'Required' },
+		style       : {
+			minWidth : '15%',
+			maxWidth : '15%',
+		},
+		rules: { required: 'Required' },
 	},
 
 ]);

@@ -10,5 +10,7 @@ export { default as useTicketsRequest } from './hooks/useTicketsRequest';
 export { default as useHarbourRequest } from './hooks/useHarbourRequest';
 export { default as useAuthRequest } from './hooks/useAuthRequest';
 export { default as useCxAutomationRequest } from './hooks/useCxAutomationRequest';
+
+export { default as useGetPermission } from './hooks/useGetPermission';
 export { publicRequest } from './helpers/public-request';
 export { request } from './helpers/request';

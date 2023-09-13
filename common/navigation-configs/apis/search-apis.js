@@ -405,6 +405,24 @@ const apis = [
 		service_name : 'checkout',
 	},
 	{
+		api          : 'list_checkout_invoices',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'create_checkout_invoice',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'update_checkout_invoice',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
+	{
 		api          : 'create_spot_search_contract',
 		access_type  : 'private',
 		feature      : 'search',
@@ -512,6 +530,47 @@ const apis = [
 	},
 	{
 		api          : 'get_spot_search_location_recommendations',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'list_spot_search_rate_cards',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'add_spot_search_service',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'get_spot_search_schedule_weeks',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'get_spot_search_rate_card',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'remove_spot_search_service',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'get_freight_rate_min_price',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_checkout_inco_term',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'list_spot_search_rate_card_operators',
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},

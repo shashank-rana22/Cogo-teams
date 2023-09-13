@@ -13,7 +13,6 @@ const OFFSET = 1;
 
 function Block(props) {
 	const {
-		key,
 		name,
 		control,
 		errors,
@@ -21,6 +20,9 @@ function Block(props) {
 		removeBlock,
 		watch,
 		refetch,
+		handleSubmit,
+		editSubBlock,
+		setEditSubBlock,
 	} = props;
 
 	const {
@@ -32,11 +34,11 @@ function Block(props) {
 		remove,
 		subBlockOptions,
 		subBlockWiseParameterOptions,
-		blackParameterLading,
+		blockParameterLoading,
 	} = useBlockCreation({ control, name, watch });
 
 	return (
-		<div className={styles.container} key={key}>
+		<div className={styles.container} key={blockParameterLoading}>
 			<div className={styles.header}>
 				<div className={styles.block_number}><p>{blockIndex + OFFSET}</p></div>
 
@@ -62,26 +64,38 @@ function Block(props) {
 			{fields.map((field, subBlockIndex) => (
 				<SubBlock
 					key={field.id}
-					name={`${name}.${subBlockIndex}`}
+					name={`${name}.sub_blocks.${subBlockIndex}`}
 					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					control={control}
 					watch={watch}
+					handleSubmit={handleSubmit}
 					watchBlock={watchBlock}
 					subBlockType={subBlockType}
 					removeSubBlock={remove}
 					subBlockOptions={subBlockOptions}
 					subBlockWiseParameterOptions={subBlockWiseParameterOptions}
 					refetch={refetch}
+					editSubBlock={editSubBlock}
+					setEditSubBlock={setEditSubBlock}
 				/>
 			))}
 
-			{blackParameterLading ? <Loader themeType="primary" /> : (!!subBlockType && (
+			{blockParameterLoading ? <Loader themeType="primary" /> : (!!subBlockType && (
 				<Button
 					type="button"
 					size="md"
 					themeType="link"
-					onClick={() => append(CHILD_EMPTY_VALUES)}
+					onClick={() => {
+						setEditSubBlock((prev) => ({
+							...prev,
+							[blockIndex]: {
+								...prev[blockIndex],
+								[fields.length]: true,
+							},
+						}));
+						append(CHILD_EMPTY_VALUES);
+					}}
 				>
 					+ Add
 					{' '}

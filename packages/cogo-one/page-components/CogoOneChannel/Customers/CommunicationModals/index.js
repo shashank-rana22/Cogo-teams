@@ -94,6 +94,7 @@ function CommunicationModals({
 					mailProps={mailProps}
 					userId={userId}
 					activeMail={activeMail}
+					viewType={viewType}
 				/>
 			)}
 

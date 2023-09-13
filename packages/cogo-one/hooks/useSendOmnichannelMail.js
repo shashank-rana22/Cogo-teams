@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
-import { getCommunicationPayload } from '../helpers/communicationPayloadHelpers';
+import { getCommunicationPayload, ENDPOINT_MAPPING } from '../helpers/communicationPayloadHelpers';
 
 const useSendOmnichannelMail = ({
 	setEmailState = () => {},
@@ -30,6 +30,11 @@ const useSendOmnichannelMail = ({
 		mailActions = {},
 		emailState = {},
 	}) => {
+		if (!Object.keys(ENDPOINT_MAPPING).includes(mailActions?.actionType)) {
+			Toast.error('Endpoint is Required');
+			return;
+		}
+
 		try {
 			await trigger({
 				data: getCommunicationPayload({
@@ -45,7 +50,7 @@ const useSendOmnichannelMail = ({
 			});
 			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 
-			setEmailState(DEFAULT_EMAIL_STATE);
+			setEmailState({ ...DEFAULT_EMAIL_STATE, scrollToTop: true });
 			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
@@ -53,7 +58,8 @@ const useSendOmnichannelMail = ({
 	};
 
 	return {
-		sendMail, mailLoading: loading,
+		sendMail,
+		mailLoading: loading,
 	};
 };
 

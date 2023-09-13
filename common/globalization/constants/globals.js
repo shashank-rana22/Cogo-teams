@@ -69,8 +69,11 @@ const GLOBAL_CONSTANTS = {
 		CNY : '¥',
 
 	},
-
-	formats: {
+	cargo_insurance: {
+		IN: ['fcl_freight', 'air_freight', 'lcl_freight'],
+	},
+	new_search_supported_services : ['fcl_freight'],
+	formats                       : {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
 			'dd MMM yyyy'       : 'dd MMM yyyy',
@@ -79,21 +82,26 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
+			'EEE, dd'          	: 'EEE, dd',
 			dd                  : 'dd',
 			MMM                 : 'MMM',
 			yyyy                : 'yyyy',
+			'MMM, dd'           : 'MMM, dd',
+			EEEE                : 'EEEE',
+			'MMM dd yyyy'       : 'MMM dd yyyy',
 		},
 		time: {
-			'hh:mm aaa' : 'hh:mm aaa',
-			'HH:mm'     : 'HH:mm',
-			'hh:mm:ss'  : 'hh:mm:ss',
-			'hh aaa'    : 'hh aaa',
-			'HH:mm:ss'  : 'HH:mm:ss',
-			'HH:mm a'   : 'HH:mm a',
-			hh          : 'hh',
-			HH          : 'HH',
-			mm          : 'mm',
-			a           : 'a',
+			'hh:mm aaa'    : 'hh:mm aaa',
+			'HH:mm'        : 'HH:mm',
+			'hh:mm:ss'     : 'hh:mm:ss',
+			'hh aaa'       : 'hh aaa',
+			'HH:mm:ss'     : 'HH:mm:ss',
+			'HH:mm:ss aaa' : 'HH:mm:ss aaa',
+			'HH:mm a'      : 'HH:mm a',
+			hh             : 'hh',
+			HH             : 'HH',
+			mm             : 'mm',
+			a              : 'a',
 		},
 	},
 	payment_url: {
@@ -109,7 +117,8 @@ const GLOBAL_CONSTANTS = {
 		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
 							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
-	flash_booking_charge_codes: [
+	cogoport_agent_email_id    : 'agentid@cogoport.com',
+	flash_booking_charge_codes : [
 		'OTC',
 		'BAS',
 		'BASNO',
@@ -385,8 +394,14 @@ const GLOBAL_CONSTANTS = {
 		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 		clock_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
-		sad_icon                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		firebase_configuration  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/firebase_icon.png',
+		green_arrow             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/green_arrow.png',
+		red_arrow               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/red_arrow.png',
 		sign_up_failed          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
+		previlege_leave_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/privilegeLeaveImage.svg',
+		sick_leave_icon         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sickLeaveImage.svg',
+		casual_leave_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/casualLeaveImage.svg',
+		sad_icon                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		kyc_event               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
@@ -404,6 +419,31 @@ const GLOBAL_CONSTANTS = {
 		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
 		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
 		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
+		empty_notes         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/notes-empty.svg',
+		no_incident_data    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
+		booking_verification_png:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/booking_verification-s2c',
+		point_of_contact_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/poc_icon_new_s2c',
+		hs_code_s2c_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hs_code-s2c',
+		cargo_value_s2c_png          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargo_value-s2c',
+		cargo_readiness_date_s2c_png : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargo_readiness-s2c',
+		si_amendment_s2c_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/si_amendment-s2c',
+		booking_note_s2c_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/booking_note-s2c',
+		bi_amendment_s2c_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/bi_amendment-s2c',
+		no_of_bi_s2c_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_of_bi-s2c',
+		ip_empty_state_s2c_png       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ip_empty_icon_s2c',
+		kyc_pending_png:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg',
+		cogo_assured_banner     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_assured_banner',
+		cogo_contract_banner    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogocontract-tag.svg',
+		lock_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/lock.svg',
+		calender_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calender',
+		guarenteed_booking_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
+		filter_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg',
+		no_rates_found_emoji    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
+		shipping_line_default_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
 	},
 
 	video_call_ring_tone_url:
@@ -544,8 +584,16 @@ const GLOBAL_CONSTANTS = {
 		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
 		iframe_html_tag_text       : /<iframe([\s\S]*?)<\/iframe>/gm,
 		html_class_regex           : /class="([^"]+)"/g,
+		static_url                 : /([^:]\/)\/+/g,
+		gst_number                 : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+		otp                        : /[^0-9]/g,
+		hyphen_characters          : /-/g,
+		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 	},
 	zeroth_index                 : 0,
+	one                          : 1,
+	two                          : 2,
+	fifty                        : 50,
 	milliseconds_in_one_day      : 86400000,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
@@ -594,8 +642,32 @@ const GLOBAL_CONSTANTS = {
 			orissa_metaliks  : 'AAACO8663L',
 			varun_beverages  : 'AAACV2678L',
 		},
+		ftl_disable_backdate_date: '2023-06-13T00:00:00',
 	},
-	shipment_types: [
+	freight_unit_mapping: {
+		per_container         : '/Ctr.',
+		per_shipment          : '/Shipment',
+		per_bl                : '/BL',
+		per_kg                : '/Kg',
+		per_truck             : '/Truck',
+		per_awb               : '/Awb',
+		per_cbm               : '/Cbm',
+		per_kg_per_day        : ' /Kg Per Day',
+		per_document          : '/Document',
+		per_package           : '/Package',
+		percentage_of_freight : 'Percentage of Freight',
+		per_ton               : '/Ton',
+	},
+	applicable_stage_options: [
+		{ label: 'Quotation', value: 'quotation' },
+		// { label: 'Proforma Approval', value: 'proforma_approval' },
+		// { label: 'Sales Invoice Generation', value: 'sales_invoice_generation' },
+		{ label: 'ETA', value: 'eta' },
+		{ label: 'ETD', value: 'etd' },
+	],
+	PAN_LENGTH     : 10,
+	GST_LENGTH     : 15,
+	shipment_types : [
 		{ value: 'fcl_freight', label: 'FCL' },
 		{ value: 'lcl_freight', label: 'LCL' },
 		{ value: 'air_freight', label: 'AIR' },
@@ -624,6 +696,9 @@ const GLOBAL_CONSTANTS = {
 			},
 			treasury: {
 				currencies: ['INR', 'USD', 'VND'],
+			},
+			feedback_services: {
+				currencies: ['INR', 'USD', 'EUR', 'GBP', 'VND', 'IDR', 'SGD', 'THB', 'CNY', 'AED'],
 			},
 		},
 	},
@@ -709,7 +784,17 @@ const GLOBAL_CONSTANTS = {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',
 	},
-	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+	days                       : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+	governance_manager_role_id : 'ebafce31-75ef-4865-9060-775574e9606f',
+	governance_lead_role_id    : 'ae80297f-e30d-45fb-845c-61c302523476',
+	governance_manager_pending_image_url:
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/93e7e3ef7b8aaea36010c16608eb8bef/openmoji_timer.svg',
+	governance_manager_approved_image_url:
+    'https://cogoport-testing.sgp1.digitaloceanspaces.com/75a2231b9871b1f91a26663aa25d2da0/Group%201000010749.svg',
+	governance_manager_rejected_image_url:
+    'https://cogoport-testing.sgp1.digitaloceanspaces.com/2466c7e2faa34ad8f4beb2b110b1ce1e/Group.svg',
+
+	default_preferred_language: 'english',
 };
 
 export default GLOBAL_CONSTANTS;

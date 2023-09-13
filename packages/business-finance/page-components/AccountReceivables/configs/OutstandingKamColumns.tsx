@@ -5,10 +5,10 @@ import { getByKey } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const OutstandingKamColumn = ({ entityCode }) => [
+export const outstandingKamColumn = ({ entityCode, t }) => [
 
 	{
-		Header   : 'KAM Name',
+		Header   : t('KAM_name_column'),
 		accessor : (row) => (
 
 			<div>
@@ -38,7 +38,7 @@ export const OutstandingKamColumn = ({ entityCode }) => [
 		id: 'kam_owners',
 	},
 	{
-		Header   : 'Amount',
+		Header   : t('amount'),
 		accessor : (row) => (
 			<div>
 				<Tooltip content={(
@@ -76,7 +76,7 @@ export const OutstandingKamColumn = ({ entityCode }) => [
 		id: 'open_invoice_amount',
 	},
 	{
-		Header   : 'Outstanding Amt.',
+		Header   : t('outstanding_amount_column'),
 		accessor : (row) => (
 			<div>
 

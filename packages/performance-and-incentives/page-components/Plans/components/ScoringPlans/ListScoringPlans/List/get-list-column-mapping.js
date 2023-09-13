@@ -48,7 +48,7 @@ const getListColumnMapping = (props) => {
 			id       : 'channel',
 			key      : 'channel',
 			Header   : <div className={styles.heading}>CHANNEL</div>,
-			accessor : ({ channel }) => (isEmpty(channel) ? '___' : <div>{channel.toUpperCase()}</div>),
+			accessor : ({ channel }) => (isEmpty(channel) ? '___' : <div>{startCase(channel).toUpperCase()}</div>),
 		},
 		{
 			id       : 'role_function',
@@ -129,7 +129,7 @@ const getListColumnMapping = (props) => {
 							placement="left"
 							interactive
 							render={(
-								<Actions />
+								<Actions activeActionId={activeActionId} />
 							)}
 							onClickOutside={() => setActiveActionId(null)}
 						>

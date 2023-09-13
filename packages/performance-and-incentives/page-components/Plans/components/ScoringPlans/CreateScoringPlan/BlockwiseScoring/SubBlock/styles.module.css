@@ -36,10 +36,6 @@
 	margin-bottom: 4px;
 }
 
-.btn {
-	margin-left: auto;
-}
-
 .delete_block {
 	display: flex;
 	align-items: center;
@@ -53,4 +49,14 @@
 
 .underline_text {
 	text-decoration: underline;
+}
+
+.disabled {
+	pointer-events: none;
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+.btn {
+	margin-left: auto;
 }

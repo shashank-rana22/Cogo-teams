@@ -1,0 +1,36 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0;
+}
+
+.filter_button {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 4px 12px;
+	margin-left: 12px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+}
+
+.greeting_text {
+	font-size: 19px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	color: #221f20;
+}
+
+.assigned_input {
+	width: 16%;
+	margin-left: 40%;
+}

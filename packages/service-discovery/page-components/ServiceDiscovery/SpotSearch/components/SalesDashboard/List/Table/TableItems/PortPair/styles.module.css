@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.service_type {
+	margin-right: 20px;
+}
+
+.location_name {
+	max-width: 120px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tooltip_content {
+	text-align: center;
+	word-wrap: keep-all;
+}
+
+.locations_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	cursor: pointer;
+}

@@ -1,17 +1,20 @@
 import Header from './Header';
 import List from './List';
 import ListFilters from './ListFilters';
+import useGetScoringConfigs from './useGetScoringConfigs';
 
 function ListScoringPlans(props) {
-	const { setActiveMode, setParams } = props;
+	const { setActiveMode } = props;
+
+	const { list, setParams, paginationData, getNextPage, loading } = useGetScoringConfigs();
 
 	return (
 		<>
 			<Header setActiveMode={setActiveMode} />
 
-			<ListFilters setParams={setParams} />
+			<ListFilters setParams={setParams} paginationData={paginationData} />
 
-			<List />
+			<List list={list} paginationData={paginationData} getNextPage={getNextPage} loading={loading} />
 		</>
 	);
 }

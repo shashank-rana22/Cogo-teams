@@ -33,8 +33,8 @@ const useGetScoringConfig = () => {
 
 	return {
 		data,
-		loading,
-		refetch: getAgentScoringConfig,
+		getConfigLoading : loading,
+		refetch          : getAgentScoringConfig,
 		scoring_confing_id,
 	};
 };

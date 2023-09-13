@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -17,9 +16,6 @@ const useGetListRfqs = ({ revelantToUser }) => {
 		user_profile: profile,
 	}));
 
-	const isFullAccess = user_profile.partner.user_role_ids
-		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
-
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;
 		if (rates_status) {
@@ -30,7 +26,7 @@ const useGetListRfqs = ({ revelantToUser }) => {
 			params: {
 				filters: {
 					...(filters || {}),
-					relevant_supply_agent_id: !isFullAccess || revelantToUser
+					relevant_supply_agent_id: revelantToUser
 						? user_profile?.user?.id : undefined,
 					supply_agent_preference : true,
 					service_type            : filters.service_type,
