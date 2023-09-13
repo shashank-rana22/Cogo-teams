@@ -10,6 +10,7 @@ interface ItemProps {
 }
 interface Props {
 	itemData: ItemProps;
+	searchValue?: string;
 }
 
 interface ItemTypes {
@@ -22,14 +23,15 @@ interface ItemTypes {
 	isProforma?:string;
 	jobType?:string
 }
-function RenderViewMoreButton({ itemData }: Props) {
+function RenderViewMoreButton({ itemData, searchValue = '' }: Props) {
 	const router = useRouter();
 
 	const handleChange = (item: ItemTypes) => {
 		router.push(
 			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${item?.billId}
 			&billNumber=${item?.billNumber}&orgId=${item?.organizationId}&jobNumber=${item?.jobNumber}
-			&status=${item?.status}&billType=${item?.billType}&isProforma=${item?.isProforma}&jobType=${item?.jobType}`,
+			&status=${item?.status}&billType=${item?.billType}&isProforma=${item?.isProforma}&jobType=${item?.jobType}
+			&searchValue=${searchValue}`,
 		);
 	};
 

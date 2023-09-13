@@ -43,7 +43,7 @@ function Header({
 	const [modalData, setModalData] = useState('');
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
-	const { isShipment } = Router?.query || {};
+	const { isShipment, searchValue } = Router?.query || {};
 
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
@@ -76,8 +76,9 @@ function Header({
 			];
 		}
 		return [
-			`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
-			`/business-finance/coe-finance/all_invoices/purchase-view?jobNumber=${jobNumber}`,
+			`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}&searchValue=${searchValue}`,
+			`/business-finance/coe-finance/all_invoices/purchase-view?jobNumber=${jobNumber}
+			&searchValue=${searchValue}`,
 		];
 	};
 
