@@ -2,11 +2,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	cursor: pointer;
 }
 
 .main_heading {
-	margin: 0;
+	font-size: 24px;
+	font-weight: 600;
+	cursor: pointer;
 }
 
 .main_heading:hover {
@@ -15,7 +16,7 @@
 }
 
 .tour_btn {
-	margin-right: 12px;
+	margin: 0 16px;
 }
 
 .tour_btn:hover {
@@ -27,7 +28,7 @@
 }
 
 .segmented_section {
-	margin: 0 12px;
+	margin-right: 12px;
 }
 
 .entity_select {
@@ -36,6 +37,20 @@
 	:global {
 		.ui_select_display_container {
 			height: 42px !important;
+		}
+	}
+}
+
+.filter_group {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.exclude_section {
+	:global {
+		.ui_checkbox_container {
+			padding: 12px 0;
 		}
 	}
 }

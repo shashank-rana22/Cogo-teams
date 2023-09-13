@@ -31,6 +31,7 @@ function ServiceWiseStats({
 	activeShipmentCard = '',
 	setActiveShipmentCard = () => {},
 	customDate = new Date(),
+	isCancelledExcluded = false,
 }) {
 	const { tour, setTour, setIsTourInitial } = useContext(TourContext);
 	const { currency, invoiceCount, jobCount } = mainCardData || {};
@@ -44,6 +45,7 @@ function ServiceWiseStats({
 		activeService,
 		customDate,
 		specificServiceLevel : activeService,
+		isCancelledExcluded,
 	});
 
 	const mappingCard = getMappingCard({
