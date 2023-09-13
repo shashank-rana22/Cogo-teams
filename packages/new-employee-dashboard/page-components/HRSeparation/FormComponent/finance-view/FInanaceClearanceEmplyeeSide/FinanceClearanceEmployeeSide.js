@@ -16,6 +16,7 @@ import fnfColumns, { outstandingColumns } from './columns';
 import FinanceRecommendations from './finance-recommendations';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
+import FinanceUpdateModal from './update-modal';
 
 const ZERO = 0;
 const data2 = [
@@ -38,32 +39,23 @@ const data2 = [
 ];
 
 function FinanceClearanceEmployeeSide() {
-	const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const [show, setShow] = useState(true);
+	const [showModal, setShowModal] = useState(false);
 	const [outStandingShow, setOutStandingShow] = useState(true);
 	const [totalRecoverableAmount, setTotalRecoverableAmount] = useState(ZERO);
-
+	const [financeRecommendation, SetFinanceRecommendation] = useState({
+		employee : false,
+		fnf      : false,
+	});
+	const { control, formState:{ errors }, watch, handleSubmit } = useForm();
+	const [updateData, setUpdateData] = useState([]);
 	const data1 = useMemo(() => (
-		[
-			{
-				particular        : 'Joining Bonus',
-				category          : 'Bonus',
-				recoverableAmount : 'approved',
-			},
-			{
-				particular        : 'Advance Salary',
-				category          : 'Loan',
-				recoverableAmount : 'approved',
-			},		{
-				particular        : 'Gift',
-				category          : 'Gift',
-				recoverableAmount : 'approved',
-			},
-		]
-	), []);
+		updateData
+	), [updateData]);
 
-	const onSubmit = () => {
-
+	const onSubmit = (values = {}) => {
+		console.log('submitted form', values);
+		console.log('remaining values :: ', updateData, financeRecommendation, totalRecoverableAmount);
 	};
 	const totalRecoverableAmountFun = useCallback(
 		() => {
@@ -91,13 +83,18 @@ function FinanceClearanceEmployeeSide() {
 			</div>
 
 			<div className={styles.container}>
-				<div className={styles.heading_container} aria-hidden onClick={() => setShow(!show)}>
+				<div className={styles.heading_container}>
 					<div className={styles.heading}>
 						A. Update FNF Status
 					</div>
 					<div className={styles.btn_and_arrow}>
 						<div className={styles.heading_btn}>
-							<Button size="md" themeType="secondary" className={styles.heading_btn}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.heading_btn}
+								onClick={() => setShowModal(true)}
+							>
 								<IcMPlus />
 								{' '}
 								Add Particular
@@ -106,6 +103,8 @@ function FinanceClearanceEmployeeSide() {
 						<IcMArrowDown
 							width={22}
 							height={22}
+							aria-hidden
+							onClick={() => setShow(!show)}
 							className={show ? styles.caret_active : styles.caret_arrow}
 						/>
 					</div>
@@ -130,8 +129,6 @@ function FinanceClearanceEmployeeSide() {
 			<div className={styles.container}>
 				<div
 					className={styles.heading_container}
-					aria-hidden
-					onClick={() => setOutStandingShow(!outStandingShow)}
 				>
 					<div className={styles.heading}>
 						B. Outstanding Amount
@@ -147,6 +144,8 @@ function FinanceClearanceEmployeeSide() {
 						<IcMArrowDown
 							width={22}
 							height={22}
+							aria-hidden
+							onClick={() => setOutStandingShow(!outStandingShow)}
 							className={outStandingShow ? styles.caret_active : styles.caret_arrow}
 						/>
 					</div>
@@ -174,10 +173,15 @@ function FinanceClearanceEmployeeSide() {
 					</div>
 				</div>
 			</div>
-			<FinanceRecommendations control={control} />
+			<FinanceRecommendations
+				control={control}
+				financeRecommendation={financeRecommendation}
+				SetFinanceRecommendation={SetFinanceRecommendation}
+			/>
+
 			<AdditionalRemarks control={control} />
 			<div className={styles.container}>
-				<TermsConditions control={control} />
+				<TermsConditions control={control} errors={errors} />
 			</div>
 
 			<div className={styles.footer}>
@@ -192,6 +196,7 @@ function FinanceClearanceEmployeeSide() {
 				</Button>
 			</div>
 
+			<FinanceUpdateModal showModal={showModal} setShowModal={setShowModal} setUpdateData={setUpdateData} />
 		</>
 
 	);

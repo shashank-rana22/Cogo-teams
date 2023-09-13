@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function AdditionalRemarks({ control = {}, errors = {} }) {
+function AdditionalRemarks({ control = {} }) {
 	const [showNotes, setShowNotes] = useState(true);
 
 	return (
@@ -29,11 +29,7 @@ function AdditionalRemarks({ control = {}, errors = {} }) {
 						name="notes"
 						rules={{ required: 'this is required' }}
 					/>
-
 				</div>
-				{errors.notes && (
-					<span className={styles.error}>*required</span>
-				)}
 			</div>
 
 		</div>
