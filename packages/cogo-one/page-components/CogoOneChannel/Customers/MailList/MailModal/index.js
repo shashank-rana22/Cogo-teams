@@ -108,14 +108,6 @@ function MailEditorModal({
 			showCloseIcon={false}
 			closeOnOuterClick={false}
 		>
-			{/* <div
-				className={styles.minimize_container}
-				role="presentation"
-				onClick={() => setMinimizeModal(true)}
-			>
-				minimize
-			</div> */}
-
 			<Modal.Header
 				title={(
 					<RenderHeader
@@ -134,7 +126,7 @@ function MailEditorModal({
 						setMinimizeModal={setMinimizeModal}
 					/>
 				)}
-				className={isTemplateView ? styles.template_view : ''}
+				className={styles.modal_header}
 			/>
 			<Modal.Body>
 				{!isTemplateView ? (
