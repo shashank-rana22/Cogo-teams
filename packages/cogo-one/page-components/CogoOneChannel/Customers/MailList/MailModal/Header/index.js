@@ -1,6 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSend, IcMAttach, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMSend, IcMAttach, IcMArrowBack, IcMMinus } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
@@ -85,6 +85,10 @@ function RenderHeader({
 						>
 							Add Template
 						</Button>
+					</div>
+
+					<div className={styles.minimize_button} title="minimize">
+						<IcMMinus onClick={() => setMinimizeModal(true)} />
 					</div>
 
 					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (

@@ -63,8 +63,7 @@ const getReplyAllMails = ({
 };
 
 export function getRecipientData({
-	setButtonType = () => {},
-	setEmailState = () => {},
+	mailProps = {},
 	senderAddress = '',
 	recipientData = [],
 	ccData = [],
@@ -76,6 +75,12 @@ export function getRecipientData({
 	formattedData = {},
 	eachMessage = {},
 }) {
+	const {
+		setButtonType = () => {},
+		setEmailState = () => {},
+		buttonType = '',
+	} = mailProps || {};
+
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
@@ -85,6 +90,12 @@ export function getRecipientData({
 			Toast.error(`you cant ${startCase(val)} the draft mail`);
 			return;
 		}
+
+		if (buttonType) {
+			Toast.warn('Email compose already in progress');
+			return;
+		}
+
 		setButtonType(val);
 
 		let mailData = {};
