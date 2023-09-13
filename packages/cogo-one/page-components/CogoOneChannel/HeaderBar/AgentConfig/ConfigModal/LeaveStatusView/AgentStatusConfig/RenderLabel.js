@@ -7,11 +7,11 @@ const START_TIME_HOUR = 0;
 
 const formatSingleTime = ({ time }) => {
 	const [hours, minutes] = time.split(':');
-	let ampm = 'AM';
+	let midDay = 'AM';
 	let formattedHours = parseInt(hours, 10);
 
 	if (formattedHours >= HOUR_TIME_FORMAT) {
-		ampm = 'PM';
+		midDay = 'PM';
 		if (formattedHours > HOUR_TIME_FORMAT) {
 			formattedHours -= HOUR_TIME_FORMAT;
 		}
@@ -19,11 +19,12 @@ const formatSingleTime = ({ time }) => {
 		formattedHours = HOUR_TIME_FORMAT;
 	}
 
-	return `${formattedHours}:${minutes} ${ampm}`;
+	return `${formattedHours}:${minutes} ${midDay}`;
 };
 
 function RenderLabel({ item = {} }) {
 	const { shift_name = '', start_time_local = '', end_time_local = '' } = item || {};
+
 	return (
 		<div className={styles.content}>
 			<div className={styles.label}>{startCase(shift_name)}</div>

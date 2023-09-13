@@ -5,17 +5,18 @@ import { useEffect } from 'react';
 import RenderLabel from './RenderLabel';
 import styles from './styles.module.css';
 
-const SET_SHIFT_VALUE = {};
-
 const getShiftValue = ({ list = [] }) => {
-	(list || []).forEach((item) => {
-		SET_SHIFT_VALUE[item?.id] = ({
-			id         : item?.cogoone_shift?.id,
-			shift_name : item?.shift_name,
-		});
-	});
+	const updatedShiftValue = (list || []).reduce((acc, item) => {
+		if (item && item?.id && item?.cogoone_shift && item?.shift_name) {
+			acc[item.id] = {
+				id         : item.cogoone_shift.id,
+				shift_name : item.shift_name,
+			};
+		}
+		return acc;
+	}, {});
 
-	return SET_SHIFT_VALUE;
+	return updatedShiftValue;
 };
 
 function AgentStatusConfig({
@@ -30,12 +31,12 @@ function AgentStatusConfig({
 }) {
 	const { agent_type: agentType = '', id: rowId = '', status = '', agent_id: agentId = '' } = itm || {};
 
-	const handleSelecteddata = async ({ selectedId = '', obj = {} }) => {
+	const handleSelecteddata = ({ selectedId = '', obj = {} }) => {
 		if (!selectedId) {
 			return;
 		}
 
-		await setShiftData((prev) => ({
+		setShiftData((prev) => ({
 			...prev,
 			[rowId]: {
 				id         : obj?.id,
@@ -60,15 +61,15 @@ function AgentStatusConfig({
 		<div className={styles.container}>
 			<AsyncSelect
 				asyncKey="cogoone_shift_time"
-				initialCall
+				initialCall={false}
 				onChange={(val, obj) => handleSelecteddata({ selectedId: val, obj })}
 				value={shiftData?.[rowId]?.id}
 				placeholder="Select shift"
-				muiltiple
 				size="xs"
 				params={{
 					filters: {
-						team_name: agentType,
+						team_name : agentType,
+						status    : 'active',
 					},
 				}}
 				renderLabel={(item) => <RenderLabel item={item} />}
