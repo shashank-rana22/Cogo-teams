@@ -21,6 +21,10 @@ function EditInvoice({
 	const allowedRoles = {
 		IN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
 		VN : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
+		SG : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
+		ID : [geo.uuid.admin_id, geo.uuid.super_admin_id],
+		TH : [geo.uuid.admin_id, geo.uuid.super_admin_id],
+		CN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
 	};
 
 	const { role_ids } = useSelector(({ profile }) => ({

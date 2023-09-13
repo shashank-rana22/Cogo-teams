@@ -111,3 +111,8 @@
 	width: 50%;
 	border: 1.5px solid #ed3726;
 }
+
+.tooltip {
+	word-break: break-word;
+	word-wrap: break-word;
+}

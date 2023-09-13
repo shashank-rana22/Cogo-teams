@@ -4,34 +4,17 @@ import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCod
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoEntities';
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
+import { getTabs } from './Constants/getTabs';
 import Controller from './Controller';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
-
-const tabs = [
-	{
-		key   : 'requested',
-		label : 'Requested',
-	},
-	{
-		key   : 'approved',
-		label : 'Approved',
-	},
-	{
-		key   : 'rejected',
-		label : 'Rejected',
-	},
-	{
-		key   : 'controller',
-		label : 'Approval Management',
-	},
-];
 
 const tabsKeyComponentMapping = {
 	requested  : TabComponent,
@@ -51,6 +34,8 @@ interface Profile {
 function IncidentManagement() {
 	const { query, push } = useRouter();
 
+	const { t } = useTranslation(['incidentManagement']);
+
 	const { profile }:Profile = useSelector((state) => state);
 
 	const { partner } = profile || {};
@@ -64,7 +49,7 @@ function IncidentManagement() {
 	const [entityCode, setEntityCode] = useState(entity);
 
 	const entityDataCount = entityData.length;
-
+	const tabsMappingData = getTabs({ t });
 	const entityOptions = (entityData || []).map((item: ItemProps) => {
 		const {
 			business_name: companyName = '',
@@ -76,7 +61,7 @@ function IncidentManagement() {
 		};
 	});
 	const [activeTab, setActiveTab] = useState<string>(
-		query.activeTab || tabs[GLOBAL_CONSTANTS.zeroth_index].key,
+		query.activeTab || tabsMappingData[GLOBAL_CONSTANTS.zeroth_index].key,
 	);
 	const {
 		incidentData,
@@ -155,7 +140,7 @@ function IncidentManagement() {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div className={styles.header_style}>Incident Management</div>
+				<div className={styles.header_style}>{t('incidentManagement:incident_management')}</div>
 				{loading ? (
 					<Placeholder width="200px" height="30px" />
 				) : (
@@ -165,7 +150,7 @@ function IncidentManagement() {
 							onChange={(entityVal: string) => setEntityCode(entityVal)}
 							value={entityCode}
 							options={entityOptions}
-							placeholder="Select Entity Code"
+							placeholder={t('incidentManagement:select_entity') || ''}
 							size="sm"
 							disabled={entityDataCount <= 1}
 						/>
@@ -179,7 +164,7 @@ function IncidentManagement() {
 					fullWidth
 					themeType="primary"
 				>
-					{tabs.map(({ key = '', label = '' }) => (
+					{tabsMappingData.map(({ key = '', label = '' }) => (
 						<TabPanel
 							name={key}
 							key={key}

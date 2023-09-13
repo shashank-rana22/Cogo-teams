@@ -151,6 +151,10 @@
 	}
 }
 
+.processing {
+	background-color: var(--color-primary-error-red-5);
+}
+
 .icon_wrapper {
 	display: flex;
 	align-items: center;
@@ -262,4 +266,9 @@
 .tooltip_div {
 	font-size: 10px;
 	text-transform: capitalize;
+}
+
+.reload {
+	display: flex;
+	align-items: center;
 }

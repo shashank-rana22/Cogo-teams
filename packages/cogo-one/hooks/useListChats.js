@@ -32,6 +32,7 @@ function useListChats({
 	workPrefernceLoading = false,
 	listOnlyMails = false,
 	activeFolder = '',
+	sidFilters = '',
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -71,8 +72,9 @@ function useListChats({
 			activeSubTab,
 			listOnlyMails,
 			activeFolder,
+			sidFilters,
 		}),
-		[userId, appliedFilters, isBotSession, viewType, activeSubTab, listOnlyMails, activeFolder],
+		[userId, appliedFilters, isBotSession, viewType, activeSubTab, listOnlyMails, activeFolder, sidFilters],
 	);
 
 	const queryForSearch = useMemo(() => {
@@ -191,11 +193,12 @@ function useListChats({
 			setCarouselState,
 			updateLoadingState,
 			workPrefernceLoading,
+			listOnlyMails,
 		});
 		return () => {
 			snapshotCleaner({ ref: flashMessagesSnapShotListener });
 		};
-	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState, workPrefernceLoading]);
+	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState, workPrefernceLoading, listOnlyMails]);
 
 	return {
 		chatsData: {

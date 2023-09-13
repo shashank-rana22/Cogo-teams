@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.textarea_label {
+	font-weight: 600;
+}

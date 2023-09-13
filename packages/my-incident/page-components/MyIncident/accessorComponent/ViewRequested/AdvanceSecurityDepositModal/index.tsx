@@ -3,7 +3,7 @@ import React from 'react';
 
 import AdvanceDepositCommonModal from '../AdvanceDepositCommonModal';
 
-import SecurityDepositData from './securityDepositData';
+import securityDepositData from './securityDepositData';
 
 interface DepositInterface {
 	advanceDocumentId?: string,
@@ -37,7 +37,7 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }:Props
 			{showModal
 			&& (
 				<AdvanceDepositCommonModal
-					securityDepositDetails={SecurityDepositData({ advanceSecurityDeposit })}
+					securityDepositDetails={securityDepositData({ advanceSecurityDeposit })}
 					itemData={itemData}
 					showModal={showModal}
 					setShowModal={setShowModal}

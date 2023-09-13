@@ -37,7 +37,7 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 										<div className={styles.stakeholder}>
 											{msg?.created_by_stakeholder
 														=== 'booking_agent'
-												? 'KAM'
+												? 'CCS'
 												: startCase(msg?.created_by_stakeholder)}
 										</div>
 									) : null}

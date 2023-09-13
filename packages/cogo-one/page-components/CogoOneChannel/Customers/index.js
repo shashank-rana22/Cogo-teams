@@ -1,11 +1,13 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
 import { getUserActiveMails } from '../../../configurations/mail-configuration';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
+import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentSettings from './AgentSettings';
@@ -44,6 +46,7 @@ function Customers({
 	selectedAutoAssign = {},
 	autoAssignChats = {},
 	setAutoAssignChats = () => {},
+	preferenceLoading = false,
 }) {
 	const {
 		userEmailAddress = '',
@@ -54,6 +57,13 @@ function Customers({
 	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
+		firestore,
+		viewType,
+		agentId: userId,
+		isBotSession,
+	});
+
+	const { unReadMailsCount = 0 } = useGetUnreadMailsCount({
 		firestore,
 		viewType,
 		agentId: userId,
@@ -86,6 +96,7 @@ function Customers({
 			},
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
+			viewType,
 		},
 		outlook: {
 			mailProps,
@@ -98,16 +109,33 @@ function Customers({
 			mailsToBeShown: userSharedMails,
 			firestore,
 			userId,
+			isBotSession,
 		},
 	};
 
-	const tabMappings = getTabMappings({ unReadChatsCount, unReadMissedCallCount, viewType });
+	const tabMappings = getTabMappings({
+		unReadChatsCount,
+		unReadMissedCallCount,
+		unReadMailsCount,
+		viewType,
+	});
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
 	const handleChangeTab = (val) => {
 		setActiveTab((prev) => ({ ...prev, tab: val, data: {}, subTab: 'all' }));
 	};
+
+	useEffect(() => {
+		const chatTabsActive = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.chat_tabs_to_be_shown || [];
+
+		if (!chatTabsActive?.includes(activeTab?.tab) && viewType) {
+			setActiveTab((prev) => ({
+				...prev,
+				tab: chatTabsActive?.[GLOBAL_CONSTANTS.zeroth_index] || 'message',
+			}));
+		}
+	}, [activeTab?.tab, setActiveTab, viewType]);
 
 	return (
 		<div
@@ -141,6 +169,7 @@ function Customers({
 					isBotSession={isBotSession}
 					userId={userId}
 					firestore={firestore}
+					preferenceLoading={preferenceLoading}
 				/>
 			</div>
 

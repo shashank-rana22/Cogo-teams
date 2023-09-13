@@ -2,16 +2,13 @@
 	text-overflow: ellipsis;
 }
 
-.view {
-	color: #6cc077;
-	text-decoration: underline;
-	background-color: transparent;
-}
-
 .view_flex {
 	display: flex;
 	gap: 4px;
 	align-items: center;
+	color: #6cc077;
+	text-decoration: underline;
+	background-color: transparent;
 }
 
 .tooltip_text {

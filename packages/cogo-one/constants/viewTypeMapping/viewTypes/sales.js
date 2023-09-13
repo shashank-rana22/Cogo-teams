@@ -4,6 +4,7 @@ import {
 	getSalesSessionQuery,
 	getSalesAgentButtons,
 } from '../../../helpers/viewTypeFunctions';
+import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPreferences';
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SALES = {
@@ -14,7 +15,7 @@ const SALES = {
 	group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query        : getSalesSessionQuery,
 	kam_contacts_base_query   : ({ agentId }) => [where('user_details.agent_ids', 'array-contains', agentId)],
-	chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts'],
+	chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts', 'groups'],
 	default_side_nav          : 'profile',
 	accesible_filters         : {
 		observer : ['closed_session'],
@@ -22,16 +23,17 @@ const SALES = {
 	},
 	stats_feedback_count: ['no_of_quotation_send', 'no_of_bookings', 'customer_satisfaction_score',
 		'calls_made', 'calls_received', 'chats_assigned'],
-	to_show_agent_activity_graph  : true,
-	extra_side_bar_navs_access    : ['spot_search'],
-	get_accesible_assign_buttons  : getSalesAgentButtons,
-	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
-	show_relevant_templates       : ['quick_reply'],
-	mails_to_be_shown             : [],
-	bulk_assign_features          : [],
-	configurations_to_be_shown    : [],
-	group_agents_api_filter       : ['sales'],
-	accessible_new_communications : ['new_mail', 'global_contacts'],
+	to_show_agent_activity_graph : true,
+	extra_side_bar_navs_access   : ['spot_search'],
+	get_accesible_assign_buttons : getSalesAgentButtons,
+	accesible_agent_types_query  : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
+	show_relevant_templates      : ['quick_reply'],
+	mails_to_be_shown            : [],
+	bulk_assign_features         : [],
+	configurations_to_be_shown   : [],
+	group_agents_api_filter      : [...COGOVERSE_AGENT_MAPPINGS.sales, 'shipment_specialist',
+		'shipment_specialist_admin'],
+	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                 : false,
 		bot_message_toggle          : false,
@@ -40,7 +42,7 @@ const SALES = {
 		claim_chats                 : false,
 		toggle_self_status          : true,
 		on_leave_status_toggle      : false,
-		has_group_access            : false,
+		has_group_access            : true,
 		can_message_on_bot_session  : false,
 		has_permission_to_edit      : false,
 		send_promotional_rate       : true,

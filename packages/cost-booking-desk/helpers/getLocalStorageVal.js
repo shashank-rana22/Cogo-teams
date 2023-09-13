@@ -8,12 +8,13 @@ export default function getLocalStorageVal() {
 
 	const { scopeFilters = {}, filters = {} } = storedValues || {};
 
-	let { shipmentType, stepperTab, activeTab } = storedValues || {};
+	let { shipmentType = '', stepperTab = '', activeTab = '', paymentActiveTab = '' } = storedValues || {};
 
 	if (!CONTROLS_CONFIG.shipment_types.some((t) => t.value === shipmentType)) {
 		shipmentType = 'fcl_freight';
 		stepperTab = 'export';
 		activeTab = 'assigned';
+		paymentActiveTab = 'payment_request';
 		filters.page = 1;
 	}
 
@@ -28,6 +29,6 @@ export default function getLocalStorageVal() {
 	if (typeof filters?.page !== 'number') filters.page = 1;
 
 	return {
-		filters, shipmentType, stepperTab, scopeFilters, activeTab,
+		filters, shipmentType, stepperTab, scopeFilters, activeTab, paymentActiveTab,
 	};
 }

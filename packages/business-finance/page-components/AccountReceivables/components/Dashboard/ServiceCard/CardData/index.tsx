@@ -1,6 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -19,6 +20,8 @@ interface CardDataProps {
 }
 
 function CardData({ tab }: CardDataProps) {
+	const { t = () => '' } = useTranslation(['accountRecievables']);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.key_container}>{tab?.key}</div>
@@ -35,7 +38,7 @@ function CardData({ tab }: CardDataProps) {
 										<Tooltip
 											placement="top"
 											content={
-											item?.name === 'others' ? 'No Service Tagged'
+											item?.name === 'others' ? t('no_service_tagged')
 												: startCase(item?.name)
 }
 										>
