@@ -37,9 +37,8 @@ function Card({
 		return (
 			(urlList || []).map((url, index) => (
 				<div key={url}>
-					<Button themeType="linkUi" onClick={() => { window.open(url); }}>
-						link
-						{index + VALUE_ONE}
+					<Button className={styles.url_link} themeType="linkUi" onClick={() => { window.open(url); }}>
+						{`link ${index + VALUE_ONE}`}
 					</Button>
 				</div>
 			))
