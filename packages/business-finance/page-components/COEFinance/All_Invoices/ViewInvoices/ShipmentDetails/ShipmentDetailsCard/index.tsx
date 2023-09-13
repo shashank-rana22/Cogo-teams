@@ -13,6 +13,7 @@ import collectionPartyRejectCheckboxList from '../../../../constants/collection-
 import useGetDocumentContent from '../../../../hook/useGetDocumentContent';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
+import { getCardDataFromId } from '../../../../utils/getCardDataFromId';
 import isDisabled from '../../../../utils/isDisabled';
 
 import BillingPartyCard from './BillingPartyCard';
@@ -32,11 +33,15 @@ interface ShipmentDetailsCardInterface {
 	invoiceStatus: string;
 	lineItemsCheck: boolean;
 	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
+	onAccept: Function;
+	onTabClick: Function;
+	tab: object;
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 const CHECK_REMARK_LENGTH = 1;
 const MAX_CARDS = 4;
+const LINE_ITEM_ID = 4;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -47,6 +52,9 @@ function ShipmentDetailsCard({
 	invoiceStatus = '',
 	lineItemsCheck = false,
 	setCheckItem = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	onTabClick = (prop) => (prop),
+	tab = {},
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -197,10 +205,14 @@ function ShipmentDetailsCard({
 		setShowRejected(false);
 	};
 
-	const onSubmit = () => {
+	const onSubmit = (cardId) => {
 		const current = Object.keys(showRejected)?.[GLOBAL_CONSTANTS.zeroth_index];
 		handleRejected(+current);
 		setShowRejected(false);
+		if (cardId !== LINE_ITEM_ID) {
+			const { tabName = '', tabToOpen = '', timelineItem = '' } = getCardDataFromId(cardId);
+			onAccept({ tabName, tabToOpen, timelineItem });
+		}
 	};
 
 	const collectionPartyRejectionList = collectionPartyRejectCheckboxList(
@@ -330,10 +342,12 @@ function ShipmentDetailsCard({
 									collectionPartyRejectionList={collectionPartyRejectionList}
 									handleClickReject={handleClickReject}
 									handleClick={handleClick}
-									isDisabled={isDisabled}
 									status={status}
 									docContent={docContent}
 									setCheckItem={setCheckItem}
+									onAccept={onAccept}
+									onTabClick={onTabClick}
+									showTab={tab.collectionPartyTab}
 								/>
 							)}
 
@@ -345,13 +359,15 @@ function ShipmentDetailsCard({
 									isInvoiceApproved={isInvoiceApproved}
 									rejected={rejected}
 									handleClickUndo={handleClickUndo}
-									billingPartyRejectionList={collectionPartyRejectionList}
+									billingPartyRejectionList={billingPartyRejectionList}
 									handleClickReject={handleClickReject}
 									handleClick={handleClick}
-									isDisabled={isDisabled}
 									status={status}
 									docContent={docContent}
 									setCheckItem={setCheckItem}
+									onAccept={onAccept}
+									onTabClick={onTabClick}
+									showTab={tab.billingPartyTab}
 								/>
 							)}
 
@@ -365,7 +381,6 @@ function ShipmentDetailsCard({
 									handleClickUndo={handleClickUndo}
 									handleClickReject={handleClickReject}
 									handleClick={handleClick}
-									isDisabled={isDisabled}
 									invoiceType={invoiceType}
 									organizationName={organizationName}
 									remarks={remarks}
@@ -375,6 +390,9 @@ function ShipmentDetailsCard({
 									setShowHighAdvancedModal={setShowHighAdvancedModal}
 									docContent={docContent}
 									setCheckItem={setCheckItem}
+									onAccept={onAccept}
+									onTabClick={onTabClick}
+									showTab={tab.invoiceDetailsTab}
 								/>
 							)}
 
@@ -390,6 +408,8 @@ function ShipmentDetailsCard({
 									tdsRate={tdsRate}
 									paidTds={paidTds}
 									setCheckItem={setCheckItem}
+									onTabClick={onTabClick}
+									showTab={tab.lineItemsTab}
 								/>
 							)}
 						</>

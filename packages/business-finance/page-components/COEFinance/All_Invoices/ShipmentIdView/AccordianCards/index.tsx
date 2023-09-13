@@ -17,14 +17,23 @@ interface ListData {
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
 	shipmentIdView?: boolean;
-	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>;
+	onTabClick?: Function;
+	onAccept?: Function;
+	showTab?: boolean;
+	sidDataChecked?: boolean;
 }
+
+const PRESENT_TAB = 'sidDataTab';
+
 function AccordianCards({
 	itemData,
 	currentOpenSID,
 	setCurrentOpenSID,
 	shipmentIdView = true,
-	setCheckItem = () => {},
+	onTabClick = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	showTab = false,
+	sidDataChecked = false,
 }: ListData) {
 	const {
 		jobId,
@@ -53,7 +62,6 @@ function AccordianCards({
 		shipmentId     : '',
 	});
 	const router = useRouter();
-	const [showInvoices, setShowInvoices] = useState(false);
 
 	return (
 		<div>
@@ -245,10 +253,10 @@ function AccordianCards({
 						{!shipmentIdView && (
 							<div
 								className={styles.ic_arrow}
-								onClick={() => { setShowInvoices(!showInvoices); }}
+								onClick={() => onTabClick({ tabName: PRESENT_TAB })}
 								role="presentation"
 							>
-								{showInvoices ? (
+								{showTab ? (
 									<IcMArrowRotateUp height="17px" width="17px" />
 								) : (
 									<IcMArrowRotateDown height="17px" width="17px" />
@@ -263,7 +271,7 @@ function AccordianCards({
 					)}
 				</div>
 				<div>
-					{(showInvoices || currentOpenSID === jobId) && (
+					{(showTab || currentOpenSID === jobId) && (
 						<CardItem
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}
@@ -271,9 +279,9 @@ function AccordianCards({
 							setDataCard={setDataCard}
 							amountTab={amountTab}
 							setAmountTab={setAmountTab}
-							showInvoices={showInvoices}
-							setShowInvoices={setShowInvoices}
-							setCheckItem={setCheckItem}
+							onAccept={onAccept}
+							showTab={showTab}
+							sidDataChecked={sidDataChecked}
 						/>
 					)}
 

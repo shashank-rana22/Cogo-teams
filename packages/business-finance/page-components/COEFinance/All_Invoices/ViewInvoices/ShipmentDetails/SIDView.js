@@ -5,7 +5,13 @@ import { useState } from 'react';
 import useShipmentIdView from '../../../hook/useShipmentIdView.ts';
 import AccordianCards from '../../ShipmentIdView/AccordianCards/index.tsx';
 
-function SIDView({ shipmentId = '', setCheckItem = (prop) => prop }) {
+function SIDView({
+	shipmentId = '',
+	onTabClick = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	showTab = false,
+	sidDataChecked = false,
+}) {
 	const {
 		list: { data },
 	} = useShipmentIdView({ invoicesRequired: true, shipmentId });
@@ -19,7 +25,10 @@ function SIDView({ shipmentId = '', setCheckItem = (prop) => prop }) {
 			currentOpenSID={currentOpenSID}
 			setCurrentOpenSID={setCurrentOpenSID}
 			shipmentIdView={false}
-			setCheckItem={setCheckItem}
+			onTabClick={onTabClick}
+			onAccept={onAccept}
+			showTab={showTab}
+			sidDataChecked={sidDataChecked}
 		/>
 	);
 }

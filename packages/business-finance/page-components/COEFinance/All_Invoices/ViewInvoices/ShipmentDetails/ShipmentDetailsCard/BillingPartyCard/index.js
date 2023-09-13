@@ -3,11 +3,15 @@ import {
 	IcCFtick, IcMCrossInCircle,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
-import { useState } from 'react';
+
+import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import styles from './styles.module.css';
 
 const CARD_ID = 2;
+const PRESENT_TAB = 'billingPartyTab';
+const TAB_TO_OPEN = 'invoiceDetailsTab';
+const TIMELINE_ITEM = 'billingPartyCheck';
 
 function BillingPartyCard({
 	id = '',
@@ -19,13 +23,13 @@ function BillingPartyCard({
 	billingPartyRejectionList = [],
 	handleClickReject = () => {},
 	handleClick = () => {},
-	isDisabled = () => {},
 	status = '',
 	docContent = '',
 	setCheckItem = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	onTabClick = (prop) => (prop),
+	showTab = false,
 }) {
-	const [showDetails, setShowDetails] = useState(false);
-
 	let labelClassName;
 	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
 		labelClassName = styles.label_approved;
@@ -43,14 +47,18 @@ function BillingPartyCard({
 		iconElement = <IcMCrossInCircle height="17px" width="17px" />;
 	}
 
-	const onClickResponse = (response = true) => {
+	const onClickResponse = ({ response }) => {
 		if (response) {
 			handleClick(id);
 		} else {
 			handleClickReject(id);
 		}
+		onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
+	};
+	const handleUndo = () => {
+		handleClickUndo(id);
 		setCheckItem(
-			(prev) => ({ ...prev, billingPartyCheck: true }),
+			(prev) => ({ ...prev, billingPartyCheck: false }),
 		);
 	};
 
@@ -68,7 +76,7 @@ function BillingPartyCard({
 					</div>
 				</div>
 
-				{showDetails ? (!isInvoiceApproved && (
+				{showTab ? (!isInvoiceApproved && (
 					<div>
 						{showValue.includes(CARD_ID) || rejected.includes(CARD_ID) ? (
 							<div
@@ -80,9 +88,7 @@ function BillingPartyCard({
 							>
 								<Button
 									onClick={() => {
-										setCheckItem(
-											(prev) => ({ ...prev, billingPartyCheck: false }),
-										);
+										handleUndo();
 									}}
 									size="md"
 									themeType="secondary"
@@ -96,7 +102,9 @@ function BillingPartyCard({
 									disabled={!isDisabled(status)}
 									size="md"
 									themeType="secondary"
-									onClick={() => { onClickResponse(true); }}
+									onClick={() => onClickResponse({
+										response: true,
+									})}
 								>
 									Approve
 								</Button>
@@ -105,7 +113,9 @@ function BillingPartyCard({
 									size="md"
 									themeType="secondary"
 									style={{ border: '1px solid #ed3726' }}
-									onClick={() => { onClickResponse(false); }}
+									onClick={() => onClickResponse({
+										response: false,
+									})}
 								>
 									Reject
 								</Button>
@@ -116,7 +126,7 @@ function BillingPartyCard({
 					<div
 						className={styles.caret}
 						onClick={() => {
-							setShowDetails(true);
+							onTabClick({ tabName: PRESENT_TAB });
 						}}
 						role="presentation"
 					>
@@ -125,7 +135,7 @@ function BillingPartyCard({
 					</div>
 				)}
 			</div>
-			{showDetails && (
+			{showTab && (
 				<div>
 					<div className={styles.hr} />
 

@@ -6,30 +6,34 @@ import ShowIcon from './ShowIcon';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckItem = (prop) => (prop) }:
+const PRESENT_TAB = 'taggingTab';
+const TAB_TO_OPEN = 'sidDataTab';
+
+function Tagging({
+	billId = '',
+	setRemarksVal = () => {},
+	status = '',
+	onTabClick = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	showTab = false,
+	taggingChecked = false,
+}:
 {
-	billId: string, status: string, setCheckItem: Function, setRemarksVal: React.Dispatch<React.SetStateAction<{
+	billId: string, status: string, onTabClick: Function,
+	showTab: boolean, taggingChecked: boolean, onAccept: Function, setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];
 		invoiceDetailsRemark: string[];
 		taggingRemark: string[];
 	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
-	const [showData, setShowData] = useState(false);
-
-	const onAccept = () => {
-		setShowData(false);
-		setCheckItem(
-			(prev: any) => ({ ...prev, taggingCheck: true }),
-		);
-	};
 
 	return (
 		<div style={{ padding: '0 20px' }}>
 			<div
 				className={styles.heading_data}
 				role="presentation"
-				onClick={() => setShowData(!showData)}
+				onClick={() => onTabClick({ tabName: PRESENT_TAB })}
 			>
 				<div className={styles.business_name}>
 					Invoice Tagging
@@ -38,14 +42,14 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckI
 				</div>
 				<div>
 					{
-					showData
+					showTab
 						? <IcMArrowRotateUp height={16} width={16} />
 						: <IcMArrowRotateDown height={16} width={16} />
 }
 				</div>
 			</div>
 
-			{showData && (
+			{showTab && (
 				<div>
 					<TagMap
 						billId={billId}
@@ -58,7 +62,12 @@ function Tagging({ billId = '', setRemarksVal = () => {}, status = '', setCheckI
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '8px' }}
-						onClick={onAccept}
+						disabled={taggingChecked}
+						onClick={() => onAccept({
+							tabName      : PRESENT_TAB,
+							tabToOpen    : TAB_TO_OPEN,
+							timelineItem : 'taggingCheck',
+						})}
 						className={styles.approve_button}
 					>
 						Accept

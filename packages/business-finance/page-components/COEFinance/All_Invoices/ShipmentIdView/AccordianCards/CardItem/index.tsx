@@ -30,9 +30,9 @@ interface PropsType {
 	amountTab: string;
 	setAmountTab: Function;
 	setDataCard: Function;
-	showInvoices?: boolean;
-	setShowInvoices?: Function;
-	setCheckItem?: Function;
+	onAccept?: Function;
+	showTab?: boolean;
+	sidDataChecked?: boolean;
 }
 
 interface FullResponseProps {
@@ -41,6 +41,9 @@ interface FullResponseProps {
 	list?: object[];
 }
 
+const PRESENT_TAB = 'sidDataTab';
+const TAB_TO_OPEN = 'collectionPartyTab';
+
 function CardItem({
 	cardData,
 	currentOpenSID,
@@ -48,9 +51,9 @@ function CardItem({
 	amountTab,
 	setDataCard,
 	setAmountTab,
-	showInvoices = false,
-	setShowInvoices = () => {},
-	setCheckItem = () => {},
+	onAccept = (prop) => (prop),
+	showTab = false,
+	sidDataChecked = false,
 }: PropsType) {
 	const { jobNumber, jobType } = cardData || {};
 	const {
@@ -99,7 +102,7 @@ function CardItem({
 					itemData={cardData}
 					amountTab={amountTab}
 					setAmountTab={setAmountTab}
-					showInvoices={showInvoices}
+					showTab={showTab}
 				/>
 			</div>
 
@@ -123,7 +126,7 @@ function CardItem({
 				)}
 			</div>
 
-			{!showInvoices ? (
+			{!showTab ? (
 				<div className={styles.footer}>
 					<div
 						className={styles.footer_text}
@@ -138,12 +141,12 @@ function CardItem({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => {
-							setShowInvoices(false);
-							setCheckItem(
-								(prev: any) => ({ ...prev, sidDataCheck: true }),
-							);
-						}}
+						disabled={sidDataChecked}
+						onClick={() => onAccept({
+							tabName      : PRESENT_TAB,
+							tabToOpen    : TAB_TO_OPEN,
+							timelineItem : 'sidDataCheck',
+						})}
 					>
 						Accept
 					</Button>

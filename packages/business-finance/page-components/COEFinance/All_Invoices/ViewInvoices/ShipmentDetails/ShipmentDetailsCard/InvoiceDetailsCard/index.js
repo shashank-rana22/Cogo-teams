@@ -2,12 +2,16 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { useState } from 'react';
+
+import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import FTLFreightInvoiceDetails from './FTLFreightInvoiceDetails';
 import styles from './styles.module.css';
 
 const CARD_ID = 3;
+const PRESENT_TAB = 'invoiceDetailsTab';
+const TAB_TO_OPEN = 'lineItemsTab';
+const TIMELINE_ITEM = 'invoiceDetailsCheck';
 
 function InvoiceDetailsCard({
 	id = '',
@@ -18,7 +22,6 @@ function InvoiceDetailsCard({
 	handleClickUndo = () => {},
 	handleClickReject = () => {},
 	handleClick = () => {},
-	isDisabled = () => {},
 	invoiceType = '',
 	organizationName = '',
 	remarks = [],
@@ -28,9 +31,10 @@ function InvoiceDetailsCard({
 	setShowHighAdvancedModal = (prop) => prop,
 	docContent = '',
 	setCheckItem = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	onTabClick = (prop) => (prop),
+	showTab = false,
 }) {
-	const [showDetails, setShowDetails] = useState(false);
-
 	const {
 		billNumber = '',
 		billDate,
@@ -75,14 +79,18 @@ function InvoiceDetailsCard({
 
 	const getColor = (value) => (docContent?.includes(value) ? 'green' : 'auto');
 
-	const onClickResponse = (response = true) => {
+	const onClickResponse = ({ response }) => {
 		if (response) {
 			handleClick(id);
 		} else {
 			handleClickReject(id);
 		}
+		onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
+	};
+	const handleUndo = () => {
+		handleClickUndo(id);
 		setCheckItem(
-			(prev) => ({ ...prev, invoiceDetailsCheck: true }),
+			(prev) => ({ ...prev, invoiceDetailsCheck: false }),
 		);
 	};
 
@@ -100,8 +108,7 @@ function InvoiceDetailsCard({
 						{iconComponent}
 					</div>
 				</div>
-				{}
-				{showDetails ? (!isInvoiceApproved && (
+				{showTab ? (!isInvoiceApproved && (
 					<div>
 						{showValue.includes(CARD_ID) || rejected.includes(CARD_ID) ? (
 							<div
@@ -113,9 +120,7 @@ function InvoiceDetailsCard({
 							>
 								<Button
 									onClick={() => {
-										setCheckItem(
-											(prev) => ({ ...prev, invoiceDetailsCheck: false }),
-										);
+										handleUndo();
 									}}
 									size="md"
 									themeType="secondary"
@@ -129,7 +134,9 @@ function InvoiceDetailsCard({
 									disabled={!isDisabled(status)}
 									size="md"
 									themeType="secondary"
-									onClick={() => { onClickResponse(true); }}
+									onClick={() => onClickResponse({
+										response: true,
+									})}
 								>
 									Approve
 								</Button>
@@ -138,7 +145,9 @@ function InvoiceDetailsCard({
 									size="md"
 									themeType="secondary"
 									style={{ border: '1px solid #ed3726' }}
-									onClick={() => { onClickResponse(false); }}
+									onClick={() => onClickResponse({
+										response: false,
+									})}
 								>
 									Reject
 								</Button>
@@ -149,7 +158,7 @@ function InvoiceDetailsCard({
 					<div
 						className={styles.caret}
 						onClick={() => {
-							setShowDetails(true);
+							onTabClick({ tabName: PRESENT_TAB });
 						}}
 						role="presentation"
 					>
@@ -158,7 +167,7 @@ function InvoiceDetailsCard({
 				)}
 			</div>
 
-			{showDetails ? (
+			{showTab ? (
 				<div>
 					<div className={styles.hr} />
 					<div className={styles.billing_party_container}>

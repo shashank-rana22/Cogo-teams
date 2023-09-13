@@ -1,10 +1,14 @@
 import { Button } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { useState } from 'react';
+
+import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import styles from './styles.module.css';
 
 const CARD_ID = 1;
+const PRESENT_TAB = 'collectionPartyTab';
+const TAB_TO_OPEN = 'billingPartyTab';
+const TIMELINE_ITEM = 'collectionPartyCheck';
 
 function CollectionPartyCard({
 	id = '',
@@ -16,12 +20,13 @@ function CollectionPartyCard({
 	collectionPartyRejectionList = [],
 	handleClickReject = () => {},
 	handleClick = () => {},
-	isDisabled = () => {},
 	status = '',
 	docContent = '',
 	setCheckItem = (prop) => (prop),
+	onAccept = (prop) => (prop),
+	onTabClick = (prop) => (prop),
+	showTab = false,
 }) {
-	const [showDetails, setShowDetails] = useState(false);
 	let labelClassName;
 
 	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
@@ -40,14 +45,18 @@ function CollectionPartyCard({
 		iconElement = <IcMCrossInCircle height="17px" width="17px" />;
 	}
 
-	const onClickResponse = (response = true) => {
+	const onClickResponse = ({ response }) => {
 		if (response) {
 			handleClick(id);
+			onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
 		} else {
 			handleClickReject(id);
 		}
+	};
+	const handleUndo = () => {
+		handleClickUndo(id);
 		setCheckItem(
-			(prev) => ({ ...prev, collectionPartyCheck: true }),
+			(prev) => ({ ...prev, collectionPartyCheck: false }),
 		);
 	};
 
@@ -65,21 +74,16 @@ function CollectionPartyCard({
 					</div>
 				</div>
 
-				{showDetails ? (!isInvoiceApproved && (
+				{showTab ? (!isInvoiceApproved && (
 					<div>
 						{showValue.includes(CARD_ID) || rejected.includes(CARD_ID) ? (
 							<div
 								className={styles.button_container}
-								onClick={() => {
-									handleClickUndo(id);
-								}}
 								role="presentation"
 							>
 								<Button
 									onClick={() => {
-										setCheckItem(
-											(prev) => ({ ...prev, collectionPartyCheck: false }),
-										);
+										handleUndo();
 									}}
 									size="md"
 									themeType="secondary"
@@ -93,7 +97,9 @@ function CollectionPartyCard({
 									disabled={!isDisabled(status)}
 									size="md"
 									themeType="secondary"
-									onClick={() => { onClickResponse(true); }}
+									onClick={() => onClickResponse({
+										response: true,
+									})}
 								>
 									Approve
 								</Button>
@@ -102,7 +108,9 @@ function CollectionPartyCard({
 									size="md"
 									themeType="secondary"
 									style={{ border: '1px solid #ed3726' }}
-									onClick={() => { onClickResponse(false); }}
+									onClick={() => onClickResponse({
+										response: false,
+									})}
 								>
 									Reject
 								</Button>
@@ -113,7 +121,7 @@ function CollectionPartyCard({
 					<div
 						className={styles.caret}
 						onClick={() => {
-							setShowDetails(true);
+							onTabClick({ tabName: PRESENT_TAB });
 						}}
 						role="presentation"
 					>
@@ -123,7 +131,7 @@ function CollectionPartyCard({
 				) }
 
 			</div>
-			{showDetails ? (
+			{showTab ? (
 				<div>
 					<div className={styles.hr} />
 

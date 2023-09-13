@@ -79,6 +79,7 @@ function ViewInvoices() {
 				jobType={jobType}
 				billId={billId}
 				lineItemsCheck={checkItem?.lineItemsCheck}
+				checkItem={checkItem}
 				setCheckItem={setCheckItem}
 			/>
 		</div>

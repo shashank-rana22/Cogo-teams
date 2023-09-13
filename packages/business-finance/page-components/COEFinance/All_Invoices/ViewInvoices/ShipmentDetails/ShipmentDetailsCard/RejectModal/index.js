@@ -141,7 +141,7 @@ function RejectModal({
 				)}
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={onSubmit}>Submit</Button>
+				<Button onClick={() => onSubmit(id)}>Submit</Button>
 			</Modal.Footer>
 		</Modal>
 	);

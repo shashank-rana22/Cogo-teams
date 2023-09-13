@@ -110,6 +110,7 @@ interface ShipmentDetailsInterface {
 	billId?:string;
 	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
 	lineItemsCheck?: boolean;
+	checkItem?: object;
 }
 
 function ShipmentDetails({
@@ -122,10 +123,9 @@ function ShipmentDetails({
 	jobType = '',
 	billId = '',
 	lineItemsCheck = false,
+	checkItem = {},
 	setCheckItem = (prop) => (prop),
 }: ShipmentDetailsInterface) {
-	const [showDetails, setShowDetails] = useState(false);
-	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
@@ -146,10 +146,29 @@ function ShipmentDetails({
 
 	const jobTypeValue = jobType?.toLowerCase();
 
-	const onAccept = ({ valueName = '', setCloseDetails = (prop) => prop }) => {
-		setCloseDetails(false);
+	const [tab, setTab] = useState({
+		shipmentDetailsTab : true,
+		documentsTab       : false,
+		taggingTab         : false,
+		sidDataTab         : false,
+		collectionPartyTab : false,
+		billingPartyTab    : false,
+		invoiceDetailsTab  : false,
+		lineItemsTab       : false,
+	});
+	const onTabClick = ({ tabName = '' }) => {
+		setTab(
+			(prev: any) => ({ ...prev, [tabName]: !prev[tabName] }),
+		);
+	};
+
+	const onAccept = ({ tabName = '', tabToOpen = '', timelineItem = '' }) => {
+		onTabClick({ tabName });
+		setTab(
+			(prev: any) => ({ ...prev, [tabToOpen]: true }),
+		);
 		setCheckItem(
-			(prev: any) => ({ ...prev, [valueName]: true }),
+			(prev: any) => ({ ...prev, [timelineItem]: true }),
 		);
 	};
 
@@ -179,9 +198,7 @@ function ShipmentDetails({
 					<div className={styles.card}>
 						<div
 							className={styles.card_upper}
-							onClick={() => {
-								setShowDetails(!showDetails);
-							}}
+							onClick={() => onTabClick({ tabName: 'shipmentDetailsTab' })}
 							role="presentation"
 						>
 							<div className={styles.sub_container}>
@@ -211,15 +228,11 @@ function ShipmentDetails({
 									</div>
 								)}
 							</div>
-
 							<div
 								className={styles.caret}
-								onClick={() => {
-									setShowDetails(!showDetails);
-								}}
 								role="presentation"
 							>
-								{showDetails ? (
+								{tab.shipmentDetailsTab ? (
 									<IcMArrowRotateUp height="17px" width="17px" />
 								) : (
 									<IcMArrowRotateDown height="17px" width="17px" />
@@ -227,7 +240,7 @@ function ShipmentDetails({
 							</div>
 						</div>
 
-						{showDetails && (
+						{tab.shipmentDetailsTab && (
 							<div className={styles.shipment_container_section}>
 								<div className={styles.details}>
 									<Details
@@ -239,9 +252,11 @@ function ShipmentDetails({
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
+									disabled={checkItem.shipmentDetailsCheck}
 									onClick={() => onAccept({
-										valueName       : 'shipmentDetailsCheck',
-										setCloseDetails : setShowDetails,
+										tabName      : 'shipmentDetailsTab',
+										tabToOpen    : 'documentsTab',
+										timelineItem : 'shipmentDetailsCheck',
 									})}
 									className={styles.approve_button}
 								>
@@ -253,9 +268,7 @@ function ShipmentDetails({
 
 					<div
 						className={styles.card}
-						onClick={() => {
-							setShowDocuments(!showDocuments);
-						}}
+						onClick={() => onTabClick({ tabName: 'documentsTab' })}
 						role="presentation"
 					>
 						<div className={styles.card_upper}>
@@ -269,32 +282,31 @@ function ShipmentDetails({
 
 							<div
 								className={styles.caret}
-								onClick={() => {
-									setShowDocuments(!showDocuments);
-								}}
 								role="presentation"
 							>
-								{showDocuments ? (
+								{tab.documentsTab ? (
 									<IcMArrowRotateUp height="17px" width="17px" />
 								) : (
 									<IcMArrowRotateDown height="17px" width="17px" />
 								)}
 							</div>
 						</div>
-						{showDocuments && <div className={styles.hr} />}
+						{tab.documentsTab && <div className={styles.hr} />}
 						<div className={styles.documents}>
-							{showDocuments && <Documents shipmentId={shipmentId} />}
+							{tab.documentsTab && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
-						{showDocuments && (
+						{tab.documentsTab && (
 							<div className={styles.apply_section}>
 								<Button
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
+									disabled={checkItem.documentsCheck}
 									onClick={() => onAccept({
-										valueName       : 'documentsCheck',
-										setCloseDetails : setShowDocuments,
+										tabName      : 'documentsTab',
+										tabToOpen    : 'taggingTab',
+										timelineItem : 'documentsCheck',
 									})}
 									className={styles.approve_button}
 								>
@@ -309,11 +321,21 @@ function ShipmentDetails({
 							billId={billId}
 							setRemarksVal={setRemarksVal}
 							status={status}
-							setCheckItem={setCheckItem}
+							onTabClick={onTabClick}
+							onAccept={onAccept}
+							showTab={tab.taggingTab}
+							taggingChecked={checkItem.taggingCheck}
 						/>
 					</div>
 
-					<SIDView shipmentId={jobNumber} setCheckItem={setCheckItem} />
+					<SIDView
+						shipmentId={jobNumber}
+						onTabClick={onTabClick}
+						onAccept={onAccept}
+						showTab={tab.sidDataTab}
+						sidDataChecked={checkItem.sidDataCheck}
+					/>
+
 				</>
 			)}
 			<div>
@@ -378,6 +400,9 @@ function ShipmentDetails({
 						invoiceStatus={status}
 						lineItemsCheck={lineItemsCheck}
 						setCheckItem={setCheckItem}
+						onAccept={onAccept}
+						onTabClick={onTabClick}
+						tab={tab}
 					/>
 				</div>
 			</div>

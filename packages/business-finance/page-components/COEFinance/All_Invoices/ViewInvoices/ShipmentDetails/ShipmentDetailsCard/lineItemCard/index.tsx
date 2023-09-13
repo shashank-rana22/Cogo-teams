@@ -43,12 +43,16 @@ interface LineItemCardInterface {
 	paidTds: string | number;
 	subTotal: string | number;
 	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
+	onTabClick: Function;
+	showTab: boolean;
 }
 
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
 const DEFAULT_ZERO_VALUE = 0;
+const PRESENT_TAB = 'lineItemsTab';
+
 function LineItemCard({
 	lineItems = [],
 	bill = {
@@ -66,8 +70,9 @@ function LineItemCard({
 	paidTds = 0,
 	subTotal = 0,
 	setCheckItem = (prop) => (prop),
+	onTabClick = (prop) => (prop),
+	showTab = false,
 }: LineItemCardInterface) {
-	const [showDetails, setShowDetails] = useState(false);
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
 	const [rejectedItems, setRejectedItems] = useState({});
@@ -202,7 +207,7 @@ function LineItemCard({
 				<div className={styles.main_header}>
 					<div className={styles.instructions}>
 						Line Items and Tax Rates
-						{showDetails ? (
+						{showTab ? (
 							<div className={styles.pill_tooltip}>
 								<Tooltip
 									content={(
@@ -217,7 +222,7 @@ function LineItemCard({
 						) : undefined}
 					</div>
 
-					{showDetails && (
+					{showTab && (
 						<div>
 							{!isInvoiceApproved && (
 								<div className={styles.header_detail}>
@@ -234,21 +239,21 @@ function LineItemCard({
 				<div
 					className={styles.caret}
 					onClick={() => {
-						setShowDetails(!showDetails);
+						onTabClick({ tabName: PRESENT_TAB });
 					}}
 					role="presentation"
 				>
-					{showDetails ? (
+					{showTab ? (
 						<IcMArrowRotateUp height="17px" width="17px" />
 					) : (
 						<IcMArrowRotateDown height="17px" width="17px" />
 					)}
 				</div>
 			</div>
-			{showDetails ? <div className={styles.hr} /> : undefined}
+			{showTab ? <div className={styles.hr} /> : undefined}
 
 			<div>
-				{showDetails ? (
+				{showTab ? (
 					<div className={styles.container}>
 						<List
 							config={LINE_ITEMS}
