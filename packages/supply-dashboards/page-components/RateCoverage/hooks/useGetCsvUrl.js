@@ -1,11 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
+
+const END_POINT_MAPPING = {
+	fcl_freight : 'get_fcl_freight_rate_job_csv_url',
+	air_freight : 'get_air_freight_rate_job_csv_url',
+};
 
 const useGetCsvFile = (filter, activeCard) => {
-	const END_POINT = 'generate_csv_file_url';
-
+	const [urlList, setUrlList] = useState([]);
 	const [{ loading }, trigger] = useRequest({
-		url    : END_POINT,
+		url    : END_POINT_MAPPING[filter?.service],
 		method : 'GET',
 	}, { manual: true });
 
@@ -35,17 +40,17 @@ const useGetCsvFile = (filter, activeCard) => {
 				},
 			});
 			if (resp?.data) {
-				return resp?.data?.url;
+				setUrlList(resp?.data?.urls || []);
 			}
 		} catch (err) {
 			Toast.error('Download failed');
 		}
-		return null;
 	};
 
 	return {
 		loading,
 		getCsvFile,
+		urlList,
 	};
 };
 

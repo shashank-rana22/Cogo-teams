@@ -72,3 +72,9 @@
 	border: 1px solid transparent;
 	border-radius: 8px;
 }
+
+.url_container{
+	display: flex;
+	max-width: 120px;
+	flex-wrap: wrap;
+}
