@@ -94,9 +94,7 @@ function useGetAsyncOptions({
 			const res = await triggerSingle({
 				params: merge(params, { filters: { [valueKey]: value } }),
 			});
-			const newOptions = typeof getModifiedOptions === 'function'
-				? getModifiedOptions({ options: res?.data?.list }) : res?.data?.list;
-			return newOptions?.[GLOBAL_CONSTANTS.zeroth_index] || null;
+			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			// console.log(err);
 			return {};
