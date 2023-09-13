@@ -1,20 +1,13 @@
 import { Button } from '@cogoport/components';
-import {
-	AsyncSelectController,
-	ChipsController,
-	CreatableSelectController,
-	InputController, MobileNumberController,
-	TextAreaController,
-	UploadController,
-	useForm,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getFieldController } from '@cogoport/ocean-modules/utils/getFieldController';
 import { useEffect, useState } from 'react';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
+import getControls from './getControls';
 import styles from './styles.module.css';
 
 function Error(key, errors) {
@@ -26,8 +19,7 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 
 	const { loading = false, defaultValues = {} } = useListOrganizationUsers({ orgId });
 
-	const { control, reset, formState:{ errors = {} }, handleSubmit, watch } = useForm();
-	const { ...formValues } = watch();
+	const { control, reset, formState:{ errors = {} }, handleSubmit } = useForm();
 
 	const {
 		onSubmit = () => {},
@@ -39,171 +31,39 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 		isDefaultData : false,
 	});
 
+	const { controls = [] } = getControls({ setCountryId, countryValidation });
+
 	useEffect(() => {
 		reset(defaultValues);
 	}, [reset, defaultValues]);
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.form_container}>
-				<div className={styles.first_container}>
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Company Name</label>
+			<div className={styles.flex_container}>
+				{controls?.map((cntrl) => {
+					const { type = '', name = '', styles: style = {}, label = '' } = cntrl;
 
-						<InputController
-							name="business_name"
-							control={control}
-							size="sm"
-							rules={{ required: 'Company Name is required' }}
-							placeholder="Enter Company Name"
-						/>
-						{Error('business_name', errors)}
-					</div>
+					const Element = getFieldController(type);
 
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Pincode / Zip Code</label>
+					return (
+						<>
+							<div
+								className={styles.form_item_container}
+								key={name}
+								style={style}
+							>
+								<label className={styles.form_label}>{label}</label>
 
-						<AsyncSelectController
-							size="sm"
-							control={control}
-							name="pincode"
-							asyncKey="list_locations"
-							valueKey="postal_code"
-							initialCall
-							rules={{ required: 'Pincode is required' }}
-							getSelectedOption={(val) => setCountryId(val?.country_id)}
-						/>
-						{Error('pincode', errors)}
-					</div>
+								<Element
+									control={control}
+									{...cntrl}
+								/>
+							</div>
 
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>
-							{countryValidation?.others?.identification_number?.labelNumber || 'GST'}
-						</label>
-
-						<InputController
-							size="sm"
-							name="tax_number"
-							control={control}
-							rules={{
-								pattern: {
-									value: countryId !== GLOBAL_CONSTANTS.country_ids.VN
-										? countryValidation?.regex?.GST : undefined,
-									message: `${countryValidation?.others?.identification_number?.label} 
-									Number is Invalid`,
-								},
-							}}
-						/>
-						{Error('tax_number', errors)}
-					</div>
-				</div>
-
-				<div className={styles.address_container}>
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Address</label>
-
-						<TextAreaController
-							control={control}
-							name="address"
-							rows={3}
-							placeholder="Enter Address"
-							rules={{ required: 'Address is required' }}
-						/>
-						{Error('address', errors)}
-					</div>
-
-					<div className={styles.sub_container}>
-						<label className={styles.form_label}>Is your Address SEZ ?</label>
-						<div>
-							<ChipsController
-								name="is_sez"
-								label="Reason for contact ?"
-								control={control}
-								rules={{ required: 'Required' }}
-								options={[
-									{
-										label : 'Yes',
-										value : 'yes',
-									},
-									{
-										label : 'No',
-										value : 'no',
-									}]}
-							/>
-						</div>
-					</div>
-
-				</div>
-
-				<div className={styles.upload_container}>
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>
-							{/* {taxLabel} */}
-							{' '}
-							Proof
-						</label>
-
-						<UploadController
-							className="tax_document"
-							name="tax_number_document_url"
-							disabled={formValues?.not_reg_under_gst}
-							control={control}
-							rules={{
-								required: {
-									value: !formValues?.not_reg_under_gst,
-									// message : `${taxLabel} Proof is required`,
-								},
-							}}
-						/>
-						{Error('tax_number_document_url', errors)}
-					</div>
-				</div>
-
-				<div className={styles.first_container}>
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>POC Name</label>
-						<CreatableSelectController
-							size="sm"
-							control={control}
-							name="name"
-							placeholder="Enter your POC Name"
-						/>
-					</div>
-
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Mobile Number</label>
-						<MobileNumberController
-							size="sm"
-							control={control}
-							name="mobile_number"
-							styles={{ flex: '1 1 10%' }}
-							rules={{
-								pattern: {
-									value   : countryValidation?.regex?.MOBILE_NUMBER,
-									message : 'Mobile Number is Invalid',
-								},
-							}}
-						/>
-						{Error('mobile_number', errors)}
-					</div>
-
-					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>Email</label>
-						<InputController
-							size="sm"
-							control={control}
-							name="email"
-							rules={{
-								required : 'Email is required',
-								pattern  : {
-									value   : countryValidation?.regex?.EMAIL,
-									message : 'Enter Valid Email Address',
-								},
-							}}
-						/>
-						{Error('email', errors)}
-					</div>
-				</div>
+							{Error(name, errors)}
+						</>
+					);
+				})}
 			</div>
 
 			<div className={styles.button_container}>

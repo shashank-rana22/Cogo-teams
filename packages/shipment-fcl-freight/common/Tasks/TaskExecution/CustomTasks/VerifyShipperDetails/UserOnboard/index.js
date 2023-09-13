@@ -84,20 +84,20 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 
 				<div className={styles.form_item_container}>
 					<label className={styles.form_label}>
-						{countryValidation?.others?.identification_number?.label || 'PAN'}
+						{countryValidation?.others?.pan_number?.label || 'PAN'}
 					</label>
 
 					<InputController
 						size="sm"
 						name="registration_number"
 						control={control}
-						placeholder={`Enter ${countryValidation?.others?.identification_number?.label || 'PAN'}`}
+						placeholder={`Enter ${countryValidation?.others?.pan_number?.label || 'PAN'}`}
 						value={listLeadsData?.registration_number}
 						rules={{
-							required : { value: !formValues?.registration_number, message: 'GST number is required' },
+							required : { value: !formValues?.pan_number, message: 'PAN number is required' },
 							pattern  : {
-								value   : countryValidation?.regex?.TAX,
-								message : `${countryValidation?.others?.identification_number?.label}
+								value   : countryValidation?.others?.pan_number?.pattern,
+								message : `${countryValidation?.others?.pan_number?.label}
 								Number is invalid`,
 							},
 						}}
