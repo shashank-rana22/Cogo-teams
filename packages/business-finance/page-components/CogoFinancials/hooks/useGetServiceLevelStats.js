@@ -14,6 +14,7 @@ const useGetServiceLevelStats = ({
 	customDate = new Date(),
 	specificServiceLevel = null,
 	serviceLevel,
+	isCancelledExcluded = false,
 }) => {
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 
@@ -45,6 +46,7 @@ const useGetServiceLevelStats = ({
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
+			isCancelledExcluded,
 		};
 
 		// no api call if no custom date & range selected
@@ -60,7 +62,7 @@ const useGetServiceLevelStats = ({
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
 		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY,
-		serviceLevel,
+		serviceLevel, isCancelledExcluded,
 	]);
 
 	useEffect(() => {

@@ -14,10 +14,15 @@ const ROUTES_MAPPING = {
 };
 
 const getButtonOptions = ({
-	setShowRaiseTicket,
-	setShowPocModal, setShowPopover, shipmentItem,
+	setShowRaiseTicket = () => {},
+	setShowPocModal = () => {},
+	setShowPopover = () => {},
+	shipmentItem = {},
 	showAddPrimaryUserButton = false,
 	handleRowClick = () => {},
+	setActiveTab = () => {},
+	sid = '',
+	showModalType = () => {},
 }) => [
 	{
 		key      : 'view_shipments',
@@ -61,14 +66,47 @@ const getButtonOptions = ({
 		condition : ['all_shipments', 'user_shipments'],
 		show      : showAddPrimaryUserButton,
 	},
+	{
+		key      : 'show_notes_modal',
+		children : 'Notes',
+		onClick  : (e) => {
+			e.stopPropagation();
+			showModalType({ modalType: 'show_notes_modal', shipmentData: shipmentItem });
+			setShowPopover('');
+		},
+		condition : ['all_shipments'],
+		show      : true,
+	},
+	{
+		key      : 'open_emails',
+		children : 'Open Emails',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setActiveTab((prev) => ({
+				...prev,
+				data          : {},
+				tab           : 'firebase_emails',
+				subTab        : 'hidden_filter',
+				hiddenFilters : { sid },
+			}));
+			setShowPopover('');
+		},
+		condition : ['all_shipments'],
+		show      : true,
+	},
 ];
 
 function HeaderBlock({
-	shipmentItem = {}, setShowPocDetails = () => {},
-	type = '', setShowPopover = () => {}, showPopover = '',
+	shipmentItem = {},
+	setShowPocDetails = () => {},
+	type = '',
+	setShowPopover = () => {},
+	showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	handleShipmentChat = () => {},
+	setActiveTab = () => {},
+	showModalType = () => {},
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
@@ -120,6 +158,9 @@ function HeaderBlock({
 		shipmentItem,
 		showAddPrimaryUserButton,
 		handleRowClick,
+		setActiveTab,
+		sid: serial_id,
+		showModalType,
 	});
 
 	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type) && itm?.show);

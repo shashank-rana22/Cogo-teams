@@ -63,16 +63,28 @@ const useGetListCoverage = () => {
 			}
 		});
 
+		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
+
+		const DATE_PARAMS = {};
+
+		if (isTodayDateRequired) {
+			DATE_PARAMS.start_date = new Date();
+		}
+		if (isTodayDateRequired) {
+			DATE_PARAMS.end_date = new Date();
+		}
+		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
+		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
+
 		try {
 			await trigger({
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						serial_id  : sid ? parseInt(sid, 10) : undefined,
-						source     : source || undefined,
-						user_id    : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
-						start_date : filter?.start_date,
-						end_date   : filter?.end_date,
+						serial_id : sid ? parseInt(sid, 10) : undefined,
+						source    : source || undefined,
+						user_id   : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						...DATE_PARAMS,
 					},
 					page,
 				},

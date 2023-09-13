@@ -123,5 +123,5 @@ export function getShipmentSpecialistButtons({
 		return ['add_me_to_group'];
 	}
 
-	return ['request_for_assign'];
+	return ['request_for_assign', 'add_me_to_group'];
 }

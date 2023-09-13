@@ -72,6 +72,8 @@ function DetailsForm({ errors, control, handleEntityChange, fromCurrency, toCurr
 						name="accountingDate"
 						placeholder="Accounting Date"
 						rules={{ required: true }}
+						isPreviousDaysAllowed
+						maxDate={new Date()}
 					/>
 					{errors?.accountingDate ? (
 						<div className={styles.errors}>
