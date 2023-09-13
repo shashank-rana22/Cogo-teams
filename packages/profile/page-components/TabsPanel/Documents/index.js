@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import PopupModal from '../../../common/Modal';
 import StyledTable from '../../../common/StyledTable';
 import { getTablesData } from '../../../utils/constants';
 import { otherDocumentsInfo } from '../../../utils/otherInfo';
@@ -9,7 +10,12 @@ import styles from './styles.module.css';
 import useGetColumns from './useGetColumns';
 
 function Documents({ data: employeeData = {} }) {
-	const columns = useGetColumns();
+	const [show, setShow] = useState(false);
+
+	const [name, setName] = useState('');
+	const [url, setUrl] = useState('');
+
+	const columns = useGetColumns(setShow, setName, setUrl);
 
 	const { signed_documents, other_documents } = employeeData;
 	const tablesData = getTablesData(signed_documents, other_documents);
@@ -28,6 +34,7 @@ function Documents({ data: employeeData = {} }) {
 						<div className={styles.info_subcontainer} key={heading}>
 							<span className={styles.info_heading}>{heading}</span>
 							<StyledTable columns={columns} data={data} className="salary_table" />
+							<PopupModal show={show} onClose={() => setShow(false)} name={name} url={url} key={name} />
 						</div>
 					),
 				)}

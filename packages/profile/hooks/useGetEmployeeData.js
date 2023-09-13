@@ -16,9 +16,7 @@ const useGetEmployeeDetails = (user_id = '') => {
 	}, [user_id, trigger]);
 
 	useEffect(() => {
-		console.log('here', user_id);
 		if (user_id) {
-			console.log('here1', user_id);
 			try {
 				getEmployeeDetails();
 			} catch (error) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { otherInfo } from '../../../utils/info';
-import { otherOtherInfo } from '../../../utils/otherInfo';
+import { otherDocumentsInfo } from '../../../utils/otherInfo';
 import DetailsCard from '../DetailsCard';
 import RightGlance from '../RightGlance';
 
@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function OtherDetails({ data = {}, loading = false }) {
 	const info = otherInfo;
-	const otherInformation = otherOtherInfo;
+	const otherInformation = otherDocumentsInfo;
 
 	return (
 		<div className={styles.tab_content}>

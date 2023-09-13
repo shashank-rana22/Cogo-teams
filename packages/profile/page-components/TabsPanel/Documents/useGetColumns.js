@@ -3,7 +3,7 @@ import { IcMDownload } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const useGetColumns = () => ([
+const useGetColumns = (setShow = () => {}, setName = () => {}, setUrl = () => {}) => ([
 	{
 		Header   : 'NAME',
 		accessor : (item) => (<div className={styles.table_item}>{item.name}</div>),
@@ -16,7 +16,7 @@ const useGetColumns = () => ([
 	},
 	{
 		Header   : 'ACTION',
-		accessor : () => (
+		accessor : (item) => (
 			<div className={styles.table_item}>
 				<Button
 					size="md"
@@ -29,6 +29,7 @@ const useGetColumns = () => ([
 					size="md"
 					themeType="secondary"
 					className={styles.view_button}
+					onClick={() => { setShow(true); setUrl(item.url); setName(item.name); }}
 				>
 					<span className={styles.view_text}>View</span>
 				</Button>

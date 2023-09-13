@@ -40,11 +40,3 @@ export const otherDocumentsInfo = [
 	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
 	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
 ];
-
-export const otherOtherInfo = [
-	{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
-	{ label: 'Age in Organsization', key: 'processed', value: 'age_in_organization' },
-	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
-	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
-	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
-];
