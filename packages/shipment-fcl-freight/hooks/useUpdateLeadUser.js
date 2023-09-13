@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-function useUpdateLeadUser({ listLeadsData = {} }) {
+function useUpdateLeadUser({ selectedUserId = '', setIsEditMode = () => {}, refetchList = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_lead_user',
 		method : 'POST',
@@ -13,6 +13,10 @@ function useUpdateLeadUser({ listLeadsData = {} }) {
 			await trigger({ data: payload });
 
 			Toast.success('Successful');
+
+			setIsEditMode(null);
+
+			refetchList();
 		} catch (error) {
 			toastApiError(error);
 		}
@@ -24,9 +28,9 @@ function useUpdateLeadUser({ listLeadsData = {} }) {
 		const PAYLOAD = {
 			name,
 			email,
-			mobile_number        : mobile_number?.number,
-			mobile_country_code  : mobile_number?.country_code,
-			lead_organization_id : listLeadsData?.id,
+			mobile_number       : mobile_number?.number,
+			mobile_country_code : mobile_number?.country_code,
+			id                  : selectedUserId,
 		};
 
 		updateLeadUser({ payload: PAYLOAD });

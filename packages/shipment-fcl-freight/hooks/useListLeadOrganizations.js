@@ -31,9 +31,9 @@ function useListLeadOrganizations({ task = {} }) {
 				} = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 				setDefaultValues({
-					company_name : business_name,
+					company_name: business_name,
 					country_id,
-					gst_number   : registration_number,
+					registration_number,
 				});
 
 				setListLeadsData(res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index]);
@@ -52,7 +52,7 @@ function useListLeadOrganizations({ task = {} }) {
 		setListLeadsData,
 		defaultValues,
 		loading,
-		getListLeadOrganizations,
+		refetchList: getListLeadOrganizations,
 	};
 }
 

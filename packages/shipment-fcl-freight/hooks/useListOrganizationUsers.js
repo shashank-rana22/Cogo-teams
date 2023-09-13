@@ -3,17 +3,17 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-function useListOrganizations({ orgId = '' }) {
+function useListOrganizationUsers({ orgId = '' }) {
 	const [data, setData] = useState({});
 	const [defaultValues, setDefaultValues] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_organization_billing_addresses',
+		url    : '/list_organization_users',
 		method : 'GET',
 		params : {
 			filters: {
-				organization_id  : orgId,
-				trade_party_type : 'self',
+				organization_id : orgId,
+				status          : 'active',
 			},
 		},
 	}, { manual: false });
@@ -23,16 +23,19 @@ function useListOrganizations({ orgId = '' }) {
 			try {
 				const res = await trigger();
 
-				setData(res?.data || {});
+				const pocData = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
+				const { business_name } = pocData?.organization || {};
 
-				const list = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
+				setData(pocData);
 
 				setDefaultValues({
-					business_name           : list?.name,
-					pincode                 : list?.pincode,
-					tax_number              : list?.tax_number,
-					address                 : list?.address,
-					tax_number_document_url : list?.tax_number_document_url,
+					business_name,
+					name          : pocData?.name,
+					email         : pocData?.email,
+					mobile_number : {
+						number       : pocData?.mobile_number,
+						country_code : pocData?.mobile_country_code,
+					},
 				});
 			} catch (error) {
 				toastApiError(error);
@@ -47,12 +50,10 @@ function useListOrganizations({ orgId = '' }) {
 
 	return {
 		loading,
-		listData: data?.list?.[GLOBAL_CONSTANTS.zeroth_index],
+		data,
 		defaultValues,
-		setDefaultValues,
-		setData,
 		getListOrganizations,
 	};
 }
 
-export default useListOrganizations;
+export default useListOrganizationUsers;

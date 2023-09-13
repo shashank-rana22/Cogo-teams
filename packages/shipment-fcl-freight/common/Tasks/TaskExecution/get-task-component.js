@@ -89,8 +89,8 @@ const getTaskComponent = ({
 		[VERIFY_SHIPPER_DETAILS]: {
 			task,
 			onCancel,
-			refetch      : taskListRefetch,
-			shipmentData : shipment_data,
+			refetch: taskListRefetch,
+			shipment_data,
 		},
 		[UPDATE_NOMINATION_DETAILS]: {
 			primaryService : primary_service,

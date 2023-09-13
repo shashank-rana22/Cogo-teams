@@ -9,10 +9,11 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import { useEffect } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useEffect, useState } from 'react';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
-import useListOrganizations from '../../../../../../hooks/useListOrganizations';
+import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
 import styles from './styles.module.css';
 
@@ -21,7 +22,9 @@ function Error(key, errors) {
 }
 
 function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
-	const { loading = false, listData = {}, defaultValues = {} } = useListOrganizations({ orgId });
+	const [countryId, setCountryId] = useState('');
+
+	const { loading = false, defaultValues = {} } = useListOrganizationUsers({ orgId });
 
 	const { control, reset, formState:{ errors = {} }, handleSubmit, watch } = useForm();
 	const { ...formValues } = watch();
@@ -32,7 +35,7 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 	} = useCreateAutoUpsellService({ task, refetch });
 
 	const countryValidation = getCountryConstants({
-		country_id    : listData?.country_id,
+		country_id    : countryId,
 		isDefaultData : false,
 	});
 
@@ -68,12 +71,15 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 							valueKey="postal_code"
 							initialCall
 							rules={{ required: 'Pincode is required' }}
+							getSelectedOption={(val) => setCountryId(val?.country_id)}
 						/>
 						{Error('pincode', errors)}
 					</div>
 
 					<div className={styles.form_item_container}>
-						<label className={styles.form_label}>GST Number</label>
+						<label className={styles.form_label}>
+							{countryValidation?.others?.identification_number?.labelNumber || 'GST'}
+						</label>
 
 						<InputController
 							size="sm"
@@ -81,8 +87,10 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 							control={control}
 							rules={{
 								pattern: {
-									value   : countryValidation?.regex?.TAX,
-									message : 'Tax Number is Invalid',
+									value: countryId !== GLOBAL_CONSTANTS.country_ids.VN
+										? countryValidation?.regex?.GST : undefined,
+									message: `${countryValidation?.others?.identification_number?.label} 
+									Number is Invalid`,
 								},
 							}}
 						/>
@@ -143,7 +151,7 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 							rules={{
 								required: {
 									value: !formValues?.not_reg_under_gst,
-								// message : `${taxLabel} Proof is required`,
+									// message : `${taxLabel} Proof is required`,
 								},
 							}}
 						/>

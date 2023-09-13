@@ -20,7 +20,7 @@ function Error(key, errors) {
 function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 	const {
 		control,
-		formState:{ errors = {}, isValid = false },
+		formState:{ errors = {} },
 		handleSubmit,
 		reset,
 		watch,
@@ -42,7 +42,7 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 			business_name       : values?.company_name,
 			id                  : listLeadsData?.id,
 			country_id          : values?.country_id,
-			registration_number : values?.gst_number,
+			registration_number : values?.registration_number,
 
 		};
 
@@ -83,24 +83,26 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 				</div>
 
 				<div className={styles.form_item_container}>
-					<label className={styles.form_label}>GST</label>
+					<label className={styles.form_label}>
+						{countryValidation?.others?.identification_number?.label || 'PAN'}
+					</label>
 
 					<InputController
 						size="sm"
-						name="gst_number"
+						name="registration_number"
 						control={control}
-						placeholder="Enter GST"
+						placeholder={`Enter ${countryValidation?.others?.identification_number?.label || 'PAN'}`}
 						value={listLeadsData?.registration_number}
 						rules={{
-							required : { value: !formValues?.gst_number, message: 'GST number is required' },
+							required : { value: !formValues?.registration_number, message: 'GST number is required' },
 							pattern  : {
-								value   : countryValidation?.regex?.GST,
-								message : `
-									${countryValidation?.others?.identification_number?.label} Number is invalid`,
+								value   : countryValidation?.regex?.TAX,
+								message : `${countryValidation?.others?.identification_number?.label}
+								Number is invalid`,
 							},
 						}}
 					/>
-					{Error('gst_number', errors)}
+					{Error('registration_number', errors)}
 				</div>
 			</div>
 
@@ -108,7 +110,8 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 				<Button
 					themeType="accent"
 					onClick={handleSubmit(updateDetails)}
-					disabled={isValid || isEqual(formValues, defaultValues) || updateLoading}
+					disabled={isEqual(formValues, defaultValues) || updateLoading}
+					loading={updateLoading}
 				>
 					Update
 				</Button>

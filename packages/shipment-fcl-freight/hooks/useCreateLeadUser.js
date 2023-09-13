@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-function useCreateLeadUser({ listLeadsData = {} }) {
+function useCreateLeadUser({ listLeadsData = {}, refetchList = () => {}, setShowCreatePoc = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user',
 		method : 'POST',
@@ -13,6 +13,10 @@ function useCreateLeadUser({ listLeadsData = {} }) {
 			await trigger({ data: payload });
 
 			Toast.success('Successful');
+
+			setShowCreatePoc(false);
+
+			refetchList();
 		} catch (error) {
 			toastApiError(error);
 		}

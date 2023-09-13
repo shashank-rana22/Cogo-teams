@@ -15,7 +15,7 @@ import getColumns from './getColumns';
 import styles from './styles.module.css';
 
 function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }) {
-	const [isEditMode, setIsEditMode] = useState(null);
+	const [selectedUserId, setSelectedUserId] = useState(null);
 	const [showCreatePoc, setShowCreatePoc] = useState(false);
 
 	const { control, handleSubmit } = useForm();
@@ -24,11 +24,8 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 		loading = false,
 		listLeadsData = {},
 		defaultValues = {},
+		refetchList = () => {},
 	} = useListLeadOrganizations({ task });
-
-	const { onUpdateLeadUser = () => {}, updateLoading = false } = useUpdateLeadUser({ listLeadsData });
-
-	const { onCreateLeadUser = () => {}, createUserLoading = false } = useCreateLeadUser({ listLeadsData });
 
 	const {
 		onVerify = () => {},
@@ -37,7 +34,24 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 		createOrgLoading = false,
 	} = useCreateLeadOrganizationToAccount({ listLeadsData, setStep, setOrgId, task });
 
-	const columns = getColumns({ setIsEditMode, isEditMode, control, setCheckList, handleSubmit, onUpdateLeadUser });
+	const {
+		onUpdateLeadUser = () => {},
+		updateLoading = false,
+	} = useUpdateLeadUser({ selectedUserId, setSelectedUserId, refetchList });
+
+	const {
+		onCreateLeadUser = () => {},
+		createUserLoading = false,
+	} = useCreateLeadUser({ listLeadsData, refetchList, setShowCreatePoc });
+
+	const columns = getColumns({
+		setSelectedUserId,
+		selectedUserId,
+		control,
+		setCheckList,
+		handleSubmit,
+		onUpdateLeadUser,
+	});
 
 	return (
 		<>

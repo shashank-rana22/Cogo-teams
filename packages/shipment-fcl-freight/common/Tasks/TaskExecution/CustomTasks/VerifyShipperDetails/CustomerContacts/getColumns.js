@@ -5,8 +5,8 @@ import { IcMEdit } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function getColumns({
-	isEditMode = false,
-	setIsEditMode = () => {},
+	selectedUserId = '',
+	setSelectedUserId = () => {},
 	control = {},
 	setCheckList = () => {},
 	handleSubmit = () => {},
@@ -18,7 +18,7 @@ function getColumns({
 			Header   : 'Select',
 			accessor : (item) => (
 				<Checkbox
-					disabled={isEditMode === item?.id}
+					disabled={selectedUserId === item?.id}
 					onChange={(event) => {
 						setCheckList(() => {
 							if (event?.target?.checked) {
@@ -34,7 +34,7 @@ function getColumns({
 			id       : 'contact_name',
 			Header   : 'Name',
 			accessor : (item) => (
-				isEditMode === item?.id ? (
+				selectedUserId === item?.id ? (
 					<InputController
 						size="sm"
 						name="name"
@@ -49,7 +49,7 @@ function getColumns({
 			id       : 'contact_email',
 			Header   : 'Email',
 			accessor : (item) => (
-				isEditMode === item?.id ? (
+				selectedUserId === item?.id ? (
 					<InputController
 						size="sm"
 						name="email"
@@ -64,13 +64,16 @@ function getColumns({
 			id       : 'contact_number',
 			Header   : 'Mobile Number',
 			accessor : (item) => (
-				isEditMode === item?.id
+				selectedUserId === item?.id
 					? (
 						<MobileNumberController
 							size="sm"
 							name="mobile_number"
 							control={control}
-							value={item?.mobile_number}
+							value={{
+								number       : item?.mobile_number,
+								country_code : item?.mobile_country_code,
+							}}
 							placeholder="Enter Mobile Number"
 						/>
 					) : `${item?.mobile_country_code} ${item?.mobile_number}`
@@ -81,7 +84,7 @@ function getColumns({
 			Header   : '',
 			accessor : (item) => (
 				<div className={styles.action_container}>
-					{isEditMode === item?.id
+					{selectedUserId === item?.id
 						? (
 							<>
 								<Button
@@ -93,7 +96,7 @@ function getColumns({
 
 								<Button
 									themeType="tertiary"
-									onClick={() => setIsEditMode(null)}
+									onClick={() => setSelectedUserId(null)}
 								>
 									Cancel
 								</Button>
@@ -101,7 +104,7 @@ function getColumns({
 						) : (
 							<Button
 								themeType="tertiary"
-								onClick={() => { setIsEditMode(item?.id); }}
+								onClick={() => { setSelectedUserId(item?.id); }}
 							>
 								<IcMEdit />
 							</Button>

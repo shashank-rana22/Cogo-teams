@@ -4,28 +4,33 @@ import { useState } from 'react';
 import BillingAddress from './BillingAddress';
 import CustomerContacts from './CustomerContacts';
 
+const COMPONENT_MAPPING = {
+	0 : CustomerContacts,
+	1 : BillingAddress,
+};
+
 function VerifyShipperDetails({
 	task = {},
 	shipment_data = {},
 	refetch = () => {},
 }) {
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
-	// const [step, setStep] = useState('1');
 	const [orgId, setOrgId] = useState(shipment_data?.consignee_shipper_id);
 
+	const componentProps = {
+		0: {
+			setStep, task, setOrgId,
+		},
+		1: {
+			task, shipment_data, refetch, orgId,
+		},
+	};
+
+	const Component = COMPONENT_MAPPING[step] || null;
+	const props = componentProps[step] || {};
+
 	return (
-		<div>
-			{ step === '0' ? (
-				<CustomerContacts setStep={setStep} task={task} setOrgId={setOrgId} />
-
-			) : null}
-
-			{step === '1' ? (
-				<BillingAddress task={task} shipment_data={shipment_data} refetch={refetch} orgId={orgId} />
-
-			) : null}
-		</div>
-
+		<Component {...props} />
 	);
 }
 
