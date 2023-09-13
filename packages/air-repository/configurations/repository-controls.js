@@ -101,7 +101,7 @@ const repositoryControls = (t = () => {}) => ({
 		{
 			name        : 'ams_mode',
 			type        : 'select',
-			placeholder : 'AMS Mode for this Airline Airport Pair',
+			placeholder : t('airRepository:ams_mode_placeholder'),
 			options     : [
 				{
 					label : 'Electronic',
@@ -112,7 +112,7 @@ const repositoryControls = (t = () => {}) => ({
 					value : 'manual',
 				},
 			],
-			label : 'AMS Mode for this Airline Airport Pair',
+			label : t('airRepository:ams_mode_label'),
 			span  : 6,
 			rules : {
 				required: true,

@@ -26,7 +26,14 @@ function POCDetails({ data = {} }) {
 	const {
 		e_booking_availability: eBooking,
 		inventory_stock_availability: availability, pocs_data:pocsData,
+		ams_mode: amsMode,
 	} = data || {};
+	let amsModeValue = '-';
+	if (amsMode === 'electronic') {
+		amsModeValue = 'Electronic';
+	} else if (amsMode === 'manual') {
+		amsModeValue = 'Manual';
+	}
 
 	return (
 		<div className={styles.poc_detail_container}>
@@ -42,6 +49,12 @@ function POCDetails({ data = {} }) {
 						<span>:</span>
 					</div>
 					{availability === 'before_booking' ? t('airRepository:before') : t('airRepository:after')}
+					<div className={cl`${styles.basic_info_heading} ${styles.inventory}`}>
+						{t('airRepository:ams_mode_field_label')}
+						<span>:</span>
+					</div>
+					{amsModeValue}
+
 				</div>
 				<div className={styles.poc_list}>
 					<header className={styles.header}>

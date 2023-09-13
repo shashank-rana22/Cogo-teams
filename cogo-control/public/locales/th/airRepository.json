@@ -77,5 +77,7 @@
     "failed_to_upload":"อัพโหลดล้มเหลว",
     "before":"ก่อน",
     "after":"หลังจาก",
-    "ams_mode_field_label": "โหมดแอม"
+    "ams_mode_field_label": "โหมดแอม",
+    "ams_mode_placeholder": "เลือกโหมด AMS",
+    "ams_mode_label": "โหมด AMS สำหรับคู่สนามบินของสายการบินนี้"
 }
