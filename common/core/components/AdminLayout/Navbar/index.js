@@ -144,6 +144,8 @@ function Navbar({
 						showCount={showCount}
 					/>
 
+					<AdminNotification />
+
 					<div className={styles.search_container}>
 						<Input
 							value={searchString}
@@ -217,13 +219,13 @@ function Navbar({
 						)
 				}
 
-				<AdminNotification
+				{/* <AdminNotification
 					notificationData={notificationData}
 					notificationLoading={notificationLoading}
 					trigger={trigger}
 					openNotificationPopover={openNotificationPopover}
 					setOpenNotificationPopover={setOpenNotificationPopover}
-				/>
+				/> */}
 
 			</div>
 

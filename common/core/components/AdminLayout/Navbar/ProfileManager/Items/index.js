@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// eslint-disable-next-line no-unused-vars
 import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
 // import NewNotifications from '../../../../../../../packages/notifications/page-components/NewNotifications';
 import { useSelector } from '@cogoport/store';
@@ -19,7 +20,7 @@ const THIRTY_SECONDS = 30;
 const ONE = 1;
 const TWO = 2;
 // const ZERO_COUNT = 0;
-const MAX_COUNT = 100;
+// const MAX_COUNT = 100;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -67,10 +68,10 @@ function Items({
 	refetch = () => {},
 	checkIfSessionExpiring,
 	// notificationCount = ZERO_COUNT,
-	openNotificationPopover,
+	// openNotificationPopover,
 	setOpenNotificationPopover,
 	notificationData,
-	showCount,
+	// showCount,
 	// notificationLoading,
 	// trigger,
 }) {
@@ -104,9 +105,9 @@ function Items({
 		setOpenPopover(!openPopover);
 	};
 
-	const handleNotificationPopover = () => {
-		setOpenNotificationPopover(!openNotificationPopover);
-	};
+	// const handleNotificationPopover = () => {
+	// 	setOpenNotificationPopover(!openNotificationPopover);
+	// };
 
 	let activeUser = {};
 	(userSessionMappings || []).forEach((user) => {
@@ -232,40 +233,40 @@ function Items({
 
 			{
 			// (notificationCount > ZERO_COUNT) && (
-				<div className={styles.notifications_container}>
-					{!showSubNav ? (
-						<div className={styles.notifiction_icon}>
-							<IcMNotifications width={16} height={16} fill="red" />
-							{notificationCount && showCount && !openNotificationPopover ? (
-								<div className={styles.new_notifications}>
-									{notificationCount >= MAX_COUNT
-										? `${MAX_COUNT}+` : notificationCount}
-								</div>
-							) : null}
-						</div>
-					) : null}
+				// <div className={styles.notifications_container}>
+				// 	{!showSubNav ? (
+				// 		<div className={styles.notifiction_icon}>
+				// 			<IcMNotifications width={16} height={16} fill="red" />
+				// 			{notificationCount && showCount && !openNotificationPopover ? (
+				// 				<div className={styles.new_notifications}>
+				// 					{notificationCount >= MAX_COUNT
+				// 						? `${MAX_COUNT}+` : notificationCount}
+				// 				</div>
+				// 			) : null}
+				// 		</div>
+				// 	) : null}
 
-					<div style={showSubNav ? { width: '100%' } : {}}>
-						<Button
-							size="md"
-							themeType="primary"
-							onClick={handleNotificationPopover}
-							disabled={loadingState}
-							className={styles.button_styles}
-							style={showSubNav ? { width: '100%' } : {}}
-						>
-							{notificationCount ? `
-							${t('common:you_have')}
-							${' '}
-							${notificationCount}
-							${' '}
-							${t('common:new')}
-							${' '}
-							${notificationCount > ONE ? t('common:notifications') : t('common:notification')}` : 'You have no new Notifications'}
-						</Button>
-					</div>
+				// 	<div style={showSubNav ? { width: '100%' } : {}}>
+				// 		<Button
+				// 			size="md"
+				// 			themeType="primary"
+				// 			onClick={handleNotificationPopover}
+				// 			disabled={loadingState}
+				// 			className={styles.button_styles}
+				// 			style={showSubNav ? { width: '100%' } : {}}
+				// 		>
+				// 			{notificationCount ? `
+				// 			${t('common:you_have')}
+				// 			${' '}
+				// 			${notificationCount}
+				// 			${' '}
+				// 			${t('common:new')}
+				// 			${' '}
+				// 			${notificationCount > ONE ? t('common:notifications') : t('common:notification')}` : 'You have no new Notifications'}
+				// 		</Button>
+				// 	</div>
 
-				</div>
+				// </div>
 			// )
 			}
 
