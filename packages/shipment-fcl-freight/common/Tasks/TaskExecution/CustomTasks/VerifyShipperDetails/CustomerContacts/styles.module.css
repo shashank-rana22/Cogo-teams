@@ -4,6 +4,12 @@
 	& h4 {
 		padding-left: 4px;
 	}
+
+	:global {
+		.ui_table_container {
+			padding: 0;
+		}
+	}
 }
 
 .table {
@@ -19,7 +25,14 @@
 	}
 }
 
+.action_container {
+	display: flex;
+	align-self: center;
+	justify-content: flex-end;
+}
+
 .button_container {
 	display: flex;
-	justify-content: flex-end;
+	align-self: center;
+	justify-content: space-between;
 }

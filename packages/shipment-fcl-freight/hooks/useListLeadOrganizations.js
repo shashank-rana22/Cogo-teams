@@ -6,8 +6,9 @@ import { useEffect, useCallback, useState } from 'react';
 
 function useListLeadOrganizations({ task = {} }) {
 	const [defaultValues, setDefaultValues] = useState({});
+	const [listLeadsData, setListLeadsData] = useState({});
 
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/list_lead_organizations',
 		method : 'GET',
 		params : {
@@ -34,6 +35,8 @@ function useListLeadOrganizations({ task = {} }) {
 					country_id,
 					gst_number   : registration_number,
 				});
+
+				setListLeadsData(res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index]);
 			}
 		} catch (err) {
 			toastApiError(err);
@@ -45,7 +48,8 @@ function useListLeadOrganizations({ task = {} }) {
 	}, [getListLeadOrganizations]);
 
 	return {
-		listLeads: data?.list,
+		listLeadsData,
+		setListLeadsData,
 		defaultValues,
 		loading,
 		getListLeadOrganizations,

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-function useUpdateLeadUser() {
+function useUpdateLeadUser({ listLeadsData = {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_lead_user',
 		method : 'POST',
@@ -24,8 +24,9 @@ function useUpdateLeadUser() {
 		const PAYLOAD = {
 			name,
 			email,
-			mobile_number       : mobile_number?.number,
-			mobile_country_code : mobile_number?.country_code,
+			mobile_number        : mobile_number?.number,
+			mobile_country_code  : mobile_number?.country_code,
+			lead_organization_id : listLeadsData?.id,
 		};
 
 		updateLeadUser({ payload: PAYLOAD });

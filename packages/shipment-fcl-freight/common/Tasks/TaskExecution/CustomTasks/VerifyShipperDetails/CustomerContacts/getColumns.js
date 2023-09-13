@@ -80,13 +80,13 @@ function getColumns({
 			id       : 'edit',
 			Header   : '',
 			accessor : (item) => (
-				<div className={styles.button_container}>
+				<div className={styles.action_container}>
 					{isEditMode === item?.id
 						? (
 							<>
 								<Button
 									themeType="secondary"
-									onClick={() => { handleSubmit(onUpdateLeadUser); }}
+									onClick={handleSubmit(onUpdateLeadUser)}
 								>
 									Save
 								</Button>
