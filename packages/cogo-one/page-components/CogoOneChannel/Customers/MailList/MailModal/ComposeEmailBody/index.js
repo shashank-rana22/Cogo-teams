@@ -9,15 +9,15 @@ import styles from './styles.module.css';
 
 function ComposeEmailBody(props) {
 	const {
-		handleKeyPress = () => { },
-		handleEdit = () => { },
-		handleChange = () => { },
-		handleDelete = () => { },
-		handleCancel = () => { },
-		handleAttachmentDelete = () => { },
-		getDecodedData = () => { },
+		handleKeyPress = () => {},
+		handleEdit = () => {},
+		handleChange = () => {},
+		handleDelete = () => {},
+		handleCancel = () => {},
+		handleAttachmentDelete = () => {},
+		getDecodedData = () => {},
 		userEmailAddress,
-		setEmailState = () => { },
+		setEmailState = () => {},
 		userSharedMails = [],
 		viewType = '',
 		errorValue = '',

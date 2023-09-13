@@ -49,14 +49,14 @@ function MailEditorModal({
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 
 	const {
-		handleKeyPress = () => { },
-		handleEdit = () => { },
-		handleChange = () => { },
-		handleDelete = () => { },
-		handleCancel = () => { },
-		handleClose = () => { },
-		handleAttachmentDelete = () => { },
-		getDecodedData = () => { },
+		handleKeyPress = () => {},
+		handleEdit = () => {},
+		handleChange = () => {},
+		handleDelete = () => {},
+		handleCancel = () => {},
+		handleClose = () => {},
+		handleAttachmentDelete = () => {},
+		getDecodedData = () => {},
 	} = mailFunction({
 		...mailProps,
 		setErrorValue,
@@ -68,7 +68,7 @@ function MailEditorModal({
 	});
 
 	const {
-		handleSend = () => { },
+		handleSend = () => {},
 		replyLoading = false,
 	} = useMailEditorFunctions({
 		uploading,
