@@ -39,11 +39,11 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
-			{shipment_data?.remaining_days_to_job_closure ? (
+			{shipment_data?.remaining_closure_days ? (
 				<Pill size="sm" color="green" className={styles.pill}>
 					Operational Closure in:
 					{' '}
-					{shipment_data?.remaining_days_to_job_closure}
+					{shipment_data?.remaining_closure_days}
 					{' '}
 					Day(s)
 				</Pill>
