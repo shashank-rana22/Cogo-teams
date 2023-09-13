@@ -60,7 +60,7 @@ function AgentStatusConfig({
 		<div className={styles.container}>
 			<AsyncSelect
 				asyncKey="cogoone_shift_time"
-				initialCall={false}
+				initialCall
 				onChange={(val, obj) => handleSelecteddata({ selectedId: val, obj })}
 				value={shiftData?.[rowId]?.id}
 				placeholder="Select shift"

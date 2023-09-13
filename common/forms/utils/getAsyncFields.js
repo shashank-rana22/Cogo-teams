@@ -974,7 +974,7 @@ function asyncListCogoOneShiftTime() {
 		labelKey    : 'shift_name',
 		valueKey    : 'id',
 		endpoint    : 'list_cogoone_shifts',
-		initialCall : true,
+		initialCall : false,
 	};
 }
 
