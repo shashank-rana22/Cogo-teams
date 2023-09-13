@@ -1,0 +1,99 @@
+.container {
+	width: 100%;
+}
+
+.select_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 0 10px;
+
+	:global {
+		.ui_select_options_container {
+			max-height: 120px;
+		}
+	}
+}
+
+.select_teams {
+	width: 250px;
+	margin-top: 6px;
+}
+
+.mid_section {
+	max-height: 240px;
+	padding: 0 10px 30px;
+	overflow: auto;
+}
+
+.mid_section::-webkit-scrollbar {
+	display: none;
+}
+
+.control_fields {
+	display: flex;
+	width: calc(100% - 200px);
+
+	> div {
+		margin: 0 auto;
+	}
+}
+
+.heading {
+	display: flex;
+	margin: 16px 0 12px;
+	font-weight: 500;
+
+	> div {
+		margin: 0 auto;
+
+		&:first-child {
+			width: 140px;
+			margin: 0 0 0 60px;
+		}
+	}
+}
+
+.shift_details {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+
+	> p {
+		width: 150px;
+		margin: 0;
+
+		/* text-align: center; */
+		margin-left: 50px;
+		font-size: 16px;
+	}
+
+	:global {
+		.ui_time_options_container {
+			max-height: 124px;
+		}
+
+		/* .react-datepicker__aria-live {
+			display: none;
+		} */
+	}
+
+	/* > div {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	} */
+}
+
+.button_section {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	min-height: 44px;
+	padding: 8px;
+	background-color: #fff;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}

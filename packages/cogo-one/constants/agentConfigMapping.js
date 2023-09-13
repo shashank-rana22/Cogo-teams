@@ -19,6 +19,16 @@ const AGENT_CONFIG_MAPPING = [
 		/>,
 	},
 	{
+		label : 'Shift Configuration',
+		name  : 'shift_configuration',
+		icon  : <Image
+			src={GLOBAL_CONSTANTS.image_url.firebase_configuration}
+			height={44}
+			width={44}
+			alt="fire-base-configuration"
+		/>,
+	},
+	{
 		label : 'Agents Status',
 		name  : 'agents_status',
 		icon  : <Image
