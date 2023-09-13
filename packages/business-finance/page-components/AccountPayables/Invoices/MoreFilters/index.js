@@ -1,7 +1,7 @@
 import { Modal, Button, cl } from '@cogoport/components';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Filter from '../../../commons/Filters/index.tsx';
 import { moreFilters } from '../configurations/moreFiltersconfig';
@@ -21,13 +21,21 @@ function FilterModal({
 	const [modalFilters, setModalFilters] = useState({
 		currency    : filters?.currency,
 		invoiceType : filters?.invoiceType || undefined,
-		entity      : filters.entity,
+		entity      : filters?.entity,
 	});
-	const { currency = '' } = modalFilters || {};
 
+	const { currency = '', entity = '', invoiceType = '' } = filters || {};
 	const handleClose = () => {
 		setShowModal(false);
 	};
+
+	useEffect(() => {
+		setModalFilters({
+			currency,
+			invoiceType: invoiceType || undefined,
+			entity,
+		});
+	}, [currency, invoiceType, entity]);
 
 	return (
 		<div className={styles.modal_container}>

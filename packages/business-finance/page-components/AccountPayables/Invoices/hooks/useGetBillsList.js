@@ -94,6 +94,15 @@ function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '
 	}, [refetch]);
 
 	useEffect(() => {
+		setBillsFilters({
+			invoiceView : 'coe_accepted',
+			entity      : activeEntity,
+			pageSize    : 10,
+			pageIndex   : 1,
+		});
+	}, [activeEntity]);
+
+	useEffect(() => {
 		setStats((prevStats) => ({ ...prevStats, invoice_details: billsData?.totalRecords }));
 	}, [billsData, setStats]);
 

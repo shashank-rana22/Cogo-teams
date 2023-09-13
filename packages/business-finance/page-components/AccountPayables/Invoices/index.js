@@ -29,6 +29,7 @@ const TABS = [
 ];
 
 const FIRST_PAGE = 1;
+const DENY_ENITY_PAYRUN = ['101', '201'];
 
 const FUNCTIONS = {
 	renderToolTip: (itemData, field) => (
@@ -105,6 +106,7 @@ function Invoices({ activeEntity = '' }) {
 							onClick={() => {
 								setShowPayrunModal(true);
 							}}
+							disabled={DENY_ENITY_PAYRUN.includes(activeEntity)}
 						>
 							Create Pay Run
 						</Button>
