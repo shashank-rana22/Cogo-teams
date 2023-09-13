@@ -1,7 +1,8 @@
 {
     "header_tabs_approved_awb": "批准的AWB",
     "header_tabs_handed_over": "移交了",
-    "header_tabs_final_awb": "最终AWB",
+    "header_tabs_final_awb": "最终最终的AWB",
+    "header_tabs_completed_awb": "完全的 AWB",
     "header_printing_desk": "打印桌",
     "header_search_placeholder": "通过SID或AWB编号搜索",
     "header_toggle_onlabel": "与我有关",
@@ -117,5 +118,10 @@
     "awb_controls_package_count_required": "包装计数是必需的",
     "awb_controls_cannot_be_negative_validation": "不能负面",
     "awb_controls_should_be_greater_than_0_validation": "应该大于0",
-    "utils_get_select_all_checkbox_label": "全选"
+    "utils_get_select_all_checkbox_label": "全选",
+    "completed_awb_fields_sid_label": "SID",
+    "completed_awb_fields_awb_label": "AWB",
+    "completed_awb_fields_awb_category_label": "AWB 类别",
+    "completed_awb_fields_uploaded_by_label": "上传",
+    "completed_awb_fields_uploaded_at_label": "上传"
 }

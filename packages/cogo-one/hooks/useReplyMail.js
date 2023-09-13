@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useLensRequest, useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
@@ -17,11 +18,14 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 		sender_user_id      : userId,
 		send_by             : userName,
 	},
-	sender_user_id : userId,
-	service        : 'user',
-	service_id     : userId,
-	sender         : payload?.sender,
-	source         : 'CogoOne:AdminPlatform',
+	sender_user_id  : userId,
+	service         : 'user',
+	service_id      : userId,
+	sender          : payload?.sender,
+	cc_emails       : isEmpty(payload?.ccrecipients) ? undefined : payload?.ccrecipients,
+	bcc_emails      : isEmpty(payload?.bccrecipients) ? undefined : payload?.bccrecipients,
+	attachment_urls : isEmpty(payload?.attachments) ? undefined : payload?.attachments,
+	source          : 'CogoOne:AdminPlatform',
 });
 
 const API_MAPPING = {

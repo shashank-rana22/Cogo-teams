@@ -15,8 +15,6 @@ const MAIL_LOADING_SKELETON_LENGTH = 5;
 function MailConversation({ mailProps = {} }) {
 	const {
 		activeMail,
-		setButtonType = () => {},
-		setEmailState = () => {},
 		activeMailAddress = '',
 	} = mailProps;
 
@@ -61,14 +59,13 @@ function MailConversation({ mailProps = {} }) {
 			<Header
 				subject={subject}
 				loading={loading}
-				setButtonType={setButtonType}
-				setEmailState={setEmailState}
 				senderAddress={senderAddress}
 				recipientData={recipientData}
 				ccData={ccData}
 				bccData={bccData}
 				activeMailAddress={activeMailAddress}
 				isDraft={isDraft}
+				mailProps={mailProps}
 			/>
 
 			<div className={styles.email_body}>

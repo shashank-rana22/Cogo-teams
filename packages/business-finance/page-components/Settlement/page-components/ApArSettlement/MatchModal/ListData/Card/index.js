@@ -1,4 +1,4 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { cl, Tooltip, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete, IcMEdit, IcMDrag, IcMCopy } from '@cogoport/icons-react';
 import { copyToClipboard } from '@cogoport/utils';
@@ -28,6 +28,7 @@ const EXC_RATE_FIXED_LENGTH = 2;
 
 const onClickCopy = (documentValue = '') => {
 	copyToClipboard(documentValue, 'Document Value');
+	Toast.success('Text Copied Successfully');
 };
 
 export default function CardItem({
@@ -62,30 +63,36 @@ export default function CardItem({
 		setSelectedData(UPDATED_SELECTED_DATA);
 		setCanSettle(false);
 	};
+
 	const handleEditAllocation = () => {
-		const NEW_ALLOCATION = parseFloat(cardData?.allocationAmount);
-		const NEW_BALANCE_AFTER_ALLOCATION = parseFloat(
-			+balanceAmount - parseFloat(cardData?.allocationAmount),
-		);
+		const NEW_ALLOCATION = parseFloat(cardData?.allocationAmount) || INITIAL_BAL;
+		const NEW_BALANCE_AFTER_ALLOCATION = parseFloat(+balanceAmount - NEW_ALLOCATION) || INITIAL_BAL;
+
 		if (NEW_ALLOCATION >= ZERO_BALANCE && NEW_ALLOCATION <= balanceAmount) {
-			setEditedAllocation(cardData?.allocationAmount);
+			setEditedAllocation(NEW_ALLOCATION);
 			cardData.balanceAfterAllocation = NEW_BALANCE_AFTER_ALLOCATION;
 		}
 	};
+
 	const handleEditTDS = () => {
-		const TDS_DIFFERENCE = parseFloat(+cardData.tds - +prevTDS);
+		const TDS_DIFFERENCE = parseFloat(+cardData.tds - +prevTDS) || INITIAL_BAL;
 		cardData.balanceAmount -= +TDS_DIFFERENCE;
 		cardData.allocationAmount -= +TDS_DIFFERENCE;
 		setEditedAllocation(cardData?.allocationAmount);
 		setNewTDS(cardData?.tds);
 		setPrevTDS(cardData?.tds);
 	};
+
 	useEffect(() => {
 		setNewTDS(cardData?.tds);
 		setPrevTDS(cardData?.tds);
 		setEditedAllocation(cardData?.allocationAmount);
-		const TOTAL = updatedData?.reduce((sum, item) => +sum + +item.balanceAmount
-		* +item.exchangeRate * item.signFlag, INITIAL_BAL);
+		const TOTAL = updatedData?.reduce((sum, item) => {
+			const balAmt = +item.balanceAmount || INITIAL_BAL;
+			const excRate = +item.exchangeRate || INITIAL_BAL;
+			const signFlag = item.signFlag || INITIAL_BAL;
+			return sum + balAmt * excRate * signFlag;
+		}, INITIAL_BAL);
 		setUpdateBal(TOTAL);
 	}, [cardData?.tds, cardData?.allocationAmount, setUpdateBal, updatedData]);
 	return (
@@ -96,8 +103,8 @@ export default function CardItem({
 				<div className={cl`${styles.icon_div} ${styles.flex}`}>
 					<IcMDrag
 						className={styles.icon}
-						height={30}
-						width={30}
+						height={40}
+						width={40}
 					/>
 				</div>
 
@@ -117,7 +124,7 @@ export default function CardItem({
 						interactive
 					>
 						<div>
-							{(cardData?.documentValue && cardData?.documentValue.length > DOC_LENGTH
+							{(cardData?.documentValue && cardData?.documentValue?.length > DOC_LENGTH
 								? `${cardData?.documentValue.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
 								: cardData?.documentValue) || '-'}
 						</div>

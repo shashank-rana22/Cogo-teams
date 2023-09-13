@@ -96,6 +96,14 @@ function Item({
 							<span>{item?.live_invoice_number}</span>
 						</div>
 
+						{item?.incident_id && (
+							<div className={styles.in_number}>
+								Incident ID:
+								{' '}
+								{item?.incident_id}
+							</div>
+						)}
+
 						<div className={styles.invoice_value}>
 							Invoice Value -
 							{' '}

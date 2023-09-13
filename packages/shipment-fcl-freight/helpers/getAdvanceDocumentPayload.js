@@ -15,7 +15,9 @@ const getAdvanceDocumentPayload = ({
 	cogoEntityId = '',
 	collectionPartyAddress = {},
 	collectionPartyBankDetails = {},
+	primary_service = {},
 }) => {
+	const { service_type: serviceType = '' } = primary_service || {};
 	const {
 		upload,
 		currency = '',
@@ -53,7 +55,7 @@ const getAdvanceDocumentPayload = ({
 		jobSource                           : 'LOGISTICS',
 		jobType                             : 'SHIPMENT',
 		currency,
-		serviceType                         : 'testing',
+		serviceType,
 		tdsAmount                           : collectionParty?.tds_deduction_rate,
 		amount                              : amount * quantity,
 		refundable                          : true,

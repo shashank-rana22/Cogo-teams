@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -11,10 +12,10 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 	forward   : 'FW',
 };
 
-export function getSubject({ subject = '', buttonType = '' }) {
+export function getSubject({ subject = '', newButtonType = '' }) {
 	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
-	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[buttonType] || '';
+	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[newButtonType] || '';
 
 	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
 		? subject : `${emailPrefix}: ${formatedSubject}`;
@@ -62,8 +63,7 @@ const getReplyAllMails = ({
 };
 
 export function getRecipientData({
-	setButtonType = () => {},
-	setEmailState = () => {},
+	mailProps = {},
 	senderAddress = '',
 	recipientData = [],
 	ccData = [],
@@ -75,11 +75,17 @@ export function getRecipientData({
 	formattedData = {},
 	eachMessage = {},
 }) {
+	const {
+		setButtonType = () => {},
+		setEmailState = () => {},
+		buttonType = '',
+	} = mailProps || {};
+
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 
-	const handleClick = ({ buttonType = '', data = {} }) => {
+	const handleClick = ({ buttonType: newButtonType = '', data = {} }) => {
 		if (isDraft) {
 			setButtonType('send_mail');
 			setEmailState(
@@ -95,11 +101,16 @@ export function getRecipientData({
 			return;
 		}
 
-		setButtonType(buttonType);
+		if (buttonType) {
+			Toast.warn('Email compose already in progress');
+			return;
+		}
+
+		setButtonType(newButtonType);
 
 		let mailData = {};
 
-		if (buttonType === 'reply') {
+		if (newButtonType === 'reply') {
 			mailData = getReplyMails({
 				filteredRecipientData,
 				senderAddress,
@@ -107,7 +118,7 @@ export function getRecipientData({
 				filteredCcData,
 				filteredBccData,
 			});
-		} else if (buttonType === 'reply_all') {
+		} else if (newButtonType === 'reply_all') {
 			mailData = getReplyAllMails({
 				filteredRecipientData,
 				senderAddress,
@@ -117,8 +128,7 @@ export function getRecipientData({
 			});
 		}
 
-		console.log('mailData:', mailData);
-		const newSubject = getSubject({ subject, buttonType });
+		const newSubject = getSubject({ subject, newButtonType });
 
 		setEmailState(
 			(prev) => ({

@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Toast } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -34,7 +34,13 @@ function CommunicationModals({
 			type : 'whatsapp_new_message_modal',
 			data : {},
 		}),
-		new_mail        : () => setButtonType('send_mail'),
+		new_mail: () => {
+			if (buttonType) {
+				Toast.warn('Email compose is already in progress');
+				return;
+			}
+			setButtonType('send_mail');
+		},
 		global_contacts : () => setOpenKamContacts(true),
 		sp_contacts     : () => {
 			setSendBulkTemplates((prevVal) => !prevVal);
@@ -94,6 +100,7 @@ function CommunicationModals({
 					mailProps={mailProps}
 					userId={userId}
 					activeMail={activeMail}
+					viewType={viewType}
 				/>
 			)}
 

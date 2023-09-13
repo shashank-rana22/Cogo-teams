@@ -29,7 +29,7 @@ function List({ isSeller = false, source = '' }) {
 	const {
 		servicesList = [], refetchServices = () => {},
 		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
-		showRequestCSD,
+		showRequestCSD, refetch: getShipmentRefetch = () => {},
 	} = useContext(ShipmentDetailContext);
 
 	const { trade_type = '', security_dd_type = '' } = primary_service || {};
@@ -160,7 +160,7 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setShowModal('cargo_insurance_service')}
 						className={styles.btn_div}
-						disabled={!!isCargoInsured}
+						disabled={!!isCargoInsured || shipment_data?.is_job_closed}
 					>
 						<span className={styles.add_icon}>+</span>
 						Add Cargo Insurance
@@ -232,6 +232,7 @@ function List({ isSeller = false, source = '' }) {
 				<NewRequestModal
 					showRequestModal={showRequestModal}
 					setShowRequestModal={setShowRequestModal}
+					getShipmentRefetch={getShipmentRefetch}
 				/>
 			) : null}
 		</section>
