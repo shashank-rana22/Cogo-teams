@@ -2,7 +2,6 @@ import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
 import AdminConfirmed from './admin-view/admin-confirmation';
-import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
 import ExitInterview from './hrbp-view/ExitInterview';
 import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
@@ -43,8 +42,7 @@ const COMPONENT_MAPPING = {
 		admin_confirmation : AdminConfirmed,
 	},
 	hoto_clearance: {
-		hoto_clearance             : HOTOClearance,
-		HOTOClearance_confirmation : HOTOClearanceConfirmation,
+		hoto_clearance: HOTOClearance,
 	},
 };
 
