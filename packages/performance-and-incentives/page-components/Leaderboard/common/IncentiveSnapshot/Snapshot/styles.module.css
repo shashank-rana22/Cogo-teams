@@ -1,0 +1,35 @@
+.container {
+	width: 32%;
+	padding: 12px;
+	border: 1px solid #f2f2f2;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.heading {
+	margin: 0;
+	font-size: var(--font-size-xl);
+	color: #828282;
+}
+
+.amount {
+	margin: 0;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.body_text {
+	color: #828282;
+}
+
+.footer_text {
+	margin-top: 24px;
+	font-size: var(--font-size-sm);
+	color: #828282;
+}
