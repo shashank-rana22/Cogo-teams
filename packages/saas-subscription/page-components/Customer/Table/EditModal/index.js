@@ -2,12 +2,13 @@ import { ButtonIcon, cl, Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import { DETAILS_MAPPING, HEADER_MAPPING } from '../../../../constant/editModalConstant';
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
 
 import FuturePlanDetails from './FuturePlanDetails';
+import PlanApproval from './PlanApproval';
 import QuotaDetails from './QuotaDetails';
 import styles from './styles.module.css';
 
@@ -25,7 +26,7 @@ function EditModal({ editModal, setEditModal }) {
 		closeModalHandler,
 	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
-	const { active = {}, quotas = [], future = {} } = subInfo || {};
+	const { active = {}, quotas = [], future = {}, pending_orders = {}, approved_orders = {} } = subInfo || {};
 	const { id = '', plan = {}, pricing = {}, product_family = {} } = active || {};
 
 	return (
@@ -101,6 +102,11 @@ function EditModal({ editModal, setEditModal }) {
 
 					<div className={styles.validity_container}>
 						<FuturePlanDetails future={future} />
+						<PlanApproval
+							orders_info={!isEmpty(pending_orders) ? pending_orders : approved_orders}
+							showCta={!isEmpty(pending_orders)}
+							setEditModal={setEditModal}
+						/>
 					</div>
 				</div>
 			</div>
