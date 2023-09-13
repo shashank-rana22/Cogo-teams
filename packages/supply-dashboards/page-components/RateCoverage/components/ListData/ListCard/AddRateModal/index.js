@@ -1,9 +1,12 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable max-len */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable custom-eslint/variables-name-check */
 import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	asyncFieldsListOperators,
 	asyncFieldsLocations,
-	asyncFieldsOrganization,
+	// asyncFieldsOrganization,
 	asyncFieldsPartnerUsersIds,
 	useForm,
 	useGetAsyncOptions,
@@ -11,7 +14,7 @@ import {
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { useSelector } from '@cogoport/store';
 import { merge, startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import Layout from '../../../../../RfqEnquiries/Layout';
@@ -19,8 +22,9 @@ import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../..
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
-// import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
+import useGetFreightRate from '../../../../hooks/useGetFreightRate';
 
+// import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 import airControls from './AirControls';
 import fclControls from './FclControls';
 import styles from './styles.module.css';
@@ -59,6 +63,8 @@ function AddRateModal({
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+	const [chargeCodes, setChargeCodes] = useState(null);
+
 	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const { options:mainPortOptions1 } = useGetMainPortsOptions({ location_id: data?.origin_port?.id });
@@ -117,33 +123,16 @@ function AddRateModal({
 			},
 		),
 	);
-	const serviceProviders = useGetAsyncOptions(
-		merge(
-			asyncFieldsOrganization(),
-			{
-				params: {
-					filters: {
-						status       : 'active',
-						service      : filter?.service,
-						kyc_status   : 'verified',
-						account_type : 'service_provider',
-					},
-				},
-			},
-		),
-	);
 
 	const fclCommodityOptions = getCommodityOptions(data?.container_type);
 
 	const finalControls = !isAirService ? fclControls({
 		data,
-		// chargeCodeOptions: CHARGE_CODE_OPTIONS,
 		listShippingLineOptions,
 		mainPortOptions1,
 		mainPortOptions2,
 		originLocationOptions,
 		destinationLocationOptions,
-		serviceProviders,
 		fclCommodityOptions,
 	}) : airControls({
 		data,
@@ -152,7 +141,6 @@ function AddRateModal({
 		originLocationOptions,
 		destinationLocationOptions,
 		listAirLineOptions,
-		serviceProviders,
 	});
 
 	const { DEFAULT_VALUES, fields } = getDefaultValues(finalControls);
@@ -171,7 +159,69 @@ function AddRateModal({
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const values = watch();
-	const { finalFields } = FieldMutation({ fields, values, data });
+
+	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
+
+	const prefillData = useRef();
+
+	useEffect(() => {
+		let prefillFreightCodes = [];
+		if (rateData) {
+			if (!prefillData.current) {
+				prefillData.current = rateData;
+			}
+			// console.log(prefillData.current, 'test1');
+
+			// const { freight = {} } = prefillData.current;
+			// const { validities = [] } = freight;
+			// let val;
+			// (validities || []).forEach((validity) => {
+			// 	const { line_items = [] } = validity;
+			// 	val = [line_items];
+			// 	// prefillFreightCodes
+			// });
+
+			let mandatoryFreightCodes = [];
+			Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
+				if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+					let flag = {};
+					prefillFreightCodes.forEach((charge) => {
+						if (charge.code === code) {
+							flag = charge;
+						}
+					});
+					if (Object.keys(flag).length) {
+						prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
+						mandatoryFreightCodes = [...mandatoryFreightCodes,
+							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+					} else {
+						mandatoryFreightCodes = [...mandatoryFreightCodes,
+							{ code, price: '', unit: '', currency: '' }];
+					}
+				}
+			});
+
+			if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
+				setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
+			}
+		}
+	}, [JSON.stringify(rateData)]);
+
+	useEffect(() => {
+		if (rateData?.freight_charge_codes) {
+			setChargeCodes(rateData?.freight_charge_codes);
+		}
+	}, [JSON.stringify(rateData?.freight_charge_codes)]);
+
+	const { finalFields } = FieldMutation({
+		fields,
+		values,
+		rateData,
+		filter,
+		chargeCodes,
+		setChargeCodes,
+	});
+
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 
@@ -219,6 +269,11 @@ function AddRateModal({
 			});
 		}
 	}, [weightSlabsJSON, weightSlabs, isAirService, freeWeight, setValue]);
+
+	useEffect(() => {
+		setValue('free_weight', rateData?.weight_limit?.free_limit);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(rateData)]);
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">

@@ -86,6 +86,7 @@ const useGetListCoverage = () => {
 						user_id   : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
 						...DATE_PARAMS,
 					},
+					// generate_csv_url: true,
 					page,
 				},
 			});

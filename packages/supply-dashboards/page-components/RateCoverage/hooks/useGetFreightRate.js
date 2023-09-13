@@ -1,13 +1,19 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
 const API_NAME = {
 	fcl_freight : 'get_fcl_freight_rate',
 	air_freight : 'get_air_freight_rate',
 };
 
-const useGetFreightRate = ({ filter, cardData }) => {
+const useGetFreightRate = ({ filter, formValues, cardData }) => {
 	const endPoint = API_NAME[filter?.service];
+
+	const dependencyValue = {
+		service_provider_id : formValues?.service_provider_id,
+		shipping_line_id    : formValues?.shipping_line_id,
+	};
 
 	const { profile = {} } = useSelector((state) => state);
 	const { partner = {} } = profile;
@@ -17,28 +23,27 @@ const useGetFreightRate = ({ filter, cardData }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const fclParams = {
-		origin_port_id      : cardData?.origin_port_id,
-		destination_port_id : cardData?.destination_port_id,
-		shipping_line_id    : cardData?.shipping_line_id,
-		service_provider_id : cardData?.service_provider_id,
-	};
-	const airParams = {
-		origin_airport_id      : cardData?.origin_airport_id,
-		destination_airport_id : cardData?.destination_airport_id,
-		airline_id             : cardData?.airline_id,
-		service_provider_id    : cardData?.service_provider_id,
-	};
-	const paramsMapping = filter?.service === 'air_freight' ? airParams : fclParams;
-
 	const getFreightRate = async () => {
+		const fclParams = {
+			origin_port_id      : cardData?.origin_port_id,
+			destination_port_id : cardData?.destination_port_id,
+			shipping_line_id    : formValues?.shipping_line_id,
+			service_provider_id : formValues?.service_provider_id,
+		};
+		const airParams = {
+			origin_airport_id      : cardData?.origin_airport_id,
+			destination_airport_id : cardData?.destination_airport_id,
+			airline_id             : formValues?.airline_id,
+			service_provider_id    : formValues?.service_provider_id,
+		};
+		const paramsMapping = filter?.service === 'air_freight' ? airParams : fclParams;
 		try {
 			await trigger({
 				params: {
 					id             : cardData?.id,
-					commodity      : cardData?.commodity,
-					container_size : cardData?.container_size,
-					container_type : cardData?.container_type,
+					commodity      : formValues?.commodity,
+					container_size : formValues?.container_size,
+					container_type : formValues?.container_type,
 					cogo_entity_id : id || undefined,
 					...paramsMapping,
 				},
@@ -48,8 +53,13 @@ const useGetFreightRate = ({ filter, cardData }) => {
 		}
 	};
 
+	useEffect(() => {
+		if (formValues?.service_provider_id && formValues?.shipping_line_id) { getFreightRate(); }
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(dependencyValue)]);
+
 	return {
-		getFreightRate,
+		// getFreightRate,
 		data,
 		loading,
 	};

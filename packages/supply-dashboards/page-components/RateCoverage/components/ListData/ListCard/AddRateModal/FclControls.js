@@ -1,7 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
 
@@ -12,7 +11,7 @@ const fclControls = ({
 	listShippingLineOptions,
 	fclCommodityOptions,
 	mainPortOptions1, mainPortOptions2,
-	serviceProviders,
+	// serviceProviders,
 	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
@@ -25,7 +24,7 @@ const fclControls = ({
 		heading     : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
-		...serviceProviders,
+		// ...serviceProviders,
 		span        : 4,
 		value       : data?.service_provider_id,
 		rules       : { required: 'service provider is required' },
@@ -254,20 +253,11 @@ const fclControls = ({
 		],
 	},
 	{
-		type               : 'fieldArray',
-		heading            : 'Line Items',
-		name               : 'line_items',
-		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
-		value              : [
-			{
-				code     : 'BAS',
-				unit     : 'per_container',
-				currency : GLOBAL_CONSTANTS.currency_code.USD,
-				price    : 0,
-			},
-		],
-		controls: [
+		type       : 'fieldArray',
+		heading    : 'Line Items',
+		name       : 'line_items',
+		buttonText : 'Add Line Items',
+		controls   : [
 			{
 				name        : 'code',
 				type        : 'select',
@@ -280,10 +270,6 @@ const fclControls = ({
 				span        : 2,
 				type        : 'select',
 				className   : 'primary lg',
-				// options   : [{
-				// 	label : 'Per Container',
-				// 	value : 'per_container',
-				// }],
 				placeholder : 'Unit',
 			},
 			{

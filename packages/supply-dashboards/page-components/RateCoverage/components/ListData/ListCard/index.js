@@ -6,7 +6,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING } from '../../../configurations/helpers/constants';
-import useGetFreightRate from '../../../hooks/useGetFreightRate';
+// import useGetFreightRate from '../../../hooks/useGetFreightRate';
 
 import AddRateModal from './AddRateModal';
 import CloseModal from './CloseModal';
@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
 
-function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {}, source :src = '' }) {
+function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {} }) {
 	const { sources = [] } = data;
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
 
@@ -28,10 +28,8 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
 
-	const { getFreightRate } = useGetFreightRate({ filter, cardData: data });
 	const handleAddRate = () => {
 		setShowAddRateModal((prev) => !prev);
-		if (src !== 'spot_search') { getFreightRate(); }
 	};
 
 	return (
