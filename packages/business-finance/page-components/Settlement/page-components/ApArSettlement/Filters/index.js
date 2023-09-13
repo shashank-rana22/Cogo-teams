@@ -1,7 +1,6 @@
 import { SingleDateRange, cl, MultiSelect, Toggle } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import { ACCOUNT_MODE_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter';
@@ -31,7 +30,6 @@ function Filters({
 			<div className={styles.header}>
 				<span className={styles.criteria}>
 					Selection Criteria
-					<IcMInfo style={{ marginLeft: '4px' }} />
 				</span>
 				<div>
 					<Toggle

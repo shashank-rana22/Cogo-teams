@@ -1,11 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import getNavData from '../utils/getNavData';
-
-const ZEROTH_INDEX = 0;
 
 export default function useGetScopeOptions({
 	defaultValues = {},
@@ -27,7 +26,7 @@ export default function useGetScopeOptions({
 		let { main_apis } = navData;
 		const allNavApis = (permissions_navigations || {})[navigation] || {};
 
-		main_apis = apisToConsider?.length > ZEROTH_INDEX ? apisToConsider : main_apis;
+		main_apis = !isEmpty(apisToConsider) ? apisToConsider : main_apis;
 
 		let scopes = [];
 		const VIEW_TYPES = {};

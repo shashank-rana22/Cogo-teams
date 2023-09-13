@@ -71,7 +71,7 @@ function Amount({
 					</div>
 					<div>Matching Balance</div>
 				</div>
-				<div>
+				<div className={styles.match_button}>
 					<Button
 						size="md"
 						themeType="primary"

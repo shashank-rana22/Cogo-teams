@@ -46,7 +46,7 @@ function AdditionalConditions({
 			key       : 'kyc',
 			component : KycMessage,
 			condition : kycShowCondition,
-			show      : ['locked'],
+			show      : ['booking_confirmation'],
 			props     : {
 				detail,
 				status       : orgData?.kyc_status,

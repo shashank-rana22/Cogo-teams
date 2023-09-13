@@ -1,0 +1,13 @@
+.container {
+	:global {
+		.ui_stepper_container {
+			background-color: transparent;
+		}
+	}
+}
+
+.breadcrumb {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

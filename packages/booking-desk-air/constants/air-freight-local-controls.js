@@ -1,7 +1,7 @@
-const airFreightLocalControls = [
+const airFreightLocalControls = (t = () => {}) => [
 	{
 		name           : 'airport_id',
-		label          : 'Airport',
+		label          : t('airBookingDesk:label_airport'),
 		type           : 'location-select',
 		optionsListKey : 'locations',
 		params         : {
@@ -16,17 +16,17 @@ const airFreightLocalControls = [
 	},
 	{
 		name        : 'trade_type',
-		label       : 'Trade Type',
+		label       : t('airBookingDesk:label_trade_type'),
 		type        : 'select',
-		placeholder : 'Select Trade type',
+		placeholder : t('airBookingDesk:placeholder_trade_type'),
 		className   : 'primary md',
 		options     : [
 			{
-				label : 'Import',
+				label : t('airBookingDesk:trade_type_import'),
 				value : 'import',
 			},
 			{
-				label : 'Export',
+				label : t('airBookingDesk:trade_type_export'),
 				value : 'export',
 			},
 		],
@@ -35,16 +35,16 @@ const airFreightLocalControls = [
 	},
 	{
 		name        : 'state',
-		label       : 'State',
+		label       : t('airBookingDesk:label_state'),
 		type        : 'select',
-		placeholder : 'Select State',
+		placeholder : t('airBookingDesk:placeholder_state'),
 		options     : [
 			{
-				label : 'Awaiting service provider confirmation',
+				label : t('airBookingDesk:state_awaiting_confirmation'),
 				value : 'awaiting_service_provider_confirmation',
 			},
 			{
-				label : 'Confirmed by service provider',
+				label : t('airBookingDesk:state_confirmed_by_service_provider'),
 				value : 'confirmed_by_service_provider',
 			},
 		],

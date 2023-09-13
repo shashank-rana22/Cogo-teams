@@ -97,14 +97,19 @@ function Actions({
 									size="sm"
 									onClick={() => setShowModal('show_review')}
 									themeType="accent"
-									disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+									disabled={disableMarkAsReviewed || invoice?.is_eta_etd
+										|| shipment_data?.is_job_closed_financially}
 								>
 									Mark as Reviewed
 								</Button>
 							) : null}
 
 							{invoice?.status === 'reviewed' ? (
-								<Button size="sm" onClick={() => setShowModal('otp_verification')}>
+								<Button
+									size="sm"
+									onClick={() => setShowModal('otp_verification')}
+									disabled={shipment_data?.is_job_closed_financially}
+								>
 									Send OTP for Approval
 								</Button>
 							) : null}
@@ -128,6 +133,7 @@ function Actions({
 						<Button
 							size="sm"
 							themeType="tertiary"
+							disabled={shipment_data?.is_job_closed}
 							onClick={() => sendInvoiceToFinance({
 								payload: {
 									id: invoice?.id,
