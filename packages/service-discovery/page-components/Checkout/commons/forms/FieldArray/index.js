@@ -28,15 +28,11 @@ function FieldArray(props) {
 	controls.forEach((controlItem) => {
 		EMPTY_VALUES[controlItem.name] = value[GLOBAL_CONSTANTS.zeroth_index][controlItem.name] || '';
 	});
-<<<<<<< HEAD:packages/service-discovery/page-components/Checkout/commons/forms/FieldArray/index.js
 
 	if (isEmpty(fields)) {
 		append(EMPTY_VALUES);
 	}
 
-=======
-	console.log('fields', newField);
->>>>>>> 275c6c8316 (added list and adding):packages/terms-and-conditions/page-components/FieldArray/index.js
 	return (
 		<div>
 			{fields.map((field, index) => (
