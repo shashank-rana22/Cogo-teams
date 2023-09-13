@@ -170,7 +170,7 @@ function Navbar({
 						style={{ marginTop: 8 }}
 						role="presentation"
 					>
-						<IcMNotifications width={16} height={16} fill="red" />
+						<IcMNotifications width={16} height={16} fill={unseenNotificationCount ? 'red' : '#000'} />
 						{unseenNotificationCount && showCount && !openNotificationPopover ? (
 							<div className={styles.notification_count}>
 								{unseenNotificationCount >= MAX_COUNT
