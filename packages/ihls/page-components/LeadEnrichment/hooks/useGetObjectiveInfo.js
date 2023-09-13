@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 
 const useGetObjectiveInfo = ({ allocationLeadId }) => {
 	const [params, setParams] = useState({
-		page_limit : 10,
-		page       : 1,
+		page_limit               : 10,
+		page                     : 1,
+		pagination_data_required : true,
 	});
 
 	const [searchValue, setSearchValue] = useState('');
@@ -21,6 +22,8 @@ const useGetObjectiveInfo = ({ allocationLeadId }) => {
 		},
 	}, { manual: false });
 
+	const { list: response = [], ...paginationData } = data || {};
+
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
@@ -30,7 +33,8 @@ const useGetObjectiveInfo = ({ allocationLeadId }) => {
 
 	return {
 		loading,
-		response: (data?.list || []),
+		response: (response || []),
+		paginationData,
 		debounceQuery,
 		searchValue,
 		setSearchValue,

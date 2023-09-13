@@ -73,7 +73,7 @@ function LeadInfo({
 
 			<div className={styles.pagination}>
 				<Pagination
-					type="number"
+					type="table"
 					currentPage={paginationData.page}
 					totalItems={paginationData.count}
 					pageSize={10}

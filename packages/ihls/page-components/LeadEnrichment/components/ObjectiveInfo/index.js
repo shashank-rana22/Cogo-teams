@@ -1,5 +1,8 @@
+import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
+import EmptyState from '../../../../commons/EmptyState';
 import SearchInput from '../../../../commons/SearchInput';
 import useGetObjectiveInfo from '../../hooks/useGetObjectiveInfo';
 
@@ -13,9 +16,19 @@ function ObjectiveInfo(props) {
 		loading,
 		response,
 		debounceQuery,
+		paginationData,
 		searchValue,
 		setSearchValue,
+		setParams,
 	} = useGetObjectiveInfo({ allocationLeadId });
+
+	const onPageChange = (pageNumber) => {
+		setParams((p) => ({ ...p, page: pageNumber }));
+	};
+
+	if (!loading && response.length === GLOBAL_CONSTANTS.zeroth_index) {
+		return <EmptyState height={300} width={300} emptyText="" />;
+	}
 
 	return (
 		<>
@@ -29,6 +42,13 @@ function ObjectiveInfo(props) {
 						value={searchValue}
 					/>
 				</div>
+				<Pagination
+					type="table"
+					currentPage={paginationData.page}
+					totalItems={paginationData.count}
+					pageSize={10}
+					onPageChange={onPageChange}
+				/>
 			</div>
 			<div className={styles.tableContainer}>
 				{loading ? <LoadingState />

@@ -12,6 +12,7 @@
 
 .tableHeader {
 	display: flex;
+	display: none;
 	margin-bottom: 16px;
 }
 

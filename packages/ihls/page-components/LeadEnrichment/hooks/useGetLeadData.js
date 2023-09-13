@@ -11,7 +11,7 @@ const STRING_BOOL_MAPPINGS = {
 	null  : null,
 };
 
-const useGetEnrichmentData = () => {
+const useGetLeadData = () => {
 	const [params, setParams] = useState({
 		page_limit               : 10,
 		page                     : 1,
@@ -226,4 +226,4 @@ const useGetEnrichmentData = () => {
 	};
 };
 
-export default useGetEnrichmentData;
+export default useGetLeadData;

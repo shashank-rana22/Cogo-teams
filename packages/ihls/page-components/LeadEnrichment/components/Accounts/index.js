@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { STATISTICS_HEAD } from '../../helpers/constants';
-import useGetEnrichmentData from '../../hooks/useGetEnrichmentData';
+import useGetLeadData from '../../hooks/useGetLeadData';
 import LeadInfo from '../LeadInfo';
 import MainFilters from '../MainFilters';
 import Statistics from '../Statistics';
@@ -26,7 +26,7 @@ function Accounts() {
 		onChangeTableHeadCheckbox = () => {},
 		onChangeBodyCheckbox = () => {},
 		paginationData = {},
-	} = useGetEnrichmentData();
+	} = useGetLeadData();
 
 	return (
 		<div className={styles.container}>
