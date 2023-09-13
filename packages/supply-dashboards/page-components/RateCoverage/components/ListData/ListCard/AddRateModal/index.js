@@ -218,6 +218,9 @@ function AddRateModal({
 			if (!isEmpty(validities)) {
 				const { line_items = [] } = validities[DEFAULT_VALUE];
 				prefillFreightCodes = line_items;
+				setValue('schedule_type', validities[DEFAULT_VALUE]?.schedule_type);
+				setValue('validity_start', new Date(validities[DEFAULT_VALUE]?.validity_start));
+				setValue('validity_end', new Date(validities[DEFAULT_VALUE]?.validity_end));
 			}
 
 			let mandatoryFreightCodes = [];
