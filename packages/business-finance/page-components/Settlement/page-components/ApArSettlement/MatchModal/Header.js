@@ -45,6 +45,7 @@ function Header(
 		dryRun = false,
 		fileValue = '',
 		checkLoading = false,
+		t = () => {},
 	},
 ) {
 	const [showJvButton, setShowJvButton] = useState(false);
@@ -69,10 +70,10 @@ function Header(
 	return (
 		<>
 			<div className={cl`${styles.header} ${styles.supheader}`}>
-				<span className={styles.supheader}>MATCHING</span>
+				<span className={styles.supheader}>{t('settlement:matching_text')}</span>
 				{' '}
 				<span className={cl`${styles.subheader} ${styles.supheader}`}>
-					( Drag and drop to set the matching hierarchy )
+					{t('settlement:drag_drop_text')}
 
 				</span>
 			</div>
@@ -81,7 +82,7 @@ function Header(
 			<div className={styles.balanceStyle}>
 				<div className={styles.overflow_style}>
 					<div className={styles.match_bal_style}>
-						Matching Balance
+						{t('settlement:matching_balance_text')}
 						<p className={styles.paragraph}>
 							{getFormatAmount(updateBal, selectedData[GLOBAL_CONSTANTS.zeroth_index]?.currency)}
 						</p>
@@ -100,7 +101,7 @@ function Header(
 									themeType="primary"
 									onClick={() => setShowJV(true)}
 								>
-									CREATE JV
+									{t('settlement:create_jv_text')}
 								</Button>
 							)}
 						</div>
@@ -110,11 +111,11 @@ function Header(
 				<div className={styles.btn_container}>
 					<div className={styles.Datepicker}>
 						<div style={{ margin: '0px 6px', fontSize: '12px', fontWeight: '500' }}>
-							Settlement Date
+							{t('settlement:settlement_date')}
 						</div>
 
 						<Datepicker
-							placeholder="Enter Date"
+							placeholder={t('settlement:date_placeholder') || ''}
 							dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 							name="date"
 							onChange={(e) => { setDate(e); }}
@@ -127,7 +128,7 @@ function Header(
 						onClick={() => { handleSetTdsZero(updatedData, setUpdatedData); }}
 						themeType="secondary"
 					>
-						Set TDS Zero
+						{t('settlement:set_tds_zero')}
 					</Button>
 
 					<div>
@@ -136,9 +137,9 @@ function Header(
 							onClick={() => onClick('primary sm')}
 							themeType="secondary"
 						>
-							Upload File
+							{t('settlement:upload_file_label')}
 						</Button>
-						<p className={styles.optional}>(Optional)</p>
+						<p className={styles.optional}>{t('settlement:optional_label')}</p>
 						{showDocument && (
 							<UploadDocument
 								showDocument={showDocument}
@@ -146,6 +147,7 @@ function Header(
 								onOuterClick={onOuterClick}
 								fileValue={fileValue}
 								setFileValue={setFileValue}
+								t={t}
 							/>
 						)}
 					</div>
@@ -159,11 +161,11 @@ function Header(
 								handleDryRunClick();
 							}}
 						>
-							DRY RUN
+							{t('settlement:dry_run_text')}
 						</Button>
 						{dryRun
 					&& (
-						<p className={styles.error}>Please refresh to dry run again !</p>
+						<p className={styles.error}>{t('settlement:refresh_alert')}</p>
 					)}
 					</div>
 

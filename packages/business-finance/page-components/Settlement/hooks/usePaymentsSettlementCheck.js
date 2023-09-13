@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { getFormatDates } from '../utils/getFormatDate';
 
-const usePaymentsSettlementCheck = ({ selectedData = [], date = '' }) => {
+const usePaymentsSettlementCheck = ({ selectedData = [], date = '', t = () => {} }) => {
 	const { profile } = useSelector((state) => state || {});
 	const [success, setSuccess] = useState(true);
 	const [
@@ -33,10 +33,10 @@ const usePaymentsSettlementCheck = ({ selectedData = [], date = '' }) => {
 						&& getFormatDates(date)) || undefined,
 				},
 			});
-			Toast.success('Dry Run Successful');
+			Toast.success(t('settlement:dry_run_successful_message'));
 		} catch (error) {
 			setSuccess(false);
-			Toast.error(error?.response?.data?.message || 'Something went wrong');
+			Toast.error(error?.response?.data?.message || t('settlement:something_went_wrong_message'));
 		}
 	};
 

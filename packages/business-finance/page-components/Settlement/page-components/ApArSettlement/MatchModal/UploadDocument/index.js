@@ -2,14 +2,13 @@ import { Modal, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import React from 'react';
 
-const TITLE = 'Upload Document';
-
 function UploadDocument({
 	showDocument = false,
 	setShowDocument = () => {},
 	onOuterClick = () => {},
 	fileValue = {},
 	setFileValue = () => {},
+	t = () => {},
 }) {
 	return (
 		<Modal
@@ -18,10 +17,10 @@ function UploadDocument({
 			onOuterClick={() => onOuterClick()}
 			size="md"
 		>
-			<Modal.Header title={TITLE} />
+			<Modal.Header title={t('settlement:upload_document_title')} />
 			<Modal.Body>
 				<div style={{ display: 'block', alignItems: 'center', marginBottom: '16px' }}>
-					<p>Drag and drop your files here!</p>
+					<p>{t('settlement:drag_drop')}</p>
 					<FileUploader
 						defaultValues={fileValue?.finalUrl || fileValue}
 						onChange={setFileValue}
@@ -37,13 +36,13 @@ function UploadDocument({
 					onClick={() => { setShowDocument(false); }}
 					themeType="secondary"
 				>
-					Upload
+					{t('settlement:upload_btn')}
 				</Button>
 				<Button
 					themeType="secondary"
 					onClick={() => { setShowDocument(false); setFileValue({}); }}
 				>
-					Cancel/Remove File
+					{t('settlement:cancel_btn')}
 				</Button>
 			</Modal.Footer>
 		</Modal>

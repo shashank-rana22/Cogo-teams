@@ -1,7 +1,7 @@
-export const ACCOUNT_MODE_OPTIONS = [
-	{ label: 'AP', value: 'AP' },
-	{ label: 'AR', value: 'AR' },
-	{ label: 'CSD', value: 'CSD' },
-	{ label: 'PDA', value: 'PDA' },
-	{ label: 'VTDS', value: 'VTDS' },
+export const accountModeOptions = ({ t = () => {} }) => [
+	{ label: t('settlement:ap_label'), value: 'AP' },
+	{ label: t('settlement:ar_label'), value: 'AR' },
+	{ label: t('settlement:csd_label'), value: 'CSD' },
+	{ label: t('settlement:pda_label'), value: 'PDA' },
+	{ label: t('settlement:vtds_label'), value: 'VTDS' },
 ];

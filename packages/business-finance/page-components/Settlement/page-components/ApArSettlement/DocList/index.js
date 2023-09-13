@@ -1,4 +1,5 @@
 import { Table, Pagination } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import useGetColumns from '../../../configurations/ap-ar-settlement/docList-column';
@@ -17,6 +18,7 @@ function DocList({
 	pageCheckedRows = [],
 	setPageCheckedRows = () => {},
 }) {
+	const { t = () => {} } = useTranslation(['settlement']);
 	const { list = [] } = data || {};
 	const TABLE_COLUMNS = useGetColumns({
 		data,
@@ -27,6 +29,7 @@ function DocList({
 		setSortData,
 		pageCheckedRows,
 		setPageCheckedRows,
+		t,
 	});
 	return (
 		<div className={styles.container}>

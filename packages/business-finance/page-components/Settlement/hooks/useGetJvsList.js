@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const useGetJVList = ({ filters = {} }) => {
+const useGetJVList = ({ filters = {}, t = () => {} }) => {
 	const [{ data:jvListData, loading: jvListLoading }, jvListTrigger] = useRequestBf(
 		{
 			url     : '/payments/parent-jv/list',
@@ -20,7 +20,7 @@ const useGetJVList = ({ filters = {} }) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.error?.message || 'Something went wrong');
+			Toast.error(error?.error?.message || t('settlement:something_went_wrong_message'));
 		}
 	};
 
