@@ -31,7 +31,7 @@ function EmptyChatPage({
 		return (
 			<ShipmentsHomePage
 				setActiveTab={setActiveTab}
-				showAddPrimaryUserButton={showShipments}
+				viewType={viewType}
 				mailProps={mailProps}
 			/>
 		);

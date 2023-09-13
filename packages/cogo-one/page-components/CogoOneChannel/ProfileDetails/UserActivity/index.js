@@ -28,9 +28,9 @@ function Loader({ activityTab = '' }) {
 function UserActivities(props) {
 	const {
 		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
-		setRaiseTicketModal = () => {},
-		viewType = '',
+		setRaiseTicketModal = () => {}, viewType = '',
 		setActiveTab = () => {},
+		mailProps = {},
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -78,7 +78,6 @@ function UserActivities(props) {
 		type: 'activity',
 		pagination,
 		setPagination,
-
 	});
 
 	const {
@@ -259,6 +258,7 @@ function UserActivities(props) {
 					viewType={viewType}
 					fetchActivityLogs={fetchActivityLogs}
 					setActiveTab={setActiveTab}
+					mailProps={mailProps}
 				/>
 			)}
 

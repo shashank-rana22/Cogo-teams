@@ -1,9 +1,9 @@
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import PocContainer from '../../../../../common/PocContainer';
 import ShipmentsCard from '../../../../../common/ShipmentsCard';
 
-import PocContainer from './PocContainer';
 import styles from './styles.module.css';
 
 const handleShipmentClick = ({
@@ -59,7 +59,7 @@ function ShipmentCard({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
-	showAddPrimaryUserButton = false,
+	viewType = '',
 	mailProps = {},
 	params = {},
 	range = '',
@@ -109,7 +109,7 @@ function ShipmentCard({
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
-				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				viewType={viewType}
 				handleShipmentChat={handleShipmentChat}
 			/>
 		</div>
