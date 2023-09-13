@@ -3,7 +3,6 @@ import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import blockOptions from '../../../../../constants/select-block-options';
 import SubBlock from '../SubBlock';
 
 import styles from './styles.module.css';
@@ -36,7 +35,8 @@ function Block(props) {
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		blockParameterLoading,
-	} = useBlockCreation({ control, name, watch });
+		filteredBlockOptions,
+	} = useBlockCreation({ control, name, watch, blockIndex });
 
 	return (
 		<div className={styles.container} key={blockParameterLoading}>
@@ -58,8 +58,9 @@ function Block(props) {
 				<SelectController
 					name={`${name}.block`}
 					control={control}
-					options={blockOptions}
+					options={filteredBlockOptions}
 					rules={{ required: 'Required' }}
+					value={watchBlock}
 				/>
 
 				{errors[`${name}.block`] && (
@@ -89,11 +90,12 @@ function Block(props) {
 				/>
 			))}
 
-			{blockParameterLoading ? <Loader themeType="primary" /> : (!!subBlockType && (
+			{blockParameterLoading ? <Loader themeType="primary" /> : ((subBlockOptions.length !== fields.length) && (
 				<Button
 					type="button"
 					size="md"
 					themeType="link"
+					style={{ marginTop: '4px' }}
 					onClick={() => {
 						setEditSubBlock((prev) => ({
 							...prev,

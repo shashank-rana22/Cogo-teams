@@ -49,7 +49,7 @@ function FieldArray(props) {
 				<Button
 					themeType={buttonThemeType}
 					onClick={() => append(CHILD_EMPTY_VALUES)}
-					style={{ margin: '16px 0px' }}
+					style={{ marginTop: '4px' }}
 				>
 					+
 					{' '}

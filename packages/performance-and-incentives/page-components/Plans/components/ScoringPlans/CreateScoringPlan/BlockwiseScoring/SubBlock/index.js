@@ -33,6 +33,7 @@ function SubBlock(props) {
 		handleClick = () => {},
 		parameterUnitOptions = {},
 		checkForSubBlock = () => {},
+		filteredSubBlockOptions = [],
 	} = useSubBlockCreation({
 		subBlockWiseParameterOptions,
 		subBlockType,
@@ -46,6 +47,7 @@ function SubBlock(props) {
 		setEditSubBlock,
 		prefillValues,
 		watchBlock,
+		subBlockOptions,
 	});
 
 	const isEditMode = editSubBlock[blockIndex]?.[subBlockIndex];
@@ -64,7 +66,7 @@ function SubBlock(props) {
 						<SelectController
 							name={`${name}.sub_block_id`}
 							control={control}
-							options={subBlockOptions}
+							options={filteredSubBlockOptions}
 							value={watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}].sub_block_id`)}
 							rules={{ required: `${subBlockType} is required` }}
 						/>

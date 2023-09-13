@@ -16,6 +16,7 @@ const useSubBlockCreation = (props) => {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
+		subBlockOptions,
 	} = props;
 
 	const { updateScoringAttributes, loading } = usePostAgentScoringAttributes();
@@ -58,7 +59,7 @@ const useSubBlockCreation = (props) => {
 				fixed_percentage_value     : item.fixed_percentage_value || undefined,
 				variable_percentage_value  : item.variable_percentage_value || undefined,
 				provisional_trigger        : item.provisional_trigger,
-				realised_trigger           : item.realised_dtrigger,
+				realised_trigger           : item.realised_trigger,
 
 			}));
 
@@ -67,6 +68,23 @@ const useSubBlockCreation = (props) => {
 			refetch();
 		})();
 	};
+
+	const formValues = watch();
+
+	const filteredSubBlockOptions = useMemo(() => {
+		const selectedBlockOptions = formValues.blocks[blockIndex]
+			?.sub_blocks?.reduce((accumulator, currentValue, currentIndex) => {
+				if (currentIndex < subBlockIndex) {
+					const accumulatorCopy = [...accumulator];
+					accumulatorCopy.push(currentValue.sub_block_id);
+
+					return accumulatorCopy;
+				}
+				return accumulator;
+			}, []);
+
+		return subBlockOptions.filter((item) => !selectedBlockOptions.includes(item.value));
+	}, [formValues.blocks, blockIndex, subBlockOptions, subBlockIndex]);
 
 	const checkForSubBlock = () => prefillValues[blockIndex]
 		?.sub_blocks?.find((item) => item.sub_block_id === watchSubBlock);
@@ -78,6 +96,7 @@ const useSubBlockCreation = (props) => {
 		loading,
 		handleClick,
 		checkForSubBlock,
+		filteredSubBlockOptions,
 	};
 };
 

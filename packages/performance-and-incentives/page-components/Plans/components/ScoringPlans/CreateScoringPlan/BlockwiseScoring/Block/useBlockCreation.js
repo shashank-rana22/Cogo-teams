@@ -3,9 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import blockOptions from '../../../../../constants/select-block-options';
+
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
-const useBlockCreation = ({ control, name, watch }) => {
+const useBlockCreation = ({ control, name, watch, blockIndex }) => {
 	const CHILD_EMPTY_VALUES = {
 		sub_block_id: '',
 	};
@@ -40,6 +42,22 @@ const useBlockCreation = ({ control, name, watch }) => {
 
 	const subBlockType = list[GLOBAL_CONSTANTS.zeroth_index]?.sub_block_type;
 
+	const formValues = watch();
+
+	const filteredBlockOptions = useMemo(() => {
+		const selectedBlockOptions = formValues.blocks?.reduce((accumulator, currentValue, currentIndex) => {
+			if (currentIndex < blockIndex) {
+				const accumulatorCopy = [...accumulator];
+				accumulatorCopy.push(currentValue.block);
+
+				return accumulatorCopy;
+			}
+			return accumulator;
+		}, []);
+
+		return blockOptions.filter((item) => !selectedBlockOptions.includes(item.value));
+	}, [formValues.blocks, blockIndex]);
+
 	return {
 		CHILD_EMPTY_VALUES,
 		watchBlock,
@@ -50,6 +68,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		blockParameterLoading,
+		filteredBlockOptions,
 	};
 };
 

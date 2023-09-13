@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 // import { useRouter } from '@cogoport/next';
 
+import blockOptions from '../../../../constants/select-block-options';
+
 import Block from './Block';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
@@ -60,14 +62,17 @@ function BlockwiseScoring(props) {
 					/>
 				))}
 
-				<Button
-					type="button"
-					size="md"
-					themeType="link"
-					onClick={() => append(CHILD_EMPTY_VALUES)}
-				>
-					+ Add Block
-				</Button>
+				{(blockOptions.length !== fields.length) ? (
+					<Button
+						type="button"
+						size="md"
+						themeType="link"
+						onClick={() => append(CHILD_EMPTY_VALUES)}
+					>
+						+ Add Block
+					</Button>
+				) : null}
+
 			</div>
 
 			<div className={styles.btn_container}>
