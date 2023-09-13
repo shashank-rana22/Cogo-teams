@@ -1,27 +1,28 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import INCO_TERM_MAPING from '../../../../../constants/inco-term-mapping';
-import SERVICE_ICON_MAPPINGS from '../../../../../constants/service-icon-mapping';
+import serviceIconMappings from '../../../../../constants/service-icon-mapping';
 
 import styles from './styles.module.css';
 
-const SingleCountryDataServices = {
+const singleCountryDataServices = (t = () => {}) => ({
 	air_freight_local: {
-		export       : 'Origin',
-		import       : 'Destination',
-		suffix_label : 'Location:',
+		export       : t('airBookingDesk:service_type_export_origin'),
+		import       : t('airBookingDesk:service_type_import_destination'),
+		suffix_label : t('airBookingDesk:service_type_suffix_label_location'),
 
 	},
 	air_customs: {
-		export       : 'Origin',
-		import       : 'Destination',
-		suffix_label : 'Custom Clearance:',
+		export       : t('airBookingDesk:service_type_export_origin'),
+		import       : t('airBookingDesk:service_type_import_destination'),
+		suffix_label : t('airBookingDesk:service_type_suffix_label_custom_clearance'),
 
 	},
-};
+});
 
-function HandleLocationPort({ type = '', item }) {
+function HandleLocationPort({ type = '', item = {} }) {
 	const { display_name = '', port_code = '', postal_code = '' } = item[type] || {};
 
 	return (
@@ -51,15 +52,20 @@ function HandleLocationPort({ type = '', item }) {
 	);
 }
 
-function PortDetails({ item }) {
+function PortDetails({ item = {} }) {
+	const { t } = useTranslation(['airBookingDesk']);
+
 	const {
 		shipment_type = '',
 		trade_type = '',
 		inco_term = '',
 	} = item || {};
 
+	const SingleCountryDataServices = singleCountryDataServices(t);
+
 	const isSingleDataCountryServices = Object.keys(SingleCountryDataServices).includes(shipment_type);
 
+	const SERVICE_ICON_MAPPINGS = serviceIconMappings(t);
 	const { icon = '', text = '' } = SERVICE_ICON_MAPPINGS[shipment_type];
 
 	const tradeType = trade_type || INCO_TERM_MAPING[inco_term];

@@ -14,10 +14,13 @@ const ROUTES_MAPPING = {
 };
 
 const getButtonOptions = ({
-	setShowRaiseTicket,
-	setShowPocModal, setShowPopover, shipmentItem,
+	setShowRaiseTicket = () => {},
+	setShowPocModal = () => {},
+	setShowPopover = () => {},
+	shipmentItem = {},
 	showAddPrimaryUserButton = false,
 	handleRowClick = () => {},
+	showModalType = () => {},
 }) => [
 	{
 		key      : 'view_shipments',
@@ -61,14 +64,29 @@ const getButtonOptions = ({
 		condition : ['all_shipments', 'user_shipments'],
 		show      : showAddPrimaryUserButton,
 	},
+	{
+		key      : 'show_notes_modal',
+		children : 'Notes',
+		onClick  : (e) => {
+			e.stopPropagation();
+			showModalType({ modalType: 'show_notes_modal', shipmentData: shipmentItem });
+			setShowPopover('');
+		},
+		condition : ['all_shipments'],
+		show      : true,
+	},
 ];
 
 function HeaderBlock({
-	shipmentItem = {}, setShowPocDetails = () => {},
-	type = '', setShowPopover = () => {}, showPopover = '',
+	shipmentItem = {},
+	setShowPocDetails = () => {},
+	type = '',
+	setShowPopover = () => {},
+	showPopover = '',
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	handleShipmentChat = () => {},
+	showModalType = () => {},
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
@@ -120,6 +138,7 @@ function HeaderBlock({
 		shipmentItem,
 		showAddPrimaryUserButton,
 		handleRowClick,
+		showModalType,
 	});
 
 	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type) && itm?.show);

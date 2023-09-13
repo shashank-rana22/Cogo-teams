@@ -18,12 +18,12 @@ const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }
 			created_at_greater_than : !serialId ? start_date : undefined,
 			created_at_less_than    : !serialId ? end_date : undefined,
 		},
-		get_shipment_quotation_data  : true,
-		milestone_data_required      : true,
-		current_task_status_required : true,
-		last_completed_task_required : true,
-		page                         : pagination,
-		page_limit                   : 6,
+		// get_shipment_quotation_data  : true,
+		// milestone_data_required      : true,
+		// current_task_status_required : true,
+		// last_completed_task_required : true,
+		page       : pagination,
+		page_limit : 6,
 	};
 };
 

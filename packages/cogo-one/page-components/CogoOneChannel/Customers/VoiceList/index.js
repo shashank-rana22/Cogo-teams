@@ -24,6 +24,7 @@ function VoiceList(voiceProps) {
 		activeVoiceCard = {},
 		activeTab = '',
 		fetchUnreadCall = () => {},
+		viewType = '',
 	} = voiceProps;
 
 	const [searchValue, setSearchValue] = useState('');
@@ -35,7 +36,7 @@ function VoiceList(voiceProps) {
 		appliedFilters = {},
 		setAppliedFilters = () => {},
 		setListData = () => {},
-	} = useGetVoiceCallList({ activeTab, searchValue });
+	} = useGetVoiceCallList({ activeTab, searchValue, viewType });
 
 	const { updateMissedVoiceCount } = useUpdateVoiceCallRecord({ fetchUnreadCall });
 
