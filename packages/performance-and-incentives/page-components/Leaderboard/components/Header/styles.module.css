@@ -1,0 +1,17 @@
+.head_container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+.subheading {
+	font-size: var(--font-size-xl);
+}
+
+.light {
+	color: var(--color-secondary-2);
+}
+
+.button_container {
+	display: flex;
+}
