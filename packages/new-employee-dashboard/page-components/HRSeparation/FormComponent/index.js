@@ -66,7 +66,7 @@ function FormComponent({
 		return is_complete;
 	});
 
-	if (loading) return 'loading...';
+	if (loading) return 'loading...';				// TODOs: give some loading state
 
 	return (
 		<div className={styles.container}>
