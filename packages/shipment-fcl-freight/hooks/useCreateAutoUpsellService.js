@@ -3,8 +3,8 @@ import { useRequest } from '@cogoport/request';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
-function useCreateAutoUpsellService({ task = {}, refetch = () => {} }) {
-	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
+function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {} }) {
+	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: () => { onCancel(); refetch(); } });
 
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/auto_upsell_service',

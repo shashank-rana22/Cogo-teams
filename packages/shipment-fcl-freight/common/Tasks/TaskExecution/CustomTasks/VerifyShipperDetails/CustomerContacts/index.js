@@ -14,7 +14,7 @@ import CreatePoc from './CreatePoc';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 
-function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }) {
+function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {}, onCancel = () => {} }) {
 	const [selectedUserId, setSelectedUserId] = useState(null);
 	const [showCreatePoc, setShowCreatePoc] = useState(false);
 
@@ -85,13 +85,22 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {} }
 						Add POC
 					</Button>
 
-					<Button
-						disabled={isEmpty(checkList) || loading || createUserLoading || createOrgLoading}
-						themeType="accent"
-						onClick={() => { onVerify(); }}
-					>
-						Verify
-					</Button>
+					<div>
+						<Button
+							themeType="secondary"
+							onClick={() => { onCancel(); }}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							disabled={isEmpty(checkList) || loading || createUserLoading || createOrgLoading}
+							themeType="accent"
+							onClick={() => { onVerify(); }}
+						>
+							Verify
+						</Button>
+					</div>
 				</div>
 			</div>
 		</>

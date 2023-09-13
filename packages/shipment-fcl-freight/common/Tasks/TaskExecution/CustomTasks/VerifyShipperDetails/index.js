@@ -12,6 +12,7 @@ const COMPONENT_MAPPING = {
 function VerifyShipperDetails({
 	task = {},
 	shipment_data = {},
+	onCancel = () => {},
 	refetch = () => {},
 }) {
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
@@ -19,10 +20,10 @@ function VerifyShipperDetails({
 
 	const componentProps = {
 		0: {
-			setStep, task, setOrgId,
+			setStep, task, setOrgId, onCancel,
 		},
 		1: {
-			task, shipment_data, refetch, orgId,
+			task, shipment_data, refetch, orgId, onCancel,
 		},
 	};
 

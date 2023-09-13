@@ -14,7 +14,7 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
+function BillingAddress({ task = {}, refetch = () => {}, orgId = '', onCancel = () => {} }) {
 	const [countryId, setCountryId] = useState('');
 
 	const { loading = false, defaultValues = {} } = useListOrganizationUsers({ orgId });
@@ -24,7 +24,7 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '' }) {
 	const {
 		onSubmit = () => {},
 		loading: upsellLoading = false,
-	} = useCreateAutoUpsellService({ task, refetch });
+	} = useCreateAutoUpsellService({ task, refetch, onCancel });
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,
