@@ -153,48 +153,6 @@ function AddRateModal({
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
 
-	useEffect(() => {
-		let prefillFreightCodes = [];
-		if (rateData?.freight) {
-			const { freight = {} } = rateData;
-			const { validities = [] } = freight;
-			if (!isEmpty(validities)) {
-				const { line_items = [] } = validities[DEFAULT_VALUE];
-				prefillFreightCodes = line_items;
-			}
-
-			let mandatoryFreightCodes = [];
-			Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
-				if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = {};
-					prefillFreightCodes.forEach((charge) => {
-						if (charge.code === code) {
-							flag = charge;
-						}
-					});
-					if (Object.keys(flag).length) {
-						prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
-						mandatoryFreightCodes = [...mandatoryFreightCodes,
-							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
-					} else {
-						mandatoryFreightCodes = [...mandatoryFreightCodes,
-							{ code, price: '', unit: '', currency: '' }];
-					}
-				}
-			});
-
-			if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
-				setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
-			}
-		}
-	}, [JSON.stringify(rateData)]);
-
-	useEffect(() => {
-		if (rateData?.freight_charge_codes) {
-			setChargeCodes(rateData?.freight_charge_codes);
-		}
-	}, [JSON.stringify(rateData?.freight_charge_codes)]);
-
 	const { finalFields } = FieldMutation({
 		fields,
 		values,
@@ -253,9 +211,47 @@ function AddRateModal({
 	}, [weightSlabsJSON, weightSlabs, isAirService, freeWeight, setValue]);
 
 	useEffect(() => {
+		let prefillFreightCodes = [];
+		if (rateData?.freight) {
+			const { freight = {} } = rateData;
+			const { validities = [] } = freight;
+			if (!isEmpty(validities)) {
+				const { line_items = [] } = validities[DEFAULT_VALUE];
+				prefillFreightCodes = line_items;
+			}
+
+			let mandatoryFreightCodes = [];
+			Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
+				if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+					let flag = {};
+					prefillFreightCodes.forEach((charge) => {
+						if (charge.code === code) {
+							flag = charge;
+						}
+					});
+					if (Object.keys(flag).length) {
+						prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
+						mandatoryFreightCodes = [...mandatoryFreightCodes,
+							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+					} else {
+						mandatoryFreightCodes = [...mandatoryFreightCodes,
+							{ code, price: '', unit: '', currency: '' }];
+					}
+				}
+			});
+
+			if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
+				setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
+			}
+		}
 		setValue('free_weight', rateData?.weight_limit?.free_limit);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(rateData)]);
+
+	useEffect(() => {
+		if (rateData?.freight_charge_codes) {
+			setChargeCodes(rateData?.freight_charge_codes);
+		}
+	}, [JSON.stringify(rateData?.freight_charge_codes)]);
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
