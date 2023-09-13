@@ -1,4 +1,12 @@
-// eslint-disable-next-line import/no-unresolved
-import EmployeeProfile from '@cogoport/profile/page-components/EmployeeProfile';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default EmployeeProfile;
+// eslint-disable-next-line import/no-unresolved
+export { default } from '@cogoport/profile/page-components/EmployeeProfile';
+
+export async function getServerSideProps({ locale }) {
+	return {
+		props: {
+			...(await serverSideTranslations(locale, ['common'])),
+		},
+	};
+}
