@@ -20,6 +20,7 @@ function NewNotifications({
 	// openNotificationPopover,
 	dataRequired,
 	setDataRequired,
+	onMarkAllAsRead,
 }) {
 	const { zeroth_index } = GLOBAL_CONSTANTS;
 
@@ -121,12 +122,9 @@ function NewNotifications({
 
 	const handleNotificationClick = async (item) => {
 		try {
-			console.log('notification clicked');
 			if (item?.content?.link) {
 				notificationsRedirectLink({ link: item?.content?.link, push, partner_id, NAVIGATION_LINKS });
 			}
-
-			console.log('notification clicked trigger');
 
 			if (!item?.is_clicked) {
 				const updateRes = await triggerCommunication({
@@ -138,20 +136,21 @@ function NewNotifications({
 					trigger({
 						params: {
 							data_required                  : dataRequired,
-							// data_required                  : true,
 							not_seen_count_required        : true,
 							filters                        : { type: 'platform_notification' },
 							communication_content_required : dataRequired,
-							// communication_content_required : true,
 						},
 					});
 				}
 			}
+
 			setOpenNotificationPopover(false);
 		} catch (err) {
 			showErrorsInToast(err.data);
 		}
 	};
+
+	// Todo : Not being used to countinuesly fire trigger
 
 	useEffect(() => {
 		if (!loading && (unPrefixedPath !== '/notifications' || dataRequired)) {
@@ -189,7 +188,7 @@ function NewNotifications({
 			// onShowToggle={onShowToggle}
 			formattedData={formattedData}
 			handleNotificationClick={handleNotificationClick}
-			// onMarkAllAsRead={onMarkAllAsRead}
+			onMarkAllAsRead={onMarkAllAsRead}
 			onSeeAll={onSeeAll}
 		/>
 	);

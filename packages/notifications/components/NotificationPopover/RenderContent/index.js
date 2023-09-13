@@ -9,9 +9,9 @@ function RenderContent({
 	handleNotificationClick = () => {},
 	onMarkAllAsRead = () => {},
 	onSeeAll = () => {},
-	rpaNotifications = [],
-	rpaLoading = false,
-	handleRpaNotificationClick = () => {},
+	// rpaNotifications = [],
+	// rpaLoading = false,
+	// handleRpaNotificationClick = () => {},
 	setShowPopover = () => {},
 }) {
 	const { list = [], loading } = formattedData || {};
@@ -22,11 +22,11 @@ function RenderContent({
 			label : 'Notifications',
 			value : 'general',
 		},
-		{
-			color : 'yellow',
-			label : 'Mails',
-			value : 'mails',
-		},
+		// {
+		// 	color : 'yellow',
+		// 	label : 'Mails',
+		// 	value : 'mails',
+		// },
 	];
 
 	const NOTIFICATION_TYPE_MAPPING = {
@@ -36,11 +36,11 @@ function RenderContent({
 			handleNotificationClick,
 		},
 
-		mails: {
-			loading                 : rpaLoading,
-			list                    : rpaNotifications,
-			handleNotificationClick : handleRpaNotificationClick,
-		},
+		// mails: {
+		// 	loading                 : rpaLoading,
+		// 	list                    : rpaNotifications,
+		// 	handleNotificationClick : handleRpaNotificationClick,
+		// },
 	};
 
 	return (

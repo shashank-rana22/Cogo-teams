@@ -1,5 +1,5 @@
 import { Input, cl } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchdark, IcMNotifications } from '@cogoport/icons-react';
 // import NewNotifications from '@cogoport/notifications/page-components/NewNotifications/index';
 import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
@@ -17,6 +17,9 @@ import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
+
+const ZERO = 0;
+const MAX_COUNT = 100;
 
 function Navbar({
 	className,
@@ -50,6 +53,7 @@ function Navbar({
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
 	const [openNotificationPopover, setOpenNotificationPopover] = useState(false);
+	const [unseenNotificationCount, setUnseenNotificationCount] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -84,6 +88,8 @@ function Navbar({
 		// },
 	}, { manual: true });
 
+	const { is_not_seen_count = ZERO } = notificationData || {};
+
 	useEffect(() => {
 		trigger({
 			params: {
@@ -96,6 +102,10 @@ function Navbar({
 			},
 		});
 	}, [trigger]);
+
+	useEffect(() => {
+		setUnseenNotificationCount(is_not_seen_count);
+	}, [is_not_seen_count]);
 
 	const handleLeave = () => {
 		setShowCount(true);
@@ -144,8 +154,6 @@ function Navbar({
 						showCount={showCount}
 					/>
 
-					<AdminNotification />
-
 					<div className={styles.search_container}>
 						<Input
 							value={searchString}
@@ -154,6 +162,24 @@ function Navbar({
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}
 						/>
+					</div>
+
+					<div
+						onClick={() => setOpenNotificationPopover(!openNotificationPopover)}
+						className={styles.list_item_inner}
+						style={{ marginTop: 8 }}
+						role="presentation"
+					>
+						<IcMNotifications width={16} height={16} fill="red" />
+						{unseenNotificationCount && showCount && !openNotificationPopover ? (
+							<div className={styles.notification_count}>
+								{unseenNotificationCount >= MAX_COUNT
+									? `${MAX_COUNT}+` : unseenNotificationCount}
+							</div>
+						) : null}
+
+						<span>Notifications</span>
+
 					</div>
 
 					<div className={styles.line} />
@@ -219,13 +245,20 @@ function Navbar({
 						)
 				}
 
-				{/* <AdminNotification
-					notificationData={notificationData}
-					notificationLoading={notificationLoading}
-					trigger={trigger}
-					openNotificationPopover={openNotificationPopover}
-					setOpenNotificationPopover={setOpenNotificationPopover}
-				/> */}
+				{
+					openNotificationPopover
+						&& (
+							<AdminNotification
+								notificationData={notificationData}
+								notificationLoading={notificationLoading}
+								trigger={trigger}
+								openNotificationPopover={openNotificationPopover}
+								setOpenNotificationPopover={setOpenNotificationPopover}
+								setUnseenNotificationCount={setUnseenNotificationCount}
+								unseenNotificationCount={unseenNotificationCount}
+							/>
+						)
+				}
 
 			</div>
 

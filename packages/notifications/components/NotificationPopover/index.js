@@ -77,7 +77,6 @@ function NotificationsPopover(props) {
 
 	return (
 		<div style={{ display: 'flex' }}>
-
 			<RenderContent
 				{...props}
 				notificationType={notificationType}

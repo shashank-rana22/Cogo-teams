@@ -33,7 +33,7 @@ function Header({
 					<div
 						onClick={() => {
 							// eslint-disable-next-line no-unused-expressions
-							onMarkAllAsRead;
+							onMarkAllAsRead();
 							setShow(false);
 						}}
 						role="button"

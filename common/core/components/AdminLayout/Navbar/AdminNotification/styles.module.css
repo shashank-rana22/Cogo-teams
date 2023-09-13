@@ -17,7 +17,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 8px 16px;
+	padding: 0 12px 0 0;
 	border-radius: 11.0769px;
 }
 
@@ -29,9 +29,16 @@
 	/* margin-bottom: 10px; */
 	align-items: center;
 	width: 100%;
-	padding: 0;
+	padding: 8px 16px;
+
+	/* padding: 0; */
 	margin: 8px 0;
 	overflow: auto;
+	font-weight: 500 !important;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: background-color 0.1s linear, color 0.1s linear;
+	will-change: background-color;
 
 	&:hover {
 		background-color: #fef199;
