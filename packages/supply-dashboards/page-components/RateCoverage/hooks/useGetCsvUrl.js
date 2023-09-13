@@ -3,10 +3,14 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import { HEADINGS } from '../configurations/helpers/constants';
+
 const END_POINT_MAPPING = {
 	fcl_freight : 'get_fcl_freight_rate_job_csv_url',
 	air_freight : 'get_air_freight_rate_job_csv_url',
 };
+
+const sources = Object.keys(HEADINGS);
 
 const useGetCsvFile = (filter, activeCard) => {
 	const { user_data } = useSelector(({ profile }) => ({
@@ -48,7 +52,7 @@ const useGetCsvFile = (filter, activeCard) => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						source  : activeCard || undefined,
+						source  : sources.includes(activeCard) ? activeCard : undefined,
 						user_id : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
 						...DATE_PARAMS,
 					},
