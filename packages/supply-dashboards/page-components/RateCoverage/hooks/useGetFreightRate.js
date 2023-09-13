@@ -59,7 +59,6 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 	}, [JSON.stringify(dependencyValue)]);
 
 	return {
-		// getFreightRate,
 		data,
 		loading,
 	};

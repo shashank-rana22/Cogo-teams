@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable custom-eslint/function-name-check */
 import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
 import { merge, startCase } from '@cogoport/utils';
@@ -48,10 +49,7 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 							value : unit,
 						}));
 					});
-					// eslint-disable-next-line no-param-reassign
-					// eslint-disable-next-line no-param-reassign
 					childCtrl.customProps = {};
-					// eslint-disable-next-line no-param-reassign
 					childCtrl.customProps.options = UNIT_OPTIONS;
 				}
 
@@ -60,7 +58,6 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 					Object.keys(chargeCodes || {}).forEach((code) => {
 						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
 					});
-					// eslint-disable-next-line no-param-reassign
 					childCtrl.options =	OPTIONS;
 				}
 			});

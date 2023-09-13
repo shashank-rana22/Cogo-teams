@@ -6,7 +6,6 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING } from '../../../configurations/helpers/constants';
-// import useGetFreightRate from '../../../hooks/useGetFreightRate';
 
 import AddRateModal from './AddRateModal';
 import CloseModal from './CloseModal';
