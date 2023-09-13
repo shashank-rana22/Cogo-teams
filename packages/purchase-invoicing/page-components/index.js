@@ -1,9 +1,13 @@
+import { isEmpty } from '@cogoport/utils';
+
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
-import useGetPayableBills from '../hooks/useGetPayableBills';
+// import useGetPayableBills from '../hooks/useGetPayableBills';
+import useGetShipmentCrossEntityInvoice from '../hooks/useGetShipmentCrossEntityInvoice';
 
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
-import CrossEntityInvoice from './CrossEntityInvoices';
+import Invoices from './Invoices';
+// import CrossEntityInvoice from './CrossEntityInvoices';
 
 function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = () => {} }) {
 	const {
@@ -16,9 +20,16 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 		shipment_type : shipmentData?.shipment_type,
 	});
 
-	const { invoiceList, loading } = useGetPayableBills({ shipment_data: shipmentData });
+	const {
+		data: invoiceDataCE,
+		groupedInvoices:groupedInvoicesCE,
+		loading:loadingCE,
+		refetch:salesInvoicesRefetch,
+	} = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
 
-	if (collectionPartyLoading || loading) {
+	// const { invoiceList, loading } = useGetPayableBills({ shipment_data: shipmentData });
+
+	if (collectionPartyLoading || loadingCE) {
 		return <Loader />;
 	}
 
@@ -36,12 +47,22 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 				/>
 			))}
 
-			{(invoiceList || []).map((invoice) => (
+			{/* {(invoiceList || []).map((invoice) => (
 				<CrossEntityInvoice
 					key={invoice?.id}
 					item={invoice}
 				/>
-			))}
+			))} */}
+
+			{!loadingCE && !isEmpty(invoiceDataCE) ? (
+				<Invoices
+					invoiceDataCE={invoiceDataCE}
+					groupedInvoicesCE={groupedInvoicesCE}
+					loadingCE={loadingCE}
+					shipmentData={shipmentData}
+					salesInvoicesRefetch={salesInvoicesRefetch}
+				/>
+			) : null}
 		</div>
 	);
 }

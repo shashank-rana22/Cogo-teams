@@ -16,7 +16,7 @@ function CardHeader({
 					if (field.show === false) {
 						return null;
 					}
-					// todo : add key
+
 					return (
 						// eslint-disable-next-line react/jsx-key
 						<Field
