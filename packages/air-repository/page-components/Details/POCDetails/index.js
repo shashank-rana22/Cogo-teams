@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -28,12 +29,6 @@ function POCDetails({ data = {} }) {
 		inventory_stock_availability: availability, pocs_data:pocsData,
 		ams_mode: amsMode,
 	} = data || {};
-	let amsModeValue = '-';
-	if (amsMode === 'electronic') {
-		amsModeValue = 'Electronic';
-	} else if (amsMode === 'manual') {
-		amsModeValue = 'Manual';
-	}
 
 	return (
 		<div className={styles.poc_detail_container}>
@@ -53,7 +48,7 @@ function POCDetails({ data = {} }) {
 						{t('airRepository:ams_mode_field_label')}
 						<span>:</span>
 					</div>
-					{amsModeValue}
+					{startCase(amsMode) || '-'}
 
 				</div>
 				<div className={styles.poc_list}>
