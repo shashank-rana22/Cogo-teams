@@ -59,7 +59,7 @@
 	justify-content: center;
 	width: 340px;
 	height: 40px;
-	cursor: all-scroll;
+	cursor: pointer;
 	background: #fff;
 	border: 1px solid #ff5655;
 	border-radius: 8px 8px 0 0;
