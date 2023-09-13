@@ -53,7 +53,7 @@ function EditInvoicePreference({
 		setAddInvoicingParty(false);
 	};
 
-	const disableOnProcessing = (selectedParties || []).map((obj) => obj?.processing)?.includes(true);
+	const disableOnProcessing = (selectedParties || []).some((obj) => obj?.processing);
 
 	return (
 		<>
