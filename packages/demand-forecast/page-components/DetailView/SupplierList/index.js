@@ -1,5 +1,4 @@
 import { Pagination } from '@cogoport/components';
-import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
@@ -42,12 +41,6 @@ function SupplierList({ origin_location_id = '', destination_location_id = '', i
 
 	return (
 		<div className={styles.list}>
-			<div className={styles.scope_select}>
-				<ScopeSelect
-					size="md"
-				/>
-			</div>
-
 			<div className={styles.row}>
 				{tableConfig.map((config) => {
 					const { key, title, width } = config;
