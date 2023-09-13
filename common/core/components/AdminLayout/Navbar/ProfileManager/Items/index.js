@@ -103,6 +103,7 @@ function Items({
 
 	const handlePopover = () => {
 		setOpenPopover(!openPopover);
+		setOpenNotificationPopover(false);
 	};
 
 	// const handleNotificationPopover = () => {

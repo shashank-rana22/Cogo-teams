@@ -1,5 +1,5 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
-import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp, IcMNotifications } from '@cogoport/icons-react';
+import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 // import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
@@ -64,11 +64,11 @@ function ProfileManager({
 			fun   : routerFunction,
 			icon  : IcMProfile,
 		},
-		{
-			title : 'notification', // add in translation
-			name  : 'notifications',
-			icon  : IcMNotifications,
-		},
+		// {
+		// 	title : 'notification', // add in translation
+		// 	name  : 'notifications',
+		// 	icon  : IcMNotifications,
+		// },
 		{
 			title : t('common:switch_account'),
 			name  : 'switch_account',

@@ -165,7 +165,10 @@ function Navbar({
 					</div>
 
 					<div
-						onClick={() => setOpenNotificationPopover(!openNotificationPopover)}
+						onClick={() => {
+							setOpenNotificationPopover(!openNotificationPopover);
+							setOpenPopover(false);
+						}}
 						className={styles.list_item_inner}
 						style={{ marginTop: 8 }}
 						role="presentation"

@@ -1,8 +1,6 @@
 import { dynamic } from '@cogoport/next';
 import { useState, useMemo } from 'react';
 
-// eslint-disable-next-line import/no-relative-packages
-import NewNotifications from '../../notifications/page-components/NewNotifications/index';
 import KamDeskContext from '../context/KamDeskContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
@@ -44,7 +42,6 @@ function KamDesk() {
 
 	return (
 		<KamDeskContext.Provider value={contextValues}>
-			<NewNotifications />
 			{shipmentType ? <RenderDesk activeTab={activeTab} /> : null}
 		</KamDeskContext.Provider>
 	);
