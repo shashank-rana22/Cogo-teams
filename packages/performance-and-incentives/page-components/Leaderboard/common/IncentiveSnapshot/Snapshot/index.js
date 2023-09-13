@@ -1,4 +1,4 @@
-import { IcADiscover } from '@cogoport/icons-react';
+import { IcADiscover, IcMProvisional } from '@cogoport/icons-react';
 
 import INCENTIVE_SNAPSHOT_CONSTANTS from '../../../constants/incentive-snapshot-constants';
 
@@ -8,7 +8,7 @@ const { PROVISIONAL, REALIZED, PAYOUT } = INCENTIVE_SNAPSHOT_CONSTANTS;
 
 const COMPONENT_MAPPING = {
 	[PROVISIONAL]: {
-		Icon    : IcADiscover,
+		Icon    : IcMProvisional,
 		heading : 'Provisional',
 	},
 	[REALIZED]: {
