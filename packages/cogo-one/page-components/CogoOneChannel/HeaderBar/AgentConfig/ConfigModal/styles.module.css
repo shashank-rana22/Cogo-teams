@@ -58,5 +58,25 @@
 }
 
 .modal_header {
+	display: flex;
+	align-items: center;
 	padding: 10px 16px;
+
+	:global {
+		.ui_modal_header_title {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.header_label {
+	font-weight: 600;
+}
+
+.back_icon {
+	width: 30px;
+	height: 20px;
+	margin: 0 10px 0 0;
+	cursor: pointer;
 }

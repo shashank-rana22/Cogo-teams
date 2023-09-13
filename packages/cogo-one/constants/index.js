@@ -374,7 +374,7 @@ export const RATING_ELEMENTS = {
 
 	},
 	sad: {
-		image : <IcCVerySad width={30} height={30} style={{ marginTop: '18px' }} />,
+		image : <IcCVerySad width={30} height={30} style={{ marginTop: '8px' }} />,
 		arrow : <IcMDown fill="#ee3425" />,
 	},
 };

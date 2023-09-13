@@ -12818,6 +12818,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_shipment_operating_procedures',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_instruction',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'post_allocation_feedback',
 			access_type  : 'private',
 			service_name : 'allocation',
@@ -14038,6 +14058,11 @@ const partner = {
 			api          : 'get_rolling_forecast_fcl_freight_clusters',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 };
