@@ -6,6 +6,7 @@ import { useState } from 'react';
 import EmptyState from '../common/EmptyState';
 import getColumns from '../configurations/getColumns';
 
+import ActionModal from './ActionModal';
 import Header from './Header';
 import styles from './styles.module.css';
 
@@ -96,6 +97,12 @@ function AmsSubmission() {
 						/>
 					</div>
 				) : null} */}
+			{!isEmpty(modalData) ? (
+				<ActionModal
+					modalData={modalData}
+					setModalData={setModalData}
+				/>
+			) : null}
 		</div>
 	);
 }

@@ -51,7 +51,11 @@ const getTcStatusColumns = ({ t = () => {}, setModalData = () => {} }) => [
 		id       : 'tc_actions',
 		accessor : (item) => (
 			<div className={styles.status}>
-				<Button size="sm" onClick={setModalData}>
+				<Button
+					size="sm"
+					onClick={() => setModalData((prev) => (
+						{ ...prev, data: item, type: 'submit_lms_data' }))}
+				>
 					Submit LMS Data
 				</Button>
 			</div>
@@ -83,7 +87,11 @@ const getTdStatusColumns = ({ t = () => {}, setModalData = () => {} }) => [
 		id       : 'td_actions',
 		accessor : (item) => (
 			<div className={styles.status}>
-				<Button size="sm">
+				<Button
+					size="sm"
+					onClick={() => setModalData((prev) => (
+						{ ...prev, data: item, type: 'amend' }))}
+				>
 					Amend
 				</Button>
 			</div>

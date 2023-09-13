@@ -25,6 +25,7 @@ function Header({
 			>
 				{(tabOptions || []).map((item) => {
 					const { name = '', label = '' } = item;
+
 					return (
 						<TabPanel
 							key={name}
