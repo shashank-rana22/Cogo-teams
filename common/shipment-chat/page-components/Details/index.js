@@ -30,6 +30,12 @@ const shipmentChatStakeholders = [
 	'sales_agent',
 	'costbooking_ops',
 	'lastmile_ops',
+	'release_desk',
+	'collection_desk',
+	'bl_release_desk',
+	'bl_collection_desk',
+	'do_release_desk',
+	'do_collection_desk',
 ];
 
 const CONDITION_MAPPING = {
