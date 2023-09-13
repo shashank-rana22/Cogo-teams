@@ -54,7 +54,8 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 	};
 
 	useEffect(() => {
-		if (formValues?.service_provider_id && formValues?.shipping_line_id) { getFreightRate(); }
+		if (formValues?.service_provider_id
+			&& (formValues?.shipping_line_id || formValues?.airline_id)) { getFreightRate(); }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(dependencyValue)]);
 
