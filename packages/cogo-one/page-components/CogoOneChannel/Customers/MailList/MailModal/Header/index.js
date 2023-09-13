@@ -4,16 +4,11 @@ import { IcMSend, IcMAttach, IcMArrowBack } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
+import { HEADER_MAPPING } from '../../../../../../constants/mailConstants';
 
 import styles from './styles.module.css';
 
-const HEADER_MAPPING = {
-	send_mail : 'New Mail',
-	forward   : 'Forward Mail',
-	reply_all : 'Reply All',
-	reply     : 'Reply',
-	email     : 'Choose Template',
-};
+const DISABLE_ATTACHMENTS_FOR = ['forward'];
 
 function RenderUploadIcon({ uploading = false }) {
 	return (
@@ -43,6 +38,7 @@ function RenderHeader({
 	setEmailTemplate = () => {},
 	isTemplateView = false,
 	setButtonType = () => {},
+	setMinimizeModal = () => {},
 }) {
 	return (
 		<>
@@ -55,6 +51,7 @@ function RenderHeader({
 							height={20}
 							cursor="pointer"
 						/>
+						Back
 					</div>
 				) : (
 					<Button
@@ -67,7 +64,11 @@ function RenderHeader({
 				)}
 			</div>
 
-			<div className={styles.title}>
+			<div
+				className={styles.title}
+				role="presentation"
+				onClick={() => setMinimizeModal(true)}
+			>
 				{HEADER_MAPPING[buttonType] || 'New Message'}
 			</div>
 
@@ -85,20 +86,23 @@ function RenderHeader({
 							Add Template
 						</Button>
 					</div>
-					<div className={styles.file_uploader_div}>
-						<CustomFileUploader
-							disabled={uploading}
-							handleProgress={setUploading}
-							className="file_uploader"
-							accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
-							multiple
-							uploadIcon={<RenderUploadIcon uploading={uploading} />}
-							value={attachments}
-							onChange={setAttachments}
-							showProgress={false}
-							ref={uploaderRef}
-						/>
-					</div>
+
+					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
+						<div className={styles.file_uploader_div}>
+							<CustomFileUploader
+								disabled={uploading}
+								handleProgress={setUploading}
+								className="file_uploader"
+								accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
+								multiple
+								uploadIcon={<RenderUploadIcon uploading={uploading} />}
+								value={attachments}
+								onChange={setAttachments}
+								showProgress={false}
+								ref={uploaderRef}
+							/>
+						</div>
+					)}
 
 					<div
 						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}

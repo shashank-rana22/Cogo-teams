@@ -1,19 +1,19 @@
-const SERVICE_WISE_MAPPINGS = [
+const getServiceWiseMappings = (t = () => {}) => [
 	{
 		name  : 'air_freight',
-		title : 'Air International',
+		title : t('airBookingDesk:service_title_air_international'),
 	},
 	{
 		name  : 'air_customs',
-		title : 'Air Customs',
+		title : t('airBookingDesk:service_title_air_customs'),
 	},
 	{
 		name  : 'air_freight_local',
-		title : 'Air Local',
+		title : t('airBookingDesk:service_title_air_local'),
 	},
 	{
 		name  : 'domestic_air_freight',
-		title : 'Air Domestic',
+		title : t('airBookingDesk:service_title_air_domestic'),
 	},
 ];
-export default SERVICE_WISE_MAPPINGS;
+export default getServiceWiseMappings;
