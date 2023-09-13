@@ -9,7 +9,8 @@ import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
 const useBlockCreation = ({ control, name, watch, blockIndex }) => {
 	const CHILD_EMPTY_VALUES = {
-		sub_block_id: '',
+		sub_block_id : '',
+		parameters   : [],
 	};
 
 	const watchBlock = watch(`${name}.block`);

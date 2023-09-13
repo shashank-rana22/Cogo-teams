@@ -24,7 +24,7 @@ function FieldArray(props) {
 
 	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		CHILD_EMPTY_VALUES[controlItem.name] = '';
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.name === 'scoring_type' ? 'absolute' : '';
 	});
 
 	return (

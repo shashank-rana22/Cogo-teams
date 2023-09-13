@@ -9,9 +9,8 @@ import styles from './styles.module.css';
 import useBlockWiseScoring from './useBlockWiseScoring';
 
 const CHILD_EMPTY_VALUES = {
-	block              : '',
-	scoring_type       : '',
-	service_fieldarray : [],
+	block      : '',
+	sub_blocks : [],
 };
 
 function BlockwiseScoring(props) {

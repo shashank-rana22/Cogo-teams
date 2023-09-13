@@ -17,7 +17,6 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Scoring Type',
 		placeholder : 'Value',
-		value       : 'absolute',
 		options     : [{
 			label : 'Absolute',
 			value : 'absolute',
