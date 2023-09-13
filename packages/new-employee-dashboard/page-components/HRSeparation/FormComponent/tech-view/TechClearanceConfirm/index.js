@@ -2,22 +2,22 @@ import { Tags } from '@cogoport/components';
 import { IcMFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import styles from './styles.module.css';
-import TechStatus from './TechStatus';
+import TechStatus from '../TechClearance/TechStatus';
 
-const options = [
-	{
-		key      : '1',
-		disabled : false,
-		children : 'Completed',
-		prefix   : null,
-		suffix   : null,
-		color    : '#849E4C',
-		tooltip  : false,
-	},
-];
+import styles from './styles.module.css';
 
 function TechClearanceConfirm() {
+	const options = [
+		{
+			key      : '1',
+			disabled : false,
+			children : 'Completed',
+			prefix   : null,
+			suffix   : null,
+			color    : '#849E4C',
+			tooltip  : false,
+		},
+	];
 	const [items, setItems] = useState(options);
 
 	return (

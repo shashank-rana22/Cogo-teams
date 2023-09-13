@@ -1,28 +1,48 @@
-import { InputController } from '@cogoport/forms';
+import { Loader } from '@cogoport/components';
+import { InputController, MobileNumberController } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { startCase, isEmpty } from '@cogoport/utils';
+import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function CommunicationMode({ control, errors }) {
+function CommunicationMode({ dataItems = {}, control = {}, errors = {}, loading = false, setValue = () => {} }) {
 	const [show, setShow] = useState(true);
-
+	const { application_exist } = dataItems || {};
 	const controlItem = {
-		name        : 'Personal_Email',
+		name        : 'personal_email',
 		label       : 'Personal_Email',
 		showAstrick : true,
 		placeholder : 'Enter Status',
 		rules       : { required: 'This is required' },
+
 	};
 	const controlItem2 = {
-		name        : 'Mobile_Number',
+		name        : 'mobile_number',
 		label       : 'Mobile_Number',
 		showAstrick : true,
 		placeholder : 'Enter Status',
-		rules       : { required: 'This is required' },
+		rules       : {
+			required : true,
+			validate : (value) => (value.country_code && value.number
+				? undefined
+				: ' Mobile Number is Required'),
+		},
 	};
+	useEffect(() => {
+		if (!isEmpty(dataItems)) {
+			setValue('personal_email', dataItems?.personal_email);
+			setValue('mobile_number', {
+				country_code : dataItems?.mobile_country_code,
+				number       : dataItems?.mobile_number,
+			});
+		}
+	}, [dataItems, setValue]);
 
+	// const watchMobileNumber = watch('mobile_number');
+	if (loading) {
+		return <Loader themeType="secondary" />;
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
@@ -41,7 +61,12 @@ function CommunicationMode({ control, errors }) {
 					</div>
 
 					<div className={styles.employee_detail}>
-						<InputController control={control} placeholder={controlItem.placeholder} {...controlItem} />
+						<InputController
+							control={control}
+							placeholder={controlItem.placeholder}
+							{...controlItem}
+							disabled={application_exist}
+						/>
 						{errors[controlItem.name] && (
 							<div className={styles.error_msg}>
 								*This is Required
@@ -56,17 +81,23 @@ function CommunicationMode({ control, errors }) {
 					</div>
 
 					<div className={styles.employee_detail}>
-						<InputController
+						<MobileNumberController
 							control={control}
 							placeholder={controlItem2.placeholder}
 							{...controlItem2}
+							disabled={application_exist}
 						/>
-						{errors[controlItem2.name] && (
+						{/* {(!watchMobileNumber?.country_code || !watchMobileNumber?.number) && (
 							<div className={styles.error_msg}>
 								*This is Required
 							</div>
-						)}
+						)} */}
 					</div>
+					{errors[controlItem2.name] && (
+						<div className={styles.error_msg}>
+							*This is Required
+						</div>
+					)}
 				</div>
 				<div className={styles.alert_text}>
 					<span>
