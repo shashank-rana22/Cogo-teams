@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import {
 	AsyncSelectController,
-	CheckboxController,
 	DatepickerController,
 	InputController,
+	CheckboxController,
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
@@ -120,8 +120,8 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 					<CheckboxController
 						control={control}
 						name="accept_tnc"
-						type="checkbox"
 						disabled={is_complete}
+						rules={{ required: { value: true, message: '*required' } }}
 					/>
 					<div>
 						The details you provide guide critical decisions, making accuracy paramount.
@@ -131,6 +131,8 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 						<br />
 						<br />
 						Enter your Full Name, confirm your understanding and commitment to these terms.
+
+						<div className={styles.error}>{errors?.accept_tnc ? '*required' : null}</div>
 					</div>
 				</div>
 
@@ -147,7 +149,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button onClick={() => setShowModal(true)}>
+				<Button onClick={handleSubmit(() => setShowModal(true))}>
 					Accept & Proceed
 					<IcMArrowRight height="18px" width="18px" />
 				</Button>
