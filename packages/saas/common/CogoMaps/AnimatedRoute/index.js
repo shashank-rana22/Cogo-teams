@@ -3,7 +3,9 @@ import { L } from '@cogoport/maps';
 import { useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
+// eslint-disable-next-line custom-eslint/import-from-react
 import '../../../libs/motion';
+
 import { getIcon, getLatLng } from '../../../utils/getMapFn';
 
 import styles from './styles.module.css';
@@ -73,8 +75,7 @@ function useAnimatedRoute({ map, path, transportMode }) {
 				map?.removeLayer(sequence);
 			}
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [map]);
+	}, [map, sequence]);
 
 	return (
 		null);

@@ -1,6 +1,6 @@
 import { L, FeatureGroup, Marker } from '@cogoport/maps';
 
-function Pointer({ lat = '', lng = '', iconSvg = 'location', map = {} }) {
+function Pointer({ lat = '', lng = '', iconSvg = 'location', map }) {
 	const TWENTY_FOUR = 24;
 	const TWELVE = 12.75;
 	const icon = L.icon({
