@@ -44,12 +44,12 @@ function Card({
 			))
 		);
 	}
-
+	console.log(activeCard, '?activeCard');
 	return (
 		<div className={styles[className]}>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
-				{activeCard === detail?.status
+				{(activeCard === detail?.status && activeCard !== 'weekly_backlog_count')
 				&&					(
 					<Popover placement="top" render={<div className={styles.url_container}><RenderContent /></div>}>
 						<IcMDownload onClick={handleDownload} />
