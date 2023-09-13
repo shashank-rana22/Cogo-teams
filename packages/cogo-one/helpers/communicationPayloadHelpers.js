@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import getRenderEmailBody from './getRenderEmailBody';
 
-const ENDPOINT_MAPPING = {
+export const ENDPOINT_MAPPING = {
 	forward   : '/forward_mail',
 	reply     : '/reply_mail',
 	reply_all : '/reply_all',
@@ -49,7 +49,7 @@ export const getCommunicationPayload = ({
 		lead_user_id,
 		recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 		message_metadata : {
-			endpoint            : ENDPOINT_MAPPING[actionType] || ENDPOINT_MAPPING.send_mail,
+			endpoint            : ENDPOINT_MAPPING[actionType],
 			body                : payload,
 			send_to_omnichannel : true,
 			conversation_id,
