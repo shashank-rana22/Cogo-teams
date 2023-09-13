@@ -166,9 +166,8 @@ function ShipmentDetails({
 	};
 
 	const onAccept = ({ tabName = '', tabToOpen = '', timelineItem = '' }) => {
-		onTabClick({ tabName });
 		setTab(
-			(prev: any) => ({ ...prev, [tabToOpen]: true }),
+			(prev: any) => ({ ...prev, [tabToOpen]: true, [tabName]: !prev[tabName] }),
 		);
 		setCheckItem(
 			(prev: any) => ({ ...prev, [timelineItem]: true }),
@@ -271,10 +270,13 @@ function ShipmentDetails({
 
 					<div
 						className={styles.card}
-						onClick={() => onTabClick({ tabName: 'documentsTab' })}
-						role="presentation"
+
 					>
-						<div className={styles.card_upper}>
+						<div
+							className={styles.card_upper}
+							onClick={() => onTabClick({ tabName: 'documentsTab' })}
+							role="presentation"
+						>
 							<div className={styles.sub_container}>
 								Shipment Documents
 								<IcADocumentTemplates height="17px" width="17px" />
