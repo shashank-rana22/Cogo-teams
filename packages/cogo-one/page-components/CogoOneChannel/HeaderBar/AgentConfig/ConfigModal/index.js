@@ -62,6 +62,8 @@ function ConfigModal({
 		setSearch = () => {},
 		paramsState = {},
 		setAgentType = () => {},
+		setIsInActive = () => {},
+		isInActive = false,
 	} = hookToBeUsed({
 		agentType: getCommonAgentType({ viewType }),
 	}) || {};
@@ -92,6 +94,8 @@ function ConfigModal({
 			paramsState,
 			setAgentType,
 			setActiveCard,
+			setIsInActive,
+			isInActive,
 		},
 		fire_base_configuration: {
 			firestore,
