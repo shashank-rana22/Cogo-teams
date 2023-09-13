@@ -1,7 +1,4 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable custom-eslint/variables-name-check */
 import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	asyncFieldsListOperators,
