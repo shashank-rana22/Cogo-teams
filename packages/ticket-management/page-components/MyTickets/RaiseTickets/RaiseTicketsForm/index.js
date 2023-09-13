@@ -31,6 +31,7 @@ function RaiseTicketsForm({
 	const watchOrgId = watch('organization_id');
 	const watchUserId = watch('user_id');
 	const watchCategory = watch('category');
+	const watchSubCategory = watch('sub_category');
 	const watchIssueType = watch('issue_type');
 	const watchService = watch('service');
 	const watchTradeType = watch('trade_type');
@@ -51,6 +52,7 @@ function RaiseTicketsForm({
 	const defaultControls = useRaiseTicketcontrols({
 		setAdditionalInfo,
 		watchRequestType,
+		watchSubCategory,
 		watchTradeType,
 		watchCategory,
 		watchService,

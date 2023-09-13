@@ -31,10 +31,16 @@ const getCollectionPartyParams = (organization_id = '') => ({
 function NewRequestModal({
 	showRequestModal = false,
 	setShowRequestModal = () => {},
+	getShipmentRefetch = () => {},
 }) {
 	const { partner, user } = useSelector(({ profile }) => profile);
 
-	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal });
+	const refetchAdvanceDocument = () => {
+		setShowRequestModal(false);
+		getShipmentRefetch();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ refetchAdvanceDocument });
 	const { listEntities = {} } = useGetEntities();
 
 	const { primary_service = {}, shipment_data: { serial_id } } = useContext(ShipmentDetailContext);
@@ -112,6 +118,7 @@ function NewRequestModal({
 			cogoEntityId  : partner?.id,
 			collectionPartyAddress,
 			collectionPartyBankDetails,
+			primary_service,
 		});
 		apiTrigger(payload);
 	};

@@ -54,7 +54,7 @@ export interface TableProps {
 }
 
 export interface ListDataProps {
-	list: object[];
+	list?: object[];
 	pageIndex?: number;
 	totalPage?: number;
 	totalRecords?: number;

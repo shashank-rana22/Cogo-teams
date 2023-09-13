@@ -19,6 +19,7 @@ function ShipmentsCard({
 	showAddPrimaryUserButton = false,
 	handleShipmentChat = () => {},
 	setActiveTab = () => {},
+	showModalType = () => {},
 }) {
 	const {
 		shipment_type = '',
@@ -47,6 +48,7 @@ function ShipmentsCard({
 					setShowPocModal={setShowPocModal}
 					showAddPrimaryUserButton={showAddPrimaryUserButton}
 					setActiveTab={setActiveTab}
+					showModalType={showModalType}
 				/>
 
 				<ShippingRoute

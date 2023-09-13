@@ -11,9 +11,9 @@ const DATES = [
 	{ label: 'Upload Date', key: 'uploadBillDate' },
 ];
 
-export function RenderInvoiceDates({ itemData }) {
+export function RenderInvoiceDates({ itemData = {} }) {
 	return (
-		<div>
+		<div className={styles.font}>
 			{DATES.map((date) => (
 				<div className={date?.bold ? styles?.bold : ''} key={date?.key}>
 					<span>{date?.label}</span>

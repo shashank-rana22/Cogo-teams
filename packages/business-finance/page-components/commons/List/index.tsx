@@ -31,16 +31,17 @@ export interface Props {
 	subActiveTab?: string;
 	width?: string;
 	rowStyle?: string;
+	idKey?: string;
+	showId?: string;
+	RenderAccordianData?: any;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
-	viewId?:null;
-	renderDropDown?:Function;
 }
 
 function List({
 	config = { fields: [] },
 	sort = {},
 	setSort = () => {},
-	itemData = { list: [] },
+	itemData = {},
 	renderHeaderCheckbox = () => '',
 	functions = {},
 	loading = false,
@@ -48,12 +49,13 @@ function List({
 	handlePageChange = () => {},
 	pageSize = 10,
 	showPagination = true,
+	showId = '',
+	idKey = 'id',
+	RenderAccordianData = () => null,
 	subActiveTab = undefined,
 	width = null,
 	rowStyle = null,
 	paginationType = 'table',
-	viewId = null,
-	renderDropDown = () => {},
 }: Props) {
 	const {
 		showHeader = true,
@@ -86,32 +88,34 @@ function List({
 					<div className={styles.no_data}>
 						<img
 							style={{ width: '24%', margin: '8%' }}
-							src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
+							src={
+								GLOBAL_CONSTANTS.image_url.list_no_result_found
+							}
 							alt="no data"
 						/>
 					</div>
 				) : (
-					<div>
-						{(!isEmpty(list) ? list : [1, 2, 3, 4, 5]).map((singleitem) => (
-							<>
-								<CardColumn
-									key={singleitem.id}
-									fields={fields}
-									itemStyles={itemStyles}
+					(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+						<React.Fragment key={singleitem.id || singleitem}>
+							<CardColumn
+								fields={fields}
+								itemStyles={itemStyles}
+								singleitem={singleitem}
+								config={config}
+								loading={loading}
+								functions={commonFunctions(functions)}
+								isMobile={isMobile}
+								subActiveTab={subActiveTab}
+								width={width}
+								rowStyle={rowStyle}
+							/>
+							{showId === singleitem?.[idKey] ? (
+								<RenderAccordianData
 									singleitem={singleitem}
-									config={config}
-									loading={loading}
-									functions={commonFunctions(functions)}
-									isMobile={isMobile}
-									subActiveTab={subActiveTab}
-									width={width}
-									rowStyle={rowStyle}
-									viewId={viewId}
 								/>
-								{renderDropDown(singleitem)}
-							</>
-						))}
-					</div>
+							) : null}
+						</React.Fragment>
+					))
 				)}
 			</div>
 			{showPagination && (
