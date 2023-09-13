@@ -1,4 +1,4 @@
-import { Input, Popover } from '@cogoport/components';
+import { Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -22,6 +22,8 @@ function Header({
 	activeSubTab = '',
 	setActiveSubTab = () => {},
 	activeTab = '',
+	sidFilter = '',
+	resetSidFilter = () => {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 
@@ -45,7 +47,23 @@ function Header({
 					setAppliedFilters={setAppliedFilters}
 					setIsBotSession={setIsBotSession}
 					activeTab={activeTab}
+					hasSidFilter={!!sidFilter}
 				/>
+				{sidFilter	? (
+					<div className={styles.flex_filter}>
+						<div className={styles.applied_filters}>
+							<span>{sidFilter}</span>
+							SID filter is applied
+						</div>
+						<Button
+							size="sm"
+							themeType="linkUi"
+							onClick={resetSidFilter}
+						>
+							clear
+						</Button>
+					</div>
+				) : undefined}
 			</div>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>

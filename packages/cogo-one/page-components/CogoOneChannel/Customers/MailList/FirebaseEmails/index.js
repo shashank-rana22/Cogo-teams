@@ -54,6 +54,10 @@ function FirebaseEmails(messageProps) {
 		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
 	};
 
+	const resetSidFilter = () => {
+		setActiveTab((prev) => ({ ...prev, subTab: 'all', data: {}, tab: 'firebase_emails', hiddenFilters: {} }));
+	};
+
 	const { messagesList, sortedPinnedChatList } = chatsData;
 
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList);
@@ -74,6 +78,8 @@ function FirebaseEmails(messageProps) {
 				setActiveSubTab={setActiveSubTab}
 				activeSubTab={activeTab?.subTab}
 				activeTab={activeTab?.tab}
+				resetSidFilter={resetSidFilter}
+				sidFilter={activeTab?.hiddenFilters?.sid || ''}
 			/>
 
 			{(isEmpty(messagesList) && isPinnedChatEmpty && !loadingState?.chatsLoading)

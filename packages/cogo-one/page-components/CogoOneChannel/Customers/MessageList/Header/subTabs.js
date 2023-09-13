@@ -14,6 +14,7 @@ function SubTabs({
 	setAppliedFilters = () => {},
 	setIsBotSession = () => {},
 	activeTab = '',
+	hasSidFilter = false,
 }) {
 	const subTabMapping = getSubTabsMapping({ viewType, activeTab });
 
@@ -31,7 +32,7 @@ function SubTabs({
 	}
 
 	return (
-		<div className={styles.parent_tab_div}>
+		<div className={styles.parent_tab_div} style={{ marginBottom: hasSidFilter ? '0' : '10px' }}>
 			{subTabMapping.map((eachTab = {}) => (
 				<div
 					key={eachTab?.name}
