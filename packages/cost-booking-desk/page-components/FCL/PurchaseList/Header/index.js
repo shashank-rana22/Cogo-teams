@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
+import { Tabs, TabPanel, Input, ButtonIcon, Select } from '@cogoport/components';
 import { IcMAppSearch, IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
@@ -8,11 +8,28 @@ import CostBookingDeskContext from '../../../../context/CostBookingDeskContext';
 
 import styles from './styles.module.css';
 
+const ADVANCE_DOCUMENT_DEPOSIT_OPTIONS = [
+	{ label: 'Requested', value: 'REQUESTED' },
+	{ label: 'Approved', value: 'APPROVED' },
+	{ label: 'Rejected', value: 'REJECTED' },
+];
+
+const ADVANCE_DOCUMENT_REFUND_OPTIONS = [
+	{ label: 'Pending', value: 'false' },
+	{ label: 'Refunded', value: 'true' },
+
+];
+
 function Header({
 	searchValue = '',
 	setSearchValue = () => {},
+	modalData = {},
+	setModalData = () => {},
 }) {
 	const { paymentActiveTab = '', setPaymentActiveTab = () => {} } = useContext(CostBookingDeskContext);
+
+	const statusOptions = paymentActiveTab === 'payment_request' ? ADVANCE_DOCUMENT_DEPOSIT_OPTIONS
+		: ADVANCE_DOCUMENT_REFUND_OPTIONS;
 
 	return (
 		<div className={styles.tab_search_container}>
@@ -31,7 +48,19 @@ function Header({
 					))}
 				</Tabs>
 			</div>
-			<div>
+			<div className={styles.filters}>
+				<div className={styles.status}>
+					<Select
+						value={modalData?.statusFilter}
+						options={statusOptions}
+						placeholder="Filter by Status"
+						onChange={(e) => setModalData((prev) => ({ ...prev, statusFilter: e }))}
+						isClearable
+						size="sm"
+						name="status"
+					/>
+				</div>
+
 				<Input
 					size="sm"
 					prefix={<IcMAppSearch />}

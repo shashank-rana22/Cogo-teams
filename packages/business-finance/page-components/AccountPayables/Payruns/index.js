@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import List from '../../commons/List/index.tsx';
@@ -10,7 +11,12 @@ import renderFunctions from './renderFunction';
 import styles from './styles.module.css';
 
 function Payruns({ activeEntity = '' }) {
-	const [activePayrunTab, setActivePayrunTab] = useState('INITIATED');
+	const {
+		query = {},
+	} = useSelector(({ general }) => ({
+		query: general?.query,
+	}));
+	const [activePayrunTab, setActivePayrunTab] = useState(query?.initiated || 'INITIATED');
 	const [isInvoiceView, setIsInvoiceView] = useState(false);
 	const [overseasData, setOverseasData] = useState('NORMAL');
 	const [viewId, setViewId] = useState(null);

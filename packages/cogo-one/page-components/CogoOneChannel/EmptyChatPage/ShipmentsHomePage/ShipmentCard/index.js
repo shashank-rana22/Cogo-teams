@@ -61,6 +61,7 @@ function ShipmentCard({
 	setShowPocModal = () => {},
 	viewType = '',
 	mailProps = {},
+	showModalType = () => {},
 	params = {},
 	range = '',
 }) {
@@ -111,6 +112,7 @@ function ShipmentCard({
 				setShowPocModal={setShowPocModal}
 				viewType={viewType}
 				handleShipmentChat={handleShipmentChat}
+				showModalType={showModalType}
 			/>
 		</div>
 	);

@@ -6,7 +6,6 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 		borderRadius : '8px',
 		background   : 'none',
 		color        : '#333',
-		marginLeft   : '-56px',
 	},
 	bodyStyles: {
 		color      : '#333333',
@@ -16,16 +15,14 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 	},
 	fields: [
 		{
-			func   : 'renderCheckbox',
-			span   : 0.1,
-			styles : { marginLeft: '-16px' },
+			func : 'renderCheckbox',
+			span : 0.2,
 		},
 		{
-			label  : 'Adv. Doc. No.',
-			key    : 'advanceDocumentNo',
-			span   : 1.2,
-			func   : 'renderDocNumber',
-			styles : { marginLeft: '32px' },
+			label : 'Adv. Doc. No.',
+			key   : 'advanceDocumentNo',
+			span  : 1.2,
+			func  : 'renderDocNumber',
 		},
 		{
 			label : 'Incident Number',

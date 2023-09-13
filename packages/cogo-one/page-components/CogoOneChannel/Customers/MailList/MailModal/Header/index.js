@@ -101,7 +101,6 @@ function RenderHeader({
 							/>
 						</div>
 					)}
-
 					<div
 						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
 					>

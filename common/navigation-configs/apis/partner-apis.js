@@ -12818,6 +12818,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_shipment_operating_procedures',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_instruction',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'post_allocation_feedback',
 			access_type  : 'private',
 			service_name : 'allocation',

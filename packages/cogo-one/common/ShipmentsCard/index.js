@@ -18,6 +18,7 @@ function ShipmentsCard({
 	setShowPocModal = () => {},
 	viewType = '',
 	handleShipmentChat = () => {},
+	showModalType = () => {},
 }) {
 	const {
 		shipment_type = '',
@@ -45,6 +46,7 @@ function ShipmentsCard({
 					showPopover={showPopover}
 					setShowPocModal={setShowPocModal}
 					viewType={viewType}
+					showModalType={showModalType}
 				/>
 
 				<ShippingRoute
