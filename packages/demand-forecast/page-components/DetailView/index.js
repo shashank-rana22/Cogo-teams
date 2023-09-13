@@ -1,10 +1,12 @@
 import { useRouter } from '@cogoport/next';
+import ScopeSelect from '@cogoport/scope-select/components';
 import { useEffect } from 'react';
 
 import useGetRollingForecastFclFreightData from '../../hooks/useGetRollingForecastFclFreightData';
 
 import Graph from './Graph';
 import Header from './Header';
+import styles from './styles.module.css';
 import SupplierList from './SupplierList';
 
 function DetailView() {
@@ -35,6 +37,12 @@ function DetailView() {
 				loading={loading}
 			/>
 			<Graph data={data} loading={loading} total_estimated_demand={total_estimated_demand} />
+
+			<div className={styles.scope_select}>
+				<ScopeSelect
+					size="md"
+				/>
+			</div>
 			<SupplierList
 				origin_location_id={origin_id}
 				destination_location_id={destination_id}
