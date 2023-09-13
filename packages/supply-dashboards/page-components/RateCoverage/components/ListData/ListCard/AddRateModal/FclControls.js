@@ -125,6 +125,7 @@ const fclControls = ({
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
+		disabled    : data?.commodity,
 		options     : fclCommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
