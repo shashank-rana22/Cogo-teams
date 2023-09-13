@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getLogsColumns = ({
+const getEnrichmentRequestsColumns = ({
 	setLogId = () => {},
 }) => [
 	{
@@ -65,4 +65,4 @@ const getLogsColumns = ({
 	},
 ];
 
-export default getLogsColumns;
+export default getEnrichmentRequestsColumns;

@@ -8,20 +8,20 @@
 	color: var(--color-secondary-greyscale-1);
 }
 
+.account_table {
+	margin-top: 16px;
+}
+
 .statistics {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 8px;
-	margin-top: 8px;
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-	}
 }
 
-.segments {
-	flex: 3;
+.statistics__item {
+	width: 100%;
 }
 
-.contacts {
-	flex: 6;
+.statistics > div {
+	flex: calc(33% - 8px);
 }

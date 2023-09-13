@@ -7,14 +7,14 @@ import LeadTable from '../../commons/LeadTable';
 // import log_controls from '../../configurations/log-controls';
 import useGetLogs from '../../hooks/useGetLogs';
 
-import getEnrichmentColumns from './getLogsColumns';
-import PanLogs from './PanLogs';
+import EnrichmentRequestInfo from './EnrichmentRequestInfo';
+import getEnrichmentRequestsColumns from './getEnrichmentRequestsColumns';
 import styles from './styles.module.css';
 
-function Logs() {
+function EnrichmentRequests() {
 	const [logId, setLogId] = useState(null);
 	const [open, setOpen] = useState(false);
-	const columns = getEnrichmentColumns({ setLogId });
+	const columns = getEnrichmentRequestsColumns({ setLogId });
 
 	const {
 		// loading,
@@ -92,7 +92,7 @@ function Logs() {
 					)}
 					/>
 					<Modal.Body className={styles.modal_body}>
-						<PanLogs />
+						<EnrichmentRequestInfo />
 					</Modal.Body>
 					<Modal.Footer>
 						<Button onClick={onClose}>Close</Button>
@@ -103,4 +103,4 @@ function Logs() {
 	);
 }
 
-export default Logs;
+export default EnrichmentRequests;

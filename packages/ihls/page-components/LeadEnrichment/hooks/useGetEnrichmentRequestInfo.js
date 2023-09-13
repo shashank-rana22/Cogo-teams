@@ -1,5 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useAthenaRequest } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const list = [
@@ -23,7 +23,7 @@ const list = [
 	},
 ];
 
-const useGetPanLogs = ({ id = null }) => {
+const useGetEnrichmentRequestInfo = ({ id = null }) => {
 	const [params, setParams] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -34,9 +34,9 @@ const useGetPanLogs = ({ id = null }) => {
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
-	const [{ loading = false }] = useAthenaRequest({
-		url    : 'shipments_by_hscod',
-		method : 'post',
+	const [{ loading = false }] = useRequest({
+		url    : 'enrichment_request_info',
+		method : 'get',
 		params,
 	}, { manual: false });
 
@@ -60,4 +60,4 @@ const useGetPanLogs = ({ id = null }) => {
 	};
 };
 
-export default useGetPanLogs;
+export default useGetEnrichmentRequestInfo;

@@ -83,7 +83,7 @@ request.interceptors.request.use((oldConfig) => {
 			authorizationscope : 'partner',
 			authorization      : `Bearer: ${token}`,
 			authorizationparameters,
-			'auth-token'       : '123',
+			'auth-token'       : '9ad1c512-fc96-40ac-b79c-547dd4c52f86',
 		},
 	};
 });

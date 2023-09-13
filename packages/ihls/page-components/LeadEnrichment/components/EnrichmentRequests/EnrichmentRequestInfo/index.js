@@ -2,12 +2,13 @@ import React from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 import LeadTable from '../../../commons/LeadTable';
+import useGetEnrichmentRequestInfo from '../../../hooks/useGetEnrichmentRequestInfo';
 // import useGetObjectiveInfo from '../../hooks/useGetObjectiveInfo';
 
 // import Header from './components/Header';
 // import ObjectiveTable from './components/ObjectiveTable';
+
 import styles from './styles.module.css';
-import useGetPanLogs from './useGetPanLogs';
 
 const accountList = [
 	{
@@ -27,7 +28,7 @@ const accountList = [
 	},
 ];
 
-function PanLogs({ id = null }) {
+function EnrichmentRequestInfo({ id = null }) {
 	const {
 		// loading,
 		// response,
@@ -36,7 +37,7 @@ function PanLogs({ id = null }) {
 		searchValue,
 		setSearchValue,
 		// setParams,
-	} = useGetPanLogs({ id });
+	} = useGetEnrichmentRequestInfo({ id });
 
 	const columns = [
 		{
@@ -79,4 +80,4 @@ function PanLogs({ id = null }) {
 	);
 }
 
-export default PanLogs;
+export default EnrichmentRequestInfo;

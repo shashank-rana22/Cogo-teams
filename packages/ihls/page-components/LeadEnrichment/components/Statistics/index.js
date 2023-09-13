@@ -92,7 +92,8 @@ function Statistics({
 				</span>
 			</div>
 			{
-				!loading && isEmpty(sample_contact_data) ? <EmptyState emptyText="" height={100} width={150} />
+				!loading && isEmpty(sample_contact_data)
+					? <EmptyState showImage={false} height={100} width={150} />
 					: (
 						<div className={styles.single_chart_container}>
 							<ResponsivePie

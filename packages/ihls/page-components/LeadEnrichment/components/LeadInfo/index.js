@@ -5,10 +5,10 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LeadTable from '../../commons/LeadTable';
-import EnrichmentInfo from '../EnrichmentLogs';
+import LeadEnrichmentLogs from '../LeadEnrichmentLogs';
 import ObjectiveInfo from '../ObjectiveInfo';
 
-import getEnrichmentColumns from './getEnrichmentColumns';
+import getLeadInfoColumns from './getLeadInfoColumns';
 import styles from './styles.module.css';
 
 function LeadInfo({
@@ -21,18 +21,18 @@ function LeadInfo({
 	onChangeBodyCheckbox = () => {},
 }) {
 	const [leadId, setLeadId] = useState(null);
-	const [objectiveLeadId, setObjectiveLeadId] = useState(null);
-	const columns = getEnrichmentColumns({
+	const [allocationLeadId, setAllocationLeadId] = useState(null);
+	const columns = getLeadInfoColumns({
 		selectAll,
 		onChangeTableHeadCheckbox,
 		checkedRowsId,
 		onChangeBodyCheckbox,
 		setLeadId,
-		setObjectiveLeadId,
+		setAllocationLeadId,
 	});
 
 	const onClose = () => {
-		setObjectiveLeadId(null);
+		setAllocationLeadId(null);
 	};
 
 	const onCloseLogs = () => {
@@ -81,7 +81,7 @@ function LeadInfo({
 				/>
 			</div>
 
-			<Modal style={{ width: '70%' }} show={objectiveLeadId} onClose={onClose} placement="center">
+			<Modal style={{ width: '70%' }} show={allocationLeadId} onClose={onClose} placement="center">
 				<Modal.Header title={(
 					<>
 						<IcMEyeopen className={styles.eye_icon} />
@@ -92,7 +92,7 @@ function LeadInfo({
 				)}
 				/>
 				<Modal.Body className={styles.modal_body}>
-					<ObjectiveInfo objectiveLeadId={objectiveLeadId} />
+					<ObjectiveInfo allocationLeadId={allocationLeadId} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button onClick={onClose}>Close</Button>
@@ -109,7 +109,7 @@ function LeadInfo({
 				)}
 				/>
 				<Modal.Body>
-					<EnrichmentInfo />
+					<LeadEnrichmentLogs />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button onClick={onCloseLogs}>Close</Button>

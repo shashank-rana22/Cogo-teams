@@ -1,8 +1,8 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useAthenaRequest } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetObjectiveInfo = ({ objectiveLeadId }) => {
+const useGetObjectiveInfo = ({ allocationLeadId }) => {
 	const [params, setParams] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -12,12 +12,12 @@ const useGetObjectiveInfo = ({ objectiveLeadId }) => {
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
-	const [{ loading = false, data = {} }] = useAthenaRequest({
+	const [{ loading = false, data = {} }] = useRequest({
 		url    : 'get_objective_list',
 		method : 'get',
 		params : {
 			...params,
-			cogo_lead_ids: [objectiveLeadId],
+			allocation_lead_ids: [allocationLeadId],
 		},
 	}, { manual: false });
 

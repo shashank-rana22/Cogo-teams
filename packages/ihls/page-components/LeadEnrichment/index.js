@@ -2,52 +2,46 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
 import Accounts from './components/Accounts';
-import Logs from './components/Logs';
-import styles from './styles.module.css';
+import EnrichmentRequests from './components/EnrichmentRequests';
 
 const LEAD_ENRICHMENT_TABS = {
-	accounts: {
-		name      : 'accounts',
-		title     : 'Accounts',
+	lead_dasdhoard: {
+		name      : 'lead_dasdhoard',
+		title     : 'Lead Dashboard',
 		Component : Accounts,
 	},
-	logs: {
-		name      : 'logs',
-		title     : 'Logs',
-		Component : Logs,
+	enrichment_requests: {
+		name      : 'enrichment_requests',
+		title     : 'Enrichment Requests',
+		Component : EnrichmentRequests,
 	},
 };
 
 function LeadEnrichment() {
-	const [activeTab, setActiveTab] = useState('accounts');
+	const [activeTab, setActiveTab] = useState('lead_dasdhoard');
 
 	return (
-		<>
-			<div className={styles.header}>Cogo Leads</div>
-			<div className={styles.description}>Click on pie chart to filter</div>
-			<Tabs
-				activeTab={activeTab}
-				themeType="primary"
-				onChange={setActiveTab}
-				className={styles.tab}
-			>
-				{Object.values(LEAD_ENRICHMENT_TABS).map((item) => {
-					const { name = '', title = '', Component } = item;
+		<Tabs
+			activeTab={activeTab}
+			themeType="primary"
+			onChange={setActiveTab}
+		>
+			{Object.values(LEAD_ENRICHMENT_TABS).map((item) => {
+				const { name = '', title = '', Component } = item;
 
-					if (!Component) return null;
+				if (!Component) return null;
 
-					return (
-						<TabPanel
-							key={name}
-							name={name}
-							title={title}
-						>
-							<Component />
-						</TabPanel>
-					);
-				})}
-			</Tabs>
-		</>
+				return (
+					<TabPanel
+						key={name}
+						name={name}
+						title={title}
+					>
+						<Component />
+					</TabPanel>
+				);
+			})}
+		</Tabs>
 	);
 }
 

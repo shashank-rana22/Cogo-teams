@@ -5,4 +5,4 @@ export const REGISTRATION_MAPPING = {
 };
 export const REGISTRATION_TYPE_INDEX = 3;
 
-export const STATISTICS_HEAD = [['segment', 'shipment', 'registration'], ['company_type', 'lifecycle_stage', 'source']];
+export const STATISTICS_HEAD = ['segment', 'shipment', 'registration', 'company_type', 'lifecycle_stage', 'source'];

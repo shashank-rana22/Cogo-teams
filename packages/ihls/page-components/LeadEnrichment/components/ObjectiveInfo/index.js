@@ -8,14 +8,14 @@ import ObjectiveTable from './components/ObjectiveTable';
 import styles from './styles.module.css';
 
 function ObjectiveInfo(props) {
-	const { objectiveLeadId } = props;
+	const { allocationLeadId } = props;
 	const {
 		loading,
 		response,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-	} = useGetObjectiveInfo({ objectiveLeadId });
+	} = useGetObjectiveInfo({ allocationLeadId });
 
 	return (
 		<>

@@ -6,13 +6,13 @@ import { REGISTRATION_MAPPING, REGISTRATION_TYPE_INDEX } from '../../helpers/con
 
 import styles from './styles.module.css';
 
-const getEnrichmentColumns = ({
+const getLeadInfoColumns = ({
 	selectAll = false,
 	onChangeTableHeadCheckbox = () => {},
 	checkedRowsId = [],
 	onChangeBodyCheckbox = () => {},
 	setLeadId = () => {},
-	setObjectiveLeadId = () => {},
+	setAllocationLeadId = () => {},
 }) => [
 	{
 		id     : 'checkbox',
@@ -98,7 +98,7 @@ const getEnrichmentColumns = ({
 		id       : 'objectives',
 		accessor : ({ id }) => (
 			<section className={styles.objectives}>
-				<Button onClick={() => { setObjectiveLeadId(id); }} themeType="secondary">
+				<Button onClick={() => { setAllocationLeadId(id); }} themeType="secondary">
 					<IcMEyeopen style={{ marginRight: '4px' }} />
 					View
 				</Button>
@@ -151,4 +151,4 @@ const getEnrichmentColumns = ({
 	},
 ];
 
-export default getEnrichmentColumns;
+export default getLeadInfoColumns;

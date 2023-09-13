@@ -30,8 +30,8 @@ function Accounts() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>Accounts List</div>
-			<div>{paginationData?.count}</div>
+
+			<div className={styles.header}>Leads Statistics</div>
 
 			<div className={styles.filterContainer}>
 				<MainFilters
@@ -48,30 +48,32 @@ function Accounts() {
 				/>
 			</div>
 
-			{STATISTICS_HEAD.map((row) => (
-				<div key={row} className={styles.statistics}>
-					{row.map((item) => (
-						<div key={item} className={styles.segments}>
-							<Statistics
-								head={item}
-								params={params}
-							/>
-						</div>
-					))}
-				</div>
-			))}
+			<div className={styles.statistics}>
 
-			<LeadInfo
-				response={response}
-				paginationData={paginationData}
-				loading={loading}
-				selectAll={selectAll}
-				params={params}
-				setParams={setParams}
-				onChangeTableHeadCheckbox={onChangeTableHeadCheckbox}
-				checkedRowsId={checkedRowsId}
-				onChangeBodyCheckbox={onChangeBodyCheckbox}
-			/>
+				{STATISTICS_HEAD.map((item) => (
+					<div key={item} className={styles.statistics__item}>
+						<Statistics
+							head={item}
+							params={params}
+						/>
+					</div>
+				))}
+			</div>
+
+			<div className={styles.account_table}>
+				<div className={styles.header}>Accounts List</div>
+				<LeadInfo
+					response={response}
+					paginationData={paginationData}
+					loading={loading}
+					selectAll={selectAll}
+					params={params}
+					setParams={setParams}
+					onChangeTableHeadCheckbox={onChangeTableHeadCheckbox}
+					checkedRowsId={checkedRowsId}
+					onChangeBodyCheckbox={onChangeBodyCheckbox}
+				/>
+			</div>
 		</div>
 	);
 }
