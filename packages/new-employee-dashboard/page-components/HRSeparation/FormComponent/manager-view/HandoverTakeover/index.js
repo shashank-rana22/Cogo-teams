@@ -1,43 +1,47 @@
 import { Button } from '@cogoport/components';
 import {
 	AsyncSelectController,
-	CheckboxController,
 	DatepickerController,
 	InputController,
-	useForm,
+	CheckboxController,
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import ModalComponent from './ModalComponent';
 import styles from './styles.module.css';
+import useHandoverTakeover from './useHandoverTakeover';
 
-function HandoverTakeover() {
-	const [showModal, setShowModal] = useState(false);
-
-	const { control, handleSubmit, formState: { errors } } = useForm();
-
-	const onSubmit = (values) => {
-		console.log('values :: ', values);
-		setShowModal(true);
-	};
+function HandoverTakeover({ data = {}, refetch = () => {} }) {
+	const {
+		showModal,
+		setShowModal,
+		control,
+		handleSubmit,
+		errors,
+		onSubmit,
+		loading,
+		is_complete,
+	} = useHandoverTakeover({ data, refetch });
 
 	return (
 		<div>
 			<div className={styles.title}>ASSIGN HANDOVER/TAKEOVER</div>
 			<div className={styles.sub_heading}>Select people for HOTO</div>
 
-			<div className={styles.completed}>
-				<img
-					src={GLOBAL_CONSTANTS.image_url.tick_icon_green}
-					width="20px"
-					height="20px"
-					alt="Empty-state"
-					style={{ marginRight: 10 }}
-				/>
-				You have successfully completed your tasks. No further changes are allowed.
-			</div>
+			{is_complete ? (
+				<div className={styles.completed}>
+					<img
+						src={GLOBAL_CONSTANTS.image_url.tick_icon_green}
+						width="20px"
+						height="20px"
+						alt="Empty-state"
+						style={{ marginRight: 10 }}
+					/>
+					You have successfully completed your tasks. No further changes are allowed.
+				</div>
+			) : null}
 
 			<div className={styles.styled_component}>
 				<div className={styles.header}>Status</div>
@@ -53,6 +57,7 @@ function HandoverTakeover() {
 							control={control}
 							params={{ filters: { employee_status: ['confirmed', 'probation'] } }}
 							size="md"
+							disabled={is_complete}
 							rules={{ required: true }}
 						/>
 						<div className={styles.error}>{errors?.handover_by ? '*required' : null}</div>
@@ -68,6 +73,7 @@ function HandoverTakeover() {
 							control={control}
 							params={{ filters: { employee_status: ['confirmed', 'probation'] } }}
 							size="md"
+							disabled={is_complete}
 							rules={{ required: true }}
 						/>
 						<div className={styles.error}>{errors?.takeover_by ? '*required' : null}</div>
@@ -78,7 +84,8 @@ function HandoverTakeover() {
 					<div className={styles.label}>Additional Remark (if any)</div>
 					<InputController
 						control={control}
-						name="Additional_remark"
+						name="additional_remark"
+						disabled={is_complete}
 					/>
 				</div>
 			</div>
@@ -87,11 +94,12 @@ function HandoverTakeover() {
 				<div className={styles.header}>Suggest Last Working Day</div>
 				<DatepickerController
 					placeholder="Select Date"
-					name="suggested_last_working_day"
+					name="last_working_day"
 					control={control}
 					rules={{ required: true }}
+					disabled={is_complete}
 				/>
-				<div className={styles.error}>{errors?.suggested_last_working_day ? '*required' : null}</div>
+				<div className={styles.error}>{errors?.last_working_day ? '*required' : null}</div>
 			</div>
 
 			<div className={styles.styled_component}>
@@ -100,6 +108,7 @@ function HandoverTakeover() {
 					placeholder="Type your notes here..."
 					name="notes_for_hrbp"
 					control={control}
+					disabled={is_complete}
 				/>
 			</div>
 
@@ -111,7 +120,8 @@ function HandoverTakeover() {
 					<CheckboxController
 						control={control}
 						name="accept_tnc"
-						type="checkbox"
+						disabled={is_complete}
+						rules={{ required: { value: true, message: '*required' } }}
 					/>
 					<div>
 						The details you provide guide critical decisions, making accuracy paramount.
@@ -121,6 +131,8 @@ function HandoverTakeover() {
 						<br />
 						<br />
 						Enter your Full Name, confirm your understanding and commitment to these terms.
+
+						<div className={styles.error}>{errors?.accept_tnc ? '*required' : null}</div>
 					</div>
 				</div>
 
@@ -130,19 +142,26 @@ function HandoverTakeover() {
 						control={control}
 						name="full_name"
 						rules={{ required: '*required' }}
+						disabled={is_complete}
 					/>
 					<div className={styles.error}>{errors?.full_name ? '*required' : null}</div>
 				</div>
 			</div>
 
 			<div className={styles.button_container}>
-				<Button onClick={handleSubmit(onSubmit)}>
+				<Button onClick={handleSubmit(() => setShowModal(true))}>
 					Accept & Proceed
 					<IcMArrowRight height="18px" width="18px" />
 				</Button>
 			</div>
 
-			<ModalComponent showModal={showModal} setShowModal={setShowModal} />
+			<ModalComponent
+				showModal={showModal}
+				setShowModal={setShowModal}
+				handleSubmit={handleSubmit}
+				onSubmit={onSubmit}
+				loading={loading}
+			/>
 		</div>
 	);
 }

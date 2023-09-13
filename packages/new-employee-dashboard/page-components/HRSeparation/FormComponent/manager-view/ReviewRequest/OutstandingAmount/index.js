@@ -1,41 +1,16 @@
 import { Table } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 
-const DATA = [
-	{
-		legal_business_name : 'Total',
-		first_to_thirty     : 98700,
-		total_outstanding   : 98700,
-	},
-	{
-		legal_business_name : 'XYZ',
-		first_to_thirty     : 98700,
-		total_outstanding   : 98700,
-	},
-	{
-		legal_business_name : 'XYZ',
-		first_to_thirty     : 98700,
-		total_outstanding   : 98700,
-	},
-	{
-		legal_business_name : 'XYZ',
-		first_to_thirty     : 98700,
-		total_outstanding   : 98700,
-	},
-	{
-		legal_business_name : 'XYZ',
-		first_to_thirty     : 98700,
-		total_outstanding   : 98700,
-	},
-];
-
-function OutstandingAmount() {
+function OutstandingAmount({ outstanding_amount_details = [] }) {
 	const [showTable, setShowTable] = useState(true);
 	const columns = getColumns();
+
+	const outstanding = !isEmpty(outstanding_amount_details) ? outstanding_amount_details : [{}];
 
 	return (
 		<div className={styles.container}>
@@ -53,9 +28,11 @@ function OutstandingAmount() {
 				/>
 			</div>
 
-			<div className={showTable ? styles.table_view : styles.table_view_closed}>
-				<Table columns={columns} data={DATA} loading={false} />
-			</div>
+			{showTable ? (
+				<div className={styles.table_view}>
+					<Table columns={columns} data={outstanding} loading={false} />
+				</div>
+			) : null}
 		</div>
 	);
 }

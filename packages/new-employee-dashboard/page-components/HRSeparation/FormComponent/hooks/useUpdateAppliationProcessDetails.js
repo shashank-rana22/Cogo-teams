@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useUpdateAppliationProcessDetails = ({ refetch = () => {} }) => {
+const useUpdateAppliationProcessDetails = ({ refetch = () => {}, setShowModal = () => {} }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_application_process_details',
@@ -15,6 +15,7 @@ const useUpdateAppliationProcessDetails = ({ refetch = () => {} }) => {
 			});
 
 			refetch();
+			setShowModal(false);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

@@ -23,4 +23,5 @@
 .hr_meeting {
 	flex: 7;
 	margin-left: 16px;
+	width: 60vw;
 }

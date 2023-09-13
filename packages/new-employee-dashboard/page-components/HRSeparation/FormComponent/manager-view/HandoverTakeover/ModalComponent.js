@@ -4,7 +4,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ModalComponent({ showModal = false, setShowModal = () => {} }) {
+function ModalComponent({
+	showModal = false,
+	setShowModal = () => {},
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	loading = false,
+}) {
 	return (
 		<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 			<Modal.Body>
@@ -37,7 +43,8 @@ function ModalComponent({ showModal = false, setShowModal = () => {} }) {
 					size="md"
 					themeType="primary"
 					className={styles.proceed_modal_btn}
-					onClick={() => setShowModal(false)}
+					onClick={handleSubmit(onSubmit)}
+					disabled={loading}
 				>
 					Yes, Proceed
 				</Button>

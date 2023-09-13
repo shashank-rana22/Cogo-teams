@@ -37,7 +37,7 @@ function JobStatus({ shipment_data = {}, activeStakeholder = '' }) {
 					Undo
 				</Button>
 			)}
-			{setShowModal ? (
+			{showModal ? (
 				<ReOpenJob shipmentData={shipment_data} showModal={showModal} setShowModal={setShowModal} />
 			) : null}
 		</div>

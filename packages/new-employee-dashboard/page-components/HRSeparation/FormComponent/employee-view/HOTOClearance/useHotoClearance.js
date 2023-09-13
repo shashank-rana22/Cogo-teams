@@ -3,17 +3,19 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useState } from 'react';
 
-const useSubmitHOTOClearance = ({ onSuccess = () => {} }) => {
+const useHotoClearance = ({ refetch, data = {} }) => {
+	const [showModal, setShowModal] = useState(false);
+
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
 		url    : '/update_application_process_details',
 	}, { manual: true });
 
-	const { handleSubmit, control, formState:{ errors } } = useForm();
+	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	const onSubmit = async (values = {}) => {
-		console.log('values', values);
 		try {
 			await trigger({
 				data: {
@@ -21,13 +23,26 @@ const useSubmitHOTOClearance = ({ onSuccess = () => {} }) => {
 					process_name          : 'hoto_clearance',
 				},
 			});
-			onSuccess();
+
+			refetch();
+			setShowModal(true);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
 	};
 
-	return { loading, handleSubmit, errors, control, onSubmit };
+	const { applicant_details } = data || {};
+
+	return {
+		loading,
+		handleSubmit,
+		errors,
+		control,
+		onSubmit,
+		applicant_details,
+		showModal,
+		setShowModal,
+	};
 };
 
-export default useSubmitHOTOClearance;
+export default useHotoClearance;
