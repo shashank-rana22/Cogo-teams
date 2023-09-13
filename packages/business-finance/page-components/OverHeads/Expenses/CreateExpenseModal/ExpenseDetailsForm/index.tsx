@@ -208,7 +208,6 @@ function ExpenseDetailsForm({
 			id: VENDOR_ID,
 			serial_id: SERIAL_ID,
 		} = obj || {};
-		
 
 		setCategoryOptions(
 			services?.map((service) => ({
