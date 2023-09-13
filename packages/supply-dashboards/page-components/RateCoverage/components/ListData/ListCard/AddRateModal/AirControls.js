@@ -79,6 +79,7 @@ const airControls = ({
 		placeholder : 'Commodity',
 		type        : 'select',
 		value       : data?.commodity || 'general',
+		disabled    : data?.commodity,
 		options     : commodityOptions,
 		span        : 4,
 		rules       : { required: 'commodity is required' },

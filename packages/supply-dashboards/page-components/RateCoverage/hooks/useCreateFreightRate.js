@@ -70,6 +70,7 @@ const useCreateFreightRate = (service) => {
 					validity_end             : data?.validity_end,
 					origin_main_port_id      : data?.origin_main_port_id,
 					destination_main_port_id : data?.destination_main_port_id,
+					schedule_type            : data?.schedule_type,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }

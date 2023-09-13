@@ -10,7 +10,6 @@ const fclControls = ({
 	data,
 	listShippingLineOptions,
 	fclCommodityOptions,
-	mainPortOptions1, mainPortOptions2,
 	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
@@ -68,7 +67,6 @@ const fclControls = ({
 		heading     : 'Origin Main port',
 		placeholder : 'Origin Main port',
 		span        : 4,
-		...mainPortOptions1,
 		rules       : { required: 'origin main port is required' },
 	},
 	{
@@ -87,7 +85,6 @@ const fclControls = ({
 		type        : 'select',
 		heading     : 'Destination main port',
 		span        : 4,
-		...mainPortOptions2,
 		placeholder : 'Destination main port',
 		rules       : { required: 'destination main port is required' },
 	},

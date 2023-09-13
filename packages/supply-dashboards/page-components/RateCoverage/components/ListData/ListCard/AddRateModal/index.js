@@ -15,7 +15,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, merge, startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import useGetMainPortsOptions from '../../../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import Layout from '../../../../../RfqEnquiries/Layout';
 import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
@@ -64,9 +63,6 @@ function AddRateModal({
 	const [chargeCodes, setChargeCodes] = useState(null);
 
 	const { user: { id: user_id = '' } = {} } = user_data;
-
-	const { options:mainPortOptions1 } = useGetMainPortsOptions({ location_id: data?.origin_port?.id });
-	const { options:mainPortOptions2 } = useGetMainPortsOptions({ location_id: data?.destination_port?.id });
 
 	const type = (isAirService) ? 'airport' : 'seaport';
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -126,8 +122,6 @@ function AddRateModal({
 	const finalControls = !isAirService ? fclControls({
 		data,
 		listShippingLineOptions,
-		mainPortOptions1,
-		mainPortOptions2,
 		originLocationOptions,
 		destinationLocationOptions,
 		fclCommodityOptions,

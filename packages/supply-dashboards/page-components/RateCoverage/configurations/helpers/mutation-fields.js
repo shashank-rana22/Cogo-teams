@@ -3,6 +3,8 @@
 import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
 import { merge, startCase } from '@cogoport/utils';
 
+import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
+
 function FieldMutation({ fields, values, filter, chargeCodes }) {
 	const organizationUsers = useGetAsyncOptions(
 		merge(
@@ -10,6 +12,8 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 			{ params: { filters: { organization_id: values?.service_provider_id } } },
 		),
 	);
+	const mainPortOptions1 = useGetMainPortsOptions({ location_id: values?.origin_port?.id });
+	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_port?.id });
 
 	const serviceProviders = useGetAsyncOptions(
 		merge(
@@ -36,6 +40,15 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 		if (name === 'sourced_by_id') {
 			newControl = { ...newControl, ...organizationUsers };
 		}
+
+		if (name === 'origin_main_port_id') {
+			newControl = { ...newControl, ...mainPortOptions1 };
+		}
+
+		if (name === 'destination_main_port_id') {
+			newControl = { ...newControl, ...mainPortOptions2 };
+		}
+
 		if (control?.controls) {
 			control.controls.forEach((childCtrl) => {
 				if (childCtrl.name === 'unit') {
