@@ -12,11 +12,11 @@ import styles from './styles.module.css';
 const CHECK_REMARK_LENGTH = 1;
 
 function RejectModal({
+	id = '',
 	showRejected = {},
 	onClose = () => {},
 	collectionPartyRejectionList = [],
 	billingPartyRejectionList = [],
-	id = '',
 	checkedValue = {},
 	setCheckedValue = (p) => p,
 	remarksVal = {},
@@ -25,12 +25,22 @@ function RejectModal({
 	invoiceType = '',
 	organizationName = '',
 	remarks = {},
-	urgencyTag = '',
 	billDate = new Date(),
 	status = '',
 	placeOfSupply = '',
-	onSubmit = () => {},
+	onSubmit = (prop) => (prop),
+	billAdditionalObject = {},
 }) {
+	const {
+
+		paymentType = '',
+		isIncidental = '',
+		advancedAmount = '0',
+		advancedAmountCurrency = '',
+		urgencyTag = '',
+		paymentDueDate = '',
+	} = billAdditionalObject || {};
+
 	return (
 		<Modal
 			size="lg"
@@ -112,6 +122,11 @@ function RejectModal({
 										organizationName,
 										remarks,
 										urgencyTag,
+										paymentType,
+										isIncidental,
+										advancedAmount,
+										advancedAmountCurrency,
+										paymentDueDate,
 									},
 								)}
 								onChange={(val) => {

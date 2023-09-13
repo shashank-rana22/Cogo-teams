@@ -6,17 +6,16 @@ import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-
 import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
 import isDisabled from '../../../../../utils/isDisabled.ts';
 
-import FTLFreightInvoiceDetails from './FTLFreightInvoiceDetails';
+import AdditionalInvoiceDetails from './AdditionalInvoiceDetails';
 import styles from './styles.module.css';
 
 const CARD_ID = 3;
 const PRESENT_TAB = 'invoiceDetailsTab';
 const TAB_TO_OPEN = 'lineItemsTab';
 const TIMELINE_ITEM = 'invoiceDetailsCheck';
+const LABEL = 'Invoice Details';
 
 function InvoiceDetailsCard({
-	id = '',
-	label = '',
 	showValue = [],
 	isInvoiceApproved = false,
 	rejected = [],
@@ -32,27 +31,21 @@ function InvoiceDetailsCard({
 	setShowHighAdvancedModal = (prop) => prop,
 	docContent = '',
 	setCheckItem = (prop) => (prop),
-	onAccept = (prop) => (prop),
-	onTabClick = (prop) => (prop),
+	onAccept = () => {},
+	onTabClick = () => {},
 	showTab = false,
 }) {
 	const {
 		billNumber = '',
-		billDate,
+		billDate = '',
 		status = '',
 		billType = '',
-		grandTotal = 0,
+		grandTotal = 1,
 	} = bill || {};
 
 	const {
-		shipmentType = '',
-		reasonForCN = '',
-		outstandingDocument = '',
-		paymentType = '',
-		isIncidental = '',
-		advancedAmount = '0',
-		advancedAmountCurrency = '',
 		urgencyTag = '',
+		paymentDueDate = '',
 	} = billAdditionalObject || {};
 
 	const tag = urgencyTag || 'No Urgency Tag';
@@ -80,14 +73,14 @@ function InvoiceDetailsCard({
 
 	const onClickResponse = ({ response }) => {
 		if (response) {
-			handleClick(id);
+			handleClick(CARD_ID);
 		} else {
-			handleClickReject(id);
+			handleClickReject(CARD_ID);
 		}
 		onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
 	};
 	const handleUndo = () => {
-		handleClickUndo(id);
+		handleClickUndo(CARD_ID);
 		setCheckItem(
 			(prev) => ({ ...prev, invoiceDetailsCheck: false }),
 		);
@@ -99,7 +92,7 @@ function InvoiceDetailsCard({
 				<div
 					className={labelClassName}
 				>
-					{label}
+					{LABEL}
 					{' '}
 					<div
 						style={{ justifyContent: 'center', display: 'flex' }}
@@ -113,7 +106,7 @@ function InvoiceDetailsCard({
 							<div
 								className={styles.button_container}
 								onClick={() => {
-									handleClickUndo(id);
+									handleClickUndo(CARD_ID);
 								}}
 								role="presentation"
 							>
@@ -220,8 +213,7 @@ function InvoiceDetailsCard({
 						</div>
 						<div className={styles.margin_bottom}>
 							Invoice Date -
-							{' '}
-							<span>
+							<span className={styles.span_left}>
 								{formatDate({
 									date       : billDate,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
@@ -230,27 +222,24 @@ function InvoiceDetailsCard({
 							</span>
 						</div>
 						<div className={styles.margin_bottom}>
-							Payment Due date -
-							{' '}
-							<span>DD MM YYYY</span>
+							Payment Due Date -
+							<span className={styles.span_left}>
+								{formatDate({
+									date       : paymentDueDate,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+									formatType : 'date',
+								})}
+							</span>
 						</div>
 
-						{shipmentType === 'ftl_freight'
-							&& (
-								<FTLFreightInvoiceDetails
-									billType={billType}
-									advancedPaymentObj={advancedPaymentObj}
-									isIncidental={isIncidental}
-									paymentType={paymentType}
-									advancedAmountCurrency={advancedAmountCurrency}
-									advancedAmount={advancedAmount}
-									grandTotal={grandTotal}
-									setShowHighAdvancedModal={setShowHighAdvancedModal}
-									outstandingDocument={outstandingDocument}
-									viewDocument={viewDocument}
-									reasonForCN={reasonForCN}
-								/>
-							)}
+						<AdditionalInvoiceDetails
+							billType={billType}
+							advancedPaymentObj={advancedPaymentObj}
+							grandTotal={grandTotal}
+							setShowHighAdvancedModal={setShowHighAdvancedModal}
+							viewDocument={viewDocument}
+							billAdditionalObject={billAdditionalObject}
+						/>
 					</div>
 				</div>
 			) : undefined}

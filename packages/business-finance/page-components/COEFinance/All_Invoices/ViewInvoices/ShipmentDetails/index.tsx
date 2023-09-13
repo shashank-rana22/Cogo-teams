@@ -110,7 +110,10 @@ interface ShipmentDetailsInterface {
 	billId?:string;
 	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
 	lineItemsCheck?: boolean;
-	checkItem?: object;
+	checkItem?: { shipmentDetailsCheck?: boolean,
+		documentsCheck?: boolean,
+		taggingCheck?: boolean,
+		sidDataCheck?: boolean, };
 }
 
 function ShipmentDetails({

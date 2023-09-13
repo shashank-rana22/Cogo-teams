@@ -33,9 +33,13 @@ interface ShipmentDetailsCardInterface {
 	invoiceStatus: string;
 	lineItemsCheck: boolean;
 	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
-	onAccept: Function;
-	onTabClick: Function;
-	tab: object;
+	onAccept: any;
+	onTabClick: any;
+	tab?: { collectionPartyTab?: boolean,
+		billingPartyTab?: boolean,
+		invoiceDetailsTab?: boolean,
+		lineItemsTab?: boolean,
+	};
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
@@ -106,7 +110,6 @@ function ShipmentDetailsCard({
 		shipmentType = '',
 		serialId = '',
 		advancedAmount = '0',
-		urgencyTag = '',
 	} = billAdditionalObject || {};
 
 	const { organizationId: serviceProviderOrgId } = serviceProviderDetail || {};
@@ -304,23 +307,22 @@ function ShipmentDetailsCard({
 				</div>
 				<div className={styles.small_hr} />
 				{DetailsCard.map((itemData: any) => {
-					const { id, label = '' } = itemData || {};
+					const { id = '' } = itemData || {};
 
 					return (
 						<>
 							{showRejected[id as keyof typeof showRejected] && (
 								<RejectModal
+									id={id}
 									showRejected={showRejected}
 									onClose={onClose}
 									collectionPartyRejectionList={collectionPartyRejectionList}
 									billingPartyRejectionList={billingPartyRejectionList}
-									id={id}
 									checkedValue={checkedValue}
 									setCheckedValue={setCheckedValue}
 									remarksVal={remarksVal}
 									setRemarksVal={setRemarksVal}
 									billNumber={billNumber}
-									urgencyTag={urgencyTag}
 									invoiceType={invoiceType}
 									remarks={remarks}
 									organizationName={organizationName}
@@ -328,13 +330,12 @@ function ShipmentDetailsCard({
 									status={status}
 									placeOfSupply={placeOfSupply}
 									onSubmit={onSubmit}
+									billAdditionalObject={billAdditionalObject}
 								/>
 							)}
 
 							{id === 1 && (
 								<CollectionPartyCard
-									id={id}
-									label={label}
 									showValue={showValue}
 									isInvoiceApproved={isInvoiceApproved}
 									rejected={rejected}
@@ -353,8 +354,6 @@ function ShipmentDetailsCard({
 
 							{id === 2 && (
 								<BillingPartyCard
-									id={id}
-									label={label}
 									showValue={showValue}
 									isInvoiceApproved={isInvoiceApproved}
 									rejected={rejected}
@@ -373,8 +372,6 @@ function ShipmentDetailsCard({
 
 							{id === 3 && (
 								<InvoiceDetailsCard
-									id={id}
-									label={label}
 									showValue={showValue}
 									isInvoiceApproved={isInvoiceApproved}
 									rejected={rejected}

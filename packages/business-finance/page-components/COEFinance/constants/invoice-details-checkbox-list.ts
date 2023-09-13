@@ -9,6 +9,11 @@ function invoiceDetailsRejectCheckboxList(
 		organizationName = '',
 		remarks = 'No Remarks',
 		urgencyTag = 'No Urgency Tag',
+		advancedAmount = '0',
+		advancedAmountCurrency = '',
+		paymentType = '',
+		isIncidental = '',
+		paymentDueDate = new Date(),
 	},
 ) {
 	return [
@@ -26,7 +31,22 @@ function invoiceDetailsRejectCheckboxList(
 				formatType : 'date',
 			})}`,
 		},
-		{ name: 'Payment Due date', value: 'Payment Due date', label: 'Payment Due date -' },
+		{
+			name  : 'Payment Due date',
+			value : 'Payment Due date',
+			label : `Payment Due Date - ${formatDate({
+				date       : paymentDueDate,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+				formatType : 'date',
+			})}`,
+		},
+		{ name: 'Is Incidental', value: 'Is Incidental', label: `Is Incidental - ${isIncidental}` },
+		{ name: 'Payment Type', value: 'Payment Type', label: `Payment Type - ${paymentType}` },
+		{
+			name  : 'Advance amount',
+			value : 'Advance amount',
+			label : `Advance Amount - ${advancedAmountCurrency} ${advancedAmount}`,
+		},
 	];
 }
 export default invoiceDetailsRejectCheckboxList;

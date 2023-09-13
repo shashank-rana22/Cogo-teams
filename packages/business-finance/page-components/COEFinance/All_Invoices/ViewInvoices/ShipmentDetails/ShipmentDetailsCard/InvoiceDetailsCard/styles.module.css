@@ -64,3 +64,7 @@
 	margin: 0 16px;
 	cursor: pointer;
 }
+
+.span_left {
+	margin-left: 2px;
+}

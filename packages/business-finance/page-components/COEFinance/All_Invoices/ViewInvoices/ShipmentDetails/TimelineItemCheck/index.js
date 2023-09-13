@@ -27,7 +27,6 @@ function TimeLineItemCheck({ checkItem = {}, status = '' }) {
 				>
 					<div
 						className={styles.line_group}
-
 					>
 						{checkItem[itemKey] || isInvoiceApproved ? (
 							<IcMFtick color="#f68b21" height={24} width={24} />
@@ -46,7 +45,6 @@ function TimeLineItemCheck({ checkItem = {}, status = '' }) {
 					</div>
 					<div>
 						{ITEMS[itemKey]}
-
 					</div>
 
 				</div>

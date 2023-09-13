@@ -13,10 +13,9 @@ const CARD_ID = 2;
 const PRESENT_TAB = 'billingPartyTab';
 const TAB_TO_OPEN = 'invoiceDetailsTab';
 const TIMELINE_ITEM = 'billingPartyCheck';
+const LABEL = 'Billing Party';
 
 function BillingPartyCard({
-	id = '',
-	label = '',
 	showValue = [],
 	isInvoiceApproved = false,
 	rejected = [],
@@ -27,8 +26,8 @@ function BillingPartyCard({
 	status = '',
 	docContent = '',
 	setCheckItem = (prop) => (prop),
-	onAccept = (prop) => (prop),
-	onTabClick = (prop) => (prop),
+	onAccept = () => {},
+	onTabClick = () => {},
 	showTab = false,
 }) {
 	let labelClassName;
@@ -50,14 +49,14 @@ function BillingPartyCard({
 
 	const onClickResponse = ({ response }) => {
 		if (response) {
-			handleClick(id);
+			handleClick(CARD_ID);
 		} else {
-			handleClickReject(id);
+			handleClickReject(CARD_ID);
 		}
 		onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
 	};
 	const handleUndo = () => {
-		handleClickUndo(id);
+		handleClickUndo(CARD_ID);
 		setCheckItem(
 			(prev) => ({ ...prev, billingPartyCheck: false }),
 		);
@@ -69,7 +68,7 @@ function BillingPartyCard({
 				<div
 					className={labelClassName}
 				>
-					{label}
+					{LABEL}
 					<div
 						className={styles.icon_section}
 					>
@@ -83,7 +82,7 @@ function BillingPartyCard({
 							<div
 								className={styles.button_container}
 								onClick={() => {
-									handleClickUndo(id);
+									handleClickUndo(CARD_ID);
 								}}
 								role="presentation"
 							>

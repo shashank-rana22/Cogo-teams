@@ -10,10 +10,9 @@ const CARD_ID = 1;
 const PRESENT_TAB = 'collectionPartyTab';
 const TAB_TO_OPEN = 'billingPartyTab';
 const TIMELINE_ITEM = 'collectionPartyCheck';
+const LABEL = 'Bank Details - Collection Party';
 
 function CollectionPartyCard({
-	id = '',
-	label = '',
 	showValue = [],
 	isInvoiceApproved = false,
 	rejected = [],
@@ -24,8 +23,8 @@ function CollectionPartyCard({
 	status = '',
 	docContent = '',
 	setCheckItem = (prop) => (prop),
-	onAccept = (prop) => (prop),
-	onTabClick = (prop) => (prop),
+	onAccept = () => {},
+	onTabClick = () => {},
 	showTab = false,
 }) {
 	let labelClassName;
@@ -48,14 +47,14 @@ function CollectionPartyCard({
 
 	const onClickResponse = ({ response }) => {
 		if (response) {
-			handleClick(id);
+			handleClick(CARD_ID);
 			onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
 		} else {
-			handleClickReject(id);
+			handleClickReject(CARD_ID);
 		}
 	};
 	const handleUndo = () => {
-		handleClickUndo(id);
+		handleClickUndo(CARD_ID);
 		setCheckItem(
 			(prev) => ({ ...prev, collectionPartyCheck: false }),
 		);
@@ -67,7 +66,7 @@ function CollectionPartyCard({
 				<div
 					className={labelClassName}
 				>
-					{label}
+					{LABEL}
 					<div
 						className={styles.arrow_icon}
 					>

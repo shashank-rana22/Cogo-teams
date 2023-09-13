@@ -10,19 +10,24 @@ const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
 
-function FTLFreightInvoiceDetails({
+function AdditionalInvoiceDetails({
 	billType = '',
 	advancedPaymentObj = {},
-	isIncidental = false,
-	paymentType = '',
-	advancedAmountCurrency = '',
-	advancedAmount = '',
 	grandTotal = 1,
 	setShowHighAdvancedModal = () => {},
-	outstandingDocument = false,
 	viewDocument = () => {},
-	reasonForCN = '',
+	billAdditionalObject = {},
 }) {
+	const {
+		shipmentType = '',
+		reasonForCN = '',
+		outstandingDocument = '',
+		paymentType = '',
+		isIncidental = false,
+		advancedAmount = '0',
+		advancedAmountCurrency = '',
+	} = billAdditionalObject || {};
+
 	const advancedATHAmountPercentage = +((+advancedAmount / (+grandTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
 		.toFixed(MAX_DECIMAL_PLACES);
 	const isAdvancedATHAmountGreaterThan80Percent = !Number.isNaN(advancedATHAmountPercentage)
@@ -59,7 +64,6 @@ function FTLFreightInvoiceDetails({
 			);
 		}
 	}
-
 	return (
 		<div>
 			{billType === 'BILL' && isIncidental && (
@@ -94,7 +98,7 @@ function FTLFreightInvoiceDetails({
 				{button}
 			</div>
 
-			{advancedPaymentObj?.data && (
+			{advancedPaymentObj?.data && shipmentType === 'ftl_freight' && (
 				<div className={styles.margin_bottom}>
 					Updated Advanced Amount -
 					{' '}
@@ -107,7 +111,7 @@ function FTLFreightInvoiceDetails({
 				</div>
 			)}
 
-			{outstandingDocument && (
+			{outstandingDocument && shipmentType === 'ftl_freight' && (
 				<div className={styles.margin_bottom}>
 					Outstanding Proforma Approval-
 					{' '}
@@ -122,7 +126,7 @@ function FTLFreightInvoiceDetails({
 				</div>
 			)}
 
-			{billType === 'CREDIT_NOTE' && reasonForCN && (
+			{billType === 'CREDIT_NOTE' && reasonForCN && shipmentType === 'ftl_freight' && (
 				<div className={styles.margin_bottom}>
 					Reason For CN -
 					{' '}
@@ -133,4 +137,4 @@ function FTLFreightInvoiceDetails({
 	);
 }
 
-export default FTLFreightInvoiceDetails;
+export default AdditionalInvoiceDetails;
