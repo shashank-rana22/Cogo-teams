@@ -978,6 +978,18 @@ function asyncListCogoOneShiftTime() {
 	};
 }
 
+function asyncListOverSeasTradeParties() {
+	return {
+		valueKey     : 'organizationId',
+		labelKey     : 'organizationName',
+		endpoint     : '/purchase/bills/list-overseas-trade-parties',
+		authkey      : 'list-overseas-trade-parties',
+		initialCall  : false,
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1058,4 +1070,5 @@ export {
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
 	asyncListCogoOneShiftTime,
+	asyncListOverSeasTradeParties,
 };

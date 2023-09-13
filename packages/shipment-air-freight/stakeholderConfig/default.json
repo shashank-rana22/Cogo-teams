@@ -22,5 +22,6 @@
     },
     "tracking": {
         "tab_title": "Tracking"
-    }
+    },
+    "job_open_request": false
 }

@@ -1765,6 +1765,12 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_executive_summary',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_organization_communication_logs_by_view',
 			access_type  : 'private',
 			feature      : 'demand_crm',
@@ -12812,6 +12818,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_shipment_operating_procedures',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_instruction',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'post_allocation_feedback',
 			access_type  : 'private',
 			service_name : 'allocation',
@@ -13421,6 +13447,11 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'delete_tickets_category',
 			access_type  : 'private',
 			service_name : 'tickets',
@@ -14025,6 +14056,11 @@ const partner = {
 			api          : 'get_rolling_forecast_fcl_freight_clusters',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 };

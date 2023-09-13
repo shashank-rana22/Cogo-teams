@@ -198,7 +198,7 @@ function CollectionPartyDetails({
 						size="sm"
 						onClose={() => { setOpen(false); }}
 					>
-						<Modal.Header title="Upload Scan of Invoice" />
+						<Modal.Header title={isJobClosed ? 'Upload Scan of Credit Note' : 'Upload Scan of Invoice'} />
 						<Modal.Body>
 							<section>
 								<FileUploader

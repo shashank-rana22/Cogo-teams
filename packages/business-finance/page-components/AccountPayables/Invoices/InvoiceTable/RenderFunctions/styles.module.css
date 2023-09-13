@@ -13,8 +13,7 @@
 
 .urgency {
 	padding: 2px 4px;
-	font-size: 12px;
-	font-weight: 500;
+	font-size: 10px;
 	color: #333;
 	background-color: #f8aea8;
 	border-radius: 4px;
@@ -23,4 +22,8 @@
 .flex {
 	display: flex;
 	align-items: center;
+}
+
+.font {
+	font-size: 10px;
 }
