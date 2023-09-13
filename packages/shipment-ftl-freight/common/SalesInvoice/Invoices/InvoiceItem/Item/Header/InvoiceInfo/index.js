@@ -2,6 +2,7 @@ import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -72,6 +73,8 @@ function InvoiceInfo({
 			message: API_SUCCESS_MESSAGE[type],
 		});
 	};
+
+	const isProcessing = invoice?.processing || true;
 
 	return (
 		<>
@@ -161,7 +164,26 @@ function InvoiceInfo({
 						</div>
 					) : null}
 
-				{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
+				{isProcessing
+					? (
+						<div className={styles.reload}>
+							<div className={cl`${styles.payment_method} ${styles.processing}`}>Processing</div>
+							<Button
+								size="sm"
+								themeType="tertiary"
+								onClick={() => apiTrigger({
+									payload: {
+										id: invoice?.id,
+									},
+								})}
+							>
+								<IcMRefresh width={15} height={15} fill="#ee3425" />
+							</Button>
+						</div>
+					)
+					: null}
+
+				{(!invoice.is_revoked && invoice.status !== 'finance_rejected' && !isProcessing) ? (
 					<Actions
 						invoice={invoice}
 						bfInvoiceRefetch={bfInvoiceRefetch}
@@ -172,8 +194,8 @@ function InvoiceInfo({
 					/>
 				) : null}
 
-				{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id ? (
+				{(invoice?.status === 'reviewed'
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id && !isProcessing) ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
@@ -183,7 +205,7 @@ function InvoiceInfo({
 						</Button>
 					) : null}
 
-				{showRequestCN ? (
+				{(showRequestCN && !isProcessing) ? (
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
@@ -193,7 +215,7 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{invoice?.status === 'reviewed' ? (
+				{(invoice?.status === 'reviewed' && !isProcessing) ? (
 					<Button
 						size="sm"
 						onClick={() => setShowOTPModal(true)}
@@ -202,7 +224,7 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{!INVOICE_STATUS.includes(invoice.status) ? (
+				{(!INVOICE_STATUS.includes(invoice.status) && !isProcessing) ? (
 					<Button
 						size="sm"
 						onClick={() => setShowReview(true)}
@@ -213,7 +235,7 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
+				{(invoice?.is_revoked && invoice?.status !== 'revoked' && !isProcessing) ? (
 					<div className={styles.info_container}>Requested for Revoke</div>
 				) : null}
 			</div>
