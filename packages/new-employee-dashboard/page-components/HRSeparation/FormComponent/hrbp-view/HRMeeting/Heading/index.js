@@ -1,19 +1,22 @@
 import { Button, Tags } from '@cogoport/components';
-import { IcMTaskCompleted, IcCFtick } from '@cogoport/icons-react';
+import { IcMTaskCompleted, IcCFtick, IcMClock } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const options = [
-	{
-		key      : '1',
-		disabled : false,
-		children : 'Completed',
-		color    : 'green',
-		tooltip  : false,
-	},
-];
-function Heading({ title = 'HR MEETING', subTitle = 'Summary from manager interaction' }) {
+function Heading({
+	title = 'HR MEETING', subTitle = 'Summary from manager interaction',
+	isComplete = false, name = '',
+}) {
+	const options = [
+		{
+			key      : '1',
+			disabled : false,
+			children : isComplete ? 'Completed' : 'Pending',
+			color    : isComplete ? 'green' : 'orange',
+			tooltip  : false,
+		},
+	];
 	const [items, setItems] = useState(options);
 
 	return (
@@ -33,8 +36,12 @@ function Heading({ title = 'HR MEETING', subTitle = 'Summary from manager intera
 			</div>
 
 			<div className={styles.sub_heading}>
-				<IcCFtick width={20} height={20} />
-				<span style={{ marginLeft: '10px' }}>Cleared by Person/Team Name</span>
+				{isComplete ? <IcCFtick width={20} height={20} />
+					: <IcMClock width={20} height={20} style={{ color: '#F68B21' }} />}
+				<span style={{ marginLeft: '10px' }}>
+					{isComplete ? `Cleared by ${name}`
+						: `Awaiting clearance from ${name}`}
+				</span>
 			</div>
 
 		</>

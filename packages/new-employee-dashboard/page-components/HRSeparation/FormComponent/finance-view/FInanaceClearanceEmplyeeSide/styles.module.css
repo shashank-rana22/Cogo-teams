@@ -129,18 +129,18 @@
 }
 
 .recoverable_amount {
-	color: black;
+	padding-left: 8px;
 	margin-bottom: 8px;
 	font-size: 20px;
 	font-weight: 500;
-	padding-left: 8px;
+	color: black;
 }
 
 .heading_container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .caret_arrow {
@@ -179,9 +179,9 @@
 
 .heading_btn {
 	padding-right: 10px;
-	color: #221F20;
-	text-align: center;
 	font-weight: 500;
+	color: #221f20;
+	text-align: center;
 }
 
 .table_update_fnf {
@@ -189,9 +189,9 @@
 }
 
 .outstanding_heading {
+	margin: 8px 0;
 	font-size: 16px;
 	font-weight: 600;
-	margin: 8px 0;
 }
 
 .fnf_excel_sheet_container {
@@ -201,10 +201,11 @@
 }
 
 .outstanding_fnf_heading {
-	color: #4F4F4F;
 	font-size: 16px;
 	font-weight: 500;
+	color: #4f4f4f;
 }
+
 .tags {
 	display: flex;
 	align-items: center;
@@ -217,16 +218,19 @@
 		.ui_EOpUW {
 			padding-left: 0;
 		}
-		.ui_HO5Zq{
-			color: #000;
+
+		.ui_HO5Zq {
 			font-weight: 400;
+			color: #000;
 		}
 	}
 }
-.error{
+
+.error {
 	font-size: 12px;
 	color: red;
 }
 .table_item_style{
 	font-weight: 400;
 }
+

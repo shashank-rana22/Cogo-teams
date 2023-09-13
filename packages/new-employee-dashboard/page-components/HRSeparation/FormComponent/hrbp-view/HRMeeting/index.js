@@ -18,7 +18,7 @@ const FIRST_INDEX = 1;
 const SECOND_INDEX = 2;
 const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
-function HRMeeting({ data = {}, refetch = () => {} }) {
+function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 	const {
 		control,
 		watch,
@@ -32,7 +32,7 @@ function HRMeeting({ data = {}, refetch = () => {} }) {
 	const { hr_meet:hrMeet } = hr_meet || {};
 	const { sub_process_detail_id, sub_process_data } = hrMeet || {};
 
-	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
 	const onSubmit = (values) => {
 		const payload = {
@@ -110,9 +110,15 @@ function HRMeeting({ data = {}, refetch = () => {} }) {
 			</div>
 
 			<EmployeeDetail data={data} />
-			<DatePicker control={control} watch={watch} reset={reset} errors={errors} />
+			<DatePicker
+				control={control}
+				watch={watch}
+				reset={reset}
+				errors={errors}
+				lastWorkingDay={sub_process_data?.lastWorkingDay}
+			/>
 			<JoiningBonus control={control} errors={errors} />
-			<InterviewQuestions control={control} errors={errors} />
+			<InterviewQuestions control={control} errors={errors} data={sub_process_data} watch={watch} />
 			<NotesForManager control={control} />
 			<div className={styles.button}>
 				<Button size="md" onClick={handleSubmit(onSubmit)}>

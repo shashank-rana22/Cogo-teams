@@ -144,6 +144,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'create_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_off_boarding_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{

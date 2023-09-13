@@ -49,3 +49,16 @@
 	justify-content: flex-end;
 	margin-top: 16px;
 }
+
+.upper_text {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.lower_text {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}

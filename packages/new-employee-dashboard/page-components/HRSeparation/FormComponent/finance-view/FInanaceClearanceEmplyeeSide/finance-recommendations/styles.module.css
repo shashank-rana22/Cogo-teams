@@ -46,17 +46,19 @@
 	align-items: center;
 	width: 100%;
 }
-.hold_employee_container{
-    :global{
-        .ui_TE06c{
-            padding: 10px 0;
-        }
-    }
+
+.hold_employee_container {
+	:global {
+		.ui_TE06c {
+			padding: 10px 0;
+		}
+	}
 }
-.hold_fnf_container{
-    :global{
-        .ui_TE06c{
-            padding: 10px 0;
-        }
-    }
+
+.hold_fnf_container {
+	:global {
+		.ui_TE06c {
+			padding: 10px 0;
+		}
+	}
 }

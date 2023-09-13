@@ -1,84 +1,80 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowDown, IcMFtick, IcMArrowRight, IcMInformation, IcMTick, IcMCross } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMFtick, IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import CancellationRequest from '../CancellationRequest';
 import Heading from '../HRMeeting/Heading';
 
-// import LeavingReason from './LeavingReason';
 import styles from './styles.module.css';
 
-function TechClearanceHrbp() {
-	const [show, setShow] = useState(false);
-	const [visible, setVisible] = useState(false);
+function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {}, handleNext = () => {} }) {
+	const { tech_clearance, application_status } = data || {};
+	const { process_user_details, tech_clearance:techClearance } = tech_clearance || {};
+	let { name } = process_user_details || {};
+	const { sub_process_data, is_complete } = techClearance || {};
+	const { serviceList, name:approver_name } = sub_process_data || {};
+	name = approver_name === null ? name : approver_name;
 
-	const STATUS_CONFIRMED = {
-		cloud_service : 'Access Removed',
-		atlassian     : 'Access Removed',
-		github        : 'Access Removed',
-		Figma         : 'Access Removed',
-	};
+	const [show, setShow] = useState(false);
 
 	return (
 		<>
-			<Heading title="TECH CLEARANCE" subTitle="Access Removal" />
+			<Heading title="TECH CLEARANCE" subTitle="Access Removal" isComplete={is_complete} name={name} />
 
-			{visible ? (
-				<div className={styles.prompt}>
-					<IcMInformation style={{ color: '#EE3425' }} width={20} height={20} />
-					<span className={styles.prompt_text}>Rahul Dev has requested for cancellation of separation.</span>
-					<div className={styles.buttons}>
-						<Button style={{ background: '#fdebe9', color: 'black' }}>
-							<IcMCross width={18} height={18} />
-							<span>Reject</span>
-
-						</Button>
-						<Button className={styles.acc_btn}>
-							<IcMTick width={20} height={20} />
-							<span>Accept</span>
-
-						</Button>
-					</div>
-				</div>
+			{application_status === 'cancellation_requested' ? (
+				<CancellationRequest
+					data={data}
+					refetch={refetch}
+				/>
 			) : null}
-			<div className={styles.container}>
+			{is_complete ? (
+				<>
+					<div className={styles.container}>
 
-				<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
-					<span>
-						Status
-					</span>
-					<div className={styles.button_add_service_container}>
-						<IcMArrowDown
-							width={16}
-							height={16}
-							className={show ? styles.caret_active : styles.caret_arrow}
-						/>
-					</div>
-				</div>
-
-				<div className={show ? styles.item_container : styles.item_container_closed}>
-					{Object.keys(STATUS_CONFIRMED || {}).map((val) => (
-						<div className={styles.detail} key={val.key}>
-							<div className={styles.label}>
-								{startCase(val) || '-'}
-							</div>
-							<div className={styles.status_detail}>
-								<IcMFtick height={18} width={18} color="#849E4C" />
-								{STATUS_CONFIRMED[val] || '-'}
+						<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
+							<span>
+								Status
+							</span>
+							<div className={styles.button_add_service_container}>
+								<IcMArrowDown
+									width={16}
+									height={16}
+									className={show ? styles.caret_active : styles.caret_arrow}
+								/>
 							</div>
 						</div>
-					))}
-				</div>
-			</div>
-			<div className={styles.footer}>
-				<Button themeType="secondary" style={{ marginRight: '4px' }}>Back</Button>
-				<Button themeType="primary" onClick={() => setVisible(!visible)}>
-					Proceed
-					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
 
-				</Button>
-			</div>
-			{/* <LeavingReason /> */}
+						<div className={show ? styles.item_container : styles.item_container_closed}>
+							{(serviceList || []).map((val) => (
+								<div className={styles.detail} key={val.key}>
+									<div className={styles.label}>
+										{startCase(val)}
+									</div>
+									<div className={styles.status_detail}>
+										<IcMFtick
+											height={18}
+											width={18}
+											color="#849E4C"
+											style={{ marginRight: '4px' }}
+										/>
+										Access Removed
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+					<div className={styles.footer}>
+						<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
+						<Button themeType="primary" onClick={handleNext}>
+							Proceed
+							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+
+						</Button>
+					</div>
+				</>
+			) : null}
+
 		</>
 	);
 }

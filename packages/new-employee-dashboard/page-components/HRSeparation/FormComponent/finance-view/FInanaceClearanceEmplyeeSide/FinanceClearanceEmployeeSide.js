@@ -1,9 +1,8 @@
-import { Button, Input } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import { useForm, UploadController } from '@cogoport/forms';
 import {
 	IcMArrowDown,
 	IcMArrowRight,
-	IcMCloudUpload,
 	IcMDownload,
 	IcMPlus,
 } from '@cogoport/icons-react';
@@ -158,7 +157,13 @@ function FinanceClearanceEmployeeSide() {
 					</div>
 					<div className={styles.fnf_excel_sheet_container}>
 						<div className={styles.outstanding_fnf_heading}> FNF Excel Sheet</div>
-						<Input
+						<UploadController
+							name="fnffile"
+							control={control}
+							placeholder="Only Image, pdf/doc..."
+							size="md"
+						/>
+						{/* <Input
 							size="md"
 							placeholder="Only Image, pdf/doc..."
 							prefix={<IcMCloudUpload width={16} height={16} />}
@@ -169,7 +174,7 @@ function FinanceClearanceEmployeeSide() {
 
 							)}
 							disabled
-						/>
+						/> */}
 					</div>
 				</div>
 			</div>

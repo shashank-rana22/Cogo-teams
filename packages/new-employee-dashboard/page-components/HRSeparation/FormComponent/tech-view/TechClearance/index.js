@@ -1,59 +1,117 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Tags } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMTick, IcMError } from '@cogoport/icons-react';
+import { IcMTick, IcMError, IcMFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 // import useGetApplicationProcessDetails from '../../useGetApplicationProcessDetails';
 // import useSubmitTechClearance from '../useSubmitTechClearance';
 
+import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+
 import DatePicker from './DatePicker';
 import ServiceList from './ServiceList';
 import styles from './styles.module.css';
+import TechStatus from './TechStatus';
 import TermsAndConditions from './TermsAndConditions';
 
-function TechClearance() {
+function TechClearance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
+	const options = [
+		{
+			key      : '1',
+			disabled : false,
+			children : 'Completed',
+			prefix   : null,
+			suffix   : null,
+			color    : '#849E4C',
+			tooltip  : false,
+		},
+	];
+	const [items, setItems] = useState(options);
 	const {
 		control,
 		formState:{ errors = {} },
 		handleSubmit,
+		setValue,
 	} = useForm();
 
-	// const { data } = useGetApplicationProcessDetails();
-	// const { postTechData } = useSubmitTechClearance();
+	const { tech_clearance } = data || {};
+	const { tech_clearance:techClearance } = tech_clearance || {};
+	const { sub_process_detail_id } = techClearance || {};
 
-	const onSubmit = (values) => {
-		// 	postTechData({
-		// 		sub_process_data      : values,
-		// 		sub_process_detail_id : 'bce47a4f-5a4d-44e3-8f7c-dae20abba0a6',
-		// 		process_name          : 'tech_clearance',
-		// 	});
-		console.log(values);
-		setShowModal(true);
+	const TECH_CLEARANCE_STATUS = techClearance?.is_complete;
+
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const onSubmit = (values = {}) => {
+		const payload = {
+			process_name     : 'tech_clearance',
+			sub_process_detail_id,
+			sub_process_data : {
+				lastWorkingDay : values.date,
+				serviceList    : values.service_list,
+				checkDetails   : values.check_details,
+				name           : values.full_name,
+			},
+		};
+		updateApplication({ payload });
 	};
-
 	return (
 		<div className={styles.tech_container}>
-			<div className={styles.title}>Access Removal</div>
-			<div className={styles.sub_heading}>Check the boxes after removal of access</div>
+			<div className={styles.container}>
+				<div className={styles.sub_container}>
+					<div className={styles.title}>Access Removal</div>
+					<div className={styles.sub_heading}>Check the boxes after removal of access</div>
+				</div>
+				{TECH_CLEARANCE_STATUS
+				&& (
+					<Tags
+						items={items}
+						onItemsChange={setItems}
+						size="xl"
+						className={styles.completed}
+					/>
+				)}
 
-			<DatePicker control={control} errors={errors} />
-			<ServiceList control={control} errors={errors} />
-			<TermsAndConditions control={control} errors={errors} />
-
-			<div className={styles.provide_clearance_btn_container}>
-				<Button
-					size="md"
-					themeType="primary"
-					className={styles.provide_clearance_btn}
-					onClick={() => {
-						handleSubmit(onSubmit)();
-					}}
-				>
-					Provide Clearance
-					<IcMTick width="18px" height="18px" color="white" />
-				</Button>
 			</div>
+
+			{TECH_CLEARANCE_STATUS
+			&& (
+				<>
+					<div className={styles.completed_notification_container}>
+						<IcMFtick height="18px" width="18px" color="#849E4C" />
+						<div className={styles.completed_notification_text}>
+							You have successfully completed your tasks. No further changes are allowed
+						</div>
+					</div>
+					<TechStatus
+						techClearance={techClearance}
+					/>
+				</>
+			)}
+			{!TECH_CLEARANCE_STATUS
+			&& 			(
+				<>
+					<DatePicker
+						control={control}
+						errors={errors}
+						setValue={setValue}
+						dataItems={data}
+					/>
+					<ServiceList control={control} errors={errors} />
+					<TermsAndConditions control={control} errors={errors} techClearance={techClearance} />
+					<div className={styles.provide_clearance_btn_container}>
+						<Button
+							size="md"
+							themeType="primary"
+							className={styles.provide_clearance_btn}
+							onClick={() => setShowModal(true)}
+						>
+							Provide Clearance
+							<IcMTick width="18px" height="18px" color="white" />
+						</Button>
+					</div>
+				</>
+			)}
 			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 				<Modal.Body>
 					<div className={styles.modal_icon_container}>
@@ -82,7 +140,10 @@ function TechClearance() {
 						size="md"
 						themeType="Accent"
 						className={styles.proceed_modal_btn}
-						onClick={() => setShowModal(false)}
+						onClick={() => {
+							handleSubmit(onSubmit)();
+							setShowModal(false);
+						}}
 					>
 						Yes, Proceed
 					</Button>

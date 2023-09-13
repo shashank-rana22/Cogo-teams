@@ -55,3 +55,7 @@
 	transition: 0.3s;
 	transform: rotate(180deg);
 }
+
+.modal_message_text > input {
+	width: 100%;
+}

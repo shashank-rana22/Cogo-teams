@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+// import { Button } from '@cogoport/components';
 import { InputController, SelectController } from '@cogoport/forms';
-import { IcMArrowDown, IcMPlus } from '@cogoport/icons-react';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ const company_assets = [
 	{ label: 'Not Collected', value: 'notcollected' },
 	{ label: 'Not Allocated', value: 'notallocated' }];
 
-function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) {
+function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is_complete = false }) {
 	const [show, setShow] = useState(true);
 	// const [idCardStatus, setIdCardStatus] = useState(null);
 	// const [accesscard, setaccesscard] = useState(null);
@@ -26,14 +26,14 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 				{
 					source === 'admin-clearance' ? (
 						<div className={styles.accordiontitle}>
-							<Button
+							{/* <Button
 								size="md"
 								themeType="secondary"
 								className={styles.servicesbtn}
 							>
 								<IcMPlus />
 								Add Services
-							</Button>
+							</Button> */}
 							<IcMArrowDown
 								width={16}
 								height={16}
@@ -61,6 +61,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 						name="idcardstatus"
 						options={id_card_options}
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 					{errors.idcardstatus && (
 						<span className={styles.error}>*required</span>
@@ -75,6 +76,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 						name="accesscardstatus"
 						options={access_card_options}
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 					{errors.accesscardstatus && (
 						<span className={styles.error}>*required</span>
@@ -89,6 +91,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 						name="companyassets"
 						options={company_assets}
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 					{errors.companyassets && (
 						<span className={styles.error}>*required</span>
@@ -103,6 +106,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 						control={control}
 						name="parkingcharges"
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 
 					{errors.parkingcharges && (
@@ -118,6 +122,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 						control={control}
 						name="othercharges"
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 					{errors.othercharges && (
 						<span className={styles.error}>*required</span>
@@ -133,6 +138,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {} }) 
 						control={control}
 						name="specify"
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 					{errors.specify && (
 						<span className={styles.error}>*required</span>

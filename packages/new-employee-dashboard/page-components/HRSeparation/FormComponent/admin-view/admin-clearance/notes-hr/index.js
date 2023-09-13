@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function NotesHrbp({ control = {}, errors = {} }) {
+function NotesHrbp({ control = {}, errors = {}, is_complete = false }) {
 	const [showNotes, setShowNotes] = useState(true);
 
 	return (
@@ -28,6 +28,7 @@ function NotesHrbp({ control = {}, errors = {} }) {
 						control={control}
 						name="notes"
 						rules={{ required: 'this is required' }}
+						disabled={is_complete}
 					/>
 
 				</div>
