@@ -4,6 +4,7 @@ import AdminClearance from './admin-view/admin-clearance';
 import AdminConfirmed from './admin-view/admin-confirmation';
 import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
+import FinanceClearanceEmployeeSide from './finance-view/FInanaceClearanceEmplyeeSide/FinanceClearanceEmployeeSide';
 import ExitInterview from './hrbp-view/ExitInterview';
 import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
 import ExitReasons from './hrbp-view/ExitReasons';
@@ -46,10 +47,13 @@ const COMPONENT_MAPPING = {
 		HOTOClearance,
 		HOTOClearance_confirmation: HOTOClearanceConfirmation,
 	},
+	finance: {
+		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
+	},
 };
 
 function FormComponent({ data = {}, loading = false, refetchApplicationDetails = () => {} }) {
-	const Render = COMPONENT_MAPPING.hrbp.hr_meeting;
+	const Render = COMPONENT_MAPPING.finance.finance_clearance_employee_side;
 
 	return (
 		<div className={styles.container}>

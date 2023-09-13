@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { IcMProfile, IcMEmail, IcMCalendar, IcMClock, IcMLocation } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -20,10 +21,6 @@ function ExitInterview({ data = {} }) {
 	const [otpValue, setOtpValue] = useState('');
 	const [otpError, setOtpError] = useState(false);
 	const { handleSubmit, onSubmit } = useSubmitResignationProgress({
-		onSuccess: () => {
-			console.log('api hit success...');
-			// setShowModal(true);
-		},
 	});
 	const onClickSubmit = () => {
 		if (otpValue.length !== OTP_LENGTH) {
@@ -31,8 +28,7 @@ function ExitInterview({ data = {} }) {
 			return;
 		}
 
-		handleSubmit(onSubmit)();
-
+		handleSubmit(onSubmit(otpValue))();
 		console.log('resign progress data ::', data);
 	};
 
