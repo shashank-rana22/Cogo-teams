@@ -4,12 +4,14 @@ import { LABEL_MAPPING } from '../constants';
 
 const HUNDRED = 100;
 const NO_VALUE = 0;
+const DEFAULT_TOTAL_VALUE = 1;
 
 export const getData = ({ taxType, type, cardData, totalCost, totalRevenue }) => {
 	const operationalOrActualCostPercent = (Number(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`])
-	/ Number(totalCost)) * HUNDRED;
+	/ Number(totalCost || DEFAULT_TOTAL_VALUE)) * HUNDRED;
 
-	const operationalOrActualRevenuePercent = (cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`] / totalRevenue)
+	const operationalOrActualRevenuePercent = (cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`]
+	/ (totalRevenue || DEFAULT_TOTAL_VALUE))
 	* HUNDRED;
 
 	const isCostOverflowing = operationalOrActualCostPercent > HUNDRED;
