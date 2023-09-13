@@ -1,14 +1,7 @@
 import { Button } from '@cogoport/components';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import formatDate from '@cogoport/globalization/utils/formatDate';
-import {
-	IcACareers,
-	IcMTick,
-} from '@cogoport/icons-react';
+import { IcACareers } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-// import { startCase } from '@cogoport/utils';
-// import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -25,6 +18,7 @@ function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false
 				<div className={styles.img}>
 					<IcACareers width={18} height={18} />
 				</div>
+
 				<div className={styles.sec2}>
 					<div className={styles.text1}>
 						<span className={styles.text_name}>{val.employee_name}</span>
@@ -39,6 +33,7 @@ function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false
 					</div>
 				</div>
 			</div>
+
 			{isManager ? (
 				<div className={styles.yes_no}>
 					<div className={styles.approve}>
