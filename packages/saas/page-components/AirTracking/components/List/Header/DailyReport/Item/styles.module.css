@@ -1,0 +1,9 @@
+.col {
+	padding: 8px;
+
+	:global {
+		.ui_toggle_container {
+			padding: 5px;
+		}
+	}
+}

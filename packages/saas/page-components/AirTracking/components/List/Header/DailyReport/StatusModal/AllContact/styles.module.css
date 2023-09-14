@@ -1,0 +1,39 @@
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	padding: 10px 16px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.body {
+	padding: 16px 20px;
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&.search_container {
+		align-items: flex-end;
+	}
+
+	.input_box {
+		width: 80%;
+
+		input {
+			width: 100%;
+		}
+	}
+
+	:global {
+		.ui_input_suffix {
+			margin-right: 5px;
+		}
+	}
+}
+
+.empty_state {
+	width: fit-content;
+	margin: 10px auto;
+}

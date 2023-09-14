@@ -1,0 +1,79 @@
+.container {
+	padding: 0 10px;
+}
+
+.dot_container {
+	position: relative;
+	width: 28px;
+	height: 28px;
+}
+
+.dot_bg {
+	width: 28px;
+	height: 28px;
+	background-color: #e8f9ee;
+	border-radius: 100%;
+}
+
+.dot {
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	width: 14px;
+	height: 14px;
+	background-color: #0ebc93;
+	border-radius: 100%;
+}
+
+.line {
+	width: 1px;
+	height: 100%;
+	margin: 0 auto;
+	border-left: 1.5px solid #000;
+}
+
+.next_step {
+	.dot {
+		background: #bdbdbd;
+	}
+
+	.dot_bg {
+		background: #f9f9f9;
+	}
+
+	.line {
+		border: 1.5px dashed #e3e3e3;
+	}
+}
+
+.curr_dot {
+	.dot {
+		background-color: #ff1000;
+	}
+
+	.dot_bg {
+		position: relative;
+		background: #ffddda;
+		animation: current_milestone 0.8s infinite alternate;
+	}
+
+	.line {
+		border: 1.5px dashed #e3e3e3;
+	}
+}
+
+@keyframes current_milestone {
+	0% {
+		top: 13px;
+		left: 13px;
+		width: 0;
+		height: 0;
+	}
+
+	100% {
+		top: 0;
+		left: 0;
+		width: 28px;
+		height: 28px;
+	}
+}

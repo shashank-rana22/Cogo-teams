@@ -1,0 +1,45 @@
+.container {
+	padding: 16px 0;
+
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			padding: 6px 10px;
+		}
+	}
+}
+
+.label {
+	font-weight: 600;
+}
+
+.col {
+	padding: 0 8px;
+	margin-bottom: 15px;
+}
+
+.time {
+	width: 45%;
+}
+
+.select_container {
+	width: 45%;
+}
+
+.errors {
+	color: #f33;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 14px;
+	border-top: 0.5px solid #333;
+
+	.submit_btn {
+		margin-left: 10px;
+	}
+}

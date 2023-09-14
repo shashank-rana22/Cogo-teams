@@ -1,0 +1,70 @@
+.container {
+	margin-bottom: 20px;
+
+	:global {
+		.ui_popover_container.tippy-box {
+			max-width: 1100px !important;
+		}
+
+		div[data-tippy-root] {
+			z-index: 1000 !important;
+		}
+	}
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+
+	@media screen and (max-width: 767px) {
+		flex-wrap: wrap;
+	}
+}
+
+.first_row {
+	justify-content: space-between;
+	margin-bottom: 20px;
+
+	h2 {
+		margin: 0 20px 0 0;
+	}
+
+	svg {
+		vertical-align: bottom;
+	}
+}
+
+.second_row {
+	justify-content: flex-end;
+
+	.second_row_tab {
+		width: 42%;
+	}
+
+	@media screen and (max-width: 767px) {
+		flex-direction: column;
+		justify-content: center;
+
+		.second_row_tab {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+	}
+}
+
+.ocean_row {
+	justify-content: space-between;
+}
+
+.export_btn {
+	margin: 10px 0;
+	margin-left: 15px;
+}
+
+.archived_section {
+	@media screen and (max-width: 767px) {
+		flex-direction: row-reverse;
+		justify-content: space-around;
+		margin-top: 10px;
+	}
+}

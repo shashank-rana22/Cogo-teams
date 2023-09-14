@@ -1,0 +1,72 @@
+.container {
+	padding: 0 20px 20px 0;
+
+	@media screen and (max-width: 767px) {
+		padding: 0 0 20px;
+	}
+}
+
+.title {
+	margin-right: 20px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.flex_box {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+
+	@media screen and (max-width: 767px) {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+}
+
+.header {
+	margin-bottom: 15px;
+}
+
+.filter_section {
+	.select_field {
+		width: 150px;
+		margin: 0 15px;
+	}
+
+	@media screen and (max-width: 767px) {
+		justify-content: space-around;
+
+		.shipment_btn {
+			margin-top: 20px;
+		}
+	}
+}
+
+.tracking_info {
+	/* border: 1px solid #daf9ff; */
+	border-radius: 4px;
+}
+
+.view_tab {
+	:global {
+		.ui_tabs_container .ui_tab_list_container.ui_ps_themeType_tertiary {
+			border: 1px solid  #e0e0e0;
+			box-shadow: none;
+		}
+
+		.ui_tab_container {
+			border: none;
+		}
+
+		.ui_tab_container.ui_tab_active.ui_ps_themeType_tertiary {
+			margin: 0;
+			background: #fef199;
+			border-radius: 0;
+		}
+
+		.ui_tabs_list_icon {
+			color: #333 !important;
+		}
+	}
+}

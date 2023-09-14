@@ -1,0 +1,27 @@
+.container {
+	width: 350px;
+}
+
+.header {
+	padding-bottom: 7px;
+	border-bottom: 1px solid #d3d3d3;
+
+	h3 {
+		margin: 0;
+	}
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	font-weight: 600;
+	color: #636363;
+}
+
+.filter_section {
+	margin: 20px 0;
+}

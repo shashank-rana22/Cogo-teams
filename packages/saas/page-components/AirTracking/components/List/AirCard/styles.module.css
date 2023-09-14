@@ -1,0 +1,68 @@
+.container {
+	margin-bottom: 30px;
+	border-radius: 8px;
+	box-shadow: 0 0 16px rgb(98 127 172 / 20%);
+}
+
+.main_body {
+	display: flex;
+	justify-content: space-between;
+
+	.stepper_container {
+		width: 65%;
+		cursor: pointer;
+	}
+
+	.dashed_line {
+		margin: 25px;
+		border-left: 1.5px dashed #e0e0e0;
+	}
+
+	.shipment_details_container {
+		display: flex;
+		align-items: flex-start;
+		width: 32%;
+		padding: 20px;
+
+		.shipment_info {
+			flex: 2;
+		}
+	}
+
+	@media screen and (max-width: 767px) {
+		flex-direction: column;
+
+		.dashed_line {
+			display: none;
+		}
+
+		.stepper_container,
+		.shipment_details_container {
+			width: 100%;
+		}
+	}
+}
+
+.header {
+	display: inline-block;
+	padding: 10px 20px;
+	font-weight: 600;
+	background-color: #fffce6;
+	border-top-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+.skeleton_loader {
+	padding: 40px 20px 20px 40px;
+}
+
+.setting {
+	padding: 0 8px;
+	cursor: pointer;
+
+	:global {
+		.tippy-content {
+			padding: 0;
+		}
+	}
+}

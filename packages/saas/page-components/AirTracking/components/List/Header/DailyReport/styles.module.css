@@ -1,0 +1,54 @@
+.container {
+	position: relative;
+	width: 1000px;
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #f8f2e7;
+}
+
+.header {
+	margin-bottom: 20px;
+	border: none;
+}
+
+.cta_container {
+	display: flex;
+	align-items: center;
+
+	.cross_icon {
+		margin-left: 10px;
+	}
+}
+
+.table {
+	border: 1px solid #f8f2e7;
+	border-radius: 4px;
+}
+
+.card_header {
+	font-weight: 600;
+}
+
+.col {
+	padding: 8px;
+}
+
+.empty_state {
+	width: fit-content;
+	margin: 10px auto;
+}
+
+.pagination_container {
+	margin-top: 12px;
+
+	:global {
+		.ui_pagination_table_container {
+			justify-content: flex-end;
+			font-size: 13px;
+		}
+	}
+}
