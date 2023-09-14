@@ -1,13 +1,11 @@
 import { isEmpty } from '@cogoport/utils';
 
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
-// import useGetPayableBills from '../hooks/useGetPayableBills';
 import useGetShipmentCrossEntityInvoice from '../hooks/useGetShipmentCrossEntityInvoice';
 
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
 import Invoices from './Invoices';
-// import CrossEntityInvoice from './CrossEntityInvoices';
 
 function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = () => {} }) {
 	const {
@@ -27,8 +25,6 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 		refetch:salesInvoicesRefetch,
 	} = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
 
-	// const { invoiceList, loading } = useGetPayableBills({ shipment_data: shipmentData });
-
 	if (collectionPartyLoading || loadingCE) {
 		return <Loader />;
 	}
@@ -46,13 +42,6 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 					fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
 				/>
 			))}
-
-			{/* {(invoiceList || []).map((invoice) => (
-				<CrossEntityInvoice
-					key={invoice?.id}
-					item={invoice}
-				/>
-			))} */}
 
 			{!loadingCE && !isEmpty(invoiceDataCE) && shipmentData?.shipment_type === 'fcl_freight' ? (
 				<Invoices
