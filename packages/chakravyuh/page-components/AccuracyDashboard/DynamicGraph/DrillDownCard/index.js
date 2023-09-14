@@ -31,7 +31,7 @@ function DrillDownCard({
 			/>
 
 			<div className={styles.flex_between}>
-				<p className={styles.card_name}>{`${startCase(data?.action_type)} Count`}</p>
+				<p className={styles.card_name}>{`${startCase(data?.action_type)}`}</p>
 				{(isAtTop || isMainCard) && (
 					<h3 className={styles.rate_amount}>
 						<Tooltip

@@ -130,11 +130,11 @@
 		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
 	}
 
-	20% {
+	30% {
 		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
 	}
 
-	95% {
+	80% {
 		border: 1px solid var(--card-color);
 		box-shadow: 0 0 4px var(--card-color);
 	}

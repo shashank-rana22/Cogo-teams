@@ -32,7 +32,7 @@ export const getCardsDataFromGraph = ({
 }) => {
 	const CARDS = [];
 
-	const getCards = (position, graphNode) => {
+	const getCards = (position, graphNode, posIdx) => {
 		const { name = '', rates_count = '', drop = '', child = {} } = graphNode;
 		CARDS.push({
 			action_type : name,
@@ -43,11 +43,12 @@ export const getCardsDataFromGraph = ({
 				left : `${position[GLOBAL_CONSTANTS.zeroth_index]}px`,
 				top  : `${position[FIRST]}px`,
 			},
+			positionIdx: posIdx,
 		});
 		Object.entries(child).forEach(([key, items]) => {
 			if (items.length === FIRST) {
 				const [firstChild] = items;
-				getCards(positionMapping(position, key), firstChild);
+				getCards(positionMapping(position, key), firstChild, posIdx + FIRST);
 			} else {
 				const mid = Math.floor(items.length / SECOND);
 				const length = (mid * POSITION_FACTOR) - (POSITION_FACTOR / SECOND);
@@ -56,14 +57,14 @@ export const getCardsDataFromGraph = ({
 					position[FIRST] - length,
 				];
 				items.forEach((childItem) => {
-					getCards(intialPosition, childItem);
+					getCards(intialPosition, childItem, posIdx + FIRST);
 					intialPosition[FIRST] += POSITION_FACTOR;
 				});
 			}
 		});
 	};
 
-	getCards([INITAL_POSITION_X, INITAL_POSITION_Y], graph);
+	getCards([INITAL_POSITION_X, INITAL_POSITION_Y], graph, FIRST);
 
 	return { cards: CARDS };
 };

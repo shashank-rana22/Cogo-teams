@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 import SVGLayout from './SVGLayout';
 
 const DEFAULT_ZOOM_LEVEL = 0;
+const DELAY_CONSTANT = 0.1;
 
 // const DUMMY_GRAPH = {
 // 	name        : 'Spot Search',
@@ -24,48 +25,37 @@ const DEFAULT_ZOOM_LEVEL = 0;
 // 					name        : 'Shipment',
 // 					rates_count : '1230',
 // 					child       : {
-// 						bottom: [{
-// 							name        : 'Revenue Desk',
-// 							rates_count : '1230',
-// 							child       : {
-// 								bottom: [{
-// 									name        : 'SO1',
-// 									rates_count : '1230',
-// 									child       : {},
-// 								}],
-// 							},
-// 						}],
 // 						right: [{
-// 							name        : 'Received',
+// 							name        : 'Confirmed',
 // 							rates_count : '1230',
 // 							child       : {
-// 								right: [{
-// 									name        : 'Confirmed',
+// 								right: [
+// 									{
+// 										name        : 'Completed',
+// 										rates_count : '1230',
+// 										child       : {},
+// 									},
+// 									{
+// 										name        : 'Aborted',
+// 										rates_count : '1230',
+// 										child       : {},
+// 									},
+// 									{
+// 										name        : 'Cancelled',
+// 										rates_count : '1230',
+// 										child       : {},
+// 									},
+// 								],
+// 								bottom: [{
+// 									name        : 'Revenue Desk',
 // 									rates_count : '1230',
 // 									child       : {
-// 										right: [
-// 											{
-// 												name        : 'Cancelled',
-// 												rates_count : '1230',
-// 												child       : {},
-// 											},
-// 											{
-// 												name        : 'Aborted',
-// 												rates_count : '1230',
-// 												child       : {},
-// 											},
-// 											{
-// 												name        : 'Completed',
-// 												rates_count : '1230',
-// 												child       : {},
-// 											},
-// 										],
+// 										bottom: [{
+// 											name        : 'SO1',
+// 											rates_count : '1230',
+// 											child       : {},
+// 										}],
 // 									},
-// 								}],
-// 								top: [{
-// 									name        : 'OUTDATED',
-// 									rates_count : '1230',
-// 									child       : {},
 // 								}],
 // 							},
 // 						}],
@@ -76,122 +66,83 @@ const DEFAULT_ZOOM_LEVEL = 0;
 // 	},
 // };
 
+// const DUMMY_GRAPH = {
+// 	name        : 'Spot Search',
+// 	rates_count : '1230',
+// 	parent      : 'GLOBAL PARENT',
+// 	child       : {
+// 		right: [
+// 			{
+// 				name        : 'Rate Shown',
+// 				rates_count : '1230',
+// 				child       : {
+// 					right: [
+// 						{
+// 							name        : 'Disliked',
+// 							rates_count : '1230',
+// 							child       : {
+// 								right: [
+// 									{
+// 										name        : 'Feedback Recieved',
+// 										rates_count : '1230',
+// 										child       : {
+// 											right: [
+// 												{
+// 													name        : 'Rate Reverted Feedbacks',
+// 													rates_count : '1230',
+// 													child       : {
+// 														right: [
+// 															{
+// 																name        : 'Rates Reverted',
+// 																rates_count : '1230',
+// 																child       : {},
+// 															},
+// 														],
+// 													},
+// 												},
+// 											],
+// 										},
+// 									},
+// 								],
+// 							},
+// 						},
+// 						{
+// 							name        : 'Liked',
+// 							rates_count : '1230',
+// 							child       : {},
+// 						},
+// 					],
+// 				},
+// 			},
+// 		],
+// 	},
+// };
+
 const DUMMY_GRAPH = {
 	name        : 'Spot Search',
 	rates_count : '1230',
 	parent      : 'GLOBAL PARENT',
 	child       : {
-		right: [
-			{
-				name        : 'Checkout',
-				rates_count : '1230',
-				drop        : '23',
-				child       : {
-					right: [
-						{
-							name        : 'Booking Confirm',
+		right: [{
+			name        : 'Rates Requested',
+			rates_count : '1230',
+			parent      : 'GLOBAL PARENT',
+			child       : {
+				right: [{
+					name        : 'Requests Closed',
+					rates_count : '1230',
+					parent      : 'GLOBAL PARENT',
+					child       : {
+						right: [{
+							name        : 'Rates Reverted',
 							rates_count : '1230',
-							child       : {
-								right: [
-									{
-										name        : 'Revenue Desk',
-										rates_count : '1230',
-										child       : {
-											right: [{
-												name        : '',
-												rates_count : '1230',
-												child       : {},
-											}],
-										},
-									},
-								],
-							},
-						},
-					],
-				},
+							parent      : 'GLOBAL PARENT',
+							child       : {},
+						}],
+					},
+				}],
 			},
-			{
-				name        : 'Checkout',
-				rates_count : '1230',
-				child       : {
-					right: [
-						{
-							name        : 'Booking Confirm',
-							rates_count : '1230',
-							child       : {
-								right: [
-									{
-										name        : 'Revenue Desk',
-										rates_count : '1230',
-										child       : {
-											right: [{
-												name        : '',
-												rates_count : '1230',
-												child       : {},
-											}],
-										},
-									},
-								],
-							},
-						},
-					],
-				},
-			},
-			{
-				name        : 'Checkout',
-				rates_count : '1230',
-				child       : {
-					right: [
-						{
-							name        : 'Booking Confirm',
-							rates_count : '1230',
-							child       : {
-								right: [
-									{
-										name        : 'Revenue Desk',
-										rates_count : '1230',
-										child       : {
-											right: [{
-												name        : '',
-												rates_count : '1230',
-												child       : {},
-											}],
-										},
-									},
-								],
-							},
-						},
-					],
-				},
-			},
-			{
-				name        : 'Checkout',
-				rates_count : '1230',
-				child       : {
-					right: [
-						{
-							name        : 'Booking Confirm',
-							rates_count : '1230',
-							child       : {
-								right: [
-									{
-										name        : 'Revenue Desk',
-										rates_count : '1230',
-										child       : {
-											right: [{
-												name        : '',
-												rates_count : '1230',
-												child       : {},
-											}],
-										},
-									},
-								],
-							},
-						},
-					],
-				},
-			},
-		],
+		}],
 	},
 };
 
@@ -215,7 +166,7 @@ function DynamicGraph() {
 				</div>
 				<div className={styles.cards_layout}>
 					{cards.map((item) => {
-						const { position } = item;
+						const { position, positionIdx } = item;
 						const isActive = activeParent === item.action_type;
 						return (
 							<div
@@ -227,11 +178,12 @@ function DynamicGraph() {
 									key={item.action_type}
 									data={item}
 									cardIndex={1}
-                                        // delay={
-                                        // 	(FACTOR * rowIdx)
-                                        // 	// + (DEFAULT_DELAY + colIdx * (FACTOR / (row.length - FACTOR || FACTOR)))
-                                        // }
-									delay={0}
+									delay={positionIdx * DELAY_CONSTANT}
+                                    // delay={
+                                    // 	(FACTOR * rowIdx)
+                                    // 	// + (DEFAULT_DELAY + colIdx * (FACTOR / (row.length - FACTOR || FACTOR)))
+                                    // }
+									// delay={0}
 									handleClick={handleClick}
 									animate={!activeParent}
 									isAtTop={isActive}
