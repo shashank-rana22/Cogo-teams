@@ -39,8 +39,7 @@ function TrendChart({
 		const NEW_OBJ = {};
 		Object.entries(item).forEach(([key, value]) => {
 			if (key !== 'predicted') {
-				if (key === 'day')NEW_OBJ[key] = value;
-				else if (typeof (value) === 'object') {
+				if (typeof (value) === 'object') {
 					Object.entries(value).forEach(([type, count]) => {
 						if (type === viewType)NEW_OBJ[key] = count;
 					});
