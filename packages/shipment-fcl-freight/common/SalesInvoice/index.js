@@ -32,8 +32,8 @@ function SalesInvoice() {
 	return (
 		<main className={styles.container}>
 			<OverviewManageServices isOpen={false} source="overview" />
-			{/* (!isEmpty(invoiceData) || !isEmpty(invoiceDataCE))  optimise */}
-			{!(loading || loadingCE) && (!isEmpty(invoiceData) || !isEmpty(invoiceDataCE)) ? (
+
+			{!(loading || loadingCE) && !(isEmpty(invoiceData) && isEmpty(invoiceDataCE)) ? (
 				<Invoices
 					invoiceData={invoiceData}
 					invoiceDataCE={invoiceDataCE}

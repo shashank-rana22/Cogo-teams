@@ -1,7 +1,6 @@
 import useListBfSalesInvoices from '../../hooks/useListBfSalesInvoices';
 
 import InvoiceItem from './InvoiceItem';
-// import styles from './styles.module.css';
 
 function Invoices({
 	invoiceDataCE = {},
@@ -18,10 +17,6 @@ function Invoices({
 	const totalsCE = invoiceDataCE?.invoicing_party_wise_total;
 
 	return (
-	// <main className={styles.container}>
-
-	// 	<div className={styles.line} />
-
 		<section>
 			{Object.keys(groupedInvoicesCE || {}).map((item) => (
 				<InvoiceItem
@@ -37,7 +32,7 @@ function Invoices({
 				/>
 			))}
 		</section>
-	// </main>
+
 	);
 }
 

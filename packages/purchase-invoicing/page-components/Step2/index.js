@@ -60,8 +60,8 @@ function StepTwo({
 					onClick={
 					iseditable
 						? () => setStep(STEP_ONE)
-						: () => closeModal()
-				}
+						: closeModal
+					}
 				>
 					Go Back
 

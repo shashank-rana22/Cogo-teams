@@ -33,7 +33,6 @@ function InvoiceItem({
 						})}
 					</div>
 				</div>
-
 			</div>
 
 			<div className={styles.invoice_list_wrapper}>
