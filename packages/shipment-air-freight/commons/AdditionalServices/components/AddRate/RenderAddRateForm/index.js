@@ -39,8 +39,8 @@ function RenderAddRateForm({
 }) {
 	const { formControl } = controls({ serviceData, source });
 
-	let { services = [] } = serviceData;
-	services = services.find((service) => service.service_type === 'air_freight_service');
+	let { services = [] } = serviceData || {};
+	services = services?.find((service) => service.service_type === 'air_freight_service');
 
 	const selectedUnit = watch('unit');
 	const prefillValue = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[selectedUnit];
