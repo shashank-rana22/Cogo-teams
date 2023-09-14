@@ -34,20 +34,9 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 
 	const countryValidation = getCountryConstants({ country_id: listLeadsData?.country_id, isDefaultData: false });
 
-	const { updateLoading = false, updateLeadOrganization } = useUpdateLeadOrganization();
+	const { updateLoading = false, updateDetails = () => {} } = useUpdateLeadOrganization({ listLeadsData });
 
-	const updateDetails = (values) => {
-		const PAYLOAD = {
-			account_type        : 'importer_exporter',
-			business_name       : values?.company_name,
-			id                  : listLeadsData?.id,
-			country_id          : values?.country_id,
-			registration_number : values?.registration_number,
-
-		};
-
-		updateLeadOrganization({ payload: PAYLOAD });
-	};
+	const { business_name = '', country_id = '', registration_number = '' } = listLeadsData || {};
 
 	return (
 		<div className={styles.details_form}>
@@ -60,7 +49,7 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 						control={control}
 						name="company_name"
 						placeholder="Enter Company Name"
-						value={listLeadsData?.business_name}
+						value={business_name}
 						rules={{ required: 'Company Name is required' }}
 					/>
 
@@ -76,7 +65,7 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 						size="sm"
 						placeholder="Enter or Select Country"
 						optionValueKey="id"
-						value={listLeadsData?.country_id}
+						value={country_id}
 						rules={{ required: 'Country of Registration is required' }}
 					/>
 					{Error('country_id', errors)}
@@ -92,7 +81,7 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 						name="registration_number"
 						control={control}
 						placeholder={`Enter ${countryValidation?.others?.pan_number?.label || 'PAN'}`}
-						value={listLeadsData?.registration_number}
+						value={registration_number}
 						rules={{
 							required : { value: !formValues?.pan_number, message: 'PAN number is required' },
 							pattern  : {

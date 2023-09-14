@@ -27,7 +27,13 @@ function useCreateLeadOrganizationToAccount({
 				setOrgId(res?.data?.organization_id);
 			}
 
-			await apiTrigger({ id: task?.id, tags: ['1'], status: 'pending' });
+			const updatePendingTaskPayload = {
+				id     : task?.id,
+				tags   : ['1'],
+				status : 'pending',
+			};
+
+			await apiTrigger({ ...updatePendingTaskPayload });
 
 			setStep('1');
 		} catch (error) {

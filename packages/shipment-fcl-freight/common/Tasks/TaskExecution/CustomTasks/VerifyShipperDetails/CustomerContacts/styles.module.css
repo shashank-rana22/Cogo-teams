@@ -35,4 +35,12 @@
 	display: flex;
 	align-self: center;
 	justify-content: space-between;
+
+	>div {
+		display: flex;
+
+		>button {
+			margin-left: 8px;
+		}
+	}
 }

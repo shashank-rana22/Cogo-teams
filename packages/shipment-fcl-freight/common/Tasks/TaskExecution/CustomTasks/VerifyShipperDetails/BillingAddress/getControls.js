@@ -71,7 +71,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 		{
 			name   : 'tax_number_document_url',
 			label  : 'Proof',
-			type   : 'fileUpload',
+			type   : 'upload',
 			styles : { flex: '1 1 100%' },
 		},
 		{

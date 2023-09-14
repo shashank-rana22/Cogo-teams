@@ -27,11 +27,13 @@ const controlTypeControllerMapping = {
 	selectDayFrequency : DayFrequencyController,
 	datePicker         : DatepickerController,
 	dateRangePicker    : DateRangePickerController,
-	fileUpload         : UploadController,
+	upload             : UploadController,
 	creatableSelect    : CreatableSelectController,
 	textarea           : TextAreaController,
 	checkBox           : CheckboxController,
 	mobileNumber       : MobileNumberController,
 };
 
-export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
+const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
+
+export default getFieldController;

@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import { getFieldController } from '@cogoport/ocean-modules/utils/getFieldController';
+import getFieldController from '@cogoport/ocean-modules/utils/getFieldController';
 import { useEffect, useState } from 'react';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
@@ -24,7 +24,7 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '', onCancel = 
 	const {
 		onSubmit = () => {},
 		loading: upsellLoading = false,
-	} = useCreateAutoUpsellService({ task, refetch, onCancel });
+	} = useCreateAutoUpsellService({ task, refetch, onCancel, countryId });
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,
@@ -40,8 +40,8 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '', onCancel = 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.flex_container}>
-				{controls?.map((cntrl) => {
-					const { type = '', name = '', styles: style = {}, label = '' } = cntrl;
+				{controls?.map((formControl) => {
+					const { type = '', name = '', styles: style = {}, label = '' } = formControl;
 
 					const Element = getFieldController(type);
 
@@ -56,7 +56,7 @@ function BillingAddress({ task = {}, refetch = () => {}, orgId = '', onCancel = 
 
 								<Element
 									control={control}
-									{...cntrl}
+									{...formControl}
 								/>
 							</div>
 

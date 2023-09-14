@@ -88,7 +88,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {}, 
 					<div>
 						<Button
 							themeType="secondary"
-							onClick={() => { onCancel(); }}
+							onClick={onCancel}
 						>
 							Cancel
 						</Button>
@@ -96,7 +96,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setOrgId = () => {}, 
 						<Button
 							disabled={isEmpty(checkList) || loading || createUserLoading || createOrgLoading}
 							themeType="accent"
-							onClick={() => { onVerify(); }}
+							onClick={onVerify}
 						>
 							Verify
 						</Button>

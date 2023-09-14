@@ -1,9 +1,11 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
+import getAutoUpsellPayload from '../helpers/getAutoUpsellPayload';
+
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
-function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {} }) {
+function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {}, countryId = '' }) {
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: () => { onCancel(); refetch(); } });
 
 	const [{ loading = false }, trigger] = useRequest({
@@ -22,31 +24,7 @@ function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = 
 	};
 
 	const onSubmit = (values) => {
-		const {
-			name,
-			business_name,
-			pincode,
-			tax_number,
-			address,
-			tax_number_document_url,
-			email,
-		} = values;
-
-		const { shipment_id, task_field_id } = task;
-
-		const payload = {
-			shipment_id,
-			name,
-			address,
-			pincode,
-			tax_number,
-			business_name,
-			email,
-			tax_number_document_url : tax_number_document_url?.finalUrl,
-			service_type            : 'fcl_freight_local',
-			trade_partner_id        : task_field_id,
-			country_id              : values?.country_id,
-		};
+		const payload = getAutoUpsellPayload({ task, values, countryId });
 
 		createAutoUpsellService({ payload });
 	};
