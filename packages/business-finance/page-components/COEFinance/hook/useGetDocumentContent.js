@@ -5,7 +5,7 @@ import toastApiError from '../../commons/toastApiError.ts';
 import { ENTITY_NAME_LIST } from '../constants/ENTITY_NAME_LIST';
 
 const useGetDocumentContent = ({ data }) => {
-	const { billDocumentUrl, billType } = data?.bill || {};
+	const { billDocumentUrl } = data?.bill || {};
 	const orgName = data?.sellerDetail?.organizationName;
 
 	const [
@@ -36,7 +36,7 @@ const useGetDocumentContent = ({ data }) => {
 				trigger({
 					params: {
 						file_url    : billDocumentUrl,
-						entity_type : billType,
+						entity_type : 'purchase_invoice',
 						entity_name : getSupplierMappedName(),
 					},
 				});
@@ -46,7 +46,7 @@ const useGetDocumentContent = ({ data }) => {
 		};
 
 		if (billDocumentUrl) { getContent(); }
-	}, [trigger, billDocumentUrl, billType, orgName]);
+	}, [trigger, billDocumentUrl, orgName]);
 
 	return {
 		contentLoading,
