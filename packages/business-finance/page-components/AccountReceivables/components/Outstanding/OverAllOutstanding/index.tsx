@@ -3,6 +3,11 @@ import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
+import {
+	kamWiseList,
+	serviceWiseList,
+	ccWiseList,
+} from '../../../configs/dummy-graph-stats';
 import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
@@ -101,7 +106,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 
 	const graphPropsList = {
 		kam_wise_outstandings: {
-			data        : viewGraphStats ? KamDataPoints : '',
+			data        : viewGraphStats ? KamDataPoints : kamWiseList,
 			heading     : 'KAM Wise Outstandings',
 			loading     : kamWiseLoading,
 			isKamWise   : true,
@@ -114,7 +119,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 			},
 		},
 		service_wise_outstandings: {
-			data        : viewGraphStats ? ServiceDataPoints : '',
+			data        : viewGraphStats ? ServiceDataPoints : serviceWiseList,
 			heading     : 'Service Wise Open Invoices',
 			loading     : serviceWiseLoading,
 			isKamWise   : false,
@@ -129,7 +134,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 	};
 	const graphPropsChild = {
 		cc_wise_outstandings: {
-			data        : viewGraphStats ? ccDataPoints : '',
+			data        : viewGraphStats ? ccDataPoints : ccWiseList,
 			heading     : 'CC Wise Outstandings',
 			loading     : ccWiseLoading,
 			isKamWise   : true,

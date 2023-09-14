@@ -25,7 +25,7 @@ function Outstanding({ entityCode = '' }) {
 					name="outstanding_visualization"
 					title="Outstanding Visualization"
 				>
-					<OutStandingVisualization />
+					<OutStandingVisualization entityCode={entityCode} />
 				</TabPanel>
 			</Tabs>
 		</div>

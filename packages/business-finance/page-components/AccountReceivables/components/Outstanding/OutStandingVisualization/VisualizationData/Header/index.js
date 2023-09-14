@@ -51,23 +51,6 @@ function Headers({
 				<div className={styles.flex}>
 					<div>
 						<Select
-							placeholder="Search by Cogo entity"
-							optionsListKey="cogo-entities-id"
-							defaultOptions
-							clearable="true"
-							valueKey="entity_code"
-							onChange={(e) => handleApply({ entity_code: e })}
-							value={entity_code}
-							labelKey="description"
-							size="sm"
-							style={{
-								width       : '150px',
-								marginRight : '20px',
-							}}
-						/>
-					</div>
-					<div>
-						<Select
 							placeholder="Select Duration Type"
 							defaultOptions
 							onChange={(e) => handleApply({ period_type: e })}
