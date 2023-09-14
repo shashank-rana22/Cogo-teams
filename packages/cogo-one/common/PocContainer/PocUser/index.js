@@ -5,7 +5,7 @@ import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import getEachUserFormatedData from '../../../../../../../utils/getPocUserFormattedData';
+import getEachUserFormatedData from '../../../utils/getPocUserFormattedData';
 
 import styles from './styles.module.css';
 
