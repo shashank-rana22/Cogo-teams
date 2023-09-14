@@ -27,6 +27,10 @@ const MultiSelectController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.MultiselectController),
 	{ ssr: false },
 );
+const UploadController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.UploadController),
+	{ ssr: false },
+);
 
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
@@ -39,6 +43,7 @@ function FormElement({ type = '', ...rest }) {
 
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
 
+	if (type === 'file') return <UploadController {...rest} />;
 	return <InputController {...rest} type={type} />;
 }
 
