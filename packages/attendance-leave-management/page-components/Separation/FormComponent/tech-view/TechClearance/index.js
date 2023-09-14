@@ -43,6 +43,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 	const TECH_CLEARANCE_STATUS = techClearance?.is_complete;
 
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+
 	const onSubmit = (values = {}) => {
 		const payload = {
 			process_name     : 'tech_clearance',
@@ -56,6 +57,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 		};
 		updateApplication({ payload });
 	};
+
 	return (
 		<div className={styles.tech_container}>
 			<div className={styles.container}>
@@ -72,7 +74,6 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 						className={styles.completed}
 					/>
 				)}
-
 			</div>
 
 			{TECH_CLEARANCE_STATUS
@@ -89,6 +90,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 					/>
 				</>
 			)}
+
 			{!TECH_CLEARANCE_STATUS
 			&& 			(
 				<>
@@ -113,6 +115,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 					</div>
 				</>
 			)}
+
 			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 				<Modal.Body>
 					<div className={styles.modal_icon_container}>
@@ -151,7 +154,6 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 				</Modal.Footer>
 			</Modal>
 		</div>
-
 	);
 }
 

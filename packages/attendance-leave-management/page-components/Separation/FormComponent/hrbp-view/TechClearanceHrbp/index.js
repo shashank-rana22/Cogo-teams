@@ -69,12 +69,10 @@ function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {
 						<Button themeType="primary" onClick={handleNext}>
 							Proceed
 							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
 						</Button>
 					</div>
 				</>
 			) : null}
-
 		</>
 	);
 }

@@ -26,11 +26,9 @@ function SeparationForm() {
 						className={show ? styles.caret_active : styles.caret_arrow}
 					/>
 				</div>
-
 			</div>
 
 			<div className={show ? styles.show_separation : styles.hide_separation}>
-
 				<div className={styles.completed_notification_container}>
 					<IcMFtick height="22px" width="22px" color="#849E4C" />
 					<div className={styles.completed_notification_text}>
@@ -38,9 +36,7 @@ function SeparationForm() {
 						You will soon hear from the respective HR.
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 	);
 }

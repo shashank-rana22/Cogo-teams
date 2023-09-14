@@ -7,6 +7,7 @@ function JoiningBonus({ control, errors }) {
 	const options = [
 		{ name: 'R1', value: 'yes', label: 'yes' }, { name: 'R2', value: 'no', label: 'no' },
 	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Joining Bonus Clawback Applicable?</div>
@@ -36,7 +37,6 @@ function JoiningBonus({ control, errors }) {
 					<span className={styles.error}>*Amount is Required</span>
 				)}
 			</div>
-
 		</div>
 	);
 }

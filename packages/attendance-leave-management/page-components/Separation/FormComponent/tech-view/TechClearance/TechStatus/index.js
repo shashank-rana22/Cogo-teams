@@ -9,7 +9,7 @@ function TechStatus({ techClearance = {} }) {
 
 	const { sub_process_data } = techClearance || {};
 	const { serviceList } = sub_process_data || {};
-	// console.log(techClearance);
+
 	return (
 		<div className={styles.container}>
 
