@@ -69,7 +69,6 @@ function History({
 				onPageChange={onPageChange}
 				refetch={refetch}
 				showFooter={false}
-				source="outstanding"
 			/>
 			{(!loading && isEmpty(data?.list)) ? <EmptyStateDocs /> : null}
 		</div>
