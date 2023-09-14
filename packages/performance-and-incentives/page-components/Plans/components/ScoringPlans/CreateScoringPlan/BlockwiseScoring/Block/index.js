@@ -23,8 +23,6 @@ function Block(props) {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
-		formData,
-		setFormData,
 		additionalControlsData,
 
 	} = props;
@@ -97,8 +95,6 @@ function Block(props) {
 					editSubBlock={editSubBlock}
 					setEditSubBlock={setEditSubBlock}
 					prefillValues={prefillValues}
-					formData={formData}
-					setFormData={setFormData}
 					additionalControlsData={additionalControlsData}
 				/>
 			))}

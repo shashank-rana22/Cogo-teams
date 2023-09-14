@@ -1,15 +1,19 @@
 import { Modal, Button, Datepicker, Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import usePostAgentScoringAttributes from '../../../../../hooks/usePostAgentScoringConfigAttributes';
+import usePostAgentScoringAttributes from '../../../../hooks/usePostAgentScoringConfigAttributes';
 
 import styles from './styles.module.css';
 
 function ActivationModal({
+	source = '',
 	refetch = () => {},
 	activeActionId = '', setActiveActionId = () => {}, setShowActivationModal = () => {},
 }) {
+	const { push } = useRouter();
+
 	const [activationDate, setActivationDate] = useState('');
 
 	const { updateScoringAttributes } = usePostAgentScoringAttributes();
@@ -27,11 +31,15 @@ function ActivationModal({
 
 		await updateScoringAttributes({ configId: activeActionId, status: 'active', activationDate });
 
-		setActiveActionId(null);
 		setShowActivationModal(false);
-
 		Toast.success('Activated successfully!');
 
+		if (source) {
+			push('/performance-and-incentives/plans');
+			return;
+		}
+
+		setActiveActionId(null);
 		refetch();
 	};
 

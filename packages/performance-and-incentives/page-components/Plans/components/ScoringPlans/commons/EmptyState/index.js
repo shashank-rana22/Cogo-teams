@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -11,9 +10,7 @@ function EmptyState({
 	flexDirection = 'row',
 	textSize = '16px',
 }) {
-	const { t } = useTranslation(['allocation']);
-
-	const emptyValue = emptyText || t('allocation:common_empty_text');
+	const emptyValue = emptyText || 'Data not found';
 
 	return (
 		<div className={cl`${styles.container} ${styles[flexDirection]}`}>

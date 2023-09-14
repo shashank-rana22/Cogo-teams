@@ -3,8 +3,8 @@ import { useForm, useFieldArray } from '@cogoport/forms';
 import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
-import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 import getAdditionalControls from '../../../../../../configurations/get-additional-controls';
+import { getFieldController } from '../../../../commons/Form/getFieldController';
 
 import styles from './styles.module.css';
 // import useGetAgentScoringParameters from './useGetAgentScoringParameters';

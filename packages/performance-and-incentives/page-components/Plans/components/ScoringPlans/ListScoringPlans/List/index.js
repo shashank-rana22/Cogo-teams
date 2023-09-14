@@ -1,7 +1,10 @@
 import { Table, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import ActivationModal from './ActivationModal';
+import ActivationModal from '../../commons/ActivationModal';
+import EmptyState from '../../commons/EmptyState';
+
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
@@ -21,6 +24,17 @@ function List(props) {
 		showActivationModal,
 		setShowActivationModal,
 	});
+
+	if (!loading && isEmpty(list)) {
+		return (
+			<EmptyState
+				flexDirection="column"
+				height={400}
+				width={700}
+				textSize={24}
+			/>
+		);
+	}
 
 	return (
 		<>

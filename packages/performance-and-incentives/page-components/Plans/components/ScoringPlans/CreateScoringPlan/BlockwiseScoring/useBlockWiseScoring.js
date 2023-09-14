@@ -19,8 +19,8 @@ const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 });
 
 const useBlockWiseScoring = ({ data = {} }) => {
-	const [formData, setFormData] = useState({});
 	const [editSubBlock, setEditSubBlock] = useState({});
+	const [showActivationModal, setShowActivationModal] = useState(false);
 
 	const { control, formState: { errors }, watch, setValue, handleSubmit } = useForm();
 
@@ -65,7 +65,6 @@ const useBlockWiseScoring = ({ data = {} }) => {
 
 	useEffect(() => {
 		setValue('blocks', prefillValues);
-		setFormData(prefillValues);
 		setEditSubBlock({});
 	}, [setValue, prefillValues]);
 
@@ -80,9 +79,9 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
-		formData,
-		setFormData,
 		additionalControlsData,
+		showActivationModal,
+		setShowActivationModal,
 	};
 };
 

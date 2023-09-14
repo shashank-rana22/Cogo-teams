@@ -60,7 +60,7 @@ const useBlockCreation = ({ control, name, watch, blockIndex, prefillValues }) =
 		return blockOptions.filter((item) => !selectedBlockOptions.includes(item.value));
 	}, [formValues.blocks, blockIndex]);
 
-	const checkForBlock = () => prefillValues[blockIndex]?.find((item) => item.block === watchBlock);
+	const checkForBlock = () => prefillValues?.find((item) => item.block === watchBlock);
 
 	return {
 		CHILD_EMPTY_VALUES,
