@@ -1,4 +1,7 @@
 .main_container {
-	display: flex;
-	align-items: center;
+	width: 100%;
+}
+
+.button_container {
+	margin-top: 6px;
 }
