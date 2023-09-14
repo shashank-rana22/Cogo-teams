@@ -699,6 +699,9 @@ const GLOBAL_CONSTANTS = {
 			feedback_services: {
 				currencies: ['INR', 'USD', 'EUR', 'GBP', 'VND', 'IDR', 'SGD', 'THB', 'CNY', 'AED'],
 			},
+			create_payrun: {
+				entities: ['101', '201'],
+			},
 		},
 	},
 	services: {

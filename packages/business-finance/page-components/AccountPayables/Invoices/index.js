@@ -1,4 +1,5 @@
 import { Button, Input, Toggle } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -29,7 +30,7 @@ const TABS = [
 ];
 
 const FIRST_PAGE = 1;
-const DENY_ENITY_PAYRUN = ['101', '201'];
+const DENY_ENITY_PAYRUN = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.create_payrun.entities;
 
 const FUNCTIONS = {
 	renderToolTip: (itemData, field) => (
