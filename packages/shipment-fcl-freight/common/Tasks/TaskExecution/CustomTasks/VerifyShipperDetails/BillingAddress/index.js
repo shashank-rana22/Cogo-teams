@@ -14,10 +14,10 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function BillingAddress({ task = {}, refetch = () => {}, orgId = '', onCancel = () => {} }) {
+function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = '', onCancel = () => {} }) {
 	const [countryId, setCountryId] = useState('');
 
-	const { loading = false, defaultValues = {} } = useListOrganizationUsers({ orgId });
+	const { loading = false, defaultValues = {} } = useListOrganizationUsers({ consigneeShipperId });
 
 	const { control, reset, formState:{ errors = {} }, handleSubmit } = useForm();
 
