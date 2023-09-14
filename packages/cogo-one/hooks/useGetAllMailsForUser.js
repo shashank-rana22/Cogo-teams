@@ -15,6 +15,7 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 		isLastPage           : false,
 		loading              : false,
 	});
+	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const { loading, mailsListData, isLastPage } = mailData;
 
@@ -30,6 +31,8 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 			const filteredMailsQuery = query(
 				collection(firestore, FIRESTORE_PATH.email),
 				where('user_id', '==', userId),
+				...(appliedFilters?.shipment_serial_id
+					? [where('shipment_serial_id', '==', Number(appliedFilters?.shipment_serial_id))] : []),
 				where('new_message_sent_at', '<=', lastMessageTimeStamp),
 				orderBy('new_message_sent_at', 'desc'),
 				limit(PAGE_LIMIT),
@@ -62,7 +65,7 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 				(prev) => ({ ...prev, loading: false }),
 			);
 		}
-	}, [firestore, userId]);
+	}, [firestore, userId, appliedFilters]);
 
 	const handleScroll = useCallback((e) => {
 		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop)
@@ -90,6 +93,8 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 		mailListLoading: loading,
 		getFilteredMails,
 		setMailData,
+		setAppliedFilters,
+		appliedFilters,
 	};
 }
 
