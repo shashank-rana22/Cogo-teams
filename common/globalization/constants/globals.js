@@ -51,6 +51,9 @@ const GLOBAL_CONSTANTS = {
 		per_package   : 'packages_count',
 		per_awb       : 'awb_count',
 		per_container : 'containers_count',
+		per_bl        : 'bls_count',
+		per_truck     : 'trucks_count',
+		per_trailer   : 'trailer_count',
 	},
 
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
