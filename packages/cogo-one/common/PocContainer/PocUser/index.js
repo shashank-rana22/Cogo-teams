@@ -1,11 +1,11 @@
-import { Tooltip, Avatar, cl } from '@cogoport/components';
+import { Tooltip, Avatar, cl, Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMEmail, IcMCall, IcMWhatsapp, IcMLiveChat } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import getEachUserFormatedData from '../../../../../../../utils/getPocUserFormattedData';
+import getEachUserFormatedData from '../../../utils/getPocUserFormattedData';
 
 import styles from './styles.module.css';
 
@@ -47,9 +47,14 @@ function PocUser({
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 
-	const { setButtonType, setEmailState } = mailProps;
+	const { setButtonType, setEmailState, buttonType } = mailProps;
 
 	const handleSendEmail = ({ user = {} }) => {
+		if (buttonType) {
+			Toast.warn('Email compose is already in progress');
+			return;
+		}
+
 		setButtonType('send_mail');
 		setEmailState(
 			(prev) => ({

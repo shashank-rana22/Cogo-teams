@@ -3,6 +3,7 @@ import { IcMOverflowDot, IcMCopy, IcMAgentManagement, IcMLiveChat } from '@cogop
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import handleCopyShipmentData from '../../../helpers/handleCopyShipmentData';
 import RaiseTicketModal from '../../RaiseTicketModal';
 
@@ -20,6 +21,8 @@ const getButtonOptions = ({
 	shipmentItem = {},
 	showAddPrimaryUserButton = false,
 	handleRowClick = () => {},
+	setActiveTab = () => {},
+	sid = '',
 	showModalType = () => {},
 }) => [
 	{
@@ -75,6 +78,23 @@ const getButtonOptions = ({
 		condition : ['all_shipments'],
 		show      : true,
 	},
+	{
+		key      : 'open_emails',
+		children : 'Open Emails',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setActiveTab((prev) => ({
+				...prev,
+				data          : {},
+				tab           : 'firebase_emails',
+				subTab        : 'hidden_filter',
+				hiddenFilters : { sid },
+			}));
+			setShowPopover('');
+		},
+		condition : ['all_shipments'],
+		show      : true,
+	},
 ];
 
 function HeaderBlock({
@@ -84,8 +104,9 @@ function HeaderBlock({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
-	showAddPrimaryUserButton = false,
+	viewType = '',
 	handleShipmentChat = () => {},
+	setActiveTab = () => {},
 	showModalType = () => {},
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
@@ -94,6 +115,10 @@ function HeaderBlock({
 	}));
 
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
+
+	const showAddPrimaryUserButton = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
+	const showShipmentsStakeholdersContactDetails = VIEW_TYPE_GLOBAL_MAPPING[viewType]
+		?.permissions?.show_shipments_stakeholders_contact_details;
 
 	const {
 		serial_id = '',
@@ -138,6 +163,8 @@ function HeaderBlock({
 		shipmentItem,
 		showAddPrimaryUserButton,
 		handleRowClick,
+		setActiveTab,
+		sid: serial_id,
 		showModalType,
 	});
 
@@ -165,7 +192,7 @@ function HeaderBlock({
 
 			<div className={styles.icons_container}>
 
-				{type === 'all_shipments' ? (
+				{showShipmentsStakeholdersContactDetails ? (
 					<Tooltip content="POCs" placement="bottom">
 						<IcMAgentManagement
 							className={cl`${styles.common_style} ${styles.poc_details}`}
@@ -177,19 +204,17 @@ function HeaderBlock({
 					</Tooltip>
 				) : null}
 
-				{
-					showAddPrimaryUserButton ? (
-						<Tooltip content="Chat" placement="bottom">
-							<IcMLiveChat
-								className={cl`${styles.common_style} ${styles.message_icon_styles}`}
-								onClick={(e) => {
-									e.stopPropagation();
-									handleShipmentChat({ shipmentDetails: shipmentItem });
-								}}
-							/>
-						</Tooltip>
-					) : null
-				}
+				{showShipmentsStakeholdersContactDetails ? (
+					<Tooltip content="Chat" placement="bottom">
+						<IcMLiveChat
+							className={cl`${styles.common_style} ${styles.message_icon_styles}`}
+							onClick={(e) => {
+								e.stopPropagation();
+								handleShipmentChat({ shipmentDetails: shipmentItem });
+							}}
+						/>
+					</Tooltip>
+				) : null}
 
 				<Tooltip content="Copy" placement="bottom">
 					<IcMCopy

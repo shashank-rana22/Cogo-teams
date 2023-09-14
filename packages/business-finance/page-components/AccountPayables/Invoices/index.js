@@ -1,4 +1,5 @@
 import { Button, Input, Toggle } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -46,6 +47,7 @@ const FUNCTIONS = {
 };
 
 function Invoices({ activeEntity = '' }) {
+	const ELIGIBLE_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);
@@ -58,7 +60,7 @@ function Invoices({ activeEntity = '' }) {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
-	} = useGetBillsList({ activeTab, activeEntity });
+	} = useGetBillsList({ activeTab, activeEntity, showElement: true });
 
 	const { stats = {} } = billsData || {};
 
@@ -105,6 +107,7 @@ function Invoices({ activeEntity = '' }) {
 							onClick={() => {
 								setShowPayrunModal(true);
 							}}
+							disabled={!ELIGIBLE_ENITY_PAYRUN}
 						>
 							Create Pay Run
 						</Button>
