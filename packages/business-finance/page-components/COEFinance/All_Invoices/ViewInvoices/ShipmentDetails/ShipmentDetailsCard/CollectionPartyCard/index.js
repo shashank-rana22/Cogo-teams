@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
 import { getLabelStyle, getIcon } from '../../../../../utils/getLabelStyle';
@@ -77,13 +77,23 @@ function CollectionPartyCard({
 								>
 									Undo
 								</Button>
+								<div
+									className={styles.caret}
+									onClick={() => {
+										onTabClick({ tabName: PRESENT_TAB });
+									}}
+									role="presentation"
+								>
+									<IcMArrowRotateUp height="17px" width="17px" />
+
+								</div>
 							</div>
 						) : (
 							<div className={styles.button_container}>
 								<Button
 									disabled={!isDisabled(status)}
 									size="md"
-									themeType="secondary"
+									themeType="primary"
 									onClick={() => onClickResponse({
 										response: true,
 									})}

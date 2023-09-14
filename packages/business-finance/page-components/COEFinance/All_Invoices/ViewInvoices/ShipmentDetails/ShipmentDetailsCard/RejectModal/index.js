@@ -46,11 +46,11 @@ function RejectModal({
 
 	return (
 		<Modal
-			size="lg"
+			size="md"
 			show={showRejected[id]}
 			onClose={onClose}
 		>
-			<Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
+			<Modal.Header title="Choose the details you want to reject" />
 			<Modal.Body>
 				{Object.keys(showRejected).includes(COLLECTION_PARTY_INDEX) && (
 					<div>
