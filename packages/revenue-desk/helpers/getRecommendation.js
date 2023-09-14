@@ -1,11 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getRecommendation = ({
-	// setSupplierPayload,
+	setSupplierPayload,
 	allPreferenceCardsData,
 	currentFormatedrates,
 	systemFormattedRates,
-	// singleServiceData,
+	singleServiceData,
 }) => {
 	const SERVICE_PROVIDERS = [];
 	(allPreferenceCardsData || []).forEach((data) => {
@@ -32,7 +32,7 @@ const getRecommendation = ({
 			validity_id    : required_rate?.rowData?.validity_id,
 		});
 	});
-	// setSupplierPayload((prev) => {...prev, [singleServiceData?.id]: SERVICE_PROVIDERS });
+	setSupplierPayload((prev) => ({ ...prev, [singleServiceData?.id]: SERVICE_PROVIDERS }));
 };
 
 export default getRecommendation;

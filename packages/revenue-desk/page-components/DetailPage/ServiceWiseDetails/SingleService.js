@@ -133,7 +133,7 @@ function SingleService({
 	];
 
 	useEffect(() => {
-		if (!recommendationLoading) {
+		if (!recommendationLoading && !supplierPayload?.[singleServiceData.id]) {
 			getRecommendation({
 				setSupplierPayload,
 				allPreferenceCardsData,
