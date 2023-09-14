@@ -40,6 +40,10 @@
 			text-indent: -99999px;
 			content: "_";
 		}
+
+		.ui_ps_themeType_secondary {
+			border: solid 1px #000;
+		}
 	}
 }
 
@@ -62,4 +66,15 @@
 .tooltip_content {
 	word-break: normal;
 	overflow-wrap: normal;
+}
+
+.awb_number {
+	font-weight: 600;
+}
+
+.submit_ams_status {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-weight: 600;
 }

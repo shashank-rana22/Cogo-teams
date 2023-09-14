@@ -14,7 +14,7 @@ function Header({
 	setSearchValue = () => {},
 }) {
 	const { t } = useTranslation(['amsSubmission']);
-	const tabOptions = tabs(t);
+	const tabOptions = tabs({ t });
 
 	return (
 		<div className={styles.main_header}>
@@ -43,7 +43,7 @@ function Header({
 					size="sm"
 					prefix={<IcMAppSearch />}
 					placeholder={t('amsSubmission:input_placeholder')}
-					onChange={(e) => setSearchValue(e)}
+					onChange={setSearchValue}
 					value={searchValue}
 					suffix={(
 						<ButtonIcon

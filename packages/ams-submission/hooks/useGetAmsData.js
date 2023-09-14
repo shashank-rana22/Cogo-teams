@@ -1,4 +1,5 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestAir } from '@cogoport/request';
@@ -6,26 +7,30 @@ import { useState, useEffect, useCallback } from 'react';
 
 const INIT_PAGE = 1;
 
-const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, date }) => ({
-	cargoHandedOverAtOriginAt : date,
-	originAirportId           : null,
-	tcDataRequired            : activeTab === 'tc_status_check',
-	tdDataRequired            : true,
-	page                      : pagination,
-	pageSize                  : 10,
-});
-
-const useGetAmsData = ({ activeTab = 'tc_status_check' }) => {
-	const [pagination, setPagination] = useState(INIT_PAGE);
-
+const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, query = '' }) => {
 	const newDate = new Date();
-	newDate.setDate(newDate.getDate() - 10);
+	newDate.setDate(newDate.getDate() - INIT_PAGE - INIT_PAGE - INIT_PAGE);
 	const date = formatDate({
 		date       : newDate,
 		formatType : 'date',
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	});
-	console.log('date:', date);
+	const searchQuery = query ? { q: query } : {};
+
+	return {
+		cargoHandedOverAtOriginAt : date,
+		originAirportId           : null,
+		tcDataRequired            : activeTab === 'tc_status_check',
+		tdDataRequired            : true,
+		page                      : pagination,
+		pageSize                  : 10,
+		...searchQuery,
+	};
+};
+
+const useGetAmsData = ({ activeTab = 'tc_status_check', searchValue = '' }) => {
+	const [pagination, setPagination] = useState(INIT_PAGE);
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [{ data = {}, loading }, trigger] = useRequestAir({
 		url     : '/air-coe/air-freight/ams-data',
@@ -36,20 +41,29 @@ const useGetAmsData = ({ activeTab = 'tc_status_check' }) => {
 	const apiTrigger = useCallback(async () => {
 		try {
 			await trigger({
-				params: getPayload({ activeTab, pagination, date }),
+				params: getPayload({ activeTab, pagination, query }),
 			});
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [activeTab, pagination, trigger, date]);
+	}, [activeTab, pagination, trigger, query]);
 
 	useEffect(() => {
 		apiTrigger();
 	}, [apiTrigger, pagination]);
 
+	useEffect(() => {
+		setPagination(INIT_PAGE);
+	}, [activeTab]);
+
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [debounceQuery, searchValue]);
+
 	return {
 		data,
 		loading,
+		apiTrigger,
 		pagination,
 		setPagination,
 	};

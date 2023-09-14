@@ -4,8 +4,9 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import EmptyState from '../common/EmptyState';
-import getColumns from '../configurations/getColumns';
+import getColumns from '../configurations/get-columns';
 import useGetAmsData from '../hooks/useGetAmsData';
+import usePutAirCoeAirFreight from '../hooks/usePutAirCoeAirFreight';
 
 import ActionModal from './ActionModal';
 import Header from './Header';
@@ -23,14 +24,26 @@ function AmsSubmission() {
 		type : '',
 	});
 
-	const columns = getColumns({ t, activeTab, modalData, setModalData });
-
 	const {
 		data = {},
 		loading = false,
+		apiTrigger: amsDataApiTrigger = () => {},
 		pagination = 1,
 		setPagination = () => {},
-	} = useGetAmsData({ activeTab });
+	} = useGetAmsData({ activeTab, searchValue });
+
+	const {
+		apiTrigger: submitStatusApiTrigger = () => {},
+		loading: submitStatusLoading = false,
+	} = usePutAirCoeAirFreight({ amsDataApiTrigger });
+
+	const columns = getColumns({
+		t,
+		activeTab,
+		setModalData,
+		submitStatusApiTrigger,
+		submitStatusLoading,
+	});
 
 	const { list = [], totalRecords } = data || {};
 
@@ -53,7 +66,7 @@ function AmsSubmission() {
 
 			{!loading && isEmpty(list) ? <EmptyState /> : null}
 
-			{list?.length >= PAGE_LIMIT
+			{totalRecords >= PAGE_LIMIT
 				? (
 					<div className={styles.footer}>
 						<Pagination

@@ -3,21 +3,35 @@ import { IcCError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-import styles from './styles.module.css';
+import getContentMapping from '../../configurations/get-content-mapping';
+import useGetServiceOpsList from '../../hooks/useGetServiceOpsList';
 
-const getContentMapping = ({ t = () => {} }) => ({
-	submit_lms_data : t('amsSubmission:modal_content_submit_lms_data'),
-	amend           : t('amsSubmission:modal_content_amend'),
-	send_email      : t('amsSubmission:modal_content_send_email'),
-});
+import styles from './styles.module.css';
 
 function ActionModal({
 	modalData = {},
 	setModalData = () => {},
 }) {
 	const { t } = useTranslation(['amsSubmission']);
-
 	const contentMapping = getContentMapping({ t });
+
+	const {
+		apiTrigger: lmsApiTrigger = () => {},
+		loading: lmsLoading = false,
+	} = useGetServiceOpsList();
+
+	const handleClick = () => {
+		const { data = {}, type = '' } = modalData || {};
+		if (type === 'submit_lms_data') {
+			const { master_airway_bill_number = '', airportId = '', airlineId = '' } = data || {};
+			const payload = {
+				master_airway_bill_number,
+				airportId,
+				airlineId,
+			};
+			lmsApiTrigger({ payload, setModalData });
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -32,13 +46,15 @@ function ActionModal({
 				<div className={styles.button_container}>
 					<Button
 						themeType="secondary"
+						disabled={lmsLoading}
 						onClick={() => setModalData({})}
 					>
 						{t('amsSubmission:button_cancel')}
 
 					</Button>
 					<Button
-						onClick={() => setModalData({})}
+						disabled={lmsLoading}
+						onClick={handleClick}
 					>
 						{t('amsSubmission:button_confirm')}
 
