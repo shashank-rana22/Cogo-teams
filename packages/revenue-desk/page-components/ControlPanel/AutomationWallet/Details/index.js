@@ -78,7 +78,7 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							size="xs"
 							placeholder="Enter Amount"
 							onChange={(e) => setWalletAmount(e)}
-							style={{ width: '180px' }}
+							style={{ width: '180px', marginRight: '10px' }}
 						/>
 					</div>
 					<div className={styles.icon}>
