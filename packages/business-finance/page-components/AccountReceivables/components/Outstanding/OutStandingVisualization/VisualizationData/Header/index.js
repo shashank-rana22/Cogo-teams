@@ -57,8 +57,8 @@ function Headers({
 							value={period_type}
 							size="sm"
 							options={[
-								{ label: 'Week on week', value: 'week' },
-								{ label: 'Month on month', value: 'month' },
+								{ label: 'Week On Week', value: 'week' },
+								{ label: 'Month On Month', value: 'month' },
 							]}
 							style={{
 								width       : '150px',
