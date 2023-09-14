@@ -128,37 +128,37 @@ function CollectionPartyCard({
 				) }
 
 			</div>
-			{showTab ? (
-				<div>
-					<div className={styles.hr} />
+			<div
+				className={styles.bottom_card}
+				style={{ maxHeight: showTab ? '252px' : '0' }}
+			>
+				<div className={styles.hr} />
 
-					<div className={styles.billing_party_container}>
-						{collectionPartyRejectionList?.map((item) => {
-							const [labelText, valueText] = (item?.label || '').split(' - ');
-							return (
-								<div
-									key={item?.label}
-									className={styles.margin_bottom}
+				<div className={styles.billing_party_container}>
+					{collectionPartyRejectionList?.map((item) => {
+						const [labelText, valueText] = (item?.label || '').split(' - ');
+						return (
+							<div
+								key={item?.label}
+								className={styles.margin_bottom}
+							>
+								{labelText}
+								{' '}
+								-
+								{' '}
+								<span
+									style={{
+										color: getDetailValueColor({ value: valueText, docContent }),
+									}}
 								>
-									{labelText}
-									{' '}
-									-
-									{' '}
-									<span
-										style={{
-											color: getDetailValueColor({ value: valueText, docContent }),
-										}}
-									>
-										{valueText}
-									</span>
-								</div>
-							);
-						})}
-					</div>
-
+									{valueText}
+								</span>
+							</div>
+						);
+					})}
 				</div>
-			) : undefined }
 
+			</div>
 		</div>
 	);
 }

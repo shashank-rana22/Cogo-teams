@@ -73,3 +73,8 @@
 	display: flex;
 	justify-content: center;
 }
+
+.bottom_card {
+	overflow: auto;
+	transition: max-height 0.3s ease-in-out;
+}

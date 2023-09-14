@@ -155,90 +155,91 @@ function InvoiceDetailsCard({
 				)}
 			</div>
 
-			{showTab ? (
-				<div>
-					<div className={styles.hr} />
-					<div className={styles.billing_party_container}>
-						<div className={styles.margin_bottom}>
-							Invoice Number -
-							{' '}
-							<span
-								style={{ color: getDetailValueColor({ value: billNumber, docContent }) }}
-							>
-								{billNumber}
-							</span>
-						</div>
-						<div className={styles.margin_bottom}>
-							Invoice Type -
-							{' '}
-							<span
-								style={{ color: getDetailValueColor({ value: invoiceType, docContent }) }}
-							>
-								{invoiceType}
-
-							</span>
-						</div>
-						<div className={styles.margin_bottom}>
-							Supplier name -
-							{' '}
-							<span
-								style={{ color: getDetailValueColor({ value: organizationName, docContent }) }}
-							>
-								{organizationName}
-
-							</span>
-						</div>
-						<div className={styles.margin_bottom}>
-							Urgency Tag -
-							{' '}
-							<span
-								style={{ color: getDetailValueColor({ value: tag, docContent }) }}
-							>
-								{tag}
-							</span>
-						</div>
-						<div className={styles.margin_bottom}>
-							Remarks -
-							{' '}
-							<span
-								style={{ color: getDetailValueColor({ value: remarksValue, docContent }) }}
-							>
-								{remarksValue || 'No Remarks'}
-
-							</span>
-						</div>
-						<div className={styles.margin_bottom}>
-							Invoice Date -
-							<span className={styles.span_left}>
-								{formatDate({
-									date       : billDate,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
-									formatType : 'date',
-								})}
-							</span>
-						</div>
-						<div className={styles.margin_bottom}>
-							Payment Due Date -
-							<span className={styles.span_left}>
-								{formatDate({
-									date       : paymentDueDate,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
-									formatType : 'date',
-								})}
-							</span>
-						</div>
-
-						<AdditionalInvoiceDetails
-							billType={billType}
-							advancedPaymentObj={advancedPaymentObj}
-							grandTotal={grandTotal}
-							setShowHighAdvancedModal={setShowHighAdvancedModal}
-							viewDocument={viewDocument}
-							billAdditionalObject={billAdditionalObject}
-						/>
+			<div
+				className={styles.bottom_card}
+				style={{ maxHeight: showTab ? '280px' : '0' }}
+			>
+				<div className={styles.hr} />
+				<div className={styles.billing_party_container}>
+					<div className={styles.margin_bottom}>
+						Invoice Number -
+						{' '}
+						<span
+							style={{ color: getDetailValueColor({ value: billNumber, docContent }) }}
+						>
+							{billNumber}
+						</span>
 					</div>
+					<div className={styles.margin_bottom}>
+						Invoice Type -
+						{' '}
+						<span
+							style={{ color: getDetailValueColor({ value: invoiceType, docContent }) }}
+						>
+							{invoiceType}
+
+						</span>
+					</div>
+					<div className={styles.margin_bottom}>
+						Supplier name -
+						{' '}
+						<span
+							style={{ color: getDetailValueColor({ value: organizationName, docContent }) }}
+						>
+							{organizationName}
+
+						</span>
+					</div>
+					<div className={styles.margin_bottom}>
+						Urgency Tag -
+						{' '}
+						<span
+							style={{ color: getDetailValueColor({ value: tag, docContent }) }}
+						>
+							{tag}
+						</span>
+					</div>
+					<div className={styles.margin_bottom}>
+						Remarks -
+						{' '}
+						<span
+							style={{ color: getDetailValueColor({ value: remarksValue, docContent }) }}
+						>
+							{remarksValue || 'No Remarks'}
+
+						</span>
+					</div>
+					<div className={styles.margin_bottom}>
+						Invoice Date -
+						<span className={styles.span_left}>
+							{formatDate({
+								date       : billDate,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+								formatType : 'date',
+							})}
+						</span>
+					</div>
+					<div className={styles.margin_bottom}>
+						Payment Due Date -
+						<span className={styles.span_left}>
+							{formatDate({
+								date       : paymentDueDate,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+								formatType : 'date',
+							})}
+						</span>
+					</div>
+
+					<AdditionalInvoiceDetails
+						billType={billType}
+						advancedPaymentObj={advancedPaymentObj}
+						grandTotal={grandTotal}
+						setShowHighAdvancedModal={setShowHighAdvancedModal}
+						viewDocument={viewDocument}
+						billAdditionalObject={billAdditionalObject}
+					/>
 				</div>
-			) : undefined}
+			</div>
 		</div>
 	);
 }

@@ -69,3 +69,8 @@
 	margin: 0 16px;
 	cursor: pointer;
 }
+
+.bottom_card {
+	overflow: auto;
+	transition: max-height 0.3s ease-in-out;
+}
