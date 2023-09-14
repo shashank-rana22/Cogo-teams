@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Tabs, TabPanel, Select } from '@cogoport/components';
+import { Tabs, TabPanel, Select, Placeholder } from '@cogoport/components';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
@@ -60,7 +60,7 @@ function Overheads() {
 			<EntityContext.Provider value={entityCode}>
 				<div className={styles.main_heading}>Overheads</div>
 				<div className={styles.header}>
-					{ entityLoading ? null : (
+					{ entityLoading ? <Placeholder height="30px" width="260px" /> : (
 						<Select
 							name="activeEntity"
 							value={entityCode}
@@ -68,7 +68,7 @@ function Overheads() {
 							placeholder="Select Entity"
 							options={entityOptions}
 							size="sm"
-							style={{ width: '260px' }}
+							style={{ width: '290px' }}
 						/>
 					) }
 				</div>
