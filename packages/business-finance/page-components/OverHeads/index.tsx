@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Tabs, TabPanel } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
@@ -21,8 +23,16 @@ function Overheads() {
 	const { profile: { partner } }:ProfileProps = profile || {};
 	const { id: partnerId } = partner || {};
 
+	const defaultEntityCode = getDefaultEntityCode(partnerId);
+
+	let defaultEntityId = '';
+
+	Object.keys(ENTITY_MAPPING).forEach((element) => {
+		if (element === defaultEntityCode) { defaultEntityId = ENTITY_MAPPING[element].id; }
+	});
+
 	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
-	const [entityCode, setEntityCode] = useState(partnerId);
+	const [entityCode, setEntityCode] = useState(defaultEntityId);
 
 	const handleChange = (tab:any) => {
 		setActiveTab(tab);
