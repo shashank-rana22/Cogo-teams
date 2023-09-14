@@ -1,24 +1,9 @@
-import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
 import SERVICE_TYPES_MAPPING from './service-types-mapping';
 import ShipmentIcon from './ShipmentIcon';
-
-function GetToolTipContent({ list = [] }) {
-	return (
-		<div>
-			{list.map((countryObj, i) => (
-				<div key={countryObj.id}>
-					{i + GLOBAL_CONSTANTS.one}
-					.
-					{countryObj.name}
-				</div>
-			))}
-		</div>
-	);
-}
 
 const FREIGHT_DETAILS_MAPPING = {
 	service: {
@@ -69,7 +54,6 @@ const FREIGHT_DETAILS_MAPPING = {
 
 			return (
 				<div>
-					<Tooltip content={GetToolTipContent({ list: item.paying_party_countries })} />
 					<div>
 						{item.paying_party_countries?.[GLOBAL_CONSTANTS.zeroth_index]?.name}
 						{' '}

@@ -1,4 +1,5 @@
-import { Popover, Modal } from '@cogoport/components';
+import { Popover, Modal, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
@@ -22,7 +23,7 @@ function TermCard({
 	EditForm = () => {},
 }) {
 	const [showEdit, setShowEdit] = useState(false);
-
+	const [visibleToolTip, setShowVisibleToolTip] = useState(false);
 	const editRef = useRef(null);
 
 	const LABEL_MAPPING = {
@@ -32,6 +33,20 @@ function TermCard({
 	const { id = '', service = '', status = '' } = listItem;
 	const [visible, setVisible] = useState(false);
 	const callBack = () => setShowEdit(null);
+	function GetToolTipContent({ list = [] }) {
+		return (
+			<div>
+				{list.map((countryObj, i) => (
+					<div key={countryObj.id}>
+						{i + GLOBAL_CONSTANTS.one}
+						.
+						{countryObj.name}
+					</div>
+				))}
+			</div>
+		);
+	}
+
 	return (
 		<div>
 			<div
@@ -64,7 +79,23 @@ function TermCard({
 										</span>
 									) : null}
 
-									<p className={styles.value}>{valueItem || '___'}</p>
+									<div
+										role="presentation"
+										onClick={() => (key === 'paying_party_countries'
+											? setShowVisibleToolTip(!visibleToolTip) : null)}
+										className={styles.value}
+										onMouseEnter={() => setShowVisibleToolTip(true)}
+										onMouseLeave={() => setShowVisibleToolTip(false)}
+									>
+										{key === 'paying_party_countries' && (
+											<Tooltip
+												content={GetToolTipContent({ list: listItem?.paying_party_countries })}
+												visible={visibleToolTip}
+											/>
+										)}
+										{valueItem || '___'}
+
+									</div>
 								</div>
 							);
 						})}
