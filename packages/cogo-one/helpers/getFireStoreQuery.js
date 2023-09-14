@@ -34,7 +34,8 @@ const getModifiedFilters = ({
 				? { activeFolder: `show_in_${activeFolder}` } : {}
 		),
 		channels           : isEmpty(appliedFilters?.channels) ? requiredChannels : appliedFilters?.channels,
-		shipment_serial_id : sidFilters || undefined,
+		shipment_serial_id : !isEmpty(appliedFilters?.shipment_serial_id)
+			? appliedFilters?.shipment_serial_id : sidFilters || undefined,
 	};
 };
 

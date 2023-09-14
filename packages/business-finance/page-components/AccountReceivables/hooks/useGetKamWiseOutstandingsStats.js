@@ -15,7 +15,10 @@ const useGetKamWiseOutstandingsStats = ({ viewGraphStats = false }) => {
 		if (viewGraphStats) {
 			trigger({
 				params: {
-					is_precovid: 'NO',
+					is_precovid : 'NO',
+					filters     : {
+						sales_agent_id: selected_agent_id,
+					},
 				},
 			});
 		}
