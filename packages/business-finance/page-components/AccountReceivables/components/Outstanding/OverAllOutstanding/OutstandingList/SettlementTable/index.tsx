@@ -70,16 +70,19 @@ function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
 				columns={SettlementList({ sort, setSort, settlementFilters, setSettlementFilters, invoiceKeys })}
 				loading={loading}
 			/>
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={pageNo}
-					totalItems={totalRecords}
-					pageSize={settlementFilters.pageLimit}
-					onPageChange={(val) => setSettlementFilters({ ...settlementFilters, page: val })}
-				/>
-
-			</div>
+			{totalRecords >= settlementFilters.pageLimit
+				? (
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="table"
+							currentPage={pageNo}
+							totalItems={totalRecords}
+							pageSize={settlementFilters.pageLimit}
+							onPageChange={(val) => setSettlementFilters({ ...settlementFilters, page: val })}
+						/>
+					</div>
+				)
+				: null}
 
 			<MoreDetailsModal
 				active={active}

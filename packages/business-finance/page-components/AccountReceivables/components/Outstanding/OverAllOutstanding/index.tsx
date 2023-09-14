@@ -243,7 +243,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 						/>
 					))}
 					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
-					{!isEmpty(list) && (
+					{!isEmpty(list) && (totalRecords >= pageLimit) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
