@@ -25,7 +25,7 @@ function Item({
 			}}
 			className={cl`${item.expired ? styles.expired : ''} ${
 				item.isDuplicates ? styles.duplicate : ''
-			}`}
+			} ${styles.card_container_styles}`}
 		>
 			{fields.map((singleItem) => {
 				if (singleItem?.show === false) {

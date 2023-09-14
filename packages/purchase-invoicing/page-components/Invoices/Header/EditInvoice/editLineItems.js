@@ -26,7 +26,7 @@ const useEditLineItems = ({
 	const allChargeCodesRef = useRef({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_sell_quotations',
+		url    : '/update_shipment_cross_entity_invoice',
 		method : 'POST',
 	}, { manual: true });
 
