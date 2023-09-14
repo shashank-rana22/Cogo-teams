@@ -1,9 +1,8 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import useGetShipmentQuotation from '../../../../../hooks/useGetShipmentQuotation';
 import useListCurrencyConversion from '../../../../../hooks/useListCurrencyConversion';
 import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyConversion';
 
+const INITIAL_STATE = 0;
 const CURRENCY_CONVERSION_FACTOR = 1;
 
 const useHelper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' }) => {
@@ -27,7 +26,7 @@ const useHelper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' 
 		});
 	});
 
-	const exchangeRateApiData = currencyConversionData?.[GLOBAL_CONSTANTS?.zeroth_index];
+	const exchangeRateApiData = currencyConversionData?.[INITIAL_STATE];
 	const allCurrenciesWithConversionFactor = exchangeRateApiData?.currency_conversion_rate?.currencies;
 	const updatedCurrencyConversionRate = exchangeRateApiData?.updated_currency_conversion_rate;
 	const currency_conversion_delta = exchangeRateApiData?.updated_currency_conversion_rate?.currency_conversion_delta;
