@@ -20,15 +20,14 @@ function CancellationRequest({ data = {}, refetch = () => {} }) {
 				>
 					<IcMCross width={18} height={18} />
 					<span>Reject</span>
-
 				</Button>
+
 				<Button
 					className={styles.acc_btn}
 					onClick={() => onRequestCancelApplication('cancelled')}
 				>
 					<IcMTick width={20} height={20} />
 					<span>Accept</span>
-
 				</Button>
 			</div>
 		</div>

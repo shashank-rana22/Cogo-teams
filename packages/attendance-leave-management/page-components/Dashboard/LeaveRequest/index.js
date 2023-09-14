@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 const ZERO_COMPARE = 0;
 
-function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
+function LeaveRequest({ isManager = false }) {
 	const [activeTab, setActiveTab] = useState('employee');
 
 	const { loading, data } = useGetLeaveGroupings(activeTab);
@@ -32,7 +32,7 @@ function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.left_header}>
-					<IcMArrowLeft width={20} height={20} onClick={() => setShowInbox(false)} />
+					<IcMArrowLeft width={20} height={20} />
 					<div className={styles.card_content}>
 						<span className={styles.above_text}>MY INBOX</span>
 						<span className={styles.below_text}>
