@@ -31,7 +31,7 @@ function useCreateLeadOrganizationToAccount({
 
 			const res = await trigger({ data: payload });
 
-			if (res.data) {
+			if (res?.data) {
 				setConsigneeShipperId(res?.data?.organization_id);
 			}
 

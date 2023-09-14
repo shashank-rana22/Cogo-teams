@@ -56,7 +56,9 @@ function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = ''
 				{controls?.map((formControl) => {
 					const { type = '', name = '', styles: style = {}, label = '' } = formControl;
 
-					const Element = INPUT_MAPPING(type);
+					const Element = INPUT_MAPPING[type];
+
+					if (!Element) return null;
 
 					return (
 						<div
