@@ -51,7 +51,7 @@ function Card({
 				{(activeCard === detail?.status && activeCard !== 'weekly_backlog_count')
 				&&					(
 					<Popover placement="top" render={<div className={styles.url_container}><RenderContent /></div>}>
-						<IcMDownload onClick={handleDownload} />
+						<IcMDownload onClick={handleDownload} style={{ cursor: 'pointer' }} />
 					</Popover>
 				)}
 			</div>
