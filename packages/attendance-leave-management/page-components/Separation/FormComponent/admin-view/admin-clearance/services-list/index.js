@@ -23,10 +23,9 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
 				<span>Services List</span>
-				{
-					source === 'admin-clearance' ? (
-						<div className={styles.accordiontitle}>
-							{/* <Button
+				{source === 'admin-clearance' ? (
+					<div className={styles.accordiontitle}>
+						{/* <Button
 								size="md"
 								themeType="secondary"
 								className={styles.servicesbtn}
@@ -34,22 +33,19 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 								<IcMPlus />
 								Add Services
 							</Button> */}
-							<IcMArrowDown
-								width={16}
-								height={16}
-								className={show ? styles.caret_active : styles.caret_arrow}
-							/>
-						</div>
-					)
-						:					(
-							<IcMArrowDown
-								width={16}
-								height={16}
-								className={show ? styles.caret_active : styles.caret_arrow}
-							/>
-						)
-				}
-
+						<IcMArrowDown
+							width={16}
+							height={16}
+							className={show ? styles.caret_active : styles.caret_arrow}
+						/>
+					</div>
+				) :	(
+					<IcMArrowDown
+						width={16}
+						height={16}
+						className={show ? styles.caret_active : styles.caret_arrow}
+					/>
+				)}
 			</div>
 
 			<div className={show ? styles.item_container : styles.item_container_closed}>
@@ -63,9 +59,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
-					{errors.idcardstatus && (
-						<span className={styles.error}>*required</span>
-					)}
+					{errors.idcardstatus ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -78,9 +72,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
-					{errors.accesscardstatus && (
-						<span className={styles.error}>*required</span>
-					)}
+					{errors.accesscardstatus ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -93,9 +85,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
-					{errors.companyassets && (
-						<span className={styles.error}>*required</span>
-					)}
+					{errors.companyassets ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -109,9 +99,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 						disabled={is_complete}
 					/>
 
-					{errors.parkingcharges && (
-						<span className={styles.error}>*required</span>
-					)}
+					{errors.parkingcharges ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -124,10 +112,7 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
-					{errors.othercharges && (
-						<span className={styles.error}>*required</span>
-					)}
-
+					{errors.othercharges ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -140,14 +125,9 @@ function Servicelist({ source = 'admin-clearance', control = {}, errors = {}, is
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
-					{errors.specify && (
-						<span className={styles.error}>*required</span>
-					)}
-
+					{errors.specify ? <span className={styles.error}>*required</span> : null}
 				</div>
-
 			</div>
-
 		</div>
 	);
 }

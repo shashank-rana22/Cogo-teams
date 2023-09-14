@@ -17,7 +17,6 @@ function NotesHrbp({ control = {}, errors = {}, is_complete = false }) {
 					height={16}
 					className={showNotes ? styles.caret_active : styles.caret_arrow}
 				/>
-
 			</div>
 
 			<div className={showNotes ? styles.item_container : styles.item_container_closed}>
@@ -30,11 +29,8 @@ function NotesHrbp({ control = {}, errors = {}, is_complete = false }) {
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
-
 				</div>
-				{errors.notes && (
-					<span className={styles.error}>*required</span>
-				)}
+				{errors.notes ? <span className={styles.error}>*required</span> : null}
 			</div>
 
 		</div>
