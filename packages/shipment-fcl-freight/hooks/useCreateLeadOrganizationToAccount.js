@@ -4,10 +4,19 @@ import { useState } from 'react';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
+const getFormattedPayload = ({ leadsData = {}, checkList = [] }) => {
+	const payload = {
+		lead_organization_id : leadsData?.id,
+		lead_user_id         : checkList,
+	};
+
+	return payload;
+};
+
 function useCreateLeadOrganizationToAccount({
 	setStep = () => {},
 	setConsigneeShipperId = () => {},
-	listLeadsData = {},
+	leadsData = {},
 	task = {},
 }) {
 	const [checkList, setCheckList] = useState(null);
@@ -19,8 +28,10 @@ function useCreateLeadOrganizationToAccount({
 		method : 'POST',
 	}, { manual: true });
 
-	const createLeadOrgAccount = async ({ payload }) => {
+	const createLeadOrgAccount = async () => {
 		try {
+			const payload = getFormattedPayload({ leadsData, checkList });
+
 			const res = await trigger({ data: payload });
 
 			if (res.data) {
@@ -41,20 +52,10 @@ function useCreateLeadOrganizationToAccount({
 		}
 	};
 
-	const onVerify = () => {
-		const PAYLOAD = {
-			lead_organization_id : listLeadsData?.id,
-			lead_user_id         : checkList,
-		};
-
-		createLeadOrgAccount({ payload: PAYLOAD });
-	};
-
 	return {
 		createLoading: loading,
 		checkList,
 		setCheckList,
-		onVerify,
 		createLeadOrgAccount,
 	};
 }

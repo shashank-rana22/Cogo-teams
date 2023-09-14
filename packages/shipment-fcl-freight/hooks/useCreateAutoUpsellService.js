@@ -6,12 +6,17 @@ import getAutoUpsellPayload from '../helpers/getAutoUpsellPayload';
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
 function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {}, countryId = '' }) {
-	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: () => { onCancel(); refetch(); } });
-
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/auto_upsell_service',
 		method : 'POST',
 	}, { manual: true });
+
+	const taskRefetch = () => {
+		onCancel();
+		refetch();
+	};
+
+	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: taskRefetch });
 
 	const createAutoUpsellService = async ({ payload }) => {
 		try {

@@ -22,27 +22,27 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 
 	const {
 		loading = false,
-		listLeadsData = {},
+		leadsData = {},
 		defaultValues = {},
 		refetchList = () => {},
 	} = useListLeadOrganizations({ task });
 
 	const {
-		onVerify = () => {},
+		createLeadOrgAccount = () => {},
 		setCheckList = () => {},
 		checkList = [],
 		createOrgLoading = false,
-	} = useCreateLeadOrganizationToAccount({ listLeadsData, setStep, setConsigneeShipperId, task });
+	} = useCreateLeadOrganizationToAccount({ leadsData, setStep, setConsigneeShipperId, task });
 
 	const {
 		onUpdateLeadUser = () => {},
 		updateLoading = false,
-	} = useUpdateLeadUser({ selectedUserId, setSelectedUserId, refetchList });
+	} = useUpdateLeadUser({ selectedUserId, setSelectedUserId, refetchList, setShowCreatePoc });
 
 	const {
 		onCreateLeadUser = () => {},
 		createUserLoading = false,
-	} = useCreateLeadUser({ listLeadsData, refetchList, setShowCreatePoc });
+	} = useCreateLeadUser({ leadsData, refetchList, setShowCreatePoc, setSelectedUserId });
 
 	const columns = getColumns({
 		setSelectedUserId,
@@ -55,12 +55,12 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 
 	return (
 		<>
-			<UserOnboard listLeadsData={listLeadsData} defaultValues={defaultValues} />
+			<UserOnboard leadsData={leadsData} defaultValues={defaultValues} />
 
 			<div className={styles.main_container}>
 				<h4>Customer contacts</h4>
 				<Table
-					data={listLeadsData?.users || []}
+					data={leadsData?.users || []}
 					className={styles.table}
 					columns={columns}
 					loading={loading || updateLoading}
@@ -96,7 +96,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 						<Button
 							disabled={isEmpty(checkList) || loading || createUserLoading || createOrgLoading}
 							themeType="accent"
-							onClick={onVerify}
+							onClick={createLeadOrgAccount}
 						>
 							Verify
 						</Button>

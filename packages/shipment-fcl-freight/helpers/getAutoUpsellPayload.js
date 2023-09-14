@@ -18,7 +18,7 @@ const getAutoUpsellPayload = ({ task = {}, values = {}, countryId = '' }) => {
 		address,
 		pincode,
 		tax_number,
-		business_name,
+		name                    : business_name,
 		tax_number_document_url : tax_number_document_url?.finalUrl,
 		service_type            : SERVICE_TYPE,
 		trade_partner_id        : task_field_id,

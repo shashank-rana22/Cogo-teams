@@ -17,7 +17,7 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
+function UserOnboard({ leadsData = {}, defaultValues = {} }) {
 	const {
 		control,
 		formState:{ errors = {} },
@@ -32,11 +32,11 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 		reset(defaultValues);
 	}, [defaultValues, reset]);
 
-	const countryValidation = getCountryConstants({ country_id: listLeadsData?.country_id, isDefaultData: false });
+	const countryValidation = getCountryConstants({ country_id: leadsData?.country_id, isDefaultData: false });
 
-	const { updateLoading = false, updateDetails = () => {} } = useUpdateLeadOrganization({ listLeadsData });
+	const { updateLoading = false, updateLeadOrganization = () => {} } = useUpdateLeadOrganization({ leadsData });
 
-	const { business_name = '', country_id = '', registration_number = '' } = listLeadsData || {};
+	const { business_name = '', country_id = '', registration_number = '' } = leadsData || {};
 
 	return (
 		<div className={styles.details_form}>
@@ -98,7 +98,7 @@ function UserOnboard({ listLeadsData = {}, defaultValues = {} }) {
 			<div className={styles.button_container}>
 				<Button
 					themeType="accent"
-					onClick={handleSubmit(updateDetails)}
+					onClick={handleSubmit(updateLeadOrganization)}
 					disabled={isEqual(formValues, defaultValues) || updateLoading}
 					loading={updateLoading}
 				>
