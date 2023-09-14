@@ -41,13 +41,10 @@ function FinanceRecommendations({ SetFinanceRecommendation, financeRecommendatio
 						onLabel="Release FNF"
 						offLabel="Hold FNF"
 						value={financeRecommendation.fnf}
-						onChange={(e) => { toggle(e); }}
+						onChange={(e) => toggle(e)}
 					/>
-
 				</div>
-
 			</div>
-
 		</div>
 	);
 }
