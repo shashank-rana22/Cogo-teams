@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 function useGetSettlementTable(organizationId: string, entityCode?: string) {
 	const [filters, setFilters] = useState({
 		query       : '',
-		date        : {},
+		date        : { startDate: '', endDate: '' },
 		accountType : 'All',
 		orgId       : '',
 		page        : 1,
@@ -28,7 +28,10 @@ function useGetSettlementTable(organizationId: string, entityCode?: string) {
 		{ manual: true },
 	);
 
-	const { query = '', date, accountType, page = 1, sortBy, sortType } = filters;
+	const {
+		query = '', date = { startDate: '', endDate: '' },
+		accountType = 'All', page = 1, sortBy, sortType,
+	} = filters;
 
 	useEffect(() => {
 		debounceQuery(query);

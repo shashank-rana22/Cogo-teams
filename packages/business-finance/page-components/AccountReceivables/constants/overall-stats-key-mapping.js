@@ -10,11 +10,6 @@ export const OVERALL_STATS_KEY_MAPPING = [
 		textColor : '#FC5555',
 	},
 	{
-		valueKey  : 'fortyFiveLedAmount',
-		countKey  : 'fortyFiveCount',
-		textColor : '#FC5555',
-	},
-	{
 		valueKey  : 'sixtyLedAmount',
 		countKey  : 'sixtyCount',
 		textColor : '#FC5555',
@@ -30,8 +25,13 @@ export const OVERALL_STATS_KEY_MAPPING = [
 		textColor : '#FC5555',
 	},
 	{
-		valueKey  : 'oneEightyPlusLedAmount',
-		countKey  : 'oneEightyPlusCount',
+		valueKey  : 'threeSixtyFiveLedAmount',
+		countKey  : 'threeSixtyFiveCount',
+		textColor : '#FC5555',
+	},
+	{
+		valueKey  : 'threeSixtyFivePlusLedAmount',
+		countKey  : 'threeSixtyFivePlusCount',
 		textColor : '#FC5555',
 	},
 ];

@@ -17,12 +17,12 @@ interface Props {
 
 function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
 	const {
-		data = {}, loading = false, filters = {},
+		data = {}, loading = false, filters = { accountType: '', query: '' },
 		setFilters = () => { }, apiData = {}, refetch = () => { },
 	} = useGetSettlementTable(organizationId, entityCode);
 
 	const onPageChange = (val) => {
-		setFilters({ ...filters, page: val });
+		setFilters((p) => ({ ...p, page: val }));
 	};
 
 	const onChange = (val: string, name: string) => {
@@ -34,7 +34,7 @@ function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
 			<div className={styles.filter_wrap}>
 				<Select
 					placeholder="Select Status"
-					value={setFilters?.accountType}
+					value={filters?.accountType}
 					onChange={(val: string) => onChange(val, 'accountType')}
 					options={ACCOUNT_TYPE}
 					style={{ width: 200, marginRight: '16px' }}
@@ -42,7 +42,7 @@ function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
 				<Input
 					className="primary md"
 					placeholder="Search by Document Number"
-					value={setFilters?.query}
+					value={filters?.query}
 					onChange={(val) => onChange(val, 'query')}
 					prefix={<IcMSearchdark />}
 					style={{ width: 300 }}
