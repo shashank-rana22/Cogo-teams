@@ -1,13 +1,12 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
-const getFormattedPayload = ({ leadsData = {}, checkList = [] }) => {
+const getFormattedPayload = ({ leadsData = {}, selectedPocId = '' }) => {
 	const payload = {
 		lead_organization_id : leadsData?.id,
-		lead_user_id         : checkList,
+		lead_user_id         : selectedPocId,
 	};
 
 	return payload;
@@ -19,8 +18,6 @@ function useCreateLeadOrganizationToAccount({
 	leadsData = {},
 	task = {},
 }) {
-	const [checkList, setCheckList] = useState(null);
-
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ successMessage: 'Updated Successfully' });
 
 	const [{ loading }, trigger] = useRequest({
@@ -28,9 +25,9 @@ function useCreateLeadOrganizationToAccount({
 		method : 'POST',
 	}, { manual: true });
 
-	const createLeadOrgAccount = async () => {
+	const createLeadOrgAccount = async ({ selectedPocId = '' }) => {
 		try {
-			const payload = getFormattedPayload({ leadsData, checkList });
+			const payload = getFormattedPayload({ leadsData, selectedPocId });
 
 			const res = await trigger({ data: payload });
 
@@ -54,8 +51,6 @@ function useCreateLeadOrganizationToAccount({
 
 	return {
 		createLoading: loading,
-		checkList,
-		setCheckList,
 		createLeadOrgAccount,
 	};
 }

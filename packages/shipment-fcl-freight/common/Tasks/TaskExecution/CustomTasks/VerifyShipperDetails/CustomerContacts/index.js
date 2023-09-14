@@ -1,7 +1,6 @@
 import { Button, Table } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateLeadOrganizationToAccount from '../../../../../../hooks/useCreateLeadOrganizationToAccount';
@@ -18,7 +17,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 	const [selectedUserId, setSelectedUserId] = useState(null);
 	const [showCreatePoc, setShowCreatePoc] = useState(false);
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, reset } = useForm();
 
 	const {
 		loading = false,
@@ -29,8 +28,6 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 
 	const {
 		createLeadOrgAccount = () => {},
-		setCheckList = () => {},
-		checkList = [],
 		createOrgLoading = false,
 	} = useCreateLeadOrganizationToAccount({ leadsData, setStep, setConsigneeShipperId, task });
 
@@ -42,20 +39,21 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 	const {
 		onCreateLeadUser = () => {},
 		createUserLoading = false,
-	} = useCreateLeadUser({ leadsData, refetchList, setShowCreatePoc, setSelectedUserId });
+	} = useCreateLeadUser({ leadsData, refetchList, setShowCreatePoc, setSelectedUserId, reset });
 
 	const columns = getColumns({
 		setSelectedUserId,
 		selectedUserId,
 		control,
-		setCheckList,
+		buttonLoading: loading || createUserLoading || createOrgLoading || updateLoading,
 		handleSubmit,
 		onUpdateLeadUser,
+		createLeadOrgAccount,
 	});
 
 	return (
 		<>
-			<UserOnboard leadsData={leadsData} defaultValues={defaultValues} />
+			<UserOnboard leadsData={leadsData} defaultValues={defaultValues} refetchList={refetchList} />
 
 			<div className={styles.main_container}>
 				<h4>Customer contacts</h4>
@@ -85,22 +83,13 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 						Add POC
 					</Button>
 
-					<div>
-						<Button
-							themeType="secondary"
-							onClick={onCancel}
-						>
-							Cancel
-						</Button>
-
-						<Button
-							disabled={isEmpty(checkList) || loading || createUserLoading || createOrgLoading}
-							themeType="accent"
-							onClick={createLeadOrgAccount}
-						>
-							Verify
-						</Button>
-					</div>
+					<Button
+						themeType="secondary"
+						disabled={loading || createUserLoading || createOrgLoading || updateLoading}
+						onClick={onCancel}
+					>
+						Cancel
+					</Button>
 				</div>
 			</div>
 		</>

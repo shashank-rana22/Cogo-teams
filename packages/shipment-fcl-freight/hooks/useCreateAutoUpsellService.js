@@ -1,11 +1,14 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 import getAutoUpsellPayload from '../helpers/getAutoUpsellPayload';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
-function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {}, countryId = '' }) {
+function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {} }) {
+	const [countryId, setCountryId] = useState('');
+
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/auto_upsell_service',
 		method : 'POST',
@@ -36,6 +39,8 @@ function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = 
 
 	return {
 		loading,
+		countryId,
+		setCountryId,
 		createAutoUpsellService,
 		onSubmit,
 	};
