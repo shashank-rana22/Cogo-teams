@@ -700,6 +700,8 @@ const GLOBAL_CONSTANTS = {
 			feedback_services: {
 				currencies: ['INR', 'USD', 'EUR', 'GBP', 'VND', 'IDR', 'SGD', 'THB', 'CNY', 'AED'],
 			},
+		},
+		feature_unsupported_service: {
 			create_payrun: {
 				entities: ['101', '201'],
 			},

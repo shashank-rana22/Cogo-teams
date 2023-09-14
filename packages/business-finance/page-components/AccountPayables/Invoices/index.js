@@ -30,7 +30,8 @@ const TABS = [
 ];
 
 const FIRST_PAGE = 1;
-const DENY_ENITY_PAYRUN = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.create_payrun.entities;
+const DENY_ENITY_PAYRUN = GLOBAL_CONSTANTS.service_supported_countries
+	.feature_unsupported_service.create_payrun.entities;
 
 const FUNCTIONS = {
 	renderToolTip: (itemData, field) => (
