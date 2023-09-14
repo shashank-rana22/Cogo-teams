@@ -2,8 +2,6 @@ import {
 	CreatableSelectController,
 	ChipsController,
 	DatepickerController,
-	DateRangePickerController,
-	DayFrequencyController,
 	InputController,
 	MultiselectController,
 	RadioGroupController,
@@ -11,29 +9,26 @@ import {
 	UploadController,
 	TextAreaController,
 	CheckboxController,
-	InputNumberController,
 	AsyncSelectController,
 	MobileNumberController,
 } from '@cogoport/forms';
 
-const controlTypeControllerMapping = {
-	text               : InputController,
-	number             : InputNumberController,
-	select             : SelectController,
-	multiSelect        : MultiselectController,
-	radioGroup         : RadioGroupController,
-	asyncSelect        : AsyncSelectController,
-	chips              : ChipsController,
-	selectDayFrequency : DayFrequencyController,
-	datePicker         : DatepickerController,
-	dateRangePicker    : DateRangePickerController,
-	upload             : UploadController,
-	creatableSelect    : CreatableSelectController,
-	textarea           : TextAreaController,
-	checkBox           : CheckboxController,
-	mobileNumber       : MobileNumberController,
+const controllerTypeMapping = {
+	text            : InputController,
+	number          : InputController,
+	select          : SelectController,
+	multiSelect     : MultiselectController,
+	radioGroup      : RadioGroupController,
+	asyncSelect     : AsyncSelectController,
+	chips           : ChipsController,
+	datePicker      : DatepickerController,
+	upload          : UploadController,
+	creatableSelect : CreatableSelectController,
+	textarea        : TextAreaController,
+	checkBox        : CheckboxController,
+	mobileNumber    : MobileNumberController,
 };
 
-const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
+const getFieldController = (type = 'text') => controllerTypeMapping[type] || null;
 
 export default getFieldController;

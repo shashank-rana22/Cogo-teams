@@ -1,5 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { ThreeDotLoader, AddCompanyModal } from '@cogoport/ocean-modules';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -8,7 +8,6 @@ import useListShipmentTradePartners from '../../../hooks/useListShipmentTradePar
 import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
-	UploadBookingNote,
 	MarkConfirmServices,
 	UploadDraftBL,
 	UploadSI,
@@ -35,12 +34,10 @@ const MAPPED_TASKS = [
 	'generate_freight_certificate',
 	'generate_cargo_insurance',
 	'upload_compliance_documents',
+	'upload_booking_note',
+	'add_consignee_details',
+	'add_shipper_details',
 ];
-
-const TRADE_PARTY_TYPE = {
-	add_consignee_details : { trade_party_type: 'consignee' },
-	add_shipper_details   : { trade_party_type: 'shipper' },
-};
 
 const INCLUDED_ORG = ['nvocc', 'freight_forwarder'];
 const REDUCE_LENGTH_BY = 1;
@@ -66,7 +63,7 @@ function ExecuteTask({
 
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-	const { data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id, task });
+	const { data: shipmentTradePartnersData } = useListShipmentTradePartners({ shipment_id: shipment_data?.id, task });
 
 	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
@@ -102,6 +99,9 @@ function ExecuteTask({
 			tasksList,
 			selectedMail,
 			taskListRefetch,
+			mailLoading,
+			getShipmentRefetch,
+			shipmentTradePartnersData,
 		});
 
 		const RenderComponent = COMPONENT_MAPPING?.[task?.task] || null;
@@ -142,20 +142,6 @@ function ExecuteTask({
 		);
 	}
 
-	if (task.task === 'upload_booking_note') {
-		if (mailLoading) {
-			return <div>Loading...</div>;
-		}
-
-		return (
-			<UploadBookingNote
-				task={task}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
 	if (task.task === 'upload_si' && primary_service?.trade_type === 'export') {
 		return (
 			<UploadSI
@@ -163,21 +149,6 @@ function ExecuteTask({
 				onCancel={onCancel}
 				services={servicesList}
 				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
-	if (['add_consignee_details', 'add_shipper_details'].includes(task.task)) {
-		return (
-			<AddCompanyModal
-				tradePartnersData={data}
-				addCompany={TRADE_PARTY_TYPE[task.task]}
-				tradePartnerTrigger={taskListRefetch}
-				shipment_id={shipment_data?.id}
-				importer_exporter_id={shipment_data?.importer_exporter_id}
-				withModal={false}
-				setAddCompany={onCancel}
-				getShipmentRefetch={getShipmentRefetch}
 			/>
 		);
 	}

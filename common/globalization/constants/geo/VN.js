@@ -546,7 +546,7 @@ export default {
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
 		pan_number: {
-			label   : 'PAN',
+			label   : 'VAT',
 			pattern : undefined,
 		},
 		economic_zone: {
