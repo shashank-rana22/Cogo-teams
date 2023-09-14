@@ -45,6 +45,15 @@ const GLOBAL_CONSTANTS = {
 		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
 	},
 
+	selected_unit_to_prefill_value_mapping: {
+		per_kg        : 'chargeable_weight',
+		per_kg_gross  : 'weight',
+		per_package   : 'packages_count',
+		per_awb       : 'awb_count',
+		per_shipment  : 'quantity',
+		per_container : 'containers_count',
+	},
+
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
 	currency_code   : CURRENCY_CODE,

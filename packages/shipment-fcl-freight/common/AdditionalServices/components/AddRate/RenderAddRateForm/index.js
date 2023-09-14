@@ -1,7 +1,10 @@
 import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import controls from './controls';
 import styles from './styles.module.css';
+
+const PREFILL_QUANTITY_ONE = 1;
 
 const controlTypeMapping = {
 	select      : SelectController,
@@ -29,8 +32,21 @@ function RenderAddRateForm({
 	errors = {},
 	serviceData = {},
 	source = '',
+	watch = () => {},
+	setValue = () => {},
 }) {
 	const { formControl = [] } = controls({ serviceData, source });
+
+	let { services = [] } = serviceData;
+	services = services.filter((service) => service.service_type === 'fcl_freight_service');
+
+	const selectedUnit = watch('unit');
+	const prefillValue = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[selectedUnit];
+
+	setValue('quantity', services?.[GLOBAL_CONSTANTS.zeroth_index]?.[prefillValue]);
+	if (selectedUnit === 'per_shipment') {
+		setValue('quantity', PREFILL_QUANTITY_ONE);
+	}
 
 	return (
 		<form className={styles.form_container}>

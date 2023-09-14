@@ -24,13 +24,13 @@ const REMARK_STATUS = [
 ];
 
 function AddRate({
-	item,
-	setAddRate,
+	item = {},
+	setAddRate = () => {},
 	status,
 	setAddSellPrice = () => {},
-	refetch,
+	refetch = () => {},
 	onCancel = () => {},
-	filters,
+	filters = {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
@@ -39,6 +39,8 @@ function AddRate({
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
+
+	console.log('status', status);
 
 	const refetchForUpdateSubService = () => {
 		refetch();
@@ -64,6 +66,7 @@ function AddRate({
 		control,
 		formState: { errors },
 		setValue,
+		watch,
 	} = useForm();
 
 	useEffect(() => {
@@ -136,7 +139,7 @@ function AddRate({
 			{REMARK_STATUS.includes(status?.status) ? (
 				<p style={{ marginTop: '8px' }}>
 					<strong> Comment:</strong>
-					&nbsp;
+					{' '}
 					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
@@ -146,6 +149,8 @@ function AddRate({
 				errors={errors}
 				serviceData={item}
 				source={source}
+				watch={watch}
+				setValue={setValue}
 			/>
 
 			<ActionsToShow
