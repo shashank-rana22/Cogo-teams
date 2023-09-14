@@ -16,7 +16,7 @@ const useFinanceClearance = ({ refetch }) => {
 		employee : false,
 		fnf      : false,
 	});
-
+	const off_boarding_application_id = data?.off_boarding_application_id || '';
 	const data1 = data?.finance_clearance || {};
 	const { finance_clearance } = data1 || {};
 	const { sub_process_detail_id, sub_process_data, is_complete } = finance_clearance || {};
@@ -26,6 +26,7 @@ const useFinanceClearance = ({ refetch }) => {
 		const OUTSTANDINDDETAILS = [];
 		outstanding_amount_details.map((item) => (
 			OUTSTANDINDDETAILS.push({
+				...item,
 				cleared            : values[item?.registrationNumber] || false,
 				business_name      : item?.businessName || '-',
 				dues               : item?.dues || '-',
@@ -54,6 +55,7 @@ const useFinanceClearance = ({ refetch }) => {
 				hold_employee              : financeRecommendation?.employee || false,
 			},
 		};
+		// console.log(payload);
 
 		updateApplication({ payload });
 	};
@@ -64,6 +66,7 @@ const useFinanceClearance = ({ refetch }) => {
 
 	return {
 		handleSubmit,
+		data,
 		onSubmit,
 		control,
 		errors,
@@ -77,6 +80,7 @@ const useFinanceClearance = ({ refetch }) => {
 		totalRecoverableAmount,
 		SetFinanceRecommendation,
 		financeRecommendation,
+		off_boarding_application_id,
 	};
 };
 

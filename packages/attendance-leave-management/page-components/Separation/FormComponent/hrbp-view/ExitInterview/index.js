@@ -13,7 +13,7 @@ import ExitHeading from './ExitHeading';
 import ScheduleInterview from './Schedule';
 import styles from './styles.module.css';
 
-function ExitInterview({ refetch = () => {} }) {
+function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack = () => {}, data = {} }) {
 	const [visible, setvisible] = useState(false);
 	const {
 		control,
@@ -23,21 +23,23 @@ function ExitInterview({ refetch = () => {} }) {
 		formState:{ errors = {} },
 	} = useForm();
 
-	// const { exit_interview } = data || {};
-	// const { exit_interview :exit_interview_scheduled } = exit_interview || {};
-	// const { sub_process_detail_id, sub_process_data } = exit_interview_scheduled || {};
+	const { exit_interview } = data || {};
+
+	const { exit_interview_scheduled } = exit_interview || {};
+	const { sub_process_detail_id } = exit_interview_scheduled || {};
+	console.log('Data', sub_process_detail_id);
 
 	const v1 = watch();
 	console.log('v1:', v1);
-	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
 	const onSubmit = (values) => {
 		console.log(values, 'formValues');
 		setvisible(true);
 		const payload = {
-			sub_process_data: values,
-			// sub_process_detail_id : '50adeb65-d63c-4c99-9a16-cd724ee4ca35',
-			// process_name          : 'admin_clearance',
+			sub_process_data : values,
+			sub_process_detail_id,
+			process_name     : 'admin_clearance',
 		};
 		updateApplication({
 			payload,
@@ -64,7 +66,7 @@ function ExitInterview({ refetch = () => {} }) {
 			<ScheduleInterview visible={visible} control={control} watch={watch} reset={reset} errors={errors} />
 
 			<div className={styles.footer}>
-				<Button themeType="secondary" style={{ marginRight: '12px' }}>Back</Button>
+				<Button themeType="secondary" style={{ marginRight: '12px' }} onClick={handleBack}>Back</Button>
 				<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
 					Notify Employee
 					<IcMArrowRight width={16} height={16} style={{ marginLeft: '12px' }} />

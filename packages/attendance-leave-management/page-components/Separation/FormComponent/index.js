@@ -55,7 +55,7 @@ function FormComponent({
 	data = {},
 	loading = false,
 	refetchApplicationDetails = () => {},
-	view_type = 'tech_clearance',
+	view_type = 'hr_meet',
 }) {
 	const [currentComponent, setCurrentComponent] = useState('hr_meet');
 	const ONE = 1; const MINUS_ONE = -1;
