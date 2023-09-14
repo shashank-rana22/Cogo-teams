@@ -1,10 +1,17 @@
 import { Button } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 
+import DASHBOARD_VIEW_CONSTANTS from '../../../constants/dashboard-view-constants';
+
 import styles from './styles.module.css';
 
-function Header() {
+const { PUBLIC } = DASHBOARD_VIEW_CONSTANTS;
+
+function Header(props) {
+	const { setView } = props;
+
 	const { user } = useSelector(({ profile }) => profile);
+
 	return (
 		<div className={styles.head_container}>
 			<div>
@@ -29,6 +36,7 @@ function Header() {
 					size="lg"
 					themeType="secondary"
 					style={{ marginRight: '12px' }}
+					onClick={() => setView(PUBLIC)}
 				>
 					Public View Mode
 				</Button>
