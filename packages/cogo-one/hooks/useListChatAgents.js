@@ -8,7 +8,7 @@ const getParams = ({ agentType, page, query, isInActive = false }) => ({
 	filters: {
 		q          : query || undefined,
 		agent_type : agentType || undefined,
-		status     : isInActive ? 'inactive' : 'active',
+		...(isInActive ? { status: 'inactive' } : { status_not: 'inactive' }),
 	},
 	page,
 	page_limit : PAGE_LIMIT,
