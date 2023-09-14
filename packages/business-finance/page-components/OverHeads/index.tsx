@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Tabs, TabPanel, Select, Placeholder } from '@cogoport/components';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
