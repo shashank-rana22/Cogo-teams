@@ -1,12 +1,18 @@
 import { CheckboxController } from '@cogoport/forms';
 
-const getColumns = ({ control }) => [
+const getColumns = ({ control, is_complete = false }) => [
 	{
 		Header   : 'CLEAR',
 		accessor : (item) => (
+
 			<div>
 				{' '}
-				<CheckboxController name={item?.registrationNumber} control={control} />
+				<CheckboxController
+					name={item?.registrationNumber}
+					control={control}
+					checked={item.cleared}
+					disabled={is_complete}
+				/>
 			</div>
 		),
 	},

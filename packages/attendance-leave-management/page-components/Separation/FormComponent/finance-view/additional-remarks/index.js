@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 
 function AdditionalRemarks({ control = {}, isComplete = false, confirmedValues = {} }) {
 	const [showNotes, setShowNotes] = useState(true);
-
+	// console.log('add remark file log :: ', confirmedValues?.additionalRemarks, isComplete);
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} key={confirmedValues}>
 			<div className={styles.heading} aria-hidden onClick={() => setShowNotes(!showNotes)}>
 				<span>Additional Remarks</span>
 
@@ -24,11 +24,10 @@ function AdditionalRemarks({ control = {}, isComplete = false, confirmedValues =
 					<InputController
 						size="md"
 						placeholder="Type your notes here"
-						value={isComplete ? confirmedValues.additionalRemarks : null}
+						value={isComplete ? confirmedValues?.additionalRemarks : ''}
 						disabled={isComplete}
 						control={control}
-						name="notes"
-						rules={{ required: 'this is required' }}
+						name="additionalRemarks"
 					/>
 				</div>
 			</div>

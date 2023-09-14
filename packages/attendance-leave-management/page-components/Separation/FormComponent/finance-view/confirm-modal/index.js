@@ -4,11 +4,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function FinanceConfirmModal({ confirmModal = {}, setConfirmModal = () => {}, handleSubmit = () => {} }) {
-	const onSubmit = () => {
-		setConfirmModal(false);
-		console.log('modal submitted..');
-	};
+function FinanceConfirmModal({
+	confirmModal = {},
+	setConfirmModal = () => {},
+	onSubmit = () => {},
+	handleSubmit = () => {},
+}) {
 	return (
 		<div>
 			<Modal size="sm" show={confirmModal} onClose={() => setConfirmModal(false)}>
@@ -43,7 +44,7 @@ function FinanceConfirmModal({ confirmModal = {}, setConfirmModal = () => {}, ha
 						size="md"
 						themeType="primary"
 						className={styles.proceed_modal_btn}
-						onClick={handleSubmit(onSubmit)}
+						onClick={() => { handleSubmit(onSubmit)(); }}
 					>
 						Yes, Proceed
 					</Button>

@@ -11,14 +11,16 @@ const fnfColumns = ({
 }) => ([
 	{
 		Header   : 'PARTICULAR',
-		accessor : (item = {}) => (
-			<section>
-				{/* <InputController
+		accessor : (item = {}) => {
+			console.log(item, 'items');
+			return (
+				<section>
+					{/* <InputController
 				control={control}
 				className={styles.input_table}
 			/> */}
-				<div>{item?.particular}</div>
-				{/* <InputController
+					<div>{item?.particular}</div>
+					{/* <InputController
 					control={control}
 					placeholder="Type Amount here"
 					className={styles.name_input}
@@ -28,11 +30,12 @@ const fnfColumns = ({
 					onChange={totalRecoverableAmountFun}
 					rules={{ required: { value: true, message: '*This Field is required' } }}
 				/> */}
-				{errors?.item?.particular && (
-					<div className={styles.error}>*Required</div>
-				)}
-			</section>
-		),
+					{errors?.item?.particular && (
+						<div className={styles.error}>*Required</div>
+					)}
+				</section>
+			);
+		},
 	},
 	{
 		Header   : 'CATEGORY',
@@ -40,28 +43,31 @@ const fnfColumns = ({
 	},
 	{
 		Header   : 'RECOVERABLE AMOUNT',
-		accessor : (item) => (
-			<section>
-				{/* <InputController
+		accessor : (item) => {
+			console.log('amount ', item);
+			return (
+				<section>
+					{/* <InputController
 					control={control}
 					className={styles.input_table}
 				/> */}
-				<InputController
-					control={control}
-					placeholder="Type Amount here"
-					className={styles.name_input}
-					name={`${item.particular}RecoverableAmount`}
-					disabled
-					value={item?.recoverable_amount}
-					size="md"
-					type="number"
-					rules={{ required: { value: true, message: '*This Field is required' } }}
-				/>
-				{errors?.item?.particular && (
-					<div className={styles.error}>*Required</div>
-				)}
-			</section>
-		),
+					<InputController
+						control={control}
+						placeholder="Type Amount here"
+						className={styles.name_input}
+						name={`${item.particular}RecoverableAmount`}
+						disabled
+						value={item?.recoverable_amount}
+						size="md"
+						type="number"
+						rules={{ required: { value: true, message: '*This Field is required' } }}
+					/>
+					{/* {errors[`${item.particular}RecoverableAmount`] && (
+						<div className={styles.error}>*Required</div>
+					)} */}
+				</section>
+			);
+		},
 	},
 	// {
 	// 	Header   : 'APPLICABILITY',

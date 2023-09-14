@@ -4,6 +4,7 @@ import {
 	IcMArrowDown,
 	IcMArrowRight,
 	IcMDownload,
+	IcMFtick,
 	IcMPlus,
 } from '@cogoport/icons-react';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -12,6 +13,7 @@ import StyledTable from '../commons/StyledTable';
 
 import AdditionalRemarks from './additional-remarks';
 import fnfColumns from './columns';
+import FinanceConfirmModal from './confirm-modal';
 import FinanceRecommendations from './finance-recommendations';
 import getColumns from './Outstandingamount/getcolumns';
 import styles from './styles.module.css';
@@ -39,53 +41,81 @@ const ZERO = 0;
 // 	},
 // ];
 
+// eslint-disable-next-line max-lines-per-function
 function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	// const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const {
 		handleSubmit, onSubmit, control, errors,
 		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
-		SetFinanceRecommendation, financeRecommendation, off_boarding_application_id, is_complete,
+		SetFinanceRecommendation, financeRecommendation, off_boarding_application_id,
+		sub_process_data, confirmModal, setConfirmModal, is_complete,
+		loading, setValue,
 	} = useFinanceClearance({ refetch });
-
-	console.log(is_complete); // use this for showing the get details
+	// const is_complete = true;
+	//	console.log(is_complete); // use this for showing the get details
 	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
-	const v1 = watch();
-	console.log(v1);
+	const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
+	const [confirmedValues, setConfirmedValues] = useState(
+		{
+			tcFullName        : 'Udit chavan',
+			employee          : true,
+			fnf               : true,
+			additionalRemarks : '',
+			getupdateData     : [],
 
+		},
+	);
+	console.log('sub process data', sub_process_data, is_complete);
+
+	useEffect(() => {
+		setValue('additionalRemarks', data.additional_remarks);
+		setConfirmedValues(
+			{
+				tcFullName    : 'Udit chavan',
+				employee      : data.hold_employee,
+				fnf           : data.hold_fnf,
+				getupdateData : data?.update_fnf_status,
+
+			},
+		);
+	}, [data, loading, setUpdateData, setValue]);
+	console.log(data);
 	const [show, setShow] = useState(true);
+	// const [confirmModal, setConfirmModal] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [outStandingShow, setOutStandingShow] = useState(true);
-
-	const columnsout = getColumns({ control });
-
+	const columnsout = getColumns({ control, is_complete });
 	const data1 = useMemo(() => (
 		updateData
 	), [updateData]);
+	const showdata = useMemo(() => (
+		confirmedValues.getupdateData
+	), [confirmedValues.getupdateData]);
 
 	const handleDownloadSheet = async () => {
 		const link = await getDownloadOutstandingFileLink(off_boarding_application_id);
 		window.open(link?.data, '_blank');
 	};
-
-	// const onButtonClick = (values = {}) => {
-	// 	console.log('submitted form', values);
-	// 	console.log('remaining values :: ', updateData, financeRecommendation, totalRecoverableAmount);
-	// };
 	const totalRecoverableAmountFun = useCallback(
 		() => {
 			let recoverable_amount_sum = 0;
-			data1.forEach((elem) => {
+			const arr = is_complete ? showdata : data1;
+			arr?.forEach((elem) => {
 				const props = `${elem?.particular}RecoverableAmount`;
 				recoverable_amount_sum += parseInt(watch(props) || ZERO, 10);
 			});
 			setTotalRecoverableAmount(recoverable_amount_sum);
 		},
-		[data1, setTotalRecoverableAmount, watch],
+		[data1, showdata, is_complete, setTotalRecoverableAmount, watch],
 	);
 
 	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, watch]);
 
 	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
+
+	// if (loading) {
+	//  return null;
+	// }
 
 	return (
 		<>
@@ -95,7 +125,14 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 					<span className={styles.lower_text}>FNF & other settlements </span>
 				</div>
 			</div>
-
+			{is_complete ? (
+				<div className={styles.completed_notification_container}>
+					<IcMFtick height="22px" width="22px" color="#849E4C" />
+					<div className={styles.completed_notification_text}>
+						You have successfully completed your tasks. No further changes are allowed.
+					</div>
+				</div>
+			) : null}
 			<div className={styles.container}>
 				<div className={styles.heading_container}>
 					<div className={styles.heading}>
@@ -108,6 +145,8 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 								themeType="secondary"
 								className={styles.heading_btn}
 								onClick={() => setShowModal(true)}
+								disabled={is_complete}
+
 							>
 								<IcMPlus />
 								{' '}
@@ -125,7 +164,7 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 				</div>
 				<div className={show ? styles.show_application : styles.hide_application}>
 					<div className={styles.table_update_fnf}>
-						<StyledTable columns={columns} data={data1} />
+						<StyledTable columns={columns} data={is_complete ? showdata : data1} />
 					</div>
 					{' '}
 					<div className={styles.document_section}>
@@ -148,7 +187,11 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 					</div>
 					<div className={styles.btn_and_arrow}>
 						<div className={styles.heading_btn}>
-							<Button size="md" themeType="secondary" onClick={() => handleDownloadSheet()}>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => handleDownloadSheet()}
+							>
 								<IcMDownload />
 								{' '}
 								Download Outstanding Sheet
@@ -169,15 +212,18 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 						<div className={styles.outstanding_heading}>Outstanding Amount Details</div>
 						<StyledTable columns={columnsout} data={outstanding_amount_details} loading={false} />
 					</div>
-					<div className={styles.fnf_excel_sheet_container}>
-						<div className={styles.outstanding_fnf_heading}> FNF Excel Sheet</div>
-						<UploadController
-							name="fnffile"
-							control={control}
-							placeholder="Only Image, pdf/doc..."
-							size="md"
-						/>
-						{/* <Input
+					{is_complete ?	null : (
+						<div className={styles.fnf_excel_sheet_container}>
+							<div className={styles.outstanding_fnf_heading}> FNF Excel Sheet</div>
+							<UploadController
+								name="fnffile"
+								control={control}
+								placeholder="Only Image, pdf/doc..."
+								size="md"
+								disabled={is_complete}
+								className={is_complete ? styles.uploadbtn : null}
+							/>
+							{/* <Input
 							size="md"
 							placeholder="Only Image, pdf/doc..."
 							prefix={<IcMCloudUpload width={16} height={16} />}
@@ -189,33 +235,61 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 							)}
 							disabled
 						/> */}
-					</div>
+						</div>
+					)}
 				</div>
 			</div>
 			<FinanceRecommendations
 				control={control}
 				financeRecommendation={financeRecommendation}
 				SetFinanceRecommendation={SetFinanceRecommendation}
+				confirmedValues={confirmedValues}
+				isComplete={is_complete}
+
 			/>
 
-			<AdditionalRemarks control={control} />
+			<AdditionalRemarks
+				key={loading}
+				control={control}
+				isComplete={is_complete}
+				confirmedValues={confirmedValues}
+			/>
 			<div className={styles.container}>
-				<TermsConditions control={control} errors={errors} />
+				<TermsConditions
+					control={control}
+					errors={errors}
+					isComplete={is_complete}
+					confirmedValues={confirmedValues}
+				/>
 			</div>
 
-			<div className={styles.footer}>
-				{/* <Button themeType="secondary" style={{ marginRight: '4px' }}>Back</Button> */}
-				<Button
-					themeType="primary"
-					onClick={() => handleSubmit(onSubmit)()}
-				>
-					Proceed
-					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+			{is_complete ? null
+				: (
+					<div className={styles.footer}>
+						{/* <Button themeType="secondary" style={{ marginRight: '4px' }}>Back</Button> */}
+						<Button
+							themeType="primary"
+							onClick={handleSubmit(() => setConfirmModal(true))}
 
-				</Button>
-			</div>
+						>
+							Proceed
+							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
 
-			<FinanceUpdateModal showModal={showModal} setShowModal={setShowModal} setUpdateData={setUpdateData} />
+						</Button>
+					</div>
+				)}
+
+			<FinanceUpdateModal
+				showModal={showModal}
+				setShowModal={setShowModal}
+				setUpdateData={setUpdateData}
+			/>
+			<FinanceConfirmModal
+				confirmModal={confirmModal}
+				setConfirmModal={setConfirmModal}
+				handleSubmit={handleSubmit}
+				onSubmit={onSubmit}
+			/>
 		</>
 
 	);

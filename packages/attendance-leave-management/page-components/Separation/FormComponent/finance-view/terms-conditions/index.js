@@ -17,6 +17,7 @@ function TermsConditions({ control = {}, errors = {}, isComplete = false, confir
 						className={styles.Checkbox}
 						control={control}
 						value={isComplete}
+						checked={isComplete}
 						name="checkbox_agreement"
 						disabled={isComplete}
 						rules={{ required: { value: true, message: '*required' } }}

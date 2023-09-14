@@ -14,15 +14,16 @@ const useFinanceClearance = ({ refetch }) => {
 		employee : false,
 		fnf      : false,
 	});
-	const { data } = useGetFinanceClearanceProcessDetails();
+	const { data, loading } = useGetFinanceClearanceProcessDetails();
 	const off_boarding_application_id = data?.off_boarding_application_id || '';
 	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm();
 
 	const data1 = data?.finance_clearance || {};
 	const { finance_clearance } = data1 || {};
+	const [showModal, setShowModal] = useState(false);
 	const { sub_process_detail_id, sub_process_data, is_complete } = finance_clearance || {};
 	const { notes_shared_with_you = [], outstanding_amount_details = [] } = sub_process_data || {};
-	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShowModal });
 
 	const onSubmit = (values) => {
 		const OUTSTANDINDDETAILS = [];
@@ -56,6 +57,7 @@ const useFinanceClearance = ({ refetch }) => {
 				additional_remarks         : values.notes,
 				hold_fnf                   : financeRecommendation?.fnf || false,
 				hold_employee              : financeRecommendation?.employee || false,
+				name                       : financeRecommendation.name || '',
 			},
 		};
 		// console.log(payload);
@@ -84,6 +86,11 @@ const useFinanceClearance = ({ refetch }) => {
 		SetFinanceRecommendation,
 		financeRecommendation,
 		off_boarding_application_id,
+		sub_process_data,
+		loading,
+		setValue,
+		setConfirmModal : setShowModal,
+		confirmModal    : showModal,
 	};
 };
 
