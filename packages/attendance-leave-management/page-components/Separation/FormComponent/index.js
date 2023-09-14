@@ -55,13 +55,13 @@ function FormComponent({
 	data = {},
 	loading = false,
 	refetchApplicationDetails = () => {},
-	view_type = 'tech_clearance',
+	view_type = '',
 }) {
 	const [currentComponent, setCurrentComponent] = useState('hr_meet');
 	const ONE = 1; const MINUS_ONE = -1;
 	let Render = null;
 
-	if (view_type === 'hr_meet') {
+	if (view_type === 'hrbp_clearance') {
 		const handleNext = () => {
 			const componentKeys = Object.keys(COMPONENT_MAPPING.hr_meet);
 			const currentIndex = componentKeys.indexOf(currentComponent);
@@ -80,7 +80,7 @@ function FormComponent({
 			}
 		};
 
-		Render = COMPONENT_MAPPING.hr_meet[currentComponent];
+		Render = COMPONENT_MAPPING.hr_meet?.[currentComponent];
 
 		return (
 			<div className={styles.container}>
