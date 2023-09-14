@@ -17,6 +17,7 @@ import getColumns from './Outstandingamount/getcolumns';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
 import FinanceUpdateModal from './update-modal';
+import useDownloadOutstandingDetails from './useDownloadOutstandingDetails';
 import useFinanceClearance from './useFinanceClearance';
 
 const ZERO = 0;
@@ -38,14 +39,16 @@ const ZERO = 0;
 // 	},
 // ];
 
-function FinanceClearanceEmployeeSide({ data, refetch = () => {} }) {
+function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	// const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const {
 		handleSubmit, onSubmit, control, errors,
 		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
-		SetFinanceRecommendation, financeRecommendation,
-	} = useFinanceClearance({ data, refetch });
+		SetFinanceRecommendation, financeRecommendation, off_boarding_application_id, is_complete,
+	} = useFinanceClearance({ refetch });
 
+	console.log(is_complete); // use this for showing the get details
+	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
 	const v1 = watch();
 	console.log(v1);
 
@@ -58,6 +61,11 @@ function FinanceClearanceEmployeeSide({ data, refetch = () => {} }) {
 	const data1 = useMemo(() => (
 		updateData
 	), [updateData]);
+
+	const handleDownloadSheet = async () => {
+		const link = await getDownloadOutstandingFileLink(off_boarding_application_id);
+		window.open(link?.data, '_blank');
+	};
 
 	// const onButtonClick = (values = {}) => {
 	// 	console.log('submitted form', values);
@@ -140,7 +148,7 @@ function FinanceClearanceEmployeeSide({ data, refetch = () => {} }) {
 					</div>
 					<div className={styles.btn_and_arrow}>
 						<div className={styles.heading_btn}>
-							<Button size="md" themeType="secondary">
+							<Button size="md" themeType="secondary" onClick={() => handleDownloadSheet()}>
 								<IcMDownload />
 								{' '}
 								Download Outstanding Sheet
