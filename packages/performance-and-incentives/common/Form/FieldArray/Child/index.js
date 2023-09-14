@@ -1,4 +1,4 @@
-import { IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../getFieldController';
 
@@ -19,6 +19,8 @@ function Child(props) {
 		error = {},
 		watch = () => {},
 		parameterUnitOptions = {},
+		setParam = () => {},
+		setParamScoringType = () => {},
 	} = props;
 
 	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
@@ -55,6 +57,16 @@ function Child(props) {
 					</div>
 				);
 			})}
+
+			<IcMPlusInCircle
+				className={styles.add_icon}
+				onClick={() => {
+					setParamScoringType(scoringType);
+					setParam(paramType);
+				}}
+				width={16}
+				height={16}
+			/>
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete

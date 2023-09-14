@@ -8,9 +8,11 @@ const useGetScoringConfigs = () => {
 	const [searchValue, setSearchValue] = useState('');
 
 	const [params, setParams] = useState({
-		page       : 1,
-		page_limit : 10,
-		filters    : {
+		page                      : 1,
+		page_limit                : 10,
+		cogo_entity_data_required : true,
+		role_data_required        : true,
+		filters                   : {
 			q: searchQuery || undefined,
 		},
 	});

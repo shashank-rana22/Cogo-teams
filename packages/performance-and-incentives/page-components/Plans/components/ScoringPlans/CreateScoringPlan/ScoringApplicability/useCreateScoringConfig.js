@@ -7,8 +7,22 @@ import { useEffect } from 'react';
 
 import getScoreApplicableFormControls from '../../../../configurations/get-score-applicable-form-controls';
 
+const getApiDetails = ({ id = '' }) => {
+	if (id) {
+		return {
+			authkey : 'post_agent_scoring_config_attributes',
+			url     : 'config_attributes',
+		};
+	}
+
+	return {
+		authkey : 'post_agent_scoring_config',
+		url     : 'config',
+	};
+};
+
 const useCreateScoringConfig = ({ data, editApplicability, setEditApplicability }) => {
-	const { push, query: { mode } } = useRouter();
+	const { push, query: { mode, id } } = useRouter();
 
 	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm({
 		defaultValues: {
@@ -29,10 +43,12 @@ const useCreateScoringConfig = ({ data, editApplicability, setEditApplicability 
 		editApplicability,
 	});
 
+	const apiDetails = getApiDetails({ id });
+
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'config',
+		url     : apiDetails.url,
 		method  : 'POST',
-		authkey : 'post_agent_scoring_config',
+		authkey : apiDetails.authkey,
 	}, { manual: true });
 
 	const onCreateScoringConfig = async (values = {}) => {
@@ -46,13 +62,16 @@ const useCreateScoringConfig = ({ data, editApplicability, setEditApplicability 
 					channel,
 					role_ids,
 					display_name,
-					status: 'draft',
+					status : 'draft',
+					id     : id || undefined,
 				},
 			});
 
 			Toast.success('Saved successfully!');
 
-			await push(`/performance-and-incentives/plans?mode=${mode}&id=${res.data.id}`);
+			if (!id) {
+				await push(`/performance-and-incentives/plans?mode=${mode}&id=${res.data.id}`);
+			}
 
 			setEditApplicability(false);
 		} catch (error) {

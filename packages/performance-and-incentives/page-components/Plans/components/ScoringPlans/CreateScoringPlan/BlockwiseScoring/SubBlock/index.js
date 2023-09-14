@@ -5,6 +5,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 
 import FieldArray from '../../../../../../../common/Form/FieldArray';
 
+import AdditionalControlsModal from './AdditionalControlsModal';
 import styles from './styles.module.css';
 import useSubBlockCreation from './useSubBlockCreation';
 
@@ -26,6 +27,7 @@ function SubBlock(props) {
 		prefillValues,
 		watchBlock,
 		removeSubBlock,
+		additionalControlsData,
 	} = props;
 
 	const {
@@ -34,6 +36,12 @@ function SubBlock(props) {
 		parameterUnitOptions = {},
 		checkForSubBlock = () => {},
 		filteredSubBlockOptions = [],
+		additionalControls = {},
+		setAdditionalControls = () => {},
+		param,
+		setParam = () => {},
+		paramScoringType = '',
+		setParamScoringType = () => {},
 	} = useSubBlockCreation({
 		subBlockWiseParameterOptions,
 		subBlockType,
@@ -48,6 +56,7 @@ function SubBlock(props) {
 		prefillValues,
 		watchBlock,
 		subBlockOptions,
+		additionalControlsData,
 	});
 
 	const isEditMode = editSubBlock[blockIndex]?.[subBlockIndex];
@@ -106,8 +115,21 @@ function SubBlock(props) {
 					watch={watch}
 					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 					parameterUnitOptions={parameterUnitOptions}
+					setParam={setParam}
+					setParamScoringType={setParamScoringType}
 				/>
 			</div>
+
+			{param ? (
+				<AdditionalControlsModal
+					additionalControls={additionalControls}
+					setAdditionalControls={setAdditionalControls}
+					paramScoringType={paramScoringType}
+					setParamScoringType={setParamScoringType}
+					param={param}
+					setParam={setParam}
+				/>
+			) : null}
 
 			<Button
 				size="md"

@@ -6,7 +6,7 @@ import useGetScoringConfigs from './useGetScoringConfigs';
 function ListScoringPlans(props) {
 	const { setActiveMode } = props;
 
-	const { list, setParams, paginationData, getNextPage, loading } = useGetScoringConfigs();
+	const { list, setParams, paginationData, getNextPage, loading, refetch } = useGetScoringConfigs();
 
 	return (
 		<>
@@ -14,7 +14,13 @@ function ListScoringPlans(props) {
 
 			<ListFilters setParams={setParams} paginationData={paginationData} />
 
-			<List list={list} paginationData={paginationData} getNextPage={getNextPage} loading={loading} />
+			<List
+				list={list}
+				paginationData={paginationData}
+				getNextPage={getNextPage}
+				loading={loading}
+				refetch={refetch}
+			/>
 		</>
 	);
 }

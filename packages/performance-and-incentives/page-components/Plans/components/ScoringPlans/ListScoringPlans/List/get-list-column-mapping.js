@@ -1,4 +1,4 @@
-import { Pill, Tooltip, Button, Popover } from '@cogoport/components';
+import { Pill, Tooltip, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const getListColumnMapping = (props) => {
-	const { activeActionId, setActiveActionId } = props;
+	const { activeActionId, setActiveActionId, refetch } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -60,23 +60,25 @@ const getListColumnMapping = (props) => {
 			id       : 'roles',
 			key      : 'roles',
 			Header   : <div className={styles.heading}>ROLES</div>,
-			accessor : ({ roles }) => (
-				isEmpty(roles) ? '___' : (
-					<Tooltip content={(
-						<div>
-							{roles.map(
-								(role, index) => (
-									<div key={role.id}>
-										{`${index + INDEX_LENGTH_NORMALIZATION_VALUE}. ${role.name}`}
-									</div>
-								),
-							)}
-						</div>
-					)}
+			accessor : ({ roles_data }) => (
+				isEmpty(roles_data) ? '___' : (
+					<Tooltip
+						content={(
+							<div>
+								{roles_data.map(
+									(role, index) => (
+										<div key={role.id} className={styles.tooltip}>
+											{`${index + INDEX_LENGTH_NORMALIZATION_VALUE}. ${role.name}`}
+										</div>
+									),
+								)}
+							</div>
+						)}
+						maxWidth={400}
 					>
 						<div className={styles.roles}>
-							{roles.map((role, index) => (
-								index === roles.length - INDEX_LENGTH_NORMALIZATION_VALUE
+							{roles_data.map((role, index) => (
+								index === roles_data.length - INDEX_LENGTH_NORMALIZATION_VALUE
 									? role.name
 									: `${role.name}, `))}
 						</div>
@@ -114,14 +116,6 @@ const getListColumnMapping = (props) => {
 			Header   : <div className={styles.heading}>ACTIONS</div>,
 			accessor : ({ id }) => (
 				<div className={styles.actions}>
-					<Button
-						type="button"
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '20px' }}
-					>
-						Controls
-					</Button>
 
 					<div>
 						<Popover
@@ -129,7 +123,11 @@ const getListColumnMapping = (props) => {
 							placement="left"
 							interactive
 							render={(
-								<Actions activeActionId={activeActionId} />
+								<Actions
+									activeActionId={activeActionId}
+									refetch={refetch}
+									setActiveActionId={setActiveActionId}
+								/>
 							)}
 							onClickOutside={() => setActiveActionId(null)}
 						>

@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 
 import blockOptions from '../../../../constants/select-block-options';
 
@@ -16,7 +16,7 @@ const CHILD_EMPTY_VALUES = {
 function BlockwiseScoring(props) {
 	const { data, refetch, getConfigLoading } = props;
 
-	// const { push } = useRouter();
+	const { push } = useRouter();
 
 	const {
 		control,
@@ -29,6 +29,9 @@ function BlockwiseScoring(props) {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
+		formData,
+		setFormData,
+		additionalControlsData,
 	} = useBlockWiseScoring({ data });
 
 	if (getConfigLoading) return <LoadingState />;
@@ -58,6 +61,9 @@ function BlockwiseScoring(props) {
 						editSubBlock={editSubBlock}
 						setEditSubBlock={setEditSubBlock}
 						prefillValues={prefillValues}
+						formData={formData}
+						setFormData={setFormData}
+						additionalControlsData={additionalControlsData}
 					/>
 				))}
 
@@ -80,6 +86,7 @@ function BlockwiseScoring(props) {
 					type="button"
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
+					onClick={() => push('/performance-and-incentives/plans')}
 				>
 					Cancel
 				</Button>

@@ -1,5 +1,5 @@
 import { startCase } from '@cogoport/utils';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import getPrimaryControls from '../../../../../configurations/get-block-primary-controls';
 import usePostAgentScoringAttributes from '../../../../../hooks/usePostAgentScoringConfigAttributes';
@@ -17,7 +17,12 @@ const useSubBlockCreation = (props) => {
 		setEditSubBlock,
 		prefillValues,
 		subBlockOptions,
+		additionalControlsData,
 	} = props;
+
+	const [additionalControls, setAdditionalControls] = useState({});
+	const [paramScoringType, setParamScoringType] = useState('');
+	const [param, setParam] = useState(null);
 
 	const { updateScoringAttributes, loading } = usePostAgentScoringAttributes();
 
@@ -29,9 +34,15 @@ const useSubBlockCreation = (props) => {
 			[value]: [{ label: startCase(unit), value: unit }],
 		}), {}), [subBlockWiseParameterOptions, watchSubBlock]);
 
-	const parameterOptions = useMemo(() => subBlockWiseParameterOptions[watchSubBlock]?.map(
+	const parameterOptions = useMemo(() => subBlockWiseParameterOptions?.[watchSubBlock]?.map(
 		({ label, value }) => ({ label, value }),
 	), [subBlockWiseParameterOptions, watchSubBlock]);
+
+	const paramAdditionalControls = useMemo(() => subBlockWiseParameterOptions?.[watchSubBlock]
+		?.reduce((acc, { value, additional_controls: paramAddControls }) => ({
+			...acc,
+			[value]: paramAddControls,
+		}), {}), [subBlockWiseParameterOptions, watchSubBlock]);
 
 	const controls = getPrimaryControls({ parameterOptions });
 
@@ -60,6 +71,7 @@ const useSubBlockCreation = (props) => {
 				variable_percentage_value  : item.variable_percentage_value || undefined,
 				provisional_trigger        : item.provisional_trigger,
 				realised_trigger           : item.realised_trigger,
+				additional_controls        : additionalControls[item.parameter] || [],
 
 			}));
 
@@ -89,6 +101,20 @@ const useSubBlockCreation = (props) => {
 	const checkForSubBlock = () => prefillValues[blockIndex]
 		?.sub_blocks?.find((item) => item.sub_block_id === watchSubBlock);
 
+	useEffect(() => {
+		setAdditionalControls(paramAdditionalControls);
+	}, [paramAdditionalControls]);
+
+	useEffect(() => {
+		const updatedAdditionalControls = Object.keys(paramAdditionalControls || {}).reduce((result, key) => ({
+			...result,
+			[key]: (key in (additionalControlsData[watchSubBlock] || {}))
+				? additionalControlsData[watchSubBlock][key] : paramAdditionalControls[key],
+		}), {});
+
+		setAdditionalControls(updatedAdditionalControls);
+	}, [additionalControlsData, paramAdditionalControls, watchSubBlock]);
+
 	return {
 		controls,
 		Element,
@@ -97,6 +123,12 @@ const useSubBlockCreation = (props) => {
 		handleClick,
 		checkForSubBlock,
 		filteredSubBlockOptions,
+		additionalControls,
+		setAdditionalControls,
+		param,
+		setParam,
+		paramScoringType,
+		setParamScoringType,
 	};
 };
 

@@ -19,6 +19,7 @@ const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 });
 
 const useBlockWiseScoring = ({ data = {} }) => {
+	const [formData, setFormData] = useState({});
 	const [editSubBlock, setEditSubBlock] = useState({});
 
 	const { control, formState: { errors }, watch, setValue, handleSubmit } = useForm();
@@ -42,8 +43,29 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		return updatedAcc;
 	}, {}) || [])?.map(([key, value]) => ({ block: key, sub_blocks: value })), [data]);
 
+	const additionalControlsData = useMemo(() => {
+		if (!data || !data.config_blocks) {
+			return {};
+		}
+
+		return data.config_blocks.reduce((acc, item) => {
+			const currAcc = { ...acc };
+
+			currAcc[item.agent_scoring_block_id] = item.parameters.reduce((subAcc, subItem) => {
+				const currSubAcc = { ...subAcc };
+
+				currSubAcc[subItem.agent_scoring_parameter_id] = subItem.additional_controls;
+
+				return currSubAcc;
+			}, {});
+
+			return currAcc;
+		}, {});
+	}, [data]);
+
 	useEffect(() => {
 		setValue('blocks', prefillValues);
+		setFormData(prefillValues);
 		setEditSubBlock({});
 	}, [setValue, prefillValues]);
 
@@ -58,6 +80,9 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
+		formData,
+		setFormData,
+		additionalControlsData,
 	};
 };
 

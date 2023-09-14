@@ -30,12 +30,13 @@ const useBlockCreation = ({ control, name, watch, blockIndex }) => {
 		return {
 			...acc,
 			[sub_block_id]: (agent_scoring_parameters || []).map((parameter) => {
-				const { id, display_name, parameter_unit } = parameter || {};
+				const { id, display_name, parameter_unit, additional_controls } = parameter || {};
 
 				return {
 					label : display_name,
 					value : id,
 					unit  : parameter_unit,
+					additional_controls,
 				};
 			}),
 		};

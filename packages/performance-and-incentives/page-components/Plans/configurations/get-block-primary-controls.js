@@ -8,8 +8,8 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		options     : parameterOptions,
 		rules       : { required: 'Required' },
 		style       : {
-			minWidth : '20%',
-			maxWidth : '20%',
+			minWidth : '18%',
+			maxWidth : '18%',
 		},
 	},
 	{
@@ -26,8 +26,8 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 			value : 'percentage',
 		}],
 		style: {
-			minWidth : '15%',
-			maxWidth : '15%',
+			minWidth : '13%',
+			maxWidth : '13%',
 		},
 		rules: { required: 'Required' },
 	},
