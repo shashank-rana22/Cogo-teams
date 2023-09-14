@@ -12,7 +12,10 @@ import styles from './styles.module.css';
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const getListColumnMapping = (props) => {
-	const { activeActionId, setActiveActionId, refetch } = props;
+	const {
+		activeActionId, setActiveActionId, refetch,
+		setShowActivationModal = () => {}, showActivationModal = false,
+	} = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -114,19 +117,21 @@ const getListColumnMapping = (props) => {
 			id       : 'actions',
 			key      : 'actions',
 			Header   : <div className={styles.heading}>ACTIONS</div>,
-			accessor : ({ id }) => (
+			accessor : ({ id, status }) => (
 				<div className={styles.actions}>
 
 					<div>
 						<Popover
-							visible={activeActionId === id}
+							visible={activeActionId === id && !showActivationModal}
 							placement="left"
 							interactive
 							render={(
 								<Actions
 									activeActionId={activeActionId}
 									refetch={refetch}
+									status={status}
 									setActiveActionId={setActiveActionId}
+									setShowActivationModal={setShowActivationModal}
 								/>
 							)}
 							onClickOutside={() => setActiveActionId(null)}

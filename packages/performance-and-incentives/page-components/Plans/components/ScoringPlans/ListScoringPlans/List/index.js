@@ -1,6 +1,7 @@
 import { Table, Pagination } from '@cogoport/components';
 import { useState } from 'react';
 
+import ActivationModal from './ActivationModal';
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
@@ -9,9 +10,17 @@ function List(props) {
 
 	const [activeActionId, setActiveActionId] = useState(null);
 
+	const [showActivationModal, setShowActivationModal] = useState(false);
+
 	const { page, total_count, page_limit } = paginationData || {};
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ activeActionId, setActiveActionId, refetch });
+	const LIST_COLUMN_MAPPING = getListColumnMapping({
+		activeActionId,
+		setActiveActionId,
+		refetch,
+		showActivationModal,
+		setShowActivationModal,
+	});
 
 	return (
 		<>
@@ -33,6 +42,15 @@ function List(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
+
+			{showActivationModal ? (
+				<ActivationModal
+					refetch={refetch}
+					activeActionId={activeActionId}
+					setActiveActionId={setActiveActionId}
+					setShowActivationModal={setShowActivationModal}
+				/>
+			) : null}
 
 		</>
 	);

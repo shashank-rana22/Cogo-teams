@@ -34,6 +34,7 @@ function Filters(props) {
 				interactive
 				placement={placement}
 				visible={open}
+				maxWidth={400}
 				onClickOutside={onClickOutside}
 				render={open ? (
 					<FilterContent

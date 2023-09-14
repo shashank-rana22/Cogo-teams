@@ -1,7 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import SubBlock from '../SubBlock';
 
@@ -36,21 +36,27 @@ function Block(props) {
 		fields,
 		append,
 		remove,
+		checkForBlock,
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		blockParameterLoading,
 		filteredBlockOptions,
-	} = useBlockCreation({ control, name, watch, blockIndex });
+	} = useBlockCreation({ control, name, watch, blockIndex, prefillValues });
+
+	const blockData = checkForBlock();
 
 	return (
 		<div className={styles.container} key={blockParameterLoading}>
 			<div className={styles.header}>
 				<div className={styles.block_number}><p>{blockIndex + OFFSET}</p></div>
 
-				<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(blockIndex)}>
-					<IcMDelete className={styles.icon} />
-					<div className={styles.underline_text}>Delete Block</div>
-				</div>
+				{isEmpty(blockData) ? (
+					<div role="presentation" className={styles.delete_block} onClick={() => removeBlock(blockIndex)}>
+						<IcMDelete className={styles.icon} />
+						<div className={styles.underline_text}>Delete Block</div>
+					</div>
+				) : null}
+
 			</div>
 
 			<div className={styles.inner_container}>

@@ -53,7 +53,7 @@ function ListFilters(props) {
 					{conditionalWrapper({
 						condition : filtersApplied,
 						wrapper   : (children) => (
-							<Badge color="red" size="md" text="">{children}</Badge>
+							<Badge color="red" size="md" text="" style={{ marginLeft: '4px' }}>{children}</Badge>
 						),
 						children: <IcMFilter style={{ marginLeft: '4px' }} />,
 					})}

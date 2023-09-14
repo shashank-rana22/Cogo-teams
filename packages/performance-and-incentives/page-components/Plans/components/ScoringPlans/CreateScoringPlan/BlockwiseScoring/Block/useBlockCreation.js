@@ -7,7 +7,7 @@ import blockOptions from '../../../../../constants/select-block-options';
 
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
-const useBlockCreation = ({ control, name, watch, blockIndex }) => {
+const useBlockCreation = ({ control, name, watch, blockIndex, prefillValues }) => {
 	const CHILD_EMPTY_VALUES = {
 		sub_block_id : '',
 		parameters   : [],
@@ -60,6 +60,8 @@ const useBlockCreation = ({ control, name, watch, blockIndex }) => {
 		return blockOptions.filter((item) => !selectedBlockOptions.includes(item.value));
 	}, [formValues.blocks, blockIndex]);
 
+	const checkForBlock = () => prefillValues[blockIndex]?.find((item) => item.block === watchBlock);
+
 	return {
 		CHILD_EMPTY_VALUES,
 		watchBlock,
@@ -67,6 +69,7 @@ const useBlockCreation = ({ control, name, watch, blockIndex }) => {
 		fields,
 		append,
 		remove,
+		checkForBlock,
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		blockParameterLoading,

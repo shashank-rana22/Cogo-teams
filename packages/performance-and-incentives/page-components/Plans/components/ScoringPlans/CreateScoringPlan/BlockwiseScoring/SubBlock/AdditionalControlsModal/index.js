@@ -114,7 +114,7 @@ function AdditionalControlsModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={handleClose}>Cancel</Button>
+				<Button themeType="secondary" onClick={handleClose} style={{ marginRight: '6px' }}>Cancel</Button>
 				<Button onClick={handleSubmit(handleSave)}>Save</Button>
 			</Modal.Footer>
 		</Modal>
