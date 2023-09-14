@@ -11,8 +11,9 @@ function formatToTimeStamp(dateString = '') {
 	const formatedDate = formatDate({
 		date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 		formatType : 'dateTime',
-		seperator  : 'T',
+		separator  : 'T',
 	});
 	return formatedDate;
 }

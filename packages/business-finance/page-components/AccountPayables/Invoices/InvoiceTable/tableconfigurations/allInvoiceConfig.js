@@ -103,12 +103,6 @@ export const ALL_INVOICE_CONFIG = {
 			func    : 'renderInvoiceDates',
 		},
 		{
-			label : 'Urgency',
-			key   : 'urgencyTag',
-			span  : 1,
-			func  : 'renderUrgencyTag',
-		},
-		{
 			label : 'Action',
 			key   : 'action',
 			span  : 0.6,
