@@ -6,6 +6,7 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useSendInvoiceToFinance from '../../../../../../../hooks/useSendInvoiceToFinance';
 import useUpdateShipmentInvoiceStatus from '../../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 import ClickableDiv from '../../../../../../ClickableDiv';
 import Actions from '../Actions';
@@ -59,6 +60,7 @@ function InvoiceInfo({
 	};
 
 	const { apiTrigger = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
+	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -74,7 +76,7 @@ function InvoiceInfo({
 		});
 	};
 
-	const isProcessing = invoice?.processing || true;
+	const isProcessing = invoice?.processing || false;
 
 	return (
 		<>
@@ -171,7 +173,7 @@ function InvoiceInfo({
 							<Button
 								size="sm"
 								themeType="tertiary"
-								onClick={() => apiTrigger({
+								onClick={() => sendInvoiceToFinance({
 									payload: {
 										id: invoice?.id,
 									},
