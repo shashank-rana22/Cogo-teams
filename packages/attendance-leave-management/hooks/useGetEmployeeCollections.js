@@ -17,7 +17,6 @@ const useGetEmployeeCollections = ({ isManager, request_type, isOpen, searchQuer
 		() => {
 			trigger({
 				params: {
-					performed_by_id    : '8696aa63-bfc4-4932-a711-8c0e0ab21498',
 					view_requests_type : isManager ? 'view_employee_requests' : 'view_my_requests',
 					required_listing   : request_type,
 					...filters,
