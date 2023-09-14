@@ -32,7 +32,8 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			size   : 'sm',
 			styles : { flexBasis: '30%' },
 			rules  : {
-				pattern: {
+				required : `${countryValidation?.others?.registration_number?.label || 'GST'} is required`,
+				pattern  : {
 					value   : countryValidation?.others?.registration_number?.pattern,
 					message : 'Tax Number is Invalid',
 				},
@@ -50,14 +51,11 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			},
 		},
 		{
-			name   : 'is_sez',
-			label  : 'Is your Address SEZ ?',
-			type   : 'chips',
-			styles : { flexBasis: '25%' },
-			rules  : {
-				required: 'Required',
-			},
-			options: [
+			name    : 'is_sez',
+			label   : 'Is your Address SEZ ?',
+			type    : 'chips',
+			styles  : { flexBasis: '25%' },
+			options : [
 				{
 					label : 'Yes',
 					value : 'yes',
@@ -67,12 +65,18 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 					value : 'no',
 				},
 			],
+			rules: {
+				required: 'Required',
+			},
 		},
 		{
 			name   : 'tax_number_document_url',
 			label  : 'Proof',
 			type   : 'upload',
 			styles : { flexBasis: '100%' },
+			rules  : {
+				required: 'Document is Required',
+			},
 		},
 		{
 			name        : 'name',
@@ -81,6 +85,9 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			type        : 'creatableSelect',
 			placeholder : 'Enter your POC name',
 			styles      : { flexBasis: '30%' },
+			rules       : {
+				required: 'POC Name is required',
+			},
 		},
 		{
 			name  : 'mobile_number',
@@ -88,7 +95,8 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			size  : 'sm',
 			type  : 'mobileNumber',
 			rules : {
-				pattern: {
+				required : 'Mobile Number is required',
+				pattern  : {
 					value   : countryValidation?.regex?.MOBILE_NUMBER,
 					message : 'Mobile Number is Invalid',
 				},

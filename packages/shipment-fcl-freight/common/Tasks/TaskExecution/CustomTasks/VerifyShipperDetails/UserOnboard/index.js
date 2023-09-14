@@ -43,72 +43,68 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 
 	return (
 		<div className={styles.details_form}>
-			<div className={styles.row}>
-				<div className={styles.form_item_container}>
-					<label className={styles.form_label}>Company Name</label>
+			<div className={styles.form_item_container}>
+				<label className={styles.form_label}>Company Name</label>
 
-					<CreatableSelectController
-						size="sm"
-						control={control}
-						name="company_name"
-						placeholder="Enter Company Name"
-						value={business_name}
-						rules={{ required: 'Company Name is required' }}
-					/>
+				<CreatableSelectController
+					size="sm"
+					control={control}
+					name="company_name"
+					placeholder="Enter Company Name"
+					value={business_name}
+					rules={{ required: 'Company Name is required' }}
+				/>
 
-					{Error('company_name', errors)}
-				</div>
+				{Error('company_name', errors)}
+			</div>
 
-				<div className={styles.form_item_container}>
-					<label className={styles.form_label}>Country of Registration</label>
+			<div className={styles.form_item_container}>
+				<label className={styles.form_label}>Country of Registration</label>
 
-					<CountrySelectController
-						name="country_id"
-						control={control}
-						size="sm"
-						placeholder="Enter or Select Country"
-						optionValueKey="id"
-						value={country_id}
-						rules={{ required: 'Country of Registration is required' }}
-					/>
-					{Error('country_id', errors)}
-				</div>
+				<CountrySelectController
+					name="country_id"
+					control={control}
+					size="sm"
+					placeholder="Enter or Select Country"
+					optionValueKey="id"
+					value={country_id}
+					rules={{ required: 'Country of Registration is required' }}
+				/>
+				{Error('country_id', errors)}
+			</div>
 
-				<div className={styles.form_item_container}>
-					<label className={styles.form_label}>
-						{countryValidation?.others?.pan_number?.label || 'PAN'}
-					</label>
+			<div className={styles.form_item_container}>
+				<label className={styles.form_label}>
+					{countryValidation?.others?.pan_number?.label || 'PAN'}
+				</label>
 
-					<InputController
-						size="sm"
-						name="registration_number"
-						control={control}
-						placeholder={`Enter ${countryValidation?.others?.pan_number?.label || 'PAN'}`}
-						value={registration_number}
-						rules={{
-							required : { value: !formValues?.pan_number, message: 'PAN number is required' },
-							pattern  : {
-								value   : countryValidation?.others?.pan_number?.pattern,
-								message : `${countryValidation?.others?.pan_number?.label}
+				<InputController
+					size="sm"
+					name="registration_number"
+					control={control}
+					placeholder={`Enter ${countryValidation?.others?.pan_number?.label || 'PAN'}`}
+					value={registration_number}
+					rules={{
+						required : { value: !formValues?.pan_number, message: 'PAN number is required' },
+						pattern  : {
+							value   : countryValidation?.others?.pan_number?.pattern,
+							message : `${countryValidation?.others?.pan_number?.label}
 								Number is invalid`,
-							},
-						}}
-					/>
-					{Error('registration_number', errors)}
-				</div>
+						},
+					}}
+				/>
+				{Error('registration_number', errors)}
 			</div>
 
-			<div className={styles.button_container}>
-				<Button
-					themeType="accent"
-					onClick={handleSubmit(updateLeadOrganization)}
-					disabled={isEqual(formValues, defaultValues) || updateLoading}
-					loading={updateLoading}
-				>
-					Update
-				</Button>
-			</div>
-
+			<Button
+				themeType="accent"
+				onClick={handleSubmit(updateLeadOrganization)}
+				disabled={isEqual(formValues, defaultValues) || updateLoading}
+				loading={updateLoading}
+				className={styles.update_button}
+			>
+				Update
+			</Button>
 		</div>
 	);
 }

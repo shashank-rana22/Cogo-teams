@@ -9,6 +9,7 @@
 
 .form_item_container {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	margin: 0 16px 8px 0;
 

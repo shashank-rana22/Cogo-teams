@@ -49,7 +49,7 @@ function useCreateLeadUser({
 	};
 
 	return {
-		createLoading: loading,
+		createUserLoading: loading,
 		onCreateLeadUser,
 	};
 }

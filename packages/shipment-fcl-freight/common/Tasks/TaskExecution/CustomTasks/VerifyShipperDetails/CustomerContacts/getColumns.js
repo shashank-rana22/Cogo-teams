@@ -11,7 +11,7 @@ function getColumns({
 	control = {},
 	handleSubmit = () => {},
 	onUpdateLeadUser = () => {},
-	createLeadOrgAccount = () => {},
+	createLeadOrgAccount = () => { },
 }) {
 	const columns = [
 		{
@@ -72,34 +72,37 @@ function getColumns({
 						? (
 							<>
 								<Button
-									themeType="secondary"
-									onClick={handleSubmit(onUpdateLeadUser)}
-								>
-									Save
-								</Button>
-
-								<Button
 									themeType="tertiary"
 									onClick={() => setSelectedUserId('')}
 								>
 									Cancel
 								</Button>
+
+								<Button
+									themeType="secondary"
+									onClick={handleSubmit(onUpdateLeadUser)}
+								>
+									Save
+								</Button>
 							</>
 						) : (
 							<>
 								<Button
-									themeType="tertiary"
+									themeType="secondary"
+									disabled={buttonLoading}
 									onClick={() => { setSelectedUserId(item?.id); }}
 								>
-									<IcMEdit />
+									<IcMEdit className={styles.icon} />
+									Edit
 								</Button>
 
 								{!selectedUserId ? (
 									<Button
 										loading={buttonLoading}
+										disabled={buttonLoading}
 										onClick={() => createLeadOrgAccount({ selectedPocId: item?.id })}
 									>
-										Verify
+										Choose and Verify
 									</Button>
 								) : null}
 							</>

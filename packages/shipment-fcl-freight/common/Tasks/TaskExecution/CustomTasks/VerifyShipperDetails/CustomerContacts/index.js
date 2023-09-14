@@ -28,7 +28,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 
 	const {
 		createLeadOrgAccount = () => {},
-		createOrgLoading = false,
+		createLoading = false,
 	} = useCreateLeadOrganizationToAccount({ leadsData, setStep, setConsigneeShipperId, task });
 
 	const {
@@ -45,7 +45,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 		setSelectedUserId,
 		selectedUserId,
 		control,
-		buttonLoading: loading || createUserLoading || createOrgLoading || updateLoading,
+		buttonLoading: loading || createUserLoading || createLoading || updateLoading,
 		handleSubmit,
 		onUpdateLeadUser,
 		createLeadOrgAccount,
@@ -56,7 +56,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 			<UserOnboard leadsData={leadsData} defaultValues={defaultValues} refetchList={refetchList} />
 
 			<div className={styles.main_container}>
-				<h4>Customer contacts</h4>
+				<h4>Customer Contacts</h4>
 				<Table
 					data={leadsData?.users || []}
 					className={styles.table}
@@ -75,7 +75,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 
 				<div className={styles.button_container}>
 					<Button
-						disabled={showCreatePoc || createUserLoading || createOrgLoading}
+						disabled={showCreatePoc || createUserLoading || createLoading}
 						onClick={() => { setShowCreatePoc(true); }}
 						themeType="accent"
 					>
@@ -85,7 +85,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 
 					<Button
 						themeType="secondary"
-						disabled={loading || createUserLoading || createOrgLoading || updateLoading}
+						disabled={loading || createUserLoading || createLoading || updateLoading}
 						onClick={onCancel}
 					>
 						Cancel

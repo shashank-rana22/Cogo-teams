@@ -15,6 +15,7 @@
 .table {
 	:global {
 		.ui_table_body_cell {
+			width: 20%;
 			padding: 12px 8px;
 			overflow: visible;
 		}
@@ -28,11 +29,20 @@
 .action_container {
 	display: flex;
 	align-self: center;
-	justify-content: flex-end;
+
+	:global {
+		:first-child.ui_button_container {
+			margin-right: 12px;
+		}
+	}
 }
 
 .button_container {
 	display: flex;
 	align-self: center;
 	justify-content: space-between;
+}
+
+.icon {
+	margin-right: 4px;
 }
