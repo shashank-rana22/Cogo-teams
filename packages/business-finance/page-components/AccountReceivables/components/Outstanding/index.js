@@ -12,7 +12,7 @@ function Outstanding({ entityCode = '' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.select}>
-				<ScopeSelect />
+				<ScopeSelect size="md" />
 			</div>
 			<Tabs activeTab={activeTab} onChange={setActiveTab} themeType="primary">
 				<TabPanel
