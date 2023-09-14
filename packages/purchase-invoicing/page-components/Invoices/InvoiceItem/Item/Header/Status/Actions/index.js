@@ -2,8 +2,7 @@ import { cl, Button } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useUpdateCrossEntityStatus from '../../../../../../../hooks/useUpdateCrossEntityStatus';
-
+import ApproveInvoice from './ApproveInvoice';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
 
@@ -14,7 +13,6 @@ function Actions({
 	refetch = () => {},
 	shipment_data = {},
 }) {
-	const { loading, updateStatus } = useUpdateCrossEntityStatus();
 	const [showModal, setShowModal] = useState('');
 
 	const onModalClose = () => setShowModal('');
@@ -23,14 +21,15 @@ function Actions({
 		<div className={styles.container}>
 			<div className={styles.actions_wrap}>
 				<div className={styles.statuses}>
-					<Button
-						size="sm"
-						onClick={() => updateStatus({ invoice_id: invoice?.id, status: 'approved', refetch })}
-						disabled={invoice?.status !== 'pending'}
-						loading={loading}
-					>
-						Mark as approved
-					</Button>
+					{invoice?.status === 'pending' ? (
+						<Button
+							size="sm"
+							onClick={() => setShowModal('approve_invoice')}
+						>
+							Mark as approved
+						</Button>
+					) : null}
+
 				</div>
 			</div>
 
@@ -52,6 +51,15 @@ function Actions({
 					shipment_data={shipment_data}
 				/>
 			) : null}
+
+			{showModal === 'approve_invoice' && (
+				<ApproveInvoice
+					show={showModal === 'approve_invoice'}
+					onClose={onModalClose}
+					invoice={invoice}
+					refetch={refetch}
+				/>
+			)}
 
 		</div>
 	);
