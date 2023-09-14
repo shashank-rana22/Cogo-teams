@@ -18,7 +18,7 @@ const getPayload = ({
 	RequestType    : request_type || undefined,
 	Description    : additional_information || undefined,
 	NotifyCustomer : notify_customer || undefined,
-	SerialID       : serial_id,
+	SerialID       : serial_id || undefined,
 	Subcategory    : sub_category || undefined,
 	...additionalData,
 });

@@ -1,10 +1,10 @@
-export const STATUS_OPTIONS1 = [
-	{ label: 'Partially Utilized', value: 'partially_utilized' },
-	{ label: 'Unutilized', value: 'unutilized' },
+export const statusOptionsPayment = ({ t = () => {} }) => [
+	{ label: t('settlement:partially_utilized_label'), value: 'partially_utilized' },
+	{ label: t('settlement:unutilized_label'), value: 'unutilized' },
 
 ];
-export const STATUS_OPTIONS2 = [
-	{ label: 'Partial Paid', value: 'partial_paid' },
-	{ label: 'Unpaid', value: 'unpaid' },
+export const statusOptionsInvoice = ({ t = () => {} }) => [
+	{ label: t('settlement:partially_paid_label'), value: 'partial_paid' },
+	{ label: t('settlement:unpaid_label'), value: 'unpaid' },
 
 ];

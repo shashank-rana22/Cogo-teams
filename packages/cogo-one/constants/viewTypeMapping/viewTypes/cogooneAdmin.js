@@ -9,7 +9,7 @@ const COGOONE_ADMIN = {
 	teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	session_type_query     : getSupplySessionQuery,
 	contacts_base_query    : () => [where('user_details.account_type', '==', 'service_provider')],
-	chat_sub_tabs_access   : ['all', 'groups', 'contacts'],
+	chat_sub_tabs_access   : ['all', 'groups', 'contacts', 'hidden_filter'],
 	accesible_filters      : {
 		all      : ['15_min_filter', 'assigned_to', 'assigned_agent', 'chat_tags'],
 		contacts : ['chat_tags'],
@@ -23,7 +23,7 @@ const COGOONE_ADMIN = {
 	show_relevant_templates       : ['quick_reply', 'supply', 'shipment_specialist'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
-	configurations_to_be_shown    : ['lock_configuration', 'list_agents', 'switch_views'],
+	configurations_to_be_shown    : ['fire_base_configuration', 'list_agents', 'switch_views'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 	permissions                   : {
 		auto_assign                 : true,
