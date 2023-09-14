@@ -1,13 +1,31 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import {
+	AsyncSelectController,
+	ChipsController,
+	CreatableSelectController,
+	InputController,
+	MobileNumberController,
+	TextAreaController,
+	UploadController,
+	useForm,
+} from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import getFieldController from '@cogoport/ocean-modules/utils/getFieldController';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
 import getControls from './getControls';
 import styles from './styles.module.css';
+
+const INPUT_MAPPING = {
+	text            : InputController,
+	asyncSelect     : AsyncSelectController,
+	chips           : ChipsController,
+	upload          : UploadController,
+	creatableSelect : CreatableSelectController,
+	textarea        : TextAreaController,
+	mobileNumber    : MobileNumberController,
+};
 
 function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
@@ -38,7 +56,7 @@ function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = ''
 				{controls?.map((formControl) => {
 					const { type = '', name = '', styles: style = {}, label = '' } = formControl;
 
-					const Element = getFieldController(type);
+					const Element = INPUT_MAPPING(type);
 
 					return (
 						<div
