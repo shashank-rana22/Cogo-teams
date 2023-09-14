@@ -1,10 +1,8 @@
 import { Badge, Popover } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMRefresh, IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { FilterControls } from '../../../../configurations/user-email-filters';
 import useGetAllMailsForUser from '../../../../hooks/useGetAllMailsForUser';
 
 import ApplicableFilters from './ApplicableFilters';
@@ -44,33 +42,7 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 		setActiveMail({ val: item, tab: 'firebase_emails', expandSideBar: false });
 	};
 
-	const {
-		control,
-		watch,
-		handleSubmit,
-		reset = () => {},
-	} = useForm();
-
-	const formValue = watch();
-
-	const isEmptyFilters = Object.keys(formValue || {}).every((key) => isEmpty(formValue[key]));
 	const isAppliedFilters = Object.keys(appliedFilters || {}).every((key) => isEmpty(appliedFilters[key]));
-
-	const handleClearAll = () => {
-		const nullFormValues = FilterControls.reduce(
-			(prev, currentItem) => (
-				{ ...prev, [currentItem?.name]: '' }
-			),
-			{},
-		);
-
-		reset(nullFormValues);
-	};
-
-	const handleApply = (val) => {
-		setAppliedFilters(val);
-		setShowPopover(false);
-	};
 
 	return (
 		<div className={styles.main_container}>
@@ -87,12 +59,8 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 						render={(showPopover && (
 							<ApplicableFilters
 								setShowPopover={setShowPopover}
-								FilterControls={FilterControls}
-								control={control}
-								isEmptyFilters={isEmptyFilters}
-								handleClearAll={handleClearAll}
-								handleSubmit={handleSubmit}
-								handleApply={handleApply}
+								setAppliedFilters={setAppliedFilters}
+								appliedFilters={appliedFilters}
 							/>
 						)
 						)}

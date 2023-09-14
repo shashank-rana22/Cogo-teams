@@ -1,5 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../common/EmptyState';
 import LoadingState from '../../../Customers/LoadingState';
 
 import MailsCardData from './MailsCardData';
@@ -10,26 +11,27 @@ function MailsList({
 	mailListLoading = false,
 	setSelectedMail = () => {},
 }) {
+	if (isEmpty(mailsListData) && !mailListLoading) {
+		return (
+			<EmptyState type="help_desk" />
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-			{(isEmpty(mailsListData) && !mailListLoading)
-				? (
-					<div className={styles.empty_div}>No Emails Yet..</div>
-				) :	(
-					<div
-						onScroll={handleScroll}
-						className={styles.list_container}
-					>
-						{(mailsListData || []).map((item) => (
-							<MailsCardData
-								key={item?.id}
-								item={item}
-								setSelectedMail={setSelectedMail}
-							/>
-						))}
-						{mailListLoading ? <LoadingState /> : null}
-					</div>
-				)}
+			<div
+				onScroll={handleScroll}
+				className={styles.list_container}
+			>
+				{(mailsListData || []).map((item) => (
+					<MailsCardData
+						key={item?.id}
+						item={item}
+						setSelectedMail={setSelectedMail}
+					/>
+				))}
+				{mailListLoading ? <LoadingState /> : null}
+			</div>
 		</div>
 	);
 }

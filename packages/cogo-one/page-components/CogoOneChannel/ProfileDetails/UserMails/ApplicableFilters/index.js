@@ -1,17 +1,44 @@
 import { cl, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../utils/getFieldController';
+import FormLayout from '../../../../../common/FormLayout';
+import { FILTER_CONTROLS } from '../../../../../configurations/user-email-filters';
 
 import styles from './styles.module.css';
 
 function ApplicableFilters({
 	setShowPopover = () => {},
-	FilterControls = [], control = {},
-	isEmptyFilters = false,
-	handleSubmit = () => {},
-	handleApply = () => {},
-	handleClearAll = () => {},
+	setAppliedFilters = () => {},
+	appliedFilters = {},
 }) {
+	const {
+		control,
+		watch,
+		handleSubmit,
+		reset = () => {},
+	} = useForm({ defaultValues: appliedFilters });
+
+	const formValue = watch();
+
+	const isEmptyFilters = Object.keys(formValue || {}).every((key) => isEmpty(formValue[key]));
+
+	const handleClearAll = () => {
+		const nullFormValues = FILTER_CONTROLS.reduce(
+			(prev, currentItem) => (
+				{ ...prev, [currentItem?.name]: '' }
+			),
+			{},
+		);
+
+		reset(nullFormValues);
+	};
+
+	const handleApply = (val) => {
+		setAppliedFilters(val);
+		setShowPopover(false);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -29,31 +56,12 @@ function ApplicableFilters({
 						</div>
 					) : null}
 			</div>
-			<div className={styles.body}>
-				{FilterControls.map(
-					(itm) => {
-						const { name, label, controllerType } = itm;
 
-						const Element = getFieldController(controllerType);
+			<FormLayout
+				control={control}
+				controls={FILTER_CONTROLS}
+			/>
 
-						if (!Element) {
-							return null;
-						}
-
-						return (
-							<div key={name}>
-								<h4 className={styles.field_label}>
-									{label}
-								</h4>
-								<Element
-									control={control}
-									{...itm}
-								/>
-							</div>
-						);
-					},
-				)}
-			</div>
 			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.footer}`}>
 				<Button
 					size="md"

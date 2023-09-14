@@ -11,10 +11,3 @@
 .list_container::-webkit-scrollbar {
 	display: none;
 }
-
-.empty_div {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 80vh;
-}
