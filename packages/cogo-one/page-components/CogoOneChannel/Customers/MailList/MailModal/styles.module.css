@@ -36,3 +36,54 @@
 .template_view {
 	width: 55%;
 }
+
+.expand_icon {
+	position: absolute;
+	top: 5px;
+	left: 4px;
+	cursor: pointer;
+
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.minimize_container {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 66px;
+	height: 20px;
+	padding: auto;
+	color: var(--color-secondary-greyscale-3);
+	cursor: pointer;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+
+	&:hover {
+		font-weight: 500;
+		color: #fff;
+		background-color: var(--color-tertiary-blue-2);
+	}
+}
+
+.minimized_modal_styles {
+	position: fixed;
+	right: calc(50% - 170px);
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 340px;
+	height: 40px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}

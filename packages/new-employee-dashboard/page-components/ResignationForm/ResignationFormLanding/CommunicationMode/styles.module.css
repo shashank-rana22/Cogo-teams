@@ -22,7 +22,6 @@
 	flex-wrap: wrap;
 	align-items: center;
 	height: 120px;
-	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }
 

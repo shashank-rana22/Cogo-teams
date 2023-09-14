@@ -80,8 +80,10 @@ const navigationMapping = ({ t = () => {} }) => {
 			type          : 'link',
 			icon          : IcMDashboard,
 			main_apis     : [],
-			possible_apis : apis.employee_portal,
-			module_type   : 'dashboards',
+			possible_apis : [
+				...apis.welcome,
+			],
+			module_type: 'dashboards',
 		},
 		employee_portal: {
 			key           : 'employee_portal',
@@ -2621,19 +2623,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/supply-allocation',
 					type          : 'link',
 					possible_apis : apis.supply_allocation,
-
-					main_apis: [],
+					main_apis     : [],
 				},
 				{
-					key   : 'forecast-demand_forecast',
-					title : t('common:demand_forecast'),
-
+					key           : 'forecast-demand_forecast',
+					title         : t('common:demand_forecast'),
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',
 					possible_apis : apis.demand_forecast,
-
-					main_apis: [],
+					main_apis     : ['get_rolling_forecast_fcl_freight_clusters', 'get_rolling_forecast_port_pairs'],
 				},
 			],
 		},
@@ -2645,7 +2644,10 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/attendance-leave-management',
 			type          : 'link',
 			module_type   : 'dashboards',
-			possible_apis : apis.attendance_leave_management,
+			possible_apis : [
+				...apis.attendance_leave_management,
+				...apis.separation,
+			],
 		},
 	};
 

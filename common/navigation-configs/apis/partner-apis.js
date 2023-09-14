@@ -14032,6 +14032,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 };
 

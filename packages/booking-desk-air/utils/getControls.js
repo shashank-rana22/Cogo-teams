@@ -4,24 +4,29 @@ import airFreightControls from '../constants/air-freight-filter-controls';
 import airFreightLocalControls from '../constants/air-freight-local-controls';
 import filterCommonControls from '../constants/filter-common-controls';
 
-const getFilterControls = ({ serviceActiveTab }) => {
+const getFilterControls = ({ serviceActiveTab = 'air_freight', t = () => {} }) => {
 	let controls = [];
+	const filterCommonControl = filterCommonControls(t);
+	const airFreightControl = airFreightControls(t);
+	const airCustomControl = airCustomControls(t);
+	const airFreightLocalControl = airFreightLocalControls(t);
+	const domesticAirFreightControl = domesticAirFreightControls(t);
 
 	switch (serviceActiveTab) {
 		case 'air_freight':
-			controls = [...filterCommonControls, ...airFreightControls];
+			controls = [...filterCommonControl, ...airFreightControl];
 			break;
 		case 'air_customs':
-			controls = [...filterCommonControls, ...airCustomControls];
+			controls = [...filterCommonControl, ...airCustomControl];
 			break;
 		case 'air_freight_local':
-			controls = [...filterCommonControls, ...airFreightLocalControls];
+			controls = [...filterCommonControl, ...airFreightLocalControl];
 			break;
 		case 'domestic_air_freight':
-			controls = [...filterCommonControls, ...domesticAirFreightControls];
+			controls = [...filterCommonControl, ...domesticAirFreightControl];
 			break;
 		default:
-			controls = [...filterCommonControls];
+			controls = [...filterCommonControl];
 	}
 	return controls;
 };

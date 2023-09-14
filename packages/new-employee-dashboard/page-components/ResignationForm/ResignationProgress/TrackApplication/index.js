@@ -1,6 +1,7 @@
+/* eslint-disable max-len */
 import { Button, Stepper } from '@cogoport/components';
 import { IcMError, IcMArrowRight, IcMCross, IcMArrowDown, IcMEmail, IcMProfile, IcMClock } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ExitInterview from '../ExitInterview';
 
@@ -10,16 +11,39 @@ function TrackApplication({ data = {} }) {
 	const [show, setShow] = useState(true);
 	const [warningShow, warningSetShow] = useState(true);
 	const PERSON_NAME = 'Shivam Singh';
-	const [activeKey, setActiveKey] = useState('AdminClearance');
+	const [activeKey, setActiveKey] = useState('hr_meet');
 	const items = [
-		{ title: 'HR Meet', key: 'HRMeet' },
-		{ title: 'RM Clearance', key: 'RMClearance' },
-		{ title: 'Finance Clearance', key: 'FinanceClearance' },
-		{ title: 'HOTO Clearance', key: 'HOTOClearance' },
-		{ title: 'Admin Clearance', key: 'AdminClearance' },
-		{ title: 'Tech Clearance', key: 'TechClearance' },
-		{ title: 'Exit Interview', key: 'ExitInterview' },
+		{ title: 'HR Meet', key: 'hr_meet' },
+		{ title: 'RM Clearance', key: 'manager_clearance' },
+		{ title: 'Finance Clearance', key: 'finance_clearance' },
+		{ title: 'HOTO Clearance', key: 'hoto_clearance' },
+		{ title: 'Admin Clearance', key: 'admin_clearance' },
+		{ title: 'Tech Clearance', key: 'tech_clearance' },
+		{ title: 'Exit Interview', key: 'exit_interview' },
 	];
+	const applicationStatusStepper = (dataset) => {
+		items.forEach((element) => {
+			if ((dataset?.process_status && dataset?.process_status[element.key]?.status) !== 'completed') {
+				setActiveKey(element.key);
+				console.log('key set to ', element.key);
+			}
+		});
+		// });
+		// if (dataset?.process_status) {
+		// 	const arr = Object.values(dataset?.process_status);
+		// 	console.log('obj arr :: ', arr);
+		// 	console.log('key set to find :: ', Object.entries(dataset?.process_status).find((element) => element[1].status !== 'completed'));
+		// }
+	};
+
+	useEffect(() => {
+		applicationStatusStepper(data);
+	});
+
+	// function for later requirements....
+	// const onClickSetActive = (e) => {
+	// 	setActiveKey(e);
+	// };
 
 	return (
 		<div className={styles.main_container}>
@@ -68,7 +92,7 @@ function TrackApplication({ data = {} }) {
 				<div className={styles.stepper_container}>
 					<Stepper
 						active={activeKey}
-						setActive={setActiveKey}
+						// setActive={(e) => onClickSetActive(e)}
 						items={items}
 						style={{ background: '#f9f9f9' }}
 					/>

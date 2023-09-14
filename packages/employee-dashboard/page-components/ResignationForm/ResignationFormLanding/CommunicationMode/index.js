@@ -1,14 +1,12 @@
-import { useForm, InputController } from '@cogoport/forms';
+import { InputController } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function CommunicationMode() {
+function CommunicationMode({ control = {}, errors = {} }) {
 	const [show, setShow] = useState(true);
-
-	const { control } = useForm();
 
 	const controlItem = {
 		name        : 'Personal_Email',
@@ -36,6 +34,7 @@ function CommunicationMode() {
 				/>
 			</div>
 			<div className={show ? styles.item_container : styles.item_container_closed}>
+
 				<div className={styles.detail}>
 					<div className={styles.label}>
 						{startCase(controlItem.label)}
@@ -43,6 +42,11 @@ function CommunicationMode() {
 
 					<div className={styles.employee_detail}>
 						<InputController control={control} placeholder={controlItem.placeholder} {...controlItem} />
+						{errors[controlItem.name] && (
+							<div className={styles.error_msg}>
+								*This is Required
+							</div>
+						)}
 					</div>
 
 				</div>
@@ -52,7 +56,16 @@ function CommunicationMode() {
 					</div>
 
 					<div className={styles.employee_detail}>
-						<InputController control={control} placeholder={controlItem2.placeholder} {...controlItem2} />
+						<InputController
+							control={control}
+							placeholder={controlItem2.placeholder}
+							{...controlItem2}
+						/>
+						{errors[controlItem2.name] && (
+							<div className={styles.error_msg}>
+								*This is Required
+							</div>
+						)}
 					</div>
 				</div>
 				<div className={styles.alert_text}>

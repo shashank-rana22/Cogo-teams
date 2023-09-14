@@ -44,13 +44,19 @@
 }
 
 .date_picker {
+	width: 100%;
 	margin-right: 2px;
 	background: #fff;
 	border: none !important;
 
 	:global {
 		.react-datepicker__input-container > input {
+			width: 100%;
 			border: 0;
+		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
 		}
 	}
 }

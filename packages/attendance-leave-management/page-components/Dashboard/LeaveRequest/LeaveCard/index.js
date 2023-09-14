@@ -79,31 +79,24 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 						<div>
 							{loading ? <Loader /> : (
 								<div className={styles.parent_div}>
-									{(list || []).map(
-										(val) => (
-											request_label === 'OFFBOARDING REQUESTS'
-												? (
-													<OffboardingSubCard
-														val={val}
-														updateLoading={updateLoading}
-														isManager={isManager}
-														handleLeaveUpdate={handleLeaveUpdate}
-														key={`${val.id}${val.employee_code}`}
-													/>
-												)
-
-												:												(
-													<LeaveSubCard
-														val={val}
-														updateLoading={updateLoading}
-														isManager={isManager}
-														handleLeaveUpdate={handleLeaveUpdate}
-														key={`${val.id}${val.employee_code}`}
-													/>
-												)
-
-										),
-									)}
+									{(list || []).map((val) => (
+										request_label === 'OFFBOARDING REQUESTS' ? (
+											<OffboardingSubCard
+												val={val}
+												updateLoading={updateLoading}
+												isManager={isManager}
+												handleLeaveUpdate={handleLeaveUpdate}
+												key={`${val.id}${val.employee_code}`}
+											/>
+										) : (
+											<LeaveSubCard
+												val={val}
+												updateLoading={updateLoading}
+												isManager={isManager}
+												handleLeaveUpdate={handleLeaveUpdate}
+												key={`${val.id}${val.employee_code}`}
+											/>
+										)))}
 								</div>
 							)}
 						</div>

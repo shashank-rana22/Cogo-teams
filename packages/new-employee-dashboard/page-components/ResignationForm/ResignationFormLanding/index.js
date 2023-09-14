@@ -8,23 +8,57 @@ import ResignEmployeeDetails from '../ResignEmployeeDetails';
 import CommunicationMode from './CommunicationMode';
 import DatePicker from './DatePicker';
 import styles from './styles.module.css';
+import useGetEmployeeDetails from './useGetEmployeeDetails';
+import usePostEmployeeDetails from './usePostEmployeeDetails';
+import useUpdateOffBoarding from './useUpdateOffBoarding';
 
-function ResignationFormLanding() {
-	const RESIGN_SUBMITTED = true;
+const TERMS_AND_CONDITIONS = `By clicking on Initiate Separation, you agree to serve your 
+							  notice period per your employment contract. Per your employment contract, 
+                              your LWD is 'dd/mm/yyyy'`;
+
+function ResignationFormLanding({ refetch = () => {} }) {
+	const CANCEL_REQUEST = 'cancellation_requested';
+
+	const { data:dataItems = {}, loading, refetchApplicationDetails } = useGetEmployeeDetails({ refetch });
+
 	const [showModal, setShowModal] = useState(false);
+
+	const { application_exist } = dataItems || {};
+	const { application_status } = dataItems || {};
+
 	const {
 		control,
 		formState:{ errors = {} },
-		watch,
 		handleSubmit,
+		watch,
+		setValue,
 	} = useForm();
-	const v = watch();
-	console.log(v, 'valueChanged');
 
-	const onSubmit = (Values) => {
-		console.log(Values);
+	const { postApplicationDetails } = usePostEmployeeDetails({ refetch: refetchApplicationDetails });
+	const { requestCancellation } = useUpdateOffBoarding({ refetch: refetchApplicationDetails });
+
+	const onSubmit = (values = {}) => {
+		const payload = {
+			reason               : values?.reason_of_leaving,
+			mobile_number        : values?.mobile_number.number,
+			mobile_country_code  : values?.mobile_number.country_code,
+			email                : values?.personal_email,
+			last_working_day     : values?.date,
+			terms_and_conditions : TERMS_AND_CONDITIONS,
+		};
+		postApplicationDetails({ payload });
+	};
+	const cancelRequest = () => {
+		const payload = {
+			application_id : dataItems?.application_id,
+			status         : CANCEL_REQUEST,
+		};
+		requestCancellation({ payload });
+	};
+	const handleSeparation = () => {
 		setShowModal(true);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -32,14 +66,19 @@ function ResignationFormLanding() {
 					<div className={styles.title}>SEPARATION FORM</div>
 					<div className={styles.sub_heading}>Please fill the information carefully</div>
 				</div>
-				{RESIGN_SUBMITTED && (
-					<Button size="md" themeType="secondary">
+				{application_exist && (
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={cancelRequest}
+						disabled={application_status === 'cancellation_requested'}
+					>
 						Request Cancellation
 					</Button>
 				)}
 
 			</div>
-			{RESIGN_SUBMITTED && (
+			{application_exist && (
 				<div className={styles.pop_up_container}>
 					<IcMFtick height={18} width={18} color="#849E4C" />
 					<span className={styles.pop_up_content}>
@@ -48,42 +87,57 @@ function ResignationFormLanding() {
 					</span>
 				</div>
 			)}
-			<ResignEmployeeDetails control={control} errors={errors} />
-			<CommunicationMode control={control} errors={errors} />
-			<DatePicker control={control} errors={errors} />
-			<div className={styles.check_box_notice}>
-				<CheckboxController
-					control={control}
-					name="check_separation"
-					errors={errors}
-					rules={{ required: true }}
-					className={styles.check_box_notice_icon}
-				/>
-				{errors.check_separation && (
-					<div className={styles.error_msg}>
-						*This is Required
+			<ResignEmployeeDetails
+				control={control}
+				errors={errors}
+				dataItems={dataItems}
+				loading={loading}
+			/>
+			<CommunicationMode
+				control={control}
+				errors={errors}
+				dataItems={dataItems}
+				watch={watch}
+				setValue={setValue}
+			/>
+			<DatePicker control={control} dataItems={dataItems} errors={errors} setValue={setValue} />
+			{
+			!application_exist && (
+				<>
+					<div className={styles.check_box_notice}>
+						<CheckboxController
+							control={control}
+							name="check_separation"
+							errors={errors}
+							rules={{ required: true }}
+							className={styles.check_box_notice_icon}
+						/>
+						<span className={styles.check_box_text}>
+							{TERMS_AND_CONDITIONS}
+						</span>
 					</div>
-				)}
-				<span className={styles.check_box_text}>
-					By clicking on Initiate Separation,
-					you agree to serve your notice period per your
-					employment contract. Per your employment contract, your LWD is &apos;dd/mm/yyyy&apos;
-				</span>
-			</div>
-			<div className={styles.cta_buttons}>
-				<Button size="md" themeType="secondary" style={{ marginRight: '4px' }}>Cancel</Button>
-				<Button
-					size="md"
-					themeType="primary"
-					onClick={() => {
-						handleSubmit(onSubmit)();
-					}}
-				>
-					Initiate Separation
-					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+					{errors.check_separation && (
+						<div className={styles.error_msg}>
+							*This is Required
+						</div>
+					)}
+				</>
+			)
+            }
+			{!application_exist && (
+				<div className={styles.cta_buttons}>
+					<Button size="md" themeType="secondary" style={{ marginRight: '4px' }}>Cancel</Button>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={handleSubmit(handleSeparation)}
+					>
+						Initiate Separation
+						<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
 
-				</Button>
-			</div>
+					</Button>
+				</div>
+			)}
 			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 				<Modal.Body>
 					<div className={styles.modal_icon_container}>
@@ -112,7 +166,10 @@ function ResignationFormLanding() {
 						size="md"
 						themeType="Accent"
 						className={styles.proceed_modal_btn}
-						onClick={() => setShowModal(false)}
+						onClick={() => {
+							setShowModal(false);
+							handleSubmit(onSubmit)();
+						}}
 					>
 						Yes, Proceed
 					</Button>

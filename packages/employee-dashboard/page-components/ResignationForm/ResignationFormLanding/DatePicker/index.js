@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DatePicker({ control }) {
+function DatePicker({ control = {}, errors = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Current Last Working Day</div>
@@ -19,7 +19,13 @@ function DatePicker({ control }) {
 						className={styles.date_picker}
 						rules={{ required: 'this is required' }}
 					/>
+					{errors.date && (
+						<div className={styles.error_msg}>
+							*This is Required
+						</div>
+					)}
 				</div>
+
 			</div>
 			<div className={styles.alert_text}>
 				<span>

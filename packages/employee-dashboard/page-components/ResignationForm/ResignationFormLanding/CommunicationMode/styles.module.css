@@ -20,7 +20,8 @@
 .item_container {
 	display: flex;
 	flex-wrap: wrap;
-	height: 100px;
+	align-items: center;
+	height: 120px;
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }
@@ -69,4 +70,11 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #4f4f4f;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
 }
