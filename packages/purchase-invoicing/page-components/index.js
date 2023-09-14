@@ -54,7 +54,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 				/>
 			))} */}
 
-			{!loadingCE && !isEmpty(invoiceDataCE) ? (
+			{!loadingCE && !isEmpty(invoiceDataCE) && shipmentData?.shipment_type === 'fcl_freight' ? (
 				<Invoices
 					invoiceDataCE={invoiceDataCE}
 					groupedInvoicesCE={groupedInvoicesCE}
