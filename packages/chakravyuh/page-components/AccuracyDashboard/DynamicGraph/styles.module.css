@@ -1,0 +1,106 @@
+.container {
+	--animation-duration: 3.5s;
+
+	.zoom_container {
+		position: absolute;
+		top: 180px;
+		right: 40px;
+		z-index: 1;
+
+		> div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 30px;
+			height: 30px;
+			margin-top: 2px;
+			cursor: pointer;
+			background-color: #fafbfc;
+			border: 1px solid #8080806f;
+			transition: all 300ms ease-in-out;
+
+			svg {
+				width: 20px;
+				height: 20px;
+				transition: all 300ms ease-in-out;
+			}
+
+			&:hover {
+				background-color: #eff0f3;
+
+				svg {
+					scale: 1.15;
+				}
+			}
+
+			&:active {
+				scale: 0.25;
+			}
+
+			&.zoom_disabled {
+				&:hover {
+					cursor: not-allowed;
+					background-color: inherit;
+
+					svg {
+						scale: 1;
+					}
+				}
+
+				&:active {
+					scale: 1;
+				}
+			}
+		}
+	}
+
+	&.parent_zoom_level_1 {
+		.zoom_child {
+			width: 134%;
+			height: calc(133.33vh - 186px);
+			transform-origin: 0 0;
+			scale: 0.75;
+		}
+	}
+
+	&.parent_zoom_level_2 {
+		.zoom_child {
+			width: 200%;
+			height: 156vh;
+			transform-origin: 0 0;
+			scale: 0.5;
+		}
+	}
+}
+
+.graph_layout {
+	position: relative;
+	height: calc(100vh - 186px);
+	min-height: 500px;
+	padding: 8px 0;
+	margin-top: 16px;
+	overflow-y: auto;
+	background-color: #fff;
+	border-radius: 8px;
+	transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+	&.minimize {
+		height: 200px;
+		min-height: 200px;
+	}
+
+	&.empty_state {
+		height: calc(100vh - 200px);
+		min-height: 500px;
+	}
+}
+
+.svg_layout {
+	position: absolute;
+}
+
+.card_container {
+	position: absolute;
+	top: 0;
+	left: 0;
+}

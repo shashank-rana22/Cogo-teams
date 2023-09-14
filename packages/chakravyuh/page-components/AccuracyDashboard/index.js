@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { DEFAULT_GLOBAL_FILTERS } from '../../constants/default_global_filters';
 
 import DashboardView from './Dashboard';
-import DrillDownView from './DrillDown';
+// import DrillDownView from './DrillDown';
+import DynamicGraph from './DynamicGraph';
 import Filters from './Filters';
 import Heading from './Heading';
 import MapView from './MapView';
@@ -15,7 +16,8 @@ const VIEW_MAPPING = {
 		heading   : 'Price Accuracy Dashboard',
 	},
 	drilldown: {
-		Component : DrillDownView,
+		// Component : DrillDownView,
+		Component : DynamicGraph,
 		heading   : 'Rates Life Cycle',
 		backView  : 'dashboard',
 	},
