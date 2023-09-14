@@ -25,7 +25,7 @@ import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
-function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
+function ConsigneeShipperBookingAgent({ get = {} }) {
 	const [activeTab, setActiveTab] = useState('overview');
 	const {
 		shipment_data = {}, isGettingShipment = false, getShipmentStatusCode = '',
@@ -37,17 +37,17 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 	);
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: SERVICE_ADDITIONAL_METHODS,
-		activeStakeholder,
+		additional_methods : SERVICE_ADDITIONAL_METHODS,
+		activeStakeholder  : 'consignee_shipper_booking_agent',
 	});
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder,
+		activeStakeholder: 'consignee_shipper_booking_agent',
 		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, activeStakeholder]);
+	}), [get, servicesGet, getTimeline]);
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
