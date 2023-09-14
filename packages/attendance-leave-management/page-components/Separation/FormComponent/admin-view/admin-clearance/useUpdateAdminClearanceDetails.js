@@ -6,23 +6,18 @@ const useUpdateAdminClearanceData = () => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_application_process_details',
-
 	}, { manual: true });
 
 	const postAdminData = async ({ payload }) => {
 		try {
-			await trigger({
-				data: payload,
-			});
+			await trigger({ data: payload });
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			if (error?.response?.data) Toast.error(getApiErrorString(error?.response?.data));
+			else console.log(error);
 		}
 	};
 
-	return {
-		loading,
-		postAdminData,
-	};
+	return { loading, postAdminData };
 };
 
 export default useUpdateAdminClearanceData;
