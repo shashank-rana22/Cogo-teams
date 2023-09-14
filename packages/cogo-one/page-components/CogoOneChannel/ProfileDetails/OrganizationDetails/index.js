@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { ACCOUNT_TYPE } from '../../../../constants';
+import { FIREBASE_TABS, ACCOUNT_TYPE } from '../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
@@ -45,8 +45,8 @@ function OrganizationDetails({
 	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
 	const leadOrganizationId = lead_user_details?.lead_organization_id;
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
-	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
-	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
+	const organizationId = FIREBASE_TABS.includes(activeTab) ? messageOrgId : voiceOrgId;
+	const userId = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceUserId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({
 		organizationId,

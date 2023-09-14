@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { authRequest } from '@cogoport/request/helpers/auth-request';
 import { useDispatch, useSelector } from '@cogoport/store';
@@ -39,8 +40,15 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 				try {
 					const res = await authRequest.get('get_user_session');
 
-					const { partner = {} } = res.data || {};
+					const { partner = {}, user = {} } = res.data || {};
+
+					const { preferred_languages } = user || {};
+
+					const userLanguagePreferenece = preferred_languages?.[GLOBAL_CONSTANTS.zeroth_index]
+					|| GLOBAL_CONSTANTS.default_preferred_language;
+
 					setCookie('parent_entity_id', partner.id);
+					setCookie('lang_preference', userLanguagePreferenece);
 
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {

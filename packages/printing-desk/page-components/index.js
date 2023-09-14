@@ -4,15 +4,17 @@ import useListShipmentPendingTasks from '../hooks/useListShipmentPendingTasks';
 
 import ApprovedAWB from './ApprovedAWB';
 import AWBDocument from './AWBDocument';
+import CompletedAwb from './CompletedAwb';
 import EditAWB from './EditAWB';
 import FinalAwb from './FinalAWB';
 import HandedOver from './HandedOver';
 import Header from './Header';
 
 const TABS_COMPONENT_MAPPING = {
-	approved_awb : ApprovedAWB,
-	handed_over  : HandedOver,
-	final_awb    : FinalAwb,
+	approved_awb  : ApprovedAWB,
+	handed_over   : HandedOver,
+	final_awb     : FinalAwb,
+	completed_awb : CompletedAwb,
 };
 
 function PrintingDesk() {

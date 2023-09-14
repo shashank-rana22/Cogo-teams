@@ -1,9 +1,9 @@
-import { Button, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
-import { getSubject } from '../../helpers/getRecipientData';
+import { getRecipientData } from '../../helpers/getRecipientData';
 import useGetMailContent from '../../hooks/useGetMailContent';
 
 import MailActions from './mailActions';
@@ -11,12 +11,26 @@ import MailAttachments from './MailAttachments';
 import MailHeader from './MailHeader';
 import styles from './styles.module.css';
 
+const getEmailText = ({
+	expandedState = '',
+	loading = false,
+}) => {
+	if (loading) {
+		return 'Loading...';
+	}
+
+	if (expandedState) {
+		return 'Collapse';
+	}
+
+	return 'Expand';
+};
+
 function MailBody({
 	eachMessage = {},
-	setMailActions = () => {},
-	mailActions = {},
 	hasPermissionToEdit = false,
 	formattedData = {},
+	mailProps = {},
 }) {
 	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
@@ -24,9 +38,18 @@ function MailBody({
 	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
 
 	const {
+		setButtonType = () => {},
+		setEmailState = () => {},
+	} = mailProps || {};
+
+	const {
 		subject = '',
 		message_id = '',
 		body = '',
+		sender: senderAddress = '',
+		to_mails: recipientData = [],
+		cc_mails: ccData = [],
+		bcc_mails: bccData = [],
 	} = response || {};
 
 	const {
@@ -34,11 +57,6 @@ function MailBody({
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
-
-	const { data } = mailActions || {};
-	const { response: selectedResponse = {} } = data || {};
-
-	const { message_id: selectedMessageid } = selectedResponse || {};
 
 	const date = created_at && formatDate({
 		date       : new Date(created_at),
@@ -48,23 +66,20 @@ function MailBody({
 		separator  : ' ',
 	});
 
-	const handleClick = ({ buttonType }) => {
-		setMailActions({
-			actionType : buttonType,
-			data       : {
-				...eachMessage,
-				response: {
-					...eachMessage?.response,
-					subject: getSubject(
-						{
-							subject : eachMessage?.response?.subject,
-							val     : buttonType,
-						},
-					),
-				},
-			},
-		});
-	};
+	const { handleClick = () => {} } = getRecipientData({
+		setButtonType,
+		setEmailState,
+		senderAddress,
+		recipientData,
+		ccData,
+		bccData,
+		formattedData,
+		eachMessage,
+		activeMailAddress : source,
+		isDraft           : false,
+		subject,
+		emailVia          : 'firebase_emails',
+	});
 
 	const handleExpandClick = () => {
 		if (!expandedState && !bodyMessage) {
@@ -84,13 +99,13 @@ function MailBody({
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
 			<div
-				className={cl`${styles.container} 
-				${selectedMessageid === message_id ? styles.active_container : ''}`}
+				className={styles.container}
 			>
 				<MailHeader
 					eachMessage={eachMessage}
 					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
+					handleExpandClick={handleExpandClick}
 				/>
 
 				<div className={styles.subject}>
@@ -100,26 +115,29 @@ function MailBody({
 				</div>
 
 				<div
-					className={cl`${styles.body} ${expandedState ? styles.expanded_body : styles.collapsed_body}`}
+					className={cl`${styles.body} 
+					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
 					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
 				/>
 
-				<Button
-					onClick={handleExpandClick}
-					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
-					size="xs"
-					className={styles.dots_body}
-					themeType="linkUi"
-				>
-					{expandedState ? 'Collapse' : 'Expand'}
-				</Button>
-
-				{hasPermissionToEdit && (
+				{hasPermissionToEdit ? (
 					<MailActions
 						handleClick={handleClick}
 					/>
-				)}
+				) : null}
+
 				<MailAttachments mediaUrls={media_url} />
+
+				<div className={styles.extra_controls}>
+					<div
+						role="presentation"
+						onClick={handleExpandClick}
+						style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+						className={styles.dots_body}
+					>
+						{getEmailText({ expandedState, loading })}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

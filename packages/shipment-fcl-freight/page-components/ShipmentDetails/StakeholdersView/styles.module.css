@@ -23,13 +23,19 @@
 	}
 }
 
-.job_close_pill {
+.job_closed_container {
+	display: flex;
+	align-items: center;
+	margin-right: 16px;
+}
+
+.job_closed_pill {
 	font-weight: 600;
-	background-color: var(--color-primary-error-red-4);
+	background-color: var(--color-tertiary-success-green-3);
 
 	:global {
 		.ui_pill_text {
-			color: #000;
+			color: var(--color-secondary-greyscale-2);
 		}
 	}
 }

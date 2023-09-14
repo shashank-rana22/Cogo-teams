@@ -195,3 +195,10 @@
 	margin: 24px 0 12px;
 	text-align: center;
 }
+
+.mini_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 50px;
+}

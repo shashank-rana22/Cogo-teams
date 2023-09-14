@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+
+	:global {
+		.ui_checkbox_group_container {
+			flex-direction: column;
+			padding: 0;
+		}
+
+		.ui_checkbox_container {
+			padding: 4px 0;
+		}
+
+		.ui_text_area_container {
+			padding: 8px;
+		}
+
+		.ui_select_input_placeholder {
+			font-size: 14px;
+			color: #828282;
+		}
+
+		.ui_select_input_control::placeholder {
+			font-size: 14px;
+			color: #828282;
+		}
+	}
+}
+
+.form_item {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
+}
+
+.label {
+	display: flex;
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 14px;
+	color: #4f4f4f;
+}
+
+.error_message {
+	margin-top: 2px;
+	font-size: 12px;
+	color: #cb6464;
+}

@@ -2,18 +2,21 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+import getFormatedPath from '../utils/getFormatedPath';
+
 const DEFAULT_PAGE = 1;
 const FILTERS_STATES = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'];
 
 const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }) => {
 	const { start_date = '', end_date = '' } = dateFilters;
+
 	return {
 		filters: {
 			state                   : FILTERS_STATES,
 			serial_id               : serialId || undefined,
 			shipment_type           : shipmentType || undefined,
-			created_at_greater_than : start_date || undefined,
-			created_at_less_than    : end_date || undefined,
+			created_at_greater_than : !serialId ? start_date : undefined,
+			created_at_less_than    : !serialId ? end_date : undefined,
 		},
 		get_shipment_quotation_data  : true,
 		milestone_data_required      : true,
@@ -25,10 +28,12 @@ const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }
 };
 
 function useListShipments({ dateFilters = {} }) {
+	const { queryParams = {} } = getFormatedPath();
+
 	const [params, setParams] = useState({
-		query        : '',
+		query        : queryParams.sid || '',
 		pagination   : DEFAULT_PAGE,
-		shipmentType : '',
+		shipmentType : queryParams.shipmentType || '',
 	});
 
 	const { query: searchQuery, debounceQuery } = useDebounceQuery();
@@ -42,7 +47,12 @@ function useListShipments({ dateFilters = {} }) {
 		async ({ pagination, serialId, shipmentType }) => {
 			try {
 				await trigger({
-					params: getParams({ pagination, serialId, shipmentType, dateFilters }),
+					params: getParams({
+						pagination,
+						serialId,
+						shipmentType,
+						dateFilters,
+					}),
 				});
 				setParams((prev) => ({ ...prev, pagination }));
 			} catch (e) {

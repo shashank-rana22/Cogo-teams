@@ -13,6 +13,7 @@ function SentDiv({ eachList = {} }) {
 		start_time_of_call = '',
 		end_time_of_call,
 		channel_type,
+		communication_log = {},
 	} = eachList || {};
 
 	const date = created_at ? formatDate({
@@ -40,6 +41,7 @@ function SentDiv({ eachList = {} }) {
 						endTimeOfCall={end_time_of_call}
 						startTimeOfCall={start_time_of_call}
 						channelType={channel_type}
+						communication_log={communication_log}
 					/>
 				</div>
 			</div>

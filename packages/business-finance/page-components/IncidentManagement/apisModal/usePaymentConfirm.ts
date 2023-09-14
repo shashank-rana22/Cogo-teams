@@ -11,12 +11,14 @@ interface PropsData {
 	refetch?:()=>void,
 	setShowModal?:(p:boolean)=>void,
 	id?: string | number,
+	t?: Function,
 }
 
 const usePaymentConfirm = ({
 	refetch,
 	setShowModal,
 	id,
+	t,
 }:PropsData) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -35,7 +37,7 @@ const usePaymentConfirm = ({
 	);
 
 	const successToast = () => {
-		Toast.success('Request Updated Sucessfully');
+		Toast.success(t('incidentManagement:request_updated_successfully_message'));
 		setShowModal(false);
 		refetch();
 	};
@@ -59,7 +61,7 @@ const usePaymentConfirm = ({
 				Toast.error(message);
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.message || 'Something went wrong');
+			Toast.error(e?.response?.data?.message || t('incidentManagement:something_went_wrong_message'));
 		}
 	};
 

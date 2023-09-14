@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useRef } from 'react';
 
 import LevelForm from '../../Controller/CustomTable/ColumnCard/LevelForm';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 function CreateLevelModal({
 	refetch = () => {},
 }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showCreateModal, setShowCreateModal] = useState(false);
 	const [level, setLevel] = useState(null);
 	const ref = useRef();
@@ -34,7 +36,7 @@ function CreateLevelModal({
 				<Modal.Header
 					title={(
 						<Heading
-							title="Create Level"
+							title={t('incidentManagement:create_level_title')}
 						/>
 					)}
 				/>
@@ -57,19 +59,19 @@ function CreateLevelModal({
 						themeType="secondary"
 						onClick={onCancel}
 					>
-						Cancel
+						{t('incidentManagement:cancel_btn')}
 					</Button>
 					<Button
 						size="md"
 						loading={loading || updating}
 						onClick={onSubmit}
 					>
-						Create
+						{t('incidentManagement:create_btn')}
 					</Button>
 				</Modal.Footer>
 			</Modal>
 			<Button onClick={() => { setShowCreateModal(true); }}>
-				Create
+				{t('incidentManagement:create_btn')}
 			</Button>
 		</>
 	);

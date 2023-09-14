@@ -6,7 +6,7 @@ const LOADER_LENGTH = 6;
 
 function LoadingState() {
 	return (
-		<div className={styles.list_container}>
+		<>
 			{[...Array(LOADER_LENGTH).keys()].map((itm) => (
 				<div className={styles.card_container} key={itm}>
 					<div className={styles.card}>
@@ -30,9 +30,7 @@ function LoadingState() {
 					</div>
 				</div>
 			))}
-
-		</div>
-
+		</>
 	);
 }
 

@@ -18,15 +18,15 @@ import styles from './styles.module.css';
 const FIRST_PAGE = 1;
 const DEFAULT_FILTER_LEN = 4;
 
-function Invoices({ organizationId = '' }) {
+function Invoices({ organizationId = '', setStats = () => { } }) {
 	const {
 		billsData = {},
 		billsLoading = false,
 		billsFilters = {},
-		setBillsFilters = () => {},
+		setBillsFilters = () => { },
 		orderBy = {},
-		setOrderBy = () => {},
-	} = useGetBillsList({ activeTab: 'all', organizationId });
+		setOrderBy = () => { },
+	} = useGetBillsList({ activeTab: 'all', organizationId, setStats });
 
 	const functions = {
 		renderToolTip: (itemData, field) => (

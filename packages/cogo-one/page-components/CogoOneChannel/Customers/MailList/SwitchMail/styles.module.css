@@ -54,3 +54,41 @@
 .align_the_elements_center {
 	text-align: center;
 }
+
+.styled_popover {
+	width: 100%;
+	max-width: unset !important;
+	padding: 0;
+
+	>div {
+		padding: 0;
+	}
+}
+
+.user_mail_address {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 4px 10px 4px 4px;
+	cursor: pointer;
+	background: #fefce6;
+	border-radius: 4px;
+}
+
+.mail_address_name {
+	width: calc(100% - 75px);
+	overflow: hidden;
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.arrow_right {
+	width: 20px;
+	height: 20px;
+	fill: #4e4e4e;
+}

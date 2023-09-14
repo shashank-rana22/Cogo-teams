@@ -12,11 +12,11 @@ import {
 	BASE_LAYER, LAYOUT_WIDTH, TIME_LIMIT,
 	MAX_BOUNDS, ITEMS, SECOND_IDX,
 } from '../../../../constants/map_constants';
-import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
-import { getChildHierarchy, getLowestHierarchy, HIERARCHY_MAPPING } from '../../../../utils/hierarchy-utils';
+// import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
+import { getLowestHierarchy, HIERARCHY_MAPPING } from '../../../../utils/hierarchy-utils';
 import { getPolygonStyleProps } from '../../../../utils/map-utils';
 
-import ActiveRegions from './ActiveRegions';
+// import ActiveRegions from './ActiveRegions';
 import Point from './AnimatedPoint';
 import MapEvents from './MapEvents';
 import styles from './styles.module.css';
@@ -46,26 +46,25 @@ function Map({
 	const activeRef = useRef(null);
 
 	const lowestHierarchy = getLowestHierarchy(hierarchy);
-	const requiredType = getChildHierarchy(lowestHierarchy, hierarchy);
-	const type = requiredType && (requiredType !== 'port_id' && requiredType !== 'country_id')
-		? requiredType.split('_')[GLOBAL_CONSTANTS.zeroth_index] : null;
+	// const requiredType = getChildHierarchy(lowestHierarchy, hierarchy);
+	// const type = requiredType && (requiredType !== 'port_id' && requiredType !== 'country_id')
+	// 	? requiredType.split('_')[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const originId = locationFilters.origin?.id;
 
-	const { data: activeData = [], loading: activeLoading } = useGetSimplifiedGeometry({
-		country_id   : hierarchy?.country_id,
-		continent_id : hierarchy?.continent_id,
-		type,
-	});
+	// const { data: activeData = [], loading: activeLoading } = useGetSimplifiedGeometry({
+	// 	country_id   : hierarchy?.country_id,
+	// 	continent_id : hierarchy?.continent_id,
+	// 	type,
+	// });
 
-	const showRegions = !isEmpty(activeData)
-							&& HIERARCHY_MAPPING.region_id >= HIERARCHY_MAPPING[lowestHierarchy] - SECOND_IDX;
-	const showPorts = HIERARCHY_MAPPING.port_id + SECOND_IDX >= HIERARCHY_MAPPING[lowestHierarchy];
-
-	const showLoading = loading || activeLoading;
+	// const showRegions = !isEmpty(activeData)
+	// 						&& HIERARCHY_MAPPING.region_id >= HIERARCHY_MAPPING[lowestHierarchy] - SECOND_IDX;
+	const showPorts = HIERARCHY_MAPPING[lowestHierarchy] <= SECOND_IDX;
+	const showLoading = loading;
 	const originPosition = locationFilters?.origin?.latitude
 		? [locationFilters.origin.latitude, locationFilters.origin.longitude] : null;
-	const originLocation = [...data, ...activeData]
+	const originLocation = [...data]
 		.filter(({ id }) => id === locationFilters.origin.id)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const getFilteredData = (dataToProcess) => dataToProcess.filter(({ id }) => id !== originId
@@ -145,7 +144,7 @@ function Map({
 				accuracyMapping={accuracyMapping}
 				setLocationFilters={setLocationFilters}
 			/>
-			<ActiveRegions
+			{/* <ActiveRegions
 				ref={activeRef}
 				setBounds={setBounds}
 				currentId={currentId}
@@ -156,7 +155,7 @@ function Map({
 				accuracyMapping={accuracyMapping}
 				setLocationFilters={setLocationFilters}
 				activeData={getFilteredData(activeData)}
-			/>
+			/> */}
 			{showPorts
 			&& activeList.map((item) => {
 				const position = [item.destination_latitude, item.destination_longitude];

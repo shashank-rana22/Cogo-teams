@@ -8,7 +8,6 @@ import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
-const OPTIONS = [];
 const INITIAL_STATE = 0;
 
 function SelectService({
@@ -17,6 +16,7 @@ function SelectService({
 	onClose = () => {},
 	allTakenServices = [],
 }) {
+	const OPTIONS = [];
 	const { services = [], invoice_currency, invoice_source = '' } = invoice;
 	const selected = useMemo(() => services?.map((service) => service?.serviceKey || ''), [services]);
 
@@ -25,10 +25,6 @@ function SelectService({
 
 	allTakenServices?.forEach((service) => {
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
-			const trade_type = service?.trade_type;
-
-			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
-
 			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
 
 			const invoiceAmount = formatAmount({
@@ -40,11 +36,11 @@ function SelectService({
 				},
 			});
 
-			const content = (
-				<div className={styles.service_details}>
+			const content = [
+				<div className={styles.service_details} key="invoice_line_item_details">
 					<div>
 						<b>Invoice Currency: </b>
-						&nbsp;
+						{' '}
 						<span>{service?.currency}</span>
 					</div>
 
@@ -68,8 +64,8 @@ function SelectService({
 							<span>{invoiceAmount}</span>
 						</div>
 					) : null}
-				</div>
-			);
+				</div>,
+			];
 
 			const id_with_igst = service?.serviceKey;
 
@@ -77,7 +73,7 @@ function SelectService({
 
 			const serviceType = service?.service_type === 'shipment'
 				? 'Convenience Fees'
-				: `${tradeType} ${startCase(serviceName)} ${service?.is_igst ? '(IGST)' : ''} ${isBas
+				: `${startCase(serviceName)} ${service?.is_igst ? '(IGST)' : ''} ${isBas
 					&& !service?.is_igst ? '(BAS)' : ''}`;
 
 			const servicesToPush = {

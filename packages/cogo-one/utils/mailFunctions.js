@@ -35,7 +35,7 @@ function mailFunction({
 			event?.preventDefault?.();
 			const newEmail = email || newEmailInput;
 
-			if (!validateEmail(newEmail)) {
+			if (!validateEmail(newEmail.trim())) {
 				setErrorValue('Enter valid id');
 				return;
 			}

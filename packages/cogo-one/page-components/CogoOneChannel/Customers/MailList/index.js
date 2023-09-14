@@ -1,74 +1,61 @@
-import { Avatar, Tooltip } from '@cogoport/components';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
 import { useState } from 'react';
 
-import MailDetails from '../../../../common/MailDetails';
-import getUserNameFromEmail from '../../../../helpers/getUserNameFromEmail';
+import OutlookMails from '../../../../common/MailDetails';
 
+import FirebaseEmails from './FirebaseEmails';
 import MailSideBar from './MailSideBar';
 import styles from './styles.module.css';
 import SwitchMail from './SwitchMail';
 
-function MailList(mailprops) {
+const COMPONENTS_MAPPING = {
+	outlook         : OutlookMails,
+	firebase_emails : FirebaseEmails,
+};
+
+function MailsList({
+	mailProps = {},
+	mailsToBeShown = [],
+	activeTab = {},
+	...rest
+}) {
 	const {
 		setActiveMail = () => {},
 		activeMail = {},
 		activeMailAddress = '',
-		viewType = '',
-		userEmailAddress = '',
-		setActiveMailAddress = () => {},
-	} = mailprops;
+	} = mailProps;
 
 	const [activeFolder, setActiveFolder] = useState('inbox');
 	const [appliedFilters, setAppliedFilters] = useState(null);
-	const [showPopover, setShowPopover] = useState(false);
 
-	const { shortName, userName } = getUserNameFromEmail({ query: activeMailAddress });
+	const ActiveComponent = COMPONENTS_MAPPING?.[activeTab?.tab] || null;
+
+	if (!ActiveComponent) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
-			<Tooltip
-				interactive
-				caret={false}
-				placement="bottom"
-				visible={showPopover}
-				className={styles.styled_popover}
-				onClickOutside={() => setShowPopover((prev) => !prev)}
-				content={(
-					<SwitchMail
-						viewType={viewType}
-						setActiveMail={setActiveMail}
-						setShowPopover={setShowPopover}
-						userEmailAddress={userEmailAddress}
-						activeMailAddress={activeMailAddress}
-						setActiveMailAddress={setActiveMailAddress}
-					/>
-				)}
-			>
-				<div
-					role="presentation"
-					className={styles.user_mail_address}
-					onClick={() => setShowPopover((prev) => !prev)}
-				>
-					<Avatar
-						size="40px"
-						personName={shortName}
-					/>
-					<span className={styles.mail_address}>
-						{userName}
-					</span>
-					<IcMArrowRotateDown className={styles.arrow_right} />
-				</div>
-			</Tooltip>
+			{activeTab?.tab === 'outlook' ? (
+				<SwitchMail
+					mailsToBeShown={mailsToBeShown}
+					mailProps={mailProps}
+				/>
+			) : null}
 
-			<div className={styles.list_mails}>
+			<div className={cl`${styles.list_mails} 
+				${activeTab?.tab === 'outlook'
+				? styles.switch_mail_present : styles.no_switch_mail}`}
+			>
 				<MailSideBar
 					activeFolder={activeFolder}
 					setActiveFolder={setActiveFolder}
 					setAppliedFilters={setAppliedFilters}
+					activeTab={activeTab?.tab}
 				/>
 
-				<MailDetails
+				<ActiveComponent
+					{...rest}
 					activeFolder={activeFolder}
 					setActiveMail={setActiveMail}
 					activeMail={activeMail}
@@ -81,4 +68,4 @@ function MailList(mailprops) {
 	);
 }
 
-export default MailList;
+export default MailsList;

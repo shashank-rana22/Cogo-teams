@@ -50,7 +50,13 @@ export function getSalesAgentButtons({
 	userId = '',
 	showBotMessages = false,
 	isManager = false,
+	isPartOfGroup = false,
+	isGroupFormed = false,
 }) {
+	if (isPartOfGroup) {
+		return [];
+	}
+
 	if (supportAgentId === userId || isManager) {
 		return ['assign_modal'];
 	}
@@ -59,7 +65,11 @@ export function getSalesAgentButtons({
 		return ['assign_to_me'];
 	}
 
-	return ['request_for_assign'];
+	if (isGroupFormed) {
+		return ['add_me_to_group'];
+	}
+
+	return ['request_for_assign', 'add_me_to_group'];
 }
 
 export function getSupplyAgentButtons({

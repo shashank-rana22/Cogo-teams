@@ -1,6 +1,6 @@
 import { RaiseAlarm, RaiseAlarmCard } from '@cogoport/air-modules/components/RaiseAlarm';
 import useGetShipmentFaultAlarmDescription from '@cogoport/air-modules/hooks/useGetShipmentFaultAlarmDescription';
-import { Tabs, TabPanel, Toggle, Button, cl } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
@@ -9,6 +9,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
+import JobStatus from '../../commons/JobStatus';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -30,7 +31,12 @@ const TAB_MAPPING = {
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
 
-function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = () => {}, isGettingShipment = false }) {
+function HandleRaiseContainer({
+	shipment_data = {},
+	alarmId = '',
+	setAlarmId = () => {},
+	isGettingShipment = false,
+}) {
 	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
 
 	if (!shipment_data?.is_job_closed && isTrue) {
@@ -44,9 +50,7 @@ function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = (
 			</div>
 		);
 	}
-	if (shipment_data?.is_job_closed) {
-		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
-	}
+
 	return null;
 }
 
@@ -59,7 +63,7 @@ function DefaultView() {
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
-	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
+	const { features = [], default_tab = 'tasks', job_open_request = false } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
 
 	const [alarmId, setAlarmId] = useState('');
@@ -127,18 +131,27 @@ function DefaultView() {
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
+					{shipment_data?.is_job_closed && (
+						<JobStatus
+							shipment_data={shipment_data}
+							isJobOpenAllowed={job_open_request}
+						/>
+					)}
+
 					<Toggle
 						size="md"
 						onLabel="Old"
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
+
 					<HandleRaiseContainer
 						shipment_data={shipment_data}
 						alarmId={alarmId}
 						setAlarmId={setAlarmId}
 						isGettingShipment={isGettingShipment}
 					/>
+
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>

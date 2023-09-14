@@ -9,7 +9,6 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTyp
 import useGetEmojiList from '../../../../../../../hooks/useGetEmojis';
 import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotionalRate';
 import EmojisBody from '../../EmojisBody';
-import { getCanSendMessage } from '../footerFunctions';
 
 import styles from './styles.module.css';
 
@@ -27,9 +26,6 @@ function SendActions({
 	setDraftUploadedFiles = () => {},
 	setDraftMessages = () => {},
 	hasUploadedFiles = false,
-	emailState = {},
-	isEmail = false,
-	mailActions = {},
 }, ref) {
 	const { channel_type = '' } = formattedData;
 
@@ -39,7 +35,7 @@ function SendActions({
 		|| (isEmpty(draftMessage?.trim()) && !hasUploadedFiles)
 	);
 
-	const canSendMessage = !hasNoPermissionToSend && getCanSendMessage({ emailState, channelType: channel_type });
+	const canSendMessage = !hasNoPermissionToSend;
 
 	const {
 		sendPromotionalRate = () => {},
@@ -53,8 +49,7 @@ function SendActions({
 	} = useGetEmojiList();
 
 	const isSendPromotionalRate = (
-		!isEmail
-		&& hasPermissionToEdit
+		hasPermissionToEdit
 		&& channel_type === 'whatsapp'
 		&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.send_promotional_rate
 	);
@@ -67,7 +62,7 @@ function SendActions({
 			}),
 		);
 	};
-	const isUploadDisabled = uploading?.[roomId] || (isEmail && mailActions?.actionType === 'forward');
+	const isUploadDisabled = uploading?.[roomId];
 
 	return (
 		<>
@@ -92,35 +87,33 @@ function SendActions({
 						ref={ref}
 					/>
 				)}
-				{!isEmail && (
-					<Popover
-						placement="top"
-						render={(
-							<EmojisBody
-								emojisList={emojisList}
-								setOnClicked={setOnClicked}
-								updateMessage={handleUpdateMessage}
-							/>
-						)}
-						visible={onClicked}
-						maxWidth={355}
-						onClickOutside={() => {
+				<Popover
+					placement="top"
+					render={(
+						<EmojisBody
+							emojisList={emojisList}
+							setOnClicked={setOnClicked}
+							updateMessage={handleUpdateMessage}
+						/>
+					)}
+					visible={onClicked}
+					maxWidth={355}
+					onClickOutside={() => {
+						if (hasPermissionToEdit) {
+							setOnClicked(false);
+						}
+					}}
+				>
+					<IcMHappy
+						fill="#828282"
+						style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
+						onClick={() => {
 							if (hasPermissionToEdit) {
-								setOnClicked(false);
+								setOnClicked((prev) => !prev);
 							}
 						}}
-					>
-						<IcMHappy
-							fill="#828282"
-							style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
-							onClick={() => {
-								if (hasPermissionToEdit) {
-									setOnClicked((prev) => !prev);
-								}
-							}}
-						/>
-					</Popover>
-				)}
+					/>
+				</Popover>
 			</div>
 			<div className={styles.send_messages}>
 				{isSendPromotionalRate && (
@@ -136,17 +129,15 @@ function SendActions({
 					</Button>
 				)}
 
-				{!isEmail && (
-					<IcMQuickreply
-						fill="#828282"
-						style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
-						onClick={() => {
-							if (hasPermissionToEdit) {
-								openInstantMessages();
-							}
-						}}
-					/>
-				)}
+				<IcMQuickreply
+					fill="#828282"
+					style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
+					onClick={() => {
+						if (hasPermissionToEdit) {
+							openInstantMessages();
+						}
+					}}
+				/>
 				<IcMSend
 					fill="#EE3425"
 					style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}

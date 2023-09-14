@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { orderBy } from 'firebase/firestore';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
@@ -15,12 +16,33 @@ const TAB_WISE_QUERY_KEY_MAPPING = {
 	kamContacts : 'kam_contacts_base_query',
 };
 
+const getModifiedFilters = ({
+	appliedFilters = {},
+	listOnlyMails = false,
+	activeFolder = '',
+}) => {
+	const requiredChannels = listOnlyMails
+		? ['email']
+		: ['platform_chat', 'telegram', 'whatsapp', 'zalo'];
+
+	return {
+		...(appliedFilters || {}),
+		...(
+			(activeFolder && (activeFolder !== 'all_mails'))
+				? { activeFolder: `show_in_${activeFolder}` } : {}
+		),
+		channels: isEmpty(appliedFilters?.channels) ? requiredChannels : appliedFilters?.channels,
+	};
+};
+
 function getFireStoreQuery({
-	userId,
-	appliedFilters,
+	userId = '',
+	appliedFilters = {},
 	isBotSession = false,
-	viewType,
-	activeSubTab,
+	viewType = '',
+	activeSubTab = '',
+	listOnlyMails = false,
+	activeFolder = '',
 }) {
 	const filterId = appliedFilters.assigned_to === 'me'
 		? userId
@@ -30,14 +52,16 @@ function getFireStoreQuery({
 	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 	const epochTimestamp = currentTime.getTime();
 
+	const modifiedFilters = getModifiedFilters({ appliedFilters, listOnlyMails, activeFolder });
+
 	const queryFilterMapping = getQueryFilterMapping({
-		appliedFilters,
+		appliedFilters: modifiedFilters,
 		isBotSession,
 		epochTimestamp,
 		filterId,
 	});
 
-	const queryFilters = Object.keys(appliedFilters).reduce(
+	const queryFilters = Object.keys(modifiedFilters).reduce(
 		(accumulator, currentValue) => [
 			...accumulator,
 			...(queryFilterMapping?.[currentValue] || []),

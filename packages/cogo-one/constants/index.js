@@ -14,6 +14,12 @@ import {
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
+export const ENABLE_SIDE_BAR = ['whatsapp', 'platform_chat', 'zalo', 'telegram', 'voice_call', 'video_call'];
+
+export const ENABLE_EXPAND_SIDE_BAR = ['email'];
+
+export const FIREBASE_TABS = ['message', 'firebase_emails'];
+
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
 	facebook  : <IcCFacebook width={25} height={25} />,
@@ -368,7 +374,7 @@ export const RATING_ELEMENTS = {
 
 	},
 	sad: {
-		image : <IcCVerySad width={30} height={30} />,
+		image : <IcCVerySad width={30} height={30} style={{ marginTop: '18px' }} />,
 		arrow : <IcMDown fill="#ee3425" />,
 	},
 };

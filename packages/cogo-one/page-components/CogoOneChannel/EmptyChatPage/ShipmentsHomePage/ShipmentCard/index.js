@@ -10,8 +10,17 @@ const handleShipmentClick = ({
 	importerExporterPoc = {},
 	setActiveTab = () => {},
 	primaryPocDetails = {},
+	params = {},
+	range = '',
 }) => {
-	const showActiveUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
+	const { query = '', shipmentType = '' } = params || {};
+
+	const newHashUrl = `sid=${query}${shipmentType ? `&shipmentType=${shipmentType}` : ''}
+	${range && range !== 'custom' ? `&range=${range}` : ''}`;
+
+	window.location.hash = newHashUrl;
+
+	const activeUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
 
 	const {
 		id: userId = '',
@@ -19,7 +28,7 @@ const handleShipmentClick = ({
 		email = '',
 		mobile_country_code = '',
 		mobile_number = '',
-	} = showActiveUserChat || {};
+	} = activeUserChat || {};
 
 	const chatData = {
 		user_id                 : userId,
@@ -52,6 +61,8 @@ function ShipmentCard({
 	setShowPocModal = () => {},
 	showAddPrimaryUserButton = false,
 	mailProps = {},
+	params = {},
+	range = '',
 }) {
 	const {
 		serial_id = '',
@@ -82,7 +93,13 @@ function ShipmentCard({
 			role="presentation"
 			className={styles.container}
 			key={key}
-			onClick={() => handleShipmentClick({ importerExporterPoc, primaryPocDetails, setActiveTab })}
+			onClick={() => handleShipmentClick({
+				importerExporterPoc,
+				primaryPocDetails,
+				setActiveTab,
+				params,
+				range,
+			})}
 		>
 			<ShipmentsCard
 				setShowPocDetails={setShowPocDetails}

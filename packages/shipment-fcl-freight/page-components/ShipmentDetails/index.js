@@ -23,6 +23,7 @@ const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
 	'end_to_end_shipment',
 	'containers',
 	'rollover_shipments',
+	'advance_documents',
 ];
 
 function ShipmentDetails() {

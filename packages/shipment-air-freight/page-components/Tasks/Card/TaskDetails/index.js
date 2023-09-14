@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
@@ -55,7 +55,11 @@ function TaskDetails({
 
 			<div>
 				<div className={styles.details}>
-					<div className={styles.task_name}>{taskName}</div>
+					<div className={cl`${styles.task_name} 
+					${task?.mandatory ? styles.mandatory_task : ''}`}
+					>
+						{taskName}
+					</div>
 
 					<div className={styles.task_date_details}>
 						{task?.deadline && task?.status !== 'completed' ? (

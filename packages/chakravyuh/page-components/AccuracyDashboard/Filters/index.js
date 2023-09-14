@@ -1,7 +1,7 @@
 import { Select, cl, Datepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { addDays, merge, startCase } from '@cogoport/utils';
+import { addDays, startCase } from '@cogoport/utils';
 
 import {
 	LOCATIONS_PROPS, MAIN_PORT_PROPS, TYPE_MAPPING,
@@ -65,14 +65,7 @@ function Filters(props) {
 									onChange={(value, obj) => handleChange(key, value, obj)}
 									value={globalFilters[key]}
 									className={styles.location_select}
-									params={merge(getLocationParams(service_type), {
-										filters: {
-											type: [
-												`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
-												'country',
-											],
-										},
-									})}
+									params={getLocationParams(service_type)}
 									{...LOCATIONS_PROPS}
 								/>
 							</div>

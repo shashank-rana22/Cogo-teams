@@ -3,6 +3,19 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import { FIREBASE_TABS } from '../constants';
+
+const getPayload = ({
+	activeTab, activeMessageCard, activeVoiceCard, id, user_number, profile, editNote, noteValue,
+}) => ({
+	channel: (FIREBASE_TABS.includes(activeTab)
+		? activeMessageCard : activeVoiceCard)?.channel_type || 'message',
+	channel_chat_id : FIREBASE_TABS.includes(activeTab) ? id : user_number,
+	agent_id        : profile?.user?.id,
+	note_id         : editNote ? '' : undefined,
+	notes_data      : [noteValue],
+});
+
 function useCreateOmniNote({ editNote, fetchListNotes, activeMessageCard, activeTab, activeVoiceCard }) {
 	const { profile } = useSelector((state) => state);
 	const [{ loading }, trigger] = useRequest({
@@ -16,13 +29,16 @@ function useCreateOmniNote({ editNote, fetchListNotes, activeMessageCard, active
 	const omniChannelNote = async ({ noteValue }) => {
 		try {
 			await trigger({
-				data: {
-					channel         : activeTab === 'message' ? 'whatsapp' : 'voice_call',
-					channel_chat_id : activeTab === 'message' ? id : user_number,
-					agent_id        : profile?.user?.id,
-					note_id         : editNote ? '' : undefined,
-					notes_data      : [noteValue],
-				},
+				data: getPayload({
+					activeTab,
+					activeMessageCard,
+					activeVoiceCard,
+					id,
+					user_number,
+					profile,
+					editNote,
+					noteValue,
+				}),
 			});
 			fetchListNotes();
 			Toast.success('Successfully Created');

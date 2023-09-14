@@ -4,10 +4,10 @@ import { Image } from '@cogoport/next';
 export const SEARCH_QUERY_LIMIT = 50;
 
 export const MAIL_FOLDER_OPTIONS = {
-	inbox : 'Inbox',
-	draft : 'Drafts',
-	sent  : 'Sent Items',
-	spam  : 'Junk Email',
+	inbox      : 'Inbox',
+	draft      : 'Drafts',
+	sent_items : 'Sent Items',
+	spam       : 'Junk Email',
 };
 
 export const DEFAULT_LIST_MAILS_TIMEOUT = 300000;

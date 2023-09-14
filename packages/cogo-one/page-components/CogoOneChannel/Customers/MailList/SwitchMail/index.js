@@ -1,76 +1,58 @@
-import { Avatar, cl } from '@cogoport/components';
-import React from 'react';
+import { Avatar, Tooltip } from '@cogoport/components';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
-import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
 import getUserNameFromEmail from '../../../../../helpers/getUserNameFromEmail';
 
+import ChangeMail from './changeMail';
 import styles from './styles.module.css';
 
 function SwitchMail({
-	viewType = '',
-	userEmailAddress = '',
-	activeMailAddress = '',
-	setActiveMail = () => {},
-	setShowPopover = () => {},
-	setActiveMailAddress = () => {},
+	mailProps = {},
+	mailsToBeShown = [],
 }) {
-	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
+	const {
+		setActiveMail = () => {},
+		activeMailAddress = '',
+		setActiveMailAddress = () => {},
+	} = mailProps;
+	const [showPopover, setShowPopover] = useState(false);
 
-	const filteredMails = userActiveMails.filter((itm) => (itm !== activeMailAddress));
-
-	const { shortName: activePersonName } = getUserNameFromEmail({ query: activeMailAddress });
+	const { shortName, userName } = getUserNameFromEmail({ query: activeMailAddress });
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.active_mail}>
-				<Avatar
-					size="50px"
-					personName={activePersonName}
+		<Tooltip
+			interactive
+			caret={false}
+			placement="bottom"
+			visible={showPopover}
+			className={styles.styled_popover}
+			onClickOutside={() => setShowPopover((prev) => !prev)}
+			content={(
+				<ChangeMail
+					setActiveMail={setActiveMail}
+					setShowPopover={setShowPopover}
+					activeMailAddress={activeMailAddress}
+					setActiveMailAddress={setActiveMailAddress}
+					mailsToBeShown={mailsToBeShown}
 				/>
-				<div className={cl`${styles.mail_address_container} 
-						${styles.align_the_elements_center}`}
-				>
-					<div className={styles.user_name}>
-						{activePersonName}
-					</div>
-					<div className={styles.mail_address}>
-						{activeMailAddress}
-					</div>
-				</div>
-			</div>
-
-			{filteredMails.map(
-				(itm) => {
-					const { shortName: currentPersonName } = getUserNameFromEmail({ query: itm });
-
-					return (
-						<div
-							key={itm}
-							role="presentation"
-							onClick={() => {
-								setActiveMailAddress(itm);
-								setShowPopover(false);
-								setActiveMail({});
-							}}
-							className={styles.mail_container}
-						>
-							<Avatar
-								size="45px"
-								personName={currentPersonName}
-							/>
-							<div className={styles.mail_address_container}>
-								<div className={styles.user_name}>
-									{currentPersonName}
-								</div>
-								<div className={styles.mail_address}>
-									{itm}
-								</div>
-							</div>
-						</div>
-					);
-				},
 			)}
-		</div>
+		>
+			<div
+				role="presentation"
+				className={styles.user_mail_address}
+				onClick={() => setShowPopover((prev) => !prev)}
+			>
+				<Avatar
+					size="40px"
+					personName={shortName}
+				/>
+				<span className={styles.mail_address_name}>
+					{userName}
+				</span>
+				<IcMArrowRotateDown className={styles.arrow_right} />
+			</div>
+		</Tooltip>
 	);
 }
 

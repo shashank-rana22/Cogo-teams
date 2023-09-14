@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
@@ -6,11 +7,20 @@ import getNavData from '../utils/getNavData';
 
 const ZEROTH_INDEX = 0;
 
-export default function useGetScopeOptions({ defaultValues = {}, apisToConsider = [] } = {}) {
+export default function useGetScopeOptions({
+	defaultValues = {},
+	apisToConsider = [],
+	savedAuthDetails = {},
+} = {}) {
 	const { profile, general } = useSelector((store) => store);
 	const { pathname } = general || {};
 	const { permissions_navigations } = profile || {};
 	const { navigation } = routeConfig[pathname] || {};
+
+	const {
+		scope: savedScope = '',
+		through_criteria: savedThroughCriteria = '',
+	} = savedAuthDetails || {};
 
 	const scopeValues = useMemo(() => {
 		const navData = getNavData({ navigation }) || {};
@@ -38,15 +48,47 @@ export default function useGetScopeOptions({ defaultValues = {}, apisToConsider 
 
 						defaultView = VIEW_TYPES[view_type]?.includes(defaultValues?.view_type)
 							? defaultValues?.view_type
-							: (through_criteria || [])[ZEROTH_INDEX];
+							: (through_criteria || [])[GLOBAL_CONSTANTS.zeroth_index];
 					}
 				}
 			});
 		});
 		scopes = Array.from(new Set(scopes));
 
-		return { scopes, viewTypes: VIEW_TYPES, defaultScope, defaultView, defaultAgentId };
-	}, [navigation, permissions_navigations, defaultValues, apisToConsider]);
+		const isScopePresent = (scopes || []).some(
+			(scopeOption) => scopeOption === savedScope,
+		);
+
+		const isViewTypePresent = (VIEW_TYPES?.[savedScope] || []).some(
+			(viewType) => viewType === savedThroughCriteria,
+		);
+
+		if (isScopePresent || !defaultScope) {
+			if (isViewTypePresent || !defaultScope) {
+				defaultView = savedThroughCriteria;
+			} else {
+				defaultView = null;
+			}
+			defaultScope = savedScope;
+		}
+
+		return {
+			scopes,
+			viewTypes: VIEW_TYPES,
+			defaultScope,
+			defaultView,
+			defaultAgentId,
+		};
+	}, [
+		navigation,
+		permissions_navigations,
+		apisToConsider,
+		defaultValues?.selected_agent_id,
+		defaultValues.scope,
+		defaultValues?.view_type,
+		savedScope,
+		savedThroughCriteria,
+	]);
 
 	return {
 		scopeData: scopeValues,
