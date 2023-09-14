@@ -9,28 +9,26 @@ function FinanceConfirmModal({ confirmModal = {}, setConfirmModal = () => {}, ha
 		setConfirmModal(false);
 		console.log('modal submitted..');
 	};
+
 	return (
 		<div>
 			<Modal size="sm" show={confirmModal} onClose={() => setConfirmModal(false)}>
 				<Modal.Body>
 					<div className={styles.modal_icon_container}>
 						<IcMError width="40px" height="40px" color="#C26D1A" />
-
 					</div>
+
 					<div className={styles.modal_message_container}>
 						<div className={styles.modal_message_text}>
 							<span className={styles.modal_msg_highlight}>
 								Are you sure you want to provide clearance?
-
 							</span>
 							{' '}
 							You can not make any changes after this point.
 						</div>
 					</div>
-
 				</Modal.Body>
 				<Modal.Footer>
-
 					<Button
 						size="md"
 						themeType="secondary"
@@ -39,6 +37,7 @@ function FinanceConfirmModal({ confirmModal = {}, setConfirmModal = () => {}, ha
 					>
 						Cancel
 					</Button>
+
 					<Button
 						size="md"
 						themeType="primary"
@@ -47,7 +46,6 @@ function FinanceConfirmModal({ confirmModal = {}, setConfirmModal = () => {}, ha
 					>
 						Yes, Proceed
 					</Button>
-
 				</Modal.Footer>
 			</Modal>
 		</div>

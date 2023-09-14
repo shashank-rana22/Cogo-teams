@@ -44,16 +44,13 @@ function ExitReasons() {
 	// 	// });
 	// 	reset();
 	// };
+
 	return (
 		<>
 			<ExitHeading title="EXIT INTERVIEW" subTitle="Schedule interview the the employee" />
-			{
-				!complete ? <ReasonsToLeave setComplete={setComplete} setCode={setCode} />
-					:				<InterviewComplete code={code} />
-			}
-
+			{!complete
+				? <ReasonsToLeave setComplete={setComplete} setCode={setCode} /> : <InterviewComplete code={code} />}
 		</>
-
 	);
 }
 
