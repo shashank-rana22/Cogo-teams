@@ -134,7 +134,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 						</div>
 
 						<div className={styles.document_container}>
-							<div className={styles.label}>{`${t('incidentManagement:doc')} - `}</div>
+							<div className={styles.bold_label}>{`${t('incidentManagement:doc')} - `}</div>
 
 							{!isEmpty(documentUrls)
 								? (documentUrls || []).map((url: string) => (
@@ -149,7 +149,7 @@ function JobOpen({ id = '', refetch = () => {}, row = {} as any, isEditable = tr
 
 						{isEditable && (
 							<>
-								<div className={styles.label}>
+								<div className={styles.bold_label}>
 									{`${t('incidentManagement:remarks')}*`}
 								</div>
 

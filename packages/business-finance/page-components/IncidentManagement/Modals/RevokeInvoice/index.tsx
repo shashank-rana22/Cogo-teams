@@ -22,6 +22,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 		setShowModal,
 		id,
 		reqRevokeInvoiceRequest,
+		setReqRevokeInvoiceRequest,
 		remarks,
 		t,
 	});
@@ -41,55 +42,62 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 
-						<div>
+						<div className={styles.flex_container}>
 							<div className={styles.label_flex}>
 								{t('incidentManagement:invoice_number')}
 							</div>
 							<div className={styles.date_value}>
-								{invoiceNumber || '-'}
+								{`: ${invoiceNumber || '-'}`}
 							</div>
 						</div>
+
+						<div className={styles.flex_container}>
+							<div className={styles.label_flex}>
+								{t('incidentManagement:cancel_reason')}
+							</div>
+							<div className={styles.date_value}>
+								{`: ${reqRevokeInvoiceRequest?.cancelReason || '-'}`}
+							</div>
+						</div>
+
 						<div className={styles.label_flex}>
 							<div className={styles.document}>
 								{`${t('incidentManagement:doc')} -`}
 							</div>
-							{agreementDocument !== '' ? (
-								<a href={agreementDocument} target="_blank" rel="noreferrer" key={agreementDocument}>
-									<div className={styles.view_flex}>
-										<div className={styles.view}>{t('incidentManagement:view_agreement_link')}</div>
-										<IcMEyeopen />
+							<div style={{ marginLeft: '2px' }}>
+								{agreementDocument !== '' ? (
+									<a
+										href={agreementDocument}
+										target="_blank"
+										rel="noreferrer"
+										key={agreementDocument}
+									>
+										<div className={styles.view_flex}>
+											<div className={styles.view}>{t('incidentManagement:view_doc_link')}</div>
+											<IcMEyeopen
+												fill="#f68b21"
+											/>
+										</div>
+
+									</a>
+								) : (
+									<div key={agreementDocument}>
+										{' '}
+										{t('incidentManagement:no_doc_available')}
 									</div>
-
-								</a>
-							) : (
-								<div key={agreementDocument}>
-									{' '}
-									{t('incidentManagement:no_doc_available')}
-								</div>
-							)}
+								)}
+							</div>
 						</div>
 
-						<div>
-							{t('incidentManagement:cancel_reason')}
-						</div>
-						<Textarea
-							value={reqRevokeInvoiceRequest?.cancelReason}
-							disabled={!isEditable}
-							onChange={(e) => setReqRevokeInvoiceRequest({
-								...reqRevokeInvoiceRequest,
-								cancelReason: e,
-							})}
-							placeholder={t('incidentManagement:cancel_invoice_reason')}
-						/>
-
-						<div>
-							{t('incidentManagement:remarks')}
+						<div className={styles.remarks_flex}>
+							{`${t('incidentManagement:remarks')}*`}
 						</div>
 						<Textarea
 							value={remarks}
 							disabled={!isEditable}
 							onChange={setRemarks}
 							placeholder={t('incidentManagement:remarks_placeholder')}
+							style={{ height: '80px' }}
 						/>
 
 					</Modal.Body>

@@ -5,12 +5,13 @@
 
 .title {
 	min-width: 200px;
-	font-weight: 600;
+	font-weight: 400;
 }
 
 .flex {
 	display: flex;
 	margin-bottom: 8px;
+	font-weight: 600;
 }
 
 .name {
@@ -38,13 +39,13 @@
 }
 
 .text_area {
-	height: 100px;
+	height: 80px;
 	padding: 4px;
 	margin-bottom: 12px;
 }
 
 .file_link {
-	color: #07b02c !important;
+	color: var(--color-accent-orange-2);
 	text-decoration: underline !important;
 }
 

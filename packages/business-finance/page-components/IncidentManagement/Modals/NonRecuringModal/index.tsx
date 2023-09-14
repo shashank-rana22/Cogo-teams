@@ -92,15 +92,15 @@ function NonRecuringModal({
 					</div>
 
 					<div className={styles.document_flex}>
-						<div className={styles.document}>{`${t('incidentManagement:remarks')} -`}</div>
+						<div className={styles.remark_document}>{`${t('incidentManagement:remarks')} -`}</div>
 						{remarkData?.length > DEFAULT_MAX_LENGTH ? (
 							<Tooltip
 								className={styles.tooltip}
 								interactive
-								content={remarkData || '-'}
+								content={remarkData || ' -'}
 							>
 								<div className={styles.wrapper}>
-									{remarkData || '-'}
+									{remarkData || ' -'}
 								</div>
 							</Tooltip>
 						) : (
@@ -121,9 +121,9 @@ function NonRecuringModal({
 									<div className={styles.view}>
 										{t('incidentManagement:view_doc_link')}
 									</div>
-									<div>
-										<IcMEyeopen />
-									</div>
+
+									<IcMEyeopen fill="#f68b21" />
+
 								</div>
 							</a>
 						) : (
@@ -157,7 +157,7 @@ function NonRecuringModal({
 								onChange={(value: string) => setRemarks(value)}
 								style={{
 									width        : '700',
-									height       : '100px',
+									height       : '80px',
 									marginBottom : '12px',
 								}}
 							/>

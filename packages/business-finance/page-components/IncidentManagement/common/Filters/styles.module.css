@@ -13,11 +13,6 @@
 		}
 
 		.react-datepicker__input-container {
-			input {
-				height: 32px;
-				font-size: 10px;
-			}
-
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}
@@ -43,6 +38,7 @@
 	align-items: center;
 	width: 50%;
 	margin-left: -6px;
+	font-size: 14px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
