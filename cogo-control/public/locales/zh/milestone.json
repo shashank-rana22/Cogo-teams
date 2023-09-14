@@ -1,0 +1,16 @@
+{
+    "main_title":"标准里程碑",
+    "create":"创造",
+    "empty_milestone":"没有标准里程碑",
+    "loader_alt":"Cogoport加载",
+    "filter_opertor_placeholder":"输入运输线",
+    "filter_source_placeholder":"选择源",
+    "filter_source_opt_1":"跟踪工作",
+    "filter_source_opt_2":"默认",
+    "filter_source_opt_3":"ldb",
+    "filter_status_placeholder":"选择状态",
+    "filter_status_opt_1":"积极的",
+    "filter_status_opt_2":"不活动",
+    "filter_status_opt_3":"未铺装",
+    "filter_search_placeholder":"由里程碑/标准里程碑搜索"
+}
