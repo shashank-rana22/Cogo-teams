@@ -41,22 +41,19 @@ function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = ''
 					const Element = getFieldController(type);
 
 					return (
-						<>
-							<div
-								className={styles.form_item_container}
-								key={name}
-								style={style}
-							>
-								<label className={styles.form_label}>{label}</label>
+						<div
+							className={styles.form_item_container}
+							key={name}
+							style={style}
+						>
+							<label className={styles.form_label}>{label}</label>
 
-								<Element
-									control={control}
-									{...formControl}
-								/>
-							</div>
-
+							<Element
+								control={control}
+								{...formControl}
+							/>
 							{Error(name, errors)}
-						</>
+						</div>
 					);
 				})}
 			</div>
