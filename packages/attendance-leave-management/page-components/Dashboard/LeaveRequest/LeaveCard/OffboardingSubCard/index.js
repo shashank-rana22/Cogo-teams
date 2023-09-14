@@ -8,8 +8,9 @@ import styles from './styles.module.css';
 
 function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false }) {
 	const router = useRouter();
+
 	const handleResignation = (id, process_name) => {
-		router.push(`/separation?process_name=${process_name}&id=${id}`);
+		router.push(`/separation?process_name=${process_name}&application_id=${id}`);
 	};
 
 	return (

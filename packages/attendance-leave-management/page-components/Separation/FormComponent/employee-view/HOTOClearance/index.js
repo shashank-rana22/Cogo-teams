@@ -129,16 +129,14 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 						<div className={styles.modal_message_text}>
 							<span className={styles.modal_msg_highlight}>
 								Are you sure you want to provide clearance?
-
 							</span>
 							{' '}
 							You can not make any changes after this point.
 						</div>
 					</div>
-
 				</Modal.Body>
-				<Modal.Footer>
 
+				<Modal.Footer>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -147,6 +145,7 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 					>
 						Cancel
 					</Button>
+
 					<Button
 						size="md"
 						themeType="primary"
@@ -156,11 +155,9 @@ function HOTOClearance({ data = {}, refetch = () => {} }) {
 					>
 						Yes, Proceed
 					</Button>
-
 				</Modal.Footer>
 			</Modal>
 		</div>
-
 	);
 }
 

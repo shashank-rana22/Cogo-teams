@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function NotesHrbp({ control = {}, errors = {}, is_complete = false }) {
+function AdditionalRemarks({ control = {}, isComplete = false, confirmedValues = {} }) {
 	const [showNotes, setShowNotes] = useState(true);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShowNotes(!showNotes)}>
-				<span>Notes for HRBP</span>
+				<span>Additional Remarks</span>
 
 				<IcMArrowDown
 					width={16}
@@ -24,17 +24,16 @@ function NotesHrbp({ control = {}, errors = {}, is_complete = false }) {
 					<InputController
 						size="md"
 						placeholder="Type your notes here"
+						value={isComplete ? confirmedValues.additionalRemarks : null}
+						disabled={isComplete}
 						control={control}
 						name="notes"
 						rules={{ required: 'this is required' }}
-						disabled={is_complete}
 					/>
 				</div>
-				{errors.notes ? <span className={styles.error}>*required</span> : null}
 			</div>
-
 		</div>
 	);
 }
 
-export default NotesHrbp;
+export default AdditionalRemarks;

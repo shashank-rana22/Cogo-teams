@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import AdminClearance from './admin-view/admin-clearance';
 // import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
-import FinanceEmployeeConfirmModal from './finance-view/FInanaceClearanceEmplyeeSide/FinanaceEmployeeConfirmModal';
-import FinanceClearanceEmployeeSide from './finance-view/FInanaceClearanceEmplyeeSide/FinanceClearanceEmployeeSide';
+import FinanceClearanceEmployeeSide from './finance-view';
 import AdminClearanceHrbp from './hrbp-view/AdminClearanceHrbp';
 import ExitInterview from './hrbp-view/ExitInterview';
 // import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
@@ -19,7 +18,7 @@ import HandoverTakeover from './manager-view/HandoverTakeover';
 import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
-import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
+// import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
 
 const COMPONENT_MAPPING = {
 	hr_meet: {
@@ -37,8 +36,8 @@ const COMPONENT_MAPPING = {
 		assign_hoto    : HandoverTakeover,
 	},
 	tech_clearance: {
-		tech_clearance         : TechClearance,
-		tech_clearance_confirm : TechClearanceConfirm,
+		// tech_clearance_confirm : TechClearanceConfirm,
+		tech_clearance: TechClearance,
 	},
 	admin_clearance: {
 		admin_clearance: AdminClearance,
@@ -48,8 +47,8 @@ const COMPONENT_MAPPING = {
 	//	HOTOClearance_confirmation : HOTOClearanceConfirmation,
 	},
 	finance: {
-		finance_clearance_employee_side : FinanceClearanceEmployeeSide,
-		finance_clearance_confirm_modal : FinanceEmployeeConfirmModal,
+		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
+	//	finance_clearance_confirm_modal : FinanceEmployeeConfirmModal,
 	},
 };
 
@@ -57,13 +56,13 @@ function FormComponent({
 	data = {},
 	loading = false,
 	refetchApplicationDetails = () => {},
-	view_type = 'hr_meet',
+	view_type = '',
 }) {
 	const [currentComponent, setCurrentComponent] = useState('hr_meet');
 	const ONE = 1; const MINUS_ONE = -1;
 	let Render = null;
 
-	if (view_type === 'hr_meet') {
+	if (view_type === 'hrbp_clearance') {
 		const handleNext = () => {
 			const componentKeys = Object.keys(COMPONENT_MAPPING.finance);
 			const currentIndex = componentKeys.indexOf(currentComponent);
@@ -82,7 +81,8 @@ function FormComponent({
 			}
 		};
 
-		Render = COMPONENT_MAPPING.finance.finance_clearance_confirm_modal;
+		Render = COMPONENT_MAPPING.hr_meet?.[currentComponent];
+
 		return (
 			<div className={styles.container}>
 				{Render ? (
@@ -99,6 +99,7 @@ function FormComponent({
 			</div>
 		);
 	}
+
 	Object.keys(COMPONENT_MAPPING[view_type]).every((key) => {
 		const { is_complete = false } = data?.[view_type]?.[key] || {};
 

@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMTick, IcCFtick } from '@cogoport/icons-react';
-// import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
@@ -12,7 +11,6 @@ import NotesHrbp from './notes-hr';
 import Servicelist from './services-list';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
-// import useUpdateAdminClearanceData from './useUpdateAdminClearanceDetails';
 
 const ZEROTH_INDEX = 0;
 function AdminClearance({ data = {}, refetch = () => {} }) {
@@ -21,6 +19,7 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 	const { sub_process_detail_id } = admin_clearance?.admin_clearance || {};
 	const { sub_process_data } = admin_clearance?.admin_clearance || {};
 	const { is_complete } = admin_clearance?.admin_clearance || false;
+
 	const {
 		control,
 		formState:{ errors = {} },
@@ -30,7 +29,6 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 	} = useForm();
 	const termschecked = watch('termsacceptance');
 
-	// const { postAdminData } = useUpdateAdminClearanceData();
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShow });
 
 	const onSubmit = (values) => {
@@ -63,10 +61,6 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 	//	refetch();
 	};
 
-	const handleClose = () => {
-		setShow(false);
-	};
-
 	useEffect(() => {
 		if (is_complete) {
 			setValue('last_working_day', new Date(sub_process_data?.last_working_day));
@@ -87,57 +81,47 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 			<div className={styles.containermain}>
 				<div className={styles.title}>Admin Clareance</div>
 				<div className={styles.subtitle}>Collection of company assets</div>
-				{
-					is_complete
-						? 							(
-							<div className={styles.tickdiv}>
-								<IcCFtick
-									className={styles.tickicon}
-								/>
-								<span>You have successfully completed your tasks. No further changes are allowed.</span>
-							</div>
-						)
 
-						: null
-				}
+				{is_complete ? (
+					<div className={styles.tickdiv}>
+						<IcCFtick
+							className={styles.tickicon}
+						/>
+						<span>You have successfully completed your tasks. No further changes are allowed.</span>
+					</div>
+				) : null}
 
 				<DatePicker control={control} errors={errors} is_complete={is_complete} />
 				<Servicelist control={control} errors={errors} is_complete={is_complete} />
 				<NotesHrbp control={control} errors={errors} is_complete={is_complete} />
 			</div>
-			{
-				!is_complete
-					? (
-						<>
-							<TermsConditions
-								control={control}
-								errors={errors}
-								handleSubmit={handleSubmit}
-								onSubmit={onSubmit}
-								termschecked={termschecked}
+			{!is_complete ? (
+				<>
+					<TermsConditions
+						control={control}
+						errors={errors}
+						handleSubmit={handleSubmit}
+						onSubmit={onSubmit}
+						termschecked={termschecked}
+					/>
+					<div className={styles.buttondiv}>
+						<Button
+							className={styles.adminbutton}
+							onClick={() => setShow(!show)}
+						>
+							Provide Clearance
+							<IcMTick
+								width={16}
+								height={16}
 							/>
-							<div className={styles.buttondiv}>
-								<Button
-									className={styles.adminbutton}
-									onClick={() => setShow(!show)}
-								>
-									Provide Clearance
-									<IcMTick
-										width={16}
-										height={16}
-									/>
-								</Button>
-							</div>
-
-						</>
-
-					)
-					: null
-			}
+						</Button>
+					</div>
+				</>
+			) : null}
 
 			<OpenModal
 				show={show}
-				onClose={handleClose}
+				onClose={() => setShow(false)}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
 			/>

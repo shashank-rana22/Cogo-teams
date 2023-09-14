@@ -76,11 +76,13 @@
 
 .caret_arrow {
 	align-self: center;
+	margin-right: 12px;
 	transition: 0.3s;
 }
 
 .caret_active {
 	align-self: center;
+	margin-right: 12px;
 	transition: 0.3s;
 	transform: rotate(180deg);
 }

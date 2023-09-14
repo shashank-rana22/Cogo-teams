@@ -1,4 +1,3 @@
-import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import FormComponent from './FormComponent';
@@ -8,9 +7,7 @@ import TaskList from './TaskList';
 import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 function Separation() {
-	const { query } = useSelector((state) => state.general);
-
-	const { data, loading, refetchApplicationDetails } = useGetApplicationProcessDetails();
+	const { data, loading, refetchApplicationDetails, process_name } = useGetApplicationProcessDetails();
 
 	return (
 		<div className={styles.container}>
@@ -27,7 +24,7 @@ function Separation() {
 						data={data}
 						loading={loading}
 						refetchApplicationDetails={refetchApplicationDetails}
-						view_type={query?.process_name}
+						view_type={process_name}
 					/>
 				</div>
 			</div>
