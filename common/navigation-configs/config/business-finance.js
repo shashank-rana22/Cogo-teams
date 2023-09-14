@@ -67,6 +67,14 @@ const businessFinance = {
 		navigation : 'business_finance-account_payables',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]/create-pay-run': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]/over-seas-agent': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/account-payables/[active_tab]/advance-payment': {
 		navigation: 'business_finance-account_payables',
 	},

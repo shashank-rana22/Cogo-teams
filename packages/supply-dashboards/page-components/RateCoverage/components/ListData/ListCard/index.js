@@ -15,7 +15,6 @@ const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slab
 
 function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {} }) {
 	const { sources = [] } = data;
-
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
 
 	const items = (ITEM_LIST || []).map((item) => ({
@@ -27,6 +26,10 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
+
+	const handleAddRate = () => {
+		setShowAddRateModal((prev) => !prev);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -170,7 +173,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 						)}
 						<Button
 							style={{ marginLeft: '16px' }}
-							onClick={() => { setShowAddRateModal((prev) => !prev); }}
+							onClick={handleAddRate}
 						>
 							{filter?.status !== 'completed' ? 'Add Rate' : 'Edit Rate'}
 						</Button>
