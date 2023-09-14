@@ -1,8 +1,5 @@
-/* eslint-disable max-lines-per-function */
 import { Modal, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 // eslint-disable-next-line import/no-unresolved
 import converter from 'number-to-words';
@@ -10,9 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import useGeneratePdf from '../../hooks/useGeneratePdf';
 import useGetTradeParties from '../../hooks/useGetOrganizationTradeParty';
-import { invoiceColumns } from '../../utils/invoiceColumns';
-
-import styles from './styles';
+import InvoiceAmountContainer from '../InvoiceAmountContainer';
+import InvoiceDetailsContainer from '../InvoiceDetailsContainer';
+import InvoiceHeaderContainer from '../InvoiceHeaderContainer';
+import InvoiceLowerContainer from '../InvoiceLowerContainer';
 
 const ZERO = 0;
 
@@ -22,11 +20,8 @@ function InvoiceTemplate({
 	setShowTemplate = () => {},
 	formValues = {},
 	billingParty = {},
-	// collectionPartyState = {},
-	// collectionPartyAddress = {},
 	bank_details = [],
 	shipment_data = {},
-	// fields = {},
 	calculatedValues = {},
 	lineItemsDataArray = [],
 	setGenerateInvoiceModal = () => {},
@@ -64,7 +59,6 @@ function InvoiceTemplate({
 	};
 
 	const {
-		// loading: loadingGetTradeParty,
 		data: tradePartyData,
 		getSelfTradeParty,
 	} = useGetTradeParties({ serviceProvider });
@@ -150,293 +144,45 @@ function InvoiceTemplate({
 			<Modal.Header />
 			<Modal.Body style={{ maxHeight: '780px' }}>
 				<div ref={ref}>
-					<div style={styles.first_container}>
-						<div style={styles.customer_info}>
-							<b>{serviceProviderTradePartyObj?.business_name}</b>
-							<div style={{ paddingTop: '5px' }}>
-								<div>
-									{billingAddress?.address}
-									,
-									{' '}
-									{billingAddress?.pincode}
-								</div>
-								<div>{serviceProviderTradePartyObj?.country?.name}</div>
-								<div>
-									PAN No :
-									{' '}
-									{serviceProviderTradePartyObj?.registration_number}
-								</div>
-								<div>
-									GST No :
-									{' '}
-									{billingAddress?.tax_number}
-								</div>
-							</div>
-						</div>
-						<div style={styles.invoice_type}>
-							<div style={styles.proforma}>
-								<b>{formValues.invoice_type}</b>
-							</div>
-							<img src={imageSrc} alt="Cogoport" height="40px" />
-						</div>
-					</div>
+					<InvoiceHeaderContainer
+						serviceProviderTradePartyObj={serviceProviderTradePartyObj}
+						billingAddress={billingAddress}
+						imageSrc={imageSrc}
+						formValues={formValues}
+					/>
+					<InvoiceDetailsContainer
+						business_name={business_name}
+						address={address}
+						city={city}
+						pin_code={pin_code}
+						country={country}
+						cin={cin}
+						registration_number={registration_number}
+						gst_number={gst_number}
+						bank_account_number={bank_account_number}
+						ifsc_number={ifsc_number}
+						bank_name={bank_name}
+						branch_name={branch_name}
+						tax_invoice_no={tax_invoice_no}
+						shipment_data={shipment_data}
+						formValues={formValues}
+						split_type={split_type}
+						due_date={due_date}
+						invoice_date={invoice_date}
+					/>
 
-					<div style={styles.second_container}>
-						<div style={styles.billing_party_details}>
-							<div style={{ textAlign: 'center' }}>
-								<b>Ship To Customer</b>
-							</div>
-							<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
-								<b>{business_name}</b>
-								<div style={{ paddingTop: '5px' }}>
-									<div>{address}</div>
-									<div>
-										{city?.name}
-										{' '}
-										-
-										{' '}
-										{pin_code}
-									</div>
-									<div>{country?.name}</div>
-									<div>
-										CIN No :
-										{' '}
-										{cin}
-									</div>
-									<div>
-										PAN No :
-										{' '}
-										{registration_number}
-									</div>
-									<div>
-										GST No:
-										{' '}
-										{gst_number}
-									</div>
-								</div>
-							</div>
-						</div>
-						<div style={styles.billing_party_address}>
-							<div style={{ textAlign: 'center' }}>
-								<b>Bill To Customer</b>
-							</div>
-							<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
-								<b>COGOPORT PRIVATE LIMITED</b>
-								<div>
-									{address}
-									,
-									{' '}
-									{city?.name}
-									{' '}
-									-
-									{' '}
-									{pin_code}
-									,
-									{' '}
-									{country?.name}
-								</div>
-								<div>
-									CIN No :
-									{' '}
-									{cin}
-								</div>
-								<div>
-									PAN No :
-									{' '}
-									{registration_number}
-								</div>
-								<div>
-									GST No :
-									{' '}
-									{gst_number}
-								</div>
-							</div>
-						</div>
-						<div style={styles.bank_details}>
-							<div style={{ textAlign: 'center' }}>
-								<b>Bank Details</b>
-							</div>
-							<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
-								<div>
-									<b>Account No. :</b>
-									{' '}
-									{bank_account_number}
-								</div>
-								<div>
-									<b>IFSC Number :</b>
-									{' '}
-									{ifsc_number}
-								</div>
-								<div>
-									<b>Bank Name :</b>
-									{' '}
-									{bank_name}
-								</div>
-								<div>
-									<b>Branch Name :</b>
-									{branch_name}
-								</div>
-							</div>
-						</div>
-						<div style={styles.invoice_details}>
-							<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
-								<div>
-									<b>Invoice No : </b>
-									{tax_invoice_no}
-								</div>
-								<div>
-									<b>Invoice Date : </b>
-									{formatDate({
-										date       : invoice_date,
-										formatType : 'dateTime',
-										separator  : ', ',
-									})}
-								</div>
-								<div>
-									<b>Due Date : </b>
-									{formatDate({
-										date       : due_date,
-										formatType : 'dateTime',
-										separator  : ', ',
-									})}
-								</div>
-								<div>
-									<b>Shipment Id : </b>
-									{shipment_data?.serial_id}
-								</div>
-								<div>
-									<b>Place Of Supply : </b>
-									{formValues?.place_of_supply}
-								</div>
-								{split_type && (
-									<div>
-										<b>Split type : </b>
-										{startCase(split_type)}
-									</div>
-								)}
-							</div>
-						</div>
-					</div>
+					<InvoiceAmountContainer
+						lineItemsDataArray={lineItemsDataArray}
+						calculatedValues={calculatedValues}
+						formValues={formValues}
+					/>
 
-					<div style={styles.third_container}>
-						<div>
-							<div style={styles.column_headings}>
-								{invoiceColumns.map((item) => (
-									<div style={styles.item_label} key={item.key}>
-										{item.label}
-									</div>
-								))}
-							</div>
-						</div>
-						<div>
-							{lineItemsDataArray.map((singleItem) => (
-								<div
-									style={styles.line_items_array}
-									key={singleItem?.serial_number}
-								>
-									{invoiceColumns.map((item) => (
-										<div
-											style={{
-												border    : '1px solid black',
-												width     : '100%',
-												textAlign : 'center',
-											}}
-											key={item.key}
-										>
-											{singleItem[item.key] || '-'}
-										</div>
-									))}
-								</div>
-							))}
-						</div>
-						<div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-							<div style={styles.total_amount}>
-								<div style={{ width: '50%', border: '0.5px solid black' }}>
-									<b>
-										{formatAmount({
-											amount   : calculatedValues.total_tax_amount || ZERO,
-											currency : formValues?.invoice_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										})}
-									</b>
-								</div>
-								<div style={{ width: '50%', border: '0.5px solid black' }}>
-									<b>
-										{formatAmount({
-											amount   : calculatedValues.sub_total_amount || ZERO,
-											currency : formValues?.invoice_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										})}
-									</b>
-								</div>
-							</div>
-						</div>
-					</div>
+					<InvoiceLowerContainer
+						formValues={formValues}
+						calculatedValues={calculatedValues}
+						amountInWords={amountInWords}
+					/>
 
-					<div style={styles.fourth_container}>
-						<div style={{ display: 'flex' }}>
-							<div style={styles.amount}>
-								<b>
-									Total Payable in Words :
-									{' '}
-									{formValues?.invoice_currency}
-									{' '}
-									{amountInWords || '-'}
-								</b>
-							</div>
-							<div style={styles.tax}>
-								<div>
-									<b>
-										Total Amount Before Tax: &nbsp; &nbsp;
-										{' '}
-										{formatAmount({
-											amount   : calculatedValues.sub_total_amount || ZERO,
-											currency : formValues?.invoice_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										})}
-									</b>
-								</div>
-								<div>
-									<b>
-										Total Amount After Tax: &nbsp; &nbsp; &nbsp;
-										{' '}
-										{formatAmount({
-											amount   : calculatedValues.invoice_amount || ZERO,
-											currency : formValues?.invoice_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										})}
-									</b>
-								</div>
-							</div>
-						</div>
-						<div style={{ display: 'flex' }}>
-							<div style={styles.remarks}>
-								<b>Remarks: &nbsp;</b>
-								<div>
-									{formValues?.remarks || ''}
-								</div>
-							</div>
-							<div style={styles.signature}>
-								<b> Authorised Signatory </b>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div style={{ marginLeft: '36%', marginTop: '40px', display: 'flex' }}>
 					<Button
@@ -453,8 +199,6 @@ function InvoiceTemplate({
 						style={{ marginLeft: '10px' }}
 						onClick={() => {
 							uploadPdf();
-							// setShowTemplate(false);
-							// setGenerateInvoiceModal(true);
 						}}
 					>
 						Upload Invoice
