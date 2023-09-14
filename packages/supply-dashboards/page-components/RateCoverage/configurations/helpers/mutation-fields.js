@@ -12,8 +12,9 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 			{ params: { filters: { organization_id: values?.service_provider_id } } },
 		),
 	);
-	const mainPortOptions1 = useGetMainPortsOptions({ location_id: values?.origin_port?.id });
-	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_port?.id });
+	const mainPortOptions1 = useGetMainPortsOptions({ location_id: values?.origin_location_id });
+
+	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_location_id });
 
 	const serviceProviders = useGetAsyncOptions(
 		merge(
