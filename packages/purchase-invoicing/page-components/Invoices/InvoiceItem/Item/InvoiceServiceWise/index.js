@@ -1,7 +1,8 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
-import CardList from './CardList/index';
+import CardList from './CardList';
+// import CardListOLD from './CardListOLD/index';
 import { invoiceTable } from './InvoiceTable';
 import styles from './styles.module.css';
 

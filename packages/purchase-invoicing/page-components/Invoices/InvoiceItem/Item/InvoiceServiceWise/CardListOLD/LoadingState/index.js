@@ -15,6 +15,7 @@ function LoadingState({ fields = [], isLast = false }) {
 				}
 				return (
 					<div
+						// eslint-disable-next-line custom-eslint/key-as-function
 						key={uuid()}
 						style={STYLES_COL}
 					>

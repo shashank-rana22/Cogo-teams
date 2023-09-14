@@ -1,63 +1,38 @@
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import { cl, Loader } from '@cogoport/components';
 import React from 'react';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
-import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-const ONE = 1;
 function List({
 	fields = [],
 	data = [],
 	loading = false,
 	showCode = false,
-	showContent = { heading: 'No Results found!' },
-	sort = {},
-	setSort = () => {},
-	isLclManifest = false,
-	numberOfLoader = 10,
+	detail = {},
+	creditNote = false,
 }) {
-	function HandleRender() {
-		if (loading) {
-			const loadingStates = Array.from({ length: numberOfLoader }, (_, i) => (
-				// eslint-disable-next-line react/jsx-key
-				<LoadingState fields={fields} isLast={i === numberOfLoader - ONE} />
-			));
+	return (
+		<main className={cl`${styles.main} ${creditNote ? styles.creditNote : ''}`}>
+			<Header fields={fields} showCode={showCode} detail={detail} />
 
-			return loadingStates;
-		}
+			{loading
+				? (
+					<div className={styles.loading_wrapper}>
+						<Loader />
+					</div>
+				)
 
-		if (!data.length) {
-			return <EmptyState showContent={showContent} />;
-		}
-
-		return (
-			<>
-				{(data || []).map((item, i) => (
-					// eslint-disable-next-line react/jsx-key
+				: (data || []).map((item) => (
 					<CardItem
+						key={item}
 						item={item}
 						loading={loading}
 						fields={fields}
-						isLast={data?.length === i + ONE && !isLclManifest}
 					/>
 				))}
-			</>
-		);
-	}
-
-	return (
-		<div className={styles.container}>
-			<Header
-				fields={fields}
-				showCode={showCode}
-				sort={sort}
-				setSort={setSort}
-			/>
-
-			<HandleRender />
-		</div>
+		</main>
 	);
 }
 
