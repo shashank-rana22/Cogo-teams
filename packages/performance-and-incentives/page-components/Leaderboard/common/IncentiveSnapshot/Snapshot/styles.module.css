@@ -17,12 +17,12 @@
 	font-size: 1.15em;
 	color: #828282;
 
-	@media (min-width: 1024px) {
+	/* @media (min-width: 1024px) {
 		font-size: 1.25em;
 	}
 	@media (min-width: 1440px) {
 		font-size: 1.35em;
-	}
+	} */
 	@media (min-width: 2560px) {
 		font-size: 1.55em;
 	}
@@ -46,12 +46,12 @@
 	font-size: 1.15em;
 	font-weight: 600;
 
-	@media (min-width: 1024px) {
+	/* @media (min-width: 1024px) {
 		font-size: 1.25em;
 	}
 	@media (min-width: 1440px) {
 		font-size: 1.35em;
-	}
+	} */
 	@media (min-width: 2560px) {
 		font-size: 1.55em;
 	}
@@ -61,12 +61,12 @@
 	font-size: 1em;
 	color: #828282;
 
-	@media (min-width: 1024px) {
+	/* @media (min-width: 1024px) {
 		font-size: 1.1em;
 	}
 	@media (min-width: 1440px) {
 		font-size: 1.2em;
-	}
+	} */
 	@media (min-width: 2560px) {
 		font-size: 1.4em;
 	}
@@ -77,12 +77,12 @@
 	font-size: 0.7em;
 	color: #828282;
 
-	@media (min-width: 1024px) {
+	/* @media (min-width: 1024px) {
 		font-size: 0.8em;
 	}
 	@media (min-width: 1440px) {
 		font-size: 0.9em;
-	}
+	} */
 	@media (min-width: 2560px) {
 		font-size: 1.1em;
 	}
