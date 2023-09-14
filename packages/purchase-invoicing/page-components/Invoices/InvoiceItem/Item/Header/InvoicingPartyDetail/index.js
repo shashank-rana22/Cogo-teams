@@ -14,7 +14,7 @@ function InvoicingPartyDetail({
 	const invoicePartyDetailsRef = useRef(null);
 
 	const {
-		billing_address,
+		buy_address,
 	} = invoice;
 
 	const RESTRICTED_ENTITY_IDS = [];
@@ -26,7 +26,7 @@ function InvoicingPartyDetail({
 	return (
 		<div className={styles.invoice_party_details} ref={invoicePartyDetailsRef}>
 			<div className={styles.invoice_party_name}>
-				{billing_address?.name || billing_address?.business_name}
+				{buy_address?.name || buy_address?.business_name}
 			</div>
 
 			{!RESTRICTED_ENTITY_IDS.includes(shipment_data?.entity_id)
@@ -38,14 +38,14 @@ function InvoicingPartyDetail({
 							placement="bottom"
 							content={(
 								<div className={styles.tooltip_div}>
-									{billing_address?.address}
+									{buy_address?.address}
 								</div>
 							)}
 						>
 							<div
 								className={styles.gst_number}
 							>
-								{billing_address?.tax_number}
+								{buy_address?.tax_number}
 							</div>
 						</Tooltip>
 					</div>
