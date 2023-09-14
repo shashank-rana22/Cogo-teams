@@ -10,10 +10,13 @@ import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 import AgentWiseLockScreen from './AgentWiseLockScreen';
 import FireBaseConfiguration from './FireBaseConfiguration';
 import LeaveStatusView from './LeaveStatusView';
+import ShiftConfiguration from './ShiftConfiguration';
 import styles from './styles.module.css';
 import SwitchView from './SwitchView';
 
 const SHOW_PAGINATION_FOR = ['list_agents', 'agents_status'];
+
+const THREE_CONTAINER = 3;
 
 const TAB_CONFIG_MAPPING = {
 	list_agents: {
@@ -24,6 +27,10 @@ const TAB_CONFIG_MAPPING = {
 	fire_base_configuration: {
 		Component  : FireBaseConfiguration,
 		headerText : 'Fire Base Configuration',
+	},
+	shift_configuration: {
+		Component  : ShiftConfiguration,
+		headerText : 'Shift Configuration',
 	},
 	agents_status: {
 		Component  : LeaveStatusView,
@@ -98,6 +105,10 @@ function ConfigModal({
 			setActiveCard,
 			handleClose,
 		},
+		shift_configuration: {
+			handleClose,
+			viewType,
+		},
 		agents_status: {
 			firestore,
 			isLoading: loading,
@@ -126,7 +137,7 @@ function ConfigModal({
 		>
 			<Modal.Header
 				className={styles.modal_header}
-				title={activeCard === 'fire_base_configuration' ? (
+				title={(activeCard === 'fire_base_configuration' || activeCard === 'shift_configuration') ? (
 					<>
 						<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
 						<span className={styles.header_label}>{headerText || 'Configuration'}</span>
@@ -144,7 +155,11 @@ function ConfigModal({
 							{...COMPONENT_PROPS[activeCard]}
 						/>
 					) : (
-						<div className={styles.screen_container}>
+						<div
+							className={cl`${styles.screen_container}
+							 ${AGENT_CONFIG_MAPPING.length > THREE_CONTAINER
+								? styles.wrap_container : ''}`}
+						>
 							{AGENT_CONFIG_MAPPING.map((item) => {
 								const { label = '', name = '', icon = {} } = item || {};
 

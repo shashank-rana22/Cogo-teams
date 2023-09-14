@@ -22,6 +22,12 @@
 	overflow: auto;
 }
 
+.wrap_container {
+	justify-content: flex-start;
+	margin: 0 2px;
+	overflow-y: hidden;
+}
+
 .active_card {
 	background: #c26d1a;
 
