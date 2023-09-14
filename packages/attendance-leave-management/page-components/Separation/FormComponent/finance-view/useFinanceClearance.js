@@ -8,8 +8,6 @@ import useGetFinanceClearanceProcessDetails from './useGetFinanceClearanceDetail
 const ZERO = 0;
 
 const useFinanceClearance = ({ refetch }) => {
-	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm();
-	const { data } = useGetFinanceClearanceProcessDetails();
 	const [updateData, setUpdateData] = useState([]);
 	const [totalRecoverableAmount, setTotalRecoverableAmount] = useState(ZERO);
 	const [financeRecommendation, SetFinanceRecommendation] = useState({
@@ -17,11 +15,15 @@ const useFinanceClearance = ({ refetch }) => {
 		fnf      : false,
 	});
 
+	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm();
+	const { data } = useGetFinanceClearanceProcessDetails();
+
 	const data1 = data?.finance_clearance || {};
 	const { finance_clearance } = data1 || {};
 	const { sub_process_detail_id, sub_process_data, is_complete } = finance_clearance || {};
 	const { notes_shared_with_you = [], outstanding_amount_details = [] } = sub_process_data || {};
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
+
 	const onSubmit = (values) => {
 		const OUTSTANDINDDETAILS = [];
 		outstanding_amount_details.map((item) => (
@@ -41,6 +43,7 @@ const useFinanceClearance = ({ refetch }) => {
 				sixty              : item?.openInvoiceAgeingBucket?.sixty?.ledgerAmount || '-',
 			})
 		));
+
 		const payload = {
 			process_name     : 'finance_clearance',
 			sub_process_detail_id,
