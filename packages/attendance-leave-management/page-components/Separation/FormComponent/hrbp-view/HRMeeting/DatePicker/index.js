@@ -38,7 +38,6 @@ function DatePicker({ control = {}, errors = {}, lastWorkingDay = '' }) {
 						formatType : 'date',
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 					})}
-
 				</span>
 			</div>
 		</div>

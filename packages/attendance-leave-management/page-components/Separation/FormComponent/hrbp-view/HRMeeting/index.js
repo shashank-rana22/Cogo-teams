@@ -79,7 +79,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			setValue('date', new Date(sub_process_data?.lastWorkingDay));
+			setValue('date', sub_process_data?.lastWorkingDay);
 			setValue('joining_bonus_amount', sub_process_data?.joiningBonus);
 			setValue('joining_bonus_clawback', sub_process_data?.joiningBonusApplicable);
 			setValue('your_notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].value);
