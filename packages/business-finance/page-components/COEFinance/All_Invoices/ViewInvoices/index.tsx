@@ -34,6 +34,7 @@ function ViewInvoices() {
 	});
 
 	const [isTagFound, setIsTagFound] = useState(false);
+	const [currentTab, setCurrentTab] = useState('shipmentDetailsTab');
 
 	useEffect(() => {
 		if (!isTagFound) {
@@ -82,6 +83,7 @@ function ViewInvoices() {
 					status={status}
 					checkItem={checkItem}
 					isTagFound={isTagFound}
+					currentTab={currentTab}
 				/>
 			</div>
 
@@ -99,6 +101,7 @@ function ViewInvoices() {
 				setCheckItem={setCheckItem}
 				isTagFound={isTagFound}
 				setIsTagFound={setIsTagFound}
+				setCurrentTab={setCurrentTab}
 			/>
 		</div>
 	);

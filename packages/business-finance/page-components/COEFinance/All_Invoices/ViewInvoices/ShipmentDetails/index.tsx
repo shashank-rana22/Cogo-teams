@@ -117,6 +117,7 @@ interface ShipmentDetailsInterface {
 	};
 	isTagFound?: boolean;
 	setIsTagFound?: any;
+	setCurrentTab?: any;
 }
 
 function ShipmentDetails({
@@ -133,6 +134,7 @@ function ShipmentDetails({
 	setCheckItem = (prop) => (prop),
 	isTagFound = false,
 	setIsTagFound = () => {},
+	setCurrentTab = () => {},
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -168,12 +170,14 @@ function ShipmentDetails({
 		setTab(
 			(prev: any) => ({ ...prev, [tabName]: !prev[tabName] }),
 		);
+		setCurrentTab(tabName);
 	};
 
 	const onAccept = ({ tabName = '', tabToOpen = '', timelineItem = '' }) => {
 		setTab(
 			(prev: any) => ({ ...prev, [tabToOpen]: true, [tabName]: !prev[tabName] }),
 		);
+		setCurrentTab(tabToOpen);
 		setCheckItem(
 			(prev: any) => ({ ...prev, [timelineItem]: true }),
 		);

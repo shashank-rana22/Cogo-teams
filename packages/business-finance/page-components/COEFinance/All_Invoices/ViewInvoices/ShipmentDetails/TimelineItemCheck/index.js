@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMFtick } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -14,12 +15,12 @@ const ITEMS = {
 	lineItemsCheck       : 'Line Items',
 };
 
-function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false }) {
+function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false, currentTab = '' }) {
 	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
 	if (!isTagFound) {
 		delete ITEMS.taggingCheck;
 	}
-
+	const updatedCurrentTab = currentTab.replace('Tab', 'Check');
 	return (
 		<div className={styles.timeline}>
 			{Object.keys(ITEMS).map((itemKey) => (
@@ -34,7 +35,11 @@ function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false }) 
 						{checkItem[itemKey] || isInvoiceApproved ? (
 							<IcMFtick color="#f68b21" height={24} width={24} />
 						) : (
-							<div className={styles.dull} />
+							<div
+								className={cl`
+								${styles.sharedCircle} 
+								${itemKey === updatedCurrentTab ? styles.currentTabCircle : styles.dull}`}
+							/>
 						)}
 						{ITEMS[itemKey] !== 'Line Items' ? (
 							<div
@@ -46,7 +51,7 @@ function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false }) 
 							/>
 						) : undefined}
 					</div>
-					<div>
+					<div className={itemKey === updatedCurrentTab ? styles.currentTabStyle : undefined}>
 						{ITEMS[itemKey]}
 					</div>
 
