@@ -20,6 +20,11 @@
 			overflow: visible;
 		}
 
+		:first-child.ui_table_body_cell,
+		:first-child.ui_table_head_cell {
+			padding-left: 20px;
+		}
+
 		.country_code {
 			margin-right: 12px;
 		}

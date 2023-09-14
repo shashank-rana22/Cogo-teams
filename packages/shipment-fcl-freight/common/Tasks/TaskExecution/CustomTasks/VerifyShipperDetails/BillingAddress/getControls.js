@@ -90,18 +90,18 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			},
 		},
 		{
-			name  : 'mobile_number',
-			label : 'Mobile Number',
-			size  : 'sm',
-			type  : 'mobileNumber',
-			rules : {
+			name   : 'mobile_number',
+			label  : 'Mobile Number',
+			size   : 'sm',
+			type   : 'mobileNumber',
+			styles : { flexBasis: '30%' },
+			rules  : {
 				required : 'Mobile Number is required',
 				pattern  : {
 					value   : countryValidation?.regex?.MOBILE_NUMBER,
 					message : 'Mobile Number is Invalid',
 				},
 			},
-			styles: { flexBasis: '30%' },
 		},
 		{
 			name   : 'email',
