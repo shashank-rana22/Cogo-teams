@@ -170,16 +170,16 @@ function Actions({
 						</>
 					) : null}
 
-						<KebabContent
-							invoice={invoice}
-							shipment_data={shipment_data}
-							invoiceData={invoiceData}
-							isIRNGenerated={isIRNGenerated}
-							setShowModal={setShowModal}
-							showCancelOptions={showCancelOptions}
-							bfInvoice={bfInvoice}
-						/>
-					</div>
+					<KebabContent
+						invoice={invoice}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						isIRNGenerated={isIRNGenerated}
+						setShowModal={setShowModal}
+						showCancelOptions={showCancelOptions}
+						bfInvoice={bfInvoice}
+					/>
+				</div>
 
 			</div>
 

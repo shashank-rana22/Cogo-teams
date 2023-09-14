@@ -157,7 +157,7 @@ const useEditLineItems = ({
 		let isLineItemsValid = true;
 
 		Object.keys(values).forEach((key) => {
-			const { line_items: lineItems, service_type: serviceType } = (services || []).find(
+			const { line_items: lineItems } = (services || []).find(
 				(ele) => {
 					const [serviceId] = (key || '').split(':');
 					return serviceId && ele.service_id === serviceId;
@@ -171,11 +171,7 @@ const useEditLineItems = ({
 			formValsToChecked.forEach((val, idx) => {
 				const originalValue = lineItems?.[idx];
 
-				if (
-					val.price_discounted < originalValue.price_discounted
-					&& ((shipment_data?.shipment_type === 'fcl_freight'
-					&& serviceType !== 'fcl_freight_local_service') || (originalValue?.code === 'BookingCONV'))
-				) {
+				if (val.price_discounted < originalValue.price_discounted) {
 					const priceDiscountedRefKey = `${key}.${idx}.price_discounted`;
 
 					setError(priceDiscountedRefKey, {

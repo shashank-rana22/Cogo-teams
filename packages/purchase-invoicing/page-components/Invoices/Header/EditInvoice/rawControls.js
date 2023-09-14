@@ -61,9 +61,10 @@ const rawControls = ({
 				span        : 2,
 				handleChange,
 				placeholder : 'Select Line Item',
-				disabled:
-				isFieldsDisabled,
-				rules: { required: 'Required' },
+				disabled    : true,
+				// disabled:
+				// isFieldsDisabled,
+				rules       : { required: 'Required' },
 			},
 			{
 
@@ -77,6 +78,7 @@ const rawControls = ({
 				),
 				placeholder : 'Enter alias name/code',
 				span        : 2,
+				disabled    : true,
 				rules       : {
 					validate: (v) => {
 						if (isFieldsDisabled || isEmpty(v)) {
@@ -91,7 +93,8 @@ const rawControls = ({
 				type     : 'select',
 				name     : 'unit',
 				options  : convertObjectMappingToArray(FCL_UNITS),
-				disabled : isFieldsDisabled,
+				// disabled : isFieldsDisabled,
+				disabled : true,
 				span     : 2,
 				rules    : { required: true },
 			},
@@ -104,8 +107,9 @@ const rawControls = ({
 				placeholder  : 'Select Currency',
 				rules        : { required: true },
 				span         : 1.5,
-				disabled:
-				handleDisableCond(charge, isAdminSuperAdmin),
+				disabled     : true,
+				// disabled:
+				// handleDisableCond(charge, isAdminSuperAdmin),
 			},
 			{
 				label       : 'Price',
@@ -117,7 +121,8 @@ const rawControls = ({
 					required : true,
 					validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 				},
-				disabled: isFieldsDisabled,
+				// disabled: true,
+				// disabled: isFieldsDisabled,
 			},
 			{
 				label       : 'Quantity',
@@ -126,14 +131,16 @@ const rawControls = ({
 				placeholder : 'enter quantity',
 				rules       : { required: true, min: 1 },
 				span        : 1,
-				disabled    : isFieldsDisabled,
+				disabled    : true,
+				// disabled    : isFieldsDisabled,
 			},
 			{
-				label  : 'Amount (Tax Excl.)',
-				type   : 'static',
-				name   : 'total',
-				render : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
-				span   : 2,
+				label    : 'Amount (Tax Excl.)',
+				type     : 'static',
+				name     : 'total',
+				render   : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
+				span     : 2,
+				disabled : true,
 			},
 		],
 	};
