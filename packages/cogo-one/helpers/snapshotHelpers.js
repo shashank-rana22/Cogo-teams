@@ -210,30 +210,6 @@ export function mountSnapShot({
 	);
 }
 
-export async function mountLatestMialSnapShot({
-	unreadNewMailMessage = {},
-	omniChannelCollection = {},
-	baseQuery = [],
-	sessionQuery = [],
-	queryFilters = [],
-	setNewMessage = () => {},
-}) {
-	snapshotCleaner({ ref: unreadNewMailMessage });
-
-	const newMailMessageQuery = query(
-		omniChannelCollection,
-		where('has_admin_unread_messages', '==', true),
-		...(baseQuery || []),
-		...(sessionQuery || []),
-		...(queryFilters || []),
-		orderBy('new_message_sent_at', 'desc'),
-	);
-
-	const newMailMessagePromise = await getDocs(newMailMessageQuery);
-	const newMailMessage = newMailMessagePromise?.docs;
-	setNewMessage(newMailMessage);
-}
-
 export async function getPrevChats({
 	omniChannelCollection,
 	omniChannelQuery, listData,

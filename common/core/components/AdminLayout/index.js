@@ -7,7 +7,7 @@ import { getFirestore } from 'firebase/firestore';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
-import useGetUnreadMails from '../../helpers/useGetLatestMailMessage';
+import useGetUnreadMails from '../../helpers/useGetUnreadMails';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';

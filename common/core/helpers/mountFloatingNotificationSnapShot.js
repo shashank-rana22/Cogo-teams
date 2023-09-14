@@ -3,7 +3,7 @@ import {
 	query, where, orderBy,
 } from 'firebase/firestore';
 
-import handleNotificationClick from './getNotification';
+import getNotification from './getNotification';
 
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
@@ -59,7 +59,7 @@ export function mountFloatingNotificationSnapShot({
 			(floatNotificationChatSnapshot) => {
 				const { resultList } = dataFormatter(floatNotificationChatSnapshot?.docs);
 
-				handleNotificationClick({
+				getNotification({
 					resultList,
 					firestore,
 				});
