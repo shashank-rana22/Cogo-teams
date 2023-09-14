@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Tabs, TabPanel } from '@cogoport/components';
-import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { Tabs, TabPanel, Select } from '@cogoport/components';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
@@ -8,6 +7,7 @@ import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import { EntityContext } from './commons/Contexts';
+import useListCogoEntities from './commons/hooks/useListCogoEntities';
 import Expenses from './Expenses/index';
 import styles from './styles.module.css';
 import Vendors from './Vendors/index';
@@ -22,6 +22,8 @@ function Overheads() {
 	const profile = useSelector((state) => state);
 	const { profile: { partner } }:ProfileProps = profile || {};
 	const { id: partnerId } = partner || {};
+
+	const { entityLoading = true, entityData = [] } = useListCogoEntities();
 
 	const defaultEntityCode = getDefaultEntityCode(partnerId);
 
@@ -41,27 +43,34 @@ function Overheads() {
 			`/business-finance/overheads/${tab}`,
 		);
 	};
+	const entityOptions = (entityData || []).map((item) => {
+		const {
+			id = '',
+			entity_code: entitycode = '',
+		} = item || {};
+
+		return {
+			label : `${entitycode} - ${item.business_name}`,
+			value : id,
+		};
+	});
 
 	return (
 		<div className={styles.font}>
 			<EntityContext.Provider value={entityCode}>
 				<div className={styles.main_heading}>Overheads</div>
 				<div className={styles.header}>
-					<AsyncSelect
-						placeholder="Select Entity Code"
-						value={entityCode}
-						onChange={(val) => setEntityCode(val)}
-						isClearable
-						initialCall
-						labelKey="entity_code"
-						valueKey="id"
-						getModifiedOptions={({ options }) => (options?.map((option) => ({
-							...option,
-							entity_code: `${option?.entity_code} - ${option?.business_name}`,
-						})))}
-						asyncKey="list_cogo_entity"
-						style={{ width: '260px' }}
-					/>
+					{ entityLoading ? null : (
+						<Select
+							name="activeEntity"
+							value={entityCode}
+							onChange={(entityVal) => setEntityCode(entityVal)}
+							placeholder="Select Entity"
+							options={entityOptions}
+							size="sm"
+							style={{ width: '260px' }}
+						/>
+					) }
 				</div>
 				<Tabs
 					activeTab={activeTab}
