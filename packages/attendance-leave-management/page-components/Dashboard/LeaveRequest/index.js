@@ -2,6 +2,7 @@ import { Input, Tabs, TabPanel } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowLeft, IcMSearchlight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -14,9 +15,9 @@ import styles from './styles.module.css';
 
 const ZERO_COMPARE = 0;
 
-function LeaveRequest({ isManager = false }) {
+function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 	const [activeTab, setActiveTab] = useState('employee');
-
+	const { push } = useRouter();
 	const { loading, data } = useGetLeaveGroupings(activeTab);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -28,11 +29,16 @@ function LeaveRequest({ isManager = false }) {
 		setSearchQuery(event);
 	};
 
+	const handleGoBack = () => {
+		setShowInbox(false);
+		push('/attendance-leave-management');
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.left_header}>
-					<IcMArrowLeft width={20} height={20} />
+					<IcMArrowLeft width={20} height={20} onClick={handleGoBack} />
 					<div className={styles.card_content}>
 						<span className={styles.above_text}>MY INBOX</span>
 						<span className={styles.below_text}>

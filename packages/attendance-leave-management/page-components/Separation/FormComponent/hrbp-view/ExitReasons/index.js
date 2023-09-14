@@ -1,58 +1,104 @@
-// import { Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
 // import useGetGenerateExitCode from '../../hooks/useGetGenerateExitCode';
-// import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 import ExitHeading from '../ExitInterview/ExitHeading';
-import InterviewComplete from '../ExitInterviewComplete/InterviewCompletion';
 
+import InterviewComplete from './InterviewCompletion';
 import ReasonsToLeave from './Reasons';
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
-function ExitReasons() {
+const REASONS_LIST = [
+	'Lack of Career Growth and Development Opportunities',
+	'Inadequate Compensation and Benefits',
+	'Work-Life Balance Issues',
+	'Company Culture and Values Misalignment',
+	'Lack of Recognition and Appreciation',
+	'Poor Communication',
+	'Unchallenging tasks No job satisfaction',
+	'Conflict and Workplace/ Team Issues',
+	'Personal Reasons'];
+
+function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = () => {}, data = {} }) {
 	const [code, setCode] = useState(null);
 	const [complete, setComplete] = useState(false);
 	const {
-	//	control,
-		watch,
-	//	reset,
-		// handleSubmit,
+		control,
+		reset,
+		handleSubmit,
 	} = useForm();
+	const { off_boarding_application_id } = data || '';
+	const { exit_interview } = data || {};
+	const { exit_interview_completed } = exit_interview || {};
+	const { sub_process_detail_id } = exit_interview_completed || {};
 
-	// const { exit_interview } = data || {};
-	// const { exit_interview :exit_interview_scheduled } = exit_interview || {};
-	// const { sub_process_detail_id, sub_process_data } = exit_interview_scheduled || {};
-	// const OFF_BOARDING_APPLICATION_ID = '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda';
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
-	const v1 = watch();
-	console.log('v1:', v1);
-	//	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
-	// const { getExitCode } = useGetGenerateExitCode();
+	const onSubmit = (values) => {
+		const REASONSARRAY = [];
+		REASONS_LIST.map((item) => (
+			REASONSARRAY.push({
+				reason : item,
+				status : values?.item || false,
+			})
+		));
+		const payload = {
+			sub_process_data: {
+				reasons      : REASONSARRAY,
+				reason_by_hr : values.reason,
+				remarks      : values.remarks,
 
-	// const onSubmit = (values) => {
-	// 	console.log(values, 'formValues');
-	// 	// const payload = {
-	// 	// 	sub_process_data: values,
-	// 	// 	// sub_process_detail_id : '50adeb65-d63c-4c99-9a16-cd724ee4ca35',
-	// 	// 	// process_name          : 'admin_clearance',
-	// 	// };
-	// 	//	console.log(off_boarding_application_id);
-	// 	getExitCode({ OFF_BOARDING_APPLICATION_ID });
-	// 	// updateApplication({
-	// 	// 	payload,
-	// 	// });
-	// 	reset();
-	// };
+			},
+			sub_process_detail_id,
+			process_name: 'exit_interview',
+		};
+		//	console.log(off_boarding_application_id);
+		updateApplication({
+			payload,
+		});
+		reset();
+	};
 	return (
-		<>
-			<ExitHeading title="EXIT INTERVIEW" subTitle="Schedule interview the the employee" />
+		<div>
+
 			{
-				!complete ? <ReasonsToLeave setComplete={setComplete} setCode={setCode} />
-					:				<InterviewComplete code={code} />
+				!complete
+					? (
+						<>
+							<ExitHeading title="EXIT INTERVIEW" subTitle="Schedule interview the the employee" />
+							<ReasonsToLeave
+								setComplete={setComplete}
+								setCode={setCode}
+								control={control}
+								off_boarding_application_id={off_boarding_application_id}
+								REASONS_LIST={REASONS_LIST}
+							/>
+						</>
+					)
+					:						(
+						<>
+							<ExitHeading title="EXIT INTERVIEW" subTitle="complete the interview" />
+							<InterviewComplete code={code} control={control} />
+							<div className={styles.footer}>
+								<Button
+									themeType="secondary"
+									style={{ marginRight: '12px' }}
+									onClick={handleBack}
+								>
+									Back
+
+								</Button>
+								<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
+									Complete Interview
+								</Button>
+							</div>
+						</>
+					)
 			}
 
-		</>
+		</div>
 
 	);
 }

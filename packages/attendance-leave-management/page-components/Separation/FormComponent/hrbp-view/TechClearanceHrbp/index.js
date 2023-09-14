@@ -29,52 +29,48 @@ function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {
 				/>
 			) : null}
 			{is_complete ? (
-				<>
-					<div className={styles.container}>
+				<div className={styles.container}>
 
-						<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
-							<span>
-								Status
-							</span>
-							<div className={styles.button_add_service_container}>
-								<IcMArrowDown
-									width={16}
-									height={16}
-									className={show ? styles.caret_active : styles.caret_arrow}
-								/>
-							</div>
+					<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
+						<span>
+							Status
+						</span>
+						<div className={styles.button_add_service_container}>
+							<IcMArrowDown
+								width={16}
+								height={16}
+								className={show ? styles.caret_active : styles.caret_arrow}
+							/>
 						</div>
+					</div>
 
-						<div className={show ? styles.item_container : styles.item_container_closed}>
-							{(serviceList || []).map((val) => (
-								<div className={styles.detail} key={val.key}>
-									<div className={styles.label}>
-										{startCase(val)}
-									</div>
-									<div className={styles.status_detail}>
-										<IcMFtick
-											height={18}
-											width={18}
-											color="#849E4C"
-											style={{ marginRight: '4px' }}
-										/>
-										Access Removed
-									</div>
+					<div className={show ? styles.item_container : styles.item_container_closed}>
+						{(serviceList || []).map((val) => (
+							<div className={styles.detail} key={val.key}>
+								<div className={styles.label}>
+									{startCase(val)}
 								</div>
-							))}
-						</div>
+								<div className={styles.status_detail}>
+									<IcMFtick
+										height={18}
+										width={18}
+										color="#849E4C"
+										style={{ marginRight: '4px' }}
+									/>
+									Access Removed
+								</div>
+							</div>
+						))}
 					</div>
-					<div className={styles.footer}>
-						<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
-						<Button themeType="primary" onClick={handleNext}>
-							Proceed
-							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
-						</Button>
-					</div>
-				</>
+				</div>
 			) : null}
-
+			<div className={styles.footer}>
+				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
+				<Button themeType="primary" onClick={handleNext}>
+					Proceed
+					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+				</Button>
+			</div>
 		</>
 	);
 }

@@ -100,16 +100,15 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 						))}
 						{errors.notes_shared ? <span className={styles.error}>*This field is Required</span> : null}
 					</div>
-
-					<div className={styles.footer}>
-						<Button themeType="secondary" style={{ marginRight: 4 }} onClick={handleBack}>Back</Button>
-						<Button themeType="primary" onClick={handleNext}>
-							Proceed
-							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-						</Button>
-					</div>
 				</>
 			) : null}
+			<div className={styles.footer}>
+				<Button themeType="secondary" style={{ marginRight: 4 }} onClick={handleBack}>Back</Button>
+				<Button themeType="primary" onClick={handleNext}>
+					Proceed
+					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+				</Button>
+			</div>
 		</>
 	);
 }

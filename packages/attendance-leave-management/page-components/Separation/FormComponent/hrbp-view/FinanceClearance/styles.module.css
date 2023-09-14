@@ -67,3 +67,18 @@
 	font-weight: 500;
 	color: #4f4f4f;
 }
+
+.popover_green {
+	padding: 6px;
+	cursor: pointer;
+	background-color: #abcd62;
+	border-radius: 10px;
+}
+
+.popover_red {
+	padding: 6px;
+	margin-bottom: 6px;
+	cursor: pointer;
+	background-color: orange;
+	border-radius: 10px;
+}

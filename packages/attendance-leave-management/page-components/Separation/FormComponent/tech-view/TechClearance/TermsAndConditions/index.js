@@ -56,7 +56,6 @@ function TermsAndConditions({ control, errors }) {
 						<div className={styles.error}>*Required</div>
 					)}
 				</div>
-
 			</div>
 		</div>
 	);

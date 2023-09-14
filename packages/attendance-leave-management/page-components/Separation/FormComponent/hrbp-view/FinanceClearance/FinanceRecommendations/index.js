@@ -3,8 +3,13 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function FinanceRecommendations() {
+function FinanceRecommendations({ data = {} }) {
+	const {
+		hold_employee,
+	} = data || {};
 	const [showNotes, setShowNotes] = useState(true);
+
+	console.log({ showNotes });
 
 	return (
 
@@ -15,11 +20,27 @@ function FinanceRecommendations() {
 
 			<div className={styles.content_container}>
 				<div className={styles.hold_employee_container}>
-					<Toggle name="a4" size="md" disabled={false} onLabel="Let GO Employee" offLabel="Hold Employee" />
+					<Toggle
+						name="a4"
+						size="md"
+						disabled={false}
+						onLabel="Let GO Employee"
+						value={hold_employee}
+						onChange={setShowNotes}
+						offLabel="Hold Employee"
+					/>
 				</div>
 
 				<div className={styles.hold_fnf_container}>
-					<Toggle name="a4" size="md" disabled={false} onLabel="Release FNF" offLabel="Hold FNF" />
+					<Toggle
+						name="a4"
+						size="md"
+						disabled={false}
+						onLabel="Release FNF"
+						offLabel="Hold FNF"
+						value={showNotes}
+						onChange={setShowNotes}
+					/>
 				</div>
 			</div>
 		</div>
