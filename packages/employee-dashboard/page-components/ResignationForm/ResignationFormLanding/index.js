@@ -16,7 +16,7 @@ const TERMS_AND_CONDITIONS = `By clicking on Initiate Separation, you agree to s
 							  notice period per your employment contract. Per your employment contract, 
                               your LWD is 'dd/mm/yyyy'`;
 
-function ResignationFormLanding() {
+function ResignationFormLanding({ refetch = () => {} }) {
 	const CANCEL_REQUEST = 'cancellation_requested';
 
 	const { data:dataItems = {}, loading, refetchApplicationDetails } = useGetEmployeeDetails();
@@ -39,10 +39,10 @@ function ResignationFormLanding() {
 		setValue,
 	} = useForm();
 
-	const { postApplicationDetails } = usePostEmployeeDetails({ refetch: refetchApplicationDetails });
+	const { postApplicationDetails } = usePostEmployeeDetails({ refetch });
 	const { requestCancellation } = useUpdateOffBoarding({ refetch: refetchApplicationDetails });
 
-	const onSubmit = (values = {}) => {
+	const onSubmit = async (values = {}) => {
 		const payload = {
 			reason               : values?.reason_of_leaving,
 			mobile_number        : values?.mobile_number.number,
