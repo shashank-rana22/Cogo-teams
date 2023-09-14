@@ -34,7 +34,7 @@ function RepositoryModal({
 	const onSubmit = (values) => {
 		const pocData = (values.pocs_data || []).map((poc) => dataPayload(poc));
 		const payload = {
-			...values,
+			...values || {},
 			pocs_data   : pocData || undefined,
 			id          : item?.id,
 			action_name : edit ? 'update' : undefined,

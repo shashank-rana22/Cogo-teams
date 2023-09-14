@@ -27,7 +27,7 @@ function POCDetails({ data = {} }) {
 	const {
 		e_booking_availability: eBooking,
 		inventory_stock_availability: availability, pocs_data:pocsData,
-		ams_mode: amsMode,
+		ams_mode: amsMode = 'manual',
 	} = data || {};
 
 	return (
