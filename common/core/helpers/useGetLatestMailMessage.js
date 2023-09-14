@@ -7,9 +7,6 @@ import { useEffect, useRef } from 'react';
 import { mountFloatingNotificationSnapShot } from './mountFloatingNotificationSnapShot';
 
 const useGetUnreadMails = ({ firestore, agentId }) => {
-	// const [newMessages, setNewMessages] = useState({});
-	// console.log('newMessages23332:', newMessages, Object.keys(newMessages).length);
-
 	const unreadCountSnapshotListener = useRef(null);
 
 	useEffect(() => {
@@ -22,7 +19,6 @@ const useGetUnreadMails = ({ firestore, agentId }) => {
 				where('channel_type', 'in', ['email']),
 				where('show_in_inbox', '==', true),
 			],
-			// setNewMessages,
 			firestore,
 		});
 	}, [firestore, agentId]);

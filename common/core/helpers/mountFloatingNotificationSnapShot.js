@@ -3,7 +3,7 @@ import {
 	query, where, orderBy,
 } from 'firebase/firestore';
 
-// import handleNotificationClick from './getNotification';
+import handleNotificationClick from './getNotification';
 
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
@@ -38,7 +38,7 @@ export function mountFloatingNotificationSnapShot({
 	baseQuery = [],
 	sessionQuery = [],
 	queryFilters = [],
-	// firestore,
+	firestore,
 }) {
 	const mailSnapshotRef = unreadCountSnapshotListener;
 
@@ -58,11 +58,11 @@ export function mountFloatingNotificationSnapShot({
 			floatNotificationChatQuery,
 			(floatNotificationChatSnapshot) => {
 				const { resultList } = dataFormatter(floatNotificationChatSnapshot?.docs);
-				console.log('resultList:', resultList);
-				// handleNotificationClick({
-				// 	resultList,
-				// 	firestore,
-				// });
+
+				handleNotificationClick({
+					resultList,
+					firestore,
+				});
 			},
 		);
 	} catch (error) {
