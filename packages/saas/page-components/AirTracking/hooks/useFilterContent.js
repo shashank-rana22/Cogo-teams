@@ -1,7 +1,6 @@
+import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
-
-import { useForm } from '@/packages/forms';
 
 const OPERATOR_KEY_MAPPING = {
 	ocean : 'shipping_line_id',

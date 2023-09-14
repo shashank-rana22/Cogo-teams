@@ -1,10 +1,11 @@
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
+const DEFAULT_PAGE = 1;
 
 const useGetDsrList = ({ showConfigure }) => {
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const { query } = useRouter();
 	const { branch_id = '' } = query || {};

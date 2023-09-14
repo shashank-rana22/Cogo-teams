@@ -8,7 +8,7 @@ import getLoadingArr from '../../../utils/getLoadingArr';
 
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@/ui/commons/utils/formatDate';
 
 const LOADING_ARR = getLoadingArr(3);

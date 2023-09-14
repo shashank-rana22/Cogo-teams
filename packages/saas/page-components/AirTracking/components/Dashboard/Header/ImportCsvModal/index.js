@@ -1,16 +1,15 @@
 import { Modal, Button, ButtonIcon } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import csvUploadControls from '../../../../configuration/csvUploadControls';
 import { CSV_SAMPLE_FILE } from '../../../../constant/csvSampleFile';
+import getField from '../../../../constant/getField';
 import useCsvUpload from '../../../../hooks/useCsvUpload';
 
 import styles from './styles.module.css';
-
-import { useForm } from '@/packages/forms';
-import getField from '@/packages/forms/Controlled';
 
 const downloadSampleHandler = ({ trackingType }) => {
 	window.open(CSV_SAMPLE_FILE[trackingType], '_self');

@@ -1,7 +1,7 @@
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 
-const keyMapping = {
+const KEY_MAPPING = {
 	ocean : 'shipping_line_id',
 	air   : 'airline_id',
 };
@@ -38,8 +38,8 @@ const useCsvUpload = ({ trackingType = 'ocean', closeModalHandler }) => {
 		const { fileValue = '', operatorLine = '' } = formData || {};
 
 		const payload = {
-			file_url                   : fileValue,
-			[keyMapping[trackingType]] : operatorLine,
+			file_url                    : fileValue,
+			[KEY_MAPPING[trackingType]] : operatorLine,
 		};
 
 		uploadCsvHandler({ payload });

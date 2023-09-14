@@ -1,14 +1,13 @@
 import { Button, cl } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { useTranslation } from 'next-i18next';
 
 import scheduleControls from '../../../../../../configuration/scheduleControls';
+import getField from '../../../../../../constant/getField';
 import useDsrSchedule from '../../../../../../hooks/useDsrSchedule';
 import parseScheduleString from '../../../../../../utils/parseScheduleString';
 
 import styles from './styles.module.css';
-
-import { useForm } from '@/packages/forms';
-import getField from '@/packages/forms/Controlled';
 
 function SelectSchedule({
 	dsrList = [],

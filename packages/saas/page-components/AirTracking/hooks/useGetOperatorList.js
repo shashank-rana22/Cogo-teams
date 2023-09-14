@@ -1,4 +1,4 @@
-import { useRequest } from '@/packages/request';
+import { useRequest } from '@cogoport/request';
 
 const createOptions = (list = []) => (
 	(list || []).map((ele) => ({

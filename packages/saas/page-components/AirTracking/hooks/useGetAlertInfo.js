@@ -1,4 +1,4 @@
-import { useRequest } from '@/packages/request';
+import { useRequest } from '@cogoport/request';
 
 const MANUAL_CALL = {
 	ocean : false,

@@ -1,5 +1,6 @@
 import { cl, Tooltip, Pill } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { useTranslation } from 'react-i18next';
 
 import getMappingObject from '../../../../../constant/card';
@@ -7,8 +8,7 @@ import getMappingObject from '../../../../../constant/card';
 import Stepper from './Stepper';
 import styles from './styles.module.css';
 
-import { Image } from '@/packages/next';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@/ui/commons/utils/formatDate';
 
 const INVALID_VESSEL_NAME = ['N/A'];

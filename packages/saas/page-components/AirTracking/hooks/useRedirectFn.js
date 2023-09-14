@@ -1,4 +1,4 @@
-import { useRouter } from '@/packages/next';
+import { useRouter } from '@cogoport/next';
 
 const PUBLIC_PAGE_NOTIFICATION = 'https://www.cogoport.com/en-IN/notifications';
 

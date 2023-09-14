@@ -1,11 +1,10 @@
 import { Checkbox, Toggle, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, upperCase } from '@cogoport/utils';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
-import formatDate from '@/ui/commons/utils/formatDate';
-
-const style = {
+const ICON_STYLES = {
 	cursor        : 'pointer',
 	marginLeft    : '6px',
 	verticalAlign : 'middle',
@@ -36,7 +35,7 @@ const itemFunction = ({
 			<IcMEdit
 				width={12}
 				height={12}
-				style={style}
+				style={ICON_STYLES}
 				onClick={() => editHandler({ itemData, key: config.key })}
 			/>
 		</span>
@@ -63,7 +62,7 @@ const itemFunction = ({
 		if (isEmpty(poc_details)) return '--';
 
 		const filteredArr = poc_details.filter((item) => item?.user_type === upperCase(config?.key));
-		return <span>{filteredArr[0]?.name || '--'}</span>;
+		return <span>{filteredArr[GLOBAL_CONSTANTS.zeroth_index]?.name || '--'}</span>;
 	},
 	renderPortPair: (itemData) => {
 		const { itinerary = [] } = itemData || {};

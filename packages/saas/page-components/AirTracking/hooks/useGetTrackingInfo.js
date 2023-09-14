@@ -1,9 +1,8 @@
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 import { MAX_API_TRIES, FIRST_VISIT_MAPPING } from '../constant/trackingInfo';
-
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
 
 const SHIPMENT_DATA_URL = {
 	ocean : '/get_saas_container_subscription',
@@ -15,9 +14,13 @@ const wait = (time) => new Promise((res) => {
 	}, time);
 });
 
+const WAIT_TIME = 1500;
+const INCREMENT = 1;
+const ZERO = 0;
+
 const useGetShipmentInfo = () => {
 	const { query } = useRouter();
-	const [apiTries, setApiTries] = useState(0);
+	const [apiTries, setApiTries] = useState(ZERO);
 	const { trackingType = '', trackingId = '', isFirstVisit: firstVisitBool = 'false' } = query;
 
 	const isFirstVisit = FIRST_VISIT_MAPPING[firstVisitBool];
@@ -40,8 +43,8 @@ const useGetShipmentInfo = () => {
 
 			if (isDataFound) setApiTries(MAX_API_TRIES);
 			else {
-				await wait(1500);
-				setApiTries((prev) => prev + 1);
+				await wait(WAIT_TIME);
+				setApiTries((prev) => prev + INCREMENT);
 			}
 		} catch (err) {
 			console.error(err);

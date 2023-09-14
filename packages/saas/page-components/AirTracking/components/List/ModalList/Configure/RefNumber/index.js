@@ -1,13 +1,12 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { useTranslation } from 'next-i18next';
 
 import getRefNumberControls from '../../../../../configuration/refNumberControls';
+import getField from '../../../../../constant/getField';
 import useCreateRefNum from '../../../../../hooks/useCreateRefNum';
 
 import styles from './styles.module.css';
-
-import { useForm } from '@/packages/forms';
-import getField from '@/packages/forms/Controlled';
 
 function RefNumber({ closeHandler, shipmentId, refetchTrackerList, activeTab = 'ocean' }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);

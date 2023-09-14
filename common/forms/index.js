@@ -10,6 +10,7 @@ export { default as InputGroupController } from './page-components/Controlled/In
 export { default as MobileNumberController } from './page-components/Controlled/MobileNumberController';
 export { default as UploadController } from './page-components/Controlled/UploadController';
 export { default as PillsController } from './page-components/Controlled/PillsController';
+export { default as RadioController } from './page-components/Controlled/RadioController';
 export { default as RadioGroupController } from './page-components/Controlled/RadioGroupController';
 export { default as DateRangePickerController } from './page-components/Controlled/DateRangePickerController';
 export { default as TimepickerController } from './page-components/Controlled/TimepickerController';

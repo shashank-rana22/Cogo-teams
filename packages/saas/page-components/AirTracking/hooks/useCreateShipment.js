@@ -1,4 +1,4 @@
-import { useRequest } from '@/packages/request';
+import { useRequest } from '@cogoport/request';
 
 const UPDATE_API_URL = {
 	ocean : '/create_saas_shipment_details',

@@ -1,16 +1,15 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
 import getCommodityControls from '../../../../../configuration/commodityControls';
 import getMappingObject from '../../../../../constant/card';
+import getField from '../../../../../constant/getField';
 import useCreateShipment from '../../../../../hooks/useCreateShipment';
 
 import styles from './styles.module.css';
-
-import { useForm } from '@/packages/forms';
-import getField from '@/packages/forms/Controlled';
 
 function Commodity({ closeHandler, shipmentId = '', refetchTrackerList, shipmentInfo = {}, activeTab }) {
 	const { hs_code = '' } = shipmentInfo || {};

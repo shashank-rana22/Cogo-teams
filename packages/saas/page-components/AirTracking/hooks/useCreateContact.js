@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-
-import { useForm } from '@/packages/forms';
-import { useRequest } from '@/packages/request';
-import { useSelector } from '@/packages/store';
 
 const CREATE_CONTACT_URL = {
 	ocean : '/create_saas_shipment_poc',

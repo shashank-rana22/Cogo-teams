@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
@@ -8,8 +9,7 @@ import useRedirectFn from '../../../../hooks/useRedirectFn';
 import StatsContainer from './StatsContainer';
 import styles from './styles.module.css';
 
-import { Image } from '@/packages/next';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import MapContainer from '@/ui/page-components/air-ocean-tracking/common/MapContainer';
 import Table from '@/ui/page-components/air-ocean-tracking/common/Table';
 

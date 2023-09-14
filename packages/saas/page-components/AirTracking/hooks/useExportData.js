@@ -1,5 +1,5 @@
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 
 const useExportData = () => {
 	const { query } = useRouter();

@@ -1,6 +1,6 @@
 import { isFutureDate, isCurrentDate } from '../utils/dateCompare';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const SINGLE_MILESTONE_INDEX = 1;
 const LAST_INDEX = -1;

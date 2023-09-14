@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 
-const { useRequest } = require('@/packages/request');
+const { useRequest } = require('@cogoport/request');
 
 const TRACKER_ID_KEY = {
 	ocean : 'saas_container_subscription_ids',

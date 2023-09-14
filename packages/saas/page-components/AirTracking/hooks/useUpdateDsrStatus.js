@@ -1,6 +1,5 @@
+import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
-
-import { useRequest } from '@/packages/request';
 
 const useUpdateDsrStatus = () => {
 	const [{ loading }, trigger] = useRequest({

@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 
 import useRedirectFn from './useRedirectFn';
-
-import { useRequest } from '@/packages/request';
 
 const MAPPING = {
 	ocean: {

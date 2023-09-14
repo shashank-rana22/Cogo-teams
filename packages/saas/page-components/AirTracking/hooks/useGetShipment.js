@@ -1,7 +1,6 @@
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 import { useMemo } from 'react';
-
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
 
 const useGetShipment = ({ contactId = '' }) => {
 	const { query } = useRouter();
@@ -20,19 +19,19 @@ const useGetShipment = ({ contactId = '' }) => {
 
 	const [associatedShipments, otherShipments] = useMemo(() => {
 		const shipmentList = data?.list || [];
-		const associated = [];
-		const other = [];
+		const ASSOCIATED = [];
+		const OTHER = [];
 
 		shipmentList.forEach((shipment) => {
 			const isAssociated = shipment.poc_details.some((item) => item?.id === contactId);
 
 			if (isAssociated) {
-				associated.push(shipment);
+				ASSOCIATED.push(shipment);
 			} else {
-				other.push(shipment);
+				OTHER.push(shipment);
 			}
 		});
-		return [associated, other];
+		return [ASSOCIATED, OTHER];
 	}, [contactId, data]);
 
 	return {

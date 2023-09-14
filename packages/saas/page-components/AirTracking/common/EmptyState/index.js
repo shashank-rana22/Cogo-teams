@@ -1,4 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -8,9 +10,6 @@ import useRedirectFn from '../../hooks/useRedirectFn';
 import ArchiveDelete from '../ArchiveDelete';
 
 import styles from './styles.module.css';
-
-import { useRouter } from '@/packages/next';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
 
 function EmptyState() {
 	const { query } = useRouter();

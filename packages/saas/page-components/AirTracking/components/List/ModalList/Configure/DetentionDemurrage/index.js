@@ -1,14 +1,13 @@
 import { cl, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMInformation } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
 import getDetDemControls from '../../../../../configuration/detDemControls';
+import getField from '../../../../../constant/getField';
 import useCreateShipment from '../../../../../hooks/useCreateShipment';
 
 import styles from './styles.module.css';
-
-import { useForm } from '@/packages/forms';
-import getField from '@/packages/forms/Controlled';
 
 function DetentionDemurrage({ closeHandler, shipmentId, refetchTrackerList, shipmentInfo = {} }) {
 	const { origin_detention = '', destination_demurrage = '', destination_detention = '' } = shipmentInfo || {};

@@ -1,13 +1,14 @@
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
+const DEFAULT_PAGE = 1;
 
 const useGetContactList = () => {
 	const { query } = useRouter();
 	const { branch_id = '' } = query || {};
 
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',

@@ -6,7 +6,7 @@ import getLoadingArr from '../../../../utils/getLoadingArr';
 
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const LOADING_ARR = getLoadingArr(3);
 const LOADING_ICON = {

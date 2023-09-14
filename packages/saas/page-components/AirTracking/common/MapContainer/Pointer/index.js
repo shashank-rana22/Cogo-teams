@@ -1,6 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { L, Marker, FeatureGroup } from '@cogoport/maps';
-
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
 
 const ICON_MAPPING = {
 	origin      : GLOBAL_CONSTANTS.image_url.origin_map_pointer,

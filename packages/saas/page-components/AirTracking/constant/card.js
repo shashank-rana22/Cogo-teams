@@ -1,6 +1,6 @@
 import { IcMError, IcMFairport, IcMFcl, IcMFtick } from '@cogoport/icons-react';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 export const DEFAULT_STATUS = {
 	ocean : [false, false, false, false],

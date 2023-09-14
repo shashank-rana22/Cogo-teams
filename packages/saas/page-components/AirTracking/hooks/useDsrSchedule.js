@@ -1,13 +1,15 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
-import { useRequest } from '@/packages/request';
+const PAD_START = 2;
 
 const getTimePayload = (time) => {
 	const date = new Date(time);
 
 	const hours = date.getHours();
-	const minutes = date.getMinutes().toString().padStart(2, '0');
+	const minutes = date.getMinutes().toString().padStart(PAD_START, '0');
 
 	return `${hours}:${minutes}`;
 };
@@ -17,7 +19,7 @@ const useDsrSchedule = ({ dsrList = [], selectedContact = {}, closeModalHandler,
 
 	const selectedContactDsr = useMemo(() => dsrList.filter((dsr) => (
 		dsr?.poc_details?.id === id
-	))?.[0], [dsrList, id]);
+	))?.[GLOBAL_CONSTANTS.zeroth_index], [dsrList, id]);
 
 	const { schedule: prevSchedule = '' } = selectedContactDsr || {};
 

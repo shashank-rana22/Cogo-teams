@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image, dynamic } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
@@ -5,9 +7,6 @@ import { getLoadingText, LOADING_TEXT_COUNT } from '../../constant/loadingText';
 import useGetMapRoute from '../../hooks/useGetMapRoute';
 
 import styles from './styles.module.css';
-
-import { Image, dynamic } from '@/packages/next';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
 
 const CogoMaps = dynamic(() => import('./MapsComp'), { ssr: false });
 

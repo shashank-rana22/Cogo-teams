@@ -1,13 +1,14 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
+import { DEFAULT_LNG_INDEX } from '../constant/mapConstant';
 import calAirRoute from '../utils/calAirRoute';
 
-import { useRequest } from '@/packages/request';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
-import { DEFAULT_LAT_INDEX, DEFAULT_LNG_INDEX } from '@/ui/commons/constants/mapConstant';
-
 const LAST_INDEX = -1;
+const ONE = 1;
+const FLAT_ORDER = 2;
 
 const getUniqueArrElements = (arr) => arr.reduce((accumulator, current) => {
 	const found = accumulator.some(
@@ -38,7 +39,7 @@ const useGetMapRoute = ({ trackingInfo = [], type = 'ocean' }) => {
 			});
 			const apiData = resp?.data || {};
 			const routeInfo = apiData?.routes || [];
-			const routeArr = (routeInfo || []).map((ele) => [ele?.route]).flat(2);
+			const routeArr = (routeInfo || []).map((ele) => [ele?.route]).flat(FLAT_ORDER);
 			const uniqueRouteArr = getUniqueArrElements(routeArr);
 
 			return uniqueRouteArr;
@@ -59,7 +60,7 @@ const useGetMapRoute = ({ trackingInfo = [], type = 'ocean' }) => {
 			const uniqueLatLngArr = getUniqueArrElements(latLngArr);
 
 			if (isEmpty(uniqueLatLngArr)) return undefined;
-			if (uniqueLatLngArr.length === 1) return uniqueLatLngArr;
+			if (uniqueLatLngArr.length === ONE) return uniqueLatLngArr;
 			const value = await getSeaRoute(
 				{ coordinates: [uniqueLatLngArr[GLOBAL_CONSTANTS.zeroth_index], ...uniqueLatLngArr.slice(LAST_INDEX)] },
 			);
@@ -78,7 +79,7 @@ const useGetMapRoute = ({ trackingInfo = [], type = 'ocean' }) => {
 
 			if (isRouteAvaliable) {
 				updatedRoute = mapPoints.map((point) => ({
-					lat : point[DEFAULT_LAT_INDEX],
+					lat : point[GLOBAL_CONSTANTS.zeroth_index],
 					lng : point[DEFAULT_LNG_INDEX],
 				}));
 			}

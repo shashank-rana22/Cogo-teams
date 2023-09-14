@@ -1,12 +1,11 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import getMappingObject from '../constant/card';
-
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
 
 const USER_TYPE_MAPPING = {
 	SHIPPER   : 'shipper',

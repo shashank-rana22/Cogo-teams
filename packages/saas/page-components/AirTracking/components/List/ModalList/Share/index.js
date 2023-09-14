@@ -1,15 +1,15 @@
 import { Button, cl } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import getShareListConfig from '../../../../configuration/shareListConfig';
 import getShareTrackerControls from '../../../../configuration/shareTrackerControls';
+import getField from '../../../../constant/getField';
 import useShareTracker from '../../../../hooks/useShareTracker';
 
 import styles from './styles.module.css';
 
-import { useForm } from '@/packages/forms';
-import getField from '@/packages/forms/Controlled';
 import Table from '@/ui/page-components/air-ocean-tracking/common/Table';
 
 function Share({ shipmentId = '' }) {

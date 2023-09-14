@@ -1,12 +1,11 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'react-i18next';
 
 import useRedirectFn from '../../hooks/useRedirectFn';
 
 import styles from './styles.module.css';
 import TrackingInfo from './TrackingInfo';
-
-import { useRouter } from '@/packages/next';
 
 function TrackerDetails() {
 	const { query } = useRouter();

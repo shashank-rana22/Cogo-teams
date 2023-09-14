@@ -1,3 +1,4 @@
+import { Image, dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -5,8 +6,7 @@ import useGetMapRoute from '../../../../hooks/useGetMapRoute';
 
 import styles from './styles.module.css';
 
-import { Image, dynamic } from '@/packages/next';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const CogoMaps = dynamic(() => import('./MapComps'), { ssr: false });
 

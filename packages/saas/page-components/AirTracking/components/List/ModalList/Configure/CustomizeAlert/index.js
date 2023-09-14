@@ -1,3 +1,4 @@
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -7,8 +8,7 @@ import AddAlert from './AddAlert';
 import SelectContact from './SelectContact';
 import styles from './styles.module.css';
 
-import { Image } from '@/packages/next';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const COMPONENT_MAPPING = {
 	select_contact : SelectContact,

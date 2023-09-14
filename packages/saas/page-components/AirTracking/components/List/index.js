@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -11,9 +12,8 @@ import ModalList from './ModalList';
 import OceanCard from './OceanCard';
 import styles from './styles.module.css';
 
-import { Image } from '@/packages/next';
 import CustomerSatisfaction from '@/ui/commons/components/CustomerSatisfaction';
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const CARD_COMPONENT = {
 	air   : AirCard,

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getMappingObject from '@/ui/page-components/air-ocean-tracking/constant/card';
 
 const getOptions = ({ containerDetails = [] }) => containerDetails.map((item) => ({

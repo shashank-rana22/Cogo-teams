@@ -1,12 +1,11 @@
 import { cl } from '@cogoport/components';
+import { Image } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 
 import { DEFAULT_STATUS } from '../../../../constant/card';
 import { getMilestone } from '../../../../utils/getMilestone';
 
 import styles from './styles.module.css';
-
-import { Image } from '@/packages/next';
 
 function Stepper({ activeTab, currentMilestone = {}, lineInfo = {}, airCargoDetails = {} }) {
 	const { short_name = '', logo_url = '' } = lineInfo || {};

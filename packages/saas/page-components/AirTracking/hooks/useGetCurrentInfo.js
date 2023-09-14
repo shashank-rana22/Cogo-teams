@@ -1,9 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { mergeAirMilestone, mergeOceanMilestone } from '../utils/mergeMilestone';
-
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
 
 const useGetCurrentInfo = ({ data = {}, trackingType }) => {
 	const { data: trackingInfo = [] } = data || {};
@@ -15,7 +14,7 @@ const useGetCurrentInfo = ({ data = {}, trackingType }) => {
 		const { container_details = [], airway_bill_details = {} } = data || {};
 
 		if (!isEmpty(container_details) || !isEmpty(airway_bill_details)) {
-			setCurrContainerDetails(container_details?.[0] || airway_bill_details);
+			setCurrContainerDetails(container_details?.[GLOBAL_CONSTANTS.zeroth_index] || airway_bill_details);
 		}
 	}, [data, setCurrContainerDetails]);
 

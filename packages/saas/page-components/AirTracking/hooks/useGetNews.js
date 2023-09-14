@@ -1,4 +1,4 @@
-import { useRequestPublic } from '@/packages/request';
+import { useRequestPublic } from '@cogoport/request';
 
 const MAX_NEWS = 3;
 

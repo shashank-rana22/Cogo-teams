@@ -3,10 +3,10 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import getFilterControls from '../../../../../configuration/filterControls';
+import getField from '../../../../../constant/getField';
 
 import styles from './styles.module.css';
 
-import getField from '@/packages/forms/Controlled';
 import useFilterContent from '@/ui/page-components/air-ocean-tracking/hooks/useFilterContent';
 
 function FilterContent({ filterData = {}, activeTab, globalFilter = {}, setGlobalFilter }) {

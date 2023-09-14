@@ -7,7 +7,7 @@ import { isCurrentDate, isFutureDate } from '../../../../utils/dateCompare';
 import Card from './Card';
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@/ui/commons/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const LAST_INDEX = -1;
 

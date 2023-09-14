@@ -1,6 +1,6 @@
-import { useRouter } from '@/packages/next';
-import { useRequest } from '@/packages/request';
-import { useSelector } from '@/packages/store';
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useCreateDsr = () => {
 	const { id = '', organization = {} } = useSelector((state) => ({

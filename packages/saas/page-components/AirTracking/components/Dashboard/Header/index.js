@@ -3,14 +3,13 @@ import { IcAOceanTracking, IcAAirTracking } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
+import getField from '../../../constant/getField';
 import useCreateTracker from '../../../hooks/useCreateTracker';
 import useGetOperatorList from '../../../hooks/useGetOperatorList';
 
 import ImportCsvModal from './ImportCsvModal';
 import OrTag from './OrTag';
 import styles from './styles.module.css';
-
-import getField from '@/packages/forms/Controlled';
 
 const getOptions = ({ t }) => [
 	{

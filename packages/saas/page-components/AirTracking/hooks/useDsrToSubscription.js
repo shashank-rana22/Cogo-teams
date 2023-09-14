@@ -1,7 +1,6 @@
+import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
-
-import { useRequest } from '@/packages/request';
 
 const useDsrToSubscription = ({ dsrId = '', setActiveStepper, selectedShipments, setSelectedShipments }) => {
 	const [{ loading: getListLoading, data: prevDsrToSubData = [] }] = useRequest({
@@ -13,7 +12,7 @@ const useDsrToSubscription = ({ dsrId = '', setActiveStepper, selectedShipments,
 	}, { manual: false });
 
 	const url = useMemo(() => (
-		prevDsrToSubData?.length > 0 ? 'update_dsr_to_subscription_mapping' : 'create_dsr_to_subscription_mapping'
+		!isEmpty(prevDsrToSubData) ? 'update_dsr_to_subscription_mapping' : 'create_dsr_to_subscription_mapping'
 	), [prevDsrToSubData]);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -23,7 +22,7 @@ const useDsrToSubscription = ({ dsrId = '', setActiveStepper, selectedShipments,
 
 	const updateDsrToSubscription = async ({ selectedShipmentList }) => {
 		try {
-			if (prevDsrToSubData?.length === 0) {
+			if (isEmpty(prevDsrToSubData)) {
 				await trigger({
 					data: {
 						saas_dsr_id     : dsrId,

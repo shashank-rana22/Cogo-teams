@@ -3,11 +3,10 @@ import { IcMCross } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
 import getAddContactControls from '../../configuration/addContactControls';
+import getField from '../../constant/getField';
 import useCreateContact from '../../hooks/useCreateContact';
 
 import styles from './styles.module.css';
-
-import getField from '@/packages/forms/Controlled';
 
 function AddContactModal({
 	addContact = false, setAddContact = () => {}, fetchContactList = () => {},
