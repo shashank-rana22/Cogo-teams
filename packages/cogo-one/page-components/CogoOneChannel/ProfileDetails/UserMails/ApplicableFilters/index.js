@@ -18,7 +18,6 @@ function ApplicableFilters({
 				<div className={styles.title}>
 					Filters
 				</div>
-
 				{!isEmptyFilters
 					? (
 						<div

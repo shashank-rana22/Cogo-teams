@@ -23,6 +23,7 @@ function useGetAllMailsForUser({ firestore = {}, userId }) {
 		if (!userId) {
 			return;
 		}
+
 		setMailData(
 			(prev) => ({ ...prev, loading: true }),
 		);
