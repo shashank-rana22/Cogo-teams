@@ -19,6 +19,7 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 	const { sub_process_detail_id } = admin_clearance?.admin_clearance || {};
 	const { sub_process_data } = admin_clearance?.admin_clearance || {};
 	const { is_complete } = admin_clearance?.admin_clearance || false;
+
 	const {
 		control,
 		formState:{ errors = {} },
@@ -58,10 +59,6 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 			payload,
 		});
 	//	refetch();
-	};
-
-	const handleClose = () => {
-		setShow(false);
 	};
 
 	useEffect(() => {
@@ -124,7 +121,7 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 
 			<OpenModal
 				show={show}
-				onClose={handleClose}
+				onClose={() => setShow(false)}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
 			/>
