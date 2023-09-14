@@ -17,8 +17,8 @@ const useCreateShipmentTradePartner = ({
 		try {
 			const res = await trigger({ data: { ...val, shipment_id } });
 			if (!res.hasError) {
-				refetch();
 				Toast.success(successMessage);
+				refetch();
 			}
 		} catch (err) {
 			toastApiError(err);
