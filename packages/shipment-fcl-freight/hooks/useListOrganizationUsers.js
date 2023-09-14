@@ -24,7 +24,7 @@ function useListOrganizationUsers({ consigneeShipperId = '' }) {
 				const res = await trigger();
 
 				const pocData = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
-				const { business_name } = pocData?.organization || {};
+				const { business_name = '' } = pocData?.organization || {};
 
 				setData(pocData);
 
