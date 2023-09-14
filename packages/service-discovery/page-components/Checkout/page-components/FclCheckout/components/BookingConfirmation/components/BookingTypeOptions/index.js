@@ -14,6 +14,7 @@ function BookingTypeOptions({
 	radioOption = [],
 	bookingConfirmationMode = '',
 	setBookingConfirmationMode = () => {},
+	isAssistedBookingNotAllowed = false,
 }) {
 	const {
 		detail = {},
@@ -22,6 +23,10 @@ function BookingTypeOptions({
 	} = useContext(CheckoutContext);
 
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
+
+	if (isAssistedBookingNotAllowed) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
