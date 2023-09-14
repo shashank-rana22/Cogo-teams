@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetCcWiseOutstandingStats = () => {
+const useGetCcWiseOutstandingStats = ({ viewGraphStats = false }) => {
 	const {
 		profile: { authorizationparameters, selected_agent_id },
 	} = useSelector((state) => state);
@@ -13,17 +13,20 @@ const useGetCcWiseOutstandingStats = () => {
 	}, { manual: true });
 
 	useEffect(() => {
-		trigger({
-			params: {
+		if (viewGraphStats) {
+			trigger({
+				params: {
 
-				is_precovid: 'NO',
+					is_precovid: 'NO',
 
-			},
-		});
+				},
+			});
+		}
 	}, [
 		authorizationparameters,
 		selected_agent_id,
 		trigger,
+		viewGraphStats,
 	]);
 	return {
 		ccWiseLoading : loading,
