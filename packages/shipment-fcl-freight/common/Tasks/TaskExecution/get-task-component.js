@@ -1,14 +1,22 @@
+import { AddCompanyModal } from '@cogoport/ocean-modules';
+
 import {
 	AmendDraftBl,
 	CargoInsurance,
 	ChooseServiceProvider,
 	GenerateFreightCertificate,
 	NominationTask,
+	UploadBookingNote,
 	UploadCargoArrival,
 	UploadComplianceDocs,
 	UploadContainerDetails,
 	VerifyShipperDetails,
 } from './CustomTasks';
+
+const TRADE_PARTY_TYPE = {
+	add_consignee_details : { trade_party_type: 'consignee' },
+	add_shipper_details   : { trade_party_type: 'shipper' },
+};
 
 const TASKS = {
 	UPDATE_CONTAINER_DETAILS        : 'update_container_details',
@@ -20,6 +28,9 @@ const TASKS = {
 	GENERATE_FREIGHT_CERTIFICATE    : 'generate_freight_certificate',
 	GENERATE_CARGO_INSURANCE        : 'generate_cargo_insurance',
 	UPLOAD_COMPLIANCE_DOCUMENTS     : 'upload_compliance_documents',
+	UPLOAD_BOOKING_NOTE             : 'upload_booking_note',
+	ADD_CONSIGNEE_DETAILS           : 'add_consignee_details',
+	ADD_SHIPPER_DETAILS             : 'add_shipper_details',
 };
 
 const {
@@ -32,6 +43,9 @@ const {
 	GENERATE_FREIGHT_CERTIFICATE,
 	GENERATE_CARGO_INSURANCE,
 	UPLOAD_COMPLIANCE_DOCUMENTS,
+	UPLOAD_BOOKING_NOTE,
+	ADD_CONSIGNEE_DETAILS,
+	ADD_SHIPPER_DETAILS,
 } = TASKS;
 
 const COMPONENT_MAPPING = {
@@ -44,6 +58,9 @@ const COMPONENT_MAPPING = {
 	[GENERATE_FREIGHT_CERTIFICATE]    : GenerateFreightCertificate,
 	[GENERATE_CARGO_INSURANCE]        : CargoInsurance,
 	[UPLOAD_COMPLIANCE_DOCUMENTS]     : UploadComplianceDocs,
+	[UPLOAD_BOOKING_NOTE]             : UploadBookingNote,
+	[ADD_CONSIGNEE_DETAILS]           : AddCompanyModal,
+	[ADD_SHIPPER_DETAILS]             : AddCompanyModal,
 };
 
 const getTaskComponent = ({
@@ -55,6 +72,9 @@ const getTaskComponent = ({
 	tasksList = [],
 	selectedMail = [],
 	taskListRefetch = () => {},
+	mailLoading = false,
+	getShipmentRefetch = () => {},
+	shipmentTradePartnersData = {},
 }) => {
 	const propsMapping = {
 		[UPDATE_CONTAINER_DETAILS]: {
@@ -114,6 +134,32 @@ const getTaskComponent = ({
 			onCancel,
 			taskListRefetch,
 			tasksList,
+		},
+		[UPLOAD_BOOKING_NOTE]: {
+			task,
+			onCancel,
+			taskListRefetch,
+			mailLoading,
+		},
+		[ADD_CONSIGNEE_DETAILS]: {
+			tradePartnersData    : shipmentTradePartnersData,
+			addCompany           : TRADE_PARTY_TYPE[task?.task],
+			tradePartnerTrigger  : taskListRefetch,
+			shipment_id          : shipment_data?.id,
+			importer_exporter_id : shipment_data?.importer_exporter_id,
+			withModal            : false,
+			setAddCompany        : onCancel,
+			getShipmentRefetch,
+		},
+		[ADD_SHIPPER_DETAILS]: {
+			tradePartnersData    : shipmentTradePartnersData,
+			addCompany           : TRADE_PARTY_TYPE[task?.task],
+			tradePartnerTrigger  : taskListRefetch,
+			shipment_id          : shipment_data?.id,
+			importer_exporter_id : shipment_data?.importer_exporter_id,
+			withModal            : false,
+			setAddCompany        : onCancel,
+			getShipmentRefetch,
 		},
 	};
 
