@@ -43,7 +43,8 @@
 
 .count {
 	font-size: var(--font-size-md);
-	color: #356efd;
+	font-weight: 500;
+	color: #09f;
 }
 
 .icon {
@@ -74,9 +75,8 @@
 }
 
 .amount_open {
-	display: flex;
 	margin-top: 2px;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
 	color: var(--color-primary-error-red-3);
 	word-break: break-all;
@@ -140,8 +140,9 @@
 
 .count_open {
 	margin-left: 4px;
-	font-size: var(--font-size-lg);
-	color: #356efd;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	color: #09f;
 }
 
 .statsfull {

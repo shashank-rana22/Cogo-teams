@@ -48,11 +48,6 @@ export const ONACCOUNT_STATS_KEY_MAPPING = [
 		textColor : '#29CC6A',
 	},
 	{
-		valueKey  : 'fortyFiveLedAmount',
-		countKey  : 'fortyFiveCount',
-		textColor : '#29CC6A',
-	},
-	{
 		valueKey  : 'sixtyLedAmount',
 		countKey  : 'sixtyCount',
 		textColor : '#29CC6A',
@@ -68,8 +63,13 @@ export const ONACCOUNT_STATS_KEY_MAPPING = [
 		textColor : '#29CC6A',
 	},
 	{
-		valueKey  : 'oneEightyPlusLedAmount',
-		countKey  : 'oneEightyPlusCount',
+		valueKey  : 'threeSixtyFiveLedAmount',
+		countKey  : 'threeSixtyFiveCount',
+		textColor : '#29CC6A',
+	},
+	{
+		valueKey  : 'threeSixtyFivePlusLedAmount',
+		countKey  : 'threeSixtyFivePlusCount',
 		textColor : '#29CC6A',
 	},
 ];
