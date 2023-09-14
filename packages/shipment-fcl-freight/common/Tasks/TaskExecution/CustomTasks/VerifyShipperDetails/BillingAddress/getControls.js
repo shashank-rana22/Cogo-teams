@@ -6,7 +6,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			type        : 'text',
 			size        : 'sm',
 			placeholder : 'Enter Company Name',
-			styles      : { flex: '1 1 30%' },
+			styles      : { flexBasis: '30%' },
 			rules       : {
 				required: 'Company name is required',
 			},
@@ -20,7 +20,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			valueKey          : 'postal_code',
 			initialCall       : true,
 			getSelectedOption : (val) => setCountryId(val?.country_id),
-			styles            : { flex: '1 1 30%' },
+			styles            : { flexBasis: '30%' },
 			rules             : {
 				required: 'Pincode is Required',
 			},
@@ -30,10 +30,10 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			label  : countryValidation?.others?.registration_number?.label || 'GST',
 			type   : 'text',
 			size   : 'sm',
-			styles : { flex: '1 1 30%' },
+			styles : { flexBasis: '30%' },
 			rules  : {
 				pattern: {
-					value   : countryValidation?.regex?.TAX,
+					value   : countryValidation?.others?.registration_number?.pattern,
 					message : 'Tax Number is Invalid',
 				},
 			},
@@ -44,7 +44,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			rows        : 3,
 			type        : 'textarea',
 			placeholder : 'Enter Address',
-			styles      : { flex: '1 1 58.5%' },
+			styles      : { flexBasis: '58.5%' },
 			rules       : {
 				required: 'Address is required',
 			},
@@ -53,7 +53,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			name   : 'is_sez',
 			label  : 'Is your Address SEZ ?',
 			type   : 'chips',
-			styles : { flex: '1 1 25%' },
+			styles : { flexBasis: '25%' },
 			rules  : {
 				required: 'Required',
 			},
@@ -72,7 +72,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			name   : 'tax_number_document_url',
 			label  : 'Proof',
 			type   : 'upload',
-			styles : { flex: '1 1 100%' },
+			styles : { flexBasis: '100%' },
 		},
 		{
 			name        : 'name',
@@ -80,7 +80,7 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 			size        : 'sm',
 			type        : 'creatableSelect',
 			placeholder : 'Enter your POC name',
-			styles      : { flex: '1 1 30%' },
+			styles      : { flexBasis: '30%' },
 		},
 		{
 			name  : 'mobile_number',
@@ -93,14 +93,14 @@ function getControls({ countryValidation, setCountryId = () => {} }) {
 					message : 'Mobile Number is Invalid',
 				},
 			},
-			styles: { flex: '1 1 30%' },
+			styles: { flexBasis: '30%' },
 		},
 		{
 			name   : 'email',
 			label  : 'Email',
 			type   : 'text',
 			size   : 'sm',
-			styles : { flex: '1 1 30%' },
+			styles : { flexBasis: '30%' },
 			rules  : {
 				required : 'Email is required',
 				pattern  : {

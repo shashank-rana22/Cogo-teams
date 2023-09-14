@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { InputController, MobileNumberController } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 
@@ -6,30 +6,14 @@ import styles from './styles.module.css';
 
 function getColumns({
 	selectedUserId = '',
+	buttonLoading = false,
 	setSelectedUserId = () => {},
 	control = {},
-	setCheckList = () => {},
 	handleSubmit = () => {},
 	onUpdateLeadUser = () => {},
+	createLeadOrgAccount = () => {},
 }) {
 	const columns = [
-		{
-			id       : 'select_contacts',
-			Header   : 'Select',
-			accessor : (item) => (
-				<Checkbox
-					disabled={selectedUserId === item?.id}
-					onChange={(event) => {
-						setCheckList(() => {
-							if (event?.target?.checked) {
-								return item?.id;
-							}
-							return null;
-						});
-					}}
-				/>
-			),
-		},
 		{
 			id       : 'contact_name',
 			Header   : 'Name',
@@ -96,18 +80,29 @@ function getColumns({
 
 								<Button
 									themeType="tertiary"
-									onClick={() => setSelectedUserId(null)}
+									onClick={() => setSelectedUserId('')}
 								>
 									Cancel
 								</Button>
 							</>
 						) : (
-							<Button
-								themeType="tertiary"
-								onClick={() => { setSelectedUserId(item?.id); }}
-							>
-								<IcMEdit />
-							</Button>
+							<>
+								<Button
+									themeType="tertiary"
+									onClick={() => { setSelectedUserId(item?.id); }}
+								>
+									<IcMEdit />
+								</Button>
+
+								{!selectedUserId ? (
+									<Button
+										loading={buttonLoading}
+										onClick={() => createLeadOrgAccount({ selectedPocId: item?.id })}
+									>
+										Verify
+									</Button>
+								) : null}
+							</>
 						)}
 				</div>
 			),

@@ -1,8 +1,15 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import {
+	AsyncSelectController,
+	ChipsController,
+	CreatableSelectController,
+	InputController,
+	MobileNumberController,
+	TextAreaController,
+	UploadController,
+	useForm,
+} from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
-import getFieldController from '@cogoport/ocean-modules/utils/getFieldController';
-import { useEffect, useState } from 'react';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
@@ -10,21 +17,31 @@ import useListOrganizationUsers from '../../../../../../hooks/useListOrganizatio
 import getControls from './getControls';
 import styles from './styles.module.css';
 
+const INPUT_MAPPING = {
+	text            : InputController,
+	asyncSelect     : AsyncSelectController,
+	chips           : ChipsController,
+	upload          : UploadController,
+	creatableSelect : CreatableSelectController,
+	textarea        : TextAreaController,
+	mobileNumber    : MobileNumberController,
+};
+
 function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
 function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = '', onCancel = () => {} }) {
-	const [countryId, setCountryId] = useState('');
-
-	const { loading = false, defaultValues = {} } = useListOrganizationUsers({ consigneeShipperId });
-
 	const { control, reset, formState:{ errors = {} }, handleSubmit } = useForm();
+
+	const { loading = false } = useListOrganizationUsers({ consigneeShipperId, reset });
 
 	const {
 		onSubmit = () => {},
 		loading: upsellLoading = false,
-	} = useCreateAutoUpsellService({ task, refetch, onCancel, countryId });
+		countryId = '',
+		setCountryId = () => {},
+	} = useCreateAutoUpsellService({ task, refetch, onCancel });
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,
@@ -33,17 +50,15 @@ function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = ''
 
 	const { controls = [] } = getControls({ setCountryId, countryValidation });
 
-	useEffect(() => {
-		reset(defaultValues);
-	}, [reset, defaultValues]);
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.flex_container}>
 				{controls?.map((formControl) => {
 					const { type = '', name = '', styles: style = {}, label = '' } = formControl;
 
-					const Element = getFieldController(type);
+					const Element = INPUT_MAPPING[type];
+
+					if (!Element) return null;
 
 					return (
 						<div
@@ -64,7 +79,11 @@ function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = ''
 			</div>
 
 			<div className={styles.button_container}>
-				<Button disabled={upsellLoading || loading} onClick={handleSubmit(onSubmit)}>
+				<Button
+					loading={upsellLoading || loading}
+					disabled={upsellLoading || loading}
+					onClick={handleSubmit(onSubmit)}
+				>
 					Save
 				</Button>
 			</div>

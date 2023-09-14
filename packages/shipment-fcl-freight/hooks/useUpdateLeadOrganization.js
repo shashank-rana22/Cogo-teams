@@ -15,7 +15,7 @@ const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
 	return payload;
 };
 
-function useUpdateLeadOrganization({ leadsData = {} }) {
+function useUpdateLeadOrganization({ leadsData = {}, refetchList = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_lead_organization',
 		method : 'POST',
@@ -26,6 +26,8 @@ function useUpdateLeadOrganization({ leadsData = {} }) {
 			const payload = getFormattedPayload({ values, leadsData });
 
 			await trigger({ data: payload });
+
+			refetchList();
 
 			Toast.success('Successful');
 		} catch (error) {

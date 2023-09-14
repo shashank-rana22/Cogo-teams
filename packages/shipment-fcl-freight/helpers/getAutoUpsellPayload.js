@@ -1,17 +1,17 @@
 const SERVICE_TYPE = 'fcl_freight_local';
 const getAutoUpsellPayload = ({ task = {}, values = {}, countryId = '' }) => {
 	const {
-		name,
-		business_name,
-		pincode,
-		tax_number,
-		address,
-		tax_number_document_url,
-		mobile_number,
-		email,
-	} = values;
+		name = '',
+		business_name = '',
+		pincode = '',
+		tax_number = '',
+		address = '',
+		tax_number_document_url = '',
+		mobile_number = {},
+		email = '',
+	} = values || {};
 
-	const { shipment_id = '', task_field_id = '' } = task;
+	const { shipment_id = '', task_field_id = '' } = task || {};
 
 	const payload = {
 		shipment_id,

@@ -7,7 +7,6 @@
 
 .form_item_container {
 	display: flex;
-	flex: 1;
 	flex-direction: column;
 	margin: 0 8px 8px 0;
 }
@@ -31,12 +30,12 @@
 }
 
 .errors {
-	font-size: 12px;
-	color: red;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-1);
 }
 
 .form_label {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 

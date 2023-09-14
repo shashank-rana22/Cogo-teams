@@ -17,13 +17,13 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function UserOnboard({ leadsData = {}, defaultValues = {} }) {
+function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {} }) {
 	const {
 		control,
 		formState:{ errors = {} },
-		handleSubmit,
-		reset,
-		watch,
+		handleSubmit = () => {},
+		reset = () => {},
+		watch = () => {},
 	} = useForm();
 
 	const { ...formValues } = watch();
@@ -34,7 +34,10 @@ function UserOnboard({ leadsData = {}, defaultValues = {} }) {
 
 	const countryValidation = getCountryConstants({ country_id: leadsData?.country_id, isDefaultData: false });
 
-	const { updateLoading = false, updateLeadOrganization = () => {} } = useUpdateLeadOrganization({ leadsData });
+	const {
+		updateLoading = false,
+		updateLeadOrganization = () => {},
+	} = useUpdateLeadOrganization({ leadsData, refetchList });
 
 	const { business_name = '', country_id = '', registration_number = '' } = leadsData || {};
 

@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-function useListOrganizationUsers({ consigneeShipperId = '' }) {
+function useListOrganizationUsers({ consigneeShipperId = '', reset = () => {} }) {
 	const [data, setData] = useState({});
 	const [defaultValues, setDefaultValues] = useState({});
 
@@ -24,7 +24,7 @@ function useListOrganizationUsers({ consigneeShipperId = '' }) {
 				const res = await trigger();
 
 				const pocData = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
-				const { business_name } = pocData?.organization || {};
+				const { business_name = '' } = pocData?.organization || {};
 
 				setData(pocData);
 
@@ -48,10 +48,13 @@ function useListOrganizationUsers({ consigneeShipperId = '' }) {
 		getListOrganizations();
 	}, [getListOrganizations]);
 
+	useEffect(() => {
+		reset(defaultValues);
+	}, [reset, defaultValues]);
+
 	return {
 		loading,
 		data,
-		defaultValues,
 		getListOrganizations,
 	};
 }

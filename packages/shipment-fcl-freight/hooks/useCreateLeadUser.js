@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
-	const { new_name, new_email, new_mobile_number } = values;
+	const { new_name = '', new_email = '', new_mobile_number = {} } = values;
 
 	const payload = {
 		name                 : new_name,
@@ -21,6 +21,7 @@ function useCreateLeadUser({
 	refetchList = () => { },
 	setShowCreatePoc = () => { },
 	setSelectedUserId = () => { },
+	reset = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user',
@@ -37,7 +38,9 @@ function useCreateLeadUser({
 
 			setShowCreatePoc(false);
 
-			setSelectedUserId(null);
+			setSelectedUserId('');
+
+			reset();
 
 			refetchList();
 		} catch (error) {
