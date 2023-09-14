@@ -167,7 +167,7 @@ function SelfAndTradePartyForm({
 										control={control}
 										placeholder={`Enter ${countryValidation?.others?.identification_number?.label
 											|| 'PAN Number'}`}
-										disabled={!!registrationNumber}
+										disabled={registrationNumber}
 									/>
 								</div>
 							</div>

@@ -72,7 +72,7 @@ function UploadBookingNote({
 	const { serviceQuotationLoading = true, loading } = step3_data || {};
 
 	if (mailLoading) {
-		return <div>Loading...</div>;
+		return <>Loading...</>;
 	}
 
 	return (

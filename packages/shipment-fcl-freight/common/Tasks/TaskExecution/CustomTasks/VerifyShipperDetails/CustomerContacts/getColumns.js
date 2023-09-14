@@ -80,7 +80,7 @@ function getColumns({
 
 								<Button
 									themeType="tertiary"
-									onClick={() => setSelectedUserId(null)}
+									onClick={() => setSelectedUserId('')}
 								>
 									Cancel
 								</Button>

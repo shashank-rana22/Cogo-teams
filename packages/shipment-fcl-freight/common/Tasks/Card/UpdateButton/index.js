@@ -109,7 +109,6 @@ function UpdateButton({
 				disabled={disableTask}
 			>
 				{buttonText}
-				{' '}
 			</Button>
 		</div>
 	);

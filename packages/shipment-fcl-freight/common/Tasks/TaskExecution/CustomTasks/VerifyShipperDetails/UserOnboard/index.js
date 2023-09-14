@@ -21,9 +21,9 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 	const {
 		control,
 		formState:{ errors = {} },
-		handleSubmit,
-		reset,
-		watch,
+		handleSubmit = () => {},
+		reset = () => {},
+		watch = () => {},
 	} = useForm();
 
 	const { ...formValues } = watch();

@@ -35,7 +35,7 @@ function useUpdateLeadUser({
 
 			Toast.success('Successful');
 
-			setSelectedUserId(null);
+			setSelectedUserId('');
 
 			setShowCreatePoc(false);
 

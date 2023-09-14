@@ -38,7 +38,7 @@ function useCreateLeadUser({
 
 			setShowCreatePoc(false);
 
-			setSelectedUserId(null);
+			setSelectedUserId('');
 
 			reset();
 
