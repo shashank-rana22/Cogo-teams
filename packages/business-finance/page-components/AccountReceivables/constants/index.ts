@@ -210,27 +210,27 @@ export const StatsKeyMapping = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '31-45 DAYS',
+		label     : '31-60 DAYS',
 		valueKey  : 'fortyFive',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '46-60 DAYS',
+		label     : '61-90 DAYS',
 		valueKey  : 'sixty',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '61-90 DAYS',
+		label     : '91-180 DAYS',
 		valueKey  : 'ninety',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '91-180 DAYS',
+		label     : '181-365 DAYS',
 		valueKey  : 'oneEighty',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '180+ DAYS',
+		label     : '365+ DAYS',
 		valueKey  : 'oneEightyPlus',
 		textColor : '#cb6464',
 	},
