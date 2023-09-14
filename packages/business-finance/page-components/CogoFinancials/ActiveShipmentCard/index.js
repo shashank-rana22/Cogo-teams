@@ -28,6 +28,7 @@ function ActiveShipmentCard({
 	activeBar = '',
 	setActiveBar = () => {},
 	setTableFilters = () => {},
+	isCancelledExcluded = false,
 }) {
 	const PROPS_KEY_MAPPING = {
 		ongoing: {
@@ -39,6 +40,7 @@ function ActiveShipmentCard({
 			timeRange,
 			filter,
 			customDate,
+			isCancelledExcluded,
 		},
 		operational: {
 			title        : 'Operationally Closed',
@@ -58,6 +60,7 @@ function ActiveShipmentCard({
 			defaultWidth : '252',
 			setTableFilters,
 			infoContent  : INFO_CONTENT.operationallyClosed,
+			isCancelledExcluded,
 		},
 		financial: {
 			title        : 'Financially Closed',
@@ -78,6 +81,7 @@ function ActiveShipmentCard({
 			defaultWidth : '252',
 			setTableFilters,
 			infoContent  : INFO_CONTENT.financiallyClosed,
+			isCancelledExcluded,
 		},
 	};
 
