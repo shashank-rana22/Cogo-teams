@@ -38,9 +38,9 @@ function RenderHeader({
 	setEmailTemplate = () => {},
 	isTemplateView = false,
 	setMinimizeModal = () => {},
+	handleSaveDraft = () => {},
 }) {
 	return (
-
 		<div className={styles.mail_modal_header}>
 			<div className={styles.header}>
 				<div className={styles.left_container}>
@@ -91,9 +91,12 @@ function RenderHeader({
 							size="sm"
 							themeType="accent"
 							disabled={replyLoading}
-							onClick={() => {
-								setEmailTemplate((prev) => ({ ...prev, isTemplateView: true }));
-							}}
+							onClick={() => setEmailTemplate(
+								(prev) => ({
+									...prev,
+									isTemplateView: true,
+								}),
+							)}
 						>
 							Add Template
 						</Button>
@@ -104,13 +107,14 @@ function RenderHeader({
 							size="sm"
 							themeType="secondary"
 							disabled={replyLoading}
+							onClick={handleSaveDraft}
 						>
 							Save as draft
 						</Button>
 					)}
 
 					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
-						<div className={styles.file_uploader_div}>
+						<div className={styles.file_uploader_div} title="attachment">
 							<CustomFileUploader
 								disabled={uploading || replyLoading}
 								handleProgress={setUploading}
@@ -125,6 +129,7 @@ function RenderHeader({
 							/>
 						</div>
 					)}
+
 					<div
 						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
 						title="send"

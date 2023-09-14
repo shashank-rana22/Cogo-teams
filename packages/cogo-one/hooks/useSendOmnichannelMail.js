@@ -10,6 +10,7 @@ import { getCommunicationPayload, ENDPOINT_MAPPING } from '../helpers/communicat
 const useSendOmnichannelMail = ({
 	setEmailState = () => {},
 	setButtonType = () => {},
+	saveToExistingThread = () => {},
 }) => {
 	const {
 		user: { id: userId, name = '' },
@@ -29,6 +30,7 @@ const useSendOmnichannelMail = ({
 		formattedData = {},
 		mailActions = {},
 		emailState = {},
+		dataForFirebase = {},
 	}) => {
 		if (!Object.keys(ENDPOINT_MAPPING).includes(mailActions?.actionType)) {
 			Toast.error('Endpoint is Required');
@@ -36,7 +38,7 @@ const useSendOmnichannelMail = ({
 		}
 
 		try {
-			await trigger({
+			const response = await trigger({
 				data: getCommunicationPayload({
 					userId,
 					formattedData,
@@ -47,6 +49,12 @@ const useSendOmnichannelMail = ({
 					name,
 					source,
 				}),
+			});
+
+			saveToExistingThread({
+				payload          : dataForFirebase,
+				communication_id : response?.data?.id,
+				buttonType       : mailActions?.actionType,
 			});
 			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 

@@ -20,6 +20,7 @@ function CommunicationModals({
 	viewType = '',
 	setOpenKamContacts = () => {},
 	setSendBulkTemplates = () => {},
+	firestore = {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -101,6 +102,7 @@ function CommunicationModals({
 					userId={userId}
 					activeMail={activeMail}
 					viewType={viewType}
+					firestore={firestore}
 				/>
 			)}
 

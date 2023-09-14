@@ -61,7 +61,14 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 				let prevMessageData = {};
 				querySnapshot.forEach((mes) => {
 					const timeStamp = mes.data()?.created_at;
-					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+
+					prevMessageData = {
+						...prevMessageData,
+						[timeStamp]: {
+							...(mes.data() || {}),
+							id: mes.id,
+						},
+					};
 				});
 
 				getCogooneTimeline({
@@ -102,9 +109,17 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 			|| GLOBAL_CONSTANTS.zeroth_index) - LAST_INDEX_FROM_END]?.data()?.created_at;
 		const islastPage = prevMessages?.length < PAGE_LIMIT;
 		let prevMessageData = {};
+
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;
-			prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+
+			prevMessageData = {
+				...prevMessageData,
+				[timeStamp]: {
+					...(mes.data() || {}),
+					id: mes.id,
+				},
+			};
 		});
 
 		getCogooneTimeline({

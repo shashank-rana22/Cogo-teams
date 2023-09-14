@@ -35,7 +35,13 @@ function MailBody({
 	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
 
-	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
+	const {
+		response,
+		send_by = '',
+		created_at = '',
+		media_url = [],
+		is_draft: isDraft = false,
+	} = eachMessage || {};
 
 	const {
 		subject = '',
@@ -70,7 +76,7 @@ function MailBody({
 		formattedData,
 		eachMessage,
 		activeMailAddress : source,
-		isDraft           : false,
+		isDraft,
 		subject,
 		emailVia          : 'firebase_emails',
 	});
@@ -86,20 +92,22 @@ function MailBody({
 	return (
 		<div>
 			<div className={styles.send_by_name}>
-				Replied by
+				{isDraft ? 'Created' : 'Replied'}
+				{' '}
+				by
 				{' '}
 				{send_by || 'user'}
 				,
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
-			<div
-				className={styles.container}
-			>
+
+			<div className={styles.container}>
 				<MailHeader
 					eachMessage={eachMessage}
 					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
 					handleExpandClick={handleExpandClick}
+					isDraft={isDraft}
 				/>
 
 				<div className={styles.subject}>
@@ -117,6 +125,7 @@ function MailBody({
 				{hasPermissionToEdit ? (
 					<MailActions
 						handleClick={handleClick}
+						isDraft={isDraft}
 					/>
 				) : null}
 

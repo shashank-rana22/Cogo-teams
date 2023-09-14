@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import useMailDraftFunctions from '../hooks/useMailDraftFunctions';
 import useReplyMail from '../hooks/useReplyMail';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
@@ -13,6 +14,7 @@ function useMailEditorFunctions({
 	attachments = [],
 	userId = '',
 	mailProps = {},
+	firestore = {},
 }) {
 	const {
 		buttonType = '',
@@ -35,9 +37,23 @@ function useMailEditorFunctions({
 	} = emailState || {};
 
 	const {
+		is_draft: isDraft = false,
+	} = eachMessage || {};
+
+	const {
 		replyMailApi = () => {},
 		replyLoading = false,
 	} = useReplyMail(mailProps);
+
+	const {
+		saveToExistingThread = () => {},
+		createNewRoomAndAddDraft = () => {},
+		updateTheExistingDraft = () => {},
+	} = useMailDraftFunctions({
+		firestore,
+		formattedData,
+		parentEmailMessage: eachMessage,
+	});
 
 	const {
 		mailLoading = false,
@@ -45,6 +61,7 @@ function useMailEditorFunctions({
 	} = useSendOmnichannelMail({
 		setEmailState,
 		setButtonType,
+		saveToExistingThread,
 	});
 
 	const handlePayload = () => {
@@ -96,14 +113,44 @@ function useMailEditorFunctions({
 					data       : eachMessage,
 				},
 				emailState,
+				dataForFirebase: payload,
 			});
 			return;
 		}
 		replyMailApi(payload);
 	};
 
+	const handleSaveDraft = () => {
+		const isEmptyMail = getFormatedEmailBody({ emailState });
+
+		if (uploading) {
+			Toast.error('Files are uploading...');
+			return;
+		}
+
+		if (isEmptyMail && isEmpty(attachments)) {
+			Toast.error('There is nothing in email body to save as draft');
+			return;
+		}
+
+		if (isDraft) {
+			updateTheExistingDraft({ payload: handlePayload() });
+		} else if (buttonType === 'send_mail') {
+			createNewRoomAndAddDraft({ payload: handlePayload() });
+		} else {
+			saveToExistingThread({
+				payload: handlePayload(),
+				buttonType,
+			});
+		}
+
+		setButtonType('');
+		Toast.success('Draft has saved successfully');
+	};
+
 	return {
 		handleSend,
+		handleSaveDraft,
 		replyLoading: replyLoading || mailLoading,
 	};
 }

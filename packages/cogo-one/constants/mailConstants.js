@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 export const SEARCH_QUERY_LIMIT = 50;
@@ -53,7 +54,8 @@ export const BUTTON_MAPPING = [
 			width={20}
 			height={20}
 		/>,
-		key: 'reply',
+		key              : 'reply',
+		toBeShownInDraft : false,
 	},
 	{
 		buttonName : 'Reply All',
@@ -63,7 +65,8 @@ export const BUTTON_MAPPING = [
 			width={20}
 			height={20}
 		/>,
-		key: 'reply_all',
+		key              : 'reply_all',
+		toBeShownInDraft : false,
 
 	},
 	{
@@ -74,6 +77,16 @@ export const BUTTON_MAPPING = [
 			width={20}
 			height={20}
 		/>,
-		key: 'forward',
+		key              : 'forward',
+		toBeShownInDraft : false,
+	},
+	{
+		buttonName : 'Preview',
+		icon       : <IcMEyeopen
+			width={20}
+			height={20}
+		/>,
+		key              : 'preview',
+		toBeShownInDraft : true,
 	},
 ];

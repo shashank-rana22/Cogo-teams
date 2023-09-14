@@ -17,6 +17,7 @@ function MailEditorModal({
 	userId = '',
 	activeMail = {},
 	viewType = '',
+	firestore = {},
 }) {
 	const {
 		buttonType,
@@ -70,12 +71,14 @@ function MailEditorModal({
 	const {
 		handleSend = () => {},
 		replyLoading = false,
+		handleSaveDraft = () => {},
 	} = useMailEditorFunctions({
 		uploading,
 		activeMail,
 		attachments,
 		userId,
 		mailProps,
+		firestore,
 	});
 
 	if (minimizeModal) {
@@ -123,6 +126,7 @@ function MailEditorModal({
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
 						setButtonType={setButtonType}
+						handleSaveDraft={handleSaveDraft}
 						setMinimizeModal={setMinimizeModal}
 					/>
 				)}

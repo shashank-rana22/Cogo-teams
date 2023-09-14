@@ -14,6 +14,7 @@ function MailHeader({
 	handleClick = () => {},
 	handleExpandClick = () => {},
 	hasPermissionToEdit = false,
+	isDraft = false,
 }) {
 	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
 
@@ -65,9 +66,14 @@ function MailHeader({
 				<div className={styles.icon_flex}>
 					{BUTTON_MAPPING.map(
 						(item) => {
-							const { key = '', icon = '' } = item || {};
+							const { key = '', icon = '', toBeShownInDraft = false } = item || {};
 
-							if (!icon || !hasPermissionToEdit) {
+							if (
+								!icon
+								|| !hasPermissionToEdit
+								|| (isDraft && !toBeShownInDraft)
+								|| (!isDraft && toBeShownInDraft)
+							) {
 								return null;
 							}
 

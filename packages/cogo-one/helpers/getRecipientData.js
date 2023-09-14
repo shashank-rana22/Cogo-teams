@@ -81,23 +81,43 @@ export function getRecipientData({
 		buttonType = '',
 	} = mailProps || {};
 
+	const { response = {} } = eachMessage || {};
+
+	const {
+		body = '',
+		sender = '',
+		draft_type = '',
+		subject: draftSubject = '',
+		to_mails = [],
+		cc_mails = [],
+		bcc_mails = [],
+	} = response || {};
+
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 
-	const handleClick = ({ buttonType: newButtonType = '', data = {} }) => {
+	const handleClick = ({
+		buttonType: newButtonType = '',
+	}) => {
 		if (isDraft) {
-			setButtonType('send_mail');
+			setButtonType(draft_type);
+
 			setEmailState(
 				(prev) => ({
 					...prev,
-					body          : data?.body?.content,
-					subject       : data?.subject,
-					toUserEmail   : recipientData || [],
-					ccrecipients  : ccData || [],
-					bccrecipients : bccData || [],
+					emailVia,
+					body          : body || '',
+					from_mail     : sender || '',
+					subject       : draftSubject || '',
+					toUserEmail   : to_mails || [],
+					ccrecipients  : cc_mails || [],
+					bccrecipients : bcc_mails || [],
+					formattedData,
+					eachMessage,
 				}),
 			);
+
 			return;
 		}
 

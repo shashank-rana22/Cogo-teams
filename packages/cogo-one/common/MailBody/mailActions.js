@@ -7,11 +7,20 @@ import styles from './styles.module.css';
 
 function MailActions({
 	handleClick = () => {},
+	isDraft = false,
 }) {
 	return (
 		<div className={styles.buttons_flex}>
 			{BUTTON_MAPPING.map((eachButton) => {
-				const { buttonName = '', icon = '', key = '' } = eachButton || {};
+				const { buttonName = '', icon = '', key = '', toBeShownInDraft = false } = eachButton || {};
+
+				if (
+					!icon
+					|| (isDraft && !toBeShownInDraft)
+					|| (!isDraft && toBeShownInDraft)
+				) {
+					return null;
+				}
 
 				return (
 					<Button
