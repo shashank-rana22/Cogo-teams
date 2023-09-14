@@ -13740,9 +13740,16 @@ const partner = {
 	],
 	ams_submission: [
 		{
-			api          : 'get_referrer_network_node',
-			access_type  : 'private',
-			service_name : 'referral',
+			api         : 'get_air_coe_air_freight_ams_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_air_freight',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_service_ops_list',
+			access_type : 'private',
 		},
 	],
 	business_finance_dunnings: [

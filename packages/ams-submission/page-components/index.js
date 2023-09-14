@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import EmptyState from '../common/EmptyState';
 import getColumns from '../configurations/getColumns';
+import useGetAmsData from '../hooks/useGetAmsData';
 
 import ActionModal from './ActionModal';
 import Header from './Header';
@@ -13,7 +14,7 @@ import styles from './styles.module.css';
 const PAGE_LIMIT = 10;
 
 function AmsSubmission() {
-	const { t } = useTranslation;
+	const { t } = useTranslation(['amsSubmission']);
 
 	const [activeTab, setActiveTab] = useState('tc_status_check');
 	const [searchValue, setSearchValue] = useState('');
@@ -23,69 +24,36 @@ function AmsSubmission() {
 	});
 
 	const columns = getColumns({ t, activeTab, modalData, setModalData });
-	const data = [
-		{
-			name  : 'hahhaa',
-			label : 'hahahah',
-			value : 'hahahah',
-		},
-		{
-			name  : 'huihuihui',
-			label : 'huihuihui',
-			value : 'huihuihui',
-		},
-		{
-			name  : 'hiahiahia',
-			label : 'hiahiahia',
-			value : 'hiahiahia',
-		},
-		{
-			name  : 'hahhaa',
-			label : 'hahahah',
-			value : 'hahahah',
-		},
-		{
-			name  : 'huihuihui',
-			label : 'huihuihui',
-			value : 'huihuihui',
-		},
-		{
-			name  : 'hiahiahia',
-			label : 'hiahiahia',
-			value : 'hiahiahia',
-		},
-		{
-			name  : 'hahhaa',
-			label : 'hahahah',
-			value : 'hahahah',
-		},
-		{
-			name  : 'huihuihui',
-			label : 'huihuihui',
-			value : 'huihuihui',
-		},
-		{
-			name  : 'hiahiahia',
-			label : 'hiahiahia',
-			value : 'hiahiahia',
-		},
-	];
+
+	const {
+		data = {},
+		loading = false,
+		pagination = 1,
+		setPagination = () => {},
+	} = useGetAmsData({ activeTab });
+
+	const { list = [], totalRecords } = data || {};
 
 	return (
 		<div className={styles.main_container}>
-			<h1>Electronic Data Submission</h1>
+			<h1>{t('amsSubmission:header_data_submission')}</h1>
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 			/>
+
 			<Table
-				data={data}
+				data={list}
 				columns={columns}
+				loading={loading}
+				loadingRowsCount={PAGE_LIMIT}
 			/>
-			{isEmpty(data) ? <EmptyState /> : null}
-			{/* {data.length >= PAGE_LIMIT
+
+			{!loading && isEmpty(list) ? <EmptyState /> : null}
+
+			{list?.length >= PAGE_LIMIT
 				? (
 					<div className={styles.footer}>
 						<Pagination
@@ -96,8 +64,9 @@ function AmsSubmission() {
 							onPageChange={setPagination}
 						/>
 					</div>
-				) : null} */}
-			{!isEmpty(modalData) ? (
+				) : null}
+
+			{!isEmpty(modalData?.data) ? (
 				<ActionModal
 					modalData={modalData}
 					setModalData={setModalData}

@@ -5,19 +5,19 @@ import { useTranslation } from 'next-i18next';
 import styles from './styles.module.css';
 
 function EmptyState() {
-	const { t } = useTranslation();
+	const { t } = useTranslation(['amsSubmission']);
 	const amsEmptyStateSrc = GLOBAL_CONSTANTS.image_url.ams_empty_state;
 
 	return (
 		<div className={styles.container}>
 			<div>
-				<h1 className={styles.header}>No Shipments found !!</h1>
-				<h3>Looks like no results were found...</h3>
+				<h1 className={styles.header}>{t('amsSubmission:no_shipments_found')}</h1>
+				<h3>{t('amsSubmission:no_results_found')}</h3>
 			</div>
 
 			<Image
 				src={amsEmptyStateSrc}
-				alt="empty_page"
+				alt={t('amsSubmission:empty_page_alt')}
 				height={300}
 				width={450}
 			/>

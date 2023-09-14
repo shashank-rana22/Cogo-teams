@@ -13,7 +13,7 @@ function Header({
 	searchValue = '',
 	setSearchValue = () => {},
 }) {
-	const { t } = useTranslation();
+	const { t } = useTranslation(['amsSubmission']);
 	const tabOptions = tabs(t);
 
 	return (
@@ -42,7 +42,7 @@ function Header({
 					className={styles.input_search}
 					size="sm"
 					prefix={<IcMAppSearch />}
-					placeholder="Search via AWB Number"
+					placeholder={t('amsSubmission:input_placeholder')}
 					onChange={(e) => setSearchValue(e)}
 					value={searchValue}
 					suffix={(
@@ -59,8 +59,8 @@ function Header({
 					size="sm"
 					name="tc_td_status"
 					disabled={false}
-					onLabel="All"
-					offLabel="Relevant to me"
+					onLabel={t('amsSubmission:toggle_all')}
+					offLabel={t('amsSubmission:toggle_relevant_to_me')}
 				/>
 			</div>
 		</div>

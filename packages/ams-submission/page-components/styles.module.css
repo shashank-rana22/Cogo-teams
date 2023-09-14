@@ -58,3 +58,8 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.tooltip_content {
+	word-break: normal;
+	overflow-wrap: normal;
+}

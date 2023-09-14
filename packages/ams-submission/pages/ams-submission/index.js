@@ -6,7 +6,7 @@ export { default } from '@cogoport/ams-submission/page-components';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common'])),
+			...(await serverSideTranslations(locale, ['common', 'amsSubmission'])),
 		},
 	};
 }
