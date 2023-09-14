@@ -6,7 +6,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsConditions({ control = {}, errors = {} }) {
+function TermsConditions({ control = {}, errors = {}, isComplete = false, confirmedValues = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>
@@ -16,7 +16,9 @@ function TermsConditions({ control = {}, errors = {} }) {
 					<CheckboxController
 						className={styles.Checkbox}
 						control={control}
+						value={isComplete}
 						name="checkbox_agreement"
+						disabled={isComplete}
 						rules={{ required: { value: true, message: '*required' } }}
 					/>
 					<div className={styles.content}>
@@ -47,7 +49,9 @@ function TermsConditions({ control = {}, errors = {} }) {
 							size="sm"
 							placeholder="Enter your full name"
 							control={control}
+							value={isComplete ? confirmedValues.tcFullName : null}
 							name="name"
+							disabled={isComplete}
 							rules={{ required: 'this is required' }}
 						/>
 						{errors.name && (

@@ -20,7 +20,12 @@ const data = [
 	},
 ];
 
-function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpdateData = () => {} }) {
+function FinanceUpdateModal({
+	showModal = false,
+	setShowModal = () => {},
+	setUpdateData = () => {},
+
+}) {
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {

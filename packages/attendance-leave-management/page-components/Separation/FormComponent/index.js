@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import AdminClearance from './admin-view/admin-clearance';
 // import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
+import FinanceEmployeeConfirmModal from './finance-view/FInanaceClearanceEmplyeeSide/FinanaceEmployeeConfirmModal';
 import FinanceClearanceEmployeeSide from './finance-view/FInanaceClearanceEmplyeeSide/FinanceClearanceEmployeeSide';
 import AdminClearanceHrbp from './hrbp-view/AdminClearanceHrbp';
 import ExitInterview from './hrbp-view/ExitInterview';
@@ -47,7 +48,8 @@ const COMPONENT_MAPPING = {
 	//	HOTOClearance_confirmation : HOTOClearanceConfirmation,
 	},
 	finance: {
-		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
+		finance_clearance_employee_side : FinanceClearanceEmployeeSide,
+		finance_clearance_confirm_modal : FinanceEmployeeConfirmModal,
 	},
 };
 
@@ -63,7 +65,7 @@ function FormComponent({
 
 	if (view_type === 'hr_meet') {
 		const handleNext = () => {
-			const componentKeys = Object.keys(COMPONENT_MAPPING.hr_meet);
+			const componentKeys = Object.keys(COMPONENT_MAPPING.finance);
 			const currentIndex = componentKeys.indexOf(currentComponent);
 
 			if (currentIndex !== MINUS_ONE && currentIndex < componentKeys.length - ONE) {
@@ -80,7 +82,7 @@ function FormComponent({
 			}
 		};
 
-		Render = COMPONENT_MAPPING.hr_meet[currentComponent];
+		Render = COMPONENT_MAPPING.finance.finance_clearance_confirm_modal;
 		return (
 			<div className={styles.container}>
 				{Render ? (

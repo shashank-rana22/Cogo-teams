@@ -11,22 +11,15 @@ const fnfColumns = ({
 }) => ([
 	{
 		Header   : 'PARTICULAR',
-		accessor : (item) => (
+		accessor : (item = {}) => (
 			<section>
 				{/* <InputController
 				control={control}
 				className={styles.input_table}
 			/> */}
-				<InputController
-					control={control}
-					placeholder="Type Amount here"
-					className={styles.name_input}
-					name={`${item.particular}RecoverableAmount`}
-					size="md"
-					type="number"
-					onChange={totalRecoverableAmountFun}
-					rules={{ required: { value: true, message: '*This Field is required' } }}
-				/>
+				<div>
+					{item.particular}
+				</div>
 				{errors?.item?.particular && (
 					<div className={styles.error}>*Required</div>
 				)}
@@ -52,6 +45,8 @@ const fnfColumns = ({
 					name={`${item.particular}RecoverableAmount`}
 					size="md"
 					type="number"
+					value={item.recoverableAmount}
+					disabled
 					onChange={totalRecoverableAmountFun}
 					rules={{ required: { value: true, message: '*This Field is required' } }}
 				/>

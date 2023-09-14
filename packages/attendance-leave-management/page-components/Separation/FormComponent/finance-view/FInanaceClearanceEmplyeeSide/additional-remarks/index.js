@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function AdditionalRemarks({ control = {} }) {
+function AdditionalRemarks({ control = {}, isComplete = false, confirmedValues = {} }) {
 	const [showNotes, setShowNotes] = useState(true);
 
 	return (
@@ -25,6 +25,8 @@ function AdditionalRemarks({ control = {} }) {
 					<InputController
 						size="md"
 						placeholder="Type your notes here"
+						value={isComplete ? confirmedValues.additionalRemarks : null}
+						disabled={isComplete}
 						control={control}
 						name="notes"
 						rules={{ required: 'this is required' }}
