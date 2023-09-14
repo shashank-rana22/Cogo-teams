@@ -165,3 +165,38 @@
 	background: #fff;
 	border-radius: 1px solid #333;
 }
+
+.button_container {
+	:global {
+		.ui_button_container {
+			white-space: nowrap;
+		}
+
+		.ui_ps_size_md {
+			min-width: initial;
+			height: 34px;
+		}
+	}
+}
+
+.notifications_badge {
+	position: absolute;
+	top: -2px;
+	left: 11px;
+	display: flex;
+	align-items: center;
+	height: 16px;
+	padding: 4px;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 12px;
+	color: #fff;
+	background: #111;
+	border-radius: 50%;
+}
+
+.notification_wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}

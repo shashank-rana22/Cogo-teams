@@ -21,6 +21,7 @@ const PAGE_SIZE = 2;
 const CHECK_DATA_LENGTH = 0;
 
 function VisualizationData({
+	entityCode = '',
 	openVisualization = false,
 }) {
 	const [selectedBarData, setSelectedBarData] = useState();
@@ -47,6 +48,7 @@ function VisualizationData({
 		filterValues,
 		kamOwnerId,
 		toggleValue,
+		entityCode,
 	);
 	const { page_number } = filters || {};
 
@@ -86,7 +88,6 @@ function VisualizationData({
 			<LineChart data={data} />
 		);
 	}
-
 	const handleTabs = (e) => {
 		setFilterValues((prev) => ({
 			...prev,
@@ -158,6 +159,7 @@ function VisualizationData({
 										barData={data}
 										setKamOwnerId={setKamOwnerId}
 										pageNumber={page_number}
+										entityCode={entityCode}
 									/>
 								)}
 							</>

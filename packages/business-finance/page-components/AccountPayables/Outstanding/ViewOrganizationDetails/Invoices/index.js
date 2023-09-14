@@ -4,8 +4,6 @@ import React from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
 import List from '../../../../commons/List/index.tsx';
-import { invoiceFilters } from '../../../Invoices/configurations';
-import useGetBillsList from '../../../Invoices/hooks/useGetBillsList';
 import { RenderAction } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderToolTip';
@@ -18,16 +16,28 @@ import styles from './styles.module.css';
 const FIRST_PAGE = 1;
 const DEFAULT_FILTER_LEN = 4;
 
-function Invoices({ organizationId = '', setStats = () => { } }) {
-	const {
-		billsData = {},
-		billsLoading = false,
-		billsFilters = {},
-		setBillsFilters = () => { },
-		orderBy = {},
-		setOrderBy = () => { },
-	} = useGetBillsList({ activeTab: 'all', organizationId, setStats });
+export const invoiceFilters = [
+	{
+		name        : 'invoiceView',
+		span        : 1,
+		type        : 'select',
+		placeholder : 'Invoice View',
+		options     : [
+			{ label: 'All', value: 'all' },
+			{ label: 'Migrated', value: 'migrated' },
+			{ label: 'COE Accepted', value: 'coe_accepted' },
+		],
+	},
+];
 
+function Invoices({
+	billsData = {},
+	billsLoading = false,
+	billsFilters = {},
+	setBillsFilters = () => {},
+	orderBy = {},
+	setOrderBy = () => {},
+}) {
 	const functions = {
 		renderToolTip: (itemData, field) => (
 			<RenderToolTip itemData={itemData} field={field} />
