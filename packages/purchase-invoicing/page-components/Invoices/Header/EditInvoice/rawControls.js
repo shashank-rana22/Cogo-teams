@@ -23,17 +23,18 @@ const rawControls = ({
 	const { id, shipment_type, entity_id } = shipment_data;
 
 	return {
-		type         : 'edit_service_charges',
-		name         : `${charge?.service_id}:${index}`,
-		service_name : charge?.service_type,
-		showHeader   : true,
-		showButtons  : true,
-		path         : 'sales_invoice',
-		shipment_id  : id,
+		type             : 'edit_service_charges',
+		name             : `${charge?.service_id}:${index}`,
+		service_name     : charge?.service_type,
+		showHeader       : true,
+		showButtons      : true,
+		// path             : 'sales_invoice',
+		shipment_id      : id,
 		shipment_type,
 		entity_id,
-		trade_type   : primary_service?.trade_type,
-		value        : [
+		trade_type       : primary_service?.trade_type,
+		showDeleteButton : false,
+		value            : [
 			{
 				code             : '',
 				alias            : '',
