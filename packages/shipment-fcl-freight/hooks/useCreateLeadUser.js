@@ -21,6 +21,7 @@ function useCreateLeadUser({
 	refetchList = () => { },
 	setShowCreatePoc = () => { },
 	setSelectedUserId = () => { },
+	reset = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user',
@@ -38,6 +39,8 @@ function useCreateLeadUser({
 			setShowCreatePoc(false);
 
 			setSelectedUserId(null);
+
+			reset();
 
 			refetchList();
 		} catch (error) {

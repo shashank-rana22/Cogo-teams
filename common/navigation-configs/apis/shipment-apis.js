@@ -35,11 +35,6 @@ const apis = [
 		service_name : 'lead',
 	},
 	{
-		api          : 'list_organization_billing_addresses',
-		access_type  : 'private',
-		service_name : 'lead',
-	},
-	{
 		api          : 'auto_upsell_service',
 		access_type  : 'private',
 		service_name : 'shipment',
