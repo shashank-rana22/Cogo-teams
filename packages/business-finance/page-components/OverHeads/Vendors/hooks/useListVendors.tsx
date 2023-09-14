@@ -1,12 +1,15 @@
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+
+import { EntityContext } from '../../commons/Contexts';
 
 const useListVendors = ({ filters, sort }) => {
 	const {
 		page, pageLimit, paymentStatus, CATEGORY, searchValue,
 	} = filters;
-	const { paymentSortType, openInvoiceSortType, createdAtSortType } = sort;
+	const entityCode = useContext(EntityContext);
 
+	const { paymentSortType, openInvoiceSortType, createdAtSortType } = sort;
 	const [
 		{ data, loading },
 		trigger,
@@ -23,8 +26,8 @@ const useListVendors = ({ filters, sort }) => {
 		try {
 			trigger({
 				params: {
-					page_limit                 : pageLimit,
-					page,
+					pageSize                   : pageLimit,
+					pageIndex                  : page,
 					verification_data_required : true,
 					paymentSortType            : paymentSortType || undefined,
 					openInvoiceSortType        : openInvoiceSortType || undefined,
@@ -32,6 +35,7 @@ const useListVendors = ({ filters, sort }) => {
 					paymentStatus              : paymentStatus || undefined,
 					category                   : CATEGORY || undefined,
 					q                          : searchValue || undefined,
+					cogoEntityId               : entityCode,
 				},
 			});
 		} catch (err) {
@@ -45,7 +49,7 @@ const useListVendors = ({ filters, sort }) => {
 		openInvoiceSortType,
 		createdAtSortType,
 		paymentStatus, CATEGORY, searchValue,
-
+		entityCode,
 	]);
 
 	return {

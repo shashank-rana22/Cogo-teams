@@ -112,6 +112,7 @@ function ShipmentCard({
 				setShowPocModal={setShowPocModal}
 				viewType={viewType}
 				handleShipmentChat={handleShipmentChat}
+				setActiveTab={setActiveTab}
 				showModalType={showModalType}
 			/>
 		</div>

@@ -21,6 +21,8 @@ const getButtonOptions = ({
 	shipmentItem = {},
 	showAddPrimaryUserButton = false,
 	handleRowClick = () => {},
+	setActiveTab = () => {},
+	sid = '',
 	showModalType = () => {},
 }) => [
 	{
@@ -76,6 +78,23 @@ const getButtonOptions = ({
 		condition : ['all_shipments'],
 		show      : true,
 	},
+	{
+		key      : 'open_emails',
+		children : 'Open Emails',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setActiveTab((prev) => ({
+				...prev,
+				data          : {},
+				tab           : 'firebase_emails',
+				subTab        : 'hidden_filter',
+				hiddenFilters : { sid },
+			}));
+			setShowPopover('');
+		},
+		condition : ['all_shipments'],
+		show      : true,
+	},
 ];
 
 function HeaderBlock({
@@ -87,6 +106,7 @@ function HeaderBlock({
 	setShowPocModal = () => {},
 	viewType = '',
 	handleShipmentChat = () => {},
+	setActiveTab = () => {},
 	showModalType = () => {},
 }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
@@ -143,6 +163,8 @@ function HeaderBlock({
 		shipmentItem,
 		showAddPrimaryUserButton,
 		handleRowClick,
+		setActiveTab,
+		sid: serial_id,
 		showModalType,
 	});
 

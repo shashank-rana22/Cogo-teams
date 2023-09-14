@@ -18,6 +18,7 @@ function ShipmentsCard({
 	setShowPocModal = () => {},
 	viewType = '',
 	handleShipmentChat = () => {},
+	setActiveTab = () => {},
 	showModalType = () => {},
 }) {
 	const {
@@ -46,6 +47,7 @@ function ShipmentsCard({
 					showPopover={showPopover}
 					setShowPocModal={setShowPocModal}
 					viewType={viewType}
+					setActiveTab={setActiveTab}
 					showModalType={showModalType}
 				/>
 

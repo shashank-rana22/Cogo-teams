@@ -41,7 +41,7 @@ function ShipmentActivities({
 			{(list || []).map((shipmentItem) => {
 				const {
 					serial_id = '',
-				} = shipmentItem;
+				} = shipmentItem || {};
 
 				if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === serial_id) {
 					return (

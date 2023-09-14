@@ -9,7 +9,7 @@ const COGOONE_ADMIN = {
 	teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	session_type_query     : getSupplySessionQuery,
 	contacts_base_query    : () => [where('user_details.account_type', '==', 'service_provider')],
-	chat_sub_tabs_access   : ['all', 'groups', 'contacts'],
+	chat_sub_tabs_access   : ['all', 'groups', 'contacts', 'hidden_filter'],
 	accesible_filters      : {
 		all      : ['15_min_filter', 'assigned_to', 'assigned_agent', 'chat_tags'],
 		contacts : ['chat_tags'],
