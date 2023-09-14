@@ -9,6 +9,7 @@ function TechStatus({ techClearance = {} }) {
 
 	const { sub_process_data } = techClearance || {};
 	const { serviceList } = sub_process_data || {};
+	// console.log(techClearance);
 	return (
 		<div className={styles.container}>
 
@@ -26,7 +27,7 @@ function TechStatus({ techClearance = {} }) {
 				</div>
 			</div>
 			<div className={show ? styles.item_container : styles.item_container_closed}>
-				{serviceList?.map((val) => (
+				{(serviceList || []).map((val) => (
 					<div className={styles.detail} key={val.key}>
 						<div className={styles.label}>
 							{startCase(val) || '-'}

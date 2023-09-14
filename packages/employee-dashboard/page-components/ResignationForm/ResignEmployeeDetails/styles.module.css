@@ -1,5 +1,4 @@
 .container {
-	width: 100%;
 	padding: 12px;
 	margin-top: 16px;
 	margin-bottom: 16px;
@@ -21,8 +20,8 @@
 .item_container {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
-	height: 120px;
+	height: 360px;
+	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -45,8 +44,8 @@
 
 .label {
 	margin-bottom: 4px;
-	font-weight: 400;
-	color: #4f4f4f;
+	font-weight: 500;
+	color: #221f20;
 }
 
 .employee_detail {
@@ -64,12 +63,13 @@
 	transform: rotate(180deg);
 }
 
-.alert_text {
+.reason_leaving {
 	flex-basis: 100%;
-	padding-left: 6px;
-	font-size: 12px;
-	font-weight: 400;
-	color: #4f4f4f;
+	padding: 8px;
+}
+
+.controller_ele > textarea {
+	height: 92px;
 }
 
 .error_msg {

@@ -27,6 +27,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 			tooltip  : false,
 		},
 	];
+	console.log('data::::', data);
 	const [items, setItems] = useState(options);
 	const {
 		control,

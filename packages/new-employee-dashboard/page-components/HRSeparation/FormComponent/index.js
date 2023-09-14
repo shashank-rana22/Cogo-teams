@@ -18,7 +18,7 @@ import HandoverTakeover from './manager-view/HandoverTakeover';
 import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
-import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
+// import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
 
 const COMPONENT_MAPPING = {
 	hr_meet: {
@@ -36,8 +36,8 @@ const COMPONENT_MAPPING = {
 		assign_hoto    : HandoverTakeover,
 	},
 	tech_clearance: {
-		tech_clearance         : TechClearance,
-		tech_clearance_confirm : TechClearanceConfirm,
+		// tech_clearance_confirm : TechClearanceConfirm,
+		tech_clearance: TechClearance,
 	},
 	admin_clearance: {
 		admin_clearance: AdminClearance,

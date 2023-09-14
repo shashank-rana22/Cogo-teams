@@ -33,7 +33,6 @@ function FinanceRecommendations({ SetFinanceRecommendation, financeRecommendatio
 						onChange={(e) => { toggle(e); }}
 					/>
 				</div>
-
 				<div className={styles.hold_fnf_container}>
 					<Toggle
 						name="fnf"
@@ -44,8 +43,11 @@ function FinanceRecommendations({ SetFinanceRecommendation, financeRecommendatio
 						value={financeRecommendation.fnf}
 						onChange={(e) => { toggle(e); }}
 					/>
+
 				</div>
+
 			</div>
+
 		</div>
 	);
 }

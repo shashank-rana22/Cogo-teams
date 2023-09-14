@@ -2,18 +2,18 @@ import React from 'react';
 
 import ResignationFormLanding from './ResignationFormLanding';
 import ResignationProgress from './ResignationProgress';
-
-const FORM_COMPONENT_MAPPING = {
-	resignation_form     : ResignationFormLanding,
-	resignation_progress : ResignationProgress,
-};
+import useGetEmployeeApplicationProcessDetails from './useGetEmployeeApplicationProcessDetails';
 
 function ResignationForm() {
-	const Render = FORM_COMPONENT_MAPPING.resignation_progress;
+	const { data } = useGetEmployeeApplicationProcessDetails();
+
+	const { application_exist } = data || {};
+
+	if (application_exist) return <ResignationProgress data={data} />;
 
 	return (
 		<div>
-			<Render />
+			<ResignationFormLanding />
 		</div>
 	);
 }

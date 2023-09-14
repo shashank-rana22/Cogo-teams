@@ -1,21 +1,37 @@
+/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { IcMProfile, IcMEmail, IcMCalendar, IcMClock, IcMLocation } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
+
+import useSubmitResignationProgress from '../useSubmitResignationProgress';
 
 import OTPInputExitInterview from './OTPInputExitInterview';
 import styles from './styles.module.css';
 
-const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
-function ExitInterview({ handleSubmit }) {
-	const INTERVIEW_DETAILS = {
-		date     : '23/03/2023',
-		time     : '2:15pm',
-		location : 'Deck House',
-		name     : 'Shivam Singh',
-		email    : EMAIL_FOR_INTERVIEW_DETAILS,
+// const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
+const OTP_LENGTH = 6;
+function ExitInterview({ data = {}, inProgressObject = {} }) {
+	const INTERVIEW_DETAILS = data?.interview_details;
+
+	// INTERVIEW_DETAILS = {
+	// 	date     : '23/03/2023',
+	// 	time     : '2:15pm',
+	// 	location : 'Deck House',
+	// 	name     : 'Shivam Singh',
+	// 	email    : EMAIL_FOR_INTERVIEW_DETAILS,
+	// };
+	const [otpValue, setOtpValue] = useState('');
+	const [otpError, setOtpError] = useState(false);
+	const { handleSubmit, onSubmit } = useSubmitResignationProgress({
+	});
+	const onClickSubmit = () => {
+		if (otpValue.length !== OTP_LENGTH) {
+			setOtpError(true);
+			return;
+		}
+
+		handleSubmit(onSubmit(otpValue))();
 	};
-	// const [otpValue,setOtpValue]=useState(' ');
-	// const [otpstate,setOtpState]=useState(false);
 
 	return (
 		<div className={styles.main_container}>
@@ -29,35 +45,35 @@ function ExitInterview({ handleSubmit }) {
 					<div className={styles.icon_and_info_container}>
 						<IcMCalendar height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.date}
+							{INTERVIEW_DETAILS?.date}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMClock height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.time}
+							{INTERVIEW_DETAILS?.time}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMLocation height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.location}
+							{INTERVIEW_DETAILS?.location}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMProfile height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.name}
+							{inProgressObject?.name}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMEmail height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.email}
+							{inProgressObject?.email}
 						</div>
 					</div>
 
@@ -74,7 +90,10 @@ function ExitInterview({ handleSubmit }) {
 						Enter the code shared with you by the HR to complete the separation process
 					</div>
 					<div className={styles.code_container}>
-						<OTPInputExitInterview />
+						<OTPInputExitInterview setOtpValue={setOtpValue} setOtpError={setOtpError} />
+						{otpError
+							? <div className={styles.error}>*required</div>
+							: null}
 					</div>
 				</div>
 
@@ -82,7 +101,7 @@ function ExitInterview({ handleSubmit }) {
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={handleSubmit(onsubmit)}
+						onClick={onClickSubmit}
 					>
 						Complete Separation
 					</Button>
