@@ -17,7 +17,6 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 	const [visible, setvisible] = useState(false);
 	const {
 		control,
-		watch,
 		reset,
 		handleSubmit,
 		formState:{ errors = {} },
@@ -27,24 +26,19 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 
 	const { exit_interview_scheduled } = exit_interview || {};
 	const { sub_process_detail_id } = exit_interview_scheduled || {};
-	console.log('Data', sub_process_detail_id);
 
-	const v1 = watch();
-	console.log('v1:', v1);
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
-	const onSubmit = (values) => {
-		console.log(values, 'formValues');
+	const onSubmit = async (values) => {
 		setvisible(true);
 		const payload = {
 			sub_process_data : values,
 			sub_process_detail_id,
-			process_name     : 'admin_clearance',
+			process_name     : 'exit_interview',
 		};
 		updateApplication({
 			payload,
 		});
-		reset();
 	};
 	return (
 		<>
@@ -61,9 +55,8 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 				)
 				: 			null
 		}
-			{/* <InterviewComplete /> */}
 
-			<ScheduleInterview visible={visible} control={control} watch={watch} reset={reset} errors={errors} />
+			<ScheduleInterview visible={visible} control={control} reset={reset} errors={errors} />
 
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '12px' }} onClick={handleBack}>Back</Button>

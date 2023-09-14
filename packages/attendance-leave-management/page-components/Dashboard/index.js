@@ -1,6 +1,7 @@
 import { Tabs, TabPanel, Button, Toast } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
 import useGetCheckinStats from '../../hooks/useGetCheckinStats';
@@ -17,11 +18,13 @@ const MANAGER = true;
 
 function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
-	const showInbox = new URLSearchParams(window?.location?.search)?.get('showInbox') || false;
+	const router = useRouter();
+	const { query } = useSelector((state) => state.general);
+	const [showInbox, setShowInbox] = useState(query?.showInbox || false);
 
 	const [coords, setCoords] = useState(null);
-	const router = useRouter();
 	const handleShowInbox = () => {
+		setShowInbox(true);
 		router.push('/attendance-leave-management?showInbox=true');
 	};
 
@@ -58,7 +61,7 @@ function AttendanceLeaveDashboard() {
 					</Button>
 				) : null}
 			</div>
-			{ showInbox ? <LeaveRequest isManager={is_manager} /> : (
+			{ showInbox ? <LeaveRequest isManager={is_manager} setShowInbox={setShowInbox} /> : (
 				<div className={styles.tab_container}>
 					<Tabs
 						activeTab={activeTab}
