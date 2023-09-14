@@ -1,12 +1,14 @@
-import { Button, Placeholder } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
-import React from 'react';
+import { Button, Loader, Placeholder, Popover } from '@cogoport/components';
+import { IcMArrowDown, IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
-// import useGetCsvFile from '../../../../hooks/useGetCsvUrl';
+import useGetCsvFile from '../../../../hooks/useGetCsvUrl';
 
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
+const VALUE_ONE = 1;
 
 function Card({
 	detail = {},
@@ -15,24 +17,43 @@ function Card({
 	statsLoading = false,
 	className = '',
 	handleClick = () => {},
+	filter = {},
 }) {
 	const { title = 'Previous Backlogs', color = '#000' } = detail;
-	// const { loading, getCsvFile } = useGetCsvFile(filter, activeCard);
 
-	// const handleDownload = async (e) => {
-	// 	e.stopPropagation();
-	// 	const url = await getCsvFile();				//for downloading csv file
-	// 	if (url) {
-	// 		window.open(url);
-	// 	}
-	// };
+	const [visible, setVisible] = useState(false);
 
+	const { loading, urlList, getCsvFile } = useGetCsvFile(filter, activeCard);
+
+	const handleDownload = async (e) => {
+		e.stopPropagation();
+		setVisible(!visible);
+		getCsvFile();
+	};
+
+	function RenderContent() {
+		if (loading) { return <Loader />; }
+		if (!loading && isEmpty(urlList)) { return <>No data</>; }
+		return (
+			(urlList || []).map((url, index) => (
+				<div key={url}>
+					<Button className={styles.url_link} themeType="linkUi" onClick={() => { window.open(url); }}>
+						{`link ${index + VALUE_ONE}`}
+					</Button>
+				</div>
+			))
+		);
+	}
 	return (
 		<div className={styles[className]}>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
-				{/* {activeCard === detail?.status
-				&& ((loading) ? <Loader /> : <IcMDownload onClick={handleDownload} />)} */}
+				{(activeCard === detail?.status && activeCard !== 'weekly_backlog_count')
+				&&					(
+					<Popover placement="top" render={<div className={styles.url_container}><RenderContent /></div>}>
+						<IcMDownload onClick={handleDownload} />
+					</Popover>
+				)}
 			</div>
 			<div className={styles.hr_line} />
 			<div className={styles.row}>

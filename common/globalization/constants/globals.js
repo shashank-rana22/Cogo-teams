@@ -419,6 +419,7 @@ const GLOBAL_CONSTANTS = {
 		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
 		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
 		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
+		empty_notes         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/notes-empty.svg',
 		no_incident_data    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
 		booking_verification_png:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/booking_verification-s2c',

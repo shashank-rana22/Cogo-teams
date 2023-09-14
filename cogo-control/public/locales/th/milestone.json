@@ -1,0 +1,16 @@
+{
+    "main_title":"เหตุการณ์สำคัญมาตรฐาน",
+    "create":"สร้าง",
+    "empty_milestone":"ไม่มีเหตุการณ์สำคัญมาตรฐาน",
+    "loader_alt":"การโหลด Cogoport",
+    "filter_opertor_placeholder":"ป้อนสายการขนส่ง",
+    "filter_source_placeholder":"เลือกแหล่งที่มา",
+    "filter_source_opt_1":"งานติดตาม",
+    "filter_source_opt_2":"ค่าเริ่มต้น",
+    "filter_source_opt_3":"ldb",
+    "filter_status_placeholder":"เลือกสถานะ",
+    "filter_status_opt_1":"คล่องแคล่ว",
+    "filter_status_opt_2":"ไม่ทำงาน",
+    "filter_status_opt_3":"ไม่มีใคร",
+    "filter_search_placeholder":"ค้นหาโดย Milestone/เหตุการณ์สำคัญ"
+}

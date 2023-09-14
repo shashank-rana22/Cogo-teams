@@ -23,6 +23,10 @@
 	}
 }
 
+.margintop {
+	margin-top: 12px;
+}
+
 .search_div {
 	width: 24%;
 }
@@ -30,4 +34,10 @@
 .toggle_div {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_input_control::placeholder {
+			font-size: 12px;
+		}
+	}
 }

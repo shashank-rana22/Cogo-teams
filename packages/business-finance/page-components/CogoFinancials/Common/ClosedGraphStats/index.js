@@ -30,6 +30,7 @@ function ClosedGraphStats({
 	defaultWidth = '252',
 	setTableFilters = () => {},
 	infoContent = '',
+	isCancelledExcluded = false,
 }) {
 	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
@@ -39,6 +40,7 @@ function ClosedGraphStats({
 		activeBar,
 		customDate,
 		serviceLevel: activeBar,
+		isCancelledExcluded,
 	});
 
 	return (

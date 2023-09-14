@@ -1,4 +1,8 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
+import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import getFieldsByTab from '../../../constants/config';
 import useGetMilestones from '../hooks/useGetMilestones';
@@ -12,6 +16,7 @@ function PageView({
 	onClickCard = () => {},
 	sideBar,
 }) {
+	const { t } = useTranslation(['milestone']);
 	const { list, filters = {}, loading = false, hookSetters } = useGetMilestones({ sideBar });
 
 	const { data = [], fullResponse } = list || {};
@@ -24,28 +29,6 @@ function PageView({
 		hookSetters.setFilters({ ...filters, page: pageNumber });
 	};
 
-	const getRender = () => {
-		if (data.length === 0 && !loading) {
-			return (
-				<div>
-					<div className={styles.no_data}>
-						No Standard Milestones
-					</div>
-				</div>
-			);
-		}
-		if (loading && data.length === 0) {
-			return (
-				<div className={styles.loading}>
-					<img
-						alt="cogoport-loading"
-						src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif"
-					/>
-				</div>
-			);
-		}
-		return null;
-	};
 	return (
 		<div className={styles.container} id="milestones_main_container">
 			<Filter hookSetters={hookSetters} filters={filters} id="milestones_filters" />
@@ -54,7 +37,26 @@ function PageView({
 				<section className={styles.list_view} id="milestones_list_view">
 
 					<Header columns={columns} id="milestones_list_header" />
-					{getRender()}
+
+					{loading ? (
+						<div className={styles.loading}>
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.network_loader}
+								width={200}
+								height={200}
+								alt={t('milestone:loader_alt')}
+							/>
+						</div>
+					) : null}
+
+					{isEmpty(data) && !loading ? (
+						<div>
+							<div className={styles.no_data}>
+								{t('milestone:empty_milestone')}
+							</div>
+						</div>
+					) : null}
+
 					{(data || []).map((item) => (
 						<List
 							key={item?.id}

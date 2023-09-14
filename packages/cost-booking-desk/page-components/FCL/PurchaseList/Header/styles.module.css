@@ -39,3 +39,13 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.filters {
+	display: flex;
+	min-width: 35%;
+}
+
+.status {
+	min-width: 40%;
+	margin-right: 8px;
+}
