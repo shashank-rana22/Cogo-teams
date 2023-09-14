@@ -49,18 +49,15 @@ function FinanceEmployeeConfirmModal() {
 		employee : false,
 		fnf      : false,
 	});
-	const [confirmedValues] = useState(
-		{
-			tcFullName        : 'Udit chavan',
-			employee          : false,
-			fnf               : true,
-			additionalRemarks : 'none',
-
-		},
-	);
+	const [confirmedValues] = useState({
+		tcFullName        : 'Udit chavan',
+		employee          : false,
+		fnf               : true,
+		additionalRemarks : 'none',
+	});
 	const [isComplete] = useState(true);
-	const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const [updateData, setUpdateData] = useState([]);
+	const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const data1 = useMemo(() => (
 		updateData
 	), [updateData]);
@@ -135,9 +132,8 @@ function FinanceEmployeeConfirmModal() {
 				<div className={show ? styles.show_application : styles.hide_application}>
 					<div className={styles.table_update_fnf}>
 						<StyledTable columns={columns} data={data1} />
-
 					</div>
-					{' '}
+
 					<div className={styles.document_section}>
 						<div className={styles.doc_heading}>
 							Total Recoverable Amount
@@ -235,7 +231,6 @@ function FinanceEmployeeConfirmModal() {
 						>
 							Proceed
 							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
 						</Button>
 					</div>
 				)}
@@ -245,13 +240,13 @@ function FinanceEmployeeConfirmModal() {
 				setShowModal={setShowModal}
 				setUpdateData={setUpdateData}
 			/>
+
 			<FinanceConfirmModal
 				confirmModal={confirmModal}
 				setConfirmModal={setConfirmModal}
 				handleSubmit={handleSubmit}
 			/>
 		</>
-
 	);
 }
 

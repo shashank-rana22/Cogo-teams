@@ -74,15 +74,13 @@ function ReasonsToLeave({ setComplete, setCode }) {
 					</div>
 				</div>
 				<div className={show ? styles.item_container : styles.item_container_closed}>
-
 					{REASONS_LIST.map((val) => (
-
 						<div className={styles.checkboxdiv} key={val}>
 							<CheckboxController name={val} control={control} />
 							<div>{val}</div>
 						</div>
+					))}
 
-					)) }
 					<div className={styles.inputcontainer}>
 						<div className={styles.label}>Additional Remarks (if any)</div>
 						<InputController
@@ -92,7 +90,6 @@ function ReasonsToLeave({ setComplete, setCode }) {
 							placeholder="Enter your Remarks"
 						/>
 					</div>
-
 				</div>
 			</div>
 
@@ -102,12 +99,12 @@ function ReasonsToLeave({ setComplete, setCode }) {
 					Click
 					on ‘Generate Code’ button once the interview is completed.
 					Share it with the employee only after the interview.
-
 				</div>
 			</div>
+
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '12px' }}>Back</Button>
-				<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
+				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>
 					Generate Code
 				</Button>
 			</div>
