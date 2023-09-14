@@ -1,5 +1,8 @@
 .mail_card {
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 8px 8px 8px 20px;
 	cursor: pointer;
 	background: #fff;
@@ -14,6 +17,12 @@
 	&:last-child {
 		margin-top: none;
 	}
+}
+
+.user_details {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
 }
 
 .no_border_left {

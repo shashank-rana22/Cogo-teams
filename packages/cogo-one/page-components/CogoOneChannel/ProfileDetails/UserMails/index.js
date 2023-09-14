@@ -1,8 +1,9 @@
-import { Badge, Popover } from '@cogoport/components';
-import { IcMRefresh, IcMFilter } from '@cogoport/icons-react';
+import { Badge, Popover, Input } from '@cogoport/components';
+import { IcMRefresh, IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { SEARCH_QUERY_LIMIT } from '../../../../constants/mailConstants';
 import useGetAllMailsForUser from '../../../../hooks/useGetAllMailsForUser';
 
 import ApplicableFilters from './ApplicableFilters';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 
 function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }) {
 	const [showPopover, setShowPopover] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
 
 	const { setActiveMail = () => {} } = mailProps || {};
 
@@ -24,13 +26,14 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 		setMailData = () => {},
 		setAppliedFilters = () => {},
 		appliedFilters = {},
-	} = useGetAllMailsForUser({ firestore, userId, channelChatId });
+		setActiveMessage = () => {},
+	} = useGetAllMailsForUser({ firestore, userId, channelChatId, searchValue, setActiveMail });
 
 	const handleReset = () => {
 		setMailData(
 			{
 				mailsListData        : [],
-				lastMessageTimeStamp : Date.now(),
+				lastMessageTimeStamp : null,
 				isLastPage           : false,
 				loading              : false,
 			},
@@ -38,16 +41,24 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 		getFilteredMails({ lastMessageTimeStamp: Date.now() });
 	};
 
-	const setSelectedMail = (item) => {
-		setActiveMail({ val: item, tab: 'firebase_emails', expandSideBar: false });
-	};
-
 	const isAppliedFilters = Object.keys(appliedFilters || {}).every((key) => isEmpty(appliedFilters[key]));
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.header}>
-				<span>User Mails</span>
+				<div className={styles.left_details}>
+					Mails
+					<div className={styles.input_container}>
+						<Input
+							size="sm"
+							prefix={<IcMSearchlight width={18} height={18} />}
+							placeholder="Search here..."
+							value={searchValue}
+							onChange={(val) => setSearchValue(val)}
+						/>
+					</div>
+				</div>
+
 				<div className={styles.filter_container}>
 					<IcMRefresh
 						className={styles.refresh_icon}
@@ -87,8 +98,18 @@ function UserMails({ firestore = {}, formattedMessageData = {}, mailProps = {} }
 				mailsListData={mailsListData}
 				handleScroll={handleScroll}
 				mailListLoading={mailListLoading}
-				setSelectedMail={setSelectedMail}
+				setActiveMessage={setActiveMessage}
 			/>
+
+			{searchValue ? (
+				<div className={styles.note}>
+					Only recent
+					{' '}
+					{SEARCH_QUERY_LIMIT}
+					{' '}
+					mails will be shown with search filter.
+				</div>
+			) : null}
 		</div>
 	);
 }

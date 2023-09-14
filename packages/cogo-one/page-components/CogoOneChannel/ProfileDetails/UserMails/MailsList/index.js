@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function MailsList({
 	mailsListData = [], handleScroll = () => {},
 	mailListLoading = false,
-	setSelectedMail = () => {},
+	setActiveMessage = () => {},
 }) {
 	if (isEmpty(mailsListData) && !mailListLoading) {
 		return (
@@ -27,7 +27,7 @@ function MailsList({
 					<MailsCardData
 						key={item?.id}
 						item={item}
-						setSelectedMail={setSelectedMail}
+						setActiveMessage={setActiveMessage}
 					/>
 				))}
 				{mailListLoading ? <LoadingState /> : null}
