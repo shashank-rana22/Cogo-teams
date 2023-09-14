@@ -40,10 +40,10 @@ function AddCompanyModal({
 	};
 
 	const createRefetch = () => {
-		onClose();
 		tradePartnerTrigger();
 		stakeholdersTrigger();
 		getShipmentRefetch();
+		onClose();
 	};
 
 	const { apiTrigger:createTrigger, loading:createLoading } = useCreateShipmentTradePartner({

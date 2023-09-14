@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-function useListOrganizationUsers({ orgId = '' }) {
+function useListOrganizationUsers({ consigneeShipperId = '' }) {
 	const [data, setData] = useState({});
 	const [defaultValues, setDefaultValues] = useState({});
 
@@ -12,7 +12,7 @@ function useListOrganizationUsers({ orgId = '' }) {
 		method : 'GET',
 		params : {
 			filters: {
-				organization_id : orgId,
+				organization_id : consigneeShipperId,
 				status          : 'active',
 			},
 		},

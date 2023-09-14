@@ -16,14 +16,14 @@ function VerifyShipperDetails({
 	refetch = () => {},
 }) {
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
-	const [orgId, setOrgId] = useState(shipment_data?.consignee_shipper_id);
+	const [consigneeShipperId, setConsigneeShipperId] = useState(shipment_data?.consignee_shipper_id);
 
 	const componentProps = {
 		0: {
-			setStep, task, setOrgId, onCancel,
+			setStep, task, setConsigneeShipperId, onCancel,
 		},
 		1: {
-			task, shipment_data, refetch, orgId, onCancel,
+			task, refetch, consigneeShipperId, onCancel,
 		},
 	};
 

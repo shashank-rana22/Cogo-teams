@@ -56,7 +56,13 @@ function ExecuteTask({
 	setSelectedMail = () => {},
 	tasksList = [],
 }) {
-	const { servicesList, shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const {
+		servicesList = [],
+		shipment_data = {},
+		primary_service = {},
+		stakeholderConfig = {},
+		refetch: getShipmentRefetch = () => { },
+	} = useContext(ShipmentDetailContext);
 
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
@@ -171,6 +177,7 @@ function ExecuteTask({
 				importer_exporter_id={shipment_data?.importer_exporter_id}
 				withModal={false}
 				setAddCompany={onCancel}
+				getShipmentRefetch={getShipmentRefetch}
 			/>
 		);
 	}

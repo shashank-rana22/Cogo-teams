@@ -6,7 +6,7 @@ import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
 function useCreateLeadOrganizationToAccount({
 	setStep = () => {},
-	setOrgId = () => {},
+	setConsigneeShipperId = () => {},
 	listLeadsData = {},
 	task = {},
 }) {
@@ -24,7 +24,7 @@ function useCreateLeadOrganizationToAccount({
 			const res = await trigger({ data: payload });
 
 			if (res.data) {
-				setOrgId(res?.data?.organization_id);
+				setConsigneeShipperId(res?.data?.organization_id);
 			}
 
 			await apiTrigger({ id: task?.id, tags: ['1'], status: 'pending' });
