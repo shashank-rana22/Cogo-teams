@@ -21,20 +21,19 @@ function Actions({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.main_container}>
-				<div className={styles.actions_wrap}>
-					<div className={styles.statuses}>
-						<Button
-							size="sm"
-							onClick={() => updateStatus({ invoice_id: invoice?.id, status: 'approved', refetch })}
-							disabled={invoice?.status !== 'pending'}
-							loading={loading}
-						>
-							Mark as approved
-						</Button>
-					</div>
+			<div className={styles.actions_wrap}>
+				<div className={styles.statuses}>
+					<Button
+						size="sm"
+						onClick={() => updateStatus({ invoice_id: invoice?.id, status: 'approved', refetch })}
+						disabled={invoice?.status !== 'pending'}
+						loading={loading}
+					>
+						Mark as approved
+					</Button>
 				</div>
 			</div>
+
 			<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 
 				<KebabContent

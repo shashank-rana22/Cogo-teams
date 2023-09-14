@@ -129,7 +129,9 @@
 
 .actions_wrap {
 	display: flex;
-	align-items: flex-end;
+	
+	/* align-items: flex-end; */
+	align-items: center;
 
 	&.icons {
 		align-items: center;
