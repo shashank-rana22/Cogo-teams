@@ -82,6 +82,9 @@ function BookingConfirmationFooter({
 			&& !is_tnc_accepted
 			&& credit_source === 'pre_approved_clean_credit');
 
+	const isKycPending = (detail?.importer_exporter?.kyc_status !== 'verified'
+	&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
+
 	const {
 		handleSubmit,
 		onClickSubmitOtp,
@@ -109,6 +112,7 @@ function BookingConfirmationFooter({
 		invoicingParties,
 		disableConditionForFcl,
 		noRatesPresent,
+		isKycPending,
 	});
 
 	useEffect(() => {
@@ -152,7 +156,8 @@ function BookingConfirmationFooter({
 	|| isVeryRisky
 	|| noRatesPresent
 	|| isEmpty(invoicingParties)
-	|| disableConditionForBookingMethods;
+	|| disableConditionForBookingMethods
+	|| isKycPending;
 
 	return (
 		<div className={styles.container}>

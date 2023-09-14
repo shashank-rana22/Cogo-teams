@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -27,7 +28,13 @@ const onCardClick = ({
 	}
 
 	if (otherChannelType === 'email') {
-		const { setButtonType, setEmailState } = mailProps;
+		const { setButtonType, setEmailState, buttonType } = mailProps;
+
+		if (buttonType) {
+			Toast.warn('Email compose is already in progress');
+			return;
+		}
+
 		setButtonType('send_mail');
 		setEmailState(
 			(prev) => ({
