@@ -1,5 +1,5 @@
 import { Button, Input, Toggle } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -30,8 +30,6 @@ const TABS = [
 ];
 
 const FIRST_PAGE = 1;
-const DENY_ENITY_PAYRUN = GLOBAL_CONSTANTS.service_supported_countries
-	.feature_unsupported_service.create_payrun.entities;
 
 const FUNCTIONS = {
 	renderToolTip: (itemData, field) => (
@@ -49,6 +47,7 @@ const FUNCTIONS = {
 };
 
 function Invoices({ activeEntity = '' }) {
+	const DENY_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);
@@ -108,7 +107,7 @@ function Invoices({ activeEntity = '' }) {
 							onClick={() => {
 								setShowPayrunModal(true);
 							}}
-							disabled={DENY_ENITY_PAYRUN.includes(activeEntity)}
+							disabled={!DENY_ENITY_PAYRUN}
 						>
 							Create Pay Run
 						</Button>

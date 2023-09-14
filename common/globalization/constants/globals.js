@@ -701,11 +701,6 @@ const GLOBAL_CONSTANTS = {
 				currencies: ['INR', 'USD', 'EUR', 'GBP', 'VND', 'IDR', 'SGD', 'THB', 'CNY', 'AED'],
 			},
 		},
-		feature_unsupported_service: {
-			create_payrun: {
-				entities: ['101', '201'],
-			},
-		},
 	},
 	services: {
 		fcl_freight: {
