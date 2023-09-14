@@ -11,12 +11,18 @@ function formatToTimeStamp(dateString = '') {
 	const formatedDate = formatDate({
 		date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 		formatType : 'dateTime',
-		seperator  : 'T',
+		separator  : 'T',
 	});
 	return formatedDate;
 }
-function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '', setStats = () => { } }) {
+function useGetBillsList({
+	activeTab = '',
+	activeEntity = '',
+	organizationId = '',
+	showElement = false,
+}) {
 	const [billsFilters, setBillsFilters] = useState({
 		invoiceView : 'coe_accepted',
 		entity      : activeEntity,
@@ -90,12 +96,10 @@ function useGetBillsList({ activeTab = '', activeEntity = '', organizationId = '
 	);
 
 	useEffect(() => {
-		refetch();
-	}, [refetch]);
-
-	useEffect(() => {
-		setStats((prevStats) => ({ ...prevStats, invoice_details: billsData?.totalRecords }));
-	}, [billsData, setStats]);
+		if (showElement) {
+			refetch();
+		}
+	}, [refetch, showElement]);
 
 	return {
 		billsData,
