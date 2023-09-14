@@ -1,5 +1,12 @@
+const MAPPING = {
+	'10th'          : '10th',
+	'12th'          : '12th',
+	graduate_degree : 'GRADUATE DEGREE',
+	master_degree   : 'MASTERS DEGREE',
+};
+
 const useGetEducationInfo = (employee_education_details = []) => ((employee_education_details || []).map((detail) => ({
-	heading : `${detail.education_level} DETAILS`,
+	heading : `${MAPPING[detail.education_level]} DETAILS`,
 	details : [
 		{ label: 'College', key: `${detail.education_level}`, value: 'school_name' },
 		{ label: 'Degree', key: `${detail.education_level}`, value: 'degree' },
