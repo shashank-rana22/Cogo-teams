@@ -1,7 +1,6 @@
 module.exports = {
 	extends : ['@cogoport/eslint-config/custom-eslint-rules'],
 	rules   : {
-		'linebreak-style' : ['error', 'windows'],
 		'react/no-danger' : 'off',
 		'react/jsx-key'   : 'error',
 
