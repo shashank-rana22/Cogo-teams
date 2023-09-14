@@ -1,16 +1,16 @@
 import { Button } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import FieldArray from '../../../../../../../common/Form/FieldArray';
 
+import AdditionalControlsModal from './AdditionalControlsModal';
 import styles from './styles.module.css';
 import useSubBlockCreation from './useSubBlockCreation';
 
 function SubBlock(props) {
 	const {
-		key,
 		name,
 		blockIndex,
 		subBlockIndex,
@@ -24,12 +24,24 @@ function SubBlock(props) {
 		refetch,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
+		watchBlock,
+		removeSubBlock,
+		additionalControlsData,
 	} = props;
 
 	const {
 		controls = [],
 		handleClick = () => {},
 		parameterUnitOptions = {},
+		checkForSubBlock = () => {},
+		filteredSubBlockOptions = [],
+		additionalControls = {},
+		setAdditionalControls = () => {},
+		param,
+		setParam = () => {},
+		paramScoringType = '',
+		setParamScoringType = () => {},
 	} = useSubBlockCreation({
 		subBlockWiseParameterOptions,
 		subBlockType,
@@ -41,13 +53,16 @@ function SubBlock(props) {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
-
+		prefillValues,
+		watchBlock,
+		subBlockOptions,
+		additionalControlsData,
 	});
 
 	const isEditMode = editSubBlock[blockIndex]?.[subBlockIndex];
 
 	return (
-		<div className={styles.container} key={key}>
+		<div className={styles.container}>
 
 			<div className={`${!isEditMode ? styles.disabled : ''}`}>
 				<div className={styles.inner_container}>
@@ -60,11 +75,12 @@ function SubBlock(props) {
 						<SelectController
 							name={`${name}.sub_block_id`}
 							control={control}
-							options={subBlockOptions}
+							options={filteredSubBlockOptions}
 							value={watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}].sub_block_id`)}
+							rules={{ required: `${subBlockType} is required` }}
 						/>
 
-						{errors?.[`${name}.sub_block_id`] && (
+						{errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.sub_block_id && (
 							<div className={styles.error_msg}>Required</div>
 						)}
 					</div>
@@ -72,7 +88,13 @@ function SubBlock(props) {
 					<div
 						role="presentation"
 						className={styles.delete_block}
-						onClick={() => handleClick({ subBlockStatus: 'inactive' })}
+						onClick={() => {
+							if (isEmpty(checkForSubBlock())) {
+								removeSubBlock(subBlockIndex);
+								return;
+							}
+							handleClick({ subBlockStatus: 'inactive' });
+						}}
 					>
 						<IcMDelete className={styles.icon} />
 
@@ -91,9 +113,23 @@ function SubBlock(props) {
 					buttonThemeType="link"
 					buttonText="Add Parameter"
 					watch={watch}
+					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 					parameterUnitOptions={parameterUnitOptions}
+					setParam={setParam}
+					setParamScoringType={setParamScoringType}
 				/>
 			</div>
+
+			{param ? (
+				<AdditionalControlsModal
+					additionalControls={additionalControls}
+					setAdditionalControls={setAdditionalControls}
+					paramScoringType={paramScoringType}
+					setParamScoringType={setParamScoringType}
+					param={param}
+					setParam={setParam}
+				/>
+			) : null}
 
 			<Button
 				size="md"

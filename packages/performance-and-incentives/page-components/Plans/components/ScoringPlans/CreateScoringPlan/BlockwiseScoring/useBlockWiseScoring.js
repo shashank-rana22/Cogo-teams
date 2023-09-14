@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 	const {
 		agent_scoring_parameter_id, scoring_type, base_score, fixed_percentage_value,
-		variable_percentage_value, provisional_trigger, realised_trigger,
+		variable_percentage_value, provisional_trigger, realised_trigger, parameter_unit,
 	} = parameter;
 	return {
 		base_score,
@@ -13,11 +13,13 @@ const getParameters = ({ parameters = [] }) => parameters.map((parameter) => {
 		provisional_trigger,
 		fixed_percentage_value,
 		variable_percentage_value,
-		parameter: agent_scoring_parameter_id,
+		scoring_unit : parameter_unit,
+		parameter    : agent_scoring_parameter_id,
 	};
 });
 
 const useBlockWiseScoring = ({ data = {} }) => {
+	const [formData, setFormData] = useState({});
 	const [editSubBlock, setEditSubBlock] = useState({});
 
 	const { control, formState: { errors }, watch, setValue, handleSubmit } = useForm();
@@ -41,8 +43,29 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		return updatedAcc;
 	}, {}) || [])?.map(([key, value]) => ({ block: key, sub_blocks: value })), [data]);
 
+	const additionalControlsData = useMemo(() => {
+		if (!data || !data.config_blocks) {
+			return {};
+		}
+
+		return data.config_blocks.reduce((acc, item) => {
+			const currAcc = { ...acc };
+
+			currAcc[item.agent_scoring_block_id] = item.parameters.reduce((subAcc, subItem) => {
+				const currSubAcc = { ...subAcc };
+
+				currSubAcc[subItem.agent_scoring_parameter_id] = subItem.additional_controls;
+
+				return currSubAcc;
+			}, {});
+
+			return currAcc;
+		}, {});
+	}, [data]);
+
 	useEffect(() => {
 		setValue('blocks', prefillValues);
+		setFormData(prefillValues);
 		setEditSubBlock({});
 	}, [setValue, prefillValues]);
 
@@ -56,6 +79,10 @@ const useBlockWiseScoring = ({ data = {} }) => {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
+		formData,
+		setFormData,
+		additionalControlsData,
 	};
 };
 

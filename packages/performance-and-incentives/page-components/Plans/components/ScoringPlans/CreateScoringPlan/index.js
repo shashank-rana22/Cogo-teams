@@ -9,9 +9,9 @@ import ScoringApplicability from './ScoringApplicability';
 import styles from './styles.module.css';
 
 function CreateScoringPlan() {
-	const { push, query: { mode } } = useRouter();
+	const { push, query: { mode, id } } = useRouter();
 
-	const isEditMode = mode === 'edit';
+	const isEditMode = mode === 'edit' || id;
 
 	const [editApplicability, setEditApplicability] = useState(!isEditMode);
 

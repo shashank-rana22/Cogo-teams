@@ -4833,9 +4833,14 @@ const partner = {
 			service_name : 'air_freight_rate',
 		},
 		{
-			api          : 'generate_csv_file_url',
+			api          : 'get_fcl_freight_rate_job_csv_url',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_job_csv_url',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 		{
 			api          : 'delete_fcl_freight_rate_job',

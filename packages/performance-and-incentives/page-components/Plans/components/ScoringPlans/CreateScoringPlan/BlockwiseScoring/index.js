@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
+
+import blockOptions from '../../../../constants/select-block-options';
 
 import Block from './Block';
 import LoadingState from './LoadingState';
@@ -7,15 +9,14 @@ import styles from './styles.module.css';
 import useBlockWiseScoring from './useBlockWiseScoring';
 
 const CHILD_EMPTY_VALUES = {
-	block              : '',
-	scoring_type       : '',
-	service_fieldarray : [],
+	block      : '',
+	sub_blocks : [],
 };
 
 function BlockwiseScoring(props) {
 	const { data, refetch, getConfigLoading } = props;
 
-	// const { push } = useRouter();
+	const { push } = useRouter();
 
 	const {
 		control,
@@ -27,6 +28,10 @@ function BlockwiseScoring(props) {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
+		formData,
+		setFormData,
+		additionalControlsData,
 	} = useBlockWiseScoring({ data });
 
 	if (getConfigLoading) return <LoadingState />;
@@ -55,17 +60,24 @@ function BlockwiseScoring(props) {
 						handleSubmit={handleSubmit}
 						editSubBlock={editSubBlock}
 						setEditSubBlock={setEditSubBlock}
+						prefillValues={prefillValues}
+						formData={formData}
+						setFormData={setFormData}
+						additionalControlsData={additionalControlsData}
 					/>
 				))}
 
-				<Button
-					type="button"
-					size="md"
-					themeType="link"
-					onClick={() => append(CHILD_EMPTY_VALUES)}
-				>
-					+ Add Block
-				</Button>
+				{(blockOptions.length !== fields.length) ? (
+					<Button
+						type="button"
+						size="md"
+						themeType="link"
+						onClick={() => append(CHILD_EMPTY_VALUES)}
+					>
+						+ Add Block
+					</Button>
+				) : null}
+
 			</div>
 
 			<div className={styles.btn_container}>
@@ -74,6 +86,7 @@ function BlockwiseScoring(props) {
 					type="button"
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
+					onClick={() => push('/performance-and-incentives/plans')}
 				>
 					Cancel
 				</Button>

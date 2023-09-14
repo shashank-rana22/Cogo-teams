@@ -48,3 +48,8 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.tooltip {
+	word-break: break-word;
+	white-space: pre-wrap;
+}

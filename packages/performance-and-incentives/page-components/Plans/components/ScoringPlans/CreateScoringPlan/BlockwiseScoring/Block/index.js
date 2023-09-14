@@ -3,7 +3,6 @@ import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import blockOptions from '../../../../../constants/select-block-options';
 import SubBlock from '../SubBlock';
 
 import styles from './styles.module.css';
@@ -23,6 +22,11 @@ function Block(props) {
 		handleSubmit,
 		editSubBlock,
 		setEditSubBlock,
+		prefillValues,
+		formData,
+		setFormData,
+		additionalControlsData,
+
 	} = props;
 
 	const {
@@ -35,7 +39,8 @@ function Block(props) {
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		blockParameterLoading,
-	} = useBlockCreation({ control, name, watch });
+		filteredBlockOptions,
+	} = useBlockCreation({ control, name, watch, blockIndex });
 
 	return (
 		<div className={styles.container} key={blockParameterLoading}>
@@ -54,7 +59,13 @@ function Block(props) {
 					<sup className={styles.sup}>*</sup>
 				</div>
 
-				<SelectController name={`${name}.block`} control={control} options={blockOptions} />
+				<SelectController
+					name={`${name}.block`}
+					control={control}
+					options={filteredBlockOptions}
+					rules={{ required: 'Required' }}
+					value={watchBlock}
+				/>
 
 				{errors[`${name}.block`] && (
 					<div className={styles.error_msg}>{errors[`${name}.block`]?.message}</div>
@@ -68,6 +79,7 @@ function Block(props) {
 					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					control={control}
+					errors={errors}
 					watch={watch}
 					handleSubmit={handleSubmit}
 					watchBlock={watchBlock}
@@ -78,14 +90,19 @@ function Block(props) {
 					refetch={refetch}
 					editSubBlock={editSubBlock}
 					setEditSubBlock={setEditSubBlock}
+					prefillValues={prefillValues}
+					formData={formData}
+					setFormData={setFormData}
+					additionalControlsData={additionalControlsData}
 				/>
 			))}
 
-			{blockParameterLoading ? <Loader themeType="primary" /> : (!!subBlockType && (
+			{blockParameterLoading ? <Loader themeType="primary" /> : ((subBlockOptions.length !== fields.length) && (
 				<Button
 					type="button"
 					size="md"
 					themeType="link"
+					style={{ marginTop: '4px' }}
 					onClick={() => {
 						setEditSubBlock((prev) => ({
 							...prev,

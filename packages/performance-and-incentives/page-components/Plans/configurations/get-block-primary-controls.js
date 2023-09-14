@@ -8,8 +8,8 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		options     : parameterOptions,
 		rules       : { required: 'Required' },
 		style       : {
-			minWidth : '20%',
-			maxWidth : '20%',
+			minWidth : '18%',
+			maxWidth : '18%',
 		},
 	},
 	{
@@ -17,7 +17,6 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Scoring Type',
 		placeholder : 'Value',
-		value       : 'absolute',
 		options     : [{
 			label : 'Absolute',
 			value : 'absolute',
@@ -27,8 +26,8 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 			value : 'percentage',
 		}],
 		style: {
-			minWidth : '15%',
-			maxWidth : '15%',
+			minWidth : '13%',
+			maxWidth : '13%',
 		},
 		rules: { required: 'Required' },
 	},
@@ -69,18 +68,26 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Provisional Trigger',
 		placeholder : 'Select',
-		style       : {
+		options     : [{
+			label : '1st SID booked',
+			value : '1st SID booked',
+		}],
+		style: {
 			minWidth : '15%',
 			maxWidth : '15%',
 		},
 		rules: { required: 'Required' },
 	},
 	{
-		name        : 'realised_dtrigger',
+		name        : 'realised_trigger',
 		type        : 'select',
 		label       : 'Realised Trigger',
 		placeholder : 'Select',
-		style       : {
+		options     : [{
+			label : 'IRN generation / Invoice Knockoff',
+			value : 'IRN generation / Invoice Knockoff',
+		}],
+		style: {
 			minWidth : '15%',
 			maxWidth : '15%',
 		},

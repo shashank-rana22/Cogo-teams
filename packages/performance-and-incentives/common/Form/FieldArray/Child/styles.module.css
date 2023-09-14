@@ -27,3 +27,14 @@
 	font-size: 10px;
 	color: #cb6464;
 }
+
+.delete_btn,
+.add_icon {
+	align-self: center;
+	margin-top: 12px;
+	cursor: pointer;
+}
+
+.add_icon {
+	margin-right: 6px;
+}

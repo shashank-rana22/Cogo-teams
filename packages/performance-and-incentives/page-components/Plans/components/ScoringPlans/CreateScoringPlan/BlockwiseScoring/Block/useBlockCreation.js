@@ -3,11 +3,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import blockOptions from '../../../../../constants/select-block-options';
+
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
-const useBlockCreation = ({ control, name, watch }) => {
+const useBlockCreation = ({ control, name, watch, blockIndex }) => {
 	const CHILD_EMPTY_VALUES = {
-		sub_block_id: '',
+		sub_block_id : '',
+		parameters   : [],
 	};
 
 	const watchBlock = watch(`${name}.block`);
@@ -27,18 +30,35 @@ const useBlockCreation = ({ control, name, watch }) => {
 		return {
 			...acc,
 			[sub_block_id]: (agent_scoring_parameters || []).map((parameter) => {
-				const { id, display_name, parameter_unit } = parameter || {};
+				const { id, display_name, parameter_unit, additional_controls } = parameter || {};
 
 				return {
 					label : display_name,
 					value : id,
 					unit  : parameter_unit,
+					additional_controls,
 				};
 			}),
 		};
 	}, {}), [list]);
 
 	const subBlockType = list[GLOBAL_CONSTANTS.zeroth_index]?.sub_block_type;
+
+	const formValues = watch();
+
+	const filteredBlockOptions = useMemo(() => {
+		const selectedBlockOptions = formValues.blocks?.reduce((accumulator, currentValue, currentIndex) => {
+			if (currentIndex < blockIndex) {
+				const accumulatorCopy = [...accumulator];
+				accumulatorCopy.push(currentValue.block);
+
+				return accumulatorCopy;
+			}
+			return accumulator;
+		}, []);
+
+		return blockOptions.filter((item) => !selectedBlockOptions.includes(item.value));
+	}, [formValues.blocks, blockIndex]);
 
 	return {
 		CHILD_EMPTY_VALUES,
@@ -50,6 +70,7 @@ const useBlockCreation = ({ control, name, watch }) => {
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		blockParameterLoading,
+		filteredBlockOptions,
 	};
 };
 

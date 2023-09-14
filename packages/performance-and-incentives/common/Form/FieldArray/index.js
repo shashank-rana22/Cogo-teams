@@ -8,7 +8,7 @@ function FieldArray(props) {
 		name,
 		control,
 		controls,
-		error,
+		error = {},
 		showElements,
 		buttonText,
 		showButtons = true,
@@ -24,7 +24,7 @@ function FieldArray(props) {
 
 	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		CHILD_EMPTY_VALUES[controlItem.name] = '';
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.name === 'scoring_type' ? 'absolute' : '';
 	});
 
 	return (
@@ -49,7 +49,7 @@ function FieldArray(props) {
 				<Button
 					themeType={buttonThemeType}
 					onClick={() => append(CHILD_EMPTY_VALUES)}
-					style={{ margin: '16px 0px' }}
+					style={{ marginTop: '4px' }}
 				>
 					+
 					{' '}

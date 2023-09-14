@@ -16,21 +16,26 @@ const usePostAgentScoringAttributes = () => {
 
 	const updateScoringAttributes = async ({
 		agentScoringBlockId = '',
-		agentScoringParameters = [], subBlockStatus = '',
+		agentScoringParameters = [], subBlockStatus = '', configId = '', status = '',
 	}) => {
 		try {
 			await trigger({
 				data: {
-					id,
-					agent_scoring_blocks: [{
-						agent_scoring_block_id          : agentScoringBlockId,
-						status                          : subBlockStatus || 'active',
-						agent_scoring_parameter_details : agentScoringParameters,
-					}],
+					id: id || configId,
+					...(!status ? {
+						agent_scoring_blocks: [{
+							agent_scoring_block_id          : agentScoringBlockId,
+							status                          : subBlockStatus || 'active',
+							agent_scoring_parameter_details : agentScoringParameters,
+						}],
+					} : {}),
+
+					status: status || undefined,
 				},
 			});
-
-			Toast.success(`${subBlockStatus ? 'Deleted' : 'Saved'} successfully!`);
+			if (!status) {
+				Toast.success(`${subBlockStatus ? 'Deleted' : 'Saved'} successfully!`);
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

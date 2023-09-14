@@ -1,4 +1,4 @@
-import { IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../getFieldController';
 
@@ -19,6 +19,8 @@ function Child(props) {
 		error = {},
 		watch = () => {},
 		parameterUnitOptions = {},
+		setParam = () => {},
+		setParamScoringType = () => {},
 	} = props;
 
 	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
@@ -56,16 +58,22 @@ function Child(props) {
 				);
 			})}
 
+			<IcMPlusInCircle
+				className={styles.add_icon}
+				onClick={() => {
+					setParamScoringType(scoringType);
+					setParam(paramType);
+				}}
+				width={16}
+				height={16}
+			/>
+
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete
-					className={`form-fieldArray-${name}-remove`}
+					className={styles.delete_btn}
+					width={16}
+					height={16}
 					onClick={() => remove(index, FIRST_INDEX)}
-					style={{
-						height       : '16px',
-						width        : '16px',
-						cursor       : 'pointer',
-						marginBottom : '12px',
-					}}
 				/>
 			) : null}
 		</div>
