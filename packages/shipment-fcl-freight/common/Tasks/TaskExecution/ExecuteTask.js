@@ -104,7 +104,7 @@ function ExecuteTask({
 			shipmentTradePartnersData,
 		});
 
-		const RenderComponent = COMPONENT_MAPPING?.[task?.task] || null;
+		const RenderComponent = COMPONENT_MAPPING?.[task?.task];
 		const renderProps = propsMapping?.[task?.task] || {};
 
 		if (RenderComponent) {
