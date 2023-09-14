@@ -1,13 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import {
-	useForm,
-	AsyncSelectController,
-	SelectController,
-	RadioGroupController,
-	InputController,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -24,15 +18,11 @@ import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useGetEntities from '../../hooks/useGetEntities';
 import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
-import AdditionalDetails from '../InvoiceFormLayout/AdditionalDetails';
-import BillingPartyDetails from '../InvoiceFormLayout/BillingPartyDetails';
 import { getCollectionPartyDetails } from '../InvoiceFormLayout/CollectionPartyDetails/utils/getCollectionPartyDetails';
-import PurchaseInvoiceDates from '../InvoiceFormLayout/PurchaseInvoiceDates';
 import InvoicesUploaded from '../InvoicesUploaded';
 import InvoiceTemplate from '../InvoiceTemplate';
 
-import getFormControls from './CollectionPartyCard/controls';
-import LineItemDetails from './LineItemDetails/index';
+import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
@@ -243,11 +233,6 @@ function CollectionPartyDetails({
 		}
 	});
 
-	const INVOICE_TYPE_OPTIONS = [
-		{ name: 'purchase_invoice', label: 'Purchase Invoice', value: 'Purchase' },
-		{ name: 'proforma_invoice', label: 'Proforma Invoice', value: 'Proforma' },
-	];
-
 	return (
 		<div className={styles.container}>
 
@@ -396,139 +381,39 @@ function CollectionPartyDetails({
 				) : null}
 
 				{generateInvoiceModal ? (
-					<Modal
-						size="fullscreen"
-						show={generateInvoiceModal}
-						placement="left"
-						onClose={() => {
-							setGenerateInvoiceModal(false);
-						}}
-					>
-						<Modal.Header title="Generate Invoice" />
-						<Modal.Body style={{ maxHeight: '780px' }}>
-							<>
-								<RadioGroupController
-									control={control}
-									name="invoice_type"
-									options={INVOICE_TYPE_OPTIONS}
-								/>
-								<AdditionalDetails
-									control={control}
-									open
-									primary_service={primary_service}
-									serviceProvider={collectionParty}
-									errors={errors}
-									setErrors={setErrors}
-									errMszs={errMszs}
-									setErrMszs={setErrMszs}
-								/>
-								<PurchaseInvoiceDates control={control} invoiceCurrency={invoiceCurrency} />
-								<BillingPartyDetails
-									control={control}
-									open
-									listEntities={listEntities}
-									entitiesLoading={entitiesLoading}
-									billingParty={billingParty}
-									setBillingParty={setBillingParty}
-									setValue={setValue}
-									watch={watch}
-								/>
-								<h3 style={{ margin: '10px' }}>Collection Party Details</h3>
-								<div className={styles.collection_party}>
-									{(getFormControls({
-										setValue,
-										cpParams,
-										handleModifiedOptions,
-										collectionParty    : collectionPartyState,
-										setCollectionParty : setCollectionPartyState,
-										collectionPartyAddress,
-										collectionPartyAddresses,
-										setCollectionPartyAddress,
-										COLLECTION_PARTY_BANK_OPTIONS,
-									}) || []).map((item) => {
-										const ele = { ...item };
-										if (ele.name === 'collection_party') {
-											return (
-												<div key={ele.name} className={styles.controller}>
-													<div style={{ marginLeft: '20px' }}>{ele.label}</div>
-													<AsyncSelectController
-														{...ele}
-														key={ele.name}
-														control={control}
-													/>
-												</div>
-											);
-										}
-										return (
-											<div key={ele.name} className={styles.controller}>
-												<div style={{ marginLeft: '20px' }}>{ele.label}</div>
-												<SelectController
-													{...ele}
-													label={ele.label}
-													key={ele.name}
-													control={control}
-												/>
-											</div>
-										);
-									})}
-									<div className={styles.controller} style={{ margin: '20px' }}>
-										<div style={{ marginLeft: '20px' }}>
-											Remarks:
-											{' '}
-										</div>
-										<div className={styles.input_controller}>
-											<InputController name="remarks" control={control} />
-										</div>
-									</div>
-
-								</div>
-
-								<LineItemDetails
-									control={control}
-									open
-									watch={watch}
-									serviceProvider={collectionParty}
-									setCodes={setCodes}
-									calculatedValues={calculatedValues}
-								/>
-								<div style={{ display: 'flex' }}>
-									<Button
-										size="md"
-										className={styles.generate_button}
-										onClick={() => {
-											setGenerateInvoiceModal(false);
-											setShowTemplate(true);
-										}}
-									>
-										Generate
-									</Button>
-									{
-										!isEmpty(downloadButtonState) && (
-											<Button
-												size="lg"
-												themeType="linkUi"
-												className={styles.download_button}
-											>
-												<a
-													href={downloadButtonState}
-													target="_blank"
-													rel="noopener noreferrer"
-													download
-												>
-													Download
-
-												</a>
-											</Button>
-										)
-									}
-								</div>
-							</>
-						</Modal.Body>
-					</Modal>
+					<InvoiceModal
+						generateInvoiceModal={generateInvoiceModal}
+						setGenerateInvoiceModal={setGenerateInvoiceModal}
+						control={control}
+						primary_service={primary_service}
+						collectionParty={collectionParty}
+						errors={errors}
+						setErrors={setErrors}
+						errMszs={errMszs}
+						setErrMszs={setErrMszs}
+						invoiceCurrency={invoiceCurrency}
+						listEntities={listEntities}
+						entitiesLoading={entitiesLoading}
+						billingParty={billingParty}
+						setBillingParty={setBillingParty}
+						watch={watch}
+						setValue={setValue}
+						setCodes={setCodes}
+						cpParams={cpParams}
+						handleModifiedOptions={handleModifiedOptions}
+						collectionPartyState={collectionPartyState}
+						setCollectionPartyState={setCollectionPartyState}
+						collectionPartyAddress={collectionPartyAddress}
+						setCollectionPartyAddress={setCollectionPartyAddress}
+						collectionPartyAddresses={collectionPartyAddresses}
+						COLLECTION_PARTY_BANK_OPTIONS={COLLECTION_PARTY_BANK_OPTIONS}
+						calculatedValues={calculatedValues}
+						setShowTemplate={setShowTemplate}
+						downloadButtonState={downloadButtonState}
+					/>
 				) : null}
 				{
 					showTemplate ? (
-
 						<InvoiceTemplate
 							showTemplate={showTemplate}
 							setShowTemplate={setShowTemplate}
@@ -546,7 +431,6 @@ function CollectionPartyDetails({
 							setDownloadButtonState={setDownloadButtonState}
 							downloadButtonState={downloadButtonState}
 						/>
-
 					) : null
 				}
 			</AccordianView>
