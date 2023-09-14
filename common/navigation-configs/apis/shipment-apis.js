@@ -168,6 +168,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'update_shipment_cross_entity_invoice_status',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'get_sage_shipment_purchase_quotations',
 		access_type  : 'private',
 		service_name : 'sage',

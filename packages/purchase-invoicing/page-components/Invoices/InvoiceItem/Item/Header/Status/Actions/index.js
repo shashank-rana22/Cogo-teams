@@ -1,6 +1,8 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
+
+import useUpdateCrossEntityStatus from '../../../../../../../hooks/useUpdateCrossEntityStatus';
 
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
@@ -12,13 +14,27 @@ function Actions({
 	refetch = () => {},
 	shipment_data = {},
 }) {
+	const { loading, updateStatus } = useUpdateCrossEntityStatus();
 	const [showModal, setShowModal] = useState('');
 
 	const onModalClose = () => setShowModal('');
 
 	return (
 		<div className={styles.container}>
-
+			<div className={styles.main_container}>
+				<div className={styles.actions_wrap}>
+					<div className={styles.statuses}>
+						<Button
+							size="sm"
+							onClick={() => updateStatus({ invoice_id: invoice?.id, status: 'approved', refetch })}
+							disabled={invoice?.status !== 'pending'}
+							loading={loading}
+						>
+							Mark as approved
+						</Button>
+					</div>
+				</div>
+			</div>
 			<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 
 				<KebabContent
