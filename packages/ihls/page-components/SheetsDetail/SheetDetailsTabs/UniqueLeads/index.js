@@ -6,7 +6,6 @@ import useUniqueAthenaLeads from '../../../../hooks/useUniqueAthenaLeads';
 import ListPagination from '../ListPagination';
 
 import styles from './styles.module.css';
-import tableColumn from './tableColumn.json';
 import { tabColumns } from './tableColumns';
 
 function UniqueLeads() {
@@ -29,8 +28,7 @@ function UniqueLeads() {
 		defaultFilters: { cogo_lead_file_id: router.query.file_id },
 	});
 
-	const paginationProps = { setFilters, filters, data: tableColumn };
-	console.log(data, 'data');
+	const paginationProps = { setFilters, filters, data };
 
 	const handleChange = (val) => {
 		const tempFilter = {
@@ -61,7 +59,7 @@ function UniqueLeads() {
 			<Table
 				loading={loading}
 				columns={tabColumns}
-				data={tableColumn?.list || []}
+				data={data?.list || []}
 			/>
 			<ListPagination {...paginationProps} />
 		</div>

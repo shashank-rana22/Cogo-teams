@@ -6,7 +6,6 @@ import useAthenaShipmentRecords from '../../../../hooks/useAthenaShipmentRecords
 import ListPagination from '../ListPagination';
 
 import styles from './styles.module.css';
-import tableColumn from './tableColumn.json';
 import { tabColumns } from './tableColumns';
 
 function ShipmentRecords() {
@@ -35,8 +34,7 @@ function ShipmentRecords() {
 		{ label: 'Sea', value: 'SEA' },
 	];
 
-	const paginationProps = { setFilters, filters, data: tableColumn };
-	console.log(data, 'data');
+	const paginationProps = { setFilters, filters, data };
 
 	return (
 		<div className={styles.container}>
@@ -57,7 +55,7 @@ function ShipmentRecords() {
 				<Table
 					loading={loading}
 					columns={tabColumns}
-					data={tableColumn?.list || []}
+					data={data?.list || []}
 				/>
 			</div>
 
