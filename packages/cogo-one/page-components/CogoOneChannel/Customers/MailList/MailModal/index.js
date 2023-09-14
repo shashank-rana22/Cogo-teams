@@ -80,16 +80,16 @@ function MailEditorModal({
 
 	if (minimizeModal) {
 		return (
-			<div className={styles.minimized_modal_styles}>
+			<div
+				className={styles.minimized_modal_styles}
+				role="presentation"
+				onClick={() => setMinimizeModal(false)}
+			>
 				<div className={styles.expand_icon}>
-					<IcMExpand onClick={() => setMinimizeModal(false)} />
+					<IcMExpand />
 				</div>
 
-				<div
-					className={styles.title}
-					role="presentation"
-					onClick={() => setMinimizeModal(false)}
-				>
+				<div className={styles.title}>
 					{HEADER_MAPPING[buttonType] || 'New Message'}
 				</div>
 			</div>
@@ -108,14 +108,6 @@ function MailEditorModal({
 			showCloseIcon={false}
 			closeOnOuterClick={false}
 		>
-			<div
-				className={styles.minimize_container}
-				role="presentation"
-				onClick={() => setMinimizeModal(true)}
-			>
-				minimize
-			</div>
-
 			<Modal.Header
 				title={(
 					<RenderHeader
@@ -134,7 +126,7 @@ function MailEditorModal({
 						setMinimizeModal={setMinimizeModal}
 					/>
 				)}
-				className={isTemplateView ? styles.template_view : ''}
+				className={styles.modal_header}
 			/>
 			<Modal.Body>
 				{!isTemplateView ? (

@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import { getPlanDetailsConfig } from '../../../configuration/planListConfig';
 import getValues from '../../../utils/getValues';
@@ -7,7 +8,9 @@ import itemFunction from '../../Plan/ItemFunction';
 import styles from './styles.module.css';
 
 function Header({ plan = {}, loading = false }) {
-	const planListConfig = getPlanDetailsConfig({ isPlanDetail: true });
+	const { t } = useTranslation(['saasSubscription']);
+
+	const planListConfig = getPlanDetailsConfig({ isPlanDetail: true, t });
 
 	return (
 		<div className={styles.flex_box}>
