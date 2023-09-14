@@ -15,6 +15,7 @@ function PurchaseInvoiceDates({
 	errors = {},
 	purchaseInvoiceValues = {},
 }) {
+	console.log('helloinvoicecurrency', invoiceCurrency, options);
 	const geo = getGeoConstants();
 	const { fields, append, remove } = useFieldArray({
 		control,

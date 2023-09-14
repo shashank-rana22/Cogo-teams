@@ -62,6 +62,25 @@ const styles = {
 		border     : '1px solid black',
 		textAlign  : 'center',
 	},
+	line_items_array: {
+		border    : '1px solid black',
+		display   : 'flex',
+		minHeight : '25px',
+		fontSize  : '15px',
+		width     : '100%',
+	},
+	item: {
+		width     : '12%',
+		minHeight : '17px',
+		border    : '0.5px solid black',
+	},
+	total_amount: {
+		border    : '1px solid black',
+		display   : 'flex',
+		minHeight : '25px',
+		fontSize  : '15px',
+		width     : '22.3%',
+	},
 
 	fourth_container: {
 		border: '1px solid black',

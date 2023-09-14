@@ -1,7 +1,13 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm, AsyncSelectController, SelectController } from '@cogoport/forms';
+import {
+	useForm,
+	AsyncSelectController,
+	SelectController,
+	RadioGroupController,
+	InputController,
+} from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -14,18 +20,19 @@ import AccordianView from '../../common/Accordianview';
 import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
+import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useGetEntities from '../../hooks/useGetEntities';
 import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
 import AdditionalDetails from '../InvoiceFormLayout/AdditionalDetails';
 import BillingPartyDetails from '../InvoiceFormLayout/BillingPartyDetails';
 import { getCollectionPartyDetails } from '../InvoiceFormLayout/CollectionPartyDetails/utils/getCollectionPartyDetails';
-import LineItemDetails from '../InvoiceFormLayout/LineItemDetails';
 import PurchaseInvoiceDates from '../InvoiceFormLayout/PurchaseInvoiceDates';
 import InvoicesUploaded from '../InvoicesUploaded';
 import InvoiceTemplate from '../InvoiceTemplate';
 
 import getFormControls from './CollectionPartyCard/controls';
+import LineItemDetails from './LineItemDetails/index';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
@@ -33,6 +40,7 @@ const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
 const ONE = 1;
+const ZERO = 0;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
@@ -85,6 +93,8 @@ function CollectionPartyDetails({
 	const [collectionPartyAddress, setCollectionPartyAddress] = useState({});
 	const [errors, setErrors] = useState({});
 	const [errMszs, setErrMszs] = useState({});
+	const [codes, setCodes] = useState({});
+	const [downloadButtonState, setDownloadButtonState] = useState('');
 
 	const {
 		billing_addresses: billingAddresses = [],
@@ -149,9 +159,38 @@ function CollectionPartyDetails({
 	&& !shipment_data?.is_job_closed
 	&& filteredServices.length === ONE;
 
-	const { control, watch, setValue } = useForm();
+	const { fields, control, watch, setValue } = useForm();
 
 	const formValues = watch();
+
+	const calculatedValues = useCalculateTotalPrice({
+		baseCurrency : formValues?.invoice_currency,
+		lineItems    : formValues?.line_items,
+		chargeCodes  : codes,
+	});
+	console.log('calculatedValues:', calculatedValues);
+
+	const lineItemsDataArray = (calculatedValues.newItems || []).map(
+		(item, index) => {
+			const codeData = codes[item?.code] || {};
+			console.log('codeData', codes);
+			return {
+				serial_number       : index + ONE,
+				code                : item?.code,
+				product_description : codeData?.actualname,
+				sac                 : codeData?.sac_code,
+				currency            : item?.currency,
+				quantity            : item?.quantity,
+				exchange_rate       : item?.exchange_rate,
+				tax_type            : 'T',
+				tax_percent         : `${codeData?.tax_percent}%`,
+				taxable_amount      : Number(item?.tax_amt || ZERO),
+				total               : Number(item?.cost || ZERO),
+				truck_number        : formValues?.truck_number,
+			};
+		},
+	);
+	console.log('lineItemsDataArray:', lineItemsDataArray);
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -177,6 +216,8 @@ function CollectionPartyDetails({
 	}
 
 	const isJobClosed = shipment_data?.is_job_closed;
+
+	const invoiceCurrency = formValues?.invoice_currency;
 
 	const onConfirm = () => {
 		if (!isEmpty(uploadInvoiceUrl)) {
@@ -205,6 +246,13 @@ function CollectionPartyDetails({
 		}
 	});
 	console.log('bank_details', collectionPartyState);
+
+	const INVOICE_TYPE_OPTIONS = [
+		{ name: 'purchase_invoice', label: 'Purchase Invoice', value: 'Purchase' },
+		{ name: 'proforma_invoice', label: 'Proforma Invoice', value: 'Proforma' },
+	];
+
+	console.log('hellodoiwabhsdbvc', downloadButtonState);
 
 	return (
 		<div className={styles.container}>
@@ -365,6 +413,11 @@ function CollectionPartyDetails({
 						<Modal.Header title="Generate Invoice" />
 						<Modal.Body style={{ maxHeight: '780px' }}>
 							<>
+								<RadioGroupController
+									control={control}
+									name="invoice_type"
+									options={INVOICE_TYPE_OPTIONS}
+								/>
 								<AdditionalDetails
 									control={control}
 									open
@@ -376,6 +429,7 @@ function CollectionPartyDetails({
 									setErrMszs={setErrMszs}
 								/>
 								<PurchaseInvoiceDates control={control} />
+								{console.log('invoiceCurrency', invoiceCurrency)}
 								<BillingPartyDetails
 									control={control}
 									open
@@ -424,6 +478,16 @@ function CollectionPartyDetails({
 											</div>
 										);
 									})}
+									<div className={styles.controller} style={{ margin: '20px' }}>
+										<div style={{ marginLeft: '20px' }}>
+											Remarks:
+											{' '}
+										</div>
+										<div className={styles.input_controller}>
+											<InputController name="remarks" control={control} />
+										</div>
+									</div>
+
 								</div>
 
 								<LineItemDetails
@@ -431,23 +495,47 @@ function CollectionPartyDetails({
 									open
 									watch={watch}
 									serviceProvider={collectionParty}
+									setCodes={setCodes}
+									calculatedValues={calculatedValues}
 								/>
-								<Button
-									size="md"
-									className={styles.generate_button}
-									onClick={() => {
-										setGenerateInvoiceModal(false);
-										setShowTemplate(true);
-									}}
-								>
-									Generate
-								</Button>
+								<div style={{ display: 'flex' }}>
+									<Button
+										size="md"
+										className={styles.generate_button}
+										onClick={() => {
+											setGenerateInvoiceModal(false);
+											setShowTemplate(true);
+										}}
+									>
+										Generate
+									</Button>
+									{
+										!isEmpty(downloadButtonState) && (
+											<Button
+												size="lg"
+												themeType="linkUi"
+												className={styles.download_button}
+											>
+												<a
+													href={downloadButtonState}
+													target="_blank"
+													rel="noopener noreferrer"
+													download
+												>
+													Download
+
+												</a>
+											</Button>
+										)
+									}
+								</div>
 							</>
 						</Modal.Body>
 					</Modal>
 				) : null}
 				{
 					showTemplate ? (
+
 						<InvoiceTemplate
 							showTemplate={showTemplate}
 							setShowTemplate={setShowTemplate}
@@ -458,7 +546,14 @@ function CollectionPartyDetails({
 							collectionPartyState={collectionPartyState}
 							bank_details={bank_details}
 							shipment_data={shipment_data}
+							fields={fields}
+							calculatedValues={calculatedValues}
+							lineItemsDataArray={lineItemsDataArray}
+							setGenerateInvoiceModal={setGenerateInvoiceModal}
+							setDownloadButtonState={setDownloadButtonState}
+							downloadButtonState={downloadButtonState}
 						/>
+
 					) : null
 				}
 			</AccordianView>

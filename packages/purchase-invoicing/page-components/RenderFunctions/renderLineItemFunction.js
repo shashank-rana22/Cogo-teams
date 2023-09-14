@@ -10,6 +10,17 @@ import styles from './styles.module.css';
 
 const DEFAULT_ROUNDING = 2;
 
+const getTruckNumberOptions = ({ serviceProvider, options:newOptions = [] }) => {
+	serviceProvider?.service_charges.forEach((item) => {
+		if (item?.service_type === 'ftl_freight_service') {
+			newOptions.push(
+				{ label: item?.detail?.truck_number, value: item?.detail?.truck_number },
+			);
+		}
+	});
+	return newOptions;
+};
+
 const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => ({
 	...option,
 	actualname : option?.item_name,
@@ -61,33 +72,19 @@ export const renderLineItemFunctions = {
 			) : null}
 		</div>
 	),
-	truck_number: ({ control, index, setCodes, errors }) => (
+	truck_number: ({ control, index, errors, serviceProvider }) => (
 		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
-			<AsyncSelectController
+			<SelectController
 				control={control}
-				name={`line_items.${index}.code`}
+				name="truck_number"
 				placeholder="Enter"
-				// asyncKey="search_products_v2" // this will change
-				getModifiedOptions={handleModifiedOptions}
 				initialCall
-				// params={{
-				// 	organization_id         : extradata?.organization_id,
-				// 	organization_billing_id : extradata?.organization_billing_id,
-				// 	entity_id               : extradata?.entity_id,
-				// 	organization_trade_party_detail_id:
-				// 		extradata?.organization_trade_party_detail_id,
-				// 	filters: {
-				// 		service_names: isEmpty(extradata?.serviceNames)
-				// 			? [extradata?.shipment_type] : extradata?.serviceNames,
-				// 		invoicing_type: 'PURCHASE',
-				// 	},
-				// }}
-				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
+				options={getTruckNumberOptions({ serviceProvider })}
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.code ? (
+			{errors?.line_items?.[index]?.truck_number ? (
 				<div className={styles.errors}>
-					Code is Required
+					* Required
 				</div>
 			) : null}
 		</div>

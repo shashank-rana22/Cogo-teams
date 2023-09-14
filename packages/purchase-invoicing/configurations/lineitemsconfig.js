@@ -1,10 +1,5 @@
 export const lineItemConfig = [
 	{
-		label : 'Truck Number',
-		span  : 1.8,
-		key   : 'truck_number',
-	},
-	{
 		label : 'Charge item',
 		span  : 3.6,
 		key   : 'code',
