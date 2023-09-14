@@ -77,7 +77,7 @@ function UpdateButton({
 	}
 
 	if (task?.task === 'add_shipper_details') {
-		disableTask = (tasksList || []).some((item) => item?.task === 'mark_confirmed' && item.status === 'pending');
+		disableTask = (tasksList || []).some((item) => item?.task === 'mark_confirmed' && item?.status === 'pending');
 	}
 
 	if (
