@@ -5,25 +5,23 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const ZERO = 0;
-
-const data = [
-	{
-		label : 'Bonus',
-		value : 'Bonus',
-	},
-	{
-		label : 'Loan',
-		value : 'Loan',
-	}, {
-		label : 'Gift',
-		value : 'Gift',
-	},
-];
-
 function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpdateData = () => {} }) {
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
-
+	const data = [
+		{
+			label : 'Bonus',
+			value : 'Bonus',
+		},
+		{
+			label : 'Loan',
+			value : 'Loan',
+		}, {
+			label : 'Gift',
+			value : 'Gift',
+		},
+	];
 	const onSubmit = (values) => {
+		console.log('modal submit add new particular', values);
 		setUpdateData((prev) => [...prev,
 			{
 				particular        : values.particular,
@@ -113,6 +111,7 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 
 				</Modal.Body>
 				<Modal.Footer>
+
 					<Button
 						size="md"
 						themeType="secondary"
@@ -121,7 +120,6 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 					>
 						Cancel
 					</Button>
-
 					<Button
 						size="md"
 						themeType="primary"
@@ -130,8 +128,10 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 					>
 						Yes, Proceed
 					</Button>
+
 				</Modal.Footer>
 			</Modal>
+
 		</div>
 	);
 }

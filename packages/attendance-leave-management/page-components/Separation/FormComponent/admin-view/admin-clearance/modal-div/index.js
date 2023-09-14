@@ -7,13 +7,11 @@ import styles from './styles.module.css';
 function OpenModal({ show, onClose, onSubmit, handleSubmit }) {
 	return (
 		<Modal size="sm" show={show} onClose={onClose} placement="center" className={styles.modalcontainer}>
-
 			<Modal.Body styles={styles.modalbody}>
 				<div className={styles.modal_icon_container}>
-
 					<IcMError width="40px" height="40px" color="#C26D1A" />
-
 				</div>
+
 				<div>
 					<span className={styles.boldtext}>Are you sure you want to provide clearance?</span>
 					{' '}
@@ -27,9 +25,7 @@ function OpenModal({ show, onClose, onSubmit, handleSubmit }) {
 					className={styles.cancel_modal_btn}
 					onClick={() => onClose()}
 				>
-
 					Cancel
-
 				</Button>
 
 				<Button

@@ -1,25 +1,64 @@
+/* eslint-disable max-len */
 import { Button, Stepper } from '@cogoport/components';
 import { IcMError, IcMArrowRight, IcMCross, IcMArrowDown, IcMEmail, IcMProfile, IcMClock } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import ExitInterview from '../ExitInterview';
 
 import styles from './styles.module.css';
 
-function TrackApplication({ handleSubmit, control, errors }) {
+const STEPPER_ITEMS = [
+	{ title: 'HR Meet', key: 'hr_meet' },
+	{ title: 'RM Clearance', key: 'manager_clearance' },
+	{ title: 'Finance Clearance', key: 'finance_clearance' },
+	{ title: 'HOTO Clearance', key: 'hoto_clearance' },
+	{ title: 'Admin Clearance', key: 'admin_clearance' },
+	{ title: 'Tech Clearance', key: 'tech_clearance' },
+	{ title: 'Exit Interview', key: 'exit_interview' },
+];
+
+function TrackApplication({ data = {} }) {
 	const [show, setShow] = useState(true);
 	const [warningShow, warningSetShow] = useState(true);
-	const PERSON_NAME = 'Shivam Singh';
-	const [activeKey, setActiveKey] = useState('AdminClearance');
-	const items = [
-		{ title: 'HR Meet', key: 'HRMeet' },
-		{ title: 'RM Clearance', key: 'RMClearance' },
-		{ title: 'Finance Clearance', key: 'FinanceClearance' },
-		{ title: 'HOTO Clearance', key: 'HOTOClearance' },
-		{ title: 'Admin Clearance', key: 'AdminClearance' },
-		{ title: 'Tech Clearance', key: 'TechClearance' },
-		{ title: 'Exit Interview', key: 'ExitInterview' },
-	];
+	const [inProgressObject, setInProgressObject] = useState({});
+	const [authorityName, setAuthorityName] = useState('');
+	// const PERSON_NAME = 'Shivam Singh';
+	const [activeKey, setActiveKey] = useState('hr_meet');
+
+	const applicationStatusStepper = useCallback((dataset = {}) => {
+		STEPPER_ITEMS.forEach((element) => {
+			if ((dataset?.process_status && dataset?.process_status[element.key]?.status) === 'in_progress') {
+				setActiveKey(element.key);
+			}
+		});
+
+		const arr = Object.values(dataset?.process_status);
+		const inFoundProgressObject = arr.find((obj) => obj.status === 'in_progress');
+		setInProgressObject(inFoundProgressObject);
+		// console.log('obj arr :: ',inFoundProgressObject);
+		Object.keys(dataset?.process_status).forEach((key) => {
+			const value = dataset.process_status[key];
+			if (value.status === 'in_progress') {
+				setAuthorityName(key);
+			}
+		});
+
+		// for (const [key, value] of Object.entries(dataset?.process_status)) {
+		// 	if (value.status === 'in_progress') {
+		// 		setAuthorityName(key);
+		// 	}
+		// }
+		// console.log('key set to find :: ', Object.entries(dataset?.process_status).find((element) => element[1].status !== 'completed'));
+	}, []);
+
+	useEffect(() => {
+		applicationStatusStepper(data);
+	}, [applicationStatusStepper, data]);
+
+	// function for later requirements....
+	// const onClickSetActive = (e) => {
+	// 	setActiveKey(e);
+	// };
 
 	return (
 		<div className={styles.main_container}>
@@ -28,16 +67,14 @@ function TrackApplication({ handleSubmit, control, errors }) {
 					<div className={styles.title}>TRACK YOUR APPLICATION</div>
 					<div className={styles.sub_heading}>Status & details about your separation</div>
 				</div>
-
 				<IcMArrowDown
-					width={22}
-					height={22}
+					width={16}
+					height={16}
 					className={show ? styles.caret_active : styles.caret_arrow}
 				/>
 			</div>
 
 			<div className={show ? styles.show_application : styles.hide_application}>
-
 				<div
 					className={warningShow
 						? styles.completed_notification_container_show
@@ -68,40 +105,54 @@ function TrackApplication({ handleSubmit, control, errors }) {
 				<div className={styles.stepper_container}>
 					<Stepper
 						active={activeKey}
-						setActive={setActiveKey}
-						items={items}
+						// setActive={(e) => onClickSetActive(e)}
+						items={STEPPER_ITEMS}
 						style={{ background: '#f9f9f9' }}
 					/>
 
 				</div>
-				<ExitInterview handleSubmit={handleSubmit} control={control} errors={errors} />
 				<div className={styles.stages_container_main}>
 
 					<div className={styles.name_and_mail_container_main}>
 						<div className={styles.avatar_and_name_container}>
 							<IcMProfile height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
 							<div className={styles.name}>
-								HR Name
+								{inProgressObject?.name}
 							</div>
 						</div>
 						<div className={styles.avatar_and_mail_container}>
 							<IcMEmail height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
 							<div className={styles.email}>
-								samplemail.address@cogoport.com
+								{inProgressObject?.email}
 							</div>
 						</div>
 					</div>
 
 					<div className={styles.waiting_notification_container}>
-						<IcMClock height="22px" width="22px" color="#F68B21" />
-						<div className={styles.waiting_notification_text}>
-							Awaiting clearance from
-							{' '}
-							{PERSON_NAME}
-						</div>
+						{authorityName === 'hr_meet' && (
+							<div className={styles.waiting_notification_text}>
+								You will be contacted by the HR for the meeting. Post meeting the separation process will formally start.
+							</div>
+						)}
+						{(authorityName !== 'hr_meet' && authorityName === 'exit_interview')
+						&& (
+							<>
+								<IcMClock height="22px" width="22px" color="#F68B21" />
+								<div className={styles.waiting_notification_text}>
+									Awaiting clearance from
+									{' '}
+									{inProgressObject?.name}
+								</div>
+							</>
+						)}
+
 					</div>
 
 				</div>
+				<ExitInterview
+					data={data}
+					inProgressObject={inProgressObject}
+				/>
 
 			</div>
 

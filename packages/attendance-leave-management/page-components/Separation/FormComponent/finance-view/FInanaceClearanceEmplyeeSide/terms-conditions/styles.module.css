@@ -46,6 +46,8 @@
 	font-weight: 400;
 	line-height: 150%;
 	color: #221f20;
+
+	/* 18px */
 }
 
 .name_main_container {
@@ -57,6 +59,7 @@
 }
 
 .full_name_text {
+	/* 21px */
 	margin-bottom: 6px;
 	font-size: 14px;
 	font-style: normal;
@@ -79,6 +82,8 @@
 	font-weight: 400;
 	line-height: 150%;
 	color: #bdbdbd;
+
+	/* 24px */
 }
 
 .error {

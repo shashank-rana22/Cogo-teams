@@ -4,19 +4,18 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetFinanceClearanceProcessDetails = () => {
+const useGetEmployeeApplicationProcessDetails = () => {
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
-		url    : '/get_application_process_details',
+		url    : '/get_employee_application_details',
 	}, { manual: true });
 
-	const getFinanceClearanceProcessDetails = useCallback(
+	const getEmployeeApplicationProcessDetails = useCallback(
 		() => {
 			try {
 				trigger({
 					params: {
-						off_boarding_application_id : 'f191ea65-dc5b-4d9d-ab8a-4c4833a87058',
-						process_name                : 'finance_clearance',
+						off_boarding_application_id: 'f191ea65-dc5b-4d9d-ab8a-4c4833a87058',
 					},
 				});
 			} catch (error) {
@@ -27,14 +26,14 @@ const useGetFinanceClearanceProcessDetails = () => {
 	);
 
 	useEffect(() => {
-		getFinanceClearanceProcessDetails();
-	}, [getFinanceClearanceProcessDetails]);
+		getEmployeeApplicationProcessDetails();
+	}, [getEmployeeApplicationProcessDetails]);
 
 	return {
 		loading,
 		data,
-		refetchApplicationDetails: getFinanceClearanceProcessDetails,
+		refetchApplicationDetails: getEmployeeApplicationProcessDetails,
 	};
 };
 
-export default useGetFinanceClearanceProcessDetails;
+export default useGetEmployeeApplicationProcessDetails;

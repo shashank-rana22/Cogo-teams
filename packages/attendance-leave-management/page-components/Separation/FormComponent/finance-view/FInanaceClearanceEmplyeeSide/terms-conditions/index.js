@@ -37,6 +37,7 @@ function TermsConditions({ control = {}, errors = {} }) {
 							<div className={styles.error}>*required</div>
 						)}
 					</div>
+
 				</div>
 				<div className={styles.name_main_container}>
 					<div className={styles.full_name_text}>

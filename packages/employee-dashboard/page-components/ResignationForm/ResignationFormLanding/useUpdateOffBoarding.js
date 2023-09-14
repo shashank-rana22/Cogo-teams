@@ -2,17 +2,18 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const usePostEmployeeDetails = ({ refetch = () => {} }) => {
+const useUpdateOffBoarding = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
-		url    : '/create_application',
+		url    : 'update_off_boarding_application',
 	}, { manual: true });
 
-	const postApplicationDetails = async ({ payload }) => {
+	const requestCancellation = async ({ payload }) => {
 		try {
 			await trigger({
 				data: payload,
 			});
+
 			refetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
@@ -21,8 +22,8 @@ const usePostEmployeeDetails = ({ refetch = () => {} }) => {
 
 	return {
 		loading,
-		postApplicationDetails,
+		requestCancellation,
 	};
 };
 
-export default usePostEmployeeDetails;
+export default useUpdateOffBoarding;

@@ -10,6 +10,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 12px;
+	padding-left: 6px;
 	font-size: 16px;
 	font-weight: 600;
 	cursor: pointer;
@@ -18,7 +20,7 @@
 .item_container {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: 24px;
+	height: 360px;
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }
@@ -31,6 +33,27 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.detail {
+	flex-basis: 25%;
+	padding: 8px;
+
+	@media (max-width: 768px) {
+		flex-basis: 100%;
+	}
+}
+
+.label {
+	margin-bottom: 4px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.employee_detail {
+	margin-bottom: 4px;
+	font-weight: 600;
+	color: #333;
+}
+
 .caret_arrow {
 	transition: 0.3s;
 }
@@ -40,25 +63,18 @@
 	transform: rotate(180deg);
 }
 
-.name_input_container {
-	display: flex;
-	flex: 1 0 0;
-	align-items: center;
-	width: 100%;
+.reason_leaving {
+	flex-basis: 100%;
+	padding: 8px;
 }
 
-.hold_employee_container {
-	:global {
-		.ui_TE06c {
-			padding: 10px 0;
-		}
-	}
+.controller_ele > textarea {
+	height: 92px;
 }
 
-.hold_fnf_container {
-	:global {
-		.ui_TE06c {
-			padding: 10px 0;
-		}
-	}
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
 }

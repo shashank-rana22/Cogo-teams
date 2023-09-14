@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
-import { IcMArrowRight, IcMFtick } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { IcMArrowDown, IcMArrowRight, IcMFtick } from '@cogoport/icons-react';
+import React, { useState, useEffect } from 'react';
 
 import ResignEmployeeDetails from '../ResignEmployeeDetails';
 
@@ -16,15 +16,20 @@ const TERMS_AND_CONDITIONS = `By clicking on Initiate Separation, you agree to s
 							  notice period per your employment contract. Per your employment contract, 
                               your LWD is 'dd/mm/yyyy'`;
 
-function ResignationFormLanding({ refetch = () => {} }) {
+function ResignationFormLanding() {
 	const CANCEL_REQUEST = 'cancellation_requested';
 
-	const { data:dataItems = {}, loading, refetchApplicationDetails } = useGetEmployeeDetails({ refetch });
+	const { data:dataItems = {}, loading, refetchApplicationDetails } = useGetEmployeeDetails();
+	const [show, setShow] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);
 
 	const { application_exist } = dataItems || {};
 	const { application_status } = dataItems || {};
+
+	useEffect(() => {
+		setShow(!application_exist);
+	}, [loading, application_exist]);
 
 	const {
 		control,
@@ -61,46 +66,57 @@ function ResignationFormLanding({ refetch = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
+
+			<div className={styles.header} aria-hidden onClick={() => setShow(!show)}>
 				<div>
 					<div className={styles.title}>SEPARATION FORM</div>
 					<div className={styles.sub_heading}>Please fill the information carefully</div>
 				</div>
 				{application_exist && (
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={cancelRequest}
-						disabled={application_status === 'cancellation_requested'}
-					>
-						Request Cancellation
-					</Button>
+					<div className={styles.header_right}>
+						<Button
+							size="md"
+							themeType="secondary"
+							onClick={cancelRequest}
+							disabled={application_status === 'cancellation_requested'}
+							className={styles.button_separation}
+						>
+							Request Cancellation
+						</Button>
+						<IcMArrowDown
+							width={16}
+							height={16}
+							className={show ? styles.caret_active : styles.caret_arrow}
+						/>
+					</div>
 				)}
 
 			</div>
-			{application_exist && (
-				<div className={styles.pop_up_container}>
-					<IcMFtick height={18} width={18} color="#849E4C" />
-					<span className={styles.pop_up_content}>
-						Your application has been successfully
-						forwarded to the HR Department. You will soon hear from the respective HR.
-					</span>
-				</div>
-			)}
-			<ResignEmployeeDetails
-				control={control}
-				errors={errors}
-				dataItems={dataItems}
-				loading={loading}
-			/>
-			<CommunicationMode
-				control={control}
-				errors={errors}
-				dataItems={dataItems}
-				watch={watch}
-				setValue={setValue}
-			/>
-			<DatePicker control={control} dataItems={dataItems} errors={errors} setValue={setValue} />
+			<div className={show ? styles.item_container : styles.item_container_closed}>
+				{application_exist && (
+					<div className={styles.pop_up_container}>
+						<IcMFtick height={18} width={18} color="#849E4C" />
+						<span className={styles.pop_up_content}>
+							Your application has been successfully
+							forwarded to the HR Department. You will soon hear from the respective HR.
+						</span>
+					</div>
+				)}
+				<ResignEmployeeDetails
+					control={control}
+					errors={errors}
+					dataItems={dataItems}
+					loading={loading}
+				/>
+				<CommunicationMode
+					control={control}
+					errors={errors}
+					dataItems={dataItems}
+					watch={watch}
+					setValue={setValue}
+				/>
+				<DatePicker control={control} dataItems={dataItems} errors={errors} setValue={setValue} />
+			</div>
 			{
 			!application_exist && (
 				<>
@@ -138,6 +154,7 @@ function ResignationFormLanding({ refetch = () => {} }) {
 					</Button>
 				</div>
 			)}
+
 			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 				<Modal.Body>
 					<div className={styles.modal_icon_container}>

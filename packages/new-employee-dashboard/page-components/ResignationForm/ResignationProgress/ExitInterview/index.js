@@ -8,16 +8,19 @@ import useSubmitResignationProgress from '../useSubmitResignationProgress';
 import OTPInputExitInterview from './OTPInputExitInterview';
 import styles from './styles.module.css';
 
-const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
+// const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
 const OTP_LENGTH = 6;
-function ExitInterview({ data = {} }) {
-	const INTERVIEW_DETAILS = {
-		date     : '23/03/2023',
-		time     : '2:15pm',
-		location : 'Deck House',
-		name     : 'Shivam Singh',
-		email    : EMAIL_FOR_INTERVIEW_DETAILS,
-	};
+function ExitInterview({ data = {}, inProgressObject = {} }) {
+	console.log(data, '::data');
+	const INTERVIEW_DETAILS = data?.interview_details;
+
+	// INTERVIEW_DETAILS = {
+	// 	date     : '23/03/2023',
+	// 	time     : '2:15pm',
+	// 	location : 'Deck House',
+	// 	name     : 'Shivam Singh',
+	// 	email    : EMAIL_FOR_INTERVIEW_DETAILS,
+	// };
 	const [otpValue, setOtpValue] = useState('');
 	const [otpError, setOtpError] = useState(false);
 	const { handleSubmit, onSubmit } = useSubmitResignationProgress({
@@ -29,7 +32,6 @@ function ExitInterview({ data = {} }) {
 		}
 
 		handleSubmit(onSubmit(otpValue))();
-		console.log('resign progress data ::', data);
 	};
 
 	return (
@@ -44,35 +46,35 @@ function ExitInterview({ data = {} }) {
 					<div className={styles.icon_and_info_container}>
 						<IcMCalendar height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.date}
+							{INTERVIEW_DETAILS?.date}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMClock height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.time}
+							{INTERVIEW_DETAILS?.time}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMLocation height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.location}
+							{INTERVIEW_DETAILS?.location}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMProfile height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.name}
+							{inProgressObject?.name}
 						</div>
 					</div>
 
 					<div className={styles.icon_and_info_container}>
 						<IcMEmail height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 4 }} />
 						<div className={styles.info}>
-							{INTERVIEW_DETAILS.email}
+							{inProgressObject?.email}
 						</div>
 					</div>
 
