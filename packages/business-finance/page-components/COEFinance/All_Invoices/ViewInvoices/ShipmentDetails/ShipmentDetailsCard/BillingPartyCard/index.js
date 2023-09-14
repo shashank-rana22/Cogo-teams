@@ -1,10 +1,8 @@
 import { Button } from '@cogoport/components';
-import {
-	IcCFtick, IcMCrossInCircle,
-	IcMArrowRotateDown,
-} from '@cogoport/icons-react';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
+import { getLabelStyle, getIcon } from '../../../../../utils/getLabelStyle';
 import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import styles from './styles.module.css';
@@ -30,22 +28,9 @@ function BillingPartyCard({
 	onTabClick = () => {},
 	showTab = false,
 }) {
-	let labelClassName;
-	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
-		labelClassName = styles.label_approved;
-	} else if (rejected.includes(CARD_ID)) {
-		labelClassName = styles.label_rejected;
-	} else {
-		labelClassName = styles.label;
-	}
+	const labelStyle = getLabelStyle({ CARD_ID, showValue, rejected, styles, isInvoiceApproved });
 
-	let iconElement = null;
-
-	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
-		iconElement = <IcCFtick height="17px" width="17px" />;
-	} else if (rejected.includes(CARD_ID)) {
-		iconElement = <IcMCrossInCircle height="17px" width="17px" />;
-	}
+	const iconElement = getIcon({ CARD_ID, showValue, rejected, styles, isInvoiceApproved });
 
 	const onClickResponse = ({ response }) => {
 		if (response) {
@@ -65,13 +50,9 @@ function BillingPartyCard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
-				<div
-					className={labelClassName}
-				>
+				<div className={labelStyle}>
 					{LABEL}
-					<div
-						className={styles.icon_section}
-					>
+					<div className={styles.icon_section}>
 						{iconElement}
 					</div>
 				</div>

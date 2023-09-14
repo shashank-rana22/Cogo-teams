@@ -12,9 +12,6 @@ interface BillAdditionalInterface {
 	collectionPartyId?: string;
 }
 
-interface CheckItemInterface {
-	lineItemsCheck?: boolean;
-}
 interface DataInterface {
 	billAdditionalObject?: BillAdditionalInterface;
 }
@@ -26,7 +23,7 @@ interface HeaderInterface {
 	lineItemsRemarks: object;
 	status: string;
 	jobNumber?:string;
-	checkItem?: CheckItemInterface;
+	checkItem?: any;
 	isTagFound?: boolean;
 }
 
@@ -70,6 +67,8 @@ function Header({
 	|| remarksVal?.invoiceDetailsRemark?.length > 0
 	|| remarksVal?.taggingRemark?.length > 0;
 
+	const isItemNotChecked = Object.values(checkItem).some((item) => item === false);
+
 	const getRoute = () => {
 		if (isShipment) {
 			return [
@@ -103,7 +102,7 @@ function Header({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '8px' }}
-						disabled={!checkItem?.lineItemsCheck || isApproveDisabled}
+						disabled={isItemNotChecked || isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Approve
@@ -120,7 +119,7 @@ function Header({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={!checkItem?.lineItemsCheck || !isApproveDisabled}
+						disabled={isItemNotChecked || !isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject

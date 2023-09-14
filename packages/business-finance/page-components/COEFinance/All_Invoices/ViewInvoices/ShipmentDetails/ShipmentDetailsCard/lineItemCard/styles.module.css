@@ -168,3 +168,17 @@
 .invoice_pill {
 	font-size: var(--font-size-sm);
 }
+
+.label_approved {
+	font-weight: 700;
+	color: #6cc077;
+}
+
+.label_rejected {
+	font-weight: 700;
+	color: red;
+}
+
+.label {
+	font-weight: 700;
+}

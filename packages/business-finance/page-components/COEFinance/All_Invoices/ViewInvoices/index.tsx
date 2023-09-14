@@ -35,6 +35,14 @@ function ViewInvoices() {
 
 	const [isTagFound, setIsTagFound] = useState(false);
 
+	useEffect(() => {
+		if (!isTagFound) {
+			setCheckItem(
+				(prev) => ({ ...prev, taggingCheck: true }),
+			);
+		}
+	}, [setCheckItem, isTagFound]);
+
 	const [isSticky, setIsSticky] = useState(false);
 
 	useEffect(() => {

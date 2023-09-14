@@ -18,21 +18,19 @@ import converter from 'number-to-words';
 import React, { useEffect, useState } from 'react';
 
 import List from '../../../../../../commons/List/index';
-import {
-	LINE_ITEMS,
-	LINE_ITEMS_CHECK,
-} from '../../../../../configurations/LINE_ITEMS';
+import { LINE_ITEMS, LINE_ITEMS_CHECK } from '../../../../../configurations/LINE_ITEMS';
+import { getLineItemLabelStyle, getLineItemIcon } from '../../../../../utils/getLabelStyle';
 
 import RenderAction from './RenderAction';
 import styles from './styles.module.css';
 
 interface LineItemCardInterface {
-	lineItems: Array<object>;
+	lineItems?: Array<object>;
 	bill?: {
 		taxTotal: any;
 		billCurrency: string;
 		grandTotal: any;
-		subTotal: string | number;
+		subTotal?: string | number;
 		tdsAmount: string | number;
 	};
 	lineItemsRemarks: object;
@@ -40,11 +38,11 @@ interface LineItemCardInterface {
 	isInvoiceApproved: boolean;
 	shipmentType: string;
 	tdsRate: string | number;
-	paidTds: string | number;
-	subTotal: string | number;
-	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
-	onTabClick: Function;
-	showTab: boolean;
+	paidTds?: string | number;
+	subTotal?: string | number;
+	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>;
+	onTabClick?: Function;
+	showTab?: boolean;
 }
 
 const PERCENTAGE_FACTOR = 100;
@@ -99,6 +97,20 @@ function LineItemCard({
 			);
 		}
 	}, [ApproveCheck, RejectCheck, lineItems?.length, setCheckItem]);
+
+	const lineItemLabel = getLineItemLabelStyle({
+		length: lineItems?.length,
+		ApproveCheck,
+		RejectCheck,
+		styles,
+		isInvoiceApproved,
+	});
+	const iconElement = getLineItemIcon({
+		length: lineItems?.length,
+		ApproveCheck,
+		RejectCheck,
+		isInvoiceApproved,
+	});
 
 	const handleApproveClick = (key = '') => {
 		setApprovedItems((previousActions: any) => ({
@@ -206,7 +218,7 @@ function LineItemCard({
 			<div className={styles.header_dropdown}>
 				<div className={styles.main_header}>
 					<div className={styles.instructions}>
-						Line Items and Tax Rates
+						<span className={lineItemLabel}>Line Items and Tax Rates</span>
 						{showTab ? (
 							<div className={styles.pill_tooltip}>
 								<Tooltip
@@ -220,6 +232,7 @@ function LineItemCard({
 								</Tooltip>
 							</div>
 						) : undefined}
+						{iconElement}
 					</div>
 
 					{showTab && (

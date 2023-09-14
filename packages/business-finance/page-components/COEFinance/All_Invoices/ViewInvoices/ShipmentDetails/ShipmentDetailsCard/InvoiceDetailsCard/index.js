@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcCFtick, IcMCrossInCircle, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
+import { getLabelStyle, getIcon } from '../../../../../utils/getLabelStyle';
 import isDisabled from '../../../../../utils/isDisabled.ts';
 
 import AdditionalInvoiceDetails from './AdditionalInvoiceDetails';
@@ -53,21 +54,9 @@ function InvoiceDetailsCard({
 	const viewDocument = (document) => {
 		window.open(document);
 	};
-	let labelClassName = styles.label;
+	const labelStyle = getLabelStyle({ CARD_ID, showValue, rejected, styles, isInvoiceApproved });
 
-	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
-		labelClassName = styles.label_approved;
-	} else if (rejected.includes(CARD_ID)) {
-		labelClassName = styles.label_rejected;
-	}
-
-	let iconComponent = null;
-
-	if (showValue.includes(CARD_ID) || isInvoiceApproved) {
-		iconComponent = <IcCFtick height="17px" width="17px" />;
-	} else if (rejected.includes(CARD_ID)) {
-		iconComponent = <IcMCrossInCircle height="17px" width="17px" />;
-	}
+	const iconElement = getIcon({ CARD_ID, showValue, rejected, styles, isInvoiceApproved });
 
 	const remarksValue = remarks?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
@@ -90,14 +79,14 @@ function InvoiceDetailsCard({
 		<div className={styles.container}>
 			<div className={styles.header_container}>
 				<div
-					className={labelClassName}
+					className={labelStyle}
 				>
 					{LABEL}
 					{' '}
 					<div
 						style={{ justifyContent: 'center', display: 'flex' }}
 					>
-						{iconComponent}
+						{iconElement}
 					</div>
 				</div>
 				{showTab ? (!isInvoiceApproved && (

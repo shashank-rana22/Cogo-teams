@@ -10,7 +10,10 @@ import { TagCard } from './TagCard';
 
 function TagMap({
 	billId = '',
-	value = { remark: '' }, setValue = () => {}, setRemarksVal = () => {}, status = '',
+	value = { remark: '' },
+	setValue = () => {},
+	setRemarksVal = () => {},
+	status = '',
 	setIsTagFound = () => {},
 }: {
 	billId: string, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },

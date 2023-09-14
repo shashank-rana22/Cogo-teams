@@ -2,7 +2,7 @@
 import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -291,7 +291,7 @@ function ShipmentDetailsCard({
 								<IcMInfo width={15} height={15} />
 							</div>
 						</Tooltip>
-						<Pill color="blue">{invoiceType}</Pill>
+						{!isEmpty(invoiceType) ? <Pill color="blue">{invoiceType}</Pill> : undefined}
 					</div>
 
 					{!isInvoiceApproved && (
