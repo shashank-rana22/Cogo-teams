@@ -1,7 +1,7 @@
-import { cl } from '@cogoport/components';
+import { cl, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import NoDataState from '../../../../../common/NoDataState';
 import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
@@ -11,20 +11,58 @@ import styles from '../styles.module.css';
 
 const VALID_IDS = ['supply', 'rate_extension', 'cluster_extension'];
 
+const VIEW_TYPE_OPTIONS = [
+	{
+		value : 'average_price',
+		label : 'Average Price',
+	},
+	{
+		value : 'max_price',
+		label : 'Max Price',
+	},
+	{
+		value : 'min_price',
+		label : 'Min Price',
+	},
+];
+
 function TrendChart({
 	parent_mode = null,
 	isAnimating = false,
 	isHighlighted = false,
 	globalFilters = {},
 }) {
+	const [viewType, setViewType] = useState('average_price');
 	const IDS = parent_mode ? [parent_mode] : VALID_IDS;
 	const { loading, trendsData } = useGetFclFreightRateTrends({ filters: globalFilters });
-	const filteredDataForChart = trendsData?.map(({ predicted, ...rest }) => ({ ...rest })) || [];
+	const filteredDataForChart = trendsData?.map((item) => {
+		const NEW_OBJ = {};
+		Object.entries(item).forEach(([key, value]) => {
+			if (key !== 'predicted') {
+				if (key === 'day')NEW_OBJ[key] = value;
+				else if (typeof (value) === 'object') {
+					Object.entries(value).forEach(([type, count]) => {
+						if (type === viewType)NEW_OBJ[key] = count;
+					});
+				} else NEW_OBJ[key] = value;
+			}
+		});
+		return NEW_OBJ;
+	});
 
 	return (
 		<div className={cl`${styles.rate_accuracy_chart_container} 
 		${isHighlighted ? styles.highlighted_container : ''}`}
 		>
+			<Select
+				size="sm"
+				style={{ width: '150px' }}
+				placeholder="Select"
+				value={viewType}
+				onChange={setViewType}
+				options={VIEW_TYPE_OPTIONS}
+			/>
+
 			<div className={styles.legends}>
 				{IDS.map((key) => (
 					<div className={styles.legend_item} key={key}>
