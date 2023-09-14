@@ -19,7 +19,17 @@
 
 .block_text {
 	margin: 0;
-	font-size: var(--font-size-xl);
+	font-size: 1.15em;
+
+	@media (min-width: 1024px) {
+		font-size: 1.25em;
+	}
+	@media (min-width: 1440px) {
+		font-size: 1.35em;
+	}
+	@media (min-width: 2560px) {
+		font-size: 1.55em;
+	}
 }
 
 .activity_container {
@@ -51,12 +61,32 @@
 
 .value_text {
 	margin-right: 8px;
-	font-size: var(--font-size-xl);
+	font-size: 1.15em;
 	font-weight: 600;
+
+	@media (min-width: 1024px) {
+		font-size: 1.25em;
+	}
+	@media (min-width: 1440px) {
+		font-size: 1.35em;
+	}
+	@media (min-width: 2560px) {
+		font-size: 1.55em;
+	}
 }
 
 .label_text {
 	width: 80%;
-	font-size: var(--font-size-xl);
+	font-size: 1.15em;
 	color: #828282;
+
+	@media (min-width: 1024px) {
+		font-size: 1.25em;
+	}
+	@media (min-width: 1440px) {
+		font-size: 1.35em;
+	}
+	@media (min-width: 2560px) {
+		font-size: 1.55em;
+	}
 }

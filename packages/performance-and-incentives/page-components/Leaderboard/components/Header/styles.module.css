@@ -4,8 +4,30 @@
 	margin-bottom: 24px;
 }
 
+.heading {
+	@media (min-width: 1024px) {
+		font-size: 1.6em;
+	}
+	@media (min-width: 1440px) {
+		font-size: 1.7em;
+	}
+	@media (min-width: 2560px) {
+		font-size: 1.9em;
+	}
+}
+
 .subheading {
-	font-size: var(--font-size-xl);
+	font-size: 1.2em;
+
+	@media (min-width: 1024px) {
+		font-size: 1.3em;
+	}
+	@media (min-width: 1440px) {
+		font-size: 1.4em;
+	}
+	@media (min-width: 2560px) {
+		font-size: 1.6em;
+	}
 }
 
 .light {

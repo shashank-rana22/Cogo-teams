@@ -5,6 +5,20 @@
 	border-radius: 8px;
 }
 
+.heading {
+	font-size: 1.2em;
+
+	@media (min-width: 1024px) {
+		font-size: 1.3em;
+	}
+	@media (min-width: 1440px) {
+		font-size: 1.4em;
+	}
+	@media (min-width: 2560px) {
+		font-size: 1.6em;
+	}
+}
+
 .blocks_container {
 	>div {
 		border-bottom: 1px solid #f2f2f2;

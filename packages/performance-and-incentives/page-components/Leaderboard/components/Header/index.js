@@ -8,7 +8,7 @@ function Header() {
 	return (
 		<div className={styles.head_container}>
 			<div>
-				<h2>
+				<h2 className={styles.heading}>
 					Welcome,
 					{' '}
 					{user.name}
