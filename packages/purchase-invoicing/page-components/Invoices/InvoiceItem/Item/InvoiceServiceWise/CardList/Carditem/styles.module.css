@@ -72,3 +72,9 @@
 	font-weight: 500;
 	color: black;
 }
+
+.card_container_styles {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
