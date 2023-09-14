@@ -60,7 +60,7 @@ function Invoices({ activeEntity = '' }) {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
-	} = useGetBillsList({ activeTab, activeEntity });
+	} = useGetBillsList({ activeTab, activeEntity, showElement: true });
 
 	const { stats = {} } = billsData || {};
 
