@@ -10,18 +10,20 @@ function PopupModal({ show = false, onClose = () => {}, name = '', url = '' }) {
 				<Modal.Header title={name} />
 				<Modal.Body>
 					<div className={styles.pdf_container}>
-						<object
-							data={url}
+						<iframe
+							src={url}
 							type="application/pdf"
 							width="100%"
-							height="720px"
+							height="100%"
+							title="Document"
+							style={{ border: 'none' }}
 						>
 							<p>
 								It seems you don&apos;t have a PDF plugin for this browser. No biggie... you can
 								{' '}
 								<a href={url}>click here to download the PDF file.</a>
 							</p>
-						</object>
+						</iframe>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

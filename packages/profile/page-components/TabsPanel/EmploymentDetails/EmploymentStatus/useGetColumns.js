@@ -59,8 +59,12 @@ const useGetColumns = () => (
 		},
 		{
 			Header   : 'STATUS',
-			accessor : (item) => (<div className={styles.table_item}>{item?.employee_status || ' — '}</div>),
-			id       : 'status',
+			accessor : (item) => (
+				<div className={styles.table_item}>
+					<span className={styles.status}>{item?.employee_status || ' — '}</span>
+				</div>
+			),
+			id: 'status',
 		},
 	]
 );

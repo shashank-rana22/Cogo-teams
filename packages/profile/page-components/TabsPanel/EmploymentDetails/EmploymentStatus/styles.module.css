@@ -10,3 +10,7 @@
 	color: #221f20;
 	text-align: center;
 }
+
+.status{
+	text-transform: capitalize;
+}
