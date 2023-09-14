@@ -149,7 +149,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 						style={{ background: '#FEF9FE' }}
 					>
 						<div className={styles.flex_column}>
-							<div className={styles.label}>Total Outstanding</div>
+							<div className={styles.label_outstanding}>Total Outstanding</div>
 							<div className={styles.amountout}>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,

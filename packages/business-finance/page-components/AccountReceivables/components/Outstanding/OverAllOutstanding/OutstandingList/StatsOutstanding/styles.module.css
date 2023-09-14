@@ -61,9 +61,15 @@
 }
 
 .label {
-	width: 30%;
+	width: 100%;
 	margin-left: 12px;
 	font-size: 12px;
+	font-weight: 600;
+}
+
+.label_outstanding {
+	width: 100%;
+	margin-left: 12px;
 	font-weight: 600;
 }
 
@@ -108,7 +114,6 @@
 .outstanding_card {
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	width: 14%;
 	margin: 26px 4px 2px 12px;
 	border-radius: 8px;
