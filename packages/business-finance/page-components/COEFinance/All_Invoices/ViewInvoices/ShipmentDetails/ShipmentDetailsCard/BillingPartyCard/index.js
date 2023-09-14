@@ -35,10 +35,10 @@ function BillingPartyCard({
 	const onClickResponse = ({ response }) => {
 		if (response) {
 			handleClick(CARD_ID);
+			onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
 		} else {
 			handleClickReject(CARD_ID);
 		}
-		onAccept({ tabName: PRESENT_TAB, tabToOpen: TAB_TO_OPEN, timelineItem: TIMELINE_ITEM });
 	};
 	const handleUndo = () => {
 		handleClickUndo(CARD_ID);

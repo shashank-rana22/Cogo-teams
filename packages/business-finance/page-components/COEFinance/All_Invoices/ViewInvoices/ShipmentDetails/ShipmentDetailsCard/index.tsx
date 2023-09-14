@@ -97,7 +97,6 @@ function ShipmentDetailsCard({
 		billNumber = '',
 		billDate,
 		status = '',
-		placeOfSupply = '',
 		billType = '',
 		isProforma = false,
 		billDocumentUrl,
@@ -322,15 +321,12 @@ function ShipmentDetailsCard({
 									setCheckedValue={setCheckedValue}
 									remarksVal={remarksVal}
 									setRemarksVal={setRemarksVal}
-									billNumber={billNumber}
 									invoiceType={invoiceType}
 									remarks={remarks}
 									organizationName={organizationName}
-									billDate={billDate}
-									status={status}
-									placeOfSupply={placeOfSupply}
 									onSubmit={onSubmit}
 									billAdditionalObject={billAdditionalObject}
+									bill={bill}
 								/>
 							)}
 
