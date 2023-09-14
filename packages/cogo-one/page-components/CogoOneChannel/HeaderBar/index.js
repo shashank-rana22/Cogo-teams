@@ -54,10 +54,13 @@ function HeaderBar({
 
 	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
+	const showStats = !isEmpty(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.stats_feedback_count)
+	|| VIEW_TYPE_GLOBAL_MAPPING[viewType]?.to_show_agent_activity_graph;
+
 	return (
 		<div className={cl`${styles.header_container} ${showDetails ? styles.show_on_top : ''}`}>
 			<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
-				{showDetails ? (
+				{(showDetails && showStats) ? (
 					<ShowMoreStats
 						setShowDetails={setShowDetails}
 						showDetails={showDetails}
@@ -95,6 +98,7 @@ function HeaderBar({
 						preferenceLoading={preferenceLoading}
 						showDetails={showDetails}
 						setShowDetails={setShowDetails}
+						showStats={showStats}
 						status={status}
 						setIsShaking={setIsShaking}
 						shakeButton={shakeButton}

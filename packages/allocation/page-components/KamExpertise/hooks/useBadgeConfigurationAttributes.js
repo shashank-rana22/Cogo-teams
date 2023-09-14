@@ -5,7 +5,7 @@ import { snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 const useUpdateSingleBadge = (props) => {
-	const { medal = '', id, image_url:previous_image_url, score:previous_score, listRefetch } = props;
+	const { medal = '', id, image_url:previous_image_url, score:previous_score, listRefetch, t = () => {} } = props;
 	const [openModal, setOpenModal] = useState(false);
 
 	const formProps = useForm();
@@ -61,9 +61,9 @@ const useUpdateSingleBadge = (props) => {
 
 			listRefetch();
 
-			Toast.success('Badge Updated!');
+			Toast.success(t('allocation:badge_updated_toast'));
 		} catch (error) {
-			Toast.error(error?.response?.data?.error || 'Something went wrong');
+			Toast.error(error?.response?.data?.error || t('allocation:something_went_wrong'));
 		}
 	};
 	return {

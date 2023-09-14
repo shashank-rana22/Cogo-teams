@@ -3,18 +3,21 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-import controls from '../configurations/get-configuration-publish-controls';
+import getControls from '../configurations/get-configuration-publish-controls';
 
 const usePublishConfiguration = ({
 	item = {},
 	listRefetch = () => {},
 	setShow = () => {},
+	t = () => {},
 }) => {
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/configuration_status',
 		method  : 'POST',
 		authkey : 'post_allocation_configuration_status',
 	});
+
+	const controls = getControls({ t });
 
 	const formProps = useForm({
 		defaultValues: {
@@ -26,12 +29,12 @@ const usePublishConfiguration = ({
 
 	const onPublish = async (values) => {
 		if (!values.active_date_range.startDate) {
-			setError('active_date_range', { type: 'required', message: 'Start Date is required' });
+			setError('active_date_range', { type: 'required', message: t('allocation:start_date_validation') });
 			return;
 		}
 
 		if (!values.active_date_range.endDate) {
-			setError('active_date_range', { type: 'required', message: 'End Date is required' });
+			setError('active_date_range', { type: 'required', message: t('allocation:end_date_validation') });
 			return;
 		}
 
@@ -49,7 +52,7 @@ const usePublishConfiguration = ({
 
 			listRefetch();
 
-			Toast.success('Configuration published successfully');
+			Toast.success(t('allocation:publish_configuration_success_toast'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

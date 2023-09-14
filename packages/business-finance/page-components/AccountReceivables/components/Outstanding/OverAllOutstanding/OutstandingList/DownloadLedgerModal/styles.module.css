@@ -1,0 +1,31 @@
+.modal {
+	:global {
+		.ui_modal_body_container {
+			overflow-x: visible;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	height: 100px;
+}
+
+.date {
+	:global {
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
+}
+
+.download {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.download_icon {
+	margin-left: 4px;
+	color: #fff;
+}

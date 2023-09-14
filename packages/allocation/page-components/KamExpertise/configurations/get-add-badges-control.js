@@ -1,36 +1,36 @@
-const controls = [
+const getControls = ({ t = () => {} }) => [
 	{
 		name        : 'badge',
-		label       : 'Badge Name',
-		placeholder : 'Enter Name',
+		label       : t('allocation:badge_name_label'),
+		placeholder : t('allocation:badge_name_placeholder'),
 		type        : 'text',
 		rules       : {
-			required: 'Badge Name is required',
+			required: t('allocation:badge_name_rules_required'),
 		},
 		isClearable: true,
 	},
 	{
 		name        : 'condition',
-		label       : 'Event',
-		placeholder : 'Select Events',
+		label       : t('allocation:event_label'),
+		placeholder : t('allocation:event_placeholder'),
 		type        : 'asyncSelect',
 		asyncKey    : 'expertise_configuration',
 		multiple    : true,
 		initialCall : false,
 		rules       : {
-			required: 'Specify Events',
+			required: t('allocation:event_rules_required'),
 		},
 	},
 	{
 		name        : 'description',
-		label       : 'Description',
-		placeholder : 'Enter Description',
+		label       : t('allocation:description_label'),
+		placeholder : t('allocation:enter_description_placeholder'),
 		type        : 'text',
 		rules       : {
-			required: 'Description is required',
+			required: t('allocation:description_input_rules_required'),
 		},
 		isClearable: true,
 	},
 ];
 
-export default controls;
+export default getControls;

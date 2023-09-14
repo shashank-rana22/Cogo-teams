@@ -10,7 +10,10 @@ const getPayload = ({
 	loggedInAgentId = '',
 	callStartAt = '',
 	callEndAt = '',
+	callRecordId = '',
 }) => {
+	const { sid = '', communication_summary = '', title = '' } = extraPayload || {};
+	const payload = { communication_summary, title };
 	const {
 		organization_id = '',
 		user_id = '',
@@ -25,7 +28,14 @@ const getPayload = ({
 		partner_id               : partnerId,
 		communication_start_time : new Date(callStartAt),
 		communication_end_time   : callEndAt,
-		...(extraPayload || {}),
+		communication_service_id : callRecordId || undefined,
+		communication_service    : callRecordId ? 'servetel' : undefined,
+		feedback                 : sid ? [{
+			feedback_data:
+			[{ serial_id: sid }],
+			feedback_type: 'shipment',
+		}] : undefined,
+		...(payload || {}),
 	};
 };
 
@@ -35,6 +45,7 @@ function useCreateCommunicationLog({
 	loggedInAgentId = '',
 	callStartAt = '',
 	callEndAt = '',
+	callRecordId = '',
 }) {
 	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 
@@ -53,6 +64,7 @@ function useCreateCommunicationLog({
 					loggedInAgentId,
 					callStartAt,
 					callEndAt,
+					callRecordId,
 				}),
 			});
 			Toast.success('Saved Successfully');

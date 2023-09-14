@@ -1,0 +1,12 @@
+.child {
+	width: 100%;
+}
+
+.add_button_container {
+	display: flex;
+	padding: 12px;
+}
+
+.add_button_text {
+	font-size: var(--font-size-md);
+}

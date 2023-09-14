@@ -1,5 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { IcMUpwardGraph } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import useChartStats from '../../../../hooks/useChartStats';
 
@@ -7,20 +8,22 @@ import { getStatsData } from './get-stats-data';
 import styles from './styles.module.css';
 
 function Statistics({ activeTab, filters }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		stats = {},
 		loading,
 		isEmpty = false,
 	} = useChartStats({ activeTab, filters });
 
-	const statsControl = getStatsData({ stats })[activeTab] || {};
+	const statsControl = getStatsData({ stats, t })[activeTab] || {};
 
 	if (isEmpty && !loading) {
 		return (
 			<section className={styles.container}>
 				<div className={styles.empty_text}>
 					<IcMUpwardGraph width={100} height={100} style={{ marginBottom: '16px' }} />
-					Statistics are not available at this moment.
+					{t('allocation:statistics_empty_state')}
 				</div>
 			</section>
 		);

@@ -9,6 +9,7 @@ export const getFeedbackColumns = ({
 	onChangeTableHeadCheckbox = () => {},
 	checkedRowsId = [],
 	onChangeBodyCheckbox = () => {},
+	t = () => {},
 }) => [
 	{
 		id     : 'checkbox',
@@ -25,7 +26,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'ORGANIZATION',
+		Header   : t('allocation:organization_feedback_label'),
 		key      : 'organization',
 		id       : 'organization',
 		accessor : ({ organization, lead_organization_id, lead_organization }) => (
@@ -39,7 +40,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'COGO-ENTITY',
+		Header   : t('allocation:cogo_entity'),
 		key      : 'cogo_entity',
 		id       : 'cogo_entity',
 		accessor : ({ cogo_entity }) => (
@@ -49,7 +50,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'TYPE',
+		Header   : t('allocation:type_label'),
 		key      : 'type',
 		id       : 'type',
 		accessor : ({ source_type }) => (
@@ -59,7 +60,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'SUB-TYPE',
+		Header   : t('allocation:sub_type'),
 		key      : 'sub_type',
 		id       : 'sub_type',
 		accessor : ({ feedback_parameter }) => (
@@ -69,7 +70,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'CURRENT DATA',
+		Header   : t('allocation:current_data'),
 		key      : 'current_data',
 		id       : 'current_data',
 		accessor : ({ feedback_parameter_value }) => (
@@ -89,7 +90,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'FEEDBACK & PROOF',
+		Header   : t('allocation:feedback_and_proof'),
 		key      : 'feedback',
 		id       : 'feedback',
 		accessor : ({ feedback, other_feedback, feedback_reference_document_url }) => (
@@ -123,7 +124,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'CORRECTION & PROOF',
+		Header   : t('allocation:correction_and_proof'),
 		key      : 'correction',
 		id       : 'correction',
 		accessor : ({
@@ -158,7 +159,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'KAM',
+		Header   : t('allocation:kam_label'),
 		key      : 'kam',
 		id       : 'kam',
 		accessor : ({ created_by }) => (
@@ -168,7 +169,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'KAM Manager',
+		Header   : t('allocation:kam_manager'),
 		key      : 'kam_manager',
 		id       : 'kam_manager',
 		accessor : ({ manager }) => (
@@ -178,7 +179,7 @@ export const getFeedbackColumns = ({
 		),
 	},
 	{
-		Header   : 'CREATION DATE',
+		Header   : t('allocation:created_date'),
 		key      : 'created_date',
 		id       : 'created_date',
 		accessor : ({ created_at }) => (

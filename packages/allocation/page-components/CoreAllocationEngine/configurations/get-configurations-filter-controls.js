@@ -1,10 +1,10 @@
-const controls = [
+const getControls = ({ t = () => {} }) => [
 	{
 		name        : 'role_ids',
-		label       : 'Roles',
+		label       : t('allocation:role_ids_label'),
 		type        : 'asyncSelect',
 		multiple    : true,
-		placeholder : 'Select roles',
+		placeholder : t('allocation:role_ids_placeholder'),
 		asyncKey    : 'partner_roles',
 		initialCall : false,
 		params      : {
@@ -18,55 +18,56 @@ const controls = [
 	},
 	{
 		name        : 'stakeholder_type',
-		label       : 'Stakeholder Type',
+		label       : t('allocation:stakeholder_type_label'),
 		type        : 'select',
-		placeholder : 'Select stakeholder type',
+		placeholder : t('allocation:stakeholder_type_placeholder'),
 		options     : [
-			{ value: 'sales_agent', label: 'Sales Agent' },
-			{ value: 'booking_agent', label: 'Booking Agent' },
-			{ value: 'supply_agent', label: 'Supply Agent' },
-			{ value: 'entity_manager', label: 'Entity Manager' },
-			{ value: 'ckam', label: 'CKAM' },
-			{ value: 'credit_controller', label: 'Credit Controller' },
-			{ value: 'service_ops2', label: 'Service OPS 2' },
-			{ value: 'trade_finance_agent', label: 'Trade Finance Agent' },
+			{ value: 'sales_agent', label: t('allocation:sales_agent_label') },
+			{ value: 'booking_agent', label: t('allocation:booking_agent_label') },
+			{ value: 'supply_agent', label: t('allocation:supply_agent_label') },
+			{ value: 'entity_manager', label: t('allocation:entity_manager_label') },
+			{ value: 'ckam', label: t('allocation:ckam_label') },
+			{ value: 'credit_controller', label: t('allocation:credit_controller_label') },
+			{ value: 'service_ops2', label: ('allocation:service_ops_two') },
+			{ value: 'trade_finance_agent', label: ('allocation:trade_finance_agent') },
 		],
 		isClearable: true,
 	},
+
 	{
 		name    : 'locking_criterion',
 		type    : 'chips',
-		label   : 'Locking Criterion',
+		label   : t('allocation:locking_criterion_label'),
 		options : [
-			{ value: 'quotations_last_date', label: 'Quotation' },
-			{ value: 'shipment_booked', label: 'Shipment Booked' },
+			{ value: 'quotations_last_date', label: t('allocation:quotations_last_date') },
+			{ value: 'shipment_booked', label: t('allocation:shipment_booked') },
 		],
 		multiple: true,
 	},
 	{
 		name    : 'schedule_type',
 		type    : 'chips',
-		label   : 'Schedule Type',
+		label   : t('allocation:schedule_type'),
 		options : [
-			{ value: 'daily', label: 'Daily' },
-			{ value: 'weekly', label: 'Weekly' },
-			{ value: 'monthly', label: 'Monthly' },
+			{ value: 'daily', label: t('allocation:daily_label') },
+			{ value: 'weekly', label: t('allocation:weekly_label') },
+			{ value: 'monthly', label: t('allocation:monthly_label') },
 		],
 		multiple: true,
 	},
 	{
 		name    : 'status',
 		type    : 'chips',
-		label   : 'Status',
+		label   : t('allocation:status_header'),
 		options : [
-			{ value: 'active', label: 'Active' },
-			{ value: 'draft', label: 'Draft' },
-			{ value: 'publishable', label: 'Publishable' },
-			{ value: 'checking', label: 'Checking' },
-			{ value: 'not_publishable', label: 'Not publishable' },
+			{ value: 'active', label: t('allocation:active_status') },
+			{ value: 'draft', label: t('allocation:draft_status') },
+			{ value: 'publishable', label: t('allocation:publishable_status') },
+			{ value: 'checking', label: t('allocation:checking_status') },
+			{ value: 'not_publishable', label: t('allocation:not_publishable_status') },
 		],
 		multiple: true,
 	},
 ];
 
-export default controls;
+export default getControls;

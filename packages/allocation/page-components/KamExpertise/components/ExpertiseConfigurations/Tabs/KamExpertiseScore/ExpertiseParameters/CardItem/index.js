@@ -1,22 +1,28 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isNumber } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
-function CardItem({ item, editMode, control }) {
-	const { data = [], group_name = '', description = '' } = item;
-	const isDoubleLevel = data.length > 1;
+const FIRST_INDEX = 1;
 
-	const conditionName = data?.[0]?.condition_name || '';
+function CardItem({ item, editMode, control }) {
+	const { t } = useTranslation(['allocation']);
+
+	const { data = [], group_name = '', description = '' } = item;
+	const isDoubleLevel = data.length > FIRST_INDEX;
+
+	const conditionName = data?.[GLOBAL_CONSTANTS.zeroth_index]?.condition_name || '';
 
 	return (
 		<div className={styles.card_item}>
 			<div className={styles.name_container}>
 				<div className={styles.parent_parameter_name}>
-					{startCase(data.length === 1 ? conditionName : group_name)}
+					{startCase(data.length === FIRST_INDEX ? conditionName : group_name)}
 				</div>
 
 				<div className={styles.icon_container}>
@@ -28,7 +34,7 @@ function CardItem({ item, editMode, control }) {
 
 			{data.map((childItem, index) => {
 				const { condition_name = '', attributes: controls = [] } = childItem;
-				const isLastItem = index === data.length - 1;
+				const isLastItem = index === data.length - FIRST_INDEX;
 
 				return (
 					<>
@@ -56,7 +62,7 @@ function CardItem({ item, editMode, control }) {
 								const Element = getFieldController(controlsObject.type) || null;
 
 								return (
-									<div className={styles.field_container}>
+									<div key={controlsObject?.label} className={styles.field_container}>
 										{editMode ? (
 											<>
 												<div className={styles.label}>
@@ -71,7 +77,7 @@ function CardItem({ item, editMode, control }) {
 												/>
 
 												<div className={styles.lower_current_value}>
-													Current value:
+													{t('allocation:current_value_label')}
 													{' '}
 													{isNumber(score)
 														? score
@@ -86,8 +92,8 @@ function CardItem({ item, editMode, control }) {
 
 												<div className={styles.current_value}>
 													{isNumber(score)
-														? score || 0
-														: startCase(score) || 0}
+														? score || GLOBAL_CONSTANTS.zeroth_index
+														: startCase(score) || GLOBAL_CONSTANTS.zeroth_index}
 												</div>
 											</>
 										)}

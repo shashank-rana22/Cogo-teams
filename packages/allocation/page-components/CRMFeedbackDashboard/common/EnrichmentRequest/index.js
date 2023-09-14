@@ -6,6 +6,7 @@ import {
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
 
@@ -15,6 +16,8 @@ function EnrichmentRequest({
 	checkedRowsId = [],
 	setActiveTab = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		onEnrichmentRequest = () => {},
 		loading = false,
@@ -24,7 +27,7 @@ function EnrichmentRequest({
 		thirdParty = '',
 		setThirdParty = () => {},
 		setThirdPartyPayload = () => {},
-	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId });
+	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId, t });
 
 	const geo = getGeoConstants();
 
@@ -64,7 +67,7 @@ function EnrichmentRequest({
 				}}
 				disabled={isEmpty(checkedRowsId)}
 			>
-				Create Enrichment Request
+				{t('allocation:create_enrichment_request')}
 			</Button>
 
 			<Modal
@@ -74,17 +77,17 @@ function EnrichmentRequest({
 				onClose={onCloseModal}
 				placement="top"
 			>
-				<Modal.Header title="Create Enrichment Request" />
+				<Modal.Header title={t('allocation:create_enrichment_request')} />
 
 				<Modal.Body className={styles.modal_body}>
-					Please select the Data Enrichment Agent(s) to send the enrichment request for the
+					{t('allocation:create_enrichment_request_phrase')}
 					{' '}
 					{checkedRowsId.length || 'these'}
 					{' '}
-					selected feedback(s):
+					{t('allocation:selected_feedbacks')}
 					<Select
 						className={styles.modal_select}
-						placeholder="Select 3rd Party Agent(s)"
+						placeholder={t('allocation:select_third_party_agents')}
 						value={thirdParty}
 						onChange={handleChange}
 						isClearable
@@ -100,7 +103,7 @@ function EnrichmentRequest({
 						onClick={onCloseModal}
 						disabled={loading}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 
 					<Button
@@ -112,7 +115,7 @@ function EnrichmentRequest({
 						onClick={onEnrichmentRequest}
 						loading={loading}
 					>
-						Send Request
+						{t('allocation:send_request')}
 					</Button>
 				</Modal.Footer>
 			</Modal>

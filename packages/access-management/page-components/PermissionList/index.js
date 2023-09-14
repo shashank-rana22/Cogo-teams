@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import useOnBoardRole from '../../hooks/useOnBoardRole';
@@ -10,6 +11,7 @@ import RoleDetails from './RoleDetails';
 import styles from './styles.module.css';
 
 function PermissionList() {
+	const { t } = useTranslation(['accessManagement']);
 	const props = useOnBoardRole();
 	const {
 		loading,
@@ -29,7 +31,7 @@ function PermissionList() {
 		<section className={styles.container}>
 			<Button className={styles.back_container} size="md" themeType="secondary" onClick={onBack}>
 				<IcMArrowBack fill="#221F20" style={{ marginRight: 4 }} />
-				Back
+				{t('accessManagement:roles_and_permission_button_back')}
 			</Button>
 
 			<RoleDetails

@@ -35,7 +35,7 @@ const invoicePaymentList = ({
 		id       : 'name',
 		accessor : (row) => (
 
-			<div style={{ marginLeft: '20px' }}>
+			<div>
 				{getByKey(row, 'paymentNumber') as string}
 			</div>
 
@@ -46,7 +46,7 @@ const invoicePaymentList = ({
 		Header   : 'Sage Reference Number',
 		id       : 'sageRefNumber',
 		accessor : (row) => (
-			<div style={{ marginLeft: '30px' }}>
+			<div>
 				{row?.sageRefNumber}
 			</div>
 

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetEngagementScoringAccountStats from '../../../../hooks/useGetEngagementScoringAccountStats';
@@ -9,6 +10,8 @@ import DistributionSettingsItem from './DistributionSettingsItem';
 import Header from './Header';
 import SettingsItem from './SettingsItem';
 import styles from './styles.module.css';
+
+const FIRST_INDEX = 1;
 
 function EditSetting(props) {
 	const {
@@ -61,41 +64,41 @@ function EditSetting(props) {
 	const handleClick = () => {
 		const watchFields = watch();
 
-		const valuesForPrefilling = [];
+		const VALUES_FOR_PREFILLING = [];
 
 		(preFilledList || []).forEach((element) => {
 			const { id = '' } = element;
 
-			const scores = {};
+			const SCORES = {};
 
 			Object.keys(watchFields).forEach((ele) => {
 				const idx = ele.indexOf('_');
 
-				if (ele.substring(0, idx) === id) {
-					const attribute = ele.substring(idx + 1);
+				if (ele.substring(GLOBAL_CONSTANTS.zeroth_index, idx) === id) {
+					const attribute = ele.substring(idx + FIRST_INDEX);
 
-					scores[attribute] = watchFields[ele];
-					scores.warmth = element.warmth;
+					SCORES[attribute] = watchFields[ele];
+					SCORES.warmth = element.warmth;
 				}
 			});
 
-			if (!isEmpty(scores)) {
-				valuesForPrefilling.push(scores);
+			if (!isEmpty(SCORES)) {
+				VALUES_FOR_PREFILLING.push(SCORES);
 			}
 		});
 
-		const limit = [];
+		const LIMIT = [];
 
-		valuesForPrefilling.forEach((element) => {
-			const obj = {};
-			obj.warmth = element.warmth || undefined;
-			obj.lower_limit = element.range_from || undefined;
-			obj.upper_limit = element.range_to || undefined;
+		VALUES_FOR_PREFILLING.forEach((element) => {
+			const OBJ = {};
+			OBJ.warmth = element.warmth || undefined;
+			OBJ.lower_limit = element.range_from || undefined;
+			OBJ.upper_limit = element.range_to || undefined;
 
-			limit.push(obj);
+			LIMIT.push(OBJ);
 		});
 
-		onUpdateStats(limit);
+		onUpdateStats(LIMIT);
 	};
 
 	return (

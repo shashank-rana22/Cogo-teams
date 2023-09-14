@@ -1,8 +1,9 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../../../../common/Form/getFieldController';
-import controls from '../../../../../../../configurations/get-list-objectives-filter-controls';
+import getControls from '../../../../../../../configurations/get-list-objectives-filter-controls';
 
 import styles from './styles.module.css';
 
@@ -14,6 +15,10 @@ function FilterForm({
 	setShowFilterPopover = () => { },
 	setValue = () => { },
 }) {
+	const { t } = useTranslation(['allocation']);
+
+	const controls = getControls({ t });
+
 	const onSubmit = async (values) => {
 		setParams((pv) => ({
 			...pv,
@@ -71,14 +76,14 @@ function FilterForm({
 					style={{ marginRight: 8 }}
 					onClick={onClickCancel}
 				>
-					Reset All
+					{t('allocation:reset_all_button')}
 				</Button>
 				<Button
 					type="submit"
 					size="md"
 					themeType="primary"
 				>
-					Apply
+					{t('allocation:apply_button')}
 				</Button>
 			</div>
 		</form>

@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 
 import AccountTransactionFunnel from './AccountTransactionFunnel';
@@ -8,6 +9,8 @@ import styles from './styles.module.css';
 import useSetObjectiveRequirements from './useSetObjectiveReuirements';
 
 const ObjectiveRequirements = forwardRef((props, ref) => {
+	const { t } = useTranslation(['allocation']);
+
 	const { formValues, setFormValues, disabled, setActiveStep, generalConfigFormState } = props;
 
 	const {
@@ -30,8 +33,8 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 	return (
 		<div ref={divRef} className={styles.container}>
 			<div className={styles.heading_container}>
-				<h3>Set Objective For Lead Scoring</h3>
-				<p>If no field is selected, it will automatically mean for all the inputs in that field</p>
+				<h3>{t('allocation:set_objective_lead_scoring')}</h3>
+				<p>{t('allocation:set_objective_lead_scoring_phrase')}</p>
 			</div>
 
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -66,7 +69,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 						themeType="primary"
 						disabled={disabled}
 					>
-						Proceed & Review
+						{t('allocation:proceed_and_review_button')}
 					</Button>
 				</div>
 			</form>

@@ -1,31 +1,36 @@
 import { Input, Table } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
-import CONFIGURATION_FILTER_TABLE_COLUMNS from '../../../../../../constants/configuration-filter-table-columns';
+import getConfigurationFilterTableColumns from '../../../../../../constants/configuration-filter-table-columns';
 
 import styles from './styles.module.css';
 
 function Published({ setSelectedVersion = () => {}, list, versionName, setVersionName }) {
-	const tableData = [];
+	const { t } = useTranslation(['allocation']);
+
+	const configurationFilterTableColumns = getConfigurationFilterTableColumns({ t });
+
+	const TABLE_DATA = [];
 
 	list.forEach((element) => {
 		if (element.status !== 'draft') {
-			tableData.push(element);
+			TABLE_DATA.push(element);
 		}
 	});
 
 	return (
 		<div className={styles.modal_body}>
 			<div className={styles.head_text}>
-				Select the version to create a new draft:
+				{t('allocation:version_to_create_new_draft')}
 			</div>
 
 			<div className={styles.supporting_text}>
-				Creating a new draft will overwrite the existing saved draft.
+				{t('allocation:creating_a_new_draft_will_overwrite')}
 			</div>
 
 			<Input
 				size="sm"
-				placeholder="Enter Draft Name"
+				placeholder={t('allocation:enter_draft_name_placeholder')}
 				style={{ marginBottom: '16px' }}
 				value={versionName}
 				onChange={(value) => setVersionName(value)}
@@ -33,8 +38,8 @@ function Published({ setSelectedVersion = () => {}, list, versionName, setVersio
 
 			<Table
 				className={styles.table}
-				columns={CONFIGURATION_FILTER_TABLE_COLUMNS}
-				data={tableData}
+				columns={configurationFilterTableColumns}
+				data={TABLE_DATA}
 				selectType="single"
 				onRowClick={(row) => setSelectedVersion(row)}
 			/>

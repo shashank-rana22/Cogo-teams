@@ -6,7 +6,6 @@ import { useContext, useState } from 'react';
 import BookingRequirements from './BookingRequirements';
 import styles from './styles.module.css';
 
-const SHOW_ALL_TASKS = ['manager', 'admin'];
 const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops'];
 const SUPPLY_REMARKS_ROLES = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager'];
 
@@ -29,9 +28,6 @@ function Header({
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
 	const showOthersTasks = !!stakeholderConfig?.tasks?.show_others_tasks;
-
-	const showToogle = SHOW_ALL_TASKS.some((item) => activeStakeholder?.includes(item));
-
 	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
@@ -64,7 +60,7 @@ function Header({
 						</div>
 					) : null}
 
-					{showOthersTasks && !showToogle ? (
+					{showOthersTasks ? (
 						<div className={styles.toggle_container}>
 							<span>Show only my tasks</span>
 							<Toggle

@@ -1,5 +1,6 @@
 import { Popover, Chips, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import SearchInput from '../../../../common/SearchInput';
@@ -12,15 +13,25 @@ function Filters({
 	navStatus = {},
 	setNavStatus = () => {},
 }) {
+	const { t } = useTranslation(['accessManagement']);
 	const content = (
 		<section className={styles.filters_popover_content}>
-			<span>Navigation Status</span>
+			<span>{t('accessManagement:roles_and_permission_filters_navigation_status_heading')}</span>
 			<Chips
 				className={styles.chips_container}
 				items={[
-					{ children: 'Assigned', key: 'assigned' },
-					{ children: 'Not Assigned', key: 'not_assigned' },
-					{ children: 'All', key: 'all' },
+					{
+						children : t('accessManagement:roles_and_permission_filters_children_assigned'),
+						key      : 'assigned',
+					},
+					{
+						children : t('accessManagement:roles_and_permission_filters_children_not_assigned'),
+						key      : 'not_assigned',
+					},
+					{
+						children : t('accessManagement:roles_and_permission_filters_children_all_assigned'),
+						key      : 'all',
+					},
 				]}
 				selectedItems={navStatus}
 				onItemChange={(val) => setNavStatus(val)}
@@ -33,11 +44,11 @@ function Filters({
 				value={searchString}
 				onChange={onChangeSearchNavigation}
 				size="md"
-				placeholder="Search Navigation"
+				placeholder={t('accessManagement:roles_and_permission_search_navigation_placeholder')}
 			/>
 			<Popover placement="top" render={content} interactive className={styles.filters_popover}>
 				<Button themeType="tertiary" size="lg">
-					Filters
+					{t('accessManagement:roles_and_permission_filters_label')}
 					{' '}
 					<IcMFilter />
 				</Button>

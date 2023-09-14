@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../../../../../../../common/Form/getFieldController';
@@ -15,6 +16,8 @@ function FilterForm({
 	setShowFilterPopover = () => { },
 	setValue = () => { },
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const { id: partnerId = '' } = useSelector((state) => state.profile.partner);
 
 	const onSubmit = async (values) => {
@@ -31,7 +34,7 @@ function FilterForm({
 		setShowFilterPopover(false);
 	};
 
-	const newControls = getControls(partnerId);
+	const newControls = getControls(partnerId, t);
 
 	const onClickCancel = () => {
 		newControls.forEach((item) => {
@@ -78,14 +81,14 @@ function FilterForm({
 					style={{ marginRight: 8 }}
 					onClick={onClickCancel}
 				>
-					Reset All
+					{t('allocation:reset_all_button')}
 				</Button>
 				<Button
 					type="submit"
 					size="md"
 					themeType="primary"
 				>
-					Apply
+					{t('allocation:apply_button')}
 				</Button>
 			</div>
 		</form>

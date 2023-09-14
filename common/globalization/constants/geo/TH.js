@@ -51,6 +51,7 @@ export default {
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		cogo_auditor_id                  : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
@@ -96,6 +97,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		cogo_auditor               : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		ff_cost_booking_executive  : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
@@ -197,6 +199,7 @@ export default {
 		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
+		account_receivable_executive     : 'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3',
 		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716',
@@ -458,6 +461,7 @@ export default {
 					'manage_forecast',
 					'rfq_enquiries',
 					'rates_sheets',
+					'rate_density',
 				],
 			},
 		},

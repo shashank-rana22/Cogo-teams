@@ -1,10 +1,10 @@
 import getEntityOptions from '../helpers/get-entity-options';
 
-const controls = [
+const controls = ({ t = () => {} }) => [
 	{
 		name        : 'role_ids',
-		label       : 'By Agent Role',
-		placeholder : 'select',
+		label       : t('allocation:by_agent_role_label'),
+		placeholder : t('allocation:select_placeholder'),
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_roles',
 		initialCall : true,
@@ -21,8 +21,8 @@ const controls = [
 	},
 	{
 		name        : 'partner_id',
-		label       : 'By Entity',
-		placeholder : 'select',
+		label       : t('allocation:by_entity_label'),
+		placeholder : t('allocation:select_placeholder'),
 		type        : 'select',
 		options     : getEntityOptions(),
 		caret       : true,
@@ -31,20 +31,20 @@ const controls = [
 	},
 	{
 		name        : 'channels',
-		label       : 'By Channel',
-		placeholder : 'select',
+		label       : t('allocation:by_channel_label'),
+		placeholder : t('allocation:select_placeholder'),
 		type        : 'select',
 		options     : [
 			{
-				label : 'SME',
+				label : t('allocation:sme_options'),
 				value : 'sme',
 			},
 			{
-				label : 'Enterprise',
+				label : t('allocation:enterprise'),
 				value : 'enterprise',
 			},
 			{
-				label : 'CP',
+				label : t('allocation:cp_options'),
 				value : 'cp',
 			},
 		],
@@ -54,16 +54,16 @@ const controls = [
 	},
 	{
 		name        : 'objective_type',
-		label       : 'By Objective Type',
-		placeholder : 'select',
+		label       : t('allocation:by_objective_type'),
+		placeholder : t('allocation:select_placeholder'),
 		type        : 'select',
 		options     : [
 			{
-				label : 'Company',
+				label : t('allocation:company_options'),
 				value : 'company',
 			},
 			{
-				label : 'Team',
+				label : t('allocation:team_options'),
 				value : 'team',
 			},
 		],

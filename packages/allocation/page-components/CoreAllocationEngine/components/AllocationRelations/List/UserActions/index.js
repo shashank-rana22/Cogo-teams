@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import useRelationActions from '../../../../hooks/useRelationActions';
 
@@ -11,26 +12,28 @@ function UserActions({
 	checkedRowsId,
 	onClearSelection = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const requestType = confirmModalState.type;
 
 	const DISPLAY_TEXT_MAPPING = {
 		approve: {
-			title     : `${startCase(requestType)} allocation request`,
-			body_text : `${startCase(requestType)} this Request`,
+			title     : `${startCase(requestType)} ${t('allocation:allocation_request')}`,
+			body_text : `${startCase(requestType)} ${t('allocation:this_request_text')}`,
 		},
 		reject: {
-			title     : `${startCase(requestType)} allocation request`,
-			body_text : `${startCase(requestType)} this Request`,
+			title     : `${startCase(requestType)} ${t('allocation:allocation_request')}`,
+			body_text : `${startCase(requestType)} ${t('allocation:this_request_text')}`,
 		},
 		delete: {
-			title     : `${startCase(requestType)} allocation relation`,
-			body_text : `${startCase(requestType)} this Allocation Relation`,
+			title     : `${startCase(requestType)} ${t('allocation:allocation_relation')}`,
+			body_text : `${startCase(requestType)} ${t('allocation:this_allocation_relation')}`,
 		},
 		approve_all: {
-			title     : 'Bulk approve Requests',
-			body_text : `Approve ${(checkedRowsId || []).length}  Request(s) `,
+			title     : t('allocation:bulk_approve_requests'),
+			body_text : `${t('allocation:approved_label')} 
+			${(checkedRowsId || []).length} ${t('allocation:request_validate')}`,
 		},
-
 	};
 
 	const {
@@ -41,6 +44,7 @@ function UserActions({
 		setConfirmModalState,
 		checkedRowsId,
 		onClearSelection,
+		t,
 	});
 
 	return (
@@ -48,7 +52,7 @@ function UserActions({
 			<Modal.Header title={`${DISPLAY_TEXT_MAPPING[requestType].title}`} />
 
 			<Modal.Body>
-				Are you sure you want to
+				{t('allocation:are_you_sure_you_want_to')}
 				{' '}
 				{DISPLAY_TEXT_MAPPING[requestType].body_text}
 				?
@@ -63,7 +67,7 @@ function UserActions({
 						disabled={loadingUpdateRelations}
 						onClick={handleUpdateRelation}
 					>
-						Yes
+						{t('allocation:yes_label')}
 					</Button>
 				</div>
 			</Modal.Footer>

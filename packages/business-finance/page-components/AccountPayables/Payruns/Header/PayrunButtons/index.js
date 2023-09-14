@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -17,7 +18,7 @@ function PayrunButtons({
 	globalFilters = {},
 	selectedPayrun = null,
 	setSelectedPayrun = () => {},
-	checkedRow = null,
+	checkedRow = {},
 	setCheckedRow = () => {},
 	itemData = {},
 	activeEntity = '',
@@ -25,6 +26,11 @@ function PayrunButtons({
 	selectedIds = [],
 	setSelectedIds = () => {},
 }) {
+	const { push } = useRouter();
+
+	const handleClick = () => {
+		push(`/business-finance/account-payables/audit/${checkedRow.id}`);
+	};
 	const { allotEntityBank, allotEntityLoading, getEntityBank } = useGetAllotEntityBank({
 		selectedPayrun, checkedRow,
 	});
@@ -74,7 +80,7 @@ function PayrunButtons({
 	if (activePayrunTab === 'INITIATED' && !isInvoiceView) {
 		return (
 			<div>
-				<Button className={styles.upload_button} disabled={isEmpty(checkedRow)}>
+				<Button className={styles.upload_button} disabled={isEmpty(checkedRow)} onClick={handleClick}>
 					Go To Audit
 				</Button>
 			</div>

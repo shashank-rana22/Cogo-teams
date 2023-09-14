@@ -4,11 +4,14 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
+const FIRST_INDEX = 1;
+
 const useEditExpertiseParameters = ({
 	list = [],
 	expertiseRefetch = () => {},
 	setEditMode = () => {},
 	cardRefetch,
+	t = () => {},
 }) => {
 	const formProps = useForm();
 
@@ -22,35 +25,35 @@ const useEditExpertiseParameters = ({
 
 	const onSave = async (formValues = {}) => {
 		try {
-			const attributes = [];
+			const ATTRIBUTES = [];
 
 			list.forEach((group) => {
 				group.data.forEach((service) => {
 					const scores = { id: service.id };
-					const scoring_criteria = {};
+					const SCORING_CRITERIA = {};
 
 					Object.keys(formValues).forEach((formAttr) => {
 						service.attributes.forEach((attr) => {
 							if (attr.name === formAttr && formValues[formAttr]) {
-								const attributeName = formAttr.substring(formAttr.indexOf('_') + 1);
-								scoring_criteria[attributeName] = formValues[formAttr];
+								const attributeName = formAttr.substring(formAttr.indexOf('_') + FIRST_INDEX);
+								SCORING_CRITERIA[attributeName] = formValues[formAttr];
 							}
 						});
 					});
 
-					scores.scoring_criteria = scoring_criteria;
+					scores.scoring_criteria = SCORING_CRITERIA;
 
 					if (!isEmpty(scores.scoring_criteria)) {
-						attributes.push(scores);
+						ATTRIBUTES.push(scores);
 					}
 				});
 			});
 
-			if (isEmpty(attributes)) {
-				Toast.error('No change in scores');
+			if (isEmpty(ATTRIBUTES)) {
+				Toast.error(t('allocation:no_change_in_scores'));
 				return;
 			}
-			const payload = { attributes };
+			const payload = { attributes: ATTRIBUTES };
 
 			await trigger({
 				data: payload,
@@ -63,7 +66,7 @@ const useEditExpertiseParameters = ({
 			reset();
 
 			cardRefetch();
-			Toast.success('Edited Successfully!');
+			Toast.success(t('allocation:edited_successfully_toast'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

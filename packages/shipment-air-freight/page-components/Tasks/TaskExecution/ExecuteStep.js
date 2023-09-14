@@ -20,7 +20,6 @@ function ExecuteStep({
 	serviceIdMapping = [],
 	shipment_data = {},
 	primary_service = {},
-	getShipment = () => {},
 	getShipmentTimeline = () => {},
 	services = [],
 	tradeType = '',
@@ -62,10 +61,10 @@ function ExecuteStep({
 		currentStep,
 		isLastStep,
 		getApisData,
-		showElements,
-		getShipment,
 		getShipmentTimeline,
 		services,
+		shipment_data,
+		primary_service,
 	});
 
 	const formValues = watch();

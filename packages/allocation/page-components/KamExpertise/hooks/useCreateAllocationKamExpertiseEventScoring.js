@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 function useCreateAllocationKamExpertiseEventScoring(props) {
-	const { onClose, expertiseRefetch, cardRefetch } = props;
+	const { onClose, expertiseRefetch, cardRefetch, t = () => {} } = props;
 
 	const formProps = useForm({
 		defaultValues: {
@@ -64,7 +64,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 
 			onClose();
 
-			Toast.success('Condition Added Successfully');
+			Toast.success(t('allocation:condition_added_successfully'));
 
 			expertiseRefetch();
 			cardRefetch();

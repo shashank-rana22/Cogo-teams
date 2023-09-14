@@ -1,11 +1,14 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
 import getControls from '../../../../configurations/get-configuration-controls';
 
 import Child from './Child';
 
 function FieldArray(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		name, control, watch, engagementType, refetch, editLoading,
 	} = props;
@@ -15,12 +18,12 @@ function FieldArray(props) {
 	const watchLifecycleStage = watch('single_item');
 	const eventsToExclude = watchLifecycleStage.map((obj) => obj.event_name);
 
-	const { controls = [] } = getControls({ eventsToExclude, engagementType });
+	const { controls = [] } = getControls({ eventsToExclude, engagementType, t });
 
-	const childValues = {};
+	const CHILD_VALUES = {};
 
 	controls.forEach((item) => {
-		childValues[item.name] = '';
+		CHILD_VALUES[item.name] = '';
 	});
 
 	return (
@@ -44,11 +47,10 @@ function FieldArray(props) {
 
 			<Button
 				themeType="secondary"
-				onClick={() => append(childValues)}
+				onClick={() => append(CHILD_VALUES)}
 				style={{ marginTop: '8px' }}
 			>
-				{' '}
-				+ Add Lifecycle Item
+				{t('allocation:add_lifecycle_item_button')}
 			</Button>
 
 		</>

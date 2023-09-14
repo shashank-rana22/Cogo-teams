@@ -1,17 +1,17 @@
 import Global from '../components/Dashboard/Global';
 import Objectives from '../components/Dashboard/Objectives';
 
-const DASHBOARD_COMPONENTS_MAPPING = {
+const getDashboardComponentsMapping = ({ t = () => {} }) => ({
 	global: {
 		name      : 'global',
-		title     : 'Global',
+		title     : t('allocation:tab_global_label'),
 		component : Global,
 	},
 	objectives: {
 		name      : 'objectives',
-		title     : 'Objectives',
+		title     : t('allocation:tab_objective_label'),
 		component : Objectives,
 	},
-};
+});
 
-export default DASHBOARD_COMPONENTS_MAPPING;
+export default getDashboardComponentsMapping;

@@ -2,6 +2,7 @@ import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import controls from '../../../configurations/upload-final-awb-controls';
@@ -62,6 +63,7 @@ function UploadModal({
 	edit = false,
 	setEdit = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	const { control, handleSubmit, formState: { errors } } = useForm();
 
 	const { loading, createDocument } = useCreateShipmentDocument();
@@ -92,16 +94,19 @@ function UploadModal({
 					scroll={false}
 					size="md"
 				>
-					<Modal.Header title={(<h5>Upload Airway Bill</h5>)} style={{ paddingBottom: 0 }} />
+					<Modal.Header
+						title={(<h5>{t('printingDesk:final_awb_upload_modal_upload_airway_bill_header')}</h5>)}
+						style={{ paddingBottom: 0 }}
+					/>
 					<Modal.Body>
-						<Layout fields={controls} errors={errors} control={control} />
+						<Layout fields={controls(t)} errors={errors} control={control} />
 						<Button
 							style={{ marginTop: '20px' }}
 							onClick={handleSubmit(onSubmit)}
 							disabled={loading || updateLoading}
 							themeType="accent"
 						>
-							Upload
+							{t('printingDesk:final_awb_upload_modal_upload_button_text')}
 						</Button>
 					</Modal.Body>
 				</Modal>

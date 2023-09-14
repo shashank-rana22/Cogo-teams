@@ -1,6 +1,6 @@
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
 
-const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false }) => {
+const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false, t = () => {} }) => {
 	const asyncControl = useGetAsyncOptionsMicroservice({
 		labelKey : 'condition_name',
 		valueKey : 'id',
@@ -16,42 +16,42 @@ const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false }
 	return [
 		{
 			name        : 'event_configuration_detail_id',
-			label       : 'Condition Name',
+			label       : t('allocation:event_configuration_detail_id_label'),
 			placeholder : '',
 			...asyncControl,
 			type        : 'select',
 			rules       : {
-				required: 'Condition Parameter is required',
+				required: t('allocation:event_configuration_detail_id_rules_required'),
 			},
 			isClearable: true,
 		},
 		{
 			name        : 'scoring_type',
-			label       : 'Score Type',
+			label       : t('allocation:scoring_type_label'),
 			placeholder : '',
 			type        : 'select',
 			options     : [
-				{ value: 'absolute', label: 'Absolute' },
-				{ value: 'percentage', label: 'Percentage' },
-				{ value: 'tat', label: 'TAT' },
+				{ value: 'absolute', label: t('allocation:scoring_type_options_absolute') },
+				{ value: 'percentage', label: t('allocation:scoring_type_options_percentage') },
+				{ value: 'tat', label: t('allocation:scoring_type_options_tat') },
 			],
 			rules: {
-				required: 'Score Type is required',
+				required: t('allocation:scoring_type_rules_required'),
 			},
 			isClearable: true,
 		},
 		...modifiedControls,
 		{
 			name    : 'impact',
-			label   : 'Impact',
+			label   : t('allocation:impact_label'),
 			type    : 'select',
 			options : [
-				{ value: 'low', label: 'Low' },
-				{ value: 'medium', label: 'Medium' },
-				{ value: 'high', label: 'High' },
+				{ value: 'low', label: t('allocation:impact_options_low') },
+				{ value: 'medium', label: t('allocation:impact_options_medium') },
+				{ value: 'high', label: t('allocation:impact_options_high') },
 			],
 			rules: {
-				required: 'Impact is required',
+				required: t('allocation:impact_rules_required'),
 			},
 			isClearable: true,
 		},

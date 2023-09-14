@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
-import GetSortingData from '../components/Outstanding/OutstandingList/SettlementTable/sorting';
+import GetSortingData from '../components/Outstanding/OverAllOutstanding/OutstandingList/SettlementTable/sorting';
 
 interface Sort {
 	sortType?: string;
@@ -24,6 +24,7 @@ interface Props {
 }
 const MAX_LEN_FOR_TEXT = 12;
 
+// eslint-disable-next-line custom-eslint/function-name-check
 const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters, invoiceKeys }:Props) => [
 	{
 		Header   : 'Reference Number',

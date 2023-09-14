@@ -43,7 +43,7 @@ function ReviewDoc({
 			performed_by_org_id : task.organization_id,
 		};
 	}
-	const { updateDocument } = useUpdateShipmentDocuments(
+	const { updateDocument = () => {}, taskUpdateLoading = false } = useUpdateShipmentDocuments(
 		{ refetch: newRefetch },
 	);
 
@@ -162,14 +162,14 @@ function ReviewDoc({
 					<Button
 						onClick={handleAmmend}
 						themeType="secondary"
-						disabled={loading}
+						disabled={loading || taskUpdateLoading}
 					>
 						Amend
 					</Button>
 
 					<Button
 						onClick={handleApprove}
-						disabled={loading}
+						disabled={loading || taskUpdateLoading}
 					>
 						Approve
 					</Button>
@@ -179,13 +179,13 @@ function ReviewDoc({
 					<Button
 						onClick={onClose}
 						themeType="secondary"
-						disabled={loading}
+						disabled={loading || taskUpdateLoading}
 					>
 						Cancel
 					</Button>
 					<Button
 						onClick={handleSubmit}
-						disabled={loading}
+						disabled={loading || taskUpdateLoading}
 					>
 						Submit
 					</Button>

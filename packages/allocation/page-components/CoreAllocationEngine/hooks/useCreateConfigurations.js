@@ -1,17 +1,21 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import getCreateConfigurationsControls from '../configurations/get-configurations-create-controls';
 
+const FIRST_INDEX = 1;
+
 const useCreateConfigurations = ({
 	viewType = '',
 	item = {},
 	setShow = () => {},
 	listRefetch = () => {},
+	t = () => {},
 }) => {
 	const [segment, setSegment] = useState();
 
@@ -27,7 +31,7 @@ const useCreateConfigurations = ({
 		authkey,
 	}, { manual: true });
 
-	const controls = getCreateConfigurationsControls({ setSegment });
+	const controls = getCreateConfigurationsControls({ setSegment, t });
 
 	const {
 		service_type,
@@ -121,7 +125,7 @@ const useCreateConfigurations = ({
 			return scheduleData.dates_of_month;
 		}
 
-		return 1;
+		return FIRST_INDEX;
 	};
 
 	const onSubmit = async (values = {}) => {
@@ -135,7 +139,7 @@ const useCreateConfigurations = ({
 			days                 : getDays(scheduleData),
 			is_lead_user_segment : values.service_type === 'lead_organization',
 
-			...(values.user_ids?.length === 0 && {
+			...(values.user_ids?.length === GLOBAL_CONSTANTS.zeroth_index && {
 				user_ids: undefined,
 			}),
 			segment_type: segment,
@@ -158,7 +162,8 @@ const useCreateConfigurations = ({
 
 			listRefetch();
 
-			Toast.success(`Configuration ${viewType}ed successfully`);
+			Toast.success(`${t('allocation:configuration_label')}${' '} 
+			${viewType}${t('allocation:ed_label')} ${t('allocation:successfully_label')} `);
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

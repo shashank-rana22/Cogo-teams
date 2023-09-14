@@ -19,7 +19,7 @@ function Sop({ shipment_data = {}, primary_service = {} }) {
 		shipment_id: shipment_data?.id || '',
 	});
 
-	const { sopData, loading } = useGetSopList({
+	const { sopData, loading, refetch } = useGetSopList({
 		filters,
 		trade_partners_details,
 		tradePartnerData,
@@ -80,7 +80,9 @@ function Sop({ shipment_data = {}, primary_service = {} }) {
 					setFilters={setFilters}
 					reload={reload}
 					setReload={setReload}
+					refetch={refetch}
 				/>
+
 			) : null}
 
 			<div className={styles.sop_list}>{content}</div>

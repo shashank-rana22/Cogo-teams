@@ -6,14 +6,14 @@ import getObjectiveFilterControls from '../../../../../configurations/get-object
 
 const MIN_LENGTH = 0;
 
-const controls = getObjectiveFilterControls();
-
 const useFilterContent = (props) => {
-	const { setParams } = props;
+	const { setParams, t = () => {} } = props;
 
 	const [showFilters, setShowFilters] = useState(false);
 
 	const [filters, setFilters] = useState({});
+
+	const controls = getObjectiveFilterControls({ t });
 
 	const formProps = useForm();
 

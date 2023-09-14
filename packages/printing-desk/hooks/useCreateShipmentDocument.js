@@ -1,8 +1,10 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 const useCreateShipmentDocument = () => {
+	const { t } = useTranslation(['printingDesk']);
 	const [{ loading }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/documents',
@@ -17,7 +19,8 @@ const useCreateShipmentDocument = () => {
 				data: payload,
 			});
 			listAPI({ filters: {} });
-			Toast.success('Document Created Successfully');
+
+			Toast.success(t('printingDesk:common_success_doc_created_message'));
 		} catch (err) {
 			toastApiError(err);
 		}

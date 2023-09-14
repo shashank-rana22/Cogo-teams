@@ -1,36 +1,41 @@
 import { Pill } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-const CARD_DATA_MAPPING = [
+const getCardDataMapping = ({ t = () => {} }) => [
 	{
 		key   : 'country',
-		label : 'Country',
+		label : t('allocation:country'),
 	},
 	{
 		key   : 'state',
-		label : 'State',
+		label : t('allocation:state'),
 	},
 	{
 		key   : 'city',
-		label : 'City',
+		label : t('allocation:city'),
 	},
 	{
 		key   : 'pincode',
-		label : 'Pincode',
+		label : t('allocation:pincode'),
 	},
 ];
 
 function OrganizationDetailsCard(props) {
+	const { t } = useTranslation(['allocation']);
+
+	const cardDataMapping = getCardDataMapping({ t });
+
 	const { organizationDetails } = props;
 
 	return (
 		<div className={styles.container}>
-			<h4 className={styles.heading}>Organization Details</h4>
+			<h4 className={styles.heading}>{t('allocation:organization_details')}</h4>
 
 			<div className={styles.card}>
-				{CARD_DATA_MAPPING.map((item) => {
+				{(cardDataMapping || []).map((item) => {
 					const { key, label } = item;
 
 					const locationItem = organizationDetails[key];
@@ -44,7 +49,7 @@ function OrganizationDetailsCard(props) {
 
 							{isEmpty(locationItem) ? (
 								<div className={styles.not_found}>
-									Not found
+									{t('allocation:not_found_label')}
 								</div>
 							) : (
 								<div className={styles.pills}>

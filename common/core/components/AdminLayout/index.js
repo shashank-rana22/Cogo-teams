@@ -4,6 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
@@ -23,11 +24,16 @@ const WHITE_BACKGROUND_MAPPING = [
 	'/[partner_id]/learning/course/[course_id]',
 	'/[partner_id]/learning/course/introduction',
 	'/[partner_id]/learning/course/preview',
+	'/[partner_id]/checkout/[checkout_id]',
+	'/[partner_id]/book/[spot_search_id]',
+	'/[partner_id]/service-discovery',
 ];
 
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
+	const { t } = useTranslation(['common']);
+
 	const {
 		user_data,
 		pathname,
@@ -61,7 +67,7 @@ function AdminLayout({
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
-	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });
+	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys, t });
 
 	const { nav_items = {} } = configs || {};
 
@@ -74,7 +80,7 @@ function AdminLayout({
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
-			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
 			<main className={styles.children_container}>{children}</main>

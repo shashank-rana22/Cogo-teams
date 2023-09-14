@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useBulkDeallocation from '../../../hooks/useBulkDeallocation';
 
@@ -15,6 +16,8 @@ function DeallocateModal({
 	setModalDetailsArray = () => {},
 	refetch = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const isSingleSelected = modalDetailsArray?.length === DEFAULT_CHECKED_ACCOUNT;
 
 	const { onDeallocate } = useBulkDeallocation({
@@ -23,6 +26,7 @@ function DeallocateModal({
 		setCheckedRowsId,
 		setModalDetailsArray,
 		refetch,
+		t,
 	});
 
 	return (
@@ -31,7 +35,7 @@ function DeallocateModal({
 			onClose={() => setShowDeallocateModal(false)}
 			size={isSingleSelected ? 'lg' : 'md'}
 		>
-			<Modal.Header title="De - Allocate" />
+			<Modal.Header title={t('allocation:de_allocate_heading')} />
 
 			<Modal.Body>
 				{isSingleSelected
@@ -45,10 +49,11 @@ function DeallocateModal({
 					themeType="secondary"
 					onClick={() => setShowDeallocateModal(false)}
 				>
-					Cancel
-
+					{t('allocation:cancel_button')}
 				</Button>
-				<Button type="button" style={{ marginLeft: '8px' }} onClick={() => onDeallocate()}>De-Allocate</Button>
+				<Button type="button" style={{ marginLeft: '8px' }} onClick={() => onDeallocate()}>
+					{t('allocation:de_allocate_button')}
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

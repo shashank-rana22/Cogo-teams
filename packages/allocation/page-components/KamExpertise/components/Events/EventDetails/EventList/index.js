@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../common/EmptyState';
 
@@ -7,6 +8,8 @@ import EventLoadingState from './EventLoadingState';
 import styles from './styles.module.css';
 
 function EventList(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { list, setEventListData, loading, listRefetch } = props;
 
 	if (loading) {
@@ -22,7 +25,7 @@ function EventList(props) {
 					height="250px"
 					width="400px"
 					flexDirection="column"
-					emptyText="Events not Found"
+					emptyText={t('allocation:events_not_found_label')}
 					textSize="20px"
 				/>
 			</div>

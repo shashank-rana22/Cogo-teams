@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateBulkEnrichment = ({ setActiveTab = () => {}, checkedRowsId = [] }) => {
+const useCreateBulkEnrichment = ({ setActiveTab = () => {}, checkedRowsId = [], t = () => {} }) => {
 	const [isOpenModal, setisOpenModal] = useState(false);
 
 	const onCloseModal = () => {
@@ -36,7 +36,7 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, checkedRowsId = [] }
 				data: payload,
 			});
 
-			Toast.success('Request has been initiated successfully.');
+			Toast.success(t('allocation:request_initiated_successfully'));
 
 			onCloseModal();
 

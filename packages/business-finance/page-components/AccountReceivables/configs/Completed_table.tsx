@@ -60,6 +60,7 @@ interface InvoiceTable {
 	totalRows?:object[],
 	isHeaderChecked?:boolean,
 	setIsHeaderChecked?:Function,
+	showFilters?: boolean,
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
@@ -83,6 +84,7 @@ const completedColumn = ({
 	isHeaderChecked,
 	setIsHeaderChecked,
 	entityCode,
+	showFilters = true,
 }: InvoiceTable) => [
 	{
 		Header: <HeaderCheckbox
@@ -451,10 +453,12 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<Remarks itemData={row} />
-				<InvoiceDetails
-					item={row}
-					entityCode={entityCode}
-				/>
+				{showFilters ? (
+					<InvoiceDetails
+						item={row}
+						entityCode={entityCode}
+					/>
+				) : null}
 				<RenderIRNGenerated
 					itemData={row}
 					refetch={refetch}

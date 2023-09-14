@@ -1,4 +1,5 @@
 import { Select, Modal, Button, MultiSelect } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import useImportRoles from '../../../hooks/useImportRoles';
@@ -7,6 +8,7 @@ import Priority from './Priority';
 import styles from './styles.module.css';
 
 function ImportRoles({ show, onClose, onSubmit = () => {} }) {
+	const { t } = useTranslation(['accessManagement']);
 	const {
 		handleSubmit,
 		setFormvalues,
@@ -28,29 +30,40 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 			scroll={false}
 			className={styles.modal_container}
 		>
-			<Modal.Header title={(<h3>Import Roles</h3>)} />
+			<Modal.Header title={(
+				<h3>
+					{t('accessManagement:roles_and_permission_permission_list_import_roles_heading')}
+				</h3>
+			)}
+			/>
 			<Modal.Body>
 				<div className="disclaimer">
-					<h3>Disclaimer</h3>
+					<h3>{t('accessManagement:roles_and_permission_permission_list_import_roles_disclainer')}</h3>
 					<span>
-						Please note that importing roles will only prefill permissions into
-						the navigations. You still need to go to each navigation and save
-						them
+						{t('accessManagement:roles_and_permission_permission_list_import_roles_description')}
 					</span>
 				</div>
 				{view === 'import' ? (
 					<div className={styles.partner_roles}>
-						<h4>Select Partner</h4>
+						<h4>
+							{t('accessManagement:roles_and_permission_permission_list_import_roles_select_partner')}
+						</h4>
 						<Select
 							{...partnerOptions}
-							placeholder="Select Partner"
+							placeholder={
+								t('accessManagement:roles_and_permission_permission_list_import_roles_select_partner')
+							}
 							value={formValues.partner_id}
 							onChange={(val) => setFormvalues({ ...formValues, partner_id: val })}
 							isClearable
 						/>
 						{formValues?.partner_id ? (
 							<div className={styles.partner_roles}>
-								<h4>Select Partner Roles</h4>
+								<h4>
+									{
+							t('accessManagement:roles_and_permission_permission_list_import_roles_select_partner_role')
+									}
+								</h4>
 								<MultiSelect
 									{...partnerRoleOptions}
 									value={formValues.role_ids}
@@ -77,7 +90,7 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 					themeType="secondary"
 					onClick={view === 'priority' ? () => setView('import') : onClose}
 				>
-					Cancel
+					{t('accessManagement:roles_and_permission_permission_list_import_roles_select_cancel_button')}
 				</Button>
 				<Button
 					size="md"

@@ -3,7 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useUpdateAllocationPreferences = ({ item = {}, setShow = () => {}, listRefetch = () => {} }) => {
+const useUpdateAllocationPreferences = ({
+	item = {},
+	setShow = () => {},
+	listRefetch = () => {},
+	t = () => {},
+}) => {
 	const [radioValue, setRadioValue] = useState();
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -26,7 +31,7 @@ const useUpdateAllocationPreferences = ({ item = {}, setShow = () => {}, listRef
 			listRefetch();
 
 			Toast.success(
-				'Preferences saved successfully! Please check after sometime.',
+				t('allocation:update_preferences_toast_success'),
 			);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

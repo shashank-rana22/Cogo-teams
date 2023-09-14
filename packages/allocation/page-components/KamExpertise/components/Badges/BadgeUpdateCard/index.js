@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 
@@ -9,6 +10,7 @@ const InputController = getFieldController('number');
 const UploadController = getFieldController('fileUpload');
 
 function BadgeUpdateCard(props) {
+	const { t } = useTranslation(['allocation']);
 	const {
 		badgeItemData = {},
 		control,
@@ -34,7 +36,7 @@ function BadgeUpdateCard(props) {
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 			<div className={styles.display_flex}>
 				<div>
-					<p className={styles.medal_text}>Medal</p>
+					<p className={styles.medal_text}>{t('allocation:medal_label')}</p>
 
 					<p>{medalType}</p>
 				</div>
@@ -42,7 +44,7 @@ function BadgeUpdateCard(props) {
 				<div className={styles.vertical_line} />
 
 				<div>
-					<p style={{ color: '#4f4f4f' }}>Score</p>
+					<p style={{ color: '#4f4f4f' }}>{t('allocation:score_label')}</p>
 
 					<InputController
 						name={`${medalType}_value`}
@@ -52,7 +54,7 @@ function BadgeUpdateCard(props) {
 						size="sm"
 						placeholder="000"
 						rules={{
-							required: 'Score is required',
+							required: t('allocation:score_is_required'),
 						}}
 						type="number"
 						disabled={loading}
@@ -67,7 +69,7 @@ function BadgeUpdateCard(props) {
 			<div className={styles.lower_subheader2}>
 				{medalType}
 				{' '}
-				Medal
+				{t('allocation:medal_label')}
 			</div>
 
 			<div className={styles.file_select_style}>
@@ -78,7 +80,7 @@ function BadgeUpdateCard(props) {
 						disabled={loading}
 						accept=".png, .jpeg"
 						rules={isEmpty(badgeItemData) ? {
-							required: 'Image is required',
+							required: t('allocation:image_is_required'),
 						} : {}}
 					/>
 				</div>
@@ -115,7 +117,7 @@ function BadgeUpdateCard(props) {
 						themeType="primary"
 						id="save_request_btn"
 					>
-						Save
+						{t('allocation:save_button')}
 					</Button>
 				</div>
 			)}

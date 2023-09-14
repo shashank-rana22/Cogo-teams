@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -8,6 +9,8 @@ function PublishVersionModal({
 	onCreate,
 	publishLoading,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<Modal
 			size="md"
@@ -19,13 +22,13 @@ function PublishVersionModal({
 			}}
 		>
 
-			<Modal.Header title="Publish Draft" />
+			<Modal.Header title={t('allocation:publish_draft')} />
 
 			<Modal.Body>
 				<div className={styles.text}>
-					Are you sure you wish to publish
+					{t('allocation:are_you_sure_you_wish_to_publish')}
 					{' '}
-					<b>Current Draft</b>
+					<b>{t('allocation:current_draft')}</b>
 					{' '}
 					?
 				</div>
@@ -40,7 +43,7 @@ function PublishVersionModal({
 					disabled={publishLoading}
 					onClick={() => setShowPublishModal(false)}
 				>
-					Cancel
+					{t('allocation:cancel_button')}
 				</Button>
 
 				<Button
@@ -52,7 +55,7 @@ function PublishVersionModal({
 					}}
 					loading={publishLoading}
 				>
-					Yes
+					{t('allocation:back_button')}
 				</Button>
 			</Modal.Footer>
 		</Modal>

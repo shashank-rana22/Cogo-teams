@@ -1,17 +1,17 @@
-export const STATUS_MAPPING = {
+export const getStatusMapping = ({ t = () => {} }) => ({
 	active: {
-		status      : 'Request Created',
+		status      : t('allocation:request_created'),
 		color       : 'blue',
-		buttonLabel : 'Deactivate Request',
+		buttonLabel : t('allocation:active_status_button_label'),
 	},
 	responded: {
-		status      : 'Response Received',
+		status      : t('allocation:responded_status_label'),
 		color       : 'green',
-		buttonLabel : 'View Response',
+		buttonLabel : t('allocation:responded_status_button_label'),
 	},
 	inactive: {
-		status      : 'Deactivated',
+		status      : t('allocation:inactive_status_label'),
 		color       : 'red',
 		buttonLabel : null,
 	},
-};
+});

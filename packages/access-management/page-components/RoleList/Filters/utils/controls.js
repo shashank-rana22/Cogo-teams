@@ -1,4 +1,4 @@
-import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 
 const resetFilters = {
 	hierarchy_level    : undefined,
@@ -11,8 +11,9 @@ const resetFilters = {
 
 const MIN_ARRAY_LENGTH = 0;
 
-const getAllNavigations = () => {
+const getAllNavigations = (t = () => {}) => {
 	const ALL_NAVS = [];
+	const navigationMappingAdmin = navigationMapping({ t });
 	Object.values(navigationMappingAdmin || {}).forEach((navigation) => {
 		if (navigation.isSubNavs) {
 			navigation.options.forEach((navOpt) => {
@@ -28,53 +29,140 @@ const getAllNavigations = () => {
 	return ALL_NAVS;
 };
 
-const FUNCTION_SUB_FUNCTION_MAPPING = {
-	sales: [
-		{ label: 'Customer Success', value: 'customer_success' },
-		{ label: 'Field Sales', value: 'field_sales' },
-		{ label: 'Strategic Sales', value: 'strategic_sales' },
-		{ label: 'CP Sales', value: 'cp_sales' },
-		{ label: 'Acquisition', value: 'acquisition' },
-		{ label: 'CP Portfolio', value: 'cp_portfolio' },
-		{ label: 'Customer Operations', value: 'customer_operations' },
-	],
-	supply: [
-		{ label: 'Shipping Line', value: 'shipping_line' },
-		{ label: 'Freight Forwarder', value: 'freight_forwarder' },
-		{ label: 'Transportation', value: 'transportation' },
-		{ label: 'CFS', value: 'cfs' },
-		{ label: 'Customs', value: 'customs' },
-		{ label: 'NVOCC', value: 'nvocc' },
-		{ label: 'Overseas', value: 'overseas' },
-		{ label: 'IATA Agents', value: 'iata_agents' },
-	],
-	operations: [
-		{ label: 'Booking Desk', value: 'booking_desk' },
-		{ label: 'Post Shipment', value: 'post_shipment' },
-		{ label: 'FINOPS', value: 'finops' },
-		{ label: 'Common Customer Operations', value: 'common_customer_operations' },
-		{ label: 'CP Customer Operations', value: 'cp_customer_operations' },
-		{ label: 'Mid Size Customer Operations', value: 'mid_size_customer_operations' },
-		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
-	],
-	finance  : [{ label: 'Credit Controller', value: 'credit_controller' }],
-	training : [
-		{ label: 'Training General', value: 'training_general' },
-		{ label: 'Tech', value: 'tech' },
-		{ label: 'Product', value: 'product' },
-	],
-	hr: [
-		{ label: 'HR Admin', value: 'hr_admin' },
-		{ label: 'HRBP', value: 'hrbp' },
-		{ label: 'Talent Acquisition', value: 'talent_acquisition' },
-	],
-	external: [
-		{ label: 'Enrichment', value: 'enrichment' },
-	],
-};
-
-const get_all_sub_functions = (role_functions) => {
+const getAllSubFunctions = (role_functions, t) => {
 	const ROLE_SUB_FUNCTIONS = [];
+	const FUNCTION_SUB_FUNCTION_MAPPING = {
+		sales: [
+			{
+				label : t('accessManagement:roles_and_permission_select_sales_customer_success'),
+				value : 'customer_success',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_sales_field_sales'),
+				value : 'field_sales',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_sales_strategic_sales'),
+				value : 'strategic_sales',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_sales_cp_sales'),
+				value : 'cp_sales',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_sales_acquisition'),
+				value : 'acquisition',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_cp_portfolio'),
+				value : 'cp_portfolio',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_customer_operations'),
+				value : 'customer_operations',
+			},
+		],
+		supply: [
+			{ label: t('accessManagement:roles_and_permission_select_supply_shippling_line'), value: 'shipping_line' },
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_freight_forwarder'),
+				value : 'freight_forwarder',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_transportation'),
+				value : 'transportation',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_cfs'),
+				value : 'cfs',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_customs'),
+				value : 'customs',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_nvocc'),
+				value : 'nvocc',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_overseas'),
+				value : 'overseas',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_supply_iata_agents'),
+				value : 'iata_agents',
+			},
+		],
+		operations: [
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_booking_desk'),
+				value : 'booking_desk',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_post_shipment'),
+				value : 'post_shipment',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_finops'),
+				value : 'finops',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_common_customer_operations'),
+				value : 'common_customer_operations',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_cp_customer_operations'),
+				value : 'cp_customer_operations',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_mid_size_customer_operations'),
+				value : 'mid_size_customer_operations',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_operations_enterprise_customer_operations'),
+				value : 'enterprise_customer_operations',
+			},
+		],
+		finance: [{
+			label : t('accessManagement:roles_and_permission_select_finance_credit_controller'),
+			value : 'credit_controller',
+		}],
+		training: [
+			{
+				label : t('accessManagement:roles_and_permission_select_training_training_general'),
+				value : 'training_general',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_training_tech'),
+				value : 'tech',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_training_product'),
+				value : 'product',
+			},
+		],
+		hr: [
+			{
+				label : t('accessManagement:roles_and_permission_select_hr_admin'),
+				value : 'hr_admin',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_hrbp'),
+				value : 'hrbp',
+			},
+			{
+				label : t('accessManagement:roles_and_permission_select_talent_acquisition'),
+				value : 'talent_acquisition',
+			},
+		],
+		external: [
+			{
+				label : t('accessManagement:roles_and_permission_select_enrichment'),
+				value : 'enrichment',
+			},
+		],
+	};
+
 	if (role_functions?.length > MIN_ARRAY_LENGTH) {
 		role_functions?.forEach((item) => {
 			FUNCTION_SUB_FUNCTION_MAPPING[item].forEach((sub_function) => {
@@ -91,28 +179,28 @@ const get_all_sub_functions = (role_functions) => {
 	return ROLE_SUB_FUNCTIONS;
 };
 
-export const controls = (role_functions, partnerOptions) => [
+export const controls = (role_functions, partnerOptions, t) => [
 	{
 		...partnerOptions,
 		name        : 'stakeholder_id',
-		placeholder : 'Select partner',
+		placeholder : t('accessManagement:roles_and_permission_select_stakeholder_id_placeholder'),
 		type        : 'select',
 		isClearable : true,
 		params      : { filters: { status: 'active' } },
 	},
 	{
 		name           : 'navigation',
-		placeholder    : 'Select module',
+		placeholder    : t('accessManagement:roles_and_permission_select_navigation_placeholder'),
 		scope          : 'partner',
 		type           : 'select',
 		defaultOptions : true,
 		caret          : true,
 		isClearable    : true,
-		options        : getAllNavigations(),
+		options        : getAllNavigations(t),
 	},
 	{
 		name           : 'role_functions',
-		placeholder    : 'Select Function',
+		placeholder    : t('accessManagement:roles_and_permission_select_role_functions_placeholder'),
 		scope          : 'partner',
 		type           : 'multiSelect',
 		defaultOptions : true,
@@ -120,23 +208,23 @@ export const controls = (role_functions, partnerOptions) => [
 		isClearable    : true,
 		options        : [
 			{
-				label : 'Sales',
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_sales'),
 				value : 'sales',
 			},
 			{
-				label : 'Supply',
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_supply'),
 				value : 'supply',
 			},
 			{
-				label : 'Operations',
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_operations'),
 				value : 'operations',
 			},
 			{
-				label : 'Finance',
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_finance'),
 				value : 'finance',
 			},
 			{
-				label : 'External',
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_external'),
 				value : 'external',
 			},
 		],
@@ -144,18 +232,18 @@ export const controls = (role_functions, partnerOptions) => [
 	},
 	{
 		name           : 'role_sub_functions',
-		placeholder    : 'Select Sub-function',
+		placeholder    : t('accessManagement:roles_and_permission_select_sub_function_placeholder'),
 		scope          : 'partner',
 		type           : 'multiSelect',
 		defaultOptions : true,
-		options        : get_all_sub_functions(role_functions),
+		options        : getAllSubFunctions(role_functions, t),
 		caret          : true,
 		isClearable    : true,
 		params         : { filters: { status: 'active' } },
 	},
 	{
 		name           : 'hierarchy_level',
-		placeholder    : 'Select Level',
+		placeholder    : t('accessManagement:roles_and_permission_select_hierarchy_level_placeholder'),
 		scope          : 'partner',
 		type           : 'select',
 		defaultOptions : true,
@@ -163,31 +251,31 @@ export const controls = (role_functions, partnerOptions) => [
 		isClearable    : true,
 		options        : [
 			{
-				label : 'Owner',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_owner'),
 				value : 'owner',
 			},
 			{
-				label : 'Manager',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_manager'),
 				value : 'manager',
 			},
 			{
-				label : 'Function Head',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_function_head'),
 				value : 'function_head',
 			},
 			{
-				label : 'Head',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_head'),
 				value : 'head',
 			},
 			{
-				label : 'Zone Head',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_zone_head'),
 				value : 'zone_head',
 			},
 			{
-				label : 'Region Head',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_region_head'),
 				value : 'region_head',
 			},
 			{
-				label : 'Cluster Head',
+				label : t('accessManagement:roles_and_permission_select_hierarchy_level_cluster_head'),
 				value : 'cluster_head',
 			},
 		],

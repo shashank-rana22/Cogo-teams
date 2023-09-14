@@ -109,15 +109,13 @@ function SelectService({
 			options.push(servicesToPush);
 		}
 
-		options = options?.filter(
-			(opt) => !(
-				opt?.service_type === 'cargo_insurance_service'
-					&& !GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
-						.cargo_insurance.countries.includes(
-							countryCode,
-						)
-			),
-		);
+		options = options?.filter((opt) => {
+			const isCargoInsuranceService = opt?.service_type === 'cargo_insurance_service';
+			const isCountrySupported = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+				.cargo_insurance.countries.includes(countryCode);
+
+			return !(isCargoInsuranceService && !isCountrySupported) && !opt?.processing;
+		});
 	});
 
 	const handleChange = (newValue) => {

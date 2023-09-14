@@ -1,5 +1,6 @@
 import { Modal, Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
@@ -23,6 +24,8 @@ function List({
 	getNextPage = () => {},
 	onClearSelection = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
@@ -33,7 +36,7 @@ function List({
 				<EmptyState
 					height={280}
 					width={440}
-					emptyText="No records found"
+					emptyText={t('allocation:no_records_found')}
 					textSize="24px"
 					flexDirection="column"
 				/>

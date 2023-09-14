@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useApproveAllocationDetails = ({ setShowApprove, listRefetch }) => {
+const useApproveAllocationDetails = ({ setShowApprove, listRefetch, t = () => {} }) => {
 	const {
 		general: { query = {} },
 	} = useSelector((state) => state);
@@ -24,7 +24,7 @@ const useApproveAllocationDetails = ({ setShowApprove, listRefetch }) => {
 
 			setShowApprove(false);
 
-			Toast.success('Details approved successfully!');
+			Toast.success(t('allocation:approve_details_toast_success'));
 
 			listRefetch();
 		} catch (error) {

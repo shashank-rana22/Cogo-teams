@@ -1,34 +1,38 @@
-const options = {
+const getOptions = ({ t = () => {} }) => ({
 	organization: [
 		{
-			label : 'Booking Agent',
+			label : t('allocation:booking_agent_label'),
 			value : 'booking_agent',
 		},
 		{
-			label : 'Sales Agent',
+			label : t('allocation:sales_agent_label'),
 			value : 'sales_agent',
 		},
 		{
-			label : 'Supply Agent',
+			label : t('allocation:supply_agent_label'),
 			value : 'supply_agent',
 		},
 		{
-			label : 'CKAM',
+			label : t('allocation:ckam_label'),
 			value : 'ckam',
 		},
 	],
 	partner: [
 		{
-			label : 'Entity Manager',
+			label : t('allocation:entity_manager_label'),
 			value : 'entity_manager',
 		},
 		{
-			label : 'Portfolio Manager',
+			label : t('allocation:portfolio_manager_label'),
 			value : 'portfolio_manager',
 		},
 	],
-};
+});
 
-const getStakeholderTypeOptions = ({ service_type = '' }) => options[service_type];
+const getStakeholderTypeOptions = ({ service_type = '', t = () => {} }) => {
+	const options = getOptions({ t });
+
+	return options[service_type];
+};
 
 export default getStakeholderTypeOptions;

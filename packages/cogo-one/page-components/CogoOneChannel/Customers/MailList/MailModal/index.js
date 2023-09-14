@@ -1,40 +1,52 @@
-import { Toast, Modal, RTEditor, Input, Select } from '@cogoport/components';
-import { IcMCross } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { Modal, Pagination } from '@cogoport/components';
+import { IcMExpand } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
-import RTE_TOOL_BAR_CONFIG from '../../../../../constants/rteToolBarConfig';
-import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
+import { HEADER_MAPPING } from '../../../../../constants/mailConstants';
+import useMailEditorFunctions from '../../../../../helpers/mailEditorFunctions';
+import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
 
+import ComposeEmailBody from './ComposeEmailBody';
+import EmailTemplateList from './EmailTemplateList';
 import RenderHeader from './Header';
-import Recipients from './Recipients';
 import styles from './styles.module.css';
 
-function MailModal({
+function MailEditorModal({
 	mailProps = {},
 	userId = '',
 	activeMail = {},
-	replyMailApi = () => {},
-	replyLoading = false,
+	viewType = '',
 }) {
 	const {
 		buttonType,
-		activeMailAddress,
-		emailState,
 		setEmailState,
-		userMails = [],
-		viewType,
-		userEmailAddress,
+		setButtonType,
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
 
 	const [showControl, setShowControl] = useState(null);
 	const [errorValue, setErrorValue] = useState('');
+	const [minimizeModal, setMinimizeModal] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [attachments, setAttachments] = useState([]);
+	const [emailTemplate, setEmailTemplate] = useState({
+		isTemplateView : false,
+		emailData      : {},
+	});
+
+	const { isTemplateView = false, emailData = {} } = emailTemplate;
+
+	const {
+		data = {},
+		loading = false,
+		fetchEmailTemplate = () => {},
+		search = '',
+		setSearch = () => {},
+	} = useListEmailTemplates({ isTemplateView, viewType });
+
+	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 
 	const {
 		handleKeyPress = () => {},
@@ -55,161 +67,109 @@ function MailModal({
 		uploaderRef,
 	});
 
-	const userActiveMails = (
-		[...new Set([
-			...getUserActiveMails({ userEmailAddress, viewType }),
-			...(userMails || []),
-		])]
-	).map(
-		(curr) => ({ label: curr, value: curr }),
-	);
+	const {
+		handleSend = () => {},
+		replyLoading = false,
+	} = useMailEditorFunctions({
+		uploading,
+		activeMail,
+		attachments,
+		userId,
+		mailProps,
+	});
 
-	const handleSend = () => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
-		if (replyLoading) {
-			return;
-		}
+	if (minimizeModal) {
+		return (
+			<div
+				className={styles.minimized_modal_styles}
+				role="presentation"
+				onClick={() => setMinimizeModal(false)}
+			>
+				<div className={styles.expand_icon}>
+					<IcMExpand />
+				</div>
 
-		if (uploading) {
-			Toast.error('Files are uploading...');
-			return;
-		}
-
-		if (isEmpty(emailState?.toUserEmail)) {
-			Toast.error('To Mail is Required');
-			return;
-		}
-
-		if (isEmptyMail || !emailState?.subject) {
-			Toast.error('Both Subject and Body are Requied');
-			return;
-		}
-
-		const payload = {
-			sender        : emailState?.from_mail || activeMailAddress,
-			toUserEmail   : emailState?.toUserEmail,
-			ccrecipients  : emailState?.ccrecipients,
-			bccrecipients : emailState?.bccrecipients,
-			subject       : emailState?.subject,
-			content       : emailState?.body,
-			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
-			attachments,
-			userId,
-
-		};
-		replyMailApi(payload);
-	};
+				<div className={styles.title}>
+					{HEADER_MAPPING[buttonType] || 'New Message'}
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<Modal
 			show={buttonType}
 			onClose={handleClose}
-			onOuterClick={handleClose}
 			size="lg"
 			className={styles.styled_ui_modal_dialog}
 			placement="top"
 			scroll
+			animate={false}
+			showCloseIcon={false}
+			closeOnOuterClick={false}
 		>
-			<Modal.Header title={(
-				<RenderHeader
-					replyLoading={replyLoading}
-					handleSend={handleSend}
-					setUploading={setUploading}
-					uploading={uploading}
-					attachments={attachments}
-					setAttachments={setAttachments}
-					handleClose={handleClose}
-					uploaderRef={uploaderRef}
-					buttonType={buttonType}
-				/>
-			)}
+			<Modal.Header
+				title={(
+					<RenderHeader
+						replyLoading={replyLoading}
+						handleSend={handleSend}
+						setUploading={setUploading}
+						uploading={uploading}
+						attachments={attachments}
+						setAttachments={setAttachments}
+						handleClose={handleClose}
+						uploaderRef={uploaderRef}
+						buttonType={buttonType}
+						setEmailTemplate={setEmailTemplate}
+						isTemplateView={isTemplateView}
+						setButtonType={setButtonType}
+						setMinimizeModal={setMinimizeModal}
+					/>
+				)}
+				className={styles.modal_header}
 			/>
 			<Modal.Body>
-				<div className={styles.type_to}>
-					<div className={styles.sub_text}>
-						From:
-					</div>
-					<div className={styles.select_container}>
-						<Select
-							value={emailState?.from_mail || activeMailAddress}
-							onChange={(val) => setEmailState((prev) => ({ ...prev, from_mail: val }))}
-							disabled={buttonType !== 'send_mail'}
-							options={userActiveMails}
-							size="sm"
-						/>
-					</div>
-				</div>
-				<Recipients
-					emailState={emailState}
-					handleChange={handleChange}
-					handleDelete={handleDelete}
-					handleKeyPress={handleKeyPress}
-					handleCancel={handleCancel}
-					handleEdit={handleEdit}
-					showControl={showControl}
-					errorValue={errorValue}
-					setEmailState={setEmailState}
-				/>
-
-				<div className={styles.type_to}>
-					<div className={styles.sub_text}>
-						Sub:
-					</div>
-					<Input
-						value={emailState?.subject}
-						onChange={(val) => setEmailState((p) => ({ ...p, subject: val }))}
-						size="xs"
-						placeholder="Enter your Subject"
-						className={styles.styled_input}
+				{!isTemplateView ? (
+					<ComposeEmailBody
+						{...mailProps}
+						handleKeyPress={handleKeyPress}
+						handleEdit={handleEdit}
+						handleChange={handleChange}
+						handleDelete={handleDelete}
+						handleCancel={handleCancel}
+						handleAttachmentDelete={handleAttachmentDelete}
+						getDecodedData={getDecodedData}
+						errorValue={errorValue}
+						attachments={attachments}
+						showControl={showControl}
+						uploading={uploading}
 					/>
-				</div>
-
-				<div className={styles.rte_container}>
-					<RTEditor
-						value={emailState?.body}
-						onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-						className={styles.styled_editor}
-						modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
+				) : (
+					<EmailTemplateList
+						list={list}
+						loading={loading}
+						search={search}
+						setSearch={setSearch}
+						fetchEmailTemplate={fetchEmailTemplate}
+						setEmailTemplate={setEmailTemplate}
+						emailData={emailData}
+						setEmailState={setEmailState}
 					/>
-
-					<div className={styles.attachments_scroll}>
-						{uploading && (
-							<div className={styles.uploading}>
-								{uploading && 'Uploading...'}
-							</div>
-						)}
-
-						{(attachments || []).map(
-							(data) => {
-								const { fileIcon = {}, fileName = '' } = getDecodedData(data) || {};
-
-								return (
-									<div
-										className={styles.uploaded_files}
-										key={fileName}
-									>
-										<div className={styles.uploaded_files_content}>
-											{fileIcon}
-											<div className={styles.content_div}>
-												{fileName}
-											</div>
-										</div>
-										<IcMCross
-											className={styles.cross_svg}
-											onClick={(e) => {
-												e.stopPropagation();
-												handleAttachmentDelete(data);
-											}}
-										/>
-									</div>
-								);
-							},
-						)}
-					</div>
-				</div>
+				)}
 			</Modal.Body>
+			{isTemplateView ? (
+				<Modal.Footer>
+					<Pagination
+						type="page"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={(val) => fetchEmailTemplate({ page: val })}
+					/>
+				</Modal.Footer>
+			) : null}
 		</Modal>
 	);
 }
 
-export default MailModal;
+export default MailEditorModal;

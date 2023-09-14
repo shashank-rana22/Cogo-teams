@@ -1,5 +1,6 @@
 import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../common/EmptyState';
 import ConfigurationDetails from '../ConfigurationDetails';
@@ -18,13 +19,15 @@ function List({
 	stakeholderDetail,
 	setStakeholderDetail,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	if (!loading && isEmpty(list)) {
 		return (
 			<div className={styles.emptystate}>
 				<EmptyState
 					height={280}
 					width={440}
-					emptyText="No records found"
+					emptyText={t('allocation:no_records_found')}
 					textSize="24px"
 					flexDirection="column"
 				/>

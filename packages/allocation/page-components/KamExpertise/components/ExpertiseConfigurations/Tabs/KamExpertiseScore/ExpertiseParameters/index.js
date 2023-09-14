@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useEditExpertiseParameters from '../../../../../hooks/useEditExpertiseParameters';
@@ -10,6 +11,8 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ExpertiseParameters(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { onClickAddCondition, activeCollapse = '', cardRefetch } = props;
 
 	const [editMode, setEditMode] = useState(false);
@@ -22,20 +25,21 @@ function ExpertiseParameters(props) {
 		handleSubmit,
 		control,
 		loading: editLoading,
-	} = useEditExpertiseParameters({ list, expertiseRefetch, setEditMode, cardRefetch });
+	} = useEditExpertiseParameters({ list, expertiseRefetch, setEditMode, cardRefetch, t });
 
 	if (isEmpty(list) && !expertiseLoading) {
 		return (
 			<div className={styles.empty_card}>
-				There are no conditions currently active,
-				please add a score parameter to begin
+				{t('allocation:no_condition_currently_active_phrase')}
 
 				<Button
 					themeType="secondary"
 					onClick={onClickAddCondition}
 					style={{ marginTop: '16px' }}
 				>
-					+ Condition
+					+
+					{' '}
+					{t('allocation:condition_label')}
 				</Button>
 			</div>
 		);
@@ -52,7 +56,7 @@ function ExpertiseParameters(props) {
 								onClick={() => setEditMode(false)}
 								disabled={editLoading}
 							>
-								Cancel
+								{t('allocation:cancel_button')}
 							</Button>
 
 							<Button
@@ -63,16 +67,21 @@ function ExpertiseParameters(props) {
 								onClick={handleSubmit(onSave)}
 								disabled={editLoading}
 							>
-								Save
+								{t('allocation:save_button')}
 							</Button>
 						</>
 					)
-						: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
+						: (
+							<Button themeType="secondary" onClick={() => setEditMode(!editMode)}>
+								{t('allocation:edit_button')}
+							</Button>
+						)}
 				</div>
 
 				{expertiseLoading ? <LoadingState />
 					: list.map((item) => (
 						<CardItem
+							key={item?.group_name}
 							editMode={editMode}
 							item={item}
 							control={control}
@@ -80,7 +89,11 @@ function ExpertiseParameters(props) {
 					)) }
 
 				<div className={styles.condition_button_container}>
-					<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
+					<Button themeType="secondary" onClick={onClickAddCondition}>
+						+
+						{' '}
+						{t('allocation:condition_label')}
+					</Button>
 				</div>
 			</div>
 		</div>

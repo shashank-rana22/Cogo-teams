@@ -2,19 +2,20 @@ import { Select, TabPanel, Tabs, Placeholder } from '@cogoport/components';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AdvancePayment from './AdvancePayment/index.tsx';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
 import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
+import Outstanding from './Outstanding';
 import Payruns from './Payruns';
 import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
-const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'treasury-chest'];
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'outstanding', 'treasury-chest', 'invoices'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -29,6 +30,8 @@ function AccountPayables() {
 		query?.active_tab || 'dashboard',
 	);
 
+	const [selectedOrg, setSelectedOrg] = useState({});
+
 	const { loading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 
@@ -36,7 +39,7 @@ function AccountPayables() {
 
 	const handleTabChange = (v) => {
 		if (
-			['invoices', 'payruns', 'outstanding'].includes(v)
+			['payruns', 'invoices'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
@@ -50,7 +53,7 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = (entityData || []).map((item) => {
+	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
 			entity_code: entityCode = '',
@@ -70,13 +73,13 @@ function AccountPayables() {
 					<Placeholder className={styles.loader} />
 				) : (
 					<div>
-						{FILTER_TABS.includes(activePayables) ? (
+						{isEmpty(selectedOrg) && FILTER_TABS.includes(activePayables) ? (
 							<Select
 								name="activeEntity"
 								value={activeEntity}
 								onChange={(entityVal) => setActiveEntity(entityVal)}
 								placeholder="Select Entity"
-								options={EntityOptions}
+								options={entityOptions}
 								size="sm"
 								style={{ width: '284px' }}
 								disabled={entityDataCount <= ENTITY_CODE_LENGTH}
@@ -85,7 +88,7 @@ function AccountPayables() {
 					</div>
 				)}
 			</div>
-			<div className={styles.container}>
+			<div className={isEmpty(selectedOrg) ? styles.container : styles.nodisplay}>
 				<Tabs
 					activeTab={activePayables}
 					fullWidth
@@ -96,7 +99,7 @@ function AccountPayables() {
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="invoices" title="INVOICES">
-						<Invoices />
+						<Invoices activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">
 						<AdvancePayment activeEntity={activeEntity} />
@@ -105,7 +108,11 @@ function AccountPayables() {
 						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
-						<h1>Outstandings</h1>
+						<Outstanding
+							entityCode={activeEntity}
+							setSelectedOrg={setSelectedOrg}
+							selectedOrg={selectedOrg}
+						/>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
 						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />

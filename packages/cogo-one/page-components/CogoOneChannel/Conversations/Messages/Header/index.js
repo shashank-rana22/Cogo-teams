@@ -17,6 +17,8 @@ import TagsPopOver from './HeaderFuncs/tagsPopOver';
 import RightButton from './RightButton';
 import styles from './styles.module.css';
 
+const SHOW_UPDATE_USER_BUTTON = ['whatsapp', 'platform_chat'];
+
 function Header({
 	setOpenModal = () => {},
 	formattedData = {},
@@ -71,11 +73,12 @@ function Header({
 		group_members = [],
 		account_type = '',
 		managers_ids = [],
+		user_id = '',
 	} = formattedData || {};
 
 	const handleUpdateUser = () => {
-		if (!updateRoomLoading || !hasNoFireBaseRoom) {
-			updateUserRoom(mobile_no);
+		if (!updateRoomLoading && !hasNoFireBaseRoom) {
+			updateUserRoom({ mobile_number: mobile_no, channel: channel_type, user_id });
 		}
 	};
 
@@ -140,7 +143,7 @@ function Header({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 					/>
 
-					{channel_type === 'whatsapp' && (
+					{(SHOW_UPDATE_USER_BUTTON.includes(channel_type) && (mobile_no || user_id)) ? (
 						<div
 							role="presentation"
 							className={cl`${styles.icon_div} 
@@ -155,7 +158,7 @@ function Header({
 								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 							/>
 						</div>
-					)}
+					) : null}
 				</div>
 			</div>
 

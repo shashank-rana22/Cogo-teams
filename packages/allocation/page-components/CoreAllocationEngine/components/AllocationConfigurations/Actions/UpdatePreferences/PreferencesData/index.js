@@ -1,5 +1,6 @@
 import { RadioGroup, Pagination, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../../common/EmptyState';
 
@@ -7,6 +8,8 @@ import PreferenceCard from './PreferenceCard';
 import styles from './styles.module.css';
 
 function PreferencesData(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list,
 		listLoading,
@@ -23,7 +26,7 @@ function PreferencesData(props) {
 		return (
 			<div className={styles.spinner_container}>
 				<Loader themeType="primary" />
-				<p>Kindly wait, fetching relevant information...</p>
+				<p>{t('allocation:update_preferences_loading_text')}</p>
 			</div>
 		);
 	}
@@ -35,7 +38,7 @@ function PreferencesData(props) {
 	return (
 		<div className={styles.preferences_container}>
 			<div className={styles.radio_container}>
-				<div className={styles.radio_label}>Select All : </div>
+				<div className={styles.radio_label}>{t('allocation:select_all_label')}</div>
 				<RadioGroup options={CONFIGURATION_OPTIONS} value={radioValue} onChange={setRadioValue} />
 			</div>
 

@@ -1,0 +1,23 @@
+.container {
+	max-height: 356px;
+	padding: 4px 24px;
+	margin-top: 16px;
+	overflow-y: auto;
+}
+
+.card {
+	padding-bottom: 10px;
+	margin-bottom: 12px;
+	background-color: #f5fafe;
+	border-radius: 4px;
+}
+
+.custom_tag {
+	display: flex;
+	justify-content: center;
+	width: 8%;
+	font-weight: 600;
+	color: #0c244f;
+	background-color: #d9eafd;
+	border-radius: 4px;
+}

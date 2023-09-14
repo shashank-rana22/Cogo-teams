@@ -4,6 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useRaiseTicketControls from '../../configurations/raise-ticket-controls';
+import { FIREBASE_TABS } from '../../constants';
 import useCreateTicket from '../../hooks/useCreateTicket';
 import { getFieldController } from '../../utils/getFieldController';
 import HeaderName from '../HeaderName';
@@ -90,7 +91,7 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 				className={styles.header_styles}
 			/>
 			<Modal.Body className={styles.body_styled}>
-				{source === 'message' && (
+				{FIREBASE_TABS.includes(source) ? (
 					<>
 						<div className={styles.name_div}>
 							<HeaderName formattedData={formattedData} />
@@ -99,7 +100,7 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 							<ReceiveDiv canRaiseTicket={false} eachMessage={messageData} />
 						</div>
 					</>
-				)}
+				) : null}
 				<div className={styles.styled_form}>
 					{(controls || []).map((eachControl = {}) => {
 						const { label = '', controlType = '', name = '' } = eachControl || {};

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useDeleteEvent = ({ id, listRefetch }) => {
+const useDeleteEvent = ({ id, listRefetch, t = () => {} }) => {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -25,7 +25,7 @@ const useDeleteEvent = ({ id, listRefetch }) => {
 
 			setShowDeleteModal(false);
 
-			Toast.success('Event Deleted');
+			Toast.success(t('allocation:event_deleted_label'));
 
 			listRefetch();
 		} catch (error) {

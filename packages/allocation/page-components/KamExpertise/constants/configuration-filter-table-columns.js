@@ -5,22 +5,22 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import styles from
 	'../components/ExpertiseConfigurations/CurrentConfigurations/Header/ModalComponents/Published/styles.module.css';
 
-const CONFIGURATION_FILTER_TABLE_COLUMNS = [
+const getConfigurationFilterTableColumns = ({ t = () => {} }) => [
 	{
-		Header   : 'VERSION NAME',
+		Header   : t('allocation:version_name_uppercase'),
 		key      : 'version_number',
 		id       : 'version_number',
 		accessor : 'version_number',
 		Cell     : ({ value }) => (
 			<section>
-				Version
+				{t('allocation:version_label')}
 				{' '}
 				{value || ''}
 			</section>
 		),
 	},
 	{
-		Header   : 'STATUS',
+		Header   : t('allocation:status'),
 		accessor : 'status',
 		Cell     : ({ value }) => {
 			const colors = value === 'live' ? 'green' : 'red';
@@ -33,7 +33,7 @@ const CONFIGURATION_FILTER_TABLE_COLUMNS = [
 
 	},
 	{
-		Header   : 'LAST UPDATED',
+		Header   : t('allocation:last_updated_uppercase'),
 		accessor : 'audit_data',
 		Cell     : ({ value }) => (
 			<section>
@@ -49,4 +49,4 @@ const CONFIGURATION_FILTER_TABLE_COLUMNS = [
 
 ];
 
-export default CONFIGURATION_FILTER_TABLE_COLUMNS;
+export default getConfigurationFilterTableColumns;

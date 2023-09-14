@@ -1,7 +1,7 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Filter from '../../../commons/Filters/index.tsx';
 import { moreFilters } from '../configurations/moreFiltersconfig';
@@ -11,14 +11,31 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => { } }) {
+function FilterModal({
+	filters = {},
+	setFilters = () => { },
+	filterLength = FILTER_LENGTH,
+	onClear = () => {},
+}) {
 	const [showModal, setShowModal] = useState(false);
-	const [modalFilters, setModalFilters] = useState({});
-	const { currency = '' } = modalFilters || {};
+	const [modalFilters, setModalFilters] = useState({
+		currency    : filters?.currency,
+		invoiceType : filters?.invoiceType || undefined,
+		entity      : filters?.entity,
+	});
 
+	const { currency = '', entity = '', invoiceType = '' } = filters || {};
 	const handleClose = () => {
 		setShowModal(false);
 	};
+
+	useEffect(() => {
+		setModalFilters({
+			currency,
+			invoiceType: invoiceType || undefined,
+			entity,
+		});
+	}, [currency, invoiceType, entity]);
 
 	return (
 		<div className={styles.modal_container}>
@@ -37,10 +54,10 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<div className={styles.currencys}>Currency</div>
 					<div className={styles.currencycontainer}>
 						{CURRENCY_DATA.map((item) => {
-							const { icon: Icon, text } = item;
+							const { icon: Icon, text } = item || {};
 							return (
 								<div
-									className={`${styles.currency_values} 
+									className={cl`${styles.currency_values} 
 									${currency === text ? styles.selected : styles.unselected}`}
 									key={text}
 									onClick={() => {
@@ -77,9 +94,12 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 										pageIndex   : 1,
 										pageSize    : 10,
 										invoiceView : filters?.invoiceView || '',
-										category    : filters?.category || '',
+										category    : filters?.category || undefined,
+										currency    : filters?.currency || '',
+										entity      : filters?.entity || '',
 									});
-									setModalFilters({});
+									onClear();
+									setModalFilters({ currency: filters?.currency || '' });
 									setShowModal(false);
 								}}
 							>
@@ -111,7 +131,7 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<IcMFilter />
 				</span>
 				{Object.keys(filters)?.filter((key) => ((key !== 'category')
-					&& (!isEmpty(filters?.[key])))).length > FILTER_LENGTH
+					&& (!isEmpty(filters?.[key])))).length > filterLength
 					&& <IcCRedCircle height={8} width={8} />}
 			</div>
 		</div>

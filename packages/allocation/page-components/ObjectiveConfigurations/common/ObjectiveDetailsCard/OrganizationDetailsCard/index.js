@@ -1,44 +1,49 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION = 1;
 const MIN_LENGTH = 2;
 
-const CARD_DATA_MAPPING = [
+const getCardDataMapping = ({ t = () => {} }) => ([
 	{
 		key   : 'country',
-		label : 'Country',
+		label : t('allocation:country'),
 	},
 	{
 		key   : 'state',
-		label : 'State',
+		label : t('allocation:state'),
 	},
 	{
 		key   : 'city',
-		label : 'City',
+		label : t('allocation:city'),
 	},
 	{
 		key   : 'pincode',
-		label : 'Pincode',
+		label : t('allocation:pincode'),
 	},
 	{
 		key   : 'segments',
-		label : 'Segment',
+		label : t('allocation:segments'),
 	},
-];
+]);
 
 function OrganizationDetailsCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { organizationDetails } = props;
+
+	const cardDataMapping = getCardDataMapping({ t });
 
 	return (
 		<div className={styles.container}>
-			<h4 className={styles.heading}>Organization Details</h4>
+			<h4 className={styles.heading}>{t('allocation:organization_details')}</h4>
 
 			<div className={styles.card}>
-				{CARD_DATA_MAPPING.map((item) => {
+				{(cardDataMapping || []).map((item) => {
 					const { key, label } = item;
 
 					const locationItem = organizationDetails[key];

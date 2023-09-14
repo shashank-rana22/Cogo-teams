@@ -2,19 +2,19 @@ import CREATE_FORM_STEPPER_KEYS_MAPPING from '../constants/create-form-stepper-k
 
 const { SET_OBJECTIVE, REVIEW_OBJECTIVE, SET_OBJECTIVE_WEIGHTAGE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
-const STEPPER_OPTIONS_MAPPING = [
+const getStepperOptionsMapping = ({ t = () => {} }) => ([
 	{
 		key   : SET_OBJECTIVE,
-		title : 'Set Objectives',
+		title : t('allocation:set_objectives'),
 	},
 	{
 		key   : REVIEW_OBJECTIVE,
-		title : 'Review Objective',
+		title : t('allocation:review_objective'),
 	},
 	{
 		key   : SET_OBJECTIVE_WEIGHTAGE,
-		title : 'Set Objective Weightage',
+		title : t('allocation:set_objective_weightage'),
 	},
-];
+]);
 
-export default STEPPER_OPTIONS_MAPPING;
+export default getStepperOptionsMapping;

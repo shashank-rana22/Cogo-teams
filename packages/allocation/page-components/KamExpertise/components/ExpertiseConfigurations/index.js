@@ -2,9 +2,10 @@ import { Button, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import { TAB_PANEL_MAPPING, CONSTANT_KEYS } from '../../constants/table-panel-mapping';
+import { getTabPanelMapping, CONSTANT_KEYS } from '../../constants/table-panel-mapping';
 import useGetExpertiseParameters from '../../hooks/useGetExpertiseParameters';
 import useGetKamExpertiseConfig from '../../hooks/useGetKamExpertiseConfig';
 import useGetKamExpertiseCurrentConfig from '../../hooks/useGetKamExpertiseCurrentConfig';
@@ -18,6 +19,8 @@ const { KAM_EXPERTISE_SCORE_CONFIG, KAM_LEVEL_CONFIG } = CONSTANT_KEYS;
 
 function ViewAllConfigs() {
 	const router = useRouter();
+
+	const { t } = useTranslation(['allocation']);
 
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
 	const [showPublishModal, setShowPublishModal] = useState(false);
@@ -34,6 +37,8 @@ function ViewAllConfigs() {
 		scrollDraftRef,
 	} = useGetKamExpertiseCurrentConfig({ type: ['draft', 'live', 'expired'] });
 
+	const tabPanelMapping = getTabPanelMapping({ t });
+
 	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
 	const { listExpertiseParams, expertiseLoading, expertiseRefetch } = useGetExpertiseParameters();
 	const { onCreate, loading: publishLoading } =	usePublishDraft({
@@ -42,6 +47,7 @@ function ViewAllConfigs() {
 		cardRefetch,
 		expertiseRefetch,
 		list,
+		t,
 	});
 
 	const componentProps = {
@@ -67,13 +73,13 @@ function ViewAllConfigs() {
 				</div>
 
 				<div className={styles.back_text}>
-					Back to Dashboard
+					{t('allocation:back_to_dashboard')}
 				</div>
 			</div>
 
 			<section className={styles.container}>
 				<div className={styles.heading_container}>
-					Configurations
+					{t('allocation:configurations')}
 				</div>
 
 				<CurrentConfigurations
@@ -87,7 +93,7 @@ function ViewAllConfigs() {
 
 				<div className={styles.tab_list} ref={draftRef}>
 					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
-						{Object.values(TAB_PANEL_MAPPING).map((item) => {
+						{Object.values(tabPanelMapping).map((item) => {
 							const { name = '', title = '', Component } = item;
 
 							return Component ? (
@@ -107,7 +113,7 @@ function ViewAllConfigs() {
 							|| configCardLoading || isEmpty(list)}
 						onClick={() => setShowPublishModal(true)}
 					>
-						Publish
+						{t('allocation:publish_button')}
 					</Button>
 
 					{showPublishModal && (

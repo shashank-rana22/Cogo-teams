@@ -1,10 +1,12 @@
 import store from '@cogoport/store';
-import { format, getCookie } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
+// eslint-disable-next-line custom-eslint/import-from-package-utils
+import { getCookie } from './getCookieFromCtx';
 
 const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate',
 	'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate'];

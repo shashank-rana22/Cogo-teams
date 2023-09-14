@@ -2,11 +2,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	margin-top: 8px;
-}
-
-.style_cancel {
-	margin-right: 12px;
 }
 
 .generate_container {

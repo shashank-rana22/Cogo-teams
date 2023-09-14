@@ -1,48 +1,66 @@
 import { Pill, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format, isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+
 function ConfigurationDetails({ configurationDetails = {} }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div className={styles.main_card}>
 			<div className={styles.column_container}>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Schedule Type</div>
-					<div className={styles.value}>{startCase(configurationDetails.schedule_type) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:schedule_type')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.schedule_type)
+					|| t('allocation:not_available')}
+					</div>
 				</div>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Repeat On (day)</div>
-					<div className={styles.value}>{startCase(configurationDetails.days) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:repeat_on_day')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.days)
+					|| t('allocation:not_available')}
+
+					</div>
 				</div>
 			</div>
 
 			<div className={styles.column_container}>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Stakeholder Type</div>
-					<div className={styles.value}>{startCase(configurationDetails.stakeholder_type) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:stakeholder_type_label')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.stakeholder_type)
+					|| t('allocation:not_available')}
+					</div>
 				</div>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Roles</div>
+					<div className={styles.label}>{t('allocation:role_ids_label')}</div>
 					<div className={styles.value}>
-						{!isEmpty(configurationDetails.role) ? startCase(configurationDetails.role[0]?.name) : 'NA'}
+						{!isEmpty(configurationDetails.role)
+							? startCase(configurationDetails.role[GLOBAL_CONSTANTS.zeroth_index]?.name)
+							: t('allocation:not_available')}
 						<Tooltip
 							placement="bottom"
 							content={(
 								<div>
 									{configurationDetails.role?.map((item) => (
-										<Pill size="md" color="orange">
+										<Pill key={item?.name} size="md" color="orange">
 											{startCase(item.name)}
 										</Pill>
 									))}
 								</div>
 							)}
 						>
-							{configurationDetails.role?.length > 1 && (
+							{configurationDetails.role?.length > FIRST_INDEX && (
 								<strong>
 									+
-									{configurationDetails.role.length - 1}
-									more
+									{configurationDetails.role.length - FIRST_INDEX}
+									{t('allocation:more_label')}
 								</strong>
 							)}
 						</Tooltip>
@@ -52,30 +70,36 @@ function ConfigurationDetails({ configurationDetails = {} }) {
 
 			<div className={styles.column_container}>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Segment</div>
-					<div className={styles.value}>{startCase(configurationDetails.segment_type) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:segments')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.segment_type)
+					|| t('allocation:not_available')}
+
+					</div>
 				</div>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Users</div>
+					<div className={styles.label}>{t('allocation:users_label')}</div>
 					<div className={styles.value}>
-						{!isEmpty(configurationDetails.user) ? startCase(configurationDetails.user[0]?.name) : 'NA'}
+						{!isEmpty(configurationDetails.user)
+							? startCase(configurationDetails.user[GLOBAL_CONSTANTS.zeroth_index]?.name)
+							: t('allocation:not_available')}
 						<Tooltip
 							placement="bottom"
 							content={(
 								<div>
 									{configurationDetails.user?.map((item) => (
-										<Pill size="md" color="orange">
+										<Pill key={item.name} size="md" color="orange">
 											{startCase(item.name)}
 										</Pill>
 									))}
 								</div>
 							)}
 						>
-							{configurationDetails.user?.length > 1 && (
+							{configurationDetails.user?.length > FIRST_INDEX && (
 								<strong>
 									+
-									{configurationDetails.user.length - 1}
-									more
+									{configurationDetails.user.length - FIRST_INDEX}
+									{t('allocation:more_label')}
 								</strong>
 							)}
 						</Tooltip>
@@ -85,25 +109,36 @@ function ConfigurationDetails({ configurationDetails = {} }) {
 
 			<div className={styles.column_container}>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Locking Criterion</div>
-					<div className={styles.value}>{startCase(configurationDetails.locking_criterion) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:locking_criterion_label')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.locking_criterion)
+					|| t('allocation:not_available')}
+					</div>
 				</div>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Expire Date</div>
+					<div className={styles.label}>{t('allocation:expiry_date_label')}</div>
 					<div className={styles.value}>
-						{configurationDetails.end_date ? format(configurationDetails.end_date, 'dd MMM yyyy') : 'NA'}
+						{configurationDetails.end_date ? format(configurationDetails.end_date, 'dd MMM yyyy')
+							: t('allocation:not_available')}
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.column_container}>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Locking Period (Days)</div>
-					<div className={styles.value}>{startCase(configurationDetails.locking_period) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:locking_period_label')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.locking_period)
+					|| t('allocation:not_available')}
+
+					</div>
 				</div>
 				<div className={styles.item_container}>
-					<div className={styles.label}>Cooling Period (Days)</div>
-					<div className={styles.value}>{startCase(configurationDetails.cooling_period) || 'NA'}</div>
+					<div className={styles.label}>{t('allocation:cooling_period_label')}</div>
+					<div className={styles.value}>
+						{startCase(configurationDetails.cooling_period)
+					|| t('allocation:not_available')}
+					</div>
 				</div>
 			</div>
 		</div>

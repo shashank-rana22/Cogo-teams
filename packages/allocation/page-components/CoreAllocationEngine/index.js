@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
 import { useSelector, useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 import Configurations from './components/AllocationConfigurations';
@@ -10,35 +11,39 @@ import Relations from './components/AllocationRelations';
 import Requests from './components/AllocationRequests';
 import styles from './styles.module.css';
 
-const TAB_PANEL_MAPPING = {
+const getTabPanelMappings = ({ t = () => {} }) => ({
 	configurations: {
 		name      : 'configurations',
-		title     : 'Configurations',
+		title     : t('allocation:tab_configurations_label'),
 		Component : Configurations,
 	},
 	relations: {
 		name      : 'relations',
-		title     : 'Relations',
+		title     : t('allocation:tab_relations_label'),
 		Component : Relations,
 	},
 	requests: {
 		name      : 'requests',
-		title     : 'Requests',
+		title     : t('allocation:tab_request_label'),
 		Component : Requests,
 	},
 	quotas: {
 		name      : 'quotas',
-		title     : 'Quotas',
+		title     : t('allocation:tab_quotas_label'),
 		Component : Quotas,
 	},
-};
+});
 
 function CoreAllocationEngine() {
+	const { t } = useTranslation(['allocation']);
+
 	const { profile } = useSelector((state) => state);
 
 	const dispatch = useDispatch();
 
 	const [activeAllocation, setActiveAllocation] = useState('configurations');
+
+	const tabPanelMappings = getTabPanelMappings({ t });
 
 	useEffect(() => {
 		if (activeAllocation !== 'requests') {
@@ -56,7 +61,7 @@ function CoreAllocationEngine() {
 		<section className={styles.container} id="core_engine_container">
 			<section className={styles.header_container}>
 				<section className={styles.heading_container}>
-					Core Engine
+					{t('allocation:core_engine_heading')}
 				</section>
 
 				{activeAllocation === 'requests' ? (
@@ -71,7 +76,7 @@ function CoreAllocationEngine() {
 					themeType="primary"
 					onChange={setActiveAllocation}
 				>
-					{Object.values(TAB_PANEL_MAPPING).map((item) => {
+					{Object.values(tabPanelMappings).map((item) => {
 						const { name = '', title = '', Component } = item;
 
 						if (!Component) return null;

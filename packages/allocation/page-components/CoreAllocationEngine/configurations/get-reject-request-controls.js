@@ -1,14 +1,14 @@
-const controls = [
+const controls = ({ t = () => {} }) => ([
 	{
 		name        : 'rejection_reasons',
 		type        : 'asyncSelect',
-		label       : 'Reason Type',
-		placeholder : 'Search Reason...',
+		label       : t('allocation:rejection_reasons_label'),
+		placeholder : t('allocation:rejection_reasons_placeholder'),
 		asyncKey    : 'allocation_rejection_type',
 		multiple    : true,
 		isClearable : true,
-		rules       : { required: 'reason type is required' },
+		rules       : { required: t('allocation:rejection_reasons_rules_required') },
 	},
-];
+]);
 
 export default controls;

@@ -35,12 +35,14 @@ const formatSingleData = (
 export const formatFinalData = ({
 	shipment_id = '',
 	truck_number = '',
+	truck_type = '',
 	initFormattedData = {},
 	otherFormattedData = {},
 }) => {
 	let formattedData = {
 		truck_number,
 		shipment_id,
+		truck_type,
 	};
 
 	Object.values(ALL_STEPPER_CONFIGS_OBJ).forEach((singleItem) => {

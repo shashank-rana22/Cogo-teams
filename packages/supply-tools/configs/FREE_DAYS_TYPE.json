@@ -1,0 +1,10 @@
+[
+    {
+        "label" : "Detention",
+        "value" : "detention"
+    },
+    {
+        "label" : "Demurrage",
+        "value" : "demurrage"
+    }
+]

@@ -4,6 +4,7 @@
 	justify-content: space-between;
 	width: 100%;
 	margin-bottom: 8px;
+	cursor: pointer;
 }
 
 .avatar {
@@ -54,15 +55,23 @@
 }
 
 .icon_styles {
-	width: 16px;
-	height: 16px;
-	margin-left: 15px;
+	margin-left: 14px;
 	color: #424242;
 	cursor: pointer;
+	transition: 0.5s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease-in-out;
+		transform: scale(1.2);
+	}
 }
 
 .icon_flex {
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 4px;
+}
+
+.tool_tip {
+	max-width: 500px !important;
 }

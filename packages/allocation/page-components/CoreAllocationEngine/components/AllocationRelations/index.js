@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import useAllocationRelations from '../../hooks/useListAllocationRelations';
 
 import CreateRelationModal from './CreateRelationModal';
@@ -6,6 +8,8 @@ import List from './List';
 import styles from './styles.module.css';
 
 function Relations() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list,
 		showCreateRelationModal,
@@ -29,7 +33,7 @@ function Relations() {
 		columns,
 		setSelectAll = () => {},
 		onClearSelection = () => {},
-	} = useAllocationRelations();
+	} = useAllocationRelations({ t });
 
 	return (
 		<div className={styles.container}>

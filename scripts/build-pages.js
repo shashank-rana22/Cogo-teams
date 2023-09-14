@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 
-const excludePackages = ['authentication'];
+const excludePackages = ['authentication', 'error'];
 
 const getDirectories = (source) => fs.readdirSync(source, { withFileTypes: true })
 	.filter((dirent) => dirent.isDirectory())

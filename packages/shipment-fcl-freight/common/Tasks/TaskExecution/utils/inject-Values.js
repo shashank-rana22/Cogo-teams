@@ -56,11 +56,11 @@ const injectValues = ({
 		});
 	} else if (
 		task?.task === 'upload_draft_bill_of_lading'
-		&& stepConfig?.name === shipment_data.bl_category
+		&& stepConfig?.name === primary_service?.bl_category
 	) {
 		controls.forEach((control, index) => {
 			if (control?.type === 'fieldArray') {
-				controls[index].value = Array(shipment_data.bls_count || MINIMUM_BLS_COUNT)
+				controls[index].value = Array(primary_service?.bls_count || MINIMUM_BLS_COUNT)
 					.fill(null)
 					?.map(() => ({
 						description : '',

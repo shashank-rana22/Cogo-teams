@@ -1,11 +1,13 @@
 import { Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { useTranslation } from 'next-i18next';
 
 import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
 	const {
 		setToggleScreen = () => {},
 		searchValue,
@@ -22,7 +24,7 @@ function Header(props) {
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
 				<AsyncSelect
-					placeholder="Event"
+					placeholder={t('allocation:event_label')}
 					size="sm"
 					value={expertise}
 					onChange={(value) => setExpertise(value)}
@@ -35,7 +37,7 @@ function Header(props) {
 
 				<SearchInput
 					size="sm"
-					placeholder="Search"
+					placeholder={t('allocation:search_label')}
 					setGlobalSearch={setSearchValue}
 					debounceQuery={debounceQuery}
 					value={searchValue}
@@ -55,7 +57,7 @@ function Header(props) {
 						setToggleScreen('create_mastery');
 					}}
 				>
-					Add Mastery
+					{t('allocation:add_mastery_label')}
 				</Button>
 
 				<Button
@@ -68,7 +70,7 @@ function Header(props) {
 						setToggleScreen('create_badge');
 					}}
 				>
-					Add New Badge
+					{t('allocation:add_new_badge_label')}
 				</Button>
 			</div>
 		</div>

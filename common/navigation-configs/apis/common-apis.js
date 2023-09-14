@@ -536,7 +536,7 @@ const common_apis = {
 			service_name : 'credit',
 		},
 		{
-			api          : 'create_credit',
+			api          : 'create_export_factoring_request',
 			access_type  : 'private',
 			service_name : 'credit',
 		},
@@ -690,6 +690,16 @@ const common_apis = {
 			api          : 'get_ef_agreement',
 			access_type  : 'private',
 			service_name : 'credit',
+		},
+		{
+			api        	 : 'send_ef_offer_letter_signatory_to_cogowallet',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };

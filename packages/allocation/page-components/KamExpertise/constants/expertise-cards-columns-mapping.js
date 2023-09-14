@@ -1,15 +1,15 @@
-const EXPERTISE_CARDS_COLUMNS_MAPPING = [
+const getExpertiseCardColumns = ({ t = () => {} }) => [
 	{
 		key   : 'high_priority_count',
-		label : 'No. of high impact conditions',
+		label : t('allocation:high_priority_count'),
 		flex  : 2.5,
 	},
 	{
 		key   : 'parameters',
-		label : 'Number of parameters',
+		label : t('allocation:no_of_parameters'),
 		flex  : 2,
 	},
 
 ];
 
-export default EXPERTISE_CARDS_COLUMNS_MAPPING;
+export default getExpertiseCardColumns;

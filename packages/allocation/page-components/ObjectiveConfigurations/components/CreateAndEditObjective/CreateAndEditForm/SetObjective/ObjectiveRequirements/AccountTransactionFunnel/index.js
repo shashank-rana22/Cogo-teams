@@ -1,17 +1,20 @@
 import { DateRangePickerController, InputController } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function AccountTransactionFunnel(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { lifecycleStage, control, disabled } = props;
 
 	return (
 		<div className={styles.container}>
-			<h4>3. Account Transaction Funnel</h4>
+			<h4>{t('allocation:account_transaction_funnel')}</h4>
 
 			<div className={styles.form_container}>
 				<div className={styles.form_element}>
-					<p>Select Date Range</p>
+					<p>{t('allocation:select_date_range')}</p>
 
 					<DateRangePickerController
 						name="date_range"
@@ -25,35 +28,35 @@ function AccountTransactionFunnel(props) {
 				<div className={styles.input_fields}>
 					{lifecycleStage === 'transacting' && (
 						<div className={styles.form_element}>
-							<p>No of Shipments in selected date Range</p>
+							<p>{t('allocation:shipment_count_label')}</p>
 
 							<InputController
 								name="shipment_count"
 								control={control}
-								placeholder="Shipment Count"
+								placeholder={t('allocation:shipment_count_placeholder')}
 								disabled={disabled}
 							/>
 						</div>
 					)}
 
 					<div className={styles.form_element}>
-						<p>No of Quotations in selected date Range</p>
+						<p>{t('allocation:quotation_count_label')}</p>
 
 						<InputController
 							name="quotation_count"
 							control={control}
-							placeholder="Quotation Count"
+							placeholder={t('allocation:quotation_count_placeholder')}
 							disabled={disabled}
 						/>
 					</div>
 
 					<div className={styles.form_element}>
-						<p>No of Searches in selected date Range</p>
+						<p>{t('allocation:search_count_label')}</p>
 
 						<InputController
 							name="search_count"
 							control={control}
-							placeholder="Search Count"
+							placeholder={t('allocation:search_count_placeholder')}
 							disabled={disabled}
 						/>
 					</div>

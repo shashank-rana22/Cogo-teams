@@ -4,9 +4,11 @@ import { isEmpty } from '@cogoport/utils';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useUpdateShipmentDocument from '../../../hooks/useUpdateShipmentDocument';
+import { downloadButton } from '../../../utils/downloadButton';
 import getFileObject from '../../../utils/getFileObject';
 import useGetMediaUrl from '../../../utils/useGetMediaUrl';
 import SelectDocumentCopies from '../SelectDocumentCopies';
@@ -14,12 +16,6 @@ import SelectDocumentCopies from '../SelectDocumentCopies';
 import styles from './styles.module.css';
 
 const { image_url } = GLOBAL_CONSTANTS;
-
-const DOWNLOAD_BUTTON = {
-	document_accepted            : 'Download 12 Copies',
-	document_uploaded            : 'Download',
-	document_amendment_requested : 'Download',
-};
 
 const INCLUDE_TNC = ['original_3', 'original_2', 'original_1'];
 
@@ -40,6 +36,7 @@ function DownloadDocumentContainer({
 	setViewDoc = () => {},
 	setItem = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	const [docCopies, setDocCopies] = useState([]);
 	const [copiesValue, copiesOnChange] = useState([]);
 
@@ -172,7 +169,7 @@ function DownloadDocumentContainer({
 								className="primary md"
 								disabled={saveDocument || loading || whiteout}
 							>
-								Download 12 Copies with T&C
+								{t('printingDesk:awb_document_download_document_container_download_with_t_n_c_button')}
 							</Button>
 						</Popover>
 					</div>
@@ -202,7 +199,7 @@ function DownloadDocumentContainer({
 								className="primary md"
 								disabled={saveDocument || loading}
 							>
-								Download 12 Copies
+								{t('printingDesk:awb_document_download_document_container_download_button')}
 							</Button>
 						</Popover>
 					)
@@ -216,7 +213,9 @@ function DownloadDocumentContainer({
 							}}
 							disabled={saveDocument}
 						>
-							{saveDocument ? 'Downloading...' : DOWNLOAD_BUTTON[documentState]}
+							{saveDocument
+								? t('printingDesk:awb_document_download_document_container_downloading_button')
+								: downloadButton({ t, documentState })}
 						</Button>
 					)}
 			</div>

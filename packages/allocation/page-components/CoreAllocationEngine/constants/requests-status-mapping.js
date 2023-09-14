@@ -1,10 +1,10 @@
-const STATUS_MAPPING = {
+const getStatusMapping = ({ t = () => {} }) => ({
 	approved: {
-		label: 'Approve',
+		label: t('allocation:approved_label'),
 	},
 	rejected: {
-		label: 'Reject',
+		label: t('allocation:rejected_label'),
 	},
-};
+});
 
-export default STATUS_MAPPING;
+export default getStatusMapping;

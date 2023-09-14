@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import BADGE_STARS_CLASSNAME_MAPPING from '../../../../../../constants/badge-stars-mapping';
 
@@ -13,6 +14,8 @@ const TWO = 2;
 const THREE = 3;
 
 function ListItem(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { data, index } = props;
 
 	const {
@@ -48,7 +51,8 @@ function ListItem(props) {
 						</div>
 
 						<div>
-							Total:
+							{t('allocation:total_label')}
+							:
 							{' '}
 							<b>{score}</b>
 						</div>
@@ -94,7 +98,7 @@ function ListItem(props) {
 									onClickViewMoreBadges(partner_user_id);
 								}}
 							>
-								View More
+								{t('allocation:view_more_button')}
 							</span>
 						)}
 					</span>

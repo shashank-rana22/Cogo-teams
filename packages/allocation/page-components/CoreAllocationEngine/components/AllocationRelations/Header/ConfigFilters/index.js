@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import Filters from '../../../../../../common/Filters';
 
@@ -7,11 +8,13 @@ import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
 function ConfigFilters(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { params, setParams, disabled } = props;
 
 	const {
 		controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied,
-	} = useFilterContent({ params, setParams });
+	} = useFilterContent({ params, setParams, t });
 
 	return (
 		<Filters
@@ -29,7 +32,7 @@ function ConfigFilters(props) {
 				onClick={() => setShowFilters(!showFilters)}
 				disabled={disabled}
 			>
-				Filter
+				{t('allocation:filter_label')}
 
 				<IcMFilter style={{ marginLeft: '4px' }} />
 

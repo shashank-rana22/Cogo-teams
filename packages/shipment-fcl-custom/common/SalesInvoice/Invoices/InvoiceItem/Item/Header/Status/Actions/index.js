@@ -79,14 +79,20 @@ function Actions({
 								size="sm"
 								onClick={() => setShowReview(true)}
 								themeType="accent"
-								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+								disabled={disableMarkAsReviewed
+									|| invoice?.is_eta_etd
+									|| shipment_data?.is_job_closed_financially}
 							>
 								Mark as Reviewed
 							</Button>
 						) : null}
 
 						{invoice?.status === 'reviewed' ? (
-							<Button size="sm" onClick={() => setShowOTPModal(true)}>
+							<Button
+								size="sm"
+								onClick={() => setShowOTPModal(true)}
+								disabled={shipment_data?.is_job_closed_financially}
+							>
 								Send OTP for Approval
 							</Button>
 						) : null}

@@ -8,6 +8,7 @@ const useSetVersionFilter = (props) => {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		t = () => {},
 	} = props;
 
 	const [selectedVersion, setSelectedVersion] = useState({});
@@ -42,7 +43,7 @@ const useSetVersionFilter = (props) => {
 
 			setSelectedVersion({});
 
-			Toast.success('Version selected successfully');
+			Toast.success(t('allocation:version_selected_successfully_toast'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

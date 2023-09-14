@@ -1,20 +1,25 @@
 import { Badge, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import Filters from '../../../../../../common/Filters';
 
 import useFilterContent from './useFilterContent';
 
-const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
+const conditionalWrapper = ({ condition, wrapper, children }) => (
+	condition ? wrapper(children) : children
+);
 
 function ConfigFilters({
 	params,
 	setParams,
 	disabled,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied,
-	} = useFilterContent({ params, setParams });
+	} = useFilterContent({ params, setParams, t });
 
 	return (
 		<Filters
@@ -32,20 +37,17 @@ function ConfigFilters({
 				onClick={() => setShowFilters(!showFilters)}
 				disabled={disabled}
 			>
-				Filter
+				{t('allocation:filter_label')}
 
-				<ConditionalWrapper
-					condition={filtersApplied}
-					wrapper={(children) => (
+				{conditionalWrapper({
+					condition : filtersApplied,
+					wrapper   : (children) => (
 						<Badge color="red" size="md" text="">
 							{children}
 						</Badge>
-					)}
-				>
-					<div>
-						<IcMFilter style={{ marginLeft: '4px' }} />
-					</div>
-				</ConditionalWrapper>
+					),
+					children: <div><IcMFilter style={{ marginLeft: '4px' }} /></div>,
+				})}
 			</Button>
 		</Filters>
 	);

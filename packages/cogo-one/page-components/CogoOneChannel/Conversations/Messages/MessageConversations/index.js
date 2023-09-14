@@ -12,6 +12,9 @@ import styles from './styles.module.css';
 
 const DISTANCE_FROM_TOP = 10;
 const TIMEOUT_FOR_SCROLL = 200;
+const MIN_HEIGHT_FOR_API_CALL = 10;
+const DISABLE_FOOTER_FOR = ['email'];
+const LATEST_MESSAGES_AT_TOP_FOR = ['email'];
 
 function MessageConversations({
 	firestore = {},
@@ -31,9 +34,6 @@ function MessageConversations({
 	mailProps = {},
 	activeChatCollection = {},
 	newUserRoomLoading = false,
-	setMailActions = () => {},
-	mailActions = {},
-	actionType = '',
 	assignLoading = false,
 	assignChat = () => {},
 	supportAgentId = '',
@@ -42,6 +42,9 @@ function MessageConversations({
 	const conversationsDivRef = useRef(null);
 
 	const { id = '', channel_type = '' } = activeMessageCard || {};
+	const { emailState = {}, setEmailState = () => {} } = mailProps || {};
+	const { scrollToTop = false } = emailState || {};
+	const latestMessagesAtTop = LATEST_MESSAGES_AT_TOP_FOR.includes(channel_type);
 
 	const {
 		getNextData = () => {}, lastPage, firstLoadingMessages,
@@ -55,6 +58,14 @@ function MessageConversations({
 		}
 	};
 
+	const handleEmailScroll = (e) => {
+		const { clientHeight, scrollTop, scrollHeight } = e.target;
+		const reachBottom = scrollTop + clientHeight + MIN_HEIGHT_FOR_API_CALL >= scrollHeight;
+		if (reachBottom && !lastPage && !loadingPrevMessages) {
+			getNextData();
+		}
+	};
+
 	const scrollToLastMessage = useCallback(() => {
 		setTimeout(() => {
 			conversationsDivRef.current?.scrollTo({
@@ -64,9 +75,27 @@ function MessageConversations({
 		}, TIMEOUT_FOR_SCROLL);
 	}, []);
 
+	const scrollToRecentMessage = useCallback(() => {
+		setTimeout(() => {
+			conversationsDivRef.current?.scrollTo({
+				top   	  : 0,
+				behavior : 'smooth',
+			});
+		}, TIMEOUT_FOR_SCROLL);
+	}, []);
+
 	useEffect(() => {
-		scrollToLastMessage();
-	}, [scrollToLastMessage, id, firstLoadingMessages]);
+		if (scrollToTop) {
+			scrollToRecentMessage();
+			setEmailState((prev) => ({ ...prev, scrollToTop: false }));
+		}
+	}, [scrollToRecentMessage, scrollToTop, setEmailState]);
+
+	useEffect(() => {
+		if (!latestMessagesAtTop) {
+			scrollToLastMessage();
+		}
+	}, [scrollToLastMessage, id, firstLoadingMessages, latestMessagesAtTop]);
 
 	return (
 		<div
@@ -85,7 +114,9 @@ function MessageConversations({
 			/>
 			<div
 				className={styles.message_container}
-				onScroll={handleScroll}
+				onScroll={latestMessagesAtTop
+					? handleEmailScroll
+					: handleScroll}
 				ref={conversationsDivRef}
 			>
 				{(newUserRoomLoading || firstLoadingMessages) ? (
@@ -111,18 +142,18 @@ function MessageConversations({
 						setModalType={setModalType}
 						activeTab={activeTab}
 						viewType={viewType}
-						setMailActions={setMailActions}
-						mailActions={mailActions}
 						firestore={firestore}
 						scrollToBottom={scrollToLastMessage}
+						scrollToTop={scrollToTop}
 						hasPermissionToEdit={hasPermissionToEdit}
 						ref={conversationsDivRef}
 						mailProps={mailProps}
+						latestMessagesAtTop={latestMessagesAtTop}
 					/>
 				)}
 			</div>
 			<div className={styles.omni_channel_text_footer}>
-				{(channel_type !== 'email' || actionType) && (
+				{DISABLE_FOOTER_FOR.includes(channel_type) ? null : (
 					<Footer
 						canMessageOnBotSession={canMessageOnBotSession}
 						hasPermissionToEdit={hasPermissionToEdit}
@@ -137,8 +168,6 @@ function MessageConversations({
 						assignChat={assignChat}
 						assignLoading={assignLoading}
 						scrollToBottom={scrollToLastMessage}
-						mailActions={mailActions}
-						setMailActions={setMailActions}
 					/>
 				)}
 			</div>

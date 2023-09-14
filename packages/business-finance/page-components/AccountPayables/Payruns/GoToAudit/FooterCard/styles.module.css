@@ -1,0 +1,17 @@
+.footer_card {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: end;
+	width: 96%;
+	padding: 16px;
+	margin-left: -36px;
+	background: var(--color-secondary-5);
+	box-shadow: 0 0 33px rgb(0 0 0 / 25%);
+}
+
+.button {
+	display: block;
+	margin: 5px;
+	font-weight: 500;
+}

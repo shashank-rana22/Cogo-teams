@@ -23,3 +23,7 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.publish_note {
+	margin-left: 28px;
+}

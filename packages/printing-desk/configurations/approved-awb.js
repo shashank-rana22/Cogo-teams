@@ -1,19 +1,19 @@
-export const approvedAWBFields = {
-	fields: [
+export const approvedAWBFields = ({ t = () => {} }) => {
+	const fields = [
 		{
 			key   : 'serialId',
-			label : 'SID',
+			label : t('printingDesk:approved_awb_fields_sid_label'),
 			span  : 2,
 			func  : 'handleSerialId',
 		},
 		{
 			key   : 'awbNumber',
-			label : 'AWB',
+			label : t('printingDesk:approved_awb_fields_awb_label'),
 			span  : 2,
 		},
 		{
 			key   : 'blCategory',
-			label : 'AWB Category',
+			label : t('printingDesk:approved_awb_fields_awb_category_label'),
 			span  : 2,
 			func  : 'handleBlCategory',
 		},
@@ -35,5 +35,6 @@ export const approvedAWBFields = {
 			span  : 2,
 			func  : 'handleHandover',
 		},
-	],
+	];
+	return fields;
 };

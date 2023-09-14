@@ -1,4 +1,5 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
 import useApproveConcor from '../../apisModal/useApproveConcor';
@@ -54,19 +55,20 @@ function ConcorModal({
 	remark = '',
 	row = {},
 }: Props) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({ remarks: null });
-
 	const { useOnAction: onAction, loading } = useApproveConcor({
 		refetch,
 		setShowModal,
 		id,
 		concorData,
+		t,
 	});
 
-	const invoiceDetailsMapping = getInvoiceDetails({ concorData, referenceId });
-	const concorDetails = getOrganisationDetails(concorData);
-	const bankData = getBankDetails(concorData);
+	const invoiceDetailsMapping = getInvoiceDetails({ concorData, referenceId, t });
+	const concorDetails = getOrganisationDetails(concorData, t);
+	const bankData = getBankDetails(concorData, t);
 	const isDisabled = loading || !inputValues.remarks;
 
 	useEffect(() => {
@@ -88,7 +90,7 @@ function ConcorModal({
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title={`Concor PDA Approval : ${referenceId}`} />
+					<Modal.Header title={`${t('incidentManagement:concor_pda_approval')} : ${referenceId}`} />
 					<Modal.Body>
 						{!isEditable ? <ApproveAndReject row={row} /> : null}
 						<div className={styles.bank}>
@@ -110,10 +112,10 @@ function ConcorModal({
 						<div>
 							<div className={styles.flex}>
 								<div className={styles.name}>
-									Invoice Details
+									{t('incidentManagement:invoice_details')}
 								</div>
 								<div className={styles.tag}>
-									Type: Advance
+									{t('incidentManagement:advance_type')}
 								</div>
 							</div>
 							<div className={styles.bank}>
@@ -150,14 +152,14 @@ function ConcorModal({
 							</div>
 
 							<div style={{ display: 'flex' }}>
-								<div className={styles.input_titles}>Remarks*</div>
+								<div className={styles.input_titles}>{`${t('incidentManagement:remarks')}*`}</div>
 								<span className={styles.divider}>:</span>
 								<Textarea
 									name="remark"
 									size="sm"
 									defaultValue={remark}
 									disabled={!isEditable}
-									placeholder="Enter Remarks Here..."
+									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
 									style={{ height: '100px', margin: '0 12px 12px 0' }}
 								/>
@@ -175,7 +177,7 @@ function ConcorModal({
 										onAction(inputValues, 'REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 								<Button
 									size="md"
@@ -184,7 +186,7 @@ function ConcorModal({
 										onAction(inputValues, 'APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

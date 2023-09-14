@@ -2,16 +2,17 @@ import { Accordion, Pill } from '@cogoport/components';
 import { InputNumberController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../configurations/objective-status-color-mapping';
 
 import ObjectiveDetails from './ObjectiveDetails';
 import styles from './styles.module.css';
 
-const MODE_BASIS_MAPPING = {
+const getModeBiasMapping = ({ t = () => {} }) => ({
 	view: ({ weightage }) => (
 		<p className={styles.set_weightage}>
-			Weightage:
+			{t('allocation:weightage_label')}
 			{' '}
 			<strong>
 				{weightage}
@@ -21,7 +22,11 @@ const MODE_BASIS_MAPPING = {
 	),
 	edit: ({ id, weightage, control }) => (
 		<>
-			<p className={styles.set_weightage}>Set Weightage (%)</p>
+			<p className={styles.set_weightage}>
+				{t('allocation:set_weightage')}
+				{' '}
+				(%)
+			</p>
 			<InputNumberController
 				name={`${id}_weightage`}
 				size="sm"
@@ -37,9 +42,13 @@ const MODE_BASIS_MAPPING = {
 			/>
 		</>
 	),
-};
+});
 
 function Objectives(props) {
+	const { t } = useTranslation(['allocation']);
+
+	const modeBiasMapping = getModeBiasMapping({ t });
+
 	const { objectives, mode, control } = props;
 
 	return (
@@ -67,7 +76,7 @@ function Objectives(props) {
 								</div>
 
 								<div className={styles.title_right_container}>
-									{MODE_BASIS_MAPPING[mode]({ id, weightage, control })}
+									{modeBiasMapping[mode]({ id, weightage, control })}
 								</div>
 							</div>
 						)}

@@ -31,7 +31,11 @@ function PopoverContent({
 					themeType="accent"
 					loading={loading}
 					onClick={() => {
-						updateChat({ tags: [headertags, ...(prevTags || [])] });
+						updateChat({
+							tags   : [headertags, ...(prevTags || [])],
+							action : 'tags_changed',
+							reason : headertags === 'important' ? 'added Important Tag' : '',
+						});
 						setIsVisible(false);
 					}}
 				>

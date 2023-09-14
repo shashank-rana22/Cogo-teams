@@ -1,10 +1,14 @@
 import { Button, Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { setCookie } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import MappedUser from './MappedUser';
 import styles from './styles.module.css';
+
+const USER_SESSION_CALL = 2000;
+const ACCOUNTS_LIST = 2;
 
 function SwitchAccounts({
 	userMappings = [],
@@ -14,6 +18,7 @@ function SwitchAccounts({
 	checkIfSessionExpiring,
 	setOpenPopover = () => {},
 }) {
+	const { t } = useTranslation(['common']);
 	const {
 		profile,
 	} = useSelector((state) => state);
@@ -22,13 +27,13 @@ function SwitchAccounts({
 	const [sessionId, setSessionId] = useState('');
 
 	const handleSwitchProfile = (user_session_id) => {
-		setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_session_id, 2000, {});
+		setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_session_id, USER_SESSION_CALL, {});
 		// eslint-disable-next-line no-undef
 		window.location.href = '/';
-		Toast.success('Switching Profile');
+		Toast.success(t('common:switching_profile'));
 	};
 
-	if (userMappings?.length < 2) {
+	if (userMappings?.length < ACCOUNTS_LIST) {
 		return null;
 	}
 
@@ -64,7 +69,7 @@ function SwitchAccounts({
 					disabled={!sessionId || checkIfSessionExpiring || loading}
 					onClick={() => handleSwitchProfile(sessionId)}
 				>
-					Switch Account
+					{t('common:switch_account')}
 				</Button>
 			</div>
 		</div>

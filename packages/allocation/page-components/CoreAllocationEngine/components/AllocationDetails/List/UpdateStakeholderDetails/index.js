@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import Form from '../../../../../../common/Form';
 import useUpdateAllocationDetails from '../../../../hooks/useUpdateAllocationDetails';
@@ -9,13 +10,18 @@ function UpdateStakeholderDetails({
 	setStakeholderDetail,
 	listRefetch,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		onSave,
 		formProps,
 		controls,
 		loading,
 	} = useUpdateAllocationDetails({
-		stakeholderDetail, setStakeholderDetail, listRefetch,
+		stakeholderDetail,
+		setStakeholderDetail,
+		listRefetch,
+		t,
 	});
 
 	const { handleSubmit } = formProps;
@@ -29,7 +35,7 @@ function UpdateStakeholderDetails({
 			showCloseIcon
 			onClose={() => setStakeholderDetail({})}
 		>
-			<Modal.Header title="Change Stakeholder" />
+			<Modal.Header title={t('allocation:change_stakeholder')} />
 
 			<form onSubmit={handleSubmit(onSave)}>
 				<Modal.Body>
@@ -43,7 +49,7 @@ function UpdateStakeholderDetails({
 						disabled={loading}
 						type="submit"
 					>
-						Save
+						{t('allocation:save_button')}
 					</Button>
 				</Modal.Footer>
 			</form>

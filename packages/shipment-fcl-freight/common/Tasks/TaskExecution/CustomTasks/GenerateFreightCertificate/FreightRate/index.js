@@ -19,7 +19,7 @@ function FreightRate({
 	updateTask = () => {},
 	loading = false,
 }) {
-	const { register, handleSubmit, control, formState: { errors }, setValue, watch } = useForm({
+	const { handleSubmit, control, formState: { errors }, setValue, watch } = useForm({
 		defaultValues: {
 			freight_declaration: [{
 				commodity     : '',
@@ -61,9 +61,8 @@ function FreightRate({
 							<label htmlFor="commodity">Commodity</label>
 
 							<InputController
-								name="commodity"
+								name={`freight_declaration.${index}.commodity`}
 								control={control}
-								{...register(`freight_declaration.${index}.commodity`)}
 								size="sm"
 								rules={{ required: { value: true, message: 'Commodity is required' } }}
 							/>
@@ -79,12 +78,11 @@ function FreightRate({
 							<label htmlFor="currency">Currency</label>
 
 							<AsyncSelectController
-								name="currency"
+								name={`freight_declaration.${index}.currency`}
 								control={control}
-								{...register(`freight_declaration.${index}.currency`)}
 								size="sm"
 								valueKey="iso_code"
-								lableKey="iso_code"
+								labelKey="iso_code"
 								asyncKey="list_exchange_rate_currencies"
 								rules={{ required: { value: true, message: 'Currency is required' } }}
 							/>
@@ -100,11 +98,10 @@ function FreightRate({
 							<label htmlFor="freight_price">Rate per container</label>
 
 							<InputController
-								name="freight_price"
+								name={`freight_declaration.${index}.freight_price`}
 								control={control}
 								type="number"
 								size="sm"
-								{...register(`freight_declaration.${index}.freight_price`)}
 								rules={{ required: { value: true, message: 'Freight Price is required' } }}
 							/>
 
@@ -119,11 +116,10 @@ function FreightRate({
 							<label htmlFor="origin_price">Exwork</label>
 
 							<InputController
-								name="origin_price"
+								name={`freight_declaration.${index}.origin_price`}
 								control={control}
 								type="number"
 								size="sm"
-								{...register(`freight_declaration.${index}.origin_price`)}
 								rules={{ required: { value: true, message: 'Origin Price is required' } }}
 							/>
 
@@ -152,6 +148,7 @@ function FreightRate({
 					themeType="secondary"
 					style={{ marginRight: 10 }}
 					disabled={loading}
+					onClick={onCancel}
 				>
 					Cancel
 				</Button>

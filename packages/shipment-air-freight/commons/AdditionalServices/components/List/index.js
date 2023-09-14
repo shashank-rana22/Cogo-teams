@@ -123,12 +123,13 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setTerminalChargeModal(true)}
 						className={styles.terminal_charges}
-						disabled
+						disabled={shipment_data?.is_job_closed}
 					>
 						<div className={styles.add_icon}>+</div>
 						Add Terminal Charge
 					</Button>
 				) : null}
+
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}

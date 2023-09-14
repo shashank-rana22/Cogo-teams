@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useCheckConfigurationPublishability from '../../../../hooks/useCheckConfigurationPublishability';
 
@@ -7,15 +8,17 @@ function CheckConfigurationPublishablity({
 	setShow,
 	listRefetch,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		onCheckPublish, loadingCheckPublishability,
-	} = useCheckConfigurationPublishability({ item, listRefetch, setShow });
+	} = useCheckConfigurationPublishability({ item, listRefetch, setShow, t });
 
 	return (
 		<>
-			<Modal.Header title="Check Publishability" />
+			<Modal.Header title={t('allocation:check_publishability')} />
 
-			<Modal.Body>Do you want to check publishability of the configuration?</Modal.Body>
+			<Modal.Body>{t('allocation:check_publishability_phrase')}</Modal.Body>
 
 			<Modal.Footer>
 				<Button
@@ -25,7 +28,7 @@ function CheckConfigurationPublishablity({
 					disabled={loadingCheckPublishability}
 					onClick={onCheckPublish}
 				>
-					Check
+					{t('allocation:check_button')}
 				</Button>
 			</Modal.Footer>
 		</>

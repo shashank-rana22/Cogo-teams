@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import styles from '../components/AllocationDetails/List/styles.module.css';
 import DETAILS_STATUS_COLOR_MAPPING from '../constants/details-status-color-mapping';
 
-const useListAllocationDetails = () => {
+const useListAllocationDetails = ({ t = () => {} }) => {
 	const {
 		general: { query = {}, locale = '' },
 	} = useSelector((reduxState) => reduxState);
@@ -79,13 +79,13 @@ const useListAllocationDetails = () => {
 
 	const columns = [
 		{
-			Header   : 'Serial Id',
+			Header   : t('allocation:serial_id_header'),
 			accessor : ({ organization = {} }) => (
 				<Pill color="blue" size="lg">{organization.serial_id || '___'}</Pill>
 			),
 		},
 		{
-			Header   : 'Organization',
+			Header   : t('allocation:organization'),
 			accessor : ({ organization = {} }) => (
 				<div>
 					<Tooltip
@@ -104,13 +104,13 @@ const useListAllocationDetails = () => {
 			),
 		},
 		{
-			Header   : 'User',
+			Header   : t('allocation:user_label'),
 			accessor : ({ user = {} }) => (
 				<div>{startCase((user.name || '___').toLowerCase())}</div>
 			),
 		},
 		{
-			Header   : 'Old Stakeholder',
+			Header   : t('allocation:old_stakeholder'),
 			accessor : ({ old_stakeholder = {}, old_stakeholder_type = '' }) => (
 				<div>
 					<div>
@@ -123,7 +123,7 @@ const useListAllocationDetails = () => {
 			),
 		},
 		{
-			Header   : 'New Stakeholder',
+			Header   : t('allocation:new_stakeholder'),
 			accessor : ({ stakeholder = {}, stakeholder_type = '' }) => (
 				<div>
 					<div>
@@ -136,7 +136,7 @@ const useListAllocationDetails = () => {
 			),
 		},
 		{
-			Header   : 'Status',
+			Header   : t('allocation:status_header'),
 			accessor : ({ id = '', status = '' }) => (
 				<Legend
 					className={styles.legend}
@@ -154,7 +154,7 @@ const useListAllocationDetails = () => {
 			),
 		},
 		{
-			Header   : 'Action',
+			Header   : t('allocation:action_header'),
 			accessor : (listItem = {}) => {
 				const { status = '' } = listItem;
 
@@ -165,7 +165,7 @@ const useListAllocationDetails = () => {
 						disabled={status === 'approved'}
 						onClick={() => onClickChangeStakeholder(listItem)}
 					>
-						Change Stakeholder
+						{t('allocation:change_stakeholder')}
 					</Button>
 				);
 			},

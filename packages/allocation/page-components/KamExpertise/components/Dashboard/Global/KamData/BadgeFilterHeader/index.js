@@ -1,12 +1,15 @@
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 
 import SearchInput from '../../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
 function BadgeFilterHeader(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		leaderboardLoading, searchKAM, setSearchKAM, debounceQuery, badgeName, setBadgeName,
 		conditionName, setConditionName, roleName, setRoleName, managerName, setManagerName,
@@ -18,13 +21,13 @@ function BadgeFilterHeader(props) {
 
 		<div className={styles.leaderboard_header}>
 			<div className={styles.overview_header}>
-				Leaderboard
+				{t('allocation:leaderboard_label')}
 			</div>
 
 			<div className={styles.container}>
 				<div className={styles.select_container}>
 					<AsyncSelect
-						placeholder="Manager"
+						placeholder={t('allocation:manager')}
 						size="sm"
 						value={managerName}
 						onChange={(value) => setManagerName(value)}
@@ -45,7 +48,7 @@ function BadgeFilterHeader(props) {
 				</div>
 				<div className={styles.select_container}>
 					<AsyncSelect
-						placeholder="Role"
+						placeholder={t('allocation:role')}
 						size="sm"
 						value={roleName}
 						onChange={(value) => setRoleName(value)}
@@ -58,7 +61,7 @@ function BadgeFilterHeader(props) {
 				</div>
 				<div className={styles.select_container}>
 					<AsyncSelect
-						placeholder="Event configuration"
+						placeholder={t('allocation:event_configuration')}
 						size="sm"
 						value={conditionName}
 						onChange={(value) => setConditionName(value)}
@@ -71,7 +74,7 @@ function BadgeFilterHeader(props) {
 				</div>
 				<div className={styles.select_container}>
 					<AsyncSelect
-						placeholder="Badge"
+						placeholder={t('allocation:badge_label')}
 						size="sm"
 						value={badgeName}
 						onChange={(value) => setBadgeName(value)}
@@ -92,7 +95,7 @@ function BadgeFilterHeader(props) {
 				<div className={styles.search}>
 					<SearchInput
 						size="sm"
-						placeholder="Search KAM"
+						placeholder={t('allocation:search_kam')}
 						value={searchKAM}
 						disabled={leaderboardLoading}
 						setGlobalSearch={setSearchKAM}

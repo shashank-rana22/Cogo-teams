@@ -1,11 +1,16 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
-import Controls from '../../../../../configurations/get-add-kam-level-draft-controls';
+import getControls from '../../../../../configurations/get-add-kam-level-draft-controls';
 import useCreateKamLevel from '../../../../../hooks/useCreateKamLevel';
 import Card from '../Card';
 
 import styles from './styles.module.css';
+
+const FIRST_INDEX = 1;
+
+const SECOND_INDEX = 2;
 
 function Footer({
 	setCreateKam = () => { },
@@ -14,11 +19,15 @@ function Footer({
 	cardRefetch,
 	createKam,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		formProps,
 		onCreate,
 		createLoading,
-	} = useCreateKamLevel({ dataLength, setCreateKam, refetch, cardRefetch });
+	} = useCreateKamLevel({ dataLength, setCreateKam, refetch, cardRefetch, t });
+
+	const controls = getControls({ t });
 
 	const {
 		control, formState: { errors }, handleSubmit,
@@ -32,7 +41,7 @@ function Footer({
 					className={styles.create_button}
 					onClick={() => setCreateKam(true)}
 				>
-					Create Kam Level
+					{t('allocation:create_kam_level')}
 				</Button>
 			</div>
 		);
@@ -42,12 +51,12 @@ function Footer({
 		<div className={styles.level_card_container}>
 			<div className={styles.level_desc}>
 				<b>
-					KAM
+					{t('allocation:kam')}
 					{' '}
-					{ dataLength ? dataLength + 1 : 1}
+					{ dataLength ? dataLength + FIRST_INDEX : FIRST_INDEX}
 					<IcMArrowNext className={styles.arrow} />
 					{' '}
-					{ dataLength ? dataLength + 2 : 2}
+					{ dataLength ? dataLength + SECOND_INDEX : SECOND_INDEX}
 				</b>
 			</div>
 
@@ -57,7 +66,7 @@ function Footer({
 					themeType="secondary"
 					onClick={() => setCreateKam(false)}
 				>
-					Cancel
+					{t('allocation:cancel_button')}
 				</Button>
 
 				<Button
@@ -65,12 +74,12 @@ function Footer({
 					onClick={handleSubmit(onCreate)}
 					style={{ marginLeft: 8 }}
 				>
-					Save
+					{t('allocation:save_button')}
 				</Button>
 			</div>
 
 			<Card
-				list={Controls}
+				list={controls}
 				control={control}
 				editMode
 				errors={errors}

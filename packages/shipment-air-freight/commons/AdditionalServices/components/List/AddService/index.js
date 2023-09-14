@@ -18,6 +18,7 @@ function AddService({
 	refetch = () => {},
 	closeModal = () => {},
 	source = '',
+	tradeType = '',
 }) {
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
@@ -36,6 +37,10 @@ function AddService({
 			isSeller,
 			name: `${item?.code} ${startCase(item?.name)}`,
 		}));
+
+	if (tradeType === 'export') {
+		finalList = finalList.filter((item) => item.code !== 'THC');
+	}
 
 	if (filters.name) {
 		finalList = finalList.filter((item) => item.name.toLowerCase().includes(filters.name.toLowerCase()));

@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useUpdateConfiguration from '../../../../hooks/useUpdateConfiguration';
 
@@ -7,15 +8,17 @@ function DeleteConfiguration({
 	setShow,
 	listRefetch,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		onDelete, loadingUpdate,
-	} = useUpdateConfiguration({ item, listRefetch, setShow });
+	} = useUpdateConfiguration({ item, listRefetch, setShow, t });
 
 	return (
 		<>
-			<Modal.Header title="Delete Configuration" />
+			<Modal.Header title={t('allocation:delete_configuration')} />
 
-			<Modal.Body>Do you want to delete this configuration?</Modal.Body>
+			<Modal.Body>{t('allocation:delete_configuration_phrase')}</Modal.Body>
 
 			<Modal.Footer>
 				<Button
@@ -25,7 +28,7 @@ function DeleteConfiguration({
 					disabled={loadingUpdate}
 					onClick={onDelete}
 				>
-					Yes
+					{t('allocation:yes_label')}
 				</Button>
 			</Modal.Footer>
 		</>

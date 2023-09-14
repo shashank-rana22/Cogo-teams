@@ -1,14 +1,14 @@
-const WARMTH_ACCOUNTS_STATS = [
+const getWarmthAccountStats = ({ t = () => {} }) => [
 	{
 		key   : 'ice_cold_accounts',
-		label : 'Ice Cold',
+		label : t('allocation:ice_cold'),
 		flex  : 1,
 	},
 	{
 		key   : 'cold_accounts',
-		label : 'Cold',
+		label : t('allocation:cold'),
 		flex  : 1,
 	},
 ];
 
-export default WARMTH_ACCOUNTS_STATS;
+export default getWarmthAccountStats;

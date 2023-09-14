@@ -234,7 +234,7 @@ function GenerateMAWB({
 	}, [formValues.chargeableWeight]);
 
 	useEffect(() => {
-		if (!viewDoc) {
+		if (!viewDoc && formValues.class !== 'm') {
 			setValue('amount', ((formValues.chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
 		}
 

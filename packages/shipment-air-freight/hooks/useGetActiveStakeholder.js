@@ -9,13 +9,20 @@ const useGetActiveStakeholder = () => {
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 
 	const stakeholderMap = [
+		{ role_ids: geo.uuid.kam_manager_ids, stakeholder: 'booking_agent_manager' },
 		{
 			role_ids    : [...geo.uuid.kam_ids, ...geo.uuid.cogo_fx_settings_allowed_role_ids],
 			stakeholder : 'booking_agent',
 		},
+		{ role_ids: geo.uuid.account_receivable_executive, stakeholder: 'account_receivable_executive' },
+		{ role_ids: geo.uuid.so1_so2_ops_role_id, stakeholder: 'so1_so2_ops' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.air_so_1_manager, stakeholder: 'booking_desk_manager' },
-		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
+		{
+			role_ids: [...geo.uuid.service_ops2_role_id,
+				geo.uuid.costbooking_ops_role_ids],
+			stakeholder: 'document_desk',
+		},
 		{ role_ids: geo.uuid.so_2_manager, stakeholder: 'document_desk_manager' },
 		{ role_ids: [geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id], stakeholder: 'superadmin' },
 		{ role_ids: geo.uuid.sales_role, stakeholder: 'sales_agent' },
@@ -27,14 +34,16 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{ role_ids: [geo.uuid.coe_finance_head, geo.uuid.prod_settlement_executive], stakeholder: 'credit_control' },
 		{
-			role_ids    : [geo.uuid.costbooking_ops_role_ids, geo.uuid.costbooking_ops_manager_role_ids],
+			role_ids    : geo.uuid.costbooking_ops_manager_role_ids,
 			stakeholder : 'cost_booking_manager',
 		},
 		{
 			role_ids    : [geo.uuid.ff_cost_booking_executive],
 			stakeholder : 'ff_cost_booking',
 		},
-		{ role_ids: geo.uuid.so1_so2_ops_role_id, stakeholder: 'so1_so2_ops' },
+		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
+		{ role_ids: geo.uuid.so1_revenue_desk, stakeholder: 'so1_revenue_desk' },
+		{ role_ids: geo.uuid.cogo_auditor_id, stakeholder: 'cogo_auditor_id' },
 	];
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || [])

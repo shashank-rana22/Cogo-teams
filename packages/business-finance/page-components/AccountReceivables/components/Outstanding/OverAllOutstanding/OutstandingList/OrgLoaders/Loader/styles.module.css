@@ -1,0 +1,11 @@
+.flex {
+	display: flex;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.flex_column {
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}

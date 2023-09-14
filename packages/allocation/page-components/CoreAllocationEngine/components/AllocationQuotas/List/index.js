@@ -1,5 +1,6 @@
 import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../common/EmptyState';
 import ROLE_TYPE_LIST_MAPPING from '../../../constants/role-type-list-mapping-quotas';
@@ -7,6 +8,8 @@ import ROLE_TYPE_LIST_MAPPING from '../../../constants/role-type-list-mapping-qu
 import styles from './styles.module.css';
 
 function List(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data,
 		columns,
@@ -22,7 +25,7 @@ function List(props) {
 				<EmptyState
 					height={280}
 					width={440}
-					emptyText="No records found"
+					emptyText={t('allocation:no_records_found')}
 					textSize="24px"
 					flexDirection="column"
 				/>

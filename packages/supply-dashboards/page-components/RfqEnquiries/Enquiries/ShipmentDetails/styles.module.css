@@ -1,0 +1,169 @@
+.shipment_details_container {
+	margin-top: 10px;
+}
+
+.border {
+	height: 40px;
+	border: 1px dashed #828282;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.color {
+	font-weight: 600;
+	color: #7278ad;
+}
+
+.shipment_info {
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #828282;
+}
+
+.details {
+	padding: 10px;
+	margin-top: 10px;
+	background-color: #f9f9f9;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.shipment_value {
+	display: flex;
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.value {
+	margin-right: 16px;
+}
+
+.upper_body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.body {
+	padding: 8px;
+}
+
+.code {
+	font-size: 12px;
+	color: #f68b21;
+}
+
+.name {
+	display: flex;
+	gap: 2px;
+	align-self: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.country {
+	padding: 2px;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.subname {
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.detention_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.days {
+	font-size: 12px;
+	color: #828282;
+}
+
+.detention_demurrage {
+	margin-top: 10px;
+}
+
+.head {
+	font-weight: 600;
+	color: #828282;
+}
+
+.days_container {
+	display: flex;
+	padding: 4px 0;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.detention {
+	margin-right: 10px;
+}
+
+.bottom {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	margin-top: 10px;
+	cursor: pointer;
+	background: #fdfbf6;
+	border-radius: 0 0 4px 4px;
+}
+
+.air_details {
+	display: flex;
+	flex-direction: column;
+	margin-right: 14px;
+}
+
+.air_head {
+	font-size: 12px;
+	color: #828282;
+}
+
+.air_value {
+	font-weight: 600;
+	color: #7278ad;
+}
+
+.air_contract {
+	display: flex;
+	margin-top: 14px;
+}
+
+.air_contract_heads {
+	margin: 2px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.total_weight {
+	margin-right: 14px;
+	font-weight: 400;
+}
+
+.total_weight_value {
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.air_details_weight {
+	display: flex;
+	margin-top: 4px;
+}

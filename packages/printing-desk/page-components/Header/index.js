@@ -1,25 +1,12 @@
 import { Input, Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
+import { tabs } from '../../utils/tabs';
 import Filters from '../Filters';
 
 import styles from './styles.module.css';
-
-const TABS = [
-	{
-		key   : 'approved_awb',
-		label : 'Approved AWB',
-	},
-	{
-		key   : 'handed_over',
-		label : 'Handed Over',
-	},
-	{
-		key   : 'final_awb',
-		label : 'Final AWB',
-	},
-];
 
 function Header({
 	searchValue = '',
@@ -30,16 +17,17 @@ function Header({
 	setFilters = () => {},
 	setRelevantToMe = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	return (
 		<header>
-			<div className={styles.heading}>Printing Desk</div>
+			<div className={styles.heading}>{t('printingDesk:header_printing_desk')}</div>
 			<div className={styles.top_container}>
 				<Tabs
 					themeType="tertiary"
 					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
-					{TABS.map((tab) => {
+					{tabs({ t }).map((tab) => {
 						const { key = '', label = '' } = tab;
 						return (
 							<TabPanel
@@ -65,7 +53,7 @@ function Header({
 						)
 					)}
 					className={styles.input_search}
-					placeholder="Search by SID or AWB Number"
+					placeholder={t('printingDesk:header_search_placeholder')}
 					type="text"
 					onChange={(val) => {
 						setSearchValue(val);
@@ -77,8 +65,8 @@ function Header({
 					name="stakeholder_id"
 					size="sm"
 					disabled={false}
-					onLabel="Relevent to me"
-					offLabel="All"
+					onLabel={t('printingDesk:header_toggle_onlabel')}
+					offLabel={t('printingDesk:header_toggle_offlabel')}
 					onChange={() => setRelevantToMe((prev) => !prev)}
 				/>
 				<Filters setFilters={setFilters} filters={filters} />

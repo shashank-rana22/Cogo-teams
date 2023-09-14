@@ -4,24 +4,27 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const TOTAL_SPANS = 12;
+const ZERO_SPAN = 0;
+
 function Layout({
-	control, fields, showElements = {}, register, errors,
+	control = [], fields = [], showElements = {}, register = {}, errors = {},
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
-			span += field.span || 12;
-			if (span === 12) {
+			span += field.span || TOTAL_SPANS;
+			if (span === TOTAL_SPANS) {
 				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
-				span = 0;
-			} else if (span < 12) {
+				span = ZERO_SPAN;
+			} else if (span < TOTAL_SPANS) {
 				rowWiseFields.push(field);
 			} else {
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
 				rowWiseFields.push(field);
 				span = field.span;
@@ -29,18 +32,21 @@ function Layout({
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((field) => (
-				<div className={styles.row}>
+			{TOTAL_FIELDS.map((field) => (
+				<div key={field.name} className={styles.row}>
 					{field.map((fieldsItem) => {
 						const { type, heading = '' } = fieldsItem;
 						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
+						if (!type && heading) {
+							return <h4 key={heading} className={styles.empty_field}>{heading }</h4>;
+						}
 						if (type === 'fieldArray' && show) {
 							return (
-								<div style={{ width: '100%' }}>
+								<div key={fieldsItem.name} style={{ width: '100%' }}>
 									<div className={styles.heading}>
 										{heading}
 									</div>

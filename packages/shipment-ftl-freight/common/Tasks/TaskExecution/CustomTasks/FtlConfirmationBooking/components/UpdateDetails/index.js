@@ -13,19 +13,18 @@ const DEFAULT_VALUE = 0;
 const INCREAMENT_VALUE = 1;
 
 function UpdateDetails(props) {
-	const { services = [] } = props;
+	const { services = [], serviceProviderData = {} } = props;
 	const initialTruckType = services?.[GLOBAL_CONSTANTS.zeroth_index]?.truck_type;
 	const [currentTab, setCurrentTab] = useState(initialTruckType);
 
 	const {
 		destination_location_id = '',
 		origin_location_id = '',
-		service_provider_id = '',
 		asset_ids = [],
 	} = services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { data, loading: assetsLoading } = useListOrganizationAssets({
-		id       : service_provider_id,
+		id       : serviceProviderData?.[currentTab]?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id,
 		assetIds : asset_ids,
 	});
 

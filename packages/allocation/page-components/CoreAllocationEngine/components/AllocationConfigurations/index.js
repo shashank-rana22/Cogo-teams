@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useListAllocationConfigurations from '../../hooks/useListAllocationConfiguration';
 
@@ -8,6 +9,8 @@ import List from './List';
 import styles from './styles.module.css';
 
 function Configurations() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list,
 		params,
@@ -22,7 +25,7 @@ function Configurations() {
 		listItem,
 		workflowName,
 		setWorkflowName,
-	} = useListAllocationConfigurations();
+	} = useListAllocationConfigurations({ t });
 
 	return (
 		<div className={styles.container}>

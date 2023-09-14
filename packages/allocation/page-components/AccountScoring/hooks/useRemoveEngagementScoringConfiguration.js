@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-function useRemoveEngagementScoringConfiguration({ refetch }) {
+function useRemoveEngagementScoringConfiguration({ refetch, t = () => {} }) {
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'remove_event_configuration',
 		method  : 'POST',
@@ -17,7 +17,7 @@ function useRemoveEngagementScoringConfiguration({ refetch }) {
 
 			await trigger({ data: payload });
 
-			Toast.success('Configuration deleted successfully');
+			Toast.success(t('allocation:configuration_added_successfully'));
 
 			refetch();
 		} catch (error) {

@@ -34,7 +34,6 @@ function Messages({
 	const activeRoomSnapshotListener = useRef(null);
 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
-	const [mailActions, setMailActions] = useState({ actionType: '', data: {} });
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
@@ -123,8 +122,6 @@ function Messages({
 		activeMessageCard: activeTab?.data,
 	};
 
-	const { actionType = '' } = mailActions || {};
-
 	useEffect(() => {
 		mountActiveRoomSnapShot({
 			activeRoomSnapshotListener,
@@ -134,8 +131,6 @@ function Messages({
 			activeChannelType,
 			setActiveTab,
 		});
-
-		setMailActions({ actionType: '', data: {} });
 
 		return () => {
 			snapshotCleaner({ ref: activeRoomSnapshotListener });
@@ -170,9 +165,6 @@ function Messages({
 						activeTab={activeTab}
 						activeChatCollection={activeChatCollection}
 						newUserRoomLoading={newUserRoomLoading}
-						setMailActions={setMailActions}
-						mailActions={mailActions}
-						actionType={actionType}
 						communicationLoading={communicationLoading}
 						mailProps={mailProps}
 						sendCommunicationTemplate={sendCommunicationTemplate}

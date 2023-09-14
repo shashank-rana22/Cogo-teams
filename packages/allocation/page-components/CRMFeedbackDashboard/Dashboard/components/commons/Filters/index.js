@@ -7,6 +7,7 @@ import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import { controlsFeedbacks, controlsRequests } from './controls';
@@ -19,6 +20,8 @@ function Filters({
 	onChangeFilters = () => {},
 	activeTab = '',
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const [date, setDate] = useState({});
 
 	const cogoEntityOptions = useGetAsyncOptions({
@@ -71,11 +74,13 @@ function Filters({
 				leadOrganizationOptions || {},
 				kamOptions || {},
 				kamManagerOptions || {},
+				t,
 			)
 		) : (
 			controlsRequests(
 				organizationOptions || {},
 				leadOrganizationOptions || {},
+				t,
 			)
 		);
 

@@ -24,9 +24,8 @@
 
 	&:hover {
 		width: 94%;
-		height: 46px;
 		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
-		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+		transition: width 0.1s ease-in-out;
 	}
 }
 

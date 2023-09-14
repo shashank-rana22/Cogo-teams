@@ -3,6 +3,7 @@ import { cl, Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import filterControls from '../../configurations/filter-controls';
@@ -12,6 +13,7 @@ import styles from './styles.module.css';
 const MINUTE_TO_MILLISECOND = 60000;
 
 function Filters({ setFilters = () => {}, filters = {} }) {
+	const { t } = useTranslation(['printingDesk']);
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
@@ -42,17 +44,19 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 	function PopoverContent() {
 		return (
 			<>
-				<Layout fields={filterControls} control={control} errors={errors} />
+				<Layout fields={filterControls({ t })} control={control} errors={errors} />
 				<div className={styles.footer_button}>
 					<Button
 						themeType="secondary"
 						style={{ marginRight: '16px' }}
 						onClick={() => handleClear()}
 					>
-						Clear
+						{t('printingDesk:filters_clear_button')}
 
 					</Button>
-					<Button onClick={handleSubmit(onSubmit)}>Apply</Button>
+					<Button onClick={handleSubmit(onSubmit)}>
+						{t('printingDesk:filters_apply_button')}
+					</Button>
 				</div>
 			</>
 		);
@@ -72,7 +76,7 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 					className={styles.filter_svg}
 					onClick={() => setVisible((prev) => !prev)}
 				>
-					Filters
+					{t('printingDesk:filters_button')}
 					{' '}
 					<IcMFilter />
 					{!isEmpty(filters) && <IcCRedCircle height={8} width={8} className={styles.filter_dot} /> }

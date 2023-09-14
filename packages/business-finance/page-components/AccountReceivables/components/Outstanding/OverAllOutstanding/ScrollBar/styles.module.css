@@ -1,0 +1,22 @@
+.arrow_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: 50px;
+	padding-bottom: 10px;
+
+	:global {
+		.core-ui-button-root {
+			width: 25px;
+			height: 25px;
+			padding: 0 !important;
+			background-color: #303b67;
+			border-radius: 50%;
+		}
+	}
+}
+
+.scroll_text {
+	padding: 0 12px;
+	font-size: 10px;
+}

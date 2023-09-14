@@ -1,5 +1,6 @@
 import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useCallback, useState, useRef } from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -25,7 +26,7 @@ function Navbar({
 	inCall = false,
 }) {
 	const ref = useRef(null);
-
+	const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
@@ -103,7 +104,7 @@ function Navbar({
 					<div className={styles.search_container}>
 						<Input
 							value={searchString}
-							placeholder="Search menu..."
+							placeholder={t('common:search_bar')}
 							className={resetSubnavs ? styles.input_search : styles.input_search_hover}
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}

@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import useUpdateShipmentDocument from '../../../hooks/useUpdateShipmentDocument';
@@ -21,6 +22,7 @@ function SaveDocumentContainer({
 	formData = {},
 	listAPI = () => {},
 }) {
+	const { t } = useTranslation(['printingDesk']);
 	const { documentId, serviceId, shipment_id: pendingShipmentId, shipmentId } = taskItem;
 
 	const { updateShipment, loading } = useUpdateShipmentDocument({ listAPI });
@@ -70,7 +72,7 @@ function SaveDocumentContainer({
 						}}
 						disabled={loading || saveDocument}
 					>
-						Edit
+						{t('printingDesk:awb_document_save_document_container_edit_button')}
 					</Button>
 				</div>
 			) : null}
@@ -82,7 +84,9 @@ function SaveDocumentContainer({
 					}}
 					disabled={loading || saveDocument}
 				>
-					{loading || saveDocument ? 'Saving...' : 'Save'}
+					{loading || saveDocument
+						? t('printingDesk:awb_document_save_document_container_saving_button')
+						: t('printingDesk:awb_document_save_document_container_save_button')}
 				</Button>
 			</div>
 		</div>

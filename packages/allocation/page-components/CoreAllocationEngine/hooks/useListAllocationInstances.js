@@ -8,7 +8,7 @@ import styles from '../components/AllocationConfigurations/Actions/Instances/Lis
 import INSTANCES_STATUS_COLOR_MAPPING from '../constants/instances-status-color-mapping';
 // eslint-disable-next-line max-len
 
-const useListAllocationInstances = ({ item = {} }) => {
+const useListAllocationInstances = ({ item = {}, t = () => {} }) => {
 	const { push } = useRouter();
 
 	const onRowClick = (listItem) => {
@@ -62,31 +62,31 @@ const useListAllocationInstances = ({ item = {} }) => {
 
 	const columns = [
 		{
-			Header   : 'Serial Id',
+			Header   : t('allocation:serial_id'),
 			accessor : ({ serial_id = '' }) => (
 				<Pill color="blue" size="lg">{serial_id || '___'}</Pill>
 			),
 		},
 		{
-			Header   : 'Created At',
+			Header   : t('allocation:created_at'),
 			accessor : ({ created_at = '' }) => (
 				<div>{created_at ? format(created_at, 'dd MMM yyyy') : '___'}</div>
 			),
 		},
 		{
-			Header   : 'Updated At',
+			Header   : t('allocation:updated_at'),
 			accessor : ({ updated_at = '' }) => (
 				<div>{updated_at ? format(updated_at, 'dd MMM yyyy') : '___'}</div>
 			),
 		},
 		{
-			Header   : 'Execution At',
+			Header   : t('allocation:execution_at'),
 			accessor : ({ execution_at = '' }) => (
 				<div>{execution_at ? format(execution_at, 'dd MMM yyyy') : '___'}</div>
 			),
 		},
 		{
-			Header   : 'Status',
+			Header   : t('allocation:status_header'),
 			accessor : ({ id = '', status = '' }) => (
 				<Legend
 					className={styles.legend}
@@ -104,7 +104,7 @@ const useListAllocationInstances = ({ item = {} }) => {
 			),
 		},
 		{
-			Header   : 'Action',
+			Header   : t('allocation:action_header'),
 			accessor : ({ id = '', status = '' }) => (
 				<Button
 					size="sm"
@@ -112,7 +112,7 @@ const useListAllocationInstances = ({ item = {} }) => {
 					onClick={() => onRowClick({ id, status })}
 					disabled={!['pending_approval', 'completed'].includes(status)}
 				>
-					View Details
+					{t('allocation:view_details')}
 				</Button>
 			),
 		},

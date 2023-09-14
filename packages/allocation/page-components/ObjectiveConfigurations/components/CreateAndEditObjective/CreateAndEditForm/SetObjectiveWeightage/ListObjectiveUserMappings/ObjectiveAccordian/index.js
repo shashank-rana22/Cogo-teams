@@ -2,6 +2,7 @@ import { Accordion, Pill, cl } from '@cogoport/components';
 import { InputNumberController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import ObjectiveDetailsCard from '../../../../../../common/ObjectiveDetailsCard';
 import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../configurations/objective-status-color-mapping';
@@ -9,6 +10,8 @@ import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../configurations/obj
 import styles from './styles.module.css';
 
 function ObjectiveAccordian(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		currentObjective = false,
 		formValues = {},
@@ -38,7 +41,7 @@ function ObjectiveAccordian(props) {
 						<Pill color="blue">
 							{startCase(objective_type)}
 							{' '}
-							Objective
+							{t('allocation:objective_label')}
 						</Pill>
 
 						<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[status]}>
@@ -47,7 +50,11 @@ function ObjectiveAccordian(props) {
 					</div>
 
 					<div className={styles.title_right_container}>
-						<p className={styles.set_weightage}>Set Weightage (%)</p>
+						<p className={styles.set_weightage}>
+							{t('allocation:set_weightage')}
+							{' '}
+							(%)
+						</p>
 
 						<InputNumberController
 							className={styles.input}

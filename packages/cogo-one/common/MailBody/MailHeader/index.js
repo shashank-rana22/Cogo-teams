@@ -9,7 +9,12 @@ import getUserNameFromEmail from '../../../helpers/getUserNameFromEmail';
 import ReceipientComp from './receipientComp';
 import styles from './styles.module.css';
 
-function MailHeader({ eachMessage = {}, handleClick = () => {}, hasPermissionToEdit = false }) {
+function MailHeader({
+	eachMessage = {},
+	handleClick = () => {},
+	handleExpandClick = () => {},
+	hasPermissionToEdit = false,
+}) {
 	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
 
 	const {
@@ -31,7 +36,11 @@ function MailHeader({ eachMessage = {}, handleClick = () => {}, hasPermissionToE
 	];
 
 	return (
-		<div className={styles.header_flex}>
+		<div
+			className={styles.header_flex}
+			onClick={handleExpandClick}
+			role="presentation"
+		>
 			<div className={styles.left_container}>
 				<Avatar
 					personName={senderName}
@@ -56,18 +65,25 @@ function MailHeader({ eachMessage = {}, handleClick = () => {}, hasPermissionToE
 				<div className={styles.icon_flex}>
 					{BUTTON_MAPPING.map(
 						(item) => {
-							const { key, icon: Icon = null } = item || {};
+							const { key = '', icon = '' } = item || {};
 
-							if (!Icon || !hasPermissionToEdit) {
+							if (!icon || !hasPermissionToEdit) {
 								return null;
 							}
 
 							return (
-								<Icon
+								<div
+									role="presentation"
 									key={key}
 									className={styles.icon_styles}
-									onClick={() => handleClick({ buttonType: key })}
-								/>
+									onClick={(e) => {
+										e.stopPropagation();
+										handleClick(key);
+									}}
+								>
+									{icon}
+								</div>
+
 							);
 						},
 					)}

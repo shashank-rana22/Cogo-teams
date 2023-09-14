@@ -12,7 +12,7 @@ const DECIMAL_COUNT = 2;
 const INDEX_LENGTH_NORMALIZATION = 1;
 
 const useEditWeightage = (props) => {
-	const { objectives, userDetails, refetch } = props;
+	const { objectives, userDetails, refetch, t = () => {} } = props;
 
 	const { user = {}, role = {} } = userDetails || {};
 
@@ -56,7 +56,7 @@ const useEditWeightage = (props) => {
 			const isValidWeightages = validateTotalWeightage({ objective_weightages });
 
 			if (!isValidWeightages) {
-				throw new Error('Weightage sum should be 100');
+				throw new Error(t('allocation:weightage_sum_should_be_hundred'));
 			}
 
 			const payload = { objective_weightages };
@@ -65,7 +65,8 @@ const useEditWeightage = (props) => {
 
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data) || err?.message || 'Unable to set weightages');
+			Toast.error(getApiErrorString(err.response?.data) || err?.message
+			|| t('allocation:unable_to_set_weightage'));
 		}
 	};
 

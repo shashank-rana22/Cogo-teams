@@ -1,12 +1,18 @@
+import { useTranslation } from 'next-i18next';
+
 import styles from './styles.module.css';
 
 function EmptyState({
 	height = 125,
 	width = 225,
-	emptyText = 'Data not found',
+	emptyText = '',
 	flexDirection = 'row',
 	textSize = '16px',
 }) {
+	const { t } = useTranslation(['allocation']);
+
+	const emptyValue = emptyText || t('allocation:common_empty_text');
+
 	return (
 		<div className={`${styles.container} ${styles[flexDirection]}`}>
 			<img
@@ -17,7 +23,7 @@ function EmptyState({
 				style={{ margin: '10px' }}
 			/>
 
-			<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
+			<div className={styles.text} style={{ fontSize: textSize }}>{emptyValue}</div>
 		</div>
 
 	);

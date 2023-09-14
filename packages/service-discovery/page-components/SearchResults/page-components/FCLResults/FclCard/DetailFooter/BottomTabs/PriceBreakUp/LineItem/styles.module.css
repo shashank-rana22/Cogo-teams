@@ -1,0 +1,8 @@
+.container {
+	display: flex;
+}
+
+.amount {
+	margin-top: 2px;
+	margin-right: 8px;
+}

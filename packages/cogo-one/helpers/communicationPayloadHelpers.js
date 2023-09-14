@@ -1,9 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-const ENDPOINT_MAPPING = {
-	forward : '/forward_mail',
-	reply   : '/reply_mail',
+import getRenderEmailBody from './getRenderEmailBody';
+
+export const ENDPOINT_MAPPING = {
+	forward   : '/forward_mail',
+	reply     : '/reply_mail',
+	reply_all : '/reply_all',
 };
 
 export const getCommunicationPayload = ({
@@ -34,7 +37,7 @@ export const getCommunicationPayload = ({
 		ccrecipients,
 		bccrecipients,
 		subject,
-		content     : draftMessage,
+		content     : getRenderEmailBody({ html: draftMessage }),
 		msgId       : message_id,
 		userId,
 		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
@@ -46,7 +49,7 @@ export const getCommunicationPayload = ({
 		lead_user_id,
 		recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 		message_metadata : {
-			endpoint            : ENDPOINT_MAPPING[actionType] || ENDPOINT_MAPPING.send_mail,
+			endpoint            : ENDPOINT_MAPPING[actionType],
 			body                : payload,
 			send_to_omnichannel : true,
 			conversation_id,
@@ -58,7 +61,7 @@ export const getCommunicationPayload = ({
 		service_id      : userId,
 		sender          : payload?.sender,
 		cc_emails       : isEmpty(ccrecipients) ? undefined : ccrecipients,
-		bcc_emails      : isEmpty(bccrecipients) ? undefined : ccrecipients,
+		bcc_emails      : isEmpty(bccrecipients) ? undefined : bccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		source          : 'CogoOne:AdminPlatform',
 	};

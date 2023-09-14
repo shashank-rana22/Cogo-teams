@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -60,9 +61,11 @@ function Child({
 						if (!Element) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
-								<h4 className={styles.child_label}>
+								<div className={cl`${styles.child_label} 
+								${controlItem?.rules?.required ? styles.required_field : ''}`}
+								>
 									{controlItem?.label}
-								</h4>
+								</div>
 								<Element
 									{...controlItem}
 									{...EXTRA_PROPS}

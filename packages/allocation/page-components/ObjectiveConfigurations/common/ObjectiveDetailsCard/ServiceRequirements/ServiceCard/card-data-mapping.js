@@ -3,17 +3,18 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const CARD_DATA_MAPPING = [
+const getCardDataMapping = ({ t = () => {} }) => ([
 	{
 		name     : 'inco_terms',
-		label    : 'Incoterm',
+		label    : t('allocation:incoterms_label'),
 		accessor : ({ inco_terms }) => {
 			if (isEmpty(inco_terms)) return null;
 
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>
-						Incoterm:
+						{t('allocation:incoterms_label')}
+						:
 					</div>
 
 					<div className={styles.value_container}>
@@ -25,14 +26,15 @@ const CARD_DATA_MAPPING = [
 	},
 	{
 		name     : 'hs_codes',
-		label    : 'Commodity Codes',
+		label    : t('allocation:hs_codes_label'),
 		accessor : ({ hs_codes }) => {
 			if (isEmpty(hs_codes)) return null;
 
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>
-						Commodity Codes:
+						{t('allocation:hs_codes_label')}
+						:
 					</div>
 
 					<div className={styles.key_value_container}>
@@ -50,7 +52,8 @@ const CARD_DATA_MAPPING = [
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>
-						Container Details:
+						{t('allocation:container_details')}
+						:
 					</div>
 
 					<div className={styles.key_value_container}>
@@ -59,14 +62,14 @@ const CARD_DATA_MAPPING = [
 							<Pill>
 								{weight}
 								{' '}
-								Kg
+								{t('allocation:unit_kg')}
 							</Pill>
 						)}
 						{!isEmpty(volume) && (
 							<Pill>
 								{volume}
 								{' '}
-								CBM
+								{t('allocation:unit_cbm')}
 							</Pill>
 						)}
 					</div>
@@ -82,7 +85,8 @@ const CARD_DATA_MAPPING = [
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>
-						Container Size:
+						{t('allocation:container_size')}
+						:
 					</div>
 
 					<div className={styles.key_value_container}>
@@ -90,7 +94,7 @@ const CARD_DATA_MAPPING = [
 							<Pill key={value}>
 								{value}
 								{' '}
-								ft
+								{t('allocation:unit_ft')}
 							</Pill>
 						))}
 					</div>
@@ -106,7 +110,8 @@ const CARD_DATA_MAPPING = [
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>
-						Container Type:
+						{t('allocation:container_type')}
+						:
 					</div>
 
 					<div className={styles.key_value_container}>
@@ -124,7 +129,8 @@ const CARD_DATA_MAPPING = [
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>
-						Truck Type:
+						{t('allocation:truck_type')}
+						:
 					</div>
 
 					<div className={styles.key_value_container}>
@@ -143,18 +149,18 @@ const CARD_DATA_MAPPING = [
 			return (
 				<div className={styles.key_value_container}>
 					<div className={cl`${styles.key_value_container} ${styles.origin_location}`}>
-						<div className={styles.label}>Origin:</div>
+						<div className={styles.label}>{t('allocation:trade_lane_origin')}</div>
 						<Pill>{origin_location.name}</Pill>
 					</div>
 
 					<div className={styles.key_value_container}>
-						<div className={styles.label}>Destination:</div>
+						<div className={styles.label}>{t('allocation:trade_lane_destination')}</div>
 						<Pill>{destination_location.name}</Pill>
 					</div>
 				</div>
 			);
 		},
 	},
-];
+]);
 
-export default CARD_DATA_MAPPING;
+export default getCardDataMapping;

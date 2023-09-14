@@ -1,4 +1,4 @@
-import { InputController } from '@cogoport/forms';
+import { CheckboxController, InputController } from '@cogoport/forms';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -35,8 +35,17 @@ function ChangePassword({
 				}}
 
 			/>
+
 			<div className={styles.password_validator}>
 				<PasswordValidator errorMessage={errors?.password?.message || patternError} password={password} />
+			</div>
+
+			<div className={styles.checkbox}>
+				<CheckboxController
+					name="deactivate_sessions"
+					control={control}
+				/>
+				<label>{t('profile:account_logout_message')}</label>
 			</div>
 
 		</div>

@@ -11,12 +11,10 @@ const useUpdateUserRoom = () => {
 		{ manual: true },
 	);
 
-	const updateUserRoom = async (mobileNumber = '') => {
+	const updateUserRoom = async (payload) => {
 		try {
 			await trigger({
-				data: {
-					mobile_number: mobileNumber,
-				},
+				data: payload,
 			});
 			Toast.success('User Updated Successfully');
 		} catch (error) {

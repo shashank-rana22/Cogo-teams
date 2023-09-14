@@ -1,5 +1,6 @@
 import { Collapse, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../../../common/EmptyState';
 
@@ -11,6 +12,8 @@ import useList from './useList';
 const ONE = 1;
 
 function List(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		LIST_COLUMN_MAPPING,
 		objectiveList,
@@ -23,7 +26,7 @@ function List(props) {
 		showModal,
 		setShowModal,
 		refetchListObjectives,
-	} = useList(props);
+	} = useList({ ...props, t });
 
 	if (isEmpty(objectiveList)) {
 		return (
@@ -31,7 +34,7 @@ function List(props) {
 				height="400px"
 				width="600px"
 				flexDirection="column"
-				emptyText="Objectives list not found"
+				emptyText={t('allocation:objectives_list_not_found')}
 			/>
 		);
 	}

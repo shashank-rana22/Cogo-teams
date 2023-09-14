@@ -82,20 +82,22 @@ function Actions({
 		salesInvoicesRefetch();
 	};
 
-	const underTranslation = () => ((invoice?.status === 'reviewed' && (!bfInvoice?.systemGeneratedProforma
+	function UnderTranslation() {
+		return (invoice?.status === 'reviewed' && (!bfInvoice?.systemGeneratedProforma
 			|| !bfInvoice?.proformaPdfUrl)) || (invoice?.status === 'approved'
 			&& !bfInvoice?.systemGeneratedInvoice) ? (
-				<div className={styles.pill}>Under Translation</div>) : null);
+				<div className={styles.pill}>Under Translation</div>) : null;
+	}
 
-	const approveButton = () => (
-		invoice?.status === 'reviewed' && bfInvoice?.systemGeneratedProforma && bfInvoice?.proformaPdfUrl ? (
+	function ApproveButton() {
+		return invoice?.status === 'reviewed' && bfInvoice?.systemGeneratedProforma && bfInvoice?.proformaPdfUrl ? (
 			<div className={styles.review_invoice}>
 				<Button size="sm" onClick={updateInvoiceStatus} disabled={loading}>
 					Approve
 				</Button>
 			</div>
-		) : null
-	);
+		) : null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -111,14 +113,17 @@ function Actions({
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
-								disabled={disableMarkAsReviewed}
+								disabled={disableMarkAsReviewed || shipment_data?.is_job_closed_financially}
 							>
 								Mark as Reviewed
 							</Button>
 						) : null}
 					</div>
-					{underTranslation}
-					{approveButton}
+
+					<UnderTranslation />
+
+					<ApproveButton />
+
 					{invoice?.status === 'amendment_requested' ? (
 						<Tooltip
 							placement="bottom"
@@ -144,24 +149,24 @@ function Actions({
 								<div className={styles.tooltip_child}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
-										&nbsp;
+										{' '}
 										{invoice.proforma_email_count || DEFAULT_COUNT}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
-										&nbsp;
+										{' '}
 										{invoice.sales_email_count || DEFAULT_COUNT}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
-											&nbsp;
+											{' '}
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
-											&nbsp;
+											{' '}
 											{invoice?.sales_utr?.status || ''}
 										</div>
 									</div>

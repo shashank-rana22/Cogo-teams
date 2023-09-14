@@ -6,7 +6,10 @@ import Stakeholders from '../Stakeholders';
 
 import styles from './styles.module.css';
 
-function ServiceIDGroup({ data = [], setAddPoc = () => {}, rolesPermission = {}, shipment_type = '' }) {
+function ServiceIDGroup({
+	data = [], setAddPoc = () => {}, rolesPermission = {},
+	shipment_data = {}, activeStakeholder = '',
+}) {
 	const DATA_BY_SERVICE_ID = (data || []).reduce((acc, item) => {
 		const { service_id, ...rest } = item;
 		if (!acc[service_id]) {
@@ -52,7 +55,8 @@ function ServiceIDGroup({ data = [], setAddPoc = () => {}, rolesPermission = {},
 								data={DATA_BY_SERVICE_ID[key]}
 								setAddPoc={setAddPoc}
 								rolesPermission={rolesPermission}
-								shipment_type={shipment_type}
+								shipment_data={shipment_data}
+								activeStakeholder={activeStakeholder}
 							/>
 						</div>
 					</div>

@@ -1,0 +1,16 @@
+{
+    "main_title":" Các cột mốc tiêu chuẩn",
+    "create":"Tạo nên",
+    "empty_milestone":" Không có cột mốc tiêu chuẩn",
+    "loader_alt":" Tải Cogoport",
+    "filter_opertor_placeholder":" Nhập dòng vận chuyển",
+    "filter_source_placeholder":"Chọn nguồn",
+    "filter_source_opt_1":" Công việc theo dõi",
+    "filter_source_opt_2":"Mặc định",
+    "filter_source_opt_3":" LDB",
+    "filter_status_placeholder":" Chọn trạng thái",
+    "filter_status_opt_1":"Tích cực",
+    "filter_status_opt_2":" Không hoạt động",
+    "filter_status_opt_3":" Chưa được khai thác",
+    "filter_search_placeholder":" Tìm kiếm theo cột mốc/cột mốc tiêu chuẩn"
+}

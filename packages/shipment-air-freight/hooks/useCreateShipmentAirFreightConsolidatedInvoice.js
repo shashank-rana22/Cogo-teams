@@ -25,7 +25,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 			await trigger({
 				data: additionalServicePayload,
 			});
-			createShipmentAdditionalService();
+			createShipmentAdditionalService(values);
 		} catch (err) {
 			toastApiError(err);
 		}

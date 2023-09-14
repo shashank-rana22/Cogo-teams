@@ -9,10 +9,6 @@ import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
-const ALLOWED_ROLES = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
-	GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
-	GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id];
-
 function EditInvoice({
 	show = 'false',
 	onClose = () => {},
@@ -22,7 +18,7 @@ function EditInvoice({
 }) {
 	const { profile } = useSelector((state) => state);
 
-	const isRoleAllowed = ALLOWED_ROLES.includes(profile?.user?.id);
+	const isRoleAllowed = GLOBAL_CONSTANTS.uuid.air_admin_user_ids.includes(profile?.user?.id);
 
 	const {
 		controls,

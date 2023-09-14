@@ -1,5 +1,6 @@
 import { Button, Toggle } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import SearchInput from '../../../../../common/SearchInput';
 
@@ -7,6 +8,8 @@ import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		onClickCreateReqBtn,
 		disabled,
@@ -28,14 +31,15 @@ function Header(props) {
 	const isBulkUpdateMode = !isEmpty(checkedRowsId);
 
 	const selectedItemsForUpdate = isBulkUpdateMode ? checkedRowsId.length : '';
+
 	return (
 		<>
 			<div className={styles.container}>
 				<Toggle
 					name="allocation_type"
 					size="md"
-					offLabel="Organization"
-					onLabel="Partner"
+					offLabel={t('allocation:allocation_type_off_label')}
+					onLabel={t('allocation:allocation_type_on_label')}
 					value={toggleValue}
 					onChange={(e) => onChangeParams({
 						filters:
@@ -51,7 +55,7 @@ function Header(props) {
 					<div className={styles.search_container}>
 						<SearchInput
 							size="sm"
-							placeholder="Search by Organization name / User name"
+							placeholder={t('allocation:search_placeholder_org_name')}
 							setGlobalSearch={setSearchValue}
 							debounceQuery={debounceQuery}
 							value={searchValue}
@@ -71,7 +75,7 @@ function Header(props) {
 						onClick={onClickCreateReqBtn}
 						disabled={disabled || isCreateDisabled}
 					>
-						Create
+						{t('allocation:create_button_label')}
 					</Button>
 				</div>
 			</div>
@@ -84,18 +88,18 @@ function Header(props) {
 						disabled={!isBulkUpdateMode}
 						onClick={applyBulkFilter}
 					>
-						Apply Bulk Filter
+						{t('allocation:apply_bulk_filter_button_label')}
 					</Button>
 
 					{!isEmpty(checkedRowsId) && (
 						<div className={styles.selection_text}>
 							<div className={styles.text}>
 								{' '}
-								You have selected
+								{t('allocation:selection_text')}
 								{' '}
 								{checkedRowsId.length}
 								{' '}
-								row(s)
+								{t('allocation:rows_label')}
 							</div>
 
 							<Button
@@ -104,7 +108,7 @@ function Header(props) {
 								onClick={onClearSelection}
 								style={{ backgroundColor: '#F8F2E7', padding: 0 }}
 							>
-								Clear Selection
+								{t('allocation:clear_selection_button_label')}
 							</Button>
 						</div>
 					)}
@@ -116,7 +120,7 @@ function Header(props) {
 					disabled={isEmpty(id)}
 					onClick={() => setShowModal(true)}
 				>
-					APPROVE ALL
+					{t('allocation:approve_all_button_label')}
 					{' '}
 					{selectedItemsForUpdate}
 				</Button>

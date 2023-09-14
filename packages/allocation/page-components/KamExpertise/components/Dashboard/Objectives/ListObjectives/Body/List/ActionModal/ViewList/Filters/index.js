@@ -2,6 +2,7 @@ import { Button, Input, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import getControls from '../../../../../../../../../configurations/get-kam-list-filter-controls';
@@ -28,7 +29,9 @@ function Filters({
 	setParams = () => { },
 	debounceQuery = () => { },
 }) {
-	const showRedDot = isFiltersEmpty({ filterVals: params?.filters, controls: getControls() });
+	const { t } = useTranslation(['allocation']);
+
+	const showRedDot = isFiltersEmpty({ filterVals: params?.filters, controls: getControls('', t) });
 
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
 
@@ -70,7 +73,7 @@ function Filters({
 					size="lg"
 					onClick={() => setShowFilterPopover(!showFilterPopover)}
 				>
-					Filter
+					{t('allocation:filter_label')}
 					<IcMFilter style={{ marginLeft: '8px' }} />
 					{showRedDot ? (
 						<div className={styles.red_dot} />
@@ -82,7 +85,7 @@ function Filters({
 				<Input
 					name="searchKey"
 					size="md"
-					placeholder="Search by Objective Name"
+					placeholder={t('allocation:search_by_objective_name')}
 					value={searchKey}
 					onChange={(val) => handleChange(val)}
 				/>

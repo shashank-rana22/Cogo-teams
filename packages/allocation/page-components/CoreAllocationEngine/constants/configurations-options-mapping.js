@@ -1,12 +1,12 @@
-const CONFIGURATION_OPTIONS = [
+const getConfigurationOptions = ({ t = () => {} }) => [
 	{
-		label : 'Old',
+		label : t('allocation:old_label'),
 		value : 'old_configuration',
 	},
 	{
-		label : 'New',
+		label : t('allocation:new_label'),
 		value : 'new_configuration',
 	},
 ];
 
-export default CONFIGURATION_OPTIONS;
+export default getConfigurationOptions;

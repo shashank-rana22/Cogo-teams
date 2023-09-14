@@ -1,19 +1,20 @@
 import { Button, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function Header({ setEditing = () => {}, loading }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
-				<div className={styles.label}>Percentile Settings</div>
+				<div className={styles.label}>{t('allocation:percentile_setting_heading_title')}</div>
 
 				<Tooltip
 					className={styles.word_break}
-					content="When the account lies in the respective percentile it would be assigned
-					a score at that time based on the table given below to show the region in which
-					the account lies whether (COLD , ICE COLD , WARM , HOT , FLAMING HOT)"
+					content={t('allocation:percentile_setting_heading_tooltip_data')}
 					placement="top"
 				>
 					<IcMInfo height={16} className={styles.info_icon} />
@@ -27,8 +28,7 @@ function Header({ setEditing = () => {}, loading }) {
 					onClick={() => setEditing((pv) => !pv)}
 					disabled={loading}
 				>
-					{' '}
-					Edit
+					{t('allocation:percentile_setting_edit_button')}
 				</Button>
 			</div>
 

@@ -1,4 +1,5 @@
 import { Button, Toggle } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import SearchInput from '../../../../../common/SearchInput';
 
@@ -13,13 +14,15 @@ function Header({
 	searchValue,
 	setSearchValue = () => {},
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div className={styles.container}>
 			<Toggle
 				name="role_type"
 				size="md"
-				offLabel="Role"
-				onLabel="User"
+				offLabel={t('allocation:role_label')}
+				onLabel={t('allocation:user_label')}
 				value={toggleRoleType}
 				onChange={(e) => setParams((pv) => ({
 					...pv,
@@ -36,7 +39,7 @@ function Header({
 				<div className={styles.search_container}>
 					<SearchInput
 						size="sm"
-						placeholder="Search by Role name / User name"
+						placeholder={t('allocation:search_by_role_name_placeholder')}
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
@@ -50,7 +53,7 @@ function Header({
 					onClick={onClickCreateQuota}
 					disabled={disabled}
 				>
-					Create
+					{t('allocation:create_button')}
 				</Button>
 			</div>
 		</div>

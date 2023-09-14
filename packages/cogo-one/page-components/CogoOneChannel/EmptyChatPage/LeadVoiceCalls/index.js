@@ -1,4 +1,4 @@
-import { Input, Pagination } from '@cogoport/components';
+import { Input, Pagination, Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
@@ -6,14 +6,17 @@ import { Image } from '@cogoport/next';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useListLeadOrgUsers from '../../../../hooks/useListLeadOrgUsers';
 
+import CreateLeadAccount from './CreateLeadAccount';
 import LeadOrgCard from './LeadOrgCard';
 import styles from './styles.module.css';
 
 function LeadVoiceCalls({ setActiveTab = () => {} }) {
 	const dispatch = useDispatch();
+	const [createLeadModal, setCreateLeadModal] = useState(false);
 
 	const {
 		data,
@@ -22,6 +25,7 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		setSearch,
 		handlePagination,
 		partnerId,
+		getOrganizationUsers = () => {},
 	} = useListLeadOrgUsers();
 
 	const geo = getGeoConstants();
@@ -115,22 +119,30 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
 				<div className={styles.title}>Lead Contacts</div>
-				<Input
-					size="sm"
-					value={search}
-					onChange={setSearch}
-					prefix={<IcMSearchlight className={styles.search_icon} />}
-					placeholder="Search By Name"
-					className={styles.input_styled}
-					suffix={
-						(search ? (
+				<div className={styles.filter_section}>
+					<Button
+						size="md"
+						themeType="accent"
+						className={styles.add_button}
+						onClick={() => setCreateLeadModal(true)}
+					>
+						Create Account
+					</Button>
+					<Input
+						size="sm"
+						value={search}
+						onChange={setSearch}
+						prefix={<IcMSearchlight className={styles.search_icon} />}
+						placeholder="Search By Name"
+						className={styles.input_styled}
+						suffix={search ? (
 							<IcMCross
 								className={styles.cross_icon}
 								onClick={() => setSearch('')}
 							/>
-						) : null)
-				}
-				/>
+						) : null}
+					/>
+				</div>
 			</div>
 			{loading ? (
 				<div className={styles.loader}>
@@ -177,6 +189,12 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 					/>
 				) : null}
 			</div>
+			<CreateLeadAccount
+				createLeadModal={createLeadModal}
+				setCreateLeadModal={setCreateLeadModal}
+				getOrganizationUsers={getOrganizationUsers}
+			/>
+
 		</div>
 	);
 }

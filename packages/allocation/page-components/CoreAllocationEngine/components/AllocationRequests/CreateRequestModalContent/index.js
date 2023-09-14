@@ -1,9 +1,12 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import Form from '../../../../../common/Form';
 import useCreateAllocationRequest from '../../../hooks/useCreateAllocationRequest';
 
 function CreateUpdateModal(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { refetch, onCloseModal, params } = props;
 
 	const {
@@ -11,13 +14,13 @@ function CreateUpdateModal(props) {
 		loading: loadingOnSave,
 		formProps,
 		controls,
-	} = useCreateAllocationRequest({ onCloseModal, refetch, params });
+	} = useCreateAllocationRequest({ onCloseModal, refetch, params, t });
 
 	const { handleSubmit } = formProps;
 
 	return (
 		<>
-			<Modal.Header title="Create Request" />
+			<Modal.Header title={t('allocation:create_request_label')} />
 
 			<form onSubmit={handleSubmit(onSave)}>
 				<Modal.Body>
@@ -37,7 +40,7 @@ function CreateUpdateModal(props) {
 						onClick={onCloseModal}
 						style={{ marginRight: '10px' }}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 
 					<Button
@@ -47,7 +50,7 @@ function CreateUpdateModal(props) {
 						loading={loadingOnSave}
 						id="save_request_btn"
 					>
-						Save
+						{t('allocation:save_button')}
 					</Button>
 				</Modal.Footer>
 			</form>

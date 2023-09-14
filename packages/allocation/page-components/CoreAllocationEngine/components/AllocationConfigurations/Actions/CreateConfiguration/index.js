@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import Form from '../../../../../../common/Form';
 import useCreateConfigurations from '../../../../hooks/useCreateConfigurations';
@@ -11,6 +12,8 @@ function CreateConfiguration({
 	setShow,
 	listRefetch,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		controls,
 		onSubmit,
@@ -21,13 +24,16 @@ function CreateConfiguration({
 		item,
 		setShow,
 		listRefetch,
+		t,
 	});
 
 	const { handleSubmit } = formProps;
 
 	return (
 		<>
-			<Modal.Header title={`${viewType === 'create' ? 'Create' : 'Edit'} Configuration`} />
+			<Modal.Header title={`${viewType === 'create' ? t('allocation:create_button_label')
+				: t('allocation:edit_button')} ${t('allocation:configuration_label')}`}
+			/>
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Modal.Body>
@@ -44,7 +50,7 @@ function CreateConfiguration({
 							disabled={loading}
 							style={{ marginRight: '10px' }}
 						>
-							Cancel
+							{t('allocation:cancel_button')}
 						</Button>
 
 						<Button
@@ -53,7 +59,7 @@ function CreateConfiguration({
 							themeType="primary"
 							disabled={loading}
 						>
-							Save
+							{t('allocation:save_button')}
 						</Button>
 					</div>
 				</Modal.Footer>

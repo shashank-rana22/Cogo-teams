@@ -8,9 +8,11 @@ import formatData from './helpers/formatData';
 import { checkHangupStatus } from './helpers/hangupHelpers';
 import useCloseVoiceCall from './hooks/useCloseVoiceCall';
 import useFetchFirebaseRoom from './hooks/useFetchFirebase';
+import useGetUserCallDetails from './hooks/useGetUserCallDetails';
 import useHangUpCall from './hooks/useHangUpCall';
 import useOutgoingCall from './hooks/useOutgoingCall';
 import useUpdateLiveCallStatus from './hooks/useUpdateLiveCallStatus';
+import LogModal from './LogModal';
 import MinimizeCallModal from './MinimizeModal';
 
 const SECS_TO_MS = 1000;
@@ -48,14 +50,27 @@ function VoiceCall({ firestore = {} }) {
 		callRecordId = '',
 		callEndAt = '',
 		conferenceType = '',
+		selfOrganizationId = '',
+		source = '',
 	} = callState || {};
+	const { mobile_number = '', mobile_country_code = '' } = receiverUserDetails || {};
+
+	const {
+		loading = false,
+		data = {},
+	} = useGetUserCallDetails({
+		mobileNumber      : mobile_number,
+		mobileCountryCode : mobile_country_code,
+	});
+
+	const { agent_type = '' } = data || {};
 
 	const {
 		unmountVoiceCall,
 		openFeedbackform,
 	} = useCloseVoiceCall({ setCallState });
 
-	const { makeCallApi = () => {}, callLoading } = useOutgoingCall({
+	const { makeCallApi = () => { }, callLoading } = useOutgoingCall({
 		voiceCallData,
 		setCallState,
 		unmountVoiceCall,
@@ -113,6 +128,8 @@ function VoiceCall({ firestore = {} }) {
 		};
 	}, [callStartAt, status]);
 
+	const showLogModal = source === 'outstanding';
+
 	return (
 		<>
 			{showCallModalType === 'fullCallModal' && (
@@ -129,17 +146,30 @@ function VoiceCall({ firestore = {} }) {
 					attendees={attendees}
 					conferenceType={conferenceType}
 					callState={callState}
+					callUserDetails={data}
+					callUserLoading={loading}
 				/>
 			)}
-			{showCallModalType === 'feedbackModal' && (
+			{showCallModalType === 'feedbackModal' && !showLogModal && (
 				<FeedbackModal
 					receiverUserDetails={receiverUserDetails}
 					unmountVoiceCall={unmountVoiceCall}
 					loggedInAgentId={loggedInAgentId}
 					callStartAt={callStartAt}
 					callEndAt={callEndAt}
+					callRecordId={callRecordId}
+					agentType={agent_type}
 				/>
 			)}
+
+			{showCallModalType === 'feedbackModal' && showLogModal && (
+				<LogModal
+					showLog
+					organizationId={selfOrganizationId}
+					unmountVoiceCall={unmountVoiceCall}
+				/>
+			)}
+
 			{showCallModalType === 'minimizedModal' && (
 				<MinimizeCallModal
 					receiverUserDetails={receiverUserDetails}

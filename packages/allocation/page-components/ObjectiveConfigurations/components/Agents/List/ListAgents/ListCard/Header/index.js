@@ -1,12 +1,15 @@
 import { Button, Pill } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 const MIN_LENGTH = 1;
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		userDetails,
 		mode,
@@ -28,7 +31,7 @@ function Header(props) {
 				themeType="secondary"
 				onClick={() => setMode('edit')}
 			>
-				Edit Distribution
+				{t('allocation:edit_distribution_button')}
 			</Button>
 		),
 		edit: (
@@ -39,7 +42,7 @@ function Header(props) {
 					onClick={onDistributeEqually}
 					disabled={loading}
 				>
-					Distribute Equally
+					{t('allocation:distribute_equally_button')}
 				</Button>
 
 				<Button
@@ -48,7 +51,7 @@ function Header(props) {
 					onClick={onDiscardChanges}
 					disabled={loading}
 				>
-					Discard Changes
+					{t('allocation:discard_changes_button')}
 				</Button>
 
 				<Button
@@ -58,7 +61,7 @@ function Header(props) {
 					loading={loading}
 				>
 					<IcMTick style={{ marginRight: '4px' }} />
-					Save Changes
+					{t('allocation:save_changes_button')}
 				</Button>
 			</>
 		),
@@ -76,7 +79,8 @@ function Header(props) {
 
 				{!isEmpty(partner) && (
 					<Pill size="md">
-						Entity:
+						{t('allocation:entity_label')}
+						:
 						{' '}
 						{partner.business_name}
 					</Pill>

@@ -1,9 +1,10 @@
 import { Button, Modal, Pagination, RadioGroup, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import AsyncSelect from '../../../../../../../../common/Form/components/Business/AsyncSelect';
 import SearchInput from '../../../../../../../../common/SearchInput';
-import EDIT_AGENTS_RADIO_OPTIONS from '../../../../../../configurations/edit-agent-select-type-radio-options';
+import getEditAgentRadioOptions from '../../../../../../configurations/edit-agent-select-type-radio-options';
 import SELECT_AGENTS_KEYS_MAPPING from '../../../../../../constants/select-agents-keys-mapping';
 
 import getListColumns from './get-list-columns';
@@ -13,6 +14,8 @@ import useEditApplicableAgents from './useEditApplicableAgents';
 const { SELECT_ALL } = SELECT_AGENTS_KEYS_MAPPING;
 
 function EditApplicableAgentsModal(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { showEditAgentsModal, setShowEditAgentsModal, watchRoles, formValues, setFormValues } = props;
 
 	const {
@@ -32,7 +35,9 @@ function EditApplicableAgentsModal(props) {
 		setSelectedRmIds,
 	} = useEditApplicableAgents({ watchRoles, formValues, setFormValues, setShowEditAgentsModal });
 
-	const { LIST_COLUMNS } = getListColumns({ selectMode, selectedAgentIds, setSelectedAgentIds });
+	const { LIST_COLUMNS } = getListColumns({ selectMode, selectedAgentIds, setSelectedAgentIds, t });
+
+	const editAgnetRadioOptions = getEditAgentRadioOptions({ t });
 
 	const { page = 1, total_count = 0, page_limit = 10 } = paginationData || {};
 
@@ -44,19 +49,18 @@ function EditApplicableAgentsModal(props) {
 			showCloseIcon
 			animate
 		>
-			<Modal.Header title={<h4 className={styles.title}>Edit Applicable Agents</h4>} />
+			<Modal.Header title={<h4 className={styles.title}>{t('allocation:edit_applicable_agents_title')}</h4>} />
 
 			<Modal.Body>
 				<p className={styles.description}>
-					Select from Agents for whom this objective will be applied.
-					By default All agents in the Selected Role will be selected. You may edit it from here.
+					{t('allocation:select_agents_description')}
 				</p>
 
-				<p><b>Note: Only deallocation will run on blocked agents.</b></p>
+				<p><b>{t('allocation:note_blocked_agents')}</b></p>
 
 				<RadioGroup
 					className={styles.radio_group}
-					options={EDIT_AGENTS_RADIO_OPTIONS}
+					options={editAgnetRadioOptions}
 					value={selectMode}
 					onChange={setSelectMode}
 				/>
@@ -65,7 +69,7 @@ function EditApplicableAgentsModal(props) {
 					<div className={styles.control_container}>
 						<SearchInput
 							size="md"
-							placeholder="Search by Agent"
+							placeholder={t('allocation:search_agent_placeholder')}
 							value={searchValue}
 							setGlobalSearch={setSearchValue}
 							debounceQuery={debounceQuery}
@@ -74,7 +78,7 @@ function EditApplicableAgentsModal(props) {
 
 					<div className={styles.control_container}>
 						<AsyncSelect
-							placeholder="Select Reporting Manager"
+							placeholder={t('allocation:select_reporting_manager_placeholder')}
 							asyncKey="partner_users"
 							valueKey="user_id"
 							intialCall
@@ -112,7 +116,7 @@ function EditApplicableAgentsModal(props) {
 					style={{ marginRight: '8px' }}
 					onClick={() => setShowEditAgentsModal(false)}
 				>
-					Cancel
+					{t('allocation:cancel_button')}
 				</Button>
 
 				<Button
@@ -121,7 +125,7 @@ function EditApplicableAgentsModal(props) {
 					onClick={onApplyChanges}
 					disabled={loading || (selectMode !== SELECT_ALL && isEmpty(selectedAgentIds))}
 				>
-					Apply Changes
+					{t('allocation:apply_changes_button')}
 				</Button>
 			</Modal.Footer>
 		</Modal>

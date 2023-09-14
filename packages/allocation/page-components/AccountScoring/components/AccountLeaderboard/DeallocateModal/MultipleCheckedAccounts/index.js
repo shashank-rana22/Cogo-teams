@@ -1,10 +1,15 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 
-import WARMTH_ACCOUNTS_STATS from '../../../../constants/get-multiple-account-stats';
+import getWarmthAccountStats from '../../../../constants/get-multiple-account-stats';
 
 import styles from './styles.module.css';
 
 function MultipleCheckedAccounts({ modalDetailsArray = [] }) {
+	const { t } = useTranslation(['allocation']);
+
+	const warmthAccountStats = getWarmthAccountStats({ t });
+
 	const filteredList = modalDetailsArray.reduce(
 		(result, singleAccount) => {
 			const { warmth } = singleAccount;
@@ -20,14 +25,14 @@ function MultipleCheckedAccounts({ modalDetailsArray = [] }) {
 
 	return (
 		<div className={styles.container}>
-			You are about to de-allocate
+			{t('allocation:you_are_about_to_deallocate')}
 			{' '}
 			{modalDetailsArray?.length}
 			{' '}
-			Users.
-			Please verify from the list below before de-allocation
+			{t('allocation:users')}
+			{t('allocation:please_verify_deallocation_phrase')}
 			<div className={styles.account_stats}>
-				{WARMTH_ACCOUNTS_STATS.map((item) => {
+				{(warmthAccountStats || []).map((item) => {
 					const { key, label, flex } = item;
 					return (
 						<div key={key} style={{ flex }}>

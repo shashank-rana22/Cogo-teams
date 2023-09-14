@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import useListAllocationDetails from '../../hooks/useListAllocationDetails';
 
 import Header from './Header';
@@ -5,6 +7,8 @@ import List from './List';
 import styles from './styles.module.css';
 
 function Details() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list,
 		loading,
@@ -23,7 +27,7 @@ function Details() {
 		columns,
 		stakeholderDetail,
 		setStakeholderDetail,
-	} = useListAllocationDetails();
+	} = useListAllocationDetails({ t });
 
 	return (
 		<section className={styles.container} id="allocation_details_container">

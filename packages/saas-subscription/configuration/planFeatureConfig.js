@@ -1,32 +1,32 @@
-const planFeatureConfig = [
+const getPlanFeatureConfig = ({ t }) => [
 	{
 		key   : 'value',
-		title : 'Value',
+		title : t('saasSubscription:pricing_plan_config_val'),
 		width : '50%',
 	},
 	{
 		key   : 'display_name',
-		title : 'Display Name',
+		title : t('saasSubscription:pricing_plan_config_name'),
 		width : '50%',
 	},
 ];
 
-const updatePlanFeatureConfig = [
+const getUpdatePlanFeatureConfig = ({ t }) => [
 	{
 		key   : 'value',
-		title : 'Value',
+		title : t('saasSubscription:pricing_update_plan_config_val'),
 		width : '25%',
 	},
 	{
 		key   : 'feature_name',
-		title : 'Display Name',
+		title : t('saasSubscription:pricing_update_plan_config_name'),
 		width : '45%',
 	},
 	{
 		key   : 'sequence',
-		title : 'Sequence',
+		title : t('saasSubscription:pricing_update_plan_config_seq'),
 		width : '20%',
 	},
 ];
-export default planFeatureConfig;
-export { updatePlanFeatureConfig };
+export default getPlanFeatureConfig;
+export { getUpdatePlanFeatureConfig };

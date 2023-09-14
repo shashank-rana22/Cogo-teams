@@ -5,31 +5,31 @@ import getChannelWiseRolesFilters from '../helpers/get-channel-wise-roles-filter
 import getEntityOptions from '../helpers/get-entity-options';
 
 const getGeneralConfiguratioFormControls = (props) => {
-	const { watchPartner, watchChannel, disabled } = props;
+	const { watchPartner, watchChannel, disabled, t = () => {} } = props;
 
 	const controls = [
 		{
 			name  : 'objective_type',
 			label : (
 				<>
-					Select Objective Type
+					{t('allocation:select_objective_type')}
 					<sup style={{ color: 'red' }}>*</sup>
 				</>
 			),
 			type        : 'select',
-			placeholder : 'Objective Type',
+			placeholder : t('allocation:objective_type_placeholder'),
 			options     : [
 				{
-					label : 'Company',
+					label : t('allocation:company_options'),
 					value : 'company',
 				},
 				{
-					label : 'Team',
+					label : t('allocation:team_options'),
 					value : 'team',
 				},
 			],
 			rules: {
-				required: 'Objective Type is required',
+				required: t('allocation:objective_type_required'),
 			},
 			disabled,
 		},
@@ -37,14 +37,14 @@ const getGeneralConfiguratioFormControls = (props) => {
 			name  : 'name',
 			label : (
 				<>
-					Objective Name
+					{t('allocation:objective_name')}
 					<sup style={{ color: 'red' }}>*</sup>
 				</>
 			),
 			type        : 'text',
-			placeholder : 'Objective Name',
+			placeholder : t('allocation:objective_name_placeholder'),
 			rules       : {
-				required: 'Objective Name is required',
+				required: t('allocation:objective_name_required'),
 			},
 			disabled,
 		},
@@ -52,15 +52,15 @@ const getGeneralConfiguratioFormControls = (props) => {
 			name  : 'partner',
 			label : (
 				<>
-					Select Cogo Entity
+					{t('allocation:select_cogo_entity')}
 					<sup style={{ color: 'red' }}>*</sup>
 				</>
 			),
-			placeholder : 'Cogo Entity',
+			placeholder : t('allocation:cogo_entity_placeholder'),
 			type        : 'select',
 			options     : getEntityOptions(),
 			rules       : {
-				required: 'Cogo Entity is required',
+				required: t('allocation:cogo_entity_required'),
 			},
 			disabled,
 		},
@@ -68,28 +68,28 @@ const getGeneralConfiguratioFormControls = (props) => {
 			name  : 'channels',
 			label : (
 				<>
-					Select Channel
+					{t('allocation:select_channel')}
 					<sup style={{ color: 'red' }}>*</sup>
 				</>
 			),
 			type        : 'multiSelect',
-			placeholder : 'Channel',
+			placeholder : t('allocation:channel_placeholder'),
 			options     : [
 				{
-					label : 'SME',
+					label : t('allocation:sme_options'),
 					value : 'sme',
 				},
 				{
-					label : 'Enterprise',
+					label : t('allocation:enterprise'),
 					value : 'enterprise',
 				},
 				{
-					label : 'CP',
+					label : t('allocation:cp_options'),
 					value : 'cp',
 				},
 			],
 			rules: {
-				required: 'Channel is required',
+				required: t('allocation:channel_required'),
 			},
 			disabled,
 		},
@@ -97,11 +97,11 @@ const getGeneralConfiguratioFormControls = (props) => {
 			name  : 'roles',
 			label : (
 				<>
-					Select Cogoport Agent Roles
+					{t('allocation:select_agent_roles')}
 					<sup style={{ color: 'red' }}>*</sup>
 				</>
 			),
-			placeholder : 'Agent Roles',
+			placeholder : t('allocation:agent_roles_placeholder'),
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'partner_roles',
@@ -119,7 +119,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 				},
 			},
 			rules: {
-				required: 'Roles is required',
+				required: t('allocation:roles_required'),
 			},
 			getModifiedOptions: ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),

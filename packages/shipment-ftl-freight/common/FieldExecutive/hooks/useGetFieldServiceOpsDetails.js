@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
@@ -8,6 +9,7 @@ const useGetFieldServiceOpsDetails = ({
 	shipment_id = '',
 	setInitFormattedData = () => {},
 	setOtherFormattedData = () => {},
+	setTruckType = () => {},
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_shipment_field_service_ops_detail',
@@ -16,13 +18,14 @@ const useGetFieldServiceOpsDetails = ({
 
 	const getDetails = useCallback(async (truck_number) => {
 		try {
-			await trigger({
+			const resp = await trigger({
 				params: { shipment_id, truck_number },
 			});
+			setTruckType(resp?.data?.data?.truck_type ?? null);
 		} catch (error) {
-			console.error(error?.data);
+			toastApiError(error);
 		}
-	}, [trigger, shipment_id]);
+	}, [trigger, shipment_id, setTruckType]);
 
 	useEffect(() => {
 		if (!isEmpty(data)) {

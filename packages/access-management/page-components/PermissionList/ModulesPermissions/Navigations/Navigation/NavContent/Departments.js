@@ -1,62 +1,9 @@
 import { Chips, MultiSelect } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
-
-const OPTIONS = [
-	{
-		children : 'Supply',
-		key      : 'supply',
-	},
-	{
-		children : 'Sales',
-		key      : 'sales',
-	},
-	{
-		children : 'Operations',
-		key      : 'operations',
-	},
-	{
-		children : 'Finance',
-		key      : 'finance',
-	},
-	{
-		children : 'Channel Partner',
-		key      : 'channel_partner',
-	},
-];
-
-const OPTIONS_Select = [
-	{
-		label : 'Allow',
-		value : 'allowed',
-	},
-	{
-		label : 'Self',
-		value : 'self',
-	},
-	{
-		label : 'Team',
-		value : 'team',
-	},
-	{
-		label : 'All',
-		value : 'all',
-	},
-	{
-		label : 'Across All',
-		value : 'across_all',
-	},
-
-	{
-		label : 'Channel Partner',
-		value : 'channel_partner',
-	},
-	{
-		label : 'Channel Partner Team',
-		value : 'channel_partner_team',
-	},
-];
 
 const through_criteria = {
 	supply: [
@@ -84,41 +31,95 @@ const through_criteria = {
 };
 
 const getThroughCriteria = (item) => {
-	const allTC = [];
+	const ALL_TC = [];
 	(item || []).forEach((key) => {
-		allTC.push(...through_criteria[key]);
+		ALL_TC.push(...through_criteria[key]);
 	});
-	return allTC;
+	return ALL_TC;
 };
 
 const getDepartment = (item) => {
-	const allDepartments = [];
+	const ALL_DEPARTMENTS = [];
 	Object.keys(through_criteria)?.forEach((key) => {
-		if (through_criteria[key].filter((tc) => item.includes(tc)).length > 0) {
-			allDepartments.push(key);
+		if (through_criteria[key].filter((tc) => item.includes(tc)).length > GLOBAL_CONSTANTS.zeroth_index) {
+			ALL_DEPARTMENTS.push(key);
 		}
 	});
-	return allDepartments;
+	return ALL_DEPARTMENTS;
 };
 
 function Departments({ onChange = () => {}, selectedDepartments = {} }) {
+	const { t } = useTranslation(['accessManagement']);
+	const OPTIONS_Select = [
+		{
+			label : t('accessManagement:roles_and_permission_allow'),
+			value : 'allowed',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_self'),
+			value : 'self',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_team'),
+			value : 'team',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_all'),
+			value : 'all',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_across_all'),
+			value : 'across_all',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_channel_partner'),
+			value : 'channel_partner',
+		},
+		{
+			label : t('accessManagement:roles_and_permission_channel_partner_team'),
+			value : 'channel_partner_team',
+		},
+	];
+
+	const OPTIONS = [
+		{
+			children : t('accessManagement:roles_and_permission_update_edit_role_role_functions_supply'),
+			key      : 'supply',
+		},
+		{
+			children : t('accessManagement:roles_and_permission_update_edit_role_role_functions_sales'),
+			key      : 'sales',
+		},
+		{
+			children : t('accessManagement:roles_and_permission_update_edit_role_role_functions_operations'),
+			key      : 'operations',
+		},
+		{
+			children : t('accessManagement:roles_and_permission_update_edit_role_role_functions_finance'),
+			key      : 'finance',
+		},
+		{
+			children : t('accessManagement:roles_and_permission_pills_channel_partner'),
+			key      : 'channel_partner',
+		},
+	];
 	return (
 		<section>
-			<h4>Access types (scopes)</h4>
+			<h4>{t('accessManagement:roles_and_permission_department_description_access_type_scopes')}</h4>
 			<MultiSelect
-				placeholder="Choose type"
+				placeholder={
+					t('accessManagement:roles_and_permission_department_description_access_type_scopes_placeholder')
+				}
 				value={selectedDepartments.scopes}
 				onChange={(val) => onChange({ scopes: val })}
 				options={OPTIONS_Select}
 				style={{ marginBottom: '8px' }}
 			/>
 			<span>
-				Access type allows this role too see data in different formats. For
-				e.g. if you are selecting team, role will be able to see their team
-				memebers data in that navigation.
+				{t('accessManagement:roles_and_permission_access_type_allows_description')}
 			</span>
 			<div style={{ marginTop: '20px' }}>
-				<h4>Departments</h4>
+				<h4>{t('accessManagement:roles_and_permission_department_description_label')}</h4>
 				<Chips
 					className={styles.chips}
 					items={OPTIONS}
@@ -128,10 +129,7 @@ function Departments({ onChange = () => {}, selectedDepartments = {} }) {
 				/>
 			</div>
 			<span>
-				Department allow this role too see data via different criterias in a
-				particular scope. For e.g If you have selected sales then role will be
-				able to see data in which they are tagged as sales owner or team members
-				data in which their team members are tagged as sales owner
+				{t('accessManagement:roles_and_permission_department_description')}
 				{' '}
 			</span>
 		</section>

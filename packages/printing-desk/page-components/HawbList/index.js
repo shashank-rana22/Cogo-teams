@@ -1,4 +1,5 @@
 import { Loader } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect } from 'react';
 
 import { hawbFields } from '../../configurations/hawb-fields';
@@ -17,7 +18,8 @@ const EDIT_HAWB = {
 };
 
 function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdit = () => {} }) {
-	const { fields } = hawbFields;
+	const { t } = useTranslation(['printingDesk']);
+	const fields = hawbFields({ t });
 	const { shipmentId, documentData = {} } = data || {};
 
 	const { data:hawbData = {}, loading, getHawbList:listAPI } = useGetHawbList(shipmentId);

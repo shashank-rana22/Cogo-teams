@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 
 const usePublishDraft = (props) => {
@@ -9,9 +10,10 @@ const usePublishDraft = (props) => {
 		expertiseRefetch,
 		cardRefetch,
 		list,
+		t = () => {},
 	} = props;
 
-	const draftData = list.filter((item) => item?.status === 'draft')?.[0] || {};
+	const draftData = list.filter((item) => item?.status === 'draft')?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { version_id = '' } = draftData;
 
@@ -40,7 +42,7 @@ const usePublishDraft = (props) => {
 
 			cardRefetch();
 
-			Toast.success('Version Published Successfully');
+			Toast.success(t('allocation:version_published_successfully_toast'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

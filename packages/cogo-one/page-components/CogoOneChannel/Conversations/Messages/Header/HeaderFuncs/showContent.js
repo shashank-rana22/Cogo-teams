@@ -58,7 +58,12 @@ function ShowContent({
 
 	const handleRemoveTags = ({ item }) => {
 		const updatedList = (list || []).filter((value) => value !== item);
-		updateChat({ tags: (updatedList || []) });
+
+		updateChat({
+			tags   : (updatedList || []),
+			action : 'tags_changed',
+			reason : item === 'important' ? 'removed Important Tag' : '',
+		});
 	};
 
 	if (isEmpty(list)) {

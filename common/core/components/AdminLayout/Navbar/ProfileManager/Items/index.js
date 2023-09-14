@@ -1,7 +1,8 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import SwitchAccounts from '../../SwitchAccounts';
@@ -15,6 +16,7 @@ const THIRTY_SECONDS = 30;
 const ONE = 1;
 const TWO = 2;
 const ZERO_COUNT = 0;
+const MAX_NOTIFICATION_COUNT = 99;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -63,6 +65,8 @@ function Items({
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
 }) {
+	const { t } = useTranslation(['common']);
+
 	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
@@ -192,26 +196,6 @@ function Items({
 				})}
 			</div>
 
-			{(notificationCount > ZERO_COUNT && showSubNav) && (
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						style={{ width: '100%', marginTop: 10 }}
-						themeType="primary"
-						onClick={notificationRedirect}
-						disabled={loadingState}
-					>
-						You have
-						{' '}
-						{notificationCount}
-						{' '}
-						new
-						{' '}
-						{notificationCount > ONE ? 'notifications' : 'notification'}
-					</Button>
-				</div>
-			)}
-
 			{showSubNav && (
 				<div className={styles.button_container}>
 					<Button
@@ -221,7 +205,34 @@ function Items({
 						onClick={redirect}
 						disabled={loadingState}
 					>
-						Add Account
+						{t('common:add_account')}
+					</Button>
+				</div>
+			)}
+
+			{notificationCount > ZERO_COUNT && (
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						style={{ width: '100%', marginTop: 10 }}
+						themeType="primary"
+						onClick={notificationRedirect}
+						disabled={loadingState}
+					>
+						{resetSubnavs ? (
+							`${t('common:you_have')} ${notificationCount} ${t('common:new')} ${
+								notificationCount > ONE ? t('common:notifications') : t('common:notification')
+							}`
+						) : (
+							<div className={styles.notification_wrapper}>
+								<IcMNotifications height="24px" width="24px" />
+								<div className={styles.notifications_badge}>
+									{notificationCount > MAX_NOTIFICATION_COUNT
+										? `${MAX_NOTIFICATION_COUNT}+`
+										: notificationCount}
+								</div>
+							</div>
+						)}
 					</Button>
 				</div>
 			)}

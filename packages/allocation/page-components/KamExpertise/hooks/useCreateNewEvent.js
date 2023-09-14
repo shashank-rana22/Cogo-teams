@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
@@ -8,6 +9,7 @@ function useCreateNewEvent(props) {
 		attributeList = [],
 		listRefetch = () => {},
 		setEventListData = () => {},
+		t = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -23,11 +25,11 @@ function useCreateNewEvent(props) {
 			expertise_type, group_name, condition_name, event_state_on, description, attribute,
 		} = formValues;
 
-		const payloadAttribute = [];
+		const PAYLOAD_ATTRIBUTE = [];
 		attributeList.forEach((res) => {
 			Object.keys(formValues).forEach((response) => {
 				if (response === res?.name && !isEmpty(formValues[response] || [])) {
-					payloadAttribute.push({
+					PAYLOAD_ATTRIBUTE.push({
 						rule_id   : res?.id,
 						parameter : Array.isArray(formValues[response]) ? formValues[response] : [formValues[response]],
 					});
@@ -35,8 +37,8 @@ function useCreateNewEvent(props) {
 			});
 		});
 
-		if (payloadAttribute.length === 0) {
-			Toast.default('Enter Attribute Value');
+		if (PAYLOAD_ATTRIBUTE.length === GLOBAL_CONSTANTS.zeroth_index) {
+			Toast.default(t('allocation:enter_attribute_value'));
 		} else {
 			try {
 				const payload = {
@@ -44,7 +46,7 @@ function useCreateNewEvent(props) {
 					group_name     : group_name || undefined,
 					condition_name : condition_name || undefined,
 					event_state_on,
-					attributes     : payloadAttribute,
+					attributes     : PAYLOAD_ATTRIBUTE,
 					description,
 					attribute,
 
@@ -54,7 +56,7 @@ function useCreateNewEvent(props) {
 					data: payload,
 				});
 
-				Toast.success('Event Successfully Created!');
+				Toast.success(t('allocation:event_successfully_created_toast'));
 				listRefetch();
 				setEventListData({
 					data        : {},
@@ -63,7 +65,7 @@ function useCreateNewEvent(props) {
 			} catch (error) {
 				Toast.error(
 					getApiErrorString(error?.response?.data)
-								|| 'Unable to Create Event, Please try again!!',
+					|| t('allocation:unable_to_create_event'),
 				);
 			}
 		}

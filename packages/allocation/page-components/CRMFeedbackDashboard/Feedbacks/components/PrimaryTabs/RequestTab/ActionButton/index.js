@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import useDeactivateRequest from '../../../../../hooks/useDeactivateRequest';
 
@@ -13,15 +14,17 @@ function ActionButton({
 	feedback_request_id = '',
 	refetch = () => {},
 }) {
+	const router = useRouter();
+
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		loading = false,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onDeactivateRequest = () => {},
 		onCloseModal = () => {},
-	} = useDeactivateRequest({ feedback_request_id, refetch });
-
-	const router = useRouter();
+	} = useDeactivateRequest({ feedback_request_id, refetch, t });
 
 	const url = `/allocation/responses/${feedback_request_id}?third_party=${third_party}&organization=${organization}`;
 
@@ -55,15 +58,15 @@ function ActionButton({
 					onClose={onCloseModal}
 					placement="top"
 				>
-					<Modal.Header title="Deactivate Enrichment Request" />
+					<Modal.Header title={t('allocation:deactivate_enrichment_request')} />
 
 					<Modal.Body className={styles.modal_body}>
-						You are about to Deactivate a Request sent to
+						{t('allocation:deactivate_enrichment_request_phrase')}
 						{' '}
 						<i>
 							{third_party || '--'}
 						</i>
-						, are you sure?
+						{t('allocation:are_you_sure')}
 					</Modal.Body>
 
 					<Modal.Footer>
@@ -74,7 +77,7 @@ function ActionButton({
 							disabled={loading}
 							onClick={onCloseModal}
 						>
-							Cancel
+							{t('allocation:cancel_button')}
 						</Button>
 
 						<Button
@@ -85,7 +88,7 @@ function ActionButton({
 							onClick={onDeactivateRequest}
 							loading={loading}
 						>
-							Delete
+							{t('allocation:delete_button')}
 						</Button>
 					</Modal.Footer>
 				</Modal>

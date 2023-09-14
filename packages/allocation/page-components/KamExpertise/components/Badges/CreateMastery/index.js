@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
@@ -12,6 +13,8 @@ const UploadController = getFieldController('fileUpload');
 const InputController = getFieldController('textarea');
 
 function CreateMastery(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		setToggleScreen,
 		masteryItemData = {},
@@ -26,7 +29,7 @@ function CreateMastery(props) {
 		loading = false,
 		onSave,
 		onClose,
-	} = useCreateMasterConfiguration({ masteryItemData, setToggleScreen, listRefetch });
+	} = useCreateMasterConfiguration({ masteryItemData, setToggleScreen, listRefetch, t });
 
 	const {
 		control,
@@ -36,7 +39,7 @@ function CreateMastery(props) {
 	} = formProps;
 
 	const watch_image_input = watch('image_input');
-	const updated_at = audits?.[0]?.created_at || null;
+	const updated_at = audits?.[GLOBAL_CONSTANTS.zeroth_index]?.created_at || null;
 
 	return (
 		<form onSubmit={handleSubmit(onSave)}>
@@ -48,7 +51,9 @@ function CreateMastery(props) {
 								className={styles.text_styles}
 								style={{ paddingRight: '10px' }}
 							>
-								Last Modified :
+								{t('allocation:last_modified_label')}
+								{' '}
+								:
 								{' '}
 								{updated_at ? formatDate({
 									date       : updated_at,
@@ -58,7 +63,9 @@ function CreateMastery(props) {
 							</p>
 
 							<p className={styles.text_styles}>
-								Last Modified By :
+								{t('allocation:last_modified_by_label')}
+								{' '}
+								:
 								{' '}
 								{created_by?.name}
 							</p>
@@ -66,11 +73,12 @@ function CreateMastery(props) {
 						</div>
 					) : null}
 
-					<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Mastery</h2>
+					<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
+						{t('allocation:add_mastery_label')}
+					</h2>
 
 					<p className={styles.text_styles2}>
-						Select the conditions and number of completions necessary to
-						obtain the badge.
+						{t('allocation:create_mastery_phrase')}
 					</p>
 				</div>
 
@@ -105,7 +113,9 @@ function CreateMastery(props) {
 
 					<div className={styles.lower_background}>
 						<div style={{ width: '29%' }}>
-							<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
+							<p style={{ color: '#4f4f4f' }}>
+								{t('allocation:badge_png')}
+							</p>
 
 							<div className={styles.uploader}>
 								<UploadController
@@ -115,7 +125,7 @@ function CreateMastery(props) {
 									disabled={loading}
 									rules={isEmpty(masteryItemData)
 										? {
-											required: 'Image is required',
+											required: t('allocation:image_is_required'),
 										}
 										: {}}
 								/>
@@ -144,17 +154,16 @@ function CreateMastery(props) {
 						</div>
 
 						<div className={styles.text_area_container}>
-							<p style={{ color: '#4f4f4f' }}>Description</p>
+							<p style={{ color: '#4f4f4f' }}>{t('allocation:description_label')}</p>
 
 							<InputController
 								name="description_input"
 								className={styles.text_area}
 								multiline
 								disabled={loading}
-								placeholder="Multimodal maestro is awarded
-                                				to users who complete gold 3 in all of these badges"
+								placeholder={t('allocation:description_input_placeholder')}
 								control={control}
-								rules={{ required: 'Description is required' }}
+								rules={{ required: t('allocation:description_input_rules_required') }}
 							/>
 
 							<div className={styles.error_message}>
@@ -172,7 +181,7 @@ function CreateMastery(props) {
 						onClick={onClose}
 						disabled={loading}
 					>
-						Cancel
+						{t('allocation:cancel_button')}
 					</Button>
 
 					<Button
@@ -182,7 +191,7 @@ function CreateMastery(props) {
 						id="save_button"
 						loading={loading}
 					>
-						Save
+						{t('allocation:save_button')}
 					</Button>
 				</div>
 			</section>

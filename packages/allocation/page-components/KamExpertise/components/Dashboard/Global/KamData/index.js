@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import useGetKamExpertiseDashboard from '../../../../hooks/useGetKamExpertiseDashboard';
@@ -17,6 +18,8 @@ const THREE = 3;
 const FOUR = 4;
 
 function KamData() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		loading = false,
 		dashboardData,
@@ -90,11 +93,10 @@ function KamData() {
 					))
 				}
 			</div>
-
 			{
 				isEmpty(kamLevel) && (
 					<div className={styles.level_zero}>
-						Click on KAM level card to view leaderboard overview
+						{t('allocation:level_card_to_view_leaderboard_overview')}
 					</div>
 				)
 			}
@@ -103,7 +105,7 @@ function KamData() {
 				<>
 					<div className={styles.container}>
 						<div className={styles.header}>
-							{`KAM ${kamLevel} Overview`}
+							{`${t('allocation:kam')} ${kamLevel} ${t('allocation:overview_label')}`}
 						</div>
 
 						<KamOverview

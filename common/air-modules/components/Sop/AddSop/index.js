@@ -22,6 +22,7 @@ function AddSop({
 	trade_partners_details,
 	primary_service,
 	shipment_data,
+	refetch = () => {},
 }) {
 	const [sopType, setSopType] = useState(SOP_TYPE_OPTIONS[GLOBAL_CONSTANTS.zeroth_index]?.value);
 	const [formHeading, setFormHeading] = useState('');
@@ -53,6 +54,7 @@ function AddSop({
 		trade_partners_details,
 		primary_service,
 		shipment_data,
+		refetch,
 	});
 
 	useEffect(() => {

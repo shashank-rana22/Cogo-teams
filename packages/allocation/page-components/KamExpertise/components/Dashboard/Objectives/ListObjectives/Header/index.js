@@ -1,8 +1,11 @@
 import { Toggle } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function Header(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		params = {},
 		setParams = () => { },
@@ -24,8 +27,8 @@ function Header(props) {
 				className={styles.toggle}
 				size="md"
 				name="active_status"
-				onLabel="Inactive"
-				offLabel="Active"
+				onLabel={t('allocation:active_status_on_label')}
+				offLabel={t('allocation:active_status_off_label')}
 				value={params?.filters?.status || ['active', 'live']}
 				onChange={() => handleToggle()}
 			/>

@@ -3,7 +3,7 @@ const formatIps = (ips) => {
 		const {
 			billing_address : billingAddress, id, is_active, services = [], is_igst,
 			invoice_currency, invoicing_party_total_discounted, invoice_total_currency,
-			status, source:invoice_source, invoice_language,
+			status, source:invoice_source, invoice_language, processing,
 		} = ip || {};
 
 		const {
@@ -57,6 +57,7 @@ const formatIps = (ips) => {
 			invoice_source,
 			is_igst,
 			invoice_language,
+			processing,
 		};
 	});
 

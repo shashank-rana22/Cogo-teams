@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
+import { FIREBASE_TABS, ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../../constants';
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
@@ -27,10 +28,12 @@ function ProfileDetails({
 	formattedMessageData = {},
 	orgId = '',
 	mailProps = {},
+	chatsConfig = {},
 }) {
-	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
+	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
-	const customerUserId = activeTab === 'message' ? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
+	const customerUserId = FIREBASE_TABS.includes(activeTab)
+		? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
 
 	const [activeSelect, setActiveSelect] = useState(
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
@@ -65,6 +68,8 @@ function ProfileDetails({
 		{ orgId },
 	);
 	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.data?.channel_type) && chatsConfig?.expandSideBar));
 
 	useEffect(() => {
 		setShowMore(false);
@@ -72,44 +77,46 @@ function ProfileDetails({
 
 	return (
 		<div className={styles.profile_div}>
-			<div className={cl`${styles.container}
+			{expandedSideBar ? (
+				<div className={cl`${styles.container}
 			${activeSelect === 'add_on_services' ? styles.add_on_services_tab : ''}`}
-			>
-				{ActiveComp && (
-					<ActiveComp
-						customerId={customerId}
-						activeMessageCard={activeMessageCard}
-						activeSelect={activeSelect}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
-						formattedMessageData={formattedMessageData}
-						loading={loading}
-						openNewTab={openNewTab}
-						ORG_PAGE_URL={ORG_PAGE_URL}
-						orgId={orgId}
-						disableQuickActions={disableQuickActions}
-						documents_count={documents_count}
-						setModalType={setModalType}
-						hideCpButton={hideCpButton}
-						getOrgDetails={getOrgDetails}
-						activeRoomLoading={activeRoomLoading}
-						setActiveSelect={setActiveSelect}
-						showMore={showMore}
-						setShowMore={setShowMore}
-						setRaiseTicketModal={setRaiseTicketModal}
-						zippedTicketsData={zippedTicketsData}
-						quotationSentData={quotationEmailSentAt}
-						viewType={viewType}
-						firestore={firestore}
-						userId={userId}
-						setActiveTab={setActiveTab}
-						mailProps={mailProps}
-						userData={(getUserLoading || !customerUserId) ? {} : userData}
-						getUserLoading={getUserLoading}
-						organizationData={organizationData}
-					/>
-				)}
-			</div>
+				>
+					{ActiveComp && (
+						<ActiveComp
+							customerId={customerId}
+							activeMessageCard={activeMessageCard}
+							activeSelect={activeSelect}
+							activeTab={activeTab}
+							activeVoiceCard={activeVoiceCard}
+							formattedMessageData={formattedMessageData}
+							loading={loading}
+							openNewTab={openNewTab}
+							ORG_PAGE_URL={ORG_PAGE_URL}
+							orgId={orgId}
+							disableQuickActions={disableQuickActions}
+							documents_count={documents_count}
+							setModalType={setModalType}
+							hideCpButton={hideCpButton}
+							getOrgDetails={getOrgDetails}
+							activeRoomLoading={activeRoomLoading}
+							setActiveSelect={setActiveSelect}
+							showMore={showMore}
+							setShowMore={setShowMore}
+							setRaiseTicketModal={setRaiseTicketModal}
+							zippedTicketsData={zippedTicketsData}
+							quotationSentData={quotationEmailSentAt}
+							viewType={viewType}
+							firestore={firestore}
+							userId={userId}
+							setActiveTab={setActiveTab}
+							mailProps={mailProps}
+							userData={(getUserLoading || !customerUserId) ? {} : userData}
+							getUserLoading={getUserLoading}
+							organizationData={organizationData}
+						/>
+					)}
+				</div>
+			) : null}
 
 			<RightSideNav
 				activeSelect={activeSelect}
@@ -125,6 +132,8 @@ function ProfileDetails({
 				orgId={orgId}
 				viewType={viewType}
 				formattedMessageData={formattedMessageData}
+				setActiveTab={setActiveTab}
+				expandSideBar={chatsConfig?.expandSideBar}
 			/>
 		</div>
 	);

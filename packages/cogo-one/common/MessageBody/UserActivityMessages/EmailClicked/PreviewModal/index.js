@@ -1,7 +1,8 @@
 import { Modal } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import PreviewHtml from './PreviewHtml';
+import PreviewHtml from '../../../../PreviewHtml';
+
 import styles from './styles.module.css';
 
 function PreviewModal({

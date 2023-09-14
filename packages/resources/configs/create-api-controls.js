@@ -29,10 +29,11 @@ const createApiResourceControls = [
 		rules : { required: 'Display Name is required' },
 	},
 	{
-		name  : 'service',
-		label : 'Service',
-		type  : 'select',
-		options: [
+		name    : 'service',
+		label   : 'Service',
+		type    : 'select',
+		options : [
+			{ label: 'Rolling Forecast', value: 'rolling_forecast' },
 			{ label: 'Lead', value: 'lead' },
 			{ label: 'Condition', value: 'condition' },
 			{ label: 'Ltl freight rate', value: 'ltl_freight_rate' },
@@ -138,8 +139,8 @@ const createApiResourceControls = [
 			{ label: 'Plutus', value: 'plutus' },
 			{ label: 'Iris', value: 'iris' },
 			{ label: 'Heimdall', value: 'heimdall' },
-			{ label: 'Hades', value: 'hades' }
-		  ],	
+			{ label: 'Hades', value: 'hades' },
+		],
 		width : '20%',
 		rules : { required: 'Service is required' },
 	},

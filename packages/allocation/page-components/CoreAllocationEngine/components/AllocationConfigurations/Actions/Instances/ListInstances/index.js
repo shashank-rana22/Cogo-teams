@@ -1,12 +1,15 @@
 import {
 	DateRangepicker, Table, Pagination,
 } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useListAllocationInstances from '../../../../../hooks/useListAllocationInstances';
 
 import styles from './styles.module.css';
 
 function ListInstances({ item }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list,
 		listLoading,
@@ -15,7 +18,7 @@ function ListInstances({ item }) {
 		dateRange,
 		setDateRange,
 		columns,
-	} =	 useListAllocationInstances({ item });
+	} =	 useListAllocationInstances({ item, t });
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 

@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
@@ -20,7 +21,7 @@ const useCreateShipmentTerminalService = ({
 			Toast.success('Terminal Charges Will Be Applied');
 			setTerminalChargeModal(false);
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
 	};
 

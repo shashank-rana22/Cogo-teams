@@ -5,8 +5,8 @@ import { useAllocationRequest } from '@cogoport/request';
 
 import getCreateRelationsControls from '../configurations/get-create-relation-controls';
 
-const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList = () => {} }) => {
-	const controls = getCreateRelationsControls();
+const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList = () => {}, t = () => {} }) => {
+	const controls = getCreateRelationsControls({ t });
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/relation',
@@ -59,7 +59,7 @@ const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList =
 
 			setShowCreateRelationModal(false);
 
-			Toast.success('Allocation Relation Created Successfully!');
+			Toast.success(t('allocation:allocation_relation_created_success'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response.data));
 		}

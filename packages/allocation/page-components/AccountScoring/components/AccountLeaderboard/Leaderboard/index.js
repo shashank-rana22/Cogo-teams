@@ -1,5 +1,6 @@
 import { Table, Pagination, Toggle, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
@@ -10,6 +11,8 @@ import getLeaderBoardColumns from './LeaderboardListColumns';
 import styles from './styles.module.css';
 
 function Leaderboard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		leaderboardList,
 		leaderboardLoading,
@@ -45,6 +48,7 @@ function Leaderboard(props) {
 		modalDetailsArray,
 		setModalDetailsArray,
 		leaderboardList,
+		t,
 	});
 
 	const onChangeBulkToggle = (event) => {
@@ -64,16 +68,16 @@ function Leaderboard(props) {
 
 	return (
 		<>
-			<div className={styles.header_text}>Leaderboard List</div>
+			<div className={styles.header_text}>{t('allocation:leader_board_list')}</div>
 			<div className={styles.bulk_container}>
 
 				<div className={styles.bulk_deallocate_toggle}>
-					Bulk De-allocate:
+					{t('allocation:bulk_deallocate')}
 					<Toggle
 						name="bulk_deallocate"
 						size="md"
-						offLabel="off"
-						onLabel="on"
+						offLabel={t('allocation:off_label')}
+						onLabel={t('allocation:on_label')}
 						onChange={(event) => onChangeBulkToggle(event)}
 					/>
 
@@ -84,8 +88,7 @@ function Leaderboard(props) {
 						disabled={(!bulkDeallocateFilter) || (bulkDeallocateFilter && isEmpty(checkedRowsId))}
 						onClick={() => setShowDeallocateModal(true)}
 					>
-						De-allocate
-
+						{t('allocation:deallocate')}
 					</Button>
 				</div>
 
@@ -97,7 +100,7 @@ function Leaderboard(props) {
 						height={220}
 						width={380}
 						flexDirection="column"
-						emptyText="Leaderboard Data not found"
+						emptyText={t('allocation:leaderboard_empty_state')}
 						textSize={20}
 					/>
 				</div>

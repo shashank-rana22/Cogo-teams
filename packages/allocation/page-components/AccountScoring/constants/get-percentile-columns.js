@@ -1,6 +1,6 @@
-const percentileColumns = [
+const getPercentileColumns = ({ t = () => {} }) => [
 	{
-		Header   : 'PERCENTILE RANGE',
+		Header   : t('allocation:percentile_range'),
 		accessor : ({ lower_limit = 0, upper_limit = 0 }) => (
 			<section>
 				{lower_limit}
@@ -10,7 +10,7 @@ const percentileColumns = [
 		),
 	},
 	{
-		Header   : 'BIAS SCORE',
+		Header   : t('allocation:bias_score'),
 		accessor : ({ score = 0 }) => (
 			<section>
 				{score}
@@ -19,4 +19,4 @@ const percentileColumns = [
 	},
 ];
 
-export default percentileColumns;
+export default getPercentileColumns;

@@ -1,4 +1,5 @@
 import { Button, Toggle } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import SearchInput from '../../../../../common/SearchInput';
 
@@ -15,6 +16,8 @@ function Header({
 	setSearchValue = () => {},
 	debounceQuery,
 }) {
+	const { t } = useTranslation(['allocation']);
+
 	const onChangeToggle = (event) => {
 		setParams((previousParams) => ({
 			...previousParams,
@@ -39,8 +42,8 @@ function Header({
 				<Toggle
 					name="relation_status"
 					size="md"
-					offLabel="Active"
-					onLabel="Pending"
+					offLabel={t('allocation:active_off_label')}
+					onLabel={t('allocation:pending_on_label')}
 					onChange={(event) => onChangeToggle(event)}
 					disabled={disabled}
 				/>
@@ -51,7 +54,7 @@ function Header({
 				<div className={styles.search_container}>
 					<SearchInput
 						size="sm"
-						placeholder="Search by Company Name/User/Stakeholder"
+						placeholder={t('allocation:search_business_name_placeholder')}
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
@@ -72,7 +75,7 @@ function Header({
 					onClick={() => setShowCreateRelationModal(true)}
 					disabled={disabled}
 				>
-					Create
+					{t('allocation:create_button')}
 				</Button>
 			</div>
 

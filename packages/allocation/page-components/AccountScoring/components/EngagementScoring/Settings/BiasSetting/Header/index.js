@@ -1,17 +1,20 @@
 import { Button, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function Header({ setEditing = () => {}, loading }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
-				<div className={styles.label}>Bias Settings</div>
+				<div className={styles.label}>{t('allocation:bias_settings')}</div>
 
 				<Tooltip
 					className={styles.word_break}
-					content="Bias is used to calculate the warmness of the KAM"
+					content={t('allocation:bias_setting_tooltip_data')}
 					placement="top"
 				>
 					<IcMInfo height={16} className={styles.info_icon} />
@@ -26,7 +29,7 @@ function Header({ setEditing = () => {}, loading }) {
 					disabled={loading}
 				>
 					{' '}
-					Edit
+					{t('allocation:bias_setting_edit_button')}
 				</Button>
 			</div>
 		</div>

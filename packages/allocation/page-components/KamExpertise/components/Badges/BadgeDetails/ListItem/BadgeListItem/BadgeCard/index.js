@@ -1,5 +1,6 @@
 import { Modal, Placeholder } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import useUpdateSingleBadge from '../../../../../../hooks/useBadgeConfigurationAttributes';
 import BadgeUpdateCard from '../../../../BadgeUpdateCard';
@@ -7,12 +8,14 @@ import BadgeUpdateCard from '../../../../BadgeUpdateCard';
 import styles from './styles.module.css';
 
 function BadgeCard(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { badgeItemData = {}, medal, isLast, listRefetch, data } = props;
 	const { score, image_url = '', id = '' } = data || {};
 
 	const {
 		onSave, loading, formProps, openModal, onClose,
-	} = useUpdateSingleBadge({ medal, id, image_url, score, listRefetch });
+	} = useUpdateSingleBadge({ medal, id, image_url, score, listRefetch, t });
 
 	const {
 		control, handleSubmit, watch,
@@ -43,7 +46,7 @@ function BadgeCard(props) {
 						<div className={styles.score}>
 							{score || '_'}
 							{' '}
-							Score
+							{t('allocation:score_label')}
 						</div>
 					</div>
 

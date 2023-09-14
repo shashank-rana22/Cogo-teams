@@ -5,7 +5,7 @@ import SELECT_AGENTS_KEYS_MAPPING from '../constants/select-agents-keys-mapping'
 const { SELECT_ONLY, EXCLUDE_ONLY } = SELECT_AGENTS_KEYS_MAPPING;
 
 const getCreateObjectivePayload = (props) => {
-	const { data, weightageData, distribute_equally } = props;
+	const { data, weightageData, distribute_equally, t = () => {} } = props;
 
 	const { generalConfiguration, objectiveRequirements } = data || {};
 
@@ -38,7 +38,7 @@ const getCreateObjectivePayload = (props) => {
 			const [objectiveId, userId, roleId] = controlName.split('_');
 
 			if (isEmpty(weightage)) {
-				throw new Error('Weightage for all objective not set. Please resolve all conflicts first.');
+				throw new Error(t('allocation:weightage_objective_not_set_toast_error'));
 			}
 
 			if (userId === 'undefined') {

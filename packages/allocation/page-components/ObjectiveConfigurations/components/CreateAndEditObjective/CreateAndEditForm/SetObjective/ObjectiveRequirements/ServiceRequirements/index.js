@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import Service from './Service';
@@ -10,6 +11,8 @@ import styles from './styles.module.css';
 const MIN_FIELD_LENGTH = 1;
 
 function ServiceRequirements(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		name,
 		control,
@@ -56,7 +59,7 @@ function ServiceRequirements(props) {
 				}}
 			>
 				<IcMPlusInCircle style={{ marginRight: '4px' }} />
-				Add Another
+				{t('allocation:add_another_button')}
 			</Button>
 
 			{showAddAnotherConditionModal && (

@@ -1,4 +1,5 @@
 import { Breadcrumb } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useGetBadgeList from '../../hooks/useGetBadgeList';
 
@@ -22,6 +23,8 @@ const BADGES_COMPONENTS_MAPPING = {
 };
 
 function Badges() {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list: badgeList = [],
 		toggleScreen,
@@ -77,31 +80,51 @@ function Badges() {
 		<section className={styles.main_container}>
 			<Breadcrumb className={styles.breadcrumb}>
 				<Breadcrumb.Item
-					label={<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>Dashboard</a>}
+					label={(
+						<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>
+							{t('allocation:dashboard_label')}
+						</a>
+					)}
 				/>
 
-				{ (toggleScreen === BADGE_DETAILS) && <Breadcrumb.Item label={<b>All Badges</b>} />}
+				{ (toggleScreen === BADGE_DETAILS) && (
+					<Breadcrumb.Item label={(
+						<b>
+							{t('allocation:all_badges_label')}
+						</b>
+					)}
+					/>
+				)}
 
 				{ (toggleScreen !== BADGE_DETAILS)
 					&& (
 						<Breadcrumb.Item
 							label={(
 								<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/view-badges`}>
-									All Badges
+									{t('allocation:all_badges_label')}
 								</a>
 							)}
 						/>
 					)}
 
 				{ (toggleScreen === CREATE_BADGE)
-					&& <Breadcrumb.Item label={<b>Add Badge</b>} />}
+					&& (
+						<Breadcrumb.Item label={(
+							<b>
+								{t('allocation:add_badge_label')}
+							</b>
+						)}
+						/>
+					)}
 
 				{ (toggleScreen === CREATE_MASTERY)
-					&& <Breadcrumb.Item label={<b>Add Mastery</b>} />}
+					&& <Breadcrumb.Item label={<b>{t('allocation:add_mastery_label')}</b>} />}
 			</Breadcrumb>
 
 			<section className={styles.container}>
-				<div className={styles.heading_container}>Badges</div>
+				<div className={styles.heading_container}>
+					{t('allocation:badges_label')}
+				</div>
 			</section>
 
 			{Component && (

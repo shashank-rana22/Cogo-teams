@@ -1,12 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-import getAddMasteryControls from '../configurations/get-add-mastery-controls';
+import getControls from '../configurations/get-add-mastery-controls';
 
 function useCreateMasterConfiguration(props) {
-	const { masteryItemData = {}, listRefetch, setToggleScreen } = props;
+	const { masteryItemData = {}, listRefetch, setToggleScreen, t = () => {} } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration',
@@ -15,6 +16,8 @@ function useCreateMasterConfiguration(props) {
 	}, { manual: true });
 
 	const { badge_name, expertise_configuration_detail_ids, description } = masteryItemData;
+
+	const getAddMasteryControls = getControls({ t });
 
 	const formProps = useForm({
 		defaultValues: {
@@ -57,7 +60,7 @@ function useCreateMasterConfiguration(props) {
 					...payload,
 					id            : masteryItemData.id,
 					badge_details : [{
-						...payload.badge_details?.[0],
+						...payload.badge_details?.[GLOBAL_CONSTANTS.zeroth_index],
 						badge_detail_id: masteryItemData?.mastery_details?.id,
 					}],
 				};
@@ -67,11 +70,12 @@ function useCreateMasterConfiguration(props) {
 
 			onClose();
 
-			Toast.success(isEmpty(masteryItemData) ? 'Master Badge Created !' : 'Master Badge Updated !');
+			Toast.success(isEmpty(masteryItemData) ? t('allocation:master_badge_created')
+				: t('allocation:master_badge_updated'));
 
 			listRefetch();
 		} catch (error) {
-			Toast.error(error?.response?.data?.error || 'Something went wrong');
+			Toast.error(error?.response?.data?.error || t('allocation:sonething_went_wrong'));
 		}
 	};
 

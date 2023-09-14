@@ -4,6 +4,8 @@ import Permissions from '../Permissions';
 
 import Departments from './Departments';
 
+const FIRST_SCREEN = 1;
+
 function NavContent({
 	navigationApis = {},
 	setNavigationRefs = {},
@@ -15,7 +17,7 @@ function NavContent({
 }) {
 	return (
 		<section>
-			{show === 1 ? (
+			{show === FIRST_SCREEN ? (
 				<Departments
 					onChange={onDepartmentChange}
 					selectedDepartments={selectedDepartments}

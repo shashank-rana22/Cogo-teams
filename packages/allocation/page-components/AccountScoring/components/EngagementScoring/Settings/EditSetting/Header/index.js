@@ -1,9 +1,12 @@
 import { Button, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function Header({ heading = '', tooltipData = '', onClose = () => {} }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
@@ -22,8 +25,7 @@ function Header({ heading = '', tooltipData = '', onClose = () => {} }) {
 					themeType="secondary"
 					onClick={onClose}
 				>
-					Cancel
-
+					{t('allocation:cancel_button')}
 				</Button>
 
 				<Button
@@ -31,7 +33,7 @@ function Header({ heading = '', tooltipData = '', onClose = () => {} }) {
 					themeType="primary"
 					style={{ marginLeft: '8px' }}
 				>
-					Save
+					{t('allocation:save_button')}
 				</Button>
 			</div>
 		</div>

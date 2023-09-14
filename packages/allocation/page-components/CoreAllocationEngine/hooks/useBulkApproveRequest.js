@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 const useBulkApproveRequest = (props) => {
-	const { onCloseModal, checkedRowsId, onClearSelection } = props;
+	const { onCloseModal, checkedRowsId, onClearSelection, t = () => {} } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/request_bulk_approve',
@@ -25,7 +25,7 @@ const useBulkApproveRequest = (props) => {
 
 			onClearSelection();
 
-			Toast.success('Request has been initiated successfully. Please wait for the changes to be reflected');
+			Toast.success(t('allocation:initiation_success_toast'));
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

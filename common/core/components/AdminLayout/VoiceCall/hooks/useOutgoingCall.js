@@ -10,6 +10,7 @@ const getPayload = ({
 	orgId = '',
 	userId = '',
 	loggedInAgentId = '',
+	source = 'cogo_one',
 }) => {
 	let payload = {};
 	if (isUnkownUser) {
@@ -26,7 +27,7 @@ const getPayload = ({
 		};
 	}
 
-	return { ...payload, source: 'cogo_one', agent_id: loggedInAgentId };
+	return { ...payload, source, agent_id: loggedInAgentId };
 };
 
 const setCallStateData = ({
@@ -35,8 +36,11 @@ const setCallStateData = ({
 	userId = '',
 	userName = '',
 	setCallState = () => {},
+	selfOrganizationId = {},
+	source = '',
 	lead_user_id = '',
 	lead_organization_id = '',
+	mobile_country_code = '',
 }) => {
 	const receiverUserDetails = {
 		mobile_number,
@@ -45,10 +49,13 @@ const setCallStateData = ({
 		organization_id : orgId,
 		lead_user_id,
 		lead_organization_id,
+		mobile_country_code,
 	};
 
 	setCallState((p) => ({
 		...p,
+		selfOrganizationId,
+		source,
 		receiverUserDetails,
 		lead_organization_id,
 		showCallModalType : 'fullCallModal',
@@ -77,9 +84,13 @@ function useOutgoingCall({
 		mobile_number = '',
 		mobile_country_code = '',
 		userName = '',
+		source = '',
+		orgData = {},
 		lead_user_id = '',
 		lead_organization_id = '',
 	} = voiceCallData || {};
+
+	const { selfOrganizationId = '' } = orgData || {};
 
 	const makeCallApi = useCallback(async () => {
 		try {
@@ -89,8 +100,11 @@ function useOutgoingCall({
 				userId,
 				userName,
 				setCallState,
+				selfOrganizationId,
+				source,
 				lead_user_id,
 				lead_organization_id,
+				mobile_country_code,
 			});
 
 			await trigger({
@@ -101,6 +115,7 @@ function useOutgoingCall({
 					orgId,
 					userId,
 					loggedInAgentId,
+					source,
 				}),
 			});
 		} catch (error) {
@@ -110,7 +125,7 @@ function useOutgoingCall({
 	}, [
 		isUnkownUser, lead_organization_id, lead_user_id,
 		loggedInAgentId, mobile_country_code, mobile_number, orgId,
-		setCallState, trigger, unmountVoiceCall, userId, userName,
+		setCallState, trigger, unmountVoiceCall, userId, userName, selfOrganizationId, source,
 	]);
 
 	return {

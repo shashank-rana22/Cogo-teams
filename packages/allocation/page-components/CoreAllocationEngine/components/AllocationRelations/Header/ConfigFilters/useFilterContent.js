@@ -1,13 +1,16 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import controls from '../../../../configurations/get-relations-filter-controls';
+import getControls from '../../../../configurations/get-relations-filter-controls';
 
-const useFilterContent = ({ params, setParams }) => {
+const useFilterContent = ({ params, setParams, t = () => {} }) => {
 	const [showFilters, setShowFilters] = useState(false);
 
 	const [filters, setFilters] = useState({});
+
+	const controls = getControls({ t });
 
 	const formProps = useForm();
 
@@ -30,13 +33,13 @@ const useFilterContent = ({ params, setParams }) => {
 	const applyFilters = () => {
 		const data = getValues();
 
-		const values = {};
+		const VALUES = {};
 		controls.forEach((control) => {
 			if (!isEmpty(data[control.name] || {})) {
-				values[control.name] = data?.[control.name];
+				VALUES[control.name] = data?.[control.name];
 			}
 		});
-		setFilters(values);
+		setFilters(VALUES);
 	};
 
 	const handleReset = () => {
@@ -61,7 +64,7 @@ const useFilterContent = ({ params, setParams }) => {
 		setShowFilters(false);
 	};
 
-	const filtersApplied = Object.keys(filters).length !== 0;
+	const filtersApplied = Object.keys(filters).length !== GLOBAL_CONSTANTS.zeroth_index;
 
 	return { controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied };
 };

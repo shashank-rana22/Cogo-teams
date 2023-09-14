@@ -1,6 +1,7 @@
 import { Placeholder, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDoubleLeft } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 
 import Heading from '../../../common/Heading';
@@ -16,31 +17,34 @@ function RoleDetails({
 	getRole = () => {},
 	activeNavs = [],
 }) {
+	const { t } = useTranslation(['accessManagement']);
+
 	const {
 		name = '',
 		remarks: descriptions = '',
 		stakeholder_type = '',
 		importedPermissions,
 	} = roleData;
+
 	const details = useMemo(
 		() => [
 			{
-				title    : 'Role',
+				title    : t('accessManagement:roles_and_permission_update_role_role'),
 				data     : name || '',
 				skeleton : { width: '80%' },
 			},
 			{
-				title    : 'Short Name',
+				title    : t('accessManagement:roles_and_permission_update_role_short_name'),
 				data     : roleData?.short_name || '-',
 				skeleton : { width: '50%' },
 			},
 			{
-				title    : 'Partner',
+				title    : t('accessManagement:roles_and_permission_update_role_partner'),
 				data     : (roleData?.partner?.business_name || '-').toUpperCase(),
 				skeleton : { width: '50%' },
 			},
 			{
-				title    : 'Role Description',
+				title    : t('accessManagement:roles_and_permission_update_role_role_description'),
 				data     : descriptions || '',
 				skeleton : { width: '100%' },
 			},
@@ -62,12 +66,13 @@ function RoleDetails({
 				placement="top"
 				trigger="mouseenter"
 				interactive
-				content={<div>Prefill permissions from other roles</div>}
+				content={<div>{t('accessManagement:roles_and_permission_prefill_permission_from_other_roles')}</div>}
 			>
 				<div>
 					<Button onClick={onImport}>
 						<IcMArrowDoubleLeft size={1.25} style={{ marginRight: 8 }} />
-						{isImported ? 'Clear Import' : 'Import Role'}
+						{isImported ? t('accessManagement:roles_and_permission_clear_import')
+							: t('accessManagement:roles_and_permission_import_role')}
 					</Button>
 				</div>
 			</Tooltip>
@@ -78,8 +83,8 @@ function RoleDetails({
 		<section className={styles.container}>
 			<div className={styles.heading_container}>
 				<Heading
-					title="Update Role"
-					subTitle="Update permissions for the role"
+					title={t('accessManagement:roles_and_permission_update_role_heading')}
+					subTitle={t('accessManagement:roles_and_permission_update_role_sub_heading')}
 				/>
 
 				<section className={styles.permissions_container}>

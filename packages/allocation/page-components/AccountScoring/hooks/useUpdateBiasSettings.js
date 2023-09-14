@@ -1,9 +1,15 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
+
+const FIRST_INDEX = 1;
 
 function useUpdateBiasSettings() {
+	const { t } = useTranslation(['allocation']);
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'engagement_scoring_settings_attributes',
 		method  : 'POST',
@@ -11,46 +17,46 @@ function useUpdateBiasSettings() {
 	}, { manual: true });
 
 	const onClickSave = async (formValues, onClose, refetch, preFilledList) => {
-		const valuesForPrefilling = [];
+		const VALUES_FOR_PREFILLING = [];
 
 		preFilledList.forEach((element) => {
 			const { id = '' } = element;
 
 			const scores = { id };
-			const scoring_criteria = {};
+			const SCORING_CRITERIA = {};
 
 			Object.keys(formValues).forEach((item) => {
 				const first_index = item.indexOf('_');
-				if (id === item.substring(0, first_index)) {
-					const attributeName = item.substring(first_index + 1);
+				if (id === item.substring(GLOBAL_CONSTANTS.zeroth_index, first_index)) {
+					const attributeName = item.substring(first_index + FIRST_INDEX);
 
-					scoring_criteria[attributeName] = formValues[item];
+					SCORING_CRITERIA[attributeName] = formValues[item];
 				}
 			});
 
-			scores.scoring_criteria = scoring_criteria;
+			scores.scoring_criteria = SCORING_CRITERIA;
 
 			if (!isEmpty(scores)) {
-				valuesForPrefilling.push(scores);
+				VALUES_FOR_PREFILLING.push(scores);
 			}
 		});
 
-		const setting_details = [];
+		const SETTING_DETAILS = [];
 
-		valuesForPrefilling.forEach((element) => {
-			const obj = {};
-			obj.setting_id = element.id || undefined;
-			obj.lower_limit = element.scoring_criteria.age_from || 0;
-			obj.upper_limit = element.scoring_criteria.age_to || undefined;
-			obj.score = element.scoring_criteria.multiplier || undefined;
+		VALUES_FOR_PREFILLING.forEach((element) => {
+			const OBJ = {};
+			OBJ.setting_id = element.id || undefined;
+			OBJ.lower_limit = element.scoring_criteria.age_from || GLOBAL_CONSTANTS.zeroth_index;
+			OBJ.upper_limit = element.scoring_criteria.age_to || undefined;
+			OBJ.score = element.scoring_criteria.multiplier || undefined;
 
-			setting_details.push(obj);
+			SETTING_DETAILS.push(OBJ);
 		});
 
 		try {
 			const payload = {
-				setting_type: 'bias',
-				setting_details,
+				setting_type    : 'bias',
+				setting_details : SETTING_DETAILS,
 			};
 
 			await trigger({
@@ -61,9 +67,9 @@ function useUpdateBiasSettings() {
 
 			onClose();
 
-			Toast.success('Settings updated succesfully!!');
+			Toast.success(t('allocation:settings_updated_successfully'));
 		} catch (e) {
-			Toast.error(getApiErrorString(e?.response?.data) || 'Something went wrong !');
+			Toast.error(getApiErrorString(e?.response?.data) || t('allocation:something_went_wrong'));
 		}
 	};
 

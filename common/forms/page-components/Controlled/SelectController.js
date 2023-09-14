@@ -21,7 +21,7 @@ function SelectController(props) {
 					id={name}
 					onChange={(val, obj) => {
 						if (typeof rest?.onChange === 'function') {
-							rest?.onChange(val, obj);
+							rest?.onChange(val, obj, name);
 						}
 						onChange(val, obj);
 					}}

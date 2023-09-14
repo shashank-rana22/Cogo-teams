@@ -1,6 +1,9 @@
 import { Button } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 
+import INSTRUCTIONS from './instructions.json';
+import RenderSuffix from './RenderSuffix';
 import styles from './styles.module.css';
 
 function BulkUploadContent(props) {
@@ -12,10 +15,28 @@ function BulkUploadContent(props) {
 		onClickViewSampleFile,
 		handleSubmit,
 		setBulkUploadComponent,
+		activeTab,
 	} = props || {};
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.guide_title}>
+				Bulk
+				{' '}
+				{startCase(activeTab)}
+				{' '}
+				Guide
+			</div>
+
+			{(INSTRUCTIONS[activeTab] || []).map((instruction) => (
+				<div key={instruction} className={styles.instruction}>
+					{instruction}
+					<div className={styles.render_select}>
+						<RenderSuffix instruction={instruction} />
+					</div>
+				</div>
+			))}
+
 			<div className={styles.upload_new_hire}>Upload New Hire Sheet</div>
 
 			<div className={styles.uploader}>

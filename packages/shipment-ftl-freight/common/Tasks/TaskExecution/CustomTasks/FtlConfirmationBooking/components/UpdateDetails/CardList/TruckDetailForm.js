@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import getDefaultValues from '../../../../../utils/get-default-values';
-import { truckDetailsControls as controls } from '../../../configs/truckDetailsControls';
+import { truckDetailsControls } from '../../../configs/truckDetailsControls';
 import useListConstantConfigurations from '../../../hooks/useListConstantConfigurations';
 import { isATHAmountValid } from '../../../utils/validateAth';
 
@@ -20,7 +20,9 @@ function TruckDetailForm({
 	services = [],
 	truckDetailsList = [],
 	tripDistance = 1,
+	shipment_data = {},
 }) {
+	const controls = truckDetailsControls({ shipment_data });
 	const defaultValues = getDefaultValues(controls);
 	const { control, formState : { errors }, handleSubmit, setValue, reset } = useForm({ defaultValues });
 
@@ -43,8 +45,8 @@ function TruckDetailForm({
 					if (subControl.name === 'truck_number') {
 						tempControl.type = 'select';
 						tempControl.options = truckDetailsList?.map((truck) => ({
-							label : truck?.name,
-							value : truck?.name,
+							label : truck?.data?.asset_registration_number,
+							value : truck?.data?.asset_registration_number,
 						}));
 					}
 				});

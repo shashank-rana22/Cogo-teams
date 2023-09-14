@@ -28,6 +28,10 @@ const businessFinance = {
 		navigation : 'business_finance-account_receivables',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/account-receivables/[active_tab]/viewOrgDetail': {
+		navigation : 'business_finance-account_receivables',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/translate-account-receivables/[activeTab]': {
 		navigation : 'business_finance-account_receivables_translate',
 		isMainNav  : true,
@@ -60,6 +64,14 @@ const businessFinance = {
 		navigation: 'business_finance-cogo_book',
 	},
 	'/[partner_id]/business-finance/account-payables/[active_tab]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]/create-pay-run': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]/over-seas-agent': {
 		navigation : 'business_finance-account_payables',
 		isMainNav  : true,
 	},

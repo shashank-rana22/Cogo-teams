@@ -1,4 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import applyRegEx from '../../../../utils/apply-regex';
@@ -18,7 +19,8 @@ import styles from './styles.module.css';
  * @returns  Navigations UI
  */
 
-function Navigations(props) {
+function Navigations(props = {}) {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const {
 		roleData = {},
 		navigationMappings = {},
@@ -51,7 +53,7 @@ function Navigations(props) {
 	return (
 		<section className={styles.container}>
 			<Tabs activeTab={activeTab} onChange={setActiveTab}>
-				<TabPanel title="CRM" name="crm">
+				<TabPanel title={t('accessManagement:roles_and_permission_permission_list_navigations_crm')} name="crm">
 					{(crmNavs || []).map((navigation) => {
 						const NavElement = navElement(navigation);
 						return (
@@ -72,7 +74,10 @@ function Navigations(props) {
 						);
 					})}
 				</TabPanel>
-				<TabPanel title="Dashboards" name="dashboard">
+				<TabPanel
+					title={t('accessManagement:roles_and_permission_permission_list_navigations_dashboards')}
+					name="dashboard"
+				>
 					{(dashBoardNavs || []).map((navigation) => {
 						const NavElement = navElement(navigation);
 						return (

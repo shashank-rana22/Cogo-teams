@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import CrmTable from '../../../../common/CrmTable';
 import EnrichmentRequest from '../../../../common/EnrichmentRequest';
@@ -10,6 +11,8 @@ import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
 
 function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		data = {},
 		loading = false,
@@ -30,6 +33,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		onChangeTableHeadCheckbox,
 		checkedRowsId,
 		onChangeBodyCheckbox,
+		t,
 	});
 
 	return (

@@ -66,10 +66,6 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
 	useEffect(() => {
-		listAPI();
-	}, [activeTab, listAPI]);
-
-	useEffect(() => {
 		if (searchValue) {
 			const statsObj = data?.data?.stats || {};
 			const statsObjValues:Array<number> = Object.values(statsObj) || [];
@@ -77,8 +73,7 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
 			setActiveTab(TABS_STATS_MAPPING[maxStatsKey]);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
+	}, [data, searchValue]);
 
 	return (
 		<div>
@@ -95,7 +90,7 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 						>
 							{' '}
 							<div
-								className={cl`${styles.container_click} 
+								className={cl`${styles.container_click}
 								${tab.key === activeTab ? styles.sub_container_click : styles.sub_container}`}
 							>
 								{tab.label}

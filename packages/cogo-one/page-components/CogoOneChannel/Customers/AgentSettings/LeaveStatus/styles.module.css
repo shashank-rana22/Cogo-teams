@@ -2,6 +2,7 @@
 	:global {
 		.ui_toggle_container.ui_ps_size_md .ui_switch {
 			right: 66px;
+			cursor: pointer;
 		}
 
 		.ui_toggle_container.ui_toggle_inside .ui_inner::before {
@@ -21,7 +22,7 @@
 			padding-right: 10px;
 			font-size: 12px;
 			color: #fff;
-			content: "On Leave";
+			content: "break";
 			background-color: #f8aea8;
 		}
 
@@ -31,6 +32,14 @@
 
 		input[type="checkbox"]:checked + .ui_label_radius .ui_switch {
 			right: 0;
+		}
+	}
+}
+
+.loading_div {
+	:global {
+		.ui_label_radius {
+			cursor: not-allowed;
 		}
 	}
 }

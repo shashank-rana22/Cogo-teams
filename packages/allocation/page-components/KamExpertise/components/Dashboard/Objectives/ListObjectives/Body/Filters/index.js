@@ -2,9 +2,10 @@ import { Button, Input, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import controls from '../../../../../../configurations/get-list-objectives-filter-controls';
+import getControls from '../../../../../../configurations/get-list-objectives-filter-controls';
 
 import FilterForm from './FilterForm';
 import styles from './styles.module.css';
@@ -28,6 +29,10 @@ function Filters({
 	setParams = () => { },
 	debounceQuery = () => { },
 }) {
+	const { t } = useTranslation(['allocation']);
+
+	const controls = getControls({ t });
+
 	const showRedDot = isFiltersEmpty({ filterVals: params?.filters, controls });
 
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
@@ -53,7 +58,7 @@ function Filters({
 				<Input
 					name="searchKey"
 					size="md"
-					placeholder="Search by Objective Name"
+					placeholder={t('allocation:search_by_objective_name')}
 					value={searchKey}
 					onChange={(val) => handleChange(val)}
 				/>
@@ -84,7 +89,7 @@ function Filters({
 						size="lg"
 						onClick={() => setShowFilterPopover(!showFilterPopover)}
 					>
-						Filter
+						{t('allocation:filter_label')}
 						<IcMFilter style={{ marginLeft: '8px' }} />
 						{showRedDot ? (
 							<div className={styles.red_dot} />

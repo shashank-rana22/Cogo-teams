@@ -1,25 +1,27 @@
 import { Button, Modal } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useBulkApproveRequest from '../../../hooks/useBulkApproveRequest';
 
 function BulkUpdateConfirmation(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { checkedRowsId } = props;
 
-	const { loading, onBulkApprove } = useBulkApproveRequest({ ...props });
+	const { loading, onBulkApprove } = useBulkApproveRequest({ ...props, t });
 
 	return (
 		<>
-			<Modal.Header title="Bulk Approve Requests" />
+			<Modal.Header title={t('allocation:bulk_approve_requests')} />
 
 			<Modal.Body>
-				Are you sure you want to
+				{t('allocation:are_you_sure_you_want_to')}
 				{' '}
-				Approve
+				{t('allocation:approved_label')}
 				{' '}
-				{checkedRowsId.length || 'these'}
+				{checkedRowsId.length || t('allocation:these_label')}
 				{' '}
-				Request(s)
-				?
+				{t('allocation:requests_check')}
 			</Modal.Body>
 
 			<Modal.Footer>
@@ -30,7 +32,7 @@ function BulkUpdateConfirmation(props) {
 					disabled={loading}
 					onClick={onBulkApprove}
 				>
-					Yes, I do
+					{t('allocation:yes_button_label')}
 				</Button>
 			</Modal.Footer>
 		</>

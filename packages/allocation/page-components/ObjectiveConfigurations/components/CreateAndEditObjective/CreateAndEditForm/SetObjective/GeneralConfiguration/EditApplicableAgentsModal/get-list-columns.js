@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import styles from './styles.module.css';
 
 const getListColumns = (props) => {
-	const { selectMode, selectedAgentIds, setSelectedAgentIds } = props;
+	const { selectMode, selectedAgentIds, setSelectedAgentIds, t = () => {} } = props;
 
 	const LIST_COLUMNS = [
 		{
@@ -19,7 +19,7 @@ const getListColumns = (props) => {
 						{roles_data[GLOBAL_CONSTANTS.zeroth_index]?.name || '___'}
 					</p>
 
-					{block_access ? <Pill color="red">Blocked</Pill> : null}
+					{block_access ? <Pill color="red">{t('allocation:blocked_label')}</Pill> : null}
 				</div>
 			),
 		},

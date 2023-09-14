@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Checkbox, Popover, Tooltip, Badge, Pill } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -12,7 +13,7 @@ import Actions from '../components/AllocationRequests/List/Actions';
 import styles from '../components/AllocationRequests/List/styles.module.css';
 import REQUEST_STATUS_COLOR_MAPPING from '../constants/request-status-color-mapping';
 
-const useListAllocationRequests = () => {
+const useListAllocationRequests = ({ t = () => {} }) => {
 	const { profile: { authParams } } = useSelector((state) => state);
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -174,13 +175,13 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'id',
-			Header   : 'Serial Id',
+			Header   : t('allocation:serial_id_header'),
 			accessor : ({ service }) => (service?.serial_id
 				? <Badge color="blue" size="lg" text={service.serial_id} /> : '___'),
 		},
 		{
 			key      : 'organization',
-			Header   : 'Organization',
+			Header   : t('allocation:org_label'),
 			accessor : ({ service, partner }) => {
 				const { service_type: toggleValue } = params.filters || {};
 
@@ -205,12 +206,12 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'sub_type',
-			Header   : 'Sub Type',
+			Header   : t('allocation:sub_type_header'),
 			accessor : ({ sub_type }) => <div className={styles.sub_type}>{startCase(sub_type || '___')}</div>,
 		},
 		{
 			key      : 'service_user',
-			Header   : 'User',
+			Header   : t('allocation:user_header'),
 			accessor : ({ service_user }) => (
 				<div className={styles.value_container}>
 					{startCase(service_user?.name || '___')}
@@ -220,7 +221,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'partner',
-			Header   : 'Partner',
+			Header   : t('allocation:partner_header'),
 			accessor : ({ partner: entity_partner }) => (
 				<div className={styles.value_container}>
 					{entity_partner?.business_name || '___'}
@@ -229,7 +230,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'stakeholder_type',
-			Header   : 'Stakeholder Type',
+			Header   : t('allocation:stakeholder_type_label'),
 			accessor : ({ stakeholder_type }) => (
 				<div className={styles.value_container}>
 					{startCase(stakeholder_type || '___')}
@@ -238,7 +239,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'previous_agent',
-			Header   : 'Previous Agent',
+			Header   : t('allocation:previous_agent_header'),
 			accessor : ({ old_stakeholder }) => (
 				<div className={styles.value_container}>
 					<div>
@@ -251,7 +252,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'requested_agent',
-			Header   : 'Requested Agent',
+			Header   : t('allocation:requested_agent_header'),
 			accessor : ({ user }) => (
 				<div className={styles.value_container}>
 					<div>
@@ -264,7 +265,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'created_by',
-			Header   : 'Requested By',
+			Header   : t('allocation:requested_by_header'),
 			accessor : ({ created_by }) => (
 				<div className={styles.value_container}>
 					{startCase(created_by?.name || '___')}
@@ -273,7 +274,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'created_at',
-			Header   : 'Requested At',
+			Header   : t('allocation:requested_at_header'),
 			accessor : ({ created_at }) => (
 				<div>
 					{created_at	 ? (
@@ -298,7 +299,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'updated_at',
-			Header   : 'Updated At',
+			Header   : t('allocation:updated_at_header'),
 			accessor : ({ updated_at }) => (
 				<div>
 					{updated_at ? (
@@ -323,7 +324,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'reason',
-			Header   : 'Reason',
+			Header   : t('allocation:reason_header'),
 			accessor : ({ reason }) => (
 				<Tooltip content={<div className={styles.tooltip_text}>{reason}</div>} placement="top">
 					<div className={styles.reason}>
@@ -334,7 +335,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'booking_confirmation_proof',
-			Header   : 'Booking Confirmation Proof',
+			Header   : t('allocation:booking_confirmation_proof_header'),
 			accessor : ({ booking_confirmation_proof }) => (
 				<div className={styles.value_container}>
 					{booking_confirmation_proof
@@ -344,7 +345,7 @@ const useListAllocationRequests = () => {
 								themeType="link"
 								onClick={() => window.open(booking_confirmation_proof, '_blank')}
 							>
-								View Proof
+								{t('allocation:view_proof_label')}
 							</Button>
 						)
 						: '___'}
@@ -353,7 +354,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'status',
-			Header   : 'Status',
+			Header   : t('allocation:status_header'),
 			accessor : ({ status }) => (status ? (
 				<Pill
 					size="md"
@@ -365,7 +366,7 @@ const useListAllocationRequests = () => {
 		},
 		{
 			key      : 'action',
-			Header   : 'Action',
+			Header   : t('allocation:action_header'),
 			accessor : (item) => {
 				const { id, status: requestStatus } = item;
 

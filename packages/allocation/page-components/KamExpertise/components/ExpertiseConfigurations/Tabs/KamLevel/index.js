@@ -9,6 +9,8 @@ import KamLevelCard from './KamLevelCard';
 import KamLevelDropDown from './KamLevelDropDown';
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+
 function KamLevel(props) {
 	const {
 		levelLoading,
@@ -31,7 +33,7 @@ function KamLevel(props) {
 				data={data}
 				isActiveCard={activeCard === data?.transition_level}
 				refetch={refetch}
-				isLastCard={dataLength === index + 1}
+				isLastCard={dataLength === index + FIRST_INDEX}
 				cardRefetch={cardRefetch}
 			/>,
 			children: <KamLevelDropDown

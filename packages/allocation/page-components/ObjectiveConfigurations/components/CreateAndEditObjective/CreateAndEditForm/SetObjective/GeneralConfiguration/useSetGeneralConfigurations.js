@@ -7,7 +7,7 @@ import getGeneralConfiguratioFormControls from '../../../../../configurations/ge
 import getSeparatedIdData from '../../../../../helpers/get-separated-id-data';
 
 const useSetGeneralConfiguration = (props) => {
-	const { formValues, setFormValues, onSaveCallback, onResetCallback, disabled } = props;
+	const { formValues, setFormValues, onSaveCallback, onResetCallback, disabled, t = () => {} } = props;
 
 	const {
 		generalConfiguration:
@@ -38,7 +38,7 @@ const useSetGeneralConfiguration = (props) => {
 	const watchChannel = watch('channels');
 	const watchRoles = watch('roles');
 
-	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, disabled });
+	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, disabled, t });
 
 	const onSave = (values) => {
 		const { partner } = values;

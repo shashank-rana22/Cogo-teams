@@ -1,14 +1,19 @@
 import { Button, Modal, RadioGroup } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import SELECT_OPERATOR_OPTIONS from '../../../../../../../configurations/select-operator-options';
+import getSelectOperatorOptions from '../../../../../../../configurations/select-operator-options';
 
 import styles from './styles.module.css';
 
 function SetAndOrConditionModal(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const { showAddAnotherConditionModal, setShowAnotherConditionModal, setFormValues, append } = props;
 
 	const [selectedOperator, setSelectedOperator] = useState('');
+
+	const selectOperatorOptions = getSelectOperatorOptions({ t });
 
 	const onConfirm = () => {
 		setFormValues((previousValues) => ({
@@ -32,8 +37,8 @@ function SetAndOrConditionModal(props) {
 		>
 			<Modal.Header title={(
 				<div>
-					<h4>Add Another: And/Or Selection</h4>
-					<p>You are adding another Service Requirement</p>
+					<h4>{t('allocation:add_another_service_heading')}</h4>
+					<p>{t('allocation:add_another_service_phrase')}</p>
 				</div>
 			)}
 			/>
@@ -43,7 +48,7 @@ function SetAndOrConditionModal(props) {
 					className={styles.radio_group}
 					value={selectedOperator}
 					onChange={setSelectedOperator}
-					options={SELECT_OPERATOR_OPTIONS}
+					options={selectOperatorOptions}
 				/>
 			</Modal.Body>
 
@@ -54,7 +59,7 @@ function SetAndOrConditionModal(props) {
 					onClick={() => setShowAnotherConditionModal(false)}
 					style={{ marginRight: '8px' }}
 				>
-					Cancel
+					{t('allocation:cancel_button')}
 				</Button>
 
 				<Button
@@ -63,7 +68,7 @@ function SetAndOrConditionModal(props) {
 					disabled={!selectedOperator}
 					onClick={onConfirm}
 				>
-					Confirm
+					{t('allocation:confirm_button')}
 				</Button>
 			</Modal.Footer>
 		</Modal>

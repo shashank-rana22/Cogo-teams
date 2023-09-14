@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function SecurityDepositRefundData({ advanceSecurityDepositRefund }) {
+function getSecurityDepositRefundData({ advanceSecurityDepositRefund, t }) {
 	const {
 		supplierName = '',
 		totalAmount = 0,
@@ -14,12 +14,12 @@ function SecurityDepositRefundData({ advanceSecurityDepositRefund }) {
 	} = advanceSecurityDepositRefund || {};
 	return (
 		[
-			{ title: 'Supplier Name', value:	supplierName },
-			{ title: 'Shipment ID', value:	sid },
-			{ title: 'Total Amount', value:	totalAmount },
-			{ title: 'UTR Number', value:	utrNumber },
+			{ title: t('incidentManagement:supplier_name_title'), value:	supplierName },
+			{ title: t('incidentManagement:shipment_id'), value:	sid },
+			{ title: t('incidentManagement:total_amount'), value:	totalAmount },
+			{ title: t('incidentManagement:utr_number'), value:	utrNumber },
 			{
-				title: 'Remark',
+				title: t('incidentManagement:remark_title'),
 				value:
 	<div>
 		{remark?.length >= 30 ? (
@@ -39,18 +39,21 @@ function SecurityDepositRefundData({ advanceSecurityDepositRefund }) {
 	</div>,
 			},
 			{
-				title: 'Upload Proof',
+				title: t('incidentManagement:upload_proof_title'),
 				value:
 	<div>
 
 		{(uploadProof || []).map((url:any) => (url !== '' ? (
 			<a href={url} target="_blank" rel="noreferrer" key={url}>
 				<div className={styles.view_flex}>
-					<div className={styles.view}>link</div>
+					{t('incidentManagement:link')}
 				</div>
 			</a>
 		) : (
-			<div key={url}> No document available</div>
+			<div key={url}>
+				{' '}
+				{t('incidentManagement:no_doc_available')}
+			</div>
 		)))}
 	</div>,
 			},
@@ -58,4 +61,4 @@ function SecurityDepositRefundData({ advanceSecurityDepositRefund }) {
 	);
 }
 
-export default SecurityDepositRefundData;
+export default getSecurityDepositRefundData;

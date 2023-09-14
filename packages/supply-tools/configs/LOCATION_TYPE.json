@@ -1,0 +1,20 @@
+{
+    "fcl": [
+        {
+            "label" : "Seaport",
+            "value" : "seaport"
+        },
+        {
+            "label" : "Country",
+            "value" : "country"
+        },
+        {
+            "label" : "Trade",
+            "value" : "trade"
+        },
+        {
+            "label" : "Continent",
+            "value" : "continent"
+        }
+    ]
+}

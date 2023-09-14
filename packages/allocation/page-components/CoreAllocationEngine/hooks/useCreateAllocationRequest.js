@@ -5,12 +5,12 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-import controls from '../configurations/get-requests-create-controls';
+import getControls from '../configurations/get-requests-create-controls';
 import SERVICE_TYPE_MAPPING from '../configurations/service-type-details';
 import getStakeholderTypeOptions from '../configurations/stakeholder-options';
 
 const useCreateAllocationRequest = (props) => {
-	const { onCloseModal, refetch, params } = props;
+	const { onCloseModal, refetch, params, t = () => {} } = props;
 
 	const {
 		profile: {
@@ -27,6 +27,8 @@ const useCreateAllocationRequest = (props) => {
 	});
 	const { watch, setValue } = formProps;
 
+	const controls = getControls({ t });
+
 	const { service_type, organization_id, partner_id :servicePartnerId } = watch();
 
 	useEffect(() => {
@@ -35,7 +37,7 @@ const useCreateAllocationRequest = (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [service_type, organization_id, servicePartnerId]);
 
-	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type }) || [];
+	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type, t }) || [];
 
 	const api = useAllocationRequest({
 		url     : '/request',
@@ -80,11 +82,11 @@ const useCreateAllocationRequest = (props) => {
 
 			onCloseModal();
 			refetch();
-			Toast.success('Request created successfully');
+			Toast.success(t('allocation:request_created_success'));
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data)
-					|| 'Unable to Save, Please try again!!',
+					|| t('allocation:save_error_default'),
 			);
 		}
 	};

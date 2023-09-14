@@ -1,0 +1,18 @@
+.heading {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 36px;
+	color: #221f20;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin: 16px;
+	background: #f9f5ec;
+}
+
+.scope_select {
+	margin-right: 20px;
+}

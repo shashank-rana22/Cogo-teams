@@ -1,5 +1,6 @@
 import { Modal, Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../common/EmptyState';
 import CONFIGURATIONS_WORKFLOW_MAPPING from '../../../constants/configurations-workflow-mapping';
@@ -7,6 +8,8 @@ import CONFIGURATIONS_WORKFLOW_MAPPING from '../../../constants/configurations-w
 import styles from './styles.module.css';
 
 function List(props) {
+	const { t } = useTranslation(['allocation']);
+
 	const {
 		list,
 		loading,
@@ -27,7 +30,7 @@ function List(props) {
 				<EmptyState
 					height={280}
 					width={440}
-					emptyText="No records found"
+					emptyText={t('allocation:no_records_found')}
 					textSize="24px"
 					flexDirection="column"
 				/>

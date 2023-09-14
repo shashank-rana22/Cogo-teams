@@ -1,16 +1,21 @@
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+
 function Card({ list = [], editMode = false, control, errors = {} }) {
+	const { t } = useTranslation(['allocation']);
+
 	return (
 		<div>
 			{list.map((item, index) => {
 				const { expertise_type, value } = item;
 
-				const isLastItem = index === list.length - 1;
+				const isLastItem = index === list.length - FIRST_INDEX;
 
 				return (
 					<>
@@ -26,14 +31,14 @@ function Card({ list = [], editMode = false, control, errors = {} }) {
 									name        : id,
 									type        : 'text',
 									label       : startCase(threshold_score_type),
-									placeholder : 'Enter Score',
+									placeholder : t('allocation:enter_score_placeholder'),
 									rules,
 								};
 
 								const Element = getFieldController(controlsObject.type) || null;
 
 								return (
-									<div className={styles.field_container}>
+									<div key={controlsObject?.label} className={styles.field_container}>
 										{editMode ? (
 											<>
 												<div className={styles.label}>
@@ -47,7 +52,9 @@ function Card({ list = [], editMode = false, control, errors = {} }) {
 												/>
 
 												<div className={styles.lower_current_value}>
-													{threshold_score ? `Current value: ${threshold_score}` : null}
+													{threshold_score
+														? `${t('allocation:current_value_label')} ${threshold_score}`
+														: null}
 												</div>
 
 												<div className={styles.error_message}>

@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 const FIRST_INDEX = 1;
 
@@ -118,6 +119,8 @@ const useCreateRole = () => {
 		method : 'POST',
 	}, { autoCancel: false, manual: true });
 
+	const { t } = useTranslation(['accessManagement']);
+
 	const createRole = async (
 		auth_role_id,
 		navigationPermissions,
@@ -164,12 +167,13 @@ const useCreateRole = () => {
 				}
 				try {
 					await Promise.all(ALL_PROMISES);
-					Toast.success('Role Updated successfully');
+					Toast.success(t('accessManagement:roles_and_permission_use_create_roles_successfull'));
 					if (refetch) {
 						refetch();
 					}
 				} catch (err) {
-					Toast.error(err.response?.data.error || 'Unable to update role, please try again');
+					Toast.error(err.response?.data.error
+						|| t('accessManagement:roles_and_permission_use_create_roles_unable'));
 				}
 			} else {
 				payload = {
@@ -179,17 +183,18 @@ const useCreateRole = () => {
 				try {
 					const res = await trigger({ data: payload });
 					if (!res.hasError) {
-						Toast.success('Role Updated successfully');
+						Toast.success(t('accessManagement:roles_and_permission_use_create_roles_successfull'));
 						if (refetch) {
 							refetch();
 						}
 					}
 				} catch (err) {
-					Toast.error(err.response?.data.error || 'Unable to update role, please try again');
+					Toast.error(err.response?.data.error
+						|| t('accessManagement:roles_and_permission_use_create_roles_unable'));
 				}
 			}
 		} else {
-			Toast.error('No change in permissions.');
+			Toast.error(t('accessManagement:roles_and_permission_use_create_roles_no_change'));
 		}
 	};
 	return { createRole, loading };
