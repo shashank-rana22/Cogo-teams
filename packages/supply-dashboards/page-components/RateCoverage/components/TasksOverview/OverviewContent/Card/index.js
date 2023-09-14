@@ -1,6 +1,6 @@
 import { Button, Loader, Placeholder, Popover } from '@cogoport/components';
 import { IcMArrowDown, IcMDownload } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetCsvFile from '../../../../hooks/useGetCsvUrl';
@@ -38,7 +38,7 @@ function Card({
 			(urlList || []).map((url, index) => (
 				<div key={url}>
 					<Button className={styles.url_link} themeType="linkUi" onClick={() => { window.open(url); }}>
-						{`link ${index + VALUE_ONE}`}
+						{`${startCase(activeCard)} ${index + VALUE_ONE}`}
 					</Button>
 				</div>
 			))

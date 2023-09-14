@@ -5,7 +5,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 
-function FieldMutation({ fields, values, filter, chargeCodes }) {
+function FieldMutation({ fields, values, chargeCodes }) {
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -23,7 +23,6 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 				params: {
 					filters: {
 						status       : 'active',
-						service      : filter?.service,
 						kyc_status   : 'verified',
 						account_type : 'service_provider',
 					},
