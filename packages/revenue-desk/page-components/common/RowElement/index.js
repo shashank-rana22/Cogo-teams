@@ -29,9 +29,9 @@ function RowElement({
 	const current_weightage = {
 		...rest,
 		overall_weightage,
-		overall_weightage_2_day  : _2_day,
-		overall_weightage_7_day  : _7_day,
-		overall_weightage_30_day : _30_day,
+		_2_day,
+		_7_day,
+		_30_day,
 	};
 	const INITIAL_WEIGHT = {};
 	list.map((item) => {
@@ -51,7 +51,7 @@ function RowElement({
 
 	const isFulfillType = (item) => {
 		const key = item?.key;
-		return ['overall_weightage_2_day', 'overall_weightage_7_day', 'overall_weightage_30_day'].includes(key);
+		return ['_2_day', '_7_day', '_30_day'].includes(key);
 	};
 
 	return (

@@ -34,7 +34,7 @@ export const parametersForm = 	{
 			{ label: 'FCA', value: 'fca' },
 			{ label: 'FAS', value: 'fas' },
 		],
-		rules: { required: 'Import Inco terms is Required' },
+		rules: { required: 'Inco terms is Required' },
 	},
 
 	exportIncoterms: {
@@ -52,7 +52,7 @@ export const parametersForm = 	{
 			{ label: 'CIF', value: 'cif' },
 			{ label: 'CFR', value: 'cfr' },
 		],
-		rules: { required: 'Export Inco terms is Required' },
+		rules: { required: 'Inco terms is Required' },
 	},
 
 	containerType: {

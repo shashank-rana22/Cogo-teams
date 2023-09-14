@@ -15,9 +15,9 @@ const useCreateRDAutomationParameters = ({ refetch }) => {
 		try {
 			const {
 				overall_weightage,
-				overall_weightage_2_day,
-				overall_weightage_7_day,
-				overall_weightage_30_day,
+				_2_day,
+				_7_day,
+				_30_day,
 				...rest
 			} = weightages;
 
@@ -27,9 +27,9 @@ const useCreateRDAutomationParameters = ({ refetch }) => {
 					weightages   : {
 						fulfillment_ratio: {
 							overall_weightage,
-							overall_weightage_2_day,
-							overall_weightage_7_day,
-							overall_weightage_30_day,
+							_2_day,
+							_7_day,
+							_30_day,
 						},
 						...rest,
 					},

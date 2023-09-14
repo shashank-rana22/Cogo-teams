@@ -67,8 +67,7 @@ function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = ()
 										style={{ width: '250px' }}
 									/>
 									<div className={styles.errors}>
-										{tradeTypeValue === 'import' ? errors?.import_inco_term?.message
-											: errors?.inco_term?.message}
+										{errors?.inco_term?.message}
 									</div>
 								</div>
 							)}
@@ -99,7 +98,7 @@ function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = ()
 					setOpenForm={setOpenForm}
 					openForm={openForm}
 					maxHeight="300px"
-					margin="0 5px"
+					margin="0 5px 10px"
 					refetch={refetch}
 				/>
 			)}

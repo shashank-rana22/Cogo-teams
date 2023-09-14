@@ -36,11 +36,11 @@ function Details({
 					<div className={styles.content}>
 						Container Type:
 						{' '}
-						{deskValue?.container_type}
+						{startCase(deskValue?.container_type)}
 					</div>
 
 					<div className={styles.content}>
-						{deskValue?.inco_term}
+						{startCase(deskValue?.inco_term)}
 					</div>
 
 					<Button onClick={() => setShowWeight(!showWeight)} size="md" themeType="secondary">

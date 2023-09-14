@@ -45,7 +45,8 @@ function TableLayout({
 					</div>
 
 					<div className={styles.content}>
-						Container Type:
+						Container Type :
+						{' '}
 						{startCase(container_type)}
 					</div>
 
@@ -61,8 +62,12 @@ function TableLayout({
 						) : <IcMArrowRotateRight style={{ marginRight: '10px' }} />}
 						VIEW WEIGHTAGE
 					</Button>
-					<Button onClick={() => handelInActive(val?.id)} size="md" themeType="secondary">
-						InActive
+					<Button
+						onClick={() => handelInActive(val?.id)}
+						size="md"
+						style={{	background: '#f9f9f9', color: '#000' }}
+					>
+						Mark InActive
 					</Button>
 				</div>
 			</div>

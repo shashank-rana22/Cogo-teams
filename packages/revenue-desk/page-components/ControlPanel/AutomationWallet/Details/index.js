@@ -1,4 +1,5 @@
 import { Button, Input, Tooltip } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -13,8 +14,8 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 	const [disabledValue, setDisabledValue] = useState(false);
 	const [walletAmount, setWalletAmount] = useState(data?.wallet_amount);
 
-	const { service_type, shipment_parameters } = data || {};
-	const { trade_type, origin_location, destination_location } = shipment_parameters || {};
+	const { service_type = '', shipment_parameters = {}, wallet_used = '', currency = '' } = data || {};
+	const { trade_type, origin_location = '', destination_location = '' } = shipment_parameters || {};
 
 	const { updateRevenueDeskWallet } = useUpdateRevenueDeskWallet({
 		service_type,
@@ -61,6 +62,14 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 										) : destination_location?.name}
 								</div>
 							)}
+
+						<div className={styles.content}>
+							Wallet Used :
+							{currency}
+							{' '}
+							{wallet_used}
+						</div>
+
 						<Input
 							value={walletAmount}
 							disabled={!disabledValue}
@@ -69,7 +78,7 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							size="xs"
 							placeholder="Enter Amount"
 							onChange={(e) => setWalletAmount(e)}
-							style={{ width: '250px' }}
+							style={{ width: '180px' }}
 						/>
 					</div>
 					<div className={styles.icon}>
@@ -82,14 +91,16 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							</Button>
 						)}
 						<Button
-							style={{ marginRight: '10px' }}
+							style={{ marginRight: '10px', background: '#f9f9f9', color: '#000' }}
 							onClick={() => setDisabledValue(!disabledValue)}
 						>
-							Edit
+							<IcMEdit style={{ marginRight: '10px' }} />
+							Edit Amount
 						</Button>
+
 						<Button
-							size="md"
 							themeType="secondary"
+							size="md"
 							onClick={() => updateRevenueDeskWallet({ status: 'in_active' })}
 						>
 							Mark InActive

@@ -12,9 +12,9 @@ export const list = [
 	{ key: 'monthly_active_booking', label: 'Active Shipment' },
 	{ key: 'allocation_ratio', label: 'Allocation Ratio' },
 	{ key: 'overall_weightage', label: 'Fulfillment Ratio' },
-	{ key: 'overall_weightage_2_day', label: 'Ratio 2 Day' },
-	{ key: 'overall_weightage_7_day', label: 'Ratio 7 Day' },
-	{ key: 'overall_weightage_30_day', label: 'Ratio 30 Day' },
+	{ key: '_2_day', label: 'Ratio 2 Day' },
+	{ key: '_7_day', label: 'Ratio 7 Day' },
+	{ key: '_30_day', label: 'Ratio 30 Day' },
 	{ key: 'threshold', label: 'Profitability Cutoff' },
 	{ key: 'weightage_override_cuttoff', label: 'Weightage Override Cutoff' },
 ];
