@@ -2,7 +2,7 @@ import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
-export default function getFclControls({ type = '', handleChange = () => {} }) {
+export default function getFclControls({ type = '' }) {
 	const lclFreightOptions = getCommodityList('lcl_freight');
 	const freightOptions = getCommodityList('freight');
 
@@ -27,9 +27,9 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			caret       : true,
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Destination Location',
@@ -37,12 +37,12 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			placeholder : 'Select Destination',
 			type        : 'async_select',
 			caret       : true,
-			handleChange,
-			asyncKey    : 'list_locations',
-			watch       : true,
-			span        : 6,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			asyncKey : 'list_locations',
+			watch    : true,
+			span     : 6,
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			name           : 'shipping_line_id',
@@ -51,10 +51,10 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			caret          : true,
 			defaultOptions : true,
 			watch          : true,
-			handleChange,
-			disabled       : type === 'edit',
-			asyncKey       : 'list_operators',
-			placeholder    : 'Select Shipping Line',
+
+			disabled    : type === 'edit',
+			asyncKey    : 'list_operators',
+			placeholder : 'Select Shipping Line',
 
 		},
 		{
@@ -115,9 +115,9 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Destination Location',
@@ -128,9 +128,9 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label         : 'Commodity',
@@ -165,9 +165,9 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'country', 'airport'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'country', 'airport'] } },
 		},
 		{
 			label       : 'Destination Location',
@@ -178,18 +178,18 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'country', 'airport'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'country', 'airport'] } },
 		},
 		{
-			name        : 'airline_id',
-			label       : 'Airline',
-			type        : 'async_select',
-			caret       : true,
-			asyncKey    : 'list_operators',
-			watch       : true,
-			handleChange,
+			name     : 'airline_id',
+			label    : 'Airline',
+			type     : 'async_select',
+			caret    : true,
+			asyncKey : 'list_operators',
+			watch    : true,
+
 			disabled    : type === 'edit',
 			placeholder : 'Select Airline',
 
@@ -226,8 +226,8 @@ export default function getFclControls({ type = '', handleChange = () => {} }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			disabled    : type === 'edit',
-			handleChange,
-			params      : { filters: { type: ['continent', 'country', 'seaport'] } },
+
+			params: { filters: { type: ['continent', 'country', 'seaport'] } },
 		},
 		{
 			label       : 'Commodity',

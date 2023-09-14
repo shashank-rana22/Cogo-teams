@@ -2,6 +2,12 @@
 	width: calc(90%);
 }
 
+.sub_container {
+	padding: 20px 40px 60px;
+	background-color: white;
+	border-radius: 6px;
+}
+
 .header_wrap {
 	display: flex;
 	justify-content: space-between;
@@ -21,4 +27,17 @@
 	font-weight: 700;
 	line-height: 16px;
 	letter-spacing: 0.02em;
+}
+
+.stepper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 500px;
+	min-height: 25px;
+}
+
+.stepper_container {
+	position: relative;
+	left: -20px;
 }

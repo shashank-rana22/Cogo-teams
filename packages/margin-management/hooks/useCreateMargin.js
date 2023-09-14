@@ -4,18 +4,18 @@ import { useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdateMargin = () => {
+const useCreateMargin = () => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			method : 'post',
-			url    : '/update_margin',
+			url    : '/create_margin',
 		},
 		{ manual: true },
 	);
-	const onSubmit = useCallback(async ({ params = {} }) => {
+	const onSubmit = useCallback(async ({ data = {} }) => {
 		try {
-			await trigger({ params });
-			Toast.success('Margin has been deactivated.');
+			await trigger({ data });
+			Toast.success('Margin created successfully');
 			return true;
 		} catch (err) {
 			toastApiError(err);
@@ -28,4 +28,4 @@ const useUpdateMargin = () => {
 		onSubmit,
 	};
 };
-export default useUpdateMargin;
+export default useCreateMargin;

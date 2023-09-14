@@ -1,4 +1,4 @@
-const getControls = ({ handleChange = () => {}, type = '', marginType = '', partnerId = '' }) => {
+const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 	const controls = [
 		{
 			name           : 'partner_id',
@@ -26,7 +26,6 @@ const getControls = ({ handleChange = () => {}, type = '', marginType = '', part
 			watch    : true,
 			span     : 7,
 			disabled : type === 'edit',
-			handleChange,
 			options  : [
 				{ label: 'Sales', value: 'demand' },
 				{ label: 'Supply', value: 'supply' },
@@ -34,23 +33,23 @@ const getControls = ({ handleChange = () => {}, type = '', marginType = '', part
 			],
 			rules: { required: 'Margin type is required' },
 		},
-		// {
-		// 	label       : 'Select Rate Type',
-		// 	name        : 'rate_type',
-		// 	type        : 'pills',
-		// 	span        : 7,
-		// 	value       : 'marketplace_rate',
-		// 	disabled    : type === 'edit',
-		// 	caret       : true,
-		// 	watch       : true,
-		// 	multiple    : false,
-		// 	placeholder : 'Select Rate Type',
-		// 	options     : [
-		// 		{ label: 'Marketplace Rate', value: 'marketplace_rate' },
-		// 		{ label: 'Cogo Assured Rate', value: 'cogo_assured_rate' },
-		// 	],
-		// 	rules: { required: 'Rate type is required' },
-		// },
+		{
+			label       : 'Select Rate Type',
+			name        : 'rate_type',
+			type        : 'chips',
+			span        : 7,
+			value       : 'marketplace_rate',
+			disabled    : type === 'edit',
+			caret       : true,
+			watch       : true,
+			multiple    : false,
+			placeholder : 'Select Rate Type',
+			options     : [
+				{ label: 'Marketplace Rate', value: 'marketplace_rate' },
+				{ label: 'Cogo Assured Rate', value: 'cogo_assured_rate' },
+			],
+			rules: { required: 'Rate type is required' },
+		},
 
 		{
 			name     : 'service',
@@ -122,32 +121,30 @@ const getControls = ({ handleChange = () => {}, type = '', marginType = '', part
 				}),
 			},
 		},
-		// {
-		// 	label       : 'Organization Type',
-		// 	name        : 'organization_type',
-		// 	type        : 'select',
-		// 	span        : 7,
-		// 	disabled    : type === 'edit',
-		// 	caret       : true,
-		// 	watch       : true,
-		// 	multiple    : false,
-		// 	isClearable : true,
-		// 	placeholder : 'Select Organization Type',
-		// 	options     : [
-		// 		{ label: 'Importer Exporter', value: 'importer_exporter' },
-		// 		{ label: 'Channel Partner', value: 'channel_partner' },
-		// 	],
-		// },
+		{
+			label       : 'Organization Type',
+			name        : 'organization_type',
+			type        : 'select',
+			span        : 7,
+			disabled    : type === 'edit',
+			caret       : true,
+			watch       : true,
+			multiple    : false,
+			isClearable : true,
+			placeholder : 'Select Organization Type',
+			options     : [
+				{ label: 'Importer Exporter', value: 'importer_exporter' },
+				{ label: 'Channel Partner', value: 'channel_partner' },
+			],
+		},
 		{
 			name           : 'organization_id',
 			label          : 'Organization',
-			sort           : true,
 			defaultOptions : true,
 			caret          : true,
 			span           : 7,
 			scope          : 'partner',
 			type           : 'async_select',
-			handleChange,
 			watch          : true,
 			asyncKey       : 'organizations',
 			disabled       : type === 'edit',

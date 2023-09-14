@@ -3,7 +3,7 @@ import containertypes from '@cogoport/constants/container-types.json';
 import truckTypes from '@cogoport/constants/truck-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
-export default function getLtlFreight({ type = '', handleChange = () => { } }) {
+export default function getLtlFreight({ type = '' }) {
 	const freightOptions = getCommodityList('freight');
 	const ltl_freight = [
 		{
@@ -15,6 +15,7 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			options  : [
 				{ label: 'Import', value: 'import' },
 				{ label: 'Export', value: 'export' },
+				{ label: 'Domestic', value: 'domestic' },
 			],
 		},
 		{
@@ -26,9 +27,9 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : {
+
+			disabled : type === 'edit',
+			params   : {
 				filters: {
 					type: ['continent', 'country', 'pincode', 'seaport', 'airport'],
 				},
@@ -43,9 +44,9 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : {
+
+			disabled : type === 'edit',
+			params   : {
 				filters: {
 					type: ['continent', 'country', 'pincode', 'seaport', 'airport'],
 				},
@@ -73,6 +74,7 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			options  : [
 				{ label: 'Import', value: 'import' },
 				{ label: 'Export', value: 'export' },
+				{ label: 'Domestic', value: 'domestic' },
 			],
 		},
 		{
@@ -84,9 +86,9 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : {
+
+			disabled : type === 'edit',
+			params   : {
 				filters: {
 					type: ['continent', 'country', 'pincode', 'seaport', 'airport'],
 				},
@@ -101,9 +103,9 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : {
+
+			disabled : type === 'edit',
+			params   : {
 				filters: {
 					type: ['continent', 'country', 'pincode', 'seaport', 'airport'],
 				},
@@ -141,6 +143,7 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			options  : [
 				{ label: 'Import', value: 'import' },
 				{ label: 'Export', value: 'export' },
+
 			],
 		},
 		{
@@ -152,9 +155,9 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			caret       : true,
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Destination Location',
@@ -162,12 +165,12 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			placeholder : 'Select Destination',
 			type        : 'async_select',
 			caret       : true,
-			handleChange,
-			asyncKey    : 'list_locations',
-			watch       : true,
-			span        : 6,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			asyncKey : 'list_locations',
+			watch    : true,
+			span     : 6,
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			name           : 'shipping_line_id',
@@ -176,10 +179,10 @@ export default function getLtlFreight({ type = '', handleChange = () => { } }) {
 			caret          : true,
 			defaultOptions : true,
 			watch          : true,
-			handleChange,
-			disabled       : type === 'edit',
-			asyncKey       : 'list_operators',
-			placeholder    : 'Select Shipping Line',
+
+			disabled    : type === 'edit',
+			asyncKey    : 'list_operators',
+			placeholder : 'Select Shipping Line',
 
 		},
 		{

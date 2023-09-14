@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useListMargins from '../../hooks/useListMargins';
 import Create from '../Create';
@@ -10,13 +10,15 @@ function Edit() {
 	const { data, loading, setFilterParams } = useListMargins({
 		defaultParams: { margin_stats_required: true, page_limit: 5 },
 	});
+	const [item, setItem] = useState({});
 	useEffect(() => {
 		setFilterParams({ id: query?.id });
-	}, [query?.id, setFilterParams]);
+		setItem(data?.list?.shift());
+	}, [query?.id, setFilterParams, data?.list]);
 
 	return (
 		<div>
-			{loading ? <Loader /> : <Create type="edit" item={data?.list?.shift()} />}
+			{loading ? <Loader /> : <Create type="edit" item={item} />}
 		</div>
 	);
 }

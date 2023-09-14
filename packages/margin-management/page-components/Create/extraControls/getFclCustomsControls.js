@@ -1,7 +1,7 @@
 import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
 
-export default function getFclCustomsControls({ type = '', handleChange = () => {} }) {
+export default function getFclCustomsControls({ type = '' }) {
 	const fcl_customs = [
 		{
 			label    : 'Select Trade Type',
@@ -23,8 +23,8 @@ export default function getFclCustomsControls({ type = '', handleChange = () => 
 			asyncKey    : 'list_locations',
 			disabled    : type === 'edit',
 			watch       : true,
-			handleChange,
-			params      : { filters: { type: ['continent', 'country', 'seaport'] } },
+
+			params: { filters: { type: ['continent', 'country', 'seaport'] } },
 		},
 		{
 			label       : 'Container Size',
@@ -78,9 +78,9 @@ export default function getFclCustomsControls({ type = '', handleChange = () => 
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'country', 'airport'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'country', 'airport'] } },
 		},
 		{
 			label         : 'Commodity',
@@ -103,6 +103,7 @@ export default function getFclCustomsControls({ type = '', handleChange = () => 
 			options  : [
 				{ label: 'Import', value: 'import' },
 				{ label: 'Export', value: 'export' },
+				{ label: 'Domestic', value: 'domestic' },
 			],
 		},
 		{
@@ -114,9 +115,9 @@ export default function getFclCustomsControls({ type = '', handleChange = () => 
 			asyncKey    : 'list_locations',
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : {
+
+			disabled : type === 'edit',
+			params   : {
 				filters: { type: ['continent', 'country', 'seaport', 'city'] },
 			},
 		},
@@ -129,9 +130,9 @@ export default function getFclCustomsControls({ type = '', handleChange = () => 
 			watch       : true,
 			span        : 6,
 			asyncKey    : 'list_locations',
-			handleChange,
-			disabled    : type === 'edit',
-			params      : {
+
+			disabled : type === 'edit',
+			params   : {
 				filters: { type: ['continent', 'country', 'seaport', 'city'] },
 			},
 		},
@@ -149,13 +150,13 @@ export default function getFclCustomsControls({ type = '', handleChange = () => 
 			],
 		},
 		{
-			name        : 'shipping_line_id',
-			label       : 'Shipping line',
-			type        : 'async_select',
-			caret       : true,
-			watch       : true,
-			asyncKey    : 'list_operators',
-			handleChange,
+			name     : 'shipping_line_id',
+			label    : 'Shipping line',
+			type     : 'async_select',
+			caret    : true,
+			watch    : true,
+			asyncKey : 'list_operators',
+
 			disabled    : type === 'edit',
 			placeholder : 'Select Shipping Line',
 

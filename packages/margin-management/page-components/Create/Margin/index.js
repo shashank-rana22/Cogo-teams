@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import Layout from '../../../common/Layout';
 
@@ -21,34 +21,34 @@ function Margin({
 		return margin_type;
 	};
 
-	// const origin = () => {
-	// 	if (type === 'edit') {
-	// 		if (
-	// 			!isEmpty(data?.filters?.location)
-	//             || !isEmpty(idValues?.location_id?.name)
-	// 		) {
-	// 			return idValues?.location_id?.name || data?.filters?.location?.name;
-	// 		}
-	// 		if (
-	// 			!isEmpty(data?.filters?.origin_location)
-	//             || !isEmpty(idValues?.origin_location_id?.name)
-	// 		) {
-	// 			return (
-	// 				idValues?.origin_location_id?.name
-	//                 || data?.filters?.origin_location?.name
-	// 			);
-	// 		}
-	// 	}
-	// 	if (type === 'create') {
-	// 		return idValues?.location_id?.name || idValues?.origin_location_id?.name;
-	// 	}
-	// 	return null;
-	// };
+	const origin = () => {
+		if (type === 'edit') {
+			if (
+				!isEmpty(data?.filters?.location)
+                || !isEmpty(idValues?.location_id?.name)
+			) {
+				return idValues?.location_id?.name || data?.filters?.location?.name;
+			}
+			if (
+				!isEmpty(data?.filters?.origin_location)
+                || !isEmpty(idValues?.origin_location_id?.name)
+			) {
+				return (
+					idValues?.origin_location_id?.name
+                    || data?.filters?.origin_location?.name
+				);
+			}
+		}
+		if (type === 'create') {
+			return idValues?.location_id?.name || idValues?.origin_location_id?.name;
+		}
+		return null;
+	};
 
-	// const destination = type === 'edit'
-	// 	? idValues?.organization_id?.business_name
-	//     || data?.organization?.business_name
-	// 	: idValues?.organization_id?.business_name;
+	const destination = type === 'edit'
+		? idValues?.organization_id?.business_name
+        || data?.organization?.business_name
+		: idValues?.organization_id?.business_name;
 
 	const organization = type === 'edit'
 		? idValues?.organization_id?.business_name
@@ -64,29 +64,41 @@ function Margin({
 		? idValues?.airline?.business_name
         || data?.filters?.airline?.business_name
 		: idValues?.airline?.business_name;
-
 	return (
 		<div>
 			<div className={styles.details_panel}>
 				<div className={styles.flex}>
-					<Pill>
-						{marginType(formValues?.margin_type || data?.margin_type)}
-					</Pill>
-					<Pill>
-						{startCase(service)}
-					</Pill>
+					<div>
+						<div className={styles.flex_column}>
+							<Pill color="green">
+								{marginType(formValues?.margin_type || data?.margin_type)}
+							</Pill>
+							<Pill color="yellow">{startCase(service)}</Pill>
+							{origin() && <Pill>{origin() }</Pill>}
+							{destination && <Pill>{ destination}</Pill>}
+						</div>
 
-					{organization ? (
-						<Pill>{organization}</Pill>
-					) : null}
+						{organization ? (
+							<Pill>{organization}</Pill>
+						) : null}
 
-					{shipping_line ? (
-						<Pill>{shipping_line}</Pill>
-					) : null}
+						{shipping_line ? (
+							<Pill>{shipping_line}</Pill>
+						) : null}
 
-					{airline ? (
-						<Pill>{airline}</Pill>
-					) : null}
+						{airline ? (
+							<Pill>{airline}</Pill>
+						) : null}
+					</div>
+				</div>
+				<div>
+					{(idValues?.container_size || data?.container_size)
+                    && <Pill>{idValues?.container_size || data?.container_size}</Pill>}
+					{(idValues?.container_type || data?.container_type)
+                    && <Pill>{idValues?.container_type || idValues?.container_type || data?.container_type }</Pill>}
+					{(idValues?.commodity || data?.commodity) && <Pill>{idValues?.commodity || data?.commodity}</Pill>}
+					{(idValues?.trade_type || data?.trade_type)
+                    && <Pill>{idValues?.trade_type || data?.trade_type}</Pill>}
 				</div>
 			</div>
 			<Layout controls={marginControls} control={control} />

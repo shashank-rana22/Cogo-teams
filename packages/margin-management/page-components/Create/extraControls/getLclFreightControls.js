@@ -2,7 +2,7 @@ import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
-export default function getLclFreightControls({ type = '', handleChange = () => {} }) {
+export default function getLclFreightControls({ type = '' }) {
 	const freightOptions = getCommodityList('freight');
 	const lcl_freight_local = [
 		{
@@ -25,9 +25,9 @@ export default function getLclFreightControls({ type = '', handleChange = () => 
 			caret       : true,
 			watch       : true,
 			span        : 6,
-			handleChange,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Destination Location',
@@ -35,12 +35,12 @@ export default function getLclFreightControls({ type = '', handleChange = () => 
 			placeholder : 'Select Destination',
 			type        : 'async_select',
 			caret       : true,
-			handleChange,
-			asyncKey    : 'list_locations',
-			watch       : true,
-			span        : 6,
-			disabled    : type === 'edit',
-			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
+
+			asyncKey : 'list_locations',
+			watch    : true,
+			span     : 6,
+			disabled : type === 'edit',
+			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			name           : 'shipping_line_id',
@@ -49,10 +49,10 @@ export default function getLclFreightControls({ type = '', handleChange = () => 
 			caret          : true,
 			defaultOptions : true,
 			watch          : true,
-			handleChange,
-			disabled       : type === 'edit',
-			asyncKey       : 'list_operators',
-			placeholder    : 'Select Shipping Line',
+
+			disabled    : type === 'edit',
+			asyncKey    : 'list_operators',
+			placeholder : 'Select Shipping Line',
 
 		},
 		{

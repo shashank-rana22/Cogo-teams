@@ -24,3 +24,8 @@
 .tab {
 	width: 75vw;
 }
+
+.search {
+	position: fixed;
+	right: 15px;
+}
