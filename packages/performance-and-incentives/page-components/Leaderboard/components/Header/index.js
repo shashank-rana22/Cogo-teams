@@ -1,14 +1,11 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-
-import DASHBOARD_VIEW_CONSTANTS from '../../../constants/dashboard-view-constants';
 
 import styles from './styles.module.css';
 
-const { PUBLIC } = DASHBOARD_VIEW_CONSTANTS;
-
-function Header(props) {
-	const { setView } = props;
+function Header() {
+	const router = useRouter();
 
 	const { user } = useSelector(({ profile }) => profile);
 
@@ -36,7 +33,7 @@ function Header(props) {
 					size="lg"
 					themeType="secondary"
 					style={{ marginRight: '12px' }}
-					onClick={() => setView(PUBLIC)}
+					onClick={() => router.push('/performance-and-incentives/public-leaderboard')}
 				>
 					Public View Mode
 				</Button>

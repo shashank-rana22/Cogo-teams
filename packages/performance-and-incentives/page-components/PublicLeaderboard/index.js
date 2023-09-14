@@ -1,8 +1,10 @@
-import React from 'react';
+import Header from './components/Header';
 
 function PublicDashboard() {
 	return (
-		<div>PublicDashboard</div>
+		<div>
+			<Header />
+		</div>
 	);
 }
 

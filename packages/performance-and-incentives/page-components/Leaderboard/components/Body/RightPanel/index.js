@@ -1,5 +1,5 @@
-import Activity from '../../../../common/Activity';
-import IncentiveSnapshot from '../../../../common/IncentiveSnapshot';
+import Activity from '../../../common/Activity';
+import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
 
 import styles from './styles.module.css';
 

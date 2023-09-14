@@ -7,6 +7,10 @@ const performanceAndIncentives = {
 		navigation : 'performance_and_incentives-leaderboard',
 		isMainNav  : true,
 	},
+	'/[partner_id]/performance-and-incentives/public-leaderboard': {
+		navigation : 'performance_and_incentives-leaderboard',
+		isMainNav  : false,
+	},
 };
 
 module.exports = performanceAndIncentives;
