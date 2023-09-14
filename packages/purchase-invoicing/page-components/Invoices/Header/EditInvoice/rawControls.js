@@ -28,6 +28,7 @@ const rawControls = ({
 		service_name     : charge?.service_type,
 		showHeader       : true,
 		showButtons      : true,
+		showAddButtons   : false,
 		// path             : 'sales_invoice',
 		shipment_id      : id,
 		shipment_type,
