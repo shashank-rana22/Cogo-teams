@@ -12,7 +12,6 @@ import styles from './styles.module.css';
 
 function TableLayout({
 	filter = {},
-	addWeightage = false, maxHeight = '', margin = '',
 	openForm = false, setOpenForm = () => {},
 	val = [],
 	refetch = () => {},
@@ -35,7 +34,7 @@ function TableLayout({
 
 	return (
 		<div>
-			<div className={styles.container} style={{ margin }}>
+			<div className={styles.container}>
 				<div>{startCase(service_type)}</div>
 				<div className={styles.content_details}>
 					<div className={styles.content}>
@@ -80,10 +79,10 @@ function TableLayout({
 								style={{ width: column_width }}
 								className={styles.tableheader_item}
 							>
-								{(item === 'Add weightage' && !addWeightage) ? (
+								{(item === 'Add weightage') ? (
 									<Button
 										themeType="secondary"
-										onClick={() => handelField(addWeightage)}
+										onClick={() => handelField()}
 									>
 										<IcMEdit style={{ marginRight: '10px' }} />
 										EDIT WEIGHTAGE
@@ -95,16 +94,13 @@ function TableLayout({
 					<RowElement
 						list={list}
 						data={val?.weightages}
-						columnTitle={columnTitle}
 						column_width={column_width}
 						filter={filter}
 						apiTrigger={apiTrigger}
 						disabledInput={disabledInput}
-						maxHeight={maxHeight}
 						deskValue={val}
 						openForm={openForm}
 						setOpenForm={setOpenForm}
-						addWeightage={addWeightage}
 					/>
 				</div>
 			)}

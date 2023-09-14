@@ -69,7 +69,6 @@ function Details({
 					</div>
 					<RowElement
 						list={list}
-						columnTitle={columnTitle}
 						column_width={column_width}
 						apiTrigger={apiTrigger}
 						maxHeight={maxHeight}

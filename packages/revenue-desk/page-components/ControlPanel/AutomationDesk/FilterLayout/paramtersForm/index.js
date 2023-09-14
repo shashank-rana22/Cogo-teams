@@ -9,8 +9,11 @@ import styles from './styles.module.css';
 
 function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = () => {} }) {
 	const [openTable, setOpentable] = useState(false);
-	const [deskValue, setDeskValue] = useState();
-	const { service, tradeType, importIncoTerms, exportIncoterms, containerType } = parametersForm;
+	const [deskValue, setDeskValue] = useState({});
+	const {
+		service = '', tradeType = '', importIncoTerms = '',
+		exportIncoterms = '', containerType = '',
+	} = parametersForm;
 
 	const { handleSubmit, control, watch, formState:{ errors } } = useForm();
 	const serviceType = watch('service_type');

@@ -7,6 +7,7 @@ import {
 import useListAutomationParameter from '../hooks/useListAutomationParameter';
 
 import FilterLayout from './FilterLayout';
+import styles from './styles.module.css';
 import TableLayout from './TableLayout';
 
 function AutomationDesk() {
@@ -30,12 +31,7 @@ function AutomationDesk() {
 			{!loading && (
 				<div>
 					{data?.list?.length === VALUE_ZERO ? (
-						<div
-							style={{
-								marginTop : '40px',
-								textAlign : 'center',
-							}}
-						>
+						<div className={styles.icon}>
 							<img
 								src={SRC}
 								alt="empty_page"
@@ -58,7 +54,7 @@ function AutomationDesk() {
 				</div>
 			)}
 			{(data?.total_count || VALUE_ZERO) > VALUE_TEN ? (
-				<div style={{ float: 'right', marginTop: '15px' }}>
+				<div className={styles.pagination}>
 					<Pagination
 						type="table"
 						totalItems={data?.total_count || VALUE_ZERO}

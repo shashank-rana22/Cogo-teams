@@ -15,28 +15,21 @@ function FilterLayout({ filter = {}, setFilter = () => {}, refetch = () => {} })
 
 	return (
 		<div className={styles.filter}>
-			<div className={styles.fieldContainer}>
-				<div>
-					<Select
-						placeholder="Service Type"
-						options={automationDeskServiceOptions}
-						value={filter?.service_type}
-						onChange={(val) => onChange(val, 'service_type')}
-						size="sm"
-						style={{ width: '150px' }}
-					/>
-				</div>
-			</div>
-			<div className={styles.buttonContainer}>
-				<Button
-					themeType="accent"
-					size="sm"
-					onClick={() => setOpenForm(!openForm)}
-					style={{ width: '140px' }}
-				>
-					Create New Parameters
-				</Button>
-			</div>
+			<Select
+				placeholder="Service Type"
+				options={automationDeskServiceOptions}
+				value={filter?.service_type}
+				onChange={(val) => onChange(val, 'service_type')}
+				size="sm"
+				style={{ width: '150px' }}
+			/>
+			<Button
+				themeType="accent"
+				size="md"
+				onClick={() => setOpenForm(!openForm)}
+			>
+				Create New Parameters
+			</Button>
 			{openForm && <ParametersForm openForm={openForm} setOpenForm={setOpenForm} refetch={refetch} />}
 		</div>
 	);

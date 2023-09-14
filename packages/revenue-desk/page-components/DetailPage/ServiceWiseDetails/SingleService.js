@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
@@ -79,10 +80,9 @@ function SingleService({
 	} = useListShipmentBookingConfirmationPreferences({
 		singleServiceData,
 		shipmentData,
-		isPreferenceRequired: !isPreferenceSet && singleServiceData?.service_type === 'fcl_freight_service',
+		isPreferenceRequired: !isPreferenceSet,
 	});
 
-	console.log(allPreferenceCardsData, recommendationLoading);
 	// const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 	// 	shipmentData,
 	// 	singleServiceData,
@@ -133,7 +133,7 @@ function SingleService({
 	];
 
 	useEffect(() => {
-		if (!recommendationLoading && !supplierPayload?.[singleServiceData.id]) {
+		if (!recommendationLoading && (allPreferenceCardsData || []).length && !isPreferenceSet) {
 			getRecommendation({
 				setSupplierPayload,
 				allPreferenceCardsData,
@@ -142,7 +142,6 @@ function SingleService({
 				singleServiceData,
 			});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recommendationLoading, JSON.stringify(systemFormatedRates), JSON.stringify(currentFormatedrates)]);
 
 	return (
