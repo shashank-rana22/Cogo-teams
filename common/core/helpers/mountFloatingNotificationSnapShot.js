@@ -38,7 +38,7 @@ export function mountFloatingNotificationSnapShot({
 	baseQuery = [],
 	sessionQuery = [],
 	queryFilters = [],
-	firestore,
+	firestore = {},
 }) {
 	const mailSnapshotRef = unreadCountSnapshotListener;
 

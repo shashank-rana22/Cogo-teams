@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import { mountFloatingNotificationSnapShot } from './mountFloatingNotificationSnapShot';
 
-const useGetUnreadMails = ({ firestore, agentId }) => {
+const useGetUnreadMails = ({ firestore = {}, agentId = '' }) => {
 	const unreadCountSnapshotListener = useRef(null);
 
 	useEffect(() => {

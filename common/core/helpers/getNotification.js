@@ -7,10 +7,7 @@ import { FIRESTORE_PATH } from '../components/AdminLayout/LockScreen/configurati
 
 const CLOSE_NOTIFY_DURATION = 3000;
 
-const getNotification = async ({
-	resultList,
-	firestore,
-}) => {
+const getNotification = async ({ resultList = {}, firestore = {} }) => {
 	if (isEmpty(resultList)) {
 		return;
 	}
