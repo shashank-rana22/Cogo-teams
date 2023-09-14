@@ -47,7 +47,7 @@ const FUNCTIONS = {
 };
 
 function Invoices({ activeEntity = '' }) {
-	const DENY_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
+	const ELIGIBLE_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);
@@ -107,7 +107,7 @@ function Invoices({ activeEntity = '' }) {
 							onClick={() => {
 								setShowPayrunModal(true);
 							}}
-							disabled={!DENY_ENITY_PAYRUN}
+							disabled={!ELIGIBLE_ENITY_PAYRUN}
 						>
 							Create Pay Run
 						</Button>
