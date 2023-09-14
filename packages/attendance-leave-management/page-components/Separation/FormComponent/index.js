@@ -81,6 +81,7 @@ function FormComponent({
 		};
 
 		Render = COMPONENT_MAPPING.hr_meet[currentComponent];
+
 		return (
 			<div className={styles.container}>
 				{Render ? (
@@ -97,6 +98,7 @@ function FormComponent({
 			</div>
 		);
 	}
+
 	Object.keys(COMPONENT_MAPPING[view_type]).every((key) => {
 		const { is_complete = false } = data?.[view_type]?.[key] || {};
 
