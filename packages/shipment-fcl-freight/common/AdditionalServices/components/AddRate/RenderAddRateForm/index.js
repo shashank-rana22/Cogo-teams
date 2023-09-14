@@ -38,12 +38,12 @@ function RenderAddRateForm({
 	const { formControl = [] } = controls({ serviceData, source });
 
 	let { services = [] } = serviceData;
-	services = services.filter((service) => service.service_type === 'fcl_freight_service');
+	services = services.find((service) => service.service_type === 'fcl_freight_service');
 
 	const selectedUnit = watch('unit');
 	const prefillValue = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[selectedUnit];
 
-	setValue('quantity', services?.[GLOBAL_CONSTANTS.zeroth_index]?.[prefillValue]);
+	setValue('quantity', services?.[prefillValue]);
 	if (selectedUnit === 'per_shipment') {
 		setValue('quantity', PREFILL_QUANTITY_ONE);
 	}

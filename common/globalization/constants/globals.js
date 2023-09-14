@@ -50,7 +50,6 @@ const GLOBAL_CONSTANTS = {
 		per_kg_gross  : 'weight',
 		per_package   : 'packages_count',
 		per_awb       : 'awb_count',
-		per_shipment  : 'quantity',
 		per_container : 'containers_count',
 	},
 

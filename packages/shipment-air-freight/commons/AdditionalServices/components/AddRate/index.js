@@ -26,7 +26,7 @@ const REMARK_STATUS = [
 function AddRate({
 	item = {},
 	setAddRate = () => {},
-	status,
+	status = {},
 	setAddSellPrice = () => {},
 	refetch = () => {},
 	onCancel = () => {},
@@ -39,8 +39,6 @@ function AddRate({
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
-
-	console.log('status', status);
 
 	const refetchForUpdateSubService = () => {
 		refetch();
