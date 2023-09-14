@@ -9,7 +9,7 @@ import getFormattedDate from '../utils/getFormattedDate';
 
 const useGetProfitabilityStats = ({
 	entity = '', timeRange = '', customDate = {},
-	filter = {}, showShipmentList = false,
+	filter = {}, showShipmentList = false, isCancelledExcluded = false,
 }) => {
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 
@@ -63,6 +63,7 @@ const useGetProfitabilityStats = ({
 			service       : !isEmpty(service) ? service.toUpperCase() : undefined,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
+			isCancelledExcluded,
 		};
 
 		// no api call if no custom date & range selected
@@ -92,7 +93,7 @@ const useGetProfitabilityStats = ({
 		}
 	}, [entity, timeRange, ongoingTrigger, closedTrigger,
 		financialTrigger, customDate, DEFAULT_CURRENCY,
-		filter]);
+		filter, isCancelledExcluded]);
 
 	useEffect(() => {
 		if (!showShipmentList) { // calling stats api only at the parent level

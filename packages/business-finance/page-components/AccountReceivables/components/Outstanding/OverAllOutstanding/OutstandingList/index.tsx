@@ -264,10 +264,12 @@ function OutstandingList({
 					</div>
 					<div className={styles.ledger_style}>
 						<Tooltip content="Ledger Download" placement="top">
-							<IcMDownload
-								className={styles.download_icon_div}
-								onClick={() => setShowLedgerModal(true)}
-							/>
+							<div className={styles.download_icon_div}>
+								<IcMDownload
+									fill="black"
+									onClick={() => setShowLedgerModal(true)}
+								/>
+							</div>
 						</Tooltip>
 						{!showElement && (
 							<Button
