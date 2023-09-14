@@ -44,10 +44,9 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 									<span style={{ marginLeft: '4px' }}>
 										{startCase(sub_process_data?.idcardstatus)}
 									</span>
-
 								</div>
-
 							</div>
+
 							<div className={styles.column}>
 								<div className={styles.row1}>Access Card</div>
 								<div className={styles.row2}>
@@ -55,10 +54,9 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 									<span style={{ marginLeft: '4px' }}>
 										{startCase(sub_process_data?.accesscardstatus)}
 									</span>
-
 								</div>
-
 							</div>
+
 							<div className={styles.column}>
 								<div className={styles.row1}>Parking Ticket</div>
 								<div className={styles.row2}>
@@ -66,10 +64,9 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 									<span style={{ marginLeft: '4px' }}>
 										{startCase(sub_process_data?.companyassets)}
 									</span>
-
 								</div>
-
 							</div>
+
 							<div className={styles.column}>
 								<div className={styles.row1}>Parking Charges</div>
 								<div className={styles.row2}>
@@ -77,16 +74,16 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 										{startCase(sub_process_data?.parkingcharges)}
 										rs
 									</span>
-
 								</div>
-
 							</div>
 						</div>
 					</div>
+
 					<div className={styles.container}>
 						<div className={styles.heading}>
 							Notes shared with you
 						</div>
+
 						{(sub_process_data?.notes || []).map((item) => (
 							<div key={item} className={styles.upper_text}>
 								<div>
@@ -101,16 +98,14 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 								</div>
 							</div>
 						))}
-						{errors.notes_shared && (
-							<span className={styles.error}>*This field is Required</span>
-						)}
+						{errors.notes_shared ? <span className={styles.error}>*This field is Required</span> : null}
 					</div>
+
 					<div className={styles.footer}>
-						<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
+						<Button themeType="secondary" style={{ marginRight: 4 }} onClick={handleBack}>Back</Button>
 						<Button themeType="primary" onClick={handleNext}>
 							Proceed
 							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
 						</Button>
 					</div>
 				</>

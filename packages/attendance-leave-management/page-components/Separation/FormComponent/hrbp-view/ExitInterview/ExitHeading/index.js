@@ -11,6 +11,7 @@ function ExitHeading({ title = 'HR MEETING', subTitle = 'Summary from manager in
 				<span className={styles.upper_text}>{title}</span>
 				<span className={styles.lower_text}>{subTitle}</span>
 			</div>
+
 			<div className={styles.logs_button}>
 				<Button size="md" themeType="accent">
 					<IcMTaskCompleted />

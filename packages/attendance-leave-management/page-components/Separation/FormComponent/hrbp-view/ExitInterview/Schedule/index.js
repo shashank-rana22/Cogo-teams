@@ -7,36 +7,34 @@ import styles from './styles.module.css';
 
 function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 	const [show, setShow] = useState(true);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
 				<span>Schedule Interview</span>
-				{
-					visible ? (
-						<div className={styles.accordiontitle}>
-							<Button
-								size="md"
-								themeType="secondary"
-								className={styles.servicesbtn}
-							>
-								<IcMEdit />
-								Edit
-							</Button>
-							<IcMArrowDown
-								width={16}
-								height={16}
-								className={show ? styles.caret_active : styles.caret_arrow}
-							/>
-						</div>
-					)
-						:					(
-							<IcMArrowDown
-								width={16}
-								height={16}
-								className={show ? styles.caret_active : styles.caret_arrow}
-							/>
-						)
-				}
+				{visible ? (
+					<div className={styles.accordiontitle}>
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.servicesbtn}
+						>
+							<IcMEdit />
+							Edit
+						</Button>
+						<IcMArrowDown
+							width={16}
+							height={16}
+							className={show ? styles.caret_active : styles.caret_arrow}
+						/>
+					</div>
+				) : (
+					<IcMArrowDown
+						width={16}
+						height={16}
+						className={show ? styles.caret_active : styles.caret_arrow}
+					/>
+				)}
 			</div>
 
 			<div className={show ? styles.item_container : styles.item_container_closed}>
@@ -52,12 +50,8 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
 						/>
-
 					</div>
-					{errors.date && (
-						<span className={styles.error}>*required</span>
-					)}
-
+					{errors.date ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -71,11 +65,8 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
 						/>
-
 					</div>
-					{errors.offtime && (
-						<span className={styles.error}>*required</span>
-					)}
+					{errors.offtime ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>
@@ -88,11 +79,8 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
 						/>
-
 					</div>
-					{errors.location && (
-						<span className={styles.error}>*required</span>
-					)}
+					{errors.location ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail1}>
@@ -105,16 +93,10 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							className={styles.infoinput}
 							rules={{ required: 'this is required' }}
 						/>
-
 					</div>
-					{errors.info && (
-						<span className={styles.error}>*required</span>
-					)}
-
+					{errors.info ? <span className={styles.error}>*required</span> : null}
 				</div>
-
 			</div>
-
 		</div>
 	);
 }

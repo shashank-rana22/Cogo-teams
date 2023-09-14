@@ -16,11 +16,12 @@ import styles from './styles.module.css';
 const MANAGER = true;
 
 function AttendanceLeaveDashboard() {
+	const router = useRouter();
+
 	const [activeTab, setActiveTab] = useState('attendance');
 	const showInbox = new URLSearchParams(window?.location?.search)?.get('showInbox') || false;
 
 	const [coords, setCoords] = useState(null);
-	const router = useRouter();
 	const handleShowInbox = () => {
 		router.push('/attendance-leave-management?showInbox=true');
 	};
