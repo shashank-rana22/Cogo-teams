@@ -56,7 +56,7 @@ function FormComponent({
 	data = {},
 	loading = false,
 	refetchApplicationDetails = () => {},
-	view_type = '',
+	view_type = 'hrbp_clearance',
 }) {
 	const [currentComponent, setCurrentComponent] = useState('hr_meet');
 	const ONE = 1; const MINUS_ONE = -1;
@@ -64,7 +64,7 @@ function FormComponent({
 
 	if (view_type === 'hrbp_clearance') {
 		const handleNext = () => {
-			const componentKeys = Object.keys(COMPONENT_MAPPING.finance);
+			const componentKeys = Object.keys(COMPONENT_MAPPING.hr_meet);
 			const currentIndex = componentKeys.indexOf(currentComponent);
 
 			if (currentIndex !== MINUS_ONE && currentIndex < componentKeys.length - ONE) {
