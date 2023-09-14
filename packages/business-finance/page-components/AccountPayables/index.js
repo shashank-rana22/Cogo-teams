@@ -73,7 +73,7 @@ function AccountPayables() {
 					<Placeholder className={styles.loader} />
 				) : (
 					<div>
-						{FILTER_TABS.includes(activePayables) ? (
+						{isEmpty(selectedOrg) && FILTER_TABS.includes(activePayables) ? (
 							<Select
 								name="activeEntity"
 								value={activeEntity}
