@@ -7,6 +7,8 @@ import { getFirestore } from 'firebase/firestore';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
+import useGetUnreadMails from '../../helpers/useGetLatestMailMessage';
+
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
@@ -75,6 +77,8 @@ function AdminLayout({
 
 	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
 									&& is_joining_tnc_accepted === false;
+
+	useGetUnreadMails({ firestore, agentId: user_id });
 
 	return (
 		<div className={cl`
