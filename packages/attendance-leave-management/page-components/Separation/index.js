@@ -7,7 +7,7 @@ import TaskList from './TaskList';
 import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 function Separation() {
-	const { data, loading, refetchApplicationDetails } = useGetApplicationProcessDetails();
+	const { data, loading, refetchApplicationDetails, process_name } = useGetApplicationProcessDetails();
 
 	return (
 		<div className={styles.container}>
@@ -24,6 +24,7 @@ function Separation() {
 						data={data}
 						loading={loading}
 						refetchApplicationDetails={refetchApplicationDetails}
+						view_type={process_name}
 					/>
 				</div>
 			</div>

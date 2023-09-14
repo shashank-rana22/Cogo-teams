@@ -7,8 +7,9 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function EmployeeDetail({ data = {} }) {
-	const { applicant_details } = data || {};
 	const [show, setShow] = useState(true);
+
+	const { applicant_details } = data || {};
 
 	const KEYS_TO_DISPLAY = {
 		employee_name   : applicant_details?.employee_name,

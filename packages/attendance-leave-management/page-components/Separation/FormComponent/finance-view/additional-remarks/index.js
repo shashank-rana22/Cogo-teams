@@ -17,7 +17,6 @@ function AdditionalRemarks({ control = {} }) {
 					height={16}
 					className={showNotes ? styles.caret_active : styles.caret_arrow}
 				/>
-
 			</div>
 
 			<div className={showNotes ? styles.item_container : styles.item_container_closed}>
@@ -31,7 +30,6 @@ function AdditionalRemarks({ control = {} }) {
 					/>
 				</div>
 			</div>
-
 		</div>
 	);
 }

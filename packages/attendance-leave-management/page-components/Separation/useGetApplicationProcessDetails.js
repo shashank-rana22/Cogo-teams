@@ -2,9 +2,12 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const useGetApplicationProcessDetails = () => {
+	const { query } = useSelector((state) => state.general);
+
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_application_process_details',
@@ -15,15 +18,15 @@ const useGetApplicationProcessDetails = () => {
 			try {
 				trigger({
 					params: {
-						off_boarding_application_id : 'f191ea65-dc5b-4d9d-ab8a-4c4833a87058',
-						process_name                : 'hrbp_clearance',
+						off_boarding_application_id : query?.application_id,
+						process_name                : query?.process_name,
 					},
 				});
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		},
-		[trigger],
+		[query?.application_id, query?.process_name, trigger],
 	);
 
 	useEffect(() => {
@@ -33,7 +36,8 @@ const useGetApplicationProcessDetails = () => {
 	return {
 		loading,
 		data,
-		refetchApplicationDetails: getApplicationProcessDetails,
+		refetchApplicationDetails : getApplicationProcessDetails,
+		process_name              : query?.process_name,
 	};
 };
 

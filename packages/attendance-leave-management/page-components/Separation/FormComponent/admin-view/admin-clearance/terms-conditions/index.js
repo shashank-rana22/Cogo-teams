@@ -1,8 +1,4 @@
-// import { Button } from '@cogoport/components';
-import {
-	InputController, CheckboxController,
-} from '@cogoport/forms';
-// import { IcMTick } from '@cogoport/icons-react';
+import { InputController, CheckboxController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -34,15 +30,13 @@ function TermsConditions({ control = {}, errors = {}, termschecked = false }) {
 						</p>
 					</div>
 				</div>
+				{!termschecked ? <span className={styles.error}>*required</span> : null}
 
-				{!termschecked
-			&& (
-				<span className={styles.error}>*required</span>
-			)}
 				<div className={styles.name_main_container}>
 					<div className={styles.full_name_text}>
 						Full Name
 					</div>
+
 					<div className={styles.name_input_container}>
 						<InputController
 							size="sm"
@@ -58,7 +52,6 @@ function TermsConditions({ control = {}, errors = {}, termschecked = false }) {
 					</div>
 				</div>
 			</div>
-
 		</div>
 	);
 }

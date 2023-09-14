@@ -40,9 +40,7 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 						<div className={styles.modal_message_text}>
 							Update FNF Status
 						</div>
-						<div
-							className={styles.particular_input_cont}
-						>
+						<div className={styles.particular_input_cont}>
 							<section>
 								<div className={styles.modal_header}>
 									Particular
@@ -54,13 +52,11 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 									name="particular"
 									size="md"
 									type="text"
-									rules={{
-										required: '*required',
-									}}
+									rules={{ required: '*required' }}
 								/>
-								{errors?.particular && (
+								{errors?.particular ? (
 									<div className={styles.errors}>*required</div>
-								)}
+								) : null}
 							</section>
 
 							<section>
@@ -75,13 +71,11 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 									size="md"
 									type="number"
 									options={data}
-									rules={{
-										required: '*required',
-									}}
+									rules={{ required: '*required' }}
 								/>
-								{errors?.category && (
+								{errors?.category ? (
 									<div className={styles.errors}>*required</div>
-								)}
+								) : null}
 							</section>
 
 							<section>
@@ -102,16 +96,15 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 											? true : 'Number must be whole'),
 									}}
 								/>
-								{errors?.recoverableAmount && (
+								{errors?.recoverableAmount ? (
 									<div className={styles.errors}>*Value must be Greater than 0</div>
-								)}
+								) : null}
 							</section>
 						</div>
 					</div>
-
 				</Modal.Body>
-				<Modal.Footer>
 
+				<Modal.Footer>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -120,6 +113,7 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 					>
 						Cancel
 					</Button>
+
 					<Button
 						size="md"
 						themeType="primary"
@@ -128,10 +122,8 @@ function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpd
 					>
 						Yes, Proceed
 					</Button>
-
 				</Modal.Footer>
 			</Modal>
-
 		</div>
 	);
 }

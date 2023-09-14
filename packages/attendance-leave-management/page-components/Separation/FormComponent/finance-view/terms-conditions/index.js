@@ -33,9 +33,7 @@ function TermsConditions({ control = {}, errors = {} }) {
 						<p>
 							Enter your Full Name, confirm your understanding and commitment to these terms.
 						</p>
-						{errors?.checkbox_agreement && (
-							<div className={styles.error}>*required</div>
-						)}
+						{errors?.checkbox_agreement ? <div className={styles.error}>*required</div> : null}
 					</div>
 
 				</div>
@@ -51,9 +49,7 @@ function TermsConditions({ control = {}, errors = {} }) {
 							name="name"
 							rules={{ required: 'this is required' }}
 						/>
-						{errors.name && (
-							<span className={styles.error}>*required</span>
-						)}
+						{errors.name ? <span className={styles.error}>*required</span> : null}
 					</div>
 				</div>
 			</div>
