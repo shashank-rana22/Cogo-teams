@@ -14,7 +14,6 @@ function Documents({ data: employeeData = {} }) {
 
 	const [name, setName] = useState('');
 	const [url, setUrl] = useState('');
-
 	const columns = useGetColumns(setShow, setName, setUrl);
 
 	const { signed_documents, other_documents } = employeeData;

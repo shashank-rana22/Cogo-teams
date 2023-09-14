@@ -1,7 +1,16 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
+
+const createDownload = (url) => {
+	if (!url) {
+		Toast.error('Url does not exist!');
+	} else {
+		window.open(url, '_self');
+		Toast.success('Attendance Report Downloaded successfully');
+	}
+};
 
 const useGetColumns = (setShow = () => {}, setName = () => {}, setUrl = () => {}) => ([
 	{
@@ -22,6 +31,7 @@ const useGetColumns = (setShow = () => {}, setName = () => {}, setUrl = () => {}
 					size="md"
 					themeType="secondary"
 					className={styles.download_button}
+					onClick={() => createDownload(item.url)}
 				>
 					<IcMDownload width={14} height={14} />
 				</Button>
