@@ -78,7 +78,7 @@
 	margin-top: 2px;
 	font-size: 14px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-3);
 	word-break: break-all;
 }
 
@@ -87,7 +87,16 @@
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-3);
+	word-break: break-all;
+}
+
+.account {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #29cc6a;
 	word-break: break-all;
 }
 
@@ -97,7 +106,7 @@
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-3);
 	word-break: break-all;
 }
 
