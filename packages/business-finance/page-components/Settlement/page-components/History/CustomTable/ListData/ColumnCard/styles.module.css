@@ -57,13 +57,9 @@
 
 .ribbon {
 	position: relative;
-
-	--f: 6px; /* control the folded part */
-	--r: 16px; /* control the ribbon shape */
-	--t: -7px; /* the top offset */
-
 	top: -16px;
-	right: -22px;
+	right: 28px;
+	width: 50px;
 	padding: 0 10px var(--f) calc(10px + var(--r));
 	clip-path:
 		polygon(
@@ -78,6 +74,10 @@
 	font-size: 10px;
 	color: black;
 	background: var(--color-primary-error-red-2);
+
+	--f: 6px; /* control the folded part */
+	--r: 16px; /* control the ribbon shape */
+	--t: -7px; /* the top offset */
 }
 
 .ribbon_orange {
@@ -85,6 +85,5 @@
 }
 
 .ribbon_render {
-	flex: 0.2;
-	width: 50px;
+	width: 1px;
 }
