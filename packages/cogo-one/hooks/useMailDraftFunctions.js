@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { addDoc, updateDoc, doc, collection } from 'firebase/firestore';
+import { addDoc, updateDoc, doc, collection, getDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
@@ -41,7 +41,7 @@ function useMailDraftFunctions({
 	const { id: messageDocumentId = '', response = {} } = parentEmailMessage || {};
 	const { parent_email_message = {}, draft_type = '' } = response || {};
 
-	const saveToExistingThread = ({
+	const saveToExistingThread = async ({
 		payload = {},
 		communication_id = '',
 		buttonType = '',
@@ -66,7 +66,7 @@ function useMailDraftFunctions({
 			return;
 		}
 
-		addDoc(
+		const res = await addDoc(
 			activeChatCollection,
 			formatMailDraftMessage({
 				communication_id,
@@ -76,14 +76,24 @@ function useMailDraftFunctions({
 			}),
 		);
 
+		let lastDraftDoc;
+
+		if (res?.id) {
+			lastDraftDoc = await getDoc(doc(
+				firestore,
+				`${FIRESTORE_PATH.email}/${id}/messages/${res.id}`,
+			));
+		}
+
 		updateDoc(messageFireBaseDoc, {
 			show_in_drafts      : true,
 			new_message_sent_at : Date.now(),
 			no_of_drafts        : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
+			last_draft_document : lastDraftDoc?.data() || {},
 		});
 	};
 
-	const updateTheExistingDraft = ({
+	const updateTheExistingDraft = async ({
 		communication_id,
 		payload,
 	}) => {
@@ -92,11 +102,16 @@ function useMailDraftFunctions({
 			`${FIRESTORE_PATH.email}/${id}/messages/${messageDocumentId}`,
 		);
 
-		if (isEmpty(activeDraftMailCollection)) {
+		const messageFireBaseDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH.email}/${id}`,
+		);
+
+		if (isEmpty(activeDraftMailCollection) || isEmpty(messageFireBaseDoc)) {
 			return;
 		}
 
-		updateDoc(
+		await updateDoc(
 			activeDraftMailCollection,
 			formatMailDraftMessage({
 				communication_id,
@@ -105,6 +120,16 @@ function useMailDraftFunctions({
 				buttonType         : draft_type,
 			}),
 		);
+
+		const lastDraftDoc = await getDoc(doc(
+			firestore,
+			`${FIRESTORE_PATH.email}/${id}/messages/${messageDocumentId}`,
+		));
+
+		updateDoc(messageFireBaseDoc, {
+			new_message_sent_at : Date.now(),
+			last_draft_document : lastDraftDoc?.data() || {},
+		});
 	};
 
 	const createNewRoomAndAddDraft = () => {

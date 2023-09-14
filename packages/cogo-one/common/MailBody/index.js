@@ -90,7 +90,7 @@ function MailBody({
 	};
 
 	return (
-		<div>
+		<div className={styles.email_container}>
 			<div className={styles.send_by_name}>
 				{isDraft ? 'Created' : 'Replied'}
 				{' '}

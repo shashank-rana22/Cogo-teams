@@ -153,6 +153,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 		firstLoadingMessages : firstLoadingMessages || firstTimeLineLoading,
 		loadingPrevMessages  : loadingPrevMessages || timeLineLoading,
 		messagesState,
+		mountSnapShot,
 	};
 };
 

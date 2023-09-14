@@ -50,6 +50,7 @@ function LoadPrevMessages({
 		</div>
 	);
 }
+
 function MessagesThread(
 	{
 		loadingPrevMessages = false,
