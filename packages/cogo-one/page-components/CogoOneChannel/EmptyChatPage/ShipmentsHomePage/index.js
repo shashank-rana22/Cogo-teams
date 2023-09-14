@@ -34,7 +34,7 @@ function ListShipmentCards({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
-	showAddPrimaryUserButton = false,
+	viewType = '',
 	mailProps = {},
 	showModalType = () => {},
 	params = {},
@@ -67,7 +67,7 @@ function ListShipmentCards({
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
-				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				viewType={viewType}
 				mailProps={mailProps}
 				showModalType={showModalType}
 				params={params}
@@ -77,7 +77,7 @@ function ListShipmentCards({
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
+function ShipmentsHomePage({ setActiveTab = () => {}, viewType = '', mailProps = {} }) {
 	const { queryParams = {} } = getFormatedPath();
 
 	const [showPocDetails, setShowPocDetails] = useState({});
@@ -167,7 +167,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								setShowPopover={setShowPopover}
 								showPopover={showPopover}
 								setShowPocModal={setShowPocModal}
-								showAddPrimaryUserButton={showAddPrimaryUserButton}
+								viewType={viewType}
 								mailProps={mailProps}
 								showModalType={showModalType}
 								params={params}

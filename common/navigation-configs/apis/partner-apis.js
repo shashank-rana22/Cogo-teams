@@ -7844,6 +7844,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',

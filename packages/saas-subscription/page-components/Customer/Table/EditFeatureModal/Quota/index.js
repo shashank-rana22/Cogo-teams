@@ -1,12 +1,17 @@
 import { cl, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
-import editQuotaControl from '../../../../../configuration/editQuotaControl';
+import getEditQuotaControl from '../../../../../configuration/editQuotaControl';
 import useUpdateQuota from '../../../../../hooks/useUpdateQuota';
 import { getFieldController } from '../../../../../utils/getFieldController';
 import styles from '../styles.module.css';
 
 function Quota({ quotaInfo = {}, modalChangeHandler }) {
 	const { id = '' } = quotaInfo || {};
+	const { t } = useTranslation(['saasSubscription']);
+
+	const editQuotaControl = getEditQuotaControl({ t });
+
 	const { formHook = {}, submitHandler, loading } = useUpdateQuota({ id, modalChangeHandler });
 	const { control, formState:{ errors }, handleSubmit } = formHook || {};
 
@@ -39,7 +44,7 @@ function Quota({ quotaInfo = {}, modalChangeHandler }) {
 					onClick={() => modalChangeHandler(false)}
 					loading={loading}
 				>
-					Cancel
+					{t('saasSubscription:cancel')}
 				</Button>
 				<Button
 					themeType="accent"
@@ -48,7 +53,7 @@ function Quota({ quotaInfo = {}, modalChangeHandler }) {
 					onClick={handleSubmit(submitHandler)}
 					loading={loading}
 				>
-					Save
+					{t('saasSubscription:save')}
 				</Button>
 			</div>
 		</>

@@ -1,7 +1,8 @@
 import { Pagination, Placeholder, cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import listConfig from '../../../configuration/listConfig';
+import getConfig from '../../../configuration/listConfig';
 import getValues from '../../../utils/getValues';
 
 import EditFeatureModal from './EditFeatureModal';
@@ -9,7 +10,11 @@ import EditModal from './EditModal';
 import itemFunction from './ItemFunctions';
 import styles from './styles.module.css';
 
+const LOADER_COUNT = 5;
+
 function Table({ userList = {}, loading = false, setGlobalFilters }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const { list = [], page = 0, page_limit = 0, total_count = 0 } = userList || {};
 	const [editModal, setEditModal] = useState({
 		openEditModal        : false,
@@ -17,10 +22,11 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 		editAddon            : false,
 		editPlan             : false,
 	});
+	const listConfig = getConfig({ t });
 
-	const functions = itemFunction({ setEditModal });
+	const functions = itemFunction({ setEditModal, t });
 
-	const newList = loading ? [...Array(5).keys()] : list;
+	const newList = loading ? [...Array(LOADER_COUNT).keys()] : list;
 
 	const pageChangeHandler = (v) => {
 		setGlobalFilters((prev) => ({ ...prev, page: v }));
