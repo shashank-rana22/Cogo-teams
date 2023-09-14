@@ -10,6 +10,9 @@ import invoiceDetailsRejectCheckboxList from '../../../../../constants/invoice-d
 import styles from './styles.module.css';
 
 const CHECK_REMARK_LENGTH = 1;
+const COLLECTION_PARTY_INDEX = '1';
+const BILLING_PARTY_INDEX = '2';
+const INVOICE_DETAILS_INDEX = '3';
 
 function RejectModal({
 	id = '',
@@ -49,7 +52,7 @@ function RejectModal({
 		>
 			<Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
 			<Modal.Body>
-				{Object.keys(showRejected).includes('1') && (
+				{Object.keys(showRejected).includes(COLLECTION_PARTY_INDEX) && (
 					<div>
 						<div className={styles.flex_center}>
 							<CheckboxGroup
@@ -79,7 +82,7 @@ function RejectModal({
 					</div>
 				)}
 
-				{Object.keys(showRejected).includes('2') && (
+				{Object.keys(showRejected).includes(BILLING_PARTY_INDEX) && (
 					<div>
 						<div className={styles.flex_center}>
 							<CheckboxGroup
@@ -108,7 +111,7 @@ function RejectModal({
 						/>
 					</div>
 				)}
-				{Object.keys(showRejected).includes('3') && (
+				{Object.keys(showRejected).includes(INVOICE_DETAILS_INDEX) && (
 					<div>
 						<div className={styles.flex_center}>
 							<CheckboxGroup
