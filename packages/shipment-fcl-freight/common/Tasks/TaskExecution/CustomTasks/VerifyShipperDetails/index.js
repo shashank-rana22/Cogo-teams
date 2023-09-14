@@ -27,8 +27,10 @@ function VerifyShipperDetails({
 		},
 	};
 
-	const Component = COMPONENT_MAPPING[step] || null;
+	const Component = COMPONENT_MAPPING[step];
 	const props = componentProps[step] || {};
+
+	if (!Component) return null;
 
 	return (
 		<Component {...props} />
