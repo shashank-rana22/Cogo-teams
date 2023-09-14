@@ -1,0 +1,16 @@
+{
+    "main_title":"Tonggak standar",
+    "create":"Membuat",
+    "empty_milestone":"Tidak ada tonggak standar",
+    "loader_alt":"Pemuatan Cogoport",
+    "filter_opertor_placeholder":"Masukkan jalur pengiriman",
+    "filter_source_placeholder":"Pilih Sumber",
+    "filter_source_opt_1":"Pekerjaan pelacakan",
+    "filter_source_opt_2":"Bawaan",
+    "filter_source_opt_3":"Ldb",
+    "filter_status_placeholder":"Pilih Status",
+    "filter_status_opt_1":"Aktif",
+    "filter_status_opt_2":"Tidak aktif",
+    "filter_status_opt_3":"Belum terpetakan",
+    "filter_search_placeholder":"Cari dengan tonggak sejarah/tonggak standar"
+}
