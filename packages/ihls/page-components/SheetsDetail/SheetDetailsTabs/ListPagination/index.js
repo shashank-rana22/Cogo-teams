@@ -5,7 +5,8 @@ import styles from './styles.module.css';
 function ListPagination({ filters = {}, setFilters = () => {}, data = {} }) {
 	const { page, ...restFilters } = filters || {};
 
-	const { page_limit = 10, total_count = 1 } = data || {};
+	const { page_limit = 10, total = 1 } = data || {};
+
 	const onClick = (currentPage) => {
 		setFilters({ ...restFilters, page: currentPage });
 	};
@@ -15,7 +16,7 @@ function ListPagination({ filters = {}, setFilters = () => {}, data = {} }) {
 			<Pagination
 				type="table"
 				pageSize={page_limit}
-				totalItems={total_count}
+				totalItems={total}
 				currentPage={page}
 				onPageChange={onClick}
 			/>

@@ -1,14 +1,27 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
-import statusTagMapping from './statusTagMapping';
-
+const orgTypeMapping = (item) => {
+	const TYPE = [];
+	const MAPPING = {
+		is_importer : 'Importer',
+		is_exporter : 'Exporter',
+		is_cha      : 'CHA',
+	};
+	Object.keys(MAPPING).forEach((key) => {
+		if (item[key]) {
+			TYPE.push(MAPPING[key]);
+		}
+	});
+	return isEmpty(TYPE) ? '-' : TYPE.join(', ');
+};
 export const tabColumns = [
 	{ Header: '#', accessor: (item) => (item?.id || '-') },
-	{ Header: 'File Name', accessor: (item) => (item?.formatted_file_name || '-') },
-	{ Header: 'Unique Leads', accessor: (item) => (item?.unique_leads_created_count || '-') },
-	{ Header: 'Update Leads', accessor: (item) => (item?.leads_updated_count || '-') },
-	{ Header: 'Shipment Records', accessor: (item) => (item?.shipment_records_created_count || '-') },
+	{ Header: 'Name', accessor: (item) => (item?.name || '-') },
+	{ Header: 'PAN', accessor: (item) => (item?.registration_number || '-') },
+	{ Header: 'IEC', accessor: (item) => (item?.iec || '-') },
+	{ Header: 'Type', accessor: (item) => (orgTypeMapping(item) || '-') },
 	{
 		Header   : 'Created At',
 		accessor : (item) => (formatDate({
@@ -24,10 +37,6 @@ export const tabColumns = [
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		})) || '-',
-	},
-	{
-		Header   : 'Status',
-		accessor : (item) => (statusTagMapping[item?.status?.toLowerCase()] || '-'),
 	},
 
 ];

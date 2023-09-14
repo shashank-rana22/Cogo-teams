@@ -14,6 +14,7 @@ function SheetsList({ filters = {}, setFilters = () => {}, data = {}, heading = 
 	const paginationProps = { setFilters, filters, data };
 	const [sortTypeCreatedAt, setSortingTypeCreatedAt] = useState('asc');
 	const [sortTypeUpdatedAt, setSortingTypeUpdatedAt] = useState('asc');
+
 	const onClickCreatedAt = () => {
 		setSortingTypeUpdatedAt('asc');
 		if (sortTypeCreatedAt === 'desc') {
@@ -36,25 +37,26 @@ function SheetsList({ filters = {}, setFilters = () => {}, data = {}, heading = 
 	};
 	return (
 		<div className={styles.container}>
-			<div className={styles.filters}>
-				<Button themeType="secondary" onClick={onClickCreatedAt}>
-					Created At
-					{' '}
-					{sortTypeCreatedAt === 'asc'
-						? <IcMArrowUp /> : <IcMArrowDown />}
-				</Button>
-				<Button themeType="secondary" onClick={onClickUpdatedAt}>
-					Updated At
-					{' '}
-					{sortTypeUpdatedAt === 'asc'
-						? <IcMArrowUp /> : <IcMArrowDown />}
 
-				</Button>
-			</div>
 			<div className={styles.heading}>
 				<div>{heading}</div>
+				<div className={styles.filters}>
+					<Button themeType="secondary" onClick={onClickCreatedAt}>
+						Created At
+						{' '}
+						{sortTypeCreatedAt === 'asc'
+							? <IcMArrowUp /> : <IcMArrowDown />}
+					</Button>
+					<Button themeType="secondary" onClick={onClickUpdatedAt} className={styles.updated_btn}>
+						Updated At
+						{' '}
+						{sortTypeUpdatedAt === 'asc'
+							? <IcMArrowUp /> : <IcMArrowDown />}
 
-				<ListPagination {...paginationProps} />
+					</Button>
+					<ListPagination {...paginationProps} />
+				</div>
+
 			</div>
 			<div>
 

@@ -13,62 +13,10 @@
 	color: #333;
 }
 
-.filter_btn {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: auto;
-	height: auto;
-	padding: 4px 12px;
-	font-size: 10px;
-	font-weight: 600;
-	color: black;
-	cursor: pointer;
-	background: #fff;
-	border: 1px solid black;
-	border-radius: 5px;
-}
-
-.reset_button {
-	height: auto;
-	padding: 4px 12px;
-	margin-right: 4px;
-	margin-left: 10px;
-	font-size: 10px;
-	line-height: 12px;
-	color: #fff;
-	text-align: center;
-	letter-spacing: 0.04em;
-	background: #000;
-	border-radius: 4px;
-}
-
-.filter_dot {
-	position: absolute;
-	top: 4px;
-	left: 20px;
-	width: 8px;
-	height: 8px;
-	background: rgb(3 74 253);
-	border: 1px solid #fff;
-	border-radius: 100%;
-}
-
-.filter_container .tippy-box .tippy-content {
-	max-height: 100%;
-}
-
 .cards_container {
 	margin-top: 10px;
 	background-color: #fff;
 	border-radius: 8px;
-}
-
-@media (max-width: 768px) {
-	.cards_container {
-		margin-top: 24px;
-	}
 }
 
 .stats_heading {
@@ -86,16 +34,6 @@
 
 .lead_conversion_stats_container .stats_item {
 	flex: 1;
-}
-
-@media (max-width: 768px) {
-	.lead_conversion_stats_container {
-		flex-wrap: wrap;
-	}
-
-	.lead_conversion_stats_container .stats_item {
-		flex: 1;
-	}
 }
 
 .secondary_button {

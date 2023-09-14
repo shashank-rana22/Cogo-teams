@@ -34,9 +34,14 @@
 
 .heading {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	padding: 10px;
 	font-size: 16px;
+}
+
+.updated_btn {
+	margin: 0 10px;
 }
 
 .filters {
@@ -50,4 +55,37 @@
 	align-items: center;
 	margin-left: 8px;
 	transform: scale(115%);
+}
+
+.completed {
+	background: #c1e1c1;
+}
+
+.processing {
+	background: #add8e6;
+}
+
+.lead {
+	background: #a8acce;
+}
+
+.uploaded {
+	background: #ffb6c1;
+}
+
+.shipment {
+	background: #ffcccb;
+}
+
+.raw {
+	background: #ade2ad;
+}
+
+.failure {
+	background: linear-gradient(to right, rgb(243 180 180), rgb(243 180 180));
+}
+
+.status_pill {
+	display: flex;
+	align-items: center;
 }
