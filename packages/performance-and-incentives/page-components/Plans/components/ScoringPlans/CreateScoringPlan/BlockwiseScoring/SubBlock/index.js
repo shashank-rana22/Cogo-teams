@@ -33,6 +33,7 @@ function SubBlock(props) {
 	const {
 		controls = [],
 		handleClick = () => {},
+		parameterOptions = [],
 		parameterUnitOptions = {},
 		checkForSubBlock = () => {},
 		filteredSubBlockOptions = [],
@@ -113,10 +114,13 @@ function SubBlock(props) {
 					buttonThemeType="link"
 					buttonText="Add Parameter"
 					watch={watch}
-					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
+					blockIndex={blockIndex}
+					subBlockIndex={subBlockIndex}
+					parameterOptions={parameterOptions}
 					parameterUnitOptions={parameterUnitOptions}
 					setParam={setParam}
 					setParamScoringType={setParamScoringType}
+					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 				/>
 			</div>
 

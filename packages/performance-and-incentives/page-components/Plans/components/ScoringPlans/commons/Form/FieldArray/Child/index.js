@@ -3,6 +3,7 @@ import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 import { getFieldController } from '../../getFieldController';
 
 import styles from './styles.module.css';
+import useBlockParameters from './useBlockParameters';
 
 const FIRST_INDEX = 1;
 
@@ -13,11 +14,14 @@ function Child(props) {
 		index,
 		name,
 		remove,
+		blockIndex = 0,
+		subBlockIndex = 0,
 		showDeleteButton = true,
 		noDeleteButtonTill = 0,
 		disabled = false,
 		error = {},
 		watch = () => {},
+		parameterOptions = [],
 		parameterUnitOptions = {},
 		setParam = () => {},
 		setParamScoringType = () => {},
@@ -25,6 +29,14 @@ function Child(props) {
 
 	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
 	const paramUnitOptions = parameterUnitOptions[paramType];
+
+	const { filteredParameterOptions } = useBlockParameters({
+		watch,
+		blockIndex,
+		subBlockIndex,
+		paramIndex: index,
+		parameterOptions,
+	});
 
 	return (
 		<div key={scoringType} className={styles.content}>
@@ -49,6 +61,7 @@ function Child(props) {
 							{...rest}
 							name={`${name}.${index}.${controlName}`}
 							{...(controlName === 'scoring_unit') ? { options: paramUnitOptions } : {}}
+							{...(controlName === 'parameter') ? { options: filteredParameterOptions } : {}}
 						/>
 
 						<div className={styles.error_message}>

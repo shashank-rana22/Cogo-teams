@@ -118,6 +118,7 @@ const useSubBlockCreation = (props) => {
 	return {
 		controls,
 		Element,
+		parameterOptions,
 		parameterUnitOptions,
 		loading,
 		handleClick,
