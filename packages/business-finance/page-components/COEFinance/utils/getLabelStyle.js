@@ -38,10 +38,10 @@ export const getLineItemLabelStyle = ({
 	let labelClassName = null;
 	if (length === ApproveCheck || isInvoiceApproved) {
 		labelClassName = styles.label_approved;
-	} else if (ApproveCheck + RejectCheck === NO_LINE_ITEM_CHECKED) {
-		labelClassName = styles.label;
-	} else {
+	} else if (RejectCheck > NO_LINE_ITEM_CHECKED) {
 		labelClassName = styles.label_rejected;
+	} else {
+		labelClassName = styles.label;
 	}
 
 	return labelClassName;

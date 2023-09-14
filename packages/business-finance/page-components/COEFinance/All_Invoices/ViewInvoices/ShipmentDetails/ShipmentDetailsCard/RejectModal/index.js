@@ -24,15 +24,12 @@ function RejectModal({
 	setCheckedValue = (p) => p,
 	remarksVal = {},
 	setRemarksVal = () => {},
-	billNumber = '',
 	invoiceType = '',
 	organizationName = '',
 	remarks = {},
-	billDate = new Date(),
-	status = '',
-	placeOfSupply = '',
 	onSubmit = (prop) => (prop),
 	billAdditionalObject = {},
+	bill = {},
 }) {
 	const {
 
@@ -43,6 +40,13 @@ function RejectModal({
 		urgencyTag = '',
 		paymentDueDate = '',
 	} = billAdditionalObject || {};
+
+	const {
+		billNumber = '',
+		billDate = new Date(),
+		status = '',
+		placeOfSupply = '',
+	} = bill || {};
 
 	return (
 		<Modal
