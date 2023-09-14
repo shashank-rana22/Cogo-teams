@@ -48,6 +48,7 @@ const COMPONENT_MAPPING = {
 	},
 	finance: {
 		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
+	//	finance_clearance_confirm_modal : FinanceEmployeeConfirmModal,
 	},
 };
 
@@ -63,7 +64,7 @@ function FormComponent({
 
 	if (view_type === 'hrbp_clearance') {
 		const handleNext = () => {
-			const componentKeys = Object.keys(COMPONENT_MAPPING.hr_meet);
+			const componentKeys = Object.keys(COMPONENT_MAPPING.finance);
 			const currentIndex = componentKeys.indexOf(currentComponent);
 
 			if (currentIndex !== MINUS_ONE && currentIndex < componentKeys.length - ONE) {

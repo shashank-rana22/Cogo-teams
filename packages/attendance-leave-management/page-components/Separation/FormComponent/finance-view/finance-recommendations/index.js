@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function FinanceRecommendations({ SetFinanceRecommendation, financeRecommendation }) {
+function FinanceRecommendations({
+	SetFinanceRecommendation = () => {},
+	financeRecommendation = {},
+	confirmedValues = {},
+	isComplete = false,
+}) {
 	const [showNotes, setShowNotes] = useState(true);
 	const toggle = (e) => {
 		SetFinanceRecommendation(
@@ -26,10 +31,11 @@ function FinanceRecommendations({ SetFinanceRecommendation, financeRecommendatio
 					<Toggle
 						name="employee"
 						size="md"
-						disabled={false}
+						disabled={isComplete}
 						onLabel="Let GO Employee"
 						offLabel="Hold Employee"
-						value={financeRecommendation.employee}
+						checked={isComplete ? confirmedValues.employee : financeRecommendation.employee}
+						// value={financeRecommendation.employee}
 						onChange={(e) => { toggle(e); }}
 					/>
 				</div>
@@ -37,11 +43,12 @@ function FinanceRecommendations({ SetFinanceRecommendation, financeRecommendatio
 					<Toggle
 						name="fnf"
 						size="md"
-						disabled={false}
+						disabled={isComplete}
 						onLabel="Release FNF"
 						offLabel="Hold FNF"
-						value={financeRecommendation.fnf}
-						onChange={(e) => toggle(e)}
+						checked={isComplete ? confirmedValues.fnf : financeRecommendation.fnf}
+//						value={financeRecommendation.fnf}
+						onChange={(e) => { toggle(e); }}
 					/>
 				</div>
 			</div>
