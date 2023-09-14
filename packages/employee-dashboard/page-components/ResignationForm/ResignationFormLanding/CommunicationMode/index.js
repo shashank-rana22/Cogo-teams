@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { InputController, MobileNumberController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -66,6 +67,12 @@ function CommunicationMode({ dataItems = {}, control = {}, errors = {}, loading 
 							placeholder={controlItem.placeholder}
 							{...controlItem}
 							disabled={application_exist}
+							rules={{
+								pattern: {
+									value   : GLOBAL_CONSTANTS.regex_patterns.email,
+									message : 'Enter valid email',
+								},
+							}}
 						/>
 						{errors[controlItem.name] && (
 							<div className={styles.error_msg}>
@@ -86,6 +93,12 @@ function CommunicationMode({ dataItems = {}, control = {}, errors = {}, loading 
 							placeholder={controlItem2.placeholder}
 							{...controlItem2}
 							disabled={application_exist}
+							rules={{
+								pattern: {
+									value   : GLOBAL_CONSTANTS.regex_patterns.number,
+									message : 'Enter valid email',
+								},
+							}}
 						/>
 						{/* {(!watchMobileNumber?.country_code || !watchMobileNumber?.number) && (
 							<div className={styles.error_msg}>

@@ -17,17 +17,15 @@ const useUpdateCancellationRequest = ({ data = {}, refetch = () => {} }) => {
 				application_id: data?.off_boarding_application_id,
 				status,
 			};
+
 			await trigger({
 				data: payload,
 			});
 
 			refetch();
-
-			if (status === 'cancelled') {
-				router.push('/attendance-leave-management');
-			}
+			if (status === 'cancelled') router.push('/attendance-leave-management');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			if (error?.response?.data) Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

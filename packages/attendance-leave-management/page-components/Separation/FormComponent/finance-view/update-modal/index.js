@@ -5,21 +5,28 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const ZERO = 0;
-function FinanceUpdateModal({ showModal = false, setShowModal = () => {}, setUpdateData = () => {} }) {
+
+const data = [
+	{
+		label : 'Bonus',
+		value : 'Bonus',
+	},
+	{
+		label : 'Loan',
+		value : 'Loan',
+	}, {
+		label : 'Gift',
+		value : 'Gift',
+	},
+];
+
+function FinanceUpdateModal({
+	showModal = false,
+	setShowModal = () => {},
+	setUpdateData = () => {},
+
+}) {
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
-	const data = [
-		{
-			label : 'Bonus',
-			value : 'Bonus',
-		},
-		{
-			label : 'Loan',
-			value : 'Loan',
-		}, {
-			label : 'Gift',
-			value : 'Gift',
-		},
-	];
 	const onSubmit = (values) => {
 		console.log('modal submit add new particular', values);
 		setUpdateData((prev) => [...prev,

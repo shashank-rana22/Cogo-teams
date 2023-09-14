@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function DatePicker({ control = {}, errors = {}, dataItems = {}, setValue = () => {} }) {
 	const { applicant_details } = dataItems || {};
+
 	useEffect(() => {
 		if (!isEmpty(applicant_details)) {
 			setValue(
@@ -30,7 +31,6 @@ function DatePicker({ control = {}, errors = {}, dataItems = {}, setValue = () =
 					rules={{ required: 'this is required' }}
 					disabled
 				/>
-
 			</div>
 			{errors.date && (
 				<div className={styles.error}>*Required</div>

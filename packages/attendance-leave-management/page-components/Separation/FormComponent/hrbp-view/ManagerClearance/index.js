@@ -49,22 +49,22 @@ function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}
 					refetch={refetch}
 				/>
 			) : null}
-			<div className={styles.container}>
-				<div className={styles.heading}>
-					Feedback Rating
-				</div>
-				<InputController
-					control={control}
-					name="feedback_rating"
-					size="md"
-					style={{ marginRight: '8px' }}
-					placeholder="Typed"
-					disabled={review_request?.is_complete}
-				/>
-			</div>
 
 			{is_complete ? (
 				<>
+					<div className={styles.container}>
+						<div className={styles.heading}>
+							Feedback Rating
+						</div>
+						<InputController
+							control={control}
+							name="feedback_rating"
+							size="md"
+							style={{ marginRight: '8px' }}
+							placeholder="Typed"
+							disabled={review_request?.is_complete}
+						/>
+					</div>
 					<div className={styles.container}>
 						<div className={styles.heading}>
 							Status
@@ -179,25 +179,24 @@ function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}
 								</div>
 							</div>
 						))}
-
-						<div className={styles.footer}>
-							<Button
-								themeType="secondary"
-								style={{ marginRight: '4px' }}
-								onClick={handleBack}
-							>
-								Back
-
-							</Button>
-							<Button themeType="primary" onClick={handleNext}>
-								Proceed
-								<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
-							</Button>
-						</div>
 					</div>
 				</>
 			) : null}
+			<div className={styles.footer}>
+				<Button
+					themeType="secondary"
+					style={{ marginRight: '4px' }}
+					onClick={handleBack}
+				>
+					Back
+
+				</Button>
+				<Button themeType="primary" onClick={handleNext}>
+					Proceed
+					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+
+				</Button>
+			</div>
 		</>
 	);
 }

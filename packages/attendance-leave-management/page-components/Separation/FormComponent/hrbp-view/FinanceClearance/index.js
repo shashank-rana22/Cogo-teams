@@ -3,93 +3,123 @@ import { IcMArrowRight, IcMDocument, IcMEyeopen } from '@cogoport/icons-react';
 import React from 'react';
 
 import StyledTable from '../../commons/StyledTable';
+import CancellationRequest from '../CancellationRequest';
 import Heading from '../HRMeeting/Heading';
 
-import { fnfColumns, outstandingColumns } from './columns';
+import { getFnfColumns, outstandingColumns } from './columns';
 import FinanceRecommendations from './FinanceRecommendations';
 import styles from './styles.module.css';
+import useUpdateFnfStatus from './useUpdateFnfStatus';
 
 const NUM = 1;
-const data1 = [
-	{
-		companyLoan   : '500000',
-		advanceAmount : '100000',
-		status        : 'RECOVERED',
-	},
-];
 
-const data2 = [
-	{
-		accountName    : 'XYZ',
-		tenure         : '-',
-		outstandingAmt : '100000',
-		status         : 'pending',
-		description    : 'salary',
+function FinanceClearance({ data = {}, handleBack = () => {}, handleNext = () => {}, refetch = () => {} }) {
+	console.log('🚀 ~ file: index.js:16 ~ FinanceClearance ~ data:', data);
+	const { updateApplication = () => {} } = useUpdateFnfStatus({ refetch });
+	const fnfColumns = getFnfColumns({ onStatusChange: updateApplication });
 
-	},
-	{
-		accountName    : 'XYZ',
-		tenure         : '-',
-		outstandingAmt : '100000',
-		status         : 'pending',
-		description    : 'salary',
+	const { finance_clearance, application_status } = data || {};
+	const { finance_clearance:financeClearance, process_user_details } = finance_clearance || {};
+	const { sub_process_data, is_complete } = financeClearance || {};
+	const {
+		fnf_details,
+		fnf_excel_sheet_url,
+		outstanding_amount_details,
+		outstanding_excel_sheet,
+	} = sub_process_data || {};
 
-	},
-];
+	const data_fnf = (fnf_details || []).map((item) => ({
+		companyLoan   : item?.category,
+		advanceAmount : item?.recoverable_amount,
+		status        : item?.status,
+		id            : item?.id,
+	}));
 
-const URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com/5b9d632d5221f50d4d4fbfc6d489c31b/sample.pdf';
-const parts = URL.split('/');
-const lastPart = parts[parts.length - NUM];
+	const data_outstanding = (outstanding_amount_details || [])
+		.filter((item) => !item.cleared)
+		.map((item) => ({
+			accountName    : item?.business_name,
+			tenure         : '-',
+			dues           : '-',
+			outstandingAmt : item?.totalOutstanding,
+			status         : 'Pending',
+			description    : 'salary',
+		}));
+	const parts = fnf_excel_sheet_url?.split('/');
+	const lastPart = parts?.[(parts || []).length - NUM];
 
-function FinanceClearance({ handleBack = () => {}, handleNext = () => {} }) {
 	return (
 		<>
-			<Heading title="FINANCE CLEARANCE" />
-			<FinanceRecommendations />
-			<div className={styles.container}>
-				<div className={styles.heading}>
-					A. Review FNF Status
-				</div>
-				<StyledTable columns={fnfColumns} data={data1} />
-				<div className={styles.document_section}>
-					<div className={styles.doc_heading}>FNF Excel Sheet</div>
-					<Input
-						size="md"
-						placeholder={lastPart}
-						prefix={<IcMDocument width={16} height={16} />}
-						suffix={(
-							<IcMEyeopen
-								style={{ marginRight: '10px', cursor: 'pointer', color: 'black' }}
-								onClick={() => window.open(URL, '_blank')}
+			<Heading
+				title="FINANCE CLEARANCE"
+				name={process_user_details?.name}
+				isComplete={is_complete}
+			/>
+			{application_status === 'cancellation_requested' ? (
+				<CancellationRequest
+					data={data}
+					refetch={refetch}
+				/>
+			) : null}
+			{is_complete ? (
+				<>
+					{' '}
+					<FinanceRecommendations data={sub_process_data} />
+					<div className={styles.container}>
+						<div className={styles.heading}>
+							A. Review FNF Status
+						</div>
+						<StyledTable columns={fnfColumns} data={data_fnf} />
+						<div className={styles.document_section}>
+							<div className={styles.doc_heading}>FNF Excel Sheet</div>
+							<Input
+								size="md"
+								placeholder={lastPart}
+								prefix={<IcMDocument width={16} height={16} />}
+								suffix={(
+									<IcMEyeopen
+										style={{ marginRight: '10px', cursor: 'pointer', color: 'black' }}
+										onClick={() => window.open(fnf_excel_sheet_url, '_blank')}
+									/>
+								)}
+								disabled
 							/>
-						)}
-						disabled
-					/>
-				</div>
-			</div>
+						</div>
+					</div>
 
-			<div className={styles.container}>
-				<div className={styles.heading}>
-					B. Outstanding Amount
-				</div>
-				<StyledTable columns={outstandingColumns} data={data2} />
-				<div className={styles.document_section}>
-					<div className={styles.doc_heading}> Outstanding Excel Sheet</div>
-					<Input
-						size="md"
-						placeholder={lastPart}
-						prefix={<IcMDocument width={16} height={16} />}
-						suffix={(
-							<IcMEyeopen
-								style={{ marginRight: '10px', cursor: 'pointer', color: 'black' }}
-								onClick={() => window.open(URL, '_blank')}
+					<div className={styles.container}>
+						<div className={styles.heading}>
+							B. Outstanding Amount
+						</div>
+						<StyledTable columns={outstandingColumns} data={data_outstanding} />
+						<div className={styles.document_section}>
+							<div className={styles.doc_heading}> Outstanding Excel Sheet</div>
+							<Input
+								size="md"
+								placeholder={lastPart}
+								prefix={<IcMDocument width={16} height={16} />}
+								suffix={(
+									<IcMEyeopen
+										style={{ marginRight: '10px', cursor: 'pointer', color: 'black' }}
+										onClick={() => window.open(outstanding_excel_sheet, '_blank')}
+									/>
+								)}
+								disabled
 							/>
-						)}
-						disabled
-					/>
-				</div>
-			</div>
+						</div>
+					</div>
 
+					<div className={styles.container}>
+						<div className={styles.heading}>
+							Notes shared with you
+						</div>
+
+						<div className={styles.upper_text}>
+							{sub_process_data?.additional_remarks}
+						</div>
+					</div>
+				</>
+			) : null}
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
 				<Button themeType="primary" onClick={handleNext}>
@@ -98,7 +128,6 @@ function FinanceClearance({ handleBack = () => {}, handleNext = () => {} }) {
 
 				</Button>
 			</div>
-
 		</>
 	);
 }

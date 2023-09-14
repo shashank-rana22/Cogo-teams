@@ -157,6 +157,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'update_fnf_detail_status',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{

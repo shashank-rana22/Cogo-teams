@@ -11,7 +11,7 @@ const fnfColumns = ({
 }) => ([
 	{
 		Header   : 'PARTICULAR',
-		accessor : (item) => (
+		accessor : (item = {}) => (
 			<section>
 				{/* <InputController
 				control={control}
@@ -55,7 +55,6 @@ const fnfColumns = ({
 					value={item?.recoverable_amount}
 					size="md"
 					type="number"
-					// onChange={totalRecoverableAmountFun}
 					rules={{ required: { value: true, message: '*This Field is required' } }}
 				/>
 				{errors?.item?.particular && (

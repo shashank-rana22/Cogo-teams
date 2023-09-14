@@ -10,6 +10,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 	const { notes } = data || {};
 	const [show, setShow] = useState(false);
 	const notes_to_watch = watch();
+	console.log('🚀 ~ file: index.js:13 ~ InterviewQuestions ~ notes_to_watch:', notes_to_watch);
 
 	return (
 		<div className={styles.container}>
@@ -32,6 +33,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 							style={{ marginRight: '8px', width: '100%' }}
 							placeholder="Type your notes here"
 							rules={{ required: 'this is required' }}
+							disabled={notes?.[GLOBAL_CONSTANTS.zeroth_index]?.value}
 						/>
 						{errors.your_notes && (
 							<span className={styles.error}>*This field is Required</span>
@@ -43,9 +45,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb"
 									size="md"
-									disabled={notes[GLOBAL_CONSTANTS.zeroth_index]?.value === undefined
-										|| notes_to_watch?.your_notes === undefined
-										|| notes_to_watch?.your_notes === ''}
+									disabled={notes?.[GLOBAL_CONSTANTS.zeroth_index]?.value}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -73,9 +73,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb_2"
 									size="md"
-									disabled={notes[ONE]?.value === undefined
-										|| notes_to_watch?.your_notes_2 === undefined
-										|| notes_to_watch?.your_notes_2 === ''}
+									disabled={!notes?.[ONE]?.value || !notes_to_watch?.your_notes_2}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -97,6 +95,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 							size="md"
 							style={{ marginRight: '8px', width: '100%' }}
 							placeholder="Type your notes here"
+							disabled={!notes?.[TWO]?.value || !notes_to_watch?.your_notes_2}
 						/>
 						<div className={styles.below_text}>
 							<div>
@@ -104,9 +103,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb_3"
 									size="md"
-									disabled={notes[TWO]?.value === undefined
-										|| notes_to_watch?.your_notes_3 === undefined
-										|| notes_to_watch?.your_notes_3 === ''}
+									disabled={!notes?.[TWO]?.value || !notes_to_watch?.your_notes_2}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -127,6 +124,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 							size="md"
 							placeholder="Type your notes here"
 							rules={{ required: 'this is required' }}
+							disabled={!notes?.[THREE]?.value || !notes_to_watch?.your_notes_2}
 						/>
 						{errors.your_notes_4 && (
 							<span className={styles.error}>*This field is Required</span>
@@ -137,9 +135,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb_4"
 									size="md"
-									disabled={notes[THREE]?.value === undefined
-										|| notes_to_watch?.your_notes_4 === undefined
-										|| notes_to_watch?.your_notes_4 === ''}
+									disabled={!notes?.[THREE]?.value || !notes_to_watch?.your_notes_2}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>

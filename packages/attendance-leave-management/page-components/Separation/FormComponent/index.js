@@ -48,6 +48,7 @@ const COMPONENT_MAPPING = {
 	},
 	finance: {
 		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
+	//	finance_clearance_confirm_modal : FinanceEmployeeConfirmModal,
 	},
 };
 

@@ -26,6 +26,7 @@ function ServiceList({ control = {}, errors = {} }) {
 		}
 		setNewService('');
 	};
+
 	return (
 		<div className={styles.container}>
 

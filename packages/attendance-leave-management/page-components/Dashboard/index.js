@@ -17,8 +17,9 @@ import styles from './styles.module.css';
 const MANAGER = true;
 
 function AttendanceLeaveDashboard() {
-	const [activeTab, setActiveTab] = useState('attendance');
 	const router = useRouter();
+
+	const [activeTab, setActiveTab] = useState('attendance');
 	const { query } = useSelector((state) => state.general);
 	const [showInbox, setShowInbox] = useState(query?.showInbox || false);
 

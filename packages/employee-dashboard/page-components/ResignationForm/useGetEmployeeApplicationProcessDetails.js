@@ -32,7 +32,7 @@ const useGetEmployeeApplicationProcessDetails = () => {
 	return {
 		loading,
 		data,
-		refetchApplicationDetails: getEmployeeApplicationProcessDetails,
+		refetch: getEmployeeApplicationProcessDetails,
 	};
 };
 
