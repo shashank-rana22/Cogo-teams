@@ -36,8 +36,6 @@ function LineItemDetails({
 		name: 'line_items',
 	});
 
-	console.log('serviceProvider', serviceProvider);
-
 	const SERVICE_NAMES = [];
 	(serviceProvider?.services || []).map((service) => {
 		if (service?.service_type !== 'subsidiary_service') {

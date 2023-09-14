@@ -168,12 +168,10 @@ function CollectionPartyDetails({
 		lineItems    : formValues?.line_items,
 		chargeCodes  : codes,
 	});
-	console.log('calculatedValues:', calculatedValues);
 
 	const lineItemsDataArray = (calculatedValues.newItems || []).map(
 		(item, index) => {
 			const codeData = codes[item?.code] || {};
-			console.log('codeData', codes);
 			return {
 				serial_number       : index + ONE,
 				code                : item?.code,
@@ -190,7 +188,6 @@ function CollectionPartyDetails({
 			};
 		},
 	);
-	console.log('lineItemsDataArray:', lineItemsDataArray);
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -245,14 +242,11 @@ function CollectionPartyDetails({
 			});
 		}
 	});
-	console.log('bank_details', collectionPartyState);
 
 	const INVOICE_TYPE_OPTIONS = [
 		{ name: 'purchase_invoice', label: 'Purchase Invoice', value: 'Purchase' },
 		{ name: 'proforma_invoice', label: 'Proforma Invoice', value: 'Proforma' },
 	];
-
-	console.log('hellodoiwabhsdbvc', downloadButtonState);
 
 	return (
 		<div className={styles.container}>
@@ -428,8 +422,7 @@ function CollectionPartyDetails({
 									errMszs={errMszs}
 									setErrMszs={setErrMszs}
 								/>
-								<PurchaseInvoiceDates control={control} />
-								{console.log('invoiceCurrency', invoiceCurrency)}
+								<PurchaseInvoiceDates control={control} invoiceCurrency={invoiceCurrency} />
 								<BillingPartyDetails
 									control={control}
 									open

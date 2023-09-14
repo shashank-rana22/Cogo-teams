@@ -6,8 +6,6 @@ const useGetTradeParties = ({ serviceProvider = {} }) => {
 		url    : '/list_organization_trade_parties',
 	});
 
-	console.log('hello');
-
 	const getSelfTradeParty = async () => {
 		try {
 			await trigger({

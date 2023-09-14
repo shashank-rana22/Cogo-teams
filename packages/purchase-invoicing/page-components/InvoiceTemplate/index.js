@@ -30,11 +30,8 @@ function InvoiceTemplate({
 	calculatedValues = {},
 	lineItemsDataArray = [],
 	setGenerateInvoiceModal = () => {},
-	downloadButtonState = '',
 	setDownloadButtonState = () => {},
 }) {
-	console.log('fields', calculatedValues);
-
 	const fetchImageData = async ({ url = '', setterFunc }) => {
 		try {
 			const response = await fetch(url);
@@ -65,7 +62,6 @@ function InvoiceTemplate({
 			setDownloadButtonState,
 		});
 	};
-	console.log('downloadButtonState:', downloadButtonState);
 
 	const {
 		// loading: loadingGetTradeParty,
@@ -74,27 +70,9 @@ function InvoiceTemplate({
 	} = useGetTradeParties({ serviceProvider });
 	const { list = [] } = tradePartyData || {};
 
-	console.log('formValuesyahahai', formValues);
-
 	useEffect(() => {
 		fetchImageData({ url: GLOBAL_CONSTANTS.image_url.cogo_logo, setterFunc: setImageSrc });
 	}, []);
-
-	// const [codes, setCodes] = useState({});
-
-	// console.log('hellocodes', codes, 'formValues', formValues);
-
-	// const handleCodeChange = (obj) => {
-	// 	setCodes({ ...codes, [obj?.code]: obj });
-	// };
-
-	// const handleOptionsChange = (options) => {
-	// 	const HASHED_OPTIONS = {};
-	// 	options.forEach((option) => {
-	// 		HASHED_OPTIONS[option?.code] = option;
-	// 	});
-	// 	setCodes({ ...codes, ...HASHED_OPTIONS });
-	// };
 
 	useEffect(() => {
 		getSelfTradeParty();
@@ -102,7 +80,6 @@ function InvoiceTemplate({
 	}, [showTemplate]);
 
 	const serviceProviderTradePartyObj = list?.find((item) => item?.trade_party_type === 'self') || {};
-	console.log('serviceProviderTradePartyObj:', billingParty);
 
 	const serviceProviderAllBillingAddresses = [
 		...(serviceProviderTradePartyObj?.billing_addresses || []),
@@ -340,7 +317,6 @@ function InvoiceTemplate({
 							</div>
 						</div>
 					</div>
-					{console.log('formValuesdahsbcafdcb', formValues)}
 
 					<div style={styles.third_container}>
 						<div>
@@ -368,14 +344,11 @@ function InvoiceTemplate({
 											key={item.key}
 										>
 											{singleItem[item.key] || '-'}
-
-											{console.log('kyahaalhaibhaike', item.key, singleItem[item.key])}
 										</div>
 									))}
 								</div>
 							))}
 						</div>
-						{console.log(lineItemsDataArray, invoiceColumns, 'herbjfsendj')}
 						<div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
 							<div style={styles.total_amount}>
 								<div style={{ width: '50%', border: '0.5px solid black' }}>

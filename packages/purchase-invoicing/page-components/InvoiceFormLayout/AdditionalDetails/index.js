@@ -19,9 +19,6 @@ function AdditionalDetails({
 	serviceProvider = {},
 	formValues = {},
 }) {
-	console.log('errMszs', errMszs);
-	console.log('purchaseInvoiceValues', purchaseInvoiceValues);
-	console.log('formValues', formValues);
 	const { origin, destination } = getLocationConfig(primary_service);
 
 	const UPLOADED_INVOICES = [];

@@ -47,7 +47,6 @@ function InvoiceFormLayout({
 	editData = {},
 }, ref) {
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
-	console.log('purchaseInvoiceValues', purchaseInvoiceValues);
 
 	const [showTaggings, setShowTaggings] = useState(false);
 	const [billCatogory, setBillCatogory] = useState('purchase');

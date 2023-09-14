@@ -83,7 +83,6 @@ function LineItemDetails({
 					))}
 				</div>
 				<div>
-					{console.log('finalLineItemConfig', finalLineItemConfig)}
 					{fields.map((lineitem, index) => (
 						<div className={styles.tablecolumn} key={lineitem.id}>
 							{finalLineItemConfig.map((field) => (

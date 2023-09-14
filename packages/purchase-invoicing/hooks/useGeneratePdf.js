@@ -33,7 +33,6 @@ const useGeneratePdf = () => {
 			Toast.error(getApiErrorString(error?.data) || 'Something Went Wrong');
 		}
 	};
-	console.log('dataaaaaaaaaa');
 
 	return { loading, generatePdf };
 };
