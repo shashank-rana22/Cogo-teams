@@ -118,17 +118,16 @@ function FinanceClearance({ data = {}, handleBack = () => {}, handleNext = () =>
 							{sub_process_data?.additional_remarks}
 						</div>
 					</div>
-
-					<div className={styles.footer}>
-						<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
-						<Button themeType="primary" onClick={handleNext}>
-							Proceed
-							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
-						</Button>
-					</div>
 				</>
 			) : null}
+			<div className={styles.footer}>
+				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
+				<Button themeType="primary" onClick={handleNext}>
+					Proceed
+					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+
+				</Button>
+			</div>
 		</>
 	);
 }
