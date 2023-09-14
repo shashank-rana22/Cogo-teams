@@ -101,6 +101,15 @@ function useGetBillsList({
 		}
 	}, [refetch, showElement]);
 
+	useEffect(() => {
+		setBillsFilters({
+			invoiceView : 'coe_accepted',
+			entity      : activeEntity,
+			pageSize    : 10,
+			pageIndex   : 1,
+		});
+	}, [activeEntity]);
+
 	return {
 		billsData,
 		billsLoading,
