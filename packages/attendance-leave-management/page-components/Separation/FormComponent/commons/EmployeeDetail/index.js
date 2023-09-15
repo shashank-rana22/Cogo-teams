@@ -4,9 +4,11 @@ import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import Loader from '../../../../../common/Loader';
+
 import styles from './styles.module.css';
 
-function EmployeeDetail({ data = {} }) {
+function EmployeeDetail({ data = {}, loading = false }) {
 	const [show, setShow] = useState(true);
 
 	const { applicant_details } = data || {};
@@ -31,6 +33,7 @@ function EmployeeDetail({ data = {} }) {
 		personal_mail       : applicant_details?.personal_mail,
 		reason_for_leaving  : applicant_details?.reason_for_leaving,
 	};
+	if (loading) return <Loader />;
 
 	return (
 		<div className={styles.container}>

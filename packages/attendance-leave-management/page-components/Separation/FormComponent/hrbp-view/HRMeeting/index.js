@@ -19,7 +19,8 @@ const FIRST_INDEX = 1;
 const SECOND_INDEX = 2;
 const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
-function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
+function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loading = false }) {
+	console.log('🚀 ~ file: index.js:23 ~ HRMeeting ~ data:', data);
 	const {
 		control,
 		watch,
@@ -116,7 +117,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 					refetch={refetch}
 				/>
 			) : null}
-			<EmployeeDetail data={data} />
+			<EmployeeDetail data={data} loading={loading} />
 			<DatePicker
 				control={control}
 				watch={watch}

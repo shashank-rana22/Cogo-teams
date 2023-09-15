@@ -6,13 +6,18 @@ import styles from './styles.module.css';
 import useUpdateCancellationRequest from './useUpdateCancellationRequest';
 
 function CancellationRequest({ data = {}, refetch = () => {} }) {
-	console.log('🚀 ~ file: index.js:9 ~ CancellationRequest ~ data:', data);
 	const { onRequestCancelApplication } = useUpdateCancellationRequest({ data, refetch });
+	const { applicant_details } = data || {};
+	const { employee_name } = applicant_details || {};
 
 	return (
 		<div className={styles.prompt}>
 			<IcMInformation style={{ color: '#EE3425' }} width={20} height={20} />
-			<span className={styles.prompt_text}>Rahul Dev has requested for cancellation of separation.</span>
+			<span className={styles.prompt_text}>
+				{employee_name}
+				{' '}
+				has requested for cancellation of separation.
+			</span>
 			<div className={styles.buttons}>
 				<Button
 					style={{ background: '#fdebe9', color: 'black' }}
