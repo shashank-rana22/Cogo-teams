@@ -20,6 +20,10 @@ export interface ItemDataProps {
 	incomeTotalAmount: number,
 	expenseCount: number,
 	expenseTotalAmount: string,
+	sellQuoteCount?: number,
+	sellQuoteTotalAmount?: string,
+	buyQuoteCount?: number,
+	buyQuoteTotalAmount?: string,
 	serviceType: string,
 	discountAppliedKam: number,
 	discountAppliedRevenueDesk: number,
@@ -46,7 +50,7 @@ function ShipmentIdView() {
 	} = useShipmentIdView({ invoicesRequired: pendingApproval, shipmentId: serialId });
 	const { totalRecords } = shipmentData || {};
 
-	const handleShipmentView = () => {
+	function HandleShipmentView() {
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
@@ -69,7 +73,7 @@ function ShipmentIdView() {
 				key={item?.jobId}
 			/>
 		));
-	};
+	}
 
 	return (
 		<div>
@@ -83,7 +87,7 @@ function ShipmentIdView() {
 			/>
 
 			<div>
-				{handleShipmentView()}
+				{HandleShipmentView()}
 				{data.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination

@@ -24,6 +24,13 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 			const { document_type: DocumentType } = item || {};
 			return <p>{startCase(DocumentType)}</p>;
 		},
+		DocumentNumberFunc: (item) => {
+			const { data = {} } = item || {};
+			const parsedData = JSON.parse(data);
+			const documentNumber = parsedData?.document_number || '';
+
+			return <p>{startCase(documentNumber)}</p>;
+		},
 		ServiceTypeFunc: (item) => {
 			const { service_type: serviceType } = item || {};
 			return <p>{startCase(serviceType)}</p>;
@@ -80,7 +87,7 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 		},
 	};
 
-	const getDocumentData = () => {
+	function GetDocumentData() {
 		if (loading) {
 			return (
 				<div className={styles.loader_main}>
@@ -99,11 +106,11 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 				loading={loading}
 			/>
 		);
-	};
+	}
 
 	return (
 		<div className={styles.list}>
-			{getDocumentData()}
+			{GetDocumentData()}
 		</div>
 	);
 }

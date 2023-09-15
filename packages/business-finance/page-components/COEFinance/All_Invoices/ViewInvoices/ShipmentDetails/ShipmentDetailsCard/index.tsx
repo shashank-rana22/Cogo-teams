@@ -31,7 +31,7 @@ interface ShipmentDetailsCardInterface {
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	invoiceStatus: string;
-	lineItemsCheck: boolean;
+	lineItemsCheck?: boolean;
 	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
 	onAccept: any;
 	onTabClick: any;

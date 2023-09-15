@@ -271,7 +271,7 @@ function ShipmentDetails({
 									})}
 									className={styles.approve_button}
 								>
-									Accept
+									Approve
 								</Button>
 							</div>
 						)}
@@ -324,7 +324,7 @@ function ShipmentDetails({
 									})}
 									className={styles.approve_button}
 								>
-									Accept
+									Approve
 								</Button>
 							</div>
 						)}

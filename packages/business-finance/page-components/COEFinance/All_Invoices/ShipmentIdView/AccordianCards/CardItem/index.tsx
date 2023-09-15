@@ -181,7 +181,7 @@ function CardItem({
 							timelineItem : 'sidDataCheck',
 						})}
 					>
-						Accept
+						Approve
 					</Button>
 				</div>
 			)}

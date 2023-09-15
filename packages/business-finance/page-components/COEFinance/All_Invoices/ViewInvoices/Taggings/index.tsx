@@ -75,7 +75,7 @@ function Tagging({
 						})}
 						className={styles.approve_button}
 					>
-						Accept
+						Approve
 					</Button>
 				</div>
 			)}
