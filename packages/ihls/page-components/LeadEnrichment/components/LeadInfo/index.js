@@ -1,10 +1,11 @@
-import { Button, Input, Modal, Pagination } from '@cogoport/components';
+import { Button, Input, Modal, Pagination, Popover } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LeadTable from '../../commons/LeadTable';
+import EnrichmentRequestModal from '../EnrichmentRequestModal';
 import LeadEnrichmentLogs from '../LeadEnrichmentLogs';
 import ObjectiveInfo from '../ObjectiveInfo';
 
@@ -12,14 +13,18 @@ import getLeadInfoColumns from './getLeadInfoColumns';
 import styles from './styles.module.css';
 
 function LeadInfo({
-	response = [], loading = false,
+	response = [],
+	loading = false,
 	paginationData = {},
 	selectAll = false,
+	params = {},
+	checkedRowsId = [],
 	setParams = () => {},
 	onChangeTableHeadCheckbox = () => {},
-	checkedRowsId = () => {},
 	onChangeBodyCheckbox = () => {},
 }) {
+	const [showRequest, setShowRequest] = useState(false);
+	const [visible, setVisible] = useState(false);
 	const [leadId, setLeadId] = useState(null);
 	const [allocationLeadId, setAllocationLeadId] = useState(null);
 	const columns = getLeadInfoColumns({
@@ -38,6 +43,14 @@ function LeadInfo({
 	const onCloseLogs = () => {
 		setLeadId(null);
 	};
+
+	const onCloseActions = () => {
+		setVisible(false);
+	};
+
+	// const onCloseRequest = () => {
+	// 	setShowRequest(false);
+	// };
 
 	const onPageChange = (pageNumber) => {
 		setParams((p) => ({ ...p, page: pageNumber }));
@@ -64,8 +77,35 @@ function LeadInfo({
 					</div>
 				</div>
 				<div className={styles.triggerButtons}>
-					<Button size="md" themeType="primary">Send to Enrichment</Button>
-					<Button size="md" themeType="primary">Send to Bounce Check</Button>
+					<Popover
+						onClickOutside={() => onCloseActions()}
+						placement="bottom"
+						caret={false}
+						render={(
+							<>
+								<Button
+									className={styles.popover_buttons}
+									size="md"
+									themeType="primary"
+									onClick={() => { setShowRequest(true); setVisible(false); }}
+								>
+									Send to Enrichment
+
+								</Button>
+								<Button
+									className={styles.popover_buttons}
+									size="md"
+									themeType="primary"
+								>
+									Push to CRM
+
+								</Button>
+							</>
+						)}
+						visible={visible}
+					>
+						<Button themeType="secondary" onClick={() => setVisible(!visible)}>Action</Button>
+					</Popover>
 				</div>
 			</div>
 
@@ -115,6 +155,14 @@ function LeadInfo({
 					<Button onClick={onCloseLogs}>Close</Button>
 				</Modal.Footer>
 			</Modal>
+
+			<EnrichmentRequestModal
+				checkedRowsId={checkedRowsId}
+				params={params}
+				showRequest={showRequest}
+				setShowRequest={setShowRequest}
+				// onCloseRequest={onCloseRequest}
+			/>
 
 		</div>
 	);

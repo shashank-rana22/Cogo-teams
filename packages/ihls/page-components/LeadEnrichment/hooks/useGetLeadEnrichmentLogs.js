@@ -23,7 +23,7 @@ const list = [
 	},
 ];
 
-const useGetEnrichmentRequestInfo = ({ id = null }) => {
+const useGetLeadEnrichmentLogs = ({ id = null }) => {
 	const [params, setParams] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -35,7 +35,7 @@ const useGetEnrichmentRequestInfo = ({ id = null }) => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [{ loading = false }] = useRequest({
-		url    : 'enrichment_request_info',
+		url    : 'list_enrichment_request',
 		method : 'get',
 		params,
 	}, { manual: false });
@@ -60,4 +60,4 @@ const useGetEnrichmentRequestInfo = ({ id = null }) => {
 	};
 };
 
-export default useGetEnrichmentRequestInfo;
+export default useGetLeadEnrichmentLogs;

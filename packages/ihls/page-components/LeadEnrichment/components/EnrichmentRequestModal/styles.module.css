@@ -1,0 +1,19 @@
+.input_field {
+	margin-top: 8px;
+}
+
+.button_div {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
+
+.field_array {
+	margin-top: 8px;
+}
+
+.error_message {
+	margin: 4px 0 0 4px;
+	font-size: 10px;
+	color: #cb6464;
+}

@@ -4,14 +4,15 @@
 	justify-content: start; */
 	padding: 16px 0;
 
-	:global() {
+	/* :global() {
 		[data-tippy-root] {
 			transform: translate3d(0, 100px, 0) !important;
 		}
-	}
+	} */
 }
 
 .logContainer {
+	margin-top: 16px;
 	background-color: #fff;
 
 	:global(.ui_table_head_row) {
@@ -49,7 +50,6 @@
 }
 
 .icmFilter {
-	/* width: 20px; */
 	height: auto;
 	margin: 0 8px 0 0;
 	cursor: pointer;
@@ -60,4 +60,14 @@
 	justify-content: center;
 	padding: 16px;
 	border-top: 1px solid var(--color-tertiary-beige-4);
+}
+
+.input_filters {
+	display: flex;
+	gap: 8px;
+}
+
+.filter_container {
+	display: flex;
+	justify-content: space-between;
 }

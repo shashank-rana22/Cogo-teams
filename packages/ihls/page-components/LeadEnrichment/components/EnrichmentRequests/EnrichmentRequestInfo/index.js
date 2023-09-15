@@ -2,7 +2,7 @@ import React from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 import LeadTable from '../../../commons/LeadTable';
-import useGetEnrichmentRequestInfo from '../../../hooks/useGetEnrichmentRequestInfo';
+import useGetLeadEnrichmentLogs from '../../../hooks/useGetLeadEnrichmentLogs';
 // import useGetObjectiveInfo from '../../hooks/useGetObjectiveInfo';
 
 // import Header from './components/Header';
@@ -37,7 +37,7 @@ function EnrichmentRequestInfo({ id = null }) {
 		searchValue,
 		setSearchValue,
 		// setParams,
-	} = useGetEnrichmentRequestInfo({ id });
+	} = useGetLeadEnrichmentLogs({ id });
 
 	const columns = [
 		{

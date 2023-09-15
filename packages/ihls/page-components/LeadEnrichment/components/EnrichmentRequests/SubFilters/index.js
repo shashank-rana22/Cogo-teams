@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import React from 'react';
 
 import { getFieldController } from '../../../../../commons/Form/getFieldController';
+import enrichment_request_filters from '../../../configurations/get-enrichment-request-filters';
 
 import styles from './styles.module.css';
 
@@ -9,17 +10,16 @@ function SubFilters({
 	control = [], handleSubmit = () => {},
 	handleClick = () => {}, onClickCancel = () => {},
 	loading = false,
-	sub_controls = [],
-	watch = () => {},
+	// watch = () => {},
 }) {
-	const enriched = watch('enrichment_status');
+	// const enriched = watch('enrichment_status');
 	return (
 		<div className={styles.container}>
 			<div className={styles.container_body}>
-				{sub_controls.map((item) => {
-					if (enriched && enriched === 'false' && item.name === 'is_verified') {
-						return null;
-					}
+				{enrichment_request_filters.map((item) => {
+					// if (enriched && enriched === 'false' && item.name === 'is_verified') {
+					// 	return null;
+					// }
 					const ele = { ...item };
 					const { name, displayName, placeholder, type, width, options } = item;
 					const Element = getFieldController(type);
