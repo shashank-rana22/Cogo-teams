@@ -1,7 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
@@ -18,14 +17,6 @@ function EditInvoice({
 	refetch = () => {},
 }) {
 	const geo = getGeoConstants();
-	// const allowedRoles = {
-	// 	IN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
-	// 	VN : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
-	// 	SG : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
-	// 	ID : [geo.uuid.admin_id, geo.uuid.super_admin_id],
-	// 	TH : [geo.uuid.admin_id, geo.uuid.super_admin_id],
-	// 	CN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
-	// };
 
 	const { role_ids } = useSelector(({ profile }) => ({
 		role_ids: profile.partner?.user_role_ids,

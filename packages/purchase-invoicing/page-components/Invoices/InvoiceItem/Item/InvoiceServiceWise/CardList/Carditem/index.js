@@ -6,10 +6,12 @@ import getValue from '../../../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 const TWELVE = 12;
+
 const HUNDRED = 100;
+
 function Item({
-	item,
-	fields,
+	item = {},
+	fields = [],
 	loading = false,
 }) {
 	return (
@@ -18,8 +20,10 @@ function Item({
 				if (singleItem?.show === false) {
 					return null;
 				}
+
 				const { span, render = () => {}, label } = singleItem;
 				const widthVal = (span / TWELVE) * HUNDRED;
+
 				return (
 					<div
 						style={{ width: `${widthVal}%` }}

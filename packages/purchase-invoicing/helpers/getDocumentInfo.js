@@ -10,7 +10,9 @@ export const getDocumentInfo = ({ bfInvoice }) => {
 		proformaPdfUrl = '', invoicePdfUrl = '', eInvoicePdfUrl = '',
 		einvoicePdfUrl = '',
 	} = bfInvoice || {};
+
 	const eInvoice = eInvoicePdfUrl || einvoicePdfUrl;
+
 	const { cancelledEInvoicePdfUrl = '', cancelledIrnNumber = '' } = invoiceAdditional || {};
 
 	const invoiceNumberPriority = [

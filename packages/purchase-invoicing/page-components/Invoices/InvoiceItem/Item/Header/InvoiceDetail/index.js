@@ -19,11 +19,13 @@ function InvoiceDetail({
 }) {
 	const {
 		invoice_total_currency,
-		invoice_total_discounted,
-		live_invoice_number,
+		invoice_total_discounted = 0,
+		live_invoice_number = '',
+		credit_option = {},
+		payment_mode = '',
 	} = invoice;
 
-	const creditSource = invoice?.credit_option?.credit_source?.split('_');
+	const creditSource = credit_option?.credit_source?.split('_');
 
 	const BF_INVOICE_DETAILS = invoicesList?.filter(
 		(item) => [item?.proformaNumber, item?.invoiceNumber].includes(live_invoice_number),
@@ -89,12 +91,12 @@ function InvoiceDetail({
 				</div>
 			</div>
 
-			{invoice?.payment_mode ? (
+			{payment_mode ? (
 				<div className={styles.payment_mode_status}>
-					{invoice?.payment_mode === 'credit' ? (
+					{payment_mode === 'credit' ? (
 						<div>
 							<div className={styles.info_container}>
-								{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_CREDIT_UPTO))}
+								{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_CREDIT_UPTO) || '')}
 							</div>
 
 							<div className={styles.payment_method}>
@@ -107,7 +109,7 @@ function InvoiceDetail({
 							</div>
 						</div>
 					) : (
-						<div className={styles.payment_method}>{invoice?.payment_mode}</div>
+						<div className={styles.payment_method}>{payment_mode}</div>
 					)}
 				</div>
 			) : null}

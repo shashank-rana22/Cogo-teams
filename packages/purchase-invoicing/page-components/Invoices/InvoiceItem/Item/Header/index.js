@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 
 const UPPER_CASE_EXCHANGE_RATE_STATE = ['eta', 'etd'];
 
-// todo :: go through header once
 function Header({
 	children = null,
 	invoice = {},

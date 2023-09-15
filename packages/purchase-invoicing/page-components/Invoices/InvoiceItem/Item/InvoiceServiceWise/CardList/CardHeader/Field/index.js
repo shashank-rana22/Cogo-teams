@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 const TWELVE = 12;
 const HUNDRED = 100;
+
 function Field({ field = {}, showCode = false }) {
 	const renderHeaderText = () => {
 		if (showCode && field.name) {
@@ -11,8 +12,10 @@ function Field({ field = {}, showCode = false }) {
 		}
 		return field.label;
 	};
+
 	const { span } = field;
 	const widthVal = (span / TWELVE) * HUNDRED;
+
 	return (
 		<div
 			style={{ width: `${widthVal}%` }}
@@ -24,4 +27,5 @@ function Field({ field = {}, showCode = false }) {
 		</div>
 	);
 }
+
 export default Field;

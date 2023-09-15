@@ -56,7 +56,7 @@ export const renderValue = (label, detail) => {
 		return `Package: ${inputValue}`;
 	}
 
-	function FormatPocData({ pocDetails }) {
+	function FormatPocData({ pocDetails = {} }) {
 		return (
 			<div>
 				<div>{pocDetails?.name}</div>
@@ -70,7 +70,7 @@ export const renderValue = (label, detail) => {
 		);
 	}
 
-	function FormatShipperDetails({ shipperDetails }) {
+	function FormatShipperDetails({ shipperDetails = {} }) {
 		return (
 			<div>
 				<div>{shipperDetails?.name}</div>

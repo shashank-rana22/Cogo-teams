@@ -19,18 +19,15 @@ function Actions({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.actions_wrap}>
-				<div className={styles.statuses}>
-					{invoice?.status === 'pending' ? (
-						<Button
-							size="sm"
-							onClick={() => setShowModal('approve_invoice')}
-						>
-							Mark as approved
-						</Button>
-					) : null}
-
-				</div>
+			<div className={cl`${styles.actions_wrap} ${styles.statuses}`}>
+				{invoice?.status === 'pending' ? (
+					<Button
+						size="sm"
+						onClick={() => setShowModal('approve_invoice')}
+					>
+						Mark as approved
+					</Button>
+				) : null}
 			</div>
 
 			<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>

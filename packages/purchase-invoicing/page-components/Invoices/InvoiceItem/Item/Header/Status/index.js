@@ -11,12 +11,11 @@ function Status({
 	refetchAferApiCall = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	return (
 		<div className={styles.status_container_outer}>
-			<div className={styles.invoice_container}>
-				<div className={styles.invoice_status}>
-					{startCase(invoice?.status)}
-				</div>
+			<div className={styles.invoice_status}>
+				{startCase(invoice?.status)}
 			</div>
 
 			{!invoice?.is_revoked && invoice?.status !== 'finance_rejected' && (

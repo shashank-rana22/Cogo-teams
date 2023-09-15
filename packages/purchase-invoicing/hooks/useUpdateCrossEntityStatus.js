@@ -7,7 +7,11 @@ const useUpdateCrossEntityStatus = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateStatus = async ({ invoice_id, status, refetch }) => {
+	const updateStatus = async ({
+		invoice_id = '',
+		status = '',
+		refetch = () => {},
+	}) => {
 		try {
 			await trigger({
 				data: {
