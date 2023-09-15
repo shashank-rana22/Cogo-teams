@@ -16,8 +16,8 @@ function ReasonsToLeave({ setComplete, setCode, control, off_boarding_applicatio
 	const { getExitCode } = useGetGenerateExitCode();
 
 	const handleGetCode = async () => {
-		const data = await getExitCode({ off_boarding_application_id });
-		setCode(data.exit_code);
+		const exitcode = await getExitCode(off_boarding_application_id);
+		setCode(exitcode?.exit_code);
 		setComplete(true);
 	};
 

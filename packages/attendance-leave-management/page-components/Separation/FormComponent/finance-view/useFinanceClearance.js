@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateAppliationProcessDetails from '../hooks/useUpdateAppliationProcessDetails';
 
@@ -13,7 +13,6 @@ const useFinanceClearance = ({ data, refetch }) => {
 		employee : false,
 		fnf      : false,
 	});
-	// const { data, loading } = useGetFinanceClearanceProcessDetails();
 	const off_boarding_application_id = data?.off_boarding_application_id || '';
 	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm();
 
@@ -53,18 +52,18 @@ const useFinanceClearance = ({ data, refetch }) => {
 				outstanding_amount_details : OUTSTANDINDDETAILS,
 				update_fnf_status          : updateData,
 				total_recoverable_amount   : totalRecoverableAmount,
-				additional_remarks         : values.notes,
+				additional_remarks         : values.additionalRemarks,
 				hold_fnf                   : financeRecommendation?.fnf || false,
 				hold_employee              : financeRecommendation?.employee || false,
-				name                       : financeRecommendation.name || '',
+				name                       : values.fullName || '',
 			},
 		};
 		updateApplication({ payload });
 	};
 
-	useEffect(() => {
-		// setValue('feedback_rating', sub_process_data?.feedback_rating);
-	}, [setValue, sub_process_data?.feedback_rating]);
+	// useEffect(() => {
+	// 	setValue('feedback_rating', sub_process_data?.feedback_rating);
+	// }, [setValue, sub_process_data?.feedback_rating]);
 
 	return {
 		handleSubmit,

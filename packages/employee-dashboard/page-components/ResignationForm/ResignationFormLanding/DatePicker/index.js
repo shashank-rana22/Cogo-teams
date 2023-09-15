@@ -7,7 +7,6 @@ import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 
 function DatePicker({ control = {}, errors = {}, dataItems = {}, loading = false, setValue = () => {} }) {
-	// console.log(dataItems.application_exist, 'application_exist');
 	const { application_exist } = dataItems || {};
 
 	useEffect(() => {
@@ -23,7 +22,6 @@ function DatePicker({ control = {}, errors = {}, dataItems = {}, loading = false
 		return <Loader themeType="secondary" />;
 	}
 
-	// console.log('dataItems', dataItems);
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Current Last Working Day</div>

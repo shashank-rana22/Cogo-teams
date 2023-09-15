@@ -22,7 +22,7 @@ const useDownloadOutstandingDetails = () => {
 
 	return {
 		loading,
-		data,
+		downloadlink: data,
 		getDownloadOutstandingFileLink,
 	};
 };

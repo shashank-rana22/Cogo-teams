@@ -5,36 +5,29 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
+function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = () => {} }) {
 	const [show, setShow] = useState(true);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
 				<span>Schedule Interview</span>
-				{visible ? (
-					<div className={styles.accordiontitle}>
-						<Button
-							size="md"
-							themeType="secondary"
-							className={styles.servicesbtn}
-						>
-							<IcMEdit />
-							Edit
-						</Button>
-						<IcMArrowDown
-							width={16}
-							height={16}
-							className={show ? styles.caret_active : styles.caret_arrow}
-						/>
-					</div>
-				) : (
+				<div className={styles.accordiontitle}>
+					<Button
+						size="md"
+						themeType="secondary"
+						className={styles.servicesbtn}
+						onClick={() => setEdit(false)}
+					>
+						<IcMEdit />
+						Edit
+					</Button>
 					<IcMArrowDown
 						width={16}
 						height={16}
 						className={show ? styles.caret_active : styles.caret_arrow}
 					/>
-				)}
+				</div>
 			</div>
 
 			<div className={show ? styles.item_container : styles.item_container_closed}>
@@ -49,6 +42,7 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							name="date"
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
+							disabled={is_complete}
 						/>
 					</div>
 					{errors.date ? <span className={styles.error}>*required</span> : null}
@@ -61,9 +55,10 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 						<TimepickerController
 							placeholder="Select time"
 							control={control}
-							name="offtime"
+							name="interviewTime"
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
+							disabled={is_complete}
 						/>
 					</div>
 					{errors.offtime ? <span className={styles.error}>*required</span> : null}
@@ -77,6 +72,7 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							control={control}
 							name="location"
 							className={styles.datepicker}
+							disabled={is_complete}
 							rules={{ required: 'this is required' }}
 						/>
 					</div>
@@ -92,6 +88,7 @@ function ScheduleInterview({ visible = false, control = {}, errors = {} }) {
 							name="info"
 							className={styles.infoinput}
 							rules={{ required: 'this is required' }}
+							disabled={is_complete}
 						/>
 					</div>
 					{errors.info ? <span className={styles.error}>*required</span> : null}

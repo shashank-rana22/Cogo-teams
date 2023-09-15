@@ -23,25 +23,7 @@ import useDownloadOutstandingDetails from './useDownloadOutstandingDetails';
 import useFinanceClearance from './useFinanceClearance';
 
 const ZERO = 0;
-// const data2 = [
-// 	{
-// 		accountName    : 'XYZ',
-// 		tenure         : '-',
-// 		outstandingAmt : '100000',
-// 		status         : 'pending',
-// 		description    : 'salary',
-// 	},
-// 	{
-// 		accountName    : 'XYZ',
-// 		tenure         : '-',
-// 		outstandingAmt : '100000',
-// 		status         : 'pending',
-// 		description    : 'salary',
 
-// 	},
-// ];
-
-// eslint-disable-next-line max-lines-per-function
 function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading = false }) {
 	// const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const {
@@ -51,13 +33,11 @@ function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading =
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
 		setValue,
 	} = useFinanceClearance({ data, refetch, loading });
-	// const is_complete = true;
-	//	console.log(is_complete); // use this for showing the get details
-	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
+	const { getDownloadOutstandingFileLink, downloadlink } = useDownloadOutstandingDetails();
 	// const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
 	const [confirmedValues, setConfirmedValues] = useState(
 		{
-			tcFullName        : 'Udit chavan',
+			tcFullName        : '',
 			employee          : true,
 			fnf               : true,
 			additionalRemarks : '',
@@ -65,22 +45,23 @@ function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading =
 
 		},
 	);
-	// console.log('sub process data', sub_process_data, is_complete);
 
 	useEffect(() => {
-		setValue('additionalRemarks', sub_process_data?.additional_remarks);
-		setConfirmedValues(
-			{
-				tcFullName    : 'Udit chavan',
+		if (is_complete) {
+			setValue('additionalRemarks', sub_process_data?.additional_remarks);
+			setValue('fullName', sub_process_data?.name);
+			setValue('checkboxagreement', true);
+			setConfirmedValues({
+				tcFullName    : sub_process_data?.name,
 				employee      : sub_process_data?.hold_employee,
-				fnf           : sub_process_data.hold_fnf,
-				getupdateData : data?.update_fnf_status,
+				fnf           : sub_process_data?.hold_fnf,
+				getupdateData : sub_process_data?.update_fnf_status,
 
-			},
-		);
-	}, [data, loading, setUpdateData, setValue, sub_process_data]);
+			}, is_complete);
+		}
+	}, [data, is_complete, setUpdateData, setValue, sub_process_data]);
+
 	const [show, setShow] = useState(true);
-	// const [confirmModal, setConfirmModal] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [outStandingShow, setOutStandingShow] = useState(true);
 	const columnsout = getColumns({ control, is_complete });
@@ -92,8 +73,8 @@ function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading =
 	), [confirmedValues.getupdateData]);
 
 	const handleDownloadSheet = async () => {
-		const link = await getDownloadOutstandingFileLink(off_boarding_application_id);
-		window.open(link?.data, '_blank');
+		await getDownloadOutstandingFileLink(off_boarding_application_id);
+		window.open(downloadlink, '_blank');
 	};
 	const totalRecoverableAmountFun = useCallback(
 		() => {
@@ -111,11 +92,6 @@ function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading =
 	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, watch]);
 
 	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
-
-	// if (loading) {
-	//  return null;
-	// }
-
 	return (
 		<>
 			<div className={styles.header}>
@@ -257,7 +233,7 @@ function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading =
 				<TermsConditions
 					control={control}
 					errors={errors}
-					isComplete={is_complete}
+					is_complete={is_complete}
 					confirmedValues={confirmedValues}
 				/>
 			</div>

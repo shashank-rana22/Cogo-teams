@@ -6,7 +6,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsConditions({ control = {}, errors = {}, isComplete = false, confirmedValues = {} }) {
+function TermsConditions({ control = {}, errors = {}, is_complete = false, confirmedValues = {} }) {
+//	 console.log(is_complete, 'wertyj', confirmedValues);
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>
@@ -16,10 +17,10 @@ function TermsConditions({ control = {}, errors = {}, isComplete = false, confir
 					<CheckboxController
 						className={styles.Checkbox}
 						control={control}
-						value={isComplete}
-						checked={isComplete}
-						name="checkbox_agreement"
-						disabled={isComplete}
+						value={is_complete}
+						checked={is_complete}
+						name="checkboxagreement"
+						disabled={is_complete}
 						rules={{ required: { value: true, message: '*required' } }}
 					/>
 					<div className={styles.content}>
@@ -36,7 +37,7 @@ function TermsConditions({ control = {}, errors = {}, isComplete = false, confir
 						<p>
 							Enter your Full Name, confirm your understanding and commitment to these terms.
 						</p>
-						{errors?.checkbox_agreement ? <div className={styles.error}>*required</div> : null}
+						{errors?.checkboxagreement ? <div className={styles.error}>*required</div> : null}
 					</div>
 
 				</div>
@@ -49,12 +50,12 @@ function TermsConditions({ control = {}, errors = {}, isComplete = false, confir
 							size="sm"
 							placeholder="Enter your full name"
 							control={control}
-							value={isComplete ? confirmedValues.tcFullName : null}
-							name="name"
-							disabled={isComplete}
+							value={confirmedValues.tcFullName}
+							name="fullName"
+							disabled={is_complete}
 							rules={{ required: 'this is required' }}
 						/>
-						{errors.name ? <span className={styles.error}>*required</span> : null}
+						{errors.fullName ? <span className={styles.error}>*required</span> : null}
 					</div>
 				</div>
 			</div>

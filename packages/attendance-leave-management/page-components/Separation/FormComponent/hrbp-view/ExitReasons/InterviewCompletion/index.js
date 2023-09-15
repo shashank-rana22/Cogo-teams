@@ -14,7 +14,7 @@ const options = [
 	{ label: 'Harassment Case', value: 'Harassment Case' },
 	{ label: 'Others', value: 'Others' },
 ];
-function InterviewComplete({ code, control }) {
+function InterviewComplete({ code, control, complete }) {
 	const OTP = code || '';
 	const otparray = OTP.split('');
 	// const [value, setValue] = useState('');
@@ -63,6 +63,7 @@ function InterviewComplete({ code, control }) {
 					size="sm"
 					name="reason"
 					placeholder="Select reason"
+					disabled={complete}
 					control={control}
 					options={options}
 				/>
