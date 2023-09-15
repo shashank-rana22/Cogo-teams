@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -26,6 +27,7 @@ function POCDetails({ data = {} }) {
 	const {
 		e_booking_availability: eBooking,
 		inventory_stock_availability: availability, pocs_data:pocsData,
+		ams_mode: amsMode = 'manual',
 	} = data || {};
 
 	return (
@@ -42,6 +44,12 @@ function POCDetails({ data = {} }) {
 						<span>:</span>
 					</div>
 					{availability === 'before_booking' ? t('airRepository:before') : t('airRepository:after')}
+					<div className={cl`${styles.basic_info_heading} ${styles.inventory}`}>
+						{t('airRepository:ams_mode_field_label')}
+						<span>:</span>
+					</div>
+					{startCase(amsMode) || '-'}
+
 				</div>
 				<div className={styles.poc_list}>
 					<header className={styles.header}>

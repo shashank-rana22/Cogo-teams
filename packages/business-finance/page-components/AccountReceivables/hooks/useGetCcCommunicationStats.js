@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 const useGetCcCommunicationStats = ({
 	dateFilter = {},
+	viewGraphStats = false,
 }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_cc_communication_stats',
@@ -12,22 +13,24 @@ const useGetCcCommunicationStats = ({
 	}, { manual: true });
 
 	useEffect(() => {
-		trigger({
-			params: {
-				start_date: formatDate({
-					date       : dateFilter?.startDate,
-					formatType : 'date',
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				}),
+		if (viewGraphStats) {
+			trigger({
+				params: {
+					start_date: formatDate({
+						date       : dateFilter?.startDate,
+						formatType : 'date',
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					}),
 
-				end_date: formatDate({
-					date       : dateFilter?.endDate,
-					formatType : 'date',
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				}),
-			},
-		});
-	}, [dateFilter?.endDate, dateFilter?.startDate, trigger]);
+					end_date: formatDate({
+						date       : dateFilter?.endDate,
+						formatType : 'date',
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					}),
+				},
+			});
+		}
+	}, [dateFilter?.endDate, dateFilter?.startDate, trigger, viewGraphStats]);
 	return {
 		ccCommLoading : loading,
 		ccCommStats   : data || [],

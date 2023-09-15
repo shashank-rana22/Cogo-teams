@@ -98,6 +98,26 @@ const repositoryControls = (t = () => {}) => ({
 				required: true,
 			},
 		},
+		{
+			name        : 'ams_mode',
+			type        : 'select',
+			placeholder : t('airRepository:ams_mode_placeholder'),
+			options     : [
+				{
+					label : t('airRepository:electronic_label'),
+					value : 'electronic',
+				},
+				{
+					label : t('airRepository:manual_label'),
+					value : 'manual',
+				},
+			],
+			label : t('airRepository:ams_mode_label'),
+			span  : 6,
+			rules : {
+				required: true,
+			},
+		},
 	],
 	email: [
 		{
