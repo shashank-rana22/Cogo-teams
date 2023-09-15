@@ -1,15 +1,36 @@
 import currencies from '@cogoport/air-modules/helpers/currencies';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const ENTITY_CODES = Object.keys(ENTITY_FEATURE_MAPPING).filter(
 	(key) => ENTITY_FEATURE_MAPPING[key].feature_supported.includes('terminal_charge'),
 );
 
-const getTerminalChargeRateControl = ({ setEntityData = () => {} }) => {
+const getBillingAddressOptions = (billingParty = {}) => (
+	billingParty?.addresses?.map((address) => ({
+		...address,
+		label : address?.address,
+		value : address?.id,
+	}))
+);
+
+const getCollectionAddressOptions = (collectionParty = {}) => (
+	collectionParty?.billing_addresses?.map((address) => ({
+		...address,
+		label : address?.address,
+		value : address?.id,
+	}))
+);
+
+const getTerminalChargeRateControl = ({
+	entityData = {}, setEntityData = () => {},
+	collectionPartyData = {}, setCollectionPartyData = () => {},
+}) => {
+	const geo = getGeoConstants();
 	const TERMINAL_CHARGE_RATE_CONTROL = [
 		{
 			name     : 'cogo_entity_id',
-			label    : 'Select Cogo Entity',
+			label    : 'Billing Party',
 			type     : 'async-select',
 			asyncKey : 'list_cogo_entity',
 			params   : {
@@ -22,6 +43,50 @@ const getTerminalChargeRateControl = ({ setEntityData = () => {} }) => {
 			span           : 6,
 			defaultOptions : true,
 			onChange       : (_, val) => { setEntityData({ ...val }); },
+		},
+		{
+			label       : 'Billing Party Address',
+			name        : 'billing_address',
+			type        : 'select',
+			options     : getBillingAddressOptions(entityData),
+			placeholder : 'Select Address',
+			span        : 6,
+			rules       : {
+				required: true,
+			},
+		},
+		{
+			name        : 'collection_party',
+			label       : 'Collection Party',
+			type        : 'async-select',
+			labelKey    : 'business_name',
+			placeholder : 'Add Bank Account',
+			asyncKey    : 'list_organization_trade_parties',
+			span        : 6,
+			params      : {
+				documents_data_required         : true,
+				poc_data_required               : true,
+				billing_addresses_data_required : true,
+				filters                         : {
+					organization_id  : geo.uuid.freight_force_org_id,
+					trade_party_type : ['collection_party', 'self'],
+				},
+			},
+			onChange : (_, val) => { setCollectionPartyData({ ...val }); },
+			rules    : {
+				required: true,
+			},
+		},
+		{
+			label       : 'Collection Party Address',
+			name        : 'collection_party_address',
+			type        : 'select',
+			options     : getCollectionAddressOptions(collectionPartyData),
+			span        : 6,
+			placeholder : 'Enter Collection Party Address',
+			rules       : {
+				required: true,
+			},
 		},
 		{
 			name    : 'currency',

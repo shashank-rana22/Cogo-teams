@@ -1,12 +1,11 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
 
 const getPayload = ({
 	values = {}, mainServicesData = {}, sheetData = {},
-	entityData = {},
+	entityData = {}, collectionPartyData = {},
 }) => {
 	const geo = getGeoConstants();
 
@@ -18,6 +17,20 @@ const getPayload = ({
 		id:cogo_entity_id = '', serial_id = '',
 		addresses = [],
 	} = entityData || {};
+
+	const {
+		business_name: collectionBusinessName = '', registration_number :collectionRegistrationNumber = '',
+		billing_addresses = [],
+	} = collectionPartyData || {};
+
+	const billingAddress = addresses.find((address) => address.id === values?.billing_address);
+
+	const collectionPartyAddress = billing_addresses.find((address) => address.id === values?.collection_party_address);
+
+	const {
+		pincode:collectionPincode = '', address: collectionAddress = '',
+		tax_number: collectionTaxNumber,
+	} = collectionPartyAddress || {};
 
 	const { id:country_id = '', country_code = '', name = '', type = '' } = country || {};
 
@@ -73,8 +86,15 @@ const getPayload = ({
 				type,
 			},
 			address: {
-				...addresses[GLOBAL_CONSTANTS.zeroth_index],
+				...billingAddress,
 			},
+		},
+		collection_party_detail: {
+			pincode             : collectionPincode,
+			address             : collectionAddress,
+			tax_number          : collectionTaxNumber,
+			business_name       : collectionBusinessName,
+			registration_number : collectionRegistrationNumber,
 		},
 	};
 	return payload;

@@ -25,8 +25,15 @@ function TerminalChargeRate({
 }) {
 	const [entityData, setEntityData] = useState({});
 	const [irnGenerated, setIRNGenerated] = useState(true);
+	const [collectionPartyData, setCollectionPartyData] = useState({});
 
-	const controls = getTerminalChargeRateControl({ setEntityData });
+	const controls = getTerminalChargeRateControl({
+		entityData,
+		setEntityData,
+		collectionPartyData,
+		setCollectionPartyData,
+	});
+
 	const { formState:{ errors }, control, handleSubmit, setValue } = useForm();
 
 	const { createShipmentAdditionalService } =	useCreateShipmentAdditionalService({
@@ -42,6 +49,7 @@ function TerminalChargeRate({
 		sheetData,
 		mainServicesData,
 		entityData,
+		collectionPartyData,
 		createShipmentAdditionalService,
 	});
 

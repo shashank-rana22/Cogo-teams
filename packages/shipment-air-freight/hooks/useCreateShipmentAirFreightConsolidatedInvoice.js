@@ -6,6 +6,7 @@ import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payl
 const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	sheetData = {}, mainServicesData = {},
 	entityData = {},
+	collectionPartyData = {},
 	createShipmentAdditionalService = () => {},
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -19,6 +20,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 			mainServicesData,
 			sheetData,
 			entityData,
+			collectionPartyData,
 		});
 
 		try {
