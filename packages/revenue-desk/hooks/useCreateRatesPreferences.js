@@ -35,11 +35,11 @@ const useUpdateRatesPreferences = ({
 		const selectedRates = supplierPayload?.[service_id] || [];
 		const SERVICE_PROVIDERS = [];
 		const AMOUNT = [];
-		const CURRENCY = [];
+
 		(selectedRates).forEach((provider, index) => {
 			const totalSellValue = provider?.data?.rowData?.total_sell_price_in_preferred_currency;
-			const totalPriceValue = provider?.data?.rowData?.total_price_in_preferred_currency;
-			const Amount_Value = totalSellValue - totalPriceValue;
+			const totalBuyValue = provider?.data?.rowData?.total_buy_price_in_preferred_currency;
+			const amount_Value = totalBuyValue - totalSellValue;
 			const preferred_currency = provider?.data?.rowData?.preferred_currency;
 			SERVICE_PROVIDERS.push({
 				priority                    : index + INCREMENT_BY_ONE,
@@ -48,15 +48,29 @@ const useUpdateRatesPreferences = ({
 				validity_id                 : provider?.validity_id,
 				booking_confirmation_status : service?.service_type === 'air_freight_service' ? 'pending' : undefined,
 			});
-			AMOUNT.push(Amount_Value);
-			CURRENCY.push(preferred_currency);
+			AMOUNT.push({ amount: amount_Value, priority: index + INCREMENT_BY_ONE, currency: preferred_currency });
 		});
 
+		let mergedAmount = {};
+		mergedAmount = AMOUNT.reduce((result, currentAmount) => {
+			// eslint-disable-next-line no-param-reassign
+			result = {
+				wallet_amount            : Math.max(currentAmount.amount),
+				rate_priority_for_wallet : currentAmount.priority,
+				wallet_currency          : currentAmount?.currency,
+				apply_rd_wallet          : true,
+			};
+			return result?.wallet_amount > ZERO_VALUE ? result : null;
+		}, {});
+
 		const { service_type } = service;
+
 		const final_payload = {
 			service_providers               : SERVICE_PROVIDERS,
-			amount                          : Math.min(...AMOUNT),
-			currency                        : CURRENCY[ZERO_VALUE],
+			wallet_amount                   : mergedAmount?.wallet_amount || undefined,
+			apply_rd_wallet                 : mergedAmount?.apply_rd_wallet || undefined,
+			rate_priority_for_wallet        : mergedAmount?.rate_priority_for_wallet || undefined,
+			wallet_currency                 : mergedAmount?.wallet_currency || undefined,
 			booking_confirmation_docs       : [],
 			service_id                      : service_id || undefined,
 			service_type                    : service.service_type || undefined,
@@ -79,7 +93,6 @@ const useUpdateRatesPreferences = ({
 					shipment_id            : shipmentData?.id,
 					remarks                : othertext || reason,
 					revenue_desk_decisions : REVENUE_DESK_DECISION,
-
 				},
 			});
 			Toast.success('Preferences Updated');
