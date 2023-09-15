@@ -9,6 +9,7 @@ const notMandatoryControls = [
 	'transport_mode',
 	'organization_type',
 	'service',
+
 ];
 const TWO = 2;
 
@@ -46,7 +47,7 @@ const getShowElements = ({
 
 	allPresentControls.forEach((control) => {
 		if (control.name !== 'margin_values') {
-			SHOW_ELEMENTS[control.name] =				showControl || notMandatoryControls.includes(control.name);
+			SHOW_ELEMENTS[control.name] = showControl || notMandatoryControls.includes(control.name);
 			if (
 				!newValues[control.name]
 				&& !notMandatoryControls.includes(control.name)
@@ -54,7 +55,6 @@ const getShowElements = ({
 				showControl = false;
 			}
 		}
-
 		if (control.name === 'addition_type') {
 			if (isConditionMatches(conditions.ADD_CHANNEL_PARTNER_MARGIN)) {
 				if (
@@ -140,6 +140,7 @@ const getShowElements = ({
 			}
 		}
 	});
+	console.log(SHOW_ELEMENTS, 'SHOW_ELEMENTS');
 	return SHOW_ELEMENTS;
 };
 export default getShowElements;

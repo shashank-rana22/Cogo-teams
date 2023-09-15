@@ -1,4 +1,4 @@
-const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
+const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) => {
 	const controls = [
 		{
 			name           : 'partner_id',
@@ -9,9 +9,11 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 			watch          : true,
 			scope          : 'partner',
 			type           : 'async_select',
+			initialCall    : true,
 			asyncKey       : 'partners',
 			params         : { filters: { status: 'active' } },
 			disabled       : type === 'edit',
+			value          : item?.partner_id,
 			style          : {
 				control: (base) => ({
 					...base,
@@ -31,14 +33,15 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 				{ label: 'Supply', value: 'supply' },
 				{ label: 'Cogoport', value: 'cogoport' },
 			],
-			rules: { required: 'Margin type is required' },
+			rules : { required: 'Margin type is required' },
+			value : item?.margin_type,
 		},
 		{
 			label       : 'Select Rate Type',
 			name        : 'rate_type',
 			type        : 'chips',
 			span        : 7,
-			value       : 'marketplace_rate',
+			value       : item?.rate_type || 'marketplace_rate',
 			disabled    : type === 'edit',
 			caret       : true,
 			watch       : true,
@@ -58,6 +61,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 			span     : 7,
 			caret    : true,
 			watch    : true,
+			value    : item?.service,
 			disabled : type === 'edit',
 			options  : [
 				{
@@ -136,6 +140,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 				{ label: 'Importer Exporter', value: 'importer_exporter' },
 				{ label: 'Channel Partner', value: 'channel_partner' },
 			],
+			value: item?.organization_type,
 		},
 		{
 			name           : 'organization_id',
@@ -145,6 +150,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 			span           : 7,
 			scope          : 'partner',
 			type           : 'async_select',
+			initialCall    : true,
 			watch          : true,
 			asyncKey       : 'organizations',
 			disabled       : type === 'edit',
@@ -157,7 +163,8 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 					partner_id: partnerId || undefined,
 				},
 			},
-			style: {
+			value : item?.organization_id,
+			style : {
 				control: (base) => ({
 					...base,
 					'&:disabled': { cursor: 'not-allowed', opacity: '0.6' },
@@ -165,8 +172,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '' }) => {
 			},
 		},
 	];
-	const DEFAULT_VALUES = controls.map((item) => ({ [item.name]: '' }));
-	return { controls, DEFAULT_VALUES };
+	return { controls };
 };
 
 export default getControls;

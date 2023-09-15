@@ -51,52 +51,33 @@ let initialCall = false;
 function Create({ type = 'create', item = {} }) {
 	const { isConditionMatches } = useGetPermission();
 	const [activeKey, setActiveKey] = useState('customize');
-	const [idValues, setIdValues] = useState({});
-	const [partnerId, setPartnerId] = useState('');
-	const [marginType, setMarginType] = useState('');
-	// const [additionType, setAdditionType] = useState('');
-	// const { onSubmit: trigger } = useCreateMargin();
-	// const [chargeCodes, setChargeCodes] = useState([]);
-	// const { trigger:chargeCodesTrigger } = useListRateChargeCodes({ defaultFilters: { autoCancel: false } });
+	const [idValues, setIdValues] = useState(item);
+	// const [partnerId, setPartnerId] = useState('');
+	// const [marginType, setMarginType] = useState('');
 
-	const { controls: initialControls } = getControls({ type, marginType, partnerId });
-	const [service, setService] = useState('');
+	// const [service, setService] = useState('');
 	const {
 		control,
 		watch,
 		handleSubmit,
+		fields,
 	} = useForm({ defaultValues: idValues });
 	const formValues = watch();
+	const { controls: initialControls } = getControls({
+		type,
+		marginType : formValues?.margin_type,
+		partnerId  : formValues?.partner_id,
+		item,
+	});
 
-	// useEffect(() => {
-	// 	if (formValues?.service) {
-	// 		getChargeCodes({ setChargeCodes, service: formValues?.service, trigger: chargeCodesTrigger });
-	// 		setService(formValues?.service);
-	// 	}
-	// }, [formValues?.service, chargeCodesTrigger]);
-
-	useEffect(() => {
-		if (formValues?.partner_id) {
-			setPartnerId(formValues?.partner_id);
-		}
-	}, [formValues?.partner_id]);
-	useEffect(() => {
-		if (formValues?.margin_type) {
-			setMarginType(formValues?.margin_type);
-		}
-	}, [formValues?.margin_type]);
-	useEffect(() => {
-		setService(formValues?.service);
-		initialCall = false;
-	}, [formValues?.service]);
 	const getAllControls = useCallback(() => {
-		let extraControls = (getFclControls({ type })[service] || []);
-		extraControls = (getFclCustomsControls({ type })[service] || extraControls);
-		extraControls = (getLclFreightControls({ type })[service] || extraControls);
-		extraControls = (getLtlFreight({ type })[service] || extraControls);
+		let extraControls = (getFclControls({ type })[formValues?.service] || []);
+		extraControls = (getFclCustomsControls({ type })[formValues?.service] || extraControls);
+		extraControls = (getLclFreightControls({ type })[formValues?.service] || extraControls);
+		extraControls = (getLtlFreight({ type })[formValues?.service] || extraControls);
 		const controls = [...(initialControls || []), ...(extraControls || [])];
 		return controls;
-	}, [initialControls, service, type]);
+	}, [initialControls, formValues?.service, type]);
 	const controls = useMemo(() => getAllControls(), [getAllControls]);
 
 	// const marginValuedControls = getAllTheControls({
@@ -125,7 +106,7 @@ function Create({ type = 'create', item = {} }) {
 			setIdValues(controls.map((dat) => ({ [dat]: '' })));
 			initialCall = true;
 		}
-	}, [controls, setIdValues, service]);
+	}, [controls, setIdValues, formValues?.service]);
 
 	const onSubmit = (values) => {
 		setIdValues(values);
@@ -157,7 +138,7 @@ function Create({ type = 'create', item = {} }) {
 				{
 					activeKey === 'customize' ? (
 						<div>
-							<Layout controls={controls} control={control} showElements={showElements} />
+							<Layout controls={controls} control={control} showElements={showElements} fields={fields} />
 							<Button
 								onClick={handleSubmit(onSubmit)}
 							>
@@ -170,7 +151,7 @@ function Create({ type = 'create', item = {} }) {
 								formValues={formValues}
 								idValues={idValues}
 								type={type}
-								service={service}
+								service={formValues?.service}
 								marginControls={marginControls}
 								control={control}
 								data={item}
