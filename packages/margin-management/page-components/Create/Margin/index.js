@@ -1,7 +1,7 @@
 import { Pill } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import Layout from '../../../common/Layout';
+import NestedLayout from '../../../common/NestedLayout';
 
 import styles from './styles.module.css';
 
@@ -64,6 +64,7 @@ function Margin({
 		? idValues?.airline?.business_name
         || data?.filters?.airline?.business_name
 		: idValues?.airline?.business_name;
+
 	return (
 		<div>
 			<div className={styles.details_panel}>
@@ -101,7 +102,7 @@ function Margin({
                     && <Pill>{idValues?.trade_type || data?.trade_type}</Pill>}
 				</div>
 			</div>
-			<Layout controls={marginControls} control={control} />
+			<NestedLayout controls={marginControls} control={control} />
 		</div>
 	);
 }

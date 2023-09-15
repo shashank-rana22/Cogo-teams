@@ -55,6 +55,7 @@ const getShowElements = ({
 				showControl = false;
 			}
 		}
+
 		if (control.name === 'addition_type') {
 			if (isConditionMatches(conditions.ADD_CHANNEL_PARTNER_MARGIN)) {
 				if (

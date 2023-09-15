@@ -10,31 +10,28 @@
 export const marginControls = [{
 	name               : 'margin_slabs',
 	label              : 'Margin values',
-	type               : 'fieldArray',
+	type               : 'nestedFieldArray',
 	noDeleteButtonTill : 1,
 	buttonText         : 'Add Another Field',
-	value              : [
+	controls           : [
 		{
-			lower_limit : '',
-			upper_limit : '',
-		},
-	],
-	controls: [
-		{
-			name  : 'lower_limit',
-			label : 'Lower Limit',
-			type  : 'number',
-			size  : 'lg',
-			span  : 4,
-			rules : { required: 'Lower Limit is required' },
+			name    : 'lower_limit',
+			label   : 'Lower Limit',
+			type    : 'select',
+			options : {},
+			size    : 'lg',
+			span    : 4,
+			rules   : { required: 'Lower Limit is required' },
+			value   : '',
 		},
 		{
 			name  : 'upper_limit',
 			label : 'Upper Limit',
-			type  : 'number',
+			type  : 'input',
 			size  : 'lg',
 			span  : 4,
 			rules : { required: 'UpperLimit is required' },
+			value : '',
 		},
 		{
 			name  : 'limit_currency',
@@ -45,6 +42,7 @@ export const marginControls = [{
 			// options : OPTIONS,
 			watch : true,
 			rules : { required: 'Currency is required' },
+			value : '',
 		},
 		{
 			name               : 'margin_values',

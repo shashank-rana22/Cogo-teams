@@ -1,0 +1,15 @@
+.nested_field_array {
+	width: 100%;
+}
+
+.field_container {
+	margin-bottom: 6px;
+	border: 1px solid #dedede;
+	border-radius: 4px;
+}
+
+.field_header {
+	display: flex;
+	justify-content: space-between;
+	padding: 4px;
+}

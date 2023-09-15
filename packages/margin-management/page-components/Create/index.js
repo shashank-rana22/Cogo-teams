@@ -2,16 +2,16 @@ import { Button, FunnelStepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
-import { useGetPermission } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
+// import { useGetPermission } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Layout from '../../common/Layout';
-// import getChargeCodes from '../../helpers/getChargeCodes';
-// import getAllTheControls from '../../helpers/getControls';
-import getShowElements from '../../helpers/getShowElements';
-// import useCreateMargin from '../../hooks/useCreateMargin';
-// import useListRateChargeCodes from '../../hooks/useListRateChargeCodes';
+import disablePrevFields from '../../helpers/disablePrevFields';
+import getFormattedValues from '../../helpers/getFormattedValues';
+import useCreateMargin from '../../hooks/useCreateMargin';
+// import conditions from '../../utils/condition-constants';
+import toastApiError from '../../utils/toastApiError';
 
 import getFclControls from './extraControls/getFclControls';
 import getFclCustomsControls from './extraControls/getFclCustomsControls';
@@ -21,41 +21,61 @@ import getControls from './getControls';
 import Margin from './Margin';
 import { marginControls } from './marginControls';
 import styles from './styles.module.css';
+// import getShowElements from '../../helpers/getShowElements';
 
-// const payload = {
-// 	service      : 'fcl_freight',
-// 	margin_type  : 'demand',
-// 	margin_slabs : [
+// import useCreateMargin from '../../hooks/useCreateMargin';
+// import useListRateChargeCodes from '../../hooks/useListRateChargeCodes';
+
+// import { useSelector } from '@cogoport/store';
+// import getChargeCodes from '../../helpers/getChargeCodes';
+// import getAllTheControls from '../../helpers/getControls';
+
+// const values = {
+// 	partner_id        : '515c974d-5363-4c92-9088-ca725cecc740',
+// 	margin_type       : 'demand',
+// 	rate_type         : 'marketplace_rate',
+// 	service           : 'fcl_freight',
+// 	organization_type : '',
+// 	organization_id   : 'e18306f5-c2da-4587-9357-90cd5dc03ec4',
+// 	margin_slabs      : [
 // 		{
-// 			margin_values: [
-// 				{
-// 					code     : 'BAS',
-// 					type     : 'percentage',
-// 					value    : 10,
-// 					currency : 'INR',
-// 				},
-// 			],
-// 			lower_limit : 0,
-// 			upper_limit : 10,
+// 			lower_limit    : 0,
+// 			upper_limit    : '1',
+// 			limit_currency : 'INR',
 // 		},
 // 	],
-// 	filters               : {},
-// 	agent_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-// 	margin_slabs_currency : 'INR',
+// 	trade_type    : 'import',
+// 	margin_values : [
+// 		[
+// 			{
+// 				code     : 'BAS',
+// 				type     : 'percentage',
+// 				value    : '100',
+// 				currency : 'INR',
+// 			},
+// 		],
+// 	],
 // };
+// const agent_view = ['margin', 'across_all'];
+const ZERO = 0;
 const items = [
 	{ title: <div className={styles.stepper}>CUSTOMIZE YOUR DETAILS</div>, key: 'customize' },
 	{ title: <div className={styles.stepper}>ADD THE MARGINS</div>, key: 'add' },
 ];
 let initialCall = false;
 function Create({ type = 'create', item = {} }) {
-	const { isConditionMatches } = useGetPermission();
-	const [activeKey, setActiveKey] = useState('customize');
-	const [idValues, setIdValues] = useState(item);
-	// const [partnerId, setPartnerId] = useState('');
-	// const [marginType, setMarginType] = useState('');
+	const { agent_id } = useSelector(({ profile }) => ({
+		agent_id: profile?.user?.id,
 
-	// const [service, setService] = useState('');
+	}));
+	// const { isConditionMatches } = useGetPermission();
+	const [activeKey, setActiveKey] = useState('customize');
+	const [idValues, setIdValues] = useState({});
+	const { onSubmit: submitForm } = useCreateMargin();
+
+	useEffect(() => {
+		setIdValues(item);
+	}, [item]);
 	const {
 		control,
 		watch,
@@ -70,6 +90,15 @@ function Create({ type = 'create', item = {} }) {
 		item,
 	});
 
+	// if (
+	// 	isConditionMatches(conditions.SEE_ALL_MARGINS, 'or')
+	// 	|| formValues?.addition_type === 'channel_partner'
+	// ) {
+	// 	fields.partner_id.params = formValues?.addition_type === 'channel_partner'
+	// 		? { filters: { entity_manager_id: agent_id, status: 'active' } }
+	// 		: { filters: { status: 'active' } };
+	// }
+
 	const getAllControls = useCallback(() => {
 		let extraControls = (getFclControls({ type })[formValues?.service] || []);
 		extraControls = (getFclCustomsControls({ type })[formValues?.service] || extraControls);
@@ -79,27 +108,68 @@ function Create({ type = 'create', item = {} }) {
 		return controls;
 	}, [initialControls, formValues?.service, type]);
 	const controls = useMemo(() => getAllControls(), [getAllControls]);
-
-	// const marginValuedControls = getAllTheControls({
-	// 	allPresentControls: marginControls,
-	// 	item,
-	// 	chargeCodes,
-	// 	additionType,
-	// 	service,
+	// const { authorizationparameters } = useSelector(({ profile }) => ({
+	// 	authorizationparameters: profile,
+	// }));
+	// console.log('authorizationparameters', authorizationparameters);
+	// const showElements = getShowElements({
+	// 	allPresentControls : controls,
+	// 	formValues,
+	// 	item               : { ...(item || {}), ...(item?.filters || {}) },
 	// 	isConditionMatches,
+	// 	agent_view,
 	// });
-	// const allPresentValuedControls = getAllTheControls(
-	// 	{
-	// 		allPresentControls: controls,
-	// 		item,
-	// 		chargeCodes,
-	// 		additionType,
-	// 		service,
-	// 		isConditionMatches,
-	// 	},
-	// );
+	const handleFormSubmit = async (values) => {
+		const [slabs_currency] = values.margin_slabs || [];
+		const { limit_currency } = slabs_currency || {};
 
-	// const allControls = [...allPresentValuedControls, ...marginValuedControls];
+		const editValues = {
+			...values,
+			trade_type:
+				values?.trade_type
+				|| formValues?.trade_type
+				|| item?.filters?.trade_type,
+		};
+		if (activeKey === 'customize') {
+			setActiveKey('add');
+			setIdValues(values);
+		} else if (activeKey === 'add') {
+			try {
+				const formattedValues = getFormattedValues(
+					{ values: editValues },
+				);
+				const rawPayload = {
+					...formattedValues,
+					status   : type === 'update' ? item?.status : undefined,
+					agent_id : ['demand', 'supply'].includes(formattedValues?.margin_type)
+						? agent_id
+						: undefined,
+					margin_slabs_currency: limit_currency,
+				};
+				const PAYLOAD = {};
+				Object.keys(rawPayload || {}).forEach((key) => {
+					if (rawPayload[key] || rawPayload[key] === ZERO) {
+						PAYLOAD[key] = rawPayload[key];
+					}
+				});
+
+				const editPayload = {
+					margin_slabs_currency : limit_currency,
+					margin_slabs          : formattedValues?.margin_slabs,
+					id                    : item?.id,
+				};
+				const actualPayload = type === 'edit' ? editPayload : PAYLOAD;
+				await submitForm({ data: actualPayload });
+			} catch (err) {
+				toastApiError(err);
+			}
+		}
+	};
+	Object.keys(fields || {}).forEach((key) => {
+		if (key === 'margin_slabs') {
+			disablePrevFields('margin_slabs', key, fields, formValues);
+		}
+	});
 
 	useEffect(() => {
 		if (!initialCall) {
@@ -108,11 +178,6 @@ function Create({ type = 'create', item = {} }) {
 		}
 	}, [controls, setIdValues, formValues?.service]);
 
-	const onSubmit = (values) => {
-		setIdValues(values);
-		setActiveKey('add');
-	};
-	const showElements = getShowElements({ allPresentControls: controls, formValues, isConditionMatches });
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_wrap}>
@@ -138,24 +203,31 @@ function Create({ type = 'create', item = {} }) {
 				{
 					activeKey === 'customize' ? (
 						<div>
-							<Layout controls={controls} control={control} showElements={showElements} fields={fields} />
+							<Layout controls={controls} control={control} fields={fields} />
 							<Button
-								onClick={handleSubmit(onSubmit)}
+								onClick={handleSubmit(handleFormSubmit)}
 							>
 								Save and proceed
 							</Button>
 						</div>
 					)
 						: (
-							<Margin
-								formValues={formValues}
-								idValues={idValues}
-								type={type}
-								service={formValues?.service}
-								marginControls={marginControls}
-								control={control}
-								data={item}
-							/>
+							<div>
+								<Margin
+									formValues={formValues}
+									idValues={idValues}
+									type={type}
+									service={formValues?.service}
+									marginControls={marginControls}
+									control={control}
+									data={item}
+								/>
+								<Button
+									onClick={handleSubmit(handleFormSubmit)}
+								>
+									{type === 'edit' ? 'update margin' : 'create margin'}
+								</Button>
+							</div>
 						)
 				}
 			</div>
