@@ -8,12 +8,16 @@ const useGetRDWallet = ({ data : walletData }) => {
 	}, { manual: true });
 
 	const getRdWallet = useCallback(async () => {
-		await trigger({
-			params: {
-				service_id   : walletData?.id,
-				service_type : walletData?.service_type,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					service_id   : walletData?.id,
+					service_type : walletData?.service_type,
+				},
+			});
+		} catch (err) {
+			// console.log(err)
+		}
 	}, [trigger, walletData?.id, walletData?.service_type]);
 
 	useEffect(() => { getRdWallet(); }, [getRdWallet]);
