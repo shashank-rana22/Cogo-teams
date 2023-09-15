@@ -1,4 +1,5 @@
 import { Button, Input, Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -65,9 +66,13 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 
 						<div className={styles.content}>
 							Wallet Used :
-							{currency}
-							{' '}
-							{wallet_used}
+							{formatAmount({
+								amount  : wallet_used,
+								currency,
+								options : {
+									style: 'currency',
+								},
+							}) || '-'}
 						</div>
 
 						<Input
