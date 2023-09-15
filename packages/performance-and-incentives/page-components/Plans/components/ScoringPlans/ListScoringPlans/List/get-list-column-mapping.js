@@ -92,10 +92,10 @@ const getListColumnMapping = (props) => {
 		{
 			id       : 'creation',
 			key      : 'creation',
-			Header   : <div className={styles.heading}>CREATION</div>,
-			accessor : ({ created_at }) => (isEmpty(created_at)
+			Header   : <div className={styles.heading}>UPDATED</div>,
+			accessor : ({ updated_at }) => (updated_at
 				? formatDate({
-					date       : created_at,
+					date       : updated_at,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				}) : '___'

@@ -12,9 +12,6 @@ const useGetScoringConfigs = () => {
 		page_limit                : 10,
 		cogo_entity_data_required : true,
 		role_data_required        : true,
-		filters                   : {
-			q: searchQuery || undefined,
-		},
 	});
 
 	const [{ data, loading }, refetch] = useAllocationRequest({
@@ -38,7 +35,6 @@ const useGetScoringConfigs = () => {
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
-				q: searchQuery || undefined,
 			},
 		}));
 	}, [searchQuery]);

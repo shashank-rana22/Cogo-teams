@@ -43,8 +43,8 @@ const getScoringPlansFilterControls = () => {
 					value : 'enterprise',
 				},
 				{
-					label : 'CP',
-					value : 'cp',
+					label : 'Channel Partner',
+					value : 'channel_partner',
 				},
 			],
 		},
