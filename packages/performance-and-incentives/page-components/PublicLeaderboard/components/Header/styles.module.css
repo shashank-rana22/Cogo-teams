@@ -1,4 +1,11 @@
 .container {
 	display: flex;
 	justify-content: space-between;
+	height: fit-content;
+	padding: 20px 32px;
+}
+
+.sub_heading {
+	font-size: 18px;
+	color: #4f4f4f;
 }
