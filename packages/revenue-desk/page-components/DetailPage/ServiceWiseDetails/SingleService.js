@@ -133,7 +133,9 @@ function SingleService({
 	];
 
 	useEffect(() => {
-		if (!recommendationLoading && (allPreferenceCardsData || []).length && !isPreferenceSet) {
+		if (!recommendationLoading && (allPreferenceCardsData || []).length && !isPreferenceSet && !ratesLoading
+		&& !supplierPayload?.[singleServiceData?.id]
+		) {
 			getRecommendation({
 				setSupplierPayload,
 				allPreferenceCardsData,
@@ -142,7 +144,8 @@ function SingleService({
 				singleServiceData,
 			});
 		}
-	}, [recommendationLoading, JSON.stringify(systemFormatedRates), JSON.stringify(currentFormatedrates)]);
+	}, [recommendationLoading, JSON.stringify(systemFormatedRates), JSON.stringify(currentFormatedrates),
+		ratesLoading]);
 
 	return (
 		<div>
