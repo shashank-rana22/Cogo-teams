@@ -6,7 +6,6 @@ import React from 'react';
 import Filter from '../../../../commons/Filters/index.tsx';
 import CustomTable from '../../../../Settlement/page-components/History/CustomTable/index.tsx';
 import EmptyStateDocs from '../../commons/EmptyStateDocs/index.tsx';
-import useHistorySettlement from '../../hooks/useGetSettlement';
 
 import styles from './styles.module.css';
 
@@ -19,7 +18,6 @@ const historyFilters = [
 			{ label: 'All', value: 'All' },
 			{ label: 'On Account Payment', value: 'REC' },
 			{ label: 'Credit Note', value: 'PCN' },
-			{ label: 'Invoice', value: 'SINV' },
 		],
 		placeholder: 'All',
 	},
@@ -36,18 +34,20 @@ const historyFilters = [
 	},
 ];
 
-function History({ organizationId = '', setStats = () => {} }) {
-	const {
-		data = {}, loading = false, filters = {},
-		setFilters = () => { }, apiData = {}, refetch = () => { },
-	} = useHistorySettlement({ organizationId, setStats });
-
+function History({
+	data = {},
+	loading = false,
+	filters = {},
+	setFilters = () => {},
+	apiData = {},
+	refetch = () => {},
+}) {
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
 	};
 
 	return (
-		<div>
+		<div className={styles.margintop}>
 			<div className={styles.filter_container}>
 				<Filter controls={historyFilters} setFilters={setFilters} filters={filters} pageKey="page" />
 				<div className={styles.toggle_div}>

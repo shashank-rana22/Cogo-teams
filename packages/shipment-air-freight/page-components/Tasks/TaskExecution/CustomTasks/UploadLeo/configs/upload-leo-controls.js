@@ -2,11 +2,12 @@ import currencies from '@cogoport/air-modules/helpers/currencies';
 
 const controls = [
 	{
-		label : 'LEO date',
-		name  : 'leo_date',
-		type  : 'datepicker',
-		span  : 4,
-		rules : {
+		label                 : 'LEO date',
+		name                  : 'leo_date',
+		type                  : 'datepicker',
+		isPreviousDaysAllowed : true,
+		span                  : 4,
+		rules                 : {
 			required: true,
 		},
 	},

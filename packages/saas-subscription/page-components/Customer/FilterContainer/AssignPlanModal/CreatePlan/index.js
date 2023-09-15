@@ -1,10 +1,11 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
-import addonConfig from '../../../../../configuration/addonConfig';
-import createPlanControl from '../../../../../configuration/createPlanControl';
+import getAddonConfig from '../../../../../configuration/addonConfig';
+import getCreatePlanControl from '../../../../../configuration/createPlanControl';
 import { planConfig } from '../../../../../configuration/planConfig';
 import useCreatePlan from '../../../../../hooks/useCreatePlan';
 import { getFieldController } from '../../../../../utils/getFieldController';
@@ -14,6 +15,7 @@ import Pricing from './Pricing';
 import styles from './styles.module.css';
 
 function CreatePlan({ closeModal }) {
+	const { t } = useTranslation(['saasSubscription']);
 	const [defaultCurrency, setDefaultCurrency] = useState('');
 
 	const [frequencyPeriod, setFrequencyPeriod] = useState('month');
@@ -21,6 +23,9 @@ function CreatePlan({ closeModal }) {
 	const [updatePricing, setUpdatePricing] = useState(
 		planConfig(defaultCurrency),
 	);
+
+	const createPlanControl = getCreatePlanControl({ t });
+	const addonConfig = getAddonConfig({ t });
 
 	const { createPlan, loading } = useCreatePlan({ closeModal });
 
@@ -127,7 +132,7 @@ function CreatePlan({ closeModal }) {
 			</Modal.Body>
 			<Modal.Footer>
 				<Button onClick={handleSubmit(onSubmit)} loading={loading}>
-					Create
+					{t('saasSubscription:create')}
 				</Button>
 			</Modal.Footer>
 		</form>

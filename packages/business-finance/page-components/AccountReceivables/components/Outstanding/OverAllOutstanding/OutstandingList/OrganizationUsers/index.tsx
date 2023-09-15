@@ -17,7 +17,7 @@ function Users({ selfOrganizationId = '', orgData = {} }: Props) {
 		selfOrganizationId,
 	});
 
-	const { list = [], page, totalRecords } = organizationData || {};
+	const { list = [], page, totalRecords, total_count: totalCount } = organizationData || {};
 
 	return (
 		<div>
@@ -27,15 +27,19 @@ function Users({ selfOrganizationId = '', orgData = {} }: Props) {
 				loading={loading}
 			/>
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={totalRecords}
-					pageSize={param.page_limit}
-					onPageChange={(val) => setParam({ ...param, page: val })}
-				/>
-			</div>
+			{totalCount >= param.page_limit
+				? (
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={totalRecords}
+							pageSize={param.page_limit}
+							onPageChange={(val) => setParam({ ...param, page: val })}
+						/>
+					</div>
+				)
+				: null}
 		</div>
 	);
 }
