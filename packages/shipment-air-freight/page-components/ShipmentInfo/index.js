@@ -1,8 +1,8 @@
 import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import Image from 'next/image';
 import React, { useContext } from 'react';
 
 import useShipmentBack from '../../hooks/useShipmentBack';
