@@ -9,7 +9,7 @@ function InvoiceItem({
 	loading = false,
 	invoicesList = [],
 	bfInvoiceRefetch = () => {},
-	salesInvoicesRefetch = () => {},
+	purchaseInvoicesRefetch = () => {},
 }) {
 	return (
 		<main className={styles.container}>
@@ -43,7 +43,7 @@ function InvoiceItem({
 						loading={loading}
 						invoicesList={invoicesList}
 						bfInvoiceRefetch={bfInvoiceRefetch}
-						salesInvoicesRefetch={salesInvoicesRefetch}
+						purchaseInvoicesRefetch={purchaseInvoicesRefetch}
 					/>
 				))}
 			</div>

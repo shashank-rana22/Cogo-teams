@@ -26,10 +26,7 @@ const rawControls = ({
 		type             : 'edit_service_charges',
 		name             : `${charge?.service_id}:${index}`,
 		service_name     : charge?.service_type,
-		showHeader       : true,
-		showButtons      : true,
 		showAddButtons   : false,
-		// path             : 'sales_invoice',
 		shipment_id      : id,
 		shipment_type,
 		entity_id,
@@ -64,8 +61,6 @@ const rawControls = ({
 				handleChange,
 				placeholder : 'Select Line Item',
 				disabled    : true,
-				// disabled:
-				// isFieldsDisabled,
 				rules       : { required: 'Required' },
 			},
 			{
@@ -95,7 +90,6 @@ const rawControls = ({
 				type     : 'select',
 				name     : 'unit',
 				options  : convertObjectMappingToArray(FCL_UNITS),
-				// disabled : isFieldsDisabled,
 				disabled : true,
 				span     : 2,
 				rules    : { required: true },
@@ -110,8 +104,6 @@ const rawControls = ({
 				rules        : { required: true },
 				span         : 1.5,
 				disabled     : true,
-				// disabled:
-				// handleDisableCond(charge, isAdminSuperAdmin),
 			},
 			{
 				label       : 'Price',
@@ -123,8 +115,6 @@ const rawControls = ({
 					required : true,
 					validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 				},
-				// disabled: true,
-				// disabled: isFieldsDisabled,
 			},
 			{
 				label       : 'Quantity',
@@ -134,7 +124,6 @@ const rawControls = ({
 				rules       : { required: true, min: 1 },
 				span        : 1,
 				disabled    : true,
-				// disabled    : isFieldsDisabled,
 			},
 			{
 				label    : 'Amount (Tax Excl.)',

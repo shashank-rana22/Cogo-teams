@@ -22,7 +22,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 		data: invoiceDataCE,
 		groupedInvoices:groupedInvoicesCE,
 		loading:loadingCE,
-		refetch:salesInvoicesRefetch,
+		refetch:purchaseInvoicesRefetch,
 	} = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
 
 	if (collectionPartyLoading || loadingCE) {
@@ -49,7 +49,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 					groupedInvoicesCE={groupedInvoicesCE}
 					loadingCE={loadingCE}
 					shipmentData={shipmentData}
-					salesInvoicesRefetch={salesInvoicesRefetch}
+					purchaseInvoicesRefetch={purchaseInvoicesRefetch}
 				/>
 			) : null}
 		</div>

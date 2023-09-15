@@ -20,7 +20,7 @@ const useEditLineItems = ({
 	primary_service = {},
 	info,
 }) => {
-	const services = invoice.services || [];
+	const services = invoice?.services || [];
 
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const allChargeCodesRef = useRef({});

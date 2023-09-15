@@ -34,11 +34,8 @@ function InvoiceDetail({
 	const { status = '', invoiceRejectionReason = '-' } = BF_INVOICE_DETAILS || {};
 
 	const {
-		invoice_number = '',
 		invoice_pdf = '',
 	} = getDocumentInfo({ bfInvoice: BF_INVOICE_DETAILS });
-
-	const invoiceNo = invoice_number || live_invoice_number;
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -54,7 +51,7 @@ function InvoiceDetail({
 						? handleDownload(invoice_pdf)
 						: null)}
 				>
-					{invoiceNo}
+					{live_invoice_number}
 				</div>
 
 				<div className={styles.status_container}>
@@ -117,4 +114,5 @@ function InvoiceDetail({
 		</div>
 	);
 }
+
 export default InvoiceDetail;

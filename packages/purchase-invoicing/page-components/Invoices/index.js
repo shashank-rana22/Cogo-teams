@@ -7,7 +7,7 @@ function Invoices({
 	groupedInvoicesCE = {},
 	loadingCE = false,
 	shipmentData = {},
-	salesInvoicesRefetch = () => {},
+	purchaseInvoicesRefetch = () => {},
 }) {
 	const {
 		salesList : invoicesList,
@@ -24,11 +24,9 @@ function Invoices({
 					item={groupedInvoicesCE[item]}
 					total={totalsCE?.[item]}
 					loading={loadingCE}
-					invoiceData={invoiceDataCE}
 					invoicesList={invoicesList}
 					bfInvoiceRefetch={bfInvoiceRefetch}
-					salesInvoicesRefetch={salesInvoicesRefetch} // rename also check all props are being used
-					isCrossEntity
+					purchaseInvoicesRefetch={purchaseInvoicesRefetch}
 				/>
 			))}
 		</section>

@@ -9,7 +9,7 @@ function ItemHeader({
 	loading = false,
 	invoicesList = [],
 	bfInvoiceRefetch = () => {},
-	salesInvoicesRefetch = () => {},
+	purchaseInvoicesRefetch = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -17,7 +17,7 @@ function ItemHeader({
 				invoice={invoice}
 				invoicesList={invoicesList}
 				bfInvoiceRefetch={bfInvoiceRefetch}
-				salesInvoicesRefetch={salesInvoicesRefetch}
+				purchaseInvoicesRefetch={purchaseInvoicesRefetch}
 			>
 				<div className={styles.invoice_info}>
 					{(invoice?.services || []).map((item) => (

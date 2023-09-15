@@ -15,7 +15,7 @@ function Header({
 	invoice = {},
 	invoicesList = [],
 	bfInvoiceRefetch = () => {},
-	salesInvoicesRefetch = () => {},
+	purchaseInvoicesRefetch = () => {},
 }) {
 	const [open, setOpen] = useState(false);
 
@@ -23,7 +23,7 @@ function Header({
 
 	const refetchAferApiCall = () => {
 		bfInvoiceRefetch();
-		salesInvoicesRefetch();
+		purchaseInvoicesRefetch();
 	};
 
 	return (

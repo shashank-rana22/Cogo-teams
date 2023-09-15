@@ -6,7 +6,7 @@ import ApproveInvoice from './ApproveInvoice';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
 
-const EditInvoice = dynamic(() => import('../../../../../Header/EditInvoice/index'), { ssr: false });
+const EditInvoice = dynamic(() => import('../../../../../EditInvoice/index'), { ssr: false });
 
 function Actions({
 	invoice = {},
