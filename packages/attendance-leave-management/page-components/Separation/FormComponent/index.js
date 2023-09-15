@@ -46,7 +46,7 @@ const COMPONENT_MAPPING = {
 		hoto_clearance: HOTOClearance,
 	//	HOTOClearance_confirmation : HOTOClearanceConfirmation,
 	},
-	finance: {
+	finance_clearance: {
 		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
 	//	finance_clearance_confirm_modal : FinanceEmployeeConfirmModal,
 	},

@@ -10,6 +10,7 @@ const getColumns = ({ control, is_complete = false }) => [
 				<CheckboxController
 					name={item?.registrationNumber}
 					control={control}
+					value={item.cleared}
 					checked={item.cleared}
 					disabled={is_complete}
 				/>

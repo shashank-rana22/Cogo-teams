@@ -51,13 +51,11 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
 		loading, setValue,
 	} = useFinanceClearance({ refetch });
-	// const is_complete = true;
-	//	console.log(is_complete); // use this for showing the get details
 	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
 	const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
 	const [confirmedValues, setConfirmedValues] = useState(
 		{
-			tcFullName        : 'Udit chavan',
+			tcFullName        : '',
 			employee          : true,
 			fnf               : true,
 			additionalRemarks : '',
@@ -68,17 +66,17 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	console.log('sub process data', sub_process_data, is_complete);
 
 	useEffect(() => {
-		setValue('additionalRemarks', data.additional_remarks);
-		setConfirmedValues(
-			{
-				tcFullName    : 'Udit chavan',
-				employee      : data.hold_employee,
-				fnf           : data.hold_fnf,
-				getupdateData : data?.update_fnf_status,
+		setValue('additionalRemarks', data?.additional_remarks);
+		setValue('Fullname', data?.name);
+		setValue('checkboxagreement', true);
+		setConfirmedValues({
+			tcFullName    : data?.name,
+			employee      : data.hold_employee,
+			fnf           : data.hold_fnf,
+			getupdateData : data?.update_fnf_status,
 
-			},
-		);
-	}, [data, loading, setUpdateData, setValue]);
+		}, is_complete);
+	}, [data, is_complete, loading, setUpdateData, setValue]);
 	console.log(data);
 	const [show, setShow] = useState(true);
 	// const [confirmModal, setConfirmModal] = useState(false);
@@ -116,7 +114,7 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	// if (loading) {
 	//  return null;
 	// }
-
+	console.log(is_complete, 'isComplete');
 	return (
 		<>
 			<div className={styles.header}>
@@ -258,7 +256,7 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 				<TermsConditions
 					control={control}
 					errors={errors}
-					isComplete={is_complete}
+					is_complete={is_complete}
 					confirmedValues={confirmedValues}
 				/>
 			</div>
