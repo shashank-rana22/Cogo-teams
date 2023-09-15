@@ -1,7 +1,6 @@
 .container {
 	padding: 12px;
-	margin-top: 16px;
-	margin-bottom: 16px;
+	margin: 16px 0;
 	background: #fff;
 	border-radius: 16px;
 }
@@ -48,17 +47,9 @@
 }
 
 .hold_employee_container {
-	:global {
-		.ui_TE06c {
-			padding: 10px 0;
-		}
-	}
+	margin: 10px -10px;
 }
 
 .hold_fnf_container {
-	:global {
-		.ui_TE06c {
-			padding: 10px 0;
-		}
-	}
+	margin: 10px -10px;
 }

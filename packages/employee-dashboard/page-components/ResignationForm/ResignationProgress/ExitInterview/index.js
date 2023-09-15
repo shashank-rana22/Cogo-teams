@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { IcMProfile, IcMEmail, IcMCalendar, IcMClock, IcMLocation } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -8,18 +7,9 @@ import useSubmitResignationProgress from '../useSubmitResignationProgress';
 import OTPInputExitInterview from './OTPInputExitInterview';
 import styles from './styles.module.css';
 
-// const EMAIL_FOR_INTERVIEW_DETAILS = 'shivamsingh@cogoport.com';
 const OTP_LENGTH = 6;
 function ExitInterview({ data = {}, inProgressObject = {} }) {
 	const INTERVIEW_DETAILS = data?.interview_details;
-
-	// INTERVIEW_DETAILS = {
-	// 	date     : '23/03/2023',
-	// 	time     : '2:15pm',
-	// 	location : 'Deck House',
-	// 	name     : 'Shivam Singh',
-	// 	email    : EMAIL_FOR_INTERVIEW_DETAILS,
-	// };
 	const [otpValue, setOtpValue] = useState('');
 	const [otpError, setOtpError] = useState(false);
 	const { handleSubmit, onSubmit } = useSubmitResignationProgress({
@@ -30,7 +20,7 @@ function ExitInterview({ data = {}, inProgressObject = {} }) {
 			return;
 		}
 
-		handleSubmit(onSubmit(otpValue))();
+		handleSubmit(onSubmit({ otpValue, application_id: data?.application_id }))();
 	};
 
 	return (

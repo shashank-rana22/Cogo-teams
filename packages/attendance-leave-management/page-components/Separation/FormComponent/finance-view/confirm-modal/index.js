@@ -18,14 +18,11 @@ function FinanceConfirmModal({
 						<IcMError width="40px" height="40px" color="#C26D1A" />
 					</div>
 
-					<div className={styles.modal_message_container}>
-						<div className={styles.modal_message_text}>
-							<span className={styles.modal_msg_highlight}>
-								Are you sure you want to provide clearance?
-							</span>
-							{' '}
-							You can not make any changes after this point.
-						</div>
+					<div className={styles.modal_message_text}>
+						<span className={styles.modal_msg_highlight}>
+							Are you sure you want to provide clearance?
+						</span>
+						You can not make any changes after this point.
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

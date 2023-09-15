@@ -1,5 +1,6 @@
 import { Button	 } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowDown,
 	IcMArrowRight,
@@ -22,35 +23,15 @@ import FinanceUpdateModal from './update-modal';
 import useDownloadOutstandingDetails from './useDownloadOutstandingDetails';
 import useFinanceClearance from './useFinanceClearance';
 
-const ZERO = 0;
-// const data2 = [
-// 	{
-// 		accountName    : 'XYZ',
-// 		tenure         : '-',
-// 		outstandingAmt : '100000',
-// 		status         : 'pending',
-// 		description    : 'salary',
-// 	},
-// 	{
-// 		accountName    : 'XYZ',
-// 		tenure         : '-',
-// 		outstandingAmt : '100000',
-// 		status         : 'pending',
-// 		description    : 'salary',
-
-// 	},
-// ];
-
-// eslint-disable-next-line max-lines-per-function
 function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
-	// const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const {
 		handleSubmit, onSubmit, control, errors,
 		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
-		SetFinanceRecommendation, financeRecommendation, off_boarding_application_id,
+		setFinanceRecommendation, financeRecommendation, off_boarding_application_id,
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
 		loading, setValue,
 	} = useFinanceClearance({ refetch });
+
 	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
 	const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
 	const [confirmedValues, setConfirmedValues] = useState(
@@ -63,7 +44,6 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 
 		},
 	);
-	console.log('sub process data', sub_process_data, is_complete);
 
 	useEffect(() => {
 		setValue('additionalRemarks', data?.additional_remarks);
@@ -77,9 +57,8 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 
 		}, is_complete);
 	}, [data, is_complete, loading, setUpdateData, setValue]);
-	console.log(data);
+
 	const [show, setShow] = useState(true);
-	// const [confirmModal, setConfirmModal] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [outStandingShow, setOutStandingShow] = useState(true);
 	const columnsout = getColumns({ control, is_complete });
@@ -100,7 +79,7 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 			const arr = is_complete ? showdata : data1;
 			arr?.forEach((elem) => {
 				const props = `${elem?.particular}RecoverableAmount`;
-				recoverable_amount_sum += parseInt(watch(props) || ZERO, 10);
+				recoverable_amount_sum += parseInt(watch(props) || GLOBAL_CONSTANTS.zeroth_index, 10);
 			});
 			setTotalRecoverableAmount(recoverable_amount_sum);
 		},
@@ -111,10 +90,6 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 
 	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
 
-	// if (loading) {
-	//  return null;
-	// }
-	console.log(is_complete, 'isComplete');
 	return (
 		<>
 			<div className={styles.header}>
@@ -221,18 +196,6 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 								disabled={is_complete}
 								className={is_complete ? styles.uploadbtn : null}
 							/>
-							{/* <Input
-							size="md"
-							placeholder="Only Image, pdf/doc..."
-							prefix={<IcMCloudUpload width={16} height={16} />}
-							suffix={(
-								<Button size="lg" themeType="secondary">
-									Upload
-								</Button>
-
-							)}
-							disabled
-						/> */}
 						</div>
 					)}
 				</div>
@@ -240,10 +203,9 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 			<FinanceRecommendations
 				control={control}
 				financeRecommendation={financeRecommendation}
-				SetFinanceRecommendation={SetFinanceRecommendation}
+				setFinanceRecommendation={setFinanceRecommendation}
 				confirmedValues={confirmedValues}
 				isComplete={is_complete}
-
 			/>
 
 			<AdditionalRemarks
@@ -264,15 +226,12 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 			{is_complete ? null
 				: (
 					<div className={styles.footer}>
-						{/* <Button themeType="secondary" style={{ marginRight: '4px' }}>Back</Button> */}
 						<Button
 							themeType="primary"
 							onClick={handleSubmit(() => setConfirmModal(true))}
-
 						>
 							Proceed
 							<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
-
 						</Button>
 					</div>
 				)}

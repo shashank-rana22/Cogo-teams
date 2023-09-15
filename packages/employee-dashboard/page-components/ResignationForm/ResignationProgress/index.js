@@ -7,13 +7,7 @@ import TrackApplication from './TrackApplication';
 import useSubmitResignationProgress from './useSubmitResignationProgress';
 
 function ResignationProgress({ data = {} }) {
-	// console.log(data, 'data::');
-	// const { application_exist } = data || {};
-	const { handleSubmit, control, errors } = useSubmitResignationProgress({
-		onSuccess: () => {
-			// setShowModal(true);
-		},
-	});
+	const { handleSubmit, control, errors } = useSubmitResignationProgress();
 	return (
 		<div className={styles.main_container}>
 			<TrackApplication handleSubmit={handleSubmit} control={control} errors={errors} data={data} />

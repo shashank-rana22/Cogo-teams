@@ -16,10 +16,13 @@ const useSubmitResignationProgress = () => {
 		try {
 			await trigger({
 				data: {
-					application_id : '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda',
-					exit_code      : values,
+					application_id : values.application_id,
+					exit_code      : values.otpValue,
 				},
 			});
+			Toast.success(
+				'Completed Separation',
+			);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}

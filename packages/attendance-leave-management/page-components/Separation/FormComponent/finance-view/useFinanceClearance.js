@@ -10,7 +10,7 @@ const ZERO = 0;
 const useFinanceClearance = ({ refetch }) => {
 	const [updateData, setUpdateData] = useState([]);
 	const [totalRecoverableAmount, setTotalRecoverableAmount] = useState(ZERO);
-	const [financeRecommendation, SetFinanceRecommendation] = useState({
+	const [financeRecommendation, setFinanceRecommendation] = useState({
 		employee : false,
 		fnf      : false,
 	});
@@ -83,7 +83,7 @@ const useFinanceClearance = ({ refetch }) => {
 		updateData,
 		setTotalRecoverableAmount,
 		totalRecoverableAmount,
-		SetFinanceRecommendation,
+		setFinanceRecommendation,
 		financeRecommendation,
 		off_boarding_application_id,
 		sub_process_data,

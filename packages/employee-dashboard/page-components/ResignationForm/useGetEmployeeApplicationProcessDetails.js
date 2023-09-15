@@ -1,4 +1,3 @@
-/* eslint-disable custom-eslint/uuid-check */		// TODOs
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
@@ -13,11 +12,7 @@ const useGetEmployeeApplicationProcessDetails = () => {
 	const getEmployeeApplicationProcessDetails = useCallback(
 		() => {
 			try {
-				trigger({
-					params: {
-						off_boarding_application_id: 'f191ea65-dc5b-4d9d-ab8a-4c4833a87058',
-					},
-				});
+				trigger();
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}

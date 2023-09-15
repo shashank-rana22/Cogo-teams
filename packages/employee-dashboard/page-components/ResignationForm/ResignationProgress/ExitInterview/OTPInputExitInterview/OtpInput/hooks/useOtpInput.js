@@ -1,14 +1,14 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useEffect, useImperativeHandle, useRef } from 'react';
 
 import useKey from './useKey';
 import useOtpInputEvents from './useOtpInputEvents';
 
-const ONE_FOR_LOOP = 1;
 const getInitialOtpValues = (otpLength) => {
 	const HASH = {};
 
-	for (let i = 0; i < otpLength; i += ONE_FOR_LOOP) {
-		HASH[`otp-${i + ONE_FOR_LOOP}`] = '';
+	for (let i = 0; i < otpLength; i += GLOBAL_CONSTANTS.one) {
+		HASH[`otp-${i + GLOBAL_CONSTANTS.one}`] = '';
 	}
 
 	return HASH;
@@ -33,22 +33,21 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		let isAllOtpInputValuePresent = true;
 		let value = '';
 
-		for (let i = 0; i < otpLength; i += ONE_FOR_LOOP) {
-			if (!values[`otp-${i + ONE_FOR_LOOP}`]) {
+		for (let i = 0; i < otpLength; i += GLOBAL_CONSTANTS.one) {
+			if (!values[`otp-${i + GLOBAL_CONSTANTS.one}`]) {
 				isAllOtpInputValuePresent = false;
 				break;
 			}
 
-			value += values[`otp-${i + ONE_FOR_LOOP}`];
+			value += values[`otp-${i + GLOBAL_CONSTANTS.one}`];
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(values)]);
+	}, [onChange, otpLength, values]);
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
-			element.setAttribute('maxlength', ONE_FOR_LOOP);
+			element.setAttribute('maxlength', GLOBAL_CONSTANTS.one);
 			element.setAttribute('inputmode', 'numeric');
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,14 +56,14 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 	const handleChange = (index) => (event) => {
 		setValues((previousState) => ({
 			...previousState,
-			[`otp-${index + ONE_FOR_LOOP}`]: event,
+			[`otp-${index + GLOBAL_CONSTANTS.one}`]: event,
 		}));
 
 		if (isBackSpacePressed) {
 			return;
 		}
 
-		const nextOtpInputElement = otpInputElementsRef.current[index + ONE_FOR_LOOP];
+		const nextOtpInputElement = otpInputElementsRef.current[index + GLOBAL_CONSTANTS.one];
 		nextOtpInputElement?.focus();
 	};
 
@@ -79,8 +78,6 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 	useImperativeHandle(
 		ref,
 		imperativeHandles,
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[],
 	);
 
 	return {

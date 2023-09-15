@@ -7,7 +7,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function TermsConditions({ control = {}, errors = {}, is_complete = false, confirmedValues = {} }) {
-//	 console.log(is_complete, 'wertyj', confirmedValues);
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>

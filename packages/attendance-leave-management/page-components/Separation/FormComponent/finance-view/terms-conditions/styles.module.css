@@ -5,7 +5,6 @@
 }
 
 .title {
-	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
 	text-transform: uppercase;
@@ -27,7 +26,7 @@
 	margin-bottom: 24px;
 
 	:global {
-		.ui_QSZTB {
+		.ui_checkbox_container {
 			padding: 0;
 		}
 	}
@@ -43,11 +42,7 @@
 	width: 90%;
 	font-size: 12px;
 	font-style: normal;
-	font-weight: 400;
-	line-height: 150%;
 	color: #221f20;
-
-	/* 18px */
 }
 
 .name_main_container {
@@ -59,12 +54,8 @@
 }
 
 .full_name_text {
-	/* 21px */
 	margin-bottom: 6px;
-	font-size: 14px;
-	font-style: normal;
 	font-weight: 600;
-	line-height: 150%;
 	color: #221f20;
 }
 
@@ -78,12 +69,7 @@
 
 .name_input {
 	font-size: 16px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 150%;
 	color: #bdbdbd;
-
-	/* 24px */
 }
 
 .error {

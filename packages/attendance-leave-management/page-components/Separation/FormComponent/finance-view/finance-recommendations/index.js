@@ -4,20 +4,19 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function FinanceRecommendations({
-	SetFinanceRecommendation = () => {},
+	setFinanceRecommendation = () => {},
 	financeRecommendation = {},
 	confirmedValues = {},
 	isComplete = false,
 }) {
 	const [showNotes, setShowNotes] = useState(true);
 	const toggle = (e) => {
-		SetFinanceRecommendation(
+		setFinanceRecommendation(
 			() => ({
 				...financeRecommendation,
 				[e.target.name]: e.target.checked,
 			}),
 		);
-		console.log('toggle', financeRecommendation);
 	};
 
 	return (
@@ -35,7 +34,6 @@ function FinanceRecommendations({
 						onLabel="Let GO Employee"
 						offLabel="Hold Employee"
 						checked={isComplete ? confirmedValues.employee : financeRecommendation.employee}
-						// value={financeRecommendation.employee}
 						onChange={(e) => { toggle(e); }}
 					/>
 				</div>
@@ -47,7 +45,6 @@ function FinanceRecommendations({
 						onLabel="Release FNF"
 						offLabel="Hold FNF"
 						checked={isComplete ? confirmedValues.fnf : financeRecommendation.fnf}
-//						value={financeRecommendation.fnf}
 						onChange={(e) => { toggle(e); }}
 					/>
 				</div>

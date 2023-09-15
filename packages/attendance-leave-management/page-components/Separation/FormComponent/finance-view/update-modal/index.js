@@ -1,10 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
 import { InputController, SelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
-
-const ZERO = 0;
 
 const data = [
 	{
@@ -28,12 +27,11 @@ function FinanceUpdateModal({
 }) {
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 	const onSubmit = (values) => {
-		console.log('modal submit add new particular', values);
 		setUpdateData((prev) => [...prev,
 			{
-				particular         : values.particular,
-				category           : values.category,
-				recoverable_amount : parseInt(values.recoverableAmount, 10),
+				particular         : values?.particular,
+				category           : values?.category,
+				recoverable_amount : parseInt(values?.recoverableAmount, 10),
 			}]);
 		setShowModal(false);
 		reset();
@@ -96,10 +94,10 @@ function FinanceUpdateModal({
 									name="recoverableAmount"
 									size="md"
 									type="number"
-									value={ZERO}
+									value={GLOBAL_CONSTANTS.zeroth_index}
 									rules={{
 										required : 'Value must be Greater than 0',
-										validate : (value) => (parseInt(value, 10) >= ZERO
+										validate : (value) => (parseInt(value, 10) >= GLOBAL_CONSTANTS.zeroth_index
 											? true : 'Number must be whole'),
 									}}
 								/>
