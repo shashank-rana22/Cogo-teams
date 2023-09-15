@@ -69,6 +69,7 @@ function MessagesThread(
 		hasPermissionToEdit = false,
 		mailProps = {},
 		latestMessagesAtTop = false,
+		deleteMessage = () => {},
 	},
 	messageRef,
 ) {
@@ -152,6 +153,7 @@ function MessagesThread(
 						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
+						deleteMessage={deleteMessage}
 					/>
 				);
 			})}

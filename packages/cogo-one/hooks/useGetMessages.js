@@ -7,9 +7,12 @@ import {
 	limit,
 	where,
 	getDocs,
+	doc,
+	deleteDoc,
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
+import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 import useListCogooneTimeline from './useListCogooneTimeline';
@@ -17,7 +20,7 @@ import useListCogooneTimeline from './useListCogooneTimeline';
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
 
-const useGetMessages = ({ activeChatCollection, id, viewType }) => {
+const useGetMessages = ({ activeChatCollection, id, viewType, firestore = {}, channel_type = '' }) => {
 	const [messagesState, setMessagesState] = useState({});
 
 	const firstMessages = useRef(null);
@@ -132,6 +135,29 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 		setLoadingPrevMessages(false);
 	};
 
+	const deleteMessage = ({ timestamp = '', messageDocId = '' }) => {
+		setMessagesState((prev) => {
+			const { [id]: currentDocument, ...rest } = prev;
+
+			const { [timestamp]: del, ...restDocuments } = currentDocument?.messagesData || {};
+			return {
+				...rest,
+				[id]: {
+					...currentDocument,
+					messagesData: {
+						...restDocuments,
+					},
+				},
+			};
+		});
+
+		const messageDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}/messages/${messageDocId}`,
+		);
+		deleteDoc(messageDoc);
+	};
+
 	useEffect(() => {
 		mountSnapShot();
 		return () => {
@@ -154,6 +180,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 		loadingPrevMessages  : loadingPrevMessages || timeLineLoading,
 		messagesState,
 		mountSnapShot,
+		deleteMessage,
 	};
 };
 

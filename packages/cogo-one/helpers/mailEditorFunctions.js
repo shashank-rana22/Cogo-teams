@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import useMailDraftFunctions from '../hooks/useMailDraftFunctions';
 import useReplyMail from '../hooks/useReplyMail';
+import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
 import getFormatedEmailBody from './getFormatedEmailBody';
@@ -37,32 +37,9 @@ function useMailEditorFunctions({
 	} = emailState || {};
 
 	const {
-		is_draft: isDraft = false,
-	} = eachMessage || {};
-
-	const {
 		replyMailApi = () => {},
 		replyLoading = false,
 	} = useReplyMail(mailProps);
-
-	const {
-		saveToExistingThread = () => {},
-		createNewRoomAndAddDraft = () => {},
-		updateTheExistingDraft = () => {},
-	} = useMailDraftFunctions({
-		firestore,
-		formattedData,
-		parentEmailMessage: eachMessage,
-	});
-
-	const {
-		mailLoading = false,
-		sendMail = () => {},
-	} = useSendOmnichannelMail({
-		setEmailState,
-		setButtonType,
-		saveToExistingThread,
-	});
 
 	const handlePayload = () => {
 		const emailBody = getRenderEmailBody({ html: body });
@@ -79,6 +56,23 @@ function useMailEditorFunctions({
 			userId,
 		};
 	};
+
+	const { saveDraft = () => {} } = useSaveDraft({
+		firestore,
+		draftMessageData : eachMessage,
+		buttonType,
+		rteEditorPayload : handlePayload(),
+		roomData         : formattedData,
+	});
+
+	const {
+		mailLoading = false,
+		sendMail = () => {},
+	} = useSendOmnichannelMail({
+		setEmailState,
+		setButtonType,
+		saveDraft,
+	});
 
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
@@ -120,7 +114,7 @@ function useMailEditorFunctions({
 		replyMailApi(payload);
 	};
 
-	const handleSaveDraft = () => {
+	const handleSaveDraft = async ({ isMinimize = false } = {}) => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 
 		if (uploading) {
@@ -133,15 +127,9 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		if (isDraft) {
-			updateTheExistingDraft({ payload: handlePayload() });
-		} else if (buttonType === 'send_mail') {
-			createNewRoomAndAddDraft({ payload: handlePayload() });
-		} else {
-			saveToExistingThread({
-				payload: handlePayload(),
-				buttonType,
-			});
+		await saveDraft();
+		if (!isMinimize) {
+			return;
 		}
 
 		setButtonType('');

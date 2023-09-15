@@ -26,11 +26,28 @@ const getEmailText = ({
 	return 'Expand';
 };
 
+const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
+	if (!isDraft) {
+		return '#e0e0e0';
+	}
+
+	if (!emailStatus) {
+		return '#F9AE64';
+	}
+
+	if (emailStatus === 'sucess') {
+		return '#ABCD62';
+	}
+
+	return '#EE3425';
+};
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
 	formattedData = {},
 	mailProps = {},
+	deleteMessage = () => {},
 }) {
 	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
@@ -41,6 +58,7 @@ function MailBody({
 		created_at = '',
 		media_url = [],
 		is_draft: isDraft = false,
+		email_status: emailStatus = '',
 	} = eachMessage || {};
 
 	const {
@@ -79,15 +97,18 @@ function MailBody({
 		isDraft,
 		subject,
 		emailVia          : 'firebase_emails',
+		deleteMessage,
 	});
 
 	const handleExpandClick = () => {
-		if (!expandedState && !bodyMessage) {
+		if (!expandedState && !bodyMessage && !isDraft) {
 			getEmailBody();
 			return;
 		}
 		setExpandedState((prev) => !prev);
 	};
+
+	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
 
 	return (
 		<div className={styles.email_container}>
@@ -101,13 +122,14 @@ function MailBody({
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
 
-			<div className={styles.container}>
+			<div className={styles.container} style={{ border: `1px solid ${emailBorderColor}` }}>
 				<MailHeader
 					eachMessage={eachMessage}
 					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
 					handleExpandClick={handleExpandClick}
 					isDraft={isDraft}
+					emailStatus={emailStatus}
 				/>
 
 				<div className={styles.subject}>

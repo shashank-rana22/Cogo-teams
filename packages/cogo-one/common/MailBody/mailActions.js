@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import { BUTTON_MAPPING } from '../../constants/mailConstants';
+import { BUTTON_MAPPING, BUTTON_KEYS_MAPPING } from '../../constants/mailConstants';
 
 import styles from './styles.module.css';
 
@@ -9,15 +9,17 @@ function MailActions({
 	handleClick = () => {},
 	isDraft = false,
 }) {
+	if (isDraft) {
+		return null;
+	}
+
 	return (
 		<div className={styles.buttons_flex}>
 			{BUTTON_MAPPING.map((eachButton) => {
-				const { buttonName = '', icon = '', key = '', toBeShownInDraft = false } = eachButton || {};
+				const { buttonName = '', icon = '', key = '' } = eachButton || {};
 
 				if (
-					!icon
-					|| (isDraft && !toBeShownInDraft)
-					|| (!isDraft && toBeShownInDraft)
+					!icon || !BUTTON_KEYS_MAPPING.mail.includes(key)
 				) {
 					return null;
 				}

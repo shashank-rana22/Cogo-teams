@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { IcMEdit, IcMAppDelete } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 export const SEARCH_QUERY_LIMIT = 50;
@@ -54,8 +54,7 @@ export const BUTTON_MAPPING = [
 			width={20}
 			height={20}
 		/>,
-		key              : 'reply',
-		toBeShownInDraft : false,
+		key: 'reply',
 	},
 	{
 		buttonName : 'Reply All',
@@ -65,8 +64,7 @@ export const BUTTON_MAPPING = [
 			width={20}
 			height={20}
 		/>,
-		key              : 'reply_all',
-		toBeShownInDraft : false,
+		key: 'reply_all',
 
 	},
 	{
@@ -77,16 +75,27 @@ export const BUTTON_MAPPING = [
 			width={20}
 			height={20}
 		/>,
-		key              : 'forward',
-		toBeShownInDraft : false,
+		key: 'forward',
 	},
 	{
 		buttonName : 'Preview',
-		icon       : <IcMEyeopen
+		icon       : <IcMEdit
 			width={20}
 			height={20}
 		/>,
-		key              : 'preview',
-		toBeShownInDraft : true,
+		key: 'preview',
+	},
+	{
+		buttonName : 'delete',
+		icon       : (<IcMAppDelete
+			width={20}
+			height={20}
+		/>),
+		key: 'delete',
 	},
 ];
+
+export const BUTTON_KEYS_MAPPING = {
+	draft : ['preview', 'delete'],
+	mail  : ['forward', 'reply', 'reply_all'],
+};

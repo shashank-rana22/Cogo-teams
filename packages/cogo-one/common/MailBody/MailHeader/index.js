@@ -3,10 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
-import { BUTTON_MAPPING } from '../../../constants/mailConstants';
 import getUserNameFromEmail from '../../../helpers/getUserNameFromEmail';
 
 import ReceipientComp from './receipientComp';
+import RightButtonsMapping from './RightButtonsMapping';
 import styles from './styles.module.css';
 
 function MailHeader({
@@ -15,6 +15,7 @@ function MailHeader({
 	handleExpandClick = () => {},
 	hasPermissionToEdit = false,
 	isDraft = false,
+	emailStatus = '',
 }) {
 	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
 
@@ -24,6 +25,7 @@ function MailHeader({
 		sender = '',
 		to_mails = [],
 		received_time = '',
+		last_draft_saved_on = '',
 	} = response || {};
 
 	const { userName } = getUserNameFromEmail({ query: sender });
@@ -35,6 +37,8 @@ function MailHeader({
 		{ label: 'Cc', mailsData: cc_mails },
 		{ label: 'Bcc', mailsData: bcc_mails },
 	];
+
+	const rightTime = isDraft ? (last_draft_saved_on && new Date(last_draft_saved_on)) : received_time;
 
 	return (
 		<div
@@ -51,6 +55,8 @@ function MailHeader({
 				<div>
 					<div className={styles.sender_name}>
 						{startCase(senderName)}
+						{' '}
+						{isDraft ? <span>[DRAFT]</span> : null}
 					</div>
 
 					{RECEIPIENT_MAPPING.map((item) => (
@@ -63,41 +69,16 @@ function MailHeader({
 			</div>
 
 			<div>
-				<div className={styles.icon_flex}>
-					{BUTTON_MAPPING.map(
-						(item) => {
-							const { key = '', icon = '', toBeShownInDraft = false } = item || {};
-
-							if (
-								!icon
-								|| !hasPermissionToEdit
-								|| (isDraft && !toBeShownInDraft)
-								|| (!isDraft && toBeShownInDraft)
-							) {
-								return null;
-							}
-
-							return (
-								<div
-									role="presentation"
-									key={key}
-									className={styles.icon_styles}
-									onClick={(e) => {
-										e.stopPropagation();
-										handleClick({ buttonType: key });
-									}}
-								>
-									{icon}
-								</div>
-
-							);
-						},
-					)}
-				</div>
+				{hasPermissionToEdit ? (
+					<div className={styles.icon_flex}>
+						<RightButtonsMapping isDraft={isDraft} handleClick={handleClick} emailStatus={emailStatus} />
+					</div>
+				) : null}
 
 				<div className={styles.time_stamp}>
+					{isDraft ? <span>Saved: </span> : null}
 					{formatDate({
-						date       : received_time,
+						date       : rightTime,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',

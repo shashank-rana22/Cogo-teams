@@ -74,6 +74,7 @@ export function getRecipientData({
 	emailVia = '',
 	formattedData = {},
 	eachMessage = {},
+	deleteMessage = () => {},
 }) {
 	const {
 		setButtonType = () => {},
@@ -81,7 +82,7 @@ export function getRecipientData({
 		buttonType = '',
 	} = mailProps || {};
 
-	const { response = {} } = eachMessage || {};
+	const { response = {}, created_at = '', id = '' } = eachMessage || {};
 
 	const {
 		body = '',
@@ -100,6 +101,16 @@ export function getRecipientData({
 	const handleClick = ({
 		buttonType: newButtonType = '',
 	}) => {
+		if (buttonType) {
+			Toast.warn('Email compose already in progress');
+			return;
+		}
+
+		if (newButtonType === 'delete') {
+			deleteMessage({ timestamp: created_at, messageDocId: id });
+			return;
+		}
+
 		if (isDraft) {
 			setButtonType(draft_type);
 
@@ -118,11 +129,6 @@ export function getRecipientData({
 				}),
 			);
 
-			return;
-		}
-
-		if (buttonType) {
-			Toast.warn('Email compose already in progress');
 			return;
 		}
 

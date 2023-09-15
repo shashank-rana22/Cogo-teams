@@ -1,0 +1,42 @@
+.draft_message {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-style: oblique;
+	color: #849e4c;
+}
+
+.failed_draft {
+	display: flex;
+	font-size: 12px;
+	font-style: oblique;
+	color: #ee3425;
+}
+
+.delete_svg {
+	margin-left: 8px;
+	transition: 0.5s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease-in-out;
+		transform: scale(1.2);
+	}
+}
+
+.icon_styles {
+	margin-left: 14px;
+	color: #424242;
+	cursor: pointer;
+	transition: 0.5s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease-in-out;
+		transform: scale(1.2);
+	}
+}
+
+.icon_flex {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 4px;
+}

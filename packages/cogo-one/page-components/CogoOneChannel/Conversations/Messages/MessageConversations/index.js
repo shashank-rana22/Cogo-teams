@@ -48,8 +48,8 @@ function MessageConversations({
 
 	const {
 		getNextData = () => {}, lastPage, firstLoadingMessages,
-		messagesData, loadingPrevMessages,
-	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom });
+		messagesData, loadingPrevMessages, deleteMessage,
+	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom, firestore, channel_type });
 
 	const handleScroll = (e) => {
 		const bottom = e.target.scrollTop <= DISTANCE_FROM_TOP;
@@ -149,6 +149,7 @@ function MessageConversations({
 						ref={conversationsDivRef}
 						mailProps={mailProps}
 						latestMessagesAtTop={latestMessagesAtTop}
+						deleteMessage={deleteMessage}
 					/>
 				)}
 			</div>

@@ -62,7 +62,11 @@ function RenderHeader({
 
 				<div className={styles.right_container}>
 					<div className={styles.minimize_button} title="minimize">
-						<IcMMinus onClick={() => setMinimizeModal(true)} />
+						<IcMMinus onClick={() => {
+							handleSaveDraft({ isMinimize: true });
+							setMinimizeModal(true);
+						}}
+						/>
 					</div>
 				</div>
 			</div>
