@@ -1,5 +1,6 @@
-import { Select, Button, Loader } from '@cogoport/components';
+import { Select, Button, Loader, Toast } from '@cogoport/components';
 import { useForm, TimepickerController } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import { CONTROLS, SHIFT_CONFIGURATION_HEADING, teamsOption } from '../../../../../../constants/shiftsMapping';
@@ -10,10 +11,20 @@ import getDefaultValues from '../../../../../../utils/getDefaultValues';
 
 import styles from './styles.module.css';
 
+const compareTime = (start_time, end_time) => {
+	if (start_time && end_time
+		&& (Number(start_time.getHours()) <= Number(end_time.getHours()))
+		&& (
+			Number(start_time.getHours()) !== Number(end_time.getHours())
+			|| Number(start_time.getMinutes()) <= Number(end_time.getMinutes())
+		)
+	) { return true; }
+	return false;
+};
+
 function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 	const [selectedTeam, setSelectedTeam] = useState('shipment_specialist');
-	// const [defaultValues, setDefaultValues] = useState({});
-
+	const [submissionState, setSubmissionState] = useState({});
 	const {
 		getListShift = () => {},
 		shiftsData = {},
@@ -22,48 +33,81 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 
 	const { createUpdateRequest = () => {} } = useUpdateCogooneShift({ getListShift });
 
-	const { createCogooneShift = () => {} } = useCreateBulkCogooneShift();
+	const { createCogooneShiftRequest = () => {} } = useCreateBulkCogooneShift();
 
 	const { list = [] } = shiftsData || {};
 
 	const defaultValues = useMemo(() => getDefaultValues({ list, selectedTeam }), [selectedTeam, list]);
 
 	const toShowSelect = viewType === 'cogoone_admin';
+	const isShipmentSpecialist = viewType === 'shipment_specialist';
 
 	const {
-		control, setValue, handleSubmit,
-		// formState:{ errors = {} },
-		watch,
+		control, setValue, handleSubmit, watch,
 	} = useForm({});
-	console.log('watch:', watch());
 
 	const onSubmit = (val) => {
-		const formattedValues = (list || []).map((itm) => {
-			const { id: shiftId, shift_name = '', status = 'inactive' } = itm || {};
-			return {
-				shift_id         : status === 'active' ? shiftId : null,
-				start_time_local : val[`${shift_name}_shift_start_time`] || new Date(),
-				end_time_local   : val[`${shift_name}_shift_end_time`] || new Date(),
+		const NEW_OBJ = {};
+		Object.entries(val).forEach(([key, time]) => {
+			const [shift_name, time_key] = key.split('_shift_');
+			NEW_OBJ[shift_name] = {
+				...NEW_OBJ[shift_name],
+				shift_name,
+				[`${time_key}_local`]: time,
 			};
 		});
-		createUpdateRequest({ formattedValues, prevList: list });
-
-		createCogooneShift({ formattedValues, prevList: list });
+		(list || []).forEach((itm) => {
+			const { id: shiftId, shift_name = '' } = itm || {};
+			if (shift_name in NEW_OBJ) {
+				NEW_OBJ[shift_name].shift_id = shiftId;
+			}
+		});
+		const formattedValues = Object.values(NEW_OBJ);
+		if (
+			!createUpdateRequest({ formattedValues: [...formattedValues], prevList: list })
+		&&	!createCogooneShiftRequest({
+			team_name: isShipmentSpecialist
+				? 'shipment_specialist' : selectedTeam,
+			formattedValues,
+		})) {
+			Toast.error('No changes triggered...');
+		}
 	};
-
-	// useEffect(() => {
-	// 	setDefaultValues(getDefaultValues({ list }));
-	// }, [list]);
-
-	// useEffect(() => {
-	// 	setDefaultValues({});
-	// }, [selectedTeam]);
 
 	useEffect(() => {
 		Object.entries(defaultValues).forEach(([key, value]) => {
 			setValue(key, value);
 		});
 	}, [setValue, defaultValues]);
+
+	const formValues = watch();
+
+	const validateTime = (start_time, end_time) => {
+		if (!start_time && !end_time) return true;
+		if (
+			!compareTime(start_time, end_time)
+		) {
+			Toast.error('Start Time should be less than End Time');
+			return false;
+		}
+		return true;
+	};
+
+	const handleChange = (val, name) => {
+		const [phase, type] = name.split('_shift_');
+		let flag = true;
+		if (type === 'start_time') {
+			flag = validateTime(val, formValues[`${phase}_shift_end_time`]);
+		} else {
+			flag = validateTime(formValues[`${phase}_shift_start_time`], val);
+		}
+		setSubmissionState((prev) => ({ ...prev, [phase]: flag }));
+	};
+
+	const isSubmitAllowed = () => {
+		if (isEmpty(submissionState)) return false;
+		return Object.values(submissionState).reduce((res, itm) => res && itm, true);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -106,9 +150,9 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 													placeholder="Select time"
 													control={control}
 													name={`${name}`}
-													// rules={{ required: true }}
+													maxDate={new Date()}
+													onChange={handleChange}
 												/>
-												{/* {errors?.[name] ? 'Required' : null} */}
 											</div>
 										))}
 									</div>
@@ -130,7 +174,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 					size="md"
 					themeType="primary"
 					onClick={handleSubmit(onSubmit)}
-					disabled={shiftDataLoading}
+					disabled={shiftDataLoading || !isSubmitAllowed()}
 				>
 					Submit
 				</Button>

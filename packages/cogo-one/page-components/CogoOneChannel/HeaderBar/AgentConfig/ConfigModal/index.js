@@ -127,13 +127,13 @@ function ConfigModal({
 			setViewType,
 		},
 	};
-
 	return (
 		<Modal
 			size="md"
 			show={showAgentDetails}
 			onClose={handleClose}
 			placement="top"
+			scroll={activeCard !== 'shift_configuration'}
 		>
 			<Modal.Header
 				className={styles.modal_header}
@@ -147,7 +147,10 @@ function ConfigModal({
 				)}
 			/>
 
-			<Modal.Body className={styles.modal_body}>
+			<Modal.Body className={cl`${styles.modal_body}
+							 ${activeCard === 'shift_configuration'
+				? styles.shift_container : ''}`}
+			>
 				{(activeCard && Component)
 					? (
 						<Component

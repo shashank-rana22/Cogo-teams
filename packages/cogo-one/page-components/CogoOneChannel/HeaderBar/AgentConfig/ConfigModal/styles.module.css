@@ -8,6 +8,10 @@
 	padding: 8px 0;
 }
 
+.shift_container {
+	max-height: 350px;
+}
+
 .footer_styles {
 	min-height: 48px;
 }
@@ -24,7 +28,6 @@
 
 .wrap_container {
 	justify-content: flex-start;
-	margin: 0 2px;
 	overflow-y: hidden;
 }
 

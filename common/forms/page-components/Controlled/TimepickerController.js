@@ -17,7 +17,12 @@ function TimepickerController(props) {
 				<Timepicker
 					{...rest}
 					key={rest.id}
-					onChange={onChange}
+					onChange={(val) => {
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(val, name);
+						}
+						onChange(val);
+					}}
 					value={value}
 					onBlur={onBlur}
 					data-test-value={value}

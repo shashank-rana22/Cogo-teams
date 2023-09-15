@@ -3,7 +3,8 @@ import { useCallback, useEffect } from 'react';
 
 const getPayload = ({ selectedTeam }) => ({
 	filters: {
-		team_name: selectedTeam,
+		team_name : selectedTeam,
+		status    : 'active',
 	},
 });
 

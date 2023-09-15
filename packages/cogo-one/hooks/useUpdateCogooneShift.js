@@ -11,12 +11,13 @@ const compareTime = (timeString, date) => {
 	) { return true; }
 	return false;
 };
+
 const getPayload = ({ formattedValues, prevList }) => {
 	const PAYLOAD = [];
 	formattedValues.forEach((valueItem) => {
 		const { shift_id, start_time_local, end_time_local } = valueItem;
 		const [oldItem] = prevList.filter(({ id }) => id === shift_id);
-		if (!isEmpty(oldItem)) {
+		if (!isEmpty(oldItem) && shift_id) {
 			const { start_time_local: prev_start_time_local, end_time_local: prev_end_time_local } = oldItem;
 			if (
 				!compareTime(prev_start_time_local, start_time_local)
@@ -47,6 +48,7 @@ function useUpdateCogooneShift({ getListShift = () => {} }) {
 		try {
 			await trigger(payload);
 			getListShift();
+			Toast.success('Timing updated successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
@@ -55,10 +57,10 @@ function useUpdateCogooneShift({ getListShift = () => {} }) {
 	const createUpdateRequest = ({ formattedValues, prevList }) => {
 		const payload = getPayload({ formattedValues, prevList });
 		if (isEmpty(payload.data.shift_details)) {
-			Toast.error('No values changed!');
-		} else {
-			updateTeamsShift(payload);
+			return false;
 		}
+		updateTeamsShift(payload);
+		return true;
 	};
 	return {
 		createUpdateRequest,

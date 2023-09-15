@@ -30,7 +30,6 @@
 .mid_section {
 	max-height: 240px;
 	padding: 0 10px 30px;
-	overflow: auto;
 }
 
 .mid_section::-webkit-scrollbar {
@@ -69,27 +68,17 @@
 	> p {
 		width: 150px;
 		margin: 0;
-
-		/* text-align: center; */
 		margin-left: 50px;
 		font-size: 16px;
 	}
 
 	:global {
-		/* .ui_time_options_container {
-			max-height: 124px;
-		} */
-
-		/* .react-datepicker__aria-live {
-			display: none;
-		} */
-	}
-
-	/* > div {
-		&:last-child {
-			margin-bottom: 0;
+		.ui_time_options_container {
+			> div > div > div {
+				height: 100px;
+			}
 		}
-	} */
+	}
 }
 
 .button_section {
