@@ -79,7 +79,6 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 	}, [setValue, defaultValues]);
 
 	const formValues = watch();
-	console.log('formValues:', formValues);
 
 	const validateTime = (start_time, end_time) => {
 		if (!start_time && !end_time) return true;
