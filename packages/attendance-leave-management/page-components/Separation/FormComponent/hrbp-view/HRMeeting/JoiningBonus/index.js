@@ -3,7 +3,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function JoiningBonus({ control, errors }) {
+function JoiningBonus({ control = {}, errors = {}, data = {} }) {
+	const { joiningBonus, joiningBonusApplicable } = data || {};
+	console.log('🚀 ~ file: index.js:8 ~ JoiningBonus ~ joiningBonusApplicable:', joiningBonusApplicable);
 	const options = [
 		{ name: 'R1', value: 'yes', label: 'yes' }, { name: 'R2', value: 'no', label: 'no' },
 	];
@@ -16,7 +18,7 @@ function JoiningBonus({ control, errors }) {
 					control={control}
 					name="joining_bonus_clawback"
 					options={options}
-					rules={{ required: 'this is required' }}
+					disabled={joiningBonusApplicable}
 				/>
 				{errors.joining_bonus_clawback && (
 					<span className={styles.error}>Selection is Required</span>
@@ -31,7 +33,7 @@ function JoiningBonus({ control, errors }) {
 					size="md"
 					style={{ marginRight: '8px', width: 200 }}
 					placeholder="Enter amount"
-					rules={{ required: 'this is required' }}
+					disabled={joiningBonus}
 				/>
 				{errors.joining_bonus_amount && (
 					<span className={styles.error}>*Amount is Required</span>

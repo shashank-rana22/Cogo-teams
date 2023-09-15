@@ -23,17 +23,16 @@ import FinanceUpdateModal from './update-modal';
 import useDownloadOutstandingDetails from './useDownloadOutstandingDetails';
 import useFinanceClearance from './useFinanceClearance';
 
-function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
+function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = () => {} }) {
 	const {
 		handleSubmit, onSubmit, control, errors,
 		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
 		setFinanceRecommendation, financeRecommendation, off_boarding_application_id,
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
-		loading, setValue,
-	} = useFinanceClearance({ refetch });
-
-	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
-	const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
+		setValue,
+	} = useFinanceClearance({ data, refetch, loading });
+	const { getDownloadOutstandingFileLink, downloadlink } = useDownloadOutstandingDetails();
+	// const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
 	const [confirmedValues, setConfirmedValues] = useState(
 		{
 			tcFullName        : '',
@@ -46,17 +45,19 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	);
 
 	useEffect(() => {
-		setValue('additionalRemarks', data?.additional_remarks);
-		setValue('Fullname', data?.name);
-		setValue('checkboxagreement', true);
-		setConfirmedValues({
-			tcFullName    : data?.name,
-			employee      : data.hold_employee,
-			fnf           : data.hold_fnf,
-			getupdateData : data?.update_fnf_status,
+		if (is_complete) {
+			setValue('additionalRemarks', sub_process_data?.additional_remarks);
+			setValue('fullName', sub_process_data?.name);
+			setValue('checkboxagreement', true);
+			setConfirmedValues({
+				tcFullName    : sub_process_data?.name,
+				employee      : sub_process_data?.hold_employee,
+				fnf           : sub_process_data?.hold_fnf,
+				getupdateData : sub_process_data?.update_fnf_status,
 
-		}, is_complete);
-	}, [data, is_complete, loading, setUpdateData, setValue]);
+			}, is_complete);
+		}
+	}, [is_complete, setUpdateData, setValue, sub_process_data]);
 
 	const [show, setShow] = useState(true);
 	const [showModal, setShowModal] = useState(false);
@@ -70,8 +71,8 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	), [confirmedValues.getupdateData]);
 
 	const handleDownloadSheet = async () => {
-		const link = await getDownloadOutstandingFileLink(off_boarding_application_id);
-		window.open(link?.data, '_blank');
+		await getDownloadOutstandingFileLink(off_boarding_application_id);
+		window.open(downloadlink, '_blank');
 	};
 	const totalRecoverableAmountFun = useCallback(
 		() => {
@@ -89,7 +90,6 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, watch]);
 
 	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
-
 	return (
 		<>
 			<div className={styles.header}>

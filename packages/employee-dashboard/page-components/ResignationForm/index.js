@@ -11,11 +11,7 @@ function ResignationForm() {
 
 	if (application_exist) return <ResignationProgress data={data} />;
 
-	return (
-		<div>
-			<ResignationFormLanding refetch={refetch} />
-		</div>
-	);
+	return 	<ResignationFormLanding refetch={refetch} />;
 }
 
 export default ResignationForm;

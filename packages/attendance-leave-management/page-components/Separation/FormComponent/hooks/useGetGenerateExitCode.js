@@ -8,26 +8,23 @@ const useGetGenerateExitCode = () => {
 		url    : '/generate_exit_code',
 	}, { manual: true });
 
-	const getExitCode = async () => {
+	const getExitCode = async (off_boarding_application_id) => {
 		let res = {};
 		try {
 			res = await trigger({
 				data: {
-					off_boarding_application_id: '9e0f52c9-da4a-43fb-bd16-772cdc8f8bda',
+					off_boarding_application_id,
 				},
 			});
-			if (res?.data) {
-				return res.data;
-			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
-		return res;
+		return res?.data;
 	};
 
 	return {
 		loading,
-		data,
+		exitcode: data,
 		getExitCode,
 	};
 };

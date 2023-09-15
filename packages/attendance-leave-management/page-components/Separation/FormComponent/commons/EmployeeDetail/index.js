@@ -10,17 +10,18 @@ function EmployeeDetail({ data = {} }) {
 	const [show, setShow] = useState(true);
 
 	const { applicant_details } = data || {};
+	const { date_of_joining } = applicant_details || {};
 
 	const KEYS_TO_DISPLAY = {
 		employee_name   : applicant_details?.employee_name,
 		cogo_id         : applicant_details?.cogo_id,
 		department      : applicant_details?.department,
 		designation     : applicant_details?.designation,
-		date_of_joining : formatDate({
-			date       : new Date(),
+		date_of_joining : date_of_joining ? formatDate({
+			date       : new Date(applicant_details?.date_of_joining),
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
-		}),
+		}) : undefined,
 		age_in_organization : applicant_details?.age_in_organization,
 		reporting_location  : applicant_details?.reporting_location,
 		chapter             : applicant_details?.chapter,

@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function NotesForManager({ control }) {
+function NotesForManager({ control = {}, data = {} }) {
 	const [show, setShow] = useState(false);
-
+	const { notes } = data || {};
+	const FOURTH_INDEX = 4;
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
@@ -22,7 +23,7 @@ function NotesForManager({ control }) {
 						size="md"
 						style={{ marginRight: '8px', width: '100%' }}
 						placeholder="Type your notes here"
-						rules={{ required: 'this is required' }}
+						disabled={notes?.[FOURTH_INDEX]?.value}
 					/>
 				</div>
 			) }

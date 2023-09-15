@@ -1,8 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// import useGetGenerateExitCode from '../../hooks/useGetGenerateExitCode';
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 import ExitHeading from '../ExitInterview/ExitHeading';
 
@@ -22,19 +21,20 @@ const REASONS_LIST = [
 	'Personal Reasons'];
 
 function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = () => {}, data = {} }) {
-	const [code, setCode] = useState(null);
-	const [complete, setComplete] = useState(false);
 	const {
 		control,
 		reset,
 		handleSubmit,
+		setValue,
 	} = useForm();
 	const { off_boarding_application_id } = data || '';
 	const { exit_interview } = data || {};
 	const { exit_interview_completed } = exit_interview || {};
-	const { sub_process_detail_id } = exit_interview_completed || {};
-
+	const { sub_process_detail_id, is_complete, sub_process_data } = exit_interview_completed || {};
+	const { exitCode } = sub_process_data || {};
+	const [code, setCode] = useState(exitCode);
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
+	const [complete, setComplete] = useState(is_complete || false);
 
 	const onSubmit = (values) => {
 		const REASONSARRAY = [];
@@ -49,17 +49,23 @@ function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = (
 				reasons      : REASONSARRAY,
 				reason_by_hr : values.reason,
 				remarks      : values.remarks,
+				exitCode     : code,
 
 			},
 			sub_process_detail_id,
 			process_name: 'exit_interview',
 		};
-		//	console.log(off_boarding_application_id);
 		updateApplication({
 			payload,
 		});
 		reset();
 	};
+
+	useEffect(() => {
+		if (is_complete) {
+			setValue('reason', sub_process_data?.reason_by_hr);
+		}
+	}, [is_complete, setValue, sub_process_data]);
 	return (
 		<div>
 
@@ -80,7 +86,7 @@ function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = (
 					:						(
 						<>
 							<ExitHeading title="EXIT INTERVIEW" subTitle="complete the interview" />
-							<InterviewComplete code={code} control={control} />
+							<InterviewComplete complete={is_complete} code={code} control={control} />
 							<div className={styles.footer}>
 								<Button
 									themeType="secondary"
@@ -90,7 +96,11 @@ function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = (
 									Back
 
 								</Button>
-								<Button themeType="primary" onClick={() => handleSubmit(onSubmit)()}>
+								<Button
+									disabled={complete}
+									themeType="primary"
+									onClick={() => handleSubmit(onSubmit)()}
+								>
 									Complete Interview
 								</Button>
 							</div>

@@ -1,4 +1,3 @@
-/* eslint-disable custom-eslint/uuid-check */		// TODOs
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
@@ -10,9 +9,8 @@ const useDownloadOutstandingDetails = () => {
 	}, { manual: true });
 
 	const getDownloadOutstandingFileLink = async (off_boarding_application_id) => {
-		let res = {};
 		try {
-			res = await	trigger({
+			await	trigger({
 				params: {
 					application_id: off_boarding_application_id,
 				},
@@ -20,12 +18,11 @@ const useDownloadOutstandingDetails = () => {
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
-		return res;
 	};
 
 	return {
 		loading,
-		data,
+		downloadlink: data,
 		getDownloadOutstandingFileLink,
 	};
 };

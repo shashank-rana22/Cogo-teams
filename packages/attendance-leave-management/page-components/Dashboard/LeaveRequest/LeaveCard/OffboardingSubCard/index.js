@@ -6,12 +6,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false }) {
-	const router = useRouter();
+const handleResignation = (id, process_name, router) => {
+	router.push(`/separation?process_name=${process_name}&application_id=${id}`);
+};
 
-	const handleResignation = (id, process_name) => {
-		router.push(`/separation?process_name=${process_name}&application_id=${id}`);
-	};
+function OffboardingSubCard({ val = {}, updateLoading = false }) {
+	const router = useRouter();
 
 	return (
 		<div className={styles.details} key={val.off_boarding_application_id}>
@@ -34,21 +34,17 @@ function OffboardingSubCard({ val = {}, isManager = false, updateLoading = false
 					</div>
 				</div>
 			</div>
+			<div className={styles.approve}>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={() => handleResignation(val.off_boarding_application_id, val.process_name, router)}
+					disabled={updateLoading}
+				>
+					Go To Clearance
+				</Button>
+			</div>
 
-			{isManager ? (
-				<div className={styles.yes_no}>
-					<div className={styles.approve}>
-						<Button
-							size="md"
-							themeType="secondary"
-							onClick={() => handleResignation(val.off_boarding_application_id, val.process_name)}
-							disabled={updateLoading}
-						>
-							Go To Clearance
-						</Button>
-					</div>
-				</div>
-			) : null}
 		</div>
 	);
 }

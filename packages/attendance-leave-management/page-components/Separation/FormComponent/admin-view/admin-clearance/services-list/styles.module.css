@@ -61,13 +61,3 @@
 	transition: 0.3s;
 	transform: rotate(180deg);
 }
-
-.servicesbtn {
-	margin-right: 8px;
-}
-
-.accordiontitle {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}

@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMTick, IcCFtick } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -12,10 +13,11 @@ import Servicelist from './services-list';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
 
-const ZEROTH_INDEX = 0;
 function AdminClearance({ data = {}, refetch = () => {} }) {
 	const [show, setShow] = useState(false);
 	const admin_clearance = data?.admin_clearance || {};
+	const applicant_details = data?.applicant_details || {};
+	const { last_working_day } = applicant_details || null;
 	const { sub_process_detail_id } = admin_clearance?.admin_clearance || {};
 	const { sub_process_data } = admin_clearance?.admin_clearance || {};
 	const { is_complete } = admin_clearance?.admin_clearance || false;
@@ -26,8 +28,9 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 		handleSubmit,
 		watch,
 		setValue,
+		reset,
 	} = useForm();
-	const termschecked = watch('termsacceptance');
+	const termsChecked = watch('termsAcceptance');
 
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShow });
 
@@ -41,15 +44,15 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 		const payload = {
 			sub_process_data: {
 				notes,
-				accesscardstatus : values?.accesscardstatus,
-				termsacceptance  : values?.termsacceptance,
+				accessCardStatus : values?.accessCardStatus,
+				termsAcceptance  : values?.termsAcceptance,
 				specify          : values?.specify,
-				parkingcharges   : values?.parkingcharges,
-				othercharges     : values?.othercharges,
+				parkingCharges   : values?.parkingCharges,
+				otherCharges     : values?.otherCharges,
 				name             : values?.name,
-				last_working_day : values?.last_working_day,
-				idcardstatus     : values?.idcardstatus,
-				companyassets    : values?.companyassets,
+				last_working_day,
+				idCardStatus     : values?.idCardStatus,
+				companyAssets    : values?.companyAssets,
 
 			},
 			sub_process_detail_id,
@@ -58,34 +61,36 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 		updateApplication({
 			payload,
 		});
-	//	refetch();
+		reset();
 	};
 
 	useEffect(() => {
 		if (is_complete) {
 			setValue('last_working_day', new Date(sub_process_data?.last_working_day));
-			setValue('accesscardstatus', sub_process_data?.accesscardstatus);
-			setValue('companyassets', sub_process_data?.companyassets);
-			setValue('idcardstatus', sub_process_data?.idcardstatus);
+			setValue('accessCardStatus', sub_process_data?.accessCardStatus);
+			setValue('companyAssets', sub_process_data?.companyAssets);
+			setValue('idCardStatus', sub_process_data?.idCardStatus);
 			setValue('name', sub_process_data?.name);
-			setValue('othercharges', sub_process_data?.othercharges);
-			setValue('parkingcharges', sub_process_data?.parkingcharges);
+			setValue('otherCharges', sub_process_data?.otherCharges);
+			setValue('parkingCharges', sub_process_data?.parkingCharges);
 			setValue('specify', sub_process_data?.specify);
-			setValue('notes', sub_process_data?.notes[ZEROTH_INDEX].Value);
-			setValue('termsacceptance', sub_process_data?.termsacceptance);
+			setValue('notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].Value);
+			setValue('termsAcceptance', sub_process_data?.termsAcceptance);
+		} else if (last_working_day) {
+			setValue('last_working_day', new Date(last_working_day));
 		}
-	}, [setValue, data, sub_process_data, is_complete]);
+	}, [setValue, data, sub_process_data, is_complete, last_working_day]);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.containermain}>
+			<div className={styles.container_main}>
 				<div className={styles.title}>Admin Clareance</div>
-				<div className={styles.subtitle}>Collection of company assets</div>
+				<div className={styles.sub_title}>Collection of company assets</div>
 
 				{is_complete ? (
-					<div className={styles.tickdiv}>
+					<div className={styles.tick_div}>
 						<IcCFtick
-							className={styles.tickicon}
+							className={styles.tick_icon}
 						/>
 						<span>You have successfully completed your tasks. No further changes are allowed.</span>
 					</div>
@@ -102,11 +107,11 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 						errors={errors}
 						handleSubmit={handleSubmit}
 						onSubmit={onSubmit}
-						termschecked={termschecked}
+						termsChecked={termsChecked}
 					/>
-					<div className={styles.buttondiv}>
+					<div className={styles.button_div}>
 						<Button
-							className={styles.adminbutton}
+							className={styles.admin_button}
 							onClick={() => setShow(!show)}
 						>
 							Provide Clearance

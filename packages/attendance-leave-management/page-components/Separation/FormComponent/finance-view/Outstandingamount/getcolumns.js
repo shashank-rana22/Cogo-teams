@@ -6,7 +6,6 @@ const getColumns = ({ control, is_complete = false }) => [
 		accessor : (item) => (
 
 			<div>
-				{' '}
 				<CheckboxController
 					name={item?.registrationNumber}
 					control={control}

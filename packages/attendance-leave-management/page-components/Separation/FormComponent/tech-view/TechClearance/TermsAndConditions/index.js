@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsAndConditions({ control, errors }) {
+function TermsAndConditions({ control = {}, errors = {} }) {
 	return (
 		<div>
 			<div className={styles.title}>Terms & Conditions</div>

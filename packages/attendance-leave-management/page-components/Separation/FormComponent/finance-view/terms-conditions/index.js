@@ -50,11 +50,11 @@ function TermsConditions({ control = {}, errors = {}, is_complete = false, confi
 							placeholder="Enter your full name"
 							control={control}
 							value={confirmedValues.tcFullName}
-							name="Fullname"
+							name="fullName"
 							disabled={is_complete}
 							rules={{ required: 'this is required' }}
 						/>
-						{errors.Fullname ? <span className={styles.error}>*required</span> : null}
+						{errors.fullName ? <span className={styles.error}>*required</span> : null}
 					</div>
 				</div>
 			</div>
