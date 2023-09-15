@@ -38,7 +38,7 @@ const getPayload = ({ formattedValues, prevList }) => {
 	};
 };
 
-function useUpdateCogooneShift({ getListShift = () => {}, handleClose = () => {} }) {
+function useUpdateCogooneShift() {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_bulk_cogoone_shift',
 		method : 'post',
@@ -47,21 +47,17 @@ function useUpdateCogooneShift({ getListShift = () => {}, handleClose = () => {}
 	const updateTeamsShift = async (payload) => {
 		try {
 			await trigger(payload);
-			getListShift();
-			handleClose();
 			Toast.success('Timing updated successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
-	const createUpdateRequest = ({ formattedValues, prevList }) => {
+	const createUpdateRequest = async ({ formattedValues, prevList }) => {
 		const payload = getPayload({ formattedValues, prevList });
-		if (isEmpty(payload.data.shift_details)) {
-			return false;
+		if (!isEmpty(payload.data.shift_details)) {
+			await updateTeamsShift(payload);
 		}
-		updateTeamsShift(payload);
-		return true;
 	};
 	return {
 		createUpdateRequest,

@@ -17,12 +17,11 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.shift_view_default_type || '',
 	);
 	const {
-		getListShift = () => {},
 		shiftsData = {},
 		shiftDataLoading = false,
 	} = useListCogooneShiftConfiguration({ selectedTeam });
 
-	const { createUpdateRequest = () => {} } = useUpdateCogooneShift({ getListShift, handleClose });
+	const { createUpdateRequest = () => {} } = useUpdateCogooneShift();
 
 	const { createCogooneShiftRequest = () => {} } = useCreateBulkCogooneShift({ handleClose });
 
@@ -36,9 +35,9 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 		control, setValue, handleSubmit, watch, formState:{ errors = {}, isDirty },
 	} = useForm({});
 
-	const onSubmit = (val) => {
+	const onSubmit = async (val) => {
 		const formattedValues = transformShiftData({ val, list });
-		createUpdateRequest({ formattedValues: [...formattedValues], prevList: list });
+		await createUpdateRequest({ formattedValues: [...formattedValues], prevList: list });
 		createCogooneShiftRequest({ team_name: selectedTeam, formattedValues });
 	};
 

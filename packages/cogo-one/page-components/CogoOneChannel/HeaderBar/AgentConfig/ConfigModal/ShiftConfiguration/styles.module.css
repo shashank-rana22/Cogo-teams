@@ -87,6 +87,10 @@
 					height: 100px;
 				}
 			}
+
+			.ui_time_display_container {
+				width: 126px;
+			}
 		}
 
 		&:first-child > div:nth-child(2) {

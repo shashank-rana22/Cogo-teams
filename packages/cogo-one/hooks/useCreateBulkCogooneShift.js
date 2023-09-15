@@ -28,23 +28,22 @@ const useCreateBulkCogooneShift = ({ handleClose = () => {} }) => {
 		method : 'post',
 	}, { manual: true });
 
-	const createCogooneShift = (payload) => {
+	const createCogooneShift = async (payload) => {
 		try {
-			trigger(payload);
-			handleClose();
+			await trigger(payload);
 			Toast.success(' Shift created successfully');
+			handleClose();
 		} catch (e) {
 			console.error(e);
 		}
 	};
 
-	const createCogooneShiftRequest = ({ team_name, formattedValues }) => {
+	const createCogooneShiftRequest = async ({ team_name, formattedValues }) => {
 		const payload = getPayload({ team_name, formattedValues });
-		if (isEmpty(payload.data.shift_details)) {
-			return false;
+		if (!isEmpty(payload.data.shift_details)) {
+			await createCogooneShift(payload);
 		}
-		createCogooneShift(payload);
-		return true;
+		handleClose();
 	};
 
 	return {
