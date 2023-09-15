@@ -21,6 +21,7 @@ const useGetQueryBuilder = ({
 	path = '',
 	barGraphData = [],
 	pageNumber,
+	entityCode = '',
 }) => {
 	const [filters, setFilters] = useState({
 		page: 1,
@@ -37,9 +38,9 @@ const useGetQueryBuilder = ({
 
 	const { indexValue = '', id } = selectedBarData || {};
 
-	const { bifurcation_type, entity_code, period_type } = filterValues || {};
+	const { bifurcation_type, period_type } = filterValues || {};
 
-	const { entity_code: queryBuilderEntity, query_conditions } =		queryBuilderForm || {};
+	const { query_conditions } =		queryBuilderForm || {};
 
 	const getSplitDates = indexValue?.split('to');
 
@@ -87,12 +88,12 @@ const useGetQueryBuilder = ({
 
 		return dateData;
 	}, [barGraphData, getSplitDates, indexValue, pageNumber, period_type]);
-
+	console.log(entityCode, 'entityCode');
 	const getQueryBuilder = useCallback(() => {
 		const barId = !Number.isNaN(Number(id)) ? [id] : ['301', '101'];
 		const formattedPayload = {
 			kam_owner_list: {
-				entity_code      : entity_code ? [entity_code] : barId,
+				entity_code      : entityCode ? [entityCode] : barId,
 				is_query_builder : false,
 				filters          : {
 					query_type : 'kam_owner_list',
@@ -105,7 +106,7 @@ const useGetQueryBuilder = ({
 			},
 
 			kam_owners: {
-				entity_code      : entity_code ? [entity_code] : barId,
+				entity_code      : entityCode ? [entityCode] : barId,
 				is_query_builder : false,
 				page_limit       : 10,
 				page             : outstandingPagination?.page || PAGE_SIZE,
@@ -119,14 +120,14 @@ const useGetQueryBuilder = ({
 				end_date: getDates(),
 			},
 			query_builder: {
-				entity_code  : queryBuilderEntity,
+				entity_code  : entityCode,
 				query_conditions,
 				page_limit   : 10,
 				page         : filters.page,
 				kam_owner_id : filters.kam_id === 'all' ? '' : filters.kam_id,
 			},
 			queryBuilderKam: {
-				entity_code : queryBuilderEntity,
+				entity_code : entityCode,
 				query_conditions,
 				page_limit  : 100,
 				page        : filters.page,
@@ -136,7 +137,7 @@ const useGetQueryBuilder = ({
 			},
 		};
 		const payload = {
-			entity_code      : entity_code ? [entity_code] : ['301', '101'],
+			entity_code      : entityCode ? [entityCode] : ['301', '101'],
 			query_conditions : [],
 			page_limit       : 10,
 			page             : outstandingPagination?.page || PAGE_SIZE,
@@ -153,8 +154,8 @@ const useGetQueryBuilder = ({
 		} catch (error) {
 			console.error(error);
 		}
-	}, [bifurcation_type, entity_code, filters.kam_id, filters.page, getDates,
-		id, kamOwner, outstandingPagination?.page, path, queryBuilderEntity, query_conditions, trigger]);
+	}, [bifurcation_type, entityCode, filters.kam_id, filters.page, getDates,
+		id, kamOwner, outstandingPagination?.page, path, query_conditions, trigger]);
 
 	const getResult = useCallback(() => {
 		if (
