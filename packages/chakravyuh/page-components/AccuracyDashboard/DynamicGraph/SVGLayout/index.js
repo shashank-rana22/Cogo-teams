@@ -3,9 +3,9 @@ import anime from 'animejs/lib/anime.es';
 import { useRef, useEffect } from 'react';
 
 const PATH_STYLE = {
-	stroke           : '#7EAEB4',
+	stroke           : '#001219',
 	strokeOpacity    : '1',
-	strokeWidth      : '3',
+	strokeWidth      : '2',
 	strokeDasharray  : 'none',
 	strokeLinecap    : 'butt',
 	strokeDashoffset : '0',
@@ -18,20 +18,22 @@ const PATH_STYLE = {
 
 const ANIMATION_DURATION = 2000;
 const ANIMATION_END_DELAY = 2000;
+const ADJUSTMENT_FACTOR = 120;
 
-function SVGLayout({ paths = [] }) {
+function SVGLayout({ paths = [], bounds = [], mode = '' }) {
 	const svgRef = useRef(null);
 
 	const stylesPaths = paths.map((path = '') => ({
 		id        : path,
 		pathProps : {
 			...PATH_STYLE,
-			d: path,
+			stroke : mode === 'background' ? '#f4f4f4' : PATH_STYLE.stroke,
+			d      : path,
 		},
 	}));
 
 	useEffect(() => {
-		if (svgRef.current) {
+		if (svgRef.current && mode !== 'background') {
 			const svgPaths = svgRef.current.querySelectorAll('path');
 
 			svgPaths.forEach((path) => {
@@ -50,16 +52,16 @@ function SVGLayout({ paths = [] }) {
 				});
 			});
 		}
-	}, []);
+	}, [mode]);
 
+	const { maxX, maxY } = bounds;
 	return (
 		<svg
 			ref={svgRef}
-			width="1200pt"
-			height="700pt"
-			viewBox="0 0 1200 700"
+			width={`${maxX + ADJUSTMENT_FACTOR}pt`}
+			height={`${maxY + ADJUSTMENT_FACTOR}pt`}
+			viewBox={`0 0 ${maxX + ADJUSTMENT_FACTOR} ${maxY + ADJUSTMENT_FACTOR}`}
 			xmlSpace="preserve"
-			// className={styles.tree_icon}
 			shapeRendering="geometricPrecision"
 			textRendering="geometricPrecision"
 		>

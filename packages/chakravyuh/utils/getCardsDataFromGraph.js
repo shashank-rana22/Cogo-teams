@@ -6,8 +6,7 @@ const ADJUSTMENT_FACTOR = 1.5;
 const POSITION_FACTOR = 150;
 const VERTICAL_POSITION_FACTOR = 150;
 const HORIZONTAL_POSITION_FACTOR = 150;
-const INITAL_POSITION_X = 50;
-const INITAL_POSITION_Y = 250;
+
 const positionMapping = (position, direction) => {
 	switch (direction) {
 		case 'top': {
@@ -27,24 +26,50 @@ const positionMapping = (position, direction) => {
 	}
 };
 
+const getIntialPositionForMultiValuedBranch = (position, length) => ([
+	position[GLOBAL_CONSTANTS.zeroth_index] + (HORIZONTAL_POSITION_FACTOR * ADJUSTMENT_FACTOR),
+	position[FIRST] - length,
+]);
+
+const comparePositions = (bound, position) => {
+	const [refX, refY] = position;
+	const { maxX, minX, maxY, minY } = bound;
+
+	return {
+		minX : Math.min(minX, refX),
+		maxX : Math.max(maxX, refX),
+		minY : Math.min(minY, refY),
+		maxY : Math.max(maxY, refY),
+	};
+};
+
 export const getCardsDataFromGraph = ({
 	graph = {},
 }) => {
 	const CARDS = [];
+	let bounds = {
+		minX : GLOBAL_CONSTANTS.zeroth_index,
+		maxX : GLOBAL_CONSTANTS.zeroth_index,
+		minY : GLOBAL_CONSTANTS.zeroth_index,
+		maxY : GLOBAL_CONSTANTS.zeroth_index,
+	};
 
 	const getCards = (position, graphNode, posIdx) => {
 		const { name = '', rates_count = '', drop = '', child = {} } = graphNode;
+		bounds = comparePositions(bounds, position);
+
 		CARDS.push({
 			action_type : name,
 			parent      : name,
 			drop,
 			rates_count,
 			position    : {
-				left : `${position[GLOBAL_CONSTANTS.zeroth_index]}px`,
-				top  : `${position[FIRST]}px`,
+				left : position[GLOBAL_CONSTANTS.zeroth_index],
+				top  : position[FIRST],
 			},
 			positionIdx: posIdx,
 		});
+
 		Object.entries(child).forEach(([key, items]) => {
 			if (items.length === FIRST) {
 				const [firstChild] = items;
@@ -52,10 +77,7 @@ export const getCardsDataFromGraph = ({
 			} else {
 				const mid = Math.floor(items.length / SECOND);
 				const length = (mid * POSITION_FACTOR) - (POSITION_FACTOR / SECOND);
-				const intialPosition = [
-					position[GLOBAL_CONSTANTS.zeroth_index] + (HORIZONTAL_POSITION_FACTOR * ADJUSTMENT_FACTOR),
-					position[FIRST] - length,
-				];
+				const intialPosition = getIntialPositionForMultiValuedBranch(position, length);
 				items.forEach((childItem) => {
 					getCards(intialPosition, childItem, posIdx + FIRST);
 					intialPosition[FIRST] += POSITION_FACTOR;
@@ -64,7 +86,10 @@ export const getCardsDataFromGraph = ({
 		});
 	};
 
-	getCards([INITAL_POSITION_X, INITAL_POSITION_Y], graph, FIRST);
+	getCards([GLOBAL_CONSTANTS.zeroth_index, GLOBAL_CONSTANTS.zeroth_index], graph, FIRST);
 
-	return { cards: CARDS };
+	return {
+		cards: CARDS,
+		bounds,
+	};
 };

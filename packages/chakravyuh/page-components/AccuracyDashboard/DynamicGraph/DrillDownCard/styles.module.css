@@ -45,7 +45,7 @@
 	}
 
 	&.animate {
-		--card-color: #0a9396;
+		--card-color: #001219;
 
 		animation-name: shadow-animation;
 		animation-duration: 4s;
@@ -127,11 +127,11 @@
 
 @keyframes shadow-animation {
 	0% {
-		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+		box-shadow: 0 0 4px 4px rgb(0 0 0 / 5%);
 	}
 
 	30% {
-		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+		box-shadow: 0 0 4px 4px rgb(0 0 0 / 5%);
 	}
 
 	80% {

@@ -71,16 +71,28 @@
 			scale: 0.5;
 		}
 	}
+
+	> h3 {
+		position: relative;
+		top: 50px;
+		left: 50px;
+		z-index: 1;
+		width: 0;
+		height: 0;
+		font-size: 20px;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
 }
 
 .graph_layout {
 	position: relative;
-	height: calc(100vh - 186px);
-	min-height: 500px;
-	padding: 8px 0;
 	margin-top: 16px;
 	overflow-y: auto;
 	background-color: #fff;
+	background-image: url("https://cogoport-testing.sgp1.digitaloceanspaces.com/158bab1b368e6a2b4082a4aeeea3dda8/Globe.png");
+	background-repeat: space;
+	background-position: 50% 50%;
 	border-radius: 8px;
 	transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
@@ -97,6 +109,8 @@
 
 .svg_layout {
 	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .card_container {

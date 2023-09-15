@@ -3,11 +3,13 @@ import { isEmpty } from '@cogoport/utils';
 
 const FIRST = 1;
 const SECOND = 2;
+const INITIAL_POSITION_X = 120;
+const INITIAL_POSITION_Y = 113;
 
-const LENGTH_FACTOR = 110;
+const LENGTH_FACTOR = 112;
 const ADJUSTMENT_FACTOR = 0.78;
-const HORIZONTAL_LENGTH_FACTOR = 110;
-const VERTICAL_LENGTH_FACTOR = 110;
+const HORIZONTAL_LENGTH_FACTOR = 112;
+const VERTICAL_LENGTH_FACTOR = 112;
 const CURVE_FACTOR = 6;
 
 const D_CONFIG = {
@@ -64,7 +66,7 @@ const connections = (length) => {
 export const generateSVGPaths = ({
 	graph = {},
 }) => {
-	const D_STRING = 'M 85 220';
+	const D_STRING = `M ${INITIAL_POSITION_X} ${INITIAL_POSITION_Y}`;
 
 	const PATHS = [];
 
@@ -80,7 +82,11 @@ export const generateSVGPaths = ({
 						getPath(`${str} ${dValue}`, newChild);
 					} else {
 						const mid = Math.floor(child[dir].length / SECOND);
-						let length = (LENGTH_FACTOR / SECOND) + CURVE_FACTOR - (mid * LENGTH_FACTOR);
+						let length = (
+							(LENGTH_FACTOR / SECOND)
+							+ SECOND * ADJUSTMENT_FACTOR * CURVE_FACTOR
+							- (mid * LENGTH_FACTOR)
+						);
 						child[dir].forEach((obj) => {
 							getPath(
 								` ${str} ${ADJUSTED_D_VALUES[dir]} 
@@ -89,7 +95,7 @@ export const generateSVGPaths = ({
 							);
 							length += LENGTH_FACTOR;
 							if (length > GLOBAL_CONSTANTS.zeroth_index && length < LENGTH_FACTOR) {
-								length -= SECOND * CURVE_FACTOR;
+								length -= SECOND * SECOND * ADJUSTMENT_FACTOR * CURVE_FACTOR;
 							}
 						});
 					}
