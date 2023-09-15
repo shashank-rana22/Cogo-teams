@@ -38,12 +38,6 @@ function AccountPayables() {
 	const entity = getDefaultEntityCode(partnerId);
 
 	const handleTabChange = (v) => {
-		// if (
-		// 	['payruns', 'invoices'].includes(v)
-		// ) {
-		// 	window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
-		// 	return;
-		// }
 		setActivePayables(v);
 		push(
 			'/business-finance/account-payables/[active_tab]',
