@@ -108,8 +108,14 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 						<div>
 							<div className={styles.padding_top} />
 							<div className={styles.parent_div}>
-								{(list || []).map(
-									(val) => (
+								{(list || []).map((val) => (
+									request_label === 'OFFBOARDING REQUESTS' ? (
+										<OffboardingSubCard
+											val={val}
+											updateLoading={updateLoading}
+											key={val.id}
+										/>
+									) : (
 										<LeaveSubCard
 											val={val}
 											updateLoading={updateLoading}
@@ -117,8 +123,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 											handleLeaveUpdate={handleLeaveUpdate}
 											key={val.id}
 										/>
-									),
-								)}
+									)))}
 							</div>
 						</div>
 					)}

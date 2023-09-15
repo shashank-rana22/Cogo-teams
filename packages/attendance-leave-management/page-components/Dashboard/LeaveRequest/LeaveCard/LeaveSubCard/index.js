@@ -37,7 +37,7 @@ function LeaveSubCard({ val = {}, isManager = false, updateLoading = false, hand
 						, from
 						{' '}
 						{formatDate({
-							date       : new Date(val.leave_start_date),
+							date       : val?.leave_start_date && new Date(val?.leave_start_date),
 							dateFormat : GLOBAL_CONSTANTS.formats.date['MMM dd yyyy'],
 							formatType : 'date',
 						})}
@@ -45,7 +45,7 @@ function LeaveSubCard({ val = {}, isManager = false, updateLoading = false, hand
 						-
 						{' '}
 						{formatDate({
-							date       : new Date(val.leave_end_date),
+							date       : val?.leave_end_date && new Date(val?.leave_end_date),
 							dateFormat : GLOBAL_CONSTANTS.formats.date['MMM dd yyyy'],
 							formatType : 'date',
 						})}
@@ -53,7 +53,7 @@ function LeaveSubCard({ val = {}, isManager = false, updateLoading = false, hand
 					<div className={styles.text2}>{val.leave_reason}</div>
 					<div className={styles.leave_details}>
 						<div className={styles.name}>
-							{formatDistanceToNow(new Date(val.created_at), { addSuffix: true })}
+							{val?.created_at && formatDistanceToNow(new Date(val?.created_at), { addSuffix: true })}
 						</div>
 					</div>
 				</div>

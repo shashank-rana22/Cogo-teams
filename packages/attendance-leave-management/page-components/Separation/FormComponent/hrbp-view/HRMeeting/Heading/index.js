@@ -8,8 +8,6 @@ function Heading({
 	title = 'HR MEETING', subTitle = 'Summary from manager interaction',
 	isComplete = false, name = '',
 }) {
-	console.log('🚀 ~ file: index.js:11 ~ isComplete:', isComplete);
-
 	return (
 		<>
 			<div className={styles.header}>
