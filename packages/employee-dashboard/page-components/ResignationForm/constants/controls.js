@@ -61,7 +61,7 @@ const getControls = (values = {}) => [
 		label       : 'Enter_Reason_of_Leaving',
 		type        : 'textarea',
 		showAstrick : true,
-		rules       : { required: values.reason_of_leaving ? false : 'This is required' },
+		rules       : { required: values?.reason_of_leaving ? false : 'This is required' },
 		value       : values?.reason_of_leaving,
 	},
 ];

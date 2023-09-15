@@ -14,21 +14,22 @@ import styles from './styles.module.css';
 import TechStatus from './TechStatus';
 import TermsAndConditions from './TermsAndConditions';
 
+const OPTIONS = [
+	{
+		key      : '1',
+		disabled : false,
+		children : 'Completed',
+		prefix   : null,
+		suffix   : null,
+		color    : '#849E4C',
+		tooltip  : false,
+	},
+];
+
 function TechClearance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
-	const options = [
-		{
-			key      : '1',
-			disabled : false,
-			children : 'Completed',
-			prefix   : null,
-			suffix   : null,
-			color    : '#849E4C',
-			tooltip  : false,
-		},
-	];
-	console.log('data::::', data);
-	const [items, setItems] = useState(options);
+
+	const [items, setItems] = useState(OPTIONS);
 	const {
 		control,
 		formState:{ errors = {} },

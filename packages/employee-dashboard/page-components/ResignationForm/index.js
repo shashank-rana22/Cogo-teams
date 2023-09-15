@@ -5,11 +5,11 @@ import ResignationProgress from './ResignationProgress';
 import useGetEmployeeApplicationProcessDetails from './useGetEmployeeApplicationProcessDetails';
 
 function ResignationForm() {
-	const { data, refetch = () => {} } = useGetEmployeeApplicationProcessDetails();
+	const { data, refetch = () => {}, loading = false } = useGetEmployeeApplicationProcessDetails();
 
 	const { application_exist } = data || {};
 
-	if (application_exist) return <ResignationProgress data={data} />;
+	if (application_exist) return <ResignationProgress data={data} loading={loading} />;
 
 	return 	<ResignationFormLanding refetch={refetch} />;
 }

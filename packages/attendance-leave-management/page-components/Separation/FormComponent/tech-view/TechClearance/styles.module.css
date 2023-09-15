@@ -88,7 +88,7 @@
 	color: #fff;
 
 	:global {
-		.ui_EOpUW {
+		.ui_tag_container {
 			padding-left: 0;
 		}
 	}

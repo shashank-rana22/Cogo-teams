@@ -110,6 +110,14 @@
 		.ui_ps_direction_horizontal {
 			margin: 0;
 		}
+
+		.ui_stepper_step_map:last-child {
+			display: none;
+		}
+
+		.ui_stepper_step_map:nth-last-child(2) .ui_stepper_step_connector {
+			display: none;
+		}
 	}
 }
 

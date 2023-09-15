@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Placeholder } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
 import { IcMArrowDown, IcMArrowRight, IcMFtick } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
@@ -19,7 +19,7 @@ const TERMS_AND_CONDITIONS = `By clicking on Initiate Separation, you agree to s
 function ResignationFormLanding({ refetch = () => {} }) {
 	const CANCEL_REQUEST = 'cancellation_requested';
 
-	const { data:dataItems = {}, loading, refetchApplicationDetails } = useGetEmployeeDetails();
+	const { data:dataItems = {}, loading = false, refetchApplicationDetails } = useGetEmployeeDetails();
 	const [show, setShow] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);
@@ -63,6 +63,9 @@ function ResignationFormLanding({ refetch = () => {} }) {
 	const handleSeparation = () => {
 		setShowModal(true);
 	};
+	if (loading) {
+		return <Placeholder height="100px" width="100%" margin="0px 0px 20px 0px" />;
+	}
 
 	return (
 		<div className={styles.container}>

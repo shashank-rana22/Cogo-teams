@@ -13,6 +13,7 @@ const SERVICE_CHECKBOX_LIST = [
 	{ label: 'Figma', value: 'Figma' },
 	{ label: 'Github', value: 'Github' },
 ];
+
 function ServiceList({ control = {}, errors = {} }) {
 	const [show, setShow] = useState(false);
 	const [newService, setNewService] = useState('');

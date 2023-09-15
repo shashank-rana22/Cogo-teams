@@ -3,7 +3,7 @@ import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import getElementController from '../configs/getElementController';
+import getElementController from '../../../utils/configs/getElementController';
 import getControls from '../constants/controls';
 
 import styles from './styles.module.css';

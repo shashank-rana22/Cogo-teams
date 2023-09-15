@@ -27,7 +27,7 @@
 	margin-bottom: 24px;
 
 	:global {
-		.ui_QSZTB {
+		.ui_checkbox_container {
 			padding: 0;
 		}
 	}
@@ -42,7 +42,6 @@
 .content {
 	width: 95%;
 	font-size: 13px;
-	font-weight: 400;
 	color: #221f20;
 }
 
@@ -69,7 +68,6 @@
 
 .name_input {
 	font-size: 16px;
-	font-weight: 400;
 	color: #bdbdbd;
 }
 
