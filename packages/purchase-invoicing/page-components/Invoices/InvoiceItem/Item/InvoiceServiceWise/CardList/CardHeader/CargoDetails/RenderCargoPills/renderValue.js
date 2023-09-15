@@ -6,7 +6,7 @@ import { startCase, upperCase, isEmpty } from '@cogoport/utils';
 const UNIT_ELEMENT = 1;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
 
-export const renderValue = (label, detail) => {
+export const renderValue = (label = '', detail = {}) => {
 	const {
 		packages = [],
 		weight = '', volume = '',
@@ -20,7 +20,7 @@ export const renderValue = (label, detail) => {
 		: '';
 
 	const inputValue = valueForInput
-		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(
+		? `${valueForInput?.packages_count} Pkg, ${dimension} ${startCase(
 			valueForInput?.packing_type,
 		)}`
 		: '';
@@ -37,7 +37,7 @@ export const renderValue = (label, detail) => {
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item, index) => {
 								const values = item
-									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
+									? `${item?.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
 								return <div key={keysForPackages[index]}>{values}</div>;
@@ -86,47 +86,47 @@ export const renderValue = (label, detail) => {
 			}
 			return `${detail?.container_size || '--'}ft`;
 		case 'containers_count':
-			if (!detail.containers_count) {
+			if (!detail?.containers_count) {
 				return null;
 			}
 
-			if (detail.containers_count === UNIT_ELEMENT) {
+			if (detail?.containers_count === UNIT_ELEMENT) {
 				return '1 Container';
 			}
 
-			return `${detail.containers_count} Containers`;
+			return `${detail?.containers_count} Containers`;
 		case 'packages_count':
-			if (!detail.packages_count) {
+			if (!detail?.packages_count) {
 				return null;
 			}
 
-			if (detail.packages_count === UNIT_ELEMENT) {
+			if (detail?.packages_count === UNIT_ELEMENT) {
 				return '1 Package';
 			}
 
-			return `${detail.packages_count} Packages`;
+			return `${detail?.packages_count} Packages`;
 		case 'trucks_count':
-			if (!detail.trucks_count) {
+			if (!detail?.trucks_count) {
 				return null;
 			}
 
-			if (detail.trucks_count === UNIT_ELEMENT) {
+			if (detail?.trucks_count === UNIT_ELEMENT) {
 				return '1 Truck';
 			}
 
-			return `${detail.trucks_count} Trucks`;
+			return `${detail?.trucks_count} Trucks`;
 		case 'truck_type':
-			return startCase(detail.truck_type || '');
+			return startCase(detail?.truck_type || '');
 		case 'container_type':
-			return startCase(detail.container_type || '');
+			return startCase(detail?.container_type || '');
 		case 'trade_type':
-			return startCase(detail.trade_type || '');
+			return startCase(detail?.trade_type || '');
 		case 'commodity':
-			return startCase(detail.commodity || '');
+			return startCase(detail?.commodity || '');
 		case 'payment_term':
-			return startCase(detail.payment_term || '');
+			return startCase(detail?.payment_term || '');
 		case 'inco_term':
-			return `Inco - ${upperCase(detail.inco_term || '')}`;
+			return `Inco - ${upperCase(detail?.inco_term || '')}`;
 		case 'packages':
 			if (isEmpty(packages)) {
 				return null;
@@ -134,29 +134,29 @@ export const renderValue = (label, detail) => {
 			return <PackageDetails />;
 
 		case 'haulage_type':
-			return startCase(detail.haulage_type || '');
+			return startCase(detail?.haulage_type || '');
 		case 'transport_mode':
-			return startCase(detail.transport_mode || '');
+			return startCase(detail?.transport_mode || '');
 		case 'cargo_weight_per_container':
-			return `${detail.cargo_weight_per_container} MT`;
+			return `${detail?.cargo_weight_per_container} MT`;
 		case 'destination_cargo_handling_type':
-			return startCase(detail.destination_cargo_handling_type || '');
+			return startCase(detail?.destination_cargo_handling_type || '');
 		case 'origin_cargo_handling_type':
-			return startCase(detail.origin_cargo_handling_type || '');
+			return startCase(detail?.origin_cargo_handling_type || '');
 		case 'cargo_handling_type':
-			return startCase(detail.cargo_handling_type || '');
+			return startCase(detail?.cargo_handling_type || '');
 		case 'container_status':
-			return startCase(detail.container_status || '');
+			return startCase(detail?.container_status || '');
 		case 'source':
 			return detail?.source === 'direct'
 				? 'Sell Without Buy'
-				: startCase(detail.source || '');
+				: startCase(detail?.source || '');
 		case 'shipping_line.business_name':
-			return detail.shipping_line?.business_name;
+			return detail?.shipping_line?.business_name;
 		case 'preferred_shipping_line.business_name':
-			return detail.preferred_shipping_line?.business_name;
+			return detail?.preferred_shipping_line?.business_name;
 		case 'state':
-			return startCase(detail.state || '');
+			return startCase(detail?.state || '');
 		case 'origin_port.display_name':
 			return detail?.origin_port?.display_name || '';
 		case 'destination_port.display_name':
@@ -168,11 +168,11 @@ export const renderValue = (label, detail) => {
 		case 'origin_location.display_name':
 			return detail.origin_location?.display_name || '';
 		case 'container_handover_location':
-			return detail.container_handover_location?.display_name || '';
+			return detail?.container_handover_location?.display_name || '';
 		case 'container_pickup_location':
-			return detail.container_pickup_location?.display_name || '';
+			return detail?.container_pickup_location?.display_name || '';
 		case 'destination_location.display_name':
-			return detail.destination_location?.display_name || '';
+			return detail?.destination_location?.display_name || '';
 		case 'supplier_poc':
 			return <FormatPocData pocDetails={detail?.supplier_poc || {}} />;
 		case 'origin_oversea_agent':
@@ -194,7 +194,7 @@ export const renderValue = (label, detail) => {
 		case 'truck_number':
 			return startCase(detail?.truck_number);
 		case 'driver_details':
-			return `${startCase(detail?.driver_details.name)} , ${detail?.driver_details.contact}`;
+			return `${startCase(detail?.driver_details?.name)} , ${detail?.driver_details?.contact}`;
 		case 'estimated_departure':
 			return formatDate({
 				date       : detail?.estimated_departure,
