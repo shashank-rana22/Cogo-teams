@@ -69,6 +69,7 @@ function Block(props) {
 					options={filteredBlockOptions}
 					rules={{ required: 'Required' }}
 					value={watchBlock}
+					disabled={!isEmpty(blockData)}
 				/>
 
 				{errors[`${name}.block`] && (

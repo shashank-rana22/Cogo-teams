@@ -19,26 +19,28 @@ const useBlockCreation = ({ control, name, watch, blockIndex, prefillValues }) =
 
 	const { fields, append, remove } = useFieldArray({ control, name: `${name}.sub_blocks` });
 
-	const subBlockOptions = useMemo(() => list.map(({ id, sub_block_name }) => ({
-		label : startCase(sub_block_name),
-		value : id,
-	})), [list]);
+	const subBlockOptions = useMemo(() => list.filter((item) => item.status === 'active')
+		?.map(({ id, sub_block_name }) => ({
+			label : startCase(sub_block_name),
+			value : id,
+		})), [list]);
 
 	const subBlockWiseParameterOptions = useMemo(() => list.reduce((acc, subBlockItem) => {
 		const { id: sub_block_id, agent_scoring_parameters } = subBlockItem || {};
 
 		return {
 			...acc,
-			[sub_block_id]: (agent_scoring_parameters || []).map((parameter) => {
-				const { id, name: paramName, parameter_unit, additional_controls } = parameter || {};
+			[sub_block_id]: (agent_scoring_parameters || []).filter((item) => item.status === 'active')
+				?.map((parameter) => {
+					const { id, name: paramName, parameter_unit, additional_controls } = parameter || {};
 
-				return {
-					label : paramName,
-					value : id,
-					unit  : parameter_unit,
-					additional_controls,
-				};
-			}),
+					return {
+						label : paramName,
+						value : id,
+						unit  : parameter_unit,
+						additional_controls,
+					};
+				}),
 		};
 	}, {}), [list]);
 

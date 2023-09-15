@@ -163,7 +163,7 @@ const getAdditionalControls = ({ afterParameterOptions }) => ([
 	{
 		name        : 'after_scoring_parameter_id',
 		type        : 'select',
-		label       : 'after parameter',
+		label       : 'After parameter',
 		placeholder : 'Select',
 		value       : null,
 		options     : afterParameterOptions,

@@ -137,8 +137,6 @@ const useSubBlockCreation = (props) => {
 				? additionalControlsData[watchSubBlock][key] : paramAdditionalControls[key],
 		}), {});
 
-		console.log(updatedAdditionalControls, 'hello');
-
 		setAdditionalControls(updatedAdditionalControls);
 	}, [additionalControlsData, paramAdditionalControls, watchSubBlock]);
 
