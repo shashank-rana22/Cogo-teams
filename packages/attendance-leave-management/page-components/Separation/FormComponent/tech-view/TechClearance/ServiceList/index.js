@@ -7,22 +7,23 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const SERVICE_CHECKBOX_LIST = [
+	{ label: 'Cloud Services', value: 'Cloud_Services' },
+	{ label: 'Atlassian', value: 'Atlassian' },
+	{ label: 'Figma', value: 'Figma' },
+	{ label: 'Github', value: 'Github' },
+];
 function ServiceList({ control = {}, errors = {} }) {
 	const [show, setShow] = useState(false);
 	const [newService, setNewService] = useState('');
 	const [showModal, setShowModal] = useState(false);
 
-	const [SERVICE_CHECKBOX_LIST, setServiceCheckboxList] = useState([
-		{ label: 'Cloud Services', value: 'Cloud_Services' },
-		{ label: 'Atlassian', value: 'Atlassian' },
-		{ label: 'Figma', value: 'Figma' },
-		{ label: 'Github', value: 'Github' },
-	]);
+	const [serviceCheckboxList, setServiceCheckboxList] = useState(SERVICE_CHECKBOX_LIST);
 
 	const addNewService = () => {
 		if (newService.trim() !== '') {
 			const newServiceObject = { label: newService, value: newService };
-			setServiceCheckboxList([...SERVICE_CHECKBOX_LIST, newServiceObject]);
+			setServiceCheckboxList([...serviceCheckboxList, newServiceObject]);
 		}
 		setNewService('');
 	};
@@ -56,7 +57,7 @@ function ServiceList({ control = {}, errors = {} }) {
 				<CheckboxGroupController
 					control={control}
 					errors={errors}
-					options={SERVICE_CHECKBOX_LIST}
+					options={serviceCheckboxList}
 					className={styles.check_box_controller}
 					name="service_list"
 				/>
@@ -87,22 +88,6 @@ function ServiceList({ control = {}, errors = {} }) {
 
 					</Modal.Footer>
 				</Modal>
-				{/* <div className={styles.add_service_input_container}>
-					<input
-						type="text"
-						placeholder="Enter a new service"
-						value={newService}
-						onChange={(e) => setNewService(e.target.value)}
-					/>
-					<Button
-						className={styles.add_service_button}
-						size="md"
-						themeType="primary"
-						onClick={addNewService}
-					>
-						Add
-					</Button>
-				</div> */}
 			</div>
 		</div>
 	);

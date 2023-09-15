@@ -40,10 +40,10 @@ function CommunicationMode({ dataItems = {}, control = {}, errors = {}, loading 
 		}
 	}, [dataItems, setValue]);
 
-	// const watchMobileNumber = watch('mobile_number');
 	if (loading) {
 		return <Loader themeType="secondary" />;
 	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
@@ -100,11 +100,6 @@ function CommunicationMode({ dataItems = {}, control = {}, errors = {}, loading 
 								},
 							}}
 						/>
-						{/* {(!watchMobileNumber?.country_code || !watchMobileNumber?.number) && (
-							<div className={styles.error_msg}>
-								*This is Required
-							</div>
-						)} */}
 					</div>
 					{errors[controlItem2.name] && (
 						<div className={styles.error_msg}>
