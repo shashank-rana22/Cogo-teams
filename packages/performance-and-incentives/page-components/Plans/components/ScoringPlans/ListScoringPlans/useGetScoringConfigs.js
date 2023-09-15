@@ -12,6 +12,8 @@ const useGetScoringConfigs = () => {
 		page_limit                : 10,
 		cogo_entity_data_required : true,
 		role_data_required        : true,
+		sort_by                   : 'updated_at',
+		sort_type                 : 'desc',
 	});
 
 	const [{ data, loading }, refetch] = useAllocationRequest({
@@ -40,6 +42,7 @@ const useGetScoringConfigs = () => {
 	}, [searchQuery]);
 
 	return {
+		params,
 		setParams,
 		loading,
 		list,

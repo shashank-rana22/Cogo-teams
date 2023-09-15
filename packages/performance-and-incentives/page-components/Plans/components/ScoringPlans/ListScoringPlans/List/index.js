@@ -9,7 +9,7 @@ import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { list = [], paginationData, getNextPage, loading, refetch } = props;
+	const { list = [], paginationData, getNextPage, loading, refetch, params = {}, setParams } = props;
 
 	const [activeActionId, setActiveActionId] = useState(null);
 
@@ -18,9 +18,11 @@ function List(props) {
 	const { page, total_count, page_limit } = paginationData || {};
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({
+		params,
+		refetch,
+		setParams,
 		activeActionId,
 		setActiveActionId,
-		refetch,
 		showActivationModal,
 		setShowActivationModal,
 	});
