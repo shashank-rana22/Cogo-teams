@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const compareTime = (timeString, date) => {
+const checkTimeEqual = (timeString, date) => {
 	const [hr, mn] = timeString.split(':');
 	if (
 		Number(hr) === Number(date.getHours())
@@ -20,8 +20,8 @@ const getPayload = ({ formattedValues, prevList }) => {
 		if (!isEmpty(oldItem) && shift_id) {
 			const { start_time_local: prev_start_time_local, end_time_local: prev_end_time_local } = oldItem;
 			if (
-				!compareTime(prev_start_time_local, start_time_local)
-				|| !compareTime(prev_end_time_local, end_time_local)
+				!checkTimeEqual(prev_start_time_local, start_time_local)
+				|| !checkTimeEqual(prev_end_time_local, end_time_local)
 			) {
 				PAYLOAD.push({
 					shift_id,
@@ -38,7 +38,7 @@ const getPayload = ({ formattedValues, prevList }) => {
 	};
 };
 
-function useUpdateCogooneShift({ getListShift = () => {} }) {
+function useUpdateCogooneShift({ getListShift = () => {}, handleClose = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_bulk_cogoone_shift',
 		method : 'post',
@@ -48,6 +48,7 @@ function useUpdateCogooneShift({ getListShift = () => {} }) {
 		try {
 			await trigger(payload);
 			getListShift();
+			handleClose();
 			Toast.success('Timing updated successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

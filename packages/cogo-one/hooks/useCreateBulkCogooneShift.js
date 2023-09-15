@@ -22,7 +22,7 @@ const getPayload = ({ team_name, formattedValues }) => {
 	};
 };
 
-const useCreateBulkCogooneShift = () => {
+const useCreateBulkCogooneShift = ({ handleClose = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_bulk_cogoone_shift',
 		method : 'post',
@@ -31,6 +31,7 @@ const useCreateBulkCogooneShift = () => {
 	const createCogooneShift = (payload) => {
 		try {
 			trigger(payload);
+			handleClose();
 			Toast.success(' Shift created successfully');
 		} catch (e) {
 			console.error(e);
