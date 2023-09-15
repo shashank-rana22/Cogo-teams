@@ -4833,9 +4833,14 @@ const partner = {
 			service_name : 'air_freight_rate',
 		},
 		{
-			api          : 'generate_csv_file_url',
+			api          : 'get_fcl_freight_rate_job_csv_url',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_job_csv_url',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 		{
 			api          : 'delete_fcl_freight_rate_job',
@@ -7839,6 +7844,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8828,6 +8837,18 @@ const partner = {
 		},
 		{
 			api         : 'list_organization_users',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_history',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -12818,6 +12839,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_shipment_operating_procedures',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_operating_instruction',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_operating_procedure',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'post_allocation_feedback',
 			access_type  : 'private',
 			service_name : 'allocation',
@@ -14046,6 +14087,11 @@ const partner = {
 			api          : 'get_rolling_forecast_fcl_freight_clusters',
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 };

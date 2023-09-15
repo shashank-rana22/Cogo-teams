@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ColumnCard from './ColumnCard';
-import ribbonstyles from './ColumnCard/styles.module.css';
 import styles from './styles.module.css';
 
 interface ListItem {
@@ -26,7 +25,7 @@ interface Props {
 	source?: string;
 }
 
-function ListData({ list = [], getTableBodyCheckbox = () => {}, refetch = () => {}, source = '' }: Props) {
+function ListData({ list = [], getTableBodyCheckbox = () => { }, refetch = () => { }, source = '' }: Props) {
 	return (
 		<div className={styles.list}>
 			{(list || []).map((item) => (
@@ -37,19 +36,6 @@ function ListData({ list = [], getTableBodyCheckbox = () => {}, refetch = () => 
 						refetch={refetch}
 						source={source}
 					/>
-					{source ? null : (
-						<div className={ribbonstyles.ribbon_render}>
-							<div
-								className={
-									item?.accMode === 'AP'
-										? ribbonstyles.ribbon_red
-										: ribbonstyles.ribbon_orange
-								}
-							>
-								{item?.accMode}
-							</div>
-						</div>
-					)}
 				</div>
 			))}
 		</div>

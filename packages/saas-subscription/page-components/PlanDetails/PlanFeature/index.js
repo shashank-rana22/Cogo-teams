@@ -1,12 +1,18 @@
 import { Button, Placeholder, cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import getValues from '../../../utils/getValues';
 import itemFunctions from '../../../utils/itemFunctions';
 
 import styles from './styles.module.css';
 
+const LOADER_COUNT = 4;
+
 function PlanFeature({ title, list = [], configs, loading = false, setFeatureModal, name }) {
-	const updateList = loading ? [...Array(4).keys()] : list;
+	const { t } = useTranslation(['saasSubscription']);
+
+	const updateList = loading ? [...Array(LOADER_COUNT).keys()] : list;
+
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.flex_box} ${styles.header_container}`}>
@@ -16,7 +22,7 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 					themeType="secondary"
 					onClick={() => setFeatureModal((prev) => ({ ...prev, name, openModal: true, info: list }))}
 				>
-					Add More
+					{t('saasSubscription:pricing_add')}
 				</Button>
 			</div>
 
