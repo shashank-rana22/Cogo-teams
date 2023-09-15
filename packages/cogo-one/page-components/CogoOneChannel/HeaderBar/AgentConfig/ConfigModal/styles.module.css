@@ -9,7 +9,8 @@
 }
 
 .shift_container {
-	max-height: 350px;
+	max-height: 360px;
+	border-top: 1px solid #e0e0e0;
 }
 
 .footer_styles {
@@ -28,6 +29,7 @@
 
 .wrap_container {
 	justify-content: flex-start;
+	padding: 12px 0 20px 20px;
 	overflow-y: hidden;
 }
 

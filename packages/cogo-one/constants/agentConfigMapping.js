@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAgentManagement } from '@cogoport/icons-react';
+import { IcMAgentManagement, IcMClock } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 const AGENT_CONFIG_MAPPING = [
@@ -21,12 +21,7 @@ const AGENT_CONFIG_MAPPING = [
 	{
 		label : 'Shift Configuration',
 		name  : 'shift_configuration',
-		icon  : <Image
-			src={GLOBAL_CONSTANTS.image_url.firebase_configuration}
-			height={44}
-			width={44}
-			alt="fire-base-configuration"
-		/>,
+		icon  : <IcMClock width={40} height={40} />,
 	},
 	{
 		label : 'Agents Status',

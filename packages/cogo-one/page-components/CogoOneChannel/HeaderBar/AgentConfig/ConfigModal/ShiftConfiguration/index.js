@@ -1,6 +1,5 @@
 import { Select, Button, Loader, Toast } from '@cogoport/components';
 import { useForm, TimepickerController } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import { CONTROLS, SHIFT_CONFIGURATION_HEADING, teamsOption } from '../../../../../../constants/shiftsMapping';
@@ -24,7 +23,6 @@ const compareTime = (start_time, end_time) => {
 
 function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 	const [selectedTeam, setSelectedTeam] = useState('shipment_specialist');
-	const [submissionState, setSubmissionState] = useState({});
 	const {
 		getListShift = () => {},
 		shiftsData = {},
@@ -43,7 +41,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 	const isShipmentSpecialist = viewType === 'shipment_specialist';
 
 	const {
-		control, setValue, handleSubmit, watch,
+		control, setValue, handleSubmit, watch, formState:{ errors = {} },
 	} = useForm({});
 
 	const onSubmit = (val) => {
@@ -81,32 +79,25 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 	}, [setValue, defaultValues]);
 
 	const formValues = watch();
+	console.log('formValues:', formValues);
 
 	const validateTime = (start_time, end_time) => {
 		if (!start_time && !end_time) return true;
 		if (
 			!compareTime(start_time, end_time)
 		) {
-			Toast.error('Start Time should be less than End Time');
+			// Toast.error('Start Time should be less than End Time');
 			return false;
 		}
 		return true;
 	};
 
-	const handleChange = (val, name) => {
+	const handleValidate = (val, name) => {
 		const [phase, type] = name.split('_shift_');
-		let flag = true;
 		if (type === 'start_time') {
-			flag = validateTime(val, formValues[`${phase}_shift_end_time`]);
-		} else {
-			flag = validateTime(formValues[`${phase}_shift_start_time`], val);
+			return validateTime(val, formValues[`${phase}_shift_end_time`]);
 		}
-		setSubmissionState((prev) => ({ ...prev, [phase]: flag }));
-	};
-
-	const isSubmitAllowed = () => {
-		if (isEmpty(submissionState)) return false;
-		return Object.values(submissionState).reduce((res, itm) => res && itm, true);
+		return validateTime(formValues[`${phase}_shift_start_time`], val);
 	};
 
 	return (
@@ -151,8 +142,15 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 													control={control}
 													name={`${name}`}
 													maxDate={new Date()}
-													onChange={handleChange}
+													rules={{
+														validate: (value) => (handleValidate(value, name)
+															? true
+															: 'Start Time should be less than End Time'),
+													}}
 												/>
+												{errors && errors[name] && (
+													<div className={styles.error}>{errors[name].message}</div>
+												)}
 											</div>
 										))}
 									</div>
@@ -174,7 +172,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 					size="md"
 					themeType="primary"
 					onClick={handleSubmit(onSubmit)}
-					disabled={shiftDataLoading || !isSubmitAllowed()}
+					disabled={shiftDataLoading}
 				>
 					Submit
 				</Button>

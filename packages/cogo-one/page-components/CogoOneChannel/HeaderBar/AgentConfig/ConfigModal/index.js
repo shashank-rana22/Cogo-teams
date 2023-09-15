@@ -164,7 +164,7 @@ function ConfigModal({
 					) : (
 						<div
 							className={cl`${styles.screen_container}
-							 ${AGENT_CONFIG_MAPPING.length > THREE_CONTAINER
+							 ${configurationsToBeShown.length > THREE_CONTAINER
 								? styles.wrap_container : ''}`}
 						>
 							{AGENT_CONFIG_MAPPING.map((item) => {
