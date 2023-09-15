@@ -25,7 +25,7 @@ function ActionModal({
 		if (type === 'submit_lms_data') {
 			const { master_airway_bill_number = '', airportId = '', airlineId = '' } = data || {};
 			const payload = {
-				master_airway_bill_number,
+				masterAirwayBillNumber: master_airway_bill_number,
 				airportId,
 				airlineId,
 			};

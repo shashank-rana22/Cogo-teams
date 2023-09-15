@@ -22,5 +22,8 @@
     "input_placeholder": "ค้นหาด้วยหมายเลข AWB",
     "toggle_all": "ทั้งหมด",
     "toggle_relevant_to_me": "ที่เกี่ยวข้องกับฉัน",
-    "header_data_submission": "การส่งข้อมูลอิเล็กทรอนิกส์"
+    "header_data_submission": "การส่งข้อมูลอิเล็กทรอนิกส์",
+    "action_button_query_submitted": "ส่ง",
+    "action_button_query_submitted_status_yes": "ใช่",
+    "action_button_query_submitted_status_no": "เลขที่"
 }

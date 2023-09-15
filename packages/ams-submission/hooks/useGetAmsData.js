@@ -9,7 +9,7 @@ const INIT_PAGE = 1;
 
 const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, query = '' }) => {
 	const newDate = new Date();
-	newDate.setDate(newDate.getDate() - INIT_PAGE - INIT_PAGE - INIT_PAGE);
+	newDate.setDate(newDate.getDate() - INIT_PAGE - INIT_PAGE - INIT_PAGE - INIT_PAGE - INIT_PAGE);
 	const date = formatDate({
 		date       : newDate,
 		formatType : 'date',

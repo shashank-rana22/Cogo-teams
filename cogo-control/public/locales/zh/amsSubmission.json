@@ -22,5 +22,8 @@
     "input_placeholder": "通过运单号码搜索",
     "toggle_all": "全部",
     "toggle_relevant_to_me": "与我相关",
-    "header_data_submission": "电子数据提交"
+    "header_data_submission": "电子数据提交",
+    "action_button_query_submitted": "已提交",
+    "action_button_query_submitted_status_yes": "是的",
+    "action_button_query_submitted_status_no": "不"
 }

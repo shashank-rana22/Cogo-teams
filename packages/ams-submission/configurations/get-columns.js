@@ -6,12 +6,11 @@ import styles from '../page-components/styles.module.css';
 const handleSubmitStatusClick = ({
 	submitStatusApiTrigger = () => {},
 	item = {},
-	router = {},
 }) => {
 	const payload = {
-		master_airway_bill_number: item?.master_airway_bill_number,
+		masterAirwayBillNumber: item?.master_airway_bill_number,
 	};
-	submitStatusApiTrigger({ payload, router });
+	submitStatusApiTrigger({ payload });
 };
 
 const handleLmsDataClick = ({ setModalData = () => {}, item = {} }) => {
@@ -74,25 +73,26 @@ const getTcStatusColumns = ({
 				);
 			}
 			if (item?.amsStatus === 'completed') {
-				return <div style={{ color: 'green' }}>Submitted</div>;
+				return <div style={{ color: 'green' }}>{t('amsSubmission:action_button_query_submitted')}</div>;
 			}
 
 			return (
 				<div className={styles.submit_ams_status}>
-					Submitted?
+					{t('amsSubmission:action_button_query_submitted')}
+					?
 					<Button
 						themeType="secondary"
 						onClick={() => handleSubmitStatusClick({ submitStatusApiTrigger, item })}
 						disabled={submitStatusLoading}
 					>
-						Yes
+						{t('amsSubmission:action_button_query_submitted_status_yes')}
 
 					</Button>
 					<Button
 						themeType="secondary"
 						disabled={submitStatusLoading}
 					>
-						No
+						{t('amsSubmission:action_button_query_submitted_status_no')}
 
 					</Button>
 				</div>

@@ -22,5 +22,8 @@
     "input_placeholder": "Pencarian melalui Nomor AWB",
     "toggle_all": "Semua",
     "toggle_relevant_to_me": "Relevan bagi saya",
-    "header_data_submission": "Penyampaian Data Elektronik"
+    "header_data_submission": "Penyampaian Data Elektronik",
+    "action_button_query_submitted": "Dikirim",
+    "action_button_query_submitted_status_yes": "Ya",
+    "action_button_query_submitted_status_no": "TIDAK"
 }

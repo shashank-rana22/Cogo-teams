@@ -22,5 +22,8 @@
     "input_placeholder": "Tìm kiếm qua số AWB",
     "toggle_all": "Tất cả",
     "toggle_relevant_to_me": "Có liên quan đến tôi",
-    "header_data_submission": "Gửi dữ liệu điện tử"
+    "header_data_submission": "Gửi dữ liệu điện tử",
+    "action_button_query_submitted": "Đã gửi",
+    "action_button_query_submitted_status_yes": "Đúng",
+    "action_button_query_submitted_status_no": "KHÔNG"
 }

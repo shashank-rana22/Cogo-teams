@@ -22,5 +22,8 @@
     "input_placeholder": "Search via AWB Number",
     "toggle_all": "All",
     "toggle_relevant_to_me": "Relevant to me",
-    "header_data_submission": "Electronic Data Submission"
+    "header_data_submission": "Electronic Data Submission",
+    "action_button_query_submitted": "Submitted",
+    "action_button_query_submitted_status_yes": "Yes",
+    "action_button_query_submitted_status_no": "No"
 }

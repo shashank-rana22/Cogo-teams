@@ -1,9 +1,10 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
-// import { useRouter } from '@cogoport/next';
+import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
+import { useRouter } from 'next/router';
 
 const useGetServiceOpsList = () => {
-	// const router = useRouter();
+	const router = useRouter();
 	const [{ data = {}, loading }, trigger] = useRequestAir({
 		url     : '/air-coe/service-ops/list',
 		method  : 'GET',
@@ -16,7 +17,12 @@ const useGetServiceOpsList = () => {
 				params: payload,
 			});
 			setModalData({});
-			// router.push(data?.);
+
+			if (data?.lmsUrl) {
+				router.push(data?.lmsUrl, data?.lmsUrl);
+			} else {
+				Toast.error('Something went wrong');
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
