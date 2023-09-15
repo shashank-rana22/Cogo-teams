@@ -1,0 +1,41 @@
+.list_header_container {
+	display: flex;
+	padding: 0 12px;
+}
+
+.list_body_container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.list_row {
+	display: flex;
+	padding: 12px;
+	background-color: #fff;
+	border: 1px solid #f2f2f2;
+	border-radius: 4px;
+}
+
+.list_column {
+	>p {
+		margin-bottom: 0;
+	}
+
+	display: flex;
+	align-items: center;
+}
+
+.top_heading {
+	color: #828282;
+}
+
+.rank {
+	margin-left: 4px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.name {
+	font-size: 18px;
+}
