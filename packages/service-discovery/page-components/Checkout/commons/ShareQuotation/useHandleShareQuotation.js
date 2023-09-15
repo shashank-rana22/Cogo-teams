@@ -18,6 +18,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 	const [selectedModes, setSelectedModes] = useState(['email']);
 	const [show, setShow] = useState(false);
 	const [confirmation, setConfirmation] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 
 	const quotationOptions = [
 		{
@@ -52,6 +53,8 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 	};
 
 	const handleClick = () => {
+		setShowPopover(false);
+
 		if (detail?.primary_service === 'fcl_freight') {
 			setConfirmation(true);
 			return;
@@ -86,16 +89,21 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			style           : {},
 			onClickFunction : handleClick,
 			loading         : false,
+			size            : 'md',
 			disabled        : noRatesPresent,
 		},
 		{
 			key             : 'share_quotation',
 			label           : 'Share Quotation',
-			themeType       : 'primary',
-			onClickFunction : () => setShowShareQuotationModal(true),
-			style           : { marginLeft: '20px' },
-			disabled        : isEmpty(selectedModes) || noRatesPresent,
-			loading         : false,
+			themeType       : 'accent',
+			onClickFunction : () => {
+				setShowShareQuotationModal(true);
+				setShowPopover(false);
+			},
+			style    : { marginLeft: '20px' },
+			size     : 'md',
+			disabled : isEmpty(selectedModes) || noRatesPresent,
+			loading  : false,
 		},
 	];
 
@@ -115,6 +123,8 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		confirmation,
 		setConfirmation,
 		handleCopyQuoteLink,
+		showPopover,
+		setShowPopover,
 	};
 };
 

@@ -2,6 +2,7 @@
     "header_tabs_approved_awb": "ที่ได้รับการอนุมัติ AWB",
     "header_tabs_handed_over": "ส่งมอบ",
     "header_tabs_final_awb": "สุดท้าย AWB",
+    "header_tabs_completed_awb": "เสร็จสิ้นรอบชิงชนะเลิศ AWB",
     "header_printing_desk": "โต๊ะพิมพ์",
     "header_search_placeholder": "ค้นหาตามหมายเลข SID หรือ AWB",
     "header_toggle_onlabel": "เกี่ยวข้องกับฉัน",
@@ -117,5 +118,10 @@
     "awb_controls_package_count_required": "จำเป็นต้องมีจำนวนแพ็คเกจ",
     "awb_controls_cannot_be_negative_validation": "ไม่สามารถลบได้",
     "awb_controls_should_be_greater_than_0_validation": "ควรมากกว่า 0",
-    "utils_get_select_all_checkbox_label": "เลือกทั้งหมด"
+    "utils_get_select_all_checkbox_label": "เลือกทั้งหมด",
+    "completed_awb_fields_sid_label": "SID",
+    "completed_awb_fields_awb_label": "AWB",
+    "completed_awb_fields_awb_category_label": "AWB หมวดหมู่",
+    "completed_awb_fields_uploaded_by_label": "อัปโหลดโดย",
+    "completed_awb_fields_uploaded_at_label": "อัปโหลดที่"
 }

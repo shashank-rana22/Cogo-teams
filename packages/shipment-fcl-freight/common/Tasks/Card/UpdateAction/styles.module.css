@@ -17,14 +17,11 @@
 }
 
 .task_action {
-	font-size: var(--font-size-sm);
-	line-height: 16px;
-	color: var(--color-secondary-greyscale-3);
-	text-align: center;
-	cursor: pointer;
-
-	&:hover {
-		color: var(--color-primary-error-red-2);
+	:global {
+		.ui_button_container {
+			font-size: var(--font-size-sm);
+			color: var(--color-secondary-greyscale-3);
+		}
 	}
 }
 

@@ -25,7 +25,7 @@ import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
-function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
+function ConsigneeShipperBookingAgent({ get = {} }) {
 	const [activeTab, setActiveTab] = useState('overview');
 	const {
 		shipment_data = {}, isGettingShipment = false, getShipmentStatusCode = '',
@@ -37,17 +37,17 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 	);
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: SERVICE_ADDITIONAL_METHODS,
-		activeStakeholder,
+		additional_methods : SERVICE_ADDITIONAL_METHODS,
+		activeStakeholder  : 'consignee_shipper_booking_agent',
 	});
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder,
+		activeStakeholder: 'consignee_shipper_booking_agent',
 		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, activeStakeholder]);
+	}), [get, servicesGet, getTimeline]);
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
@@ -60,9 +60,14 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<div className={styles.job_closed_container}>
+							<Pill className={styles.job_closed_pill} size="lg">
+								{shipment_data?.is_job_closed_financially
+									? 'Financially Closed' : 'Operationally Closed'}
+							</Pill>
+						</div>
+					)}
 
 					<ShipmentChat />
 				</div>

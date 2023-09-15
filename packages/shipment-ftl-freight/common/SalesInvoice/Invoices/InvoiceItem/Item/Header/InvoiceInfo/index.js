@@ -203,6 +203,7 @@ function InvoiceInfo({
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
+							disabled={shipment_data?.is_job_closed}
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
@@ -213,6 +214,7 @@ function InvoiceInfo({
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
+						disabled={shipment_data?.is_job_closed}
 						onClick={() => setAskNullify(true)}
 					>
 						Request CN
@@ -223,6 +225,7 @@ function InvoiceInfo({
 					<Button
 						size="sm"
 						onClick={() => setShowOTPModal(true)}
+						disabled={shipment_data?.is_job_closed_financially}
 					>
 						Send OTP for Approval
 					</Button>
@@ -233,7 +236,8 @@ function InvoiceInfo({
 						size="sm"
 						onClick={() => setShowReview(true)}
 						themeType="accent"
-						disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+						disabled={disableMarkAsReviewed
+							|| invoice?.is_eta_etd || shipment_data?.is_job_closed_financially}
 					>
 						Mark as Reviewed
 					</Button>

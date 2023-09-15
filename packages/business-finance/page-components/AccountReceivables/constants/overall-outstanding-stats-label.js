@@ -6,10 +6,7 @@ const OVERALL_OUTSTANDING_STATS_LABEL = [
 		label: '0-30 DAYS',
 	},
 	{
-		label: '31-45 DAYS',
-	},
-	{
-		label: '46-60 DAYS',
+		label: '31-60 DAYS',
 	},
 	{
 		label: '61-90 DAYS',
@@ -18,7 +15,10 @@ const OVERALL_OUTSTANDING_STATS_LABEL = [
 		label: '91-180 DAYS',
 	},
 	{
-		label: '180+ DAYS',
+		label: '181-365 DAYS',
+	},
+	{
+		label: '365+ DAYS',
 	},
 ];
 
