@@ -187,7 +187,7 @@ function InvoiceInfo({
 					)
 					: null}
 
-				{(!invoice.is_revoked && status !== 'finance_rejected' && !isProcessing) ? (
+				{(!is_revoked && status !== 'finance_rejected' && !isProcessing) ? (
 					<Actions
 						invoice={invoice}
 						bfInvoiceRefetch={bfInvoiceRefetch}
