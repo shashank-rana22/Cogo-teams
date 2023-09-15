@@ -33,6 +33,15 @@ const TextAreaController = dynamic(
 	{ ssr: false },
 );
 
+const CountrySelectController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.CountrySelectController),
+	{ ssr: false },
+);
+const InputNumberController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.InputNumberController),
+	{ ssr: false },
+);
+
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
 
@@ -45,6 +54,10 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
 
 	if (type === 'textarea') return <TextAreaController {...rest} />;
+
+	if (type === 'country_select') return <CountrySelectController {...rest} />;
+
+	if (type === 'number') return <InputNumberController {...rest} />;
 
 	return <InputController {...rest} type={type} />;
 }

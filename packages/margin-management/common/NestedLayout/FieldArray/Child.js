@@ -44,12 +44,6 @@ function Child({
 							const flex = getWidthPercent(span || TOTAL_SPAN);
 							const element_name = `${name}.${index}.${ctrlItemName}`;
 
-							console.log(
-								Object.keys(showElements || {}).includes(element_name),
-								{ element_name },
-								Object.keys(showElements || {}),
-							);
-
 							if (Object.keys(showElements || {}).includes(element_name)
 							&& !showElements[element_name]) return null;
 

@@ -1,9 +1,10 @@
 import { Button, FunnelStepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { Link } from '@cogoport/next';
+import { Link, useRouter } from '@cogoport/next';
 // import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Layout from '../../common/Layout';
@@ -19,43 +20,9 @@ import getLclFreightControls from './extraControls/getLclFreightControls';
 import getLtlFreight from './extraControls/getLtlFreight';
 import getControls from './getControls';
 import Margin from './Margin';
-import { marginControls } from './marginControls';
+import getMarginControls from './marginControls';
 import styles from './styles.module.css';
 // import getShowElements from '../../helpers/getShowElements';
-
-// import useCreateMargin from '../../hooks/useCreateMargin';
-// import useListRateChargeCodes from '../../hooks/useListRateChargeCodes';
-
-// import { useSelector } from '@cogoport/store';
-// import getChargeCodes from '../../helpers/getChargeCodes';
-// import getAllTheControls from '../../helpers/getControls';
-
-// const values = {
-// 	partner_id        : '515c974d-5363-4c92-9088-ca725cecc740',
-// 	margin_type       : 'demand',
-// 	rate_type         : 'marketplace_rate',
-// 	service           : 'fcl_freight',
-// 	organization_type : '',
-// 	organization_id   : 'e18306f5-c2da-4587-9357-90cd5dc03ec4',
-// 	margin_slabs      : [
-// 		{
-// 			lower_limit    : 0,
-// 			upper_limit    : '1',
-// 			limit_currency : 'INR',
-// 		},
-// 	],
-// 	trade_type    : 'import',
-// 	margin_values : [
-// 		[
-// 			{
-// 				code     : 'BAS',
-// 				type     : 'percentage',
-// 				value    : '100',
-// 				currency : 'INR',
-// 			},
-// 		],
-// 	],
-// };
 // const agent_view = ['margin', 'across_all'];
 const ZERO = 0;
 const items = [
@@ -68,14 +35,15 @@ function Create({ type = 'create', item = {} }) {
 		agent_id: profile?.user?.id,
 
 	}));
+	const router = useRouter();
 	// const { isConditionMatches } = useGetPermission();
-	const [activeKey, setActiveKey] = useState('customize');
-	const [idValues, setIdValues] = useState({});
+	const [activeKey, setActiveKey] = useState(isEmpty(item) ? 'customize' : 'add');
+	const [idValues, setIdValues] = useState({ margin_slabs: [], ...item });
 	const { onSubmit: submitForm } = useCreateMargin();
 
-	useEffect(() => {
-		setIdValues(item);
-	}, [item]);
+	// useEffect(() => {
+	// 	setIdValues(item);
+	// }, [item]);
 	const {
 		control,
 		watch,
@@ -89,7 +57,7 @@ function Create({ type = 'create', item = {} }) {
 		partnerId  : formValues?.partner_id,
 		item,
 	});
-
+	const marginControls = getMarginControls({ service: formValues?.service });
 	// if (
 	// 	isConditionMatches(conditions.SEE_ALL_MARGINS, 'or')
 	// 	|| formValues?.addition_type === 'channel_partner'
@@ -119,7 +87,19 @@ function Create({ type = 'create', item = {} }) {
 	// 	isConditionMatches,
 	// 	agent_view,
 	// });
-	const handleFormSubmit = async (values) => {
+	const handleFormSubmit = async (value) => {
+		const MV = [];
+		const { margin_slabs, ...rest } = value;
+		const ms = margin_slabs.map((it) => {
+			const { lower_limit, upper_limit, limit_currency, margin_values } = it;
+			const new_margin_values = margin_values.map((val) => {
+				const { code, currency, min_value, max_value } = val;
+				return { code, type: val.type, value: val.value, currency, min_value, max_value };
+			});
+			MV.push(new_margin_values);
+			return { lower_limit, upper_limit, limit_currency };
+		});
+		const values = { margin_slabs: ms, ...rest, margin_values: MV };
 		const [slabs_currency] = values.margin_slabs || [];
 		const { limit_currency } = slabs_currency || {};
 
@@ -160,6 +140,7 @@ function Create({ type = 'create', item = {} }) {
 				};
 				const actualPayload = type === 'edit' ? editPayload : PAYLOAD;
 				await submitForm({ data: actualPayload });
+				router.push('/margins');
 			} catch (err) {
 				toastApiError(err);
 			}
@@ -201,38 +182,39 @@ function Create({ type = 'create', item = {} }) {
 					items={items}
 				/>
 				{
-					activeKey === 'customize' ? (
+				activeKey === 'customize' ? (
+					<div>
+						<Layout controls={controls} control={control} fields={fields} />
+						<Button
+							onClick={handleSubmit(handleFormSubmit)}
+						>
+							Save and proceed
+						</Button>
+					</div>
+				)
+					: (
 						<div>
-							<Layout controls={controls} control={control} fields={fields} />
+							<Margin
+								idValues={idValues}
+								type={type}
+								service={formValues?.service}
+								marginControls={marginControls}
+								control={control}
+								data={item}
+								watch={watch}
+							/>
 							<Button
 								onClick={handleSubmit(handleFormSubmit)}
 							>
-								Save and proceed
+								{type === 'edit' ? 'update margin' : 'create margin'}
 							</Button>
 						</div>
 					)
-						: (
-							<div>
-								<Margin
-									formValues={formValues}
-									idValues={idValues}
-									type={type}
-									service={formValues?.service}
-									marginControls={marginControls}
-									control={control}
-									data={item}
-								/>
-								<Button
-									onClick={handleSubmit(handleFormSubmit)}
-								>
-									{type === 'edit' ? 'update margin' : 'create margin'}
-								</Button>
-							</div>
-						)
-				}
+			}
 			</div>
 
 		</div>
 	);
 }
+
 export default Create;

@@ -6,7 +6,7 @@ import NestedLayout from '../../../common/NestedLayout';
 import styles from './styles.module.css';
 
 function Margin({
-	formValues = {},
+	watch = () => {},
 	idValues = {},
 	type = '',
 	data = {},
@@ -14,6 +14,7 @@ function Margin({
 	marginControls = [],
 	control = {},
 }) {
+	const formValues = watch();
 	const marginType = (margin_type) => {
 		if (margin_type === 'demand') {
 			return 'sales';
