@@ -203,10 +203,6 @@
 .invoice_container {
 	width: 26%;
 
-	/* display: flex;
-	align-items: center;
-	justify-content: center; */
-
 	@media (max-width: 768px) {
 		display: none;
 	}
@@ -279,10 +275,6 @@
 
 .status_container_outer {
 	display: flex;
-
-	/* justify-content: space-between; */
 	align-items: center;
 	width: 26%;
-
-	/* background-color: #393f70; */
 }

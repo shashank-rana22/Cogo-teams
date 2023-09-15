@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, upperCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
@@ -36,16 +36,6 @@ function Header({
 	};
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
-
-	// where is it being used
-	let invoiceStatus = invoicesList?.filter(
-		(item) => item?.invoiceNumber === invoice?.live_invoice_number
-			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
-
-	if (invoiceStatus === 'POSTED') {
-		invoiceStatus = 'IRN GENERATED';
-	}
 
 	return (
 		<div className={styles.container}>
