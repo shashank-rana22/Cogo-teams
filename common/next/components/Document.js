@@ -6,6 +6,8 @@ import Document, {
 import GTM from './GtmHandler';
 
 function CogoDocument({ locale = '' }) {
+	const htmlLanguage = locale === 'default' ? 'en' : locale;
+
 	const selectedFont = getLanguageSpecifications({ locale, accessor: 'link' });
 	const fontFamily = getLanguageSpecifications({ locale, accessor: 'font_family' });
 
@@ -22,7 +24,7 @@ function CogoDocument({ locale = '' }) {
 	// `;
 
 	return (
-		<Html>
+		<Html lang={htmlLanguage}>
 			<Head>
 				{process.env.NEXT_PUBLIC_GTM_ID && <GTM gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
