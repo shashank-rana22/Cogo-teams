@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
+import { CUSTOM_TASKS } from '../../../constants/custom-tasks';
 import useGetOrganization from '../../../hooks/useGetOrganization';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import useListShipmentTradePartners from '../../../hooks/useListShipmentTradePartners';
@@ -16,27 +17,12 @@ import {
 import CargoInsurance from './CustomTasks/CargoInsurance';
 import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
-import getTaskComponent from './get-task-component';
+import getCustomTaskComponent from './getCustomTaskComponent';
 import useTaskExecution from './helpers/useTaskExecution';
 
 const EXCLUDED_SERVICES = [
 	'fcl_freight_service',
 	'haulage_freight_service',
-];
-
-const MAPPED_TASKS = [
-	'update_container_details',
-	'upload_container_arrival_notice',
-	'amend_draft_house_bill_of_lading',
-	'choose_service_provider',
-	'verify_shipper_details',
-	'update_nomination_details',
-	'generate_freight_certificate',
-	'generate_cargo_insurance',
-	'upload_compliance_documents',
-	'upload_booking_note',
-	'add_consignee_details',
-	'add_shipper_details',
 ];
 
 const INCLUDED_ORG = ['nvocc', 'freight_forwarder'];
@@ -89,8 +75,8 @@ function ExecuteTask({
 		);
 	}
 
-	if (MAPPED_TASKS.includes(task?.task)) {
-		const { propsMapping = {}, COMPONENT_MAPPING = {} } = getTaskComponent({
+	if (CUSTOM_TASKS.includes(task?.task)) {
+		const { propsMapping = {}, COMPONENT_MAPPING = {} } = getCustomTaskComponent({
 			task,
 			shipment_data,
 			servicesList,

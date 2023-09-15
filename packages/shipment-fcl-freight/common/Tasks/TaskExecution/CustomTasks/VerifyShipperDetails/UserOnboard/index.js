@@ -70,6 +70,7 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 					value={country_id}
 					rules={{ required: 'Country of Registration is required' }}
 				/>
+
 				{Error('country_id', errors)}
 			</div>
 
@@ -93,6 +94,7 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 						},
 					}}
 				/>
+
 				{Error('registration_number', errors)}
 			</div>
 

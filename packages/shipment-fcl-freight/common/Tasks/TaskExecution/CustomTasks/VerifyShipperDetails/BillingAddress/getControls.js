@@ -35,7 +35,7 @@ function getControls({ countryValidation = {}, setCountryId = () => {} }) {
 				required : `${countryValidation?.others?.registration_number?.label || 'GST'} is required`,
 				pattern  : {
 					value   : countryValidation?.others?.registration_number?.pattern,
-					message : 'Tax Number is Invalid',
+					message : `${countryValidation?.others?.registration_number?.label || 'GST'} is invalid`,
 				},
 			},
 		},

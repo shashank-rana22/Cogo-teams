@@ -18,7 +18,7 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 	const [submitUserId, setSubmitUserId] = useState(null);
 	const [showCreatePoc, setShowCreatePoc] = useState(false);
 
-	const { control, handleSubmit, reset, formState:{ errors } } = useForm();
+	const { control, handleSubmit = () => {}, reset = () => {}, formState:{ errors = {} } } = useForm();
 
 	const {
 		loading = false,

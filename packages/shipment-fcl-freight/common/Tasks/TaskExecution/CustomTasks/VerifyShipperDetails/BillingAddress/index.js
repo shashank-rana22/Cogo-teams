@@ -32,7 +32,7 @@ function Error(key, errors) {
 }
 
 function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = '', onCancel = () => {} }) {
-	const { control, reset, formState:{ errors = {} }, handleSubmit } = useForm();
+	const { control, reset = () => {}, formState:{ errors = {} }, handleSubmit = () => {} } = useForm();
 
 	const { loading = false } = useListOrganizationUsers({ consigneeShipperId, reset });
 
