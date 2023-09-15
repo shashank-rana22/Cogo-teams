@@ -13,7 +13,13 @@ import CreatePoc from './CreatePoc';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 
-function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId = () => {}, onCancel = () => {} }) {
+function CustomerContacts({
+	shipment_data = {},
+	setStep = () => {},
+	task = {},
+	onCancel = () => { },
+	setConsigneeId = () => {},
+}) {
 	const [selectedUserId, setSelectedUserId] = useState(null);
 	const [submitUserId, setSubmitUserId] = useState(null);
 	const [showCreatePoc, setShowCreatePoc] = useState(false);
@@ -30,7 +36,13 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 	const {
 		createLeadOrgAccount = () => {},
 		createLoading = false,
-	} = useCreateLeadOrganizationToAccount({ leadsData, setStep, setConsigneeShipperId, task });
+	} = useCreateLeadOrganizationToAccount({
+		leadsData,
+		setStep,
+		task,
+		shipment_data,
+		setConsigneeId,
+	});
 
 	const {
 		onUpdateLeadUser = () => {},

@@ -1,5 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import BillingAddress from './BillingAddress';
 import CustomerContacts from './CustomerContacts';
@@ -11,19 +12,20 @@ const COMPONENT_MAPPING = {
 
 function VerifyShipperDetails({
 	task = {},
-	shipment_data = {},
 	onCancel = () => {},
 	refetch = () => {},
 }) {
+	const { shipment_data = {}, refetchServices = () => {} } = useContext(ShipmentDetailContext);
+
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
-	const [consigneeShipperId, setConsigneeShipperId] = useState(shipment_data?.consignee_shipper_id);
+	const [consigneeId, setConsigneeId] = useState(shipment_data?.consignee_shipper_id);
 
 	const componentProps = {
 		0: {
-			setStep, task, setConsigneeShipperId, onCancel,
+			setStep, task, onCancel, shipment_data, setConsigneeId,
 		},
 		1: {
-			task, refetch, consigneeShipperId, onCancel,
+			task, refetch, onCancel, refetchServices, shipment_data, consigneeId,
 		},
 	};
 

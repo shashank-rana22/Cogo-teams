@@ -15,10 +15,11 @@ const getFormattedPayload = ({ leadsData = {}, selectedPocId = '' }) => {
 };
 
 function useCreateLeadOrganizationToAccount({
+	shipment_data = {},
 	setStep = () => {},
-	setConsigneeShipperId = () => {},
 	leadsData = {},
 	task = {},
+	setConsigneeId = () => {},
 }) {
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ successMessage: 'Updated Successfully' });
 
@@ -33,18 +34,25 @@ function useCreateLeadOrganizationToAccount({
 
 			const res = await trigger({ data: payload });
 
-			if (res?.data) {
-				setConsigneeShipperId(res?.data?.organization_id);
-			}
-
 			const updatePendingTaskPayload = {
-				id     : task?.id,
-				tags   : [ONE],
-				status : 'pending',
+				id          : task?.id,
+				tags        : [ONE],
+				status      : 'pending',
+				update_data : {
+					shipment: {
+						id                   : shipment_data?.id,
+						consignee_shipper_id : res?.data?.organization_id,
+					},
+					pending_task: {
+						id              : task?.id,
+						organization_id : res?.data?.organization_id,
+					},
+				},
 			};
 
 			await apiTrigger({ ...updatePendingTaskPayload });
 
+			setConsigneeId(res?.data?.organization_id);
 			setStep(ONE);
 		} catch (error) {
 			toastApiError(error);

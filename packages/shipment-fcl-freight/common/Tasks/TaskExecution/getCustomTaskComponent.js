@@ -97,7 +97,6 @@ const getCustomTaskComponent = ({
 			task,
 			onCancel,
 			refetch: taskListRefetch,
-			shipment_data,
 		},
 		[UPDATE_NOMINATION_DETAILS]: {
 			primaryService : primary_service,

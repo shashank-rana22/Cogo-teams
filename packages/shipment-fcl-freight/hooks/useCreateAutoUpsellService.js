@@ -8,7 +8,8 @@ import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
 function useCreateAutoUpsellService({
 	task = {}, refetch = () => {}, onCancel = () => {},
-	refetchServices = () => {},
+	refetchServices = () => {}, shipment_data = {},
+	consigneeId = '',
 }) {
 	const [countryId, setCountryId] = useState('');
 
@@ -29,7 +30,15 @@ function useCreateAutoUpsellService({
 		try {
 			await trigger({ data: payload });
 
-			await apiTrigger({ id: task?.id });
+			await apiTrigger({
+				id          : task?.id,
+				update_data : {
+					pending_task: {
+						id              : task?.id,
+						organization_id : shipment_data?.consignee_shipper_id || consigneeId,
+					},
+				},
+			});
 		} catch (error) {
 			toastApiError(error);
 		}
