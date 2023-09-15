@@ -6,10 +6,11 @@ import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 const INIT_PAGE = 1;
+const PREV_DATE = 10;
 
 const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, query = '' }) => {
 	const newDate = new Date();
-	newDate.setDate(newDate.getDate() - INIT_PAGE - INIT_PAGE - INIT_PAGE - INIT_PAGE - INIT_PAGE);
+	newDate.setDate(newDate.getDate() - PREV_DATE);
 	const date = formatDate({
 		date       : newDate,
 		formatType : 'date',
@@ -20,8 +21,7 @@ const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, que
 	return {
 		cargoHandedOverAtOriginAt : date,
 		originAirportId           : null,
-		tcDataRequired            : activeTab === 'tc_status_check',
-		tdDataRequired            : true,
+		state                     : activeTab === 'tc_status_check' ? 'TC' : 'TD',
 		page                      : pagination,
 		pageSize                  : 10,
 		...searchQuery,
