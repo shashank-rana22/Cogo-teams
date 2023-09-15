@@ -1,4 +1,5 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Toggle } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -29,6 +30,12 @@ function SelectFilters({
 	selectedIds = [],
 	setSelectedIds = () => {},
 }) {
+	const { query } = useRouter();
+
+	const handleVersionChange = () => {
+		window.location.href = `/${query.partner_id}/business-finance/account-payables/payruns`;
+	};
+
 	return (
 		<div className={styles.sub_container}>
 			<div className={styles.filter_container}>
@@ -56,6 +63,14 @@ function SelectFilters({
 						: null}
 				</div>
 				<div className={styles.filter}>
+					<Toggle
+						name="toggle"
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
+
 					<SearchFilter
 						globalFilters={globalFilters}
 						setGlobalFilters={setGlobalFilters}
