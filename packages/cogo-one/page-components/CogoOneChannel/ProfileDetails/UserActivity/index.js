@@ -3,12 +3,13 @@ import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogopo
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { USER_ACTIVITY_MAPPING } from '../../../../constants';
+import { FIREBASE_TABS, USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 
 import ActiveComponent from './ActiveComponent';
+import CommunicationTabs from './CommunicationTabs';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
 import ShipmentLoadingState from './ShipmentActivities/LoadingState';
@@ -31,6 +32,7 @@ function UserActivities(props) {
 		setRaiseTicketModal = () => {},
 		viewType = '',
 		setActiveTab = () => {},
+		mailProps = {},
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -45,8 +47,8 @@ function UserActivities(props) {
 	} = formattedMessageData || {};
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
-	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
-	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
+	const user_id = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceCallUserId;
+	const lead_user_id = FIREBASE_TABS.includes(activeTab) ? messageLeadUserId : null;
 
 	const {
 		loading = false,
@@ -78,7 +80,6 @@ function UserActivities(props) {
 		type: 'activity',
 		pagination,
 		setPagination,
-
 	});
 
 	const {
@@ -192,19 +193,8 @@ function UserActivities(props) {
 				</Tabs>
 			</div>
 
-			{(activeTab === 'message' && activityTab === 'communication') && (
-				<div className={styles.communication_options}>
-					<Tabs
-						activeTab={activeSubTab}
-						themeType="secondary"
-						onChange={setActiveSubTab}
-						fullWidth={false}
-					>
-						<TabPanel name="channels" title="Channels" />
-						<TabPanel name="agent" title="Agents" />
-						<TabPanel name="summary" title="Summary" />
-					</Tabs>
-				</div>
+			{(FIREBASE_TABS.includes(activeTab) && activityTab === 'communication') && (
+				<CommunicationTabs activeSubTab={activeSubTab} setActiveSubTab={setActiveSubTab} />
 			)}
 
 			{activeSubTab !== 'agent' && (
@@ -259,6 +249,7 @@ function UserActivities(props) {
 					viewType={viewType}
 					fetchActivityLogs={fetchActivityLogs}
 					setActiveTab={setActiveTab}
+					mailProps={mailProps}
 				/>
 			)}
 

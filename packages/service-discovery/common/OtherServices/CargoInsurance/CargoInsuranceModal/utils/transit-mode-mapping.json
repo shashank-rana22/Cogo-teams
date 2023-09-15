@@ -1,0 +1,7 @@
+{
+    "fcl_freight":"SEA",
+    "lcl_freight":"SEA",
+    "air_freight":"AIR",
+    "ftl_freight":"ROAD",
+    "ltl_freight":"ROAD"
+}

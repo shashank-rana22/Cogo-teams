@@ -12,15 +12,16 @@
 		align-items: flex-start;
 		justify-content: center;
 	}
+}
 
-	:global {
-		.ui_button_container {
-			min-width: 140px;
-		}
-	}
+.view_button_container {
+	width: 12%;
+	margin-right: 16px;
 }
 
 .view_button {
-	margin-right: 20px;
+	width: 100%;
+	font-size: var(--font-size-md);
 	font-weight: 600;
+	border-radius: 4px;
 }

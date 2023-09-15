@@ -1,6 +1,7 @@
 import { Tooltip, Textarea, Modal, Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import usePostExpense from '../../apisModal/usePostExpense';
@@ -12,7 +13,7 @@ import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 import mappingNonRecurring from '../../utils/mappingNonRecurring';
 import { toTitleCase } from '../../utils/titleCase';
 
-import { OVER_HEAD_CONFIGS } from './overheadsConfig';
+import { getOverHeadConfigs } from './overheadsConfig';
 import styles from './style.module.css';
 
 const DEFAULT_MAX_LENGTH = 40;
@@ -23,8 +24,8 @@ function NonRecuringModal({
 	row = {},
 	isEditable = true,
 }: any) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
-
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, level3, level2, level1 } = row || {};
 	const {
@@ -44,6 +45,7 @@ function NonRecuringModal({
 		setShowModal,
 		id,
 		remark: remarks,
+		t,
 	});
 
 	const { businessName } = organization || {};
@@ -64,7 +66,7 @@ function NonRecuringModal({
 				onClose={() => setShowModal(false)}
 			>
 				<Modal.Header
-					title={`Expense Approval - ${toTitleCase(
+					title={`${t('incidentManagement:expense_approval')} -  ${toTitleCase(
 						businessName,
 					)} (${toTitleCase(startCase(expenseType))}) ${referenceId}`}
 				/>
@@ -90,7 +92,7 @@ function NonRecuringModal({
 					</div>
 
 					<div className={styles.document_flex}>
-						<div className={styles.document}>Remarks -</div>
+						<div className={styles.document}>{`${t('incidentManagement:remarks')} -`}</div>
 						{remarkData?.length > DEFAULT_MAX_LENGTH ? (
 							<Tooltip
 								className={styles.tooltip}
@@ -107,7 +109,7 @@ function NonRecuringModal({
 					</div>
 
 					<div className={styles.document_flex}>
-						<div className={styles.document}>Document -</div>
+						<div className={styles.document}>{`${t('incidentManagement:doc')} -`}</div>
 						{(documents || []).map((url: any) => (url !== '' ? (
 							<a
 								href={url}
@@ -117,7 +119,7 @@ function NonRecuringModal({
 							>
 								<div className={styles.view_flex}>
 									<div className={styles.view}>
-										View Document
+										{t('incidentManagement:view_doc_link')}
 									</div>
 									<div>
 										<IcMEyeopen />
@@ -125,30 +127,33 @@ function NonRecuringModal({
 								</div>
 							</a>
 						) : (
-							<div key={url}> No document available</div>
+							<div key={url}>
+								{' '}
+								{t('incidentManagement:no_doc_available')}
+							</div>
 						)))}
 					</div>
 					{!isEmpty(lineItems) ? (
 						<div className={styles.list_container}>
 							<StyledTable
-								columns={OVER_HEAD_CONFIGS}
+								columns={getOverHeadConfigs({ t })}
 								showPagination={false}
 								data={lineItems}
 							/>
 						</div>
 					) : (
 						<div className={styles.line_item_empty}>
-							No LineItems Available
+							{t('incidentManagement:no_line_items_available')}
 						</div>
 					)}
 					{isEditable && (
 						<>
-							<div className={styles.remarks}>Remarks*</div>
+							<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 
 							<Textarea
 								name="remark"
 								size="md"
-								placeholder="Enter Remark Here..."
+								placeholder={t('incidentManagement:remarks_placeholder')}
 								onChange={(value: string) => setRemarks(value)}
 								style={{
 									width        : '700',
@@ -173,7 +178,7 @@ function NonRecuringModal({
 									onAction('REJECTED');
 								}}
 							>
-								Reject
+								{t('incidentManagement:reject_btn')}
 							</Button>
 
 							<Button
@@ -185,7 +190,7 @@ function NonRecuringModal({
 									onAction('APPROVED');
 								}}
 							>
-								Approve
+								{t('incidentManagement:approve_btn')}
 							</Button>
 						</div>
 					</Modal.Footer>

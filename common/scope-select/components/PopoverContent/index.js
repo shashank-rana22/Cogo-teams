@@ -1,12 +1,13 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
 export default function PopoverContent({
-	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent,
+	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent, userId,
 }) {
 	const { scopes, viewTypes } = scopeData;
 	const defaultValues = {
@@ -35,14 +36,14 @@ export default function PopoverContent({
 	};
 
 	useEffect(() => {
-		setValue('viewType', (viewTypes[selectedScope] || [])[0]);
+		setValue('viewType', (viewType || (viewTypes?.[selectedScope] || [])[GLOBAL_CONSTANTS.zeroth_index]));
 		if (selectedScope === 'self') {
 			setValue('selected_agent_id', '');
 		}
-	}, [selectedScope, viewTypes, setValue]);
+	}, [selectedScope, viewTypes, setValue, viewType]);
 
-	const isScopesPresent = scopes.length > 0;
-	const isViewTypesPresent = (viewTypes[selectedScope] || []).length > 0;
+	const isScopesPresent = !isEmpty(scopes);
+	const isViewTypesPresent = !isEmpty(viewTypes?.[selectedScope]);
 
 	return (
 		<div className={styles.popover_content}>
@@ -68,7 +69,7 @@ export default function PopoverContent({
 						{scopes.map((val) => (
 							<Button
 								key={val}
-								className={`${styles.button_as_pill} ${selectedScope === val ? styles.active : ''}`}
+								className={cl`${styles.button_as_pill} ${selectedScope === val ? styles.active : ''}`}
 								size={size}
 								onClick={() => handleValChange('scope', val)}
 								color={selectedScope === val ? 'green' : undefined}
@@ -87,7 +88,9 @@ export default function PopoverContent({
 						{viewTypes[selectedScope].map((val) => (
 							<Button
 								key={val}
-								className={`${styles.button_as_pill} ${selectedViewType === val ? styles.active : ''}`}
+								className={cl`${styles.button_as_pill} ${selectedViewType === val
+									? styles.active
+									: ''}`}
 								size={size}
 								onClick={() => handleValChange('viewType', val)}
 								color={selectedViewType === val ? 'green' : undefined}
@@ -107,6 +110,15 @@ export default function PopoverContent({
 						control={control}
 						size={size}
 						asyncKey="partner_users"
+						initialCall
+						params={{
+							...(!['across_all', 'all'].includes(selectedScope) ? {
+								filters: {
+									reporting_manager_id: userId,
+								},
+							} : {}),
+							status: 'active',
+						}}
 						isClearable
 						valueKey="user_id"
 					/>

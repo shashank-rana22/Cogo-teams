@@ -34,7 +34,7 @@ const ZERO = 0;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
-const INVOICE_SHIPMENT_TYPES = ['air_freight', 'ftl_freight'];
+const INVOICE_SHIPMENT_TYPES = ['air_freight', 'ftl_freight', 'fcl_freight'];
 const ADD_SERVICE_MODALS = ['purchase', 'charge_code'];
 
 const STAKE_HOLDER_TYPES = [
@@ -301,7 +301,9 @@ function CollectionPartyDetails({
 						</div>
 					)}
 				</div>
+
 				<ServiceTables service_charges={collectionParty?.service_charges} shipment_data={shipment_data} />
+
 				<div className={styles.totalamount}>
 					Total With TAX
 					<span className={styles.amount}>
@@ -311,13 +313,14 @@ function CollectionPartyDetails({
 						)}
 					</span>
 				</div>
+
 				{open ? (
 					<Modal
 						show={open}
 						size="sm"
 						onClose={() => { setOpen(false); }}
 					>
-						<Modal.Header title="Upload Scan of Invoice" />
+						<Modal.Header title={isJobClosed ? 'Upload Scan of Credit Note' : 'Upload Scan of Invoice'} />
 						<Modal.Body>
 							<section>
 								<FileUploader

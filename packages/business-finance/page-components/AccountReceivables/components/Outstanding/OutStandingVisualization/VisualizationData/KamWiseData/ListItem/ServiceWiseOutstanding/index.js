@@ -3,6 +3,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useGetServiceWiseOutstandings from '../../../../../../../hooks/useGetServiceWiseOutstandings';
+import EmptyStateOutStanding from '../../../../../EmptyStateOutStanding';
 import StatsCard from '../StatsCard';
 
 import styles from './styles.module.css';
@@ -32,9 +33,7 @@ function ServiceWiseOutstanding({
 
 	if (isEmpty(serviceWiseStats)) {
 		return (
-			<h2>
-				NO DATA FOUND
-			</h2>
+			<EmptyStateOutStanding />
 		);
 	}
 

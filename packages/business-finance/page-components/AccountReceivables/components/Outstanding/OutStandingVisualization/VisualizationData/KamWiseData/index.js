@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { OUTSTANDING_AMOUNT_KEYS } from '../../../../../constants/account-type';
 import useGetQueryBuilder from '../../../../../hooks/useGetQueryBuilder';
+import EmptyStateOutStanding from '../../../EmptyStateOutStanding';
 
 import KamOrgData from './KamOrgData';
 import KamOwners from './KamOwners';
@@ -16,6 +17,7 @@ function KamWiseData({
 	barData = [],
 	setKamOwnerId = () => {},
 	pageNumber = 1,
+	entityCode = '',
 }) {
 	const [filters, setFilters] = useState({
 		page: 1,
@@ -26,6 +28,7 @@ function KamWiseData({
 		path         : 'kam_owner_list',
 		barGraphData : barData,
 		pageNumber,
+		entityCode,
 	});
 
 	const { list } = data || {};
@@ -72,7 +75,7 @@ function KamWiseData({
 		if (!loading && isEmpty(list || [])) {
 			return (
 				<div className={styles.container}>
-					NO DATA FOUND
+					<EmptyStateOutStanding width={400} height={200} />
 				</div>
 			);
 		}
@@ -88,6 +91,7 @@ function KamWiseData({
 					filters={filters}
 					setFilters={setFilters}
 					barData={barData}
+					entityCode={entityCode}
 				/>
 			</>
 		);

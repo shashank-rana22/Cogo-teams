@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 
 import useGetOutstandingInvoices from '../../../../hooks/useGetOutstandingInvoices';
+import EmptyStateOutStanding from '../../EmptyStateOutStanding';
 
 import BarChart from './BarChart';
 import Headers from './Header';
@@ -20,6 +21,7 @@ const PAGE_SIZE = 2;
 const CHECK_DATA_LENGTH = 0;
 
 function VisualizationData({
+	entityCode = '',
 	openVisualization = false,
 }) {
 	const [selectedBarData, setSelectedBarData] = useState();
@@ -46,6 +48,7 @@ function VisualizationData({
 		filterValues,
 		kamOwnerId,
 		toggleValue,
+		entityCode,
 	);
 	const { page_number } = filters || {};
 
@@ -68,7 +71,11 @@ function VisualizationData({
 		}
 
 		if (!loading && isEmpty(data || [])) {
-			return <Loader themeType="secondary" style={{ height: 64, width: 64 }} />;
+			return (
+				<div className={styles.container}>
+					<EmptyStateOutStanding width={400} height={200} />
+				</div>
+			);
 		}
 
 		return !toggleValue ? (
@@ -81,7 +88,6 @@ function VisualizationData({
 			<LineChart data={data} />
 		);
 	}
-
 	const handleTabs = (e) => {
 		setFilterValues((prev) => ({
 			...prev,
@@ -153,6 +159,7 @@ function VisualizationData({
 										barData={data}
 										setKamOwnerId={setKamOwnerId}
 										pageNumber={page_number}
+										entityCode={entityCode}
 									/>
 								)}
 							</>

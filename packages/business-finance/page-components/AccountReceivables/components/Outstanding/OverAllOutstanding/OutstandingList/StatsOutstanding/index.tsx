@@ -44,7 +44,6 @@ function StatsOutstanding({ item }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.invoices_wrapper}>
 				{invoiceContainer.map((invoiceObject) => (
 					<div className={styles.invoices_card} key={invoiceObject.name}>
@@ -104,7 +103,7 @@ function StatsOutstanding({ item }) {
 
 			<div className={styles.outstanding_card} style={{ background: '#FEF9FE' }}>
 				<div className={styles.flex_column}>
-					<div className={styles.label}>Total Outstanding</div>
+					<div className={styles.label_outstanding}>Total Outstanding</div>
 					<div
 						className={styles.amount}
 					>

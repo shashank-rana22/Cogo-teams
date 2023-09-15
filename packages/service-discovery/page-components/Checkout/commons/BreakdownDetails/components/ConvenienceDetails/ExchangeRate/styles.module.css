@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.applicable_stage {
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+}
+
+.fx_conversion {
+	margin-right: 8px;
+	font-weight: 600;
+}

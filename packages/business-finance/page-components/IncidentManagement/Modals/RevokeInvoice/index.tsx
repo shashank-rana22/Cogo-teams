@@ -1,5 +1,6 @@
 import { Button, Modal, Textarea } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetRevokeInvoiceData from '../../apisModal/useGetRevokeInvoiceData';
@@ -9,19 +10,20 @@ import ViewButton from '../../common/ViewButton';
 import styles from './style.module.css';
 
 function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const { data: { revokeInvoiceRequest = {} } } = row || {};
 	const { documentUrls = [], invoiceNumber = '' } = revokeInvoiceRequest;
 	const agreementDocument = documentUrls[0] || '';
 	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState(remark);
 	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
-
-	const { useOnAction:OnAction, loading } = useGetRevokeInvoiceData({
+	const { useOnAction:onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
 		setShowModal,
 		id,
 		reqRevokeInvoiceRequest,
 		remarks,
+		t,
 	});
 
 	return (
@@ -35,13 +37,13 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title="Revoke Invoice" />
+					<Modal.Header title={t('incidentManagement:invoice_revoke')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 
 						<div>
 							<div className={styles.label_flex}>
-								Invoice Number
+								{t('incidentManagement:invoice_number')}
 							</div>
 							<div className={styles.date_value}>
 								{invoiceNumber || '-'}
@@ -49,23 +51,26 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 						</div>
 						<div className={styles.label_flex}>
 							<div className={styles.document}>
-								Document -
+								{`${t('incidentManagement:doc')} -`}
 							</div>
 							{agreementDocument !== '' ? (
 								<a href={agreementDocument} target="_blank" rel="noreferrer" key={agreementDocument}>
 									<div className={styles.view_flex}>
-										<div className={styles.view}>View Agreement</div>
+										<div className={styles.view}>{t('incidentManagement:view_agreement_link')}</div>
 										<IcMEyeopen />
 									</div>
 
 								</a>
 							) : (
-								<div key={agreementDocument}> No document available</div>
+								<div key={agreementDocument}>
+									{' '}
+									{t('incidentManagement:no_doc_available')}
+								</div>
 							)}
 						</div>
 
 						<div>
-							Cancel Reason
+							{t('incidentManagement:cancel_reason')}
 						</div>
 						<Textarea
 							value={reqRevokeInvoiceRequest?.cancelReason}
@@ -74,17 +79,17 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 								...reqRevokeInvoiceRequest,
 								cancelReason: e,
 							})}
-							placeholder="Cancel E-invoice Reason ..."
+							placeholder={t('incidentManagement:cancel_invoice_reason')}
 						/>
 
 						<div>
-							Remark
+							{t('incidentManagement:remarks')}
 						</div>
 						<Textarea
 							value={remarks}
 							disabled={!isEditable}
 							onChange={setRemarks}
-							placeholder="Remark here ...."
+							placeholder={t('incidentManagement:remarks_placeholder')}
 						/>
 
 					</Modal.Body>
@@ -98,10 +103,10 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 									disabled={!(remarks?.length) || loading}
 									loading={loading}
 									onClick={() => {
-										OnAction('REJECTED');
+										onAction('REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 
 								<Button
@@ -110,10 +115,10 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 									disabled={!(remarks?.length) || loading}
 									loading={loading}
 									onClick={() => {
-										OnAction('APPROVED');
+										onAction('APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

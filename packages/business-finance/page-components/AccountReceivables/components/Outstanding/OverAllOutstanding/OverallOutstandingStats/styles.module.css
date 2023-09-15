@@ -60,7 +60,7 @@
 	justify-content: center;
 	width: 11%;
 	padding: 10px;
-	margin: 10px 0 20px 4px;
+	margin: 38px 0 20px 4px;
 	background: #fff;
 }
 
@@ -73,5 +73,20 @@
 }
 
 .total_outstanding_label {
+	font-weight: 600;
+}
+
+.invoices_wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.stats_label {
+	display: flex;
+	margin-top: 8px;
+	margin-left: 22%;
+	font-size: 12px;
 	font-weight: 600;
 }

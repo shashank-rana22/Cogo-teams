@@ -4,15 +4,23 @@ import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import useSeen from '../hooks/useSeen';
+import getStaticPath from '../utils/getStaticPath';
 
 import List from './List';
 import styles from './styles.module.css';
+
+const INITIAL_MSG_COUNT = 0;
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);
+
+	let audio = null;
+	if (typeof window !== 'undefined') {
+		audio = new Audio(getStaticPath({ path: '/mp3/chat-notification.mp3' }));
+	}
 
 	const { msgSeen } = useSeen();
 
@@ -34,8 +42,15 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	const count = totalCount?.reduce((a, b) => a + b, INITIAL_VALUE);
 
 	useEffect(() => {
+		if (count > INITIAL_MSG_COUNT && !show) {
+			audio.play();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [count]);
+
+	useEffect(() => {
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
-	}, [count, setMessagesCount, show]);
+	}, [count, setMessagesCount, audio]);
 
 	return (
 		<div className={styles.chat_container}>

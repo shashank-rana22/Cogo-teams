@@ -1,7 +1,9 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import invoiceTable from '../../../../../../../configs/invoice_table';
 import useListOutstandingInvoices from '../../../../../../../hooks/useListOutstandingInvoices';
+import EmptyStateOutStanding from '../../../../../EmptyStateOutStanding';
 
 import InvoiceFilters from './InvoiceFilters';
 
@@ -15,6 +17,7 @@ function InvoiceTable({
 	path = '',
 }) {
 	const {
+		loading,
 		data,
 		params,
 		setParams,
@@ -42,7 +45,11 @@ function InvoiceTable({
 				invoiceStatus={invoiceStatus}
 			/>
 			<div>
-				<Table columns={invoiceTable()} data={data?.list || []} />
+				{isEmpty(data?.list) && !loading ? (
+					<EmptyStateOutStanding />
+				) : (
+					<Table columns={invoiceTable()} data={data?.list || []} loading={loading} />
+				)}
 			</div>
 		</div>
 	);

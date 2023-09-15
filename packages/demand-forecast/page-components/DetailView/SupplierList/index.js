@@ -1,6 +1,8 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
+import EmptyState from '../../../common/EmptyState/EmptyState';
 import ListLoading from '../../../common/EmptyState/ListLoading';
 import getSupplierTableConfig from '../../../configurations/supplier-table-config';
 import useGetRollingFclFreightSuppliers from '../../../hooks/useGetRollingFclFreightSuppliers';
@@ -20,6 +22,22 @@ function SupplierList({ origin_location_id = '', destination_location_id = '', i
 	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id, isMiniCluster });
 
 	const tableConfig = getSupplierTableConfig({ t });
+
+	if (isEmpty(dataList) && !loading) {
+		return (
+			<div>
+				<EmptyState
+					height={250}
+					width={400}
+					flexDirection="column"
+					alignItems="center"
+					emptyText="Data Not Found"
+					textSize="20"
+					marginTop="10px"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.list}>

@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const organizationColumn = [
@@ -34,11 +33,6 @@ const organizationColumn = [
 				)}
 			</div>
 		),
-	},
-	{
-		Header   : '',
-		accessor : () => <Button>Place Call</Button>,
-		id       : 'mobile',
 	},
 ];
 

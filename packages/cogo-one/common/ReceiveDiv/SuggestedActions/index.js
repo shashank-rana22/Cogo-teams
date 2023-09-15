@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Toast, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -71,8 +71,15 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 			return;
 		}
 
-		const { setButtonType, setEmailState } = mailProps;
+		const { setButtonType, setEmailState, buttonType } = mailProps;
+
+		if (buttonType) {
+			Toast.warn('Email compose is already in progress');
+			return;
+		}
+
 		setButtonType('send_mail');
+
 		setEmailState(
 			(prev) => ({
 				...prev,

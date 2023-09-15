@@ -1,4 +1,4 @@
-import { Tooltip, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
@@ -26,6 +26,8 @@ function RightSideNav({
 	orgId = '',
 	viewType = '',
 	formattedMessageData = {},
+	expandSideBar = false,
+	setActiveTab = () => {},
 }) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
@@ -34,13 +36,27 @@ function RightSideNav({
 
 	const [searchSpotModal, setSearchSpotmodal] = useState(false);
 
+	const disabledSpotSearch = loading || disableQuickActions;
+
+	const { userId = '', userMobile = '', leadUserId = '' } = getFormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
+
+	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
+
+	const ICON_MAPPING = getIconMapping({
+		viewType,
+		expandSideBar,
+		channelType: formattedMessageData?.channel_type,
+	}) || [];
+
 	const check = () => {
 		dispatch(
 			setProfileState({
 				...profileData,
-
 				showFaq: true,
-
 			}),
 		);
 	};
@@ -59,22 +75,26 @@ function RightSideNav({
 			openNewTab({ crm: 'searches', prm: 'searches' });
 		} else if (val === 'help_desk') {
 			check();
+		} else if (val === 'sidebar_control') {
+			setActiveTab((prev) => {
+				setActiveSelect(!prev?.expandSideBar ? 'profile' : '');
+
+				return {
+					...prev,
+					expandSideBar: !prev?.expandSideBar,
+				};
+			});
 		} else {
 			setActiveSelect(val);
+
+			if (!expandSideBar) {
+				setActiveTab((prev) => ({
+					...prev,
+					expandSideBar: true,
+				}));
+			}
 		}
 	};
-
-	const disabledSpotSearch = loading || disableQuickActions;
-
-	const { userId = '', userMobile = '', leadUserId = '' } = getFormatData({
-		activeMessageCard,
-		activeVoiceCard,
-		activeTab,
-	});
-
-	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
-
-	const ICON_MAPPING = getIconMapping(viewType) || [];
 
 	return (
 		<>
@@ -102,22 +122,19 @@ function RightSideNav({
 							role="presentation"
 							onClick={() => handleClick(name)}
 						>
-							<Tooltip content={content} placement="left">
-								{showDocumentCount && (
-									<div className={styles.count}>
-										{documentsCount > MAX_DISPLAY_COUNT ? '99+' : (
-											documentsCount
-										)}
-									</div>
-								)}
-								{showquotationSentData && (
-									<div className={styles.quotation} />
-								)}
-								<div>
-									{icon || null}
+							{showDocumentCount && (
+								<div className={styles.count}>
+									{documentsCount > MAX_DISPLAY_COUNT ? '99+' : (
+										documentsCount
+									)}
 								</div>
-							</Tooltip>
-
+							)}
+							{showquotationSentData && (
+								<div className={styles.quotation} />
+							)}
+							<div title={content}>
+								{icon || null}
+							</div>
 						</div>
 					);
 				})}

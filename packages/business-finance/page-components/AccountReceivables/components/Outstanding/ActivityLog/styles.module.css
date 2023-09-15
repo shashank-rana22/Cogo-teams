@@ -7,6 +7,12 @@
 .input {
 	width: 49%;
 	margin: 12px 0;
+
+	:global {
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
 }
 
 .label {

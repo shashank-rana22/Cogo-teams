@@ -27,10 +27,10 @@ function ListItem({
 	item = {},
 	selectedBarData = {},
 	filterValues = {},
-	queryBuilderForm,
 	KamAndAgeingArr,
 	barData = [],
 	path = '',
+	entityCode = '',
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
@@ -56,13 +56,12 @@ function ListItem({
 	} = item || {};
 
 	const { id } = selectedBarData || {};
-	const { entity_code, bifurcation_type } = filterValues || {};
-	const { entity_code: entityCode } = queryBuilderForm || {};
+	const { bifurcation_type } = filterValues || {};
 	const { kamAgeingArr = {}, ageingArr } = KamAndAgeingArr || {};
 
 	const barId = !Number.isNaN(Number(id)) ? [id] : ['301', '101'];
 
-	const cogoEntityValue = entityCode || (entity_code ? [entity_code] : barId);
+	const cogoEntityValue = entityCode ? [entityCode] : barId;
 
 	const getAgeingBucket =		bifurcation_type === 'overall'
 		? undefined
@@ -144,6 +143,7 @@ function ListItem({
 					<Tabs
 						activeTab={activeTab}
 						themeType="primary"
+						fullWidth
 						onChange={(val) => handleActiveTabs(val)}
 						className={styles.custom_tabs}
 					>

@@ -1,0 +1,33 @@
+.btn_grp {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+	background: #fff;
+	border-top: 1px solid #cbcff5;
+
+	@media (min-width: 768px) {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 60px;
+	background-color: #fffbf8;
+	border: 1px dotted #f9ae64;
+	border-radius: 8px;
+}
+
+.title {
+	margin: 16px 0 0;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #393f70;
+}

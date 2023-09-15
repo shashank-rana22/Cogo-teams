@@ -4,6 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useState } from 'react';
 
 import { SERVICE_WISE_COLORS, KAM_WISE_COLORS } from '../../../../constants/color';
+import EmptyStateOutStanding from '../../EmptyStateOutStanding';
 
 import GraphListView from './GraphListView';
 import PieChartLegends from './PieChartLegends';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 
 const TEXT_COLOR_FACTOR = 2;
 const BORDER_COLOR_FACTOR = 0.2;
+const DEFAULT_VALUE = 0;
 function ResponsivePieChart({
 	data = [],
 	heading = '',
@@ -23,7 +25,7 @@ function ResponsivePieChart({
 	const [showListView, setShowListView] = useState(true);
 	const [isSortBy, setIsSortBy] = useState('');
 	const colors = isKamWise ? KAM_WISE_COLORS : SERVICE_WISE_COLORS;
-
+	const isEmpty = (data || []).every((el) => el?.value === DEFAULT_VALUE);
 	const sortedData = [...data];
 
 	if (isSortBy === 'asc') {
@@ -33,6 +35,12 @@ function ResponsivePieChart({
 	}
 
 	function RenderBody() {
+		if (isEmpty && !loading) {
+			return (
+				<EmptyStateOutStanding smallCard="kamWiseCard" />
+			);
+		}
+
 		if (loading) {
 			return (
 				<div className={styles.loader}>
@@ -118,7 +126,7 @@ function ResponsivePieChart({
 			<div className={styles.flex}>
 				<div className={styles.heading}>{heading}</div>
 				<Button
-					className="secondary sm"
+					themeType="secondary"
 					onClick={() => setShowListView(!showListView)}
 				>
 					{!showListView ? 'Graph View' : 'List View'}

@@ -1,9 +1,9 @@
-import { Toast, Modal, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Modal, Pagination } from '@cogoport/components';
+import { IcMExpand } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
-import getRenderEmailBody from '../../../../../helpers/getRenderEmailBody';
+import { HEADER_MAPPING } from '../../../../../constants/mailConstants';
+import useMailEditorFunctions from '../../../../../helpers/mailEditorFunctions';
 import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
 
@@ -12,17 +12,14 @@ import EmailTemplateList from './EmailTemplateList';
 import RenderHeader from './Header';
 import styles from './styles.module.css';
 
-function MailModal({
+function MailEditorModal({
 	mailProps = {},
 	userId = '',
 	activeMail = {},
-	replyMailApi = () => {},
-	replyLoading = false,
+	viewType = '',
 }) {
 	const {
 		buttonType,
-		activeMailAddress,
-		emailState,
 		setEmailState,
 		setButtonType,
 	} = mailProps;
@@ -31,6 +28,7 @@ function MailModal({
 
 	const [showControl, setShowControl] = useState(null);
 	const [errorValue, setErrorValue] = useState('');
+	const [minimizeModal, setMinimizeModal] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [attachments, setAttachments] = useState([]);
 	const [emailTemplate, setEmailTemplate] = useState({
@@ -46,7 +44,7 @@ function MailModal({
 		fetchEmailTemplate = () => {},
 		search = '',
 		setSearch = () => {},
-	} = useListEmailTemplates({ isTemplateView });
+	} = useListEmailTemplates({ isTemplateView, viewType });
 
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 
@@ -69,53 +67,46 @@ function MailModal({
 		uploaderRef,
 	});
 
-	const handleSend = () => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
-		if (replyLoading) {
-			return;
-		}
+	const {
+		handleSend = () => {},
+		replyLoading = false,
+	} = useMailEditorFunctions({
+		uploading,
+		activeMail,
+		attachments,
+		userId,
+		mailProps,
+	});
 
-		if (uploading) {
-			Toast.error('Files are uploading...');
-			return;
-		}
+	if (minimizeModal) {
+		return (
+			<div
+				className={styles.minimized_modal_styles}
+				role="presentation"
+				onClick={() => setMinimizeModal(false)}
+			>
+				<div className={styles.expand_icon}>
+					<IcMExpand />
+				</div>
 
-		if (isEmpty(emailState?.toUserEmail)) {
-			Toast.error('To Mail is Required');
-			return;
-		}
-
-		if (isEmptyMail || !emailState?.subject) {
-			Toast.error('Both Subject and Body are Requied');
-			return;
-		}
-
-		const emailBody = getRenderEmailBody({ html: emailState?.body });
-
-		const payload = {
-			sender        : emailState?.from_mail || activeMailAddress,
-			toUserEmail   : emailState?.toUserEmail,
-			ccrecipients  : emailState?.ccrecipients,
-			bccrecipients : emailState?.bccrecipients,
-			subject       : emailState?.subject,
-			content       : emailBody,
-			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
-			attachments,
-			userId,
-
-		};
-		replyMailApi(payload);
-	};
+				<div className={styles.title}>
+					{HEADER_MAPPING[buttonType] || 'New Message'}
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<Modal
 			show={buttonType}
 			onClose={handleClose}
-			onOuterClick={handleClose}
 			size="lg"
 			className={styles.styled_ui_modal_dialog}
 			placement="top"
 			scroll
+			animate={false}
+			showCloseIcon={false}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header
 				title={(
@@ -132,9 +123,10 @@ function MailModal({
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
 						setButtonType={setButtonType}
+						setMinimizeModal={setMinimizeModal}
 					/>
 				)}
-				className={isTemplateView ? styles.template_view : ''}
+				className={styles.modal_header}
 			/>
 			<Modal.Body>
 				{!isTemplateView ? (
@@ -180,4 +172,4 @@ function MailModal({
 	);
 }
 
-export default MailModal;
+export default MailEditorModal;

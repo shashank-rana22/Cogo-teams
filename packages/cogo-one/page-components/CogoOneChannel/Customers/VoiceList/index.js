@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import { VOICE_ICON_MAPPING, SHOW_LOG_STATUS_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
+import useUpdateVoiceCallRecord from '../../../../hooks/useUpdateVoiceCallRecord';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import LoadingState from '../LoadingState';
 
@@ -14,11 +15,16 @@ import CallsHeader from './CallsHeader';
 import EmptyCard from './EmptyCard';
 import styles from './styles.module.css';
 
+const DEFAULT_UNREAD_CALLS = 0;
+const MAXIMUM_UNREAD_CALLS = 100;
+
 function VoiceList(voiceProps) {
 	const {
 		setActiveVoiceCard = () => {},
 		activeVoiceCard = {},
 		activeTab = '',
+		fetchUnreadCall = () => {},
+		viewType = '',
 	} = voiceProps;
 
 	const [searchValue, setSearchValue] = useState('');
@@ -29,7 +35,10 @@ function VoiceList(voiceProps) {
 		handleScroll = () => { },
 		appliedFilters = {},
 		setAppliedFilters = () => {},
-	} = useGetVoiceCallList({ activeTab, searchValue });
+		setListData = () => {},
+	} = useGetVoiceCallList({ activeTab, searchValue, viewType });
+
+	const { updateMissedVoiceCount } = useUpdateVoiceCallRecord({ fetchUnreadCall });
 
 	const { list = [] } = data;
 
@@ -46,6 +55,26 @@ function VoiceList(voiceProps) {
 			status = call_status;
 		}
 		return status;
+	};
+
+	const handleCardClick = (item) => {
+		const { missed_call_count: missedCallCount, id } = item;
+
+		setActiveVoiceCard(item);
+
+		if (missedCallCount > DEFAULT_UNREAD_CALLS) {
+			const updatedItem = {
+				...item,
+				missed_call_count: 0,
+			};
+			updateMissedVoiceCount({ id });
+
+			const updatedList = list.map((listItem) => (listItem.id === id ? updatedItem : listItem));
+			setListData((prevState) => ({
+				...prevState,
+				list: updatedList,
+			}));
+		}
 	};
 
 	return (
@@ -65,6 +94,7 @@ function VoiceList(voiceProps) {
 						user_data = null, user_number = '', organization_data = null,
 						start_time_of_call = '', initiated_by = '',
 						call_status: status = '', channel_type: channelType = '',
+						missed_call_count: missedCallCount = 0,
 					} = item || {};
 
 					const checkActiveCard = activeVoiceCard?.id === item?.id;
@@ -90,9 +120,12 @@ function VoiceList(voiceProps) {
 							${styles.card_container}
 							${checkActiveCard ? styles.active_card : ''}
 				 `}
-							onClick={() => setActiveVoiceCard(item)}
+							onClick={() => handleCardClick(item)}
 						>
-							<div className={styles.card}>
+							<div className={cl`
+							${styles.card}
+							${(missedCallCount > DEFAULT_UNREAD_CALLS) ? styles.count_visible : ''}
+				 `}>
 								<div className={styles.user_information}>
 									<div className={styles.avatar_container}>
 										<div className={styles.status_icons}>
@@ -159,6 +192,15 @@ function VoiceList(voiceProps) {
 											}) : ''}
 										</div>
 									</div>
+								</div>
+								<div className={styles.cards_footer}>
+									{missedCallCount > DEFAULT_UNREAD_CALLS && (
+										<div className={styles.new_message_count}>
+											{missedCallCount > MAXIMUM_UNREAD_CALLS
+												? '99+'
+												: missedCallCount}
+										</div>
+									)}
 								</div>
 							</div>
 						</div>

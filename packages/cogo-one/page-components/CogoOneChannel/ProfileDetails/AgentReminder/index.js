@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { FIREBASE_TABS } from '../../../../constants';
 import useCreateCommunicationLog from '../../../../hooks/useCreateCommunication';
 import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicationLog';
 
@@ -14,8 +15,8 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 	const [showReminder, setShowReminder] = useState(false);
 	const { organization_id:messageOrgId = null, user_id: messageUserId = null } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = null, user_id: voiceUserId = null } = activeVoiceCard || {};
-	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
-	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
+	const organizationId = FIREBASE_TABS.includes(activeTab) ? messageOrgId : voiceOrgId;
+	const userId = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceUserId;
 
 	const [inputValue, setInputValue] = useState({
 		title       : '',

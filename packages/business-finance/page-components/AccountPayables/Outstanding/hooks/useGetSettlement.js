@@ -5,7 +5,7 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-const useHistorySettlement = ({ organizationId }) => {
+const useHistorySettlement = ({ organizationId, showElement = false }) => {
 	const [filters, setFilters] = useState({
 		query       : '',
 		date        : {},
@@ -64,10 +64,10 @@ const useHistorySettlement = ({ organizationId }) => {
 	}, [accountType, date?.endDate, date?.startDate, organizationId, page, search, sortBy, sortType, trigger]);
 
 	useEffect(() => {
-		if (!isEmpty(organizationId)) {
+		if (!isEmpty(organizationId) && showElement) {
 			refetch();
 		}
-	}, [organizationId, refetch]);
+	}, [organizationId, refetch, showElement]);
 
 	return {
 		filters,

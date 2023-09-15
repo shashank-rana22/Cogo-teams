@@ -1,0 +1,59 @@
+.main_container {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	width: 90%;
+	padding: 8px;
+	margin-left: 4px;
+	background: rgb(255 255 255 / 50%);
+	border-radius: 6px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 10px;
+	background: #fff;
+	border-radius: 6px;
+	animation: card 1s both;
+
+	@keyframes card {
+		0% {
+			opacity: 0;
+			transform: translate3d(-20px, 0, 0);
+		}
+
+		100% {
+			opacity: 1;
+			transform: none;
+		}
+	}
+}
+
+.last_call_info {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	font-size: 12px;
+}
+
+.user_info {
+	margin-left: 6px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.title {
+	width: calc(100% - 100px);
+	overflow: hidden;
+	font-weight: 500;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+}

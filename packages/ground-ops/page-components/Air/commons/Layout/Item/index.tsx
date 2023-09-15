@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import getElementController from '../getController';
@@ -40,12 +41,9 @@ function Item(props) {
 			>
 				{heading}
 			</div>
-			<h4 style={{
-				height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-			}}
-			>
+			<div className={cl`${styles.label} ${rules?.required ? styles.required_field : ''}`}>
 				{label}
-			</h4>
+			</div>
 			<Element
 				{...props}
 				control={control}

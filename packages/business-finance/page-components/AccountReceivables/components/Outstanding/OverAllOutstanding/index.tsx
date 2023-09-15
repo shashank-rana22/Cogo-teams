@@ -1,19 +1,22 @@
-import { Pagination, Table } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { Button, Pagination } from '@cogoport/components';
+import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
-import ccCallListTable from '../../../configs/CC_Call_List_Table';
 import {
-	CC_COMMUNICATION_DATA,
-} from '../../../constants/kam-wise-data';
+	kamWiseList,
+	serviceWiseList,
+	ccWiseList,
+} from '../../../configs/dummy-graph-stats';
 import useGetCallPriority from '../../../hooks/useGetCallPriority';
+import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
 import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstandingsStats';
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
 
+import CcCallList from './CcCallList';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
@@ -42,21 +45,25 @@ function OverAllOutstanding({ entityCode = '' }) {
 		refetch,
 	} = useGetOrgOutstanding({ entityCode });
 
+	const [dateFilter, setDateFilter] = useState({
+		startDate : startOfMonth(new Date()),
+		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+	});
+	const [range, setRange] = useState('this_month');
 	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
 	});
+	const [viewGraphStats, setViewGraphStats] = useState(false);
 	const ref = useRef(null);
 	const RIGHT_OFF_SET = 2000;
 	const LEFT_OFF_SET = -2000;
-	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats({
-		globalFilters: formFilters,
-	});
-	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({
-		globalFilters: formFilters,
-	});
-	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({
-		globalFilters: formFilters,
+	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats({ viewGraphStats });
+	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({ viewGraphStats });
+	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({ viewGraphStats });
+	const { ccCommStats = [], ccCommLoading = false } = useGetCcCommunicationStats({
+		dateFilter,
+		viewGraphStats,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -99,7 +106,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 
 	const graphPropsList = {
 		kam_wise_outstandings: {
-			data        : KamDataPoints,
+			data        : viewGraphStats ? KamDataPoints : kamWiseList,
 			heading     : 'KAM Wise Outstandings',
 			loading     : kamWiseLoading,
 			isKamWise   : true,
@@ -112,7 +119,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 			},
 		},
 		service_wise_outstandings: {
-			data        : ServiceDataPoints,
+			data        : viewGraphStats ? ServiceDataPoints : serviceWiseList,
 			heading     : 'Service Wise Open Invoices',
 			loading     : serviceWiseLoading,
 			isKamWise   : false,
@@ -120,14 +127,14 @@ function OverAllOutstanding({ entityCode = '' }) {
 				legendPaddingTop: '10px',
 			},
 			listTitle: {
-				nameTitle  : 'KAM Owners',
+				nameTitle  : 'Services Wise',
 				valueTitle : 'Total Open Invoice Amount',
 			},
 		},
 	};
 	const graphPropsChild = {
 		cc_wise_outstandings: {
-			data        : ccDataPoints,
+			data        : viewGraphStats ? ccDataPoints : ccWiseList,
 			heading     : 'CC Wise Outstandings',
 			loading     : ccWiseLoading,
 			isKamWise   : true,
@@ -167,21 +174,36 @@ function OverAllOutstanding({ entityCode = '' }) {
 								))}
 							</div>
 							<div className={styles.cc_call_table}>
-								<div className={styles.cc_list}>CC Call Stats</div>
-								<div style={{ display: 'flex' }}>
-									<Table columns={ccCallListTable()} data={CC_COMMUNICATION_DATA || []} />
-								</div>
+								<CcCallList
+									data={ccCommStats || []}
+									loading={ccCommLoading}
+									dateFilter={dateFilter}
+									setDateFilter={setDateFilter}
+									range={range}
+									setRange={setRange}
+								/>
 							</div>
 						</div>
 					</div>
 					<div>
-						<ScrollBar
-							ref={ref}
-							rightOffSet={RIGHT_OFF_SET}
-							leftOffSet={LEFT_OFF_SET}
-						/>
-
+						{viewGraphStats && (
+							<ScrollBar
+								ref={ref}
+								rightOffSet={RIGHT_OFF_SET}
+								leftOffSet={LEFT_OFF_SET}
+							/>
+						)}
 					</div>
+					{!viewGraphStats && (
+						<div className={styles.overlay}>
+							<Button
+								onClick={() => setViewGraphStats(true)}
+								className="primary md"
+							>
+								View
+							</Button>
+						</div>
+					)}
 				</div>
 			</div>
 			<OutstandingFilter
@@ -221,7 +243,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 						/>
 					))}
 					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
-					{!isEmpty(list) && (
+					{!isEmpty(list) && (totalRecords >= pageLimit) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"

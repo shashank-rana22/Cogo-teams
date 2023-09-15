@@ -54,7 +54,7 @@ function Settlement() {
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
 	const handleChange = (tab: string) => {
-		if (['JournalVoucher', 'tds-settlement', 'onAccountCollection', 'history'].includes(tab)) {
+		if (['ap-ar-settlement', 'JournalVoucher', 'tds-settlement', 'onAccountCollection', 'history'].includes(tab)) {
 			setActiveTab(tab);
 			push(
 				'/business-finance/settlement/[active_tab]',

@@ -1,20 +1,18 @@
-import { cl, Textarea, RTEditor } from '@cogoport/components';
+import { cl, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef, useEffect } from 'react';
 
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import useSendChat from '../../../../../../hooks/useSendChat';
-import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMail';
 import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
-import styles from '../styles.module.css';
 
-import { getPlaceHolder, getEmailState } from './footerFunctions';
+import { getPlaceHolder } from './footerFunctions';
 import FooterHead from './FooterHead';
 import SendActions from './SendActions';
+import styles from './styles.module.css';
 
 const TEXTBOX_COMPONENT_MAPPING = {
-	email    : RTEditor,
 	whatsapp : Textarea,
 	default  : Textarea,
 };
@@ -33,39 +31,22 @@ function Footer({
 	communicationLoading = false,
 	assignChat = () => {},
 	assignLoading = false,
-	mailActions = {},
-	setMailActions = () => {},
 }) {
 	const uploaderRef = useRef(null);
 
-	const { id = '', channel_type = '', email = '', source = '' } = formattedData;
+	const { id = '', channel_type = '' } = formattedData;
 
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [emailState, setEmailState] = useState(() => getEmailState({ mailActions }));
 	const [showControl, setShowControl] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 
-	const uploadedFiles = draftUploadedFiles?.[id];
 	const draftMessage = draftMessages?.[id];
 
 	const fileMetaData = formatFileAttributes({ uploadedFiles: draftUploadedFiles?.[id] });
 
 	const hasUploadedFiles = !isEmpty(draftUploadedFiles?.[id]);
-
-	const resetEmailStates = () => {
-		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
-		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
-		setEmailState({
-			toUserEmail   : [email],
-			subject       : '',
-			ccrecipients  : [],
-			bccrecipients : [],
-		});
-		uploaderRef?.current?.externalHandleDelete?.(channel_type === 'email' ? [] : '');
-		setMailActions({ actionType: '', data: {} });
-	};
 
 	const {
 		sendChatMessage,
@@ -87,34 +68,11 @@ function Footer({
 		hasUploadedFiles,
 	});
 
-	const {
-		mailLoading = false,
-		sendMail = () => {},
-	} = useSendOmnichannelMail({
-		scrollToBottom,
-		formattedData,
-		emailState,
-		draftUploadedFiles,
-		draftMessage,
-		uploadedFiles,
-		setDraftMessages,
-		setDraftUploadedFiles,
-		mailActions,
-		id,
-		resetEmailStates,
-		source,
-	});
-
 	const SEND_FUNC_MAPPING = {
 		whatsapp: {
 			function           : sendChatMessage,
 			sendMessageLoading : messageLoading,
 			sendOnEnter        : true,
-		},
-		email: {
-			function           : sendMail,
-			sendMessageLoading : mailLoading,
-			sendOnEnter        : false,
 		},
 		default: {
 			function           : sendChatMessage,
@@ -155,32 +113,22 @@ function Footer({
 		});
 	};
 
-	const isEmail = channel_type === 'email';
-
 	const TextAreaComponent = TEXTBOX_COMPONENT_MAPPING[channel_type] || TEXTBOX_COMPONENT_MAPPING.default;
 
 	useEffect(() => {
-		setEmailState(getEmailState({ mailActions, email }));
-
-		const defaultValue = channel_type === 'email' ? [] : '';
-
 		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
-		setDraftUploadedFiles((prev) => ({ ...prev, [id]: defaultValue }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: '' }));
 
-		uploaderRef?.current?.externalHandleDelete?.(defaultValue);
-	}, [mailActions, email, id, channel_type]);
+		uploaderRef?.current?.externalHandleDelete?.('');
+	}, [id]);
 
 	return (
 		<>
 			{hasPermissionToEdit && (
 				<FooterHead
-					isEmail={isEmail}
-					mailActions={mailActions}
 					setErrorValue={setErrorValue}
-					emailState={emailState}
 					setShowControl={setShowControl}
 					showControl={showControl}
-					setEmailState={setEmailState}
 					errorValue={errorValue}
 					uploading={uploading}
 					roomId={id}
@@ -189,8 +137,6 @@ function Footer({
 					hasUploadedFiles={hasUploadedFiles}
 					uploaderRef={uploaderRef}
 					hasPermissionToEdit={hasPermissionToEdit}
-					key={mailActions?.actionType}
-					setMailActions={setMailActions}
 				/>
 			)}
 			<div
@@ -198,9 +144,9 @@ function Footer({
 					hasPermissionToEdit ? '' : styles.opacity
 				}`}
 			>
-				{!isEmail && !isEmpty(suggestions) && (
+				{!isEmpty(suggestions) && (
 					<div className={styles.suggestions_div}>
-						<div className={styles.flex}>
+						<div className={styles.flex_container}>
 							<div className={styles.suggestions_text}>
 								Suggestions:
 							</div>
@@ -226,7 +172,6 @@ function Footer({
 					</div>
 				)}
 				<TextAreaComponent
-					key={mailActions?.actionType}
 					rows={5}
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
 					className={styles.text_area}
@@ -256,9 +201,6 @@ function Footer({
 						hasUploadedFiles={hasUploadedFiles}
 						draftUploadedFiles={draftUploadedFiles}
 						ref={uploaderRef}
-						emailState={emailState}
-						isEmail={isEmail}
-						mailActions={mailActions}
 					/>
 				</div>
 			</div>

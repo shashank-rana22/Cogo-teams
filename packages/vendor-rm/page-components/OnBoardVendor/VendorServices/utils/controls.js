@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 import officeLocations from '../../../../utils/office-locations.json';
 import { EXCLUDE_CATEGORIES } from '../../../ListVendors/constants';
 
-const controls = [
+const controls = ({ entityCode }) => [
 	{
 		name               : 'services',
 		label              : 'Office Details',
@@ -24,6 +24,7 @@ const controls = [
 				// eslint-disable-next-line max-len
 				getModifiedOptions : ({ options }) => (options?.filter(({ categoryName = '' }) => (!EXCLUDE_CATEGORIES.includes(categoryName)))),
 				style              : { flexBasis: '30%' },
+				params             : { entityCode },
 				rules              : { required: 'Category is required' },
 			},
 			{

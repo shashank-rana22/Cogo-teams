@@ -99,7 +99,7 @@ function UploadModal({
 						style={{ paddingBottom: 0 }}
 					/>
 					<Modal.Body>
-						<Layout fields={controls({ t })} errors={errors} control={control} />
+						<Layout fields={controls(t)} errors={errors} control={control} />
 						<Button
 							style={{ marginTop: '20px' }}
 							onClick={handleSubmit(onSubmit)}

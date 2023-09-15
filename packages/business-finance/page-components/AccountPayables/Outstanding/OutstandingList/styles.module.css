@@ -15,10 +15,22 @@
 	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
 }
 
+.download_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 32px;
+	padding: 0 12px;
+	margin-left: 12px;
+	cursor: pointer;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
 .custom_tag {
 	display: flex;
 	padding: 4px 8px;
-	margin-right: 4px;
+	margin-right: 8px;
 	font-size: 10px;
 	font-weight: 500;
 	background-color: #f2f2f2;

@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useGetQueryBuilder from '../../../../../../hooks/useGetQueryBuilder';
+import EmptyStateOutStanding from '../../../../EmptyStateOutStanding';
 import ListItem from '../ListItem';
 
 import styles from './styles.module.css';
@@ -15,6 +16,7 @@ function KamOrgData({
 	setFilters = () => {},
 	filters = {},
 	barData = [],
+	entityCode = '',
 }) {
 	const { data, loading } = useGetQueryBuilder({
 		kamOwner,
@@ -23,6 +25,7 @@ function KamOrgData({
 		outstandingPagination : filters,
 		path                  : 'kam_owners',
 		barGraphData          : barData,
+		entityCode,
 	});
 
 	if (loading) {
@@ -35,7 +38,8 @@ function KamOrgData({
 
 	if (!loading && isEmpty(list || [])) {
 		return (
-			<h2>NO DATA FOUND</h2>
+
+			<EmptyStateOutStanding width={400} height={200} />
 		);
 	}
 
@@ -48,6 +52,7 @@ function KamOrgData({
 					filterValues={filterValues}
 					key={val?.credit_controller_id}
 					barData={barData}
+					entityCode={entityCode}
 				/>
 			))}
 			<div className={styles.pagination_container}>

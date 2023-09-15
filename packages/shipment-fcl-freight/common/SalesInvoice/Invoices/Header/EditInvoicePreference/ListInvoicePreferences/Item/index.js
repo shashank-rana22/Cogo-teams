@@ -31,6 +31,7 @@ function Item({
 		services = [],
 		status = '',
 		id = '',
+		processing = false,
 	} = invoice || {};
 
 	const open = openedService && openedService?.id === id;
@@ -89,9 +90,10 @@ function Item({
 			) : null}
 
 			<div
-				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
+				className={cl`${styles.header_container} ${open ? styles.open : ''} 
+				${processing ? styles.disable : ''}`}
 				style={{ cursor: noActionState || noActionForInsurance ? 'default' : '' }}
-				onClick={!(noActionState || noActionForInsurance)
+				onClick={!processing && !(noActionState || noActionForInsurance)
 					? () => handleServiceToggle()
 					: null}
 			>
@@ -123,20 +125,21 @@ function Item({
 					</div>
 
 					<div className={styles.billing_info}>
-						GST Number:&nbsp;
+						GST Number:
+						{' '}
 						{billing_address?.tax_number}
 					</div>
 
 					<div className={styles.billing_info}>
 						Invoice Currency:
-						&nbsp;
+						{' '}
 						{invoice_currency}
 					</div>
 
 					{invoice_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
-							&nbsp;
+							{' '}
 							{formatAmount({
 								amount   : invoice_total_discounted,
 								currency : invoice_total_currency,

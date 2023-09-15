@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { FilterProps } from '../interface';
@@ -23,8 +24,8 @@ function Filters({
 	onChangeFilters = (v) => v,
 }: Props) {
 	const { search } = filters || {};
-
-	const filterControls = getFilterControls({ activeTab, isSettlementExecutive });
+	const { t } = useTranslation(['incidentManagement']);
+	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t });
 
 	return (
 		<section className={styles.container} id="filters">
@@ -62,7 +63,7 @@ function Filters({
 					search: value || undefined,
 				})}
 				size="md"
-				placeholder="Search by Invoice/Proforma Number "
+				placeholder={t('incidentManagement:invoice_proforma_search')}
 			/>
 		</section>
 	);

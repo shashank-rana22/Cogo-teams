@@ -18,21 +18,27 @@ interface Props {
 	onClose: () => void;
 	setShow: React.Dispatch<React.SetStateAction<boolean>>;
 	refetch: () => void;
+	Entity?: string;
+	selectedData?: { ledCurrency?: string, currency?: string }[];
+	line_items?: object[];
 }
 
-function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
+function CreateJvModal({
+	show, onClose = () => {},
+	setShow, refetch, selectedData = [], Entity = '', line_items = [EMPTY_LINE_ITEMS],
+}:Props) {
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
 		{
-			entityCode     : '',
-			ledCurrency    : '',
+			entityCode     : Entity || '',
+			ledCurrency    : selectedData?.[0]?.ledCurrency || '',
 			category       : '',
-			currency       : '',
+			currency       : selectedData?.[0]?.currency || '',
 			accountingDate : new Date(),
 			journal        : '',
 			exchangeRate   : '',
 			description    : '',
-			line_items     : [EMPTY_LINE_ITEMS],
+			line_items     : line_items || [EMPTY_LINE_ITEMS],
 		},
 	});
 

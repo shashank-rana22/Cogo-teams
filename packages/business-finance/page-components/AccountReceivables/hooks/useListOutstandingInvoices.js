@@ -1,3 +1,4 @@
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
@@ -33,6 +34,11 @@ const useListOutstandingInvoices = ({
 		'UNPAID',
 		'PARTIAL PAID',
 	]);
+	const { query = '', debounceQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		debounceQuery(searchQuery);
+	}, [searchQuery, debounceQuery]);
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_outstanding_invoices',
@@ -118,7 +124,7 @@ const useListOutstandingInvoices = ({
 					sort_type : orderBy.order || undefined,
 					sort_by   : orderBy.key || undefined,
 					filters   : {
-						q             : searchQuery || undefined,
+						q             : query || undefined,
 						...filters,
 						is_precovid   : 'NO',
 						cogo_entity   : cogoEntityValue,
@@ -133,14 +139,14 @@ const useListOutstandingInvoices = ({
 			console.error(err);
 		}
 	}, [cogoEntityValue, filters, getAgeingBucket, getDates,
-		invoiceStatus, orderBy.key, orderBy.order, params, registrationNumber, searchQuery, trigger]);
+		invoiceStatus, orderBy.key, orderBy.order, params, registrationNumber, query, trigger]);
 
 	useEffect(() => {
 		fetchOutstandingInvoices();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params.page,
 		orderBy,
-		searchQuery,
+		query,
 		invoiceStatus,
 		filters]);
 

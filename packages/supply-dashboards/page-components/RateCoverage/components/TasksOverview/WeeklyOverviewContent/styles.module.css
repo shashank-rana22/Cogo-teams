@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.text {
+	color: #4f4f4f;
+}

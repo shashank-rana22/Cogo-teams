@@ -2,26 +2,30 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useLensRequest, useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
 const getLensPayload = ({ payload }) => payload;
 
-const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userMails = [] }) => ({
+const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userSharedMails = [] }) => ({
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
 		endpoint            : '/send_mail',
 		body                : payload,
-		send_to_omnichannel : !!userMails?.includes(payload?.sender),
+		send_to_omnichannel : !!userSharedMails?.includes(payload?.sender),
 		sender_user_id      : userId,
 		send_by             : userName,
 	},
-	sender_user_id : userId,
-	service        : 'user',
-	service_id     : userId,
-	sender         : payload?.sender,
-	source         : 'CogoOne:AdminPlatform',
+	sender_user_id  : userId,
+	service         : 'user',
+	service_id      : userId,
+	sender          : payload?.sender,
+	cc_emails       : isEmpty(payload?.ccrecipients) ? undefined : payload?.ccrecipients,
+	bcc_emails      : isEmpty(payload?.bccrecipients) ? undefined : payload?.bccrecipients,
+	attachment_urls : isEmpty(payload?.attachments) ? undefined : payload?.attachments,
+	source          : 'CogoOne:AdminPlatform',
 });
 
 const API_MAPPING = {
@@ -54,7 +58,7 @@ function useReplyMail(mailProps) {
 		setButtonType = () => {},
 		userId = '',
 		userName = '',
-		userMails = [],
+		userSharedMails = [],
 	} = mailProps;
 
 	const {
@@ -71,7 +75,7 @@ function useReplyMail(mailProps) {
 	const replyMailApi = async (payload) => {
 		try {
 			await trigger({
-				data: getPayload({ payload, userId, userName, userMails }),
+				data: getPayload({ payload, userId, userName, userSharedMails }),
 			});
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);

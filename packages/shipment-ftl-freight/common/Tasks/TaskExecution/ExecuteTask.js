@@ -12,6 +12,7 @@ import {
 	UploadEWB,
 	PickAndDropTasks,
 	FtlConfirmationBooking,
+	ConfirmAwaitingServices,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -28,7 +29,13 @@ function ExecuteTask({
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 
-	const { servicesList, shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
+	const {
+		servicesList,
+		shipment_data,
+		primary_service,
+		getShipmentTimeline,
+		refetchServices,
+	} = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],
@@ -87,6 +94,7 @@ function ExecuteTask({
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
 				refetch={taskListRefetch}
+				refetchServices={refetchServices}
 			/>
 		);
 	}
@@ -129,6 +137,7 @@ function ExecuteTask({
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
 				refetch={taskListRefetch}
+				refetchServices={refetchServices}
 			/>
 		);
 	}
@@ -145,6 +154,18 @@ function ExecuteTask({
 				shipment_data={shipment_data}
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+				refetchServices={refetchServices}
+			/>
+		);
+	}
+
+	if (task.task === 'confirm_awaiting_services') {
+		return (
+			<ConfirmAwaitingServices
+				task={task}
+				services={servicesList}
+				onCancel={onCancel}
 				refetch={taskListRefetch}
 			/>
 		);

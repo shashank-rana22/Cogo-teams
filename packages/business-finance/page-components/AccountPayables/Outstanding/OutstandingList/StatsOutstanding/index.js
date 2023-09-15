@@ -113,14 +113,38 @@ function StatsOutstanding({ item = {}, source = '' }) {
 				className={styles.outstanding_card}
 				style={{ background: source ? '#fff' : '#f9fbfe' }}
 			>
-				<div className={styles.total}>Total Outstanding</div>
-				<div className={cl`${styles.amount} ${styles.marginleft}`}>
-					{getAmount({
-						amount:
-								item?.totalOutstanding,
-						currency:
-								item?.ledCurrency || currency,
-					})}
+				<div>
+					<div>
+						<div className={styles.total}>Total Outstanding</div>
+						<div className={cl`${styles.amount} ${styles.marginleft}
+						${item?.totalOutstanding >= DEFAULT_AMOUNT
+							? styles.positive : styles.amount}`}
+						>
+							{getAmount({
+								amount:
+									item?.totalOutstanding,
+								currency:
+									item?.ledCurrency || currency,
+							})}
+						</div>
+					</div>
+					<div className={styles.padding_total}>
+						<div className={styles.financial}>
+							Closing Balance
+							<span className={styles.year}>(FY22-23)</span>
+						</div>
+						<div className={cl`${styles.amount} ${styles.marginleft}
+						${item?.closingOutstandingAmountAtFirstApril >= DEFAULT_AMOUNT
+							? styles.positive : styles.amount}`}
+						>
+							{getAmount({
+								amount:
+									item?.closingOutstandingAmountAtFirstApril,
+								currency:
+									item?.ledCurrency || currency,
+							})}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

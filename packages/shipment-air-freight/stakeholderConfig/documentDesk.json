@@ -12,7 +12,7 @@
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
         "checked_show_my_tasks":true,
-        "is_task_assigned":false
+        "is_task_assigned":true
     },
     "documents":{
         "tab_title":"Documents",
@@ -52,5 +52,6 @@
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
         "can_edit":["notifying_party","collection_party"],
         "can_add_service_provider_poc":true
-    }
+    },
+    "job_open_request": false
 }
