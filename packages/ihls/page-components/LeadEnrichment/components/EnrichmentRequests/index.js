@@ -68,19 +68,19 @@ function EnrichmentRequests() {
 						const { name, placeholder, type, width, options } = item;
 						const Element = getFieldController(type);
 						return (
-							<div key={name} className={styles.field_container}>
-								<Element
-									{...ele}
-									prefix={null}
-									placeholder={placeholder}
-									options={options}
-									isClearable
-									style={{ width }}
-									control={control}
-									key={name}
-									size="sm"
-								/>
-							</div>
+						// <div key={name} className={styles.field_container}>
+							<Element
+								{...ele}
+								prefix={null}
+								placeholder={placeholder}
+								options={options}
+								isClearable
+								style={{ width }}
+								control={control}
+								key={name}
+								size="sm"
+							/>
+						// </div>
 						);
 					})}
 					<Button
