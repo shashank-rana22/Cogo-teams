@@ -6,7 +6,10 @@ import getAutoUpsellPayload from '../helpers/getAutoUpsellPayload';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
-function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = () => {} }) {
+function useCreateAutoUpsellService({
+	task = {}, refetch = () => {}, onCancel = () => {},
+	refetchServices = () => {},
+}) {
 	const [countryId, setCountryId] = useState('');
 
 	const [{ loading = false }, trigger] = useRequest({
@@ -17,6 +20,7 @@ function useCreateAutoUpsellService({ task = {}, refetch = () => {}, onCancel = 
 	const taskRefetch = () => {
 		onCancel();
 		refetch();
+		refetchServices();
 	};
 
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: taskRefetch });
