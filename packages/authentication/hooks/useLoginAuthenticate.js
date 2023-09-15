@@ -76,7 +76,6 @@ const useLoginAuthenticate = () => {
 
 		if (redirectPath) {
 			window.location.href = `/v2/${profile?.partner?.id}${redirectPath || EMPTY_PATH}`;
-			await router.push(`${redirectPath}`, `${redirectPath}`);
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 
