@@ -7,10 +7,10 @@ const ONE_FOR_LOOP = 1;
 const getInitialOtpValues = (otpLength) => {
 	const HASH = {};
 
-	for (let i = 0; i < otpLength; i += ONE_FOR_LOOP) {
-		HASH[`otp-${i + ONE_FOR_LOOP}`] = '';
-	}
-
+	Array.from({ length: Math.ceil(otpLength / ONE_FOR_LOOP) }).forEach((_, index) => {
+		const key = `otp-${(index + ONE_FOR_LOOP) * ONE_FOR_LOOP}`;
+		HASH[key] = '';
+	});
 	return HASH;
 };
 
