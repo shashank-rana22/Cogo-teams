@@ -1,72 +1,87 @@
-import { Toast } from '@cogoport/components';
-import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useCallback, useEffect, useState } from 'react';
 
-function useGetSettlementTable(organizationId:string, entityCode?: string) {
-	const [settlementFilters, setSettlementFilters] = useState({
-		page        : 1,
-		pageLimit   : 10,
-		orgId       : organizationId,
+function useGetSettlementTable(organizationId: string, entityCode?: string) {
+	const [filters, setFilters] = useState({
 		query       : '',
+		date        : { startDate: '', endDate: '' },
 		accountType : 'All',
+		orgId       : '',
+		page        : 1,
+		sortBy      : '',
+		sortType    : '',
 	});
-	const [sort, setSort] = useState({
-		sortType : 'Desc',
-		sortBy   : 'settlementDate',
-	});
-	const { query, accountType, pageLimit, page, orgId } = settlementFilters || {};
+	const [apiData, setApiData] = useState({});
 
-	const { debounceQuery } = useDebounceQuery();
+	const { query: search = '', debounceQuery } = useDebounceQuery();
+
+	const [{ data, loading }, trigger] = useRequestBf(
+		{
+			url     : '/payments/settlement/history',
+			authKey : 'get_payments_settlement_history',
+			method  : 'get',
+		},
+		{ manual: true },
+	);
+
+	const {
+		query = '', date = { startDate: '', endDate: '' },
+		accountType = 'All', page = 1, sortBy, sortType,
+	} = filters;
 
 	useEffect(() => {
 		debounceQuery(query);
 	}, [debounceQuery, query]);
 
-	const [
-		{ data: settlementList, loading },
-		trigger,
-	] = useRequestBf(
-		{
-			url     : '/payments/settlement/list',
-			method  : 'get',
-			authKey : 'get_payments_settlement_list',
-		},
-		{ manual: true },
-	);
+	const refetch = useCallback(async () => {
+		try {
+			const res = await trigger({
+				params: {
+					accountType : accountType || 'All',
+					orgId       : organizationId || undefined,
+					startDate   : date?.startDate ? formatDate({
+						date       : date?.startDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+						formatType : 'date',
+					}) : undefined,
+					endDate: date?.endDate ? formatDate({
+						date       : date?.endDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+						formatType : 'date',
+					}) : undefined,
+					query      : search || undefined,
+					page,
+					pageLimit  : 10,
+					sortBy     : sortBy || undefined,
+					sortType   : sortType || undefined,
+					entityCode : entityCode || undefined,
+				},
+			});
+			setApiData(res?.data || []);
+		} catch (error) {
+			setApiData({});
+		}
+	}, [accountType, date?.endDate, date?.startDate, entityCode,
+		organizationId, page, search, sortBy, sortType, trigger]);
 
-	useEffect(
-		() => {
-			const refetch = () => {
-				try {
-					trigger({
-						params: {
-							page,
-							pageLimit,
-							orgId       : orgId || undefined,
-							accountType : accountType || undefined,
-							query       : query || undefined,
-							entityCode  : entityCode || undefined,
-							sortBy      : sort?.sortBy || undefined,
-							sortType    : sort?.sortType || undefined,
-						},
-					});
-				} catch (e) {
-					Toast.error(e?.message);
-				}
-			};
+	useEffect(() => {
+		if (!isEmpty(organizationId)) {
 			refetch();
-		},
-		[accountType, orgId, page, pageLimit, query, trigger, entityCode, sort?.sortBy, sort?.sortType],
-	);
+		}
+	}, [organizationId, refetch]);
 
 	return {
-		settlementList,
+		filters,
+		setFilters,
+		data,
 		loading,
-		settlementFilters,
-		setSettlementFilters,
-		sort,
-		setSort,
+		setApiData,
+		apiData,
+		refetch,
 	};
 }
 
