@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import LeaveModal from '../../../../../../common/LeaveModal';
 import useCreateUserInactiveStatus from '../../../../../../hooks/useCreateUserInactiveStatus';
+import useListCogoOneShift from '../../../../../../hooks/useListCogoOneShift';
 
 import AgentStatusConfig from './AgentStatusConfig';
 import styles from './styles.module.css';
@@ -21,6 +22,8 @@ function LeaveAgentModal({
 }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 	const [shiftData, setShiftData] = useState({});
+
+	const { shiftList = [] } = useListCogoOneShift();
 
 	const { list = [] } = listAgentStatus || {};
 
@@ -109,6 +112,7 @@ function LeaveAgentModal({
 										shiftData={shiftData}
 										updateUserStatus={updateUserStatus}
 										list={list}
+										shiftList={shiftList}
 									/>
 								)}
 							</div>

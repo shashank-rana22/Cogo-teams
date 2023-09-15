@@ -969,15 +969,6 @@ function asyncListSpotSearchRateCardOperators() {
 	};
 }
 
-function asyncListCogoOneShiftTime() {
-	return {
-		labelKey    : 'shift_name',
-		valueKey    : 'id',
-		endpoint    : 'list_cogoone_shifts',
-		initialCall : false,
-	};
-}
-
 function asyncListOverSeasTradeParties() {
 	return {
 		valueKey     : 'organizationId',
@@ -1069,6 +1060,5 @@ export {
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
-	asyncListCogoOneShiftTime,
 	asyncListOverSeasTradeParties,
 };

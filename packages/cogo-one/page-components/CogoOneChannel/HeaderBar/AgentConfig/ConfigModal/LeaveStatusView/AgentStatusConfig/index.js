@@ -1,5 +1,4 @@
-import { Button, Toggle } from '@cogoport/components';
-import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { Button, Toggle, Select } from '@cogoport/components';
 import { useEffect, useMemo } from 'react';
 
 import RenderLabel from './RenderLabel';
@@ -14,8 +13,9 @@ function AgentStatusConfig({
 	updateUserStatus = () => {},
 	list = [],
 	itm = {},
+	shiftList = [],
 }) {
-	const { agent_type: agentType = '', id: rowId = '', status = '', agent_id: agentId = '' } = itm || {};
+	const { id: rowId = '', status = '', agent_id: agentId = '' } = itm || {};
 
 	const handleSelecteddata = ({ selectedId = '', obj = {} }) => {
 		if (!selectedId) {
@@ -39,16 +39,15 @@ function AgentStatusConfig({
 
 	const setShiftTime = useMemo(() => {
 		const filteredList = (list || []).filter((item) => item && item?.id
-		&& item?.cogoone_shift && item?.shift_name);
+		&& item?.cogoone_shift);
 
 		const updatedShiftValue = filteredList.reduce((acc, item) => {
 			acc[item.id] = {
-				id         : item.cogoone_shift.id,
-				shift_name : item.shift_name,
+				id         : item?.cogoone_shift?.id,
+				shift_name : item?.cogoone_shift?.shift_name,
 			};
 			return acc;
 		}, {});
-
 		return updatedShiftValue;
 	}, [list]);
 
@@ -58,21 +57,16 @@ function AgentStatusConfig({
 
 	return (
 		<div className={styles.container}>
-			<AsyncSelect
-				asyncKey="cogoone_shift_time"
-				initialCall={false}
-				onChange={(val, obj) => handleSelecteddata({ selectedId: val, obj })}
+			<Select
 				value={shiftData?.[rowId]?.id}
-				placeholder="Select shift"
+				onChange={(val, obj) => handleSelecteddata({ selectedId: val, obj })}
 				size="xs"
-				params={{
-					filters: {
-						team_name : agentType,
-						status    : 'active',
-					},
-				}}
-				renderLabel={(item) => <RenderLabel item={item} />}
 				className={styles.select_section}
+				options={shiftList || []}
+				labelKey="shift_name"
+				valueKey="id"
+				placeholder="Select shift"
+				renderLabel={(item) => <RenderLabel item={item} />}
 			/>
 			<Button
 				size="sm"
