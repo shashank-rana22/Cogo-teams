@@ -8,7 +8,7 @@ const getPayload = ({ selectedTeam }) => ({
 	},
 });
 
-function useListCogooneShift({ selectedTeam }) {
+function useListCogooneShiftConfiguration({ selectedTeam }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_cogoone_shifts',
 		method : 'get',
@@ -34,4 +34,4 @@ function useListCogooneShift({ selectedTeam }) {
 		shiftDataLoading : loading,
 	};
 }
-export default useListCogooneShift;
+export default useListCogooneShiftConfiguration;

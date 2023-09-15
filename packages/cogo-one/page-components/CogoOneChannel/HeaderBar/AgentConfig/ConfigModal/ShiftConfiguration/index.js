@@ -6,7 +6,7 @@ import { CONTROLS, SHIFT_CONFIGURATION_HEADING, teamsOption } from '../../../../
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
 import { transformShiftData, validateTime } from '../../../../../../helpers/shiftConfigurationHelpers';
 import useCreateBulkCogooneShift from '../../../../../../hooks/useCreateBulkCogooneShift';
-import useListCogooneShift from '../../../../../../hooks/useListCogooneShift';
+import useListCogooneShiftConfiguration from '../../../../../../hooks/useListCogooneShiftConfiguration';
 import useUpdateCogooneShift from '../../../../../../hooks/useUpdateCogooneShift';
 import getDefaultValues from '../../../../../../utils/getDefaultValues';
 
@@ -20,7 +20,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 		getListShift = () => {},
 		shiftsData = {},
 		shiftDataLoading = false,
-	} = useListCogooneShift({ selectedTeam });
+	} = useListCogooneShiftConfiguration({ selectedTeam });
 
 	const { createUpdateRequest = () => {} } = useUpdateCogooneShift({ getListShift, handleClose });
 
