@@ -29,7 +29,6 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
 	const onSubmit = (values) => {
-		console.log('true');
 		const payload = {
 			sub_process_data : values,
 			sub_process_detail_id,

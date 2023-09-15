@@ -20,7 +20,6 @@ const SECOND_INDEX = 2;
 const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
 function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loading = false }) {
-	console.log('🚀 ~ file: index.js:23 ~ HRMeeting ~ data:', data);
 	const {
 		control,
 		watch,
