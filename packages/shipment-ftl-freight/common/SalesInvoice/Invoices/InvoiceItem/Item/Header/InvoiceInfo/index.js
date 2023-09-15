@@ -45,12 +45,16 @@ function InvoiceInfo({
 		invoice_total_currency,
 		invoice_total_discounted,
 		live_invoice_number,
-	} = invoice;
+		processing : isProcessing = false,
+		id: invoiceId = '',
+		status = '',
+		is_revoked = false,
+	} = invoice || {};
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
-	&& invoice?.status === 'reviewed'
+	&& status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
@@ -75,8 +79,6 @@ function InvoiceInfo({
 			message: API_SUCCESS_MESSAGE[type],
 		});
 	};
-
-	const isProcessing = invoice?.processing || false;
 
 	return (
 		<>
@@ -159,10 +161,10 @@ function InvoiceInfo({
 			</div>
 
 			<div className={styles.invoice_container}>
-				{invoice.status
-					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
+				{status
+					&& RESTRICT_REVOKED_STATUS.includes(status) ? (
 						<div className={styles.invoice_status}>
-							{startCase(invoice.status)}
+							{startCase(status)}
 						</div>
 					) : null}
 
@@ -175,7 +177,7 @@ function InvoiceInfo({
 								themeType="tertiary"
 								onClick={() => sendInvoiceToFinance({
 									payload: {
-										id: invoice?.id,
+										id: invoiceId,
 									},
 								})}
 							>
@@ -185,7 +187,7 @@ function InvoiceInfo({
 					)
 					: null}
 
-				{(!invoice.is_revoked && invoice.status !== 'finance_rejected' && !isProcessing) ? (
+				{(!invoice.is_revoked && status !== 'finance_rejected' && !isProcessing) ? (
 					<Actions
 						invoice={invoice}
 						bfInvoiceRefetch={bfInvoiceRefetch}
@@ -196,7 +198,7 @@ function InvoiceInfo({
 					/>
 				) : null}
 
-				{(invoice?.status === 'reviewed'
+				{(status === 'reviewed'
 					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id && !isProcessing) ? (
 						<Button
 							style={{ marginTop: '4px' }}
@@ -217,7 +219,7 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{(invoice?.status === 'reviewed' && !isProcessing) ? (
+				{(status === 'reviewed' && !isProcessing) ? (
 					<Button
 						size="sm"
 						onClick={() => setShowOTPModal(true)}
@@ -226,7 +228,7 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{(!INVOICE_STATUS.includes(invoice.status) && !isProcessing) ? (
+				{(!INVOICE_STATUS.includes(status) && !isProcessing) ? (
 					<Button
 						size="sm"
 						onClick={() => setShowReview(true)}
@@ -237,7 +239,7 @@ function InvoiceInfo({
 					</Button>
 				) : null}
 
-				{(invoice?.is_revoked && invoice?.status !== 'revoked' && !isProcessing) ? (
+				{(is_revoked && status !== 'revoked' && !isProcessing) ? (
 					<div className={styles.info_container}>Requested for Revoke</div>
 				) : null}
 			</div>
