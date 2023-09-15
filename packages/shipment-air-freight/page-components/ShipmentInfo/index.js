@@ -2,6 +2,7 @@ import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
+import Image from 'next/image';
 import React, { useContext } from 'react';
 
 import useShipmentBack from '../../hooks/useShipmentBack';
@@ -40,10 +41,11 @@ function ShipmentInfo() {
 			{source ? <Pill size="sm" color="blue" className={styles.pill}>{sourceText}</Pill> : null}
 
 			{is_cogo_assured ? (
-				<img
+				<Image
 					src={GLOBAL_CONSTANTS.image_url.cogo_assured_svg}
 					alt="cogo-assured"
 					height={16}
+					width={88}
 				/>
 			) : null}
 
