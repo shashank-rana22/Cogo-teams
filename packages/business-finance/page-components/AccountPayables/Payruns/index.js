@@ -100,18 +100,18 @@ function Payruns({ activeEntity = '' }) {
 						pageIndex: val,
 					}))}
 					showPagination
-					viewId={viewId}
 					dropDownData={dropDownData}
 					loadingDropDown={loadingDropDown}
 					activePayrunTab={activePayrunTab}
 					paginationType="number"
 					idKey="objectId"
-					renderDropDown={(singleitem) => (
+					showId={viewId}
+					RenderAccordianData={(props) => (
 						<RenderPaidAccordian
 							dropDownData={dropDownData}
 							loadingDropDown={loadingDropDown}
 							viewId={viewId}
-							singleitem={singleitem}
+							singleitem={props}
 							country_code={country_code}
 						/>
 					)}
