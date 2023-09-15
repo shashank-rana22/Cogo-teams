@@ -39,7 +39,7 @@ function AccountPayables() {
 
 	const handleTabChange = (v) => {
 		if (
-			['payruns', 'outstanding', 'invoices'].includes(v)
+			['payruns', 'invoices'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
@@ -73,7 +73,7 @@ function AccountPayables() {
 					<Placeholder className={styles.loader} />
 				) : (
 					<div>
-						{FILTER_TABS.includes(activePayables) ? (
+						{isEmpty(selectedOrg) && FILTER_TABS.includes(activePayables) ? (
 							<Select
 								name="activeEntity"
 								value={activeEntity}

@@ -31,23 +31,6 @@ interface DataInterface {
 	totalRecords: number;
 }
 
-interface Props {
-	apiData: DataInterface | {};
-	onPageChange: (val: number) => void;
-	loading: boolean;
-	setFilters: React.Dispatch<React.SetStateAction<{}>>;
-	filters: { sortType?: string };
-	isAllChecked: boolean;
-	showHeaderCheckbox: boolean;
-	onChangeTableHeaderCheckbox: (event: object) => void;
-	checkedRows: Object;
-	getTableBodyCheckbox: (item: object) => React.JSX.Element;
-	refetch: () => void;
-	setCheckedRows: (p: object) => void;
-	showFooter?: boolean;
-	source?: string;
-}
-
 function CustomTable({
 	apiData = {},
 	onPageChange,
@@ -63,7 +46,7 @@ function CustomTable({
 	setCheckedRows,
 	showFooter = true,
 	source = '',
-}: Props) {
+}: any) {
 	const {
 		list = [],
 		pageNo = 1,

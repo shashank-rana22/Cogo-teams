@@ -2,9 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
-import getAllPocMergedData from '../../../../../../helpers/getAllPocMergedData';
-import useListShipmentStakeholders from '../../../../../../hooks/useListShipmentStakeholders';
-import useListShipmentTradePartners from '../../../../../../hooks/useListShipmentTradePartners';
+import getAllPocMergedData from '../../helpers/getAllPocMergedData';
+import useListShipmentStakeholders from '../../hooks/useListShipmentStakeholders';
+import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
 import PocUser from './PocUser';
 import styles from './styles.module.css';
