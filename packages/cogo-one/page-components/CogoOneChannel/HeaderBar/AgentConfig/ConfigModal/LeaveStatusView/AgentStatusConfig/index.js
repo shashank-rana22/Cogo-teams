@@ -1,23 +1,9 @@
 import { Button, Toggle } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import RenderLabel from './RenderLabel';
 import styles from './styles.module.css';
-
-const getShiftValue = ({ list = [] }) => {
-	const updatedShiftValue = (list || []).reduce((acc, item) => {
-		if (item && item?.id && item?.cogoone_shift && item?.shift_name) {
-			acc[item.id] = {
-				id         : item.cogoone_shift.id,
-				shift_name : item.shift_name,
-			};
-		}
-		return acc;
-	}, {});
-
-	return updatedShiftValue;
-};
 
 function AgentStatusConfig({
 	onChangeToggle = () => {},
@@ -51,7 +37,20 @@ function AgentStatusConfig({
 		});
 	};
 
-	const setShiftTime = getShiftValue({ list });
+	const setShiftTime = useMemo(() => {
+		const filteredList = (list || []).filter((item) => item && item?.id
+		&& item?.cogoone_shift && item?.shift_name);
+
+		const updatedShiftValue = filteredList.reduce((acc, item) => {
+			acc[item.id] = {
+				id         : item.cogoone_shift.id,
+				shift_name : item.shift_name,
+			};
+			return acc;
+		}, {});
+
+		return updatedShiftValue;
+	}, [list]);
 
 	useEffect(() => {
 		setShiftData(setShiftTime);
