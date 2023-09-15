@@ -82,7 +82,6 @@ const useGetLeadData = () => {
 
 	const getFormattedParam = (param_attr) => {
 		const formatted_attr = (param_attr || []).map((item) => STRING_BOOL_MAPPINGS[item] || item);
-
 		return formatted_attr;
 	};
 
@@ -115,7 +114,7 @@ const useGetLeadData = () => {
 				...(previousParams.filters || {}),
 				platform_lifecycle_stage: platform_lifecycle_stage && !isEmpty(platform_lifecycle_stage)
 					? platform_lifecycle_stage : undefined,
-				is_channel_partner : STRING_BOOL_MAPPINGS[is_channel_partner] || undefined,
+				is_channel_partner : is_channel_partner ? STRING_BOOL_MAPPINGS[is_channel_partner] : undefined,
 				segment            : segment && !isEmpty(segment) ? segment : undefined,
 				registration_type  : registration_type && !isEmpty(registration_type) ? registration_type : undefined,
 				is_user_enriched   : org_enrichment_status
