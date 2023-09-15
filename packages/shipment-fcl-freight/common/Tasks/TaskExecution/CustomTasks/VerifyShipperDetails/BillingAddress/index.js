@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import {
 	AsyncSelectController,
 	ChipsController,
@@ -10,6 +11,7 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import { useContext } from 'react';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
@@ -32,6 +34,8 @@ function Error(key, errors) {
 }
 
 function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = '', onCancel = () => {} }) {
+	const { refetchServices = () => {} } = useContext(ShipmentDetailContext);
+
 	const { control, reset = () => {}, formState:{ errors = {} }, handleSubmit = () => {} } = useForm();
 
 	const { loading = false } = useListOrganizationUsers({ consigneeShipperId, reset });
@@ -41,7 +45,7 @@ function BillingAddress({ task = {}, refetch = () => {}, consigneeShipperId = ''
 		loading: upsellLoading = false,
 		countryId = '',
 		setCountryId = () => {},
-	} = useCreateAutoUpsellService({ task, refetch, onCancel });
+	} = useCreateAutoUpsellService({ task, refetch, onCancel, refetchServices });
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,
