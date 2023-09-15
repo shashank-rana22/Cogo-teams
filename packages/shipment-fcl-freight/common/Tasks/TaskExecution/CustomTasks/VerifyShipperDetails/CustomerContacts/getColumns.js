@@ -6,12 +6,15 @@ import styles from './styles.module.css';
 
 function getColumns({
 	selectedUserId = '',
-	buttonLoading = false,
+	createLoading = false,
+	updateLoading = false,
 	setSelectedUserId = () => {},
 	control = {},
 	handleSubmit = () => {},
 	onUpdateLeadUser = () => {},
-	createLeadOrgAccount = () => { },
+	createLeadOrgAccount = () => {},
+	submitUserId = '',
+	setSubmitUserId = () => {},
 }) {
 	const columns = [
 		{
@@ -74,6 +77,7 @@ function getColumns({
 								<Button
 									themeType="tertiary"
 									onClick={() => setSelectedUserId('')}
+									disabled={updateLoading}
 								>
 									Cancel
 								</Button>
@@ -81,6 +85,8 @@ function getColumns({
 								<Button
 									themeType="secondary"
 									onClick={handleSubmit(onUpdateLeadUser)}
+									loading={updateLoading}
+									disabled={updateLoading}
 								>
 									Save
 								</Button>
@@ -89,7 +95,7 @@ function getColumns({
 							<>
 								<Button
 									themeType="secondary"
-									disabled={buttonLoading}
+									disabled={createLoading && submitUserId === item?.id}
 									onClick={() => { setSelectedUserId(item?.id); }}
 								>
 									<IcMEdit className={styles.icon} />
@@ -98,9 +104,12 @@ function getColumns({
 
 								{!selectedUserId ? (
 									<Button
-										loading={buttonLoading}
-										disabled={buttonLoading}
-										onClick={() => createLeadOrgAccount({ selectedPocId: item?.id })}
+										loading={createLoading && submitUserId === item?.id}
+										disabled={createLoading && submitUserId === item?.id}
+										onClick={() => {
+											createLeadOrgAccount({ selectedPocId: item?.id });
+											setSubmitUserId(item?.id);
+										}}
 									>
 										Choose and Verify
 									</Button>

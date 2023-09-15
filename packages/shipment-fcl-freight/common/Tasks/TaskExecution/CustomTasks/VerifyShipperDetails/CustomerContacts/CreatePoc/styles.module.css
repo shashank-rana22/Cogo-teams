@@ -7,11 +7,11 @@
 .form_container {
 	display: flex;
 	flex: 1;
-	align-items: center;
+	align-items: flex-start;
 	width: 100%;
 	padding: 12px 8px;
 	margin-bottom: 12px;
-	background: var(--color-secondary-4);
+	background-color: var(--color-secondary-4);
 	border-radius: 6px;
 
 	button {
@@ -41,6 +41,11 @@
 
 .button_container {
 	display: flex;
-	align-self: center;
 	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.errors {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-1);
 }

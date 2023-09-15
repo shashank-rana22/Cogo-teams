@@ -1,4 +1,4 @@
-function getControls({ countryValidation, setCountryId = () => {} }) {
+function getControls({ countryValidation = {}, setCountryId = () => {} }) {
 	const controls = [
 		{
 			name        : 'business_name',

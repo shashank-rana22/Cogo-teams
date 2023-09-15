@@ -18,9 +18,9 @@ const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
 
 function useCreateLeadUser({
 	leadsData = {},
-	refetchList = () => { },
-	setShowCreatePoc = () => { },
-	setSelectedUserId = () => { },
+	refetchList = () => {},
+	setShowCreatePoc = () => {},
+	setSelectedUserId = () => {},
 	reset = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({

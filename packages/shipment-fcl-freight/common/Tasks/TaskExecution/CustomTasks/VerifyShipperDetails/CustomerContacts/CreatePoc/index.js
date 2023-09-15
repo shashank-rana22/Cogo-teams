@@ -1,53 +1,52 @@
 import { Button } from '@cogoport/components';
 import { InputController, MobileNumberController } from '@cogoport/forms';
 
+import getControls from './getControls';
 import styles from './styles.module.css';
+
+const INPUT_MAPPING = {
+	text         : InputController,
+	mobileNumber : MobileNumberController,
+};
 
 function CreatePoc({
 	setShowCreatePoc = () => {},
 	control = {},
+	errors = {},
 	onCreateLeadUser = () => {},
 	handleSubmit = () => {},
+	createUserLoading = false,
 }) {
+	const controls = getControls();
+
 	return (
 		<div className={styles.form_container}>
-			<div className={styles.form_item_container}>
-				<label className={styles.form_label}>Name</label>
+			{controls.map((formControl) => {
+				const { name = '', label = '', type = '' } = formControl;
+				const Element = INPUT_MAPPING[type];
 
-				<InputController
-					size="sm"
-					name="new_name"
-					control={control}
-					placeholder="Enter Name"
-				/>
-			</div>
+				if (!Element) return null;
 
-			<div className={styles.form_item_container}>
-				<label className={styles.form_label}>Email</label>
+				return (
+					<div key={name} className={styles.form_item_container}>
+						<label className={styles.form_label}>{label}</label>
 
-				<InputController
-					size="sm"
-					name="new_email"
-					control={control}
-					placeholder="Enter Email Address"
-				/>
-			</div>
+						<Element
+							control={control}
+							{...formControl}
+						/>
 
-			<div className={styles.form_item_container}>
-				<label className={styles.form_label}>Mobile Number</label>
-
-				<MobileNumberController
-					size="sm"
-					name="new_mobile_number"
-					control={control}
-					placeholder="Enter Mobile Number"
-				/>
-			</div>
+						<div className={styles.errors}>{errors?.name?.message}</div>
+					</div>
+				);
+			})}
 
 			<div className={styles.button_container}>
 				<Button
 					themeType="secondary"
 					onClick={handleSubmit(onCreateLeadUser)}
+					loading={createUserLoading}
+					disabled={createUserLoading}
 				>
 					Save
 				</Button>
@@ -55,6 +54,7 @@ function CreatePoc({
 				<Button
 					themeType="tertiary"
 					onClick={() => { setShowCreatePoc(false); }}
+					disabled={createUserLoading}
 				>
 					Cancel
 				</Button>

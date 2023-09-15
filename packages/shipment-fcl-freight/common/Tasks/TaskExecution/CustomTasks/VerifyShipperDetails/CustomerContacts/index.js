@@ -15,9 +15,10 @@ import styles from './styles.module.css';
 
 function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId = () => {}, onCancel = () => {} }) {
 	const [selectedUserId, setSelectedUserId] = useState(null);
+	const [submitUserId, setSubmitUserId] = useState(null);
 	const [showCreatePoc, setShowCreatePoc] = useState(false);
 
-	const { control, handleSubmit, reset } = useForm();
+	const { control, handleSubmit, reset, formState:{ errors } } = useForm();
 
 	const {
 		loading = false,
@@ -45,10 +46,13 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 		setSelectedUserId,
 		selectedUserId,
 		control,
-		buttonLoading: loading || createUserLoading || createLoading || updateLoading,
+		createLoading,
+		updateLoading,
 		handleSubmit,
 		onUpdateLeadUser,
 		createLeadOrgAccount,
+		submitUserId,
+		setSubmitUserId,
 	});
 
 	return (
@@ -61,14 +65,16 @@ function CustomerContacts({ setStep = () => {}, task = {}, setConsigneeShipperId
 					data={leadsData?.users || []}
 					className={styles.table}
 					columns={columns}
-					loading={loading || updateLoading}
+					loading={loading}
 				/>
 
 				{showCreatePoc ? (
 					<CreatePoc
 						setShowCreatePoc={setShowCreatePoc}
 						onCreateLeadUser={onCreateLeadUser}
+						createUserLoading={createUserLoading}
 						control={control}
+						errors={errors}
 						handleSubmit={handleSubmit}
 					/>
 				) : null}

@@ -58,7 +58,7 @@ function ExecuteTask({
 		shipment_data = {},
 		primary_service = {},
 		stakeholderConfig = {},
-		refetch: getShipmentRefetch = () => { },
+		refetch: getShipmentRefetch = () => {},
 	} = useContext(ShipmentDetailContext);
 
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
