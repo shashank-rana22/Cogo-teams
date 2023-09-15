@@ -5,11 +5,9 @@ import styles from './styles.module.css';
 
 function FinanceRecommendations({ data = {} }) {
 	const {
-		hold_employee,
+		hold_employee, hold_fnf,
 	} = data || {};
 	const [showNotes, setShowNotes] = useState(true);
-
-	console.log({ showNotes });
 
 	return (
 
@@ -23,10 +21,10 @@ function FinanceRecommendations({ data = {} }) {
 					<Toggle
 						name="a4"
 						size="md"
-						disabled={false}
+						disabled
 						onLabel="Let GO Employee"
 						value={hold_employee}
-						onChange={setShowNotes}
+						checked={hold_employee}
 						offLabel="Hold Employee"
 					/>
 				</div>
@@ -35,10 +33,11 @@ function FinanceRecommendations({ data = {} }) {
 					<Toggle
 						name="a4"
 						size="md"
-						disabled={false}
+						disabled
 						onLabel="Release FNF"
 						offLabel="Hold FNF"
 						value={showNotes}
+						checked={hold_fnf}
 						onChange={setShowNotes}
 					/>
 				</div>

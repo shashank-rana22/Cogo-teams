@@ -5,13 +5,10 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () => { } }) {
+function InterviewQuestions({ control = {}, errors = {}, data = {} }) {
 	const ONE = 1; const TWO = 2; const THREE = 3;
 	const { notes } = data || {};
 	const [show, setShow] = useState(false);
-	const notes_to_watch = watch();
-	console.log('🚀 ~ file: index.js:13 ~ InterviewQuestions ~ notes_to_watch:', notes_to_watch);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading} aria-hidden onClick={() => setShow(!show)}>
@@ -73,7 +70,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb_2"
 									size="md"
-									disabled={!notes?.[ONE]?.value || !notes_to_watch?.your_notes_2}
+									disabled={notes?.[ONE]?.value}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -95,7 +92,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 							size="md"
 							style={{ marginRight: '8px', width: '100%' }}
 							placeholder="Type your notes here"
-							disabled={!notes?.[TWO]?.value || !notes_to_watch?.your_notes_2}
+							disabled={notes?.[TWO]?.value}
 						/>
 						<div className={styles.below_text}>
 							<div>
@@ -103,7 +100,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb_3"
 									size="md"
-									disabled={!notes?.[TWO]?.value || !notes_to_watch?.your_notes_2}
+									disabled={notes?.[TWO]?.value}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
@@ -124,7 +121,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 							size="md"
 							placeholder="Type your notes here"
 							rules={{ required: 'this is required' }}
-							disabled={!notes?.[THREE]?.value || !notes_to_watch?.your_notes_2}
+							disabled={notes?.[THREE]?.value}
 						/>
 						{errors.your_notes_4 && (
 							<span className={styles.error}>*This field is Required</span>
@@ -135,7 +132,7 @@ function InterviewQuestions({ control = {}, errors = {}, data = {}, watch = () =
 									control={control}
 									name="your_notes_cb_4"
 									size="md"
-									disabled={!notes?.[THREE]?.value || !notes_to_watch?.your_notes_2}
+									disabled={notes?.[THREE]?.value}
 								/>
 							</div>
 							<div className={styles.manager_text}>Share with manager</div>
