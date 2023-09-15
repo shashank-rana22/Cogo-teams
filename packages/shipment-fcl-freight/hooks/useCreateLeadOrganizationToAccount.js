@@ -3,6 +3,8 @@ import { useRequest } from '@cogoport/request';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
+const ONE = '1';
+
 const getFormattedPayload = ({ leadsData = {}, selectedPocId = '' }) => {
 	const payload = {
 		lead_organization_id : leadsData?.id,
@@ -37,13 +39,13 @@ function useCreateLeadOrganizationToAccount({
 
 			const updatePendingTaskPayload = {
 				id     : task?.id,
-				tags   : ['1'],
+				tags   : [ONE],
 				status : 'pending',
 			};
 
 			await apiTrigger({ ...updatePendingTaskPayload });
 
-			setStep('1');
+			setStep(ONE);
 		} catch (error) {
 			toastApiError(error);
 		}

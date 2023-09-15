@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const getFormattedPayload = ({ values = {}, selectedUserId = '' }) => {
-	const { name = '', email = '', mobile_number = {} } = values;
+	const { name = '', email = '', mobile_number = {} } = values || {};
 
 	const payload = {
 		name,
