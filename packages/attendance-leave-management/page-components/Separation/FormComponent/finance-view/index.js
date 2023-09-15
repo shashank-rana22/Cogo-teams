@@ -42,19 +42,19 @@ const ZERO = 0;
 // ];
 
 // eslint-disable-next-line max-lines-per-function
-function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
+function FinanceClearanceEmployeeSide({ data = {}, refetch = () => {}, loading = false }) {
 	// const { control, formState:{ errors }, watch, handleSubmit } = useForm();
 	const {
 		handleSubmit, onSubmit, control, errors,
 		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
 		SetFinanceRecommendation, financeRecommendation, off_boarding_application_id,
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
-		loading, setValue,
-	} = useFinanceClearance({ refetch });
+		setValue,
+	} = useFinanceClearance({ data, refetch, loading });
 	// const is_complete = true;
 	//	console.log(is_complete); // use this for showing the get details
 	const { getDownloadOutstandingFileLink } = useDownloadOutstandingDetails();
-	const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
+	// const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
 	const [confirmedValues, setConfirmedValues] = useState(
 		{
 			tcFullName        : 'Udit chavan',
@@ -65,21 +65,20 @@ function FinanceClearanceEmployeeSide({ refetch = () => {} }) {
 
 		},
 	);
-	console.log('sub process data', sub_process_data, is_complete);
+	// console.log('sub process data', sub_process_data, is_complete);
 
 	useEffect(() => {
-		setValue('additionalRemarks', data.additional_remarks);
+		setValue('additionalRemarks', sub_process_data?.additional_remarks);
 		setConfirmedValues(
 			{
 				tcFullName    : 'Udit chavan',
-				employee      : data.hold_employee,
-				fnf           : data.hold_fnf,
+				employee      : sub_process_data?.hold_employee,
+				fnf           : sub_process_data.hold_fnf,
 				getupdateData : data?.update_fnf_status,
 
 			},
 		);
-	}, [data, loading, setUpdateData, setValue]);
-	console.log(data);
+	}, [data, loading, setUpdateData, setValue, sub_process_data]);
 	const [show, setShow] = useState(true);
 	// const [confirmModal, setConfirmModal] = useState(false);
 	const [showModal, setShowModal] = useState(false);

@@ -6,8 +6,6 @@ import {
 import React, { useState } from 'react';
 
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
-// import InterviewComplete from '../ExitInterviewComplete/InterviewCompletion';
-// import ReasonsToLeave from '../ExitReasons/Reasons';
 
 import ExitHeading from './ExitHeading';
 import ScheduleInterview from './Schedule';

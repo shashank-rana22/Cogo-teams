@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-// import useGetGenerateExitCode from '../../hooks/useGetGenerateExitCode';
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 import ExitHeading from '../ExitInterview/ExitHeading';
 
@@ -54,7 +53,6 @@ function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = (
 			sub_process_detail_id,
 			process_name: 'exit_interview',
 		};
-		//	console.log(off_boarding_application_id);
 		updateApplication({
 			payload,
 		});

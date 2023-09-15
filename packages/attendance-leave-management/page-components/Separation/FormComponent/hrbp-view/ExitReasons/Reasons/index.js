@@ -9,28 +9,17 @@ import React, { useState } from 'react';
 import useGetGenerateExitCode from '../../../hooks/useGetGenerateExitCode';
 
 import styles from './styles.module.css';
-// { onSubmit, control, handleSubmit }
+
 function ReasonsToLeave({ setComplete, setCode, control, off_boarding_application_id, REASONS_LIST }) {
 	const [show, setShow] = useState(true);
 
-	// const v1 = watch();
-	// console.log('v1:', v1);
-	//	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
 	const { getExitCode } = useGetGenerateExitCode();
 
 	const handleGetCode = async () => {
 		const data = await getExitCode({ off_boarding_application_id });
-		console.log(data.exit_code);
 		setCode(data.exit_code);
 		setComplete(true);
-		// updateApplication({
-		// 	payload,
-		// });
-		// reset();
 	};
-	// const onSubmit = () => {
-	// 	reset();
-	// };
 
 	return (
 		<>
@@ -71,7 +60,11 @@ function ReasonsToLeave({ setComplete, setCode, control, off_boarding_applicatio
 				<div className={styles.heading}>Interview Completion Code</div>
 				<div className={styles.info}>
 					Click
-					on ‘Generate Code’ button once the interview is completed.
+					on
+					{' '}
+					<q>Generate Code</q>
+					{' '}
+					button once the interview is completed.
 					Share it with the employee only after the interview.
 				</div>
 			</div>

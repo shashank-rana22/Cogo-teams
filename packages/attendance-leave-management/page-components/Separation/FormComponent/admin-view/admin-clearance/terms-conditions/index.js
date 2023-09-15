@@ -3,18 +3,18 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsConditions({ control = {}, errors = {}, termschecked = false }) {
+function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>
-			<div className={styles.subtitle}>Please read carefully</div>
+			<div className={styles.sub_title}>Please read carefully</div>
 			<div className={styles.content_sub_container}>
 				<div className={styles.content_text_container}>
 					<CheckboxController
 						className={styles.Checkbox}
-						name="termsacceptance"
+						name="termsAcceptance"
 						control={control}
-						checkeed={termschecked}
+						checkeed={termsChecked}
 					/>
 					<div className={styles.content}>
 						<p>
@@ -30,7 +30,7 @@ function TermsConditions({ control = {}, errors = {}, termschecked = false }) {
 						</p>
 					</div>
 				</div>
-				{!termschecked ? <span className={styles.error}>*required</span> : null}
+				{!termsChecked ? <span className={styles.error}>*required</span> : null}
 
 				<div className={styles.name_main_container}>
 					<div className={styles.full_name_text}>
@@ -46,9 +46,7 @@ function TermsConditions({ control = {}, errors = {}, termschecked = false }) {
 							rules={{ required: 'this is required' }}
 						/>
 
-						{errors.name && (
-							<span className={styles.error}>*required</span>
-						)}
+						{errors.name ? <span className={styles.error}>*required</span> : null}
 					</div>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 
-function DatePicker({ control, errors, is_complete = false }) {
+function DatePicker({ control, errors }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Last Working Day</div>
@@ -22,7 +22,7 @@ function DatePicker({ control, errors, is_complete = false }) {
 					name="last_working_day"
 					className={styles.date_picker}
 					rules={{ required: 'this is required' }}
-					disabled={is_complete}
+					disabled
 				/>
 				{errors.last_working_day ? <span className={styles.error}>*required</span> : null}
 			</div>

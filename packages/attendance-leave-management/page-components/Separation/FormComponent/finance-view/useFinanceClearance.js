@@ -1,20 +1,19 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useState } from 'react';
 
 import useUpdateAppliationProcessDetails from '../hooks/useUpdateAppliationProcessDetails';
 
-import useGetFinanceClearanceProcessDetails from './useGetFinanceClearanceDetails';
+// import useGetFinanceClearanceProcessDetails from './useGetFinanceClearanceDetails';
 
-const ZERO = 0;
-
-const useFinanceClearance = ({ refetch }) => {
+const useFinanceClearance = ({ data, refetch }) => {
 	const [updateData, setUpdateData] = useState([]);
-	const [totalRecoverableAmount, setTotalRecoverableAmount] = useState(ZERO);
+	const [totalRecoverableAmount, setTotalRecoverableAmount] = useState(GLOBAL_CONSTANTS.zeroth_index);
 	const [financeRecommendation, SetFinanceRecommendation] = useState({
 		employee : false,
 		fnf      : false,
 	});
-	const { data, loading } = useGetFinanceClearanceProcessDetails();
+	// const { data, loading } = useGetFinanceClearanceProcessDetails();
 	const off_boarding_application_id = data?.off_boarding_application_id || '';
 	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm();
 
@@ -60,8 +59,6 @@ const useFinanceClearance = ({ refetch }) => {
 				name                       : financeRecommendation.name || '',
 			},
 		};
-		// console.log(payload);
-
 		updateApplication({ payload });
 	};
 
@@ -87,7 +84,6 @@ const useFinanceClearance = ({ refetch }) => {
 		financeRecommendation,
 		off_boarding_application_id,
 		sub_process_data,
-		loading,
 		setValue,
 		setConfirmModal : setShowModal,
 		confirmModal    : showModal,

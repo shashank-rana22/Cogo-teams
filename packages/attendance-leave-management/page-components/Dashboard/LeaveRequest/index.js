@@ -13,8 +13,6 @@ import useGetLeaveGroupings from '../../../hooks/useGetLeaveGroupings';
 import LeaveCard from './LeaveCard';
 import styles from './styles.module.css';
 
-const ZERO_COMPARE = 0;
-
 function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 	const [activeTab, setActiveTab] = useState('employee');
 	const { push } = useRouter();
@@ -59,7 +57,7 @@ function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 							title="My Requests"
 							badge={total_self_pending_count || GLOBAL_CONSTANTS.zeroth_index}
 						/>
-						{ (isManager || total_employees_pending_count > ZERO_COMPARE) && (
+						{ (isManager || total_employees_pending_count > GLOBAL_CONSTANTS.zeroth_index) && (
 							<TabPanel
 								name="manager"
 								title="Employee Requests"
