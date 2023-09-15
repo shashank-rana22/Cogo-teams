@@ -45,6 +45,10 @@ function AccordianCards({
 		incomeTotalAmount,
 		expenseCount,
 		expenseTotalAmount,
+		sellQuoteCount = 0,
+		sellQuoteTotalAmount = 0,
+		buyQuoteCount = 0,
+		buyQuoteTotalAmount = 0,
 		serviceType,
 		pendingApprovalCount,
 		urgentCount,
@@ -52,7 +56,7 @@ function AccordianCards({
 		creditNoteCount,
 		creditNoteTotalAmount,
 	} = itemData || {};
-	const [amountTab, setAmountTab] = useState('expense');
+	const [amountTab, setAmountTab] = useState('sellQuote');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
 		jobSource      : '',
@@ -117,26 +121,50 @@ function AccordianCards({
 									})}
 								</div>
 							</div>
-							<div className={styles.urgent}>
-								<div className={styles.urgent_label_text}>
-									Urgent (
-									{urgentCount}
-									)
+							{shipmentIdView ? (
+								<div className={styles.urgent}>
+									<div className={styles.urgent_label_text}>
+										Urgent (
+										{urgentCount}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.urgent_vr} />
+									</div>
+									<div className={styles.urgent_value_text}>
+										{formatAmount({
+											amount   : urgentTotalAmount! as any,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.small_right_border}>
-									<div className={styles.urgent_vr} />
+							) : (
+								<div className={styles.expense}>
+									<div className={styles.expense_label_text}>
+										Sell Quote (
+										{sellQuoteCount || 0}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.small_vr} />
+									</div>
+									<div className={styles.expense_value_text}>
+										{formatAmount({
+											amount   :	sellQuoteTotalAmount as string,
+											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.urgent_value_text}>
-									{formatAmount({
-										amount   : urgentTotalAmount! as any,
-										currency : GLOBAL_CONSTANTS.currency_code.INR,
-										options  : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
-								</div>
-							</div>
+							)}
+
 						</div>
 						<div className={styles.expense_amount}>
 							<div className={styles.expense}>
@@ -161,26 +189,50 @@ function AccordianCards({
 									)}
 								</div>
 							</div>
-							<div className={styles.expense}>
-								<div className={styles.expense_label_text}>
-									Credit Note (
-									{creditNoteCount}
-									)
+							{shipmentIdView ? (
+								<div className={styles.expense}>
+									<div className={styles.expense_label_text}>
+										Credit Note (
+										{creditNoteCount}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.small_vr} />
+									</div>
+									<div className={styles.expense_value_text}>
+										{formatAmount({
+											amount   :	creditNoteTotalAmount as any,
+											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.small_right_border}>
-									<div className={styles.small_vr} />
+							) : (
+								<div className={styles.expense}>
+									<div className={styles.expense_label_text}>
+										Buy Quote (
+										{buyQuoteCount || 0}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.small_vr} />
+									</div>
+									<div className={styles.expense_value_text}>
+										{formatAmount({
+											amount   :	buyQuoteTotalAmount as string,
+											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.expense_value_text}>
-									{formatAmount({
-										amount   :	creditNoteTotalAmount as any,
-										currency :	GLOBAL_CONSTANTS.currency_code.INR,
-										options  : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
-								</div>
-							</div>
+							) }
+
 						</div>
 					</div>
 					<div className={styles.right_border}>
