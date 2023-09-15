@@ -18,7 +18,8 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	show_relevant_templates       : ['quick_reply'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
-	configurations_to_be_shown    : ['agents_status'],
+	configurations_to_be_shown    : ['agents_status', 'shift_configuration'],
+	shift_view_default_type       : 'shipment_specialist',
 	accessible_new_communications : ['new_mail'],
 	stats_feedback_count          : [],
 	to_show_agent_activity_graph  : false,
@@ -46,6 +47,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : true,
+		shift_configuration_select                  : false,
 	},
 };
 

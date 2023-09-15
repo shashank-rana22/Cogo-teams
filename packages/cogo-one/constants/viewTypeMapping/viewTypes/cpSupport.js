@@ -27,6 +27,7 @@ const CP_SUPPORT = {
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
+	shift_view_default_type       : '',
 	group_agents_api_filter       : ['cp_support'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
@@ -50,6 +51,7 @@ const CP_SUPPORT = {
 		show_shipment_reminder                      : true,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		shift_configuration_select                  : false,
 	},
 };
 

@@ -32,6 +32,7 @@ const SUPPLY_ADMIN = {
 	mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 	bulk_assign_features          : ['bulk_send_templates'],
 	configurations_to_be_shown    : [],
+	shift_view_default_type       : '',
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 	group_agents_api_filter       : ['supply', 'supply_admin'],
 	permissions                   : {
@@ -55,6 +56,7 @@ const SUPPLY_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		shift_configuration_select                  : false,
 	},
 };
 

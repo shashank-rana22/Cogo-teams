@@ -27,6 +27,7 @@ const SALES_ADMIN = {
 	mails_to_be_shown            : [],
 	bulk_assign_features         : [],
 	configurations_to_be_shown   : [],
+	shift_view_default_type      : '',
 	group_agents_api_filter      : [...COGOVERSE_AGENT_MAPPINGS.sales, 'shipment_specialist',
 		'shipment_specialist_admin'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
@@ -51,6 +52,7 @@ const SALES_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : true,
 		show_shipments_stakeholders_contact_details : true,
+		shift_configuration_select                  : false,
 	},
 };
 

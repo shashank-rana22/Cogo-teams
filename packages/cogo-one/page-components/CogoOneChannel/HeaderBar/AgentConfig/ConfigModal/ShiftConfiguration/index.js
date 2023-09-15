@@ -3,6 +3,7 @@ import { useForm, TimepickerController } from '@cogoport/forms';
 import { useState, useEffect, useMemo } from 'react';
 
 import { CONTROLS, SHIFT_CONFIGURATION_HEADING, teamsOption } from '../../../../../../constants/shiftsMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
 import useCreateBulkCogooneShift from '../../../../../../hooks/useCreateBulkCogooneShift';
 import useListCogooneShift from '../../../../../../hooks/useListCogooneShift';
 import useUpdateCogooneShift from '../../../../../../hooks/useUpdateCogooneShift';
@@ -22,7 +23,9 @@ const compareTime = (start_time, end_time) => {
 };
 
 function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
-	const [selectedTeam, setSelectedTeam] = useState('shipment_specialist');
+	const [selectedTeam, setSelectedTeam] = useState(
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.shift_view_default_type || '',
+	);
 	const {
 		getListShift = () => {},
 		shiftsData = {},
@@ -37,8 +40,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 
 	const defaultValues = useMemo(() => getDefaultValues({ list, selectedTeam }), [selectedTeam, list]);
 
-	const toShowSelect = viewType === 'cogoone_admin';
-	const isShipmentSpecialist = viewType === 'shipment_specialist';
+	const toShowSelect = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.shift_configuration_select;
 
 	const {
 		control, setValue, handleSubmit, watch, formState:{ errors = {} },
@@ -64,8 +66,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 		if (
 			!createUpdateRequest({ formattedValues: [...formattedValues], prevList: list })
 		&&	!createCogooneShiftRequest({
-			team_name: isShipmentSpecialist
-				? 'shipment_specialist' : selectedTeam,
+			team_name: selectedTeam,
 			formattedValues,
 		})) {
 			Toast.error('No changes triggered...');
@@ -81,11 +82,12 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 	const formValues = watch();
 
 	const validateTime = (start_time, end_time) => {
-		if (!start_time && !end_time) return true;
+		if (!start_time && !end_time) {
+			return true;
+		}
 		if (
 			!compareTime(start_time, end_time)
 		) {
-			// Toast.error('Start Time should be less than End Time');
 			return false;
 		}
 		return true;
@@ -105,7 +107,7 @@ function ShiftConfiguration({ handleClose = () => {}, viewType = '' }) {
 				<div className={styles.select_container}>
 					<Select
 						value={selectedTeam}
-						onChange={(val) => setSelectedTeam(val)}
+						onChange={setSelectedTeam}
 						placeholder="Select Teams"
 						options={teamsOption}
 						size="sm"

@@ -24,6 +24,7 @@ const COGOONE_ADMIN = {
 	mails_to_be_shown             : [],
 	bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
 	configurations_to_be_shown    : ['fire_base_configuration', 'list_agents', 'switch_views', 'shift_configuration'],
+	shift_view_default_type       : 'shipment_specialist',
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 	permissions                   : {
 		auto_assign                                 : true,
@@ -46,6 +47,7 @@ const COGOONE_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		shift_configuration_select                  : true,
 	},
 };
 
