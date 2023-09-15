@@ -16,13 +16,14 @@ export const getFnfColumns = ({ onStatusChange = () => {} }) => [
 				${styles[(item.status === null || item.status === 'not_recovered')
 					? 'pending_color' : 'approved_color']}`}
 			>
-				<div className={cl`${styles.pending_dot}
+				<div style={{ display: 'flex', alignItems: 'center', marginRight: '6px' }}>
+					<div className={cl`${styles.pending_dot}
 					${styles[(item.status === null || item.status === 'not_recovered')
-					? 'pending_color_bg' : 'approved_color_bg']}`}
-				/>
-				{startCase((item.status === null || item.status === 'not_recovered'))
-					? 'Not recovered' : 'Recovered' || '-'}
-
+						? 'pending_color_bg' : 'approved_color_bg']}`}
+					/>
+					{startCase((item.status === null || item.status === 'not_recovered'))
+						? 'Not recovered' : 'Recovered' || '-'}
+				</div>
 				<Popover
 					placement="left"
 					render={(
@@ -45,7 +46,7 @@ export const getFnfColumns = ({ onStatusChange = () => {} }) => [
 						</div>
 					)}
 				>
-					<div>
+					<div style={{ alignItems: 'center' }}>
 						<IcMEdit style={{ marginLeft: '4px', cursor: 'pointer' }} />
 					</div>
 				</Popover>

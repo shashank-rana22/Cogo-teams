@@ -20,7 +20,7 @@ function DatePicker({ control = {}, errors = {}, lastWorkingDay = '' }) {
 					dateFormat="dd/MM/yyyy"
 					name="date"
 					className={styles.datepicker}
-					rules={{ required: 'this is required' }}
+					disabled={lastWorkingDay}
 				/>
 				{errors.date && (
 					<span className={styles.error}>Location Name is Required</span>

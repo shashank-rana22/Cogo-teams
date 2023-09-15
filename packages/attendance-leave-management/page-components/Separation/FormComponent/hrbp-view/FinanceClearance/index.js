@@ -121,10 +121,16 @@ function FinanceClearance({ data = {}, handleBack = () => {}, handleNext = () =>
 				</>
 			) : null}
 			<div className={styles.footer}>
-				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
+				<Button
+					themeType="secondary"
+					style={{ marginRight: '4px', height: '32px' }}
+					onClick={handleBack}
+				>
+					<span style={{ fontSize: '14px' }}>Back</span>
+				</Button>
 				<Button themeType="primary" onClick={handleNext}>
-					Proceed
-					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+					<span style={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>Proceed</span>
+					<IcMArrowRight width={20} height={20} style={{ marginLeft: '4px' }} />
 
 				</Button>
 			</div>

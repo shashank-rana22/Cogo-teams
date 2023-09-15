@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 
 import EmployeeDetail from '../../commons/EmployeeDetail';
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+import CancellationRequest from '../CancellationRequest';
 
 import DatePicker from './DatePicker';
 import InterviewQuestions from './InterviewQuestions';
@@ -28,11 +29,10 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 		setValue,
 	} = useForm();
 
-	const { hr_meet } = data || {};
-	console.log('🚀 ~ file: index.js:32 ~ HRMeeting ~ data:', data);
+	const { hr_meet, application_status } = data || {};
 	const { hr_meet:hrMeet } = hr_meet || {};
-	const { sub_process_detail_id, sub_process_data = {} } = hrMeet || {};
-	console.log('🚀 ~ file: index.js:34 ~ HRMeeting ~ sub_process_data:', sub_process_data);
+	const { sub_process_detail_id, sub_process_data = {}, is_complete } = hrMeet || {};
+	const { last_working_day } = sub_process_data || {};
 
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
@@ -81,7 +81,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			setValue('date', new Date(sub_process_data?.lastWorkingDay));
+			setValue('date', last_working_day ? new Date(sub_process_data?.lastWorkingDay) : undefined);
 			setValue('joining_bonus_amount', sub_process_data?.joiningBonus);
 			setValue('joining_bonus_clawback', sub_process_data?.joiningBonusApplicable);
 			setValue('your_notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].value);
@@ -94,7 +94,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 			setValue('your_notes_cb_4', sub_process_data?.notes[THIRD_INDEX].is_shared_with_manager);
 			setValue('your_notes_manager', sub_process_data?.notes[FOURTH_INDEX].value);
 		}
-	}, [setValue, data, sub_process_data]);
+	}, [setValue, data, sub_process_data, last_working_day]);
 
 	return (
 		<>
@@ -110,7 +110,12 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 					</Button>
 				</div>
 			</div>
-
+			{application_status === 'cancellation_requested' ? (
+				<CancellationRequest
+					data={data}
+					refetch={refetch}
+				/>
+			) : null}
 			<EmployeeDetail data={data} />
 			<DatePicker
 				control={control}
@@ -119,14 +124,21 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {} }) {
 				errors={errors}
 				lastWorkingDay={sub_process_data?.lastWorkingDay}
 			/>
-			<JoiningBonus control={control} errors={errors} />
+			<JoiningBonus control={control} errors={errors} data={sub_process_data} />
 			<InterviewQuestions control={control} errors={errors} data={sub_process_data} watch={watch} />
-			<NotesForManager control={control} />
+			<NotesForManager control={control} watch={watch} data={sub_process_data} />
 			<div className={styles.button}>
-				<Button size="md" onClick={handleSubmit(onSubmit)}>
-					<span style={{ fontSize: '16px' }}>Submit Notes</span>
-					<IcMArrowRight width={16} height={16} />
-				</Button>
+				{is_complete ?	(
+					<Button size="md" onClick={handleNext}>
+						<span style={{ fontSize: '16px' }}>Next</span>
+						<IcMArrowRight width={16} height={16} />
+					</Button>
+				) : (
+					<Button size="md" onClick={handleSubmit(onSubmit)}>
+						<span style={{ fontSize: '16px' }}>Submit Notes</span>
+						<IcMArrowRight width={25} height={25} />
+					</Button>
+				)}
 			</div>
 
 		</>

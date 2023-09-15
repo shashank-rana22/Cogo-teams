@@ -80,12 +80,11 @@ function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}
 									name="handover_by"
 									asyncKey="list_employees"
 									placeholder="Type to search..."
-									valueKey="user_id"
 									initialCall={false}
 									control={control}
 									params={{
 										filters: {
-											employee_status: ['probation', 'confirmed'],
+											status: 'active',
 										},
 									}}
 									size="md"
@@ -106,7 +105,6 @@ function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}
 									name="takeover_by"
 									asyncKey="list_employees"
 									placeholder="Type to search..."
-									valueKey="user_id"
 									initialCall={false}
 									control={control}
 									params={{

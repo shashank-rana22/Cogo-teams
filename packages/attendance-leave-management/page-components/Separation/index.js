@@ -8,6 +8,7 @@ import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 function Separation() {
 	const { data, loading, refetchApplicationDetails, process_name } = useGetApplicationProcessDetails();
+	console.log('🚀 ~ file: index.js:11 ~ Separation ~ process_name:', process_name);
 
 	return (
 		<div className={styles.container}>

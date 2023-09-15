@@ -14,7 +14,7 @@ function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {
 	let { name } = process_user_details || {};
 	const { sub_process_data, is_complete } = techClearance || {};
 	const { serviceList, name:approver_name } = sub_process_data || {};
-	name = approver_name === null ? name : approver_name;
+	name = !approver_name ? name : approver_name;
 
 	const [show, setShow] = useState(false);
 
@@ -67,8 +67,8 @@ function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
 				<Button themeType="primary" onClick={handleNext}>
-					Proceed
-					<IcMArrowRight width={16} height={16} style={{ marginLeft: '4px' }} />
+					<span style={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>Proceed</span>
+					<IcMArrowRight width={20} height={20} style={{ marginLeft: '4px' }} />
 				</Button>
 			</div>
 		</>

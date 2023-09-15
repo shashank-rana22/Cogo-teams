@@ -23,6 +23,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	margin-top: 16px;
+	margin-right: 12px;
 }
 
 .pending_flex {
@@ -79,6 +80,6 @@
 	padding: 6px;
 	margin-bottom: 6px;
 	cursor: pointer;
-	background-color: orange;
+	background-color: #c26d1a;
 	border-radius: 10px;
 }
