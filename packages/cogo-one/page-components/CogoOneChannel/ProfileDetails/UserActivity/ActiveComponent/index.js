@@ -13,6 +13,7 @@ function ActiveComponent(props) {
 		viewType = '',
 		fetchActivityLogs = () => {},
 		setActiveTab = () => {},
+		mailProps = {},
 	} = props || {};
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -44,6 +45,7 @@ function ActiveComponent(props) {
 				viewType={viewType}
 				fetchActivityLogs={fetchActivityLogs}
 				setActiveTab={setActiveTab}
+				mailProps={mailProps}
 			/>
 		</div>
 	);

@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 const { zeroth_index } = GLOBAL_CONSTANTS || {};
-const useGetOutstandingInvoices = (filter, kamOwnerId, toggleValue) => {
+const useGetOutstandingInvoices = (filter, kamOwnerId, toggleValue, entityCode = '') => {
 	const {
 		profile: { authorizationparameters },
 	} = useSelector((state) => state);
@@ -21,7 +21,6 @@ const useGetOutstandingInvoices = (filter, kamOwnerId, toggleValue) => {
 
 	const {
 		dateRangePickerValue,
-		entity_code,
 		bifurcation_type,
 		view_type,
 		...rest
@@ -30,9 +29,9 @@ const useGetOutstandingInvoices = (filter, kamOwnerId, toggleValue) => {
 		async () => {
 			await trigger({
 				params: {
-					start_date  : dateRangePickerValue?.startDate,
-					end_date    : dateRangePickerValue?.endDate,
-					entity_code : entity_code ? [entity_code] : ['301', '101'],
+					start_date  : dateRangePickerValue?.startDate || undefined,
+					end_date    : dateRangePickerValue?.endDate || undefined,
+					entity_code : entityCode ? [entityCode] : ['301', '101'],
 					kam_owner_id:
                         kamOwnerId && kamOwnerId[zeroth_index] !== 'all' ? kamOwnerId : undefined,
 					bifurcation_type : toggleValue ? 'dso' : bifurcation_type,
@@ -50,7 +49,7 @@ const useGetOutstandingInvoices = (filter, kamOwnerId, toggleValue) => {
 			bifurcation_type,
 			dateRangePickerValue?.endDate,
 			dateRangePickerValue?.startDate,
-			entity_code,
+			entityCode,
 			trigger,
 			view_type,
 		],

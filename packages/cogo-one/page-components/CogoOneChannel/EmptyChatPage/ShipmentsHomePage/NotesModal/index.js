@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function Header({
 	showForm = false,
 	setShowForm = () => {},
+	serial_id = '',
 }) {
 	if (showForm) {
 		return (
@@ -24,7 +25,11 @@ function Header({
 
 	return (
 		<div className={styles.header_styles}>
-			<div className={styles.header_text}>Notes</div>
+			<div className={styles.header_text}>
+				Notes
+				{' '}
+				<span>{`(SID: ${serial_id})`}</span>
+			</div>
 			<Button
 				size="sm"
 				themeType="accent"
@@ -42,7 +47,7 @@ function NotesModal({ modalState = {}, setModalState = () => {} }) {
 
 	const { shipmentData = {} } = modalState || {};
 
-	const { shipment_type = '' } = shipmentData || {};
+	const { shipment_type = '', serial_id = '' } = shipmentData || {};
 
 	const controlType = getControlType({ shipmentType: shipment_type });
 
@@ -65,6 +70,7 @@ function NotesModal({ modalState = {}, setModalState = () => {} }) {
 					<Header
 						showForm={showForm}
 						setShowForm={setShowForm}
+						serial_id={serial_id}
 					/>
 				)}
 				className={styles.title}
