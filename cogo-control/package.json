@@ -115,7 +115,8 @@
     "@cogoport/attendance-leave-management":"workspace:0.1.0",
     "@cogoport/supply-tools": "workspace:0.1.0",
     "@cogoport/error":"workspace:1.0.0",
-    "@cogoport/warehouse-management": "workspace:1.0.0"
+    "@cogoport/warehouse-management": "workspace:1.0.0",
+    "@cogoport/marketing":"workspace:0.1.0"
   },
   "browserslist": [
     "defaults"
