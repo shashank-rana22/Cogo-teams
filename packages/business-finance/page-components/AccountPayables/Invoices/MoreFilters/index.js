@@ -97,6 +97,7 @@ function FilterModal({
 										category    : filters?.category || undefined,
 										currency    : filters?.currency || '',
 										entity      : filters?.entity || '',
+										invoiceType : filters?.invoiceType || undefined,
 									});
 									onClear();
 									setModalFilters({ currency: filters?.currency || '' });
