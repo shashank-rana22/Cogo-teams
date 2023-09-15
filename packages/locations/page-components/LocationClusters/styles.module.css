@@ -16,18 +16,24 @@
 	align-items: center;
 }
 
-.container .card-list-root {
+.container .card_list_root {
 	border: none;
 }
 
-.container .card-list-header-title {
+.container .card_list_header_title {
 	color: #fff !important;
 }
 
-.container .card-body-row {
+.container .card_body_row {
 	padding: 10px 12px !important;
 	margin: 0 8px !important;
 	margin-top: 8px !important;
 	border: 1px solid #cbd1f8;
 	border-radius: 8px;
+}
+
+.modal_header {
+	padding: 8px;
+	font-size: 24px;
+	font-weight: 700;
 }
