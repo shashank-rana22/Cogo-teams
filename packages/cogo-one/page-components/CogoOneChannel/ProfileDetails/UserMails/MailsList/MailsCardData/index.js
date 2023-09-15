@@ -77,8 +77,8 @@ function MailsCardData({ item = {}, setActiveMessage = () => {} }) {
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
 							alt="important"
-							width="10"
-							height="10"
+							width={10}
+							height={10}
 						/>
 					</div>
 				) : null}
