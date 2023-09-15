@@ -3,7 +3,7 @@ import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
@@ -43,7 +43,6 @@ interface ShipmentDetailsCardInterface {
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
-const CHECK_REMARK_LENGTH = 1;
 const MAX_CARDS = 4;
 const LINE_ITEM_ID = 4;
 
@@ -237,21 +236,6 @@ function ShipmentDetailsCard({
 			taxNumberBuyer,
 		},
 	);
-
-	useEffect(() => {
-		setRemarksVal((prev) => ({
-			...prev,
-			collectionPartyRemark:
-            [...checkedValue.collectionPartyRemark, prev?.collectionPartyRemark[prev.collectionPartyRemark.length
-				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
-			billingPartyRemark:
-            [...checkedValue.billingPartyRemark, prev?.billingPartyRemark[prev.billingPartyRemark.length
-				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
-			invoiceDetailsRemark:
-            [...checkedValue.invoiceDetailsRemark, prev?.invoiceDetailsRemark[prev.invoiceDetailsRemark.length
-				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
-		}));
-	}, [checkedValue, setRemarksVal]);
 
 	const lineItemCheckedCount = lineItemsCheck ? 1 : 0;
 

@@ -182,3 +182,9 @@
 .label {
 	font-weight: 700;
 }
+
+.text_container {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}

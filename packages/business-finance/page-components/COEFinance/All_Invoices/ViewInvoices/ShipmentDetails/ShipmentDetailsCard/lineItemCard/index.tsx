@@ -375,14 +375,15 @@ function LineItemCard({
 								/>
 							</div>
 
-							<div style={{ display: 'flex', justifyContent: 'center' }} />
-							<Textarea
-								name="remark"
-								size="md"
-								placeholder="Remarks Here ..."
-								style={{ width: '700', height: '100px' }}
-								onChange={(val: string) => handleLineItemsRemarks(val)}
-							/>
+							<div className={styles.text_container}>
+								<Textarea
+									name="remark"
+									size="md"
+									placeholder="Enter Remarks Here ..."
+									style={{ width: '700', height: '100px' }}
+									onChange={(val: string) => handleLineItemsRemarks(val)}
+								/>
+							</div>
 						</Modal.Body>
 
 						<Modal.Footer>
