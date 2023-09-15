@@ -68,11 +68,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Provisional Trigger',
 		placeholder : 'Select',
-		options     : [{
-			label : '1st SID booked',
-			value : '1st SID booked',
-		}],
-		style: {
+		style       : {
 			minWidth : '15%',
 			maxWidth : '15%',
 		},
@@ -83,11 +79,7 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		type        : 'select',
 		label       : 'Realised Trigger',
 		placeholder : 'Select',
-		options     : [{
-			label : 'IRN generation / Invoice Knockoff',
-			value : 'IRN generation / Invoice Knockoff',
-		}],
-		style: {
+		style       : {
 			minWidth : '15%',
 			maxWidth : '15%',
 		},

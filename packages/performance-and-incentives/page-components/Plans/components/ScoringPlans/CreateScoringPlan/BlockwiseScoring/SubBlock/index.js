@@ -31,7 +31,9 @@ function SubBlock(props) {
 	} = props;
 
 	const {
+		param,
 		controls = [],
+		watchSubBlock = '',
 		handleClick = () => {},
 		parameterOptions = [],
 		parameterUnitOptions = {},
@@ -39,7 +41,6 @@ function SubBlock(props) {
 		filteredSubBlockOptions = [],
 		additionalControls = {},
 		setAdditionalControls = () => {},
-		param,
 		setParam = () => {},
 		paramScoringType = '',
 		setParamScoringType = () => {},
@@ -114,6 +115,7 @@ function SubBlock(props) {
 					buttonThemeType="link"
 					buttonText="Add Parameter"
 					watch={watch}
+					watchBlock={watchBlock}
 					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					parameterOptions={parameterOptions}
@@ -126,12 +128,13 @@ function SubBlock(props) {
 
 			{param ? (
 				<AdditionalControlsModal
-					additionalControls={additionalControls}
-					setAdditionalControls={setAdditionalControls}
-					paramScoringType={paramScoringType}
-					setParamScoringType={setParamScoringType}
 					param={param}
 					setParam={setParam}
+					watchSubBlock={watchSubBlock}
+					paramScoringType={paramScoringType}
+					setParamScoringType={setParamScoringType}
+					additionalControls={additionalControls}
+					setAdditionalControls={setAdditionalControls}
 				/>
 			) : null}
 

@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import blockOptions from '../../../../constants/select-block-options';
@@ -93,7 +93,10 @@ function BlockwiseScoring(props) {
 					type="button"
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
-					onClick={() => push('/performance-and-incentives/plans')}
+					onClick={() => {
+						Toast.success('Saved Successfully');
+						push('/performance-and-incentives/plans');
+					}}
 				>
 					Save As Draft
 				</Button>

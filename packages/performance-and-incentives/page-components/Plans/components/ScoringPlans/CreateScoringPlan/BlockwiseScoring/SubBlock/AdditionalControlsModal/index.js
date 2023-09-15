@@ -1,21 +1,31 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
 import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import getAdditionalControls from '../../../../../../configurations/get-additional-controls';
 import { getFieldController } from '../../../../commons/Form/getFieldController';
 
 import styles from './styles.module.css';
-// import useGetAgentScoringParameters from './useGetAgentScoringParameters';
+import useGetAgentScoringParameters from './useGetAgentScoringParameters';
 
 function AdditionalControlsModal({
-	additionalControls = {},
 	param = '',
-	setParam = () => {}, paramScoringType = '',
-	setParamScoringType = () => {}, setAdditionalControls = () => {},
+	watchSubBlock = '',
+	setParam = () => {},
+	paramScoringType = '',
+	additionalControls = {},
+	setParamScoringType = () => {},
+	setAdditionalControls = () => {},
 }) {
-	// const { data } = useGetAgentScoringParameters({});
+	const { data : { list = [] }, loading } = useGetAgentScoringParameters({ subBlockId: watchSubBlock });
+
+	const afterParameterOptions = useMemo(() => list.map((item) => ({
+		label : item.display_name,
+		value : item.id,
+	})), [list]);
+
+	const controls = getAdditionalControls({ afterParameterOptions });
 
 	const { control, getValues, formState: { errors }, handleSubmit, setValue } = useForm();
 
@@ -23,8 +33,6 @@ function AdditionalControlsModal({
 		control,
 		name: 'additional_controls',
 	});
-
-	const controls = getAdditionalControls();
 
 	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
@@ -55,7 +63,7 @@ function AdditionalControlsModal({
 		<Modal size="xl" show onClose={handleClose} placement="center">
 			<Modal.Header title="Additional Controls" />
 
-			<Modal.Body>
+			<Modal.Body key={loading}>
 				{fields.map((field, index) => (
 					<div key={field.id} className={styles.container}>
 						<div className={styles.controls_container}>
