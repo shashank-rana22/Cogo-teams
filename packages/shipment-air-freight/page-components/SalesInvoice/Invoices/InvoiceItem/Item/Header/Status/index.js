@@ -38,9 +38,18 @@ function Status({
 		<div className={styles.invoice_container}>
 			{invoice?.status
 					&& restrictedRevokedStatus.includes(invoice?.status) && (
-						<div className={styles.invoice_status}>
-							{startCase(invoice?.status)}
-						</div>
+						<>
+							<div className={styles.invoice_status}>
+								{startCase(invoice?.status)}
+							</div>
+							{invoice?.status === 'finance_rejected' && invoice?.rejection_reason
+								? (
+									<div className={styles.invoice_rejection_reason}>
+										{invoice.rejection_reason}
+									</div>
+								)
+								: null}
+						</>
 			)}
 
 			{invoice?.processing ? (

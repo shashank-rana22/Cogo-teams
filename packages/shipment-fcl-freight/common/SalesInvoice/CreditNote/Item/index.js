@@ -126,8 +126,13 @@ function Item({
 									{startCase(CN_STATUS_MAPPING[itemStatus])}
 								</div>
 
-								{itemStatus === 'rejected' ? (
-									<IcCError width={16} height={16} />
+								{itemStatus === 'rejected' && item?.rejection_reason ? (
+									<div className={styles.rejection_reason}>
+										<IcCError width={16} height={16} />
+										<span>
+											{item?.rejection_reason}
+										</span>
+									</div>
 								) : null}
 							</div>
 
