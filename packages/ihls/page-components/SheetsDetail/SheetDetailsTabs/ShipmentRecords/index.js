@@ -8,13 +8,15 @@ import ListPagination from '../ListPagination';
 import styles from './styles.module.css';
 import { tabColumns } from './tableColumns';
 
+const SHIPMENT_MODES = [
+	{ label: 'Air', value: 'AIR' },
+	{ label: 'Sea', value: 'SEA' },
+];
+
 function ShipmentRecords() {
 	const router = useRouter();
 	const [selectValue, setSelectValue] = useState('');
-	const {
-		data = {}, loading = false, setFilters = () => {},
-		filters = {},
-	} = useAthenaShipmentRecords({
+	const { data = {}, loading = false, setFilters = () => {}, filters = {} } = useAthenaShipmentRecords({
 		defaultParams: {
 			page_limit               : 10,
 			pagination_data_required : true,
@@ -29,10 +31,6 @@ function ShipmentRecords() {
 		}
 		setSelectValue(val);
 	};
-	const shipmentModeOptions = [
-		{ label: 'Air', value: 'AIR' },
-		{ label: 'Sea', value: 'SEA' },
-	];
 
 	const paginationProps = { setFilters, filters, data };
 
@@ -45,7 +43,7 @@ function ShipmentRecords() {
 					onChange={handleChange}
 					placeholder="Select Type"
 					isClearable
-					options={shipmentModeOptions}
+					options={SHIPMENT_MODES}
 					className={styles.select}
 				/>
 

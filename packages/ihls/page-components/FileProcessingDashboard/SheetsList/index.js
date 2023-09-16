@@ -1,5 +1,4 @@
 import { Table, Button } from '@cogoport/components';
-// import { Link } from '@cogoport/next';
 import { IcMArrowUp, IcMArrowDown } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
@@ -37,7 +36,6 @@ function SheetsList({ filters = {}, setFilters = () => {}, data = {}, heading = 
 	};
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.heading}>
 				<div>{heading}</div>
 				<div className={styles.filters}>
@@ -68,6 +66,7 @@ function SheetsList({ filters = {}, setFilters = () => {}, data = {}, heading = 
 				/>
 
 			</div>
+
 			<ListPagination {...paginationProps} />
 		</div>
 	);

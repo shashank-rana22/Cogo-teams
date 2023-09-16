@@ -13,6 +13,7 @@ const CONVERSTION_STATS_MAPPING = {
 	success                 : 'Completed',
 	failure                 : 'Failed',
 };
+
 const FILTER_MAPPING = {
 	total                   : undefined,
 	uploaded                : 'uploaded',
@@ -23,6 +24,7 @@ const FILTER_MAPPING = {
 	success                 : 'success',
 	failure                 : 'failure',
 };
+
 function FileStats({
 	conversionKey = '', SVG_MAPPING = {}, stat = 0, loading = false,
 	setIsSelectedKey = () => {}, isSelectedKey = '', setHeading = () => {}, setFilters = () => {},

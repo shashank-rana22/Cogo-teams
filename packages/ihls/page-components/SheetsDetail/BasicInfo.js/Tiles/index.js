@@ -13,7 +13,6 @@ function Tiles({ data = {}, loading = false }) {
 			>
 				<Card.Title title="Processed Records" className={styles.tile_heading} />
 				<Card.Description className={styles.stat_value}>
-
 					{loading ? <Placeholder />
 						: (
 							<div className={styles.main_title}>

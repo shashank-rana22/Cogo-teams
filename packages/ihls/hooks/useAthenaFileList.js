@@ -10,7 +10,8 @@ const useAthenaFileList = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const {
 		page = 1,
 		sort_by = 'id',
-		sort_type = 'asc', ...restFilters
+		sort_type = 'asc',
+		...restFilters
 	} = filters || {};
 
 	const [{ loading }, trigger] = useAthenaRequest({

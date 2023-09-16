@@ -15,7 +15,6 @@
 		"@cogoport/utils": "^1.2.6",
 		"axios": "^1.3.4",
 		"axios-hooks": "^4.0.0",
-		"react": "18.2.0",
-		"uuid": "^9.0.0"
+		"react": "18.2.0"
 	}
 }

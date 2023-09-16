@@ -8,15 +8,15 @@ import ListPagination from '../ListPagination';
 import styles from './styles.module.css';
 import { tabColumns } from './tableColumns';
 
+const LEAD_TYPES = [
+	{ label: 'Importer', value: 'importer' },
+	{ label: 'Exporter', value: 'exporter' },
+	{ label: 'CHA', value: 'cha' },
+];
 function UniqueLeads() {
 	const router = useRouter();
 	const [multiSelectValue, setMultiSelectValue] = useState([]);
 
-	const options = [
-		{ label: 'Importer', value: 'importer' },
-		{ label: 'Exporter', value: 'exporter' },
-		{ label: 'CHA', value: 'cha' },
-	];
 	const {
 		data = {}, loading = false, setFilters = () => {},
 		filters = {},
@@ -50,7 +50,7 @@ function UniqueLeads() {
 					onChange={handleChange}
 					placeholder="Select Type"
 					isClearable
-					options={options}
+					options={LEAD_TYPES}
 					className={styles.select}
 				/>
 

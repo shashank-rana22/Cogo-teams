@@ -11,6 +11,7 @@ import Tiles from './Tiles';
 
 function BasicInfo() {
 	const router = useRouter();
+
 	const { data = [], loading = false } = useAthenaFileDetails({ fileId: router.query.file_id });
 	const listInfoData = isEmpty(data?.data) ? {} : data?.data?.[GLOBAL_CONSTANTS.zeroth_index];
 

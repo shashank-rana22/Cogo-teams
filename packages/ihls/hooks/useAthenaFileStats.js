@@ -7,14 +7,14 @@ const useAthenaFileStats = () => {
 	const [data, setData] = useState({});
 
 	const [{ loading }, trigger] = useAthenaRequest({
-		url: '/athena/athena-files-stats',
-
+		url    : '/athena/athena-files-stats',
+		method : 'get',
 	}, { manual: true });
 
 	const fetchFileStats = useCallback(async () => {
 		try {
 			const res = await trigger();
-			if (res) {
+			if (res?.data) {
 				setData(res?.data);
 			}
 		} catch (err) {

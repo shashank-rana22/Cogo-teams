@@ -5,7 +5,6 @@ import {
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
-import { v1 as uuid } from 'uuid';
 
 import EmptyState from '../../commons/EmptyState';
 import useAthenaFileList from '../../hooks/useAthenaFileList';
@@ -35,15 +34,15 @@ const FILE_SVG_MAPPING = {
 	processing              : <IcMInvoiceApprovals />,
 	failure                 : <IcMCrossInCircle />,
 };
+
 function FileProcessingDashboard() {
 	const [heading, setHeading] = useState('Total Files');
+	const [isSelectedKey, setIsSelectedKey] = useState('total_files');
+
 	const FILE_STATS_KEYS = Object.keys(FILTER_MAPPING);
 
-	const {
-		data = {},
-		statsLoading = false,
-		fetchFileStats = () => {},
-	} = useAthenaFileStats();
+	const { data = {}, statsLoading = false, fetchFileStats = () => {} } = useAthenaFileStats();
+
 	const {
 		listData = {}, listLoading = false, fetchFileList = () => {}, setFilters = () => {},
 		filters = {},
@@ -59,16 +58,11 @@ function FileProcessingDashboard() {
 		fetchFileStats();
 	};
 
-	const handleRefresh = () => {
-		refetch();
-	};
-	const [isSelectedKey, setIsSelectedKey] = useState('total_files');
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				<div>Source Data Files</div>
-				<Button themeType="secondary" onClick={handleRefresh}>
+				<Button themeType="secondary" onClick={refetch}>
 					<IcMRefresh style={{ marginRight: '4px' }} />
 					REFRESH
 
@@ -76,45 +70,38 @@ function FileProcessingDashboard() {
 			</div>
 			<div className={styles.cards_container}>
 				<div className={styles.lead_conversion_stats_container}>
-					{
-                        FILE_STATS_KEYS.map((conversionKey, index) => (
-	<FileStats
-		key={`${`${index}${uuid()}`}`}
-		conversionKey={conversionKey}
-		SVG_MAPPING={FILE_SVG_MAPPING}
-		stat={data[conversionKey]}
-		loading={statsLoading}
-		setHeading={setHeading}
-		isSelectedKey={isSelectedKey}
-		setIsSelectedKey={setIsSelectedKey}
-		setFilters={setFilters}
-	/>
-                        ))
-
-                     }
+					{FILE_STATS_KEYS.map((conversionKey) => (
+						<FileStats
+							key={conversionKey}
+							conversionKey={conversionKey}
+							SVG_MAPPING={FILE_SVG_MAPPING}
+							stat={data[conversionKey]}
+							loading={statsLoading}
+							setHeading={setHeading}
+							isSelectedKey={isSelectedKey}
+							setIsSelectedKey={setIsSelectedKey}
+							setFilters={setFilters}
+						/>
+					))}
 				</div>
-
 			</div>
-			{
-                isEmpty(listData?.list) && !listLoading ? (
-	<EmptyState
-		height={220}
-		width={350}
-		emptyText="No Records Found"
-		flexDirection="row"
-		textSize="22px"
-	/>
-                ) : (
-	<SheetsList
-		heading={heading}
-		loading={listLoading}
-		data={listData}
-		filters={filters}
-		setFilters={setFilters}
-	/>
-                )
-            }
-
+			{isEmpty(listData?.list) && !listLoading ? (
+				<EmptyState
+					height={220}
+					width={350}
+					emptyText="No Records Found"
+					flexDirection="row"
+					textSize="22px"
+				/>
+			) : (
+				<SheetsList
+					heading={heading}
+					loading={listLoading}
+					data={listData}
+					filters={filters}
+					setFilters={setFilters}
+				/>
+			)}
 		</div>
 	);
 }

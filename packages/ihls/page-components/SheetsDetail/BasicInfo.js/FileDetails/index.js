@@ -9,7 +9,10 @@ function FileDetails({ data = {}, loading = false }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.icon_container}><IcMFileUploader height="50px" width="50px" /></div>
+			<div className={styles.icon_container}>
+				<IcMFileUploader height="50px" width="50px" />
+			</div>
+
 			<div className={styles.info_container}>
 				<div className={styles.title_container}>
 					<div className={styles.subtitle}>Cogo File Name</div>
@@ -21,6 +24,7 @@ function FileDetails({ data = {}, loading = false }) {
 						</Tooltip>
 					)}
 				</div>
+
 				<div className={styles.title_container}>
 					<div className={styles.subtitle}>Status</div>
 					{loading ? (

@@ -27,7 +27,7 @@ export const tabColumns = [
 	},
 	{
 		Header   : 'Status',
-		accessor : (item) => (statusTagMapping[item?.status?.toLowerCase()] || '-'),
+		accessor : (item) => (statusTagMapping?.[item?.status?.toLowerCase()] || '-'),
 	},
 
 ];

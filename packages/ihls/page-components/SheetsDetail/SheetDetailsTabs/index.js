@@ -18,7 +18,6 @@ function SheetDetailsTab() {
 					<ShipmentRecords />
 				</TabPanel>
 			</Tabs>
-
 		</div>
 	);
 }
