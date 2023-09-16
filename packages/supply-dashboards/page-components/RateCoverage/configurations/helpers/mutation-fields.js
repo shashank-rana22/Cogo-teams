@@ -5,15 +5,16 @@ import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 
-function FieldMutation({ fields, values, filter, chargeCodes }) {
+function FieldMutation({ fields, values, chargeCodes }) {
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
 			{ params: { filters: { organization_id: values?.service_provider_id } } },
 		),
 	);
-	const mainPortOptions1 = useGetMainPortsOptions({ location_id: values?.origin_port?.id });
-	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_port?.id });
+	const mainPortOptions1 = useGetMainPortsOptions({ location_id: values?.origin_location_id });
+
+	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_location_id });
 
 	const serviceProviders = useGetAsyncOptions(
 		merge(
@@ -22,7 +23,6 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 				params: {
 					filters: {
 						status       : 'active',
-						service      : filter?.service,
 						kyc_status   : 'verified',
 						account_type : 'service_provider',
 					},

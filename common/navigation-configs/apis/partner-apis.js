@@ -8842,6 +8842,18 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'outstanding',

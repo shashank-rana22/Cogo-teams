@@ -219,31 +219,32 @@ function AddRateModal({
 				setValue('validity_start', new Date(validities[DEFAULT_VALUE]?.validity_start));
 				setValue('validity_end', new Date(validities[DEFAULT_VALUE]?.validity_end));
 			}
-
-			let mandatoryFreightCodes = [];
-			Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
-				if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = {};
-					prefillFreightCodes.forEach((charge) => {
-						if (charge.code === code) {
-							flag = charge;
-						}
-					});
-					if (Object.keys(flag).length) {
-						prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
-						mandatoryFreightCodes = [...mandatoryFreightCodes,
-							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
-					} else {
-						mandatoryFreightCodes = [...mandatoryFreightCodes,
-							{ code, price: '', unit: '', currency: '' }];
-					}
-				}
-			});
-
-			if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
-				setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
-			}
 		}
+
+		let mandatoryFreightCodes = [];
+		Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
+			if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+				let flag = {};
+				prefillFreightCodes.forEach((charge) => {
+					if (charge.code === code) {
+						flag = charge;
+					}
+				});
+				if (Object.keys(flag).length) {
+					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
+					mandatoryFreightCodes = [...mandatoryFreightCodes,
+						{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+				} else {
+					mandatoryFreightCodes = [...mandatoryFreightCodes,
+						{ code, price: '', unit: '', currency: '' }];
+				}
+			}
+		});
+
+		if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
+			setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
+		}
+
 		setValue('free_weight', rateData?.weight_limit?.free_limit);
 	}, [JSON.stringify(rateData)]);
 
