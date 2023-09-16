@@ -1,25 +1,23 @@
 /* eslint-disable no-underscore-dangle */
 import { Button, cl, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTranslation } from 'next-i18next';
 
 import useGetNews from '../../../hooks/useGetNews';
 import useRedirectFn from '../../../hooks/useRedirectFn';
-import getLoadingArr from '../../../utils/getLoadingArr';
 
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@/ui/commons/utils/formatDate';
+// const LOADING_ARR = getLoadingArr(3);
 
-const LOADING_ARR = getLoadingArr(3);
-
-const EXTRACT_URL_FROM_HTML_STRING = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/;
+const LOADING_ROWS = 3;
 
 const URL_INDEX = 2;
 const MIN_URL_LENGTH = 3;
 
 const newsClickHandler = ({ content }) => {
-	const matches = content.match(EXTRACT_URL_FROM_HTML_STRING);
+	const matches = content.match(GLOBAL_CONSTANTS.regex_patterns.extract_url_from_html_string);
 
 	if (matches && matches.length >= MIN_URL_LENGTH) {
 		const hrefUrl = matches[URL_INDEX];
@@ -34,7 +32,7 @@ function InfoContainer() {
 
 	const { redirectToNotifications } = useRedirectFn();
 
-	const newData = loading ? LOADING_ARR : data;
+	const newData = loading ? [...Array(LOADING_ROWS).keys()] : data;
 
 	return (
 		<div className={styles.container}>
@@ -46,7 +44,7 @@ function InfoContainer() {
 					<div
 						key={news?._id || news}
 						className={cl`${styles.row}
-					${index === (data.length - 1) ? styles.last_row : ''}`}
+					${index === (data.length - GLOBAL_CONSTANTS.one) ? styles.last_row : ''}`}
 					>
 						{loading ? (
 							<Placeholder height="25px" margin="0px 0px 5px 0px" />

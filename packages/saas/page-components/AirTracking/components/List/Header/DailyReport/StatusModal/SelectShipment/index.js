@@ -1,20 +1,23 @@
 import { Placeholder, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useMemo, useState } from 'react';
 
+import Table from '../../../../../../common/Table';
 import getShipmentConfig from '../../../../../../configuration/shipmentConfig';
 import { getTableFn } from '../../../../../../configuration/shipmentTableConfig';
 import useDsrToSubscription from '../../../../../../hooks/useDsrToSubscription';
 import useGetShipment from '../../../../../../hooks/useGetShipment';
-import getLoadingArr from '../../../../../../utils/getLoadingArr';
 
 import styles from './styles.module.css';
 
-import Table from '@/ui/page-components/air-ocean-tracking/common/Table';
+const LOADING_ROWS = 4;
 
-const LOADING_ARR = getLoadingArr(4);
-
-function SelectShipment({ selectedContact = {}, setIsSingleReport, setActiveStepper }) {
+function SelectShipment({
+	selectedContact = {},
+	setIsSingleReport = () => {},
+	setActiveStepper = () => {},
+}) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const shipmentConfig = getShipmentConfig({ t });
@@ -44,13 +47,13 @@ function SelectShipment({ selectedContact = {}, setIsSingleReport, setActiveStep
 
 	return (
 		<div className={styles.container}>
-			{(getListLoading || listLoading) ? LOADING_ARR.map((ele) => (
+			{(getListLoading || listLoading) ? [...Array(LOADING_ROWS).keys()].map((ele) => (
 				<Placeholder key={ele} height="30px" margin="0px 0px 15px 0px" />
 			))
 				: TABLE_MAPPING.map((info) => {
 					const { name, title, filteredList = [], maxHeight, emptyStateText } = info || {};
 					return (
-						filteredList.length > 0 ? (
+						isEmpty(filteredList) ? (
 							<Table
 								key={name}
 								title={title}

@@ -3,7 +3,13 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 
 import Content from './Content';
 
-function CardPopover({ showPopover, setShowPopover, setModalInfo, id = '', shipment_info = {} }) {
+function CardPopover({
+	showPopover = false,
+	setShowPopover = () => {},
+	setModalInfo = () => {},
+	id = '',
+	shipment_info = {},
+}) {
 	return (
 		<Popover
 			placement="bottom"

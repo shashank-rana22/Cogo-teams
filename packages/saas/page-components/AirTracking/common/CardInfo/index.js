@@ -5,7 +5,7 @@ import getMappingObject from '../../constant/card';
 
 import styles from './styles.module.css';
 
-function CardInfo({ activeTab, type = '', input, referenceNo = '', serialId = '' }) {
+function CardInfo({ activeTab = '', type = '', input = '', referenceNo = '', serialId = '' }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const GET_MAPPING = getMappingObject({ t });

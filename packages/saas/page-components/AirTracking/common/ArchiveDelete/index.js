@@ -6,7 +6,10 @@ import useDeleteTracker from '../../hooks/useDeleteTracker';
 import styles from './styles.module.css';
 
 function ArchiveDelete({
-	name = 'delete', shipmentId = '', closeHandler, activeTab = 'ocean',
+	name = 'delete',
+	shipmentId = '',
+	closeHandler = () => {},
+	activeTab = 'ocean',
 	refetchTrackerList = () => {}, src = '',
 }) {
 	const { t } = useTranslation(['commmon', 'airOceanTracking']);

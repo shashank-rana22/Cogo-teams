@@ -5,16 +5,21 @@ import CardInfo from '../../../common/CardInfo';
 import CardPopover from '../../../common/CardPopover';
 import EmptyCard from '../../../common/EmptyCard';
 import useRedirectFn from '../../../hooks/useRedirectFn';
-import getLoadingArr from '../../../utils/getLoadingArr';
 
 import Footer from './Footer';
 import ShipmentInfo from './ShipmentInfo';
 import Stepper from './Stepper';
 import styles from './styles.module.css';
 
-const LOADING_ARR = getLoadingArr(3);
+const LOADER_ROWS = 3;
 
-function AirCard({ listItem = {}, loading = false, activeTab, setModalInfo, refetchTrackerList }) {
+function AirCard({
+	listItem = {},
+	loading = false,
+	activeTab = '',
+	setModalInfo = () => {},
+	refetchTrackerList = () => {},
+}) {
 	const [showPopover, setShowPopover] = useState(false);
 	const { redirectToTracker } = useRedirectFn();
 
@@ -46,7 +51,7 @@ function AirCard({ listItem = {}, loading = false, activeTab, setModalInfo, refe
 				>
 					{loading ? (
 						<div className={styles.skeleton_loader}>
-							{LOADING_ARR.map((ele) => (
+							{[...Array(LOADER_ROWS).keys()].map((ele) => (
 								<Placeholder key={ele} height="30px" margin="0px 0px 20px 0px" />
 							))}
 						</div>

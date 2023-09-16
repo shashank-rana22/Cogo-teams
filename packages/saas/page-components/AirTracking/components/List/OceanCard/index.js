@@ -1,21 +1,27 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useMemo, useState } from 'react';
 
 import CardInfo from '../../../common/CardInfo';
 import CardPopover from '../../../common/CardPopover';
 import EmptyCard from '../../../common/EmptyCard';
 import useRedirectFn from '../../../hooks/useRedirectFn';
-import getLoadingArr from '../../../utils/getLoadingArr';
 
 import ContainerInfo from './ContainerInfo';
 import Footer from './Footer';
 import Stepper from './Stepper';
 import styles from './styles.module.css';
 
-const LOADING_ARR = getLoadingArr(3);
+const LOADING_ROWS = 3;
 
-function Card({ listItem = {}, loading = false, activeTab, setModalInfo, refetchTrackerList }) {
-	const [activeContainerIndex, setActiveContainerIndex] = useState(1);
+function Card({
+	listItem = {},
+	loading = false,
+	activeTab = '',
+	setModalInfo = () => {},
+	refetchTrackerList = () => {},
+}) {
+	const [activeContainerIndex, setActiveContainerIndex] = useState(GLOBAL_CONSTANTS.one);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { redirectToTracker } = useRedirectFn();
@@ -29,9 +35,9 @@ function Card({ listItem = {}, loading = false, activeTab, setModalInfo, refetch
 	const isTrackerEmpty = tracking_status !== 'Found';
 
 	const { currentMilestone, currentContainer, currentContainerAction, containerDetailsLength } = useMemo(() => ({
-		currentMilestone       : milestones?.[activeContainerIndex - 1],
-		currentContainer       : container_details?.[activeContainerIndex - 1],
-		currentContainerAction : action?.[activeContainerIndex - 1],
+		currentMilestone       : milestones?.[activeContainerIndex - GLOBAL_CONSTANTS.one],
+		currentContainer       : container_details?.[activeContainerIndex - GLOBAL_CONSTANTS.one],
+		currentContainerAction : action?.[activeContainerIndex - GLOBAL_CONSTANTS.one],
 		containerDetailsLength : container_details?.length,
 	}), [action, activeContainerIndex, container_details, milestones]);
 
@@ -58,7 +64,7 @@ function Card({ listItem = {}, loading = false, activeTab, setModalInfo, refetch
 				>
 					{loading ? (
 						<div className={styles.skeleton_loader}>
-							{LOADING_ARR.map((ele) => (
+							{[...Array(LOADING_ROWS).keys()].map((ele) => (
 								<Placeholder key={ele} height="30px" margin="0px 0px 20px 0px" />
 							))}
 						</div>

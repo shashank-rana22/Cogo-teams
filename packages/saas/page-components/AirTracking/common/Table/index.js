@@ -2,23 +2,24 @@ import { cl, Placeholder, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
+import getValue from '../../utils/getValue';
 import itemFunction from '../../utils/itemFunction';
 
 import styles from './styles.module.css';
 
-import getValue from '@/ui/commons/utils/getValue';
+const LOADING_ROWS = 5;
 
 function Table({
 	title = '', configs = [], filteredList = [], data = {}, loading = false,
 	showPagination = true, setPage = () => {}, selectedContact = '', setSelectedContact = () => {}, isClickable = true,
-	isScroll = false, maxHeight, itmFunction = {}, showHover = true,
+	isScroll = false, maxHeight = '', itmFunction = {}, showHover = true,
 }) {
 	const { list: dataList = [], page = 0, page_limit = 0, total_count = 0 } = data || {};
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const list = isEmpty(filteredList) ? dataList : filteredList;
-	const newList = loading ? [...Array(5).keys()] : list;
+	const newList = loading ? [...Array(LOADING_ROWS).keys()] : list;
 
 	const newFunction = itemFunction({ ...itmFunction, t });
 

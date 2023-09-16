@@ -11,7 +11,12 @@ const MAPPING = {
 
 };
 
-const Content = ({ setModalInfo, id = '', setShowPopover, shipment_info = {} }) => {
+function Content({
+	setModalInfo = () => {},
+	id = '',
+	setShowPopover = () => {},
+	shipment_info = {},
+}) {
 	const clickHandler = (item) => {
 		setModalInfo((prev) => ({
 			...prev,
@@ -31,6 +36,6 @@ const Content = ({ setModalInfo, id = '', setShowPopover, shipment_info = {} }) 
 			</div>
 		))
 	);
-};
+}
 
 export default Content;
