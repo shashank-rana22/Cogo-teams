@@ -7,23 +7,17 @@ import ProcessBtn from './ProcessBtn';
 import styles from './styles.module.css';
 
 const ONE = 1;
+const STATUS_COLOR_MAPPING = {
+	validated       : '#CFEAED',
+	invalidated     : '#F8AEA8',
+	processing      : '#FBD1A6',
+	partially_added : '#FEF199',
+	processed       : '#C4DC91',
+	uploaded        : '#CED1ED',
+};
 function getStatusColor(status) {
-	switch (status) {
-		case 'validated':
-			return '#CFEAED';
-		case 'invalidated':
-			return '#F8AEA8';
-		case 'processing':
-			return '#FBD1A6';
-		case 'partially_added':
-			return '#FEF199';
-		case 'processed':
-			return '#C4DC91';
-		case 'uploaded':
-			return '#CED1ED';
-		default:
-			return 'gray';
-	}
+	const DEFAULT_COLOR = 'gray';
+	return STATUS_COLOR_MAPPING?.[status] || DEFAULT_COLOR;
 }
 const getTableColumns = ({ refetch = () => {} }) => {
 	const tableColumns = [
@@ -100,13 +94,13 @@ const getTableColumns = ({ refetch = () => {} }) => {
 
 				if (item?.status === 'processed') {
 					return (
+
 						<div>
-							<div>
-								Rates added :
-								{' '}
-								{+rates_added}
-							</div>
+							Rates added :
+							{' '}
+							{+rates_added}
 						</div>
+
 					);
 				}
 

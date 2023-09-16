@@ -26,7 +26,9 @@ function RateSheet() {
 						<Filters filters={filters} setFilters={setFilters} />
 
 					</div>
+
 					<UploadRatesheet refetch={refetch} />
+
 				</div>
 			</div>
 

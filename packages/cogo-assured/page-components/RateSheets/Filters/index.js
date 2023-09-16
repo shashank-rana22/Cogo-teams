@@ -9,24 +9,23 @@ const ONE = 1;
 
 function Filters({ filters = {}, setFilters = () => {} }) {
 	return (
-		<div className={styles.filter_container}>
-			<div className={styles.filter}>
-				<Select
-					{...controls[GLOBAL_CONSTANTS.zeroth_index]}
-					onChange={(value) => setFilters({ ...filters, status: value, page: 1 })}
-					value={filters?.status}
-					className={styles.field_controller}
-					isClearable
-				/>
 
-				<Select
-					{...controls[ONE]}
-					onChange={(value) => setFilters({ ...filters, service_name: value, page: 1 })}
-					value={filters?.service_name}
-					className={styles.field_controller}
-					isClearable
-				/>
-			</div>
+		<div className={styles.filter}>
+			<Select
+				{...controls[GLOBAL_CONSTANTS.zeroth_index]}
+				onChange={(value) => setFilters({ ...filters, status: value, page: 1 })}
+				value={filters?.status}
+				className={styles.field_controller}
+				isClearable
+			/>
+
+			<Select
+				{...controls[ONE]}
+				onChange={(value) => setFilters({ ...filters, service_name: value, page: 1 })}
+				value={filters?.service_name}
+				className={styles.field_controller}
+				isClearable
+			/>
 		</div>
 
 	);
