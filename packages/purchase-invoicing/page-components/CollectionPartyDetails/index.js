@@ -1,7 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -14,11 +13,8 @@ import AccordianView from '../../common/Accordianview';
 import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
-import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
-import useGetEntities from '../../hooks/useGetEntities';
 import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
-import { getCollectionPartyDetails } from '../InvoiceFormLayout/CollectionPartyDetails/utils/getCollectionPartyDetails';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import InvoiceModal from './InvoiceModal';
@@ -29,7 +25,6 @@ const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
 const ONE = 1;
-const ZERO = 0;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
@@ -48,17 +43,6 @@ const STAKE_HOLDER_TYPES = [
 	'collection_desk',
 ];
 
-const getCollectionPartyParams = (organization_id = '') => ({
-	documents_data_required         : true,
-	other_addresses_data_required   : true,
-	poc_data_required               : true,
-	billing_addresses_data_required : true,
-	filters                         : {
-		organization_id,
-		trade_party_type: ['collection_party', 'self'],
-	},
-});
-
 function CollectionPartyDetails({
 	collectionParty = {}, refetch = () => {}, servicesData = {},
 	fullwidth = false, AddService = () => {},
@@ -73,26 +57,6 @@ function CollectionPartyDetails({
 	const [step, setStep] = useState(DEFAULT_STEP);
 	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
 
-	const cpParams = getCollectionPartyParams(collectionParty?.service_provider_id);
-	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
-
-	const [collectionPartyState, setCollectionPartyState] = useState({});
-	const [collectionPartyAddress, setCollectionPartyAddress] = useState({});
-	const [codes, setCodes] = useState({});
-
-	const [renderContent, setRenderContent] = useState('');
-
-	const {
-		billing_addresses: billingAddresses = [],
-		other_addresses: otherAddresses = [],
-	} = collectionPartyState || {};
-	const allAddresses = [...billingAddresses, ...otherAddresses];
-	const collectionPartyAddresses = (allAddresses || []).map((address) => ({
-		...address,
-		label : `${address?.address} / ${address?.tax_number}`,
-		value : address?.id,
-	}));
-
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
@@ -102,8 +66,6 @@ function CollectionPartyDetails({
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
 		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
-
-	const { listEntities, entitiesLoading } = useGetEntities();
 
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
@@ -145,36 +107,6 @@ function CollectionPartyDetails({
 	&& !shipment_data?.is_job_closed
 	&& filteredServices.length === ONE;
 
-	const { fields, control, watch, setValue } = useForm();
-
-	const formValues = watch();
-
-	const calculatedValues = useCalculateTotalPrice({
-		baseCurrency : formValues?.invoice_currency,
-		lineItems    : formValues?.line_items,
-		chargeCodes  : codes,
-	});
-
-	const lineItemsDataArray = (calculatedValues.newItems || []).map(
-		(item, index) => {
-			const codeData = codes[item?.code] || {};
-			return {
-				serial_number       : index + ONE,
-				code                : item?.code,
-				product_description : codeData?.actualname,
-				sac                 : codeData?.sac_code,
-				currency            : item?.currency,
-				quantity            : item?.quantity,
-				exchange_rate       : item?.exchange_rate,
-				tax_type            : 'T',
-				tax_percent         : `${codeData?.tax_percent}%`,
-				taxable_amount      : Number(item?.tax_amt || ZERO),
-				total               : Number(item?.cost || ZERO),
-				truck_number        : formValues?.truck_number,
-			};
-		},
-	);
-
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
 		if (element?.is_active === true) {
@@ -200,8 +132,6 @@ function CollectionPartyDetails({
 
 	const isJobClosed = shipment_data?.is_job_closed;
 
-	const invoiceCurrency = formValues?.invoice_currency;
-
 	const onConfirm = () => {
 		if (!isEmpty(uploadInvoiceUrl)) {
 			setOpenComparision({});
@@ -210,24 +140,6 @@ function CollectionPartyDetails({
 			toastApiError('Invoice is Required');
 		}
 	};
-
-	const COLLECTION_PARTY_BANK_OPTIONS = [];
-
-	const bank_details = (collectionPartyState?.documents || []).filter(
-		(item) => item?.document_type === 'bank_account_details',
-	);
-	(bank_details || []).forEach((bank) => {
-		if (
-			['pending', 'verified'].includes(bank?.verification_status)
-			&& bank?.status === 'active'
-		) {
-			COLLECTION_PARTY_BANK_OPTIONS.push({
-				...bank,
-				label : bank?.data?.bank_name,
-				value : bank?.data?.bank_account_number,
-			});
-		}
-	});
 
 	return (
 		<div className={styles.container}>
@@ -276,7 +188,6 @@ function CollectionPartyDetails({
 										className={styles.marginright}
 										onClick={() => {
 											setGenerateInvoiceModal(true);
-											setRenderContent('form');
 										}}
 									>
 										Generate Invoice
@@ -386,31 +297,9 @@ function CollectionPartyDetails({
 					<InvoiceModal
 						generateInvoiceModal={generateInvoiceModal}
 						setGenerateInvoiceModal={setGenerateInvoiceModal}
-						control={control}
+						shipment_data={shipment_data}
 						primary_service={primary_service}
 						collectionParty={collectionParty}
-						invoiceCurrency={invoiceCurrency}
-						listEntities={listEntities}
-						entitiesLoading={entitiesLoading}
-						watch={watch}
-						setValue={setValue}
-						setCodes={setCodes}
-						cpParams={cpParams}
-						handleModifiedOptions={handleModifiedOptions}
-						collectionPartyState={collectionPartyState}
-						setCollectionPartyState={setCollectionPartyState}
-						collectionPartyAddress={collectionPartyAddress}
-						setCollectionPartyAddress={setCollectionPartyAddress}
-						collectionPartyAddresses={collectionPartyAddresses}
-						COLLECTION_PARTY_BANK_OPTIONS={COLLECTION_PARTY_BANK_OPTIONS}
-						calculatedValues={calculatedValues}
-						renderContent={renderContent}
-						setRenderContent={setRenderContent}
-						formValues={formValues}
-						bank_details={bank_details}
-						shipment_data={shipment_data}
-						lineItemsDataArray={lineItemsDataArray}
-						fields={fields}
 					/>
 				) : null}
 			</AccordianView>

@@ -43,7 +43,7 @@ function IndexModalContent({
 	collectionPartyAddress = {},
 	collectionPartyAddresses = {},
 	setCollectionPartyAddress = () => {},
-	COLLECTION_PARTY_BANK_OPTIONS = [],
+	collectionPartyBankOptions = [],
 	calculatedValues = {},
 	downloadButtonState = '',
 	setRenderContent = () => {},
@@ -87,7 +87,7 @@ function IndexModalContent({
 					collectionPartyAddress,
 					collectionPartyAddresses,
 					setCollectionPartyAddress,
-					COLLECTION_PARTY_BANK_OPTIONS,
+					collectionPartyBankOptions,
 				}) || []).map((item) => {
 					const ele = { ...item };
 					if (ele.name === 'collection_party') {
