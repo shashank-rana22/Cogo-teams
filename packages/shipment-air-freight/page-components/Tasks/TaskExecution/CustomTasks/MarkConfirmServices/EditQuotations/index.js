@@ -38,11 +38,11 @@ function EditQuotations({
 			if (unit === 'unit') {
 				const finalValue = value[service_id].map((val, idx) => {
 					if (idx === +index) {
-						const { service_detail = [] } = service_charges_with_trade
+						const { service_detail = [] } = (service_charges_with_trade || [])
 							.find((element) => element.service_id === service_id);
-						const prefillKey = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[val.unit];
-						let prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index][prefillKey];
-						prefillValue = (prefillValue === undefined ? QUANTITY_ONE : prefillValue);
+						const prefillKey = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[val?.unit];
+						const prefillValue = service_detail?.[GLOBAL_CONSTANTS.zeroth_index]?.[prefillKey]
+						|| QUANTITY_ONE;
 						return {
 							...val,
 							quantity: prefillValue,
