@@ -10,10 +10,10 @@ import styles from './styles.module.css';
 const STEPPER_ITEMS = [
 	{ title: 'HR Meet', key: 'hr_meet' },
 	{ title: 'RM Clearance', key: 'manager_clearance' },
-	{ title: 'Finance Clearance', key: 'finance_clearance' },
-	{ title: 'HOTO Clearance', key: 'hoto_clearance' },
-	{ title: 'Admin Clearance', key: 'admin_clearance' },
 	{ title: 'Tech Clearance', key: 'tech_clearance' },
+	{ title: 'HOTO Clearance', key: 'hoto_clearance' },
+	{ title: 'Finance Clearance', key: 'finance_clearance' },
+	{ title: 'Admin Clearance', key: 'admin_clearance' },
 	{ title: 'Exit Interview', key: 'exit_interview' },
 	{ title: 'Exit Completed', key: 'exit_completed' },
 ];

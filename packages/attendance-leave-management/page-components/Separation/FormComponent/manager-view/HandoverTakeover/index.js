@@ -25,6 +25,9 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 		is_complete,
 	} = useHandoverTakeover({ data, refetch });
 
+	const { applicant_details } = data || {};
+	const { employee_id } = applicant_details || {};
+
 	return (
 		<div>
 			<div className={styles.title}>ASSIGN HANDOVER/TAKEOVER</div>
@@ -55,9 +58,10 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 							placeholder="Type to search..."
 							initialCall
 							control={control}
-							params={{ filters: { employee_status: ['confirmed', 'probation'] } }}
+							params={{ filters: { status: 'active' } }}
 							size="md"
-							disabled={is_complete}
+							value={employee_id}
+							disabled
 							rules={{ required: true }}
 						/>
 						<div className={styles.error}>{errors?.handover_by ? '*required' : null}</div>
@@ -71,7 +75,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 							placeholder="Type to search..."
 							initialCall
 							control={control}
-							params={{ filters: { employee_status: ['confirmed', 'probation'] } }}
+							params={{ filters: { status: 'active' } }}
 							size="md"
 							disabled={is_complete}
 							rules={{ required: true }}
