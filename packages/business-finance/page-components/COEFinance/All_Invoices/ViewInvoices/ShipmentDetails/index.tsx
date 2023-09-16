@@ -118,6 +118,8 @@ interface ShipmentDetailsInterface {
 	isTagFound?: boolean;
 	setIsTagFound?: any;
 	setCurrentTab?: any;
+	setCombinedRemarks?: Function;
+
 }
 
 function ShipmentDetails({
@@ -135,6 +137,7 @@ function ShipmentDetails({
 	isTagFound = false,
 	setIsTagFound = () => {},
 	setCurrentTab = () => {},
+	setCombinedRemarks = () => {},
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -419,6 +422,7 @@ function ShipmentDetails({
 						onAccept={onAccept}
 						onTabClick={onTabClick}
 						tab={tab}
+						setCombinedRemarks={setCombinedRemarks}
 					/>
 				</div>
 			</div>

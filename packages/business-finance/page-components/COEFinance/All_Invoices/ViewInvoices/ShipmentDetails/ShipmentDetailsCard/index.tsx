@@ -3,7 +3,7 @@ import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
@@ -40,6 +40,7 @@ interface ShipmentDetailsCardInterface {
 		invoiceDetailsTab?: boolean,
 		lineItemsTab?: boolean,
 	};
+	setCombinedRemarks?: Function;
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
@@ -58,6 +59,7 @@ function ShipmentDetailsCard({
 	onAccept = (prop) => (prop),
 	onTabClick = (prop) => (prop),
 	tab = {},
+	setCombinedRemarks = () => {},
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -238,6 +240,14 @@ function ShipmentDetailsCard({
 	);
 
 	const lineItemCheckedCount = lineItemsCheck ? 1 : 0;
+
+	useEffect(() => {
+		const COMBINED_DATA = {};
+		Object.keys(checkedValue)?.forEach((key) => {
+			COMBINED_DATA[key] = [...checkedValue[key], ...remarksVal[key]];
+		});
+		setCombinedRemarks({ ...COMBINED_DATA });
+	}, [checkedValue, remarksVal, setCombinedRemarks]);
 
 	return (
 		<div>

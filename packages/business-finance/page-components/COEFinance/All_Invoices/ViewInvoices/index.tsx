@@ -35,6 +35,7 @@ function ViewInvoices() {
 
 	const [isTagFound, setIsTagFound] = useState(false);
 	const [currentTab, setCurrentTab] = useState('shipmentDetailsTab');
+	const [combinedRemarks, setCombinedRemarks] = useState({});
 
 	useEffect(() => {
 		if (!isTagFound) {
@@ -75,7 +76,7 @@ function ViewInvoices() {
 			>
 				<Header
 					data={fullResponse}
-					remarksVal={remarksVal}
+					remarksVal={combinedRemarks}
 					overAllRemark={overAllRemark}
 					setOverAllRemark={setOverAllRemark}
 					lineItemsRemarks={lineItemsRemarks}
@@ -102,6 +103,7 @@ function ViewInvoices() {
 				isTagFound={isTagFound}
 				setIsTagFound={setIsTagFound}
 				setCurrentTab={setCurrentTab}
+				setCombinedRemarks={setCombinedRemarks}
 			/>
 		</div>
 	);
