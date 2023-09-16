@@ -33,8 +33,6 @@ const useCreateEnrichmentRequest = (props) => {
 			enrichment_source_id,
 		} = formValues || {};
 
-		// console.log('herer');
-
 		const payloadMode = mode === 'select_first' ? 'api_call' : mode;
 
 		try {

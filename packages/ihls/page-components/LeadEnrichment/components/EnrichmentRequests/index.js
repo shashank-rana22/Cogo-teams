@@ -9,17 +9,34 @@ import enrichment_request_filters from '../../configurations/get-enrichment-requ
 import getSearchControls from '../../configurations/search-control';
 import useGetEnrichmentRequests from '../../hooks/useGetEnrichmentRequests';
 
+import EnrichmentRequestEdit from './EnrichmentRequestEdit';
 import EnrichmentRequestInfo from './EnrichmentRequestInfo';
 import getEnrichmentRequestsColumns from './getEnrichmentRequestsColumns';
 import styles from './styles.module.css';
 
 function EnrichmentRequests() {
-	const [logId, setLogId] = useState(null);
-	const columns = getEnrichmentRequestsColumns({ setLogId });
+	const [request, setRequest] = useState({
+		id   : null,
+		type : null,
+	});
+
+	const onClose = () => {
+		setRequest((p) => ({
+			...p,
+			id   : null,
+			type : null,
+		}));
+	};
+	const columns = getEnrichmentRequestsColumns({
+		request,
+		setRequest,
+		onClose,
+	});
 
 	const {
 		loading,
 		response,
+		refetch,
 		control,
 		paginationData,
 		reset,
@@ -28,10 +45,6 @@ function EnrichmentRequests() {
 		debounceQuery,
 	} = useGetEnrichmentRequests();
 	const searchControls = getSearchControls({ debounceQuery, name: 'name', placeholder: 'Request name...' });
-
-	const onClose = () => {
-		setLogId(null);
-	};
 
 	const onClickReset = () => {
 		reset();
@@ -92,42 +105,10 @@ function EnrichmentRequests() {
 						<IcMUndo style={{ width: '16px', height: 'auto' }} />
 					</Button>
 				</div>
-				{/* <div style={{ display: 'flex' }}>
-					<Popover
-						interactive
-						placement="bottom"
-						visible={open}
-						caret={false}
-						onClickOutside={onClickOutside}
-						render={open ? (
-							<SubFilters
-								loading={loading}
-								control={control}
-								handleSubmit={handleSubmit}
-								handleClick={handleClick}
-							/>
-						) : null}
-					>
-						<div className={styles.filters}>
-							<Button themeType="secondary" onClick={() => setOpen(!open)}>
-								<IcMFilter className={styles.icmFilter} />
-								Filters
-							</Button>
-							<Button
-								themeType="secondary"
-								onClick={onClickReset}
-								disabled={loading}
-								className={styles.icmUndo}
-							>
-								<IcMUndo style={{ width: '16px', height: 'auto' }} />
-							</Button>
-						</div>
-					</Popover>
-				</div> */}
 			</div>
 			<div className={styles.logContainer}>
 
-				<LeadTable columns={columns} data={response} loading={false} />
+				<LeadTable columns={columns} data={response} loading={loading} />
 
 				{!loading && !isEmpty(response)
 				&& (
@@ -142,7 +123,12 @@ function EnrichmentRequests() {
 					</div>
 				)}
 
-				<Modal style={{ width: '70%' }} show={!isEmpty(logId)} onClose={onClose} placement="center">
+				<Modal
+					style={{ width: '70%' }}
+					show={request.type === 'view'}
+					onClose={onClose}
+					placement="center"
+				>
 					<Modal.Header title={(
 						<>
 							<IcMEyeopen className={styles.eye_icon} />
@@ -159,6 +145,7 @@ function EnrichmentRequests() {
 						<Button onClick={onClose}>Close</Button>
 					</Modal.Footer>
 				</Modal>
+				<EnrichmentRequestEdit refetch={refetch} request={request} onClose={onClose} />
 			</div>
 		</div>
 	);

@@ -48,10 +48,6 @@ function LeadInfo({
 		setVisible(false);
 	};
 
-	// const onCloseRequest = () => {
-	// 	setShowRequest(false);
-	// };
-
 	const onPageChange = (pageNumber) => {
 		setParams((p) => ({ ...p, page: pageNumber }));
 	};

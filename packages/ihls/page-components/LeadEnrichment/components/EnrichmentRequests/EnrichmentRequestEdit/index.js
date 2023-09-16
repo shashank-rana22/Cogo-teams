@@ -1,0 +1,59 @@
+import { Button, Modal } from '@cogoport/components';
+import { UploadController } from '@cogoport/forms';
+
+import useUpdateEnrichmentRequest from '../../../hooks/useUpdateEnrichmentRequest';
+
+import styles from './styles.module.css';
+
+function EnrichmentRequestEdit({ request = null, onClose = () => {}, refetch = () => {} }) {
+	const {
+		onUpdate,
+		loading,
+		control,
+		errors,
+		handleSubmit,
+	} = useUpdateEnrichmentRequest({ requestId: request.id, refetch, onClose });
+	return (
+		<Modal
+			show={request.type === 'action'}
+			onClose={onClose}
+			placement="center"
+		>
+			<Modal.Header title={(
+				<span>
+					Upload Enriched File
+				</span>
+			)}
+			/>
+			<Modal.Body className={styles.modal_body}>
+				<div className={styles.container}>
+					<UploadController
+						control={control}
+						errors={errors}
+						name="upload_question"
+						accept=".csv, .xlsx"
+						rules={{ required: 'File is required.' }}
+					/>
+
+					{errors.upload_question && (
+						<div className={styles.error_msg}>
+							{errors.upload_question.message}
+						</div>
+					)}
+				</div>
+			</Modal.Body>
+			<Modal.Footer>
+				<div className={styles.button_div}>
+					<Button
+						loading={loading}
+						onClick={handleSubmit(onUpdate)}
+					>
+						Update
+					</Button>
+					<Button themeType="secondary" onClick={onClose}>Close</Button>
+				</div>
+			</Modal.Footer>
+		</Modal>
+	);
+}
+export default EnrichmentRequestEdit;

@@ -21,7 +21,6 @@
 
 	:global(.ui_button_container) {
 		height: unset;
-		padding: 0 0 0 12px;
 	}
 }
 
@@ -72,4 +71,9 @@
 .filter_container {
 	display: flex;
 	justify-content: space-between;
+}
+
+.popover_buttons {
+	width: 100%;
+	margin-top: 4px;
 }

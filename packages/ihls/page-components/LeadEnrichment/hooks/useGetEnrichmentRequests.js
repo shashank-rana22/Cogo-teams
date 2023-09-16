@@ -8,7 +8,7 @@ const useGetEnrichmentRequests = () => {
 		page                     : 1,
 		pagination_data_required : true,
 	});
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }, refetch] = useRequest({
 		url    : 'list_enrichment_requests',
 		method : 'get',
 		params,
@@ -16,7 +16,7 @@ const useGetEnrichmentRequests = () => {
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
-	const { control, handleSubmit, reset, watch } = useForm();
+	const { control, reset, watch } = useForm();
 
 	const { list = [], ...paginationData } = data || {};
 
@@ -24,13 +24,15 @@ const useGetEnrichmentRequests = () => {
 		const subscription = watch((value) => {
 			const {
 				enrichment_source_id,
+				enrichment_status,
 			} = value;
 
 			setParams((previousParams) => ({
 				...previousParams,
 				filters: {
 					...(previousParams.filters || {}),
-					enrichment_source_id: enrichment_source_id || undefined,
+					enrichment_source_id : enrichment_source_id || undefined,
+					enrichment_status    : enrichment_status || undefined,
 				},
 			}));
 		});
@@ -48,29 +50,11 @@ const useGetEnrichmentRequests = () => {
 		}));
 	}, [searchQuery]);
 
-	const handleClick = async (formValues) => {
-		const {
-			account_name,
-			assigned_by,
-			enrichment_agency,
-		} = formValues;
-		setParams((previousParams) => ({
-			...previousParams,
-			filters: {
-				...(previousParams.filters || {}),
-				account_name      : account_name || undefined,
-				assigned_by       : assigned_by || undefined,
-				enrichment_agency : enrichment_agency || undefined,
-			},
-		}));
-	};
-
 	return {
 		loading,
 		response: (list || []),
+		refetch,
 		control,
-		handleClick,
-		handleSubmit,
 		reset,
 		setParams,
 		params,

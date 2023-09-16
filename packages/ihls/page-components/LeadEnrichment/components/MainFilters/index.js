@@ -107,11 +107,11 @@ function MainFilters({
 				<Button
 					size="sm"
 					themeType="secondary"
-					onClick={handleSubmit(handleClick)}
 					disabled={loading}
 					className={styles.icmUndo}
+					onClick={onClickReset}
 				>
-					<IcMUndo onClick={onClickReset} style={{ width: '16px', height: 'auto' }} />
+					<IcMUndo style={{ width: '16px', height: 'auto' }} />
 				</Button>
 			</div>
 		</div>
