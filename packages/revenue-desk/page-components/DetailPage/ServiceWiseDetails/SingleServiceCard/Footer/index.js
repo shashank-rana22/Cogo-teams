@@ -6,6 +6,7 @@ import useGetRDWallet from '../../../../../hooks/useGetRDWallet';
 import styles from './styles.module.css';
 
 function Footer({ data = {} }) {
+	const ZERO_VALUE = 0;
 	const { data: walletAmount } = useGetRDWallet({ data });
 	const { wallet_amount = '', currency = '' } = walletAmount || {};
 
@@ -40,6 +41,7 @@ function Footer({ data = {} }) {
 			value : data?.preferred_shipping_line?.business_name,
 		},
 	];
+
 	return (
 		<div className={styles.container}>
 			{infoArray.map((item) => (item.value ? (
@@ -55,8 +57,7 @@ function Footer({ data = {} }) {
 			<div className={styles.wallet_container}>
 				<div className={styles.wallet_text}>
 					Wallet Balance -
-					{' '}
-					<span className={styles.price_text}>
+					<span className={walletAmount > ZERO_VALUE ? styles.price_text : styles.red_text}>
 						{formatAmount({
 							amount  : wallet_amount,
 							currency,
