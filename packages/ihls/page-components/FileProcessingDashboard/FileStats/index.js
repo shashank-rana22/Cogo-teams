@@ -47,16 +47,17 @@ function FileStats({
 			onClick={handleContainerClick}
 			className={cl`${styles.container} ${(conversionKey === isSelectedKey) ? styles.active : ''}`}
 		>
-			<div className={styles.file_header}>
+			<div className={styles.file_header} style={{ color: '#828282', marginLeft: 3 }}>
 				{SVG_MAPPING[conversionKey]}
-				<div style={{ color: '#828282', marginLeft: 3 }} className={styles.text}>
+				<div className={styles.text}>
 					{CONVERSTION_STATS_MAPPING[conversionKey]}
 				</div>
 			</div>
-			<div style={{ display: 'flex', alignItems: 'center', paddingTop: 8, borderTop: '1px solid #E0E0E0' }}>
-				<div className={styles.file_data}>
-					{stat}
-				</div>
+			<div
+				style={{ display: 'flex', alignItems: 'center', paddingTop: 8, borderTop: '1px solid #E0E0E0' }}
+				className={styles.file_data}
+			>
+				{stat}
 			</div>
 		</button>
 	);

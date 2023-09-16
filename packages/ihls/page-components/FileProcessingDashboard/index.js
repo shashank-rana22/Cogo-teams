@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
+import FILTER_MAPPING from '../../config/FILTER_MAPPING.json';
 import useAthenaFileList from '../../hooks/useAthenaFileList';
 import useAthenaFileStats from '../../hooks/useAthenaFileStats';
 
@@ -14,16 +15,6 @@ import FileStats from './FileStats';
 import SheetsList from './SheetsList';
 import styles from './styles.module.css';
 
-const FILTER_MAPPING = {
-	total                   : undefined,
-	uploaded                : 'uploaded',
-	processing              : 'processing',
-	raw_record_created      : 'raw_record_created',
-	lead_created            : 'lead_created',
-	shipment_record_created : 'shipment_record_created',
-	success                 : 'success',
-	failure                 : 'failure',
-};
 const FILE_SVG_MAPPING = {
 	total                   : <IcMFileUploader />,
 	success                 : <IcMTick />,

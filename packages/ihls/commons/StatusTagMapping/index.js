@@ -11,7 +11,7 @@ import {
 
 import styles from './styles.module.css';
 
-const statusTagMapping = {
+const StatusTagMapping = {
 	success: (
 		<div className={styles.status_pill}>
 			<IcMTick height="14px" width="14px" />
@@ -31,12 +31,10 @@ const statusTagMapping = {
 		</div>
 	),
 	shipment_record_created: (
-		<>
+		<div className={styles.status_pill}>
 			<IcMShip height="14px" width="14px" />
-			<div className={styles.status_pill}>
-				<Pill className={styles.shipment}>Shipment Record Created</Pill>
-			</div>
-		</>
+			<Pill className={styles.shipment}>Shipment Record Created</Pill>
+		</div>
 	),
 	raw_record_created: (
 		<div className={styles.status_pill}>
@@ -64,4 +62,4 @@ const statusTagMapping = {
 	),
 };
 
-export default statusTagMapping;
+export default StatusTagMapping;

@@ -52,20 +52,18 @@ function SheetsList({ filters = {}, setFilters = () => {}, data = {}, heading = 
 							? <IcMArrowUp /> : <IcMArrowDown />}
 
 					</Button>
-					<ListPagination {...paginationProps} />
 				</div>
 
 			</div>
-			<div>
 
-				<Table
-					onRowClick={(item) => router.push(`/ihls/data-pipeline/${item?.id}`)}
-					loading={loading}
-					columns={tabColumns}
-					data={data?.list || []}
-				/>
+			<ListPagination {...paginationProps} />
 
-			</div>
+			<Table
+				onRowClick={(item) => router.push(`/ihls/data-pipeline/${item?.id}`)}
+				loading={loading}
+				columns={tabColumns}
+				data={data?.list || []}
+			/>
 
 			<ListPagination {...paginationProps} />
 		</div>

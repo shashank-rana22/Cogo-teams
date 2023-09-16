@@ -1,7 +1,8 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
 
-import statusTagMapping from './statusTagMapping';
+import StatusTagMapping from '../../../../commons/StatusTagMapping';
+
 import styles from './styles.module.css';
 
 function FileDetails({ data = {}, loading = false }) {
@@ -31,7 +32,7 @@ function FileDetails({ data = {}, loading = false }) {
 						<Placeholder width="230px" height="16px" />
 					) : (
 						<div className={styles.details}>
-							{fileDataStatus ? statusTagMapping[fileDataStatus] : null}
+							{fileDataStatus ? StatusTagMapping[fileDataStatus] : null}
 						</div>
 					)}
 				</div>
