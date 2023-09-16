@@ -3,20 +3,16 @@ const controls = [
 		name        : 'status',
 		label       : 'Status',
 		type        : 'select',
-		caret       : true,
 		placeholder : 'Select status',
-		className   : 'primary md',
 		options     : [
 			{
 				label : 'Uploaded',
 				value : 'uploaded',
 			},
-
 			{
 				label : 'Validated',
 				value : 'validated',
 			},
-
 			{
 				label : 'Invalidated',
 				value : 'invalidated',
@@ -26,12 +22,10 @@ const controls = [
 				label : 'Processed',
 				value : 'processed',
 			},
-
 			{
 				label : 'Processing',
 				value : 'processing',
 			},
-
 			{
 				label : 'Partially Added',
 				value : 'partially_added',
@@ -43,8 +37,6 @@ const controls = [
 		label       : 'Service Name',
 		type        : 'select',
 		placeholder : 'Select service',
-		className   : 'primary md',
-		caret       : true,
 		options     : [
 			{
 				label : 'FCL Freight',

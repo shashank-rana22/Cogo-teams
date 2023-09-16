@@ -1,16 +1,14 @@
-const getControls = [
+const controls = [
 	{
 		name        : 'service_name',
 		label       : 'Service Name',
 		type        : 'select',
-		className   : 'primary lg',
 		placeholder : 'Please select service',
 		options     : [
 			{
 				label : 'FCL Freight',
 				value : 'fcl_freight',
 			},
-
 			{
 				label : 'FCL Freight Local',
 				value : 'fcl_freight_local',
@@ -20,18 +18,17 @@ const getControls = [
 		rules : { required: 'Service Name is required' },
 	},
 	{
-		name        : 'comment',
-		label       : 'Comments',
-		type        : 'textarea',
-		span        : 6,
-		className   : 'primary lg',
-		placeholder : 'Write your comments here...',
+		name  : 'comment',
+		label : 'Comments',
+		type  : 'textarea',
+		span  : 6,
+
+		placeholder: 'Write your comments here...',
 	},
 
 	{
 		name            : 'file_url',
 		type            : 'file',
-		className       : 'primary lg',
 		showProgress    : true,
 		onlyURLOnChange : true,
 		themeType       : 'secondary',
@@ -44,4 +41,4 @@ const getControls = [
 		rules           : { required: 'Rate Sheet is required' },
 	},
 ];
-export default getControls;
+export default controls;

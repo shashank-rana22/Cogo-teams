@@ -12,6 +12,7 @@ function RateSheet() {
 	const {
 		data = {}, loading = false, setFilters = () => {}, filters = {}, refetch = () => {},
 	} = useListRatesheet({});
+
 	const tableColumns = getTableColumns({ refetch });
 	const paginationProps = { setFilters, filters, data };
 	return (
@@ -27,7 +28,6 @@ function RateSheet() {
 					</div>
 					<UploadRatesheet refetch={refetch} />
 				</div>
-
 			</div>
 
 			<div className={styles.table_container}>

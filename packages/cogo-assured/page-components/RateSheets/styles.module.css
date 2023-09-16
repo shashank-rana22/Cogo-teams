@@ -24,11 +24,6 @@
 	}
 }
 
-.commodity_container {
-	display: flex;
-	justify-content: space-between;
-}
-
 .commodity_label {
 	display: inline-block;
 	width: 20%;
@@ -41,7 +36,8 @@
 }
 
 .header,
-.filters_add {
+.filters_add,
+.commodity_container {
 	display: flex;
 	justify-content: space-between;
 }

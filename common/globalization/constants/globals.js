@@ -108,8 +108,8 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
-						3dbb0e12ed2336171d1d32cb72ed2d4e/new_employee_bulk_upload_sample.csv`,
+		new_hire_bulk_upload_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '3dbb0e12ed2336171d1d32cb72ed2d4e/new_employee_bulk_upload_sample.csv',
 	},
 	sample_ratesheet_url: {
 		sample_file_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/ea6f784b835820e9558b7098928cc2fd/'

@@ -15,8 +15,9 @@ function ProcessBtn({ item = {}, refetch = () => {} }) {
 	});
 
 	const handleProcess = () => {
-		apiTrigger({ value: item });
+		apiTrigger({ id: item?.id });
 	};
+
 	return (
 		<>
 			<Button themeType="secondary" onClick={() => setShow(true)}>Process</Button>

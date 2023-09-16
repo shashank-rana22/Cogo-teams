@@ -13,8 +13,8 @@ const useListRatesheet = ({ defaultFilters = {} }) => {
 		url    : '/list_cogo_assured_rate_sheets',
 		params : {
 			filters: {
-				...restFilters,
 				...defaultFilters,
+				...restFilters,
 			},
 			page,
 			page_limit: 10,

@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getCreateUpdateRatesheetPayload from '../helpers/getCreateUpdateRatesheetPayload';
 import toastApiError from '../utils/toastApiError';
 
 const useCreateRatesheet = ({
@@ -15,17 +14,13 @@ const useCreateRatesheet = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const payload = getCreateUpdateRatesheetPayload(val);
-			const res = await trigger({ data: payload });
+			await trigger({ data: val });
 
 			Toast.success(successMessage);
 
 			refetch();
-
-			return res;
 		} catch (err) {
 			toastApiError(err);
-			return err;
 		}
 	};
 

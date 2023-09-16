@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getProcessRatesheetPayload from '../helpers/getProcessRatesheetPayload';
 import toastApiError from '../utils/toastApiError';
 
 const useProcessRatesheet = ({
@@ -15,18 +14,13 @@ const useProcessRatesheet = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const payload = await getProcessRatesheetPayload({ values: val?.value });
-
-			const res = await trigger({ data: payload });
+			await trigger({ data: val });
 
 			Toast.success(successMessage);
 
 			refetch();
-
-			return res;
 		} catch (err) {
 			toastApiError(err);
-			return err;
 		}
 	};
 

@@ -6,17 +6,16 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 const ONE = 1;
+
 function Filters({ filters = {}, setFilters = () => {} }) {
 	return (
 		<div className={styles.filter_container}>
 			<div className={styles.filter}>
-
 				<Select
 					{...controls[GLOBAL_CONSTANTS.zeroth_index]}
 					onChange={(value) => setFilters({ ...filters, status: value, page: 1 })}
 					value={filters?.status}
 					className={styles.field_controller}
-					theme="admin"
 					isClearable
 				/>
 
@@ -25,12 +24,9 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 					onChange={(value) => setFilters({ ...filters, service_name: value, page: 1 })}
 					value={filters?.service_name}
 					className={styles.field_controller}
-					theme="admin"
 					isClearable
 				/>
-
 			</div>
-
 		</div>
 
 	);

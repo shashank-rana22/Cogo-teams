@@ -7,17 +7,13 @@ import { useState } from 'react';
 import Layout from '../../../common/Layout';
 import useCreateRatesheet from '../../../hooks/useCreateRatesheet';
 
-import getControls from './getControls';
+import controls from './controls';
 import styles from './styles.module.css';
 
 function UploadRatesheet({ refetch = () => {} }) {
-	const DEFAULT_VALUES = {};
 	const [show, setShow] = useState(false);
-	const FILE_URL = GLOBAL_CONSTANTS.sample_ratesheet_url.sample_file_url;
 
-	const { control, formState:{ errors = {} } = {}, watch, handleSubmit } = useForm({
-		defaultValues: DEFAULT_VALUES,
-	});
+	const { control, formState:{ errors = {} } = {}, handleSubmit } = useForm();
 
 	const { apiTrigger = () => {}, loading } = useCreateRatesheet({
 		refetch: () => {
@@ -26,21 +22,15 @@ function UploadRatesheet({ refetch = () => {} }) {
 		},
 	});
 
-	const handleSubmitForm = ({ data }) => {
-		apiTrigger({ values: data });
-	};
-
-	const onSubmit = (values) => handleSubmitForm({ data: values });
+	const onSubmit = (values) => apiTrigger(values);
 
 	const downloadSample = () => {
-		if (FILE_URL) window.open(FILE_URL, '_blank');
+		window.open(GLOBAL_CONSTANTS.sample_ratesheet_url.sample_file_url, '_blank');
 	};
-	const controls = getControls;
 
 	return (
 		<div>
 			<div className={styles.button_section}>
-
 				<Button
 					size="lg"
 					themeType="primary"
@@ -65,13 +55,12 @@ function UploadRatesheet({ refetch = () => {} }) {
 							<Button className={styles.text_button} onClick={() => downloadSample()}>DOWNLOAD</Button>
 							Sample Rate Sheet
 						</div>
+
 						<Layout
 							controls={controls}
 							errors={errors}
 							control={control}
-							formValues={watch()}
 						/>
-
 					</Modal.Body>
 
 					<Modal.Footer>

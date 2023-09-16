@@ -4,7 +4,7 @@ import { useFieldArray } from '@cogoport/forms';
 import Child from './Child';
 import styles from './styles.module.css';
 
-function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {} }) {
+function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true }) {
 	const { controls = [], name } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
@@ -21,7 +21,6 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 					control={control}
 					index={index}
 					name={name}
-					formValues={formValues}
 				/>
 			))}
 
