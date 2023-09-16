@@ -130,7 +130,7 @@ function Item({
 									<div className={styles.rejection_reason}>
 										<IcCError width={16} height={16} />
 										<span>
-											{item?.rejection_reason}
+											{item.rejection_reason}
 										</span>
 									</div>
 								) : null}
