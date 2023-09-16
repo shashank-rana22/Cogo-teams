@@ -37,13 +37,8 @@ function ListView({
 		return <div className={styles.loader}><Loader /></div>;
 	}
 
-	if (isEmpty(data?.list)) {
-		return <EmptyState />;
-	}
-
 	return (
 		<div>
-
 			<div className={cl`${styles.row_container} ${styles.width_95} ${styles.header_container}`}>
 				{columns.map((col) => (
 					<div
@@ -58,35 +53,36 @@ function ListView({
 
 			<hr className={styles.divider} />
 
-			<div>
-				<ListPagination data={data} setFilters={setFilters} filters={filters} />
+			{isEmpty(data?.list) ? <EmptyState /> : (
+				<div>
+					<ListPagination data={data} setFilters={setFilters} filters={filters} />
+					{(data?.list || []).map((item) => (
+						<div key={item?.id} className={styles.card_container}>
+							<div className={styles.row_container}>
+								<div className={cl`${styles.row_container} ${styles.width_95}`}>
+									{columns.map((col) => (
+										<div
+											key={col.key}
+											style={{
+												width   : `${getWidthPercent(col?.span)}%`,
+												padding : '0 8px',
+											}}
+										>
+											{typeof col?.render === 'function' ? col.render(item) : null}
+										</div>
+									))}
 
-				{(data?.list || []).map((item) => (
-					<div key={item?.id} className={styles.card_container}>
-						<div className={styles.row_container}>
-							<div className={cl`${styles.row_container} ${styles.width_95}`}>
-								{columns.map((col) => (
-									<div
-										key={col.key}
-										style={{
-											width   : `${getWidthPercent(col?.span)}%`,
-											padding : '0 8px',
-										}}
-									>
-										{typeof col?.render === 'function' ? col.render(item) : null}
-									</div>
-								))}
+								</div>
 
 							</div>
 
+							<Footer item={item} />
 						</div>
+					))}
 
-						<Footer item={item} />
-					</div>
-				))}
-
-				<ListPagination data={data} setFilters={setFilters} filters={filters} />
-			</div>
+					<ListPagination data={data} setFilters={setFilters} filters={filters} />
+				</div>
+			)}
 
 			{showEdit ? (
 				<Modal
