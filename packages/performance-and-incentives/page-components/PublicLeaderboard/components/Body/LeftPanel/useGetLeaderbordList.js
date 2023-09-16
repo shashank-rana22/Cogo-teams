@@ -30,7 +30,7 @@ function useGetLeaderbordList() {
 				id         : 4,
 				name       : 'Sahil Kala',
 				picture    : null,
-				rank       : 5,
+				rank       : 4,
 				score      : 950,
 				percentile : 93.02,
 			},
