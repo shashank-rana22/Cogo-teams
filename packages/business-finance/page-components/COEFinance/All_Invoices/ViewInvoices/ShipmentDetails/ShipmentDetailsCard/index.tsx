@@ -41,6 +41,7 @@ interface ShipmentDetailsCardInterface {
 	};
 	setCombinedRemarks?: Function;
 	docContent?: string;
+	chargesTable?: any;
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
@@ -61,6 +62,7 @@ function ShipmentDetailsCard({
 	tab = {},
 	setCombinedRemarks = () => {},
 	docContent = '',
+	chargesTable = [],
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -396,6 +398,7 @@ function ShipmentDetailsCard({
 									setCheckItem={setCheckItem}
 									onTabClick={onTabClick}
 									showTab={tab.lineItemsTab}
+									chargesTable={chargesTable}
 								/>
 							)}
 						</>

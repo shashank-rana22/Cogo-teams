@@ -160,7 +160,7 @@ function ShipmentDetails({
 		lineItemsTab       : false,
 	});
 
-	const { docContent } = useGetDocumentContent({ data });
+	const { docContent = '', chargesTable = [] } = useGetDocumentContent({ data });
 
 	const onTabClick = ({ tabName = '' }) => {
 		setTab(
@@ -373,6 +373,7 @@ function ShipmentDetails({
 						tab={tab}
 						setCombinedRemarks={setCombinedRemarks}
 						docContent={docContent}
+						chargesTable={chargesTable}
 					/>
 				</div>
 			</div>

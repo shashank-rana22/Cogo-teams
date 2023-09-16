@@ -23,32 +23,38 @@ export const LINE_ITEMS = {
 		{
 			label : 'Cur.',
 			key   : 'currency',
+			func  : 'renderCurrency',
 			span  : 1,
 		},
 		{
 			label : 'Rate',
 			key   : 'price',
+			func  : 'renderPrice',
 			span  : 1,
 
 		},
 		{
 			label : 'Qty',
 			key   : 'quantity',
+			func  : 'renderQuantity',
 			span  : 1,
 		},
 		{
 			label : 'Ex. Rate',
 			key   : 'exchangeRate',
+			func  : 'renderExchangeRate',
 			span  : 1.5,
 		},
 		{
 			label : 'Tax',
 			key   : 'taxAmount',
+			func  : 'renderTaxAmount',
 			span  : 1.2,
 		},
 		{
 			label : 'Total Cost',
 			key   : 'total',
+			func  : 'renderTotalCost',
 			span  : 1.9,
 		},
 		{
