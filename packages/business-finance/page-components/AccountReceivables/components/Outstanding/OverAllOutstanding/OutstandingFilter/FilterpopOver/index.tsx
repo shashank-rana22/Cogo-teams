@@ -144,7 +144,7 @@ function FilterpopOver({
 			<Popover
 				visible={show}
 				placement="bottom"
-				render={show && <Content />}
+				render={show ? <Content /> : null}
 				className={styles.pop_over_style}
 				{...rest}
 			>
