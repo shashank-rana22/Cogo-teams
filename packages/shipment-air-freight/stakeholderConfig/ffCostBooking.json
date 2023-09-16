@@ -55,5 +55,5 @@
         "can_edit":["collection_party","notifying_party"],
         "can_add_service_provider_poc":true
     },
-    "job_open_request": false
+    "job_open_request": true
 }
