@@ -18,12 +18,14 @@ function TermList({
 	handleSubmitForm = () => {},
 }) {
 	const [showHiddenContentId, setShowHiddenContentId] = useState(null);
+
 	if (isEmpty(list)) {
 		return <EmptyState />;
 	}
+
 	return (
 		<div className={styles.container}>
-			{!loading && list.map((listItem) => (
+			{!loading ? list?.map((listItem) => (
 				<div key={listItem.id}>
 					<TermCard
 						EditForm={EditForm}
@@ -33,8 +35,8 @@ function TermList({
 						listItem={listItem}
 						refetch={refetch}
 						handleSubmitForm={handleSubmitForm}
-						description={listItem.description}
-						showMoreTnC={showHiddenContentId === listItem.id}
+						description={listItem?.description}
+						showMoreTnC={showHiddenContentId === listItem?.id}
 						onClickShowMoreTnC={
 							() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))
 }
@@ -43,7 +45,7 @@ function TermList({
 						}}
 					/>
 				</div>
-			))}
+			)) : null}
 		</div>
 	);
 }

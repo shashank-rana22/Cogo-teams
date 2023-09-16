@@ -1,14 +1,10 @@
 {
   "name": "@cogoport/terms-and-conditions",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "Terms and Conditions Package",
+  "main": "./index.js",
+  "private": true,
+  "types": "./index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.441",
     "@cogoport/request": "workspace:0.1.0",

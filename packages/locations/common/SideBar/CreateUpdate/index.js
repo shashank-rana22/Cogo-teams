@@ -52,6 +52,7 @@ function CreateUpdateForm() {
 					return null;
 				})}
 			</div>
+
 			<Button disabled={loading} type="submit">{t('locations:submit_button')}</Button>
 		</form>
 	);

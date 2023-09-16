@@ -7,7 +7,8 @@ const getCreateUpdateTncPayload = ({ values = {}, editFormValue = {}, organizati
 		trade_type,
 		country_id,
 		paying_party_country_ids,
-	} = values;
+		description = [],
+	} = values || {};
 
 	const formValues = {
 		service                  : service || undefined,
@@ -19,14 +20,13 @@ const getCreateUpdateTncPayload = ({ values = {}, editFormValue = {}, organizati
 		paying_party_country_ids : paying_party_country_ids || undefined,
 	};
 
-	const { description = [] } = values;
-
-	const descriptionNew = description.map((item) => item.terms_and_condition);
+	const descriptionNew = description?.map((item) => !!item?.terms_and_condition);
 
 	const payload = {
 		...(isUpdatable ? { id: editFormValue?.id } : { ...formValues }),
 		description: descriptionNew,
 	};
+
 	return payload;
 };
 

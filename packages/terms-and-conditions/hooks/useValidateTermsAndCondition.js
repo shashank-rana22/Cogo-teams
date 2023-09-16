@@ -1,20 +1,12 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../utlis/toastApiError';
 
-const useValidateTermsAndCondition = (props) => {
-	const { setTncLevel, organizationId } = props;
-
-	const {
-		general: { scope },
-	} = useSelector((state) => state);
-
+const useValidateTermsAndCondition = ({ setTncLevel, organizationId }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		scope,
 		url    : '/validate_terms_and_condition',
-	});
+	}, { manual: true });
 
 	const onValdidateSubmit = async (values = {}) => {
 		try {

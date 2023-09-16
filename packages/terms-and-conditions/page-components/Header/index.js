@@ -5,6 +5,7 @@ import AddEdit from '../CreateUpdateTnC/AddEdit';
 import Filter from './Filters';
 import styles from './styles.module.css';
 
+const FIRST_PAGE = 1;
 function Header({
 	currentStatus = 'active',
 	setCurrentStatus = () => {},
@@ -19,7 +20,6 @@ function Header({
 }) {
 	const onChangeToggleStatus = () => {
 		setCurrentStatus((pv) => (pv === 'active' ? 'inactive' : 'active'));
-		const FIRST_PAGE = 1;
 		setPagination(FIRST_PAGE);
 	};
 	return (

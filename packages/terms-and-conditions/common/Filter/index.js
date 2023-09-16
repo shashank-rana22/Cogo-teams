@@ -1,11 +1,17 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import getOptions from '../../config/service-to-trade-type-mappings';
+import SERVICE_TRADE_TYPE_OPTION_MAPPING from '../../config/service-to-trade-type-mappings';
 import getShowElements from '../../hooks/getShowElements';
 import Layout from '../Layout';
 
 import styles from './styles.module.css';
+
+const LABEL_MAPPING = {
+	import  : 'Import To',
+	export  : 'Export From',
+	default : 'Country',
+};
 
 function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow = () => {} }) {
 	const finalControls = controls;
@@ -14,29 +20,16 @@ function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow =
 	const { control, handleSubmit, watch } = useForm({ defaultValues: restFilters });
 	const { service = '', trade_type = '' } = watch();
 
-	const newField = finalControls.map((field) => {
-		const { name } = field;
-		let newControl = { ...field };
-
-		if (name === 'country_id') {
-			newControl = {
-				...newControl,
-
-				label:
-				(trade_type === 'import' && 'Import To')
-				|| (trade_type === 'export' && 'Export From')
-				|| 'Country',
-			};
+	finalControls.forEach((ctrl, index) => {
+		if (ctrl?.name === 'country_id') {
+			finalControls[index].label = LABEL_MAPPING?.[trade_type] || LABEL_MAPPING.default;
 		}
 
-		if (name === 'trade_type') {
-			newControl = {
-				...newControl,
-				options: getOptions[service],
-			};
+		if (ctrl?.name === 'trade_type') {
+			finalControls[index].options = SERVICE_TRADE_TYPE_OPTION_MAPPING[service];
 		}
-		return { ...newControl };
 	});
+
 	const showElements = getShowElements({ service, trade_type, controls });
 
 	const onReset = () => {
@@ -58,7 +51,7 @@ function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow =
 			</div>
 
 			<div>
-				<Layout controls={newField} control={control} showElements={showElements} />
+				<Layout controls={finalControls} control={control} showElements={showElements} />
 			</div>
 		</div>
 	);

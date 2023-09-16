@@ -8,6 +8,11 @@ import ShowMoreTNC from '../ShowMoreTnC';
 import PopOverContent from './PopContent';
 import styles from './style.module.css';
 
+const LABEL_MAPPING = {
+	fcl_freight : 'Shipping Line',
+	air_freight : 'Airline',
+};
+
 function TermCard({
 	listItem = {},
 	showMoreTnC = false,
@@ -25,18 +30,13 @@ function TermCard({
 
 	const editRef = useRef(null);
 
-	const LABEL_MAPPING = {
-		fcl_freight : 'Shipping Line',
-		air_freight : 'Airline',
-	};
 	const { id = '', service = '', status = '' } = listItem;
 	const [visible, setVisible] = useState(false);
 	const callBack = () => setShowEdit(null);
+
 	return (
 		<div>
-			<div
-				className={styles.container}
-			>
+			<div className={styles.container}>
 				<div
 					className={styles.freight_item_header}
 					onClick={onClickShowMoreTnC}
@@ -103,11 +103,11 @@ function TermCard({
 
 			</div>
 
-			{showMoreTnC && (
+			{showMoreTnC ? (
 				<div className={styles.freight_item_main}>
 					<ShowMoreTNC description={description} />
 				</div>
-			)}
+			) : null}
 
 			{showEdit ? (
 				<Modal

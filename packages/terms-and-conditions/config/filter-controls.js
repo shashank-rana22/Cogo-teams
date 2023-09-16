@@ -1,7 +1,7 @@
 import SERVICE_TYPE from './service-type.json';
 import TRADE_TYPE from './trade-type.json';
 
-const getTncControls = [
+const controls = [
 	{
 		name    : 'service',
 		label   : 'Service Type',
@@ -11,13 +11,11 @@ const getTncControls = [
 		rules   : { required: true },
 	},
 	{
-
 		name           : 'shipping_line_id',
 		label          : 'Shipping Line',
 		type           : 'async_select',
 		asyncKey       : 'list_operators',
 		placeholder    : 'Select Shipping Line',
-		optionsListKey : 'shipping-lines',
 		defaultOptions : true,
 		span           : 12,
 		params         : {
@@ -30,13 +28,13 @@ const getTncControls = [
 	},
 	{
 
-		name           : 'airline_id',
-		label          : 'Airline',
-		type           : 'async_select',
-		asyncKey       : 'list_operators',
-		placeholder    : 'Select Airline',
-		defaultOptions : true,
-		span           : 12,
+		name        : 'airline_id',
+		label       : 'Airline',
+		type        : 'async_select',
+		asyncKey    : 'list_operators',
+		placeholder : 'Select Airline',
+		initialCall : true,
+		span        : 12,
 	},
 	{
 		name        : 'trade_type',
@@ -48,28 +46,24 @@ const getTncControls = [
 		isClearable : true,
 	},
 	{
-
-		name           : 'country_id',
-		label          : 'Country',
-		type           : 'async_select',
-		placeholder    : 'Select Country Name',
-		optionsListKey : 'locations',
-		asyncKey       : 'list_locations',
-		span           : 12,
-		params         : { filters: { type: ['country'] } },
+		name        : 'country_id',
+		label       : 'Country',
+		type        : 'async_select',
+		placeholder : 'Select Country Name',
+		asyncKey    : 'list_locations',
+		span        : 12,
+		params      : { filters: { type: ['country'] } },
 	},
-
 	{
-		name           : 'paying_party_country_ids',
-		label          : 'Paying Party Country',
-		type           : 'async_select',
-		optionsListKey : 'locations',
-		asyncKey       : 'list_locations',
-		placeholder    : 'Select Country Name',
-		params         : { filters: { type: ['country'] } },
-		span           : 12,
-		multiple       : true,
+		name        : 'paying_party_country_ids',
+		label       : 'Paying Party Country',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		placeholder : 'Select Country Name',
+		params      : { filters: { type: ['country'] } },
+		span        : 12,
+		multiple    : true,
 	},
 ];
 
-export default getTncControls;
+export default controls;

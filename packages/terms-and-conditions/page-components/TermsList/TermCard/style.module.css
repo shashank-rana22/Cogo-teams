@@ -15,7 +15,8 @@
 .freight_item_header {
 	position: relative;
 	width: 90%;
-	padding: 16px 16px 16px 24px;
+	padding: 16px;
+	padding-left: 24px;
 	cursor: pointer;
 }
 
@@ -76,7 +77,8 @@
 }
 
 .freight_item_main {
-	padding: 16px 16px 16px 24px;
+	padding: 16px;
+	padding-left: 24px;
 	margin-bottom: 15px;
 	overflow-y: visible;
 	background-color: #fff;

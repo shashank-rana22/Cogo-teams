@@ -13,13 +13,10 @@ const getTncControls = ({ item = {} }) => {
 		paying_party_country_ids = [],
 		description = undefined,
 	} = item || {};
-	let newDesc = [
-		{
-			terms_and_condition: '',
-		},
-	];
+	let newDesc = [{ terms_and_condition: '' }];
+
 	if (!isEmpty(description)) {
-		newDesc = description.map((des) => ({
+		newDesc = description?.map((des) => ({
 			terms_and_condition: des,
 		}));
 	}
@@ -36,23 +33,21 @@ const getTncControls = ({ item = {} }) => {
 		},
 		{
 
-			name           : 'shipping_line_id',
-			label          : 'Shipping Line',
-			type           : 'async_select',
-			asyncKey       : 'list_operators',
-			value          : shipping_line_id,
-			disabled       : !!id,
-			placeholder    : 'Select Shipping Line',
-			optionsListKey : 'shipping-lines',
-			defaultOptions : true,
-			span           : 6,
-			isClearable    : true,
-			params         : {
+			name        : 'shipping_line_id',
+			label       : 'Shipping Line',
+			type        : 'async_select',
+			asyncKey    : 'list_operators',
+			value       : shipping_line_id,
+			disabled    : !!id,
+			placeholder : 'Select Shipping Line',
+			initialCall : true,
+			span        : 6,
+			isClearable : true,
+			params      : {
 				page_limit : 10,
 				sort_by    : 'short_name',
 				sort_type  : 'asc',
 				filters    : { operator_type: 'shipping_line', status: 'active' },
-
 			},
 		},
 		{
@@ -64,11 +59,9 @@ const getTncControls = ({ item = {} }) => {
 			value          : airline_id,
 			disabled       : !!id,
 			placeholder    : 'Select Airline',
-			optionsListKey : 'air-lines',
 			defaultOptions : true,
 			span           : 6,
 			isClearable    : true,
-			cacheOptions   : false,
 		},
 		{
 			name        : 'trade_type',
@@ -83,30 +76,28 @@ const getTncControls = ({ item = {} }) => {
 		},
 		{
 
-			name           : 'country_id',
-			label          : 'Country',
-			type           : 'async_select',
-			placeholder    : 'Select Country Name',
-			optionsListKey : 'locations',
-			disabled       : !!id,
-			asyncKey       : 'list_locations',
-			value          : country_id,
-			span           : 6,
-			params         : { filters: { type: ['country'] } },
+			name        : 'country_id',
+			label       : 'Country',
+			type        : 'async_select',
+			placeholder : 'Select Country Name',
+			disabled    : !!id,
+			asyncKey    : 'list_locations',
+			value       : country_id,
+			span        : 6,
+			params      : { filters: { type: ['country'] } },
 		},
 
 		{
-			name           : 'paying_party_country_ids',
-			label          : 'Paying Party Country',
-			type           : 'async_select',
-			optionsListKey : 'locations',
-			asyncKey       : 'list_locations',
-			placeholder    : 'Select Country Name',
-			disabled       : !!id,
-			value          : paying_party_country_ids,
-			params         : { filters: { type: ['country'] } },
-			span           : 6,
-			multiple       : true,
+			name        : 'paying_party_country_ids',
+			label       : 'Paying Party Country',
+			type        : 'async_select',
+			asyncKey    : 'list_locations',
+			placeholder : 'Select Country Name',
+			disabled    : !!id,
+			value       : paying_party_country_ids,
+			params      : { filters: { type: ['country'] } },
+			span        : 6,
+			multiple    : true,
 		},
 		{
 			name               : 'description',
