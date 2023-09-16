@@ -1,10 +1,6 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMTick, IcCFtick } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
-
-import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+import React from 'react';
 
 import DatePicker from './date-picker';
 import OpenModal from './modal-div';
@@ -12,74 +8,20 @@ import NotesHrbp from './notes-hr';
 import Servicelist from './services-list';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
+import useAdminClearanceDetails from './useAdminClearanceDetails';
 
 function AdminClearance({ data = {}, refetch = () => {} }) {
-	const [show, setShow] = useState(false);
-	const admin_clearance = data?.admin_clearance || {};
-	const applicant_details = data?.applicant_details || {};
-	const { last_working_day } = applicant_details || null;
-	const { sub_process_detail_id } = admin_clearance?.admin_clearance || {};
-	const { sub_process_data } = admin_clearance?.admin_clearance || {};
-	const { is_complete } = admin_clearance?.admin_clearance || false;
-
 	const {
+		show,
+		setShow,
+		is_complete,
 		control,
-		formState:{ errors = {} },
+		errors,
 		handleSubmit,
 		watch,
-		setValue,
-		reset,
-	} = useForm();
+		onSubmit,
+	} = useAdminClearanceDetails({ data, refetch });
 	const termsChecked = watch('termsAcceptance');
-
-	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShow });
-
-	const onSubmit = (values) => {
-		const notes = [{
-			label                  : 'notes for hrbp',
-			Value                  : values.notes,
-			Is_shared_with_manager : true,
-
-		}];
-		const payload = {
-			sub_process_data: {
-				notes,
-				accessCardStatus : values?.accessCardStatus,
-				termsAcceptance  : values?.termsAcceptance,
-				specify          : values?.specify,
-				parkingCharges   : values?.parkingCharges,
-				otherCharges     : values?.otherCharges,
-				name             : values?.name,
-				last_working_day,
-				idCardStatus     : values?.idCardStatus,
-				companyAssets    : values?.companyAssets,
-
-			},
-			sub_process_detail_id,
-			process_name: 'admin_clearance',
-		};
-		updateApplication({
-			payload,
-		});
-		reset();
-	};
-
-	useEffect(() => {
-		if (is_complete) {
-			setValue('last_working_day', new Date(sub_process_data?.last_working_day));
-			setValue('accessCardStatus', sub_process_data?.accessCardStatus);
-			setValue('companyAssets', sub_process_data?.companyAssets);
-			setValue('idCardStatus', sub_process_data?.idCardStatus);
-			setValue('name', sub_process_data?.name);
-			setValue('otherCharges', sub_process_data?.otherCharges);
-			setValue('parkingCharges', sub_process_data?.parkingCharges);
-			setValue('specify', sub_process_data?.specify);
-			setValue('notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].Value);
-			setValue('termsAcceptance', sub_process_data?.termsAcceptance);
-		} else if (last_working_day) {
-			setValue('last_working_day', new Date(last_working_day));
-		}
-	}, [setValue, data, sub_process_data, is_complete, last_working_day]);
 
 	return (
 		<div className={styles.container}>

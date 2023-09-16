@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { DatepickerController, TimepickerController, InputController } from '@cogoport/forms';
+import { DatepickerController, TimepickerController, InputController, TextAreaController } from '@cogoport/forms';
 import { IcMArrowDown, IcMCalendar, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -17,10 +17,14 @@ function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = (
 						size="md"
 						themeType="secondary"
 						className={styles.servicesbtn}
-						onClick={() => setEdit(false)}
+						onClick={(event) => {
+							event.stopPropagation();
+							setEdit(false);
+						}}
 					>
 						<IcMEdit />
-						Edit
+						<span style={{ marginLeft: '8px' }}>Edit</span>
+
 					</Button>
 					<IcMArrowDown
 						width={16}
@@ -82,7 +86,7 @@ function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = (
 				<div className={styles.detail1}>
 					<div className={styles.label}>Additional Remarks (if any)</div>
 					<div className={styles.dates}>
-						<InputController
+						<TextAreaController
 							placeholder="Enter additional info"
 							control={control}
 							name="info"
