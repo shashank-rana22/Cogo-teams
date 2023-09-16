@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import useUpdateAppliationProcessDetails from '../hooks/useUpdateAppliationProcessDetails';
 
-// import useGetFinanceClearanceProcessDetails from './useGetFinanceClearanceDetails';
-
 const useFinanceClearance = ({ data, refetch }) => {
 	const [updateData, setUpdateData] = useState([]);
 	const [totalRecoverableAmount, setTotalRecoverableAmount] = useState(GLOBAL_CONSTANTS.zeroth_index);
@@ -60,10 +58,6 @@ const useFinanceClearance = ({ data, refetch }) => {
 		};
 		updateApplication({ payload });
 	};
-
-	// useEffect(() => {
-	// 	setValue('feedback_rating', sub_process_data?.feedback_rating);
-	// }, [setValue, sub_process_data?.feedback_rating]);
 
 	return {
 		handleSubmit,

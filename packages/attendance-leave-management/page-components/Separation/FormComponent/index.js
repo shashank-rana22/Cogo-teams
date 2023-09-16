@@ -2,12 +2,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
-// import HOTOClearanceConfirmation from './employee-view/HOTOClearanaceConfirmation';
 import HOTOClearance from './employee-view/HOTOClearance';
 import FinanceClearanceEmployeeSide from './finance-view';
 import AdminClearanceHrbp from './hrbp-view/AdminClearanceHrbp';
 import ExitInterview from './hrbp-view/ExitInterview';
-// import ExitInterviewComplete from './hrbp-view/ExitInterviewComplete';
 import ExitReasons from './hrbp-view/ExitReasons';
 import FinanceClearance from './hrbp-view/FinanceClearance';
 import HandoverTakeoverClearance from './hrbp-view/HandoverTakeoverClearance';
@@ -18,7 +16,8 @@ import HandoverTakeover from './manager-view/HandoverTakeover';
 import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
-// import TechClearanceConfirm from './tech-view/TechClearanceConfirm';
+
+const INVALID_INDEX = -1;
 
 const COMPONENT_MAPPING = {
 	hr_meet: {
@@ -36,7 +35,6 @@ const COMPONENT_MAPPING = {
 		assign_hoto    : HandoverTakeover,
 	},
 	tech_clearance: {
-		// tech_clearance_confirm : TechClearanceConfirm,
 		tech_clearance: TechClearance,
 	},
 	admin_clearance: {
@@ -44,7 +42,6 @@ const COMPONENT_MAPPING = {
 	},
 	hoto_clearance: {
 		hoto_clearance: HOTOClearance,
-	//	HOTOClearance_confirmation : HOTOClearanceConfirmation,
 	},
 	finance_clearance: {
 		finance_clearance_employee_side: FinanceClearanceEmployeeSide,
@@ -59,7 +56,6 @@ function FormComponent({
 	currentComponent = 'hr_meet',
 	setCurrentComponent = () => {},
 }) {
-	const ONE = 1; const MINUS_ONE = -1;
 	let Render = null;
 
 	if (view_type === 'hrbp_clearance') {
@@ -67,8 +63,8 @@ function FormComponent({
 			const componentKeys = Object.keys(COMPONENT_MAPPING.hr_meet);
 			const currentIndex = componentKeys.indexOf(currentComponent);
 
-			if (currentIndex !== MINUS_ONE && currentIndex < componentKeys.length - ONE) {
-				setCurrentComponent(componentKeys[currentIndex + ONE]);
+			if (currentIndex !== INVALID_INDEX && currentIndex < componentKeys.length - GLOBAL_CONSTANTS.one) {
+				setCurrentComponent(componentKeys[currentIndex + GLOBAL_CONSTANTS.one]);
 			}
 		};
 
@@ -76,8 +72,8 @@ function FormComponent({
 			const componentKeys = Object.keys(COMPONENT_MAPPING.hr_meet);
 			const currentIndex = componentKeys.indexOf(currentComponent);
 
-			if (currentIndex !== MINUS_ONE && currentIndex > GLOBAL_CONSTANTS.zeroth_index) {
-				setCurrentComponent(componentKeys[currentIndex - ONE]);
+			if (currentIndex !== INVALID_INDEX && currentIndex > GLOBAL_CONSTANTS.zeroth_index) {
+				setCurrentComponent(componentKeys[currentIndex - GLOBAL_CONSTANTS.one]);
 			}
 		};
 
@@ -107,8 +103,6 @@ function FormComponent({
 
 		return is_complete;
 	});
-
-	if (loading) return 'loading...';
 
 	return (
 		<div className={styles.container}>

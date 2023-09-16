@@ -1,7 +1,6 @@
 .container {
 	width: 100%;
-
-	/* overflow: auto; */
+	overflow: auto;
 
 	:global {
 		table {
@@ -9,6 +8,7 @@
 		}
 
 		.ui_table_head_cell {
+			width: 33%;
 			padding: 10px;
 			background-color: #f3fafa;
 		}
@@ -29,7 +29,6 @@
 
 		.ui_table_body_cell:first-child,
 		.ui_table_head_cell:first-child {
-			width: 33%;
 			border-radius: 6px 0 0 6px;
 		}
 

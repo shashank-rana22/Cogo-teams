@@ -11,8 +11,7 @@ import Loader from '../../../../common/Loader';
 import useGetEmployeeCollections from '../../../../hooks/useGetEmployeeCollections';
 import useUpdateLeaveStatus from '../../../../hooks/useGetUpdateLeaveStatus';
 
-import LeaveSubCard from './LeaveSubCard';
-import OffboardingSubCard from './OffboardingSubCard';
+import HandleShowSubCards from './handleShowSubCard';
 import styles from './styles.module.css';
 
 const TOTAL_COUNT = 10;
@@ -59,7 +58,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 							</div>
 						</div>
 						<div className={styles.yes_no}>
-							{isManager && (
+							{isManager && request_label !== 'OFFBOARDING REQUESTS' && (
 								<Button
 									size="md"
 									themeType="link"
@@ -78,26 +77,13 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 					{accordion && (
 						<div>
 							{loading ? <Loader /> : (
-								<div className={styles.parent_div}>
-									{(list || []).map((val) => (
-										request_label === 'OFFBOARDING REQUESTS' ? (
-											<OffboardingSubCard
-												val={val}
-												updateLoading={updateLoading}
-												isManager={isManager}
-												handleLeaveUpdate={handleLeaveUpdate}
-												key={`${val.id}${val.employee_code}`}
-											/>
-										) : (
-											<LeaveSubCard
-												val={val}
-												updateLoading={updateLoading}
-												isManager={isManager}
-												handleLeaveUpdate={handleLeaveUpdate}
-												key={`${val.id}${val.employee_code}`}
-											/>
-										)))}
-								</div>
+								<HandleShowSubCards
+									updateLoading={updateLoading}
+									isManager={isManager}
+									handleLeaveUpdate={handleLeaveUpdate}
+									list={list}
+									request_label={request_label}
+								/>
 							)}
 						</div>
 					)}
@@ -108,22 +94,13 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 						<div>
 							<div className={styles.padding_top} />
 							<div className={styles.parent_div}>
-								{(list || []).map((val) => (
-									request_label === 'OFFBOARDING REQUESTS' ? (
-										<OffboardingSubCard
-											val={val}
-											updateLoading={updateLoading}
-											key={val.id}
-										/>
-									) : (
-										<LeaveSubCard
-											val={val}
-											updateLoading={updateLoading}
-											isManager={isManager}
-											handleLeaveUpdate={handleLeaveUpdate}
-											key={val.id}
-										/>
-									)))}
+								<HandleShowSubCards
+									updateLoading={updateLoading}
+									isManager={isManager}
+									handleLeaveUpdate={handleLeaveUpdate}
+									list={list}
+									request_label={request_label}
+								/>
 							</div>
 						</div>
 					)}

@@ -30,9 +30,14 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 
 	const onSubmit = (values) => {
 		const payload = {
-			sub_process_data : values,
+			sub_process_data: {
+				interview_date     : values?.date,
+				interview_time     : values?.interviewTime,
+				interview_location : values?.location,
+				info               : values?.info,
+			},
 			sub_process_detail_id,
-			process_name     : 'exit_interview',
+			process_name: 'exit_interview',
 		};
 		updateApplication({
 			payload,
@@ -41,9 +46,9 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 
 	useEffect(() => {
 		if (is_complete) {
-			setValue('interviewTime', sub_process_data?.interviewTime && new Date(sub_process_data?.interviewTime));
-			setValue('date', sub_process_data?.date && new Date(sub_process_data?.date));
-			setValue('location', sub_process_data?.location);
+			setValue('interviewTime', sub_process_data?.interview_time && new Date(sub_process_data?.interview_time));
+			setValue('date', sub_process_data?.interview_date && new Date(sub_process_data?.interview_date));
+			setValue('location', sub_process_data?.interview_location);
 			setValue('info', sub_process_data?.info);
 		}
 	}, [is_complete, setValue, sub_process_data]);

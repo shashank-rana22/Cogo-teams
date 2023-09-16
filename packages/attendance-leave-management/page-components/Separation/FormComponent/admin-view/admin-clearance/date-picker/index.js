@@ -21,7 +21,6 @@ function DatePicker({ control, errors }) {
 					dateFormat={`${date}`}
 					name="last_working_day"
 					className={styles.date_picker}
-					rules={{ required: 'this is required' }}
 					disabled
 				/>
 				{errors.last_working_day ? <span className={styles.error}>*required</span> : null}

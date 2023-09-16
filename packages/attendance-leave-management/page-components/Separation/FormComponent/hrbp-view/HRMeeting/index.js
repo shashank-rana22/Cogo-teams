@@ -29,11 +29,11 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 		setValue,
 	} = useForm();
 
-	const { hr_meet, application_status } = data || {};
+	const { hr_meet, application_status, applicant_details } = data || {};
+	const { last_working_day } = applicant_details || {};
 	const { hr_meet:hrMeet } = hr_meet || {};
 	const { sub_process_detail_id, sub_process_data = {}, is_complete } = hrMeet || {};
-	const { last_working_day } = sub_process_data || {};
-
+	const { lastWorkingDay } = sub_process_data || {};
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
 	const onSubmit = (values) => {
@@ -81,7 +81,8 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			setValue('date', last_working_day ? new Date(sub_process_data?.lastWorkingDay) : undefined);
+			setValue('date', lastWorkingDay ? new Date(sub_process_data?.lastWorkingDay) : undefined);
+			setValue('suggested_date', last_working_day ? new Date(last_working_day) : undefined);
 			setValue('joining_bonus_amount', sub_process_data?.joiningBonus);
 			setValue('joining_bonus_clawback', sub_process_data?.joiningBonusApplicable);
 			setValue('your_notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].value);
@@ -94,7 +95,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 			setValue('your_notes_cb_4', sub_process_data?.notes[THIRD_INDEX].is_shared_with_manager);
 			setValue('your_notes_manager', sub_process_data?.notes[FOURTH_INDEX].value);
 		}
-	}, [setValue, data, sub_process_data, last_working_day]);
+	}, [setValue, data, sub_process_data, last_working_day, lastWorkingDay]);
 
 	return (
 		<>
@@ -123,6 +124,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 				reset={reset}
 				errors={errors}
 				lastWorkingDay={sub_process_data?.lastWorkingDay}
+				suggestedLastday={last_working_day}
 			/>
 			<JoiningBonus control={control} errors={errors} data={sub_process_data} />
 			<InterviewQuestions control={control} errors={errors} data={sub_process_data} watch={watch} />

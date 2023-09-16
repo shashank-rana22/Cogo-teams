@@ -69,35 +69,37 @@ function ExitInterview({ data = {}, inProgressObject = {} }) {
 
 				</div>
 			</div>
-
-			<div className={styles.interview_completion_container}>
-				<div className={styles.interview_completion_heading}>
-					Interview Completion Code
-				</div>
-
-				<div className={styles.interview_completion_code_container}>
-					<div className={styles.interview_completion_code_heading}>
-						Enter the code shared with you by the HR to complete the separation process
+			{inProgressObject
+			&& (
+				<div className={styles.interview_completion_container}>
+					<div className={styles.interview_completion_heading}>
+						Interview Completion Code
 					</div>
-					<div className={styles.code_container}>
-						<OTPInputExitInterview setOtpValue={setOtpValue} setOtpError={setOtpError} />
-						{otpError
-							? <div className={styles.error}>*required</div>
-							: null}
+
+					<div className={styles.interview_completion_code_container}>
+						<div className={styles.interview_completion_code_heading}>
+							Enter the code shared with you by the HR to complete the separation process
+						</div>
+						<div className={styles.code_container}>
+							<OTPInputExitInterview setOtpValue={setOtpValue} setOtpError={setOtpError} />
+							{otpError
+								? <div className={styles.error}>*required</div>
+								: null}
+						</div>
 					</div>
-				</div>
 
-				<div className={styles.interview_completion_btn}>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={onClickSubmit}
-					>
-						Complete Separation
-					</Button>
-				</div>
+					<div className={styles.interview_completion_btn}>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={onClickSubmit}
+						>
+							Complete Separation
+						</Button>
+					</div>
 
-			</div>
+				</div>
+			)}
 
 		</div>
 	);

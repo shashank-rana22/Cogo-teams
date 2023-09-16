@@ -1,5 +1,5 @@
 import { cl, Popover } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -25,7 +25,8 @@ export const getFnfColumns = ({ onStatusChange = () => {} }) => [
 						? 'Not recovered' : 'Recovered' || '-'}
 				</div>
 				<Popover
-					placement="left"
+					caret={false}
+					placement="bottom"
 					render={(
 						<div>
 							<div
@@ -47,7 +48,11 @@ export const getFnfColumns = ({ onStatusChange = () => {} }) => [
 					)}
 				>
 					<div style={{ alignItems: 'center' }}>
-						<IcMEdit style={{ marginLeft: '4px', cursor: 'pointer' }} />
+						<IcMArrowDown
+							style={{ marginTop: '8px', cursor: 'pointer' }}
+							width={16}
+							height={16}
+						/>
 					</div>
 				</Popover>
 			</div>

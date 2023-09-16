@@ -15,7 +15,8 @@ const useUpdateFnfStatus = ({ refetch = () => {} }) => {
 					id, status,
 				},
 			});
-			refetch();
+			await refetch();
+			Toast.success('Status Changed Successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
