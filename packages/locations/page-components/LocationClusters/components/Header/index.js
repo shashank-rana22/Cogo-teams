@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Header({ searchQuery = '', setSearchQuery = () => {}, setShow = () => {} }) {
 	return (
 		<div className={styles.container}>
-			<p className={styles.heading}>Location Clusters</p>
+			<h1>Location Clusters</h1>
 			<div className={styles.styled_container}>
 				<Input
 					suffix={<IcMSearchlight size={3} />}

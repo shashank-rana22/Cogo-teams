@@ -1,10 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import listData from '../configurations/dataLocationClusters.json';
-
 const useGetListData = ({ globalFilters = {}, searchQuery = '' }) => {
-	const [locationData, setLocationData] = useState([listData.list]);
+	const [locationData, setLocationData] = useState([]);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_location_clusters',
