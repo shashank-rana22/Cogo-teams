@@ -29,12 +29,12 @@ const getPayload = ({
 
 	const {
 		pincode:collectionPincode = '', address: collectionAddress = '',
-		tax_number: collectionTaxNumber,
+		tax_number: collectionTaxNumber = '',
 	} = collectionPartyAddress || {};
 
 	const { id:country_id = '', country_code = '', name = '', type = '' } = country || {};
 
-	const { currency = '', price = 0, tax_price = 0, total_tax_price = 0 } = values || {};
+	const { currency = '', price = 0, tax_price = 0, total_tax_price = 0, mawb_number = '' } = values || {};
 
 	const {
 		chargeable_weight = '', airline_id = '', origin_airport_id = '',
@@ -65,6 +65,7 @@ const getPayload = ({
 
 	const payload = {
 		csr_data,
+		mawb_number,
 		payment_mode         : 'cash',
 		service              : 'air_freight_local_service',
 		csr_sheet_id         : id,

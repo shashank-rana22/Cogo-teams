@@ -8,7 +8,6 @@ const ENTITY_CODES = Object.keys(ENTITY_FEATURE_MAPPING).filter(
 
 const getBillingAddressOptions = (billingParty = {}) => (
 	billingParty?.addresses?.map((address) => ({
-		...address,
 		label : address?.address,
 		value : address?.id,
 	}))
@@ -16,7 +15,6 @@ const getBillingAddressOptions = (billingParty = {}) => (
 
 const getCollectionAddressOptions = (collectionParty = {}) => (
 	collectionParty?.billing_addresses?.map((address) => ({
-		...address,
 		label : address?.address,
 		value : address?.id,
 	}))
@@ -27,7 +25,17 @@ const getTerminalChargeRateControl = ({
 	collectionPartyData = {}, setCollectionPartyData = () => {},
 }) => {
 	const geo = getGeoConstants();
+
 	const TERMINAL_CHARGE_RATE_CONTROL = [
+		{
+			name        : 'mawb_number',
+			label       : 'MAWB Number',
+			type        : 'text',
+			placeholder : 'Enter MAWB Number (XXX-XXXX-XXXX)',
+			rules       : { required: true },
+			span        : 6,
+		},
+		{ span: 6 },
 		{
 			name     : 'cogo_entity_id',
 			label    : 'Billing Party',
@@ -60,12 +68,12 @@ const getTerminalChargeRateControl = ({
 			label       : 'Collection Party',
 			type        : 'async-select',
 			labelKey    : 'business_name',
-			placeholder : 'Add Bank Account',
+			renderLabel : (item) => `${item?.business_name} (${item?.display_name})`,
+			placeholder : 'Select Collection Party',
 			asyncKey    : 'list_organization_trade_parties',
+			initialCall : true,
 			span        : 6,
 			params      : {
-				documents_data_required         : true,
-				poc_data_required               : true,
 				billing_addresses_data_required : true,
 				filters                         : {
 					organization_id  : geo.uuid.freight_force_org_id,
@@ -83,7 +91,7 @@ const getTerminalChargeRateControl = ({
 			type        : 'select',
 			options     : getCollectionAddressOptions(collectionPartyData),
 			span        : 6,
-			placeholder : 'Enter Collection Party Address',
+			placeholder : 'Select Collection Party Address',
 			rules       : {
 				required: true,
 			},

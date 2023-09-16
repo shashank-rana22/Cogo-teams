@@ -1,13 +1,13 @@
 const UPLOAD_TERMINAL_CHARGE_CONTROL = [
 	{
 		name        : 'csr_reference_number',
-		label       : 'CSR Reference Number',
+		label       : 'TC Invoice Number',
 		type        : 'text',
-		placeholder : 'Type Reference Number',
+		placeholder : 'Type TC Invoice No',
 		span        : 6,
 		rules:
 			{
-				required: 'CSR Reference Number is required',
+				required: 'TC Invoice No. is required',
 			},
 
 	},
