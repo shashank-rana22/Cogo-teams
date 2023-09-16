@@ -24,7 +24,8 @@ function FilterModal({
 		entity      : filters?.entity,
 	});
 
-	const { currency = '', entity = '', invoiceType = '' } = filters || {};
+	const { entity = '', invoiceType = '' } = filters || {};
+	const { currency = '' } = modalFilters || {};
 	const handleClose = () => {
 		setShowModal(false);
 	};
