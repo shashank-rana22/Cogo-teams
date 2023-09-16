@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 function ActionModal({
 	modalData = {},
 	setModalData = () => {},
+	amsDataApiTrigger = () => {},
 }) {
 	const { t } = useTranslation(['amsSubmission']);
 	const contentMapping = getContentMapping({ t });
@@ -18,7 +19,7 @@ function ActionModal({
 	const {
 		apiTrigger: lmsApiTrigger = () => {},
 		loading: lmsLoading = false,
-	} = useGetAirlineConfigList();
+	} = useGetAirlineConfigList({ amsDataApiTrigger });
 
 	const handleClick = () => {
 		const { data = {}, type = '' } = modalData || {};

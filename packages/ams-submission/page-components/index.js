@@ -83,6 +83,7 @@ function AmsSubmission() {
 				<ActionModal
 					modalData={modalData}
 					setModalData={setModalData}
+					amsDataApiTrigger={amsDataApiTrigger}
 				/>
 			) : null}
 		</div>

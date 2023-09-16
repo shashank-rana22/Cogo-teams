@@ -6,9 +6,11 @@ import styles from '../page-components/styles.module.css';
 const handleSubmitStatusClick = ({
 	submitStatusApiTrigger = () => {},
 	item = {},
+	state = '',
 }) => {
 	const payload = {
 		masterAirwayBillNumber: item?.master_airway_bill_number,
+		state,
 	};
 	submitStatusApiTrigger({ payload });
 };
@@ -82,7 +84,7 @@ const getTcStatusColumns = ({
 					?
 					<Button
 						themeType="secondary"
-						onClick={() => handleSubmitStatusClick({ submitStatusApiTrigger, item })}
+						onClick={() => handleSubmitStatusClick({ submitStatusApiTrigger, item, state: 'confirm' })}
 						disabled={submitStatusLoading}
 					>
 						{t('amsSubmission:action_button_query_submitted_status_yes')}
@@ -91,6 +93,7 @@ const getTcStatusColumns = ({
 					<Button
 						themeType="secondary"
 						disabled={submitStatusLoading}
+						onClick={() => handleSubmitStatusClick({ submitStatusApiTrigger, item, state: 'cancelled' })}
 					>
 						{t('amsSubmission:action_button_query_submitted_status_no')}
 

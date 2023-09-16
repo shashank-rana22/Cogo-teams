@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 import { useRouter } from 'next/router';
 
-const useGetAirlineConfigList = () => {
+const useGetAirlineConfigList = ({ amsDataApiTrigger = () => {} }) => {
 	const router = useRouter();
 	const [{ data = {}, loading }, trigger] = useRequestAir({
 		url     : '/air-coe/airline-config/list',
@@ -23,6 +23,7 @@ const useGetAirlineConfigList = () => {
 			} else {
 				Toast.error('Something went wrong');
 			}
+			amsDataApiTrigger();
 		} catch (err) {
 			toastApiError(err);
 		}
