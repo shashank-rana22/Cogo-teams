@@ -46,7 +46,7 @@ const useUpdateTestUserMapping = ({ setActiveState }) => {
 			// 	elem?.msRequestFullscreen();
 			// }
 		} catch (err) {
-			Toast.error(err.response?.data);
+			Toast.error(err.responsed?.data);
 		}
 	};
 
