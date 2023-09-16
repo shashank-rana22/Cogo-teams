@@ -11,9 +11,8 @@ const useGeneratePdf = () => {
 	const generatePdf = async ({
 		html,
 		scale = 1,
-		setShowTemplate = () => {},
-		setGenerateInvoiceModal = () => {},
 		setDownloadButtonState = () => {},
+		setRenderContent = () => {},
 	}) => {
 		try {
 			const res = await trigger({
@@ -27,8 +26,7 @@ const useGeneratePdf = () => {
 			});
 			Toast.success('Uploaded Successfully');
 			setDownloadButtonState(res?.data?.pdf_url);
-			setShowTemplate(false);
-			setGenerateInvoiceModal(true);
+			setRenderContent('form');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data) || 'Something Went Wrong');
 		}

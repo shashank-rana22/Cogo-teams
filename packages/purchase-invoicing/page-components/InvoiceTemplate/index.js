@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 // eslint-disable-next-line import/no-unresolved
@@ -16,16 +16,14 @@ const ZERO = 0;
 
 function InvoiceTemplate({
 	serviceProvider = {},
-	showTemplate = false,
-	setShowTemplate = () => {},
 	formValues = {},
 	billingParty = {},
 	bank_details = [],
 	shipment_data = {},
 	calculatedValues = {},
 	lineItemsDataArray = [],
-	setGenerateInvoiceModal = () => {},
 	setDownloadButtonState = () => {},
+	setRenderContent = () => {},
 }) {
 	const fetchImageData = async ({ url = '', setterFunc }) => {
 		try {
@@ -52,9 +50,8 @@ function InvoiceTemplate({
 		await generatePdf({
 			html,
 			scale: 0.8,
-			setShowTemplate,
-			setGenerateInvoiceModal,
 			setDownloadButtonState,
+			setRenderContent,
 		});
 	};
 
@@ -71,7 +68,7 @@ function InvoiceTemplate({
 	useEffect(() => {
 		getSelfTradeParty();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [showTemplate]);
+	}, []);
 
 	const serviceProviderTradePartyObj = list?.find((item) => item?.trade_party_type === 'self') || {};
 
@@ -135,78 +132,68 @@ function InvoiceTemplate({
 	}
 
 	return (
-		<Modal
-			show={showTemplate}
-			size="fullscreen"
-			placement="center"
-			onClose={() => { setShowTemplate(false); }}
-		>
-			<Modal.Header />
-			<Modal.Body style={{ maxHeight: '780px' }}>
-				<div ref={ref}>
-					<InvoiceHeaderContainer
-						serviceProviderTradePartyObj={serviceProviderTradePartyObj}
-						billingAddress={billingAddress}
-						imageSrc={imageSrc}
-						formValues={formValues}
-					/>
-					<InvoiceDetailsContainer
-						business_name={business_name}
-						address={address}
-						city={city}
-						pin_code={pin_code}
-						country={country}
-						cin={cin}
-						registration_number={registration_number}
-						gst_number={gst_number}
-						bank_account_number={bank_account_number}
-						ifsc_number={ifsc_number}
-						bank_name={bank_name}
-						branch_name={branch_name}
-						tax_invoice_no={tax_invoice_no}
-						shipment_data={shipment_data}
-						formValues={formValues}
-						split_type={split_type}
-						due_date={due_date}
-						invoice_date={invoice_date}
-					/>
+		<>
+			<div ref={ref}>
+				<InvoiceHeaderContainer
+					serviceProviderTradePartyObj={serviceProviderTradePartyObj}
+					billingAddress={billingAddress}
+					imageSrc={imageSrc}
+					formValues={formValues}
+				/>
+				<InvoiceDetailsContainer
+					business_name={business_name}
+					address={address}
+					city={city}
+					pin_code={pin_code}
+					country={country}
+					cin={cin}
+					registration_number={registration_number}
+					gst_number={gst_number}
+					bank_account_number={bank_account_number}
+					ifsc_number={ifsc_number}
+					bank_name={bank_name}
+					branch_name={branch_name}
+					tax_invoice_no={tax_invoice_no}
+					shipment_data={shipment_data}
+					formValues={formValues}
+					split_type={split_type}
+					due_date={due_date}
+					invoice_date={invoice_date}
+				/>
 
-					<InvoiceAmountContainer
-						lineItemsDataArray={lineItemsDataArray}
-						calculatedValues={calculatedValues}
-						formValues={formValues}
-					/>
+				<InvoiceAmountContainer
+					lineItemsDataArray={lineItemsDataArray}
+					calculatedValues={calculatedValues}
+					formValues={formValues}
+				/>
 
-					<InvoiceLowerContainer
-						formValues={formValues}
-						calculatedValues={calculatedValues}
-						amountInWords={amountInWords}
-					/>
+				<InvoiceLowerContainer
+					formValues={formValues}
+					calculatedValues={calculatedValues}
+					amountInWords={amountInWords}
+				/>
 
-				</div>
-				<div style={{ marginLeft: '36%', marginTop: '40px', display: 'flex' }}>
-					<Button
-						size="lg"
-						onClick={() => {
-							setShowTemplate(false);
-							setGenerateInvoiceModal(true);
-						}}
-					>
-						Go Back
-					</Button>
-					<Button
-						size="lg"
-						style={{ marginLeft: '10px' }}
-						onClick={() => {
-							uploadPdf();
-						}}
-					>
-						Upload Invoice
-					</Button>
-				</div>
-			</Modal.Body>
-		</Modal>
-
+			</div>
+			<div style={{ marginLeft: '36%', marginTop: '40px', display: 'flex' }}>
+				<Button
+					size="lg"
+					onClick={() => {
+						setRenderContent('form');
+					}}
+				>
+					Go Back
+				</Button>
+				<Button
+					size="lg"
+					style={{ marginLeft: '10px' }}
+					onClick={() => {
+						uploadPdf();
+					}}
+				>
+					Upload Invoice
+				</Button>
+			</div>
+		</>
 	);
 }
 export default InvoiceTemplate;

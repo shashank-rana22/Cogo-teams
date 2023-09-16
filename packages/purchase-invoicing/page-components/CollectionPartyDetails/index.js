@@ -20,7 +20,6 @@ import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
 import { getCollectionPartyDetails } from '../InvoiceFormLayout/CollectionPartyDetails/utils/getCollectionPartyDetails';
 import InvoicesUploaded from '../InvoicesUploaded';
-import InvoiceTemplate from '../InvoiceTemplate';
 
 import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
@@ -73,18 +72,15 @@ function CollectionPartyDetails({
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
 	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
-	const [showTemplate, setShowTemplate] = useState(false);
 
 	const cpParams = getCollectionPartyParams(collectionParty?.service_provider_id);
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
 
-	const [billingParty, setBillingParty] = useState({});
 	const [collectionPartyState, setCollectionPartyState] = useState({});
 	const [collectionPartyAddress, setCollectionPartyAddress] = useState({});
-	const [errors, setErrors] = useState({});
-	const [errMszs, setErrMszs] = useState({});
 	const [codes, setCodes] = useState({});
-	const [downloadButtonState, setDownloadButtonState] = useState('');
+
+	const [renderContent, setRenderContent] = useState('');
 
 	const {
 		billing_addresses: billingAddresses = [],
@@ -278,7 +274,10 @@ function CollectionPartyDetails({
 										size="md"
 										themeType="secondary"
 										className={styles.marginright}
-										onClick={() => { setGenerateInvoiceModal(true); }}
+										onClick={() => {
+											setGenerateInvoiceModal(true);
+											setRenderContent('form');
+										}}
 									>
 										Generate Invoice
 									</Button>
@@ -390,15 +389,9 @@ function CollectionPartyDetails({
 						control={control}
 						primary_service={primary_service}
 						collectionParty={collectionParty}
-						errors={errors}
-						setErrors={setErrors}
-						errMszs={errMszs}
-						setErrMszs={setErrMszs}
 						invoiceCurrency={invoiceCurrency}
 						listEntities={listEntities}
 						entitiesLoading={entitiesLoading}
-						billingParty={billingParty}
-						setBillingParty={setBillingParty}
 						watch={watch}
 						setValue={setValue}
 						setCodes={setCodes}
@@ -411,31 +404,15 @@ function CollectionPartyDetails({
 						collectionPartyAddresses={collectionPartyAddresses}
 						COLLECTION_PARTY_BANK_OPTIONS={COLLECTION_PARTY_BANK_OPTIONS}
 						calculatedValues={calculatedValues}
-						setShowTemplate={setShowTemplate}
-						downloadButtonState={downloadButtonState}
+						renderContent={renderContent}
+						setRenderContent={setRenderContent}
+						formValues={formValues}
+						bank_details={bank_details}
+						shipment_data={shipment_data}
+						lineItemsDataArray={lineItemsDataArray}
+						fields={fields}
 					/>
 				) : null}
-				{
-					showTemplate ? (
-						<InvoiceTemplate
-							showTemplate={showTemplate}
-							setShowTemplate={setShowTemplate}
-							serviceProvider={collectionParty}
-							formValues={formValues}
-							billingParty={billingParty}
-							collectionPartyAddress={collectionPartyAddress}
-							collectionPartyState={collectionPartyState}
-							bank_details={bank_details}
-							shipment_data={shipment_data}
-							fields={fields}
-							calculatedValues={calculatedValues}
-							lineItemsDataArray={lineItemsDataArray}
-							setGenerateInvoiceModal={setGenerateInvoiceModal}
-							setDownloadButtonState={setDownloadButtonState}
-							downloadButtonState={downloadButtonState}
-						/>
-					) : null
-				}
 			</AccordianView>
 		</div>
 	);

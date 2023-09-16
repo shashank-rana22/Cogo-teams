@@ -1,24 +1,8 @@
-import { Modal, Button } from '@cogoport/components';
-import {
-	AsyncSelectController,
-	SelectController,
-	RadioGroupController,
-	InputController,
-} from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
+import { Modal } from '@cogoport/components';
+import { useState } from 'react';
 
-import AdditionalDetails from '../../InvoiceFormLayout/AdditionalDetails';
-import BillingPartyDetails from '../../InvoiceFormLayout/BillingPartyDetails';
-import PurchaseInvoiceDates from '../../InvoiceFormLayout/PurchaseInvoiceDates';
-import getFormControls from '../CollectionPartyCard/controls';
-import LineItemDetails from '../LineItemDetails';
-
-import styles from './styles.module.css';
-
-const INVOICE_TYPE_OPTIONS = [
-	{ name: 'purchase_invoice', label: 'Purchase Invoice', value: 'Purchase' },
-	{ name: 'proforma_invoice', label: 'Proforma Invoice', value: 'Proforma' },
-];
+import InvoiceTemplate from '../../InvoiceTemplate';
+import InvoiceModalContent from '../InvoiceModalContent';
 
 function InvoiceModal({
 	generateInvoiceModal = false,
@@ -26,15 +10,9 @@ function InvoiceModal({
 	control = {},
 	primary_service,
 	collectionParty = {},
-	errors = {},
-	setErrors = () => {},
-	errMszs = () => {},
-	setErrMszs = () => {},
 	invoiceCurrency = '',
 	listEntities = {},
 	entitiesLoading = false,
-	billingParty = {},
-	setBillingParty = () => {},
 	watch = {},
 	setValue = {},
 	setCodes = () => {},
@@ -47,9 +25,19 @@ function InvoiceModal({
 	setCollectionPartyAddress = () => {},
 	COLLECTION_PARTY_BANK_OPTIONS = [],
 	calculatedValues = {},
-	setShowTemplate = () => {},
-	downloadButtonState = '',
+	renderContent = '',
+	setRenderContent = () => {},
+	formValues = {},
+	bank_details = [],
+	shipment_data = {},
+	lineItemsDataArray = [],
+	fields = {},
 }) {
+	const MODAL_TITLE = renderContent === 'form' ? 'Generate Invoice' : null;
+	const [errors, setErrors] = useState({});
+	const [errMszs, setErrMszs] = useState({});
+	const [billingParty, setBillingParty] = useState({});
+	const [downloadButtonState, setDownloadButtonState] = useState('');
 	return (
 		<Modal
 			size="fullscreen"
@@ -59,125 +47,61 @@ function InvoiceModal({
 				setGenerateInvoiceModal(false);
 			}}
 		>
-			<Modal.Header title="Generate Invoice" />
+			<Modal.Header title={MODAL_TITLE} />
 			<Modal.Body style={{ maxHeight: '780px' }}>
-				<>
-					<RadioGroupController
-						control={control}
-						name="invoice_type"
-						options={INVOICE_TYPE_OPTIONS}
-					/>
-					<AdditionalDetails
-						control={control}
-						open
-						primary_service={primary_service}
-						serviceProvider={collectionParty}
-						errors={errors}
-						setErrors={setErrors}
-						errMszs={errMszs}
-						setErrMszs={setErrMszs}
-					/>
-					<PurchaseInvoiceDates control={control} invoiceCurrency={invoiceCurrency} />
-					<BillingPartyDetails
-						control={control}
-						open
-						listEntities={listEntities}
-						entitiesLoading={entitiesLoading}
-						billingParty={billingParty}
-						setBillingParty={setBillingParty}
-						setValue={setValue}
-						watch={watch}
-					/>
-					<h3 style={{ margin: '10px' }}>Collection Party Details</h3>
-					<div className={styles.collection_party}>
-						{(getFormControls({
-							setValue,
-							cpParams,
-							handleModifiedOptions,
-							collectionParty    : collectionPartyState,
-							setCollectionParty : setCollectionPartyState,
-							collectionPartyAddress,
-							collectionPartyAddresses,
-							setCollectionPartyAddress,
-							COLLECTION_PARTY_BANK_OPTIONS,
-						}) || []).map((item) => {
-							const ele = { ...item };
-							if (ele.name === 'collection_party') {
-								return (
-									<div key={ele.name} className={styles.controller}>
-										<div style={{ marginLeft: '20px' }}>{ele.label}</div>
-										<AsyncSelectController
-											{...ele}
-											key={ele.name}
-											control={control}
-										/>
-									</div>
-								);
-							}
-							return (
-								<div key={ele.name} className={styles.controller}>
-									<div style={{ marginLeft: '20px' }}>{ele.label}</div>
-									<SelectController
-										{...ele}
-										label={ele.label}
-										key={ele.name}
-										control={control}
-									/>
-								</div>
-							);
-						})}
-						<div className={styles.controller} style={{ margin: '20px' }}>
-							<div style={{ marginLeft: '20px' }}>
-								Remarks:
-								{' '}
-							</div>
-							<div className={styles.input_controller}>
-								<InputController name="remarks" control={control} />
-							</div>
-						</div>
+				{
+					renderContent === 'form' && (
+						<InvoiceModalContent
+							generateInvoiceModal={generateInvoiceModal}
+							control={control}
+							primary_service={primary_service}
+							collectionParty={collectionParty}
+							errors={errors}
+							setErrors={setErrors}
+							errMszs={errMszs}
+							setErrMszs={setErrMszs}
+							invoiceCurrency={invoiceCurrency}
+							listEntities={listEntities}
+							entitiesLoading={entitiesLoading}
+							billingParty={billingParty}
+							setBillingParty={setBillingParty}
+							watch={watch}
+							setValue={setValue}
+							setCodes={setCodes}
+							cpParams={cpParams}
+							handleModifiedOptions={handleModifiedOptions}
+							collectionPartyState={collectionPartyState}
+							setCollectionPartyState={setCollectionPartyState}
+							collectionPartyAddress={collectionPartyAddress}
+							setCollectionPartyAddress={setCollectionPartyAddress}
+							collectionPartyAddresses={collectionPartyAddresses}
+							COLLECTION_PARTY_BANK_OPTIONS={COLLECTION_PARTY_BANK_OPTIONS}
+							calculatedValues={calculatedValues}
+							downloadButtonState={downloadButtonState}
+							setRenderContent={setRenderContent}
+						/>
+					)
+				}
+				{
+					renderContent === 'template' && (
+						<InvoiceTemplate
+							serviceProvider={collectionParty}
+							formValues={formValues}
+							billingParty={billingParty}
+							collectionPartyAddress={collectionPartyAddress}
+							collectionPartyState={collectionPartyState}
+							bank_details={bank_details}
+							shipment_data={shipment_data}
+							fields={fields}
+							calculatedValues={calculatedValues}
+							lineItemsDataArray={lineItemsDataArray}
+							setDownloadButtonState={setDownloadButtonState}
+							downloadButtonState={downloadButtonState}
+							setRenderContent={setRenderContent}
+						/>
+					)
+				}
 
-					</div>
-
-					<LineItemDetails
-						control={control}
-						open
-						watch={watch}
-						serviceProvider={collectionParty}
-						setCodes={setCodes}
-						calculatedValues={calculatedValues}
-					/>
-					<div style={{ display: 'flex' }}>
-						<Button
-							size="md"
-							className={styles.generate_button}
-							onClick={() => {
-								setGenerateInvoiceModal(false);
-								setShowTemplate(true);
-							}}
-						>
-							Generate
-						</Button>
-						{
-							!isEmpty(downloadButtonState) && (
-								<Button
-									size="lg"
-									themeType="linkUi"
-									className={styles.download_button}
-								>
-									<a
-										href={downloadButtonState}
-										target="_blank"
-										rel="noopener noreferrer"
-										download
-									>
-										Download
-
-									</a>
-								</Button>
-							)
-						}
-					</div>
-				</>
 			</Modal.Body>
 		</Modal>
 	);
