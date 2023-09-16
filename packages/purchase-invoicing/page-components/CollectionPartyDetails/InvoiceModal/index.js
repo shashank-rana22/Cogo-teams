@@ -21,8 +21,7 @@ function InvoiceModal({
 }) {
 	const [renderContent, setRenderContent] = useState('form');
 	const MODAL_TITLE = renderContent === 'form' ? 'Generate Invoice' : null;
-	const [errors, setErrors] = useState({});
-	const [errMszs, setErrMszs] = useState({});
+
 	const [billingParty, setBillingParty] = useState({});
 	const [downloadButtonState, setDownloadButtonState] = useState('');
 
@@ -123,10 +122,6 @@ function InvoiceModal({
 							control={control}
 							primary_service={primary_service}
 							collectionParty={collectionParty}
-							errors={errors}
-							setErrors={setErrors}
-							errMszs={errMszs}
-							setErrMszs={setErrMszs}
 							invoiceCurrency={invoiceCurrency}
 							listEntities={listEntities}
 							entitiesLoading={entitiesLoading}

@@ -6,6 +6,7 @@ import {
 	InputController,
 } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import AdditionalDetails from '../../InvoiceFormLayout/AdditionalDetails';
 import BillingPartyDetails from '../../InvoiceFormLayout/BillingPartyDetails';
@@ -24,10 +25,6 @@ function IndexModalContent({
 	control = {},
 	primary_service,
 	collectionParty = {},
-	errors = {},
-	setErrors = () => {},
-	errMszs = () => {},
-	setErrMszs = () => {},
 	invoiceCurrency = '',
 	listEntities = {},
 	entitiesLoading = false,
@@ -48,6 +45,8 @@ function IndexModalContent({
 	downloadButtonState = '',
 	setRenderContent = () => {},
 }) {
+	const [errors, setErrors] = useState({});
+	const [errMszs, setErrMszs] = useState({});
 	return (
 		<>
 			<RadioGroupController
