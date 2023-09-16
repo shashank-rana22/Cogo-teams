@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setShowRequest = () => {}, params = {} }) {
 	const {
-		// loading,
+		loading,
 		control,
 		handleSubmit,
 		errors,
@@ -78,7 +78,7 @@ function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setSh
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.button_div}>
-					<Button onClick={handleSubmit(onSave)}>Save</Button>
+					<Button onClick={handleSubmit(onSave)} loading={loading}>Save</Button>
 					<Button themeType="secondary" onClick={onCloseRequest}>Close</Button>
 				</div>
 			</Modal.Footer>

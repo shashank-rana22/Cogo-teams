@@ -1,5 +1,5 @@
-import { Button, Modal, Pagination } from '@cogoport/components';
-import { IcMEyeopen, IcMUndo } from '@cogoport/icons-react';
+import { Button, Pagination } from '@cogoport/components';
+import { IcMUndo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -124,30 +124,13 @@ function EnrichmentRequests() {
 					</div>
 				)}
 
-				<Modal
-					style={{ width: '70%' }}
-					show={request.type === 'view'}
-					onClose={onClose}
-					placement="center"
-				>
-					<Modal.Header title={(
-						<>
-							<IcMEyeopen className={styles.eye_icon} />
-							<span>
-								View Accounts
-							</span>
-						</>
-					)}
-					/>
-					<Modal.Body className={styles.modal_body}>
-						<EnrichmentRequestInfo />
-					</Modal.Body>
-					<Modal.Footer>
-						<Button onClick={onClose}>Close</Button>
-					</Modal.Footer>
-				</Modal>
-				<EnrichmentRequestEdit refetch={refetch} request={request} onClose={onClose} />
-				<EnrichmentRequestUsers request={request} onClose={onClose} />
+				{request.type ? (
+					<>
+						<EnrichmentRequestInfo request={request} onClose={onClose} />
+						<EnrichmentRequestEdit refetch={refetch} request={request} onClose={onClose} />
+						<EnrichmentRequestUsers request={request} onClose={onClose} />
+					</>
+				) : null}
 			</div>
 		</div>
 	);

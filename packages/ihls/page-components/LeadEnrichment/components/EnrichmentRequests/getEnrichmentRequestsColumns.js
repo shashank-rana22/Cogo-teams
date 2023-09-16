@@ -88,7 +88,6 @@ const getEnrichmentRequestsColumns = ({
 									themeType="primary"
 									className={styles.popover_buttons}
 								>
-									{/* <IcMEyeopen className={styles.eye_open} /> */}
 									View
 								</Button>
 								<Button

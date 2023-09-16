@@ -1,82 +1,86 @@
-import React from 'react';
+import { Pagination, Button, Modal } from '@cogoport/components';
 
-import SearchInput from '../../../../../commons/SearchInput';
+import { getFieldController } from '../../../../../commons/Form/getFieldController';
 import LeadTable from '../../../commons/LeadTable';
-import useGetLeadEnrichmentLogs from '../../../hooks/useGetLeadEnrichmentLogs';
-// import useGetObjectiveInfo from '../../hooks/useGetObjectiveInfo';
+import getSearchControls from '../../../configurations/search-control';
+import useGetEnrichmentRequestLeads from '../../../hooks/useGetEnrichmentRequestLeads';
 
-// import Header from './components/Header';
-// import ObjectiveTable from './components/ObjectiveTable';
-
+import getEnrichmentRequestOrganizations from './getEnrichmentRequestOrganizationsColumns';
 import styles from './styles.module.css';
 
-const accountList = [
-	{
-		id           : 1,
-		account_name : 'Yash enrichers',
-		account_pan  : 'CDSADS2131F',
-	},
-	{
-		id           : 2,
-		account_name : 'Yash enrichers',
-		account_pan  : 'CDSADS2131F',
-	},
-	{
-		id           : 3,
-		account_name : 'Yash enrichers',
-		account_pan  : 'CDSADS2131F',
-	},
-];
-
-function EnrichmentRequestInfo({ id = null }) {
+function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 	const {
-		// loading,
-		// response,
-		// searchQuery,
+		loading,
+		response,
+		control,
 		debounceQuery,
-		searchValue,
-		setSearchValue,
-		// setParams,
-	} = useGetLeadEnrichmentLogs({ id });
+		paginationData,
+		setParams,
+	} = useGetEnrichmentRequestLeads({ enrichment_request_id: request.id });
 
-	const columns = [
-		{
-			Header   : 'ACCOUNT NAME',
-			key      : 'account_name',
-			accessor : ({ account_name }) => (
-				<div className={styles.table_cell}>
-					{account_name || '___'}
-				</div>
-			),
-		},
-		{
-			Header   : 'PAN',
-			key      : 'account_pan',
-			accessor : ({ account_pan }) => (
-				<div className={styles.table_cell}>
-					{account_pan || '___'}
-				</div>
-			),
-		},
-	];
+	const columns = getEnrichmentRequestOrganizations();
+	const searchControls = getSearchControls({ debounceQuery });
+
+	const onPageChange = (pageNumber) => {
+		setParams((p) => ({ ...p, page: pageNumber }));
+	};
 
 	return (
-		<>
-			<div className={styles.search}>
-				<div className={styles.searchbar}>
-					<SearchInput
-						placeholder="Search Objective"
-						size="sm"
-						setGlobalSearch={setSearchValue}
-						debounceQuery={debounceQuery}
-						value={searchValue}
-					/>
-				</div>
-			</div>
-			<div className={styles.tableContainer}>
-				<LeadTable columns={columns} data={accountList} />
-			</div>
-		</>
+		<Modal
+			style={{ width: '70%' }}
+			show={request.type === 'view'}
+			onClose={onClose}
+			placement="center"
+		>
+			<Modal.Header title={(
+				<span>
+					View Accounts
+				</span>
+			)}
+			/>
+			<Modal.Body className={styles.modal_body}>
+				<>
+					<div className={styles.search}>
+						<div className={styles.searchbar}>
+							{searchControls.map((item) => {
+								const { name, type, width } = item;
+								const Element = getFieldController(type);
+
+								if (!Element) return null;
+
+								return (
+									<Element
+										{...item}
+										name={name}
+										isClearable
+										prefix={null}
+										style={{ width }}
+										control={control}
+										key={name}
+										size="sm"
+									/>
+								);
+							})}
+						</div>
+					</div>
+					<div className={styles.tableContainer}>
+						<div className={styles.pagination}>
+							<Pagination
+								type="table"
+								currentPage={paginationData.page}
+								totalItems={paginationData.count}
+								pageSize={10}
+								onPageChange={onPageChange}
+							/>
+						</div>
+						<LeadTable columns={columns} data={response} loading={loading} />
+					</div>
+				</>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button onClick={onClose}>Close</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 
