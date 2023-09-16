@@ -26,23 +26,21 @@ function TrackApplication({ data = {} }) {
 	const [activeKey, setActiveKey] = useState('hr_meet');
 
 	const applicationStatusStepper = useCallback((dataset = {}) => {
-		STEPPER_ITEMS.forEach((element) => {
-			if ((dataset?.process_status && dataset?.process_status[element.key]?.status) === 'in_progress') {
-				setActiveKey(element.key);
-			} else {
-				setActiveKey('exit_completed');
-			}
-		});
-
 		const arr = Object.values(dataset?.process_status);
-		const inFoundProgressObject = arr.find((obj) => obj.status === 'in_progress');
+		const inFoundProgressObject = (arr || []).find((obj) => obj?.status === 'in_progress');
+		const inCompleteObject = (arr || []).find((obj) => obj?.status === 'in_complete');
 		setInProgressObject(inFoundProgressObject);
-		Object.keys(dataset?.process_status).forEach((key) => {
-			const value = dataset.process_status[key];
-			if (value.status === 'in_progress') {
-				setAuthorityName(key);
-			}
-		});
+		if (!inFoundProgressObject && !inCompleteObject) {
+			setActiveKey('exit_completed');
+		} else {
+			Object.keys(dataset?.process_status).forEach((key) => {
+				const value = dataset?.process_status[key];
+				if (value?.status === 'in_progress') {
+					setAuthorityName(key);
+					setActiveKey(key);
+				}
+			});
+		}
 	}, []);
 
 	useEffect(() => {
@@ -71,9 +69,9 @@ function TrackApplication({ data = {} }) {
 						style={{ background: '#f9f9f9' }}
 					/>
 				</div>
-				<div className={styles.stages_container_main}>
-					{!isEmpty(inProgressObject)
-					&& (
+				{(authorityName !== 'exit_interview' && !isEmpty(inProgressObject))
+				&& (
+					<div className={styles.stages_container_main}>
 						<div className={styles.name_and_mail_container_main}>
 							<div className={styles.avatar_and_name_container}>
 								<IcMProfile height="18px" width="18px" fill="#4f4f4f" style={{ marginRight: 8 }} />
@@ -88,9 +86,6 @@ function TrackApplication({ data = {} }) {
 								</div>
 							</div>
 						</div>
-					)}
-					{!isEmpty(inProgressObject)
-					&& (
 						<div className={styles.waiting_notification_container}>
 							{authorityName === 'hr_meet' && (
 								<div className={styles.waiting_notification_text}>
@@ -99,7 +94,7 @@ function TrackApplication({ data = {} }) {
 								</div>
 							)}
 							{(
-								authorityName !== 'hr_meet' && authorityName !== 'exit_interview'
+								authorityName !== 'hr_meet'
 							) && (
 								<>
 									<IcMClock height="22px" width="22px" color="#F68B21" />
@@ -111,9 +106,9 @@ function TrackApplication({ data = {} }) {
 								</>
 							)}
 						</div>
-					)}
 
-				</div>
+					</div>
+				)}
 				{(authorityName === 'exit_interview' || isEmpty(inProgressObject)) && (
 					<ExitInterview
 						data={data}
