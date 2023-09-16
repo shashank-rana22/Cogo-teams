@@ -18,8 +18,10 @@ export default {
 		'tracking',
 		'purchase',
 	],
-	shipment_info   : {},
-	shipment_header : {
+	shipment_info: {
+		job_open_request: true,
+	},
+	shipment_header: {
 		add_po_number: true,
 	},
 	default_tab : 'overview',
@@ -79,4 +81,5 @@ export default {
 			'status::cancelled_by_supplier'                    : false,
 		},
 	},
+
 };

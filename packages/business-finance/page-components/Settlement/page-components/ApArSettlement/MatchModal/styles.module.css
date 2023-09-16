@@ -130,3 +130,21 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.overflow_style {
+	display: flex;
+	align-items: center;
+}
+
+.match_bal_style {
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+}
+
+.overflow_dot {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	cursor: pointer;
+}

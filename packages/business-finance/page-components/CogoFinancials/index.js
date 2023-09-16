@@ -33,6 +33,7 @@ function CogoFinancials() {
 	const [tableFilters, setTableFilters] = useState({});
 	const [tour, setTour] = useState(false);
 	const [isTourInitial, setIsTourInitial] = useState(true);
+	const [isCancelledExcluded, setIsCancelledExcluded] = useState(false);
 
 	const geo = getGeoConstants();
 	const countryCode = geo?.country.code;
@@ -46,7 +47,7 @@ function CogoFinancials() {
 	const {
 		financialData, financialLoading, operationalData, operationalLoading, ongoingData,
 		ongoingLoading,
-	} = useGetProfitabilityStats({ filter, entity, timeRange, customDate, showShipmentList });
+	} = useGetProfitabilityStats({ filter, entity, timeRange, customDate, showShipmentList, isCancelledExcluded });
 
 	useEffect(() => {
 		if (!showShipmentList) {
@@ -86,6 +87,7 @@ function CogoFinancials() {
 					setFilter={setFilter}
 					entity={entity}
 					setEntity={setEntity}
+					setIsCancelledExcluded={setIsCancelledExcluded}
 				/>
 
 				{isEmpty(activeShipmentCard) ? (
@@ -142,6 +144,7 @@ function CogoFinancials() {
 							activeBar={activeBar}
 							setActiveBar={setActiveBar}
 							setTableFilters={setTableFilters}
+							isCancelledExcluded={isCancelledExcluded}
 						/>
 						<div className={styles.remaining_shipment_cards}>
 							{activeShipmentCard !== 'ongoing' && !showShipmentList && (

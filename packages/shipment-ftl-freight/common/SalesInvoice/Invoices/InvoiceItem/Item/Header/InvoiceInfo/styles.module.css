@@ -144,3 +144,8 @@
 	font-size: var(--font-size-sm);
 	color: var(--color-secondary-greyscale-2);
 }
+
+.reload {
+	display: flex;
+	align-items: center;
+}
