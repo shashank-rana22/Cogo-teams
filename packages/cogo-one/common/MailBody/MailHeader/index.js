@@ -17,7 +17,7 @@ function MailHeader({
 	isDraft = false,
 	emailStatus = '',
 }) {
-	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
+	const { response, send_by = '', conversation_type = '', last_draft_saved_on = '' } = eachMessage || {};
 
 	const {
 		cc_mails = [],
@@ -25,7 +25,6 @@ function MailHeader({
 		sender = '',
 		to_mails = [],
 		received_time = '',
-		last_draft_saved_on = '',
 	} = response || {};
 
 	const { userName } = getUserNameFromEmail({ query: sender });
@@ -38,7 +37,11 @@ function MailHeader({
 		{ label: 'Bcc', mailsData: bcc_mails },
 	];
 
-	const rightTime = isDraft ? (last_draft_saved_on && new Date(last_draft_saved_on)) : received_time;
+	const lastDraftDate = typeof last_draft_saved_on === 'number' ? new Date(last_draft_saved_on) : null;
+
+	const rightTime = isDraft
+		? lastDraftDate
+		: received_time;
 
 	return (
 		<div

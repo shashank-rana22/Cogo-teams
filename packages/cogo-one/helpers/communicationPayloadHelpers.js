@@ -9,6 +9,11 @@ export const ENDPOINT_MAPPING = {
 	reply_all : '/reply_all',
 };
 
+const getOmniChannelLink = ({ id, channel_type }) => {
+	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
+	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
+};
+
 export const getCommunicationPayload = ({
 	userId = '',
 	formattedData = {},
@@ -27,7 +32,7 @@ export const getCommunicationPayload = ({
 		message_id = '',
 	} = response || {};
 
-	const { conversation_id = '', user_id = '', lead_user_id = '' } = formattedData || {};
+	const { conversation_id = '', user_id = '', lead_user_id = '', id = '' } = formattedData || {};
 
 	const { ccrecipients = [], bccrecipients = [], subject = '', toUserEmail = [] } = emailState || {};
 
@@ -64,5 +69,6 @@ export const getCommunicationPayload = ({
 		bcc_emails      : isEmpty(bccrecipients) ? undefined : bccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		source          : 'CogoOne:AdminPlatform',
+		draft_url       : getOmniChannelLink({ id, channel_type: 'email' }) || '',
 	};
 };

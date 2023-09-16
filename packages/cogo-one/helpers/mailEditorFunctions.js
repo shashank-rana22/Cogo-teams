@@ -36,11 +36,6 @@ function useMailEditorFunctions({
 		body = '',
 	} = emailState || {};
 
-	const {
-		replyMailApi = () => {},
-		replyLoading = false,
-	} = useReplyMail(mailProps);
-
 	const handlePayload = () => {
 		const emailBody = getRenderEmailBody({ html: body });
 
@@ -64,6 +59,11 @@ function useMailEditorFunctions({
 		rteEditorPayload : handlePayload(),
 		roomData         : formattedData,
 	});
+
+	const {
+		replyMailApi = () => {},
+		replyLoading = false,
+	} = useReplyMail({ ...mailProps, saveDraft });
 
 	const {
 		mailLoading = false,

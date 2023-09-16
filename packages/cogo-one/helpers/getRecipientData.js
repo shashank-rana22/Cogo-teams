@@ -101,13 +101,13 @@ export function getRecipientData({
 	const handleClick = ({
 		buttonType: newButtonType = '',
 	}) => {
-		if (buttonType) {
-			Toast.warn('Email compose already in progress');
+		if (newButtonType === 'delete') {
+			deleteMessage({ timestamp: created_at, messageDocId: id });
 			return;
 		}
 
-		if (newButtonType === 'delete') {
-			deleteMessage({ timestamp: created_at, messageDocId: id });
+		if (buttonType) {
+			Toast.warn('Email compose already in progress');
 			return;
 		}
 

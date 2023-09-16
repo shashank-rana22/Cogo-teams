@@ -35,7 +35,7 @@ const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
 		return '#F9AE64';
 	}
 
-	if (emailStatus === 'sucess') {
+	if (emailStatus === 'success') {
 		return '#ABCD62';
 	}
 

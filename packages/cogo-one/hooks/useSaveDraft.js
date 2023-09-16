@@ -82,6 +82,7 @@ const updateMessage = async ({
 	no_of_drafts = 0,
 	is_draft = false,
 	draftMessageData = {},
+	isNewRoomCreated = false,
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -91,20 +92,22 @@ const updateMessage = async ({
 		roomId,
 	});
 
-	const updateRoomPayload = {
-		show_in_drafts      : true,
-		new_message_sent_at : Date.now(),
-		no_of_drafts        : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
-		last_draft_document : updatePayload,
-		updated_at          : Date.now(),
-	};
+	if (!isNewRoomCreated) {
+		const updateRoomPayload = {
+			show_in_drafts      : true,
+			new_message_sent_at : Date.now(),
+			no_of_drafts        : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
+			last_draft_document : updatePayload,
+			updated_at          : Date.now(),
+		};
 
-	const roomDoc = doc(
-		firestore,
-		`${FIRESTORE_PATH[channel_type]}/${roomId}`,
-	);
+		const roomDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${roomId}`,
+		);
 
-	await updateDoc(roomDoc, updateRoomPayload);
+		await updateDoc(roomDoc, updateRoomPayload);
+	}
 
 	if (!is_draft) {
 		const activeChatCollection = collection(
@@ -157,17 +160,18 @@ const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEd
 		}
 
 		await updateMessage({
-			roomId       : roomIdNew,
-			payload      : rteEditorPayload,
+			roomId           : roomIdNew,
+			payload          : rteEditorPayload,
 			communication_id,
 			buttonType,
 			parent_email_message,
 			firestore,
-			channel_type : 'email',
-			messageId    : id,
+			channel_type     : 'email',
+			messageId        : id,
 			no_of_drafts,
 			is_draft,
 			draftMessageData,
+			isNewRoomCreated : !roomId,
 		});
 	};
 

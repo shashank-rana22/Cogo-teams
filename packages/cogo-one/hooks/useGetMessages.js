@@ -150,12 +150,15 @@ const useGetMessages = ({ activeChatCollection, id, viewType, firestore = {}, ch
 				},
 			};
 		});
-
-		const messageDoc = doc(
-			firestore,
-			`${FIRESTORE_PATH[channel_type]}/${id}/messages/${messageDocId}`,
-		);
-		deleteDoc(messageDoc);
+		try {
+			const messageDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}/messages/${messageDocId}`,
+			);
+			deleteDoc(messageDoc);
+		} catch (e) {
+			console.error('e', e);
+		}
 	};
 
 	useEffect(() => {

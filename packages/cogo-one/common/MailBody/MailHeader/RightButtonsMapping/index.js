@@ -9,7 +9,7 @@ const SUCESS_MESSAGE = 'Draft delivered sucessfully';
 const FAILED_MESSAGE = 'Delivery Failed. Please try again';
 
 function DraftMailStatus({ emailStatus = '', handleClick = () => {} }) {
-	if (emailStatus === 'sucess') {
+	if (emailStatus === 'success') {
 		return (
 			<div className={styles.draft_message}>
 				<div>{SUCESS_MESSAGE}</div>
