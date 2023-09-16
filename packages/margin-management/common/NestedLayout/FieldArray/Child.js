@@ -29,7 +29,6 @@ function Child({
 	customField = {},
 }) {
 	const total_fields = getTotalFields({ controls });
-
 	return (
 		<div key={field.id} className={styles.child}>
 			<div className={styles.heading}>

@@ -41,3 +41,15 @@
 	position: relative;
 	left: -20px;
 }
+
+.margin_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.heading_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

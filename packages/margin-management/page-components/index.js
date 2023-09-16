@@ -1,6 +1,6 @@
 import { Loader, Button } from '@cogoport/components';
 import { Link } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useListMargins from '../hooks/useListMargins';
 
@@ -19,6 +19,9 @@ function MarginManagement() {
 		defaultFilters: { margin_type: 'demand', service: '', status: 'active' },
 
 	});
+	useEffect(() => {
+		setFilterParams({ margin_type: 'demand', service: '', status: 'active' });
+	}, [setFilterParams]);
 	const [marginBreakupData, setMarginBreakupData] = useState({});
 	const [activeTab, setActivetab] = useState('demand');
 	const [activeService, setActiveService] = useState('');

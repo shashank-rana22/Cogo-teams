@@ -1,6 +1,6 @@
 import { Button, FunnelStepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDelete } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -11,7 +11,7 @@ import Layout from '../../common/Layout';
 import getShowElements from '../../helpers/getShowElements';
 import useCreateMargin from '../../hooks/useCreateMargin';
 import useUpdateMargin from '../../hooks/useUpdateMargin';
-// import conditions from '../../utils/condition-constants';
+import DeactiveModal from '../MarginValues/Buttons/DeactivateModal';
 
 import getFclControls from './extraControls/getFclControls';
 import getFclCustomsControls from './extraControls/getFclCustomsControls';
@@ -29,8 +29,24 @@ const items = [
 	{ title: <div className={styles.stepper}>CUSTOMIZE YOUR DETAILS</div>, key: 'customize' },
 	{ title: <div className={styles.stepper}>ADD THE MARGINS</div>, key: 'add' },
 ];
+const DEFAULT_MARGIN_SLABS = [
+	{
+		lower_limit    : '',
+		upper_limit    : '',
+		limit_currency : '',
+		margin_values  : [{
+			code      : '',
+			type      : '',
+			value     : '',
+			currency  : '',
+			min_value : '',
+			max_value : '',
+		}],
+	},
+];
 let initialCall = false;
 function Create({ type = 'create', item = {} }) {
+	console.log('ITEM', item);
 	const router = useRouter();
 	const { agent_id } = useSelector(({ profile }) => ({
 		agent_id: profile?.user?.id,
@@ -38,9 +54,10 @@ function Create({ type = 'create', item = {} }) {
 	}));
 	const { isConditionMatches } = useGetPermission();
 	const [activeKey, setActiveKey] = useState(isEmpty(item) ? 'customize' : 'add');
-	const [idValues, setIdValues] = useState({ margin_slabs: [], ...item });
+	const [idValues, setIdValues] = useState({ margin_slabs: DEFAULT_MARGIN_SLABS, ...item });
 	const { onSubmit: submitForm } = useCreateMargin();
-	const { onSubmit:updateForm } = useUpdateMargin();
+	const { onSubmit: updateForm } = useUpdateMargin();
+	const [openModal, setOpenModal] = useState(false);
 
 	const {
 		control,
@@ -48,7 +65,7 @@ function Create({ type = 'create', item = {} }) {
 		handleSubmit,
 		fields,
 		setValue,
-		formState:{ errors = {} } = {},
+		formState: { errors = {} } = {},
 	} = useForm({ defaultValues: idValues });
 	const formValues = watch();
 	const { controls: initialControls } = getControls({
@@ -58,14 +75,6 @@ function Create({ type = 'create', item = {} }) {
 		item,
 	});
 	const marginControls = getMarginControls({ service: formValues?.service });
-	// if (
-	// 	isConditionMatches(conditions.SEE_ALL_MARGINS, 'or')
-	// 	|| formValues?.addition_type === 'channel_partner'
-	// ) {
-	// 	fields.partner_id.params = formValues?.addition_type === 'channel_partner'
-	// 		? { filters: { entity_manager_id: agent_id, status: 'active' } }
-	// 		: { filters: { status: 'active' } };
-	// }
 
 	const getAllControls = useCallback(() => {
 		let extraControls = (getFclControls({ type })[formValues?.service] || []);
@@ -132,6 +141,12 @@ function Create({ type = 'create', item = {} }) {
 		submitForm,
 	});
 
+	const handleSetActive = (key) => {
+		if (key === 'customize') {
+			setActiveKey(key);
+		} else handleSubmit(() => setActiveKey(key))();
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_wrap}>
@@ -146,53 +161,74 @@ function Create({ type = 'create', item = {} }) {
 				</div>
 
 			</div>
-			<div className={styles.text}>CREATE NEW MARGIN</div>
+			<div className={styles.heading_button}>
+				{type === 'edit' ? <div className={styles.text}>EDIT MARGIN</div>
+					: <div className={styles.text}>CREATE NEW MARGIN</div>}
+				{type === 'edit' && (
+					<Button themeType="secondary" onClick={() => setOpenModal(true)}>
+						<IcMDelete
+							style={{ width: '2em', height: '2em', marginRight: '4px' }}
+						/>
+						deactivate
+					</Button>
+				) }
+			</div>
+			{openModal && (
+				<DeactiveModal
+					type="edit"
+					setOpenModal={setOpenModal}
+					id={item?.id}
+					openModal={openModal}
+				/>
+			) }
 			<div className={styles.sub_container}>
 				<FunnelStepper
 					className={styles.stepper_container}
 					active={activeKey}
-					setActive={setActiveKey}
+					setActive={handleSetActive}
 					items={items}
 				/>
 				{
-				activeKey === 'customize' ? (
-					<div>
-						<Layout
-							controls={controls}
-							control={control}
-							fields={fields}
-							errors={errors}
-							showElements={showElements}
-							customFieldArrayControls={customFieldArrayControls}
-						/>
-						<Button
-							onClick={handleSubmit(handleFormSubmit)}
-						>
-							Save and proceed
-						</Button>
-					</div>
-				)
-					: (
+					activeKey === 'customize' ? (
 						<div>
-							<Margin
-								idValues={idValues}
-								type={type}
-								service={formValues?.service}
-								marginControls={marginControls}
+							<Layout
+								controls={controls}
 								control={control}
-								data={item}
-								watch={watch}
+								fields={fields}
 								errors={errors}
+								showElements={showElements}
 								customFieldArrayControls={customFieldArrayControls}
 							/>
 							<Button
 								onClick={handleSubmit(handleFormSubmit)}
 							>
-								{type === 'edit' ? 'update margin' : 'create margin'}
+								Save and proceed
 							</Button>
 						</div>
 					)
-			}
+						: (
+							<div>
+								<Margin
+									idValues={idValues}
+									type={type}
+									service={formValues?.service}
+									marginControls={marginControls}
+									control={control}
+									data={item}
+									watch={watch}
+									errors={errors}
+									customFieldArrayControls={customFieldArrayControls}
+								/>
+								<div className={styles.margin_button}>
+									<Button
+										onClick={handleSubmit(handleFormSubmit)}
+									>
+										{type === 'edit' ? 'update margin' : 'create margin'}
+									</Button>
+								</div>
+							</div>
+						)
+				}
 			</div>
 
 		</div>

@@ -17,6 +17,9 @@ function Footer({
             { margin_stats_required: true, page_limit: 5 },
 	});
 	useEffect(() => {
+		setFilterParams({ margin_type: 'demand', service: '', status: 'active' });
+	}, [setFilterParams]);
+	useEffect(() => {
 		setFilterParams((prev) => ({ ...prev, service, margin_type }));
 	}, [service, setFilterParams, margin_type]);
 	const paginationProps = { filterParams, setFilterParams, data };

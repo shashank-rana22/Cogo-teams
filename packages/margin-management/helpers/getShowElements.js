@@ -24,13 +24,13 @@ const getShowElements = ({
 	Object.keys(formValues).forEach((key) => { (NEW_VALUES[key] = (formValues?.[key] || item?.[key])); });
 	notMandatoryControls.forEach((key) => { (SHOW_ELEMENTS[key] = 'true'); });
 
-	SHOW_ELEMENTS.trade_type = (!isEmpty(formValues?.service));
-	SHOW_ELEMENTS.origin_location_id = (!isEmpty(formValues?.trade_type));
-	SHOW_ELEMENTS.destination_location_id = (!isEmpty(formValues?.origin_location_id));
-	SHOW_ELEMENTS.shipping_line_id = (!isEmpty(formValues?.destination_location_id));
-	SHOW_ELEMENTS.transport_mode = (!isEmpty(formValues?.destination_location_id));
-	SHOW_ELEMENTS.container_size = (!isEmpty(formValues?.shipping_line_id || formValues?.location_id));
-	SHOW_ELEMENTS.container_type = (!isEmpty(formValues?.container_size));
+	SHOW_ELEMENTS.trade_type = (!isEmpty(NEW_VALUES?.service));
+	SHOW_ELEMENTS.origin_location_id = (!isEmpty(NEW_VALUES?.trade_type));
+	SHOW_ELEMENTS.destination_location_id = (!isEmpty(NEW_VALUES?.origin_location_id));
+	SHOW_ELEMENTS.shipping_line_id = (!isEmpty(NEW_VALUES?.destination_location_id));
+	SHOW_ELEMENTS.transport_mode = (!isEmpty(NEW_VALUES?.destination_location_id));
+	SHOW_ELEMENTS.container_size = (!isEmpty(NEW_VALUES?.shipping_line_id || NEW_VALUES?.location_id));
+	SHOW_ELEMENTS.container_type = (!isEmpty(NEW_VALUES?.container_size));
 
 	allPresentControls.forEach((control) => {
 		if (control?.name === 'addition_type') {

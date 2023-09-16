@@ -1,7 +1,10 @@
 import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
 export default function getFclCustomsControls({ type = '' }) {
+	const freightOptions = getCommodityList('freight');
+	const localOptions = getCommodityList('local');
 	const fcl_customs = [
 		{
 			label    : 'Select Trade Type',
@@ -56,6 +59,7 @@ export default function getFclCustomsControls({ type = '' }) {
 			disabled    : type === 'edit',
 			placeholder : 'Select Commodity',
 			watch       : true,
+			options     : freightOptions,
 		},
 	];
 	const air_customs = [
@@ -198,14 +202,14 @@ export default function getFclCustomsControls({ type = '' }) {
 			options     : containertypes,
 		},
 		{
-			label         : 'Commodity',
-			name          : 'commodity',
-			type          : 'select',
-			placeholder   : 'Select Commodity',
-			caret         : true,
-			watch         : true,
-			disabled      : type === 'edit',
-			commodityType : 'local',
+			label       : 'Commodity',
+			name        : 'commodity',
+			type        : 'select',
+			placeholder : 'Select Commodity',
+			caret       : true,
+			watch       : true,
+			disabled    : type === 'edit',
+			options     : localOptions,
 		},
 	];
 	return { fcl_customs, air_customs, haulage_freight };

@@ -133,14 +133,14 @@ export default function getFclControls({ type = '' }) {
 			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
-			label         : 'Commodity',
-			name          : 'commodity',
-			type          : 'select',
-			placeholder   : 'Select Commodity',
-			caret         : true,
-			watch         : true,
-			disabled      : type === 'edit',
-			commodityType : 'lcl_freight',
+			label       : 'Commodity',
+			name        : 'commodity',
+			type        : 'select',
+			placeholder : 'Select Commodity',
+			caret       : true,
+			watch       : true,
+			disabled    : type === 'edit',
+			options     : lclFreightOptions,
 
 		},
 	];

@@ -60,7 +60,7 @@ export default function getLtlFreight({ type = '' }) {
 			caret         : true,
 			watch         : true,
 			disabled      : type === 'edit',
-			commodityType : 'hazardous',
+			commodityType : freightOptions,
 
 		},
 	];
@@ -129,7 +129,7 @@ export default function getLtlFreight({ type = '' }) {
 			caret         : true,
 			watch         : true,
 			disabled      : type === 'edit',
-			commodityType : 'ftl_freight',
+			commodityType : freightOptions,
 
 		},
 	];

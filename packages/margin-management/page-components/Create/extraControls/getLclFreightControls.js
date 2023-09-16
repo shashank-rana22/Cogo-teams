@@ -3,7 +3,7 @@ import containertypes from '@cogoport/constants/container-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
 export default function getLclFreightControls({ type = '' }) {
-	const freightOptions = getCommodityList('freight');
+	const freightOptions = getCommodityList('lcl_freight');
 	const lcl_freight_local = [
 		{
 			label    : 'Select Trade Type',

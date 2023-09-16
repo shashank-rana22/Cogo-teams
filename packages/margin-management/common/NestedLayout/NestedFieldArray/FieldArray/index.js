@@ -22,7 +22,6 @@ function FieldArray({
 	} = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name: `${name}.${index}.${nestedName}` });
-
 	return (
 		<div className={styles.field_array}>
 			{fields.map((field, nestedIndex) => (
