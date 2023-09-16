@@ -76,7 +76,10 @@ function MailHeader({
 									role="presentation"
 									key={key}
 									className={styles.icon_styles}
-									onClick={() => handleClick(key)}
+									onClick={(e) => {
+										e.stopPropagation();
+										handleClick(key);
+									}}
 								>
 									{icon}
 								</div>

@@ -1,9 +1,9 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import ShippingLineModal from '../../../../../../common/ShippingLineModal';
+// import ShippingLineModal from '../../../../../../common/ShippingLineModal';
+import { LoadingState } from '../../../../../../common/LoadingState';
 import CargoModal from '../../../../common/CargoModal';
-import LoadingState from '../../../../common/Loading';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 
@@ -17,9 +17,9 @@ function SelectedRateCard({
 	loading = false,
 	setScreen = () => {},
 	setHeaderProps = () => {},
-	cogoAssuredRates = [],
-	showShippingLineModal = false,
-	setShowShippingLineModal = () => {},
+	// cogoAssuredRates = [],
+	// showShippingLineModal = false,
+	// setShowShippingLineModal = () => {},  // will be used in future
 	setRouterLoading = () => {},
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
@@ -30,7 +30,7 @@ function SelectedRateCard({
 		spot_search_detail: detail = {},
 	} = data || {};
 
-	const { source = 'cogo_assured_rate', shipping_line = {} } = rateCardData;
+	const { source = 'cogo_assured_rate' } = rateCardData;
 
 	const { spot_search_id = '' } = detail;
 
@@ -87,7 +87,7 @@ function SelectedRateCard({
 				/>
 			) : null}
 
-			{showShippingLineModal ? (
+			{/* {showShippingLineModal ? (
 				<ShippingLineModal
 					shipping_line={shipping_line}
 					show={showShippingLineModal}
@@ -95,7 +95,7 @@ function SelectedRateCard({
 					cogoAssuredRates={cogoAssuredRates}
 					detail={detail}
 				/>
-			) : null}
+			) : null} */}
 		</div>
 	);
 }

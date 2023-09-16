@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
@@ -8,6 +8,7 @@ import React, { useMemo, useState } from 'react';
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import RolloverDetails from '../../../common/RolloverDetails';
@@ -25,7 +26,7 @@ import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
-function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
+function ConsigneeShipperBookingAgent({ get = {} }) {
 	const [activeTab, setActiveTab] = useState('overview');
 	const {
 		shipment_data = {}, isGettingShipment = false, getShipmentStatusCode = '',
@@ -37,17 +38,17 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 	);
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: SERVICE_ADDITIONAL_METHODS,
-		activeStakeholder,
+		additional_methods : SERVICE_ADDITIONAL_METHODS,
+		activeStakeholder  : 'consignee_shipper_booking_agent',
 	});
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder,
+		activeStakeholder: 'consignee_shipper_booking_agent',
 		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, activeStakeholder]);
+	}), [get, servicesGet, getTimeline]);
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
@@ -60,9 +61,11 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<JobStatus
+							shipment_data={shipment_data}
+						/>
+					)}
 
 					<ShipmentChat />
 				</div>

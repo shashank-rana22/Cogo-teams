@@ -1,3 +1,4 @@
+import ApArSettlement from '../page-components/ApArSettlement';
 import History from '../page-components/History';
 import JournalVoucher from '../page-components/JournalVoucher';
 import OnAccountCollection from '../page-components/OnAccountCollection';
@@ -8,7 +9,7 @@ const tabPanelMapping = (entityCode, entity) => (
 		{
 			name      : 'ap-ar-settlement',
 			title     : 'AR/AP Settlement',
-			component : <>--</>,
+			component : <ApArSettlement />,
 		},
 		{
 			name      : 'tds-settlement',

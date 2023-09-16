@@ -1,0 +1,24 @@
+.container {
+	padding: 12px;
+	margin-right: 3%;
+	background: #fff;
+	border: 1px solid transparent;
+	border-radius: 8px;
+}
+
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 16px;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.bold_font {
+	font-size: 20px;
+	font-weight: 600;
+}

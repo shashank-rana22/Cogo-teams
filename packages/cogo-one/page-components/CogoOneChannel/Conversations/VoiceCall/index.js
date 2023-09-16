@@ -28,8 +28,8 @@ function VoiceCall({ activeVoiceCard = {} }) {
 		listData: { list = [] },
 		handleScroll,
 	} = useListUserVoiceCalls({
-		user_id     : user_id || undefined,
-		user_number : !user_id ? user_number : undefined,
+		userId     : user_id,
+		userNumber : user_number,
 	});
 	useEffect(() => {
 		if (!loading) {

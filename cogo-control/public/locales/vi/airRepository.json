@@ -76,5 +76,10 @@
     "created":"Tạo",
     "failed_to_upload":"Không tải lên",
     "before":"Trước",
-    "after":"Sau đó"
+    "after":"Sau đó",
+    "ams_mode_field_label": "Chế độ Ams",
+    "ams_mode_placeholder": "Chọn Chế độ AMS",
+    "ams_mode_label": "Chế độ AMS cho cặp sân bay hãng hàng không này",
+    "electronic_label": "Điện tử",
+    "manual_label": "Thủ công"
 }

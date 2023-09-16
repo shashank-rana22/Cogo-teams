@@ -10,7 +10,13 @@ import styles from './styles.module.css';
 function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, setRefreshList = () => {} }) {
 	const [additionalInfo, setAdditionalInfo] = useState([]);
 
-	const formProps = useForm();
+	const formProps = useForm({
+		defaultValues: {
+			request_type : 'shipment',
+			priority     : 'medium',
+		},
+	});
+
 	const { handleSubmit, reset } = formProps;
 
 	const handleClose = () => {

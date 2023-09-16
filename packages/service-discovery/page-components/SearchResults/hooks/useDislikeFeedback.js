@@ -45,7 +45,7 @@ const useDislikeFeedback = ({
 
 	const { spot_search_id = '' } = query;
 
-	const freight = rate.service_type || details.service_type;
+	const freight = details.search_type;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : URL,
