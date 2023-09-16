@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
+import UNIT_TO_PREFILL_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_TO_PREFILL_VALUE_MAPPING';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -25,12 +26,13 @@ function StepThree({ data = {}, setStep = () => {}, shipment_id = '', updateServ
 		const subscription = watch((value, { name }) => {
 			const [service_id, index, unit] = name.split('.');
 			if (unit === 'unit') {
-				const finalValue = value[service_id].map((val, idx) => {
+				const finalValue = value[service_id]?.map((val, idx) => {
 					if (idx === +index) {
-						const { service_detail = [] } = service_charges_with_trade
+						const { service_detail = [] } = (service_charges_with_trade || [])
 							.find((element) => element.service_id === service_id);
-						const prefillKey = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[val.unit];
-						const prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index][prefillKey] || QUANTITY_ONE;
+						const prefillKey = UNIT_TO_PREFILL_VALUE_MAPPING?.[val?.unit];
+						const prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index]?.[prefillKey]
+						|| (val?.unit === 'per_shipment' ? QUANTITY_ONE : '');
 						return {
 							...val,
 							quantity: prefillValue,

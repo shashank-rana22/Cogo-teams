@@ -1,17 +1,51 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
+import UNIT_TO_PREFILL_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_TO_PREFILL_VALUE_MAPPING';
+import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function Step3({ data, setStep }) {
+const QUANTITY_ONE = 1;
+const STEP_TWO = 2;
+const DEFAULT_PRICE_ZERO = 0;
+const DEFAULT_QUANTITY_ZERO = 0;
+
+function StepThree({ data = {}, setStep = () => {} }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });
-	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
+	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, setValue } = formProps || {};
 
-	const customValues = {};
+	const { service_charges_with_trade = [] } = data;
+
+	const CUSTOM_VALUES = {};
 	const formValues = watch();
+	useEffect(() => {
+		const subscription = watch((value, { name }) => {
+			const [service_id, index, unit] = name.split('.');
+			if (unit === 'unit') {
+				const finalValue = value[service_id]?.map((val, idx) => {
+					if (idx === +index) {
+						const { service_detail = [] } = (service_charges_with_trade || [])
+							.find((element) => element.service_id === service_id);
+						const prefillKey = UNIT_TO_PREFILL_VALUE_MAPPING?.[val?.unit];
+						const prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index]?.[prefillKey]
+						|| (val?.unit === 'per_shipment' ? QUANTITY_ONE : '');
+						return {
+							...val,
+							quantity: prefillValue,
+						};
+					}
+					return val;
+				});
+				setValue(service_id, finalValue);
+			}
+		});
+		return () => subscription.unsubscribe();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [watch]);
 
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
@@ -19,7 +53,7 @@ function Step3({ data, setStep }) {
 			if (key && formValues[key]) {
 				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
 					...value,
-					total    : (value.price || 0) * (value.quantity || 0),
+					total    : (value.price || DEFAULT_PRICE_ZERO) * (value.quantity || DEFAULT_QUANTITY_ZERO),
 					currency : 'INR',
 				}));
 			}
@@ -31,7 +65,7 @@ function Step3({ data, setStep }) {
 	const newFormValues = prepareFormValues();
 
 	Object.keys(formValues).forEach((key) => {
-		customValues[key] = {
+		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			id         : key,
 		};
@@ -43,15 +77,15 @@ function Step3({ data, setStep }) {
 				control={control}
 				fields={finalControls}
 				errors={errors}
-				customValues={customValues}
+				customValues={CUSTOM_VALUES}
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(2)}>Back</Button>
+				<Button themeType="secondary" onClick={() => setStep(STEP_TWO)}>Back</Button>
 
 				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>
 	);
 }
-export default Step3;
+export default StepThree;

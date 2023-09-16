@@ -1,6 +1,6 @@
+import UNIT_TO_PREFILL_VALUE_MAPPING from '@cogoport/air-modules/constants/UNIT_TO_PREFILL_VALUE_MAPPING';
 import { cl } from '@cogoport/components';
 import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -43,7 +43,7 @@ function RenderAddRateForm({
 	services = services?.find((service) => service.service_type === serviceData?.service_type);
 
 	const selectedUnit = watch('unit');
-	const prefillValue = GLOBAL_CONSTANTS.selected_unit_to_prefill_value_mapping?.[selectedUnit];
+	const prefillValue = UNIT_TO_PREFILL_VALUE_MAPPING[selectedUnit];
 
 	setValue('quantity', services?.[prefillValue]);
 	if (selectedUnit === 'per_shipment') {
