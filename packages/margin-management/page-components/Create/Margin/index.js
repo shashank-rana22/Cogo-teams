@@ -71,29 +71,28 @@ function Margin({
 	return (
 		<div>
 			<div className={styles.details_panel}>
-				<div className={styles.flex}>
-					<div>
-						<div className={styles.flex_column}>
-							<Pill color="green">
-								{marginType(formValues?.margin_type || data?.margin_type)}
-							</Pill>
-							<Pill color="yellow">{startCase(service)}</Pill>
-							{origin() && <Pill>{origin() }</Pill>}
-							{destination && <Pill>{ destination}</Pill>}
-						</div>
+				<div className={styles.flex_column}>
+					<Pill color="green" className={styles.pill}>
+						{marginType(formValues?.margin_type || data?.margin_type)}
+					</Pill>
+					<Pill color="yellow" className={styles.pill}>{startCase(service)}</Pill>
 
-						{organization ? (
-							<Pill>{organization}</Pill>
-						) : null}
-
-						{shipping_line ? (
-							<Pill>{shipping_line}</Pill>
-						) : null}
-
-						{airline ? (
-							<Pill>{airline}</Pill>
-						) : null}
+					<div className={styles.flex}>
+						{origin() && <Pill className={styles.pill}>{origin() }</Pill>}
+						{destination && <Pill className={styles.pill}>{ destination}</Pill>}
 					</div>
+
+					{organization ? (
+						<Pill className={styles.pill}>{organization}</Pill>
+					) : null}
+
+					{shipping_line ? (
+						<Pill className={styles.pill}>{shipping_line}</Pill>
+					) : null}
+
+					{airline ? (
+						<Pill className={styles.pill}>{airline}</Pill>
+					) : null}
 				</div>
 				<div>
 					{(idValues?.container_size || data?.container_size)
