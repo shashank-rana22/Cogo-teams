@@ -1,6 +1,8 @@
 import { Placeholder, cl } from '@cogoport/components';
 import React from 'react';
 
+import FILTER_MAPPING from '../../../config/FILTER_MAPPING.json';
+
 import styles from './styles.module.css';
 
 const CONVERSTION_STATS_MAPPING = {
@@ -12,17 +14,6 @@ const CONVERSTION_STATS_MAPPING = {
 	shipment_record_created : 'Shipment Record',
 	success                 : 'Completed',
 	failure                 : 'Failed',
-};
-
-const FILTER_MAPPING = {
-	total                   : undefined,
-	uploaded                : 'uploaded',
-	processing              : 'processing',
-	raw_record_created      : 'raw_record_created',
-	lead_created            : 'lead_created',
-	shipment_record_created : 'shipment_record_created',
-	success                 : 'success',
-	failure                 : 'failure',
 };
 
 function FileStats({

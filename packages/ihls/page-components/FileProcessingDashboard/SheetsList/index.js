@@ -57,15 +57,17 @@ function SheetsList({ filters = {}, setFilters = () => {}, data = {}, heading = 
 			</div>
 
 			<ListPagination {...paginationProps} />
-
-			<Table
-				onRowClick={(item) => router.push(`/ihls/data-pipeline/${item?.id}`)}
-				loading={loading}
-				columns={tabColumns}
-				data={data?.list || []}
-			/>
+			<div>
+				<Table
+					onRowClick={(item) => router.push(`/ihls/data-pipeline/${item?.id}`)}
+					loading={loading}
+					columns={tabColumns}
+					data={data?.list || []}
+				/>
+			</div>
 
 			<ListPagination {...paginationProps} />
+
 		</div>
 	);
 }

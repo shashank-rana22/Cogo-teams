@@ -15,10 +15,8 @@ function Tiles({ data = {}, loading = false }) {
 				<Card.Description className={styles.stat_value}>
 					{loading ? <Placeholder />
 						: (
-							<div className={styles.main_title}>
-								<div className={styles.green}>
-									{data?.processed_records_count || DEFAULT_ZERO}
-								</div>
+							<div className={styles.main_title} style={{ color: '#67c676' }}>
+								{data?.processed_records_count || DEFAULT_ZERO}
 							</div>
 						)}
 				</Card.Description>
@@ -34,10 +32,8 @@ function Tiles({ data = {}, loading = false }) {
 
 					{loading ? <Placeholder />
 						: (
-							<div className={styles.main_title}>
-								<div className={styles.blue}>
-									{data?.unique_leads_created_count || DEFAULT_ZERO}
-								</div>
+							<div className={styles.main_title} style={{ color: '#367bf5' }}>
+								{data?.unique_leads_created_count || DEFAULT_ZERO}
 							</div>
 						)}
 				</Card.Description>
@@ -52,10 +48,8 @@ function Tiles({ data = {}, loading = false }) {
 
 					{loading ? <Placeholder />
 						: (
-							<div className={styles.main_title}>
-								<div className={styles.blue}>
-									{data?.leads_updated_count || DEFAULT_ZERO}
-								</div>
+							<div className={styles.main_title} style={{ color: '#367bf5' }}>
+								{data?.leads_updated_count || DEFAULT_ZERO}
 							</div>
 						)}
 				</Card.Description>
@@ -70,10 +64,8 @@ function Tiles({ data = {}, loading = false }) {
 
 					{loading ? <Placeholder />
 						: (
-							<div className={styles.main_title}>
-								<div className={styles.green}>
-									{data?.shipment_records_created_count || DEFAULT_ZERO}
-								</div>
+							<div className={styles.main_title} style={{ color: '#367bf5' }}>
+								{data?.shipment_records_created_count || DEFAULT_ZERO}
 							</div>
 						)}
 				</Card.Description>

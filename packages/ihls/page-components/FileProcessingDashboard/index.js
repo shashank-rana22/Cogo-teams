@@ -60,21 +60,19 @@ function FileProcessingDashboard() {
 				</Button>
 			</div>
 			<div className={styles.cards_container}>
-				<div className={styles.lead_conversion_stats_container}>
-					{FILE_STATS_KEYS.map((conversionKey) => (
-						<FileStats
-							key={conversionKey}
-							conversionKey={conversionKey}
-							SVG_MAPPING={FILE_SVG_MAPPING}
-							stat={data[conversionKey]}
-							loading={statsLoading}
-							setHeading={setHeading}
-							isSelectedKey={isSelectedKey}
-							setIsSelectedKey={setIsSelectedKey}
-							setFilters={setFilters}
-						/>
-					))}
-				</div>
+				{FILE_STATS_KEYS.map((conversionKey) => (
+					<FileStats
+						key={conversionKey}
+						conversionKey={conversionKey}
+						SVG_MAPPING={FILE_SVG_MAPPING}
+						stat={data[conversionKey]}
+						loading={statsLoading}
+						setHeading={setHeading}
+						isSelectedKey={isSelectedKey}
+						setIsSelectedKey={setIsSelectedKey}
+						setFilters={setFilters}
+					/>
+				))}
 			</div>
 			{isEmpty(listData?.list) && !listLoading ? (
 				<EmptyState

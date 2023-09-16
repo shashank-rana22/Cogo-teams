@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import statusTagMapping from './statusTagMapping';
+import StatusTagMapping from '../../../commons/StatusTagMapping';
 
 export const tabColumns = [
 	{ Header: '#', accessor: (item) => (item?.id || '-') },
@@ -27,7 +27,7 @@ export const tabColumns = [
 	},
 	{
 		Header   : 'Status',
-		accessor : (item) => (statusTagMapping?.[item?.status?.toLowerCase()] || '-'),
+		accessor : (item) => (StatusTagMapping?.[item?.status?.toLowerCase()] || '-'),
 	},
 
 ];
