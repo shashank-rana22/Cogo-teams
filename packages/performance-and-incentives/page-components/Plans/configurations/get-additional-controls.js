@@ -1,4 +1,7 @@
-const getAdditionalControls = () => ([
+import { Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
+
+const getAdditionalControls = ({ afterParameterOptions }) => ([
 	{
 		name        : 'customer_account_type',
 		type        : 'select',
@@ -118,9 +121,21 @@ const getAdditionalControls = () => ([
 		},
 	},
 	{
-		name        : 'consideration_threshold',
-		type        : 'number',
-		label       : <div>Consideration Threshold</div>,
+		name : 'consideration_threshold',
+		type : 'number',
+		label:
+	<div style={{ display: 'flex' }}>
+		<div style={{ marginRight: '4px' }}>Consideration Threshold</div>
+		{' '}
+		<Tooltip
+			content="To be considered after (nth shipment)"
+			placement="top"
+			maxWidth={500}
+			interactive
+		>
+			<IcMInfo fill="#bf291e" width="12px" height="12px" cursor="pointer" />
+		</Tooltip>
+	</div>,
 		placeholder : 'Type',
 		style       : {
 			parent_style: {
@@ -148,22 +163,11 @@ const getAdditionalControls = () => ([
 	{
 		name        : 'after_scoring_parameter_id',
 		type        : 'select',
-		label       : 'after parameter',
+		label       : 'After parameter',
 		placeholder : 'Select',
 		value       : null,
-		options     : [{
-			label : 'Shipment',
-			value : 'shipment',
-		},
-		{
-			label : 'Container',
-			value : 'container',
-		},
-		{
-			label : 'TEU',
-			value : 'TEU',
-		}],
-		style: {
+		options     : afterParameterOptions,
+		style       : {
 			parent_style: {
 				flexBasis: '36%',
 			},

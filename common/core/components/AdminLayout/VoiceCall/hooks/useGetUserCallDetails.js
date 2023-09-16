@@ -25,6 +25,10 @@ const useGetUserCallDetails = ({
 	}, { manual: true });
 
 	const getVoiceCall = useCallback(async () => {
+		if (!mobileNumber) {
+			return;
+		}
+
 		try {
 			await trigger({
 				params: getPayload({ mobileNumber, mobileCountryCode, countryCode }),

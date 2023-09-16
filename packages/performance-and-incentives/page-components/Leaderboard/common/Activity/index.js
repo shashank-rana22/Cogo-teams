@@ -1,4 +1,4 @@
-import ACTIVITY_CONSTANTS from '../../constants/activity-constants';
+import ACTIVITY_CONSTANTS from '../../../../constants/activity-constants';
 
 import Block from './Block';
 import styles from './styles.module.css';

@@ -1,7 +1,7 @@
-import { Pill, Tooltip, Popover } from '@cogoport/components';
+import { Pill, Tooltip, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMArrowRotateVertical } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import SCORING_PLAN_STATUS_COLOUR_MAPPING from '../../../../constants/scoring-plan-status-colour-mapping';
@@ -11,8 +11,24 @@ import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
+const handleSort = ({ params = {}, setParams = () => {}, sortBy }) => {
+	if (params.sort_by === sortBy) {
+		if (params.sort_type === 'asc') {
+			setParams((prev) => ({ ...prev, sort_type: 'desc' }));
+		} else {
+			setParams((prev) => ({ ...prev, sort_type: 'asc' }));
+		}
+		return;
+	}
+	setParams((prev) => ({ ...prev, sort_by: sortBy, sort_type: 'desc' }));
+};
+
 const getListColumnMapping = (props) => {
-	const { activeActionId, setActiveActionId, refetch } = props;
+	const {
+		params = {}, setParams = () => {},
+		activeActionId, setActiveActionId, refetch,
+		setShowActivationModal = () => {}, showActivationModal = false,
+	} = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -87,22 +103,40 @@ const getListColumnMapping = (props) => {
 			),
 		},
 		{
-			id       : 'creation',
-			key      : 'creation',
-			Header   : <div className={styles.heading}>CREATION</div>,
-			accessor : ({ created_at }) => (isEmpty(created_at)
+			id  : 'updated',
+			key : 'updated',
+			Header:
+			(
+				<div className={cl`${styles.heading} ${styles.sort_column}`}>
+					<div>UDPATED AT</div>
+					<IcMArrowRotateVertical
+						style={{ marginLeft: '4px', cursor: 'pointer' }}
+						onClick={() => handleSort({ params, setParams, sortBy: 'updated_at' })}
+					/>
+				</div>
+			),
+			accessor: ({ updated_at }) => (updated_at
 				? formatDate({
-					date       : created_at,
+					date       : updated_at,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				}) : '___'
 			),
 		},
 		{
-			id       : 'activation',
-			key      : 'activation',
-			Header   : <div className={styles.heading}>ACTIVATION</div>,
-			accessor : ({ activate_at }) => (activate_at
+			id  : 'activation',
+			key : 'activation',
+			Header:
+			(
+				<div className={cl`${styles.heading} ${styles.sort_column}`}>
+					<div>ACTIVATION</div>
+					<IcMArrowRotateVertical
+						style={{ marginLeft: '4px', cursor: 'pointer' }}
+						onClick={() => handleSort({ params, setParams, sortBy: 'activate_at' })}
+					/>
+				</div>
+			),
+			accessor: ({ activate_at }) => (activate_at
 				? formatDate({
 					date       : activate_at,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -114,19 +148,21 @@ const getListColumnMapping = (props) => {
 			id       : 'actions',
 			key      : 'actions',
 			Header   : <div className={styles.heading}>ACTIONS</div>,
-			accessor : ({ id }) => (
+			accessor : ({ id, status }) => (
 				<div className={styles.actions}>
 
 					<div>
 						<Popover
-							visible={activeActionId === id}
+							visible={activeActionId === id && !showActivationModal}
 							placement="left"
 							interactive
 							render={(
 								<Actions
 									activeActionId={activeActionId}
 									refetch={refetch}
+									status={status}
 									setActiveActionId={setActiveActionId}
+									setShowActivationModal={setShowActivationModal}
 								/>
 							)}
 							onClickOutside={() => setActiveActionId(null)}

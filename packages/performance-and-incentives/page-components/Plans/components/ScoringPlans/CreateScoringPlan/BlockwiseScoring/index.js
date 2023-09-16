@@ -1,7 +1,8 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import blockOptions from '../../../../constants/select-block-options';
+import ActivationModal from '../../commons/ActivationModal';
 
 import Block from './Block';
 import LoadingState from './LoadingState';
@@ -16,7 +17,7 @@ const CHILD_EMPTY_VALUES = {
 function BlockwiseScoring(props) {
 	const { data, refetch, getConfigLoading } = props;
 
-	const { push } = useRouter();
+	const { push, query : { id } = {} } = useRouter();
 
 	const {
 		control,
@@ -29,9 +30,9 @@ function BlockwiseScoring(props) {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
-		formData,
-		setFormData,
 		additionalControlsData,
+		showActivationModal,
+		setShowActivationModal,
 	} = useBlockWiseScoring({ data });
 
 	if (getConfigLoading) return <LoadingState />;
@@ -61,8 +62,6 @@ function BlockwiseScoring(props) {
 						editSubBlock={editSubBlock}
 						setEditSubBlock={setEditSubBlock}
 						prefillValues={prefillValues}
-						formData={formData}
-						setFormData={setFormData}
 						additionalControlsData={additionalControlsData}
 					/>
 				))}
@@ -80,23 +79,35 @@ function BlockwiseScoring(props) {
 
 			</div>
 
+			{showActivationModal ? (
+				<ActivationModal
+					source="creation"
+					activeActionId={id}
+					setShowActivationModal={setShowActivationModal}
+				/>
+			) : null}
+
 			<div className={styles.btn_container}>
 				<Button
 					size="lg"
 					type="button"
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
-					onClick={() => push('/performance-and-incentives/plans')}
+					onClick={() => {
+						Toast.success('Saved Successfully');
+						push('/performance-and-incentives/plans');
+					}}
 				>
-					Cancel
+					Save As Draft
 				</Button>
 
 				<Button
 					size="lg"
 					type="button"
 					themeType="primary"
+					onClick={() => setShowActivationModal(true)}
 				>
-					Create Scoring
+					Activate Config
 				</Button>
 			</div>
 		</>

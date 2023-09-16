@@ -6,34 +6,33 @@ const getScoringPlansFilterControls = () => {
 			name    : 'status',
 			label   : 'Status',
 			type    : 'multiSelect',
-			size    : 'sm',
 			options : [
 				{
 					label : 'Active',
 					value : 'active',
 				},
 				{
+					label : 'Draft',
+					value : 'draft',
+				},
+				{
 					label : 'Inactive',
 					value : 'inactive',
 				},
 			],
-			isClearable: true,
 		},
 		{
 			name    : 'cogo_entity_id',
 			label   : 'Entity',
 			type    : 'multiSelect',
-			size    : 'sm',
 			options : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map(
 				(entity) => ({ label: entity.name, value: entity.id }),
 			),
-			isClearable: true,
 		},
 		{
 			name    : 'channel',
 			label   : 'Channel',
 			type    : 'multiSelect',
-			size    : 'sm',
 			options : [
 				{
 					label : 'SME',
@@ -44,17 +43,15 @@ const getScoringPlansFilterControls = () => {
 					value : 'enterprise',
 				},
 				{
-					label : 'CP',
-					value : 'cp',
+					label : 'Channel Partner',
+					value : 'channel_partner',
 				},
 			],
-			isClearable: true,
 		},
 		{
 			name    : 'role_function',
 			label   : 'Function',
 			type    : 'multiSelect',
-			size    : 'sm',
 			options : [
 				{
 					label : 'Sales',
@@ -85,16 +82,15 @@ const getScoringPlansFilterControls = () => {
 					value : 'external',
 				},
 			],
-			isClearable: true,
 		},
 		{
-			name     : 'role_ids',
-			label    : 'Roles',
-			type     : 'asyncSelect',
-			size     : 'sm',
-			multiple : true,
-			asyncKey : 'partner_roles',
-			params   : {
+			name        : 'role_ids',
+			label       : 'Roles',
+			type        : 'asyncSelect',
+			multiple    : true,
+			asyncKey    : 'partner_roles',
+			initialCall : true,
+			params      : {
 				permissions_data_required : false,
 				filters                   : {
 					partner_entity_types : ['cogoport'],
@@ -102,7 +98,6 @@ const getScoringPlansFilterControls = () => {
 					stakeholder_id       : Object.values(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => entity.id),
 				},
 			},
-			isClearable: true,
 		},
 	];
 

@@ -1,7 +1,7 @@
 import { Button, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
-import Filters from '../../../../../../common/Filters';
+import Filters from '../../commons/Filters';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
@@ -53,7 +53,7 @@ function ListFilters(props) {
 					{conditionalWrapper({
 						condition : filtersApplied,
 						wrapper   : (children) => (
-							<Badge color="red" size="md" text="">{children}</Badge>
+							<Badge color="red" size="md" text="" style={{ marginLeft: '4px' }}>{children}</Badge>
 						),
 						children: <IcMFilter style={{ marginLeft: '4px' }} />,
 					})}
