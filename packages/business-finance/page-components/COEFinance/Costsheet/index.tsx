@@ -104,10 +104,7 @@ function CostSheet() {
 					size="md"
 					themeType="secondary"
 					onClick={() => {
-						Router.push(
-							`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
-							`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
-						);
+						Router.back();
 					}}
 				>
 					Go Back

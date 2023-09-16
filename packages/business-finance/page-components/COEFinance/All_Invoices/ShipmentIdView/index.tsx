@@ -1,5 +1,4 @@
 import { Pagination } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useShipmentIdView from '../../hook/useShipmentIdView';
@@ -35,11 +34,9 @@ export interface ItemDataProps {
 }
 
 function ShipmentIdView() {
-	const { query } = useRouter();
-	const { jobNumber } = query || {};
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
 	const [pendingApproval, setPendingApproval] = useState('all');
-	const [serialId, setSerialId] = useState(jobNumber || '');
+	const [serialId, setSerialId] = useState('');
 	const {
 		hookSetters,
 		pageNo,
