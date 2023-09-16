@@ -50,6 +50,11 @@ const ihls = {
 			access_type  : 'public',
 			service_name : 'athena',
 		},
+		{
+			api          : 'list_enrichment_users',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
 	],
 };
 

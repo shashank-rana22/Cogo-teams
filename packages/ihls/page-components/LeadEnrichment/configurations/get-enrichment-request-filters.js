@@ -3,7 +3,7 @@ const enrichment_request_filters = [
 		name        : 'enrichment_source_id',
 		placeholder : 'Agency',
 		type        : 'select',
-		width       : '15%',
+		width       : '18%',
 		options     : [
 			{ label: 'Neo Kinetics', value: '4' },
 		],
@@ -12,7 +12,7 @@ const enrichment_request_filters = [
 		name        : 'enrichment_status',
 		placeholder : 'Enrichment Status',
 		type        : 'select',
-		width       : '15%',
+		width       : '18%',
 		options     : [
 			{ label: 'Enriched', value: 'enriched' },
 			{ label: 'Pending', value: 'pending' },

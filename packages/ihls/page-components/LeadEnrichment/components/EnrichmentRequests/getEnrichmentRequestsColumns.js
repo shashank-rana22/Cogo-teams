@@ -75,7 +75,7 @@ const getEnrichmentRequestsColumns = ({
 			Header   : 'ACTION',
 			key      : 'action',
 			id       : 'action',
-			accessor : ({ id }) => (
+			accessor : ({ enrichment_status, id }) => (
 				<div className={styles.table_cell}>
 					<Popover
 						onClickOutside={() => onClose()}
@@ -99,6 +99,15 @@ const getEnrichmentRequestsColumns = ({
 								>
 									Edit
 
+								</Button>
+								<Button
+									className={styles.popover_buttons}
+									size="md"
+									themeType="primary"
+									onClick={() => onClickButton({ id, type: 'users' })}
+									disabled={enrichment_status !== 'success'}
+								>
+									Users
 								</Button>
 							</>
 						)}

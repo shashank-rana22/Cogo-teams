@@ -11,6 +11,7 @@ import useGetEnrichmentRequests from '../../hooks/useGetEnrichmentRequests';
 
 import EnrichmentRequestEdit from './EnrichmentRequestEdit';
 import EnrichmentRequestInfo from './EnrichmentRequestInfo';
+import EnrichmentRequestUsers from './EnrichmentRequestUsers';
 import getEnrichmentRequestsColumns from './getEnrichmentRequestsColumns';
 import styles from './styles.module.css';
 
@@ -146,6 +147,7 @@ function EnrichmentRequests() {
 					</Modal.Footer>
 				</Modal>
 				<EnrichmentRequestEdit refetch={refetch} request={request} onClose={onClose} />
+				<EnrichmentRequestUsers request={request} onClose={onClose} />
 			</div>
 		</div>
 	);
