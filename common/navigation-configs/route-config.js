@@ -9,6 +9,7 @@ import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
+import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
@@ -89,6 +90,7 @@ const routeConfig = {
 	...allocations,
 	...supplyDashboard,
 	...contracts,
+	...business,
 	...businessFinance,
 	...unifiedDashboard,
 	...vendorRM,
