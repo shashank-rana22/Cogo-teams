@@ -1,4 +1,4 @@
-import { Loader, Accordion, Button } from '@cogoport/components';
+import { Loader, Accordion, Button, MultiSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
@@ -10,15 +10,13 @@ import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetVariance from '../../../hook/useGetVariance';
-import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 import Tagging from '../Taggings';
 
 import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
-import Details from './Details/index';
+import DetailsCard from './DetailsCard';
 import Documents from './Documents/index';
 // eslint-disable-next-line import/no-cycle
-import GetPills from './GetPills';
 import PdfDisplay from './PdfDisplay/index';
 // eslint-disable-next-line import/no-cycle
 import POC from './POC/index';
@@ -143,16 +141,7 @@ function ShipmentDetails({
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
-	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
-	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
-	const { data: dataWallet } = useGetWallet(shipmentId);
-	const {
-		agent_data: agentData,
-		agent_role_data: agentRoleData,
-		amount,
-		amount_currency: amountCurrency,
-	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const jobTypeValue = jobType?.toLowerCase();
 
@@ -183,6 +172,11 @@ function ShipmentDetails({
 		);
 	};
 
+	const [value, onChange] = useState([]);
+	const options = [
+		{ label: '12345', value: 'first' },
+	];
+
 	return (
 		<div className={styles.container}>
 			<h3>
@@ -206,80 +200,16 @@ function ShipmentDetails({
 
 			{jobType === 'SHIPMENT' && (
 				<>
-					<div className={styles.card}>
-						<div
-							className={styles.card_upper}
-							onClick={() => onTabClick({ tabName: 'shipmentDetailsTab' })}
-							role="presentation"
-						>
-							<div className={styles.sub_container}>
-								Details
-								<div className={styles.tags_container}>
-									<GetPills
-										loadingShipment={loadingShipment}
-										sourceText={sourceText}
-										tradeType={tradeType}
-									/>
-								</div>
-								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
-									<div className={styles.data}>
-										<div className={styles.kam_data}>KAM -</div>
-										<div>
-											{agentData?.name}
-											(
-											{agentRoleData?.name}
-											)
-										</div>
-										<div className={styles.kam_data}>Wallet Usage - </div>
-										<div>
-											{amountCurrency || ''}
-
-											{amount || 0}
-										</div>
-									</div>
-								)}
-							</div>
-							<div
-								className={styles.caret}
-								role="presentation"
-							>
-								{tab.shipmentDetailsTab ? (
-									<IcMArrowRotateUp height="17px" width="17px" />
-								) : (
-									<IcMArrowRotateDown height="17px" width="17px" />
-								)}
-							</div>
-						</div>
-
-						{tab.shipmentDetailsTab && (
-							<div className={styles.shipment_container_section}>
-								<div className={styles.details}>
-									<Details
-										dataList={dataList}
-										shipmentId={shipmentId}
-									/>
-								</div>
-								<Button
-									size="md"
-									themeType="secondary"
-									style={{ marginRight: '8px' }}
-									disabled={checkItem.shipmentDetailsCheck}
-									onClick={() => onAccept({
-										tabName      : 'shipmentDetailsTab',
-										tabToOpen    : 'documentsTab',
-										timelineItem : 'shipmentDetailsCheck',
-									})}
-									className={styles.approve_button}
-								>
-									Approve
-								</Button>
-							</div>
-						)}
-					</div>
-
+					<DetailsCard
+						onTabClick={onTabClick}
+						loadingShipment={loadingShipment}
+						onAccept={onAccept}
+						shipmentDetailsTab={tab.shipmentDetailsTab}
+						shipmentDetailsCheck={checkItem.shipmentDetailsCheck}
+						dataList={dataList}
+					/>
 					<div
 						className={styles.card}
-
 					>
 						<div
 							className={styles.card_upper}
@@ -367,29 +297,44 @@ function ShipmentDetails({
 						</Accordion>
 					</div>
 				)}
-				{collectionPartyId ? (
-					<div className={styles.variance}>
-						<div>
-							VARIANCE -
-							{loading
-								? 'Getting......'
-								: `${varianceFullData?.currency || '--'}${' '}
+				<div className={styles.poc_aligned}>
+					<div className={styles.container_number}>
+						{collectionPartyId ? (
+							<div className={styles.variance}>
+								<div>
+									VARIANCE -
+									{loading
+										? 'Getting......'
+										: `${varianceFullData?.currency || '--'}${' '}
 					${varianceFullData?.total_variance || '--'}`}
-						</div>
-						{varianceFullData?.data ? (
-							<div
-								className={styles.view_more}
-								onClick={() => setShowVariance(true)}
-								role="presentation"
-							>
-								View More
+								</div>
+								{varianceFullData?.data ? (
+									<div
+										className={styles.view_more}
+										onClick={() => setShowVariance(true)}
+										role="presentation"
+									>
+										View More
+									</div>
+								) : (
+									<div>NO DATA FOUND</div>
+								)}
 							</div>
-						) : (
-							<div>NO DATA FOUND</div>
-						)}
+						) : null}
+						<div className={styles.select_filter}>
+							<MultiSelect
+								value={value}
+								onChange={onChange}
+								placeholder="Container Numbers"
+								options={options}
+								isClearable
+								style={{ width: '250px' }}
+								size="md"
+							/>
+						</div>
 					</div>
-				) : null}
-				<POC itemData={data} />
+					<POC itemData={data} />
+				</div>
 			</div>
 
 			{showVariance && (
