@@ -753,6 +753,13 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
+	profile: [
+		{
+			api          : 'get_employee_directory',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default HRMS;

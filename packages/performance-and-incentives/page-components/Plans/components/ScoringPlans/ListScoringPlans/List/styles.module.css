@@ -53,3 +53,8 @@
 	word-break: break-word;
 	white-space: pre-wrap;
 }
+
+.sort_column {
+	display: flex;
+	align-items: center;
+}

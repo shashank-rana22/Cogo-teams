@@ -6,6 +6,11 @@ const performance_and_incentives = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
 			api          : 'get_agent_scoring_eligible_roles',
 			access_type  : 'private',
 			service_name : 'agent_scoring',

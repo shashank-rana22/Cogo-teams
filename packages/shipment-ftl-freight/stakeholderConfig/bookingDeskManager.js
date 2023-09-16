@@ -24,7 +24,7 @@ export default {
 		'field_executive',
 	],
 	shipment_info: {
-		job_open_request: false,
+		job_open_request: true,
 	},
 	default_tab : 'overview',
 	overview    : {

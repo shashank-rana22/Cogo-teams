@@ -1,8 +1,13 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
+import {
+	kamWiseList,
+	serviceWiseList,
+	ccWiseList,
+} from '../../../configs/dummy-graph-stats';
 import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
@@ -49,14 +54,16 @@ function OverAllOutstanding({ entityCode = '' }) {
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
 	});
+	const [viewGraphStats, setViewGraphStats] = useState(false);
 	const ref = useRef(null);
 	const RIGHT_OFF_SET = 2000;
 	const LEFT_OFF_SET = -2000;
-	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats();
-	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats();
-	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats();
+	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats({ viewGraphStats });
+	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({ viewGraphStats });
+	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({ viewGraphStats });
 	const { ccCommStats = [], ccCommLoading = false } = useGetCcCommunicationStats({
 		dateFilter,
+		viewGraphStats,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -99,7 +106,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 
 	const graphPropsList = {
 		kam_wise_outstandings: {
-			data        : KamDataPoints,
+			data        : viewGraphStats ? KamDataPoints : kamWiseList,
 			heading     : 'KAM Wise Outstandings',
 			loading     : kamWiseLoading,
 			isKamWise   : true,
@@ -112,7 +119,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 			},
 		},
 		service_wise_outstandings: {
-			data        : ServiceDataPoints,
+			data        : viewGraphStats ? ServiceDataPoints : serviceWiseList,
 			heading     : 'Service Wise Open Invoices',
 			loading     : serviceWiseLoading,
 			isKamWise   : false,
@@ -127,7 +134,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 	};
 	const graphPropsChild = {
 		cc_wise_outstandings: {
-			data        : ccDataPoints,
+			data        : viewGraphStats ? ccDataPoints : ccWiseList,
 			heading     : 'CC Wise Outstandings',
 			loading     : ccWiseLoading,
 			isKamWise   : true,
@@ -179,13 +186,24 @@ function OverAllOutstanding({ entityCode = '' }) {
 						</div>
 					</div>
 					<div>
-						<ScrollBar
-							ref={ref}
-							rightOffSet={RIGHT_OFF_SET}
-							leftOffSet={LEFT_OFF_SET}
-						/>
-
+						{viewGraphStats && (
+							<ScrollBar
+								ref={ref}
+								rightOffSet={RIGHT_OFF_SET}
+								leftOffSet={LEFT_OFF_SET}
+							/>
+						)}
 					</div>
+					{!viewGraphStats && (
+						<div className={styles.overlay}>
+							<Button
+								onClick={() => setViewGraphStats(true)}
+								className="primary md"
+							>
+								View
+							</Button>
+						</div>
+					)}
 				</div>
 			</div>
 			<OutstandingFilter
@@ -225,7 +243,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 						/>
 					))}
 					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
-					{!isEmpty(list) && (
+					{!isEmpty(list) && (totalRecords >= pageLimit) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"

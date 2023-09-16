@@ -7,7 +7,11 @@ import usePostAgentScoringConfigAttributes from '../../../../../hooks/usePostAge
 
 import styles from './styles.module.css';
 
-function Actions({ activeActionId = '', refetch = () => {}, setActiveActionId = () => {} }) {
+function Actions({
+	status = '',
+	activeActionId = '', refetch = () => {},
+	setActiveActionId = () => {}, setShowActivationModal = () => {},
+}) {
 	const { push } = useRouter();
 
 	const { updateScoringAttributes } = usePostAgentScoringConfigAttributes();
@@ -35,19 +39,22 @@ function Actions({ activeActionId = '', refetch = () => {}, setActiveActionId = 
 				</div>
 			</div>
 
-			<div role="presentation" className={styles.workflow_cta}>
+			<div role="presentation" className={styles.workflow_cta} onClick={(() => setShowActivationModal(true))}>
 				<div className={styles.cta_text}>
 					<IcMTick width={24} height={24} style={{ marginRight: '8px' }} />
 					Activate
 				</div>
 			</div>
 
-			<div role="presentation" className={styles.workflow_cta} onClick={handleDeactive}>
-				<div className={styles.cta_text}>
-					<IcMCross width={20} height={20} style={{ marginRight: '8px' }} />
-					Inactive
+			{status !== 'inactive' ? (
+				<div role="presentation" className={styles.workflow_cta} onClick={handleDeactive}>
+					<div className={styles.cta_text}>
+						<IcMCross width={20} height={20} style={{ marginRight: '8px' }} />
+						Inactive
+					</div>
 				</div>
-			</div>
+			) : null}
+
 		</div>
 	);
 }

@@ -22,6 +22,14 @@
 	background-color: #fffbf8;
 	border: 1px dotted #f9ae64;
 	border-radius: 8px;
+
+	:global {
+		.ui_input_container.uppercase {
+			.ui_input_control {
+				text-transform: uppercase;
+			}
+		}
+	}
 }
 
 .title {

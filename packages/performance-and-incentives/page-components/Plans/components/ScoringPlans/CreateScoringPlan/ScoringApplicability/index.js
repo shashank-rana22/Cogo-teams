@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import { getFieldController } from '../../../../../../common/Form/getFieldController';
+import { getFieldController } from '../../commons/Form/getFieldController';
 
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';

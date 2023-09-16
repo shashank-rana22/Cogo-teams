@@ -17,6 +17,7 @@ const usePostAgentScoringAttributes = () => {
 	const updateScoringAttributes = async ({
 		agentScoringBlockId = '',
 		agentScoringParameters = [], subBlockStatus = '', configId = '', status = '',
+		activationDate = '',
 	}) => {
 		try {
 			await trigger({
@@ -30,7 +31,8 @@ const usePostAgentScoringAttributes = () => {
 						}],
 					} : {}),
 
-					status: status || undefined,
+					status      : status || undefined,
+					activate_at : activationDate || undefined,
 				},
 			});
 			if (!status) {

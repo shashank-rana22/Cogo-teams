@@ -3,7 +3,7 @@ import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import FieldArray from '../../../../../../../common/Form/FieldArray';
+import FieldArray from '../../../commons/Form/FieldArray';
 
 import AdditionalControlsModal from './AdditionalControlsModal';
 import styles from './styles.module.css';
@@ -31,14 +31,16 @@ function SubBlock(props) {
 	} = props;
 
 	const {
+		param,
 		controls = [],
+		watchSubBlock = '',
 		handleClick = () => {},
+		parameterOptions = [],
 		parameterUnitOptions = {},
 		checkForSubBlock = () => {},
 		filteredSubBlockOptions = [],
 		additionalControls = {},
 		setAdditionalControls = () => {},
-		param,
 		setParam = () => {},
 		paramScoringType = '',
 		setParamScoringType = () => {},
@@ -113,21 +115,26 @@ function SubBlock(props) {
 					buttonThemeType="link"
 					buttonText="Add Parameter"
 					watch={watch}
-					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
+					watchBlock={watchBlock}
+					blockIndex={blockIndex}
+					subBlockIndex={subBlockIndex}
+					parameterOptions={parameterOptions}
 					parameterUnitOptions={parameterUnitOptions}
 					setParam={setParam}
 					setParamScoringType={setParamScoringType}
+					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 				/>
 			</div>
 
 			{param ? (
 				<AdditionalControlsModal
-					additionalControls={additionalControls}
-					setAdditionalControls={setAdditionalControls}
-					paramScoringType={paramScoringType}
-					setParamScoringType={setParamScoringType}
 					param={param}
 					setParam={setParam}
+					watchSubBlock={watchSubBlock}
+					paramScoringType={paramScoringType}
+					setParamScoringType={setParamScoringType}
+					additionalControls={additionalControls}
+					setAdditionalControls={setAdditionalControls}
 				/>
 			) : null}
 
