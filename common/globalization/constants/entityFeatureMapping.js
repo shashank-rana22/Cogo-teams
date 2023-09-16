@@ -85,8 +85,8 @@ const ENTITY_FEATURE_MAPPING = {
 		},
 		feature_supported: [
 			'cogo_books',
-			'freight_sales_invoice_restricted_enitity',
-			'freight_cross_entity_purchase_invoice_restricted_enitity',
+			'freight_sales_invoice_restricted_entity',
+			'freight_cross_entity_purchase_invoice_restricted_entity',
 			'cancel_e_invoice',
 			'upload_invoice',
 			'refetch-pdfs',
@@ -106,8 +106,8 @@ const ENTITY_FEATURE_MAPPING = {
 		},
 		feature_supported: [
 			'cogo_books',
-			'freight_sales_invoice_restricted_enitity',
-			'freight_cross_entity_purchase_invoice_restricted_enitity',
+			'freight_sales_invoice_restricted_entity',
+			'freight_cross_entity_purchase_invoice_restricted_entity',
 			'cancel_e_invoice',
 			'upload_invoice',
 			'dunning',
@@ -126,8 +126,8 @@ const ENTITY_FEATURE_MAPPING = {
 		},
 		feature_supported: [
 			'cogo_books',
-			'freight_sales_invoice_restricted_enitity',
-			'freight_cross_entity_purchase_invoice_restricted_enitity',
+			'freight_sales_invoice_restricted_entity',
+			'freight_cross_entity_purchase_invoice_restricted_entity',
 			'cancel_e_invoice',
 			'upload_invoice',
 			'dunning',
@@ -146,8 +146,8 @@ const ENTITY_FEATURE_MAPPING = {
 		},
 		feature_supported: [
 			'cogo_books',
-			'freight_sales_invoice_restricted_enitity',
-			'freight_cross_entity_purchase_invoice_restricted_enitity',
+			'freight_sales_invoice_restricted_entity',
+			'freight_cross_entity_purchase_invoice_restricted_entity',
 			'cancel_e_invoice',
 			'upload_invoice',
 			'dunning',

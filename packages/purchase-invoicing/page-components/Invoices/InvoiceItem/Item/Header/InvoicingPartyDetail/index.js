@@ -21,7 +21,7 @@ function InvoicingPartyDetail({
 
 	Object.entries(ENTITY_MAPPING).forEach(([key, value]) => (
 		ENTITY_FEATURE_MAPPING[key]?.feature_supported
-			?.includes('freight_cross_entity_purchase_invoice_restricted_enitity')
+			?.includes('freight_cross_entity_purchase_invoice_restricted_entity')
 			? RESTRICTED_ENTITY_IDS.push(value.id) : null));
 
 	return (
