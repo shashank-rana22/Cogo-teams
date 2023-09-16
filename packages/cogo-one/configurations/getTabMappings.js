@@ -35,6 +35,11 @@ const getTabMappings = ({
 			badge : unReadMailsCount,
 			show  : true,
 		},
+		{
+			label : 'Teams',
+			value : 'teams',
+			show  : true,
+		},
 	];
 
 	return TABS_MAPPING.filter((itm) => tabsToBeShown.includes(itm.value) && itm.show);

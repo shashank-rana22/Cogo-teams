@@ -15,6 +15,7 @@ import CommunicationModals from './CommunicationModals';
 import MailsList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
+import Teams from './Teams';
 import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
@@ -22,6 +23,7 @@ const COMPONENT_MAPPING = {
 	voice           : VoiceList,
 	outlook         : MailsList,
 	firebase_emails : MailsList,
+	teams           : Teams,
 };
 
 const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];

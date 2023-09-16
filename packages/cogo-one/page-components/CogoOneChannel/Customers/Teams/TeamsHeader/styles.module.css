@@ -1,0 +1,35 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 12px 0 6px;
+}
+
+.filter_icon {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+
+.search_field {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 44px);
+}
+
+.styled_popover {
+	padding: 0;
+	margin-top: 10px;
+
+	:global {
+		.tippy-content {
+			width: 260px;
+			height: 190px;
+			padding: 0;
+
+			>div {
+				height: 100%;
+			}
+		}
+	}
+}
