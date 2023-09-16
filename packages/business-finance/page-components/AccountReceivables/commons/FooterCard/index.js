@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function FooterCard({ entityCode = '', bulkIrnGenerate = () => {}, bulkIrnLoading = false, checkedRows = [] }) {
 	const [confirmation, setConfirmation] = useState(false);
 
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const irnLabel = ENTITY_FEATURE_MAPPING[entityCode]?.labels?.irn_label;
 
 	return (
 		<div className={styles.footer_div}>
