@@ -1,10 +1,8 @@
-import { InputController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const fnfColumns = ({
-	control = {},
 	errors = {},
 }) => ([
 	{
@@ -23,8 +21,8 @@ const fnfColumns = ({
 	{
 		Header   : 'RECOVERABLE AMOUNT',
 		accessor : (item) => (
-			<section>
-				<InputController
+			<section className={styles.particular_container}>
+				{/* <InputController
 					control={control}
 					placeholder="Type Amount here"
 					className={styles.name_input}
@@ -34,7 +32,9 @@ const fnfColumns = ({
 					size="md"
 					type="number"
 					rules={{ required: { value: true, message: '*This Field is required' } }}
-				/>
+				/> */}
+
+				{item.recoverable_amount}
 			</section>
 		),
 	},

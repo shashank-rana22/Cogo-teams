@@ -12,14 +12,15 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import StyledTable from '../commons/StyledTable';
 
+import AddParticular from './add-particular';
 import AdditionalRemarks from './additional-remarks';
 import fnfColumns from './columns';
 import FinanceConfirmModal from './confirm-modal';
 import FinanceRecommendations from './finance-recommendations';
+import FnfTable from './FnfTable';
 import getColumns from './Outstandingamount/getcolumns';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
-import FinanceUpdateModal from './update-modal';
 import useDownloadOutstandingDetails from './useDownloadOutstandingDetails';
 import useFinanceClearance from './useFinanceClearance';
 
@@ -32,7 +33,7 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 		setValue,
 	} = useFinanceClearance({ data, refetch, loading });
 	const { getDownloadOutstandingFileLink, downloadlink } = useDownloadOutstandingDetails();
-	// const data = useMemo(() => (sub_process_data || {}), [sub_process_data]);
+
 	const [confirmedValues, setConfirmedValues] = useState(
 		{
 			tcFullName        : '',
@@ -60,7 +61,7 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 	}, [is_complete, setUpdateData, setValue, sub_process_data]);
 
 	const [show, setShow] = useState(true);
-	const [showModal, setShowModal] = useState(false);
+	const [addParticular, setAddParticular] = useState(false);
 	const [outStandingShow, setOutStandingShow] = useState(true);
 	const columnsout = getColumns({ control, is_complete });
 	const data1 = useMemo(() => (
@@ -79,15 +80,14 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 			let recoverable_amount_sum = 0;
 			const arr = is_complete ? showdata : data1;
 			arr?.forEach((elem) => {
-				const props = `${elem?.particular}RecoverableAmount`;
-				recoverable_amount_sum += parseInt(watch(props) || GLOBAL_CONSTANTS.zeroth_index, 10);
+				recoverable_amount_sum += parseInt(elem.recoverable_amount || GLOBAL_CONSTANTS.zeroth_index, 10);
 			});
 			setTotalRecoverableAmount(recoverable_amount_sum);
 		},
-		[data1, showdata, is_complete, setTotalRecoverableAmount, watch],
+		[is_complete, showdata, data1, setTotalRecoverableAmount],
 	);
 
-	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, watch]);
+	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, updateData]);
 
 	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
 	return (
@@ -117,7 +117,7 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 								size="md"
 								themeType="secondary"
 								className={styles.heading_btn}
-								onClick={() => setShowModal(true)}
+								onClick={() => setAddParticular(true)}
 								disabled={is_complete}
 
 							>
@@ -137,8 +137,17 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 				</div>
 				<div className={show ? styles.show_application : styles.hide_application}>
 					<div className={styles.table_update_fnf}>
-						<StyledTable columns={columns} data={is_complete ? showdata : data1} />
+						<FnfTable
+							columns={columns}
+							addParticular={addParticular}
+							data={is_complete ? showdata : data1}
+						/>
 					</div>
+					<AddParticular
+						addParticular={addParticular}
+						setAddParticular={setAddParticular}
+						setUpdateData={setUpdateData}
+					/>
 					{' '}
 					<div className={styles.document_section}>
 						<div className={styles.doc_heading}>
@@ -181,7 +190,7 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 				</div>
 
 				<div className={outStandingShow ? styles.show_application : styles.hide_application}>
-					<div className={styles.table_update_fnf}>
+					<div className={styles.table_update_out_amount}>
 						<div className={styles.outstanding_heading}>Outstanding Amount Details</div>
 						<StyledTable columns={columnsout} data={outstanding_amount_details} loading={false} />
 					</div>
@@ -236,11 +245,11 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 					</div>
 				)}
 
-			<FinanceUpdateModal
+			{/* <FinanceUpdateModal
 				showModal={showModal}
 				setShowModal={setShowModal}
 				setUpdateData={setUpdateData}
-			/>
+			/> */}
 			<FinanceConfirmModal
 				confirmModal={confirmModal}
 				setConfirmModal={setConfirmModal}
