@@ -16,6 +16,7 @@ function UploadBookingNote({
 	task = {},
 	onCancel = () => {},
 	taskListRefetch = () => {},
+	mailLoading = false,
 }) {
 	const THREE = 3;
 	const ONE = 1;
@@ -70,8 +71,11 @@ function UploadBookingNote({
 	});
 	const { serviceQuotationLoading = true, loading } = step3_data || {};
 
-	return (
+	if (mailLoading) {
+		return <>Loading...</>;
+	}
 
+	return (
 		<div>
 			{step === GLOBAL_CONSTANTS.zeroth_index ? (
 				<Step0

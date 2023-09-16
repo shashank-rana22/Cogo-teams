@@ -34,6 +34,7 @@ function SelfAndTradePartyForm({
 	const [id, setId] = useState('');
 	const [pocNameOptions, setPocNameOptions] = useState([]);
 	const [countryId, setCountryId] = useState('');
+	const [registrationNumber, setRegistrationNumber] = useState('');
 
 	const {
 		data:{ list = [] } = {},
@@ -71,6 +72,7 @@ function SelfAndTradePartyForm({
 	useEffect(() => {
 		const selectedTradeParty = list?.find((t) => t.id === trade_party_id);
 		setValue('registration_number', selectedTradeParty?.registration_number || '');
+		setRegistrationNumber(selectedTradeParty?.registration_number);
 
 		if (!isEmpty(selectedTradeParty)) {
 			setAddressData([...(selectedTradeParty?.billing_addresses || []),
@@ -165,7 +167,7 @@ function SelfAndTradePartyForm({
 										control={control}
 										placeholder={`Enter ${countryValidation?.others?.identification_number?.label
 											|| 'PAN Number'}`}
-										disabled
+										disabled={registrationNumber}
 									/>
 								</div>
 							</div>
