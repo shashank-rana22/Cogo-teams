@@ -40,7 +40,7 @@ function Status({
 					&& restrictedRevokedStatus.includes(invoice?.status) && (
 						<>
 							<div className={styles.invoice_status}>
-								{startCase(invoice?.status)}
+								{startCase(invoice.status || '')}
 							</div>
 							{invoice?.status === 'finance_rejected' && invoice?.rejection_reason
 								? (
