@@ -11,7 +11,7 @@ const SHIPMENT_SPECIALIST = {
 	session_type_query           : () => [where('session_type', '==', 'admin')],
 	chat_sub_tabs_access         : ['all', 'teams', 'groups', 'hidden_filter'],
 	teams_chats_base_query       : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-	extra_side_bar_navs_access   : [],
+	extra_side_bar_navs_access   : ['user_mails'],
 	default_side_nav             : 'user_activity',
 	get_accesible_assign_buttons : getShipmentSpecialistButtons,
 	accesible_agent_types_query  : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
