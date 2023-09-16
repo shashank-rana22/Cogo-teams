@@ -11,7 +11,7 @@ function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 		{
 			url     : '/common/job-profitability/get-quotations',
 			method  : 'get',
-			authKey : 'get_common_job-profitability_get-quotations',
+			authKey : 'get_common_job_profitability_get_quotations',
 		},
 		{ manual: true, autoCancel: false },
 	);
