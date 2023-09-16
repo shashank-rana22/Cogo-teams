@@ -15,6 +15,7 @@ function CoeFinance() {
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
+		setFilters({});
 		push(
 			'/business-finance/coe-finance/[active_tab]',
 			`/business-finance/coe-finance/${tab}`,
