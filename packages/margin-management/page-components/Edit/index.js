@@ -1,24 +1,18 @@
 import { Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
 
 import useListMargins from '../../hooks/useListMargins';
 import Create from '../Create';
 
+const ZERO = 0;
 function Edit() {
 	const { query } = useSelector(({ general }) => general);
-	const { data, loading, setFilterParams } = useListMargins({
-		defaultParams: { margin_stats_required: true, page_limit: 5 },
+	const { data, loading } = useListMargins({
+		defaultFilters: { id: query?.id },
 	});
-	const [item, setItem] = useState({});
-	useEffect(() => {
-		setFilterParams({ id: query?.id });
-		setItem(data?.list?.shift());
-	}, [query?.id, setFilterParams, data?.list]);
-
 	return (
 		<div>
-			{loading ? <Loader /> : <Create type="edit" item={item} />}
+			{loading ? <Loader /> : <Create type="edit" item={data?.list?.[ZERO]} />}
 		</div>
 	);
 }

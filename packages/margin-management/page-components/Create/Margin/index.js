@@ -13,6 +13,8 @@ function Margin({
 	service = '',
 	marginControls = [],
 	control = {},
+	errors = {},
+	customFieldArrayControls = {},
 }) {
 	const formValues = watch();
 	const marginType = (margin_type) => {
@@ -103,7 +105,12 @@ function Margin({
                     && <Pill>{idValues?.trade_type || data?.trade_type}</Pill>}
 				</div>
 			</div>
-			<NestedLayout controls={marginControls} control={control} />
+			<NestedLayout
+				controls={marginControls}
+				control={control}
+				errors={errors}
+				customFieldArrayControls={customFieldArrayControls}
+			/>
 		</div>
 	);
 }

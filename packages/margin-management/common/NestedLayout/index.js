@@ -6,7 +6,10 @@ import getWidthPercent from './getWidthPercent';
 import NestedFieldArray from './NestedFieldArray';
 import styles from './styles.module.css';
 
-function Layout({ controls = [], control = {}, errors = {}, showElements = {}, formValues = {} }) {
+function Layout({
+	controls = [], control = {}, errors = {}, showElements = {}, formValues = {},
+	customFieldArrayControls = {},
+}) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
 			return showElements[c.name];
@@ -25,6 +28,7 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 				if (type === 'nestedFieldArray') {
 					return (
 						<NestedFieldArray
+							customFieldArrayControls={customFieldArrayControls}
 							ctrl={ctrl}
 							key={ctrl.name}
 							control={control}
@@ -39,6 +43,7 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 				if (type === 'fieldArray') {
 					return (
 						<FieldArray
+							customFieldArrayControls={customFieldArrayControls}
 							ctrl={ctrl}
 							key={ctrl.name}
 							control={control}

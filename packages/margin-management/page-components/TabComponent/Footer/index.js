@@ -11,7 +11,7 @@ function Footer({
 	showContainerDetails = true,
 }) {
 	const {
-		data = {}, loading = false, setFilterParams = () => { }, params = {}, setParams = () => {},
+		data = {}, loading = false, setFilterParams = () => { }, filterParams = {},
 	} = useListMargins({
 		defaultParams:
             { margin_stats_required: true, page_limit: 5 },
@@ -19,7 +19,7 @@ function Footer({
 	useEffect(() => {
 		setFilterParams((prev) => ({ ...prev, service, margin_type }));
 	}, [service, setFilterParams, margin_type]);
-	const paginationProps = { params, setParams, data };
+	const paginationProps = { filterParams, setFilterParams, data };
 	if (loading) return <Loader themeType="primary" />;
 	return (
 		<div>

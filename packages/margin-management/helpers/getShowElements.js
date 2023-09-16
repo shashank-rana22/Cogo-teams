@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import conditions from '../utils/condition-constants';
 
 const notMandatoryControls = [
@@ -6,7 +8,6 @@ const notMandatoryControls = [
 	'agent_id',
 	'partner_id',
 	'organization_id',
-	'transport_mode',
 	'organization_type',
 	'service',
 
@@ -18,46 +19,22 @@ const getShowElements = ({
 	isConditionMatches = () => {},
 }) => {
 	const SHOW_ELEMENTS = {};
-	let showControl = true;
+	const NEW_VALUES = {};
 
-	const newValues = {
-		margin_type       : formValues?.margin_type || item?.margin_type,
-		rate_type         : formValues?.rate_type || item?.rate_type,
-		organization_type : formValues?.organization_type || item?.organization_type,
-		addition_type     : formValues?.addition_type,
-		partner_id        : formValues?.partner_id || item?.partner_id,
-		service           : formValues?.service || item?.service,
-		organization_id   : formValues?.organization_id || item?.organization_id,
-		trade_type        : formValues?.trade_type || item?.filters?.trade_type,
-		origin_location_id:
-			formValues?.origin_location_id || item?.origin_location_id,
-		location_id: formValues?.location_id || item?.location_id,
-		destination_location_id:
-			formValues?.destination_location_id || item?.destination_location_id,
-		shipping_line_id : formValues?.shipping_line_id || item?.shipping_line_id,
-		airline_id       : formValues?.airline_id || item?.airline_id,
-		container_size   : formValues?.container_size || item?.container_size,
-		container_type   : formValues?.container_type || item?.container_type,
-		commodity        : formValues?.commodity || item?.commodity,
-		haulage_type     : formValues?.haulage_type || item?.haulage_type,
-		transport_mode   : formValues?.transport_mode || item?.transport_mode,
-		truck_type       : formValues?.truck_type || item?.truck_type,
-		margin_values    : formValues?.margin_values || item?.margin_values,
-	};
+	Object.keys(formValues).forEach((key) => { (NEW_VALUES[key] = (formValues?.[key] || item?.[key])); });
+	notMandatoryControls.forEach((key) => { (SHOW_ELEMENTS[key] = 'true'); });
+
+	SHOW_ELEMENTS.trade_type = (!isEmpty(formValues?.service));
+	SHOW_ELEMENTS.origin_location_id = (!isEmpty(formValues?.trade_type));
+	SHOW_ELEMENTS.destination_location_id = (!isEmpty(formValues?.origin_location_id));
+	SHOW_ELEMENTS.shipping_line_id = (!isEmpty(formValues?.destination_location_id));
+	SHOW_ELEMENTS.transport_mode = (!isEmpty(formValues?.destination_location_id));
+	SHOW_ELEMENTS.container_size = (!isEmpty(formValues?.shipping_line_id || formValues?.location_id));
+	SHOW_ELEMENTS.container_type = (!isEmpty(formValues?.container_size));
 
 	allPresentControls.forEach((control) => {
-		if (control.name !== 'margin_values') {
-			SHOW_ELEMENTS[control.name] = showControl || notMandatoryControls.includes(control.name);
-			if (
-				!newValues[control.name]
-				&& !notMandatoryControls.includes(control.name)
-			) {
-				showControl = false;
-			}
-		}
-
-		if (control.name === 'addition_type') {
-			if (isConditionMatches(conditions.ADD_CHANNEL_PARTNER_MARGIN)) {
+		if (control?.name === 'addition_type') {
+			if (isConditionMatches(conditions?.ADD_CHANNEL_PARTNER_MARGIN)) {
 				if (
 					agent_view[TWO] === 'sales_agent_view'
 					|| agent_view[TWO] === 'supply_agent_view'
@@ -73,10 +50,10 @@ const getShowElements = ({
 			}
 		}
 
-		if (control.name === 'partner_id') {
+		if (control?.name === 'partner_id') {
 			if (
 				isConditionMatches(conditions.SEE_ALL_MARGINS, 'or')
-				|| newValues?.addition_type === 'channel_partner'
+				|| NEW_VALUES?.addition_type === 'channel_partner'
 			) {
 				SHOW_ELEMENTS.partner_id = true;
 			} else {
@@ -85,25 +62,25 @@ const getShowElements = ({
 		}
 
 		if (
-			control.name === 'shipping_line_id'
-			&& newValues?.service === 'haulage_freight'
+			control?.name === 'shipping_line_id'
+			&& NEW_VALUES?.service === 'haulage_freight'
 		) {
-			if (newValues?.haulage_type === 'carrier') {
+			if (NEW_VALUES?.haulage_type === 'carrier') {
 				SHOW_ELEMENTS.shipping_line_id = true;
 			} else {
 				SHOW_ELEMENTS.shipping_line_id = false;
 			}
 		}
 		if (control.name === 'transport_mode') {
-			if (newValues?.haulage_type) {
+			if (NEW_VALUES?.haulage_type) {
 				SHOW_ELEMENTS.transport_mode = true;
 			} else {
 				SHOW_ELEMENTS.transport_mode = false;
 			}
 		}
 
-		if (control.name === 'margin_values' && newValues?.margin_values) {
-			SHOW_ELEMENTS[control.name] = newValues.margin_values.map((itemValue) => {
+		if (control.name === 'margin_values' && NEW_VALUES?.margin_values) {
+			SHOW_ELEMENTS[control.name] = NEW_VALUES?.margin_values.map((itemValue) => {
 				if (itemValue?.type === 'percentage') {
 					return {
 						code      : true,
@@ -126,7 +103,7 @@ const getShowElements = ({
 		}
 
 		if (control.name === 'rate_type') {
-			if (formValues.margin_type === 'cogoport') {
+			if (formValues?.margin_type === 'cogoport') {
 				SHOW_ELEMENTS[control.name] = true;
 			} else {
 				SHOW_ELEMENTS[control.name] = false;
@@ -134,14 +111,14 @@ const getShowElements = ({
 		}
 
 		if (control.name === 'organization_type') {
-			if (formValues.margin_type === 'cogoport') {
+			if (formValues?.margin_type === 'cogoport') {
 				SHOW_ELEMENTS[control.name] = true;
 			} else {
 				SHOW_ELEMENTS[control.name] = false;
 			}
 		}
 	});
-	console.log(SHOW_ELEMENTS, 'SHOW_ELEMENTS');
+
 	return SHOW_ELEMENTS;
 };
 export default getShowElements;

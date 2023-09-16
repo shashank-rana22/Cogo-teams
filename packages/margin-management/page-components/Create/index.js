@@ -2,53 +2,53 @@ import { Button, FunnelStepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
-// import { useGetPermission } from '@cogoport/request';
+import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Layout from '../../common/Layout';
-import disablePrevFields from '../../helpers/disablePrevFields';
-import getFormattedValues from '../../helpers/getFormattedValues';
+import getShowElements from '../../helpers/getShowElements';
 import useCreateMargin from '../../hooks/useCreateMargin';
+import useUpdateMargin from '../../hooks/useUpdateMargin';
 // import conditions from '../../utils/condition-constants';
-import toastApiError from '../../utils/toastApiError';
 
 import getFclControls from './extraControls/getFclControls';
 import getFclCustomsControls from './extraControls/getFclCustomsControls';
 import getLclFreightControls from './extraControls/getLclFreightControls';
 import getLtlFreight from './extraControls/getLtlFreight';
 import getControls from './getControls';
+import getHandleFormSubmit from './getHandleFormSubmit';
 import Margin from './Margin';
 import getMarginControls from './marginControls';
 import styles from './styles.module.css';
-// import getShowElements from '../../helpers/getShowElements';
-// const agent_view = ['margin', 'across_all'];
-const ZERO = 0;
+
+const agent_view = ['margin', 'across_all'];
+const ZERO = 0; const ONE = 1;
 const items = [
 	{ title: <div className={styles.stepper}>CUSTOMIZE YOUR DETAILS</div>, key: 'customize' },
 	{ title: <div className={styles.stepper}>ADD THE MARGINS</div>, key: 'add' },
 ];
 let initialCall = false;
 function Create({ type = 'create', item = {} }) {
+	const router = useRouter();
 	const { agent_id } = useSelector(({ profile }) => ({
 		agent_id: profile?.user?.id,
 
 	}));
-	const router = useRouter();
-	// const { isConditionMatches } = useGetPermission();
+	const { isConditionMatches } = useGetPermission();
 	const [activeKey, setActiveKey] = useState(isEmpty(item) ? 'customize' : 'add');
 	const [idValues, setIdValues] = useState({ margin_slabs: [], ...item });
 	const { onSubmit: submitForm } = useCreateMargin();
+	const { onSubmit:updateForm } = useUpdateMargin();
 
-	// useEffect(() => {
-	// 	setIdValues(item);
-	// }, [item]);
 	const {
 		control,
 		watch,
 		handleSubmit,
 		fields,
+		setValue,
+		formState:{ errors = {} } = {},
 	} = useForm({ defaultValues: idValues });
 	const formValues = watch();
 	const { controls: initialControls } = getControls({
@@ -76,81 +76,41 @@ function Create({ type = 'create', item = {} }) {
 		return controls;
 	}, [initialControls, formValues?.service, type]);
 	const controls = useMemo(() => getAllControls(), [getAllControls]);
-	// const { authorizationparameters } = useSelector(({ profile }) => ({
-	// 	authorizationparameters: profile,
-	// }));
-	// console.log('authorizationparameters', authorizationparameters);
-	// const showElements = getShowElements({
-	// 	allPresentControls : controls,
-	// 	formValues,
-	// 	item               : { ...(item || {}), ...(item?.filters || {}) },
-	// 	isConditionMatches,
-	// 	agent_view,
-	// });
-	const handleFormSubmit = async (value) => {
-		const MV = [];
-		const { margin_slabs, ...rest } = value;
-		const ms = margin_slabs.map((it) => {
-			const { lower_limit, upper_limit, limit_currency, margin_values } = it;
-			const new_margin_values = margin_values.map((val) => {
-				const { code, currency, min_value, max_value } = val;
-				return { code, type: val.type, value: val.value, currency, min_value, max_value };
-			});
-			MV.push(new_margin_values);
-			return { lower_limit, upper_limit, limit_currency };
-		});
-		const values = { margin_slabs: ms, ...rest, margin_values: MV };
-		const [slabs_currency] = values.margin_slabs || [];
-		const { limit_currency } = slabs_currency || {};
 
-		const editValues = {
-			...values,
-			trade_type:
-				values?.trade_type
-				|| formValues?.trade_type
-				|| item?.filters?.trade_type,
-		};
-		if (activeKey === 'customize') {
-			setActiveKey('add');
-			setIdValues(values);
-		} else if (activeKey === 'add') {
-			try {
-				const formattedValues = getFormattedValues(
-					{ values: editValues },
-				);
-				const rawPayload = {
-					...formattedValues,
-					status   : type === 'update' ? item?.status : undefined,
-					agent_id : ['demand', 'supply'].includes(formattedValues?.margin_type)
-						? agent_id
-						: undefined,
-					margin_slabs_currency: limit_currency,
-				};
-				const PAYLOAD = {};
-				Object.keys(rawPayload || {}).forEach((key) => {
-					if (rawPayload[key] || rawPayload[key] === ZERO) {
-						PAYLOAD[key] = rawPayload[key];
-					}
-				});
-
-				const editPayload = {
-					margin_slabs_currency : limit_currency,
-					margin_slabs          : formattedValues?.margin_slabs,
-					id                    : item?.id,
-				};
-				const actualPayload = type === 'edit' ? editPayload : PAYLOAD;
-				await submitForm({ data: actualPayload });
-				router.push('/margins');
-			} catch (err) {
-				toastApiError(err);
-			}
-		}
-	};
-	Object.keys(fields || {}).forEach((key) => {
-		if (key === 'margin_slabs') {
-			disablePrevFields('margin_slabs', key, fields, formValues);
-		}
+	const showElements = getShowElements({
+		allPresentControls : controls,
+		formValues,
+		item               : { ...(item || {}), ...(item?.filters || {}) },
+		isConditionMatches,
+		agent_view,
 	});
+	const { margin_slabs = [] } = formValues;
+	const customFieldArrayControls = { margin_slabs: [] };
+	useEffect(() => {
+		margin_slabs?.forEach((_o, index) => {
+			if (index > ZERO) {
+				setValue(`margin_slabs.${index}.lower_limit`, Number(margin_slabs[index - ONE].upper_limit) + ONE);
+			} else {
+				setValue(`margin_slabs.${index}.lower_limit`, '0');
+			}
+		});
+	}, [margin_slabs, setValue]);
+
+	useEffect(() => {
+		margin_slabs?.forEach((_o, index) => {
+			if (index === ZERO) {
+				customFieldArrayControls.margin_slabs[index] = {
+					lower_limit: { disabled: true },
+				};
+			}
+
+			if (index > ZERO) {
+				customFieldArrayControls.margin_slabs[index] = {
+					lower_limit: { disabled: true },
+				};
+			}
+		});
+	}, [margin_slabs, customFieldArrayControls?.margin_slabs]);
 
 	useEffect(() => {
 		if (!initialCall) {
@@ -158,6 +118,19 @@ function Create({ type = 'create', item = {} }) {
 			initialCall = true;
 		}
 	}, [controls, setIdValues, formValues?.service]);
+
+	const handleFormSubmit = getHandleFormSubmit({
+		activeKey,
+		setActiveKey,
+		formValues,
+		item,
+		setIdValues,
+		type,
+		agent_id,
+		router,
+		updateForm,
+		submitForm,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -184,7 +157,14 @@ function Create({ type = 'create', item = {} }) {
 				{
 				activeKey === 'customize' ? (
 					<div>
-						<Layout controls={controls} control={control} fields={fields} />
+						<Layout
+							controls={controls}
+							control={control}
+							fields={fields}
+							errors={errors}
+							showElements={showElements}
+							customFieldArrayControls={customFieldArrayControls}
+						/>
 						<Button
 							onClick={handleSubmit(handleFormSubmit)}
 						>
@@ -202,6 +182,8 @@ function Create({ type = 'create', item = {} }) {
 								control={control}
 								data={item}
 								watch={watch}
+								errors={errors}
+								customFieldArrayControls={customFieldArrayControls}
 							/>
 							<Button
 								onClick={handleSubmit(handleFormSubmit)}

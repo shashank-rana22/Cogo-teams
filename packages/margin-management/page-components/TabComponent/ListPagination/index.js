@@ -3,14 +3,14 @@ import { Pagination } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function ListPagination({ paginationProps = {} }) {
-	const { params = {}, setParams = () => {}, data = {} } = paginationProps;
+	const { filterParams = {}, setFilterParams = () => {}, data = {} } = paginationProps;
 	const setPage = (val) => {
-		setParams({ ...params, page: val });
+		setFilterParams({ ...filterParams, page: val });
 	};
 	return (
 		<div className={styles.pagination}>
 			<Pagination
-				currentPage={params.page}
+				currentPage={filterParams.page}
 				onPageChange={setPage}
 				totalItems={data?.total_count}
 				type="table"

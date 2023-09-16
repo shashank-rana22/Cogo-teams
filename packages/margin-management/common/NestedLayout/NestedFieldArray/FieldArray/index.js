@@ -11,7 +11,7 @@ const HEADING_INDEX_OFFSET = 1;
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 function FieldArray({
 	ctrl = {}, control = {}, error = {}, formValues = {}, name = '', index = 0,
-	showElements = {},
+	showElements = {}, customFieldArrayControls = {},
 }) {
 	const {
 		controls = [],
@@ -50,6 +50,7 @@ function FieldArray({
 									name={`${name}.${index}.${nestedName}`}
 									formValues={formValues}
 									showElements={showElements}
+									customFieldArrayControls={customFieldArrayControls}
 
 								/>
 							))}
@@ -68,6 +69,7 @@ function FieldArray({
 							name={`${name}.${index}.${nestedName}`}
 							formValues={formValues}
 							labelName={nestedName}
+							customField={customFieldArrayControls}
 						/>
 					)}
 				</div>

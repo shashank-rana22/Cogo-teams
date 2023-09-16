@@ -16,6 +16,8 @@ function MarginManagement() {
 	} = useListMargins({
 		defaultParams:
 		{ margin_stats_required: true, page_limit: 5 },
+		defaultFilters: { margin_type: 'demand', service: '', status: 'active' },
+
 	});
 	const [marginBreakupData, setMarginBreakupData] = useState({});
 	const [activeTab, setActivetab] = useState('demand');
