@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -10,6 +10,7 @@ import React, { useMemo, useState } from 'react';
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import RolloverDetails from '../../../common/RolloverDetails';
@@ -65,12 +66,9 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 					<RolloverDetails />
 
 					{shipment_data?.is_job_closed && (
-						<div className={styles.job_closed_container}>
-							<Pill className={styles.job_closed_pill} size="lg">
-								{shipment_data?.is_job_closed_financially
-									? 'Financially Closed' : 'Operationally Closed'}
-							</Pill>
-						</div>
+						<JobStatus
+							shipment_data={shipment_data}
+						/>
 					)}
 
 					<ShipmentChat />
