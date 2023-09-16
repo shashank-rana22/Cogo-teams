@@ -8,8 +8,8 @@ import { DEFAULT_GLOBAL_FILTERS } from '../../../constants/default_global_filter
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
 
-import Deviation from './Deviation';
 import Distribution from './Distribution';
+import RateAddition from './RateAddition';
 import ScallableAccuracy from './ScallableAccuracy';
 import styles from './styles.module.css';
 import Views from './Views';
@@ -23,7 +23,7 @@ function DashboardView(props) {
 		data, loading,
 	} = useGetFclFreightRateStats({ filters: globalFilters });
 
-	const { accuracy = [], deviation = [], ...rest } = data || {};
+	const { accuracy = [], ...rest } = data || {};
 
 	let dateString = [];
 	if (start_date) {
@@ -70,7 +70,11 @@ function DashboardView(props) {
 						setGlobalFilters={setGlobalFilters}
 						dateString={dateString}
 					/>
-					<Deviation data={deviation} loading={loading} dateString={dateString} />
+					<RateAddition
+						dateString={dateString}
+						setGlobalFilters={setGlobalFilters}
+						globalFilters={globalFilters}
+					/>
 				</div>
 				<div className={cl`${styles.side_container} ${isHighlighted ? styles.minimise : ''}`}>
 					<Views setView={setView} data={rest} loading={loading} />
