@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import getContentMapping from '../../configurations/get-content-mapping';
-import useGetServiceOpsList from '../../hooks/useGetServiceOpsList';
+import useGetAirlineConfigList from '../../hooks/useGetAirlineConfigList';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,7 @@ function ActionModal({
 	const {
 		apiTrigger: lmsApiTrigger = () => {},
 		loading: lmsLoading = false,
-	} = useGetServiceOpsList();
+	} = useGetAirlineConfigList();
 
 	const handleClick = () => {
 		const { data = {}, type = '' } = modalData || {};

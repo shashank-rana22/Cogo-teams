@@ -3,12 +3,12 @@ import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 import { useRouter } from 'next/router';
 
-const useGetServiceOpsList = () => {
+const useGetAirlineConfigList = () => {
 	const router = useRouter();
 	const [{ data = {}, loading }, trigger] = useRequestAir({
-		url     : '/air-coe/service-ops/list',
+		url     : '/air-coe/airline-config/list',
 		method  : 'GET',
-		authKey : 'get_air_coe_service_ops_list',
+		authKey : 'get_air_coe_airline_config_list',
 	}, { manual: true });
 
 	const apiTrigger = async ({ payload = {}, setModalData = () => {} }) => {
@@ -35,4 +35,4 @@ const useGetServiceOpsList = () => {
 	};
 };
 
-export default useGetServiceOpsList;
+export default useGetAirlineConfigList;

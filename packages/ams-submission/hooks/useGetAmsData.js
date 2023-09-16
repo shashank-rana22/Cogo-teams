@@ -6,7 +6,7 @@ import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 const INIT_PAGE = 1;
-const PREV_DATE = 10;
+const PREV_DATE = 11;
 
 const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, query = '' }) => {
 	const newDate = new Date();

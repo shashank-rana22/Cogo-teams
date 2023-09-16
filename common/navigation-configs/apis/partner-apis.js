@@ -13769,7 +13769,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_air_coe_service_ops_list',
+			api         : 'get_air_coe_airline_config_list',
 			access_type : 'private',
 		},
 	],
