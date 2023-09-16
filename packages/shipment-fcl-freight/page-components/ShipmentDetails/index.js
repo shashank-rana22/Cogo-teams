@@ -24,6 +24,7 @@ const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
 	'containers',
 	'rollover_shipments',
 	'advance_documents',
+	'remaining_closure_days',
 ];
 
 function ShipmentDetails() {
