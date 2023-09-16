@@ -10,7 +10,6 @@ import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 import billingPartyRejectCheckboxList from '../../../../constants/billing-party-remark-checkbox-list';
 import collectionPartyRejectCheckboxList from '../../../../constants/collection-party-remark-checkbox-list';
-import useGetDocumentContent from '../../../../hook/useGetDocumentContent';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import { getCardDataFromId } from '../../../../utils/getCardDataFromId';
@@ -41,6 +40,7 @@ interface ShipmentDetailsCardInterface {
 		lineItemsTab?: boolean,
 	};
 	setCombinedRemarks?: Function;
+	docContent?: string;
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
@@ -60,6 +60,7 @@ function ShipmentDetailsCard({
 	onTabClick = (prop) => (prop),
 	tab = {},
 	setCombinedRemarks = () => {},
+	docContent = '',
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -160,8 +161,6 @@ function ShipmentDetailsCard({
 	const [advancedPaymentObj = {}] = (shipmentDocData?.list
 		?.filter((item) => JSON.parse(JSON.stringify(item?.data || ''))?.invoice_number === billNumber
 		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
-
-	const { docContent } = useGetDocumentContent({ data });
 
 	const handleClickUndo = (id?: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
