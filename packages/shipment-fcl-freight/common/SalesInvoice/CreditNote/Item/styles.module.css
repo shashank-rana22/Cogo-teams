@@ -87,12 +87,12 @@
 		align-items: center;
 
 		svg {
-			margin-right: 5px;
+			margin-right: 4px;
 		}
 
 		& .rejection_reason {
 			display: flex;
-			margin-top: 5px;
+			margin-top: 4px;
 		}
 
 		span {

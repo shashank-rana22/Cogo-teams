@@ -123,7 +123,7 @@ function Item({
 						<div className={styles.invoice_status_and_action}>
 							<div className={styles.status}>
 								<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
-									{startCase(CN_STATUS_MAPPING[itemStatus])}
+									{startCase(CN_STATUS_MAPPING[itemStatus] || '')}
 								</div>
 
 								{itemStatus === 'rejected' && item?.rejection_reason ? (
