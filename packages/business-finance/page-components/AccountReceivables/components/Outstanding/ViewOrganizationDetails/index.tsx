@@ -9,9 +9,7 @@ import styles from './styles.module.css';
 function ViewOrganizationDetails({ selectedOrgId = {}, setSelectedOrgId = () => {} }) {
 	const router = useRouter();
 
-	const {
-		entityCode = '', organizationId = '',
-	} = router.query || {};
+	const { entityCode = '' } = router.query || {};
 
 	return (
 		<div>
@@ -29,7 +27,7 @@ function ViewOrganizationDetails({ selectedOrgId = {}, setSelectedOrgId = () => 
 				item={selectedOrgId}
 				entityCode={entityCode}
 				showElement
-				organizationId={organizationId}
+				organizationId={selectedOrgId?.organizationId || ''}
 			/>
 		</div>
 	);
