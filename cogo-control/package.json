@@ -116,6 +116,7 @@
     "@cogoport/supply-tools": "workspace:0.1.0",
     "@cogoport/error":"workspace:1.0.0",
     "@cogoport/warehouse-management": "workspace:1.0.0",
+    "@cogoport/profile":"workspace:0.1.0",
     "@cogoport/saas": "workspace:0.1.0"
   },
   "browserslist": [

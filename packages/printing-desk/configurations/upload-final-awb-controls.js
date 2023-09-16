@@ -30,7 +30,7 @@ const controls = (t = () => {}) => [
 		label      : t('printingDesk:upload_final_awb_controls_document_label'),
 		type       : 'file',
 		drag       : true,
-		span       : 8,
+		span       : 2,
 		maxSize    : GLOBAL_CONSTANTS.options.upload_file_size['1MB'],
 		uploadType : 'aws',
 		height     : '88',

@@ -8,18 +8,20 @@ import getQueryFilterMapping from './getQueryFilterMapping';
 const BULK_ASSIGN_SEEN_MINUTES = 15;
 
 const TAB_WISE_QUERY_KEY_MAPPING = {
-	all         : 'all_chats_base_query',
-	observer    : 'observer_chats_base_query',
-	groups      : 'group_chats_query',
-	teams       : 'teams_chats_base_query',
-	contacts    : 'contacts_base_query',
-	kamContacts : 'kam_contacts_base_query',
+	all           : 'all_chats_base_query',
+	observer      : 'observer_chats_base_query',
+	groups        : 'group_chats_query',
+	teams         : 'teams_chats_base_query',
+	contacts      : 'contacts_base_query',
+	kamContacts   : 'kam_contacts_base_query',
+	hidden_filter : 'hidden_filter_base_query',
 };
 
 const getModifiedFilters = ({
 	appliedFilters = {},
 	listOnlyMails = false,
 	activeFolder = '',
+	sidFilters = '',
 }) => {
 	const requiredChannels = listOnlyMails
 		? ['email']
@@ -31,7 +33,9 @@ const getModifiedFilters = ({
 			(activeFolder && (activeFolder !== 'all_mails'))
 				? { activeFolder: `show_in_${activeFolder}` } : {}
 		),
-		channels: isEmpty(appliedFilters?.channels) ? requiredChannels : appliedFilters?.channels,
+		channels           : isEmpty(appliedFilters?.channels) ? requiredChannels : appliedFilters?.channels,
+		shipment_serial_id : !isEmpty(appliedFilters?.shipment_serial_id)
+			? appliedFilters?.shipment_serial_id : sidFilters || undefined,
 	};
 };
 
@@ -43,6 +47,7 @@ function getFireStoreQuery({
 	activeSubTab = '',
 	listOnlyMails = false,
 	activeFolder = '',
+	sidFilters = '',
 }) {
 	const filterId = appliedFilters.assigned_to === 'me'
 		? userId
@@ -52,7 +57,7 @@ function getFireStoreQuery({
 	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 	const epochTimestamp = currentTime.getTime();
 
-	const modifiedFilters = getModifiedFilters({ appliedFilters, listOnlyMails, activeFolder });
+	const modifiedFilters = getModifiedFilters({ appliedFilters, listOnlyMails, activeFolder, sidFilters });
 
 	const queryFilterMapping = getQueryFilterMapping({
 		appliedFilters: modifiedFilters,

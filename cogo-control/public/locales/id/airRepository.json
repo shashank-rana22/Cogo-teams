@@ -76,5 +76,10 @@
     "created":"Dibuat",
     "failed_to_upload":"Gagal mengunggah",
     "before":"Sebelum",
-    "after":"Setelah"
+    "after":"Setelah",
+    "ams_mode_field_label": "Modus Ams",
+    "ams_mode_placeholder": "Pilih Mode AMS",
+    "ams_mode_label": "Mode AMS untuk Pasangan Bandara Maskapai ini",
+    "electronic_label": "Elektronik",
+    "manual_label": "Manual"
 }

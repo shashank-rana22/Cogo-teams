@@ -1,11 +1,16 @@
-/* eslint-disable max-len */
+import getLanguageSpecifications from '@cogoport/globalization/utils/getLanguageSpecifications';
 import Document, {
 	Head, Html, Main, NextScript,
 } from 'next/document';
 
 import GTM from './GtmHandler';
 
-function CogoDocument() {
+function CogoDocument({ locale = '' }) {
+	const htmlLanguage = locale === 'default' ? 'en' : locale;
+
+	const selectedFont = getLanguageSpecifications({ locale, accessor: 'link' });
+	const fontFamily = getLanguageSpecifications({ locale, accessor: 'font_family' });
+
 	// const setInitialTheme = `
 	//   function getUserPreference() {
 	//     if(window.localStorage.getItem('theme')) {
@@ -19,13 +24,13 @@ function CogoDocument() {
 	// `;
 
 	return (
-		<Html>
+		<Html lang={htmlLanguage}>
 			<Head>
 				{process.env.NEXT_PUBLIC_GTM_ID && <GTM gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
 				<link
-					href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+					href={`https://fonts.googleapis.com/css2?family=${selectedFont}&display=swap`}
 					rel="stylesheet"
 				/>
 				<link rel="shortcut icon" href="/v2/favicon.ico" />
@@ -33,7 +38,7 @@ function CogoDocument() {
 				<link rel="icon" type="image/png" sizes="32x32" href="/v2/favicon-32x32.png" />
 				<link rel="icon" type="image/png" sizes="16x16" href="/v2/favicon-16x16.png" />
 			</Head>
-			<body>
+			<body style={{ fontFamily }}>
 				{/* <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} /> */}
 				<Main />
 				<NextScript />
