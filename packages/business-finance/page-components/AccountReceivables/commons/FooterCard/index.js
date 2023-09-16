@@ -15,7 +15,9 @@ function FooterCard({ entityCode = '', bulkIrnGenerate = () => {}, bulkIrnLoadin
 		<div className={styles.footer_div}>
 			<div className={styles.total_invoice_count}>
 				<div className={styles.heading_style}>
-					Total Invoice Number&apos;s Selected :
+					{'Total Invoice Number\'s Selected'}
+					{' '}
+					:
 					{' '}
 					<span className={styles.count_ref}>{checkedRows?.length}</span>
 				</div>

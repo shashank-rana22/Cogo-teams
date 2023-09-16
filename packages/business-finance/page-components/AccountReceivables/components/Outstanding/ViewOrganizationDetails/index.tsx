@@ -17,7 +17,7 @@ function ViewOrganizationDetails({ selectedOrgId = {}, setSelectedOrgId = () => 
 				<Button
 					size="lg"
 					themeType="secondary"
-					onClick={() => setSelectedOrgId(null)}
+					onClick={() => setSelectedOrgId({})}
 				>
 					Go Back
 

@@ -7,8 +7,7 @@ import PopoverContent from '../../../../../OverAllOutstanding/OutstandingList/Po
 import styles from './styles.module.css';
 
 function PopoverTags({ data = {}, loading = false, item = {}, handleClick = () => {} }) {
-	const { credit_controller_id, credit_controller_name, tagged_state } = item || {};
-
+	const { credit_controller_id = '', credit_controller_name = '', tagged_state = '' } = item || {};
 	return (
 		<div className={styles.details}>
 			<div className={styles.details}>
