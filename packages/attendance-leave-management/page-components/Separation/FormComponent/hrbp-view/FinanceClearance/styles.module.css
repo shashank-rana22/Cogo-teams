@@ -33,7 +33,8 @@
 }
 
 .pending_color {
-	color: #c26d1a;
+	color: #bf291e;
+	border-radius: 10px;
 }
 
 .approved_color {
@@ -41,7 +42,7 @@
 }
 
 .pending_color_bg {
-	background-color: #f68b21;
+	background-color: #bf291e;
 }
 
 .approved_color_bg {
@@ -70,16 +71,20 @@
 }
 
 .popover_green {
-	padding: 6px;
+	padding: 6px 16px;
+	color: #849e4c;
 	cursor: pointer;
-	background-color: #abcd62;
+	background-color: #f7faef;
+	border-top: 1px solid #e0e0e0;
 	border-radius: 10px;
 }
 
 .popover_red {
-	padding: 6px;
-	margin-bottom: 6px;
+	padding: 6px 16px;
+	margin-bottom: 4px;
+	color: #bf291e;
 	cursor: pointer;
-	background-color: #c26d1a;
+	background-color: #fdebe9;
+	border-top: 1px solid #e0e0e0;
 	border-radius: 10px;
 }

@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 function AdditionalRemarks({ control = {}, isComplete = false, confirmedValues = {} }) {
 	const [showNotes, setShowNotes] = useState(true);
-	// console.log('add remark file log :: ', confirmedValues?.additionalRemarks, isComplete);
 	return (
 		<div className={styles.container} key={confirmedValues}>
 			<div className={styles.heading} aria-hidden onClick={() => setShowNotes(!showNotes)}>

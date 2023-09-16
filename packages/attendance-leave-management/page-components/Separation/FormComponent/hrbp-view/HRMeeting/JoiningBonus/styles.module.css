@@ -4,6 +4,12 @@
 	margin-bottom: 16px;
 	background: #fff;
 	border-radius: 6px;
+
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+	}
 }
 
 .heading {
@@ -23,4 +29,12 @@
 	font-weight: 500;
 	line-height: 16px;
 	color: #cb6464;
+}
+
+.footer {
+	:global {
+		.ui_input_container {
+			margin-top: 6px;
+		}
+	}
 }
