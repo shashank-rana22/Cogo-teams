@@ -10,14 +10,15 @@ import columnsFunc from './Fields';
 import styles from './styles.module.css';
 
 function WeightSlabs() {
+	const [showModal, setShowModal] = useState(false);
 	const {
-		listWeightSlabs: refetchList,
+		listWeightSlabs: refetchList = () => {},
 		data,
 		loading,
 		filters,
-		setFilters,
+		setFilters = () => {},
 	} = useListFclWeightSlabsConfiguration();
-	const [showModal, setShowModal] = useState(false);
+
 	const handleClick = () => {
 		setShowModal({ ...showModal, isEdit: false });
 	};
@@ -33,9 +34,9 @@ function WeightSlabs() {
 	};
 
 	const {
-		apiTrigger,
+		apiTrigger = () => {},
 		loading: apiLoading = false,
-		handleCloseModal,
+		handleCloseModal = () => {},
 	} = useCreateUpdateFclWeightSlabs({
 		item    : showModal,
 		setItem : setShowModal,
@@ -50,6 +51,7 @@ function WeightSlabs() {
 	};
 
 	let heading = 'ADD WEIGHT SLABS';
+
 	if (showModal?.isEdit) {
 		heading = 'UPDATE WEIGHT SLABS';
 	}

@@ -1,8 +1,8 @@
-const fclFreightRateFormatter = ({ values, item }) => {
+const fclFreightRateFormatter = ({ values = {}, item = {} }) => {
 	const payload = {
-		id                     : item.id || undefined,
-		extension_name         : values.extension_name || undefined,
-		line_item_charge_code  : values.line_item_charge_code || undefined,
+		id                     : item?.id || undefined,
+		extension_name         : values?.extension_name || undefined,
+		line_item_charge_code  : values?.line_item_charge_code || undefined,
 		performed_by_id        : values.performed_by_id || undefined,
 		service_provider_id    : values?.service_provider_id || undefined,
 		shipping_line_id       : values?.shipping_line_id || undefined,

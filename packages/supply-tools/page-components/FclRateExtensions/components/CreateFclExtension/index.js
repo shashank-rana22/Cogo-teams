@@ -19,11 +19,11 @@ function CreateFclExtension({ refetch = () => {} }) {
 	});
 
 	const handleSubmitForm = ({ data }) => {
-		const checkChargeDetails = (data.line_item_charge_code
-			&& data.gri_currency
-			&& data.gri_rate)
-			|| (data.line_item_charge_code === data.gri_currency
-				&& data.gri_currency === data.gri_rate);
+		const checkChargeDetails = (data?.line_item_charge_code
+			&& data?.gri_currency
+			&& data?.gri_rate)
+			|| (data?.line_item_charge_code === data?.gri_currency
+				&& data?.gri_currency === data?.gri_rate);
 
 		if (!checkChargeDetails) {
 			Toast.error('Please fill all the charge details');

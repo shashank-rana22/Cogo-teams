@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
 const useListFclWeightSlabsConfiguration = () => {
 	const [filters, setFilters] = useState({
 		page: 1,
@@ -12,22 +14,23 @@ const useListFclWeightSlabsConfiguration = () => {
 		scope  : 'partner',
 	});
 
+	const { page = 1 } = filters;
+
 	const listWeightSlabs = useCallback(async () => {
 		try {
-			const { page } = filters;
 			await trigger({
 				params: {
 					page,
 				},
 			});
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
-	}, [filters, trigger]);
+	}, [trigger, page]);
 
 	useEffect(() => {
 		listWeightSlabs();
-	}, [listWeightSlabs]);
+	}, [listWeightSlabs, filters]);
 
 	return {
 		listWeightSlabs,

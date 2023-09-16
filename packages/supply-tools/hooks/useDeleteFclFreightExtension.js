@@ -1,17 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
-const useDeleteFclFreightExtension = (refetch) => {
-	const {
-		general: { scope },
-	} = useSelector((state) => state);
-
+const useDeleteFclFreightExtension = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_fcl_freight_rate_extension_rule_set',
 		method : 'POST',
-		scope,
-	}, { manual: false });
+	}, { manual: true });
 
 	const deleteFclFreight = async (item) => {
 		try {
@@ -19,7 +13,7 @@ const useDeleteFclFreightExtension = (refetch) => {
 				data: { id: item?.id, status: 'inactive' },
 			});
 			if (!res?.hasError) {
-				Toast.success(' Deleted Successfully');
+				Toast.success('Deleted Successfully');
 				refetch();
 			}
 		} catch (error) {

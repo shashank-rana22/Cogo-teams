@@ -37,7 +37,7 @@ const getCreateUpdateWeightSlabPayload = ({ values, item, isCogoAssured }) => {
 		shipping_line_id          : shipping_line_id || undefined,
 		service_provider_id       : service_provider_id || undefined,
 		importer_exporter_id      : importer_exporter_id || undefined,
-		is_cogo_assured           : isCogoAssured,
+		is_cogo_assured           : !!isCogoAssured,
 		container_size            : container_size || undefined,
 		commodity                 : commodity || undefined,
 		max_weight                : Number(max_weight) || undefined,

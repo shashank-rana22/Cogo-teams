@@ -2,8 +2,8 @@ import useDeleteWeightSlabs from '../../../hooks/useDeleteWeightSlabs';
 
 import fclColumns from './fcl-freight-slabs';
 
-const useGetColumns = ({ setShowModal, refetch }) => {
-	const { deleteWeightSlabs } = useDeleteWeightSlabs(refetch);
+const useGetColumns = ({ setShowModal = () => {}, refetch = () => {} }) => {
+	const { deleteWeightSlabs = () => {} } = useDeleteWeightSlabs({ refetch });
 	const handleAction = (item) => {
 		setShowModal({ ...item, isEdit: true });
 	};

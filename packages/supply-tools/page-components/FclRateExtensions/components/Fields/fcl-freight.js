@@ -13,7 +13,7 @@ const ZERO_GRI_RATE = 0;
 const CLUSTER_SPLIT_INDEX = 1;
 
 const fclColumnFunc = ({ setShow, refetch }) => {
-	const { deleteFclFreight } = useDeleteFclFreightExtension(refetch);
+	const { deleteFclFreight } = useDeleteFclFreightExtension({ refetch });
 
 	const columns = [
 		{
