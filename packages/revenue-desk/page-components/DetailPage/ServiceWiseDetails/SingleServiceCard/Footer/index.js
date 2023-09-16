@@ -57,7 +57,7 @@ function Footer({ data = {} }) {
 			<div className={styles.wallet_container}>
 				<div className={styles.wallet_text}>
 					Wallet Balance -
-					<span className={walletAmount > ZERO_VALUE ? styles.price_text : styles.red_text}>
+					<span className={wallet_amount > ZERO_VALUE ? styles.price_text : styles.red_text}>
 						{formatAmount({
 							amount  : wallet_amount,
 							currency,
