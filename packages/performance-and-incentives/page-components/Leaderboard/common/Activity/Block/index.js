@@ -1,6 +1,6 @@
 import { IcMAccountEnrichment, IcMAccounts, IcMEngagement, IcMShipment } from '@cogoport/icons-react';
 
-import ACTIVITY_CONSTANTS from '../../../constants/activity-constants';
+import ACTIVITY_CONSTANTS from '../../../../../constants/activity-constants';
 
 import styles from './styles.module.css';
 

@@ -1,0 +1,32 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.heading {
+	margin-bottom: 0;
+	font-size: 18px;
+}
+
+.block_container {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 32px;
+}
+
+.activity_container {
+	display: flex;
+	flex-basis: 30%;
+	align-items: center;
+}
+
+.value {
+	margin-right: 8px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.activity {
+	color: #828282;
+}
