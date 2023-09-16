@@ -97,7 +97,7 @@ function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = (
 
 								</Button>
 								<Button
-									disabled={complete}
+									disabled={is_complete}
 									themeType="primary"
 									onClick={() => handleSubmit(onSubmit)()}
 								>
