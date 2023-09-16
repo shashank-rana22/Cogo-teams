@@ -1,6 +1,6 @@
 const getTagPayload = ({ value = {}, forUpdate = false, data = {} }) => {
-	const { tags, location_ids, ...restControls } = value;
-	const tagStrings = tags.map((tag) => tag.tag).filter((tag) => !!tag);
+	const { tags = [], location_ids, ...restControls } = value || {};
+	const tagStrings = tags.map((tag) => tag?.tag).filter((tag) => !!tag);
 	const loc_ids = (forUpdate) ? [location_ids].flat() : location_ids;
 
 	const withTagPayload = {

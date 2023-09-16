@@ -19,7 +19,7 @@ function ViewLocations({ setShowViewLocations = () => {}, item:itemData = {} }) 
 
 	const filteredLocations = searchVal
 		? (data || [])?.filter(
-			(location) => startCase(location?.display_name)?.toLowerCase()?.includes(searchVal.toLowerCase()),
+			(location) => startCase(location?.display_name)?.toLowerCase()?.includes(searchVal?.toLowerCase()),
 		)
 		: data;
 

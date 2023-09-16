@@ -11,7 +11,7 @@ function LocationCard({ name = '', type = '' }) {
 				<Pill
 					size="lg"
 					style={{ width: 'fit-content' }}
-					className={styles[type.includes('port') ? type : 'land']}
+					className={styles[type?.includes('port') ? type : 'land']}
 				>
 					{startCase(type)}
 				</Pill>

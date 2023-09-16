@@ -29,7 +29,7 @@ function CardList({
 		{
 			Header   : 'LOADING...',
 			accessor : (item) => (
-				<Placeholder key={item.id} />
+				<Placeholder key={item?.id} />
 			),
 		},
 	];

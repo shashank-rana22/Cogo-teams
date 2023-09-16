@@ -24,9 +24,7 @@ function SearchLocations({
 				)}
 				placeholder="Search for location"
 				value={searchVal}
-				onChange={(e) => {
-					setSearchVal(e);
-				}}
+				onChange={setSearchVal}
 				onBlur={() => {
 					setShowInput(false);
 					setIsFocused(false);

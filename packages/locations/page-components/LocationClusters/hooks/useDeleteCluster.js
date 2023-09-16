@@ -18,7 +18,7 @@ const useDeleteCluster = ({ refetch = () => {}, data = {} }) => {
 				},
 			});
 			Toast.success('Cluster Deleted Successfully');
-			await refetch();
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}

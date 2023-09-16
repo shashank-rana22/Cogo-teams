@@ -14,12 +14,12 @@ function CardButtons({ item = {}, getLocationData = () => {} }) {
 	const [showViewLocations, setShowViewLocations] = useState(false);
 	const [showDelete, setShowDelete] = useState(false);
 
-	const { handleDeleteCluster } = useDeleteCluster({
+	const { handleDeleteCluster = () => {} } = useDeleteCluster({
 		refetch : getLocationData,
 		data    : item,
 	});
 	const newControls = controls.map((ctrl) => {
-		if (ctrl.name !== 'tags') {
+		if (ctrl?.name !== 'tags') {
 			return {
 				...ctrl,
 				value: item?.[ctrl.name],
@@ -30,7 +30,12 @@ function CardButtons({ item = {}, getLocationData = () => {} }) {
 			value: item?.tags?.map((val) => ({ tag: val })),
 		};
 	});
-	const { handleUpdateCluster } = useUpdateCluster({ setShow: false, refetch: getLocationData, data: item });
+
+	const { handleUpdateCluster = () => {} } = useUpdateCluster({
+		setShow : false,
+		refetch : getLocationData,
+		data    : item,
+	});
 
 	const deleteHanlder = () => {
 		handleDeleteCluster();

@@ -18,7 +18,7 @@ const useUpdateCluster = ({ setShow = () => {}, refetch = () => {}, data = {} })
 			});
 			Toast.success('Cluster Created Successfully');
 			setShow(false);
-			await refetch();
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}
