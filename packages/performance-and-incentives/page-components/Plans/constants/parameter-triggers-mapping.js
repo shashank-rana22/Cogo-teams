@@ -39,7 +39,7 @@ const PARAM_TRIGGERS_MAPPING = {
 		provisional_trigger : 'email_log_created',
 		realised_trigger    : 'email_log_created',
 	},
-	chat_attended_within_TAT: {
+	chat_attended_within_tat: {
 		provisional_trigger : 'chat_log_created',
 		realised_trigger    : 'chat_log_created',
 	},
@@ -79,7 +79,7 @@ const PARAM_TRIGGERS_MAPPING = {
 		provisional_trigger : 'quotation_sent',
 		realised_trigger    : 'quotation_sent',
 	},
-	cancellations_by_KAM: {
+	cancellations_by_kam: {
 		provisional_trigger : 'SID cancelled',
 		realised_trigger    : 'SID cancelled',
 	},
