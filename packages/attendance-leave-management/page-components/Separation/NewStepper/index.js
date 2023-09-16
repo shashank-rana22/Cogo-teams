@@ -6,25 +6,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-// const apiData = {
-// 	hr_meet      : 'completed',
-// 	rm_clearance : {
-// 		rm_clearance   : 'active',
-// 		review_request : 'completed',
-// 		assign_hoto    : 'pending',
-// 	},
-// 	finance_clearance : 'pending',
-// 	hoto_clearance    : 'pending',
-// 	admin_clearance   : 'pending',
-// 	tech_clearance    : 'pending',
-// 	exit_interview    : {
-// 		exit_interview      : 'pending',
-// 		interview_scheduled : 'pending',
-// 		feedback_form       : 'pending',
-// 		interview_completed : 'pending',
-// 	},
-// };
-
 const API_DATA_MAPPING = {
 	hr_meet             : 'hr_meet',
 	rm_clearance        : 'rm_clearance.rm_clearance',
@@ -36,8 +17,7 @@ const API_DATA_MAPPING = {
 	tech_clearance      : 'tech_clearance',
 	exit_interview      : 'exit_interview.exit_interview',
 	interview_scheduled : 'exit_interview.interview_scheduled',
-	feedback_form       : 'exit_interview.feedback_form',
-	interview_completed : 'interview_completed',
+	interview_completed : 'exit_interview.interview_completed',
 };
 
 function SubStep({ description = '', stepCompleted = false, stepActive = false }) {
@@ -49,6 +29,7 @@ function SubStep({ description = '', stepCompleted = false, stepActive = false }
                 ${cl.ns('stepper_step')}
                 ${stepCompleted ? cl.ns('stepper_step_completed') : ''}
 				${stepActive ? styles.sub_step_active : ''}
+				${styles.cursor_auto}
             `}
 			role="presentation"
 		>
@@ -107,7 +88,6 @@ function Step({
                 ${stepCompleted ? cl.ns('stepper_step_completed') : ''}
             `}
 				role="presentation"
-				// onClick={onClick}
 			>
 				<div
 					className={cl`
@@ -141,7 +121,11 @@ function Step({
 				/>
 				<div style={{ padding: '12px 8px' }}>
 					{items.length > GLOBAL_CONSTANTS.zeroth_index ? items.map((val, index) => (
-						<div key={val.title}>
+						<div
+							key={val.title}
+							onClick={(e) => e.stopPropagation()}
+							aria-hidden
+						>
 							<SubStep
 								num={(index + GLOBAL_CONSTANTS.one).toString()}
 								description={val.title}
@@ -160,12 +144,13 @@ function Step({
 function Stepper({
 	id = 0,
 	className = '',
-	style,
+	style = {},
 	items = [],
 	shadowed = false,
 	direction = 'horizontal',
 	enableForwardClick = false,
 	data = {},
+	handleCurrentTask = () => {},
 }) {
 	return (
 		<div
@@ -187,6 +172,8 @@ function Stepper({
                             ${cl.ns('stepper_step_map')}
                         `}
 					key={item.key}
+					onClick={() => handleCurrentTask(item.view_type)}
+					aria-hidden
 				>
 
 					<Step

@@ -160,3 +160,7 @@
 		}
 	}
 }
+
+.cursor_auto {
+	cursor: default;
+}

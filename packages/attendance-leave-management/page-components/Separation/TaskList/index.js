@@ -8,35 +8,35 @@ import styles from './styles.module.css';
 // const INCREMENT = 1;
 // const INITIALIZE_WITH_ZERO = 0;
 
-const apiData = {
-	hr_meet      : 'completed',
-	rm_clearance : {
-		rm_clearance   : 'active',
-		review_request : 'pending',
-		assign_hoto    : 'completed',
-	},
-	finance_clearance : 'active',
-	hoto_clearance    : 'completed',
-	admin_clearance   : 'pending',
-	tech_clearance    : 'pending',
-	exit_interview    : {
-		exit_interview      : 'active',
-		interview_scheduled : 'pending',
-		feedback_form       : 'pending',
-		interview_completed : 'pending',
-	},
-};
+// const apiData = {
+// 	hr_meet      : 'completed',
+// 	rm_clearance : {
+// 		rm_clearance   : 'active',
+// 		review_request : 'pending',
+// 		assign_hoto    : 'completed',
+// 	},
+// 	finance_clearance : 'active',
+// 	hoto_clearance    : 'completed',
+// 	admin_clearance   : 'pending',
+// 	tech_clearance    : 'pending',
+// 	exit_interview    : {
+// 		exit_interview      : 'active',
+// 		interview_scheduled : 'pending',
+// 		feedback_form       : 'pending',
+// 		interview_completed : 'pending',
+// 	},
+// };
 
 const data_tasklist = [
 	{
 		title     : 'HR Meet',
 		key       : 'hr_meet',
-		view_type : 'hr',
+		view_type : 'hr_meet',
 	},
 	{
 		title   	 : 'RM Clearance',
 		key     	 : 'rm_clearance',
-		view_type : 'rm',
+		view_type : 'manager_clearance',
 		subtask   : [
 			{
 				title : 'Review Request',
@@ -51,34 +51,31 @@ const data_tasklist = [
 	{
 		title     : 'Finance clearance',
 		key       : 'finance_clearance',
-		view_type : 'finance',
+		view_type : 'finance_clearance',
 	},
 	{
 		title     : 'HOTO Clearance',
 		key       : 'hoto_clearance',
-		view_type : 'hoto',
+		view_type : 'hoto_clearance',
 	},
 	{
 		title     : 'Admin Clearance',
 		key       : 'admin_clearance',
-		view_type : 'admin',
+		view_type : 'admin_clearance',
 	},
 	{
 		title     : 'Tech Clearance',
 		key       : 'tech_clearance',
-		view_type : 'tech',
+		view_type : 'tech_clearance',
 	},
 	{
-		title 	 : 'Exit Interview',
-		key   	 : 'exit_interview',
-		subtask : [
+		title   	 : 'Exit Interview',
+		key     	 : 'exit_interview',
+		view_type : 'exit_interview',
+		subtask   : [
 			{
 				title : 'Interview Scheduled',
 				key   : 'interview_scheduled',
-			},
-			{
-				title : 'Feedback Form',
-				key   : 'feedback_form',
 			},
 			{
 				title : 'Interview Completed',
@@ -97,7 +94,9 @@ const data_tasklist = [
 // 	);
 // }
 
-function TaskList({ view_type = 'admin' }) {
+function TaskList({ view_type = 'hrbp_clearance', apiData = {}, setCurrentComponent = () => {} }) {
+	console.log('view_type', view_type, apiData);
+
 	// const [task_active, setTaskActive] = useState(INITIALIZE_WITH_ZERO);
 	// const [is_sub, setIsSub] = useState(false);
 	// const [sub_id, setSubId] = useState(INITIALIZE_WITH_ZERO);
@@ -122,7 +121,12 @@ function TaskList({ view_type = 'admin' }) {
 	// 	}
 	// };
 
-	const dataArr = data_tasklist.filter((val) => val.view_type === view_type);
+	const stepperArr = view_type === 'hrbp_clearance' ? data_tasklist
+		: data_tasklist.filter((val) => val.view_type === view_type);
+
+	const handleCurrentTask = (currentTask) => {
+		setCurrentComponent(currentTask);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -140,11 +144,12 @@ function TaskList({ view_type = 'admin' }) {
 				<Stepper
 					// active={task_active}
 					// setActive={setTaskActive}
-					items={dataArr}
+					items={stepperArr}
 					// is_sub={is_sub}
 					// subid={sub_id}
 					direction="vertical"
 					data={apiData}
+					handleCurrentTask={handleCurrentTask}
 				/>
 			</div>
 			{/* <Button onClick={handleNextClicked}>next</Button>
