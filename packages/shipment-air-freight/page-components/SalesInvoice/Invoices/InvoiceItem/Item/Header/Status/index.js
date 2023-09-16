@@ -37,7 +37,7 @@ function Status({
 	return (
 		<div className={styles.invoice_container}>
 			{invoice?.status
-					&& restrictedRevokedStatus.includes(invoice?.status) && (
+					&& restrictedRevokedStatus.includes(invoice?.status) ? (
 						<>
 							<div className={styles.invoice_status}>
 								{startCase(invoice.status || '')}
@@ -50,7 +50,7 @@ function Status({
 								)
 								: null}
 						</>
-			)}
+				) : null}
 
 			{invoice?.processing ? (
 				<div className={styles.reload}>

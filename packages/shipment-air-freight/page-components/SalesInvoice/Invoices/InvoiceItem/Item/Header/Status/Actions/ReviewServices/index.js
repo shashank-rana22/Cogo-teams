@@ -30,6 +30,7 @@ function ReviewServices({
 		apiTrigger({
 			id     : invoice?.id,
 			status : value ? 'reviewed' : undefined,
+			...(invoice?.is_fx_locked ? { is_fx_locked: invoice.is_fx_locked } : null),
 		});
 	};
 
