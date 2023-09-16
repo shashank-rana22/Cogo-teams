@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import {
 	COMMODITY_NAME_MAPPING,
 	FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
@@ -12,6 +11,115 @@ const getOptions = ({ containerType }) => FREIGHT_CONTAINER_COMMODITY_MAPPINGS[c
 	label : COMMODITY_NAME_MAPPING[item].name,
 	value : item,
 }));
+
+const TRADE_TYPE_OPTIONS = [
+	{
+		label : 'Export',
+		value : 'export',
+	},
+	{
+		label : 'Import',
+		value : 'import',
+	},
+];
+
+const CONTAINER_SIZE_OPTIONS = [
+	{
+		label : '20ft',
+		value : '20',
+	},
+	{
+		label : '40ft',
+		value : '40',
+	},
+	{
+		label : '40ft HC',
+		value : '40HC',
+	},
+	{
+		label : '45ft HC',
+		value : '45HC',
+	},
+];
+
+const ORGANIZATION_CATEGORIES = [
+	{
+		label : 'Airline',
+		value : 'airline',
+	},
+	{
+		label : 'Shipping Line',
+		value : 'shipping_line',
+	},
+	{
+		label : 'Shipper',
+		value : 'shipper',
+	},
+	{
+		label : 'Freight Forwarder',
+		value : 'freight_forwarder',
+	},
+	{
+		label : 'Customs Service Provider',
+		value : 'customs_service_provider',
+	},
+	{
+		label : 'Transporter',
+		value : 'transporter',
+	},
+	{
+		label : 'Nvocc',
+		value : 'nvocc',
+	},
+	{
+		label : 'Overseas Agent',
+		value : 'overseas_agent',
+	},
+	{
+		label : 'Iata Agents',
+		value : 'iata_agents',
+	},
+	{
+		label : 'Cfs',
+		value : 'cfs',
+	},
+	{
+		label : 'Courier',
+		value : 'courier',
+	},
+	{
+		label : 'Consolidator',
+		value : 'consolidator',
+	},
+	{
+		label : 'Warehouse',
+		value : 'warehouse',
+	},
+	{
+		label : 'Internal',
+		value : 'internal',
+	},
+	{
+		label : 'Rail',
+		value : 'rail',
+	},
+	{
+		label : 'Attached leased transporter',
+		value : 'attached_leased',
+	},
+	{
+		label : 'Cogoport mituj transporter',
+		value : 'cogoport_mituj',
+	},
+	{
+		label : 'Third party logistics vendor',
+		value : 'third_party_logistics_vendor',
+	},
+	{
+		label : 'Other',
+		value : 'other',
+	},
+];
 
 const MAX_WEIGHT = 18;
 
@@ -28,7 +136,6 @@ const getControls = ({ item }) => [
 		defaultOptions : true,
 		isClearable    : true,
 		span           : 4,
-		showForScope   : ['partner'],
 		showIfMissing  : true,
 		showOptional   : false,
 		params         : {
@@ -53,16 +160,7 @@ const getControls = ({ item }) => [
 		rules          : { required: 'This is required' },
 		value          : item?.trade_type,
 		caret          : true,
-		options      		: [
-			{
-				label : 'Export',
-				value : 'export',
-			},
-			{
-				label : 'Import',
-				value : 'import',
-			},
-		],
+		options      		: TRADE_TYPE_OPTIONS,
 	},
 
 	{
@@ -188,24 +286,7 @@ const getControls = ({ item }) => [
 		value          : item?.container_size,
 		placeholder    : 'Size',
 		optionsListKey : 'container-sizes',
-		options        : [
-			{
-				label : '20ft',
-				value : '20',
-			},
-			{
-				label : '40ft',
-				value : '40',
-			},
-			{
-				label : '40ft HC',
-				value : '40HC',
-			},
-			{
-				label : '45ft HC',
-				value : '45HC',
-			},
-		],
+		options        : CONTAINER_SIZE_OPTIONS,
 
 	},
 	{
@@ -215,85 +296,8 @@ const getControls = ({ item }) => [
 		span         : 3,
 		showOptional : false,
 		value        : item?.organization_category,
-		options      : [
-			{
-				label : 'Airline',
-				value : 'airline',
-			},
-			{
-				label : 'Shipping Line',
-				value : 'shipping_line',
-			},
-			{
-				label : 'Shipper',
-				value : 'shipper',
-			},
-			{
-				label : 'Freight Forwarder',
-				value : 'freight_forwarder',
-			},
-			{
-				label : 'Customs Service Provider',
-				value : 'customs_service_provider',
-			},
-			{
-				label : 'Transporter',
-				value : 'transporter',
-			},
-			{
-				label : 'Nvocc',
-				value : 'nvocc',
-			},
-			{
-				label : 'Overseas Agent',
-				value : 'overseas_agent',
-			},
-			{
-				label : 'Iata Agents',
-				value : 'iata_agents',
-			},
-			{
-				label : 'Cfs',
-				value : 'cfs',
-			},
-			{
-				label : 'Courier',
-				value : 'courier',
-			},
-			{
-				label : 'Consolidator',
-				value : 'consolidator',
-			},
-			{
-				label : 'Warehouse',
-				value : 'warehouse',
-			},
-			{
-				label : 'Internal',
-				value : 'internal',
-			},
-			{
-				label : 'Rail',
-				value : 'rail',
-			},
-			{
-				label : 'Attached leased transporter',
-				value : 'attached_leased',
-			},
-			{
-				label : 'Cogoport mituj transporter',
-				value : 'cogoport_mituj',
-			},
-			{
-				label : 'Third party logistics vendor',
-				value : 'third_party_logistics_vendor',
-			},
-			{
-				label : 'Other',
-				value : 'other',
-			},
-		],
-		placeholder: 'Type here...',
+		options      : ORGANIZATION_CATEGORIES,
+		placeholder  : 'Type here...',
 	},
 	{
 		label         : 'Commodity',

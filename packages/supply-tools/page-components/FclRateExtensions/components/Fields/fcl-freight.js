@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -12,7 +11,7 @@ import styles from './styles.module.css';
 const ZERO_GRI_RATE = 0;
 const CLUSTER_SPLIT_INDEX = 1;
 
-const fclColumnFunc = ({ setShow, refetch }) => {
+const useGetFclColumnFunc = ({ setShow, refetch }) => {
 	const { deleteFclFreight } = useDeleteFclFreightExtension({ refetch });
 
 	const columns = [
@@ -148,7 +147,7 @@ const fclColumnFunc = ({ setShow, refetch }) => {
 						onClick={() => {
 							setShow({ ...item, isEdit: true });
 						}}
-						className="primary sm"
+						themeType="primary"
 					>
 						Update
 					</Button>
@@ -156,7 +155,7 @@ const fclColumnFunc = ({ setShow, refetch }) => {
 						onClick={() => {
 							deleteFclFreight({ ...item, status: 'inactive' });
 						}}
-						className="secondary sm"
+						themeType="secondary"
 					>
 						Delete
 					</Button>
@@ -170,4 +169,4 @@ const fclColumnFunc = ({ setShow, refetch }) => {
 	return columns;
 };
 
-export default fclColumnFunc;
+export default useGetFclColumnFunc;
