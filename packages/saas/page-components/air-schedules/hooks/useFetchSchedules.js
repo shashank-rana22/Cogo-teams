@@ -35,7 +35,7 @@ const useFetchSchedules = () => {
 			const { data } = res;
 			setSchedules(data);
 		} catch (err) {
-			console.log('Unable to fetch schedules. Please try again.');
+			console.error('Unable to fetch schedules. Please try again.');
 		}
 	}, [currentPage, filters, general?.query?.branch_id, schedules?.filter_data, trigger]);
 

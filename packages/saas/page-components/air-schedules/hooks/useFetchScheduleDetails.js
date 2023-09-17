@@ -6,7 +6,6 @@ import { useState, useEffect, useCallback } from 'react';
 const useFetchScheduleDetails = ({
 	pageLimit = 10, id, currentPage,
 }) => {
-	console.log(currentPage, 'currentPage');
 	const {
 		isFirstVisit,
 		user_id,
@@ -62,7 +61,7 @@ const useFetchScheduleDetails = ({
 				},
 			]);
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}, [currentPage, filters, id, pageLimit, user_id, sortBy, trigger]);
 
@@ -95,7 +94,7 @@ const useFetchScheduleDetails = ({
 			]);
 			setActiveFilter(false);
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}, [currentPage, filters, id, pageLimit, user_id, trigger]);
 
