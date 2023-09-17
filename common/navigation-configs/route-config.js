@@ -54,6 +54,7 @@ import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saas from './config/saas';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
@@ -167,6 +168,7 @@ const routeConfig = {
 	...supplyTools,
 	...profile,
 	...tradeParties,
+	...saas,
 };
 
 export default routeConfig;
