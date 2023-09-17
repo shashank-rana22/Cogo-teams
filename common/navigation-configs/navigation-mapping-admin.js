@@ -2289,8 +2289,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'ihls-data_pipeline',
 					title         : t('common:file_processing_dashboard'),
-					href          : '/ihls/data-pipeline',
-					as            : '/ihls/data-pipeline',
+					href          : '/v2/ihls/data-pipeline',
+					as            : '/v2/ihls/data-pipeline',
 					type          : 'link',
 					icon          : IcMDataPipeline,
 					possible_apis : [],
