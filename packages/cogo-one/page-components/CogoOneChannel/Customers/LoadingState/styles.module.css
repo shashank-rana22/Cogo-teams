@@ -1,10 +1,11 @@
 .card_container {
-	padding: 10px 12px;
-	margin-top: 10px;
-	border: 1px solid #e0e0e0;
+	width: 100%;
+	padding: 12px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .card {
+	width: 100%;
 	padding: 8px;
 	cursor: pointer;
 }
@@ -22,15 +23,6 @@
 
 .avatar_container {
 	display: flex;
-}
-
-.list_container {
-	height: 75vh;
-	overflow-y: auto;
-}
-
-.list_container::-webkit-scrollbar {
-	display: none;
 }
 
 .user_activity {

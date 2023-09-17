@@ -44,7 +44,7 @@ function InvoiceFilters({
 					)}
 					onChange={(e) => {
 						setParams({ ...params, page: 1 });
-						setSearchQuery(e.target.value);
+						setSearchQuery(e);
 					}}
 					value={searchQuery}
 					placeholder="Search by Invoice Number"

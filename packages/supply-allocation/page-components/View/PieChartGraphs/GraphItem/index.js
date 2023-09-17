@@ -23,6 +23,7 @@ const HEADINGS_MAPPING = {
 
 const generateData = (data, type) => {
 	const isWeeklyForecast = type === 'weekly_forecasts';
+	const isContainerTypeForecast = type === 'container_type_forecasts';
 
 	return Object.entries(data || {}).reduce(
 		(accumulator, [key, value], index) => {
@@ -44,6 +45,8 @@ const generateData = (data, type) => {
 				label = `${startCase(key)}`;
 				color = COLORS_MAPPING?.[type]?.[key];
 			}
+
+			if (isContainerTypeForecast && key === 'refer') { label = 'Reefer'; }
 
 			return {
 				graphData: [

@@ -2,9 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetKamWiseOutstandingsStats = ({
-	globalFilters,
-}) => {
+const useGetKamWiseOutstandingsStats = ({ viewGraphStats = false }) => {
 	const {
 		profile: { authorizationparameters, selected_agent_id },
 	} = useSelector((state) => state);
@@ -14,16 +12,21 @@ const useGetKamWiseOutstandingsStats = ({
 		method : 'GET',
 	}, { manual: true });
 	useEffect(() => {
-		trigger({
-			params: {
-				is_precovid: 'NO',
-			},
-		});
+		if (viewGraphStats) {
+			trigger({
+				params: {
+					is_precovid : 'NO',
+					filters     : {
+						sales_agent_id: selected_agent_id,
+					},
+				},
+			});
+		}
 	}, [
 		authorizationparameters,
 		selected_agent_id,
-		globalFilters,
 		trigger,
+		viewGraphStats,
 	]);
 
 	return {

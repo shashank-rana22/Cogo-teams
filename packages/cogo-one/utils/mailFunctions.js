@@ -33,7 +33,7 @@ function mailFunction({
 	}) => {
 		if (event?.key === 'Enter' || email) {
 			event?.preventDefault?.();
-			const newEmail = email || newEmailInput;
+			const newEmail = (email || '').trim() || (newEmailInput || '').trim();
 
 			if (!validateEmail(newEmail)) {
 				setErrorValue('Enter valid id');

@@ -4,7 +4,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import useGetControls from '../../../../configurations/filter-controls';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 
 import Item from './Item';
@@ -30,16 +29,9 @@ function FilterComponents({
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	setIsBotSession = () => {},
-	tagOptions = [],
-	viewType,
-	activeSubTab,
+	viewType = '',
+	filterControls = [],
 }) {
-	const filterControls = useGetControls({
-		tagOptions,
-		viewType,
-		activeSubTab,
-	});
-
 	const {
 		control,
 		formState: { errors },

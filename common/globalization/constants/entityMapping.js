@@ -16,6 +16,7 @@ const ENTITY_MAPPING = {
 		id                  : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
+		code                : '101',
 		default_entity_code : '301',
 		GSTIN               : ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
 	},
@@ -26,6 +27,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryNetherland,
 		currency            : 'EUR',
 		default_entity_code : '201',
+		code                : '201',
 		GSTIN               : [],
 	},
 	301: {
@@ -35,6 +37,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
+		code                : '301',
 		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance', 'dunning'],
 		labels              : {
 			irn_label: 'IRN',
@@ -49,6 +52,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountrySingapore,
 		currency            : 'SGD',
 		default_entity_code : '401',
+		code                : '401',
 		GSTIN               : [],
 	},
 	501: {
@@ -57,6 +61,7 @@ const ENTITY_MAPPING = {
 		id                  : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		icon                : IcCCountryVietnam,
 		default_entity_code : '501',
+		code                : '501',
 		currency            : 'VND',
 		GSTIN               : [],
 	},
@@ -66,6 +71,7 @@ const ENTITY_MAPPING = {
 		id                  : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
 		icon                : IcCThailand,
 		default_entity_code : '601',
+		code                : '601',
 		currency            : 'THB',
 		GSTIN               : [],
 	},
@@ -75,6 +81,7 @@ const ENTITY_MAPPING = {
 		id                  : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
 		icon                : IcCIndonesia,
 		default_entity_code : '701',
+		code                : '701',
 		currency            : 'IDR',
 		GSTIN               : [],
 	},
@@ -85,6 +92,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCChina,
 		default_entity_code : '81',
 		currency            : 'CNY',
+		code                : '801',
 		GSTIN               : [],
 	},
 };

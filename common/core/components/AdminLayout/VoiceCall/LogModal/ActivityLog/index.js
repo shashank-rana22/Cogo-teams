@@ -8,6 +8,7 @@ import {
 	TextAreaController,
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -53,6 +54,7 @@ function ActivityLog({
 	type = '',
 	organizationId = '',
 }) {
+	const { profile = {} } = useSelector((state) => state);
 	const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 	const time = GLOBAL_CONSTANTS.formats.time['HH:mm'];
 	return (
@@ -87,6 +89,7 @@ function ActivityLog({
 						initialCall={false}
 						size="md"
 						isClearable
+						value={profile?.user?.id}
 						rules={{ required: true }}
 					/>
 					<div className={styles.error}>{errors?.attendee ? '*required' : null}</div>
@@ -95,12 +98,12 @@ function ActivityLog({
 
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
-					<div className={styles.label}>Title *</div>
+					<div className={styles.label}>Description *</div>
 					<InputController
 						name="title"
 						rules={{ required: true }}
 						size="md"
-						placeholder="Enter title"
+						placeholder="Enter Description"
 						control={control}
 					/>
 					<div className={styles.error}>{errors?.title ? '*required' : null}</div>
@@ -149,7 +152,6 @@ function ActivityLog({
 								showTimeSelect
 								dateFormat={`${date} ${time}`}
 								name="startDateTime"
-								isPreviousDaysAllowed
 								control={control}
 								rules={{ required: true }}
 							/>
@@ -257,7 +259,6 @@ function ActivityLog({
 			<div style={{ margin: '12px 0px' }}>
 				<div className={styles.label}>
 					Add Summary
-					<span style={{ color: '#f68b21' }}>(Optional)</span>
 				</div>
 				<TextAreaController
 					name="summary"
@@ -265,7 +266,9 @@ function ActivityLog({
 					control={control}
 					placeholder="Enter Remarks..."
 					style={{ height: '100px' }}
+					rules={{ required: true }}
 				/>
+				<div className={styles.error}>{errors?.summary ? '*required' : null}</div>
 			</div>
 		</div>
 

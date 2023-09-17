@@ -61,5 +61,5 @@
 	font-size: var(--font-size-xl);
 	font-weight: 700;
 	line-height: 16px;
-	color: #393f70;
+	color: var(--color-secondary-greyscale-2);
 }

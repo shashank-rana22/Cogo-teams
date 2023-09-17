@@ -68,7 +68,14 @@ function JournalVoucher({ entityCode }) {
 				setFilters={setFilters}
 				filters={filters}
 			/>
-			{show ? <CreateJvModal show={show} setShow={setShow} onClose={onClose} refetch={refetch} /> : null}
+			{show ? (
+				<CreateJvModal
+					show={show}
+					setShow={setShow}
+					onClose={onClose}
+					refetch={refetch}
+				/>
+			) : null}
 		</div>
 	);
 }

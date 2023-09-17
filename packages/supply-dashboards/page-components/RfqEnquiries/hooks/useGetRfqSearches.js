@@ -1,15 +1,13 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 const CONSTANT_ONE = 1;
-const useGetRfqSearches = ({ rfqId } = {}) => {
+const useGetRfqSearches = ({ rfqId, relevantToUser } = {}) => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	const isFullAccess = user_profile.partner.user_role_ids
-		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
+
 	const [list, setList] = useState({
 		data       : [],
 		total      : 0,
@@ -23,7 +21,7 @@ const useGetRfqSearches = ({ rfqId } = {}) => {
 			filters: {
 				rfq_id                   : rfqId,
 				is_under_negotiation     : true,
-				relevant_supply_agent_id : !isFullAccess ? user_profile?.user?.id : undefined,
+				relevant_supply_agent_id : relevantToUser ? user_profile?.user?.id : undefined,
 			},
 			page,
 			service_data_required: true,
@@ -51,7 +49,7 @@ const useGetRfqSearches = ({ rfqId } = {}) => {
 					}));
 			});
 		// eslint-disable-next-line
-	}, [page]);
+	}, [page,relevantToUser]);
 
 	return {
 		loading,

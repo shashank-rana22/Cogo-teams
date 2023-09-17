@@ -5,7 +5,7 @@ export { default } from '@cogoport/business-finance/page-components/IncidentMana
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common'])),
+			...(await serverSideTranslations(locale, ['common', 'incidentManagement'])),
 		},
 	};
 }

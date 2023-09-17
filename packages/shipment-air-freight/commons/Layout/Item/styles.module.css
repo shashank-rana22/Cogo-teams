@@ -66,6 +66,11 @@
 	font-weight: 500;
 }
 
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .error {
 	padding-left: 4px;
 	margin: 0;

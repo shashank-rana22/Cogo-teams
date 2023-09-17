@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, {
 	useState,
 	useEffect,
@@ -11,9 +11,30 @@ import React, {
 import stakeholderMappings from './stakeholder-mappings';
 import styles from './styles.module.css';
 
-const TOTAL_STAKEHOLDERS_LENGTH = 2;
 const CHAR_LENGTH = 1;
 const SUGGESTION_LENGTH = 0;
+
+function RenderSuggestions({ suggestions = [], selectedText = '' }) {
+	if (isEmpty(suggestions)) {
+		return null;
+	}
+
+	return (
+		<div className={styles.container} role="listbox">
+			{(suggestions || []).map((item) => (
+				<div
+					key={item}
+					className={styles.options}
+					onKeyPress={selectedText}
+					role="presentation"
+					onClick={() => selectedText(item)}
+				>
+					<div className="text-option">{startCase(item)}</div>
+				</div>
+			))}
+		</div>
+	);
+}
 
 function Sendto(
 	{ data = {}, setStakeHolderView = () => {}, isStakeholder = true },
@@ -24,10 +45,10 @@ function Sendto(
 	const [userName, setUserName] = useState({});
 	const [text, setText] = useState('');
 
-	const stakeholder_type = isStakeholder && data?.channelData?.stakeholder_types?.length < TOTAL_STAKEHOLDERS_LENGTH
-		? data?.channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index] : 'default';
+	const stakeholder_type = isStakeholder ? data?.channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index]
+		: 'default';
 
-	const stakeholders = stakeholderMappings[stakeholder_type];
+	const stakeholders = stakeholderMappings[stakeholder_type] || stakeholderMappings.default;
 
 	const cond = (stakeholders || []).filter((item) => {
 		if (text.includes(item)) {
@@ -81,32 +102,9 @@ function Sendto(
 		setText(`${text.substr(SUGGESTION_LENGTH, text.length - userName.length) + value} `);
 	};
 
-	const renderSuggestions = () => {
-		if (suggestions.length === SUGGESTION_LENGTH) {
-			return null;
-		}
-
-		return (
-			<div className={styles.container} role="listbox">
-				{(suggestions || []).map((item) => (
-					<div
-						key={item}
-						className={styles.options}
-						onKeyPress={selectedText}
-						role="button"
-						tabIndex="0"
-						onClick={() => selectedText(item)}
-					>
-						<div className="text-option">{startCase(item)}</div>
-					</div>
-				))}
-			</div>
-		);
-	};
-
 	return (
 		<>
-			<div>{renderSuggestions()}</div>
+			<RenderSuggestions selectedText={selectedText} suggestions={suggestions} />
 			<div className={styles.send_to_container}>
 				<div className={styles.send_text}>Sending to -</div>
 

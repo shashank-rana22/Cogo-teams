@@ -8,15 +8,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
-	const getSplitted = (str) => {
-		const all = str?.split('\\n');
-		let res = '';
-		(all || []).forEach((ele) => {
-			res += `${ele}\n`;
-		});
-		return res;
-	};
-
 	return (
 		<div
 			className={cl` ${styles.container} ${msg?.created_by_user_id === user_id
@@ -32,13 +23,21 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 					>
 						<div className={styles.details}>
 							<div>
-								<span>
+								<span className={styles.stakeholder_details}>
 									{msg?.created_by_stakeholder ? (
 										<div className={styles.stakeholder}>
 											{msg?.created_by_stakeholder
 														=== 'booking_agent'
-												? 'KAM'
+												? 'CCS'
 												: startCase(msg?.created_by_stakeholder)}
+										</div>
+									) : null}
+
+									{msg?.created_by_user ? (
+										<div className={styles.user}>
+											(
+											{startCase(msg?.created_by_user)}
+											)
 										</div>
 									) : null}
 								</span>
@@ -79,7 +78,7 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 						))}
 
 						{msg?.content ? (
-							<div className={styles.msg}>{`${getSplitted(msg.content)}`}</div>
+							<div className={styles.msg}>{msg.content}</div>
 						) : null}
 					</div>
 				) : null

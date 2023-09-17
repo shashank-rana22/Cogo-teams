@@ -1,15 +1,17 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetInterJvData from '../../apisModal/useGetInterJvData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
-import controls from './contols';
+import getControls from './contols';
 import StyledTableICJV from './StyledTableICJV';
 import styles from './styles.module.css';
 
 function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable = true, row }) {
+	const { t } = useTranslation(['incidentManagement']);
 	const [showICJvModal, setShowICJvModal] = useState(false);
 	const [remark, setRemark] = useState('');
 
@@ -21,6 +23,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 		id,
 		interCompanyJournalVoucherRequest,
 		remark,
+		t,
 	});
 
 	return (
@@ -36,12 +39,12 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 						setShowICJvModal(false);
 					}}
 				>
-					<Modal.Header title="Inter Company - Journal Voucher" />
+					<Modal.Header title={t('incidentManagement:icjv_title')} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.sub_container}>
 							<div className={styles.debit_container}>
-								<div className={styles.color}>Debit  </div>
+								<div className={styles.color}>{t('incidentManagement:debit_header')}</div>
 								<div className={styles.debit}>
 									<div style={{ margin: '0px 2px' }}>
 										{list[0]?.currency}
@@ -51,7 +54,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 							</div>
 
 							<div className={styles.debit_container}>
-								<div className={styles.color}>Credit  </div>
+								<div className={styles.color}>{t('incidentManagement:credit_header')}</div>
 								<div className={styles.debit}>
 									<div style={{ margin: '0px 2px' }}>
 										{list[0]?.currency}
@@ -63,19 +66,19 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 						<div>
 							<StyledTableICJV
 								data={list || []}
-								columns={controls}
+								columns={getControls({ t })}
 								loading={false}
 							/>
 						</div>
 
 						{isEditable && (
 							<>
-								<div className={styles.remarks}>Remarks*</div>
+								<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
 
 								<Textarea
 									name="remark"
 									size="md"
-									placeholder="Enter Remark Here..."
+									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(value: string) => setRemark(value)}
 									style={{ width: '700', height: '100px', marginBottom: '12px' }}
 								/>
@@ -96,7 +99,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 										OnAction('REJECTED');
 									}}
 								>
-									Reject
+									{t('incidentManagement:reject_btn')}
 								</Button>
 
 								<Button
@@ -108,7 +111,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 										OnAction('APPROVED');
 									}}
 								>
-									Approve
+									{t('incidentManagement:approve_btn')}
 								</Button>
 							</div>
 						</Modal.Footer>

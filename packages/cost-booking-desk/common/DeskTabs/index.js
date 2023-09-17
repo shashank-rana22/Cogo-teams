@@ -30,7 +30,7 @@ function DeskTabs() {
 				<TabPanel
 					title={tab?.title}
 					key={tab?.name}
-					name={tab.name}
+					name={tab?.name}
 				/>
 			))}
 		</Tabs>

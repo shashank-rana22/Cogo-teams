@@ -1,17 +1,26 @@
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import PocContainer from '../../../../../common/PocContainer';
 import ShipmentsCard from '../../../../../common/ShipmentsCard';
 
-import PocContainer from './PocContainer';
 import styles from './styles.module.css';
 
 const handleShipmentClick = ({
 	importerExporterPoc = {},
 	setActiveTab = () => {},
 	primaryPocDetails = {},
+	params = {},
+	range = '',
 }) => {
-	const showActiveUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
+	const { query = '', shipmentType = '' } = params || {};
+
+	const newHashUrl = `sid=${query}${shipmentType ? `&shipmentType=${shipmentType}` : ''}
+	${range && range !== 'custom' ? `&range=${range}` : ''}`;
+
+	window.location.hash = newHashUrl;
+
+	const activeUserChat = !isEmpty(primaryPocDetails) ? primaryPocDetails : importerExporterPoc;
 
 	const {
 		id: userId = '',
@@ -19,7 +28,7 @@ const handleShipmentClick = ({
 		email = '',
 		mobile_country_code = '',
 		mobile_number = '',
-	} = showActiveUserChat || {};
+	} = activeUserChat || {};
 
 	const chatData = {
 		user_id                 : userId,
@@ -50,8 +59,11 @@ function ShipmentCard({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
-	showAddPrimaryUserButton = false,
+	viewType = '',
 	mailProps = {},
+	showModalType = () => {},
+	params = {},
+	range = '',
 }) {
 	const {
 		serial_id = '',
@@ -82,7 +94,13 @@ function ShipmentCard({
 			role="presentation"
 			className={styles.container}
 			key={key}
-			onClick={() => handleShipmentClick({ importerExporterPoc, primaryPocDetails, setActiveTab })}
+			onClick={() => handleShipmentClick({
+				importerExporterPoc,
+				primaryPocDetails,
+				setActiveTab,
+				params,
+				range,
+			})}
 		>
 			<ShipmentsCard
 				setShowPocDetails={setShowPocDetails}
@@ -92,8 +110,10 @@ function ShipmentCard({
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
-				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				viewType={viewType}
 				handleShipmentChat={handleShipmentChat}
+				setActiveTab={setActiveTab}
+				showModalType={showModalType}
 			/>
 		</div>
 	);

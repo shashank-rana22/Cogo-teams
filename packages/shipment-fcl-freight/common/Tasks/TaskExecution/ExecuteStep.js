@@ -1,10 +1,11 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
 
+import ApprovalModal from './ApprovalModal';
 import BookingPreferenceCard from './CustomTasks/UploadBookingNote/components/Step0/BookingPreferenceCard';
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
@@ -12,6 +13,7 @@ import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
 import RestrictTask from './RestrictTask';
 import styles from './styles.module.css';
+import prefillChanges from './utils/prefillChanges';
 
 function ExecuteStep({
 	task = {},
@@ -24,6 +26,9 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const [showApprovalModal, setShowApprovalModal] = useState(false);
+	const [approvalChanges, setApprovalChanges] = useState({});
+
 	const { options, allCommodity } = useGetCommodityOptions({ task });
 
 	const {
@@ -74,7 +79,7 @@ function ExecuteStep({
 		showElements,
 	});
 
-	const handleTaskSubmit = async () => {
+	const handleApiSubmit = async () => {
 		if (isShipmentRolloverable && editBookingParams) {
 			setIsLoading(true);
 
@@ -86,6 +91,21 @@ function ExecuteStep({
 			}
 		} else {
 			handleSubmit(onSubmit)();
+		}
+		setShowApprovalModal(false);
+	};
+
+	const handleTaskSubmit = () => {
+		const changes = prefillChanges({
+			config     : stepConfig,
+			formValues : watch(),
+		});
+
+		if (!isEmpty(changes) && isEmpty(errors)) {
+			setApprovalChanges(changes);
+			setShowApprovalModal(true);
+		} else {
+			handleApiSubmit();
 		}
 	};
 
@@ -140,7 +160,18 @@ function ExecuteStep({
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>
+
+			{showApprovalModal ? (
+				<ApprovalModal
+					approvalChanges={approvalChanges}
+					showModal={showApprovalModal}
+					loading={isLoading}
+					handleApprove={handleApiSubmit}
+					setShowModal={setShowApprovalModal}
+				/>
+			) : null}
 		</div>
+
 	);
 }
 

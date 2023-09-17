@@ -1,0 +1,23 @@
+.form_item {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_select_input_control {
+			font-size: 14px !important;
+		}
+	}
+}
+
+.label {
+	display: flex;
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #000;
+}
+
+.required_mark {
+	margin-left: 4px;
+	color: #e74c3c;
+}

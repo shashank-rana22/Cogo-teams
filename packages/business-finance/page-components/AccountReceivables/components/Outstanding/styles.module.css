@@ -3,8 +3,15 @@
 
 	:global {
 		.ui_tab_container {
+			width: 200px;
 			padding: 10px;
 			border-radius: 4px;
 		}
 	}
+}
+
+.select {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 12px;
 }

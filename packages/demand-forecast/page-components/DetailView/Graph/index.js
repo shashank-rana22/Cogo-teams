@@ -35,21 +35,34 @@ const getDateLabel = (dates = []) => {
 
 const getGraphData = ({ graphInfo = {}, key }) => {
 	const graphData = Object.keys(graphInfo).map((graphInfoKey) => {
+		let label = startCase(graphInfoKey);
+		let id = label;
+
 		if (key === 'weekly_forecasts') {
-			return {
-				id    : getDateLabel(JSON.parse(graphInfoKey)),
-				label : getDateLabel(JSON.parse(graphInfoKey)),
-				value : graphInfo[graphInfoKey],
-			};
+			const parsedGraphInfoKey = JSON.parse(graphInfoKey);
+			id = getDateLabel(parsedGraphInfoKey);
+			label = id;
+		}
+
+		if (key === 'container_size_forecasts') {
+			label += ' ft';
+		}
+
+		if (key === 'container_type_forecasts' && graphInfoKey === 'refer') {
+			label = 'Reefer';
+		}
+
+		if (key === 'persona_forecasts') {
+			label = label.toUpperCase();
 		}
 
 		return {
-			id    : startCase(graphInfoKey),
-			label : `${startCase(graphInfoKey)} ${key === 'container_size_forecasts' ? 'ft' : ''}`,
-			value : graphInfo[graphInfoKey],
-
+			id,
+			label,
+			value: graphInfo[graphInfoKey],
 		};
 	});
+
 	return graphData;
 };
 

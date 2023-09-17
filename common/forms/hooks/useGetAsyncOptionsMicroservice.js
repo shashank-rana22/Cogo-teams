@@ -123,7 +123,7 @@ function useGetAsyncOptionsMicroservice({
 			const res = await triggerSingle({
 				params: merge(params, (searchByq ? { q: value } : { filters: { [valueKey]: value } })),
 			});
-			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || res?.data?.items[GLOBAL_CONSTANTS.zeroth_index]
+			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || res?.data?.items?.[GLOBAL_CONSTANTS.zeroth_index]
 			|| res?.data?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			// console.log(err);

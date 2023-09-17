@@ -23,7 +23,7 @@ function FilterpopOver({
 		setFilters((p) => ({ ...p, [name]: val }));
 	};
 	return (
-		<div>
+		<div className={styles.popover}>
 			<Popover
 				visible={show}
 				placement="bottom"
@@ -48,9 +48,8 @@ function FilterpopOver({
 					onClick={() => {
 						setShow(!show);
 					}}
+					style={{ backgroundColor: '#ee3425' }}
 				>
-					Filters
-					{' '}
 					<IcMFilter className={styles.style_filter_button} />
 				</Button>
 			</Popover>

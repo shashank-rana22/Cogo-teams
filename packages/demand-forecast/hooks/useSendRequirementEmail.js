@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 
 const useSendRequirementEmail = () => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/send_requirement_email',
+		url    : '/send_rolling_forecast_requirement_email',
 		method : 'POST',
 	}, { manual: true });
 

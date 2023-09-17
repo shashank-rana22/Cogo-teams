@@ -23,6 +23,11 @@ const ICON_MAPPING = {
 	rejected             : <IcMCrossInCircle {...ICON_STYLE} />,
 };
 
+const COLOR_MAP = {
+	active  : '#67c676',
+	default : '#ed3726',
+};
+
 const iconFilterMapping = [
 	{
 		icon       : IcMArrowRotateUp,
@@ -38,18 +43,20 @@ const iconFilterMapping = [
 	},
 ];
 
-const renderToolTipContent = (UNIQUE_SERVICES) => (
-	<div>
-		{(UNIQUE_SERVICES || []).map((item, index) => {
-			if (index === GLOBAL_CONSTANTS.zeroth_index) {
-				return null;
-			}
-			return <div key={item}>{startCase(item)}</div>;
-		})}
-	</div>
-);
+function RenderToolTipContent({ UNIQUE_SERVICES = [] }) {
+	return (
+		<div>
+			{(UNIQUE_SERVICES || []).map((item, index) => {
+				if (index === GLOBAL_CONSTANTS.zeroth_index) {
+					return null;
+				}
+				return <div key={item}>{startCase(item)}</div>;
+			})}
+		</div>
+	);
+}
 
-const renderUniqueServices = ({ services, type }) => {
+function RenderUniqueServices({ services = [], type = '' }) {
 	if (isEmpty(services)) return null;
 
 	const UNIQUE_SERVICES = [];
@@ -70,7 +77,7 @@ const renderUniqueServices = ({ services, type }) => {
 		<div style={{ display: 'flex' }}>
 			{startCase(UNIQUE_SERVICES?.[GLOBAL_CONSTANTS.zeroth_index])}
 			<Tooltip
-				content={renderToolTipContent(UNIQUE_SERVICES)}
+				content={<RenderToolTipContent UNIQUE_SERVICES={UNIQUE_SERVICES} />}
 				placement="left"
 			>
 				{length - FIRST_INDEX > GLOBAL_CONSTANTS.zeroth_index ? (
@@ -84,17 +91,18 @@ const renderUniqueServices = ({ services, type }) => {
 			</Tooltip>
 		</div>
 	);
-};
+}
 
-const useVendorList = () => {
+const useVendorList = ({ activeEntity = '', active = '' }) => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState();
 
 	const [params, setParams] = useState({
 		filters: {
-			status : 'active',
-			q      : searchQuery || undefined,
+			status         : active || 'active',
+			q              : searchQuery || undefined,
+			cogo_entity_id : activeEntity,
 		},
 		page                     : 1,
 		pagination_data_required : true,
@@ -115,10 +123,12 @@ const useVendorList = () => {
 			...prevParams,
 			filters: {
 				...prevParams.filters,
-				q: searchQuery || undefined,
+				status         : active ? 'active' : 'inactive',
+				q              : searchQuery || undefined,
+				cogo_entity_id : activeEntity || undefined,
 			},
 		}));
-	}, [searchQuery]);
+	}, [searchQuery, activeEntity, active]);
 
 	const handleViewMore = (id) => {
 		const HREF = '/vendors/[vendor_id]';
@@ -134,31 +144,33 @@ const useVendorList = () => {
 	const expectedFilters = ['category', 'sub_categpry', 'registration_number'];
 	const isFilterInUse = expectedFilters.some((item) => Object.keys(params?.filters).includes(item));
 
-	const getHeader = () => (
-		<div className={styles.created_at_header}>
-			<div>
-				CREATED AT
+	function GetHeader() {
+		return (
+			<div className={styles.created_at_header}>
+				<div>
+					CREATED AT
+				</div>
+				<div className={styles.filter_icon_container}>
+					{
+						iconFilterMapping.map((item) => {
+							const { icon: Icon, filterType = '', style = {} } = item;
+							return (
+								<Icon
+									key={filterType}
+									fill={item[params?.sort_type] || '#000'}
+									onClick={() => setParams((pv) => ({
+										...pv,
+										sort_type: filterType,
+									}))}
+									style={style}
+								/>
+							);
+						})
+					}
+				</div>
 			</div>
-			<div className={styles.filter_icon_container}>
-				{
-					iconFilterMapping.map((item) => {
-						const { icon: Icon, filterType = '', style = {} } = item;
-						return (
-							<Icon
-								key={filterType}
-								fill={item[params?.sort_type] || '#000'}
-								onClick={() => setParams((pv) => ({
-									...pv,
-									sort_type: filterType,
-								}))}
-								style={style}
-							/>
-						);
-					})
-				}
-			</div>
-		</div>
-	);
+		);
+	}
 
 	const columns = [
 		{
@@ -204,12 +216,21 @@ const useVendorList = () => {
 			id       : 'category',
 			accessor : ({ services = [] }) => (
 				<section className={styles.bold}>
-					{renderUniqueServices({ services, type: 'category' })}
+					<RenderUniqueServices services={services} type="category" />
 				</section>
 			),
 		},
 		{
-			Header   : getHeader(),
+			Header   : 'STATUS',
+			id       : 'status',
+			accessor : ({ status }) => (
+				<section className={styles.bold} style={{ color: COLOR_MAP[status] || COLOR_MAP?.default }}>
+					{startCase(status)}
+				</section>
+			),
+		},
+		{
+			Header   : <GetHeader />,
 			id       : 'created_at',
 			accessor : ({ created_at = '' }) => (
 				<section className={styles.bold}>

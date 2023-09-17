@@ -31,11 +31,10 @@ export const dateCheckerShipment = (leftDate, rightDate) => {
 	return leftDateTime >= rightDateTime;
 };
 
-const FTL_TASK_DATE_VALIDATION = 'ftl_task_date_validation';
-
-const ENTITY_IDS = [];
-
-export const ENTITY_CODES = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
-	ENTITY_FEATURE_MAPPING[key].feature_supported.includes(FTL_TASK_DATE_VALIDATION);
-	return ENTITY_IDS.push(value.id);
-});
+export const ENTITY_CODES = Object.entries(ENTITY_FEATURE_MAPPING).reduce((acc, [key, value]) => {
+	if (value?.feature_supported?.includes('ftl_task_date_validation')) {
+		const entityId = GLOBAL_CONSTANTS.cogoport_entities?.[key]?.id;
+		acc.push(entityId);
+	}
+	return acc;
+}, []);

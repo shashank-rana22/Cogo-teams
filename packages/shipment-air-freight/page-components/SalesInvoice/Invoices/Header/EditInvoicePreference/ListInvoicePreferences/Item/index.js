@@ -91,9 +91,13 @@ function Item({
 			)}
 
 			<div
-				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
+				className={cl`
+					${styles.header_container} 
+					${open ? styles.open : ''} 
+					${invoice?.processing ? styles.disable : ''}
+				`}
 				style={{ cursor: noActionState ? 'default' : '' }}
-				onClick={!noActionState ? () => handleServiceToggle() : undefined}
+				onClick={!invoice?.processing && !noActionState ? () => handleServiceToggle() : undefined}
 			>
 				<div className={styles.info_div}>
 					<div className={styles.details}>

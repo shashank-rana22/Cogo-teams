@@ -43,7 +43,8 @@
 
 .count {
 	font-size: var(--font-size-md);
-	color: #356efd;
+	font-weight: 500;
+	color: #09f;
 }
 
 .icon {
@@ -61,18 +62,23 @@
 }
 
 .label {
-	width: 30%;
+	width: 100%;
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 600;
 }
 
-.amount_open {
-	display: flex;
-	margin-top: 2px;
-	font-size: 14px;
+.label_outstanding {
+	width: 100%;
+	margin-left: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-2);
+}
+
+.amount_open {
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-3);
 	word-break: break-all;
 }
 
@@ -81,7 +87,16 @@
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-3);
+	word-break: break-all;
+}
+
+.account {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #29cc6a;
 	word-break: break-all;
 }
 
@@ -91,7 +106,7 @@
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-3);
 	word-break: break-all;
 }
 
@@ -108,9 +123,8 @@
 .outstanding_card {
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	width: 14%;
-	margin: 8px 4px 2px 12px;
+	margin: 26px 4px 2px 12px;
 	border-radius: 8px;
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
 }
@@ -126,8 +140,9 @@
 
 .count_open {
 	margin-left: 4px;
-	font-size: var(--font-size-lg);
-	color: #356efd;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	color: #09f;
 }
 
 .statsfull {

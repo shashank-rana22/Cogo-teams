@@ -152,7 +152,7 @@ function CallPriorityModal({
 						</div>
 					</div>
 					<div className={styles.accordion}>
-						<Accordion title="View Outstanding Status" animate>
+						<Accordion title="View Outstanding Stats" animate>
 							<div className={styles.org_list}>
 								<StatsOutstanding item={data} showOutStanding={false} />
 							</div>

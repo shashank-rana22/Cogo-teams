@@ -29,9 +29,9 @@ const getReplyMails = ({
 	filteredBccData = [],
 }) => {
 	if (
-		activeMailAddress.toLowerCase() !== senderAddress.toLowerCase()
+		activeMailAddress?.toLowerCase() !== senderAddress?.toLowerCase()
 		|| filteredRecipientData.length !== CHECK_ONE_OR_MORE_ELEMENTS
-		|| (filteredRecipientData.length === CHECK_ONE_OR_MORE_ELEMENTS
+		|| !(filteredRecipientData.length === CHECK_ONE_OR_MORE_ELEMENTS
 			&& isEmpty(filteredCcData)
 			&& isEmpty(filteredBccData)
 		) || isEmpty(filteredRecipientData)
@@ -51,7 +51,7 @@ const getReplyAllMails = ({
 }) => {
 	let toUserEmail = filteredRecipientData;
 
-	if (senderAddress.toLowerCase() !== activeMailAddress.toLowerCase()) {
+	if (senderAddress?.toLowerCase() !== activeMailAddress?.toLowerCase()) {
 		toUserEmail = [senderAddress, ...toUserEmail];
 	}
 
@@ -63,8 +63,7 @@ const getReplyAllMails = ({
 };
 
 export function getRecipientData({
-	setButtonType = () => {},
-	setEmailState = () => {},
+	mailProps = {},
 	senderAddress = '',
 	recipientData = [],
 	ccData = [],
@@ -72,16 +71,31 @@ export function getRecipientData({
 	activeMailAddress = '',
 	subject = '',
 	isDraft = false,
+	emailVia = '',
+	formattedData = {},
+	eachMessage = {},
 }) {
-	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
-	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
-	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
+	const {
+		setButtonType = () => {},
+		setEmailState = () => {},
+		buttonType = '',
+	} = mailProps || {};
+
+	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
+	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
+	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 
 	const handleClick = (val) => {
 		if (isDraft) {
 			Toast.error(`you cant ${startCase(val)} the draft mail`);
 			return;
 		}
+
+		if (buttonType) {
+			Toast.warn('Email compose already in progress');
+			return;
+		}
+
 		setButtonType(val);
 
 		let mailData = {};
@@ -91,6 +105,8 @@ export function getRecipientData({
 				filteredRecipientData,
 				senderAddress,
 				activeMailAddress,
+				filteredCcData,
+				filteredBccData,
 			});
 		} else if (val === 'reply_all') {
 			mailData = getReplyAllMails({
@@ -101,16 +117,21 @@ export function getRecipientData({
 				filteredBccData,
 			});
 		}
+
 		const newSubject = getSubject({ subject, val });
 
 		setEmailState(
 			(prev) => ({
 				...prev,
+				emailVia,
 				body          : '',
+				from_mail     : activeMailAddress,
 				subject       : newSubject || subject,
 				toUserEmail   : mailData?.toUserEmail || [],
 				ccrecipients  : mailData?.ccrecipients || [],
 				bccrecipients : mailData?.bccrecipients || [],
+				formattedData,
+				eachMessage,
 			}),
 		);
 	};

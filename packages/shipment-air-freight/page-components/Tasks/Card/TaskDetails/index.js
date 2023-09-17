@@ -1,8 +1,8 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import CargoDetails from '../../../../commons/CargoDetails';
 
@@ -42,10 +42,10 @@ function TaskDetails({
 			<div className={styles.task_and_icon}>
 				<div className={styles.icon}>
 					{task?.status === 'completed' ? (
-						<IcMTaskCompleted fill="##F68B21" width="1.5em" height="1.5em" />
+						<IcMTaskCompleted fill="#008000" width="1.5em" height="1.5em" />
 					) : (
 						<IcMTaskNotCompleted
-							fill="##F68B21"
+							fill="#F68B21"
 							width="1.5em"
 							height="1.5em"
 						/>
@@ -55,22 +55,26 @@ function TaskDetails({
 
 			<div>
 				<div className={styles.details}>
-					<div className={styles.task_name}>{taskName}</div>
+					<div className={cl`${styles.task_name} 
+					${task?.mandatory ? styles.mandatory_task : ''}`}
+					>
+						{taskName}
+					</div>
 
 					<div className={styles.task_date_details}>
-						{task?.deadline ? (
+						{task?.deadline && task?.status !== 'completed' ? (
 							<Tooltip
 								interactive
 								theme="light"
 								content={(
 									<div style={{ fontSize: '10px' }}>
-										{format(
-											task?.deadline,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
-											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
-											null,
-											true,
-										)}
+										{formatDate({
+											date       : task?.deadline,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : ' ',
+										})}
 									</div>
 								)}
 							>
@@ -91,16 +95,32 @@ function TaskDetails({
 							<div className={styles.message}>( Bypassed the process )</div>
 						)}
 						{task?.status === 'completed' ? (
-							<div className={styles.completed}>
-								<IcMFtick />
+							<Tooltip
+								interactive
+								theme="light"
+								content={(
+									<div style={{ fontSize: '10px' }}>
+										{formatDate({
+											date       : task?.updated_at,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : ' ',
+										})}
+									</div>
+								)}
+							>
+								<div className={styles.completed}>
+									<IcMFtick />
 
-								{`Completed On: ${formatDate({
-									date       : task?.updated_at,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-									formatType : 'date',
-									separator  : ' - ',
-								})}`}
-							</div>
+									{`Completed On: ${formatDate({
+										date       : task?.updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										formatType : 'date',
+
+									})}`}
+								</div>
+							</Tooltip>
 						) : null}
 
 						{task?.due_in ? (

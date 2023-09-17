@@ -1,23 +1,36 @@
 import { Button, Tooltip } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const VISIT_COGO_ACADEMY_EXCLUSION_ROLE = 'training';
+const ZERO = 0;
 
-function CardItem({ data = {} }) {
-	const { auth_role_data } = useSelector((state) => state.profile);
-	const { role_functions } = auth_role_data || {};
-
+function CardItem({ data = {}, testsCount = 0, coursesCount = 0 }) {
 	const { push } = useRouter();
 
 	const { icon_url, heading, title, desc, href, tag } = data;
 
-	const { label, url:redirection_url } = href;
+	const { label } = href;
 
-	const { icon: tag_icon, text: tag_text } = tag;
+	const { icon: tag_icon, courses_text: courses_tag_text, assignments_text:assignments_tag_text } = tag;
+	let tag_text = tag.text;
+	let redirection_url = href.url;
+
+	if (title === 'CogoAcademy') {
+		if (coursesCount > ZERO && testsCount > ZERO) {
+			tag_text = `${coursesCount} ${courses_tag_text} + ${testsCount} ${assignments_tag_text}`;
+			redirection_url = '/learning/course';
+		} else if (coursesCount > ZERO && !testsCount > ZERO) {
+			tag_text = `${coursesCount} ${courses_tag_text}`;
+			redirection_url = '/learning/course';
+		} else if (testsCount > ZERO && !coursesCount > ZERO) {
+			tag_text = `${testsCount} ${assignments_tag_text}`;
+			redirection_url = '/learning/tests/dashboard';
+		} else if (!testsCount > ZERO && !coursesCount > ZERO) {
+			tag_text = '';
+		}
+	}
 
 	const openLink = (url) => {
 		if (url?.includes('http://') || url?.includes('https://')) {
@@ -26,9 +39,6 @@ function CardItem({ data = {} }) {
 			push(url, url);
 		}
 	};
-
-	const isVisitCogoAcademyVisible = title !== 'CogoAcademy'
-			|| !role_functions.includes(VISIT_COGO_ACADEMY_EXCLUSION_ROLE);
 
 	return (
 		<div className={styles.container}>
@@ -43,7 +53,8 @@ function CardItem({ data = {} }) {
 					<div className={styles.description}>{desc}</div>
 				</div>
 
-				{isVisitCogoAcademyVisible ? (
+				{(tag_text !== '') ? (
+
 					<div className={styles.tag_and_link_container}>
 						<div className={styles.tag_container}>
 							<img src={tag_icon} alt="img" width={16} />

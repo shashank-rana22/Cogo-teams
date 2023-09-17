@@ -36,7 +36,20 @@ function getQueryFilterMapping({
 					orderBy('last_message_document.created_at', 'desc'),
 				] : [],
 		events: appliedFilters?.events?.includes('events')
-			? [where('last_message_document.message_type', '==', 'event')] : [],
+			? [where('last_message_document.message_type', '==', 'event')]
+			: [],
+		activeFolder: appliedFilters?.activeFolder
+			? [where(appliedFilters?.activeFolder, '==', true)]
+			: [],
+		user_email: appliedFilters?.user_email
+			? [where('email', '==', appliedFilters?.user_email)]
+			: [],
+		shipment_serial_id: appliedFilters?.shipment_serial_id
+			? [where('shipment_serial_id', '==', Number(appliedFilters?.shipment_serial_id))]
+			: [],
+		source_email: appliedFilters?.source_email
+			? [where('source', '==', appliedFilters?.source_email)]
+			: [],
 	};
 }
 

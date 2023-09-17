@@ -312,6 +312,19 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'get_exchange_rate',
+		access_type  : 'private',
+		service_name : 'exchange_rate',
+	},
+	{
+		api         : 'get_purchase_advance_document_list_csd_advance_documents',
+		access_type : 'private',
+	},
+	{
+		api         : 'post_payments_accounts',
+		access_type : 'private',
+	},
 ];
 
 export default apis;

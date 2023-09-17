@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 interface FormDataInterface {
 	registrationNumber?: string;
-	entityObject?: { id?: string };
+	entityObject?: { id?: string; entity_code?: string };
 	periodOfTransaction?: string;
 	vendorName?: string;
 	expenseCategory?: string;
@@ -85,6 +85,19 @@ export const recurringExpenseDetails = ({
 					span        : 2.2,
 				},
 				{
+					name           : 'cogoEntity',
+					label          : 'Cogo Entity',
+					type           : 'select',
+					multiple       : false,
+					defaultOptions : false,
+					placeholder    : 'Entity',
+					span           : 2.2,
+					options        : entityOptions,
+					value          : formData?.entityObject?.id,
+					onChange       : (e: any) => handleEntityChange(e),
+					style          : { width: '164px' },
+				},
+				{
 					name           : 'expenseCategory',
 					label          : 'Expense Category',
 					type           : 'asyncSelect',
@@ -97,21 +110,9 @@ export const recurringExpenseDetails = ({
 					value          : formData?.expenseCategory,
 					onChange       : (e, obj) => handleCategoryChange(e, obj),
 					renderLabel    : (item) => startCase(item.categoryName),
+					params         : { entityCode: formData?.entityObject?.entity_code },
 					span           : 2.2,
 					className      : styles.select,
-					style          : { width: '164px' },
-				},
-				{
-					name           : 'cogoEntity',
-					label          : 'Cogo Entity',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Entity',
-					span           : 2.2,
-					options        : entityOptions,
-					value          : formData?.entityObject?.id,
-					onChange       : (e: any) => handleEntityChange(e),
 					style          : { width: '164px' },
 				},
 				{

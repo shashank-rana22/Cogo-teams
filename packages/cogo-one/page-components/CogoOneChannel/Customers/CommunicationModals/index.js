@@ -1,10 +1,9 @@
-import { cl } from '@cogoport/components';
+import { cl, Toast } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
-import useReplyMail from '../../../../hooks/useReplyMail';
-import MailModal from '../MailList/MailModal';
+import MailEditorModal from '../MailList/MailModal';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import DialCallModal from './DialCallModal';
@@ -25,11 +24,6 @@ function CommunicationModals({
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
 
-	const {
-		replyMailApi = () => {},
-		replyLoading = false,
-	} = useReplyMail(mailProps);
-
 	const { buttonType, setButtonType, activeMail } = mailProps;
 
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
@@ -40,7 +34,13 @@ function CommunicationModals({
 			type : 'whatsapp_new_message_modal',
 			data : {},
 		}),
-		new_mail        : () => setButtonType('send_mail'),
+		new_mail: () => {
+			if (buttonType) {
+				Toast.warn('Email compose is already in progress');
+				return;
+			}
+			setButtonType('send_mail');
+		},
 		global_contacts : () => setOpenKamContacts(true),
 		sp_contacts     : () => {
 			setSendBulkTemplates((prevVal) => !prevVal);
@@ -96,12 +96,11 @@ function CommunicationModals({
 			/>
 
 			{!!buttonType && (
-				<MailModal
+				<MailEditorModal
 					mailProps={mailProps}
 					userId={userId}
 					activeMail={activeMail}
-					replyMailApi={replyMailApi}
-					replyLoading={replyLoading}
+					viewType={viewType}
 				/>
 			)}
 

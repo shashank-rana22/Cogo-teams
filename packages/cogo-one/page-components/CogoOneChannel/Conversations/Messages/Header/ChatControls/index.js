@@ -3,6 +3,7 @@ import React from 'react';
 
 import HeaderName from '../../../../../../common/HeaderName';
 
+import EmailHeader from './emailHeader';
 import styles from './styles.module.css';
 import VideoCalling from './VideoCalling';
 
@@ -37,6 +38,10 @@ function ChatControls({
 			},
 		});
 	};
+
+	if (channel_type === 'email') {
+		return <EmailHeader formattedData={formattedData} />;
+	}
 
 	return (
 		<div className={styles.flex_space_between}>
