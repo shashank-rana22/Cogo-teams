@@ -133,9 +133,6 @@ export default function getMarginControls({ service }) {
 				],
 			},
 		],
-	// validateFn: (field, callback) => {
-	// 	formFieldValues(field, callback);
-	// },
 	}];
 	return marginControls;
 }

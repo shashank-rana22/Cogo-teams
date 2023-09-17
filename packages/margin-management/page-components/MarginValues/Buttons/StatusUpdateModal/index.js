@@ -6,8 +6,7 @@ function StatusUpdateModal({
 	show = false,
 	setShow = () => {},
 	id = '',
-	// refetch = () => {},
-	// listRefetch = () => {},
+	refetch = () => {},
 	setMarginBreakupData = () => {},
 }) {
 	const { loading, onSubmit } = useUpdateMargin();
@@ -21,8 +20,7 @@ function StatusUpdateModal({
 		if (success) {
 			setShow(false);
 			setMarginBreakupData({});
-			// refetch();
-			// listRefetch();
+			refetch();
 			Toast.success('Status has been updated successfully!');
 		}
 	};

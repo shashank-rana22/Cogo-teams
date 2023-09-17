@@ -7,7 +7,7 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 function SearchForm({ activeTab = '', setFilterParams = () => {}, filterParams = {} }) {
-	const { controls } = getControls({ activeTab });
+	const { controls = {} } = getControls({ activeTab });
 	const { control, handleSubmit, reset } = useForm({ defaultValues: filterParams });
 	const onSubmit = (values) => {
 		setFilterParams((prev) => ({ ...prev, ...values }));

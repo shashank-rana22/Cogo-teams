@@ -5,13 +5,11 @@ import styles from './styles.module.css';
 
 function Info({ data = {} }) {
 	const {
-		location,
-		origin_location,
-		destination_location,
-		trade_type,
-		// shipping_line,
-		// airline,
-		rate_type,
+		location = {},
+		origin_location = {},
+		destination_location = {},
+		trade_type = '',
+		rate_type = '',
 	} = data?.filters || {};
 	const origin = () => {
 		if (!isEmpty(location)) {

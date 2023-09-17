@@ -8,7 +8,7 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 const MINUS_ONE = -1;
-function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => { } }) {
+function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => {}, refetch = () => {} }) {
 	const { margin_slabs = [], margin_slabs_currency } = data || [];
 	function HandlePercentage({ item }) {
 		if (item?.type === 'percentage') {
@@ -72,7 +72,12 @@ function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => 
 						))}
 						<div className={styles.line} />
 
-						<Buttons data={data} activeTab={activeTab} setMarginBreakupData={setMarginBreakupData} />
+						<Buttons
+							data={data}
+							activeTab={activeTab}
+							setMarginBreakupData={setMarginBreakupData}
+							refetch={refetch}
+						/>
 					</div>
 				)}
 

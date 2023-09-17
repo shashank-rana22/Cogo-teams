@@ -7,7 +7,7 @@ import DeactiveModal from './DeactivateModal';
 import StatusUpdateModal from './StatusUpdateModal';
 import styles from './styles.module.css';
 
-function Buttons({ data = {}, activeTab = '', setMarginBreakupData = () => {} }) {
+function Buttons({ data = {}, activeTab = '', setMarginBreakupData = () => {}, refetch = () => {} }) {
 	const router = useRouter();
 	const [openModal, setOpenModal] = useState(false);
 	const [openUpdateModal, setOpenUpdateModal] = useState(false);
@@ -50,8 +50,7 @@ function Buttons({ data = {}, activeTab = '', setMarginBreakupData = () => {} })
 				<DeactiveModal
 					setOpenModal={setOpenModal}
 					id={data?.id}
-                // refetch={refetch}
-                // listRefetch={listRefetch}
+					refetch={refetch}
 					setMarginBreakupData={setMarginBreakupData}
 					openModal={openModal}
 				/>
@@ -62,8 +61,7 @@ function Buttons({ data = {}, activeTab = '', setMarginBreakupData = () => {} })
 					show={openUpdateModal}
 					setShow={setOpenUpdateModal}
 					id={data?.id}
-					// refetch={refetch}
-					// listRefetch={listRefetch}
+					refetch={refetch}
 					setMarginBreakupData={setMarginBreakupData}
 				/>
 			) }

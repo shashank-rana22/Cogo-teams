@@ -13,6 +13,7 @@ import useCreateMargin from '../../hooks/useCreateMargin';
 import useUpdateMargin from '../../hooks/useUpdateMargin';
 import DeactiveModal from '../MarginValues/Buttons/DeactivateModal';
 
+import DEFAULT_MARGIN_SLABS from './DEFAULT_MARGIN_SLABS';
 import getFclControls from './extraControls/getFclControls';
 import getFclCustomsControls from './extraControls/getFclCustomsControls';
 import getLclFreightControls from './extraControls/getLclFreightControls';
@@ -29,24 +30,9 @@ const items = [
 	{ title: <div className={styles.stepper}>CUSTOMIZE YOUR DETAILS</div>, key: 'customize' },
 	{ title: <div className={styles.stepper}>ADD THE MARGINS</div>, key: 'add' },
 ];
-const DEFAULT_MARGIN_SLABS = [
-	{
-		lower_limit    : '',
-		upper_limit    : '',
-		limit_currency : '',
-		margin_values  : [{
-			code      : '',
-			type      : '',
-			value     : '',
-			currency  : '',
-			min_value : '',
-			max_value : '',
-		}],
-	},
-];
+
 let initialCall = false;
 function Create({ type = 'create', item = {} }) {
-	console.log('ITEM', item);
 	const router = useRouter();
 	const { agent_id } = useSelector(({ profile }) => ({
 		agent_id: profile?.user?.id,
@@ -116,6 +102,10 @@ function Create({ type = 'create', item = {} }) {
 			if (index > ZERO) {
 				customFieldArrayControls.margin_slabs[index] = {
 					lower_limit: { disabled: true },
+				};
+				customFieldArrayControls.margin_slabs[index - ONE] = {
+					lower_limit : { disabled: true },
+					upper_limit : { disabled: true },
 				};
 			}
 		});

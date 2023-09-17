@@ -16,10 +16,8 @@ const useCreateMargin = () => {
 		try {
 			await trigger({ data });
 			Toast.success('Margin created successfully');
-			return true;
 		} catch (err) {
 			toastApiError(err);
-			return false;
 		}
 	}, [trigger]);
 

@@ -7,7 +7,7 @@ const getHandleFormSubmit = ({
 	formValues = {}, item = {}, setIdValues = () => {}, type = '', agent_id = '',
 	router = {}, updateForm = () => {}, submitForm = () => {},
 }) => {
-	const handleFormSubmit = async (value) => {
+	const handleFormSubmit = (value) => {
 		const MV = [];
 		const { margin_slabs:MS, ...rest } = value;
 		const ms = MS.map((it) => {
@@ -60,9 +60,9 @@ const getHandleFormSubmit = ({
 				};
 				const actualPayload = type === 'edit' ? editPayload : PAYLOAD;
 				if (type === 'edit') {
-					await updateForm({ data: actualPayload });
+					updateForm({ data: actualPayload });
 				} else {
-					await submitForm({ data: actualPayload });
+					submitForm({ data: actualPayload });
 				}
 				router.push('/margins');
 			} catch (err) {

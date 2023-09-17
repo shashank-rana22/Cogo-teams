@@ -12,7 +12,7 @@ import TabComponent from './TabComponent';
 
 function MarginManagement() {
 	const {
-		data, loading, filterParams, setFilterParams, apiTrigger,
+		data = {}, loading = false, filterParams = {}, setFilterParams = () => {}, apiTrigger:refetch = () => {},
 	} = useListMargins({
 		defaultParams:
 		{ margin_stats_required: true, page_limit: 5 },
@@ -40,7 +40,6 @@ function MarginManagement() {
 						data={data}
 						filterParams={filterParams}
 						setFilterParams={setFilterParams}
-						refetch={apiTrigger}
 						activeTab={activeTab}
 						setActivetab={setActivetab}
 						activeService={activeService}
@@ -64,6 +63,7 @@ function MarginManagement() {
 							data={marginBreakupData}
 							setMarginBreakupData={setMarginBreakupData}
 							activeTab={activeTab}
+							refetch={refetch}
 						/>
 					</div>
 				</div>

@@ -3,14 +3,14 @@ import { useRouter } from '@cogoport/next';
 
 import useUpdateMargin from '../../../../hooks/useUpdateMargin';
 
-const M1 = 'Are you sure you want to deactivate this margin? Once you deactivate a margin, ';
-const M2 = 'you cannot activate it again.';
+const MODAL_TEXT_1 = 'Are you sure you want to deactivate this margin? Once you deactivate a margin, ';
+const MODAL_TEXT_2 = 'you cannot activate it again.';
 function DeactiveModal({
-	setOpenModal = () => {},
+	setOpenModal = () => {}, refetch = () => {},
 	id = '', setMarginBreakupData = () => {}, type = '', openModal = false,
 }) {
 	const router = useRouter();
-	const { loading, onSubmit } = useUpdateMargin();
+	const { loading = false, onSubmit = () => {} } = useUpdateMargin();
 	const handleSave = async () => {
 		const params = {
 			id,
@@ -20,9 +20,7 @@ function DeactiveModal({
 		if (success) {
 			setOpenModal(false);
 			setMarginBreakupData({});
-			// refetch();
-			// listRefetch();
-
+			refetch();
 			if (type === 'edit') {
 				router.push('/margins');
 			}
@@ -32,7 +30,7 @@ function DeactiveModal({
 		<Modal show={openModal} onClose={setOpenModal} placement="top" showCloseIcon={false}>
 			<Modal.Header title="Deactivate" />
 			<Modal.Body>
-				{M1 + M2}
+				{MODAL_TEXT_1 + MODAL_TEXT_2}
 			</Modal.Body>
 
 			<Modal.Footer>

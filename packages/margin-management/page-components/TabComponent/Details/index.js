@@ -6,13 +6,13 @@ import styles from './styles.module.css';
 function Details({ data = {}, setMarginBreakupData = () => {}, showContainerDetails = true }) {
 	const { service = '', margin_type = '', margin_slabs_currency = '', filters = {}, partner = {} } = data || {};
 	const {
-		commodity,
-		container_type,
-		container_size,
-		location,
-		origin_location,
-		destination_location,
-		trade_type,
+		commodity = '',
+		container_type = '',
+		container_size = '',
+		location = {},
+		origin_location = {},
+		destination_location = {},
+		trade_type = '',
 	} = filters || {};
 	const { business_name } = partner || {};
 	const origin = () => {

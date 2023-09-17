@@ -112,8 +112,7 @@ const getControls = ({ activeTab }) => {
 			span        : 12,
 		},
 	];
-	const DEFAULT_VALUES = controls.map((item) => ({ [item]: '' }));
-	return { controls, DEFAULT_VALUES };
+	return { controls };
 };
 
 export default getControls;
