@@ -1,0 +1,92 @@
+{
+  "air_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "ftl_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "ltl_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "fcl_freight_local": [
+    {
+      "label": "Per container",
+      "value": "per_container"
+    },
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "air_freight_local": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "trailer_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "haulage_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "fcl_freight": [
+    {
+      "label": "Per container",
+      "value": "per_container"
+    },
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "lcl_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "fcl_customs": [
+    {
+      "label": "Per container",
+      "value": "per_container"
+    },
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "lcl_customs": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "air_customs": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ],
+  "rail_domestic_freight": [
+    {
+      "label": "Per shipment",
+      "value": "per_shipment"
+    }
+  ]
+}
