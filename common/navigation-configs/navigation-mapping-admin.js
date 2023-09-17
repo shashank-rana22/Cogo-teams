@@ -750,8 +750,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:location_clusters'),
-					href  : '/locations-clusters',
-					as    : '/locations-clusters',
+					href  : '/v2/locations-clusters',
+					as    : '/v2/locations-clusters',
 					type  : 'link',
 				},
 				{
