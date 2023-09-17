@@ -28,6 +28,7 @@ const useHandleBookingConfirmationFooter = ({
 	invoicingParties = [],
 	disableConditionForFcl = false,
 	noRatesPresent = false,
+	isKycPending,
 }) => {
 	const { push } = useRouter();
 
@@ -189,6 +190,11 @@ const useHandleBookingConfirmationFooter = ({
 			return;
 		}
 
+		if (isKycPending) {
+			setError('Please complete KYC to proceed');
+			return;
+		}
+
 		setError('');
 	}, [
 		bookingConfirmationMode,
@@ -199,6 +205,7 @@ const useHandleBookingConfirmationFooter = ({
 		quotation_email_sent_at,
 		setError,
 		noRatesPresent,
+		isKycPending,
 	]);
 
 	return {

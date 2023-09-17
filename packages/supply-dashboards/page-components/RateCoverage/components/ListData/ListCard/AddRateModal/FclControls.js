@@ -1,17 +1,15 @@
 /* eslint-disable max-lines-per-function */
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
 
-const MIN_CARGO_WEIGHT = 18;
+import styles from './styles.module.css';
+
 const fclControls = ({
-	data, chargeCodeOptions,
-	fclCommodityOptions,
+	data,
 	listShippingLineOptions,
-	mainPortOptions1, mainPortOptions2,
-	serviceProviders, organizationUsers,
+	fclCommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
@@ -24,7 +22,6 @@ const fclControls = ({
 		heading     : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
-		...serviceProviders,
 		span        : 4,
 		value       : data?.service_provider_id,
 		rules       : { required: 'service provider is required' },
@@ -35,7 +32,6 @@ const fclControls = ({
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
-		...organizationUsers,
 		span        : 4,
 		rules       : { required: 'rate provided by user is required' },
 	},
@@ -71,7 +67,6 @@ const fclControls = ({
 		heading     : 'Origin Main port',
 		placeholder : 'Origin Main port',
 		span        : 4,
-		...mainPortOptions1,
 		rules       : { required: 'origin main port is required' },
 	},
 	{
@@ -90,7 +85,6 @@ const fclControls = ({
 		type        : 'select',
 		heading     : 'Destination main port',
 		span        : 4,
-		...mainPortOptions2,
 		placeholder : 'Destination main port',
 		rules       : { required: 'destination main port is required' },
 	},
@@ -128,6 +122,7 @@ const fclControls = ({
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
+		disabled    : data?.commodity,
 		options     : fclCommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
@@ -154,6 +149,7 @@ const fclControls = ({
 		placeholder : 'Validity Start',
 		span        : 3,
 		minDate     : new Date(),
+		className   : styles.date_filter,
 		rules       : {
 			required: 'validity start date is required',
 		},
@@ -162,6 +158,7 @@ const fclControls = ({
 		name        : 'validity_end',
 		heading     : 'Validity End',
 		type        : 'date_picker',
+		className   : styles.date_filter,
 		placeholder : 'Validity End',
 		span        : 3,
 		minDate     : new Date(),
@@ -196,11 +193,7 @@ const fclControls = ({
 		type        : 'number',
 		span        : 3,
 		placeholder : 'Free Weight Limit',
-		value:
-			data?.cargo_weight_per_container <= MIN_CARGO_WEIGHT
-				? data?.cargo_weight_per_container
-				: MIN_CARGO_WEIGHT,
-		rules: { required: 'free weight is required' },
+		rules       : { required: 'free weight is required' },
 	},
 	{
 		name        : 'schedule_type',
@@ -222,22 +215,12 @@ const fclControls = ({
 		heading    : 'Weight Slabs',
 		type       : 'fieldArray',
 		buttonText : 'Add Weight Slabs',
-		value:
-			data?.cargo_weight_per_container > MIN_CARGO_WEIGHT
-				? [
-					{
-						lower_limit : 18.1,
-						upper_limit : data?.cargo_weight_per_container,
-						currency    : GLOBAL_CONSTANTS.currency_code.USD,
-						price       : 0,
-					},
-				]
-				: undefined,
-		controls: [
+		controls   : [
 			{
 				name        : 'lower_limit',
 				type        : 'number',
 				span        : 4,
+				disabled    : true,
 				placeholder : 'Lower Limit (in MT)',
 				rules       : { required: 'lower limit is required' },
 			},
@@ -266,44 +249,30 @@ const fclControls = ({
 		],
 	},
 	{
-		heading            : 'Line Items',
-		name               : 'line_item',
-		span               : 12,
-		noDeleteButtonTill : 1,
-	},
-	{
-		type        : 'fieldArray',
-		showButtons : true,
-		name        : 'line_items',
-		buttonText  : 'Add Line Items',
-		controls    : [
+		type       : 'fieldArray',
+		heading    : 'Line Items',
+		name       : 'line_items',
+		buttonText : 'Add Line Items',
+		controls   : [
 			{
 				name        : 'code',
 				type        : 'select',
 				span        : 1.5,
 				placeholder : 'Charge Name',
-				value       : 'BAS',
-				options     : chargeCodeOptions,
 				rules       : { required: 'code is required' },
 			},
 			{
-				name      : 'unit',
-				span      : 2,
-				type      : 'select',
-				className : 'primary lg',
-				value     : 'per_container',
-				options   : [{
-					label : 'Per Container',
-					value : 'per_container',
-				}],
-				placeholder: 'Unit',
+				name        : 'unit',
+				span        : 2,
+				type        : 'select',
+				className   : 'primary lg',
+				placeholder : 'Unit',
 			},
 			{
 				name        : 'currency',
 				span        : 1.5,
 				type        : 'select',
 				placeholder : 'Curr...',
-				value       : 'USD',
 				options     : currencyOptions,
 			},
 			{
@@ -327,13 +296,8 @@ const fclControls = ({
 		],
 	},
 	{
-		name          : 'container_slabs',
-		heading       : 'Container Slabs',
-		span          : 12,
-		showOnlyLabel : true,
-	},
-	{
 		name               : 'container_slabs',
+		heading            : 'Container Slabs',
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Add Container Count Wise BAS Slabs',

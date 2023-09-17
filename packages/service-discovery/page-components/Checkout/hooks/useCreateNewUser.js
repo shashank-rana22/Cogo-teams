@@ -4,13 +4,14 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
+import workScopes from '../constants/work-scope';
+
 const controls = [
 	{
 		label       : 'Name',
 		name        : 'name',
 		placeholder : 'Enter name',
 		type        : 'text',
-		span        : 12,
 		rules       : { required: 'Name is required' },
 	},
 	{
@@ -18,7 +19,6 @@ const controls = [
 		name        : 'email',
 		placeholder : 'Enter email',
 		type        : 'text',
-		span        : 12,
 		rules       : {
 			required : 'Email is required',
 			pattern  : { value: GLOBAL_CONSTANTS.regex_patterns.email, message: 'Please write valid email' },
@@ -31,8 +31,6 @@ const controls = [
 		type        : 'mobile-number-select',
 		numberKey   : 'mobile_number',
 		codeKey     : 'mobile_country_code',
-		span        : 12,
-		select2     : 'new',
 		rules       : {
 			required : true,
 			validate : (value) => (value?.mobile_country_code && value?.mobile_number
@@ -47,18 +45,14 @@ const controls = [
 		type        : 'mobile-number-select',
 		numberKey   : 'whatsapp_number',
 		codeKey     : 'whatsapp_country_code',
-		span        : 12,
-		select2     : 'new',
 	},
 	{
-		name           : 'work_scopes',
-		label          : 'Work Scopes',
-		placeholder    : 'Select work scopes',
-		optionsListKey : 'work-scopes',
-		type           : 'select',
-		multiple       : true,
-		span           : 12,
-		autoCloseMenu  : false,
+		name          : 'work_scopes',
+		label         : 'Work Scopes',
+		placeholder   : 'Select work scopes',
+		type          : 'multi-select',
+		options       : workScopes,
+		autoCloseMenu : false,
 	},
 ];
 
@@ -85,13 +79,17 @@ const useCreateNewUser = ({
 			// 	ops_exec_email : values.email,
 			// });
 			if (values) {
+				const { mobile_number = {}, whatsapp_number = {}, ...restValues } = values;
+
 				const res = await trigger({
 					data: {
 						organization_id,
 						organization_branch_id : branch_id,
 						status                 : 'active',
-						...values,
 						work_scopes            : values.work_scopes || [],
+						...mobile_number,
+						...whatsapp_number,
+						...restValues,
 					},
 				});
 

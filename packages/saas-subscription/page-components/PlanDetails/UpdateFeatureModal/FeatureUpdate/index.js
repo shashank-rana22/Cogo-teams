@@ -1,12 +1,16 @@
 import { cl, Button, ButtonIcon } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
 function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submitHandler }) {
 	const { configs, formControls, defaultValue = {}, appendValue, name, title } = featureInfo;
+
+	const { t } = useTranslation(['saasSubscription']);
 
 	const {
 		control,
@@ -56,7 +60,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 								<Item
 									info={field}
 									control={control}
-									controls={formControls[0].controls}
+									controls={formControls[GLOBAL_CONSTANTS.zeroth_index].controls}
 									remove={remove}
 									errors={errors}
 									fields={fields}
@@ -67,7 +71,9 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 						))}
 					</div>
 					<div className={styles.add_btn_container}>
-						<Button type="button" themeType="link" onClick={appendHandler}>Add</Button>
+						<Button type="button" themeType="link" onClick={appendHandler}>
+							{t('saasSubscription:add')}
+						</Button>
 					</div>
 				</div>
 			</div>
@@ -79,7 +85,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 					onClick={() => modalCloseHandler(false)}
 					disabled={loading}
 				>
-					Cancel
+					{t('saasSubscription:cancel')}
 				</Button>
 				<Button
 					type="button"
@@ -87,7 +93,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 					onClick={handleSubmit(submitHandler)}
 					loading={loading}
 				>
-					Save
+					{t('saasSubscription:save')}
 				</Button>
 			</div>
 		</>

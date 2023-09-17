@@ -1,4 +1,5 @@
 import { Button, Input, Toggle } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -10,6 +11,7 @@ import { invoiceFilters } from './configurations';
 import GetState from './GetState';
 import useGetBillsList from './hooks/useGetBillsList';
 import useGetDownloadReport from './hooks/useGetDownloadReport';
+import PayRunModal from './InvoiceTable/PayrunModal';
 import { RenderAction } from './InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from './InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from './InvoiceTable/RenderFunctions/RenderToolTip';
@@ -29,10 +31,27 @@ const TABS = [
 
 const FIRST_PAGE = 1;
 
-function Invoices() {
+const FUNCTIONS = {
+	renderToolTip: (itemData, field) => (
+		<RenderToolTip itemData={itemData} field={field} />
+	),
+	renderInvoiceDates: (itemData, field) => (
+		<RenderInvoiceDates itemData={itemData} field={field} />
+	),
+	renderUrgencyTag: (itemData, field) => (
+		<RenderUrgency itemData={itemData} field={field} />
+	),
+	renderAction: (itemData) => (
+		<RenderAction itemData={itemData} />
+	),
+};
+
+function Invoices({ activeEntity = '' }) {
+	const ELIGIBLE_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);
+	const [showPayrunModal, setShowPayrunModal] = useState(false);
 
 	const {
 		billsData,
@@ -41,7 +60,7 @@ function Invoices() {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
-	} = useGetBillsList({ activeTab });
+	} = useGetBillsList({ activeTab, activeEntity, showElement: true });
 
 	const { stats = {} } = billsData || {};
 
@@ -52,21 +71,6 @@ function Invoices() {
 
 	const handleVersionChange = () => {
 		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices`;
-	};
-
-	const functions = {
-		renderToolTip: (itemData, field) => (
-			<RenderToolTip itemData={itemData} field={field} />
-		),
-		renderInvoiceDates: (itemData, field) => (
-			<RenderInvoiceDates itemData={itemData} field={field} />
-		),
-		renderUrgencyTag: (itemData, field) => (
-			<RenderUrgency itemData={itemData} field={field} />
-		),
-		renderAction: (itemData) => (
-			<RenderAction itemData={itemData} />
-		),
 	};
 
 	return (
@@ -96,6 +100,18 @@ function Invoices() {
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
+					<div>
+						<Button
+							size="md"
+							className={styles.button}
+							onClick={() => {
+								setShowPayrunModal(true);
+							}}
+							disabled={!ELIGIBLE_ENITY_PAYRUN}
+						>
+							Create Pay Run
+						</Button>
+					</div>
 					<Button onClick={() => { setShow(true); }} className={styles.button}>Get State</Button>
 					<Button
 						onClick={generateInvoice}
@@ -126,7 +142,7 @@ function Invoices() {
 					itemData={billsData}
 					loading={billsLoading}
 					config={ALL_INVOICE_CONFIG}
-					functions={functions}
+					functions={FUNCTIONS}
 					sort={orderBy}
 					setSort={setOrderBy}
 					page={billsFilters?.pageIndex || FIRST_PAGE}
@@ -141,6 +157,13 @@ function Invoices() {
 				/>
 			</div>
 			{show ? <GetState show={show} setShow={setShow} /> : null}
+			{showPayrunModal ? (
+				<PayRunModal
+					activeEntity={activeEntity}
+					showPayrunModal={showPayrunModal}
+					setShowPayrunModal={setShowPayrunModal}
+				/>
+			) : null}
 		</div>
 	);
 }

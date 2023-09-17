@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
@@ -11,9 +13,9 @@ import { SearchFilters } from './SearchFilters';
 import styles from './styles.module.css';
 
 const INITIAL_MAT_BAL = 0;
-const EMPTY_DATA_LENGTH = 0;
 
 function ApArSettlement() {
+	const { t = () => {} } = useTranslation(['settlement']);
 	const [filters, setFilters] = useState({
 		entityCode : '301',
 		date       : { startDate: null, endDate: null },
@@ -31,13 +33,11 @@ function ApArSettlement() {
 	});
 
 	const TEXT = 	(filters?.entityCode && filters?.tradeParty)
-		? 'Looks like you do not have any data in this category'
-		: 'Select filters to find what you\'re looking for';
+		? t('settlement:empty_data_in_filters_message')
+		: t('settlement:select_filters_message');
 
 	const [selectedData, setSelectedData] = useState([]);
 	const [matchBal, setMatchBal] = useState(INITIAL_MAT_BAL);
-	const TOTAL_MATCHING_BALANCE = selectedData.reduce((sum, item) => +sum
-	+ +item.balanceAmount * +item.exchangeRate * +item.signFlag, INITIAL_MAT_BAL);
 	const [reRender, setReRender] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
 	const [pageCheckedRows, setPageCheckedRows] = useState({});
@@ -52,6 +52,7 @@ function ApArSettlement() {
 		sorting,
 		setMatchModalShow,
 		setSelectedData,
+		t,
 	});
 
 	const handleFilterChange = (filterName, value) => {
@@ -65,29 +66,6 @@ function ApArSettlement() {
 	const onPageChange = (val) => {
 		setFilters((prev) => ({ ...prev, page: val }));
 	};
-
-	function DataRender() {
-		if (data && data?.list?.length > EMPTY_DATA_LENGTH) {
-			return (
-				<DocList
-					data={data}
-					loading={loading}
-					onPageChange={onPageChange}
-					selectedData={selectedData}
-					setSelectedData={setSelectedData}
-					setSortData={setSorting}
-					sortData={sorting}
-					pageCheckedRows={pageCheckedRows}
-					setPageCheckedRows={setPageCheckedRows}
-				/>
-			);
-		}
-		return (
-			<div className={styles.emptycontainer}>
-				<EmptyState height={315} width={482} Text={TEXT} />
-			</div>
-		);
-	}
 
 	useEffect(() => {
 		setSelectedData([]);
@@ -105,8 +83,14 @@ function ApArSettlement() {
 		});
 		setPageCheckedRows(UPDATEDPAGECHECKEDROWS);
 
-		const TOTAL = selectedData?.reduce((sum, item) => +sum + (+item.balanceAmount
-		* +item.exchangeRate * +item.signFlag), INITIAL_MAT_BAL);
+		const TOTAL = selectedData.reduce((sum, item) => {
+			const balanceAmount = +item.balanceAmount || INITIAL_MAT_BAL;
+			const exchangeRate = +item.exchangeRate || INITIAL_MAT_BAL;
+			const signFlag = +item.signFlag || INITIAL_MAT_BAL;
+			const itemTotal = balanceAmount * exchangeRate * signFlag;
+
+			return sum + itemTotal;
+		}, INITIAL_MAT_BAL);
 		setMatchBal(TOTAL);
 	}, [selectedData, pageCheckedRowsStringfy]);
 
@@ -124,33 +108,38 @@ function ApArSettlement() {
 
 			/>
 			{
-
-			loading ? (
-				<div>
-
-					<DocList
-						data={data}
-						loading={loading}
-						onPageChange={onPageChange}
-						selectedData={selectedData}
-						setSelectedData={setSelectedData}
-						setSortData={setSorting}
-						sortData={sorting}
-						pageCheckedRows={pageCheckedRows}
-						setPageCheckedRows={setPageCheckedRows}
-					/>
-				</div>
-			)
-				: <DataRender />
-
-}
+				(isEmpty(data?.list) && !loading)
+					? (
+						<>
+							<div className={styles.empty_container}>
+								<EmptyState height={315} width={482} text={TEXT} />
+							</div>
+							<div style={{ height: '80px' }} />
+						</>
+					)
+					: (
+						<>
+							<DocList
+								data={data}
+								loading={loading}
+								onPageChange={onPageChange}
+								selectedData={selectedData}
+								setSelectedData={setSelectedData}
+								setSortData={setSorting}
+								sortData={sorting}
+								pageCheckedRows={pageCheckedRows}
+								setPageCheckedRows={setPageCheckedRows}
+							/>
+							<div style={{ height: '80px' }} />
+						</>
+					)
+			}
 			<Amount
 				data={accountData}
 				loading={accountLoading}
 				selectedData={selectedData}
 				matchModalShow={matchModalShow}
 				setMatchModalShow={setMatchModalShow}
-				totalMatchingBalance={TOTAL_MATCHING_BALANCE}
 				matchBal={matchBal}
 				setMatchBal={setMatchBal}
 				filters={filters}
@@ -160,7 +149,6 @@ function ApArSettlement() {
 				<MatchModal
 					matchModalShow={matchModalShow}
 					setMatchModalShow={setMatchModalShow}
-					totalMatchingBalance={TOTAL_MATCHING_BALANCE}
 					selectedData={selectedData}
 					setSelectedData={setSelectedData}
 					loading={loading}

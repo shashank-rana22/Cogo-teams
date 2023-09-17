@@ -3,6 +3,7 @@ import AdvanceSecurityDepositRefund from '../../Modals/AdvanceSecurityDepositRef
 import BankDetails from '../../Modals/BankDetails';
 import ConcorModal from '../../Modals/ConcorModal';
 import ICJVModal from '../../Modals/ICJV_Modal';
+import JobOpen from '../../Modals/JobOpen';
 import JvModal from '../../Modals/JvModal';
 import NonRecuringModal from '../../Modals/NonRecuringModal';
 import PaymentConfirmation from '../../Modals/PaymentConfirmation';
@@ -31,6 +32,7 @@ const TYPE_COMPONENT_MAPPING = {
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
 	REVOKE_INVOICE                         : RevokeInvoice,
+	JOB_OPEN                               : JobOpen,
 };
 
 function AccessorComponent({ row, getIncidentData }) {

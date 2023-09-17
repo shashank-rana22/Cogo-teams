@@ -5,22 +5,23 @@ import {
 	IcMFcustoms,
 } from '@cogoport/icons-react';
 
-const SERVICE_ICON_MAPPINGS = {
+const serviceIconMappings = (t = () => {}) => ({
 	air_freight: {
 		icon : <IcMFair />,
-		text : 'AIR',
+		text : t('airBookingDesk:service_air'),
 	},
 	domestic_air_freight: {
 		icon : <IcMFairport />,
-		text : 'Domestic AIR',
+		text : t('airBookingDesk:service_domestic_air'),
 	},
 	air_freight_local: {
 		icon : <IcMFlocalCharges />,
-		text : 'AIR Local',
+		text : t('airBookingDesk:service_air_local'),
 	},
 	air_customs: {
 		icon : <IcMFcustoms />,
-		text : 'AIR Customs',
+		text : t('airBookingDesk:service_air_customs'),
 	},
-};
-export default SERVICE_ICON_MAPPINGS;
+});
+
+export default serviceIconMappings;

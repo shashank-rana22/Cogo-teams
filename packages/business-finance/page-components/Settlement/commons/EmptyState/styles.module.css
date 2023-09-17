@@ -3,7 +3,8 @@
 	align-items: center;
 	justify-content: center;
 	height: max-content;
-	background: #fff;
+	margin-bottom: 40px;
+	background: var(--color-secondary-5);
 }
 
 .column {

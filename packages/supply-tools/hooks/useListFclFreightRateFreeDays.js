@@ -36,7 +36,7 @@ const useListFclFreightRateFreeDays = ({ activeTab = '', isApiTrigger = true, de
 	}, [trigger]);
 
 	useEffect(() => {
-		if (isApiTrigger)apiTrigger();
+		if (isApiTrigger) apiTrigger();
 	}, [apiTrigger, filters, activeTab, isApiTrigger]);
 
 	return {

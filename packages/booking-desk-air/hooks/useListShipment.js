@@ -53,7 +53,6 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 		setFilters,
 		data,
 		setPage,
-
 	};
 };
 export default useListShipment;

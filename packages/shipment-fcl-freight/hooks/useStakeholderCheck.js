@@ -33,7 +33,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.so1_so2_role_id, stakeholder: 'so1_so2_ops' },
 		{ role_ids: geo.uuid.igm_desk, stakeholder: 'igm_desk' },
 		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
-		{ role_ids: geo.uuid.finops_manager, stakeholder: 'finops_manager' },
+		{ role_ids: [geo.uuid.finops_manager, geo.uuid.cogo_auditor], stakeholder: 'finops_manager' },
 		{ role_ids: geo.uuid.document_control_manager, stakeholder: 'document_control_manager' },
 		{ role_ids: geo.uuid.document_control_lead, stakeholder: 'document_control_lead' },
 		{ role_ids: geo.uuid.corporate_owner_id, stakeholder: 'corporate_owner' },

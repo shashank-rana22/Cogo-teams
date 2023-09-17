@@ -43,7 +43,7 @@ function ReviewServices({
 			setShow={setShow}
 		/>
 	) : (
-		<Modal show={show === 'showReview'} onClose={() => setShow(false)} closeOnOuterClick={false}>
+		<Modal show={show} onClose={() => setShow(false)} closeOnOuterClick={false}>
 			<Modal.Header title="MARK AS REVIEWED" />
 			<Modal.Body>
 				<div className={styles.form}>

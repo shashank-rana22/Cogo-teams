@@ -49,32 +49,17 @@ function Content({
 					themeType="primary-vertical"
 					style={{ display: 'flex', width: '440px' }}
 				>
-					<TabPanel name="salesAgent" title="Sales Agent">
+					<TabPanel name="salesAgent" title="Supplier Agent">
 						<div className={styles.tabpanel_style}>
 							<AsyncSelect
 								name="user_id"
 								asyncKey="partner_users"
 								valueKey="user_id"
-								initialCall={false}
 								onChange={(userId) => onChange(userId, 'salesAgentId')}
 								value={filters.salesAgentId}
-								placeholder="Select Sales Agent User"
+								placeholder="Select Supplier User"
 								size="sm"
-								isClearable
-							/>
-						</div>
-					</TabPanel>
-					<TabPanel name="creditController" title="Credit Controller">
-						<div className={styles.tabpanel_style}>
-							<AsyncSelect
-								name="credit_controller_id"
-								asyncKey="partner_users"
-								valueKey="user_id"
-								initialCall={false}
-								onChange={(userId) => onChange(userId, 'creditControllerId')}
-								value={filters.creditControllerId}
-								placeholder="Select Credit Controller User"
-								size="sm"
+								initialCall
 								isClearable
 							/>
 						</div>

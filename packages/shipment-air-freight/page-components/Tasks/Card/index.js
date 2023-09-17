@@ -44,12 +44,14 @@ function Card({
 			)}
 
 			{task?.status === 'completed' && task?.assigned_stakeholder === 'system' && (
-				<Button
-					className={styles.view_button}
-					onClick={handleEmail}
-				>
-					View
-				</Button>
+				<div className={styles.view_button_container}>
+					<Button
+						className={styles.view_button}
+						onClick={handleEmail}
+					>
+						View
+					</Button>
+				</div>
 			)}
 
 			<UpdateAction

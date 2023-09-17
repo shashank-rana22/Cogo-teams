@@ -1,4 +1,5 @@
-import { Button, CheckboxGroup } from '@cogoport/components';
+import { Button, CheckboxGroup, Popover } from '@cogoport/components';
+import { dynamic } from '@cogoport/next';
 import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
@@ -9,6 +10,12 @@ import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
 import useHandleShareQuotation from './useHandleShareQuotation';
 
+const PopoverContent = dynamic(
+	() => import(
+		'./StyledPopover'
+	),
+	{ ssr: false },
+);
 function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }) {
 	const {
 		rate,
@@ -33,6 +40,8 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 		confirmation,
 		setConfirmation,
 		handleCopyQuoteLink,
+		showPopover,
+		setShowPopover,
 	} = useHandleShareQuotation({
 		detail,
 		updateCheckout,
@@ -87,21 +96,23 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 			) : null}
 
 			<div className={styles.button_container}>
-				{BUTTON_MAPPING.map((item) => {
-					const { label, key, onClickFunction = () => {}, ...restProps } = item;
-
-					return (
-						<Button
-							key={key}
-							type="button"
-							size="lg"
-							onClick={onClickFunction}
-							{...restProps}
-						>
-							{label}
-						</Button>
-					);
-				})}
+				<Popover
+					placement="top"
+					caret
+					render={(
+						<PopoverContent BUTTON_MAPPING={BUTTON_MAPPING} />
+					)}
+					visible={showPopover}
+				>
+					<Button
+						type="button"
+						themeType="primary"
+						onClick={() => setShowPopover((prev) => !prev)}
+						size="md"
+					>
+						{showPopover ? 'Click Here to close Popover' : 'Share Quotation or Copy Link'}
+					</Button>
+				</Popover>
 			</div>
 		</div>
 	);
