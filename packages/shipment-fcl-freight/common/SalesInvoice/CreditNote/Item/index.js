@@ -126,14 +126,15 @@ function Item({
 									{startCase(CN_STATUS_MAPPING[itemStatus] || '')}
 								</div>
 
-								{itemStatus === 'rejected' && item?.rejection_reason ? (
+								{(itemStatus === 'finance_rejected' || itemStatus === 'rejected')
+								&& item?.rejection_reason ? (
 									<div className={styles.rejection_reason}>
 										<IcCError width={16} height={16} />
 										<span>
 											{item.rejection_reason}
 										</span>
 									</div>
-								) : null}
+									) : null}
 							</div>
 
 							{itemStatus === 'pending' ? (
