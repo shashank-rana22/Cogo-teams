@@ -115,7 +115,7 @@ const updateMessage = async ({
 			`${FIRESTORE_PATH[channel_type]}/${roomId}/messages`,
 		);
 
-		await addDoc(
+		const res = await addDoc(
 			activeChatCollection,
 			merge(
 				updatePayload,
@@ -125,7 +125,7 @@ const updateMessage = async ({
 				},
 			),
 		);
-		return;
+		return { roomId, messageId: res?.id };
 	}
 
 	const messageDoc = doc(
@@ -137,19 +137,20 @@ const updateMessage = async ({
 		messageDoc,
 		updatePayload,
 	);
+	return { roomId, messageId };
 };
 
 const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEditorPayload }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
-	const saveDraft = async ({ communication_id } = {}) => {
+	const saveDraft = async ({ communication_id, newComposeRoomId = '', newComposeDraftMsgId = '' } = {}) => {
 		const { id: roomId, no_of_drafts = 0 } = roomData || {};
 
 		const { is_draft = false, id = '', parent_email_message = {} } = draftMessageData || {};
 
-		let roomIdNew = roomId;
+		let roomIdNew = newComposeRoomId || roomId;
 
-		if (!roomId) {
+		if (!roomIdNew) {
 			roomIdNew = await createDraftRoom({
 				agentId,
 				firestore,
@@ -159,7 +160,7 @@ const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEd
 			});
 		}
 
-		await updateMessage({
+		return updateMessage({
 			roomId           : roomIdNew,
 			payload          : rteEditorPayload,
 			communication_id,
@@ -167,9 +168,9 @@ const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEd
 			parent_email_message,
 			firestore,
 			channel_type     : 'email',
-			messageId        : id,
+			messageId        : newComposeDraftMsgId || id,
 			no_of_drafts,
-			is_draft,
+			is_draft         : newComposeDraftMsgId ? true : is_draft,
 			draftMessageData,
 			isNewRoomCreated : !roomId,
 		});

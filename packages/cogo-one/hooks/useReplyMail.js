@@ -8,12 +8,12 @@ import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
 const getLensPayload = ({ payload }) => payload;
 
-// const getOmniChannelLink = ({ id, channel_type }) => {
-// 	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
-// 	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
-// };todo before merge
+const getOmniChannelLink = ({ id, channel_type }) => {
+	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
+	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
+};
 
-const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userSharedMails = [] }) => ({
+const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userSharedMails = [], roomId = '' }) => ({
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
@@ -31,7 +31,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 	bcc_emails      : isEmpty(payload?.bccrecipients) ? undefined : payload?.bccrecipients,
 	attachment_urls : isEmpty(payload?.attachments) ? undefined : payload?.attachments,
 	source          : 'CogoOne:AdminPlatform',
-	// draft_url       : getOmniChannelLink({id:}),
+	draft_url       : getOmniChannelLink({ id: roomId, channel_type: 'email' }),
 });
 
 const API_MAPPING = {
@@ -65,7 +65,7 @@ function useReplyMail(mailProps) {
 		userId = '',
 		userName = '',
 		userSharedMails = [],
-		// saveDraft = () => {},todo
+		saveDraft = () => {},
 	} = mailProps;
 
 	const {
@@ -81,10 +81,16 @@ function useReplyMail(mailProps) {
 
 	const replyMailApi = async (payload) => {
 		try {
-			await trigger({
-				data: getPayload({ payload, userId, userName, userSharedMails }),
-			});
+			const { roomId, messageId } = await saveDraft();
 
+			const res = await trigger({
+				data: getPayload({ payload, userId, userName, userSharedMails, roomId }),
+			});
+			saveDraft({
+				communication_id     : res?.data?.id,
+				newComposeRoomId     : roomId,
+				newComposeDraftMsgId : messageId,
+			});
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);
 			setButtonType('');
