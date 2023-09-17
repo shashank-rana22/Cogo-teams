@@ -1644,8 +1644,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'cogo_assured-rate_sheets',
 					title         : t('common:rate_sheets'),
-					href          : '/cogo-assured/rate_sheets',
-					as            : '/cogo-assured/rate_sheets',
+					href          : '/v2/cogo-assured/rate_sheets',
+					as            : '/v2/cogo-assured/rate_sheets',
 					type          : 'link',
 					possible_apis : apis.cogo_assured,
 

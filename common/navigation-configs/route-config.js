@@ -16,6 +16,7 @@ import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
+import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
@@ -86,6 +87,7 @@ import welcome from './config/welcome';
 const routeConfig = {
 	...rolesAndPermissions,
 	...locations,
+	...cogoAssured,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
