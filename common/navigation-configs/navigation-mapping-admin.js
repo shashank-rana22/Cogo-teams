@@ -1780,8 +1780,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'transaction_setting-convenience_rate',
 					title         : t('common:convenience_rates'),
-					href          : '/convenience-rates',
-					as            : '/convenience-rates',
+					href          : '/v2/convenience-rates',
+					as            : '/v2/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
 					possible_apis : apis.convenience_rate,
 					module_type   : 'crm',
