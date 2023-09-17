@@ -750,8 +750,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:location_clusters'),
-					href  : '/locations-clusters',
-					as    : '/locations-clusters',
+					href  : '/v2/locations-clusters',
+					as    : '/v2/locations-clusters',
 					type  : 'link',
 				},
 				{
@@ -1644,8 +1644,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'cogo_assured-rate_sheets',
 					title         : t('common:rate_sheets'),
-					href          : '/cogo-assured/rate_sheets',
-					as            : '/cogo-assured/rate_sheets',
+					href          : '/v2/cogo-assured/rate_sheets',
+					as            : '/v2/cogo-assured/rate_sheets',
 					type          : 'link',
 					possible_apis : apis.cogo_assured,
 
@@ -2289,8 +2289,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'ihls-data_pipeline',
 					title         : t('common:file_processing_dashboard'),
-					href          : '/ihls/data-pipeline',
-					as            : '/ihls/data-pipeline',
+					href          : '/v2/ihls/data-pipeline',
+					as            : '/v2/ihls/data-pipeline',
 					type          : 'link',
 					icon          : IcMDataPipeline,
 					possible_apis : [],
