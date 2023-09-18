@@ -125,5 +125,10 @@
     "performance_rating": "绩效评分",
     "users_based_on_issues": "用户（基于问题）",
     "top_categories": "热门类别",
-    "are_you_sure_want_to": "您确定要"
+    "are_you_sure_want_to": "您确定要",
+    "raised_by_desk": "被桌子举起",
+    "raised_to_desk": "被放到桌子上",
+    "request_type": "请求类型",
+    "select_sid": "选择SID",
+    "select_request_ype": "选择请求类型"
 }

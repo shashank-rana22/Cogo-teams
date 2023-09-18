@@ -125,5 +125,10 @@
     "performance_rating": "Penilaian Kinerja",
     "users_based_on_issues": "Pengguna (berdasarkan masalah)",
     "top_categories": "Kategori Teratas",
-    "are_you_sure_want_to": "Apakah Anda yakin ingin"
+    "are_you_sure_want_to": "Apakah Anda yakin ingin",
+    "raised_by_desk": "Ditinggikan oleh meja",
+    "raised_to_desk": "Ditinggikan ke meja",
+    "request_type": "Jenis Permintaan",
+    "select_sid": "Pilih SID",
+    "select_request_ype": "Pilih Jenis Permintaan"
 }
