@@ -21,7 +21,7 @@ function InterviewComplete({ code = '', control = {}, complete = false }) {
 				Once the employee enters the code on their admin platform,
 				the access to the admin platform will be removed.
 			</div>
-			<div className={styles.containerotp}>
+			<div className={styles.container_otp}>
 				{otparray.map((key, index) => (
 					<div
 						className={styles.input_item}
@@ -38,7 +38,7 @@ function InterviewComplete({ code = '', control = {}, complete = false }) {
 				))}
 			</div>
 
-			<div className={styles.dividercontainer}>
+			<div className={styles.divider_container}>
 				<hr className={styles.divider} />
 				OR
 				{' '}
