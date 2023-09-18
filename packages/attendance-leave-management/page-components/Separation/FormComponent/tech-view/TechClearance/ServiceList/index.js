@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal,Input } from '@cogoport/components';
 import {
 	CheckboxGroupController,
 } from '@cogoport/forms';
@@ -60,15 +60,13 @@ function ServiceList({ control = {}, errors = {} }) {
 					name="service_list"
 				/>
 				<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
+					<Modal.Header title="Add Service"/>
 					<Modal.Body>
 						<div className={styles.modal_message_container}>
 							<div className={styles.modal_message_text}>
-								<input
-									type="text"
-									placeholder="Enter a new service"
-									value={newService}
-									onChange={(e) => setNewService(e.target.value)}
-								/>
+							<Input size="sm" placeholder="Enter a new service" 
+							value={newService}  
+							onChange={(e) => setNewService(e.target.value)}/>
 							</div>
 						</div>
 
