@@ -139,7 +139,7 @@ function ShipmentDetails({
 		amount_currency: amountCurrency,
 	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const getPills = () => {
+	function GetPills() {
 		if (loadingShipment) {
 			return <Placeholder height="20px" width="80px" />;
 		}
@@ -150,7 +150,7 @@ function ShipmentDetails({
 			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
 		}
 		return <div>NO DATA FOUND</div>;
-	};
+	}
 
 	const jobTypeValue = jobType?.toLowerCase();
 	return (
@@ -187,7 +187,7 @@ function ShipmentDetails({
 							<div className={styles.sub_container}>
 								Details
 								<div className={styles.tags_container}>
-									{getPills()}
+									<GetPills />
 								</div>
 								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
 									<div className={styles.data}>
