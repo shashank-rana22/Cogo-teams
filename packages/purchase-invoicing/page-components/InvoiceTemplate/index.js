@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 // eslint-disable-next-line import/no-unresolved
 import converter from 'number-to-words';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import useGeneratePdf from '../../hooks/useGeneratePdf';
+import useGetImageSource from '../../hooks/useGetImageSource';
 import useGetTradeParties from '../../hooks/useGetOrganizationTradeParty';
 import InvoiceAmountContainer from '../InvoiceAmountContainer';
 import InvoiceDetailsContainer from '../InvoiceDetailsContainer';
@@ -25,21 +25,7 @@ function InvoiceTemplate({
 	setDownloadButtonState = () => {},
 	setRenderContent = () => {},
 }) {
-	const fetchImageData = async ({ url = '', setterFunc }) => {
-		try {
-			const response = await fetch(url);
-			const blobData = await response.blob();
-			const reader = new FileReader();
-			reader.readAsDataURL(blobData);
-			reader.onloadend = () => {
-				const base64data = reader.result;
-				setterFunc(base64data);
-			};
-		} catch (err) {
-			console.log(err?.data);
-		}
-	};
-	const [imageSrc, setImageSrc] = useState('');
+	const { imageSrc = '' } = useGetImageSource();
 
 	const callback = (res) => {
 		setDownloadButtonState(res?.data?.pdf_url);
@@ -63,10 +49,6 @@ function InvoiceTemplate({
 		data: tradePartyData,
 	} = useGetTradeParties({ serviceProvider });
 	const { list = [] } = tradePartyData || {};
-
-	useEffect(() => {
-		fetchImageData({ url: GLOBAL_CONSTANTS.image_url.cogo_logo, setterFunc: setImageSrc });
-	}, []);
 
 	const serviceProviderTradePartyObj = list?.find((item) => item?.trade_party_type === 'self') || {};
 
