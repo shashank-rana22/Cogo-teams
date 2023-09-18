@@ -324,7 +324,7 @@ const useGetAdvancePaymentList = ({
 		});
 	};
 
-	const getTableHeaderCheckbox = () => {
+	function TableHeaderCheckbox() {
 		const { list = [] } = apiData || {};
 		const { list: dataList = [] } = data || {};
 		const isCheckedLength = list.filter((value) => value?.checked).length;
@@ -335,7 +335,7 @@ const useGetAdvancePaymentList = ({
 				onChange={onChangeTableHeaderCheckbox}
 			/>
 		);
-	};
+	}
 
 	const onChangeTableBodyCheckbox = (itemData: ItemProps) => {
 		const { advanceDocumentId = '' } = itemData || {};
@@ -357,7 +357,7 @@ const useGetAdvancePaymentList = ({
 			return prevData;
 		});
 	};
-	const getTableBodyCheckbox = (itemData: ItemProps) => {
+	function TableBodyCheckbox(itemData: ItemProps) {
 		const { advanceDocumentId = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(
@@ -372,7 +372,7 @@ const useGetAdvancePaymentList = ({
 				/>
 			</div>
 		);
-	};
+	}
 
 	return {
 		data,
@@ -383,9 +383,9 @@ const useGetAdvancePaymentList = ({
 		submitSelectedInvoices,
 		selectedData,
 		selectedDataLoading,
-		getTableBodyCheckbox,
+		getTableBodyCheckbox   : TableBodyCheckbox,
 		apiData,
-		getTableHeaderCheckbox,
+		getTableHeaderCheckbox : TableHeaderCheckbox,
 		viewSelectedData,
 		viewSelectedDataLoading,
 		getViewSelectedInvoices,
