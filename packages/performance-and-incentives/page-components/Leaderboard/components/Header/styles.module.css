@@ -37,3 +37,25 @@
 .button_container {
 	display: flex;
 }
+
+.container {
+	width: fit-content;
+
+	:global {
+		.ui_popover_container {
+			padding: unset !important;
+		}
+	}
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 8px 12px;
+	background-color: #fff;
+}
+
+.rotate {
+	transform: rotate(180);
+}
