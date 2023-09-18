@@ -26,6 +26,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'list_shipment_container_details',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api         : 'get_purchase_bills_sid_details_by_id',
 			access_type : 'private',
 			feature     : 'coeFinance',

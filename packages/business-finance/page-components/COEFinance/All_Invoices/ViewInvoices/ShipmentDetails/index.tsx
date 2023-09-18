@@ -1,4 +1,5 @@
-import { Loader, Accordion, Button, MultiSelect } from '@cogoport/components';
+import { Loader, Accordion, Button } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
@@ -69,6 +70,7 @@ interface BillInterface {
 
 interface JobInterface {
 	jobNumber: string;
+	referenceId: string;
 }
 
 interface BillAdditionalObjectInterface {
@@ -137,7 +139,7 @@ function ShipmentDetails({
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
-	const { jobNumber } = job || {};
+	const { jobNumber, referenceId = '' } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
@@ -173,9 +175,6 @@ function ShipmentDetails({
 	};
 
 	const [value, onChange] = useState([]);
-	const options = [
-		{ label: '12345', value: 'first' },
-	];
 
 	return (
 		<div className={styles.container}>
@@ -302,7 +301,7 @@ function ShipmentDetails({
 						{collectionPartyId ? (
 							<div className={styles.variance}>
 								<div>
-									VARIANCE -
+									<span className={styles.variance_margin}>VARIANCE:</span>
 									{loading
 										? 'Getting......'
 										: `${varianceFullData?.currency || '--'}${' '}
@@ -322,14 +321,23 @@ function ShipmentDetails({
 							</div>
 						) : null}
 						<div className={styles.select_filter}>
-							<MultiSelect
+							<AsyncSelect
+								params={{
+									filters: {
+										shipment_id: referenceId,
+									},
+								}}
 								value={value}
 								onChange={onChange}
+								multiple
 								placeholder="Container Numbers"
-								options={options}
 								isClearable
 								style={{ width: '250px' }}
 								size="md"
+								intialCall
+								asyncKey="shipment_container_details"
+								labelKey="container_number"
+								valueKey="container_number"
 							/>
 						</div>
 					</div>
