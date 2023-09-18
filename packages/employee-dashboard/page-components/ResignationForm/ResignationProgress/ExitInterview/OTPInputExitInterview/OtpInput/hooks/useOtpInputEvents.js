@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
@@ -14,8 +13,6 @@ const useOtpInputEvents = ({
 	otpInputElementsRef = [],
 }) => {
 	const isCtrlDown = useRef(false);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const validateInputKeydownEvent = useCallback((event) => {
 		if (Number.isInteger(+event.key)) {
 			return;

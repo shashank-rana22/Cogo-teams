@@ -1,10 +1,10 @@
 import { Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { memo, forwardRef } from 'react';
 
 import useOtpInput from './hooks/useOtpInput';
 import styles from './styles.module.css';
 
-const ZERO_FOR_COMP = 0;
 function OtpInput(props, ref) {
 	const { otpLength = 0, inputSize = 'md', onChange = () => {}, placeholder } = props;
 
@@ -27,7 +27,10 @@ function OtpInput(props, ref) {
 				<div
 					className={styles.input_item}
 					key={key}
-					style={{ marginLeft: `${index === ZERO_FOR_COMP ? ZERO_FOR_COMP : '16px'}` }}
+					style={{
+						marginLeft: `${index === GLOBAL_CONSTANTS.zeroth_index
+							? GLOBAL_CONSTANTS.zeroth_index : '16px'}`,
+					}}
 				>
 					<Input
 						size={inputSize}

@@ -9,8 +9,13 @@ import styles from './styles.module.css';
 function TermsConditions({ control = {}, errors = {}, is_complete = false, confirmedValues = {} }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>TERMS & CONDITIONS</div>
-			<div className={styles.subtitle}>Please read carefully</div>
+			<div className={styles.header_container}>
+				<div>
+					<div className={styles.title}>TERMS & CONDITIONS</div>
+					<div className={styles.subtitle}>Please read carefully</div>
+				</div>
+				{errors?.checkboxagreement ? <div className={styles.error_tc}>*required</div> : null}
+			</div>
 			<div className={styles.content_sub_container}>
 				<div className={styles.content_text_container}>
 					<CheckboxController
@@ -36,7 +41,6 @@ function TermsConditions({ control = {}, errors = {}, is_complete = false, confi
 						<p>
 							Enter your Full Name, confirm your understanding and commitment to these terms.
 						</p>
-						{errors?.checkboxagreement ? <div className={styles.error}>*required</div> : null}
 					</div>
 
 				</div>

@@ -1,6 +1,7 @@
 import { Button	 } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowDown,
 	IcMArrowRight,
@@ -27,7 +28,7 @@ import useFinanceClearance from './useFinanceClearance';
 function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = () => {} }) {
 	const {
 		handleSubmit, onSubmit, control, errors,
-		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
+		outstanding_amount_details, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
 		setFinanceRecommendation, financeRecommendation, off_boarding_application_id,
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
 		setValue,
@@ -86,10 +87,13 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 		},
 		[is_complete, showdata, data1, setTotalRecoverableAmount],
 	);
-
+	const deleteItemUpdateStatus = (id = 1) => {
+		const temp = updateData.filter((obj) => obj.id !== id);
+		setUpdateData(temp);
+	};
 	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, updateData]);
 
-	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
+	const columns = fnfColumns({ errors, deleteItemUpdateStatus });
 	return (
 		<>
 			<div className={styles.header}>
@@ -154,7 +158,15 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 							Total Recoverable Amount
 						</div>
 						<span className={styles.recoverable_amount}>
-							{totalRecoverableAmount}
+							{formatAmount({
+								amount   : totalRecoverableAmount,
+								currency : 'INR',
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
 						</span>
 					</div>
 				</div>

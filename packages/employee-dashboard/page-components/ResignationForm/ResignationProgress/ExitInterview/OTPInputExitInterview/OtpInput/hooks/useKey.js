@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 
 const useKey = (targetKey) => {
@@ -32,7 +33,6 @@ const useKey = (targetKey) => {
 
 			window.removeEventListener('keyup', upHandler);
 		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []); // Empty array ensures that effect is only run on mount and unmount
 
 	return keyPressed;
