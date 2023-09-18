@@ -1,5 +1,5 @@
 import { cl, Toast } from '@cogoport/components';
-import { IcMPlus } from '@cogoport/icons-react';
+import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
@@ -27,6 +27,7 @@ function CommunicationModals({
 	const { buttonType, setButtonType, activeMail } = mailProps;
 
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
+	const showOnlyEmailCommunication = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_email_communication;
 
 	const CLICK_FUNCTIONS = {
 		new_call     : () => setShowDialModal(true),
@@ -48,6 +49,37 @@ function CommunicationModals({
 		},
 	};
 
+	if (showOnlyEmailCommunication) {
+		return (
+			<>
+				<div
+					className={styles.wrapper}
+					role="presentation"
+					onClick={CLICK_FUNCTIONS?.new_mail}
+				>
+					<div className={cl`${styles.plus_circle} ${styles.single_communication}`}>
+						<div className={styles.wheel_box}>
+							<IcMEmail
+								fill="#ffffff"
+								width={25}
+								height={30}
+							/>
+						</div>
+					</div>
+				</div>
+
+				{!!buttonType && (
+					<MailEditorModal
+						mailProps={mailProps}
+						userId={userId}
+						activeMail={activeMail}
+						viewType={viewType}
+					/>
+				)}
+			</>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -58,7 +90,7 @@ function CommunicationModals({
 					checked={isChecked}
 					readOnly
 				/>
-				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
+				<div htmlFor="plus_checkbox" className={cl`${styles.plus_circle} ${styles.multiple_communication}`}>
 					<div className={styles.wheel_box}>
 						<IcMPlus
 							onClick={() => setIsChecked((prev) => !prev)}

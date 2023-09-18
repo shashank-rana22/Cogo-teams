@@ -11,6 +11,14 @@
 	box-shadow: 3px 7px 16px #8a795d99;
 }
 
+.single_communication {
+	background-color: #606060;
+}
+
+.multiple_communication {
+	background-color: #000;
+}
+
 .plus_circle svg {
 	transition: 0.5s;
 }

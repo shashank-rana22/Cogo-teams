@@ -52,6 +52,7 @@ const SUPPORT = {
 		show_shipment_reminder                      : true,
 		show_lead_voice_calls                       : true,
 		show_shipments_stakeholders_contact_details : false,
+		show_email_communication                    : false,
 	},
 };
 
