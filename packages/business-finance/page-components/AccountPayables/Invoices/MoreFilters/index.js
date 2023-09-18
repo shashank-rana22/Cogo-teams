@@ -95,13 +95,17 @@ function FilterModal({
 										pageIndex   : 1,
 										pageSize    : 10,
 										invoiceView : filters?.invoiceView || '',
-										category    : filters?.category || undefined,
-										currency    : filters?.currency || '',
+										category    : undefined,
+										currency    : '',
 										entity      : filters?.entity || '',
-										invoiceType : filters?.invoiceType || undefined,
+										invoiceType : undefined,
 									});
 									onClear();
-									setModalFilters({ currency: filters?.currency || '' });
+									setModalFilters({
+										currency   : '',
+										urgencyTag : [],
+										services   : [],
+									});
 									setShowModal(false);
 								}}
 							>
