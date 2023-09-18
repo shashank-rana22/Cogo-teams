@@ -30,7 +30,11 @@ export interface ItemDataProps {
 	urgentCount: number,
 	urgentTotalAmount: number,
 	creditNoteCount: number,
-	creditNoteTotalAmount: number
+	creditNoteTotalAmount: number,
+	buyQuotationCount?: number,
+	buyQuotationTotalAmount?: number,
+	sellQuotationCount?: number,
+	sellQuotationTotalAmount?: number,
 }
 
 function ShipmentIdView() {

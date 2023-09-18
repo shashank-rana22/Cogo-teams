@@ -45,10 +45,10 @@ function AccordianCards({
 		incomeTotalAmount,
 		expenseCount,
 		expenseTotalAmount,
-		sellQuoteCount = 0,
-		sellQuoteTotalAmount = 0,
-		buyQuoteCount = 0,
-		buyQuoteTotalAmount = 0,
+		buyQuotationCount = 0,
+		buyQuotationTotalAmount = 0,
+		sellQuotationCount = 0,
+		sellQuotationTotalAmount = 0,
 		serviceType,
 		pendingApprovalCount,
 		urgentCount,
@@ -56,6 +56,7 @@ function AccordianCards({
 		creditNoteCount,
 		creditNoteTotalAmount,
 	} = itemData || {};
+
 	const [amountTab, setAmountTab] = useState('sellQuote');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
@@ -145,8 +146,8 @@ function AccordianCards({
 							) : (
 								<div className={styles.expense}>
 									<div className={styles.expense_label_text}>
-										Sell Quote (
-										{sellQuoteCount || 0}
+										Buy Quote (
+										{buyQuotationCount}
 										)
 									</div>
 									<div className={styles.small_right_border}>
@@ -154,7 +155,7 @@ function AccordianCards({
 									</div>
 									<div className={styles.expense_value_text}>
 										{formatAmount({
-											amount   :	sellQuoteTotalAmount as string,
+											amount   :	buyQuotationTotalAmount as string,
 											currency :	GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
@@ -213,8 +214,8 @@ function AccordianCards({
 							) : (
 								<div className={styles.expense}>
 									<div className={styles.expense_label_text}>
-										Buy Quote (
-										{buyQuoteCount || 0}
+										Sell Quote (
+										{sellQuotationCount}
 										)
 									</div>
 									<div className={styles.small_right_border}>
@@ -222,7 +223,7 @@ function AccordianCards({
 									</div>
 									<div className={styles.expense_value_text}>
 										{formatAmount({
-											amount   :	buyQuoteTotalAmount as string,
+											amount   :	sellQuotationTotalAmount as string,
 											currency :	GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
