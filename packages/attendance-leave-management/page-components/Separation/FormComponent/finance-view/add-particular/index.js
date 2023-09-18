@@ -3,23 +3,13 @@ import { InputController, SelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
+import {
+	FNFPARTICULARDATA,
+} from '../../../../../utils/constants';
+
 import styles from './styles.module.css';
 
 let ID = GLOBAL_CONSTANTS.zeroth_index;
-const data = [
-	{
-		label : 'Bonus',
-		value : 'Bonus',
-	},
-	{
-		label : 'Loan',
-		value : 'Loan',
-	}, {
-		label : 'Gift',
-		value : 'Gift',
-	},
-];
-
 function AddParticular({
 	addParticular = false,
 	setAddParticular = () => {},
@@ -67,7 +57,8 @@ function AddParticular({
 							name="category"
 							value=""
 							size="md"
-							options={data}
+							type="number"
+							options={FNFPARTICULARDATA}
 							rules={{ required: '*required' }}
 						/>
 						{errors?.category ? (

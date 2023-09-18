@@ -2,23 +2,17 @@ import { Input } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import React from 'react';
 
+import {
+	REASONSTOLEAVE,
+} from '../../../../../../utils/constants';
+
 import styles from './styles.module.css';
 
 const ZEROTOCOMPARE = 0;
-const options = [
-	{ label: 'Termination', value: 'Termination' },
-	{ label: 'Termination - Fraud', value: 'Termination - Fraud' },
-	{ label: 'Absconding', value: 'Absconding' },
-	{ label: 'Security Reasons', value: 'Security Reasons' },
-	{ label: 'Death', value: 'Death' },
-	{ label: 'Harassment Case', value: 'Harassment Case' },
-	{ label: 'Others', value: 'Others' },
-];
-function InterviewComplete({ code, control, complete }) {
+
+function InterviewComplete({ code = '', control = {}, complete = false }) {
 	const OTP = code || '';
 	const otparray = OTP.split('');
-	// const [value, setValue] = useState('');
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Interview Completion Code</div>
@@ -65,7 +59,7 @@ function InterviewComplete({ code, control, complete }) {
 					placeholder="Select reason"
 					disabled={complete}
 					control={control}
-					options={options}
+					options={REASONSTOLEAVE}
 				/>
 			</div>
 

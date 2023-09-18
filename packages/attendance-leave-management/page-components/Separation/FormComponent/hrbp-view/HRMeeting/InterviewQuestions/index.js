@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+const TWO = 2;
+const THREE = 3;
 function InterviewQuestions({ control = {}, errors = {}, data = {} }) {
-	const ONE = 1; const TWO = 2; const THREE = 3;
 	const { notes } = data || {};
 	const [show, setShow] = useState(false);
 	return (

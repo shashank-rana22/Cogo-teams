@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OpenModal({ show, onClose, onSubmit, handleSubmit }) {
+function OpenModal({ show = false, onClose = () => {}, onSubmit = () => {}, handleSubmit = () => {} }) {
 	return (
 		<Modal size="sm" show={show} onClose={onClose} placement="center" className={styles.modal_container}>
 			<Modal.Body styles={styles.modal_body}>
@@ -23,7 +23,7 @@ function OpenModal({ show, onClose, onSubmit, handleSubmit }) {
 					size="md"
 					themeType="secondary"
 					className={styles.cancel_modal_btn}
-					onClick={() => onClose()}
+					onClick={onClose}
 				>
 					Cancel
 				</Button>
@@ -32,7 +32,7 @@ function OpenModal({ show, onClose, onSubmit, handleSubmit }) {
 					size="md"
 					themeType="Accent"
 					className={styles.proceed_modal_btn}
-					onClick={() => handleSubmit(onSubmit)()}
+					onClick={handleSubmit(onSubmit)}
 				>
 					Yes, Proceed
 				</Button>

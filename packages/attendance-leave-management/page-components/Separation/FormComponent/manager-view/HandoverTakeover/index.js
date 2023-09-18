@@ -75,7 +75,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 							placeholder="Type to search..."
 							initialCall
 							control={control}
-							params={{ filters: { status: 'active' } }}
+							params={{ filters: { status: 'active' }, source: 'api' }}
 							size="md"
 							disabled={is_complete}
 							rules={{ required: true }}

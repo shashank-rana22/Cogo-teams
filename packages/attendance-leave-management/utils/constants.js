@@ -275,3 +275,55 @@ export const TASK_LIST = [
 		],
 	},
 ];
+
+export const IDCARDOPTIONS = [
+	{ label: 'Collected', value: 'collected' }, { label: 'Not Collected', value: 'notcollected' }];
+export const ACCESSCARDOPTIONS = [
+	{ label: 'Collected', value: 'collected' },
+	{ label: 'Not Collected', value: 'notcollected' }];
+export const COMPANYASSETS = [
+	{ label: 'Collected', value: 'collected' },
+	{ label: 'Not Collected', value: 'notcollected' },
+	{ label: 'Not Allocated', value: 'notallocated' }];
+
+export const FNFPARTICULARDATA = [
+	{
+		label : 'Bonus',
+		value : 'Bonus',
+	},
+	{
+		label : 'Loan',
+		value : 'Loan',
+	}, {
+		label : 'Gift',
+		value : 'Gift',
+	},
+];
+
+export const REASONSTOLEAVE = [
+	{ label: 'Termination', value: 'Termination' },
+	{ label: 'Termination - Fraud', value: 'Termination - Fraud' },
+	{ label: 'Absconding', value: 'Absconding' },
+	{ label: 'Security Reasons', value: 'Security Reasons' },
+	{ label: 'Death', value: 'Death' },
+	{ label: 'Harassment Case', value: 'Harassment Case' },
+	{ label: 'Others', value: 'Others' },
+];
+
+export const REASONS_LIST = [
+	'Lack of Career Growth and Development Opportunities',
+	'Inadequate Compensation and Benefits',
+	'Work-Life Balance Issues',
+	'Company Culture and Values Misalignment',
+	'Lack of Recognition and Appreciation',
+	'Poor Communication',
+	'Unchallenging tasks No job satisfaction',
+	'Conflict and Workplace/ Team Issues',
+	'Personal Reasons'];
+
+export	const SERVICE_CHECKBOX_LIST = [
+	{ label: 'Cloud Services', value: 'Cloud_Services' },
+	{ label: 'Atlassian', value: 'Atlassian' },
+	{ label: 'Figma', value: 'Figma' },
+	{ label: 'Github', value: 'Github' },
+];

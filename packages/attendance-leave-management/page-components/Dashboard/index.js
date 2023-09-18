@@ -55,7 +55,7 @@ function AttendanceLeaveDashboard() {
 						size="md"
 						themeType="primary"
 						className={styles.request_btn}
-						onClick={() => handleShowInbox()}
+						onClick={handleShowInbox}
 					>
 						My Requests
 						{MANAGER ? <IcMLiveChat /> : <IcMLiveChat />}

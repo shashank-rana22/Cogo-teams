@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const date = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 
-function DatePicker({ control, errors }) {
+function DatePicker({ control = {}, errors = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Last Working Day</div>
@@ -18,7 +18,7 @@ function DatePicker({ control, errors }) {
 				<DatepickerController
 					placeholder="Select Date"
 					control={control}
-					dateFormat={`${date}`}
+					dateFormat={date}
 					name="last_working_day"
 					className={styles.date_picker}
 					disabled

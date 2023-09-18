@@ -21,7 +21,7 @@ const useAdminClearanceDetails = ({ data = {}, refetch = () => {} }) => {
 		reset,
 	} = useForm();
 
-	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShow });
+	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, setShowModal: setShow });
 
 	const onSubmit = (values) => {
 		const notes = [{

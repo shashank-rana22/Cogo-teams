@@ -96,7 +96,6 @@
 
 .lower_text {
 	font-size: 12px;
-	font-weight: 400;
 	color: #4f4f4f;
 }
 
@@ -228,7 +227,6 @@
 
 .completed_notification_text {
 	margin-left: 6px;
-	font-weight: 400;
 	color: black;
 }
 

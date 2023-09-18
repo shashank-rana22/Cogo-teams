@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = () => {} }) {
+function ScheduleInterview({ is_complete = false, control = {}, errors = {}, setEdit = () => {}, complete = false }) {
 	const [show, setShow] = useState(true);
 
 	return (
@@ -46,7 +46,7 @@ function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = (
 							name="date"
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
-							disabled={is_complete}
+							disabled={is_complete || complete}
 						/>
 					</div>
 					{errors.date ? <span className={styles.error}>*required</span> : null}
@@ -62,7 +62,7 @@ function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = (
 							name="interviewTime"
 							className={styles.datepicker}
 							rules={{ required: 'this is required' }}
-							disabled={is_complete}
+							disabled={is_complete || complete}
 						/>
 					</div>
 					{errors.offtime ? <span className={styles.error}>*required</span> : null}
@@ -76,7 +76,7 @@ function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = (
 							control={control}
 							name="location"
 							className={styles.datepicker}
-							disabled={is_complete}
+							disabled={is_complete || complete}
 							rules={{ required: 'this is required' }}
 						/>
 					</div>
@@ -92,7 +92,7 @@ function ScheduleInterview({ is_complete, control = {}, errors = {}, setEdit = (
 							name="info"
 							className={styles.infoinput}
 							rules={{ required: 'this is required' }}
-							disabled={is_complete}
+							disabled={is_complete || complete}
 						/>
 					</div>
 					{errors.info ? <span className={styles.error}>*required</span> : null}

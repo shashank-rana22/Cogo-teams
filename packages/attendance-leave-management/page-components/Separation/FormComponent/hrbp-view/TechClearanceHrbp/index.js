@@ -67,7 +67,7 @@ function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '4px' }} onClick={handleBack}>Back</Button>
 				<Button themeType="primary" onClick={handleNext}>
-					<span style={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>Proceed</span>
+					<span className={styles.proceedbtn}>Proceed</span>
 					<IcMArrowRight width={20} height={20} style={{ marginLeft: '4px' }} />
 				</Button>
 			</div>
