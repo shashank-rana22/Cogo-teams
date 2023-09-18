@@ -3,12 +3,12 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import { formatBigNumbers } from '../../../../../utils/formatBigNumbers';
 import styles from '../styles.module.css';
 
 import EmptyState from './EmptyState';
 
 const HOVER_DELAY = 300;
-const TO_FIXED = 2;
 
 function List({ loading = false, finalList = [], setActiveId = () => {}, originName = '' }) {
 	const [hoverTimer, setHoverTimer] = useState(null);
@@ -39,7 +39,7 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 	if (loading || finalList.length) {
 		return (
 			<>
-				{finalList.map(({ total_rates = 0, destination_id, destination_name, total_accuracy = 0 }) => (
+				{finalList.map(({ count = 0, destination_id, destination_name }) => (
 					// eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
 					<button
 						onMouseOver={() => handleMouseOver(destination_id)}
@@ -57,11 +57,14 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 									{destination_name}
 								</Tooltip>
 							</div>
-							<p>{`${total_rates} Rates`}</p>
 						</div>
 						<div className={styles.right}>
-							<p>Accuracy</p>
-							<h4>{`${Number(total_accuracy).toFixed(TO_FIXED)}%`}</h4>
+							<Tooltip
+								content={<span>{count}</span>}
+								placement="bottom"
+							>
+								<h4>{formatBigNumbers(count)}</h4>
+							</Tooltip>
 						</div>
 					</button>
 				))}

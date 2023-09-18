@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { LOCATION_KEYS } from '../constants/map_constants';
+import { LOCATION_KEYS, SELECT_AGGREGATE } from '../constants/map_constants';
 import getFormattedPayload from '../utils/getFormattedPayload';
 import toastApiError from '../utils/toastApiError';
 
@@ -54,7 +54,21 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 				...globalFilters,
 				start_date: new Date(),
 			}, ['end_date', ...EXCLUDE_KEYS]);
-			getStats(merge(params, { filters, ...sort, page: 1 }));
+			const { sort_by } = sort;
+			const [[aggregate_type]] = Object.entries(SELECT_AGGREGATE).filter(
+				([, value]) => {
+					if (value.includes(sort_by)) {
+						return true;
+					}
+					return false;
+				},
+			);
+			const select_aggregate = { count: `${[aggregate_type]}(${sort_by})` };
+			getStats(merge(params, {
+				filters,
+				select_aggregate,
+				page: 1,
+			}));
 			setPage(START_PAGE);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

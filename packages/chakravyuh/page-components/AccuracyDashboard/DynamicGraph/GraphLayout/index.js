@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 import SVGLayout from '../SVGLayout';
 
 const DEFAULT_ZOOM_LEVEL = 0;
-const DELAY_CONSTANT = 0.1;
+const DELAY_CONSTANT = 0.2;
 
 const INITIAL_POSITION_X = 100;
 const INITIAL_POSITION_Y = 100;

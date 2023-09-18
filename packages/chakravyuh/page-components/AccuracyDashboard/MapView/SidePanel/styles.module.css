@@ -120,6 +120,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	font-size: 16px;
 }
 
 .card {
@@ -144,7 +145,7 @@
 		width: 80px;
 		margin: 0;
 		font-size: 14px;
-		color: #000;
+		color: #221f20;
 
 		>p {
 			margin: 0 0 8px;
@@ -152,13 +153,13 @@
 
 		h4 {
 			margin: 0;
-			font-size: 24px;
-			color: #ee3425;
+			font-size: 18px;
 		}
 	}
 
 	.left {
-		width: calc(100% - 80px);
+		width: calc(100% - 66px);
+		padding-right: 10px;
 		border-right: 1px dotted #f2e3c3;
 
 		>p {
@@ -173,9 +174,9 @@
 			align-items: flex-start;
 
 			>div {
-				max-width: 50%;
+				max-width: calc(50% - 25px);
 				overflow: hidden;
-				font-size: 16px;
+				font-size: 15px;
 				font-weight: 600;
 				color: #221f20;
 				text-overflow: ellipsis;

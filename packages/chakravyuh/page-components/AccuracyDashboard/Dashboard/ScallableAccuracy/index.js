@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { section_container, bottom_label } from '../styles.module.css';
 
+import DeviationChart from './DeviationChart';
 import RateAccuracyChart from './RateAccuracyChart';
 import styles from './styles.module.css';
 import TrendChart from './TrendChart';
@@ -11,6 +12,13 @@ import TrendChart from './TrendChart';
 const TIME_LIMIT = 200;
 
 const ALL_TABS_LIST = [
+	{
+		key       : 'deviation',
+		name      : 'deviation',
+		title     : 'Deviation',
+		Component : DeviationChart,
+		heading   : 'Rate Deviation with Time (USD)',
+	},
 	{
 		key       : 'trend',
 		name      : 'trend',

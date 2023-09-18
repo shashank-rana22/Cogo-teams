@@ -24,41 +24,17 @@ const DUMMY_GRAPH_1 = {
 									{
 										name        : 'Completed',
 										rates_count : '1230',
-										child       : {
-											right: [
-												{
-													name        : 'Completed',
-													rates_count : '1230',
-													child       : {},
-												},
-											],
-										},
+										child       : {},
 									},
 									{
 										name        : 'Aborted',
 										rates_count : '1230',
-										child       : {
-											right: [
-												{
-													name        : 'Completed',
-													rates_count : '1230',
-													child       : {},
-												},
-											],
-										},
+										child       : {},
 									},
 									{
 										name        : 'Cancelled',
 										rates_count : '1230',
-										child       : {
-											bottom: [
-												{
-													name        : 'Completed',
-													rates_count : '1230',
-													child       : {},
-												},
-											],
-										},
+										child       : {},
 									},
 								],
 								bottom: [{

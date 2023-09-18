@@ -5,7 +5,6 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import SortButton from '../../../../common/SortButton';
 import { SORT_OPTIONS } from '../../../../constants/map_constants';
 import Heading from '../../Heading';
 
@@ -99,10 +98,6 @@ function SidePanel({
 							<span className={styles.elipsis}>{startCase(originName)}</span>
 							<span>{` to ${startCase(destination || 'Countries')}`}</span>
 						</h4>
-						<SortButton
-							type={sort_type}
-							onChange={(val) => setSort(((prev) => ({ ...prev, sort_type: val })))}
-						/>
 						<Select
 							size="sm"
 							placeholder="sort by"
