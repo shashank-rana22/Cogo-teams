@@ -33,7 +33,7 @@ export default {
 	regex: {
 		TAX                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		// eslint-disable-next-line max-len
-		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		GST                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		ECN                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -547,7 +547,7 @@ export default {
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
 		pan_number: {
-			label   : 'PAN',
+			label   : 'VAT',
 			pattern : undefined,
 		},
 		economic_zone: {
@@ -595,6 +595,12 @@ export default {
 						request_replace_invoice : true,
 						request_credit_note     : false,
 					},
+				},
+				common: {
+					validate_registration_number : false,
+					validate_pan_number          : false,
+					include_gst                  : false,
+					is_export_tradeType          : false,
 				},
 			},
 		},

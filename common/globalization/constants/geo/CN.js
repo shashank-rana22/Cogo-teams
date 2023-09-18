@@ -575,6 +575,12 @@ export default {
 				supply_sender_mobile_number : '918069195980',
 			},
 			partner: {
+				common: {
+					validate_registration_number : false,
+					validate_pan_number          : false,
+					include_gst                  : false,
+					is_export_tradeType          : false,
+				},
 				bookings: {
 					invoicing: {
 						request_cancel_invoice  : false,

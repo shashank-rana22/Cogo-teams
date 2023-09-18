@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import ScopeSelect from '@cogoport/scope-select';
 import { useState } from 'react';
 
 import OutStandingVisualization from './OutStandingVisualization';
@@ -10,6 +11,9 @@ function Outstanding({ entityCode = '' }) {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.select}>
+				<ScopeSelect size="md" />
+			</div>
 			<Tabs activeTab={activeTab} onChange={setActiveTab} themeType="primary">
 				<TabPanel
 					size={12}
@@ -25,7 +29,7 @@ function Outstanding({ entityCode = '' }) {
 					name="outstanding_visualization"
 					title="Outstanding Visualization"
 				>
-					<OutStandingVisualization />
+					<OutStandingVisualization entityCode={entityCode} />
 				</TabPanel>
 			</Tabs>
 		</div>

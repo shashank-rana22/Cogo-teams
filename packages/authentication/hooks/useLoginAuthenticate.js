@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import languageMapping from '@cogoport/globalization/constants/languageLocaleMapping';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import useRequest from '@cogoport/request/hooks/useRequest';
@@ -15,11 +14,6 @@ import redirections from '../utils/redirections';
 const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
-
-const LANGUAGE_LOCALE_MAPPING = Object.keys(languageMapping).reduce((acc, key) => {
-	acc[languageMapping[key].value] = key;
-	return acc;
-}, {});
 
 const useLoginAuthenticate = () => {
 	const router = useRouter();
@@ -77,34 +71,21 @@ const useLoginAuthenticate = () => {
 	}, []);
 
 	const redirectFunction = async () => {
-		let locale = 'en';
 		const configs = redirections(profile);
 		const redirectPath = decodeURIComponent(redirect_path);
-		const { user } = profile || {};
-		const { preferred_languages } = user || {};
-
-		const userLanguagePreferenece = preferred_languages?.[GLOBAL_CONSTANTS.zeroth_index]
-		|| GLOBAL_CONSTANTS.default_preferred_language;
-
-		if (userLanguagePreferenece in LANGUAGE_LOCALE_MAPPING) {
-			locale = LANGUAGE_LOCALE_MAPPING[userLanguagePreferenece];
-		}
 
 		if (redirectPath) {
-			await router.push(`${redirectPath}`, `${redirectPath}`, { locale });
+			window.location.href = `/v2/${profile?.partner?.id}${redirectPath || EMPTY_PATH}`;
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
-			const replaceAs = configs?.as?.replace('/v2', '');
 
-			await router.push(replaceHref, replaceAs, { locale });
+			window.location.href = `/v2/${profile?.partner?.id}${replaceHref || EMPTY_PATH}`;
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
 		} else {
-			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH, { locale });
+			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
 		}
-
-		setCookie('locale', locale);
 	};
 
 	useEffect(() => {

@@ -55,5 +55,5 @@
         "add_external_import_poc":true,
         "add_external_export_poc":true
     },
-    "job_open_request": false
+    "job_open_request": true
 }

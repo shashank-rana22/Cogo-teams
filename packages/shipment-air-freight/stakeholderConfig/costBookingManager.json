@@ -26,7 +26,7 @@
         "role": "sales"
     },
     "purchase":{
-        "tab_title": "Purchase Live Invoices"
+        "tab_title": "Live Invoices"
     },
     "edit_supplier": false,
     "cancel_service": false,
