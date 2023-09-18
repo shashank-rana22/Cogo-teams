@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 const INITIAL_MSG_COUNT = 0;
 
 const CONTAINER_STYLES_MAPPING = {
-	'coe-booking_note_desk': styles.chat_container_booking_desk,
+	'coe-booking_note_desk' : styles.chat_container_booking_desk,
+	'coe-kam_desk'          : styles.chat_container_kam_desk,
 };
 
 function ShipmentChat({ setMessagesCount = () => { }, navigation = '' }) {
@@ -55,6 +56,8 @@ function ShipmentChat({ setMessagesCount = () => { }, navigation = '' }) {
 	useEffect(() => {
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
 	}, [count, setMessagesCount, audio]);
+
+	console.log('navigation', navigation);
 
 	return (
 		<div className={CONTAINER_STYLES_MAPPING[navigation] || styles.chat_container}>
