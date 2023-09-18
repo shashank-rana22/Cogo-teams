@@ -17,7 +17,11 @@ function ActionModal({
 	const contentMapping = getContentMapping({ t });
 
 	const handleClick = () => {
-		const { data = {}, type = '' } = modalData || {};
+		const {
+			data = {},
+			type = '',
+		} = modalData || {};
+
 		if (type === 'submit_lms_data') {
 			const { master_airway_bill_number = '', airportId = '', airlineId = '' } = data || {};
 			const payload = {

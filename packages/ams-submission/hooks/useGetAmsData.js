@@ -7,7 +7,11 @@ import { useState, useEffect, useCallback } from 'react';
 
 const INIT_PAGE = 1;
 
-const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, query = '' }) => {
+const getPayload = ({
+	activeTab = 'tc_status_check',
+	pagination = INIT_PAGE,
+	query = '',
+}) => {
 	const date = formatDate({
 		date       : new Date(),
 		formatType : 'date',
@@ -25,7 +29,10 @@ const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, que
 	};
 };
 
-const useGetAmsData = ({ activeTab = 'tc_status_check', searchValue = '' }) => {
+const useGetAmsData = ({
+	activeTab = 'tc_status_check',
+	searchValue = '',
+}) => {
 	const [pagination, setPagination] = useState(INIT_PAGE);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
