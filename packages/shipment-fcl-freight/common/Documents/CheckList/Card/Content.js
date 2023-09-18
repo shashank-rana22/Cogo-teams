@@ -60,7 +60,15 @@ function Content({
 		'bill_of_lading',
 	].includes(uploadedItem?.document_type);
 
-	const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const kam_stakeholders = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager'];
+
+	// const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const isRestrictedExportBlDo = kam_stakeholders.includes(activeStakeholder) ? (
+		isHBLMBL && tradeType === 'export' && isEmpty(bl_details)
+	) : (
+		isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details)
+	);
+
 	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
 	&& isEmpty(do_details) && activeStakeholder !== 'document_control_manager');
 
