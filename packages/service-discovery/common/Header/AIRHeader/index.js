@@ -1,6 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
 
-import Back from '../common/Back';
 import SearchDetails from '../common/SearchDetails';
 import Wallet from '../common/Wallet';
 
@@ -27,43 +26,33 @@ function AIRHeader({
 
 	return (
 		<div className={styles.container}>
-			{activePage !== 'checkout' ? (
-				<Back
-					currentScreen={rest.currentScreen}
-					heading={rest.headerHeading}
-					setCurrentScreen={rest.setCurrentScreen}
+			<div className={styles.left_section}>
+				<SearchDetails
+					data={data}
+					service_key={service_key}
+					loading={loading && isEmpty(data)}
+					setHeaderProps={setHeaderProps}
+					showAdditionalHeader={showAdditionalHeader}
+					isAllowedToEdit={isAllowedToEdit}
+					activePage={activePage}
 				/>
-			) : null}
+			</div>
 
-			<div className={styles.details_header}>
-				<div className={styles.left_section}>
-					<SearchDetails
-						data={data}
-						service_key={service_key}
-						loading={loading && isEmpty(data)}
-						setHeaderProps={setHeaderProps}
-						showAdditionalHeader={showAdditionalHeader}
-						isAllowedToEdit={isAllowedToEdit}
-						activePage={activePage}
-					/>
-				</div>
+			<div className={styles.right_section}>
+				<Packages
+					data={data}
+					loading={loading && isEmpty(data)}
+					activePage={rest.activePage}
+					isAllowedToEdit={isAllowedToEdit}
+					infoBanner={infoBanner}
+					setInfoBanner={setInfoBanner}
+					isGuideViewed={isGuideViewed}
+				/>
 
-				<div className={styles.right_section}>
-					<Packages
-						data={data}
-						loading={loading && isEmpty(data)}
-						activePage={rest.activePage}
-						isAllowedToEdit={isAllowedToEdit}
-						infoBanner={infoBanner}
-						setInfoBanner={setInfoBanner}
-						isGuideViewed={isGuideViewed}
-					/>
-
-					<Wallet
-						data={data}
-						service_key={service_key}
-					/>
-				</div>
+				<Wallet
+					data={data}
+					service_key={service_key}
+				/>
 			</div>
 		</div>
 	);
