@@ -35,7 +35,9 @@ export function mountFloatingNotificationSnapShot({
 	unreadCountSnapshotListener = {},
 	omniChannelCollection = {},
 	firestore = {},
-	agentId = '',
+	baseQuery = [],
+	sessionQuery = [],
+	queryFilters = [],
 }) {
 	const mailSnapshotRef = unreadCountSnapshotListener;
 
@@ -45,12 +47,9 @@ export function mountFloatingNotificationSnapShot({
 			omniChannelCollection,
 			where('has_admin_unread_messages', '==', true),
 			where('show_floating_notification', '==', true),
-			[where('support_agent_id', '==', agentId)],
-			[where('session_type', '==', 'admin')],
-			[
-				where('channel_type', 'in', ['email']),
-				where('show_in_inbox', '==', true),
-			],
+			...(baseQuery || []),
+			...(sessionQuery || []),
+			...(queryFilters || []),
 			orderBy('new_message_sent_at', 'desc'),
 		);
 
