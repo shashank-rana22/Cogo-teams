@@ -50,19 +50,9 @@ const controls = {
 				value : 'air_customs_service',
 			},
 			{
-				id    : 9,
-				label : 'FCL freight local',
-				value : 'fcl_freight_local_service',
-			},
-			{
-				id    : 9,
-				label : 'LCL freight local',
-				value : 'lcl_freight_local_service',
-			},
-			{
-				id    : 9,
-				label : 'AIR freight local',
-				value : 'air_freight_local_service',
+				id    : 10,
+				label : 'FCL CFS',
+				value : 'fcl_cfs_service',
 			},
 		],
 		rules: { required: 'Service Type is Required' },

@@ -51,26 +51,34 @@ const useUpdateRatesPreferences = ({
 			AMOUNT.push({ amount: amount_Value, priority: index + INCREMENT_BY_ONE, currency: preferred_currency });
 		});
 
-		let mergedAmount = {};
-		mergedAmount = AMOUNT.reduce((result, currentAmount) => {
-			// eslint-disable-next-line no-param-reassign
-			result = {
-				wallet_amount            : Math.max(currentAmount.amount),
-				rate_priority_for_wallet : currentAmount.priority,
-				wallet_currency          : currentAmount?.currency,
-				apply_rd_wallet          : true,
-			};
-			return result?.wallet_amount > ZERO_VALUE ? result : null;
-		}, {});
+		let mergedAmount = {
+			wallet_amount: 0,
+		};
+
+		AMOUNT.forEach((amt) => {
+			if (amt?.amount > mergedAmount?.wallet_amount) {
+				const result = {
+					wallet_amount            : amt?.amount,
+					apply_rd_wallet          : true,
+					rate_priority_for_wallet : amt?.priority,
+					wallet_currency          : amt?.currency,
+				};
+				mergedAmount = result;
+			}
+		});
 
 		const { service_type } = service;
 
+		const MAX_VALUE = mergedAmount?.wallet_amount > ZERO_VALUE;
+
 		const final_payload = {
-			service_providers               : SERVICE_PROVIDERS,
-			wallet_amount                   : mergedAmount?.wallet_amount || undefined,
-			apply_rd_wallet                 : mergedAmount?.apply_rd_wallet || undefined,
-			rate_priority_for_wallet        : mergedAmount?.rate_priority_for_wallet || undefined,
-			wallet_currency                 : mergedAmount?.wallet_currency || undefined,
+			service_providers : SERVICE_PROVIDERS,
+			wallet_amount     : MAX_VALUE ? mergedAmount?.wallet_amount : undefined,
+			apply_rd_wallet   : MAX_VALUE ? mergedAmount?.apply_rd_wallet : undefined,
+			rate_priority_for_wallet:
+			MAX_VALUE ? mergedAmount?.rate_priority_for_wallet : undefined,
+			wallet_currency: MAX_VALUE
+				? mergedAmount?.wallet_currency : undefined,
 			booking_confirmation_docs       : [],
 			service_id                      : service_id || undefined,
 			service_type                    : service.service_type || undefined,

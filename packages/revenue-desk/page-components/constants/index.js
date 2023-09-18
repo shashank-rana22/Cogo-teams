@@ -32,6 +32,7 @@ export const serviceOptions = [
 	{ label: 'FTL Freight', value: 'ftl_freight_service' },
 	{ label: 'LTL Freight', value: 'ltl_freight_service' },
 	{ label: 'FCL Customs', value: 'fcl_customs_service' },
+	{ label: 'FCL CFS', value: 'fcl_cfs_service' },
 	{ label: 'LCL Customs', value: 'lcl_customs_service' },
 	{ label: 'Haulage Freight', value: 'haulage_freight_service' },
 ];

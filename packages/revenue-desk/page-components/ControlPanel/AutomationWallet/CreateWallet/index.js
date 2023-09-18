@@ -13,7 +13,7 @@ import useCreateRevenueDeskWallet from '../../hooks/useCreateRevenueDeskWallet';
 import styles from './styles.module.css';
 
 function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetch = () => {} }) {
-	const [submitValue, setSubmitValue] = useState({});
+	const [submitValue, setSubmitValue] = useState(false);
 
 	const { createRevenueDeskWallet, loading } = useCreateRevenueDeskWallet({ setCreateWallet, refetch });
 
@@ -69,6 +69,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 									control={control}
 									name="origin_location_id"
 									{...locationOptions}
+									isClearable
 									style={{ width: '250px' }}
 								/>
 							</div>
@@ -82,6 +83,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 									name="destination_location_id"
 									style={{ width: '250px' }}
 									{...locationOptions}
+									isClearable
 								/>
 							</div>
 						)}
