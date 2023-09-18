@@ -9,7 +9,8 @@ export default {
 			code   : 'IDR',
 			symbol : 'Rp',
 		},
-		mobile_country_code: '+62',
+		mobile_country_code : '+62',
+		allowed_languages   : ['english'],
 	},
 	formats: {
 		amount: {

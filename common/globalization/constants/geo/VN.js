@@ -11,7 +11,7 @@ export default {
 			symbol : '₫',
 		},
 		mobile_country_code : '+84',
-		language            : 'vietnamese',
+		allowed_languages   : ['english', 'vietnamese'],
 	},
 	formats: {
 		amount: {

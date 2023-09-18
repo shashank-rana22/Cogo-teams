@@ -12,7 +12,7 @@ export default {
 			symbol : '₹',
 		},
 		mobile_country_code : '+91',
-		language            : 'english',
+		allowed_languages   : ['english'],
 	},
 	formats: {
 		amount: {
