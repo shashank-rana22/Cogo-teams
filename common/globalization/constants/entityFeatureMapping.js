@@ -52,6 +52,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'terminal_charge',
 			'refresh',
 			'ftl_customer_invoice',
+			'create_payrun',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
@@ -69,6 +70,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'cogo_books',
 			'post_to_sage',
 			'cancel_irn',
+			'create_payrun',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/UEN Number',
@@ -91,6 +93,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'upload_invoice',
 			'refetch-pdfs',
 			'dunning',
+			'create_payrun',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/VAT Number',
@@ -111,6 +114,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'cancel_e_invoice',
 			'upload_invoice',
 			'dunning',
+			'create_payrun',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/TIN Number',
@@ -131,6 +135,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'cancel_e_invoice',
 			'upload_invoice',
 			'dunning',
+			'create_payrun',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/NPWP Number',
@@ -151,6 +156,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'cancel_e_invoice',
 			'upload_invoice',
 			'dunning',
+			'create_payrun',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/USCC Number',

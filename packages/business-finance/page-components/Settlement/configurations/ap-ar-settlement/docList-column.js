@@ -21,6 +21,7 @@ const useGetColumns = ({
 	setSortData = () => {},
 	pageCheckedRows = {},
 	setPageCheckedRows = () => {},
+	t = () => {},
 }) => {
 	const { list = [] } = data || {};
 	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
@@ -72,7 +73,7 @@ const useGetColumns = ({
 		{
 			id     : 'documentValue',
 			Header : (
-				<div className={styles.commonStylingHeader}>DOCUMENT NO</div>
+				<div className={styles.commonStylingHeader}>{t('settlement:document_number_header')}</div>
 			),
 			accessor: (row) => {
 				const { documentValue = '', documentType = '' } = row || {};
@@ -112,7 +113,7 @@ const useGetColumns = ({
 			id     : 'transactionDate',
 			Header : (
 				<span className={styles.commonStylingHeader}>
-					DOC. DATE
+					{t('settlement:doc_date_header')}
 					<RenderSortingArrows field="transactionDate" sortData={sortData} setSortData={setSortData} />
 				</span>
 			),
@@ -123,7 +124,7 @@ const useGetColumns = ({
 			id     : 'documentAmount',
 			Header : (
 				<div className={styles.commonStylingHeader}>
-					DOC AMOUNT
+					{t('settlement:doc_amount_header')}
 					<RenderSortingArrows field="documentAmount" sortData={sortData} setSortData={setSortData} />
 				</div>
 			),
@@ -145,19 +146,23 @@ const useGetColumns = ({
 		},
 		{
 			id       : 'exchangeRate',
-			Header   : (<div className={styles.commonStylingHeader}>EXC RATE</div>),
+			Header   : (<div className={styles.commonStylingHeader}>{t('settlement:exchange_rate_header')}</div>),
 			accessor : (item) => item?.exchangeRate || '--',
 		},
 		{
-			id       : 'taxableAmount',
-			Header   : (<div className={styles.commonStylingHeader}>TDS APPLICABLE AMOUNT</div>),
-			accessor : (item) => getFormatAmount(item?.taxableAmount, item?.currency) || '--',
+			id     : 'taxableAmount',
+			Header : (
+				<div className={styles.commonStylingHeader}>
+					{t('settlement:tds_applicable_amount_header')}
+				</div>
+			),
+			accessor: (item) => getFormatAmount(item?.taxableAmount, item?.currency) || '--',
 		},
 		{
 			id     : 'tds',
 			Header : (
 				<div className={styles.commonStylingHeader}>
-					TDS
+					{t('settlement:tds_header')}
 					<RenderSortingArrows field="tdsAmount" sortData={sortData} setSortData={setSortData} />
 				</div>),
 			accessor: (item) => {
@@ -177,14 +182,14 @@ const useGetColumns = ({
 		},
 		{
 			id       : 'settledTds',
-			Header   : (<div className={styles.commonStylingHeader}>SETTLED TDS</div>),
+			Header   : (<div className={styles.commonStylingHeader}>{t('settlement:settled_tds_header')}</div>),
 			accessor : (item) => getFormatAmount(item?.settledTds, item?.currency) || '--',
 		},
 		{
 			id     : 'settledAmount',
 			Header : (
 				<div className={styles.commonStylingHeader}>
-					PAID/RECIEVED
+					{t('settlement:paid_received_header')}
 					<RenderSortingArrows field="paidAmount" sortData={sortData} setSortData={setSortData} />
 				</div>),
 			accessor: (item) => getFormatAmount(item?.settledAmount, item?.currency) || '--',
@@ -193,7 +198,7 @@ const useGetColumns = ({
 			id     : 'balanceAmount',
 			Header : (
 				<div className={styles.commonStylingHeader}>
-					BALANCE
+					{t('settlement:balance_header')}
 					<RenderSortingArrows field="balanceAmount" sortData={sortData} setSortData={setSortData} />
 				</div>),
 			accessor: (item) => {
@@ -213,7 +218,7 @@ const useGetColumns = ({
 		},
 		{
 			id       : 'status',
-			Header   : (<div className={styles.commonStylingHeader}>STATUS</div>),
+			Header   : (<div className={styles.commonStylingHeader}>{t('settlement:status_header')}</div>),
 			accessor : (item) => (
 				<Pill
 					size="md"

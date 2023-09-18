@@ -19,5 +19,7 @@
     { "label": "Mumbai", "value": "48a489eb-76d3-419a-bffc-dac6715056d3" },
     { "label": "Rudrapur", "value": "68d0e107-5879-4b5c-b0ca-de99230aaf38" },
     { "label": "Bagdogra", "value": "b906d557-c80f-4819-bfc1-f59d3ebad6ac" },
-    { "label": "Ho Chi Minh", "value": "edaccd90-ee23-4238-b1c1-e15aa9532366" }
+    { "label": "Ho Chi Minh", "value": "edaccd90-ee23-4238-b1c1-e15aa9532366" },
+    { "label": "Siliguri", "value": "d0324967-35a7-4efe-b925-9e0a69ed6f0d" },
+    { "label": "Varanasi", "value": "12c9c474-845a-480c-9a6c-0e078f9cdeea" }
 ]

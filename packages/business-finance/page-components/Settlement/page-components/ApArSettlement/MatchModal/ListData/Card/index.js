@@ -2,6 +2,7 @@ import { cl, Tooltip, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete, IcMEdit, IcMDrag, IcMCopy } from '@cogoport/icons-react';
 import { copyToClipboard } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import { getFormatAmount } from '../../../../../utils/getFormatAmount';
@@ -26,9 +27,9 @@ const KEY_ALLOCATION = 'allocation';
 const ZERO_BALANCE = 0;
 const EXC_RATE_FIXED_LENGTH = 2;
 
-const onClickCopy = (documentValue = '') => {
+const onClickCopy = (documentValue = '', t = () => {}) => {
 	copyToClipboard(documentValue, 'Document Value');
-	Toast.success('Text Copied Successfully');
+	Toast.success(t('settlement:copied_text_success_message'));
 };
 
 export default function CardItem({
@@ -43,6 +44,7 @@ export default function CardItem({
 	isError = false,
 	setCanSettle = () => {},
 }) {
+	const { t = () => {} } = useTranslation(['settlement']);
 	const cardData = itm;
 	const {
 		documentAmount = 0,
@@ -116,7 +118,7 @@ export default function CardItem({
 								<IcMCopy
 									width={18}
 									height={18}
-									onClick={() => onClickCopy(cardData?.documentValue || '')}
+									onClick={() => onClickCopy(cardData?.documentValue || '', t)}
 									className={styles.copy_icon}
 								/>
 							</div>
@@ -151,6 +153,7 @@ export default function CardItem({
 								setNewTDS={setNewTDS}
 								setPrevTDS={setPrevTDS}
 								fieldType={KEY_TDS}
+								t={t}
 							/>
 						)
 						:					(
@@ -189,6 +192,7 @@ export default function CardItem({
 								newItem={cardData}
 								originalAllocation={originalAllocation}
 								fieldType={KEY_ALLOCATION}
+								t={t}
 							/>
 						)
 						:					(

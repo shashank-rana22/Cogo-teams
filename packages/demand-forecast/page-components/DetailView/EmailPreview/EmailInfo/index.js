@@ -13,6 +13,14 @@ function EmailInfo() {
 			<div className={styles.body}>
 				{t('demandForecast:email_message_body')}
 			</div>
+			<div>
+				{t('demandForecast:email_message_link_comment')}
+			</div>
+			<div className={styles.body}>
+				<a href={t('demandForecast:email_message_link_url')} className={styles.bodyUrl}>
+					{t('demandForecast:email_message_link_url')}
+				</a>
+			</div>
 			<div className={styles.footer}>
 				{t('demandForecast:email_message_footer')}
 			</div>

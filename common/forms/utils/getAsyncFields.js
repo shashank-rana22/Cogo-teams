@@ -969,6 +969,46 @@ function asyncListSpotSearchRateCardOperators() {
 	};
 }
 
+function asyncListLocationClusters() {
+	return {
+		labelKey    : 'cluster_name',
+		valueKey    : 'id',
+		endpoint    : 'list_location_clusters',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 50,
+		},
+	};
+}
+
+function asyncListFclFreightCommodityClusters() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_freight_commodity_clusters',
+		initialCall : true,
+		params      : {
+			filters        : { status: 'active' },
+			page_limit     : 50,
+			defaultOptions : true,
+			isSearchable   : true,
+		},
+	};
+}
+
+function asyncListOverSeasTradeParties() {
+	return {
+		valueKey     : 'organizationId',
+		labelKey     : 'organizationName',
+		endpoint     : '/purchase/bills/list-overseas-trade-parties',
+		authkey      : 'list-overseas-trade-parties',
+		initialCall  : false,
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1047,5 +1087,8 @@ export {
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
+	asyncListLocationClusters,
+	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
+	asyncListOverSeasTradeParties,
 };

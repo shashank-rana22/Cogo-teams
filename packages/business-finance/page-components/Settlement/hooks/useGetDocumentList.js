@@ -12,6 +12,7 @@ const useGetDocumentList = ({
 	filters = {}, sorting = {},
 	setMatchModalShow = () => {},
 	setSelectedData = () => {},
+	t = () => {},
 }) => {
 	const { profile } = useSelector((state) => state || {});
 
@@ -60,7 +61,6 @@ const useGetDocumentList = ({
 							endDate               : (endDate && getFormatDates(endDate)) || undefined,
 							orgId                 : tradeParty,
 							accModes              : accMode || undefined,
-							// query                 : query || undefined,
 							docType               : undefined,
 							documentPaymentStatus : undefined,
 							entityCode,
@@ -119,9 +119,10 @@ const useGetDocumentList = ({
 			refetch();
 			setSelectedData([]);
 			setSettleConfirmation(false);
-			Toast.success('Settle successfully');
+			Toast.success(t('settlement:settle_success_message'));
 		} catch (error) {
-			Toast.error(error?.response?.data?.message || error?.message || 'Something went wrong');
+			Toast.error(error?.response?.data?.message || error?.message
+				|| t('settlement:something_went_wrong_message'));
 		}
 	};
 

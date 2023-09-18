@@ -83,11 +83,13 @@ importers:
       '@cogoport/chakravyuh': workspace:0.1.0
       '@cogoport/chro': workspace:0.1.0
       '@cogoport/cogo-academy': workspace:0.1.0
+      '@cogoport/cogo-assured': workspace:0.1.0
       '@cogoport/cogo-one': workspace:0.1.1
       '@cogoport/cogo-verse-analytics': workspace:0.1.0
       '@cogoport/components': ^1.0.359
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/controlled-booking': workspace:0.1.0
+      '@cogoport/convenience-rates': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/cost-booking-desk': workspace:0.1.0
       '@cogoport/demand-forecast': workspace:^0.1.0
@@ -121,12 +123,14 @@ importers:
       '@cogoport/operators': workspace:1.0.0
       '@cogoport/performance-management': workspace:1.0.0
       '@cogoport/printing-desk': workspace:1.0.0
+      '@cogoport/profile': workspace:0.1.0
       '@cogoport/referral': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/resources': workspace:1.0.0
       '@cogoport/revenue-desk': workspace:0.1.0
       '@cogoport/rfq-dashboard': workspace:0.1.0
       '@cogoport/risk-management': workspace:0.1.0
+      '@cogoport/saas': workspace:0.1.0
       '@cogoport/saas-subscription': workspace:0.1.0
       '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/schedules': workspace:^0.1.0
@@ -192,11 +196,13 @@ importers:
       '@cogoport/chakravyuh': link:../packages/chakravyuh
       '@cogoport/chro': link:../packages/chro
       '@cogoport/cogo-academy': link:../packages/cogo-academy
+      '@cogoport/cogo-assured': link:../packages/cogo-assured
       '@cogoport/cogo-one': link:../packages/cogo-one
       '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
       '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/controlled-booking': link:../packages/controlled-booking
+      '@cogoport/convenience-rates': link:../packages/convenience-rates
       '@cogoport/core': link:../common/core
       '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
       '@cogoport/demand-forecast': link:../packages/demand-forecast
@@ -230,12 +236,14 @@ importers:
       '@cogoport/operators': link:../packages/operators
       '@cogoport/performance-management': link:../packages/performance-management
       '@cogoport/printing-desk': link:../packages/printing-desk
+      '@cogoport/profile': link:../packages/profile
       '@cogoport/referral': link:../packages/referral
       '@cogoport/request': link:../common/request
       '@cogoport/resources': link:../packages/resources
       '@cogoport/revenue-desk': link:../packages/revenue-desk
       '@cogoport/rfq-dashboard': link:../packages/rfq-dashboard
       '@cogoport/risk-management': link:../packages/risk-management
+      '@cogoport/saas': link:../packages/saas
       '@cogoport/saas-subscription': link:../packages/saas-subscription
       '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/schedules': link:../packages/schedules
@@ -413,11 +421,13 @@ importers:
 
   common/next:
     specifiers:
+      '@cogoport/globalization': workspace:*
       '@cogoport/store': workspace:0.1.0
       next: 13.1.6
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
+      '@cogoport/globalization': link:../globalization
       '@cogoport/store': link:../store
       next: 13.1.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
@@ -999,6 +1009,7 @@ importers:
       '@cogoport/icons-react': ^1.0.65
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/scope-select': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
       '@types/file-saver': ^2.0.5
@@ -1018,6 +1029,7 @@ importers:
       '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       file-saver: 2.0.5
@@ -1205,6 +1217,30 @@ importers:
       react: 18.2.0
       react-rte: 0.16.5_react@18.2.0
 
+  packages/cogo-assured:
+    specifiers:
+      '@cogoport/components': ^1.0.442
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.98
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/context': link:../../common/context
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+
   packages/cogo-one:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -1314,6 +1350,30 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+
+  packages/convenience-rates:
+    specifiers:
+      '@cogoport/components': ^1.0.441
+      '@cogoport/core': workspace:*
+      '@cogoport/forms': workspace:*
+      '@cogoport/globalization': workspace:*
+      '@cogoport/icons-react': ^1.0.98
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/core': link:../../common/core
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
@@ -1767,6 +1827,7 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.359
       '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
@@ -1775,6 +1836,7 @@ importers:
     dependencies:
       '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -1995,6 +2057,28 @@ importers:
       jspdf: 2.5.1
       react: 18.2.0
 
+  packages/profile:
+    specifiers:
+      '@cogoport/components': ^1.0.442
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
+      '@cogoport/icons-react': ^1.0.98
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+
   packages/purchase-invoicing:
     specifiers:
       '@cogoport/components': ^1.0.432
@@ -2169,6 +2253,32 @@ importers:
       react-hook-form: 7.46.1_react@18.2.0
     devDependencies:
       '@types/react': 18.2.21
+
+  packages/saas:
+    specifiers:
+      '@cogoport/components': ^1.0.442
+      '@cogoport/constants': workspace:^0.1.0
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.98
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/context': link:../../common/context
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
 
   packages/saas-subscription:
     specifiers:

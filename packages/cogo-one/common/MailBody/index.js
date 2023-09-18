@@ -38,11 +38,6 @@ function MailBody({
 	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
 
 	const {
-		setButtonType = () => {},
-		setEmailState = () => {},
-	} = mailProps || {};
-
-	const {
 		subject = '',
 		message_id = '',
 		body = '',
@@ -67,8 +62,7 @@ function MailBody({
 	});
 
 	const { handleClick = () => {} } = getRecipientData({
-		setButtonType,
-		setEmailState,
+		mailProps,
 		senderAddress,
 		recipientData,
 		ccData,

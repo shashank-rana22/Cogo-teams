@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ const THIRTY_SECONDS = 30;
 const ONE = 1;
 const TWO = 2;
 const ZERO_COUNT = 0;
+const MAX_NOTIFICATION_COUNT = 99;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -195,26 +196,6 @@ function Items({
 				})}
 			</div>
 
-			{(notificationCount > ZERO_COUNT && showSubNav) && (
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						style={{ width: '100%', marginTop: 10 }}
-						themeType="primary"
-						onClick={notificationRedirect}
-						disabled={loadingState}
-					>
-						{t('common:you_have')}
-						{' '}
-						{notificationCount}
-						{' '}
-						{t('common:new')}
-						{' '}
-						{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
-					</Button>
-				</div>
-			)}
-
 			{showSubNav && (
 				<div className={styles.button_container}>
 					<Button
@@ -225,6 +206,33 @@ function Items({
 						disabled={loadingState}
 					>
 						{t('common:add_account')}
+					</Button>
+				</div>
+			)}
+
+			{notificationCount > ZERO_COUNT && (
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						style={{ width: '100%', marginTop: 10 }}
+						themeType="primary"
+						onClick={notificationRedirect}
+						disabled={loadingState}
+					>
+						{resetSubnavs ? (
+							`${t('common:you_have')} ${notificationCount} ${t('common:new')} ${
+								notificationCount > ONE ? t('common:notifications') : t('common:notification')
+							}`
+						) : (
+							<div className={styles.notification_wrapper}>
+								<IcMNotifications height="24px" width="24px" />
+								<div className={styles.notifications_badge}>
+									{notificationCount > MAX_NOTIFICATION_COUNT
+										? `${MAX_NOTIFICATION_COUNT}+`
+										: notificationCount}
+								</div>
+							</div>
+						)}
 					</Button>
 				</div>
 			)}
